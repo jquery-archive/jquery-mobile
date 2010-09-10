@@ -1,0 +1,17 @@
+<Files index.html>
+ForceType application/x-httpd-php
+</Files>
+
+RewriteEngine On
+RewriteRule ^css/all combine.php?type=css
+RewriteRule ^js/all combine.php?type=javascript
+
+# Turn on Expires and set default to 0
+ExpiresActive On
+ExpiresDefault "access"
+
+
+# cache text, css, and javascript files for one week
+<FilesMatch ".(html|png|jpg|gif|js|css)$">
+Header set Cache-Control "max-age=1"
+</FilesMatch>

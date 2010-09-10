@@ -1,0 +1,263 @@
+<?php /*gzip page*/ ob_start("ob_gzhandler"); ?>
+<!DOCTYPE html> 
+<html class="ui-layout"> 
+	<head> 
+	<title>jQuery Mobile Framework - ui-tree Example</title> 
+	<link rel="stylesheet" type="text/css"  href="../../css/all" /> 
+	<!--script type="text/javascript" src="../../js/all"></script-->
+</head> 
+<body> 
+
+
+
+<div role="application" class="ui-tree-contain">
+<div class="ui-tree-header ui-header ui-contain-a"><a href="#" title="Back" class="ui-button ui-clickable-a ui-clickable-corner-all ui-button-icon-notext"><span class="ui-clickable-inner  ui-clickable-corner-all"><span class="ui-icon ui-icon-arrow-left-a"></span></span></a><div class="ui-tree-section-title">My Documents</div></div>
+
+<ul class="ui-tree" role="ui-tree">
+	<li role="treeitem" class="ui-treeitem" aria-expanded="false">
+		<a href="#" class="ui-treeitem-label ui-contain-b" tabindex="0">
+			<span class="ui-treeitem-count ui-contain-a ui-clickable-corner-all">22</span>
+			<span class="ui-clickable-inner ">
+				<span class="ui-icon ui-icon-arrow-right-b"></span>
+				<span class="ui-treeitem-title">Most simplest category</span>
+			</span>
+		</a>
+	</li>
+	
+
+	
+	
+	
+	<li role="ui-treeitem" class="ui-treeitem" aria-expanded="false">
+		<a href="#" class="ui-list ui-list-a" tabindex="0">
+			<span class="ui-list-inner ">
+				<span class="ui-icon ui-icon-arrow-right-b"></span>
+				<span class="list-title">Most simplest category</span>
+			</span>
+		</a>
+	</li>
+	
+	<li role="ui-treeitem" class="ui-treeitem" aria-expanded="false">
+		<a href="#" class="ui-list ui-list-a" tabindex="0">
+			<span class="ui-list-inner">
+				<span class="ui-icon ui-icon-arrow-r"></span>
+				<span class="ui-list-title">Most simplest category type ever</span>
+			</span>
+		</a>
+	</li>
+</ul>
+</div>
+
+
+
+<div role="application" class="ui-tree-contain">
+<ol class="ui-tree" role="tree">
+
+	<li role="ui-treeitem" class="ui-treeitem" aria-expanded="false">
+		<div class="ui-list ui-list-a"><div class="ui-clickable-inner ui-clickable-corner-all">
+				<div class="ui-list-title">
+					<a href="#" tabindex="0" class="ui-link-inherit">Simple with a little hierarchy</a>
+				</div>
+				<div class="ui-list-desc">item description text can go here...</div>
+				<span class="ui-icon ui-icon-arrow-r"></span>
+		</div></div>
+	</li>
+	
+	<li role="ui-treeitem" class="ui-treeitem" aria-expanded="false">
+		<div class="ui-treeitem-label ui-contain-a"><div class="ui-clickable-inner ui-clickable-corner-all">
+				<div class="ui-treeitem-title">
+					<a href="#" tabindex="0" class="ui-link-inherit">Simple with a little hierarchy</a>
+				</div>
+				<div class="ui-treeitem-desc">item description text can go here...</div>
+				<span class="ui-icon ui-icon-arrow-right-a"></span>
+		</div></div>
+	</li>
+	
+	<li role="ui-treeitem" class="ui-treeitem" aria-expanded="false">
+		<div class="ui-treeitem-label ui-contain-a"><div class="ui-clickable-inner ui-clickable-corner-all">
+				<div class="ui-treeitem-title">
+					<a href="#" tabindex="0" class="ui-link-inherit">Simple with a little hierarchy</a>
+				</div>
+				<div class="ui-treeitem-desc">item description text can go here...</div>
+				<span class="ui-icon ui-icon-arrow-right-a"></span>
+		</div></div>
+	</li>
+	
+	<li role="ui-treeitem" class="ui-treeitem" aria-expanded="false">
+		<div class="ui-treeitem-label ui-contain-f"><div class="ui-clickable-inner ui-clickable-corner-all">
+				<div class="ui-treeitem-title">
+					<a href="#" tabindex="0" class="ui-link-inherit">Simple with a little hierarchy</a>
+				</div>
+				<div class="ui-treeitem-desc">item description text can go here...</div>
+				<span class="ui-icon ui-icon-arrow-right-b"></span>
+		</div></div>
+	</li>
+	
+	<li role="ui-treeitem" class="ui-treeitem" aria-expanded="false">
+		<div class="ui-treeitem-label ui-contain-f"><div class="ui-clickable-inner ui-clickable-corner-all">
+				<div class="ui-treeitem-title">
+					<a href="#" tabindex="0" class="ui-link-inherit">Simple with a little hierarchy</a>
+				</div>
+				<div class="ui-treeitem-desc">item description text can go here...</div>
+				<span class="ui-icon ui-icon-arrow-right-b"></span>
+		</div></div>
+	</li>
+	
+	<li role="ui-treeitem" class="ui-treeitem" aria-expanded="false">
+		<div class="ui-treeitem-label ui-contain-f"><div class="ui-clickable-inner ui-clickable-corner-all">
+				<div class="ui-treeitem-title">
+					<a href="#" tabindex="0" class="ui-link-inherit">Simple with a little hierarchy</a>
+				</div>
+				<div class="ui-treeitem-desc">item description text can go here...</div>
+				<span class="ui-icon ui-icon-arrow-right-b"></span>
+		</div></div>
+	</li>
+</ol>
+</div>	
+
+
+
+
+<div role="application" class="ui-tree-contain">
+<ul class="ui-tree" role="tree">
+	
+	<li role="ui-treeitem" class="ui-treeitem" aria-expanded="false">
+		<div class="ui-treeitem-label ui-contain-a">
+			<div class="ui-treeitem-content">
+				<div class="ui-treeitem-title"><a href="http://example.com" class="ui-treeitem-ext ui-link-inherit">Item title (split button approach)</a></div>
+				<div class="ui-treeitem-desc">item description text can go here...</div>
+				<a href="#" title="browse details" class="ui-treeitem-next ui-contain-a" tabindex="0">
+					<span class="ui-button ui-clickable-c ui-shadow ui-clickable-corner-all ui-icon-notext">
+						<span class="ui-clickable-inner ui-clickable-corner-all"><span class="ui-icon ui-icon-arrow-right-a"></span></span>
+					</span>
+				</a>
+			</div>	
+			<div class="ui-treeitem-aside">
+				<p>Testing this out!</p>
+			</div>
+		</div>
+	</li>
+	
+	<li role="ui-treeitem" class="ui-treeitem" aria-expanded="false">
+		<div class="ui-treeitem-label ui-contain-a">
+			<div class="ui-treeitem-labelgroup">
+				<div class="ui-treeitem-title"><a href="http://example.com" class="ui-treeitem-ext ui-link-inherit">Item title (split button approach)</a></div>
+				<div class="ui-treeitem-desc">item description text can go</div>
+				<a href="#" title="browse details" class="ui-treeitem-next ui-contain-a" tabindex="0">
+					<span class="ui-button ui-clickable-c ui-shadow ui-clickable-corner-all ui-icon-notext">
+						<span class="ui-clickable-inner ui-clickable-corner-all"><span class="ui-icon ui-icon-arrow-right-a"></span></span>
+					</span>
+				</a>
+			</div>
+		</div>
+	</li>
+	
+	<li role="ui-treeitem" class="ui-treeitem" aria-expanded="false">
+		<div class="ui-treeitem-label ui-contain-a">
+			<div class="ui-treeitem-labelgroup">
+				<div class="ui-treeitem-title"><a href="http://example.com" class="ui-treeitem-ext ui-link-inherit">Item title (split button approach)</a></div>
+				<div class="ui-treeitem-desc">item description text can go</div>
+				<a href="#" title="browse details" class="ui-treeitem-next ui-contain-a" tabindex="0">
+					<span class="ui-button ui-clickable-c ui-shadow ui-clickable-corner-all ui-icon-notext">
+						<span class="ui-clickable-inner ui-clickable-corner-all"><span class="ui-icon ui-icon-arrow-right-a"></span></span>
+					</span>
+				</a>
+			</div>
+		</div>
+	</li>
+</ul>
+</div>	
+
+
+<div role="application" class="ui-tree-contain">
+<ul class="ui-tree" role="tree">	
+
+	
+	<li role="ui-treeitem" class="ui-treeitem" aria-expanded="false">
+		<div class="ui-treeitem-label ui-contain-b">
+			<img src="images/content%20samples/jb.jpg" class="ui-treeitem-thumb" alt="jb" width="75" height="75" />
+			<div class="ui-treeitem-labelgroup">
+				<div class="ui-treeitem-title"><a href="http://example.com" class="ui-treeitem-ext ui-link-inherit">My World 2.0</a></div>
+				<div class="ui-treeitem-desc"><strong>Justin Bieber</strong></div>
+				<div class="ui-treeitem-desc">item description text</div>
+				<a href="#" title="browse details" class="ui-treeitem-next ui-contain-b" tabindex="0">
+					<span class="ui-button ui-clickable-c ui-shadow ui-clickable-corner-all ui-icon-notext">
+						<span class="ui-clickable-inner ui-clickable-corner-all"><span class="ui-icon ui-icon-arrow-right-a"></span></span>
+					</span>
+				</a>
+			</div>
+		</div>
+	</li>
+
+	
+	<li role="ui-treeitem" class="ui-treeitem" aria-expanded="false">
+		<div class="ui-treeitem-label ui-contain-b">
+			<img src="images/content%20samples/jb.jpg" class="ui-treeitem-thumb" alt="jb" width="75" height="75" />
+			<div class="ui-treeitem-labelgroup">
+				<div class="ui-treeitem-title"><a href="http://example.com" class="ui-treeitem-ext ui-link-inherit">My World 2.0</a></div>
+				<div class="ui-treeitem-desc"><strong>Justin Bieber</strong></div>
+				<div class="ui-treeitem-desc">item description text</div>
+				<a href="#" title="browse details" class="ui-treeitem-next ui-contain-d" tabindex="0">
+					<span class="ui-button ui-clickable-c ui-shadow ui-clickable-corner-all ui-icon-notext">
+						<span class="ui-clickable-inner ui-clickable-corner-all"><span class="ui-icon ui-icon-arrow-right-a"></span></span>
+					</span>
+				</a>
+			</div>
+		</div>
+	</li>
+	
+	<li role="ui-treeitem" class="ui-treeitem" aria-expanded="false">
+		<div class="ui-treeitem-label ui-contain-b">
+			<img src="images/content%20samples/jb.jpg" class="ui-treeitem-thumb" alt="jb" width="75" height="75" />
+			<div class="ui-treeitem-labelgroup">
+				<div class="ui-treeitem-title"><a href="http://example.com" class="ui-treeitem-ext ui-link-inherit">My World 2.0</a></div>
+				<div class="ui-treeitem-desc"><strong>Justin Bieber</strong></div>
+				<div class="ui-treeitem-desc">item description text</div>
+				<a href="#" title="browse details" class="ui-treeitem-next ui-contain-d" tabindex="0">
+					<span class="ui-button ui-clickable-c ui-shadow ui-clickable-corner-all ui-icon-notext">
+						<span class="ui-clickable-inner ui-clickable-corner-all"><span class="ui-icon ui-icon-arrow-right-a"></span></span>
+					</span>
+				</a>
+			</div>
+		</div>
+	</li>
+
+
+</ul>
+</div>
+
+
+
+
+<div role="application" class="ui-tree-contain">
+<ol class="ui-tree" role="tree">	
+
+	
+	<li role="ui-treeitem" class="ui-treeitem" aria-expanded="false">
+		<div class="ui-treeitem-label ui-contain-d">
+			<img src="images/content%20samples/jb.jpg" class="ui-treeitem-thumb" alt="jb" width="75" height="75" />
+			<div class="ui-treeitem-count ui-contain-a ui-clickable-corner-all">22</div>
+			<div class="ui-treeitem-labelgroup">
+				<h2 class="ui-treeitem-title"><a href="http://example.com" class="ui-treeitem-ext ui-link-inherit">My World 2.0</a></h2>
+				<div class="ui-treeitem-desc"><strong>Justin Bieber</strong></div>
+				<div class="ui-treeitem-desc">item description text</div>
+				<a href="#" title="browse details" class="ui-treeitem-next ui-contain-d" tabindex="0">
+					<span class="ui-button ui-clickable-c ui-shadow ui-clickable-corner-all ui-button-icon-right">
+						<span class="ui-clickable-inner ui-clickable-corner-all"><span class="ui-icon ui-icon-arrow-right-a"></span></span>
+					</span>
+				</a>
+			</div>
+		</div>
+	</li>
+
+	
+
+
+
+</ol>
+</div>
+
+
+
+</body>
+</html>
