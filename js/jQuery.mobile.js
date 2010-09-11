@@ -383,12 +383,6 @@
 				.find('.ui-btn-text').text(backBtnText);
 		});
 	};
-	
-	//swipe right always triggers a back 
-	$('body').bind('swiperight.jqm',function(){
-		history.go(-1);
-		return false;
-	});
 
 	//dom-ready
 	$(function(){
@@ -458,7 +452,13 @@
 		//setTimeout(function(){ pageLoading(true); }, 3000);
 		
 		//update orientation 
-		updateOrientation();			
+		updateOrientation();	
+		
+		//swipe right always triggers a back 
+		$body.bind('swiperight.jqm',function(){
+			history.go(-1);
+			return false;
+		});		
 		
 		//some debug stuff for the events pages
 		$('body').bind('scrollstart scrollstop swipe swipeleft swiperight tap taphold turn',function(e){
