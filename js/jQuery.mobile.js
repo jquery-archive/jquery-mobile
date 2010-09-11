@@ -384,8 +384,8 @@
 		});
 	};
 	
-	//swipe left always triggers a back 
-	$(document).swipeleft(function(){
+	//swipe right always triggers a back 
+	$('body').bind('swiperight.jqm',function(){
 		history.go(-1);
 		return false;
 	});
@@ -455,7 +455,7 @@
 		$window.trigger( "hashchange" );
 		
 		//... this shouldn't be needed, but chrome isn't getting it sometimes
-		setTimeout(function(){ pageLoading(true); }, 3000);
+		//setTimeout(function(){ pageLoading(true); }, 3000);
 		
 		//update orientation 
 		updateOrientation();			
