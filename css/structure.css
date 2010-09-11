@@ -393,7 +393,7 @@ keyframes from jordandobson.com/webkit_loading_animation/resize/
 
 .slideup.out.reverse {
 	z-index: 10;
-	-webkit-animation-name: slidedown;
+	-webkit-animation-name: slidebackdown;
 }
 
 .slideup.in.reverse {
@@ -407,9 +407,40 @@ keyframes from jordandobson.com/webkit_loading_animation/resize/
     to { -webkit-transform: translateY(0); }
 }
 
-@-webkit-keyframes slidedown {
+@-webkit-keyframes slidebackdown {
     from { -webkit-transform: translateY(0); }
     to { -webkit-transform: translateY(100%); }
+}
+
+
+/*for animating in and out from above*/
+.slidedown.in {
+	-webkit-animation-name: slidedown;
+	z-index: 10;
+}
+
+.slidedown.out {
+	-webkit-animation-name: dontmove;
+	z-index: 0;
+}
+
+.slidedown.out.reverse {
+	z-index: 10;
+	-webkit-animation-name: slidebackup;
+}
+
+.slidedown.in.reverse {
+	z-index: 0;
+	-webkit-animation-name: dontmove;
+}
+@-webkit-keyframes slidedown {
+    from { -webkit-transform: translateY(-100%); }
+    to { -webkit-transform: translateY(0); }
+}
+
+@-webkit-keyframes slidebackup {
+    from { -webkit-transform: translateY(0); }
+    to { -webkit-transform: translateY(-100%); }
 }
 
 /* Hackish, but reliable. */

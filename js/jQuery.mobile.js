@@ -16,7 +16,7 @@
 		startPage,
 		startPageId = 'ui-page-start',
 		activePageClass = 'ui-page-active',
-		transitions = 'slide slideup pop flip fade dissolve swap',
+		transitions = 'slide slideup slidedown pop flip fade dissolve swap',
 		transitionSpecified = false,
 		currentTransition = 'slide',
 		transitionDuration = 350,
