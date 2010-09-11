@@ -23,6 +23,7 @@
 		orientation,
 		backBtnText = "Back",
 		prevUrl = location.hash,
+		hashNavUnderway = false,
 		//vars for custom event tracking
 		scrolling = false,
 		touching = false,
@@ -294,6 +295,7 @@
 	//turn on/off page loading message.. also hides the ui-content div
 	function pageLoading(done){
 		if(done){
+			hideToolbarsAfterDelay();
 			//remove loading msg
 			$html.removeClass('ui-loading');
 			//fade in page content, remove loading msg		
@@ -322,7 +324,8 @@
 		to.animationComplete(function(){
 			from.add(to).removeClass(' out in reverse '+ transitions);
 			from.removeClass(activePageClass);
-			pageLoading(true);		
+			to.find('.ui-header,.ui-footer').trigger('overlayIn');
+			pageLoading(true);	
 		});
 		if(back){ currentTransition = 'slide'; }
 	};
@@ -338,6 +341,12 @@
 			setTimeout(callback, transitionDuration);
 		}
 	};
+	
+	function hideToolbarsAfterDelay(){
+		setTimeout(function(){
+			$('.ui-header,.ui-footer').trigger('overlayOut');
+		}, 2000);
+	}
 		
 	//markup-driven enhancements, to be called on any ui-page upon loading
 	function mobilize($el){	
@@ -399,11 +408,11 @@
 				back = (url === prevUrl);
 			
 			if(url){
+				hashNavUnderway = true;
 				//see if content is present - NOTE: local urls aren't working right now - need logic to kill # 
 				var localDiv = $('[id="'+url+'"]');
 				if(localDiv.length){
 					changePage($('.ui-page-active'), localDiv, back);
-					pageLoading(true);
 				}
 				else { //ajax it in
 					pageLoading();
@@ -414,7 +423,6 @@
 						$(this).html( $(this).find('.ui-page:eq(0)').html() );	
 						mobilize($(this));
 						changePage($('.ui-page-active'), $(this), back);
-						pageLoading(true);
 					});
 				}
 			}
@@ -429,8 +437,9 @@
 				}
 				else{
 					startPage.addClass(activePageClass);
+					startPage.find('.ui-header,.ui-footer').trigger('overlayIn');
+					pageLoading(true);
 				}
-				pageLoading(true);
 			}
 		});	
 	
@@ -458,12 +467,14 @@
 		$body.bind('swiperight.jqm',function(){
 			history.go(-1);
 			return false;
-		});		
+		});	
 		
 		//some debug stuff for the events pages
 		$('body').bind('scrollstart scrollstop swipe swipeleft swiperight tap taphold turn',function(e){
 			$('#eventlogger').prepend('<div>Event fired: '+ e.type +'</div>');
 		});
+		
+		
 		
 	});
 })(jQuery, this);

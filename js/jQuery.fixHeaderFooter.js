@@ -12,11 +12,11 @@ $.fn.fixHeaderFooter = function(options){
 			ignoreTargets: 'a,input,textarea,select,button,label,.ui-headfoot-placehold',
 			transition: el.find('[data-headfoottransition]').attr('data-headfoottransition') || ['slidedown','slideup'],
 			//also accepts a string, like 'fade'. All animations work, but fade and slidedown/up look best
-			overlayOnly: el.find('.ui-fullscreen').length //if this is true, we should set the parent div to height 0 to force overlays...?
+			overlayOnly: el.find('.ui-fullscreen').length
 		},options);
 
 		var els = el.find('.ui-header,.ui-footer').wrap('<div class="ui-headfoot-placehold"><div class="ui-headfoot-wrap"></div></div>'),
-			posLoop = setInterval(function(){ els.trigger('setTop'); }, 20),
+			//posLoop = setInterval(function(){ els.trigger('setTop'); }, 20),
 			tIsArray = $.isArray(o.transition);	
 			
 		//add transition types	
@@ -123,11 +123,6 @@ $.fn.fixHeaderFooter = function(options){
 		$(window)
 			.bind('load',function(){
 				els.trigger('overlayIn');
-				
-				setTimeout(function(){
-					els.trigger('overlayOut');
-					if(posLoop){ clearInterval(posLoop); }
-				}, 2000);
 					
 				if(o.overlayOnly){	
 					//to-do...for a photo-viewer or something full-screen 
