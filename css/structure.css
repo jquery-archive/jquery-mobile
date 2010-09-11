@@ -157,10 +157,10 @@ div.ui-checkbox, div.ui-radio { position:relative;  margin: .2em 0 .5em;  }
 
 /*used in listbox - to be removed/replaced with page-style hiding*/
 .ui-helper-hidden,.ui-mobile .ui-content-hidden { display: none; }
-.ui-content { min-height: 480px;  }
+.ui-content {   }
 
-.ui-fullscreen { width: 100%; height: 100%; position: relative; overflow: hidden; }
-.ui-fullscreen img { width: 100%; }
+.ui-fullscreen {  }
+.ui-fullscreen img { max-width: 100%; }
 
 /*collapsible panels*/
 .ui-collapsible-contain { margin: 0 0 -1px;  border-left-width: 0; border-right-width: 0; overflow: hidden; }
