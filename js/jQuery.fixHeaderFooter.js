@@ -10,7 +10,7 @@ $.fn.fixHeaderFooter = function(options){
 		var el = $(this);		
 		var o = $.extend({
 			ignoreTargets: 'a,input,textarea,select,button,label,.ui-headfoot-placehold',
-			transition: ['slidedown','slideup'],//also accepts a string, like 'fade'
+			transition: ['slidedown','slideup'],//also accepts a string, like 'fade'. All animations work, but fade and slidedown/up look best
 			overlayOnly: el.find('.ui-fullscreen').length //if this is true, we should set the parent div to height 0 to force overlays...?
 		},options);
 
@@ -73,8 +73,13 @@ $.fn.fixHeaderFooter = function(options){
 					addOverlayOnlyClass();
 				}
 				else{
-					el.addClass('reverse out').animationComplete(function(){
-						el.removeClass('reverse out');
+					var classes = 'out';
+					//if it's one of these, we'll need to add the reverse class too
+					if(el.is('.slidedown,.slideup, .swap, .pop, .flip')){
+						classes += ' reverse';
+					}
+					el.addClass(classes).animationComplete(function(){
+						el.removeClass(classes);
 						el.parent().removeClass('ui-fixpos');
 						addOverlayOnlyClass();
 					});	
