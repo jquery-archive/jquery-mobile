@@ -332,7 +332,7 @@
 	// note: Expects CSS animations use transitionDuration (350ms)
 	$.fn.animationComplete = function(callback){
 		if($.support.WebKitAnimationEvent){
-			$(this).one('webkitAnimationEnd', callback);
+			return $(this).one('webkitAnimationEnd', callback);
 		}
 		else{
 			setTimeout(callback, transitionDuration);

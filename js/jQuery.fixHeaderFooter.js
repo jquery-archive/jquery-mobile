@@ -10,11 +10,30 @@ $.fn.fixHeaderFooter = function(options){
 		var el = $(this);		
 		var o = $.extend({
 			ignoreTargets: 'a,input,textarea,select,button,label,.ui-headfoot-placehold',
+			transition: ['slidedown','slideup'],//also accepts a string, like 'fade'
 			overlayOnly: el.find('.ui-fullscreen').length //if this is true, we should set the parent div to height 0 to force overlays...?
 		},options);
 
 		var els = el.find('.ui-header,.ui-footer').wrap('<div class="ui-headfoot-placehold"><div class="ui-headfoot-wrap"></div></div>'),
-			posLoop = setInterval(function(){ els.trigger('setTop'); }, 20);	
+			posLoop = setInterval(function(){ els.trigger('setTop'); }, 20),
+			tIsArray = $.isArray(o.transition);	
+			
+		//add transition types	
+		els.filter('.ui-header').addClass(tIsArray ? o.transition[0] : o.transition);
+		els.filter('.ui-footer').addClass(tIsArray ? o.transition[1] : o.transition);
+	
+		//for determining whether a placeholder is visible on the screen or not	
+		function placeHolderOutofView(thisel){
+			//always return false if it's overlayOnly
+			if(o.overlayOnly){ return false; }
+			
+			var fromTop = $.scrollY(),
+				screenHeight = window.innerHeight,
+				thisHeight = thisel.parent().parent().height(),
+				thisTop = thisel.parent().parent().offset().top;
+				
+			return thisel.is('.ui-header') ? (thisTop + thisHeight <= fromTop) : (thisTop > fromTop + screenHeight);
+		}	
 			
 		//set placeholder heights, then bind custom events	
 		els
@@ -34,16 +53,36 @@ $.fn.fixHeaderFooter = function(options){
 					return $(this).parent().css('top', ($(this).is('.ui-header')) ? fromTop : fromTop + screenHeight - thisHeight);
 			})
 			.bind('overlayIn',function(){
-				$(this).parent().addClass('ui-fixpos');
+				var el = $(this);
+				el.parent().addClass('ui-fixpos');
+				//only animate if placeholder is out of view
+				if( placeHolderOutofView(el) ){
+					el.addClass('in').animationComplete(function(){
+						el.removeClass('in');
+					});
+				}
 				if(o.overlayOnly){	
-					$(this).parent().parent().removeClass('ui-headfoot-hidden');
+					el.parent().parent().removeClass('ui-headfoot-hidden');
 				}
 				return $(this).trigger('setTop');	
 			})
-			.bind('overlayOut',function(){
-				$(this).parent().removeClass('ui-fixpos');
-				if(o.overlayOnly){	
-					$(this).parent().parent().addClass('ui-headfoot-hidden');
+			.bind('overlayOut',function(e,immediately){
+				var el = $(this);
+				if(immediately || !placeHolderOutofView(el)){
+					el.parent().removeClass('ui-fixpos');
+					addOverlayOnlyClass();
+				}
+				else{
+					el.addClass('reverse out').animationComplete(function(){
+						el.removeClass('reverse out');
+						el.parent().removeClass('ui-fixpos');
+						addOverlayOnlyClass();
+					});	
+				}
+				function addOverlayOnlyClass(){
+					if(o.overlayOnly){	
+						el.parent().parent().addClass('ui-headfoot-hidden');
+					}
 				}
 				return $(this);
 			})
@@ -65,9 +104,9 @@ $.fn.fixHeaderFooter = function(options){
 			})
 			.bind('scrollstart',function(){
 				if(els.parent().is('.ui-fixpos')){
-					els.data('visiblebeforescroll',true);
+					els.data('visiblebeforescroll', true);
 				}
-				els.trigger('overlayOut');
+				els.trigger('overlayOut',[true]);
 			})
 			.bind('scrollstop',function(){
 				if(els.data('visiblebeforescroll')){
