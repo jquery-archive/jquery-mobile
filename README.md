@@ -20,3 +20,4 @@ To-do
 - figure out how tree ties into state changes (should we make it bookmarkable?)
 - get selectmenu using ui-page model with transitions. (no url tracking though)
 - $(':focus').blur(); may not work everywhere
+- decide whether it makes sense to add -moz, -o, and w3c? properties into all the transitions. Fennec support? Opera mobile/mini? Others?
