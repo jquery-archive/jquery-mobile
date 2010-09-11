@@ -23,7 +23,6 @@
 		orientation,
 		backBtnText = "Back",
 		prevUrl = location.hash,
-		hashNavUnderway = false,
 		//vars for custom event tracking
 		scrolling = false,
 		touching = false,
@@ -408,7 +407,6 @@
 				back = (url === prevUrl);
 			
 			if(url){
-				hashNavUnderway = true;
 				//see if content is present - NOTE: local urls aren't working right now - need logic to kill # 
 				var localDiv = $('[id="'+url+'"]');
 				if(localDiv.length){
