@@ -10,7 +10,8 @@ $.fn.fixHeaderFooter = function(options){
 		var el = $(this);		
 		var o = $.extend({
 			ignoreTargets: 'a,input,textarea,select,button,label,.ui-headfoot-placehold',
-			transition: ['slidedown','slideup'],//also accepts a string, like 'fade'. All animations work, but fade and slidedown/up look best
+			transition: el.find('[data-headfoottransition]').attr('data-headfoottransition') || ['slidedown','slideup'],
+			//also accepts a string, like 'fade'. All animations work, but fade and slidedown/up look best
 			overlayOnly: el.find('.ui-fullscreen').length //if this is true, we should set the parent div to height 0 to force overlays...?
 		},options);
 
@@ -24,8 +25,8 @@ $.fn.fixHeaderFooter = function(options){
 	
 		//for determining whether a placeholder is visible on the screen or not	
 		function placeHolderOutofView(thisel){
-			//always return false if it's overlayOnly
-			if(o.overlayOnly){ return false; }
+			//always return true if it's overlayOnly
+			if(o.overlayOnly){ return true; }
 			
 			var fromTop = $.scrollY(),
 				screenHeight = window.innerHeight,
@@ -122,6 +123,7 @@ $.fn.fixHeaderFooter = function(options){
 		$(window)
 			.bind('load',function(){
 				els.trigger('overlayIn');
+				
 				setTimeout(function(){
 					els.trigger('overlayOut');
 					if(posLoop){ clearInterval(posLoop); }
