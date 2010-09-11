@@ -292,6 +292,45 @@ keyframes from jordandobson.com/webkit_loading_animation/resize/
 	-webkit-animation-name: slideouttoright;
 }
 
+.slideup.in {
+	-webkit-animation-name: slideinfrombottom;
+	z-index: 10;
+}
+
+.slideup.out {
+	-webkit-animation-name: dontmove;
+	z-index: 0;
+}
+
+.slideup.out.reverse {
+	z-index: 10;
+	-webkit-animation-name: slideouttobottom;
+}
+
+.slideup.in.reverse {
+	z-index: 0;
+	-webkit-animation-name: dontmove;
+}
+.slidedown.in {
+	-webkit-animation-name: slideinfromtop;
+	z-index: 10;
+}
+
+.slidedown.out {
+	-webkit-animation-name: dontmove;
+	z-index: 0;
+}
+
+.slidedown.out.reverse {
+	z-index: 10;
+	-webkit-animation-name: slideouttotop;
+}
+
+.slidedown.in.reverse {
+	z-index: 0;
+	-webkit-animation-name: dontmove;
+}
+
 @-webkit-keyframes slideinfromright {
     from { -webkit-transform: translateX(100%); }
     to { -webkit-transform: translateX(0); }
@@ -310,6 +349,27 @@ keyframes from jordandobson.com/webkit_loading_animation/resize/
 @-webkit-keyframes slideouttoright {
     from { -webkit-transform: translateX(0); }
     to { -webkit-transform: translateX(100%); }
+}
+
+
+@-webkit-keyframes slideinfromtop {
+    from { -webkit-transform: translateY(-100%); }
+    to { -webkit-transform: translateY(0); }
+}
+
+@-webkit-keyframes slideinfrombottom {
+    from { -webkit-transform: translateY(100%); }
+    to { -webkit-transform: translateY(0); }
+}
+
+@-webkit-keyframes slideouttobottom {
+    from { -webkit-transform: translateY(0); }
+    to { -webkit-transform: translateY(100%); }
+}
+
+@-webkit-keyframes slideouttotop {
+    from { -webkit-transform: translateY(0); }
+    to { -webkit-transform: translateY(-100%); }
 }
 
 @-webkit-keyframes fadein {
@@ -381,67 +441,6 @@ keyframes from jordandobson.com/webkit_loading_animation/resize/
     to { -webkit-transform: rotateY(180deg) scale(.8); }
 }
 
-.slideup.in {
-	-webkit-animation-name: slideup;
-	z-index: 10;
-}
-
-.slideup.out {
-	-webkit-animation-name: dontmove;
-	z-index: 0;
-}
-
-.slideup.out.reverse {
-	z-index: 10;
-	-webkit-animation-name: slidebackdown;
-}
-
-.slideup.in.reverse {
-	z-index: 0;
-	-webkit-animation-name: dontmove;
-}
-
-
-@-webkit-keyframes slideup {
-    from { -webkit-transform: translateY(100%); }
-    to { -webkit-transform: translateY(0); }
-}
-
-@-webkit-keyframes slidebackdown {
-    from { -webkit-transform: translateY(0); }
-    to { -webkit-transform: translateY(100%); }
-}
-
-
-/*for animating in and out from above*/
-.slidedown.in {
-	-webkit-animation-name: slidedown;
-	z-index: 10;
-}
-
-.slidedown.out {
-	-webkit-animation-name: dontmove;
-	z-index: 0;
-}
-
-.slidedown.out.reverse {
-	z-index: 10;
-	-webkit-animation-name: slidebackup;
-}
-
-.slidedown.in.reverse {
-	z-index: 0;
-	-webkit-animation-name: dontmove;
-}
-@-webkit-keyframes slidedown {
-    from { -webkit-transform: translateY(-100%); }
-    to { -webkit-transform: translateY(0); }
-}
-
-@-webkit-keyframes slidebackup {
-    from { -webkit-transform: translateY(0); }
-    to { -webkit-transform: translateY(-100%); }
-}
 
 /* Hackish, but reliable. */
 @-webkit-keyframes dontmove {
