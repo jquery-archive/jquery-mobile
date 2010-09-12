@@ -7,7 +7,8 @@
 (function($){
 $.fn.fixHeaderFooter = function(options){
 	return $(this).each(function(){
-		var el = $(this);		
+		if($(this).data('fixedapplied')){ return; }
+		var el = $uipage = $(this).data('fixedapplied',true);		
 		var o = $.extend({
 			ignoreTargets: 'a,input,textarea,select,button,label,.ui-headfoot-placehold',
 			transition: el.find('[data-headfoottransition]').attr('data-headfoottransition') || ['slidedown','slideup'],
@@ -16,8 +17,8 @@ $.fn.fixHeaderFooter = function(options){
 		},options);
 
 		var els = el.find('.ui-header,.ui-footer').wrap('<div class="ui-headfoot-placehold"><div class="ui-headfoot-wrap"></div></div>'),
-			//posLoop = setInterval(function(){ els.trigger('setTop'); }, 20),
-			tIsArray = $.isArray(o.transition);	
+			tIsArray = $.isArray(o.transition),
+			currentstate = 'inline';
 			
 		//add transition types	
 		els.filter('.ui-header').addClass(tIsArray ? o.transition[0] : o.transition);
@@ -53,83 +54,103 @@ $.fn.fixHeaderFooter = function(options){
 					thisHeight = $(this).parent().outerHeight();
 					return $(this).parent().css('top', ($(this).is('.ui-header')) ? fromTop : fromTop + screenHeight - thisHeight);
 			})
+			.bind('click tap mousedown',function(e){
+				e.stopImmediatePropagation();
+				return false;
+			});	
+			
+		$uipage
 			.bind('overlayIn',function(){
-				var el = $(this);
-				el.parent().addClass('ui-fixpos');
-				//only animate if placeholder is out of view
-				if( placeHolderOutofView(el) ){
-					el.addClass('in').animationComplete(function(){
-						el.removeClass('in');
-					});
-				}
-				if(o.overlayOnly){	
-					el.parent().parent().removeClass('ui-headfoot-hidden');
-				}
-				return $(this).trigger('setTop');	
+			console.log('out')
+				currentstate = 'overlay';
+				return els.each(function(){
+					var el = $(this);
+					el.parent().addClass('ui-fixpos');
+					//only animate if placeholder is out of view
+					if( placeHolderOutofView(el) ){
+						el.addClass('in').animationComplete(function(){
+							el.removeClass('in');
+						});
+					}
+					if(o.overlayOnly){	
+						el.parent().parent().removeClass('ui-headfoot-hidden');
+					}
+					el.trigger('setTop');
+				});	
 			})
 			.bind('overlayOut',function(e,immediately){
-				var el = $(this);
-				if(immediately || !placeHolderOutofView(el)){
-					el.parent().removeClass('ui-fixpos');
-					addOverlayOnlyClass();
-				}
-				else{
-					var classes = 'out';
-					//if it's one of these, we'll need to add the reverse class too
-					if(el.is('.slidedown,.slideup, .swap, .pop, .flip')){
-						classes += ' reverse';
-					}
-					el.addClass(classes).animationComplete(function(){
-						el.removeClass(classes);
+			console.log('in')
+				currentstate = 'inline';
+				return els.each(function(){
+					var el = $(this);
+					if(immediately || !placeHolderOutofView(el)){
 						el.parent().removeClass('ui-fixpos');
 						addOverlayOnlyClass();
-					});	
-				}
-				function addOverlayOnlyClass(){
-					if(o.overlayOnly){	
-						el.parent().parent().addClass('ui-headfoot-hidden');
 					}
-				}
-				return $(this);
+					else{
+						var classes = 'out';
+						//if it's one of these, we'll need to add the reverse class too
+						if(el.is('.slidedown,.slideup, .swap, .pop, .flip')){
+							classes += ' reverse';
+						}
+						el.addClass(classes).animationComplete(function(){
+							el.removeClass(classes);
+							el.parent().removeClass('ui-fixpos');
+							addOverlayOnlyClass();
+						});	
+					}
+					function addOverlayOnlyClass(){
+						if(o.overlayOnly){	
+							el.parent().parent().addClass('ui-headfoot-hidden');
+						}
+					}
+				});
 			})
 			.bind('overlayToggle',function(){
-				return $(this).parent().is('.ui-fixpos') ? $(this).trigger('overlayOut') : $(this).trigger('overlayIn');
-			})
-			.bind('mousedown',function(e){
-				return false;
-			})
-			.bind('click tap',function(e){
-				e.stopImmediatePropagation();
-			});			
+				return (currentstate == 'overlay') ? $(this).trigger('overlayOut') : $(this).trigger('overlayIn');
+			});		
+			
+			
 		
-		$(document)
+		$uipage
 			.bind('tap',function(e){
 				if( !$(e.target).closest(o.ignoreTargets).length ){
-					els.trigger('overlayToggle');
+					$(this).trigger('overlayToggle');
 				}
 			})
 			.bind('scrollstart',function(){
-				if(els.parent().is('.ui-fixpos')){
-					els.data('visiblebeforescroll', true);
+				if(currentstate == 'overlay'){
+					$uipage.data('visiblebeforescroll', true);
 				}
-				els.trigger('overlayOut',[true]);
+				$uipage.trigger('overlayOut',[true]);
+				return false;
 			})
 			.bind('scrollstop',function(){
-				if(els.data('visiblebeforescroll')){
-					els.removeData('visiblebeforescroll').trigger('overlayIn');
+				if($uipage.data('visiblebeforescroll')){
+					$uipage.removeData('visiblebeforescroll').trigger('overlayIn');
 				}
+				return false;
 			});
+			
+
+		$('body').scrollstart(function(){
+			$uipage.trigger('scrollstart');
+		})
+		.scrollstop(function(){
+			$uipage.trigger('scrollstop');
+		});	
+
 					
 		$(window)
 			.bind('load',function(){
-				els.trigger('overlayIn');
+				$uipage.trigger('overlayIn');
 					
 				if(o.overlayOnly){	
 					//to-do...for a photo-viewer or something full-screen 
 					els.parents('.ui-headfoot-placehold:eq(0)').addClass('ui-headfoot-overlayonly');
 				}
 			})
-			.resize(function(){ els.trigger('overlayOut'); });
+			.resize(function(){ $uipage.trigger('overlayOut',[true]); });
 	});			
 };
 })(jQuery);

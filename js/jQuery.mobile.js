@@ -180,7 +180,7 @@
 		.scroll(function(e){			
 			var prevscroll = $.scrollY();
 			function checkscrollstop(){
-				if(prevscroll === $.scrollY()){ 
+				if(prevscroll === $.scrollY() && scrolling){ 
 					$body.trigger('scrollstop'); 
 					scrolling = false;
 				}
@@ -323,7 +323,7 @@
 		to.animationComplete(function(){
 			from.add(to).removeClass(' out in reverse '+ transitions);
 			from.removeClass(activePageClass);
-			to.find('.ui-header,.ui-footer').trigger('overlayIn');
+			to.trigger('overlayIn');
 			pageLoading(true);	
 		});
 		if(back){ currentTransition = 'slide'; }
@@ -343,7 +343,7 @@
 	
 	function hideToolbarsAfterDelay(){
 		setTimeout(function(){
-			$('.ui-header,.ui-footer').trigger('overlayOut');
+			$('.ui-page-active').trigger('overlayOut');
 		}, 2000);
 	}
 		
@@ -435,7 +435,7 @@
 				}
 				else{
 					startPage.addClass(activePageClass);
-					startPage.find('.ui-header,.ui-footer').trigger('overlayIn');
+					startPage.trigger('overlayIn');
 					pageLoading(true);
 				}
 			}
