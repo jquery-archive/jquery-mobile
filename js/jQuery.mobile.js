@@ -25,11 +25,12 @@
 		prevUrl = location.hash,
 		//vars for custom event tracking
 		scrolling = false,
+		scrollListeningOn = true,
 		touching = false,
 		touchstartdata,
 		touchstopdata,
-		tapNotMoveTime = 50,
-		tapHoldTime = 700,
+		tapNotMoveTime = 75,
+		tapHoldTime = 300,
 		maxSwipeTime = 1000,
 		minSwipeXDistance = 180,
 		maxSwipeYtolerance = 80;
@@ -153,7 +154,11 @@
 	//hide Address bar
 	function hideBrowserChrome(){
 		//kill addr bar
+		scrollListeningOn = false;
 		window.scrollTo(0,0);
+		setTimeout(function(){
+			scrollListeningOn = true;
+		}, 150);
 	}
 	
 	//get vert scroll dist
@@ -177,10 +182,11 @@
 
 	//detect and trigger some custom events (scrollstart,scrollstop,tap,taphold,swipe,swipeleft,swiperight) 
 	$(document)
-		.scroll(function(e){			
+		.scroll(function(e){	
+			if(!scrollListeningOn){ return false; }		
 			var prevscroll = $.scrollY();
 			function checkscrollstop(){
-				if(prevscroll === $.scrollY() && scrolling){ 
+				if(prevscroll === $.scrollY() && scrolling && scrollListeningOn){ 
 					$body.trigger('scrollstop'); 
 					scrolling = false;
 				}
@@ -188,6 +194,7 @@
 			setTimeout(checkscrollstop,50);
 		})
 		.bind( ($.support.touch ? 'touchmove' : 'scroll'), function(e){
+			if(!scrollListeningOn){ return false; }
 			//iPhone triggers scroll a tad late - touchmoved preferred
 			if(!scrolling){ 
 				scrolling = true;
@@ -294,7 +301,6 @@
 	//turn on/off page loading message.. also hides the ui-content div
 	function pageLoading(done){
 		if(done){
-			hideToolbarsAfterDelay();
 			//remove loading msg
 			$html.removeClass('ui-loading');
 			//fade in page content, remove loading msg		
@@ -309,7 +315,6 @@
 	//transition between pages - based on transitions from jQtouch
 	function changePage(from,to,back){
 		hideBrowserChrome();
-		
 		if(!back && !transitionSpecified){ currentTransition = 'slide'; }
 		
 		//kill keyboard (thx jQtouch :) )
@@ -323,8 +328,9 @@
 		to.animationComplete(function(){
 			from.add(to).removeClass(' out in reverse '+ transitions);
 			from.removeClass(activePageClass);
-			to.trigger('overlayIn');
 			pageLoading(true);	
+			$.fixedToolbars.show();
+			$.fixedToolbars.hideAfterDelay();
 		});
 		if(back){ currentTransition = 'slide'; }
 	};
@@ -341,14 +347,11 @@
 		}
 	};
 	
-	function hideToolbarsAfterDelay(){
-		setTimeout(function(){
-			$('.ui-page-active').trigger('overlayOut');
-		}, 2000);
-	}
+	
 		
 	//markup-driven enhancements, to be called on any ui-page upon loading
 	function mobilize($el){	
+		//to-do: make sure this only runs one time on a page (or maybe per component)
 		return $el.each(function(){		
 			//checkboxes, radios
 			$el.find('input[type=radio],input[type=checkbox]').customCheckboxRadio();
@@ -434,12 +437,15 @@
 					changePage(currentPage, startPage, back);
 				}
 				else{
+					$.fixedToolbars.show();
 					startPage.addClass(activePageClass);
-					startPage.trigger('overlayIn');
 					pageLoading(true);
+					$.fixedToolbars.hideAfterDelay();
 				}
 			}
 		});	
+		
+		hideBrowserChrome();
 	
 		//mobilize all pages present
 		mobilize($('.ui-page'));
