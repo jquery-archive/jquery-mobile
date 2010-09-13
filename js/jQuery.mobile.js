@@ -43,25 +43,6 @@
 	*/
 	$.support.orientation = !!window.orientation;
 	
-	//ajax support: to use bbq-style navigation with external pages, we will need to first test for ajax support (and fall back to normal urls)
-	//note: maybe core should be updated with this support property?
-	$.support.ajax = (function(){
-		//factory test borrowed from quirksmode.org
-        var xmlhttp = false, index = -1, factory,
-            XMLHttpFactories = [
-                function() { return new XMLHttpRequest() },
-                function() { return new ActiveXObject("Msxml2.XMLHTTP") },
-                function() { return new ActiveXObject("Msxml3.XMLHTTP") },
-                function() { return new ActiveXObject("Microsoft.XMLHTTP") }
-            ];
-        while ((factory = XMLHttpFactories[++index])) {
-            try { xmlhttp = factory(); }
-            catch (e) { continue; }
-            break;
-        }
-        return !!xmlhttp;
-	})();
-
 	/* Some CSS capability tests from EnhanceJS -- in the vein of $.support.boxmodel -- almost certainly needed for widgets to work
 	*/
 	//test CSS display none
