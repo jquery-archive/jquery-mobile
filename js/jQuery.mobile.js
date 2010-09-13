@@ -63,7 +63,6 @@
 	})();
 
 	/* Some CSS capability tests from EnhanceJS -- in the vein of $.support.boxmodel -- almost certainly needed for widgets to work
-		* note: assuming they work in Firefox 4, these can run without domready (currently FF4 beta won't report these offset dimensions before body is present)
 	*/
 	//test CSS display none
 	$.support.display = (function(){
