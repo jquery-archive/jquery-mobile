@@ -366,13 +366,13 @@
 			//selects
 			$el.find('select').customSelect();
 			//tabs
-			$('[data-role="tabs"]').tabs({fixedAsFooter:true});
+			$el.find('[data-role="tabs"]').tabs({fixedAsFooter:true});
 			//global nav
-			$('[data-role="globalnav"]').globalnav();
+			$el.find('[data-role="globalnav"]').globalnav();
 			//fix toolbars
 			$el.fixHeaderFooter();
 			//buttons from links in headers,footers,bars, or with data-role
-			$('.ui-header a, .ui-footer a, .ui-bar a, [data-role="button"]').not('.ui-btn').buttonMarkup();
+			$el.find('.ui-header a, .ui-footer a, .ui-bar a, [data-role="button"]').not('.ui-btn').buttonMarkup();
 			//vertical controlgroups
 			$el.find('[data-role="controlgroup"]:not([data-type="horizontal"])').controlgroup();
 			//horizontal controlgroups
