@@ -1,13 +1,12 @@
-/*
-* jQuery Mobile Framework
-* Copyright (c) jQuery Project
-* Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
-* Note: Code is in draft form and is subject to change!!
-	-	This file adds properties to $.support, 
-*/
-
-(function($,window,undefined){
-
+/*!
+ * jQuery Mobile
+ * http://jquerymobile.com/
+ *
+ * Copyright 2010, jQuery Project
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ */
+(function( $, window, undefined ) {
 	var $window = $(window),
 		$html = $('html'),
 		$head = $('head'),
@@ -477,8 +476,5 @@
 		$('body').bind('scrollstart scrollstop swipe swipeleft swiperight tap taphold turn',function(e){
 			$('#eventlogger').prepend('<div>Event fired: '+ e.type +'</div>');
 		});
-		
-		
-		
 	});
-})(jQuery, this);
+})( jQuery, this );
