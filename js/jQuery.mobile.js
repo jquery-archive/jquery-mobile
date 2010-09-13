@@ -464,9 +464,6 @@
 		//trigger a new hashchange, hash or not
 		$window.trigger( "hashchange" );
 		
-		//... this shouldn't be needed, but chrome isn't getting it sometimes
-		//setTimeout(function(){ pageLoading(true); }, 3000);
-		
 		//update orientation 
 		updateOrientation();	
 		
