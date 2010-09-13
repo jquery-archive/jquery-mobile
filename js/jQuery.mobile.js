@@ -318,7 +318,7 @@
 		if(!back && !transitionSpecified){ currentTransition = 'slide'; }
 		
 		//kill keyboard (thx jQtouch :) )
-		$(':focus').blur();
+		$(document.activeElement).blur();
 		
 		//animate in / out
 		from.addClass(currentTransition + ' out ' + (back ? 'reverse':''));
@@ -340,7 +340,7 @@
 	// note: Expects CSS animations use transitionDuration (350ms)
 	$.fn.animationComplete = function(callback){
 		if($.support.WebKitAnimationEvent){
-			return $(this).one('webkitAnimationEnd', callback);
+			return $(this).one('webkitAnimationEnd', callback); //check out transitionEnd (opera per Paul's request)
 		}
 		else{
 			setTimeout(callback, transitionDuration);
