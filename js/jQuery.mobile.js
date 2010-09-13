@@ -126,10 +126,13 @@
 	
 	//test whether a CSS media type or query applies (adapted from work by Scott Jehl & Paul Irish: http://gist.github.com/557891)
 	$.media = (function(){
-		if ( (window.media && media.matchMedium) ){
+		/*
+		note: once support improves, try window.matchMedia here
+		if ( window.matchMedia ){
 			//use native support if available
-			return media.matchMedium;
+			return window.matchMedia;
 		}
+		*/
 		var cache = {},
 	        testDiv = $('<div id="jq-mediatest"></div>'),
 	        fakeBody = $('<body></body>').append(testDiv);
