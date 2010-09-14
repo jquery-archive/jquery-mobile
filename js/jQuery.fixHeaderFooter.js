@@ -37,7 +37,7 @@ $.fn.fixHeaderFooter = function(options){
 				}
 			})
 			.bind('setTop',function(){
-				var fromTop = $.scrollY(),
+				var fromTop = $(window).scrollTop(),
 					screenHeight = window.innerHeight,
 					thisHeight = $(this).parent().height();
 					return $(this).parent().css('top', ($(this).is('.ui-header')) ? fromTop : fromTop + screenHeight - thisHeight);
@@ -64,7 +64,7 @@ $.fixedToolbars = (function(){
 			//always return true if it's overlayOnly
 			if(thisel.closest('.ui-headfoot-overlayonly').length){ return true; }
 			
-			var fromTop = $.scrollY(),
+			var fromTop = $(window).scrollTop(),
 				screenHeight = window.innerHeight,
 				thisHeight = thisel.parent().parent().height(),
 				thisTop = thisel.parent().parent().offset().top;
