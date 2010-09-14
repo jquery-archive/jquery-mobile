@@ -8,7 +8,7 @@
 $.fn.globalnav = function(settings){
 	return $(this).each(function(){ //there should only ever be one of these... is each necessary?
 		var o = $.extend({
-			fixedAs: 'header'
+			fixedAs: 'footer'
 		},settings);
 		
 		//wrap it with footer classes
