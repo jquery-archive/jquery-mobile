@@ -45,7 +45,4 @@ $.extend( $.support, {
 	fakeBody.remove();
 })();
 
-// if we're missing support for any of these, then we're a C-grade browser
-if ( !$.support.display || !$.support.position || !$.support.overflow || !$.support.floatclear ) {
-	return;
-}
+
