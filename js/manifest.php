@@ -1,6 +1,6 @@
 <?
 $elements = array(
-	'jquery-1.4.2.min.js',
+	'jquery.min.js',
 	'jQuery.hashchange.js',
 	'jQuery.clickable.js',
 	'jQuery.fixHeaderFooter.js',

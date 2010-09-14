@@ -6,9 +6,6 @@ Possible additions:
 
 $.extend( $.support, {
 	orientation: !!window.orientation,
-	// to use bbq-style navigation with external pages
-	// we will need to first test for ajax support (and fall back to normal urls)
-	ajax: !!$.ajaxSettings.xhr(),
 	touch: typeof Touch === "object",
 	WebKitAnimationEvent: typeof WebKitTransitionEvent === "object"
 });
@@ -44,5 +41,3 @@ $.extend( $.support, {
 	
 	fakeBody.remove();
 })();
-
-
