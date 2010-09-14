@@ -17,6 +17,7 @@ $elements = array(
 	'jQuery.tree.js',
 	'jQuery.globalnav.js',
 	'jQuery.mobile.support.js',
+	'jQuery.mobile.event.js',
 	'jQuery.mobile.js'
 );
 
