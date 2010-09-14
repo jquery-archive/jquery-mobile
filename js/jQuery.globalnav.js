@@ -8,11 +8,11 @@
 $.fn.globalnav = function(settings){
 	return $(this).each(function(){ //there should only ever be one of these... is each necessary?
 		var o = $.extend({
-			fixedAs: 'footer'
+			fixedAs: 'header'
 		},settings);
 		
 		//wrap it with footer classes
-		var globalnav = $(this).wrap('<div class="ui-bar-a"></div>').addClass(o.fixedAs == 'footer' ? 'ui-footer' : 'ui-header');
+		var globalnav = $(this).wrap('<div class="ui-bar-a"></div>').parent().addClass(o.fixedAs == 'footer' ? 'ui-footer' : 'ui-header');
 		
 		//apply fixed footer markup to ui-footer
 		$(document).fixHeaderFooter();
