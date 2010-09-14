@@ -223,10 +223,10 @@ div.ui-checkbox, div.ui-radio { position:relative;  margin: .2em 0 .5em;  }
 .ui-tabs-body div.ui-tabs-panel-selected { display:block; }
 
 /*globalnav*/
-.ui-globalnav { overflow: hidden; width: 100%;  }
-.ui-globalnav ul { list-style:none; padding: 0; margin: 0; position: relative; display: block; border: 0; float: left; width: 2000px; }
+.ui-globalnav { overflow: hidden; width: 100%; overflow: hidden;  }
+.ui-globalnav ul { list-style:none; padding: 0; margin: 0; position: relative; display: block; border: 0;}
 .ui-globalnav li { float: left; margin:0; padding:0; }
-.ui-globalnav li .ui-btn { font-size: 12px; text-align: center; margin: 0 -1px 0 0; outline: none; border-top-width: 0; border-bottom-width: 0; }
+.ui-globalnav li .ui-btn { display: block; font-size: 12px; text-align: center; margin: 0 -1px; outline: none; border-top-width: 0; border-bottom-width: 0; }
 .ui-globalnav li .ui-btn-inner { padding-left: 15px; padding-right: 15px; }
 
 

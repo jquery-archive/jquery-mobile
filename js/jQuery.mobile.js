@@ -284,8 +284,6 @@
 			$el.find('select').customSelect();
 			//tabs
 			$el.find('[data-role="tabs"]').tabs({fixedAsFooter:true});
-			//global nav
-			$el.find('[data-role="globalnav"]').globalnav();
 			//fix toolbars
 			$el.fixHeaderFooter();
 			//buttons from links in headers,footers,bars, or with data-role
@@ -363,6 +361,9 @@
 		});	
 		
 		hideBrowserChrome();
+		
+		//global nav
+		$('.ui-globalnav').globalnav();
 	
 		//mobilize all pages present
 		mobilize($('.ui-page'));

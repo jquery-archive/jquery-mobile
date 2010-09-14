@@ -6,21 +6,26 @@
 */
 (function($){
 $.fn.globalnav = function(settings){
-	return $(this).each(function(){
-		//configurable options
-		var o = $.extend({},settings);
-
-		var globalnav = $(this).wrap('<div class="ui-globalnav"></div>');
+	return $(this).each(function(){ //there should only ever be one of these... is each necessary?
+	
+		//wrap it with footer classes
+		var globalnav = $(this).wrap('<div class="ui-footer ui-bar-a"></div>');
 		
-		globalnav.find('a').buttonMarkup({corners: false, iconPos: 'top', icon: 'arrow-u'});
+		//apply fixed footer markup to ui-footer
+		$(document).fixHeaderFooter();
 		
-		var pageFooter = globalnav.parents('.ui-page:eq(0)').find('.ui-footer');
-		if( !pageFooter.length ){
-			pageFooter = $('<div class="ui-footer ui-bar-a"></div>').appendTo(globalnav.parents('.ui-page:eq(0)'));
-		}
+		//set up the nav tabs widths (currently evenly divided widths, to be improved later)
+		var navtabs = globalnav.find('li');
+		navtabs.width(100/navtabs.length+'%');
 		
-		//add to footer
-		globalnav.prependTo(pageFooter);
+		//apply state on click and at load
+		//NOTE: we'll need to find a way to highlight an active tab at load as well
+		navtabs.find('a')
+			.buttonMarkup({corners: false, iconPos: 'top', icon: 'arrow-u'})
+			.bind('tap',function(){
+				navtabs.find('.ui-btn-active').removeClass('ui-btn-active');
+				$(this).addClass('ui-btn-active');
+			});
 	});
 };	
 })(jQuery);
