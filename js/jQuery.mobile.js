@@ -1,13 +1,12 @@
-/*
-* jQuery Mobile Framework
-* Copyright (c) jQuery Project
-* Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
-* Note: Code is in draft form and is subject to change!!
-	-	This file adds properties to $.support, 
-*/
-
-(function($,window,undefined){
-
+/*!
+ * jQuery Mobile
+ * http://jquerymobile.com/
+ *
+ * Copyright 2010, jQuery Project
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ */
+(function( $, window, undefined ) {
 	var $window = $(window),
 		$html = $('html'),
 		$head = $('head'),
@@ -34,90 +33,6 @@
 		maxSwipeTime = 1000,
 		minSwipeXDistance = 180,
 		maxSwipeYtolerance = 80;
-		
-	/* 
-		add some  properties to $.support
-		- Notes: 
-			- add $.support.scrollTop ?
-			- CSS matrix support needed?
-	*/
-	$.support.orientation = !!window.orientation;
-	
-	//ajax support: to use bbq-style navigation with external pages, we will need to first test for ajax support (and fall back to normal urls)
-	//note: maybe core should be updated with this support property?
-	$.support.ajax = (function(){
-		//factory test borrowed from quirksmode.org
-        var xmlhttp = false, index = -1, factory,
-            XMLHttpFactories = [
-                function() { return new XMLHttpRequest() },
-                function() { return new ActiveXObject("Msxml2.XMLHTTP") },
-                function() { return new ActiveXObject("Msxml3.XMLHTTP") },
-                function() { return new ActiveXObject("Microsoft.XMLHTTP") }
-            ];
-        while ((factory = XMLHttpFactories[++index])) {
-            try { xmlhttp = factory(); }
-            catch (e) { continue; }
-            break;
-        }
-        return !!xmlhttp;
-	})();
-
-	/* Some CSS capability tests from EnhanceJS -- in the vein of $.support.boxmodel -- almost certainly needed for widgets to work
-	*/
-	//test CSS display none
-	$.support.display = (function(){
-		var fakeBody = $('<body></body>').prependTo($html),
-			testDiv = $('<div style="height: 5px; position: absolute; display: none;"></div>').prependTo(fakeBody),
-			divHeight = testDiv[0].offsetHeight; //note: jQuery .height() returned "5"
-		fakeBody.remove();
-		return divHeight === 0;
-	})();	
-		
-	//test CSS absolute positioning
-	$.support.position = (function(){	
-		var fakeBody = $('<body></body>').prependTo($html),
-			testDiv = $('<div style="position: absolute; left: 10px;"></div>').prependTo(fakeBody),
-			divLeft = testDiv[0].offsetLeft;
-        fakeBody.remove();
-        return divLeft === 10;
-    })();    
-        
-    //test CSS overflow (used in widgets for clearfix, hiding, etc)
-    $.support.overflow = (function(){	
-        var fakeBody = $('<body></body>').prependTo($html),
-        	testDiv = $('<div style="position: absolute; overflow: hidden; height: 0;"><div style="height: 10px;"></div></div>').prependTo(fakeBody),
-        	divHeight = testDiv[0].offsetHeight;
-        fakeBody.remove();
-        return divHeight === 0;
-    })();
-    
-    //test CSS float,clear
-    $.support.floatclear = (function(){
-    	var fakeBody = $('<body></body>').prependTo($html),
-    		pass = false,
-    		innerStyle = 'style="width: 5px; height: 5px; float: left;"',
-            testDiv = $('<div><div ' + innerStyle + '></div><div ' + innerStyle + '></div></div>').prependTo(fakeBody),
-            kids = testDiv[0].childNodes,
-            topA = kids[0].offsetTop,
-            divB = kids[1],
-            topB = divB.offsetTop;
-        if (topA === topB) {
-            divB.style.clear = 'left';
-            topB = divB.offsetTop;
-            if (topA !== topB) {
-                pass = true;
-            }
-        }
-        fakeBody.remove();
-        return pass;
-    })();
-    
-    //right about here, we *could* make sure all of the above css support props are true, if not, return and leave the page usable fercryin'outloud
-	if(!$.support.display || !$.support.position || !$.support.overflow || !$.support.floatclear ) { return; }
-	
-	//support properties from jQtouch
-	$.support.touch = (typeof Touch == "object");
-    $.support.WebKitAnimationEvent = (typeof WebKitTransitionEvent == "object");	
 	
 	/*
 		add some core behavior,events
@@ -476,8 +391,5 @@
 		$('body').bind('scrollstart scrollstop swipe swipeleft swiperight tap taphold turn',function(e){
 			$('#eventlogger').prepend('<div>Event fired: '+ e.type +'</div>');
 		});
-		
-		
-		
 	});
-})(jQuery, this);
+})( jQuery, this );

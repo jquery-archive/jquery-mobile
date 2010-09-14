@@ -16,6 +16,7 @@ $elements = array(
 	'jQuery.tabs.js',
 	'jQuery.tree.js',
 	'jQuery.globalnav.js',
+	'jQuery.mobile.support.js',
 	'jQuery.mobile.js'
 );
 
