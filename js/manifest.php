@@ -5,7 +5,7 @@ $elements = array(
 	'jQuery.clickable.js',
 	'jQuery.fixHeaderFooter.js',
 	'jQuery.forms.checkboxradio.js',
-	'jQuery.expandable.js',
+	'jQuery.forms.expandable.js',
 	'jQuery.forms.textinput.js',
 	'jQuery.forms.select.js',
 	'jQuery.buttonMarkup.js',
