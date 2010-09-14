@@ -252,7 +252,7 @@
 			from.removeClass(activePageClass);
 			pageLoading(true);	
 			$.fixedToolbars.show();
-			$.fixedToolbars.hideAfterDelay();
+			//$.fixedToolbars.hideAfterDelay();
 		});
 		if(back){ currentTransition = 'slide'; }
 	};
@@ -360,7 +360,7 @@
 					$.fixedToolbars.show();
 					startPage.addClass(activePageClass);
 					pageLoading(true);
-					$.fixedToolbars.hideAfterDelay();
+					//$.fixedToolbars.hideAfterDelay();
 				}
 			}
 		});	
