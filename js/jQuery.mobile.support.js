@@ -15,13 +15,11 @@ $.extend( $.support, {
 
 (function() {
 	var fakeBody = $( "<body>" ).prependTo( "html" ),
-		displayDiv = $( "<div style='height: 5px; position: absolute; display: none;'></div>" )
-			.prependTo( fakeBody ),
-		positionDiv = $( "<div style='position: absolute; left: 10px;'></div>" )
-			.prependTo( fakeBody ),
-		overflowDiv = $( "<div style='position: absolute; overflow: hidden; height: 0;'>" +
-			"<div style='height: 10px;'></div></div>" ).prependTo( fakeBody ),
-		floatClearHtml = "<div style='width:5px;height:5px;float:left;'></div>",
+		displayDiv = $( "<div style='height:5px;position:absolute;display:none;'/>" )
+			.prependTo( fakeBody )[ 0 ],
+		positionDiv = $( "<div style='position:absolute;left:10px;overflow:hidden;height:0;'>" +
+				"<div style='height:10px;'/></div>").prependTo( fakeBody )[ 0 ],
+		floatClearHtml = "<div style='width:5px;height:5px;float:left;'/>",
 		floatClearWrap = $( "<div>" )
 			.append( floatClearHtml + floatClearHtml )
 			.prependTo( fakeBody ),
@@ -38,9 +36,9 @@ $.extend( $.support, {
 	}
 	
 	$.extend( $.support, {
-		display: displayDiv[ 0 ].offsetHeight === 0,
-		position: positionDiv[ 0 ].offsetLeft === 10,
-		overflow: overflowDiv[ 0 ].offsetHeight === 0,
+		display: displayDiv.offsetHeight === 0,
+		position: positionDiv.offsetLeft === 10,
+		overflow: positionDiv.offsetHeight === 0,
 		floatclear: supportFloatClear
 	});
 	
