@@ -202,8 +202,8 @@
 		else{
 			transitionSpecified = false;
 		}
-		prevUrl = $.bbq.getState('url');
-		$.bbq.pushState({ url: href });
+		prevUrl = location.hash.replace(/^#/,'');
+		location.hash = href;
 		//note: if it's a non-local-anchor and Ajax is not supported, go to page
 		if(href.match(/^[^#]/) && !$.support.ajax){ 
 			window.location = href;
@@ -323,10 +323,10 @@
 		//define body
 		$body = $('body');
 	
-		//hashchange for page state tracking - uses bbq. - needs to be bound at domready (for IE6 Ben?)
+		//hashchange for page state tracking - needs to be bound at domready (for IE6)
 		//When document.location.hash changes, find or load content, make it active
 		$window.bind( "hashchange", function(e){
-			var url = e.getState('url'),
+			var url = location.hash.replace(/^#/,''),
 				back = (url === prevUrl);
 			
 			if(url){
