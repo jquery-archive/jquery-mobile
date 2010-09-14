@@ -66,7 +66,7 @@ $.fn.tabs = function(settings){
 		//generic select tab function
 		function selectTab(tab,fromHashChange){
 			if(o.trackState && !fromHashChange){ 
-				$.bbq.pushState({'tab': tab.attr('href')});
+				pushState("tab", tab.attr("href"));
 			}
 			else{	
 				//unselect tabs
@@ -143,7 +143,7 @@ $.fn.tabs = function(settings){
 		
 		//function to select a tab from the url hash
 		function selectTabFromHash(hash){
-			var currHash = hash || $.bbq.getState('tab');
+			var currHash = hash || getState("tab");
 			if(!currHash){ currHash = '';}
 			var hashedTab = tabsNav.find('a[href=#'+ currHash.replace('#','') +']');
 		    if( hashedTab.size() > 0){
@@ -157,7 +157,7 @@ $.fn.tabs = function(settings){
 		}
 		
 		$(window).bind('hashchange',function(){
-			var tab = $.bbq.getState('tab');
+			var tab = getState("tab");
 			if(tab){
 				selectTabFromHash(tab,true);
 			}
@@ -177,5 +177,18 @@ $.fn.tabs = function(settings){
 			tabsNav.prependTo(footer);
 		}	
 	});
-};	
+};
+
+var curState = {};
+
+function pushState( name, value ) {
+	curState[ name ] = value;
+	window.location.hash = jQuery.param( curState );
+}
+
+function getState( name ) {
+	var found = (new RegExp("(?:^|&)" + name + "=(.*?)(?:&|$)")).exec( window.location.hash );
+	return found ? found[1] : null;
+}
+
 })(jQuery);

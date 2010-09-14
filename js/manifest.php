@@ -1,7 +1,7 @@
 <?
 $elements = array(
 	'jquery-1.4.2.min.js',
-	'jQuery.bbq.js',
+	'jQuery.hashchange.js',
 	'jQuery.clickable.js',
 	'jQuery.fixHeaderFooter.js',
 	'jQuery.forms.checkboxradio.js',
