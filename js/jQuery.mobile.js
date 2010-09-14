@@ -26,18 +26,7 @@
 		transitionDuration = 350,
 		orientation,
 		backBtnText = "Back",
-		prevUrl = location.hash,
-		//vars for custom event tracking
-		scrolling = false,
-		scrollListeningOn = true,
-		touching = false,
-		touchstartdata,
-		touchstopdata,
-		tapNotMoveTime = 75,
-		tapHoldTime = 300,
-		maxSwipeTime = 1000,
-		minSwipeXDistance = 180,
-		maxSwipeYtolerance = 80;
+		prevUrl = location.hash;
 	
 	/*
 		add some core behavior,events
@@ -75,101 +64,14 @@
 	
 	//hide Address bar
 	function hideBrowserChrome(){
-		//kill addr bar
-		scrollListeningOn = false;
+		$.event.special.scrollstart.enabled = false;
 		window.scrollTo(0,0);
 		setTimeout(function(){
-			scrollListeningOn = true;
+			$.event.special.scrollstart.enabled = true;
 		}, 150);
 	}
 	
-	//get vert scroll dist
-	$.scrollY = function(){
-		return $(window).scrollTop(); //always returns 0 WebOS!! HELP! http://jsbin.com/unufu3/5/edit
-	};
 	
-	//add new event shortcuts
-	$.each( ("touchstart touchmove touchend orientationchange tap swipe swipeleft swiperight scrollstart scrollstop").split(" "), function( i, name ) {
-		// Handle event binding
-		$.fn[ name ] = function( fn ) {
-			return fn ? this.live( name, fn ) : this.trigger( name );
-		};
-		if ( $.attrFn ) {
-			$.attrFn[ name ] = true;
-		}
-	});
-	
-	
-	
-
-	//detect and trigger some custom events (scrollstart,scrollstop,tap,taphold,swipe,swipeleft,swiperight) 
-	$(document)
-		.scroll(function(e){	
-			if(!scrollListeningOn){ return false; }		
-			var prevscroll = $.scrollY();
-			function checkscrollstop(){
-				if(prevscroll === $.scrollY() && scrolling && scrollListeningOn){ 
-					$body.trigger('scrollstop'); 
-					scrolling = false;
-				}
-			}
-			setTimeout(checkscrollstop,50);
-		})
-		.bind( ($.support.touch ? 'touchmove' : 'scroll'), function(e){
-			if(!scrollListeningOn){ return false; }
-			//iPhone triggers scroll a tad late - touchmoved preferred
-			if(!scrolling){ 
-				scrolling = true;
-				$body.trigger('scrollstart'); //good place to trigger?
-			}
-		})
-		.bind( ($.support.touch ? 'touchstart' : 'mousedown'), function(e){
-			touching = true;
-			//make sure it's not a touchmove and still touching
-			function checktap(eType){
-				if(!scrolling && touching){ 
-					$(e.target).trigger(eType);
-				}
-			}
-			//tap / taphold detection timeouts (make sure it's not a touchmove & before firing)
-			setTimeout(checktap, tapNotMoveTime, ['tap']);	
-			setTimeout(checktap, tapHoldTime, ['taphold']);	
-			
-			//cache data from touch start - for later use in swipe testing
-			var eScope = e.originalEvent.touches ? e.originalEvent.touches[0] : e;
-			touchstartdata = {
-				'time': (new Date).getTime(), 
-				'coords': [eScope.pageX, eScope.pageY], 
-				'origin': $(e.target)
-			};
-		})
-		.bind(($.support.touch ? 'touchmove' : 'mousemove'), function(e){
-			if(touchstartdata){
-				var eScope = e.originalEvent.touches ? e.originalEvent.touches[0] : e;
-				touchstopdata = {
-					'time': (new Date).getTime(), 
-					'coords': [eScope.pageX, eScope.pageY]
-				};
-				//trying not to interfere with scrolling here...
-				//this may need to be expanded to any non-y movement...
-				if(Math.abs(touchstartdata.coords[0] - touchstopdata.coords[0]) > 10){
-					e.preventDefault();
-				}
-			}
-		})
-		.bind(($.support.touch ? 'touchend' : 'mouseup'), function(e){	
-			touching = false;	
-			if(touchstartdata && touchstopdata){
-				//detect whether a swipe occurred, trigger it	
-				if(	touchstopdata.time - touchstartdata.time < maxSwipeTime && 
-					Math.abs(touchstartdata.coords[0] - touchstopdata.coords[0]) > minSwipeXDistance &&
-					Math.abs(touchstartdata.coords[1] - touchstopdata.coords[1]) < maxSwipeYtolerance ){	
-						touchstartdata.origin.trigger('swipe');	
-						touchstartdata.origin.trigger( (touchstartdata.coords[0] > touchstopdata.coords[0] ? 'swipeleft' : 'swiperight'));
-				}
-			}
-			touchstartdata = touchstopdata = null;
-		});
 	
 	//add orientation class on flip/resize. This should probably use special events. Also, any drawbacks to just using resize?
 	$window.bind( ($.support.orientation ? 'orientationchange' : 'resize'), updateOrientation);
