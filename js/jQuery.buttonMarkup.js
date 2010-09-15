@@ -27,7 +27,8 @@ $.fn.buttonMarkup = function(options){
 			shadow: true,
 			iconshadow: true,
 			iconPos: el.attr('data-iconPos'),
-			icon: el.attr('data-icon')
+			icon: el.attr('data-icon'),
+			wrapperEls: 'span'
 		},options);
 		
 		if(o.icon){
@@ -38,9 +39,9 @@ $.fn.buttonMarkup = function(options){
 		el
 			.attr('data-theme', o.theme)
 			.addClass('ui-btn ui-btn-up-'+ o.theme + (o.corners?' ui-btn-corner-all':'') + (o.iconPos? ' ui-btn-icon-'+o.iconPos : '')+ (o.shadow? ' ui-shadow' : ''))
-			.wrapInner('<span class="ui-btn-text"></span>')
+			.wrapInner('<'+o.wrapperEls+' class="ui-btn-text"></'+o.wrapperEls+'>')
 			.prepend(o.iconPos ? '<span class="ui-icon '+o.icon+ (o.shadow? ' ui-icon-shadow' : '')+'"></span>': '')
-			.wrapInner('<span class="ui-btn-inner '+ (o.corners?' ui-btn-corner-all':'') +'"></span>')
+			.wrapInner('<'+o.wrapperEls+' class="ui-btn-inner '+ (o.corners?' ui-btn-corner-all':'') +'"></'+o.wrapperEls+'>')
 			.clickable();
 	});		
 
