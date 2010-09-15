@@ -72,7 +72,7 @@ $.fixedToolbars = (function(){
 			return thisel.is('.ui-header') ? (thisTop + thisHeight <= fromTop) : (thisTop > fromTop + screenHeight);
 		}	
 
-
+	$(function() {
 	$(document)
 		.bind('tap',function(e){
 			if( !$(e.target).closest(ignoreTargets).length ){
@@ -91,7 +91,7 @@ $.fixedToolbars = (function(){
 				showAfterScroll = false;
 			}
 		});
-
+	});
 
 		//hide on resize?
 		$(window).resize(function(){ $.fixedToolbars.hide(true); });
