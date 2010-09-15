@@ -74,7 +74,6 @@ $.event.special.tap = {
 					}
 				}, 300 );
 				
-				event.preventDefault();
 			})
 			.bind( touchMoveEvent, function() {
 				moved = true;
