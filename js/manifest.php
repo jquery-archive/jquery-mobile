@@ -13,6 +13,7 @@ $elements = array(
 	'jQuery.collapsible.js',
 	'jQuery.controlGroup.js',
 	'jQuery.fieldContain.js',
+	'jQuery.listview.js',
 	'jQuery.globalnav.js',
 	'jQuery.mobile.support.js',
 	'jQuery.mobile.event.js',
