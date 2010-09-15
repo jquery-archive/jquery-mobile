@@ -7,7 +7,8 @@ Possible additions:
 $.extend( $.support, {
 	orientation: !!window.orientation,
 	touch: typeof Touch === "object",
-	WebKitAnimationEvent: typeof WebKitTransitionEvent === "object"
+	WebKitAnimationEvent: typeof WebKitTransitionEvent === "object",
+	pushState: !!history.pushState
 });
 
 (function() {
