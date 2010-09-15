@@ -189,8 +189,6 @@
 			$el.find('.field').fieldcontain();
 			//selects
 			$el.find('select').customSelect();
-			//tabs
-			$el.find('[data-role="tabs"]').tabs({fixedAsFooter:true});
 			//fix toolbars
 			$el.fixHeaderFooter();
 			//buttons from links in headers,footers,bars, or with data-role
@@ -199,8 +197,8 @@
 			$el.find('[data-role="controlgroup"]:not([data-type="horizontal"])').controlgroup();
 			//horizontal controlgroups
 			$el.find('[data-role="controlgroup"][data-type="horizontal"]').controlgroup({direction: 'horizontal'});
-			//tree from data role
-			$el.find('[data-role="tree"]').tree();
+			//listview from data role
+			$el.find('[data-role="listview"]').listview();
 			//links within content areas
 			$el.find('.ui-body a:not(.ui-btn):not(.ui-link-inherit)').addClass('ui-link');
 			//rewrite "home" links to mimic the back button (pre-js, these links are usually "home" links)	
