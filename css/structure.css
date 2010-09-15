@@ -178,42 +178,7 @@ div.ui-checkbox, div.ui-radio { position:relative;  margin: .2em 0 .5em;  }
 	.ui-field-contain { border-width: 0; padding: 0; margin: 1em 0; }
 }
 
-/*tree*/
-.ui-tree-contain { border-width: 0; }
-.ui-tree { position: relative; }
-.ui-tree,.ui-tree ul.ui-tree-group,.ui-tree ol.ui-tree-group, .ui-tree li.ui-treeitem { list-style:none; margin:0; padding:0; zoom: 1; }
-.ui-tree, .ui-tree .ui-tree-group { -webkit-transition: left .3s linear; width: 100%; margin: 0;  }
-.ui-tree .ui-tree-group { position: absolute; top:0; left: 100%; border-width: 0;  }
-.ui-tree-expanded, .ui-tree .ui-tree-expanded { -webkit-transition: left .3s linear; left: -100%; }
-.ui-tree .ui-tree-expanded { left: 0; }
-.ui-tree a.ui-treeitem-link { text-align: left; margin: 0 0 -1px 0; }
-.ui-tree a.ui-treeitem-link:focus { outline: none; }
-.ui-tree .ui-tree-group-collapsed { display: none; }
-.ui-tree .ui-tree-content-loading { padding: 20px; text-align: center; }
-.ui-tree .ui-tree-content-loading .ui-icon { width: 32px; height: 32px; margin: 0 auto; display: block;  }
-.ui-tree-loading-text {  margin: 15px auto; display: block; }
 
-/* new tree layout stuff - tbd */
-.ui-treeitem-label {  cursor: pointer; text-decoration: none; position: relative; display: block; margin: 0 0 -1px 0; text-align: left; overflow: hidden; padding: 0 40px 0 0; font-size: 16px;  }
-.ui-treeitem-label .ui-btn-inner { padding: 0; }
-.ui-treeitem-label a { text-decoration: none; }
-.ui-treeitem-thumb, .ui-treeitem-content { float: left; margin-right: 10px;  }
-.ui-treeitem-content { width: 60%;  }
-.ui-treeitem-aside { float: right; margin: 0 10px; width: 25%; text-align: right; }
-.ui-treeitem-aside, .ui-treeitem-aside * { font-size: 12px;  }
-.ui-treeitem-thumb { border: 0; }
-.ui-treeitem-title { font-size: 16px; font-weight: bold; display: block; margin: .6em 15px; }
-.ui-treeitem-desc { font-size: 12px; font-weight: normal; display: block; margin: -.5em 15px .6em; }
-.ui-treeitem-label .ui-icon { position: absolute; right: 5px; top: 50%; margin-top: -11px; }
-.ui-treeitem-count {  float: right; position: relative; margin: 1em 5px; font-size: 11px; font-weight: bold; border-width: 0; padding: .2em .4em; background-image: none; }
-.ui-treeitem-next { position: absolute; width: 30px; height: 100%; border-width: 0; border-left-width: 1px; top: 0; right: 0; padding: 0 5px; }
-.ui-treeitem-next .ui-btn { overflow: hidden; position: absolute; right: 5px; top: 50%; margin-top: -11px; width: 20px; height: 20px; }
-.ui-treeitem-next .ui-btn .ui-icon { right: 0; top: 0; margin: 0; }
-
-/*tree btn bar*/
-.ui-tree-header { overflow: hidden; }
-.ui-tree-header-hidden { display: none;  }
-.ui-tree-section-title { text-align: center; font-size: 16px; }
 
 /*tabs*/
 .ui-tabs-nav { list-style:none; padding: 0; margin: 0; position: relative; display: block; border: 0; overflow: hidden; }
