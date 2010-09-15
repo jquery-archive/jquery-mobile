@@ -8,11 +8,15 @@
 $.fn.listview = function(options){
 	return $(this).each(function(){
 		var o = $.extend({
-			theme: $(this).is('[data-theme]') ? $(this).attr('data-theme') : 'f',
-			countTheme: $(this).is('[data-count-theme]') ? $(this).attr('data-count-theme') : 'a',
+			theme: $(this).is('[data-theme]') ? $(this).attr('data-theme') : 'f'
+		},options);
+		
+		//split these to be able to reference o.theme - there's a simpler way i'm sure!
+		o = $.extend({	
+			countTheme: $(this).is('[data-count-theme]') ? $(this).attr('data-count-theme') : o.theme,
 			headerTheme: 'b',
 			splitTheme: $(this).is('[data-split-theme]') ? $(this).attr('data-split-theme') : 'b'
-		},options);
+		},o);
 
 		//if it's a nested list, chunk it into ui-page items, recurse through them and call listview on each individual ul
 		$( $(this).find("ul").get().reverse() ).each(function( i ) {
@@ -75,7 +79,7 @@ $.fn.listview = function(options){
 				.filter('li:first-child img').addClass('ui-corner-tl').end()
 				.filter('li:last-child img').addClass('ui-corner-bl').end()
 			.end()
-			.find('.ui-li-count').addClass('ui-bar-'+o.countTheme + ' ui-btn-corner-all')
+			.find('.ui-li-count').addClass('ui-btn-up-'+o.countTheme + ' ui-btn-corner-all')
 			.end()
 			.find(':header').addClass('ui-li-heading')
 			.end()
