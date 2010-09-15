@@ -1,0 +1,207 @@
+<?php /*gzip page*/ ob_start("ob_gzhandler"); ?>
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<title>jQuery Mobile Framework - Listview Examples</title> 
+	<link rel="stylesheet" type="text/css"  href="css/all"/> 
+	<script type="text/javascript" src="js/all"></script>
+	
+</head> 
+<body> 
+
+<div class="ui-page">
+
+	<div class="ui-header ui-bar-a">
+		<h1>Listview Examples</h1>
+		<a href="index.html" class="ui-back" data-icon="arrow-l">Home</a>
+	</div>
+
+
+	<div class="ui-content">
+
+	<h2 class="ui-bar ui-bar-b">Basic Listview:</h2>
+	
+	<ul data-role="listview">
+		<li><a href="index.html">Page A</a></li>
+		<li><a href="index.html">Page B</a></li>
+		<li><a href="index.html">Page C</a></li>
+	</ul>
+	
+	<h2 class="ui-bar ui-bar-b">Nested Listview:</h2>
+	
+	<ul data-role="listview">
+		<li>Page A
+			<ul>
+				<li><a href="index.html">Page A 1</a></li>
+				<li><a href="index.html">Page A 2</a></li>
+				<li><a href="index.html">Page A 3</a></li>
+			</ul>
+		</li>
+		<li>Page B
+			<ul>
+				<li><a href="index.html">Page B 1</a></li>
+				<li><a href="index.html">Page B 2</a></li>
+				<li><a href="index.html">Page B 3</a></li>
+			</ul>
+		</li>
+		<li>Page C
+			<ul>
+				<li><a href="index.html">Page C 1</a></li>
+				<li><a href="index.html">Page C 2</a></li>
+				<li><a href="index.html">Page C 3</a></li>
+			</ul>
+		</li>
+	</ul>
+
+	<h2 class="ui-bar ui-bar-b">Basic Listview w/ counts:</h2>
+
+	<ul data-role="listview">
+		<li class="ui-li">
+			<a href="index.html">Page A</a>
+			<span class="ui-li-count">22</span>
+		</li>
+		<li class="ui-li">
+			<a href="index.html">Page A</a>
+			<span class="ui-li-count">22</span>
+		</li>
+		<li class="ui-li">
+			<a href="index.html">Page A</a>
+			<span class="ui-li-count">22</span>
+		</li>
+	</ul>	
+	
+	<h2 class="ui-bar ui-bar-b">Basic Listview w/ hierarchy:</h2>
+	
+	<ul data-role="listview">
+		<li class="ui-li">
+			<h3><a href="index.html">Page A</a></h3>
+			<p>Quick description about this item here...</p>
+			<span class="ui-li-count">22</span>
+		</li>
+		<li class="ui-li">
+			<h3><a href="index.html">Page A</a></h3>
+			<p>Quick description about this item here...</p>
+			<span class="ui-li-count">22</span>
+		</li>
+		<li class="ui-li">
+			<h3><a href="index.html">Page A</a></h3>
+			<p>Quick description about this item here...</p>
+			<span class="ui-li-count">22</span>
+		</li>
+	</ul>
+	
+	
+	
+	
+	<h2 class="ui-bar ui-bar-b">Basic Listview w/ thumbnails:</h2>
+	
+	<ul data-role="listview">
+		<li class="ui-li">
+			<img src="images/jb.jpg" alt="jb" />
+			<h3><a href="index.html">Page A</a></h3>
+			<p>Quick description about this item here...</p>
+			<span class="ui-li-count">22</span>
+		</li>
+		<li class="ui-li">
+			<img src="images/jb.jpg" alt="jb" />
+			<h3><a href="index.html">Page A</a></h3>
+			<p>Quick description about this item here...</p>
+			<span class="ui-li-count">22</span>
+		</li>
+		<li class="ui-li">
+			<img src="images/jb.jpg" alt="jb" />
+			<h3><a href="index.html">Page A</a></h3>
+			<p>Quick description about this item here...</p>
+			<span class="ui-li-count">22</span>
+		</li>
+	</ul>
+	
+	
+		<h2 class="ui-bar ui-bar-b">Listview w/ thumbnails:</h2>
+	
+	<ul data-role="listview">
+		<li class="ui-li">
+			<img src="images/jb.jpg" alt="jb" />
+			<h3><a href="index.html">Page A</a></h3>
+			<p>Quick description about this item here...</p>
+			<span class="ui-li-count">22</span>
+			<a href="index.html" title="browse details"></a>
+		</li>
+		<li class="ui-li">
+			<img src="images/jb.jpg" alt="jb" />
+			<h3><a href="index.html">Page A</a></h3>
+			<p>Quick description about this item here...</p>
+			<span class="ui-li-count">22</span>
+			<a href="index.html" title="browse details"></a>
+		</li>
+		<li class="ui-li">
+			<img src="images/jb.jpg" alt="jb" />
+			<h3><a href="index.html">Page A</a></h3>
+			<p>Quick description about this item here...</p>
+			<span class="ui-li-count">22</span>
+			<a href="index.html" title="browse details"></a>
+		</li>
+	</ul>
+	
+	
+	<h2 class="ui-bar ui-bar-b">Basic Listview w/ split buttons:</h2>
+	
+	<ol data-role="listview">
+		<li class="ui-li">
+			<img src="images/jb.jpg" alt="jb" />
+			<h3><a href="index.html">Page A</a></h3>
+			<p>Quick description about this item here...</p>
+			<span class="ui-li-count">22</span>
+			<a href="index.html">browse details</a>
+		</li>
+		<li class="ui-li">
+			<img src="images/jb.jpg" alt="jb" />
+			<h3><a href="index.html">Page A</a></h3>
+			<p>Quick description about this item here...</p>
+			<span class="ui-li-count">22</span>
+			<a href="index.html">browse details</a>
+		</li>
+		<li class="ui-li">
+			<img src="images/jb.jpg" alt="jb" />
+			<h3><a href="index.html">Page A</a></h3>
+			<p>Quick description about this item here...</p>
+			<span class="ui-li-count">22</span>
+			<a href="index.html">browse details</a>
+		</li>
+	</ol>
+	
+	
+	<h2 class="ui-bar ui-bar-b">Same as above, different theme</h2>
+	
+	<ol data-role="listview" data-theme="e" data-split-theme="c" data-count-theme="c">
+		<li class="ui-li">
+			<img src="images/jb.jpg" alt="jb" />
+			<h3><a href="index.html">Page A</a></h3>
+			<p>Quick description about this item here...</p>
+			<span class="ui-li-count">22</span>
+			<a href="index.html">browse details</a>
+		</li>
+		<li class="ui-li">
+			<img src="images/jb.jpg" alt="jb" />
+			<h3><a href="index.html">Page A</a></h3>
+			<p>Quick description about this item here...</p>
+			<span class="ui-li-count">22</span>
+			<a href="index.html">browse details</a>
+		</li>
+		<li class="ui-li">
+			<img src="images/jb.jpg" alt="jb" />
+			<h3><a href="index.html">Page A</a></h3>
+			<p>Quick description about this item here...</p>
+			<span class="ui-li-count">22</span>
+			<a href="index.html">browse details</a>
+		</li>
+	</ol>
+	
+
+
+	</div> 
+</div>		
+
+
+</body>
+</html>
