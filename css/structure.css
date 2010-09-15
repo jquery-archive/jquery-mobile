@@ -178,15 +178,6 @@ div.ui-checkbox, div.ui-radio { position:relative;  margin: .2em 0 .5em;  }
 	.ui-field-contain { border-width: 0; padding: 0; margin: 1em 0; }
 }
 
-
-
-/*tabs*/
-.ui-tabs-nav { list-style:none; padding: 0; margin: 0; position: relative; display: block; border: 0; overflow: hidden; }
-.ui-tabs-nav li { float: left; margin:0; padding:0; width: 33%; }
-.ui-tabs-nav li .ui-btn { display: block; float: none; font-size: 12px; text-align: center; margin: 0 -1px 0 0; outline: none; border-top-width: 0; border-bottom-width: 0; }
-.ui-tabs-body div.ui-tabs-panel {  display:none; }
-.ui-tabs-body div.ui-tabs-panel-selected { display:block; }
-
 /*globalnav*/
 .ui-globalnav { overflow: hidden; width: 100%; overflow: hidden;  }
 .ui-globalnav ul { list-style:none; padding: 0; margin: 0; position: relative; display: block; border: 0;}
