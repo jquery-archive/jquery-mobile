@@ -1,6 +1,6 @@
 <?
 $elements = array(
-	'jquery.min.js',
+	'jquery.js',
 	'jQuery.hashchange.js',
 	'jQuery.clickable.js',
 	'jQuery.fixHeaderFooter.js',
@@ -13,8 +13,6 @@ $elements = array(
 	'jQuery.collapsible.js',
 	'jQuery.controlGroup.js',
 	'jQuery.fieldContain.js',
-	'jQuery.tabs.js',
-	'jQuery.tree.js',
 	'jQuery.globalnav.js',
 	'jQuery.mobile.support.js',
 	'jQuery.mobile.event.js',
