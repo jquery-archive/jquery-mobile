@@ -7,7 +7,8 @@
 (function($){
 $.fn.controlgroup = function(options){
 	var o = $.extend({
-			direction: 'vertical'
+			direction: 'vertical',
+			shadow: false
 		},options);
 		
 	return $(this).each(function(){
@@ -19,7 +20,7 @@ $.fn.controlgroup = function(options){
 		$('<div role="heading" class="ui-controlgroup-label">'+ groupheading.html() +'</div>').insertBefore(groupheading);	
 		groupheading.remove();	
 
-		$(this).addClass('ui-controlgroup ui-controlgroup-'+o.direction);
+		$(this).addClass('ui-corner-all ui-controlgroup ui-controlgroup-'+o.direction);
 		
 		function flipClasses(els){
 			els
@@ -30,6 +31,9 @@ $.fn.controlgroup = function(options){
 		}
 		flipClasses($(this).find('.ui-btn'));
 		flipClasses($(this).find('.ui-btn-inner'));
+		if(o.shadow){
+			$(this).addClass('ui-shadow');
+		}
 	});	
 };
 })(jQuery);
