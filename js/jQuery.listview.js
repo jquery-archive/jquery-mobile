@@ -23,8 +23,9 @@ $.fn.listview = function( options ) {
 		o = $.extend({	
 			countTheme: data( "count-theme", o.theme ),
 			headerTheme: "b",
+			groupingTheme: data( "grouping-theme", "c" ),
 			splitTheme: data( "split-theme", "b" ),
-			inset: data( "inset", "true" ) === "true"
+			inset: data( "inset", "false" ) === "true"
 		}, o);
 		
 		//if it's a nested list, chunk it into ui-page items, recurse through them and call listview on each individual ul
@@ -73,18 +74,24 @@ $.fn.listview = function( options ) {
 						var aside = $li.find('.ui-li-aside');
 						aside.prependTo(aside.parent()); //shift aside to front for css float
 					}
-					$li
-						.addClass( "ui-li" )
-						.buttonMarkup({
-							wrapperEls: "div",
-							shadow: false,
-							corners: false,
-							iconPos: "right",
-							icon: "arrow-r",
-							theme: o.theme
-						})
-						.find( "a" ).eq( 0 )
-							.addClass( "ui-link-inherit" );
+					$li.addClass( "ui-li" );
+					
+					if( $li.find('a').length ){	
+						$li
+							.buttonMarkup({
+								wrapperEls: "div",
+								shadow: false,
+								corners: false,
+								iconPos: "right",
+								icon: "arrow-r",
+								theme: o.theme
+							})
+							.find( "a" ).eq( 0 )
+								.addClass( "ui-link-inherit" );
+					}
+					else{
+						$li.addClass( "ui-li-grouping ui-btn ui-body-" + o.groupingTheme );
+					}		
 				});
 		
 		if ( o.inset ) {
@@ -151,7 +158,7 @@ $.fn.listview = function( options ) {
 				.addClass( "ui-li-desc" );
 		
 		//tapping the whole LI triggers ajaxClick on the first link
-		$this.find( "li" ).live( "tap", function() {
+		$this.find( "li:not(.ui-li-grouping)" ).live( "tap", function() {
 			$( this ).find( "a:first" ).ajaxClick();
 		});
 	});
