@@ -24,7 +24,7 @@ $.fn.listview = function( options ) {
 			countTheme: data( "count-theme", o.theme ),
 			headerTheme: "b",
 			splitTheme: data( "split-theme", "b" ),
-			fillWidth: data( "fill-width", "true" ) === "true"
+			inset: data( "inset", "true" ) === "true"
 		}, o);
 		
 		//if it's a nested list, chunk it into ui-page items, recurse through them and call listview on each individual ul
@@ -87,7 +87,7 @@ $.fn.listview = function( options ) {
 							.addClass( "ui-link-inherit" );
 				});
 		
-		if ( !o.fillWidth ) {
+		if ( o.inset ) {
 			$this
 				.addClass( "ui-listview-inset" )
 				.controlgroup({ shadow: true });
@@ -116,7 +116,7 @@ $.fn.listview = function( options ) {
 						} ) );
 					
 					//fix corners
-					if ( !o.fillWidth ) {
+					if ( o.inset ) {
 						var closestLi = $( this ).closest( "li" );
 						if ( closestLi.is( "li:first-child" ) ) {
 							$( this ).addClass( "ui-corner-tr" );
@@ -129,7 +129,7 @@ $.fn.listview = function( options ) {
 			.find( "img")
 				.addClass( "ui-li-thumb" );
 		
-		if ( !o.fillWidth ) {
+		if ( o.inset ) {
 			$this
 				.find( "img" )
 					.filter( "li:first-child img" )
