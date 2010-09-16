@@ -1,0 +1,28 @@
+<?php /*gzip page*/ ob_start("ob_gzhandler"); ?>
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<title>jQuery Mobile Framework - Dialog Example</title> 
+	<link rel="stylesheet" type="text/css" href="css/all" /> 
+	<script type="text/javascript" src="js/all"></script>
+</head> 
+<body> 
+
+<div class="ui-page">
+	<div class="ui-header" data-theme="d">
+		<h1>Dialog Example</h1>
+		<a href="index.html" class="ui-back" data-icon="arrow-l">Home</a>
+	</div>
+	
+	<div class="ui-content ui-body ui-body-a">
+		<h1>Demo description</h1>
+		
+		<p>This is a regular page, styled as a dialog!</p>
+		<a href="#" data-role="button" data-theme="a">Okay</a>       
+		<a href="#" data-role="button">Cancel</a>    
+	</div>
+</div>
+
+
+</body>
+</html>
