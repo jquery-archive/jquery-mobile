@@ -24,7 +24,6 @@
 		transitionSpecified = false,
 		currentTransition = 'slide',
 		transitionDuration = 350,
-		orientation,
 		backBtnText = "Back",
 		prevUrl = location.hash;
 	
@@ -73,18 +72,10 @@
 	
 	
 	
-	//add orientation class on flip/resize. This should probably use special events. Also, any drawbacks to just using resize?
-	$window.bind( ($.support.orientation ? 'orientationchange' : 'resize'), updateOrientation);
-	
-	//orientation change classname logic - logic borrowed/modified from jQtouch
-	function updateOrientation() {
-        var neworientation = window.innerWidth < window.innerHeight ? 'portrait' : 'landscape';
-        if(orientation !== neworientation){
-        	$body.trigger('turn', {orientation: orientation}); //temp event name
-        }
-        orientation = neworientation;
-        $html.removeClass('portrait landscape').addClass(orientation);
-    }
+	//add orientation class on flip/resize.
+	$window.bind( "orientationchange", function( event, data ) {
+		$html.removeClass( "portrait landscape" ).addClass( data.orientation );
+	});
 	
 	//add mobile, loading classes to doc
 	$html.addClass('ui-mobile');
@@ -285,7 +276,7 @@
 		$window.trigger( "hashchange" );
 		
 		//update orientation 
-		updateOrientation();	
+		$html.addClass( $.event.special.orientationchange.orientation( $window ) );
 		
 		//swipe right always triggers a back 
 		$body.bind('swiperight.jqm',function(){
