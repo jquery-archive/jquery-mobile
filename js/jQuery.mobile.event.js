@@ -145,6 +145,35 @@ $.event.special.swipe = {
 	}
 };
 
+$.event.special.orientationchange = {
+	orientation: function( elem ) {
+		return elem.width() / elem.height() < 1.1 ? "portrait" : "landscape";
+	},
+	
+	setup: function() {
+		var thisObject = this,
+			$this = $( thisObject ),
+			orientation = $.event.special.orientationchange.orientation( $this );
+
+		function handler() {
+			var newOrientation = $.event.special.orientationchange.orientation( $this );
+			
+			if ( orientation !== newOrientation ) {
+				$.event.handle.call( thisObject, "orientationchange", {
+					orientation: newOrientation
+				} );
+				orientation = newOrientation;
+			}
+		}
+
+		if ( $.support.orientation ) {
+			thisObject.addEventListener( "orientationchange", handler, false );
+		} else {
+			$this.bind( "resize", handler );
+		}
+	}
+};
+
 $.each({
 	scrollstop: "scrollstart",
 	taphold: "tap",
