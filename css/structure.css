@@ -194,7 +194,7 @@ div.ui-checkbox, div.ui-radio { position:relative;  margin: .2em 0 .5em;  }
 .ui-li-thumb { position: absolute; left: 1px; top: 0; max-height: 80px; max-width: 80px; }
 .ui-li-thumb, .ui-li-content { float: left; margin-right: 10px; }
 .ui-li-aside { float: right; width: 25%; text-align: right; margin: .3em 0; }
-.ui-li-count { position: absolute; font-size: 11px; font-weight: bold; padding: .2em .4em; top: 50%; margin-top: -.9em; right: 38px; }
+.ui-li-count { position: absolute; font-size: 11px; font-weight: bold; padding: .2em .5em; top: 50%; margin-top: -.9em; right: 38px; }
 .ui-li-link-alt { position: absolute; width: 30px; height: 100%; border-width: 0; border-left-width: 1px; top: 0; right: 0; }
 .ui-li-link-alt .ui-btn { overflow: hidden; position: absolute; right: 5px; top: 50%; margin-top: -11px;  }
 .ui-li-link-alt .ui-btn-inner { padding: 0; position: static; }
