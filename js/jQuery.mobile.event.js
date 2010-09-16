@@ -19,10 +19,11 @@ $.event.special.scrollstart = {
 	setup: function() {
 		var thisObject = this,
 			$this = $( thisObject ),
+			scrolling,
 			timer;
 		
-		function trigger( event, scrolling ) {
-			$this.data( "ui-scrolling", scrolling );
+		function trigger( event, state ) {
+			scrolling = state;
 			var originalType = event.type;
 			event.type = scrolling ? "scrollstart" : "scrollstop";
 			$.event.handle.call( thisObject, event );
@@ -35,7 +36,7 @@ $.event.special.scrollstart = {
 				return;
 			}
 			
-			if ( !$this.data( "ui-scrolling" ) ) {
+			if ( !scrolling ) {
 				trigger( event, true );
 			}
 			
@@ -143,3 +144,16 @@ $.event.special.swipe = {
 			});
 	}
 };
+
+$.each({
+	scrollstop: "scrollstart",
+	taphold: "tap",
+	swipeleft: "swipe",
+	swiperight: "swipe"
+}, function( event, sourceEvent ) {
+	$.event.special[ event ] = {
+		setup: function() {
+			$( this ).bind( sourceEvent, $.noop );
+		}
+	};
+});
