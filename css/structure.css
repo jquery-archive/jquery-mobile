@@ -189,8 +189,8 @@ div.ui-checkbox, div.ui-radio { position:relative;  margin: .2em 0 .5em;  }
 .ui-li .ui-btn-inner { display: block; position: relative; padding: .5em 65px .5em 15px; }
 .ui-li-has-thumb { min-height: 70px; }
 .ui-li-has-thumb .ui-btn-inner { padding-left: 100px; }
-.ui-li-heading { font-size: 16px; font-weight: bold; display: block; margin: .6em 0;  }
-.ui-li-desc {  font-size: 12px; font-weight: normal; display: block; margin: -.5em 0 .6em; }
+.ui-li-heading { font-size: 16px; font-weight: bold; display: block; margin: .6em 0; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;  }
+.ui-li-desc {  font-size: 12px; font-weight: normal; display: block; margin: -.5em 0 .6em; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; }
 .ui-li-thumb { position: absolute; left: 1px; top: 0; max-height: 80px; max-width: 80px; }
 .ui-li-thumb, .ui-li-content { float: left; margin-right: 10px; }
 .ui-li-aside { float: right; width: 25%; text-align: right; margin: .3em 0; }
