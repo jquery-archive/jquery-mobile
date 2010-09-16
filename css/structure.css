@@ -179,22 +179,24 @@ div.ui-checkbox, div.ui-radio { position:relative;  margin: .2em 0 .5em;  }
 }
 
 /* listview */
-.ui-listview { margin: 1em 15px; }
+.ui-listview { margin: 0; }
+.ui-listview-inset { margin: 1em 15px;  }
 .ui-listview, .ui-li { list-style:none; padding:0; zoom: 1; }
-.ui-li { display: block; margin:0; position: relative; overflow: hidden; text-align: left; border-bottom-width: 0; }
+.ui-li { display: block; margin:0; position: relative; overflow: hidden; text-align: left; border-width: 0; border-top-width: 1px; }
+.ui-listview-inset .ui-li { border-right-width: 1px; border-left-width: 1px; }
 .ui-li:last-child { border-bottom-width: 1px; }
-.ui-li .ui-btn-inner { display: block; padding: .5em 65px .5em 15px; }
-.ui-li-has-thumb { min-height: 80px; }
+.ui-li .ui-btn-inner { display: block; position: relative; padding: .5em 65px .5em 15px; }
+.ui-li-has-thumb { min-height: 70px; }
 .ui-li-has-thumb .ui-btn-inner { padding-left: 100px; }
 .ui-li-heading { font-size: 16px; font-weight: bold; display: block; margin: .6em 0;  }
 .ui-li-desc {  font-size: 12px; font-weight: normal; display: block; margin: -.5em 0 .6em; }
-.ui-li-thumb { position: absolute; left: 0; top: 0; max-height: 80px; max-width: 80px; }
+.ui-li-thumb { position: absolute; left: 1px; top: 0; max-height: 80px; max-width: 80px; }
 .ui-li-thumb, .ui-li-content { float: left; margin-right: 10px; }
 .ui-li-aside { float: right; width: 25%; text-align: right; }
 .ui-li-count { position: absolute; font-size: 11px; font-weight: bold; padding: .2em .4em; top: 50%; margin-top: -.9em; right: 38px; }
 .ui-li-link-alt { position: absolute; width: 30px; height: 100%; border-width: 0; border-left-width: 1px; top: 0; right: 0; }
 .ui-li-link-alt .ui-btn { overflow: hidden; position: absolute; right: 5px; top: 50%; margin-top: -11px;  }
-.ui-li-link-alt .ui-btn-inner { padding: 0; }
+.ui-li-link-alt .ui-btn-inner { padding: 0; position: static; }
 .ui-li-link-alt .ui-btn .ui-icon { right: 50%; margin-right: -9px;  }
 
 /*globalnav*/

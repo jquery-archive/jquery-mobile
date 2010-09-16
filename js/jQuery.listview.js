@@ -15,9 +15,10 @@ $.fn.listview = function(options){
 		o = $.extend({	
 			countTheme: $(this).is('[data-count-theme]') ? $(this).attr('data-count-theme') : o.theme,
 			headerTheme: 'b',
-			splitTheme: $(this).is('[data-split-theme]') ? $(this).attr('data-split-theme') : 'b'
+			splitTheme: $(this).is('[data-split-theme]') ? $(this).attr('data-split-theme') : 'b',
+			fillWidth: $(this).is('[data-fill-width]') ? ($(this).attr('data-fill-width') == 'true') : true
 		},o);
-
+		
 		//if it's a nested list, chunk it into ui-page items, recurse through them and call listview on each individual ul
 		$( $(this).find("ul").get().reverse() ).each(function( i ) {
 			var parent = $(this).parent(), 
@@ -52,9 +53,13 @@ $.fn.listview = function(options){
 					.addClass('ui-li' + ($(this).is(':has(img)') ? ' ui-li-has-thumb' : ''))
 					.buttonMarkup({wrapperEls: 'div', shadow: false, corners: false, iconPos: 'right', icon: 'arrow-r', theme: o.theme})
 					.find('a:eq(0)').addClass('ui-link-inherit');
-			})
-			.end()
-			.controlgroup({shadow: true})
+			});
+		
+		if(!o.fillWidth){
+			$(this).addClass('ui-listview-inset').controlgroup({shadow: true});
+		}	
+		
+		$(this)	
 			.find('li').each(function(){		
 				//for split buttons
 				$(this).find('a:eq(1)').each(function(){
@@ -66,19 +71,25 @@ $.fn.listview = function(options){
 						.find('.ui-btn-inner').append($('<span></span>').buttonMarkup({ shadow: true, corners: true, theme: o.splitTheme, iconPos: 'notext',icon: 'arrow-r' }));
 					
 					//fix corners
-					var closestLi = $(this).closest('li');
-					if(closestLi.is('li:first-child')){
-						$(this).addClass('ui-corner-tr');
+					if(!o.fillWidth){
+						var closestLi = $(this).closest('li');
+						if(closestLi.is('li:first-child')){
+							$(this).addClass('ui-corner-tr');
+						}
+						else if(closestLi.is('li:last-child')){
+							$(this).addClass('ui-corner-br');
+						}		
 					}
-					else if(closestLi.is('li:last-child')){
-						$(this).addClass('ui-corner-br');
-					}		
 				});	
 			})
-			.find('img').addClass('ui-li-thumb')
-				.filter('li:first-child img').addClass('ui-corner-tl').end()
-				.filter('li:last-child img').addClass('ui-corner-bl').end()
-			.end()
+			.find('img').addClass('ui-li-thumb');
+		
+		if(!o.fillWidth){	
+			$(this).find('img').filter('li:first-child img').addClass('ui-corner-tl').end()
+			.filter('li:last-child img').addClass('ui-corner-bl').end();
+		}
+			
+		$(this)
 			.find('.ui-li-count').addClass('ui-btn-up-'+o.countTheme + ' ui-btn-corner-all')
 			.end()
 			.find(':header').addClass('ui-li-heading')
