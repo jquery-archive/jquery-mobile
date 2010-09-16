@@ -22,8 +22,13 @@ $.fn.fixHeaderFooter = function(options){
 		},options);
 			
 		//add transition and theme types	
-		els.filter('.ui-header').addClass( $.isArray(o.transition) ? o.transition[0] : o.transition).addClass('ui-bar-' + ($(this).is('[data-theme]') ? $(this).attr('data-theme') : 'a'));
-		els.filter('.ui-footer').addClass( $.isArray(o.transition) ? o.transition[1] : o.transition).addClass('ui-bar-' + ($(this).is('[data-theme]') ? $(this).attr('data-theme') : 'a'));
+		els.filter('.ui-header').each(function(){
+			$(this).addClass( $.isArray(o.transition) ? o.transition[0] : o.transition).addClass('ui-bar-' + ($(this).is('[data-theme]') ? $(this).attr('data-theme') : 'a'));
+		});
+			
+		els.filter('.ui-footer').each(function(){
+			$(this).addClass( $.isArray(o.transition) ? o.transition[1] : o.transition).addClass('ui-bar-' + ($(this).is('[data-theme]') ? $(this).attr('data-theme') : 'a'));
+		});	
 				
 		//set placeholder heights, then bind custom events	
 		els
