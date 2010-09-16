@@ -69,6 +69,10 @@ $.fn.listview = function( options ) {
 					if ( $li.is( ":has(img)" ) ) {
 						$li.addClass( "ui-li-has-thumb" );
 					}
+					if ( $li.is( ":has(.ui-li-aside)" ) ) {
+						var aside = $li.find('.ui-li-aside');
+						aside.prependTo(aside.parent()); //shift aside to front for css float
+					}
 					$li
 						.addClass( "ui-li" )
 						.buttonMarkup({
