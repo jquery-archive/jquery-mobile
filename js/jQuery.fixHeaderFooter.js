@@ -21,9 +21,9 @@ $.fn.fixHeaderFooter = function(options){
 			overlayOnly: el.find('.ui-fullscreen').length
 		},options);
 			
-		//add transition types	
-		els.filter('.ui-header').addClass( $.isArray(o.transition) ? o.transition[0] : o.transition);
-		els.filter('.ui-footer').addClass( $.isArray(o.transition) ? o.transition[1] : o.transition);
+		//add transition and theme types	
+		els.filter('.ui-header').addClass( $.isArray(o.transition) ? o.transition[0] : o.transition).addClass('ui-bar-' + ($(this).is('[data-theme]') ? $(this).attr('data-theme') : 'a'));
+		els.filter('.ui-footer').addClass( $.isArray(o.transition) ? o.transition[1] : o.transition).addClass('ui-bar-' + ($(this).is('[data-theme]') ? $(this).attr('data-theme') : 'a'));
 				
 		//set placeholder heights, then bind custom events	
 		els
