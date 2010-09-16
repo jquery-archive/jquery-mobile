@@ -23,7 +23,7 @@ $.fn.listview = function( options ) {
 		o = $.extend({	
 			countTheme: data( "count-theme", o.theme ),
 			headerTheme: "b",
-			groupingTheme: data( "grouping-theme", "c" ),
+			groupingTheme: data( "grouping-theme", "b" ),
 			splitTheme: data( "split-theme", "b" ),
 			inset: data( "inset", "false" ) === "true"
 		}, o);
