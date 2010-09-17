@@ -8,7 +8,7 @@
 $.fn.dialog = function(options){
 	return $(this).each(function(){		
 		$(this)
-			.addClass('ui-dialog')
+			.addClass('ui-dialog ui-body-a')
 			.find('.ui-header')
 			.addClass('ui-corner-top ui-overlay-shadow')
 			.end()
