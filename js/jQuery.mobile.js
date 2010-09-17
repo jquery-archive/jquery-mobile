@@ -249,10 +249,7 @@
 				}
 			}
 			else{ 
-				//either...
-				// we've backed up to the root page url, 
-				// it's a plugin state
-				//or it's the first page load with no hash present				
+				//either we've backed up to the root page url, or it's the first page load with no hash present				
 				var currentPage = $('.ui-page-active');
 				if( currentPage.length && !startPage.is('.ui-page-active')){
 					changePage(currentPage, startPage, back);
