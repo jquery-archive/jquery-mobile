@@ -18,7 +18,7 @@ $.fn.fixHeaderFooter = function(options){
 		var o = $.extend({
 			transition: el.find('[data-headfoottransition]').attr('data-headfoottransition') || ['slidedown','slideup'],
 			//also accepts a string, like 'fade'. All animations work, but fade and slidedown/up look best
-			overlayOnly: el.find('.ui-fullscreen').length
+			overlayOnly: el.find('.ui-fullscreen').length || el.is('[data-role="globalnav"]')
 		},options);
 			
 		//add transition and theme types	
@@ -71,12 +71,13 @@ $.fixedToolbars = (function(){
 			
 			var fromTop = $(window).scrollTop(),
 				screenHeight = window.innerHeight,
-				thisHeight = thisel.parent().parent().height(),
-				thisTop = thisel.parent().parent().offset().top,
+				placeholder = thisel.parent().parent(),
+				thisHeight = placeholder.height(),
+				thisTop = placeholder.offset().top,
 				thisIsHeader = thisel.is('.ui-header');
-				
+			
 			if(partialVisibilityOkay){
-				return thisIsHeader ? (thisTop <= fromTop) : (thisTop + thisHeight > fromTop + screenHeight);
+				return thisIsHeader ? (thisTop <= fromTop) : (thisTop + thisHeight >= fromTop + screenHeight);
 			}
 			else {
 				return thisIsHeader ? (thisTop + thisHeight <= fromTop) : (thisTop > fromTop + screenHeight);
@@ -115,18 +116,23 @@ $.fixedToolbars = (function(){
 			var els = allToolbars();
 			return els.each(function(){
 				var el = $(this),
+					partiallyCropped = placeHolderOutofView(el, true),
+					outofView = placeHolderOutofView(el),
 					overlayOnly = el.closest('.ui-headfoot-overlayonly').length;
-				//only animate if placeholder is out of view
-				if( placeHolderOutofView(el, true) ){
+				
+				if( partiallyCropped || overlayOnly){
 					el.parent().addClass('ui-fixpos');
-					if( placeHolderOutofView(el) ){
-						el.addClass('in').animationComplete(function(){
-							el.removeClass('in');
-						});
-					}
 				}
+						
+				//only animate if placeholder is out of view
+
+				if( outofView ){
+					el.addClass('in').animationComplete(function(){
+						el.removeClass('in');
+					});
+				}
+
 				if(overlayOnly){	
-					el.parent().addClass('ui-fixpos');
 					el.parent().parent().removeClass('ui-headfoot-hidden');
 				}
 				el.trigger('setTop');

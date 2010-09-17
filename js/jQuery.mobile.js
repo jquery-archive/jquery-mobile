@@ -255,7 +255,7 @@
 	//dom-ready
 	$(function(){
 		//global nav
-		$('.ui-globalnav').globalnav();
+		$('[data-role="globalnav"]').globalnav();
 	
 		//mobilize all pages present
 		mobilize($('.ui-page'));

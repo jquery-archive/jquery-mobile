@@ -12,10 +12,10 @@ $.fn.globalnav = function(settings){
 		},settings);
 		
 		//wrap it with footer classes
-		var globalnav = $(this).wrap('<div class="ui-bar-a"></div>').parent().addClass(o.fixedAs == 'footer' ? 'ui-footer' : 'ui-header');
+		var globalnav = $(this).wrapInner('<div class="ui-globalnav ui-bar-a"></div>').children(0).addClass(o.fixedAs == 'footer' ? 'ui-footer' : 'ui-header');
 		
 		//apply fixed footer markup to ui-footer
-		$(document).fixHeaderFooter();
+		$(this).fixHeaderFooter();
 		
 		//set up the nav tabs widths (currently evenly divided widths, to be improved later)
 		var navtabs = globalnav.find('li');
