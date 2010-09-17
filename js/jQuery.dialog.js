@@ -11,9 +11,10 @@ $.fn.dialog = function(options){
 			.addClass('ui-dialog')
 			.find('.ui-header')
 			.addClass('ui-corner-top ui-overlay-shadow')
+			.end()
 			.find('.ui-content,.ui-footer')
-				.eq(1)
-				.addClass('ui-corner-top ui-overlay-shadow');
+				.last()
+				.addClass('ui-corner-bottom ui-overlay-shadow');
 	});
 };
 })(jQuery);
