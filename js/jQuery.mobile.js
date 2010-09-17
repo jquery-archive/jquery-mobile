@@ -238,14 +238,14 @@
 				}
 				else { //ajax it in
 					pageLoading();
-					var newPage = $('<div class="ui-page" id="'+url+'"></div>')
+					var newPage = $('<div/>')
 						.appendTo($body)
 						.load(url + ' .ui-page',function(){
-						//dumping in HTML() from ui-page div - cleaner way?
-						$(this).html( $(this).find('.ui-page:eq(0)').html() );	
-						mobilize($(this));
-						changePage($('.ui-page-active'), $(this), back);
-					});
+							$(this).replaceWith( $(this).find('.ui-page:eq(0)').attr('id', url) );
+							var newPage = $('[id="'+url+'"]');	
+							mobilize(newPage);
+							changePage($('.ui-page-active'), newPage, back);
+						});
 				}
 			}
 			else{ 
