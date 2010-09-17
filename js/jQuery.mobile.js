@@ -204,10 +204,19 @@
 			//remove any pages that shouldn't cache
 			$(noCache).remove();
 			
+			//function for setting role of next page
+			function setPageRole(newPage){
+				if(nextPageRole){
+					newPage.attr('data-role', nextPageRole);
+					nextPageRole = null;
+				}
+			}
+			
 			if(url){
 				//see if content is present already
 				var localDiv = $('[id="'+url+'"]');
 				if(localDiv.length){
+					if(localDiv.is('[data-role]')){ setPageRole(localDiv); }
 					changePage($('.ui-page-active'), localDiv, back);
 				}
 				else { //ajax it in
@@ -217,10 +226,7 @@
 						.load(url + ' .ui-page',function(){
 							$(this).replaceWith( $(this).find('.ui-page:eq(0)').attr('id', url) );
 							var newPage = $('[id="'+url+'"]');
-							if(nextPageRole){
-								newPage.attr('data-role', nextPageRole);
-								nextPageRole = null;
-							}
+							setPageRole(newPage);
 							mobilize(newPage);
 							changePage($('.ui-page-active'), newPage, back);
 							
