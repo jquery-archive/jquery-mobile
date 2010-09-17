@@ -54,8 +54,9 @@
 	//send a link through hash tracking
 	$.fn.ajaxClick = function(){
 		var href = $(this).attr( "href" ),
-			transitionAttr = $(this).attr('data-transition'),
-			nextPageRole = $(this).attr('data-rel');
+			transitionAttr = $(this).attr('data-transition');
+			
+		nextPageRole = $(this).attr('data-rel');
 			
 		if(transitionAttr){
 			currentTransition = transitionAttr;
