@@ -44,8 +44,8 @@
 .ui-bar h1, .ui-bar h2, .ui-bar h3, .ui-bar h4, .ui-bar h5, .ui-bar h6 { margin: 0; padding: 0; font-size: 16px; display: inline-block; }
 
 /* page header configuration */
-.ui-header  { position: relative; padding: .8em 90px 1em; }
-.ui-header .ui-back { position: absolute; left: 10px; top: .5em;  }
+.ui-header  { position: relative; padding: .6em 90px .8em; }
+.ui-header .ui-back { position: absolute; left: 10px; top: .4em;  }
 .ui-header h1, .ui-title, .ui-footer h1 { text-align: center; font-size: 16px; display: block; margin: 0; padding: 0;  white-space: nowrap; overflow: hidden; }
 .ui-footer h1 { margin: .8em 0 1em; }
 .ui-header .ui-aux { position: absolute; right: 10px; top: .2em; }
