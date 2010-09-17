@@ -28,8 +28,8 @@
 .landscape body {  }
 
 /* "page" containers - full-screen views, one should always be in view post-pageload */
-.ui-page { top: 0; left: 0; width: 100%; height: 100%; position: absolute;  z-index: 10; visibility: hidden; height: 0; overflow: hidden; } 
-.ui-page-active { visibility: visible; height: auto; overflow: visible; }
+.ui-page { top: 0; left: 0; width: 100%; min-height: 100%; position: absolute;  z-index: 10; visibility: hidden; height: 0; overflow: hidden; } 
+.ui-page-active { visibility: visible; overflow: visible; }
 
 /* loading screen */
 .ui-loading, .ui-loading body { overflow: hidden !important; }
@@ -206,6 +206,7 @@ div.ui-checkbox, div.ui-radio { position:relative;  margin: .2em 0 .5em;  }
 .ui-globalnav li { float: left; margin:0; padding:0; }
 .ui-globalnav li .ui-btn { display: block; font-size: 12px; text-align: center; margin: 0 -1px; outline: none; border-top-width: 0; border-bottom-width: 0; }
 .ui-globalnav li .ui-btn-inner { padding-left: 15px; padding-right: 15px; }
+
 
 
 /* transitions, animations*/
