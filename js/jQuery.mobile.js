@@ -29,40 +29,6 @@
 		nextPageRole = null,
 		noCache = '.ui-dialog';
 	
-	/*
-		add some core behavior,events
-	*/	
-	
-	//test whether a CSS media type or query applies (adapted from work by Scott Jehl & Paul Irish: http://gist.github.com/557891)
-	$.media = (function(){
-		/*
-		note: once support improves, try window.matchMedia here
-		if ( window.matchMedia ){
-			//use native support if available
-			return window.matchMedia;
-		}
-		*/
-		var cache = {},
-	        testDiv = $('<div id="jq-mediatest"></div>'),
-	        fakeBody = $('<body></body>').append(testDiv);
-	    return function(q){
-	      if (cache[q] === undefined) {
-	        var styleBlock = $('<style type="text/css"></style>');
-	        var cssrule = '@media '+q+' { #jq-mediatest { position: absolute; } }';
-	        if (styleBlock[0].styleSheet){ 
-	            styleBlock[0].styleSheet.cssText = cssrule;
-	        } 
-	        else {
-	            styleBlock.text(cssrule);
-	        }      
-	        $html.prepend(fakeBody).prepend(styleBlock);
-	        cache[q] = ((window.getComputedStyle ? window.getComputedStyle(testDiv[0],null) : testDiv[0].currentStyle)['position'] == 'absolute');
-	        fakeBody.add(styleBlock).remove();
-	      }
-	      return cache[q];
-	    };
-	})();
-	
 	//hide Address bar
 	function hideBrowserChrome(){
 		$.event.special.scrollstart.enabled = false;
