@@ -47,6 +47,7 @@ $.extend( $.support, {
 $.media = (function() {
 	// TODO: use window.matchMedia once at least one UA implements it
 	var cache = {},
+		$html = $( "html" ),
 		testDiv = $( "<div id='jquery-mediatest'>" ),
 		fakeBody = $( "<body>" ).append( testDiv );
 	
