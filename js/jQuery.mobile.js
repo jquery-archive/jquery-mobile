@@ -53,7 +53,6 @@
 		
 		// let the hashchange event handler take care of everything else
 		location.hash = href;
-		pageTransition = undefined;
 		
 		// note: if it's a non-local-anchor and Ajax is not supported, go to page
 		if ( href.match( /^[^#]/ ) && !$.support.ajax ) {
@@ -115,6 +114,7 @@
 				back = !pageTransition && stackLength > 1 &&
 					urlStack[ stackLength - 2 ].url === url,
 				transition = pageTransition || "slide";
+			pageTransition = undefined;
 			
 			// if the new href is the same as the previous one
 			if ( back ) {
