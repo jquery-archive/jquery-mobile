@@ -65,16 +65,22 @@ $.fixedToolbars = (function(){
 		}
 		
 		//for determining whether a placeholder is visible on the screen or not	
-		function placeHolderOutofView(thisel){
+		function placeHolderOutofView(thisel, partialVisibilityOkay){
 			//always return true if it's overlayOnly
 			if(thisel.closest('.ui-headfoot-overlayonly').length){ return true; }
 			
 			var fromTop = $(window).scrollTop(),
 				screenHeight = window.innerHeight,
 				thisHeight = thisel.parent().parent().height(),
-				thisTop = thisel.parent().parent().offset().top;
+				thisTop = thisel.parent().parent().offset().top,
+				thisIsHeader = thisel.is('.ui-header');
 				
-			return thisel.is('.ui-header') ? (thisTop + thisHeight <= fromTop) : (thisTop > fromTop + screenHeight);
+			if(partialVisibilityOkay){
+				return thisIsHeader ? (thisTop <= fromTop) : (thisTop + thisHeight > fromTop + screenHeight);
+			}
+			else {
+				return thisIsHeader ? (thisTop + thisHeight <= fromTop) : (thisTop > fromTop + screenHeight);
+			}
 		}	
 
 	$(function() {
@@ -110,14 +116,17 @@ $.fixedToolbars = (function(){
 			return els.each(function(){
 				var el = $(this),
 					overlayOnly = el.closest('.ui-headfoot-overlayonly').length;
-				el.parent().addClass('ui-fixpos');
 				//only animate if placeholder is out of view
-				if( placeHolderOutofView(el) ){
-					el.addClass('in').animationComplete(function(){
-						el.removeClass('in');
-					});
+				if( placeHolderOutofView(el, true) ){
+					el.parent().addClass('ui-fixpos');
+					if( placeHolderOutofView(el) ){
+						el.addClass('in').animationComplete(function(){
+							el.removeClass('in');
+						});
+					}
 				}
 				if(overlayOnly){	
+					el.parent().addClass('ui-fixpos');
 					el.parent().parent().removeClass('ui-headfoot-hidden');
 				}
 				el.trigger('setTop');
@@ -137,7 +146,7 @@ $.fixedToolbars = (function(){
 					}
 				}
 				//if immediately flag is true, or the placeholder is in view, don't animate the hide
-				if(immediately || !placeHolderOutofView(el)){
+				if(immediately || !placeHolderOutofView(el, true)){
 					el.parent().removeClass('ui-fixpos');
 					addOverlayOnlyClass();
 				}
