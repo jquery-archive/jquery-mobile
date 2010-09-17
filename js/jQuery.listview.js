@@ -30,16 +30,17 @@ $.fn.listview = function( options ) {
 		
 		//if it's a nested list, chunk it into ui-page items, recurse through them and call listview on each individual ul
 		$( $this.find( "ul" ).get().reverse() ).each(function( i ) {
-			var parent = $( this ).parent(),
+			var list = $( this ),
+				parent = list.parent(),
 				title = parent.contents()[ 0 ].nodeValue,
-				theme = $( this ).attr( "[data-theme]" ) !== undefined ?
-					$( this ).attr( "data-theme" ) :
+				theme = list.attr( "[data-theme]" ) !== undefined ?
+					list.attr( "data-theme" ) :
 					o.theme,
-				countTheme = $( this ).attr( "[data-count-theme]" ) !== undefined ?
-					$( this ).attr( "data-count-theme" ) :
+				countTheme = list.attr( "[data-count-theme]" ) !== undefined ?
+					list.attr( "data-count-theme" ) :
 					o.countTheme;
 			
-			$( this ).wrap( "<div class='ui-page'><div class='ui-content'></div></div>" )
+			list.wrap( "<div class='ui-page'><div class='ui-content'></div></div>" )
 				.parent()
 					.before( "<div class='ui-header ui-bar-" + o.headerTheme + "'><h1>" +
 						title + "</h1><a href='#' class='ui-back' data-icon='arrow-l'>Back</a></div>" )
