@@ -208,7 +208,6 @@ div.ui-checkbox, div.ui-radio { position:relative;  margin: .2em 0 .5em;  }
 .ui-globalnav li .ui-btn-inner { padding-left: 15px; padding-right: 15px; }
 
 /* dialog styling */
-.ui-dialog .ui- { margin: 15px; }
 .ui-dialog .ui-headfoot-placehold, .ui-dialog .ui-content { margin: 15px; position: relative; }
 .ui-dialog .ui-headfoot-placehold { z-index: 10; }
 .ui-dialog .ui-fixpos  { margin-top: -15px; }
