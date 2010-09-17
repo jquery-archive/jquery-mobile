@@ -14,6 +14,7 @@ $elements = array(
 	'jQuery.controlGroup.js',
 	'jQuery.fieldContain.js',
 	'jQuery.listview.js',
+	'jQuery.dialog.js',
 	'jQuery.globalnav.js',
 	'jQuery.mobile.support.js',
 	'jQuery.mobile.event.js',
