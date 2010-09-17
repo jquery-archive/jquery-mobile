@@ -231,7 +231,7 @@
 			}	
 			
 			if(url){
-				//see if content is present - NOTE: local urls aren't working right now - need logic to kill # 
+				//see if content is present already
 				var localDiv = $('[id="'+url+'"]');
 				if(localDiv.length){
 					changePage($('.ui-page-active'), localDiv, back);
