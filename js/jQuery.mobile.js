@@ -25,7 +25,9 @@
 		currentTransition = 'slide',
 		transitionDuration = 350,
 		backBtnText = "Back",
-		urlStack = [location.hash.replace(/^#/,'')];
+		urlStack = [location.hash.replace(/^#/,'')],
+		nextPageRole = null,
+		noCache = '.ui-dialog';
 	
 	/*
 		add some core behavior,events
@@ -86,7 +88,8 @@
 	//send a link through hash tracking
 	$.fn.ajaxClick = function(){
 		var href = $(this).attr( "href" ),
-			transitionAttr = $(this).attr('data-transition');
+			transitionAttr = $(this).attr('data-transition'),
+			nextPageRole = $(this).attr('data-rel');
 			
 		if(transitionAttr){
 			currentTransition = transitionAttr;
@@ -170,6 +173,8 @@
 	function mobilize($el){	
 		//to-do: make sure this only runs one time on a page (or maybe per component)
 		return $el.each(function(){		
+			//dialog
+			$el.filter('[data-role="dialog"]').dialog();
 			//checkboxes, radios
 			$el.find('input[type=radio],input[type=checkbox]').customCheckboxRadio();
 			//custom buttons
@@ -230,6 +235,9 @@
 				urlStack.push(url);
 			}	
 			
+			//remove any pages that shouldn't cache
+			$(noCache).remove();
+			
 			if(url){
 				//see if content is present already
 				var localDiv = $('[id="'+url+'"]');
@@ -242,9 +250,14 @@
 						.appendTo($body)
 						.load(url + ' .ui-page',function(){
 							$(this).replaceWith( $(this).find('.ui-page:eq(0)').attr('id', url) );
-							var newPage = $('[id="'+url+'"]');	
+							var newPage = $('[id="'+url+'"]');
+							if(nextPageRole){
+								newPage.attr('data-role', nextPageRole);
+								nextPageRole = null;
+							}
 							mobilize(newPage);
 							changePage($('.ui-page-active'), newPage, back);
+							
 						});
 				}
 			}
