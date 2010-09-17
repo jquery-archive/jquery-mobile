@@ -25,7 +25,7 @@
 		currentTransition = 'slide',
 		transitionDuration = 350,
 		backBtnText = "Back",
-		prevUrl = location.hash;
+		urlStack = [location.hash.replace(/^#/,'')];
 	
 	/*
 		add some core behavior,events
@@ -95,8 +95,9 @@
 		else{
 			transitionSpecified = false;
 		}
-		prevUrl = location.hash.replace(/^#/,'');
+		
 		location.hash = href;
+		
 		//note: if it's a non-local-anchor and Ajax is not supported, go to page
 		if(href.match(/^[^#]/) && !$.support.ajax){ 
 			window.location = href;
@@ -147,7 +148,9 @@
 			$.fixedToolbars.show();
 			//$.fixedToolbars.hideAfterDelay();
 		});
-		if(back){ currentTransition = 'slide'; }
+		if(back){ 
+			currentTransition = 'slide';
+		}
 	};
 	
 	//potential (probably incomplete) fallback to workaround lack of animation callbacks. 
@@ -218,7 +221,15 @@
 		//When document.location.hash changes, find or load content, make it active
 		$window.bind( "hashchange", function(e){
 			var url = location.hash.replace(/^#/,''),
-				back = (url === prevUrl);
+				back = (url === urlStack[urlStack.length-2]);	
+				
+			//if the new href is the same as the previous one
+			if(back){
+				urlStack.pop();
+			}
+			else {
+				urlStack.push(url);
+			}	
 			
 			if(url){
 				//see if content is present - NOTE: local urls aren't working right now - need logic to kill # 
