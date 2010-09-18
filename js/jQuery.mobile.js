@@ -275,7 +275,7 @@
 		$html.addClass( $.event.special.orientationchange.orientation( $window ) );
 		
 		//swipe right always triggers a back 
-		$('.ui-page').live('swiperight.jqm',function(){
+		$body.bind('swiperight.jqm',function(){
 			history.go(-1);
 			return false;
 		});	
