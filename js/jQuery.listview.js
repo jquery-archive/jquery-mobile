@@ -158,13 +158,22 @@ $.fn.listview = function( options ) {
 			.find( "p,ul,dl" )
 				.addClass( "ui-li-desc" );
 			
-		/* auto-numbering for OL elements - we could add a $.support.cssBefore test
-			// to see if this JS generated numbering is necessary...
-		if($this.is('ol')){
-			$this.find('li').each(function( i ){
-				$(this).find('.ui-link-inherit:first').prepend('<span class="ui-li-dec"></span>');
+		// JS fallback for auto-numbering for OL elements
+		if( !$.support.cssPseudoElement && $this.is('ol') ){
+			var counter = 1;
+			$this.find('li').each(function(){
+				if( $(this).is('.ui-li-grouping') ){
+					//reset counter when a grouping heading is encountered
+					counter = 1;
+				}
+				else { 
+					$(this)
+						.find('.ui-link-inherit:first')
+						.addClass('ui-li-jsnumbering')
+						.prepend('<span class="ui-li-dec">' + counter++ + '. </span>');
+				}		
 			});
-		}	*/	
+		}	
 				
 		//tapping the whole LI triggers ajaxClick on the first link
 		$this.find( "li:has(a)" ).live( "tap", function() {

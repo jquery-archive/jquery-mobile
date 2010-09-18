@@ -184,7 +184,8 @@ div.ui-checkbox, div.ui-radio { position:relative;  margin: .2em 0 .5em;  }
 .ui-listview, .ui-li { list-style:none; padding:0; zoom: 1; }
 .ui-li { display: block; margin:0; position: relative; overflow: hidden; text-align: left; border-width: 0; border-top-width: 1px; }
 .ui-li-grouping { padding: .5em 15px; font-size: 13px; font-weight: bold; counter-reset: listnumbering;  }
-ol.ui-listview .ui-link-inherit:before { font-size: .8em; display: inline-block; padding-right: .3em; font-weight: normal;counter-increment: listnumbering; content: counter(listnumbering) ". "; }
+ol.ui-listview .ui-link-inherit:before, .ui-li-dec { font-size: .8em; display: inline-block; padding-right: .3em; font-weight: normal;counter-increment: listnumbering; content: counter(listnumbering) ". "; }
+ol.ui-listview .ui-li-jsnumbering:before { content: "" !important; } /* to avoid chance of duplication */
 .ui-listview-inset .ui-li { border-right-width: 1px; border-left-width: 1px; }
 .ui-li:last-child { border-bottom-width: 1px; }
 .ui-li .ui-btn-inner { display: block; position: relative; padding: .5em 65px .5em 15px; }
