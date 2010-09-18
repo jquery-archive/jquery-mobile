@@ -157,9 +157,11 @@ $.fn.listview = function( options ) {
 			.end()
 			.find( "p,ul,dl" )
 				.addClass( "ui-li-desc" );
+				
+				
 		
 		//tapping the whole LI triggers ajaxClick on the first link
-		$this.find( "li:not(.ui-li-grouping)" ).live( "tap", function() {
+		$this.find( "li:has(a)" ).live( "tap", function() {
 			$( this ).find( "a:first" ).ajaxClick();
 		});
 	});
