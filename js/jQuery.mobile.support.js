@@ -37,7 +37,8 @@ $.extend( $.support, {
 		display: displayDiv.offsetHeight === 0,
 		position: positionDiv.offsetLeft === 10,
 		overflow: positionDiv.offsetHeight === 0,
-		floatclear: supportFloatClear
+		floatclear: supportFloatClear,
+		cssPseudoElement: fakeBody[0].style.content !== undefined
 	});
 	
 	fakeBody.remove();
