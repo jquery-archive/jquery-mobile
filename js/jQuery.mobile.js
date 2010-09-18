@@ -146,7 +146,7 @@
 					pageLoading();
 					var newPage = $( "<div>" )
 						.appendTo( $body )
-						.load( url + " .ui-page", function() {
+						.load( url + ' [data-role="page"]', function() {
 							// TODO: test this (avoids querying the dom for new element):
 //							var newPage = $( this ).find( ".ui-page" ).eq( 0 )
 //								.attr( "id", url );
@@ -155,7 +155,7 @@
 //							mobilize( newPage );
 //							changePage( $( ".ui-page-active" ), newPage, transition, back );
 							$( this ).replaceWith(
-								$( this ).find( ".ui-page" ).eq( 0 ).attr( "id", url ) );
+								$( this ).find( '[data-role="page"]' ).eq( 0 ).attr( "id", url ) );
 							var newPage = $( "[id='" + url + "']" );
 							setPageRole( newPage );
 							mobilize( newPage );
@@ -212,6 +212,8 @@
 	function mobilize($el){	
 		//to-do: make sure this only runs one time on a page (or maybe per component)
 		return $el.each(function(){		
+			//add ui-page class
+			$el.addClass('ui-page');
 			//dialog
 			$el.filter('[data-role="dialog"]').dialog();
 			//checkboxes, radios
@@ -256,9 +258,10 @@
 
 	//dom-ready
 	$(function(){
+		
 	
 		//mobilize all pages present
-		mobilize($('.ui-page'));
+		mobilize($('[data-role="page"]'));
 		
 		//set up active page - mobilize it!
 		startPage = $('body > .ui-page:first');
