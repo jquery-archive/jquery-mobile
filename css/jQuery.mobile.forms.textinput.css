@@ -1,0 +1,14 @@
+/*
+* jQuery Mobile Framework
+* Copyright (c) jQuery Project
+* Dual licensed under the MIT (MIT-LICENSE.txt) or GPL (GPL-LICENSE.txt) licenses.
+*/
+label.ui-input-text, .ui-controlgroup-label { font-size: 16px; line-height: 1.4;  font-weight: normal; margin: 0 0 .3em; }
+input.ui-input-text, textarea.ui-input-text { padding: .4em; line-height: 1.4; font-size: 16px; display: block; width: 95%; }
+textarea.ui-input-text { height: 50px; }
+/* orientation adjustments - incomplete!*/
+@media screen and (min-width: 480px){ 
+	label.ui-input-text, .ui-controlgroup-label { vertical-align: top;   }
+	label.ui-input-text, label.ui-select, .ui-ui-controlgroup-label { display: inline-block;  width: 20%;  margin: 0 2% 0 0; }
+	input.ui-input-text, textarea.ui-input-text, a.ui-select { width: 60%; display: inline-block !important; } 
+}

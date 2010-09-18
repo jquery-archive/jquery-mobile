@@ -1,0 +1,9 @@
+/*
+* jQuery Mobile Framework
+* Copyright (c) jQuery Project
+* Dual licensed under the MIT (MIT-LICENSE.txt) or GPL (GPL-LICENSE.txt) licenses.
+*/
+.ui-dialog .ui-headfoot-placehold, .ui-dialog .ui-content { margin: 15px; position: relative; }
+.ui-dialog .ui-headfoot-placehold { z-index: 10; }
+.ui-dialog .ui-fixpos  { margin-top: -15px; }
+.ui-dialog .ui-content { margin-top: -15px; margin-bottom: -15px; }

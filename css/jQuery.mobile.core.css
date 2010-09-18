@@ -1,0 +1,51 @@
+/*
+* jQuery Mobile Framework
+* Copyright (c) jQuery Project
+* Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
+* Note: Code is in draft form and is subject to change 
+*/
+
+/* some unsets - more probably needed */
+.ui-mobile fieldset, .ui-page { padding: 0; margin: 0; }
+.ui-mobile a img, .ui-mobile fieldset { border: 0; }
+
+/* responsive page widths */
+.ui-mobile body {  margin: 0; overflow-x: hidden; -webkit-user-select: none; -webkit-text-size-adjust: none; }
+/*tablets - more work needed here*/
+@media screen and (min-width: 480px){ 
+	.ui-mobile body { width: auto; min-height: 100%; } 
+}
+/*tablets - mobile landscape-ish */
+@media screen and (max-width: 480px){ 
+	.ui-mobile body { width: 480px; min-height: 300px; } 
+}
+/*tablets - mobile portrait-ish */
+@media screen and (max-width: 320px){ 
+	.ui-mobile body { width: 320px; min-height: 460px; } 
+}
+/*orientations from js are available - necessary? media q's work well enough? */
+.portrait body {  }
+.landscape body {  }
+
+/* "page" containers - full-screen views, one should always be in view post-pageload */
+.ui-page { top: 0; left: 0; width: 100%; min-height: 100%; position: absolute;  z-index: 10; visibility: hidden; height: 0; overflow: hidden; } 
+.ui-page-active { visibility: visible; overflow: visible; }
+
+/* loading screen */
+.ui-loading, .ui-loading body { overflow: hidden !important; }
+.ui-loading .ui-content { visibility: hidden; }
+.ui-loading .ui-loader { display: block; }
+.ui-loader { display: none;  position: absolute; z-index: 0; top: 60px; left: 50%; width: 100px; margin-left: -80px; padding: 20px 30px; border: 0; }
+.ui-loader h1 { font-size: 15px; text-align: center; opacity: .8; }
+.ui-loader .ui-icon { position: static; display: block; opacity: .7; margin: 0 auto; width: 35px; height: 35px; background-color: transparent; }
+
+/*headers, content panels*/
+.ui-bar, .ui-body { position: relative; padding: .4em 15px;  overflow: hidden; display: block;  clear:both;  }
+.ui-bar h1, .ui-bar h2, .ui-bar h3, .ui-bar h4, .ui-bar h5, .ui-bar h6 { margin: 0; padding: 0; font-size: 16px; display: inline-block; }
+
+/* icons sizing */
+.ui-icon { width: 18px; height: 18px; }
+
+/* fullscreen class on ui-content div */
+.ui-fullscreen {  }
+.ui-fullscreen img { max-width: 100%; }

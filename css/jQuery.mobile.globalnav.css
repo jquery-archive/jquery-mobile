@@ -1,0 +1,10 @@
+/*
+* jQuery Mobile Framework
+* Copyright (c) jQuery Project
+* Dual licensed under the MIT (MIT-LICENSE.txt) or GPL (GPL-LICENSE.txt) licenses.
+*/
+.ui-globalnav { overflow: hidden; width: 100%; overflow: hidden;  }
+.ui-globalnav ul { list-style:none; padding: 0; margin: 0; position: relative; display: block; border: 0;}
+.ui-globalnav li { float: left; margin:0; padding:0; }
+.ui-globalnav li .ui-btn { display: block; font-size: 12px; text-align: center; margin: 0 -1px; outline: none; border-top-width: 0; border-bottom-width: 0; }
+.ui-globalnav li .ui-btn-inner { padding-left: 15px; padding-right: 15px; }
