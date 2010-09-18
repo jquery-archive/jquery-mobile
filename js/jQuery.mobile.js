@@ -91,6 +91,8 @@
 		from.addClass( transition + " out " + ( back ? "reverse" : "" ) );
 		to.appendTo($body).addClass( activePageClass + " " + transition +
 			" in " + ( back ? "reverse" : "" ) );
+		//make sure globalnav is on top	
+		$('[data-role="globalnav"]').appendTo($body);	
 		
 		// callback - remove classes, etc
 		to.animationComplete(function() {
