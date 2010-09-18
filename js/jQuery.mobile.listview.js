@@ -33,10 +33,10 @@ $.fn.listview = function( options ) {
 			var list = $( this ),
 				parent = list.parent(),
 				title = parent.contents()[ 0 ].nodeValue,
-				theme = list.attr( "[data-theme]" ) !== undefined ?
+				theme = list.attr( "data-theme" ) !== undefined ?
 					list.attr( "data-theme" ) :
 					o.theme,
-				countTheme = list.attr( "[data-count-theme]" ) !== undefined ?
+				countTheme = list.attr( "data-count-theme" ) !== undefined ?
 					list.attr( "data-count-theme" ) :
 					o.countTheme;
 			
