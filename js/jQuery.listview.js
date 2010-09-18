@@ -157,9 +157,15 @@ $.fn.listview = function( options ) {
 			.end()
 			.find( "p,ul,dl" )
 				.addClass( "ui-li-desc" );
+			
+		/* auto-numbering for OL elements - we could add a $.support.cssBefore test
+			// to see if this JS generated numbering is necessary...
+		if($this.is('ol')){
+			$this.find('li').each(function( i ){
+				$(this).find('.ui-link-inherit:first').prepend('<span class="ui-li-dec"></span>');
+			});
+		}	*/	
 				
-				
-		
 		//tapping the whole LI triggers ajaxClick on the first link
 		$this.find( "li:has(a)" ).live( "tap", function() {
 			$( this ).find( "a:first" ).ajaxClick();
