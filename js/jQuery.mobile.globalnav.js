@@ -7,6 +7,7 @@
 (function($){
 $.fn.globalnav = function(settings){
 	return $(this).each(function(){ //there should only ever be one of these... is each necessary?
+		if($(this).find('.ui-globalnav').length){ return; }
 		var o = $.extend({
 			fixedAs: 'footer'
 		},settings);
