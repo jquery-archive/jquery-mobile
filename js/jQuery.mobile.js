@@ -226,6 +226,8 @@
 			$el.find('.field').fieldcontain();
 			//selects
 			$el.find('select').customSelect();
+			//global nav
+			$el.find('[data-role="globalnav"]').globalnav();
 			//fix toolbars
 			$el.fixHeaderFooter();
 			//buttons from links in headers,footers,bars, or with data-role
@@ -254,8 +256,6 @@
 
 	//dom-ready
 	$(function(){
-		//global nav
-		$('[data-role="globalnav"]').globalnav();
 	
 		//mobilize all pages present
 		mobilize($('.ui-page'));

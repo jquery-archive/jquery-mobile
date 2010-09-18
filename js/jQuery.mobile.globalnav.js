@@ -8,6 +8,10 @@
 $.fn.globalnav = function(settings){
 	return $(this).each(function(){ //there should only ever be one of these... is each necessary?
 		if($(this).find('.ui-globalnav').length){ return; }
+		
+		//remove any other globalnav currently present
+		$('.ui-globalnav').remove();	
+		
 		var o = $.extend({
 			fixedAs: 'footer'
 		},settings);
@@ -30,6 +34,8 @@ $.fn.globalnav = function(settings){
 				navtabs.find('.ui-btn-active').removeClass('ui-btn-active');
 				$(this).addClass('ui-btn-active');
 			});
+		//insert outside of ui page divs	
+		$(this).appendTo('body');	
 	});
 };	
 })(jQuery);
