@@ -275,7 +275,7 @@
 	$(function(){
 		
 		//set up active page - mobilize it!
-		startPage = $('body > .ui-page:first');
+		startPage = $('[data-role="page"]:first');
 		
 		//make sure it has an ID - for finding it later
 		if(!startPage.attr('id')){ 
