@@ -18,6 +18,7 @@ $elements = array(
 	'jQuery.mobile.listview.js',
 	'jQuery.mobile.dialog.js',
 	'jQuery.mobile.globalnav.js',
+	'jQuery.mobile.grid.js',
 	'jQuery.mobile.js'
 );
 
