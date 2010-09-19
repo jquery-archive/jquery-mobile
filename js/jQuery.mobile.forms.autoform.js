@@ -19,7 +19,7 @@ $.fn.autoform = function(options){
 	
 		//extendable options
 		var o = $.extend({
-			submitEvents: 'change',
+			submitEvents: '',
 			method: $this.attr('method'),
 			action: $this.attr('action'),
 			injectResponse: true,//should be data-attr driven
@@ -41,7 +41,8 @@ $.fn.autoform = function(options){
 				data: $(this).serialize(),
 				dataFilter: o.dataFilter,
 				success: function(data,textStatus){
-					$('.ui-page-active .ui-content').html( $('<div></div>').append(data).mobilize() );
+					$('.ui-page-active .ui-content').replaceWith( data );
+					$.mobilize($('.ui-page-active .ui-content'));
 					$.pageLoading(true);
 				}
 			});
