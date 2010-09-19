@@ -27,7 +27,7 @@ $.fn.autoform = function(options){
 			theme: 'b'
 		}, options);
 				
-		$this.addClass('ui-autoform ui-body ui-bar-'+o.theme);
+		$this.addClass('ui-autoform ui-bar-'+o.theme);
 		
 		$this.bind(o.submitEvents, function(){
 			$(this).submit();
