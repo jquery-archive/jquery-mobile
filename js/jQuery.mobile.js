@@ -45,6 +45,15 @@
 		}, 150 );
 	}
 	
+	function manageGlobalNav(){
+		if($('.ui-page-active:last').is('.ui-globalnav-expanded')){
+			$('[data-role="globalnav"]').hide();
+		}
+		else{
+			$('[data-role="globalnav"]').show();
+		}
+	}
+	
 	// send a link through hash tracking
 	$.fn.ajaxClick = function() {
 		var href = $( this ).attr( "href" );
@@ -99,6 +108,7 @@
 			from.add( to ).removeClass(" out in reverse " + transitions );
 			from.removeClass( activePageClass );
 			pageLoading( true );
+			manageGlobalNav();
 			$.fixedToolbars.show();
 		});
 	};
@@ -143,6 +153,7 @@
 					if ( localDiv.is( "[data-role]" ) ) {
 						setPageRole( localDiv );
 					}
+					mobilize( localDiv );
 					changePage( $( ".ui-page-active" ), localDiv, transition, back );
 				} else { //ajax it in
 					pageLoading();
@@ -171,8 +182,9 @@
 				if ( currentPage.length && !startPage.is( ".ui-page-active" ) ) {
 					changePage( currentPage, startPage, transition, back );
 				} else {
-					$.fixedToolbars.show();
 					startPage.addClass( activePageClass );
+					manageGlobalNav();
+					$.fixedToolbars.show();
 					pageLoading( true );
 				}
 			}
@@ -213,7 +225,7 @@
 	//markup-driven enhancements, to be called on any ui-page upon loading
 	function mobilize($el){	
 		//to-do: make sure this only runs one time on a page (or maybe per component)
-		return $el.each(function(){		
+		return $el.not('[data-mobilized]').each(function(){		
 			//add ui-page class
 			$el.addClass('ui-page');
 			//dialog
@@ -255,6 +267,7 @@
 					return false;
 				})
 				.find('.ui-btn-text').text(backBtnText);
+			$el.attr('data-mobilized',true);	
 		});
 	};
 
