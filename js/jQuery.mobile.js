@@ -47,10 +47,10 @@
 	
 	function manageGlobalNav(){
 		if($('.ui-page-active:last').is('.ui-globalnav-expanded')){
-			$('[data-role="globalnav"]').hide();
+			$('[data-role="globalnav"]').addClass('ui-globalnav-disable');
 		}
 		else{
-			$('[data-role="globalnav"]').show();
+			$('[data-role="globalnav"]').removeClass('ui-globalnav-disable');
 		}
 	}
 	
