@@ -7,7 +7,7 @@ label.ui-input-text, .ui-controlgroup-label { font-size: 16px; line-height: 1.4;
 input.ui-input-text, textarea.ui-input-text { padding: .4em; line-height: 1.4; font-size: 16px; display: block; width: 95%; }
 textarea.ui-input-text { height: 50px; }
 .ui-input-search { margin: 5px; padding: 0 0 0 30px; background-position: 6px 50%; background-repeat: no-repeat; }
-.ui-input-search input.ui-input-text {  width: 98%; padding: .4em 0; margin: 0; display: block; border-width: 0; background: transparent; outline: 0 !important; }
+.ui-input-search input.ui-input-text { border: none; width: 98%; padding: .4em 0; margin: 0; display: block; background: transparent none; outline: 0 !important; }
 
 /* orientation adjustments - incomplete!*/
 @media screen and (min-width: 480px){ 
