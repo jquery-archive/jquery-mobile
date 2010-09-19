@@ -270,6 +270,8 @@
 			$el.attr('data-mobilized',true);	
 		});
 	};
+	
+	$.mobilize = mobilize;
 
 	//dom-ready
 	$(function(){
