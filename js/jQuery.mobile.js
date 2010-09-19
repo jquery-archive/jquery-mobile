@@ -82,7 +82,7 @@
 		if ( done ) {
 			$html.removeClass( "ui-loading" );
 			//fade in page content, remove loading msg
-			//$('.ui-page-active .ui-content')//.addClass('dissolve in');
+			$('.ui-page-active .ui-content').addClass('dissolve in');
 		} else {
 			$html.addClass( "ui-loading" );
 			$loader.appendTo( $body ).addClass( "dissolve in" );
