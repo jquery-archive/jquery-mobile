@@ -20,7 +20,7 @@ jQuery.fn.customTextInput = function(options){
 		
 		var focusedEl = input;
 		if(o.search){
-			focusedEl = input.wrap('<div class="ui-input-search ui-clickable-corner-all ui-body-c ui-btn-shadow"></div>').parent();
+			focusedEl = input.wrap('<div class="ui-input-search ui-btn-corner-all ui-body-c ui-btn-shadow ui-icon-search"></div>').parent();
 		}
 		else{
 			input.addClass('ui-corner-all ui-body-c');
