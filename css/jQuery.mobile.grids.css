@@ -3,13 +3,12 @@
 * Copyright (c) jQuery Project
 * Dual licensed under the MIT (MIT-LICENSE.txt) or GPL (GPL-LICENSE.txt) licenses.
 */
-/* content configurations. More semantix class names plz.  */
-.ui-config-a, .ui-config-b, .ui-config-c { overflow: hidden; }
+/* content configurations. */
+.ui-grid-a, .ui-grid-b, .ui-grid-c { overflow: hidden; }
 .ui-block-a, .ui-block-b, .ui-block-c,  .ui-block-d { margin: 0; padding: 0; border: 0; float: left; }
-/* config a: 50/50 */
-.ui-config-a .ui-block-a { width: 48%; float: left; }
-.ui-config-a .ui-block-b { width: 48%; float: right; text-align: right; }
-/* config b: 33/33/33 */
-.ui-config-b .ui-block-a { width: 31%; margin-right: 2%; float: left; }
-.ui-config-b .ui-block-b { width: 31%; margin-right: 2%; float: left; }
-.ui-config-b .ui-block-c { width: 31%; float: right; text-align: right; }
+/* grid a: 50/50 */
+.ui-grid-a .ui-block-a, .ui-grid-a .ui-block-b { width: 50%; }
+.ui-grid-a .ui-block-a { clear: left; }
+/* grid b: 33/33/33 */
+.ui-grid-b .ui-block-a, .ui-grid-b .ui-block-b, .ui-grid-b .ui-block-c { width: 33.333%; }
+.ui-grid-b .ui-block-a { clear: left; }
