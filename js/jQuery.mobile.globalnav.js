@@ -39,7 +39,7 @@ $.fn.globalnav = function(settings){
 				
 				$newPageContent
 					.find('a')
-					.buttonMarkup({iconPos: 'top', theme: 'b', icon: 'arrow-r'})
+					.buttonMarkup({iconPos: 'top', shadow: false, corners: false, theme: 'a', icon: 'arrow-r'})
 				
 				$newPage.append( $newPageContent ).appendTo('body');
 			
