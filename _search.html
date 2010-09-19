@@ -1,0 +1,34 @@
+<?php /*gzip page*/ ob_start("ob_gzhandler"); ?>
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<title>jQuery Mobile Framework - Search Example</title> 
+	<link rel="stylesheet" type="text/css" href="css/all" /> 
+	<script type="text/javascript" src="js/all"></script>
+</head> 
+<body> 
+
+<div data-role="page" class="ui-body-a">
+	<div class="ui-header" data-theme="d">
+		<h1>Search</h1>
+		<a href="index.html" class="ui-back" data-icon="arrow-l">Home</a>
+	</div>
+	
+	<form method="get" action="_searchresult.html">
+		<label for="term">Search:</label>
+		<input type="text" name="term" id="term" />
+		<button type="submit">Search</button>
+	</form>
+	
+	<div class="ui-content ui-body">
+		<h1>Demo description</h1>
+		<p>This is a regular page, styled as a dialog! To create a dialog, just link to a normal page and include a transition and <code>data-rel="dialog"</code> attribute.</p>
+		<p>Try loading a taller page to see how the headers and footers work: <a href="_fixed.html" data-transition="pop" data-rel="dialog">Fixed Headers/Footers</a></p>
+		<a href="#" data-role="button" data-theme="a">Sounds good</a>       
+		<a href="#" data-role="button">meh..</a>    
+	</div>
+</div>
+
+
+</body>
+</html>
