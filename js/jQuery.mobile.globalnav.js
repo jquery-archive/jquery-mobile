@@ -17,25 +17,28 @@ $.fn.globalnav = function(settings){
 		},settings);
 		
 		//wrap it with footer classes
-		var globalnav = $(this).wrapInner('<div class="ui-globalnav ui-bar-a"></div>').children(0).addClass(o.fixedAs == 'footer' ? 'ui-footer' : 'ui-header');
-		
-		//apply fixed footer markup to ui-footer
-		$(this).fixHeaderFooter();
+		var $globalnav = $(this);
+			$globalnav
+				.wrapInner('<div class="ui-globalnav ui-bar-a"></div>')
+				.children(0)
+				.addClass(o.fixedAs == 'footer' ? 'ui-footer' : 'ui-header');
 		
 		//set up the nav tabs widths (currently evenly divided widths, to be improved later)
-		var navtabs = globalnav.find('li');
-		navtabs.width(100/navtabs.length+'%');
-		
-		//apply state on click and at load
-		//NOTE: we'll need to find a way to highlight an active tab at load as well
-		navtabs.find('a')
+		$globalnav
+			.find('ul')
+			.grid({grid: $globalnav.find('li').length > 2 ? 'b' : 'a'})		
+			.find('a')
 			.buttonMarkup({corners: false, iconPos: 'top', icon: 'arrow-u'})
 			.bind('tap',function(){
-				navtabs.find('.ui-btn-active').removeClass('ui-btn-active');
+				//NOTE: we'll need to find a way to highlight an active tab at load as well
+				$globalnav.find('.ui-btn-active').removeClass('ui-btn-active');
 				$(this).addClass('ui-btn-active');
 			});
-		//insert outside of ui page divs	
-		$(this).appendTo('body');	
+		
+		$globalnav
+			.appendTo('body')
+			.fixHeaderFooter();	
+
 	});
 };	
 })(jQuery);
