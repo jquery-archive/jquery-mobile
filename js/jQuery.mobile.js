@@ -45,8 +45,8 @@
 		}, 150 );
 	}
 	
-	function manageGlobalNav(){
-		if($('.ui-page-active:last').is('.ui-globalnav-expanded')){
+	function manageGlobalNav(activePage){
+		if(activePage.is('.ui-globalnav-expanded')){
 			$('[data-role="globalnav"]').addClass('ui-globalnav-disable');
 		}
 		else{
@@ -101,14 +101,14 @@
 		to.appendTo($body).addClass( activePageClass + " " + transition +
 			" in " + ( back ? "reverse" : "" ) );
 		//make sure globalnav is on top	
-		$('[data-role="globalnav"]').appendTo($body);	
+		$('[data-role="globalnav"]').appendTo($body);
+		manageGlobalNav(to);	
 		
 		// callback - remove classes, etc
 		to.animationComplete(function() {
 			from.add( to ).removeClass(" out in reverse " + transitions );
 			from.removeClass( activePageClass );
 			pageLoading( true );
-			manageGlobalNav();
 			$.fixedToolbars.show();
 		});
 	};
@@ -183,7 +183,7 @@
 					changePage( currentPage, startPage, transition, back );
 				} else {
 					startPage.addClass( activePageClass );
-					manageGlobalNav();
+					manageGlobalNav(startPage);
 					$.fixedToolbars.show();
 					pageLoading( true );
 				}
