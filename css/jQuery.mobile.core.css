@@ -10,25 +10,25 @@
 .ui-mobile a img, .ui-mobile fieldset { border: 0; }
 
 /* responsive page widths */
-.ui-mobile body {  margin: 0; overflow-x: hidden; -webkit-user-select: none; -webkit-text-size-adjust: none; }
+.ui-mobile body {  margin: 0; overflow-x: hidden; -webkit-user-select: none; -webkit-text-size-adjust: none; min-height: 100%; }
 /*tablets - more work needed here*/
 @media screen and (min-width: 480px){ 
-	.ui-mobile body { width: auto; min-height: 100%; } 
+	.ui-mobile body { width: auto; } 
 }
 /*tablets - mobile landscape-ish */
 @media screen and (max-width: 480px){ 
-	.ui-mobile body { width: 480px; min-height: 300px; } 
+	.ui-mobile body { width: 480px; } 
 }
 /*tablets - mobile portrait-ish */
 @media screen and (max-width: 320px){ 
-	.ui-mobile body { width: 320px; min-height: 460px; } 
+	.ui-mobile body { width: 320px; } 
 }
 /*orientations from js are available - necessary? media q's work well enough? */
 .portrait body {  }
 .landscape body {  }
 
 /* "page" containers - full-screen views, one should always be in view post-pageload */
-.ui-page { top: 0; left: 0; width: 100%; min-height: 100%; position: absolute;  z-index: 10; visibility: hidden; height: 0; overflow: hidden; } 
+.ui-page { top: 0; left: 0; width: 100%; min-height: 100%; position: absolute;  z-index: 10; visibility: hidden; height: 0; overflow: hidden; border: 0; } 
 .ui-page-active { visibility: visible; overflow: visible; }
 
 /* loading screen */
