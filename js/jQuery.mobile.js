@@ -269,6 +269,9 @@
 					return false;
 				})
 				.find('.ui-btn-text').text(backBtnText);
+			//autoform plugin
+			$el.find('[data-role="autoform"]').autoform();	
+				
 			$el.attr('data-mobilized',true);	
 		});
 	};
