@@ -271,7 +271,12 @@
 		});
 	};
 	
-	$.mobilize = mobilize;
+	$.extend($, {
+		mobilize: mobilize,
+		pageLoading: pageLoading,
+		changePage: changePage,
+		hideBrowserChrome: hideBrowserChrome
+	});
 
 	//dom-ready
 	$(function(){
