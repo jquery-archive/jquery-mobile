@@ -8,24 +8,21 @@
 </head> 
 <body> 
 
-<div data-role="page" class="ui-body-a">
-	<div class="ui-header" data-theme="d">
+<div data-role="page" class="ui-body-c">
+	<div class="ui-header">
 		<h1>Search</h1>
 		<a href="index.html" class="ui-back" data-icon="arrow-l">Home</a>
 	</div>
 	
-	<form method="get" action="_searchresult.html">
-		<label for="term">Search:</label>
-		<input type="text" name="term" id="term" />
-		<button type="submit">Search</button>
+	<form method="get" action="_search-results.html" data-role="autoform">
+		<label for="term" data-role="nojs">Search:</label>
+		<input type="text" name="term" id="term" placeholder="search..." data-role="search" />
+		<button type="submit" data-role="nojs">Search</button>
 	</form>
 	
 	<div class="ui-content ui-body">
-		<h1>Demo description</h1>
-		<p>This is a regular page, styled as a dialog! To create a dialog, just link to a normal page and include a transition and <code>data-rel="dialog"</code> attribute.</p>
-		<p>Try loading a taller page to see how the headers and footers work: <a href="_fixed.html" data-transition="pop" data-rel="dialog">Fixed Headers/Footers</a></p>
-		<a href="#" data-role="button" data-theme="a">Sounds good</a>       
-		<a href="#" data-role="button">meh..</a>    
+		<h1>No results...</h1>
+		   
 	</div>
 </div>
 
