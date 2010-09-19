@@ -274,10 +274,6 @@
 	//dom-ready
 	$(function(){
 		
-	
-		//mobilize all pages present
-		mobilize($('[data-role="page"]'));
-		
 		//set up active page - mobilize it!
 		startPage = $('body > .ui-page:first');
 		
@@ -285,6 +281,9 @@
 		if(!startPage.attr('id')){ 
 			startPage.attr('id', startPageId); 
 		}
+		
+		//mobilize all pages present
+		mobilize($('[data-role="page"]'));
 		
 		//trigger a new hashchange, hash or not
 		$window.trigger( "hashchange" );
