@@ -50,3 +50,6 @@
 /* fullscreen class on ui-content div */
 .ui-fullscreen {  }
 .ui-fullscreen img { max-width: 100%; }
+
+/* non-js content hiding */
+.ui-nojs { position: absolute; left: -9999px; }

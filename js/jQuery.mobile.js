@@ -235,7 +235,7 @@
 			//checkboxes, radios
 			$el.find('input[type=radio],input[type=checkbox]').customCheckboxRadio();
 			//custom buttons
-			$el.find('button, input[type=submit]').customButton();
+			$el.find('button, input[type=submit]').not('[data-role="nojs"]').customButton();
 			//custom text inputs
 			$el.find('input[type=text],input[type=password],textarea').customTextInput();
 			//collapsible groupings
@@ -271,7 +271,8 @@
 				.find('.ui-btn-text').text(backBtnText);
 			//autoform plugin
 			$el.find('[data-role="autoform"]').autoform();	
-				
+			//hide no-js content
+			$el.find('[data-role="nojs"]').addClass('ui-nojs');	
 			$el.attr('data-mobilized',true);	
 		});
 	};
