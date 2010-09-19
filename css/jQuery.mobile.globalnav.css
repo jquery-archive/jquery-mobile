@@ -12,7 +12,7 @@
 .ui-globalnav li .ui-btn, .ui-globalnav .ui-globalnav-toggle .ui-btn { display: block; font-size: 12px; text-align: center; margin: 0 -1px; outline: none; border-top-width: 0; border-bottom-width: 0; }
 .ui-globalnav .ui-btn-inner { padding-left: 15px; padding-right: 15px; }
 /*expanded page styles*/
-.ui-globalnav-expanded .ui-btn { margin-left: 7px; margin-top: 7px; font-size: 14px; }
-.ui-globalnav-expanded .ui-block-c .ui-btn { margin-right: 7px; }
+.ui-globalnav-expanded .ui-btn { margin: 10px 0 0 10px; font-size: 14px; }
+.ui-globalnav-expanded .ui-block-c .ui-btn { margin-right: 10px; }
 .ui-globalnav-expanded .ui-btn-icon-top .ui-btn-inner { padding: 45px 5px 15px; text-align: center; }
 .ui-globalnav-expanded .ui-btn-icon-top .ui-icon { top: 15px; }
