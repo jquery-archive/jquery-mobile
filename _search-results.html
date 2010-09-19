@@ -1,0 +1,55 @@
+<?php /*gzip page*/ ob_start("ob_gzhandler"); ?>
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<title>jQuery Mobile Framework - Search Results</title> 
+	<link rel="stylesheet" type="text/css" href="css/all" /> 
+	<script type="text/javascript" src="js/all"></script>
+</head> 
+<body> 
+
+<div data-role="page" class="ui-body-c">
+	<div class="ui-header">
+		<h1>Search Results</h1>
+		<a href="index.html" class="ui-back" data-icon="arrow-l">Home</a>
+	</div>
+	
+	<form method="get" action="_searchresult.html" data-role="autoform">
+		<label for="term" data-role="nojs">Search:</label>
+		<input type="text" name="term" id="term" placeholder="search..." data-role="search" />
+		<button type="submit" data-role="nojs">Search</button>
+	</form>
+	
+	<div class="ui-content">
+		<p class="ui-body">3 Results for <em>"Justin Bieber"</em></p>
+	
+		<ol data-role="listview" data-inset="true">
+			<li>
+				<img src="images/jb.jpg" alt="jb" />
+				<h3><a href="index.html">Page A</a></h3>
+				<p>Quick description about this item here</p>
+				<span class="ui-li-count">22</span>
+				<a href="index.html">browse details</a>
+			</li>
+			<li>
+				<img src="images/jb.jpg" alt="jb" />
+				<h3><a href="index.html">Page A</a></h3>
+				<p>Quick description about this item here</p>
+				<span class="ui-li-count">22</span>
+				<a href="index.html">browse details</a>
+			</li>
+			<li>
+				<img src="images/jb.jpg" alt="jb" />
+				<h3><a href="index.html">Page A</a></h3>
+				<p>Quick description about this item here</p>
+				<span class="ui-li-count">22</span>
+				<a href="index.html">browse details</a>
+			</li>
+		</ol>
+		   
+	</div>
+</div>
+
+
+</body>
+</html>
