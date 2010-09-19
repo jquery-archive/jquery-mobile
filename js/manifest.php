@@ -10,6 +10,7 @@ $elements = array(
 	'jQuery.mobile.forms.expandable.js',
 	'jQuery.mobile.forms.textinput.js',
 	'jQuery.mobile.forms.select.js',
+	'jQuery.mobile.forms.autoform.js',
 	'jQuery.mobile.buttonMarkup.js',
 	'jQuery.mobile.forms.button.js',
 	'jQuery.mobile.collapsible.js',
