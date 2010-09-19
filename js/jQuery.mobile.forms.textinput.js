@@ -10,19 +10,29 @@ jQuery.fn.customTextInput = function(options){
 		var input = $(this);
 		
 		var o = $.extend({
+			search: input.is('[data-role="search"]') 
 			//defaultTheme: "a"
 		}, options);
 		
 		$('label[for='+input.attr('id')+']').addClass('ui-input-text');
 		
+		input.addClass('ui-input-text');
+		
+		var focusedEl = input;
+		if(o.search){
+			focusedEl = input.wrap('<div class="ui-input-search ui-clickable-corner-all ui-body-c ui-btn-shadow"></div>').parent();
+		}
+		else{
+			input.addClass('ui-corner-all ui-body-c');
+		}
+				
 		input
-			.addClass('ui-corner-all ui-body-c ui-input-text')
 			.focus(function(){
-				$(this).addClass('ui-focus');
+				focusedEl.addClass('ui-focus');
 			})
 			.blur(function(){
-				$(this).removeClass('ui-focus');
-			});
+				focusedEl.removeClass('ui-focus');
+			});	
 			
 		//autogrow	
 		if(input.is('textarea')){
