@@ -227,7 +227,9 @@
 		//to-do: make sure this only runs one time on a page (or maybe per component)
 		return $el.not('[data-mobilized]').each(function(){		
 			//add ui-page class
-			$el.addClass('ui-page');
+			if( !$el.closest('.ui-page').length ) { 
+				$el.addClass('ui-page'); 
+			}
 			//dialog
 			$el.filter('[data-role="dialog"]').dialog();
 			//checkboxes, radios
