@@ -3,6 +3,9 @@ Code is subject to change dramatically!
 
 Usage
 =====
+
+Early documentation: https://github.com/jquery/jquery-mobile/wiki/_pages
+
 For now, I've set things up with a little combinator script to concat all the css and js files into one request and gzip. (js/all and css/all)
 You'll need to point your local apache & php webserver at this root directory in order to preview things. 
 
