@@ -15,11 +15,11 @@ $.fn.globalnav = function(settings){
 		var o = $.extend({
 			fixedAs: 'footer',
 			moreText: 'More...',
-			thisId: $(this).parents('.ui-page').attr('id') + '-nav'
+			thisId: $(this).parents('.ui-page').attr('id')
 		},settings);
 		
 		$(this)
-			.attr('id', o.thisId)
+			.attr('id', o.thisId + '-globalnav')
 			.wrapInner('<div class="ui-bar-a ' + (o.fixedAs == 'footer' ? 'ui-footer' : 'ui-header') + '"><div class="ui-globalnav"></div></div>');
 		
 		//wrap it with footer classes
@@ -31,7 +31,7 @@ $.fn.globalnav = function(settings){
 				.grid({grid: numTabs > 2 ? 'b' : 'a'})		
 		
 		if(numTabs > 3 ){
-			var moreId = o.thisId + '-more',
+			var moreId = o.thisId + "&" + jQuery.mobile.subPageUrlKey  + "=globalnav",
 				$navToggle = $('<a href="#'+ moreId +'" data-transition="slideup">' + o.moreText + '</a>'),
 				$truncatedLis = $globalnav.find('li:gt(2)'),
 				$newPage = $('<div id="'+ moreId +'" class="ui-page ui-globalnav-expanded ui-body-a"><div class="ui-header"><h1>' + o.moreText + '</h1></div><div class="ui-content"></div></div>'),

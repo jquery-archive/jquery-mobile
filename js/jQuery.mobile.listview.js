@@ -8,7 +8,8 @@
 
 $.fn.listview = function( options ) {
 	return this.each(function() {
-		var $this = $( this );
+		var $this = $( this ),
+			parentID = $this.closest('.ui-page').attr('id')
 		
 		function data( type, defaultValue ) {
 			var attr = "data-" + type,
@@ -31,6 +32,7 @@ $.fn.listview = function( options ) {
 		//if it's a nested list, chunk it into ui-page items, recurse through them and call listview on each individual ul
 		$( $this.find( "ul" ).get().reverse() ).each(function( i ) {
 			var list = $( this ),
+				id = parentID + "&" + jQuery.mobile.subPageUrlKey  + "=listview-" + i,
 				parent = list.parent(),
 				title = parent.contents()[ 0 ].nodeValue,
 				theme = list.attr( "data-theme" ) !== undefined ?
@@ -46,7 +48,7 @@ $.fn.listview = function( options ) {
 						title + "</h1><a href='#' class='ui-back' data-icon='arrow-l'>Back</a></div>" )
 					.parent()
 						.attr({
-							id: "ui-listview-" + i,
+							id: id,
 							"data-theme": theme,
 							"data-count-theme": countTheme
 						})
@@ -59,7 +61,7 @@ $.fn.listview = function( options ) {
 								return false;
 							});
 			
-			parent.html( "<a href='#ui-listview-" + i + "'>" + title + "</a>" );
+			parent.html( "<a href='#" + id + "'>" + title + "</a>" );
 		}).listview();
 		
 		//create listview markup 
