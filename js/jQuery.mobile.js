@@ -6,17 +6,17 @@
  * Dual licensed under the MIT or GPL Version 2 licenses.
  * http://jquery.org/license
  */
-(function( $, window, undefined ) {
+(function( jQuery, window, undefined ) {
 	// if we're missing support for any of these, then we're a C-grade browser
-	if ( !$.support.display || !$.support.position || !$.support.overflow || !$.support.floatclear ) {
+	if ( !jQuery.support.display || !jQuery.support.position || !jQuery.support.overflow || !jQuery.support.floatclear ) {
 		return;
 	}	
 
-	var $window = $(window),
-		$html = $('html'),
-		$head = $('head'),
+	var $window = jQuery(window),
+		$html = jQuery('html'),
+		$head = jQuery('head'),
 		$body,
-		$loader = $('<div class="ui-loader ui-body-c ui-corner-all fade in"><span class="ui-icon ui-icon-loading spin"></span><h1>loading.</h1></div>'),
+		$loader = jQuery('<div class="ui-loader ui-body-c ui-corner-all fade in"><span class="ui-icon ui-icon-loading spin"></span><h1>loading.</h1></div>'),
 		startPage,
 		startPageId = 'ui-page-start',
 		activePageClass = 'ui-page-active',
@@ -38,33 +38,33 @@
 	// hide address bar
 	function hideBrowserChrome() {
 		// prevent scrollstart and scrollstop events
-		$.event.special.scrollstart.enabled = false;
+		jQuery.event.special.scrollstart.enabled = false;
 		window.scrollTo( 0, 0 );
 		setTimeout(function() {
-			$.event.special.scrollstart.enabled = true;
+			jQuery.event.special.scrollstart.enabled = true;
 		}, 150 );
 	}
 	
 	function manageGlobalNav(activePage){
 		if(activePage.is('.ui-globalnav-expanded')){
-			$('[data-role="globalnav"]').addClass('ui-globalnav-disable');
+			jQuery('[data-role="globalnav"]').addClass('ui-globalnav-disable');
 		}
 		else{
-			$('[data-role="globalnav"]').removeClass('ui-globalnav-disable');
+			jQuery('[data-role="globalnav"]').removeClass('ui-globalnav-disable');
 		}
 	}
 	
 	// send a link through hash tracking
-	$.fn.ajaxClick = function() {
-		var href = $( this ).attr( "href" );
-		pageTransition = $( this ).attr( "data-transition" ) || "slide";
-		nextPageRole = $( this ).attr( "data-rel" );
+	jQuery.fn.ajaxClick = function() {
+		var href = jQuery( this ).attr( "href" );
+		pageTransition = jQuery( this ).attr( "data-transition" ) || "slide";
+		nextPageRole = jQuery( this ).attr( "data-rel" );
 		
 		// let the hashchange event handler take care of everything else
 		location.hash = href;
 		
 		// note: if it's a non-local-anchor and Ajax is not supported, go to page
-		if ( href.match( /^[^#]/ ) && !$.support.ajax ) {
+		if ( href.match( /^[^#]/ ) && !jQuery.support.ajax ) {
 			window.location = href;
 		}
 		
@@ -72,8 +72,8 @@
 	};
 	
 	// ajaxify all navigable links
-	$( "a:not([href=#]):not([target=_blank]):not([rel=external])" ).live( "click", function() {
-		$( this ).ajaxClick();
+	jQuery( "a:not([href=#]):not([target=_blank]):not([rel=external])" ).live( "click", function() {
+		jQuery( this ).ajaxClick();
 		return false;
 	});
 	
@@ -82,7 +82,7 @@
 		if ( done ) {
 			$html.removeClass( "ui-loading" );
 			//fade in page content, remove loading msg
-			$('.ui-page-active .ui-content').addClass('dissolve in');
+			jQuery('.ui-page-active .ui-content').addClass('dissolve in');
 		} else {
 			$html.addClass( "ui-loading" );
 			$loader.appendTo( $body ).addClass( "dissolve in" );
@@ -94,14 +94,14 @@
 		hideBrowserChrome();
 		
 		// kill keyboard (thx jQtouch :) )
-		$( document.activeElement ).blur();
+		jQuery( document.activeElement ).blur();
 		
 		// animate in / out
 		from.addClass( transition + " out " + ( back ? "reverse" : "" ) );
 		to.appendTo($body).addClass( activePageClass + " " + transition +
 			" in " + ( back ? "reverse" : "" ) );
 		//make sure globalnav is on top	
-		$('[data-role="globalnav"]').appendTo($body);
+		jQuery('[data-role="globalnav"]').appendTo($body);
 		manageGlobalNav(to);	
 		
 		// callback - remove classes, etc
@@ -109,12 +109,12 @@
 			from.add( to ).removeClass(" out in reverse " + transitions );
 			from.removeClass( activePageClass );
 			pageLoading( true );
-			$.fixedToolbars.show();
+			jQuery.fixedToolbars.show();
 		});
 	};
 	
-	$(function() {
-		$body = $( "body" );
+	jQuery(function() {
+		$body = jQuery( "body" );
 		pageLoading();
 		
 		// needs to be bound at domready (for IE6)
@@ -136,7 +136,7 @@
 			}
 			
 			//remove any pages that shouldn't cache
-			$(noCache).remove();
+			jQuery(noCache).remove();
 			
 			//function for setting role of next page
 			function setPageRole( newPage ) {
@@ -148,43 +148,43 @@
 			
 			if ( url ) {
 				// see if content is present already
-				var localDiv = $( "[id='" + url + "']" );
+				var localDiv = jQuery( "[id='" + url + "']" );
 				if ( localDiv.length ) {
 					if ( localDiv.is( "[data-role]" ) ) {
 						setPageRole( localDiv );
 					}
 					mobilize( localDiv );
-					changePage( $( ".ui-page-active" ), localDiv, transition, back );
+					changePage( jQuery( ".ui-page-active" ), localDiv, transition, back );
 				} else { //ajax it in
 					pageLoading();
-					var newPage = $( "<div>" )
+					var newPage = jQuery( "<div>" )
 						.appendTo( $body )
 						.load( url + ' [data-role="page"]', function() {
 							// TODO: test this (avoids querying the dom for new element):
-//							var newPage = $( this ).find( ".ui-page" ).eq( 0 )
+//							var newPage = jQuery( this ).find( ".ui-page" ).eq( 0 )
 //								.attr( "id", url );
-//							$( this ).replaceWith( newPage );
+//							jQuery( this ).replaceWith( newPage );
 //							setPageRole( newPage );
 //							mobilize( newPage );
-//							changePage( $( ".ui-page-active" ), newPage, transition, back );
-							$( this ).replaceWith(
-								$( this ).find( '[data-role="page"]' ).eq( 0 ).attr( "id", url ) );
-							var newPage = $( "[id='" + url + "']" );
+//							changePage( jQuery( ".ui-page-active" ), newPage, transition, back );
+							jQuery( this ).replaceWith(
+								jQuery( this ).find( '[data-role="page"]' ).eq( 0 ).attr( "id", url ) );
+							var newPage = jQuery( "[id='" + url + "']" );
 							setPageRole( newPage );
 							mobilize( newPage );
-							changePage( $( ".ui-page-active" ), newPage, transition, back );
+							changePage( jQuery( ".ui-page-active" ), newPage, transition, back );
 						});
 				}
 			} else {
 				// either we've backed up to the root page url
 				// or it's the first page load with no hash present
-				var currentPage = $( ".ui-page-active" );
+				var currentPage = jQuery( ".ui-page-active" );
 				if ( currentPage.length && !startPage.is( ".ui-page-active" ) ) {
 					changePage( currentPage, startPage, transition, back );
 				} else {
 					startPage.addClass( activePageClass );
 					manageGlobalNav(startPage);
-					$.fixedToolbars.show();
+					jQuery.fixedToolbars.show();
 					pageLoading( true );
 				}
 			}
@@ -211,9 +211,9 @@
 	//potential (probably incomplete) fallback to workaround lack of animation callbacks. 
 	//should this be extended into a full special event?
 	// note: Expects CSS animations use transitionDuration (350ms)
-	$.fn.animationComplete = function(callback){
-		if($.support.WebKitAnimationEvent){
-			return $(this).one('webkitAnimationEnd', callback); //check out transitionEnd (opera per Paul's request)
+	jQuery.fn.animationComplete = function(callback){
+		if(jQuery.support.WebKitAnimationEvent){
+			return jQuery(this).one('webkitAnimationEnd', callback); //check out transitionEnd (opera per Paul's request)
 		}
 		else{
 			setTimeout(callback, transitionDuration);
@@ -261,7 +261,7 @@
 			//rewrite "home" links to mimic the back button (pre-js, these links are usually "home" links)	
 			var backBtn = $el.find('.ui-header a.ui-back');
 			if(!backBtn.length){
-				backBtn = $('<a href="#" class="ui-back" data-icon="arrow-l"></a>').appendTo($el.find('.ui-header')).buttonMarkup();
+				backBtn = jQuery('<a href="#" class="ui-back" data-icon="arrow-l"></a>').appendTo($el.find('.ui-header')).buttonMarkup();
 			}
 			backBtn
 				.click(function(){
@@ -277,7 +277,7 @@
 		});
 	};
 	
-	$.extend($, {
+	jQuery.extend({
 		mobilize: mobilize,
 		pageLoading: pageLoading,
 		changePage: changePage,
@@ -285,10 +285,10 @@
 	});
 
 	//dom-ready
-	$(function(){
+	jQuery(function(){
 		
 		//set up active page - mobilize it!
-		startPage = $('[data-role="page"]:first');
+		startPage = jQuery('[data-role="page"]:first');
 		
 		//make sure it has an ID - for finding it later
 		if(!startPage.attr('id')){ 
@@ -296,13 +296,13 @@
 		}
 		
 		//mobilize all pages present
-		mobilize($('[data-role="page"]'));
+		mobilize(jQuery('[data-role="page"]'));
 		
 		//trigger a new hashchange, hash or not
 		$window.trigger( "hashchange" );
 		
 		//update orientation 
-		$html.addClass( $.event.special.orientationchange.orientation( $window ) );
+		$html.addClass( jQuery.event.special.orientationchange.orientation( $window ) );
 		
 		//swipe right always triggers a back 
 		$body.bind('swiperight.jqm',function(){
@@ -311,8 +311,8 @@
 		});	
 		
 		//some debug stuff for the events pages
-		$('body').bind('scrollstart scrollstop swipe swipeleft swiperight tap taphold turn',function(e){
-			$('#eventlogger').prepend('<div>Event fired: '+ e.type +'</div>');
+		jQuery('body').bind('scrollstart scrollstop swipe swipeleft swiperight tap taphold turn',function(e){
+			jQuery('#eventlogger').prepend('<div>Event fired: '+ e.type +'</div>');
 		});
 	});
 })( jQuery, this );
