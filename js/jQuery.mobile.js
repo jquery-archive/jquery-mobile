@@ -11,6 +11,14 @@
 	if ( !jQuery.support.display || !jQuery.support.position || !jQuery.support.overflow || !jQuery.support.floatclear ) {
 		return;
 	}	
+	
+	//these properties should be made easy to override externally
+	jQuery.mobile = {};
+	
+	jQuery.extend(jQuery.mobile, {
+		subPageUrlKey: 'ui-page' //define the key used in urls for sub-pages. Defaults to &ui-page=
+	});
+	jQuery.mobile.subPageUrlKey = 'ui-page';
 
 	var $window = jQuery(window),
 		$html = jQuery('html'),
@@ -125,7 +133,8 @@
 				// pageTransition only exists if the user clicked a link
 				back = !pageTransition && stackLength > 1 &&
 					urlStack[ stackLength - 2 ].url === url,
-				transition = pageTransition || "slide";
+				transition = pageTransition || "slide",
+				fileUrl = url;
 			pageTransition = undefined;
 			
 			// if the new href is the same as the previous one
@@ -157,9 +166,12 @@
 					changePage( jQuery( ".ui-page-active" ), localDiv, transition, back );
 				} else { //ajax it in
 					pageLoading();
+					if(url.match( '&' + jQuery.mobile.subPageUrlKey )){
+						fileUrl = url.split( '&' + jQuery.mobile.subPageUrlKey )[0];
+					}
 					var newPage = jQuery( "<div>" )
 						.appendTo( $body )
-						.load( url + ' [data-role="page"]', function() {
+						.load( fileUrl + ' [data-role="page"]', function() {
 							// TODO: test this (avoids querying the dom for new element):
 //							var newPage = jQuery( this ).find( ".ui-page" ).eq( 0 )
 //								.attr( "id", url );
@@ -168,10 +180,11 @@
 //							mobilize( newPage );
 //							changePage( jQuery( ".ui-page-active" ), newPage, transition, back );
 							jQuery( this ).replaceWith(
-								jQuery( this ).find( '[data-role="page"]' ).eq( 0 ).attr( "id", url ) );
-							var newPage = jQuery( "[id='" + url + "']" );
+								jQuery( this ).find( '[data-role="page"]' ).eq( 0 ).attr( "id", fileUrl ) );
+							var newPage = jQuery( "[id='" + fileUrl + "']" );
 							setPageRole( newPage );
 							mobilize( newPage );
+							newPage = jQuery( "[id='" + url + "']" );
 							changePage( jQuery( ".ui-page-active" ), newPage, transition, back );
 						});
 				}
