@@ -269,8 +269,8 @@
 					return false;
 				})
 				.find('.ui-btn-text').text(backBtnText);
-			//autoform plugin
-			$el.find('[data-role="autoform"]').autoform();	
+			//ajaxform plugin
+			$el.find('[data-role="ajaxform"]').ajaxform();	
 			//hide no-js content
 			$el.find('[data-role="nojs"]').addClass('ui-nojs');	
 			$el.attr('data-mobilized',true);	
