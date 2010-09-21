@@ -8,6 +8,7 @@
 $.fn.slider = function(options){
 	return $(this).each(function(){	
 		var input = $(this),
+			label = $('[for='+ input.attr('id') +']'),
 			slider = $('<div class="ui-slider ui-bar-c ui-btn-corner-all"></div>'),
 			handle = $('<a href="#" class="ui-slider-handle" data-theme="a"></a>').appendTo(slider).buttonMarkup({corners: true}),
 			dragging = false,
@@ -42,6 +43,8 @@ $.fn.slider = function(options){
 				input.val(newval); 
 			}
 			
+			label.addClass('ui-slider')
+			
 			input
 				.addClass('ui-slider-input')
 				.keyup(function(e){
@@ -49,7 +52,6 @@ $.fn.slider = function(options){
 				});
 						
 			slider
-				.css('left', percent + '%')
 				.bind(touchStartEvent, function(event){
 					dragging = true;
 					slideUpdate(event);
@@ -65,7 +67,9 @@ $.fn.slider = function(options){
 				})
 				.insertAfter(input);
 			
-			handle.bind('tap click', function(){ return false; })	
+			handle
+				.css('left', percent + '%')
+				.bind('click', function(e){ return false; });	
 	});
 };
 })(jQuery);
