@@ -69,7 +69,7 @@
 	}
 	
 	// Send Etag hash
-	$hash = $lastmodified . '-' . md5($elements);
+	$hash = $lastmodified . '-' . md5(implode('', $elements));
 	header ("Etag: \"" . $hash . "\"");
 	
 	if (isset($_SERVER['HTTP_IF_NONE_MATCH']) && 
