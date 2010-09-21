@@ -254,7 +254,7 @@
 				case 'footer':
 					$this.addClass('ui-' + role);
 					break;
-				case 'collpsible':
+				case 'collapsible':
 				case 'fieldcontain':
 				case 'globalnav':
 				case 'listview':
