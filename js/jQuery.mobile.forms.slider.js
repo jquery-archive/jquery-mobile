@@ -6,7 +6,7 @@
 */  
 (function($){
 $.fn.slider = function(options){
-	return $(this).each(function(){	
+	return this.each(function(){	
 		var input = $(this),
 			inputID = input.attr('id'),
 			labelID = inputID + '-label',
@@ -28,68 +28,64 @@ $.fn.slider = function(options){
 					'title': val,
 					'aria-labelledby': labelID
 				}),
-			dragging = false,
-			supportTouch = $.support.touch,
-			touchStartEvent = supportTouch ? "touchstart" : "mousedown",
-			touchStopEvent = supportTouch ? "touchend" : "mouseup",
-			touchMoveEvent = supportTouch ? "touchmove" : "mousemove";
+			dragging = false;
 			
-			function slideUpdate(event, val){
-				if(!val){
-					var data = event.originalEvent.touches ? event.originalEvent.touches[ 0 ] : event,
-						tol = 4; //a slight tolerance helped get to the ends of the slider
-					if( !dragging 
-							|| data.pageX < slider.offset().left - tol 
-							|| data.pageX > slider.offset().left + slider.width() + tol ){ 
-						return; 
-					}
-					percent = Math.round(((data.pageX - slider.offset().left) / slider.width() ) * 100);
+		function slideUpdate(event, val){
+			if (val){
+				percent = parseFloat(val) / (max - min) * 100;
+			} else {
+				var data = event.originalEvent.touches ? event.originalEvent.touches[ 0 ] : event,
+					// a slight tolerance helped get to the ends of the slider
+					tol = 4;
+				if( !dragging 
+						|| data.pageX < slider.offset().left - tol 
+						|| data.pageX > slider.offset().left + slider.width() + tol ){ 
+					return; 
 				}
-				else{
-					percent = parseFloat(val) / (max - min) * 100;
-				}
-				if( percent < 0 ){ percent = 0; }
-				if( percent > 100 ){ percent = 100; }
-				var newval = Math.round( (percent/100) * max );
-				if( newval < min ){ newval = min; }
-				if( newval > max ){ newval = max; }
-				handle
-					.css('left', percent + '%')
-					.attr({
-						'aria-valuenow': newval,
-						'aria-valuetext': newval,
-						'title': newval
-					});
-				input.val(newval); 
+				percent = Math.round(((data.pageX - slider.offset().left) / slider.width() ) * 100);
 			}
-			
-			label.addClass('ui-slider')
-			
-			input
-				.addClass('ui-slider-input')
-				.keyup(function(e){
-					slideUpdate(e, $(this).val() );
-				});
-						
-			slider
-				.bind(touchStartEvent, function(event){
-					dragging = true;
-					slideUpdate(event);
-					return false;
-				})
-				.bind(touchMoveEvent, function(event){
-					slideUpdate(event);
-					return false;
-				})
-				.bind(touchStopEvent, function(){
-					dragging = false;
-					return false;
-				})
-				.insertAfter(input);
-			
+			if( percent < 0 ) { percent = 0; }
+			if( percent > 100 ) { percent = 100; }
+			var newval = Math.round( (percent/100) * max );
+			if( newval < min ) { newval = min; }
+			if( newval > max ) { newval = max; }
 			handle
 				.css('left', percent + '%')
-				.bind('click', function(e){ return false; });	
+				.attr({
+					'aria-valuenow': newval,
+					'aria-valuetext': newval,
+					'title': newval
+				});
+			input.val(newval); 
+		}
+		
+		label.addClass('ui-slider')
+		
+		input
+			.addClass('ui-slider-input')
+			.keyup(function(e){
+				slideUpdate(e, $(this).val() );
+			});
+					
+		slider
+			.bind($.support.touch ? "touchstart" : "mousedown", function(event){
+				dragging = true;
+				slideUpdate(event);
+				return false;
+			})
+			.bind($.support.touch ? "touchmove" : "mousemove", function(event){
+				slideUpdate(event);
+				return false;
+			})
+			.bind($.support.touch ? "touchend" : "mouseup", function(){
+				dragging = false;
+				return false;
+			})
+			.insertAfter(input);
+		
+		handle
+			.css('left', percent + '%')
+			.bind('click', function(e){ return false; });	
 	});
 };
 })(jQuery);
