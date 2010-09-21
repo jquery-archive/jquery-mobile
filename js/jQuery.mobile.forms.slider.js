@@ -8,18 +8,31 @@
 $.fn.slider = function(options){
 	return $(this).each(function(){	
 		var input = $(this),
-			label = $('[for='+ input.attr('id') +']'),
-			slider = $('<div class="ui-slider ui-bar-c ui-btn-corner-all"></div>'),
-			handle = $('<a href="#" class="ui-slider-handle" data-theme="a"></a>').appendTo(slider).buttonMarkup({corners: true}),
+			inputID = input.attr('id'),
+			labelID = inputID + '-label',
+			label = $('[for='+ inputID +']').attr('id',labelID),
+			val = input.val(),
+			min = parseFloat(input.attr('min')),
+			max = parseFloat(input.attr('max')),
+			percent = val / (max - min) * 100,
+			slider = $('<div class="ui-slider ui-bar-c ui-btn-corner-all" role="application"></div>'),
+			handle = $('<a href="#" class="ui-slider-handle" data-theme="a"></a>')
+				.appendTo(slider)
+				.buttonMarkup({corners: true})
+				.attr({
+					'role': 'slider',
+					'aria-valuemin': min,
+					'aria-valuemax': max,
+					'aria-valuenow': val,
+					'aria-valuetext': val,
+					'title': val,
+					'aria-labelledby': labelID
+				}),
 			dragging = false,
 			supportTouch = $.support.touch,
 			touchStartEvent = supportTouch ? "touchstart" : "mousedown",
 			touchStopEvent = supportTouch ? "touchend" : "mouseup",
-			touchMoveEvent = supportTouch ? "touchmove" : "mousemove",
-			val = input.val(),
-			min = input.attr('min'),
-			max = input.attr('max'),
-			percent = val / (max - min) * 100;
+			touchMoveEvent = supportTouch ? "touchmove" : "mousemove";
 			
 			function slideUpdate(event, val){
 				if(!val){
@@ -39,7 +52,14 @@ $.fn.slider = function(options){
 				}
 				var newval = Math.round( (percent/100) * max );
 				if( newval < min ){ newval = min; }
-				handle.css('left', percent + '%');
+				if( newval > max ){ newval = max; }
+				handle
+					.css('left', percent + '%')
+					.attr({
+						'aria-valuenow': newval,
+						'aria-valuetext': newval,
+						'title': newval
+					});
 				input.val(newval); 
 			}
 			
