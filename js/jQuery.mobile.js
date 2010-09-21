@@ -238,59 +238,75 @@
 	//markup-driven enhancements, to be called on any ui-page upon loading
 	function mobilize($el){	
 		//to-do: make sure this only runs one time on a page (or maybe per component)
-		return $el.not('[data-mobilized]').each(function(){		
-			//add ui-page class
-			if( !$el.closest('.ui-page').length ) { 
-				$el.addClass('ui-page'); 
-			}
+		return $el.not('[data-mobilized]').each(function(){	
+			 
+			//hide no-js content
+			$el.find('[data-role="nojs"]').addClass('ui-nojs');	
+			
+			//pre-find data els
+			var $dataEls = $el.find('[data-role]:not([data-role="nojs"])').andSelf();
+			
 			//header,content,footer
-			$el.find('[data-role="header"]').addClass('ui-header');
-			$el.find('[data-role="content"]').addClass('ui-content');
-			$el.find('[data-role="footer"]').addClass('ui-footer');
-			$el.filter('[data-role="content"]').addClass('ui-content'); //for ajaxform response
-			//dialog
-			$el.filter('[data-role="dialog"]').dialog();
-			//checkboxes, radios
-			$el.find('input[type=radio],input[type=checkbox]').customCheckboxRadio();
-			//custom buttons
-			$el.find('button, input[type=submit]').not('[data-role="nojs"]').customButton();
-			//custom text inputs
-			$el.find('input[type=text],input[type=password],textarea').customTextInput();
-			//collapsible groupings
-			$el.find('[data-role="collapsible"]').collapsible();
-			//single-field separators
-			$el.find('.field').fieldcontain();
-			//selects
-			$el.find('select').customSelect();
-			//global nav
-			$el.find('[data-role="globalnav"]').globalnav();
+			$dataEls.filter('[data-role="page"]').addClass('ui-page');
+			$dataEls.filter('[data-role="header"]').addClass('ui-header');
+			$dataEls.filter('[data-role="content"]').addClass('ui-content');
+			$dataEls.filter('[data-role="footer"]').addClass('ui-footer');
+			
 			//fix toolbars
 			$el.fixHeaderFooter();
-			//buttons from links in headers,footers,bars, or with data-role
-			$el.find('.ui-header a, .ui-footer a, .ui-bar a, [data-role="button"]').not('.ui-btn').buttonMarkup();
+
+			//collapsible groupings
+			$dataEls.filter('[data-role="collapsible"]').collapsible();
+			//single-field separators
+			$dataEls.filter('[data-role="fieldcontain"]').fieldcontain();
+			//global nav
+			$dataEls.filter('[data-role="globalnav"]').globalnav();
+			//listview 
+			$dataEls.filter('[data-role="listview"]').listview();
+			//dialog
+			$dataEls.filter('[data-role="dialog"]').dialog();
+			//ajaxform plugin
+			$dataEls.filter('[data-role="ajaxform"]').ajaxform();
+
+			//form elements
+			var checksradios = 'input[type=radio],input[type=checkbox]',
+				buttonInputs = 'button, input[type=submit], input[type=reset], input[type=image]',
+				textInputs = 'input[type=text],input[type=number],input[type=password],textarea',
+				selects = 'select';
+			
+			$formEls = $el.find( [checksradios, buttonInputs, textInputs, selects].join(',') );
+				
+			$formEls.filter(checksradios).customCheckboxRadio();
+			//custom buttons
+			$formEls.filter(buttonInputs).customButton();
+			//custom text inputs
+			$formEls.filter(textInputs).customTextInput();
+			//selects
+			$formEls.filter(selects).customSelect();
+			
 			//vertical controlgroups
-			$el.find('[data-role="controlgroup"]:not([data-type="horizontal"])').controlgroup();
+			$dataEls.filter('[data-role="controlgroup"]:not([data-type="horizontal"])').controlgroup();
 			//horizontal controlgroups
-			$el.find('[data-role="controlgroup"][data-type="horizontal"]').controlgroup({direction: 'horizontal'});
-			//listview from data role
-			$el.find('[data-role="listview"]').listview();
-			//links within content areas
-			$el.find('.ui-body a:not(.ui-btn):not(.ui-link-inherit)').addClass('ui-link');
-			//rewrite "home" links to mimic the back button (pre-js, these links are usually "home" links)	
+			$dataEls.filter('[data-role="controlgroup"][data-type="horizontal"]').controlgroup({direction: 'horizontal'});
+			
+			//add back buttons to headers that don't have them	
 			var backBtn = $el.find('.ui-header a.ui-back');
 			if(!backBtn.length){
-				backBtn = jQuery('<a href="#" class="ui-back" data-icon="arrow-l"></a>').appendTo($el.find('.ui-header')).buttonMarkup();
+				backBtn = jQuery('<a href="#" class="ui-back" data-icon="arrow-l"></a>').appendTo($el.find('.ui-header'));
 			}
+			
+			//buttons from links in headers,footers,bars, or with data-role
+			$dataEls.filter('[data-role="button"]').add('.ui-header a, .ui-footer a, .ui-bar a').not('.ui-btn').buttonMarkup();
+			//links within content areas
+			$el.find('.ui-body a:not(.ui-btn):not(.ui-link-inherit)').addClass('ui-link');
+			//make all back buttons mimic the back button (pre-js, these links are usually "home" links)
 			backBtn
 				.click(function(){
 					history.go(-1);
 					return false;
 				})
-				.find('.ui-btn-text').text(backBtnText);
-			//ajaxform plugin
-			$el.find('[data-role="ajaxform"]').ajaxform();	
-			//hide no-js content
-			$el.find('[data-role="nojs"]').addClass('ui-nojs');	
+				.find('.ui-btn-text').text(backBtnText);	
+			
 			$el.attr('data-mobilized',true);	
 		});
 	};
