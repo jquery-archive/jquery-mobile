@@ -272,15 +272,18 @@
 			var checksradios = 'input[type=radio],input[type=checkbox]',
 				buttonInputs = 'button, input[type=submit], input[type=reset], input[type=image]',
 				textInputs = 'input[type=text],input[type=number],input[type=password],textarea',
+				sliders = '[data-role="slider"]',
 				selects = 'select';
 			
-			$formEls = $el.find( [checksradios, buttonInputs, textInputs, selects].join(',') );
+			$formEls = $el.find( [checksradios, buttonInputs, textInputs, sliders, selects].join(',') );
 				
 			$formEls.filter(checksradios).customCheckboxRadio();
 			//custom buttons
 			$formEls.filter(buttonInputs).customButton();
 			//custom text inputs
 			$formEls.filter(textInputs).customTextInput();
+			//sliders
+			$formEls.filter(sliders).slider();
 			//selects
 			$formEls.filter(selects).customSelect();
 			
