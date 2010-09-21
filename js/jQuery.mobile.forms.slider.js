@@ -50,7 +50,7 @@ $.fn.slider = function(options){
 						
 			slider
 				.css('left', percent + '%')
-				.bind(touchStartEvent, function(){
+				.bind(touchStartEvent, function(event){
 					dragging = true;
 					slideUpdate(event);
 					return false;
