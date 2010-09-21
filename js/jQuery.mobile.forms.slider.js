@@ -44,12 +44,12 @@ $.fn.slider = function(options){
 						return; 
 					}
 					percent = Math.round(((data.pageX - slider.offset().left) / slider.width() ) * 100);
-					if( percent < 0 ){ percent = 0; }
-					if( percent > 100 ){ percent = 100; }
 				}
 				else{
 					percent = parseFloat(val) / (max - min) * 100;
 				}
+				if( percent < 0 ){ percent = 0; }
+				if( percent > 100 ){ percent = 100; }
 				var newval = Math.round( (percent/100) * max );
 				if( newval < min ){ newval = min; }
 				if( newval > max ){ newval = max; }
