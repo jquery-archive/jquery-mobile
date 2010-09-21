@@ -244,29 +244,29 @@
 			$el.find('[data-role="nojs"]').addClass('ui-nojs');	
 			
 			//pre-find data els
-			var $dataEls = $el.find('[data-role]:not([data-role="nojs"])').andSelf();
-			
-			//header,content,footer
-			$dataEls.filter('[data-role="page"]').addClass('ui-page');
-			$dataEls.filter('[data-role="header"]').addClass('ui-header');
-			$dataEls.filter('[data-role="content"]').addClass('ui-content');
-			$dataEls.filter('[data-role="footer"]').addClass('ui-footer');
+			var $dataEls = $el.find('[data-role]').andSelf().each(function() {
+				var $this = $(this),
+					role = $this.attr("data-role");
+				switch(role) {
+				case 'page':
+				case 'header':
+				case 'content':
+				case 'footer':
+					$this.addClass('ui-' + role);
+					break;
+				case 'collpsible':
+				case 'fieldcontain':
+				case 'globalnav':
+				case 'listview':
+				case 'dialog':
+				case 'ajaxform':
+					$this[role]();
+					break;
+				}
+			});
 			
 			//fix toolbars
 			$el.fixHeaderFooter();
-
-			//collapsible groupings
-			$dataEls.filter('[data-role="collapsible"]').collapsible();
-			//single-field separators
-			$dataEls.filter('[data-role="fieldcontain"]').fieldcontain();
-			//global nav
-			$dataEls.filter('[data-role="globalnav"]').globalnav();
-			//listview 
-			$dataEls.filter('[data-role="listview"]').listview();
-			//dialog
-			$dataEls.filter('[data-role="dialog"]').dialog();
-			//ajaxform plugin
-			$dataEls.filter('[data-role="ajaxform"]').ajaxform();
 
 			//form elements
 			var checksradios = 'input[type=radio],input[type=checkbox]',
