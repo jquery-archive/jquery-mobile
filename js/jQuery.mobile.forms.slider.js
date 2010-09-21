@@ -64,6 +64,8 @@ $.fn.slider = function(options){
 					return false;
 				})
 				.insertAfter(input);
+			
+			handle.bind('tap click', function(){ return false; })	
 	});
 };
 })(jQuery);
