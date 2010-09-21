@@ -52,18 +52,19 @@ $.event.special.scrollstart = {
 $.event.special.tap = {
 	setup: function() {
 		var thisObject = this,
-			$this = $( thisObject ),
-			originalType,
-			touching,
-			held,
-			moved,
-			timer;
+			$this = $( thisObject );
 		
 		$this
 			.bind( touchStartEvent, function( event ) {
-				held = false;
-				moved = false;
-				touching = true;
+				var held = false,
+					moved = false,
+					touching = true,
+					originalType,
+					timer;
+				
+				function moveHandler() {
+					moved = true;
+				}
 				
 				timer = setTimeout(function() {
 					if ( touching && !moved ) {
@@ -75,20 +76,20 @@ $.event.special.tap = {
 					}
 				}, 300 );
 				
-			})
-			.bind( touchMoveEvent, function() {
-				moved = true;
-			})
-			.bind( touchStopEvent, function( event ) {
-				clearTimeout( timer );
-				touching = false;
-				
-				if ( !held && !moved ) {
-					originalType = event.type;
-					event.type = "tap";
-					$.event.handle.call( thisObject, event );
-					event.type = originalType;
-				}
+				$this
+					.one( touchMoveEvent, moveHandler)
+					.one( touchStopEvent, function( event ) {
+						$this.unbind( touchMoveEvent, moveHandler );
+						clearTimeout( timer );
+						touching = false;
+						
+						if ( !held && !moved ) {
+							originalType = event.type;
+							event.type = "tap";
+							$.event.handle.call( thisObject, event );
+							event.type = originalType;
+						}
+					});
 			});
 	}
 };
@@ -97,50 +98,54 @@ $.event.special.tap = {
 $.event.special.swipe = {
 	setup: function() {
 		var thisObject = this,
-			$this = $( thisObject ),
-			start,
-			stop;
+			$this = $( thisObject );
 		
 		$this
 			.bind( touchStartEvent, function( event ) {
 				var data = event.originalEvent.touches ?
 						event.originalEvent.touches[ 0 ] :
-						event;
-				start = {
-					time: (new Date).getTime(),
-					coords: [ data.pageX, data.pageY ],
-					origin: $( event.target )
-				};
-			})
-			.bind( touchMoveEvent, function( event ) {
-				if ( !start ) {
-					return;
-				}
+						event,
+					start = {
+						time: (new Date).getTime(),
+						coords: [ data.pageX, data.pageY ],
+						origin: $( event.target )
+					},
+					stop;
 				
-				var data = event.originalEvent.touches ?
-						event.originalEvent.touches[ 0 ] :
-						event;
-				stop = {
-					time: (new Date).getTime(),
-					coords: [ data.pageX, data.pageY ]
-				};
-				
-				// prevent scrolling
-				if ( Math.abs( start.coords[0] - stop.coords[0] ) > 10 ) {
-					event.preventDefault();
-				}
-			})
-			.bind( touchStopEvent, function( event ) {
-				if ( start && stop ) {
-					if ( stop.time - start.time < 1000 && 
-							Math.abs( start.coords[0] - stop.coords[0]) > 180 &&
-							Math.abs( start.coords[1] - stop.coords[1]) < 80 ) {
-						start.origin
-							.trigger( "swipe" )
-							.trigger( start.coords[0] > stop.coords[0] ? "swipeleft" : "swiperight" );
+				function moveHandler( event ) {
+					if ( !start ) {
+						return;
+					}
+					
+					var data = event.originalEvent.touches ?
+							event.originalEvent.touches[ 0 ] :
+							event;
+					stop = {
+							time: (new Date).getTime(),
+							coords: [ data.pageX, data.pageY ]
+					};
+					
+					// prevent scrolling
+					if ( Math.abs( start.coords[0] - stop.coords[0] ) > 10 ) {
+						event.preventDefault();
 					}
 				}
-				start = stop = undefined;
+				
+				$this
+					.bind( touchMoveEvent, moveHandler )
+					.one( touchStopEvent, function( event ) {
+						$this.unbind( touchMoveEvent, moveHandler );
+						if ( start && stop ) {
+							if ( stop.time - start.time < 1000 && 
+									Math.abs( start.coords[0] - stop.coords[0]) > 180 &&
+									Math.abs( start.coords[1] - stop.coords[1]) < 80 ) {
+								start.origin
+								.trigger( "swipe" )
+								.trigger( start.coords[0] > stop.coords[0] ? "swipeleft" : "swiperight" );
+							}
+						}
+						start = stop = undefined;
+					});
 			});
 	}
 };
