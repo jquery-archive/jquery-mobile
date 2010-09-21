@@ -34,7 +34,7 @@ $.fn.globalnav = function(settings){
 			var moreId = o.thisId + "&" + jQuery.mobile.subPageUrlKey  + "=globalnav",
 				$navToggle = $('<a href="#'+ moreId +'" data-transition="slideup">' + o.moreText + '</a>'),
 				$truncatedLis = $globalnav.find('li:gt(2)'),
-				$newPage = $('<div id="'+ moreId +'" class="ui-page ui-globalnav-expanded ui-body-a"><div class="ui-header"><h1>' + o.moreText + '</h1></div><div class="ui-content"></div></div>'),
+				$newPage = $('<div id="'+ moreId +'" class="ui-page ui-globalnav-expanded ui-body-a"><div data-role="header"><h1>' + o.moreText + '</h1></div><div data-role="content"></div></div>'),
 				$newPageContent =  $globalnav.find('ul').clone(); 
 				
 				$newPageContent

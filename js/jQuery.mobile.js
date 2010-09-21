@@ -243,6 +243,11 @@
 			if( !$el.closest('.ui-page').length ) { 
 				$el.addClass('ui-page'); 
 			}
+			//header,content,footer
+			$el.find('[data-role="header"]').addClass('ui-header');
+			$el.find('[data-role="content"]').addClass('ui-content');
+			$el.find('[data-role="footer"]').addClass('ui-footer');
+			$el.filter('[data-role="content"]').addClass('ui-content'); //for ajaxform response
 			//dialog
 			$el.filter('[data-role="dialog"]').dialog();
 			//checkboxes, radios

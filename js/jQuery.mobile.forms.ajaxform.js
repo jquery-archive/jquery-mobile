@@ -9,7 +9,7 @@
 //ajax response callbacks
 $.formhandlers = {
 	'default' : function(data,type){
-		return $(data).find('.ui-content:eq(0)');
+		return $(data).find('[data-role="content"]:eq(0)');
 	}
 };
 
@@ -42,7 +42,7 @@ $.fn.ajaxform = function(options){
 				dataFilter: o.dataFilter,
 				success: function(data,textStatus){
 					$('.ui-page-active .ui-content').replaceWith( data );
-					$.mobilize($('.ui-page-active .ui-content'));
+					$.mobilize( $('.ui-page-active [data-role="content"]') );
 					$.pageLoading(true);
 				}
 			});
