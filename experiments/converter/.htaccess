@@ -1,0 +1,1 @@
+AddType text/cache-manifest .manifest
