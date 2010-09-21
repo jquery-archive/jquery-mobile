@@ -41,17 +41,22 @@
 		
     <fieldset data-role="collapsible">
     	<legend>Text input controls</legend>
-    	<div class="field">
+    	<div data-role="fieldcontain">
          <label for="name">Text Input:</label>
          <input type="text" name="name" id="name" value=""  />
 		</div>
-		<div class="field">
+		<div data-role="fieldcontain">
          <label for="password">Password Input:</label>
          <input type="password" name="password" id="password" value=""  />
 		</div>
-		<div class="field">
+		<div data-role="fieldcontain">
 		<label for="textarea">Textarea:</label>
 		<textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
+		</div>
+		
+		<div data-role="fieldcontain">
+			<label for="slider">Slider:</label>
+		 	<input type="number" name="slider" id="slider" data-role="slider" value="0" min="0" max="100"  />
 		</div>
 	</fieldset>
 
@@ -62,7 +67,7 @@
 		<h2>Radio toggles</h2>
          
           
-	    <fieldset data-role="controlgroup" class="field">
+	    <fieldset data-role="controlgroup" data-role="fieldcontain">
 	    	<legend>Choose one:</legend>
 	         	<input type="radio" name="radio-choice-1" id="radio-choice-1" value="choice-1" checked="checked" />
 	         	<label for="radio-choice-1">Choice 1</label>
@@ -77,7 +82,7 @@
 	         	<label for="radio-choice-4">Choice 4</label>
 	    </fieldset>
 	    
-	     <fieldset data-role="controlgroup"  data-type="horizontal" class="field">
+	     <fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
 	     	<legend>Cache settings:</legend>
 	         	<input type="radio" name="radio-choice-a" id="radio-choice-a" value="choice-a" checked="checked" />
 	         	<label for="radio-choice-a">On</label>
@@ -103,7 +108,7 @@
 			<label for="checkbox-3">Choice 3</label>
 	    </fieldset>
     
-	    <fieldset data-role="controlgroup" data-type="horizontal" class="field">
+	    <fieldset data-role="controlgroup" data-type="horizontal" data-role="fieldcontain">
 	    	<legend>Font styling:</legend>
 	    	<input type="checkbox" name="checkbox-6" id="checkbox-6" class="custom" />
 			<label for="checkbox-6">b</label>
@@ -115,7 +120,7 @@
 			<label for="checkbox-8">u</label>    
 	    </fieldset>
 	
-		<fieldset class="field">
+		<fieldset data-role="fieldcontain">
 			<input type="checkbox" name="checkbox-9" id="checkbox-9" class="custom" />
 			<label for="checkbox-9">Single Checkbox</label>
 		</fieldset>
@@ -126,7 +131,7 @@
 
 	<fieldset data-role="collapsible">
 		<legend>Select menus</legend>
-		<div class="field">
+		<div data-role="fieldcontain">
 			<label for="select-choice-1" class="select">Choose one:</label>
 			<select name="select-choice-1" id="select-choice-1">
 				<option value="Choice 1">Choice 1</option>
@@ -135,7 +140,7 @@
 			</select>
 		</div>
 		
-		<div class="field">
+		<div data-role="fieldcontain">
 			<label for="select-choice-3" class="select">Choose one:</label>
 			<select name="select-choice-3" id="select-choice-3">
 				<option value="Choice 1">Choice 1</option>
