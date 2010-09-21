@@ -13,6 +13,7 @@ $elements = array(
 	'jQuery.mobile.forms.ajaxform.js',
 	'jQuery.mobile.buttonMarkup.js',
 	'jQuery.mobile.forms.button.js',
+	'jQuery.mobile.forms.slider.js',
 	'jQuery.mobile.collapsible.js',
 	'jQuery.mobile.controlGroup.js',
 	'jQuery.mobile.fieldContain.js',

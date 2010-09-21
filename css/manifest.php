@@ -14,7 +14,8 @@ $elements = array(
 	'jQuery.mobile.forms.fieldcontain.css',
 	'jQuery.mobile.forms.select.css',
 	'jQuery.mobile.forms.textinput.css',
-	'jQuery.mobile.listview.css'
+	'jQuery.mobile.listview.css',
+	'jQuery.mobile.forms.slider.css'
 );
 
 ?>
