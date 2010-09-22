@@ -3,40 +3,14 @@
 * Copyright (c) jQuery Project
 * Dual licensed under the MIT (MIT-LICENSE.txt) or GPL (GPL-LICENSE.txt) licenses.
 */
-/*spin
-keyframes from jordandobson.com/webkit_loading_animation/resize/
- - note: can this be simplified?
-*/
 .spin  {
 -webkit-animation-name: spin;
 -webkit-animation-duration: 1s;
 -webkit-animation-iteration-count:  infinite;
 }
 @-webkit-keyframes spin {
-	0%{     -webkit-transform: rotate(0deg); }
-	8.32%{  -webkit-transform: rotate(0deg); }
-	8.33%{  -webkit-transform: rotate(30deg); }
-	16.65%{ -webkit-transform: rotate(30deg); }
-	16.66%{ -webkit-transform: rotate(60deg); }
-	24.99%{ -webkit-transform: rotate(60deg); }
-	25%{    -webkit-transform: rotate(90deg); }
-	33.32%{ -webkit-transform: rotate(90deg); }
-	33.33%{ -webkit-transform: rotate(120deg); }
-	41.65%{ -webkit-transform: rotate(120deg); }
-	41.66%{ -webkit-transform: rotate(150deg); }
-	49.99%{ -webkit-transform: rotate(150deg); }
-	50%{    -webkit-transform: rotate(180deg); }
-	58.32%{ -webkit-transform: rotate(180deg); }
-	58.33%{ -webkit-transform: rotate(210deg); }
-	66.65%{ -webkit-transform: rotate(210deg); }
-	66.66%{ -webkit-transform: rotate(240deg); }
-	74.99%{ -webkit-transform: rotate(240deg); }
-	75%{    -webkit-transform: rotate(270deg); }
-	83.32%{ -webkit-transform: rotate(270deg); }
-	83.33%{ -webkit-transform: rotate(300deg); }
-	91.65%{ -webkit-transform: rotate(300deg); }
-	91.66%{ -webkit-transform: rotate(330deg); }
-	100%{   -webkit-transform: rotate(330deg); }
+	from {-webkit-transform: rotate(0deg);}
+  	to {-webkit-transform: rotate(360deg);}
 }
 
 /*
