@@ -11,22 +11,16 @@ $.fn.listview = function( options ) {
 		var $this = $( this ),
 			parentID = $this.closest('.ui-page').attr('id')
 		
-		function data( type, defaultValue ) {
-			var attr = "data-" + type,
-				value = $this.attr( attr );
-			return value === undefined ? defaultValue : value;
-		}
-		
 		//split these to be able to reference o.theme
 		var o = $.extend({
-			theme: data( "theme", "f" )
+			theme: $this.data( "theme" ) || "f"
 		}, options );
 		o = $.extend({	
-			countTheme: data( "count-theme", o.theme ),
+			countTheme: $this.data( "count-theme" ) || o.theme,
 			headerTheme: "b",
-			groupingTheme: data( "grouping-theme", "b" ),
-			splitTheme: data( "split-theme", "b" ),
-			inset: data( "inset", "false" ) === "true"
+			groupingTheme: $this.data( "grouping-theme" ) || "b",
+			splitTheme: $this.data( "split-theme" ) || "b",
+			inset: $this.data( "inset" ) || false
 		}, o);
 		
 		//if it's a nested list, chunk it into ui-page items, recurse through them and call listview on each individual ul
@@ -35,12 +29,8 @@ $.fn.listview = function( options ) {
 				id = parentID + "&" + jQuery.mobile.subPageUrlKey  + "=listview-" + i,
 				parent = list.parent(),
 				title = parent.contents()[ 0 ].nodeValue,
-				theme = list.attr( "data-theme" ) !== undefined ?
-					list.attr( "data-theme" ) :
-					o.theme,
-				countTheme = list.attr( "data-count-theme" ) !== undefined ?
-					list.attr( "data-count-theme" ) :
-					o.countTheme;
+				theme = list.data( "theme" ) || o.theme,
+				countTheme = list.data( "count-theme" ) || o.countTheme;
 			
 			list.wrap( "<div class='ui-page'><div class='ui-content'></div></div>" )
 				.parent()
