@@ -275,7 +275,7 @@
 				sliders = '[data-role="slider"]',
 				selects = 'select';
 			
-			$formEls = $el.find( [checksradios, buttonInputs, textInputs, sliders, selects].join(',') );
+			$formEls = $el.find( [checksradios, buttonInputs, textInputs, sliders, selects].join(',') ).not('.ui-nojs');
 				
 			$formEls.filter(checksradios).customCheckboxRadio();
 			//custom buttons
