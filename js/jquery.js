@@ -11,10 +11,12 @@
  * Copyright 2010, The Dojo Foundation
  * Released under the MIT, BSD, and GPL Licenses.
  *
- * Date: Tue Sep 14 09:57:26 2010 -0400
+ * Date: Wed Sep 22 09:16:28 2010 -0400
  */
 (function( window, undefined ) {
 
+// Use the correct document accordingly with window argument (sandbox)
+var document = window.document;
 var jQuery = (function() {
 
 // Define a local copy of jQuery
@@ -29,28 +31,41 @@ var jQuery = function( selector, context ) {
 	// Map over the $ in case of overwrite
 	_$ = window.$,
 
-	// Use the correct document accordingly with window argument (sandbox)
-	//document = window.document,
-
 	// A central reference to the root jQuery(document)
 	rootjQuery,
 
 	// A simple way to check for HTML strings or ID strings
 	// (both of which we optimize for)
-	quickExpr = /^[^<]*(<[\w\W]+>)[^>]*$|^#([\w\-]+)$/,
+	quickExpr = /^(?:[^<]*(<[\w\W]+>)[^>]*$|#([\w-]+)$)/,
 
 	// Is it a simple selector
 	isSimple = /^.[^:#\[\.,]*$/,
 
 	// Check if a string has a non-whitespace character in it
 	rnotwhite = /\S/,
+	rwhite = /\s/,
 
 	// Used for trimming whitespace
 	trimLeft = /^\s+/,
 	trimRight = /\s+$/,
 
+	// Check for non-word characters
+	rnonword = /\W/,
+
 	// Match a standalone tag
 	rsingleTag = /^<(\w+)\s*\/?>(?:<\/\1>)?$/,
+
+	// JSON RegExp
+	rvalidchars = /^[\],:{}\s]*$/,
+	rvalidescape = /\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g,
+	rvalidtokens = /"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g,
+	rvalidbraces = /(?:^|:|,)(?:\s*\[)+/g,
+
+	// Useragent RegExp
+	rwebkit = /(webkit)[ \/]([\w.]+)/,
+	ropera = /(opera)(?:.*version)?[ \/]([\w.]+)/,
+	rmsie = /(msie) ([\w.]+)/,
+	rmozilla = /(mozilla)(?:.*? rv:([\w.]+))?/,
 
 	// Keep a UserAgent string for use with jQuery.browser
 	userAgent = navigator.userAgent,
@@ -156,7 +171,7 @@ jQuery.fn = jQuery.prototype = {
 				}
 
 			// HANDLE: $("TAG")
-			} else if ( !context && /^\w+$/.test( selector ) ) {
+			} else if ( !context && !rnonword.test( selector ) ) {
 				this.selector = selector;
 				this.context = document;
 				selector = document.getElementsByTagName( selector );
@@ -377,11 +392,20 @@ jQuery.extend({
 	
 	// Is the DOM ready to be used? Set to true once it occurs.
 	isReady: false,
+
+	// A counter to track how many items to wait for before
+	// the ready event fires. See #6781
+	readyWait: 1,
 	
 	// Handle when the DOM is ready
-	ready: function() {
+	ready: function( wait ) {
+		// A third-party is pushing the ready event forwards
+		if ( wait === true ) {
+			jQuery.readyWait--;
+		}
+
 		// Make sure that the DOM is not already loaded
-		if ( !jQuery.isReady ) {
+		if ( !jQuery.readyWait || (wait !== true && !jQuery.isReady) ) {
 			// Make sure body exists, at least, in case IE gets a little overzealous (ticket #5443).
 			if ( !document.body ) {
 				return setTimeout( jQuery.ready, 13 );
@@ -389,6 +413,11 @@ jQuery.extend({
 
 			// Remember that the DOM is ready
 			jQuery.isReady = true;
+
+			// If a normal DOM Ready event fired, decrement, and wait if need be
+			if ( wait !== true && --jQuery.readyWait > 0 ) {
+				return;
+			}
 
 			// If there are functions bound, to execute
 			if ( readyList ) {
@@ -515,9 +544,9 @@ jQuery.extend({
 		
 		// Make sure the incoming data is actual JSON
 		// Logic borrowed from http://json.org/json2.js
-		if ( /^[\],:{}\s]*$/.test(data.replace(/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g, "@")
-			.replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, "]")
-			.replace(/(?:^|:|,)(?:\s*\[)+/g, "")) ) {
+		if ( rvalidchars.test(data.replace(rvalidescape, "@")
+			.replace(rvalidtokens, "]")
+			.replace(rvalidbraces, "")) ) {
 
 			// Try to use the native JSON parser first
 			return window.JSON && window.JSON.parse ?
@@ -767,10 +796,10 @@ jQuery.extend({
 	uaMatch: function( ua ) {
 		ua = ua.toLowerCase();
 
-		var match = /(webkit)[ \/]([\w.]+)/.exec( ua ) ||
-			/(opera)(?:.*version)?[ \/]([\w.]+)/.exec( ua ) ||
-			/(msie) ([\w.]+)/.exec( ua ) ||
-			!/compatible/.test( ua ) && /(mozilla)(?:.*? rv:([\w.]+))?/.exec( ua ) ||
+		var match = rwebkit.exec( ua ) ||
+			ropera.exec( ua ) ||
+			rmsie.exec( ua ) ||
+			ua.indexOf("compatible") < 0 && rmozilla.exec( ua ) ||
 			[];
 
 		return { browser: match[1] || "", version: match[2] || "0" };
@@ -798,7 +827,7 @@ if ( indexOf ) {
 
 // Verify that \s matches non-breaking spaces
 // (IE fails on this test)
-if ( !/\s/.test( "\xA0" ) ) {
+if ( !rwhite.test( "\xA0" ) ) {
 	trimLeft = /^[\s\xA0]+/;
 	trimRight = /[\s\xA0]+$/;
 }
@@ -1000,7 +1029,9 @@ jQuery.props = {
 
 
 
-var windowData = {};
+var windowData = {},
+	rbrace = /^(?:\{.*\}|\[.*\])$/,
+	rdigit = /\d/;
 
 jQuery.extend({
 	cache: {},
@@ -1142,8 +1173,29 @@ jQuery.fn.extend({
 		if ( value === undefined ) {
 			var data = this.triggerHandler("getData" + parts[1] + "!", [parts[0]]);
 
+			// Try to fetch any internally stored data first
 			if ( data === undefined && this.length ) {
 				data = jQuery.data( this[0], key );
+
+				// If nothing was found internally, try to fetch any
+				// data from the HTML5 data-* attribute
+				if ( data === undefined && this[0].nodeType === 1 ) {
+					data = this[0].getAttribute( "data-" + key );
+
+					if ( typeof data === "string" ) {
+						try {
+							data = data === "true" ? true :
+								data === "false" ? false :
+								data === "null" ? null :
+								rdigit.test( data ) && !isNaN( data ) ? parseFloat( data ) :
+								rbrace.test( data ) ? jQuery.parseJSON( data ) :
+								data;
+						} catch( e ) {}
+
+					} else {
+						data = undefined;
+					}
+				}
 			}
 
 			return data === undefined && parts[1] ?
@@ -1229,7 +1281,7 @@ jQuery.fn.extend({
 		if ( data === undefined ) {
 			return jQuery.queue( this[0], type );
 		}
-		return this.each(function( i, elem ) {
+		return this.each(function( i ) {
 			var queue = jQuery.queue( this, type, data );
 
 			if ( type === "fx" && queue[0] !== "inprogress" ) {
@@ -1268,11 +1320,11 @@ jQuery.fn.extend({
 var rclass = /[\n\t]/g,
 	rspace = /\s+/,
 	rreturn = /\r/g,
-	rspecialurl = /href|src|style/,
-	rtype = /(button|input)/i,
-	rfocusable = /(button|input|object|select|textarea)/i,
-	rclickable = /^(a|area)$/i,
-	rradiocheck = /radio|checkbox/;
+	rspecialurl = /^(?:href|src|style)$/,
+	rtype = /^(?:button|input)$/i,
+	rfocusable = /^(?:button|input|object|select|textarea)$/i,
+	rclickable = /^a(?:rea)?$/i,
+	rradiocheck = /^(?:radio|checkbox)$/i;
 
 jQuery.fn.extend({
 	attr: function( name, value ) {
@@ -1606,10 +1658,6 @@ jQuery.extend({
 			// Non-existent attributes return null, we normalize to undefined
 			return attr === null ? undefined : attr;
 		}
-
-		// elem is actually elem.style ... set the style
-		// Using attr for specific style information is now deprecated. Use style instead.
-		return jQuery.style( elem, name, value );
 	}
 });
 
@@ -1617,10 +1665,12 @@ jQuery.extend({
 
 
 var rnamespaces = /\.(.*)$/,
+	rformElems = /^(?:textarea|input|select)$/i,
+	rperiod = /\./g,
+	rspace = / /g,
+	rescape = /[^\w\s.|`]/g,
 	fcleanup = function( nm ) {
-		return nm.replace(/[^\w\s\.\|`]/g, function( ch ) {
-			return "\\" + ch;
-		});
+		return nm.replace(rescape, "\\$&");
 	};
 
 /*
@@ -1955,7 +2005,7 @@ jQuery.event = {
 			jQuery.event.trigger( event, data, parent, true );
 
 		} else if ( !event.isDefaultPrevented() ) {
-			var target = event.target, old, targetType = type.replace(/\..*$/, ""),
+			var target = event.target, old, targetType = type.replace(rnamespaces, ""),
 				isClick = jQuery.nodeName(target, "a") && targetType === "click",
 				special = jQuery.event.special[ targetType ] || {};
 
@@ -2199,9 +2249,11 @@ jQuery.Event.prototype = {
 		// if preventDefault exists run it on the original event
 		if ( e.preventDefault ) {
 			e.preventDefault();
-		}
+
 		// otherwise set the returnValue property of the original event to false (IE)
-		e.returnValue = false;
+		} else {
+			e.returnValue = false;
+		}
 	},
 	stopPropagation: function() {
 		this.isPropagationStopped = returnTrue;
@@ -2311,9 +2363,7 @@ if ( !jQuery.support.submitBubbles ) {
 // change delegation, happens here so we have bind.
 if ( !jQuery.support.changeBubbles ) {
 
-	var formElems = /textarea|input|select/i,
-
-	changeFilters,
+	var changeFilters,
 
 	getVal = function( elem ) {
 		var type = elem.type, val = elem.value;
@@ -2338,7 +2388,7 @@ if ( !jQuery.support.changeBubbles ) {
 	testChange = function testChange( e ) {
 		var elem = e.target, data, val;
 
-		if ( !formElems.test( elem.nodeName ) || elem.readOnly ) {
+		if ( !rformElems.test( elem.nodeName ) || elem.readOnly ) {
 			return;
 		}
 
@@ -2402,13 +2452,13 @@ if ( !jQuery.support.changeBubbles ) {
 				jQuery.event.add( this, type + ".specialChange", changeFilters[type] );
 			}
 
-			return formElems.test( this.nodeName );
+			return rformElems.test( this.nodeName );
 		},
 
 		teardown: function( namespaces ) {
 			jQuery.event.remove( this, ".specialChange" );
 
-			return formElems.test( this.nodeName );
+			return rformElems.test( this.nodeName );
 		}
 	};
 
@@ -2687,7 +2737,7 @@ function liveHandler( event ) {
 }
 
 function liveConvert( type, selector ) {
-	return (type && type !== "*" ? type + "." : "") + selector.replace(/\./g, "`").replace(/ /g, "&");
+	return (type && type !== "*" ? type + "." : "") + selector.replace(rperiod, "`").replace(rspace, "&");
 }
 
 jQuery.each( ("blur focus focusin focusout load resize scroll unload click dblclick " +
@@ -4118,18 +4168,13 @@ function winnow( elements, qualifier, keep ) {
 
 var rinlinejQuery = / jQuery\d+="(?:\d+|null)"/g,
 	rleadingWhitespace = /^\s+/,
-	rxhtmlTag = /(<([\w:]+)[^>]*?)\/>/g,
-	rselfClosing = /^(?:area|br|col|embed|hr|img|input|link|meta|param)$/i,
+	rxhtmlTag = /<(?!area|br|col|embed|hr|img|input|link|meta|param)(([\w:]+)[^>]*)\/>/ig,
 	rtagName = /<([\w:]+)/,
 	rtbody = /<tbody/i,
 	rhtml = /<|&#?\w+;/,
-	rnocache = /<script|<object|<embed|<option|<style/i,
+	rnocache = /<(?:script|object|embed|option|style)/i,
 	rchecked = /checked\s*(?:[^=]|=\s*.checked.)/i,  // checked="checked" or checked (html5)
-	fcloseTag = function( all, front, tag ) {
-		return rselfClosing.test( tag ) ?
-			all :
-			front + "></" + tag + ">";
-	},
+	raction = /\=([^="'>\s]+\/)>/g,
 	wrapMap = {
 		option: [ 1, "<select multiple='multiple'>", "</select>" ],
 		legend: [ 1, "<fieldset>", "</fieldset>" ],
@@ -4323,7 +4368,7 @@ jQuery.fn.extend({
 
 				return jQuery.clean([html.replace(rinlinejQuery, "")
 					// Handle the case in IE 8 where action=/test/> self-closes a tag
-					.replace(/\=([^="'>\s]+\/)>/g, '="$1">')
+					.replace(raction, '="$1">')
 					.replace(rleadingWhitespace, "")], ownerDocument)[0];
 			} else {
 				return this.cloneNode(true);
@@ -4351,7 +4396,7 @@ jQuery.fn.extend({
 			(jQuery.support.leadingWhitespace || !rleadingWhitespace.test( value )) &&
 			!wrapMap[ (rtagName.exec( value ) || ["", ""])[1].toLowerCase() ] ) {
 
-			value = value.replace(rxhtmlTag, fcloseTag);
+			value = value.replace(rxhtmlTag, "<$1></$2>");
 
 			try {
 				for ( var i = 0, l = this.length; i < l; i++ ) {
@@ -4595,7 +4640,7 @@ jQuery.extend({
 
 			} else if ( typeof elem === "string" ) {
 				// Fix "XHTML"-style tags in all browsers
-				elem = elem.replace(rxhtmlTag, fcloseTag);
+				elem = elem.replace(rxhtmlTag, "<$1></$2>");
 
 				// Trim whitespace, otherwise indexOf won't work as expected
 				var tag = (rtagName.exec( elem ) || ["", ""])[1].toLowerCase(),
@@ -4722,179 +4767,113 @@ function evalScript( i, elem ) {
 
 
 
-// exclude the following css properties to add px
-var rexclude = /z-?index|font-?weight|opacity|zoom|line-?height/i,
-	ralpha = /alpha\([^)]*\)/,
+var ralpha = /alpha\([^)]*\)/,
 	ropacity = /opacity=([^)]*)/,
-	rfloat = /float/i,
 	rdashAlpha = /-([a-z])/ig,
 	rupper = /([A-Z])/g,
 	rnumpx = /^-?\d+(?:px)?$/i,
 	rnum = /^-?\d/,
 
-	cssShow = { position: "absolute", visibility: "hidden", display:"block" },
+	cssShow = { position: "absolute", visibility: "hidden", display: "block" },
 	cssWidth = [ "Left", "Right" ],
 	cssHeight = [ "Top", "Bottom" ],
+	curCSS,
 
 	// cache check for defaultView.getComputedStyle
 	getComputedStyle = document.defaultView && document.defaultView.getComputedStyle,
-	// normalize float css property
-	styleFloat = jQuery.support.cssFloat ? "cssFloat" : "styleFloat",
+
 	fcamelCase = function( all, letter ) {
 		return letter.toUpperCase();
 	};
 
 jQuery.fn.css = function( name, value ) {
 	return jQuery.access( this, name, value, true, function( elem, name, value ) {
-		if ( value === undefined ) {
-			return jQuery.curCSS( elem, name );
-		}
-		
-		if ( typeof value === "number" && !rexclude.test(name) ) {
-			value += "px";
-		}
-
-		jQuery.style( elem, name, value );
+		return value !== undefined ?
+			jQuery.style( elem, name, value ) :
+			jQuery.css( elem, name );
 	});
 };
 
 jQuery.extend({
-	style: function( elem, name, value ) {
-		// don't set styles on text and comment nodes
-		if ( !elem || elem.nodeType === 3 || elem.nodeType === 8 ) {
+	// Add in style property hooks for overriding the default
+	// behavior of getting and setting a style property
+	cssHooks: {
+		opacity: {
+			get: function( elem ) {
+				// We should always get a number back from opacity
+				var ret = curCSS( elem, "opacity", "opacity" );
+				return ret === "" ? "1" : ret;
+			}
+		}
+	},
+
+	// Exclude the following css properties to add px
+	cssNumber: {
+		"zIndex": true,
+		"fontWeight": true,
+		"opacity": true,
+		"zoom": true,
+		"lineHeight": true
+	},
+
+	// Add in properties whose names you wish to fix before
+	// setting or getting the value
+	cssProps: {
+		// normalize float css property
+		"float": jQuery.support.cssFloat ? "cssFloat" : "styleFloat"
+	},
+
+	// Get and set the style property on a DOM Node
+	style: function( elem, name, value, extra ) {
+		// Don't set styles on text and comment nodes
+		if ( !elem || elem.nodeType === 3 || elem.nodeType === 8 || !elem.style ) {
 			return undefined;
 		}
 
-		// ignore negative width and height values #1599
-		if ( (name === "width" || name === "height") && parseFloat(value) < 0 ) {
-			value = undefined;
-		}
+		// Make sure that we're working with the right name
+		var ret, origName = jQuery.camelCase( name ),
+			style = elem.style, hooks = jQuery.cssHooks[ origName ];
 
-		var style = elem.style || elem, set = value !== undefined;
+		name = jQuery.cssProps[ origName ] || origName;
 
-		// IE uses filters for opacity
-		if ( !jQuery.support.opacity && name === "opacity" && style.filter ) {
-			if ( set ) {
-				// IE has trouble with opacity if it does not have layout
-				// Force it by setting the zoom level
-				style.zoom = 1;
-
-				// Set the alpha filter to set the opacity
-				var opacity = parseInt( value, 10 ) + "" === "NaN" ? "" : "alpha(opacity=" + value * 100 + ")";
-				var filter = style.filter || jQuery.curCSS( elem, "filter" ) || "";
-				style.filter = ralpha.test(filter) ? filter.replace(ralpha, opacity) : opacity;
+		// Check if we're setting a value
+		if ( value !== undefined ) {
+			// If a number was passed in, add 'px' to the (except for certain CSS properties)
+			if ( typeof value === "number" && !jQuery.cssNumber[ origName ] ) {
+				value += "px";
 			}
 
-			return style.filter && style.filter.indexOf("opacity=") >= 0 ?
-				(parseFloat( ropacity.exec(style.filter)[1] ) / 100) + "":
-				"";
+			// If a hook was provided, use that value, otherwise just set the specified value
+			if ( !hooks || !("set" in hooks) || (value = hooks.set( elem, value )) !== undefined ) {
+				style[ name ] = value;
+			}
+
+		} else {
+			// If a hook was provided get the non-computed value from there
+			if ( hooks && "get" in hooks && (ret = hooks.get( elem, false, extra )) !== undefined ) {
+				return ret;
+			}
+
+			// Otherwise just get the value from the style object
+			return style[ name ];
 		}
-
-		// Make sure we're using the right name for getting the float value
-		if ( rfloat.test( name ) ) {
-			name = styleFloat;
-		}
-
-		name = name.replace(rdashAlpha, fcamelCase);
-
-		if ( set ) {
-			style[ name ] = value;
-		}
-
-		return style[ name ];
 	},
 
-	css: function( elem, name, force, extra ) {
-		if ( name === "width" || name === "height" ) {
-			if ( elem.offsetWidth !== 0 ) {
-				val = getWH( elem, name, extra );
+	css: function( elem, name, extra ) {
+		// Make sure that we're working with the right name
+		var ret, origName = jQuery.camelCase( name ),
+			hooks = jQuery.cssHooks[ origName ];
 
-			} else {
-				jQuery.swap( elem, cssShow, function() {
-					val = getWH( elem, name, extra );
-				});
-			}
+		name = jQuery.cssProps[ origName ] || origName;
 
-			return Math.max(0, Math.round(val));
+		// If a hook was provided get the computed value from there
+		if ( hooks && "get" in hooks && (ret = hooks.get( elem, true, extra )) !== undefined ) {
+			return ret;
+
+		// Otherwise, if a way to get the computed value exists, use that
+		} else if ( curCSS ) {
+			return curCSS( elem, name, origName );
 		}
-
-		return jQuery.curCSS( elem, name, force );
-	},
-
-	curCSS: function( elem, name, force ) {
-		var ret, style = elem.style, filter;
-
-		// IE uses filters for opacity
-		if ( !jQuery.support.opacity && name === "opacity" && elem.currentStyle ) {
-			ret = ropacity.test(elem.currentStyle.filter || "") ?
-				(parseFloat(RegExp.$1) / 100) + "" :
-				"";
-
-			return ret === "" ?
-				"1" :
-				ret;
-		}
-
-		// Make sure we're using the right name for getting the float value
-		if ( rfloat.test( name ) ) {
-			name = styleFloat;
-		}
-
-		if ( !force && style && style[ name ] ) {
-			ret = style[ name ];
-
-		} else if ( getComputedStyle ) {
-
-			// Only "float" is needed here
-			if ( rfloat.test( name ) ) {
-				name = "float";
-			}
-
-			name = name.replace( rupper, "-$1" ).toLowerCase();
-
-			var defaultView = elem.ownerDocument.defaultView;
-
-			if ( !defaultView ) {
-				return null;
-			}
-
-			var computedStyle = defaultView.getComputedStyle( elem, null );
-
-			if ( computedStyle ) {
-				ret = computedStyle.getPropertyValue( name );
-			}
-
-			// We should always get a number back from opacity
-			if ( name === "opacity" && ret === "" ) {
-				ret = "1";
-			}
-
-		} else if ( elem.currentStyle ) {
-			var camelCase = name.replace(rdashAlpha, fcamelCase);
-
-			ret = elem.currentStyle[ name ] || elem.currentStyle[ camelCase ];
-
-			// From the awesome hack by Dean Edwards
-			// http://erik.eae.net/archives/2007/07/27/18.54.15/#comment-102291
-
-			// If we're not dealing with a regular pixel number
-			// but a number that has a weird ending, we need to convert it to pixels
-			if ( !rnumpx.test( ret ) && rnum.test( ret ) ) {
-				// Remember the original values
-				var left = style.left, rsLeft = elem.runtimeStyle.left;
-
-				// Put in the new values to get a computed value out
-				elem.runtimeStyle.left = elem.currentStyle.left;
-				style.left = camelCase === "fontSize" ? "1em" : (ret || 0);
-				ret = style.pixelLeft + "px";
-
-				// Revert the changed values
-				style.left = left;
-				elem.runtimeStyle.left = rsLeft;
-			}
-		}
-
-		return ret;
 	},
 
 	// A method for quickly swapping in/out CSS properties to get correct calculations
@@ -4913,8 +4892,125 @@ jQuery.extend({
 		for ( name in options ) {
 			elem.style[ name ] = old[ name ];
 		}
+	},
+
+	camelCase: function( string ) {
+		return string.replace( rdashAlpha, fcamelCase );
 	}
 });
+
+// DEPRECATED, Use jQuery.css() instead
+jQuery.curCSS = jQuery.css;
+
+jQuery.each(["height", "width"], function( i, name ) {
+	jQuery.cssHooks[ name ] = {
+		get: function( elem, computed, extra ) {
+			var val;
+
+			if ( computed ) {
+				if ( elem.offsetWidth !== 0 ) {
+					val = getWH( elem, name, extra );
+
+				} else {
+					jQuery.swap( elem, cssShow, function() {
+						val = getWH( elem, name, extra );
+					});
+				}
+
+				return val + "px";
+			}
+		},
+
+		set: function( elem, value ) {
+			if ( rnumpx.test( value ) ) {
+				// ignore negative width and height values #1599
+				value = parseFloat(value);
+
+				if ( value >= 0 ) {
+					return value + "px";
+				}
+
+			} else {
+				return value;
+			}
+		}
+	};
+});
+
+if ( !jQuery.support.opacity ) {
+	jQuery.cssHooks.opacity = {
+		get: function( elem, computed ) {
+			// IE uses filters for opacity
+			return ropacity.test((computed ? elem.currentStyle.filter : elem.style.filter) || "") ?
+				(parseFloat(RegExp.$1) / 100) + "" :
+				"1";
+		},
+
+		set: function( elem, value ) {
+			var style = elem.style;
+
+			// IE has trouble with opacity if it does not have layout
+			// Force it by setting the zoom level
+			style.zoom = 1;
+
+			// Set the alpha filter to set the opacity
+			var opacity = parseInt( value, 10 ) + "" === "NaN" ?
+				"" :
+				"alpha(opacity=" + value * 100 + ")";
+
+			var filter = style.filter || elem.currentStyle.filter || "";
+
+			style.filter = ralpha.test(filter) ?
+				filter.replace(ralpha, opacity) :
+				opacity;
+		}
+	};
+}
+
+if ( getComputedStyle ) {
+	curCSS = function( elem, newName, name ) {
+		var ret, defaultView, computedStyle;
+
+		name = name.replace( rupper, "-$1" ).toLowerCase();
+
+		if ( !(defaultView = elem.ownerDocument.defaultView) ) {
+			return undefined;
+		}
+
+		if ( (computedStyle = defaultView.getComputedStyle( elem, null )) ) {
+			ret = computedStyle.getPropertyValue( name );
+		}
+
+		return ret;
+	};
+
+} else if ( document.documentElement.currentStyle ) {
+	curCSS = function( elem, name ) {
+		var left, rsLeft, ret = elem.currentStyle[ name ], style = elem.style;
+
+		// From the awesome hack by Dean Edwards
+		// http://erik.eae.net/archives/2007/07/27/18.54.15/#comment-102291
+
+		// If we're not dealing with a regular pixel number
+		// but a number that has a weird ending, we need to convert it to pixels
+		if ( !rnumpx.test( ret ) && rnum.test( ret ) ) {
+			// Remember the original values
+			left = style.left;
+			rsLeft = elem.runtimeStyle.left;
+
+			// Put in the new values to get a computed value out
+			elem.runtimeStyle.left = elem.currentStyle.left;
+			style.left = name === "fontSize" ? "1em" : (ret || 0);
+			ret = style.pixelLeft + "px";
+
+			// Revert the changed values
+			style.left = left;
+			elem.runtimeStyle.left = rsLeft;
+		}
+
+		return ret;
+	};
+}
 
 function getWH( elem, name, extra ) {
 	var which = name === "width" ? cssWidth : cssHeight,
@@ -4926,14 +5022,14 @@ function getWH( elem, name, extra ) {
 
 	jQuery.each( which, function() {
 		if ( !extra ) {
-			val -= parseFloat(jQuery.curCSS( elem, "padding" + this, true)) || 0;
+			val -= parseFloat(jQuery.css( elem, "padding" + this )) || 0;
 		}
 
 		if ( extra === "margin" ) {
-			val += parseFloat(jQuery.curCSS( elem, "margin" + this, true)) || 0;
+			val += parseFloat(jQuery.css( elem, "margin" + this )) || 0;
 
 		} else {
-			val -= parseFloat(jQuery.curCSS( elem, "border" + this + "Width", true)) || 0;
+			val -= parseFloat(jQuery.css( elem, "border" + this + "Width" )) || 0;
 		}
 	});
 
@@ -4949,7 +5045,7 @@ if ( jQuery.expr && jQuery.expr.filters ) {
 			true :
 			width > 0 && height > 0 && !skip ?
 				false :
-				jQuery.curCSS(elem, "display") === "none";
+				(elem.style.display || jQuery.css( elem, "display" )) === "none";
 	};
 
 	jQuery.expr.filters.visible = function( elem ) {
@@ -4961,12 +5057,13 @@ if ( jQuery.expr && jQuery.expr.filters ) {
 
 
 var jsc = jQuery.now(),
-	rscript = /<script(.|\s)*?\/script>/gi,
-	rselectTextarea = /select|textarea/i,
-	rinput = /color|date|datetime|email|hidden|month|number|password|range|search|tel|text|time|url|week/i,
+	rscript = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,
+	rselectTextarea = /^(?:select|textarea)/i,
+	rinput = /^(?:color|date|datetime|email|hidden|month|number|password|range|search|tel|text|time|url|week)$/i,
+	rbracket = /\[\]$/,
 	jsre = /\=\?(&|$)/,
 	rquery = /\?/,
-	rts = /(\?|&)_=.*?(&|$)/,
+	rts = /([?&])_=[^&]*(&?)/,
 	rurl = /^(\w+:)?\/\/([^\/?#]+)/,
 	r20 = /%20/g,
 
@@ -5021,7 +5118,7 @@ jQuery.fn.extend({
 					// See if a selector was specified
 					self.html( selector ?
 						// Create a dummy div to hold the results
-						jQuery("<div />")
+						jQuery("<div>")
 							// inject the contents of the document in, removing the scripts
 							// to avoid any 'Permission Denied' errors in IE
 							.append(res.responseText.replace(rscript, ""))
@@ -5502,7 +5599,7 @@ function buildParams( prefix, obj, traditional, add ) {
 	if ( jQuery.isArray(obj) ) {
 		// Serialize array item.
 		jQuery.each( obj, function( i, v ) {
-			if ( traditional || /\[\]$/.test( prefix ) ) {
+			if ( traditional || rbracket.test( prefix ) ) {
 				// Treat each array item as a scalar.
 				add( prefix, v );
 
@@ -5589,9 +5686,8 @@ jQuery.extend( jQuery.ajax, {
 		try {
 			// IE error sometimes returns 1223 when it should be 204 so treat it as success, see #1450
 			return !xhr.status && location.protocol === "file:" ||
-				// Opera returns 0 when status is 304
-				( xhr.status >= 200 && xhr.status < 300 ) ||
-				xhr.status === 304 || xhr.status === 1223 || xhr.status === 0;
+				xhr.status >= 200 && xhr.status < 300 ||
+				xhr.status === 304 || xhr.status === 1223;
 		} catch(e) {}
 
 		return false;
@@ -5610,8 +5706,7 @@ jQuery.extend( jQuery.ajax, {
 			jQuery.ajax.etag[url] = etag;
 		}
 
-		// Opera returns 0 when status is 304
-		return xhr.status === 304 || xhr.status === 0;
+		return xhr.status === 304;
 	},
 
 	httpData: function( xhr, type, s ) {
@@ -5656,7 +5751,7 @@ jQuery.extend( jQuery.ajax );
 
 
 var elemdisplay = {},
-	rfxtypes = /toggle|show|hide/,
+	rfxtypes = /^(?:toggle|show|hide)$/,
 	rfxnum = /^([+\-]=)?([\d+.\-]+)(.*)$/,
 	timerId,
 	fxAttrs = [
@@ -5679,14 +5774,14 @@ jQuery.fn.extend({
 
 				this[i].style.display = old || "";
 
-				if ( jQuery.css(this[i], "display") === "none" ) {
+				if ( jQuery.css( this[i], "display" ) === "none" ) {
 					var nodeName = this[i].nodeName, display;
 
 					if ( elemdisplay[ nodeName ] ) {
 						display = elemdisplay[ nodeName ];
 
 					} else {
-						var elem = jQuery("<" + nodeName + " />").appendTo("body");
+						var elem = jQuery("<" + nodeName + ">").appendTo("body");
 
 						display = elem.css("display");
 
@@ -5721,7 +5816,7 @@ jQuery.fn.extend({
 			for ( var i = 0, l = this.length; i < l; i++ ) {
 				var old = jQuery.data(this[i], "olddisplay");
 				if ( !old && old !== "none" ) {
-					jQuery.data(this[i], "olddisplay", jQuery.css(this[i], "display"));
+					jQuery.data( this[i], "olddisplay", jQuery.css( this[i], "display" ) );
 				}
 			}
 
@@ -5775,7 +5870,7 @@ jQuery.fn.extend({
 				self = this;
 
 			for ( p in prop ) {
-				var name = p.replace(rdashAlpha, fcamelCase);
+				var name = jQuery.camelCase( p );
 
 				if ( p !== name ) {
 					prop[ name ] = prop[ p ];
@@ -5789,7 +5884,7 @@ jQuery.fn.extend({
 
 				if ( ( p === "height" || p === "width" ) && this.style ) {
 					// Store display property
-					opt.display = jQuery.css(this, "display");
+					opt.display = this.style.display;
 
 					// Make sure that nothing sneaks out
 					opt.overflow = this.style.overflow;
@@ -5966,13 +6061,13 @@ jQuery.fx.prototype = {
 	},
 
 	// Get the current size
-	cur: function( force ) {
+	cur: function() {
 		if ( this.elem[this.prop] != null && (!this.elem.style || this.elem.style[this.prop] == null) ) {
 			return this.elem[ this.prop ];
 		}
 
-		var r = parseFloat(jQuery.css(this.elem, this.prop, force));
-		return r && r > -10000 ? r : parseFloat(jQuery.curCSS(this.elem, this.prop)) || 0;
+		var r = parseFloat( jQuery.css( this.elem, this.prop ) );
+		return r && r > -10000 ? r : 0;
 	},
 
 	// Start an animation from one number to another
@@ -6047,7 +6142,7 @@ jQuery.fx.prototype = {
 					var old = jQuery.data(this.elem, "olddisplay");
 					this.elem.style.display = old ? old : this.options.display;
 
-					if ( jQuery.css(this.elem, "display") === "none" ) {
+					if ( jQuery.css( this.elem, "display" ) === "none" ) {
 						this.elem.style.display = "block";
 					}
 				}
@@ -6060,7 +6155,7 @@ jQuery.fx.prototype = {
 				// Reset the properties, if the item has been hidden or shown
 				if ( this.options.hide || this.options.show ) {
 					for ( var p in this.options.curAnim ) {
-						jQuery.style(this.elem, p, this.options.orig[p]);
+						jQuery.style( this.elem, p, this.options.orig[p] );
 					}
 				}
 
@@ -6117,7 +6212,7 @@ jQuery.extend( jQuery.fx, {
 
 	step: {
 		opacity: function( fx ) {
-			jQuery.style(fx.elem, "opacity", fx.now);
+			jQuery.style( fx.elem, "opacity", fx.now );
 		},
 
 		_default: function( fx ) {
@@ -6140,6 +6235,9 @@ if ( jQuery.expr && jQuery.expr.filters ) {
 
 
 
+
+var rtable = /^t(?:able|d|h)$/i,
+	rroot = /^(?:body|html)$/i;
 
 if ( "getBoundingClientRect" in document.documentElement ) {
 	jQuery.fn.offset = function( options ) {
@@ -6213,7 +6311,7 @@ if ( "getBoundingClientRect" in document.documentElement ) {
 				top  += elem.offsetTop;
 				left += elem.offsetLeft;
 
-				if ( jQuery.offset.doesNotAddBorder && !(jQuery.offset.doesAddBorderForTableAndCells && /^t(able|d|h)$/i.test(elem.nodeName)) ) {
+				if ( jQuery.offset.doesNotAddBorder && !(jQuery.offset.doesAddBorderForTableAndCells && rtable.test(elem.nodeName)) ) {
 					top  += parseFloat( computedStyle.borderTopWidth  ) || 0;
 					left += parseFloat( computedStyle.borderLeftWidth ) || 0;
 				}
@@ -6246,7 +6344,7 @@ if ( "getBoundingClientRect" in document.documentElement ) {
 
 jQuery.offset = {
 	initialize: function() {
-		var body = document.body, container = document.createElement("div"), innerDiv, checkDiv, table, td, bodyMarginTop = parseFloat( jQuery.curCSS(body, "marginTop", true) ) || 0,
+		var body = document.body, container = document.createElement("div"), innerDiv, checkDiv, table, td, bodyMarginTop = parseFloat( jQuery.css(body, "marginTop") ) || 0,
 			html = "<div style='position:absolute;top:0;left:0;margin:0;border:5px solid #000;padding:0;width:1px;height:1px;'><div></div></div><table style='position:absolute;top:0;left:0;margin:0;border:5px solid #000;padding:0;width:1px;height:1px;' cellpadding='0' cellspacing='0'><tr><td></td></tr></table>";
 
 		jQuery.extend( container.style, { position: "absolute", top: 0, left: 0, margin: 0, border: 0, width: "1px", height: "1px", visibility: "hidden" } );
@@ -6285,25 +6383,25 @@ jQuery.offset = {
 		jQuery.offset.initialize();
 
 		if ( jQuery.offset.doesNotIncludeMarginInBodyOffset ) {
-			top  += parseFloat( jQuery.curCSS(body, "marginTop",  true) ) || 0;
-			left += parseFloat( jQuery.curCSS(body, "marginLeft", true) ) || 0;
+			top  += parseFloat( jQuery.css(body, "marginTop") ) || 0;
+			left += parseFloat( jQuery.css(body, "marginLeft") ) || 0;
 		}
 
 		return { top: top, left: left };
 	},
 	
 	setOffset: function( elem, options, i ) {
-		var position = jQuery.curCSS( elem, "position" );
+		var position = jQuery.css( elem, "position" );
 
 		// set position first, in-case top/left are set even on static elem
 		if ( position === "static" ) {
 			elem.style.position = "relative";
 		}
 
-		var curElem    = jQuery( elem ),
-			curOffset  = curElem.offset(),
-			curCSSTop  = jQuery.curCSS( elem, "top", true ),
-			curCSSLeft = jQuery.curCSS( elem, "left", true ),
+		var curElem = jQuery( elem ),
+			curOffset = curElem.offset(),
+			curCSSTop = jQuery.css( elem, "top" ),
+			curCSSLeft = jQuery.css( elem, "left" ),
 			calculatePosition = (position === "absolute" && jQuery.inArray('auto', [curCSSTop, curCSSLeft]) > -1),
 			props = {}, curPosition = {}, curTop, curLeft;
 
@@ -6348,17 +6446,17 @@ jQuery.fn.extend({
 
 		// Get correct offsets
 		offset       = this.offset(),
-		parentOffset = /^body|html$/i.test(offsetParent[0].nodeName) ? { top: 0, left: 0 } : offsetParent.offset();
+		parentOffset = rroot.test(offsetParent[0].nodeName) ? { top: 0, left: 0 } : offsetParent.offset();
 
 		// Subtract element margins
 		// note: when an element has margin: auto the offsetLeft and marginLeft
 		// are the same in Safari causing offset.left to incorrectly be 0
-		offset.top  -= parseFloat( jQuery.curCSS(elem, "marginTop",  true) ) || 0;
-		offset.left -= parseFloat( jQuery.curCSS(elem, "marginLeft", true) ) || 0;
+		offset.top  -= parseFloat( jQuery.css(elem, "marginTop") ) || 0;
+		offset.left -= parseFloat( jQuery.css(elem, "marginLeft") ) || 0;
 
 		// Add offsetParent borders
-		parentOffset.top  += parseFloat( jQuery.curCSS(offsetParent[0], "borderTopWidth",  true) ) || 0;
-		parentOffset.left += parseFloat( jQuery.curCSS(offsetParent[0], "borderLeftWidth", true) ) || 0;
+		parentOffset.top  += parseFloat( jQuery.css(offsetParent[0], "borderTopWidth") ) || 0;
+		parentOffset.left += parseFloat( jQuery.css(offsetParent[0], "borderLeftWidth") ) || 0;
 
 		// Subtract the two offsets
 		return {
@@ -6370,7 +6468,7 @@ jQuery.fn.extend({
 	offsetParent: function() {
 		return this.map(function() {
 			var offsetParent = this.offsetParent || document.body;
-			while ( offsetParent && (!/^body|html$/i.test(offsetParent.nodeName) && jQuery.css(offsetParent, "position") === "static") ) {
+			while ( offsetParent && (!rroot.test(offsetParent.nodeName) && jQuery.css(offsetParent, "position") === "static") ) {
 				offsetParent = offsetParent.offsetParent;
 			}
 			return offsetParent;
@@ -6436,14 +6534,14 @@ jQuery.each([ "Height", "Width" ], function( i, name ) {
 	// innerHeight and innerWidth
 	jQuery.fn["inner" + name] = function() {
 		return this[0] ?
-			jQuery.css( this[0], type, false, "padding" ) :
+			parseFloat( jQuery.css( this[0], type, "padding" ) ) :
 			null;
 	};
 
 	// outerHeight and outerWidth
 	jQuery.fn["outer" + name] = function( margin ) {
 		return this[0] ?
-			jQuery.css( this[0], type, false, margin ? "margin" : "border" ) :
+			parseFloat( jQuery.css( this[0], type, margin ? "margin" : "border" ) ) :
 			null;
 	};
 
@@ -6478,7 +6576,7 @@ jQuery.each([ "Height", "Width" ], function( i, name ) {
 				// Get or set width or height on the element
 				size === undefined ?
 					// Get width or height on the element
-					jQuery.css( elem, type ) :
+					parseFloat( jQuery.css( elem, type ) ) :
 
 					// Set the width or height on the element (default to pixels if value is unitless)
 					this.css( type, typeof size === "string" ? size : size + "px" );
