@@ -141,8 +141,8 @@ $.event.special.swipe = {
 						$this.unbind( touchMoveEvent, moveHandler );
 						if ( start && stop ) {
 							if ( stop.time - start.time < 1000 && 
-									Math.abs( start.coords[0] - stop.coords[0]) > 180 &&
-									Math.abs( start.coords[1] - stop.coords[1]) < 80 ) {
+									Math.abs( start.coords[0] - stop.coords[0]) > 30 &&
+									Math.abs( start.coords[1] - stop.coords[1]) < 20 ) {
 								start.origin
 								.trigger( "swipe" )
 								.trigger( start.coords[0] > stop.coords[0] ? "swipeleft" : "swiperight" );
