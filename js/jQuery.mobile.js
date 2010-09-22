@@ -218,8 +218,12 @@
 	//add mobile, loading classes to doc
 	$html.addClass('ui-mobile');
 	
-	//insert mobile meta (any other metas needed? webapp? iPhone icon? etc)
-	$head.append('<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />');
+	//insert mobile meta - these will need to be configurable somehow.
+	$head.append('<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />'+
+		'<link rel="apple-touch-icon" href="images/homeicon.png" />'+
+		'<link rel="apple-touch-startup-image" href="images/startscreen.png" />'+
+		'<meta name="apple-mobile-web-app-capable" content="yes" />' +
+        '<meta name="apple-mobile-web-app-status-bar-style" content="default" />');
 	
 	//potential (probably incomplete) fallback to workaround lack of animation callbacks. 
 	//should this be extended into a full special event?
