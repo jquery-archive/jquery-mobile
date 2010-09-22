@@ -56,6 +56,10 @@ $.event.special.tap = {
 		
 		$this
 			.bind( touchStartEvent, function( event ) {
+				if ( event.which && event.which !== 1 ) {
+					return;
+				}
+				
 				var held = false,
 					moved = false,
 					touching = true,
