@@ -36,7 +36,11 @@ jQuery.fn.customTextInput = function(options){
 			
 		//autogrow	
 		if(input.is('textarea')){
-			input.expandable();
+			input.keydown(function(){
+				if( input[0].offsetHeight < input[0].scrollHeight ){
+					input.css({height: input[0].scrollHeight + 10 });
+				}
+			})
 		}	
 	});
 };

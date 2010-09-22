@@ -8,7 +8,6 @@ $elements = array(
 	'jQuery.mobile.clickable.js',
 	'jQuery.mobile.fixHeaderFooter.js',
 	'jQuery.mobile.forms.checkboxradio.js',
-	'jQuery.mobile.forms.expandable.js',
 	'jQuery.mobile.forms.textinput.js',
 	'jQuery.mobile.forms.select.js',
 	'jQuery.mobile.forms.ajaxform.js',
