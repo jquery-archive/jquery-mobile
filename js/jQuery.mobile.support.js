@@ -6,7 +6,7 @@ Possible additions:
 
 $.extend( $.support, {
 	orientation: "orientation" in window,
-	touch: "ontouchmove" in document,
+	touch: "ontouchend" in document,
 	WebKitAnimationEvent: typeof WebKitTransitionEvent === "object",
 	pushState: !!history.pushState
 });
