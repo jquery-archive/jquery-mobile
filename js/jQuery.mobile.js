@@ -289,7 +289,7 @@
 			//sliders
 			$formEls.filter(sliders).slider();
 			//selects
-			$formEls.filter(selects).customSelect();
+			$formEls.filter(selects).not('[data-role="slider"]').customSelect();
 			
 			//vertical controlgroups
 			$dataEls.filter('[data-role="controlgroup"]:not([data-type="horizontal"])').controlgroup();
