@@ -94,13 +94,13 @@ $.fixedToolbars = (function(){
 		.bind('scrollstart',function(){
 			if(currentstate == 'overlay'){
 				showAfterScroll = true;
+				$.fixedToolbars.hide(true);
 			}
-			$.fixedToolbars.hide(true);
 		})
 		.bind('scrollstop',function(){
 			if(showAfterScroll){
-				$.fixedToolbars.show();
 				showAfterScroll = false;
+				$.fixedToolbars.show();
 			}
 		});
 	});
