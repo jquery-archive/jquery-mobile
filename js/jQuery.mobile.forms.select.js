@@ -88,6 +88,7 @@ $.fn.customSelect = function(options){
 				'aria-haspopup': 'true',
 				'aria-owns': menuId
 			})
+			// FIXME why mousedown? doesn't seem to work on desktop browsers
 			.mousedown(function(){
 				select.trigger('showmenu');
 				return false;
