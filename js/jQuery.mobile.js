@@ -291,7 +291,7 @@
 			/*temporary datepicker workaround */
 			$formEls.filter(dateInputs).hide().after( $('<div />').datepicker() );
 			
-			$('.ui-datepicker').addClass('ui-shadow');
+			$('.ui-datepicker');//.addClass('ui-shadow');
 			$('.ui-datepicker-header').addClass('ui-body-c ui-corner-top').removeClass('ui-corner-all');
 			$('.ui-datepicker-prev').buttonMarkup({iconPos: 'notext', icon: 'arrow-l', shadow: true, corners: true});
 			$('.ui-datepicker-next').buttonMarkup({iconPos: 'notext', icon: 'arrow-r', shadow: true, corners: true});
