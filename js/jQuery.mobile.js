@@ -275,17 +275,32 @@
 			//form elements
 			var checksradios = 'input[type=radio],input[type=checkbox]',
 				buttonInputs = 'button, input[type=submit], input[type=reset], input[type=image]',
-				textInputs = 'input[type=text],input[type=number],input[type=password],textarea',
+				textInputs = 'input[type=text],input[type=number],input[type=date],input[type=password],textarea',
+				dateInputs = 'input[type=date]',
 				sliders = '[data-role="slider"]',
 				selects = 'select';
 			
-			$formEls = $el.find( [checksradios, buttonInputs, textInputs, sliders, selects].join(',') ).not('.ui-nojs');
+			$formEls = $el.find( [checksradios, buttonInputs, textInputs, dateInputs, sliders, selects].join(',') ).not('.ui-nojs');
 				
 			$formEls.filter(checksradios).customCheckboxRadio();
 			//custom buttons
 			$formEls.filter(buttonInputs).customButton();
 			//custom text inputs
 			$formEls.filter(textInputs).customTextInput();
+			
+			/*temporary datepicker workaround */
+			$formEls.filter(dateInputs).hide().after( $('<div />').datepicker() );
+			
+			$('.ui-datepicker').addClass('ui-shadow');
+			$('.ui-datepicker-header').addClass('ui-body-c ui-corner-top').removeClass('ui-corner-all');
+			$('.ui-datepicker-prev').buttonMarkup({iconPos: 'notext', icon: 'arrow-l', shadow: true, corners: true});
+			$('.ui-datepicker-next').buttonMarkup({iconPos: 'notext', icon: 'arrow-r', shadow: true, corners: true});
+			$('.ui-datepicker-calendar thead').remove();
+			$('.ui-datepicker-calendar td').addClass('ui-btn-up-c');
+			$('.ui-datepicker-calendar a').buttonMarkup({corners: false, shadow: false});
+			/* //temporary datepicker workaround */
+			
+			
 			//sliders
 			$formEls.filter(sliders).slider();
 			//selects
