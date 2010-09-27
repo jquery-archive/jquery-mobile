@@ -243,7 +243,9 @@
 	function mobilize($el){	
 		//to-do: make sure this only runs one time on a page (or maybe per component)
 		return $el.not('[data-mobilized]').each(function(){	
-			 
+
+			var $el = $(this);
+
 			//hide no-js content
 			$el.find('[data-role="nojs"]').addClass('ui-nojs');	
 			
