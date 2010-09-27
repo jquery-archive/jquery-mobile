@@ -294,6 +294,7 @@
 			$('.ui-datepicker-prev').buttonMarkup({iconPos: 'notext', icon: 'arrow-l', shadow: true, corners: true});
 			$('.ui-datepicker-next').buttonMarkup({iconPos: 'notext', icon: 'arrow-r', shadow: true, corners: true});
 			$('.ui-datepicker-calendar thead').remove();
+			$('.ui-btn-text span').attr('class','');
 			$('.ui-datepicker-calendar td').addClass('ui-btn-up-c');
 			$('.ui-datepicker-calendar a').buttonMarkup({corners: false, shadow: false});
 			/* //temporary datepicker workaround */
