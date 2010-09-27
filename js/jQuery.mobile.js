@@ -247,7 +247,24 @@
 			var $el = $(this);
 
 			//hide no-js content
-			$el.find('[data-role="nojs"]').addClass('ui-nojs');	
+			$el.find('[data-role="nojs"]').addClass('ui-nojs');
+			
+			$el.find('input[type=radio],input[type=checkbox]').customCheckboxRadio();
+			$el.find('button, input[type=submit], input[type=reset], input[type=image]').customButton();
+			$el.find('input[type=text],input[type=number],input[type=password],textarea').customTextInput();
+			$el.find("input, select").filter('[data-role="slider"]').slider();
+			$el.find('select').not('[data-role="slider"]').customSelect();
+			
+			/*temporary datepicker workaround */
+			$el.find('input[type=date]').hide().after( $('<div />').datepicker() );
+			$('.ui-datepicker-header').addClass('ui-body-c ui-corner-top').removeClass('ui-corner-all');
+			$('.ui-datepicker-prev').buttonMarkup({iconPos: 'notext', icon: 'arrow-l', shadow: true, corners: true});
+			$('.ui-datepicker-next').buttonMarkup({iconPos: 'notext', icon: 'arrow-r', shadow: true, corners: true});
+			$('.ui-datepicker-calendar thead').remove();
+			$('.ui-datepicker-calendar .ui-btn-text span').attr('class','');
+			$('.ui-datepicker-calendar td').addClass('ui-btn-up-c');
+			$('.ui-datepicker-calendar a').buttonMarkup({corners: false, shadow: false});
+			/* //temporary datepicker workaround */
 			
 			//pre-find data els
 			var $dataEls = $el.find('[data-role]').andSelf().each(function() {
@@ -268,51 +285,21 @@
 				case 'ajaxform':
 					$this[role]();
 					break;
+				case 'controlgroup':
+					// FIXME for some reason this has to come before the form control stuff (see above)
+					$this.controlgroup({
+						direction: $this.attr("data-type")
+					});
+					break;
 				}
 			});
 			
 			//fix toolbars
 			$el.fixHeaderFooter();
 
-			//form elements
-			var checksradios = 'input[type=radio],input[type=checkbox]',
-				buttonInputs = 'button, input[type=submit], input[type=reset], input[type=image]',
-				textInputs = 'input[type=text],input[type=number],input[type=date],input[type=password],textarea',
-				dateInputs = 'input[type=date]',
-				sliders = '[data-role="slider"]',
-				selects = 'select';
-			
-			$formEls = $el.find( [checksradios, buttonInputs, textInputs, dateInputs, sliders, selects].join(',') ).not('.ui-nojs');
-				
-			$formEls.filter(checksradios).customCheckboxRadio();
-			//custom buttons
-			$formEls.filter(buttonInputs).customButton();
-			//custom text inputs
-			$formEls.filter(textInputs).customTextInput();
-			
-			/*temporary datepicker workaround */
-			$formEls.filter(dateInputs).hide().after( $('<div />').datepicker() );
-			$('.ui-datepicker-header').addClass('ui-body-c ui-corner-top').removeClass('ui-corner-all');
-			$('.ui-datepicker-prev').buttonMarkup({iconPos: 'notext', icon: 'arrow-l', shadow: true, corners: true});
-			$('.ui-datepicker-next').buttonMarkup({iconPos: 'notext', icon: 'arrow-r', shadow: true, corners: true});
-			$('.ui-datepicker-calendar thead').remove();
-			$('.ui-datepicker-calendar .ui-btn-text span').attr('class','');
-			$('.ui-datepicker-calendar td').addClass('ui-btn-up-c');
-			$('.ui-datepicker-calendar a').buttonMarkup({corners: false, shadow: false});
-			/* //temporary datepicker workaround */
-			
-			
-			//sliders
-			$formEls.filter(sliders).slider();
-			//selects
-			$formEls.filter(selects).not('[data-role="slider"]').customSelect();
-			
-			//vertical controlgroups
-			$dataEls.filter('[data-role="controlgroup"]:not([data-type="horizontal"])').controlgroup();
-			//horizontal controlgroups
-			$dataEls.filter('[data-role="controlgroup"][data-type="horizontal"]').controlgroup({direction: 'horizontal'});
-			
 			//add back buttons to headers that don't have them	
+			// FIXME make that optional?
+			// TODO don't do that on devices that have a native back button?
 			var backBtn = $el.find('.ui-header a.ui-back');
 			if(!backBtn.length){
 				backBtn = jQuery('<a href="#" class="ui-back" data-icon="arrow-l"></a>').appendTo($el.find('.ui-header'));
@@ -325,12 +312,13 @@
 			//make all back buttons mimic the back button (pre-js, these links are usually "home" links)
 			backBtn
 				.click(function(){
+					// FIXME if you navigated from some page directly to subpage (ala .../#_form-controls.html), back button will actually go to the previous page, instead of the parent page
 					history.go(-1);
 					return false;
 				})
 				.find('.ui-btn-text').text(backBtnText);	
 			
-			$el.attr('data-mobilized',true);	
+			$el.attr('data-mobilized', true);	
 		});
 	};
 	
