@@ -57,13 +57,13 @@ $.fn.buttonMarkup = function( options ){
 		el
 			.attr( 'data-theme', o.theme )
 			.addClass( buttonClass )
-			.wrapInner( $( '<' + wrapperEls + '>', { className: "ui-btn-text" } ) );
+			.wrapInner( $( '<' + o.wrapperEls + '>', { className: "ui-btn-text" } ) );
 		
 		if (o.icon) {
 			el.prepend( $( '<span>', { className: iconClass } ) );
 		}
 		
-		el.wrapInner( $('<' + wrapperEls + '>', { className: innerClass }) );
+		el.wrapInner( $('<' + o.wrapperEls + '>', { className: innerClass }) );
 		
 		el.clickable();
 	});		
