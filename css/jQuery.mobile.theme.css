@@ -153,7 +153,18 @@ a.ui-link-inherit { text-decoration: none !important; }
 .ui-btn-corner-bottom { -moz-border-radius-bottomleft: 1em; -webkit-border-bottom-left-radius: 1em; border-bottom-left-radius: 1em; -moz-border-radius-bottomright: 1em; -webkit-border-bottom-right-radius: 1em; border-bottom-right-radius: 1em; }
 .ui-btn-corner-right {  -moz-border-radius-topright: 1em; -webkit-border-top-right-radius: 1em; border-top-right-radius: 1em; -moz-border-radius-bottomright: 1em; -webkit-border-bottom-right-radius: 1em; border-bottom-right-radius: 1em; }
 .ui-btn-corner-left { -moz-border-radius-topleft: 1em; -webkit-border-top-left-radius: 1em; border-top-left-radius: 1em; -moz-border-radius-bottomleft: 1em; -webkit-border-bottom-left-radius: 1em; border-bottom-left-radius: 1em; }
-.ui-btn-corner-all { -moz-border-radius: 1em; -webkit-border-radius: 1em; border-radius: 1em; -webkit-background-clip: padding-box;}
+.ui-btn-corner-all { -moz-border-radius: 1em; -webkit-border-radius: 1em; border-radius: 1em;}
+
+.ui-corner-tl, .ui-corner-tr, .ui-corner-bl, 
+.ui-corner-br, .ui-corner-top, .ui-corner-bottom, 
+.ui-corner-right, .ui-corner-left, .ui-corner-all,
+.ui-btn-corner-tl, .ui-btn-corner-tr, .ui-btn-corner-bl, 
+.ui-btn-corner-br, .ui-btn-corner-top, .ui-btn-corner-bottom, 
+.ui-btn-corner-right, .ui-btn-corner-left, .ui-btn-corner-all {
+  -webkit-background-clip: padding-box;
+     -moz-background-clip: padding-box;
+          background-clip: padding-box;
+}
 
 /* Overlays */
 .ui-overlay { background: #666; opacity: .5; filter:Alpha(Opacity=50); position: absolute;  width: 100%; height: 100%; }
