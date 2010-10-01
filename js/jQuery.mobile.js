@@ -271,10 +271,11 @@
 				var $this = $(this),
 					role = $this.attr("data-role");
 				switch(role) {
-				case 'page':
 				case 'header':
-				case 'content':
 				case 'footer':
+					$this.addClass('ui-bar-' + ($(this).data('theme') ? $(this).data('theme') : 'a'));
+				case 'page':	
+				case 'content':
 					$this.addClass('ui-' + role);
 					break;
 				case 'collapsible':
