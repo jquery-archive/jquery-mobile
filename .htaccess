@@ -1,5 +1,5 @@
 # some servers don't handle x-httpd-php by default, so add a handler
-AddHandler x-httpd-php .php .htm .html
+# AddHandler x-httpd-php .php .htm .html
 
 <Files index.html>
 ForceType application/x-httpd-php
