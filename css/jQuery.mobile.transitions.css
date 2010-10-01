@@ -135,15 +135,6 @@
 	z-index: 0;
 }
 
-.dissolve.in {
-	-webkit-animation-name: fadein;
-}
-
-.dissolve.out {
-	-webkit-animation-name: fadeout;	
-}
-
-
 .flip {
 	-webkit-animation-duration: .65s;
 }
