@@ -53,15 +53,6 @@
 		}, 150 );
 	}
 	
-	function manageGlobalNav(activePage){
-		if(activePage.is('.ui-globalnav-expanded')){
-			jQuery('[data-role="globalnav"]').addClass('ui-globalnav-disable');
-		}
-		else{
-			jQuery('[data-role="globalnav"]').removeClass('ui-globalnav-disable');
-		}
-	}
-	
 	// send a link through hash tracking
 	jQuery.fn.ajaxClick = function() {
 		var href = jQuery( this ).attr( "href" );
@@ -108,9 +99,6 @@
 		from.addClass( transition + " out " + ( back ? "reverse" : "" ) );
 		to.appendTo($body).addClass( activePageClass + " " + transition +
 			" in " + ( back ? "reverse" : "" ) );
-		//make sure globalnav is on top	
-		jQuery('[data-role="globalnav"]').appendTo($body);
-		manageGlobalNav(to);	
 		
 		// callback - remove classes, etc
 		to.animationComplete(function() {
@@ -196,7 +184,6 @@
 					changePage( currentPage, startPage, transition, back );
 				} else {
 					startPage.addClass( activePageClass );
-					manageGlobalNav(startPage);
 					jQuery.fixedToolbars.show();
 					pageLoading( true );
 				}
