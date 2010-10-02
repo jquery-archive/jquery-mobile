@@ -59,12 +59,13 @@
 		pageTransition = jQuery( this ).attr( "data-transition" ) || "slide";
 		nextPageRole = jQuery( this ).attr( "data-rel" );
 		
-		// let the hashchange event handler take care of everything else
-		location.hash = href;
-		
-		// note: if it's a non-local-anchor and Ajax is not supported, go to page
-		if ( href.match( /^[^#]/ ) && !jQuery.support.ajax ) {
+		//if it's a non-local-anchor and Ajax is not supported, or if it's an external link, go to page without ajax
+		if ( (href.match( /^[^#]/ ) && !jQuery.support.ajax) || (href.match(/https?:\/\//) && !href.match(location.hostname)) ) {
 			window.location = href;
+		}
+		else{
+			// let the hashchange event handler take care of requesting the page via ajax
+			location.hash = href;
 		}
 		
 		return this;
