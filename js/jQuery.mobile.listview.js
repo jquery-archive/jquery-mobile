@@ -168,8 +168,11 @@ $.fn.listview = function( options ) {
 		}	
 				
 		//tapping the whole LI triggers ajaxClick on the first link
-		$this.find( "li:has(a)" ).live( "tap", function() {
-			$( this ).find( "a:first" ).ajaxClick();
+		$this.find( "li:has(a)" ).live( "tap", function(event) {
+			if( !$(event.target).is('a') ){
+				$( this ).find( "a:first" ).ajaxClick();
+				return false;
+			}
 		});
 	});
 };
