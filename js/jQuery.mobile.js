@@ -57,22 +57,40 @@
 	jQuery.fn.ajaxClick = function() {
 		var href = jQuery( this ).attr( "href" );
 		pageTransition = jQuery( this ).attr( "data-transition" ) || "slide";
-		nextPageRole = jQuery( this ).attr( "data-rel" );
+		nextPageRole = jQuery( this ).attr( "data-rel" ),
+		baseURL = location.hash;		
+		//if href is absolute but local, or a local ID, no base needed
+		if( /^\//.test(href) || (/https?:\/\//.test(href) && !!(href).match(location.hostname)) || /^#/.test(href) ){
+			baseURL = '';
+		}
+		//if last slot in url has a . or &, hack it off, assuming its a file 
+		//NOTE: when linking to directory names that contain a ".", always use a trailing slash!
+		else {
+			var newBaseURL = baseURL.split('/');
+			if(newBaseURL.length && /[.|&]/.test(newBaseURL[newBaseURL.length-1]) ){
+				newBaseURL.pop();	
+			}
+			baseURL = newBaseURL.join('/') + '/';
+		}
+		
+		// set href to relative path using baseURL and
+		if( !/https?:\/\//.test(href) ){
+			href = baseURL + href;
+		}
 		
 		//if it's a non-local-anchor and Ajax is not supported, or if it's an external link, go to page without ajax
-		if ( (href.match( /^[^#]/ ) && !jQuery.support.ajax) || (href.match(/https?:\/\//) && !href.match(location.hostname)) ) {
-			window.location = href;
+		if ( ( /^[^#]/.test(href) && !jQuery.support.ajax ) || ( /https?:\/\//.test(href) && !!!href.match(location.hostname) ) ) {
+			location = href
 		}
 		else{
 			// let the hashchange event handler take care of requesting the page via ajax
 			location.hash = href;
 		}
-		
 		return this;
 	};
 	
 	// ajaxify all navigable links
-	jQuery( "a:not([href=#]):not([target=_blank]):not([rel=external])" ).live( "click", function() {
+	jQuery( "a:not([href=#]):not([target=_blank]):not([rel=external])" ).live( "click", function(event) {
 		jQuery( this ).ajaxClick();
 		return false;
 	});
