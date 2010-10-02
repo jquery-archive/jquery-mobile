@@ -6,24 +6,14 @@
 */
 (function($){
 $.fn.globalnav = function(settings){
-	return $(this).each(function(){ //there should only ever be one of these... is each necessary?
-		if($(this).find('.ui-globalnav').length){ return; }
-		
-		//remove any other globalnav currently present
-		$('[data-role="globalnav"]:has(.ui-globalnav)').remove();	
-		
+	return $(this).each(function(){ 
+
 		var o = $.extend({
-			fixedAs: 'footer',
-			moreText: 'More...',
-			thisId: $(this).parents('.ui-page').attr('id')
+			moreText: 'More...'
 		},settings);
 		
-		$(this)
-			.attr('id', o.thisId + '-globalnav')
-			.wrapInner('<div class="ui-bar-a ' + (o.fixedAs == 'footer' ? 'ui-footer' : 'ui-header') + '"><div class="ui-globalnav"></div></div>');
-		
 		//wrap it with footer classes
-		var $globalnav = $(this).find('.ui-globalnav'),
+		var $globalnav = $(this).addClass('ui-globalnav'),
 			numTabs = $globalnav.find('li').length;
 			
 			$globalnav
@@ -63,10 +53,7 @@ $.fn.globalnav = function(settings){
 				$globalnav.find('.ui-btn-active').removeClass('ui-btn-active');
 				$(this).addClass('ui-btn-active');
 			});
-		
-		$(this)
-			.appendTo('body')
-			.fixHeaderFooter();	
+
 	});
 };	
 })(jQuery);

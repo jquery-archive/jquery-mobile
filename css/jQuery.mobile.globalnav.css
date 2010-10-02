@@ -3,8 +3,7 @@
 * Copyright (c) jQuery Project
 * Dual licensed under the MIT (MIT-LICENSE.txt) or GPL (GPL-LICENSE.txt) licenses.
 */
-.ui-globalnav { overflow: hidden; width: 100%; overflow: hidden;  }
-.ui-globalnav-disable { display: none; }
+.ui-globalnav { overflow: hidden; }
 .ui-globalnav ul, .ui-globalnav-expanded ul { list-style:none; padding: 0; margin: 0; position: relative; display: block; border: 0;}
 .ui-globalnav-collapsed ul { float: left; width: 75%; }
 .ui-globalnav-collapsed .ui-globalnav-toggle { float: left; width: 25%; }
