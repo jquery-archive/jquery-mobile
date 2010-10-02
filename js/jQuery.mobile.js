@@ -55,10 +55,10 @@
 	
 	// send a link through hash tracking
 	jQuery.fn.ajaxClick = function() {
-		var href = jQuery( this ).attr( "href" );
+		var href = jQuery( this ).attr( "href" ),
+			baseURL = location.hash;
 		pageTransition = jQuery( this ).attr( "data-transition" ) || "slide";
-		nextPageRole = jQuery( this ).attr( "data-rel" ),
-		baseURL = location.hash;		
+		nextPageRole = jQuery( this ).attr( "data-rel" );		
 		//if href is absolute but local, or a local ID, no base needed
 		if( /^\//.test(href) || (/https?:\/\//.test(href) && !!(href).match(location.hostname)) || /^#/.test(href) ){
 			baseURL = '';
