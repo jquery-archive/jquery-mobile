@@ -7,166 +7,86 @@
 (function($){
 $.fn.fixHeaderFooter = function(options){
 	return $(this).each(function(){
-		//make sure these things only get wrapped once
-		if($(this).data('fixedapplied')){ return; }
-		var el = $uipage = $(this).data('fixedapplied',true),
-			els = el.find('.ui-header,.ui-footer').wrap('<div class="ui-headfoot-placehold"><div class="ui-headfoot-wrap"></div></div>');	
-			//wrapper explanation: placehold wrapper sits inline and holds the height of the toolbars open while they are position abs, 
-			//unless it's overlay-only, in which case the height is 0 so it's hidden when pos static
-		
-		//config options - currently driven off data attr's 
-		var o = $.extend({
-			transition: el.find('[data-headfoottransition]').attr('data-headfoottransition') || ['slidedown','slideup'],
-			//also accepts a string, like 'fade'. All animations work, but fade and slidedown/up look best
-			overlayOnly: el.find('.ui-fullscreen').length || el.is('[data-role="globalnav"]')
-		},options);
-			
-		//add transition and theme types	
-		els.filter('.ui-header').each(function(){
-			$(this).addClass( $.isArray(o.transition) ? o.transition[0] : o.transition).addClass('ui-bar-' + ($(this).is('[data-theme]') ? $(this).attr('data-theme') : 'a'));
-		});
-			
-		els.filter('.ui-footer').each(function(){
-			$(this).addClass( $.isArray(o.transition) ? o.transition[1] : o.transition).addClass('ui-bar-' + ($(this).is('[data-theme]') ? $(this).attr('data-theme') : 'a'));
-		});	
-				
-		//set placeholder heights, then bind custom events	
-		els
-			.each(function(){ 
-				var placehold = $(this).parents('.ui-headfoot-placehold:eq(0)');
-				if(o.overlayOnly){	
-					placehold.height(0).addClass('ui-headfoot-overlayonly');
-				}
-				else{
-					placehold.height($(this).parent().height());
-				}
-			})
-			.bind('setTop',function(){
-				var fromTop = $(window).scrollTop(),
-					screenHeight = window.innerHeight,
-					thisHeight = $(this).parent().height();
-					return $(this).parent().css('top', ($(this).is('.ui-header')) ? fromTop : fromTop + screenHeight - thisHeight);
-			});			
+		$(this).find('.ui-header').addClass('ui-header-fixed fade'); //should be slidedown
+		$(this).find('.ui-footer').addClass('ui-footer-fixed fade'); //should be slideup		
 	});
 };				
 
-
-
 //single controller for all showing,hiding,toggling		
 $.fixedToolbars = (function(){
-	
-		var currentstate = 'inline',
-			showAfterScroll = false,
-			delayTimer,
-			ignoreTargets = 'a,input,textarea,select,button,label,.ui-headfoot-placehold';
-	
-		function allToolbars(){
-			return $('.ui-header,.ui-footer');
-		}
-		
-		//for determining whether a placeholder is visible on the screen or not	
-		function placeHolderOutofView(thisel, partialVisibilityOkay){
-			//always return true if it's overlayOnly
-			if(thisel.closest('.ui-headfoot-overlayonly').length){ return true; }
-			
-			var fromTop = $(window).scrollTop(),
-				screenHeight = window.innerHeight,
-				placeholder = thisel.parent().parent(),
-				thisHeight = placeholder.height(),
-				thisTop = placeholder.offset().top,
-				thisIsHeader = thisel.is('.ui-header');
-			
-			if(partialVisibilityOkay){
-				return thisIsHeader ? (thisTop <= fromTop) : (thisTop + thisHeight >= fromTop + screenHeight);
-			}
-			else {
-				return thisIsHeader ? (thisTop + thisHeight <= fromTop) : (thisTop > fromTop + screenHeight);
-			}
-		}	
+	var currentstate = 'inline',
+		showAfterScroll = false,
+		delayTimer,
+		ignoreTargets = 'a,input,textarea,select,button,label,.ui-header-fixed,.ui-footer-fixed';
 
 	$(function() {
-	$(document)
-		.bind('tap',function(e){
-			if( !$(e.target).closest(ignoreTargets).length ){
-				$.fixedToolbars.toggle();
-			}
-		})
-		.bind('scrollstart',function(){
-			if(currentstate == 'overlay'){
-				showAfterScroll = true;
-				$.fixedToolbars.hide(true);
-			}
-		})
-		.bind('scrollstop',function(){
-			if(showAfterScroll){
-				showAfterScroll = false;
-				$.fixedToolbars.show();
-			}
-		});
+		$(document)
+			.bind('tap',function(e){
+				if( !$(e.target).closest(ignoreTargets).length ){
+					$.fixedToolbars.toggle();
+				}
+			})
+			.bind('scrollstart',function(){
+				if(currentstate == 'overlay'){
+					showAfterScroll = true;
+					$.fixedToolbars.hide(true);
+				}
+			})
+			.bind('scrollstop',function(){
+				if(showAfterScroll){
+					showAfterScroll = false;
+					$.fixedToolbars.show();
+				}
+			});
+
+		$(window).bind('resize orientationchange', function(){ $.fixedToolbars.hide(true); });	
 	});
+	
+	function setTop(el){
+		var fromTop = $(window).scrollTop(),
+			thisTop = el.offset().top,
+			thisCSStop = parseFloat(el.css('top')),
+			screenHeight = window.innerHeight,
+			thisHeight = el.outerHeight();
 
-		//hide on resize?
-		$(window).resize(function(){ $.fixedToolbars.hide(true); });
+		return el.css('top', el.is('.ui-header-fixed') ? fromTop - thisTop + thisCSStop : -1 * (thisTop - (fromTop + screenHeight) + thisCSStop + thisHeight) );
+	}
 
-
+	//exposed methods
 	return {
 		show: function(){
-			if(currentstate == 'overlay'){ return; }
 			currentstate = 'overlay';
-			var els = allToolbars();
-			return els.each(function(){
+			return $('.ui-header-fixed,.ui-footer-fixed').each(function(){
 				var el = $(this),
-					partiallyCropped = placeHolderOutofView(el, true),
-					outofView = placeHolderOutofView(el),
-					overlayOnly = el.closest('.ui-headfoot-overlayonly').length;
-				
-				if( partiallyCropped || overlayOnly){
-					el.parent().addClass('ui-fixpos');
-				}
-						
-				//only animate if placeholder is out of view
-
-				if( outofView ){
+					fromTop = $(window).scrollTop(),
+					thisTop = el.offset().top,
+					screenHeight = window.innerHeight,
+					thisHeight = el.outerHeight(),
+					alreadyVisible = (el.is('.ui-header-fixed') && fromTop <= thisTop + thisHeight) || (el.is('.ui-footer-fixed') && thisTop <= fromTop + screenHeight);	
+					
+				if( !alreadyVisible ){
 					el.addClass('in').animationComplete(function(){
 						el.removeClass('in');
 					});
+					setTop(el);
 				}
-
-				if(overlayOnly){	
-					el.parent().parent().removeClass('ui-headfoot-hidden');
-				}
-				el.trigger('setTop');
 			});	
 		},
 		hide: function(immediately){
-			if(currentstate == 'inline'){ return; }
 			currentstate = 'inline';
-			var els = allToolbars();
-			return els.each(function(){
-				var el = $(this),
-					overlayOnly = el.closest('.ui-headfoot-overlayonly').length;
-				
-				function addOverlayOnlyClass(){
-					if(overlayOnly){	
-						el.parent().parent().addClass('ui-headfoot-hidden');
-					}
-				}
-				//if immediately flag is true, or the placeholder is in view, don't animate the hide
-				if(immediately || !placeHolderOutofView(el, true)){
-					el.parent().removeClass('ui-fixpos');
-					addOverlayOnlyClass();
+			return $('.ui-header-fixed,.ui-footer-fixed').each(function(){
+				var el = $(this);
+				if(immediately){
+					el.css('top',0);
 				}
 				else{
-					var classes = 'out';
-					//if it's one of these, we'll need to add the reverse class too
-					if(el.is('.slidedown,.slideup, .swap, .pop, .flip')){
-						classes += ' reverse';
+					if( el.css('top') !== 'auto' && parseFloat(el.css('top')) !== 0 ){
+						var classes = 'out reverse';
+						el.addClass(classes).animationComplete(function(){
+							el.removeClass(classes);
+							el.css('top',0);
+						});	
 					}
-					el.addClass(classes).animationComplete(function(){
-						el.removeClass(classes);
-						el.parent().removeClass('ui-fixpos');
-						addOverlayOnlyClass();
-					});	
 				}
 			});
 		},
@@ -180,6 +100,5 @@ $.fixedToolbars = (function(){
 		}
 	};
 })();
-
 
 })(jQuery);
