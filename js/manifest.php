@@ -1,7 +1,6 @@
 <?
 $elements = array(
 	'jquery.js',
-	'jquery.tmpl.js',
 	'jQuery.mobile.support.js',
 	'jQuery.mobile.event.js',
 	'jQuery.mobile.hashchange.js',
