@@ -133,6 +133,7 @@
 }
 .fade.out {
 	z-index: 0;
+	-webkit-animation-name: fadeout;
 }
 
 .flip {
