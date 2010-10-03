@@ -38,10 +38,6 @@
 		nextPageRole = null,
 		noCache = '.ui-dialog';
 	
-	
-	
-	
-	
 	// hide address bar
 	function hideBrowserChrome() {
 		// prevent scrollstart and scrollstop events
@@ -229,11 +225,7 @@
 		});
 		
 		hideBrowserChrome();
-	});
-	
-	
-	
-	
+	});	
 	
 	//add orientation class on flip/resize.
 	$window.bind( "orientationchange", function( event, data ) {
@@ -264,9 +256,7 @@
 		else{
 			setTimeout(callback, transitionDuration);
 		}
-	};
-	
-	
+	};	
 	
 	//markup-driven enhancements, to be called on any ui-page upon loading
 	function mobilize($el){	
