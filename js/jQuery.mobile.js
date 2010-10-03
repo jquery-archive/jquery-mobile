@@ -53,33 +53,42 @@
 		}, 150 );
 	}
 	
+	function getBaseURL(){
+	    var newBaseURL = location.hash.replace(/#/,'').split('/');
+		if(newBaseURL.length && /[.|&]/.test(newBaseURL[newBaseURL.length-1]) ){
+			newBaseURL.pop();	
+		}
+		newBaseURL = newBaseURL.join('/');
+		if(newBaseURL !== "" && newBaseURL.charAt(newBaseURL.length-1) !== '/'){  newBaseURL += '/'; }
+		return newBaseURL;
+	}
+	
+	function resetBaseURL(){
+		$('#ui-base').attr('href', location.pathname);
+	}
+	
+	
 	// send a link through hash tracking
 	jQuery.fn.ajaxClick = function() {
-		var href = jQuery( this ).attr( "href" ),
-			baseURL = location.hash;
+		var href = jQuery( this ).attr( "href" );
 		pageTransition = jQuery( this ).attr( "data-transition" ) || "slide";
-		nextPageRole = jQuery( this ).attr( "data-rel" );		
+		nextPageRole = jQuery( this ).attr( "data-rel" );
+		
+		//reset base to pathname for new request
+		resetBaseURL();  	
+		//find new base for url building
+		var newBaseURL = getBaseURL();
+		
 		//if href is absolute but local, or a local ID, no base needed
 		if( /^\//.test(href) || (/https?:\/\//.test(href) && !!(href).match(location.hostname)) || /^#/.test(href) ){
-			baseURL = '';
-		}
-		//if last slot in url has a . or &, hack it off, assuming its a file 
-		//NOTE: when linking to directory names that contain a ".", always use a trailing slash!
-		else {
-			var newBaseURL = baseURL.split('/');
-			if(newBaseURL.length && /[.|&]/.test(newBaseURL[newBaseURL.length-1]) ){
-				newBaseURL.pop();	
-			}
-			
-			baseURL = newBaseURL.join('/');
-			if(baseURL !== ""){  baseURL += '/'; }
+			newBaseURL = '';
 		}
 		
 		// set href to relative path using baseURL and
 		if( !/https?:\/\//.test(href) ){
-			href = baseURL + href;
+			href = newBaseURL + href;
 		}
-		
+						
 		//if it's a non-local-anchor and Ajax is not supported, or if it's an external link, go to page without ajax
 		if ( ( /^[^#]/.test(href) && !jQuery.support.ajax ) || ( /https?:\/\//.test(href) && !!!href.match(location.hostname) ) ) {
 			location = href
@@ -196,6 +205,9 @@
 							newPage = jQuery( "[id='" + url + "']" );
 							changePage( jQuery( ".ui-page-active" ), newPage, transition, back );
 						});
+						
+						//set base url for new page assets
+						$('#ui-base').attr('href', getBaseURL());
 				}
 			} else {
 				// either we've backed up to the root page url
@@ -231,7 +243,11 @@
 		'<link rel="apple-touch-icon" href="images/homeicon.png" />'+
 		'<link rel="apple-touch-startup-image" href="images/startscreen.png" />'+
 		'<meta name="apple-mobile-web-app-capable" content="yes" />' +
-        '<meta name="apple-mobile-web-app-status-bar-style" content="default" />');
+        '<meta name="apple-mobile-web-app-status-bar-style" content="default" />'+
+        '<base  href="" id="ui-base" />');
+    
+    //
+    resetBaseURL();    
 	
 	//potential (probably incomplete) fallback to workaround lack of animation callbacks. 
 	//should this be extended into a full special event?
