@@ -78,9 +78,7 @@
 		var href = jQuery( this ).attr( "href" );
 		pageTransition = jQuery( this ).attr( "data-transition" ) || "slide";
 		nextPageRole = jQuery( this ).attr( "data-rel" );
-		
-		//reset base to pathname for new request
-		resetBaseURL();  	
+		  	
 		//find new base for url building
 		var newBaseURL = getBaseURL();
 		
@@ -159,6 +157,9 @@
 				transition = pageTransition || "slide",
 				fileUrl = url;
 			pageTransition = undefined;
+			
+			//reset base to pathname for new request
+			resetBaseURL();
 			
 			// if the new href is the same as the previous one
 			if ( back ) {
@@ -251,7 +252,7 @@
         '<meta name="apple-mobile-web-app-status-bar-style" content="default" />'+
         '<base  href="" id="ui-base" />');
     
-    //
+    //set base href to pathname
     resetBaseURL();    
 	
 	//potential (probably incomplete) fallback to workaround lack of animation callbacks. 
