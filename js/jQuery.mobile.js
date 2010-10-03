@@ -63,6 +63,11 @@
 		return newBaseURL;
 	}
 	
+	function setBaseURL(){
+		//set base url for new page assets
+		$('#ui-base').attr('href', getBaseURL());
+	}
+	
 	function resetBaseURL(){
 		$('#ui-base').attr('href', location.pathname);
 	}
@@ -180,6 +185,7 @@
 					if ( localDiv.is( "[data-role]" ) ) {
 						setPageRole( localDiv );
 					}
+					setBaseURL();
 					mobilize( localDiv );
 					changePage( jQuery( ".ui-page-active" ), localDiv, transition, back );
 				} else { //ajax it in
@@ -206,8 +212,7 @@
 							changePage( jQuery( ".ui-page-active" ), newPage, transition, back );
 						});
 						
-						//set base url for new page assets
-						$('#ui-base').attr('href', getBaseURL());
+						setBaseURL();
 				}
 			} else {
 				// either we've backed up to the root page url
