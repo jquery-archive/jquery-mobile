@@ -70,7 +70,9 @@
 			if(newBaseURL.length && /[.|&]/.test(newBaseURL[newBaseURL.length-1]) ){
 				newBaseURL.pop();	
 			}
-			baseURL = newBaseURL.join('/') + '/';
+			
+			baseURL = newBaseURL.join('/');
+			if(baseURL !== ""){  baseURL += '/'; }
 		}
 		
 		// set href to relative path using baseURL and
