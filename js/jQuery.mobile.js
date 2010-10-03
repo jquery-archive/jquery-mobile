@@ -18,7 +18,6 @@
 	jQuery.extend(jQuery.mobile, {
 		subPageUrlKey: 'ui-page' //define the key used in urls for sub-pages. Defaults to &ui-page=
 	});
-	jQuery.mobile.subPageUrlKey = 'ui-page';
 
 	var $window = jQuery(window),
 		$html = jQuery('html'),
