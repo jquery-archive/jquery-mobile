@@ -33,11 +33,10 @@
 
 /* loading screen */
 .ui-loading, .ui-loading body { overflow: hidden !important; }
-.ui-loading .ui-content { visibility: hidden; }
 .ui-loading .ui-loader { display: block; }
-.ui-loader { display: none;  position: absolute; z-index: 0; top: 100px; left: 50%; width: 100px; margin-left: -80px; padding: 20px 30px; border: 0; }
-.ui-loader h1 { font-size: 15px; text-align: center; opacity: .8; }
-.ui-loader .ui-icon { position: static; display: block; opacity: .7; margin: 0 auto; width: 35px; height: 35px; background-color: transparent; }
+.ui-loader { display: none; position: absolute; opacity: .7; z-index: 10; top: 75px; left: 50%; width: 200px; margin-left: -130px; padding: 20px 30px; }
+.ui-loader h1 { font-size: 15px; text-align: center; }
+.ui-loader .ui-icon { position: static; display: block; opacity: .9; margin: 0 auto; width: 35px; height: 35px; background-color: transparent; }
 
 /*headers, content panels*/
 .ui-bar, .ui-body { position: relative; padding: .4em 15px;  overflow: hidden; display: block;  clear:both;  }

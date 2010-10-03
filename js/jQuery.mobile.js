@@ -23,7 +23,7 @@
 		$html = jQuery('html'),
 		$head = jQuery('head'),
 		$body,
-		$loader = jQuery('<div class="ui-loader ui-body-c ui-corner-all fade in"><span class="ui-icon ui-icon-loading spin"></span><h1>loading.</h1></div>'),
+		$loader = jQuery('<div class="ui-loader ui-body-a ui-corner-all"><span class="ui-icon ui-icon-loading spin"></span><h1>loading.</h1></div>'),
 		startPage,
 		startPageId = 'ui-page-start',
 		activePageClass = 'ui-page-active',
@@ -42,7 +42,9 @@
 	function hideBrowserChrome() {
 		// prevent scrollstart and scrollstop events
 		jQuery.event.special.scrollstart.enabled = false;
-		window.scrollTo( 0, 0 );
+		setTimeout(function() {
+			window.scrollTo( 0, 0 );
+		},0);	
 		setTimeout(function() {
 			jQuery.event.special.scrollstart.enabled = true;
 		}, 150 );
@@ -104,22 +106,18 @@
 		return false;
 	});
 	
-	// turn on/off page loading message.. also hides the ui-content div
+	// turn on/off page loading message.
 	function pageLoading( done ) {
 		if ( done ) {
 			$html.removeClass( "ui-loading" );
-			//fade in page content, remove loading msg
-			jQuery('.ui-page-active .ui-content').addClass('dissolve in');
 		} else {
+			$loader.appendTo('body');
 			$html.addClass( "ui-loading" );
-			$loader.appendTo( $body ).addClass( "dissolve in" );
 		}
 	};
 	
 	// transition between pages - based on transitions from jQtouch
 	function changePage( from, to, transition, back ) {
-		hideBrowserChrome();
-		
 		// kill keyboard (thx jQtouch :) )
 		jQuery( document.activeElement ).blur();
 		
@@ -223,8 +221,6 @@
 				}
 			}
 		});
-		
-		hideBrowserChrome();
 	});	
 	
 	//add orientation class on flip/resize.
@@ -374,4 +370,7 @@
 			jQuery('#eventlogger').prepend('<div>Event fired: '+ e.type +'</div>');
 		});
 	});
+	
+	$window.load(hideBrowserChrome);
+	
 })( jQuery, this );
