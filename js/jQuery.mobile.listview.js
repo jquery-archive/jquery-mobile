@@ -24,7 +24,7 @@ $.fn.listview = function( options ) {
 		}, o);
 		
 		//if it's a nested list, chunk it into ui-page items, recurse through them and call listview on each individual ul
-		$( $this.find( "ul" ).get().reverse() ).each(function( i ) {
+		$( $this.find( "ul,ol" ).get().reverse() ).each(function( i ) {
 			var list = $( this ),
 				id = parentID + "&" + jQuery.mobile.subPageUrlKey  + "=listview-" + i,
 				parent = list.parent(),
