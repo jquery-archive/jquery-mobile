@@ -1,0 +1,102 @@
+<?php /*gzip page*/ ob_start("ob_gzhandler"); ?>
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>jQuery Mobile Framework - Filtered List View</title>
+	<link rel="stylesheet" type="text/css" href="css/all" />
+	<script type="text/javascript" src="js/all"></script>
+	<script>
+	$(function() {
+		var term = $( "#term" ),
+			list = $( "[data-role=listview]" ),
+			count = $( "#count" ),
+			searchTerm = $( "#search-term" );
+		
+		$( "#term" ).keyup(function() {
+			var val = term.val().replace( /[()]/g, "\\\\$1" );
+
+			list.children().show();
+			
+			if ( val ) {
+				list.children().not( ":contains(" + val + ")" ).hide();
+			}
+
+			count.text( list.children( ":visible" ).length );
+			searchTerm.text( term.val() );
+		});
+	});
+	</script>
+</head>
+<body>
+
+<div data-role="page" class="ui-body-c">
+	<div data-role="header">
+		<h1>Stuff</h1>
+		<a href="index.html" class="ui-back" data-icon="arrow-l">Home</a>
+	</div>
+	
+	<form method="get" action="_searchresult.html">
+		<label for="term" data-role="nojs">Search:</label>
+		<input type="text" name="term" id="term" placeholder="search..." data-role="search" />
+		<button type="submit" data-role="nojs">Search</button>
+	</form>
+	
+	<div data-role="content">
+		<p class="ui-body"><span id="count">12</span> Results for "<em id="search-term">Justin Bieber</em>"</p>
+	
+		<ol data-role="listview" data-inset="true">
+			<li>
+				<img src="images/jb.jpg" alt="jb" />
+				<h2><a href="index.html">Baby (feat. Ludacris)</a></h2>
+			</li>
+			<li>
+				<img src="images/jb.jpg" alt="jb" />
+				<h2><a href="index.html">Somebody to Love</a></h2>
+			</li>
+			<li>
+				<img src="images/jb.jpg" alt="jb" />
+				<h2><a href="index.html">One Less Lonely Girl</a></h2>
+			</li>
+			<li>
+				<img src="images/jb.jpg" alt="jb" />
+				<h2><a href="index.html">That Should Be Me</a></h2>
+			</li>
+			<li>
+				<img src="images/jb.jpg" alt="jb" />
+				<h2><a href="index.html">Baby</a></h2>
+			</li>
+			<li>
+				<img src="images/jb.jpg" alt="jb" />
+				<h2><a href="index.html">Up</a></h2>
+			</li>
+			<li>
+				<img src="images/jb.jpg" alt="jb" />
+				<h2><a href="index.html">Runaway Love</a></h2>
+			</li>
+			<li>
+				<img src="images/jb.jpg" alt="jb" />
+				<h2><a href="index.html">One Time (My Heart Edition)</a></h2>
+			</li>
+			<li>
+				<img src="images/jb.jpg" alt="jb" />
+				<h2><a href="index.html">Overboard</a></h2>
+			</li>
+			<li>
+				<img src="images/jb.jpg" alt="jb" />
+				<h2><a href="index.html">Somebody to Love (Remix)</a></h2>
+			</li>
+			<li>
+				<img src="images/jb.jpg" alt="jb" />
+				<h2><a href="index.html">Never Say Never</a></h2>
+			</li>
+			<li>
+				<img src="images/jb.jpg" alt="jb" />
+				<h2><a href="index.html">Somebody to Love feat. Usher (Remix)</a></h2>
+			</li>
+		</ol>
+	</div>
+</div>
+
+
+</body>
+</html>
