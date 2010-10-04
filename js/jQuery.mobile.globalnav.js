@@ -9,12 +9,20 @@ $.fn.globalnav = function(settings){
 	return $(this).each(function(){ 
 
 		var o = $.extend({
-			moreText: 'More...'
+			moreText: 'More',
+			iconPos: $(this).data('iconPos') || 'top',
+			transition: $(this).data('transition') || 'slideup'
 		},settings);
 		
 		//wrap it with footer classes
 		var $globalnav = $(this).addClass('ui-globalnav'),
-			numTabs = $globalnav.find('li').length;
+			numTabs = $globalnav.find('li').length,
+			moreIcon = $globalnav.find('a[data-icon]').length ? 'arrow-r' : null;
+			
+			if( moreIcon == null ){ 
+				o.iconPos = null; 
+				$globalnav.add( $globalnav.children(0) ).addClass('ui-globalnav-noicons');
+			}
 			
 			$globalnav
 				.find('ul')
@@ -22,14 +30,14 @@ $.fn.globalnav = function(settings){
 		
 		if(numTabs > 3 ){
 			var moreId = o.thisId + "&" + jQuery.mobile.subPageUrlKey  + "=globalnav",
-				$navToggle = $('<a href="#'+ moreId +'" data-transition="slideup">' + o.moreText + '</a>'),
+				$navToggle = $('<a href="#'+ moreId +'" data-transition="'+ o.transition +'">' + o.moreText + '</a>'),
 				$truncatedLis = $globalnav.find('li:gt(2)'),
 				$newPage = $('<div id="'+ moreId +'" class="ui-page ui-globalnav-expanded ui-body-a"><div data-role="header"><h1>' + o.moreText + '</h1></div><div data-role="content"></div></div>'),
 				$newPageContent =  $globalnav.find('ul').clone(); 
 				
 				$newPageContent
 					.find('a')
-					.buttonMarkup({iconPos: 'top', shadow: false, corners: false, theme: 'a', icon: 'arrow-r'})
+					.buttonMarkup({shadow: false, corners: false, iconPos: o.iconPos});
 				
 				$newPage.append( $newPageContent ).appendTo('body');
 			
@@ -38,16 +46,18 @@ $.fn.globalnav = function(settings){
 				.parent()
 				.appendTo($globalnav);
 			
-			$navToggle.buttonMarkup({corners: false, iconPos: 'top', icon: 'arrow-r'});	
+			$navToggle.buttonMarkup({corners: false, shadow:false, iconPos: o.iconPos, icon: moreIcon});	
 				
 			$globalnav.addClass('ui-globalnav-collapsed');
 		
 			$truncatedLis.addClass('ui-globalnav-truncate');
 		}	
 		
+		
+		
 		$globalnav
 			.find('ul a')
-			.buttonMarkup({corners: false, iconPos: 'top', icon: 'arrow-u'})
+			.buttonMarkup({corners: false, shadow:false, iconPos: o.iconPos})
 			.bind('tap',function(){
 				//NOTE: we'll need to find a way to highlight an active tab at load as well
 				$globalnav.find('.ui-btn-active').removeClass('ui-btn-active');
