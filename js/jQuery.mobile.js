@@ -274,7 +274,7 @@
 			
 			$el.find('input[type=radio],input[type=checkbox]').customCheckboxRadio();
 			$el.find('button, input[type=submit], input[type=reset], input[type=image]').customButton();
-			$el.find('input[type=text],input[type=number],input[type=password],textarea').customTextInput();
+			$el.find('input[type=text],input[type=number],input[type=tel],input[type=url],input[type=email],input[type=password],textarea').customTextInput();
 			$el.find("input, select").filter('[data-role="slider"]').slider();
 			$el.find('select').not('[data-role="slider"]').customSelect();
 			
