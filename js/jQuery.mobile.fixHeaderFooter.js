@@ -64,7 +64,7 @@ $.fixedToolbars = (function(){
 
 		//after page is shown, append footer to new page
 		$('.ui-page').live('pageshow', function(event, ui){
-			if( stickyFooter.length ){
+			if( stickyFooter && stickyFooter.length ){
 				stickyFooter.appendTo(event.target);
 				setTop(stickyFooter);
 			}
