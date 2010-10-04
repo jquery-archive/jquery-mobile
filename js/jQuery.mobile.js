@@ -141,7 +141,6 @@
 			to.trigger("pageshow", {prevPage: from});
 			
 			pageLoading( true );
-			jQuery.fixedToolbars.show();
 		});
 	};
 	
@@ -226,7 +225,6 @@
 					changePage( currentPage, startPage, transition, back );
 				} else {
 					startPage.addClass( activePageClass );
-					jQuery.fixedToolbars.show();
 					pageLoading( true );
 				}
 			}
