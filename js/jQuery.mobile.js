@@ -118,7 +118,6 @@
 	
 	// transition between pages - based on transitions from jQtouch
 	function changePage( from, to, transition, back ) {
-		// kill keyboard (thx jQtouch :) )
 		jQuery( document.activeElement ).blur();
 		
 		// animate in / out
