@@ -120,13 +120,15 @@
 	function changePage( from, to, transition, back ) {
 		jQuery( document.activeElement ).blur();
 		
+		to.appendTo($body);
+		
 		//trigger before show/hide events
 		from.trigger("beforepagehide", {nextPage: to});
 		to.trigger("beforepageshow", {prevPage: from});
 				
 		// animate in / out
 		from.addClass( transition + " out " + ( back ? "reverse" : "" ) );
-		to.appendTo($body).addClass( activePageClass + " " + transition +
+		to.addClass( activePageClass + " " + transition +
 			" in " + ( back ? "reverse" : "" ) );
 		
 		// callback - remove classes, etc
