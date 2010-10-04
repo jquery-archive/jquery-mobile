@@ -33,16 +33,20 @@ $.fn.buttonMarkup = function( options ){
 			innerClass = "ui-btn-inner",
 			iconClass;
 		
-		if (o.iconPos || o.icon) {
+		if (o.icon) {
 			o.icon = 'ui-icon-' + o.icon;
-			o.iconPos = o.iconPos || 'left';
-
-			buttonClass += " ui-btn-icon-" + o.iconPos;
 
 			iconClass = "ui-icon " + o.icon;
 
 			if (o.shadow) { iconClass += " ui-icon-shadow" }
+			o.iconPos = o.iconPos || 'left';
 		}
+		
+		if (o.iconPos){
+			buttonClass += " ui-btn-icon-" + o.iconPos;
+		}
+		
+		
 		
 		
 		if (o.corners) { 
