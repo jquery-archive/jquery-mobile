@@ -268,6 +268,8 @@
 		return $el.not('[data-mobilized]').each(function(){	
 
 			var $el = $(this);
+			
+			$el.trigger("beforeload");
 
 			//some of the form elements currently rely on the presence of ui-page and ui-content
 			// classes so we'll handle page and content roles outside of the main role processing
@@ -350,7 +352,8 @@
 				})
 				.find('.ui-btn-text').text(backBtnText);	
 			
-			$el.attr('data-mobilized', true);	
+			$el.attr('data-mobilized', true);
+			$el.trigger("load");	
 		});
 	};
 	
