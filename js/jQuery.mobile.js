@@ -225,6 +225,8 @@
 					changePage( currentPage, startPage, transition, back );
 				} else {
 					startPage.addClass( activePageClass );
+					//FIXME: when there's no prevPage, is passing an empty jQuery obj proper style?
+					startPage.trigger("pageshow", {prevPage: $('')});
 					pageLoading( true );
 				}
 			}
