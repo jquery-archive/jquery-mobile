@@ -23,7 +23,8 @@ $.fn.customSelect = function(options){
 		//select properties,events
 		select
 			.change(function(){ 
-				button.find('.ui-btn-text').text(select.val()); 
+				var ele = select.get(0);
+				button.find('.ui-btn-text').text($(ele.options.item(ele.selectedIndex)).text()); 
 			})
 			.focus(function(){
 				$(this).blur();
@@ -76,7 +77,7 @@ $.fn.customSelect = function(options){
 			});
 					
 		//create menu button		
-		var button = $('<a href="#">'+ select.val() +'</a>')
+		var button = $('<a href="#">'+ $(this.options.item(this.selectedIndex)).text() +'</a>')
 			.buttonMarkup({
 				iconPos: 'right',
 				icon: 'arrow-d'
