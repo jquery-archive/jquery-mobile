@@ -261,6 +261,14 @@
 
 			var $el = $(this);
 
+			//some of the form elements currently rely on the presence of ui-page and ui-content
+			// classes so we'll handle page and content roles outside of the main role processing
+			// loop below.
+			$el.find('[data-role=page],[data-role=content]').andSelf().each(function() {
+					var $this = $(this);
+					$this.addClass('ui-' + $this.attr("data-role"));
+			});
+
 			//hide no-js content
 			$el.find('[data-role="nojs"]').addClass('ui-nojs');
 			
