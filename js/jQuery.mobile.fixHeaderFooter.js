@@ -17,7 +17,8 @@ $.fixedToolbars = (function(){
 	var currentstate = 'inline',
 		showAfterScroll = false,
 		delayTimer,
-		ignoreTargets = 'a,input,textarea,select,button,label,.ui-header-fixed,.ui-footer-fixed';
+		ignoreTargets = 'a,input,textarea,select,button,label,.ui-header-fixed,.ui-footer-fixed',
+		stickyFooter; //for storing quick references to duplicate footers
 
 	$(function() {
 		$(document)
@@ -40,6 +41,35 @@ $.fixedToolbars = (function(){
 			});
 
 		$(window).bind('resize orientationchange', function(){ $.fixedToolbars.hide(true); });	
+		
+		//function to return another footer already in the dom with the same data-id
+		function findStickyFooter(el){
+			var thisFooter = el.find('[data-role="footer"]');
+			return jQuery( '.ui-footer[data-id="'+ thisFooter.data('id') +'"]:not(.ui-footer-duplicate)' ).not(thisFooter);
+		}
+		
+		//before page is shown, check for duplicate footer
+		$('.ui-page').live('beforepageshow', function(event, ui){
+			stickyFooter = findStickyFooter( $(event.target) );
+			if( stickyFooter.length ){
+				//if the existing footer is the first of its kind, create a placeholder before stealing it 
+				if( stickyFooter.parents('.ui-page:eq(0)').find('.ui-footer[data-id="'+ stickyFooter.data('id') +'"]').length == 1 ){
+					stickyFooter.before( stickyFooter.clone().addClass('ui-footer-duplicate') );
+				}
+				$(event.target).find('[data-role="footer"]').addClass('ui-footer-duplicate');
+				stickyFooter.appendTo('body');
+				setTop(stickyFooter);
+			}
+		});
+
+		//after page is shown, append footer to new page
+		$('.ui-page').live('pageshow', function(event, ui){
+			if( stickyFooter.length ){
+				stickyFooter.appendTo(event.target);
+				setTop(stickyFooter);
+			}
+		});
+		
 	});
 	
 	function setTop(el){
@@ -48,8 +78,19 @@ $.fixedToolbars = (function(){
 			thisCSStop = parseFloat(el.css('top')),
 			screenHeight = window.innerHeight,
 			thisHeight = el.outerHeight();
-
-		return el.css('top', el.is('.ui-header-fixed') ? fromTop - thisTop + thisCSStop : -1 * (thisTop - (fromTop + screenHeight) + thisCSStop + thisHeight) );
+			
+		if( el.is('.ui-header-fixed') ){
+			return el.css('top', fromTop - thisTop + thisCSStop);
+		}
+		else{
+			//check if the footer is relative positioned or not
+			if( el.parents('.ui-page').length ){
+				return el.css('top', -1 * (thisTop - (fromTop + screenHeight) + thisCSStop + thisHeight) );
+			}
+			else{
+				return el.css('top', fromTop + screenHeight - thisHeight );
+			}
+		}
 	}
 
 	//exposed methods
