@@ -141,8 +141,6 @@ a.ui-link-inherit { text-decoration: none !important; }
 
 /* loading icon */
 .ui-icon-loading { background-image: url(../images/ajax-loader.png); width: 40px; height: 40px;  -moz-border-radius: 20px; -webkit-border-radius: 20px; border-radius: 20px; }
-.ui-icon-loading-sml { background-image: url(../images/ajax-loader-sml.png); }
-
 
 /* btn Corner radius */
 .ui-btn-corner-tl { -moz-border-radius-topleft: 1em; -webkit-border-top-left-radius: 1em; border-top-left-radius: 1em; }
