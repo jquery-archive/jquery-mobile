@@ -120,6 +120,10 @@
 	function changePage( from, to, transition, back ) {
 		jQuery( document.activeElement ).blur();
 		
+		//trigger before show/hide events
+		from.trigger("beforepagehide", {nextPage: to});
+		to.trigger("beforepageshow", {prevPage: from});
+				
 		// animate in / out
 		from.addClass( transition + " out " + ( back ? "reverse" : "" ) );
 		to.appendTo($body).addClass( activePageClass + " " + transition +
@@ -129,6 +133,11 @@
 		to.animationComplete(function() {
 			from.add( to ).removeClass(" out in reverse " + transitions );
 			from.removeClass( activePageClass );
+			
+			//trigger show/hide events
+			from.trigger("pagehide", {nextPage: to});
+			to.trigger("pageshow", {prevPage: from});
+			
 			pageLoading( true );
 			jQuery.fixedToolbars.show();
 		});
