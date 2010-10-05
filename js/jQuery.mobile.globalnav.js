@@ -10,7 +10,7 @@ $.fn.globalnav = function(settings){
 
 		var o = $.extend({
 			moreText: 'More',
-			iconPos: $(this).data('iconPos') || 'top',
+			iconpos: $(this).data('iconpos') || 'top',
 			transition: $(this).data('transition') || 'slideup'
 		},settings);
 		
@@ -20,7 +20,7 @@ $.fn.globalnav = function(settings){
 			moreIcon = $globalnav.find('a[data-icon]').length ? 'arrow-r' : null;
 			
 			if( moreIcon == null ){ 
-				o.iconPos = null; 
+				o.iconpos = null; 
 				$globalnav.add( $globalnav.children(0) ).addClass('ui-globalnav-noicons');
 			}
 			
@@ -37,7 +37,7 @@ $.fn.globalnav = function(settings){
 				
 				$newPageContent
 					.find('a')
-					.buttonMarkup({shadow: false, corners: false, iconPos: o.iconPos});
+					.buttonMarkup({shadow: false, corners: false, iconpos: o.iconpos});
 				
 				$newPage.append( $newPageContent ).appendTo('body');
 			
@@ -46,7 +46,7 @@ $.fn.globalnav = function(settings){
 				.parent()
 				.appendTo($globalnav);
 			
-			$navToggle.buttonMarkup({corners: false, shadow:false, iconPos: o.iconPos, icon: moreIcon});	
+			$navToggle.buttonMarkup({corners: false, shadow:false, iconpos: o.iconpos, icon: moreIcon});	
 				
 			$globalnav.addClass('ui-globalnav-collapsed');
 		
@@ -57,7 +57,7 @@ $.fn.globalnav = function(settings){
 		
 		$globalnav
 			.find('ul a')
-			.buttonMarkup({corners: false, shadow:false, iconPos: o.iconPos})
+			.buttonMarkup({corners: false, shadow:false, iconpos: o.iconpos})
 			.bind('tap',function(){
 				//NOTE: we'll need to find a way to highlight an active tab at load as well
 				$globalnav.find('.ui-btn-active').removeClass('ui-btn-active');

@@ -79,7 +79,7 @@ $.fn.customSelect = function(options){
 		//create menu button		
 		var button = $('<a href="#">'+ $(this.options.item(this.selectedIndex)).text() +'</a>')
 			.buttonMarkup({
-				iconPos: 'right',
+				iconpos: 'right',
 				icon: 'arrow-d'
 			})
 			.attr({

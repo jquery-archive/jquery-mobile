@@ -18,7 +18,7 @@ $.fn.customCheckboxRadio = function(options){
 			},options);
 			
 			// get the associated label using the input's id
-			var label = $('label[for='+input.attr('id')+']').buttonMarkup({iconPos: o.icon ? 'left' : '', shadow: false});
+			var label = $('label[for='+input.attr('id')+']').buttonMarkup({iconpos: o.icon ? 'left' : '', shadow: false});
 						
 			var icon = label.find('.ui-icon');
 			

@@ -24,7 +24,7 @@ $.fn.buttonMarkup = function( options ){
 						return 'c';
 					}
 				})(),
-				iconPos: el.attr('data-iconPos'),
+				iconpos: el.attr('data-iconpos'),
 				icon: el.attr('data-icon')
 			}, $.fn.buttonMarkup.defaults, options),
 			
@@ -39,11 +39,11 @@ $.fn.buttonMarkup = function( options ){
 			iconClass = "ui-icon " + o.icon;
 
 			if (o.shadow) { iconClass += " ui-icon-shadow" }
-			o.iconPos = o.iconPos || 'left';
+			o.iconpos = o.iconpos || 'left';
 		}
 		
-		if (o.iconPos){
-			buttonClass += " ui-btn-icon-" + o.iconPos;
+		if (o.iconpos){
+			buttonClass += " ui-btn-icon-" + o.iconpos;
 		}
 		
 		

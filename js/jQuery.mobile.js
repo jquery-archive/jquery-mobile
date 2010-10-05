@@ -293,8 +293,8 @@
 			/*temporary datepicker workaround */
 			$el.find('input[type=date]').hide().after( $('<div />').datepicker() );
 			$('.ui-datepicker-header').addClass('ui-body-c ui-corner-top').removeClass('ui-corner-all');
-			$('.ui-datepicker-prev').buttonMarkup({iconPos: 'notext', icon: 'arrow-l', shadow: true, corners: true});
-			$('.ui-datepicker-next').buttonMarkup({iconPos: 'notext', icon: 'arrow-r', shadow: true, corners: true});
+			$('.ui-datepicker-prev').buttonMarkup({iconpos: 'notext', icon: 'arrow-l', shadow: true, corners: true});
+			$('.ui-datepicker-next').buttonMarkup({iconpos: 'notext', icon: 'arrow-r', shadow: true, corners: true});
 			$('.ui-datepicker-calendar thead').remove();
 			$('.ui-datepicker-calendar .ui-btn-text span').attr('class','');
 			$('.ui-datepicker-calendar td').addClass('ui-btn-up-c');

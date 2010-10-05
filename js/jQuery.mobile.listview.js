@@ -75,7 +75,7 @@ $.fn.listview = function( options ) {
 								wrapperEls: "div",
 								shadow: false,
 								corners: false,
-								iconPos: "right",
+								iconpos: "right",
 								icon: "arrow-r",
 								theme: o.theme
 							})
@@ -111,7 +111,7 @@ $.fn.listview = function( options ) {
 							shadow: true,
 							corners: true,
 							theme: o.splitTheme,
-							iconPos: "notext",
+							iconpos: "notext",
 							icon: "arrow-r"
 						} ) );
 					
