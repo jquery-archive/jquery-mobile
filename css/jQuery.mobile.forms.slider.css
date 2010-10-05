@@ -7,8 +7,8 @@ label.ui-slider { display: block; }
 input.ui-slider-input { display: inline-block; width: 40px; }
 select.ui-slider-select { display: none; }
 div.ui-slider { position: relative; display: inline-block; overflow: visible; height: 15px; padding: 0; margin: 0 2% 0 0; top: 4px; width: 66%; }
-div.ui-slider-select { height: 36px; width: 50%;  }
-div.ui-slider-inneroffset { margin-left: 50%; position: absolute; top: 1px; height: 100%; width: 49%; }
+div.ui-slider-select { height: 32px; width: 40%;  }
+div.ui-slider-inneroffset { margin-left: 50%; position: absolute; top: 1px; height: 100%; width: 50%; }
 div.ui-slider-labels { overflow: hidden; }
 div.ui-slider-label { float: left; text-align: center; height: 36px; line-height: 36px;  }
 a.ui-slider-handle { position: absolute; top: 50%; width: 24px; height: 24px; margin-top: -13px; margin-left: -13px; }
