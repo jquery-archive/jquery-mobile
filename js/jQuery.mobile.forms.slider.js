@@ -9,7 +9,7 @@ $.fn.slider = function(options){
 	return this.each(function(){	
 		var control = $(this),
 			cType = control[0].nodeName.toLowerCase(),
-			selectClass = (cType == 'select') ? 'ui-slider-switch' : '',
+			sliderClass = (cType == 'select') ? 'ui-slider-switch' : 'ui-btn-corner-all',
 			controlID = control.attr('id'),
 			labelID = controlID + '-label',
 			label = $('[for='+ controlID +']').attr('id',labelID),
@@ -18,10 +18,11 @@ $.fn.slider = function(options){
 			max = (cType == 'input') ? parseFloat(control.attr('max')) : control.find('option').length-1,
 			percent = val / (max - min) * 100,
 			snappedPercent = percent,
-			slider = $('<div class="ui-slider '+ selectClass +' ui-bar-c" role="application"></div>'),
+			slider = $('<div class="ui-slider '+ sliderClass +' ui-bar-c" role="application"></div>'),
+			cornershadows = (cType == 'select') ? false : true,
 			handle = $('<a href="#" class="ui-slider-handle" data-theme="c"></a>')
 				.appendTo(slider)
-				.buttonMarkup({corners: false, shadow: false})
+				.buttonMarkup({corners: cornershadows, shadow: cornershadows})
 				.attr({
 					'role': 'slider',
 					'aria-valuemin': min,
