@@ -19,7 +19,7 @@ $.fn.controlgroup = function(options){
 		$(this).wrapInner('<div class="ui-controlgroup-controls"></div>');	
 		
 		//replace legend with more stylable replacement div	
-		if(groupheading){
+		if( groupheading.length ){
 			$('<div role="heading" class="ui-controlgroup-label">'+ groupheading.html() +'</div>').insertBefore( $(this).children(0) );	
 			groupheading.remove();	
 		}
