@@ -7,12 +7,13 @@ label.ui-slider { display: block; }
 input.ui-slider-input { display: inline-block; width: 40px; }
 select.ui-slider-switch { display: none; }
 div.ui-slider { position: relative; display: inline-block; overflow: visible; height: 15px; padding: 0; margin: 0 2% 0 0; top: 4px; width: 66%; }
-div.ui-slider-switch { height: 32px; width: 40%;  }
+div.ui-slider-switch { height: 32px;  overflow: hidden; }
 div.ui-slider-inneroffset { margin-left: 50%; position: absolute; top: 1px; height: 100%; width: 50%; }
-div.ui-slider-labels { overflow: hidden; }
-div.ui-slider-label { float: left; text-align: center; height: 36px; line-height: 36px;  }
 a.ui-slider-handle { position: absolute; top: 50%; width: 24px; height: 24px; margin-top: -13px; margin-left: -13px; }
 div.ui-slider-switch a.ui-slider-handle { width: 101%; height: 32px; margin-top: -18px; margin-left: -101%;  }
+span.ui-slider-label { width: 101%; position: absolute; text-align: center; height: 36px; line-height: 36px; top: 0; margin: -1px 0; }
+span.ui-slider-label-a { left: -126%; padding-left: 25%; margin-left: -2px }
+span.ui-slider-label-b { right: -126%; padding-right: 25%; margin-right: -2px }
 a.ui-slider-handle-snapping { -webkit-transition: left 100ms linear; }
 @media screen and (min-width: 480px){ 
 	label.ui-slider { display: inline-block;  width: 20%;  margin: 0 2% 0 0; }
