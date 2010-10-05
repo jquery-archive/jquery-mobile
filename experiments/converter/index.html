@@ -7,57 +7,11 @@
 	<link rel="stylesheet" type="text/css"  href="../../css/all"/> 
 	<script type="text/javascript" src="../../js/all"></script>
 	<script type="text/javascript" src="jquery.tmpl.js"></script>
-	<script type="text/javascript">
-	$(function() {
-		var conversions = [
-			{
-				id: "dollar-to-euro",
-				label: "$ => €",
-				// TODO lookup localStorage API, maybe use storageJS
-				//rate: localStorage["dollar-to-euro-rate"] || 0.766694779,
-				rate: 0.766694779,
-				update: function(callback) {
-					return;
-					var self = this;
-					var url = "http://query.yahooapis.com/v1/public/yql?q=select%20rate%2Cname%20from%20csv%20where%20url%3D'http%3A%2F%2Fdownload.finance.yahoo.com%2Fd%2Fquotes%3Fs%3DUSDEUR%253DX%26f%3Dl1n'%20and%20columns%3D'rate%2Cname'&format=json&diagnostics=true&callback=?";
-					$.getJSON(url, function(result) {
-						self.rate = parseFloat(result.query.results.row.rate);
-						$("#term").keyup();
-						//localStorage[self.id + "-rate"] = self.rate;
-					});
-				}
-			},
-			{
-				id: "miles-to-kilometers",
-				label: "m => km",
-				rate: 1.609344
-			},
-			{
-				id: "inch-to-centimeters",
-				label: "inch => cm",
-				rate: 2.54
-			}
-		];
-		$.each(conversions, function(index, conversion) {
-			conversion.update && conversion.update();
-			$("#conversion-field").tmpl(conversion).appendTo("#conversions");
-		});
-		$.mobilize($("#conversions"));
-		$("#term").keyup(function() {
-			var value = this.value;
-			$.each(conversions, function(index, conversion) {
-				$("#" + conversion.id).val( Math.ceil(value * conversion.rate * 100) / 100);
-			});
-		}).keyup().focus();
-		$("form").submit(function() {
-			$("#term").blur();
-			return false;
-		});
-	});
-	</script>
+	<script type="text/javascript" src="storage.js"></script>
+	<script type="text/javascript" src="application.js"></script>
 	<style>
 		.field { padding: 15px; }
-		.ui-back { display: none !important; }
+		.editbutton { float: right; }
 	</style>
 </head> 
 <body> 
@@ -65,24 +19,64 @@
 <div data-role="page">
 	
 	<div data-role="header">
+		<a href="#customize" class="editbutton">Edit</a>
 		<h1>Converter demo</h1>
 	</div>
 	
-	<div data-role="content" class=" ui-body-b">
+	<div data-role="content" class="ui-body-b">
 		<form method="get" action="" data-role="autoform">
 			<label for="term" data-role="nojs">Search:</label>
-			<input type="number" name="term" id="term" placeholder="search..." data-role="search" />
+			<input type="number" name="term" id="term" placeholder="search..." data-role="search" value="1" />
 		</form>
 		<div class="ui-content">
 			<ul id="conversions" data-role="listview" data-inset="true"></ul>
 		</div>
 		<script id="conversion-field" type="text/x-jquery-tmpl">
 		    <li>
-				<label for="name" class="ui-input-text">${label}</label>
-				<input type="text" readonly="readonly" name="${id}" id="${id}" value="" />
+				<label for="name" class="ui-input-text conversion-${type}" title="From ${from} to ${to}">${$item.symbols[from]} to ${$item.symbols[to]}</label>
+				<input type="text" readonly="readonly" name="${from}${to}" id="${from}${to}" value="" />
 			</li>
 		</script>
 	</div>
-</div>		
+</div>
+
+<div data-role="page" id="customize">
+	
+	<div data-role="header">
+		<h1>Edit conversions</h1>
+	</div>
+	
+	<div data-role="content" class="ui-body-b">
+		sort conversions, add new ones or delete some
+		<a href="#add-dialog" data-role="button">Add currency conversion</a>
+		<a id="restore" href="#" data-role="button">Restore default</a>
+		<a id="clear" href="#" data-role="button">Delete all conversions</a>
+	</div>
+</div>
+
+<div data-role="page" id="add-dialog">
+	<div data-role="header" data-theme="d">
+		<h1>Add conversion</h1>
+		<a href="index.html" class="ui-back" data-icon="arrow-l">Cancel</a>
+	</div>
+	
+	<div data-role="content" class=" ui-body ui-body-c">
+		<h1>Demo description</h1>
+		From
+		<select name="currency-options" id="currency-options-from">
+			<option value="EUR">EUR - Euro</option>
+			<option value="USD">USD - US Dollar</option>
+			<option value="GBP">GBP - Great Britain Pound</option>
+		</select>
+		To
+		<select name="currency-options" id="currency-options-to">
+			<option value="EUR">EUR - Euro</option>
+			<option value="USD">USD - US Dollar</option>
+			<option value="GBP">GBP - Great Britain Pound</option>
+		</select>
+		<a id="add" href="#add-dialog" data-role="button">Add conversion</a>
+	</div>
+</div>
+
 </body>
 </html>
