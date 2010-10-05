@@ -39,8 +39,6 @@ $.fixedToolbars = (function(){
 					$.fixedToolbars.show();
 				}
 			});
-
-		$(window).bind('resize orientationchange', function(){ $.fixedToolbars.hide(true); });	
 		
 		//function to return another footer already in the dom with the same data-id
 		function findStickyFooter(el){
