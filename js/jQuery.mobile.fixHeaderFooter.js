@@ -7,8 +7,9 @@
 (function($){
 $.fn.fixHeaderFooter = function(options){
 	return $(this).each(function(){
-		$(this).find('.ui-header').addClass('ui-header-fixed fade'); //should be slidedown
-		$(this).find('.ui-footer').addClass('ui-footer-fixed fade'); //should be slideup		
+		if( $(this).data('fullscreen') ){ $(this).addClass('ui-page-fullscreen'); }
+		$(this).find('.ui-header').addClass('ui-header-fixed ui-fixed-inline fade'); //should be slidedown
+		$(this).find('.ui-footer').addClass('ui-footer-fixed ui-fixed-inline fade'); //should be slideup		
 	});
 };				
 
@@ -106,6 +107,9 @@ $.fixedToolbars = (function(){
 					screenHeight = window.innerHeight,
 					thisHeight = el.outerHeight(),
 					alreadyVisible = (el.is('.ui-header-fixed') && fromTop <= thisTop + thisHeight) || (el.is('.ui-footer-fixed') && thisTop <= fromTop + screenHeight);	
+				
+				//add state class
+				el.addClass('ui-fixed-overlay').removeClass('ui-fixed-inline');	
 					
 				if( !alreadyVisible && !immediately ){
 					el.addClass('in').animationComplete(function(){
@@ -119,6 +123,10 @@ $.fixedToolbars = (function(){
 			currentstate = 'inline';
 			return $('.ui-header-fixed,.ui-footer-fixed:not(.ui-footer-duplicate)').each(function(){
 				var el = $(this);
+				
+				//add state class
+				el.addClass('ui-fixed-inline').removeClass('ui-fixed-overlay');
+				
 				if(immediately){
 					el.css('top',0);
 				}
