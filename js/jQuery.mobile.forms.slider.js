@@ -9,7 +9,7 @@ $.fn.slider = function(options){
 	return this.each(function(){	
 		var control = $(this),
 			cType = control[0].nodeName.toLowerCase(),
-			selectClass = (cType == 'select') ? 'ui-slider-select' : '',
+			selectClass = (cType == 'select') ? 'ui-slider-switch' : '',
 			controlID = control.attr('id'),
 			labelID = controlID + '-label',
 			label = $('[for='+ controlID +']').attr('id',labelID),
@@ -18,7 +18,7 @@ $.fn.slider = function(options){
 			max = (cType == 'input') ? parseFloat(control.attr('max')) : control.find('option').length-1,
 			percent = val / (max - min) * 100,
 			snappedPercent = percent,
-			slider = $('<div class="ui-slider '+ selectClass +' ui-bar-c ui-btn-corner-all" role="application"></div>'),
+			slider = $('<div class="ui-slider '+ selectClass +' ui-btn-down-c ui-btn-corner-all" role="application"></div>'),
 			handle = $('<a href="#" class="ui-slider-handle" data-theme="c"></a>')
 				.appendTo(slider)
 				.buttonMarkup({corners: true})
@@ -53,7 +53,7 @@ $.fn.slider = function(options){
 			}
 			else { 
 				if(control[0].selectedIndex !== val){
-					slider.toggleClass('ui-bar-c ui-bar-b');
+					slider.toggleClass('ui-btn-down-b ui-btn-down-c');
 				}
 				control[0].selectedIndex = val;
 			}
@@ -104,7 +104,7 @@ $.fn.slider = function(options){
 		label.addClass('ui-slider');
 		
 		control
-			.addClass((cType == 'input') ? 'ui-slider-input' : 'ui-slider-select')
+			.addClass((cType == 'input') ? 'ui-slider-input' : 'ui-slider-switch')
 			.keyup(function(e){
 				slideUpdate(e, $(this).val() );
 			});
