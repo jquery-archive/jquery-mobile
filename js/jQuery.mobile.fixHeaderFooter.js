@@ -57,7 +57,7 @@ $.fixedToolbars = (function(){
 					stickyFooter.before( stickyFooter.clone().addClass('ui-footer-duplicate') );
 				}
 				$(event.target).find('[data-role="footer"]').addClass('ui-footer-duplicate');
-				stickyFooter.appendTo('body');
+				stickyFooter.appendTo('body').css('top',0);
 				setTop(stickyFooter);
 			}
 		});
@@ -65,9 +65,9 @@ $.fixedToolbars = (function(){
 		//after page is shown, append footer to new page
 		$('.ui-page').live('pageshow', function(event, ui){
 			if( stickyFooter && stickyFooter.length ){
-				stickyFooter.appendTo(event.target);
-				setTop(stickyFooter);
+				stickyFooter.appendTo(event.target).css('top',0);
 			}
+			$.fixedToolbars.show(true);
 		});
 		
 	});
@@ -75,10 +75,9 @@ $.fixedToolbars = (function(){
 	function setTop(el){
 		var fromTop = $(window).scrollTop(),
 			thisTop = el.offset().top,
-			thisCSStop = parseFloat(el.css('top')),
+			thisCSStop = el.css('top') == 'auto' ? 0 : parseFloat(el.css('top')),
 			screenHeight = window.innerHeight,
 			thisHeight = el.outerHeight();
-			
 		if( el.is('.ui-header-fixed') ){
 			return el.css('top', fromTop - thisTop + thisCSStop);
 		}
@@ -95,9 +94,9 @@ $.fixedToolbars = (function(){
 
 	//exposed methods
 	return {
-		show: function(){
+		show: function(immediately){
 			currentstate = 'overlay';
-			return $('.ui-header-fixed,.ui-footer-fixed').each(function(){
+			return $('.ui-header-fixed,.ui-footer-fixed:not(.ui-footer-duplicate)').each(function(){
 				var el = $(this),
 					fromTop = $(window).scrollTop(),
 					thisTop = el.offset().top,
@@ -105,17 +104,17 @@ $.fixedToolbars = (function(){
 					thisHeight = el.outerHeight(),
 					alreadyVisible = (el.is('.ui-header-fixed') && fromTop <= thisTop + thisHeight) || (el.is('.ui-footer-fixed') && thisTop <= fromTop + screenHeight);	
 					
-				if( !alreadyVisible ){
+				if( !alreadyVisible && !immediately ){
 					el.addClass('in').animationComplete(function(){
 						el.removeClass('in');
 					});
-					setTop(el);
 				}
+				setTop(el);
 			});	
 		},
 		hide: function(immediately){
 			currentstate = 'inline';
-			return $('.ui-header-fixed,.ui-footer-fixed').each(function(){
+			return $('.ui-header-fixed,.ui-footer-fixed:not(.ui-footer-duplicate)').each(function(){
 				var el = $(this);
 				if(immediately){
 					el.css('top',0);
