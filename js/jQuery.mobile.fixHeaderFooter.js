@@ -15,29 +15,40 @@ $.fn.fixHeaderFooter = function(options){
 //single controller for all showing,hiding,toggling		
 $.fixedToolbars = (function(){
 	var currentstate = 'inline',
-		showAfterScroll = false,
 		delayTimer,
 		ignoreTargets = 'a,input,textarea,select,button,label,.ui-header-fixed,.ui-footer-fixed',
-		stickyFooter; //for storing quick references to duplicate footers
-
+		stickyFooter, //for storing quick references to duplicate footers
+		supportTouch = $.support.touch,
+		touchStartEvent = supportTouch ? "touchstart" : "mousedown",
+		touchStopEvent = supportTouch ? "touchend" : "mouseup",
+		stateBefore = null,
+		scrollTriggered = false;
+		
 	$(function() {
 		$(document)
-			.bind('tap',function(e){
-				if( !$(e.target).closest(ignoreTargets).length ){
-					$.fixedToolbars.toggle();
+			.bind(touchStartEvent,function(event){
+				if( $(event.target).closest(ignoreTargets).length ){ return; }
+				stateBefore = currentstate;
+				$.fixedToolbars.hide(true);
+			})
+			.bind('scrollstart',function(event){
+				if( $(event.target).closest(ignoreTargets).length ){ return; } //because it could be a touchmove...
+				scrollTriggered = true;
+				if(stateBefore == null){ stateBefore = currentstate; }
+				$.fixedToolbars.hide(true);
+			})
+			.bind(touchStopEvent,function(event){
+				if( $(event.target).closest(ignoreTargets).length ){ return; }
+				if( !scrollTriggered ){
+					$.fixedToolbars.toggle(stateBefore);
+					stateBefore = null;
 				}
 			})
-			.bind('scrollstart',function(){
-				if(currentstate == 'overlay'){
-					showAfterScroll = true;
-					$.fixedToolbars.hide(true);
-				}
-			})
-			.bind('scrollstop',function(){
-				if(showAfterScroll){
-					showAfterScroll = false;
-					$.fixedToolbars.show();
-				}
+			.bind('scrollstop',function(event){
+				if( $(event.target).closest(ignoreTargets).length ){ return; }
+				scrollTriggered = false;
+				$.fixedToolbars.toggle( stateBefore == 'overlay' ? 'inline' : 'overlay' );
+				stateBefore = null;
 			});
 		
 		//function to return another footer already in the dom with the same data-id
@@ -133,7 +144,8 @@ $.fixedToolbars = (function(){
 				$.fixedToolbars.hide();
 			}, 3000);
 		},
-		toggle: function(){
+		toggle: function(from){
+			if(from){ currentstate = from; }
 			return (currentstate == 'overlay') ? $.fixedToolbars.hide() : $.fixedToolbars.show();
 		}
 	};
