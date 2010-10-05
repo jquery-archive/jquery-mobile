@@ -88,16 +88,10 @@ $.fixedToolbars = (function(){
 			screenHeight = window.innerHeight,
 			thisHeight = el.outerHeight();
 		if( el.is('.ui-header-fixed') ){
-			return el.css('top', fromTop - thisTop + thisCSStop);
+			return el.css('top', (el.parents('.ui-page').length) ? fromTop - thisTop + thisCSStop : fromTop);
 		}
 		else{
-			//check if the footer is relative positioned or not
-			if( el.parents('.ui-page').length ){
-				return el.css('top', -1 * (thisTop - (fromTop + screenHeight) + thisCSStop + thisHeight) );
-			}
-			else{
-				return el.css('top', fromTop + screenHeight - thisHeight );
-			}
+			return el.css('top', (el.parents('.ui-page').length) ? -1 * (thisTop - (fromTop + screenHeight) + thisCSStop + thisHeight) : fromTop + screenHeight - thisHeight );
 		}
 	}
 
