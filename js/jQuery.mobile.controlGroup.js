@@ -16,9 +16,13 @@ $.fn.controlgroup = function(options){
 			flCorners = o.direction == 'horizontal' ? ['ui-corner-left', 'ui-corner-right'] : ['ui-corner-top', 'ui-corner-bottom'],
 			type = $(this).find('input:eq(0)').attr('type');
 		
+		$(this).wrapInner('<div class="ui-controlgroup-controls"></div>');	
+		
 		//replace legend with more stylable replacement div	
-		$('<div role="heading" class="ui-controlgroup-label">'+ groupheading.html() +'</div>').insertBefore(groupheading);	
-		groupheading.remove();	
+		if(groupheading){
+			$('<div role="heading" class="ui-controlgroup-label">'+ groupheading.html() +'</div>').insertBefore( $(this).children(0) );	
+			groupheading.remove();	
+		}
 
 		$(this).addClass('ui-corner-all ui-controlgroup ui-controlgroup-'+o.direction);
 		
