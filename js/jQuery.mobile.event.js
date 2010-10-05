@@ -7,7 +7,7 @@ $.each( "touchstart touchmove touchend orientationchange tap taphold swipe swipe
 });
 
 var supportTouch = $.support.touch,
-	scrollEvent = supportTouch ? "touchmove" : "scroll",
+	scrollEvent = "touchmove scroll",
 	touchStartEvent = supportTouch ? "touchstart" : "mousedown",
 	touchStopEvent = supportTouch ? "touchend" : "mouseup",
 	touchMoveEvent = supportTouch ? "touchmove" : "mousemove";
