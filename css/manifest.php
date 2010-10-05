@@ -5,7 +5,7 @@ $elements = array(
 	'jQuery.mobile.transitions.css',
 	'jQuery.mobile.grids.css',
 	'jQuery.mobile.headerfooter.css',
-	'jQuery.mobile.globalnav.css',
+	'jQuery.mobile.navlist.css',
 	'jQuery.mobile.button.css',
 	'jQuery.mobile.collapsible.css',
 	'jQuery.mobile.controlgroup.css',

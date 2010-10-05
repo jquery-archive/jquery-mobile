@@ -18,7 +18,7 @@ $elements = array(
 	'jQuery.mobile.fieldContain.js',
 	'jQuery.mobile.listview.js',
 	'jQuery.mobile.dialog.js',
-	'jQuery.mobile.globalnav.js',
+	'jQuery.mobile.navlist.js',
 	'jQuery.mobile.grid.js',
 	'jQuery.ui.datepicker.js',
 	'jQuery.mobile.js'

@@ -315,7 +315,7 @@
 					break;
 				case 'collapsible':
 				case 'fieldcontain':
-				case 'globalnav':
+				case 'navlist':
 				case 'listview':
 				case 'dialog':
 				case 'ajaxform':
