@@ -18,10 +18,10 @@ $.fn.slider = function(options){
 			max = (cType == 'input') ? parseFloat(control.attr('max')) : control.find('option').length-1,
 			percent = val / (max - min) * 100,
 			snappedPercent = percent,
-			slider = $('<div class="ui-slider '+ selectClass +' ui-btn-down-c ui-btn-corner-all" role="application"></div>'),
+			slider = $('<div class="ui-slider '+ selectClass +' ui-bar-c" role="application"></div>'),
 			handle = $('<a href="#" class="ui-slider-handle" data-theme="c"></a>')
 				.appendTo(slider)
-				.buttonMarkup({corners: true})
+				.buttonMarkup({corners: false, shadow: false})
 				.attr({
 					'role': 'slider',
 					'aria-valuemin': min,
@@ -35,16 +35,14 @@ $.fn.slider = function(options){
 			
 		if(cType == 'select'){
 			slider.wrapInner('<div class="ui-slider-inneroffset"></div>');
-			var labels = $('<div class="ui-slider-labels"></div>'),
-				options = control.find('option'),
-				labelWidth = 100 / options.length + '%'; 
+			var options = control.find('option');
 				
 			control.find('option').each(function(i){
-				$('<div class="ui-slider-label">'+$(this).text()+'</div>')
-					.width(labelWidth)
-					.prependTo(labels); //NOTE: this is to flip the label order (switches cover the selected value)
+				var side = (i==0) ?'b':'a',
+					theme = (i==0) ?'c':'b'
+				$('<span class="ui-slider-label ui-slider-label-'+ side +' ui-btn-down-'+ theme +'">'+$(this).text()+'</span>').appendTo(handle);
 			});
-			slider.prepend(labels);
+			
 		}	
 		
 		function updateControl(val){
