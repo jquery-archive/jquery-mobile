@@ -7,10 +7,10 @@ $( ":mobile-listview" ).live( "listviewcreate", function() {
 	if ( !list.data( "listview" ).options.filter ) {
 		return;
 	}
-	
-	var wrapper = $( "<div>" ),
+
+	var wrapper = $( "<form>", { class: "ui-bar-c"} ),
 		
-		search = $( "<input>", { placeholder: "Search..." })
+		search = $( "<input>", { placeholder: "Filter results...", "data-type": "search" })
 			.keyup(function() {
 				var val = this.value,
 					visible = list.children().show().length;
@@ -22,9 +22,10 @@ $( ":mobile-listview" ).live( "listviewcreate", function() {
 				count.text( visible );
 				multiple.toggle( visible !== 1 );
 			})
-			.appendTo( wrapper ),
+			.appendTo( wrapper )
+			.customTextInput(),
 		
-		results = $( "<p>" )
+		results = $( "<p>", { class: "ui-body"} )
 			.html( "Displaying <span class='count'></span> Result<span class='multiple'>s</span>" )
 			.appendTo( wrapper ),
 		
