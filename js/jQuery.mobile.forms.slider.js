@@ -19,7 +19,7 @@ $.fn.slider = function(options){
 			percent = val / (max - min) * 100,
 			snappedPercent = percent,
 			slider = $('<div class="ui-slider '+ selectClass +' ui-bar-c ui-btn-corner-all" role="application"></div>'),
-			handle = $('<a href="#" class="ui-slider-handle-btn"></a>')
+			handle = $('<a href="#" class="ui-slider-handle"></a>')
 				.appendTo(slider)
 				.buttonMarkup({corners: true, theme: 'c', shadow: true})
 				.attr({
@@ -31,7 +31,6 @@ $.fn.slider = function(options){
 					'title': val,
 					'aria-labelledby': labelID
 				}),
-			handleWrapper = handle.wrap('<div class="ui-slider-handle"></div>').parent(),
 			dragging = false;
 			
 		if(cType == 'select'){
@@ -43,7 +42,7 @@ $.fn.slider = function(options){
 					corners = (i==0) ? 'right' :'left',
 					theme = (i==0) ?'c':'b';
 				$('<div class="ui-slider-labelbg ui-slider-labelbg-'+ side +' ui-btn-down-'+ theme +' ui-btn-corner-'+ corners+'"></div>').prependTo(slider);	
-				$('<span class="ui-slider-label ui-slider-label-'+ side +' ui-btn-down-'+ theme +' ui-btn-corner-'+ corners+'" role="image">'+$(this).text()+'</span>').prependTo(handleWrapper);
+				$('<span class="ui-slider-label ui-slider-label-'+ side +' ui-btn-down-'+ theme +' ui-btn-corner-'+ corners+'" role="image">'+$(this).text()+'</span>').prependTo(handle);
 			});
 			
 		}	
@@ -81,7 +80,7 @@ $.fn.slider = function(options){
 				
 			}
 			snappedPercent = Math.round( newval / max * 100 );
-			handleWrapper.css('left', percent + '%');
+			handle.css('left', percent + '%');
 			handle.attr({
 					'aria-valuenow': (cType == 'input') ? newval : control.find('option').eq(newval).attr('value'),
 					'aria-valuetext': (cType == 'input') ? newval : control.find('option').eq(newval).text(),
@@ -101,11 +100,11 @@ $.fn.slider = function(options){
 		
 		function updateSnap(){
 			if(cType == 'select'){
-				handleWrapper
+				handle
 					.addClass('ui-slider-handle-snapping')
 					.css('left', snappedPercent + '%')
 					.animationComplete(function(){
-						handleWrapper.removeClass('ui-slider-handle-snapping');
+						handle.removeClass('ui-slider-handle-snapping');
 					});
 			}
 		}
@@ -145,7 +144,7 @@ $.fn.slider = function(options){
 			})
 			.insertAfter(control);
 		
-		handleWrapper
+		handle
 			.css('left', percent + '%')
 			.bind('click', function(e){ return false; });	
 	});
