@@ -16,18 +16,18 @@
 </head> 
 <body> 
 
-<div data-role="page" class="ui-body-b">
+<div data-role="page" class="ui-body-c">
 	
 	<div data-role="header">
-		<a href="#customize" class="editbutton ui-aux">Edit</a>
+		<a href="#customize" class="editbutton ui-aux" data-transition="flip">Edit</a>
 		<h1>Converter demo</h1>
 	</div>
-	
-	<div data-role="content">
-		<form method="get" action="" data-role="autoform">
+	<form method="get" action="" data-role="autoform" class="ui-bar-b">
 			<label for="term" data-role="nojs">Search:</label>
-			<input type="search" name="term" id="term" placeholder="search..." value="1" />
+			<input type="search" name="term" id="term" placeholder="type a value..." value="1" />
 		</form>
+	<div data-role="content">
+		
 		<div class="ui-content">
 			<ul id="conversions" data-role="listview" data-inset="true"></ul>
 		</div>
@@ -40,35 +40,35 @@
 	</div>
 </div>
 
-<div data-role="page" id="customize">
+<div data-role="page" id="customize" class="ui-body-b">
 	
-	<div data-role="header">
+	<div data-role="header" data-theme="b">
 		<h1>Edit conversions</h1>
 	</div>
 	
-	<div data-role="content" class="ui-body-b">
-		sort conversions, add new ones or delete some
-		<a href="#add-dialog" data-role="button">Add currency conversion</a>
+	<div data-role="content" class="ui-body">
+		<h2>sort conversions, add new ones or delete some</h2>
+		<a href="#add-dialog" data-role="button" data-rel="dialog" data-transition="pop">Add currency conversion</a>
 		<a id="restore" href="#" data-role="button">Restore default</a>
 		<a id="clear" href="#" data-role="button">Delete all conversions</a>
 	</div>
 </div>
 
-<div data-role="page" id="add-dialog">
+<div data-role="page" id="add-dialog" class="ui-body-a">
 	<div data-role="header" data-theme="d">
 		<h1>Add conversion</h1>
 		<a href="index.html" class="ui-back" data-icon="arrow-l">Cancel</a>
 	</div>
 	
-	<div data-role="content" class=" ui-body ui-body-c">
+	<div data-role="content" class=" ui-body">
 		<h1>Demo description</h1>
-		From
+		<label for="currency-options-from">From</label>
 		<select name="currency-options" id="currency-options-from">
 			<option value="EUR">EUR - Euro</option>
 			<option value="USD">USD - US Dollar</option>
 			<option value="GBP">GBP - Great Britain Pound</option>
 		</select>
-		To
+		<label for="currency-options-to">To</label>
 		<select name="currency-options" id="currency-options-to">
 			<option value="EUR">EUR - Euro</option>
 			<option value="USD">USD - US Dollar</option>
