@@ -9,4 +9,4 @@
 .ui-footer-duplicate, .ui-page-fullscreen .ui-fixed-inline { display: none; }
 .ui-header .ui-back { position: absolute; left: 10px; top: .4em;  }
 .ui-header h1, .ui-footer h1 { text-align: center; font-size: 16px; display: block; margin: .6em 90px .8em;  padding: 0;  white-space: nowrap; overflow: hidden; }
-.ui-header .ui-aux { position: absolute; right: 10px; top: .2em; }
+.ui-header .ui-aux { position: absolute; right: 10px; top: .4em; }
