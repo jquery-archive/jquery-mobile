@@ -26,8 +26,9 @@ jQuery.fn.customTextInput = function(options){
 			var clearbtn = $('<a href="#" class="ui-input-clear" title="clear text">clear text</a>')
 				.buttonMarkup({icon: 'delete', iconpos: 'notext', corners:true, shadow:true})
 				.click(function(){
-					input.val('');
-					toggleClear();
+					input.val('').focus();
+					input.trigger('change'); 
+					clearbtn.addClass('ui-input-clear-hidden');
 					return false;
 				})
 				.appendTo(focusedEl);
