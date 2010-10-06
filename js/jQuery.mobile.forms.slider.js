@@ -9,7 +9,7 @@ $.fn.slider = function(options){
 	return this.each(function(){	
 		var control = $(this),
 			cType = control[0].nodeName.toLowerCase(),
-			sliderClass = (cType == 'select') ? 'ui-slider-switch' : 'ui-btn-corner-all',
+			selectClass = (cType == 'select') ? 'ui-slider-switch' : '',
 			controlID = control.attr('id'),
 			labelID = controlID + '-label',
 			label = $('[for='+ controlID +']').attr('id',labelID),
@@ -18,11 +18,10 @@ $.fn.slider = function(options){
 			max = (cType == 'input') ? parseFloat(control.attr('max')) : control.find('option').length-1,
 			percent = val / (max - min) * 100,
 			snappedPercent = percent,
-			slider = $('<div class="ui-slider '+ sliderClass +' ui-bar-c" role="application"></div>'),
-			cornershadows = (cType == 'select') ? false : true,
-			handle = $('<a href="#" class="ui-slider-handle" data-theme="c"></a>')
+			slider = $('<div class="ui-slider '+ selectClass +' ui-bar-c ui-btn-corner-all" role="application"></div>'),
+			handle = $('<a href="#" class="ui-slider-handle-btn"></a>')
 				.appendTo(slider)
-				.buttonMarkup({corners: cornershadows, shadow: cornershadows})
+				.buttonMarkup({corners: true, theme: 'c', shadow: true})
 				.attr({
 					'role': 'slider',
 					'aria-valuemin': min,
@@ -32,6 +31,7 @@ $.fn.slider = function(options){
 					'title': val,
 					'aria-labelledby': labelID
 				}),
+			handleWrapper = handle.wrap('<div class="ui-slider-handle"></div>').parent(),
 			dragging = false;
 			
 		if(cType == 'select'){
@@ -40,8 +40,10 @@ $.fn.slider = function(options){
 				
 			control.find('option').each(function(i){
 				var side = (i==0) ?'b':'a',
-					theme = (i==0) ?'c':'b'
-				$('<span class="ui-slider-label ui-slider-label-'+ side +' ui-btn-down-'+ theme +'">'+$(this).text()+'</span>').appendTo(handle);
+					corners = (i==0) ? 'right' :'left',
+					theme = (i==0) ?'c':'b';
+				$('<div class="ui-slider-labelbg ui-slider-labelbg-'+ side +' ui-btn-down-'+ theme +' ui-btn-corner-'+ corners+'"></div>').prependTo(slider);	
+				$('<span class="ui-slider-label ui-slider-label-'+ side +' ui-btn-down-'+ theme +' ui-btn-corner-'+ corners+'" role="image">'+$(this).text()+'</span>').prependTo(handleWrapper);
 			});
 			
 		}	
@@ -51,9 +53,6 @@ $.fn.slider = function(options){
 				control.val(val); 
 			}
 			else { 
-				if(control[0].selectedIndex !== val){
-					slider.toggleClass('ui-btn-down-b ui-btn-down-c');
-				}
 				control[0].selectedIndex = val;
 			}
 		}
@@ -77,25 +76,36 @@ $.fn.slider = function(options){
 			var newval = Math.round( (percent/100) * max );
 			if( newval < min ) { newval = min; }
 			if( newval > max ) { newval = max; }
+			//flip the stack of the bg colors
+			if(percent > 60 && cType == 'select'){ 
+				
+			}
 			snappedPercent = Math.round( newval / max * 100 );
-			handle
-				.css('left', percent + '%')
-				.attr({
+			handleWrapper.css('left', percent + '%');
+			handle.attr({
 					'aria-valuenow': (cType == 'input') ? newval : control.find('option').eq(newval).attr('value'),
 					'aria-valuetext': (cType == 'input') ? newval : control.find('option').eq(newval).text(),
 					'title': newval
 				});
-
+			updateSwitchClass(newval);
 			updateControl(newval);
 		}
 		
+		function updateSwitchClass(val){
+			if(cType == 'input'){return;}
+			if(val == 0){ slider.addClass('ui-slider-switch-a').removeClass('ui-slider-switch-b'); }
+			else { slider.addClass('ui-slider-switch-b').removeClass('ui-slider-switch-a'); }
+		}
+		
+		updateSwitchClass(val);
+		
 		function updateSnap(){
 			if(cType == 'select'){
-				handle
+				handleWrapper
 					.addClass('ui-slider-handle-snapping')
 					.css('left', snappedPercent + '%')
 					.animationComplete(function(){
-						handle.removeClass('ui-slider-handle-snapping');
+						handleWrapper.removeClass('ui-slider-handle-snapping');
 					});
 			}
 		}
@@ -135,7 +145,7 @@ $.fn.slider = function(options){
 			})
 			.insertAfter(control);
 		
-		handle
+		handleWrapper
 			.css('left', percent + '%')
 			.bind('click', function(e){ return false; });	
 	});
