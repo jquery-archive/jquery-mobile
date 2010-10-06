@@ -286,8 +286,8 @@
 			$el.find('[data-role="nojs"]').addClass('ui-nojs');
 			
 			//replace HTML5 input types that have crap browser implementations
-			$el.find('input[type=number],input[type=range],input[type=tel],input[type=url],input[type=email],input[type=date],input[type=search]').each(function(){
-				$(this).replaceWith( $( '<div>' ).html( $(this).clone() ).html().replace(/type="([a-zA-Z]+)"/, 'type="text" data-type="$1"') );
+			$el.find('input').not('[type=text],[type=submit],[type=reset],[type=image],[type=button]').each(function(){
+				$(this).replaceWith( $( '<div>' ).html( $(this).clone() ).html().replace(/type="([a-zA-Z]+)"/, 'data-type="$1"') );
 				
 			});
 			
