@@ -7,7 +7,7 @@ label.ui-slider { display: block; }
 input.ui-slider-input { display: inline-block; width: 40px; }
 select.ui-slider-switch { display: none; }
 div.ui-slider { position: relative; display: inline-block; overflow: visible; height: 15px; padding: 0; margin: 0 2% 0 15px; top: 4px; width: 66%; }
-a.ui-slider-handle { position: absolute; z-index: 10;  top: 50%; width: 24px; height: 24px; margin-top: -13px; margin-left: -13px; }
+a.ui-slider-handle { position: absolute; z-index: 10;  top: 50%; width: 28px; height: 28px; margin-top: -15px; margin-left: -15px; }
 
 @media screen and (min-width: 480px){ 
 	label.ui-slider { display: inline-block;  width: 20%;  margin: 0 2% 0 0; }
