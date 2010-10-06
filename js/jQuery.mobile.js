@@ -290,18 +290,7 @@
 			$el.find('input[type=text],input[type=number],input[type=tel],input[type=url],input[type=email],input[type=password],textarea').customTextInput();
 			$el.find("input, select").filter('[data-role="slider"]').slider();
 			$el.find('select').not('[data-role="slider"]').customSelect();
-			
-			/*temporary datepicker workaround */
-			$el.find('input[type=date]').hide().after( $('<div />').datepicker() );
-			$('.ui-datepicker-header').addClass('ui-body-c ui-corner-top').removeClass('ui-corner-all');
-			$('.ui-datepicker-prev').buttonMarkup({iconpos: 'notext', icon: 'arrow-l', shadow: true, corners: true});
-			$('.ui-datepicker-next').buttonMarkup({iconpos: 'notext', icon: 'arrow-r', shadow: true, corners: true});
-			$('.ui-datepicker-calendar thead').remove();
-			$('.ui-datepicker-calendar .ui-btn-text span').attr('class','');
-			$('.ui-datepicker-calendar td').addClass('ui-btn-up-c');
-			$('.ui-datepicker-calendar a').buttonMarkup({corners: false, shadow: false});
-			/* //temporary datepicker workaround */
-			
+						
 			//pre-find data els
 			var $dataEls = $el.find('[data-role]').andSelf().each(function() {
 				var $this = $(this),
