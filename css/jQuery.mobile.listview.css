@@ -25,3 +25,5 @@ ol.ui-listview .ui-li-jsnumbering:before { content: "" !important; } /* to avoid
 .ui-li-link-alt .ui-btn { overflow: hidden; position: absolute; right: 5px; top: 50%; margin-top: -11px; border-bottom-width: 1px; }
 .ui-li-link-alt .ui-btn-inner { padding: 0; position: static; }
 .ui-li-link-alt .ui-btn .ui-icon { right: 50%; margin-right: -9px;  }
+
+.ui-listview-filter { border-width: 0; overflow: hidden; }
