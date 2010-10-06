@@ -11,7 +11,7 @@ $( ":mobile-listview" ).live( "listviewcreate", function() {
 	var wrapper = $( "<form>", { 'class': "ui-listview-filter ui-bar-c"} ),
 		
 		search = $( "<input>", { placeholder: "Filter results...", "data-type": "search" })
-			.keyup(function() {
+			.bind('keyup change', function() {
 				var val = this.value;
 				list.children().show();
 				if ( val ) {
