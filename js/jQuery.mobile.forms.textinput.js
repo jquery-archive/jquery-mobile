@@ -10,7 +10,7 @@ jQuery.fn.customTextInput = function(options){
 		var input = $(this);
 		
 		var o = $.extend({
-			search: input.is('[data-role="search"]') 
+			search: input.is('[type="search"],[data-type="search"]') 
 			//defaultTheme: "a"
 		}, options);
 		
