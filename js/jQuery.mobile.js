@@ -285,11 +285,19 @@
 			//hide no-js content
 			$el.find('[data-role="nojs"]').addClass('ui-nojs');
 			
+			//replace HTML5 input types that have crap browser implementations
+			$el.find('input[type=number],input[type=range],input[type=tel],input[type=url],input[type=email],input[type=date]').each(function(){
+				$(this).replaceWith( $( '<div>' ).html( $(this).clone() ).html().replace(/type="([a-zA-Z]+)"/, 'type="text" data-type="$1"') );
+				
+			});
+			
 			$el.find('input[type=radio],input[type=checkbox]').customCheckboxRadio();
 			$el.find('button, input[type=submit], input[type=reset], input[type=image]').not('.ui-nojs').customButton();
 			$el.find('input[type=text],input[type=number],input[type=tel],input[type=url],input[type=email],input[type=password],textarea').customTextInput();
 			$el.find("input, select").filter('[data-role="slider"]').slider();
 			$el.find('select').not('[data-role="slider"]').customSelect();
+			
+			
 						
 			//pre-find data els
 			var $dataEls = $el.find('[data-role]').andSelf().each(function() {
