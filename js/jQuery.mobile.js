@@ -16,7 +16,8 @@
 	jQuery.mobile = {};
 	
 	jQuery.extend(jQuery.mobile, {
-		subPageUrlKey: 'ui-page' //define the key used in urls for sub-pages. Defaults to &ui-page=
+		subPageUrlKey: 'ui-page', //define the key used in urls for sub-pages. Defaults to &ui-page=
+		degradeHTML5inputs: true
 	});
 
 	var $window = jQuery(window),
@@ -286,13 +287,15 @@
 			$el.find('[data-role="nojs"]').addClass('ui-nojs');
 			
 			//replace HTML5 input types that have crap browser implementations
-			$el.find('input').not('[type=text],[type=submit],[type=reset],[type=image],[type=button]').each(function(){
-				$(this).replaceWith( $( '<div>' ).html( $(this).clone() ).html().replace(/type="([a-zA-Z]+)"/, 'data-type="$1"') );
-			});
+			if($.mobile.degradeHTML5inputs){
+				$el.find('input').not('[type=text],[type=submit],[type=reset],[type=image],[type=button],[type=checkbox],[type=radio]').each(function(){
+					$(this).replaceWith( $( '<div>' ).html( $(this).clone() ).html().replace(/type="([a-zA-Z]+)"/, 'data-type="$1"') );
+				});
+			}
 			
 			$el.find('input[type=radio],input[type=checkbox]').customCheckboxRadio();
-			$el.find('button, input[type=submit], input[type=reset], input[type=image]').not('.ui-nojs').customButton();
-			$el.find('input[type=text],input[type=password],textarea').customTextInput();
+			$el.find('button, input[type=submit], input[type=reset], input[type=image],[type=button]').not('.ui-nojs').customButton();
+			$el.find('input, textarea').not('[type=submit],[type=reset],[type=image],[type=button],[type=checkbox],[type=radio]').customTextInput();
 			$el.find("input, select").filter('[data-role="slider"]').slider();
 			$el.find('select').not('[data-role="slider"]').customSelect();
 			
