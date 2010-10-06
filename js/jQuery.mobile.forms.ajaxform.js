@@ -24,7 +24,7 @@ $.fn.ajaxform = function(options){
 			action: $this.attr('action'),
 			injectResponse: true,//should be data-attr driven
 			dataFilter: $.formhandlers['default'], //should be data-attr driven 
-			theme: 'b'
+			theme: $this.data('theme') || 'b'
 		}, options);
 				
 		$this.addClass('ui-autoform ui-bar-'+o.theme);
