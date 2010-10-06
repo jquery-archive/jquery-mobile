@@ -19,20 +19,10 @@ $( ":mobile-listview" ).live( "listviewcreate", function() {
 						return $( this ).text().indexOf( val ) === -1;
 					}).hide().length;
 				}
-				count.text( visible );
-				multiple.toggle( visible !== 1 );
 			})
 			.appendTo( wrapper )
-			.customTextInput(),
-		
-		results = $( "<p>", { class: "ui-body"} )
-			.html( "Displaying <span class='count'></span> Result<span class='multiple'>s</span>" )
-			.appendTo( wrapper ),
-		
-		count = results.children( ".count" )
-			.text( list.children().length ),
-		
-		multiple = results.children( ".multiple" );
+			.customTextInput();
+
 	
 	wrapper.insertBefore( list );
 });
