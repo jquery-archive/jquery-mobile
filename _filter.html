@@ -5,27 +5,6 @@
 	<title>jQuery Mobile Framework - Filtered List View</title>
 	<link rel="stylesheet" type="text/css" href="css/all" />
 	<script type="text/javascript" src="js/all"></script>
-	<script>
-	$(function() {
-		var term = $( "#term" ),
-			list = $( "[data-role=listview]" ),
-			count = $( "#count" ),
-			searchTerm = $( "#search-term" );
-		
-		$( "#term" ).keyup(function() {
-			var val = term.val().replace( /[()]/g, "\\\\$1" );
-
-			list.children().show();
-			
-			if ( val ) {
-				list.children().not( ":contains(" + val + ")" ).hide();
-			}
-
-			count.text( list.children( ":visible" ).length );
-			searchTerm.text( term.val() );
-		});
-	});
-	</script>
 </head>
 <body>
 
@@ -35,16 +14,10 @@
 		<a href="index.html" class="ui-back" data-icon="arrow-l">Home</a>
 	</div>
 	
-	<form method="get" action="_searchresult.html">
-		<label for="term" data-role="nojs">Search:</label>
-		<input type="text" name="term" id="term" placeholder="search..." data-role="search" />
-		<button type="submit" data-role="nojs">Search</button>
-	</form>
-	
 	<div data-role="content">
 		<p class="ui-body"><span id="count">12</span> Results for "<em id="search-term">Justin Bieber</em>"</p>
 	
-		<ol data-role="listview" data-inset="true">
+		<ol data-role="listview" data-inset="true" data-filter="true">
 			<li>
 				<img src="images/jb.jpg" alt="jb" />
 				<h2><a href="index.html">Baby (feat. Ludacris)</a></h2>

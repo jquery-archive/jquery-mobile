@@ -19,6 +19,7 @@ $elements = array(
 	'jQuery.mobile.controlGroup.js',
 	'jQuery.mobile.fieldContain.js',
 	'jQuery.mobile.listview.js',
+	'jquery.mobile.listview.filter.js',
 	'jQuery.mobile.dialog.js',
 	'jQuery.mobile.navlist.js',
 	'jQuery.mobile.grid.js',
