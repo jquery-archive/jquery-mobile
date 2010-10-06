@@ -111,6 +111,9 @@ $.fn.slider = function(options){
 		slider
 			.bind($.support.touch ? "touchstart" : "mousedown", function(event){
 				dragging = true;
+				if((cType == 'select')){
+					val = control[0].selectedIndex;
+				}
 				slideUpdate(event);
 				return false;
 			})
@@ -118,9 +121,16 @@ $.fn.slider = function(options){
 				slideUpdate(event);
 				return false;
 			})
-			.bind($.support.touch ? "touchend" : "mouseup", function(){
+			.bind($.support.touch ? "touchend" : "mouseup", function(event){
 				dragging = false;
-				updateSnap();
+				if(cType == 'select'){
+					if(val == control[0].selectedIndex){
+						val = val == 0 ? 1 : 0;
+						//tap occurred, but value didn't change. flip it!
+						slideUpdate(event,val);
+					}
+					updateSnap();
+				}
 				return false;
 			})
 			.insertAfter(control);
