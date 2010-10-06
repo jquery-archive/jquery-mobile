@@ -131,6 +131,9 @@ a.ui-link-inherit { text-decoration: none !important; }
 .ui-icon-plus { background-image: url(../images/icon-plus-white.png); }
 .ui-icon-minus { background-image: url(../images/icon-minus-white.png); }
 
+/* delete/close */
+.ui-icon-delete { background-image: url(../images/icon-delete.png); }
+
 /*checks,radios*/
 .ui-icon-checkbox-off { background-image: url(../images/form-check-off.png); }
 .ui-icon-checkbox-on { background-image: url(../images/form-check-on.png); }
