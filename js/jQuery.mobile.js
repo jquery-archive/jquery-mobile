@@ -288,7 +288,6 @@
 			//replace HTML5 input types that have crap browser implementations
 			$el.find('input').not('[type=text],[type=submit],[type=reset],[type=image],[type=button]').each(function(){
 				$(this).replaceWith( $( '<div>' ).html( $(this).clone() ).html().replace(/type="([a-zA-Z]+)"/, 'data-type="$1"') );
-				
 			});
 			
 			$el.find('input[type=radio],input[type=checkbox]').customCheckboxRadio();
