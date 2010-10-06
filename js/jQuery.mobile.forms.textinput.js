@@ -19,8 +19,30 @@ jQuery.fn.customTextInput = function(options){
 		input.addClass('ui-input-text');
 		
 		var focusedEl = input;
+		
+		//"search" input widget
 		if(o.search){
 			focusedEl = input.wrap('<div class="ui-input-search ui-btn-corner-all ui-body-c ui-btn-shadow ui-icon-search"></div>').parent();
+			var clearbtn = $('<a href="#" class="ui-input-clear" title="clear text">clear text</a>')
+				.buttonMarkup({icon: 'delete', iconpos: 'notext', corners:true, shadow:true})
+				.click(function(){
+					input.val('');
+					toggleClear();
+					return false;
+				})
+				.appendTo(focusedEl);
+			
+			function toggleClear(){
+				if(input.val() == ''){
+					clearbtn.addClass('ui-input-clear-hidden');
+				}
+				else{
+					clearbtn.removeClass('ui-input-clear-hidden');
+				}
+			}
+			
+			toggleClear();
+			input.keyup(toggleClear);	
 		}
 		else{
 			input.addClass('ui-corner-all ui-body-c');
