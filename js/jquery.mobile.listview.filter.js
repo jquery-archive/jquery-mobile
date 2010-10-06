@@ -12,12 +12,12 @@ $( ":mobile-listview" ).live( "listviewcreate", function() {
 		
 		search = $( "<input>", { placeholder: "Filter results...", "data-type": "search" })
 			.keyup(function() {
-				var val = this.value,
-					visible = list.children().show().length;
+				var val = this.value;
+				list.children().show();
 				if ( val ) {
-					visible -= list.children().filter(function() {
+					list.children().filter(function() {
 						return $( this ).text().indexOf( val ) === -1;
-					}).hide().length;
+					}).hide();
 				}
 			})
 			.appendTo( wrapper )
