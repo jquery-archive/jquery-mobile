@@ -8,7 +8,7 @@ $( ":mobile-listview" ).live( "listviewcreate", function() {
 		return;
 	}
 
-	var wrapper = $( "<form>", { class: "ui-bar-c"} ),
+	var wrapper = $( "<form>", { 'class': "ui-listview-filter ui-bar-c"} ),
 		
 		search = $( "<input>", { placeholder: "Filter results...", "data-type": "search" })
 			.keyup(function() {
