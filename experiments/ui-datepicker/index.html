@@ -1,0 +1,54 @@
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<title>jQuery Mobile Framework - Datepicker</title> 
+	<link rel="stylesheet" type="text/css" href="../../css/all" /> 
+	<script type="text/javascript" src="../../js/all"></script>
+	
+</head> 
+<body> 
+
+<div data-role="page">
+	<link rel="stylesheet" type="text/css" href="jquery.ui.datepicker.css" /> 
+	<script type="text/javascript" src="jquery.ui.datepicker.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			/*  datepicker workaround */
+			$('input[type=date]').hide().after( $('<div />').datepicker() );
+			$('.ui-datepicker-header').addClass('ui-body-c ui-corner-top').removeClass('ui-corner-all');
+			$('.ui-datepicker-prev').buttonMarkup({iconpos: 'notext', icon: 'arrow-l', shadow: true, corners: true});
+			$('.ui-datepicker-next').buttonMarkup({iconpos: 'notext', icon: 'arrow-r', shadow: true, corners: true});
+			$('.ui-datepicker-calendar thead').remove();
+			$('.ui-datepicker-calendar .ui-btn-text span').attr('class','');
+			$('.ui-datepicker-calendar td').addClass('ui-btn-up-c');
+			$('.ui-datepicker-calendar a').buttonMarkup({corners: false, shadow: false});
+			/* // datepicker workaround */
+		});
+	</script>
+	
+	<div data-role="header">
+		<h1>Datepicker Styled for mobile</h1>
+		<a href="index.html" class="ui-back" data-icon="arrow-l">Home</a>
+	</div>
+	
+	<div data-role="content">
+	
+	
+		<form action="#" method="get">
+			
+			<div data-role="fieldcontain">
+	     	    <label for="date">Date Input (non-functional):</label>
+	     	    <input type="date" name="date" id="date" value=""  />
+			</div>
+		
+		
+		</form>
+
+	</div>
+	
+</div>
+		
+
+
+</body>
+</html>

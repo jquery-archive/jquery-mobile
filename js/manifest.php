@@ -20,7 +20,6 @@ $elements = array(
 	'jQuery.mobile.dialog.js',
 	'jQuery.mobile.navlist.js',
 	'jQuery.mobile.grid.js',
-	'jQuery.ui.datepicker.js',
 	'jQuery.mobile.js'
 );
 
