@@ -334,9 +334,9 @@
 			//add back buttons to headers that don't have them	
 			// FIXME make that optional?
 			// TODO don't do that on devices that have a native back button?
-			var backBtn = $el.find('.ui-header a.ui-back');
+			var backBtn = $el.find('.ui-page > .ui-header a.ui-back');
 			if(!backBtn.length){
-				backBtn = jQuery('<a href="#" class="ui-back" data-icon="arrow-l"></a>').appendTo($el.find('.ui-header'));
+				backBtn = jQuery('<a href="#" class="ui-back" data-icon="arrow-l"></a>').appendTo($el.find('.ui-page > .ui-header'));
 			}
 			
 			//buttons from links in headers,footers,bars, or with data-role

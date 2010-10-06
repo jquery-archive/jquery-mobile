@@ -136,6 +136,7 @@ $.fn.customSelect = function(options){
 		//back button
 		listbox.find('.ui-listbox-header a').click(function(){
 			select.trigger('hidemenu');
+			return false;
 		});
 			
 			
