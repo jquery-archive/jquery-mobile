@@ -6,25 +6,22 @@
 */
 (function( $ ) {
 
-$.fn.listview = function( options ) {
-	return this.each(function() {
-		var $this = $( this ),
-			parentID = $this.closest('.ui-page').attr('id')
-		
-		//split these to be able to reference o.theme
-		var o = $.extend({
-			theme: $this.data( "theme" ) || "f"
-		}, options );
-		o = $.extend({	
-			countTheme: $this.data( "count-theme" ) || o.theme,
-			headerTheme: "b",
-			groupingTheme: $this.data( "grouping-theme" ) || "b",
-			splitTheme: $this.data( "split-theme" ) || "b",
-			inset: $this.data( "inset" ) || false
-		}, o);
+$.widget( "mobile.listview", $.mobile.widget, {
+	options: {
+		theme: "f",
+		countTheme: "f",
+		headerTheme: "b",
+		groupingTheme: "b",
+		splitTheme: "b",
+		inset: false
+	},
+	
+	_create: function() {
+		var parentID = this.element.closest( ".ui-page" ).attr( "id" ),
+			o = this.options;
 		
 		//if it's a nested list, chunk it into ui-page items, recurse through them and call listview on each individual ul
-		$( $this.find( "ul,ol" ).get().reverse() ).each(function( i ) {
+		$( this.element.find( "ul,ol" ).get().reverse() ).each(function( i ) {
 			var list = $( this ),
 				id = parentID + "&" + jQuery.mobile.subPageUrlKey  + "=listview-" + i,
 				parent = list.parent(),
@@ -55,7 +52,7 @@ $.fn.listview = function( options ) {
 		}).listview();
 		
 		//create listview markup 
-		$this
+		this.element
 			.addClass( "ui-listview" )
 			.find( "li" )
 				.each(function() {
@@ -88,12 +85,12 @@ $.fn.listview = function( options ) {
 				});
 		
 		if ( o.inset ) {
-			$this
+			this.element
 				.addClass( "ui-listview-inset" )
 				.controlgroup({ shadow: true });
 		}
 		
-		$this
+		this.element
 			.find( "li" ).each(function() {
 				//for split buttons
 				$( this ).find( "a" ).eq( 1 ).each(function() {
@@ -130,7 +127,7 @@ $.fn.listview = function( options ) {
 				.addClass( "ui-li-thumb" );
 		
 		if ( o.inset ) {
-			$this
+			this.element
 				.find( "img" )
 					.filter( "li:first-child img" )
 						.addClass( "ui-corner-tl" )
@@ -140,7 +137,7 @@ $.fn.listview = function( options ) {
 					.end();
 		}
 		
-		$this
+		this.element
 			.find( ".ui-li-count" )
 				.addClass( "ui-btn-up-" + o.countTheme + " ui-btn-corner-all" )
 			.end()
@@ -151,9 +148,9 @@ $.fn.listview = function( options ) {
 				.addClass( "ui-li-desc" );
 			
 		// JS fallback for auto-numbering for OL elements
-		if( !$.support.cssPseudoElement && $this.is('ol') ){
+		if( !$.support.cssPseudoElement && this.element.is('ol') ){
 			var counter = 1;
-			$this.find('li').each(function(){
+			this.element.find('li').each(function(){
 				if( $(this).is('.ui-li-grouping') ){
 					//reset counter when a grouping heading is encountered
 					counter = 1;
@@ -168,13 +165,13 @@ $.fn.listview = function( options ) {
 		}	
 				
 		//tapping the whole LI triggers ajaxClick on the first link
-		$this.find( "li:has(a)" ).live( "tap", function(event) {
+		this.element.find( "li:has(a)" ).live( "tap", function(event) {
 			if( !$(event.target).is('a') ){
 				$( this ).find( "a:first" ).ajaxClick();
 				return false;
 			}
 		});
-	});
-};
+	}
+});
 
 })( jQuery );
