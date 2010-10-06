@@ -224,6 +224,7 @@
 				if ( currentPage.length && !startPage.is( ".ui-page-active" ) ) {
 					changePage( currentPage, startPage, transition, back );
 				} else {
+					startPage.trigger("beforepageshow", {prevPage: $('')});
 					startPage.addClass( activePageClass );
 					//FIXME: when there's no prevPage, is passing an empty jQuery obj proper style?
 					startPage.trigger("pageshow", {prevPage: $('')});
