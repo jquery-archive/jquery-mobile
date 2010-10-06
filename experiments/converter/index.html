@@ -2,10 +2,14 @@
 <html> 
 	<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
-	<meta name="viewport" content="width = device-width, initial-scale=1.0" />
 	<title>jQuery Mobile Framework - Converter Demo Application</title> 
 	<link rel="stylesheet" type="text/css"  href="../../css/all"/> 
 	<script type="text/javascript" src="../../js/all"></script>
+</head> 
+<body> 
+
+<div data-role="page" class="ui-body-c">
+	
 	<script type="text/javascript" src="jquery.tmpl.js"></script>
 	<script type="text/javascript" src="storage.js"></script>
 	<script type="text/javascript" src="application.js"></script>
@@ -13,10 +17,6 @@
 		.field { padding: 15px; }
 		.editbutton { float: right; }
 	</style>
-</head> 
-<body> 
-
-<div data-role="page" class="ui-body-c">
 	
 	<div data-role="header">
 		<a href="#customize" class="editbutton ui-aux" data-transition="flip">Edit</a>
@@ -61,7 +61,7 @@
 	</div>
 	
 	<div data-role="content" class=" ui-body">
-		<h1>Demo description</h1>
+		<h2>Select 2 currency options and add!</h2>
 		<label for="currency-options-from">From</label>
 		<select name="currency-options" id="currency-options-from">
 			<option value="EUR">EUR - Euro</option>
