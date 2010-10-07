@@ -8,21 +8,23 @@ $( ":mobile-listview" ).live( "listviewcreate", function() {
 		return;
 	}
 
-	var wrapper = $( "<form>", { 'class': "ui-listview-filter ui-bar-c"} ),
+	var wrapper = $( "<form>", { "class": "ui-listview-filter ui-bar-c" } ),
 		
-		search = $( "<input>", { placeholder: "Filter results...", "data-type": "search" })
-			.bind('keyup change', function() {
-				var val = this.value;
+		search = $( "<input>", {
+				placeholder: "Filter results...",
+				"data-type": "search"
+			})
+			.bind( "keyup change", function() {
+				var val = this.value.toLowerCase();;
 				list.children().show();
 				if ( val ) {
 					list.children().filter(function() {
-						return $( this ).text().indexOf( val ) === -1;
+						return $( this ).text().toLowerCase().indexOf( val ) === -1;
 					}).hide();
 				}
 			})
 			.appendTo( wrapper )
 			.customTextInput();
-
 	
 	wrapper.insertBefore( list );
 });
