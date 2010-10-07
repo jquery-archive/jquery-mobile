@@ -17,39 +17,9 @@ $.widget( "mobile.listview", $.mobile.widget, {
 	},
 	
 	_create: function() {
-		var parentID = this.element.closest( ".ui-page" ).attr( "id" ),
-			o = this.options;
+		var o = this.options;
 		
-		//if it's a nested list, chunk it into ui-page items, recurse through them and call listview on each individual ul
-		$( this.element.find( "ul,ol" ).get().reverse() ).each(function( i ) {
-			var list = $( this ),
-				id = parentID + "&" + jQuery.mobile.subPageUrlKey  + "=listview-" + i,
-				parent = list.parent(),
-				title = parent.contents()[ 0 ].nodeValue,
-				theme = list.data( "theme" ) || o.theme,
-				countTheme = list.data( "count-theme" ) || o.countTheme;
-			
-			list.wrap( "<div class='ui-page'><div class='ui-content'></div></div>" )
-				.parent()
-					.before( "<div class='ui-header ui-bar-" + o.headerTheme + "'><h1>" +
-						title + "</h1><a href='#' class='ui-back' data-icon='arrow-l'>Back</a></div>" )
-					.parent()
-						.attr({
-							id: id,
-							"data-theme": theme,
-							"data-count-theme": countTheme
-						})
-						.appendTo( "body" )
-						.fixHeaderFooter()
-						.find( ".ui-header a.ui-back" )
-							.buttonMarkup()
-							.click(function() {
-								history.go(-1);
-								return false;
-							});
-			
-			parent.html( "<a href='#" + id + "'>" + title + "</a>" );
-		}).listview();
+		this._createSubPages();
 		
 		//create listview markup 
 		this.element
@@ -146,29 +116,68 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			.end()
 			.find( "p,ul,dl" )
 				.addClass( "ui-li-desc" );
-			
-		// JS fallback for auto-numbering for OL elements
-		if( !$.support.cssPseudoElement && this.element.is('ol') ){
-			var counter = 1;
-			this.element.find('li').each(function(){
-				if( $(this).is('.ui-li-grouping') ){
-					//reset counter when a grouping heading is encountered
-					counter = 1;
-				}
-				else { 
-					$(this)
-						.find('.ui-link-inherit:first')
-						.addClass('ui-li-jsnumbering')
-						.prepend('<span class="ui-li-dec">' + counter++ + '. </span>');
-				}		
-			});
-		}	
+		
+		this._numberItems();
 				
 		//tapping the whole LI triggers ajaxClick on the first link
 		this.element.find( "li:has(a)" ).live( "tap", function(event) {
 			if( !$(event.target).is('a') ){
 				$( this ).find( "a:first" ).ajaxClick();
 				return false;
+			}
+		});
+	},
+	
+	_createSubPages: function() {
+		var parentId = this.element.closest( ".ui-page" ).attr( "id" ),
+			o = this.options;
+		$( this.element.find( "ul,ol" ).get().reverse() ).each(function( i ) {
+			var list = $( this ),
+				id = parentId + "&" + $.mobile.subPageUrlKey + "=listview-" + i,
+				parent = list.parent(),
+				title = parent.contents()[ 0 ].nodeValue,
+				theme = list.data( "theme" ) || o.theme,
+				countTheme = list.data( "count-theme" ) || o.countTheme;
+			
+			list.wrap( "<div class='ui-page'><div class='ui-content'></div></div>" )
+				.parent()
+					.before( "<div class='ui-header ui-bar-" + o.headerTheme + "'><h1>" +
+						title + "</h1><a href='#' class='ui-back' data-icon='arrow-l'>Back</a></div>" )
+					.parent()
+						.attr({
+							id: id,
+							"data-theme": theme,
+							"data-count-theme": countTheme
+						})
+						.appendTo( "body" )
+						.fixHeaderFooter()
+						.find( ".ui-header a.ui-back" )
+							.buttonMarkup()
+							.click(function() {
+								history.go(-1);
+								return false;
+							});
+			
+			parent.html( "<a href='#" + id + "'>" + title + "</a>" );
+		}).listview();
+	},
+	
+	// JS fallback for auto-numbering for OL elements
+	_numberItems: function() {
+		if ( $.support.cssPseudoElement || !this.element.is( "ol" ) ) {
+			return;
+		}
+		var counter = 1;
+		this.element.find( ".ui-li-dec" ).remove();
+		this.element.find( "li:visible" ).each(function() {
+			if( $( this ).is( ".ui-li-grouping" ) ) {
+				//reset counter when a grouping heading is encountered
+				counter = 1;
+			} else { 
+				$( this )
+					.find( ".ui-link-inherit:first" )
+					.addClass( "ui-li-jsnumbering" )
+					.prepend( "<span class='ui-li-dec'>" + (counter++) + ". </span>" );
 			}
 		});
 	}
