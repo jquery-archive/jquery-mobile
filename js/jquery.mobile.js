@@ -8,7 +8,7 @@
  */
 (function( jQuery, window, undefined ) {
 	// if we're missing support for any of these, then we're a C-grade browser
-	if ( !jQuery.support.display || !jQuery.support.position || !jQuery.support.overflow || !jQuery.support.floatclear ) {
+	if ( !jQuery.support.mediaquery ) {
 		return;
 	}	
 	
@@ -255,7 +255,7 @@
 	$html.addClass('ui-mobile');
 	
 	//insert mobile meta - these will need to be configurable somehow.
-	$head.append('<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />'+
+	$head.append('<meta name="viewport" content="width=device-width, initial-scale=1.0" />'+
 		'<link rel="apple-touch-icon" href="images/homeicon.png" />'+
 		'<link rel="apple-touch-startup-image" href="images/startscreen.png" />'+
 		'<meta name="apple-mobile-web-app-capable" content="yes" />' +
