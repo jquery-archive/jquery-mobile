@@ -87,7 +87,7 @@
 	// send a link through hash tracking
 	jQuery.fn.ajaxClick = function() {
 		var href = jQuery( this ).attr( "href" );
-		pageTransition = jQuery( this ).attr( "data-transition" ) || "slide";
+		pageTransition = jQuery( this ).data( "transition" ) || "slide";
 		nextPageRole = jQuery( this ).attr( "data-rel" );
 		  	
 		//find new base for url building
@@ -179,7 +179,7 @@
 				back = !pageTransition && stackLength > 1 &&
 					urlStack[ stackLength - 2 ].url === url,
 				transition = (extras && extras.manuallyTriggered) ? false : pageTransition || "slide",
-				fileUrl = url,
+				fileUrl = url;
 			pageTransition = undefined;
 			
 			//reset base to pathname for new request
