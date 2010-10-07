@@ -126,23 +126,33 @@
 		//trigger before show/hide events
 		from.trigger("beforepagehide", {nextPage: to});
 		to.trigger("beforepageshow", {prevPage: from});
-				
-		// animate in / out
-		from.addClass( transition + " out " + ( back ? "reverse" : "" ) );
-		to.addClass( activePageClass + " " + transition +
-			" in " + ( back ? "reverse" : "" ) );
 		
-		// callback - remove classes, etc
-		to.animationComplete(function() {
-			from.add( to ).removeClass(" out in reverse " + transitions );
-			from.removeClass( activePageClass );
-			
+		function loadComplete(){
 			//trigger show/hide events
 			from.trigger("pagehide", {nextPage: to});
 			to.trigger("pageshow", {prevPage: from});
 			
 			pageLoading( true );
-		});
+		}
+		
+		if(transition){		
+			// animate in / out
+			from.addClass( transition + " out " + ( back ? "reverse" : "" ) );
+			to.addClass( activePageClass + " " + transition +
+				" in " + ( back ? "reverse" : "" ) );
+			
+			// callback - remove classes, etc
+			to.animationComplete(function() {
+				from.add( to ).removeClass(" out in reverse " + transitions );
+				from.removeClass( activePageClass );
+				loadComplete();
+			});
+		}
+		else{
+			from.removeClass( activePageClass );
+			to.addClass( activePageClass );
+			loadComplete();
+		}
 	};
 	
 	jQuery(function() {
@@ -151,14 +161,14 @@
 		
 		// needs to be bound at domready (for IE6)
 		// find or load content, make it active
-		$window.bind( "hashchange", function(e) {
+		$window.bind( "hashchange", function(e, extras) {
 			var url = location.hash.replace( /^#/, "" ),
 				stackLength = urlStack.length,
 				// pageTransition only exists if the user clicked a link
 				back = !pageTransition && stackLength > 1 &&
 					urlStack[ stackLength - 2 ].url === url,
-				transition = pageTransition || "slide",
-				fileUrl = url;
+				transition = (extras && extras.manuallyTriggered) ? false : pageTransition || "slide",
+				fileUrl = url,
 			pageTransition = undefined;
 			
 			//reset base to pathname for new request
@@ -192,6 +202,7 @@
 					setBaseURL();
 					mobilize( localDiv );
 					changePage( jQuery( ".ui-page-active" ), localDiv, transition, back );
+					
 				} else { //ajax it in
 					pageLoading();
 					if(url.match( '&' + jQuery.mobile.subPageUrlKey )){
@@ -381,7 +392,7 @@
 		mobilize(jQuery('[data-role="page"]'));
 		
 		//trigger a new hashchange, hash or not
-		$window.trigger( "hashchange" );
+		$window.trigger( "hashchange", { manuallyTriggered: true } );
 		
 		//update orientation 
 		$html.addClass( jQuery.event.special.orientationchange.orientation( $window ) );
