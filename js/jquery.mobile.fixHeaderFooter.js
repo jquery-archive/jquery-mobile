@@ -87,12 +87,17 @@ $.fixedToolbars = (function(){
 			thisTop = el.offset().top,
 			thisCSStop = el.css('top') == 'auto' ? 0 : parseFloat(el.css('top')),
 			screenHeight = window.innerHeight,
-			thisHeight = el.outerHeight();
+			thisHeight = el.outerHeight(),
+			relval;
 		if( el.is('.ui-header-fixed') ){
-			return el.css('top', (el.parents('.ui-page').length) ? fromTop - thisTop + thisCSStop : fromTop);
+			relval = fromTop - thisTop + thisCSStop;
+			if( relval < thisTop){ relval = 0; }
+			return el.css('top', (el.parents('.ui-page').length) ? relval : fromTop);
 		}
 		else{
-			return el.css('top', (el.parents('.ui-page').length) ? -1 * (thisTop - (fromTop + screenHeight) + thisCSStop + thisHeight) : fromTop + screenHeight - thisHeight );
+			relval = -1 * (thisTop - (fromTop + screenHeight) + thisCSStop + thisHeight);
+			if( relval > thisTop ){ relval = 0; }
+			return el.css('top', (el.parents('.ui-page').length) ? relval : fromTop + screenHeight - thisHeight );
 		}
 	}
 
