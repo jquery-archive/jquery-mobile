@@ -120,8 +120,6 @@
 	function changePage( from, to, transition, back ) {
 		jQuery( document.activeElement ).blur();
 		
-		to.appendTo($body);
-		
 		//trigger before show/hide events
 		from.trigger("beforepagehide", {nextPage: to});
 		to.trigger("beforepageshow", {prevPage: from});
