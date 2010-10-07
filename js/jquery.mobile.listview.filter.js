@@ -3,8 +3,9 @@
 $.mobile.listview.prototype.options.filter = false;
 
 $( ":mobile-listview" ).live( "listviewcreate", function() {
-	var list = $( this );
-	if ( !list.data( "listview" ).options.filter ) {
+	var list = $( this ),
+		listview = list.data( "listview" );
+	if ( !listview.options.filter ) {
 		return;
 	}
 
@@ -22,6 +23,8 @@ $( ":mobile-listview" ).live( "listviewcreate", function() {
 						return $( this ).text().toLowerCase().indexOf( val ) === -1;
 					}).hide();
 				}
+				
+				listview._numberItems();
 			})
 			.appendTo( wrapper )
 			.customTextInput();
