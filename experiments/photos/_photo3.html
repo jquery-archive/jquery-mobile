@@ -2,21 +2,23 @@
 <html> 
 	<head> 
 	<title>jQuery Mobile Framework - Photo 1</title> 
-	<link rel="stylesheet" type="text/css" href="css/all" /> 
-	<script type="text/javascript" src="js/all"></script>
+	<link rel="stylesheet" type="text/css" href="../../css/all" /> 
+	<script type="text/javascript" src="../../js/all"></script>
 </head> 
 <body> 
 
-<div data-role="page">
+<div data-role="page" data-fullscreen="true">
+	<link type="text/css" href="photos.css" rel="stylesheet" />
+	<script type="text/javascript" src="photos.js"></script>
 	
-	<div data-role="header">
+	<div data-role="header" id="photoview">
 		<h1>A dock</h1>
 		<a href="index.html" class="ui-back" data-icon="arrow-l">Home</a>
 	</div>
 	
-	<div data-role="content" class=" ui-fullscreen">
+	<div data-role="content" class="photoview">
 		
-		<a href="_photo2.html" class="swipe">
+		<a href="_photo4.html">
 			<img src="images/photo-dock.jpeg" alt="photo-dock" />
 		</a>
 		
