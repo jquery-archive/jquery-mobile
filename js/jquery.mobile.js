@@ -17,7 +17,21 @@
 	
 	jQuery.extend(jQuery.mobile, {
 		subPageUrlKey: 'ui-page', //define the key used in urls for sub-pages. Defaults to &ui-page=
-		degradeHTML5inputs: true
+		degradeInputs: {
+			color: true,
+			date: true,
+			datetime: true,
+			"datetime-local": true,
+			email: true,
+			month: true,
+			number: true,
+			range: true,
+			search: true,
+			tel: true,
+			time: true,
+			url: true,
+			week: true
+		}
 	});
 
 	var $window = jQuery(window),
@@ -291,12 +305,14 @@
 			//hide no-js content
 			$el.find('[data-role="nojs"]').addClass('ui-nojs');
 			
-			//replace HTML5 input types that have crap browser implementations
-			if($.mobile.degradeHTML5inputs){
-				$el.find('input').not('[type=text],[type=submit],[type=reset],[type=image],[type=button],[type=checkbox],[type=radio]').each(function(){
-					$(this).replaceWith( $( '<div>' ).html( $(this).clone() ).html().replace(/type="([a-zA-Z]+)"/, 'data-type="$1"') );
-				});
-			}
+			$el.find( "input" ).each(function() {
+				var type = this.getAttribute( "type" );
+				if ( $.mobile.degradeInputs[ type ] ) {
+					$( this ).replaceWith(
+						$( "<div>" ).html( $(this).clone() ).html()
+							.replace( /type="([a-zA-Z]+)"/, "data-type='$1'" ) );
+				}
+			});
 			
 			$el.find('input[type=radio],input[type=checkbox]').customCheckboxRadio();
 			$el.find('button, input[type=submit], input[type=reset], input[type=image],[type=button]').not('.ui-nojs').customButton();
