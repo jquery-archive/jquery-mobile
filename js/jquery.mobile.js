@@ -36,8 +36,7 @@
 			url: location.hash.replace( /^#/, "" ),
 			transition: "slide"
 		} ],
-		nextPageRole = null,
-		noCache = '.ui-dialog';
+		nextPageRole = null;
 	
 	// hide address bar
 	function hideBrowserChrome() {
@@ -180,9 +179,6 @@
 			} else {
 				urlStack.push({ url: url, transition: transition });
 			}
-			
-			//remove any pages that shouldn't cache
-			jQuery(noCache).remove();
 			
 			//function for setting role of next page
 			function setPageRole( newPage ) {
