@@ -263,7 +263,7 @@
 	$html.addClass('ui-mobile');
 	
 	//insert mobile meta - these will need to be configurable somehow.
-	$head.prepend('<meta name="viewport" content="width=device-width, initial-scale=1.0" />');
+	$head.prepend('<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />');
     
     //set base href to pathname
     resetBaseURL();    
