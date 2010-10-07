@@ -44,6 +44,11 @@ $.fn.buttonMarkup = function( options ){
 		
 		if (o.iconpos){
 			buttonClass += " ui-btn-icon-" + o.iconpos;
+			
+			if( o.iconpos == 'notext' && !el.attr('title') ){
+				el.attr('title', el.text() );
+			}
+			
 		}
 		
 		
