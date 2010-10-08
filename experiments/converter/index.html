@@ -17,6 +17,18 @@
 		.field { padding: 15px; }
 		.editbutton { float: right; }
 	</style>
+	<script id="conversion-field" type="text/x-jquery-tmpl">
+	    <li>
+			<label for="${from}${to}" class="ui-input-text conversion-${type}" title="From ${from} to ${to}">${$item.symbols[from]} to ${$item.symbols[to]}</label>
+			<input type="text" readonly="readonly" name="${from}${to}" id="${from}${to}" value="" />
+		</li>
+	</script>
+	<script id="conversion-edit-field" type="text/x-jquery-tmpl">
+	    <li>
+			<label for="${from}${to}" class="ui-input-text conversion-${type}" title="From ${from} to ${to}">${$item.symbols[from]} to ${$item.symbols[to]}</label>
+			<a href="#" class="deletebutton ui-aux">Delete</a>
+		</li>
+	</script>
 	
 	<div data-role="header">
 		<a href="#customize" class="editbutton ui-aux" data-transition="flip">Edit</a>
@@ -31,12 +43,6 @@
 		<div class="ui-content">
 			<ul id="conversions" data-role="listview" data-inset="true"></ul>
 		</div>
-		<script id="conversion-field" type="text/x-jquery-tmpl">
-		    <li>
-				<label for="name" class="ui-input-text conversion-${type}" title="From ${from} to ${to}">${$item.symbols[from]} to ${$item.symbols[to]}</label>
-				<input type="text" readonly="readonly" name="${from}${to}" id="${from}${to}" value="" />
-			</li>
-		</script>
 	</div>
 </div>
 
@@ -48,15 +54,18 @@
 	
 	<div data-role="content" class="ui-body">
 		<h2>sort conversions, add new ones or delete some</h2>
-		<a href="#add-dialog" data-role="button" data-rel="dialog" data-transition="pop">Add currency conversion</a>
+		<a href="#add-currency-dialog" data-role="button" data-rel="dialog" data-transition="pop">Add currency conversion</a>
 		<a id="restore" href="#" data-role="button">Restore default</a>
 		<a id="clear" href="#" data-role="button">Delete all conversions</a>
+		<div class="ui-content">
+			<ul id="edit-conversions" data-role="listview" data-inset="true"></ul>
+		</div>
 	</div>
 </div>
 
-<div data-role="page" id="add-dialog" class="ui-body-a">
+<div data-role="page" id="add-currency-dialog" class="ui-body-a">
 	<div data-role="header" data-theme="d">
-		<h1>Add conversion</h1>
+		<h1>Add currency conversion</h1>
 		<a href="index.html" class="ui-back" data-icon="arrow-l">Cancel</a>
 	</div>
 	
@@ -74,7 +83,7 @@
 			<option value="USD">USD - US Dollar</option>
 			<option value="GBP">GBP - Great Britain Pound</option>
 		</select>
-		<a id="add" href="#add-dialog" data-role="button">Add conversion</a>
+		<a id="add" href="#add-dialog" data-role="button">Add currency conversion</a>
 	</div>
 </div>
 

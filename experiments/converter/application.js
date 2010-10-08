@@ -10,7 +10,8 @@ $(function() {
 	};
 	
 	function list() {
-		var ul = $("#conversions").empty().removeAttr("data-mobilized", false);
+		var ul = $("#conversions").empty().removeAttr("data-mobilized"),
+			ulEdit = $("#edit-conversions").empty().removeAttr("data-mobilized");
 		$.each(all, function(index, conversion) {
 			// if last update was less then a minute ago, don't update
 			if (conversion.type == "currency" && !conversion.rate || conversion.updated && conversion.updated + 60000 < +new Date) {
@@ -27,11 +28,15 @@ $(function() {
 			$("#conversion-field").tmpl(conversion, {
 				symbols: symbols
 			}).appendTo(ul);
+			$("#conversion-edit-field").tmpl(conversion, {
+				symbols: symbols
+			}).appendTo(ulEdit);
 		});
 		$.mobilize(ul);
+		// TODO trigger a custom event instead of keyup?
+		$("#term").keyup();
 	}
 	var all = conversions.all();
-	list();
 	$("#term").keyup(function() {
 		var value = this.value;
 		$.each(all, function(index, conversion) {
@@ -40,7 +45,8 @@ $(function() {
 				: "Rate not available, yet."
 			);
 		});
-	}).keyup().focus();
+	}).focus();
+	list();
 	$("form").submit(function() {
 		$("#term").blur();
 		return false;
@@ -65,4 +71,13 @@ $(function() {
 		list();
 		return false;
 	});
+	
+	$("#edit-conversions").click(function(event) {
+		var target = $(event.target).closest(".deletebutton");
+		if (target.length) {
+			conversions.remove(target.prev("label").attr("for"));
+			list();
+		}
+		return false;
+	})
 });
