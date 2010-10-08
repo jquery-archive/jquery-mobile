@@ -24,15 +24,15 @@
 		return JSON.parse(localStorage.getItem("conversions"));
 	}
 	function set(value) {
-		console.log("storing conversion: "+ JSON.stringify(value))
+		window.console && console.log && console.log("storing conversion: "+ JSON.stringify(value))
 		localStorage.setItem("conversions", JSON.stringify(value));
 	}
 	
 	var conversions = get("conversions");
 	if (!conversions) {
 		conversions = $.extend([], defaults);
+		set(conversions);
 	}
-	set(conversions);
 	window.conversions = {
 		store: function() {
 			set(conversions);
