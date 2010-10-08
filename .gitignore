@@ -1,5 +1,3 @@
-build/dist
-docs
 .project
 *~
 *.diff
