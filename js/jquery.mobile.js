@@ -201,6 +201,20 @@
 				}
 			}
 			
+			//wrap page and transfer data-attrs if it has an ID
+			function wrapNewPage( newPage ){
+				var copyAttrs = ['data-role', 'data-theme', 'data-fullscreen'], //TODO: more page-level attrs?
+					wrapper = newPage.wrap( "<div>" ).parent();
+					
+				$.each(copyAttrs,function(i){
+					if( newPage.attr( copyAttrs[ i ] ) ){
+						wrapper.attr( copyAttrs[ i ], newPage.attr( copyAttrs[ i ] ) );
+						newPage.removeAttr( copyAttrs[ i ] );
+					}
+				});
+				return wrapper;
+			}
+			
 			if ( url ) {
 				// see if content is present already
 				var localDiv = jQuery( "[id='" + url + "']" );
@@ -227,8 +241,15 @@
 //							setPageRole( newPage );
 //							mobilize( newPage );
 //							changePage( jQuery( ".ui-page-active" ), newPage, transition, back );
-							jQuery( this ).replaceWith(
-								jQuery( this ).find( '[data-role="page"]' ).eq( 0 ).attr( "id", fileUrl ) );
+
+							//find new page div
+							var newPage = jQuery( this ).find( '[data-role="page"]' ).eq( 0 );
+							if( newPage.attr('id') ){
+								newPage = wrapNewPage( newPage );
+								
+							}
+
+							jQuery( this ).replaceWith( newPage.attr( "id", fileUrl ) );
 							var newPage = jQuery( "[id='" + fileUrl + "']" );
 							setPageRole( newPage );
 							mobilize( newPage );
