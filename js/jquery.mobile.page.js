@@ -4,7 +4,9 @@ $.widget( "mobile.page", $.mobile.widget, {
 	options: {},
 	
 	_create: function() {
-		this._trigger( "beforeCreate" );
+		if ( this._trigger( "beforeCreate" ) === false ) {
+			return;
+		}
 		
 		//some of the form elements currently rely on the presence of ui-page and ui-content
 		// classes so we'll handle page and content roles outside of the main role processing
