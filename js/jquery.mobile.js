@@ -313,7 +313,7 @@
 			$el.find('input[type=radio],input[type=checkbox]').customCheckboxRadio();
 			$el.find('button, input[type=submit], input[type=reset], input[type=image],[type=button]').not('.ui-nojs').customButton();
 			$el.find('input, textarea').not('[type=submit],[type=reset],[type=image],[type=button],[type=checkbox],[type=radio]').customTextInput();
-			$el.find("input, select").filter('[data-role="slider"]').slider();
+			$el.find("input, select").filter('[data-role="slider"],[data-type=range]').slider();
 			$el.find('select').not('[data-role="slider"]').customSelect();
 			
 						
