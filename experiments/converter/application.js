@@ -10,8 +10,8 @@ $(function() {
 	};
 	
 	function list() {
-		var ul = $("#conversions").empty().removeAttr("data-mobilized"),
-			ulEdit = $("#edit-conversions").empty().removeAttr("data-mobilized");
+		var ul = $("#conversions").empty().page( "destroy" ),
+			ulEdit = $("#edit-conversions").empty().page( "destroy" );
 		$.each(all, function(index, conversion) {
 			// if last update was less then a minute ago, don't update
 			if (conversion.type == "currency" && !conversion.rate || conversion.updated && conversion.updated + 60000 < +new Date) {
@@ -32,7 +32,7 @@ $(function() {
 				symbols: symbols
 			}).appendTo(ulEdit);
 		});
-		$.mobilize(ul);
+		ul.page();
 		// TODO trigger a custom event instead of keyup?
 		$("#term").keyup();
 	}

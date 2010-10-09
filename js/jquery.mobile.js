@@ -53,6 +53,9 @@
 		} ],
 		nextPageRole = null;
 	
+	// TODO: don't expose (temporary during code reorg)
+	$.mobile.urlStack = urlStack;
+	
 	// hide address bar
 	function hideBrowserChrome() {
 		// prevent scrollstart and scrollstop events
@@ -223,7 +226,7 @@
 						setPageRole( localDiv );
 					}
 					setBaseURL();
-					mobilize( localDiv );
+					localDiv.page();
 					changePage( jQuery( ".ui-page-active" ), localDiv, transition, back );
 					
 				} else { //ajax it in
@@ -239,7 +242,7 @@
 //								.attr( "id", url );
 //							jQuery( this ).replaceWith( newPage );
 //							setPageRole( newPage );
-//							mobilize( newPage );
+//							newPage.page();
 //							changePage( jQuery( ".ui-page-active" ), newPage, transition, back );
 
 							//find new page div
@@ -252,7 +255,7 @@
 							jQuery( this ).replaceWith( newPage.attr( "id", fileUrl ) );
 							var newPage = jQuery( "[id='" + fileUrl + "']" );
 							setPageRole( newPage );
-							mobilize( newPage );
+							newPage.page();
 							newPage = jQuery( "[id='" + url + "']" );
 							changePage( jQuery( ".ui-page-active" ), newPage, transition, back );
 						});
@@ -305,127 +308,7 @@
 		}
 	};	
 	
-	//markup-driven enhancements, to be called on any ui-page upon loading
-	function mobilize($el){	
-		//to-do: make sure this only runs one time on a page (or maybe per component)
-		return $el.not('[data-mobilized]').each(function(){	
-
-			var $el = $(this);
-			
-			$el.trigger("beforeload");
-
-			//some of the form elements currently rely on the presence of ui-page and ui-content
-			// classes so we'll handle page and content roles outside of the main role processing
-			// loop below.
-			$el.find('[data-role=page],[data-role=content]').andSelf().each(function() {
-					var $this = $(this);
-					$this.addClass('ui-' + $this.attr("data-role"));
-			});
-
-			//hide no-js content
-			$el.find('[data-role="nojs"]').addClass('ui-nojs');
-			
-			$el.find( "input" ).each(function() {
-				var type = this.getAttribute( "type" );
-				if ( $.mobile.degradeInputs[ type ] ) {
-					$( this ).replaceWith(
-						$( "<div>" ).html( $(this).clone() ).html()
-							.replace( /type="([a-zA-Z]+)"/, "data-type='$1'" ) );
-				}
-			});
-			
-			$el.find('input[type=radio],input[type=checkbox]').customCheckboxRadio();
-			$el.find('button, input[type=submit], input[type=reset], input[type=image],[type=button]').not('.ui-nojs').customButton();
-			$el.find('input, textarea').not('[type=submit],[type=reset],[type=image],[type=button],[type=checkbox],[type=radio]').customTextInput();
-			$el.find("input, select").filter('[data-role="slider"],[data-type=range]').slider();
-			$el.find('select').not('[data-role="slider"]').customSelect();
-			
-						
-			//pre-find data els
-			var $dataEls = $el.find('[data-role]').andSelf().each(function() {
-				var $this = $(this),
-					role = $this.data("role"),
-					theme = $this.data("theme");
-				
-				//apply theming and markup modifications to page,header,content,footer						
-				if( role == 'header' || role == 'footer' ){
-					$this.addClass('ui-bar-'+ (theme || 'a') );
-					
-					//right,left buttons
-					var $headeranchors = $this.find( ">a" ),
-						leftbtn = $headeranchors.filter('.ui-btn-left').length,
-						rightbtn = $headeranchors.filter('.ui-btn-right').length;
-					
-					if( !leftbtn ){
-						leftbtn = $headeranchors.eq(0).addClass('ui-btn-left').length;						
-					}
-					if( !rightbtn ){
-						rightbtn = $headeranchors.eq(1).addClass('ui-btn-right').length;
-					}
-					
-					//auto-add back btn on pages beyond first view
-					if( $.mobile.addBackBtn && role == 'header' && urlStack.length > 1 && !leftbtn ){
-						jQuery('<a href="#" class="ui-btn-left" data-icon="arrow-l">Back</a>')
-							.tap(function(){
-								history.back();
-								return false;
-							})
-							.click(function(){
-								return false;
-							})
-							.prependTo( $this );
-					}
-					
-					$headeranchors.buttonMarkup();
-						
-					//page title	
-					$this.find('>:header').addClass('ui-title');
-					
-				}
-				else if( role == 'page' || role == 'content' ){
-					$this.addClass('ui-body-'+ (theme || 'c') );
-				}
-		
-				switch(role) {
-				case 'header':
-				case 'footer':
-				case 'page':	
-				case 'content':
-					$this.addClass('ui-' + role);
-					break;						
-				case 'collapsible':
-				case 'fieldcontain':
-				case 'navbar':
-				case 'listview':
-				case 'dialog':
-				case 'ajaxform':
-					$this[role]();
-					break;
-				case 'controlgroup':
-					// FIXME for some reason this has to come before the form control stuff (see above)
-					$this.controlgroup({
-						direction: $this.attr("data-type")
-					});
-					break;
-				}
-			});
-			
-						
-			//links in bars, or those with data-role become buttons
-			$dataEls.filter('[data-role="button"]').add('.ui-bar a, .ui-footer a, .ui-header a').not('.ui-btn').buttonMarkup();
-			//links within content areas
-			$el.find('.ui-body a:not(.ui-btn):not(.ui-link-inherit)').addClass('ui-link');
-			
-			//fix toolbars
-			$el.fixHeaderFooter();	
-			
-			$el.attr('data-mobilized', true);
-			$el.trigger("load");	
-		});
-	};
-	
 	jQuery.extend({
-		mobilize: mobilize,
 		pageLoading: pageLoading,
 		changePage: changePage,
 		hideBrowserChrome: hideBrowserChrome
@@ -434,7 +317,7 @@
 	//dom-ready
 	jQuery(function(){
 		
-		//set up active page - mobilize it!
+		//set up active page
 		startPage = jQuery('[data-role="page"]:first');
 		
 		//make sure it has an ID - for finding it later
@@ -442,8 +325,8 @@
 			startPage.attr('id', startPageId); 
 		}
 		
-		//mobilize all pages present
-		mobilize(jQuery('[data-role="page"]'));
+		//initialize all pages present
+		jQuery('[data-role="page"]').page();
 		
 		//trigger a new hashchange, hash or not
 		$window.trigger( "hashchange", { manuallyTriggered: true } );

@@ -39,7 +39,7 @@ $.fn.navbar = function(settings){
 					.find('a')
 					.buttonMarkup({shadow: false, corners: false, iconpos: o.iconpos, theme: 'a'});
 				
-				$.mobilize( $newPage.append( $newPageContent ).appendTo('body') );
+				$newPage.append( $newPageContent ).appendTo('body').page();
 			
 			
 			$navToggle

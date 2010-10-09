@@ -149,7 +149,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 									})
 									.appendTo( "body" );
 									
-				$.mobilize(newPage);		
+				newPage.page();		
 			
 			parent.html( "<a href='#" + id + "'>" + title + "</a>" );
 		}).listview();
