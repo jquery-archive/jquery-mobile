@@ -44,7 +44,7 @@
 .ui-bar h1, .ui-bar h2, .ui-bar h3, .ui-bar h4, .ui-bar h5, .ui-bar h6 { margin: 0; padding: 0; font-size: 16px; display: inline-block; }
 
 /*content area*/
-.ui-content { border-width: 0; }
+.ui-content { border-width: 0; overflow: visible; padding-bottom: 15px; }
 
 /* icons sizing */
 .ui-icon { width: 18px; height: 18px; }
