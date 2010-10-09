@@ -371,7 +371,7 @@
 					break;						
 				case 'collapsible':
 				case 'fieldcontain':
-				case 'navlist':
+				case 'navbar':
 				case 'listview':
 				case 'dialog':
 				case 'ajaxform':

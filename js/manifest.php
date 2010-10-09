@@ -21,7 +21,7 @@ $elements = array(
 	'jquery.mobile.listview.js',
 	'jquery.mobile.listview.filter.js',
 	'jquery.mobile.dialog.js',
-	'jquery.mobile.navlist.js',
+	'jquery.mobile.navbar.js',
 	'jquery.mobile.grid.js',
 	'jquery.mobile.js'
 );
