@@ -8,8 +8,8 @@
 $.fn.fixHeaderFooter = function(options){
 	return $(this).each(function(){
 		if( $(this).data('fullscreen') ){ $(this).addClass('ui-page-fullscreen'); }
-		$(this).find('.ui-header').addClass('ui-header-fixed ui-fixed-inline fade'); //should be slidedown
-		$(this).find('.ui-footer').addClass('ui-footer-fixed ui-fixed-inline fade'); //should be slideup		
+		$(this).find('.ui-header:not([data-position="inline"])').addClass('ui-header-fixed ui-fixed-inline fade'); //should be slidedown
+		$(this).find('.ui-footer:not([data-position="inline"])').addClass('ui-footer-fixed ui-fixed-inline fade'); //should be slideup		
 	});
 };				
 
