@@ -137,26 +137,19 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				parent = list.parent(),
 				title = parent.contents()[ 0 ].nodeValue,
 				theme = list.data( "theme" ) || o.theme,
-				countTheme = list.data( "count-theme" ) || o.countTheme;
-			
-			list.wrap( "<div class='ui-page'><div class='ui-content'></div></div>" )
-				.parent()
-					.before( "<div class='ui-header ui-bar-" + o.headerTheme + "'><h1>" +
-						title + "</h1><a href='#' class='ui-btn-left' data-icon='arrow-l'>Back</a></div>" )
-					.parent()
-						.attr({
-							id: id,
-							"data-theme": theme,
-							"data-count-theme": countTheme
-						})
-						.appendTo( "body" )
-						.fixHeaderFooter()
-						.find( ".ui-header a.ui-btn-left" )
-							.buttonMarkup()
-							.click(function() {
-								history.go(-1);
-								return false;
-							});
+				countTheme = list.data( "count-theme" ) || o.countTheme,
+				newPage = list.wrap( "<div data-role='page'><div data-role='content'></div></div>" )
+							.parent()
+								.before( "<div data-role='header' data-theme='" + o.headerTheme + "'><div class='ui-title'>" + title + "</div></div>" )
+								.parent()
+									.attr({
+										id: id,
+										"data-theme": theme,
+										"data-count-theme": countTheme
+									})
+									.appendTo( "body" );
+									
+				$.mobilize(newPage);		
 			
 			parent.html( "<a href='#" + id + "'>" + title + "</a>" );
 		}).listview();
