@@ -17,8 +17,8 @@ $.fn.buttonMarkup = function( options ){
 					}
 					//if not, find closest theme container
 					if(el.parents('body').length){
-						var themedParent = el.closest('[class*=ui-bar-]'); //this still catches ui-bar-blah... 
-						return themedParent.length ? themedParent.attr('class').match(/ui-bar-([a-z])/)[1] : 'c';
+						var themedParent = el.closest('[class*=ui-bar-],[class*=ui-body-],[class*=ui-list-]'); 
+						return themedParent.length ? themedParent.attr('class').match(/ui-(bar|body|list)-([a-z])/)[2] : 'c';
 					}
 					else {
 						return 'c';
