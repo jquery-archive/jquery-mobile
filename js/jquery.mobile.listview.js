@@ -142,7 +142,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			list.wrap( "<div class='ui-page'><div class='ui-content'></div></div>" )
 				.parent()
 					.before( "<div class='ui-header ui-bar-" + o.headerTheme + "'><h1>" +
-						title + "</h1><a href='#' class='ui-back' data-icon='arrow-l'>Back</a></div>" )
+						title + "</h1><a href='#' class='ui-btn-left' data-icon='arrow-l'>Back</a></div>" )
 					.parent()
 						.attr({
 							id: id,
@@ -151,7 +151,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 						})
 						.appendTo( "body" )
 						.fixHeaderFooter()
-						.find( ".ui-header a.ui-back" )
+						.find( ".ui-header a.ui-btn-left" )
 							.buttonMarkup()
 							.click(function() {
 								history.go(-1);

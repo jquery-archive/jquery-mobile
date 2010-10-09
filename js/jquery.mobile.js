@@ -31,7 +31,8 @@
 			time: true,
 			url: true,
 			week: true
-		}
+		},
+		addBackBtn: true
 	});
 
 	var $window = jQuery(window),
@@ -315,20 +316,59 @@
 			$el.find("input, select").filter('[data-role="slider"]').slider();
 			$el.find('select').not('[data-role="slider"]').customSelect();
 			
-			
 						
 			//pre-find data els
 			var $dataEls = $el.find('[data-role]').andSelf().each(function() {
 				var $this = $(this),
-					role = $this.attr("data-role");
+					role = $this.data("role"),
+					theme = $this.data("theme");
+				
+				//apply theming and markup modifications to page,header,content,footer						
+				if( role == 'header' || role == 'footer' ){
+					$this.addClass('ui-bar-'+ (theme || 'a') );
+					
+					//right,left buttons
+					var $headeranchors = $this.find( ">a" ),
+						leftbtn = $headeranchors.filter('.ui-btn-left').length,
+						rightbtn = $headeranchors.filter('.ui-btn-right').length;
+					
+					if( !leftbtn ){
+						leftbtn = $headeranchors.eq(0).addClass('ui-btn-left').length;						
+					}
+					if( !rightbtn ){
+						rightbtn = $headeranchors.eq(1).addClass('ui-btn-right').length;
+					}
+					
+					//auto-add back btn on pages beyond first view
+					if( $.mobile.addBackBtn && role == 'header' && urlStack.length > 1 && !leftbtn ){
+						jQuery('<a href="#" class="ui-btn-left" data-icon="arrow-l">Back</a>')
+							.tap(function(){
+								history.back();
+								return false;
+							})
+							.click(function(){
+								return false;
+							})
+							.prependTo( $this );
+					}
+					
+					$headeranchors.buttonMarkup();
+						
+					//page title	
+					$this.find('>:header').addClass('ui-title');
+					
+				}
+				else if( role == 'page' || role == 'content' ){
+					$this.addClass('ui-body-'+ (theme || 'c') );
+				}
+		
 				switch(role) {
 				case 'header':
 				case 'footer':
-					$this.addClass('ui-bar-' + ($(this).data('theme') ? $(this).data('theme') : 'a'));
 				case 'page':	
 				case 'content':
 					$this.addClass('ui-' + role);
-					break;
+					break;						
 				case 'collapsible':
 				case 'fieldcontain':
 				case 'navlist':
@@ -346,29 +386,14 @@
 				}
 			});
 			
-			//fix toolbars
-			$el.fixHeaderFooter();
-
-			//add back buttons to headers that don't have them	
-			// FIXME make that optional?
-			// TODO don't do that on devices that have a native back button?
-			var backBtn = $el.find('.ui-header:not(.ui-listbox-header) a.ui-back');
-			if(!backBtn.length){
-				backBtn = jQuery('<a href="#" class="ui-back" data-icon="arrow-l"></a>').appendTo($el.find('.ui-header:not(.ui-listbox-header)'));
-			}
-			
-			//buttons from links in headers,footers,bars, or with data-role
-			$dataEls.filter('[data-role="button"]').add('.ui-header a, .ui-footer a, .ui-bar a').not('.ui-btn').buttonMarkup();
+						
+			//links in bars, or those with data-role become buttons
+			$dataEls.filter('[data-role="button"]').add('.ui-bar a, .ui-footer a, .ui-header a').not('.ui-btn').buttonMarkup();
 			//links within content areas
 			$el.find('.ui-body a:not(.ui-btn):not(.ui-link-inherit)').addClass('ui-link');
-			//make all back buttons mimic the back button (pre-js, these links are usually "home" links)
-			backBtn
-				.click(function(){
-					// FIXME if you navigated from some page directly to subpage (ala .../#_form-controls.html), back button will actually go to the previous page, instead of the parent page
-					history.go(-1);
-					return false;
-				})
-				.find('.ui-btn-text').text(backBtnText);	
+			
+			//fix toolbars
+			$el.fixHeaderFooter();	
 			
 			$el.attr('data-mobilized', true);
 			$el.trigger("load");	
