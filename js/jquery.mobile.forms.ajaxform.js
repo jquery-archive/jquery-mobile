@@ -42,7 +42,7 @@ $.fn.ajaxform = function(options){
 				dataFilter: o.dataFilter,
 				success: function(data,textStatus){
 					$('.ui-page-active .ui-content').replaceWith( data );
-					$.mobilize( $('.ui-page-active [data-role="content"]') );
+					$('.ui-page-active [data-role="content"]').page();
 					$.pageLoading(true);
 				}
 			});
