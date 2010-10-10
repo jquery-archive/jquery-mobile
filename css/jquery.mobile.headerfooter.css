@@ -3,10 +3,6 @@
 * Copyright (c) jQuery Project
 * Dual licensed under the MIT (MIT-LICENSE.txt) or GPL (GPL-LICENSE.txt) licenses.
 */
-/* page header & footer configuration */
-.ui-page .ui-header, .ui-page .ui-footer { position: relative; }
+/* fixed page header & footer configuration */
 .ui-header, .ui-footer, .ui-page-fullscreen .ui-header, .ui-page-fullscreen .ui-footer  { position: absolute; z-index: 1000; overflow: hidden; width: 100%; border-left-width: 0; border-right-width: 0; }
 .ui-footer-duplicate, .ui-page-fullscreen .ui-fixed-inline { display: none; }
-.ui-header .ui-btn-left { position: absolute; left: 10px; top: .4em;  }
-.ui-header .ui-title, .ui-footer .ui-title { text-align: center; font-size: 16px; display: block; margin: .6em 90px .8em;  padding: 0;  white-space: nowrap; overflow: hidden; }
-.ui-header .ui-btn-right { position: absolute; right: 10px; top: .4em; }
