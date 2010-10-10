@@ -140,9 +140,9 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			o = this.options;
 		$( this.element.find( "ul,ol" ).get().reverse() ).each(function( i ) {
 			var list = $( this ),
-				id = parentId + "&" + $.mobile.subPageUrlKey + "=listview-" + i,
 				parent = list.parent(),
-				title = parent.contents()[ 0 ].nodeValue,
+				title = parent.contents()[ 0 ].nodeValue.split("\n")[0],
+				id = parentId + "&" + $.mobile.subPageUrlKey + "=" + $.mobile.idStringEscape(title + " " + i),
 				theme = list.data( "theme" ) || o.theme,
 				countTheme = list.data( "count-theme" ) || o.countTheme,
 				newPage = list.wrap( "<div data-role='page'><div data-role='content'></div></div>" )
