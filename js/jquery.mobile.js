@@ -51,6 +51,7 @@
 			url: location.hash.replace( /^#/, "" ),
 			transition: "slide"
 		} ],
+		focusable = "[tabindex],a,button:visible,select:visible,input",
 		nextPageRole = null;
 	
 	// TODO: don't expose (temporary during code reorg)
@@ -168,6 +169,13 @@
 			to.animationComplete(function() {
 				from.add( to ).removeClass(" out in reverse " + transitions );
 				from.removeClass( activePageClass );
+				var pageTitle = to.find( ".ui-title" );
+				if( pageTitle.length ){
+					pageTitle.focus();
+				}
+				else{
+					to.find( focusable ).eq(0).focus();
+				}
 				loadComplete();
 			});
 		}
