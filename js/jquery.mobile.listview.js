@@ -17,7 +17,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
 	},
 	
 	_create: function() {
-		var o = this.options;
+		var o = this.options
+			$list = this.element;
 		
 		this._createSubPages();
 		
@@ -27,7 +28,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			.find( "li" )
 				.each(function() {
 					var $li = $( this ),
-						role = $li.data( "role" );
+						role = $li.data( "role" ),
+						groupingtheme = $list.data( "groupingtheme" ) || o.groupingTheme;
 					if ( $li.is( ":has(img)" ) ) {
 						$li.addClass( "ui-li-has-thumb" );
 					}
@@ -51,7 +53,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 								.addClass( "ui-link-inherit" );
 					}
 					else if( role == "list-divider" ){
-						$li.addClass( "ui-li-grouping ui-btn ui-body-" + o.groupingTheme ).attr( "role", "heading" );
+						$li.addClass( "ui-li-grouping ui-btn ui-body-" + groupingtheme ).attr( "role", "heading" );
 					}
 					else {
 						$li.addClass( "ui-li-static ui-btn-up-" + o.theme );
