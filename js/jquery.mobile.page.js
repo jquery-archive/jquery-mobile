@@ -57,7 +57,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 				$headeranchors.buttonMarkup();
 				
 				//page title	
-				$this.children( ":header" ).addClass( "ui-title" );
+				$this.children( ":header" ).addClass( "ui-title" ).attr( "tabindex" , "0");
 			} else if ( role === "page" || role === "content" ) {
 				$this.addClass( "ui-body-" + (theme || "c") );
 			}
