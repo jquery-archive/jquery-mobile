@@ -1,0 +1,101 @@
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<title>jQuery Mobile Docs - Toolbars</title> 
+	<link rel="stylesheet" media="only all" href="css/all" /> 
+	<script type="text/javascript" src="js/all"></script>
+</head> 
+<body> 
+
+<div data-role="page">
+
+	<div data-role="header">
+		<h1>Toolbar basics</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="ui-body ui-body-c">
+			
+			<h2>Header/footer structure</h2>
+			<p>The <code>header</code> div is an optional bar at the top of the page that usually contains the page title text and buttons positioned in the the left or right of the bar for navigation or actions. The title text is normally an H1 heading element but it's possible to use any heading level (H1-H6) to allow for semantic flexibility. For example, a page containing multiple mobile 'pages' may use a H1 element on the home 'page' and a H2 element on the secondary pages. All heading levels are styled identically by default to maintain visual consistency.</p> 
+
+<div class="highlight"> 
+<pre>
+<span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"header"</span><span class="nt">&gt;</span> 
+	<span class="nt">&lt;h1&gt;</span>Page Title<span class="nt">&lt;/h1&gt;</span> 
+<span class="nt">&lt;/div&gt;</span> 
+</pre> 
+			</div> 
+
+			<p>A header bar will be styled by default with the theme's "a" color swatch (black in the default theme) because the header is typically primary in the visual hierarchy of a page. To set the header bar to a different color in your theme, add the <code>data-theme</code> attribute and specify the letter of the theme swatch (a, b, c, etc.). For example, this will set the bar to swatch "b" (blue in the default theme):</p> 
+
+<div class="highlight"> 
+<pre>
+<span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"header"</span> <span class="na">data-theme=</span><span class="s">"b"</span><span class="nt">&gt;</span> 
+	<span class="nt">&lt;h1&gt;</span>Page Title<span class="nt">&lt;/h1&gt;</span> 
+<span class="nt">&lt;/div&gt;</span> 
+</pre> 
+</div> 
+
+			<p>In the standard header configuration, there are slots for up to two buttons that sit on either side of the text heading. Each button is an <code>anchor</code> element that points to any <code>URI</code>. The button's width fits the length of the text and icons it contains. The header plugin looks for immediate children of the header container and will automatically set the first button found in the left slot and the second in the right slot. In this example, the Home button will appear in the left slot and Edit will appear in the right slot. If you want to add custom HTML markup (or embed a widget like Nav Bar) into the header bar, simply wrap the markup in a container <code>div</code> and the plugin won't apply the automatic button slot logic.</p> 
+
+<div class="highlight"> 
+<pre><span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"page"</span><span class="nt">&gt;</span> 
+	<span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"header"</span><span class="nt">&gt;</span> 
+		<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"index.php"</span><span class="nt">&gt;</span>Home<span class="nt">&lt;/a&gt;</span> 
+		<span class="nt">&lt;h1&gt;</span>Page Title<span class="nt">&lt;/h1&gt;</span> 
+		<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"edit.php"</span><span class="nt">&gt;</span>Edit<span class="nt">&lt;/a&gt;</span> 
+	<span class="nt">&lt;/div&gt;</span> 
+<span class="nt">&lt;/div&gt;</span> 
+</pre> 
+</div> 
+
+			<p>The button position can also be controlled by adding classes to the button anchors. This is especially useful if there isn't a left button and you only want a button in the right slot. To specify the button position, add the class of <code>ui-btn-left</code> or <code>ui-btn-right</code> to the anchor.</p> 
+
+<div class="highlight"> 
+<pre>
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"tools.php"</span> <span class="na">class=</span><span class="s">"ui-btn-right"</span><span class="nt">&gt;</span>Tools<span class="nt">&lt;/a&gt;</span> 
+
+</pre> 
+</div> 
+
+			<p>Any link added inside the header block will be automatically styled as a button that matches the color of the bar's theme swatch. To make a button stand out as a primary call to action, the <code>data-theme</code> attribute can be used to specify a contrasting button color from a different theme swatch. For example, if we set the header to theme "c" (light gray), both buttons would be styled as the "c" button by default. If we wanted the Save button to visually pop, we can override the color by setting the <code>data-theme</code> attribute to "b" (blue in our default theme) on the Save button's anchor.</p> 
+
+<div class="highlight"> 
+<pre>
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"add-user.php"</span> <span class="na">data-theme=</span><span class="s">"b"</span><span class="nt">&gt;</span>Save<span class="nt">&lt;/a&gt;</span> 
+</pre> 
+</div> 
+		
+			<a href="bars-themes.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Themed header examples</a>
+			
+				<h2>Bar positioning and behavior</h2>
+				<p>Header and footers can be positioned on the page in a few different ways. By default, the toolbars use the "fixed" positioning mode. In this mode, the headers and footer are sitting in the natural document flow, which ensures that they are visible on all devices, regardless of JavaScript support.</p>
+				<p>To achieve the convenience of static toolbars without the drawbacks of implementing faux-scrolling in JavaScript, the framework adds logic to detect when a bar has been scrolled out of view and animates them back into place by dynamically re-positioning the bar to the top or bottom of the viewport. At any time,tapping the screen will toggle the visibility of the toolbars: tapping when they aren't visible brings the toolbars into view, tapping again hides them until you tap again. This gives users the option to hide the toolbars until needed to maximize screen real estate.</p>
+				
+					<a href="bars-fixed.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Fixed bar positioning example</a>
+					
+				<p>In cases where the dynamically re-positioned "static" toolbar behavior isn't desired, you can simply turn off this feature by adding the <code>data-position="inline"</code> attribute on the header or footer container. This makes the toolbar stay in place in the page flow when the user scrolls, essentially the default HTML behavior.</p>
+				
+				<a href="bars-inline.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Inline bar positioning example</a>
+				
+				<p>The third positioning option for bars is a "fullscreen" mode works just like the default <a href="bars-fixed.html">"fixed" toolbar mode</a> except that the toolbars aren't shown at the top and bottom of the page and only appear when the page is clicked. This is useful for immersive apps like photo or video viewers where you want the content to full when whole screen and toolbars can be summoned to appear by tapping the screen. Keep in mind that the toolbars in this mode will sit <strong>over</strong> page content so this is best used for specific situations.</p>
+				
+				<a href="bars-fullscreen.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Fullscreeen bar positioning example</a>
+				
+					<h2>Persistent footers</h2>
+					<p>If you want the footer to appear persistent as you navigate between pages (especially useful if using a nav bar, see below), you can achieve this effect by adding a <code>data-id</code> attribute to each page that should have the persistent footer. Giving a set of pages the same <code>data-id</code> attribute value (like "foo"), tells the framework to use the persistent footer transition when animating.</p>
+					
+					<a href="bars-persist.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Persistent footer example</a>
+					
+					<h2>Nav bar widget</h2>
+					<p>The Nav Bar widget can be added to the page to provide a navigation bar that accommodates an unlimited number of options in a compact element that placed inside a  header, content, or footer region of the page. It displays up to 4 items in a horizontal bar with out without icons. If more than 4 items are in the navigation list, the 4th slot is used for a "more" link that opens a separate overlay with the full list of items. </p>
+					<p>The markup for a nav bar is identical to a basic linked list view: an unordered list with a link in each item and an optional icon. This markup is transformed into a nav bar by adding a <code>data-role="navbar" attribute to the list.</code></p>
+					<a href="navbar.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Nav bar examples</a>
+		
+		</div><!-- /ui-body wrapper -->	
+	</div><!-- /content -->
+</div><!-- /page -->
+
+</body>
+</html>

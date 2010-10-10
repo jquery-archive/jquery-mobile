@@ -11,14 +11,13 @@
 
 	<div data-role="header">
 		<h1>Themes</h1>
-		<a href="index.html" class="ui-back" data-icon="arrow-l">Home</a>
 	</div>
 
 	<div data-role="content">
 	
 	<div class="ui-body ui-body-c">
 	
-		<h1>Description</h1>
+		<h2>Theming overview</h2>
 		<p>The jQuery Mobile theme framework contains multiple color "swatches" for bars, content blocks and buttons. The key to the theme system used in jQuery UI is separation of color and texture (theme) from structural styles that define things like padding and dimensions. This allows the theme colors and textures to be defined once in the stylesheet then re-used throughout the interface as configurable color swatches that can be mixed and matched. We also take advantage of CSS3 properties to add rounded corners, box and text shadow and gradients to make the theme styles very lightweight and reduce server requests.</p>
 		
 		<p>Themes include at least 3 swatches for bars, content blocks and buttons. To make mapping of color swatches consistent across our widgets, we have followed the convention that swatch "a" is the highest level of visual priority (black in our default theme), "b" is secondary level (blue) and "c" is the baseline level (gray) that we use by default in many situations. Themes may have additional swatches but these are used for accents colors or specific situations within an app or site.</p>
@@ -50,7 +49,7 @@
 
 
 		<h3>Lists</h3>
-		<p>There are 2 supported list view styles. FIX THIS.</p>
+		<p>There are 2 supported list view styles. The system defaults to the "a" swatch (silver in default theme) and it can be switched to "b" via the <code>data-theme</code> attribute.</p>
 		<ul data-role="listview" data-inset="true" data-theme="e">
 			<li><a href="index.html">List item A</a></li>
 			<li><a href="index.html">List item A</a></li>
@@ -73,8 +72,8 @@
 			<a href="index.html" data-role="button" data-theme="d" data-icon="arrow-l">Button D</a>
 		</div><!-- end swatch-bars -->
 		
-		<h3>Buttons in Bars</h3>
-		<p>When a link is placed in a header or footer bar, it is automatically transformed into a compact-sized button and assigned a theme swatch letter that matches it's parent bar to visually integrate the button into the bar. Below, the same exact button code is in each of the 4 bars and is automatically adapting the right color swatch based on the parent bar swatch.</p>
+		<h3>Context-aware button theming</h3>
+		<p>When a link is placed in a header or footer bar, it is automatically transformed into a compact-sized button. It is also assigned a theme swatch letter that matches it's parent bar or content box to visually integrate the button into the parent theme, sort of like a chameleon. To illustrate this idea, below, the same exact button code is in each of the 4 bars and is automatically setting their color swatch to match on the parent bar swatch.</p>
 		
 		<div class="swatch-preview">
 			<div data-role="header" data-theme="a"><h1>Bar A</h1><a href="index.html" data-icon="arrow-l">Button A</a></div>
@@ -83,32 +82,40 @@
 			<div data-role="header" data-theme="d"><h1>Bar D</h1><a href="index.html" data-icon="arrow-l">Button D</a></div>
 		</div><!-- end swatch-bars -->
 		
-		<p>To add visual emphasis of certain buttons in a toolbar, the theme swatch can be manually on a button to make it stand out by adding <code>data-theme="a"</code> to the anchor.</p>
+		<p>This makes it really easy to ripple a theme change through a page by setting a theme swatch on a parent because you know the buttons will maintain the same relative visual weight across themes.  To add visual emphasis of certain buttons in a toolbar, the theme swatch color for a button can be set by adding a <code>data-theme="a"</code> to the anchor to make it stand out visually from it's parent. If the theme is set on a button in the markup, the framework won't override the theme swatch color when the parent theme is changed because you made a conscious decision to set the color.</p>
 		
 		<div class="swatch-bars">
-			<div data-role="header" data-theme="a"><h1>Bar A</h1> 
-				<a href="index.html" data-icon="arrow-l" data-theme="a">A</a>
-				<a href="index.html" data-icon="arrow-l" data-theme="b">B</a>
-				<a href="index.html" data-icon="arrow-l" data-theme="c">C</a>
-				<a href="index.html" data-icon="arrow-l" data-theme="d">D</a>
+			<div data-role="header" data-theme="a">
+				<div><!-- wrapper div to have control over butttons -->
+					<a href="index.html" data-icon="arrow-l" data-theme="a">A</a>
+					<a href="index.html" data-icon="arrow-l" data-theme="b">B</a>
+					<a href="index.html" data-icon="arrow-l" data-theme="c">C</a>
+					<a href="index.html" data-icon="arrow-l" data-theme="d">D</a>
+				</div>
 			</div>
-			<div data-role="header" data-theme="b"><h1>Bar B</h1> 
-				<a href="index.html" data-icon="arrow-l" data-theme="a">A</a>
-				<a href="index.html" data-icon="arrow-l" data-theme="b">B</a>
-				<a href="index.html" data-icon="arrow-l" data-theme="c">C</a>
-				<a href="index.html" data-icon="arrow-l" data-theme="d">D</a>
+			<div data-role="header" data-theme="b">
+				<div><!-- wrapper div to have control over butttons -->
+					<a href="index.html" data-icon="arrow-l" data-theme="a">A</a>
+					<a href="index.html" data-icon="arrow-l" data-theme="b">B</a>
+					<a href="index.html" data-icon="arrow-l" data-theme="c">C</a>
+					<a href="index.html" data-icon="arrow-l" data-theme="d">D</a>
+				</div>
 			</div>
-			<div data-role="header" data-theme="c"><h1>Bar C</h1> 
-				<a href="index.html" data-icon="arrow-l" data-theme="a">A</a>
-				<a href="index.html" data-icon="arrow-l" data-theme="b">B</a>
-				<a href="index.html" data-icon="arrow-l" data-theme="c">C</a>
-				<a href="index.html" data-icon="arrow-l" data-theme="d">D</a>
+			<div data-role="header" data-theme="c">
+				<div><!-- wrapper div to have control over butttons -->
+					<a href="index.html" data-icon="arrow-l" data-theme="a">A</a>
+					<a href="index.html" data-icon="arrow-l" data-theme="b">B</a>
+					<a href="index.html" data-icon="arrow-l" data-theme="c">C</a>
+					<a href="index.html" data-icon="arrow-l" data-theme="d">D</a>
+				</div>
 			</div>
-			<div data-role="header" data-theme="d"><h1>Bar D</h1> 
-				<a href="index.html" data-icon="arrow-l" data-theme="a">A</a>
-				<a href="index.html" data-icon="arrow-l" data-theme="b">B</a>
-				<a href="index.html" data-icon="arrow-l" data-theme="c">C</a>
-				<a href="index.html" data-icon="arrow-l" data-theme="d">D</a>
+			<div data-role="header" data-theme="d">
+				<div><!-- wrapper div to have control over butttons -->
+					<a href="index.html" data-icon="arrow-l" data-theme="a">A</a>
+					<a href="index.html" data-icon="arrow-l" data-theme="b">B</a>
+					<a href="index.html" data-icon="arrow-l" data-theme="c">C</a>
+					<a href="index.html" data-icon="arrow-l" data-theme="d">D</a>
+				</div>
 			</div>
 			
 		</div><!-- end swatch-bars -->
@@ -117,6 +124,7 @@
 		<p></p>
 		<div class="swatch-preview">
 			<div data-role="header" data-theme="b"> 
+				<div>
 				<a href="index.html" data-icon="arrow-l" data-iconpos="right">left</a>
 				<a href="index.html" data-icon="arrow-r" data-iconpos="right">right</a>
 				<a href="index.html" data-icon="arrow-u" data-iconpos="right">up</a>
@@ -124,6 +132,7 @@
 				<a href="index.html" data-icon="plus" data-iconpos="right">plus</a>
 				<a href="index.html" data-icon="minus" data-iconpos="right">minus</a>
 				<a href="index.html" data-icon="delete" data-iconpos="right">delete</a>
+				</div>
 			</div>
 		</div><!-- end swatch-bars -->
 
