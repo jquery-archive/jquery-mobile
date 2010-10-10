@@ -56,6 +56,14 @@
 	// TODO: don't expose (temporary during code reorg)
 	$.mobile.urlStack = urlStack;
 	
+	//consistent string escaping for urls and IDs
+	function idStringEscape(str){
+		console.log(str);
+		return str.replace(/[^a-zA-Z0-9]/, '-');
+	}
+	
+	$.mobile.idStringEscape = idStringEscape;
+	
 	// hide address bar
 	function hideBrowserChrome() {
 		// prevent scrollstart and scrollstop events
