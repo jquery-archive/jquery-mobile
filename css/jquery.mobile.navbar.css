@@ -13,7 +13,7 @@
 .ui-navbar li .ui-btn:last-child { margin-right: 0; }
 .ui-header .ui-navbar li .ui-btn, .ui-header .ui-navbar .ui-navbar-toggle .ui-btn,
 .ui-footer .ui-navbar li .ui-btn, .ui-footer .ui-navbar .ui-navbar-toggle .ui-btn { border-top-width: 0; border-bottom-width: 0; }
-.ui-navbar .ui-btn-inner { padding-left: 2px; padding-right: 2px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; }
+.ui-navbar .ui-btn-inner { padding-left: 2px; padding-right: 2px; }
 .ui-navbar-noicons li .ui-btn .ui-btn-inner, .ui-navbar-noicons .ui-navbar-toggle .ui-btn-inner { padding-top: .8em; padding-bottom: .9em; }
 /*expanded page styles*/
 .ui-navbar-expanded .ui-btn { margin: 0; font-size: 14px; }
