@@ -68,14 +68,17 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			.find( "li" ).each(function() {
 				//for split buttons
 				$( this ).find( "a" ).eq( 1 ).each(function() {
-					$( this )
+					var a = $( this );
+					a
 						.attr( "title", $( this ).text() )
 						.addClass( "ui-li-link-alt" )
 						.empty()
 						.buttonMarkup({
 							shadow: false,
 							corners: false,
-							theme: o.theme
+							theme: o.theme,
+							icon: false,
+							iconpos: false
 						})
 						.find( ".ui-btn-inner" )
 						.append( $( "<span>" ).buttonMarkup({
@@ -83,7 +86,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 							corners: true,
 							theme: o.splitTheme,
 							iconpos: "notext",
-							icon: "arrow-r"
+							icon: a.data('icon') || "arrow-r"
 						} ) );
 					
 					//fix corners
