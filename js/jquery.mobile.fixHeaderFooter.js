@@ -18,6 +18,7 @@ $.fixedToolbars = (function(){
 	var currentstate = 'inline',
 		delayTimer,
 		ignoreTargets = 'a,input,textarea,select,button,label,.ui-header-fixed,.ui-footer-fixed',
+		toolbarSelector = '.ui-page-active .ui-header-fixed, .ui-page-active .ui-footer-fixed:not(.ui-footer-duplicate)',
 		stickyFooter, //for storing quick references to duplicate footers
 		supportTouch = $.support.touch,
 		touchStartEvent = supportTouch ? "touchstart" : "mousedown",
@@ -105,7 +106,7 @@ $.fixedToolbars = (function(){
 	return {
 		show: function(immediately){
 			currentstate = 'overlay';
-			return $('.ui-header-fixed,.ui-footer-fixed:not(.ui-footer-duplicate)').each(function(){
+			return $( toolbarSelector ).each(function(){
 				var el = $(this),
 					fromTop = $(window).scrollTop(),
 					thisTop = el.offset().top,
@@ -126,7 +127,7 @@ $.fixedToolbars = (function(){
 		},
 		hide: function(immediately){
 			currentstate = 'inline';
-			return $('.ui-header-fixed,.ui-footer-fixed:not(.ui-footer-duplicate)').each(function(){
+			return $( toolbarSelector ).each(function(){
 				var el = $(this);
 				
 				//add state class
