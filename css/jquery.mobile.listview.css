@@ -22,8 +22,8 @@ ol.ui-listview .ui-li-jsnumbering:before { content: "" !important; } /* to avoid
 .ui-li-aside { float: right; width: 25%; text-align: right; margin: .3em 0; }
 .ui-li-count { position: absolute; font-size: 11px; font-weight: bold; padding: .2em .5em; top: 50%; margin-top: -.9em; right: 38px; }
 .ui-li-grouping .ui-li-count { right: 10px; }
-.ui-li-link-alt { position: absolute; width: 30px; height: 100%; border-width: 0; border-left-width: 1px; top: 0; right: 0; }
-.ui-li-link-alt .ui-btn { overflow: hidden; position: absolute; right: 5px; top: 50%; margin-top: -11px; border-bottom-width: 1px; }
+.ui-li-link-alt { position: absolute; width: 30px; height: 100%; border-width: 0; border-left-width: 1px; top: 0; right: 0; margin: 0; padding: 0; }
+.ui-li-link-alt .ui-btn { overflow: hidden; position: absolute; right: 5px; top: 50%; margin: -11px 0 0 0; border-bottom-width: 1px; }
 .ui-li-link-alt .ui-btn-inner { padding: 0; position: static; }
 .ui-li-link-alt .ui-btn .ui-icon { right: 50%; margin-right: -9px;  }
 
