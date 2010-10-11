@@ -29,6 +29,14 @@ $.widget( "mobile.page", $.mobile.widget, {
 			if ( role === "header" || role === "footer" ) {
 				$this.addClass( "ui-bar-" + (theme || "a") );
 				
+				//add ARIA role
+				if( role == "header" ){
+					$this.attr("role","banner");
+				}
+				else{
+					$this.attr("role","contentinfo");
+				}
+				
 				//right,left buttons
 				var $headeranchors = $this.children( "a" ),
 					leftbtn = $headeranchors.filter( ".ui-btn-left" ).length,
@@ -57,9 +65,17 @@ $.widget( "mobile.page", $.mobile.widget, {
 				$headeranchors.buttonMarkup();
 				
 				//page title	
-				$this.children( ":header" ).addClass( "ui-title" ).attr( "tabindex" , "0");
+				$this.children( ":header" )
+					.addClass( "ui-title" )
+					.attr( "tabindex" , "0")
+					.attr( "role" ,"heading")
+					.attr( "aria-level", "1" ); //regardless of h element number in src, it becomes h1 for the enhanced page
 			} else if ( role === "page" || role === "content" ) {
 				$this.addClass( "ui-body-" + (theme || "c") );
+				if( role == "content" ){
+					//add ARIA role
+					$this.attr("role","main");
+				}
 			}
 			
 			switch(role) {

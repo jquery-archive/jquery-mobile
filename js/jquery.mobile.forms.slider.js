@@ -42,7 +42,7 @@ $.fn.slider = function(options){
 					corners = (i==0) ? 'right' :'left',
 					theme = (i==0) ?'c':'b';
 				$('<div class="ui-slider-labelbg ui-slider-labelbg-'+ side +' ui-btn-down-'+ theme +' ui-btn-corner-'+ corners+'"></div>').prependTo(slider);	
-				$('<span class="ui-slider-label ui-slider-label-'+ side +' ui-btn-down-'+ theme +' ui-btn-corner-'+ corners+'" role="image">'+$(this).text()+'</span>').prependTo(handle);
+				$('<span class="ui-slider-label ui-slider-label-'+ side +' ui-btn-down-'+ theme +' ui-btn-corner-'+ corners+'" role="img">'+$(this).text()+'</span>').prependTo(handle);
 			});
 			
 		}	

@@ -25,6 +25,8 @@ $.fn.navbar = function(settings){
 			}
 			
 			$navbar
+				//add ARIA role
+				.attr("role","navigation")
 				.find('ul')
 				.grid({grid: numTabs > 2 ? 'b' : 'a'})		
 		

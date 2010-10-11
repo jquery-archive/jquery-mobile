@@ -8,6 +8,8 @@
 $.fn.dialog = function(options){
 	return $(this).each(function(){		
 		$(this)
+			//add ARIA role
+			.attr("role","dialog")
 			.addClass('ui-page ui-dialog ui-body-a')
 			.find('[data-role=header]')
 			.addClass('ui-corner-top ui-overlay-shadow')

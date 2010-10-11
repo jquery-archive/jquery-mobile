@@ -9,7 +9,7 @@ $( ":mobile-listview" ).live( "listviewcreate", function() {
 		return;
 	}
 
-	var wrapper = $( "<form>", { "class": "ui-listview-filter ui-bar-c" } ),
+	var wrapper = $( "<form>", { "class": "ui-listview-filter ui-bar-c", "role": "search" } ),
 		
 		search = $( "<input>", {
 				placeholder: "Filter results...",
