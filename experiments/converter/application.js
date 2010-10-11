@@ -10,8 +10,8 @@ $(function() {
 	};
 	
 	function list() {
-		var ul = $("#conversions").empty().page( "destroy" ),
-			ulEdit = $("#edit-conversions").empty().page( "destroy" );
+		var ul = $("#conversions").empty().filter( ":mobile-page" ).page( "destroy" ),
+			ulEdit = $("#edit-conversions").empty().filter( ":mobile-page" ).page( "destroy" );
 		$.each(all, function(index, conversion) {
 			// if last update was less then a minute ago, don't update
 			if (conversion.type == "currency" && !conversion.rate || conversion.updated && conversion.updated + 60000 < +new Date) {
