@@ -95,15 +95,13 @@ $.widget( "mobile.page", $.mobile.widget, {
 				break;
 			case "controlgroup":
 				// FIXME for some reason this has to come before the form control stuff (see above)
-				$this.controlgroup({
-					direction: $this.data( "type" )
-				});
+				$this.controlgroup();
 				break;
 			}
 		});
 		
 		//links in bars, or those with data-role become buttons
-		$dataEls
+		$dataEls //MOVETO LINE 
 			.filter( "[data-role=button]" )
 			.add( ".ui-bar a, .ui-footer a, .ui-header a")
 			.not( ".ui-btn" )
