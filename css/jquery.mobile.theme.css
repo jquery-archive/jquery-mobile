@@ -74,16 +74,26 @@
 .ui-btn-down-e a.ui-link-inherit { color: #fff; }
 .ui-btn-up-e, .ui-btn-hover-e, .ui-btn-down-e { font-family: Helvetica, Arial, sans-serif; }
 
-.ui-btn-up-f { border: 1px solid #ccc; background: #fff; font-weight: bold; color: #2F3E46; text-decoration: none; text-shadow: 0 -1px 1px #fff; background-image: -moz-linear-gradient(top, #fdfdfd, #f0f0f0); background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #fdfdfd),color-stop(1, #f0f0f0));   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fdfdfd', EndColorStr='#f0f0f0')"; }
+.ui-btn-up-f { border: 1px solid #ccc; background: #fff; font-weight: bold; color: #2F3E46; text-decoration: none; text-shadow: 0 -1px 1px #fff; background-image: -moz-linear-gradient(top, #fefefe, #f0f0f0); background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #fefefe),color-stop(1, #f0f0f0));   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fefefe', EndColorStr='#f0f0f0')"; }
 .ui-btn-up-f a.ui-link-inherit { color: #2F3E46; }
-.ui-btn-hover-f { border: 1px solid #B3B3B3; background: #d0d4d2; font-weight: bold; color: #2F3E46; cursor: pointer;  text-shadow: 0 -1px 1px #fff; text-decoration: none; background-image: -moz-linear-gradient(top, #e9ebea, #d0d4d2); background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #e9ebea),color-stop(1, #d0d4d2));   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#e9ebea', EndColorStr='#d0d4d2')"; }
+.ui-btn-hover-f { border: 1px solid #B3B3B3; background: #d0d4d2; font-weight: bold; color: #2F3E46; cursor: pointer;  text-shadow: 0 -1px 1px #fff; text-decoration: none; background-image: -moz-linear-gradient(top, #f9fbfa, #d0d4d2); background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #f9fbfa),color-stop(1, #d0d4d2));   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#f9fbfa', EndColorStr='#d0d4d2')"; }
 .ui-btn-hover-f a.ui-link-inherit { color: #2F3E46; }
 .ui-btn-down-f { border: 1px solid #808080; background: #ced0d2; font-weight: bold; color: #2F3E46; text-shadow: none; background-image: -moz-linear-gradient(top, #ced0d2, #e5e6e7); background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #ced0d2),color-stop(1, #e5e6e7));   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ced0d2', EndColorStr='#e5e6e7')"; }
 .ui-btn-down-f a.ui-link-inherit { color: #2F3E46; }
 .ui-btn-up-f, .ui-btn-hover-f, .ui-btn-down-f { font-family: Helvetica, Arial, sans-serif; }
 
+.ui-btn-up-g { border: 1px solid #ddd; background: #fff; font-weight: bold; color: #444; text-decoration: none; text-shadow: 0 1px 1px #fff; }
+.ui-btn-up-g a.ui-link-inherit { color: #333; }
+.ui-btn-hover-g { border: 1px solid #ccc; background: #f3f3f3; font-weight: bold; color: #222; cursor: pointer;  text-shadow: 0 1px 1px #fff; text-decoration: none; background-image: -moz-linear-gradient(top, #ffffff, #f3f3f3); background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #ffffff),color-stop(1, #f3f3f3));   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff', EndColorStr='#f3f3f3')"; }
+.ui-btn-hover-g a.ui-link-inherit { color: #222; }
+.ui-btn-down-g { border: 1px solid #aaaaaa; background: #eee; font-weight: bold; color: #111; text-shadow: none; background-image: -moz-linear-gradient(top, #eeeeee, #ffffff); background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #eeeeee),color-stop(1, #ffffff));   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#eeeeee', EndColorStr='#ffffff')"; }
+.ui-btn-down-g a.ui-link-inherit { color: #111; }
+.ui-btn-up-g, .ui-btn-hover-g, .ui-btn-down-g { font-family: Helvetica, Arial, sans-serif; }
+
 
 a.ui-link-inherit { text-decoration: none !important; }
+
+/* Active class used as the "on" state across all themes */
 
 .ui-btn-active { border: 1px solid #145072; background: #387bbe; font-weight: bold; color: #fff; cursor: pointer;  text-shadow: 0 -1px 1px #145072; text-decoration: none; background-image: -moz-linear-gradient(top, #4e89c5, #2567ab); background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #4e89c5),color-stop(1, #2567ab));   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#4e89c5', EndColorStr='#2567ab')"; /*-webkit-tap-highlight-color: #387bbe;*/ }
 .ui-btn-active a.ui-link-inherit {  color: #fff; }
