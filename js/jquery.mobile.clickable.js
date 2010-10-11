@@ -15,17 +15,11 @@ $.fn.clickable = function(){
 			.mouseup(function(){
 				$(this).removeClass('ui-btn-down-'+theme).addClass('ui-btn-up-'+theme);
 			})
-			.bind('mouseover',function(){
+			.bind('mouseover focus',function(){
 				$(this).removeClass('ui-btn-up-'+theme).addClass('ui-btn-hover-'+theme);
 			})
-			.bind('mouseout',function(){
+			.bind('mouseout blur',function(){
 				$(this).removeClass('ui-btn-hover-'+theme).addClass('ui-btn-up-'+theme);
-			})
-			.bind('focus',function(){
-				$(this).addClass('ui-focus');
-			})
-			.bind('blur',function(){
-				$(this).removeClass('ui-focus');
 			});
 	});	
 };		
