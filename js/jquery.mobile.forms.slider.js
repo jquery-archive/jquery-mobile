@@ -8,6 +8,9 @@
 $.fn.slider = function(options){
 	return this.each(function(){	
 		var control = $(this),
+			o = $.extend({
+				theme: control.data("theme") || 'c'
+			},options),
 			cType = control[0].nodeName.toLowerCase(),
 			selectClass = (cType == 'select') ? 'ui-slider-switch' : '',
 			controlID = control.attr('id'),
@@ -18,10 +21,10 @@ $.fn.slider = function(options){
 			max = (cType == 'input') ? parseFloat(control.attr('max')) : control.find('option').length-1,
 			percent = val / (max - min) * 100,
 			snappedPercent = percent,
-			slider = $('<div class="ui-slider '+ selectClass +' ui-bar-c ui-btn-corner-all" role="application"></div>'),
+			slider = $('<div class="ui-slider '+ selectClass +' ui-bar-'+o.theme+' ui-btn-corner-all" role="application"></div>'),
 			handle = $('<a href="#" class="ui-slider-handle"></a>')
 				.appendTo(slider)
-				.buttonMarkup({corners: true, theme: 'c', shadow: true})
+				.buttonMarkup({corners: true, theme: o.theme, shadow: true})
 				.attr({
 					'role': 'slider',
 					'aria-valuemin': min,
@@ -40,7 +43,7 @@ $.fn.slider = function(options){
 			control.find('option').each(function(i){
 				var side = (i==0) ?'b':'a',
 					corners = (i==0) ? 'right' :'left',
-					theme = (i==0) ?'c':'b';
+					theme = (i==0) ? o.theme :'b';
 				$('<div class="ui-slider-labelbg ui-slider-labelbg-'+ side +' ui-btn-down-'+ theme +' ui-btn-corner-'+ corners+'"></div>').prependTo(slider);	
 				$('<span class="ui-slider-label ui-slider-label-'+ side +' ui-btn-down-'+ theme +' ui-btn-corner-'+ corners+'" role="img">'+$(this).text()+'</span>').prependTo(handle);
 			});
