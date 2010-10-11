@@ -15,12 +15,12 @@ $.fn.buttonMarkup = function( options ){
 					if(el.is('[data-theme]')){
 						return el.attr('data-theme');
 					}
-					//if not, find closest theme container
-					if(el.parents('body').length){
-						var themedParent = el.closest('[class*=ui-bar-],[class*=ui-body-],[class*=ui-list-]'); 
-						return themedParent.length ? themedParent.attr('class').match(/ui-(bar|body|list)-([a-z])/)[2] : 'c';
+					//if not, try to find closest theme container
+					else if( el.parents('body').length ) {
+						var themedParent = el.closest('[class*=ui-bar-],[class*=ui-body-]'); 
+						return themedParent.length ? themedParent.attr('class').match(/ui-(bar|body)-([a-z])/)[2] : 'c';
 					}
-					else {
+					else{
 						return 'c';
 					}
 				})(),
