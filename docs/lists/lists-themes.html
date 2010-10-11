@@ -14,12 +14,19 @@
 		<h1>List themes</h1>
 	</div><!-- /header -->
 
-	<div data-role="content">
+	<div data-role="content" class="ui-body">
 		
-		<div class="ui-body ui-body-a">
-		<h2>Theme swatch "a" applied to body, "e" to lists, "a" for dividers</h2>
+		<h2>Assigning theme swatches to lists</h2>
+		<p>All the standard button swatches can be applied to lists. The default theme is "f" (silver in the default theme).  </p>
+			
+		<p>The list item color scheme can be changed to any button color theme swatch by adding the <code>data-theme="e"</code> attribute to the list, and setting the letter theme swatch. </p>
+		<p>The theme for list dividers can be set by adding the <code>data-groupingtheme</code> to the list and specifying a swatch letter.</p>
 		
 		
+		<h2>Theme variation: "a" body, "e" lists, "a" dividers</h2>
+	
+		<div class="ui-body-a">				
+	
 			<ul data-role="listview" data-inset="true" data-theme="e" data-groupingtheme="a">
 				<li><a href="index.html">Inbox</a> <span class="ui-li-count">12</span></li>
 				<li><a href="index.html">Outbox</a> <span class="ui-li-count">0</span></li>
@@ -73,9 +80,9 @@
 			</div><!-- / body wrapper -->
 			
 			
-			<div class="ui-body ui-body-b">
-			<h2>Theme swatch "b" applied to body, "f" to lists, "b" for dividers</h2>
-
+			<h2>Theme variation: "b" body, "f" lists, "b" dividers</h2>
+			
+			<div class="ui-body-b">
 
 				<ul data-role="listview" data-inset="true" data-theme="f" data-groupingtheme="b">
 					<li><a href="index.html">Inbox</a> <span class="ui-li-count">12</span></li>
@@ -130,9 +137,9 @@
 				</div><!-- / body wrapper -->
 				
 				
-				<div class="ui-body ui-body-c">
-				<h2>Theme swatch "c" applied to body, "g" to lists, "b" for dividers</h2>
-
+				<h2>Theme variation: "c" body, "g" lists, "b" dividers</h2>
+				
+				<div class="ui-body-c">
 
 					<ul data-role="listview" data-inset="true" data-theme="g" data-groupingtheme="b">
 						<li><a href="index.html">Inbox</a> <span class="ui-li-count">12</span></li>
@@ -184,7 +191,6 @@
 							<li><a href="index.html">Caleb Booth</a></li>
 							<li><a href="index.html">Christopher Adams</a></li>
 						</ul>
-					</div><!-- / body wrapper -->
 			
 	</div><!-- /content -->
 </div><!-- /page -->

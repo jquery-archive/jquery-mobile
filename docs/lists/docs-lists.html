@@ -13,8 +13,7 @@
 		<h1>Lists</h1>
 	</div><!-- /header -->
 
-	<div data-role="content">
-		<div class="ui-body ui-body-c">
+	<div data-role="content" class="ui-body">
 			
 			<h2>Basic linked lists</h2>
 			<p>A list view is coded as a simple unordered list containing linked list items with a <code>data-role="listview"</code> attribute. jQuery Mobile will apply all the necessary styles to transform the list into a mobile-friendly list view with right arrow indicator that fills the full width of the browser window. When you tap on the list item, the framework will trigger a click on the first link inside the list item, issue an AJAX request for the URL in the link, create the new page in the DOM, then kick off a page transition. Here is the HTML markup for a basic linked list.</p>
@@ -79,15 +78,7 @@
 			<p>If lists are embedded in a page with other types of content, an inset list packages the list into a block that sits inside the content area with a bit of margin and rounded corners (theme controlled). By adding the <code>data-inset="true"</code> attribute to the list (ul or ol), applies the inset appearance.</p>
 			
 			<a href="lists-inset.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Inset list example</a>
-			
-			<h2>List theming</h2>
-			<p>Themes contain two list theme swatch styles. The default theme is "f" (silver in the default theme). The list appearance can be changed to any other color theme swatch by adding the <code>data-theme="e"</code> attribute to the list, where the letter is the name of any list swatch in the theme. The theme for list dividers can be set by adding the <code>data-groupingtheme</code> to the list and specifying a swatch letter.</p>
-			
-			<a href="lists-themes.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Themed list example</a>
-			
-			
-		
-		</div><!-- /ui-body wrapper -->	
+
 	</div><!-- /content -->
 </div><!-- /page -->
 

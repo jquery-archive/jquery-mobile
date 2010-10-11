@@ -13,12 +13,22 @@
 		<h1>Themes</h1>
 	</div>
 
-	<div data-role="content">
-	
-	<div class="ui-body ui-body-c">
+	<div data-role="content" class="ui-body">
 	
 		<h2 id="overview">Theming overview</h2>
-		<p>The jQuery Mobile theme framework contains multiple color "swatches" for bars, content blocks and buttons. The key to the theme system used in jQuery UI is separation of color and texture (theme) from structural styles that define things like padding and dimensions. This allows the theme colors and textures to be defined once in the stylesheet then re-used throughout the interface as configurable color swatches that can be mixed and matched. We also take advantage of CSS3 properties to add rounded corners, box and text shadow and gradients to make the theme styles very lightweight and reduce server requests.</p>
+		
+			<p>Every layout and widget is in jQuery Mobile designed around a new object-oriented CSS framework to support rich theming of complete sites and applications. The theming system is similiar to the ThemeRoller system in jQuery UI but with a few important improvements:</p> 
+
+			<ul> 
+			<li>Richer designs are now possible because themes now include multiple color "swatches": 4 bars with matching buttons for each, 3 content areas that can be freely mixed and matched to create visual texture</li> 
+			<li>Open-ended theming allows for additional theme swatches can be added to a theme to add almost unlimited more variety to designs</li> 
+			<li>All backgrounds now use CSS3 gradients to dramatically reduce file size and number of server requests</li> 
+			<li>A simplified icon set only includes the most commonly used icons in either black or white colors to reduce image weight</li> 
+			</ul>
+		
+		<h3 id="bars">Themes &amp; swatches</h3>
+		
+		<p>In jQuery Mobile, there is a single theme CSS file that contains multiple color "swatches" for bars, content blocks and buttons that can be combined to achieve a wide range of visual effects. The key to the theme system used in jQuery UI is separation of color and texture (theme) from structural styles that define things like padding and dimensions. This allows the theme colors and textures to be defined once in the stylesheet as color "swatches", that can be mixed and matched. We also take advantage of CSS3 properties to add rounded corners, box and text shadow and gradients to make the theme styles very lightweight and reduce server requests.</p>
 		
 		<p>Themes include at least 3 swatches for bars, content blocks and buttons. To make mapping of color swatches consistent across our widgets, we have followed the convention that swatch "a" is the highest level of visual priority (black in our default theme), "b" is secondary level (blue) and "c" is the baseline level (gray) that we use by default in many situations. Themes may have additional swatches but these are used for accents colors or specific situations within an app or site.</p>
 		
@@ -141,7 +151,6 @@
 		<p>The powerful thing about the new jQuery Mobile theme system is that you can now add as many color swatches as you like within a single theme. In the future ThemeRoller tool, you will be able to add new swatches through an easy-to-use web interface. Until then, you can add new swatches manually by copying the block of theme style rules for an existing swatch, renaming the rules a new letter (e) and changing colors.</p>
 		<p>You can then you can reference the new theme by adding the <code>data-theme="e"</code> attribute to your markup. If you set a theme swatch letter, the framework simply applies classes that include the letter you specify so it's critical that your active theme file include rules for the letters specified in your markup.</p>
 	
-	</div><!-- end body wrapper -->
 	</div><!-- end content -->
 	
 </div><!-- end page -->
