@@ -1,0 +1,80 @@
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<title>jQuery Mobile Docs - Toolbars</title> 
+	<link rel="stylesheet" media="only all" href="css/all" /> 
+	<script type="text/javascript" src="js/all"></script>
+</head> 
+<body> 
+
+<div data-role="page">
+
+	<div data-role="header">
+		<h1>Footer configuration</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="ui-body ui-body-c">
+			
+			<h2>Footer bar structure</h2>
+
+	<p>The <code>footer</code> bar has the same structure as the header except for the <code>data-role</code> attribute and your choice of heading. Footers tend to be more freeform than headers in terms of content and functionality but they are designed to hold text and buttons, just like a header.</p> 
+
+<div class="highlight"> 
+<pre>
+<span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"footer"</span><span class="nt">&gt;</span> 
+	<span class="nt">&lt;h4&gt;</span>Footer content<span class="nt">&lt;/h4&gt;</span> 
+<span class="nt">&lt;/div&gt;</span> 
+</pre> 
+</div>
+
+					
+					<p>The page footer is very similar to the header in terms of options and configuration. The primary differences are that the footer is designed to be less structured than the header to allow for more flexibility, so the framework doesn't automatically place buttons to the left or right based on source order as it does in the header. A footer is identified with the <code>data-role="footer</code> attribute and can contain any markup.</p> 
+
+<div class="highlight"> 
+<pre><span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"footer"</span><span class="nt">&gt;</span> 
+   ...
+<span class="nt">&lt;/div&gt;</span> 
+</pre> 
+</div> 
+					
+					
+					<h2>Theming options</h2>
+					<p>Both the header and footer bars will be styled by default with the theme's "a" color swatch (black in the default theme) because these bars are typically primary in the visual hierarchy of a page. To set the header or footer bars to a different color in your theme, add the <code>data-theme</code> attribute and specify the letter of the theme swatch (a, b, c, etc.). For example, this will set the bar to swatch "b" (blue in the default theme):</p> 
+
+<div class="highlight"> 
+<pre>
+<span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"header"</span> <span class="na">data-theme=</span><span class="s">"b"</span><span class="nt">&gt;</span> 
+	<span class="nt">&lt;h4&gt;</span>Footer content goes here<span class="nt">&lt;/h4&gt;</span> 
+<span class="nt">&lt;/div&gt;</span> 
+</pre> 
+</div>
+		
+		
+					<p>One common scenario is to have a few buttons in the footer. Just like the header, adding a set of anchor links inside the footer bar will trigger the <code>mobilize()</code> function to transform the links into the styled mobile buttons. In the footer, each button will be as wide as the text and icon contents and the buttons will sit side-by-side because each has the CSS <code>display:inline-block</code> property.</p>
+
+<div class="highlight"> 
+<pre><span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"footer"</span><span class="nt">&gt;</span> 
+	<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"index.html"</span> <span class="na">data-icon=</span><span class="s">"plus"</span><span class="nt">&gt;</span>New<span class="nt">&lt;/a&gt;</span> 
+	<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"index.html"</span> <span class="na">data-icon=</span><span class="s">"delete"</span><span class="nt">&gt;</span>Delete<span class="nt">&lt;/a&gt;</span> 
+	<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"index.html"</span> <span class="na">data-icon=</span><span class="s">"search"</span><span class="nt">&gt;</span>Search<span class="nt">&lt;/a&gt;</span> 
+<span class="nt">&lt;/div&gt;</span> 
+</pre> 
+</div> 
+					
+					<h2>Persistent footers</h2>
+					<p>In situations where the footer is being used as a global navigation element, you may want the footer to appear like it is fixed in place between page transitions. This can be accomplished by using the persistent footer feature included in jQuery Mobile. To make a footer appear to stay in place between transitions, simply add the <code>data-id</code> attribute to the footer of both pages and use the same <code>id</code> value for each. For example, by adding <code>data-id="myfooter"</code> to the current page and the target page, the framework will keep the footer anchors in the same spot during the page animation. This effect will only work correctly if the header and footer toolbars are set to sticky so they are in view during the transition.</p>
+					
+					
+					<p>If you want the footer to appear persistent as you navigate between pages (especially useful if using a nav bar, see below), you can achieve this effect by adding a <code>data-id</code> attribute to each page that should have the persistent footer. Giving a set of pages the same <code>data-id</code> attribute value (like "foo"), tells the framework to use the persistent footer transition when animating.</p>
+					
+					<a href="bars-persist.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Persistent footer example</a>
+					
+
+		
+		</div><!-- /ui-body wrapper -->	
+	</div><!-- /content -->
+</div><!-- /page -->
+
+</body>
+</html>

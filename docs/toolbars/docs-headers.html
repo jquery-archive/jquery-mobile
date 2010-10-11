@@ -1,0 +1,88 @@
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<title>jQuery Mobile Docs - Toolbars</title> 
+	<link rel="stylesheet" media="only all" href="css/all" /> 
+	<script type="text/javascript" src="js/all"></script>
+</head> 
+<body> 
+
+<div data-role="page">
+
+	<div data-role="header">
+		<h1>Header configuration</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="ui-body ui-body-c">
+			
+			<h2>Header bar structure</h2>
+			<p>The <code>header</code> is an bar at the top of the page that usually contains the page title text and optional buttons positioned in the the left or right of the title for navigation or actions. The title text is normally an H1 heading element but it's possible to use any heading level (H1-H6) to allow for semantic flexibility. For example, a page containing multiple mobile 'pages' may use a H1 element on the home 'page' and a H2 element on the secondary pages. All heading levels are styled identically by default to maintain visual consistency.</p> 
+
+<div class="highlight"> 
+<pre>
+<span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"header"</span><span class="nt">&gt;</span> 
+	<span class="nt">&lt;h1&gt;</span>Page Title<span class="nt">&lt;/h1&gt;</span> 
+<span class="nt">&lt;/div&gt;</span> 
+</pre> 
+</div> 
+
+	<h2>Header buttons</h2>
+	
+			<p>In the standard header configuration, there are slots for up to two buttons on either side of the text heading. Each button is an <code>anchor</code> element that points to any <code>URI</code>. The button's width fits the length of the text and icons it contains. The header plugin looks for immediate children of the header container and will automatically set the first link found in the left button slot and the second link in the right button slot.</p>
+					
+			<p>In this example, the Home button will appear in the left slot and Edit will appear in the right slot. If you want to add custom HTML markup (or embed a widget like Nav Bar) into the header bar, simply wrap the markup in a container <code>div</code> and the plugin won't apply the automatic button slot logic.</p> 
+
+<div class="highlight"> 
+<pre><span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"page"</span><span class="nt">&gt;</span> 
+	<span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"header"</span><span class="nt">&gt;</span> 
+		<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"index.php"</span><span class="nt">&gt;</span>Home<span class="nt">&lt;/a&gt;</span> 
+		<span class="nt">&lt;h1&gt;</span>Page Title<span class="nt">&lt;/h1&gt;</span> 
+		<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"edit.php"</span><span class="nt">&gt;</span>Edit<span class="nt">&lt;/a&gt;</span> 
+	<span class="nt">&lt;/div&gt;</span> 
+<span class="nt">&lt;/div&gt;</span> 
+</pre> 
+</div> 
+
+			<p>The button position can also be controlled by adding classes to the button anchors instead of relying on source order. This is especially useful if there isn't a left button and you only want a button in the right slot. To specify the button position, add the class of <code>ui-btn-left</code> or <code>ui-btn-right</code> to the anchor.</p> 
+
+<div class="highlight"> 
+<pre>
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"tools.php"</span> <span class="na">class=</span><span class="s">"ui-btn-right"</span><span class="nt">&gt;</span>Tools<span class="nt">&lt;/a&gt;</span> 
+
+</pre> 
+</div> 
+
+				<p>If there isn't a user-defined button in the left slot, the framework will auto-generate a "back" button in that slot to automate the process of including this common navigation element on every page. To prevent the back button from being added to a header in these situations, add this attribute: <code>data-nobackbtn="true"</code>.</p>
+
+	<h2>Bar & button theme styling</h2>
+	
+	<p>The header will be styled by default with the theme's "a" color swatch (black in the default theme) because these bars are typically primary in the visual hierarchy of a page. To set the header to a different color in your theme, add the <code>data-theme</code> attribute and specify the letter of the theme swatch (a, b, c, etc.). For example, this will set the bar to swatch "b" (blue in the default theme):</p> 
+
+<div class="highlight"> 
+<pre>
+<span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"header"</span> <span class="na">data-theme=</span><span class="s">"b"</span><span class="nt">&gt;</span> 
+<span class="nt">&lt;h1&gt;</span>Page Title<span class="nt">&lt;/h1&gt;</span> 
+<span class="nt">&lt;/div&gt;</span> 
+</pre> 
+</div>
+
+	
+			<p>Any link added inside the header block will be automatically styled as a button that matches the color of the bar's theme swatch. To make a button stand out as a primary call to action, the <code>data-theme</code> attribute can be used to specify a contrasting button color from a different theme swatch. For example, if we set the header to theme "c" (light gray), both buttons would be styled as the "c" button by default. If we wanted the Save button to visually pop, we can override the color by setting the <code>data-theme</code> attribute to "b" (blue in our default theme) on the Save button's anchor.</p> 
+
+<div class="highlight"> 
+<pre>
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"add-user.php"</span> <span class="na">data-theme=</span><span class="s">"b"</span><span class="nt">&gt;</span>Save<span class="nt">&lt;/a&gt;</span> 
+</pre> 
+</div> 
+		
+			<a href="bars-themes.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Themed header examples</a>
+			
+		
+		
+		</div><!-- /ui-body wrapper -->	
+	</div><!-- /content -->
+</div><!-- /page -->
+
+</body>
+</html>

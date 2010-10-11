@@ -62,6 +62,17 @@
 			<li><a href="index.html">List item A</a></li>
 		</ul>
 		
+		<h3>Active state</h3>
+		<p>The jQuery Mobile framework uses a single theme swatch called "active" (bright blue in the default theme) to consistently indicate the selected state, regardless of the theme of the widget. We apply this in navigation and form controls to indicate what is currently selected. Because this theme swatch is designed for clear, consistent user feedback, it is not currently a theme swatch that can be overridden via the markup. It is set once in the theme and applied by the framework whenever a selected or active state is needed. The styling for this state is in the theme stylesheet under the <code>ui-btn-active</code> style rules.</p>
+		
+		<fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
+	     	<legend>Active is used for the on state of these toggles:</legend>
+	         	<input type="radio" name="radio-choice-a" id="radio-choice-a" value="on" checked="checked" />
+	         	<label for="radio-choice-a">On</label>
+	         	<input type="radio" name="radio-choice-a" id="radio-choice-b" value="off"  />
+	         	<label for="radio-choice-b">Off</label>
+	    </fieldset>
+		
 		<h3>Buttons</h3>
 		<p>A set of 4 button colors are also included in the default theme. Each button has styles for normal, hover/focus and pressed states. Each button is intentionally styled to match the color of a bar so they feel tightly integrated. </p>
 		
@@ -138,7 +149,8 @@
 
 		
 		<h3>Extensible themes</h3>
-		<p>The powerful thing about the new jQuery Mobile theme system is that you can now add as many color swatches as you like within a single theme. In the future ThemeRoller tool, you will be able to add new swatches through an easy-to-use web interface. Until then, you can add new swatches manually by copying the block of theme style rules for an existing swatch, renaming the rules a new letter (e) and changing colors. You can then you can reference the new theme by adding the <code>data-theme="e"</code> attribute to your toolbars.</p>
+		<p>The powerful thing about the new jQuery Mobile theme system is that you can now add as many color swatches as you like within a single theme. In the future ThemeRoller tool, you will be able to add new swatches through an easy-to-use web interface. Until then, you can add new swatches manually by copying the block of theme style rules for an existing swatch, renaming the rules a new letter (e) and changing colors.</p>
+		<p>You can then you can reference the new theme by adding the <code>data-theme="e"</code> attribute to your markup. If you set a theme swatch letter, the framework simply applies classes that include the letter you specify so it's critical that your active theme file include rules for the letters specified in your markup.</p>
 	
 	</div><!-- end body wrapper -->
 	</div><!-- end content -->

@@ -10,12 +10,72 @@
 <div data-role="page">
 
 	<div data-role="header">
-		<h1>Getting started</h1>
-		<a href="index.html" class="ui-back" data-icon="arrow-l">Home</a>
+		<h1>Page structure</h1>
 	</div><!-- /header -->
 
 	<div data-role="content">
 		<div class="ui-body ui-body-c">
+			
+			<p>Following HTML markup conventions is essential to this approach because markup is the primary mechanism used to configure the mobile experience in jQuery Mobile. Validate your code and always avoid the use of inline styles or inline JavaScript event handlers to ensure the best results.</p> 
+
+			<h2>Mobile page structure</h2> 
+
+			<p>A jQuery Mobile site starts with an HTML5 'doctype'. In the 'head', references to jQuery, jQuery Mobile and the mobile theme CSS are all required to start things off:</p> 
+
+<div class="highlight"> 
+<pre><span class="cp">&lt;!DOCTYPE html&gt;</span> 
+<span class="nt">&lt;html&gt;</span> 
+	<span class="nt">&lt;head&gt;</span> 
+		<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span> <span class="nt">/&gt;</span> 
+		<span class="nt">&lt;title&gt;</span>Page Title<span class="nt">&lt;/title&gt;</span> 
+		<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">href=</span><span class="s">"..."</span> <span class="nt">/&gt;</span> 
+		<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"jquery-min.js"</span><span class="nt">&gt;&lt;/script&gt;</span> 
+		<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"jquery-mobile-min.js"</span><span class="nt">&gt;&lt;/script&gt;</span> 
+	<span class="nt">&lt;/head&gt;</span> 
+	<span class="nt">&lt;body&gt;</span> 
+        ...
+	<span class="nt">&lt;/body&gt;</span> 
+<span class="nt">&lt;/html&gt;</span> 
+</pre> 
+</div> 
+
+			<p>Inside the <code>&lt;body&gt;</code> tag, each view or "page" on the mobile device is identified with an element (usually a <code>div</code>) with the <code>data-role="page"</code> attribute:</p> 
+
+<div class="highlight"> 
+<pre><span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"page"</span><span class="nt">&gt;</span> 
+	...
+<span class="nt">&lt;/div&gt;</span> 
+</pre> 
+</div> 
+
+			<p>Within the "page" container, any valid HTML markup can be used, but for typical pages in jQuery Mobile, the immediate children of a "page" are divs with data-roles of <code>"header"</code>, <code>"content"</code>, and <code>"footer"</code>.</p> 
+
+<div class="highlight"> 
+<pre><span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"page"</span><span class="nt">&gt;</span> 
+	<span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"header"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/div&gt;</span> 
+	<span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"content"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/div&gt;</span> 
+	<span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"footer"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/div&gt;</span> 
+<span class="nt">&lt;/div&gt;</span> 
+</pre> 
+</div> 
+
+			<p>A single HTML document can contain either a single 'page' or, by stacking multiple divs with a <code>data-role</code> of <code>"page"</code>, multiple 'pages' can be assembled and loaded together. This allows you to build a small site or application within a single document and jQuery Mobile will simply display the first 'page' it finds in the source order when the page loads.</p> 
+
+			<p>Here is an example of a 2 "page" site built with two jQuery Mobile divs navigated by linking to an ID placed on each page wrapper. Note that the IDs on the page wrappers are only needed to support the internal page linking and are optional if each page is a separate HTML document.</p> 
+
+<div class="highlight"> 
+<pre><span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"page"</span> <span class="na">id=</span><span class="s">"foo"</span><span class="nt">&gt;</span> 
+   I'm the "foo" page. Since I'm the first page in the source order, I will be displayed onLoad. 
+   <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#bar"</span><span class="nt">&gt;</span>Visit the bar "page"<span class="nt">&lt;/a&gt;</span> 
+<span class="nt">&lt;/div&gt;</span> 
+
+<span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"page"</span> <span class="na">id=</span><span class="s">"bar"</span><span class="nt">&gt;</span> 
+  I'm the "bar" page. I will be shown only if the anchor link on the <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#foo"</span><span class="nt">&gt;</span>foo<span class="nt">&lt;/a&gt;</span> page is clicked. 
+<span class="nt">&lt;/div&gt;</span> 
+</pre> 
+</div> 
+
+			<p>jQuery Mobile automates the process of animating between pages, loading external pages via Ajax and tracking page history to support the Back button and deep linking. If linking between 2 "pages" inside the same HTML document, the framework will simply animate between the two page divs. If a link points to an external HTML page, jQuery Mobile will unobtrusively formulate an Ajax request based on the link's <code>ref</code> (Hijax), display the loading spinner, append the new page's content, apply the <code>mobilize()</code> function, then animate the page into view. In either situation, jQuery Mobile updates the page's URL hash to track the current page view and enable Back button support, deep-linking and bookmarking. Learn more about the technical details of the <a class="internal present" href="/jquery/jquery-mobile/wiki/Page-Navigation-Model">Page-Navigation-Model</a>.</p>
 		
 		<pre><code>
 &lt;!DOCTYPE html&gt; 
