@@ -92,8 +92,8 @@ $.fn.customSelect = function(options){
 			
 			if( menuHeight > window.innerHeight - 80 ){
 				menuType = "page";		
-				$.changePage(thisPage, menuPage, "slideup", false);
 				menuPageContent.append( list );
+				$.changePage(thisPage, menuPage, "slide", false);
 			}
 			else {
 				menuType = "overlay";
@@ -110,17 +110,18 @@ $.fn.customSelect = function(options){
 						"margin-top": -menuHeight/2,
 						left: window.innerWidth/2,
 						"margin-left": -1* listbox.outerWidth() / 2
-					});
+					})
+					.addClass("in");
 			}
 		};
 		
 		function hidemenu(){
 			if(menuType == "page"){			
-				$.changePage(menuPage, thisPage, "slideup", true);
+				$.changePage(menuPage, thisPage, "slide", true);
 			}
 			else{
 				screen.addClass( "ui-screen-hidden" );
-				listbox.addClass( "ui-listbox-hidden" ).removeAttr( "style" );
+				listbox.addClass( "ui-listbox-hidden" ).removeAttr( "style" ).removeClass("in");
 			}
 		};
 		
