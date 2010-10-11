@@ -10,74 +10,78 @@ $(function() {
 	};
 	
 	function list() {
-		var ul = $("#conversions").empty().page( "destroy" ),
-			ulEdit = $("#edit-conversions").empty().page( "destroy" );
-		$.each(all, function(index, conversion) {
+		var ul = $( "#conversions" ).empty()
+				.filter( ":mobile-page" ).page( "destroy" ),
+			ulEdit = $( "#edit-conversions" ).empty()
+				.filter( ":mobile-page" ).page( "destroy" );
+		
+		$.each( all, function( index, conversion ) {
 			// if last update was less then a minute ago, don't update
-			if (conversion.type == "currency" && !conversion.rate || conversion.updated && conversion.updated + 60000 < +new Date) {
+			if ( conversion.type === "currency" && !conversion.rate || conversion.updated && conversion.updated + 60000 < +new Date) {
 				var self = conversion;
 				var url = "http://query.yahooapis.com/v1/public/yql?q=select%20rate%2Cname%20from%20csv%20where%20url%3D'http%3A%2F%2Fdownload.finance.yahoo.com%2Fd%2Fquotes%3Fs%3D" + conversion.from + conversion.to + "%253DX%26f%3Dl1n'%20and%20columns%3D'rate%2Cname'&format=json&diagnostics=true&callback=?";
-				$.getJSON(url, function(result) {
-					self.rate = parseFloat(result.query.results.row.rate);
+				$.getJSON( url, function( result ) {
+					console.log( "results", result );
+					self.rate = parseFloat( result.query.results.row.rate );
 					// TODO trigger a custom event instead of keyup?
-					$("#term").keyup();
+					$( "#term" ).keyup();
 					self.updated = +new Date;
 					conversions.store();
 				});
 			}
-			$("#conversion-field").tmpl(conversion, {
+			$( "#conversion-field" ).tmpl( conversion, {
 				symbols: symbols
-			}).appendTo(ul);
-			$("#conversion-edit-field").tmpl(conversion, {
+			}).appendTo( ul );
+			$( "#conversion-edit-field" ).tmpl( conversion, {
 				symbols: symbols
-			}).appendTo(ulEdit);
+			}).appendTo( ulEdit );
 		});
 		ul.page();
 		// TODO trigger a custom event instead of keyup?
-		$("#term").keyup();
+		$( "#term" ).keyup();
 	}
 	var all = conversions.all();
-	$("#term").keyup(function() {
+	$( "#term" ).keyup(function() {
 		var value = this.value;
-		$.each(all, function(index, conversion) {
-			$("#" + conversion.from + conversion.to).val( conversion.rate
-				? Math.ceil(value * conversion.rate * 100) / 100
+		$.each( all, function( index, conversion ) {
+			$( "#" + conversion.from + conversion.to ).val( conversion.rate
+				? Math.ceil( value * conversion.rate * 100 ) / 100
 				: "Rate not available, yet."
 			);
 		});
 	}).focus();
 	list();
-	$("form").submit(function() {
-		$("#term").blur();
+	$( "form" ).submit(function() {
+		$( "#term" ).blur();
 		return false;
 	});
-	$("#add").click(function() {
+	$( "#add" ).click(function() {
 		all.push({
 			type: "currency",
-			from: $("#currency-options-from").val(),
-			to: $("#currency-options-to").val()
+			from: $( "#currency-options-from" ).val(),
+			to: $( "#currency-options-to" ).val()
 		});
 		conversions.store();
 		list();
 		return false;
 	});
-	$("#clear").click(function() {
+	$( "#clear" ).click(function() {
 		conversions.clear();
 		list();
 		return false;
 	});
-	$("#restore").click(function() {
+	$( "#restore" ).click(function() {
 		conversions.restore();
 		list();
 		return false;
 	});
 	
-	$("#edit-conversions").click(function(event) {
-		var target = $(event.target).closest(".deletebutton");
-		if (target.length) {
-			conversions.remove(target.prev("label").attr("for"));
+	$( "#edit-conversions" ).click(function( event ) {
+		var target = $( event.target ).closest( ".deletebutton" );
+		if ( target.length ) {
+			conversions.remove( target.prev( "label" ).attr( "for" ) );
 			list();
 		}
 		return false;
-	})
+	});
 });
