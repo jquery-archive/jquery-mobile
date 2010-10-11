@@ -11,7 +11,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		theme: "f",
 		countTheme: "f",
 		headerTheme: "b",
-		groupingTheme: "b",
+		dividerTheme: "b",
 		splitTheme: "b",
 		inset: false
 	},
@@ -29,7 +29,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				.each(function() {
 					var $li = $( this ),
 						role = $li.data( "role" ),
-						groupingtheme = $list.data( "groupingtheme" ) || o.groupingTheme;
+						dividertheme = $list.data( "dividertheme" ) || o.dividerTheme;
 					if ( $li.is( ":has(img)" ) ) {
 						$li.addClass( "ui-li-has-thumb" );
 					}
@@ -53,7 +53,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 								.addClass( "ui-link-inherit" );
 					}
 					else if( role == "list-divider" ){
-						$li.addClass( "ui-li-grouping ui-btn ui-body-" + groupingtheme ).attr( "role", "heading" );
+						$li.addClass( "ui-li-divider ui-btn ui-body-" + dividertheme ).attr( "role", "heading" );
 					}
 					else {
 						$li.addClass( "ui-li-static ui-btn-up-" + o.theme );
@@ -172,8 +172,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		var counter = 1;
 		this.element.find( ".ui-li-dec" ).remove();
 		this.element.find( "li:visible" ).each(function() {
-			if( $( this ).is( ".ui-li-grouping" ) ) {
-				//reset counter when a grouping heading is encountered
+			if( $( this ).is( ".ui-li-divider" ) ) {
+				//reset counter when a divider heading is encountered
 				counter = 1;
 			} else { 
 				$( this )
