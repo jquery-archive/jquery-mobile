@@ -39,7 +39,7 @@
 		$html = jQuery('html'),
 		$head = jQuery('head'),
 		$body,
-		$loader = jQuery('<div class="ui-loader ui-body-a ui-corner-all"><span class="ui-icon ui-icon-loading spin"></span><h1>loading.</h1></div>'),
+		$loader = jQuery('<div class="ui-loader ui-body-a ui-corner-all"><span class="ui-icon ui-icon-loading spin"></span><h1>loading</h1></div>'),
 		startPage,
 		startPageId = 'ui-page-start',
 		activePageClass = 'ui-page-active',
