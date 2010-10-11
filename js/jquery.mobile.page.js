@@ -18,8 +18,10 @@ $.widget( "mobile.page", $.mobile.widget, {
 		
 		this.element.find( "[data-role=nojs]" ).addClass( "ui-nojs" );
 		this._enchanceControls();
+
+		//links in bars, or those with data-role become buttons
+		this.element.find( "[data-role=button], .ui-bar a" ).not( ".ui-btn" ).buttonMarkup();
 		
-		//pre-find data els
 		var $dataEls = this.element.find( "[data-role]" ).andSelf().each(function() {
 			var $this = $( this ),
 				role = $this.data( "role" ),
@@ -62,7 +64,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 						.prependTo( $this );
 				}
 				
-				$headeranchors.buttonMarkup();
+				$this.children( "a" ).buttonMarkup();
 				
 				//page title	
 				$this.children( ":header" )
@@ -102,13 +104,6 @@ $.widget( "mobile.page", $.mobile.widget, {
 				break;
 			}
 		});
-		
-		//links in bars, or those with data-role become buttons
-		$dataEls //MOVETO LINE 
-			.filter( "[data-role=button]" )
-			.add( ".ui-bar a, .ui-footer a, .ui-header a")
-			.not( ".ui-btn" )
-			.buttonMarkup();
 		
 		//links within content areas
 		this.element.find( ".ui-body a:not(.ui-btn):not(.ui-link-inherit)" )
