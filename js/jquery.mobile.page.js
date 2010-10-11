@@ -70,12 +70,15 @@ $.widget( "mobile.page", $.mobile.widget, {
 					.attr( "tabindex" , "0")
 					.attr( "role" ,"heading")
 					.attr( "aria-level", "1" ); //regardless of h element number in src, it becomes h1 for the enhanced page
-			} else if ( role === "page" || role === "content" ) {
-				$this.addClass( "ui-body-" + (theme || "c") );
-				if( role == "content" ){
-					//add ARIA role
-					$this.attr("role","main");
+			} else if ( role === "content" ) {
+				if( theme ){
+					$this.addClass( "ui-body-" + theme);
 				}
+				//add ARIA role
+				$this.attr("role","main");
+			}
+			else if( role == "page" ){
+				$this.addClass( "ui-body-" + (theme || "c") );
 			}
 			
 			switch(role) {
@@ -95,15 +98,13 @@ $.widget( "mobile.page", $.mobile.widget, {
 				break;
 			case "controlgroup":
 				// FIXME for some reason this has to come before the form control stuff (see above)
-				$this.controlgroup({
-					direction: $this.data( "type" )
-				});
+				$this.controlgroup();
 				break;
 			}
 		});
 		
 		//links in bars, or those with data-role become buttons
-		$dataEls
+		$dataEls //MOVETO LINE 
 			.filter( "[data-role=button]" )
 			.add( ".ui-bar a, .ui-footer a, .ui-header a")
 			.not( ".ui-btn" )
