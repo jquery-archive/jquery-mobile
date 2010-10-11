@@ -24,14 +24,19 @@ $.fn.buttonMarkup = function( options ){
 						return 'c';
 					}
 				})(),
-				iconpos: el.attr('data-iconpos'),
-				icon: el.attr('data-icon')
+				iconpos: el.data('iconpos'),
+				icon: el.data('icon'),
+				inline: el.data('inline')
 			}, $.fn.buttonMarkup.defaults, options),
 			
 			// Classes Defined
 			buttonClass = "ui-btn ui-btn-up-" + o.theme,
 			innerClass = "ui-btn-inner",
 			iconClass;
+		
+		if( o.inline ){
+			buttonClass += " ui-btn-inline";
+		}
 		
 		if (o.icon) {
 			o.icon = 'ui-icon-' + o.icon;

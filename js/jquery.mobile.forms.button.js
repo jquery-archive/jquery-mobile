@@ -10,7 +10,12 @@ $.fn.customButton = function(){
 		var button = $(this).addClass('ui-btn-hidden').attr('tabindex','-1');
 		//add ARIA role
 		$('<a href="#" role="button">'+ (button.text() || button.val()) +'</a>')
-			.buttonMarkup({theme: button.attr('data-theme'), icon: button.attr('data-icon')})
+			.buttonMarkup({
+				theme: button.data('theme'), 
+				icon: button.data('icon'),
+				iconpos: button.data('iconpos'),
+				inline: button.data('inline')
+			})
 			.click(function(){
 				button.click(); 
 				return false;
