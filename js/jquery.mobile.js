@@ -143,6 +143,17 @@
 		}
 	};
 	
+	//for directing focus to the page title, or otherwise first focusable element
+	function reFocus(page){
+		var pageTitle = page.find( ".ui-title" );
+		if( pageTitle.length ){
+			pageTitle.focus();
+		}
+		else{
+			page.find( focusable ).eq(0).focus();
+		}
+	}
+	
 	// transition between pages - based on transitions from jQtouch
 	function changePage( from, to, transition, back ) {
 		window.scrollTo(0,0);
@@ -156,7 +167,7 @@
 			//trigger show/hide events
 			from.trigger("pagehide", {nextPage: to});
 			to.trigger("pageshow", {prevPage: from});
-			
+			reFocus(to);
 			pageLoading( true );
 		}
 		
@@ -170,13 +181,6 @@
 			to.animationComplete(function() {
 				from.add( to ).removeClass(" out in reverse " + transitions );
 				from.removeClass( activePageClass );
-				var pageTitle = to.find( ".ui-title" );
-				if( pageTitle.length ){
-					pageTitle.focus();
-				}
-				else{
-					to.find( focusable ).eq(0).focus();
-				}
 				loadComplete();
 			});
 		}
@@ -290,6 +294,7 @@
 					startPage.addClass( activePageClass );
 					//FIXME: when there's no prevPage, is passing an empty jQuery obj proper style?
 					startPage.trigger("pageshow", {prevPage: $('')});
+					reFocus(startPage);
 					pageLoading( true );
 				}
 			}
