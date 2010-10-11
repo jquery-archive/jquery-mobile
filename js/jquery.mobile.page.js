@@ -70,12 +70,15 @@ $.widget( "mobile.page", $.mobile.widget, {
 					.attr( "tabindex" , "0")
 					.attr( "role" ,"heading")
 					.attr( "aria-level", "1" ); //regardless of h element number in src, it becomes h1 for the enhanced page
-			} else if ( role === "page" || role === "content" ) {
-				$this.addClass( "ui-body-" + (theme || "c") );
-				if( role == "content" ){
-					//add ARIA role
-					$this.attr("role","main");
+			} else if ( role === "content" ) {
+				if( theme ){
+					$this.addClass( "ui-body-" + theme);
 				}
+				//add ARIA role
+				$this.attr("role","main");
+			}
+			else if( role == "page" ){
+				$this.addClass( "ui-body-" + (theme || "c") );
 			}
 			
 			switch(role) {
