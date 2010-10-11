@@ -46,7 +46,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 								shadow: false,
 								corners: false,
 								iconpos: "right",
-								icon: "arrow-r",
+								icon: $(this).data("icon") || "arrow-r",
 								theme: o.theme
 							})
 							.find( "a" ).eq( 0 )
