@@ -17,7 +17,8 @@ $.fn.customSelect = function(options){
 		//extendable options
 		o = $.extend({
 			closeText: "close",
-			chooseText: label.text()
+			chooseText: label.text(),
+			theme: select.data("theme")
 		}, options),
 
 		buttonId = selectID + "-button",
@@ -37,7 +38,8 @@ $.fn.customSelect = function(options){
 			.insertBefore( select )
 			.buttonMarkup({
 				iconpos: 'right',
-				icon: 'arrow-d'
+				icon: 'arrow-d',
+				theme: o.theme
 			}),
 		menuPage = $( "<div data-role='dialog' data-theme='a'>" +
 					"<div data-role='header' data-theme='b'>" +

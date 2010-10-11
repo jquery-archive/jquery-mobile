@@ -46,7 +46,7 @@
 		</div>
 		<div data-role="fieldcontain">
          <label for="password">Password Input:</label>
-         <input type="password" name="password" id="password" value=""  />
+         <input type="password" name="password" id="password" value="" data-theme="b" />
 		</div>
 
 		<div data-role="fieldcontain">
@@ -60,6 +60,11 @@
 		</div>
 		
 		<div data-role="fieldcontain">
+			<label for="slider1">Input slider:</label>
+		 	<input type="range" name="slider1" id="slider1" value="50" min="0" max="100" data-theme="b" />
+		</div>
+		
+		<div data-role="fieldcontain">
 			<label for="slider2">Select slider:</label>
 			<select name="slider2" id="slider2" data-role="slider">
 				<option value="off">Off</option>
@@ -68,8 +73,8 @@
 		</div>
 		
 		<div data-role="fieldcontain">
-			<label for="slider3">Another select slider:</label>
-			<select name="slider3" id="slider3" data-role="slider">
+			<label for="slider3">Themed select slider:</label>
+			<select name="slider3" id="slider3" data-role="slider" data-theme="a">
 				<option value="off">Off</option>
 				<option value="on" selected="selected">On</option>
 			</select> 
@@ -104,6 +109,16 @@
 	         	<label for="radio-choice-a">On</label>
 	         	<input type="radio" name="radio-choice-a" id="radio-choice-b" value="off"  />
 	         	<label for="radio-choice-b">Off</label>
+	    </fieldset>
+	    
+	    <fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
+	     	<legend>Same with theme change:</legend>
+	         	<input type="radio" name="radio-choice-b" id="radio-choice-c" value="on" checked="checked" data-theme="a" />
+	         	<label for="radio-choice-c">On</label>
+	         	<input type="radio" name="radio-choice-b" id="radio-choice-d" value="off" data-theme="a" />
+	         	<label for="radio-choice-d">Off</label>
+	         	<input type="radio" name="radio-choice-b" id="radio-choice-e" value="other" data-theme="a" />
+	         	<label for="radio-choice-e">Other</label>
 	    </fieldset>
     
     </div>
@@ -159,7 +174,7 @@
 		
 		<div data-role="fieldcontain">
 			<label for="select-choice-3" class="select">Choose one:</label>
-			<select name="select-choice-3" id="select-choice-3">
+			<select name="select-choice-3" id="select-choice-3" data-theme="b">
 				<option value="Choice 1">Choice 1</option>
 				<option value="Choice 2">Choice 2</option>
 				<option value="Choice 3">Choice 3</option>

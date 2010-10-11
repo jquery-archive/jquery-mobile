@@ -25,7 +25,13 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		//create listview markup 
 		this.element
 			.addClass( "ui-listview" )
+			.attr( "role", "listbox" )
 			.find( "li" )
+				.attr("role","option")
+				.attr("tabindex","-1")
+				.focus(function(){
+					$(this).attr("tabindex","0");
+				})
 				.each(function() {
 					var $li = $( this ),
 						role = $li.data( "role" ),
@@ -58,8 +64,55 @@ $.widget( "mobile.listview", $.mobile.widget, {
 					else {
 						$li.addClass( "ui-li-static ui-btn-up-" + o.theme );
 					}	
-				});
-		
+				})
+				.eq(0)
+				.attr("tabindex","0");
+				
+	
+		//keyboard events for menu items
+		this.element.keydown(function(event){
+			//switch logic based on which key was pressed
+			switch(event.keyCode){
+				//up or left arrow keys
+				case 38:
+					//if there's a previous option, focus it
+					if( $(event.target).closest('li').prev().length  ){
+						$(event.target).blur().attr("tabindex","-1").closest('li').prev().find('a').eq(0).focus();
+					}	
+					//prevent native scroll
+					return false;
+				break;
+				//down or right arrow keys
+				case 40:
+				
+					//if there's a next option, focus it
+					if( $(event.target).closest('li').next().length ){
+						$(event.target).blur().attr("tabindex","-1").closest('li').next().find('a').eq(0).focus();
+					}	
+					//prevent native scroll
+					return false;
+				break;
+				case 39:
+					if( $(event.target).closest('li').find('a.ui-li-link-alt').length ){
+						$(event.target).blur().closest('li').find('a.ui-li-link-alt').eq(0).focus();
+					}
+					return false;
+				break;
+				case 37:
+					if( $(event.target).closest('li').find('a.ui-link-inherit').length ){
+						$(event.target).blur().closest('li').find('a.ui-link-inherit').eq(0).focus();
+					}
+					return false;
+				break;
+				//if enter or space is pressed, trigger click
+				case 13:
+				case 32:
+					 $(event.target).trigger('click'); //should trigger select
+					 return false;
+				break;	
+			}
+		});	
+
 		if ( o.inset ) {
 			this.element
 				.addClass( "ui-listview-inset" )
