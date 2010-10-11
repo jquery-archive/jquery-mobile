@@ -156,7 +156,6 @@
 	
 	// transition between pages - based on transitions from jQtouch
 	function changePage( from, to, transition, back ) {
-		window.scrollTo(0,0);
 		jQuery( document.activeElement ).blur();
 		
 		//trigger before show/hide events
@@ -164,11 +163,12 @@
 		to.trigger("beforepageshow", {prevPage: from});
 		
 		function loadComplete(){
-			//trigger show/hide events
-			from.trigger("pagehide", {nextPage: to});
-			to.trigger("pageshow", {prevPage: from});
-			reFocus(to);
 			pageLoading( true );
+			//trigger show/hide events, allow preventing focus change through return false		
+			if( from.trigger("pagehide", {nextPage: to}) !== false && to.trigger("pageshow", {prevPage: from}) !== false ){
+				window.scrollTo(0,0);
+				reFocus( to );
+			}
 		}
 		
 		if(transition){		
@@ -292,10 +292,11 @@
 				} else {
 					startPage.trigger("beforepageshow", {prevPage: $('')});
 					startPage.addClass( activePageClass );
-					//FIXME: when there's no prevPage, is passing an empty jQuery obj proper style?
-					startPage.trigger("pageshow", {prevPage: $('')});
-					reFocus(startPage);
 					pageLoading( true );
+					
+					if( startPage.trigger("pageshow", {prevPage: $('')}) !== false ){
+						reFocus(startPage);
+					}
 				}
 			}
 		});
