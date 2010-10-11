@@ -11,14 +11,14 @@ $.fn.customCheckboxRadio = function(options){
 			var input = $(this);
 			
 			var o = $.extend({
-				theme: 'b',
-				icon: !input.parents('[data-type="horizontal"]').length,
+				theme: $(this).data('theme'),
+				icon: $(this).data('icon') || !input.parents('[data-type="horizontal"]').length,
 				checkedicon: 'ui-icon-'+input.attr('type')+'-on',
 				uncheckedicon: 'ui-icon-'+input.attr('type')+'-off'
 			},options);
 			
 			// get the associated label using the input's id
-			var label = $('label[for='+input.attr('id')+']').buttonMarkup({iconpos: o.icon ? 'left' : '', icon: o.icon ? o.uncheckedicon : null, shadow: false});
+			var label = $('label[for='+input.attr('id')+']').buttonMarkup({iconpos: o.icon ? 'left' : '', theme: o.theme, icon: o.icon ? o.uncheckedicon : null, shadow: false});
 						
 			var icon = label.find('.ui-icon');
 			
