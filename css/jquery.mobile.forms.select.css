@@ -6,7 +6,8 @@
 .ui-select { display: block; }
 .ui-select select { position: absolute; left: -99999px; }
 .ui-select .ui-btn-icon-right .ui-btn-inner { padding-right: 45px; } 
-.ui-select .ui-btn-icon-right .ui-icon { right: 15px; }
+.ui-select .ui-btn-icon-right .ui-icon { right: 15px;  }
+
 /* labels */
 label.ui-select { font-size: 16px; line-height: 1.4;  font-weight: normal; margin: 0 0 .3em; display: block; }
 
@@ -19,6 +20,8 @@ label.ui-select { font-size: 16px; line-height: 1.4;  font-weight: normal; margi
 .ui-listbox-overlay .ui-listbox-header { display: none; }
 .ui-listbox-list { list-style: none; margin: 5px; padding: 0; }
 .ui-listbox .ui-listbox-option { margin: 0; text-align: left; }
+.ui-li .ui-icon { display: none; }
+.ui-btn-active .ui-icon { display: block; }
 
 /*used in listbox - to be removed/replaced with page-style hiding*/
 .ui-helper-hidden,.ui-mobile .ui-content-hidden { display: none; }

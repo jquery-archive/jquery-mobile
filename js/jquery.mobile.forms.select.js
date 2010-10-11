@@ -9,18 +9,63 @@ $.fn.customSelect = function(options){
 	return $(this).each(function(){	
 		//extendable options
 		var o = $.extend({
-			backText: 'Back',
-			chooseText: 'Choose one:',
-			inline: false
+			closeText: 'close',
+			chooseText: 'Choose one:'
 		}, options);
 		
 		var select = $(this),
 			label = $('label[for='+ select.attr('id') +']').addClass('ui-select'),
 			buttonId = select.attr('id')+'-button',
 			menuId = 	select.attr('id')+'-menu',
-			thisPage = $(this).closest('.ui-page');
+			thisPage = $(this).closest('.ui-page'),
+			//create menu button		
+			button = $('<a href="#">'+ $(this.options.item(this.selectedIndex)).text() +'</a>')
+				.buttonMarkup({
+						iconpos: 'right',
+						icon: 'arrow-d'
+					})
+					.attr({
+						'role': 'button',
+						'title': 'select menu',
+						'id': buttonId,
+						'aria-haspopup': 'true',
+						'aria-owns': menuId
+					})
+					// FIXME why mousedown? doesn't seem to work on desktop browsers
+					.mousedown(function(){
+						select.trigger('showmenu');
+						return false;
+					})
+					.insertBefore(select),
+			menuPage = $( "<div data-role='dialog'>"+
+								"<div data-role='header' data-theme='b'>"+
+									"<a href='#' class='ui-btn-left' data-icon='delete' data-iconpos='notext'>"+ o.closeText +"</a><div class='ui-title'>" + o.chooseText + "</div></div>"+
+								"<div data-role='content'></div></div>"+
+							"</div>" )
+							.appendTo( "body" )
+							.page(),	
+			menuPageContent = menuPage.find('.ui-content'),								
+			listbox = $('<div class="ui-listbox ui-listbox-overlay ui-body-a ui-overlay-shadow ui-corner-all pop"></div>'),
+			list = $('<ul class="ui-listbox-list" id="'+ menuId +'" role="listbox" aria-labelledby="'+ buttonId +'"></ul>')
+						.appendTo(listbox);
+						
 
-		//select properties,events
+		//populate menu
+		select.find('option').each(function(i){
+			var thisclass = select[0].selectedIndex == i ? 'ui-btn-active' : '';
+			var thisselected = select[0].selectedIndex == i ? ' aria-selected="true"' : '';
+			$('<li></li>')
+				.addClass(thisclass)
+				.attr("data-icon","checkbox-on")
+				.append( $('<a href="#" class="ui-listbox-option"'+thisselected+' role="option">'+ $(this).text() +'</a>') )
+				.appendTo(list);
+		});
+		
+
+		list.listview();
+		
+		
+				//select properties,events
 		select
 			.change(function(){ 
 				var ele = select.get(0);
@@ -36,12 +81,10 @@ $.fn.customSelect = function(options){
 				$(document).data('currScroll', [$(window).scrollLeft(), $(window).scrollTop()]);
 				if(menuHeight > window.innerHeight - 80){
 					menuType = "page";		
-					thisPage.find('.ui-content').addClass('ui-content-hidden');	
-					listbox.removeClass('ui-listbox-overlay');
 				}
 				else {
 					menuType = "overlay";
-					listbox.addClass('ui-listbox-overlay').css({
+					listbox.css({
 						top: $(window).scrollTop() + (window.innerHeight/2), 
 						'margin-top': -menuHeight/2,
 						left: window.innerWidth/2
@@ -53,20 +96,25 @@ $.fn.customSelect = function(options){
 				var selectedLI = list.find('.ui-btn-active').focus();
 
 				if(menuType == "page"){
-					$(window)[0].scrollTo(0, 0);
-					listbox.addClass('slideup in');
+					list.appendTo(menuPageContent);
+					$.changePage(thisPage, menuPage, 'slideup', false);
 				}
 				else{
-					listbox.addClass('pop in');
+					list.appendTo(listbox).addClass('in');
 				}
 
 			})
 			.bind('hidemenu',function(){
-				screen.addClass('ui-helper-hidden out');
-				listbox.removeAttr('style').removeClass('in').addClass('ui-listbox-hidden out');
-				thisPage.find('.ui-content').removeClass('ui-content-hidden');
+				if(menuType == "page"){
+					$.changePage(menuPage, thisPage, 'slideup', true);
+				}
+				else{
+					screen.addClass('ui-helper-hidden out');
+					listbox.removeClass('in').addClass('ui-listbox-hidden out');
+				}
+				
 				setTimeout(function(){
-				button.focus();
+					button.focus();
 					if(menuType == "page"){
 						$(window)[0].scrollTo($(document).data('currScroll')[0], $(document).data('currScroll')[1]);
 						if(button.offset().top > window.innerHeight){
@@ -75,48 +123,9 @@ $.fn.customSelect = function(options){
 					}
 				}, 50);
 			});
-					
-		//create menu button		
-		var button = $('<a href="#">'+ $(this.options.item(this.selectedIndex)).text() +'</a>')
-			.buttonMarkup({
-				iconpos: 'right',
-				icon: 'arrow-d'
-			})
-			.attr({
-				'role': 'button',
-				'title': 'select menu',
-				'id': buttonId,
-				'aria-haspopup': 'true',
-				'aria-owns': menuId
-			})
-			// FIXME why mousedown? doesn't seem to work on desktop browsers
-			.mousedown(function(){
-				select.trigger('showmenu');
-				return false;
-			})
-			.insertBefore(select);
-	
-		//create menu
-		var listbox = $('<div id="'+ menuId +'" class="ui-listbox ui-body-a ui-overlay-shadow ui-corner-all" role="listbox" aria-labelledby="'+ buttonId +'"></div>');
 		
-		//menu header
-		$('<div class="ui-listbox-header ui-header ui-bar ui-bar-a ui-corner-all"><div class="ui-title">'+ o.chooseText +'</div></div>')
-			.prepend( $('<a href="#" class="ui-back">'+ o.backText +'</span></a>').buttonMarkup({icon: 'arrow-l'}) )
-			.appendTo(listbox);
 		
-		var list = $('<ul class="ui-listbox-list"></ul>').appendTo(listbox);
 		
-		//populate menu
-		select.find('option').each(function(i){
-			var thisclass = select[0].selectedIndex == i ? 'ui-btn-active' : '';
-			var thisselected = select[0].selectedIndex == i ? ' aria-selected="true"' : '';
-			$('<li></li>')
-				.append( $('<a href="#" class="ui-listbox-option"'+thisselected+' role="option">'+ $(this).text() +'</a>').buttonMarkup().addClass(thisclass) )
-				.appendTo(list);
-		});
-		
-		//group items in a vertical listbox style (corners pilled)
-		list.controlgroup();
 		
 		//apply click events for items
 		list.find('a')
@@ -134,10 +143,13 @@ $.fn.customSelect = function(options){
 			});
 		
 		//back button
-		listbox.find('.ui-listbox-header a').click(function(){
+		menuPage.find('.ui-header a').click(function(){
 			select.trigger('hidemenu');
 			return false;
 		});
+		
+		
+		
 			
 			
 		//keyboard events for menu items
@@ -182,9 +194,10 @@ $.fn.customSelect = function(options){
 
 		
 		//add list to page
-		listbox.insertAfter(thisPage.find('.ui-content:eq(0)'));
-		var screen = $('<div class="ui-listbox-screen ui-overlay ui-helper-hidden fadeto"></div>').insertBefore(listbox);
 		
+		var screen = $('<div class="ui-listbox-screen ui-overlay ui-helper-hidden fadeto"></div>')
+							.insertAfter(thisPage);
+		listbox.insertAfter(screen);
 		//get height for figuring out overlay vs. paged
 		var menuHeight = list.outerHeight();
 		
@@ -198,7 +211,6 @@ $.fn.customSelect = function(options){
 		screen.click(function(){
 			listbox.addClass('ui-listbox-hidden out');
 			screen.addClass('ui-helper-hidden out');
-			$('.ui-page').find('.ui-content').removeClass('ui-content-hidden');
 		});	
 	});
 };
