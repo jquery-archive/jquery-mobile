@@ -1,0 +1,134 @@
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<title>jQuery Mobile Docs - Lists</title> 
+	<link rel="stylesheet" media="only all" href="css/all" /> 
+	<script type="text/javascript" src="js/all"></script>
+</head> 
+<body> 
+
+<div data-role="page">
+
+	<div data-role="header">
+		<h1>Buttons</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="ui-body ui-body-c">
+			
+			<h2>Button basics</h2>
+			<p>in jQuery Mobile, buttons that are used for navigation are coded as links and those that submit forms are coded as <code>button</code> elements. </p>
+			
+			<h2>Buttons in page content</h2>
+			
+			<p>In the main content block of a page (<code>data-role="content"</code>), any link that you want to look like a button needs the <code>data-role="button"</code> added to the link to tell the framework to style the link as a button.</p>
+			
+<pre><code>
+&lt;a href=&quot;index.html&quot; data-role=&quot;button&quot;&gt;Link button&lt;/a&gt;
+</code></pre>
+
+			<p>Creates this button:</p>
+			<a href="index.html" data-role="button">Link button</a>
+			
+			<p>A <code>button</code> element or an <code>input</code> with a <code>type</code> of <code>submit</code>, <code>reset</code>, <code>button</code>, or <code>image</code> will all be automatically transformed into a custom styled button, no need to add the <code>data-role="button"</code> attribute. We found it was impossible to consistently style link and native form buttons consistently across platforms so the framework actually generates a new link-based button for each form button button and hides the original. When a click event fires on a the link button, it triggers a click on the original form button.</p>
+			
+<pre><code>
+&lt;button&gt;Button submit&lt;/button&gt;
+</pre></code>
+
+<p>Creates this button:</p>
+<button>Button submit</button>			
+
+			<h2>Icon options</h2>
+			
+			<p>Icons can be added to buttons by adding a <code>data-icon</code> attribute on the anchor to specify the icon to display. There a core set of <a href="buttons-icons.html">standard icons</a> included in the framework. To minimize the download size of the core icons, jQuery Mobile only includes these icons in white and automatically adds a semi-transparent black circle behind the icon to make sure it has good contrast on all background colors.</p> 
+
+<pre><code>
+&lt;a href=&quot;index.html&quot; data-role=&quot;button&quot; data-icon=&quot;arrow-r&quot;&gt;Link button&lt;/a&gt;
+</pre></code>
+
+<p>Creates this button:</p>
+<a href="index.html" data-role="button" data-icon="arrow-r">Link button</a>
+
+			
+			<p>By default, icons in buttons are added to the left of the text, but the <code>data-iconpos</code> attribute specifies the icon position: <code>left</code> or <code>right</code> of the text. To create an icon-only button, set the <code>data-iconpos</code> to <code>notext</code> and the button plugin will hide the text and add it as a <code>title</code> attribute on the link to provide context for screen readers and devices that support tooltips. In this example, we're adding a plus (+) icon and positioning it to the right of the text with our <code>data-</code> attributes on the link.</p> 
+
+<pre><code>
+&lt;a href=&quot;index.html&quot; data-role=&quot;button&quot; data-icon=&quot;arrow-r&quot; data-iconpos=&quot;right&quot;&gt;Link button&lt;/a&gt;
+</pre></code>
+
+<p>Creates this button:</p>
+<a href="index.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Link button</a>
+
+
+			<p>To use custom icons, specify a <code>data-icon</code> value that has a unique name like <code>myapp-email</code> and the button plugin will generate a class by prefixing <code>ui-icon-</code> to the <code>data-icon</code> value and apply it to the button. You can then write a CSS rule that targets the <code>ui-icon-myapp-email</code> class to specify the icon background source. To maintain visual consistency, create a white icon 18x18 pixels saved as a PNG-8 with alpha transparency.</p>
+			
+			<h2>Inline buttons</h2>
+			
+			<p>If you have multiple buttons that should sit side-by-side on the same line instead of stacked like the default buttons, wrap the buttons in a container that has a <code>data-inline="true"</code> attribute. This will style the buttons to be the width of their content and float the buttons so they sit on the same line. </p>
+			
+			&lt;div data-inline=&quot;true&quot;&gt;
+				&lt;a href=&quot;index.html&quot; data-role=&quot;button&quot;&gt;Cancel&lt;/a&gt;
+				&lt;a href=&quot;index.html&quot; data-role=&quot;button&quot;&gt;Save&lt;/a&gt;
+			&lt;/div&gt;					
+			
+			<h2>Grouping</h2>
+			
+			<p>It's possible to group a set of buttons together to form a single block of buttons that look contained like a navigation component. To get this effect, wrap a set of buttons in a container with the <code>data-role="controlgroup"</code> attribute and the framework will create a vertical button group. This removes all margins and drop shadows between the buttons and only rounds the top and bottom buttons to get the effect that they are group together. </p>
+<pre><code>
+&lt;div data-role=&quot;controlgroup&quot;&gt;
+	&lt;a href=&quot;index.html&quot; data-role=&quot;button&quot;&gt;Yes&lt;/a&gt;
+	&lt;a href=&quot;index.html&quot; data-role=&quot;button&quot;&gt;No&lt;/a&gt;
+	&lt;a href=&quot;index.html&quot; data-role=&quot;button&quot;&gt;Maybe&lt;/a&gt;
+&lt;/div&gt;
+</pre></code>
+
+			<p>Creates this button group:</p>
+			
+			<div data-role="controlgroup">
+				<a href="index.html" data-role="button">Yes</a>
+				<a href="index.html" data-role="button">No</a>
+				<a href="index.html" data-role="button">Maybe</a>
+			</div>
+			
+			<p>By default, grouped buttons are presented as a vertical list. By adding the <code>data-type="horizontal"</code> attribute</p> to the control group container, you can swap this to a horizontal style group that floats the buttons side-by-side and sets the width to only be large enough to fit the content. Be aware that these will wrap to multiple lines if the button number of text length is to wide for the screen.
+			
+			<div data-role="controlgroup" data-type="horizontal">
+				<a href="index.html" data-role="button">Yes</a>
+				<a href="index.html" data-role="button">No</a>
+				<a href="index.html" data-role="button">Maybe</a>
+			</div>
+			
+			<h2>Theming</h2>
+			
+			<p>jQuery Mobile has a rich <a href="../themes.html">theming system</a> that gives you full control of how buttons are styled. When a link is added to a container, it is automatically assigned a theme swatch letter that matches it's parent bar or content box to visually integrate the button into the parent container, like a chameleon. So a button placed inside a content container with a theme of "a" (black in the default theme) will be automatically assigned the button theme of "a" (charcoal in the default theme). Here are examples of the button theme pairings in the default theme. All buttons have the same HTML markup: </p>
+			
+			<div data-role="content" data-theme="a"><h4>A swatch</h4><a href="index.html" data-role="button">Button</a></div>
+			<div data-role="content" data-theme="b"><h4>B swatch</h4><a href="index.html" data-role="button">Button</a></div>
+			<div data-role="content" data-theme="c"><h4>C swatch</h4><a href="index.html" data-role="button">Button</a></div>
+			<div data-role="content" data-theme="d"><h4>D swatch</h4><a href="index.html" data-role="button">Button</a></div>
+			
+			<p>Button can be manually assigned any of the button color swatches from the theme to add visual contrast with the container they sit inside by adding the <code>data-theme</code> attribute on the button markup and specifying a swatch letter. </p>
+
+<pre><code>			
+&lt;a href=&quot;index.html&quot; data-role=&quot;button&quot; data-theme=&quot;a&quot;&gt;Theme a&lt;/a&gt;			
+</pre></code>
+				
+				<p>Here are 4 buttons with icons that have a different swatch letter assigned via the <code>data-theme</code> attribute.</p>
+			
+				<a href="index.html" data-role="button" data-theme="a" data-icon="arrow-l">Theme a</a>
+				<a href="index.html" data-role="button" data-theme="b" data-icon="arrow-l">Theme b</a>
+				<a href="index.html" data-role="button" data-theme="c" data-icon="arrow-l">Theme c</a>
+				<a href="index.html" data-role="button" data-theme="d" data-icon="arrow-l">Theme d</a>
+			
+				
+				<h2>Buttons in bars</h2>
+
+				<p>When buttons are placed inside header or footer bars, they are styled a bit differently than in the body. To save space, buttons in bars are styled with a smaller text size, less padding and only enough width to fit the text and icons inside. The <a href="../toolbars/docs-bars.html">toolbar documentation</a> has full details on the styling options of button in bars.</p>
+			
+		</div><!-- /ui-body wrapper -->	
+	</div><!-- /content -->
+</div><!-- /page -->
+
+</body>
+</html>
