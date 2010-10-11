@@ -10,13 +10,13 @@ jQuery.fn.customTextInput = function(options){
 		var input = $(this);
 		
 		var o = $.extend({
-			search: input.is('[type="search"],[data-type="search"]') 
-			//defaultTheme: "a"
+			search: input.is('[type="search"],[data-type="search"]'), 
+			theme: input.data("theme") || "c"
 		}, options);
 		
 		$('label[for='+input.attr('id')+']').addClass('ui-input-text');
 		
-		input.addClass('ui-input-text');
+		input.addClass('ui-input-text ui-shadow-inset ui-body-'+ o.theme);
 		
 		var focusedEl = input;
 		
@@ -46,7 +46,7 @@ jQuery.fn.customTextInput = function(options){
 			input.keyup(toggleClear);	
 		}
 		else{
-			input.addClass('ui-corner-all ui-body-c');
+			input.addClass('ui-corner-all');
 		}
 				
 		input
