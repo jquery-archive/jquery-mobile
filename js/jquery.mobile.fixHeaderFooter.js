@@ -18,7 +18,7 @@ $.fixedToolbars = (function(){
 	var currentstate = 'inline',
 		delayTimer,
 		ignoreTargets = 'a,input,textarea,select,button,label,.ui-header-fixed,.ui-footer-fixed',
-		toolbarSelector = '.ui-page-active .ui-header-fixed, .ui-page-active .ui-footer-fixed:not(.ui-footer-duplicate)',
+		toolbarSelector = '.ui-page-active .ui-header-fixed:first, .ui-page-active .ui-footer-fixed:not(.ui-footer-duplicate):last',
 		stickyFooter, //for storing quick references to duplicate footers
 		supportTouch = $.support.touch,
 		touchStartEvent = supportTouch ? "touchstart" : "mousedown",
