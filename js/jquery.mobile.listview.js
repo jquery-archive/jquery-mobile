@@ -171,7 +171,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		
 		this.element
 			.find( ".ui-li-count" )
-				.addClass( "ui-btn-up-" + o.countTheme + " ui-btn-corner-all" )
+				.addClass( "ui-btn-up-" + ($list.data( "counttheme" ) || o.countTheme) + " ui-btn-corner-all" )
 			.end()
 			.find( ":header" )
 				.addClass( "ui-li-heading" )
@@ -192,14 +192,15 @@ $.widget( "mobile.listview", $.mobile.widget, {
 	
 	_createSubPages: function() {
 		var parentId = this.element.closest( ".ui-page" ).attr( "id" ),
-			o = this.options;
+			o = this.options,
+			parentList = this.element;
 		$( this.element.find( "ul,ol" ).get().reverse() ).each(function( i ) {
 			var list = $( this ),
 				parent = list.parent(),
 				title = parent.contents()[ 0 ].nodeValue.split("\n")[0],
 				id = parentId + "&" + $.mobile.subPageUrlKey + "=" + $.mobile.idStringEscape(title + " " + i),
 				theme = list.data( "theme" ) || o.theme,
-				countTheme = list.data( "count-theme" ) || o.countTheme,
+				countTheme = list.data( "counttheme" ) || parentList.data( "counttheme" ) || o.countTheme,
 				newPage = list.wrap( "<div data-role='page'><div data-role='content'></div></div>" )
 							.parent()
 								.before( "<div data-role='header' data-theme='" + o.headerTheme + "'><div class='ui-title'>" + title + "</div></div>" )
