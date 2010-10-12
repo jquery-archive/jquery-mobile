@@ -1,0 +1,30 @@
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<title>jQuery Mobile Framework - Search Example</title> 
+	<link rel="stylesheet"  href="css/all" /> 
+	<script type="text/javascript" src="js/all"></script>
+</head> 
+<body> 
+
+<div data-role="page" >
+	<div data-role="header">
+		<h1>Search</h1>
+		
+	</div>
+	
+	<form method="get" action="_search-results.html" data-role="ajaxform" d>
+		<label for="term" data-role="nojs">Search:</label>
+		<input type="search" name="term" id="term" placeholder="search..." />
+		<button type="submit" data-role="nojs">Search</button>
+	</form>
+	
+	<div data-role="content">
+		<p>No search results yet...</p>
+		   
+	</div>
+</div>
+
+
+</body>
+</html>
