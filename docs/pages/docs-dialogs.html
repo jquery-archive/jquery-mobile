@@ -2,7 +2,7 @@
 <html> 
 	<head> 
 	<title>jQuery Mobile Docs - Pages</title> 
-	<link rel="stylesheet"  href="../../css/all" /> 
+	<link rel="stylesheet" media="only all" href="../../css/all" /> 
 	<script type="text/javascript" src="../../js/all"></script>
 </head> 
 <body> 
@@ -13,20 +13,21 @@
 		<h1>Dialogs</h1>
 	</div><!-- /header -->
 
-	<div data-role="content">
+	<div data-role="content" class="ui-body">
 			
 			<p>Any page can be presented as a dialog by adding the </a>data-rel="dialog"</code> attribute to the page you're linking to. The framework will add styles to make the page look like a modal dialog by adding rounded corners and margins around the page along with a dark background behind the "dialog".</p>
 			
 			<p>The dialog will still open with the standard slide transition so to make it feel more dialog-like, we recommend adding a transition of pop, slideup or flip on the link too.</p>
 			
-<pre><code>
+<code>
 &lt;a href=&quot;foo.html&quot; data-rel=&quot;dialog&quot; data-transition=&quot;pop&quot;&gt;Open dialog&lt;/a&gt;
-</pre></code>
+</code>
 			
+			<div>
 			<a href="dialog.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">Open dialog: pop</a>
 			<a href="dialog.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="slideup">Open dialog: slideup</a>
 			<a href="dialog.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="flip">Open dialog: flip</a>
-
+			</div>
 	
 
 			
