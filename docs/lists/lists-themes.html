@@ -2,9 +2,9 @@
 <html> 
 	<head> 
 	<title>jQuery Mobile Docs - Lists</title> 
-	<link rel="stylesheet"  href="../../css/all" /> 
-	<script type="text/javascript" src="../../js/all"></script>
-	<script type="text/javascript" src="../docs/docs.js"></script>
+	<link rel="stylesheet"  href="css/all" /> 
+	<script type="text/javascript" src="js/all"></script>
+	<script type="text/javascript" src="docs/docs.js"></script>
 </head> 
 <body> 
 
@@ -14,23 +14,71 @@
 		<h1>List themes</h1>
 	</div><!-- /header -->
 
-	<div data-role="content">
+	<div data-role="content" class="ui-body">
 		
 		<h2>Assigning theme swatches to lists</h2>
-		<p>All the standard button swatches can be applied to lists. The default theme is "f" (silver in the default theme).  </p>
-			
-		<p>The list item color scheme can be changed to any button color theme swatch by adding the <code>data-theme="e"</code> attribute to the list, and setting the letter theme swatch. </p>
+		<p>All the standard button swatches can be applied to lists. Here is an example of the default list theme "c" (silver in the default theme) with default divider swatch "b" (blue in default theme).</p>
 		
-		<p>The theme for list dividers can be set by adding the <code>data-dividertheme</code> to the list and specifying a swatch letter.</p>
-		
-		<p>The theme for list dividers can be set by adding the <code>data-counttheme</code> to the list and specifying a swatch letter.</p>
-		
-		<p><strong>A</strong> swatch</p>
-		<ul data-role="listview" data-inset="true" data-theme="a" data-counttheme="d">
+<code>
+&lt;ul data-role=&quot;listview&quot; data-inset=&quot;true&quot;&gt;
+</code>
+		<ul data-role="listview" data-inset="true">
+			<li data-role="list-divider">Divider</li>
 			<li><a href="index.html">Inbox</a> <span class="ui-li-count">12</span></li>
 			<li><a href="index.html">Outbox</a> <span class="ui-li-count">0</span></li>
-			<li><a href="index.html">Drafts</a> <span class="ui-li-count">4</span></li>
 			<li><a href="index.html">Sent</a> <span class="ui-li-count">328</span></li>
+		</ul>
+
+		
+		<p>The list item color scheme can be changed to any button color theme swatch by adding the <code>data-theme</code> attribute to the list, and setting the letter theme swatch. Here is the same list above with the "a" swatch applied. </p>
+		
+<code>
+&lt;ul data-role=&quot;listview&quot; data-inset=&quot;true&quot; data-theme=&quot;a&quot;&gt;
+</code>
+		
+		<ul data-role="listview" data-inset="true" data-theme="a">
+			<li data-role="list-divider">Divider</li>
+			<li><a href="index.html">Inbox</a> <span class="ui-li-count">12</span></li>
+			<li><a href="index.html">Outbox</a> <span class="ui-li-count">0</span></li>
+			<li><a href="index.html">Sent</a> <span class="ui-li-count">328</span></li>
+		</ul>
+		
+		<h2>Theming dividers</h2>
+		
+		<p>The theme for <strong>list dividers</strong> can be set by adding the <code>data-dividertheme</code> to the list and specifying a swatch letter. Here is an example of the same list above with swatch "d" set on the dividers.</p>
+		
+<code>
+&lt;ul data-role=&quot;listview&quot; data-inset=&quot;true&quot; data-theme=&quot;a&quot; data-dividertheme=&quot;d&quot;&gt;
+</code>
+		
+		<ul data-role="listview" data-inset="true" data-theme="a" data-dividertheme="d">
+			<li data-role="list-divider">Divider</li>
+			<li><a href="index.html">Inbox</a> <span class="ui-li-count">12</span></li>
+			<li><a href="index.html">Outbox</a> <span class="ui-li-count">0</span></li>
+			<li><a href="index.html">Sent</a> <span class="ui-li-count">328</span></li>
+		</ul>
+		
+		<h2>Theming count bubbles</h2>
+		
+		<p>The theme for <strong>count bubbles</strong> can be set by adding the <code>data-counttheme</code> to the list and specifying a swatch letter. Here is an example with swatch "e" set on the dividers.</p>
+		
+<code>
+&lt;ul data-role=&quot;listview&quot; data-inset=&quot;true&quot; data-theme=&quot;a&quot; data-dividertheme=&quot;d&quot; data-counttheme=&quot;e&quot;&gt;
+</code>
+		
+		<ul data-role="listview" data-inset="true" data-theme="a" data-dividertheme="d" data-counttheme="e">
+			<li data-role="list-divider">Divider</li>
+			<li><a href="index.html">Inbox</a> <span class="ui-li-count">12</span></li>
+			<li><a href="index.html">Outbox</a> <span class="ui-li-count">0</span></li>
+			<li><a href="index.html">Sent</a> <span class="ui-li-count">328</span></li>
+		</ul>
+		
+		<h2>Examples of all basic list swatches</h2>
+		
+		<p><strong>A</strong> swatch</p>
+		<ul data-role="listview" data-inset="true" data-theme="a">
+			<li><a href="index.html">Inbox</a> <span class="ui-li-count">12</span></li>
+			<li><a href="index.html">Outbox</a> <span class="ui-li-count">0</span></li>
 			<li><a href="index.html">Trash</a> <span class="ui-li-count">62</span></li>
 		</ul>
 		
@@ -38,8 +86,6 @@
 		<ul data-role="listview" data-inset="true" data-theme="b">
 			<li><a href="index.html">Inbox</a> <span class="ui-li-count">12</span></li>
 			<li><a href="index.html">Outbox</a> <span class="ui-li-count">0</span></li>
-			<li><a href="index.html">Drafts</a> <span class="ui-li-count">4</span></li>
-			<li><a href="index.html">Sent</a> <span class="ui-li-count">328</span></li>
 			<li><a href="index.html">Trash</a> <span class="ui-li-count">62</span></li>
 		</ul>
 		
@@ -47,8 +93,6 @@
 		<ul data-role="listview" data-inset="true" data-theme="c">
 			<li><a href="index.html">Inbox</a> <span class="ui-li-count">12</span></li>
 			<li><a href="index.html">Outbox</a> <span class="ui-li-count">0</span></li>
-			<li><a href="index.html">Drafts</a> <span class="ui-li-count">4</span></li>
-			<li><a href="index.html">Sent</a> <span class="ui-li-count">328</span></li>
 			<li><a href="index.html">Trash</a> <span class="ui-li-count">62</span></li>
 		</ul>
 		
@@ -56,8 +100,6 @@
 		<ul data-role="listview" data-inset="true" data-theme="d">
 			<li><a href="index.html">Inbox</a> <span class="ui-li-count">12</span></li>
 			<li><a href="index.html">Outbox</a> <span class="ui-li-count">0</span></li>
-			<li><a href="index.html">Drafts</a> <span class="ui-li-count">4</span></li>
-			<li><a href="index.html">Sent</a> <span class="ui-li-count">328</span></li>
 			<li><a href="index.html">Trash</a> <span class="ui-li-count">62</span></li>
 		</ul>
 		
@@ -65,12 +107,11 @@
 		<ul data-role="listview" data-inset="true" data-theme="e">
 			<li><a href="index.html">Inbox</a> <span class="ui-li-count">12</span></li>
 			<li><a href="index.html">Outbox</a> <span class="ui-li-count">0</span></li>
-			<li><a href="index.html">Drafts</a> <span class="ui-li-count">4</span></li>
-			<li><a href="index.html">Sent</a> <span class="ui-li-count">328</span></li>
 			<li><a href="index.html">Trash</a> <span class="ui-li-count">62</span></li>
 		</ul>
 		
-		<h2>Theme variation: "a" body, "a" lists, "a" dividers</h2>
+		<h2>Theme variations</h2>
+		<p><strong>A</strong> page, <strong>A</strong> lists, <strong>D</strong> dividers</p>
 	
 		<div class="ui-body-a">				
 	
@@ -113,7 +154,7 @@
 				</li>
 			</ul>
 			
-				<ul data-role="listview" data-inset="true" data-theme="a" data-dividertheme="a">
+				<ul data-role="listview" data-inset="true" data-theme="a" data-dividertheme="d">
 					<li data-role="list-divider">A</li>
 					<li><a href="index.html">Adam Kinkaid</a></li>
 					<li><a href="index.html">Alex Wickerham</a></li>
@@ -127,7 +168,7 @@
 			</div><!-- / body wrapper -->
 			
 			
-			<h2>Theme variation: "b" body, "c" lists, "b" dividers</h2>
+			<p><strong>B</strong> page, <strong>C</strong> lists, <strong>D</strong> dividers</p>
 			
 			<div class="ui-body-b">
 
@@ -170,7 +211,7 @@
 					</li>
 				</ul>
 
-					<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b">
+					<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="d">
 						<li data-role="list-divider">A</li>
 						<li><a href="index.html">Adam Kinkaid</a></li>
 						<li><a href="index.html">Alex Wickerham</a></li>
@@ -184,7 +225,7 @@
 				</div><!-- / body wrapper -->
 				
 				
-				<h2>Theme variation: "d" body, "c" lists, "b" dividers</h2>
+				<p><strong>D</strong> page, <strong>C</strong> lists, <strong>E</strong> dividers</p>
 				
 				<div class="ui-body-d">
 
@@ -227,7 +268,7 @@
 						</li>
 					</ul>
 
-						<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b">
+						<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="e">
 							<li data-role="list-divider">A</li>
 							<li><a href="index.html">Adam Kinkaid</a></li>
 							<li><a href="index.html">Alex Wickerham</a></li>
