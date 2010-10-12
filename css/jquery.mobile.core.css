@@ -50,7 +50,8 @@
 .ui-header .ui-btn-right { position: absolute; right: 10px; top: .4em; }
 
 /*content area*/
-.ui-content { border-width: 0; overflow: visible; padding-bottom: 15px; }
+.ui-content { border-width: 0; overflow: visible; padding: 15px; }
+.ui-page-fullscreen .ui-content { padding:0; }
 
 /* icons sizing */
 .ui-icon { width: 18px; height: 18px; }

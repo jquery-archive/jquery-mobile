@@ -3,8 +3,8 @@
 * Copyright (c) jQuery Project
 * Dual licensed under the MIT (MIT-LICENSE.txt) or GPL (GPL-LICENSE.txt) licenses.
 */
-.ui-listview { margin: 0; counter-reset: listnumbering; }
-.ui-listview-inset { margin: 1em 15px;  }
+.ui-listview { margin: 0; counter-reset: listnumbering; margin: -15px; }
+.ui-listview-inset { margin: 1em 0;  }
 .ui-listview, .ui-li { list-style:none; padding:0; zoom: 1; }
 .ui-li { display: block; margin:0; position: relative; overflow: hidden; text-align: left; border-width: 0; border-top-width: 1px; }
 .ui-li-divider, .ui-li-static { padding: .5em 15px; font-size: 13px; font-weight: bold; counter-reset: listnumbering;  }

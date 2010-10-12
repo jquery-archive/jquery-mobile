@@ -8,5 +8,5 @@
 .ui-collapsible-heading a { padding: .7em 15px; text-align: left; margin: 0; text-decoration: none; outline: 0; border: 0; display: block; }
 .ui-collapsible-heading .ui-icon { position: absolute; right: 5px; top: 50%; margin-top: -9px; }
 .ui-collapsible-heading-status { position:absolute; left:-99999px; }
-.ui-collapsible-content { padding: 15px;  overflow:hidden; display: block; }
+.ui-collapsible-content {  overflow:hidden; display: block; }
 .ui-collapsible-content-collapsed { display: none; }
