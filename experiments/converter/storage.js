@@ -27,9 +27,6 @@ function get() {
 	return JSON.parse( localStorage.getItem( "conversions" ) );
 }
 function set( value ) {
-	if ( window.console && console.log ) {
-		console.log( "storing conversion: "+ JSON.stringify( value ) );
-	}
 	localStorage.setItem( "conversions", JSON.stringify( value ) );
 }
 

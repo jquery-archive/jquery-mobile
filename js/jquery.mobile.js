@@ -59,7 +59,6 @@
 	
 	//consistent string escaping for urls and IDs
 	function idStringEscape(str){
-		console.log(str);
 		return str.replace(/[^a-zA-Z0-9]/, '-');
 	}
 	

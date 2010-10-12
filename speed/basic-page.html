@@ -16,6 +16,13 @@
 			})
 			.taphold(function() {
 				$( this ).css( "color", "#0f0" );
+			})
+			.click(function() {
+				var elem = this;
+				$( elem ).css( "background-color", "#00f" );
+				setTimeout(function() {
+					$( elem ).css( "background-color", "transparent" );
+				}, 500 );
 			});
 	});</script>
 </head> 
