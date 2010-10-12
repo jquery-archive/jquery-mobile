@@ -13,7 +13,7 @@ $.fn.collapsible = function(options){
 			collapsed: $(this).is('[data-state="collapsed"]'),
 			heading: '>h1,>h2,>h3,>h4,>h5,>h6,>legend',
 			theme: $(this).data('theme'),
-			iconTheme: $(this).data('icontheme') || 'c'
+			iconTheme: $(this).data('icontheme') || 'd'
 		},options);
 
 		//define
@@ -37,11 +37,16 @@ $.fn.collapsible = function(options){
 			.find('a:eq(0)')
 			.buttonMarkup({
 				shadow: true,
-				corners:true,
+				corners:false,
 				iconPos: 'left',
 				icon: 'plus',
 				theme: o.theme
 			})
+			.removeClass('ui-btn-corner-all')
+			.addClass('ui-corner-all')
+			.find('.ui-btn-inner')
+			.removeClass('ui-btn-corner-all')
+			.addClass('ui-corner-all')
 			.find('.ui-icon')
 			.removeAttr('class')
 			.buttonMarkup({
