@@ -12,7 +12,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		countTheme: "c",
 		headerTheme: "b",
 		dividerTheme: "b",
-		splitIcon: "arrow-r"
+		splitIcon: "arrow-r",
 		splitTheme: "b",
 		inset: false
 	},
