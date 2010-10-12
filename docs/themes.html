@@ -15,26 +15,75 @@
 
 	<div data-role="content" class="ui-body">
 	
-		<h2 id="overview">Theming overview</h2>
+		<h2>Theming overview</h2>
 		
-			<p>Every layout and widget is in jQuery Mobile designed around a new object-oriented CSS framework to support rich theming of complete sites and applications. The theming system is similiar to the ThemeRoller system in jQuery UI but with a few important improvements:</p> 
+			<p>Every layout and widget in jQuery Mobile is designed around a new object-oriented CSS framework to make it possible to design complete sites and applications. The theming system is similar to the ThemeRoller system in jQuery UI but with a few important improvements:</p> 
 
 			<ul> 
-			<li>Richer designs are now possible because themes now include multiple color "swatches": 4 bars with matching buttons for each, 3 content areas that can be freely mixed and matched to create visual texture</li> 
-			<li>Open-ended theming allows for additional theme swatches can be added to a theme to add almost unlimited more variety to designs</li> 
-			<li>All backgrounds now use CSS3 gradients to dramatically reduce file size and number of server requests</li> 
-			<li>A simplified icon set only includes the most commonly used icons in either black or white colors to reduce image weight</li> 
+				<li>By taking advantage of CSS3 properties to add rounded corners, box and text shadow and gradients instead of images, the theme file is very lightweight and reduces server requests.</li>
+				<li>Richer designs are now possible because themes now include multiple color "swatches": 4 bars with matching buttons for each, 3 content areas that can be freely mixed and matched to create visual texture</li> 
+				<li>Open-ended theming allows for additional theme swatches can be added to a theme to add almost unlimited more variety to designs</li> 
+				<li>All backgrounds now use CSS3 gradients to dramatically reduce file size and number of server requests</li> 
+				<li>A simplified icon set only includes the most commonly used icons in either black or white colors to reduce image weight</li> 
 			</ul>
+			
 		
-		<h3 id="bars">Themes &amp; swatches</h3>
+		<h2>Themes &amp; swatches</h2>
 		
-		<p>In jQuery Mobile, there is a single theme CSS file that contains multiple color "swatches" for bars, content blocks and buttons that can be combined to achieve a wide range of visual effects. The key to the theme system used in jQuery UI is separation of color and texture (theme) from structural styles that define things like padding and dimensions. This allows the theme colors and textures to be defined once in the stylesheet as color "swatches", that can be mixed and matched. We also take advantage of CSS3 properties to add rounded corners, box and text shadow and gradients to make the theme styles very lightweight and reduce server requests.</p>
+		<p>The key to the theme system used in jQuery UI is separation of color and texture (theme) from structural styles that define things like padding and dimensions. This allows the theme colors and textures to be defined once in the stylesheet as color "swatches", that can be mixed and matched. Within a jQuery Mobile theme, there are multiple color "swatches" for bars, content blocks and buttons that can be combined to achieve a wide range of visual effects. 
+			</p>
 		
-		<p>Themes include at least 3 swatches for bars, content blocks and buttons. To make mapping of color swatches consistent across our widgets, we have followed the convention that swatch "a" is the highest level of visual priority (black in our default theme), "b" is secondary level (blue) and "c" is the baseline level (gray) that we use by default in many situations. Themes may have additional swatches but these are used for accents colors or specific situations within an app or site.</p>
+		<p>Themes include at 5 swatches each for bars, content blocks and buttons. To make mapping of color swatches consistent across our widgets, we have followed the convention that swatch "a" is the highest level of visual priority (black in our default theme), "b" is secondary level (blue) and "c" is the baseline level (gray) that we use by default in many situations, "d" for an alternate secondary level and "e" as an accent swatch.</p>
 		
+		<p> Themes may have additional swatches for accent colors or specific situations within an app or site. For example, you could </p>
+		
+		<h2>Theme swatch example</h2>
+		
+		<div data-role="header" data-position="inline">
+			<a href="index.html" data-icon="arrow-l">Button A</a>
+			<h1>Swatch A</h1>
+			<a href="index.html" data-icon="plus" data-icon-pos="right" data-theme="b">Button B</a>
+		</div>
+		<div class="ui-bar ui-bar-d">
+			<div data-role="controlgroup" data-type="horizontal" >
+				<h3>Bar D: </h3>
+				<a href="#">Button D</a>
+				<a href="#">Button D</a>
+				<a href="#">Button D</a>
+			</div><!-- /controlgroup -->
+		</div>
+		<div class="ui-body ui-body-d">
+			<h2>Body D</h2>
+			<p>This is the body content block with a <a href="#" class="ui-link">link</a>.</p>
+				<label for="slider1">Input slider:</label>
+			 	<input type="range" name="slider1" id="slider1" value="50" min="0" max="100" data-theme="c" />
+			     <fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
+			     	<legend>Cache settings:</legend>
+			         	<input type="radio" name="radio-choice-a1" id="radio-choice-a1" value="on" checked="checked" />
+			         	<label for="radio-choice-a1">On</label>
+			         	<input type="radio" name="radio-choice-a1" id="radio-choice-b1" value="off"  />
+			         	<label for="radio-choice-b1">Off</label>
+			    </fieldset>
+			<a href="#" data-role="button" data-inline="true" data-theme="a">Button A</a>
+			<a href="#" data-role="button" data-inline="true" data-theme="e">Button E</a>
+			<h4>Here is an inset split list</h4>
+			<ul data-role="listview" data-inset="true" data-theme="d">
+				<li data-role="list-divider" data-theme="b">Body B</li>
+				<li><a href="index.html">Button D</a><a href="index.html">Details</a></li>
+				<li><a href="index.html">Button D</a><a href="index.html">Details</a></li>
+				<li><a href="index.html">Button D</a><a href="index.html">Details</a></li>
+			</ul>
+		</div>
+		<div class="ui-bar ui-bar-b">
+			<div data-role="controlgroup" data-type="horizontal" >
+				<a href="#" data-icon="delete">Button B</a>
+				<a href="#" data-icon="plus">Button B</a>
+				<a href="#" data-icon="arrow-r">Button B</a>
+			</div><!-- /controlgroup -->
+		</div>
 	
 		
-		<h3 id="bars">Bars</h3>
+		<h2>Bars</h2>
 		<p>The default theme contains 4 color swatches for bars to use in header, footer and tool bars. The swatches are designated by letters (a, b, c, etc.) and are organized into a visual hierarchy where "a" is the highest level of visual priority, "b" is secondary, "c" is the baseline, and "d" is for accents. Each swatch defines the border color, text color, gradient, text-shadow, font family and link color. Our default theme looks like this:</p>
 		
 		<div class="swatch-preview">
@@ -42,37 +91,53 @@
 			<div class="ui-bar ui-bar-b">Bar B</div>
 			<div class="ui-bar ui-bar-c">Bar C</div>
 			<div class="ui-bar ui-bar-d">Bar D</div>
+			<div class="ui-bar ui-bar-e">Bar E</div>
 		</div><!-- end swatch-bars -->
 		
-		<p>By default, the framework assigns the "a" swatch (black in the default theme) to all headers and footer because these are typically given high visual priority in an application. To set the color of a bar to a different swatch color, simply add the  <code>data-theme</code> attribute to your header or footer and specify a letter (a, b, c, d) and the specified theme swatch color will be applied.</p>
+		<p>By default, the framework assigns the "a" swatch (black in the default theme) to all headers and footer because these are typically given high visual priority in an application. To set the color of a bar to a different swatch color, simply add the  <code>data-theme</code> attribute to your header or footer and specify a letter (a, b, c, d) and the specified theme swatch color will be applied. Learn more about <a href="toolbars/bars-themes.html">toolbar theming</a>.</p>
 		
 		
 		
-		<h3 id="blocks">Content Blocks</h3>
-		<p>The default theme contains 3 color swatches for use in content blocks. These are designed to coordinate with the header color swatches in the default theme. Just as with bars, you can add as many content block swatches you want by extending the theme stylesheet. If a theme isn't specified on a content block, the framework will default to "c", just like the header.</p>
+		<h2>Content Blocks</h2>
+		<p>The default theme contains 3 color swatches for use in content blocks. These are designed to coordinate with the header color swatches in the default theme. Just as with bars, you can add as many content block swatches you want by extending the theme stylesheet. If a theme isn't specified on a content block, the framework will default to "c", just like the header.Learn more about <a href="content/content-themes.html">content theming</a>.</p>
 		
 		<div class="swatch-preview">	
 			<div class="ui-body ui-body-a">Block A</div>
 			<div class="ui-body ui-body-b">Block B</div>
 			<div class="ui-body ui-body-c">Block C</div>
+			<div class="ui-body ui-body-d">Block D</div>
+			<div class="ui-body ui-body-e">Block E</div>
 		</div><!-- end swatch-bars -->
 
 
-		<h3 id="lists">Lists</h3>
-		<p>There are 2 supported list view styles. The system defaults to the "a" swatch (silver in default theme) and it can be switched to "b" via the <code>data-theme</code> attribute.</p>
+		<h2>Lists</h2>
+		<p>There are 2 supported list view styles. The system defaults to the "a" swatch (silver in default theme) and it can be switched to "b" via the <code>data-theme</code> attribute. Learn more about <a href="lists/lists-themes.html">list theming</a>.</p>
+		<ul data-role="listview" data-inset="true" data-theme="a">
+			<li><a href="index.html">List item</a></li>
+			<li><a href="index.html">List item</a></li>
+		</ul>
+		
+		<ul data-role="listview" data-inset="true" data-theme="b">
+			<li><a href="index.html">List item</a></li>
+			<li><a href="index.html">List item</a></li>
+		</ul>
+		
 		<ul data-role="listview" data-inset="true" data-theme="c">
-			<li><a href="index.html">List item A</a></li>
-			<li><a href="index.html">List item A</a></li>
-			<li><a href="index.html">List item A</a></li>
+			<li><a href="index.html">List item</a></li>
+			<li><a href="index.html">List item</a></li>
 		</ul>
 		
-		<ul data-role="listview" data-inset="true" data-theme="f">
-			<li><a href="index.html">List item A</a></li>
-			<li><a href="index.html">List item A</a></li>
-			<li><a href="index.html">List item A</a></li>
+		<ul data-role="listview" data-inset="true" data-theme="d">
+			<li><a href="index.html">List item</a></li>
+			<li><a href="index.html">List item</a></li>
 		</ul>
 		
-		<h3 id="active">Active state</h3>
+		<ul data-role="listview" data-inset="true" data-theme="e">
+			<li><a href="index.html">List item</a></li>
+			<li><a href="index.html">List item</a></li>
+		</ul>
+		
+		<h2>Active state</h2>
 		<p>The jQuery Mobile framework uses a single theme swatch called "active" (bright blue in the default theme) to consistently indicate the selected state, regardless of the theme of the widget. We apply this in navigation and form controls to indicate what is currently selected. Because this theme swatch is designed for clear, consistent user feedback, it is not currently a theme swatch that can be overridden via the markup. It is set once in the theme and applied by the framework whenever a selected or active state is needed. The styling for this state is in the theme stylesheet under the <code>ui-btn-active</code> style rules.</p>
 		
 		<fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
@@ -83,7 +148,7 @@
 	         	<label for="radio-choice-b">Off</label>
 	    </fieldset>
 		
-		<h3 id="buttons">Buttons</h3>
+		<h2>Buttons</h2>
 		<p>A set of 4 button colors are also included in the default theme. Each button has styles for normal, hover/focus and pressed states. Each button is intentionally styled to match the color of a bar so they feel tightly integrated. </p>
 		
 		<div class="swatch-preview">
@@ -93,7 +158,7 @@
 			<a href="index.html" data-role="button" data-theme="d" data-icon="arrow-l">Button D</a>
 		</div><!-- end swatch-bars -->
 		
-		<h3 id="context">Context-aware button theming</h3>
+		<h2 id="context">Context-aware button theming</h2>
 		<p>A button is automatically assigned a theme swatch letter that matches it's parent bar or content box to visually integrate the button into the parent theme, like a chameleon. To illustrate this idea, below, the same exact button code is in each of the 4 bars and is automatically setting their color swatch to match on the parent bar swatch.</p>
 		
 		<div class="swatch-preview">
@@ -103,7 +168,7 @@
 			<div data-role="header" data-theme="d"><h1>Bar D</h1><a href="index.html" data-icon="arrow-l">Button D</a></div>
 		</div><!-- end swatch-bars -->
 		
-		<p>This makes it really easy to ripple a theme change through a page by setting a theme swatch on a parent because you know the buttons will maintain the same relative visual weight across themes. Since form elements use the button styles, they will also adapt to their parent container too. </p>
+		<p>This makes it really easy to ripple a theme change through a page by setting a theme swatch on a parent because you know the buttons will maintain the same relative visual weight across themes. Since form elements use the button styles, they will also adapt to their parent container too. Learn more about <a href="buttons/buttons-themes.html">button theming</a>.</p>
 			
 		<p>To add visual emphasis of certain buttons in a toolbar, the theme swatch color for a button can be set by adding a <code>data-theme="a"</code> to the anchor to make it stand out visually from it's parent. If the theme is set on a button in the markup, the framework won't override the theme swatch color when the parent theme is changed because you made a conscious decision to set the color.</p>
 		
@@ -143,7 +208,7 @@
 			
 		</div><!-- end swatch-bars -->
 		
-		<h3 id="icons">Icons</h3>
+		<h3>Icons</h3>
 		<p>There a core set of <a href="buttons/buttons-icons.html">standard icons</a> included in the framework that can be assigned to any button. To minimize the download size of the core icons, jQuery Mobile only includes these icons in white and automatically adds a semi-transparent black circle behind the icon to make sure it has good contrast on all background colors.</p>
 
 		
