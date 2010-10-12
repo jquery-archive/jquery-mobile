@@ -29,7 +29,7 @@
 
 /* "page" containers - full-screen views, one should always be in view post-pageload */
 .ui-page { top: 0; left: 0; width: 100%; min-height: 100%; position: absolute;  z-index: 10; visibility: hidden; height: 0; overflow: hidden; border: 0; } 
-.ui-page-active { visibility: visible; overflow: auto; }
+.ui-page-active { visibility: visible; overflow: visible; }
 
 /* loading screen */
 .ui-loading, .ui-loading body { overflow: hidden !important; }
