@@ -16,8 +16,8 @@
 
 	<div data-role="content" class="ui-body">
 		
-		<h2>Assigning theme swatches to lists</h2>
-		<p>All the standard button swatches can be applied to lists. Here is an example of the default list theme "c" (silver in the default theme) with default divider swatch "b" (blue in default theme).</p>
+
+		<p>All the standard button swatches can be applied to lists. The framework assigns a default list theme swatch of "c" (silver in the default theme) and swatch "b" (blue in default theme) for dividers. Below is a default themed list.</p>
 		
 <code>
 &lt;ul data-role=&quot;listview&quot; data-inset=&quot;true&quot;&gt;
@@ -29,7 +29,7 @@
 			<li><a href="index.html">Sent</a> <span class="ui-li-count">328</span></li>
 		</ul>
 
-		
+				<h2>Theming list items</h2>
 		<p>The list item color scheme can be changed to any button color theme swatch by adding the <code>data-theme</code> attribute to the list, and setting the letter theme swatch. Here is the same list above with the "a" swatch applied. </p>
 		
 <code>
@@ -77,35 +77,65 @@
 		
 		<p>For split lists which a second button, the framework default to "b" for the theme swatch (blue in the default theme)  Here is a default split list:</p>
 		
-		<ul data-role="listview" data-inset="true" data-splittheme="a">
-			<li data-role="list-divider">Divider</li>
-			<li><a href="index.html">Inbox</a> <span class="ui-li-count">12</span> <a href="index.html">Purchase album</a></li>
-			<li><a href="index.html">Outbox</a> <span class="ui-li-count">0</span> <a href="index.html">Purchase album</a></li>
-			<li><a href="index.html">Sent</a> <span class="ui-li-count">328</span> <a href="index.html">Purchase album</a></li>
+		<ul data-role="listview" data-inset="true">
+			<li>
+				<img src="images/album-bb.jpg" />
+				<h3><a href="index.html">Broken Bells</a></h3>
+				<p>Broken Bells</p>
+				<p class="ui-li-aside">$<strong>11.99</strong></p>
+				<a href="index.html">Purchase album</a>
+			</li>
+			<li>
+				<img src="images/album-hc.jpg" />
+				<h3><a href="index.html">Warning</a></h3>
+				<p>Hot Chip</p>
+				<p class="ui-li-aside">$<strong>12.99</strong></p>	
+				<a href="index.html">Purchase album</a>
+			</li>
 		</ul>
 		
 <code>
 &lt;ul data-role=&quot;listview&quot; data-inset=&quot;true&quot; data-splittheme=&quot;a&quot;&gt;
 </code>
-		<p>To specify the color swatch for the icon button on the right, add the <code>data-splittheme</code> to the list and specifying a swatch letter. This attribute can also be added to individual split inside list items by adding a <code>data-theme</code> attribute to specific links.</p>
+		<p>To specify the color swatch for the icon button on the right, add the <code>data-splittheme</code> to the list and specify a swatch letter. This attribute can also be added to individual split inside list items by adding a <code>data-theme</code> attribute to specific links  (see second list item).</p>
 		<ul data-role="listview" data-inset="true" data-splittheme="a">
-			<li data-role="list-divider">Divider</li>
-			<li><a href="index.html">Inbox</a> <span class="ui-li-count">12</span> <a href="index.html">Purchase album</a></li>
-			<li><a href="index.html">Outbox</a> <span class="ui-li-count">0</span> <a href="index.html">Purchase album</a></li>
-			<li><a href="index.html">Sent</a> <span class="ui-li-count">328</span> <a href="index.html" data-theme="e">Purchase album</a></li>
+			<li>
+				<img src="images/album-bb.jpg" />
+				<h3><a href="index.html">Broken Bells</a></h3>
+				<p>Broken Bells</p>
+				<p class="ui-li-aside">$<strong>11.99</strong></p>
+				<a href="index.html">Purchase album</a>
+			</li>
+			<li>
+				<img src="images/album-hc.jpg" />
+				<h3><a href="index.html">Warning</a></h3>
+				<p>Hot Chip</p>
+				<p class="ui-li-aside">$<strong>12.99</strong></p>	
+				<a href="index.html" data-theme="e">Purchase album</a>
+			</li>
 		</ul>
 
-		<p>The icon for the split theme can set at the list level by adding the <code>data-spliticon</code> to the list and specifying a <a href="../buttons/buttons-icons.html">standard icon</a>. This attribute can also be added to individual split inside list items by adding a <code>data-icon</code> attribute to specific links.</p>
+		<p>The icon for the split theme can set at the list level by adding the <code>data-spliticon</code> to the list and specifying a <a href="../buttons/buttons-icons.html">standard icon</a>. This attribute can also be added to individual split inside list items by adding a <code>data-icon</code> attribute to specific links (see second list item).</p>
 		
 <code>
 &lt;ul data-role=&quot;listview&quot; data-inset=&quot;true&quot; data-splittheme=&quot;a&quot; data-spliticon=&quot;plus&quot;&gt;
 </code>
 
 		<ul data-role="listview" data-inset="true" data-splittheme="a" data-spliticon="plus">
-			<li data-role="list-divider">Divider</li>
-			<li><a href="index.html">Inbox</a> <span class="ui-li-count">12</span> <a href="index.html">Purchase album</a></li>
-			<li><a href="index.html">Outbox</a> <span class="ui-li-count">0</span> <a href="index.html">Purchase album</a></li>
-			<li><a href="index.html">Sent</a> <span class="ui-li-count">328</span> <a href="index.html"data-theme="e" data-icon="delete">Purchase album</a></li>
+			<li>
+				<img src="images/album-bb.jpg" />
+				<h3><a href="index.html">Broken Bells</a></h3>
+				<p>Broken Bells</p>
+				<p class="ui-li-aside">$<strong>11.99</strong></p>
+				<a href="index.html">Purchase album</a>
+			</li>
+			<li>
+				<img src="images/album-hc.jpg" />
+				<h3><a href="index.html">Warning</a></h3>
+				<p>Hot Chip</p>
+				<p class="ui-li-aside">$<strong>12.99</strong></p>	
+				<a href="index.html" data-theme="e" data-icon="delete">Purchase album</a>
+			</li>
 		</ul>
 		
 
@@ -147,177 +177,7 @@
 			<li><a href="index.html">Trash</a> <span class="ui-li-count">62</span></li>
 		</ul>
 		
-		<h2>Theme variations</h2>
-		<p><strong>A</strong> page, <strong>A</strong> lists, <strong>D</strong> dividers</p>
-	
-		<div class="ui-body-a">				
-	
-			<ul data-role="listview" data-inset="true" data-theme="a">
-				<li><a href="index.html">Inbox</a> <span class="ui-li-count">12</span></li>
-				<li><a href="index.html">Outbox</a> <span class="ui-li-count">0</span></li>
-				<li><a href="index.html">Drafts</a> <span class="ui-li-count">4</span></li>
-				<li><a href="index.html">Sent</a> <span class="ui-li-count">328</span></li>
-				<li><a href="index.html">Trash</a> <span class="ui-li-count">62</span></li>
-			</ul>
-			
-			<ul data-role="listview" data-inset="true" data-theme="a">
-				<li>
-					<img src="images/album-bb.jpg" />
-					<h3><a href="index.html">Broken Bells</a></h3>
-					<p>Broken Bells</p>
-					<p class="ui-li-aside">$<strong>11.99</strong></p>
-					<a href="index.html">Purchase album</a>
-				</li>
-				<li>
-					<img src="images/album-hc.jpg" />
-					<h3><a href="index.html">Warning</a></h3>
-					<p>Hot Chip</p>
-					<p class="ui-li-aside">$<strong>12.99</strong></p>
-					<a href="index.html">Purchase album</a>
-				</li>
-				<li>
-					<img src="images/album-p.jpg" />
-					<h3><a href="index.html">Wolfgang Amadeus Phoenix</a></h3>
-					<p>Phoenix</p>
-					<p class="ui-li-aside">$<strong>11.99</strong></p>
-					<a href="index.html">Purchase album</a>
-				</li>
-				<li>
-					<img src="images/album-ok.jpg" />
-					<h3><a href="index.html">Of The Blue Colour Of The Sky</a></h3>
-					<p>Ok Go</p>
-					<p class="ui-li-aside">$<strong>10.99</strong></p>
-					<a href="index.html">Purchase album</a>
-				</li>
-			</ul>
-			
-				<ul data-role="listview" data-inset="true" data-theme="a" data-dividertheme="d">
-					<li data-role="list-divider">A</li>
-					<li><a href="index.html">Adam Kinkaid</a></li>
-					<li><a href="index.html">Alex Wickerham</a></li>
-					<li><a href="index.html">Avery Johnson</a></li>
-					<li data-role="list-divider">B</li>
-					<li><a href="index.html">Bob Cabot</a></li>
-					<li data-role="list-divider">C</li>
-					<li><a href="index.html">Caleb Booth</a></li>
-					<li><a href="index.html">Christopher Adams</a></li>
-				</ul>
-			</div><!-- / body wrapper -->
-			
-			
-			<p><strong>B</strong> page, <strong>C</strong> lists, <strong>D</strong> dividers</p>
-			
-			<div class="ui-body-b">
-
-				<ul data-role="listview" data-inset="true" data-theme="c">
-					<li><a href="index.html">Inbox</a> <span class="ui-li-count">12</span></li>
-					<li><a href="index.html">Outbox</a> <span class="ui-li-count">0</span></li>
-					<li><a href="index.html">Drafts</a> <span class="ui-li-count">4</span></li>
-					<li><a href="index.html">Sent</a> <span class="ui-li-count">328</span></li>
-					<li><a href="index.html">Trash</a> <span class="ui-li-count">62</span></li>
-				</ul>
-
-				<ul data-role="listview" data-inset="true" data-theme="c">
-					<li>
-						<img src="images/album-bb.jpg" />
-						<h3><a href="index.html">Broken Bells</a></h3>
-						<p>Broken Bells</p>
-						<p class="ui-li-aside">$<strong>11.99</strong></p>
-						<a href="index.html">Purchase album</a>
-					</li>
-					<li>
-						<img src="images/album-hc.jpg" />
-						<h3><a href="index.html">Warning</a></h3>
-						<p>Hot Chip</p>
-						<p class="ui-li-aside">$<strong>12.99</strong></p>
-						<a href="index.html">Purchase album</a>
-					</li>
-					<li>
-						<img src="images/album-p.jpg" />
-						<h3><a href="index.html">Wolfgang Amadeus Phoenix</a></h3>
-						<p>Phoenix</p>
-						<p class="ui-li-aside">$<strong>11.99</strong></p>
-						<a href="index.html">Purchase album</a>
-					</li>
-					<li>
-						<img src="images/album-ok.jpg" />
-						<h3><a href="index.html">Of The Blue Colour Of The Sky</a></h3>
-						<p>Ok Go</p>
-						<p class="ui-li-aside">$<strong>10.99</strong></p>
-						<a href="index.html">Purchase album</a>
-					</li>
-				</ul>
-
-					<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="d">
-						<li data-role="list-divider">A</li>
-						<li><a href="index.html">Adam Kinkaid</a></li>
-						<li><a href="index.html">Alex Wickerham</a></li>
-						<li><a href="index.html">Avery Johnson</a></li>
-						<li data-role="list-divider">B</li>
-						<li><a href="index.html">Bob Cabot</a></li>
-						<li data-role="list-divider">C</li>
-						<li><a href="index.html">Caleb Booth</a></li>
-						<li><a href="index.html">Christopher Adams</a></li>
-					</ul>
-				</div><!-- / body wrapper -->
-				
-				
-				<p><strong>D</strong> page, <strong>C</strong> lists, <strong>E</strong> dividers</p>
-				
-				<div class="ui-body-d">
-
-					<ul data-role="listview" data-inset="true" data-theme="c">
-						<li><a href="index.html">Inbox</a> <span class="ui-li-count">12</span></li>
-						<li><a href="index.html">Outbox</a> <span class="ui-li-count">0</span></li>
-						<li><a href="index.html">Drafts</a> <span class="ui-li-count">4</span></li>
-						<li><a href="index.html">Sent</a> <span class="ui-li-count">328</span></li>
-						<li><a href="index.html">Trash</a> <span class="ui-li-count">62</span></li>
-					</ul>
-
-					<ul data-role="listview" data-inset="true" data-theme="c">
-						<li>
-							<img src="images/album-bb.jpg" />
-							<h3><a href="index.html">Broken Bells</a></h3>
-							<p>Broken Bells</p>
-							<p class="ui-li-aside">$<strong>11.99</strong></p>
-							<a href="index.html">Purchase album</a>
-						</li>
-						<li>
-							<img src="images/album-hc.jpg" />
-							<h3><a href="index.html">Warning</a></h3>
-							<p>Hot Chip</p>
-							<p class="ui-li-aside">$<strong>12.99</strong></p>
-							<a href="index.html">Purchase album</a>
-						</li>
-						<li>
-							<img src="images/album-p.jpg" />
-							<h3><a href="index.html">Wolfgang Amadeus Phoenix</a></h3>
-							<p>Phoenix</p>
-							<p class="ui-li-aside">$<strong>11.99</strong></p>
-							<a href="index.html">Purchase album</a>
-						</li>
-						<li>
-							<img src="images/album-ok.jpg" />
-							<h3><a href="index.html">Of The Blue Colour Of The Sky</a></h3>
-							<p>Ok Go</p>
-							<p class="ui-li-aside">$<strong>10.99</strong></p>
-							<a href="index.html">Purchase album</a>
-						</li>
-					</ul>
-
-						<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="e">
-							<li data-role="list-divider">A</li>
-							<li><a href="index.html">Adam Kinkaid</a></li>
-							<li><a href="index.html">Alex Wickerham</a></li>
-							<li><a href="index.html">Avery Johnson</a></li>
-							<li data-role="list-divider">B</li>
-							<li><a href="index.html">Bob Cabot</a></li>
-							<li data-role="list-divider">C</li>
-							<li><a href="index.html">Caleb Booth</a></li>
-							<li><a href="index.html">Christopher Adams</a></li>
-						</ul>
-						
-						
+		
 			
 	</div><!-- /content -->
 </div><!-- /page -->
