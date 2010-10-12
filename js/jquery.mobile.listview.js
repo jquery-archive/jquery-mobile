@@ -12,6 +12,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		countTheme: "c",
 		headerTheme: "b",
 		dividerTheme: "b",
+		splitIcon: "arrow-r"
 		splitTheme: "b",
 		inset: false
 	},
@@ -145,9 +146,9 @@ $.widget( "mobile.listview", $.mobile.widget, {
 						.append( $( "<span>" ).buttonMarkup({
 							shadow: true,
 							corners: true,
-							theme: o.splitTheme,
+							theme: $list.data('splittheme') || a.data('theme') || o.splitTheme,
 							iconpos: "notext",
-							icon: a.data('icon') || "arrow-r"
+							icon: $list.data('spliticon') || a.data('icon') ||  o.spliticon
 						} ) );
 					
 					//fix corners
