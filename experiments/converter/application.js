@@ -21,7 +21,6 @@ $(function() {
 				var self = conversion;
 				var url = "http://query.yahooapis.com/v1/public/yql?q=select%20rate%2Cname%20from%20csv%20where%20url%3D'http%3A%2F%2Fdownload.finance.yahoo.com%2Fd%2Fquotes%3Fs%3D" + conversion.from + conversion.to + "%253DX%26f%3Dl1n'%20and%20columns%3D'rate%2Cname'&format=json&diagnostics=true&callback=?";
 				$.getJSON( url, function( result ) {
-					console.log( "results", result );
 					self.rate = parseFloat( result.query.results.row.rate );
 					// TODO trigger a custom event instead of keyup?
 					$( "#term" ).keyup();
