@@ -18,7 +18,7 @@ $.fixedToolbars = (function(){
 	var currentstate = 'inline',
 		delayTimer,
 		ignoreTargets = 'a,input,textarea,select,button,label,.ui-header-fixed,.ui-footer-fixed',
-		toolbarSelector = '.ui-header-fixed, .ui-footer-fixed:not(.ui-footer-duplicate)', //removed scope temporarily - these used to be scoped to ui-page-active
+		toolbarSelector = '.ui-page-active .ui-header-fixed:first, .ui-page-active .ui-footer-fixed:not(.ui-footer-duplicate):last',
 		stickyFooter, //for storing quick references to duplicate footers
 		supportTouch = $.support.touch,
 		touchStartEvent = supportTouch ? "touchstart" : "mousedown",
@@ -84,24 +84,34 @@ $.fixedToolbars = (function(){
 	});
 	
 	function setTop(el){
-		var fromTop = $(window).scrollTop(),
-			thisTop = el.offset().top,
-			thisCSStop = el.css('top') == 'auto' ? 0 : parseFloat(el.css('top')),
-			screenHeight = window.innerHeight,
-			thisHeight = el.outerHeight(),
-			useRelative = el.parents('.ui-page:not(.ui-page-fullscreen)').length,
-			relval;
-		if( el.is('.ui-header-fixed') ){
-			relval = fromTop - thisTop + thisCSStop;
-			if( relval < thisTop){ relval = 0; }
-			return el.css('top', ( useRelative ) ? relval : fromTop);
-		}
-		else{
-			relval = -1 * (thisTop - (fromTop + screenHeight) + thisCSStop + thisHeight);
-			if( relval > thisTop ){ relval = 0; }
-			return el.css('top', ( useRelative ) ? relval : fromTop + screenHeight - thisHeight );
-		}
+		el.each(function(){
+			var el = $(this),
+				fromTop = $(window).scrollTop(),
+				thisTop = el.offset().top,
+				thisCSStop = el.css('top') == 'auto' ? 0 : parseFloat(el.css('top')),
+				screenHeight = window.innerHeight,
+				thisHeight = el.outerHeight(),
+				useRelative = el.parents('.ui-page:not(.ui-page-fullscreen)').length,
+				relval;
+			if( el.is('.ui-header-fixed') ){
+				relval = fromTop - thisTop + thisCSStop;
+				if( relval < thisTop){ relval = 0; }
+				return el.css('top', ( useRelative ) ? relval : fromTop);
+			}
+			else{
+				relval = -1 * (thisTop - (fromTop + screenHeight) + thisCSStop + thisHeight);
+				if( relval > thisTop ){ relval = 0; }
+				return el.css('top', ( useRelative ) ? relval : fromTop + screenHeight - thisHeight );
+			}
+		});
 	}
+	
+	//timeout to work around current event issues.
+	setInterval(function(){ 
+		if( currentstate == 'overlay' ){
+			setTop($(toolbarSelector)); 
+		}
+	}, 50);
 
 	//exposed methods
 	return {

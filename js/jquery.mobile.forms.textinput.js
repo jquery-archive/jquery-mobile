@@ -16,13 +16,13 @@ jQuery.fn.customTextInput = function(options){
 		
 		$('label[for='+input.attr('id')+']').addClass('ui-input-text');
 		
-		input.addClass('ui-input-text ui-shadow-inset ui-body-'+ o.theme);
+		input.addClass('ui-input-text ui-body-'+ o.theme);
 		
 		var focusedEl = input;
 		
 		//"search" input widget
 		if(o.search){
-			focusedEl = input.wrap('<div class="ui-input-search ui-btn-corner-all ui-body-c ui-btn-shadow ui-icon-search"></div>').parent();
+			focusedEl = input.wrap('<div class="ui-input-search ui-shadow-inset ui-btn-corner-all ui-body-c ui-btn-shadow ui-icon-search"></div>').parent();
 			var clearbtn = $('<a href="#" class="ui-input-clear" title="clear text">clear text</a>')
 				.buttonMarkup({icon: 'delete', iconpos: 'notext', corners:true, shadow:true})
 				.click(function(){
@@ -46,7 +46,7 @@ jQuery.fn.customTextInput = function(options){
 			input.keyup(toggleClear);	
 		}
 		else{
-			input.addClass('ui-corner-all');
+			input.addClass('ui-corner-all ui-shadow-inset');
 		}
 				
 		input

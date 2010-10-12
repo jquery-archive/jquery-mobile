@@ -145,7 +145,7 @@
 	
 	//for directing focus to the page title, or otherwise first focusable element
 	function reFocus(page){
-		var pageTitle = page.find( ".ui-title" );
+		var pageTitle = page.find( ".ui-title:eq(0)" );
 		if( pageTitle.length ){
 			pageTitle.focus();
 		}

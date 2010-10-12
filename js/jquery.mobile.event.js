@@ -60,8 +60,7 @@ $.event.special.tap = {
 					return;
 				}
 				
-				var held = false,
-					moved = false,
+				var moved = false,
 					touching = true,
 					originalType,
 					timer;
@@ -72,13 +71,12 @@ $.event.special.tap = {
 				
 				timer = setTimeout(function() {
 					if ( touching && !moved ) {
-						held = true;
 						originalType = event.type;
 						event.type = "taphold";
 						$.event.handle.call( thisObject, event );
 						event.type = originalType;
 					}
-				}, 300 );
+				}, 750 );
 				
 				$this
 					.one( touchMoveEvent, moveHandler)
@@ -87,7 +85,7 @@ $.event.special.tap = {
 						clearTimeout( timer );
 						touching = false;
 						
-						if ( !held && !moved ) {
+						if ( !moved ) {
 							originalType = event.type;
 							event.type = "tap";
 							$.event.handle.call( thisObject, event );
