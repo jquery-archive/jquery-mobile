@@ -356,11 +356,6 @@
 		
 		//update orientation 
 		$html.addClass( jQuery.event.special.orientationchange.orientation( $window ) );
-		
-		//some debug stuff for the events pages
-		jQuery('body').bind('scrollstart scrollstop swipe swipeleft swiperight tap taphold turn',function(e){
-			jQuery('#eventlogger').prepend('<div>Event fired: '+ e.type +'</div>');
-		});
 	});
 	
 	$window.load(hideBrowserChrome);
