@@ -6,13 +6,17 @@
 	<script type="text/javascript" src="../js/all"></script>
 	<script>
 	$(function() {
-		$( "p" ).tap(function() {
-			var elem = this;
-			$( elem ).css( "color", "#f00" );
-			setTimeout(function() {
-				$( elem ).css( "color", "#000" );
-			}, 500 );
-		});
+		$( "p" )
+			.tap(function() {
+				var elem = this;
+				$( elem ).css( "color", "#f00" );
+				setTimeout(function() {
+					$( elem ).css( "color", "#000" );
+				}, 500 );
+			})
+			.taphold(function() {
+				$( this ).css( "color", "#0f0" );
+			});
 	});</script>
 </head> 
 <body> 
