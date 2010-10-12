@@ -13,12 +13,14 @@ ol.ui-listview .ui-li-jsnumbering:before { content: "" !important; } /* to avoid
 .ui-listview-inset .ui-li { border-right-width: 1px; border-left-width: 1px; }
 .ui-li:last-child { border-bottom-width: 1px; }
 .ui-li .ui-btn-inner { display: block; position: relative; padding: .5em 75px .5em 15px; }
-.ui-li-has-thumb .ui-btn-inner { min-height: 60px; }
-.ui-li-has-thumb .ui-btn-inner { padding-left: 100px; }
+.ui-li-has-thumb .ui-btn-inner { min-height: 60px; padding-left: 100px; }
+.ui-li-has-icon .ui-btn-inner {  min-height: 30px; padding-left: 50px; }
 .ui-li-heading { font-size: 16px; font-weight: bold; display: block; margin: .6em 0; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;  }
 .ui-li-desc {  font-size: 12px; font-weight: normal; display: block; margin: -.5em 0 .6em; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; }
-.ui-li-thumb { position: absolute; left: 1px; top: 0; max-height: 80px; max-width: 80px; }
-.ui-li-thumb, .ui-li-content { float: left; margin-right: 10px; }
+.ui-li-thumb, .ui-li-icon { position: absolute; left: 1px; top: 0; max-height: 80px; max-width: 80px; }
+.ui-li-icon { max-height: 40px; max-width: 40px; }
+.ui-li-thumb, .ui-li-icon, .ui-li-content { float: left; margin-right: 10px; }
+
 .ui-li-aside { float: right; width: 25%; text-align: right; margin: .3em 0; }
 .ui-li-count { position: absolute; font-size: 11px; font-weight: bold; padding: .2em .5em; top: 50%; margin-top: -.9em; right: 38px; }
 .ui-li-divider .ui-li-count { right: 10px; }

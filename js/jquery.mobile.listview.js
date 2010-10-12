@@ -37,7 +37,13 @@ $.widget( "mobile.listview", $.mobile.widget, {
 						role = $li.data( "role" ),
 						dividertheme = $list.data( "dividertheme" ) || o.dividerTheme;
 					if ( $li.is( ":has(img)" ) ) {
-						$li.addClass( "ui-li-has-thumb" );
+						if ($li.is( ":has(img.ui-li-icon)" )){
+							$li.addClass( "ui-li-has-icon" );
+						}
+						else{
+							$li.addClass( "ui-li-has-thumb" );
+						}
+					
 					}
 					if ( $li.is( ":has(.ui-li-aside)" ) ) {
 						var aside = $li.find('.ui-li-aside');
