@@ -18,10 +18,8 @@ $.widget( "mobile.page", $.mobile.widget, {
 		
 		this.element.find( "[data-role=nojs]" ).addClass( "ui-nojs" );
 		this._enchanceControls();
-
-		//links in bars, or those with data-role become buttons
-		this.element.find( "[data-role=button], .ui-bar a" ).not( ".ui-btn" ).buttonMarkup();
 		
+		//pre-find data els
 		var $dataEls = this.element.find( "[data-role]" ).andSelf().each(function() {
 			var $this = $( this ),
 				role = $this.data( "role" ),
@@ -64,8 +62,6 @@ $.widget( "mobile.page", $.mobile.widget, {
 						.prependTo( $this );
 				}
 				
-				$this.children( "a" ).buttonMarkup();
-				
 				//page title	
 				$this.children( ":header" )
 					.addClass( "ui-title" )
@@ -98,16 +94,22 @@ $.widget( "mobile.page", $.mobile.widget, {
 			case "ajaxform":
 				$this[ role ]();
 				break;
-			case "controlgroup":
-				// FIXME for some reason this has to come before the form control stuff (see above)
-				$this.controlgroup();
-				break;
 			}
 		});
 		
+		//links in bars, or those with data-role become buttons
+		this.element.find( "[data-role=button], .ui-bar a, .ui-header a, .ui-footer a" )
+			.not( ".ui-btn" )
+			.buttonMarkup();
+		
+		
+		this.element
+			.find('[data-role="controlgroup"]')
+			.controlgroup();
+		
 		//links within content areas
 		this.element.find( ".ui-body a:not(.ui-btn):not(.ui-link-inherit)" )
-			.addClass( "ui-link" );
+			.addClass( "ui-link" );	
 		
 		//fix toolbars
 		this.element.fixHeaderFooter();

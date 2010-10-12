@@ -6,12 +6,12 @@
 */
 (function($){
 $.fn.controlgroup = function(options){
-	var o = $.extend({
+		
+	return $(this).each(function(){
+		var o = $.extend({
 			direction: $( this ).data( "type" ) || "vertical",
 			shadow: false
 		},options);
-		
-	return $(this).each(function(){
 		var groupheading = $(this).find('>legend'),
 			flCorners = o.direction == 'horizontal' ? ['ui-corner-left', 'ui-corner-right'] : ['ui-corner-top', 'ui-corner-bottom'],
 			type = $(this).find('input:eq(0)').attr('type');

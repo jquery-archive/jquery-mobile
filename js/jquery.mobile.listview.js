@@ -8,8 +8,8 @@
 
 $.widget( "mobile.listview", $.mobile.widget, {
 	options: {
-		theme: "f",
-		countTheme: "f",
+		theme: "c",
+		countTheme: "c",
 		headerTheme: "b",
 		dividerTheme: "b",
 		splitTheme: "b",
