@@ -8,17 +8,18 @@
 $.fn.collapsible = function(options){
 	return $(this).each(function(){
 		var o = $.extend({
-			containerTheme: 'ui-body-c',
 			expandCueText: ' click to expand contents',
 			collapseCueText: ' click to collapse contents',
 			collapsed: $(this).is('[data-state="collapsed"]'),
-			heading: '>h1,>h2,>h3,>h4,>h5,>h6,>legend'
+			heading: '>h1,>h2,>h3,>h4,>h5,>h6,>legend',
+			theme: $(this).data('theme'),
+			iconTheme: $(this).data('icontheme') || 'c'
 		},options);
 
 		//define
-		var collapsibleContain = $(this).addClass('ui-collapsible-contain '+o.containerTheme),
+		var collapsibleContain = $(this).addClass('ui-collapsible-contain'),
 			collapsibleHeading = $(this).find(o.heading).eq(0),
-			collapsibleContent = collapsibleContain.wrapInner('<div class="ui-collapsible-content ui-body"></div>').find('.ui-collapsible-content');				
+			collapsibleContent = collapsibleContain.wrapInner('<div class="ui-collapsible-content"></div>').find('.ui-collapsible-content');				
 		
 		//replace collapsibleHeading if it's a legend	
 		if(collapsibleHeading.is('legend')){
@@ -30,11 +31,26 @@ $.fn.collapsible = function(options){
 		collapsibleHeading.insertBefore(collapsibleContent);
 		
 		//modify markup & attributes
-		collapsibleHeading.addClass('ui-collapsible-heading  ui-bar-c') //NOTE - THIS SHOULD USE A BODY CLASS
+		collapsibleHeading.addClass('ui-collapsible-heading')
 			.append('<span class="ui-collapsible-heading-status"></span>')
-			.wrapInner('<a href="#" class="ui-collapsible-heading-toggle"></a>');
-		
-		collapsibleHeading.find('a:eq(0)').prepend('<span class="ui-icon ui-icon-shadow"></span>').addClass('ui-link');	
+			.wrapInner('<a href="#" class="ui-collapsible-heading-toggle"></a>')
+			.find('a:eq(0)')
+			.buttonMarkup({
+				shadow: true,
+				corners:true,
+				iconPos: 'left',
+				icon: 'plus',
+				theme: o.theme
+			})
+			.find('.ui-icon')
+			.removeAttr('class')
+			.buttonMarkup({
+				shadow: true,
+				corners:true,
+				iconPos: 'notext',
+				icon: 'plus',
+				theme: o.iconTheme
+			});
 		
 		//events
 		collapsibleContain	
