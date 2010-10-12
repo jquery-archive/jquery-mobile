@@ -65,7 +65,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 								.addClass( "ui-link-inherit" );
 					}
 					else if( role == "list-divider" ){
-						$li.addClass( "ui-li-divider ui-btn ui-body-" + dividertheme ).attr( "role", "heading" );
+						$li.addClass( "ui-li-divider ui-btn ui-bar-" + dividertheme ).attr( "role", "heading" );
 					}
 					else {
 						$li.addClass( "ui-li-static ui-btn-up-" + o.theme );
