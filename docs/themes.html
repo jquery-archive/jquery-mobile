@@ -33,55 +33,10 @@
 		<p>The key to the theme system used in jQuery UI is separation of color and texture (theme) from structural styles that define things like padding and dimensions. This allows the theme colors and textures to be defined once in the stylesheet as color "swatches", that can be mixed and matched. Within a jQuery Mobile theme, there are multiple color "swatches" for bars, content blocks and buttons that can be combined to achieve a wide range of visual effects. 
 			</p>
 		
-		<p>Themes include at 5 swatches each for bars, content blocks and buttons. To make mapping of color swatches consistent across our widgets, we have followed the convention that swatch "a" is the highest level of visual priority (black in our default theme), "b" is secondary level (blue) and "c" is the baseline level (gray) that we use by default in many situations, "d" for an alternate secondary level and "e" as an accent swatch.</p>
+		<p>Themes include at 5 swatches each for bars, content blocks and buttons that are given letters (a, b, c, d, e) for quick reference. To make mapping of color swatches consistent across our widgets, we have followed the convention that swatch "a" is the highest level of visual priority (black in our default theme), "b" is secondary level (blue) and "c" is the baseline level (gray) that we use by default in many situations, "d" for an alternate secondary level and "e" as an accent swatch.</p>
 		
-		<p> Themes may have additional swatches for accent colors or specific situations within an app or site. For example, you could </p>
+		<p> Themes may have additional swatches for accent colors or specific situations within an app or site. For example, you could add a new theme swatch named with the letter "f" that has a red bar and button for use in error situations. This will be done directly in the ThemeRoller tool when it is launched in 2011. For the time being, it's pretty easy to manually add additional swatches by editing the theme css file - copy a block of swatch styles, rename the classes with the new swatch letter name and tweak colors.</p>
 		
-		<h2>Typical themed page</h2>
-		
-		<div data-role="header" data-position="inline">
-			<a href="index.html" data-icon="arrow-l">Button A</a>
-			<h1>Swatch A</h1>
-			<a href="index.html" data-icon="plus" data-icon-pos="right" data-theme="b">Button B</a>
-		</div>
-		<div class="ui-bar ui-bar-d">
-			<div data-role="controlgroup" data-type="horizontal" >
-				<h3>Bar D: </h3>
-				<a href="#">Button D</a>
-				<a href="#">Button D</a>
-				<a href="#">Button D</a>
-			</div><!-- /controlgroup -->
-		</div>
-		<div class="ui-body ui-body-d">
-			<h2>Body D</h2>
-			<p>This is the body content block with a <a href="#" class="ui-link">link</a>.</p>
-				<label for="slider1">Input slider:</label>
-			 	<input type="range" name="slider1" id="slider1" value="50" min="0" max="100" data-theme="c" />
-			     <fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
-			     	<legend>Cache settings:</legend>
-			         	<input type="radio" name="radio-choice-a1" id="radio-choice-a1" value="on" checked="checked" />
-			         	<label for="radio-choice-a1">On</label>
-			         	<input type="radio" name="radio-choice-a1" id="radio-choice-b1" value="off"  />
-			         	<label for="radio-choice-b1">Off</label>
-			    </fieldset>
-			<a href="#" data-role="button" data-inline="true" data-theme="a">Button A</a>
-			<a href="#" data-role="button" data-inline="true" data-theme="e">Button E</a>
-			<h4>Here is an inset split list</h4>
-			<ul data-role="listview" data-inset="true" data-theme="d">
-				<li data-role="list-divider" data-theme="b">Body B</li>
-				<li><a href="index.html">Button D</a><a href="index.html">Details</a></li>
-				<li><a href="index.html">Button D</a><a href="index.html">Details</a></li>
-				<li><a href="index.html">Button D</a><a href="index.html">Details</a></li>
-			</ul>
-		</div>
-		<div class="ui-bar ui-bar-b">
-			<div data-role="controlgroup" data-type="horizontal" >
-				<a href="#" data-icon="delete">Button B</a>
-				<a href="#" data-icon="plus">Button B</a>
-				<a href="#" data-icon="arrow-r">Button B</a>
-			</div><!-- /controlgroup -->
-		</div>
-	
 		
 		<h2>Bars</h2>
 		<p>The default theme contains 4 color swatches for bars to use in header, footer and tool bars. The swatches are designated by letters (a, b, c, etc.) and are organized into a visual hierarchy where "a" is the highest level of visual priority, "b" is secondary, "c" is the baseline, and "d" is for accents. Each swatch defines the border color, text color, gradient, text-shadow, font family and link color. Our default theme looks like this:</p>
@@ -142,9 +97,9 @@
 		
 		<fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
 	     	<legend>Active is used for the on state of these toggles:</legend>
-	         	<input type="radio" name="radio-choice-a" id="radio-choice-a" value="on" checked="checked" />
+	         	<input type="radio" name=" radio-choice-a" id="radio-choice-a" value="on" checked="checked" />
 	         	<label for="radio-choice-a">On</label>
-	         	<input type="radio" name="radio-choice-a" id="radio-choice-b" value="off"  />
+	         	<input type="radio" name=" radio-choice-a" id="radio-choice-b" value="off"  />
 	         	<label for="radio-choice-b">Off</label>
 	    </fieldset>
 		
@@ -175,7 +130,7 @@
 		<p>To add visual emphasis of certain buttons in a toolbar, the theme swatch color for a button can be set by adding a <code>data-theme="a"</code> to the anchor to make it stand out visually from it's parent. If the theme is set on a button in the markup, the framework won't override the theme swatch color when the parent theme is changed because you made a conscious decision to set the color.</p>
 		
 		<div class="swatch-bars">
-			<div data-role="header" data-theme="a" data-nobackbtn="true">
+			<div data-role="header" data-theme="a" class="ui-bar" data-nobackbtn="true">
 				<div><!-- wrapper div to have control over butttons -->
 					<a href="index.html" data-icon="arrow-l" data-theme="a">A</a>
 					<a href="index.html" data-icon="arrow-l" data-theme="b">B</a>
@@ -184,7 +139,7 @@
 					<a href="index.html" data-icon="arrow-l" data-theme="e">E</a>
 				</div>
 			</div>
-			<div data-role="header" data-theme="b" data-nobackbtn="true">
+			<div data-role="header" data-theme="b" class="ui-bar" data-nobackbtn="true">
 				<div><!-- wrapper div to have control over butttons -->
 					<a href="index.html" data-icon="arrow-l" data-theme="a">A</a>
 					<a href="index.html" data-icon="arrow-l" data-theme="b">B</a>
@@ -193,7 +148,7 @@
 					<a href="index.html" data-icon="arrow-l" data-theme="e">E</a>
 				</div>
 			</div>
-			<div data-role="header" data-theme="c" data-nobackbtn="true">
+			<div data-role="header" data-theme="c" class="ui-bar" data-nobackbtn="true">
 				<div><!-- wrapper div to have control over butttons -->
 					<a href="index.html" data-icon="arrow-l" data-theme="a">A</a>
 					<a href="index.html" data-icon="arrow-l" data-theme="b">B</a>
@@ -202,7 +157,7 @@
 					<a href="index.html" data-icon="arrow-l" data-theme="e">E</a>
 				</div>
 			</div>
-			<div data-role="header" data-theme="d" data-nobackbtn="true">
+			<div data-role="header" data-theme="d" class="ui-bar" data-nobackbtn="true">
 				<div><!-- wrapper div to have control over butttons -->
 					<a href="index.html" data-icon="arrow-l" data-theme="a">A</a>
 					<a href="index.html" data-icon="arrow-l" data-theme="b">B</a>
@@ -211,7 +166,7 @@
 					<a href="index.html" data-icon="arrow-l" data-theme="e">E</a>
 				</div>
 			</div>
-			<div data-role="header" data-theme="e" data-nobackbtn="true">
+			<div data-role="header" data-theme="e" class="ui-bar" data-nobackbtn="true">
 				<div><!-- wrapper div to have control over butttons -->
 					<a href="index.html" data-icon="arrow-l" data-theme="a">A</a>
 					<a href="index.html" data-icon="arrow-l" data-theme="b">B</a>
