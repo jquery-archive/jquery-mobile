@@ -28,12 +28,13 @@
 .landscape body {  }
 
 /* "page" containers - full-screen views, one should always be in view post-pageload */
-.ui-page { top: 0; left: 0; width: 100%; min-height: 100%; position: absolute;  z-index: 10; visibility: hidden; height: 0; overflow: hidden; border: 0; } 
-.ui-page-active { visibility: visible; overflow: visible; }
+.ui-page { top: 0; left: 0; width: 100%; min-height: 100%; position: absolute;  z-index: 10; display: none; border: 0; } 
+.ui-page-active { display: block; overflow: visible; }
 
 /* loading screen */
 .ui-loading, .ui-loading body { overflow: hidden !important; }
 .ui-loading .ui-loader { display: block; }
+.ui-loading .ui-page { overflow: hidden;  }
 .ui-loader { display: none; position: absolute; opacity: .7; z-index: 10; top: 75px; left: 50%; width: 200px; margin-left: -130px; padding: 20px 30px; }
 .ui-loader h1 { font-size: 15px; text-align: center; }
 .ui-loader .ui-icon { position: static; display: block; opacity: .9; margin: 0 auto; width: 35px; height: 35px; background-color: transparent; }
