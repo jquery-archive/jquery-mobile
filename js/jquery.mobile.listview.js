@@ -148,7 +148,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 							corners: true,
 							theme: $list.data('splittheme') || a.data('theme') || o.splitTheme,
 							iconpos: "notext",
-							icon: $list.data('spliticon') || a.data('icon') ||  o.spliticon
+							icon: $list.data('spliticon') || a.data('icon') ||  o.splitIcon
 						} ) );
 					
 					//fix corners
