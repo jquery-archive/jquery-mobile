@@ -20,7 +20,9 @@
 			
 			<p>jQuery Mobile has a rich <a href="../themes.html">theming system</a> that gives you full control of how pages are styled. There is detailed theming documentation within each page widget, but let's look at a few high-level examples of how theming is applied.</p>
 			
-			<p>The <code>data-theme</code> attribute can be applied to the header and footer containers to apply any of the lettered theme color swatches. The <code>data-theme</code> attribute could be added to the content container but we recommend adding it instead to the <code>data-role="page"</code> container to ensure that the background colors are applied to the full page </p>
+			<p>The <code>data-theme</code> attribute can be applied to the header and footer containers to apply any of the lettered theme color swatches. The <code>data-theme</code> attribute could be added to the content container but we recommend adding it instead to the <code>data-role="page"</code> container to ensure that the background colors are applied to the full page.</p>
+			
+			<p>Below are examples of theme swatches applied consistently across all page elements. Typically, you would mix and match swatches on various parts of the page to create visual texture but this shows how each theme swatch looks on various elements. To see theme swatches combined for better texture, check out the typical themed page example on the <a href="../themes.html">theming overview</a> page.</p>
 			
 
 			
@@ -44,8 +46,9 @@
 				<a href="#" data-role="button" data-inline="true">Button</a>
 			</div>
 			<div class="ui-bar ui-bar-a">
-				<a href="#" data-inline="true">Button</a><a href="#" data-inline="true">Button</a><a href="#" data-inline="true">Button</a>
-				<h1>Footer A</h1>
+				<div data-role="controlgroup" data-type="horizontal" >
+					<a href="#" data-inline="true">Button</a><a href="#" data-inline="true">Button</a><a href="#" data-inline="true">Button</a>
+				</div><!-- /controlgroup -->
 			</div>
 
 
@@ -69,8 +72,9 @@
 				<a href="#" data-role="button" data-inline="true">Button</a>
 			</div>
 			<div class="ui-bar ui-bar-b">
-				<a href="#" data-inline="true">Button</a><a href="#" data-inline="true">Button</a><a href="#" data-inline="true">Button</a>
-				<h1>Footer B</h1>
+				<div data-role="controlgroup" data-type="horizontal" >
+					<a href="#" data-inline="true">Button</a><a href="#" data-inline="true">Button</a><a href="#" data-inline="true">Button</a>
+				</div><!-- /controlgroup -->
 			</div>
 			
 			<h2>Swatch C</h2>
@@ -93,8 +97,9 @@
 				<a href="#" data-role="button" data-inline="true">Button</a>
 			</div>
 			<div class="ui-bar ui-bar-c">
-				<a href="#" data-inline="true">Button</a><a href="#" data-inline="true">Button</a><a href="#" data-inline="true">Button</a>
-				<h1>Footer C</h1>
+				<div data-role="controlgroup" data-type="horizontal" >
+					<a href="#" data-inline="true">Button</a><a href="#" data-inline="true">Button</a><a href="#" data-inline="true">Button</a>
+				</div><!-- /controlgroup -->
 			</div>
 			
 			<h2>Swatch D</h2>
@@ -117,8 +122,34 @@
 				<a href="#" data-role="button" data-inline="true">Button</a>
 			</div>
 			<div class="ui-bar ui-bar-d">
-				<a href="#" data-inline="true">Button</a><a href="#" data-inline="true">Button</a><a href="#" data-inline="true">Button</a>
-				<h1>Footer B</h1>
+				<div data-role="controlgroup" data-type="horizontal" >
+					<a href="#" data-inline="true">Button</a><a href="#" data-inline="true">Button</a><a href="#" data-inline="true">Button</a>
+				</div><!-- /controlgroup -->
+			</div>
+			
+			<h2>Swatch E</h2>
+			<div class="ui-bar ui-bar-e">
+				<a href="#" data-icon="arrow-l">Back</a>
+				<h1>Header E</h1>
+			</div>
+			<div class="ui-body ui-body-e">
+				<h3>Header</h3>
+				<p>This is content color swatch "D" and a preview of a <a href="#" class="ui-link">link</a>.</p>
+					<label for="slider1">Input slider:</label>
+				 	<input type="range" name="slider1" id="slider1" value="50" min="0" max="100" data-theme="e" />
+					<fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
+				     	<legend>Cache settings:</legend>
+				         	<input type="radio" name="radio-choice-a5" id="radio-choice-a5" value="on" checked="checked" />
+				         	<label for="radio-choice-a5">On</label>
+				         	<input type="radio" name="radio-choice-a5" id="radio-choice-b5" value="off"  />
+				         	<label for="radio-choice-b5">Off</label>
+				    </fieldset>
+				<a href="#" data-role="button" data-inline="true">Button</a>
+			</div>
+			<div class="ui-bar ui-bar-e">
+				<div data-role="controlgroup" data-type="horizontal" >
+					<a href="#" data-inline="true">Button</a><a href="#" data-inline="true">Button</a><a href="#" data-inline="true">Button</a>
+				</div><!-- /controlgroup -->
 			</div>
 
 
