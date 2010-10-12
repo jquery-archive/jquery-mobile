@@ -129,7 +129,9 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		this.element
 			.find( "li" ).each(function() {
 				//for split buttons
-				$( this ).find( "a" ).eq( 1 ).each(function() {
+				var $splitBtn = $( this ).find( "a" ).eq( 1 );
+				if( $splitBtn.length ){ $(this).addClass('ui-li-has-alt'); }
+				 $splitBtn.each(function() {
 					var a = $( this );
 					a
 						.attr( "title", $( this ).text() )
