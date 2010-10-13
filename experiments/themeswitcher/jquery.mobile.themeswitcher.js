@@ -27,10 +27,12 @@
 		
 		//remover, adder
 		function addTheme(theme){
+			/*
 			//way too greedy theme remover
 			$.each(themes,function( i ){
 				$('head link[href*='+themes[ i ]+']').remove();
 			});
+			*/
 			$('head').append( '<link rel=\'stylesheet\' href=\''+ themesDir + theme +'/\' />' );
 		}
 		
