@@ -16,8 +16,20 @@
 
 	<div data-role="content">
 			
-			<h2>Button basics</h2>
-			<p>To do...</p>
+			<p>jQuery Mobile provides a complete set of finger-friendly form elements that are based on native HTML form elements.</p>
+			
+			<h2>Form setup</h2>
+			<p>A form alwaysbegins with a standard <code>form</code> tag</p>
+			
+			<p><strong>The collapsible panels</strong> are marked up as either heading/content, or legend/fieldset combinations. Helper text on the toggle links allows them to make sense on a screen reader.</p>
+
+			<p><strong>Text inputs and textareas</strong> are largely left alone, aside from having some theme classes applied. Textareas auto-grow using Brandon Aaron's expandable plugin, eliminating the need to 2-finger scroll a textarea on a mobile device.</p>
+
+			<p><strong>The radio and checkbox controls</strong> below use standard input/label markup, but are styled to be more touch-friendly. The styled control you see is actually the label element, which sits over the real input, so if images fail to load, you'll still have a functional control. In most browsers, clicking the label automatically triggers a click on the input, but we've had to trigger the update manually for a few mobile browsers that don't do this natively. On the desktop, these controls are keyboard and screen-reader accessible. The horizontal toggles for "cache settings" and "font styling" are also just sets of checkboxes and radios with icons disabled.</p>
+
+			<p><strong>The select menus</strong> are driven off native select elements, but the native selects are hidden from view and replaced with more style-friendly markup. The replacement buttons and menus are ARIA-enabled and are keyboard accessible on the desktop as well. When clicked, if the menu has room it will appear as an overlay listbox, but if there are too many options to fit in the window without scrolling, the page content is wrapped in a div and hidden, and the menu is appended after that div. This lets us take advantage of native scrolling while the menu is in use. Try the third select menu to see this behavior in action. </p>
+
+			<p><strong>The submit buttons</strong> are marked up as both input[type=submit] and button elements in the source, but we're generating anchor-based buttons in their place in order to take advantage of consistent styling across mobile browsers. The original buttons are still on the page, hidden from view, and clicking the replacement button will trigger a click on the original element, so the form can be submitted normally.</p>
 			
 			
 	</div><!-- /content -->
