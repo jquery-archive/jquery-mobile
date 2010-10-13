@@ -18,25 +18,14 @@
 		
 		<form action="#" method="get">
 
-		<div data-role="collapsible" data-state="collapsed" data-theme="b" data-icontheme="a">
-			<h1>Demo description</h1>
-			<p>This page contains various progressive-enhancement driven form controls. Native elements are sometimes hidden from view, but their values are maintained so the form can be submitted normally. In theory, browsers that don't support the custom controls will still get a usable experience.</p>
 
-			<p><strong>The collapsible panels</strong> are marked up as either heading/content, or legend/fieldset combinations. Helper text on the toggle links allows them to make sense on a screen reader.</p>
+			<p>This page contains various progressive-enhancement driven form controls. Native elements are sometimes hidden from view, but their values are maintained so the form can be submitted normally. In browsers that don't support the custom controls, they will still have a usable experience because these are all based on native form elements.</p>
 
-			<p><strong>Text inputs and textareas</strong> are largely left alone, aside from having some theme classes applied. Textareas auto-grow using Brandon Aaron's expandable plugin, eliminating the need to 2-finger scroll a textarea on a mobile device.</p>
-
-			<p><strong>The radio and checkbox controls</strong> below use standard input/label markup, but are styled to be more touch-friendly. The styled control you see is actually the label element, which sits over the real input, so if images fail to load, you'll still have a functional control. In most browsers, clicking the label automatically triggers a click on the input, but we've had to trigger the update manually for a few mobile browsers that don't do this natively. On the desktop, these controls are keyboard and screen-reader accessible. The horizontal toggles for "cache settings" and "font styling" are also just sets of checkboxes and radios with icons disabled.</p>
-
-			<p><strong>The select menus</strong> are driven off native select elements, but the native selects are hidden from view and replaced with more style-friendly markup. The replacement buttons and menus are ARIA-enabled and are keyboard accessible on the desktop as well. When clicked, if the menu has room it will appear as an overlay listbox, but if there are too many options to fit in the window without scrolling, the page content is wrapped in a div and hidden, and the menu is appended after that div. This lets us take advantage of native scrolling while the menu is in use. Try the third select menu to see this behavior in action. </p>
-
-			<p><strong>The submit buttons</strong> are marked up as both input[type=submit] and button elements in the source, but we're generating anchor-based buttons in their place in order to take advantage of consistent styling across mobile browsers. The original buttons are still on the page, hidden from view, and clicking the replacement button will trigger a click on the original element, so the form can be submitted normally.</p>
+			
 
 
 
-		</div>
-
-	    <fieldset data-role="collapsible">
+	    <fieldset data-role="collapsible" data-state="collapsed">
 	    	<legend>Text input controls</legend>
 	    	<div data-role="fieldcontain">
 	         <label for="name">Text Input:</label>
@@ -45,6 +34,10 @@
 			<div data-role="fieldcontain">
 	         <label for="password">Password Input:</label>
 	         <input type="password" name="password" id="password" value="" data-theme="b" />
+			</div>
+			<div data-role="fieldcontain">
+	         <label for="search">Search Input:</label>
+	         <input type="search" name="password" id="search" value="" data-theme="b" />
 			</div>
 
 			<div data-role="fieldcontain">
@@ -58,11 +51,6 @@
 			</div>
 
 			<div data-role="fieldcontain">
-				<label for="slider1">Input slider:</label>
-			 	<input type="range" name="slider1" id="slider1" value="50" min="0" max="100" data-theme="b" />
-			</div>
-
-			<div data-role="fieldcontain">
 				<label for="slider2">Select slider:</label>
 				<select name="slider2" id="slider2" data-role="slider">
 					<option value="off">Off</option>
@@ -70,18 +58,11 @@
 				</select> 
 			</div>
 
-			<div data-role="fieldcontain">
-				<label for="slider3">Themed select slider:</label>
-				<select name="slider3" id="slider3" data-role="slider" data-theme="a">
-					<option value="off">Off</option>
-					<option value="on" selected="selected">On</option>
-				</select> 
-			</div>
 		</fieldset>
 
 
 
-		<div id="radio-examples" data-role="collapsible">
+		<div id="radio-examples" data-role="collapsible" data-state="collapsed">
 
 			<h2>Radio toggles</h2>
 
@@ -101,22 +82,20 @@
 		         	<label for="radio-choice-4">Choice 4</label>
 		    </fieldset>
 
-		     <fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
-
 
 		    <fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
 		     	<legend>Same with theme change:</legend>
 		         	<input type="radio" name="radio-choice-b" id="radio-choice-c" value="on" checked="checked" />
 		         	<label for="radio-choice-c">On</label>
-		         	<input type="radio" name="radio-choice-b" id="radio-choice-d" value="off" data-theme="b" />
+		         	<input type="radio" name="radio-choice-b" id="radio-choice-d" value="off" />
 		         	<label for="radio-choice-d">Off</label>
-		         	<input type="radio" name="radio-choice-b" id="radio-choice-e" value="other" data-theme="b" />
+		         	<input type="radio" name="radio-choice-b" id="radio-choice-e" value="other" />
 		         	<label for="radio-choice-e">Other</label>
 		    </fieldset>
 
 	    </div>
 
-	    <div id="checkbox-examples" data-role="collapsible">
+	    <div id="checkbox-examples" data-role="collapsible" data-state="collapsed">
 
 		    <h2>Checkboxes</h2>
 
@@ -154,10 +133,10 @@
 
 
 
-		<fieldset data-role="collapsible">
+		<fieldset data-role="collapsible" data-state="collapsed">
 			<legend>Select menus</legend>
 			<div data-role="fieldcontain">
-				<label for="select-choice-1" class="select">Choose one:</label>
+				<label for="select-choice-1" class="select">Few options:</label>
 				<select name="select-choice-1" id="select-choice-1">
 					<option value="Choice 1">Choice 1</option>
 					<option value="Choice 2">Choice 2</option>
@@ -166,8 +145,8 @@
 			</div>
 
 			<div data-role="fieldcontain">
-				<label for="select-choice-3" class="select">Choose one:</label>
-				<select name="select-choice-3" id="select-choice-3" data-theme="b">
+				<label for="select-choice-3" class="select">Many options:</label>
+				<select name="select-choice-3" id="select-choice-3">
 					<option value="Choice 1">Choice 1</option>
 					<option value="Choice 2">Choice 2</option>
 					<option value="Choice 3">Choice 3</option>
@@ -193,8 +172,8 @@
 
 
 		<fieldset class="ui-grid-a">
-				<div class="ui-block-a"><input type="submit" value="Input Submit" /></div>
-				<div class="ui-block-b"><button type="submit" data-theme="b">Button Submit</button></div>	   
+				<div class="ui-block-a"><button type="submit" data-theme="c">Cancel</button></div>
+				<div class="ui-block-b"><button type="submit" data-theme="b">Submit</button></div>	   
 	    </fieldset>
 	</form>
 	
