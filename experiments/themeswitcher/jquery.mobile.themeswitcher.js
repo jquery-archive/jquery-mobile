@@ -9,7 +9,7 @@
 							'<a href=\'#\' class=\'ui-btn-left\' data-icon=\'delete\'>Cancel</a>'+
 							'<div class=\'ui-title\'>Choose a theme:</div>'+
 						'</div>'+
-						'<div data-role=\'content\' data-theme=\'c\'><ul data-role=\'listview\'></ul></div>'+
+						'<div data-role=\'content\' data-theme=\'c\'><ul data-role=\'listview\' data-inset=\'true\'></ul></div>'+
 					'</div>' )
 					.appendTo( 'body' ),
 			menu = menuPage.find('ul');	
