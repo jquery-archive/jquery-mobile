@@ -1,34 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>jQuery UI Mobile Framework</title>
+	<title>jQuery UI Mobile Framework - Documentation</title>
 	<link rel="stylesheet"  href="css/all" />
 	<script type="text/javascript" src="js/all"></script>
 </head> 
 <body> 
-<div data-role="page">
+<div data-role="page" data-theme="b">
 
-<div data-role="header">
+<div data-role="header" data-theme="c">
 	<h1>jQuery Mobile</h1>
 </div>
 
 <div data-role="content">
-	<ul data-role="listview">
-		<li><a href="docs/index.html">Documentation</a></li>
-		<li><a href="_containers-states.html">Containers &amp; states</a></li>
-		<li><a href="_fixed.html">Fixed Toolbars</a></li>
-		<li><a href="_footer-persist.html">Persistent Footer</a></li>
-		<li><a href="_form-controls.html">Form Controls</a></li>
-		<li><a href="_navbar.html">Navbar</a></li>
-		<li><a href="experiments/navbar-glyphish/">Navbar - Glyphish Icons Example</a></li>
-		<li><a href="_dialog.html" data-transition="pop" data-rel="dialog">Dialog</a></li>
-		<li><a href="_listview.html">List View</a></li>
-		<li><a href="_filter.html">Filterable List View</a></li>
-		<li><a href="experiments/api-viewer/">List View - API Viewer Example</a></li>
-		<li><a href="_search.html">Auto-search demo</a></li>
-		<li><a href="experiments/converter/" rel="external">Converter Demo App</a></li>
-		<li><a href="_events.html">Events</a></li>
-		<li><a href="_transitions.html">Transitions</a></li>
+	
+	<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b">
+		<li data-role="list-divider">Demos &amp; Documentation</li>
+		<li><a href="docs/intro.html">Introduction to jQuery Mobile</a></li>
+		<li><a href="docs/themes.html">Theme system</a></li>
+		<li><a href="docs/pages/index.html">Pages &amp; dialogs</a></li>
+		<li><a href="docs/toolbars/index.html">Header, footer &amp; nav bars</a></li>
+		<li><a href="docs/content/index.html">Content formatting</a></li>
+		<li><a href="docs/buttons/index.html">Buttons</a></li>
+		<li><a href="docs/forms/index.html">Form elements</a></li>
+		<li><a href="docs/lists/index.html">List views</a></li>
+		<li><a href="docs/events.html">Events</a></li>
+	</ul>
+	
+	<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b">
+		<li data-role="list-divider">Demos</li>
+		<li><a href="experiments/api-browser/index.html">jQuery API browser</a></li>
+		<li><a href="experiments/photos">Photo viewer</a></li>
+		<li><a href="experiments/converter">Converter</a></li>
+	</ul>
+	
+	<ul  data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b">
+		<li data-role="list-divider">Experiments</li>
+		<li><a href="experiments/ui-datepicker">Date picker styling</a></li>
 	</ul>
 </div>
 
