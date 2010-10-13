@@ -28,7 +28,7 @@
 .landscape body {  }
 
 /* "page" containers - full-screen views, one should always be in view post-pageload */
-.ui-page { top: 0; left: 0; width: 100%; min-height: 100%; position: absolute;  z-index: 10; display: none; border: 0; } 
+.ui-page { top: 0; left: 0; width: 100%; min-height: 100%; position: absolute; display: none; border: 0; } 
 .ui-page-active { display: block; overflow: visible; }
 
 /* loading screen */
