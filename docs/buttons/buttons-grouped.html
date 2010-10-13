@@ -15,27 +15,44 @@
 	</div><!-- /header -->
 
 	<div data-role="content">
+		<p>To visually group a set of buttons together to form a single block of buttons that look contained like a navigation component. To get this effect, wrap a set of buttons in a container with the <code>data-role="controlgroup"</code> attribute and the framework will create a vertical button group. This removes all margins and drop shadows between the buttons and only rounds the top and bottom buttons to get the effect that they are group together. </p>
+<pre><code>
+&lt;div data-role=&quot;controlgroup&quot;&gt;
+&lt;a href=&quot;index.html&quot; data-role=&quot;button&quot;&gt;Yes&lt;/a&gt;
+&lt;a href=&quot;index.html&quot; data-role=&quot;button&quot;&gt;No&lt;/a&gt;
+&lt;a href=&quot;index.html&quot; data-role=&quot;button&quot;&gt;Maybe&lt;/a&gt;
+&lt;/div&gt;
+</pre></code>
+
+		<p>By default, grouped buttons are presented as a vertical list:</p>
 		
+		<div data-role="controlgroup">
+			<a href="index.html" data-role="button">Yes</a>
+			<a href="index.html" data-role="button">No</a>
+			<a href="index.html" data-role="button">Maybe</a>
+		</div>
 		
-		<p><strong>Vertical</strong> grouped buttons (default)</p>
-		<div data-role="controlgroup" data-type="vertical" >
+		<p>By adding the <code>data-type="horizontal"</code> attribute to the control group container, you can swap this to a horizontal style group that floats the buttons side-by-side and sets the width to only be large enough to fit the content. Be aware that these will wrap to multiple lines if the button number of text length is to wide for the screen.
+		
+		<p><strong>Horizontal</strong> grouped buttons</p>
+		<div data-role="controlgroup" data-type="horizontal">
 			<a href="index.html" data-role="button">Yes</a>
 			<a href="index.html" data-role="button">No</a>
 			<a href="index.html" data-role="button">Maybe</a>
 		</div>
 			
-		<p><strong>Horizontal</strong> grouped buttons</p>
+		<p><strong>Horizontal</strong> grouped buttons with icons</p>
 		<div data-role="controlgroup" data-type="horizontal" >
 			<a href="index.html" data-role="button" data-icon="arrow-u">Up</a>
 			<a href="index.html" data-role="button" data-icon="arrow-d">Down</a>
-			<a href="index.html" data-role="button" data-icon="delete">Remove</a>
+			<a href="index.html" data-role="button" data-icon="delete">Delete</a>
 		</div>
 		
 		<p><strong>Horizontal</strong> grouped buttons, icon only</p>
 		<div data-role="controlgroup" data-type="horizontal" >
 			<a href="index.html" data-role="button" data-icon="arrow-u" data-iconpos="notext">Up</a>
 			<a href="index.html" data-role="button" data-icon="arrow-d" data-iconpos="notext">Down</a>
-			<a href="index.html" data-role="button" data-icon="delete" data-iconpos="notext">Remove</a>
+			<a href="index.html" data-role="button" data-icon="delete" data-iconpos="notext">Delete</a>
 		</div>
 		
 		

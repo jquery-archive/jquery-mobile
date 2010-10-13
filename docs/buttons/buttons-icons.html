@@ -15,33 +15,74 @@
 	</div><!-- /header -->
 
 	<div data-role="content">
+		
+		<p>There a core set of standard icons included in the framework. To minimize the download size of the core icons, jQuery Mobile only includes these icons in white and black colored sprites and automatically adds a semi-transparent black circle behind the icon to make sure it has good contrast on all background colors.</p> 
+		
+		
+		
+			<h2>Adding icons</h2>
 			
-		<h2>Icon position options</h2>
-		<p><strong>No icon</strong></p>
-		<a href="index.html" data-role="button">My button</a>		
-		<p><strong>Left icon</strong> (default) - data-iconpos="left"</p>
-		<a href="index.html" data-role="button" data-icon="delete">My button</a>		
-		<p><strong>Right icon</strong> - data-iconpos="right"</p>
-		<a href="index.html" data-role="button" data-icon="delete" data-iconpos="right">My button</a>
-		<p><strong>Icon only</strong> - data-iconpos="notext"</p>		
-		<a href="index.html" data-role="button" data-icon="delete" data-iconpos="notext">My button</a> 	
+			<p>Icons can be added to buttons by adding a <code>data-icon</code> attribute on the anchor to specify the icon to display.</p> 
+			
+			<code>
+			&lt;a href=&quot;index.html&quot; data-role=&quot;button&quot; <strong>data-icon=&quot;delete&quot;</strong>&gt;Delete&lt;/a&gt;
+			</code>
+			
+			<p>Creates this button with an icon:</p>
+			<a href="index.html" data-role="button" data-icon="delete">Delete</a>
+			
+			<h2>Icon set</h2>
+			
+			<p>This is a reference for the icon names you can specify in the <code>data-icon</code> attribute.</p>
+			
+			<p><strong>Left arrow</strong> - data-icon="arrow-u"</p>
+			<a href="index.html" data-role="button" data-icon="arrow-l">My button</a>
+			<p><strong>Right arrow</strong> - data-icon="arrow-d"</p>
+			<a href="index.html" data-role="button" data-icon="arrow-r">My button</a>
+			<p><strong>Up arrow</strong> - data-icon="arrow-u"</p>
+			<a href="index.html" data-role="button" data-icon="arrow-u">My button</a>
+			<p><strong>Down arrow</strong> - data-icon="arrow-d"</p>
+			<a href="index.html" data-role="button" data-icon="arrow-d">My button</a>
+			<p><strong>Delete</strong> - data-icon="delete"</p>
+			<a href="index.html" data-role="button" data-icon="delete">My button</a>
+			<p><strong>Plus</strong> - data-icon="plus"</p>
+			<a href="index.html" data-role="button" data-icon="plus">My button</a>
+			<p><strong>Minus</strong> - data-icon="minus"</p>
+			<a href="index.html" data-role="button" data-icon="minus">My button</a>
 		
-		<h2>Icon glyphs</h2>
-		<p><strong>Left arrow</strong> - data-icon="arrow-u"</p>
-		<a href="index.html" data-role="button" data-icon="arrow-l">My button</a>
-		<p><strong>Right arrow</strong> - data-icon="arrow-d"</p>
-		<a href="index.html" data-role="button" data-icon="arrow-r">My button</a>
-		<p><strong>Up arrow</strong> - data-icon="arrow-u"</p>
-		<a href="index.html" data-role="button" data-icon="arrow-u">My button</a>
-		<p><strong>Down arrow</strong> - data-icon="arrow-d"</p>
-		<a href="index.html" data-role="button" data-icon="arrow-d">My button</a>
-		<p><strong>Delete</strong> - data-icon="delete"</p>
-		<a href="index.html" data-role="button" data-icon="delete">My button</a>
-		<p><strong>Plus</strong> - data-icon="plus"</p>
-		<a href="index.html" data-role="button" data-icon="plus">My button</a>
-		<p><strong>Minus</strong> - data-icon="minus"</p>
-		<a href="index.html" data-role="button" data-icon="minus">My button</a>
+
+<code>
+&lt;a href=&quot;index.html&quot; data-role=&quot;button&quot; <strong>data-icon=&quot;delete&quot;</strong>&gt;Delete&lt;/a&gt;
+</code>
+
+<p>Creates this button with an icon:</p>
+<a href="index.html" data-role="button" data-icon="delete">Delete</a>
+
+		<h2>Icon positioning</h2>
+		<p>By default, icons in buttons are added to the left of the text, but the <code>data-iconpos</code> attribute specifies the icon position: <code>left</code> or <code>right</code> of the text.</p> 
+
+<code>
+&lt;a href=&quot;index.html&quot; data-role=&quot;button&quot; data-icon=&quot;delete&quot;<strong> data-iconpos=&quot;right&quot;</strong>&gt;Delete&lt;/a&gt;
+</code>
+
+<p>Creates this button with right-aligned icon:</p>
+<a href="index.html" data-role="button" data-icon="delete" data-iconpos="right">Delete</a>
+
+		<p>To create an icon-only button that has an icon but no text, set the <code>data-iconpos</code> attribute to <code>notext</code> and the button plugin will hide the text and add it as a <code>title</code> attribute on the link to provide context for screen readers and devices that support tooltips. In this example, we're adding a plus (+) icon and positioning it to the right of the text with our <code>data-</code> attributes on the link.</p> 
+
+<code>
+&lt;a href=&quot;index.html&quot; data-role=&quot;button&quot; data-icon=&quot;delete&quot;<strong> data-iconpos=&quot;notext&quot;</strong>&gt;Delete&lt;/a&gt;
+</code>
+
+<p>Creates this icon-only button:</p>
+<a href="index.html" data-role="button" data-icon="delete" data-iconpos="notext">Delete</a>
+
+
+		<p>To use custom icons, specify a <code>data-icon</code> value that has a unique name like <code>myapp-email</code> and the button plugin will generate a class by prefixing <code>ui-icon-</code> to the <code>data-icon</code> value and apply it to the button. You can then write a CSS rule that targets the <code>ui-icon-myapp-email</code> class to specify the icon background source. To maintain visual consistency, create a white icon 18x18 pixels saved as a PNG-8 with alpha transparency.</p>
+			
+		 	
 		
+	
 	</div><!-- /content -->
 </div><!-- /page -->
 
