@@ -201,4 +201,8 @@ a.ui-link-inherit { text-decoration: none !important; }
 .ui-icon-shadow { -moz-box-shadow: 0px 1px 0 rgba(255,255,255,.4); -webkit-box-shadow: 0px 1px 0 rgba(255,255,255,.4); box-shadow: 0px 1px 0 rgba(255,255,255,.4);  }
 
 /* set focus state last */
-.ui-focus { outline: none;  -moz-box-shadow: 0px 0px 12px #387bbe; -webkit-box-shadow: 0px 0px 12px #387bbe; box-shadow: 0px 0px 12px #387bbe; }
+.ui-focus { outline-width: 0;  -moz-box-shadow: 0px 0px 12px #387bbe; -webkit-box-shadow: 0px 0px 12px #387bbe; box-shadow: 0px 0px 12px #387bbe; }
+
+/* unset box shadow in browsers that don't do it right */
+.ui-mobile-nosupport-boxshadow * { -moz-box-shadow: none !important; -webkit-box-shadow: none !important; box-shadow: none !important; }
+.ui-mobile-nosupport-boxshadow .ui-focus { outline-width: 2px; }
