@@ -4,6 +4,15 @@
 	<title>jQuery UI Mobile Framework - Documentation</title>
 	<link rel="stylesheet"  href="themes/default" />
 	<script type="text/javascript" src="js/all"></script>
+	<script src="experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('#themeswitcher').click(function(){
+				$.themeswitcher();
+				return false;
+			});
+		});
+	</script>
 </head> 
 <body> 
 <div data-role="page" data-theme="b">
@@ -29,6 +38,7 @@
 	
 	<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b">
 		<li data-role="list-divider">Demos</li>
+		<li id="themeswitcher"><a href="#">Theme Switcher</a></li>
 		<li><a href="experiments/api-browser/index.html">jQuery API browser</a></li>
 		<li><a href="experiments/photos">Photo viewer</a></li>
 		<li><a href="experiments/converter">Converter</a></li>
