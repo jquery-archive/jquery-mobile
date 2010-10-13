@@ -92,7 +92,7 @@ $.fn.customSelect = function(options){
 			var menuHeight = list.outerHeight();
 			currScroll = [ $(window).scrollLeft(), $(window).scrollTop() ];
 			
-			if( menuHeight > window.innerHeight - 80 ){
+			if( menuHeight > window.innerHeight - 80 || !$.support.scrollTop ){
 				menuType = "page";		
 				menuPageContent.append( list );
 				$.changePage(thisPage, menuPage, "slide", false);
