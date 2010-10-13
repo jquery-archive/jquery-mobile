@@ -32,4 +32,4 @@ ol.ui-listview .ui-li-jsnumbering:before { content: "" !important; } /* to avoid
 .ui-li-link-alt .ui-btn-inner { padding: 0; position: static; }
 .ui-li-link-alt .ui-btn .ui-icon { right: 50%; margin-right: -9px;  }
 
-.ui-listview-filter { border-width: 0; overflow: hidden; }
+.ui-listview-filter { border-width: 0; overflow: hidden; margin: -15px -15px 15px -15px }
