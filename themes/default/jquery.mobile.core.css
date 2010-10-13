@@ -11,21 +11,10 @@
 
 /* responsive page widths */
 .ui-mobile body {  margin: 0; overflow-x: hidden; -webkit-user-select: none; -webkit-text-size-adjust: none; min-height: 100%; }
-/*tablets - more work needed here*/
-@media screen and (min-width: 480px){ 
-	.ui-mobile body { width: auto; } 
-}
-/*tablets - mobile landscape-ish */
-@media screen and (max-width: 480px){ 
-	.ui-mobile body { width: 480px; } 
-}
-/*tablets - mobile portrait-ish */
-@media screen and (max-width: 320px){ 
-	.ui-mobile body { width: 320px; } 
-}
-/*orientations from js are available - necessary? media q's work well enough? */
-.portrait body {  }
-.landscape body {  }
+
+/*orientations from js are available */
+.portrait {  }
+.landscape {  }
 
 /* "page" containers - full-screen views, one should always be in view post-pageload */
 .ui-page { top: 0; left: 0; width: 100%; min-height: 100%; position: absolute; display: none; border: 0; } 
