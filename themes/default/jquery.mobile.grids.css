@@ -1,0 +1,14 @@
+/*
+* jQuery Mobile Framework
+* Copyright (c) jQuery Project
+* Dual licensed under the MIT (MIT-LICENSE.txt) or GPL (GPL-LICENSE.txt) licenses.
+*/
+/* content configurations. */
+.ui-grid-a, .ui-grid-b, .ui-grid-c { overflow: hidden; }
+.ui-block-a, .ui-block-b, .ui-block-c,  .ui-block-d { margin: 0; padding: 0; border: 0; float: left; }
+/* grid a: 50/50 */
+.ui-grid-a .ui-block-a, .ui-grid-a .ui-block-b { width: 50%; }
+.ui-grid-a .ui-block-a { clear: left; }
+/* grid b: 33/33/33 */
+.ui-grid-b .ui-block-a, .ui-grid-b .ui-block-b, .ui-grid-b .ui-block-c { width: 33.333%; }
+.ui-grid-b .ui-block-a { clear: left; }

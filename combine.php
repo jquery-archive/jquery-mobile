@@ -27,8 +27,9 @@
 
 	$cache 	  = true;
 	$pullfromcache = false;
+	$theme = $_GET['theme'];
 	$cachedir = dirname(__FILE__) . '/cache';
-	$cssdir   = dirname(__FILE__) . '/css';
+	$cssdir   = dirname(__FILE__) . '/themes/' . $theme;
 	$jsdir    = dirname(__FILE__) . '/js';
 
 	// Determine the directory and type we should use
@@ -52,7 +53,16 @@
 	// Determine last modification date of the files
 	$lastmodified = 0;
 	while (list(,$element) = each($elements)) {
-		$path = realpath($base . '/' . $element);
+		$thisbase = $base;
+		$thiselement = $element;
+		if( strpos($thiselement, "../") === 0 ){
+			$thiselement = str_replace("../","",$thiselement);
+			$thisbase = explode("/", $thisbase);
+			array_pop($thisbase);
+			$thisbase = implode("/", $thisbase);
+		}
+		$path = realpath($thisbase . '/' . $thiselement);
+		//echo $path;
 	
 		if (($type == 'javascript' && substr($path, -3) != '.js') || 
 			($type == 'css' && substr($path, -4) != '.css')) {
@@ -60,7 +70,7 @@
 			exit;	
 		}
 	
-		if (substr($path, 0, strlen($base)) != $base || !file_exists($path)) {
+		if (substr($path, 0, strlen($thisbase)) != $thisbase || !file_exists($path)) {
 			header ("HTTP/1.0 404 Not Found");
 			exit;
 		}
