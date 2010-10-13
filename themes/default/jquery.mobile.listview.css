@@ -33,3 +33,4 @@ ol.ui-listview .ui-li-jsnumbering:before { content: "" !important; } /* to avoid
 .ui-li-link-alt .ui-btn .ui-icon { right: 50%; margin-right: -9px;  }
 
 .ui-listview-filter { border-width: 0; overflow: hidden; margin: -15px -15px 15px -15px }
+.ui-listview-filter .ui-input-search { margin: 5px; width: auto; display: block; }
