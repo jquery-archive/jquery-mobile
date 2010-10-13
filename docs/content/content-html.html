@@ -20,13 +20,19 @@
 
 		<style type="text/css">
 			table { width:100%; }
-			table caption { text-align:left; font-weight:bold; }
-			table thead th { border-bottom:1px solid #999; border-top:1px solid #999; }
-			table th, td {  border-bottom:1px solid #ccc; padding:6px;} 
+			table caption { text-align:left;  }
+			table thead th { text-align:left; border-bottom-width:1px; border-top-width:1px; }
+			table th, td { text-align:left; padding:6px;} 
 		</style>
 		
 		
-		<p>Our goal is to leave the main content area pretty much unstyled except for adding in a bit of padding and applying the theme font family and color. Here is what standard HTML markup looks like by default:</p>
+	
+		
+		<p>Our goal is to leave the main content area pretty much unstyled except for adding in a bit of padding and applying the theme font family and color. </p>
+		<p>We don't use CSS resets or a lot of custom styles because standard HTML markup is provides a lot of visual texture out of the box. By taking a light hand with content styling, it gives designers and developers a clean slate to work with instead of fighting against a lot of complex styles.</p>
+		
+		<h2>Default HTML markup styling for content areas</h2>
+		<hr>
 		
 		<h1>H1 Heading</h1>
 		<h2>H2 Heading</h2>
@@ -40,6 +46,8 @@
 		<blockquote>How about some blockquote action with a <cite>cite</cite></blockquote>
 		
 		<p>This is another paragraph of text so you can see how HTML markup works in content. This is another paragraph of text so you can see how HTML markup works in content. This is another paragraph of text so you can see how HTML markup works in content.</p>
+		
+		<p>We add a few styles to <code>tables</code> and <code>fieldsets</code> to make them more legible but these are easily overridden with customs styles.</p>
 		
 		<ul>
 			<li>Unordered list item 1</li>
@@ -63,7 +71,7 @@
 
 
 		<table summary="This table lists all the JetBlue flights.">
-		  <caption>Flight Schedule</caption>
+		  <caption>Travel Itinerary</caption>
 		  <thead>
 		    <tr>
 		       <th scope="col">Flight:</th>  
