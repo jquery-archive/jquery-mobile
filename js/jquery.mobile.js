@@ -156,6 +156,7 @@
 	// transition between pages - based on transitions from jQtouch
 	function changePage( from, to, transition, back ) {
 		jQuery( document.activeElement ).blur();
+		window.scrollTo( 0, 0 );
 		
 		//trigger before show/hide events
 		from.trigger("beforepagehide", {nextPage: to});
