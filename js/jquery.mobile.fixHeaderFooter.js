@@ -6,6 +6,7 @@
 */
 (function($){
 $.fn.fixHeaderFooter = function(options){
+	if( !$.support.scrollTop ){ return $(this); }
 	return $(this).each(function(){
 		if( $(this).data('fullscreen') ){ $(this).addClass('ui-page-fullscreen'); }
 		$(this).find('.ui-header:not([data-position="inline"])').addClass('ui-header-fixed ui-fixed-inline fade'); //should be slidedown
@@ -15,6 +16,7 @@ $.fn.fixHeaderFooter = function(options){
 
 //single controller for all showing,hiding,toggling		
 $.fixedToolbars = (function(){
+	if( !$.support.scrollTop ){ return; }
 	var currentstate = 'inline',
 		delayTimer,
 		ignoreTargets = 'a,input,textarea,select,button,label,.ui-header-fixed,.ui-footer-fixed',
