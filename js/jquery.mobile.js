@@ -192,12 +192,19 @@
 	};
 	
 	jQuery(function() {
+		var preventLoad = false;
+
 		$body = jQuery( "body" );
 		pageLoading();
 		
 		// needs to be bound at domready (for IE6)
 		// find or load content, make it active
 		$window.bind( "hashchange", function(e, extras) {
+			if ( preventLoad ) {
+				preventLoad = false;
+				return;
+			}
+
 			var url = location.hash.replace( /^#/, "" ),
 				stackLength = urlStack.length,
 				// pageTransition only exists if the user clicked a link
@@ -240,6 +247,8 @@
 			}
 			
 			if ( url ) {
+				var active = jQuery( ".ui-page-active" );
+
 				// see if content is present already
 				var localDiv = jQuery( "[id='" + url + "']" );
 				if ( localDiv.length ) {
@@ -248,7 +257,7 @@
 					}
 					setBaseURL();
 					localDiv.page();
-					changePage( jQuery( ".ui-page-active" ), localDiv, transition, back );
+					changePage( active, localDiv, transition, back );
 					
 				} else { //ajax it in
 					pageLoading();
@@ -272,19 +281,20 @@
 
 							setPageRole( page );
 							page.page();
-							changePage( jQuery( ".ui-page-active" ), page, transition, back );
+							changePage( active, page, transition, back );
 						},
 						error: function() {
 							pageLoading( true );
 
-							jQuery("<div class='ui-loader ui-body-e ui-corner-all'><h1>Error Loading Page</h1></div>")
-								.show()
+							jQuery("<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h1>Error Loading Page</h1></div>")
+								.css({ "display": "block", "opacity": 0.96 })
 								.appendTo("body")
-								.delay( 600 )
+								.delay( 800 )
 								.fadeOut( 400, function(){
 									$(this).remove();
 								});
 
+							preventLoad = true;
 							history.back();
 						}
 					});
