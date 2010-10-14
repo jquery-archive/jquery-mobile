@@ -168,6 +168,18 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				.addClass( "ui-li-thumb" );
 		
 		if ( o.inset ) {
+			
+			//remove corners before or after dividers
+			var sides = ['top','bottom'];
+			$.each( sides, function( i ){
+				var side = sides[ i ];
+				$list.find( ".ui-corner-" + side ).each(function(){
+					if( $(this).parents('li')[ i == 0 ? 'prev' : 'next' ]( ".ui-li-divider" ).length ){
+						$(this).removeClass( "ui-corner-" + side );
+					}
+				});
+			});			
+		
 			this.element
 				.find( "img" )
 					.filter( "li:first-child img" )
