@@ -1,0 +1,191 @@
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<title>jQuery Mobile Docs - Forms</title> 
+	<link rel="stylesheet"  href="../../themes/default" /> 
+	<script type="text/javascript" src="../../js/all"></script>
+	<script type="text/javascript" src="../docs/docs.js"></script>
+</head> 
+<body> 
+
+<div data-role="page">
+
+	<div data-role="header">
+		<h1>Text inputs</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		
+		<form action="#" method="get">
+
+
+			<p>Text inputs and textareas are coded with standard HTML elements, then enhanced by jQuery Mobile to make them more attractive and useable on a mobile.</p>
+			
+			<h2>General conventions</h2>
+			<p>All forms should be wrapped in a <code>form</code> tag that has an <code>action</code> and <code>method</code> that will handle the form data processing on the server.</p>
+			
+<code>
+&lt;form action=&quot;form.php&quot; method=&quot;post&quot;&gt;
+...
+&lt;/form&gt;
+</code>
+
+			<p>To group the label and form element together for styling, we recommend wrapping a <code>div</code> with the <code>data-role="fieldcontain"</code> attribute. The framework will add a thin vertical line above this container to separate it visually from the next field.</p>
+
+<pre><code>				
+&lt;div data-role=&quot;fieldcontain&quot;&gt;
+	...label/input code goes here...
+&lt;/div&gt;
+</pre></code>
+
+
+			<h2>Text inputs</h2>
+			<p>To collect standard alphanmeric text, use an <code>input</code> with a <code>type="text"</code> attribute. It's important to  set the <code>for</code> attribute of the <code>label</code> to match the ID of the <code>input</code> so they are semantically associated and wrap them in a <code>div</code> with the <code>data-role="fieldcontain"</code> attribute to group them.</p>
+
+<pre><code>	
+&lt;div data-role=&quot;fieldcontain&quot;&gt;
+    &lt;label for=&quot;name&quot;&gt;Text Input:&lt;/label&gt;
+    &lt;input type=&quot;text&quot; name=&quot;name&quot; id=&quot;name&quot; value=&quot;&quot;  /&gt;
+&lt;/div&gt;	
+</code></pre>		
+			 
+			<p>The text input is displayed like this:</p>
+	    	<div data-role="fieldcontain">
+	         <label for="name">Text Input:</label>
+	         <input type="text" name="name" id="name" value=""  />
+			</div>
+
+			
+			
+			<h2>Password inputs</h2>
+			<p>For password fields, use an <code>input</code> with a <code>type="password"</code> attribute. Set the <code>for</code> attribute of the <code>label</code> to match the ID of the <code>input</code> so they are semantically associated and wrap them in a <code>div</code> with the <code>data-role="fieldcontain"</code> attribute to group them.</p>
+
+<pre><code>	
+&lt;div data-role=&quot;fieldcontain&quot;&gt;
+    &lt;label for=&quot;password&quot;&gt;Password Input:&lt;/label&gt;
+    &lt;input type=&quot;password&quot; name=&quot;password&quot; id=&quot;password&quot; value=&quot;&quot; /&gt;
+&lt;/div&gt;	
+</code></pre>	
+			 
+			<p>The password input is displayed like this:</p>
+			<div data-role="fieldcontain">
+	         <label for="password">Password Input:</label>
+	         <input type="password" name="password" id="password" value="" />
+			</div>
+
+			
+			<h2>Search inputs</h2>
+			<p>Search inputs are a new HTML type that is styled with pill-shaped corners and adds a "x" icon to clear the field once you start typing. Start with an <code>input</code> with a <code>type="search"</code> attribute in your markup. </p>
+			<p>Set the <code>for</code> attribute of the <code>label</code> to match the ID of the <code>input</code> so they are semantically associated and wrap them in a <code>div</code> with the <code>data-role="fieldcontain"</code> attribute to group them.</p>
+
+<pre><code>	
+&lt;div data-role=&quot;fieldcontain&quot;&gt;
+    &lt;label for=&quot;search&quot;&gt;Search Input:&lt;/label&gt;
+    &lt;input type=&quot;search&quot; name=&quot;password&quot; id=&quot;search&quot; value=&quot;&quot; /&gt;
+&lt;/div&gt;
+</code></pre>	
+			 
+			<p>The search input is displayed like this:</p>
+			<div data-role="fieldcontain">
+	         <label for="search">Search Input:</label>
+	         <input type="search" name="password" id="search" value=""  />
+			</div>
+
+
+			<h2>Textareas</h2>
+			<p>For multi-line text inputs, use a <code>textarea</code> element. The framework will auto-grow the height of the textarea to avoid the need for an internal scrollbar which is very hard to use on a mobile device. </p>
+			<p>Set the <code>for</code> attribute of the <code>label</code> to match the ID of the <code>input</code> so they are semantically associated and wrap them in a <code>div</code> with the <code>data-role="fieldcontain"</code> attribute to group them.</p>
+
+<pre><code>	
+&lt;div data-role=&quot;fieldcontain&quot;&gt;
+	&lt;label for=&quot;textarea&quot;&gt;Textarea:&lt;/label&gt;
+	&lt;textarea cols=&quot;40&quot; rows=&quot;8&quot; name=&quot;textarea&quot; id=&quot;textarea&quot;&gt;&lt;/textarea&gt;
+&lt;/div&gt;
+</code></pre>	
+			 
+			<p>The textarea is displayed like this and will grow as you type:</p>
+			<div data-role="fieldcontain">
+			<label for="textarea">Textarea:</label>
+			<textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
+			</div>
+		
+			<h2>Sliders</h2>
+			<p>To add a slider widget to your page, start with an <code>input</code> with a new HTML5 <code>type="range"</code> attribute. Specify the <code>value</code> (current value), <code>min</code> and <code>max</code> attribute values to configure the slider. The framework will parse these attributes to configure the slider. </p>
+			<p>As you drag the slider, the input will update and vice-versa so they are always in sync so you can submit the slider value with form in a simple way. Set the <code>for</code> attribute of the <code>label</code> to match the ID of the <code>input</code> so they are semantically associated and wrap them in a <code>div</code> with the <code>data-role="fieldcontain"</code> attribute to group them.</p>
+
+<pre><code>	
+&lt;div data-role=&quot;fieldcontain&quot;&gt;
+	&lt;label for=&quot;slider&quot;&gt;Input slider:&lt;/label&gt;
+ 	&lt;input type=&quot;range&quot; name=&quot;slider&quot; id=&quot;slider&quot; value=&quot;0&quot; min=&quot;0&quot; max=&quot;100&quot;  /&gt;
+&lt;/div&gt;
+</code></pre>	
+			 
+			<p>The slider and input is displayed like this:</p>
+			<div data-role="fieldcontain">
+				<label for="slider">Input slider:</label>
+			 	<input type="range" name="slider" id="slider" value="0" min="0" max="100"  />
+			</div>
+
+				<h2>Flip toggle switches</h2>
+				<p>A binary "flip" switch is a common UI element on mobile devices that is used for any binary on/off or true/false type of data input. You can either drag the flip handle like a slider or tap on each half of the switch.</p>
+				<p>To create a flip toggle,  To add a slider widget to your page, start with an <code>select</code> with two options. The first option will be styled as the "on" state switch and the second will be styled as the "off" state so write your options in the correct order. Set the <code>for</code> attribute of the <code>label</code> to match the ID of the <code>input</code> so they are semantically associated and wrap them in a <code>div</code> with the <code>data-role="fieldcontain"</code> attribute to group them.</p>
+
+<pre><code>	
+&lt;div data-role=&quot;fieldcontain&quot;&gt;
+	&lt;label for=&quot;slider2&quot;&gt;Select slider:&lt;/label&gt;
+	&lt;select name=&quot;slider2&quot; id=&quot;slider2&quot; data-role=&quot;slider&quot;&gt;
+		&lt;option value=&quot;off&quot;&gt;Off&lt;/option&gt;
+		&lt;option value=&quot;on&quot;&gt;On&lt;/option&gt;
+	&lt;/select&gt; 
+&lt;/div&gt;
+</code></pre>	
+		<p>The flip toggle switch is displayed like this:</p>
+		<div data-role="fieldcontain">
+			<label for="slider2">Flip switch:</label>
+			<select name="slider2" id="slider2" data-role="slider">
+				<option value="off">Off</option>
+				<option value="on">On</option>
+			</select> 
+		</div>
+
+
+		<h2>Radiobuttons</h2>
+		<p>Radiobuttons are used to provide a list of options where only a single item can be selected. Traditional desktop radiobuttons are not optimized for touch input so in jQuery Mobile, we style the <code>label</code> for the radiobuttons so they are larger and look clickable. A custom set of icons are added to the label to provide visual feedback.</p>
+		<p>To create a flip toggle,  To add a slider widget to your page, start with an <code>select</code> with two options. The first option will be styled as the "on" state switch and the second will be styled as the "off" state so write your options in the correct order. Set the <code>for</code> attribute of the <code>label</code> to match the ID of the <code>input</code> so they are semantically associated and wrap them in a <code>div</code> with the <code>data-role="fieldcontain"</code> attribute to group them.</p>
+
+<pre><code>	
+&lt;div data-role=&quot;fieldcontain&quot;&gt;
+	&lt;label for=&quot;slider2&quot;&gt;Select slider:&lt;/label&gt;
+	&lt;select name=&quot;slider2&quot; id=&quot;slider2&quot; data-role=&quot;slider&quot;&gt;
+		&lt;option value=&quot;off&quot;&gt;Off&lt;/option&gt;
+			&lt;option value=&quot;on&quot;&gt;On&lt;/option&gt;
+		&lt;/select&gt; 
+&lt;/div&gt;
+</code></pre>
+
+		<p>A radiobutton list is displayed like this:</p>
+		<fieldset data-role="controlgroup" data-role="fieldcontain">
+	    	<legend>Choose one:</legend>
+	         	<input type="radio" name="radio-choice-1" id="radio-choice-1" value="choice-1" checked="checked" />
+	         	<label for="radio-choice-1">Choice 1</label>
+
+	         	<input type="radio" name="radio-choice-1" id="radio-choice-2" value="choice-2"  />
+	         	<label for="radio-choice-2">Choice 2</label>
+
+	         	<input type="radio" name="radio-choice-1" id="radio-choice-3" value="choice-3"  />
+	         	<label for="radio-choice-3">Choice 3</label>
+
+	         	<input type="radio" name="radio-choice-1" id="radio-choice-4" value="choice-4"  />
+	         	<label for="radio-choice-4">Choice 4</label>
+	    </fieldset>
+
+
+
+
+	</form>
+	
+	</div><!-- /content -->
+</div><!-- /page -->
+
+</body>
+</html>
