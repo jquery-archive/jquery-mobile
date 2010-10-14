@@ -10,7 +10,7 @@
 <div data-role="page">
 
 	<div data-role="header">
-		<h1>Links &amp; transitions</h1>
+		<h1>Linking pages</h1>
 	</div><!-- /header -->
 
 	<div data-role="content">
@@ -33,6 +33,7 @@
 			
 			<p>Here is an example of a 2 "page" site built with two jQuery Mobile divs navigated by linking to an ID placed on each page wrapper. Note that the IDs on the page wrappers are only needed to support the internal page linking and are optional if each page is a separate HTML document.</p> 
 
+<pre>
 <div class="highlight"> 
 <code><span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"page"</span> <span class="na">id=</span><span class="s">"foo"</span><span class="nt">&gt;</span> 
 	<span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"content"</span><span class="nt">&gt;</span>
@@ -51,7 +52,7 @@
 <span class="nt">&lt;/div&gt;&lt;!-- /bar page --&gt;</span> 
 </code> 
 </div> 
-		
+</pre>	
 
 		<p>You can seamlessly navigate between local, internal "pages" and external pages in jQuery UI. Both will look the same to the end user except that external pages will display the AJAX spinner while loading. In either situation, jQuery Mobile updates the page's URL hash to enable Back button support, deep-linking and bookmarking. </p>
 		
@@ -59,25 +60,7 @@
 		
 		<p>Learn more about the technical details of the <a href="docs-navmodel.html">Ajax, hashes and history</a> in jQuery mobile.</p>
 		
-		<h2>Page transitions</h2> 
-		
-		<p>The jQuery Mobile framework includes a set of CSS-based transitions that can be applied to any object or page change event. By default, when navigating to a new page, the framework applies the right to left slide transition effect. When via the Back button, the slide transition direction is reversed.</p>
 
-		<p>To set a custom transition effect, add the <code>data-transition</code> attribute to the link. Possible values include: </p>
-
-<code><code>
-&lt;a href=&quot;index.html&quot; data-transition=&quot;pop&quot;&gt;I'll pop&lt;/a&gt;
-</code></code>
-		
-		<p>
-		<a href="../_transitions-destination.html" data-role="button" data-inline="true" data-transition="slide">slide</a>
-		<a href="../_transitions-destination.html" data-role="button" data-inline="true" data-transition="slideup">slideup</a>
-		<a href="../_transitions-destination.html" data-role="button" data-inline="true" data-transition="slidedown">slidedown</a>
-		<a href="../_transitions-destination.html" data-role="button" data-inline="true" data-transition="pop">pop</a>
-		<a href="../_transitions-destination.html" data-role="button" data-inline="true" data-transition="flip">flip</a>
-		<a href="../_transitions-destination.html" data-role="button" data-inline="true" data-transition="fade">fade</a>
-		</p>
-			
 			
 	</div><!-- /content -->
 </div><!-- /page -->

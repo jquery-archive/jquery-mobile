@@ -1,0 +1,42 @@
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<title>jQuery Mobile Docs - Pages</title> 
+	<link rel="stylesheet"  href="../../themes/default" /> 
+	<script type="text/javascript" src="../../js/all"></script>
+</head> 
+<body> 
+
+<div data-role="page">
+
+	<div data-role="header">
+		<h1>Transitions</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+			
+		<h2>Page transitions</h2> 
+
+		<p>The jQuery Mobile framework includes a set of CSS-based transitions that can be applied to any object or page change event. By default, when navigating to a new page, the framework applies the right to left slide transition effect. When via the Back button, the slide transition direction is reversed.</p>
+
+		<p>To set a custom transition effect, add the <code>data-transition</code> attribute to the link. Possible values include: </p>
+
+<code><code>
+&lt;a href=&quot;index.html&quot; data-transition=&quot;pop&quot;&gt;I'll pop&lt;/a&gt;
+</code></code>
+
+		<p>
+		<a href="index.html" data-role="button" data-transition="slide">slide</a>
+		<a href="index.html" data-role="button" data-transition="slideup">slideup</a>
+		<a href="index.html" data-role="button" data-transition="slidedown">slidedown</a>
+		<a href="index.html" data-role="button" data-transition="pop">pop</a>
+		<a href="index.html" data-role="button" data-transition="flip">flip</a>
+		<a href="index.html" data-role="button" data-transition="fade">fade</a>
+		</p>
+
+			
+	</div><!-- /content -->
+</div><!-- /page -->
+
+</body>
+</html>
