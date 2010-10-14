@@ -286,10 +286,10 @@
 						error: function() {
 							pageLoading( true );
 
-							jQuery("<div class='ui-loader ui-body-e ui-corner-all'><h1>Error Loading Page</h1></div>")
-								.css({ "display": "block", "opacity": 0.9 })
+							jQuery("<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h1>Error Loading Page</h1></div>")
+								.css({ "display": "block", "opacity": 0.96 })
 								.appendTo("body")
-								.delay( 600 )
+								.delay( 800 )
 								.fadeOut( 400, function(){
 									$(this).remove();
 								});
