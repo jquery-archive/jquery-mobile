@@ -15,19 +15,38 @@
 
 	<div data-role="content">
 		
-			<p>All pages in jQuery Mobile are built with clean, semantic HTML to ensure compatibility with pretty much any web-enabled device. In devices that interpret CSS and JavaScript, jQuery Mobile applies progressive enhancement techniques to unobtrusively transform the page into a rich, interactive experience that leverages the power of jQuery and CSS3. The jQuery Mobile framework is designed to be easy enough to allow designers to build complex mobile-optimized web sites and apps with minimal JavaScript knowledge, yet powerful and extensible enough for experienced developers to build highly customized experiences.Key features include:</p>
+			<p>All pages in jQuery Mobile are built with clean, semantic HTML to ensure compatibility with pretty much any web-enabled device. In devices that interpret CSS and JavaScript, jQuery Mobile applies progressive enhancement techniques to unobtrusively transform the page into a rich, interactive experience that leverages the power of jQuery and CSS.</p>
+			
+			<h2>Key features of jQuery Mobile:</h2>
 			<ul>
-				<li>Familiar jQuery syntax and patterns and a simple, markup-driven approach for minimal learning curve</li>
-				<li>Very lightweight size (9k compressed for all mobile functionality) minimal image dependencies for speed.</li>
-				<li>Progressive enhancement approach brings core content and functionality to all mobile, tablet and deskstop platforms and a rich, installed application-like experience on newer versions of all major mobile device platforms (iOS, Android, Blackberry, Palm WebOS, Nokia/Symbian, Windows Mobile, bada, MeeGo)</li>
-				<li>Accessibility features such as WAI-ARIA are also included to ensure that the pages work for screen readers (e.g. VoiceOver in iOS) and other assistive technologies.</li>
-				<li>Events are normalized in jQuery Mobile to streamline the process of supporting touch, mouse, and cursor focus-based user input methods with a simple API. </li>
-				<li>Powerful theming framework and ThemeRoller application make highly-branded experiences feast and easy to build.</li>
-			</ul>  </p> 
+				<li><strong>Built on jQuery core</strong> for familiar and consistent jQuery syntax and APIs for minimal learning curve</li>
+				<li><strong>Compatible with all major mobile  platforms</strong> - iOS, Android, Blackberry, Palm WebOS, Nokia/Symbian, Windows Mobile, bada, MeeGo with baseline support for all devices that understand HTML</li>
+				<li><strong>Lightweight size</strong> (9k compressed for all mobile functionality) and minimal image dependencies for speed.</li>
+				<li><strong>Markup-driven configuration</strong> of pages and behavior for fast development and minimal scripting 
+				<li><strong>Progressive enhancement</strong> approach brings core content and functionality to all mobile, tablet and deskstop platforms and a rich, installed application-like experience on newer mobile platforms</li>
+				<li><strong>Automatic initialization</strong> by using HTML5 <code>data-role</code> attributes in the HTML markup to act as the trigger for the <code>mobilize()</code> function to automatically initialize all jQuery Mobile widgets found on a page.</li>
+				<li><strong>Accessibility</strong> features such as WAI-ARIA are also included to ensure that the pages work for screen readers (e.g. VoiceOver in iOS) and other assistive technologies.</li>
+				<li><strong>Normalized events</strong> streamline the process of supporting touch, mouse, and cursor focus-based user input methods with a simple API. </li>
+				<li><strong>Powerful theming framework</strong> and ThemeRoller application make highly-branded experiences easy to build.</li>
+
+			</ul>  
 			
-			<h2>Markup-driven configuration: Mobilize()</h2>
-			
-			<p>The jQuery Mobile library uses a <code>mobilize()</code> function that automatically initializes plugins for all the jQuery Mobile widgets found on a page. HTML5 <code>data-role</code> attributes in HTML markup act as the trigger for the mobilize function. For example, a <code>data-role="listview"</code> attribute on an simple unordered list tells the <code>mobilize()</code> function to apply all the CSS classes and JavaScript behaviors required to transform a list of links into a finger-friendly mobile list view widget. Developers can choose to omit the <code>mobilize()</code> function and write their own tools to trigger the jQuery Mobile plugins, but it is a convenient way to unobtrusively apply the plugins in consistent way.</p> 
+				<h2>Supported platforms</h2>
+				<p>For the alpha release, the following devices have been tested and should have a fairly solid jQuery Mobile experience. That being said, there are still a fair amount of bugs and performance improvements to be tackled before the 1.0 release in January. </p>
+				<ul>
+					<li>Apple iOS: iPhone, iPod Touch, iPad (all versions)</li>
+					<li>Android: all devices (all versions)</li>
+					<li>Blackberry Torch (version 6)</li>
+					<li>Palm WebOS Pre, Pixi</li>
+					<li>Nokia N900</li>
+				</ul>
+				
+				<p>Older versions of Blackberry, Nokia/Symbian, and Windows Mobile may work but we're still seeing JavaScript errors and rendering bugs that need to be tracked down. We don't yet have phones to test  Windows Mobile 7, bada, or MeeGo but these will be added as soon as we can get devices.</p>
+				
+				<p>Since jQuery Mobile is built on the jQuery core, all pages should also work great on most recent versions of desktop browsers too - Firefox, Chrome, Safari, Internet Explorer, Opera, etc.</p>
+				
+				
+
 						
 
 	</div><!-- /content -->
