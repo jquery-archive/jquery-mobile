@@ -252,36 +252,44 @@
 					
 				} else { //ajax it in
 					pageLoading();
-					if(url.match( '&' + jQuery.mobile.subPageUrlKey )){
+
+					if ( url.match( '&' + jQuery.mobile.subPageUrlKey ) ) {
 						fileUrl = url.split( '&' + jQuery.mobile.subPageUrlKey )[0];
 					}
-					var newPage = jQuery( "<div>" )
-						.appendTo( $body )
-						.load( fileUrl + ' [data-role="page"]', function() {
-							// TODO: test this (avoids querying the dom for new element):
-//							var newPage = jQuery( this ).find( ".ui-page" ).eq( 0 )
-//								.attr( "id", url );
-//							jQuery( this ).replaceWith( newPage );
-//							setPageRole( newPage );
-//							newPage.page();
-//							changePage( jQuery( ".ui-page-active" ), newPage, transition, back );
 
-							//find new page div
-							var newPage = jQuery( this ).find( '[data-role="page"]' ).eq( 0 );
-							if( newPage.attr('id') ){
-								newPage = wrapNewPage( newPage );
-								
+					$.ajax({
+						url: fileUrl,
+						success: function( html ) {
+							var page = jQuery("<div>" + html + "</div>").find('[data-role="page"]');
+
+							if ( page.attr('id') ) {
+								page = wrapNewPage( page );
 							}
 
-							jQuery( this ).replaceWith( newPage.attr( "id", fileUrl ) );
-							var newPage = jQuery( "[id='" + fileUrl + "']" );
-							setPageRole( newPage );
-							newPage.page();
-							newPage = jQuery( "[id='" + url + "']" );
-							changePage( jQuery( ".ui-page-active" ), newPage, transition, back );
-						});
+							page
+								.attr( "id", fileUrl )
+								.appendTo( "body" );
+
+							setPageRole( page );
+							page.page();
+							changePage( jQuery( ".ui-page-active" ), page, transition, back );
+						},
+						error: function() {
+							pageLoading( true );
+
+							jQuery("<div class='ui-loader ui-body-e ui-corner-all'><h1>Error Loading Page</h1></div>")
+								.show()
+								.appendTo("body")
+								.delay( 600 )
+								.fadeOut( 400, function(){
+									$(this).remove();
+								});
+
+							history.back();
+						}
+					});
 						
-						setBaseURL();
+					setBaseURL();
 				}
 			} else {
 				// either we've backed up to the root page url
