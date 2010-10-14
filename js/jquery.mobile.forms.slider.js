@@ -8,9 +8,13 @@
 $.fn.slider = function(options){
 	return this.each(function(){	
 		var control = $(this),
+			themedParent = control.closest('[class*=ui-bar-],[class*=ui-body-]'),
+			
 			o = $.extend({
-				theme: control.data("theme") || 'c'
+				trackTheme: control.data("tracktheme") || (themedParent.length ? themedParent.attr('class').match(/ui-(bar|body)-([a-z])/)[2] : 'd'),
+				theme: control.data("theme") || 'b'
 			},options),
+			
 			cType = control[0].nodeName.toLowerCase(),
 			selectClass = (cType == 'select') ? 'ui-slider-switch' : '',
 			controlID = control.attr('id'),
@@ -21,7 +25,7 @@ $.fn.slider = function(options){
 			max = (cType == 'input') ? parseFloat(control.attr('max')) : control.find('option').length-1,
 			percent = val / (max - min) * 100,
 			snappedPercent = percent,
-			slider = $('<div class="ui-slider '+ selectClass +' ui-bar-'+o.theme+' ui-btn-corner-all" role="application"></div>'),
+			slider = $('<div class="ui-slider '+ selectClass +' ui-btn-down-'+o.trackTheme+' ui-btn-corner-all" role="application"></div>'),
 			handle = $('<a href="#" class="ui-slider-handle"></a>')
 				.appendTo(slider)
 				.buttonMarkup({corners: true, theme: o.theme, shadow: true})
@@ -43,9 +47,9 @@ $.fn.slider = function(options){
 			control.find('option').each(function(i){
 				var side = (i==0) ?'b':'a',
 					corners = (i==0) ? 'right' :'left',
-					theme = (i==0) ? o.theme :'b';
-				$('<div class="ui-slider-labelbg ui-slider-labelbg-'+ side +' ui-btn-down-'+ theme +' ui-btn-corner-'+ corners+'"></div>').prependTo(slider);	
-				$('<span class="ui-slider-label ui-slider-label-'+ side +' ui-btn-down-'+ theme +' ui-btn-corner-'+ corners+'" role="img">'+$(this).text()+'</span>').prependTo(handle);
+					theme = (i==0) ? ' ui-btn-down-' + o.trackTheme :' ui-btn-active';
+				$('<div class="ui-slider-labelbg ui-slider-labelbg-'+ side + theme +' ui-btn-corner-'+ corners+'"></div>').prependTo(slider);	
+				$('<span class="ui-slider-label ui-slider-label-'+ side + theme +' ui-btn-corner-'+ corners+'" role="img">'+$(this).text()+'</span>').prependTo(handle);
 			});
 			
 		}	
