@@ -154,7 +154,7 @@ $.event.special.swipe = {
 
 $.event.special.orientationchange = {
 	orientation: function( elem ) {
-		return elem.width() / elem.height() < 1.1 ? "portrait" : "landscape";
+		return document.body && elem.width() / elem.height() < 1.1 ? "portrait" : "landscape";
 	},
 	
 	setup: function() {
