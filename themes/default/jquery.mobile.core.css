@@ -10,7 +10,7 @@
 .ui-mobile a img, .ui-mobile fieldset { border: 0; }
 
 /* responsive page widths */
-.ui-mobile body {  margin: 0; overflow-x: hidden; -webkit-backface-visibility:hidden; -webkit-user-select: none; -webkit-text-size-adjust: none; min-height: 100%; }
+.ui-mobile body {  margin: 0; overflow-x: hidden; -webkit-backface-visibility:hidden; -webkit-text-size-adjust: none; min-height: 100%; }
 
 /*orientations from js are available */
 .portrait {  }
