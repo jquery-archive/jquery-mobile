@@ -1,7 +1,7 @@
 //quick & dirty theme switcher, written to potentially work as a bookmarklet
 (function($){
 	$.themeswitcher = function(){
-		var themesDir = 'themes/',
+		var themesDir = 'http://jquerymobile.com/test/themes/',
 			themes = ['default','valencia'],
 			currentPage = $('.ui-page-active'),
 			menuPage = $( '<div data-role=\'dialog\' data-theme=\'a\'>' +

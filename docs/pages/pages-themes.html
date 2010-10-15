@@ -22,10 +22,35 @@
 			
 			<p>The <code>data-theme</code> attribute can be applied to the header and footer containers to apply any of the lettered theme color swatches. While the <code>data-theme</code> attribute could be added to the content container, we recommend adding it instead to <code>div</code> or container that has been assigned the <code>data-role="page"</code> attribute to ensure that the background color is applied to the full page.</p>
 			
-			<p>Below are examples of each of our default Theme's five swatches applied consistently across all page elements. Typically, you would mix and match swatches on various parts of the page to create visual texture &mdash; and the default jQuery Mobile Theme does mix and match &mdash; but this shows how each single swatch applies styles to various page elements:</p>
+			<p>The default Theme mixes styles from multiple swatches to create visual texture and present the various elements in optimal contrast to one another:</p>
 			
+						<div class="ui-bar ui-bar-a">
+				<a href="#" data-icon="arrow-l">Back</a>
+				<h1>Default Theme Bar</h1>
+			</div>
+			<div class="ui-body ui-body-c">
+				<h3>Default Theme Content Header</h3>
+				<p>This is the default content color swatch and a preview of a <a href="#" class="ui-link">link</a>.</p>
+					<label for="slider1">Input slider:</label>
+				 	<input type="range" name="slider1" id="slider1" value="50" min="0" max="100" data-theme="a" />
+				     <fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
+				     	<legend>Cache settings:</legend>
+				         	<input type="radio" name="radio-choice-a1" id="radio-choice-a1" value="on" checked="checked" />
+				         	<label for="radio-choice-a1">On</label>
+				         	<input type="radio" name="radio-choice-a1" id="radio-choice-b1" value="off"  />
+				         	<label for="radio-choice-b1">Off</label>
+				    </fieldset>
+				<a href="#" data-role="button" data-inline="true">Button</a>
+			</div>
+			<div class="ui-bar ui-bar-a">
+				<div data-role="controlgroup" data-type="horizontal" >
+					<a href="#" data-inline="true">Button</a><a href="#" data-inline="true">Button</a><a href="#" data-inline="true">Button</a>
+				</div><!-- /controlgroup -->
+			</div>
 
 			
+			<p>And each of the five "swatches" applies its style consistently across all page elements, as shown below:</p>
+						
 			<h2>Swatch A</h2>
 			<div class="ui-bar ui-bar-a">
 				<a href="#" data-icon="arrow-l">Back</a>
