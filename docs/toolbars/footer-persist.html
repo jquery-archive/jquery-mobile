@@ -10,13 +10,16 @@
 <div data-role="page">
 	
 	<div data-role="header" data-position="fixed">
-		<h1>Fixed Header</h1>
+		<h1>Fixed Footer Demo</h1>
 		<a href="../forms/forms-all.html" data-rel="dialog" data-transition="pop" data-icon="gear" class="ui-btn-right">Options</a>
 	</div>
 	
 	<div data-role="content">
 		
-		<ul data-role="listview">
+			<h2>Fixed footer navigation bar</h2>
+		<p>This page is a demo of a persistent footer navigation bar. At the foot of the page, you'll see a persistent horizontal navigation bar. Click on any of the links, and you'll see the page content transition but the footer remain fixed: The footer sticks persistently even when transitioning to a new HTML page, because the footer on all four HTML pages has the same <code>data-id</code> attribute. </p>
+
+	<ul data-role="listview">
 			<li><a href="index.html">Acura</a></li>
 			<li><a href="index.html">Audi</a></li>
 			<li><a href="index.html">BMW</a></li>
@@ -41,8 +44,6 @@
 			<li><a href="index.html">Volvo</a></li>
 		</ul>
 
-		<h2>Demo description</h2>
-		<p>This is a demo of a persistent footer - click the tabs below. The footer on this page should stick when transitioning to the next page, because they have the same data-id attributes. </p>
 	</div>
 	
 	<div data-role="footer" data-id="foo1" data-position="fixed">
