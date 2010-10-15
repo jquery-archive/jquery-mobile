@@ -72,8 +72,14 @@ min: mobile
 	@@rm -f ${MIN}.tmp
 
 zip: clean min cssmin
-	@@mkdir -p ${DIR}/theme
-	@@cp ${DIR}*.js ${DIR}
-	@@cp ${DIR}*.css ${DIR}
-	@@cp -R themes/default/images ${DIR}
+	@@mkdir -p ${DIR}
+	@@cp ${DIR}*.js ${DIR}/
+	@@cp ${DIR}*.css ${DIR}/
+	@@cp -R themes/default/images ${DIR}/
 	@@zip -r ${DIR}.zip ${DIR}
+
+# Used by the jQuery team to deploy a build to the CDN
+deploy: zip
+	@@mv ${DIR} $1
+	@@cp ${DIR}.zip $1/
+	@@scp -r $1 jqadmin@code.origin.jquery.com:/var/www/html/code.jquery.com/mobile/
