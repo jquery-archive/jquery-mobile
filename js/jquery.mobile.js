@@ -156,7 +156,6 @@
 	// transition between pages - based on transitions from jQtouch
 	function changePage( from, to, transition, back ) {
 		jQuery( document.activeElement ).blur();
-		window.scrollTo( 0, 0 );
 		
 		//trigger before show/hide events
 		from.trigger("beforepagehide", {nextPage: to});
@@ -166,7 +165,7 @@
 			pageLoading( true );
 			//trigger show/hide events, allow preventing focus change through return false		
 			if( from.trigger("pagehide", {nextPage: to}) !== false && to.trigger("pageshow", {prevPage: from}) !== false ){
-				window.scrollTo(0,0);
+				hideBrowserChrome();
 				reFocus( to );
 			}
 		}

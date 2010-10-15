@@ -6,8 +6,8 @@
 			currentPage = $('.ui-page-active'),
 			menuPage = $( '<div data-role=\'dialog\' data-theme=\'a\'>' +
 						'<div data-role=\'header\' data-theme=\'b\'>' +
-							'<a href=\'#\' class=\'ui-btn-left\' data-icon=\'delete\'>Cancel</a>'+
-							'<div class=\'ui-title\'>Choose a theme:</div>'+
+							'<a href=\'#\' class=\'ui-btn-left\' data-icon=\'delete\' data-iconpos=\'notext\'>Cancel</a>'+
+							'<div class=\'ui-title\'>Switch Theme:</div>'+
 						'</div>'+
 						'<div data-role=\'content\' data-theme=\'c\'><ul data-role=\'listview\' data-inset=\'true\'></ul></div>'+
 					'</div>' )
@@ -27,31 +27,25 @@
 		
 		//remover, adder
 		function addTheme(theme){
-			/*
-			//way too greedy theme remover
-			$.each(themes,function( i ){
-				$('head link[href*='+themes[ i ]+']').remove();
-			});
-			*/
 			$('head').append( '<link rel=\'stylesheet\' href=\''+ themesDir + theme +'/\' />' );
 		}
 		
 		//finished with this
 		function done(){
-			$.changePage(menuPage, currentPage, 'slideup', true);
+			$.changePage(menuPage, currentPage, 'pop', true);
 			menuPage.bind('pagehide',function(){
-				$(this).remove();
+				menuPage.remove();
 			});
 			return false;
 		}
+				
+		//destroy
+		menuPage.find('.ui-btn-left').click(done);
 		
 		//create page, listview
 		menuPage.page();
 		
 		//change page now	
-		$.changePage(currentPage, menuPage, 'slideup', false);
-		
-		//destroy
-		menuPage.find('.ui-btn-left').click(done);
+		$.changePage(currentPage, menuPage, 'pop', false);
 	};	
 })(jQuery);
