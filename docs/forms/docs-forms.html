@@ -27,15 +27,15 @@
 ...
 &lt;/form&gt;
 </code>
-			<h2>Page width optimizations</h2>
+			<h2>Dynamic form layout</h2>
 
-			<p>In jQuery Mobile, all form elements are designs to be a flexible width so they will adjust to fit to the width of the device. One optimization built into the framework is that we present labels and form elements differnetly based on screen width. </p>
+			<p>In jQuery Mobile, all form elements are designed to be a flexible width so they will comfortably fit the width of any mobile device. One optimization built into the framework is that we present labels and form elements differently based on screen width. </p>
 			<p>If a page is fairly narrow (~480px), the labels are styled as block-level elements so they will stack on top of the form element to save horizontal space.</p> 
 			<p>On wider screens, the labels and form elements are styled to be on the same line in a 2-column layout to take advantage of the screen real estate.</p>
 
-			<h2>Grouping elements</h2>
+			<h2>Field containers</h2>
 			
-			<p>To group the label and form element together for styling, we recommend wrapping a <code>div</code> or <code>fieldset </code>with the <code>data-role="fieldcontain"</code> attribute. The framework will add a thin vertical line below this container to  visually separate it from the next field in a form.</p>
+			<p>To improve the styling to labels and form elements on wider screens, we recommend wrapping a <code>div</code> or <code>fieldset </code>with the <code>data-role="fieldcontain"</code> attribute around each label/form element. The framework will add a thin vertical bottom border on this container to act as a field separator and visually align the label and form elements for quick scanning.</p>
 
 <pre><code>				
 &lt;div data-role=&quot;fieldcontain&quot;&gt;
