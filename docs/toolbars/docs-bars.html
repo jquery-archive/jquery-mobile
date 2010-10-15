@@ -15,18 +15,8 @@
 
 	<div data-role="content">
 			
-			<h2>Header &amp; footer bar structure</h2>
-			<p>The <code>header</code> is an bar at the top of the page that usually contains the page title text and optional buttons positioned in the the left or right of the title for navigation or actions. The title text is normally an H1 heading element but it's possible to use any heading level (H1-H6) to allow for semantic flexibility. For example, a page containing multiple mobile 'pages' may use a H1 element on the home 'page' and a H2 element on the secondary pages. All heading levels are styled identically by default to maintain visual consistency.</p> 
+			
 
-<div class="highlight"> 
-<pre>
-<span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"header"</span><span class="nt">&gt;</span> 
-	<span class="nt">&lt;h1&gt;</span>Page Title<span class="nt">&lt;/h1&gt;</span> 
-<span class="nt">&lt;/div&gt;</span> 
-</pre> 
-</div> 
-
-<a href="docs-headers.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Header configuration options</a>
 
 	<p>The <code>footer</code> bar has the same structure as the header except for the <code>data-role</code> attribute and your choice of heading. Footers tend to be more freeform than headers in terms of content and functionality but they are designed to hold text and buttons, just like a header.</p> 
 
@@ -41,7 +31,7 @@
 <a href="docs-footers.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Footer configuration options</a>
 
 			
-			<h2>Bar positioning and behavior</h2>
+			<h2>Positioning options</h2>
 			
 			<p>Header and footers can be positioned on the page in a few different ways. By default, the toolbars use the "fixed" positioning mode. In this mode, the headers and footer are sitting in the natural document flow, which ensures that they are visible on all devices, regardless of JavaScript support.</p>
 			<p>To achieve the convenience of static toolbars without the drawbacks of implementing faux-scrolling in JavaScript, the framework adds logic to detect when a bar has been scrolled out of view and animates them back into place by dynamically re-positioning the bar to the top or bottom of the viewport. At any time,tapping the screen will toggle the visibility of the toolbars: tapping when they aren't visible brings the toolbars into view, tapping again hides them until you tap again. This gives users the option to hide the toolbars until needed to maximize screen real estate.</p>

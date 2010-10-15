@@ -9,7 +9,7 @@
 
 <div data-role="page">
 
-	<div data-role="header">
+	<div data-role="header" data-position="inline">
 		<h1>Header configuration</h1>
 	</div><!-- /header -->
 
@@ -26,23 +26,41 @@
 </pre> 
 </div> 
 
+	<p>The <code>header</code> toolbar will be be themed with the "a" swatch by default (black in the default theme).</p> 
+
+<div data-role="header" data-position="inline">
+	<h1>Page title</h1>
+</div>
+
+	<p><strong>See that "back" button?</strong> The framework automatically generates a "back" button for you to automate the process of including this common navigation element on every page. To prevent the back button from being added to a header either add your own button to the left slot (see below) or, add this attribute: <code>data-nobackbtn="true"</code> to the header container.
+	
 	<h2>Header buttons</h2>
 	
-			<p>In the standard header configuration, there are slots for up to two buttons on either side of the text heading. Each button is an <code>anchor</code> element that points to any <code>URI</code>. The button's width fits the length of the text and icons it contains. The header plugin looks for immediate children of the header container and will automatically set the first link found in the left button slot and the second link in the right button slot.</p>
-					
-			<p>In this example, the Home button will appear in the left slot and Edit will appear in the right slot. If you want to add custom HTML markup (or embed a widget like Nav Bar) into the header bar, simply wrap the markup in a container <code>div</code> and the plugin won't apply the automatic button slot logic.</p> 
+			<p>In the standard header configuration, there are slots buttons on either side of the text heading. Each button is typically an <code>anchor</code> element but any valid <a href="../buttons/buttons-types.html">button markup</a> will work. To save space, buttons in toolbars are set to <a href="../buttons/buttons-inline.html">inline</a> so button is only as wide as the text and icons they contain. </p>
+	
+<pre><code>			
+&lt;div data-role=&quot;header&quot; data-position=&quot;inline&quot;&gt;
+	&lt;a href=&quot;index.html&quot; data-icon=&quot;delete&quot;&gt;Cancel&lt;/a&gt;
+	&lt;h1&gt;Edit Contact&lt;/h1&gt;
+	&lt;a href=&quot;index.html&quot; data-icon=&quot;check&quot; data-theme=&quot;b&quot;&gt;Save&lt;/a&gt;
+&lt;/div&gt;
+</code></pre>
+		
+		<h3>Button positions</h3>
+		
+			<p>The header plugin looks for immediate children of the header container and will automatically set the first link found into the left button slot and the second link into the right button slot. In this example, the 'Cancel' button will appear in the left slot and 'Save' will appear in the right slot  because of their sequence in the source order. </p> 
+			
+			<p>Buttons automatically adapt to the color of the bar they sit in so a link in a header bar with the "a" swatch color will also be styled as "a" colored buttons. To make the right button stand out, use add the <code>data-theme</code> attribute and set the color swatch for the button, "b" in this case.</p>
 
-<div class="highlight"> 
-<pre><span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"page"</span><span class="nt">&gt;</span> 
-	<span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"header"</span><span class="nt">&gt;</span> 
-		<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"index.php"</span><span class="nt">&gt;</span>Home<span class="nt">&lt;/a&gt;</span> 
-		<span class="nt">&lt;h1&gt;</span>Page Title<span class="nt">&lt;/h1&gt;</span> 
-		<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"edit.php"</span><span class="nt">&gt;</span>Edit<span class="nt">&lt;/a&gt;</span> 
-	<span class="nt">&lt;/div&gt;</span> 
-<span class="nt">&lt;/div&gt;</span> 
-</pre> 
-</div> 
-
+	
+<div data-role="header" data-position="inline">
+	<a href="index.html" data-icon="delete">Cancel</a>
+	<h1>Edit Contact</h1>
+	<a href="index.html" data-icon="check" data-theme="b">Save</a>
+</div>
+	
+	<h3>Button position classes</h3>
+	
 			<p>The button position can also be controlled by adding classes to the button anchors instead of relying on source order. This is especially useful if there isn't a left button and you only want a button in the right slot. To specify the button position, add the class of <code>ui-btn-left</code> or <code>ui-btn-right</code> to the anchor.</p> 
 
 <div class="highlight"> 
@@ -52,7 +70,11 @@
 </pre> 
 </div> 
 
-				<p>If there isn't a user-defined button in the left slot, the framework will auto-generate a "back" button in that slot to automate the process of including this common navigation element on every page. To prevent the back button from being added to a header in these situations, add this attribute: <code>data-nobackbtn="true"</code>.</p>
+<p>If you want to add custom HTML markup (or embed a widget like Nav Bar) into the header bar, simply wrap the markup in a container <code>div</code> and the plugin won't apply the automatic button slot logic.</p> 
+
+	<h3>Back buttons</h3>
+	
+			<p>If there isn't a user-defined button in the left slot, the framework will automatically generate a "back" button to automate the process of including this common navigation element on every page. To prevent the back button from being added to a header in these situations, add this attribute: <code>data-nobackbtn="true"</code> to the header container.</p>
 
 	
 
