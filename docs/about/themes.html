@@ -123,7 +123,6 @@
 		</ul>
 		
 		
-		<h3>Buttons</h3>
 		<p>A button is included for each swatch in the theme. Each button has styles for normal, hover/focus and pressed states.</p>
 		
 		<div class="swatch-preview">
@@ -135,7 +134,7 @@
 		</div><!-- end swatch-bars -->
 		
 		
-		<p>A button is automatically assigned a theme swatch letter that matches it's parent bar or content box to visually integrate the button into the parent theme, like a chameleon. To illustrate this idea, below, the same exact button code is in each of the 4 bars and is automatically setting their color swatch to match on the parent bar swatch.</p>
+		<p>By default, any button that's placed in a bar is automatically assigned a swatch letter that matches its parent bar or content box, to visually integrate the button into the parent theme like a chameleon, as shown here:</p>
 		
 		<div class="swatch-preview">
 			<div data-role="header" data-theme="a"><h1>Bar A</h1><a href="index.html" data-icon="arrow-l">Button A</a></div>
@@ -145,9 +144,9 @@
 			<div data-role="header" data-theme="e"><h1>Bar E</h1><a href="index.html" data-icon="arrow-l">Button E</a></div>
 		</div><!-- end swatch-bars -->
 		
-		<p>This makes it really easy to ripple a theme change through a page by setting a theme swatch on a parent because you know the buttons will maintain the same relative visual weight across themes. Since form elements use the button styles, they will also adapt to their parent container too. </p>
+		<p>This default behavior makes it easy to ripple a theme change through a page by setting a theme swatch on a parent because you know the buttons will maintain the same relative visual weight across themes. Since form elements use the button styles, they will also adapt to their parent container too. </p>
 			
-		<p>To add visual emphasis of certain buttons in a toolbar, the theme swatch color for a button can be set by adding a <code>data-theme="a"</code> to the anchor to make it stand out visually from it's parent. If the theme is set on a button in the markup, the framework won't override the theme swatch color when the parent theme is changed because you made a conscious decision to set the color.</p>
+		<p>To add visual emphasis to a button and help it stand out visually from its parent toolbar, an alternate swatch color can be set by adding a <code>data-theme="a"</code> to the anchor. Once an alternate swatch color is set on a button in the markup, the framework won't override that color if the parent theme is changed, because you made a conscious decision to set it.</p>
 		
 		<div class="swatch-bars">
 			<div data-role="header" data-theme="a" class="ui-bar" data-nobackbtn="true">
