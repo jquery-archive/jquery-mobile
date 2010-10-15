@@ -44,7 +44,7 @@
 		startPageId = 'ui-page-start',
 		activePageClass = 'ui-page-active',
 		pageTransition,
-		transitions = 'slide slideup slidedown pop flip fade dissolve swap',
+		transitions = 'slide slideup slidedown pop flip fade dissolve swap dissolve cube',
 		transitionDuration = 350,
 		backBtnText = "Back",
 		urlStack = [ {
