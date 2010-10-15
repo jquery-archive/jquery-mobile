@@ -17,7 +17,6 @@ FILES = js/jquery.ui.widget.js \
   js/jquery.mobile.forms.checkboxradio.js \
   js/jquery.mobile.forms.textinput.js \
   js/jquery.mobile.forms.select.js \
-  js/jquery.mobile.forms.ajaxform.js \
   js/jquery.mobile.buttonMarkup.js \
   js/jquery.mobile.forms.button.js \
   js/jquery.mobile.forms.slider.js \
