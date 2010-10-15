@@ -43,7 +43,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 					rightbtn = $headeranchors.filter( ".ui-btn-right" ).length;
 				
 				if ( !leftbtn ) {
-					leftbtn = $headeranchors.eq( 0 ).addClass( "ui-btn-left" ).length;
+					leftbtn = $headeranchors.eq( 0 ).not('.ui-btn-right').addClass( "ui-btn-left" ).length;
 				}
 				if ( !rightbtn ) {
 					rightbtn = $headeranchors.eq( 1 ).addClass( "ui-btn-right" ).length;
