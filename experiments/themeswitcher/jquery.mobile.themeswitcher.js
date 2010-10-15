@@ -2,7 +2,7 @@
 (function($){
 	$.themeswitcher = function(){
 		var themesDir = 'themes/',
-			themes = ['default','dobson'],
+			themes = ['default','valencia'],
 			currentPage = $('.ui-page-active'),
 			menuPage = $( '<div data-role=\'dialog\' data-theme=\'a\'>' +
 						'<div data-role=\'header\' data-theme=\'b\'>' +
@@ -16,7 +16,7 @@
 		
 		//menu items	
 		$.each(themes, function( i ){
-			$('<li><a href=\'#\'>' + themes[ i ] + '</a></li>')
+			$('<li><a href=\'#\'>' + themes[ i ].charAt(0).toUpperCase() + themes[ i ].substr(1) + '</a></li>')
 				.click(function(){
 					addTheme( themes[i] );
 					done();
