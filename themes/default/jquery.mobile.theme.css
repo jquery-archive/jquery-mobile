@@ -179,8 +179,8 @@ a.ui-link-inherit { text-decoration: none !important; }
 
 .ui-icon-grid { background-position: -432px 0; }
 .ui-icon-star { background-position: -468px 0; }
-.ui-icon-alert { background-position: -486px 0; }
-.ui-icon-info { background-position: -504px 0; }
+.ui-icon-alert { background-position: -504px 0; }
+.ui-icon-info { background-position: -140px 0; }
 
 /*checks,radios*/
 .ui-icon-checkbox-off,
