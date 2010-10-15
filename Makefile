@@ -80,6 +80,15 @@ zip: clean min cssmin
 
 # Used by the jQuery team to deploy a build to the CDN
 deploy: zip
+	# Deploy to CDN
 	@@mv ${DIR} $1
 	@@cp ${DIR}.zip $1/
 	@@scp -r $1 jqadmin@code.origin.jquery.com:/var/www/html/code.jquery.com/mobile/
+	@@mv $1 ${DIR}
+
+	# Deploy Demos
+	@@mkdir -p ${VER}
+	@@cp -r index.html themes experiments docs ${VER}/
+	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|href="themes/default"|href="http://code.jquery.com/mobile/${VER}/${DIR}.min.css"|g' {} \;
+	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|src="js/all"|src="http://code.jquery.com/mobile/${VER}/${DIR}.min.js"|g' {} \;
+	@@scp -r ${VER} jqadmin@jquerymobile.com:/srv/jquerymobile.com/htdocs/demos/
