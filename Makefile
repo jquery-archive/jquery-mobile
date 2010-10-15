@@ -81,10 +81,10 @@ zip: clean min cssmin
 # Used by the jQuery team to deploy a build to the CDN
 deploy: zip
 	# Deploy to CDN
-	@@mv ${DIR} $1
-	@@cp ${DIR}.zip $1/
-	@@scp -r $1 jqadmin@code.origin.jquery.com:/var/www/html/code.jquery.com/mobile/
-	@@mv $1 ${DIR}
+	@@mv ${DIR} ${VER}
+	@@cp ${DIR}.zip ${VER}/
+	@@scp -r ${VER} jqadmin@code.origin.jquery.com:/var/www/html/code.jquery.com/mobile/
+	@@mv ${VER} ${DIR}
 
 	# Deploy Demos
 	@@mkdir -p ${VER}
