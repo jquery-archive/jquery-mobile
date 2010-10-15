@@ -15,7 +15,7 @@
 
 	<div data-role="content" class="ui-body">
 			
-			<p>Any page can be presented as a dialog by adding the <code>data-rel="dialog"</code> attribute to the page you're linking to. The framework will add styles to make the page look like a modal dialog by adding rounded corners and margins around the page along with a dark background behind the "dialog".</p>
+			<p>Any page can be presented as a modal dialog by adding the <code>data-rel="dialog"</code> attribute to the page you're linking to. When the "dialog" attribute is applied, the framework adds styles to add rounded corners, margins around the page and a dark background to make the "dialog" appear to be suspended above the page.</p>
 			<p>
 			<code>
 			&lt;a href=&quot;foo.html&quot; data-rel=&quot;dialog&quot;&gt;Open dialog&lt;/a&gt;
@@ -27,7 +27,7 @@
 
 			
 			<h2>Transitions</h2>
-			<p>The dialog will still open with the standard slide transition so to make it feel more dialog-like. You can specify any page transition you want on the dialog by adding the <code>data-transition</code> attribute to the link. We recommend adding a transition of pop, slideup or flip for dialogs.</p>
+			<p>Since the dialog is a standard "page", it will open with the standard slide transition that's applied to all pages.  And like all pages, you can specify any page transition you want on the dialog by adding the <code>data-transition</code> attribute to the link. To make it feel more dialog-like, we recommend specifying a transition of "pop", "slideup" or "flip".</p>
 			
 <code>
 &lt;a href=&quot;foo.html&quot; data-rel=&quot;dialog&quot; data-transition=&quot;pop&quot;&gt;Open dialog&lt;/a&gt;
@@ -41,10 +41,10 @@
 	
 	<h2>Styling</h2>
 	<p>Dialogs can be styled with different themes, just like any page. Here is a different dialog design:</p>
-		<a href="dialog-alt.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">Alternate swatch colors</a>
+		<a href="dialog-alt.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">An alternate color scheme</a>
 		
 		
-	<p>By removing the header, dialogs can be can used to offer multiple buttons, more like a control sheet</p>
+	<p>And dialogs can be can used more like a control sheet to offer multiple buttons by removing the header:</p>
 				<a href="dialog-buttons.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="slideup">Share photos...</a>
 			
 			
