@@ -137,7 +137,7 @@
 		if ( done ) {
 			$html.removeClass( "ui-loading" );
 		} else {
-			$loader.appendTo('body');
+			$loader.appendTo('body').css({top: $(window).scrollTop() + 75});
 			$html.addClass( "ui-loading" );
 		}
 	};
