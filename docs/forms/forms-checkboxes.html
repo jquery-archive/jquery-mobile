@@ -19,33 +19,68 @@
 		<form action="#" method="get">
 
 		<h2>Checkboxes</h2>
-		<p>Checkboxes are used to provide a list of options where more than one can be selected. Traditional desktop checkboxes are not optimized for touch input so in jQuery Mobile, we style the <code>label</code> for the checkboxes so they are larger and look clickable. A custom set of icons are added to the label to provide visual feedback.</p>
-		<p>To create a checkbox,  To add a slider widget to your page, start with an <code>select</code> with two options. The first option will be styled as the "on" state switch and the second will be styled as the "off" state so write your options in the correct order. Set the <code>for</code> attribute of the <code>label</code> to match the ID of the <code>input</code> so they are semantically associated and wrap them in a <code>div</code> with the <code>data-role="fieldcontain"</code> attribute to group them.</p>
+		<p>Checkboxes are used to provide a list of options where more than one can be selected. Traditional desktop checkboxes are not optimized for touch input so in jQuery Mobile, we style the <code>label</code> for the checkboxes so they are larger and look clickable. A custom set of icons are added to the label to provide additional visual feedback.</p>
+		
+		<p>Both the radio and checkbox controls below use standard input/label markup, but are styled to be more touch-friendly. The styled control you see is actually the label element, which sits over the real input, so if images fail to load, you'll still have a functional control. In most browsers, clicking the label automatically triggers a click on the input, but we've had to trigger the update manually for a few mobile browsers that don't do this natively. On the desktop, these controls are keyboard and screen-reader accessible. </p>
+
+		<p>To create a single checkbox, add an <code>input</code> with a <code>type="checkbox"</code> attribute and a corresponding <code>label</code>. Set the <code>for</code> attribute of the <code>label</code> to match the ID of the <code>input</code> so they are semantically associated.</p>
+		
+		<p>Because checkboxes use the <code>label</code> element for the text displayed next to the checkbox form element, we recommend wrapping the checkbox in a <code>fieldset</code> element that has a <code>legend</code> which acts as the title for the question. Add the  <code>data-role="controlgroup"</code> attribute to the <code>fieldset</code> so it can be styled in a parallel way as text inputs, selects or other form elements.</p>
+		
+		<p>Lastly, need to wrap the <code>fieldset</code> in a <code>div</code> with <code>data-role="controlgroup"</code> attribute to the <code>fieldset</code> so it can be styled in a parallel way as text inputs, selects or other form elements.</p>
+
 
 <pre><code>	
 &lt;div data-role=&quot;fieldcontain&quot;&gt;
-	&lt;label for=&quot;slider2&quot;&gt;Select slider:&lt;/label&gt;
-	&lt;select name=&quot;slider2&quot; id=&quot;slider2&quot; data-role=&quot;slider&quot;&gt;
-		&lt;option value=&quot;off&quot;&gt;Off&lt;/option&gt;
-			&lt;option value=&quot;on&quot;&gt;On&lt;/option&gt;
-		&lt;/select&gt; 
+ 	&lt;fieldset data-role=&quot;controlgroup&quot;&gt;
+		&lt;legend&gt;Agree to the terms:&lt;/legend&gt;
+		&lt;input type=&quot;checkbox&quot; name=&quot;checkbox-1&quot; id=&quot;checkbox-1&quot; class=&quot;custom&quot; /&gt;
+		&lt;label for=&quot;checkbox-1&quot;&gt;I agree&lt;/label&gt;
+    &lt;/fieldset&gt;
 &lt;/div&gt;
 </code></pre>
 
-		<p>A radiobutton list is displayed like this:</p>
-		 <fieldset data-role="controlgroup">
-				<legend>Choose one or more:</legend>
-				<input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" />
-				<label for="checkbox-1">Choice 1</label>
+	<div data-role="fieldcontain">
+	 	<fieldset data-role="controlgroup">
+			<legend>Agree to the terms:</legend>
+			<input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" />
+			<label for="checkbox-1">I agree</label>
+	    </fieldset>
+	</div>
+		
+		<h2>Vertically grouped checkboxes</h2>
+		
+		<p>Typically, there are multiple checkboxes listed under a question title. To visually integrate multiple checkboxes into a grouped button set, the framework will automatically remove all margins between buttons and round only the top and bottom corners of the set if there is a <code>data-role="controlgroup"</code> attribute on the fie.</p>
 
-				<input type="checkbox" name="checkbox-2" id="checkbox-2" class="custom" />
-				<label for="checkbox-2">Choice 2</label>
+			<div  data-role="fieldcontain">
+			 	<fieldset data-role="controlgroup">
+					<legend>Choose as many snacks as you'd like:</legend>
+					<input type="checkbox" name="checkbox-1a" id="checkbox-1a" class="custom" />
+					<label for="checkbox-1a">Cheetos</label>
 
-				<input type="checkbox" name="checkbox-3" id="checkbox-3" class="custom" checked="checked" />
-				<label for="checkbox-3">Choice 3</label>
-		    </fieldset>
+					<input type="checkbox" name="checkbox-2a" id="checkbox-2a" class="custom" />
+					<label for="checkbox-2a">Doritos</label>
+					
+					<input type="checkbox" name="checkbox-3a" id="checkbox-3a" class="custom" />
+					<label for="checkbox-3a">Fritos</label>
 
-		    <fieldset data-role="controlgroup" data-type="horizontal" data-role="fieldcontain">
+					<input type="checkbox" name="checkbox-4a" id="checkbox-4a" class="custom" />
+					<label for="checkbox-4a">Sun Chips</label>
+			    </fieldset>
+			</div>
+		
+		<h2>Horizontal toggle sets</h2>
+		
+		<p>Checkboxes can also be used for grouped button sets where more than one button can be selected at once, such as the bold, italic and underline button group seen in word processors. To make a horizontal button set, add the <code> data-type="horizontal"</code> to the <code>fieldset</code>.</p>
+
+<code>
+&lt;fieldset data-role=&quot;controlgroup&quot; <strong>data-type=&quot;horizontal&quot;</strong> data-role=&quot;fieldcontain&quot;&gt;
+</code>
+
+			<p>The framework will float the labels so they sit side-by-side on a line, hide the checkbox icons and only round the left and right edges of the group.</p>
+			
+		<div data-role="fieldcontain">
+		    <fieldset data-role="controlgroup" data-type="horizontal">
 		    	<legend>Font styling:</legend>
 		    	<input type="checkbox" name="checkbox-6" id="checkbox-6" class="custom" />
 				<label for="checkbox-6">b</label>
@@ -56,12 +91,9 @@
 				<input type="checkbox" name="checkbox-8" id="checkbox-8" class="custom" />
 				<label for="checkbox-8">u</label>    
 		    </fieldset>
+		</div>
 
-			<fieldset data-role="controlgroup">
-				<legend>Single checkbox:</legend>
-				<input type="checkbox" name="checkbox-9" id="checkbox-9" class="custom" />
-				<label for="checkbox-9">Single Checkbox</label>
-			</fieldset>
+
 	</form>
 	
 	</div><!-- /content -->

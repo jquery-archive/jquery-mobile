@@ -17,101 +17,63 @@
 	<div data-role="content">
 		
 		<form action="#" method="get">
-
+			
+			<h2>Form elements</h2>
 
 			<p>This page contains various progressive-enhancement driven form controls. Native elements are sometimes hidden from view, but their values are maintained so the form can be submitted normally. In browsers that don't support the custom controls, they will still have a usable experience because these are all based on native form elements.</p>
 
-			
-
-
-
-	    <fieldset data-role="collapsible" data-state="collapsed">
-	    	<legend>Text input controls</legend>
-	    	<div data-role="fieldcontain">
+			<div data-role="fieldcontain">
 	         <label for="name">Text Input:</label>
 	         <input type="text" name="name" id="name" value=""  />
 			</div>
+			
 			<div data-role="fieldcontain">
-	         <label for="password">Password Input:</label>
-	         <input type="password" name="password" id="password" value="" data-theme="b" />
+	         <label for="name">Password:</label>
+	         <input type="password" name="name" id="name" value=""  />
 			</div>
-			<div data-role="fieldcontain">
-	         <label for="search">Search Input:</label>
-	         <input type="search" name="password" id="search" value="" data-theme="b" />
-			</div>
-
+			 
 			<div data-role="fieldcontain">
 			<label for="textarea">Textarea:</label>
 			<textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
 			</div>
-
+		
 			<div data-role="fieldcontain">
-				<label for="slider">Input slider:</label>
-			 	<input type="range" name="slider" id="slider" value="0" min="0" max="100"  />
+	         <label for="search">Search Input:</label>
+	         <input type="search" name="password" id="search" value=""  />
 			</div>
-
+			
 			<div data-role="fieldcontain">
-				<label for="slider2">Select slider:</label>
+				<label for="slider2">Flip switch:</label>
 				<select name="slider2" id="slider2" data-role="slider">
 					<option value="off">Off</option>
 					<option value="on">On</option>
 				</select> 
 			</div>
+			
+			<div data-role="fieldcontain">
+				<label for="slider">Slider:</label>
+			 	<input type="range" name="slider" id="slider" value="0" min="0" max="100"  />
+			</div>
+			
+			<div data-role="fieldcontain">
+			<fieldset data-role="controlgroup">
+				<legend>Choose as many snacks as you'd like:</legend>
+				<input type="checkbox" name="checkbox-1a" id="checkbox-1a" class="custom" />
+				<label for="checkbox-1a">Cheetos</label>
 
-		</fieldset>
+				<input type="checkbox" name="checkbox-2a" id="checkbox-2a" class="custom" />
+				<label for="checkbox-2a">Doritos</label>
+				
+				<input type="checkbox" name="checkbox-3a" id="checkbox-3a" class="custom" />
+				<label for="checkbox-3a">Fritos</label>
 
-
-
-		<div id="radio-examples" data-role="collapsible" data-state="collapsed">
-
-			<h2>Radio toggles</h2>
-
-
-		    <fieldset data-role="controlgroup" data-role="fieldcontain">
-		    	<legend>Choose one:</legend>
-		         	<input type="radio" name="radio-choice-1" id="radio-choice-1" value="choice-1" checked="checked" />
-		         	<label for="radio-choice-1">Choice 1</label>
-
-		         	<input type="radio" name="radio-choice-1" id="radio-choice-2" value="choice-2"  />
-		         	<label for="radio-choice-2">Choice 2</label>
-
-		         	<input type="radio" name="radio-choice-1" id="radio-choice-3" value="choice-3"  />
-		         	<label for="radio-choice-3">Choice 3</label>
-
-		         	<input type="radio" name="radio-choice-1" id="radio-choice-4" value="choice-4"  />
-		         	<label for="radio-choice-4">Choice 4</label>
+				<input type="checkbox" name="checkbox-4a" id="checkbox-4a" class="custom" />
+				<label for="checkbox-4a">Sun Chips</label>
 		    </fieldset>
-
-
-		    <fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
-		     	<legend>Same with theme change:</legend>
-		         	<input type="radio" name="radio-choice-b" id="radio-choice-c" value="on" checked="checked" />
-		         	<label for="radio-choice-c">On</label>
-		         	<input type="radio" name="radio-choice-b" id="radio-choice-d" value="off" />
-		         	<label for="radio-choice-d">Off</label>
-		         	<input type="radio" name="radio-choice-b" id="radio-choice-e" value="other" />
-		         	<label for="radio-choice-e">Other</label>
-		    </fieldset>
-
-	    </div>
-
-	    <div id="checkbox-examples" data-role="collapsible" data-state="collapsed">
-
-		    <h2>Checkboxes</h2>
-
-		    <fieldset data-role="controlgroup">
-				<legend>Choose one or more:</legend>
-				<input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" />
-				<label for="checkbox-1">Choice 1</label>
-
-				<input type="checkbox" name="checkbox-2" id="checkbox-2" class="custom" />
-				<label for="checkbox-2">Choice 2</label>
-
-				<input type="checkbox" name="checkbox-3" id="checkbox-3" class="custom" checked="checked" />
-				<label for="checkbox-3">Choice 3</label>
-		    </fieldset>
-
-		    <fieldset data-role="controlgroup" data-type="horizontal" data-role="fieldcontain">
+			</div>
+			
+			<div data-role="fieldcontain">
+			<fieldset data-role="controlgroup" data-type="horizontal">
 		    	<legend>Font styling:</legend>
 		    	<input type="checkbox" name="checkbox-6" id="checkbox-6" class="custom" />
 				<label for="checkbox-6">b</label>
@@ -122,59 +84,110 @@
 				<input type="checkbox" name="checkbox-8" id="checkbox-8" class="custom" />
 				<label for="checkbox-8">u</label>    
 		    </fieldset>
-
-			<fieldset data-role="controlgroup">
-				<legend>Single checkbox:</legend>
-				<input type="checkbox" name="checkbox-9" id="checkbox-9" class="custom" />
-				<label for="checkbox-9">Single Checkbox</label>
-			</fieldset>
-		</div>
-
-
-
-
-		<fieldset data-role="collapsible" data-state="collapsed">
-			<legend>Select menus</legend>
+			</div>
+		
 			<div data-role="fieldcontain">
-				<label for="select-choice-1" class="select">Few options:</label>
+			    <fieldset data-role="controlgroup">
+			    	<legend>Choose a pet:</legend>
+			         	<input type="radio" name="radio-choice-1" id="radio-choice-1" value="choice-1" checked="checked" />
+			         	<label for="radio-choice-1">Cat</label>
+
+			         	<input type="radio" name="radio-choice-1" id="radio-choice-2" value="choice-2"  />
+			         	<label for="radio-choice-2">Dog</label>
+
+			         	<input type="radio" name="radio-choice-1" id="radio-choice-3" value="choice-3"  />
+			         	<label for="radio-choice-3">Hampster</label>
+
+			         	<input type="radio" name="radio-choice-1" id="radio-choice-4" value="choice-4"  />
+			         	<label for="radio-choice-4">Lizard</label>
+			    </fieldset>
+			</div>
+			
+			<div data-role="fieldcontain">
+			    <fieldset data-role="controlgroup" data-type="horizontal">
+			     	<legend>Layout view:</legend>
+			         	<input type="radio" name="radio-choice-b" id="radio-choice-c" value="on" checked="checked" />
+			         	<label for="radio-choice-c">List</label>
+			         	<input type="radio" name="radio-choice-b" id="radio-choice-d" value="off" />
+			         	<label for="radio-choice-d">Grid</label>
+			         	<input type="radio" name="radio-choice-b" id="radio-choice-e" value="other" />
+			         	<label for="radio-choice-e">Gallery</label>
+			    </fieldset>
+			</div>
+		
+			<div data-role="fieldcontain">
+				<label for="select-choice-1" class="select">Choose shipping method:</label>
 				<select name="select-choice-1" id="select-choice-1">
-					<option value="Choice 1">Choice 1</option>
-					<option value="Choice 2">Choice 2</option>
-					<option value="Choice 3">Choice 3</option>
+					<option value="standard">Standard: 7 day</option>
+					<option value="rush">Rush: 3 days</option>
+					<option value="express">Express: next day</option>
+					<option value="overnight">Overnight</option>
 				</select>
 			</div>
-
+			
 			<div data-role="fieldcontain">
-				<label for="select-choice-3" class="select">Many options:</label>
+				<label for="select-choice-3" class="select">Your state:</label>
 				<select name="select-choice-3" id="select-choice-3">
-					<option value="Choice 1">Choice 1</option>
-					<option value="Choice 2">Choice 2</option>
-					<option value="Choice 3">Choice 3</option>
-					<option value="Choice 4">Choice 4</option>
-					<option value="Choice 5">Choice 5</option>
-					<option value="Choice 6">Choice 6</option>
-					<option value="Choice 7">Choice 7</option>
-					<option value="Choice 8">Choice 8</option>
-					<option value="Choice 9">Choice 9</option>
-					<option value="Choice 10">Choice 10</option>
-					<option value="Choice 11">Choice 11</option>
-					<option value="Choice 12">Choice 12</option>
-					<option value="Choice 13">Choice 13</option>
-					<option value="Choice 14">Choice 14</option>
-					<option value="Choice 15">Choice 15</option>
-					<option value="Choice 16">Choice 16</option>
-					<option value="Choice 17">Choice 19</option>
-					<option value="Choice 20">Choice 20</option>
+					<option value="AL">Alabama</option>
+					<option value="AK">Alaska</option>
+					<option value="AZ">Arizona</option>
+					<option value="AR">Arkansas</option>
+					<option value="CA">California</option>
+					<option value="CO">Colorado</option>
+					<option value="CT">Connecticut</option>
+					<option value="DE">Delaware</option>
+					<option value="FL">Florida</option>
+					<option value="GA">Georgia</option>
+					<option value="HI">Hawaii</option>
+					<option value="ID">Idaho</option>
+					<option value="IL">Illinois</option>
+					<option value="IN">Indiana</option>
+					<option value="IA">Iowa</option>
+					<option value="KS">Kansas</option>
+					<option value="KY">Kentucky</option>
+					<option value="LA">Louisiana</option>
+					<option value="ME">Maine</option>
+					<option value="MD">Maryland</option>
+					<option value="MA">Massachusetts</option>
+					<option value="MI">Michigan</option>
+					<option value="MN">Minnesota</option>
+					<option value="MS">Mississippi</option>
+					<option value="MO">Missouri</option>
+					<option value="MT">Montana</option>
+					<option value="NE">Nebraska</option>
+					<option value="NV">Nevada</option>
+					<option value="NH">New Hampshire</option>
+					<option value="NJ">New Jersey</option>
+					<option value="NM">New Mexico</option>
+					<option value="NY">New York</option>
+					<option value="NC">North Carolina</option>
+					<option value="ND">North Dakota</option>
+					<option value="OH">Ohio</option>
+					<option value="OK">Oklahoma</option>
+					<option value="OR">Oregon</option>
+					<option value="PA">Pennsylvania</option>
+					<option value="RI">Rhode Island</option>
+					<option value="SC">South Carolina</option>
+					<option value="SD">South Dakota</option>
+					<option value="TN">Tennessee</option>
+					<option value="TX">Texas</option>
+					<option value="UT">Utah</option>
+					<option value="VT">Vermont</option>
+					<option value="VA">Virginia</option>
+					<option value="WA">Washington</option>
+					<option value="WV">West Virginia</option>
+					<option value="WI">Wisconsin</option>
+					<option value="WY">Wyoming</option>
 				</select>
 			</div>
-		</fieldset>
 
 
-
+		<div class="ui-body ui-body-b">
 		<fieldset class="ui-grid-a">
-				<div class="ui-block-a"><button type="submit" data-theme="c">Cancel</button></div>
-				<div class="ui-block-b"><button type="submit" data-theme="b">Submit</button></div>	   
+				<div class="ui-block-a"><button type="submit" data-theme="d">Cancel</button></div>
+				<div class="ui-block-b"><button type="submit" data-theme="a">Submit</button></div>	   
 	    </fieldset>
+		</div>
 	</form>
 	
 	</div><!-- /content -->
