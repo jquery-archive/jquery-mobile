@@ -15,17 +15,17 @@
 
 	<div data-role="content">
 			
-			<h2>jQuery Mobile's "page" concept</h2> 
+			<h2>jQuery Mobile's navigation model</h2> 
 
-			<p>A "page" in jQuery Mobile consists of an element (usually a div) with a <code>data-role</code> attribute set to <code>"page"</code>. Within that "page", the markup can be entirely free-form, but generally, the immediate children of a "page" tend to be divs with roles of <code>"header"</code>, <code>"content"</code>, and <code>"footer"</code>, each of which contain markup that constitutes the content of a particular page, including common markup, forms, and custom jQuery Mobile widgets.</p> 
+			<p>A "page" in jQuery Mobile consists of an element (usually a <code>div</code>) with a <code>data-role</code> attribute set to <code>"page"</code>. Within that "page", the markup can be entirely free-form, but generally, the immediate children of a "page" tend to be divs with roles of <code>"header"</code>, <code>"content"</code>, and <code>"footer"</code>, each of which contain markup that constitutes the content of a particular page, including common markup, forms, and custom jQuery Mobile widgets.</p> 
 
-			<p>The basic workflow with page loading is as follows: first, a page is requested with a normal HTTP request, and subsequent "pages" are then requested and injected into that page's DOM. Because of this, the DOM may have a number of "pages" in it at a time, each of which can be re-visited by linking to their ID attribute.</p> 
+			<p>The basic workflow with page loading is as follows: first, a page is requested with a normal HTTP request, and subsequent "pages" are then requested and injected into that page's DOM. Because of this, the DOM may have a number of "pages" in it at a time, each of which can be re-visited by linking to its <code>ID</code> attribute.</p> 
 
 			<p>When a url is requested, there may be one or more "pages" in the response, but only the first one will be shown. The advantage of storing more than one "page" is that it allows you to pre-fetch static pages that are likely to be visited.</p> 
 
 			<h2>Hash-driven page navigation</h2> 
 
-			<p>All navigation within jQuery Mobile is based on changes in location.hash. Whenever possible, hash changes will trigger a smooth transitions between the current "page" and another that is either already present in the DOM, or is automatically loaded via Ajax.</p> 
+			<p>All navigation within jQuery Mobile is based on changes in <code>location.hash</code>. Whenever possible, hash changes will trigger a smooth transition between the current "page" and the next, whether it is either already present in the DOM, or is automatically loaded via Ajax.</p> 
 
 			<p>Hash values created by jQuery Mobile are always normalized as full paths relative to the URL of the first "real" page that was loaded.  The hash is always maintained as a valid URL, so any "page" in jQuery mobile can be bookmarked or referenced in a link.</p> 
 
