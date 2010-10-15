@@ -8,11 +8,11 @@
 $.fn.slider = function(options){
 	return this.each(function(){	
 		var control = $(this),
-			themedParent = control.closest('[class*=ui-bar-],[class*=ui-body-]'),
+			themedParent = control.parents('[class*=ui-bar-],[class*=ui-body-]').eq(0),
 			
 			o = $.extend({
-				trackTheme: control.data("tracktheme") || (themedParent.length ? themedParent.attr('class').match(/ui-(bar|body)-([a-z])/)[2] : 'd'),
-				theme: control.data("theme") || 'b'
+				trackTheme: (themedParent.length ? themedParent.attr('class').match(/ui-(bar|body)-([a-z])/)[2] : 'c'),
+				theme: control.data("theme") || (themedParent.length ? themedParent.attr('class').match(/ui-(bar|body)-([a-z])/)[2] : 'c')
 			},options),
 			
 			cType = control[0].nodeName.toLowerCase(),
