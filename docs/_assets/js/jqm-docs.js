@@ -1,15 +1,18 @@
 //set up the theme switcher on the homepage
-$(function(){
-	var lvli = $('#jqm-home ul:eq(2) li:eq(1)');
-	lvli
-		.clone()
-		.find('a:eq(0)')
-		.attr('href', '#')
-		.text('Theme switcher')
-		.click(function(){
-			$.themeswitcher();
-			return false;
-		})
-		.end()
-		.insertBefore(lvli);
+$('div').live('pagecreate',function(){
+	if( !$(this).is('.ui-dialog')){ 
+		$('<a href="#">Switch theme</a>')
+			.buttonMarkup({
+				'icon':'gear',
+				'inline': true,
+				'shadow': false,
+				'theme': 'd'
+			})
+			.appendTo( $(this).find('.ui-content') )
+			.wrap('<div class="jqm-themeswitcher">')
+			.click(function(){
+				$.themeswitcher();
+				return false;
+			});
+	}	
 });
