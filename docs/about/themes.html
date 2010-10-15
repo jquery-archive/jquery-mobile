@@ -50,7 +50,7 @@
 			<div class="ui-bar ui-bar-e">Bar E</div>
 		</div><!-- end swatch-bars -->
 		
-		<p>By default, the framework assigns the "a" swatch to all headers and footers, because these are typically given high visual priority in an application. To set the color of a bar to a different swatch color, simply add the <code>data-theme</code> attribute to your header or footer and specify an alternate swatch letter ('b' or 'd', for example) and the specified theme swatch color will be applied. Learn more about <a href="toolbars/bars-themes.html">toolbar theming</a>.</p>
+		<p>By default, the framework assigns the "a" swatch to all headers and footers, because these are typically given high visual priority in an application. To set the color of a bar to a different swatch color, simply add the <code>data-theme</code> attribute to your header or footer and specify an alternate swatch letter ('b' or 'd', for example) and the specified theme swatch color will be applied. Learn more about <a href="../toolbars/bars-themes.html">toolbar theming</a>.</p>
 		
 		
 		
@@ -92,11 +92,11 @@
 				</div><!-- /controlgroup -->
 			</div>
 
-		<p>Learn more about <a href="content/content-themes.html">content theming</a>.</p>
+		<p>Learn more about <a href="../content/content-themes.html">content theming</a>.</p>
 		
 
 		<h2>Lists &amp; Buttons</h2>
-		<p>There are 2 supported list view styles. The system defaults to the "a" swatch (silver in default theme) and it can be switched to "b" via the <code>data-theme</code> attribute. Learn more about <a href="lists/lists-themes.html">list theming</a>.</p>
+		<p>Each swatch also includes default styles for interactive elements like list items and buttons.</p>
 		<ul data-role="listview" data-inset="true" data-theme="a">
 			<li><a href="index.html">List item</a></li>
 			<li><a href="index.html">List item</a></li>
@@ -145,7 +145,7 @@
 			<div data-role="header" data-theme="e"><h1>Bar E</h1><a href="index.html" data-icon="arrow-l">Button E</a></div>
 		</div><!-- end swatch-bars -->
 		
-		<p>This makes it really easy to ripple a theme change through a page by setting a theme swatch on a parent because you know the buttons will maintain the same relative visual weight across themes. Since form elements use the button styles, they will also adapt to their parent container too. Learn more about <a href="buttons/buttons-themes.html">button theming</a>.</p>
+		<p>This makes it really easy to ripple a theme change through a page by setting a theme swatch on a parent because you know the buttons will maintain the same relative visual weight across themes. Since form elements use the button styles, they will also adapt to their parent container too. </p>
 			
 		<p>To add visual emphasis of certain buttons in a toolbar, the theme swatch color for a button can be set by adding a <code>data-theme="a"</code> to the anchor to make it stand out visually from it's parent. If the theme is set on a button in the markup, the framework won't override the theme swatch color when the parent theme is changed because you made a conscious decision to set the color.</p>
 		
@@ -198,6 +198,7 @@
 			
 		</div><!-- end swatch-bars -->
 
+<p>Learn more about <a href="../lists/lists-themes.html">list theming</a> and <a href="../buttons/buttons-themes.html">button theming</a>.</p>
 
 		<h3>Global "Active" state</h3>
 		<p>The jQuery Mobile framework uses a single theme swatch called "active" (bright blue in the default theme) to consistently indicate the selected state, regardless of the theme of the widget. We apply this in navigation and form controls to indicate what is currently selected. Because this theme swatch is designed for clear, consistent user feedback, it is not currently a theme swatch that can be overridden via the markup. It is set once in the theme and applied by the framework whenever a selected or active state is needed. The styling for this state is in the theme stylesheet under the <code>ui-btn-active</code> style rules.</p>
@@ -212,7 +213,7 @@
 
 		
 		<h2>Icons</h2>
-		<p>There a core set of <a href="buttons/buttons-icons.html">standard icons</a> included in the framework that can be assigned to any button. To minimize the download size of the core icons, jQuery Mobile only includes these icons in white and automatically adds a semi-transparent black circle behind the icon to make sure it has good contrast on all background colors.</p>
+		<p>There a core set of <a href="../buttons/buttons-icons.html">standard icons</a> included in the framework that can be assigned to any button. To minimize the download size of the core icons, jQuery Mobile only includes these icons in white and automatically adds a semi-transparent black circle behind the icon to make sure it has good contrast on all background colors.</p>
 
 		
 		<h2>Extensible themes</h2>
