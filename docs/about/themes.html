@@ -146,7 +146,7 @@
 		
 		<p>This default behavior makes it easy to ripple a theme change through a page by setting a theme swatch on a parent because you know the buttons will maintain the same relative visual weight across themes. Since form elements use the button styles, they will also adapt to their parent container too. </p>
 			
-		<p>To add visual emphasis to a button and help it stand out visually from its parent toolbar, an alternate swatch color can be set by adding a <code>data-theme="a"</code> to the anchor. Once an alternate swatch color is set on a button in the markup, the framework won't override that color if the parent theme is changed, because you made a conscious decision to set it.</p>
+		<p>If you want to add visual emphasis to a button and help it stand out visually from its parent toolbar, an alternate swatch color can be set by adding a <code>data-theme="a"</code> to the anchor. Once an alternate swatch color is set on a button in the markup, the framework won't override that color if the parent theme is changed, because you made a conscious decision to set it.</p>
 		
 		<div class="swatch-bars">
 			<div data-role="header" data-theme="a" class="ui-bar" data-nobackbtn="true">
@@ -200,7 +200,7 @@
 <p>Learn more about <a href="../lists/lists-themes.html">list theming</a> and <a href="../buttons/buttons-themes.html">button theming</a>.</p>
 
 		<h3>Global "Active" state</h3>
-		<p>The jQuery Mobile framework uses a single theme swatch called "active" (bright blue in the default theme) to consistently indicate the selected state, regardless of the theme of the widget. We apply this in navigation and form controls to indicate what is currently selected. Because this theme swatch is designed for clear, consistent user feedback, it is not currently a theme swatch that can be overridden via the markup. It is set once in the theme and applied by the framework whenever a selected or active state is needed. The styling for this state is in the theme stylesheet under the <code>ui-btn-active</code> style rules.</p>
+		<p>The jQuery Mobile framework uses a single Theme-level swatch called "active" (bright blue in the default theme) to consistently indicate the selected state, regardless of the individual swatch of the given widget. We apply this in navigation and form controls whenever there is a need to indicate what is currently selected. Because this theme swatch is designed for clear, consistent user feedback, it cannot be overridden via the markup; it is set once in the Theme and applied by the framework whenever a selected or active state is needed. The styling for this state is in the theme stylesheet under the <code>ui-btn-active</code> style rules.</p>
 		
 		<fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
 	     	<legend>Active is used for the on state of these toggles:</legend>
@@ -211,15 +211,13 @@
 	    </fieldset>
 
 		
-		<h2>Icons</h2>
+		<h3>Icons</h3>
 		<p>There a core set of <a href="../buttons/buttons-icons.html">standard icons</a> included in the framework that can be assigned to any button. To minimize the download size of the core icons, jQuery Mobile only includes these icons in white and automatically adds a semi-transparent black circle behind the icon to make sure it has good contrast on all background colors.</p>
 
 		
-		<h2>Extensible themes</h2>
-		<p>The powerful thing about the new jQuery Mobile theme system is that you can now add as many color swatches as you like within a single theme. In the future ThemeRoller tool, you will be able to add new swatches through an easy-to-use web interface. Until then, you can add new swatches manually by copying the block of theme style rules for an existing swatch, renaming the rules a new letter (e) and changing colors.</p>
-		<p>You can then you can reference the new theme by adding the <code>data-theme="c"</code> attribute to your markup. If you set a theme swatch letter, the framework simply applies classes that include the letter you specify so it's critical that your active theme file include rules for the letters specified in your markup.</p>
+
 	
-		<p><strong>Learn more</strong> about theming components</p>
+		<p><strong>Learn more</strong> about theming individual components:</p>
 		<ul data-role="listview" data-inset="true">
 			<li><a href="../pages/pages-themes.html">Page theming</a></li>
 			<li><a href="../toolbars/bars-themes.html">Toolbar theming</a></li>
