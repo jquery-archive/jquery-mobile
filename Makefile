@@ -1,10 +1,11 @@
 
 VER = $(shell cat version.txt)
 
-MAX = jquery.mobile-${VER}.js
-MIN = jquery.mobile-${VER}.min.js
-CSS = jquery.mobile-${VER}.css
-CSSMIN = jquery.mobile-${VER}.min.css
+DIR = jquery.mobile-${VER}
+MAX = ${DIR}.js
+MIN = ${DIR}.min.js
+CSS = ${DIR}.css
+CSSMIN = ${DIR}.min.css
 
 FILES = js/jquery.ui.widget.js \
   js/jquery.mobile.widget.js \
@@ -49,11 +50,14 @@ CSSFILES =  themes/default/jquery.mobile.theme.css \
 
 all: mobile min css cssmin
 
+clean:
+	@@rm -rf ${DIR}*
+
 css:
 	@@head -8 js/jquery.mobile.js > ${CSS}
 	@@cat ${CSSFILES} >> ${CSS}
 
-cssmin:
+cssmin: css
 	@@head -8 js/jquery.mobile.js > ${CSSMIN}
 	@@java -jar build/yuicompressor-2.4.2.jar --type css ${CSS} >> ${CSSMIN}
 
@@ -66,3 +70,10 @@ min: mobile
 	@@java -jar ../jquery/build/google-compiler-20100917.jar --js ${MAX} --warning_level QUIET --js_output_file ${MIN}.tmp
 	@@cat ${MIN}.tmp >> ${MIN}
 	@@rm -f ${MIN}.tmp
+
+zip: clean min cssmin
+	@@mkdir -p ${DIR}/theme
+	@@cp ${DIR}*.js ${DIR}
+	@@cp ${DIR}*.css ${DIR}
+	@@cp -R themes/default/images ${DIR}
+	@@zip -r ${DIR}.zip ${DIR}
