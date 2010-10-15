@@ -9,7 +9,6 @@ $.fn.navbar = function(settings){
 	return $(this).each(function(){ 
 
 		var o = $.extend({
-			moreText: 'More',
 			iconpos: $(this).data('iconpos') || 'top',
 			transition: $(this).data('transition') || 'slideup'
 		},settings);
@@ -28,45 +27,7 @@ $.fn.navbar = function(settings){
 				//add ARIA role
 				.attr("role","navigation")
 				.find('ul')
-				.grid({grid: numTabs > 2 ? 'b' : 'a'})		
-		
-		if(numTabs > 3 ){
-			var $navToggle = $('<a href="#" data-transition="'+ o.transition +'">' + o.moreText + '</a>'),
-				$truncatedLis = $navbar.find('li:gt(2)'),
-				$newPage = $('<div data-role="page" class="ui-navbar-expanded" data-theme="a"><div data-role="header" data-theme="b"><a href="#">Back</a><div class="ui-title">' + o.moreText + '</div></div><div data-role="content"></div></div>'),
-				$newPageContent =  $navbar.find('ul').clone(),
-				$currPage = $navbar.parents('.ui-page:eq(0)');
-				
-				$newPageContent
-					.find('a')
-					.buttonMarkup({shadow: false, corners: false, iconpos: o.iconpos, theme: 'a'});
-				
-				$newPage.append( $newPageContent ).appendTo('body').page();
-			
-			
-			$navToggle
-				.wrap('<div class="ui-navbar-toggle"></div>')
-				.parent()
-				.appendTo($navbar);
-			
-			$navToggle	
-				.buttonMarkup({corners: false, shadow:false, iconpos: o.iconpos, icon: moreIcon})
-				.click(function(){
-					$.changePage( $currPage, $newPage, o.transition );
-					return false;
-				});	
-				
-			$newPage.find('.ui-btn-left').click(function(){
-				$.changePage( $newPage, $currPage, o.transition );
-				return false;
-			});	
-				
-			$navbar.addClass('ui-navbar-collapsed');
-		
-			$truncatedLis.addClass('ui-navbar-truncate');
-		}	
-		
-		
+				.grid({grid: numTabs > 2 ? 'b' : 'a'});		
 		
 		$navbar
 			.find('ul a')
