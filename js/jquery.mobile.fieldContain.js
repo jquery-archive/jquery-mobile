@@ -9,6 +9,6 @@ $.fn.fieldcontain = function(options){
 	var o = $.extend({
 		theme: 'c'
 	},options);
-	return $(this).addClass('ui-field-contain ui-body ui-body-'+o.theme);
+	return $(this).addClass('ui-field-contain ui-body ui-br');
 };
 })(jQuery);
