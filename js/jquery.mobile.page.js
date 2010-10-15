@@ -108,7 +108,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 			.controlgroup();
 		
 		//links within content areas
-		this.element.find( ".ui-body a:not(.ui-btn):not(.ui-link-inherit)" )
+		this.element.find( "a:not(.ui-btn):not(.ui-link-inherit)" )
 			.addClass( "ui-link" );	
 		
 		//fix toolbars
