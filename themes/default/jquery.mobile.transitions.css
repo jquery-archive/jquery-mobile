@@ -134,6 +134,47 @@ Built by David Kaneda and maintained by Jonathan Stark.
 	z-index: 0;
 }
 
+.flip {
+	-webkit-animation-duration: .65s;
+}
+
+.flip.in {
+	-webkit-animation-name: flipinfromleft;
+}
+
+.flip.out {
+	-webkit-animation-name: flipouttoleft;
+}
+
+/* Shake it all about */
+
+.flip.in.reverse {
+	-webkit-animation-name: flipinfromright;
+}
+
+.flip.out.reverse {
+	-webkit-animation-name: flipouttoright;
+}
+
+@-webkit-keyframes flipinfromright {
+    from { -webkit-transform: rotateY(-180deg) scale(.8); }
+    to { -webkit-transform: rotateY(0) scale(1); }
+}
+
+@-webkit-keyframes flipinfromleft {
+    from { -webkit-transform: rotateY(180deg) scale(.8); }
+    to { -webkit-transform: rotateY(0) scale(1); }
+}
+
+@-webkit-keyframes flipouttoleft {
+    from { -webkit-transform: rotateY(0) scale(1); }
+    to { -webkit-transform: rotateY(-180deg) scale(.8); }
+}
+
+@-webkit-keyframes flipouttoright {
+    from { -webkit-transform: rotateY(0) scale(1); }
+    to { -webkit-transform: rotateY(180deg) scale(.8); }
+}
 
 
 /* Hackish, but reliable. */

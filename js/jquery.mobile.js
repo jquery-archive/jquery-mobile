@@ -44,7 +44,7 @@
 		startPageId = 'ui-page-start',
 		activePageClass = 'ui-page-active',
 		pageTransition,
-		transitions = 'slide slideup slidedown pop flip fade dissolve swap dissolve cube',
+		transitions = 'slide slideup slidedown pop flip fade',
 		transitionDuration = 350,
 		backBtnText = "Back",
 		urlStack = [ {
@@ -157,6 +157,7 @@
 	function changePage( from, to, transition, back ) {
 		jQuery( document.activeElement ).blur();
 		
+		
 		//trigger before show/hide events
 		from.trigger("beforepagehide", {nextPage: to});
 		to.trigger("beforepageshow", {prevPage: from});
@@ -165,7 +166,6 @@
 			pageLoading( true );
 			//trigger show/hide events, allow preventing focus change through return false		
 			if( from.trigger("pagehide", {nextPage: to}) !== false && to.trigger("pageshow", {prevPage: from}) !== false ){
-				hideBrowserChrome();
 				reFocus( to );
 			}
 		}
