@@ -18,6 +18,7 @@
 .ui-body-a, .ui-body-a input, .ui-body-a select, .ui-body-a textarea, .ui-body-a button { font-family: Helvetica, Arial, sans-serif; }
 .ui-body-a .ui-link-inherit { color: #fff; }
 .ui-body-a .ui-link { color: #2489CE; font-weight: bold; }
+.ui-br { border-bottom: 1px solid rgba(130,130,130,.3); }
 
 .ui-btn-up-a { border: 1px solid #222; background: #333333; font-weight: bold; color: #fff; cursor: pointer;  text-shadow: 0 -1px 1px #000; text-decoration: none; background-image: -moz-linear-gradient(top, #555555, #333333); background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #555555),color-stop(1, #333333));   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#555555', EndColorStr='#333333')"; }
 .ui-btn-up-a a.ui-link-inherit { color: #fff; }
