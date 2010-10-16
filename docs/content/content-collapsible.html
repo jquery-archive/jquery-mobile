@@ -23,17 +23,23 @@
 		
 		<p>Directly inside this container, add any header element (H1-H6). The framework will style the header to look like a clickable button and add a "+" icon to the left to indicate it's expandable.</p>
 	
-		<p>After the heading, add any HTML markup you want to be collapsible. The framework will wrap all this markup in a container that will be hidden or shown when the heading is clicked.</p>
+		<p>After the header, add any HTML markup you want to be collapsible. The framework will wrap this markup in a container that will be hidden/shown when the heading is clicked.</p>
 
 	<pre><code>		
 	&lt;div data-role=&quot;collapsible&quot;&gt;
 	&lt;h3&gt;I&#x27;m a header&lt;/h3&gt;
-	&lt;p&gt;I&#x27;m the collapsible content.&lt;/p&gt;
+	&lt;p&gt;I&#x27;m the collapsible content. By default I'm open and displayed on the page, but you can click the header to hide me.&lt;/p&gt;
 	&lt;/div&gt;
 	</pre></code>	
 	
 
-		<p>By default, the content will be expanded. To collapse the content when the page loads, add the <code>data-state="collapsed"</code> attribute to the wrapper.</p>
+			<div data-role="collapsible">
+				<h3>I'm a header</h3>
+				<p>I'm the collapsible content. By default I'm open and displayed on the page, but you can click the header to hide me.</p>
+			</div>
+
+
+		<p>As the example notes, by default the content will be expanded. To collapse the content when the page loads, add the <code>data-state="collapsed"</code> attribute to the wrapper.</p>
 
 	<code>		
 	&lt;div data-role=&quot;collapsible&quot; <strong>data-state=&quot;collapsed&quot;&gt;</strong>
@@ -47,7 +53,7 @@
 				<p>I'm the collapsible content.</p>
 			</div>
 	
-		<p>The collapsible content is minimally styled -- we just add a bit of margin between the bar and content but you can add custom styles to tweak the appearance of the collapsible container or heading button.</p>
+		<p>Collapsible content is minimally styled &mdash; we add only a bit of margin between the bar and content, and the header bar adopts the default swatch button styles of the container it sits within.</p>
 
 		<h2>Collapsible example</h2>
 		<p>This page has 4 collapsible containers with different types of content inside.</p>
