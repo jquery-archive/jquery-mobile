@@ -36,14 +36,27 @@
 		&lt;li&gt;&lt;a href=&quot;bars-fixed.html&quot;&gt;Fixed&lt;/a&gt;&lt;/li&gt;
 		&lt;li&gt;&lt;a href=&quot;bars-inline.html&quot;&gt;Inline&lt;/a&gt;&lt;/li&gt;
 		&lt;li&gt;&lt;a href=&quot;bars-fullscreen.html&quot;&gt;Fullscreen&lt;/a&gt;&lt;/li&gt;
-		&lt;li&gt;&lt;a href=&quot;../../_dialog.html&quot; data-transition=&quot;pop&quot; data-rel=&quot;dialog&quot;&gt;Dialog&lt;/a&gt;&lt;/li&gt;
 		&lt;li&gt;&lt;a href=&quot;bars-persist.html&quot;&gt;Persistent&lt;/a&gt;&lt;/li&gt;
 		&lt;li&gt;&lt;a href=&quot;bars-themes.html&quot;&gt;Themes&lt;/a&gt;&lt;/li&gt;
 	&lt;/ul&gt;
 &lt;/div&gt;&lt;!-- /navbar --&gt;
 </pre></code>
 					
-					<p>The navbar can be added inside the header or footer bar if you want it to persist.</p>
+		<p>The markup above creates a two-row nav bar element in the body of the page, like this:</p>
+					
+					
+		<div data-role="navbar">
+			<ul>
+				<li><a href="bars-fixed.html">Fixed</a></li>
+				<li><a href="bars-inline.html">Inline</a></li>
+				<li><a href="bars-fullscreen.html">Fullscreen</a></li>
+				<li><a href="bars-persist.html">Persisten</a></li>
+				<li><a href="bars-themes.html">Themes</a></li>
+			</ul>
+		</div><!-- /navbar -->
+
+					
+					<p>The navbar can be added inside the header or footer bar; if you want it to persist, simply add a <code>data-position="fixed"</code> attribute to the header or footer <code>div</code> container.</p>
 						
 
 
