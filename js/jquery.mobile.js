@@ -7,7 +7,9 @@
  * http://jquery.org/license
  */
 (function( jQuery, window, undefined ) {
-	// if we're missing support for any of these, then we're a C-grade browser
+	//some critical feature tests should be placed here.
+	//if we're missing support for any of these, then we're a C-grade browser
+	//to-do: see if we need more qualifiers here.
 	if ( !jQuery.support.mediaquery ) {
 		return;
 	}	
@@ -336,7 +338,7 @@
     //set base href to pathname
     resetBaseURL();    
 	
-	//potential (probably incomplete) fallback to workaround lack of animation callbacks. 
+	//incomplete fallback to workaround lack of animation callbacks. 
 	//should this be extended into a full special event?
 	// note: Expects CSS animations use transitionDuration (350ms)
 	jQuery.fn.animationComplete = function(callback){
