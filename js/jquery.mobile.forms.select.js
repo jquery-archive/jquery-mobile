@@ -95,7 +95,7 @@ $.fn.customSelect = function(options){
 			if( menuHeight > window.innerHeight - 80 || !$.support.scrollTop ){
 				menuType = "page";		
 				menuPageContent.append( list );
-				$.changePage(thisPage, menuPage, "slide", false);
+				$.changePage(thisPage, menuPage, false, false);
 			}
 			else {
 				menuType = "overlay";
@@ -119,7 +119,7 @@ $.fn.customSelect = function(options){
 		
 		function hidemenu(){
 			if(menuType == "page"){			
-				$.changePage(menuPage, thisPage, "slide", true);
+				$.changePage(menuPage, thisPage, false, true);
 			}
 			else{
 				screen.addClass( "ui-screen-hidden" );
@@ -135,7 +135,8 @@ $.fn.customSelect = function(options){
 			})
 			.bind("pagehide", function(){
 				window.scrollTo(currScroll[0], currScroll[1]);
-				//select.focus();
+				select.focus();
+				listbox.append( list ).removeAttr('style');
 				return false;
 			});
 			
@@ -152,25 +153,15 @@ $.fn.customSelect = function(options){
 			});		
 		
 		//button events
-		button
-			.tap(function(){
+		button.mousedown(function(event){
 				showmenu();
-				return false;
-			})
-			.click(function(){
 				return false;
 			});
 		
 		//apply click events for items
 		list
-			.click(function(e){
-				e.stopImmediatePropagation();
-			})
 			.find("li")
-			.click(function(e){
-				return false; //prevent listview click behavior
-			})
-			.tap(function(){
+			.mousedown(function(){
 				//deselect active
 				list.find( "li" )
 					.removeClass( "ui-btn-active" )
