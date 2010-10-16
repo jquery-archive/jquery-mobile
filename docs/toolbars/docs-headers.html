@@ -42,7 +42,7 @@
 	
 			<h2>Adding buttons</h2>
 	
-			<p>In the standard header configuration, there are slots for buttons on either side of the text heading. Each button is typically an <code>anchor</code> element, but any valid <a href="../buttons/buttons-types.html">button markup</a> will work. To save space, buttons in toolbars are set to <a href="../buttons/buttons-inline.html">inline styling</a> so the button is only as wide as the text and icons they contain. </p>
+			<p>In the standard header configuration, there are slots for buttons on either side of the text heading. Each button is typically an <code>anchor</code> element, but any valid <a href="../buttons/buttons-types.html">button markup</a> will work. To save space, buttons in toolbars are set to <a href="../buttons/buttons-inline.html">inline styling</a> so the button is only as wide as the text and icons it contains. </p>
 
 		
 			<h3>Default button positioning</h3>
@@ -54,7 +54,7 @@
 &lt;div data-role=&quot;header&quot; data-position=&quot;inline&quot;&gt;
 	&lt;a href=&quot;index.html&quot; data-icon=&quot;delete&quot;&gt;Cancel&lt;/a&gt;
 	&lt;h1&gt;Edit Contact&lt;/h1&gt;
-	&lt;a href=&quot;index.html&quot; data-icon=&quot;check&quot;&lt;/a&gt;
+	&lt;a href=&quot;index.html&quot; data-icon=&quot;check&quot;&gt;Save&lt;/a&gt;
 &lt;/div&gt;
 </code></pre>
 	
@@ -64,14 +64,15 @@
 				<h1>Edit Contact</h1>
 				<a href="index.html" data-icon="check">Save</a>
 			</div>
-			<p>Buttons automatically adapt to the swatch color of the bar they sit in, so a link in a header bar with the "a" color will also be styled as "a" colored buttons. It's simple to make a button visually stand out &mdash; here, we add the <code>data-theme</code> attribute and set the color swatch for the button to "b" to make the "Save" button pop.</p>
+			<p>Buttons automatically adopt the swatch color of the bar they sit in, so a link in a header bar with the "a" color will also be styled as "a" colored buttons. It's simple to make a button visually stand out &mdash; here, we add the <code>data-theme</code> attribute and set the color swatch for the button to "b" to make the "Save" button pop.</p>
 			
-			<pre><div data-role="header" data-position="inline">
-				<a href="index.html" data-icon="delete">Cancel</a>
-				<h1>Edit Contact</h1>
-				<a href="index.html" data-icon="check" data-theme="b">Save</a>
-			</div></pre>
-			
+			<pre><code>			
+&lt;div data-role=&quot;header&quot; data-position=&quot;inline&quot;&gt;
+	&lt;a href=&quot;index.html&quot; data-icon=&quot;delete&quot;&gt;Cancel&lt;/a&gt;
+	&lt;h1&gt;Edit Contact&lt;/h1&gt;
+	&lt;a href=&quot;index.html&quot; data-icon=&quot;check&quot; data-theme=&quot;b&quot;&gt;Save&lt;/a&gt;
+&lt;/div&gt;
+</code></pre>
 			
 						
 			<div data-role="header" data-position="inline">
@@ -82,7 +83,7 @@
 	
 			<h3>Controlling button position with classes</h3>
 	
-			<p>The button position can also be controlled by adding classes to the button anchors instead of relying on source order. This is especially useful if there isn't a left button and you only want a button in the right slot. To specify the button position, add the class of <code>ui-btn-left</code> or <code>ui-btn-right</code> to the anchor.</p> 
+			<p>The button position can also be controlled by adding classes to the button anchors, rather than relying on source order. This is especially useful if you only want a button in the right slot. To specify the button position, add the class of <code>ui-btn-left</code> or <code>ui-btn-right</code> to the anchor.</p> 
 			
 			<p>In this example, we're adding only a single button to the right slot so the <code>data-nobackbtn="true"</code> needs to be added to the header container to suppress the automatic Back button behavior and the button needs the <code>ui-btn-right</code> class on the link.</p>
 			
