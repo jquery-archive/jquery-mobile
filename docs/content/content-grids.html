@@ -18,33 +18,31 @@
 
 	<div data-role="content">
 		
-		<p>On a mobile device, using multiple column layouts isn't generally recommended because of the narrow screen width but there are times where you may need to place buttons or other small elements side-by-side. </p>
-		<p>The framework provides a simple way to build CSS based columns through the <code>grid</code> block styles. Grids have preset configurations for 2- and 3-column layouts that can be used in any situation that requires columns. Grids are 100% width, completely invisible (no borders or backgrounds) and don't have padding or margins so they shouldn't interfere with the styles of elements palced inside them.</p>
+		<p>Using multiple column layouts isn't generally recommended on a mobile device because of the narrow screen width, but there are times where you may need to place small elements side-by-side (like buttons or navigation tabs, for example). The jQuery Mobile framework provides a simple way to build CSS-based columns through a  block style class convention called <code>ui-grid</code>. </p>
+		<p>There are two preset configurations layouts &mdash; two-column (using the <code>class</code> of <code>ui-grid-a</code>), and three-column (using the <code>class</code> of <code>ui-grid-b</code>) &mdash; that can be used in any situation that requires columns. Grids are 100% width, completely invisible (no borders or backgrounds) and don't have padding or margins, so they shouldn't interfere with the styles of elements placed inside them.</p>
 		
 		<h2>Two column grids</h2>
-		<p>To build a two column (50/50%) layout, start with a container with a <code>class</code> of <code>ui-grid-a</code> and add two child containers inside that are classed with <code>ui-block-a</code> for the first column and  <code>ui-block-b</code> for the second.</p>
+		<p>To build a two-column (50/50%) layout, start with a container with a <code>class</code> of <code>ui-grid-a</code> and add two child containers inside that are classed with <code>ui-block-a</code> for the first column and <code>ui-block-b</code> for the second:</p>
 
 <pre><code>
 &lt;div class=&quot;ui-grid-a&quot;&gt;
-	&lt;div class=&quot;ui-block-a&quot;&gt;Block A&lt;/div&gt;
-	&lt;div class=&quot;ui-block-b&quot;&gt;Block B&lt;/div&gt;
+	&lt;div class=&quot;ui-block-a&quot;&gt;&lt;strong&gt;I'm Block A&lt;/strong&gt; and text inside will wrap&lt;/div&gt;
+	&lt;div class=&quot;ui-block-b&quot;&gt;&lt;strong&gt;I'm Block B&lt;/strong&gt; and text inside will wrap&lt;/div&gt;
 &lt;/div&gt;&lt;!-- /grid-a --&gt;
 </code></pre>
-			<p><strong>Note:</strong> that we've added a height and color swatches to the grid blocks so you can see them but these don't have any appearance by default.</p>
-			
-		<div class="ui-grid-a">
-			<div class="ui-block-a"><div class="ui-bar ui-bar-e" style="height:120px">Block A</div></div>
-			<div class="ui-block-b"><div class="ui-bar ui-bar-e" style="height:120px">Block B</div></div>
-		</div><!-- /grid-a -->
+
+
 		
-		<p>Here is a more realistic example with text inside:</p>
+		<p>The above markup produces the following content layout:</p>
 		
 		<div class="ui-grid-a">
-			<div class="ui-block-a"><strong>I'm block-b</strong> and text inside will wrap.</div>
-			<div class="ui-block-b"><strong>I'm block-b</strong> and text inside will wrap.</div>
+			<div class="ui-block-a"><strong>I'm Block A</strong> and text inside will wrap.</div>
+			<div class="ui-block-b"><strong>I'm Block B</strong> and text inside will wrap.</div>
 		</div><!-- /grid-a -->
 		
-		<p>The grid classes can be applied to any container. In this example, we've added <code>grid-a</code> to a <code>fieldset</code> to make the two button inside stretch to 50% of the screen width:</p>
+		<p>As you see above, by default grid blocks have no style appearance; they simply present content side-by-side.</p>
+		
+		<p>The grid classes can be applied to any container. In this next example, we add <code>grid-a</code> to a <code>fieldset</code> to make the two button inside stretch to 50% of the screen width:</p>
 
 <pre><code>
 &lt;fieldset class=&quot;ui-grid-a&quot;&gt;
@@ -57,6 +55,14 @@
 				<div class="ui-block-a"><button type="submit" data-theme="c">Cancel</button></div>
 				<div class="ui-block-b"><button type="submit" data-theme="b">Submit</button></div>	   
 	    </fieldset>
+	    
+	    
+	    <p>And, grid blocks can adopt presentation styles from the theming system &mdash; we've added a height and color swatch reference to the grid blocks.</p>
+			
+		<div class="ui-grid-a">
+			<div class="ui-block-a"><div class="ui-bar ui-bar-e" style="height:120px">Block A</div></div>
+			<div class="ui-block-b"><div class="ui-bar ui-bar-e" style="height:120px">Block B</div></div>
+		</div><!-- /grid-a -->
 
 		<h2>Three column grids</h2>
 		<p>There is a second grid for a 3 column layout (33/33/33%) that is similar in structure but uses <code>class=grid-b</code> on the parent and 3 child wrappers, each with <code>block-a/b/c</code> for the column child containers.</p>

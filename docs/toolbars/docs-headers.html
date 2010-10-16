@@ -17,7 +17,9 @@
 	<div data-role="content">
 		
 			<h2>Header structure</h2>
-			<p>The <code>header</code> is an toolbar at the top of the page that usually contains the page title text and optional buttons positioned in the the left or right of the title for navigation or actions. The title text is normally an H1 heading element but it's possible to use any heading level (H1-H6) to allow for semantic flexibility. For example, a page containing multiple mobile 'pages' may use a H1 element on the home 'page' and a H2 element on the secondary pages. All heading levels are styled identically by default to maintain visual consistency.</p> 
+			<p>The <code>header</code> is an toolbar at the top of the page that usually contains the page title text, and optional buttons positioned to the the left and/or right of the title for navigation or actions.</p> 
+			
+			<p>The title text is normally an H1 heading element but it's possible to use any heading level (H1-H6) to allow for semantic flexibility. For example, a page containing multiple mobile 'pages' may use a H1 element on the home 'page' and a H2 element on the secondary pages. All heading levels are styled identically by default to maintain visual consistency.</p> 
 
 <div class="highlight"> 
 <pre>
@@ -27,29 +29,32 @@
 </pre> 
 </div> 
 
-			<p>The <code>header</code> toolbar will be be themed with the "a" swatch by default (black in the default theme) but you can easily <a href="bars-themes.html">set the theme swatch color</a>.</p> 
+			<h2>Default header features</h2>
+			<p>The <code>header</code> toolbar is themed with the "a" swatch by default (black in the default theme) but you can easily <a href="bars-themes.html">set the theme swatch color</a>.</p> 
 
+
+			
 			<div data-role="header" data-position="inline">
 				<h1>Page title</h1>
 			</div>
 
-			<p><strong>See that "back" button?</strong> The framework automatically generates a "back" button for you to automate the process of including this common navigation element on every page. To prevent the back button from being added to a header either add your own button to the left slot (see below) or, add this attribute: <code>data-nobackbtn="true"</code> to the header container.
+			<p><strong>See that "back" button?</strong> The framework automatically generates a "back" button on every page, to simplify the process of including this common navigation element. To prevent the back button from being added to a header, either add your own button to the left slot (see below) or, add this attribute: <code>data-nobackbtn="true"</code> to the header container.
 	
 			<h2>Adding buttons</h2>
 	
-			<p>In the standard header configuration, there are slots buttons on either side of the text heading. Each button is typically an <code>anchor</code> element but any valid <a href="../buttons/buttons-types.html">button markup</a> will work. To save space, buttons in toolbars are set to <a href="../buttons/buttons-inline.html">inline styling</a> so the button is only as wide as the text and icons they contain. </p>
+			<p>In the standard header configuration, there are slots for buttons on either side of the text heading. Each button is typically an <code>anchor</code> element, but any valid <a href="../buttons/buttons-types.html">button markup</a> will work. To save space, buttons in toolbars are set to <a href="../buttons/buttons-inline.html">inline styling</a> so the button is only as wide as the text and icons it contains. </p>
 
 		
 			<h3>Default button positioning</h3>
 		
-			<p>The header plugin looks for immediate children of the header container and will automatically set the first link found into the left button slot and the second link into the right button slot. In this example, the 'Cancel' button will appear in the left slot and 'Save' will appear in the right slot  because of their sequence in the source order. </p> 
+			<p>The header plugin looks for immediate children of the header container, and automatically sets the first link in the left button slot and the second link in the right. In this example, the 'Cancel' button will appear in the left slot and 'Save' will appear in the right slot based on their sequence in the source order. </p> 
 			
 
 <pre><code>			
 &lt;div data-role=&quot;header&quot; data-position=&quot;inline&quot;&gt;
 	&lt;a href=&quot;index.html&quot; data-icon=&quot;delete&quot;&gt;Cancel&lt;/a&gt;
 	&lt;h1&gt;Edit Contact&lt;/h1&gt;
-	&lt;a href=&quot;index.html&quot; data-icon=&quot;check&quot;&lt;/a&gt;
+	&lt;a href=&quot;index.html&quot; data-icon=&quot;check&quot;&gt;Save&lt;/a&gt;
 &lt;/div&gt;
 </code></pre>
 	
@@ -59,8 +64,17 @@
 				<h1>Edit Contact</h1>
 				<a href="index.html" data-icon="check">Save</a>
 			</div>
-			<p>Buttons automatically adapt to the color of the bar they sit in so a link in a header bar with the "a" swatch color will also be styled as "a" colored buttons. To make the right button visually stand out, use add the <code>data-theme</code> attribute and set the color swatch for the button, "b" in this case.</p>
+			<p>Buttons automatically adopt the swatch color of the bar they sit in, so a link in a header bar with the "a" color will also be styled as "a" colored buttons. It's simple to make a button visually stand out &mdash; here, we add the <code>data-theme</code> attribute and set the color swatch for the button to "b" to make the "Save" button pop.</p>
 			
+			<pre><code>			
+&lt;div data-role=&quot;header&quot; data-position=&quot;inline&quot;&gt;
+	&lt;a href=&quot;index.html&quot; data-icon=&quot;delete&quot;&gt;Cancel&lt;/a&gt;
+	&lt;h1&gt;Edit Contact&lt;/h1&gt;
+	&lt;a href=&quot;index.html&quot; data-icon=&quot;check&quot; data-theme=&quot;b&quot;&gt;Save&lt;/a&gt;
+&lt;/div&gt;
+</code></pre>
+			
+						
 			<div data-role="header" data-position="inline">
 				<a href="index.html" data-icon="delete">Cancel</a>
 				<h1>Edit Contact</h1>
@@ -69,7 +83,7 @@
 	
 			<h3>Controlling button position with classes</h3>
 	
-			<p>The button position can also be controlled by adding classes to the button anchors instead of relying on source order. This is especially useful if there isn't a left button and you only want a button in the right slot. To specify the button position, add the class of <code>ui-btn-left</code> or <code>ui-btn-right</code> to the anchor.</p> 
+			<p>The button position can also be controlled by adding classes to the button anchors, rather than relying on source order. This is especially useful if you only want a button in the right slot. To specify the button position, add the class of <code>ui-btn-left</code> or <code>ui-btn-right</code> to the anchor.</p> 
 			
 			<p>In this example, we're adding only a single button to the right slot so the <code>data-nobackbtn="true"</code> needs to be added to the header container to suppress the automatic Back button behavior and the button needs the <code>ui-btn-right</code> class on the link.</p>
 			
