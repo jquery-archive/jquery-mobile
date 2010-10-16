@@ -1,0 +1,79 @@
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<title>jQuery Mobile Framework - Persistent footer demo</title> 
+	<link rel="stylesheet"  href="../../themes/default" /> 
+	<script type="text/javascript" src="../../js/all"></script>
+</head> 
+<body> 
+
+<div data-role="page">
+	
+	<div data-role="header" data-position="fixed">
+		<h1>Fixed Header</h1>
+		<a href="index.html" data-icon="arrow-l">Back</a>
+		<a href="../forms/forms-all.html" data-rel="dialog" data-transition="pop" data-icon="gear" class="ui-btn-right">Options</a>
+	</div>
+	
+	<div data-role="content">
+	
+			<div class="ui-body">
+				<h2>Friends</h2>
+				<p>This page is a demo of a persistent footer navigation bar. At the foot of the page, you'll see a persistent horizontal navigation bar. Click on any of the links, and you'll see the page content transition but the footer remain fixed: The footer sticks persistently even when transitioning to a new HTML page, because the footer on all four HTML pages has the same <code>data-id</code> attribute. </p>
+			</div>
+	
+
+				<ul data-role="listview" data-dividertheme="d">
+					<li data-role="list-divider">A</li>
+					<li><a href="index.html">Adam Kinkaid</a></li>
+					<li><a href="index.html">Alex Wickerham</a></li>
+					<li><a href="index.html">Avery Johnson</a></li>
+					<li data-role="list-divider">B</li>
+					<li><a href="index.html">Bob Cabot</a></li>
+					<li data-role="list-divider">C</li>
+					<li><a href="index.html">Caleb Booth</a></li>
+					<li><a href="index.html">Christopher Adams</a></li>
+					<li><a href="index.html">Culver James</a></li>
+					<li data-role="list-divider">D</li>
+					<li><a href="index.html">David Walsh</a></li>
+					<li><a href="index.html">Drake Alfred</a></li>
+					<li data-role="list-divider">E</li>
+					<li><a href="index.html">Elizabeth Bacon</a></li>
+					<li><a href="index.html">Emery Parker</a></li>
+					<li><a href="index.html">Enid Voldon</a></li>
+					<li data-role="list-divider">F</li>
+					<li><a href="index.html">Francis Wall</a></li>
+					<li data-role="list-divider">G</li>
+					<li><a href="index.html">Graham Smith</a></li>
+					<li><a href="index.html">Greta Peete</a></li>
+					<li data-role="list-divider">H</li>
+					<li><a href="index.html">Harvey Walls</a></li>
+					<li data-role="list-divider">M</li>
+					<li><a href="index.html">Mike Farnsworth</a></li>
+					<li><a href="index.html">Murray Vanderbuilt</a></li>
+					<li data-role="list-divider">N</li>
+					<li><a href="index.html">Nathan Williams</a></li>
+					<li data-role="list-divider">P</li>
+					<li><a href="index.html">Paul Baker</a></li>
+					<li><a href="index.html">Pete Mason</a></li>
+					<li data-role="list-divider">R</li>
+					<li><a href="index.html">Rod Tarker</a></li>
+					<li data-role="list-divider">S</li>
+					<li><a href="index.html">Sawyer Wakefield</a></li>
+				</ul>
+	</div>
+	
+	<div data-role="footer" data-id="foo1" data-position="fixed">
+		<div data-role="navbar">
+			<ul>
+				<li><a href="footer-persist-a.html" class="ui-btn-active">Friends</a></li>
+				<li><a href="footer-persist-b.html">Albums</a></li>
+				<li><a href="footer-persist-c.html">Emails</a></li>
+			</ul>
+		</div><!-- /navbar -->
+
+
+</div>
+
+</body>
+</html>
