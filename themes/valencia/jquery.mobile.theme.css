@@ -6,87 +6,90 @@
 */
 
 
+
 /*####################################################################################################################################
 
   A
 
 ####################################################################################################################################*/
 
-.ui-bar-a {  
+.ui-bar-a {
   font-weight: bold;
-  border: 1px solid       #BD610D; 
-  background:             #FF6700; 
-  color:                  #fff; 
-  text-shadow: 0 -1px 0px #94440F; 
+  border: 1px solid       #999; 
+  background:             #eee; 
+  color:                  #333; 
+  text-shadow: 0 1px 0px  #fff; 
   background-image: -webkit-gradient(linear,left top,left bottom,
-    color-stop(0,         #FF8700),
-    color-stop(1,         #FF6700));
+    color-stop(0,         #fcfcfc),
+    color-stop(.5,        #eee),
+    color-stop(.5,        #e3e3e3),
+    color-stop(1,         #e9e9e9));
 }
-.ui-btn-up-a {
-  border: 1px solid       #BD610D;
-  background:             #F26101;
-  color:                  #fff;
-  background-image: -webkit-gradient(linear,left top,left bottom,
-    color-stop(0,         #FF8C3F),
-    color-stop(1,         #F26101));
-}
-.ui-btn-up-a a.ui-link-inherit {
-  color:                  #fff;
-}
-.ui-btn-hover-a {
-  border: 1px solid       #BD610D;
-  background:             #F58134;
-  color:                  #fff;
-  background-image: -webkit-gradient(linear,left top,left bottom,
-    color-stop(0,         #FFA365),
-    color-stop(1,         #F58134));
-}
-.ui-btn-hover-a a.ui-link-inherit {
-  color:                  #fff;
-}
-.ui-btn-down-a {
-  border: 1px solid       #BD610D;
-  background:             #C24E01;
-  color:                  #fff;
-  background-image: -webkit-gradient(linear,left top,left bottom,
-    color-stop(0,         #CC7032),
-    color-stop(1,         #C24E01));
-}
-.ui-btn-up-a,
-.ui-btn-hover-a,
-.ui-btn-down-a {
-  text-shadow: 0 -1px 0px #94440F;
-  cursor: pointer;
-  font-weight: bold; 
-  text-decoration: none;
-  font-family: Helvetica, Arial, sans-serif;
-}
-.ui-bar-a, 
+.ui-bar-a,
 .ui-bar-a input, 
 .ui-bar-a select, 
 .ui-bar-a textarea, 
 .ui-bar-a button { 
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: Helvetica, Arial, sans-serif; 
 }
 .ui-bar-a .ui-link-inherit { 
-  color:                  #fff;
+  color:                  #333; 
 }
 .ui-bar-a .ui-link { 
-  color:                  #7cc4e7;
-  font-weight: bold;
+  color:                  #2489CE; 
+  font-weight: bold; 
 }
-.ui-body-a {
+.ui-btn-up-a {
+  border: 1px solid       #999;
+  background:             #f5f5f5;
+  color:                  #333;
+  text-shadow: 0 1px 0px  #fff;
+  background-image: -webkit-gradient(linear,left top,left bottom,
+    color-stop(0,         #f5f5f5),
+    color-stop(.5,        #ccc),
+    color-stop(.5,        #b5b5b5),
+    color-stop(1,         #f5f5f5));
+}
+.ui-btn-up-a a.ui-link-inherit { color: #333; }
+.ui-btn-hover-a { 
+  border: 1px solid       #777;
+  background:             #fff;
+  color:                  #333;
+  text-shadow: 0 1px 0px  #fff;
+  background-image: -webkit-gradient(linear,left top,left bottom,
+    color-stop(0,         #fff),
+    color-stop(.5,        #ddd),
+    color-stop(.5,        #ccc),
+    color-stop(1,         #fff));
+}
+.ui-btn-hover-a a.ui-link-inherit { color: #333; }
+.ui-btn-down-a { 
+  border: 1px solid       #888;
+  background:             #ddd;
+  color:                  #333;
+  background-image: -webkit-gradient(linear,left top,left bottom,
+    color-stop(0,         #ddd),
+    color-stop(.5,        #ccc),
+    color-stop(.5,        #bbb),
+    color-stop(1,         #ddd));
+}
+.ui-btn-down-a a.ui-link-inherit { color: #333; }
+.ui-btn-up-a, 
+.ui-btn-hover-a, 
+.ui-btn-down-a { 
+  font-family: Helvetica, Arial, sans-serif;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: none;
+  text-shadow: 0 1px 0px  #fff;
+}
+.ui-body-a { 
   font-weight: normal;
-  border: 1px solid       #222;
-  background:             #444;
-  color:                  #ddd;
-  text-shadow: 0 -1px 0px #000;
-  background-image: -webkit-gradient(linear, center top, center bottom, 
-    color-stop(0,         #333), 
-    color-stop(5%,        #333), 
-    color-stop(15%,       #444), 
-    color-stop(60%,       #444), 
-    color-stop(1,         #222));
+  border: 1px solid       #aaa;
+  background:             #ccc;
+  color:                  #111;
+  text-shadow: 0 1px 0px  #fff;
+  background-image: url(images/texture_075.png);
 }
 .ui-body-a, 
 .ui-body-a input, 
@@ -95,13 +98,19 @@
 .ui-body-a button { 
   font-family: Helvetica, Arial, sans-serif; 
 }
-.ui-body-a .ui-link-inherit { 
-  color:                  #fff; 
+.ui-body-a .ui-link-inherit {
+  color:                  #333333;
 }
 .ui-body-a .ui-link { 
-  color:                  #2489CE; 
-  font-weight: bold; 
+  font-weight: bold;
+  color:                  #ff6600;
 }
+
+a.ui-link-inherit { 
+  text-decoration: none !important;
+}
+
+
 
 /*####################################################################################################################################
 
@@ -392,90 +401,87 @@
   color:                  #ff6600;
 }
 
-
 /*####################################################################################################################################
 
   E
 
 ####################################################################################################################################*/
 
-.ui-bar-e {
+.ui-bar-e {  
   font-weight: bold;
-  border: 1px solid       #999; 
-  background:             #eee; 
-  color:                  #000; 
-  text-shadow: 0 1px 0px  #fff; 
+  border: 1px solid       #be7800; 
+  background:             #e99515; 
+  color:                  #fff; 
+  text-shadow: 0 -1px 0px #94440F; 
   background-image: -webkit-gradient(linear,left top,left bottom,
-    color-stop(0,         #fff),
-    color-stop(.5,        #ccc),
-    color-stop(.5,        #b5b5b5),
-    color-stop(1,         #eee));
+    color-stop(0,         #e9a015),
+    color-stop(1,         #e98a15));
 }
-.ui-bar-e,
+.ui-btn-up-e {
+  border: 1px solid       #BD610D;
+  background:             #ea9e0c;
+  color:                  #fff;
+  background-image: -webkit-gradient(linear,left top,left bottom,
+    color-stop(0,         #ea9e0c),
+    color-stop(1,         #e68510));
+}
+.ui-btn-up-e a.ui-link-inherit {
+  color:                  #fff;
+}
+.ui-btn-hover-e {
+  border: 1px solid       #b77504;
+  background:             #edab30;
+  color:                  #fff;
+  background-image: -webkit-gradient(linear,left top,left bottom,
+    color-stop(0,         #edab30),
+    color-stop(1,         #ed9730));
+}
+.ui-btn-hover-e a.ui-link-inherit {
+  color:                  #fff;
+}
+.ui-btn-down-e {
+  border: 1px solid       #BD610D;
+  background:             #C24E01;
+  color:                  #fff;
+  background-image: -webkit-gradient(linear,left top,left bottom,
+    color-stop(0,         #CC7032),
+    color-stop(1,         #C24E01));
+}
+.ui-btn-up-e,
+.ui-btn-hover-e,
+.ui-btn-down-e {
+  text-shadow: 0 -1px 0px #94440F;
+  cursor: pointer;
+  font-weight: bold; 
+  text-decoration: none;
+  font-family: Helvetica, Arial, sans-serif;
+}
+.ui-bar-e, 
 .ui-bar-e input, 
 .ui-bar-e select, 
 .ui-bar-e textarea, 
-.ui-bar-d button { 
-  font-family: Helvetica, Arial, sans-serif; 
+.ui-bar-e button { 
+  font-family: Helvetica, Arial, sans-serif;
 }
 .ui-bar-e .ui-link-inherit { 
-  color:                  #333; 
+  color:                  #fff;
 }
 .ui-bar-e .ui-link { 
-  color:                  #2489CE; 
-  font-weight: bold; 
-}
-.ui-btn-up-e {
-  border: 1px solid       #999;
-  background:             #f5f5f5;
-  color:                  #333;
-  text-shadow: 0 1px 0px  #fff;
-  background-image: -webkit-gradient(linear,left top,left bottom,
-    color-stop(0,         #f5f5f5),
-    color-stop(.5,        #ccc),
-    color-stop(.5,        #b5b5b5),
-    color-stop(1,         #f5f5f5));
-}
-.ui-btn-up-e a.ui-link-inherit { color: #333; }
-.ui-btn-hover-e { 
-  border: 1px solid       #777;
-  background:             #fff;
-  color:                  #333;
-  text-shadow: 0 1px 0px  #fff;
-  background-image: -webkit-gradient(linear,left top,left bottom,
-    color-stop(0,         #fff),
-    color-stop(.5,        #ddd),
-    color-stop(.5,        #ccc),
-    color-stop(1,         #fff));
-}
-.ui-btn-hover-e a.ui-link-inherit { color: #333; }
-.ui-btn-down-e { 
-  border: 1px solid       #888;
-  background:             #ddd;
-  color:                  #333;
-  background-image: -webkit-gradient(linear,left top,left bottom,
-    color-stop(0,         #ddd),
-    color-stop(.5,        #ccc),
-    color-stop(.5,        #bbb),
-    color-stop(1,         #ddd));
-}
-.ui-btn-down-e a.ui-link-inherit { color: #333; }
-.ui-btn-up-e, 
-.ui-btn-hover-e, 
-.ui-btn-down-e { 
-  font-family: Helvetica, Arial, sans-serif;
-  cursor: pointer;
+  color:                  #7cc4e7;
   font-weight: bold;
-  text-decoration: none;
-  text-shadow: 0 1px 0px  #fff;
 }
-.ui-body-e { 
+.ui-body-e {
   font-weight: normal;
-  border: 1px solid       #aaa;
-  background:             #ccc;
-  color:                  #111;
-  text-shadow: 0 1px 0px  #fff;
-  background-image: url(images/texture_075.png);
+  border: 1px solid       #222;
+  background:             #444;
+  color:                  #ddd;
+  text-shadow: 0 -1px 0px #000;
+  background-image: -webkit-gradient(linear, center top, center bottom, 
+    color-stop(0,         #333), 
+    color-stop(5%,        #333), 
+    color-stop(15%,       #444), 
+    color-stop(60%,       #444), 
+    color-stop(1,         #222));
 }
 .ui-body-e, 
 .ui-body-e input, 
@@ -484,16 +490,12 @@
 .ui-body-e button { 
   font-family: Helvetica, Arial, sans-serif; 
 }
-.ui-body-e .ui-link-inherit {
-  color:                  #333333;
+.ui-body-e .ui-link-inherit { 
+  color:                  #fff; 
 }
 .ui-body-e .ui-link { 
-  font-weight: bold;
-  color:                  #ff6600;
-}
-
-a.ui-link-inherit { 
-  text-decoration: none !important;
+  color:                  #2489CE; 
+  font-weight: bold; 
 }
 
 /* Active class used as the "on" state across all themes */
@@ -501,13 +503,13 @@ a.ui-link-inherit {
   font-weight: bold;
   cursor: pointer;
   text-decoration: none;
-  border: 1px solid       #155678;
-  background:             #4596ce;
+  border: 1px solid       #BD610D;
+  background:             #ea9e0c;
   color:                  #fff;
-  text-shadow: 0 -1px 0px #145072;
   background-image: -webkit-gradient(linear,left top,left bottom,
-    color-stop(0,         #66a4da),
-    color-stop(1,         #1a70b9));
+    color-stop(0,         #ea9e0c),
+    color-stop(1,         #e68510));
+  text-shadow: 0 1px 0px  #444;
 }
 .ui-btn-active a.ui-link-inherit {
   color:                  #fff;
