@@ -17,7 +17,7 @@
   border: 1px solid       #BD610D; 
   background:             #FF6700; 
   color:                  #fff; 
-  text-shadow: 0 -1px 1px #94440F; 
+  text-shadow: 0 -1px 0px #94440F; 
   background-image: -webkit-gradient(linear,left top,left bottom,
     color-stop(0,         #FF8700),
     color-stop(1,         #FF6700));
@@ -55,7 +55,7 @@
 .ui-btn-up-a,
 .ui-btn-hover-a,
 .ui-btn-down-a {
-  text-shadow: 0 -1px 1px #94440F;
+  text-shadow: 0 -1px 0px #94440F;
   cursor: pointer;
   font-weight: bold; 
   text-decoration: none;
@@ -80,7 +80,7 @@
   border: 1px solid       #222;
   background:             #444;
   color:                  #ddd;
-  text-shadow: 0 -1px 1px #000;
+  text-shadow: 0 -1px 0px #000;
   background-image: -webkit-gradient(linear, center top, center bottom, 
     color-stop(0,         #333), 
     color-stop(5%,        #333), 
@@ -114,7 +114,7 @@
   border: 1px solid       #222; 
   background:             #FF8700; 
   color:                  #fff; 
-  text-shadow: 0 -1px 1px #111; 
+  text-shadow: 0 -1px 0px #111; 
   background-image: -webkit-gradient(linear,left top,left bottom,
     color-stop(0,         #555555),
     color-stop(1,         #333333));
@@ -156,7 +156,7 @@
 .ui-btn-up-b, 
 .ui-btn-hover-b, 
 .ui-btn-down-b {
-  text-shadow: 0 -1px 1px #111;
+  text-shadow: 0 -1px 0px #111;
   cursor: pointer;
   font-weight: bold;
   text-decoration: none;
@@ -170,18 +170,18 @@
   font-family: Helvetica, Arial, sans-serif; 
 }
 .ui-bar-b .ui-link-inherit {
-  color:                #fff;
+  color:                  #fff;
 }
 .ui-bar-b .ui-link {
-  color:                #7cc4e7; 
+  color:                  #7cc4e7; 
   font-weight: bold;
 }
 .ui-body-b { 
   font-weight: normal;
-  border: 1px solid     #999;
-  background:           #e5e5e5;
-  color:                #666;
-  text-shadow: 0 1px 0  #fff;
+  border: 1px solid       #999;
+  background:             #e5e5e5;
+  color:                  #666;
+  text-shadow: 0 1px 0px  #fff;
   background-image: url(images/texture_05.png);
 /*
   background-image: -webkit-gradient(linear,left top,left bottom,
@@ -208,7 +208,7 @@
   border: 1px solid       #ccc; 
   background:             #e5e5e5; 
   color:                  #111; 
-  text-shadow: 0 1px 1px  #fff; 
+  text-shadow: 0 1px 0px  #fff; 
   background-image: -webkit-gradient(linear,left top,left bottom,
     color-stop(0,         #eee),
     color-stop(1,         #e5e5e5));
@@ -227,7 +227,7 @@
   cursor: pointer;
   font-weight: bold;
   text-decoration: none;
-  text-shadow: 0 1px 1px  #fff;
+  text-shadow: 0 1px 0px  #fff;
 }
 .ui-btn-up-c {
   border: 1px solid       #ccc;
@@ -265,7 +265,7 @@
 .ui-body-c {
   border: 1px solid       #ddd;
   color:                  #333333;
-  text-shadow: 0 1px 1px  #fff;
+  text-shadow: 0 1px 0px  #fff;
   background:             #fff;
   background-image: url(images/texture_075.png);
 }
@@ -295,7 +295,7 @@
   border: 1px solid       #ccc; 
   background:             #cbcbcb;
   color:                  #666; 
-  text-shadow: 0 1px 1px  #fff;
+  text-shadow: 0 1px 0px  #fff;
   background-image: -webkit-gradient(linear, center top, center bottom,
     color-stop(0,         #ddd),
     color-stop(5%,        #ccc),
@@ -358,7 +358,7 @@
   cursor: pointer;
   font-weight: bold;
   text-decoration: none;
-  text-shadow: 0 1px 1px  #fff;
+  text-shadow: 0 1px 0px  #fff;
 }
 .ui-body-d,
 .ui-body-d input,
@@ -373,7 +373,7 @@
 .ui-body-d { 
   border: 1px solid       #aaa;
   color:                  #666;
-  text-shadow: 0 1px 1px  #fff;
+  text-shadow: 0 1px 0px  #fff;
   background: #ddd;
   background-image: -webkit-gradient(linear,left top,left bottom,
     color-stop(0,         #fff),
@@ -404,7 +404,7 @@
   border: 1px solid       #999; 
   background:             #eee; 
   color:                  #000; 
-  text-shadow: 0 1px 1px  #fff; 
+  text-shadow: 0 1px 0px  #fff; 
   background-image: -webkit-gradient(linear,left top,left bottom,
     color-stop(0,         #fff),
     color-stop(.5,        #ccc),
@@ -429,7 +429,7 @@
   border: 1px solid       #999;
   background:             #f5f5f5;
   color:                  #333;
-  text-shadow: 0 1px 1px  #fff;
+  text-shadow: 0 1px 0px  #fff;
   background-image: -webkit-gradient(linear,left top,left bottom,
     color-stop(0,         #f5f5f5),
     color-stop(.5,        #ccc),
@@ -441,7 +441,7 @@
   border: 1px solid       #777;
   background:             #fff;
   color:                  #333;
-  text-shadow: 0 1px 1px  #fff;
+  text-shadow: 0 1px 0px  #fff;
   background-image: -webkit-gradient(linear,left top,left bottom,
     color-stop(0,         #fff),
     color-stop(.5,        #ddd),
@@ -467,14 +467,14 @@
   cursor: pointer;
   font-weight: bold;
   text-decoration: none;
-  text-shadow: 0 1px 1px  #fff;
+  text-shadow: 0 1px 0px  #fff;
 }
 .ui-body-e { 
   font-weight: normal;
   border: 1px solid       #aaa;
   background:             #ccc;
   color:                  #111;
-  text-shadow: 0 1px 1px  #fff;
+  text-shadow: 0 1px 0px  #fff;
   background-image: url(images/texture_075.png);
 }
 .ui-body-e, 
@@ -504,7 +504,7 @@ a.ui-link-inherit {
   border: 1px solid       #155678;
   background:             #4596ce;
   color:                  #fff;
-  text-shadow: 0 -1px 1px #145072;
+  text-shadow: 0 -1px 0px #145072;
   background-image: -webkit-gradient(linear,left top,left bottom,
     color-stop(0,         #66a4da),
     color-stop(1,         #1a70b9));
@@ -536,27 +536,51 @@ a.ui-link-inherit {
 
 /* Icons
 ----------------------------------*/
-.ui-icon { background-position: 50% 50%; background-repeat: no-repeat; background-color: #fff; background-color: rgba(0,0,0,.4);  -moz-border-radius: 9px; -webkit-border-radius: 9px; border-radius: 9px; }
-/*icons with no bg needed*/
+/* .ui-icon { background-position: 50% 50%; background-repeat: no-repeat; background-color: #fff; background-color: rgba(0,0,0,.4);  -moz-border-radius: 9px; -webkit-border-radius: 9px; border-radius: 9px; } */
+
+.ui-icon { background-image: url(images/icons-18-white.png); background-repeat: no-repeat; background-color: #666; background-color: rgba(0,0,0,.4);  -moz-border-radius: 9px; -webkit-border-radius: 9px; border-radius: 9px; }
+.ui-icon-disc { background-color: #666; background-color: rgba(0,0,0,.3);  -moz-border-radius: 9px; -webkit-border-radius: 9px; border-radius: 9px; }
+
+/* alt color */
+.ui-icon-black { background-image: url(images/icons-18-black.png); }
+.ui-icon-black-disc { background-color: #fff; background-color: rgba(255,255,255,.3);  -moz-border-radius: 9px; -webkit-border-radius: 9px; border-radius: 9px; }
+
+/* retina */
+@media  screen and (-webkit-min-device-pixel-ratio: 2), screen and (max--moz-device-pixel-ratio: 2) {
+	.ui-icon { background-image: url(images/icons-36-white.png); background-size: 558px 18px; }
+	.ui-icon-black { background-image: url(images/icons-36-black.png); }
+}
+
+/*plus minus*/
+.ui-icon-plus { background-position: -0 0; }
+.ui-icon-minus { background-position: -36px 0; }
+
+/* delete/close */
+.ui-icon-delete { background-position: -72px 0; }
+
+/*arrows*/
+.ui-icon-arrow-r { background-position: -108px 0; }
+.ui-icon-arrow-l { background-position: -144px 0; }
+.ui-icon-arrow-u { background-position: -180px 0; }
+.ui-icon-arrow-d { background-position: -216px 0; }
+
+.ui-icon-check { background-position: -252px 0; }
+.ui-icon-gear { background-position: -288px 0; }
+.ui-icon-refresh { background-position: -324px 0; }
+.ui-icon-forward { background-position: -360px 0; }
+.ui-icon-back { background-position: -396px 0; }
+
+.ui-icon-grid { background-position: -432px 0; }
+.ui-icon-star { background-position: -468px 0; }
+.ui-icon-alert { background-position: -504px 0; }
+.ui-icon-info { background-position: -540px 0; }
+
+/*checks,radios*/
 .ui-icon-checkbox-off,
 .ui-icon-checkbox-on,
 .ui-icon-radio-off,
 .ui-icon-radio-on { background-color: transparent; -moz-border-radius: 0; -webkit-border-radius: 0; border-radius: 0; }
 
-/*arrows*/
-.ui-icon-arrow-u { background-image: url(images/icon-arrow-white-up.png); }
-.ui-icon-arrow-r { background-image: url(images/icon-arrow-white-right.png); }
-.ui-icon-arrow-d { background-image: url(images/icon-arrow-white-down.png); }
-.ui-icon-arrow-l { background-image: url(images/icon-arrow-white-left.png); }
-
-/*plus minus*/
-.ui-icon-plus { background-image: url(images/icon-plus-white.png); }
-.ui-icon-minus { background-image: url(images/icon-minus-white.png); }
-
-/* delete/close */
-.ui-icon-delete { background-image: url(images/icon-delete.png); }
-
-/*checks,radios*/
 .ui-icon-checkbox-off { background-image: url(images/form-check-off.png); }
 .ui-icon-checkbox-on { background-image: url(images/form-check-on.png); }
 .ui-icon-radio-off { background-image: url(images/form-radio-off.png); }
