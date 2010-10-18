@@ -46,6 +46,7 @@
 		startPageId = 'ui-page-start',
 		activePageClass = 'ui-page-active',
 		pageTransition,
+		forceBack,
 		transitions = 'slide slideup slidedown pop flip fade',
 		transitionDuration = 350,
 		backBtnText = "Back",
@@ -102,6 +103,7 @@
 	jQuery.fn.ajaxClick = function() {
 		var href = jQuery( this ).attr( "href" );
 		pageTransition = jQuery( this ).data( "transition" ) || "slide";
+		forceBack = jQuery( this ).data( "back" ) || undefined;
 		nextPageRole = jQuery( this ).attr( "data-rel" );
 		  	
 		//find new base for url building
@@ -223,7 +225,9 @@
 				transition = urlStack.pop().transition;
 			} else {
 				urlStack.push({ url: url, transition: transition });
+				if ( forceBack ) back = true;
 			}
+			forceBack = undefined;
 			
 			//function for setting role of next page
 			function setPageRole( newPage ) {
