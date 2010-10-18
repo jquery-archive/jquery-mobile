@@ -44,7 +44,7 @@ $(function() {
 	$( "#term" ).keyup(function() {
 		var value = this.value;
 		$.each( all, function( index, conversion ) {
-			$( "#" + conversion.from + conversion.to ).val( conversion.rate
+			$( "#" + conversion.from + conversion.to ).text( conversion.rate
 				? Math.ceil( value * conversion.rate * 100 ) / 100
 				: "Rate not available, yet."
 			);
