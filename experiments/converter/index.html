@@ -5,10 +5,14 @@
 	<title>jQuery Mobile Framework - Converter Demo Application</title> 
 	<link rel="stylesheet"  href="../../themes/default" />
 	<script type="text/javascript" src="../../js/all"></script>
+	<style>
+		input:disabled { background:none; }
+	</style>
+	
 </head> 
 <body> 
 
-<div data-role="page" class="ui-body-c">
+<div data-role="page" data-theme="c">
 	
 	<script type="text/javascript" src="jquery.tmpl.js"></script>
 	<script type="text/javascript" src="storage.js"></script>
@@ -17,7 +21,7 @@
 		.field { padding: 15px; }
 	</style>
 	<script id="conversion-field" type="text/x-jquery-tmpl">
-	    <li>
+	    <li data-role="fieldcontain">
 			<label for="${from}${to}" class="ui-input-text conversion-${type}" title="From ${from} to ${to}">${$item.symbols[from]} to ${$item.symbols[to]}</label>
 			<input type="text" readonly="readonly" name="${from}${to}" id="${from}${to}" value="" />
 		</li>
@@ -29,19 +33,18 @@
 		</li>
 	</script>
 	
-	<div data-role="header">
-		<a href="#customize" class="editbutton ui-aux" data-transition="flip">Edit</a>
+	<div data-role="header" data-theme="b">
+		<a href="#customize" data-rel="dialog" data-transition="pop">Edit</a>
 		<h1>Converter demo</h1>
 	</div>
-	<form method="get" action="" data-role="autoform" class="ui-bar-b">
-			<label for="term" data-role="nojs">Search:</label>
-			<input type="search" name="term" id="term" placeholder="type a value..." value="1" />
-		</form>
+	<div class="ui-bar ui-bar-d">
+			<form method="get" action="" data-role="autoform" >
+				<label for="term" data-role="nojs">Search:</label>
+				<input type="search" name="term" id="term" placeholder="type a value..." value="1" />
+			</form>
+	</div>
 	<div data-role="content">
-		
-		<div class="ui-content">
-			<ul id="conversions" data-role="listview" data-inset="true"></ul>
-		</div>
+		<ul id="conversions" data-role="listview" data-inset="true"></ul>
 	</div>
 </div>
 
