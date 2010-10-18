@@ -129,7 +129,7 @@
 	};
 	
 	// ajaxify all navigable links
-	jQuery( "a:not([href=#]):not([target]):not([rel=external])" ).live( "click", function(event) {
+	jQuery( "a:not([href=#]):not([target]):not([rel=external]):not([href^=mailto:])" ).live( "click", function(event) {
 		jQuery( this ).ajaxClick();
 		return false;
 	});
