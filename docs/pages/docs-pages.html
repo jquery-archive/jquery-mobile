@@ -101,7 +101,7 @@
 				
 			<p>jQuery Mobile automates the process of building Ajax powered site and applications. </p>
 			
-			<p>By default, when you click on link that points to an external page (ex. products.html), the framework will parse the link's <code>href</code> to formulate an Ajax request (Hijax) and displays the loading spinner.</p>
+			<p>By default, when you click on a link that points to an external page (ex. products.html), the framework will parse the link's <code>href</code> to formulate an Ajax request (Hijax) and displays the loading spinner.</p>
 				
 			<p>If the Ajax request is successful, the new page content is added to the DOM, the <code>mobilize()</code> function runs, then the new page is animated into view with a page transition.</p>
 			
@@ -111,7 +111,7 @@
 		
 			<p>A single HTML document can contain multiple 'pages' that are loaded together by stacking multiple divs with a <code>data-role</code> of <code>"page"</code>. Each 'page' block needs a unique ID (<code>id="foo"</code>) that will be used to link internally btweent 'pages' (<code>href="#foo"</code>). When a link is clicked, the framework will look for an internal 'page' with the ID and transition it into view.</p> 
 			
-			<p>It's important to note if your are linking from a mobile page that was loaded via Ajax to a page with multiple internal pages, you need to add a <code>rel="external"</code> to the link. This tells the framework to do a full page reload to clear out the Ajax hash in the URL. This is critical because Ajax pages use the hash (#) to track the Ajax history, while multiple internal pages use the hash to indicate internal pages so there will be a conflicts.</p>
+			<p>It's important to note if you  are linking from a mobile page that was loaded via Ajax to a page with multiple internal pages, you need to add a <code>rel="external"</code> to the link. This tells the framework to do a full page reload to clear out the Ajax hash in the URL. This is critical because Ajax pages use the hash (#) to track the Ajax history, while multiple internal pages use the hash to indicate internal pages so there will be a conflicts.</p>
 			<p>For example, a link to a page containing multiple internal pages would look like this:</p>
 			
 <code>&lt;a href=&quot;multipage.html&quot; rel=&quot;external&quot;&gt;Multi-page link&lt;/a&gt;</code>
@@ -162,7 +162,7 @@
 
 		<p> </p>
 		
-		<p>PLEASE NOTE: Since we are using the hash to track navigation history for all the Ajax 'pages', it's not currently possible to deep link to an anchor (<code>index.html#foo</code>) on a page in jQuery Mobile, because the framework will look for a 'page' with and <code>ID</code> of <code>#foo</code> instead of the native behavior of scrolling to the content with that <code>ID</code>.</p>
+		<p>PLEASE NOTE: Since we are using the hash to track navigation history for all the Ajax 'pages', it's not currently possible to deep link to an anchor (<code>index.html#foo</code>) on a page in jQuery Mobile, because the framework will look for a 'page' with an <code>ID</code> of <code>#foo</code> instead of the native behavior of scrolling to the content with that <code>ID</code>.</p>
 		
 		<p>Learn more about the technical details of the navigation model and <a href="docs-navmodel.html">Ajax, hashes and history</a> in jQuery mobile.</p>
 		
