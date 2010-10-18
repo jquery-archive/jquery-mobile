@@ -22,8 +22,8 @@
 	</style>
 	<script id="conversion-field" type="text/x-jquery-tmpl">
 	    <li data-role="fieldcontain">
-			<label for="${from}${to}" class="ui-input-text conversion-${type}" title="From ${from} to ${to}">${$item.symbols[from]} to ${$item.symbols[to]}</label>
-			<input type="text" readonly="readonly" name="${from}${to}" id="${from}${to}" value="" />
+			<label class="ui-input-text conversion-${type}" title="From ${from} to ${to}">${$item.symbols[from]} to ${$item.symbols[to]}</label>
+			<span type="text" id="${from}${to}"></span>
 		</li>
 	</script>
 	<script id="conversion-edit-field" type="text/x-jquery-tmpl">
