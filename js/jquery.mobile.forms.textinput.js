@@ -57,14 +57,23 @@ jQuery.fn.customTextInput = function(options){
 				focusedEl.removeClass('ui-focus');
 			});	
 			
-		//autogrow	
-		if(input.is('textarea')){
-			input.keydown(function(){
-				if( input[0].offsetHeight < input[0].scrollHeight ){
-					input.css({height: input[0].scrollHeight + 10 });
-				}
-			})
-		}	
+		//autogrow
+		if ( input.is('textarea') ) {
+			var extraLineHeight = 15,
+				keyupTimeoutBuffer = 100,
+				keyup = function() {
+					var scrollHeight = input[0].scrollHeight,
+						clientHeight = input[0].clientHeight;
+					if ( clientHeight < scrollHeight ) {
+						input.css({ height: (scrollHeight + extraLineHeight) });
+					}
+				},
+				keyupTimeout;
+			input.keyup(function() {
+				clearTimeout( keyupTimeout );
+				keyupTimeout = setTimeout( keyup, keyupTimeoutBuffer );
+			});
+		}
 	});
 };
 })(jQuery);
