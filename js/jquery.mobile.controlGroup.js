@@ -28,9 +28,12 @@ $.fn.controlgroup = function(options){
 		function flipClasses(els){
 			els
 				.removeClass('ui-btn-corner-all ui-shadow')
-				.eq(0).addClass(flCorners[0])
-				.end()
-				.filter(':last').addClass(flCorners[1]).addClass('ui-controlgroup-last');
+				.addClass(function() {
+					return !$(this).prev()[0] ? flCorners[0] : "";
+				})
+				.addClass(function() {
+					return !$(this).next()[0] ? flCorners[1] + " ui-controlgroup-last": "";
+				});
 		}
 		flipClasses($(this).find('.ui-btn'));
 		flipClasses($(this).find('.ui-btn-inner'));
