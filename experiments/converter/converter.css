@@ -1,0 +1,6 @@
+ul li { clear:both; }
+li p.units { padding-top:23px; font-size: 110%; font-weight:bold; }
+li p.units a:link, li p.units a:visited { padding-top:26px; font-size: 90%; }
+
+li p.subtext { margin-top:2px; }
+li p.ui-li-aside { font-size:190%; }
