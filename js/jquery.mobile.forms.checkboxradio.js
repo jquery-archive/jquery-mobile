@@ -57,7 +57,7 @@ $.fn.customCheckboxRadio = function(options){
 			})
 			.trigger('updateState')
 			.click(function(){ 
-				$('input[name='+ $(this).attr('name') +']').trigger('updateState'); 
+				$('input[name="'+ $(this).attr('name') +'"]').trigger('updateState');
 			})
 			.focus(function(){ 
 				label.addClass('ui-focus'); 
