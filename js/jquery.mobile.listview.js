@@ -18,7 +18,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
 	},
 	
 	_create: function() {
-		var o = this.options
+		var o = this.options,
+			flCorners = ['ui-corner-top', 'ui-corner-bottom'],
 			$list = this.element;
 		
 		this._createSubPages();
