@@ -66,7 +66,14 @@ $.widget( "mobile.listview", $.mobile.widget, {
 								.addClass( "ui-link-inherit" );
 					}
 					else if( role == "list-divider" ){
-						$li.addClass( "ui-li-divider ui-btn ui-bar-" + dividertheme ).attr( "role", "heading" );
+						$li
+							.addClass( "ui-li-divider ui-bar-" + dividertheme )
+							.addClass(function() {
+								return !$(this).prev()[0] ? flCorners[0] : "";
+							})
+							.addClass(function() {
+								return !$(this).next()[0] ? flCorners[1] + " ui-controlgroup-last": "";
+							}).attr( "role", "heading" );
 					}
 					else {
 						$li.addClass( "ui-li-static ui-btn-up-" + o.theme );
