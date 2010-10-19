@@ -19,8 +19,8 @@
 	</style>
 	<script id="conversion-field" type="text/x-jquery-tmpl">
 	    <li>
-			<p class="conversion-${type}">${$item.symbols[from]} to ${$item.symbols[to]}</p>
-			<h2 class="ui-li-aside" id="${from}${to}">${$item.symbols[to]}</h2>
+	    	<p class="currency-from">${$item.symbols[from]} <span class="unit">${from}</span></p>
+			<p class="currency-to ui-li-aside">${$item.symbols[to]} <span id="${from}${to}" class="rate">NaN</span> <span class="unit">${to}</span></p>
 		</li>
 	</script>
 	<script id="conversion-edit-field" type="text/x-jquery-tmpl">
