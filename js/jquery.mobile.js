@@ -62,7 +62,7 @@
 	
 	//consistent string escaping for urls and IDs
 	function idStringEscape(str){
-		return str.replace(/[^a-zA-Z0-9]/, '-');
+		return str.replace(/[^a-zA-Z0-9]/g, '-');
 	}
 	
 	$.mobile.idStringEscape = idStringEscape;
