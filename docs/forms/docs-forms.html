@@ -27,6 +27,11 @@
 ...
 &lt;/form&gt;
 </code>
+
+
+<h2>Markup Conventions</h2>
+<p>When constructing forms to be used in jQuery Mobile, most of the standard guidelines used to create forms that submit via normal HTTP post or get still apply. However, one thing to keep in mind is that the <code>id</code> attributes of form controls need to be not only unique on a given page, but also unique across the pages in a site. This is because jQuery Mobile's single-page navigation model allows many different "pages" to be present in the DOM at the same time, so you must be careful to use unique <code>id</code> attributes so there will be only one of each in the DOM (and of course, be sure to pair them properly with <code>label</code> elements via the <code>for</code> attribute).</p>
+
 			<h2>Dynamic form layout</h2>
 
 			<p>In jQuery Mobile, all form elements are designed to be a flexible width so they will comfortably fit the width of any mobile device. One optimization built into the framework is that we present labels and form elements differently based on screen width. </p>
