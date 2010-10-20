@@ -61,6 +61,7 @@ $.fn.slider = function(options){
 			else { 
 				control[0].selectedIndex = val;
 			}
+			control.trigger("change");
 		}
 			
 		function slideUpdate(event, val){
