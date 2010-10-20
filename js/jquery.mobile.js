@@ -275,7 +275,10 @@
 					$.ajax({
 						url: fileUrl,
 						success: function( html ) {
-							var page = jQuery("<div>" + html + "</div>").find('[data-role="page"]');
+							var all = jQuery("<div></div>");
+							//workaround to allow scripts to execute when included in page divs
+							all.get(0).innerHTML = html;
+							var page = all.find('[data-role="page"]');
 
 							if ( page.attr('id') ) {
 								page = wrapNewPage( page );
