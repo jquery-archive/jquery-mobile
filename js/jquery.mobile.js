@@ -358,7 +358,8 @@
 	jQuery.extend({
 		pageLoading: pageLoading,
 		changePage: changePage,
-		hideBrowserChrome: hideBrowserChrome
+		hideBrowserChrome: hideBrowserChrome,
+		pageContainer: $pageContainer
 	});
 
 	//dom-ready
