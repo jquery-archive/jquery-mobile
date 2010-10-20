@@ -376,7 +376,7 @@
 		
 		//make sure it has an ID - for finding it later
 		if(!$startPage.attr('id')){ 
-			$startPage.attr('id', $startPageId); 
+			$startPage.attr('id', startPageId); 
 		}
 		
 		//initialize all pages present
