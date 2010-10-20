@@ -43,6 +43,7 @@
 		$body,
 		$loader = jQuery('<div class="ui-loader ui-body-a ui-corner-all"><span class="ui-icon ui-icon-loading spin"></span><h1>loading</h1></div>'),
 		$startPage,
+		$pageContainer,
 		startPageId = 'ui-page-start',
 		activePageClass = 'ui-page-active',
 		pageTransition,
@@ -141,7 +142,7 @@
 		if ( done ) {
 			$html.removeClass( "ui-loading" );
 		} else {
-			$loader.appendTo('body').css({top: $(window).scrollTop() + 75});
+			$loader.appendTo($pageContainer).css({top: $(window).scrollTop() + 75});
 			$html.addClass( "ui-loading" );
 		}
 	};
@@ -282,7 +283,7 @@
 
 							page
 								.attr( "id", fileUrl )
-								.appendTo( "body" );
+								.appendTo( $pageContainer );
 
 							setPageRole( page );
 							page.page();
@@ -293,7 +294,7 @@
 
 							jQuery("<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h1>Error Loading Page</h1></div>")
 								.css({ "display": "block", "opacity": 0.96 })
-								.appendTo("body")
+								.appendTo( $pageContainer )
 								.delay( 800 )
 								.fadeOut( 400, function(){
 									$(this).remove();
@@ -365,6 +366,9 @@
 		
 		//set up active page
 		$startPage = jQuery('[data-role="page"]:first');
+		
+		//set page container
+		$pageContainer = $startPage.parent();
 		
 		//make sure it has an ID - for finding it later
 		if(!$startPage.attr('id')){ 
