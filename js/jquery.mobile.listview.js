@@ -18,20 +18,13 @@ $.widget( "mobile.listview", $.mobile.widget, {
 	},
 	
 	_create: function() {
-		var o = this.options,
-			$list = this.element;
-		
-		this._createSubPages();
-		
-		//create listview markup 
+		// create listview markup 
 		this.element
 			.addClass( "ui-listview" )
 			.attr( "role", "listbox" )
 		
-		if ( o.inset ) {
-			this.element
-				.addClass( "ui-listview-inset" )
-				.controlgroup({ shadow: true });
+		if ( this.options.inset ) {
+			this.element.addClass( "ui-listview-inset ui-shadow" );
 		}	
 						
 		this.refresh();
@@ -80,17 +73,6 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			}
 		});	
 
-		// TODO class has to be defined in markup
-		this.element.find( ".ui-li-count" )
-			.addClass( "ui-btn-up-" + ($list.data( "counttheme" ) || o.countTheme) + " ui-btn-corner-all" );
-
-		// TODO what is :header matching? does that need to be moved to refresh?
-		this.element.find( ":header" )
-			.addClass( "ui-li-heading" );
-		
-		// TODO move to refresh()
-		this._numberItems();
-				
 		//tapping the whole LI triggers ajaxClick on the first link
 		this.element.find( "li:has(a)" ).live( "tap", function(event) {
 			if( !$(event.target).closest('a').length ){
@@ -101,6 +83,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
 	},
 	
 	refresh: function() {
+		this._createSubPages();
+		
 		var o = this.options,
 			dividertheme = this.element.data( "dividertheme" ) || o.dividerTheme,
 			$list = this.element;
@@ -150,6 +134,12 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				else {
 					$li.addClass( "ui-li-static ui-btn-up-" + o.theme );
 				}
+				
+				// TODO class has to be defined in markup
+				$li.find( ".ui-li-count" )
+					.addClass( "ui-btn-up-" + ($list.data( "counttheme" ) || o.countTheme) + " ui-btn-corner-all" );
+
+				$li.find( ":header" ).addClass( "ui-li-heading" );
 				
 				//for split buttons
 				var $splitBtn = $li.find( "a" ).eq( 1 );
@@ -215,6 +205,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				.filter( "li:last-child img" )
 					.addClass( "ui-corner-bl" )
 				.end();
+
+		this._numberItems();
 	},
 	
 	_createSubPages: function() {
