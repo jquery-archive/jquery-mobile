@@ -215,7 +215,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
 	_createSubPages: function() {
 		var parentId = this.element.closest( ".ui-page" ).attr( "id" ),
 			o = this.options,
-			parentList = this.element;
+			parentList = this.element,
+			persistentFooterID = this.element.closest( ".ui-page" ).find( "[data-role=footer]" ).data( "id" );
 		$( this.element.find( "ul,ol" ).get().reverse() ).each(function( i ) {
 			var list = $( this ),
 				parent = list.parent(),
@@ -226,6 +227,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				newPage = list.wrap( "<div data-role='page'><div data-role='content'></div></div>" )
 							.parent()
 								.before( "<div data-role='header' data-theme='" + o.headerTheme + "'><div class='ui-title'>" + title + "</div></div>" )
+								.after( persistentFooterID ? $( "<div>", { "data-role": "footer", "data-id": persistentFooterID, "class": "ui-footer-duplicate" } ) : "" )
 								.parent()
 									.attr({
 										id: id,
@@ -233,7 +235,9 @@ $.widget( "mobile.listview", $.mobile.widget, {
 										"data-count-theme": countTheme
 									})
 									.appendTo( $.pageContainer );
-									
+				
+				
+				
 				newPage.page();		
 			
 			parent.html( "<a href='#" + id + "'>" + title + "</a>" );
