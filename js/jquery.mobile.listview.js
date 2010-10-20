@@ -24,7 +24,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			.attr( "role", "listbox" )
 		
 		if ( this.options.inset ) {
-			this.element.addClass( "ui-listview-inset ui-shadow" );
+			this.element.addClass( "ui-listview-inset ui-corner-all ui-shadow" );
 		}	
 						
 		this.refresh();
@@ -98,6 +98,9 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			.focus(function(){
 				$(this).attr("tabindex","0");
 			})
+			.find( "img")
+				.addClass( "ui-li-thumb" )
+			.end()
 			.each(function() {
 				var $li = $( this ).addClass( "ui-li" ),
 					role = $li.data( "role" );
@@ -166,32 +169,33 @@ $.widget( "mobile.listview", $.mobile.widget, {
 							iconpos: "notext",
 							icon: $list.data('spliticon') || a.data('icon') ||  o.splitIcon
 						} ) );
-					
-					//fix corners
-					if ( o.inset ) {
-						var closestLi = $( this ).closest( "li" );
-						if ( closestLi.is( "li:first-child" ) ) {
-							$( this ).addClass( "ui-corner-tr" );
-						} else if ( closestLi.is( "li:last-child" ) ) {
-							$( this ).addClass( "ui-corner-br" );
-						}
-					}
 				});
 				
-				//remove corners before or after dividers
-				var sides = ['top','bottom'];
-				$.each( sides, function( i ){
-					var side = sides[ i ];
-					$li.filter( ".ui-corner-" + side ).each(function() {
-						if ( $li[ i == 0 ? 'prev' : 'next' ]( ".ui-li-divider" ).length ) {
-							$( this ).removeClass( "ui-corner-" + side );
-						}
-					});
-				});
+				//fix corners
+				if ( o.inset ) {
+					var closestLi = $( this ).closest( "li" );
+					if ( closestLi.is( "li:first-child" ) ) {
+						closestLi
+							.addClass('ui-corner-top')
+							.find( ".ui-li-link-alt" )
+								.addClass('ui-corner-tr')
+							.end()
+							.find( ".ui-li-thumb" )
+								.addClass('ui-corner-tl')
+					} else if ( closestLi.is( "li:last-child" ) ) {
+						closestLi
+							.addClass('ui-corner-bottom')
+							.find( ".ui-li-link-alt" )
+								.addClass('ui-corner-br')
+							.end()
+							.find( ".ui-li-thumb" )
+								.addClass('ui-corner-bl')
+					}
+				}
+				
+				
+				
 			})
-			.find( "img")
-				.addClass( "ui-li-thumb" )
-			.end()
 			.find( "p, ul, dl" )
 				.addClass( "ui-li-desc" );
 		
