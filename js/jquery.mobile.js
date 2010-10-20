@@ -42,7 +42,7 @@
 		$head = jQuery('head'),
 		$body,
 		$loader = jQuery('<div class="ui-loader ui-body-a ui-corner-all"><span class="ui-icon ui-icon-loading spin"></span><h1>loading</h1></div>'),
-		startPage,
+		$startPage,
 		startPageId = 'ui-page-start',
 		activePageClass = 'ui-page-active',
 		pageTransition,
@@ -310,15 +310,15 @@
 				// either we've backed up to the root page url
 				// or it's the first page load with no hash present
 				var currentPage = jQuery( ".ui-page-active" );
-				if ( currentPage.length && !startPage.is( ".ui-page-active" ) ) {
-					changePage( currentPage, startPage, transition, back );
+				if ( currentPage.length && !$startPage.is( ".ui-page-active" ) ) {
+					changePage( currentPage, $startPage, transition, back );
 				} else {
-					startPage.trigger("beforepageshow", {prevPage: $('')});
-					startPage.addClass( activePageClass );
+					$startPage.trigger("beforepageshow", {prevPage: $('')});
+					$startPage.addClass( activePageClass );
 					pageLoading( true );
 					
-					if( startPage.trigger("pageshow", {prevPage: $('')}) !== false ){
-						reFocus(startPage);
+					if( $startPage.trigger("pageshow", {prevPage: $('')}) !== false ){
+						reFocus($startPage);
 					}
 				}
 			}
@@ -364,11 +364,11 @@
 	jQuery(function(){
 		
 		//set up active page
-		startPage = jQuery('[data-role="page"]:first');
+		$startPage = jQuery('[data-role="page"]:first');
 		
 		//make sure it has an ID - for finding it later
-		if(!startPage.attr('id')){ 
-			startPage.attr('id', startPageId); 
+		if(!$startPage.attr('id')){ 
+			$startPage.attr('id', $startPageId); 
 		}
 		
 		//initialize all pages present
