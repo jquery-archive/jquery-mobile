@@ -70,7 +70,7 @@ $.fixedToolbars = (function(){
 					stickyFooter.before( stickyFooter.clone().addClass('ui-footer-duplicate') );
 				}
 				$(event.target).find('[data-role="footer"]').addClass('ui-footer-duplicate');
-				stickyFooter.appendTo('body').css('top',0);
+				stickyFooter.appendTo($.pageContainer).css('top',0);
 				setTop(stickyFooter);
 			}
 		});

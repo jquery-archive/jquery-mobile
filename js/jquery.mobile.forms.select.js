@@ -48,7 +48,7 @@ $.fn.customSelect = function(options){
 					"</div>"+
 					"<div data-role='content'></div>"+
 				"</div>" )
-				.appendTo( "body" )
+				.appendTo( $.pageContainer )
 				.page(),	
 		menuPageContent = menuPage.find( ".ui-content" ),			
 		screen = $( "<div>", {

@@ -1,5 +1,5 @@
 //set up the theme switcher on the homepage
-$('div').live('pagecreate',function(){
+$('div').live('pagecreate',function(event){
 	if( !$(this).is('.ui-dialog,.ui-navbar-expanded')){ 
 		$('<a href="#">Switch theme</a>')
 			.buttonMarkup({
@@ -15,4 +15,5 @@ $('div').live('pagecreate',function(){
 				return false;
 			});
 	}	
+	event.stopPropagation();
 });

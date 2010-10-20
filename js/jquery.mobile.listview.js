@@ -229,7 +229,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 										"data-theme": theme,
 										"data-count-theme": countTheme
 									})
-									.appendTo( "body" );
+									.appendTo( $.pageContainer );
 									
 				newPage.page();		
 			
