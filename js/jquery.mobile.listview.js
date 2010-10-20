@@ -74,7 +74,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		});	
 
 		//tapping the whole LI triggers ajaxClick on the first link
-		this.element.find( "li:has(a)" ).live( "tap", function(event) {
+		this.element.delegate( "li:has(a)", "tap", function(event) {
 			if( !$(event.target).closest('a').length ){
 				$( this ).find( "a:first" ).trigger('click');
 				return false;
