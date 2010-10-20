@@ -5,6 +5,11 @@ var defaults = [
 		type: "currency",
 		from: "USD",
 		to: "EUR"
+	},
+	{
+		type: "currency",
+		from: "GBP",
+		to: "EUR"
 	}
 	// TODO add back in as defaults once its possible to add other conversions, not just currencies
 	/*,

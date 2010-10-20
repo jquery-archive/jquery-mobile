@@ -1,8 +1,8 @@
 $(function() {
 	var symbols = {
 		"USD": "$",
-		"EUR": "€",
-		"GBP": "£",
+		"EUR": "&euro;",
+		"GBP": "&pound;",
 		"Miles": "m",
 		"Kilometer": "km",
 		"inch": "\"",
@@ -10,12 +10,8 @@ $(function() {
 	};
 	
 	function list() {
-		var ul = $( "#conversions" ).empty()
-				.filter( ":mobile-page" ).page( "destroy" )
-				.end(),
-			ulEdit = $( "#edit-conversions" ).empty()
-				.filter( ":mobile-page" ).page( "destroy" )
-				.end();
+		var ul = $( "#conversions" ).empty(),
+			ulEdit = $( "#edit-conversions" ).empty();
 		$.each( all, function( index, conversion ) {
 			// if last update was less then a minute ago, don't update
 			if ( conversion.type === "currency" && !conversion.rate || conversion.updated && conversion.updated + 60000 < +new Date) {
@@ -23,7 +19,6 @@ $(function() {
 				var url = "http://query.yahooapis.com/v1/public/yql?q=select%20rate%2Cname%20from%20csv%20where%20url%3D'http%3A%2F%2Fdownload.finance.yahoo.com%2Fd%2Fquotes%3Fs%3D" + conversion.from + conversion.to + "%253DX%26f%3Dl1n'%20and%20columns%3D'rate%2Cname'&format=json&diagnostics=true&callback=?";
 				$.getJSON( url, function( result ) {
 					self.rate = parseFloat( result.query.results.row.rate );
-					// TODO trigger a custom event instead of keyup?
 					$( "#term" ).keyup();
 					self.updated = +new Date;
 					conversions.store();
@@ -36,8 +31,7 @@ $(function() {
 				symbols: symbols
 			}).appendTo( ulEdit );
 		});
-		ul.page();
-		// TODO trigger a custom event instead of keyup?
+		ul.add(ulEdit).listview("refresh");
 		$( "#term" ).keyup();
 	}
 	var all = conversions.all();
