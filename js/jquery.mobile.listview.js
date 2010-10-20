@@ -147,7 +147,6 @@ $.widget( "mobile.listview", $.mobile.widget, {
 					$(this).addClass('ui-li-has-alt');
 				}
 				$splitBtn.each(function() {
-					console.log(this);
 					var a = $( this )
 						.attr( "title", $( this ).text() )
 						.addClass( "ui-li-link-alt" )
