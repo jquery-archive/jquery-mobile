@@ -358,8 +358,7 @@
 	jQuery.extend({
 		pageLoading: pageLoading,
 		changePage: changePage,
-		hideBrowserChrome: hideBrowserChrome,
-		pageContainer: $pageContainer
+		hideBrowserChrome: hideBrowserChrome
 	});
 
 	//dom-ready
@@ -370,6 +369,10 @@
 		
 		//set page container
 		$pageContainer = $startPage.parent();
+		
+		jQuery.extend({
+			pageContainer: $pageContainer
+		});
 		
 		//make sure it has an ID - for finding it later
 		if(!$startPage.attr('id')){ 
