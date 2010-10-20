@@ -164,8 +164,8 @@
 		
 		
 		//trigger before show/hide events
-		from.trigger("beforepagehide", {nextPage: to});
-		to.trigger("beforepageshow", {prevPage: from});
+		from.trigger("pagebeforehide", {nextPage: to});
+		to.trigger("pagebeforeshow", {prevPage: from});
 		
 		function loadComplete(){
 			pageLoading( true );
@@ -314,7 +314,7 @@
 				if ( currentPage.length && !$startPage.is( ".ui-page-active" ) ) {
 					changePage( currentPage, $startPage, transition, back );
 				} else {
-					$startPage.trigger("beforepageshow", {prevPage: $('')});
+					$startPage.trigger("pagebeforeshow", {prevPage: $('')});
 					$startPage.addClass( activePageClass );
 					pageLoading( true );
 					

@@ -62,7 +62,7 @@ $.fixedToolbars = (function(){
 		}
 		
 		//before page is shown, check for duplicate footer
-		$('.ui-page').live('beforepageshow', function(event, ui){
+		$('.ui-page').live('pagebeforeshow', function(event, ui){
 			stickyFooter = findStickyFooter( $(event.target) );
 			if( stickyFooter.length ){
 				//if the existing footer is the first of its kind, create a placeholder before stealing it 
