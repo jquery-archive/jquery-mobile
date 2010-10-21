@@ -120,7 +120,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			$list = this.element,
 			dividertheme = $list.data( "dividertheme" ) || o.dividerTheme,
 			li = $list.children( "li" ),
-			counter = jQuery.support.cssPseudoElement || !jQuery.nodeName( $list[0], "ol" ) ? 0 : 1;
+			counter = jQuery.support.cssPseudoElement || !jQuery.nodeName( $list[0], "ol" ) ? 0 : 1,
+			itemClass = "ui-li";
 
 		if ( counter ) {
 			$list.find( ".ui-li-dec" ).remove();
@@ -138,8 +139,6 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				return;
 			}
 
-			item.addClass( "ui-li" );
-
 			var a = item.find( "a" );
 				
 			if ( a.length ) {	
@@ -156,7 +155,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				a.first().addClass( "ui-link-inherit" );
 
 				if ( a.length > 1 ) {
-					item.addClass( "ui-li-has-alt" );
+					itemClass += " ui-li-has-alt";
 
 					var last = a.last();
 					
@@ -182,19 +181,26 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				}
 
 			} else if ( item.data( "role" ) === "list-divider" ) {
-				item.addClass( "ui-li-divider ui-btn ui-bar-" + dividertheme ).attr( "role", "heading" );
+				itemClass += " ui-li-divider ui-btn ui-bar-" + dividertheme;
+				item.attr( "role", "heading" );
+
+				//reset counter when a divider heading is encountered
+				if ( counter ) {
+					counter = 1;
+				}
 
 			} else {
-				item.addClass( "ui-li-static ui-btn-up-" + o.theme );
+				itemClass += " ui-li-static ui-btn-up-" + o.theme;
 			}
 				
 			if ( pos === 0 ) {
 				item.find( "img" ).addClass( "ui-corner-tl" );
 
 				if ( o.inset ) {
+					itemClass += " ui-corner-top";
+
 					item
 						.add( item.find( ".ui-btn-inner" ) )
-						.addClass( "ui-corner-top" )
 						.find( ".ui-li-link-alt" )
 							.addClass( "ui-corner-tr" )
 						.end()
@@ -206,9 +212,10 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				item.find( "img" ).addClass( "ui-corner-bl" );
 
 				if ( o.inset ) {
+					itemClass += " ui-corner-bottom";
+
 					item
 						.add( item.find( ".ui-btn-inner" ) )
-						.addClass( "ui-corner-bottom" )
 						.find( ".ui-li-link-alt" )
 							.addClass( "ui-corner-br" )
 						.end()
@@ -217,18 +224,14 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				}
 			}
 
-			if ( counter ) {
-				if ( item.hasClass( "ui-li-divider" ) ) {
-					//reset counter when a divider heading is encountered
-					counter = 1;
-
-				} else { 
-					item
-						.find( ".ui-link-inherit" ).first()
-						.addClass( "ui-li-jsnumbering" )
-						.prepend( "<span class='ui-li-dec'>" + (counter++) + ". </span>" );
-				}
+			if ( counter && itemClass.indexOf( "ui-li-divider" ) < 0 ) {
+				item
+					.find( ".ui-link-inherit" ).first()
+					.addClass( "ui-li-jsnumbering" )
+					.prepend( "<span class='ui-li-dec'>" + (counter++) + ". </span>" );
 			}
+
+			item.addClass( itemClass );
 
 			if ( !create ) {
 				this._itemApply( $list, item );
