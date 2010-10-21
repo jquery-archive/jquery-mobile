@@ -107,6 +107,10 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		if ( aside.length ) {
 			aside.prependTo( aside.parent() ); //shift aside to front for css float
 		}
+
+		if ( jQuery.support.cssPseudoElement || !jQuery.nodeName( item[0], "ol" ) ) {
+			return;
+		}
 	},
 	
 	refresh: function( create ) {
@@ -115,7 +119,12 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		var o = this.options,
 			$list = this.element,
 			dividertheme = $list.data( "dividertheme" ) || o.dividerTheme,
-			li = $list.find( "li" );
+			li = $list.children( "li" ),
+			counter = jQuery.support.cssPseudoElement || !jQuery.nodeName( $list[0], "ol" ) ? 0 : 1;
+
+		if ( counter ) {
+			$list.find( ".ui-li-dec" ).remove();
+		}
 
 		li
 			.addClass( "ui-li" )
@@ -130,10 +139,6 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			// If we're creating the element, we update it regardless
 			if ( !create && item.hasClass( "ui-li" ) ) {
 				return;
-			}
-
-			if ( !create ) {
-				this._itemApply( $list, item );
 			}
 
 			var a = item.find( "a" );
@@ -212,18 +217,35 @@ $.widget( "mobile.listview", $.mobile.widget, {
 							.addClass( "ui-corner-bl" );
 				}
 			}
+
+			if ( counter ) {
+				if ( item.hasClass( "ui-li-divider" ) ) {
+					//reset counter when a divider heading is encountered
+					counter = 1;
+
+				} else { 
+					item
+						.find( ".ui-link-inherit" ).first()
+						.addClass( "ui-li-jsnumbering" )
+						.prepend( "<span class='ui-li-dec'>" + (counter++) + ". </span>" );
+				}
+			}
+
+			if ( !create ) {
+				this._itemApply( $list, item );
+			}
 		});
-		
-		this._numberItems();
 	},
 	
 	_createSubPages: function() {
-		var parentId = this.element.closest( ".ui-page" ).attr( "id" ),
+		var parentList = this.element,
+			parentPage = parentList.closest( ".ui-page" ),
+			parentId = parentPage.attr( "id" ),
 			o = this.options,
-			parentList = this.element,
-			persistentFooterID = this.element.closest( ".ui-page" ).find( "[data-role=footer]" ).data( "id" );
-		$( this.element.find( "ul,ol" ).get().reverse() ).each(function( i ) {
-			var list = $( this ),
+			persistentFooterID = parentPage.find( "[data-role='footer']" ).data( "id" );
+
+		jQuery( parentList.find( "ul, ol" ).toArray().reverse() ).each(function( i ) {
+			var list = jQuery( this ),
 				parent = list.parent(),
 				title = parent.contents()[ 0 ].nodeValue.split("\n")[0],
 				id = parentId + "&" + $.mobile.subPageUrlKey + "=" + $.mobile.idStringEscape(title + " " + i),
@@ -239,7 +261,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 										"data-theme": theme,
 										"data-count-theme": countTheme
 									})
-									.appendTo( $.pageContainer );
+									.appendTo( jQuery.pageContainer );
 				
 				
 				
@@ -247,26 +269,6 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			
 			parent.html( "<a href='#" + id + "'>" + title + "</a>" );
 		}).listview();
-	},
-	
-	// JS fallback for auto-numbering for OL elements
-	_numberItems: function() {
-		if ( $.support.cssPseudoElement || !this.element.is( "ol" ) ) {
-			return;
-		}
-		var counter = 1;
-		this.element.find( ".ui-li-dec" ).remove();
-		this.element.find( "li:visible" ).each(function() {
-			if( $( this ).is( ".ui-li-divider" ) ) {
-				//reset counter when a divider heading is encountered
-				counter = 1;
-			} else { 
-				$( this )
-					.find( ".ui-link-inherit:first" )
-					.addClass( "ui-li-jsnumbering" )
-					.prepend( "<span class='ui-li-dec'>" + (counter++) + ". </span>" );
-			}
-		});
 	}
 });
 
