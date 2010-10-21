@@ -176,6 +176,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 					var closestLi = $( this ).closest( "li" );
 					if ( closestLi.is( "li:first-child" ) ) {
 						closestLi
+							.add( closestLi.find( ".ui-btn-inner" ) )
 							.addClass('ui-corner-top')
 							.find( ".ui-li-link-alt" )
 								.addClass('ui-corner-tr')
@@ -184,6 +185,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 								.addClass('ui-corner-tl')
 					} else if ( closestLi.is( "li:last-child" ) ) {
 						closestLi
+							.add( closestLi.find( ".ui-btn-inner" ) )
 							.addClass('ui-corner-bottom')
 							.find( ".ui-li-link-alt" )
 								.addClass('ui-corner-br')
