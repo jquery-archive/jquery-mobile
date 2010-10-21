@@ -141,7 +141,7 @@
 	};
 	
 	// ajaxify all navigable links
-	jQuery( "a:not([href=#]):not([target]):not([rel=external]):not([href^=mailto:])" ).live( "click", function(event) {
+	jQuery( "a:not([href='#']):not([target]):not([rel='external']):not([href^='mailto:'])" ).live( "click", function(event) {
 		jQuery( this ).ajaxClick();
 		return false;
 	});
@@ -411,7 +411,7 @@
 	jQuery(function(){
 		
 		//set up active page
-		$startPage = $.activePage = jQuery('[data-role="page"]:first');
+		$startPage = $.activePage = jQuery("[data-role='page']").first();
 		
 		//set page container
 		$pageContainer = $startPage.parent();
@@ -426,7 +426,7 @@
 		}
 		
 		//initialize all pages present
-		jQuery('[data-role="page"]').page();
+		jQuery("[data-role='page']").page();
 		
 		//trigger a new hashchange, hash or not
 		$window.trigger( "hashchange", { manuallyTriggered: true } );

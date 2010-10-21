@@ -26,8 +26,14 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		if ( this.options.inset ) {
 			this.element.addClass( "ui-listview-inset ui-corner-all ui-shadow" );
 		}	
-						
-		this.refresh();
+
+		this.element.delegate("ui-li", "focusin", function() {
+			jQuery(this).attr( "tabindex", "0" );
+		});
+
+		this._itemApply( this.element, this.element );
+		
+		this.refresh( true );
 	
 		//keyboard events for menu items
 		this.element.keydown(function(event){
@@ -81,77 +87,82 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			}
 		});
 	},
+
+	_itemApply: function( $list, item ) {
+		// TODO class has to be defined in markup
+		item.find( ".ui-li-count" )
+			.addClass( "ui-btn-up-" + ($list.data( "counttheme" ) || this.options.countTheme) + " ui-btn-corner-all" );
+
+		item.find( "h1, h2, h3, h4, h5, h6" ).addClass( "ui-li-heading" );
+
+		item.find( "p, ul, dl" ).addClass( "ui-li-desc" );
+
+		item.find( "img" ).addClass( "ui-li-thumb" ).each(function() {
+			jQuery( this ).closest( "li" )
+				.addClass( jQuery(this).is( "ui-li-icon" ) ? "ui-li-has-icon" : "ui-li-has-thumb" );
+		});
+
+		var aside = item.find( ".ui-li-aside" );
+
+		if ( aside.length ) {
+			aside.prependTo( aside.parent() ); //shift aside to front for css float
+		}
+
+		if ( jQuery.support.cssPseudoElement || !jQuery.nodeName( item[0], "ol" ) ) {
+			return;
+		}
+	},
 	
-	refresh: function() {
+	refresh: function( create ) {
 		this._createSubPages();
 		
 		var o = this.options,
-			dividertheme = this.element.data( "dividertheme" ) || o.dividerTheme,
-			$list = this.element;
-		this.element.find( "li")
-			.eq(0)
-			.attr("tabindex","0")
-			.end()
-			.filter(":not(.ui-li)" )
-			.attr("role","option")
-			.attr("tabindex","-1")
-			.focus(function(){
-				$(this).attr("tabindex","0");
-			})
-			.find( "img")
-				.addClass( "ui-li-thumb" )
-			.end()
-			.each(function() {
-				var $li = $( this ).addClass( "ui-li" ),
-					role = $li.data( "role" );
+			$list = this.element,
+			dividertheme = $list.data( "dividertheme" ) || o.dividerTheme,
+			li = $list.children( "li" ),
+			counter = jQuery.support.cssPseudoElement || !jQuery.nodeName( $list[0], "ol" ) ? 0 : 1;
 
-				if ( $li.is( ":has(img)" ) ) {
-					if ($li.is( ":has(img.ui-li-icon)" )) {
-						$li.addClass( "ui-li-has-icon" );
-					} else {
-						$li.addClass( "ui-li-has-thumb" );
-					}
-				}
+		if ( counter ) {
+			$list.find( ".ui-li-dec" ).remove();
+		}
 
-				if ( $li.is( ":has(.ui-li-aside)" ) ) {
-					var aside = $li.find('.ui-li-aside');
-					aside.prependTo(aside.parent()); //shift aside to front for css float
-				}
-				
-				if ( $li.find('a').length ) {	
-					$li
-						.buttonMarkup({
-							wrapperEls: "div",
-							shadow: false,
-							corners: false,
-							iconpos: "right",
-							icon: $(this).data("icon") || "arrow-r",
-							theme: o.theme
-						})
-						.find( "a" ).eq( 0 )
-							.addClass( "ui-link-inherit" );
-				}
-				else if( role == "list-divider" ){
-					$li.addClass( "ui-li-divider ui-btn ui-bar-" + dividertheme ).attr( "role", "heading" );
-				}
-				else {
-					$li.addClass( "ui-li-static ui-btn-up-" + o.theme );
-				}
-				
-				// TODO class has to be defined in markup
-				$li.find( ".ui-li-count" )
-					.addClass( "ui-btn-up-" + ($list.data( "counttheme" ) || o.countTheme) + " ui-btn-corner-all" );
+		li
+			.addClass( "ui-li" )
+			.attr( "role", "option" )
+			.attr( "tabindex", "-1" )
 
-				$li.find( ":header" ).addClass( "ui-li-heading" );
+		li.first().attr( "tabindex", "0" );
+
+		li.each(function( pos ) {
+			var item = jQuery( this );
+
+			// If we're creating the element, we update it regardless
+			if ( !create && item.hasClass( "ui-li" ) ) {
+				return;
+			}
+
+			var a = item.find( "a" );
 				
-				//for split buttons
-				var $splitBtn = $li.find( "a" ).eq( 1 );
-				if ( $splitBtn.length ) {
-					$(this).addClass('ui-li-has-alt');
-				}
-				$splitBtn.each(function() {
-					var a = $( this )
-						.attr( "title", $( this ).text() )
+			if ( a.length ) {	
+				item
+					.buttonMarkup({
+						wrapperEls: "div",
+						shadow: false,
+						corners: false,
+						iconpos: "right",
+						icon: item.data("icon") || "arrow-r",
+						theme: o.theme
+					});
+
+				a.first().addClass( "ui-link-inherit" );
+
+				if ( a.length > 1 ) {
+					item.addClass( "ui-li-has-alt" );
+
+					var last = a.last();
+					
+					last
+						.attr( "title", last.text() )
 						.addClass( "ui-li-link-alt" )
 						.empty()
 						.buttonMarkup({
@@ -160,67 +171,81 @@ $.widget( "mobile.listview", $.mobile.widget, {
 							theme: o.theme,
 							icon: false,
 							iconpos: false
-						});
-					a.find( ".ui-btn-inner" )
-						.append( $( "<span>" ).buttonMarkup({
-							shadow: true,
-							corners: true,
-							theme: $list.data('splittheme') || a.data('theme') || o.splitTheme,
-							iconpos: "notext",
-							icon: $list.data('spliticon') || a.data('icon') ||  o.splitIcon
-						} ) );
-				});
-				
-				//fix corners
-				if ( o.inset ) {
-					var closestLi = $( this ).closest( "li" );
-					if ( closestLi.is( "li:first-child" ) ) {
-						closestLi
-							.add( closestLi.find( ".ui-btn-inner" ) )
-							.addClass('ui-corner-top')
-							.find( ".ui-li-link-alt" )
-								.addClass('ui-corner-tr')
-							.end()
-							.find( ".ui-li-thumb" )
-								.addClass('ui-corner-tl')
-					} else if ( closestLi.is( "li:last-child" ) ) {
-						closestLi
-							.add( closestLi.find( ".ui-btn-inner" ) )
-							.addClass('ui-corner-bottom')
-							.find( ".ui-li-link-alt" )
-								.addClass('ui-corner-br')
-							.end()
-							.find( ".ui-li-thumb" )
-								.addClass('ui-corner-bl')
-					}
+						})
+						.find( ".ui-btn-inner" )
+							.append( jQuery( "<span>" ).buttonMarkup({
+								shadow: true,
+								corners: true,
+								theme: $list.data( "splittheme" ) || last.data( "theme" ) || o.splitTheme,
+								iconpos: "notext",
+								icon: $list.data( "spliticon" ) || last.data( "icon" ) ||  o.splitIcon
+							} ) );
 				}
-				
-				
-				
-			})
-			.find( "p, ul, dl" )
-				.addClass( "ui-li-desc" );
-		
-		// TODO remove these classes from any elements that may have gotten them in a previous call
-		this.element
-			.find( "img" )
-				.filter( "li:first-child img" )
-					.addClass( "ui-corner-tl" )
-				.end()
-				.filter( "li:last-child img" )
-					.addClass( "ui-corner-bl" )
-				.end();
 
-		this._numberItems();
+			} else if ( item.data( "role" ) === "list-divider" ) {
+				item.addClass( "ui-li-divider ui-btn ui-bar-" + dividertheme ).attr( "role", "heading" );
+
+			} else {
+				item.addClass( "ui-li-static ui-btn-up-" + o.theme );
+			}
+				
+			if ( pos === 0 ) {
+				item.find( "img" ).addClass( "ui-corner-tl" );
+
+				if ( o.inset ) {
+					item
+						.add( item.find( ".ui-btn-inner" ) )
+						.addClass( "ui-corner-top" )
+						.find( ".ui-li-link-alt" )
+							.addClass( "ui-corner-tr" )
+						.end()
+						.find( ".ui-li-thumb" )
+							.addClass( "ui-corner-tl" );
+				}
+
+			} else if ( pos === li.length - 1 ) {
+				item.find( "img" ).addClass( "ui-corner-bl" );
+
+				if ( o.inset ) {
+					item
+						.add( item.find( ".ui-btn-inner" ) )
+						.addClass( "ui-corner-bottom" )
+						.find( ".ui-li-link-alt" )
+							.addClass( "ui-corner-br" )
+						.end()
+						.find( ".ui-li-thumb" )
+							.addClass( "ui-corner-bl" );
+				}
+			}
+
+			if ( counter ) {
+				if ( item.hasClass( "ui-li-divider" ) ) {
+					//reset counter when a divider heading is encountered
+					counter = 1;
+
+				} else { 
+					item
+						.find( ".ui-link-inherit" ).first()
+						.addClass( "ui-li-jsnumbering" )
+						.prepend( "<span class='ui-li-dec'>" + (counter++) + ". </span>" );
+				}
+			}
+
+			if ( !create ) {
+				this._itemApply( $list, item );
+			}
+		});
 	},
 	
 	_createSubPages: function() {
-		var parentId = this.element.closest( ".ui-page" ).attr( "id" ),
+		var parentList = this.element,
+			parentPage = parentList.closest( ".ui-page" ),
+			parentId = parentPage.attr( "id" ),
 			o = this.options,
-			parentList = this.element,
-			persistentFooterID = this.element.closest( ".ui-page" ).find( "[data-role=footer]" ).data( "id" );
-		$( this.element.find( "ul,ol" ).get().reverse() ).each(function( i ) {
-			var list = $( this ),
+			persistentFooterID = parentPage.find( "[data-role='footer']" ).data( "id" );
+
+		jQuery( parentList.find( "ul, ol" ).toArray().reverse() ).each(function( i ) {
+			var list = jQuery( this ),
 				parent = list.parent(),
 				title = parent.contents()[ 0 ].nodeValue.split("\n")[0],
 				id = parentId + "&" + $.mobile.subPageUrlKey + "=" + $.mobile.idStringEscape(title + " " + i),
@@ -236,7 +261,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 										"data-theme": theme,
 										"data-count-theme": countTheme
 									})
-									.appendTo( $.pageContainer );
+									.appendTo( jQuery.pageContainer );
 				
 				
 				
@@ -244,26 +269,6 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			
 			parent.html( "<a href='#" + id + "'>" + title + "</a>" );
 		}).listview();
-	},
-	
-	// JS fallback for auto-numbering for OL elements
-	_numberItems: function() {
-		if ( $.support.cssPseudoElement || !this.element.is( "ol" ) ) {
-			return;
-		}
-		var counter = 1;
-		this.element.find( ".ui-li-dec" ).remove();
-		this.element.find( "li:visible" ).each(function() {
-			if( $( this ).is( ".ui-li-divider" ) ) {
-				//reset counter when a divider heading is encountered
-				counter = 1;
-			} else { 
-				$( this )
-					.find( ".ui-link-inherit:first" )
-					.addClass( "ui-li-jsnumbering" )
-					.prepend( "<span class='ui-li-dec'>" + (counter++) + ". </span>" );
-			}
-		});
 	}
 });
 
