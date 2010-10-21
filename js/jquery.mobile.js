@@ -115,17 +115,17 @@
 		var newBaseURL = getBaseURL();
 		
 		//if href is absolute but local, or a local ID, no base needed
-		if( /^\//.test(href) || (/https?:\/\//.test(href) && !!(href).match(location.hostname)) || /^#/.test(href) ){
+		if( /^\//.test(href) || (/^https?:\/\//.test(href) && !!(href).match(location.hostname)) || /^#/.test(href) ){
 			newBaseURL = '';
 		}
 		
 		// set href to relative path using baseURL and
-		if( !/https?:\/\//.test(href) ){
+		if( !/^https?:\/\//.test(href) ){
 			href = newBaseURL + href;
 		}
 						
 		//if it's a non-local-anchor and Ajax is not supported, or if it's an external link, go to page without ajax
-		if ( ( /^[^#]/.test(href) && !jQuery.support.ajax ) || ( /https?:\/\//.test(href) && !!!href.match(location.hostname) ) ) {
+		if ( ( /^[^#]/.test(href) && !jQuery.support.ajax ) || ( /^https?:\/\//.test(href) && !!!href.match(location.hostname) ) ) {
 			location = href
 		}
 		else{			
