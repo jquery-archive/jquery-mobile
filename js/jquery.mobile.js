@@ -46,7 +46,6 @@
 		$pageContainer,
 		startPageId = 'ui-page-start',
 		activePageClass = 'ui-page-active',
-		$activePage,
 		pageTransition,
 		forceBack,
 		transitions = 'slide slideup slidedown pop flip fade',
@@ -200,7 +199,7 @@
 		}
 		
 		//from is always the currently viewed page
-		var from = $activePage,
+		var from = $.activePage,
 			url = fileUrl = $.type(to) === "string" ? to.replace( /^#/, "" ) : null,
 			back = forceBack || ( urlStack.length > 1 && urlStack[ urlStack.length - 2 ].url === url ),
 			transition = (transition !== undefined) ? transition :  ( pageTransition || "slide" );
@@ -233,7 +232,7 @@
 				pageLoading( true );
 				//trigger show/hide events, allow preventing focus change through return false		
 				if( from.trigger("pagehide", {nextPage: to}) !== false && to.trigger("pageshow", {prevPage: from}) !== false ){
-					$activePage = to;
+					$.activePage = to;
 					reFocus( to );
 				}
 			}
@@ -344,7 +343,7 @@
 			}
 			//there's no hash, the active page is not the start page, and it's not manually triggered hashchange
 			// > probably backed out to the first page visited
-			else if( $activePage.length && !$startPage.is( $activePage ) && !(extras && extras.manuallyTriggered) ) {
+			else if( $.activePage.length && !$startPage.is( $.activePage ) && !(extras && extras.manuallyTriggered) ) {
 				changePage( $startPage, transition, true );
 			}
 			else{
@@ -399,7 +398,7 @@
 	jQuery(function(){
 		
 		//set up active page
-		$startPage = $activePage = jQuery('[data-role="page"]:first');
+		$startPage = $.activePage = jQuery('[data-role="page"]:first');
 		
 		//set page container
 		$pageContainer = $startPage.parent();
