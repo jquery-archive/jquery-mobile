@@ -16,7 +16,6 @@ $.fn.customSelect = function(options){
 				
 		//extendable options
 		o = $.extend({
-			closeText: "close",
 			chooseText: label.text(),
 			theme: select.data("theme")
 		}, options),
@@ -43,7 +42,6 @@ $.fn.customSelect = function(options){
 			}),
 		menuPage = $( "<div data-role='dialog' data-theme='a'>" +
 					"<div data-role='header' data-theme='b'>" +
-						"<a href='#' class='ui-btn-left' data-icon='delete' data-iconpos='notext'>"+ o.closeText +"</a>"+
 						"<div class='ui-title'>" + o.chooseText + "</div>"+
 					"</div>"+
 					"<div data-role='content'></div>"+
@@ -95,7 +93,7 @@ $.fn.customSelect = function(options){
 			if( menuHeight > window.innerHeight - 80 || !$.support.scrollTop ){
 				menuType = "page";		
 				menuPageContent.append( list );
-				$.changePage(menuPage, false, false);
+				$.changePage(menuPage, undefined);
 			}
 			else {
 				menuType = "overlay";
@@ -119,7 +117,7 @@ $.fn.customSelect = function(options){
 		
 		function hidemenu(){
 			if(menuType == "page"){			
-				$.changePage(thisPage, false, true);
+				$.changePage([menuPage,thisPage], undefined, true);
 			}
 			else{
 				screen.addClass( "ui-screen-hidden" );
@@ -189,12 +187,6 @@ $.fn.customSelect = function(options){
 				hidemenu();
 				return false;
 			});	
-
-		//menu page back button
-		menuPage.find( ".ui-btn-left" ).click(function(){
-			hidemenu();
-			return false;
-		});
 	
 		//hide on outside click
 		screen.click(function(){
