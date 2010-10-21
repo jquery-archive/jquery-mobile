@@ -16,7 +16,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 			$this.addClass( "ui-" + $this.data( "role" ) );
 		});
 		
-		this.element.find( "[data-role=nojs]" ).addClass( "ui-nojs" );
+		this.element.find( "[data-role='nojs']" ).addClass( "ui-nojs" );
 		this._enchanceControls();
 		
 		//pre-find data els
@@ -39,8 +39,8 @@ $.widget( "mobile.page", $.mobile.widget, {
 				
 				//right,left buttons
 				var $headeranchors = $this.children( "a" ),
-					leftbtn = $headeranchors.filter( ".ui-btn-left" ).length,
-					rightbtn = $headeranchors.filter( ".ui-btn-right" ).length;
+					leftbtn = $headeranchors.hasClass( "ui-btn-left" ),
+					rightbtn = $headeranchors.hasClass( "ui-btn-right" );
 				
 				if ( !leftbtn ) {
 					leftbtn = $headeranchors.eq( 0 ).not('.ui-btn-right').addClass( "ui-btn-left" ).length;
@@ -63,7 +63,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 				}
 				
 				//page title	
-				$this.children( ":header" )
+				$this.children( "h1, h2, h3, h4, h5, h6" )
 					.addClass( "ui-title" )
 					.attr( "tabindex" , "0")
 					.attr( "role" ,"heading")
@@ -128,23 +128,26 @@ $.widget( "mobile.page", $.mobile.widget, {
 		
 		// enchance form controls
 		this.element
-			.find( ":radio, :checkbox" )
+			.find( "[type='radio'], [type='checkbox']" )
 			.customCheckboxRadio();
+
 		this.element
-			.find( ":button, :submit, :reset, :image" )
+			.find( "button, [type='button'], [type='submit'], [type='reset'], [type='image']" )
 			.not( ".ui-nojs" )
 			.customButton();
+
 		this.element
 			.find( "input, textarea" )
-			.not( ":radio, :checkbox, :button, :submit, :reset, :image" )
+			.not( "[type='radio'], [type='checkbox'], button, [type='button'], [type='submit'], [type='reset'], [type='image']" )
 			.customTextInput();
+
 		this.element
 			.find( "input, select" )
-			.filter( "[data-role=slider], [data-type=range]" )
+			.filter( "[data-role='slider'], [data-type='range']" )
 			.slider();
+
 		this.element
-			.find( "select" )
-			.not( "[data-role=slider]" )
+			.find( "select:not([data-role='slider'])" )
 			.customSelect();
 	}
 });
