@@ -57,7 +57,7 @@
 		} ],
 		focusable = "[tabindex],a,button:visible,select:visible,input",
 		nextPageRole = null,
-		preventLoad = false,
+		hashListener = true,
 		unHashedSelectors = '[data-rel=dialog]';
 	
 	// TODO: don't expose (temporary during code reorg)
@@ -94,9 +94,9 @@
 		return newBaseURL;
 	}
 	
-	function setBaseURL(){
+	function setBaseURL( nonHashPath ){
 		//set base url for new page assets
-		$('#ui-base').attr('href', getBaseURL());
+		$('#ui-base').attr('href', getBaseURL( nonHashPath ));
 	}
 	
 	function resetBaseURL(){
@@ -128,12 +128,12 @@
 		if ( ( /^[^#]/.test(href) && !jQuery.support.ajax ) || ( /https?:\/\//.test(href) && !!!href.match(location.hostname) ) ) {
 			location = href
 		}
-		else{
-			changePage(href, pageTransition);
-			
-			if( !$(this).is(unHashedSelectors) ){
-				// let the hashchange event handler take care of requesting the page via ajax
-				location.hash = href;
+		else{			
+			if( $(this).is(unHashedSelectors) ){
+				changePage(href, pageTransition, undefined);
+			}
+			else{
+				changePage(href, pageTransition, undefined, true);
 			}
 			
 		}
@@ -191,17 +191,14 @@
 	
 
 	//for getting or creating a new page 
-	function changePage( to, transition, back ){
-		//if an error occurred, preventLoad will be true
-		if ( preventLoad ) {
-			preventLoad = false;
-			return;
-		}
-		
+	function changePage( to, transition, back, changeHash){
+
 		//from is always the currently viewed page
-		var from = $.activePage,
+		var toIsArray = $.type(to) === "array",
+			from = toIsArray ? to[0] : $.activePage,
+			to = toIsArray ? to[1] : to,
 			url = fileUrl = $.type(to) === "string" ? to.replace( /^#/, "" ) : null,
-			back = forceBack || ( urlStack.length > 1 && urlStack[ urlStack.length - 2 ].url === url ),
+			back = (back !== undefined) ? back : (forceBack || ( urlStack.length > 1 && urlStack[ urlStack.length - 2 ].url === url )),
 			transition = (transition !== undefined) ? transition :  ( pageTransition || "slide" );
 		
 		//unset pageTransition, forceBack	
@@ -225,15 +222,22 @@
 			jQuery( document.activeElement ).blur();
 			
 			//trigger before show/hide events
-			from.trigger("pagebeforehide", {nextPage: to});
-			to.trigger("pagebeforeshow", {prevPage: from});
+			from.data("page")._trigger("beforehide", {nextPage: to});
+			to.data("page")._trigger("beforeshow", {prevPage: from});
 			
 			function loadComplete(){
 				pageLoading( true );
 				//trigger show/hide events, allow preventing focus change through return false		
-				if( from.trigger("pagehide", {nextPage: to}) !== false && to.trigger("pageshow", {prevPage: from}) !== false ){
+				if( from.data("page")._trigger("hide", null, {nextPage: to}) !== false && to.data("page")._trigger("show", null, {prevPage: from}) !== false ){
 					$.activePage = to;
-					reFocus( to );
+				}
+				reFocus( to );
+				if( changeHash && url ){
+					hashListener = false;
+					location.hash = url;
+					setTimeout(function(){
+						hashListener = true;
+					}, 500);
 				}
 			}
 			
@@ -257,35 +261,46 @@
 			}
 		};
 		
-		//
+		//shared page enhancements
 		function enhancePage(){
 			setPageRole( to );
 			to.page();
 		}
-			
+		
+		//get the actual file in a jq-mobile nested url
+		function getFileURL( url ){
+			return url.match( '&' + jQuery.mobile.subPageUrlKey ) ? url.split( '&' + jQuery.mobile.subPageUrlKey )[0] : url;
+		}
 
 		//if url is a string
 		if( url ){
-			to = jQuery( "[id='" + url + "']" );
+			to = jQuery( "[id='" + url + "']" ),
+			fileUrl = getFileURL(url);
+		}
+		else{ //find base url of element, if avail
+			var toID = to.attr('id'),
+				toIDfileurl = getFileURL(toID);
+				
+			if(toID != toIDfileurl){
+				fileUrl = toIDfileurl;
+			}	
 		}
 		
 		// find the "to" page, either locally existing in the dom or by creating it through ajax
 		if ( to.length ) {
-			setBaseURL();
+			if( fileUrl ){
+				setBaseURL(fileUrl);
+			}	
 			enhancePage();
 			transitionPages();
 		} else { 
 			
 			pageLoading();
 
-			if ( url.match( '&' + jQuery.mobile.subPageUrlKey ) ) {
-				fileUrl = url.split( '&' + jQuery.mobile.subPageUrlKey )[0];
-			}
-
 			$.ajax({
 				url: fileUrl,
 				success: function( html ) {
-					setBaseURL();
+					setBaseURL(fileUrl);
 					var all = jQuery("<div></div>");
 					//workaround to allow scripts to execute when included in page divs
 					all.get(0).innerHTML = html;
@@ -307,15 +322,12 @@
 					pageLoading( true );
 
 					jQuery("<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h1>Error Loading Page</h1></div>")
-						.css({ "display": "block", "opacity": 0.96 })
+						.css({ "display": "block", "opacity": 0.96, "top": $(window).scrollTop() + 100 })
 						.appendTo( $pageContainer )
 						.delay( 800 )
 						.fadeOut( 400, function(){
 							$(this).remove();
 						});
-
-					preventLoad = true;
-					history.back();
 				}
 			});
 		}
@@ -331,6 +343,7 @@
 		// needs to be bound at domready (for IE6)
 		// find or load content, make it active
 		$window.bind( "hashchange", function(e, extras) {
+			if( !hashListener ){ return; } 
 			var to = location.hash,
 				transition = (extras && extras.manuallyTriggered) ? false : undefined;
 				
