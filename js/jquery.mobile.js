@@ -46,6 +46,7 @@
 		$pageContainer,
 		startPageId = 'ui-page-start',
 		activePageClass = 'ui-page-active',
+		$activePage,
 		pageTransition,
 		forceBack,
 		transitions = 'slide slideup slidedown pop flip fade',
@@ -56,7 +57,8 @@
 			transition: "slide"
 		} ],
 		focusable = "[tabindex],a,button:visible,select:visible,input",
-		nextPageRole = null;
+		nextPageRole = null,
+		preventLoad = false;
 	
 	// TODO: don't expose (temporary during code reorg)
 	$.mobile.urlStack = urlStack;
@@ -80,8 +82,10 @@
 		}, 150 );
 	}
 	
-	function getBaseURL(){
-	    var newBaseURL = location.hash.replace(/#/,'').split('/');
+	function getBaseURL( nonHashPath ){
+	    var newPath = nonHashPath || location.hash,
+	    	newBaseURL = newPath.replace(/#/,'').split('/');
+	    	
 		if(newBaseURL.length && /[.|&]/.test(newBaseURL[newBaseURL.length-1]) ){
 			newBaseURL.pop();	
 		}
@@ -158,45 +162,163 @@
 		}
 	}
 	
-	// transition between pages - based on transitions from jQtouch
-	function changePage( from, to, transition, back ) {
-		jQuery( document.activeElement ).blur();
-		
-		
-		//trigger before show/hide events
-		from.trigger("pagebeforehide", {nextPage: to});
-		to.trigger("pagebeforeshow", {prevPage: from});
-		
-		function loadComplete(){
-			pageLoading( true );
-			//trigger show/hide events, allow preventing focus change through return false		
-			if( from.trigger("pagehide", {nextPage: to}) !== false && to.trigger("pageshow", {prevPage: from}) !== false ){
-				reFocus( to );
+	//function for setting role of next page
+	function setPageRole( newPage ) {
+		if ( nextPageRole ) {
+			newPage.attr( "data-role", nextPageRole );
+			nextPageRole = undefined;
+		}
+	}
+	
+	//wrap page and transfer data-attrs if it has an ID
+	function wrapNewPage( newPage ){
+		var copyAttrs = ['data-role', 'data-theme', 'data-fullscreen'], //TODO: more page-level attrs?
+			wrapper = newPage.wrap( "<div>" ).parent();
+			
+		$.each(copyAttrs,function(i){
+			if( newPage.attr( copyAttrs[ i ] ) ){
+				wrapper.attr( copyAttrs[ i ], newPage.attr( copyAttrs[ i ] ) );
+				newPage.removeAttr( copyAttrs[ i ] );
 			}
+		});
+		return wrapper;
+	}
+	
+
+	//for getting or creating a new page 
+	function changePage( to, transition, back ){
+		//if an error occurred, preventLoad will be true
+		if ( preventLoad ) {
+			preventLoad = false;
+			return;
 		}
 		
-		if(transition){		
-			// animate in / out
-			from.addClass( transition + " out " + ( back ? "reverse" : "" ) );
-			to.addClass( activePageClass + " " + transition +
-				" in " + ( back ? "reverse" : "" ) );
+		//from is always the currently viewed page
+		var from = $activePage,
+			url = fileUrl = $.type(to) === "string" ? to.replace( /^#/, "" ) : null,
+			back = forceBack || ( urlStack.length > 1 && urlStack[ urlStack.length - 2 ].url === url ),
+			transition = (transition !== undefined) ? transition :  ( pageTransition || "slide" );
+		
+		//unset pageTransition, forceBack	
+		pageTransition = undefined;
+		forceBack = undefined;
 			
-			// callback - remove classes, etc
-			to.animationComplete(function() {
-				from.add( to ).removeClass(" out in reverse " + transitions );
+		//reset base to pathname for new request
+		resetBaseURL();
+			
+		// if the new href is the same as the previous one
+		if ( back ) {
+			transition = urlStack.pop().transition;
+		} else {
+			urlStack.push({ url: url, transition: transition });
+		}
+		
+		//function for transitioning between two existing pages
+		function transitionPages() {
+				
+			//kill the keyboard
+			jQuery( document.activeElement ).blur();
+			
+			//trigger before show/hide events
+			from.trigger("pagebeforehide", {nextPage: to});
+			to.trigger("pagebeforeshow", {prevPage: from});
+			
+			function loadComplete(){
+				pageLoading( true );
+				//trigger show/hide events, allow preventing focus change through return false		
+				if( from.trigger("pagehide", {nextPage: to}) !== false && to.trigger("pageshow", {prevPage: from}) !== false ){
+					$activePage = to;
+					reFocus( to );
+				}
+			}
+			
+			if(transition){		
+				// animate in / out
+				from.addClass( transition + " out " + ( back ? "reverse" : "" ) );
+				to.addClass( activePageClass + " " + transition +
+					" in " + ( back ? "reverse" : "" ) );
+				
+				// callback - remove classes, etc
+				to.animationComplete(function() {
+					from.add( to ).removeClass(" out in reverse " + transitions );
+					from.removeClass( activePageClass );
+					loadComplete();
+				});
+			}
+			else{
 				from.removeClass( activePageClass );
+				to.addClass( activePageClass );
 				loadComplete();
+			}
+		};
+		
+		//
+		function enhancePage(){
+			setPageRole( to );
+			to.page();
+		}
+			
+
+		//if url is a string
+		if( url ){
+			to = jQuery( "[id='" + url + "']" );
+		}
+		
+		// find the "to" page, either locally existing in the dom or by creating it through ajax
+		if ( to.length ) {
+			setBaseURL();
+			enhancePage();
+			transitionPages();
+		} else { 
+			
+			pageLoading();
+
+			if ( url.match( '&' + jQuery.mobile.subPageUrlKey ) ) {
+				fileUrl = url.split( '&' + jQuery.mobile.subPageUrlKey )[0];
+			}
+
+			$.ajax({
+				url: fileUrl,
+				success: function( html ) {
+					setBaseURL();
+					var all = jQuery("<div></div>");
+					//workaround to allow scripts to execute when included in page divs
+					all.get(0).innerHTML = html;
+					to = all.find('[data-role="page"]');
+					
+					//preserve ID on a retrieved page
+					if ( to.attr('id') ) {
+						to = wrapNewPage( to );
+					}
+
+					to
+						.attr( "id", fileUrl )
+						.appendTo( $pageContainer );
+						
+					enhancePage();
+					transitionPages();
+				},
+				error: function() {
+					pageLoading( true );
+
+					jQuery("<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h1>Error Loading Page</h1></div>")
+						.css({ "display": "block", "opacity": 0.96 })
+						.appendTo( $pageContainer )
+						.delay( 800 )
+						.fadeOut( 400, function(){
+							$(this).remove();
+						});
+
+					preventLoad = true;
+					history.back();
+				}
 			});
 		}
-		else{
-			from.removeClass( activePageClass );
-			to.addClass( activePageClass );
-			loadComplete();
-		}
+
 	};
+
 	
 	jQuery(function() {
-		var preventLoad = false;
 
 		$body = jQuery( "body" );
 		pageLoading();
@@ -204,128 +326,31 @@
 		// needs to be bound at domready (for IE6)
 		// find or load content, make it active
 		$window.bind( "hashchange", function(e, extras) {
-			if ( preventLoad ) {
-				preventLoad = false;
-				return;
+			var to = location.hash,
+				transition = (extras && extras.manuallyTriggered) ? false : undefined;
+				
+			// either we've backed up to the root page url
+			// or it's the first page load with no hash present
+			//there's a hash and it wasn't manually triggered
+			// > probably a new page, "back" will be figured out by changePage
+			if ( to ){
+				changePage( to, transition);
 			}
-
-			var url = location.hash.replace( /^#/, "" ),
-				stackLength = urlStack.length,
-				// pageTransition only exists if the user clicked a link
-				back = !pageTransition && stackLength > 1 &&
-					urlStack[ stackLength - 2 ].url === url,
-				transition = (extras && extras.manuallyTriggered) ? false : pageTransition || "slide",
-				fileUrl = url;
-			pageTransition = undefined;
-			
-			//reset base to pathname for new request
-			resetBaseURL();
-			
-			// if the new href is the same as the previous one
-			if ( back ) {
-				transition = urlStack.pop().transition;
-			} else {
-				urlStack.push({ url: url, transition: transition });
-				if ( forceBack ) back = true;
+			//there's no hash, the active page is not the start page, and it's not manually triggered hashchange
+			// > probably backed out to the first page visited
+			else if( $activePage.length && !$startPage.is( $activePage ) && !(extras && extras.manuallyTriggered) ) {
+				changePage( $startPage, transition, true );
 			}
-			forceBack = undefined;
-			
-			//function for setting role of next page
-			function setPageRole( newPage ) {
-				if ( nextPageRole ) {
-					newPage.attr( "data-role", nextPageRole );
-					nextPageRole = undefined;
+			else{
+				$startPage.trigger("pagebeforeshow", {prevPage: $('')});
+				$startPage.addClass( activePageClass );
+				pageLoading( true );
+				
+				if( $startPage.trigger("pageshow", {prevPage: $('')}) !== false ){
+					reFocus($startPage);
 				}
 			}
-			
-			//wrap page and transfer data-attrs if it has an ID
-			function wrapNewPage( newPage ){
-				var copyAttrs = ['data-role', 'data-theme', 'data-fullscreen'], //TODO: more page-level attrs?
-					wrapper = newPage.wrap( "<div>" ).parent();
-					
-				$.each(copyAttrs,function(i){
-					if( newPage.attr( copyAttrs[ i ] ) ){
-						wrapper.attr( copyAttrs[ i ], newPage.attr( copyAttrs[ i ] ) );
-						newPage.removeAttr( copyAttrs[ i ] );
-					}
-				});
-				return wrapper;
-			}
-			
-			if ( url ) {
-				var active = jQuery( ".ui-page-active" );
 
-				// see if content is present already
-				var localDiv = jQuery( "[id='" + url + "']" );
-				if ( localDiv.length ) {
-					if ( localDiv.is( "[data-role]" ) ) {
-						setPageRole( localDiv );
-					}
-					setBaseURL();
-					localDiv.page();
-					changePage( active, localDiv, transition, back );
-					
-				} else { //ajax it in
-					pageLoading();
-
-					if ( url.match( '&' + jQuery.mobile.subPageUrlKey ) ) {
-						fileUrl = url.split( '&' + jQuery.mobile.subPageUrlKey )[0];
-					}
-
-					$.ajax({
-						url: fileUrl,
-						success: function( html ) {
-							var all = jQuery("<div></div>");
-							//workaround to allow scripts to execute when included in page divs
-							all.get(0).innerHTML = html;
-							var page = all.find('[data-role="page"]');
-
-							if ( page.attr('id') ) {
-								page = wrapNewPage( page );
-							}
-
-							page
-								.attr( "id", fileUrl )
-								.appendTo( $pageContainer );
-
-							setPageRole( page );
-							page.page();
-							changePage( active, page, transition, back );
-						},
-						error: function() {
-							pageLoading( true );
-
-							jQuery("<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h1>Error Loading Page</h1></div>")
-								.css({ "display": "block", "opacity": 0.96 })
-								.appendTo( $pageContainer )
-								.delay( 800 )
-								.fadeOut( 400, function(){
-									$(this).remove();
-								});
-
-							preventLoad = true;
-							history.back();
-						}
-					});
-						
-					setBaseURL();
-				}
-			} else {
-				// either we've backed up to the root page url
-				// or it's the first page load with no hash present
-				var currentPage = jQuery( ".ui-page-active" );
-				if ( currentPage.length && !$startPage.is( ".ui-page-active" ) ) {
-					changePage( currentPage, $startPage, transition, back );
-				} else {
-					$startPage.trigger("pagebeforeshow", {prevPage: $('')});
-					$startPage.addClass( activePageClass );
-					pageLoading( true );
-					
-					if( $startPage.trigger("pageshow", {prevPage: $('')}) !== false ){
-						reFocus($startPage);
-					}
-				}
-			}
 		});
 	});	
 	
@@ -368,7 +393,7 @@
 	jQuery(function(){
 		
 		//set up active page
-		$startPage = jQuery('[data-role="page"]:first');
+		$startPage = $activePage = jQuery('[data-role="page"]:first');
 		
 		//set page container
 		$pageContainer = $startPage.parent();
