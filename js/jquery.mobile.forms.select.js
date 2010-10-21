@@ -95,7 +95,7 @@ $.fn.customSelect = function(options){
 			if( menuHeight > window.innerHeight - 80 || !$.support.scrollTop ){
 				menuType = "page";		
 				menuPageContent.append( list );
-				$.changePage(thisPage, menuPage, false, false);
+				$.changePage(menuPage, false, false);
 			}
 			else {
 				menuType = "overlay";
@@ -119,7 +119,7 @@ $.fn.customSelect = function(options){
 		
 		function hidemenu(){
 			if(menuType == "page"){			
-				$.changePage(menuPage, thisPage, false, true);
+				$.changePage(thisPage, false, true);
 			}
 			else{
 				screen.addClass( "ui-screen-hidden" );

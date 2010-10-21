@@ -13,6 +13,14 @@ $.fn.dialog = function(options){
 			.addClass('ui-page ui-dialog ui-body-a')
 			.find('[data-role=header]')
 			.addClass('ui-corner-top ui-overlay-shadow')
+				.find('.ui-btn-left').tap(function(){
+					$.changePage()
+					return false;
+				})
+				.click(function(){
+					return false;
+				})
+				.end()
 			.end()
 			.find('.ui-content,[data-role=footer]')
 				.last()

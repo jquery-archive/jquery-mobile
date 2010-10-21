@@ -26,9 +26,9 @@ $.fn.addSourceLink = function(style){
 
 				var activePage = $(this).parents('.ui-page-active');
 				page.find('.ui-content').append(codeblock);
-				$.changePage(activePage, page, 'slideup',false);
+				$.changePage(page, 'slideup',false);
 				page.find('.ui-btn-left').click(function(){
-					$.changePage(page, activepage, 'slideup',true);
+					$.changePage(activepage, 'slideup',true);
 					return false;
 				});						
 			})	
