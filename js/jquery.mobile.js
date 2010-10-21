@@ -58,7 +58,8 @@
 		} ],
 		focusable = "[tabindex],a,button:visible,select:visible,input",
 		nextPageRole = null,
-		preventLoad = false;
+		preventLoad = false,
+		unHashedSelectors = '[data-rel=dialog]';
 	
 	// TODO: don't expose (temporary during code reorg)
 	$.mobile.urlStack = urlStack;
@@ -129,8 +130,13 @@
 			location = href
 		}
 		else{
-			// let the hashchange event handler take care of requesting the page via ajax
-			location.hash = href;
+			changePage(href, pageTransition);
+			
+			if( !$(this).is(unHashedSelectors) ){
+				// let the hashchange event handler take care of requesting the page via ajax
+				location.hash = href;
+			}
+			
 		}
 		return this;
 	};
