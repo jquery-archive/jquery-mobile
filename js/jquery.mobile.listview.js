@@ -27,7 +27,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			this.element.addClass( "ui-listview-inset ui-corner-all ui-shadow" );
 		}	
 
-		this.element.delegate("ui-li", "focusin", function() {
+		this.element.delegate(".ui-li", "focusin", function() {
 			jQuery(this).attr( "tabindex", "0" );
 		});
 
@@ -126,10 +126,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			$list.find( ".ui-li-dec" ).remove();
 		}
 
-		li
-			.addClass( "ui-li" )
-			.attr( "role", "option" )
-			.attr( "tabindex", "-1" )
+		li.attr({ "role": "option", "tabindex": "-1" });
 
 		li.first().attr( "tabindex", "0" );
 
@@ -140,6 +137,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			if ( !create && item.hasClass( "ui-li" ) ) {
 				return;
 			}
+
+			item.addClass( "ui-li" );
 
 			var a = item.find( "a" );
 				
