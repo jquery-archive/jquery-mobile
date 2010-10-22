@@ -129,7 +129,7 @@ jQuery.widget( "mobile.listview", jQuery.mobile.widget, {
 
 		item.find( "img" ).addClass( "ui-li-thumb" ).each(function() {
 			jQuery( this ).closest( "li" )
-				.addClass( jQuery(this).is( "ui-li-icon" ) ? "ui-li-has-icon" : "ui-li-has-thumb" );
+				.addClass( jQuery(this).is( ".ui-li-icon" ) ? "ui-li-has-icon" : "ui-li-has-thumb" );
 		});
 
 		var aside = item.find( ".ui-li-aside" );
