@@ -63,7 +63,7 @@ jQuery.widget( "mobile.listview", jQuery.mobile.widget, {
 
 				// down or right arrow keys
 				case 40:
-					va next = li.next();
+					var next = li.next();
 				
 					// if there's a next option, focus it
 					if ( next.length ) {
@@ -110,7 +110,7 @@ jQuery.widget( "mobile.listview", jQuery.mobile.widget, {
 		});	
 
 		// tapping the whole LI triggers ajaxClick on the first link
-		$list.dlegate( "li", "tap", function(event) {
+		$list.delegate( "li", "tap", function(event) {
 			if ( !jQuery( e.target ).closest( "a" ).length ) {
 				jQuery( this ).find( "a" ).first().trigger( "click" );
 				return false;
