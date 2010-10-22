@@ -1,9 +1,11 @@
-(function ( $ ) {
+(function ( jQuery ) {
 
-$.widget( "mobile.page", $.mobile.widget, {
+jQuery.widget( "mobile.page", jQuery.mobile.widget, {
 	options: {},
 	
 	_create: function() {
+		var $elem = this.element;
+
 		if ( this._trigger( "beforeCreate" ) === false ) {
 			return;
 		}
@@ -11,16 +13,16 @@ $.widget( "mobile.page", $.mobile.widget, {
 		//some of the form elements currently rely on the presence of ui-page and ui-content
 		// classes so we'll handle page and content roles outside of the main role processing
 		// loop below.
-		this.element.find( "[data-role=page],[data-role=content]" ).andSelf().each(function() {
-			var $this = $( this );
-			$this.addClass( "ui-" + $this.data( "role" ) );
+		$elem.find( "[data-role='page'], [data-role='content']" ).andSelf().each(function() {
+			$(this).addClass( "ui-" + $(this).data( "role" ) );
 		});
 		
-		this.element.find( "[data-role='nojs']" ).addClass( "ui-nojs" );
+		$elem.find( "[data-role='nojs']" ).addClass( "ui-nojs" );
+
 		this._enchanceControls();
 		
-		//pre-find data els
-		var $dataEls = this.element.find( "[data-role]" ).andSelf().each(function() {
+		// pre-find data els
+		var $dataEls = $elem.find( "[data-role]" ).andSelf().each(function() {
 			var $this = $( this ),
 				role = $this.data( "role" ),
 				theme = $this.data( "theme" );
@@ -95,20 +97,20 @@ $.widget( "mobile.page", $.mobile.widget, {
 		});
 		
 		//links in bars, or those with data-role become buttons
-		this.element.find( "[data-role='button'], .ui-bar a, .ui-header a, .ui-footer a" )
+		$elem.find( "[data-role='button'], .ui-bar a, .ui-header a, .ui-footer a" )
 			.not( ".ui-btn" )
 			.buttonMarkup();
-		
-		this.element
+
+		$elem	
 			.find("[data-role='controlgroup']")
 			.controlgroup();
 		
 		//links within content areas
-		this.element.find( "a:not(.ui-btn):not(.ui-link-inherit)" )
+		$elem.find( "a:not(.ui-btn):not(.ui-link-inherit)" )
 			.addClass( "ui-link" );	
 		
 		//fix toolbars
-		this.element.fixHeaderFooter();
+		$elem.fixHeaderFooter();
 	},
 	
 	_enchanceControls: function() {
