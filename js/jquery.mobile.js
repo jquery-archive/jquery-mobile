@@ -403,17 +403,22 @@
 	function resolutionBreakpoints(){
 		var currWidth = $window.width(),
 			minPrefix = "min-width-",
-			minBreakpoints = [];
+			maxPrefix = "max-width-",
+			minBreakpoints = [],
+			maxBreakpoints = [];
 			
-		$html.removeClass( minPrefix + $.mobile.resolutionBreakpoints.join(" " + minPrefix) );
+		$html.removeClass( minPrefix + $.mobile.resolutionBreakpoints.join(" " + minPrefix) + maxPrefix + " " +  $.mobile.resolutionBreakpoints.join(" " + maxPrefix) );
 					
 		$.each($.mobile.resolutionBreakpoints,function( i ){
 			if( currWidth >= $.mobile.resolutionBreakpoints[ i ] ){
 				minBreakpoints.push( $.mobile.resolutionBreakpoints[ i ] );
 			}
+			if( currWidth <= $.mobile.resolutionBreakpoints[ i ] ){
+				maxBreakpoints.push( $.mobile.resolutionBreakpoints[ i ] );
+			}
 		});
 		
-		$html.addClass( minPrefix + minBreakpoints.join(" " + minPrefix) );	
+		$html.addClass( minPrefix + minBreakpoints.join(" " + minPrefix) + " " + maxPrefix + maxBreakpoints.join(" " + maxPrefix) );	
 	};
 	
 	//common breakpoints, overrideable, changeable
