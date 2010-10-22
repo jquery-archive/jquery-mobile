@@ -402,17 +402,18 @@
 	//add breakpoint classes for faux media-q support
 	function resolutionBreakpoints(){
 		var currWidth = $window.width(),
-			classPrefix = "maxwidth-",
-			breakPoint;
+			minPrefix = "minwidth-",
+			minBreakpoints = [];
 			
-		$html.removeClass( classPrefix + $.mobile.resolutionBreakpoints.join(" " + classPrefix) );			
+		$html.removeClass( minPrefix + $.mobile.resolutionBreakpoints.join(" " + minPrefix) );
+					
 		$.each($.mobile.resolutionBreakpoints,function( i ){
 			if( currWidth >= $.mobile.resolutionBreakpoints[ i ] ){
-				breakPoint = $.mobile.resolutionBreakpoints[ i ];
+				minBreakpoints.push( $.mobile.resolutionBreakpoints[ i ] );
 			}
 		});
 		
-		$html.addClass(classPrefix+breakPoint);	
+		$html.addClass( minPrefix + minBreakpoints.join(" " + minPrefix) );	
 	};
 	
 	//common breakpoints, overrideable, changeable
