@@ -4,9 +4,9 @@
 * Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
 * Note: Code is in draft form and is subject to change 
 */
-(function( $ ) {
+(function( jQuery ) {
 
-$.widget( "mobile.listview", $.mobile.widget, {
+jQuery.widget( "mobile.listview", jQuery.mobile.widget, {
 	options: {
 		theme: "c",
 		countTheme: "c",
@@ -18,71 +18,101 @@ $.widget( "mobile.listview", $.mobile.widget, {
 	},
 	
 	_create: function() {
+		var $list = this.element,
+			o = this.options;
+
 		// create listview markup 
-		this.element
+		$list
 			.addClass( "ui-listview" )
 			.attr( "role", "listbox" )
 		
-		if ( this.options.inset ) {
-			this.element.addClass( "ui-listview-inset ui-corner-all ui-shadow" );
+		if ( o.inset ) {
+			$list.addClass( "ui-listview-inset ui-corner-all ui-shadow" );
 		}	
 
-		this.element.delegate(".ui-li", "focusin", function() {
-			jQuery(this).attr( "tabindex", "0" );
+		$list.delegate( ".ui-li", "focusin", function() {
+			jQuery( this ).attr( "tabindex", "0" );
 		});
 
-		this._itemApply( this.element, this.element );
+		this._itemApply( $list, $list );
 		
 		this.refresh( true );
 	
 		//keyboard events for menu items
-		this.element.keydown(function(event){
-			//switch logic based on which key was pressed
-			switch(event.keyCode){
-				//up or left arrow keys
+		$list.keydown(function( e ) {
+			var target = jQuery( e.target ),
+				li = target.closest( "li" );
+
+			// switch logic based on which key was pressed
+			switch ( e.keyCode ) {
+				// up or left arrow keys
 				case 38:
-					//if there's a previous option, focus it
-					if( $(event.target).closest('li').prev().length  ){
-						$(event.target).blur().attr("tabindex","-1").closest('li').prev().find('a').eq(0).focus();
+					var prev = li.prev();
+
+					// if there's a previous option, focus it
+					if ( prev.length ) {
+						target
+							.blur()
+							.attr( "tabindex", "-1" );
+
+						prev.find( "a" ).first().focus();
 					}	
-					//prevent native scroll
+
 					return false;
 				break;
-				//down or right arrow keys
+
+				// down or right arrow keys
 				case 40:
+					var next = li.next();
 				
-					//if there's a next option, focus it
-					if( $(event.target).closest('li').next().length ){
-						$(event.target).blur().attr("tabindex","-1").closest('li').next().find('a').eq(0).focus();
+					// if there's a next option, focus it
+					if ( next.length ) {
+						target
+							.blur()
+							.attr( "tabindex", "-1" );
+						
+						next.find( "a" ).first().focus();
 					}	
-					//prevent native scroll
+
 					return false;
 				break;
+
 				case 39:
-					if( $(event.target).closest('li').find('a.ui-li-link-alt').length ){
-						$(event.target).blur().closest('li').find('a.ui-li-link-alt').eq(0).focus();
+					var a = li.find( "a.ui-li-link-alt" );
+
+					if ( a.length ) {
+						target.blur();
+						a.first().focus();
 					}
+
 					return false;
 				break;
+
 				case 37:
-					if( $(event.target).closest('li').find('a.ui-link-inherit').length ){
-						$(event.target).blur().closest('li').find('a.ui-link-inherit').eq(0).focus();
+					var a = li.find( "a.ui-link-inherit" );
+
+					if ( a.length ) {
+						target.blur();
+						a.first().focus();
 					}
+
 					return false;
 				break;
-				//if enter or space is pressed, trigger click
+
+				// if enter or space is pressed, trigger click
 				case 13:
 				case 32:
-					 $(event.target).trigger('click'); //should trigger select
+					 target.trigger( "click" );
+
 					 return false;
 				break;	
 			}
 		});	
 
-		//tapping the whole LI triggers ajaxClick on the first link
-		this.element.delegate( "li:has(a)", "tap", function(event) {
-			if( !$(event.target).closest('a').length ){
-				$( this ).find( "a:first" ).trigger('click');
+		// tapping the whole LI triggers ajaxClick on the first link
+		$list.delegate( "li", "tap", function(event) {
+			if ( !jQuery( e.target ).closest( "a" ).length ) {
+				jQuery( this ).find( "a" ).first().trigger( "click" );
 				return false;
 			}
 		});
