@@ -10,9 +10,9 @@ jQuery.fn.buttonMarkup = function( options ){
 	return this.each( function() {
 		var el = jQuery( this ),
 		    o = jQuery.extend( {}, jQuery.fn.buttonMarkup.defaults, el.data(), options),
-			
+
 			// Classes Defined
-			buttonClass = "ui-btn ui-btn-up-" + o.theme,
+			buttonClass,
 			innerClass = "ui-btn-inner",
 			iconClass;
 
@@ -23,10 +23,12 @@ jQuery.fn.buttonMarkup = function( options ){
 		// if not, try to find closest theme container
 		if ( !o.theme ) {
 			var themedParent = el.closest("[class*='ui-bar-'],[class*='ui-body-']"); 
-			return themedParent.length ?
+			o.theme = themedParent.length ?
 				/ui-(bar|body)-([a-z])/.exec( themedParent.attr("class") )[2] :
 				"c";
 		}
+
+		buttonClass = "ui-btn ui-btn-up-" + o.theme;
 		
 		if ( o.inline ) {
 			buttonClass += " ui-btn-inline";
@@ -42,7 +44,7 @@ jQuery.fn.buttonMarkup = function( options ){
 				iconClass += " ui-icon-shadow"
 			}
 		}
-		
+
 		if ( o.iconpos ) {
 			buttonClass += " ui-btn-icon-" + o.iconpos;
 			
@@ -63,11 +65,11 @@ jQuery.fn.buttonMarkup = function( options ){
 		el
 			.attr( "data-theme", o.theme )
 			.addClass( buttonClass );
-		
+
 		var wrap = ("<D class='" + innerClass + "'><D class='ui-btn-text'></D>" +
 			( o.icon ? "<span class='" + iconClass + "'></span>" : "" ) +
 			"</D>").replace(/D/g, o.wrapperEls);
-		
+
 		el.wrapInner( wrap );
 	});		
 };
@@ -100,6 +102,6 @@ var attachEvents = function() {
 	});
 
 	attachEvents = null;
-}
+};
 
 })(jQuery);

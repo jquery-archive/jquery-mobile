@@ -95,13 +95,12 @@ $.widget( "mobile.page", $.mobile.widget, {
 		});
 		
 		//links in bars, or those with data-role become buttons
-		this.element.find( "[data-role=button], .ui-bar a, .ui-header a, .ui-footer a" )
+		this.element.find( "[data-role='button'], .ui-bar a, .ui-header a, .ui-footer a" )
 			.not( ".ui-btn" )
 			.buttonMarkup();
 		
-		
 		this.element
-			.find('[data-role="controlgroup"]')
+			.find("[data-role='controlgroup']")
 			.controlgroup();
 		
 		//links within content areas
