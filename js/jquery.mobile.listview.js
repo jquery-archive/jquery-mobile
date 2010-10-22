@@ -120,8 +120,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			$list = this.element,
 			dividertheme = $list.data( "dividertheme" ) || o.dividerTheme,
 			li = $list.children( "li" ),
-			counter = jQuery.support.cssPseudoElement || !jQuery.nodeName( $list[0], "ol" ) ? 0 : 1,
-			itemClass = "ui-li";
+			counter = jQuery.support.cssPseudoElement || !jQuery.nodeName( $list[0], "ol" ) ? 0 : 1;
 
 		if ( counter ) {
 			$list.find( ".ui-li-dec" ).remove();
@@ -132,7 +131,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		li.first().attr( "tabindex", "0" );
 
 		li.each(function( pos ) {
-			var item = jQuery( this );
+			var item = jQuery( this ),
+				itemClass = "ui-li";
 
 			// If we're creating the element, we update it regardless
 			if ( !create && item.hasClass( "ui-li" ) ) {
