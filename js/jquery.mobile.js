@@ -58,7 +58,8 @@
 		focusable = "[tabindex],a,button:visible,select:visible,input",
 		nextPageRole = null,
 		hashListener = true,
-		unHashedSelectors = '[data-rel=dialog]';
+		unHashedSelectors = '[data-rel=dialog]',
+		baseUrl = location.protocol + '//' + location.host + location.pathname;
 	
 	// TODO: don't expose (temporary during code reorg)
 	$.mobile.urlStack = urlStack;
@@ -94,13 +95,13 @@
 		return newBaseURL;
 	}
 	
-	function setBaseURL( nonHashPath ){
+	var setBaseURL = !$.support.dynamicBaseTag ? $.noop : function( nonHashPath ){
 		//set base url for new page assets
-		$('#ui-base').attr('href', getBaseURL( nonHashPath ));
+		$('#ui-base').attr('href', baseUrl + getBaseURL( nonHashPath ));
 	}
 	
-	function resetBaseURL(){
-		$('#ui-base').attr('href', location.pathname);
+	var resetBaseURL = !$.support.dynamicBaseTag ? $.noop : function(){
+		$('#ui-base').attr('href', baseUrl);
 	}
 	
 	
@@ -306,6 +307,24 @@
 					all.get(0).innerHTML = html;
 					to = all.find('[data-role="page"]');
 					
+					//rewrite src and href attrs to use a base url
+					if( !$.support.dynamicBaseTag ){
+						var baseUrl = getBaseURL(fileUrl);
+						to.find('[src],[href]').each(function(){
+							var thisHref = $(this).attr('href'),
+								thisSrc = $(this).attr('src'),
+								thisAttr = thisHref ? 'href' : 'src',
+								thisUrl = thisHref || thisSrc;
+							
+							//if full path exists and is same, chop it - helps IE out
+							thisUrl.replace( location.protocol + '//' + location.host + location.pathname, '' );
+								
+							if( !/^(\w+:|#|\/)/.test(thisUrl) ){
+								$(this).attr(thisAttr, baseUrl + thisUrl);
+							}
+						});
+					}
+					
 					//preserve ID on a retrieved page
 					if ( to.attr('id') ) {
 						to = wrapNewPage( to );
@@ -381,9 +400,10 @@
 	$html.addClass('ui-mobile');
 	
 	//insert mobile meta - these will need to be configurable somehow.
+	var headPrepends = 
 	$head.prepend(
 		'<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />' +
-		'<base  href="" id="ui-base" />'
+		($.support.dynamicBaseTag ? '<base  href="" id="ui-base" />' : '')
 	);
     
     //set base href to pathname

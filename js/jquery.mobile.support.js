@@ -42,6 +42,17 @@ function propExists( prop ){
 	}
 };
 
+//test for dynamic-updating base tag support (allows us to avoid href,src attr rewriting)
+function baseTagTest(){
+	var fauxBase = location.protocol + '//' + location.host + location.pathname + "ui-dir/",
+		base = $("<base>", {"href": fauxBase}).appendTo("head"),
+		link = $( "<a href='testurl'></a>" ).prependTo( fakeBody );	
+	$.support.dynamicBaseTag = !!link[0].href.match(fauxBase);
+	base.remove();
+};
+
+baseTagTest();
+
 $.extend( $.support, {
 	orientation: "orientation" in window,
 	touch: "ontouchend" in document,
