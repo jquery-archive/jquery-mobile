@@ -391,13 +391,34 @@
 		});
 	});	
 	
+	//add mobile, loading classes to doc
+	$html.addClass('ui-mobile');
+	
 	//add orientation class on flip/resize.
 	$window.bind( "orientationchange", function( event, data ) {
 		$html.removeClass( "portrait landscape" ).addClass( data.orientation );
 	});
 	
-	//add mobile, loading classes to doc
-	$html.addClass('ui-mobile');
+	//add breakpoint classes for faux media-q support
+	function resolutionBreakpoints(){
+		var currWidth = $window.width(),
+			classPrefix = "maxwidth-",
+			breakPoint;
+			
+		$html.removeClass( classPrefix + $.mobile.resolutionBreakpoints.join(" " + classPrefix) );			
+		$.each($.mobile.resolutionBreakpoints,function( i ){
+			if( currWidth >= $.mobile.resolutionBreakpoints[ i ] ){
+				breakPoint = $.mobile.resolutionBreakpoints[ i ];
+			}
+		});
+		
+		$html.addClass(classPrefix+breakPoint);	
+	};
+	
+	//common breakpoints, overrideable, changeable
+	$.mobile.resolutionBreakpoints = [320,480,768,1024];
+	$window.bind( "orientationchange resize", resolutionBreakpoints);
+	resolutionBreakpoints();
 	
 	//insert mobile meta - these will need to be configurable somehow.
 	var headPrepends = 
