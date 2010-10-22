@@ -402,7 +402,7 @@
 	//add breakpoint classes for faux media-q support
 	function resolutionBreakpoints(){
 		var currWidth = $window.width(),
-			minPrefix = "minwidth-",
+			minPrefix = "min-width-",
 			minBreakpoints = [];
 			
 		$html.removeClass( minPrefix + $.mobile.resolutionBreakpoints.join(" " + minPrefix) );
