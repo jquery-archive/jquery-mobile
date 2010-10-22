@@ -47,7 +47,7 @@ function baseTagTest(){
 	var fauxBase = location.protocol + '//' + location.host + location.pathname + "ui-dir/",
 		base = $("<base>", {"href": fauxBase}).appendTo("head"),
 		link = $( "<a href='testurl'></a>" ).prependTo( fakeBody );	
-	$.support.dynamicBaseTag = !!link[0].href.match(fauxBase);
+	$.support.dynamicBaseTag = link[0].href.indexOf(fauxBase) === 0;
 	base.remove();
 };
 
