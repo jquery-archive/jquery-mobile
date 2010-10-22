@@ -110,7 +110,7 @@ jQuery.widget( "mobile.listview", jQuery.mobile.widget, {
 		});	
 
 		// tapping the whole LI triggers ajaxClick on the first link
-		$list.delegate( "li", "tap", function(event) {
+		$list.delegate( "li", "click", function(event) {
 			if ( !jQuery( event.target ).closest( "a" ).length ) {
 				jQuery( this ).find( "a" ).first().trigger( "click" );
 				return false;
