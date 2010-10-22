@@ -189,7 +189,8 @@
 		});
 		return wrapper;
 	}
-	
+	  
+	jQuery.ajaxExt = jQuery.ajax;  // extension point (e.g. hook in local database persistence layer)
 
 	//for getting or creating a new page 
 	function changePage( to, transition, back, changeHash){
@@ -298,7 +299,7 @@
 			
 			pageLoading();
 
-			$.ajax({
+			$.ajaxExt({
 				url: fileUrl,
 				success: function( html ) {
 					setBaseURL(fileUrl);
