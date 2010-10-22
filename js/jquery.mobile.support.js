@@ -46,12 +46,11 @@ function propExists( prop ){
 function baseTagTest(){
 	var fauxBase = location.protocol + '//' + location.host + location.pathname + "ui-dir/",
 		base = $("<base>", {"href": fauxBase}).appendTo("head"),
-		link = $( "<a href='testurl'></a>" ).prependTo( fakeBody );	
-	$.support.dynamicBaseTag = !!link[0].href.match(fauxBase);
+		link = $( "<a href='testurl'></a>" ).prependTo( fakeBody ),
+		rebase = link[0].href;
 	base.remove();
+	return rebase.indexOf(fauxBase) === 0;
 };
-
-baseTagTest();
 
 $.extend( $.support, {
 	orientation: "orientation" in window,
@@ -61,7 +60,8 @@ $.extend( $.support, {
 	mediaquery: $.media('only all'),
 	cssPseudoElement: !!propExists('content'),
 	boxShadow: !!propExists('boxShadow') && !bb,
-	scrollTop: ("pageXOffset" in window || "scrollTop" in document.documentElement || "scrollTop" in fakeBody[0]) && !webos
+	scrollTop: ("pageXOffset" in window || "scrollTop" in document.documentElement || "scrollTop" in fakeBody[0]) && !webos,
+	dynamicBaseTag: baseTagTest()
 });
 
 fakeBody.remove();
