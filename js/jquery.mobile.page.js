@@ -14,7 +14,7 @@ jQuery.widget( "mobile.page", jQuery.mobile.widget, {
 		// classes so we'll handle page and content roles outside of the main role processing
 		// loop below.
 		$elem.find( "[data-role='page'], [data-role='content']" ).andSelf().each(function() {
-			$(this).addClass( "ui-" + $(this).data( "role" ) );
+			jQuery(this).addClass( "ui-" + jQuery(this).data( "role" ) );
 		});
 		
 		$elem.find( "[data-role='nojs']" ).addClass( "ui-nojs" );
@@ -23,7 +23,7 @@ jQuery.widget( "mobile.page", jQuery.mobile.widget, {
 		
 		// pre-find data els
 		var $dataEls = $elem.find( "[data-role]" ).andSelf().each(function() {
-			var $this = $( this ),
+			var $this = jQuery( this ),
 				role = $this.data( "role" ),
 				theme = $this.data( "theme" );
 			
@@ -31,13 +31,8 @@ jQuery.widget( "mobile.page", jQuery.mobile.widget, {
 			if ( role === "header" || role === "footer" ) {
 				$this.addClass( "ui-bar-" + (theme || "a") );
 				
-				//add ARIA role
-				if( role == "header" ){
-					$this.attr("role","banner");
-				}
-				else{
-					$this.attr("role","contentinfo");
-				}
+				// add ARIA role
+				$this.attr( "role", role === "header" ? "banner" : "contentinfo" );
 				
 				//right,left buttons
 				var $headeranchors = $this.children( "a" ),
@@ -45,15 +40,19 @@ jQuery.widget( "mobile.page", jQuery.mobile.widget, {
 					rightbtn = $headeranchors.hasClass( "ui-btn-right" );
 				
 				if ( !leftbtn ) {
-					leftbtn = $headeranchors.eq( 0 ).not('.ui-btn-right').addClass( "ui-btn-left" ).length;
+					leftbtn = $headeranchors.eq( 0 ).not( ".ui-btn-right" ).addClass( "ui-btn-left" ).length;
 				}
+
 				if ( !rightbtn ) {
 					rightbtn = $headeranchors.eq( 1 ).addClass( "ui-btn-right" ).length;
 				}
 				
-				//auto-add back btn on pages beyond first view
-				if ( $.mobile.addBackBtn && role === "header" && ($.mobile.urlStack.length > 1 || $('.ui-page').length > 1) && !leftbtn && !$this.data( "noBackBtn" ) ) {
-					$( "<a href='#' class='ui-btn-left' data-icon='arrow-l'>Back</a>" )
+				// auto-add back btn on pages beyond first view
+				if ( jQuery.mobile.addBackBtn && role === "header" &&
+						(jQuery.mobile.urlStack.length > 1 || jQuery(".ui-page").length > 1) &&
+						!leftbtn && !$this.data( "noBackBtn" ) ) {
+
+					jQuery( "<a href='#' class='ui-btn-left' data-icon='arrow-l'>Back</a>" )
 						.click(function() {
 							history.back();
 							return false;
@@ -64,35 +63,36 @@ jQuery.widget( "mobile.page", jQuery.mobile.widget, {
 				//page title	
 				$this.children( "h1, h2, h3, h4, h5, h6" )
 					.addClass( "ui-title" )
-					.attr( "tabindex" , "0")
-					.attr( "role" ,"heading")
-					.attr( "aria-level", "1" ); //regardless of h element number in src, it becomes h1 for the enhanced page
+					//regardless of h element number in src, it becomes h1 for the enhanced page
+					.attr({ "tabindex": "0", "role": "heading", "aria-level": "1" });
+
 			} else if ( role === "content" ) {
-				if( theme ){
-					$this.addClass( "ui-body-" + theme);
+				if ( theme ) {
+					$this.addClass( "ui-body-" + theme );
 				}
-				//add ARIA role
-				$this.attr("role","main");
-			}
-			else if( role == "page" ){
+
+				// add ARIA role
+				$this.attr( "role", "main" );
+
+			} else if ( role === "page" ) {
 				$this.addClass( "ui-body-" + (theme || "c") );
 			}
 			
 			switch(role) {
-			case "header":
-			case "footer":
-			case "page":
-			case "content":
-				$this.addClass( "ui-" + role );
-				break;
-			case "collapsible":
-			case "fieldcontain":
-			case "navbar":
-			case "listview":
-			case "dialog":
-			case "ajaxform":
-				$this[ role ]();
-				break;
+				case "header":
+				case "footer":
+				case "page":
+				case "content":
+					$this.addClass( "ui-" + role );
+					break;
+				case "collapsible":
+				case "fieldcontain":
+				case "navbar":
+				case "listview":
+				case "dialog":
+				case "ajaxform":
+					$this[ role ]();
+					break;
 			}
 		});
 		
@@ -117,9 +117,9 @@ jQuery.widget( "mobile.page", jQuery.mobile.widget, {
 		// degrade inputs to avoid poorly implemented native functionality
 		this.element.find( "input" ).each(function() {
 			var type = this.getAttribute( "type" );
-			if ( $.mobile.degradeInputs[ type ] ) {
-				$( this ).replaceWith(
-					$( "<div>" ).html( $(this).clone() ).html()
+			if ( jQuery.mobile.degradeInputs[ type ] ) {
+				jQuery( this ).replaceWith(
+					jQuery( "<div>" ).html( jQuery(this).clone() ).html()
 						.replace( /type="([a-zA-Z]+)"/, "data-type='$1'" ) );
 			}
 		});
