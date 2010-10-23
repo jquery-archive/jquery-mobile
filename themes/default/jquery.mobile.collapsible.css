@@ -13,3 +13,6 @@
 .ui-collapsible-heading-status { position:absolute; left:-99999px; }
 .ui-collapsible-content {  display: block; padding: 10px 0 10px 8px; }
 .ui-collapsible-content-collapsed { display: none; }
+
+.ui-collapsible-set { margin: .5em 0; }
+.ui-collapsible-set .ui-collapsible-contain { margin: -1px 0 0; }
