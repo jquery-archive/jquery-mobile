@@ -108,8 +108,8 @@
 	jQuery.fn.ajaxClick = function() {
 	   var $this = jQuery( this ),
 	       href = $this.attr( "href" ),
-	       // If href begins with a slash or hash, or it doesn't contain http, or the hostname is within the href, must be local.
-	       isLocal = ( /^(\/|#)/.test(href) ) || ( href.indexOf('http') === -1 ) || ( href.indexOf(location.hostname) > -1 ),
+	       // If href doesn't contain "http", or it begins with a slash, hash, or period, or the hostname is within the href... must be local.
+	       isLocal = ( href.indexOf('http') === -1 ) || ( /^(\/|\.|#)/.test(href) ) || ( href.indexOf(location.hostname) > -1 ),
 	       //find new base for url building
 	       newBaseURL = getBaseURL();
 	       
