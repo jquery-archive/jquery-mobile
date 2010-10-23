@@ -106,38 +106,36 @@
 	
 	// send a link through hash tracking
 	jQuery.fn.ajaxClick = function() {
-		var href = jQuery( this ).attr( "href" );
-		pageTransition = jQuery( this ).data( "transition" ) || "slide";
-		forceBack = jQuery( this ).data( "back" ) || undefined;
-		nextPageRole = jQuery( this ).attr( "data-rel" );
-		  	
-		//find new base for url building
-		var newBaseURL = getBaseURL();
-		
-		//if href is absolute but local, or a local ID, no base needed
-		if( /^\//.test(href) || (/^https?:\/\//.test(href) && !!(href).match(location.hostname)) || /^#/.test(href) ){
-			newBaseURL = '';
-		}
-		
-		// set href to relative path using baseURL and
-		if( !/^https?:\/\//.test(href) ){
-			href = newBaseURL + href;
-		}
-						
-		//if it's a non-local-anchor and Ajax is not supported, or if it's an external link, go to page without ajax
-		if ( ( /^[^#]/.test(href) && !jQuery.support.ajax ) || ( /^https?:\/\//.test(href) && !!!href.match(location.hostname) ) ) {
-			location = href
-		}
-		else{			
-			if( $(this).is(unHashedSelectors) ){
+	   var $this = jQuery( this ),
+	       href = $this.attr( "href" ),
+	       // If href begins with a slash or hash, or it doesn't contain http, or the hostname is within the href, must be local.
+	       isLocal = ( /^(\/|#)/.test(href) ) || ( href.indexOf('http') === -1 ) || ( href.indexOf(location.hostname) > -1 ),
+	       //find new base for url building
+	       newBaseURL = getBaseURL();
+	       
+	   pageTransition = $this.data( "transition" ) || "slide";
+	   forceBack = $this.data( "back" ) || undefined;
+	   nextPageRole = $this.attr( "data-rel" );
+	   	   
+	   //if href is absolute but local, no base needed
+	   if ( isLocal && href.indexOf('http') > -1 ) { 
+	       newBaseURL = ''; 
+	   } else {
+	       // set href to relative path using baseURL
+	       href = newBaseURL + href;
+	   }
+	   	
+	   //if it's a non-local-anchor and Ajax is not supported, go to page without ajax
+	   if ( !isLocal || !jQuery.support.ajax ) {
+	       location = href;
+	   } else {
+	       if( $this.is(unHashedSelectors) ) {
 				changePage(href, pageTransition, undefined);
-			}
-			else{
+			} else {
 				changePage(href, pageTransition, undefined, true);
 			}
-			
-		}
-		return this;
+	   }
+	   return this;
 	};
 	
 	// ajaxify all navigable links
