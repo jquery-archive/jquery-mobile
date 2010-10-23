@@ -81,10 +81,10 @@ $.fn.collapsible = function(options){
 			
 		collapsibleHeading.click(function(){ 
 			if( collapsibleHeading.is('.ui-collapsible-heading-collapsed') ){
-				collapsibleContain.trigger('expand'); 
+				collapsibleContain.triggerHandler('expand'); 
 			}	
 			else {
-				collapsibleContain.trigger('collapse'); 
+				collapsibleContain.triggerHandler('collapse'); 
 			}
 			return false;
 		});
