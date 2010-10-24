@@ -398,7 +398,8 @@
 			minPrefix = "min-width-",
 			maxPrefix = "max-width-",
 			minBreakpoints = [],
-			maxBreakpoints = [];
+			maxBreakpoints = [],
+			breakpointClasses;
 			
 		$html.removeClass( minPrefix + resolutionBreakpoints.join(" " + minPrefix) + maxPrefix +
 			 " " +  resolutionBreakpoints.join(" " + maxPrefix) );
@@ -412,7 +413,10 @@
 			}
 		});
 		
-		$html.addClass( minPrefix + minBreakpoints.join(" " + minPrefix) + " " + maxPrefix + maxBreakpoints.join(" " + maxPrefix) );	
+		if( minBreakpoints.length ){ breakpointClasses = minPrefix + minBreakpoints.join(" " + minPrefix); }
+		if( maxBreakpoints.length ){ breakpointClasses += " " +  maxPrefix + maxBreakpoints.join(" " + maxPrefix); }
+		
+		$html.addClass( breakpointClasses );	
 	};
 	
 	//add breakpoints now and on oc/resize events
