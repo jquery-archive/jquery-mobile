@@ -59,7 +59,8 @@
 		nextPageRole = null,
 		hashListener = true,
 		unHashedSelectors = '[data-rel=dialog]',
-		baseUrl = location.protocol + '//' + location.host + location.pathname;
+		baseUrl = location.protocol + '//' + location.host + location.pathname,
+		resolutionBreakpoints = [320,480,768,1024];
 	
 	// TODO: don't expose (temporary during code reorg)
 	$.mobile.urlStack = urlStack;
@@ -392,33 +393,43 @@
 	});
 	
 	//add breakpoint classes for faux media-q support
-	function resolutionBreakpoints(){
+	function detectResolutionBreakpoints(){
 		var currWidth = $window.width(),
 			minPrefix = "min-width-",
 			maxPrefix = "max-width-",
 			minBreakpoints = [],
 			maxBreakpoints = [];
 			
-		$html.removeClass( minPrefix + $.mobile.resolutionBreakpoints.join(" " + minPrefix) + maxPrefix +
-			 " " +  $.mobile.resolutionBreakpoints.join(" " + maxPrefix) );
+		$html.removeClass( minPrefix + resolutionBreakpoints.join(" " + minPrefix) + maxPrefix +
+			 " " +  resolutionBreakpoints.join(" " + maxPrefix) );
 					
-		$.each($.mobile.resolutionBreakpoints,function( i ){
-			if( currWidth >= $.mobile.resolutionBreakpoints[ i ] ){
-				minBreakpoints.push( $.mobile.resolutionBreakpoints[ i ] );
+		$.each(resolutionBreakpoints,function( i ){
+			if( currWidth >= resolutionBreakpoints[ i ] ){
+				minBreakpoints.push( resolutionBreakpoints[ i ] );
 			}
-			if( currWidth <= $.mobile.resolutionBreakpoints[ i ] ){
-				maxBreakpoints.push( $.mobile.resolutionBreakpoints[ i ] );
+			if( currWidth <= resolutionBreakpoints[ i ] ){
+				maxBreakpoints.push( resolutionBreakpoints[ i ] );
 			}
 		});
 		
 		$html.addClass( minPrefix + minBreakpoints.join(" " + minPrefix) + " " + maxPrefix + maxBreakpoints.join(" " + maxPrefix) );	
 	};
 	
-	//common breakpoints, overrideable, changeable
-	$.mobile.resolutionBreakpoints = [320,480,768,1024];
-	$window.bind( "orientationchange resize", resolutionBreakpoints);
-	resolutionBreakpoints();
+	//add breakpoints now and on oc/resize events
+	$window.bind( "orientationchange resize", detectResolutionBreakpoints);
+	detectResolutionBreakpoints();
 	
+	//common breakpoints, overrideable, changeable
+	$.mobile.addResolutionBreakpoints = function( newbps ){
+		if( $.type( newbps ) === "array" ){
+			resolutionBreakpoints = resolutionBreakpoints.concat( newbps );
+		}
+		else {
+			resolutionBreakpoints.push( newbps );
+		}
+		detectResolutionBreakpoints();
+	}
+		
 	//insert mobile meta - these will need to be configurable somehow.
 	var headPrepends = 
 	$head.prepend(
