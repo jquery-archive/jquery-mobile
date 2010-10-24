@@ -399,7 +399,8 @@
 			minBreakpoints = [],
 			maxBreakpoints = [];
 			
-		$html.removeClass( minPrefix + $.mobile.resolutionBreakpoints.join(" " + minPrefix) + maxPrefix + " " +  $.mobile.resolutionBreakpoints.join(" " + maxPrefix) );
+		$html.removeClass( minPrefix + $.mobile.resolutionBreakpoints.join(" " + minPrefix) + maxPrefix +
+			 " " +  $.mobile.resolutionBreakpoints.join(" " + maxPrefix) );
 					
 		$.each($.mobile.resolutionBreakpoints,function( i ){
 			if( currWidth >= $.mobile.resolutionBreakpoints[ i ] ){
