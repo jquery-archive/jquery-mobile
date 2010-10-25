@@ -46,6 +46,8 @@
 		$pageContainer,
 		startPageId = 'ui-page-start',
 		activePageClass = 'ui-page-active',
+		activeBtnClass = 'ui-btn-active',
+		activeClickedLink = null,
 		pageTransition,
 		forceBack,
 		transitions = 'slide slideup slidedown pop flip fade',
@@ -118,7 +120,10 @@
 			//for links created purely for interaction - ignore
 			return false;
 		}
-		else if( external ){
+		
+		activeClickedLink = $this.closest( ".ui-btn" ).addClass( activeBtnClass );
+		
+		if( external ){
 			//deliberately redirect, in case click was triggered
 			location.href = href;
 		}
@@ -232,6 +237,11 @@
 					setTimeout(function(){
 						hashListener = true;
 					}, 500);
+				}
+				//remove active classes
+				if(activeClickedLink){
+					activeClickedLink.removeClass( activeBtnClass );
+					activeClickedLink = null;
 				}
 			}
 			
@@ -399,22 +409,23 @@
 			maxPrefix = "max-width-",
 			minBreakpoints = [],
 			maxBreakpoints = [],
+			unit = "px",
 			breakpointClasses;
 			
-		$html.removeClass( minPrefix + resolutionBreakpoints.join(" " + minPrefix) + maxPrefix +
-			 " " +  resolutionBreakpoints.join(" " + maxPrefix) );
+		$html.removeClass( minPrefix + resolutionBreakpoints.join(unit + " " + minPrefix) + unit + " " + 
+			maxPrefix + resolutionBreakpoints.join( unit + " " + maxPrefix) + unit );
 					
 		$.each(resolutionBreakpoints,function( i ){
 			if( currWidth >= resolutionBreakpoints[ i ] ){
-				minBreakpoints.push( resolutionBreakpoints[ i ] );
+				minBreakpoints.push( minPrefix + resolutionBreakpoints[ i ] + unit );
 			}
 			if( currWidth <= resolutionBreakpoints[ i ] ){
-				maxBreakpoints.push( resolutionBreakpoints[ i ] );
+				maxBreakpoints.push( maxPrefix + resolutionBreakpoints[ i ] + unit );
 			}
 		});
 		
-		if( minBreakpoints.length ){ breakpointClasses = minPrefix + minBreakpoints.join(" " + minPrefix); }
-		if( maxBreakpoints.length ){ breakpointClasses += " " +  maxPrefix + maxBreakpoints.join(" " + maxPrefix); }
+		if( minBreakpoints.length ){ breakpointClasses = minBreakpoints.join(" "); }
+		if( maxBreakpoints.length ){ breakpointClasses += " " +  maxBreakpoints.join(" "); }
 		
 		$html.addClass( breakpointClasses );	
 	};
