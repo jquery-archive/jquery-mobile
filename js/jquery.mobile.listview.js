@@ -135,7 +135,9 @@ jQuery.widget( "mobile.listview", jQuery.mobile.widget, {
 		var aside = item.find( ".ui-li-aside" );
 
 		if ( aside.length ) {
-			aside.prependTo( aside.parent() ); //shift aside to front for css float
+            aside.each(function(i, el) {
+			    $(el).prependTo( $(el).parent() ); //shift aside to front for css float
+            });
 		}
 
 		if ( jQuery.support.cssPseudoElement || !jQuery.nodeName( item[0], "ol" ) ) {
