@@ -401,8 +401,8 @@
 			maxBreakpoints = [],
 			breakpointClasses;
 			
-		$html.removeClass( minPrefix + resolutionBreakpoints.join(" " + minPrefix) + maxPrefix +
-			 " " +  resolutionBreakpoints.join(" " + maxPrefix) );
+		$html.removeClass( minPrefix + resolutionBreakpoints.join(" " + minPrefix) + " " + 
+			maxPrefix + resolutionBreakpoints.join(" " + maxPrefix) );
 					
 		$.each(resolutionBreakpoints,function( i ){
 			if( currWidth >= resolutionBreakpoints[ i ] ){
