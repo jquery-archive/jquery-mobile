@@ -399,22 +399,25 @@
 			maxPrefix = "max-width-",
 			minBreakpoints = [],
 			maxBreakpoints = [],
+			unit = "px",
 			breakpointClasses;
+			console.log(minPrefix + resolutionBreakpoints.join(unit + " " + minPrefix) + unit + " " + 
+			maxPrefix + resolutionBreakpoints.join( unit + " " + maxPrefix) + unit);
 			
-		$html.removeClass( minPrefix + resolutionBreakpoints.join(" " + minPrefix) + " " + 
-			maxPrefix + resolutionBreakpoints.join(" " + maxPrefix) );
+		$html.removeClass( minPrefix + resolutionBreakpoints.join(unit + " " + minPrefix) + unit + " " + 
+			maxPrefix + resolutionBreakpoints.join( unit + " " + maxPrefix) + unit );
 					
 		$.each(resolutionBreakpoints,function( i ){
 			if( currWidth >= resolutionBreakpoints[ i ] ){
-				minBreakpoints.push( resolutionBreakpoints[ i ] );
+				minBreakpoints.push( minPrefix + resolutionBreakpoints[ i ] + unit );
 			}
 			if( currWidth <= resolutionBreakpoints[ i ] ){
-				maxBreakpoints.push( resolutionBreakpoints[ i ] );
+				maxBreakpoints.push( maxPrefix + resolutionBreakpoints[ i ] + unit );
 			}
 		});
 		
-		if( minBreakpoints.length ){ breakpointClasses = minPrefix + minBreakpoints.join(" " + minPrefix); }
-		if( maxBreakpoints.length ){ breakpointClasses += " " +  maxPrefix + maxBreakpoints.join(" " + maxPrefix); }
+		if( minBreakpoints.length ){ breakpointClasses = minBreakpoints.join(" "); }
+		if( maxBreakpoints.length ){ breakpointClasses += " " +  maxBreakpoints.join(" "); }
 		
 		$html.addClass( breakpointClasses );	
 	};
