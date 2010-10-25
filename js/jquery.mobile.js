@@ -46,6 +46,8 @@
 		$pageContainer,
 		startPageId = 'ui-page-start',
 		activePageClass = 'ui-page-active',
+		activeBtnClass = 'ui-btn-active',
+		activeClickedLink = null,
 		pageTransition,
 		forceBack,
 		transitions = 'slide slideup slidedown pop flip fade',
@@ -118,7 +120,10 @@
 			//for links created purely for interaction - ignore
 			return false;
 		}
-		else if( external ){
+		
+		activeClickedLink = $this.closest( ".ui-btn" ).addClass( activeBtnClass );
+		
+		if( external ){
 			//deliberately redirect, in case click was triggered
 			location.href = href;
 		}
@@ -232,6 +237,11 @@
 					setTimeout(function(){
 						hashListener = true;
 					}, 500);
+				}
+				//remove active classes
+				if(activeClickedLink){
+					activeClickedLink.removeClass( activeBtnClass );
+					activeClickedLink = null;
 				}
 			}
 			
