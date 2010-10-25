@@ -59,7 +59,8 @@
 		nextPageRole = null,
 		hashListener = true,
 		unHashedSelectors = '[data-rel=dialog]',
-		baseUrl = location.protocol + '//' + location.host + location.pathname;
+		baseUrl = location.protocol + '//' + location.host + location.pathname,
+		resolutionBreakpoints = [320,480,768,1024];
 	
 	// TODO: don't expose (temporary during code reorg)
 	$.mobile.urlStack = urlStack;
@@ -104,47 +105,39 @@
 		$('#ui-base').attr('href', baseUrl);
 	}
 	
-	
-	// send a link through hash tracking
-	jQuery.fn.ajaxClick = function() {
-		var href = jQuery( this ).attr( "href" );
-		pageTransition = jQuery( this ).data( "transition" ) || "slide";
-		forceBack = jQuery( this ).data( "back" ) || undefined;
-		nextPageRole = jQuery( this ).attr( "data-rel" );
-		  	
-		//find new base for url building
-		var newBaseURL = getBaseURL();
-		
-		//if href is absolute but local, or a local ID, no base needed
-		if( /^\//.test(href) || (/https?:\/\//.test(href) && !!(href).match(location.hostname)) || /^#/.test(href) ){
-			newBaseURL = '';
+	//click routing - direct to HTTP or Ajax, accordingly
+	jQuery( "a" ).live( "click", function(event) {
+		var $this = $(this),
+			//get href, remove same-domain protocol and host
+			href = $this.attr( "href" ).replace( location.protocol + "//" + location.host, ""),
+			//if it still starts with a protocol, it's external, or could be :mailto, etc
+			external = /^\w+:|#/.test( href ) || $this.is( "[target],[rel=external]" ),
+			nullLink = href == '#';
+
+		if( nullLink ){
+			//for links created purely for interaction - ignore
+			return false;
 		}
-		
-		// set href to relative path using baseURL and
-		if( !/https?:\/\//.test(href) ){
-			href = newBaseURL + href;
+		else if( external ){
+			//deliberately redirect, in case click was triggered
+			location.href = href;
 		}
-						
-		//if it's a non-local-anchor and Ajax is not supported, or if it's an external link, go to page without ajax
-		if ( ( /^[^#]/.test(href) && !jQuery.support.ajax ) || ( /https?:\/\//.test(href) && !!!href.match(location.hostname) ) ) {
-			location = href
-		}
-		else{			
-			if( $(this).is(unHashedSelectors) ){
-				changePage(href, pageTransition, undefined);
-			}
-			else{
-				changePage(href, pageTransition, undefined, true);
+		else {	
+			//use ajax
+			var pageTransition = $this.data( "transition" ) || "slide",
+				forceBack = $this.data( "back" ) || undefined,
+				changeHashOnSuccess = !$(this).is(unHashedSelectors);
+				
+			nextPageRole = $this.attr( "data-rel" );	
+				
+			//if it's a relative href, prefix href with base url
+			if( href.indexOf('/') !== 0 && href.indexOf('#') !== 0 ){
+				href = getBaseURL() + href;
 			}
 			
+			changePage(href, pageTransition, forceBack, changeHashOnSuccess);			
 		}
-		return this;
-	};
-	
-	// ajaxify all navigable links
-	jQuery( "a:not([href='#']):not([target]):not([rel='external']):not([href^='mailto:'])" ).live( "click", function(event) {
-		jQuery( this ).ajaxClick();
-		return false;
+		event.preventDefault();
 	});
 	
 	// turn on/off page loading message.
@@ -200,7 +193,7 @@
 			from = toIsArray ? to[0] : $.activePage,
 			to = toIsArray ? to[1] : to,
 			url = fileUrl = $.type(to) === "string" ? to.replace( /^#/, "" ) : null,
-			back = (back !== undefined) ? back : (forceBack || ( urlStack.length > 1 && urlStack[ urlStack.length - 2 ].url === url )),
+			back = (back !== undefined) ? back : ( urlStack.length > 1 && urlStack[ urlStack.length - 2 ].url === url ),
 			transition = (transition !== undefined) ? transition :  ( pageTransition || "slide" );
 		
 		//unset pageTransition, forceBack	
@@ -401,32 +394,47 @@
 	});
 	
 	//add breakpoint classes for faux media-q support
-	function resolutionBreakpoints(){
+	function detectResolutionBreakpoints(){
 		var currWidth = $window.width(),
 			minPrefix = "min-width-",
 			maxPrefix = "max-width-",
 			minBreakpoints = [],
-			maxBreakpoints = [];
+			maxBreakpoints = [],
+			breakpointClasses;
 			
-		$html.removeClass( minPrefix + $.mobile.resolutionBreakpoints.join(" " + minPrefix) + maxPrefix + " " +  $.mobile.resolutionBreakpoints.join(" " + maxPrefix) );
+		$html.removeClass( minPrefix + resolutionBreakpoints.join(" " + minPrefix) + maxPrefix +
+			 " " +  resolutionBreakpoints.join(" " + maxPrefix) );
 					
-		$.each($.mobile.resolutionBreakpoints,function( i ){
-			if( currWidth >= $.mobile.resolutionBreakpoints[ i ] ){
-				minBreakpoints.push( $.mobile.resolutionBreakpoints[ i ] );
+		$.each(resolutionBreakpoints,function( i ){
+			if( currWidth >= resolutionBreakpoints[ i ] ){
+				minBreakpoints.push( resolutionBreakpoints[ i ] );
 			}
-			if( currWidth <= $.mobile.resolutionBreakpoints[ i ] ){
-				maxBreakpoints.push( $.mobile.resolutionBreakpoints[ i ] );
+			if( currWidth <= resolutionBreakpoints[ i ] ){
+				maxBreakpoints.push( resolutionBreakpoints[ i ] );
 			}
 		});
 		
-		$html.addClass( minPrefix + minBreakpoints.join(" " + minPrefix) + " " + maxPrefix + maxBreakpoints.join(" " + maxPrefix) );	
+		if( minBreakpoints.length ){ breakpointClasses = minPrefix + minBreakpoints.join(" " + minPrefix); }
+		if( maxBreakpoints.length ){ breakpointClasses += " " +  maxPrefix + maxBreakpoints.join(" " + maxPrefix); }
+		
+		$html.addClass( breakpointClasses );	
 	};
 	
-	//common breakpoints, overrideable, changeable
-	$.mobile.resolutionBreakpoints = [320,480,768,1024];
-	$window.bind( "orientationchange resize", resolutionBreakpoints);
-	resolutionBreakpoints();
+	//add breakpoints now and on oc/resize events
+	$window.bind( "orientationchange resize", detectResolutionBreakpoints);
+	detectResolutionBreakpoints();
 	
+	//common breakpoints, overrideable, changeable
+	$.mobile.addResolutionBreakpoints = function( newbps ){
+		if( $.type( newbps ) === "array" ){
+			resolutionBreakpoints = resolutionBreakpoints.concat( newbps );
+		}
+		else {
+			resolutionBreakpoints.push( newbps );
+		}
+		detectResolutionBreakpoints();
+	}
+		
 	//insert mobile meta - these will need to be configurable somehow.
 	var headPrepends = 
 	$head.prepend(

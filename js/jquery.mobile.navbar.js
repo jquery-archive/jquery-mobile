@@ -32,7 +32,7 @@ $.fn.navbar = function(settings){
 		$navbar
 			.find('ul a')
 			.buttonMarkup({corners: false, shadow:false, iconpos: o.iconpos})
-			.bind('tap',function(){
+			.bind('click',function(){
 				//NOTE: we'll need to find a way to highlight an active tab at load as well
 				$navbar.find('.ui-btn-active').removeClass('ui-btn-active');
 				$(this).addClass('ui-btn-active');
