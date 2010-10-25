@@ -411,8 +411,6 @@
 			maxBreakpoints = [],
 			unit = "px",
 			breakpointClasses;
-			console.log(minPrefix + resolutionBreakpoints.join(unit + " " + minPrefix) + unit + " " + 
-			maxPrefix + resolutionBreakpoints.join( unit + " " + maxPrefix) + unit);
 			
 		$html.removeClass( minPrefix + resolutionBreakpoints.join(unit + " " + minPrefix) + unit + " " + 
 			maxPrefix + resolutionBreakpoints.join( unit + " " + maxPrefix) + unit );
