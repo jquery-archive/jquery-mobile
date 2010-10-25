@@ -22,10 +22,12 @@ Built by David Kaneda and maintained by Jonathan Stark.
 }
 
 .slide.in {
+	z-index: 1;
 	-webkit-animation-name: slideinfromright;
 }
 
 .slide.out {
+	z-index: -1;
 	-webkit-animation-name: slideouttoleft;
 }
 
