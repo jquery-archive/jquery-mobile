@@ -23,6 +23,6 @@ div.hasDatepicker{ display: block; padding: 0; overflow: visible;  margin: 8px 0
 .ui-datepicker td { border-width: 1px; padding: 0; text-align: center; }
 .ui-datepicker td span, .ui-datepicker td a { display: block; padding: .2em 0; font-weight: bold; margin: 0; border-width: 0; text-align: center; text-decoration: none; }
 
-@media screen and (min-width: 480px){ 
+.min-width-480px { 
 	div.hasDatepicker  { width: 63%; display: inline-block; margin: 0; } 
 }

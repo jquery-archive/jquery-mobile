@@ -2,9 +2,8 @@
 <html> 
 	<head> 
 	<title>jQuery Mobile Docs - Content formatting</title> 
-	<link rel="stylesheet"  href="../../css/all" /> 
+	<link rel="stylesheet"  href="../../themes/default" /> 
 	<script type="text/javascript" src="../../js/all"></script>
-	<script type="text/javascript" src="../docs/docs.js"></script>
 	
 
 </head> 
@@ -102,8 +101,33 @@
 			</ul>
 		</div><!-- /section 4 -->
 		
+		<h2>Nested Collapsibles</h2>
+		<div data-role="collapsible">
+			<h3>I'm a header</h3>
+			<p>I'm the collapsible content. By default I'm open and displayed on the page, but you can click the header to hide me.</p>
+			<div data-role="collapsible">
+				<h3>I'm a nested collapsible header</h3>
+				<p>I'm the collapsible content. By default I'm open and displayed on the page, but you can click the header to hide me.</p>
+			</div>
+		</div>
 		
+		<h2>Collapsible sets</h2>
+		<p>By giving a parent element a data-role of collapsible-set, you can cause other collapsibles within that parent to close whenever a new one is opened, acting like an accordion widget:</p>
 		
+		<div data-role="collapsible-set">
+			<div data-role="collapsible">
+				<h3>I'm a header in a set of collapsibles</h3>
+				<p>I'm the collapsible content. I'm hidden by default because I have the "collapsed" state; you need to expand the header to see me.</p>
+			</div>
+			<div data-role="collapsible" data-state="collapsed">
+				<h3>I'm a header in a set of collapsibles</h3>
+				<p>I'm the collapsible content. I'm hidden by default because I have the "collapsed" state; you need to expand the header to see me.</p>
+			</div>
+			<div data-role="collapsible" data-state="collapsed">
+				<h3>I'm a header in a set of collapsibles</h3>
+				<p>I'm the collapsible content. I'm hidden by default because I have the "collapsed" state; you need to expand the header to see me.</p>
+			</div>
+		</div>
 		
 	
 	</div><!-- /content -->

@@ -19,10 +19,10 @@
 .ui-bar .ui-btn-icon-left .ui-btn-inner { padding-left: 27px; }
 .ui-btn-icon-right .ui-btn-inner { padding-right: 33px; }
 .ui-header .ui-btn-icon-right .ui-btn-inner,
-.ui-footer .ui-btn-icon-right .ui-btn-inner
+.ui-footer .ui-btn-icon-right .ui-btn-inner,
 .ui-bar .ui-btn-icon-right .ui-btn-inner { padding-right: 27px; }
 .ui-btn-icon-top .ui-btn-inner { padding-top: 33px; }
-.ui-header .ui-btn-icon-top .ui-btn-inner
+.ui-header .ui-btn-icon-top .ui-btn-inner,
 .ui-footer .ui-btn-icon-top .ui-btn-inner,
 .ui-bar .ui-btn-icon-top .ui-btn-inner { padding-top: 27px; }
 .ui-btn-icon-bottom .ui-btn-inner { padding-bottom: 33px; }

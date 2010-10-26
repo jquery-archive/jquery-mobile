@@ -42,6 +42,16 @@ function propExists( prop ){
 	}
 };
 
+//test for dynamic-updating base tag support (allows us to avoid href,src attr rewriting)
+function baseTagTest(){
+	var fauxBase = location.protocol + '//' + location.host + location.pathname + "ui-dir/",
+		base = $("<base>", {"href": fauxBase}).appendTo("head"),
+		link = $( "<a href='testurl'></a>" ).prependTo( fakeBody ),
+		rebase = link[0].href;
+	base.remove();
+	return rebase.indexOf(fauxBase) === 0;
+};
+
 $.extend( $.support, {
 	orientation: "orientation" in window,
 	touch: "ontouchend" in document,
@@ -50,7 +60,8 @@ $.extend( $.support, {
 	mediaquery: $.media('only all'),
 	cssPseudoElement: !!propExists('content'),
 	boxShadow: !!propExists('boxShadow') && !bb,
-	scrollTop: ("pageXOffset" in window || "scrollTop" in document.documentElement || "scrollTop" in fakeBody[0]) && !webos
+	scrollTop: ("pageXOffset" in window || "scrollTop" in document.documentElement || "scrollTop" in fakeBody[0]) && !webos,
+	dynamicBaseTag: baseTagTest()
 });
 
 fakeBody.remove();
