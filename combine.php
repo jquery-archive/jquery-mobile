@@ -163,6 +163,11 @@
 
 		// Store cache
 		if ($cache) {
+			
+			if(!file_exists($cachedir)) {
+				mkdir($cachedir, 0700);
+			}
+			
 			if ($fp = fopen($cachedir . '/' . $cachefile, 'wb')) {
 				fwrite($fp, $contents);
 				fclose($fp);
