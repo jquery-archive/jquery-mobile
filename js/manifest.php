@@ -1,4 +1,4 @@
-<?
+<?php
 $elements = array(
 	'jquery.js',
 	'jquery.ui.widget.js',
@@ -24,5 +24,4 @@ $elements = array(
 	'jquery.mobile.grid.js',
 	'jquery.mobile.js'
 );
-
 ?>

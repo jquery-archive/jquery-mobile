@@ -62,7 +62,6 @@
 			$thisbase = implode("/", $thisbase);
 		}
 		$path = realpath($thisbase . '/' . $thiselement);
-		//echo $path;
 	
 		if (($type == 'javascript' && substr($path, -3) != '.js') || 
 			($type == 'css' && substr($path, -4) != '.css')) {

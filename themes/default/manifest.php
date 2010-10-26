@@ -1,4 +1,4 @@
-<?
+<?php
 $elements = array(
 	'jquery.mobile.theme.css',
 	'jquery.mobile.core.css',
@@ -17,5 +17,4 @@ $elements = array(
 	'jquery.mobile.listview.css',
 	'jquery.mobile.forms.slider.css'
 );
-
 ?>
