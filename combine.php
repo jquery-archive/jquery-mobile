@@ -25,7 +25,7 @@
 	 */
 
 
-	$cache 	  = false;
+	$cache 	  = true;
 	$pullfromcache = false;
 	$theme = $_GET['theme'];
 	$cachedir = dirname(__FILE__) . '/cache';
