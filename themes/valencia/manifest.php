@@ -1,4 +1,4 @@
-<?
+<?php
 $elements = array(
 	'jquery.mobile.theme.css',
 	'../default/jquery.mobile.core.css',
