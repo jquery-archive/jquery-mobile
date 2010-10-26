@@ -4,29 +4,27 @@
 	<title>jQuery Mobile Framework - Photo 1</title> 
 	<link rel="stylesheet"  href="../../themes/default" /> 
 	<script type="text/javascript" src="../../js/all"></script>
+	<link rel="stylesheet"  href="photos.css" />
+	<script type="text/javascript" src="photos.js"></script>
 </head> 
 <body> 
 
-<div data-role="page" data-fullscreen="true">
-	<link rel="stylesheet"  href="photos.css" />
-	<script type="text/javascript" src="photos.js"></script>
+<div data-role="page" data-fullscreen="true" class="photoview">
 	
 	<div data-role="header">
 		<h1>A kayak</h1>
 		
 	</div>
 	
-	<div data-role="content" class="photoview">
+	<div data-role="content" >
 		
-		<a href="_photo5.html">
-			<img src="images/photo-kayak.jpeg" alt="photo-kayak" />
-		</a>
+		<img src="images/photo-kayak.jpeg" alt="photo-kayak" />
 		
 	</div>
 	
 	<div class="ui-footer ui-bar-a">
-		<a href="_photo3.html">Prev</a>
-		<a href="_photo5.html">Next</a>
+		<a href="_photo3.html" class="prev">Prev</a>
+		<a href="_photo5.html" class="next">Next</a>
 	</div>
 
 
