@@ -120,8 +120,6 @@
 			return false;
 		}
 		
-		href.replace(/^#/,'');
-		
 		activeClickedLink = $this.closest( ".ui-btn" ).addClass( activeBtnClass );
 		
 		if( external ){
@@ -140,6 +138,8 @@
 			if( href.indexOf('/') && href.indexOf('#') !== 0 ){
 				href = getBaseURL() + href;
 			}
+			
+			href.replace(/^#/,'');
 			
 			changePage(href, pageTransition, forceBack, changeHashOnSuccess);			
 		}
