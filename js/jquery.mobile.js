@@ -130,7 +130,7 @@
 			//use ajax
 			var pageTransition = $this.data( "transition" ) || "slide",
 				forceBack = $this.data( "back" ) || undefined,
-				changeHashOnSuccess = !$(this).is(unHashedSelectors);
+				changeHashOnSuccess = !$this.is(unHashedSelectors);
 				
 			nextPageRole = $this.attr( "data-rel" );	
 				
