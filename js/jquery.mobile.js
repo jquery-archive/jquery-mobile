@@ -189,6 +189,14 @@
 		return wrapper;
 	}
 	
+	//remove active classes after page transition or error
+	function removeActiveLinkClass(){
+		if(activeClickedLink){
+			activeClickedLink.removeClass( activeBtnClass );
+			activeClickedLink = null;
+		}
+	}
+	
 
 	//for getting or creating a new page 
 	function changePage( to, transition, back, changeHash){
@@ -239,11 +247,7 @@
 						hashListener = true;
 					}, 500);
 				}
-				//remove active classes
-				if(activeClickedLink){
-					activeClickedLink.removeClass( activeBtnClass );
-					activeClickedLink = null;
-				}
+				removeActiveLinkClass();
 			}
 			
 			if(transition){		
@@ -341,7 +345,7 @@
 				},
 				error: function() {
 					pageLoading( true );
-
+					removeActiveLinkClass();
 					jQuery("<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h1>Error Loading Page</h1></div>")
 						.css({ "display": "block", "opacity": 0.96, "top": $(window).scrollTop() + 100 })
 						.appendTo( $pageContainer )
