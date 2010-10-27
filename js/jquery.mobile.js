@@ -314,10 +314,8 @@
 					if( !$.support.dynamicBaseTag ){
 						var baseUrl = getBaseURL(fileUrl);
 						to.find('[src],[href]').each(function(){
-							var thisHref = $(this).attr('href'),
-								thisSrc = $(this).attr('src'),
-								thisAttr = thisHref ? 'href' : 'src',
-								thisUrl = thisHref || thisSrc;
+							var thisAttr = $(this).is('[href]') ? 'href' : 'src',
+								thisUrl = $(this).attr(thisAttr);
 							
 							//if full path exists and is same, chop it - helps IE out
 							thisUrl.replace( location.protocol + '//' + location.host + location.pathname, '' );
