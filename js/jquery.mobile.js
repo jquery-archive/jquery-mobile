@@ -135,7 +135,7 @@
 			nextPageRole = $this.attr( "data-rel" );	
 				
 			//if it's a relative href, prefix href with base url
-			if( href.indexOf('/') !== 0 && href.indexOf('#') !== 0 ){
+			if( href.indexOf('/') && href.indexOf('#') !== 0 ){
 				href = getBaseURL() + href;
 			}
 			
