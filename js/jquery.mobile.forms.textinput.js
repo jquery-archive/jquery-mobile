@@ -24,14 +24,14 @@ jQuery.fn.customTextInput = function(options){
 		if(o.search){
 			focusedEl = input.wrap('<div class="ui-input-search ui-shadow-inset ui-btn-corner-all ui-body-c ui-btn-shadow ui-icon-search"></div>').parent();
 			var clearbtn = $('<a href="#" class="ui-input-clear" title="clear text">clear text</a>')
-				.buttonMarkup({icon: 'delete', iconpos: 'notext', corners:true, shadow:true})
 				.click(function(){
 					input.val('').focus();
 					input.trigger('change'); 
 					clearbtn.addClass('ui-input-clear-hidden');
 					return false;
 				})
-				.appendTo(focusedEl);
+				.appendTo(focusedEl)
+				.buttonMarkup({icon: 'delete', iconpos: 'notext', corners:true, shadow:true});
 			
 			function toggleClear(){
 				if(input.val() == ''){
