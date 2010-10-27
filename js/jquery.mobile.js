@@ -113,12 +113,14 @@
 			//get href, remove same-domain protocol and host
 			href = $this.attr( "href" ).replace( location.protocol + "//" + location.host, ""),
 			//if it still starts with a protocol, it's external, or could be :mailto, etc
-			external = /^(:?\w+:|#)/.test( href ) || $this.is( "[target],[rel=external]" );
+			external = /^(:?\w+:)/.test( href ) || $this.is( "[target],[rel=external]" );
 
 		if( href === '#' ){
 			//for links created purely for interaction - ignore
 			return false;
 		}
+		
+		href.replace(/^#/,'');
 		
 		activeClickedLink = $this.closest( ".ui-btn" ).addClass( activeBtnClass );
 		
