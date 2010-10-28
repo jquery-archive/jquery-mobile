@@ -33,9 +33,15 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			.wrapAll( "<div class='ui-" + inputtype +"'></div>" );
 		
 		label.bind({
+			mouseover: function() {
+				if( $(this).parent().is('.ui-disabled') ){ return false; }
+			},
+			
 			mousedown: function() {
+				if( $(this).parent().is('.ui-disabled') ){ return false; }
 				label.data( "state", input.attr( "checked" ) );
 			},
+			
 			click: function() {
 				setTimeout(function() {
 					if ( input.attr( "checked" ) === label.data( "state" ) ) {
@@ -45,7 +51,6 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			}
 		});
 		
-		//bind custom event, trigger it, bind click,focus,blur events					
 		input
 			.bind({
 
@@ -84,6 +89,21 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			icon.removeClass( checkedicon );
 			icon.addClass( uncheckedicon );
 		}
+		
+		if( input.is( ":disabled" ) ){
+			this.disable();
+		}
+		else {
+			this.enable();
+		}
+	},
+	
+	disable: function(){
+		this.element.attr("disabled",true).parent().addClass("ui-disabled");
+	},
+	
+	enable: function(){
+		this.element.attr("disabled",false).parent().removeClass("ui-disabled");
 	}
 });
 })( jQuery );
