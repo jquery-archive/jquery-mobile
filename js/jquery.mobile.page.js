@@ -132,7 +132,7 @@ jQuery.widget( "mobile.page", jQuery.mobile.widget, {
 		this.element
 			.find( "button, [type='button'], [type='submit'], [type='reset'], [type='image']" )
 			.not( ".ui-nojs" )
-			.customButton();
+			.button();
 
 		this.element
 			.find( "input, textarea" )
