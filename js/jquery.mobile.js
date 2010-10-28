@@ -191,10 +191,10 @@
 	
 	//remove active classes after page transition or error
 	function removeActiveLinkClass(){
-		if(activeClickedLink){
+		if(activeClickedLink && !activeClickedLink.closest( '.ui-page-active' ).length ){
 			activeClickedLink.removeClass( activeBtnClass );
-			activeClickedLink = null;
 		}
+		activeClickedLink = null;
 	}
 	
 
