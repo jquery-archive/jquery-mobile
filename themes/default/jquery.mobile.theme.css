@@ -55,7 +55,7 @@
 .ui-bar-c {  border: 1px solid #B3B3B3; background: #e9eaeb; color: #3E3E3E; font-weight: bold; text-shadow: 0 1px 1px #fff; background-image: -moz-linear-gradient(top, #f0f0f0, #e9eaeb); background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #f0f0f0),color-stop(1, #e9eaeb));   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#f0f0f0', EndColorStr='#e9eaeb')"; }
 .ui-bar-c, .ui-bar-c input, .ui-bar-c select, .ui-bar-c textarea, .ui-bar-c button { font-family: Helvetica, Arial, sans-serif; }
 
-.ui-body-c { border: 1px solid #B3B3B3; color: #333333; text-shadow: 0 1px 0 #fff; background: #f0f0f0; background-image: -moz-linear-gradient(top, #fff, #f0f0f0); background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #fff),color-stop(1, #f0f0f0));   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fff', EndColorStr='#f0f0f0')";  }
+.ui-body-c { border: 1px solid #B3B3B3; color: #333333; text-shadow: 0 1px 0 #fff; background: #f0f0f0; background-image: -moz-linear-gradient(top, #fff, #f0f0f0); background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #fff),color-stop(1, #f0f0f0));   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff', EndColorStr='#f0f0f0')";  }
 .ui-body-c, .ui-body-c input, .ui-body-c select, .ui-body-c textarea, .ui-body-c button { font-family: Helvetica, Arial, sans-serif; }
 .ui-body-c .ui-link-inherit { color: #333333; }
 .ui-body-c .ui-link { color: #2489CE; font-weight: bold; }
@@ -96,7 +96,7 @@
 .ui-bar-e .ui-link-inherit { color: #333; }
 .ui-bar-e .ui-link { color: #2489CE; font-weight: bold; }
 
-.ui-body-e { border: 1px solid #F7C942; color: #333333; text-shadow: 0 1px 0 #fff; background: #faeb9e; background-image: -moz-linear-gradient(top, #fff, #faeb9e); background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #fff),color-stop(1, #faeb9e));   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fff', EndColorStr='#faeb9e')"; }
+.ui-body-e { border: 1px solid #F7C942; color: #333333; text-shadow: 0 1px 0 #fff; background: #faeb9e; background-image: -moz-linear-gradient(top, #fff, #faeb9e); background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #fff),color-stop(1, #faeb9e));   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff', EndColorStr='#faeb9e')"; }
 .ui-body-e, .ui-body-e input, .ui-body-e select, .ui-body-e textarea, .ui-body-e button { font-family: Helvetica, Arial, sans-serif; }
 .ui-body-e .ui-link-inherit { color: #333333; }
 .ui-body-e .ui-link { color: #2489CE; font-weight: bold; }
