@@ -139,7 +139,7 @@ a.ui-link-inherit { text-decoration: none !important; }
 
 /* Interaction Cues
 ----------------------------------*/
-.ui-state-disabled { cursor: default !important; opacity: .3; }
+.ui-disabled { cursor: default !important; opacity: .3; }
 
 /* Icons
 ----------------------------------*/
