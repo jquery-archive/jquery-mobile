@@ -478,9 +478,9 @@
 
 	//dom-ready
 	jQuery(function(){
-		
+		var $pages = jQuery("[data-role='page']");
 		//set up active page
-		$startPage = $.activePage = jQuery("[data-role='page']").first();
+		$startPage = $.activePage = $pages.first();
 		
 		//set page container
 		$pageContainer = $startPage.parent();
@@ -495,7 +495,7 @@
 		}
 		
 		//initialize all pages present
-		jQuery("[data-role='page']").page();
+		$pages.page();
 		
 		//trigger a new hashchange, hash or not
 		$window.trigger( "hashchange", { manuallyTriggered: true } );
