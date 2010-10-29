@@ -113,10 +113,9 @@
 			//get href, remove same-domain protocol and host
 			href = $this.attr( "href" ).replace( location.protocol + "//" + location.host, ""),
 			//if it still starts with a protocol, it's external, or could be :mailto, etc
-			external = /^\w+:|#/.test( href ) || $this.is( "[target],[rel=external]" ),
-			nullLink = href == '#';
+			external = /^(:?\w+:)/.test( href ) || $this.is( "[target],[rel=external]" );
 
-		if( nullLink ){
+		if( href === '#' ){
 			//for links created purely for interaction - ignore
 			return false;
 		}
@@ -131,14 +130,16 @@
 			//use ajax
 			var pageTransition = $this.data( "transition" ) || "slide",
 				forceBack = $this.data( "back" ) || undefined,
-				changeHashOnSuccess = !$(this).is(unHashedSelectors);
+				changeHashOnSuccess = !$this.is(unHashedSelectors);
 				
 			nextPageRole = $this.attr( "data-rel" );	
 				
 			//if it's a relative href, prefix href with base url
-			if( href.indexOf('/') !== 0 && href.indexOf('#') !== 0 ){
+			if( href.indexOf('/') && href.indexOf('#') !== 0 ){
 				href = getBaseURL() + href;
 			}
+			
+			href.replace(/^#/,'');
 			
 			changePage(href, pageTransition, forceBack, changeHashOnSuccess);			
 		}
@@ -186,6 +187,14 @@
 			}
 		});
 		return wrapper;
+	}
+	
+	//remove active classes after page transition or error
+	function removeActiveLinkClass(){
+		if(activeClickedLink && !activeClickedLink.closest( '.ui-page-active' ).length ){
+			activeClickedLink.removeClass( activeBtnClass );
+		}
+		activeClickedLink = null;
 	}
 	
 
@@ -238,11 +247,7 @@
 						hashListener = true;
 					}, 500);
 				}
-				//remove active classes
-				if(activeClickedLink){
-					activeClickedLink.removeClass( activeBtnClass );
-					activeClickedLink = null;
-				}
+				removeActiveLinkClass();
 			}
 			
 			if(transition){		
@@ -340,7 +345,7 @@
 				},
 				error: function() {
 					pageLoading( true );
-
+					removeActiveLinkClass();
 					jQuery("<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h1>Error Loading Page</h1></div>")
 						.css({ "display": "block", "opacity": 0.96, "top": $(window).scrollTop() + 100 })
 						.appendTo( $pageContainer )
@@ -473,9 +478,9 @@
 
 	//dom-ready
 	jQuery(function(){
-		
+		var $pages = jQuery("[data-role='page']");
 		//set up active page
-		$startPage = $.activePage = jQuery("[data-role='page']").first();
+		$startPage = $.activePage = $pages.first();
 		
 		//set page container
 		$pageContainer = $startPage.parent();
@@ -490,7 +495,7 @@
 		}
 		
 		//initialize all pages present
-		jQuery("[data-role='page']").page();
+		$pages.page();
 		
 		//trigger a new hashchange, hash or not
 		$window.trigger( "hashchange", { manuallyTriggered: true } );
