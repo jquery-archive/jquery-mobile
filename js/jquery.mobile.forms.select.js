@@ -28,7 +28,6 @@ $.fn.customSelect = function(options){
 		button = $( "<a>", { 
 				"href": "#",
 				"role": "button",
-				"title": "select menu",
 				"id": buttonId,
 				"aria-haspopup": "true",
 				"aria-owns": menuId 

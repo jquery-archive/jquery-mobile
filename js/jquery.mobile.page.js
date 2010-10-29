@@ -127,12 +127,12 @@ jQuery.widget( "mobile.page", jQuery.mobile.widget, {
 		// enchance form controls
 		this.element
 			.find( "[type='radio'], [type='checkbox']" )
-			.customCheckboxRadio();
+			.checkboxradio();
 
 		this.element
 			.find( "button, [type='button'], [type='submit'], [type='reset'], [type='image']" )
 			.not( ".ui-nojs" )
-			.customButton();
+			.button();
 
 		this.element
 			.find( "input, textarea" )

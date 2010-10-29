@@ -4,9 +4,10 @@
 * Dual licensed under the MIT (MIT-LICENSE.txt) or GPL (GPL-LICENSE.txt) licenses.
 */
 .spin  {
--webkit-animation-name: spin;
--webkit-animation-duration: 1s;
--webkit-animation-iteration-count:  infinite;
+	-webkit-transform: rotate(360deg);
+	-webkit-animation-name: spin;
+	-webkit-animation-duration: 1s;
+	-webkit-animation-iteration-count:  infinite;
 }
 @-webkit-keyframes spin {
 	from {-webkit-transform: rotate(0deg);}
@@ -22,24 +23,27 @@ Built by David Kaneda and maintained by Jonathan Stark.
 }
 
 .slide.in {
-	z-index: 1;
+	-webkit-transform: translateX(0);
 	-webkit-animation-name: slideinfromright;
 }
 
 .slide.out {
-	z-index: -1;
+	-webkit-transform: translateX(-100%);
 	-webkit-animation-name: slideouttoleft;
 }
 
 .slide.in.reverse {
+	-webkit-transform: translateX(0);
 	-webkit-animation-name: slideinfromleft;
 }
 
 .slide.out.reverse {
+	-webkit-transform: translateX(100%);
 	-webkit-animation-name: slideouttoright;
 }
 
 .slideup.in {
+	-webkit-transform: translateY(0);
 	-webkit-animation-name: slideinfrombottom;
 	z-index: 10;
 }
@@ -50,6 +54,7 @@ Built by David Kaneda and maintained by Jonathan Stark.
 }
 
 .slideup.out.reverse {
+	-webkit-transform: translateY(100%);
 	z-index: 10;
 	-webkit-animation-name: slideouttobottom;
 }
@@ -59,6 +64,7 @@ Built by David Kaneda and maintained by Jonathan Stark.
 	-webkit-animation-name: dontmove;
 }
 .slidedown.in {
+	-webkit-transform: translateY(0);
 	-webkit-animation-name: slideinfromtop;
 	z-index: 10;
 }
@@ -69,6 +75,7 @@ Built by David Kaneda and maintained by Jonathan Stark.
 }
 
 .slidedown.out.reverse {
+	-webkit-transform: translateY(-100%);
 	z-index: 10;
 	-webkit-animation-name: slideouttotop;
 }
@@ -129,6 +136,7 @@ Built by David Kaneda and maintained by Jonathan Stark.
 }
 
 .fade.in {
+	opacity: 1;
 	z-index: 10;
 	-webkit-animation-name: fadein;
 }
@@ -141,20 +149,24 @@ Built by David Kaneda and maintained by Jonathan Stark.
 }
 
 .flip.in {
+	-webkit-transform: rotateY(0) scale(1);
 	-webkit-animation-name: flipinfromleft;
 }
 
 .flip.out {
+	-webkit-transform: rotateY(-180deg) scale(.8);
 	-webkit-animation-name: flipouttoleft;
 }
 
 /* Shake it all about */
 
 .flip.in.reverse {
+	-webkit-transform: rotateY(0) scale(1);
 	-webkit-animation-name: flipinfromright;
 }
 
 .flip.out.reverse {
+	-webkit-transform: rotateY(180deg) scale(.8);
 	-webkit-animation-name: flipouttoright;
 }
 
@@ -191,11 +203,15 @@ Built by David Kaneda and maintained by Jonathan Stark.
 }
 
 .pop.in {
+	-webkit-transform: scale(1);
+    opacity: 1;
 	-webkit-animation-name: popin;
 	z-index: 10;
 }
 
 .pop.out.reverse {
+	-webkit-transform: scale(.2);
+	opacity: 0;
 	-webkit-animation-name: popout;
 	z-index: 10;
 }
