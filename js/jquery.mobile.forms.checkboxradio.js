@@ -55,7 +55,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			.bind({
 
 				click: function() {
-					jQuery( "input[name='" + input.attr( "name" ) + "'][type='checkbox']" ).checkboxradio( "refresh" );
+					jQuery( "input[name='" + input.attr( "name" ) + "'][type='" + input.attr( "type" ) + "']" ).checkboxradio( "refresh" );
 				},
 
 				focus: function() { 
