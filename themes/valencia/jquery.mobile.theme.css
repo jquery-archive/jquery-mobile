@@ -700,7 +700,7 @@ a.ui-link-inherit {
 
 /* Interaction Cues
 ----------------------------------*/
-.ui-state-disabled { 
+.ui-disabled { 
   cursor: default !important;
   opacity: .3;
 }

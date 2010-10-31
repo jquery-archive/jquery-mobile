@@ -135,7 +135,9 @@ jQuery.widget( "mobile.listview", jQuery.mobile.widget, {
 		var aside = item.find( ".ui-li-aside" );
 
 		if ( aside.length ) {
-			aside.prependTo( aside.parent() ); //shift aside to front for css float
+            aside.each(function(i, el) {
+			    $(el).prependTo( $(el).parent() ); //shift aside to front for css float
+            });
 		}
 
 		if ( jQuery.support.cssPseudoElement || !jQuery.nodeName( item[0], "ol" ) ) {
@@ -148,6 +150,7 @@ jQuery.widget( "mobile.listview", jQuery.mobile.widget, {
 		
 		var o = this.options,
 			$list = this.element,
+			self = this,
 			dividertheme = $list.data( "dividertheme" ) || o.dividerTheme,
 			li = $list.children( "li" ),
 			counter = jQuery.support.cssPseudoElement || !jQuery.nodeName( $list[0], "ol" ) ? 0 : 1;
@@ -264,7 +267,7 @@ jQuery.widget( "mobile.listview", jQuery.mobile.widget, {
 			item.addClass( itemClass );
 
 			if ( !create ) {
-				this._itemApply( $list, item );
+				self._itemApply( $list, item );
 			}
 		});
 	},

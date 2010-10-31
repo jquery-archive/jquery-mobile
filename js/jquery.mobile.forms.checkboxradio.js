@@ -4,82 +4,106 @@
 * Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
 * Note: Code is in draft form and is subject to change 
 */  
-(function(jQuery){
+(function ( $ ) {
+$.widget( "mobile.checkboxradio", $.mobile.widget, {
+	options: {
+		theme: undefined,
+		icon: undefined
+	},
+	_create: function(){
+		var input = this.element,
+			label = jQuery("label[for='" + input.attr( "id" ) + "']"),
+			inputtype = input.attr( "type" ),
+			checkedicon = "ui-icon-" + inputtype + "-on",
+			uncheckedicon = "ui-icon-" + inputtype + "-off";
 
-jQuery.fn.customCheckboxRadio = function( options ) {
-	return this.each(function() {
-		var input = jQuery( this ),
-			type = input.attr( "type" );
-
-		if ( type === "checkbox" || type === "radio" ) {
-			var o = jQuery.extend({
-				theme: input.data( "theme" ),
-				icon: input.data( "icon" ) || !input.parents( "[data-type='horizontal']" ).length,
-				checkedicon: "ui-icon-" + type + "-on",
-				uncheckedicon: "ui-icon-" + type + "-off"
-			}, options );
-			
-			// get the associated label using the input's id
-			var label = jQuery("label[for='" + input.attr( "id" ) + "']")
-				.buttonMarkup({
-					iconpos: o.icon ? "left" : "",
-					theme: o.theme,
-					icon: o.icon ? o.uncheckedicon : null,
-					shadow: false
-				});
+		if ( inputtype != "checkbox" && inputtype != "radio" ) { return; }
 						
-			var icon = label.find( ".ui-icon" );
+		label
+			.buttonMarkup({
+				iconpos: this.options.icon,
+				theme: this.options.theme,
+				icon: this.options.icon ? uncheckedicon : ( this.element.parents( "[data-type='horizontal']" ).length ? undefined : uncheckedicon ),
+				shadow: false
+			});
+		
+		// wrap the input + label in a div 
+		input
+			.add( label )
+			.wrapAll( "<div class='ui-" + inputtype +"'></div>" );
+		
+		label.bind({
+			mouseover: function() {
+				if( $(this).parent().is('.ui-disabled') ){ return false; }
+			},
 			
-			// wrap the input + label in a div 
-			input
-				.add( label )
-				.wrapAll( "<div class='ui-" + type +"'></div>" );
+			mousedown: function() {
+				if( $(this).parent().is('.ui-disabled') ){ return false; }
+				label.data( "state", input.attr( "checked" ) );
+			},
 			
-			// necessary for browsers that don't support the :hover pseudo class on labels
-			label.bind({
-				mousedown: function() {
-					label.data( "state", input.attr( "checked" ) );
-				},
+			click: function() {
+				setTimeout(function() {
+					if ( input.attr( "checked" ) === label.data( "state" ) ) {
+						input.trigger( "click" );
+					}
+				}, 1);
+			}
+		});
+		
+		input
+			.bind({
+
 				click: function() {
-					setTimeout(function() {
-						if ( input.attr( "checked" ) === label.data( "state" ) ) {
-							input.trigger( "click" );
-						}
-					}, 1);
+					jQuery( "input[name='" + input.attr( "name" ) + "']" ).checkboxradio( "refresh" );
+				},
+
+				focus: function() { 
+					label.addClass( "ui-focus" ); 
+				},
+
+				blur: function() {
+					label.removeClass( "ui-focus" );
 				}
 			});
 			
-			//bind custom event, trigger it, bind click,focus,blur events					
-			input
-				.bind({
-					updateState: function() {
-						if ( this.checked ) {
-							label.addClass( "ui-btn-active" );
-							icon.addClass( o.checkedicon );
-							icon.removeClass( o.uncheckedicon );
+		this.refresh();
+		
+	},
+	
+	refresh: function( ){
+		var input = this.element,
+			label = jQuery("label[for='" + input.attr( "id" ) + "']"),
+			inputtype = input.attr( "type" ),
+			icon = label.find( ".ui-icon" ),
+			checkedicon = "ui-icon-" + inputtype + "-on",
+			uncheckedicon = "ui-icon-" + inputtype + "-off";
+		
+		if ( input[0].checked ) {
+			label.addClass( "ui-btn-active" );
+			icon.addClass( checkedicon );
+			icon.removeClass( uncheckedicon );
 
-						} else {
-							label.removeClass( "ui-btn-active" ); 
-							icon.removeClass( o.checkedicon );
-							icon.addClass( o.uncheckedicon );
-						}
-					},
-
-					click: function() {
-						jQuery( "input[name='" + input.attr( "name" ) + "']" ).trigger( "updateState" );
-					},
-
-					focus: function() { 
-						label.addClass( "ui-focus" ); 
-					},
-
-					blur: function() {
-						label.removeClass( "ui-focus" );
-					}
-				})
-				.trigger( "updateState" );
+		} else {
+			label.removeClass( "ui-btn-active" ); 
+			icon.removeClass( checkedicon );
+			icon.addClass( uncheckedicon );
 		}
-	});
-};
-
-})(jQuery);
+		
+		if( input.is( ":disabled" ) ){
+			this.disable();
+		}
+		else {
+			this.enable();
+		}
+	},
+	
+	disable: function(){
+		this.element.attr("disabled",true).parent().addClass("ui-disabled");
+	},
+	
+	enable: function(){
+		this.element.attr("disabled",false).parent().removeClass("ui-disabled");
+	}
+});
+})( jQuery );
