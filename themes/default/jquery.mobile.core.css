@@ -21,7 +21,7 @@
 .ui-page-active { display: block; overflow: visible; }
 
 /* loading screen */
-.ui-loading, .ui-loading body { overflow: hidden !important; }
+.ui-loading body { overflow: hidden !important; }
 .ui-loading .ui-loader { display: block; }
 .ui-loading .ui-page { overflow: hidden;  }
 .ui-loader { display: none; position: absolute; opacity: .85; z-index: 10; top: 75px; left: 50%; width: 200px; margin-left: -130px; padding: 20px 30px; }
