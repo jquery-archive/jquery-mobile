@@ -1,8 +1,3 @@
-/*
-Possible additions:
-	scollTop
-	CSS Matrix
-*/
 
 // test whether a CSS media type or query applies
 $.media = (function() {
