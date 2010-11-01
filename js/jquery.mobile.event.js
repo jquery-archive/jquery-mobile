@@ -1,3 +1,5 @@
+(function( $ ) {
+
 // add new event shortcuts
 $.each( "touchstart touchmove touchend orientationchange tap taphold swipe swipeleft swiperight scrollstart scrollstop".split( " " ), function( i, name ) {
 	$.fn[ name ] = function( fn ) {
@@ -193,3 +195,5 @@ $.each({
 		}
 	};
 });
+
+})( jQuery );
