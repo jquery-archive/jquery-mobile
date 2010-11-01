@@ -65,14 +65,14 @@
 		resolutionBreakpoints = [320,480,768,1024];
 	
 	// TODO: don't expose (temporary during code reorg)
-	$.mobile.urlStack = urlStack;
+	jQuery.mobile.urlStack = urlStack;
 	
 	//consistent string escaping for urls and IDs
 	function idStringEscape(str){
 		return str.replace(/[^a-zA-Z0-9]/g, '-');
 	}
 	
-	$.mobile.idStringEscape = idStringEscape;
+	jQuery.mobile.idStringEscape = idStringEscape;
 	
 	// hide address bar
 	function hideBrowserChrome() {
@@ -98,18 +98,18 @@
 		return newBaseURL;
 	}
 	
-	var setBaseURL = !$.support.dynamicBaseTag ? $.noop : function( nonHashPath ){
+	var setBaseURL = !jQuery.support.dynamicBaseTag ? jQuery.noop : function( nonHashPath ){
 		//set base url for new page assets
-		$('#ui-base').attr('href', baseUrl + getBaseURL( nonHashPath ));
+		jQuery('#ui-base').attr('href', baseUrl + getBaseURL( nonHashPath ));
 	}
 	
-	var resetBaseURL = !$.support.dynamicBaseTag ? $.noop : function(){
-		$('#ui-base').attr('href', baseUrl);
+	var resetBaseURL = !jQuery.support.dynamicBaseTag ? jQuery.noop : function(){
+		jQuery('#ui-base').attr('href', baseUrl);
 	}
 	
 	//click routing - direct to HTTP or Ajax, accordingly
 	jQuery( "a" ).live( "click", function(event) {
-		var $this = $(this),
+		var $this = jQuery(this),
 			//get href, remove same-domain protocol and host
 			href = $this.attr( "href" ).replace( location.protocol + "//" + location.host, ""),
 			//if it still starts with a protocol, it's external, or could be :mailto, etc
@@ -151,7 +151,7 @@
 		if ( done ) {
 			$html.removeClass( "ui-loading" );
 		} else {
-			$loader.appendTo($pageContainer).css({top: $(window).scrollTop() + 75});
+			$loader.appendTo($pageContainer).css({top: jQuery(window).scrollTop() + 75});
 			$html.addClass( "ui-loading" );
 		}
 	};
@@ -180,7 +180,7 @@
 		var copyAttrs = ['data-role', 'data-theme', 'data-fullscreen'], //TODO: more page-level attrs?
 			wrapper = newPage.wrap( "<div>" ).parent();
 			
-		$.each(copyAttrs,function(i){
+		jQuery.each(copyAttrs,function(i){
 			if( newPage.attr( copyAttrs[ i ] ) ){
 				wrapper.attr( copyAttrs[ i ], newPage.attr( copyAttrs[ i ] ) );
 				newPage.removeAttr( copyAttrs[ i ] );
@@ -202,10 +202,10 @@
 	function changePage( to, transition, back, changeHash){
 
 		//from is always the currently viewed page
-		var toIsArray = $.type(to) === "array",
-			from = toIsArray ? to[0] : $.activePage,
+		var toIsArray = jQuery.type(to) === "array",
+			from = toIsArray ? to[0] : jQuery.activePage,
 			to = toIsArray ? to[1] : to,
-			url = fileUrl = $.type(to) === "string" ? to.replace( /^#/, "" ) : null,
+			url = fileUrl = jQuery.type(to) === "string" ? to.replace( /^#/, "" ) : null,
 			back = (back !== undefined) ? back : ( urlStack.length > 1 && urlStack[ urlStack.length - 2 ].url === url ),
 			transition = (transition !== undefined) ? transition :  ( pageTransition || "slide" );
 		
@@ -237,7 +237,7 @@
 				pageLoading( true );
 				//trigger show/hide events, allow preventing focus change through return false		
 				if( from.data("page")._trigger("hide", null, {nextPage: to}) !== false && to.data("page")._trigger("show", null, {prevPage: from}) !== false ){
-					$.activePage = to;
+					jQuery.activePage = to;
 				}
 				reFocus( to );
 				if( changeHash && url ){
@@ -306,7 +306,7 @@
 			
 			pageLoading();
 
-			$.ajax({
+			jQuery.ajax({
 				url: fileUrl,
 				success: function( html ) {
 					setBaseURL(fileUrl);
@@ -316,17 +316,17 @@
 					to = all.find('[data-role="page"]');
 					
 					//rewrite src and href attrs to use a base url
-					if( !$.support.dynamicBaseTag ){
+					if( !jQuery.support.dynamicBaseTag ){
 						var baseUrl = getBaseURL(fileUrl);
 						to.find('[src],[href]').each(function(){
-							var thisAttr = $(this).is('[href]') ? 'href' : 'src',
-								thisUrl = $(this).attr(thisAttr);
+							var thisAttr = jQuery(this).is('[href]') ? 'href' : 'src',
+								thisUrl = jQuery(this).attr(thisAttr);
 							
 							//if full path exists and is same, chop it - helps IE out
 							thisUrl.replace( location.protocol + '//' + location.host + location.pathname, '' );
 								
 							if( !/^(\w+:|#|\/)/.test(thisUrl) ){
-								$(this).attr(thisAttr, baseUrl + thisUrl);
+								jQuery(this).attr(thisAttr, baseUrl + thisUrl);
 							}
 						});
 					}
@@ -347,11 +347,11 @@
 					pageLoading( true );
 					removeActiveLinkClass();
 					jQuery("<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h1>Error Loading Page</h1></div>")
-						.css({ "display": "block", "opacity": 0.96, "top": $(window).scrollTop() + 100 })
+						.css({ "display": "block", "opacity": 0.96, "top": jQuery(window).scrollTop() + 100 })
 						.appendTo( $pageContainer )
 						.delay( 800 )
 						.fadeOut( 400, function(){
-							$(this).remove();
+							jQuery(this).remove();
 						});
 				}
 			});
@@ -381,15 +381,15 @@
 			}
 			//there's no hash, the active page is not the start page, and it's not manually triggered hashchange
 			// > probably backed out to the first page visited
-			else if( $.activePage.length && !$startPage.is( $.activePage ) && !(extras && extras.manuallyTriggered) ) {
+			else if( jQuery.activePage.length && !jQuerystartPage.is( jQuery.activePage ) && !(extras && extras.manuallyTriggered) ) {
 				changePage( $startPage, transition, true );
 			}
 			else{
-				$startPage.trigger("pagebeforeshow", {prevPage: $('')});
+				$startPage.trigger("pagebeforeshow", {prevPage: jQuery('')});
 				$startPage.addClass( activePageClass );
 				pageLoading( true );
 				
-				if( $startPage.trigger("pageshow", {prevPage: $('')}) !== false ){
+				if( $startPage.trigger("pageshow", {prevPage: jQuery('')}) !== false ){
 					reFocus($startPage);
 				}
 			}
@@ -418,7 +418,7 @@
 		$html.removeClass( minPrefix + resolutionBreakpoints.join(unit + " " + minPrefix) + unit + " " + 
 			maxPrefix + resolutionBreakpoints.join( unit + " " + maxPrefix) + unit );
 					
-		$.each(resolutionBreakpoints,function( i ){
+		jQuery.each(resolutionBreakpoints,function( i ){
 			if( currWidth >= resolutionBreakpoints[ i ] ){
 				minBreakpoints.push( minPrefix + resolutionBreakpoints[ i ] + unit );
 			}
@@ -438,8 +438,8 @@
 	detectResolutionBreakpoints();
 	
 	//common breakpoints, overrideable, changeable
-	$.mobile.addResolutionBreakpoints = function( newbps ){
-		if( $.type( newbps ) === "array" ){
+	jQuery.mobile.addResolutionBreakpoints = function( newbps ){
+		if( jQuery.type( newbps ) === "array" ){
 			resolutionBreakpoints = resolutionBreakpoints.concat( newbps );
 		}
 		else {
@@ -452,7 +452,7 @@
 	var headPrepends = 
 	$head.prepend(
 		'<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />' +
-		($.support.dynamicBaseTag ? '<base  href="" id="ui-base" />' : '')
+		(jQuery.support.dynamicBaseTag ? '<base  href="" id="ui-base" />' : '')
 	);
     
     //set base href to pathname
@@ -480,7 +480,7 @@
 	jQuery(function(){
 		var $pages = jQuery("[data-role='page']");
 		//set up active page
-		$startPage = $.activePage = $pages.first();
+		$startPage = jQuery.activePage = $pages.first();
 		
 		//set page container
 		$pageContainer = $startPage.parent();
