@@ -6,7 +6,7 @@
  * Dual licensed under the MIT or GPL Version 2 licenses.
  * http://jquery.org/license
  */
-(function( jQuery, window, undefined ) {
+(function( $, window, undefined ) {
 	//some critical feature tests should be placed here.
 	//if we're missing support for any of these, then we're a C-grade browser
 	//to-do: see if we need more qualifiers here.
