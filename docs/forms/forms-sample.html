@@ -19,7 +19,7 @@
 			<h2>Form submission</h2>
 
 			<p>In jQuery Mobile, form submissions are automatically handled using Ajax whenever possible, creating a smooth transition between the form and the result page. To ensure your form submits as intended, be sure to specify <code>action</code> and <code>method</code> properties on your form element.</p>
-			<p>To This page demonstrates automated ajax handling of form submissions. The form is configured to send a <code>get</code> request to <code>forms-sample-response.php</code>. Keep in mind that just like ordinary HTTP form submissions, jQuery Mobile allows <code>get</code> result pages to be bookmarked by updating the Url hash when the response returns successfully. Also like ordinary form submissions, <code>post</code> requests do not contain query parameters in the hash and are not bookmarkable.</p>
+			<p>This page demonstrates automated ajax handling of form submissions. The form below is configured to send regular a <code>get</code> request to <code>forms-sample-response.php</code>. On submit, jQuery Mobile will make sure that the Url specified is able to be retrieved via Ajax, and handle it appropriately. Keep in mind that just like ordinary HTTP form submissions, jQuery Mobile allows <code>get</code> result pages to be bookmarked by updating the Url hash when the response returns successfully. Also like ordinary form submissions, <code>post</code> requests do not contain query parameters in the hash and are not bookmarkable.</p>
 			<form action="forms-sample-response.php" method="get">
 				<fieldset>
 					<div data-role="fieldcontain">
