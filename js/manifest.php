@@ -1,4 +1,4 @@
-<?
+<?php
 $elements = array(
 	'jquery.js',
 	'jquery.ui.widget.js',
