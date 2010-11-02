@@ -25,7 +25,7 @@ jQuery.widget( "mobile.page", jQuery.mobile.widget, {
 		var $dataEls = $elem.find( "[data-role]" ).andSelf().each(function() {
 			var $this = jQuery( this ),
 				role = $this.data( "role" ),
-				theme = $this.data( "theme" );
+				theme = $this.data( "theme" ) || $this.parent('[data-role=page]').data( "theme" );
 			
 			//apply theming and markup modifications to page,header,content,footer
 			if ( role === "header" || role === "footer" ) {
