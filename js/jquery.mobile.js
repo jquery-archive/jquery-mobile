@@ -107,10 +107,17 @@
 	
 	//for form submission
 	$('form').live('submit', function(){
-		var type = $(this).attr("method");
-		$.changePage(
-			{
-				url: $(this).attr("action"),
+		var type = $(this).attr("method"),
+			url = $(this).attr( "action" ).replace( location.protocol + "//" + location.host, ""),
+			external = /^(:?\w+:)/.test( url );	
+		
+		//if it's a relative href, prefix href with base url
+		if( url.indexOf('/') && url.indexOf('#') !== 0 ){
+			url = getBaseURL() + url;
+		}
+			
+		$.changePage({
+				url: url,
 				type: type,
 				data: $(this).serialize()
 			}, 
@@ -120,6 +127,8 @@
 		);
 		return false;
 	});
+	
+	
 	
 	//click routing - direct to HTTP or Ajax, accordingly
 	jQuery( "a" ).live( "click", function(event) {
