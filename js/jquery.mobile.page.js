@@ -90,7 +90,6 @@ jQuery.widget( "mobile.page", jQuery.mobile.widget, {
 				case "navbar":
 				case "listview":
 				case "dialog":
-				case "ajaxform":
 					$this[ role ]();
 					break;
 			}
