@@ -150,8 +150,16 @@ Built by David Kaneda and maintained by Jonathan Stark.
  * the viewer from the z-plane. According to the CSS3 spec, 1000 is a moderate
  * value.
  */
-.ui-mobile-viewport {
+.ui-mobile-viewport-transitioning {
 	-webkit-perspective: 1000;
+	position: absolute;
+}
+
+.ui-mobile-viewport-transitioning,
+.ui-mobile-viewport-transitioning .ui-page {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
 }
 
 .flip {

@@ -289,6 +289,7 @@
 			}
 			
 			if(transition){		
+				$pageContainer.addClass('ui-mobile-viewport-transitioning');
 				// animate in / out
 				from.addClass( transition + " out " + ( back ? "reverse" : "" ) );
 				to.addClass( activePageClass + " " + transition +
@@ -299,6 +300,7 @@
 					from.add( to ).removeClass(" out in reverse " + transitions );
 					from.removeClass( activePageClass );
 					loadComplete();
+					$pageContainer.removeClass('ui-mobile-viewport-transitioning');
 				});
 			}
 			else{
