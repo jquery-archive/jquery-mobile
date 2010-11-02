@@ -124,10 +124,10 @@
 				url: url,
 				type: type,
 				data: $(this).serialize()
-			}, 
-			$(this).data("transition"),
-			false,  
-			type === "get"
+			},
+			undefined,
+			undefined,
+			true
 		);
 		return false;
 	});	
