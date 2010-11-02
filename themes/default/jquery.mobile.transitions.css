@@ -150,7 +150,7 @@ Built by David Kaneda and maintained by Jonathan Stark.
  * the viewer from the z-plane. According to the CSS3 spec, 1000 is a moderate
  * value.
  */
-body {
+.ui-mobile-viewport {
 	-webkit-perspective: 1000;
 }
 

@@ -523,7 +523,7 @@
 		$startPage = $.activePage = $pages.first();
 		
 		//set page container
-		$pageContainer = $startPage.parent();
+		$pageContainer = $startPage.parent().addClass('ui-mobile-viewport');
 		
 		jQuery.extend({
 			pageContainer: $pageContainer

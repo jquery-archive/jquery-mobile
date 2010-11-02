@@ -10,7 +10,7 @@
 .ui-mobile a img, .ui-mobile fieldset { border: 0; }
 
 /* responsive page widths */
-.ui-mobile body {  margin: 0; overflow-x: hidden; -webkit-backface-visibility:hidden; -webkit-text-size-adjust: none; -ms-text-size-adjust:none; }
+.ui-mobile-viewport {  margin: 0; overflow-x: hidden; -webkit-backface-visibility:hidden; -webkit-text-size-adjust: none; -ms-text-size-adjust:none; }
 
 /*orientations from js are available */
 .portrait {  }
@@ -21,7 +21,7 @@
 .ui-page-active { display: block; overflow: visible; min-height: 100%; }
 
 /* loading screen */
-.ui-loading body { overflow: hidden !important; }
+.ui-loading .ui-mobile-viewport { overflow: hidden !important; }
 .ui-loading .ui-loader { display: block; }
 .ui-loading .ui-page { overflow: hidden;  }
 .ui-loader { display: none; position: absolute; opacity: .85; z-index: 10; top: 75px; left: 50%; width: 200px; margin-left: -130px; padding: 20px 30px; }
