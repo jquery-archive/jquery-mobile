@@ -61,9 +61,9 @@
 		nextPageRole = null,
 		hashListener = true,
 		unHashedSelectors = '[data-rel=dialog]',
-		baseUrl = location.protocol + '//' + location.host + location.pathname,
+		baseUrl = getPathDir( location.protocol + '//' + location.host + location.pathname ),
 		resolutionBreakpoints = [320,480,768,1024];
-	
+
 	// TODO: don't expose (temporary during code reorg)
 	$.mobile.urlStack = urlStack;
 	
@@ -86,16 +86,14 @@
 		}, 150 );
 	}
 	
+	function getPathDir( path ){
+		var newPath = path.replace(/#/,'').split('/');
+		newPath.pop();
+		return newPath.join('/') + (newPath.length ? '/' : '');
+	}
+	
 	function getBaseURL( nonHashPath ){
-	    var newPath = nonHashPath || location.hash,
-	    	newBaseURL = newPath.replace(/#/,'').split('/');
-	    	
-		if(newBaseURL.length && /[.|&]/.test(newBaseURL[newBaseURL.length-1]) ){
-			newBaseURL.pop();	
-		}
-		newBaseURL = newBaseURL.join('/');
-		if(newBaseURL !== "" && newBaseURL.charAt(newBaseURL.length-1) !== '/'){  newBaseURL += '/'; }
-		return newBaseURL;
+		return getPathDir( nonHashPath || location.hash );
 	}
 	
 	var setBaseURL = !$.support.dynamicBaseTag ? $.noop : function( nonHashPath ){
@@ -133,7 +131,7 @@
 				changeHashOnSuccess = !$this.is(unHashedSelectors);
 				
 			nextPageRole = $this.attr( "data-rel" );	
-				
+	
 			//if it's a relative href, prefix href with base url
 			if( href.indexOf('/') && href.indexOf('#') !== 0 ){
 				href = getBaseURL() + href;
