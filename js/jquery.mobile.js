@@ -105,6 +105,22 @@
 		$('#ui-base').attr('href', baseUrl);
 	}
 	
+	//for form submission
+	$('form').live('submit', function(){
+		var type = $(this).attr("method");
+		$.changePage(
+			{
+				url: $(this).attr("action"),
+				type: type,
+				data: $(this).serialize()
+			}, 
+			$(this).data("transition"),
+			false,  
+			type === "get"
+		);
+		return false;
+	});
+	
 	//click routing - direct to HTTP or Ajax, accordingly
 	jQuery( "a" ).live( "click", function(event) {
 		var $this = $(this),
@@ -204,8 +220,21 @@
 			from = toIsArray ? to[0] : $.activePage,
 			to = toIsArray ? to[1] : to,
 			url = fileUrl = $.type(to) === "string" ? to.replace( /^#/, "" ) : null,
+			data = undefined,
+			type = 'get',
 			back = (back !== undefined) ? back : ( urlStack.length > 1 && urlStack[ urlStack.length - 2 ].url === url ),
 			transition = (transition !== undefined) ? transition :  ( pageTransition || "slide" );
+		
+		if( $.type(to) === "object" ){
+			url = to.url,
+			data = to.data,
+			type = to.type;
+			//make get requests bookmarkable
+			if( data && type == 'get' ){
+				url += "?" + data;
+				data = undefined;
+			}
+		}
 		
 		//unset pageTransition, forceBack	
 		pageTransition = undefined;
@@ -306,6 +335,8 @@
 
 			$.ajax({
 				url: fileUrl,
+				type: type,
+				data: data,
 				success: function( html ) {
 					setBaseURL(fileUrl);
 					var all = jQuery("<div></div>");
