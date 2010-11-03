@@ -225,8 +225,6 @@
 
 	//for getting or creating a new page 
 	function changePage( to, transition, back, changeHash){
-
-		var isFormRequest = false;
 		
 		//from is always the currently viewed page
 		var toIsArray = $.type(to) === "array",
@@ -236,10 +234,12 @@
 			data = undefined,
 			type = 'get',
 			back = (back !== undefined) ? back : ( urlStack.length > 1 && urlStack[ urlStack.length - 2 ].url === url ),
-			transition = (transition !== undefined) ? transition :  ( pageTransition || "slide" );
+			transition = (transition !== undefined) ? transition :  ( pageTransition || "slide" ),
+			isFormRequest = false,
+			formRequestHash = (new Date()).getTime()+""; //unique hash for id
 		
 		if( $.type(to) === "object" ){
-			isFormRequest = true;
+			isFormRequest = true,
 			url = to.url,
 			data = to.data,
 			type = to.type;
@@ -283,7 +283,7 @@
 				reFocus( to );
 				if( changeHash && url ){
 					hashListener = false;
-					location.hash = url;
+					location.hash = isFormRequest ? formRequestHash : url;
 					setTimeout(function(){
 						hashListener = true;
 					}, 500);
@@ -380,9 +380,9 @@
 					if ( to.attr('id') ) {
 						to = wrapNewPage( to );
 					}
-
+                    
 					to
-						.attr( "id", fileUrl )
+						.attr( "id", isFormRequest ? formRequestHash : fileUrl )
 						.appendTo( $pageContainer );
 						
 					enhancePage();
