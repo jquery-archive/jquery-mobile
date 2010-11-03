@@ -221,7 +221,7 @@
 		}
 		activeClickedLink = null;
 	}
-	
+
 
 	//for getting or creating a new page 
 	function changePage( to, transition, back, changeHash){
@@ -546,6 +546,8 @@
 		$html.addClass( jQuery.event.special.orientationchange.orientation( $window ) );
 	});
 	
-	$window.load(hideBrowserChrome);
+	$window
+		.load(hideBrowserChrome)
+		.unload(removeActiveLinkClass);
 	
 })( jQuery, this );
