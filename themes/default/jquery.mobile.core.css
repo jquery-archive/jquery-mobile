@@ -17,7 +17,11 @@
 .landscape {  }
 
 /* "page" containers - full-screen views, one should always be in view post-pageload */
-.ui-page { top: 0; left: 0; width: 100%; min-height: 100%; position: absolute; display: none; -webkit-backface-visibility:hidden; border: 0; } 
+.ui-page {
+	top: 0; left: 0; width: 100%; min-height: 100%; position: absolute; display: none; border: 0;
+	-webkit-backface-visibility:hidden; /* Seems to prevent tile rendering from being visible while scrolling. */
+	-webkit-transform:translateX(0); /* Needed to work around an iOS 3.1 bug that causes listview thumbs to disappear when -webkit-visibility:hidden is used. */
+} 
 .ui-page-active { display: block; overflow: visible; min-height: 100%; }
 
 /* loading screen */
