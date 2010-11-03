@@ -226,6 +226,8 @@
 	//for getting or creating a new page 
 	function changePage( to, transition, back, changeHash){
 
+		var isFormRequest = false;
+		
 		//from is always the currently viewed page
 		var toIsArray = $.type(to) === "array",
 			from = toIsArray ? to[0] : $.activePage,
@@ -237,6 +239,7 @@
 			transition = (transition !== undefined) ? transition :  ( pageTransition || "slide" );
 		
 		if( $.type(to) === "object" ){
+			isFormRequest = true;
 			url = to.url,
 			data = to.data,
 			type = to.type;
@@ -336,7 +339,7 @@
 		}
 		
 		// find the "to" page, either locally existing in the dom or by creating it through ajax
-		if ( to.length && type!="post") {
+		if ( to.length && !isFormRequest) {
 			if( fileUrl ){
 				setBaseURL(fileUrl);
 			}	
