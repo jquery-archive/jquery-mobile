@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.parent()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="parent1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.parent( [ selector ] )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Get the parent of each element in the current set of matched elements, optionally filtered by a selector.</p>
+<ul class="signatures"><li class="signature" id="parent-selector">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.parent( [ selector ] )</h4>
+<p class="arguement"><strong>selector</strong>A string containing a selector expression to match elements against.</p>
+</li></ul>
+<div class="longdesc">
+<p>Given a jQuery object that represents a set of DOM elements, the <code>.parent()</code> method allows us to search through the parents of these elements in the DOM tree and construct a new jQuery object from the matching elements. The <code>.parents()</code> and <code>.parent()</code> methods are similar, except that the latter only travels a single level up the DOM tree.</p>
+<p>The method optionally accepts a selector expression of the same type that we can pass to the <code>$()</code> function. If the selector is supplied, the elements will be filtered by testing whether they match it.</p>
+<p>Consider a page with a basic nested list on it:</p>
+<pre>
+&lt;ul class="level-1"&gt;
+  &lt;li class="item-i"&gt;I&lt;/li&gt;
+  &lt;li class="item-ii"&gt;II
+    &lt;ul class="level-2"&gt;
+      &lt;li class="item-a"&gt;A&lt;/li&gt;
+      &lt;li class="item-b"&gt;B
+        &lt;ul class="level-3"&gt;
+          &lt;li class="item-1"&gt;1&lt;/li&gt;
+          &lt;li class="item-2"&gt;2&lt;/li&gt;
+          &lt;li class="item-3"&gt;3&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li class="item-c"&gt;C&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li class="item-iii"&gt;III&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+<p>If we begin at item A, we can find its parents:</p>
+<pre>$('li.item-a').parent().css('background-color', 'red');</pre>
+<p>The result of this call is a red background for the level-2 list. Since we do not supply a selector expression, the parent element is unequivocally included as part of the object. If we had supplied one, the element would be tested for a match before it was included.</p>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Shows the parent of each element as (parent &gt; child).  Check the View Source to see the raw html.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  div,p { margin:10px; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div&gt;div, 
+    &lt;span&gt;span, &lt;/span&gt;
+    &lt;b&gt;b &lt;/b&gt;
+
+  &lt;/div&gt;
+  &lt;p&gt;p, 
+    &lt;span&gt;span, 
+      &lt;em&gt;em &lt;/em&gt;
+    &lt;/span&gt;
+  &lt;/p&gt;
+
+  &lt;div&gt;div, 
+    &lt;strong&gt;strong, 
+      &lt;span&gt;span, &lt;/span&gt;
+      &lt;em&gt;em, 
+        &lt;b&gt;b, &lt;/b&gt;
+      &lt;/em&gt;
+
+    &lt;/strong&gt;
+    &lt;b&gt;b &lt;/b&gt;
+  &lt;/div&gt;
+&lt;script&gt;
+
+    $("*", document.body).each(function () {
+      var parentTag = $(this).parent().get(0).tagName;
+      $(this).prepend(document.createTextNode(parentTag + " &gt; "));
+    });
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Find the parent element of each paragraph with a class "selected".</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div&gt;&lt;p&gt;Hello&lt;/p&gt;&lt;/div&gt;
+
+  &lt;div class="selected"&gt;&lt;p&gt;Hello Again&lt;/p&gt;&lt;/div&gt;
+
+&lt;script&gt;$("p").parent(".selected").css("background", "yellow");&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

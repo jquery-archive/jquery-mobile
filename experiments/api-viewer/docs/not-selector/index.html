@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>:not() Selector</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="not1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">not</span>  selector</h2>
+<div class="  entry-details">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/version/1.0/">1.0</a></span>jQuery(':not(selector)')</h4>
+<ul class="signatures"><li><dl class="arguments">
+<dt>selector</dt>
+<dd>A selector with which to filter by.</dd>
+</dl></li></ul>
+<p class="desc"><strong>Description: </strong>Selects all elements that do not match the given selector.</p>
+<div class="longdesc"><p>All selectors are accepted inside <code>:not()</code>,  for example: <code>:not(div a)</code> and <code>:not(div,a)</code>.</p></div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Finds all inputs that are not checked and highlights the next sibling span.  Notice there is no change when clicking the checkboxes since no click events have been linked.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div&gt;
+  &lt;input type="checkbox" name="a" /&gt;
+  &lt;span&gt;Mary&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;div&gt;
+  &lt;input type="checkbox" name="b" /&gt;
+  &lt;span&gt;lcm&lt;/span&gt;
+
+&lt;/div&gt;
+&lt;div&gt;
+  &lt;input type="checkbox" name="c" checked="checked" /&gt;
+
+  &lt;span&gt;Peter&lt;/span&gt;
+&lt;/div&gt;
+&lt;script&gt;
+  $("input:not(:checked) + span").css("background-color", "yellow");
+  $("input").attr("disabled", "disabled");
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

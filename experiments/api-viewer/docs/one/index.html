@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.one()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="one1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.one( eventType, [ eventData ], handler(eventObject) )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Attach a handler to an event for the elements. The handler is executed at most once.</p>
+<ul class="signatures"><li class="signature" id="one-eventType-eventData-handlereventObject">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.1/">1.1</a></span>.one( eventType, [ eventData ], handler(eventObject) )</h4>
+<p class="arguement"><strong>eventType</strong>A string containing one or more JavaScript event types, such as "click" or "submit," or custom event names.</p>
+<p class="arguement"><strong>eventData</strong>A map of data that will be passed to the event handler.</p>
+<p class="arguement"><strong>handler(eventObject)</strong>A function to execute at the time the event is triggered.</p>
+</li></ul>
+<div class="longdesc">
+<p>This method is identical to <code>.bind()</code>, except that the handler is unbound after its first invocation. For example:</p>
+<pre>$('#foo').one('click', function() {
+  alert('This will be displayed only once.');
+});
+</pre>
+<p>After the code is executed, a click on the element with ID <code>foo</code> will display the alert. Subsequent clicks will do nothing. This code is equivalent to:</p>
+<pre>$('#foo').bind('click', function(event) {
+  alert('This will be displayed only once.');
+  $(this).unbind(event);
+});
+</pre>
+<p>In other words, explicitly calling <code>.unbind()</code> from within a regularly-bound handler has exactly the same effect.</p>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Tie a one-time click to each div.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+div { width:60px; height:60px; margin:5px; float:left;
+background:green; border:10px outset; 
+cursor:pointer; }
+p { color:red; margin:0; clear:left; }
+&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div&gt;&lt;/div&gt;
+&lt;div&gt;&lt;/div&gt;
+&lt;div&gt;&lt;/div&gt;
+&lt;div&gt;&lt;/div&gt;
+
+&lt;div&gt;&lt;/div&gt;
+&lt;p&gt;Click a green square...&lt;/p&gt;
+&lt;script&gt;
+var n = 0;
+$("div").one("click", function(){
+var index = $("div").index(this);
+$(this).css({ borderStyle:"inset",
+    cursor:"auto" });
+$("p").text("Div at index #" + index + " clicked." +
+  "  That's " + ++n + " total clicks.");
+});
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">To display the text of all paragraphs in an alert box the first time each of them is clicked:</span>
+</h4>
+<pre><code class="example">$("p").one("click", function(){
+alert( $(this).text() );
+});</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

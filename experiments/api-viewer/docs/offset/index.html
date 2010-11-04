@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.offset()</h1>
+  				
+</div>
+
+
+<div data-role="content" data-theme="c" id="offset1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.offset()</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#Object">Object</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Get the current coordinates of the first element in the set of matched elements, relative to the document.</p>
+<ul class="signatures"><li class="signature" id="offset"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.2/">1.2</a></span>.offset()</h4></li></ul>
+<div class="longdesc">
+<p>The <code>.offset()</code> method allows us to retrieve the current position of an element <em>relative to the document</em>. Contrast this with <code>.position()</code>, which retrieves the current position <em>relative to the offset parent</em>. When positioning a new element on top of an existing one for global manipulation (in particular, for implementing drag-and-drop), <code>.offset()</code> is the more useful.</p>
+<p><code>.offset()</code> returns an object containing the properties <code>top</code> and <code>left</code>.</p>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Access the offset of the second paragraph:</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+p { margin-left:10px; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;Hello&lt;/p&gt;&lt;p&gt;2nd Paragraph&lt;/p&gt;
+&lt;script&gt;var p = $("p:last");
+var offset = p.offset();
+p.html( "left: " + offset.left + ", top: " + offset.top );&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Click to see the offset.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+p { margin-left:10px; color:blue; width:200px; 
+    cursor:pointer; }
+span { color:red; cursor:pointer; }
+div.abs { width:50px; height:50px; position:absolute;
+          left:220px; top:35px; background-color:green; 
+          cursor:pointer; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div id="result"&gt;Click an element.&lt;/div&gt;
+&lt;p&gt;
+  This is the best way to &lt;span&gt;find&lt;/span&gt; an offset.
+&lt;/p&gt;
+
+&lt;div class="abs"&gt;
+&lt;/div&gt;
+  
+&lt;script&gt;
+$("*", document.body).click(function (e) {
+  var offset = $(this).offset();
+  e.stopPropagation();
+  $("#result").text(this.tagName + " coords ( " + offset.left + ", " +
+                                  offset.top + " )");
+});
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>
+<div data-role="content" data-theme="c" id="offset2">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.offset( coordinates )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Set the current coordinates of every element in the set of matched elements, relative to the document.</p>
+<ul class="signatures">
+<li class="signature" id="offset-coordinates">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4/">1.4</a></span>.offset( coordinates )</h4>
+<p class="arguement"><strong>coordinates</strong>An object containing the properties <code>top</code> and <code>left</code>, which are integers indicating the new top and left coordinates for the elements.</p>
+</li>
+<li class="signature" id="offset-functionindex, coords">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4/">1.4</a></span>.offset( function(index, coords) )</h4>
+<p class="arguement"><strong>function(index, coords)</strong>A function to return the coordinates to set. Receives the index of the element in the collection as the first argument and the current coordinates as the second argument.</p>
+</li>
+</ul>
+<div class="longdesc"><p>The <code>.offset()</code> setter method allows us to reposition an element. The element's position is specified <em>relative to the document</em>. If the element's <code>position</code> style property is currently <code>static</code>, it will be set to <code>relative</code> to allow for this repositioning.</p></div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Set the offset of the second paragraph:</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;p { margin-left:10px; } &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;Hello&lt;/p&gt;&lt;p&gt;2nd Paragraph&lt;/p&gt;
+&lt;script&gt;$("p:last").offset({ top: 10, left: 30 });&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+
+				</div>
+
+</body></html>

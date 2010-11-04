@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.toggle()</h1>
+  				
+</div>
+
+
+<div data-role="content" data-theme="c" id="toggle1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.toggle( handler(eventObject), handler(eventObject), [ handler(eventObject) ] )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Bind two or more handlers to the matched elements, to be executed on alternate clicks.</p>
+<ul class="signatures"><li class="signature" id="toggle-handlereventObject-handlereventObject-handlereventObject">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.toggle( handler(eventObject), handler(eventObject), [ handler(eventObject) ] )</h4>
+<p class="arguement"><strong>handler(eventObject)</strong>A function to execute every even time the element is clicked.</p>
+<p class="arguement"><strong>handler(eventObject)</strong>A function to execute every odd time the element is clicked.</p>
+<p class="arguement"><strong>handler(eventObject)</strong>Additional handlers to cycle through after clicks.</p>
+</li></ul>
+<div class="longdesc">
+<p>The <code>.toggle()</code> method binds a handler for the <code>click</code> event, so the rules outlined for the triggering of <code>click</code> apply here as well.</p>
+<pre>For example, consider the HTML:
+&lt;div id="target"&gt;
+  Click here
+&lt;/div&gt;</pre>
+<p class="image"><img src="http://api.jquery.com/images/0042_05_05.png" alt=""></p>
+<p>Event handlers can then be bound to the <code>&lt;div&gt;</code>:</p>
+<pre>$('#target').toggle(function() {
+  alert('First handler for .toggle() called.');
+}, function() {
+  alert('Second handler for .toggle() called.');
+});</pre>
+<p>As the element is clicked repeatedly, the messages alternate:</p>
+<p>
+  <span class="output">First handler for .toggle() called.</span><br><span class="output">Second handler for .toggle() called.</span><br><span class="output">First handler for .toggle() called.</span><br><span class="output">Second handler for .toggle() called.</span><br><span class="output">First handler for .toggle() called.</span>
+</p>
+<p>If more than two handlers are provided, <code>.toggle()</code> will cycle among all of them. For example, if there are three handlers, then the first handler will be called on the first click, the fourth click, the seventh click, and so on.</p>
+<p>The <code>.toggle()</code> method is provided for convenience. It is relatively straightforward to implement the same behavior by hand, and this can be necessary if the assumptions built into <code>.toggle()</code> prove limiting. For example, <code>.toggle()</code> is not guaranteed to work correctly if applied twice to the same element. Since <code>.toggle()</code> internally uses a <code>click</code> handler to do its work, we must unbind <code>click</code> to remove a behavior attached with <code>.toggle()</code>, so other <code>click</code> handlers can be caught in the crossfire. The implementation also calls <code>.preventDefault()</code> on the event, so links will not be followed and buttons will not be clicked if <code>.toggle()</code> has been called on the element.</p>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Click to toggle highlight on the list item.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  ul { margin:10px; list-style:inside circle; font-weight:bold; }
+  li { cursor:pointer; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;ul&gt;
+    &lt;li&gt;Go to the store&lt;/li&gt;
+    &lt;li&gt;Pick up dinner&lt;/li&gt;
+    &lt;li&gt;Debug crash&lt;/li&gt;
+
+    &lt;li&gt;Take a jog&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;script&gt;
+    $("li").toggle(
+      function () {
+        $(this).css({"list-style-type":"disc", "color":"blue"});
+      },
+      function () {
+        $(this).css({"list-style-type":"disc", "color":"red"});
+      },
+      function () {
+        $(this).css({"list-style-type":"", "color":""});
+      }
+    );
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">To toggle a style on table cells:</span>
+</h4>
+<pre><code class="example">$("td").toggle(
+  function () {
+    $(this).addClass("selected");
+  },
+  function () {
+    $(this).removeClass("selected");
+  }
+);</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div data-role="content" data-theme="c" id="toggle2">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.toggle( [ duration ], [ callback ] )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Display or hide the matched elements.</p>
+<ul class="signatures">
+<li class="signature" id="toggle-duration-callback">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.toggle( [ duration ], [ callback ] )</h4>
+<p class="arguement"><strong>duration</strong>A string or number determining how long the animation will run.</p>
+<p class="arguement"><strong>callback</strong>A function to call once the animation is complete.</p>
+</li>
+<li class="signature" id="toggle-showOrHide">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.3/">1.3</a></span>.toggle( showOrHide )</h4>
+<p class="arguement"><strong>showOrHide</strong>A Boolean indicating whether to show or hide the elements.</p>
+</li>
+</ul>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Toggles all paragraphs.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;button&gt;Toggle&lt;/button&gt;
+&lt;p&gt;Hello&lt;/p&gt;
+&lt;p style="display: none"&gt;Good Bye&lt;/p&gt;
+&lt;script&gt;
+
+$("button").click(function () {
+$("p").toggle();
+});
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Animates all paragraphs to be shown if they are hidden and hidden if they are visible, completing the animation within 600 milliseconds.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+p { background:#dad;
+font-weight:bold;
+font-size:16px; }
+&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;button&gt;Toggle 'em&lt;/button&gt;
+
+&lt;p&gt;Hiya&lt;/p&gt;
+&lt;p&gt;Such interesting text, eh?&lt;/p&gt;
+&lt;script&gt;
+$("button").click(function () {
+$("p").toggle("slow");
+});    
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">Shows all paragraphs, then hides them all, back and forth.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;button&gt;Toggle&lt;/button&gt;
+&lt;p&gt;Hello&lt;/p&gt;
+&lt;p style="display: none"&gt;Good Bye&lt;/p&gt;
+&lt;script&gt;
+
+var flip = 0;
+$("button").click(function () {
+$("p").toggle( flip++ % 2 == 0 );
+});
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>
+
+
+				</div>
+
+</body></html>

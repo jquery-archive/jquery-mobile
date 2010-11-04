@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>jQuery.browser</h1>
+  				
+</div>
+
+<div data-role="content" data-theme="c" id="jQuery.browser1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">jQuery.browser</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#Map">Map</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>We recommend against using this property, please try to use feature detection instead (see jQuery.support). Contains flags for the useragent, read from navigator.userAgent. While jQuery.browser will not be removed from future versions of jQuery, every effort to use jQuery.support and proper feature detection should be made.</p>
+<ul class="signatures"><li class="signature" id="jQuery.browser"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>jQuery.browser</h4></li></ul>
+<div class="longdesc">
+<p>The <code>$.browser</code> property allows us to detect which web browser is accessing the page, as reported by the browser itself. It contains flags for each of the four most prevalent browser classes (Internet Explorer, Mozilla, Webkit, and Opera) as well as version information.</p>
+<p>Available flags are:</p>
+<ul>
+<li>webkit (as of jQuery 1.4)</li>
+  <li>safari (deprecated)</li>
+  <li>opera</li>
+  <li>msie</li>
+  <li>mozilla</li>
+</ul>
+<p>This property is available immediately. It is therefore safe to use it to determine whether or not to call <code>$(document).ready()</code>.
+The <code>$.browser</code> property is deprecated in jQuery 1.3, but there are no immediate plans to remove it.</p>
+<p>Because <code>$.browser</code> uses <code>navigator.userAgent</code> to determine the platform, it is vulnerable to spoofing by the user or misrepresentation by the browser itself. It is always best to avoid browser-specific code entirely where possible. The <code>$.support</code> property is available for detection of support for particular features rather than relying on <code>$.browser</code>.</p>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Show the browser info.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  p { color:green; font-weight:bolder; margin:3px 0 0 10px; }
+  div { color:blue; margin-left:20px; font-size:14px; }
+  span { color:red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;Browser info:&lt;/p&gt;
+&lt;script&gt;
+    jQuery.each(jQuery.browser, function(i, val) {
+      $("&lt;div&gt;" + i + " : &lt;span&gt;" + val + "&lt;/span&gt;")
+                .appendTo(document.body);
+    });&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Returns true if the current useragent is some version of Microsoft's Internet Explorer.</span>
+</h4>
+<pre><code class="example">$.browser.msie</code></pre>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">Alerts "this is webkit!" only for webkit browsers</span>
+</h4>
+<pre><code class="example">if ($.browser.webkit) {
+    alert("this is webkit!");
+ }</code></pre>
+</div>
+<div id="example-3">
+<h4>Example: <span class="desc">Alerts "Do stuff for firefox 3" only for firefox 3 browsers.</span>
+</h4>
+<pre><code class="example">jQuery.each(jQuery.browser, function(i, val) {
+   if(i=="mozilla" &amp;&amp; jQuery.browser.version.substr(0,3)=="1.9")
+      alert("Do stuff for firefox 3")
+ });</code></pre>
+</div>
+<div id="example-4">
+<h4>Example: <span class="desc">Set a CSS property to specific browser.</span>
+</h4>
+<pre><code class="example">jQuery.each(jQuery.browser, function(i) {
+   if($.browser.msie){
+      $("#div ul li").css("display","inline");
+   }else{
+      $("#div ul li").css("display","inline-table");
+   }
+ });</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div data-role="content" data-theme="c" id="jQuery.browser.version2">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">jQuery.browser.version</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#String">String</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>The version number of the rendering engine for the user's browser.</p>
+<ul class="signatures"><li class="signature" id="jQuery.browser.version"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.1.3/">1.1.3</a></span>jQuery.browser.version</h4></li></ul>
+<div class="longdesc">
+<p>Here are some typical results:</p>
+<ul>
+<li>Internet Explorer: 6.0, 7.0</li>
+      <li>Mozilla/Firefox/Flock/Camino: 1.7.12, 1.8.1.3, 1.9</li>
+      <li>Opera: 9.20</li>
+      <li>Safari/Webkit: 312.8, 418.9</li>
+    </ul>
+<p>Note that IE8 claims to be 7 in Compatibility View.</p>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Returns the browser version.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  p { color:blue; margin:20px; }
+  span { color:red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;
+  &lt;/p&gt;
+&lt;script&gt;
+
+    $("p").html("The browser version is: &lt;span&gt;" +
+                jQuery.browser.version + "&lt;/span&gt;");
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Alerts the version of IE that is being used</span>
+</h4>
+<pre><code class="example">if ( $.browser.msie ) {
+  alert( $.browser.version );
+}</code></pre>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">Often you only care about the "major number," the whole number. This can be accomplished with JavaScript's built-in parseInt() function:</span>
+</h4>
+<pre><code class="example">
+if (jQuery.browser.msie) {
+  alert(parseInt(jQuery.browser.version));
+}
+</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+
+				</div>
+
+</body></html>

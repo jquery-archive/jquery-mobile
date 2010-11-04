@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.toArray()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="toArray1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.toArray()</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#Array">Array</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Retrieve all the DOM elements contained in the jQuery set, as an array.</p>
+<ul class="signatures"><li class="signature" id="toArray"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4/">1.4</a></span>.toArray()</h4></li></ul>
+<div class="longdesc">
+<p><code>.toArray()</code> returns all of the elements in the jQuery set:</p>
+<pre>alert($('li').toArray());</pre>
+<p>All of the matched DOM nodes are returned by this call, contained in a standard array:</p>
+<p><span class="result">[&lt;li id="foo"&gt;, &lt;li id="bar"&gt;]</span></p>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Selects all divs in the document and returns the DOM Elements as an Array, then uses the built-in reverse-method to reverse that array.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  span { color:red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	Reversed - &lt;span&gt;&lt;/span&gt;
+
+  &lt;div&gt;One&lt;/div&gt;
+  &lt;div&gt;Two&lt;/div&gt;
+  &lt;div&gt;Three&lt;/div&gt;
+&lt;script&gt;
+
+    function disp(divs) {
+      var a = [];
+      for (var i = 0; i &lt; divs.length; i++) {
+        a.push(divs[i].innerHTML);
+      }
+      $("span").text(a.join(" "));
+    }
+    
+    disp( $("div").toArray().reverse() );
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

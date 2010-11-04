@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>ID Selector (“#id”)</h1>
+  				<div class="entry-meta">Categories:
+  					<span class="category"><a href="http://api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="http://api.jquery.com/category/selectors/basic-css-selectors/" title="View all posts in Basic">Basic</a></span>  
+    
+  				</div>
+</div>
+<div data-role="content" data-theme="c" id="id1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">id</span>  selector</h2>
+<div class="  entry-details">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/version/1.0/">1.0</a></span>jQuery('#id')</h4>
+<ul class="signatures"><li><dl class="arguments">
+<dt>id</dt>
+<dd>An ID to search for, specified via the id attribute of an element.</dd>
+</dl></li></ul>
+<p class="desc"><strong>Description: </strong>Selects a single element with the given id attribute. </p>
+<div class="longdesc">
+<p>For id selectors, jQuery uses the JavaScript function <code>document.getElementById()</code>, which is extremely efficient. When another selector is attached to the id selector, such as <code>h2#pageTitle</code>, jQuery performs an additional check before identifying the element as a match.</p>
+<p>Each <code>id</code> value must be used only once within a document. If more than one element has been assigned the same ID, queries that use that ID will only select the first matched element in the DOM. This behavior should not be relied on, however; a document with more than one element using the same ID is invalid.</p>
+<p>If the id contains characters like periods or colons you have to <a href="http://docs.jquery.com/Frequently_Asked_Questions#How_do_I_select_an_element_by_an_ID_that_has_characters_used_in_CSS_notation.3F">escape those characters with backslashes</a>.</p>
+<blockquote><p>As always, remember that as a developer, your time is typically the most valuable resource. Do not focus on optimization of selector speed unless it is clear that performance needs to be improved.</p></blockquote>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Finds the element with the id "myDiv".</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  div {
+    width: 90px;
+    height: 90px;
+    float:left;
+    padding: 5px;
+    margin: 5px;
+    background-color: #EEEEEE;
+  }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div id="notMe"&gt;&lt;p&gt;id="notMe"&lt;/p&gt;&lt;/div&gt;
+
+  &lt;div id="myDiv"&gt;id="myDiv"&lt;/div&gt;
+&lt;script&gt;$("#myDiv").css("border","3px solid red");&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Finds the element with the id "myID.entry[1]".  See how certain characters must be escaped with backslashes.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  div {
+    width: 300px;
+    float:left;
+    padding: 2px;
+    margin: 3px;
+    background-color: #EEEEEE;
+  }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div id="myID.entry[0]"&gt;id="myID.entry[0]"&lt;/div&gt;
+
+  &lt;div id="myID.entry[1]"&gt;id="myID.entry[1]"&lt;/div&gt;
+  &lt;div id="myID.entry[2]"&gt;id="myID.entry[2]"&lt;/div&gt;
+&lt;script&gt;$("#myID\\.entry\\[1\\]").css("border","3px solid red");&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

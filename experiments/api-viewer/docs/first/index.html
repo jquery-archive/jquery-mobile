@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.first()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="first1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.first()</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Reduce the set of matched elements to the first in the set.</p>
+<ul class="signatures"><li class="signature" id="first"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4/">1.4</a></span>.first()</h4></li></ul>
+<div class="longdesc">
+<p>Given a jQuery object that represents a set of DOM elements, the <code>.first()</code> method constructs a new jQuery object from the first matching element.</p>
+<p>Consider a page with a simple list on it:</p>
+<pre>
+&lt;ul&gt;
+  &lt;li&gt;list item 1&lt;/li&gt;
+  &lt;li&gt;list item 2&lt;/li&gt;
+  &lt;li&gt;list item 3&lt;/li&gt;
+  &lt;li&gt;list item 4&lt;/li&gt;
+  &lt;li&gt;list item 5&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+<p>We can apply this method to the set of list items:</p>
+<pre>$('li').first().css('background-color', 'red');</pre>
+<p>The result of this call is a red background for the first item.</p>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Highlight the first span in a paragraph.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;.highlight{background-color: yellow}&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;&lt;span&gt;Look:&lt;/span&gt; &lt;span&gt;This is some text in a paragraph.&lt;/span&gt; &lt;span&gt;This is a note about it.&lt;/span&gt;&lt;/p&gt;
+&lt;script&gt;$("p span").first().addClass('highlight');&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

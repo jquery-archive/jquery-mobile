@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.has()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="has1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.has( selector )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Reduce the set of matched elements to those that have a descendant that matches the selector or DOM element.</p>
+<ul class="signatures">
+<li class="signature" id="has-selector">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4/">1.4</a></span>.has( selector )</h4>
+<p class="arguement"><strong>selector</strong>A string containing a selector expression to match elements against.</p>
+</li>
+<li class="signature" id="has-contained">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4/">1.4</a></span>.has( contained )</h4>
+<p class="arguement"><strong>contained</strong>A DOM element to match elements against.</p>
+</li>
+</ul>
+<div class="longdesc">
+<p>Given a jQuery object that represents a set of DOM elements, the <code>.has()</code> method constructs a new jQuery object from a subset of the matching elements. The supplied selector is tested against the descendants of the matching elements; the element will be included in the result if any of its descendant elements matches the selector.</p>
+<p>Consider a page with a nested list as follows:</p>
+<pre>
+ &lt;ul&gt;
+  &lt;li&gt;list item 1&lt;/li&gt;
+  &lt;li&gt;list item 2
+    &lt;ul&gt;
+      &lt;li&gt;list item 2-a&lt;/li&gt;
+      &lt;li&gt;list item 2-b&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;list item 3&lt;/li&gt;
+  &lt;li&gt;list item 4&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+<p>We can apply this method to the set of list items as follows:</p>
+<pre>$('li').has('ul').css('background-color', 'red');</pre>
+<p>The result of this call is a red background for item 2, as it is the only <code>&lt;li&gt;</code> that has a <code>&lt;ul&gt;</code> among its descendants.</p>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Check if an element is inside another.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  .full { border: 1px solid red; }
+&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	
+&lt;ul&gt;&lt;li&gt;Does the UL contain an LI?&lt;/li&gt;&lt;/ul&gt;
+
+&lt;script&gt;
+  $("ul").append("&lt;li&gt;" + ($("ul").has("li").length ? "Yes" : "No") + "&lt;/li&gt;");
+  $("ul").has("li").addClass("full");
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

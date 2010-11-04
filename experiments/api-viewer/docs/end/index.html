@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.end()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="end1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.end()</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>End the most recent filtering operation in the current chain and return the set of matched elements to its previous state.</p>
+<ul class="signatures"><li class="signature" id="end"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.end()</h4></li></ul>
+<div class="longdesc">
+<p>Most of the methods in this chapter operate on a jQuery object and produce a new one, matching a different set of DOM elements. When this happens, it is as if the new set of elements is pushed onto a stack that is maintained inside the object. Each successive filtering method pushes a new element set onto the stack. If we need an older element set, we can use <code>end()</code> to pop the sets back off of the stack.</p>
+<p>Suppose we have a couple short lists on a page:</p>
+<pre>
+&lt;ul class="first"&gt;
+   &lt;li class="foo"&gt;list item 1&lt;/li&gt;
+   &lt;li&gt;list item 2&lt;/li&gt;
+   &lt;li class="bar"&gt;list item 3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class="second"&gt;
+   &lt;li class="foo"&gt;list item 1&lt;/li&gt;
+   &lt;li&gt;list item 2&lt;/li&gt;
+   &lt;li class="bar"&gt;list item 3&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+<p>The <code>end()</code> method is useful primarily when exploiting jQuery's chaining properties. When not using chaining, we can usually just call up a previous object by variable name, so we don't need to manipulate the stack. With <code>end()</code>, though, we can string all the method calls together:</p>
+<pre>
+$('ul.first').find('.foo').css('background-color', 'red')
+  <code>.end()</code>.find('.bar').css('background-color', 'green');
+</pre>
+<p>This chain searches for items with the class <code>foo</code> within the first list only and turns their backgrounds red. Then <code>end()</code> returns the object to its state before the call to <code>find()</code>, so the second <code>find()</code> looks for '.bar' inside <code>&lt;ul class="first"&gt;</code>, not just inside that list's <code>&lt;li class="foo"&gt;</code>, and turns the matching elements' backgrounds green. The net result is that items 1 and 3 of the first list have a colored background, and none of the items from the second list do.</p>
+<p>A long jQuery chain can be visualized as a structured code block, with filtering methods providing the openings of nested blocks and <code>end()</code> methods closing them:</p>
+<pre>
+$('ul.first').find('.foo')
+  .css('background-color', 'red')
+.end().find('.bar')
+  .css('background-color', 'green')
+.end();
+</pre>
+<p>The last <code>end()</code> is unnecessary, as we are discarding the jQuery object immediately thereafter. However, when the code is written in this form, the <code>end()</code> provides visual symmetry and closure—making the program, at least to the eyes of some developers, more readable.</p>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Selects all paragraphs, finds span elements inside these, and reverts the selection back to the paragraphs.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  p, div { margin:1px; padding:1px; font-weight:bold; 
+           font-size:16px; }
+  div { color:blue; }
+  b { color:red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;
+    Hi there &lt;span&gt;how&lt;/span&gt; are you &lt;span&gt;doing&lt;/span&gt;?
+  &lt;/p&gt;
+
+  &lt;p&gt;
+    This &lt;span&gt;span&lt;/span&gt; is one of 
+    several &lt;span&gt;spans&lt;/span&gt; in this
+    &lt;span&gt;sentence&lt;/span&gt;.
+  &lt;/p&gt;
+
+  &lt;div&gt;
+    Tags in jQuery object initially: &lt;b&gt;&lt;/b&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    Tags in jQuery object after find: &lt;b&gt;&lt;/b&gt;
+
+  &lt;/div&gt;
+  &lt;div&gt;
+    Tags in jQuery object after end: &lt;b&gt;&lt;/b&gt;
+  &lt;/div&gt;
+&lt;script&gt;
+
+    jQuery.fn.showTags = function (n) {
+      var tags = this.map(function () { 
+                              return this.tagName; 
+                            })
+                        .get().join(", ");
+      $("b:eq(" + n + ")").text(tags);
+      return this;
+    };
+
+    $("p").showTags(0)
+          .find("span")
+          .showTags(1)
+          .css("background", "yellow")
+          .end()
+          .showTags(2)
+          .css("font-style", "italic");
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Selects all paragraphs, finds span elements inside these, and reverts the selection back to the paragraphs.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;p { margin:10px; padding:10px; }&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;&lt;span&gt;Hello&lt;/span&gt;, how are you?&lt;/p&gt;
+&lt;script&gt;$("p").find("span").end().css("border", "2px red solid");&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

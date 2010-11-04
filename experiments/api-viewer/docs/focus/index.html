@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.focus()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="focus1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.focus( handler(eventObject) )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Bind an event handler to the "focus" JavaScript event, or trigger that event on an element.</p>
+<ul class="signatures">
+<li class="signature" id="focus-handlereventObject">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.focus( handler(eventObject) )</h4>
+<p class="arguement"><strong>handler(eventObject)</strong>A function to execute each time the event is triggered.</p>
+</li>
+<li class="signature" id="focus"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.focus()</h4></li>
+</ul>
+<div class="longdesc">
+<ul>
+<li>This method is a shortcut for <code>.bind('focus', handler)</code> in the first variation, and <code>.trigger('focus')</code> in the second.</li>
+<li>The <code>focus</code> event is sent to an element when it gains focus. This event is implicitly applicable to a limited set of elements, such as  form elements (<code>&lt;input&gt;</code>, <code>&lt;select&gt;</code>, etc.) and links (<code>&lt;a href&gt;</code>). In recent browser versions, the event can be extended to include all element types by explicitly setting the element's <code>tabindex</code> property. An element can gain focus via keyboard commands, such as the Tab key, or by mouse clicks on the element.</li>
+<li>Elements with focus are usually highlighted in some way by the browser, for example with a dotted line surrounding the element. The focus is used to determine which element is the first to receive keyboard-related events.</li>
+</ul>
+<p>For example, consider the HTML:</p>
+<pre>&lt;form&gt;
+  &lt;input id="target" type="text" value="Field 1" /&gt;
+  &lt;input type="text" value="Field 2" /&gt;
+&lt;/form&gt;
+&lt;div id="other"&gt;
+  Trigger the handler
+&lt;/div&gt;
+</pre>
+<p>The event handler can be bound to the first input field:</p>
+<pre>$('#target').focus(function() {
+  alert('Handler for .focus() called.');
+});</pre>
+<p>Now if we click on the first field, or tab to it from another field, the alert is displayed:</p>
+<p><span class="output">Handler for .focus() called.</span></p>
+<p>We can trigger the event when another element is clicked:</p>
+<pre>$('#other').click(function() {
+  $('#target').focus();
+});</pre>
+<p>After this code executes, clicks on <span class="output">Trigger the handler</span> will also alert the message.</p>
+<p>The <code>focus</code> event does not bubble in Internet Explorer. Therefore, scripts that rely on event delegation with the <code>focus</code> event will not work consistently across browsers.</p>
+<blockquote><p>Triggering the focus on hidden elements causes an error in Internet Explorer. Take care to only call <code>.focus()</code> without parameters on elements that are visible.</p></blockquote>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Fire focus.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;span {display:none;}&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;&lt;input type="text" /&gt; &lt;span&gt;focus fire&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;input type="password" /&gt; &lt;span&gt;focus fire&lt;/span&gt;&lt;/p&gt;
+&lt;script&gt;
+    $("input").focus(function () {
+         $(this).next("span").css('display','inline').fadeOut(1000);
+    });
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">To stop people from writing in text input boxes, try:</span>
+</h4>
+<pre><code class="example">$("input[type=text]").focus(function(){
+  $(this).blur();
+});</code></pre>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">To focus on a login input box with id 'login' on page startup, try:</span>
+</h4>
+<pre><code class="example">$(document).ready(function(){
+  $("#login").focus();
+});</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

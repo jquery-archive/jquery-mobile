@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.fadeOut()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="fadeOut1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.fadeOut( [ duration ], [ callback ] )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Hide the matched elements by fading them to transparent.</p>
+<ul class="signatures"><li class="signature" id="fadeOut-duration-callback">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.fadeOut( [ duration ], [ callback ] )</h4>
+<p class="arguement"><strong>duration</strong>A string or number determining how long the animation will run.</p>
+<p class="arguement"><strong>callback</strong>A function to call once the animation is complete.</p>
+</li></ul>
+<div class="longdesc">
+<p>The <code>.fadeOut()</code> method animates the opacity of the matched elements. Once the opacity reaches 0, the <code>display</code> style property is set to <code>none</code>, so the element no longer affects the layout of the page.</p>
+<p>Durations are given in milliseconds; higher values indicate slower animations, not faster ones. The strings <code>'fast'</code> and <code>'slow'</code> can be supplied to indicate durations of <code>200</code> and <code>600</code> milliseconds, respectively. If any other string is supplied, or if the <code>duration</code> parameter is omitted, the default duration of  <code>400</code> milliseconds is used.</p>
+<p>If supplied, the callback is fired once the animation is complete. This can be useful for stringing different animations together in sequence. The callback is not sent any arguments, but <code>this</code> is set to the DOM element being animated. If multiple elements are animated, it is important to note that the callback is executed once per matched element, not once for the animation as a whole.</p>
+<p>We can animate any element, such as a simple image:</p>
+<pre>&lt;div id="clickme"&gt;
+  Click here
+&lt;/div&gt;
+&lt;img id="book" src="book.png" alt="" width="100" height="123" /&gt;</pre>
+<p>With the element initially shown, we can hide it slowly:</p>
+<pre>$('#clickme').click(function() {
+  $('#book').fadeOut('slow', function() {
+    // Animation complete.
+  });
+});</pre>
+<p class="image four-across">
+      <img src="http://api.jquery.com/images/0042_06_37.png" alt=""><img src="http://api.jquery.com/images/0042_06_38.png" alt=""><img src="http://api.jquery.com/images/0042_06_39.png" alt=""><img src="http://api.jquery.com/images/0042_06_40.png" alt=""></p>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Animates all paragraphs to fade out, completing the animation within 600 milliseconds.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  p { font-size:150%; cursor:pointer; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;
+  If you click on this paragraph
+  you'll see it just fade away.
+  &lt;/p&gt;
+&lt;script&gt;
+  $("p").click(function () {
+  $("p").fadeOut("slow");
+  });
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Fades out spans in one section that you click on.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  span { cursor:pointer; }
+  span.hilite { background:yellow; }
+  div { display:inline; color:red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;h3&gt;Find the modifiers - &lt;div&gt;&lt;/div&gt;&lt;/h3&gt;
+  &lt;p&gt;
+  If you &lt;span&gt;really&lt;/span&gt; want to go outside
+  &lt;span&gt;in the cold&lt;/span&gt; then make sure to wear
+  your &lt;span&gt;warm&lt;/span&gt; jacket given to you by
+  your &lt;span&gt;favorite&lt;/span&gt; teacher.
+  &lt;/p&gt;
+&lt;script&gt;
+
+  $("span").click(function () {
+  $(this).fadeOut(1000, function () {
+  $("div").text("'" + $(this).text() + "' has faded!");
+  $(this).remove();
+  });
+  });
+  $("span").hover(function () {
+  $(this).addClass("hilite");
+  }, function () {
+  $(this).removeClass("hilite");
+  });
+
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

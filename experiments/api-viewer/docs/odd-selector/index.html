@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>:odd Selector</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="odd1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">odd</span>  selector</h2>
+<div class="  entry-details">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/version/1.0/">1.0</a></span>jQuery(':odd')</h4>
+<p class="desc"><strong>Description: </strong>Selects odd elements, zero-indexed.  See also even.</p>
+<div class="longdesc"><p>In particular, note that the <em>0-based indexing</em> means that, counter-intuitively, <code>:odd</code> selects the second element, fourth element, and so on within the matched set.</p></div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Finds odd table rows, matching the second, fourth and so on (index 1, 3, 5 etc.).</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+
+  table {
+    background:#f3f7f5;
+  }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;table border="1"&gt;
+    &lt;tr&gt;&lt;td&gt;Row with Index #0&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Row with Index #1&lt;/td&gt;&lt;/tr&gt;
+
+    &lt;tr&gt;&lt;td&gt;Row with Index #2&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Row with Index #3&lt;/td&gt;&lt;/tr&gt;
+  &lt;/table&gt;
+&lt;script&gt;$("tr:odd").css("background-color", "#bbbbff");&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

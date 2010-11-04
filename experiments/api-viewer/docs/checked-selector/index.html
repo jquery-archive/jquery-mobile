@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>:checked Selector</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="checked1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">checked</span>  selector</h2>
+<div class="  entry-details">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/version/1.0/">1.0</a></span>jQuery(':checked')</h4>
+<p class="desc"><strong>Description: </strong>Matches all elements that are checked.</p>
+<div class="longdesc"><p>The <code>:checked</code> selector works for checkboxes and radio buttons. For select elements, use the <code>:selected</code> selector.</p></div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Finds all input elements that are checked.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  div { color:red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;form&gt;
+    &lt;input type="checkbox" name="newsletter" checked="checked" value="Hourly" /&gt;
+
+    &lt;input type="checkbox" name="newsletter" value="Daily" /&gt;
+    &lt;input type="checkbox" name="newsletter" value="Weekly" /&gt;
+
+    &lt;input type="checkbox" name="newsletter" checked="checked" value="Monthly" /&gt;
+    &lt;input type="checkbox" name="newsletter" value="Yearly" /&gt;
+
+  &lt;/form&gt;
+  &lt;div&gt;&lt;/div&gt;
+&lt;script&gt;
+
+    function countChecked() {
+      var n = $("input:checked").length;
+      $("div").text(n + (n &lt;= 1 ? " is" : " are") + " checked!");
+    }
+    countChecked();
+    $(":checkbox").click(countChecked);
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+<h4>Result:</h4>
+<pre><code class="results">&lt;input type="checkbox" name="newsletter" checked="checked" value="Daily" /&gt;,
+  &lt;input type="checkbox" name="newsletter" checked="checked" value="Monthly" /&gt; ]</code></pre>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

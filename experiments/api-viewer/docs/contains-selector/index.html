@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>:contains() Selector</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="contains1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">contains</span>  selector</h2>
+<div class="  entry-details">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/version/1.1.4/">1.1.4</a></span>jQuery(':contains(text)')</h4>
+<p class="desc"><strong>Description: </strong>Select all elements that contain the specified text.</p>
+<div class="longdesc"><p>The matching text can appear directly within the selected element, in any of that element's descendants, or a combination thereof. As with attribute value selectors, text inside the parentheses of <code>:contains()</code> can be written as bare words or surrounded by quotation marks. The text must have matching case to be selected.</p></div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Finds all divs containing "John" and underlines them.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	
+&lt;div&gt;John Resig&lt;/div&gt;
+
+&lt;div&gt;George Martin&lt;/div&gt;
+&lt;div&gt;Malcom John Sinclair&lt;/div&gt;
+&lt;div&gt;J. Ohn&lt;/div&gt;
+      
+    
+&lt;script&gt;
+$("div:contains('John')").css("text-decoration", "underline");
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

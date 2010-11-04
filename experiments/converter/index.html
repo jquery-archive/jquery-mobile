@@ -1,0 +1,119 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+	<meta charset="utf-8" />
+	<title>jQuery Mobile Framework - Converter Demo Application</title> 
+	<link rel="stylesheet"  href="../../themes/default/default.css" />
+	<link rel="stylesheet"  href="converter.css" /> 
+	<script type="text/javascript" src="../../js/all.min.js"></script>
+	
+</head> 
+<body> 
+
+<div data-role="page" id="start" data-theme="a">
+	
+	<script type="text/javascript" src="jquery.tmpl.js"></script>
+	<script type="text/javascript" src="storage.js"></script>
+	<script type="text/javascript" src="application.js"></script>
+	<style>
+		.field { padding: 15px; }
+	</style>
+	<script id="conversion-field" type="text/x-jquery-tmpl">
+	    <li>
+	    	<p class="currency-from">${$item.symbols[from]} <span class="unit">${from}</span></p>
+			<p class="currency-to ui-li-aside">${$item.symbols[to]} <span id="${from}${to}" class="rate">NaN</span> <span class="unit">${to}</span></p>
+		</li>
+	</script>
+	<script id="conversion-edit-field" type="text/x-jquery-tmpl">
+	    <li>
+			<label for="${from}${to}" class="ui-input-text conversion-${type}" title="From ${from} to ${to}">${$item.symbols[from]} to ${$item.symbols[to]}</label>
+			<a href="#" class="deletebutton ui-aux">Delete</a>
+		</li>
+	</script>
+	
+	<div data-role="header" data-theme="e">
+		<a href="#customize" data-rel="dialog" data-transition="pop" data-icon="gear" class="ui-btn-right">Edit</a>
+		<h1>Currency converter</h1>
+	</div>
+	<div class="ui-bar ui-bar-a">
+			<form method="get" action="" data-role="autoform" id="curr-form">
+				<label for="term" data-role="nojs">Search:</label>
+				<input type="search" name="term" id="term" placeholder="Type a value..." value="25" />
+			</form>
+	</div>
+	<div data-role="content">
+		<ul id="conversions" data-role="listview" data-theme="a">
+			<li>
+				<p class="currency-from">$ <span class="unit">USD</span></p>
+				<p class="currency-to ui-li-aside">&euro; <span id="USDEUR" class="rate">NaN</span> <span class="unit">EUR</span></p>
+			</li>
+			<li><p class="currency-from">$ <span class="unit">USD</span></p>
+				<p class="currency-to ui-li-aside">&pound; 22.34 <span class="unit">GBP</span></p>
+			</li>
+			<li><p class="currency-from">$ <span class="unit">USD</span></p>
+				<p class="currency-to ui-li-aside">&yen; 22.34 <span class="unit">JPY</span></p>
+			</li>
+			<li><p class="currency-from">&euro; <span class="unit">EUR</span></p>
+				<p class="currency-to ui-li-aside">$ 22.34 <span class="unit">USD</span></p>
+			</li>
+			<li><p class="currency-from">&yen; <span class="unit">EUR</span></p>
+				<p class="currency-to ui-li-aside">$ 22.34 <span class="unit">JPY</span></p>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<div data-role="page" id="customize" class="ui-body-b">
+	
+	<div data-role="header" data-theme="b" data-nobackbtn="true">
+		<h1>Edit conversions</h1>
+		<a href="#start" data-transition="fade" data-theme="b" data-icon="check" class="ui-btn-right">Done</a>
+	</div>
+	
+	<div data-role="content">
+		<ul data-role="listview" data-theme="c" data-inset="true">
+			<li><a href="#add-currency-dialog">$ <span class="unit">USD</span> to &euro; <span class="unit">EUR</span><a href="remove" data-icon="delete" data-iconpos="notext">Remove</a></li>
+			<li><a href="#add-currency-dialog">$ <span class="unit">USD</span> to &euro; <span class="unit">EUR</span><a href="remove" data-icon="delete" data-iconpos="notext">Remove</a></li>
+			<li><a href="#add-currency-dialog">$ <span class="unit">USD</span> to &euro; <span class="unit">EUR</span><a href="remove" data-icon="delete" data-iconpos="notext">Remove</a></li>
+			<li><a href="#add-currency-dialog">$ <span class="unit">USD</span> to &euro; <span class="unit">EUR</span><a href="remove" data-icon="delete" data-iconpos="notext">Remove</a></li>
+			<li><a href="#add-currency-dialog" class="add-row">Add new...</a></li>
+		</ul>
+	</div>
+	<div class="ui-body">
+		<a id="restore" href="#" data-role="button" data-theme="c">Restore defaults</a>
+	</div>
+</div>
+
+<div data-role="page" id="add-currency-dialog" class="ui-body-b">
+	<div data-role="header" data-theme="a">
+		<h1>Add new</h1>
+		<a href="#customize" class="ui-back" data-icon="arrow-l">Cancel</a>
+	</div>
+	
+	<div data-role="content">
+		<h2>Select currencies to convert:</h2>
+		<div data-role="fieldcontain">
+			<label for="currency-options-from">From</label>
+			<select name="currency-options" id="currency-options-from" data-theme="c">
+				<option value="EUR">EUR to Euro</option>
+				<option value="USD">USD to US Dollar</option>
+				<option value="GBP">GBP to Great Britain Pound</option>
+			</select>
+		</div>
+		<div data-role="fieldcontain">
+			<label for="currency-options-to">To</label>
+			<select name="currency-options" id="currency-options-to" data-theme="c">
+				<option value="EUR">EUR to Euro</option>
+				<option value="USD">USD to US Dollar</option>
+				<option value="GBP">GBP to Great Britain Pound</option>
+			</select>
+		</div>
+		<div data-role="fieldcontain">
+		<a id="add" href="#customize" data-role="button" data-theme="c" data-inline="true">Cancel</a>
+		<a id="add" href="#customize" data-role="button" data-theme="b" data-inline="true">Add conversion</a>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>jQuery.fx.off</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="jQuery.fx.off1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">jQuery.fx.off</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#Boolean">Boolean</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Globally disable all animations.</p>
+<ul class="signatures"><li class="signature" id="jQuery.fx.off"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.3/">1.3</a></span>jQuery.fx.off</h4></li></ul>
+<div class="longdesc">
+<p>When this property is set to <code>true</code>, all animation methods will immediately set elements to their final state when called, rather than displaying an effect. This may be desirable for a couple reasons:</p>
+<ul>
+<li>jQuery is being used on a low-resource device.</li>
+    <li>Users are encountering accessibility problems with the animations (see the article <a href="http://www.jdeegan.phlegethon.org/turn_off_animation.html">Turn Off Animation</a> for more information).</li>
+    </ul>
+<p>Animations can be turned back on by setting the property to <code>false</code>.</p>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Toggle animation on and off</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+    div { width:50px; height:30px; margin:5px; float:left;
+          background:green; }
+    &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;&lt;input type="button" value="Run"/&gt; &lt;button&gt;Toggle fx&lt;/button&gt;&lt;/p&gt;
+&lt;div&gt;&lt;/div&gt;
+&lt;script&gt;
+var toggleFx = function() {
+  $.fx.off = !$.fx.off;
+};
+toggleFx();
+
+$("button").click(toggleFx)
+
+$("input").click(function(){
+  $("div").toggle("slow");
+});
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

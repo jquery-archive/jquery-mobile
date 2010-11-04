@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>Child Selector (“parent &gt; child”)</h1>
+  				<div class="entry-meta">Categories:
+  					<span class="category"><a href="http://api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="http://api.jquery.com/category/selectors/hierarchy-selectors/" title="View all posts in Hierarchy">Hierarchy</a></span>  
+    
+  				</div>
+</div>
+<div data-role="content" data-theme="c" id="child1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">child</span>  selector</h2>
+<div class="  entry-details">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/version/1.0/">1.0</a></span>jQuery('parent &gt; child')</h4>
+<ul class="signatures"><li><dl class="arguments">
+<dt>parent</dt>
+<dd>Any valid selector.</dd>
+<dt>child</dt>
+<dd>A selector to filter the child elements.</dd>
+</dl></li></ul>
+<p class="desc"><strong>Description: </strong>Selects all direct child elements specified by "child" of elements specified by "parent".</p>
+<div class="longdesc">
+<p>As a CSS selector, the child combinator is supported by all modern web browsers including Safari, Firefox, Opera, Chrome, and Internet Explorer 7 and above, but notably not by Internet Explorer versions 6 and below. However, in jQuery, this selector (along with all others) works across all supported browsers, including IE6.</p>
+<p>The child combinator (E <strong>&gt;</strong> F) can be thought of as a more specific form of the descendant combinator (E F) in that it selects only first-level descendants.</p>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Places a border around all list items that are children of &lt;ul class="topnav"&gt; .</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+body { font-size:14px; }
+&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	
+                    
+&lt;ul class="topnav"&gt;
+    &lt;li&gt;Item 1&lt;/li&gt;
+    &lt;li&gt;Item 2 
+        &lt;ul&gt;&lt;li&gt;Nested item 1&lt;/li&gt;&lt;li&gt;Nested item 2&lt;/li&gt;&lt;li&gt;Nested item 3&lt;/li&gt;&lt;/ul&gt;
+       &lt;/li&gt;
+    &lt;li&gt;Item 3&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;script&gt;$("ul.topnav &gt; li").css("border", "3px double red");&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.height()</h1>
+  				
+</div>
+
+
+<div data-role="content" data-theme="c" id="height1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.height()</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#Integer">Integer</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Get the current computed height for the first element in the set of matched elements.</p>
+<ul class="signatures"><li class="signature" id="height"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.height()</h4></li></ul>
+<div class="longdesc">
+<p>The difference between <code>.css('height')</code> and <code>.height()</code> is that the latter returns a unit-less pixel value (for example, <code>400</code>) while the former returns a value with units intact (for example, <code>400px</code>). The <code>.height()</code> method is recommended when an element's height needs to be used in a mathematical calculation.</p>
+<p class="image"><img src="http://api.jquery.com/images/0042_04_01.png"></p>
+<p>This method is also able to find the height of the window and document.</p>
+<pre>$(window).height();   // returns height of browser viewport
+$(document).height(); // returns height of HTML document</pre>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Show various heights.  Note the values are from the iframe so might be smaller than you expected.  The yellow highlight shows the iframe body.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  body { background:yellow; }
+  button { font-size:12px; margin:2px; }
+  p { width:150px; border:1px red solid; }
+  div { color:red; font-weight:bold; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;button id="getp"&gt;Get Paragraph Height&lt;/button&gt;
+  &lt;button id="getd"&gt;Get Document Height&lt;/button&gt;
+  &lt;button id="getw"&gt;Get Window Height&lt;/button&gt;
+
+  &lt;div&gt;&amp;nbsp;&lt;/div&gt;
+  &lt;p&gt;
+    Sample paragraph to test height
+  &lt;/p&gt;
+&lt;script&gt;
+    function showHeight(ele, h) {
+      $("div").text("The height for the " + ele + 
+                    " is " + h + "px.");
+    }
+    $("#getp").click(function () { 
+      showHeight("paragraph", $("p").height()); 
+    });
+    $("#getd").click(function () { 
+      showHeight("document", $(document).height()); 
+    });
+    $("#getw").click(function () { 
+      showHeight("window", $(window).height()); 
+    });
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+<div data-role="content" data-theme="c" id="height2">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.height( value )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Set the CSS height of every matched element.</p>
+<ul class="signatures">
+<li class="signature" id="height-value">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.height( value )</h4>
+<p class="arguement"><strong>value</strong>An integer representing the number of pixels, or an integer with an optional unit of measure appended (as a string).</p>
+</li>
+<li class="signature" id="height-functionindex, height">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4.1/">1.4.1</a></span>.height( function(index, height) )</h4>
+<p class="arguement"><strong>function(index, height)</strong>A function returning the height to set. Receives the index position of the element in the set and the old height as arguments.</p>
+</li>
+</ul>
+<div class="longdesc">
+<p>When calling <code>.height(value)</code>, the value can be either a string (number and unit) or a number. If only a number is provided for the value, jQuery assumes a pixel unit. If a string is provided, however, any valid CSS measurement may be used for the height (such as <code>100px</code>, <code>50%</code>, or <code>auto</code>). Note that in modern browsers, the CSS height property does not include padding, border, or margin.</p>
+<p>If no explicit unit was specified (like 'em' or '%') then "px" is concatenated to the value.</p>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">To set the height of each div on click to 30px plus a color change.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;div { width:50px; height:70px; float:left; margin:5px;
+        background:rgb(255,140,0); cursor:pointer; }  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;/div&gt;
+
+  &lt;div&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;/div&gt;
+&lt;script&gt;$("div").one('click', function () {
+      $(this).height(30)
+             .css({cursor:"auto", backgroundColor:"green"});
+    });&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+
+				</div>
+
+</body></html>

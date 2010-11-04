@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.slideToggle()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="slideToggle1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.slideToggle( [ duration ], [ callback ] )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Display or hide the matched elements with a sliding motion.</p>
+<ul class="signatures"><li class="signature" id="slideToggle-duration-callback">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.slideToggle( [ duration ], [ callback ] )</h4>
+<p class="arguement"><strong>duration</strong>A string or number determining how long the animation will run.</p>
+<p class="arguement"><strong>callback</strong>A function to call once the animation is complete.</p>
+</li></ul>
+<div class="longdesc">
+<p>The <code>.slideToggle()</code> method animates the height of the matched elements. This causes lower parts of the page to slide up or down, appearing to reveal or conceal the items. If the element is initially displayed, it will be hidden; if hidden, it will be shown. The <code>display</code> property is saved and restored as needed. If an element has a <code>display</code> value of <code>inline</code>, then is hidden and shown, it will once again be displayed <code>inline</code>. When the height reaches 0 after a hiding animation, the <code>display</code> style property is set to <code>none</code> to ensure that the element no longer affects the layout of the page.</p>
+<p>Durations are given in milliseconds; higher values indicate slower animations, not faster ones. The strings <code>'fast'</code> and <code>'slow'</code> can be supplied to indicate durations of <code>200</code> and <code>600</code> milliseconds, respectively.</p>
+<p>If supplied, the callback is fired once the animation is complete. This can be useful for stringing different animations together in sequence. The callback is not sent any arguments, but <code>this</code> is set to the DOM element being animated. If multiple elements are animated, it is important to note that the callback is executed once per matched element, not once for the animation as a whole.</p>
+<p>We can animate any element, such as a simple image:</p>
+<pre>&lt;div id="clickme"&gt;
+  Click here
+&lt;/div&gt;
+&lt;img id="book" src="book.png" alt="" width="100" height="123" /&gt;</pre>
+<p>We will cause <code>.slideToggle()</code> to be called when another element is clicked:</p>
+<pre>$('#clickme').click(function() {
+  $('#book').slideToggle('slow', function() {
+    // Animation complete.
+  });
+});
+</pre>
+<p>With the element initially shown, we can hide it slowly with the first click:</p>
+<p class="image four-across"> 
+    <img src="http://api.jquery.com/images/0042_06_25.png" alt=""><img src="http://api.jquery.com/images/0042_06_26.png" alt=""><img src="http://api.jquery.com/images/0042_06_27.png" alt=""><img src="http://api.jquery.com/images/0042_06_28.png" alt=""></p>
+<p>A second click will show the element once again:</p>
+<p class="image four-across"> 
+    <img src="http://api.jquery.com/images/0042_06_29.png" alt=""><img src="http://api.jquery.com/images/0042_06_30.png" alt=""><img src="http://api.jquery.com/images/0042_06_31.png" alt=""><img src="http://api.jquery.com/images/0042_06_32.png" alt=""></p>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Animates all paragraphs to slide up or down, completing the animation within 600 milliseconds.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  p { width:400px; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;button&gt;Toggle&lt;/button&gt;
+
+  &lt;p&gt;
+    This is the paragraph to end all paragraphs.  You
+    should feel &lt;em&gt;lucky&lt;/em&gt; to have seen such a paragraph in
+    your life.  Congratulations!
+  &lt;/p&gt;
+&lt;script&gt;
+    $("button").click(function () {
+      $("p").slideToggle("slow");
+    });
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Animates divs between dividers with a toggle that makes some appear and some disappear.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  div { background:#b977d1; margin:3px; width:60px; 
+        height:60px; float:left; }
+  div.still { background:#345; width:5px; }
+  div.hider { display:none; }
+  span { color:red; }
+  p { clear: left; }&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div&gt;&lt;/div&gt;
+&lt;div class="still"&gt;&lt;/div&gt;
+&lt;div style="display:none;"&gt;
+&lt;/div&gt;&lt;div class="still"&gt;&lt;/div&gt;
+&lt;div&gt;&lt;/div&gt;
+&lt;div class="still"&gt;&lt;/div&gt;
+&lt;div class="hider"&gt;&lt;/div&gt;
+&lt;div class="still"&gt;&lt;/div&gt;
+&lt;div class="hider"&gt;&lt;/div&gt;
+&lt;div class="still"&gt;&lt;/div&gt;
+&lt;div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;button id="aa"&gt;Toggle&lt;/button&gt; There have been &lt;span&gt;0&lt;/span&gt; toggled divs.&lt;/p&gt;
+&lt;script&gt;
+  $("#aa").click(function () {
+    $("div:not(.still)").slideToggle("slow", function () {
+      var n = parseInt($("span").text(), 10);
+      $("span").text(n + 1);
+    });
+  });
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

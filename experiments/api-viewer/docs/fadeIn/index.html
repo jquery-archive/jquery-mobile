@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.fadeIn()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="fadeIn1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.fadeIn( [ duration ], [ callback ] )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Display the matched elements by fading them to opaque.</p>
+<ul class="signatures"><li class="signature" id="fadeIn-duration-callback">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.fadeIn( [ duration ], [ callback ] )</h4>
+<p class="arguement"><strong>duration</strong>A string or number determining how long the animation will run.</p>
+<p class="arguement"><strong>callback</strong>A function to call once the animation is complete.</p>
+</li></ul>
+<div class="longdesc">
+<p>The <code>.fadeIn()</code> method animates the opacity of the matched elements.</p>
+<p>Durations are given in milliseconds; higher values indicate slower animations, not faster ones. The strings <code>'fast'</code> and <code>'slow'</code> can be supplied to indicate durations of <code>200</code> and <code>600</code> milliseconds, respectively. If any other string is supplied, or if the <code>duration</code> parameter is omitted, the default duration of  <code>400</code> milliseconds is used.</p>
+<p>If supplied, the callback is fired once the animation is complete. This can be useful for stringing different animations together in sequence. The callback is not sent any arguments, but <code>this</code> is set to the DOM element being animated. If multiple elements are animated, it is important to note that the callback is executed once per matched element, not once for the animation as a whole.</p>
+<p>We can animate any element, such as a simple image:</p>
+<pre>&lt;div id="clickme"&gt;
+      Click here
+    &lt;/div&gt;
+    &lt;img id="book" src="book.png" alt="" width="100" height="123" /&gt;
+    With the element initially hidden, we can show it slowly:
+    $('#clickme').click(function() {
+      $('#book').fadeIn('slow', function() {
+        // Animation complete
+      });
+    });</pre>
+<p class="image four-across">
+      <img src="http://api.jquery.com/images/0042_06_33.png" alt=""><img src="http://api.jquery.com/images/0042_06_34.png" alt=""><img src="http://api.jquery.com/images/0042_06_35.png" alt=""><img src="http://api.jquery.com/images/0042_06_36.png" alt=""></p>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Animates hidden divs to fade in one by one, completing each animation within 600 milliseconds.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+    span { color:red; cursor:pointer; }
+    div { margin:3px; width:80px; display:none;
+      height:80px; float:left; }
+      div#one { background:#f00; }
+      div#two { background:#0f0; }
+      div#three { background:#00f; }
+    &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;span&gt;Click here...&lt;/span&gt;
+
+    &lt;div id="one"&gt;&lt;/div&gt;
+    &lt;div id="two"&gt;&lt;/div&gt;
+    &lt;div id="three"&gt;&lt;/div&gt;
+&lt;script&gt;
+      $(document.body).click(function () {
+        $("div:hidden:first").fadeIn("slow");
+      });
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Fades a red block in over the text. Once the animation is done, it quickly fades in more text on top.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+      p { position:relative; width:400px; height:90px; }
+      div { position:absolute; width:400px; height:65px; 
+        font-size:36px; text-align:center; 
+        color:yellow; background:red;
+        padding-top:25px; 
+        top:0; left:0; display:none; }
+        span { display:none; }
+      &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;
+        Let it be known that the party of the first part
+        and the party of the second part are henceforth
+        and hereto directed to assess the allegations
+        for factual correctness... (&lt;a href="#"&gt;click!&lt;/a&gt;)
+        &lt;div&gt;&lt;span&gt;CENSORED!&lt;/span&gt;&lt;/div&gt;
+
+      &lt;/p&gt;
+&lt;script&gt;
+        $("a").click(function () {
+          $("div").fadeIn(3000, function () {
+            $("span").fadeIn(100);
+          });
+          return false;
+        }); 
+
+      &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

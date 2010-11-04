@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.map()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="map1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.map( callback(index, domElement) )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Pass each element in the current matched set through a function, producing a new jQuery object containing the return values.</p>
+<ul class="signatures"><li class="signature" id="map-callbackindex, domElement">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.2/">1.2</a></span>.map( callback(index, domElement) )</h4>
+<p class="arguement"><strong>callback(index, domElement)</strong>A function object that will be invoked for each element in the current set.</p>
+</li></ul>
+<div class="longdesc">
+<p>The <code>.map()</code> method is particularly useful for getting or setting the value of a collection of elements. Consider a form with a set of checkboxes in it:</p>
+<pre>
+&lt;form method="post" action=""&gt;
+  &lt;fieldset&gt;
+    &lt;div&gt;
+      &lt;label for="two"&gt;2&lt;/label&gt;
+      &lt;input type="checkbox" value="2" id="two" name="number[]"&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;label for="four"&gt;4&lt;/label&gt;
+      &lt;input type="checkbox" value="4" id="four" name="number[]"&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;label for="six"&gt;6&lt;/label&gt;
+      &lt;input type="checkbox" value="6" id="six" name="number[]"&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;label for="eight"&gt;8&lt;/label&gt;
+      &lt;input type="checkbox" value="8" id="eight" name="number[]"&gt;
+    &lt;/div&gt;
+  &lt;/fieldset&gt;
+&lt;/form&gt;
+</pre>
+<p>We can get a comma-separated list of checkbox <code>ID</code>s:</p>
+<pre>$(':checkbox').map(function() {
+  return this.id;
+}).get().join(',');</pre>
+<p>The result of this call is the string, <code>"two,four,six,eight"</code>.</p>
+<p>Within the callback function, <code>this</code> refers to the current DOM element for each iteration.</p>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Build a list of all the values within a form.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  p { color:red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;&lt;b&gt;Values: &lt;/b&gt;&lt;/p&gt;
+  &lt;form&gt;
+    &lt;input type="text" name="name" value="John"/&gt;
+
+    &lt;input type="text" name="password" value="password"/&gt;
+    &lt;input type="text" name="url" value="http://ejohn.org/"/&gt;
+
+  &lt;/form&gt;
+&lt;script&gt;
+    $("p").append( $("input").map(function(){
+      return $(this).val();
+    }).get().join(", ") );
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">A contrived example to show some functionality.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  body { font-size:16px; }
+  ul { float:left; margin:0 30px; color:blue; }
+  #results { color:red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;ul&gt;
+    &lt;li&gt;First&lt;/li&gt;
+    &lt;li&gt;Second&lt;/li&gt;
+    &lt;li&gt;Third&lt;/li&gt;
+
+    &lt;li&gt;Fourth&lt;/li&gt;
+    &lt;li&gt;Fifth&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;ul id="results"&gt;
+
+  &lt;/ul&gt;
+&lt;script&gt;
+    var mappedItems = $("li").map(function (index) {
+      var replacement = $("&lt;li&gt;").text($(this).text()).get(0);
+      if (index == 0) {
+        // make the first item all caps
+        $(replacement).text($(replacement).text().toUpperCase());
+      } else if (index == 1 || index == 3) {
+        // delete the second and fourth items
+        replacement = null;
+      } else if (index == 2) {
+        // make two of the third item and add some text
+        replacement = [replacement,$("&lt;li&gt;").get(0)];
+        $(replacement[0]).append("&lt;b&gt; - A&lt;/b&gt;");
+        $(replacement[1]).append("Extra &lt;b&gt; - B&lt;/b&gt;");
+      }
+
+      // replacement will be an dom element, null, 
+      // or an array of dom elements
+      return replacement;
+    });
+    $("#results").append(mappedItems);
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">Equalize the heights of the divs.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+div { width: 40px; float:left; }
+input { clear:left}
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	
+
+&lt;input type="button" value="equalize div heights"&gt;
+
+&lt;div style="background:red; height: 40px; "&gt;&lt;/div&gt;
+&lt;div style="background:green; height: 70px;"&gt;&lt;/div&gt;
+&lt;div style="background:blue; height: 50px; "&gt;&lt;/div&gt;
+
+
+&lt;script&gt;
+$.fn.equalizeHeights = function(){
+  return this.height( Math.max.apply(this, $(this).map(function(i,e){ return $(e).height() }).get() ) )
+}
+$('input').click(function(){
+  $('div').equalizeHeights();
+});
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+	<meta charset="utf-8" /> 
+	<title>jQuery Mobile Docs - Forms</title> 
+	<link rel="stylesheet"  href="../../themes/default/default.css" /> 
+	<script type="text/javascript" src="../../js.all.min.js"></script>
+</head> 
+<body> 
+
+<div data-role="page" data-theme="c">
+
+	<div data-role="header">
+		<h1>Forms</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+			
+			<h2>Form submission</h2>
+
+			<p>In jQuery Mobile, form submissions are automatically handled using Ajax whenever possible, creating a smooth transition between the form and the result page. To ensure your form submits as intended, be sure to specify <code>action</code> and <code>method</code> properties on your form element.</p>
+			<p>This page demonstrates automated ajax handling of form submissions. The form below is configured to send regular a <code>get</code> request to <code>forms-sample-response.php</code>. On submit, jQuery Mobile will make sure that the Url specified is able to be retrieved via Ajax, and handle it appropriately. Keep in mind that just like ordinary HTTP form submissions, jQuery Mobile allows <code>get</code> result pages to be bookmarked by updating the Url hash when the response returns successfully. Also like ordinary form submissions, <code>post</code> requests do not contain query parameters in the hash, so they are not bookmarkable.</p>
+			<form action="forms-sample-response.php" method="get">
+				<fieldset>
+					<div data-role="fieldcontain">
+						<label for="shipping" class="select">Choose shipping method:</label>
+						<select name="shipping" id="shipping">
+							<option value="Standard shipping">Standard: 7 day</option>
+							<option value="Rush shipping">Rush: 3 days</option>
+							<option value="Express shipping">Express: next day</option>
+							<option value="Overnight shipping">Overnight</option>
+						</select>
+					</div>
+					
+					<button type="submit" data-theme="a">Submit</button>
+				</fieldset>
+			</form>
+
+	
+	</div><!-- /content -->
+</div><!-- /page -->
+
+</body>
+</html>

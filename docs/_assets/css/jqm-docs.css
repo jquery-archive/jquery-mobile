@@ -1,0 +1,6 @@
+.ui-mobile #jqm-home {  background: #e5e5e5 url(../images/jqm-sitebg.png) top center repeat-x; }
+.ui-mobile #jqm-homeheader { padding: 55px 25px 0; text-align: center }
+.ui-mobile #jqm-homeheader h1 { margin: 0 0 10px; }
+.ui-mobile #jqm-homeheader p { margin: 0; }
+.ui-mobile #jqm-version { text-indent: -99999px; background: url(../images/version.png) top right no-repeat; width: 119px; height: 122px; overflow: hidden; position: absolute; top: 0; right: 0; }
+.ui-mobile .jqm-themeswitcher { clear: both; margin: 20px 0 -15px; }

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.eq()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="eq1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.eq( index )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Reduce the set of matched elements to the one at the specified index.</p>
+<ul class="signatures">
+<li class="signature" id="eq-index">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.1.2/">1.1.2</a></span>.eq( index )</h4>
+<p class="arguement"><strong>index</strong>An integer indicating the 0-based position of the element. </p>
+</li>
+<li class="signature" id="eq--index">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4/">1.4</a></span>.eq( -index )</h4>
+<p class="arguement"><strong>-index</strong>An integer indicating the position of the element, counting backwards  from the last element in the set. </p>
+</li>
+</ul>
+<div class="longdesc">
+<p>Given a jQuery object that represents a set of DOM elements, the <code>.eq()</code> method constructs a new jQuery object from one of the matching elements. The supplied index identifies the position of this element in the set.</p>
+<p>Consider a page with a simple list on it:</p>
+<pre>
+  &lt;ul&gt;
+    &lt;li&gt;list item 1&lt;/li&gt;
+    &lt;li&gt;list item 2&lt;/li&gt;
+    &lt;li&gt;list item 3&lt;/li&gt;
+    &lt;li&gt;list item 4&lt;/li&gt;
+    &lt;li&gt;list item 5&lt;/li&gt;
+  &lt;/ul&gt;
+</pre>
+<p>We can apply this method to the set of list items:</p>
+<pre>
+  $('li').eq(2).css('background-color', 'red');
+</pre>
+<p>The result of this call is a red background for item 3. Note that the supplied index is zero-based, and refers to the position of the element within the jQuery object, not within the DOM tree.</p>
+<p>If a negative number is provided, this indicates a position starting from the end of the set, rather than the beginning. For example:</p>
+<pre>
+  $('li').eq(-2).css('background-color', 'red');
+</pre>
+<p>This time list item 4 is turned red, since it is two from the end of the set.</p>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Turn the div with index 2 blue by adding an appropriate class.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  div { width:60px; height:60px; margin:10px; float:left;
+        border:2px solid blue; }
+  .blue { background:blue; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;/div&gt;
+
+  &lt;div&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;/div&gt;
+&lt;script&gt;
+
+    $("div").eq(2).addClass("blue");
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

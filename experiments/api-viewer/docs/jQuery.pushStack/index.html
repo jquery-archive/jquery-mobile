@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>jQuery.pushStack()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="jQuery.pushStack1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">jQuery.pushStack( elements )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Add a collection of DOM elements onto the jQuery stack.</p>
+<ul class="signatures">
+<li class="signature" id="jQuery.pushStack-elements">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>jQuery.pushStack( elements )</h4>
+<p class="arguement"><strong>elements</strong>An array of elements to push onto the stack and make into a new jQuery object.</p>
+</li>
+<li class="signature" id="jQuery.pushStack-elements-name-arguments">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.3/">1.3</a></span>jQuery.pushStack( elements, name, arguments )</h4>
+<p class="arguement"><strong>elements</strong>An array of elements to push onto the stack and make into a new jQuery object.</p>
+<p class="arguement"><strong>name</strong>The name of a jQuery method that generated the array of elements.</p>
+<p class="arguement"><strong>arguments</strong>The arguments that were passed in to the jQuery method (for serialization).</p>
+</li>
+</ul>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Add some elements onto the jQuery stack, then pop back off again.</span></h4>
+<pre><code class="example">jQuery([])
+    .pushStack( document.getElementsByTagName("div") )
+        .remove()
+    .end();</code></pre>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

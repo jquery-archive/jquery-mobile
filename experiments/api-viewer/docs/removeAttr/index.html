@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.removeAttr()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="removeAttr1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.removeAttr( attributeName )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Remove an attribute from each element in the set of matched elements.</p>
+<ul class="signatures"><li class="signature" id="removeAttr-attributeName">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.removeAttr( attributeName )</h4>
+<p class="arguement"><strong>attributeName</strong>An attribute to remove.</p>
+</li></ul>
+<div class="longdesc"><p>The <code>.removeAttr()</code> method uses the JavaScript <code>removeAttribute()</code> function, but it has the advantage of being able to be called directly on a jQuery object and it accounts for different attribute naming across browsers.</p></div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Clicking the button enables the input next to it.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;button&gt;Enable&lt;/button&gt;
+&lt;input type="text" disabled="disabled" value="can't edit this" /&gt;
+&lt;script&gt;
+$("button").click(function () {
+  $(this).next().removeAttr("disabled")
+  .focus()
+  .val("editable now");
+});
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

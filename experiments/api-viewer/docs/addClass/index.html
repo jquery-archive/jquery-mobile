@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.addClass()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="addClass1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.addClass( className )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Adds the specified class(es) to each of the set of matched elements.</p>
+<ul class="signatures">
+<li class="signature" id="addClass-className">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.addClass( className )</h4>
+<p class="arguement"><strong>className</strong>One or more class names to be added to the class attribute of each matched element.</p>
+</li>
+<li class="signature" id="addClass-functionindex, class">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4/">1.4</a></span>.addClass( function(index, class) )</h4>
+<p class="arguement"><strong>function(index, class)</strong>A function returning one or more space-separated class names to be added. Receives the index position of the element in the set and the old class value as arguments.</p>
+</li>
+</ul>
+<div class="longdesc">
+<p>It's important to note that this method does not replace a class. It simply adds the class, appending it to any which may already be assigned to the elements.</p>
+<p>More than one class may be added at a time, separated by a space, to the set of matched elements, like so:</p>
+<pre>$('p').addClass('myClass yourClass');</pre>
+<p>This method is often used with <code>.removeClass()</code> to switch elements' classes from one to another, like so:</p>
+<pre>$('p').removeClass('myClass noClass').addClass('yourClass');</pre>
+<p>Here, the <code>myClass</code> and <code>noClass</code> classes are removed from all paragraphs, while <code>yourClass</code> is added.</p>
+<p>As of jQuery 1.4, the <code>.addClass()</code> method allows us to set the class name by passing in a function.</p>
+<pre>$('ul li:last').addClass(function() {
+  return 'item-' + $(this).index();
+});</pre>
+<p>Given an unordered list with five <code>&lt;li&gt;</code> elements, this example adds the class "item-4" to the last <code>&lt;li&gt;</code>.</p>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Adds the class 'selected' to the matched elements.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+
+  p { margin: 8px; font-size:16px; }
+  .selected { color:blue; }
+  .highlight { background:yellow; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;Hello&lt;/p&gt;
+  &lt;p&gt;and&lt;/p&gt;
+  &lt;p&gt;Goodbye&lt;/p&gt;
+&lt;script&gt;$("p:last").addClass("selected");&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Adds the classes 'selected' and 'highlight' to the matched elements.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+
+  p { margin: 8px; font-size:16px; }
+  .selected { color:red; }
+  .highlight { background:yellow; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;Hello&lt;/p&gt;
+  &lt;p&gt;and&lt;/p&gt;
+  &lt;p&gt;Goodbye&lt;/p&gt;
+&lt;script&gt;$("p:last").addClass("selected highlight");&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

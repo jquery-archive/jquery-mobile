@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.undelegate()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="undelegate1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.undelegate(  )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Remove a handler from the event for all elements which match the current selector, now or in the future, based upon a specific set of root elements.</p>
+<ul class="signatures">
+<li class="signature" id="undelegate"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4.2/">1.4.2</a></span>.undelegate()</h4></li>
+<li class="signature" id="undelegate-selector-eventType">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4.2/">1.4.2</a></span>.undelegate( selector, eventType )</h4>
+<p class="arguement"><strong>selector</strong>A selector which will be used to filter the event results.</p>
+<p class="arguement"><strong>eventType</strong>A string containing a JavaScript event type, such as "click" or "keydown"</p>
+</li>
+<li class="signature" id="undelegate-selector-eventType-handler">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4.2/">1.4.2</a></span>.undelegate( selector, eventType, handler )</h4>
+<p class="arguement"><strong>selector</strong>A selector which will be used to filter the event results.</p>
+<p class="arguement"><strong>eventType</strong>A string containing a JavaScript event type, such as "click" or "keydown"</p>
+<p class="arguement"><strong>handler</strong>A function to execute at the time the event is triggered.</p>
+</li>
+</ul>
+<div class="longdesc"><p>Undelegate is a way of removing event handlers that have been bound using <a href="/delegate">.delegate()</a>. It works virtually identically to <a href="/die">.die()</a> with the addition of a selector filter argument (which is required for delegation to work).</p></div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Can bind and unbind events to the colored button.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+button { margin:5px; }
+button#theone { color:red; background:yellow; }
+&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;button id="theone"&gt;Does nothing...&lt;/button&gt;
+&lt;button id="bind"&gt;Bind Click&lt;/button&gt;
+&lt;button id="unbind"&gt;Unbind Click&lt;/button&gt;
+&lt;div style="display:none;"&gt;Click!&lt;/div&gt;
+&lt;script&gt;
+function aClick() {
+  $("div").show().fadeOut("slow");
+}
+$("#bind").click(function () {
+  $("body").delegate("#theone", "click", aClick)
+    .find("#theone").text("Can Click!");
+});
+$("#unbind").click(function () {
+  $("body").undelegate("#theone", "click", aClick)
+    .find("#theone").text("Does nothing...");
+});
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">To unbind all delegated events from all paragraphs, write:</span>
+</h4>
+<pre><code class="example">$("p").undelegate()</code></pre>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">To unbind all delegated click events from all paragraphs, write:</span>
+</h4>
+<pre><code class="example">$("p").undelegate( "click" )</code></pre>
+</div>
+<div id="example-3">
+<h4>Example: <span class="desc">To undelegate just one previously bound handler, pass the function in as the third argument:</span>
+</h4>
+<pre><code class="example">var foo = function () {
+// code to handle some kind of event
+};
+
+$("body").delegate("p", "click", foo); // ... now foo will be called when paragraphs are clicked ...
+
+$("body").undelegate("p", "click", foo); // ... foo will no longer be called.</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

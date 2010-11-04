@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div class="ui-page">
+        <div data-role="header">
+				<h1>.animate()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="animate1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.animate( properties, [ duration ], [ easing ], [ callback ] )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Perform a custom animation of a set of CSS properties.</p>
+<ul class="signatures">
+<li class="signature" id="animate-properties-duration-easing-callback">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.animate( properties, [ duration ], [ easing ], [ callback ] )</h4>
+<p class="arguement"><strong>properties</strong>A map of CSS properties that the animation will move toward.</p>
+<p class="arguement"><strong>duration</strong>A string or number determining how long the animation will run.</p>
+<p class="arguement"><strong>easing</strong>A string indicating which easing function to use for the transition.</p>
+<p class="arguement"><strong>callback</strong>A function to call once the animation is complete.</p>
+</li>
+<li class="signature" id="animate-properties-options">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.animate( properties, options )</h4>
+<p class="arguement"><strong>properties</strong>A map of CSS properties that the animation will move toward.</p>
+<p class="arguement"><strong>options</strong>A map of additional options to pass to the method. Supported keys:
+        </p>
+<ul>
+<li>
+<code>duration</code>: A string or number determining how long the animation will run.</li>
+        <li>
+<code>easing</code>: A string indicating which easing function to use for the transition.</li>
+        <li>
+<code>complete</code>: A function to call once the animation is complete.</li>
+        <li>
+<code>step</code>: A function to be called after each step of the animation.</li>
+        <li>
+<code>queue</code>: A Boolean indicating whether to place the animation in the effects queue. If <code>false</code>, the animation will begin immediately.</li>
+        <li>
+<code>specialEasing</code>: A map of one or more of the CSS properties defined by the properties argument and their corresponding easing functions (added 1.4).</li>
+        </ul>
+</li>
+</ul>
+<div class="longdesc">
+<p>The <code>.animate()</code> method allows us to create animation effects on any numeric CSS property. The only required parameter is a map of CSS properties. This map is similar to the one that can be sent to the <code>.css()</code> method, except that the range of properties is more restrictive.</p>
+<p>All animated properties should be numeric (except as noted below); properties that are non-numeric cannot be animated using basic jQuery functionality. (For example, <code>width</code>, <code>height</code>, or <code>left</code> can be animated but <code>background-color</code> cannot be.) Property values are treated as a number of pixels unless otherwise specified. The units <code>em</code> and <code>%</code> can be specified where applicable.</p>
+<p>In addition to numeric values, each property can take the strings <code>'show'</code>, <code>'hide'</code>, and <code>'toggle'</code>. These shortcuts allow for custom hiding and showing animations that take into account the display type of the element.</p>
+<p>Animated properties can also be relative. If a value is supplied with a leading <code>+=</code> or <code>-=</code> sequence of characters, then the target value is computed by adding or subtracting the given number from the current value of the property.</p>
+<h4 id="duration">Duration</h4>
+<p>Durations are given in milliseconds; higher values indicate slower animations, not faster ones. The strings <code>'fast'</code> and <code>'slow'</code> can be supplied to indicate durations of <code>200</code> and <code>600</code> milliseconds, respectively.</p>
+<h4 id="callback">Callback Function</h4>
+<p>If supplied, the callback is fired once the animation is complete. This can be useful for stringing different animations together in sequence. The callback is not sent any arguments, but <code>this</code> is set to the DOM element being animated. If multiple elements are animated, it is important to note that the callback is executed once per matched element, not once for the animation as a whole.</p>
+<p>We can animate any element, such as a simple image:</p>
+<pre>&lt;div id="clickme"&gt;
+  Click here
+&lt;/div&gt;
+&lt;img id="book" src="book.png" alt="" width="100" height="123" 
+  style="position: relative; left: 10px;" /&gt;</pre>
+<p>We can animate the opacity, left offset, and height of the image simultaneously:</p>
+<pre>$('#clickme').click(function() {
+  $('#book').animate({
+    opacity: 0.25,
+    left: '+=50',
+    height: 'toggle'
+  }, 5000, function() {
+    // Animation complete.
+  });
+});
+</pre>
+<p class="image">
+  <img src="http://api.jquery.com/images/animate-1.jpg" alt=""></p>
+<p>Note that we have specified <code>toggle</code> as the target value of the <code>height</code> property. Since the image was visible before, the animation shrinks the height to 0 to hide it. A second click then reverses this transition:
+</p>
+<p class="image"> 
+<img src="http://api.jquery.com/images/animate-2.jpg" alt=""></p>
+<p>The <code>opacity</code> of the image is already at its target value, so this property is not animated by the second click. Since we specified the target value for <code>left</code> as a relative value, the image moves even farther to the right during this second animation.</p>
+<p>The <code>position</code> attribute of the element must not be <code>static</code> if we wish to animate the <code>left</code> property as we do in the example.</p>
+<blockquote><p>The <a href="http://jqueryui.com">jQuery UI</a> project extends the <code>.animate()</code> method by allowing some non-numeric styles such as colors to be animated. The project also includes mechanisms for specifying animations through CSS classes rather than individual attributes.</p></blockquote>
+<h4 id="easing">Easing</h4>
+<p>The remaining parameter of <code>.animate()</code> is a string naming an easing function to use. An easing function specifies the speed at which the animation progresses at different points within the animation. The only easing implementations in the jQuery library are the default, called <code>swing</code>, and one that progresses at a constant pace, called <code>linear</code>. More easing functions are available with the use of plug-ins, most notably the <a href="http://jqueryui.com/">jQuery UI suite</a>.</p>
+<h4 id="per-property-easing">Per-property Easing</h4>
+<p>As of jQuery version 1.4, we can set per-property easing functions within a single <code>.animate()</code> call. In the first version of <code>.animate()</code>, each property can take an array as its value: The first member of the array is the CSS property and the second member is an easing function.  If a per-property easing function is not defined for a particular property, it uses the value of the <code>.animate()</code> method's optional easing argument. If the easing argument is not defined, the default <code>swing</code> function is used.</p>
+<p>We can, for example, simultaneously animate the width and height with the <code>swing</code> easing function and the opacity with the <code>linear</code> easing function:</p>
+<pre>$('#clickme').click(function() {
+  $('#book').animate({
+    width: ['toggle', 'swing'],
+    height: ['toggle', 'swing'],
+    opacity: 'toggle'
+  }, 5000, 'linear', function() {
+      $(this).after('&lt;div&gt;Animation complete.&lt;/div&gt;');
+  });
+});</pre>
+<p>In the second version of <code>.animate()</code>, the options map can include the <code>specialEasing</code> property, which is itself a map of CSS properties and their corresponding easing functions.  We can simultaneously animate the width using the <code>linear</code> easing function and the height using the <code>easeOutBounce</code> easing function.</p>
+<pre>$('#clickme').click(function() {
+  $('#book').animate({
+    width: 'toggle',
+    height: 'toggle'
+  }, {
+    duration: 5000, 
+    specialEasing: {
+      width: 'linear',
+      height: 'easeOutBounce'
+    }, 
+    complete: function() {
+      $(this).after('&lt;div&gt;Animation complete.&lt;/div&gt;');
+    }
+  });
+});</pre>
+<p>As previously noted, a plug-in is required for the <code>easeOutBounce</code> function.</p>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Click the button to animate the div with a number of different properties.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+div { 
+background-color:#bca; 
+width:100px; 
+border:1px solid green;
+}
+&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;button id="go"&gt;&amp;raquo; Run&lt;/button&gt;
+
+&lt;div id="block"&gt;Hello!&lt;/div&gt;
+&lt;script&gt;
+
+// Using multiple unit types within one animation.
+$("#go").click(function(){
+  $("#block").animate({ 
+    width: "70%",
+    opacity: 0.4,
+    marginLeft: "0.6in",
+    fontSize: "3em", 
+    borderWidth: "10px"
+  }, 1500 );
+});
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Shows a div animate with a relative move.  Click several times on the buttons to see the relative animations queued up.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+div { 
+position:absolute; 
+background-color:#abc; 
+left:50px;
+width:90px; 
+height:90px;
+margin:5px; 
+}
+&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;button id="left"&gt;&amp;laquo;&lt;/button&gt; &lt;button id="right"&gt;&amp;raquo;&lt;/button&gt;
+&lt;div class="block"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+$("#right").click(function(){
+  $(".block").animate({"left": "+=50px"}, "slow");
+});
+
+$("#left").click(function(){
+  $(".block").animate({"left": "-=50px"}, "slow");
+});
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">Animates all paragraphs to toggle both height and opacity, completing the animation within 600 milliseconds.</span>
+</h4>
+<pre><code class="example">$("p").animate({
+  "height": "toggle", "opacity": "toggle"
+
+}, "slow");</code></pre>
+</div>
+<div id="example-3">
+<h4>Example: <span class="desc">Animates all paragraph to a left style of 50 and opacity of 1 (opaque, visible), completing the animation within 500 milliseconds.</span>
+</h4>
+<pre><code class="example">$("p").animate({
+  "left": "50", "opacity": 1
+}, 500);
+</code></pre>
+</div>
+<div id="example-4">
+<h4>Example: <span class="desc">An example of using an 'easing' function to provide a different style of animation. This will only work if you have a plugin that provides this easing function.  Note, this code will do nothing unless the paragraph element is hidden.</span>
+</h4>
+<pre><code class="example">$("p").animate({
+  "opacity": "show"
+
+}, "slow", "easein");</code></pre>
+</div>
+<div id="example-5">
+<h4>Example: <span class="desc">The first button shows how an unqueued animation works.  It expands the div out to 90% width while the font-size is increasing. Once the font-size change is complete, the border animation will begin.
+
+The second button starts a traditional chained animation, where each animation will start once the previous animation on the element has completed.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;div { 
+  background-color:#bca; 
+  width:200px;
+  height:1.1em;
+  text-align:center;
+  border:2px solid green;
+  margin:3px;
+  font-size:14px;
+}
+button {
+  font-size:14px;
+}
+&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;button id="go1"&gt;&amp;raquo; Animate Block1&lt;/button&gt;
+&lt;button id="go2"&gt;&amp;raquo; Animate Block2&lt;/button&gt;
+&lt;button id="go3"&gt;&amp;raquo; Animate Both&lt;/button&gt;
+
+&lt;button id="go4"&gt;&amp;raquo; Reset&lt;/button&gt;
+&lt;div id="block1"&gt;Block1&lt;/div&gt;
+&lt;div id="block2"&gt;Block2&lt;/div&gt;
+&lt;script&gt;
+
+$("#go1").click(function(){
+  $("#block1").animate( { width:"90%" }, { queue:false, duration:3000 } )
+     .animate( { fontSize:"24px" }, 1500 )
+     .animate( { borderRightWidth:"15px" }, 1500);
+});
+
+$("#go2").click(function(){
+  $("#block2").animate( { width:"90%"}, 1000 )
+     .animate( { fontSize:"24px" } , 1000 )
+     .animate( { borderLeftWidth:"15px" }, 1000);
+});
+
+$("#go3").click(function(){
+  $("#go1").add("#go2").click();
+});
+
+$("#go4").click(function(){
+  $("div").css({width:"", fontSize:"", borderWidth:""});
+});
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-6">
+<h4>Example: <span class="desc">Animates all paragraphs to toggle both height and opacity, completing the animation within 600 milliseconds.</span>
+</h4>
+<pre><code class="example">$("p").animate({
+"height": "toggle", "opacity": "toggle"
+
+}, { duration: "slow" });</code></pre>
+</div>
+<div id="example-7">
+<h4>Example: <span class="desc">Animates all paragraph to a left style of 50 and opacity of 1 (opaque, visible), completing the animation within 500 milliseconds.  It also will do it outside the queue, meaning it will automatically start without waiting for its turn.</span>
+</h4>
+<pre><code class="example">$("p").animate({
+left: "50px", opacity: 1
+}, { duration: 500, queue: false });</code></pre>
+</div>
+<div id="example-8">
+<h4>Example: <span class="desc">An example of using an 'easing' function to provide a different style of animation. This will only work if you have a plugin that provides this easing function.</span>
+</h4>
+<pre><code class="example">$("p").animate({
+"opacity": "show"
+
+}, { "duration": "slow", "easing": "easein" });</code></pre>
+</div>
+<div id="example-9">
+<h4>Example: <span class="desc">An example of using a callback function.  The first argument is an array of CSS properties, the second specifies that the animation should take 1000 milliseconds to complete, the third states the easing type, and the fourth argument is an anonymous callback function. </span>
+</h4>
+<pre><code class="example">$("p").animate({
+height:200, width:400, opacity: .5
+}, 1000, "linear", function(){alert("all done");} );
+
+</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

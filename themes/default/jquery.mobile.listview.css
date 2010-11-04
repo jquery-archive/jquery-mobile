@@ -1,0 +1,43 @@
+/*
+* jQuery Mobile Framework
+* Copyright (c) jQuery Project
+* Dual licensed under the MIT (MIT-LICENSE.txt) or GPL (GPL-LICENSE.txt) licenses.
+*/
+.ui-listview { margin: 0; counter-reset: listnumbering; }
+.ui-content .ui-listview { margin: -15px; }
+.ui-content .ui-listview-inset { margin: 1em 0;  }
+.ui-listview, .ui-li { list-style:none; padding:0; zoom: 1; }
+.ui-li { display: block; margin:0; position: relative; overflow: hidden; text-align: left; border-width: 0; border-top-width: 1px; }
+.ui-li .ui-btn-text { text-overflow: ellipsis; overflow: hidden; white-space: nowrap;  }
+.ui-li-divider, .ui-li-static { padding: .5em 15px; font-size: 14px; font-weight: bold; counter-reset: listnumbering;  }
+ol.ui-listview .ui-link-inherit:before, .ui-li-dec { font-size: .8em; display: inline-block; padding-right: .3em; font-weight: normal;counter-increment: listnumbering; content: counter(listnumbering) ". "; }
+ol.ui-listview .ui-li-jsnumbering:before { content: "" !important; } /* to avoid chance of duplication */
+.ui-listview-inset .ui-li { border-right-width: 1px; border-left-width: 1px; }
+.ui-li:last-child { border-bottom-width: 1px; }
+.ui-li .ui-btn-inner { display: block; position: relative; padding: .7em 75px .7em 15px; }
+.ui-li-has-thumb .ui-btn-inner { min-height: 60px; padding-left: 100px; }
+.ui-li-has-icon .ui-btn-inner {  min-height: 20px; padding-left: 40px; }
+.ui-li-heading { font-size: 16px; font-weight: bold; display: block; margin: .6em 0; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;  }
+.ui-li-desc {  font-size: 12px; font-weight: normal; display: block; margin: -.5em 0 .6em; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; }
+.ui-li-thumb, .ui-li-icon { position: absolute; left: 1px; top: 0; max-height: 80px; max-width: 80px; }
+.ui-li-icon { max-height: 40px; max-width: 40px; left: 10px; top: .9em; }
+.ui-li-thumb, .ui-li-icon, .ui-li-content { float: left; margin-right: 10px; }
+
+.ui-li-aside { float: right; width: 50%; text-align: right; margin: .3em 0; }
+.min-width-480px .ui-li-aside { width: 45%; }
+.ui-li-has-alt .ui-btn-inner { padding-right: 95px; }
+.ui-li-count { position: absolute; font-size: 11px; font-weight: bold; padding: .2em .5em; top: 50%; margin-top: -.9em; right: 38px; }
+.ui-li-divider .ui-li-count { right: 10px; }
+.ui-li-has-alt .ui-li-count { right: 55px; }
+.ui-li-link-alt { position: absolute; width: 40px; height: 100%; border-width: 0; border-left-width: 1px; top: 0; right: 0; margin: 0; padding: 0; }
+.ui-li-link-alt .ui-btn { overflow: hidden; position: absolute; right: 8px; top: 50%; margin: -11px 0 0 0; border-bottom-width: 1px; }
+.ui-li-link-alt .ui-btn-inner { padding: 0; position: static; }
+.ui-li-link-alt .ui-btn .ui-icon { right: 50%; margin-right: -9px;  }
+
+.ui-listview-filter { border-width: 0; overflow: hidden; margin: -15px -15px 15px -15px }
+.ui-listview-filter .ui-input-search { margin: 5px; width: auto; display: block; }
+
+/* Odd iPad positioning issue. */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    .ui-li .ui-btn-text { overflow:  visible; }
+}

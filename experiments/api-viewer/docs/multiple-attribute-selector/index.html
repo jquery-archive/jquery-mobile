@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>Multiple Attribute Selector [name=value][name2=value2]</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="attributeMultiple1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">attributeMultiple</span>  selector</h2>
+<div class="  entry-details">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/version/1.0/">1.0</a></span>jQuery('[attributeFilter1][attributeFilter2][attributeFilterN]')</h4>
+<ul class="signatures"><li><dl class="arguments">
+<dt>attributeFilter1</dt>
+<dd>An attribute filter.</dd>
+<dt>attributeFilter2</dt>
+<dd>Another attribute filter, reducing the selection even more</dd>
+<dt>attributeFilterN</dt>
+<dd>As many more attribute filters as necessary</dd>
+</dl></li></ul>
+<p class="desc"><strong>Description: </strong>Matches elements that match all of the specified attribute filters.</p>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Finds all inputs that have an id attribute and whose name attribute ends with man and sets the value.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;input id="man-news" name="man-news" /&gt;
+
+  &lt;input name="milkman" /&gt;
+  &lt;input id="letterman" name="new-letterman" /&gt;
+  &lt;input name="newmilk" /&gt;
+&lt;script&gt;$("input[id][name$='man']").val("only this one");&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

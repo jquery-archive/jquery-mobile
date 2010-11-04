@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>:animated Selector</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="animated1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">animated</span>  selector</h2>
+<div class="  entry-details">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/version/1.2/">1.2</a></span>jQuery(':animated')</h4>
+<p class="desc"><strong>Description: </strong>Select all elements that are in the progress of an animation at the time the selector is run.</p>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Change the color of any div that is animated.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  div { background:yellow; border:1px solid #AAA; width:80px; height:80px; margin:5px; float:left; }
+  div.colored { background:green; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;button id="run"&gt;Run&lt;/button&gt;
+
+  &lt;div&gt;&lt;/div&gt;
+  &lt;div id="mover"&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;/div&gt;
+&lt;script&gt;
+
+    $("#run").click(function(){
+      $("div:animated").toggleClass("colored");
+    });
+    function animateIt() {
+      $("#mover").slideToggle("slow", animateIt);
+    }
+    animateIt();
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

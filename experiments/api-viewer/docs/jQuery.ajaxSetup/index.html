@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>jQuery.ajaxSetup()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="jQuery.ajaxSetup1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">jQuery.ajaxSetup( options )</span> <span class="returns"></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Set default values for future Ajax requests.</p>
+<ul class="signatures"><li class="signature" id="jQuery.ajaxSetup-options">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.1/">1.1</a></span>jQuery.ajaxSetup( options )</h4>
+<p class="arguement"><strong>options</strong>A set of key/value pairs that configure the default Ajax request. All options are optional. </p>
+</li></ul>
+<div class="longdesc">
+<p>For details on the settings available for <code>$.ajaxSetup()</code>, see <code><a href="/jQuery.ajax">$.ajax()</a></code>. </p>
+<p>All subsequent Ajax calls using any function will use the new settings, unless overridden by the individual calls, until the next invocation of <code>$.ajaxSetup()</code>.</p>
+<p>For example, we could set a default for the URL parameter before pinging the server repeatedly:</p>
+<pre>$.ajaxSetup({
+  url: 'ping.php',
+});</pre>
+<p>Now each time an Ajax request is made, this URL will be used automatically:</p>
+<pre>
+$.ajax({
+  data: {'name': 'Tim'},
+});</pre>
+<blockquote><p>Note: Global callback functions should be set with their respective global Ajax event handler methods-<code><a href="/ajaxStart">.ajaxStart()</a></code>, <code><a href="/ajaxStop">.ajaxStop()</a></code>, <code><a href="/ajaxComplete">.ajaxComplete()</a></code>, <code><a href="/ajaxError">.ajaxError()</a></code>, <code><a href="/ajaxSuccess">.ajaxSuccess()</a></code>, <code><a href="/ajaxSend">.ajaxSend()</a></code>-rather than within the <code>settings</code> object for <code>$.ajaxSetup()</code>.</p></blockquote>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Sets the defaults for Ajax requests to the url "/xmlhttp/", disables global handlers and uses POST instead of GET. The following Ajax requests then sends some data without having to set anything else.</span></h4>
+<pre><code class="example">$.ajaxSetup({
+   url: "/xmlhttp/",
+   global: false,
+   type: "POST"
+
+ });
+ $.ajax({ data: myData });</code></pre>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

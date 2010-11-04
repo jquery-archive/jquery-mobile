@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.empty()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="empty1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.empty()</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Remove all child nodes of the set of matched elements from the DOM.</p>
+<ul class="signatures"><li class="signature" id="empty"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.empty()</h4></li></ul>
+<div class="longdesc">
+<p>This method removes not only child (and other descendant) elements, but also any text within the set of matched elements. This is because, according to the DOM specification, any string of text within an element is considered a child node of that element. Consider the following HTML:</p>
+<pre>&lt;div class="container"&gt;
+  &lt;div class="hello"&gt;Hello&lt;/div&gt;
+  &lt;div class="goodbye"&gt;Goodbye&lt;/div&gt;
+&lt;/div&gt;</pre>
+<p>We can target any element for removal:</p>
+<pre>$('.hello').empty();</pre>
+<p>This will result in a DOM structure with the <code>Hello</code> text deleted:</p>
+<pre>&lt;div class="container"&gt;
+  &lt;div class="hello"&gt;&lt;/div&gt;
+  &lt;div class="goodbye"&gt;Goodbye&lt;/div&gt;
+&lt;/div&gt;</pre>
+<p>If we had any number of nested elements inside <code>&lt;div class="hello"&gt;</code>, they would be removed, too. Other jQuery constructs such as data or event handlers are erased as well.</p>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Removes all child nodes (including text nodes) from all paragraphs</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  p { background:yellow; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;
+    Hello, &lt;span&gt;Person&lt;/span&gt; &lt;a href="javascript:;"&gt;and person&lt;/a&gt;
+  &lt;/p&gt;
+
+  &lt;button&gt;Call empty() on above paragraph&lt;/button&gt;
+&lt;script&gt;
+    $("button").click(function () {
+      $("p").empty();
+    });
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

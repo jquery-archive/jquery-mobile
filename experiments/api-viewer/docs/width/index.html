@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.width()</h1>
+  				
+</div>
+
+
+<div data-role="content" data-theme="c" id="width1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.width()</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#Integer">Integer</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Get the current computed width for the first element in the set of matched elements.</p>
+<ul class="signatures"><li class="signature" id="width"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.width()</h4></li></ul>
+<div class="longdesc">
+<p>The difference between <code>.css(width)</code> and <code>.width()</code> is that the latter returns a unit-less pixel value (for example, <code>400</code>) while the former returns a value with units intact (for example, <code>400px</code>). The <code>.width()</code> method is recommended when an element's width needs to be used in a mathematical calculation.</p>
+<p class="image"><img src="http://api.jquery.com/images/0042_04_04.png"></p>
+<p>This method is also able to find the width of the window and document.</p>
+<pre>$(window).width();   // returns width of browser viewport
+$(document).width(); // returns width of HTML document</pre>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Show various widths.  Note the values are from the iframe so might be smaller than you expected.  The yellow highlight shows the iframe body.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  body { background:yellow; }
+  button { font-size:12px; margin:2px; }
+  p { width:150px; border:1px red solid; }
+  div { color:red; font-weight:bold;  }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;button id="getp"&gt;Get Paragraph Width&lt;/button&gt;
+  &lt;button id="getd"&gt;Get Document Width&lt;/button&gt;
+  &lt;button id="getw"&gt;Get Window Width&lt;/button&gt;
+
+  &lt;div&gt;&amp;nbsp;&lt;/div&gt;
+  &lt;p&gt;
+    Sample paragraph to test width
+  &lt;/p&gt;
+&lt;script&gt;
+    function showWidth(ele, w) {
+      $("div").text("The width for the " + ele + 
+                    " is " + w + "px.");
+    }
+    $("#getp").click(function () { 
+      showWidth("paragraph", $("p").width()); 
+    });
+    $("#getd").click(function () { 
+      showWidth("document", $(document).width()); 
+    });
+    $("#getw").click(function () { 
+      showWidth("window", $(window).width()); 
+    });
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+<div data-role="content" data-theme="c" id="width2">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.width( value )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Set the CSS width of each element in the set of matched elements.</p>
+<ul class="signatures">
+<li class="signature" id="width-value">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.width( value )</h4>
+<p class="arguement"><strong>value</strong>An integer representing the number of pixels, or an integer along with an optional unit of measure appended (as a string).</p>
+</li>
+<li class="signature" id="width-functionindex, width">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4.1/">1.4.1</a></span>.width( function(index, width) )</h4>
+<p class="arguement"><strong>function(index, width)</strong>A function returning the width to set. Receives the index position of the element in the set and the old width as arguments.</p>
+</li>
+</ul>
+<div class="longdesc">
+<p>When calling <code>.width('value')</code>, the value can be either a string (number and unit) or a number. If only a number is provided for the value, jQuery assumes a pixel unit. If a string is provided, however, any valid CSS measurement may be used for the width (such as <code>100px</code>, <code>50%</code>, or <code>auto</code>). Note that in modern browsers, the CSS width property does not include padding, border, or margin.</p>
+<p>If no explicit unit was specified (like 'em' or '%') then "px" is concatenated to the value.</p>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">To set the width of each div on click to 30px plus a color change.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  div { width:70px; height:50px; float:left; margin:5px;
+        background:red; cursor:pointer; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div&gt;&lt;/div&gt;
+  &lt;div&gt;d&lt;/div&gt;
+
+  &lt;div&gt;d&lt;/div&gt;
+  &lt;div&gt;d&lt;/div&gt;
+  &lt;div&gt;d&lt;/div&gt;
+&lt;script&gt;
+
+    $("div").one('click', function () {
+      $(this).width(30)
+             .css({cursor:"auto", "background-color":"blue"});
+    });
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+
+				</div>
+
+</body></html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+	<meta charset="utf-8" /> 
+	<title>jQuery Mobile Framework - Toolbars demo</title> 
+	<link rel="stylesheet"  href="../../themes/default/default.css" /> 
+	<script type="text/javascript" src="../../js.all.min.js"></script>
+</head> 
+<body> 
+
+<div data-role="page">
+	
+	<div data-role="header" data-position="fixed">
+		<h1>Fixed toolbars</h1>
+	</div>
+	
+	<div data-role="content">
+		<h2>Fixed toolbars will re-appear after you scroll</h2>
+		<p>This is a demo of the "fixed" headers and footers used in the jQuery Mobile framework. The page content flows naturally, allowing us to take advantage of native scrolling instead of a scripting a faux-scrolling workaround. The header and footer divs are right in the flow of the document, but whenever they are out of view, you can tap the screen to make them appear. Tapping again or scrolling the page will cause them to appear back in the flow of the page (at the top and bottom). </p>
+		<p>To set this behavior on a header or footer, add the <code> data-position="fixed"</code> attribute to the toolbar container.</p>
+		
+<pre><code>
+&lt;div data-role=&quot;header&quot; data-position=&quot;fixed&quot;&gt;
+	&lt;h1&gt;Fixed toolbars&lt;/h1&gt;
+&lt;/div&gt;
+</code></pre>     
+
+			       
+	
+		
+		<h4>Here is some text to make the page very long</h4>
+		
+			<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui.Donec non enim in turpis pulvinar facilisis. Ut felis.</p>
+			
+			<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui.Donec non enim in turpis pulvinar facilisis. Ut felis.</p>
+			
+			<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui.Donec non enim in turpis pulvinar facilisis. Ut felis.</p>
+			
+			<h4>And an inset list</h4>
+			
+			<ul data-role="listview" data-inset="true">
+					<li>
+						<img src="../lists/images/album-bb.jpg" />
+						<h3><a href="index.html">Broken Bells</a></h3>
+						<p>Broken Bells</p>
+						<p class="ui-li-aside">$<strong>11.99</strong></p>
+					</li>
+					<li>
+						<img src="../lists/images/album-hc.jpg" />
+						<h3><a href="index.html">Warning</a></h3>
+						<p>Hot Chip</p>
+						<p class="ui-li-aside">$<strong>12.99</strong></p>
+					</li>
+					<li>
+						<img src="../lists/images/album-p.jpg" />
+						<h3><a href="index.html">Wolfgang Amadeus Phoenix</a></h3>
+						<p>Phoenix</p>
+						<p class="ui-li-aside">$<strong>11.99</strong></p>
+					</li>
+					<li>
+						<img src="../lists/images/album-ok.jpg" />
+						<h3><a href="index.html">Of The Blue Colour Of The Sky</a></h3>
+						<p>Ok Go</p>
+						<p class="ui-li-aside">$<strong>10.99</strong></p>
+					</li>
+					<li>
+						<img src="../lists/images/album-ws.jpg" />
+						<h3><a href="index.html">Elephant</a></h3>
+						<p>The White Stripes</p>
+						<p class="ui-li-aside">$<strong>9.99</strong></p>
+					</li>
+					<li>
+						<img src="../lists/images/album-rh.jpg" />
+						<h3><a href="index.html">Kid A</a></h3>
+						<p>Radiohead</p>
+						<p class="ui-li-aside">$<strong>11.99</strong></p>
+					</li>
+					<li>
+						<img src="../lists/images/album-xx.jpg" />
+						<h3><a href="index.html">XX</a></h3>
+						<p>XX</p>
+						<p class="ui-li-aside">$<strong>10.99</strong></p>
+					</li>
+					<li>
+						<img src="../lists/images/album-mg.jpg" />
+						<h3><a href="index.html">Congratulations</a></h3>
+						<p>MGMT</p>
+						<p class="ui-li-aside">$<strong>12.99</strong></p>
+					</li>
+
+					<li>
+						<img src="../lists/images/album-ag.jpg" />
+						<h3><a href="index.html">Ashes Grammar</a></h3>
+						<p>A Sunny Day in Glasgow</p>
+						<p class="ui-li-aside">$<strong>11.99</strong></p>
+					</li>
+
+					<li>
+						<img src="../lists/images/album-k.jpg" />
+						<h3><a href="index.html">Hot Fuss</a></h3>
+						<p>Killers</p>
+						<p class="ui-li-aside">$<strong>12.99</strong></p>
+					</li>
+					<li>	
+						<img src="../lists/images/album-af.jpg" />
+						<h3><a href="index.html">The Suburbs</a></h3>
+						<p>Arcade Fire</p>
+						<p class="ui-li-aside">$<strong>12.99</strong></p>
+					</li>
+			</ul>
+			
+			<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui.Donec non enim in turpis pulvinar facilisis. Ut felis.</p>
+			
+			<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui.Donec non enim in turpis pulvinar facilisis. Ut felis.</p>
+			
+			<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui.Donec non enim in turpis pulvinar facilisis. Ut felis.</p>
+		
+	</div>
+	
+	<div data-role="footer" data-position="fixed">
+			<h1>Fixed Footer</h1>
+	</div>
+
+
+</div>
+
+</body>
+</html>

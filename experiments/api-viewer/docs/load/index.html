@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.load()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="load1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.load( url, [ data ], [ complete(responseText, textStatus, XMLHttpRequest) ] )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Load data from the server and place the returned HTML into the matched element.</p>
+<ul class="signatures"><li class="signature" id="load-url-data-completeresponseText, textStatus, XMLHttpRequest">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.load( url, [ data ], [ complete(responseText, textStatus, XMLHttpRequest) ] )</h4>
+<p class="arguement"><strong>url</strong>A string containing the URL to which the request is sent.</p>
+<p class="arguement"><strong>data</strong>A map or string that is sent to the server with the request.</p>
+<p class="arguement"><strong>complete(responseText, textStatus, XMLHttpRequest)</strong>A callback function that is executed when the request completes.</p>
+</li></ul>
+<div class="longdesc">
+<p>This method is the simplest way to fetch data from the server. It is roughly equivalent to <code>$.get(url, data, success)</code> except that it is a method rather than global function and it has an implicit callback function.  When a successful response is detected (i.e. when <code>textStatus</code> is "success" or "notmodified"), <code>.load()</code> sets the HTML contents of the matched element to the returned data. This means that most uses of the method can be quite simple:</p>
+<pre>$('#result').load('ajax/test.html');</pre>
+<p>The provided callback, if any, is executed after this post-processing has been performed:</p>
+<pre>$('#result').load('ajax/test.html', function() {
+  alert('Load was performed.');
+});</pre>
+<p>In the two examples above, if the current document does not contain an element with an ID of "result," the <code>.load()</code> method is not executed.</p>
+<p>The POST method is used if data is provided as an object; otherwise, GET is assumed.</p>
+<blockquote><p>Note: The event handling suite also has a method named <code><a href="/load-event">.load()</a></code>. Which one is fired depends on the set of arguments passed.</p></blockquote>
+<h4>Loading Page Fragments</h4>
+<p>The <code>.load()</code> method, unlike <code><a href="/jQuery.get">$.get()</a></code>, allows us to specify a portion of the remote document to be inserted. This is achieved with a special syntax for the <code>url</code> parameter. If one or more space characters are included in the string, the portion of the string following the first space is assumed to be a jQuery selector that determines the content to be loaded.   </p>
+<p>We could modify the example above to fetch only part of the document:</p>
+<pre>$('#result').load('ajax/test.html #container');</pre>
+<p>When this method executes, it retrieves the content of <code>ajax/test.html</code>, but then jQuery parses the returned document to find the element with an ID of <code>container</code>. This element, along with its contents, is inserted into the element with an ID of <code>result</code>, and the rest of the retrieved document is discarded.</p>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Load the main page's footer navigation into an ordered list.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+ body{ font-size: 12px; font-family: Arial; }
+ &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	
+&lt;b&gt;Footer navigation:&lt;/b&gt;
+&lt;ol id="new-nav"&gt;&lt;/ol&gt;
+
+&lt;script&gt;
+  $("#new-nav").load("/ #jq-footerNavigation li");
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Display a notice if the Ajax request encounters an error.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  body{ font-size: 12px; font-family: Arial; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	
+&lt;b&gt;Successful Response (should be blank):&lt;/b&gt;
+&lt;div id="success"&gt;&lt;/div&gt;
+&lt;b&gt;Error Response:&lt;/b&gt;
+&lt;div id="error"&gt;&lt;/div&gt;
+  
+&lt;script&gt;
+$("#success").load("/not-here.php", function(response, status, xhr) {
+  if (status == "error") {
+    var msg = "Sorry but there was an error: ";
+    $("#error").html(msg + xhr.status + " " + xhr.statusText);
+  }
+});
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">Load the feeds.html file into the div with the ID of feeds.</span>
+</h4>
+<pre><code class="example">$("#feeds").load("feeds.html");</code></pre>
+<h4>Result:</h4>
+<pre><code class="results">&lt;div id="feeds"&gt;&lt;b&gt;45&lt;/b&gt; feeds found.&lt;/div&gt;</code></pre>
+</div>
+<div id="example-3">
+<h4>Example: <span class="desc">pass arrays of data to the server.</span>
+</h4>
+<pre><code class="example">$("#objectID").load("test.php", { 'choices[]': ["Jon", "Susan"] } );</code></pre>
+</div>
+<div id="example-4">
+<h4>Example: <span class="desc">Same as above, but will POST the additional parameters to the server and a callback that is executed when the server is finished responding.</span>
+</h4>
+<pre><code class="example">$("#feeds").load("feeds.php", {limit: 25}, function(){
+alert("The last 25 entries in the feed have been loaded");
+});</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

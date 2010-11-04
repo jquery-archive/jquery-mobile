@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>event.target</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="event.target1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">event.target</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#Element">Element</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong> The DOM element that initiated the event.  </p>
+<ul class="signatures"><li class="signature" id="event.target"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>event.target</h4></li></ul>
+<div class="longdesc"><p>This can be the element that registered for the event or a child of it.  It is often useful to compare <code>event.target</code> to <code>this</code> in order to determine if the event is being handled due to event bubbling. This property is very useful in event delegation, when events bubble.</p></div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Display the tag's name on click</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+span, strong, p { 
+  padding: 8px; display: block; border: 1px solid #999;  }
+    &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	
+&lt;div id="log"&gt;&lt;/div&gt;
+&lt;div&gt;
+  &lt;p&gt;
+    &lt;strong&gt;&lt;span&gt;click&lt;/span&gt;&lt;/strong&gt;
+  &lt;/p&gt;
+&lt;/div&gt;
+&lt;script&gt;$("body").click(function(event) {
+  $("#log").html("clicked: " + event.target.nodeName);
+});  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Implements a simple event delegation: The click handler is added to an unordered list, and the children of its li children are hidden. Clicking one of the li children toggles (see toggle()) their children.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	
+&lt;ul&gt;
+  &lt;li&gt;item 1
+    &lt;ul&gt;
+      &lt;li&gt;sub item 1-a&lt;/li&gt;
+      &lt;li&gt;sub item 1-b&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;item 2
+    &lt;ul&gt;
+      &lt;li&gt;sub item 2-a&lt;/li&gt;
+      &lt;li&gt;sub item 2-b&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;  
+&lt;/ul&gt;
+&lt;script&gt;function handler(event) {
+  var $target = $(event.target);
+  if( $target.is("li") ) {
+    $target.children().toggle();
+  }
+}
+$("ul").click(handler).find("ul").hide();&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

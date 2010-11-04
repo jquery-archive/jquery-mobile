@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.text()</h1>
+  				
+</div>
+
+
+<div data-role="content" data-theme="c" id="text1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.text()</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#String">String</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Get the combined text contents of each element in the set of matched elements, including their descendants.</p>
+<ul class="signatures"><li class="signature" id="text"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.text()</h4></li></ul>
+<div class="longdesc">
+<p>Unlike the <code>.html()</code> method, <code>.text()</code> can be used in both XML and HTML documents. The result of the <code>.text()</code> method is a string containing the combined text of all matched elements. (Due to variations in the HTML parsers in different browsers, the text returned may vary in newlines and other white space.) Consider the following HTML:</p>
+<pre>&lt;div class="demo-container"&gt;
+  &lt;div class="demo-box"&gt;Demonstration Box&lt;/div&gt;
+  &lt;ul&gt;
+  &lt;li&gt;list item 1&lt;/li&gt;
+  &lt;li&gt;list &lt;strong&gt;item&lt;/strong&gt; 2&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;/div&gt;
+</pre>
+<p>The code <code>$('div.demo-container').text()</code> would produce the following result:</p>
+<p>
+        <code>Demonstration Box list item 1 list item 2</code>
+      </p>
+<p>The <code>.text()</code> method cannot be used on input elements.  For input field text, use the <a href="/val">.val()</a> method.</p>
+<p>As of jQuery 1.4, the <code>.text()</code> method returns the value of text and CDATA nodes as well as element nodes.</p>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Find the text in the first paragraph (stripping out the html), then set the html of the last paragraph to show it is just text (the red bold is gone).</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  p { color:blue; margin:8px; }
+  b { color:red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;&lt;b&gt;Test&lt;/b&gt; Paragraph.&lt;/p&gt;
+
+  &lt;p&gt;&lt;/p&gt;
+&lt;script&gt;
+    var str = $("p:first").text();
+    $("p:last").html(str);
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+<div data-role="content" data-theme="c" id="text2">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.text( textString )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Set the content of each element in the set of matched elements to the specified text.</p>
+<ul class="signatures">
+<li class="signature" id="text-textString">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.text( textString )</h4>
+<p class="arguement"><strong>textString</strong>A string of text to set as the content of each matched element.</p>
+</li>
+<li class="signature" id="text-functionindex, text">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4/">1.4</a></span>.text( function(index, text) )</h4>
+<p class="arguement"><strong>function(index, text)</strong>A function returning the text content to set. Receives the index position of the element in the set and the old text value as arguments.</p>
+</li>
+</ul>
+<div class="longdesc">
+<p>Unlike the <code>.html()</code> method, <code>.text()</code> can be used in both XML and HTML documents. </p>
+<p>We need to be aware that this method escapes the string provided as necessary so that it will render correctly in HTML. To do so, it calls the DOM method <code>.createTextNode()</code>, which replaces special characters with their HTML entity equivalents (such as <code>&amp;lt;</code> for <code>&lt;</code>).  Consider the following HTML:</p>
+<pre>&lt;div class="demo-container"&gt;
+  &lt;div class="demo-box"&gt;Demonstration Box&lt;/div&gt;
+  &lt;ul&gt;
+    &lt;li&gt;list item 1&lt;/li&gt;
+    &lt;li&gt;list &lt;strong&gt;item&lt;/strong&gt; 2&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+</pre>
+<p>The code <code>$('div.demo-container').text('&lt;p&gt;This is a test.&lt;/p&gt;');</code> will produce the following DOM output:</p>
+<pre>&lt;div class="demo-container"&gt;
+&amp;lt;p&amp;gt;This is a test.&amp;lt;/p&amp;gt;
+&lt;/div&gt;</pre>
+<p>It will appear on a rendered page as though the tags were exposed, like this:</p>
+<pre>&lt;p&gt;This is a test&lt;/p&gt;</pre>
+<p>The <code>.text()</code> method cannot be used on input elements.  For input field text, use the <a href="/val">.val()</a> method.</p>
+<p>As of jQuery 1.4, the <code>.text()</code> method allows us to set the text content by passing in a function.</p>
+<pre>$('ul li').text(function(index) {
+  return 'item number ' + (index + 1);
+});</pre>
+<p>Given an unordered list with three <code>&lt;li&gt;</code> elements, this example will produce the following DOM output:</p>
+<pre>&lt;ul&gt;
+  &lt;li&gt;item number 1&lt;/li&gt;
+  &lt;li&gt;item number 2&lt;/li&gt;
+  &lt;li&gt;item number 3&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Add text to the paragraph (notice the bold tag is escaped).</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+
+  p { color:blue; margin:8px; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;Test Paragraph.&lt;/p&gt;
+&lt;script&gt;$("p").text("&lt;b&gt;Some&lt;/b&gt; new text.");&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+
+				</div>
+
+</body></html>

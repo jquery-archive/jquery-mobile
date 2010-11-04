@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>jQuery.makeArray()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="jQuery.makeArray1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">jQuery.makeArray( obj )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#Array">Array</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Convert an array-like object into a true JavaScript array.</p>
+<ul class="signatures"><li class="signature" id="jQuery.makeArray-obj">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.2/">1.2</a></span>jQuery.makeArray( obj )</h4>
+<p class="arguement"><strong>obj</strong>Any object to turn into a native Array.</p>
+</li></ul>
+<div class="longdesc">
+<p>Many methods, both in jQuery and in JavaScript in general, return objects that are array-like. For example, the jQuery factory function <code>$()</code> returns a jQuery object that has many of the properties of an array (a length, the <code>[]</code> array access operator, etc.), but is not exactly the same as an array and lacks some of an array's built-in methods (such as <code>.pop()</code> and <code>.reverse()</code>).</p>
+<p>Note that after the conversion, any special features the object had (such as the jQuery methods in our example) will no longer be present. The object is now a plain array.</p>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Turn a collection of HTMLElements into an Array of them.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  div { color:red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div&gt;First&lt;/div&gt;
+  &lt;div&gt;Second&lt;/div&gt;  
+  &lt;div&gt;Third&lt;/div&gt;
+
+  &lt;div&gt;Fourth&lt;/div&gt;
+&lt;script&gt;
+    var elems = document.getElementsByTagName("div"); // returns a nodeList
+    var arr = jQuery.makeArray(elems);
+    arr.reverse(); // use an Array method on list of dom elements
+    $(arr).appendTo(document.body);
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Turn a jQuery object into an array</span>
+</h4>
+<pre><code class="example">
+    var obj = $('li');
+    var arr = $.makeArray(obj);
+</code></pre>
+<h4>Result:</h4>
+<pre><code class="results">(typeof obj === 'object' &amp;&amp; obj.jquery) === true;
+jQuery.isArray(arr) === true;
+    </code></pre>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

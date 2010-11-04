@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.scrollTop()</h1>
+  				
+</div>
+
+
+<div data-role="content" data-theme="c" id="scrollTop1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.scrollTop()</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#Integer">Integer</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Get the current vertical position of the scroll bar for the first element in the set of matched elements.</p>
+<ul class="signatures"><li class="signature" id="scrollTop"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.2.6/">1.2.6</a></span>.scrollTop()</h4></li></ul>
+<div class="longdesc"><p>The vertical scroll position is the same as the number of pixels that are hidden from view above the scrollable area. If the scroll bar is at the very top, or if the element is not scrollable, this number will be <code>0</code>.</p></div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Get the scrollTop of a paragraph.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  p { margin:10px;padding:5px;border:2px solid #666; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;Hello&lt;/p&gt;&lt;p&gt;&lt;/p&gt;
+&lt;script&gt;var p = $("p:first");
+$("p:last").text( "scrollTop:" + p.scrollTop() );
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+<div data-role="content" data-theme="c" id="scrollTop2">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.scrollTop( value )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Set the current vertical position of the scroll bar for each of the set of matched elements.</p>
+<ul class="signatures"><li class="signature" id="scrollTop-value">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.2.6/">1.2.6</a></span>.scrollTop( value )</h4>
+<p class="arguement"><strong>value</strong>An integer indicating the new position to set the scroll bar to.</p>
+</li></ul>
+<div class="longdesc"><p>The vertical scroll position is the same as the number of pixels that are hidden from view above the scrollable area. Setting the <code>scrollTop</code> positions the vertical scroll of each matched element.</p></div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Set the scrollTop of a div.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+div.demo {
+background:#CCCCCC none repeat scroll 0 0;
+border:3px solid #666666;
+margin:5px;
+padding:5px;
+position:relative;
+width:200px;
+height:100px;
+overflow:auto;
+}
+  p { margin:10px;padding:5px;border:2px solid #666;width:1000px;height:1000px; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div class="demo"&gt;&lt;h1&gt;lalala&lt;/h1&gt;&lt;p&gt;Hello&lt;/p&gt;&lt;/div&gt;
+&lt;script&gt;$("div.demo").scrollTop(300);
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+
+				</div>
+
+</body></html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>:input Selector</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="input1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">input</span>  selector</h2>
+<div class="  entry-details">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/version/1.0/">1.0</a></span>jQuery(':input')</h4>
+<p class="desc"><strong>Description: </strong>Selects all input, textarea, select and button elements.</p>
+<div class="longdesc"><p>The <code>:input</code> selector basically selects all form controls.</p></div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Finds all input elements.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  textarea { height:25px; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;form&gt;
+    &lt;input type="button" value="Input Button"/&gt;
+    &lt;input type="checkbox" /&gt;
+
+    &lt;input type="file" /&gt;
+    &lt;input type="hidden" /&gt;
+    &lt;input type="image" /&gt;
+
+    &lt;input type="password" /&gt;
+    &lt;input type="radio" /&gt;
+    &lt;input type="reset" /&gt;
+
+    &lt;input type="submit" /&gt;
+    &lt;input type="text" /&gt;
+    &lt;select&gt;&lt;option&gt;Option&lt;/option&gt;&lt;/select&gt;
+
+    &lt;textarea&gt;&lt;/textarea&gt;
+    &lt;button&gt;Button&lt;/button&gt;
+  &lt;/form&gt;
+  &lt;div id="messages"&gt;
+  &lt;/div&gt;
+&lt;script&gt;
+
+    var allInputs = $(":input");
+    var formChildren = $("form &gt; *");
+    $("#messages").text("Found " + allInputs.length + " inputs and the form has " +
+                             formChildren.length + " children.");
+            
+    // so it won't submit
+    $("form").submit(function () { return false; }); 
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

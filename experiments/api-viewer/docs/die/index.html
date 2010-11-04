@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.die()</h1>
+  				
+</div>
+
+
+<div data-role="content" data-theme="c" id="die1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.die()</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Remove all event handlers previously attached using .live() from the elements.</p>
+<ul class="signatures"><li class="signature" id="die"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4.1/">1.4.1</a></span>.die()</h4></li></ul>
+<div class="longdesc"><p>Any handler that has been attached with <code>.live()</code> can be removed with <code>.die()</code>. This method is analogous to calling <code>.unbind()</code> with no arguments, which is used to remove all handlers attached with <code>.bind()</code>.
+See the discussions of <code>.live()</code> and <code>.unbind()</code> for further details.</p></div>
+</div>
+</div>
+<div data-role="content" data-theme="c" id="die2">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.die( eventType, [ handler ] )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Remove an event handler previously attached using .live() from the elements.</p>
+<ul class="signatures"><li class="signature" id="die-eventType-handler">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.3/">1.3</a></span>.die( eventType, [ handler ] )</h4>
+<p class="arguement"><strong>eventType</strong>A string containing a JavaScript event type, such as <code>click</code> or <code>keydown</code>.</p>
+<p class="arguement"><strong>handler</strong>The function that is to be no longer executed.</p>
+</li></ul>
+<div class="longdesc"><p>Any handler that has been attached with <code>.live()</code> can be removed with <code>.die()</code>. This method is analogous to <code>.unbind()</code>, which is used to remove handlers attached with <code>.bind()</code>.
+See the discussions of <code>.live()</code> and <code>.unbind()</code> for further details.</p></div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Can bind and unbind events to the colored button.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+button { margin:5px; }
+button#theone { color:red; background:yellow; }
+&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;button id="theone"&gt;Does nothing...&lt;/button&gt;
+&lt;button id="bind"&gt;Bind Click&lt;/button&gt;
+&lt;button id="unbind"&gt;Unbind Click&lt;/button&gt;
+
+&lt;div style="display:none;"&gt;Click!&lt;/div&gt;
+&lt;script&gt;
+
+function aClick() {
+  $("div").show().fadeOut("slow");
+}
+$("#bind").click(function () {
+  $("#theone").live("click", aClick)
+              .text("Can Click!");
+});
+$("#unbind").click(function () {
+  $("#theone").die("click", aClick)
+              .text("Does nothing...");
+});
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">To unbind all live events from all paragraphs, write:</span>
+</h4>
+<pre><code class="example">$("p").die()</code></pre>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">To unbind all live click events from all paragraphs, write:</span>
+</h4>
+<pre><code class="example">$("p").die( "click" )</code></pre>
+</div>
+<div id="example-3">
+<h4>Example: <span class="desc">To unbind just one previously bound handler, pass the function in as the second argument:</span>
+</h4>
+<pre><code class="example">var foo = function () {
+// code to handle some kind of event
+};
+
+$("p").live("click", foo); // ... now foo will be called when paragraphs are clicked ...
+
+$("p").die("click", foo); // ... foo will no longer be called.</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+
+				</div>
+
+</body></html>

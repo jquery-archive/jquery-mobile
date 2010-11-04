@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>jQuery.map()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="jQuery.map1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">jQuery.map( array, callback(elementOfArray, indexInArray) )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#Array">Array</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Translate all items in an array or array-like object to another array of items.</p>
+<ul class="signatures"><li class="signature" id="jQuery.map-array-callbackelementOfArray, indexInArray">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>jQuery.map( array, callback(elementOfArray, indexInArray) )</h4>
+<p class="arguement"><strong>array</strong>The Array to translate.</p>
+<p class="arguement"><strong>callback(elementOfArray, indexInArray)</strong>The function to process each item against.  The first argument to the function is the list item, the second argument is the index in array The function can return any value.  <code>this</code> will be the global window object. </p>
+</li></ul>
+<div class="longdesc">
+<p>The $.map() method applies a function to each item in an array, collecting the results into a new array.</p>
+<p>The translation function that is provided to this method is called for each item in the array and is passed two arguments: The item to be translated, and the index within the array.</p>
+<p>The function can return:</p>
+<ul>
+<li>the translated value, which will be mapped to the resulting array</li>
+      <li>
+<code>null</code>, to remove the item</li>
+      <li>an array of values, which will be flattened into the full array</li>
+    </ul>
+<p>Map can  iterate through Array-like objects, like a jQuery object, that have a length property.</p>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">A couple examples of using .map()</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  div { color:blue; }
+  p { color:green; margin:0; }
+  span { color:red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div&gt;&lt;/div&gt;
+  &lt;p&gt;&lt;/p&gt;
+  &lt;span&gt;&lt;/span&gt;
+  
+&lt;script&gt;
+
+    var arr = [ "a", "b", "c", "d", "e" ];
+    $("div").text(arr.join(", "));
+
+    arr = jQuery.map(arr, function(n, i){
+      return (n.toUpperCase() + i);
+    });
+    $("p").text(arr.join(", "));
+
+    arr = jQuery.map(arr, function (a) { return a + a; });
+    $("span").text(arr.join(", "));
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Maps the original array to a new one and adds 4 to each value.</span>
+</h4>
+<pre><code class="example">$.map( [0,1,2], function(n){
+   return n + 4;
+ });</code></pre>
+<h4>Result:</h4>
+<pre><code class="results">[4, 5, 6] </code></pre>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">Maps the original array to a new one and adds 1 to each value if it is bigger then zero, otherwise it's removed.</span>
+</h4>
+<pre><code class="example">$.map( [0,1,2], function(n){
+   return n &gt; 0 ? n + 1 : null;
+ });</code></pre>
+<h4>Result:</h4>
+<pre><code class="results">[2, 3] </code></pre>
+</div>
+<div id="example-3">
+<h4>Example: <span class="desc">Maps the original array to a new one, each element is added with it's original value and the value plus one.</span>
+</h4>
+<pre><code class="example">$.map( [0,1,2], function(n){
+   return [ n, n + 1 ];
+ });</code></pre>
+<h4>Result:</h4>
+<pre><code class="results">[0, 1, 1, 2, 2, 3] </code></pre>
+</div>
+<div id="example-4">
+<h4>Example: <span class="desc">Maps the original array to a new one, each element is squared.</span>
+</h4>
+<pre><code class="example">$.map( [0,1,2,3], function (a) { return a * a; } );</code></pre>
+<h4>Result:</h4>
+<pre><code class="results">[0, 1, 4, 9] </code></pre>
+</div>
+<div id="example-5">
+<h4>Example: <span class="desc">Remove items by returning null from the function. This removes any numbers less than 50, and the rest are decreased by 45.</span>
+</h4>
+<pre><code class="example">$.map( [0, 1, 52, 97], function (a) { return (a &gt; 50 ? a - 45 : null); } );</code></pre>
+<h4>Result:</h4>
+<pre><code class="results">[7, 52] </code></pre>
+</div>
+<div id="example-6">
+<h4>Example: <span class="desc">Augmenting the resulting array by returning an array inside the function.</span>
+</h4>
+<pre><code class="example">var array = [0, 1, 52, 97];
+array = $.map(array, function(a, index) {
+  return [a - 45, index];
+}); </code></pre>
+<h4>Result:</h4>
+<pre><code class="results">[-45, 0, -44, 1, 7, 2, 52, 3] </code></pre>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

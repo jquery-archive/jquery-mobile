@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.ready()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="ready1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.ready( handler )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Specify a function to execute when the DOM is fully loaded.</p>
+<ul class="signatures"><li class="signature" id="ready-handler">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.ready( handler )</h4>
+<p class="arguement"><strong>handler</strong>A function to execute after the DOM is ready.</p>
+</li></ul>
+<div class="longdesc">
+<p>While JavaScript provides the <code>load</code> event for executing code when a page is rendered, this event does not get triggered until all assets such as images have been completely received. In most cases, the script can be run as soon as the DOM hierarchy has been fully constructed. The handler passed to <code>.ready()</code> is guaranteed to be executed after the DOM is ready, so this is usually the best place to attach all other event handlers and run other jQuery code.  When using scripts that rely on the value of CSS style properties, it's important to reference external stylesheets or embed style elements before referencing the scripts.</p>
+<p>In cases where code relies on loaded assets (for example, if the dimensions of an image are required), the code should be placed in a handler for the <code>load</code> event instead.</p>
+<blockquote><p>The <code>.ready()</code> method is generally incompatible with the <code>&lt;body onload=""&gt;</code> attribute. If <code>load</code> must be used, either do not use <code>.ready()</code> or use jQuery's <code>.load()</code> method to attach <code>load</code> event handlers to the window or to more specific items, like images.
+</p></blockquote>
+<p>All three of the following syntaxes are equivalent:</p>
+<ul>
+<li><code>$(document).ready(handler)</code></li>
+   <li>
+<code>$().ready(handler)</code> (this is not recommended)</li>
+   <li><code>$(handler)</code></li>
+ </ul>
+<p>There is also <code>$(document).bind("ready", handler)</code>. This behaves similarly to the ready method but with one exception: If the ready event has already fired and you try to <code>.bind("ready")</code> the bound handler will not be executed.</p>
+<p>The <code>.ready()</code> method can only be called on a jQuery object matching the current document, so the selector can be omitted.</p>
+<p>The <code>.ready()</code> method is typically used with an anonymous function:</p>
+<pre>$(document).ready(function() {
+  // Handler for .ready() called.
+});</pre>
+<p>If <code>.ready()</code> is called after the DOM has been initialized, the new handler passed in will be executed immediately.</p>
+<h4>Aliasing the jQuery Namespace</h4>
+<p>When using another JavaScript library, we may wish to call <code><a href="/jQuery.noConflict">$.noConflict()</a></code> to avoid namespace difficulties. When this function is called, the <code>$</code> shortcut is no longer available, forcing us to write <code>jQuery</code> each time we would normally write <code>$</code>. However, the handler passed to the <code>.ready()</code> method can take an argument, which is passed the global <code>jQuery</code> object. This means we can rename the object within the context of our <code>.ready()</code> handler without affecting other code:</p>
+<pre>jQuery(document).ready(function($) {
+  // Code using $ as usual goes here.
+});</pre>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Display a message when the DOM is loaded.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;p { color:red; }&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+  &lt;script&gt;
+  $(document).ready(function () {
+  $("p").text("The DOM is now loaded and can be manipulated.");
+});
+  &lt;/script&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;Not loaded yet.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

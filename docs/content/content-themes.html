@@ -1,0 +1,93 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+	<meta charset="utf-8" /> 
+	<title>jQuery Mobile Docs - Content formatting</title> 
+	<link rel="stylesheet"  href="../../themes/default/default.css" /> 
+	<script type="text/javascript" src="../../js.all.min.js"></script>
+	<script type="text/javascript" src="../docs/docs.js"></script>
+</head> 
+<body> 
+
+<div data-role="page">
+
+	<div data-role="header">
+		<h1>Theming content</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+			
+			
+		<h2>Theming the content area</h2>
+		<p>The main content area of a page (container with the <code>data-role="content"</code> attribute) should be themed by adding the <code>data-theme</code> attribute to the <code>data-role="page"</code> container to ensure that the background colors are applied to the full page, regardless of the content length. (If you add to the <code>data-theme</code> to the content container, the background color will stop after the content so there may be a gap in color between the content and fixed footer.)</p>
+		
+<code>
+&lt;div data-role=&quot;page&quot; <strong>data-theme=&quot;a&quot;</strong>&gt;
+</code>	
+		<h2>Theming collapsible blocks</h2>
+		<p>To set the color of the collapsible header, add the <code>data-theme</code> attribute to the collapsible container. The icon and body are not currently themable through data attributes, but can be styled directly with custom css.</p>
+
+<code>		
+&lt;div data-role=&quot;collapsible&quot; data-state=&quot;collapsed&quot; <strong>data-theme=&quot;a&quot;&gt;</strong>
+</code>
+		<h2>Themed examples</h2>
+		
+		<p><strong>A</strong> theme swatch on content &amp; collapsible</p>
+		<div class="ui-body ui-body-a">
+			<h1>H1 Heading</h1>
+			<p>This is a paragraph that contains <strong>strong</strong>, <em>emphasized</em> and <a href="index.html">linked</a> text. Here is more text so you can see how HTML markup works in content. Here is more text so you can see how HTML markup works in content.</p>
+			<div data-role="collapsible" data-state="collapsed" data-theme="a">
+				<h3>I'm an themed collapsible</h3>
+				<p>I have <code>data-theme</code> attribute set manually on my container to set the color to match the content block I'm in. </p>
+			</div><!-- /collapsible -->
+		</div><!-- /themed container -->
+		
+		<p><strong>B</strong> theme swatch on content &amp; collapsible</p>
+		<div class="ui-body ui-body-b">
+			<h1>H1 Heading</h1>
+			<p>This is a paragraph that contains <strong>strong</strong>, <em>emphasized</em> and <a href="index.html">linked</a> text. Here is more text so you can see how HTML markup works in content. Here is more text so you can see how HTML markup works in content.</p>
+			<div data-role="collapsible" data-state="collapsed" data-theme="b">
+				<h3>I'm an themed collapsible</h3>
+				<p>I have <code>data-theme</code> attribute set manually on my container to set the color to match the content block I'm in. </p>
+			</div><!-- /collapsible -->
+		</div><!-- /themed container -->
+		
+		<p><strong>C</strong> theme swatch on content &amp; collapsible</p>
+		<div class="ui-body ui-body-c">
+			<h1>H1 Heading</h1>
+			<p>This is a paragraph that contains <strong>strong</strong>, <em>emphasized</em> and <a href="index.html">linked</a> text. Here is more text so you can see how HTML markup works in content. Here is more text so you can see how HTML markup works in content.</p>
+			<div data-role="collapsible" data-state="collapsed" data-theme="c">
+				<h3>I'm an themed collapsible</h3>
+				<p>I have <code>data-theme</code> attribute set manually on my container to set the color to match the content block I'm in. </p>
+			</div><!-- /collapsible -->
+		</div><!-- /themed container -->
+		
+		<p><strong>D</strong> theme swatch on content &amp; collapsible</p>
+		<div class="ui-body ui-body-d">
+			<h1>H1 Heading</h1>
+			<p>This is a paragraph that contains <strong>strong</strong>, <em>emphasized</em> and <a href="index.html">linked</a> text. Here is more text so you can see how HTML markup works in content. Here is more text so you can see how HTML markup works in content.</p>
+			<div data-role="collapsible" data-state="collapsed" data-theme="d">
+				<h3>I'm an themed collapsible</h3>
+				<p>I have <code>data-theme</code> attribute set manually on my container to set the color to match the content block I'm in. </p>
+			</div><!-- /collapsible -->
+		</div><!-- /themed container -->
+		
+		<p><strong>E</strong> theme swatch on content &amp; collapsible</p>
+		<div class="ui-body ui-body-e">
+			<h1>H1 Heading</h1>
+			<p>This is a paragraph that contains <strong>strong</strong>, <em>emphasized</em> and <a href="index.html">linked</a> text. Here is more text so you can see how HTML markup works in content. Here is more text so you can see how HTML markup works in content.</p>
+			<div data-role="collapsible" data-state="collapsed" data-theme="e">
+				<h3>I'm an themed collapsible</h3>
+				<p>I have <code>data-theme</code> attribute set manually on my container to set the color to match the content block I'm in. </p>
+			</div><!-- /collapsible -->
+		</div><!-- /themed container -->
+		
+	
+		
+	
+		
+	</div><!-- /content -->
+</div><!-- /page -->
+
+</body>
+</html>

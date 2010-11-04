@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>jQuery.globalEval()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="jQuery.globalEval1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">jQuery.globalEval( code )</span> <span class="returns"></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Execute some JavaScript code globally.</p>
+<ul class="signatures"><li class="signature" id="jQuery.globalEval-code">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0.4/">1.0.4</a></span>jQuery.globalEval( code )</h4>
+<p class="arguement"><strong>code</strong>The JavaScript code to execute.</p>
+</li></ul>
+<div class="longdesc"><p>This method behaves differently from using a normal JavaScript <code>eval()</code> in that it's executed within the global context (which is important for loading external scripts dynamically).</p></div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Execute a script in the global context.</span></h4>
+<pre><code class="example">function test(){
+    jQuery.globalEval("var newVar = true;")
+}
+test();
+// newVar === true</code></pre>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

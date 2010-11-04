@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.children()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="children1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.children( [ selector ] )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Get the children of each element in the set of matched elements, optionally filtered by a selector.</p>
+<ul class="signatures"><li class="signature" id="children-selector">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.children( [ selector ] )</h4>
+<p class="arguement"><strong>selector</strong>A string containing a selector expression to match elements against.</p>
+</li></ul>
+<div class="longdesc">
+<p>Given a jQuery object that represents a set of DOM elements, the <code>.children()</code> method allows us to search through the immediate children of these elements in the DOM tree and construct a new jQuery object from the matching elements. The <code>.find()</code> and <code>.children()</code> methods are similar, except that the latter only travels a single level down the DOM tree.</p>
+<p>The method optionally accepts a selector expression of the same type that we can pass to the <code>$()</code> function. If the selector is supplied, the elements will be filtered by testing whether they match it.</p>
+<p>Consider a page with a basic nested list on it:</p>
+<pre>
+&lt;ul class="level-1"&gt;
+  &lt;li class="item-i"&gt;I&lt;/li&gt;
+  &lt;li class="item-ii"&gt;II
+    &lt;ul class="level-2"&gt;
+      &lt;li class="item-a"&gt;A&lt;/li&gt;
+      &lt;li class="item-b"&gt;B
+        &lt;ul class="level-3"&gt;
+          &lt;li class="item-1"&gt;1&lt;/li&gt;
+          &lt;li class="item-2"&gt;2&lt;/li&gt;
+          &lt;li class="item-3"&gt;3&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li class="item-c"&gt;C&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li class="item-iii"&gt;III&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+<p>If we begin at the level-2 list, we can find its children:</p>
+<pre>$('ul.level-2').children().css('background-color', 'red');</pre>
+<p>The result of this call is a red background behind items A, B, and C. Since we do not supply a selector expression, all of the children are part of the returned jQuery object. If we had supplied one, only the matching items among these three would be included.</p>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Find all children of the clicked element.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  body { font-size:16px; font-weight:bolder; }
+  div { width:130px; height:82px; margin:10px; float:left;
+        border:1px solid blue; padding:4px; }
+  #container { width:auto; height:105px; margin:0; float:none;
+        border:none; }
+  .hilite { border-color:red; }
+  #results { display:block; color:red; }
+  p { margin:10px; border:1px solid transparent; }
+  span { color:blue; border:1px solid transparent; }
+  input { width:100px; }
+  em { border:1px solid transparent; }
+  a { border:1px solid transparent; }
+  b { border:1px solid transparent; }
+  button { border:1px solid transparent; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div id="container"&gt;
+
+    &lt;div&gt;
+      &lt;p&gt;This &lt;span&gt;is the &lt;em&gt;way&lt;/em&gt; we&lt;/span&gt; 
+      write &lt;em&gt;the&lt;/em&gt; demo,&lt;/p&gt;
+
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;a href="#"&gt;&lt;b&gt;w&lt;/b&gt;rit&lt;b&gt;e&lt;/b&gt;&lt;/a&gt; the &lt;span&gt;demo,&lt;/span&gt; &lt;button&gt;write 
+      the&lt;/button&gt; demo,
+    &lt;/div&gt;
+
+    &lt;div&gt;
+      This &lt;span&gt;the way we &lt;em&gt;write&lt;/em&gt; the &lt;em&gt;demo&lt;/em&gt; so&lt;/span&gt;
+
+      &lt;input type="text" value="early" /&gt; in
+    &lt;/div&gt;
+    &lt;p&gt;
+      &lt;span&gt;t&lt;/span&gt;he &lt;span&gt;m&lt;/span&gt;orning.
+      &lt;span id="results"&gt;Found &lt;span&gt;0&lt;/span&gt; children in &lt;span&gt;TAG&lt;/span&gt;.&lt;/span&gt;
+
+    &lt;/p&gt;
+  &lt;/div&gt;
+&lt;script&gt;
+
+    $("#container").click(function (e) {
+      $("*").removeClass("hilite");
+      var $kids = $(e.target).children();
+      var len = $kids.addClass("hilite").length;
+
+      $("#results span:first").text(len);
+      $("#results span:last").text(e.target.tagName);
+
+      e.preventDefault();
+      return false;
+    });
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Find all children of each div.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  body { font-size:16px; font-weight:bolder; }
+  span { color:blue; }
+  p { margin:5px 0; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;Hello (this is a paragraph)&lt;/p&gt;
+
+  &lt;div&gt;&lt;span&gt;Hello Again (this span is a child of the a div)&lt;/span&gt;&lt;/div&gt;
+  &lt;p&gt;And &lt;span&gt;Again&lt;/span&gt; (in another paragraph)&lt;/p&gt;
+
+  &lt;div&gt;And One Last &lt;span&gt;Time&lt;/span&gt; (most text directly in a div)&lt;/div&gt;
+&lt;script&gt;$("div").children().css("border-bottom", "3px double red");&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">Find all children with a class "selected" of each div.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+
+  body { font-size:16px; font-weight:bolder; }
+  p { margin:5px 0; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div&gt;
+    &lt;span&gt;Hello&lt;/span&gt;
+    &lt;p class="selected"&gt;Hello Again&lt;/p&gt;
+    &lt;div class="selected"&gt;And Again&lt;/div&gt;
+
+    &lt;p&gt;And One Last Time&lt;/p&gt;
+  &lt;/div&gt;
+&lt;script&gt;$("div").children(".selected").css("color", "blue");&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

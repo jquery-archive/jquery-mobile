@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.replaceWith()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="replaceWith1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.replaceWith( newContent )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Replace each element in the set of matched elements with the provided new content.</p>
+<ul class="signatures">
+<li class="signature" id="replaceWith-newContent">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.2/">1.2</a></span>.replaceWith( newContent )</h4>
+<p class="arguement"><strong>newContent</strong>The content to insert. May be an HTML string, DOM element, or jQuery object.</p>
+</li>
+<li class="signature" id="replaceWith-function">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4/">1.4</a></span>.replaceWith( function )</h4>
+<p class="arguement"><strong>function</strong>A function that returns an HTML string to replace the set of matched elements with.</p>
+</li>
+</ul>
+<div class="longdesc">
+<p>The <code>.replaceWith()</code> method allows us to remove content from the DOM and insert new content in its place with a single call. Consider this DOM structure:</p>
+<pre>&lt;div class="container"&gt;
+  &lt;div class="inner first"&gt;Hello&lt;/div&gt;
+  &lt;div class="inner second"&gt;And&lt;/div&gt;
+  &lt;div class="inner third"&gt;Goodbye&lt;/div&gt;
+&lt;/div&gt;</pre>
+<p>We can replace the second inner <code>&lt;div&gt;</code> with specified HTML:</p>
+<pre>$('.second').replaceWith('&lt;h2&gt;New heading&lt;/h2&gt;');</pre>
+<p>This results in the structure:</p>
+<pre>&lt;div class="container"&gt;
+  &lt;div class="inner first"&gt;Hello&lt;/div&gt;
+  &lt;h2&gt;New heading&lt;/h2&gt;
+  &lt;div class="inner third"&gt;Goodbye&lt;/div&gt;
+&lt;/div&gt;</pre>
+<p>We could equally target all inner <code>&lt;div&gt;</code> elements at once:</p>
+<pre>$('.inner').replaceWith('&lt;h2&gt;New heading&lt;/h2&gt;');</pre>
+<p>This causes all of them to be replaced:</p>
+<pre>&lt;div class="container"&gt;
+  &lt;h2&gt;New heading&lt;/h2&gt;
+  &lt;h2&gt;New heading&lt;/h2&gt;
+  &lt;h2&gt;New heading&lt;/h2&gt;
+&lt;/div&gt;</pre>
+<p>Or, we could select an element to use as the replacement:</p>
+<pre>$('.third').replaceWith($('.first'));</pre>
+<p>This results in the DOM structure:</p>
+<pre>&lt;div class="container"&gt;
+  &lt;div class="inner second"&gt;And&lt;/div&gt;
+  &lt;div class="inner first"&gt;Hello&lt;/div&gt;
+&lt;/div&gt;</pre>
+<p>From this example, we can see that the selected element replaces the target by being moved from its old location, not by being cloned.</p>
+<p>The <code>.replaceWith()</code> method, like most jQuery methods, returns the jQuery object so that other methods can be chained onto it. However, it must be noted that the <emphasis role="italics">original</emphasis> jQuery object is returned. This object refers to the element that has been removed from the DOM, not the new element that has replaced it.</p>
+<p>In jQuery 1.4 replaceWith, before, and after will also work on disconnected DOM nodes. For example if you were to do:</p>
+<pre>$("<div></div>").replaceWith("<p></p>");</pre>
+<p>Then you would end up with a jQuery set that contains only a paragraph.</p>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">On click, replace the button with a div containing the same word.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  button { display:block; margin:3px; color:red; width:200px; }
+  div { color:red; border:2px solid blue; width:200px; 
+        margin:3px; text-align:center; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;button&gt;First&lt;/button&gt;
+  &lt;button&gt;Second&lt;/button&gt;
+
+  &lt;button&gt;Third&lt;/button&gt;
+&lt;script&gt;
+
+    $("button").click(function () {
+      $(this).replaceWith("&lt;div&gt;" + $(this).text() + "&lt;/div&gt;");
+    });
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Replace all the paragraphs with bold words.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;Hello&lt;/p&gt;
+  &lt;p&gt;cruel&lt;/p&gt;
+
+  &lt;p&gt;World&lt;/p&gt;
+&lt;script&gt;$("p").replaceWith("&lt;b&gt;Paragraph. &lt;/b&gt;");&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">Replace all the paragraphs with empty div elements.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  div { border:2px solid blue; margin:3px; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;Hello&lt;/p&gt;
+
+  &lt;p&gt;cruel&lt;/p&gt;
+  &lt;p&gt;World&lt;/p&gt;
+&lt;script&gt;$("p").replaceWith(document.createElement("div"));&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-3">
+<h4>Example: <span class="desc">On click, replace each paragraph with a jQuery div object that is already in the DOM.  Notice it doesn't clone the object but rather moves it to replace the paragraph.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  div { border:2px solid blue; color:red; margin:3px; }
+  p { border:2px solid red; color:blue; margin:3px; cursor:pointer; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;Hello&lt;/p&gt;
+  &lt;p&gt;cruel&lt;/p&gt;
+  &lt;p&gt;World&lt;/p&gt;
+
+  &lt;div&gt;Replaced!&lt;/div&gt;
+&lt;script&gt;
+    $("p").click(function () {
+      $(this).replaceWith($("div"));
+    });
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

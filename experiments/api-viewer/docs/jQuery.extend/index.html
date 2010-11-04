@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>jQuery.extend()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="jQuery.extend1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">jQuery.extend( target, [ object1 ], [ objectN ] )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#Object">Object</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Merge the contents of two or more objects together into the first object.</p>
+<ul class="signatures">
+<li class="signature" id="jQuery.extend-target-object1-objectN">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>jQuery.extend( target, [ object1 ], [ objectN ] )</h4>
+<p class="arguement"><strong>target</strong> An object that will receive the new properties if additional objects are passed in or that will extend the jQuery namespace if it is the sole argument.</p>
+<p class="arguement"><strong>object1</strong>An object containing additional properties to merge in.</p>
+<p class="arguement"><strong>objectN</strong>Additional objects containing properties to merge in.</p>
+</li>
+<li class="signature" id="jQuery.extend-deep-target-object1-objectN">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.1.4/">1.1.4</a></span>jQuery.extend( [ deep ], target, object1, [ objectN ] )</h4>
+<p class="arguement"><strong>deep</strong>If true, the merge becomes recursive (aka. deep copy).</p>
+<p class="arguement"><strong>target</strong>The object to extend. It will receive the new properties.</p>
+<p class="arguement"><strong>object1</strong>An object containing additional properties to merge in.</p>
+<p class="arguement"><strong>objectN</strong>Additional objects containing properties to merge in.</p>
+</li>
+</ul>
+<div class="longdesc">
+<p>When we supply two or more objects to <code>$.extend()</code>, properties from all of the objects are added to the target object.</p>
+<p>If only one argument is supplied to <code>$.extend()</code>, this means the target argument was omitted. In this case, the jQuery object itself is assumed to be the target. By doing this, we can add new functions to the jQuery namespace.  This can be useful for plugin authors wishing to add new methods to JQuery.</p>
+<p>Keep in mind that the target object (first argument) will be modified, and will also be returned from <code>$.extend()</code>. If, however, we want to preserve both of the original objects, we can do so by passing an empty object as the target:</p>
+<pre>var object = $.extend({}, object1, object2);</pre>
+<p>The merge performed by <code>$.extend()</code> is not recursive by default; if a property of the first object is itself an object or array, it will be completely overwritten by a property with the same key in the second object. The values are not merged. This can be seen in the example below by examining the value of banana. However, by passing <code>true</code> for the first function argument, objects will be recursively merged.</p>
+<p>Undefined properties are not copied. However, properties inherited from the object's prototype <em>will</em> be copied over.</p>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Merge two objects, modifying the first.</span>
+</h4>
+<pre><code class="example">
+var object1 = {
+  apple: 0,
+  banana: {weight: 52, price: 100},
+  cherry: 97
+};
+var object2 = {
+  banana: {price: 200},
+  durian: 100
+};
+
+$.extend(object1, object2);
+</code></pre>
+<h4>Result:</h4>
+<pre><code class="results">object1 === {apple: 0, banana: {price: 200}, cherry: 97, durian: 100}</code></pre>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Merge two objects recursively, modifying the first.</span>
+</h4>
+<pre><code class="example">
+var object1 = {
+  apple: 0,
+  banana: {weight: 52, price: 100},
+  cherry: 97
+};
+var object2 = {
+  banana: {price: 200},
+  durian: 100
+};
+
+$.extend(true, object1, object2);
+</code></pre>
+<h4>Result:</h4>
+<pre><code class="results">object1 === {apple: 0, banana: {weight: 52, price: 200}, cherry: 97, durian: 100}</code></pre>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">Merge settings and options, modifying settings.</span>
+</h4>
+<pre><code class="example">var settings = { validate: false, limit: 5, name: "foo" };
+var options = { validate: true, name: "bar" };
+jQuery.extend(settings, options);</code></pre>
+<h4>Result:</h4>
+<pre><code class="results">settings == { validate: true, limit: 5, name: "bar" }</code></pre>
+</div>
+<div id="example-3">
+<h4>Example: <span class="desc">Merge defaults and options, without modifying the defaults. This is a common plugin development pattern.</span>
+</h4>
+<pre><code class="example">var empty = {}
+var defaults = { validate: false, limit: 5, name: "foo" };
+var options = { validate: true, name: "bar" };
+var settings = $.extend(empty, defaults, options);</code></pre>
+<h4>Result:</h4>
+<pre><code class="results">settings == { validate: true, limit: 5, name: "bar" }
+empty == { validate: true, limit: 5, name: "bar" }</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

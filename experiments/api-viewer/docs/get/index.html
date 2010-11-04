@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.get()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="get1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.get( [ index ] )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#Element,%20Array">Element, Array</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Retrieve the DOM elements matched by the jQuery object.</p>
+<ul class="signatures"><li class="signature" id="get-index">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.get( [ index ] )</h4>
+<p class="arguement"><strong>index</strong>A zero-based integer indicating which element to retrieve.</p>
+</li></ul>
+<div class="longdesc">
+<p>The <code>.get()</code> method grants us access to the DOM nodes underlying each jQuery object. Suppose we had a simple unordered list on the page:</p>
+<pre>
+&lt;ul&gt;
+  &lt;li id="foo"&gt;foo&lt;/li&gt;
+  &lt;li id="bar"&gt;bar&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+<p>Without a parameter, <code>.get()</code> returns all of the elements:</p>
+<pre>alert($('li').get());</pre>
+<p>All of the matched DOM nodes are returned by this call, contained in a standard array:</p>
+<p><span class="result">[&lt;li id="foo"&gt;, &lt;li id="bar"&gt;]</span></p>
+<p>With an index specified, .get() will retrieve a single element:</p>
+<pre>($('li').get(0));</pre>
+<p>Since the index is zero-based, the first list item is returned:</p>
+<p><span class="output">&lt;li id="foo"&gt;</span></p>
+<p>Each jQuery object also masquerades as an array, so we can use the array dereferencing operator to get at the list item instead:</p>
+<pre>alert($('li')[0]);</pre>
+<p>However, this syntax lacks some of the additional capabilities of .get(), such as specifying a negative index:</p>
+<pre>alert($('li').get(-1));</pre>
+<p>A negative index is counted from the end of the matched set, so this example will return the last item in the list:</p>
+<p><span class="output">&lt;li id="bar"&gt;</span></p>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Selects all divs in the document and returns the DOM Elements as an Array, then uses the built-in reverse-method to reverse that array.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  span { color:red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	Reversed - &lt;span&gt;&lt;/span&gt;
+
+  &lt;div&gt;One&lt;/div&gt;
+  &lt;div&gt;Two&lt;/div&gt;
+  &lt;div&gt;Three&lt;/div&gt;
+&lt;script&gt;
+
+    function disp(divs) {
+      var a = [];
+      for (var i = 0; i &lt; divs.length; i++) {
+        a.push(divs[i].innerHTML);
+      }
+      $("span").text(a.join(" "));
+    }
+    
+    disp( $("div").get().reverse() );
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Gives the tag name of the element clicked on.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  span { color:red; }
+  div { background:yellow; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;span&gt;&amp;nbsp;&lt;/span&gt;
+  &lt;p&gt;In this paragraph is an &lt;span&gt;important&lt;/span&gt; section&lt;/p&gt;
+
+  &lt;div&gt;&lt;input type="text" /&gt;&lt;/div&gt;
+&lt;script&gt;
+
+    $("*", document.body).click(function (e) {
+      e.stopPropagation();
+      var domEl = $(this).get(0);
+      $("span:first").text("Clicked on - " + domEl.tagName);
+    });
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

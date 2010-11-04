@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.serializeArray()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="serializeArray1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.serializeArray()</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#Array">Array</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Encode a set of form elements as an array of names and values.</p>
+<ul class="signatures"><li class="signature" id="serializeArray"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.2/">1.2</a></span>.serializeArray()</h4></li></ul>
+<div class="longdesc">
+<p>The <code>.serializeArray()</code> method creates a JavaScript array of objects, ready to be encoded as a JSON string. It operates on a jQuery object representing a set of form elements. The form elements can be of several types:</p>
+<pre>&lt;form&gt;
+  &lt;div&gt;&lt;input type="text" name="a" value="1" id="a" /&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;input type="text" name="b" value="2" id="b" /&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;input type="hidden" name="c" value="3" id="c" /&gt;&lt;/div&gt;
+  &lt;div&gt;
+    &lt;textarea name="d" rows="8" cols="40"&gt;4&lt;/textarea&gt;
+  &lt;/div&gt;
+  &lt;div&gt;&lt;select name="e"&gt;
+    &lt;option value="5" selected="selected"&gt;5&lt;/option&gt;
+    &lt;option value="6"&gt;6&lt;/option&gt;
+    &lt;option value="7"&gt;7&lt;/option&gt;
+  &lt;/select&gt;&lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" name="f" value="8" id="f" /&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="submit" name="g" value="Submit" id="g" /&gt;
+  &lt;/div&gt;
+&lt;/form&gt;</pre>
+<p>The <code>.serializeArray()</code> method can act on a jQuery object that has selected individual form elements, such as <code>&lt;input&gt;</code>, <code>&lt;textarea&gt;</code>, and <code>&lt;select&gt;</code>. However, it is typically easier to select the <code>&lt;form&gt;</code> tag itself for serialization:</p>
+<pre>$('form').submit(function() {
+  $.print($(this).serializeArray());
+  return false;
+});</pre>
+<p>This produces the following data structure:</p>
+<pre>[
+  {
+    name: a
+    value: 1
+  },
+  {
+    name: b
+    value: 2
+  },
+  {
+    name: c
+    value: 3
+  },
+  {
+    name: d
+    value: 4
+  },
+  {
+    name: e
+    value: 5
+  }
+]</pre>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Get the values from a form, iterate through them, and append them to a results display.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  body, select { font-size:14px; }
+  form { margin:5px; }
+  p { color:red; margin:5px; }
+  b { color:blue; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;&lt;b&gt;Results:&lt;/b&gt; &lt;span id="results"&gt;&lt;/span&gt;&lt;/p&gt;
+
+  &lt;form&gt;
+    &lt;select name="single"&gt;
+      &lt;option&gt;Single&lt;/option&gt;
+      &lt;option&gt;Single2&lt;/option&gt;
+
+    &lt;/select&gt;
+    &lt;select name="multiple" multiple="multiple"&gt;
+      &lt;option selected="selected"&gt;Multiple&lt;/option&gt;
+      &lt;option&gt;Multiple2&lt;/option&gt;
+
+      &lt;option selected="selected"&gt;Multiple3&lt;/option&gt;
+    &lt;/select&gt;&lt;br/&gt;
+    &lt;input type="checkbox" name="check" value="check1" id="ch1"/&gt;
+
+    &lt;label for="ch1"&gt;check1&lt;/label&gt;
+    &lt;input type="checkbox" name="check" value="check2" checked="checked" id="ch2"/&gt;
+
+    &lt;label for="ch2"&gt;check2&lt;/label&gt;
+    &lt;input type="radio" name="radio" value="radio1" checked="checked" id="r1"/&gt;
+
+    &lt;label for="r1"&gt;radio1&lt;/label&gt;
+    &lt;input type="radio" name="radio" value="radio2" id="r2"/&gt;
+
+    &lt;label for="r2"&gt;radio2&lt;/label&gt;
+  &lt;/form&gt;
+&lt;script&gt;
+
+    function showValues() {
+      var fields = $(":input").serializeArray();
+      $("#results").empty();
+      jQuery.each(fields, function(i, field){
+        $("#results").append(field.value + " ");
+      });
+    }
+
+    $(":checkbox, :radio").click(showValues);
+    $("select").change(showValues);
+    showValues();
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

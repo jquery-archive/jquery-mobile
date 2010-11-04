@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.scroll()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="scroll1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.scroll( handler(eventObject) )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Bind an event handler to the "scroll" JavaScript event, or trigger that event on an element.</p>
+<ul class="signatures">
+<li class="signature" id="scroll-handlereventObject">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.scroll( handler(eventObject) )</h4>
+<p class="arguement"><strong>handler(eventObject)</strong>A function to execute each time the event is triggered.</p>
+</li>
+<li class="signature" id="scroll"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.scroll()</h4></li>
+</ul>
+<div class="longdesc">
+<p>This method is a shortcut for <code>.bind('scroll', handler)</code> in the first variation, and <code>.trigger('scroll')</code> in the second.</p>
+<p>The <code>scroll</code> event is sent to an element when the user scrolls to a different place in the element. It applies to <code>window</code> objects, but also to scrollable frames and elements with the <code>overflow </code>CSS property set to <code>scroll</code> (or <code>auto</code> when the element's explicit height is less than the height of its contents).</p>
+<p>For example, consider the HTML:</p>
+<pre>&lt;div id="target" style="overflow: scroll; width: 200px; height: 100px;"&gt;
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+  sed do eiusmod tempor incididunt ut labore et dolore magna
+  aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+  ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  Duis aute irure dolor in reprehenderit in voluptate velit
+  esse cillum dolore eu fugiat nulla pariatur. Excepteur
+  sint occaecat cupidatat non proident, sunt in culpa qui
+  officia deserunt mollit anim id est laborum.
+&lt;/div&gt;
+&lt;div id="other"&gt;
+  Trigger the handler
+&lt;/div&gt;
+&lt;div id="log"&gt;&lt;/div&gt;</pre>
+<p>The style definition is present to make the target element small enough to be scrollable:</p>
+<p class="image"><img src="http://api.jquery.com/images/0042_05_11.png" alt=""></p>
+<p>The <code>scroll</code> event handler can be bound to this element:</p>
+<pre>$('#target').scroll(function() {
+  $('#log').append('&lt;div&gt;Handler for .scroll() called.&lt;/div&gt;');
+});</pre>
+<p>Now when the user scrolls the text up or down, one or more messages are appended to <code>&lt;div id="log"&gt;&lt;/div&gt;</code>:</p>
+<p><span class="output">Handler for .scroll() called.</span></p>
+<p>We can trigger the event manually when another element is clicked:</p>
+<pre>$('#other').click(function() {
+  $('#target').scroll();
+});</pre>
+<p>After this code executes, clicks on <span class="output">Trigger the handler</span> will also append the message.</p>
+<p>A <code>scroll</code> event is sent whenever the element's scroll position changes, regardless of the cause. A mouse click or drag on the scroll bar, dragging inside the element, pressing the arrow keys, or using the mouse's scroll wheel could cause this event.</p>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">To do something when your page is scrolled:</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  div { color:blue; }
+  p { color:green; }
+  span { color:red; display:none; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div&gt;Try scrolling the iframe.&lt;/div&gt;
+  &lt;p&gt;Paragraph - &lt;span&gt;Scroll happened!&lt;/span&gt;&lt;/p&gt;
+&lt;script&gt;
+    $("p").clone().appendTo(document.body);
+    $("p").clone().appendTo(document.body);
+    $("p").clone().appendTo(document.body);
+    $(window).scroll(function () { 
+      $("span").css("display", "inline").fadeOut("slow"); 
+    });
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

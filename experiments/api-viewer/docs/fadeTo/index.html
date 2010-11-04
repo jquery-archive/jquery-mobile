@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.fadeTo()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="fadeTo1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.fadeTo( duration, opacity, [ callback ] )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Adjust the opacity of the matched elements.</p>
+<ul class="signatures"><li class="signature" id="fadeTo-duration-opacity-callback">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.fadeTo( duration, opacity, [ callback ] )</h4>
+<p class="arguement"><strong>duration</strong>A string or number determining how long the animation will run.</p>
+<p class="arguement"><strong>opacity</strong>A number between 0 and 1 denoting the target opacity.</p>
+<p class="arguement"><strong>callback</strong>A function to call once the animation is complete.</p>
+</li></ul>
+<div class="longdesc">
+<p>The <code>.fadeTo()</code> method animates the opacity of the matched elements.</p>
+<p>Durations are given in milliseconds; higher values indicate slower animations, not faster ones. The strings <code>'fast'</code> and <code>'slow'</code> can be supplied to indicate durations of <code>200</code> and <code>600</code> milliseconds, respectively. If any other string is supplied, the default duration of  <code>400</code> milliseconds is used. Unlike the other effect methods, <code>.fadeTo()</code> requires that <code>duration</code> be explicitly specified.</p>
+<p>If supplied, the callback is fired once the animation is complete. This can be useful for stringing different animations together in sequence. The callback is not sent any arguments, but <code>this</code> is set to the DOM element being animated. If multiple elements are animated, it is important to note that the callback is executed once per matched element, not once for the animation as a whole.</p>
+<p>We can animate any element, such as a simple image:</p>
+<pre>&lt;div id="clickme"&gt;
+    Click here
+  &lt;/div&gt;
+  &lt;img id="book" src="book.png" alt="" width="100" height="123" /&gt;
+  With the element initially shown, we can dim it slowly:
+  $('#clickme').click(function() {
+    $('#book').fadeTo('slow', 0.5, function() {
+      // Animation complete.
+    });
+  });
+  </pre>
+<p class="image four-across"> 
+    <img src="http://api.jquery.com/images/0042_06_41.png" alt=""><img src="http://api.jquery.com/images/0042_06_42.png" alt=""><img src="http://api.jquery.com/images/0042_06_43.png" alt=""><img src="http://api.jquery.com/images/0042_06_44.png" alt=""></p>
+<p>With <code>duration</code> set to <code>0</code>, this method just changes the <code>opacity</code> CSS property, so <code>.fadeTo(0, opacity)</code> is the same as <code>.css('opacity', opacity)</code>.</p>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Animates first paragraph to fade to an opacity of 0.33 (33%, about one third visible), completing the animation within 600 milliseconds.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;
+Click this paragraph to see it fade.
+&lt;/p&gt;
+
+&lt;p&gt;
+Compare to this one that won't fade.
+&lt;/p&gt;
+&lt;script&gt;
+$("p:first").click(function () {
+$(this).fadeTo("slow", 0.33);
+});
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Fade div to a random opacity on each click, completing the animation within 200 milliseconds.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+p { width:80px; margin:0; padding:5px; }
+div { width:40px; height:40px; position:absolute; }
+div#one { top:0; left:0; background:#f00; }
+div#two { top:20px; left:20px; background:#0f0; }
+div#three { top:40px; left:40px; background:#00f; }
+&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;And this is the library that John built...&lt;/p&gt;
+
+&lt;div id="one"&gt;&lt;/div&gt;
+&lt;div id="two"&gt;&lt;/div&gt;
+&lt;div id="three"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("div").click(function () {
+$(this).fadeTo("fast", Math.random());
+});
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">Find the right answer!  The fade will take 250 milliseconds and change various styles when it completes.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+div, p { width:80px; height:40px; top:0; margin:0; 
+position:absolute; padding-top:8px; }
+p { background:#fcc; text-align:center; }
+div { background:blue; }
+&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;Wrong&lt;/p&gt;
+&lt;div&gt;&lt;/div&gt;
+&lt;p&gt;Wrong&lt;/p&gt;
+&lt;div&gt;&lt;/div&gt;
+
+&lt;p&gt;Right!&lt;/p&gt;
+&lt;div&gt;&lt;/div&gt;
+&lt;script&gt;
+var getPos = function (n) {
+return (Math.floor(n) * 90) + "px";
+};
+$("p").each(function (n) {
+var r = Math.floor(Math.random() * 3);
+var tmp = $(this).text();
+$(this).text($("p:eq(" + r + ")").text());
+$("p:eq(" + r + ")").text(tmp);
+$(this).css("left", getPos(n));
+});
+$("div").each(function (n) {
+      $(this).css("left", getPos(n));
+    })
+.css("cursor", "pointer")
+.click(function () {
+      $(this).fadeTo(250, 0.25, function () {
+            $(this).css("cursor", "")
+                   .prev().css({"font-weight": "bolder",
+                                "font-style": "italic"});
+          });
+    });
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

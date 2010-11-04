@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>jQuery.getScript()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="jQuery.getScript1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">jQuery.getScript( url, [ success(data, textStatus) ] )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#XMLHttpRequest">XMLHttpRequest</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Load a JavaScript file from the server using a GET HTTP request, then execute it.</p>
+<ul class="signatures"><li class="signature" id="jQuery.getScript-url-successdata, textStatus">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>jQuery.getScript( url, [ success(data, textStatus) ] )</h4>
+<p class="arguement"><strong>url</strong>A string containing the URL to which the request is sent.</p>
+<p class="arguement"><strong>success(data, textStatus)</strong>A callback function that is executed if the request succeeds.</p>
+</li></ul>
+<div class="longdesc">
+<p>This is a shorthand Ajax function, which is equivalent to:</p>
+<pre>$.ajax({
+  url: <em>url</em>,
+  dataType: 'script',
+  success: <em>success</em>
+});
+</pre>
+<p>The callback is passed the returned JavaScript file. This is generally not useful as the script will already have run at this point.</p>
+<p>The script is executed in the global context, so it can refer to other variables and use jQuery functions. Included scripts should have some impact on the current page:</p>
+<pre>$('.result').html('&lt;p&gt;Lorem ipsum dolor sit amet.&lt;/p&gt;');</pre>
+<p>The script can then be included and run by referencing the file name:</p>
+<pre>$.getScript('ajax/test.js', function() {
+  alert('Load was performed.');
+});</pre>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">We load the new official jQuery Color Animation plugin dynamically and bind some color animations to occur once the new functionality is loaded.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;.block { 
+   background-color: blue; 
+   width: 150px; 
+   height: 70px;
+   margin: 10px; 
+}&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;button id="go"&gt;&amp;raquo; Run&lt;/button&gt;
+
+&lt;div class="block"&gt;&lt;/div&gt;
+
+&lt;script&gt;$.getScript("http://dev.jquery.com/view/trunk/plugins/color/jquery.color.js", function(){
+  $("#go").click(function(){
+    $(".block").animate( { backgroundColor: 'pink' }, 1000)
+      .animate( { backgroundColor: 'blue' }, 1000);
+  });
+});&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Load the test.js JavaScript file and execute it.</span>
+</h4>
+<pre><code class="example">$.getScript("test.js");</code></pre>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">Load the test.js JavaScript file and execute it, displaying an alert message when the execution is complete.</span>
+</h4>
+<pre><code class="example">$.getScript("test.js", function(){
+   alert("Script loaded and executed.");
+ });</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

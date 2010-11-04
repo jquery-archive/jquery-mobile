@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>event.pageY</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="event.pageY1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">event.pageY</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#Number">Number</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>The mouse position relative to the top edge of the document. </p>
+<ul class="signatures"><li class="signature" id="event.pageY"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0.4/">1.0.4</a></span>event.pageY</h4></li></ul>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Show the mouse position relative to the left and top edges of the document (within this iframe).</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;body {background-color: #eef; }
+div { padding: 20px; }&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div id="log"&gt;&lt;/div&gt;
+&lt;script&gt;$(document).bind('mousemove',function(e){ 
+            $("#log").text("e.pageX: " + e.pageX + ", e.pageY: " + e.pageY); 
+}); &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

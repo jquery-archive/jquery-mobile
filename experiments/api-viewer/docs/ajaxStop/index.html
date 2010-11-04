@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.ajaxStop()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="ajaxStop1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.ajaxStop( handler() )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong></p>
+<ul class="signatures"><li class="signature" id="ajaxStop-handler">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.ajaxStop( handler() )</h4>
+<p class="arguement"><strong>handler()</strong>The function to be invoked.</p>
+</li></ul>
+<div class="longdesc">
+<p>Whenever an Ajax request completes, jQuery checks whether there are any other outstanding Ajax requests. If none remain, jQuery triggers the <code>ajaxStop</code> event. Any and all handlers that have been registered with the <code>.ajaxStop()</code> method are executed at this time.</p>
+<p>To observe this method in action, we can set up a basic Ajax load request:</p>
+<pre>&lt;div class="trigger"&gt;Trigger&lt;/div&gt;
+&lt;div class="result"&gt;&lt;/div&gt;
+&lt;div class="log"&gt;&lt;/div&gt;</pre>
+<p>We can attach our event handler to any element:</p>
+<pre>$('.log').ajaxStop(function() {
+  $(this).text('Triggered ajaxStop handler.');
+});</pre>
+<p>Now, we can make an Ajax request using any jQuery method:</p>
+<pre>$('.trigger').click(function() {
+  $('.result').load('ajax/test.html');
+});</pre>
+<p>When the user clicks the button and the Ajax request completes, the log message is displayed.</p>
+<p>Because <code>.ajaxStop()</code> is implemented as a method of jQuery object instances, we can use the <code>this</code> keyword as we do here to refer to the selected elements within the callback function.</p>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Hide a loading message after all the Ajax requests have stopped.</span></h4>
+<pre><code class="example">$("#loading").ajaxStop(function(){
+      $(this).hide();
+      });</code></pre>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

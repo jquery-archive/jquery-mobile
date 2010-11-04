@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>:has() Selector</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="has1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">has</span>  selector</h2>
+<div class="  entry-details">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/version/1.1.4/">1.1.4</a></span>jQuery(':has(selector)')</h4>
+<p class="desc"><strong>Description: </strong>Selects elements which contain at least one element that matches the specified selector.</p>
+<div class="longdesc"><p>The expression <code>$('div:has(p)')</code> matches a <code>&lt;div&gt;</code> if a <code>&lt;p&gt;</code> exists anywhere among its descendants, not just as a direct child.</p></div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Adds the class "test" to all divs that have a paragraph inside of them.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  .test{ border: 3px inset red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div&gt;&lt;p&gt;Hello in a paragraph&lt;/p&gt;&lt;/div&gt;
+
+  &lt;div&gt;Hello again! (with no paragraph)&lt;/div&gt;
+&lt;script&gt;$("div:has(p)").addClass("test");&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

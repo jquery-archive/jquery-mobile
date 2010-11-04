@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.keyup()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="keyup1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.keyup( handler(eventObject) )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Bind an event handler to the "keyup" JavaScript event, or trigger that event on an element.</p>
+<ul class="signatures">
+<li class="signature" id="keyup-handlereventObject">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.keyup( handler(eventObject) )</h4>
+<p class="arguement"><strong>handler(eventObject)</strong>A function to execute each time the event is triggered.</p>
+</li>
+<li class="signature" id="keyup"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.keyup()</h4></li>
+</ul>
+<div class="longdesc">
+<p>This method is a shortcut for <code>.bind('keyup', handler)</code> in the first variation, and <code>.trigger('keyup')</code> in the second.</p>
+<p>The <code>keyup</code> event is sent to an element when the user releases a key on the keyboard. It can be attached to any element, but the event is only sent to the element that has the focus. Focusable elements can vary between browsers, but form elements can always get focus so are reasonable candidates for this event type.</p>
+<p>For example, consider the HTML:</p>
+<pre>&lt;form&gt;
+  &lt;input id="target" type="text" value="Hello there" /&gt;
+&lt;/form&gt;
+&lt;div id="other"&gt;
+  Trigger the handler
+&lt;/div&gt;</pre>
+<p>The event handler can be bound to the input field:</p>
+<pre>$('#target').keyup(function() {
+  alert('Handler for .keyup() called.');
+});
+</pre>
+<p>Now when the insertion point is inside the field and a key is pressed and released, the alert is displayed:</p>
+<p><span class="output">Handler for .keyup() called.</span></p>
+<p>We can trigger the event manually when another element is clicked:</p>
+<pre>$('#other').click(function() {
+  $('#target').keyup();
+});</pre>
+<p>After this code executes, clicks on <span class="output">Trigger the handler</span> will also alert the message.</p>
+<p>If key presses anywhere need to be caught (for example, to implement global shortcut keys on a page), it is useful to attach this behavior to the <code>document</code> object. Because of event bubbling, all key presses will make their way up the DOM to the <code>document</code> object unless explicitly stopped.</p>
+<p>To determine which key was pressed, we can examine the event object that is passed to the handler function. While browsers use differing attributes to store this information, jQuery normalizes the <code>.which</code> attribute so we can reliably use it to retrieve the key code. This code corresponds to a key on the keyboard, including codes for special keys such as arrows. For catching actual text entry, <code>.keypress()</code> may be a better choice.</p>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Show the event object for the keyup handler when a key is released in the input.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+fieldset { margin-bottom: 1em; }
+input { display: block; margin-bottom: .25em; }
+#print-output {
+  width: 100%;
+}
+.print-output-line {
+  white-space: pre;
+  padding: 5px;
+  font-family: monaco, monospace;
+  font-size: .7em;
+}
+
+&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;form&gt;
+  &lt;fieldset&gt;
+    &lt;label for="target"&gt;Type Something:&lt;/label&gt;
+    &lt;input id="target" type="text" /&gt;
+  &lt;/fieldset&gt;
+&lt;/form&gt;
+&lt;button id="other"&gt;
+  Trigger the handler
+&lt;/button&gt;
+&lt;script type="text/javascript" src="/scripts/events.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+var xTriggered = 0;
+$('#target').keyup(function(event) {
+  if (event.keyCode == '13') {
+     event.preventDefault();
+   }
+   xTriggered++;
+   var msg = 'Handler for .keyup() called ' + xTriggered + ' time(s).';
+  $.print(msg, 'html');
+  $.print(event);
+});
+
+$('#other').click(function() {
+  $('#target').keyup();
+});&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo" rel="460"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

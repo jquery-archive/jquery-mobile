@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.slideUp()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="slideUp1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.slideUp( [ duration ], [ callback ] )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Hide the matched elements with a sliding motion.</p>
+<ul class="signatures"><li class="signature" id="slideUp-duration-callback">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.slideUp( [ duration ], [ callback ] )</h4>
+<p class="arguement"><strong>duration</strong>A string or number determining how long the animation will run.</p>
+<p class="arguement"><strong>callback</strong>A function to call once the animation is complete.</p>
+</li></ul>
+<div class="longdesc">
+<p>The <code>.slideUp()</code> method animates the height of the matched elements. This causes lower parts of the page to slide up, appearing to conceal the items. Once the height reaches 0, the <code>display</code> style property is set to <code>none</code> to ensure that the element no longer affects the layout of the page.</p>
+<p>Durations are given in milliseconds; higher values indicate slower animations, not faster ones. The strings <code>'fast'</code> and <code>'slow'</code> can be supplied to indicate durations of <code>200</code> and <code>600</code> milliseconds, respectively. If any other string is supplied, or if the <code>duration</code> parameter is omitted, the default duration of  <code>400</code> milliseconds is used.</p>
+<p>If supplied, the callback is fired once the animation is complete. This can be useful for stringing different animations together in sequence. The callback is not sent any arguments, but <code>this</code> is set to the DOM element being animated. If multiple elements are animated, it is important to note that the callback is executed once per matched element, not once for the animation as a whole.</p>
+<p>We can animate any element, such as a simple image:</p>
+<pre>&lt;div id="clickme"&gt;
+  Click here
+&lt;/div&gt;
+&lt;img id="book" src="book.png" alt="" width="100" height="123" /&gt;</pre>
+<p>With the element initially shown, we can hide it slowly:</p>
+<pre>$('#clickme').click(function() {
+  $('#book').slideUp('slow', function() {
+    // Animation complete.
+  });
+});
+  </pre>
+<p class="image four-across"> 
+  <img src="http://api.jquery.com/images/0042_06_21.png" alt=""><img src="http://api.jquery.com/images/0042_06_22.png" alt=""><img src="http://api.jquery.com/images/0042_06_23.png" alt=""><img src="http://api.jquery.com/images/0042_06_24.png" alt=""></p>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Animates all divs to slide up, completing the animation within 400 milliseconds.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  div { background:#3d9a44; margin:3px; width:80px; 
+    height:40px; float:left; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	Click me!
+  &lt;div&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;/div&gt;
+
+  &lt;div&gt;&lt;/div&gt;
+&lt;script&gt;
+  $(document.body).click(function () {
+    if ($("div:first").is(":hidden")) {
+      $("div").show("slow");
+    } else {
+      $("div").slideUp();
+    }
+  });
+
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Animates the parent paragraph to slide up, completing the animation within 200 milliseconds. Once the animation is done, it displays an alert.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+ div { margin:2px; }
+&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div&gt;
+  &lt;button&gt;Hide One&lt;/button&gt;
+  &lt;input type="text" value="One" /&gt;
+
+&lt;/div&gt;
+&lt;div&gt;
+  &lt;button&gt;Hide Two&lt;/button&gt;
+  &lt;input type="text" value="Two" /&gt;
+
+&lt;/div&gt;
+&lt;div&gt;
+  &lt;button&gt;Hide Three&lt;/button&gt;
+  &lt;input type="text" value="Three" /&gt;
+
+&lt;/div&gt;
+&lt;div id="msg"&gt;&lt;/div&gt;
+&lt;script&gt;
+  $("button").click(function () {
+    $(this).parent().slideUp("slow", function () {
+      $("#msg").text($("button", this).text() + " has completed.");
+    });
+  });
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.unload()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="unload1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.unload( handler(eventObject) )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Bind an event handler to the "unload" JavaScript event.</p>
+<ul class="signatures"><li class="signature" id="unload-handlereventObject">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.unload( handler(eventObject) )</h4>
+<p class="arguement"><strong>handler(eventObject)</strong>A function to execute when the event is triggered.</p>
+</li></ul>
+<div class="longdesc">
+<p>This method is a shortcut for <code>.bind('unload', handler)</code>.</p>
+<p>The <code>unload</code> event is sent to the <code>window</code> element when the user navigates away from the page. This could mean one of many things. The user could have clicked on a link to leave the page, or typed in a new URL in the address bar. The forward and back buttons will trigger the event. Closing the browser window will cause the event to be triggered. Even a page reload will first create an <code>unload</code> event.</p>
+<blockquote><p>The exact handling of the <code>unload</code> event has varied from version to version of browsers. For example, some versions of Firefox trigger the event when a link is followed, but not when the window is closed. In practical usage, behavior should be tested on all supported browsers, and contrasted with the proprietary <code>beforeunload</code> event.</p></blockquote>
+<p>Any <code>unload</code> event handler should be bound to the <code>window</code> object:</p>
+<pre>$(window).unload(function() {
+  alert('Handler for .unload() called.');
+});
+</pre>
+<p>After this code executes, the alert will be displayed whenever the browser leaves the current page.
+It is not possible to cancel the <code>unload</code> event with <code>.preventDefault()</code>. This event is available so that scripts can perform cleanup when the user leaves the page.
+</p>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">To display an alert when a page is unloaded:</span></h4>
+<pre><code class="example">$(window).unload( function () { alert("Bye now!"); } );</code></pre>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

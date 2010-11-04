@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>event.relatedTarget</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="event.relatedTarget1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">event.relatedTarget</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#Element">Element</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>  The other DOM element involved in the event, if any. </p>
+<ul class="signatures"><li class="signature" id="event.relatedTarget"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.1.4/">1.1.4</a></span>event.relatedTarget</h4></li></ul>
+<div class="longdesc"><p>For <code>mouseout</code>, indicates the element being entered; for <code>mousein</code>, indicates the element being exited. </p></div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">On mouseout of anchors, alert the element type being entered.</span></h4>
+<pre><code class="example">$("a").mouseout(function(event) {
+  alert(event.relatedTarget.nodeName); // "DIV"
+});  </code></pre>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

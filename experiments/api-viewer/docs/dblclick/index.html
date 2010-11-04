@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.dblclick()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="dblclick1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.dblclick( handler(eventObject) )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Bind an event handler to the "dblclick" JavaScript event, or trigger that event on an element.</p>
+<ul class="signatures">
+<li class="signature" id="dblclick-handlereventObject">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.dblclick( handler(eventObject) )</h4>
+<p class="arguement"><strong>handler(eventObject)</strong>A function to execute each time the event is triggered.</p>
+</li>
+<li class="signature" id="dblclick"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.dblclick()</h4></li>
+</ul>
+<div class="longdesc">
+<p>This method is a shortcut for <code>.bind('dblclick', handler)</code> in the first variation, and <code>.trigger('dblclick')</code> in the second.
+The <code>dblclick</code> event is sent to an element when the element is double-clicked. Any HTML element can receive this event.
+For example, consider the HTML:</p>
+<pre>&lt;div id="target"&gt;
+  Double-click here
+&lt;/div&gt;
+&lt;div id="other"&gt;
+  Trigger the handler
+&lt;/div&gt;</pre>
+<p class="image"><img src="http://api.jquery.com/images/0042_05_04.png" alt=""></p>
+<p>The event handler can be bound to any <code>&lt;div&gt;</code>:</p>
+<pre>$('#target').dblclick(function() {
+  alert('Handler for .dblclick() called.');
+});</pre>
+<p>Now if we double-click on this element, the alert is displayed:</p>
+<p><span class="output">Handler for .dblclick() called.</span></p>
+<p>We can also trigger the event when a different element is clicked:</p>
+<pre>$('#other').click(function() {
+  $('#target').dblclick();
+});</pre>
+<p>After this code executes, (single) clicks on <span class="output">Trigger the handler</span> will also alert the message.</p>
+<p>The <code>dblclick</code> event is only triggered after this exact series of events:</p>
+<ul>
+<li>The mouse button is depressed while the pointer is inside the element.</li>
+<li>The mouse button is released while the pointer is inside the element.</li>
+<li>The mouse button is depressed again while the pointer is inside the element, within a time window that is system-dependent.</li>
+<li>The mouse button is released while the pointer is inside the element.</li>
+</ul>
+<p>It is inadvisable to bind handlers to both the <code>click</code> and <code>dblclick</code> events for the same element. The sequence of events triggered varies from browser to browser, with some receiving two <code>click</code> events and others only one. If an interface that reacts differently to single- and double-clicks cannot be avoided, then the <code>dblclick</code> event should be simulated within the <code>click</code> handler. We can achieve this by saving a timestamp in the handler, and then comparing the current time to the saved timestamp on subsequent clicks. If the difference is small enough, we can treat the click as a double-click.
+</p>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">To bind a "Hello World!" alert box the dblclick event on every paragraph on the page:</span>
+</h4>
+<pre><code class="example">$("p").dblclick( function () { alert("Hello World!"); });</code></pre>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Double click to toggle background color.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+
+  div { background:blue;
+        color:white;
+        height:100px;
+        width:150px;
+ }
+  div.dbl { background:yellow;color:black; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div&gt;&lt;/div&gt;&lt;span&gt;Double click the block&lt;/span&gt;
+&lt;script&gt;
+    var divdbl = $("div:first");
+    divdbl.dblclick(function () { 
+      divdbl.toggleClass('dbl'); 
+    });
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.removeClass()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="removeClass1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.removeClass( [ className ] )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Remove a single class, multiple classes, or all classes from each element in the set of matched elements.</p>
+<ul class="signatures">
+<li class="signature" id="removeClass-className">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.removeClass( [ className ] )</h4>
+<p class="arguement"><strong>className</strong>A class name to be removed from the class attribute of each matched element.</p>
+</li>
+<li class="signature" id="removeClass-functionindex, class">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4/">1.4</a></span>.removeClass( function(index, class) )</h4>
+<p class="arguement"><strong>function(index, class)</strong>A function returning one or more space-separated class names to be removed. Receives the index position of the element in the set and the old class value as arguments.</p>
+</li>
+</ul>
+<div class="longdesc">
+<p>If a class name is included as a parameter, then only that class will be removed from the set of matched elements. If no class names are specified in the parameter, all classes will be removed.</p>
+<p>More than one class may be removed at a time, separated by a space, from the set of matched elements, like so:</p>
+<pre>$('p').removeClass('myClass yourClass')
+</pre>
+<p>This method is often used with <code>.addClass()</code> to switch elements' classes from one to another, like so:</p>
+<pre>$('p').removeClass('myClass noClass').addClass('yourClass');
+</pre>
+<p>Here, the <code>myClass</code> and <code>noClass</code> classes are removed from all paragraphs, while <code>yourClass</code> is added.</p>
+<p>To replace all existing classes with another class, we can use <code>.attr('class', 'newClass')</code> instead.</p>
+<p>As of jQuery 1.4, the <code>.removeClass()</code> method allows us to indicate the class to be removed by passing in a function.</p>
+<pre>$('li:last').removeClass(function() {
+          return $(this).prev().attr('class');
+        });</pre>
+<p>This example removes the class name of the penultimate <code>&lt;li&gt;</code> from the last <code>&lt;li&gt;</code>.</p>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Remove the class 'blue' from the matched elements.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+
+  p { margin: 4px; font-size:16px; font-weight:bolder; }
+  .blue { color:blue; }
+  .under { text-decoration:underline; }
+  .highlight { background:yellow; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p class="blue under"&gt;Hello&lt;/p&gt;
+  &lt;p class="blue under highlight"&gt;and&lt;/p&gt;
+  &lt;p class="blue under"&gt;then&lt;/p&gt;
+
+  &lt;p class="blue under"&gt;Goodbye&lt;/p&gt;
+&lt;script&gt;$("p:even").removeClass("blue");&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Remove the class 'blue' and 'under' from the matched elements.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  p { margin: 4px; font-size:16px; font-weight:bolder; }
+  .blue { color:blue; }
+  .under { text-decoration:underline; }
+  .highlight { background:yellow; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p class="blue under"&gt;Hello&lt;/p&gt;
+
+  &lt;p class="blue under highlight"&gt;and&lt;/p&gt;
+  &lt;p class="blue under"&gt;then&lt;/p&gt;
+  &lt;p class="blue under"&gt;Goodbye&lt;/p&gt;
+&lt;script&gt;$("p:odd").removeClass("blue under");&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">Remove all the classes from the matched elements.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+
+  p { margin: 4px; font-size:16px; font-weight:bolder; }
+  .blue { color:blue; }
+  .under { text-decoration:underline; }
+  .highlight { background:yellow; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p class="blue under"&gt;Hello&lt;/p&gt;
+  &lt;p class="blue under highlight"&gt;and&lt;/p&gt;
+  &lt;p class="blue under"&gt;then&lt;/p&gt;
+
+  &lt;p class="blue under"&gt;Goodbye&lt;/p&gt;
+&lt;script&gt;$("p:eq(1)").removeClass();&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

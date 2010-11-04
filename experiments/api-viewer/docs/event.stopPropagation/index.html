@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>event.stopPropagation()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="event.stopPropagation1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">event.stopPropagation()</span> <span class="returns"></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong> This method prevents the event from bubbling up the DOM tree, preventing any parent handlers from being notified of the event.   </p>
+<ul class="signatures"><li class="signature" id="event.stopPropagation"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>event.stopPropagation()</h4></li></ul>
+<div class="longdesc">
+<p>We can use <code>.isPropagationStopped()</code> to determine if this method has been called by an event handler that was triggered by this event. </p>
+<p>This method works for custom events triggered with <a href="/trigger">trigger()</a>, as well.</p>
+<p>Note that this will not prevent other handlers <em>on the same element</em> from running. Use the method <a href="/event.isPropagationStopped">event.isPropagationStopped()</a> to know whether this method was ever called (on that event object). </p>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Kill the bubbling on the click event.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	
+&lt;script&gt;$("p").click(function(event){
+  event.stopPropagation();
+  // do something
+});  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+<h4>Result:</h4>
+<pre><code class="results"></code></pre>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

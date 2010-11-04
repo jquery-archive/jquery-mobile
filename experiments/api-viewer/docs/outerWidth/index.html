@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.outerWidth()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="outerWidth1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.outerWidth( [ includeMargin ] )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#Integer">Integer</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Get the current computed width for the first element in the set of matched elements, including padding and border.</p>
+<ul class="signatures"><li class="signature" id="outerWidth-includeMargin">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.2.6/">1.2.6</a></span>.outerWidth( [ includeMargin ] )</h4>
+<p class="arguement"><strong>includeMargin</strong>A Boolean indicating whether to include the element's margin in the calculation.</p>
+</li></ul>
+<div class="longdesc">
+<p>Returns the width of the element, along with left and right padding, border, and optionally margin, in pixels.</p>
+<p>If <code>includeMargin</code> is omitted or <code>false</code>, the padding and border are included in the calculation; if <code>true</code>, the margin is also included.</p>
+<p>This method is not applicable to <code>window</code> and <code>document</code> objects; for these, use <code><a href="/width">.width()</a></code> instead.</p>
+<p class="image"><img src="http://api.jquery.com/images/0042_04_06.png"></p>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Get the outerWidth of a paragraph.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  p { margin:10px;padding:5px;border:2px solid #666; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;Hello&lt;/p&gt;&lt;p&gt;&lt;/p&gt;
+&lt;script&gt;var p = $("p:first");
+$("p:last").text( "outerWidth:" + p.outerWidth()+ " , outerWidth(true):" + p.outerWidth(true) );
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

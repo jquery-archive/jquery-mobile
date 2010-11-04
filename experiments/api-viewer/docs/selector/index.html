@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.selector</h1>
+  				
+</div>
+<div data-role="content" class=" ui-body-c" id="selector1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">selector</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#String">String</a></span>
+</h2>
+<div class="jq-box roundBottom entry-details">
+<p class="desc"><strong>Description: </strong>A selector representing selector originally passed to jQuery().</p>
+<ul class="signatures"><li class="signature" id="selector"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.3/">1.3</a></span>selector</h4></li></ul>
+<div class="longdesc">
+<p>Should be used in conjunction with context to determine the exact query used.</p>
+<p>The <code>.live()</code> method for binding event handlers uses this property to determine how to perform its searches. Plug-ins which perform similar tasks may also find the property useful. This property contains a string representing the matched set of elements, but if DOM traversal methods have been called on the object, the string may not be a valid jQuery selector expression. For this reason, the value of <code>.selector</code> is generally most useful immediately following the original creation of the object. Consequently, the <code>.live()</code> method should only be used in this scenario. </p>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Determine the selector used.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  body { cursor:pointer; }
+  div { width:50px; height:30px; margin:5px; float:left;
+        background:green; }
+  span { color:red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	Some selectors:&lt;ul&gt;&lt;/ul&gt;
+&lt;script&gt;$("ul")
+  .append("&lt;li&gt;" + $("ul").selector + "&lt;/li&gt;")
+  .append("&lt;li&gt;" + $("ul li").selector + "&lt;/li&gt;")
+  .append("&lt;li&gt;" + $("div#foo ul:not([class])").selector + "&lt;/li&gt;");
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Collecting elements differently</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	Some selectors:&lt;ul&gt;&lt;/ul&gt;
+
+&lt;script&gt;
+   $('&lt;div&gt;' + $('ul li.foo').selector + '&lt;/div&gt;').appendTo('body');  // "ul li.foo"
+   $('&lt;div&gt;' + $('ul').find('li').filter('.foo').selector + '&lt;/div&gt;').appendTo('body'); // "ul li.filter(.foo)"
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

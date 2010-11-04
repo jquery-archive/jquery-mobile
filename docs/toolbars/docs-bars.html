@@ -1,0 +1,48 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+	<meta charset="utf-8" /> 
+	<title>jQuery Mobile Docs - Toolbars</title> 
+	<link rel="stylesheet"  href="../../themes/default/default.css" /> 
+	<script type="text/javascript" src="../../js.all.min.js"></script>
+</head> 
+<body> 
+
+<div data-role="page">
+
+	<div data-role="header">
+		<h1>Toolbar basics</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+			
+	<h2>Toolbar types</h2>
+	
+	<p>In jQuery Mobile, there are two standard types of toolbars: Headers and Footers. </p>
+	
+<ul>	<li>The <a href="docs-headers.html"><strong>Header bar </strong></a> serves as the page title, is usually the first element inside each <a href="../pages/docs-pages.html">mobile page</a>, and typically contains a page title and up to two buttons.</li>
+
+	<li>The <a href="docs-footers.html"><strong>Footer bar</strong></a> is usually the last element inside each mobile page, and tends to be more freeform than the header in terms of content and functionality, but typically contains a combination of text and buttons.</li> 
+</ul>	
+
+	<p>It's very common to have a horizontal navigation or tab bar inside the header an/or footer; jQuery Mobile includes a <a href="footer-persist-a.html"><strong>nav bar widget </strong></a> that turns an unordered list of links into a horizontal button bar, which works well in these instances.</p>
+
+			
+			<h2>Toolbar positioning options</h2>
+			
+			<p>Header and footers can be positioned on the page in a few different ways. By default, the toolbars use the <strong>"inline" positioning</strong> mode. In this mode, the headers and footer sit in the natural document flow (the default HTML behavior), which ensures that they are visible on all devices, regardless of JavaScript and CSS positioning support.</p>
+			
+			<p>A <a href="bars-fixed.html"><strong>"fixed" positioning mode</strong></a> provides the convenience of static toolbars without the drawbacks of implementing faux-scrolling in JavaScript. The toolbars start in their natural positions on the page, like the "inline" mode, but when a bar scrolls out of the viewport, the framework animates the bar back into view by dynamically re-positioning the bar to the top or bottom of the viewport.</p>
+			<p> At any time, tapping the screen will toggle the visibility of the fixed toolbars: tapping the page when the toolbars aren't visible brings them into view, tapping again hides them until you tap again. This gives users the option to hide the toolbars until needed to maximize screen real estate. </p>
+			<p>To set this behavior on a header or footer, add the <code> data-position="fixed"</code> attribute to the toolbar container.</p>
+									
+			<p>A <a href="bars-fullscreen.html"><strong>"fullscreen" position mode</strong></a> works just like the fixed mode except that the toolbars aren't shown at the top and bottom of the page and only appear when the page is clicked. This is useful for immersive apps like photo or video viewers where you want the content to full when whole screen and toolbars can be summoned to appear by tapping the screen. Keep in mind that the toolbars in this mode will sit <strong>over</strong> page content so this is best used for specific situations.</p>
+
+				
+					
+		
+	</div><!-- /content -->
+</div><!-- /page -->
+
+</body>
+</html>

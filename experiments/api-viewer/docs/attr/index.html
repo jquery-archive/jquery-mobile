@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.attr()</h1>
+  				
+</div>
+
+
+<div data-role="content" data-theme="c" id="attr1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.attr( attributeName )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#String">String</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Get the value of an attribute for the first element in the set of matched elements.</p>
+<ul class="signatures"><li class="signature" id="attr-attributeName">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.attr( attributeName )</h4>
+<p class="arguement"><strong>attributeName</strong>The name of the attribute to get.</p>
+</li></ul>
+<div class="longdesc">
+<p>It's important to note that the <code>.attr()</code> method gets the attribute value for only the <em>first</em> element in the matched set. To get the value for each element individually, we need to rely on a looping construct such as jQuery's <code>.each()</code> method.</p>
+<p>Using jQuery's <code>.attr()</code> method to get the value of an element's attribute has two main benefits:</p>
+<ol>
+<li>
+<strong>Convenience</strong>: It can be called directly on a jQuery object and chained to other jQuery methods.</li>
+        <li>
+<strong>Cross-browser consistency</strong>: Some attributes have inconsistent naming from browser to browser. Furthermore, the values of some attributes are reported inconsistently across browsers, and even across versions of a single browser. The <code>.attr()</code> method reduces such inconsistencies. </li>
+      </ol>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Finds the title attribute of the first &lt;em&gt; in the page.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;em { color:blue; font-weight;bold; }
+  div { color:red; }&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;
+    Once there was a &lt;em title="huge, gigantic"&gt;large&lt;/em&gt; dinosaur...
+  &lt;/p&gt;
+
+  The title of the emphasis is:&lt;div&gt;&lt;/div&gt;
+&lt;script&gt;var title = $("em").attr("title");
+    $("div").text(title);
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+<div data-role="content" data-theme="c" id="attr2">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.attr( attributeName, value )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Set one or more attributes for the set of matched elements.</p>
+<ul class="signatures">
+<li class="signature" id="attr-attributeName-value">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.attr( attributeName, value )</h4>
+<p class="arguement"><strong>attributeName</strong>The name of the attribute to set.</p>
+<p class="arguement"><strong>value</strong>A value to set for the attribute.</p>
+</li>
+<li class="signature" id="attr-map">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.attr( map )</h4>
+<p class="arguement"><strong>map</strong>A map of attribute-value pairs to set.</p>
+</li>
+<li class="signature" id="attr-attributeName-functionindex, attr">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.1/">1.1</a></span>.attr( attributeName, function(index, attr) )</h4>
+<p class="arguement"><strong>attributeName</strong>The name of the attribute to set.</p>
+<p class="arguement"><strong>function(index, attr)</strong>A function returning the value to set. <code>this</code> is the current element. Receives the index position of the element in the set and the old attribute value as arguments.</p>
+</li>
+</ul>
+<div class="longdesc">
+<p>The <code>.attr()</code> method is a convenient and powerful way to set the value of attributes—especially when setting multiple attributes or using values returned by a function. Let's consider the following image:</p>
+<pre>&lt;img id="greatphoto" src="brush-seller.jpg" alt="brush seller" /&gt;</pre>
+<h4>Setting a simple attribute</h4>
+<p>We can change the <code>alt</code> attribute by simply passing the name of the attribute and its new value to the <code>.attr()</code> method:</p>
+<pre>$('#greatphoto').attr('alt', 'Beijing Brush Seller');</pre>
+<p>We can <em>add</em> an attribute the same way:</p>
+<pre>$('#greatphoto')
+  .attr('title', 'Photo by Kelly Clark');</pre>
+<h4>Setting several attributes at once</h4>
+<p>To change the <code>alt</code> attribute and add the <code>title</code> attribute at the same time, we can pass both sets of names and values into the method at once using a map (JavaScript object literal). Each key-value pair in the map adds or modifies an attribute:</p>
+<pre>$('#greatphoto').attr({
+  alt: 'Beijing Brush Seller',
+  title: 'photo by Kelly Clark'
+});</pre>
+<p>When setting multiple attributes, the quotes around attribute names are optional.</p>
+<p><strong>WARNING</strong> When setting the 'class' attribute, you must always use quotes!</p>
+<h4>Computed attribute values</h4>
+<p>By using a function to set attributes, we can compute the value based on other properties of the element. For example, we could concatenate a new value with an existing value:</p>
+<pre>$('#greatphoto').attr('title', function() {
+  return this.alt + ' - photo by Kelly Clark'
+});</pre>
+<p>This use of a function to compute attribute values can be particularly useful when we modify the attributes of multiple elements at once.</p>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Set some attributes for all &lt;img&gt;s in the page.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  img { padding:10px; }
+  div { color:red; font-size:24px; }&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;img /&gt;
+  &lt;img /&gt;
+  &lt;img /&gt;
+
+  &lt;div&gt;&lt;B&gt;Attribute of Ajax&lt;/B&gt;&lt;/div&gt;
+&lt;script&gt;$("img").attr({ 
+          src: "/images/hat.gif",
+          title: "jQuery",
+          alt: "jQuery Logo"
+        });
+    $("div").text($("img").attr("alt"));&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Disables buttons greater than the 1st button.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;button { margin:10px; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;button&gt;0th Button&lt;/button&gt;
+  &lt;button&gt;1st Button&lt;/button&gt;
+  &lt;button&gt;2nd Button&lt;/button&gt;
+&lt;script&gt;$("button:gt(1)").attr("disabled","disabled");&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">Sets id for divs based on the position in the page.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  div { color:blue; }
+  span { color:red; }
+  b { font-weight:bolder; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div&gt;Zero-th &lt;span&gt;&lt;/span&gt;&lt;/div&gt;
+  &lt;div&gt;First &lt;span&gt;&lt;/span&gt;&lt;/div&gt;
+  &lt;div&gt;Second &lt;span&gt;&lt;/span&gt;&lt;/div&gt;
+&lt;script&gt;$("div").attr("id", function (arr) {
+          return "div-id" + arr;
+        })
+        .each(function () {
+          $("span", this).html("(ID = '&lt;b&gt;" + this.id + "&lt;/b&gt;')");
+        });&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-3">
+<h4>Example: <span class="desc">Sets src attribute from title attribute on the image.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;img title="hat.gif"/&gt;
+&lt;script&gt;$("img").attr("src", function() { 
+          return "/images/" + this.title; 
+        });
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>
+
+
+				</div>
+
+</body></html>

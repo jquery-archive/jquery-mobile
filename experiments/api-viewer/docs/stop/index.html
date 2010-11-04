@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.stop()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="stop1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.stop( [ clearQueue ], [ jumpToEnd ] )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Stop the currently-running animation on the matched elements.</p>
+<ul class="signatures"><li class="signature" id="stop-clearQueue-jumpToEnd">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.2/">1.2</a></span>.stop( [ clearQueue ], [ jumpToEnd ] )</h4>
+<p class="arguement"><strong>clearQueue</strong>A Boolean indicating whether to remove queued animation as well. Defaults to <code>false</code>.</p>
+<p class="arguement"><strong>jumpToEnd</strong>A Boolean indicating whether to complete the current animation immediately. Defaults to <code>false</code>.</p>
+</li></ul>
+<div class="longdesc">
+<p>When <code>.stop()</code> is called on an element, the currently-running animation (if any) is immediately stopped. If, for instance, an element is being hidden with <code>.slideUp()</code> when <code>.stop()</code> is called, the element will now still be displayed, but will be a fraction of its previous height. Callback functions are not called.</p>
+<p>If more than one animation method is called on the same element, the later animations are placed in the effects queue for the element. These animations will not begin until the first one completes. When <code>.stop()</code> is called, the next animation in the queue begins immediately. If the <code>clearQueue</code> parameter is provided with a value of <code>true</code>, then the rest of the animations in the queue are removed and never run.</p>
+<p>If the <code>jumpToEnd</code> property is provided with a value of <code>true</code>, the current animation stops, but the element is immediately given its target values for each CSS property. In our above <code>.slideUp()</code> example, the element would be immediately hidden. The callback function is then immediately called, if provided.</p>
+<p>The usefulness of the <code>.stop()</code> method is evident when we need to animate an element on <code>mouseenter</code> and <code>mouseleave</code>:</p>
+<pre>&lt;div id="hoverme"&gt;
+  Hover me
+  &lt;img id="hoverme" src="book.png" alt="" width="100" height="123" /&gt;
+&lt;/div&gt;</pre>
+<p>We can create a nice fade effect without the common problem of multiple queued animations by adding <code>.stop(true, true)</code> to the chain:</p>
+<pre>$('#hoverme-stop-2').hover(function() {
+  $(this).find('img').stop(true, true).fadeOut();
+}, function() {
+  $(this).find('img').stop(true, true).fadeIn();
+});</pre>
+<blockquote><p>Animations may be stopped globally by setting the property <code>$.fx.off</code> to <code>true</code>. When this is done, all animation methods will immediately set elements to their final state when called, rather than displaying an effect.</p></blockquote>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Click the Go button once to start the animation, then click the STOP button to stop it where it's currently positioned.  Another option is to click several buttons to queue them up and see that stop just kills the currently playing one.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;div { 
+position: absolute; 
+background-color: #abc;
+left: 0px;
+top:30px;
+width: 60px; 
+height: 60px;
+margin: 5px; 
+}
+&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;button id="go"&gt;Go&lt;/button&gt; 
+&lt;button id="stop"&gt;STOP!&lt;/button&gt;
+&lt;button id="back"&gt;Back&lt;/button&gt;
+&lt;div class="block"&gt;&lt;/div&gt;
+&lt;script&gt;
+// Start animation
+$("#go").click(function(){
+$(".block").animate({left: '+=100px'}, 2000);
+});
+
+// Stop animation when button is clicked
+$("#stop").click(function(){
+$(".block").stop();
+});
+
+// Start animation in the opposite direction
+$("#back").click(function(){
+$(".block").animate({left: '-=100px'}, 2000);
+});
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

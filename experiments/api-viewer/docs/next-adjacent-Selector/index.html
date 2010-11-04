@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>Next Adjacent Selector (“prev + next”)</h1>
+  				<div class="entry-meta">Categories:
+  					<span class="category"><a href="http://api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="http://api.jquery.com/category/selectors/hierarchy-selectors/" title="View all posts in Hierarchy">Hierarchy</a></span>  
+    
+  				</div>
+</div>
+<div data-role="content" data-theme="c" id="next adjacent1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">next adjacent</span>  selector</h2>
+<div class="  entry-details">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/version/1.0/">1.0</a></span>jQuery('prev + next')</h4>
+<ul class="signatures"><li><dl class="arguments">
+<dt>prev</dt>
+<dd>Any valid selector.</dd>
+<dt>next</dt>
+<dd>A selector to match the element that is next to the first selector.</dd>
+</dl></li></ul>
+<p class="desc"><strong>Description: </strong>Selects all next elements matching "next" that are immediately preceded by a sibling "prev".</p>
+<div class="longdesc"><p>One important point to consider with both the next adjacent sibling selector (<code>prev + next</code>) and the general sibling selector (<code>prev ~ siblings</code>) is that the elements on either side of the combinator must share the same parent.</p></div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Finds all inputs that are next to a label.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;form&gt;
+
+    &lt;label&gt;Name:&lt;/label&gt;
+    &lt;input name="name" /&gt;
+    &lt;fieldset&gt;
+      &lt;label&gt;Newsletter:&lt;/label&gt;
+
+      &lt;input name="newsletter" /&gt;
+    &lt;/fieldset&gt;
+  &lt;/form&gt;
+  &lt;input name="none" /&gt;
+&lt;script&gt;$("label + input").css("color", "blue").val("Labeled!")&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

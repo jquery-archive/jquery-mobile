@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.slideDown()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="slideDown1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.slideDown( [ duration ], [ callback ] )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Display the matched elements with a sliding motion.</p>
+<ul class="signatures"><li class="signature" id="slideDown-duration-callback">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.slideDown( [ duration ], [ callback ] )</h4>
+<p class="arguement"><strong>duration</strong>A string or number determining how long the animation will run.</p>
+<p class="arguement"><strong>callback</strong>A function to call once the animation is complete.</p>
+</li></ul>
+<div class="longdesc">
+<p>The <code>.slideDown()</code> method animates the height of the matched elements. This causes lower parts of the page to slide down, making way for the revealed items.</p>
+<p>Durations are given in milliseconds; higher values indicate slower animations, not faster ones. The strings <code>'fast'</code> and <code>'slow'</code> can be supplied to indicate durations of <code>200</code> and <code>600</code> milliseconds, respectively. If any other string is supplied, or if the <code>duration</code> parameter is omitted, the default duration of  <code>400</code> milliseconds is used.</p>
+<p>If supplied, the callback is fired once the animation is complete. This can be useful for stringing different animations together in sequence. The callback is not sent any arguments, but <code>this</code> is set to the DOM element being animated. If multiple elements are animated, it is important to note that the callback is executed once per matched element, not once for the animation as a whole.</p>
+<p>We can animate any element, such as a simple image:</p>
+<pre>&lt;div id="clickme"&gt;
+  Click here
+&lt;/div&gt;
+&lt;img id="book" src="book.png" alt="" width="100" height="123" /&gt;</pre>
+<p>With the element initially hidden, we can show it slowly:</p>
+<pre>$('#clickme').click(function() {
+  $('#book').slideDown('slow', function() {
+    // Animation complete.
+  });
+});</pre>
+<p class="image four-across"> 
+<img src="http://api.jquery.com/images/0042_06_17.png" alt=""><img src="http://api.jquery.com/images/0042_06_18.png" alt=""><img src="http://api.jquery.com/images/0042_06_19.png" alt=""><img src="http://api.jquery.com/images/0042_06_20.png" alt=""></p>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Animates all divs to slide down and show themselves over 600 milliseconds.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+div { background:#de9a44; margin:3px; width:80px; 
+height:40px; display:none; float:left; }
+&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	Click me!
+&lt;div&gt;&lt;/div&gt;
+&lt;div&gt;&lt;/div&gt;
+&lt;div&gt;&lt;/div&gt;
+&lt;script&gt;
+$(document.body).click(function () {
+if ($("div:first").is(":hidden")) {
+$("div").slideDown("slow");
+} else {
+$("div").hide();
+}
+});
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Animates all inputs to slide down, completing the animation within 1000 milliseconds. Once the animation is done, the input look is changed especially if it is the middle input which gets the focus.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+div { background:#cfd; margin:3px; width:50px; 
+text-align:center; float:left; cursor:pointer;
+border:2px outset black; font-weight:bolder; }
+input { display:none; width:120px; float:left; 
+margin:10px; }
+&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div&gt;Push!&lt;/div&gt;
+&lt;input type="text" /&gt;
+&lt;input type="text" class="middle" /&gt;
+
+&lt;input type="text" /&gt;
+&lt;script&gt;
+$("div").click(function () {
+$(this).css({ borderStyle:"inset", cursor:"wait" });
+$("input").slideDown(1000,function(){
+$(this).css("border", "2px red inset")
+.filter(".middle")
+ .css("background", "yellow")
+ .focus();
+$("div").css("visibility", "hidden");
+});
+});
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

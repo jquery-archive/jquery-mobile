@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.change()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="change1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.change( handler(eventObject) )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Bind an event handler to the "change" JavaScript event, or trigger that event on an element.</p>
+<ul class="signatures">
+<li class="signature" id="change-handlereventObject">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.change( handler(eventObject) )</h4>
+<p class="arguement"><strong>handler(eventObject)</strong>A function to execute each time the event is triggered.</p>
+</li>
+<li class="signature" id="change"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.change()</h4></li>
+</ul>
+<div class="longdesc">
+<p>This method is a shortcut for <code>.bind('change', handler)</code> in the first variation, and <code>.trigger('change')</code> in the second.</p>
+<p>The <code>change</code> event is sent to an element when its value changes. This event is limited to <code>&lt;input&gt;</code> elements, <code>&lt;textarea&gt;</code> boxes and <code>&lt;select&gt;</code> elements. For select boxes, checkboxes, and radio buttons, the event is fired immediately when the user makes a selection with the mouse, but for the other element types the event is deferred until the element loses focus.</p>
+<p>For example, consider the HTML:</p>
+<pre>&lt;form&gt;
+  &lt;input class="target" type="text" value="Field 1" /&gt;
+  &lt;select class="target"&gt;
+    &lt;option value="option1" selected="selected"&gt;Option 1&lt;/option&gt;
+    &lt;option value="option2"&gt;Option 2&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/form&gt;
+&lt;div id="other"&gt;
+  Trigger the handler
+&lt;/div&gt;</pre>
+<p>The event handler can be bound to the text input and the select box:</p>
+<pre>$('.target').change(function() {
+  alert('Handler for .change() called.');
+});</pre>
+<p>Now when the second option is selected from the dropdown, the alert is displayed. It is also displayed if we change the text in the field and then click away. If the field loses focus without the contents having changed, though, the event is not triggered. We can trigger the event manually when another element is clicked:</p>
+<pre>$('#other').click(function() {
+  $('.target').change();
+});</pre>
+<p>After this code executes, clicks on <span class="output">Trigger the handler</span> will also alert the message. The message will be displayed twice, because the handler has been bound to the <code>change</code> event on both of the form elements.</p>
+<p>As of jQuery 1.4 the <code>change</code> event now bubbles, and works identically to all other browsers, in Internet Explorer.</p>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Attaches a change event to the select that gets the text for each selected option and writes them in the div.  It then triggers the event for the initial text draw.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+
+  div { color:red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;select name="sweets" multiple="multiple"&gt;
+    &lt;option&gt;Chocolate&lt;/option&gt;
+    &lt;option selected="selected"&gt;Candy&lt;/option&gt;
+
+    &lt;option&gt;Taffy&lt;/option&gt;
+    &lt;option selected="selected"&gt;Caramel&lt;/option&gt;
+    &lt;option&gt;Fudge&lt;/option&gt;
+    &lt;option&gt;Cookie&lt;/option&gt;
+
+  &lt;/select&gt;
+  &lt;div&gt;&lt;/div&gt;
+&lt;script&gt;
+    $("select").change(function () {
+          var str = "";
+          $("select option:selected").each(function () {
+                str += $(this).text() + " ";
+              });
+          $("div").text(str);
+        })
+        .change();
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">To add a validity test to all text input elements:</span>
+</h4>
+<pre><code class="example">$("input[type='text']").change( function() {
+  // check input ($(this).val()) for validity here
+});</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

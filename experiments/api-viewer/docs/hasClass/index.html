@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.hasClass()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="hasClass1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.hasClass( className )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#Boolean">Boolean</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Determine whether any of the matched elements are assigned the given class.</p>
+<ul class="signatures"><li class="signature" id="hasClass-className">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.2/">1.2</a></span>.hasClass( className )</h4>
+<p class="arguement"><strong>className</strong>The class name to search for.</p>
+</li></ul>
+<div class="longdesc">
+<p>Elements may have more than one class assigned to them. In HTML, this is represented by separating the class names with a space:</p>
+<pre>&lt;div id="mydiv" class="foo bar"&gt;&lt;/div&gt;</pre>
+<p>The <code>.hasClass()</code> method will return <code>true</code> if the class is assigned to an element, even if other classes also are. For example, given the HTML above, the following will return <code>true</code>:</p>
+<pre>$('#mydiv').hasClass('foo')</pre>
+<p>as would:</p>
+<pre>$('#mydiv').hasClass('bar')</pre>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Looks for the class 'selected' on the matched elements.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+
+  p { margin: 8px; font-size:16px; }
+  .selected { color:red; }
+  .highlight { background:yellow; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;Hello&lt;/p&gt;
+  &lt;p class="selected"&gt;Goodbye&lt;/p&gt;
+  &lt;div id="result1"&gt;First paragraph has selected class: &lt;/div&gt;
+
+  &lt;div id="result2"&gt;Last paragraph has selected class: &lt;/div&gt;
+  &lt;div id="result3"&gt;Some paragraph has selected class: &lt;/div&gt;
+&lt;script&gt;$("div#result1").append($("p:first").hasClass("selected").toString());
+$("div#result2").append($("p:last").hasClass("selected").toString());
+$("div#result3").append($("p").hasClass("selected").toString());&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

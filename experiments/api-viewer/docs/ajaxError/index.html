@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.ajaxError()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="ajaxError1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.ajaxError( handler(event, XMLHttpRequest, ajaxOptions, thrownError) )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Register a handler to be called when Ajax requests complete with an error. This is an Ajax Event.</p>
+<ul class="signatures"><li class="signature" id="ajaxError-handlerevent, XMLHttpRequest, ajaxOptions, thrownError">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.ajaxError( handler(event, XMLHttpRequest, ajaxOptions, thrownError) )</h4>
+<p class="arguement"><strong>handler(event, XMLHttpRequest, ajaxOptions, thrownError)</strong>The function to be invoked.</p>
+</li></ul>
+<div class="longdesc">
+<p>Whenever an Ajax request completes with an error, jQuery triggers the <code>ajaxError</code> event. Any and all handlers that have been registered with the <code>.ajaxError()</code> method are executed at this time.</p>
+<p>To observe this method in action, we can set up a basic Ajax load request:</p>
+<pre>&lt;div class="trigger"&gt;Trigger&lt;/div&gt;
+&lt;div class="result"&gt;&lt;/div&gt;
+&lt;div class="log"&gt;&lt;/div&gt;</pre>
+<p>We can attach our event handler to any element:</p>
+<pre>$('.log').ajaxError(function() {
+  $(this).text('Triggered ajaxError handler.');
+});</pre>
+<p>Now, we can make an Ajax request using any jQuery method:</p>
+<pre>$('.trigger').click(function() {
+  $('.result').load('ajax/missing.html');
+});</pre>
+<p>When the user clicks the button and the Ajax request fails, because the requested file is missing, the log message is displayed.</p>
+<p><strong>Note:</strong> Because <code>.ajaxError()</code> is implemented as a method of jQuery object instances, we can use the <code>this</code> keyword as we do here to refer to the selected elements within the callback function.</p>
+<p>All <code>ajaxError</code> handlers are invoked, regardless of what Ajax request was completed. If we must differentiate between the requests, we can use the parameters passed to the handler. Each time an <code>ajaxError</code> handler is executed, it is passed the event object, the <code>XMLHttpRequest</code> object, and the settings object that was used in the creation of the request. If the request failed because JavaScript raised an exception, the exception object is passed to the handler as a fourth parameter. For example, we can restrict our callback to only handling events dealing with a particular URL:</p>
+<pre>$('.log').ajaxError(function(e, xhr, settings, exception) {
+  if (settings.url == 'ajax/missing.html') {
+    $(this).text('Triggered ajaxError handler.');
+  }
+});</pre>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Show a message when an Ajax request fails.</span></h4>
+<pre><code class="example">$("#msg").ajaxError(function(event, request, settings){
+   $(this).append("&lt;li&gt;Error requesting page " + settings.url + "&lt;/li&gt;");
+ });</code></pre>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

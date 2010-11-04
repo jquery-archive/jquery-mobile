@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div class="ui-page">
+        <div data-role="header">
+				<h1>All Selector (“*”)</h1>
+  				<div class="entry-meta">Categories:
+  					<span class="category"><a href="http://api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="http://api.jquery.com/category/selectors/basic-css-selectors/" title="View all posts in Basic">Basic</a></span>  
+    
+  				</div>
+</div>
+<div data-role="content" data-theme="c" id="all1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">all</span>  selector</h2>
+<div class="  entry-details">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/version/1.0/">1.0</a></span>jQuery('*')</h4>
+<p class="desc"><strong>Description: </strong>Selects all elements.</p>
+<div class="longdesc"><p>Caution: The all, or universal, selector is extremely slow, except when used by itself.</p></div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Finds every element (including head, body, etc) in the document.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  h3 { margin: 0; }
+  div,span,p {
+    width: 80px;
+    height: 40px;
+    float:left;
+    padding: 10px;
+    margin: 10px;
+    background-color: #EEEEEE;
+  }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div&gt;DIV&lt;/div&gt;
+
+  &lt;span&gt;SPAN&lt;/span&gt;
+  &lt;p&gt;P &lt;button&gt;Button&lt;/button&gt;&lt;/p&gt;
+&lt;script&gt;var elementCount = $("*").css("border","3px solid red").length;
+$("body").prepend("&lt;h3&gt;" + elementCount + " elements found&lt;/h3&gt;");&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">A common way to select all elements is to find within document.body so elements like head, script, etc are left out.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  h3 { margin: 0; }
+  div,span,p {
+    width: 80px;
+    height: 40px;
+    float:left;
+    padding: 10px;
+    margin: 10px;
+    background-color: #EEEEEE;
+  }
+  #test {
+    width: auto; height: auto; background-color: transparent; 
+  }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div id="test"&gt;
+  &lt;div&gt;DIV&lt;/div&gt;
+  &lt;span&gt;SPAN&lt;/span&gt;
+  &lt;p&gt;P &lt;button&gt;Button&lt;/button&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;script&gt;
+var elementCount = $("#test").find("*").css("border","3px solid red").length;
+$("body").prepend("&lt;h3&gt;" + elementCount + " elements found&lt;/h3&gt;");&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

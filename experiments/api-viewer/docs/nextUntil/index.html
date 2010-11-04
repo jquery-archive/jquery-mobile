@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.nextUntil()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="nextUntil1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.nextUntil( [ selector ] )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Get all following siblings of each element up to but not including the element matched by the selector.</p>
+<ul class="signatures"><li class="signature" id="nextUntil-selector">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4/">1.4</a></span>.nextUntil( [ selector ] )</h4>
+<p class="arguement"><strong>selector</strong>A string containing a selector expression to indicate where to stop matching following sibling elements.</p>
+</li></ul>
+<div class="longdesc">
+<p>Given a jQuery object that represents a set of DOM elements, the <code>.nextUntil()</code> method allows us to search through the successors of these elements in the DOM tree, stopping when it reaches an element matched by the method's argument. The new jQuery object that is returned contains all following siblings up to but not including the one matched by the <code>.nextUntil()</code> selector.</p>
+<p>If the selector is not matched or is not supplied, all following siblings will be selected; in these cases it selects the same elements as the <code>.nextAll()</code> method does when no filter selector is provided.</p>
+<p>Consider a page with a simple definition list as follows:</p>
+<pre>
+&lt;dl&gt;
+  &lt;dt&gt;term 1&lt;/dt&gt;
+  &lt;dd&gt;definition 1-a&lt;/dd&gt;
+  &lt;dd&gt;definition 1-b&lt;/dd&gt;
+  &lt;dd&gt;definition 1-c&lt;/dd&gt;
+  &lt;dd&gt;definition 1-d&lt;/dd&gt;
+
+  &lt;dt id="term-2"&gt;term 2&lt;/dt&gt;
+  &lt;dd&gt;definition 2-a&lt;/dd&gt;
+  &lt;dd&gt;definition 2-b&lt;/dd&gt;
+  &lt;dd&gt;definition 2-c&lt;/dd&gt;
+
+  &lt;dt&gt;term 3&lt;/dt&gt;
+  &lt;dd&gt;definition 3-a&lt;/dd&gt;
+  &lt;dd&gt;definition 3-b&lt;/dd&gt;
+&lt;/dl&gt;
+</pre>
+<p>If we begin at the second term, we can find the elements which come after it until a following <code>&lt;dt&gt;</code>.</p>
+<pre>$('#term-2').nextUntil('dt').css('background-color', 'red');</pre>
+<p>The result of this call is a red background behind definitions <code>2-a</code>, <code>2-b</code>, and <code>2-c</code>. </p>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Find the siblings that follow &lt;dt id="term-2"&gt; up to the next &lt;dt&gt; and give them a red background color.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;dl&gt;
+  &lt;dt&gt;term 1&lt;/dt&gt;
+  &lt;dd&gt;definition 1-a&lt;/dd&gt;
+  &lt;dd&gt;definition 1-b&lt;/dd&gt;
+  &lt;dd&gt;definition 1-c&lt;/dd&gt;
+  &lt;dd&gt;definition 1-d&lt;/dd&gt;
+
+  &lt;dt id="term-2"&gt;term 2&lt;/dt&gt;
+  &lt;dd&gt;definition 2-a&lt;/dd&gt;
+  &lt;dd&gt;definition 2-b&lt;/dd&gt;
+  &lt;dd&gt;definition 2-c&lt;/dd&gt;
+
+  &lt;dt&gt;term 3&lt;/dt&gt;
+  &lt;dd&gt;definition 3-a&lt;/dd&gt;
+  &lt;dd&gt;definition 3-b&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;script&gt;
+    $("#term-2").nextUntil("dt")
+      .css("background-color", "red")
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

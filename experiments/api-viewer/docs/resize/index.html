@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.resize()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="resize1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.resize( handler(eventObject) )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Bind an event handler to the "resize" JavaScript event, or trigger that event on an element.</p>
+<ul class="signatures">
+<li class="signature" id="resize-handlereventObject">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.resize( handler(eventObject) )</h4>
+<p class="arguement"><strong>handler(eventObject)</strong>A function to execute each time the event is triggered.</p>
+</li>
+<li class="signature" id="resize"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.resize()</h4></li>
+</ul>
+<div class="longdesc">
+<p>This method is a shortcut for <code>.bind('resize', handler)</code> in the first variation, and <code>.trigger('resize')</code> in the second.</p>
+<p>The <code>resize</code> event is sent to the <code>window</code> element when the size of the browser window changes:</p>
+<pre>$(window).resize(function() {
+  $('#log').append('&lt;div&gt;Handler for .resize() called.&lt;/div&gt;');
+});
+</pre>
+<p>Now whenever the browser window's size is changed, the message is appended to &lt;div id="log"&gt; one or more times, depending on the browser.</p>
+<p>Code in a <code>resize</code> handler should never rely on the number of times the handler is called. Depending on implementation, <code>resize</code> events can be sent continuously as the resizing is in progress (the typical behavior in Internet Explorer and WebKit-based browsers such as Safari and Chrome), or only once at the end of the resize operation (the typical behavior in Firefox).</p>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">To see the window width while (or after) it is resized, try:</span></h4>
+<pre><code class="example">
+$(window).resize(function() {
+  $('body').prepend('&lt;div&gt;' + $(window).width() + '&lt;/div&gt;');
+});
+  </code></pre>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

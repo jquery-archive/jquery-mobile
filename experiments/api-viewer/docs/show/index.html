@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.show()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="show1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.show(  )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Display the matched elements.</p>
+<ul class="signatures">
+<li class="signature" id="show"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.show()</h4></li>
+<li class="signature" id="show-duration-callback">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.show( duration, [ callback ] )</h4>
+<p class="arguement"><strong>duration</strong>A string or number determining how long the animation will run.</p>
+<p class="arguement"><strong>callback</strong>A function to call once the animation is complete.</p>
+</li>
+</ul>
+<div class="longdesc">
+<p>With no parameters, the <code>.show()</code> method is the simplest way to display an element:
+</p>
+<pre>$('.target').show();
+</pre>
+<p>The matched elements will be revealed immediately, with no animation. This is roughly equivalent to calling <code>.css('display', 'block')</code>, except that the <code>display</code> property is restored to whatever it was initially. If an element has a <code>display</code> value of <code>inline</code>, then is hidden and shown, it will once again be displayed <code>inline</code>.</p>
+<p>When a duration is provided, <code>.show()</code> becomes an animation method. The <code>.show()</code> method animates the width, height, and opacity of the matched elements simultaneously.</p>
+<p>Durations are given in milliseconds; higher values indicate slower animations, not faster ones. The strings <code>'fast'</code> and <code>'slow'</code> can be supplied to indicate durations of <code>200</code> and <code>600</code> milliseconds, respectively.</p>
+<p>If supplied, the callback is fired once the animation is complete. This can be useful for stringing different animations together in sequence. The callback is not sent any arguments, but <code>this</code> is set to the DOM element being animated. If multiple elements are animated, it is important to note that the callback is executed once per matched element, not once for the animation as a whole.</p>
+<p>We can animate any element, such as a simple image:</p>
+<pre>&lt;div id="clickme"&gt;
+  Click here
+&lt;/div&gt;
+&lt;img id="book" src="book.png" alt="" width="100" height="123" /&gt;
+With the element initially hidden, we can show it slowly:
+$('#clickme').click(function() {
+  $('#book').show('slow', function() {
+    // Animation complete.
+  });
+});</pre>
+<p class="image four-across">
+  <img src="http://api.jquery.com/images/0042_06_01.png" alt=""><img src="http://api.jquery.com/images/0042_06_02.png" alt=""><img src="http://api.jquery.com/images/0042_06_03.png" alt=""><img src="http://api.jquery.com/images/0042_06_04.png" alt=""></p>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Animates all hidden paragraphs to show slowly, completing the animation within 600 milliseconds.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+      p { background:yellow; }
+      &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;button&gt;Show it&lt;/button&gt;
+
+      &lt;p style="display: none"&gt;Hello  2&lt;/p&gt;
+&lt;script&gt;
+    $("button").click(function () {
+    $("p").show("slow");
+    });
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Animates all hidden divs to show fastly in order, completing each animation within 200 milliseconds. Once each animation is done, it starts the next one.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  div { background:#def3ca; margin:3px; width:80px; 
+  display:none; float:left; text-align:center; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	
+  &lt;button id="showr"&gt;Show&lt;/button&gt;
+  &lt;button id="hidr"&gt;Hide&lt;/button&gt;
+  &lt;div&gt;Hello 3,&lt;/div&gt;
+
+  &lt;div&gt;how&lt;/div&gt;
+  &lt;div&gt;are&lt;/div&gt;
+  &lt;div&gt;you?&lt;/div&gt;
+&lt;script&gt;
+$("#showr").click(function () {
+  $("div:eq(0)").show("fast", function () {
+    /* use callee so don't have to name the function */
+    $(this).next("div").show("fast", arguments.callee);
+  });
+});
+$("#hidr").click(function () {
+  $("div").hide(2000);
+});
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">Animates all span and input elements to show normally. Once the animation is done, it changes the text.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  span { display:none; }
+  div { display:none; }
+  p { font-weight:bold; background-color:#fcd; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;button&gt;Do it!&lt;/button&gt;
+  &lt;span&gt;Are you sure? (type 'yes' if you are) &lt;/span&gt;
+  &lt;div&gt;
+    &lt;form&gt;
+      &lt;input type="text"  value="as;ldkfjalsdf"/&gt;
+    &lt;/form&gt;
+  &lt;/div&gt;
+  &lt;p style="display:none;"&gt;I'm hidden...&lt;/p&gt;
+  
+&lt;script&gt;
+function doIt() {
+  $("span,div").show("normal");
+}
+/* can pass in function name */
+$("button").click(doIt);
+
+$("form").submit(function () {
+  if ($("input").val() == "yes") {
+    $("p").show(4000, function () {
+      $(this).text("Ok, DONE! (now showing)");
+    });
+  }
+  $("span,div").hide("normal");
+  /* to stop the submit */
+  return false; 
+});
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

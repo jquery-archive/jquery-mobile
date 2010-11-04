@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.trigger()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="trigger1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.trigger( eventType, extraParameters )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Execute all handlers and behaviors attached to the matched elements for the given event type.</p>
+<ul class="signatures"><li class="signature" id="trigger-eventType-extraParameters">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.trigger( eventType, extraParameters )</h4>
+<p class="arguement"><strong>eventType</strong>A string containing a JavaScript event type, such as <code>click</code> or <code>submit</code>.</p>
+<p class="arguement"><strong>extraParameters</strong>An array of additional parameters to pass along to the event handler.</p>
+</li></ul>
+<div class="longdesc">
+<p>Any event handlers attached with <code>.bind()</code> or one of its shortcut methods are triggered when the corresponding event occurs. They can be fired manually, however, with the <code>.trigger()</code> method. A call to <code>.trigger()</code> executes the handlers in the same order they would be if the event were triggered naturally by the user:</p>
+<pre>$('#foo').bind('click', function() {
+      alert($(this).text());
+    });
+    $('#foo').trigger('click');</pre>
+<p>While <code>.trigger()</code> simulates an event activation, complete with a synthesized event object, it does not perfectly replicate a naturally-occurring event.</p>
+<p>When we define a custom event type using the <code>.bind()</code> method, the second argument to <code>.trigger()</code> can become useful. For example, suppose we have bound a handler for the <code>custom</code> event to our element instead of the built-in <code>click</code> event as we did above:</p>
+<pre>$('#foo').bind('custom', function(event, param1, param2) {
+  alert(param1 + "\n" + param2);
+});
+$('#foo').trigger('custom', ['Custom', 'Event']);
+</pre>
+<p>The event object is always passed as the first parameter to an event handler, but if additional parameters are specified during a <code>.trigger()</code> call as they are here, these parameters will be passed along to the handler as well.</p>
+<p>Note the difference between the extra parameters we're passing here and the <code>eventData</code> parameter to the <a href="/bind/">.bind()</a> method. Both are mechanisms for passing information to an event handler, but the <code>extraParameters</code> argument to <code>.trigger()</code> allows information to be determined at the time the event is triggered, while the <code>eventData</code> argument to <code>.bind()</code> requires the information to be already computed at the time the handler is bound.</p>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Clicks to button #2 also trigger a click for button #1.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+
+button { margin:10px; }
+div { color:blue; font-weight:bold; }
+span { color:red; }
+&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;button&gt;Button #1&lt;/button&gt;
+&lt;button&gt;Button #2&lt;/button&gt;
+&lt;div&gt;&lt;span&gt;0&lt;/span&gt; button #1 clicks.&lt;/div&gt;
+
+&lt;div&gt;&lt;span&gt;0&lt;/span&gt; button #2 clicks.&lt;/div&gt;
+&lt;script&gt;
+$("button:first").click(function () {
+update($("span:first"));
+});
+$("button:last").click(function () {
+$("button:first").trigger('click');
+
+update($("span:last"));
+});
+
+function update(j) {
+var n = parseInt(j.text(), 10);
+j.text(n + 1);
+}
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">To submit the first form without using the submit() function, try:</span>
+</h4>
+<pre><code class="example">$("form:first").trigger("submit")</code></pre>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">To submit the first form without using the submit() function, try:</span>
+</h4>
+<pre><code class="example">var event = jQuery.Event("submit");
+$("form:first").trigger(event);
+if ( event.isDefaultPrevented() ) {
+// Perform an action...
+}</code></pre>
+</div>
+<div id="example-3">
+<h4>Example: <span class="desc">To pass arbitrary data to an event:</span>
+</h4>
+<pre><code class="example">$("p").click( function (event, a, b) {
+// when a normal click fires, a and b are undefined
+// for a trigger like below a refers to "foo" and b refers to "bar"
+
+} ).trigger("click", ["foo", "bar"]);</code></pre>
+</div>
+<div id="example-4">
+<h4>Example: <span class="desc">To pass arbitrary data through an event object:</span>
+</h4>
+<pre><code class="example">var event = jQuery.Event("logged");
+event.user = "foo";
+event.pass = "bar";
+$("body").trigger(event);</code></pre>
+</div>
+<div id="example-5">
+<h4>Example: <span class="desc">Alternate way to pass data through an event object:</span>
+</h4>
+<pre><code class="example">$("body").trigger({
+type:"logged",
+user:"foo",
+pass:"bar"
+
+});</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

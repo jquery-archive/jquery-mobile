@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>event.stopImmediatePropagation()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="event.stopImmediatePropagation1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">event.stopImmediatePropagation()</span> <span class="returns"></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong> Keeps the rest of the handlers from being executed. 
+  </p>
+<ul class="signatures"><li class="signature" id="event.stopImmediatePropagation"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.3/">1.3</a></span>event.stopImmediatePropagation()</h4></li></ul>
+<div class="longdesc"><p>This method also stops the bubbling by implicitly calling <code>event.stopPropagation()</code>. Use <code>event.isImmediatePropagationStopped()</code> to know whether this method was ever called (on that event object).</p></div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Prevents other event handlers from being called.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+p { height: 30px; width: 150px; background-color: #ccf; }
+div {height: 30px; width: 150px; background-color: #cfc; }
+&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;paragraph&lt;/p&gt;
+&lt;div&gt;division&lt;/div&gt;
+&lt;script&gt;
+$("p").click(function(event){
+  event.stopImmediatePropagation();
+});
+$("p").click(function(event){
+  // This function won't be executed
+  $(this).css("background-color", "#f00");
+});  
+$("div").click(function(event) {
+  // This function will be executed
+    $(this).css("background-color", "#f00");
+});&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

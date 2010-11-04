@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.html()</h1>
+  				
+</div>
+
+<div data-role="content" data-theme="c" id="html1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.html()</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#String">String</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Get the HTML contents of the first element in the set of matched elements.</p>
+<ul class="signatures"><li class="signature" id="html"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.html()</h4></li></ul>
+<div class="longdesc">
+<p>This method is not available on XML documents.</p>
+<p>In an HTML document, we can use <code>.html()</code> to get the contents of any element. If the selector expression matches more than one element, only the first one's HTML content is returned. Consider this code:</p>
+<pre>$('div.demo-container').html();</pre>
+<p>In order for the following <code>&lt;div&gt;</code>'s content to be retrieved, it would have to be the first one with <code>class="demo-container"</code> in the document:</p>
+<pre>&lt;div class="demo-container"&gt;
+  &lt;div class="demo-box"&gt;Demonstration Box&lt;/div&gt;
+&lt;/div&gt;</pre>
+<p>The result would look like this:</p>
+<pre>&lt;div class="demo-box"&gt;Demonstration Box&lt;/div&gt;</pre>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Click a paragraph to convert it from html to text.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  p { margin:8px; font-size:20px; color:blue; 
+      cursor:pointer; }
+  b { text-decoration:underline; }
+  button { cursor:pointer; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;
+
+    &lt;b&gt;Click&lt;/b&gt; to change the &lt;span id="tag"&gt;html&lt;/span&gt;
+  &lt;/p&gt;
+  &lt;p&gt;
+
+    to a &lt;span id="text"&gt;text&lt;/span&gt; node.
+  &lt;/p&gt;
+  &lt;p&gt;
+    This &lt;button name="nada"&gt;button&lt;/button&gt; does nothing.
+  &lt;/p&gt;
+&lt;script&gt;
+    $("p").click(function () {
+      var htmlStr = $(this).html();
+      $(this).text(htmlStr);
+    });
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+<div data-role="content" data-theme="c" id="html2">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.html( htmlString )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Set the HTML contents of each element in the set of matched elements.</p>
+<ul class="signatures">
+<li class="signature" id="html-htmlString">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.html( htmlString )</h4>
+<p class="arguement"><strong>htmlString</strong>A string of HTML to set as the content of each matched element.</p>
+</li>
+<li class="signature" id="html-functionindex, html">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4/">1.4</a></span>.html( function(index, html) )</h4>
+<p class="arguement"><strong>function(index, html)</strong>A function returning the HTML content to set. Receives the index position of the element in the set and the old HTML value as arguments.</p>
+</li>
+</ul>
+<div class="longdesc">
+<p>The <code>.html()</code> method is not available in XML documents. </p>
+<p>When we use <code>.html()</code> to set elements' contents, any contents that were in those elements is completely replaced by the new contents. Consider the following HTML:</p>
+<pre>&lt;div class="demo-container"&gt;
+  &lt;div class="demo-box"&gt;Demonstration Box&lt;/div&gt;
+&lt;/div&gt;</pre>
+<p>We can set the HTML contents of <code>&lt;div class="demo-container"&gt;</code> like so:</p>
+<pre>$('div.demo-container')
+  .html('&lt;p&gt;All new content. &lt;em&gt;You bet!&lt;/em&gt;&lt;/p&gt;');</pre>
+<p>That line of code will replace everything inside <code>&lt;div class="demo-container"&gt;</code>:</p>
+<pre>&lt;div class="demo-container"&gt;
+  &lt;p&gt;All new content. &lt;em&gt;You bet!&lt;/em&gt;&lt;/p&gt;
+&lt;/div&gt;</pre>
+<p>As of jQuery 1.4, the <code>.html()</code> method allows us to set the HTML content by passing in a function.</p>
+<pre>$('div.demo-container').html(function() {
+  var emph = '&lt;em&gt;' + $('p').length + ' paragraphs!&lt;/em&gt;';
+  return '&lt;p&gt;All new content for ' + emph + '&lt;/p&gt;';
+});</pre>
+<p>Given a document with six paragraphs, this example will set the HTML of <code>&lt;div class="demo-container"&gt;</code> to <code>&lt;p&gt;All new content for &lt;em&gt;6 paragraphs!&lt;/em&gt;&lt;/p&gt;</code>.</p>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Add some html to each div.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+
+  .red { color:red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;span&gt;Hello&lt;/span&gt;
+  &lt;div&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;/div&gt;
+&lt;script&gt;$("div").html("&lt;span class='red'&gt;Hello &lt;b&gt;Again&lt;/b&gt;&lt;/span&gt;");&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Add some html to each div then immediately do further manipulations to the inserted html.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  div { color:blue; font-size:18px; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;/div&gt;
+&lt;script&gt;
+
+    $("div").html("&lt;b&gt;Wow!&lt;/b&gt; Such excitement...");
+    $("div b").append(document.createTextNode("!!!"))
+              .css("color", "red");
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>
+
+
+				</div>
+
+</body></html>

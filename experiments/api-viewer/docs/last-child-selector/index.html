@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>:last-child Selector</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="last-child1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">last-child</span>  selector</h2>
+<div class="  entry-details">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/version/1.1.4/">1.1.4</a></span>jQuery(':last-child')</h4>
+<p class="desc"><strong>Description: </strong>Selects all elements that are the last child of their parent.</p>
+<div class="longdesc"><p>While <a href="/last-selector">:last</a> matches only a single element, <code>:last-child</code> can match more than one: one for each parent.</p></div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Finds the last span in each matched div and adds some css plus a hover state.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  span.solast { text-decoration:line-through; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div&gt;
+    &lt;span&gt;John,&lt;/span&gt;
+    &lt;span&gt;Karl,&lt;/span&gt;
+    &lt;span&gt;Brandon,&lt;/span&gt;
+
+    &lt;span&gt;Sam&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;span&gt;Glen,&lt;/span&gt;
+    &lt;span&gt;Tane,&lt;/span&gt;
+
+    &lt;span&gt;Ralph,&lt;/span&gt;
+    &lt;span&gt;David&lt;/span&gt;
+  &lt;/div&gt;
+&lt;script&gt;
+    $("div span:last-child")
+        .css({color:"red", fontSize:"80%"})
+        .hover(function () {
+              $(this).addClass("solast");
+            }, function () {
+              $(this).removeClass("solast");
+            });
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

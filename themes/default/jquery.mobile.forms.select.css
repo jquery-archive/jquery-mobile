@@ -1,0 +1,27 @@
+/*
+* jQuery Mobile Framework
+* Copyright (c) jQuery Project
+* Dual licensed under the MIT (MIT-LICENSE.txt) or GPL (GPL-LICENSE.txt) licenses.
+*/
+.ui-select { display: block; }
+.ui-select select { position: absolute; left: -99999px; }
+.ui-select .ui-btn-icon-right .ui-btn-inner { padding-right: 45px; } 
+.ui-select .ui-btn-icon-right .ui-icon { right: 15px;  }
+
+/* labels */
+label.ui-select { font-size: 16px; line-height: 1.4;  font-weight: normal; margin: 0 0 .3em; display: block; }
+
+/*listbox*/
+.ui-listbox { position: absolute; padding: 0; z-index: 100 !important; width: 80%; max-width: 350px; padding: 6px; }
+.ui-listbox .ui-listview { margin: 0;
+ }
+.ui-listbox-hidden { top: -999999px; left: -99999px; }
+.ui-listbox-screen { position: absolute; top: 0; left: 0; width: 100%; height: 100%;  z-index: 99; }
+.ui-screen-hidden, .ui-listbox-list .ui-li .ui-icon { display: none; }
+.ui-listbox-list .ui-btn-active .ui-icon { display: block; }
+
+/*used in listbox - to be removed/replaced with page-style hiding*/
+.ui-helper-hidden,.ui-mobile .ui-content-hidden { display: none; }
+
+.min-width-480px label.ui-select { display: inline-block;  width: 20%;  margin: 0 2% 0 0; }
+.min-width-480px .ui-select { width: 60%; display: inline-block; } 

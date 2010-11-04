@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>jQuery.each()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="jQuery.each1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">jQuery.each( collection, callback(indexInArray, valueOfElement) )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#Object">Object</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>A generic iterator function, which can be used to seamlessly iterate over both objects and arrays. Arrays and array-like objects with a length property (such as a function's arguments object) are iterated by numeric index, from 0 to length-1. Other objects are iterated via their named properties.
+  </p>
+<ul class="signatures"><li class="signature" id="jQuery.each-collection-callbackindexInArray, valueOfElement">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>jQuery.each( collection, callback(indexInArray, valueOfElement) )</h4>
+<p class="arguement"><strong>collection</strong>The object or array to iterate over.</p>
+<p class="arguement"><strong>callback(indexInArray, valueOfElement)</strong>The function that will be executed on every object.</p>
+</li></ul>
+<div class="longdesc">
+<p>The <code>$.each()</code> function is not the same as <a href="/each/">.each()</a>, which is used to iterate, exclusively, over a jQuery object. The <code>$.each()</code> function can be used to iterate over any collection, whether it is a map (JavaScript object) or an array. In the case of an array, the callback is passed an array index and a corresponding array value each time. (The value can also be accessed through the <code>this</code> keyword.)</p>
+<pre>$.each([52, 97], function(index, value) { 
+  alert(index + ': ' + value); 
+});
+</pre>
+<p>This produces two messages:</p>
+<p>
+  <span class="output">0: 52</span><br><span class="output">1: 97</span>
+</p>
+<p>If a map is used as the collection, the callback is passed a key-value pair each time:</p>
+<pre>var map = { 
+  'flammable': 'inflammable', 
+  'duh': 'no duh' 
+}; 
+$.each(map, function(key, value) { 
+  alert(key + ': ' + value); 
+});</pre>
+<p>Once again, this produces two messages:</p>
+<p>
+      <span class="output">flammable: inflammable</span><br><span class="output">duh: no duh</span>
+    </p>
+<p>We can break the <code>$.each()</code> loop at a particular iteration by making the callback function return <code>false</code>. Returning <em>non-false</em> is the same as a <code>continue</code> statement in a for loop; it will skip immediately to the next iteration.</p>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Iterates through the array displaying each number as both a word and numeral</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  div { color:blue; }
+  div#five { color:red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	
+  &lt;div id="one"&gt;&lt;/div&gt;
+  &lt;div id="two"&gt;&lt;/div&gt;
+  &lt;div id="three"&gt;&lt;/div&gt;
+  &lt;div id="four"&gt;&lt;/div&gt;
+  &lt;div id="five"&gt;&lt;/div&gt;
+&lt;script&gt;
+    var arr = [ "one", "two", "three", "four", "five" ];
+    var obj = { one:1, two:2, three:3, four:4, five:5 };
+
+    jQuery.each(arr, function() {
+      $("#" + this).text("Mine is " + this + ".");
+       return (this != "three"); // will stop running after "three"
+   });
+
+    jQuery.each(obj, function(i, val) {
+      $("#" + i).append(document.createTextNode(" - " + val));
+    });
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Iterates over items in an array, accessing both the current item and its index.</span>
+</h4>
+<pre><code class="example">$.each( ['a','b','c'], function(i, l){
+   alert( "Index #" + i + ": " + l );
+ });</code></pre>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">Iterates over the properties in an object, accessing both the current item and its key.</span>
+</h4>
+<pre><code class="example">$.each( { name: "John", lang: "JS" }, function(k, v){
+   alert( "Key: " + k + ", Value: " + v );
+ });</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

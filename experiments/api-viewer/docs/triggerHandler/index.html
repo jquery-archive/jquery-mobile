@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.triggerHandler()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="triggerHandler1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.triggerHandler( eventType, extraParameters )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#Object">Object</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Execute all handlers attached to an element for an event.</p>
+<ul class="signatures"><li class="signature" id="triggerHandler-eventType-extraParameters">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.2/">1.2</a></span>.triggerHandler( eventType, extraParameters )</h4>
+<p class="arguement"><strong>eventType</strong>A string containing a JavaScript event type, such as <code>click</code> or <code>submit</code>.</p>
+<p class="arguement"><strong>extraParameters</strong>An array of additional parameters to pass along to the event handler.</p>
+</li></ul>
+<div class="longdesc">
+<p>The <code>.triggerHandler()</code> method behaves similarly to <code>.trigger()</code>, with the following exceptions:</p>
+<ul>
+<li>The <code>.triggerHandler()</code> method does not cause the default behavior of an event to occur (such as a form submission).</li>
+    <li>While <code>.trigger()</code> will operate on all elements matched by the jQuery object, <code>.triggerHandler()</code> only affects the first matched element.</li>
+    <li>Events created with <code>.triggerHandler()</code> do not bubble up the DOM hierarchy; if they are not handled by the target element directly, they do nothing.</li>
+    <li>Instead of returning the jQuery object (to allow chaining), <code>.triggerHandler()</code> returns whatever value was returned by the last handler it caused to be executed. If no handlers are triggered, it returns <code>undefined</code>
+</li>
+    </ul>
+<p>For more information on this method, see the discussion for <code><a href="/trigger">.trigger()</a></code>.</p>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">If you called .triggerHandler() on a focus event - the browser's default focus action would not be triggered, only the event handlers bound to the focus event.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;button id="old"&gt;.trigger("focus")&lt;/button&gt;
+&lt;button id="new"&gt;.triggerHandler("focus")&lt;/button&gt;&lt;br/&gt;&lt;br/&gt;
+
+&lt;input type="text" value="To Be Focused"/&gt;
+&lt;script&gt;
+
+$("#old").click(function(){
+$("input").trigger("focus");
+});
+$("#new").click(function(){
+$("input").triggerHandler("focus");
+});
+$("input").focus(function(){
+$("&lt;span&gt;Focused!&lt;/span&gt;").appendTo("body").fadeOut(1000);
+});
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

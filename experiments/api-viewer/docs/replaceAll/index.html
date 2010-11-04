@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.replaceAll()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="replaceAll1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.replaceAll()</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Replace each target element with the set of matched elements.</p>
+<ul class="signatures"><li class="signature" id="replaceAll"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.2/">1.2</a></span>.replaceAll()</h4></li></ul>
+<div class="longdesc">
+<p>The <code>.replaceAll()</code> method is corollary to <code><a href="/replaceWith">.replaceWith()</a></code>, but with the source and target reversed. Consider this DOM structure:</p>
+<pre>&lt;div class="container"&gt;
+  &lt;div class="inner first"&gt;Hello&lt;/div&gt;
+  &lt;div class="inner second"&gt;And&lt;/div&gt;
+  &lt;div class="inner third"&gt;Goodbye&lt;/div&gt;
+&lt;/div&gt;</pre>
+<p>We can create an element, then replace other elements with it:</p>
+<pre>$('&lt;h2&gt;New heading&lt;/h2&gt;').replaceAll('.inner');</pre>
+<p>This causes all of them to be replaced:</p>
+<pre>&lt;div class="container"&gt;
+  &lt;h2&gt;New heading&lt;/h2&gt;
+  &lt;h2&gt;New heading&lt;/h2&gt;
+  &lt;h2&gt;New heading&lt;/h2&gt;
+&lt;/div&gt;</pre>
+<p>Or, we could select an element to use as the replacement:</p>
+<pre>$('.first').replaceAll('.third');</pre>
+<p>This results in the DOM structure:</p>
+<pre>&lt;div class="container"&gt;
+  &lt;div class="inner second"&gt;And&lt;/div&gt;
+  &lt;div class="inner first"&gt;Hello&lt;/div&gt;
+&lt;/div&gt;</pre>
+<p>From this example, we can see that the selected element replaces the target by being moved from its old location, not by being cloned.</p>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Replace all the paragraphs with bold words.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;Hello&lt;/p&gt;
+  &lt;p&gt;cruel&lt;/p&gt;
+  &lt;p&gt;World&lt;/p&gt;
+&lt;script&gt;$("&lt;b&gt;Paragraph. &lt;/b&gt;").replaceAll("p"); // check replaceWith() examples&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

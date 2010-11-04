@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>event.preventDefault()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="event.preventDefault1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">event.preventDefault()</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#undefined">undefined</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong> If this method is called, the default action of the event will not be triggered. </p>
+<ul class="signatures"><li class="signature" id="event.preventDefault"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>event.preventDefault()</h4></li></ul>
+<div class="longdesc"><p>For example, clicked anchors will not take the browser to a new URL. We can use <code>event.isDefaultPrevented()</code> to determine if this method has been called by an event handler that was triggered by this event.</p></div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Cancel the default action (navigation) of the click.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	
+&lt;a href="http://jquery.com"&gt;default click action is prevented&lt;/a&gt;
+&lt;div id="log"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+$("a").click(function(event) {
+  event.preventDefault();
+  $('&lt;div/&gt;')
+    .append('default ' + event.type + ' prevented')
+    .appendTo('#log');
+});
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

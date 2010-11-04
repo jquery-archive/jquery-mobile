@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>jQuery.dequeue()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="jQuery.dequeue1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">jQuery.dequeue( element, [ queueName ] )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Execute the next function on the queue for the matched element.</p>
+<ul class="signatures"><li class="signature" id="jQuery.dequeue-element-queueName">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.3/">1.3</a></span>jQuery.dequeue( element, [ queueName ] )</h4>
+<p class="arguement"><strong>element</strong>A DOM element from which to remove and execute a queued function.</p>
+<p class="arguement"><strong>queueName</strong>A string containing the name of the queue. Defaults to <code>fx</code>, the standard effects queue.</p>
+</li></ul>
+<div class="longdesc">
+<p><strong>Note:</strong> This is a low-level method, you should probably use <code><a href="/dequeue">.dequeue()</a></code> instead.</p>
+<p>When <code>jQuery.dequeue()</code> is called, the next function on the queue is removed from the queue, and then executed. This function should in turn (directly or indirectly) cause <code>jQuery.dequeue()</code> to be called, so that the sequence can continue.</p>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Use dequeue to end a custom queue function which allows the queue to keep going.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;div { margin:3px; width:50px; position:absolute;
+        height:50px; left:10px; top:30px; 
+        background-color:yellow; }
+  div.red { background-color:red; }  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;button&gt;Start&lt;/button&gt;  &lt;div&gt;&lt;/div&gt;
+&lt;script&gt;$("button").click(function () {
+      $("div").animate({left:'+=200px'}, 2000);
+      $("div").animate({top:'0px'}, 600);
+      $("div").queue(function () {
+        $(this).toggleClass("red");
+         $.dequeue( this );
+              });
+      $("div").animate({left:'10px', top:'30px'}, 700);
+    });&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

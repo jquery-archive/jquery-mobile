@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>:visible Selector</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="visible1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">visible</span>  selector</h2>
+<div class="  entry-details">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/version/1.0/">1.0</a></span>jQuery(':visible')</h4>
+<p class="desc"><strong>Description: </strong>Selects all elements that are visible.</p>
+<div class="longdesc">
+<p>Elements can be considered hidden for several reasons:</p>
+<ul>
+<li>They have a display value of none.</li>
+<li>They are form elements with type="hidden".</li>
+<li>Their width and height are explicitly set to 0.</li>
+<li>An ancestor element is hidden, so the element is not shown on the page.</li>
+</ul>
+<p>How <code>:visible</code> is calculated was changed in jQuery 1.3.2. The <a href="http://docs.jquery.com/Release:jQuery_1.3.2#:visible.2F:hidden_Overhauled">release notes</a> outline the changes in more detail.</p>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Make all visible divs turn yellow on click.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  div { width:50px; height:40px; margin:5px; border:3px outset green; float:left; }
+  .starthidden { display:none; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;button&gt;Show hidden to see they don't change&lt;/button&gt;
+  &lt;div&gt;&lt;/div&gt;
+  &lt;div class="starthidden"&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;/div&gt;
+
+  &lt;div&gt;&lt;/div&gt;
+  &lt;div style="display:none;"&gt;&lt;/div&gt;
+&lt;script&gt;
+    $("div:visible").click(function () {
+      $(this).css("background", "yellow");
+    });
+    $("button").click(function () {
+      $("div:hidden").show("fast");
+    });
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

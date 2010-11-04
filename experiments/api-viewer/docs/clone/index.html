@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.clone()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="clone1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.clone( [ withDataAndEvents ] )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Create a copy of the set of matched elements.</p>
+<ul class="signatures"><li class="signature" id="clone-withDataAndEvents">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.clone( [ withDataAndEvents ] )</h4>
+<p class="arguement"><strong>withDataAndEvents</strong>A Boolean indicating whether event handlers should be copied along with the elements. As of jQuery 1.4 element data will be copied as well.</p>
+</li></ul>
+<div class="longdesc">
+<p>The <code>.clone()</code> method, when used in conjunction with one of the insertion methods, is a convenient way to duplicate elements on a page. Consider the following HTML:</p>
+<pre>&lt;div class="container"&gt;
+  &lt;div class="hello"&gt;Hello&lt;/div&gt;
+  &lt;div class="goodbye"&gt;Goodbye&lt;/div&gt;
+&lt;/div&gt;</pre>
+<p>As shown in the discussion for <code><a href="/append">.append()</a></code>,  normally when we insert an element somewhere in the DOM, it is moved from its old location. So, given the code:</p>
+<pre>$('.hello').appendTo('.goodbye');</pre>
+<p>The resulting DOM structure would be:</p>
+<pre>&lt;div class="container"&gt;
+  &lt;div class="goodbye"&gt;
+    Goodbye
+    &lt;div class="hello"&gt;Hello&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+<p>To prevent this and instead create a copy of the element, we could write the following:</p>
+<pre>$('.hello').clone().appendTo('.goodbye');</pre>
+<p>This would produce:</p>
+<pre>&lt;div class="container"&gt;
+  &lt;div class="hello"&gt;Hello&lt;/div&gt;
+  &lt;div class="goodbye"&gt;
+    Goodbye
+    &lt;div class="hello"&gt;Hello&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+<blockquote><p>Note that when using the <code>.clone()</code> method, we can modify the cloned elements or their contents before (re-)inserting them into the document.</p></blockquote>
+<p>Normally, any event handlers bound to the original element are <em>not</em> copied to the clone. The optional <code>withDataAndEvents </code>parameter allows us to change this behavior, and to instead make copies of all of the event handlers as well, bound to the new copy of the element. As of jQuery 1.4, all element data (attached by the <code>.data()</code> method) is also copied to the new copy. </p>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Clones all b elements (and selects the clones) and prepends them to all paragraphs.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;b&gt;Hello&lt;/b&gt;&lt;p&gt;, how are you?&lt;/p&gt;
+&lt;script&gt;$("b").clone().prependTo("p");&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+<h4>Result:</h4>
+<pre><code class="results">&lt;b&gt;Hello&lt;/b&gt;&lt;p&gt;&lt;b&gt;Hello&lt;/b&gt;, how are you?&lt;/p&gt;</code></pre>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.mousedown()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="mousedown1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.mousedown( handler(eventObject) )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Bind an event handler to the "mousedown" JavaScript event, or trigger that event on an element.</p>
+<ul class="signatures">
+<li class="signature" id="mousedown-handlereventObject">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.mousedown( handler(eventObject) )</h4>
+<p class="arguement"><strong>handler(eventObject)</strong>A function to execute each time the event is triggered.</p>
+</li>
+<li class="signature" id="mousedown"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.mousedown()</h4></li>
+</ul>
+<div class="longdesc">
+<p>This method is a shortcut for <code>.bind('mousedown', handler)</code> in the first variation, and <code>.trigger('mousedown')</code> in the second.</p>
+<p>The <code>mousedown</code> event is sent to an element when the mouse pointer is over the element, and the mouse button is pressed. Any HTML element can receive this event.</p>
+<p>For example, consider the HTML:</p>
+<pre>&lt;div id="target"&gt;
+  Click here
+&lt;/div&gt;
+&lt;div id="other"&gt;
+  Trigger the handler
+&lt;/div&gt;</pre>
+<p class="image"><img src="http://api.jquery.com/images/0042_05_01.png" alt=""></p>
+<p>The event handler can be bound to any <code>&lt;div&gt;</code>:</p>
+<pre>$('#target').mousedown(function() {
+  alert('Handler for .mousedown() called.');
+});</pre>
+<p>Now if we click on this element, the alert is displayed:</p>
+<p><span class="output">Handler for .mousedown() called.</span></p>
+<p>We can also trigger the event when a different element is clicked:</p>
+<pre>$('#other').click(function() {
+  $('#target').mousedown();
+});</pre>
+<p>After this code executes, clicks on <span class="output">Trigger the handler</span> will also alert the message.</p>
+<p>The <code>mousedown</code> event is sent when any mouse button is clicked. To act only on specific buttons, we can use the event object's <code>which </code>property. Not all browsers support this property (Internet Explorer uses button instead), but jQuery normalizes the property so that it is safe to use in any browser. The value of <code>which</code> will be 1 for the left button, 2 for the middle button, or 3 for the right button.</p>
+<p>This event is primarily useful for ensuring that the primary button was used to begin a drag operation; if ignored, strange results can occur when the user attempts to use a context menu. While the middle and right buttons can be detected with these properties, this is not reliable. In Opera and Safari, for example, right mouse button clicks are not detectable by default.</p>
+<p>If the user clicks on an element, drags away from it, and releases the button, this is still counted as a <code>mousedown</code> event. This sequence of actions is treated as a "canceling" of the button press in most user interfaces, so it is usually better to use the <code>click</code> event unless we know that the <code>mousedown</code> event is preferable for a particular situation.</p>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Show texts when mouseup and mousedown event triggering.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;Press mouse and release here.&lt;/p&gt;
+
+&lt;script&gt;
+    $("p").mouseup(function(){
+      $(this).append('&lt;span style="color:#F00;"&gt;Mouse up.&lt;/span&gt;');
+    }).mousedown(function(){
+      $(this).append('&lt;span style="color:#00F;"&gt;Mouse down.&lt;/span&gt;');
+    });
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

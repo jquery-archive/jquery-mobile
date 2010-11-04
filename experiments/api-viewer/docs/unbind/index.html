@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.unbind()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="unbind1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.unbind( eventType, handler(eventObject) )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Remove a previously-attached event handler from the elements.</p>
+<ul class="signatures">
+<li class="signature" id="unbind-eventType-handlereventObject">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.unbind( eventType, handler(eventObject) )</h4>
+<p class="arguement"><strong>eventType</strong>A string containing a JavaScript event type, such as <code>click</code> or <code>submit</code>.</p>
+<p class="arguement"><strong>handler(eventObject)</strong>The function that is to be no longer executed.</p>
+</li>
+<li class="signature" id="unbind-event">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.unbind( event )</h4>
+<p class="arguement"><strong>event</strong>A JavaScript event object as passed to an event handler.</p>
+</li>
+</ul>
+<div class="longdesc">
+<p>Any handler that has been attached with <code>.bind()</code> can be removed with <code>.unbind()</code>. In the simplest case, with no arguments, <code>.unbind()</code> removes all handlers attached to the elements:</p>
+<pre>$('#foo').unbind();</pre>
+<p>This version removes the handlers regardless of type. To be more precise, we can pass an event type:</p>
+<pre>$('#foo').unbind('click');</pre>
+<p>By specifying the <code>click</code> event type, only handlers for that event type will be unbound. This approach can still have negative ramifications if other scripts might be attaching behaviors to the same element, however. Robust and extensible applications typically demand the two-argument version for this reason:</p>
+<pre>var handler = function() {
+  alert('The quick brown fox jumps over the lazy dog.');
+};
+$('#foo').bind('click', handler);
+$('#foo').unbind('click', handler);
+</pre>
+<p>By naming the handler, we can be assured that no other functions are caught in the crossfire. Note that the following will <em>not</em> work:</p>
+<pre>$('#foo').bind('click', function() {
+  alert('The quick brown fox jumps over the lazy dog.');
+});
+
+$('#foo').unbind('click', function() {
+  alert('The quick brown fox jumps over the lazy dog.');
+});</pre>
+<p>Even though the two functions are identical in content, they are created separately and so JavaScript is free to keep them as distinct function objects. To unbind a particular handler, we need a reference to that function and not a different one that happens to do the same thing.</p>
+<h4>Using Namespaces</h4>
+<p>Instead of maintaining references to handlers in order to unbind them, we can namespace the events and use this capability to narrow the scope of our unbinding actions. As shown in the discussion for the <code>.bind()</code> method, namespaces are defined by using a period (<code>.</code>) character when binding a handler:</p>
+<pre>$('#foo').bind('click.myEvents', handler);</pre>
+<p>When a handler is bound in this fashion, we can still unbind it the normal way:</p>
+<pre>$('#foo').unbind('click');</pre>
+<p>However, if we want to avoid affecting other handlers, we can be more specific:</p>
+<pre>$('#foo').unbind('click.myEvents');</pre>
+<p>If multiple namespaced handlers are bound, we can unbind them at once:</p>
+<pre>$('#foo').unbind('click.myEvents.yourEvents');</pre>
+<p>This syntax is similar to that used for CSS class selectors; they are not hierarchical. This method call is thus the same as:</p>
+<pre>$('#foo').unbind('click.yourEvents.myEvents');</pre>
+<p>We can also unbind all of the handlers in a namespace, regardless of event type:</p>
+<pre>$('#foo').unbind('.myEvents');</pre>
+<p>It is particularly useful to attach namespaces to event bindings when we are developing plug-ins or otherwise writing code that may interact with other event-handling code in the future.</p>
+<h4>Using the Event Object</h4>
+<p>The second form of the <code>.unbind()</code> method is used when we wish to unbind a handler from within itself. For example, suppose we wish to trigger an event handler only three times:</p>
+<pre>var timesClicked = 0;
+$('#foo').bind('click', function(event) {
+  alert('The quick brown fox jumps over the lazy dog.');
+  timesClicked++;
+  if (timesClicked &gt;= 3) {
+    $(this).unbind(event);
+  }
+});
+</pre>
+<p>The handler in this case must take a parameter, so that we can capture the event object and use it to unbind the handler after the third click. The event object contains the context necessary for <code>.unbind()</code> to know which handler to remove.
+This example is also an illustration of a closure. Since the handler refers to the <code>timesClicked</code> variable, which is defined outside the function, incrementing the variable has an effect even between invocations of the handler.</p>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Can bind and unbind events to the colored button.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+button { margin:5px; }
+button#theone { color:red; background:yellow; }
+&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;button id="theone"&gt;Does nothing...&lt;/button&gt;
+&lt;button id="bind"&gt;Bind Click&lt;/button&gt;
+&lt;button id="unbind"&gt;Unbind Click&lt;/button&gt;
+
+&lt;div style="display:none;"&gt;Click!&lt;/div&gt;
+&lt;script&gt;
+
+function aClick() {
+$("div").show().fadeOut("slow");
+}
+$("#bind").click(function () {
+// could use .bind('click', aClick) instead but for variety...
+$("#theone").click(aClick)
+  .text("Can Click!");
+});
+$("#unbind").click(function () {
+$("#theone").unbind('click', aClick)
+  .text("Does nothing...");
+});
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">To unbind all events from all paragraphs, write:</span>
+</h4>
+<pre><code class="example">$("p").unbind()</code></pre>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">To unbind all click events from all paragraphs, write:</span>
+</h4>
+<pre><code class="example">$("p").unbind( "click" )</code></pre>
+</div>
+<div id="example-3">
+<h4>Example: <span class="desc">To unbind just one previously bound handler, pass the function in as the second argument:</span>
+</h4>
+<pre><code class="example">var foo = function () {
+// code to handle some kind of event
+};
+
+$("p").bind("click", foo); // ... now foo will be called when paragraphs are clicked ...
+
+$("p").unbind("click", foo); // ... foo will no longer be called.</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

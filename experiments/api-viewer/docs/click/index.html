@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.click()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="click1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.click( handler(eventObject) )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Bind an event handler to the "click" JavaScript event, or trigger that event on an element.</p>
+<ul class="signatures">
+<li class="signature" id="click-handlereventObject">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.click( handler(eventObject) )</h4>
+<p class="arguement"><strong>handler(eventObject)</strong>A function to execute each time the event is triggered.</p>
+</li>
+<li class="signature" id="click"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.click()</h4></li>
+</ul>
+<div class="longdesc">
+<p>This method is a shortcut for <code>.bind('click', handler)</code> in the first variation, and <code>.trigger('click')</code> in the second.</p>
+<p>The <code>click</code> event is sent to an element when the mouse pointer is over the element, and the mouse button is pressed and released. Any HTML element can receive this event.</p>
+<pre>For example, consider the HTML:
+&lt;div id="target"&gt;
+  Click here
+&lt;/div&gt;
+&lt;div id="other"&gt;
+  Trigger the handler
+&lt;/div&gt;</pre>
+<p class="image"><img src="http://api.jquery.com/images/0042_05_03.png" alt=""></p>
+<p>The event handler can be bound to any <code>&lt;div&gt;</code>:</p>
+<pre>$('#target').click(function() {
+  alert('Handler for .click() called.');
+});</pre>
+<p>Now if we click on this element, the alert is displayed:</p>
+<p><span class="output">Handler for .click() called.</span></p>
+<p>We can also trigger the event when a different element is clicked:</p>
+<pre>$('#other').click(function() {
+  $('#target').click();
+});</pre>
+<p>After this code executes, clicks on <span class="output">Trigger the handler</span> will also alert the message.</p>
+<p>The <code>click</code> event is only triggered after this exact series of events:</p>
+<ul>
+<li>The mouse button is depressed while the pointer is inside the element.</li>
+  <li>The mouse button is released while the pointer is inside the element.</li>
+</ul>
+<p>This is usually the desired sequence before taking an action. If this is not required, the <code>mousedown</code> or <code>mouseup</code> event may be more suitable.</p>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">To hide paragraphs on a page when they are clicked:</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  p { color:red; margin:5px; cursor:pointer; }
+  p.hilite { background:yellow; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;First Paragraph&lt;/p&gt;
+
+  &lt;p&gt;Second Paragraph&lt;/p&gt;
+  &lt;p&gt;Yet one more Paragraph&lt;/p&gt;
+&lt;script&gt;
+    $("p").click(function () { 
+      $(this).slideUp(); 
+    });
+    $("p").hover(function () {
+      $(this).addClass("hilite");
+    }, function () {
+      $(this).removeClass("hilite");
+    });
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">To trigger the click event on all of the paragraphs on the page:</span>
+</h4>
+<pre><code class="example">$("p").click();</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

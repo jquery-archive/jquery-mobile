@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.css()</h1>
+  				
+</div>
+
+
+<div data-role="content" data-theme="c" id="css1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.css( propertyName )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#String">String</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Get the value of a style property for the first element in the set of matched elements.</p>
+<ul class="signatures"><li class="signature" id="css-propertyName">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.css( propertyName )</h4>
+<p class="arguement"><strong>propertyName</strong>A CSS property.</p>
+</li></ul>
+<div class="longdesc">
+<p>The <code>.css()</code> method is a convenient way to get a style property from the first matched element, especially in light of the different ways browsers access most of those properties (the <code>getComputedStyle()</code> method in standards-based browsers versus the <code>currentStyle</code> and <code>runtimeStyle</code> properties in Internet Explorer) and the different terms browsers use for certain properties. For example, Internet Explorer's DOM implementation refers to the <code>float</code> property as <code>styleFloat</code>, while W3C standards-compliant browsers refer to it as <code>cssFloat</code>. The <code>.css()</code> method accounts for such differences, producing the same result no matter which term we use. For example, an element that is floated left will return the string <code>left</code> for each of the following three lines:</p>
+<ol>
+<li><code>$('div.left').css('float');</code></li>
+					<li><code>$('div.left').css('cssFloat');</code></li>
+					<li><code>$('div.left').css('styleFloat');</code></li>
+				</ol>
+<p>Also, jQuery can equally interpret the CSS and DOM formatting of multiple-word properties. For example, jQuery understands and returns the correct value for both <code>.css('background-color')</code> and <code>.css('backgroundColor')</code>.</p>
+<p>Shorthand CSS properties (e.g. margin, background, border) are not supported. For example, if you want to retrieve the rendered margin, use: <code>$(elem).css('marginTop')</code> and <code>$(elem).css('marginRight')</code>, and so on.</p>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">To access the background color of a clicked div.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+div { width:60px; height:60px; margin:5px; float:left; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	
+&lt;span id="result"&gt;&amp;nbsp;&lt;/span&gt;
+&lt;div style="background-color:blue;"&gt;&lt;/div&gt;
+&lt;div style="background-color:rgb(15,99,30);"&gt;&lt;/div&gt;
+
+&lt;div style="background-color:#123456;"&gt;&lt;/div&gt;
+&lt;div style="background-color:#f11;"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("div").click(function () {
+  var color = $(this).css("background-color");
+  $("#result").html("That div is &lt;span style='color:" +
+                     color + ";'&gt;" + color + "&lt;/span&gt;.");
+});
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+<div data-role="content" data-theme="c" id="css2">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.css( propertyName, value )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Set one or more CSS properties for the  set of matched elements.</p>
+<ul class="signatures">
+<li class="signature" id="css-propertyName-value">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.css( propertyName, value )</h4>
+<p class="arguement"><strong>propertyName</strong>A CSS property name.</p>
+<p class="arguement"><strong>value</strong>A value to set for the property.</p>
+</li>
+<li class="signature" id="css-propertyName-functionindex, value">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4/">1.4</a></span>.css( propertyName, function(index, value) )</h4>
+<p class="arguement"><strong>propertyName</strong>A CSS property name.</p>
+<p class="arguement"><strong>function(index, value)</strong>A function returning the value to set. Receives the index position of the element in the set and the old value as arguments.</p>
+</li>
+<li class="signature" id="css-map">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.css( map )</h4>
+<p class="arguement"><strong>map</strong>A map of property-value pairs to set.</p>
+</li>
+</ul>
+<div class="longdesc">
+<p>As with the <code>.attr()</code> method, the <code>.css()</code> method makes setting properties of elements quick and easy. This method can take either a property name and value as separate parameters, or a single map of key-value pairs (JavaScript object notation).</p>
+<p>Also, jQuery can equally interpret the CSS and DOM formatting of multiple-word properties. For example, jQuery understands and returns the correct value for both <code>.css({'background-color': '#ffe', 'border-left': '5px solid #ccc'})</code> and <code>.css({backgroundColor: '#ffe', borderLeft: '5px solid #ccc'})</code>. Notice that with the DOM notation, quotation marks around the property names are optional, but with CSS notation they're required due to the hyphen in the name.</p>
+<p>As with <code><a href="/attr">.attr()</a></code>, <code>.css()</code> allows us to pass a function as the property value:</p>
+<pre>$('div.example').css('width', function(index) {
+  return index * 50;
+});</pre>
+<p>This example sets the widths of the matched elements to incrementally larger values.</p>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">To change the color of any paragraph to red on mouseover event.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  p { color:blue; width:200px; font-size:14px; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	
+  &lt;p&gt;Just roll the mouse over me.&lt;/p&gt;
+
+  &lt;p&gt;Or me to see a color change.&lt;/p&gt;
+  
+&lt;script&gt;
+  $("p").mouseover(function () {
+    $(this).css("color","red");
+  });
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">To highlight a clicked word in the paragraph.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  p { color:blue; font-weight:bold; cursor:pointer; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	
+&lt;p&gt;
+  Once upon a time there was a man
+  who lived in a pizza parlor. This
+  man just loved pizza and ate it all 
+  the time.  He went on to be the
+  happiest man in the world.  The end.
+&lt;/p&gt;
+&lt;script&gt;
+  var words = $("p:first").text().split(" ");
+  var text = words.join("&lt;/span&gt; &lt;span&gt;");
+  $("p:first").html("&lt;span&gt;" + text + "&lt;/span&gt;");
+  $("span").click(function () {
+    $(this).css("background-color","yellow");
+  });
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">To set the color of all paragraphs to red and background to blue:</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  p { color:green; }
+&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	
+  &lt;p&gt;Move the mouse over a paragraph.&lt;/p&gt;
+  &lt;p&gt;Like this one or the one above.&lt;/p&gt;
+
+&lt;script&gt;
+  $("p").hover(function () {
+    $(this).css({'background-color' : 'yellow', 'font-weight' : 'bolder'});
+  }, function () {
+    var cssObj = {
+      'background-color' : '#ddd',
+      'font-weight' : '',
+      'color' : 'rgb(0,40,244)'
+    }
+    $(this).css(cssObj);
+  });
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-3">
+<h4>Example: <span class="desc">Increase the size of a div when you click it:</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  div { width: 20px; height: 15px; background-color: #f33; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	
+  &lt;div&gt;click&lt;/div&gt;
+  &lt;div&gt;click&lt;/div&gt;
+
+&lt;script&gt;
+  $("div").click(function() {
+    $(this).css({
+      width: function(index, value) {
+        return parseFloat(value) * 1.2;
+      }, 
+      height: function(index, value) {
+        return parseFloat(value) * 1.2;
+      }
+
+    });
+  });
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>
+
+
+				</div>
+
+</body></html>

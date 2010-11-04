@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.closest()</h1>
+  				
+</div>
+
+<div data-role="content" data-theme="c" id="closest1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.closest( selector )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Get the first element that matches the selector, beginning at the current element and progressing up through the DOM tree.</p>
+<ul class="signatures">
+<li class="signature" id="closest-selector">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.3/">1.3</a></span>.closest( selector )</h4>
+<p class="arguement"><strong>selector</strong>A string containing a selector expression to match elements against.</p>
+</li>
+<li class="signature" id="closest-selector-context">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4/">1.4</a></span>.closest( selector, [ context ] )</h4>
+<p class="arguement"><strong>selector</strong>A string containing a selector expression to match elements against.</p>
+<p class="arguement"><strong>context</strong>A DOM element within which a matching element may be found. If no context is passed in then the context of the jQuery set will be used instead.</p>
+</li>
+</ul>
+<div class="longdesc">
+<p>Given a jQuery object that represents a set of DOM elements, the <code>.closest()</code> method allows us to search through these elements and their ancestors in the DOM tree and construct a new jQuery object from the matching elements. The <code>.parents()</code> and <code>.closest()</code> methods are similar in that they both traverse up the DOM tree. The differences between the two, though subtle, are significant:</p>
+<table>
+<thead><tr>
+<th>.closest()</th>
+  	  <th>.parents()</th>
+  	</tr></thead>
+<tbody>
+<tr>
+<td>Begins with the current element</td>
+  	  <td>Begins with the parent element</td>
+</tr>
+<tr>
+<td>Travels up the DOM tree until it finds a match for the supplied selector</td>
+  	  <td>Travels up the DOM tree to the document's root element, adding each ancestor element to a temporary collection; it then filters that collection based on a selector if one is supplied </td>
+  	  </tr>
+<tr>
+<td>The returned jQuery object contains zero or one element</td>
+  	  <td>The returned jQuery object contains zero, one, or multiple elements</td>
+  	</tr>
+</tbody>
+</table>
+<pre>
+  &lt;ul id="one" class="level-1"&gt;
+    &lt;li class="item-i"&gt;I&lt;/li&gt;
+    &lt;li id="ii" class="item-ii"&gt;II
+    &lt;ul class="level-2"&gt;
+      &lt;li class="item-a"&gt;A&lt;/li&gt;
+      &lt;li class="item-b"&gt;B
+        &lt;ul class="level-3"&gt;
+          &lt;li class="item-1"&gt;1&lt;/li&gt;
+          &lt;li class="item-2"&gt;2&lt;/li&gt;
+          &lt;li class="item-3"&gt;3&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li class="item-c"&gt;C&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li class="item-iii"&gt;III&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+<p>Suppose we perform a search for <code>&lt;ul&gt;</code> elements starting at item A:</p>
+<pre>
+$('li.item-a').closest('ul')
+  .css('background-color', 'red');
+</pre>
+<p>This will change the color of the level-2 <code>&lt;ul&gt;</code>, since it is the first encountered when traveling up the DOM tree.</p>
+<p>Suppose we search for an <code>&lt;li&gt;</code> element instead:</p>
+<pre>$('li.item-a').closest('li')
+  .css('background-color', 'red');
+</pre>
+<p>This will change the color of list item A. The <code>.closest()</code> method begins its search with the element itself before progressing up the DOM tree, and stops when item A matches the selector.</p>
+<p>We can pass in a DOM element as the context within which to search for the closest element.</p>
+<pre>var listItemII = document.getElementById('ii');
+$('li.item-a').closest('ul', listItemII)
+  .css('background-color', 'red');
+$('li.item-a').closest('#one', listItemII)
+  .css('background-color', 'green');</pre>
+<p>This will change the color of the level-2 <code>&lt;ul&gt;</code>, because it is both the first <code>&lt;ul&gt;</code> ancestor of list item A and a descendant of list item II. It will not change the color of the level-1 <code>&lt;ul&gt;</code>, however, because it is not a descendant of list item II.</p>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Show how event delegation can be done with closest.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  li { margin: 3px; padding: 3px; background: #EEEEEE; }
+  li.hilight { background: yellow; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;ul&gt;
+&lt;li&gt;&lt;b&gt;Click me!&lt;/b&gt;&lt;/li&gt;
+&lt;li&gt;You can also &lt;b&gt;Click me!&lt;/b&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;script&gt;
+
+    $(document).bind("click", function (e) {
+      $(e.target).closest("li").toggleClass("hilight");
+    });
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+<div data-role="content" data-theme="c" id="closest2">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.closest( selectors, [ context ] )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#Array">Array</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Gets an array of all the elements and selectors matched against the current element up through the DOM tree.</p>
+<ul class="signatures"><li class="signature" id="closest-selectors-context">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4/">1.4</a></span>.closest( selectors, [ context ] )</h4>
+<p class="arguement"><strong>selectors</strong>An array of string containing a selector expression to match elements against (can also be a jQuery object).</p>
+<p class="arguement"><strong>context</strong>A DOM element within which a matching element may be found. If no context is passed in then the context of the jQuery set will be used instead.</p>
+</li></ul>
+<div class="longdesc"><p>This method is primarily meant to be used internally or by plugin authors.</p></div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Show how event delegation can be done with closest.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;ul&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;/ul&gt;
+&lt;script&gt;var close = $("li:first").closest(["ul", "body"]);
+$.each(close, function(i){
+  $("li").eq(i).html( this.selector + ": " + this.elem.nodeName );
+});&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+
+				</div>
+
+</body></html>

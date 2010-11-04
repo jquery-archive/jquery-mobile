@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>:selected Selector</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="selected1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">selected</span>  selector</h2>
+<div class="  entry-details">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/version/1.0/">1.0</a></span>jQuery(':selected')</h4>
+<p class="desc"><strong>Description: </strong>Selects all elements that are selected.</p>
+<div class="longdesc"><p>The <code>:selected</code> selector works for <code>&lt;option&gt;</code> elements. It does not work for checkboxes or radio inputs; use <code>:checked</code> for them.</p></div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Attaches a change event to the select that gets the text for each selected option and writes them in the div.  It then triggers the event for the initial text draw.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  div { color:red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;select name="garden" multiple="multiple"&gt;
+
+    &lt;option&gt;Flowers&lt;/option&gt;
+    &lt;option selected="selected"&gt;Shrubs&lt;/option&gt;
+    &lt;option&gt;Trees&lt;/option&gt;
+    &lt;option selected="selected"&gt;Bushes&lt;/option&gt;
+
+    &lt;option&gt;Grass&lt;/option&gt;
+    &lt;option&gt;Dirt&lt;/option&gt;
+  &lt;/select&gt;
+  &lt;div&gt;&lt;/div&gt;
+&lt;script&gt;
+
+    $("select").change(function () {
+          var str = "";
+          $("select option:selected").each(function () {
+                str += $(this).text() + " ";
+              });
+          $("div").text(str);
+        })
+        .trigger('change');
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

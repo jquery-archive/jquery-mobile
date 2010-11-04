@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.serialize()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="serialize1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.serialize()</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#String">String</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Encode a set of form elements as a string for submission.</p>
+<ul class="signatures"><li class="signature" id="serialize"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.serialize()</h4></li></ul>
+<div class="longdesc">
+<p>The <code>.serialize()</code> method creates a text string in standard URL-encoded notation. It operates on a jQuery object representing a set of form elements. The form elements can be of several types:</p>
+<pre>&lt;form&gt;
+  &lt;div&gt;&lt;input type="text" name="a" value="1" id="a" /&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;input type="text" name="b" value="2" id="b" /&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;input type="hidden" name="c" value="3" id="c" /&gt;&lt;/div&gt;
+  &lt;div&gt;
+    &lt;textarea name="d" rows="8" cols="40"&gt;4&lt;/textarea&gt;
+  &lt;/div&gt;
+  &lt;div&gt;&lt;select name="e"&gt;
+    &lt;option value="5" selected="selected"&gt;5&lt;/option&gt;
+    &lt;option value="6"&gt;6&lt;/option&gt;
+    &lt;option value="7"&gt;7&lt;/option&gt;
+  &lt;/select&gt;&lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" name="f" value="8" id="f" /&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="submit" name="g" value="Submit" id="g" /&gt;
+  &lt;/div&gt;
+&lt;/form&gt;</pre>
+<p>The <code>.serialize()</code> method can act on a jQuery object that has selected individual form elements, such as <code>&lt;input&gt;</code>, <code>&lt;textarea&gt;</code>, and <code>&lt;select&gt;</code>. However, it is typically easier to select the <code>&lt;form&gt;</code> tag itself for serialization:</p>
+<pre>$('form').submit(function() {
+  alert($(this).serialize());
+  return false;
+});</pre>
+<p>This produces a standard-looking query string:</p>
+<pre>a=1&amp;b=2&amp;c=3&amp;d=4&amp;e=5</pre>
+<p>Note: Only <a href="http://www.w3.org/TR/html401/interact/forms.html#h-17.13.2">"successful controls"</a> are serialized to the string. No submit button value is serialized since the form was not submitted using a button. For a form element's value to be included in the serialized string, the element must have a <code>name</code> attribute. Data from file select elements is not serialized.</p>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Serialize a form to a query string, that could be sent to a server in an Ajax request.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  body, select { font-size:12px; }
+  form { margin:5px; }
+  p { color:red; margin:5px; font-size:14px; }
+  b { color:blue; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	
+
+&lt;form&gt;
+    &lt;select name="single"&gt;
+      &lt;option&gt;Single&lt;/option&gt;
+      &lt;option&gt;Single2&lt;/option&gt;
+    &lt;/select&gt;
+
+&lt;br /&gt;
+    &lt;select name="multiple" multiple="multiple"&gt;
+      &lt;option selected="selected"&gt;Multiple&lt;/option&gt;
+      &lt;option&gt;Multiple2&lt;/option&gt;
+
+      &lt;option selected="selected"&gt;Multiple3&lt;/option&gt;
+    &lt;/select&gt;
+&lt;br/&gt;
+    &lt;input type="checkbox" name="check" value="check1" id="ch1"/&gt;
+
+    &lt;label for="ch1"&gt;check1&lt;/label&gt;
+
+    &lt;input type="checkbox" name="check" value="check2" checked="checked" id="ch2"/&gt;
+
+    &lt;label for="ch2"&gt;check2&lt;/label&gt;
+&lt;br /&gt;
+    &lt;input type="radio" name="radio" value="radio1" checked="checked" id="r1"/&gt;
+
+    &lt;label for="r1"&gt;radio1&lt;/label&gt;
+    &lt;input type="radio" name="radio" value="radio2" id="r2"/&gt;
+
+    &lt;label for="r2"&gt;radio2&lt;/label&gt;
+  &lt;/form&gt;
+  &lt;p&gt;&lt;tt id="results"&gt;&lt;/tt&gt;&lt;/p&gt;
+&lt;script&gt;
+    function showValues() {
+      var str = $("form").serialize();
+      $("#results").text(str);
+    }
+    $(":checkbox, :radio").click(showValues);
+    $("select").change(showValues);
+    showValues();
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo" rel="200"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

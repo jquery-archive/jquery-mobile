@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>jQuery.proxy()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="jQuery.proxy1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">jQuery.proxy( function, context )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#Function">Function</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Takes a function and returns a new one that will always have a particular context.</p>
+<ul class="signatures">
+<li class="signature" id="jQuery.proxy-function-context">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4/">1.4</a></span>jQuery.proxy( function, context )</h4>
+<p class="arguement"><strong>function</strong>The function whose context will be changed.</p>
+<p class="arguement"><strong>context</strong>The object to which the context (`this`) of the function should be set.</p>
+</li>
+<li class="signature" id="jQuery.proxy-context-name">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4/">1.4</a></span>jQuery.proxy( context, name )</h4>
+<p class="arguement"><strong>context</strong>The object to which the context of the function should be set.</p>
+<p class="arguement"><strong>name</strong>The name of the function whose context will be changed (should be a property of the 'context' object.</p>
+</li>
+</ul>
+<div class="longdesc"><p>This method is most useful for attaching event handlers to an element where the context is pointing back to a different object. Additionally, jQuery makes sure that even if you bind the function returned from jQuery.proxy() it will still unbind the correct function, if passed the original.</p></div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Enforce the context of the function.</span></h4>
+<pre><code class="example">var obj = {
+  name: "John",
+  test: function() {
+    alert( this.name );
+    $("#test").unbind("click", obj.test);
+  }
+};
+
+$("#test").click( jQuery.proxy( obj, "test" ) );
+
+// This also works:
+// $("#test").click( jQuery.proxy( obj.test, obj ) );</code></pre>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

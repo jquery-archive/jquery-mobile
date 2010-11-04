@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>jQuery.get()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="jQuery.get1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">jQuery.get( url, [ data ], [ callback(data, textStatus, XMLHttpRequest) ], [ dataType ] )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#XMLHttpRequest">XMLHttpRequest</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Load data from the server using a HTTP GET request.</p>
+<ul class="signatures"><li class="signature" id="jQuery.get-url-data-callbackdata, textStatus, XMLHttpRequest-dataType">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>jQuery.get( url, [ data ], [ callback(data, textStatus, XMLHttpRequest) ], [ dataType ] )</h4>
+<p class="arguement"><strong>url</strong>A string containing the URL to which the request is sent.</p>
+<p class="arguement"><strong>data</strong>A map or string that is sent to the server with the request.</p>
+<p class="arguement"><strong>callback(data, textStatus, XMLHttpRequest)</strong>A callback function that is executed if the request succeeds.</p>
+<p class="arguement"><strong>dataType</strong>The type of data expected from the server.</p>
+</li></ul>
+<div class="longdesc">
+<p>This is a shorthand Ajax function, which is equivalent to:</p>
+<pre>$.ajax({
+  url: <em>url</em>,
+  data: <em>data</em>,
+  success: <em>success</em>,
+  dataType: <em>dataType</em>
+});
+</pre>
+<p>The <code>success</code> callback function is passed the returned data, which will be an XML root element, text string, JavaScript file, or JSON object, depending on the MIME type of the response. It is also passed the text status of the response. </p>
+<p>As of jQuery 1.4, the <code>success</code> callback function is also passed the XMLHttpRequest object.</p>
+<p>Most implementations will specify a success handler:</p>
+<pre>$.get('ajax/test.html', function(data) {
+  $('.result').html(data);
+  alert('Load was performed.');
+});
+</pre>
+<p>This example fetches the requested HTML snippet and inserts it on the page.</p>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Request the test.php page, but ignore the return results.</span>
+</h4>
+<pre><code class="example">$.get("test.php");</code></pre>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Request the test.php page and send some additional data along (while still ignoring the return results).</span>
+</h4>
+<pre><code class="example">$.get("test.php", { name: "John", time: "2pm" } );</code></pre>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">pass arrays of data to the server (while still ignoring the return results).</span>
+</h4>
+<pre><code class="example">$.get("test.php", { 'choices[]': ["Jon", "Susan"]} );</code></pre>
+</div>
+<div id="example-3">
+<h4>Example: <span class="desc">Alert out the results from requesting test.php (HTML or XML, depending on what was returned).</span>
+</h4>
+<pre><code class="example">$.get("test.php", function(data){
+   alert("Data Loaded: " + data);
+ });</code></pre>
+</div>
+<div id="example-4">
+<h4>Example: <span class="desc">Alert out the results from requesting test.cgi with an additional payload of data (HTML or XML, depending on what was returned).</span>
+</h4>
+<pre><code class="example">$.get("test.cgi", { name: "John", time: "2pm" },
+   function(data){
+     alert("Data Loaded: " + data);
+   });</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

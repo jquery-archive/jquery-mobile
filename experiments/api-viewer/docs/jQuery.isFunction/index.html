@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>jQuery.isFunction()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="jQuery.isFunction1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">jQuery.isFunction()</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#boolean">boolean</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Determine if the argument passed is a Javascript function object. </p>
+<ul class="signatures"><li class="signature" id="jQuery.isFunction"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.2/">1.2</a></span>jQuery.isFunction()</h4></li></ul>
+<div class="longdesc"><p><strong>Note:</strong> As of jQuery 1.3, functions provided by the browser like <code>alert()</code> and DOM element methods like <code>getAttribute()</code> are not guaranteed to be detected as functions in browsers such as Internet Explorer.</p></div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Test a few parameter examples.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  div { color:blue; margin:2px; font-size:14px; }
+  span { color:red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	
+  &lt;div&gt;jQuery.isFunction(objs[0]) = &lt;span&gt;&lt;/span&gt;&lt;/div&gt;
+
+  &lt;div&gt;jQuery.isFunction(objs[1]) = &lt;span&gt;&lt;/span&gt;&lt;/div&gt;
+  &lt;div&gt;jQuery.isFunction(objs[2]) = &lt;span&gt;&lt;/span&gt;&lt;/div&gt;
+  &lt;div&gt;jQuery.isFunction(objs[3]) = &lt;span&gt;&lt;/span&gt;&lt;/div&gt;
+
+  &lt;div&gt;jQuery.isFunction(objs[4]) = &lt;span&gt;&lt;/span&gt;&lt;/div&gt;
+  
+&lt;script&gt;
+    function stub() {
+    }
+    var objs = [
+          function () {},
+          { x:15, y:20 },
+          null,
+          stub,
+          "function"
+        ];
+
+    jQuery.each(objs, function (i) {
+      var isFunc = jQuery.isFunction(objs[i]);
+      $("span").eq(i).text(isFunc);
+    });
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Finds out if the parameter is a funcion.</span>
+</h4>
+<pre><code class="example">$.isFunction(function(){});</code></pre>
+<h4>Result:</h4>
+<pre><code class="results">true</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

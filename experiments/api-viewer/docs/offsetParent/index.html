@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.offsetParent()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="offsetParent1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.offsetParent()</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Get the closest ancestor element that is positioned.</p>
+<ul class="signatures"><li class="signature" id="offsetParent"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.26/">1.26</a></span>.offsetParent()</h4></li></ul>
+<div class="longdesc">
+<p>Given a jQuery object that represents a set of DOM elements, the <code>.offsetParent()</code> method allows us to search through the ancestors of these elements in the DOM tree and construct a new jQuery object wrapped around the closest positioned ancestor. An element is said to be positioned if it has a CSS position attribute of <code>relative</code>, <code>absolute</code>, or <code>fixed</code>. This information is useful for calculating offsets for performing animations and placing objects on the page.</p>
+<p>Consider a page with a basic nested list on it, with a positioned element:</p>
+<pre>
+&lt;ul class="level-1"&gt;
+  &lt;li class="item-i"&gt;I&lt;/li&gt;
+  &lt;li class="item-ii" style="position: relative;"&gt;II
+    &lt;ul class="level-2"&gt;
+      &lt;li class="item-a"&gt;A&lt;/li&gt;
+      &lt;li class="item-b"&gt;B
+        &lt;ul class="level-3"&gt;
+          &lt;li class="item-1"&gt;1&lt;/li&gt;
+          &lt;li class="item-2"&gt;2&lt;/li&gt;
+          &lt;li class="item-3"&gt;3&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li class="item-c"&gt;C&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li class="item-iii"&gt;III&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+<p>If we begin at item A, we can find its positioned ancestor:</p>
+<pre>$('li.item-a').offsetParent().css('background-color', 'red');</pre>
+<p>This will change the color of list item II, which is positioned.</p>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Find the offsetParent of item "A."</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	
+    &lt;ul class="level-1"&gt;
+      &lt;li class="item-i"&gt;I&lt;/li&gt;
+      &lt;li class="item-ii" style="position: relative;"&gt;II
+        &lt;ul class="level-2"&gt;
+          &lt;li class="item-a"&gt;A&lt;/li&gt;
+          &lt;li class="item-b"&gt;B
+            &lt;ul class="level-3"&gt;
+              &lt;li class="item-1"&gt;1&lt;/li&gt;
+              &lt;li class="item-2"&gt;2&lt;/li&gt;
+              &lt;li class="item-3"&gt;3&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li class="item-c"&gt;C&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li class="item-iii"&gt;III&lt;/li&gt;
+    &lt;/ul&gt;
+  
+&lt;script&gt;$('li.item-a').offsetParent().css('background-color', 'red');&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo" rel="250"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

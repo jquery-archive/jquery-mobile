@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.load()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="load1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.load( handler(eventObject) )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Bind an event handler to the "load" JavaScript event.</p>
+<ul class="signatures"><li class="signature" id="load-handlereventObject">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.load( handler(eventObject) )</h4>
+<p class="arguement"><strong>handler(eventObject)</strong>A function to execute when the event is triggered.</p>
+</li></ul>
+<div class="longdesc">
+<p>This method is a shortcut for <code>.bind('load', handler)</code>.</p>
+<p>The <code>load</code> event is sent to an element when it and all sub-elements have been completely loaded. This event can be sent to any element associated with a URL: images, scripts, frames, iframes, and the body of the document itself.</p>
+<blockquote><p>It is possible that the load event will not be triggered if the image is loaded from the browser cache. To account for this possibility, we can test the value of the image's <code>.complete</code> property. </p></blockquote>
+<p>For example, consider a page with a simple image:</p>
+<pre>&lt;img src="book.png" alt="Book" id="book" /&gt;</pre>
+<p>The event handler can be bound to the image:</p>
+<pre>$('#book').load(function() {
+  // Handler for .load() called.
+});</pre>
+<p>As soon as the image has been loaded, the handler is called.</p>
+<p>In general, it is not necessary to wait for all images to be fully loaded. If code can be executed earlier, it is usually best to place it in a handler sent to the <code>.ready()</code> method.
+</p>
+<blockquote><p>The Ajax module also has a method named <code><a href="/load">.load()</a></code>. Which one is fired depends on the set of arguments passed.</p></blockquote>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Run a function when the page is fully loaded including graphics.</span>
+</h4>
+<pre><code class="example">$(window).load(function () {
+  // run code
+});</code></pre>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Add the class bigImg to all images with height greater then 100 upon each image load.</span>
+</h4>
+<pre><code class="example">$('img.userIcon').load(function(){
+  if($(this).height() &gt; 100) {
+    $(this).addClass('bigImg');
+  }
+});</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

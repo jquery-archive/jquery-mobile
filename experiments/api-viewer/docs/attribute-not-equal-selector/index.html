@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>Attribute Not Equal Selector [name!=value]</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="attributeNotEqual1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">attributeNotEqual</span>  selector</h2>
+<div class="  entry-details">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/version/1.0/">1.0</a></span>jQuery('[attribute!=value]')</h4>
+<ul class="signatures"><li><dl class="arguments">
+<dt>attribute</dt>
+<dd>An attribute name.</dd>
+<dt>value</dt>
+<dd>An attribute value. Quotes are optional.</dd>
+</dl></li></ul>
+<p class="desc"><strong>Description: </strong>Select elements that either don't have the specified attribute, or do have the specified attribute but not with a certain value.</p>
+<div class="longdesc"><p>This selector is equivalent to <code>:not([attr=value])</code>.</p></div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Finds all inputs that don't have the name 'newsletter' and appends text to the span next to it.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div&gt;
+
+    &lt;input type="radio" name="newsletter" value="Hot Fuzz" /&gt;
+    &lt;span&gt;name is newsletter&lt;/span&gt;
+
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" value="Cold Fusion" /&gt;
+    &lt;span&gt;no name&lt;/span&gt;
+
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" name="accept" value="Evil Plans" /&gt;
+
+    &lt;span&gt;name is accept&lt;/span&gt;
+  &lt;/div&gt;
+&lt;script&gt;$("input[name!=newsletter]").next().append("&lt;b&gt;; not newsletter&lt;/b&gt;");&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

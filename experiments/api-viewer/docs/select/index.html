@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.select()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="select1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.select( handler(eventObject) )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Bind an event handler to the "select" JavaScript event, or trigger that event on an element.</p>
+<ul class="signatures">
+<li class="signature" id="select-handlereventObject">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.select( handler(eventObject) )</h4>
+<p class="arguement"><strong>handler(eventObject)</strong>A function to execute each time the event is triggered.</p>
+</li>
+<li class="signature" id="select"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.select()</h4></li>
+</ul>
+<div class="longdesc">
+<p>This method is a shortcut for <code>.bind('select', handler)</code> in the first variation, and <code>.trigger('select')</code> in the second.</p>
+<p>The <code>select</code> event is sent to an element when the user makes a text selection inside it. This event is limited to <code>&lt;input type="text"&gt;</code> fields and <code>&lt;textarea&gt;</code> boxes.</p>
+<p>For example, consider the HTML:</p>
+<pre>&lt;form&gt;
+  &lt;input id="target" type="text" value="Hello there" /&gt;
+&lt;/form&gt;
+&lt;div id="other"&gt;
+  Trigger the handler
+&lt;/div&gt;</pre>
+<p>The event handler can be bound to the text input:</p>
+<pre>$('#target').select(function() {
+  alert('Handler for .select() called.');
+});</pre>
+<p>Now when any portion of the text is selected, the alert is displayed. Merely setting the location of the insertion point will not trigger the event. We can trigger the event manually when another element is clicked:</p>
+<pre>$('#other').click(function() {
+  $('#target').select();
+});</pre>
+<p>After this code executes, clicks on the Trigger button will also alert the message:</p>
+<p><span class="output">Handler for .select() called.</span></p>
+<p>In addition, the default <code>select</code> action on the field will be fired, so the entire text field will be selected.</p>
+<blockquote><p>The method for retrieving the current selected text differs from one browser to another. A number of jQuery plug-ins offer cross-platform solutions.</p></blockquote>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">To do something when text in input boxes is selected:</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  p { color:blue; }
+  div { color:red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;
+
+    Click and drag the mouse to select text in the inputs.
+  &lt;/p&gt;
+  &lt;input type="text" value="Some text" /&gt;
+  &lt;input type="text" value="to test on" /&gt;
+
+  &lt;div&gt;&lt;/div&gt;
+&lt;script&gt;
+    $(":input").select( function () { 
+      $("div").text("Something was selected").show().fadeOut(1000); 
+    });
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">To trigger the select event on all input elements, try:</span>
+</h4>
+<pre><code class="example">$("input").select();</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

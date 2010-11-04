@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>jQuery.noConflict()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="jQuery.noConflict1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">jQuery.noConflict( [ removeAll ] )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#Object">Object</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Relinquish jQuery's control of the $ variable.</p>
+<ul class="signatures"><li class="signature" id="jQuery.noConflict-removeAll">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>jQuery.noConflict( [ removeAll ] )</h4>
+<p class="arguement"><strong>removeAll</strong>A Boolean indicating whether to remove all jQuery variables from the global scope (including jQuery itself).</p>
+</li></ul>
+<div class="longdesc">
+<p>Many JavaScript libraries use <code> $</code> as a function or variable name, just as jQuery does. In jQuery's case, <code> $</code> is just an alias for <code>jQuery</code>, so all functionality is available without using <code> $</code>. If we need to use another JavaScript library alongside jQuery, we can return control of <code> $</code> back to the other library with a call to <code>$.noConflict()</code>:</p>
+<pre>
+&lt;script type="text/javascript" src="other_lib.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="jquery.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript"&gt;
+  $.noConflict();
+  // Code that uses other library's $ can follow here.
+&lt;/script&gt;
+</pre>
+<p>This technique is especially effective in conjunction with the .ready() method's ability to alias the jQuery object, as within callback passed to .ready() we can use $ if we wish without fear of conflicts later:</p>
+<pre>
+&lt;script type="text/javascript" src="other_lib.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="jquery.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript"&gt;
+  $.noConflict();
+  jQuery(document).ready(function($) {
+    // Code that uses jQuery's $ can follow here.
+  });
+  // Code that uses other library's $ can follow here.
+&lt;/script&gt;
+</pre>
+<p>If necessary, we can free up the <code> jQuery</code> name as well by passing <code>true</code> as an argument to the method. This is rarely necessary, and if we must do this (for example, if we need to use multiple versions of the <code>jQuery</code> library on the same page), we need to consider that most plug-ins rely on the presence of the jQuery variable and may not operate correctly in this situation.</p>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Maps the original object that was referenced by $ back to $.</span>
+</h4>
+<pre><code class="example">jQuery.noConflict();
+// Do something with jQuery
+jQuery("div p").hide();
+// Do something with another library's $()
+$("content").style.display = 'none';</code></pre>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Reverts the $ alias and then creates and executes a function to provide the $ as a jQuery alias inside the functions scope. Inside the function the original $ object is not available. This works well for most plugins that don't rely on any other library.  
+
+</span>
+</h4>
+<pre><code class="example">jQuery.noConflict();
+(function($) { 
+  $(function() {
+    // more code using $ as alias to jQuery
+  });
+})(jQuery);
+// other code using $ as an alias to the other library</code></pre>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">You can chain the jQuery.noConflict() with the shorthand ready for a compact code.
+</span>
+</h4>
+<pre><code class="example">jQuery.noConflict()(function(){
+    // code using jQuery
+}); 
+// other code using $ as an alias to the other library</code></pre>
+</div>
+<div id="example-3">
+<h4>Example: <span class="desc">Creates a different alias instead of jQuery to use in the rest of the script.</span>
+</h4>
+<pre><code class="example">var j = jQuery.noConflict();
+// Do something with jQuery
+j("div p").hide();
+// Do something with another library's $()
+$("content").style.display = 'none';</code></pre>
+</div>
+<div id="example-4">
+<h4>Example: <span class="desc">Completely move jQuery to a new namespace in another object.</span>
+</h4>
+<pre><code class="example">var dom = {};
+dom.query = jQuery.noConflict(true);</code></pre>
+<h4>Result:</h4>
+<pre><code class="results">// Do something with the new jQuery
+dom.query("div p").hide();
+// Do something with another library's $()
+$("content").style.display = 'none';
+// Do something with another version of jQuery
+jQuery("div &gt; p").hide();</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.length</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="length1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">length</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#Number">Number</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>The number of elements in the jQuery object.</p>
+<ul class="signatures"><li class="signature" id="length"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>length</h4></li></ul>
+<div class="longdesc"><p>The number of elements currently matched. The .<a href="/size">size()</a> method will return the same value.</p></div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Count the divs.  Click to add more.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+
+  body { cursor:pointer; }
+  div { width:50px; height:30px; margin:5px; float:left;
+        background:green; }
+  span { color:red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;span&gt;&lt;/span&gt;
+  &lt;div&gt;&lt;/div&gt;
+&lt;script&gt;$(document.body).click(function () {
+      $(document.body).append($("&lt;div&gt;"));
+      var n = $("div").length;
+      $("span").text("There are " + n + " divs." +
+                     "Click to add more.");
+    }).trigger('click'); // trigger the click to start&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

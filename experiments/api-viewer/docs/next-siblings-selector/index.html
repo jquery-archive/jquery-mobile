@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>Next Siblings Selector (“prev ~ siblings”)</h1>
+  				<div class="entry-meta">Categories:
+  					<span class="category"><a href="http://api.jquery.com/category/selectors/" title="View all posts in Selectors">Selectors</a> &gt; <a href="http://api.jquery.com/category/selectors/hierarchy-selectors/" title="View all posts in Hierarchy">Hierarchy</a></span>  
+    
+  				</div>
+</div>
+<div data-role="content" data-theme="c" id="next siblings1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">next siblings</span>  selector</h2>
+<div class="  entry-details">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/version/1.0/">1.0</a></span>jQuery('prev ~ siblings')</h4>
+<ul class="signatures"><li><dl class="arguments">
+<dt>prev</dt>
+<dd>Any valid selector.</dd>
+<dt>siblings</dt>
+<dd>A selector to filter elements that are the following siblings of the first selector.</dd>
+</dl></li></ul>
+<p class="desc"><strong>Description: </strong>Selects all sibling elements that follow after the "prev" element, have the same parent, and match the filtering "siblings" selector.</p>
+<div class="longdesc"><p>The notable difference between (<code>prev + next</code>) and (<code>prev ~ siblings</code>) is their respective reach. While the former reaches only to the immediately following sibling element, the latter extends that reach to all following sibling elements.</p></div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Finds all divs that are siblings after the element with #prev as its id.  Notice the span isn't selected since it is not a div and the "niece" isn't selected since it is a child of a sibling, not an actual sibling.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+
+  div,span {
+    display:block;
+    width:80px;
+    height:80px;
+    margin:5px;
+    background:#bbffaa;
+    float:left;
+    font-size:14px;
+  }
+  div#small {
+    width:60px;
+    height:25px;
+    font-size:12px;
+    background:#fab;
+  }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div&gt;div (doesn't match since before #prev)&lt;/div&gt;
+  &lt;span id="prev"&gt;span#prev&lt;/span&gt;
+  &lt;div&gt;div sibling&lt;/div&gt;
+
+  &lt;div&gt;div sibling &lt;div id="small"&gt;div niece&lt;/div&gt;&lt;/div&gt;
+  &lt;span&gt;span sibling (not div)&lt;/span&gt;
+  &lt;div&gt;div sibling&lt;/div&gt;
+&lt;script&gt;$("#prev ~ div").css("border", "3px groove blue");&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

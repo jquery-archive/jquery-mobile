@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>:submit Selector</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="submit1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">submit</span>  selector</h2>
+<div class="  entry-details">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/version/1.0/">1.0</a></span>jQuery(':submit')</h4>
+<p class="desc"><strong>Description: </strong>Selects all elements of type submit.</p>
+<div class="longdesc"><p>The <code>:submit</code> selector typically applies to button or input elements. Note that some browsers treat <code>&lt;button&gt;</code> element as <code>type="default"</code> implicitly while others (such as Internet Explorer) do not.  </p></div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Finds all submit elements that are descendants of a td element.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  textarea { height:45px; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	
+&lt;table&gt;
+&lt;form&gt;
+&lt;table id="exampleTable" border="1" cellpadding="10" align="center"&gt;
+
+    &lt;tr&gt;
+        &lt;th&gt;
+            Element Type
+        &lt;/th&gt;
+        &lt;th&gt;
+            Element
+        &lt;/th&gt;
+
+    &lt;/tr
+    &lt;tr&gt;
+        &lt;td&gt;
+            &lt;input type="button" value="Input Button"/&gt;
+        &lt;/td&gt;
+
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;
+            &lt;input type="checkbox" /&gt;
+        &lt;/td&gt;
+
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;
+            &lt;input type="file" /&gt;
+        &lt;/td&gt;
+
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;
+            &lt;input type="hidden" /&gt;
+        &lt;/td&gt;
+
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;
+            &lt;input type="image" /&gt;
+        &lt;/td&gt;
+
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;
+            &lt;input type="password" /&gt;
+        &lt;/td&gt;
+
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;
+            &lt;input type="radio" /&gt;
+        &lt;/td&gt;
+
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;
+            &lt;input type="reset" /&gt;
+        &lt;/td&gt;
+
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;
+            &lt;input type="submit" /&gt;
+        &lt;/td&gt;
+
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;
+            &lt;input type="text" /&gt;
+        &lt;/td&gt;
+
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;
+            &lt;select&gt;&lt;option&gt;Option&lt;/option&gt;&lt;/select&gt;
+        &lt;/td&gt;
+
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;
+            &lt;textarea&gt;&lt;/textarea&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;
+
+    &lt;tr&gt;
+        &lt;td&gt;
+            &lt;button&gt;Button&lt;/button&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;
+            &lt;button type="submit"&gt;Button type="submit"&lt;/button&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;
+
+&lt;/table&gt;
+&lt;/form&gt;
+&lt;div id="result"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    var submitEl = $("td :submit")
+      .parent('td')
+      .css({background:"yellow", border:"3px red solid"})
+    .end();
+    
+    $('#result').text('jQuery matched ' + submitEl.length + ' elements.');
+
+    // so it won't submit
+    $("form").submit(function () { return false; });
+    
+    // Extra JS to make the HTML easier to edit (None of this is relevant to the ':submit' selector
+    $('#exampleTable').find('td').each(function(i, el) {
+        var inputEl = $(el).children(),
+            inputType = inputEl.attr('type') ? ' type="' + inputEl.attr('type') + '"' : '';
+        $(el).before('&lt;td&gt;' + inputEl[0].nodeName + inputType + '&lt;/td&gt;');
+    })
+    
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

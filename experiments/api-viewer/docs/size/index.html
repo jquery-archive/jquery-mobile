@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.size()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="size1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.size()</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#Number">Number</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Return the number of DOM elements matched by the jQuery object.</p>
+<ul class="signatures"><li class="signature" id="size"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.size()</h4></li></ul>
+<div class="longdesc">
+<pre>
+&lt;ul&gt;
+  &lt;li&gt;foo&lt;/li&gt;
+  &lt;li&gt;bar&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+<p>We can determine the number of list items by calling <code>.size()</code>:</p>
+<pre>alert('Size: ' + $('li').size());</pre>
+<p>This will alert the count of items:</p>
+<p><span class="output">Size: 2</span></p>
+<p>The <a href="/length/">.length</a> property is a slightly faster way to get this information.</p>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Count the divs. Click to add more.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;body { cursor:pointer; }
+ div { width:50px; height:30px; margin:5px; float:left; background:blue; }
+ span { color:red; }
+ &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;span&gt;&lt;/span&gt;
+
+ &lt;div&gt;&lt;/div&gt;
+&lt;script&gt;$(document.body).click(function () { $(document.body).append($("&lt;div&gt;"));
+var n = $("div").size();
+$("span").text("There are " + n + " divs." + "Click to add more.");}).click(); // trigger the click to start&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

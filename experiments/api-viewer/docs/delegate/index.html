@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.delegate()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="delegate1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.delegate( selector, eventType, handler )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Attach a handler to one or more events for all elements that match the selector, now or in the future, based on a specific set of root elements.</p>
+<ul class="signatures">
+<li class="signature" id="delegate-selector-eventType-handler">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4.2/">1.4.2</a></span>.delegate( selector, eventType, handler )</h4>
+<p class="arguement"><strong>selector</strong>A selector to filter the elements that trigger the event.</p>
+<p class="arguement"><strong>eventType</strong>A string containing one or more space-separated JavaScript event types, such as "click" or "keydown," or custom event names.</p>
+<p class="arguement"><strong>handler</strong>A function to execute at the time the event is triggered.</p>
+</li>
+<li class="signature" id="delegate-selector-eventType-eventData-handler">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4.2/">1.4.2</a></span>.delegate( selector, eventType, eventData, handler )</h4>
+<p class="arguement"><strong>selector</strong>A selector to filter the elements that trigger the event.</p>
+<p class="arguement"><strong>eventType</strong>A string containing one or more space-separated JavaScript event types, such as "click" or "keydown," or custom event names.</p>
+<p class="arguement"><strong>eventData</strong>A map of data that will be passed to the event handler.</p>
+<p class="arguement"><strong>handler</strong>A function to execute at the time the event is triggered.</p>
+</li>
+</ul>
+<div class="longdesc">
+<p>Delegate is an alternative to using the <a href="/live">.live()</a> method, allowing for each binding of event delegation to specific DOM elements. For example the following delegate code:</p>
+<pre>$("table").delegate("td", "hover", function(){
+	$(this).toggleClass("hover");
+});</pre>
+<p>Is equivalent to the following code written using <code>.live()</code>:</p>
+<pre>$("table").each(function(){
+	$("td", this).live("hover", function(){
+		$(this).toggleClass("hover");
+	});
+});</pre>
+<p>See also the <a href="/undelegate">.undelegate()</a> method for a way of removing event handlers added in <a href="/delegate">.delegate()</a>.</p>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Click a paragraph to add another. Note that .delegate() binds the click event to all paragraphs - even new ones.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  p { background:yellow; font-weight:bold; cursor:pointer; 
+      padding:5px; }
+  p.over { background: #ccc; }
+  span { color:red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;Click me!&lt;/p&gt;
+
+  &lt;span&gt;&lt;/span&gt;
+&lt;script&gt;
+    $("body").delegate("p", "click", function(){
+      $(this).after("&lt;p&gt;Another paragraph!&lt;/p&gt;");
+    });
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">To display each paragraph's text in an alert box whenever it is clicked:</span>
+</h4>
+<pre><code class="example">$("body").delegate("p", "click", function(){
+  alert( $(this).text() );
+});</code></pre>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">To cancel a default action and prevent it from bubbling up, return false:</span>
+</h4>
+<pre><code class="example">$("body").delegate("a", "click", function() { return false; })</code></pre>
+</div>
+<div id="example-3">
+<h4>Example: <span class="desc">To cancel only the default action by using the preventDefault method.</span>
+</h4>
+<pre><code class="example">$("body").delegate("a", "click", function(event){
+  event.preventDefault();
+});</code></pre>
+</div>
+<div id="example-4">
+<h4>Example: <span class="desc">Can bind custom events too.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  p { color:red; }
+  span { color:blue; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;Has an attached custom event.&lt;/p&gt;
+  &lt;button&gt;Trigger custom event&lt;/button&gt;
+  &lt;span style="display:none;"&gt;&lt;/span&gt;
+&lt;script&gt;
+
+    $("body").delegate("p", "myCustomEvent", function(e, myName, myValue){
+      $(this).text("Hi there!");
+      $("span").stop().css("opacity", 1)
+               .text("myName = " + myName)
+               .fadeIn(30).fadeOut(1000);
+    });
+    $("button").click(function () {
+      $("p").trigger("myCustomEvent");
+    });
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

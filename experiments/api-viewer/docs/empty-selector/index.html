@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>:empty Selector</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="empty1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">empty</span>  selector</h2>
+<div class="  entry-details">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/version/1.0/">1.0</a></span>jQuery(':empty')</h4>
+<p class="desc"><strong>Description: </strong>Select all elements that have no children (including text nodes).</p>
+<div class="longdesc">
+<p>This is the inverse of <code>:parent</code>. </p>
+<p>One important thing to note with :empty (and :parent) is that child elements include text nodes.</p>
+<p>The W3C recommends that the <code>&lt;p&gt;</code> element have at least one child node, even if that child is merely text (see http://www.w3.org/TR/html401/struct/text.html#edef-P). Some other elements, on the other hand, are empty (i.e. have no children) by definition: &lt;input&gt;, &lt;img&gt;, &lt;br&gt;, and &lt;hr&gt;, for example.</p>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Finds all elements that are empty - they don't have child elements or text.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+
+  td { text-align:center; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;table border="1"&gt;
+    &lt;tr&gt;&lt;td&gt;TD #0&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;TD #2&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+
+    &lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;TD#5&lt;/td&gt;&lt;/tr&gt;
+  &lt;/table&gt;
+&lt;script&gt;$("td:empty").text("Was empty!").css('background', 'rgb(255,220,200)');&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

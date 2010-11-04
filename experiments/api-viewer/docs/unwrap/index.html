@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.unwrap()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="unwrap1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.unwrap()</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Remove the parents of the set of matched elements from the DOM, leaving the matched elements in their place.</p>
+<ul class="signatures"><li class="signature" id="unwrap"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4/">1.4</a></span>.unwrap()</h4></li></ul>
+<div class="longdesc"><p>The <code>.unwrap()</code> method removes the element's parent. This is effectively the inverse of the <code><a href="/wrap">.wrap()</a></code> method. The matched elements (and their siblings, if any) replace their parents within the DOM structure.</p></div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Wrap/unwrap a div around each of the paragraphs.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  div { border: 2px solid blue; }
+  p { background:yellow; margin:4px; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;button&gt;wrap/unwrap&lt;/button&gt;
+&lt;p&gt;Hello&lt;/p&gt;
+&lt;p&gt;cruel&lt;/p&gt;
+&lt;p&gt;World&lt;/p&gt;
+&lt;script&gt;
+$("button").toggle(function(){
+  $("p").wrap("&lt;div&gt;&lt;/div&gt;");
+}, function(){
+  $("p").unwrap();
+});&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

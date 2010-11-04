@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>Attribute Equals Selector [name=value]</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="attributeEquals1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">attributeEquals</span>  selector</h2>
+<div class="  entry-details">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/version/1.0/">1.0</a></span>jQuery('[attribute=value]')</h4>
+<ul class="signatures"><li><dl class="arguments">
+<dt>attribute</dt>
+<dd>An attribute name.</dd>
+<dt>value</dt>
+<dd>An attribute value. Quotes are optional.</dd>
+</dl></li></ul>
+<p class="desc"><strong>Description: </strong>Selects elements that have the specified attribute with a value exactly equal to a certain value.</p>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Finds all inputs with name 'newsletter' and changes the text of the span next to it.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div&gt;
+
+    &lt;input type="radio" name="newsletter" value="Hot Fuzz" /&gt;
+    &lt;span&gt;name?&lt;/span&gt;
+
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" name="newsletters" value="Cold Fusion" /&gt;
+
+    &lt;span&gt;name?&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" name="accept" value="Evil Plans" /&gt;
+
+    &lt;span&gt;name?&lt;/span&gt;
+  &lt;/div&gt;
+&lt;script&gt;$("input[name='newsletter']").next().text(" is newsletter");&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.remove()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="remove1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.remove( [ selector ] )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Remove the set of matched elements from the DOM.</p>
+<ul class="signatures"><li class="signature" id="remove-selector">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.remove( [ selector ] )</h4>
+<p class="arguement"><strong>selector</strong>A selector expression that filters the set of matched elements to be removed.</p>
+</li></ul>
+<div class="longdesc">
+<p>Similar to <code><a href="/empty">.empty()</a></code>, the <code>.remove()</code> method takes elements out of the DOM. We use <code>.remove()</code> when we want to remove the element itself, as well as everything inside it. In addition to the elements themselves, all bound events and jQuery data  associated with the elements are removed.</p>
+<p>Consider the following HTML:</p>
+<pre>&lt;div class="container"&gt;
+  &lt;div class="hello"&gt;Hello&lt;/div&gt;
+  &lt;div class="goodbye"&gt;Goodbye&lt;/div&gt;
+&lt;/div&gt;</pre>
+<p>We can target any element for removal:</p>
+<pre>$('.hello').remove();</pre>
+<p>This will result in a DOM structure with the <code>&lt;div&gt;</code> element deleted:</p>
+<pre>&lt;div class="container"&gt;
+  &lt;div class="goodbye"&gt;Goodbye&lt;/div&gt;
+&lt;/div&gt;</pre>
+<p>If we had any number of nested elements inside <code>&lt;div class="hello"&gt;</code>, they would be removed, too. Other jQuery constructs such as data or event handlers are erased as well.</p>
+<p>We can also include a selector as an optional parameter. For example, we could rewrite the previous DOM removal code as follows:</p>
+<pre>$('div').remove('.hello');</pre>
+<p>This would result in the same DOM structure:</p>
+<pre>&lt;div class="container"&gt;
+  &lt;div class="goodbye"&gt;Goodbye&lt;/div&gt;
+&lt;/div&gt;</pre>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Removes all paragraphs from the DOM</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;p { background:yellow; margin:6px 0; }&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;Hello&lt;/p&gt; 
+  how are 
+  &lt;p&gt;you?&lt;/p&gt;
+  &lt;button&gt;Call remove() on paragraphs&lt;/button&gt;
+&lt;script&gt;
+    $("button").click(function () {
+      $("p").remove();
+    });
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Removes all paragraphs that contain "Hello" from the DOM</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;p { background:yellow; margin:6px 0; }&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p class="hello"&gt;Hello&lt;/p&gt;
+  how are 
+  &lt;p&gt;you?&lt;/p&gt;
+
+  &lt;button&gt;Call remove(":contains('Hello')") on paragraphs&lt;/button&gt;
+&lt;script&gt;
+
+    $("button").click(function () {
+      $("p").remove(":contains('Hello')");
+    });
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

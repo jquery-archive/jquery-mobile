@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.clearQueue()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="clearQueue1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.clearQueue( [ queueName ] )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Remove from the queue all items that have not yet been run.</p>
+<ul class="signatures"><li class="signature" id="clearQueue-queueName">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4/">1.4</a></span>.clearQueue( [ queueName ] )</h4>
+<p class="arguement"><strong>queueName</strong>A string containing the name of the queue. Defaults to <code>fx</code>, the standard effects queue.</p>
+</li></ul>
+<div class="longdesc"><p>When the <code>.clearQueue()</code> method is called, all functions on the queue that have not been executed are removed from the queue. When used without an argument, <code>.clearQueue()</code> removes the remaining functions from <code>fx</code>, the standard effects queue. In this way it is similar to <code>.stop(true)</code>. However,  while the <code>.stop()</code> method is meant to be used only with animations, <code>.clearQueue()</code> can also be used to remove any function that has been added to a generic jQuery queue with the <code>.queue()</code> method. </p></div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Empty the queue.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+div { margin:3px; width:40px; height:40px;
+    position:absolute; left:0px; top:30px; 
+    background:green; display:none; }
+div.newcolor { background:blue; }
+&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;button id="start"&gt;Start&lt;/button&gt;
+&lt;button id="stop"&gt;Stop&lt;/button&gt;
+&lt;div&gt;&lt;/div&gt;
+&lt;script&gt;$("#start").click(function () {
+  $("div").show("slow");
+  $("div").animate({left:'+=200'},5000);
+  $("div").queue(function () {
+    $(this).addClass("newcolor");
+    $(this).dequeue();
+  });
+  $("div").animate({left:'-=200'},1500);
+  $("div").queue(function () {
+    $(this).removeClass("newcolor");
+    $(this).dequeue();
+  });
+  $("div").slideUp();
+});
+$("#stop").click(function () {
+  $("div").clearQueue();
+  $("div").stop();
+});&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

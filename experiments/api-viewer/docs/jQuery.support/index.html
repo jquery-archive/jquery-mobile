@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>jQuery.support</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="jQuery.support1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">jQuery.support</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#Object">Object</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>A collection of properties that represent the presence of different browser features or bugs.</p>
+<ul class="signatures"><li class="signature" id="jQuery.support"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.3/">1.3</a></span>jQuery.support</h4></li></ul>
+<div class="longdesc">
+<p>Rather than using <code>$.browser</code> to detect the current user agent and alter the page presentation based on which browser is running, it is a good practice to perform <strong>feature detection</strong>. This means that prior to executing code which relies on a browser feature, we test to ensure that the feature works properly. To make this process simpler, jQuery performs many such tests and makes the results available to us as properties of the <code>jQuery.support</code> object.</p>
+<p>The values of all the support properties are determined using feature detection (and do not use any form of browser sniffing). </p>
+<blockquote>
+    <p>Following are a few resources that explain how feature detection works:</p>
+    <ul>
+<li><a href="http://peter.michaux.ca/articles/feature-detection-state-of-the-art-browser-scripting">http://peter.michaux.ca/articles/feature-detection-state-of-the-art-browser-scripting</a></li>
+      <li><a href="http://www.jibbering.com/faq/faq_notes/not_browser_detect.html">http://www.jibbering.com/faq/faq_notes/not_browser_detect.html</a></li>
+      <li><a href="http://yura.thinkweb2.com/cft/">http://yura.thinkweb2.com/cft/</a></li>
+    </ul>
+</blockquote>
+<p>While jQuery includes a number of properties, developers should feel free to add their own as their needs dictate. Many of the <code>jQuery.support</code> properties are rather low-level, so they are most useful for plugin and jQuery core development, rather than general day-to-day development.</p>
+<p>The tests included in <code>jQuery.support</code> are as follows:</p>
+<ul>
+<li>
+<code>boxModel</code>: Is equal to true if the page is rendering according to the <a href="http://www.w3.org/TR/REC-CSS2/box.html">W3C CSS Box Model</a> (is currently false in IE 6 and 7 when they are in Quirks Mode). This property is null until document ready occurs.</li>
+<li>
+<code>cssFloat</code>: Is equal to true if the name of the property containing the CSS float value is .cssFloat, as defined in the <a href="http://www.w3.org/TR/DOM-Level-2-Style/css.html#CSS-CSS2Properties-cssFloat">CSS Spec</a>. (It is currently false in IE, it uses styleFloat instead).</li>
+<li>
+<code>hrefNormalized</code>: Is equal to true if the <code>.getAttribute()</code> method retrieves the <code>href</code> attribute of elements unchanged, rather than normalizing it to a fully-qualified URL. (It is currently false in IE, the URLs are normalized). 
+  <div><a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#ID-666EE0F9">DOM l3 spec</a></div>
+</li>
+<li>
+<code>htmlSerialize</code>: Is equal to true  if the browser is able to serialize/insert <code>&lt;link&gt;</code> elements using the <code>.innerHTML</code> property of elements. (is currently false in IE). <div><a href="http://www.w3.org/TR/2008/WD-html5-20080610/serializing.html#html-fragment">HTML5 wd</a></div>
+</li>
+<li>
+<code>leadingWhitespace</code>: Is equal to true if the browser inserts content with .innerHTML exactly as provided—specifically, if leading whitespace characters are preserved. (It is currently false in IE 6-8). <div><a href="http://www.w3.org/TR/2008/WD-html5-20080610/dom.html#innerhtml0">HTML5 wd</a></div>
+</li>
+<li>
+<code>noCloneEvent</code>: Is equal to true  if cloned DOM elements are created without event handlers (that is, if the event handlers on the source element are not cloned). (It is currently false in IE). <div><a href="http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Registration-interfaces-h3">DOM l2 spec</a></div>
+</li>
+<li>
+<code>objectAll</code>: Is equal to true  if the <code>.getElementsByTagName()</code> method returns all descendant elements when called with a wildcard argument ('*'). (It is currently false in IE 7 and IE 8). <div><a href="http://www.w3.org/TR/WD-DOM/level-one-core.html#ID-745549614">DOM l1 spec</a></div>
+</li>
+<li>
+<code>opacity</code>: Is equal to true if a browser can properly interpret the opacity style property. (It is currently false in IE, it uses alpha filters instead). <div><a href="http://www.w3.org/TR/css3-color/#transparency">CSS3 spec</a></div>
+</li>
+<li>
+<code>scriptEval</code>: Is equal to true if inline scripts are automatically evaluated and executed when inserted to the document using standard DOM manipulation methods, such as <code>appendChild()</code> and <code>createTextNode()</code>. (It is currently false in IE, it uses <code>.text</code> to insert executable scripts). <div><a href="http://www.w3.org/TR/2008/WD-html5-20080610/tabular.html#script">HTML5 WD</a></div>
+</li>
+<li>
+<code>style</code>: Is equal to true if inline styles for an element can be accessed through the DOM attribute called style, as required by the DOM Level 2 specification. In this case, <code>.getAttribute('style')</code> can retrieve this value; in Internet Explorer, <code>.cssText</code> is used for this purpose. <div><a href="http://www.w3.org/TR/DOM-Level-2-Style/css.html#CSS-ElementCSSInlineStyle">DOM l2 Style spec</a></div>
+</li>
+<li>
+<code>tbody</code>: Is equal to true if an empty <code>&lt;table&gt;</code> element can exist without a <code>&lt;tbody&gt;</code> element. According to the HTML specification, this sub-element is optional, so the property should be true in a fully-compliant browser. If false, we must account for the possibility of the browser injecting <code>&lt;tbody&gt;</code> tags implicitly. (It is currently false in IE, which automatically inserts <code>tbody</code> if it is not present in a string assigned to <code>innerHTML</code>). <div><a href="http://dev.w3.org/html5/spec/Overview.html#the-table-element">HTML5 spec</a></div>
+</li>
+</ul>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Returns the box model for the iframe.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  p { color:blue; margin:20px; }
+  span { color:red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;
+  &lt;/p&gt;
+&lt;script&gt;
+
+    $("p").html("This frame uses the W3C box model: &lt;span&gt;" +
+                jQuery.support.boxModel + "&lt;/span&gt;");
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Returns false if the page is in QuirksMode in Internet Explorer</span>
+</h4>
+<pre><code class="example">jQuery.support.boxModel</code></pre>
+<h4>Result:</h4>
+<pre><code class="results">false</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

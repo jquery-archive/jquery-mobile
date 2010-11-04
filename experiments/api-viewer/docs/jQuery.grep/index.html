@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>jQuery.grep()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="jQuery.grep1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">jQuery.grep( array, function(elementOfArray, indexInArray), [ invert ] )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#Array">Array</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Finds the elements of an array which satisfy a filter function. The original array is not affected.</p>
+<ul class="signatures"><li class="signature" id="jQuery.grep-array-functionelementOfArray, indexInArray-invert">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>jQuery.grep( array, function(elementOfArray, indexInArray), [ invert ] )</h4>
+<p class="arguement"><strong>array</strong>The array to search through.</p>
+<p class="arguement"><strong>function(elementOfArray, indexInArray)</strong>The function to process each item against.  The first argument to the function is the item, and the second argument is the index.  The function should return a Boolean value.  <code>this</code> will be the global window object.</p>
+<p class="arguement"><strong>invert</strong>If "invert" is false, or not provided, then the function returns an array consisting of all elements for which "callback" returns true.  If "invert" is true, then the function returns an array consisting of all elements for which "callback" returns false.</p>
+</li></ul>
+<div class="longdesc">
+<p>The <code>$.grep()</code> method removes items from an array as necessary so that all remaining items pass a provided test. The test is a function that is passed an array item and the index of the item within the array. Only if the test returns true will the item be in the result array.</p>
+<p> The filter function will be passed two arguments: the current array item and its index. The filter function must return 'true' to include the item in the result array.</p>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Filters the original array of numbers leaving that are not 5 and have an index greater than 4.  Then it removes all 9s.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  div { color:blue; }
+  p { color:green; margin:0; }
+  span { color:red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div&gt;&lt;/div&gt;
+  &lt;p&gt;&lt;/p&gt;
+  &lt;span&gt;&lt;/span&gt;
+  
+&lt;script&gt;
+var arr = [ 1, 9, 3, 8, 6, 1, 5, 9, 4, 7, 3, 8, 6, 9, 1 ];
+$("div").text(arr.join(", "));
+
+arr = jQuery.grep(arr, function(n, i){
+  return (n != 5 &amp;&amp; i &gt; 4);
+});
+$("p").text(arr.join(", "));
+
+arr = jQuery.grep(arr, function (a) { return a != 9; });
+$("span").text(arr.join(", "));
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">Filter an array of numbers to include only numbers bigger then zero.</span>
+</h4>
+<pre><code class="example">$.grep( [0,1,2], function(n,i){
+   return n &gt; 0;
+ });</code></pre>
+<h4>Result:</h4>
+<pre><code class="results">[1, 2] </code></pre>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">Filter an array of numbers to include numbers that are not bigger than zero.</span>
+</h4>
+<pre><code class="example">$.grep( [0,1,2], function(n,i){
+    return n &gt; 0;
+},true);</code></pre>
+<h4>Result:</h4>
+<pre><code class="results">[0] </code></pre>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>Attribute Contains Selector [name*=value]</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="attributeContains1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">attributeContains</span>  selector</h2>
+<div class="  entry-details">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/version/1.0/">1.0</a></span>jQuery('[attribute*=value]')</h4>
+<ul class="signatures"><li><dl class="arguments">
+<dt>attribute</dt>
+<dd>An attribute name.</dd>
+<dt>value</dt>
+<dd>An attribute value. Quotes are optional.</dd>
+</dl></li></ul>
+<p class="desc"><strong>Description: </strong>Selects elements that have the specified attribute with a value containing the a given substring.</p>
+<div class="longdesc"><p>This is the most generous of the jQuery attribute selectors that match against a value. It will select an element if the selector's string appears anywhere within the element's attribute value. Compare this selector with the Attribute Contains Word selector (e.g. [attr~=word]), which is more appropriate in many cases.</p></div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Finds all inputs with a name attribute that contains 'man' and sets the value with some text.</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;input name="man-news" /&gt;
+
+  &lt;input name="milkman" /&gt;
+  &lt;input name="letterman2" /&gt;
+  &lt;input name="newmilk" /&gt;
+&lt;script&gt;$("input[name*='man']").val("has man in it!");&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

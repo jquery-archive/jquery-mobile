@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.error()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="error1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.error( handler(eventObject) )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Bind an event handler to the "error" JavaScript event.</p>
+<ul class="signatures"><li class="signature" id="error-handlereventObject">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.error( handler(eventObject) )</h4>
+<p class="arguement"><strong>handler(eventObject)</strong>A function to execute when the event is triggered.</p>
+</li></ul>
+<div class="longdesc">
+<p>This method is a shortcut for <code>.bind('error', handler)</code>.</p>
+<p>The <code>error</code> event is sent to elements, such as images, that are referenced by a document and loaded by the browser. It is called if the element was not loaded correctly.</p>
+<p>For example, consider a page with a simple image:</p>
+<pre>&lt;img src="missing.png" alt="Book" id="book" /&gt;</pre>
+<p>The event handler can be bound to the image:</p>
+<pre>$('#book').error(function() {
+  alert('Handler for .error() called.')
+});
+</pre>
+<p>If the image cannot be loaded (for example, because it is not present at the supplied URL), the alert  is displayed:</p>
+<p><span class="output">Handler for .error() called.</span></p>
+<blockquote>
+<p>This event may not be correctly fired when the page is served locally. Since <code>error</code> relies on normal HTTP status codes, it will generally not be triggered if the URL uses the <code>file:</code> protocol.</p>
+</blockquote>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">To keep a server-side log of JavaScript errors, you might want to:</span>
+</h4>
+<pre><code class="example">$(window).error(function(msg, url, line){
+  jQuery.post("js_error_log.php", { msg: msg, url: url, line: line });
+});</code></pre>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">To hide JavaScript errors from the user, you can try:</span>
+</h4>
+<pre><code class="example">$(window).error(function(){
+  return true;
+});</code></pre>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">To hide the "broken image" icons for your IE users, you can try:</span>
+</h4>
+<pre><code class="example">$("img").error(function(){
+  $(this).hide();
+});</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.live()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="live1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.live( eventType, handler )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Attach a handler to the event for all elements which match the current selector, now or in the future.</p>
+<ul class="signatures">
+<li class="signature" id="live-eventType-handler">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.3/">1.3</a></span>.live( eventType, handler )</h4>
+<p class="arguement"><strong>eventType</strong>A string containing a JavaScript event type, such as "click" or "keydown." As of jQuery 1.4 the string can contain multiple, space-separated event types or custom event names, as well.</p>
+<p class="arguement"><strong>handler</strong>A function to execute at the time the event is triggered.</p>
+</li>
+<li class="signature" id="live-eventType-eventData-handler">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4/">1.4</a></span>.live( eventType, eventData, handler )</h4>
+<p class="arguement"><strong>eventType</strong>A string containing a JavaScript event type, such as "click" or "keydown." As of jQuery 1.4 the string can contain multiple, space-separated event types or custom event names, as well.</p>
+<p class="arguement"><strong>eventData</strong>A map of data that will be passed to the event handler.</p>
+<p class="arguement"><strong>handler</strong>A function to execute at the time the event is triggered.</p>
+</li>
+</ul>
+<div class="longdesc">
+<p>This method is a variation on the basic <code>.bind()</code> method for attaching event handlers to elements. When <code>.bind()</code> is called, the elements that the jQuery object refers to get the handler attached; elements that get introduced later do not, so they would require another <code>.bind()</code> call. For instance, consider the HTML:</p>
+<pre>&lt;body&gt;
+  &lt;div class="clickme"&gt;
+    Click here
+  &lt;/div&gt;
+&lt;/body&gt;
+</pre>
+<p>We can bind a simple click handler to this element:</p>
+<pre>$('.clickme').bind('click', function() {
+  // Bound handler called.
+});
+</pre>
+<p>When the element is clicked, the handler is called. However, suppose that after this, another element is added:
+  </p>
+<pre>$('body').append('&lt;div class="clickme"&gt;Another target&lt;/div&gt;');</pre>
+<p>This new element also matches the selector <code>.clickme</code>, but since it was added after the call to <code>.bind()</code>, clicks on it will do nothing.</p>
+<p>The <code>.live()</code> method provides an alternative to this behavior. If we bind a click handler to the target element using this method:</p>
+<pre>$('.clickme').live('click', function() {
+  // Live handler called.
+});</pre>
+<p>And then later add a new element:</p>
+<pre>$('body').append('&lt;div class="clickme"&gt;Another target&lt;/div&gt;');</pre>
+<p>Then clicks on the new element will also trigger the handler.</p>
+<h4 id="event-delegation">Event Delegation</h4>
+<p>The <code>.live()</code> method is able to affect elements that have not yet been added to the DOM through the use of event delegation: a handler bound to an ancestor element is responsible for events that are triggered on its descendants. The handler passed to <code>.live()</code> is never bound to an element; instead, <code>.live()</code> binds a special handler to the root of the DOM tree. In our example, when the new element is clicked, the following steps occur:</p>
+<ol>
+<li>A click event is generated and passed to the <code>&lt;div&gt;</code> for handling.</li>
+    <li>No handler is directly bound to the <code>&lt;div&gt;</code>, so the event bubbles up the DOM tree.</li>
+    <li>The event bubbles up until it reaches the root of the tree, which is where <code>.live()</code> binds its special handlers by default. <br><em>* As of jQuery 1.4, event bubbling can optionally stop at a DOM element "context".</em>
+</li>
+    <li>The special <code>click</code> handler bound by <code>.live()</code> executes.</li>
+    <li>This handler tests the <code>target</code> of the event object to see whether it should continue. This test is performed by checking if <code>$(event.target).closest('.clickme')</code> is able to locate a matching element.</li>
+    <li>If a matching element is found, the original handler is called on it.</li>
+  </ol>
+<p>Because the test in step 5 is not performed until the event occurs, elements can be added at any time and still respond to events.</p>
+<p>See the discussion for <code><a href="/bind">.bind()</a></code> for more information on event binding.</p>
+<h4 id="multiple-events">Multiple Events</h4>
+<p>As of jQuery 1.4.1 <code>.live()</code> can accept multiple, space-separated events, similar to the functionality provided in <a href="/bind">.bind()</a>. For example, we can "live bind" the <code>mouseover</code> and <code>mouseout</code> events at the same time like so: </p>
+<pre>$('.hoverme').live('mouseover mouseout', function(event) {
+  if (event.type == 'mouseover') {
+    // do something on mouseover
+  } else {
+    // do something on mouseout
+  }
+});</pre>
+<h4 id="event-data">Event Data</h4>
+<p>As of jQuery 1.4, the optional <code>eventData</code> parameter allows us to pass additional information to the handler. One handy use of this parameter is to work around issues caused by closures. See the <code>.bind()</code> method's "<a href="/bind/#passing-event-data">Passing Event Data</a>" discussion for more information.</p>
+<h4 id="event-context">Event Context</h4>
+<p>As of jQuery 1.4, live events can be bound to a DOM element "context" rather than to the default document root. To set this context, we use the <a href="http://api.jquery.com/jquery/#selector-context"><code>jQuery()</code> function's second argument</a>, passing in a single DOM element (as opposed to a jQuery collection or a selector).</p>
+<pre>$('div.clickme', $('#container')[0]).live('click', function() {
+  // Live handler called.
+});</pre>
+<p>The live handler in this example is called only when <code>&lt;div class="clickme"&gt;</code> is a descendant of an element with an ID of "container."</p>
+<h4 id="caveats">Caveats</h4>
+<p>The <code>.live()</code> technique is useful, but due to its special approach cannot be simply substituted for <code>.bind()</code> in all cases. Specific differences include:</p>
+<ul>
+<li>DOM traversal methods are not fully supported for finding elements to send to <code>.live()</code>. Rather, the <code>.live()</code> method should always be called directly after a selector, as in the example above.</li>
+    <li>To stop further handlers from executing after one bound using <code>.live()</code>, the handler must return <code>false</code>. Calling <code>.stopPropagation()</code> will not accomplish this.</li>
+    <li>In <b>jQuery 1.3.x</b> only the following JavaScript events (in addition to custom events) could be bound with <code>.live()</code>: <code>click</code>, <code>dblclick</code>, <code>keydown</code>, <code>keypress</code>, <code>keyup</code>, <code>mousedown</code>, <code>mousemove</code>, <code>mouseout</code>, <code>mouseover</code>, and <code>mouseup</code>.</li>
+  </ul>
+<blockquote>
+    <ul>
+<li>As of <b>jQuery 1.4</b> the <code>.live()</code> method supports custom events as well as all JavaScript events. As of <b>jQuery 1.4.1</b> even <code>focus</code> and <code>blur</code> work with live (mapping to the more appropriate, bubbling, events <code>focusin</code> and <code>focusout</code>).</li>
+      <li>As of <b>jQuery 1.4.1</b> the <code>hover</code> event can be specified (mapping to "<code>mouseenter mouseleave</code>").</li>
+    </ul>
+</blockquote>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">Click a paragraph to add another. Note that .live() binds the click event to all paragraphs - even new ones.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  p { background:yellow; font-weight:bold; cursor:pointer; 
+      padding:5px; }
+  p.over { background: #ccc; }
+  span { color:red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;Click me!&lt;/p&gt;
+
+  &lt;span&gt;&lt;/span&gt;
+&lt;script&gt;
+    $("p").live("click", function(){
+      $(this).after("&lt;p&gt;Another paragraph!&lt;/p&gt;");
+    });
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">To display each paragraph's text in an alert box whenever it is clicked:</span>
+</h4>
+<pre><code class="example">$("p").live("click", function(){
+  alert( $(this).text() );
+});</code></pre>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">To cancel a default action and prevent it from bubbling up, return false:</span>
+</h4>
+<pre><code class="example">$("a").live("click", function() { return false; })</code></pre>
+</div>
+<div id="example-3">
+<h4>Example: <span class="desc">To cancel only the default action by using the preventDefault method.</span>
+</h4>
+<pre><code class="example">$("a").live("click", function(event){
+  event.preventDefault();
+});</code></pre>
+</div>
+<div id="example-4">
+<h4>Example: <span class="desc">Can bind custom events too.</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  p { color:red; }
+  span { color:blue; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;Has an attached custom event.&lt;/p&gt;
+  &lt;button&gt;Trigger custom event&lt;/button&gt;
+  &lt;span style="display:none;"&gt;&lt;/span&gt;
+&lt;script&gt;
+
+    $("p").live("myCustomEvent", function(e, myName, myValue){
+      $(this).text("Hi there!");
+      $("span").stop().css("opacity", 1)
+               .text("myName = " + myName)
+               .fadeIn(30).fadeOut(1000);
+    });
+    $("button").click(function () {
+      $("p").trigger("myCustomEvent");
+    });
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

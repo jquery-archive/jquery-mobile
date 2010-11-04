@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>jQuery.parseJSON</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="jQuery.parseJSON1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">jQuery.parseJSON( json )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#Object">Object</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Takes a well-formed JSON string and returns the resulting JavaScript object.</p>
+<ul class="signatures"><li class="signature" id="jQuery.parseJSON-json">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.4.1/">1.4.1</a></span>jQuery.parseJSON( json )</h4>
+<p class="arguement"><strong>json</strong>The JSON string to parse.</p>
+</li></ul>
+<div class="longdesc">
+<p>Passing in a malformed JSON string will result in an exception being thrown. For example, the following are all malformed JSON strings:</p>
+<ul>
+<li>
+<code>{test: 1}</code> (test does not have double quotes around it).</li>
+<li>
+<code>{'test': 1}</code> ('test' is using single quotes instead of double quotes).</li>
+</ul>
+<p>Additionally if you pass in nothing, an empty string, null, or undefined, 'null' will be returned from parseJSON. Where the browser provides a native implementation of <code>JSON.parse</code>, jQuery uses it to parse the string. For details on the JSON format, see <a href="http://json.org/">http://json.org/</a>.
+</p>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Parse a JSON string.</span></h4>
+<pre><code class="example">var obj = jQuery.parseJSON('{"name":"John"}');
+alert( obj.name === "John" );</code></pre>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

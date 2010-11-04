@@ -1,0 +1,234 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+	<meta charset="utf-8" /> 
+	<title>jQuery Mobile Framework - Static Containers, States</title> 
+	<link rel="stylesheet"  href="../../themes/default/default.css" /> 
+	<script type="text/javascript" src="../../js.all.min.js"></script>
+</head> 
+<body> 
+
+<div data-role="page">
+
+	<div data-role="header">
+		<h1>Themes</h1>
+	</div>
+
+	<div data-role="content">
+	
+		<h2>Theming overview</h2>
+		
+			<p>Every layout and widget in jQuery Mobile is designed around a new object-oriented CSS framework that makes it possible to apply a complete unified visual design Theme to sites and applications. The theming system is similar to the ThemeRoller system in jQuery UI, but adds a few important improvements:</p> 
+
+			<ul> 
+				<li>It takes advantage of <strong>CSS3 properties</strong> to add rounded corners, box and text shadow and gradients instead of images, allowing the theme file to be very lightweight and reducing server requests.</li>
+				<li>Themes include multiple <strong>color "swatches"</strong> &mdash; each consisting of a header bar, content body, and button states that can be freely mixed and matched to create visual texture &mdash; to make richer designs possible</li> 
+				<li><strong>Open-ended theming</strong> allows for up to 26 unique swatches per theme, to add almost unlimited variety to designs</li> 
+				<li>All backgrounds now use <strong>CSS3 gradients</strong> to dramatically reduce file size and number of server requests</li> 
+				<li>A <strong>simplified icon set</strong> including those most commonly used for mobile, in a sprite to reduce image weight</li> 
+			</ul>
+			
+		
+		<h2>Themes &amp; swatches</h2>
+		
+		<p>The key to the Theme system is separation of color and texture, from structural styles that define things like padding and dimensions. This allows theme colors and textures to be defined once in the stylesheet and be mixed, matched and combined to achieve a wide range of visual effects. </p>
+		
+		<p>Each Theme includes several global settings, including font family, drop shadows for overlays, and corner radius values for buttons and boxes. In addition, the Theme can include multiple color "swatches", each with color values for bars, content blocks, buttons and list items, and font <code>text-shadow</code>. </p>
+		
+		<p>jQuery Mobile's default Theme includes 5 swatches that are given letters (a, b, c, d, e) for quick reference. To make mapping of color swatches consistent across our widgets, we have followed the convention that swatch "a" is the highest level of visual priority (black in our default theme), "b" is secondary level (blue) and "c" is the baseline level (gray) that we use by default in many situations, "d" for an alternate secondary level and "e" as an accent swatch.  Themes may have additional swatches for accent colors or specific situations. For example, you could add a new theme swatch "f" that has a red bar and button for use in error situations. </p>
+		
+		<p>A new ThemeRoller tool will launched with the jQuery Mobile 1.0 release in 2011. In the meantime, it's simple to manually edit the base swatches in the default theme and/or add additional swatches by editing the theme css file: copy a block of swatch styles, rename the classes with the new swatch letter name, and tweak colors.</p>
+		
+		
+		<h3>Bars</h3>
+		<p>The default theme contains the following five Bar styles:</p>
+		
+		<div class="swatch-preview">
+			<div class="ui-bar ui-bar-a">Bar A</div>
+			<div class="ui-bar ui-bar-b">Bar B</div>
+			<div class="ui-bar ui-bar-c">Bar C</div>
+			<div class="ui-bar ui-bar-d">Bar D</div>
+			<div class="ui-bar ui-bar-e">Bar E</div>
+		</div><!-- end swatch-bars -->
+		
+		<p>By default, the framework assigns the "a" swatch to all headers and footers, because these are typically given high visual priority in an application. To set the color of a bar to a different swatch color, simply add the <code>data-theme</code> attribute to your header or footer and specify an alternate swatch letter ('b' or 'd', for example) and the specified theme swatch color will be applied. Learn more about <a href="../toolbars/bars-themes.html">toolbar theming</a>.</p>
+		
+		
+		
+		<h3>Content Blocks</h3>
+		<p>The default theme also includes color swatch values for use in content blocks, designed to coordinate with the header color swatches in the theme. </p>
+		
+		<div class="swatch-preview">	
+			<div class="ui-body ui-body-a">Block A</div>
+			<div class="ui-body ui-body-b">Block B</div>
+			<div class="ui-body ui-body-c">Block C</div>
+			<div class="ui-body ui-body-d">Block D</div>
+			<div class="ui-body ui-body-e">Block E</div>
+		</div><!-- end swatch-bars -->
+
+
+		<p>If a theme isn't specified on a content block, the framework will default to "c" to maximize contrast against the default header "a", as shown here:</p>
+					
+			<div class="ui-bar ui-bar-a">
+				<a href="#" data-icon="arrow-l">Back</a>
+				<h1>Default Theme Bar</h1>
+			</div>
+			<div class="ui-body ui-body-c">
+				<h3>Default Theme Content Header</h3>
+				<p>This is the default content color swatch and a preview of a <a href="#" class="ui-link">link</a>.</p>
+					<label for="slider1">Input slider:</label>
+				 	<input type="range" name="slider1" id="slider1" value="50" min="0" max="100" data-theme="a" />
+				     <fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
+				     	<legend>Cache settings:</legend>
+				         	<input type="radio" name="radio-choice-a1" id="radio-choice-a1" value="on" checked="checked" />
+				         	<label for="radio-choice-a1">On</label>
+				         	<input type="radio" name="radio-choice-a1" id="radio-choice-b1" value="off"  />
+				         	<label for="radio-choice-b1">Off</label>
+				    </fieldset>
+				<a href="#" data-role="button" data-inline="true">Button</a>
+			</div>
+			<div class="ui-bar ui-bar-a">
+				<div data-role="controlgroup" data-type="horizontal" >
+					<a href="#" data-inline="true">Button</a><a href="#" data-inline="true">Button</a><a href="#" data-inline="true">Button</a>
+				</div><!-- /controlgroup -->
+			</div>
+
+		<p>Learn more about <a href="../content/content-themes.html">content theming</a>.</p>
+		
+
+		<h2>Lists &amp; Buttons</h2>
+		<p>Each swatch also includes default styles for interactive elements like list items and buttons.</p>
+		<ul data-role="listview" data-inset="true" data-theme="a">
+			<li><a href="index.html">List item</a></li>
+			<li><a href="index.html">List item</a></li>
+		</ul>
+		
+		<ul data-role="listview" data-inset="true" data-theme="b">
+			<li><a href="index.html">List item</a></li>
+			<li><a href="index.html">List item</a></li>
+		</ul>
+		
+		<ul data-role="listview" data-inset="true" data-theme="c">
+			<li><a href="index.html">List item</a></li>
+			<li><a href="index.html">List item</a></li>
+		</ul>
+		
+		<ul data-role="listview" data-inset="true" data-theme="d">
+			<li><a href="index.html">List item</a></li>
+			<li><a href="index.html">List item</a></li>
+		</ul>
+		
+		<ul data-role="listview" data-inset="true" data-theme="e">
+			<li><a href="index.html">List item</a></li>
+			<li><a href="index.html">List item</a></li>
+		</ul>
+		
+		
+		<p>A button is included for each swatch in the theme. Each button has styles for normal, hover/focus and pressed states.</p>
+		
+		<div class="swatch-preview">
+			<a href="index.html" data-role="button" data-theme="a" data-icon="arrow-l">Button A</a>
+			<a href="index.html" data-role="button" data-theme="b" data-icon="arrow-l">Button B</a>
+			<a href="index.html" data-role="button" data-theme="c" data-icon="arrow-l">Button C</a>
+			<a href="index.html" data-role="button" data-theme="d" data-icon="arrow-l">Button D</a>
+			<a href="index.html" data-role="button" data-theme="e" data-icon="arrow-l">Button E</a>
+		</div><!-- end swatch-bars -->
+		
+		
+		<p>By default, any button that's placed in a bar is automatically assigned a swatch letter that matches its parent bar or content box, to visually integrate the button into the parent theme like a chameleon, as shown here:</p>
+		
+		<div class="swatch-preview">
+			<div data-role="header" data-theme="a"><h1>Bar A</h1><a href="index.html" data-icon="arrow-l">Button A</a></div>
+			<div data-role="header" data-theme="b"><h1>Bar B</h1><a href="index.html" data-icon="arrow-l">Button B</a></div>
+			<div data-role="header" data-theme="c"><h1>Bar C</h1><a href="index.html" data-icon="arrow-l">Button C</a></div>
+			<div data-role="header" data-theme="d"><h1>Bar D</h1><a href="index.html" data-icon="arrow-l">Button D</a></div>
+			<div data-role="header" data-theme="e"><h1>Bar E</h1><a href="index.html" data-icon="arrow-l">Button E</a></div>
+		</div><!-- end swatch-bars -->
+		
+		<p>This default behavior makes it easy to ripple a theme change through a page by setting a theme swatch on a parent because you know the buttons will maintain the same relative visual weight across themes. Since form elements use the button styles, they will also adapt to their parent container too. </p>
+			
+		<p>If you want to add visual emphasis to a button and help it stand out visually from its parent toolbar, an alternate swatch color can be set by adding a <code>data-theme="a"</code> to the anchor. Once an alternate swatch color is set on a button in the markup, the framework won't override that color if the parent theme is changed, because you made a conscious decision to set it.</p>
+		
+		<div class="swatch-bars">
+			<div data-role="header" data-theme="a" class="ui-bar" data-nobackbtn="true">
+				<div><!-- wrapper div to have control over butttons -->
+					<a href="index.html" data-icon="arrow-l" data-theme="a">A</a>
+					<a href="index.html" data-icon="arrow-l" data-theme="b">B</a>
+					<a href="index.html" data-icon="arrow-l" data-theme="c">C</a>
+					<a href="index.html" data-icon="arrow-l" data-theme="d">D</a>
+					<a href="index.html" data-icon="arrow-l" data-theme="e">E</a>
+				</div>
+			</div>
+			<div data-role="header" data-theme="b" class="ui-bar" data-nobackbtn="true">
+				<div><!-- wrapper div to have control over butttons -->
+					<a href="index.html" data-icon="arrow-l" data-theme="a">A</a>
+					<a href="index.html" data-icon="arrow-l" data-theme="b">B</a>
+					<a href="index.html" data-icon="arrow-l" data-theme="c">C</a>
+					<a href="index.html" data-icon="arrow-l" data-theme="d">D</a>
+					<a href="index.html" data-icon="arrow-l" data-theme="e">E</a>
+				</div>
+			</div>
+			<div data-role="header" data-theme="c" class="ui-bar" data-nobackbtn="true">
+				<div><!-- wrapper div to have control over butttons -->
+					<a href="index.html" data-icon="arrow-l" data-theme="a">A</a>
+					<a href="index.html" data-icon="arrow-l" data-theme="b">B</a>
+					<a href="index.html" data-icon="arrow-l" data-theme="c">C</a>
+					<a href="index.html" data-icon="arrow-l" data-theme="d">D</a>
+					<a href="index.html" data-icon="arrow-l" data-theme="e">E</a>
+				</div>
+			</div>
+			<div data-role="header" data-theme="d" class="ui-bar" data-nobackbtn="true">
+				<div><!-- wrapper div to have control over butttons -->
+					<a href="index.html" data-icon="arrow-l" data-theme="a">A</a>
+					<a href="index.html" data-icon="arrow-l" data-theme="b">B</a>
+					<a href="index.html" data-icon="arrow-l" data-theme="c">C</a>
+					<a href="index.html" data-icon="arrow-l" data-theme="d">D</a>
+					<a href="index.html" data-icon="arrow-l" data-theme="e">E</a>
+				</div>
+			</div>
+			<div data-role="header" data-theme="e" class="ui-bar" data-nobackbtn="true">
+				<div><!-- wrapper div to have control over butttons -->
+					<a href="index.html" data-icon="arrow-l" data-theme="a">A</a>
+					<a href="index.html" data-icon="arrow-l" data-theme="b">B</a>
+					<a href="index.html" data-icon="arrow-l" data-theme="c">C</a>
+					<a href="index.html" data-icon="arrow-l" data-theme="d">D</a>
+					<a href="index.html" data-icon="arrow-l" data-theme="e">E</a>
+				</div>
+			</div>
+			
+		</div><!-- end swatch-bars -->
+
+<p>Learn more about <a href="../lists/lists-themes.html">list theming</a> and <a href="../buttons/buttons-themes.html">button theming</a>.</p>
+
+		<h3>Global "Active" state</h3>
+		<p>The jQuery Mobile framework uses a single Theme-level swatch called "active" (bright blue in the default theme) to consistently indicate the selected state, regardless of the individual swatch of the given widget. We apply this in navigation and form controls whenever there is a need to indicate what is currently selected. Because this theme swatch is designed for clear, consistent user feedback, it cannot be overridden via the markup; it is set once in the Theme and applied by the framework whenever a selected or active state is needed. The styling for this state is in the theme stylesheet under the <code>ui-btn-active</code> style rules.</p>
+		
+		<fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
+	     	<legend>Active is used for the on state of these toggles:</legend>
+	         	<input type="radio" name=" radio-choice-a" id="radio-choice-a" value="on" checked="checked" />
+	         	<label for="radio-choice-a">On</label>
+	         	<input type="radio" name=" radio-choice-a" id="radio-choice-b" value="off"  />
+	         	<label for="radio-choice-b">Off</label>
+	    </fieldset>
+
+		
+		<h3>Icons</h3>
+		<p>There a core set of <a href="../buttons/buttons-icons.html">standard icons</a> included in the framework that can be assigned to any button. To minimize the download size of the core icons, jQuery Mobile only includes these icons in white and automatically adds a semi-transparent black circle behind the icon to make sure it has good contrast on all background colors.</p>
+
+		
+
+	
+		<p><strong>Learn more</strong> about theming individual components:</p>
+		<ul data-role="listview" data-inset="true">
+			<li><a href="../pages/pages-themes.html">Page theming</a></li>
+			<li><a href="../toolbars/bars-themes.html">Toolbar theming</a></li>
+			<li><a href="../content/content-themes.html">Content theming</a></li>
+			<li><a href="../buttons/buttons-themes.html">Button theming</a></li>
+			<li><a href="../lists/lists-themes.html">List theming</a></li>
+		</ul>
+	</div><!-- end content -->
+	
+</div><!-- end page -->
+
+</body>
+</html>

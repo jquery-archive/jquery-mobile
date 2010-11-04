@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.submit()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="submit1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.submit( handler(eventObject) )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Bind an event handler to the "submit" JavaScript event, or trigger that event on an element.</p>
+<ul class="signatures">
+<li class="signature" id="submit-handlereventObject">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.submit( handler(eventObject) )</h4>
+<p class="arguement"><strong>handler(eventObject)</strong>A function to execute each time the event is triggered.</p>
+</li>
+<li class="signature" id="submit"><h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.submit()</h4></li>
+</ul>
+<div class="longdesc">
+<p>This method is a shortcut for <code>.bind('submit', handler)</code> in the first variation, and <code>.trigger('submit')</code> in the second.</p>
+<p>The <code>submit</code> event is sent to an element when the user is attempting to submit a form. It can only be attached to <code>&lt;form&gt;</code> elements. Forms can be submitted either by clicking an explicit <code>&lt;input type="submit"&gt;</code>, <code>&lt;input type="image"&gt;</code>, or <code>&lt;button type="submit"&gt;</code>, or by pressing <kbd>Enter</kbd> when certain form element has focus.</p>
+<blockquote><p>Depending on the browser, the Enter key may only cause a form submission if the form has exactly one text field, or only when there is a submit button present. The interface should not rely on a particular behavior for this key unless the issue is forced by observing the keypress event for presses of the Enter key.</p></blockquote>
+<p>For example, consider the HTML:</p>
+<pre>&lt;form id="target" action="destination.html"&gt;
+  &lt;input type="text" value="Hello there" /&gt;
+  &lt;input type="submit" value="Go" /&gt;
+&lt;/form&gt;
+&lt;div id="other"&gt;
+  Trigger the handler
+&lt;/div&gt;</pre>
+<p>The event handler can be bound to the form:</p>
+<pre>$('#target').submit(function() {
+  alert('Handler for .submit() called.');
+  return false;
+});</pre>
+<p>Now when the form is submitted, the message is alerted. This happens prior to the actual submission, so we can cancel the submit action by calling <code>.preventDefault()</code> on the event object or by returning <code>false</code> from our handler. We can trigger the event manually when another element is clicked:</p>
+<pre>$('#other').click(function() {
+  $('#target').submit();
+});</pre>
+<p>After this code executes, clicks on <span class="output">Trigger the handler</span> will also display the message. In addition, the default <code>submit</code> action on the form will be fired, so the form will be submitted.</p>
+<p>The JavaScript <code>submit</code> event does not bubble in Internet Explorer. However, scripts that rely on event delegation with the <code>submit</code> event will work consistently across browsers as of jQuery 1.4, which has normalized the event's behavior. </p>
+</div>
+<h3>Examples:</h3>
+<div id="entry-examples" class="entry-examples">
+<div id="example-0">
+<h4>Example: <span class="desc">If you'd like to prevent forms from being submitted unless a flag variable is set, try:</span>
+</h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+
+  p { margin:0; color:blue; }
+  div,p { margin-left:10px; }
+  span { color:red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt;Type 'correct' to validate.&lt;/p&gt;
+  &lt;form action="javascript:alert('success!');"&gt;
+    &lt;div&gt;
+      &lt;input type="text" /&gt;
+
+      &lt;input type="submit" /&gt;
+    &lt;/div&gt;
+  &lt;/form&gt;
+  &lt;span&gt;&lt;/span&gt;
+&lt;script&gt;
+
+    $("form").submit(function() {
+      if ($("input:first").val() == "correct") {
+        $("span").text("Validated...").show();
+        return true;
+      }
+      $("span").text("Not valid!").show().fadeOut(1000);
+      return false;
+    });
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+<div id="example-1">
+<h4>Example: <span class="desc">If you'd like to prevent forms from being submitted unless a flag variable is set, try:</span>
+</h4>
+<pre><code class="example">$("form").submit( function () {
+  return this.some_flag_variable;
+} );</code></pre>
+</div>
+<div id="example-2">
+<h4>Example: <span class="desc">To trigger the submit event on the first form on the page, try:</span>
+</h4>
+<pre><code class="example">$("form:first").submit();</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+				</div>
+
+</body></html>

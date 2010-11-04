@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+	<meta charset="utf-8" /><meta http-equiv='content-type' content='text/html; charset=UTF-8' /></head><body>
+<div data-role="page">
+        <div data-role="header">
+				<h1>.insertAfter()</h1>
+  				
+</div>
+<div data-role="content" data-theme="c" id="insertAfter1">
+<h2 class="jq-clearfix roundTop section-title">
+<span class="name">.insertAfter( target )</span> <span class="returns">Returns: <a class="return" href="http://docs.jquery.com/Types#jQuery">jQuery</a></span>
+</h2>
+<div class="  entry-details">
+<p class="desc"><strong>Description: </strong>Insert every element in the set of matched elements after the target.</p>
+<ul class="signatures"><li class="signature" id="insertAfter-target">
+<h4 class="name">
+<span class="versionAdded">version added: <a href="/category/version/1.0/">1.0</a></span>.insertAfter( target )</h4>
+<p class="arguement"><strong>target</strong>A selector, element, HTML string, or jQuery object; the matched set of elements will be inserted after the element(s) specified by this parameter.</p>
+</li></ul>
+<div class="longdesc">
+<p>The <code><a href="/after">.after()</a></code> and <code>.insertAfter()</code> methods perform the same task. The major difference is in the syntax-specifically, in the placement of the content and target. With<code> .after()</code>, the selector expression preceding the method is the container after which the content is inserted. With <code>.insertAfter()</code>, on the other hand, the content precedes the method, either as a selector expression or as markup created on the fly, and it is inserted after the target container.</p>
+<p>Consider the following HTML:</p>
+<pre>&lt;div class="container"&gt;
+  &lt;h2&gt;Greetings&lt;/h2&gt;
+  &lt;div class="inner"&gt;Hello&lt;/div&gt;
+  &lt;div class="inner"&gt;Goodbye&lt;/div&gt;
+&lt;/div&gt;</pre>
+<p>We can create content and insert it after several elements at once:</p>
+<pre>$('&lt;p&gt;Test&lt;/p&gt;').insertAfter('.inner');</pre>
+<p>Each inner <code>&lt;div&gt;</code> element gets this new content:</p>
+<pre>&lt;div class="container"&gt;
+  &lt;h2&gt;Greetings&lt;/h2&gt;
+  &lt;div class="inner"&gt;Hello&lt;/div&gt;
+  &lt;p&gt;Test&lt;/p&gt;
+  &lt;div class="inner"&gt;Goodbye&lt;/div&gt;
+  &lt;p&gt;Test&lt;/p&gt;
+&lt;/div&gt;</pre>
+<p>We can also select an element on the page and insert it after another:</p>
+<pre>$('h2').insertAfter($('.container'));</pre>
+<p>If an element selected this way is inserted elsewhere, it will be moved after the target (not cloned):</p>
+<pre>&lt;div class="container"&gt;
+  &lt;div class="inner"&gt;Hello&lt;/div&gt;
+  &lt;div class="inner"&gt;Goodbye&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2&gt;Greetings&lt;/h2&gt;</pre>
+<p>If there is more than one target element, however, cloned copies of the inserted element will be created for each target after the first.</p>
+</div>
+<h3>Example:</h3>
+<div id="entry-examples" class="entry-examples"><div id="example-0">
+<h4><span class="desc">Inserts all paragraphs after an element with id of "foo". Same as $("#foo").after("p")</span></h4>
+<pre><code class="example demo-code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;#foo { background:yellow; }&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p&gt; is what I said... &lt;/p&gt;&lt;div id="foo"&gt;FOO!&lt;/div&gt;
+&lt;script&gt;$("p").insertAfter("#foo"); // check after() examples&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div></div>
+</div>
+</div>
+
+				</div>
+
+</body></html>
