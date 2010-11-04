@@ -1,6 +1,6 @@
 //set up the theme switcher on the homepage
 $('div').live('pagecreate',function(event){
-	if( !$(this).is('.ui-dialog,.ui-navbar-expanded')){ 
+	if( !$(this).is('.ui-dialog')){ 
 		$('<a href="#">Switch theme</a>')
 			.buttonMarkup({
 				'icon':'gear',
