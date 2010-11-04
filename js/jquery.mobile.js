@@ -238,7 +238,7 @@
 			back = (back !== undefined) ? back : ( urlStack.length > 1 && urlStack[ urlStack.length - 2 ].url === url ),
 			transition = (transition !== undefined) ? transition :  ( pageTransition || "slide" );
 		
-		if( $.type(to) === "object" ){
+		if( $.type(to) === "object" && to.url ){
 			url = to.url,
 			data = to.data,
 			type = to.type,
