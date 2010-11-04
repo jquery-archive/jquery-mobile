@@ -233,13 +233,16 @@
 			url = fileUrl = $.type(to) === "string" ? to.replace( /^#/, "" ) : null,
 			data = undefined,
 			type = 'get',
+			isFormRequest = false,
+			duplicateCachedPage = null,
 			back = (back !== undefined) ? back : ( urlStack.length > 1 && urlStack[ urlStack.length - 2 ].url === url ),
 			transition = (transition !== undefined) ? transition :  ( pageTransition || "slide" );
 		
 		if( $.type(to) === "object" ){
 			url = to.url,
 			data = to.data,
-			type = to.type;
+			type = to.type,
+			isFormRequest = true;
 			//make get requests bookmarkable
 			if( data && type == 'get' ){
 				url += "?" + data;
@@ -286,6 +289,11 @@
 					}, 500);
 				}
 				removeActiveLinkClass();
+				
+				//if there's a duplicateCachedPage, remove it from the DOM now that it's hidden
+				if( duplicateCachedPage != null ){
+					duplicateCachedPage.remove();
+				}
 			}
 			
 			if(transition){		
@@ -336,13 +344,18 @@
 		}
 		
 		// find the "to" page, either locally existing in the dom or by creating it through ajax
-		if ( to.length ) {
+		if ( to.length && !isFormRequest ) {
 			if( fileUrl ){
 				setBaseURL(fileUrl);
 			}	
 			enhancePage();
 			transitionPages();
 		} else { 
+		
+			//if to exists in DOM, save a reference to it in duplicateCachedPage for removal after page change
+			if( to.length ){
+				duplicateCachedPage = to;
+			}
 			
 			pageLoading();
 
