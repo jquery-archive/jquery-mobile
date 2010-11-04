@@ -227,8 +227,6 @@ jQuery.widget( "mobile.listview", jQuery.mobile.widget, {
 			}
 				
 			if ( pos === 0 ) {
-				item.find( "img" ).addClass( "ui-corner-tl" );
-
 				if ( o.inset ) {
 					itemClass += " ui-corner-top";
 
@@ -242,7 +240,6 @@ jQuery.widget( "mobile.listview", jQuery.mobile.widget, {
 				}
 
 			} else if ( pos === li.length - 1 ) {
-				item.find( "img" ).addClass( "ui-corner-bl" );
 
 				if ( o.inset ) {
 					itemClass += " ui-corner-bottom";
