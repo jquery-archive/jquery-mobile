@@ -440,7 +440,6 @@
 				changePage( $startPage, transition, true );
 			}
 			else{
-				$.activePage = $startPage;
 				$startPage.trigger("pagebeforeshow", {prevPage: $('')});
 				$startPage.addClass( activePageClass );
 				pageLoading( true );
