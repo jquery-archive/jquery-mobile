@@ -239,7 +239,7 @@
 			formRequestHash = (new Date()).getTime()+""; //unique hash for id
 		
 		if( $.type(to) === "object" ){
-			isFormRequest = true,
+			isFormRequest = (to != $startPage),
 			url = to.url,
 			data = to.data,
 			type = to.type;
