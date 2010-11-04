@@ -4,23 +4,24 @@
 * Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
 * Note: Code is in draft form and is subject to change 
 */ 
-(function($){
-$.fn.collapsible = function(options){
-	return $(this).each(function(){
-		var o = $.extend({
-			expandCueText: ' click to expand contents',
-			collapseCueText: ' click to collapse contents',
-			collapsed: $(this).is('[data-state="collapsed"]'),
-			heading: '>h1,>h2,>h3,>h4,>h5,>h6,>legend',
-			theme: $(this).data('theme'),
-			iconTheme: $(this).data('icontheme') || 'd'
-		},options);
+(function ( $ ) {
+$.widget( "mobile.collapsible", $.mobile.widget, {
+	options: {
+		expandCueText: ' click to expand contents',
+		collapseCueText: ' click to collapse contents',
+		collapsed: false,
+		heading: '>:header,>legend',
+		theme: undefined,
+		iconTheme: 'd'
+	},
+	_create: function(){
 
-		//define
-		var collapsibleContain = $(this).addClass('ui-collapsible-contain'),
-			collapsibleHeading = $(this).find(o.heading).eq(0),
+		var $el = this.element,
+			o = this.options,
+			collapsibleContain = $el.addClass('ui-collapsible-contain'),
+			collapsibleHeading = $el.find(o.heading).eq(0),
 			collapsibleContent = collapsibleContain.wrapInner('<div class="ui-collapsible-content"></div>').find('.ui-collapsible-content'),
-			collapsibleParent = $(this).closest('[data-role=collapsible-set]').addClass('ui-collapsible-set');				
+			collapsibleParent = $el.closest('[data-role="collapsible-set"]').addClass('ui-collapsible-set');				
 		
 		//replace collapsibleHeading if it's a legend	
 		if(collapsibleHeading.is('legend')){
@@ -141,6 +142,6 @@ $.fn.collapsible = function(options){
 			return false;
 		});
 			
-	});	
-};	
-})(jQuery);
+	}
+});
+})( jQuery );
