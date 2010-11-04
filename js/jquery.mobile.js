@@ -284,9 +284,6 @@
 				if( changeHash && url ){
 					hashListener = false;
 					location.hash = url;
-					setTimeout(function(){
-						hashListener = true;
-					}, 500);
 				}
 				removeActiveLinkClass();
 				
@@ -423,7 +420,10 @@
 		// needs to be bound at domready (for IE6)
 		// find or load content, make it active
 		$window.bind( "hashchange", function(e, triggered) {
-			if( !hashListener ){ return; } 
+			if( !hashListener ){ 
+				hashListener = true;
+				return; 
+			} 
 			var to = location.hash,
 				transition = triggered ? false : undefined;
 				
