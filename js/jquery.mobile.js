@@ -422,10 +422,10 @@
 		
 		// needs to be bound at domready (for IE6)
 		// find or load content, make it active
-		$window.bind( "hashchange", function(e, manuallyTriggered) {
+		$window.bind( "hashchange", function(e, triggered) {
 			if( !hashListener ){ return; } 
 			var to = location.hash,
-				transition = manuallyTriggered ? false : undefined;
+				transition = triggered ? false : undefined;
 				
 			// either we've backed up to the root page url
 			// or it's the first page load with no hash present
@@ -436,7 +436,7 @@
 			}
 			//there's no hash, the active page is not the start page, and it's not manually triggered hashchange
 			// > probably backed out to the first page visited
-			else if( $.activePage.length && !$startPage.is( $.activePage ) && !manuallyTriggered ) {
+			else if( $.activePage.length && !$startPage.is( $.activePage ) && !triggered ) {
 				changePage( $startPage, transition, true );
 			}
 			else{
