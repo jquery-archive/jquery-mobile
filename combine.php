@@ -26,9 +26,11 @@
 
 
 	$cache 	  = true;
+	$write_combined = true;
 	$pullfromcache = false;
 	$theme = $_GET['theme'];
 	$cachedir = dirname(__FILE__) . '/cache';
+	$combinedir = dirname(__FILE__) . '/combined';
 	$cssdir   = dirname(__FILE__) . '/themes/' . $theme;
 	$jsdir    = dirname(__FILE__) . '/js';
 
@@ -142,6 +144,34 @@
 			$path = realpath($base . '/' . $element);
 			$contents .= "\n\n" . file_get_contents($path);
 		}
+		
+		// Write pre gzipped files to disk
+		if ($write_combined) {
+			
+			if(!file_exists($combinedir)) {
+				mkdir($combinedir, 0700);
+			}
+			
+			$filename = '';
+			
+			//Determine the filename to use
+			switch ($_GET['type']) {
+				case 'css':
+					$filename = 'jquery.mobile.css';
+					break;
+				case 'javascript':
+					$filename = 'jquery.mobile.js';
+					break;
+				default:
+					header ("HTTP/1.0 503 Not Implemented");
+					exit;
+			};
+			
+			if ($fp = fopen($combinedir . '/' . $filename, 'wb')) {
+				fwrite($fp, $contents);
+				fclose($fp);
+			}
+		}
 	
 		// Send Content-Type
 		header ("Content-Type: text/" . $type);
@@ -163,6 +193,11 @@
 
 		// Store cache
 		if ($cache) {
+			
+			if(!file_exists($cachedir)) {
+				mkdir($cachedir, 0700);
+			}
+			
 			if ($fp = fopen($cachedir . '/' . $cachefile, 'wb')) {
 				fwrite($fp, $contents);
 				fclose($fp);
