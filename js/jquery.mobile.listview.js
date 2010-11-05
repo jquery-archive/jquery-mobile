@@ -200,7 +200,7 @@ jQuery.widget( "mobile.listview", jQuery.mobile.widget, {
 						.buttonMarkup({
 							shadow: false,
 							corners: false,
-							theme: splittheme,
+							theme: o.theme,
 							icon: false,
 							iconpos: false
 						})
