@@ -216,7 +216,7 @@
 	
 	//remove active classes after page transition or error
 	function removeActiveLinkClass(forceRemoval){
-		if(activeClickedLink && (!activeClickedLink.closest( '.ui-page-active' ).length) || forceRemoval ){
+		if( !!activeClickedLink && (!activeClickedLink.closest( '.ui-page-active' ).length || forceRemoval )){
 			activeClickedLink.removeClass( activeBtnClass );
 		}
 		activeClickedLink = null;
@@ -238,7 +238,7 @@
 			back = (back !== undefined) ? back : ( urlStack.length > 1 && urlStack[ urlStack.length - 2 ].url === url ),
 			transition = (transition !== undefined) ? transition :  ( pageTransition || "slide" );
 		
-		if( $.type(to) === "object" ){
+		if( $.type(to) === "object" && to.url ){
 			url = to.url,
 			data = to.data,
 			type = to.type,
@@ -440,6 +440,7 @@
 				changePage( $startPage, transition, true );
 			}
 			else{
+				$.activePage = $startPage;
 				$startPage.trigger("pagebeforeshow", {prevPage: $('')});
 				$startPage.addClass( activePageClass );
 				pageLoading( true );
