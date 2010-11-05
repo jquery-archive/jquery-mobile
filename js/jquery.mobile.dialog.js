@@ -8,12 +8,18 @@
 $.widget( "mobile.dialog", $.mobile.widget, {
 	options: {},
 	_create: function(){	
-		var $el = this.element,
-			$closeBtn = $('<a href="#" data-icon="delete" data-iconpos="notext">Close</a>')
-							.click(function(){
-								$.changePage([$el, $.activePage], undefined, true );
-								return false;
-							});
+		var self = this,
+			$el = self.element,
+			$closeBtn = $('<a href="#" data-icon="delete" data-iconpos="notext">Close</a>');
+			
+		$el.delegate("a, submit", "click submit", function(e){
+			if( e.type == "click" && ( $(e.target).closest('[data-back]') || $(e.target).closest($closeBtn) ) ){
+				self.close();
+				return false;
+			}
+			//otherwise, assume we're headed somewhere new. set activepage to dialog so the transition will work
+			$.activePage = this.element;
+		});
 	
 		this.element
 			.bind("pageshow",function(){
@@ -30,6 +36,9 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 				.last()
 				.addClass('ui-corner-bottom ui-overlay-shadow');
 
+	},
+	close: function(){
+		$.changePage([this.element, $.activePage], undefined, true );
 	}
 });
 })( jQuery );
