@@ -64,11 +64,15 @@ $.event.special.tap = {
 				
 				var moved = false,
 					touching = true,
+					origPos = [ event.pageX, event.pageY ],
 					originalType,
 					timer;
 				
 				function moveHandler() {
-					moved = true;
+					if ((Math.abs(origPos[0] - event.pageX) > 10) ||
+					    (Math.abs(origPos[1] - event.pageY) > 10)) {
+					    moved = true;
+					}
 				}
 				
 				timer = setTimeout(function() {
@@ -156,7 +160,7 @@ $.event.special.swipe = {
 
 $.event.special.orientationchange = {
 	orientation: function( elem ) {
-		return document.body && elem.width() / elem.height() < 1.1 ? "portrait" : "landscape";
+		return document.documentElement && document.documentElement.clientWidth / document.documentElement.clientHeight < 1.1 ? "portrait" : "landscape";
 	},
 	
 	setup: function() {

@@ -1,18 +1,28 @@
 /*
-* jQuery Mobile Framework : "customTextInput" plugin for text inputs, textareas (based on code from Filament Group,Inc)
+* jQuery Mobile Framework : "textinput" plugin for text inputs, textareas (based on code from Filament Group,Inc)
 * Copyright (c) jQuery Project
 * Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
 * Note: Code is in draft form and is subject to change 
 */
-(function($){
-jQuery.fn.customTextInput = function(options){
-	return $(this).each(function(){	
-		var input = $(this);
+(function ( $ ) {
+$.widget( "mobile.textinput", $.mobile.widget, {
+	options: {
+		theme: undefined,
+	},
+	_create: function(){
+		var input = this.element,
+			o = this.options,
+			theme = o.theme,
+			themeclass;
+			
+		if ( !theme ) {
+			var themedParent = this.element.closest("[class*='ui-bar-'],[class*='ui-body-']"); 
+				theme = themedParent.length ?
+					/ui-(bar|body)-([a-z])/.exec( themedParent.attr("class") )[2] :
+					"c";
+		}	
 		
-		var o = $.extend({
-			search: input.is('[type="search"],[data-type="search"]'), 
-			theme: input.data("theme") || "c"
-		}, options);
+		themeclass = " ui-body-" + theme;
 		
 		$('label[for='+input.attr('id')+']').addClass('ui-input-text');
 		
@@ -21,8 +31,8 @@ jQuery.fn.customTextInput = function(options){
 		var focusedEl = input;
 		
 		//"search" input widget
-		if(o.search){
-			focusedEl = input.wrap('<div class="ui-input-search ui-shadow-inset ui-btn-corner-all ui-body-c ui-btn-shadow ui-icon-search"></div>').parent();
+		if( input.is('[type="search"],[data-type="search"]') ){
+			focusedEl = input.wrap('<div class="ui-input-search ui-shadow-inset ui-btn-corner-all ui-btn-shadow ui-icon-search'+ themeclass +'"></div>').parent();
 			var clearbtn = $('<a href="#" class="ui-input-clear" title="clear text">clear text</a>')
 				.click(function(){
 					input.val('').focus();
@@ -46,7 +56,7 @@ jQuery.fn.customTextInput = function(options){
 			input.keyup(toggleClear);	
 		}
 		else{
-			input.addClass('ui-corner-all ui-shadow-inset');
+			input.addClass('ui-corner-all ui-shadow-inset' + themeclass);
 		}
 				
 		input
@@ -74,6 +84,14 @@ jQuery.fn.customTextInput = function(options){
 				keyupTimeout = setTimeout( keyup, keyupTimeoutBuffer );
 			});
 		}
-	});
-};
-})(jQuery);
+	},
+	
+	disable: function(){
+		( this.element.attr("disabled",true).is('[type="search"],[data-type="search"]') ? this.element.parent() : this.element ).addClass("ui-disabled");
+	},
+	
+	enable: function(){
+		( this.element.attr("disabled", false).is('[type="search"],[data-type="search"]') ? this.element.parent() : this.element ).removeClass("ui-disabled");
+	}
+});
+})( jQuery );

@@ -284,9 +284,6 @@
 				if( changeHash && url ){
 					hashListener = false;
 					location.hash = url;
-					setTimeout(function(){
-						hashListener = true;
-					}, 500);
 				}
 				removeActiveLinkClass();
 				
@@ -373,7 +370,7 @@
 					//rewrite src and href attrs to use a base url
 					if( !$.support.dynamicBaseTag ){
 						var baseUrl = getBaseURL(fileUrl);
-						to.find('[src],[href]').each(function(){
+						to.find('[src],link[href]').each(function(){
 							var thisAttr = $(this).is('[href]') ? 'href' : 'src',
 								thisUrl = $(this).attr(thisAttr);
 							
@@ -422,10 +419,13 @@
 		
 		// needs to be bound at domready (for IE6)
 		// find or load content, make it active
-		$window.bind( "hashchange", function(e, extras) {
-			if( !hashListener ){ return; } 
+		$window.bind( "hashchange", function(e, triggered) {
+			if( !hashListener ){ 
+				hashListener = true;
+				return; 
+			} 
 			var to = location.hash,
-				transition = (extras && extras.manuallyTriggered) ? false : undefined;
+				transition = triggered ? false : undefined;
 				
 			// either we've backed up to the root page url
 			// or it's the first page load with no hash present
@@ -436,11 +436,10 @@
 			}
 			//there's no hash, the active page is not the start page, and it's not manually triggered hashchange
 			// > probably backed out to the first page visited
-			else if( $.activePage.length && !$startPage.is( $.activePage ) && !(extras && extras.manuallyTriggered) ) {
+			else if( $.activePage.length && !$startPage.is( $.activePage ) && !triggered ) {
 				changePage( $startPage, transition, true );
 			}
 			else{
-				$.activePage = $startPage;
 				$startPage.trigger("pagebeforeshow", {prevPage: $('')});
 				$startPage.addClass( activePageClass );
 				pageLoading( true );
@@ -554,7 +553,7 @@
 		$pages.page();
 		
 		//trigger a new hashchange, hash or not
-		$window.trigger( "hashchange", { manuallyTriggered: true } );
+		$window.trigger( "hashchange", [ true ] );
 		
 		//update orientation 
 		$html.addClass( jQuery.event.special.orientationchange.orientation( $window ) );

@@ -136,7 +136,7 @@ jQuery.widget( "mobile.page", jQuery.mobile.widget, {
 		this.element
 			.find( "input, textarea" )
 			.not( "[type='radio'], [type='checkbox'], button, [type='button'], [type='submit'], [type='reset'], [type='image']" )
-			.customTextInput();
+			.textinput();
 
 		this.element
 			.find( "input, select" )
