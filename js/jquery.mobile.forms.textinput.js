@@ -1,18 +1,17 @@
 /*
-* jQuery Mobile Framework : "customTextInput" plugin for text inputs, textareas (based on code from Filament Group,Inc)
+* jQuery Mobile Framework : "textinput" plugin for text inputs, textareas (based on code from Filament Group,Inc)
 * Copyright (c) jQuery Project
 * Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
 * Note: Code is in draft form and is subject to change 
 */
-(function($){
-jQuery.fn.customTextInput = function(options){
-	return $(this).each(function(){	
-		var input = $(this);
-		
-		var o = $.extend({
-			search: input.is('[type="search"],[data-type="search"]'), 
-			theme: input.data("theme") || "c"
-		}, options);
+(function ( $ ) {
+$.widget( "mobile.textinput", $.mobile.widget, {
+	options: {
+		theme: "c",
+	},
+	_create: function(){
+		var input = this.element,
+			o = this.options;
 		
 		$('label[for='+input.attr('id')+']').addClass('ui-input-text');
 		
@@ -21,7 +20,7 @@ jQuery.fn.customTextInput = function(options){
 		var focusedEl = input;
 		
 		//"search" input widget
-		if(o.search){
+		if( input.is('[type="search"],[data-type="search"]') ){
 			focusedEl = input.wrap('<div class="ui-input-search ui-shadow-inset ui-btn-corner-all ui-body-c ui-btn-shadow ui-icon-search"></div>').parent();
 			var clearbtn = $('<a href="#" class="ui-input-clear" title="clear text">clear text</a>')
 				.click(function(){
@@ -74,6 +73,14 @@ jQuery.fn.customTextInput = function(options){
 				keyupTimeout = setTimeout( keyup, keyupTimeoutBuffer );
 			});
 		}
-	});
-};
-})(jQuery);
+	},
+	
+	disable: function(){
+		( this.element.attr("disabled",true).is('[type="search"],[data-type="search"]') ? this.element.parent() : this.element ).addClass("ui-disabled");
+	},
+	
+	enable: function(){
+		( this.element.attr("disabled", false).is('[type="search"],[data-type="search"]') ? this.element.parent() : this.element ).removeClass("ui-disabled");
+	}
+});
+})( jQuery );
