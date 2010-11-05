@@ -370,7 +370,7 @@
 					//rewrite src and href attrs to use a base url
 					if( !$.support.dynamicBaseTag ){
 						var baseUrl = getBaseURL(fileUrl);
-						to.find('[src],[href]').each(function(){
+						to.find('[src],link[href]').each(function(){
 							var thisAttr = $(this).is('[href]') ? 'href' : 'src',
 								thisUrl = $(this).attr(thisAttr);
 							
