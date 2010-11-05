@@ -7,11 +7,22 @@
 (function ( $ ) {
 $.widget( "mobile.textinput", $.mobile.widget, {
 	options: {
-		theme: "c",
+		theme: undefined,
 	},
 	_create: function(){
 		var input = this.element,
-			o = this.options;
+			o = this.options,
+			theme = o.theme,
+			themeclass;
+			
+		if ( !theme ) {
+			var themedParent = this.element.closest("[class*='ui-bar-'],[class*='ui-body-']"); 
+				theme = themedParent.length ?
+					/ui-(bar|body)-([a-z])/.exec( themedParent.attr("class") )[2] :
+					"c";
+		}	
+		
+		themeclass = " ui-body-" + theme;
 		
 		$('label[for='+input.attr('id')+']').addClass('ui-input-text');
 		
@@ -21,7 +32,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		
 		//"search" input widget
 		if( input.is('[type="search"],[data-type="search"]') ){
-			focusedEl = input.wrap('<div class="ui-input-search ui-shadow-inset ui-btn-corner-all ui-body-c ui-btn-shadow ui-icon-search"></div>').parent();
+			focusedEl = input.wrap('<div class="ui-input-search ui-shadow-inset ui-btn-corner-all ui-btn-shadow ui-icon-search'+ themeclass +'"></div>').parent();
 			var clearbtn = $('<a href="#" class="ui-input-clear" title="clear text">clear text</a>')
 				.click(function(){
 					input.val('').focus();
@@ -45,7 +56,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			input.keyup(toggleClear);	
 		}
 		else{
-			input.addClass('ui-corner-all ui-shadow-inset');
+			input.addClass('ui-corner-all ui-shadow-inset' + themeclass);
 		}
 				
 		input
