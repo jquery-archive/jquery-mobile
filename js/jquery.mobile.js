@@ -6,7 +6,7 @@
  * Dual licensed under the MIT or GPL Version 2 licenses.
  * http://jquery.org/license
  */
- 
+
 (function( $, window, undefined ) {
 	
 	//define jQuery.mobile hash
@@ -31,6 +31,10 @@
 		//set default transition
 		defaultTransition: 'slide',
 		
+		//show loading message during Ajax requests
+		//if false, message will not appear, but loading classes will still be toggled on html el
+		loadingMessage: "loading",
+		
 		//support conditions that must be met in order to proceed
 		gradeA: function(){
 			return jQuery.support.mediaquery;
@@ -48,7 +52,12 @@
 		$html = jQuery('html'),
 		$head = jQuery('head'),
 		$body,
-		$loader = jQuery('<div class="ui-loader ui-body-a ui-corner-all"><span class="ui-icon ui-icon-loading spin"></span><h1>loading</h1></div>'),
+		$loader = $.mobile.loadingMessage ? 
+			jQuery('<div class="ui-loader ui-body-a ui-corner-all">'+
+						'<span class="ui-icon ui-icon-loading spin"></span>'+
+						'<h1>'+ $.mobile.loadingMessage +'</h1>'+
+					'</div>')
+			: undefined,
 		$startPage,
 		$pageContainer,
 		activeClickedLink = null,
@@ -174,7 +183,10 @@
 		if ( done ) {
 			$html.removeClass( "ui-loading" );
 		} else {
-			$loader.appendTo($pageContainer).css({top: $(window).scrollTop() + 75});
+		
+			if( $.mobile.loadingMessage ){
+				$loader.appendTo($pageContainer).css({top: $(window).scrollTop() + 75});
+			}	
 			$html.addClass( "ui-loading" );
 		}
 	};
