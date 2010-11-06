@@ -181,7 +181,7 @@ jQuery.widget( "mobile.listview", jQuery.mobile.widget, {
 						shadow: false,
 						corners: false,
 						iconpos: "right",
-						icon: item.data("icon") || "arrow-r",
+						icon: a.length > 1 ? false : item.data("icon") || "arrow-r",
 						theme: o.theme
 					});
 
@@ -190,7 +190,8 @@ jQuery.widget( "mobile.listview", jQuery.mobile.widget, {
 				if ( a.length > 1 ) {
 					itemClass += " ui-li-has-alt";
 
-					var last = a.last();
+					var last = a.last(),
+						splittheme = $list.data( "splittheme" ) || last.data( "theme" ) || o.splitTheme;
 					
 					last
 						.attr( "title", last.text() )
@@ -207,7 +208,7 @@ jQuery.widget( "mobile.listview", jQuery.mobile.widget, {
 							.append( jQuery( "<span>" ).buttonMarkup({
 								shadow: true,
 								corners: true,
-								theme: $list.data( "splittheme" ) || last.data( "theme" ) || o.splitTheme,
+								theme: splittheme,
 								iconpos: "notext",
 								icon: $list.data( "spliticon" ) || last.data( "icon" ) ||  o.splitIcon
 							} ) );
@@ -227,8 +228,6 @@ jQuery.widget( "mobile.listview", jQuery.mobile.widget, {
 			}
 				
 			if ( pos === 0 ) {
-				item.find( "img" ).addClass( "ui-corner-tl" );
-
 				if ( o.inset ) {
 					itemClass += " ui-corner-top";
 
@@ -242,7 +241,6 @@ jQuery.widget( "mobile.listview", jQuery.mobile.widget, {
 				}
 
 			} else if ( pos === li.length - 1 ) {
-				item.find( "img" ).addClass( "ui-corner-bl" );
 
 				if ( o.inset ) {
 					itemClass += " ui-corner-bottom";

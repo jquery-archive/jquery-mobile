@@ -1,10 +1,29 @@
 (function ( jQuery ) {
 
 jQuery.widget( "mobile.page", jQuery.mobile.widget, {
-	options: {},
+	options: {
+		backBtnText: "Back",
+		addBackBtn: true,
+		degradeInputs: {
+			color: true,
+			date: true,
+			datetime: true,
+			"datetime-local": true,
+			email: true,
+			month: true,
+			number: true,
+			range: true,
+			search: true,
+			tel: true,
+			time: true,
+			url: true,
+			week: true
+		}
+	},
 	
 	_create: function() {
-		var $elem = this.element;
+		var $elem = this.element,
+			o = this.options;
 
 		if ( this._trigger( "beforeCreate" ) === false ) {
 			return;
@@ -29,7 +48,7 @@ jQuery.widget( "mobile.page", jQuery.mobile.widget, {
 			
 			//apply theming and markup modifications to page,header,content,footer
 			if ( role === "header" || role === "footer" ) {
-				$this.addClass( "ui-bar-" + (theme || "a") );
+				$this.addClass( "ui-bar-" + (theme || $this.parent('[data-role=page]').data( "theme" ) || "a") );
 				
 				// add ARIA role
 				$this.attr( "role", role === "header" ? "banner" : "contentinfo" );
@@ -48,11 +67,11 @@ jQuery.widget( "mobile.page", jQuery.mobile.widget, {
 				}
 				
 				// auto-add back btn on pages beyond first view
-				if ( jQuery.mobile.addBackBtn && role === "header" &&
+				if ( o.addBackBtn && role === "header" &&
 						(jQuery.mobile.urlStack.length > 1 || jQuery(".ui-page").length > 1) &&
 						!leftbtn && !$this.data( "noBackBtn" ) ) {
 
-					jQuery( "<a href='#' class='ui-btn-left' data-icon='arrow-l'>Back</a>" )
+					jQuery( "<a href='#' class='ui-btn-left' data-icon='arrow-l'>"+ o.backBtnText +"</a>" )
 						.click(function() {
 							history.back();
 							return false;
@@ -90,7 +109,6 @@ jQuery.widget( "mobile.page", jQuery.mobile.widget, {
 				case "navbar":
 				case "listview":
 				case "dialog":
-				case "ajaxform":
 					$this[ role ]();
 					break;
 			}
@@ -114,10 +132,11 @@ jQuery.widget( "mobile.page", jQuery.mobile.widget, {
 	},
 	
 	_enchanceControls: function() {
+		var o = this.options;
 		// degrade inputs to avoid poorly implemented native functionality
 		this.element.find( "input" ).each(function() {
 			var type = this.getAttribute( "type" );
-			if ( jQuery.mobile.degradeInputs[ type ] ) {
+			if ( o.degradeInputs[ type ] ) {
 				jQuery( this ).replaceWith(
 					jQuery( "<div>" ).html( jQuery(this).clone() ).html()
 						.replace( /type="([a-zA-Z]+)"/, "data-type='$1'" ) );
@@ -137,7 +156,7 @@ jQuery.widget( "mobile.page", jQuery.mobile.widget, {
 		this.element
 			.find( "input, textarea" )
 			.not( "[type='radio'], [type='checkbox'], button, [type='button'], [type='submit'], [type='reset'], [type='image']" )
-			.customTextInput();
+			.textinput();
 
 		this.element
 			.find( "input, select" )

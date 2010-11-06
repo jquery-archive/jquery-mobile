@@ -8,7 +8,8 @@
 $.widget( "mobile.button", $.mobile.widget, {
 	options: {},
 	_create: function(){
-		var $el = this.element;
+		var $el = this.element,
+			type = $el.attr('type');
 			$el
 				.addClass('ui-btn-hidden')
 				.attr('tabindex','-1');
@@ -22,7 +23,13 @@ $.widget( "mobile.button", $.mobile.widget, {
 			.text( $el.text() || $el.val() )
 			.insertBefore( $el )
 			.click(function(){
-				$el.click(); 
+				if( type == "submit" ){
+					$(this).closest('form').submit();
+				}
+				else{
+					$el.click(); 
+				}
+
 				return false;
 			})
 			.buttonMarkup({

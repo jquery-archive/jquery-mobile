@@ -6,64 +6,117 @@
  * Dual licensed under the MIT or GPL Version 2 licenses.
  * http://jquery.org/license
  */
-(function( jQuery, window, undefined ) {
-	//some critical feature tests should be placed here.
-	//if we're missing support for any of these, then we're a C-grade browser
-	//to-do: see if we need more qualifiers here.
-	if ( !jQuery.support.mediaquery ) {
+
+(function( $, window, undefined ) {
+	
+	//jQuery.mobile obj extendable options
+	jQuery.mobile = jQuery.extend({
+		
+		//define the url parameter used for referencing widget-generated sub-pages. 
+		//Translates to to example.html&ui-page=subpageIdentifier
+		//hash segment before &ui-page= is used to make Ajax request
+		subPageUrlKey: 'ui-page',
+		
+		//anchor links that match these selectors will be untrackable in history 
+		//(no change in URL, not bookmarkable)
+		nonHistorySelectors: '[data-rel=dialog]',
+		
+		//class assigned to page currently in view, and during transitions
+		activePageClass: 'ui-page-active',
+		
+		//class used for "active" button state, from CSS framework
+		activeBtnClass: 'ui-btn-active',
+		
+		//available CSS transitions
+		transitions: ['slide', 'slideup', 'slidedown', 'pop', 'flip', 'fade'],
+		
+		//set default transition
+		defaultTransition: 'slide',
+		
+		//show loading message during Ajax requests
+		//if false, message will not appear, but loading classes will still be toggled on html el
+		loadingMessage: "loading",
+		
+		//configure meta viewport tag's content attr:
+		metaViewportContent: "width=device-width, minimum-scale=1, maximum-scale=1",
+		
+		//additional markup to prepend to head
+		headExtras: undefined,
+		
+		//support conditions that must be met in order to proceed
+		gradeA: function(){
+			return jQuery.support.mediaquery;
+		}
+		
+	}, jQuery.mobile );
+	
+	//if device support condition(s) aren't met, leave things as they are -> a basic, usable experience,
+	//otherwise, proceed with the enhancements
+	if ( !jQuery.mobile.gradeA() ) {
 		return;
 	}	
-	
-	//these properties should be made easy to override externally
-	jQuery.mobile = {};
-	
-	jQuery.extend(jQuery.mobile, {
-		subPageUrlKey: 'ui-page', //define the key used in urls for sub-pages. Defaults to &ui-page=
-		degradeInputs: {
-			color: true,
-			date: true,
-			datetime: true,
-			"datetime-local": true,
-			email: true,
-			month: true,
-			number: true,
-			range: true,
-			search: true,
-			tel: true,
-			time: true,
-			url: true,
-			week: true
-		},
-		addBackBtn: true
-	});
 
+	//define vars for interal use
 	var $window = jQuery(window),
 		$html = jQuery('html'),
 		$head = jQuery('head'),
+		
+		//to be populated at DOM ready
 		$body,
-		$loader = jQuery('<div class="ui-loader ui-body-a ui-corner-all"><span class="ui-icon ui-icon-loading spin"></span><h1>loading</h1></div>'),
+		
+		//loading div which appears during Ajax requests
+		//will not appear if $.mobile.loadingMessage is false
+		$loader = $.mobile.loadingMessage ? 
+			jQuery('<div class="ui-loader ui-body-a ui-corner-all">'+
+						'<span class="ui-icon ui-icon-loading spin"></span>'+
+						'<h1>'+ $.mobile.loadingMessage +'</h1>'+
+					'</div>')
+			: undefined,
+			
+		//define meta viewport tag, if content is defined	
+		$metaViewport = $.mobile.metaViewportContent ? $("<meta>", { name: "viewport", content: $.mobile.metaViewportContent}) : undefined,
+		
+		//define baseUrl for use in relative url management
+		baseUrl = getPathDir( location.protocol + '//' + location.host + location.pathname ),
+		
+		//define base element, for use in routing asset urls that are referenced in Ajax-requested markup
+		$base = $.support.dynamicBaseTag ? $("<base>", { href: baseUrl }) : undefined,
+		
+		//will be defined as first page element in DOM
 		$startPage,
+		
+		//will be defined as $startPage.parent(), which is usually the body element
+		//will receive ui-mobile-viewport class
 		$pageContainer,
-		startPageId = 'ui-page-start',
-		activePageClass = 'ui-page-active',
-		activeBtnClass = 'ui-btn-active',
+		
+		//will be defined when a link is clicked and given an active class
 		activeClickedLink = null,
-		pageTransition,
-		forceBack,
-		transitions = 'slide slideup slidedown pop flip fade',
-		transitionDuration = 350,
-		backBtnText = "Back",
+		
+		//array of pages that are visited during a single page load
+		//length will grow as pages are visited, and shrink as "back" link/button is clicked
+		//each item has a url (string matches ID), and transition (saved for reuse when "back" link/button is clicked)
 		urlStack = [ {
 			url: location.hash.replace( /^#/, "" ),
-			transition: "slide"
+			transition: undefined
 		} ],
+		
+		//define first selector to receive focus when a page is shown
 		focusable = "[tabindex],a,button:visible,select:visible,input",
+		
+		//contains role for next page, if defined on clicked link via data-rel
 		nextPageRole = null,
+		
+		//enable/disable hashchange event listener
+		//toggled internally when location.hash is updated to match the url of a successful page load
 		hashListener = true,
-		unHashedSelectors = '[data-rel=dialog]',
-		baseUrl = location.protocol + '//' + location.host + location.pathname,
+		
+		//media-query-like width breakpoints, which are translated to classes on the html element 
 		resolutionBreakpoints = [320,480,768,1024];
-	
+		
+		
+	//prepend head markup additions
+	$head.prepend( $.mobile.headExtras || {}, $metaViewport || {}, $base || {} );
+
 	// TODO: don't expose (temporary during code reorg)
 	$.mobile.urlStack = urlStack;
 	
@@ -86,26 +139,54 @@
 		}, 150 );
 	}
 	
+	function getPathDir( path ){
+		var newPath = path.replace(/#/,'').split('/');
+		newPath.pop();
+		return newPath.join('/') + (newPath.length ? '/' : '');
+	}
+	
 	function getBaseURL( nonHashPath ){
-	    var newPath = nonHashPath || location.hash,
-	    	newBaseURL = newPath.replace(/#/,'').split('/');
-	    	
-		if(newBaseURL.length && /[.|&]/.test(newBaseURL[newBaseURL.length-1]) ){
-			newBaseURL.pop();	
-		}
-		newBaseURL = newBaseURL.join('/');
-		if(newBaseURL !== "" && newBaseURL.charAt(newBaseURL.length-1) !== '/'){  newBaseURL += '/'; }
-		return newBaseURL;
+		return getPathDir( nonHashPath || location.hash );
 	}
 	
 	var setBaseURL = !$.support.dynamicBaseTag ? $.noop : function( nonHashPath ){
 		//set base url for new page assets
-		$('#ui-base').attr('href', baseUrl + getBaseURL( nonHashPath ));
+		$base.attr('href', baseUrl + getBaseURL( nonHashPath ));
 	}
 	
 	var resetBaseURL = !$.support.dynamicBaseTag ? $.noop : function(){
-		$('#ui-base').attr('href', baseUrl);
+		$base.attr('href', baseUrl);
 	}
+	
+	//set base href to pathname
+    resetBaseURL(); 
+	
+	//for form submission
+	$('form').live('submit', function(){
+		var type = $(this).attr("method"),
+			url = $(this).attr( "action" ).replace( location.protocol + "//" + location.host, "");	
+		
+		//external submits use regular HTTP
+		if( /^(:?\w+:)/.test( url ) ){
+			return;
+		}	
+		
+		//if it's a relative href, prefix href with base url
+		if( url.indexOf('/') && url.indexOf('#') !== 0 ){
+			url = getBaseURL() + url;
+		}
+			
+		$.changePage({
+				url: url,
+				type: type,
+				data: $(this).serialize()
+			},
+			undefined,
+			undefined,
+			true
+		);
+		return false;
+	});	
 	
 	//click routing - direct to HTTP or Ajax, accordingly
 	jQuery( "a" ).live( "click", function(event) {
@@ -120,7 +201,7 @@
 			return false;
 		}
 		
-		activeClickedLink = $this.closest( ".ui-btn" ).addClass( activeBtnClass );
+		activeClickedLink = $this.closest( ".ui-btn" ).addClass( $.mobile.activeBtnClass );
 		
 		if( external ){
 			//deliberately redirect, in case click was triggered
@@ -128,12 +209,12 @@
 		}
 		else {	
 			//use ajax
-			var pageTransition = $this.data( "transition" ) || "slide",
-				forceBack = $this.data( "back" ) || undefined,
-				changeHashOnSuccess = !$this.is(unHashedSelectors);
+			var transition = $this.data( "transition" ),
+				back = $this.data( "back" ),
+				changeHashOnSuccess = !$this.is( $.mobile.nonHistorySelectors );
 				
 			nextPageRole = $this.attr( "data-rel" );	
-				
+	
 			//if it's a relative href, prefix href with base url
 			if( href.indexOf('/') && href.indexOf('#') !== 0 ){
 				href = getBaseURL() + href;
@@ -141,7 +222,7 @@
 			
 			href.replace(/^#/,'');
 			
-			changePage(href, pageTransition, forceBack, changeHashOnSuccess);			
+			changePage(href, transition, back, changeHashOnSuccess);			
 		}
 		event.preventDefault();
 	});
@@ -151,7 +232,10 @@
 		if ( done ) {
 			$html.removeClass( "ui-loading" );
 		} else {
-			$loader.appendTo($pageContainer).css({top: $(window).scrollTop() + 75});
+		
+			if( $.mobile.loadingMessage ){
+				$loader.appendTo($pageContainer).css({top: $(window).scrollTop() + 75});
+			}	
 			$html.addClass( "ui-loading" );
 		}
 	};
@@ -190,13 +274,13 @@
 	}
 	
 	//remove active classes after page transition or error
-	function removeActiveLinkClass(){
-		if(activeClickedLink && !activeClickedLink.closest( '.ui-page-active' ).length ){
-			activeClickedLink.removeClass( activeBtnClass );
+	function removeActiveLinkClass(forceRemoval){
+		if( !!activeClickedLink && (!activeClickedLink.closest( '.ui-page-active' ).length || forceRemoval )){
+			activeClickedLink.removeClass( $.mobile.activeBtnClass );
 		}
 		activeClickedLink = null;
 	}
-	
+
 
 	//for getting or creating a new page 
 	function changePage( to, transition, back, changeHash){
@@ -206,12 +290,24 @@
 			from = toIsArray ? to[0] : $.activePage,
 			to = toIsArray ? to[1] : to,
 			url = fileUrl = $.type(to) === "string" ? to.replace( /^#/, "" ) : null,
+			data = undefined,
+			type = 'get',
+			isFormRequest = false,
+			duplicateCachedPage = null,
 			back = (back !== undefined) ? back : ( urlStack.length > 1 && urlStack[ urlStack.length - 2 ].url === url ),
-			transition = (transition !== undefined) ? transition :  ( pageTransition || "slide" );
+			transition = (transition !== undefined) ? transition : $.mobile.defaultTransition;
 		
-		//unset pageTransition, forceBack	
-		pageTransition = undefined;
-		forceBack = undefined;
+		if( $.type(to) === "object" && to.url ){
+			url = to.url,
+			data = to.data,
+			type = to.type,
+			isFormRequest = true;
+			//make get requests bookmarkable
+			if( data && type == 'get' ){
+				url += "?" + data;
+				data = undefined;
+			}
+		}
 			
 		//reset base to pathname for new request
 		resetBaseURL();
@@ -243,29 +339,33 @@
 				if( changeHash && url ){
 					hashListener = false;
 					location.hash = url;
-					setTimeout(function(){
-						hashListener = true;
-					}, 500);
 				}
 				removeActiveLinkClass();
+				
+				//if there's a duplicateCachedPage, remove it from the DOM now that it's hidden
+				if( duplicateCachedPage != null ){
+					duplicateCachedPage.remove();
+				}
 			}
 			
 			if(transition){		
+				$pageContainer.addClass('ui-mobile-viewport-transitioning');
 				// animate in / out
 				from.addClass( transition + " out " + ( back ? "reverse" : "" ) );
-				to.addClass( activePageClass + " " + transition +
+				to.addClass( $.mobile.activePageClass + " " + transition +
 					" in " + ( back ? "reverse" : "" ) );
 				
 				// callback - remove classes, etc
 				to.animationComplete(function() {
-					from.add( to ).removeClass(" out in reverse " + transitions );
-					from.removeClass( activePageClass );
+					from.add( to ).removeClass(" out in reverse " + $.mobile.transitions.join(' ') );
+					from.removeClass( $.mobile.activePageClass );
 					loadComplete();
+					$pageContainer.removeClass('ui-mobile-viewport-transitioning');
 				});
 			}
 			else{
-				from.removeClass( activePageClass );
-				to.addClass( activePageClass );
+				from.removeClass( $.mobile.activePageClass );
+				to.addClass( $.mobile.activePageClass );
 				loadComplete();
 			}
 		};
@@ -296,18 +396,25 @@
 		}
 		
 		// find the "to" page, either locally existing in the dom or by creating it through ajax
-		if ( to.length ) {
+		if ( to.length && !isFormRequest ) {
 			if( fileUrl ){
 				setBaseURL(fileUrl);
 			}	
 			enhancePage();
 			transitionPages();
 		} else { 
+		
+			//if to exists in DOM, save a reference to it in duplicateCachedPage for removal after page change
+			if( to.length ){
+				duplicateCachedPage = to;
+			}
 			
 			pageLoading();
 
 			$.ajax({
 				url: fileUrl,
+				type: type,
+				data: data,
 				success: function( html ) {
 					setBaseURL(fileUrl);
 					var all = jQuery("<div></div>");
@@ -318,7 +425,7 @@
 					//rewrite src and href attrs to use a base url
 					if( !$.support.dynamicBaseTag ){
 						var baseUrl = getBaseURL(fileUrl);
-						to.find('[src],[href]').each(function(){
+						to.find('[src],link[href]').each(function(){
 							var thisAttr = $(this).is('[href]') ? 'href' : 'src',
 								thisUrl = $(this).attr(thisAttr);
 							
@@ -345,7 +452,7 @@
 				},
 				error: function() {
 					pageLoading( true );
-					removeActiveLinkClass();
+					removeActiveLinkClass(true);
 					jQuery("<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h1>Error Loading Page</h1></div>")
 						.css({ "display": "block", "opacity": 0.96, "top": $(window).scrollTop() + 100 })
 						.appendTo( $pageContainer )
@@ -367,10 +474,13 @@
 		
 		// needs to be bound at domready (for IE6)
 		// find or load content, make it active
-		$window.bind( "hashchange", function(e, extras) {
-			if( !hashListener ){ return; } 
+		$window.bind( "hashchange", function(e, triggered) {
+			if( !hashListener ){ 
+				hashListener = true;
+				return; 
+			} 
 			var to = location.hash,
-				transition = (extras && extras.manuallyTriggered) ? false : undefined;
+				transition = triggered ? false : undefined;
 				
 			// either we've backed up to the root page url
 			// or it's the first page load with no hash present
@@ -381,12 +491,12 @@
 			}
 			//there's no hash, the active page is not the start page, and it's not manually triggered hashchange
 			// > probably backed out to the first page visited
-			else if( $.activePage.length && !$startPage.is( $.activePage ) && !(extras && extras.manuallyTriggered) ) {
+			else if( $.activePage.length && !$startPage.is( $.activePage ) && !triggered ) {
 				changePage( $startPage, transition, true );
 			}
 			else{
 				$startPage.trigger("pagebeforeshow", {prevPage: $('')});
-				$startPage.addClass( activePageClass );
+				$startPage.addClass( $.mobile.activePageClass );
 				pageLoading( true );
 				
 				if( $startPage.trigger("pageshow", {prevPage: $('')}) !== false ){
@@ -401,8 +511,8 @@
 	$html.addClass('ui-mobile');
 	
 	//add orientation class on flip/resize.
-	$window.bind( "orientationchange", function( event, data ) {
-		$html.removeClass( "portrait landscape" ).addClass( data.orientation );
+	$window.bind( "orientationchange.htmlclass", function( event ) {
+		$html.removeClass( "portrait landscape" ).addClass( event.orientation );
 	});
 	
 	//add breakpoint classes for faux media-q support
@@ -446,27 +556,17 @@
 			resolutionBreakpoints.push( newbps );
 		}
 		detectResolutionBreakpoints();
-	}
-		
-	//insert mobile meta - these will need to be configurable somehow.
-	var headPrepends = 
-	$head.prepend(
-		'<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />' +
-		($.support.dynamicBaseTag ? '<base  href="" id="ui-base" />' : '')
-	);
-    
-    //set base href to pathname
-    resetBaseURL();    
+	} 
 	
-	//incomplete fallback to workaround lack of animation callbacks. 
-	//should this be extended into a full special event?
-	// note: Expects CSS animations use transitionDuration (350ms)
+	//animation complete callback
+	//TODO - update support test and create special event for transitions
+	//check out transitionEnd (opera per Paul's request)
 	jQuery.fn.animationComplete = function(callback){
-		if(jQuery.support.WebKitAnimationEvent){
-			return jQuery(this).one('webkitAnimationEnd', callback); //check out transitionEnd (opera per Paul's request)
+		if(jQuery.support.cssTransitions){
+			return jQuery(this).one('webkitAnimationEnd', callback);
 		}
 		else{
-			setTimeout(callback, transitionDuration);
+			callback();
 		}
 	};	
 	
@@ -483,27 +583,24 @@
 		$startPage = $.activePage = $pages.first();
 		
 		//set page container
-		$pageContainer = $startPage.parent();
+		$pageContainer = $startPage.parent().addClass('ui-mobile-viewport');
 		
 		jQuery.extend({
 			pageContainer: $pageContainer
 		});
 		
-		//make sure it has an ID - for finding it later
-		if(!$startPage.attr('id')){ 
-			$startPage.attr('id', startPageId); 
-		}
-		
 		//initialize all pages present
 		$pages.page();
 		
 		//trigger a new hashchange, hash or not
-		$window.trigger( "hashchange", { manuallyTriggered: true } );
+		$window.trigger( "hashchange", [ true ] );
 		
 		//update orientation 
-		$html.addClass( jQuery.event.special.orientationchange.orientation( $window ) );
+		$window.trigger( "orientationchange.htmlclass" );
 	});
 	
-	$window.load(hideBrowserChrome);
+	$window
+		.load(hideBrowserChrome)
+		.unload(removeActiveLinkClass);
 	
 })( jQuery, this );

@@ -1,8 +1,4 @@
-/*
-Possible additions:
-	scollTop
-	CSS Matrix
-*/
+(function( $ ) {
 
 // test whether a CSS media type or query applies
 $.media = (function() {
@@ -55,7 +51,7 @@ function baseTagTest(){
 $.extend( $.support, {
 	orientation: "orientation" in window,
 	touch: "ontouchend" in document,
-	WebKitAnimationEvent: typeof WebKitTransitionEvent === "object",
+	cssTransitions: "WebKitTransitionEvent" in window,
 	pushState: !!history.pushState,
 	mediaquery: $.media('only all'),
 	cssPseudoElement: !!propExists('content'),
@@ -68,3 +64,5 @@ fakeBody.remove();
 
 //for ruling out shadows via css
 if( !$.support.boxShadow ){ $('html').addClass('ui-mobile-nosupport-boxshadow'); }
+
+})( jQuery );

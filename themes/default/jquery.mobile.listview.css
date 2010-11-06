@@ -23,7 +23,8 @@ ol.ui-listview .ui-li-jsnumbering:before { content: "" !important; } /* to avoid
 .ui-li-icon { max-height: 40px; max-width: 40px; left: 10px; top: .9em; }
 .ui-li-thumb, .ui-li-icon, .ui-li-content { float: left; margin-right: 10px; }
 
-.ui-li-aside { float: right; width: 25%; text-align: right; margin: .3em 0; }
+.ui-li-aside { float: right; width: 50%; text-align: right; margin: .3em 0; }
+.min-width-480px .ui-li-aside { width: 45%; }
 .ui-li-has-alt .ui-btn-inner { padding-right: 95px; }
 .ui-li-count { position: absolute; font-size: 11px; font-weight: bold; padding: .2em .5em; top: 50%; margin-top: -.9em; right: 38px; }
 .ui-li-divider .ui-li-count { right: 10px; }
