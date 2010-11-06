@@ -28,7 +28,10 @@
 		activePageClass: 'ui-page-active',
 		
 		//class used for "active" button state, from CSS framework
-		activeBtnClass: 'ui-btn-active'
+		activeBtnClass: 'ui-btn-active',
+		
+		//available CSS transitions
+		transitions: ['slide', 'slideup', 'slidedown', 'pop', 'flip', 'fade']
 		
 	}, jQuery.mobileDefaults);
 
@@ -42,7 +45,6 @@
 		activeClickedLink = null,
 		pageTransition,
 		forceBack,
-		transitions = 'slide slideup slidedown pop flip fade',
 		transitionDuration = 350,
 		urlStack = [ {
 			url: location.hash.replace( /^#/, "" ),
@@ -292,7 +294,7 @@
 				
 				// callback - remove classes, etc
 				to.animationComplete(function() {
-					from.add( to ).removeClass(" out in reverse " + transitions );
+					from.add( to ).removeClass(" out in reverse " + $.mobile.transitions.join(' ') );
 					from.removeClass( $.mobile.activePageClass );
 					loadComplete();
 					$pageContainer.removeClass('ui-mobile-viewport-transitioning');
