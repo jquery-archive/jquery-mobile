@@ -9,10 +9,8 @@
 
 (function( $, window, undefined ) {
 	
-	//define jQuery.mobile hash
-	jQuery.mobile = {};
-	
-	jQuery.extend(jQuery.mobile, {
+	//jQuery.mobile obj extendable options
+	jQuery.mobile = jQuery.extend({
 		
 		//define the url parameter used for referencing widget-generated sub-pages. 
 		//Translates to to example.html&ui-page=subpageIdentifier
@@ -50,7 +48,7 @@
 			return jQuery.support.mediaquery;
 		}
 		
-	}, jQuery.mobileDefaults);
+	}, jQuery.mobile );
 	
 	//if device support condition(s) aren't met, leave things as they are -> a basic, usable experience,
 	//otherwise, proceed with the enhancements
