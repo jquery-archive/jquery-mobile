@@ -149,7 +149,7 @@
 		if ($write_combined) {
 			
 			if(!file_exists($combinedir)) {
-				mkdir($combinedir, 0700);
+				@mkdir($combinedir, 0700) or die("Unable to create combine directory {$combinedir}. Please check permissions.");
 			}
 			
 			$filename = '';
