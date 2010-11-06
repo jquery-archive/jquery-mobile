@@ -35,7 +35,7 @@
 			week: true
 		},
 		addBackBtn: true
-	});
+	}, jQuery.mobileDefaults);
 
 	var $window = jQuery(window),
 		$html = jQuery('html'),
