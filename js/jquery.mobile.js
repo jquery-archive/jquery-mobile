@@ -61,7 +61,6 @@
 		$startPage,
 		$pageContainer,
 		activeClickedLink = null,
-		transitionDuration = 350,
 		urlStack = [ {
 			url: location.hash.replace( /^#/, "" )
 		} ],
@@ -519,15 +518,15 @@
     //set base href to pathname
     resetBaseURL();    
 	
-	//incomplete fallback to workaround lack of animation callbacks. 
-	//should this be extended into a full special event?
-	// note: Expects CSS animations use transitionDuration (350ms)
+	//animation complete callback
+	//TODO - update support test and create special event for transitions
+	//check out transitionEnd (opera per Paul's request)
 	jQuery.fn.animationComplete = function(callback){
-		if(jQuery.support.WebKitAnimationEvent){
-			return jQuery(this).one('webkitAnimationEnd', callback); //check out transitionEnd (opera per Paul's request)
+		if(jQuery.support.cssTransitions){
+			return jQuery(this).one('webkitAnimationEnd', callback);
 		}
 		else{
-			setTimeout(callback, transitionDuration);
+			callback();
 		}
 	};	
 	

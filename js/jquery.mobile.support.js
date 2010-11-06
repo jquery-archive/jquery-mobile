@@ -51,7 +51,7 @@ function baseTagTest(){
 $.extend( $.support, {
 	orientation: "orientation" in window,
 	touch: "ontouchend" in document,
-	WebKitAnimationEvent: typeof WebKitTransitionEvent === "object",
+	cssTransitions: "WebKitTransitionEvent" in window,
 	pushState: !!history.pushState,
 	mediaquery: $.media('only all'),
 	cssPseudoElement: !!propExists('content'),
