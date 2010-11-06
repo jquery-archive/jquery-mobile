@@ -6,6 +6,7 @@
  * Dual licensed under the MIT or GPL Version 2 licenses.
  * http://jquery.org/license
  */
+ 
 (function( $, window, undefined ) {
 	
 	//define jQuery.mobile hash
@@ -26,6 +27,9 @@
 		
 		//available CSS transitions
 		transitions: ['slide', 'slideup', 'slidedown', 'pop', 'flip', 'fade'],
+		
+		//set default transition
+		defaultTransition: 'slide',
 		
 		//support conditions that must be met in order to proceed
 		gradeA: function(){
@@ -48,12 +52,9 @@
 		$startPage,
 		$pageContainer,
 		activeClickedLink = null,
-		pageTransition,
-		forceBack,
 		transitionDuration = 350,
 		urlStack = [ {
-			url: location.hash.replace( /^#/, "" ),
-			transition: "slide"
+			url: location.hash.replace( /^#/, "" )
 		} ],
 		focusable = "[tabindex],a,button:visible,select:visible,input",
 		nextPageRole = null,
@@ -150,8 +151,8 @@
 		}
 		else {	
 			//use ajax
-			var pageTransition = $this.data( "transition" ) || "slide",
-				forceBack = $this.data( "back" ) || undefined,
+			var transition = $this.data( "transition" ),
+				back = $this.data( "back" ),
 				changeHashOnSuccess = !$this.is( $.mobile.nonHistorySelectors );
 				
 			nextPageRole = $this.attr( "data-rel" );	
@@ -163,7 +164,7 @@
 			
 			href.replace(/^#/,'');
 			
-			changePage(href, pageTransition, forceBack, changeHashOnSuccess);			
+			changePage(href, transition, back, changeHashOnSuccess);			
 		}
 		event.preventDefault();
 	});
@@ -233,7 +234,7 @@
 			isFormRequest = false,
 			duplicateCachedPage = null,
 			back = (back !== undefined) ? back : ( urlStack.length > 1 && urlStack[ urlStack.length - 2 ].url === url ),
-			transition = (transition !== undefined) ? transition :  ( pageTransition || "slide" );
+			transition = transition || $.mobile.defaultTransition;
 		
 		if( $.type(to) === "object" && to.url ){
 			url = to.url,
@@ -246,10 +247,6 @@
 				data = undefined;
 			}
 		}
-		
-		//unset pageTransition, forceBack	
-		pageTransition = undefined;
-		forceBack = undefined;
 			
 		//reset base to pathname for new request
 		resetBaseURL();
