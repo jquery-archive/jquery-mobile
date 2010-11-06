@@ -14,7 +14,7 @@
 		return;
 	}	
 	
-	//these properties should be made easy to override externally
+	//define jQuery.mobile hash
 	jQuery.mobile = {};
 	
 	jQuery.extend(jQuery.mobile, {
