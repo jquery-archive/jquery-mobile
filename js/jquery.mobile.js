@@ -32,7 +32,6 @@
 		$loader = jQuery('<div class="ui-loader ui-body-a ui-corner-all"><span class="ui-icon ui-icon-loading spin"></span><h1>loading</h1></div>'),
 		$startPage,
 		$pageContainer,
-		startPageId = 'ui-page-start',
 		activePageClass = 'ui-page-active',
 		activeBtnClass = 'ui-btn-active',
 		activeClickedLink = null,
@@ -529,11 +528,6 @@
 		jQuery.extend({
 			pageContainer: $pageContainer
 		});
-		
-		//make sure it has an ID - for finding it later
-		if(!$startPage.attr('id')){ 
-			$startPage.attr('id', startPageId); 
-		}
 		
 		//initialize all pages present
 		$pages.page();
