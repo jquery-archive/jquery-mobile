@@ -22,7 +22,14 @@
 		
 		//anchor links that match these selectors will be untrackable in history 
 		//(no change in URL, not bookmarkable)
-		nonHistorySelectors: '[data-rel=dialog]'
+		nonHistorySelectors: '[data-rel=dialog]',
+		
+		//class assigned to page currently in view, and during transitions
+		activePageClass: 'ui-page-active',
+		
+		//class used for "active" button state, from CSS framework
+		activeBtnClass: 'ui-btn-active'
+		
 	}, jQuery.mobileDefaults);
 
 	var $window = jQuery(window),
@@ -32,8 +39,6 @@
 		$loader = jQuery('<div class="ui-loader ui-body-a ui-corner-all"><span class="ui-icon ui-icon-loading spin"></span><h1>loading</h1></div>'),
 		$startPage,
 		$pageContainer,
-		activePageClass = 'ui-page-active',
-		activeBtnClass = 'ui-btn-active',
 		activeClickedLink = null,
 		pageTransition,
 		forceBack,
@@ -130,7 +135,7 @@
 			return false;
 		}
 		
-		activeClickedLink = $this.closest( ".ui-btn" ).addClass( activeBtnClass );
+		activeClickedLink = $this.closest( ".ui-btn" ).addClass( $.mobile.activeBtnClass );
 		
 		if( external ){
 			//deliberately redirect, in case click was triggered
@@ -202,7 +207,7 @@
 	//remove active classes after page transition or error
 	function removeActiveLinkClass(forceRemoval){
 		if( !!activeClickedLink && (!activeClickedLink.closest( '.ui-page-active' ).length || forceRemoval )){
-			activeClickedLink.removeClass( activeBtnClass );
+			activeClickedLink.removeClass( $.mobile.activeBtnClass );
 		}
 		activeClickedLink = null;
 	}
@@ -282,20 +287,20 @@
 				$pageContainer.addClass('ui-mobile-viewport-transitioning');
 				// animate in / out
 				from.addClass( transition + " out " + ( back ? "reverse" : "" ) );
-				to.addClass( activePageClass + " " + transition +
+				to.addClass( $.mobile.activePageClass + " " + transition +
 					" in " + ( back ? "reverse" : "" ) );
 				
 				// callback - remove classes, etc
 				to.animationComplete(function() {
 					from.add( to ).removeClass(" out in reverse " + transitions );
-					from.removeClass( activePageClass );
+					from.removeClass( $.mobile.activePageClass );
 					loadComplete();
 					$pageContainer.removeClass('ui-mobile-viewport-transitioning');
 				});
 			}
 			else{
-				from.removeClass( activePageClass );
-				to.addClass( activePageClass );
+				from.removeClass( $.mobile.activePageClass );
+				to.addClass( $.mobile.activePageClass );
 				loadComplete();
 			}
 		};
@@ -426,7 +431,7 @@
 			}
 			else{
 				$startPage.trigger("pagebeforeshow", {prevPage: $('')});
-				$startPage.addClass( activePageClass );
+				$startPage.addClass( $.mobile.activePageClass );
 				pageLoading( true );
 				
 				if( $startPage.trigger("pageshow", {prevPage: $('')}) !== false ){
