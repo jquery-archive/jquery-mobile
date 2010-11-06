@@ -7,12 +7,6 @@
  * http://jquery.org/license
  */
 (function( $, window, undefined ) {
-	//some critical feature tests should be placed here.
-	//if we're missing support for any of these, then we're a C-grade browser
-	//to-do: see if we need more qualifiers here.
-	if ( !jQuery.support.mediaquery ) {
-		return;
-	}	
 	
 	//define jQuery.mobile hash
 	jQuery.mobile = {};
@@ -31,9 +25,20 @@
 		activeBtnClass: 'ui-btn-active',
 		
 		//available CSS transitions
-		transitions: ['slide', 'slideup', 'slidedown', 'pop', 'flip', 'fade']
+		transitions: ['slide', 'slideup', 'slidedown', 'pop', 'flip', 'fade'],
+		
+		//support conditions that must be met in order to proceed
+		gradeA: function(){
+			return jQuery.support.mediaquery;
+		}
 		
 	}, jQuery.mobileDefaults);
+	
+	//if device support condition(s) aren't met, leave things as they are -> a basic, usable experience,
+	//otherwise, proceed with the enhancements
+	if ( !jQuery.mobile.gradeA() ) {
+		return;
+	}	
 
 	var $window = jQuery(window),
 		$html = jQuery('html'),
