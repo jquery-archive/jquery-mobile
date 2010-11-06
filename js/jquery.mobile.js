@@ -13,7 +13,11 @@
 	jQuery.mobile = {};
 	
 	jQuery.extend(jQuery.mobile, {
-		subPageUrlKey: 'ui-page', //define the key used in urls for sub-pages. Defaults to &ui-page=
+		
+		//define the url parameter used for referencing widget-generated sub-pages. 
+		//Translates to to example.html&ui-page=subpageIdentifier
+		//hash segment before &ui-page= is used to make Ajax request
+		subPageUrlKey: 'ui-page',
 		
 		//anchor links that match these selectors will be untrackable in history 
 		//(no change in URL, not bookmarkable)
@@ -54,10 +58,16 @@
 		return;
 	}	
 
+	//define vars for interal use
 	var $window = jQuery(window),
 		$html = jQuery('html'),
 		$head = jQuery('head'),
+		
+		//to be populated at DOM ready
 		$body,
+		
+		//loading div which appears during Ajax requests
+		//will not appear if $.mobile.loadingMessage is false
 		$loader = $.mobile.loadingMessage ? 
 			jQuery('<div class="ui-loader ui-body-a ui-corner-all">'+
 						'<span class="ui-icon ui-icon-loading spin"></span>'+
@@ -74,16 +84,37 @@
 		//define base element, for use in routing asset urls that are referenced in Ajax-requested markup
 		$base = $.support.dynamicBaseTag ? $("<base>", { href: baseUrl }) : undefined,
 		
+		//will be defined as first page element in DOM
 		$startPage,
+		
+		//will be defined as $startPage.parent(), which is usually the body element
+		//will receive ui-mobile-viewport class
 		$pageContainer,
+		
+		//will be defined when a link is clicked and given an active class
 		activeClickedLink = null,
+		
+		//array of pages that are visited during a single page load
+		//length will grow as pages are visited, and shrink as "back" link/button is clicked
+		//each item has a url (string matches ID), and transition (saved for reuse when "back" link/button is clicked)
 		urlStack = [ {
-			url: location.hash.replace( /^#/, "" )
+			url: location.hash.replace( /^#/, "" ),
+			transition: undefined
 		} ],
+		
+		//define first selector to receive focus when a page is shown
 		focusable = "[tabindex],a,button:visible,select:visible,input",
+		
+		//contains role for next page, if defined on clicked link via data-rel
 		nextPageRole = null,
+		
+		//enable/disable hashchange event listener
+		//toggled internally when location.hash is updated to match the url of a successful page load
 		hashListener = true,
+		
+		//media-query-like width breakpoints, which are translated to classes on the html element 
 		resolutionBreakpoints = [320,480,768,1024];
+		
 		
 	//prepend head markup additions
 	$head.prepend( $.mobile.headExtras || {}, $metaViewport || {}, $base || {} );
