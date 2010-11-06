@@ -35,6 +35,12 @@
 		//if false, message will not appear, but loading classes will still be toggled on html el
 		loadingMessage: "loading",
 		
+		//configure meta viewport tag's content attr:
+		metaViewportContent: "width=device-width, minimum-scale=1, maximum-scale=1",
+		
+		//additional markup to prepend to head
+		headExtras: undefined,
+		
 		//support conditions that must be met in order to proceed
 		gradeA: function(){
 			return jQuery.support.mediaquery;
@@ -58,6 +64,16 @@
 						'<h1>'+ $.mobile.loadingMessage +'</h1>'+
 					'</div>')
 			: undefined,
+			
+		//define meta viewport tag, if content is defined	
+		$metaViewport = $.mobile.metaViewportContent ? $("<meta>", { name: "viewport", content: $.mobile.metaViewportContent}) : undefined,
+		
+		//define baseUrl for use in relative url management
+		baseUrl = getPathDir( location.protocol + '//' + location.host + location.pathname ),
+		
+		//define base element, for use in routing asset urls that are referenced in Ajax-requested markup
+		$base = $.support.dynamicBaseTag ? $("<base>", { href: baseUrl }) : undefined,
+		
 		$startPage,
 		$pageContainer,
 		activeClickedLink = null,
@@ -67,8 +83,10 @@
 		focusable = "[tabindex],a,button:visible,select:visible,input",
 		nextPageRole = null,
 		hashListener = true,
-		baseUrl = getPathDir( location.protocol + '//' + location.host + location.pathname ),
 		resolutionBreakpoints = [320,480,768,1024];
+		
+	//prepend head markup additions
+	$head.prepend( $.mobile.headExtras || {}, $metaViewport || {}, $base || {} );
 
 	// TODO: don't expose (temporary during code reorg)
 	$.mobile.urlStack = urlStack;
@@ -104,12 +122,15 @@
 	
 	var setBaseURL = !$.support.dynamicBaseTag ? $.noop : function( nonHashPath ){
 		//set base url for new page assets
-		$('#ui-base').attr('href', baseUrl + getBaseURL( nonHashPath ));
+		$base.attr('href', baseUrl + getBaseURL( nonHashPath ));
 	}
 	
 	var resetBaseURL = !$.support.dynamicBaseTag ? $.noop : function(){
-		$('#ui-base').attr('href', baseUrl);
+		$base.attr('href', baseUrl);
 	}
+	
+	//set base href to pathname
+    resetBaseURL(); 
 	
 	//for form submission
 	$('form').live('submit', function(){
@@ -506,17 +527,7 @@
 			resolutionBreakpoints.push( newbps );
 		}
 		detectResolutionBreakpoints();
-	}
-		
-	//insert mobile meta - these will need to be configurable somehow.
-	var headPrepends = 
-	$head.prepend(
-		'<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />' +
-		($.support.dynamicBaseTag ? '<base  href="" id="ui-base" />' : '')
-	);
-    
-    //set base href to pathname
-    resetBaseURL();    
+	} 
 	
 	//animation complete callback
 	//TODO - update support test and create special event for transitions
