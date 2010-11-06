@@ -1,16 +1,21 @@
 # the rewrite engine requires the ability to follow sym links
 Options +FollowSymLinks
 
-RewriteEngine On
-RewriteRule ^themes/([a-zA-Z\-\_\0-9]+)\/$ combine.php?type=css&theme=$1
-RewriteRule ^js/all combine.php?type=javascript
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteRule ^themes/([a-zA-Z\-\_\0-9]+)\/$ combine.php?type=css&theme=$1
+	RewriteRule ^js/all combine.php?type=javascript
+</IfModule>
 
 # Turn on Expires and set default to 0
-ExpiresActive On
-ExpiresDefault "access"
-
+<IfModule mod_expires.c>
+	ExpiresActive On
+	ExpiresDefault "access"
+</IfModule>
 
 # cache text, css, and javascript files for one week
 <FilesMatch ".(html|png|jpg|gif|js|css)$">
-Header set Cache-Control "max-age=1"
+	<IfModule mod_headers.c>
+		Header set Cache-Control "max-age=1"
+	</IfModule>
 </FilesMatch>
