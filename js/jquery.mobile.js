@@ -19,6 +19,10 @@
 	
 	jQuery.extend(jQuery.mobile, {
 		subPageUrlKey: 'ui-page', //define the key used in urls for sub-pages. Defaults to &ui-page=
+		
+		//anchor links that match these selectors will be untrackable in history 
+		//(no change in URL, not bookmarkable)
+		nonHistorySelectors: '[data-rel=dialog]',
 		degradeInputs: {
 			color: true,
 			date: true,
@@ -60,7 +64,6 @@
 		focusable = "[tabindex],a,button:visible,select:visible,input",
 		nextPageRole = null,
 		hashListener = true,
-		unHashedSelectors = '[data-rel=dialog]',
 		baseUrl = getPathDir( location.protocol + '//' + location.host + location.pathname ),
 		resolutionBreakpoints = [320,480,768,1024];
 
@@ -155,7 +158,7 @@
 			//use ajax
 			var pageTransition = $this.data( "transition" ) || "slide",
 				forceBack = $this.data( "back" ) || undefined,
-				changeHashOnSuccess = !$this.is(unHashedSelectors);
+				changeHashOnSuccess = !$this.is( $.mobile.nonHistorySelectors );
 				
 			nextPageRole = $this.attr( "data-rel" );	
 	
