@@ -22,23 +22,7 @@
 		
 		//anchor links that match these selectors will be untrackable in history 
 		//(no change in URL, not bookmarkable)
-		nonHistorySelectors: '[data-rel=dialog]',
-		degradeInputs: {
-			color: true,
-			date: true,
-			datetime: true,
-			"datetime-local": true,
-			email: true,
-			month: true,
-			number: true,
-			range: true,
-			search: true,
-			tel: true,
-			time: true,
-			url: true,
-			week: true
-		},
-		addBackBtn: true
+		nonHistorySelectors: '[data-rel=dialog]'
 	}, jQuery.mobileDefaults);
 
 	var $window = jQuery(window),
@@ -56,7 +40,6 @@
 		forceBack,
 		transitions = 'slide slideup slidedown pop flip fade',
 		transitionDuration = 350,
-		backBtnText = "Back",
 		urlStack = [ {
 			url: location.hash.replace( /^#/, "" ),
 			transition: "slide"
