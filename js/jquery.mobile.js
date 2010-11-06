@@ -6,36 +6,43 @@
  * Dual licensed under the MIT or GPL Version 2 licenses.
  * http://jquery.org/license
  */
+ 
 (function( $, window, undefined ) {
-	//some critical feature tests should be placed here.
-	//if we're missing support for any of these, then we're a C-grade browser
-	//to-do: see if we need more qualifiers here.
-	if ( !jQuery.support.mediaquery ) {
-		return;
-	}	
 	
-	//these properties should be made easy to override externally
+	//define jQuery.mobile hash
 	jQuery.mobile = {};
 	
 	jQuery.extend(jQuery.mobile, {
 		subPageUrlKey: 'ui-page', //define the key used in urls for sub-pages. Defaults to &ui-page=
-		degradeInputs: {
-			color: true,
-			date: true,
-			datetime: true,
-			"datetime-local": true,
-			email: true,
-			month: true,
-			number: true,
-			range: true,
-			search: true,
-			tel: true,
-			time: true,
-			url: true,
-			week: true
-		},
-		addBackBtn: true
-	});
+		
+		//anchor links that match these selectors will be untrackable in history 
+		//(no change in URL, not bookmarkable)
+		nonHistorySelectors: '[data-rel=dialog]',
+		
+		//class assigned to page currently in view, and during transitions
+		activePageClass: 'ui-page-active',
+		
+		//class used for "active" button state, from CSS framework
+		activeBtnClass: 'ui-btn-active',
+		
+		//available CSS transitions
+		transitions: ['slide', 'slideup', 'slidedown', 'pop', 'flip', 'fade'],
+		
+		//set default transition
+		defaultTransition: 'slide',
+		
+		//support conditions that must be met in order to proceed
+		gradeA: function(){
+			return jQuery.support.mediaquery;
+		}
+		
+	}, jQuery.mobileDefaults);
+	
+	//if device support condition(s) aren't met, leave things as they are -> a basic, usable experience,
+	//otherwise, proceed with the enhancements
+	if ( !jQuery.mobile.gradeA() ) {
+		return;
+	}	
 
 	var $window = jQuery(window),
 		$html = jQuery('html'),
@@ -44,23 +51,14 @@
 		$loader = jQuery('<div class="ui-loader ui-body-a ui-corner-all"><span class="ui-icon ui-icon-loading spin"></span><h1>loading</h1></div>'),
 		$startPage,
 		$pageContainer,
-		startPageId = 'ui-page-start',
-		activePageClass = 'ui-page-active',
-		activeBtnClass = 'ui-btn-active',
 		activeClickedLink = null,
-		pageTransition,
-		forceBack,
-		transitions = 'slide slideup slidedown pop flip fade',
 		transitionDuration = 350,
-		backBtnText = "Back",
 		urlStack = [ {
-			url: location.hash.replace( /^#/, "" ),
-			transition: "slide"
+			url: location.hash.replace( /^#/, "" )
 		} ],
 		focusable = "[tabindex],a,button:visible,select:visible,input",
 		nextPageRole = null,
 		hashListener = true,
-		unHashedSelectors = '[data-rel=dialog]',
 		baseUrl = getPathDir( location.protocol + '//' + location.host + location.pathname ),
 		resolutionBreakpoints = [320,480,768,1024];
 
@@ -145,7 +143,7 @@
 			return false;
 		}
 		
-		activeClickedLink = $this.closest( ".ui-btn" ).addClass( activeBtnClass );
+		activeClickedLink = $this.closest( ".ui-btn" ).addClass( $.mobile.activeBtnClass );
 		
 		if( external ){
 			//deliberately redirect, in case click was triggered
@@ -153,9 +151,9 @@
 		}
 		else {	
 			//use ajax
-			var pageTransition = $this.data( "transition" ) || "slide",
-				forceBack = $this.data( "back" ) || undefined,
-				changeHashOnSuccess = !$this.is(unHashedSelectors);
+			var transition = $this.data( "transition" ),
+				back = $this.data( "back" ),
+				changeHashOnSuccess = !$this.is( $.mobile.nonHistorySelectors );
 				
 			nextPageRole = $this.attr( "data-rel" );	
 	
@@ -166,7 +164,7 @@
 			
 			href.replace(/^#/,'');
 			
-			changePage(href, pageTransition, forceBack, changeHashOnSuccess);			
+			changePage(href, transition, back, changeHashOnSuccess);			
 		}
 		event.preventDefault();
 	});
@@ -217,7 +215,7 @@
 	//remove active classes after page transition or error
 	function removeActiveLinkClass(forceRemoval){
 		if( !!activeClickedLink && (!activeClickedLink.closest( '.ui-page-active' ).length || forceRemoval )){
-			activeClickedLink.removeClass( activeBtnClass );
+			activeClickedLink.removeClass( $.mobile.activeBtnClass );
 		}
 		activeClickedLink = null;
 	}
@@ -236,7 +234,7 @@
 			isFormRequest = false,
 			duplicateCachedPage = null,
 			back = (back !== undefined) ? back : ( urlStack.length > 1 && urlStack[ urlStack.length - 2 ].url === url ),
-			transition = (transition !== undefined) ? transition :  ( pageTransition || "slide" );
+			transition = transition || $.mobile.defaultTransition;
 		
 		if( $.type(to) === "object" && to.url ){
 			url = to.url,
@@ -249,10 +247,6 @@
 				data = undefined;
 			}
 		}
-		
-		//unset pageTransition, forceBack	
-		pageTransition = undefined;
-		forceBack = undefined;
 			
 		//reset base to pathname for new request
 		resetBaseURL();
@@ -297,20 +291,20 @@
 				$pageContainer.addClass('ui-mobile-viewport-transitioning');
 				// animate in / out
 				from.addClass( transition + " out " + ( back ? "reverse" : "" ) );
-				to.addClass( activePageClass + " " + transition +
+				to.addClass( $.mobile.activePageClass + " " + transition +
 					" in " + ( back ? "reverse" : "" ) );
 				
 				// callback - remove classes, etc
 				to.animationComplete(function() {
-					from.add( to ).removeClass(" out in reverse " + transitions );
-					from.removeClass( activePageClass );
+					from.add( to ).removeClass(" out in reverse " + $.mobile.transitions.join(' ') );
+					from.removeClass( $.mobile.activePageClass );
 					loadComplete();
 					$pageContainer.removeClass('ui-mobile-viewport-transitioning');
 				});
 			}
 			else{
-				from.removeClass( activePageClass );
-				to.addClass( activePageClass );
+				from.removeClass( $.mobile.activePageClass );
+				to.addClass( $.mobile.activePageClass );
 				loadComplete();
 			}
 		};
@@ -441,7 +435,7 @@
 			}
 			else{
 				$startPage.trigger("pagebeforeshow", {prevPage: $('')});
-				$startPage.addClass( activePageClass );
+				$startPage.addClass( $.mobile.activePageClass );
 				pageLoading( true );
 				
 				if( $startPage.trigger("pageshow", {prevPage: $('')}) !== false ){
@@ -456,8 +450,8 @@
 	$html.addClass('ui-mobile');
 	
 	//add orientation class on flip/resize.
-	$window.bind( "orientationchange", function( event, data ) {
-		$html.removeClass( "portrait landscape" ).addClass( data.orientation );
+	$window.bind( "orientationchange.htmlclass", function( event ) {
+		$html.removeClass( "portrait landscape" ).addClass( event.orientation );
 	});
 	
 	//add breakpoint classes for faux media-q support
@@ -544,11 +538,6 @@
 			pageContainer: $pageContainer
 		});
 		
-		//make sure it has an ID - for finding it later
-		if(!$startPage.attr('id')){ 
-			$startPage.attr('id', startPageId); 
-		}
-		
 		//initialize all pages present
 		$pages.page();
 		
@@ -556,7 +545,7 @@
 		$window.trigger( "hashchange", [ true ] );
 		
 		//update orientation 
-		$html.addClass( jQuery.event.special.orientationchange.orientation( $window ) );
+		$window.trigger( "orientationchange.htmlclass" );
 	});
 	
 	$window

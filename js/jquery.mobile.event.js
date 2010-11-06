@@ -158,34 +158,71 @@ $.event.special.swipe = {
 	}
 };
 
-$.event.special.orientationchange = {
-	orientation: function( elem ) {
-		return document.documentElement && document.documentElement.clientWidth / document.documentElement.clientHeight < 1.1 ? "portrait" : "landscape";
-	},
+(function(jQuery){
+	// "Cowboy" Ben Alman
 	
-	setup: function() {
-		var thisObject = this,
-			$this = $( thisObject ),
-			orientation = $.event.special.orientationchange.orientation( $this );
-
-		function handler() {
-			var newOrientation = $.event.special.orientationchange.orientation( $this );
+	var win = jQuery(window),
+		special_event,
+		get_orientation,
+		last_orientation;
+	
+	jQuery.event.special.orientationchange = special_event = {
+		setup: function(){
+			// If the event is supported natively, return false so that jQuery
+			// will bind to the event using DOM methods.
+			if ( jQuery.support.orientation ) { return false; }
 			
-			if ( orientation !== newOrientation ) {
-				$.event.handle.call( thisObject, "orientationchange", {
-					orientation: newOrientation
-				} );
-				orientation = newOrientation;
-			}
+			// Get the current orientation to avoid initial double-triggering.
+			last_orientation = get_orientation();
+			
+			// Because the orientationchange event doesn't exist, simulate the
+			// event by testing window dimensions on resize.
+			win.bind( "resize", handler );
+		},
+		teardown: function(){
+			// If the event is not supported natively, return false so that
+			// jQuery will unbind the event using DOM methods.
+			if ( jQuery.support.orientation ) { return false; }
+			
+			// Because the orientationchange event doesn't exist, unbind the
+			// resize event handler.
+			win.unbind( "resize", handler );
+		},
+		add: function( handleObj ) {
+			// Save a reference to the bound event handler.
+			var old_handler = handleObj.handler;
+			
+			handleObj.handler = function( event ) {
+				// Modify event object, adding the .orientation property.
+				event.orientation = get_orientation();
+				
+				// Call the originally-bound event handler and return its result.
+				return old_handler.apply( this, arguments );
+			};
 		}
-
-		if ( $.support.orientation ) {
-			thisObject.addEventListener( "orientationchange", handler, false );
-		} else {
-			$this.bind( "resize", handler );
+	};
+	
+	// If the event is not supported natively, this handler will be bound to
+	// the window resize event to simulate the orientationchange event.
+	function handler() {
+		// Get the current orientation.
+		var orientation = get_orientation();
+		
+		if ( orientation !== last_orientation ) {
+			// The orientation has changed, so trigger the orientationchange event.
+			last_orientation = orientation;
+			win.trigger( "orientationchange" );
 		}
-	}
-};
+	};
+	
+	// Get the current page orientation. This method is exposed publicly, should it
+	// be needed, as jQuery.event.special.orientationchange.orientation()
+	special_event.orientation = get_orientation = function() {
+		var elem = document.documentElement;
+		return elem && elem.clientWidth / elem.clientHeight < 1.1 ? "portrait" : "landscape";
+	};
+	
+})(jQuery);
 
 $.each({
 	scrollstop: "scrollstart",
