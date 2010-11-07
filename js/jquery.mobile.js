@@ -27,6 +27,12 @@
 		//class used for "active" button state, from CSS framework
 		activeBtnClass: 'ui-btn-active',
 		
+		//automatically handle link clicks through Ajax, when possible
+		ajaxLinksEnabled: true,
+		
+		//automatically handle form submissions through Ajax, when possible
+		ajaxFormsEnabled: true,
+		
 		//available CSS transitions
 		transitions: ['slide', 'slideup', 'slidedown', 'pop', 'flip', 'fade'],
 		
@@ -163,6 +169,8 @@
 	
 	//for form submission
 	$('form').live('submit', function(){
+		if( !$.mobile.ajaxFormsEnabled ){ return; }
+		
 		var type = $(this).attr("method"),
 			url = $(this).attr( "action" ).replace( location.protocol + "//" + location.host, "");	
 		
@@ -203,7 +211,7 @@
 		
 		activeClickedLink = $this.closest( ".ui-btn" ).addClass( $.mobile.activeBtnClass );
 		
-		if( external ){
+		if( external || !$.mobile.ajaxLinksEnabled ){
 			//deliberately redirect, in case click was triggered
 			location.href = href;
 		}
@@ -570,6 +578,7 @@
 		}
 	};	
 	
+	//TODO - add to jQuery.mobile, not $
 	jQuery.extend({
 		pageLoading: pageLoading,
 		changePage: changePage,
