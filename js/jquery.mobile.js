@@ -6,14 +6,16 @@
  * Dual licensed under the MIT or GPL Version 2 licenses.
  * http://jquery.org/license
  */
- 
+
 (function( $, window, undefined ) {
 	
-	//define jQuery.mobile hash
-	jQuery.mobile = {};
-	
-	jQuery.extend(jQuery.mobile, {
-		subPageUrlKey: 'ui-page', //define the key used in urls for sub-pages. Defaults to &ui-page=
+	//jQuery.mobile obj extendable options
+	jQuery.mobile = jQuery.extend({
+		
+		//define the url parameter used for referencing widget-generated sub-pages. 
+		//Translates to to example.html&ui-page=subpageIdentifier
+		//hash segment before &ui-page= is used to make Ajax request
+		subPageUrlKey: 'ui-page',
 		
 		//anchor links that match these selectors will be untrackable in history 
 		//(no change in URL, not bookmarkable)
@@ -31,12 +33,22 @@
 		//set default transition
 		defaultTransition: 'slide',
 		
+		//show loading message during Ajax requests
+		//if false, message will not appear, but loading classes will still be toggled on html el
+		loadingMessage: "loading",
+		
+		//configure meta viewport tag's content attr:
+		metaViewportContent: "width=device-width, minimum-scale=1, maximum-scale=1",
+		
+		//additional markup to prepend to head
+		headExtras: undefined,
+		
 		//support conditions that must be met in order to proceed
 		gradeA: function(){
 			return jQuery.support.mediaquery;
 		}
 		
-	}, jQuery.mobileDefaults);
+	}, jQuery.mobile );
 	
 	//if device support condition(s) aren't met, leave things as they are -> a basic, usable experience,
 	//otherwise, proceed with the enhancements
@@ -44,23 +56,66 @@
 		return;
 	}	
 
+	//define vars for interal use
 	var $window = jQuery(window),
 		$html = jQuery('html'),
 		$head = jQuery('head'),
+		
+		//to be populated at DOM ready
 		$body,
-		$loader = jQuery('<div class="ui-loader ui-body-a ui-corner-all"><span class="ui-icon ui-icon-loading spin"></span><h1>loading</h1></div>'),
-		$startPage,
-		$pageContainer,
-		activeClickedLink = null,
-		transitionDuration = 350,
-		urlStack = [ {
-			url: location.hash.replace( /^#/, "" )
-		} ],
-		focusable = "[tabindex],a,button:visible,select:visible,input",
-		nextPageRole = null,
-		hashListener = true,
+		
+		//loading div which appears during Ajax requests
+		//will not appear if $.mobile.loadingMessage is false
+		$loader = $.mobile.loadingMessage ? 
+			jQuery('<div class="ui-loader ui-body-a ui-corner-all">'+
+						'<span class="ui-icon ui-icon-loading spin"></span>'+
+						'<h1>'+ $.mobile.loadingMessage +'</h1>'+
+					'</div>')
+			: undefined,
+			
+		//define meta viewport tag, if content is defined	
+		$metaViewport = $.mobile.metaViewportContent ? $("<meta>", { name: "viewport", content: $.mobile.metaViewportContent}) : undefined,
+		
+		//define baseUrl for use in relative url management
 		baseUrl = getPathDir( location.protocol + '//' + location.host + location.pathname ),
+		
+		//define base element, for use in routing asset urls that are referenced in Ajax-requested markup
+		$base = $.support.dynamicBaseTag ? $("<base>", { href: baseUrl }) : undefined,
+		
+		//will be defined as first page element in DOM
+		$startPage,
+		
+		//will be defined as $startPage.parent(), which is usually the body element
+		//will receive ui-mobile-viewport class
+		$pageContainer,
+		
+		//will be defined when a link is clicked and given an active class
+		activeClickedLink = null,
+		
+		//array of pages that are visited during a single page load
+		//length will grow as pages are visited, and shrink as "back" link/button is clicked
+		//each item has a url (string matches ID), and transition (saved for reuse when "back" link/button is clicked)
+		urlStack = [ {
+			url: location.hash.replace( /^#/, "" ),
+			transition: undefined
+		} ],
+		
+		//define first selector to receive focus when a page is shown
+		focusable = "[tabindex],a,button:visible,select:visible,input",
+		
+		//contains role for next page, if defined on clicked link via data-rel
+		nextPageRole = null,
+		
+		//enable/disable hashchange event listener
+		//toggled internally when location.hash is updated to match the url of a successful page load
+		hashListener = true,
+		
+		//media-query-like width breakpoints, which are translated to classes on the html element 
 		resolutionBreakpoints = [320,480,768,1024];
+		
+		
+	//prepend head markup additions
+	$head.prepend( $.mobile.headExtras || {}, $metaViewport || {}, $base || {} );
 
 	// TODO: don't expose (temporary during code reorg)
 	$.mobile.urlStack = urlStack;
@@ -96,12 +151,15 @@
 	
 	var setBaseURL = !$.support.dynamicBaseTag ? $.noop : function( nonHashPath ){
 		//set base url for new page assets
-		$('#ui-base').attr('href', baseUrl + getBaseURL( nonHashPath ));
+		$base.attr('href', baseUrl + getBaseURL( nonHashPath ));
 	}
 	
 	var resetBaseURL = !$.support.dynamicBaseTag ? $.noop : function(){
-		$('#ui-base').attr('href', baseUrl);
+		$base.attr('href', baseUrl);
 	}
+	
+	//set base href to pathname
+    resetBaseURL(); 
 	
 	//for form submission
 	$('form').live('submit', function(){
@@ -174,7 +232,10 @@
 		if ( done ) {
 			$html.removeClass( "ui-loading" );
 		} else {
-			$loader.appendTo($pageContainer).css({top: $(window).scrollTop() + 75});
+		
+			if( $.mobile.loadingMessage ){
+				$loader.appendTo($pageContainer).css({top: $(window).scrollTop() + 75});
+			}	
 			$html.addClass( "ui-loading" );
 		}
 	};
@@ -234,7 +295,7 @@
 			isFormRequest = false,
 			duplicateCachedPage = null,
 			back = (back !== undefined) ? back : ( urlStack.length > 1 && urlStack[ urlStack.length - 2 ].url === url ),
-			transition = transition || $.mobile.defaultTransition;
+			transition = (transition !== undefined) ? transition : $.mobile.defaultTransition;
 		
 		if( $.type(to) === "object" && to.url ){
 			url = to.url,
@@ -495,27 +556,17 @@
 			resolutionBreakpoints.push( newbps );
 		}
 		detectResolutionBreakpoints();
-	}
-		
-	//insert mobile meta - these will need to be configurable somehow.
-	var headPrepends = 
-	$head.prepend(
-		'<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />' +
-		($.support.dynamicBaseTag ? '<base  href="" id="ui-base" />' : '')
-	);
-    
-    //set base href to pathname
-    resetBaseURL();    
+	} 
 	
-	//incomplete fallback to workaround lack of animation callbacks. 
-	//should this be extended into a full special event?
-	// note: Expects CSS animations use transitionDuration (350ms)
+	//animation complete callback
+	//TODO - update support test and create special event for transitions
+	//check out transitionEnd (opera per Paul's request)
 	jQuery.fn.animationComplete = function(callback){
-		if(jQuery.support.WebKitAnimationEvent){
-			return jQuery(this).one('webkitAnimationEnd', callback); //check out transitionEnd (opera per Paul's request)
+		if(jQuery.support.cssTransitions){
+			return jQuery(this).one('webkitAnimationEnd', callback);
 		}
 		else{
-			setTimeout(callback, transitionDuration);
+			callback();
 		}
 	};	
 	
