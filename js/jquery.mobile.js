@@ -96,7 +96,7 @@
 		$pageContainer,
 		
 		//will be defined when a link is clicked and given an active class
-		activeClickedLink = null,
+		$activeClickedLink = null,
 		
 		//array of pages that are visited during a single page load
 		//length will grow as pages are visited, and shrink as "back" link/button is clicked
@@ -209,7 +209,7 @@
 			return false;
 		}
 		
-		activeClickedLink = $this.closest( ".ui-btn" ).addClass( $.mobile.activeBtnClass );
+		$activeClickedLink = $this.closest( ".ui-btn" ).addClass( $.mobile.activeBtnClass );
 		
 		if( external || !$.mobile.ajaxLinksEnabled ){
 			//deliberately redirect, in case click was triggered
@@ -283,10 +283,10 @@
 	
 	//remove active classes after page transition or error
 	function removeActiveLinkClass(forceRemoval){
-		if( !!activeClickedLink && (!activeClickedLink.closest( '.ui-page-active' ).length || forceRemoval )){
-			activeClickedLink.removeClass( $.mobile.activeBtnClass );
+		if( !!$activeClickedLink && (!$activeClickedLink.closest( '.ui-page-active' ).length || forceRemoval )){
+			$activeClickedLink.removeClass( $.mobile.activeBtnClass );
 		}
-		activeClickedLink = null;
+		$activeClickedLink = null;
 	}
 
 
