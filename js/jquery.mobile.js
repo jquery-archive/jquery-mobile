@@ -118,7 +118,9 @@
 		
 		//media-query-like width breakpoints, which are translated to classes on the html element 
 		resolutionBreakpoints = [320,480,768,1024];
-		
+	
+	//add mobile, loading classes to doc
+	$html.addClass('ui-mobile');	
 		
 	//prepend head markup additions
 	$head.prepend( $.mobile.headExtras || {}, $metaViewport || {}, $base || {} );
@@ -514,9 +516,6 @@
 
 		});
 	});	
-	
-	//add mobile, loading classes to doc
-	$html.addClass('ui-mobile');
 	
 	//add orientation class on flip/resize.
 	$window.bind( "orientationchange.htmlclass", function( event ) {
