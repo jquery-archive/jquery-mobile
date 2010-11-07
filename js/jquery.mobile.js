@@ -168,7 +168,7 @@
     resetBaseURL(); 
 	
 	//for form submission
-	$('form').live('submit', function(){
+	$('form').live('submit', function(event){
 		if( !$.mobile.ajaxFormsEnabled ){ return; }
 		
 		var type = $(this).attr("method"),
@@ -193,7 +193,7 @@
 			undefined,
 			true
 		);
-		return false;
+		event.preventDefault();
 	});	
 	
 	//click routing - direct to HTTP or Ajax, accordingly
