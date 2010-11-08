@@ -28,6 +28,9 @@
 .ui-loader h1 { font-size: 15px; text-align: center; }
 .ui-loader .ui-icon { position: static; display: block; opacity: .9; margin: 0 auto; width: 35px; height: 35px; background-color: transparent; }
 
+/*fouc*/
+.ui-mobile-rendering > * { visibility: hidden; }
+
 /*headers, content panels*/
 .ui-bar, .ui-body { position: relative; padding: .4em 15px;  overflow: hidden; display: block;  clear:both;  }
 .ui-bar { font-size: 16px; margin: 0; }
