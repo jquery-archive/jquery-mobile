@@ -27,7 +27,6 @@
 	jquery.mobile.event.js,
 	jquery.mobile.fieldContain.js,
 	jquery.mobile.fixHeaderFooter.js,
-	jquery.mobile.forms.ajaxform.js,
 	jquery.mobile.forms.button.js,
 	jquery.mobile.forms.checkboxradio.js,
 	jquery.mobile.forms.select.js,
