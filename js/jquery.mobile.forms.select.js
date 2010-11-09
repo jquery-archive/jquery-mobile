@@ -13,6 +13,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		var select = this.element
 						.attr( "tabindex", "-1" )
 						.wrap( "<div class='ui-select'>" ),
+			self = this,			
 			selectID = select.attr( "id" ),
 			label = $( "label[for="+ selectID +"]" )
 						.addClass( "ui-select" ),
@@ -36,8 +37,11 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					icon: 'arrow-d',
 					theme: this.options.theme
 				}),
-			menuPage = $( "<div data-role='dialog' data-theme='a'>" +
-						"<div data-role='header' data-theme='b'>" +
+				
+			theme = /ui-btn-up-([a-z])/.exec( button.attr("class") )[1],
+				
+			menuPage = $( "<div data-role='dialog' data-theme='"+ theme +"'>" +
+						"<div data-role='header'>" +
 							"<div class='ui-title'>" + chooseText + "</div>"+
 						"</div>"+
 						"<div data-role='content'></div>"+
@@ -49,13 +53,14 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 							"class": "ui-listbox-screen ui-overlay ui-screen-hidden fade"
 					})
 					.appendTo( thisPage ),					
-			listbox = $( "<div>", { "class": "ui-listbox ui-listbox-hidden ui-body-a ui-overlay-shadow ui-corner-all pop"} )
+			listbox = $( "<div>", { "class": "ui-listbox ui-listbox-hidden ui-overlay-shadow ui-corner-all pop ui-body-" + theme } )
 					.insertAfter(screen),
 			list = $( "<ul>", { 
 					"class": "ui-listbox-list", 
 					"id": menuId, 
 					"role": "listbox", 
-					"aria-labelledby": buttonId
+					"aria-labelledby": buttonId,
+					"data-theme": theme
 				})
 				.appendTo( listbox );
 			
@@ -138,8 +143,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		//select properties,events
 		select
 			.change(function(){ 
-				var $el = select.get(0);
-				button.find( ".ui-btn-text" ).text( $($el.options.item($el.selectedIndex)).text() ); 
+				self.refresh();
 			})
 			.focus(function(){
 				$(this).blur();
@@ -189,6 +193,12 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			hidemenu();
 			return false;
 		});	
+	},
+	
+	refresh: function(){
+		var select = this.element;
+		select.prev().find( ".ui-btn-text" ).text( $(select[0].options.item(select[0].selectedIndex)).text() ); 
+		//TODO - refresh should populate the menu with new options from the select
 	},
 	
 	disable: function(){
