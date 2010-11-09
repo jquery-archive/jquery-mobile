@@ -82,13 +82,13 @@
 			: undefined,
 			
 		//define meta viewport tag, if content is defined	
-		$metaViewport = $.mobile.metaViewportContent ? $("<meta>", { name: "viewport", content: $.mobile.metaViewportContent}) : undefined,
+		$metaViewport = $.mobile.metaViewportContent ? $("<meta>", { name: "viewport", content: $.mobile.metaViewportContent}).prependTo( $head ) : undefined,
 		
 		//define baseUrl for use in relative url management
 		baseUrl = getPathDir( location.protocol + '//' + location.host + location.pathname ),
 		
 		//define base element, for use in routing asset urls that are referenced in Ajax-requested markup
-		$base = $.support.dynamicBaseTag ? $("<base>", { href: baseUrl }) : undefined,
+		$base = $.support.dynamicBaseTag ? $("<base>", { href: baseUrl }).prependTo( $head ) : undefined,
 		
 		//will be defined as first page element in DOM
 		$startPage,
@@ -125,7 +125,7 @@
 	$html.addClass('ui-mobile ui-mobile-rendering');	
 		
 	//prepend head markup additions
-	$head.prepend( $.mobile.headExtras || {}, $metaViewport || {}, $base || {} );
+	if( $.mobile.headExtras ){ $head.prepend( $.mobile.headExtras ); }
 
 	// TODO: don't expose (temporary during code reorg)
 	$.mobile.urlStack = urlStack;
