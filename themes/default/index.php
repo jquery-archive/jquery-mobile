@@ -19,5 +19,5 @@ $elements = array(
 	'jquery.mobile.forms.slider.css'
 );
 
-include('../../combine2.php');
+include('../../combine.php');
 ?>

@@ -26,5 +26,5 @@ $elements = array(
 	'jquery.mobile.js'
 );
 
-include('../combine2.php');
+include('../combine.php');
 ?>
