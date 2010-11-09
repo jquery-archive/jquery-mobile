@@ -9,8 +9,8 @@
 
 (function( $, window, undefined ) {
 	
-	//jQuery.mobile obj extendable options
-	jQuery.mobile = jQuery.extend({
+	//jQuery.mobile configurable options
+	jQuery.mobile = {
 		
 		//define the url parameter used for referencing widget-generated sub-pages. 
 		//Translates to to example.html&ui-page=subpageIdentifier
@@ -53,8 +53,10 @@
 		gradeA: function(){
 			return jQuery.support.mediaquery;
 		}
-		
-	}, jQuery.mobile );
+	};
+	
+	//trigger mobileinit event - useful hook for configuring $.mobile settings before they're used
+	$( window.document ).trigger('mobileinit');
 	
 	//if device support condition(s) aren't met, leave things as they are -> a basic, usable experience,
 	//otherwise, proceed with the enhancements
@@ -80,13 +82,13 @@
 			: undefined,
 			
 		//define meta viewport tag, if content is defined	
-		$metaViewport = $.mobile.metaViewportContent ? $("<meta>", { name: "viewport", content: $.mobile.metaViewportContent}) : undefined,
+		$metaViewport = $.mobile.metaViewportContent ? $("<meta>", { name: "viewport", content: $.mobile.metaViewportContent}).prependTo( $head ) : undefined,
 		
 		//define baseUrl for use in relative url management
 		baseUrl = getPathDir( location.protocol + '//' + location.host + location.pathname ),
 		
 		//define base element, for use in routing asset urls that are referenced in Ajax-requested markup
-		$base = $.support.dynamicBaseTag ? $("<base>", { href: baseUrl }) : undefined,
+		$base = $.support.dynamicBaseTag ? $("<base>", { href: baseUrl }).prependTo( $head ) : undefined,
 		
 		//will be defined as first page element in DOM
 		$startPage,
@@ -118,10 +120,12 @@
 		
 		//media-query-like width breakpoints, which are translated to classes on the html element 
 		resolutionBreakpoints = [320,480,768,1024];
-		
+	
+	//add mobile, initial load "rendering" classes to docEl
+	$html.addClass('ui-mobile ui-mobile-rendering');	
 		
 	//prepend head markup additions
-	$head.prepend( $.mobile.headExtras || {}, $metaViewport || {}, $base || {} );
+	if( $.mobile.headExtras ){ $head.prepend( $.mobile.headExtras ); }
 
 	// TODO: don't expose (temporary during code reorg)
 	$.mobile.urlStack = urlStack;
@@ -168,7 +172,7 @@
     resetBaseURL(); 
 	
 	//for form submission
-	$('form').live('submit', function(){
+	$('form').live('submit', function(event){
 		if( !$.mobile.ajaxFormsEnabled ){ return; }
 		
 		var type = $(this).attr("method"),
@@ -193,7 +197,7 @@
 			undefined,
 			true
 		);
-		return false;
+		event.preventDefault();
 	});	
 	
 	//click routing - direct to HTTP or Ajax, accordingly
@@ -331,7 +335,7 @@
 		function transitionPages() {
 				
 			//kill the keyboard
-			jQuery( document.activeElement ).blur();
+			jQuery( window.document.activeElement ).blur();
 			
 			//trigger before show/hide events
 			from.data("page")._trigger("beforehide", {nextPage: to});
@@ -356,7 +360,7 @@
 				}
 			}
 			
-			if(transition){		
+			if(transition && (transition !== 'none')){		
 				$pageContainer.addClass('ui-mobile-viewport-transitioning');
 				// animate in / out
 				from.addClass( transition + " out " + ( back ? "reverse" : "" ) );
@@ -515,9 +519,6 @@
 		});
 	});	
 	
-	//add mobile, loading classes to doc
-	$html.addClass('ui-mobile');
-	
 	//add orientation class on flip/resize.
 	$window.bind( "orientationchange.htmlclass", function( event ) {
 		$html.removeClass( "portrait landscape" ).addClass( event.orientation );
@@ -606,6 +607,9 @@
 		
 		//update orientation 
 		$window.trigger( "orientationchange.htmlclass" );
+		
+		//remove rendering class
+		$html.removeClass('ui-mobile-rendering');
 	});
 	
 	$window

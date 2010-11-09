@@ -14,3 +14,7 @@ ExpiresDefault "access"
 <FilesMatch ".(html|png|jpg|gif|js|css)$">
 Header set Cache-Control "max-age=1"
 </FilesMatch>
+
+
+AddType text/css themes/default
+AddType text/css themes/dobson

@@ -165,7 +165,7 @@ jQuery.widget( "mobile.page", jQuery.mobile.widget, {
 
 		this.element
 			.find( "select:not([data-role='slider'])" )
-			.customSelect();
+			.selectmenu();
 	}
 });
 
