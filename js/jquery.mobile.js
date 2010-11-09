@@ -17,9 +17,9 @@
 		//hash segment before &ui-page= is used to make Ajax request
 		subPageUrlKey: 'ui-page',
 		
-		//anchor links that match these selectors will be untrackable in history 
+		//anchor links with a data-rel, or pages with a data-role, that match these selectors will be untrackable in history 
 		//(no change in URL, not bookmarkable)
-		nonHistorySelectors: '[data-rel=dialog]',
+		nonHistorySelectors: 'dialog',
 		
 		//class assigned to page currently in view, and during transitions
 		activePageClass: 'ui-page-active',
@@ -223,7 +223,7 @@
 			//use ajax
 			var transition = $this.data( "transition" ),
 				back = $this.data( "back" ),
-				changeHashOnSuccess = !$this.is( $.mobile.nonHistorySelectors );
+				changeHashOnSuccess = !$this.is( "[data-rel="+ $.mobile.nonHistorySelectors +"]" );
 				
 			nextPageRole = $this.attr( "data-rel" );	
 	
@@ -491,6 +491,11 @@
 				hashListener = true;
 				return; 
 			} 
+			
+			if( $(".ui-page-active").is("[data-role=" + $.mobile.nonHistorySelectors + "]") ){
+				return;
+			}
+			
 			var to = location.hash,
 				transition = triggered ? false : undefined;
 				
