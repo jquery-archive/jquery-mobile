@@ -27,7 +27,7 @@ $( "[data-role='listview']" ).live( "listviewcreate", function() {
 				//listview._numberItems();
 			})
 			.appendTo( wrapper )
-			.customTextInput();
+			.textinput();
 	
 	wrapper.insertBefore( list );
 });
