@@ -56,7 +56,7 @@
 	};
 	
 	//trigger mobileinit event - useful hook for configuring $.mobile settings before they're used
-	$(document).trigger('mobileinit');
+	$( window.document ).trigger('mobileinit');
 	
 	//if device support condition(s) aren't met, leave things as they are -> a basic, usable experience,
 	//otherwise, proceed with the enhancements
@@ -335,7 +335,7 @@
 		function transitionPages() {
 				
 			//kill the keyboard
-			jQuery( document.activeElement ).blur();
+			jQuery( window.document.activeElement ).blur();
 			
 			//trigger before show/hide events
 			from.data("page")._trigger("beforehide", {nextPage: to});
