@@ -4,63 +4,60 @@
 * Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
 * Note: Code is in draft form and is subject to change 
 */  
-(function($){
-$.fn.customSelect = function(options){
-	return $(this).each(function(){	
-		var select = $(this)
+(function ( $ ) {
+$.widget( "mobile.selectmenu", $.mobile.widget, {
+	options: {
+		theme: undefined
+	},
+	_create: function(){
+		var select = this.element
 						.attr( "tabindex", "-1" )
 						.wrap( "<div class='ui-select'>" ),
 			selectID = select.attr( "id" ),
 			label = $( "label[for="+ selectID +"]" )
 						.addClass( "ui-select" ),
-				
-		//extendable options
-		o = $.extend({
-			chooseText: label.text(),
-			theme: select.data("theme")
-		}, options),
-
-		buttonId = selectID + "-button",
-		menuId = selectID + "-menu",
-		thisPage = select.closest( ".ui-page" ),
-		menuType,
-		currScroll,		
-		button = $( "<a>", { 
-				"href": "#",
-				"role": "button",
-				"id": buttonId,
-				"aria-haspopup": "true",
-				"aria-owns": menuId 
-			})
-			.text( $( this.options.item(this.selectedIndex) ).text() )
-			.insertBefore( select )
-			.buttonMarkup({
-				iconpos: 'right',
-				icon: 'arrow-d',
-				theme: o.theme
-			}),
-		menuPage = $( "<div data-role='dialog' data-theme='a'>" +
-					"<div data-role='header' data-theme='b'>" +
-						"<div class='ui-title'>" + o.chooseText + "</div>"+
-					"</div>"+
-					"<div data-role='content'></div>"+
-				"</div>" )
-				.appendTo( $.pageContainer )
-				.page(),	
-		menuPageContent = menuPage.find( ".ui-content" ),			
-		screen = $( "<div>", {
-						"class": "ui-listbox-screen ui-overlay ui-screen-hidden fade"
+			chooseText = label.text(),
+			buttonId = selectID + "-button",
+			menuId = selectID + "-menu",
+			thisPage = select.closest( ".ui-page" ),
+			menuType,
+			currScroll,		
+			button = $( "<a>", { 
+					"href": "#",
+					"role": "button",
+					"id": buttonId,
+					"aria-haspopup": "true",
+					"aria-owns": menuId 
 				})
-				.appendTo( thisPage ),					
-		listbox = $( "<div>", { "class": "ui-listbox ui-listbox-hidden ui-body-a ui-overlay-shadow ui-corner-all pop"} )
-				.insertAfter(screen),
-		list = $( "<ul>", { 
-				"class": "ui-listbox-list", 
-				"id": menuId, 
-				"role": "listbox", 
-				"aria-labelledby": buttonId
-			})
-			.appendTo( listbox );
+				.text( $( select[0].options.item(select[0].selectedIndex) ).text() )
+				.insertBefore( select )
+				.buttonMarkup({
+					iconpos: 'right',
+					icon: 'arrow-d',
+					theme: this.options.theme
+				}),
+			menuPage = $( "<div data-role='dialog' data-theme='a'>" +
+						"<div data-role='header' data-theme='b'>" +
+							"<div class='ui-title'>" + chooseText + "</div>"+
+						"</div>"+
+						"<div data-role='content'></div>"+
+					"</div>" )
+					.appendTo( $.pageContainer )
+					.page(),	
+			menuPageContent = menuPage.find( ".ui-content" ),			
+			screen = $( "<div>", {
+							"class": "ui-listbox-screen ui-overlay ui-screen-hidden fade"
+					})
+					.appendTo( thisPage ),					
+			listbox = $( "<div>", { "class": "ui-listbox ui-listbox-hidden ui-body-a ui-overlay-shadow ui-corner-all pop"} )
+					.insertAfter(screen),
+			list = $( "<ul>", { 
+					"class": "ui-listbox-list", 
+					"id": menuId, 
+					"role": "listbox", 
+					"aria-labelledby": buttonId
+				})
+				.appendTo( listbox );
 			
 		//populate menu
 		select.find( "option" ).each(function( i ){
@@ -192,8 +189,15 @@ $.fn.customSelect = function(options){
 			hidemenu();
 			return false;
 		});	
-	});
-};
-
-})(jQuery);
+	},
+	
+	disable: function(){
+		this.element.attr("disabled",true);
+	},
+	
+	enable: function(){
+		this.element.attr("disabled",false);
+	}
+});
+})( jQuery );
 	
