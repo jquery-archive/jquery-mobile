@@ -360,7 +360,7 @@
 				}
 			}
 			
-			if(transition){		
+			if(transition && (transition !== 'none')){		
 				$pageContainer.addClass('ui-mobile-viewport-transitioning');
 				// animate in / out
 				from.addClass( transition + " out " + ( back ? "reverse" : "" ) );
