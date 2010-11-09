@@ -153,7 +153,7 @@ a.ui-link-inherit { text-decoration: none !important; }
 .ui-icon-black-disc { background-color: #fff; background-color: rgba(255,255,255,.3);  -moz-border-radius: 9px; -webkit-border-radius: 9px; border-radius: 9px; }
 
 /* retina */
-@media  screen and (-webkit-min-device-pixel-ratio: 2), screen and (max--moz-device-pixel-ratio: 2) {
+@media screen and (-webkit-min-device-pixel-ratio: 2), screen and (max--moz-device-pixel-ratio: 2) {
 	.ui-icon { background-image: url(images/icons-36-white.png); background-size: 558px 18px; }
 	.ui-icon-black { background-image: url(images/icons-36-black.png); }
 }
@@ -196,7 +196,7 @@ a.ui-link-inherit { text-decoration: none !important; }
 .ui-icon-search { background-image: url(images/icon-search-black.png); }
 
 /* loading icon */
-.ui-icon-loading { background-image: url(images/ajax-loader.png); width: 40px; height: 40px;  -moz-border-radius: 20px; -webkit-border-radius: 20px; border-radius: 20px; }
+.ui-icon-loading { background-image: url(images/ajax-loader.png); width: 40px; height: 40px;  -moz-border-radius: 20px; -webkit-border-radius: 20px; border-radius: 20px; background-size: 35px 35px; }
 
 /* btn Corner radius */
 .ui-btn-corner-tl { -moz-border-radius-topleft: 1em; -webkit-border-top-left-radius: 1em; border-top-left-radius: 1em; }
