@@ -42,6 +42,9 @@
 		//show loading message during Ajax requests
 		//if false, message will not appear, but loading classes will still be toggled on html el
 		loadingMessage: "loading",
+
+		//set text for back buttons
+		backBtnText: "Back",
 		
 		//configure meta viewport tag's content attr:
 		metaViewportContent: "width=device-width, minimum-scale=1, maximum-scale=1",
