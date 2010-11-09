@@ -36,7 +36,7 @@
 		//available CSS transitions
 		transitions: ['slide', 'slideup', 'slidedown', 'pop', 'flip', 'fade'],
 		
-		//set default transition
+		//set default transition - 'none' for no transitions
 		defaultTransition: 'slide',
 		
 		//show loading message during Ajax requests
