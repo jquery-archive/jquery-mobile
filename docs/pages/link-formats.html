@@ -1,0 +1,45 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+	<meta charset="utf-8" /> 
+	<title>jQuery Mobile Docs - Links</title> 
+	<link rel="stylesheet"  href="../../themes/default" /> 
+	<script type="text/javascript" src="../../js/all"></script>
+	<script type="text/javascript" src="docs/docs.js"></script>
+</head> 
+<body> 
+
+<div data-role="page">
+
+	<div data-role="header">
+		<h1>Link formats</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		
+			<ul data-role="listview">
+				<li data-role="list-divider">Relative links</li>
+				<li><a href="../../index.html">Relative link</a></li>
+				<li><a href="../../index.html" rel="external">Relative link: rel="external"</a></li>
+				<li><a href="../../index.html" rel="external" target="foo">Relative link: rel="external", target="foo"</a></li>
+				<li><a href="../pages/dialog.html" data-rel="dialog">Relative link: data-rel="dialog" (not tracked in history)</a></li>
+				<li data-role="list-divider">Absolute links</li>
+				<li><a href="http://www.jquery.com">Absolute link</a></li>
+				<li><a href="http://www.jquery.com" rel="external">Absolute link: rel="external"</a></li>
+				<li><a href="http://www.jquery.com" rel="external" target="foo">Absolute link: rel="external", target="foo"</a></li>
+				<li data-role="list-divider">Email links</li>
+				<li><a href="mailto:jdoe@foo.com">Basic email: mailto:jdoe@foo.com</a></li>
+				<li><a href="mailto:jdoe@foo.com?cc=bill@bar.com&bcc=mark@abc.com">Mailto with a cc: and bcc:</a></li>
+				<li><a href="mailto:jdoe@foo.com?subject=Happy%20Birthday&body=Best%20wishes!">Mailto with a subject and body pre-filled</a></li>
+				<li data-role="list-divider">Phone links</li>
+				<li><a href="tel:15555555555">Phone: tel:15555555555</a></li>
+				<li><a href="wtai://wp/mc;15555555555">Phone: wtai://wp/mc;15555555555</a></li>
+				<li><a href="dc:234*234*234">Phone: dc:234*234*234</a></li>
+				<li data-role="list-divider">Other</li>
+				<li><a href="#">A href="#" will return false</a></li>
+			</ul>
+	</div><!-- /content -->
+</div><!-- /page -->
+
+</body>
+</html>
