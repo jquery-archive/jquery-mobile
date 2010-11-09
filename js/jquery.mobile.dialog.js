@@ -32,6 +32,9 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 			.addClass('ui-corner-top ui-overlay-shadow')
 				.prepend( $closeBtn )
 			.end()
+			.find('.ui-content:not([class*="ui-body-"])')
+				.addClass('ui-body-c')
+			.end()	
 			.find('.ui-content,[data-role=footer]')
 				.last()
 				.addClass('ui-corner-bottom ui-overlay-shadow');
