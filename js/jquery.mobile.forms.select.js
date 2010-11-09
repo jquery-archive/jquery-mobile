@@ -193,10 +193,12 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 	
 	disable: function(){
 		this.element.attr("disabled",true);
+		this.element.prev('a').addClass('ui-disabled');
 	},
 	
 	enable: function(){
 		this.element.attr("disabled",false);
+		this.element.prev('a').removeClass('ui-disabled');
 	}
 });
 })( jQuery );
