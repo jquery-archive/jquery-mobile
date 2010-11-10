@@ -10,19 +10,24 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		theme: undefined
 	},
 	_create: function(){
-		var select = this.element
+	
+		var self = this,
+			select = this.element
 						.attr( "tabindex", "-1" )
-						.wrap( "<div class='ui-select'>" ),
-			self = this,			
+						.wrap( "<div class='ui-select'>" ),		
+							
 			selectID = select.attr( "id" ),
-			label = $( "label[for="+ selectID +"]" )
-						.addClass( "ui-select" ),
+			
+			label = $( "label[for="+ selectID +"]" ).addClass( "ui-select" ),
+						
 			chooseText = label.text(),
+			
 			buttonId = selectID + "-button",
+			
 			menuId = selectID + "-menu",
+			
 			thisPage = select.closest( ".ui-page" ),
-			menuType,
-			currScroll,		
+				
 			button = $( "<a>", { 
 					"href": "#",
 					"role": "button",
@@ -48,13 +53,14 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					"</div>" )
 					.appendTo( $.pageContainer )
 					.page(),	
-			menuPageContent = menuPage.find( ".ui-content" ),			
-			screen = $( "<div>", {
-							"class": "ui-listbox-screen ui-overlay ui-screen-hidden fade"
-					})
-					.appendTo( thisPage ),					
+			menuPageContent = menuPage.find( ".ui-content" ),	
+					
+			screen = $( "<div>", {"class": "ui-listbox-screen ui-overlay ui-screen-hidden fade"})
+						.appendTo( thisPage ),		
+								
 			listbox = $( "<div>", { "class": "ui-listbox ui-listbox-hidden ui-overlay-shadow ui-corner-all pop ui-body-" + theme } )
 					.insertAfter(screen),
+					
 			list = $( "<ul>", { 
 					"class": "ui-listbox-list", 
 					"id": menuId, 
@@ -62,9 +68,12 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					"aria-labelledby": buttonId,
 					"data-theme": theme
 				})
-				.appendTo( listbox );
+				.appendTo( listbox ),
+				
+			menuType,
+			currScroll;	
 			
-		//populate menu
+		//populate menu with options from select element
 		select.find( "option" ).each(function( i ){
 			var selected = (select[0].selectedIndex == i),
 				anchor = $("<a>", { 
