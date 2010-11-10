@@ -271,6 +271,12 @@
 		}
 	}
 	
+	//update hash, with or without triggering hashchange event
+	$.mobile.updateHash = function(url, disableListening){
+		if(disableListening) { hashListener = false; }
+		location.hash = url;
+	}
+
 	//wrap page and transfer data-attrs if it has an ID
 	function wrapNewPage( newPage ){
 		var copyAttrs = ['data-role', 'data-theme', 'data-fullscreen'], //TODO: more page-level attrs?
@@ -349,8 +355,7 @@
 				}
 				reFocus( to );
 				if( changeHash && url ){
-					hashListener = false;
-					location.hash = url;
+					$.mobile.updateHash(url, true);
 				}
 				removeActiveLinkClass();
 				
