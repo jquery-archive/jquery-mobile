@@ -24,10 +24,10 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			controlID = control.attr('id'),
 			labelID = controlID + '-label',
 			label = $('[for='+ controlID +']').attr('id',labelID),
-			val = (cType == 'input') ? control.val() : control[0].selectedIndex,
+			val = (cType == 'input') ? parseFloat(control.val()) : control[0].selectedIndex,
 			min = (cType == 'input') ? parseFloat(control.attr('min')) : 0,
 			max = (cType == 'input') ? parseFloat(control.attr('max')) : control.find('option').length-1,
-			percent = val / (max - min) * 100,
+			percent = ((parseFloat(val) - min) / (max - min)) * 100,
 			snappedPercent = percent,
 			slider = $('<div class="ui-slider '+ selectClass +' ui-btn-down-'+o.trackTheme+' ui-btn-corner-all" role="application"></div>'),
 			handle = $('<a href="#" class="ui-slider-handle"></a>')
@@ -44,6 +44,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				}),
 			dragging = false;
 			
+						
 		if(cType == 'select'){
 			slider.wrapInner('<div class="ui-slider-inneroffset"></div>');
 			var options = control.find('option');
@@ -70,11 +71,11 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			
 		function slideUpdate(event, val){
 			if (val){
-				percent = parseFloat(val) / (max - min) * 100;
+				percent = (parseFloat(val) - min) / (max - min) * 100;
 			} else {
 				var data = event.originalEvent.touches ? event.originalEvent.touches[ 0 ] : event,
 					// a slight tolerance helped get to the ends of the slider
-					tol = 4;
+					tol = 8;
 				if( !dragging 
 						|| data.pageX < slider.offset().left - tol 
 						|| data.pageX > slider.offset().left + slider.width() + tol ){ 
@@ -82,16 +83,18 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				}
 				percent = Math.round(((data.pageX - slider.offset().left) / slider.width() ) * 100);
 			}
+			
 			if( percent < 0 ) { percent = 0; }
 			if( percent > 100 ) { percent = 100; }
-			var newval = Math.round( (percent/100) * max );
+			var newval = Math.round( (percent/100) * (max-min) ) + min;
+			
 			if( newval < min ) { newval = min; }
 			if( newval > max ) { newval = max; }
 			//flip the stack of the bg colors
 			if(percent > 60 && cType == 'select'){ 
 				
 			}
-			snappedPercent = Math.round( newval / max * 100 );
+			snappedPercent = Math.round( newval / (max-min) * 100 );
 			handle.css('left', percent + '%');
 			handle.attr({
 					'aria-valuenow': (cType == 'input') ? newval : control.find('option').eq(newval).attr('value'),
