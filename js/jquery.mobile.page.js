@@ -11,19 +11,19 @@ jQuery.widget( "mobile.page", jQuery.mobile.widget, {
 		backBtnText: "Back",
 		addBackBtn: true,
 		degradeInputs: {
-			color: true,
-			date: true,
-			datetime: true,
-			"datetime-local": true,
-			email: true,
-			month: true,
-			number: true,
+			color: false,
+			date: false,
+			datetime: false,
+			"datetime-local": false,
+			email: false,
+			month: false,
+			number: false,
 			range: true,
 			search: true,
-			tel: true,
-			time: true,
-			url: true,
-			week: true
+			tel: false,
+			time: false,
+			url: false,
+			week: false
 		}
 	},
 	
