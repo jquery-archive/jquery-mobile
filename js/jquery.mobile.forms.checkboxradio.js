@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework : "customCheckboxRadio" plugin (based on code from Filament Group,Inc)
+* jQuery Mobile Framework : "checkboxradio" plugin
 * Copyright (c) jQuery Project
 * Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
 * Note: Code is in draft form and is subject to change 

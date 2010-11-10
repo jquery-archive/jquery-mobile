@@ -1,20 +1,10 @@
-# the rewrite engine requires the ability to follow sym links
-Options +FollowSymLinks
-
-RewriteEngine On
-RewriteRule ^themes/([a-zA-Z\-\_\0-9]+)\/$ combine.php?type=css&theme=$1
-RewriteRule ^js/all combine.php?type=javascript
-
-# Turn on Expires and set default to 0
-ExpiresActive On
-ExpiresDefault "access"
-
-
-# cache text, css, and javascript files for one week
-<FilesMatch ".(html|png|jpg|gif|js|css)$">
-Header set Cache-Control "max-age=1"
+#thx askapache.com
+<FilesMatch "\.(php|html|htm|js|css)$">
+FileETag None
+<IfModule mod_headers.c>
+Header unset ETag
+Header set Cache-Control "max-age=0, no-cache, no-store, must-revalidate"
+Header set Pragma "no-cache"
+Header set Expires "Wed, 11 Jan 1984 05:00:00 GMT"
+</IfModule>
 </FilesMatch>
-
-
-AddType text/css themes/default
-AddType text/css themes/dobson

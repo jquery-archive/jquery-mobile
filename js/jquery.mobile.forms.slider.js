@@ -1,19 +1,23 @@
 /*
-* jQuery Mobile Framework : "slider" plugin (based on code from Filament Group,Inc)
+* jQuery Mobile Framework : "slider" plugin
 * Copyright (c) jQuery Project
 * Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
 * Note: Code is in draft form and is subject to change 
 */  
-(function($){
-$.fn.slider = function(options){
-	return this.each(function(){	
-		var control = $(this),
-			themedParent = control.parents('[class*=ui-bar-],[class*=ui-body-]').eq(0),
+(function ( $ ) {
+$.widget( "mobile.slider", $.mobile.widget, {
+	options: {
+		theme: undefined,
+		trackTheme: undefined
+	},
+	_create: function(){	
+		var control = this.element,
+			themedParent = control.parents('[class*=ui-bar-],[class*=ui-body-]').eq(0),			
 			
 			o = $.extend({
-				trackTheme: (themedParent.length ? themedParent.attr('class').match(/ui-(bar|body)-([a-z])/)[2] : 'c'),
-				theme: control.data("theme") || (themedParent.length ? themedParent.attr('class').match(/ui-(bar|body)-([a-z])/)[2] : 'c')
-			},options),
+				trackTheme: themedParent.length ? themedParent.attr('class').match(/ui-(bar|body)-([a-z])/)[2] : 'c',
+				theme: themedParent.length ? themedParent.attr('class').match(/ui-(bar|body)-([a-z])/)[2] : 'c'
+			},this.options),
 			
 			cType = control[0].nodeName.toLowerCase(),
 			selectClass = (cType == 'select') ? 'ui-slider-switch' : '',
@@ -124,6 +128,13 @@ $.fn.slider = function(options){
 			.keyup(function(e){
 				slideUpdate(e, $(this).val() );
 			});
+			
+		$(document).bind($.support.touch ? "touchmove" : "mousemove", function(event){
+			if(dragging){
+				slideUpdate(event);
+				return false;
+			}
+		});
 					
 		slider
 			.bind($.support.touch ? "touchstart" : "mousedown", function(event){
@@ -133,29 +144,31 @@ $.fn.slider = function(options){
 				}
 				slideUpdate(event);
 				return false;
-			})
-			.bind($.support.touch ? "touchmove" : "mousemove", function(event){
-				slideUpdate(event);
-				return false;
-			})
+			});
+			
+		slider
+			.add(document)	
 			.bind($.support.touch ? "touchend" : "mouseup", function(event){
-				dragging = false;
-				if(cType == 'select'){
-					if(val == control[0].selectedIndex){
-						val = val == 0 ? 1 : 0;
-						//tap occurred, but value didn't change. flip it!
-						slideUpdate(event,val);
+				if(dragging){
+					dragging = false;
+					if(cType == 'select'){
+						if(val == control[0].selectedIndex){
+							val = val == 0 ? 1 : 0;
+							//tap occurred, but value didn't change. flip it!
+							slideUpdate(event,val);
+						}
+						updateSnap();
 					}
-					updateSnap();
+					return false;
 				}
-				return false;
-			})
-			.insertAfter(control);
+			});
+			
+		slider.insertAfter(control);	
 		
 		handle
 			.css('left', percent + '%')
 			.bind('click', function(e){ return false; });	
-	});
-};
-})(jQuery);
+	}
+});
+})( jQuery );
 	

@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework : sample plugin for making button links that proxy to native input/buttons
+* jQuery Mobile Framework : "button" plugin - links that proxy to native input/buttons
 * Copyright (c) jQuery Project
 * Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
 * Note: Code is in draft form and is subject to change 

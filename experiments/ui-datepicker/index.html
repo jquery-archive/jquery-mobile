@@ -4,18 +4,18 @@
 	<meta charset="utf-8" /> 
 	<title>jQuery Mobile Framework - Datepicker</title> 
 	<link rel="stylesheet"  href="../../themes/default" /> 
-	<script type="text/javascript" src="../../js/all"></script>
+	<script type="text/javascript" src="../../js/"></script>
 	
 </head> 
 <body> 
 
 <div data-role="page">
 	<link rel="stylesheet"  href="jquery.ui.datepicker.css" /> 
-	<script type="text/javascript" src="jquery.ui.datepicker.js"></script>
+	<script type="text/javascript" src="jQuery.ui.datepicker.js"></script>
 	<script type="text/javascript">
 		$(function(){
 			/*  datepicker workaround */
-			$('input[type=date]').hide().after( $('<div />').datepicker() );
+			$('input[data-type=date]').hide().after( $('<div />').datepicker() );
 			$('.ui-datepicker-header').addClass('ui-body-c ui-corner-top').removeClass('ui-corner-all');
 			$('.ui-datepicker-prev').buttonMarkup({iconpos: 'notext', icon: 'arrow-l', shadow: true, corners: true});
 			$('.ui-datepicker-next').buttonMarkup({iconpos: 'notext', icon: 'arrow-r', shadow: true, corners: true});

@@ -6,7 +6,7 @@ Usage
 
 Early documentation: https://github.com/jquery/jquery-mobile/wiki/_pages
 
-For now, I've set things up with a little combinator script to concat all the css and js files into one request and gzip. (js/all and themes/default)
+For now, I've set things up with a little combinator script to concat all the css and js files into one request and gzip. (js/ and themes/default)
 You'll need to point your local apache & php webserver at this root directory in order to preview things. 
 
 If you don't currently have a webserver running locally, a quick way to get up and running is to download and install Mamp for Mac OSX. Once installed, just open Mamp, click preferences, go to the Apache tab, and select your local jQuery Mobile folder as the root. Then you can open a browser to http://localhost:8888 to preview the code.

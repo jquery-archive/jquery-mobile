@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework : prototype for "dialog" plugin.
+* jQuery Mobile Framework : "dialog" plugin.
 * Copyright (c) jQuery Project
 * Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
 * Note: Code is in draft form and is subject to change 
@@ -10,8 +10,9 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 	_create: function(){	
 		var self = this,
 			$el = self.element,
+			$prevPage = $.activePage,
 			$closeBtn = $('<a href="#" data-icon="delete" data-iconpos="notext">Close</a>');
-			
+	
 		$el.delegate("a, submit", "click submit", function(e){
 			if( e.type == "click" && ( $(e.target).closest('[data-back]') || $(e.target).closest($closeBtn) ) ){
 				self.close();
@@ -38,10 +39,20 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 			.find('.ui-content,[data-role=footer]')
 				.last()
 				.addClass('ui-corner-bottom ui-overlay-shadow');
+		
+		$(window).bind('hashchange',function(){
+			if( $el.is('.ui-page-active') ){
+				self.close();
+				$el.bind('pagehide',function(){
+					$.mobile.updateHash( $prevPage.attr('id'), true);
+				});
+			}
+		});		
 
 	},
+	
 	close: function(){
-		$.changePage([this.element, $.activePage], undefined, true );
+		$.changePage([this.element, $.activePage], undefined, true, true );
 	}
 });
 })( jQuery );
