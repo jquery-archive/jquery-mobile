@@ -1,3 +1,9 @@
+/*
+* jQuery Mobile Framework : "page" plugin
+* Copyright (c) jQuery Project
+* Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
+* Note: Code is in draft form and is subject to change 
+*/
 (function ( jQuery ) {
 
 jQuery.widget( "mobile.page", jQuery.mobile.widget, {

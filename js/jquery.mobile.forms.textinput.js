@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework : "textinput" plugin for text inputs, textareas (based on code from Filament Group,Inc)
+* jQuery Mobile Framework : "textinput" plugin for text inputs, textareas
 * Copyright (c) jQuery Project
 * Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
 * Note: Code is in draft form and is subject to change 
