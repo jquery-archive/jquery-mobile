@@ -6,9 +6,11 @@
  * Dual licensed under the MIT or GPL Version 2 licenses.
  * http://jquery.org/license
  */
+ 
+ 
 
 (function( $, window, undefined ) {
-	
+
 	//jQuery.mobile configurable options
 	jQuery.mobile = {
 		
@@ -61,7 +63,7 @@
 	//if device support condition(s) aren't met, leave things as they are -> a basic, usable experience,
 	//otherwise, proceed with the enhancements
 	if ( !jQuery.mobile.gradeA() ) {
-		return;
+		//return;
 	}	
 
 	//define vars for interal use
@@ -437,7 +439,7 @@
 					var all = jQuery("<div></div>");
 					//workaround to allow scripts to execute when included in page divs
 					all.get(0).innerHTML = html;
-					to = all.find('[data-role="page"]');
+					to = all.find('[data-role="page"], section[role=document]');
 					
 					//rewrite src and href attrs to use a base url
 					if( !$.support.dynamicBaseTag ){
@@ -598,7 +600,7 @@
 
 	//dom-ready
 	jQuery(function(){
-		var $pages = jQuery("[data-role='page']");
+		var $pages = jQuery("[data-role='page'],section[role='document']");
 		//set up active page
 		$startPage = $.activePage = $pages.first();
 		

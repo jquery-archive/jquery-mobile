@@ -35,6 +35,12 @@ jQuery.widget( "mobile.page", jQuery.mobile.widget, {
 			return;
 		}
 		
+		//add data attrs to html5 markup 
+		$elem.filter('section[role=document]').attr('data-role', 'page');
+		$elem.find('header').attr('data-role', 'header');
+		$elem.find('footer').attr('data-role', 'footer');
+		$elem.find('section[role=main]').attr('data-role', 'content');
+		
 		//some of the form elements currently rely on the presence of ui-page and ui-content
 		// classes so we'll handle page and content roles outside of the main role processing
 		// loop below.
