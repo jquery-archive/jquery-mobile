@@ -205,8 +205,11 @@
 		var $this = $(this),
 			//get href, remove same-domain protocol and host
 			href = $this.attr( "href" ).replace( location.protocol + "//" + location.host, ""),
+			//if target attr is specified, it's external, and we mimic _blank... for now
+			target = $this.is( "[target]" ),
 			//if it still starts with a protocol, it's external, or could be :mailto, etc
-			external = /^(:?\w+:)/.test( href ) || $this.is( "[target],[rel=external]" );
+			external = target || /^(:?\w+:)/.test( href ) || $this.is( "[rel=external]" ),
+			target = $this.is( "[target]" );
 
 		if( href === '#' ){
 			//for links created purely for interaction - ignore
@@ -216,8 +219,16 @@
 		$activeClickedLink = $this.closest( ".ui-btn" ).addClass( $.mobile.activeBtnClass );
 		
 		if( external || !$.mobile.ajaxLinksEnabled ){
+			//remove active link class if external
+			removeActiveLinkClass(true);
+			
 			//deliberately redirect, in case click was triggered
-			location.href = href;
+			if( target ){
+				window.open(href);
+			}
+			else{
+				location.href = href;
+			}
 		}
 		else {	
 			//use ajax
@@ -622,8 +633,6 @@
 		$html.removeClass('ui-mobile-rendering');
 	});
 	
-	$window
-		.load(hideBrowserChrome)
-		.unload(removeActiveLinkClass);
+	$window.load(hideBrowserChrome);	
 	
 })( jQuery, this );
