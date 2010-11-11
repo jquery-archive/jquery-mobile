@@ -80,7 +80,7 @@ $.fixedToolbars = (function(){
 			if( stickyFooter && stickyFooter.length ){
 				stickyFooter.appendTo(event.target).css('top',0);
 			}
-			$.fixedToolbars.show(true);
+			$.fixedToolbars.show(true, this);
 		});
 		
 	});
@@ -137,13 +137,13 @@ $.fixedToolbars = (function(){
 
 	//exposed methods
 	return {
-		show: function(immediately){
+		show: function(immediately, page){
 			currentstate = 'overlay';
-			var $ap = $.mobile.activePage ? $.mobile.activePage : $(".ui-page-active");
+			var $ap = page ? $(page) : ($.mobile.activePage ? $.mobile.activePage : $(".ui-page-active"));
 			return $ap.children( toolbarSelector ).each(function(){
 				var el = $(this),
 					fromTop = $(window).scrollTop(),
-					thisTop = el.offset().top,
+					thisTop = getOffsetTop(el[0]), // el.offset().top returns the wrong value on iPad iOS 3.2.1, call our workaround instead.
 					screenHeight = window.innerHeight,
 					thisHeight = el.outerHeight(),
 					alreadyVisible = (el.is('.ui-header-fixed') && fromTop <= thisTop + thisHeight) || (el.is('.ui-footer-fixed') && thisTop <= fromTop + screenHeight);	
