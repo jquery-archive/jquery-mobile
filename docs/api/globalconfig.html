@@ -1,0 +1,69 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+	<meta charset="utf-8" /> 
+	<title>jQuery Mobile Docs - Configuring default settings</title> 
+	<link rel="stylesheet"  href="../../themes/default" /> 
+	<script type="text/javascript" src="../../js/"></script>
+</head> 
+<body> 
+
+<div data-role="page">
+
+	<div data-role="header">
+		<h1>Configuring Default Settings</h1>
+	</div><!-- /header -->
+
+	<div data-role="content" data-theme="c">
+			<h2>Working with jQuery Mobile's Auto-initialization</h2>
+			<p>Unlike other jQuery projects, such as jQuery and jQuery UI, jQuery Mobile automatically applies many markup enhancements as soon as it loads (long before document.ready event fires). These enhancements are applied based on jQuery Mobile's default configuration, which is designed to work with common scenarios, but may or may not match your particular needs. Fortunately, these settings are easy to configure.</p>
+			
+			<h3>The mobileinit event</h3>
+			<p>When the jQuery Mobile starts to execute, it triggers a <code>mobileinit</code> event on the <code>document</code> object, to which you can bind to apply overrides to jQuery Mobile's defaults.</p>
+			
+			<pre>
+				<code>
+$(document).bind("mobileinit", function(){
+  //apply overrides here
+});
+				</code>
+			</pre>
+			
+			<p>Because the <code>mobileinit</code> event is triggered immediately upon execution, you'll need to bind your event handler before jQuery Mobile is loaded. Thus, we recommend linking to your JavaScript files in the following order:</p>
+
+			<pre>
+				<code>
+&lt;script src=&quot;jquery.js&quot;&gt;&lt;/script&gt;
+<strong>&lt;script src=&quot;custom-scripting.js&quot;&gt;&lt;/script&gt;</strong>
+&lt;script src=&quot;jquery-mobile.js&quot;&gt;&lt;/script&gt;
+				</code>
+			</pre>			
+			
+			<p>Within this event binding, you can configure defaults either by extending the <code>$.mobile</code> object using jQuery's <code>$.extend</code> method:</p>
+			
+			<pre>
+				<code>
+$(document).bind("mobileinit", function(){
+  $.extend(  $.mobile , {
+    <strong>foo: bar</strong>
+  });
+});
+				</code>
+			</pre>
+			
+			<p>...or by setting them individually:</p>
+			<pre>
+				<code>
+$(document).live("mobileinit", function(){
+  <strong>$.mobile.foo = bar;</strong>
+});
+				</code>
+			</pre>
+			
+	<p>Visit the <a href="global-settings.html">Configurable Default Settings</a> page for information on the configurable defaults.</p>		
+		
+	</div><!-- /content -->
+</div><!-- /page -->
+
+</body>
+</html>
