@@ -4,4 +4,9 @@
 .ui-mobile #jqm-homeheader p { margin: 0; }
 .ui-mobile #jqm-version { text-indent: -99999px; background: url(../images/version.png) top right no-repeat; width: 119px; height: 122px; overflow: hidden; position: absolute; top: 0; right: 0; }
 .ui-mobile .jqm-themeswitcher { clear: both; margin: 20px 0 -15px; }
+
+h2 { margin-top:2em; }
+p code { font-size:1.2em; font-weight:bold; } 
+
 dt { font-weight: bold; margin-top: 2em; }
+dt code { font-size:1.3em; line-height:150%; }
