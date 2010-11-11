@@ -7,17 +7,19 @@
 (function ( $ ) {
 $.widget( "mobile.slider", $.mobile.widget, {
 	options: {
-		theme: undefined,
-		trackTheme: undefined
+		theme: null,
+		trackTheme: null
 	},
 	_create: function(){	
 		var control = this.element,
-			themedParent = control.parents('[class*=ui-bar-],[class*=ui-body-]').eq(0),			
+		
+			parentTheme = control.parents('[class*=ui-bar-],[class*=ui-body-]').eq(0),	
 			
-			o = $.extend({
-				trackTheme: themedParent.length ? themedParent.attr('class').match(/ui-(bar|body)-([a-z])/)[2] : 'c',
-				theme: themedParent.length ? themedParent.attr('class').match(/ui-(bar|body)-([a-z])/)[2] : 'c'
-			},this.options),
+			parentTheme = parentTheme.length ? parentTheme.attr('class').match(/ui-(bar|body)-([a-z])/)[2] : 'c',
+					
+			theme = this.options.theme ? this.options.theme : parentTheme,
+			
+			trackTheme = this.options.trackTheme ? this.options.trackTheme : parentTheme,
 			
 			cType = control[0].nodeName.toLowerCase(),
 			selectClass = (cType == 'select') ? 'ui-slider-switch' : '',
@@ -29,10 +31,10 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			max = (cType == 'input') ? parseFloat(control.attr('max')) : control.find('option').length-1,
 			percent = ((parseFloat(val) - min) / (max - min)) * 100,
 			snappedPercent = percent,
-			slider = $('<div class="ui-slider '+ selectClass +' ui-btn-down-'+o.trackTheme+' ui-btn-corner-all" role="application"></div>'),
+			slider = $('<div class="ui-slider '+ selectClass +' ui-btn-down-'+ trackTheme+' ui-btn-corner-all" role="application"></div>'),
 			handle = $('<a href="#" class="ui-slider-handle"></a>')
 				.appendTo(slider)
-				.buttonMarkup({corners: true, theme: o.theme, shadow: true})
+				.buttonMarkup({corners: true, theme: theme, shadow: true})
 				.attr({
 					'role': 'slider',
 					'aria-valuemin': min,
@@ -52,7 +54,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			control.find('option').each(function(i){
 				var side = (i==0) ?'b':'a',
 					corners = (i==0) ? 'right' :'left',
-					theme = (i==0) ? ' ui-btn-down-' + o.trackTheme :' ui-btn-active';
+					theme = (i==0) ? ' ui-btn-down-' + trackTheme :' ui-btn-active';
 				$('<div class="ui-slider-labelbg ui-slider-labelbg-'+ side + theme +' ui-btn-corner-'+ corners+'"></div>').prependTo(slider);	
 				$('<span class="ui-slider-label ui-slider-label-'+ side + theme +' ui-btn-corner-'+ corners+'" role="img">'+$(this).text()+'</span>').prependTo(handle);
 			});
