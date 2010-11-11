@@ -7,7 +7,8 @@
 (function($, undefined ) {
 $.widget( "mobile.navbar", $.mobile.widget, {
 	options: {
-		iconpos: 'top'
+		iconpos: 'top',
+		grid: 'a'
 	},
 	_create: function(){
 		var $navbar = this.element,
@@ -18,7 +19,7 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 			.addClass('ui-navbar')
 			.attr("role","navigation")
 			.find("ul")
-				.grid({grid: $navbtns.length > 2 ? "b" : "a"});		
+				.grid({grid: this.options.grid });		
 		
 		if( !iconpos ){ 
 			$navbar.addClass("ui-navbar-noicons");

@@ -13,15 +13,37 @@ $.fn.grid = function(options){
 		
 		$(this).addClass('ui-grid-' + o.grid);
 			
-		var $kids = $(this).children();
-			iterator = o.grid == 'a' ? 2 : 3;
+		var $kids = $(this).children(),
+			iterator;
+			
+			switch( o.grid ){
+				case 'a':
+					iterator = 2;
+				break;
+				case 'b':
+					iterator = 3;
+				break;
+				case 'c':
+					iterator = 4;
+				break;
+				case 'd':
+					iterator = 5;
+				break;
+			}
 		
 			$kids.filter(':nth-child(' + iterator + 'n+1)').addClass('ui-block-a');
 			$kids.filter(':nth-child(' + iterator + 'n+2)').addClass('ui-block-b');
 			
-		if(iterator == 3){	
+		if(iterator > 2){	
 			$kids.filter(':nth-child(3n+3)').addClass('ui-block-c');
-		}			
+		}	
+		if(iterator> 3){	
+			$kids.filter(':nth-child(4n+4)').addClass('ui-block-d');
+		}	
+		if(iterator > 4){	
+			$kids.filter(':nth-child(5n+5)').addClass('ui-block-e');
+		}
+				
 	});	
 };
 })(jQuery);
