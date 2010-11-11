@@ -110,7 +110,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			if( menuHeight > window.innerHeight - 80 || !$.support.scrollTop ){
 				menuType = "page";		
 				menuPageContent.append( list );
-				$.changePage(menuPage, undefined);
+				$.changePage(menuPage, 'pop', false, false);
 			}
 			else {
 				menuType = "overlay";
@@ -134,7 +134,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		
 		function hidemenu(){
 			if(menuType == "page"){			
-				$.changePage([menuPage,thisPage], undefined, true);
+				$.changePage([menuPage,thisPage], 'pop', true, false);
 			}
 			else{
 				screen.addClass( "ui-screen-hidden" );
