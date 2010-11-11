@@ -69,15 +69,15 @@
 
 		<p>If a theme isn't specified on a content block, the framework will default to "c" to maximize contrast against the default header "a", as shown here:</p>
 					
-			<div class="ui-bar ui-bar-a">
+			<div data-role="header" data-position="inline">
 				<a href="#" data-icon="arrow-l">Back</a>
-				<h1>Default Theme Bar</h1>
+				<h1>Default Header</h1>
 			</div>
 			<div class="ui-body ui-body-c">
 				<h3>Default Theme Content Header</h3>
 				<p>This is the default content color swatch and a preview of a <a href="#" class="ui-link">link</a>.</p>
 					<label for="slider1">Input slider:</label>
-				 	<input type="range" name="slider1" id="slider1" value="50" min="0" max="100" data-theme="a" />
+				 	<input type="range" name="slider1" id="slider1" value="50" min="0" max="100" />
 				     <fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
 				     	<legend>Cache settings:</legend>
 				         	<input type="radio" name="radio-choice-a1" id="radio-choice-a1" value="on" checked="checked" />
