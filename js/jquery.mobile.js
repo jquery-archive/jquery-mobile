@@ -310,7 +310,7 @@
 
 		//from is always the currently viewed page
 		var toIsArray = $.type(to) === "array",
-			from = toIsArray ? to[0] : $.activePage,
+			from = toIsArray ? to[0] : $.mobile.activePage,
 			to = toIsArray ? to[1] : to,
 			url = fileUrl = $.type(to) === "string" ? to.replace( /^#/, "" ) : null,
 			data = undefined,
@@ -362,7 +362,7 @@
 				pageLoading( true );
 				//trigger show/hide events, allow preventing focus change through return false		
 				if( from.data("page")._trigger("hide", null, {nextPage: to}) !== false && to.data("page")._trigger("show", null, {prevPage: from}) !== false ){
-					$.activePage = to;
+					$.mobile.activePage = to;
 				}
 				reFocus( to );
 				if( changeHash && url ){
@@ -527,7 +527,7 @@
 			}
 			//there's no hash, the active page is not the start page, and it's not manually triggered hashchange
 			// > probably backed out to the first page visited
-			else if( $.activePage.length && !$startPage.is( $.activePage ) && !triggered ) {
+			else if( $.mobile.activePage.length && !$startPage.is( $.mobile.activePage ) && !triggered ) {
 				changePage( $startPage, transition, true );
 			}
 			else{
@@ -614,7 +614,7 @@
 	$(function(){
 		var $pages = $("[data-role='page']");
 		//set up active page
-		$startPage = $.activePage = $pages.first();
+		$startPage = $.mobile.activePage = $pages.first();
 		
 		//set page container
 		$pageContainer = $startPage.parent().addClass('ui-mobile-viewport');

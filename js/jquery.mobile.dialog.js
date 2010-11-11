@@ -10,7 +10,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 	_create: function(){	
 		var self = this,
 			$el = self.element,
-			$prevPage = $.activePage,
+			$prevPage = $.mobile.activePage,
 			$closeBtn = $('<a href="#" data-icon="delete" data-iconpos="notext">Close</a>');
 	
 		$el.delegate("a, submit", "click submit", function(e){
@@ -19,7 +19,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 				return false;
 			}
 			//otherwise, assume we're headed somewhere new. set activepage to dialog so the transition will work
-			$.activePage = this.element;
+			$.mobile.activePage = this.element;
 		});
 	
 		this.element
@@ -52,7 +52,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 	},
 	
 	close: function(){
-		$.mobile.changePage([this.element, $.activePage], undefined, true, true );
+		$.mobile.changePage([this.element, $.mobile.activePage], undefined, true, true );
 	}
 });
 })( jQuery );

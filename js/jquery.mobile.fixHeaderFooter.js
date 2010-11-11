@@ -139,7 +139,7 @@ $.fixedToolbars = (function(){
 	return {
 		show: function(immediately){
 			currentstate = 'overlay';
-			var $ap = $.activePage ? $.activePage : $(".ui-page-active");
+			var $ap = $.mobile.activePage ? $.mobile.activePage : $(".ui-page-active");
 			return $ap.children( toolbarSelector ).each(function(){
 				var el = $(this),
 					fromTop = $(window).scrollTop(),
@@ -161,7 +161,7 @@ $.fixedToolbars = (function(){
 		},
 		hide: function(immediately){
 			currentstate = 'inline';
-			var $ap = $.activePage ? $.activePage : $(".ui-page-active");
+			var $ap = $.mobile.activePage ? $.mobile.activePage : $(".ui-page-active");
 			return $ap.children( toolbarSelector ).each(function(){
 				var el = $(this);
 				
