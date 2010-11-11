@@ -1,5 +1,5 @@
 /*!
- * jQuery Mobile
+ * jQuery Mobile v@VERSION
  * http://jquerymobile.com/
  *
  * Copyright 2010, jQuery Project
@@ -45,9 +45,6 @@
 		
 		//configure meta viewport tag's content attr:
 		metaViewportContent: "width=device-width, minimum-scale=1, maximum-scale=1",
-		
-		//additional markup to prepend to head
-		headExtras: undefined,
 		
 		//support conditions that must be met in order to proceed
 		gradeA: function(){
@@ -123,9 +120,6 @@
 	
 	//add mobile, initial load "rendering" classes to docEl
 	$html.addClass('ui-mobile ui-mobile-rendering');	
-		
-	//prepend head markup additions
-	if( $.mobile.headExtras ){ $head.prepend( $.mobile.headExtras ); }
 
 	// TODO: don't expose (temporary during code reorg)
 	$.mobile.urlStack = urlStack;
@@ -188,7 +182,7 @@
 			url = getBaseURL() + url;
 		}
 			
-		$.changePage({
+		changePage({
 				url: url,
 				type: type,
 				data: $(this).serialize()
@@ -316,7 +310,7 @@
 
 		//from is always the currently viewed page
 		var toIsArray = $.type(to) === "array",
-			from = toIsArray ? to[0] : $.activePage,
+			from = toIsArray ? to[0] : $.mobile.activePage,
 			to = toIsArray ? to[1] : to,
 			url = fileUrl = $.type(to) === "string" ? to.replace( /^#/, "" ) : null,
 			data = undefined,
@@ -368,7 +362,7 @@
 				pageLoading( true );
 				//trigger show/hide events, allow preventing focus change through return false		
 				if( from.data("page")._trigger("hide", null, {nextPage: to}) !== false && to.data("page")._trigger("show", null, {prevPage: from}) !== false ){
-					$.activePage = to;
+					$.mobile.activePage = to;
 				}
 				reFocus( to );
 				if( changeHash && url ){
@@ -533,7 +527,7 @@
 			}
 			//there's no hash, the active page is not the start page, and it's not manually triggered hashchange
 			// > probably backed out to the first page visited
-			else if( $.activePage.length && !$startPage.is( $.activePage ) && !triggered ) {
+			else if( $.mobile.activePage.length && !$startPage.is( $.mobile.activePage ) && !triggered ) {
 				changePage( $startPage, transition, true );
 			}
 			else{
@@ -610,7 +604,7 @@
 	};	
 	
 	//TODO - add to jQuery.mobile, not $
-	$.extend({
+	$.extend($.mobile, {
 		pageLoading: pageLoading,
 		changePage: changePage,
 		silentScroll: silentScroll
@@ -620,7 +614,7 @@
 	$(function(){
 		var $pages = $("[data-role='page']");
 		//set up active page
-		$startPage = $.activePage = $pages.first();
+		$startPage = $.mobile.activePage = $pages.first();
 		
 		//set page container
 		$pageContainer = $startPage.parent().addClass('ui-mobile-viewport');

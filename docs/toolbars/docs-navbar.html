@@ -3,7 +3,8 @@
 	<head>
 	<meta charset="utf-8" /> 
 	<title>jQuery Mobile Docs - Toolbars</title> 
-	<link rel="stylesheet"  href="../../themes/default" /> 
+	<link rel="stylesheet"  href="../../themes/default" />  
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 	<script type="text/javascript" src="../../js/"></script>
 </head> 
 <body> 
@@ -38,8 +39,8 @@
 	<div data-role="footer">
 		<div data-role="navbar">
 			<ul>
-				<li><a href="a.html"class="ui-btn-active">One</a></li>
-				<li><a href="b.html">Two</a></li>
+				<li><a href="#"class="ui-btn-active">One</a></li>
+				<li><a href="#">Two</a></li>
 			</ul>
 		</div><!-- /navbar -->
 	</div><!-- /footer -->
@@ -49,9 +50,9 @@
 	<div data-role="footer">
 		<div data-role="navbar">
 			<ul>
-				<li><a href="a.html" class="ui-btn-active">One</a></li>
-				<li><a href="b.html">Two</a></li>
-				<li><a href="c.html">Three</a></li>
+				<li><a href="#" class="ui-btn-active">One</a></li>
+				<li><a href="#">Two</a></li>
+				<li><a href="#">Three</a></li>
 			</ul>
 		</div><!-- /navbar -->
 	</div><!-- /footer -->
@@ -61,10 +62,10 @@
 	<div data-role="footer">
 		<div data-role="navbar">
 			<ul>
-				<li><a href="a.html" class="ui-btn-active">One</a></li>
-				<li><a href="b.html">Two</a></li>
-				<li><a href="c.html">Three</a></li>
-				<li><a href="d.html">Four</a></li>
+				<li><a href="#" class="ui-btn-active">One</a></li>
+				<li><a href="#">Two</a></li>
+				<li><a href="#">Three</a></li>
+				<li><a href="#">Four</a></li>
 			</ul>
 		</div><!-- /navbar -->
 	</div><!-- /footer -->
@@ -74,11 +75,11 @@
 	<div data-role="footer">
 		<div data-role="navbar">
 			<ul>
-				<li><a href="a.html" class="ui-btn-active">One</a></li>
-				<li><a href="b.html">Two</a></li>
-				<li><a href="c.html">Three</a></li>
-				<li><a href="d.html">Four</a></li>
-				<li><a href="e.html">Five</a></li>
+				<li><a href="#" class="ui-btn-active">One</a></li>
+				<li><a href="#">Two</a></li>
+				<li><a href="#">Three</a></li>
+				<li><a href="#">Four</a></li>
+				<li><a href="#">Five</a></li>
 			</ul>
 		</div><!-- /navbar -->
 	</div><!-- /footer -->
@@ -88,19 +89,36 @@
 	<div data-role="footer">
 		<div data-role="navbar">
 			<ul>
-				<li><a href="a.html" class="ui-btn-active">One</a></li>
-				<li><a href="b.html">Two</a></li>
-				<li><a href="c.html">Three</a></li>
-				<li><a href="d.html">Four</a></li>
-				<li><a href="e.html">Five</a></li>
-				<li><a href="f.html">Six</a></li>
-				<li><a href="g.html">Seven</a></li>
-				<li><a href="h.html">Eight</a></li>
-				<li><a href="i.html">Nine</a></li>
-				<li><a href="j.html">Ten</a></li>
+				<li><a href="#" class="ui-btn-active">One</a></li>
+				<li><a href="#">Two</a></li>
+				<li><a href="#">Three</a></li>
+				<li><a href="#">Four</a></li>
+				<li><a href="#">Five</a></li>
+				<li><a href="#">Six</a></li>
+				<li><a href="#">Seven</a></li>
+				<li><a href="#">Eight</a></li>
+				<li><a href="#">Nine</a></li>
+				<li><a href="#">Ten</a></li>
 			</ul>
 		</div><!-- /navbar -->
 	</div><!-- /footer -->
+	
+	<h2>Navbars in headers</h2>
+	
+	<p>If you want to add a navbar to the top of the page, you can still have a page title and buttons. Just add the navbar container inside the header block, right after the title and buttons in the source order.</p>
+
+	<div data-role="header">
+		<h1>I'm a header</h1>
+		<a href="index.html" data-icon="gear" class="ui-btn-right">Options</a>
+				
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#">One</a></li>
+				<li><a href="#">Two</a></li>
+				<li><a href="#">Three</a></li>
+			</ul>
+		</div><!-- /navbar -->
+	</div><!-- /header -->
 	
 	<h2>Icons in navbars</h2>
 	
@@ -109,9 +127,9 @@
 	<div data-role="footer">
 		<div data-role="navbar">
 			<ul>
-				<li><a href="a.html" data-icon="grid">Summary</a></li>
-				<li><a href="b.html" data-icon="star" class="ui-btn-active">Favs</a></li>
-				<li><a href="c.html" data-icon="gear">Setup</a></li>
+				<li><a href="#" data-icon="grid">Summary</a></li>
+				<li><a href="#" data-icon="star" class="ui-btn-active">Favs</a></li>
+				<li><a href="#" data-icon="gear">Setup</a></li>
 			</ul>
 		</div><!-- /navbar -->
 	</div><!-- /footer -->
@@ -121,9 +139,9 @@
 	<div data-role="footer">
 		<div data-role="navbar">
 			<ul>
-				<li><a href="a.html" data-icon="grid" data-iconpos="top">Summary</a></li>
-				<li><a href="b.html" data-icon="star" class="ui-btn-active" data-iconpos="top">Favs</a></li>
-				<li><a href="c.html" data-icon="gear" data-iconpos="top">Setup</a></li>
+				<li><a href="#" data-icon="grid" data-iconpos="top">Summary</a></li>
+				<li><a href="#" data-icon="star" class="ui-btn-active" data-iconpos="top">Favs</a></li>
+				<li><a href="#" data-icon="gear" data-iconpos="top">Setup</a></li>
 			</ul>
 		</div><!-- /navbar -->
 	</div><!-- /footer -->
@@ -150,11 +168,11 @@
 	<div data-role="footer" class="nav-glyphish-example">
 		<div data-role="navbar" class="nav-glyphish-example">
 		<ul>
-			<li><a href="a.html" id="chat" data-icon="custom">Chat</a></li>
-			<li><a href="b.html" id="email" data-icon="custom">Email</a></li>
-			<li><a href="c.html" id="skull" data-icon="custom">Danger</a></li>
-			<li><a href="d.html" id="beer" data-icon="custom">Beer</a></li>
-			<li><a href="e.html" id="coffee" data-icon="custom">Coffee</a></li>
+			<li><a href="#" id="chat" data-icon="custom">Chat</a></li>
+			<li><a href="#" id="email" data-icon="custom">Email</a></li>
+			<li><a href="#" id="skull" data-icon="custom">Danger</a></li>
+			<li><a href="#" id="beer" data-icon="custom">Beer</a></li>
+			<li><a href="#" id="coffee" data-icon="custom">Coffee</a></li>
 		</ul>
 		</div>
 	</div>
@@ -169,9 +187,9 @@
 	<div data-role="footer">
 		<div data-role="navbar" data-theme="e">
 			<ul>
-				<li><a href="a.html" data-icon="grid" data-iconpos="top" data-theme="e">Summary</a></li>
-				<li><a href="b.html" data-icon="star" class="ui-btn-active" data-iconpos="top" data-theme="e">Favs</a></li>
-				<li><a href="c.html" data-icon="gear" data-iconpos="top" data-theme="e">Setup</a></li>
+				<li><a href="#" data-icon="grid" data-iconpos="top" data-theme="b">Summary</a></li>
+				<li><a href="#" data-icon="star" class="ui-btn-active" data-iconpos="top" data-theme="b">Favs</a></li>
+				<li><a href="#" data-icon="gear" data-iconpos="top" data-theme="b">Setup</a></li>
 			</ul>
 		</div><!-- /navbar -->
 	</div><!-- /footer -->

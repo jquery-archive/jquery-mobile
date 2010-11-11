@@ -31,7 +31,7 @@
 		
 		//finished with this
 		function done(){
-			$.changePage([menuPage, currentPage], 'pop', true);
+			$.mobile.changePage([menuPage, currentPage], 'pop', true);
 			menuPage.bind('pagehide',function(){
 				menuPage.remove();
 			});
@@ -45,6 +45,6 @@
 		menuPage.page();
 		
 		//change page now	
-		$.changePage([currentPage, menuPage], 'pop', false);
+		$.mobile.changePage([currentPage, menuPage], 'pop', false);
 	};	
 })(jQuery);

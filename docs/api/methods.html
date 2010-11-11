@@ -1,0 +1,144 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+	<meta charset="utf-8" /> 
+	<title>jQuery Mobile Docs - Methods</title> 
+	<link rel="stylesheet"  href="../../themes/default" /> 
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	<script type="text/javascript" src="../../js/"></script>
+</head> 
+<body> 
+
+<div data-role="page">
+
+	<div data-role="header">
+		<h1>Methods</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+	
+
+		<p>jQuery Mobile exposes several methods and properties on the $.mobile object for use in your applications.</p>
+		
+
+		<dl>
+			<dt><code>$.mobile.changePage</code> (<em>method</em>)</dt>
+			<dd>Programmatically change from one page to another. This method is used internally for transitions that occur as a result of clicking a link or submitting a form, when those features are enabled.</dd>
+			
+			<dd>
+				
+				<dl>
+					<dt>Arguments</dt>
+					<dd><code>to</code>					
+						<ul>
+							<li>String, url to transition to (<code>"about/us.html"</code>)</li>
+							<li>jQuery object (<code>$("#about")</code>)</li>
+							<li>Array specifying two page references [from,to] for transitioning from a known page. From is otherwise assumed to be the current page in view (or $.mobile.activePage ).</li>
+							<li>Object for sending form data. (<code>{to: url, data: serialized form data, type: "get" or "post"}</code></li>  
+						</ul>	
+						</dd>	
+						
+					<dd><code>transition</code> (<em>string</em>, examples: "pop", "slide"," "none")</dd>
+					<dd><code>back</code> (<em>boolean</em>, default: false). True will cause a reverse-direction transition.</dd>
+					<dd><code>changeHash</code> (<em>boolean</em>, default: true). Update the hash to the to page's URL when page change is complete.</dd>
+				</dl>
+			</dd>
+			
+			<dd>Examples:
+			<pre>
+			<code>
+<strong>//transition to the "about us" page with a slideup transition, where</strong> 			
+$.mobile.changePage("about/us.html", "slideup");	
+
+<strong>//transition to the "search results" page, using data from a form with an ID of "search"" 	</strong>	
+$.mobile.changePage({
+	url: "searchresults.php", 
+	type: "get", 
+	data: $("form#search").serialize()
+});		
+
+<strong>//transition to the "confirm" page with a "pop" transition without tracking it in history	</strong>		
+$.mobile.changePage("../alerts/confirm.html", "pop", false, false);	
+		
+			</code>
+			</pre>
+			
+			</dd>
+			
+			<dt><code>$.mobile.pageLoading</code> (<em>method</em>)</dt>
+			<dd>Show or hide the page loading message, which is configurable via $.mobile.loadingMessage.</dd>
+			<dd>
+				<dl>
+					<dt>Arguments:</dt>
+					<dd><code>Done</code> (<em>boolean</em>, defaults to false, meaning loading has started). True will hide the loading message.</dd>
+				</dl>
+			</dd>
+			
+			<dd>Examples:
+			<pre>
+			<code>
+<strong>//cue the page loader</strong> 			
+$.mobile.pageLoading();	
+
+<strong>//hide the page loader</strong> 			
+$.mobile.pageLoading( true );	
+			</code>
+			</pre>
+			
+			</dd>
+			
+			
+			<dt><code>$.mobile.silentScroll</code> (<em>method</em>)</dt>
+			<dd>Scroll to a particular Y position without triggering scroll event listeners.</dd>
+			<dd>
+				<dl>
+					<dt>Arguments:</dt>
+					<dd><code>yPos</code> (<em>number</em>, defaults to 0). Pass any number to scroll to that Y location.</dd>
+				</dl>
+			</dd>
+			
+			<dd>Examples:
+			<pre>
+			<code>
+<strong>//scroll to Y 100px</strong> 			
+$.mobile.silentScroll(100);	
+			</code>
+			</pre>
+			
+			</dd>
+			
+			
+			<dt><code>$.mobile.addResolutionBreakpoints</code> (<em>method</em>)</dt>
+			<dd>Add width breakpoints to the min/max width classes that are added to the HTML element.</dd>
+			<dd>
+				<dl>
+					<dt>Arguments:</dt>
+					<dd><code>values</code> (<em>number or array</em>). Pass any number or array of numbers to add to the resolution classes. Read more about this feature here: <a href="mediahelpers.html">Orientation &amp; resolution targeting</a>.</dd>
+				</dl>
+			</dd>
+			
+			<dd>Examples:
+			<pre>
+			<code>
+<strong>//scroll to Y 100px</strong> 			
+$.mobile.silentScroll(100);	
+			</code>
+			</pre>
+			
+			</dd>
+			
+			
+			
+			<dt><code>$.mobile.activePage</code> (<em>property</em>)</dt>
+			<dd>Reference to the page currently in view.</dd>
+			
+			
+			
+			
+		</dl>			
+	</div><!-- /content -->
+	
+</div><!-- /page -->
+
+</body>
+</html>
