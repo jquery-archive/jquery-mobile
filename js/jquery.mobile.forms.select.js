@@ -8,11 +8,20 @@
 $.widget( "mobile.selectmenu", $.mobile.widget, {
 	options: {
 		theme: undefined,
-		disabled: false
+		disabled: false, 
+		icon: 'arrow-d',
+		iconpos: 'right',
+		inline: undefined,
+		corners: undefined,
+		shadow: undefined,
+		iconshadow: undefined
 	},
 	_create: function(){
 	
 		var self = this,
+		
+			o = this.options,
+			
 			select = this.element
 						.attr( "tabindex", "-1" )
 						.wrap( "<div class='ui-select'>" ),		
@@ -37,9 +46,13 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				.text( $( select[0].options.item(select[0].selectedIndex) ).text() )
 				.insertBefore( select )
 				.buttonMarkup({
-					iconpos: 'right',
-					icon: 'arrow-d',
-					theme: this.options.theme
+					theme: o.theme, 
+					icon: o.icon,
+					iconpos: o.iconpos,
+					inline: o.inline,
+					corners: o.corners,
+					shadow: o.shadow,
+					iconshadow: o.iconshadow
 				}),
 				
 			theme = /ui-btn-up-([a-z])/.exec( button.attr("class") )[1],

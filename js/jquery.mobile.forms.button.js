@@ -6,9 +6,18 @@
 */ 
 (function ( $ ) {
 $.widget( "mobile.button", $.mobile.widget, {
-	options: {},
+	options: {
+		theme: undefined, 
+		icon: undefined,
+		iconpos: undefined,
+		inline: undefined,
+		corners: undefined,
+		shadow: undefined,
+		iconshadow: undefined
+	},
 	_create: function(){
 		var $el = this.element,
+			o = this.options,
 			type = $el.attr('type');
 			$el
 				.addClass('ui-btn-hidden')
@@ -33,13 +42,13 @@ $.widget( "mobile.button", $.mobile.widget, {
 				return false;
 			})
 			.buttonMarkup({
-				theme: $el.data("theme"), 
-				icon: $el.data("icon"),
-				iconpos: $el.data("iconpos"),
-				inline: $el.data("inline"),
-				corners: $el.data("corners"),
-				shadow: $el.data("shadow"),
-				iconshadow: $el.data("icon-shadow")
+				theme: o.theme, 
+				icon: o.icon,
+				iconpos: o.iconpos,
+				inline: o.inline,
+				corners: o.corners,
+				shadow: o.shadow,
+				iconshadow: o.iconshadow
 			});
 	}
 });
