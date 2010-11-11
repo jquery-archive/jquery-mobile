@@ -19,9 +19,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			selectID = select.attr( "id" ),
 			
 			label = $( "label[for="+ selectID +"]" ).addClass( "ui-select" ),
-						
-			chooseText = label.text(),
-			
+									
 			buttonId = selectID + "-button",
 			
 			menuId = selectID + "-menu",
@@ -47,12 +45,13 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				
 			menuPage = $( "<div data-role='dialog' data-theme='"+ theme +"'>" +
 						"<div data-role='header'>" +
-							"<div class='ui-title'>" + chooseText + "</div>"+
+							"<div class='ui-title'>" + label.text() + "</div>"+
 						"</div>"+
 						"<div data-role='content'></div>"+
 					"</div>" )
 					.appendTo( $.pageContainer )
 					.page(),	
+					
 			menuPageContent = menuPage.find( ".ui-content" ),	
 					
 			screen = $( "<div>", {"class": "ui-listbox-screen ui-overlay ui-screen-hidden fade"})
@@ -72,6 +71,23 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				
 			menuType;	
 			
+		//expose to other methods	
+		$.extend(self, {
+			select: select,
+			selectID: selectID,
+			label: label,
+			buttonId:buttonId,
+			menuId:menuId,
+			thisPage:thisPage,
+			button:button,
+			menuPage:menuPage,
+			menuPageContent:menuPageContent,
+			screen:screen,
+			listbox:listbox,
+			list:list,
+			menuType:menuType
+		});
+					
 		//populate menu with options from select element
 		select.find( "option" ).each(function( i ){
 			var selected = (select[0].selectedIndex == i),
@@ -94,53 +110,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		list.listview();
 		
 		
-		
-		function showmenu(){
-			var menuHeight = list.outerHeight(),
-				scrollTop = $(window).scrollTop(),
-				btnOffset = button.offset().top,
-				screenHeight = window.innerHeight;
-			
-			if( scrollTop == 0 && btnOffset > screenHeight ){
-				thisPage.one('pagehide',function(){
-					$(this).data('lastScroll', btnOffset);
-				});	
-			}
-			
-			if( menuHeight > window.innerHeight - 80 || !$.support.scrollTop ){
-				menuType = "page";		
-				menuPageContent.append( list );
-				$.changePage(menuPage, 'pop', false, false);
-			}
-			else {
-				menuType = "overlay";
-				
-				screen
-					.height( $(document).height() )
-					.removeClass('ui-screen-hidden');
-					
-				listbox
-					.append( list )
-					.removeClass( "ui-listbox-hidden" )
-					.css({
-						top: $(window).scrollTop() + (window.innerHeight/2), 
-						"margin-top": -menuHeight/2,
-						left: window.innerWidth/2,
-						"margin-left": -1* listbox.outerWidth() / 2
-					})
-					.addClass("in");
-			}
-		};
-		
-		function hidemenu(){
-			if(menuType == "page"){			
-				$.changePage([menuPage,thisPage], 'pop', true, false);
-			}
-			else{
-				screen.addClass( "ui-screen-hidden" );
-				listbox.addClass( "ui-listbox-hidden" ).removeAttr( "style" ).removeClass("in");
-			}
-		};
+
 		
 		//page show/hide events
 		menuPage
@@ -167,9 +137,9 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		
 		//button events
 		button.mousedown(function(event){
-				showmenu();
-				return false;
-			});
+			self.open();
+			return false;
+		});
 		
 		//apply click events for items
 		list
@@ -199,15 +169,68 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				}
 				
 				//hide custom select
-				hidemenu();
+				self.close();
 				return false;
 			});	
 	
 		//hide on outside click
 		screen.click(function(){
-			hidemenu();
+			self.open();
 			return false;
 		});	
+	},
+	
+	open: function(){
+		var self = this,
+			menuHeight = self.list.outerHeight(),
+			scrollTop = $(window).scrollTop(),
+			btnOffset = self.button.offset().top,
+			screenHeight = window.innerHeight;
+		
+		
+		
+		if( menuHeight > screenHeight - 80 || !$.support.scrollTop ){
+			
+			//for webos (set lastscroll using button offset)
+			if( scrollTop == 0 && btnOffset > screenHeight ){
+				self.thisPage.one('pagehide',function(){
+					$(this).data('lastScroll', btnOffset);
+				});	
+			}
+		
+			self.menuType = "page";		
+			self.menuPageContent.append( self.list );
+			$.changePage(self.menuPage, 'pop', false, false);
+		}
+		else {
+			self.menuType = "overlay";
+			
+			self.screen
+				.height( $(document).height() )
+				.removeClass('ui-screen-hidden');
+				
+			self.listbox
+				.append( self.list )
+				.removeClass( "ui-listbox-hidden" )
+				.css({
+					top: scrollTop + (screenHeight/2), 
+					"margin-top": -menuHeight/2,
+					left: window.innerWidth/2,
+					"margin-left": -1* self.listbox.outerWidth() / 2
+				})
+				.addClass("in");
+		}
+	},
+	
+	close: function(){
+		var self = this;
+		if(self.menuType == "page"){			
+			$.changePage([self.menuPage,self.thisPage], 'pop', true, false);
+		}
+		else{
+			self.screen.addClass( "ui-screen-hidden" );
+			self.listbox.addClass( "ui-listbox-hidden" ).removeAttr( "style" ).removeClass("in");
+		}
 	},
 	
 	refresh: function(){
