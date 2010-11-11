@@ -70,8 +70,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				})
 				.appendTo( listbox ),
 				
-			menuType,
-			currScroll;	
+			menuType;	
 			
 		//populate menu with options from select element
 		select.find( "option" ).each(function( i ){
@@ -97,8 +96,16 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		
 		
 		function showmenu(){
-			var menuHeight = list.outerHeight();
-			currScroll = [ $(window).scrollLeft(), $(window).scrollTop() ];
+			var menuHeight = list.outerHeight(),
+				scrollTop = $(window).scrollTop(),
+				btnOffset = button.offset().top,
+				screenHeight = window.innerHeight;
+			
+			if( scrollTop == 0 && btnOffset > screenHeight ){
+				thisPage.one('pagehide',function(){
+					$(this).data('lastScroll', btnOffset);
+				});	
+			}
 			
 			if( menuHeight > window.innerHeight - 80 || !$.support.scrollTop ){
 				menuType = "page";		
@@ -142,7 +149,6 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				return false;
 			})
 			.bind("pagehide", function(){
-				window.scrollTo(currScroll[0], currScroll[1]);
 				select.focus();
 				listbox.append( list ).removeAttr('style');
 				return false;
