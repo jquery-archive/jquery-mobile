@@ -1,0 +1,79 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+	<meta charset="utf-8" /> 
+	<title>jQuery Mobile Docs - Targeting Orientation and Resolution</title> 
+	<link rel="stylesheet"  href="../../themes/default" /> 
+	<script type="text/javascript" src="../../js/"></script>
+</head> 
+<body> 
+
+<div data-role="page">
+
+	<div data-role="header">
+		<h1>Targeting Orientation and Resolution</h1>
+	</div><!-- /header -->
+
+	<div data-role="content" data-theme="c">
+			
+			
+			<h2>Media Query Helper Classes</h2>
+			<p>jQuery Mobile adds classes to the <code>HTML</code> element that mimic browser orientation and common min/max-width CSS media queries. These classes are updated on load, resize and orientationchange, allowing you to key off these classes in your CSS, to create <a href="http://www.alistapart.com/articles/responsive-web-design/">responsive layouts</a> - even in browsers that don't support media queries! </p>
+			
+			<h3>Orientation Classes</h3>
+			<p>The HTML element will always have a class of either "portrait" or "landscape", depending on the orientation of the browser or device. You can utilize these in your CSS like this:</p>
+			<pre>
+			<code>
+.portrait {
+	/* portrait orientation changes go here! */
+}
+.landscape {
+	/* landscape orientation changes go here! */
+}			
+			</code>
+			</pre>
+			
+			<h3>Min/Max Width Breakpoint Classes</h3>
+			<p>By default, we create min and max breakpoint classes at the following widths: <code>320</code>,<code>480</code>,<code>768</code>,<code>1024</code>. These translate to classes that look like this: "min-width-320px", "max-width-480px", and are meant to be used as a replacement of (or in addition to) the media query equivalents they mimic.</p>
+<pre>
+			<code>
+.myelement { 
+	float: none;
+}			
+.min-width-480px .myelement {
+	float: left;
+}		
+			</code>
+</pre>		
+			
+			<p>Many plugins in jQuery Mobile leverage these width breakpoints. For example, form elements float beside their labels when the browser is wider than 480 pixels. The CSS to support this behavior for form text inputs looks like this:</p>
+			
+<pre>
+			<code>
+label.ui-input-text { 
+	display: block; 
+}
+.min-width-480px label.ui-input-text { 
+	display: inline-block; 
+}
+			</code>
+</pre>		
+
+			<h3>Adding Width Breakpoints</h3>
+		<p>To utilize width breakpoints of your own, jQuery Mobile exposes the <code>$.mobile.addResolutionBreakpoints </code> function, which accepts either a single number or array of numbers that will be added to the min/max breakpoints whenever they apply.</p>
+<pre>
+			<code>
+//add a min/max class for 1200 pixel widths			
+$.mobile.addResolutionBreakpoints(1200);
+
+//add min/max classes for 1200, and 1440 pixel widths			
+$.mobile.addResolutionBreakpoints([1200, 1440]);
+			</code>
+</pre>	
+					
+		
+	</div><!-- /content -->
+</div><!-- /page -->
+
+</body>
+</html>
