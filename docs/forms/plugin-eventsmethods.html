@@ -1,0 +1,130 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+	<meta charset="utf-8" /> 
+	<title>jQuery Mobile Docs - Form Plugin Methods</title> 
+	<link rel="stylesheet"  href="../../themes/default" /> 
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	<script type="text/javascript" src="../../js/"></script>
+</head> 
+<body> 
+
+<div data-role="page">
+
+	<div data-role="header">
+		<h1>Form Plugin Methods</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+
+		<p>After jQuery Mobile auto-enhances form controls into custom controls, you can manipulate many of their properties via plugin methods. The currently available methods are listed below. Check Github for updates - we're working on complete coverage.</p>
+		
+		<h2>Selectmenu</h2>
+		<dl>
+			<dt>Methods</dt>
+			<dd><code>open</code> open a closed select menu</dd>
+			<dd>
+			<pre><code>
+$('select').selectmenu('open');			
+			</code></pre>
+			</dd>
+			
+			<dd><code>close</code> close an open select menu</dd>
+			<dd>
+			<pre><code>
+$('select').selectmenu('close');			
+			</code></pre>
+			</dd>
+			
+			<dd><code>refresh</code>: Update the custom menu to reflect the native select element's value. If the number of options in the select are different than the number of items in the custom menu, it'll rebuild the custom menu. Also, if you pass a true argument you can force the rebuild to happen.</dd>
+			<dd>
+			<pre><code>
+//refresh value			
+$('select').selectmenu('refresh');
+
+//refresh and force rebuild
+$('select').selectmenu('refresh', true);
+			</code></pre>
+			</dd>
+			
+			<dd><code>enable</code>: enable a disabled select.</dd>
+			<dd>
+			<pre><code>
+$('select').selectmenu('enable');			
+			</code></pre>
+			</dd>
+			
+			<dd><code>disable</code>: disable a select.</dd>
+			<dd>
+			<pre><code>
+$('select').selectmenu('disable');			
+			</code></pre>
+			</dd>
+			
+		</dl>	
+		
+		
+		
+		
+		
+		
+		<h2>Textinput</h2>
+		<dl>
+			<dt>Methods</dt>
+			
+			<dd><code>enable</code>: enable a disabled textinput/textarea.</dd>
+			<dd>
+			<pre><code>
+$('input').textinput('enable');			
+			</code></pre>
+			</dd>
+			
+			<dd><code>disable</code>: disable a textinput/textarea.</dd>
+			<dd>
+			<pre><code>
+$('textarea').textinput('disable');			
+			</code></pre>
+			</dd>
+			
+		</dl>	
+		
+		
+		
+		
+				
+		<h2>checkboxradio</h2>
+		<dl>
+			<dt>Methods</dt>
+			
+			<dd><code>enable</code>: enable a disabled checkboxradio.</dd>
+			<dd>
+			<pre><code>
+$('input').checkboxradio('enable');			
+			</code></pre>
+			</dd>
+			
+			<dd><code>disable</code>: disable a checkboxradio.</dd>
+			<dd>
+			<pre><code>
+$('textarea').checkboxradio('disable');			
+			</code></pre>
+			</dd>
+			
+			<dd><code>refresh</code>: refresh a checkboxradio's value.</dd>
+			<dd>
+			<pre><code>
+$('textarea').checkboxradio('refresh');			
+			</code></pre>
+			</dd>
+		</dl>	
+		
+		
+		
+		
+						
+	</div><!-- /content -->
+	
+</div><!-- /page -->
+
+</body>
+</html>
