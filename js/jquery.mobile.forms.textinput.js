@@ -7,7 +7,7 @@
 (function ( $ ) {
 $.widget( "mobile.textinput", $.mobile.widget, {
 	options: {
-		theme: undefined
+		theme: null
 	},
 	_create: function(){
 		var input = this.element,
