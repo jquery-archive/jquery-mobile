@@ -7,14 +7,14 @@
 (function ( $ ) {
 $.widget( "mobile.selectmenu", $.mobile.widget, {
 	options: {
-		theme: undefined,
+		theme: null,
 		disabled: false, 
 		icon: 'arrow-d',
 		iconpos: 'right',
-		inline: undefined,
-		corners: undefined,
-		shadow: undefined,
-		iconshadow: undefined
+		inline: null,
+		corners: true,
+		shadow: true,
+		iconshadow: true
 	},
 	_create: function(){
 	
