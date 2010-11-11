@@ -7,13 +7,13 @@
 (function ( $ ) {
 $.widget( "mobile.button", $.mobile.widget, {
 	options: {
-		theme: undefined, 
-		icon: undefined,
-		iconpos: undefined,
-		inline: undefined,
-		corners: undefined,
-		shadow: undefined,
-		iconshadow: undefined
+		theme: null, 
+		icon: null,
+		iconpos: null,
+		inline: null,
+		corners: true,
+		shadow: true,
+		iconshadow: true
 	},
 	_create: function(){
 		var $el = this.element,
