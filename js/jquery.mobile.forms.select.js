@@ -14,7 +14,9 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		inline: null,
 		corners: true,
 		shadow: true,
-		iconshadow: true
+		iconshadow: true,
+		menuPageTheme: 'b',
+		overlayTheme: 'a'
 	},
 	_create: function(){
 	
@@ -57,7 +59,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				
 			theme = /ui-btn-up-([a-z])/.exec( button.attr("class") )[1],
 				
-			menuPage = $( "<div data-role='dialog' data-theme='"+ theme +"'>" +
+			menuPage = $( "<div data-role='dialog' data-theme='"+ o.menuPageTheme +"'>" +
 						"<div data-role='header'>" +
 							"<div class='ui-title'>" + label.text() + "</div>"+
 						"</div>"+
@@ -71,7 +73,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			screen = $( "<div>", {"class": "ui-listbox-screen ui-overlay ui-screen-hidden fade"})
 						.appendTo( thisPage ),		
 								
-			listbox = $( "<div>", { "class": "ui-listbox ui-listbox-hidden ui-overlay-shadow ui-corner-all pop ui-body-" + theme } )
+			listbox = $( "<div>", { "class": "ui-listbox ui-listbox-hidden ui-overlay-shadow ui-corner-all pop ui-body-" + o.overlayTheme } )
 					.insertAfter(screen),
 					
 			list = $( "<ul>", { 
