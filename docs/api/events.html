@@ -16,9 +16,11 @@
 	</div><!-- /header -->
 
 	<div data-role="content">
-		<h2>Events in jQuery Mobile</h2>
+	
 
 		<p>jQuery Mobile offers several custom events that build upon native events to create useful hooks for development. Note that these events employ various touch, mouse, and window events, depending on event existence, so you can bind to them for use in both handheld and desktop environments. You can bind to these events like you would with other jQuery events, using <code>live()</code> or <code>bind()</code>.</p>
+		
+		<h2>Touch events</h2>
 		<dl>
 			<dt><code>tap</code></dt>
 			<dd>Triggers after a quick, complete touch event.</dd>
@@ -35,12 +37,17 @@
 			<dt><code>swiperight</code></dt>
 			<dd>Triggers when a swipe event occurred moving in the right direction.</dd>
 			
+		<h2>Orientation change event</h2>
+		<dl>
 			<dt><code>orientationchange</code></dt>
 			<dd>Triggers when a device orientation changes (by turning it vertically or horizontally). When bound to this event, your callback function can leverage a second argument, which contains an <code>orientation</code> property equal to either "portrait" or "landscape". These values are also added as classes to the HTML element, allowing you to leverage them in your CSS selectors. Note that we currently bind to the resize event when orientationChange is not natively supported.</dd>
+		</dl>
 			
+		<h2>Scroll events</h2>
+		<dl>
 			<dt><code>scrollstart</code></dt>
 			<dd>Triggers when a scroll begins. Note that iOS devices freeze DOM manipulation during scroll, queuing them to apply when the scroll finishes. We're currently investigating ways to allow DOM manipulations to apply before a scroll starts.</dd>
-			
+		<dl>	
 			<dt><code>scrollstop</code></dt>
 			<dd>Triggers when a scroll finishes.</dd>
 		</dl>	
