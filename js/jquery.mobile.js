@@ -1,5 +1,5 @@
 /*!
- * jQuery Mobile
+ * jQuery Mobile v@VERSION
  * http://jquerymobile.com/
  *
  * Copyright 2010, jQuery Project

@@ -1,5 +1,6 @@
 
 VER = $(shell cat version.txt)
+SED_VER = sed "s/@VERSION/${VER}/"
 
 DIR = jquery.mobile-${VER}
 MAX = ${DIR}.js
@@ -53,19 +54,19 @@ clean:
 	@@rm -rf ${DIR}*
 
 css:
-	@@head -8 js/jquery.mobile.js > ${CSS}
+	@@head -8 js/jquery.mobile.js | ${SED_VER} > ${CSS}
 	@@cat ${CSSFILES} >> ${CSS}
 
 cssmin: css
-	@@head -8 js/jquery.mobile.js > ${CSSMIN}
+	@@head -8 js/jquery.mobile.js | ${SED_VER} > ${CSSMIN}
 	@@java -jar build/yuicompressor-2.4.2.jar --type css ${CSS} >> ${CSSMIN}
 
 mobile:
-	@@head -8 js/jquery.mobile.js > ${MAX}
+	@@head -8 js/jquery.mobile.js | ${SED_VER} > ${MAX}
 	@@cat ${FILES} >> ${MAX}
 
 min: mobile
-	@@head -8 js/jquery.mobile.js > ${MIN}
+	@@head -8 js/jquery.mobile.js | ${SED_VER} > ${MIN}
 	@@java -jar build/google-compiler-20100917.jar --js ${MAX} --warning_level QUIET --js_output_file ${MIN}.tmp
 	@@cat ${MIN}.tmp >> ${MIN}
 	@@rm -f ${MIN}.tmp
