@@ -3,8 +3,8 @@
 	<head>
 	<meta charset="utf-8" /> 
 	<title>jQuery Mobile Docs - Events</title> 
-	<link rel="stylesheet"  href="../themes/default" /> 
-	<script type="text/javascript" src="../js/"></script>
+	<link rel="stylesheet"  href="../../themes/default" /> 
+	<script type="text/javascript" src="../../js/"></script>
 </head> 
 <body> 
 
@@ -63,8 +63,13 @@ $('div').live('pagehide',function(event, ui){
 		
 		<p>Note that by binding to <code>pagebeforecreate</code> and returning <code>false</code>, you can prevent the page plugin from making its manipulations.</p>
 		
+		<div class="ui-body ui-body-e">
+			<p><strong>Note on Page IDs: </strong> Page elements in jQuery Mobile utilize the <code>ID</code> attribute for storing the location from which they came. When you place an <code>ID</code> attribute on a page that is brought into jQuery Mobile's single-page environment through Ajax, jQuery Mobile wraps that page with a new "page" <code>div</code> element, preserving any CSS references to your <code>ID</code>. However, this means that your <code>ID</code> attribute is no longer on the "page" element, so you must keep this in mind when binding to page events (<code>pagebeforecreate</code>, <code>pagecreate</code>, etc). To avoid issues, try using a class if possible. </p>
+		</div>
+		
+		
 		<h3>Animation Events</h3>
-		<p>Currently, jQuery Mobile exposes the <code>animationComplete</code> event, which you can utilize after adding or removing a class that applies a CSS transition.</p>
+		<p>jQuery Mobile exposes the <code>animationComplete</code> plugin, which you can utilize after adding or removing a class that applies a CSS transition.</p>
 			
 	</div><!-- /content -->
 	
