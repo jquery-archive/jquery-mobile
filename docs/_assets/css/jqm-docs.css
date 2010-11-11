@@ -8,5 +8,5 @@
 h2 { margin-top:1.5em; }
 p code { font-size:1.2em; font-weight:bold; } 
 
-dt { font-weight: bold; margin-top: 2em; }
-dt code { font-size:1.3em; line-height:150%; }
+dt { font-weight: bold; margin: 2em 0 .5em; }
+dt code, dd code { font-size:1.3em; line-height:150%; }
