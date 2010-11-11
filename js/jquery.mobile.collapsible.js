@@ -11,7 +11,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 		collapseCueText: ' click to collapse contents',
 		collapsed: false,
 		heading: '>:header,>legend',
-		theme: undefined,
+		theme: null,
 		iconTheme: 'd'
 	},
 	_create: function(){
