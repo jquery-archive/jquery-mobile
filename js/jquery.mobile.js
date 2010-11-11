@@ -10,7 +10,7 @@
 (function( $, window, undefined ) {
 	
 	//jQuery.mobile configurable options
-	$.mobile = {
+	$.extend( $.mobile, {
 		
 		//define the url parameter used for referencing widget-generated sub-pages. 
 		//Translates to to example.html&ui-page=subpageIdentifier
@@ -53,7 +53,7 @@
 		gradeA: function(){
 			return $.support.mediaquery;
 		}
-	};
+	});
 	
 	//trigger mobileinit event - useful hook for configuring $.mobile settings before they're used
 	$( window.document ).trigger('mobileinit');
