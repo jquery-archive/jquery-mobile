@@ -8,7 +8,7 @@
 $.widget( "mobile.navbar", $.mobile.widget, {
 	options: {
 		iconpos: 'top',
-		grid: 'a'
+		grid: null
 	},
 	_create: function(){
 		var $navbar = this.element,

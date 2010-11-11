@@ -8,31 +8,31 @@
 $.fn.grid = function(options){
 	return $(this).each(function(){
 		var o = $.extend({
-			grid: 'a'
+			grid: null
 		},options);
-		
-		$(this).addClass('ui-grid-' + o.grid);
+	
 			
 		var $kids = $(this).children(),
+			gridCols = {a: 2, b:3, c:4, d:5},
+			grid = o.grid,
 			iterator;
 			
-			switch( o.grid ){
-				case 'a':
-					iterator = 2;
-				break;
-				case 'b':
-					iterator = 3;
-				break;
-				case 'c':
-					iterator = 4;
-				break;
-				case 'd':
-					iterator = 5;
-				break;
+			if( !grid ){
+				if( $kids.length <= 5 ){
+					for(var letter in gridCols){
+						if(gridCols[letter] == $kids.length){ grid = letter; }
+					}
+				}
+				else{
+					grid = 'a';
+				}
 			}
-		
-			$kids.filter(':nth-child(' + iterator + 'n+1)').addClass('ui-block-a');
-			$kids.filter(':nth-child(' + iterator + 'n+2)').addClass('ui-block-b');
+			iterator = gridCols[grid];
+			
+		$(this).addClass('ui-grid-' + grid);
+	
+		$kids.filter(':nth-child(' + iterator + 'n+1)').addClass('ui-block-a');
+		$kids.filter(':nth-child(' + iterator + 'n+2)').addClass('ui-block-b');
 			
 		if(iterator > 2){	
 			$kids.filter(':nth-child(3n+3)').addClass('ui-block-c');
