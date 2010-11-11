@@ -7,7 +7,8 @@
 (function ( $ ) {
 $.widget( "mobile.selectmenu", $.mobile.widget, {
 	options: {
-		theme: undefined
+		theme: undefined,
+		disabled: false
 	},
 	_create: function(){
 	
@@ -91,6 +92,9 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		
 		//create list from select, update state
 		self.refresh();
+		
+		//disable if specified
+		if( this.options.disabled ){ this.disable(); }
 
 		//events on native select
 		select
@@ -173,6 +177,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 	},
 	
 	open: function(){
+		if( this.options.disabled ){ return; }
+		
 		var self = this,
 			menuHeight = self.list.outerHeight(),
 			scrollTop = $(window).scrollTop(),
@@ -221,6 +227,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 	},
 	
 	close: function(){
+		if( this.options.disabled ){ return; }
 		var self = this;
 		
 		function focusButton(){
@@ -243,11 +250,13 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 	disable: function(){
 		this.element.attr("disabled",true);
 		this.button.addClass('ui-disabled').attr("aria-disabled", true);
+		return this._setOption( "disabled", true );
 	},
 	
 	enable: function(){
 		this.element.attr("disabled",false);
 		this.button.removeClass('ui-disabled').attr("aria-disabled", false);
+		return this._setOption( "disabled", false );
 	}
 });
 })( jQuery );
