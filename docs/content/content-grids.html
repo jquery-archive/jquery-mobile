@@ -84,7 +84,7 @@
 			<div class="ui-block-a"><div class="ui-bar ui-bar-e" style="height:120px">Block A</div></div>
 			<div class="ui-block-b"><div class="ui-bar ui-bar-e" style="height:120px">Block B</div></div>
 			<div class="ui-block-c"><div class="ui-bar ui-bar-e" style="height:120px">Block C</div></div>
-		</div><!-- /grid-a -->
+		</div><!-- /grid-b -->
 		
 		<p>And an example of a 3 column grid with buttons inside:</p>
 
@@ -94,7 +94,44 @@
 				<div class="ui-block-b"><button type="submit" data-theme="b">Yes</button></div>  
 	    </fieldset>
 		
-	
+		<h2>Four-column grids</h2>
+		
+		<p>A four-column, 25/25/25/25% grid is created by specifying <code>class=ui-grid-c</code> on the parent and adding a fourth block.</p>
+			
+		<div class="ui-grid-c">
+			<div class="ui-block-a"><div class="ui-bar ui-bar-e" style="height:120px">A</div></div>
+			<div class="ui-block-b"><div class="ui-bar ui-bar-e" style="height:120px">B</div></div>
+			<div class="ui-block-c"><div class="ui-bar ui-bar-e" style="height:120px">C</div></div>
+			<div class="ui-block-d"><div class="ui-bar ui-bar-e" style="height:120px">D</div></div>
+		</div><!-- /grid-c -->
+		
+		<h2>Five-column grids</h2>
+		<p>A five-column, 20/20/20/20/20% grid is created by specifying <code>class=ui-grid-d</code> on the parent and adding a fourth block.</p>
+			
+		<div class="ui-grid-d">
+			<div class="ui-block-a"><div class="ui-bar ui-bar-e" style="height:120px">A</div></div>
+			<div class="ui-block-b"><div class="ui-bar ui-bar-e" style="height:120px">B</div></div>
+			<div class="ui-block-c"><div class="ui-bar ui-bar-e" style="height:120px">C</div></div>
+			<div class="ui-block-d"><div class="ui-bar ui-bar-e" style="height:120px">D</div></div>
+			<div class="ui-block-e"><div class="ui-bar ui-bar-e" style="height:120px">E</div></div>
+		</div><!-- /grid-c -->
+		
+		<h2>Multiple row grids</h2>
+		
+		<p>Grids are designed to wrap to multiple rows of items. For example, if you specify a 3-column grid (ui-grid-b) on a container that has nine child blocks, it will wrap to 3 rows of 3 items each. There is a CSS rule to clear the floats and start a new line when the <code>class=ui-block-a</code> is seen so make sure to assign block classes in a repeating sequence (a, b, c, a, b, c, etc.) that maps to the grid type:</p>
+			
+		<div class="ui-grid-b">
+			<div class="ui-block-a"><div class="ui-bar ui-bar-e" style="height:120px">A</div></div>
+			<div class="ui-block-b"><div class="ui-bar ui-bar-e" style="height:120px">B</div></div>
+			<div class="ui-block-c"><div class="ui-bar ui-bar-e" style="height:120px">C</div></div>
+			<div class="ui-block-a"><div class="ui-bar ui-bar-e" style="height:120px">A</div></div>
+			<div class="ui-block-b"><div class="ui-bar ui-bar-e" style="height:120px">B</div></div>
+			<div class="ui-block-c"><div class="ui-bar ui-bar-e" style="height:120px">C</div></div>
+			<div class="ui-block-a"><div class="ui-bar ui-bar-e" style="height:120px">A</div></div>
+			<div class="ui-block-b"><div class="ui-bar ui-bar-e" style="height:120px">B</div></div>
+			<div class="ui-block-c"><div class="ui-bar ui-bar-e" style="height:120px">C</div></div>
+		</div><!-- /grid-c -->
+		
 	</div><!-- /content -->
 </div><!-- /page -->
 
