@@ -3,7 +3,7 @@
 	$.themeswitcher = function(){
 		var themesDir = 'http://jquerymobile.com/test/themes/',
 			themes = ['default','valencia'],
-			currentPage = $.activePage,
+			currentPage = $.mobile.activePage,
 			menuPage = $( '<div data-role=\'dialog\' data-theme=\'a\'>' +
 						'<div data-role=\'header\' data-theme=\'b\'>' +
 							'<div class=\'ui-title\'>Switch Theme:</div>'+
