@@ -88,44 +88,11 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			menuType:menuType
 		});
 					
-		//populate menu with options from select element
-		select.find( "option" ).each(function( i ){
-			var selected = (select[0].selectedIndex == i),
-				anchor = $("<a>", { 
-							"aria-selected": selected, 
-							"role": "option", 
-							"href": "#"
-						})
-						.text( $(this).text() );
-			
-			$( "<li>", {
-					"class": selected ? "ui-btn-active" : '', 
-					"data-icon": "checkbox-on"
-				})
-				.append( anchor )
-				.appendTo( list );
-		});
 		
-		//now populated, create listview
-		list.listview();
-		
-		
+		//create list from select, update state
+		self.refresh();
 
-		
-		//page show/hide events
-		menuPage
-			.bind("pageshow", function(){
-				list.find( ".ui-btn-active" ).focus();
-				return false;
-			})
-			.bind("pagehide", function(){
-				select.focus();
-				listbox.append( list ).removeAttr('style');
-				return false;
-			});
-			
-
-		//select properties,events
+		//events on native select
 		select
 			.change(function(){ 
 				self.refresh();
@@ -136,27 +103,13 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			});		
 		
 		//button events
-		button.mousedown(function(event){
+		button.click(function(event){
 			self.open();
 			return false;
 		});
 		
-		//apply click events for items
-		list
-			.find("li")
-			.mousedown(function(){
-				//deselect active
-				list.find( "li" )
-					.removeClass( "ui-btn-active" )
-					.children(0)
-					.attr( "aria-selected", "false");
-					
-				//select this one	
-				$(this)
-					.addClass( "ui-btn-active" )
-					.find( "a" )
-					.attr( "aria-selected", "true");
-				
+		//events for list items
+		list.delegate("li",'click', function(){
 				//update select	
 				var newIndex = list.find( "li" ).index( this ),
 					prevIndex = select[0].selectedIndex;
@@ -168,16 +121,55 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					select.trigger( "change" ); 
 				}
 				
+				self.refresh();
+				
 				//hide custom select
 				self.close();
 				return false;
 			});	
 	
-		//hide on outside click
+		//events on "screen" overlay
 		screen.click(function(){
-			self.open();
+			self.close();
 			return false;
 		});	
+	},
+	
+	_buildList: function(){
+		var self = this;
+		
+		self.list.empty().filter('.ui-listview').listview('destroy');
+		
+		//populate menu with options from select element
+		self.select.find( "option" ).each(function( i ){
+				var anchor = $("<a>", { 
+							"role": "option", 
+							"href": "#"
+						})
+						.text( $(this).text() );
+			
+			$( "<li>", {"data-icon": "checkbox-on"})
+				.append( anchor )
+				.appendTo( self.list );
+		});
+		
+		//now populated, create listview
+		self.list.listview();		
+	},
+	
+	refresh: function( forceRebuild ){
+		var self = this,
+			select = this.element,
+			selected = select[0].selectedIndex;
+		
+		if( forceRebuild || select[0].options.length > self.list.find('li').length ){
+			self._buildList();
+		}	
+			
+		self.button.find( ".ui-btn-text" ).text( $(select[0].options.item(selected)).text() ); 
+		self.list
+			.find('li').removeClass( $.mobile.activeBtnClass ).attr('aria-selected', false)
+			.eq(selected).addClass( $.mobile.activeBtnClass ).find('a').attr('aria-selected', true);		
 	},
 	
 	open: function(){
@@ -186,8 +178,10 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			scrollTop = $(window).scrollTop(),
 			btnOffset = self.button.offset().top,
 			screenHeight = window.innerHeight;
-		
-		
+			
+		function focusMenuItem(){
+			self.list.find( ".ui-btn-active" ).focus();
+		}
 		
 		if( menuHeight > screenHeight - 80 || !$.support.scrollTop ){
 			
@@ -197,6 +191,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					$(this).data('lastScroll', btnOffset);
 				});	
 			}
+			
+			self.menuPage.one('pageshow',focusMenuItem);
 		
 			self.menuType = "page";		
 			self.menuPageContent.append( self.list );
@@ -219,24 +215,29 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					"margin-left": -1* self.listbox.outerWidth() / 2
 				})
 				.addClass("in");
+				
+			focusMenuItem();	
 		}
 	},
 	
 	close: function(){
 		var self = this;
+		
+		function focusButton(){
+			self.select.focus();
+			self.listbox.append(self.list);
+		}
+		
 		if(self.menuType == "page"){			
 			$.changePage([self.menuPage,self.thisPage], 'pop', true, false);
+			self.menuPage.one("pagehide",focusButton);
 		}
 		else{
 			self.screen.addClass( "ui-screen-hidden" );
 			self.listbox.addClass( "ui-listbox-hidden" ).removeAttr( "style" ).removeClass("in");
+			focusButton();
 		}
-	},
-	
-	refresh: function(){
-		var select = this.element;
-		select.prev().find( ".ui-btn-text" ).text( $(select[0].options.item(select[0].selectedIndex)).text() ); 
-		//TODO - refresh should populate the menu with new options from the select
+		
 	},
 	
 	disable: function(){
