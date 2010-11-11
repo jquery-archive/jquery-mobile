@@ -47,7 +47,7 @@
 		metaViewportContent: "width=device-width, minimum-scale=1, maximum-scale=1",
 		
 		//additional markup to prepend to head
-		headExtras: undefined,
+		headExtras: null,
 		
 		//support conditions that must be met in order to proceed
 		gradeA: function(){
