@@ -4,7 +4,7 @@
 * Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
 * Note: Code is in draft form and is subject to change 
 */
-(function($){
+(function($, undefined ) {
 $.fn.fieldcontain = function(options){
 	var o = $.extend({
 		theme: 'c'

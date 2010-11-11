@@ -4,11 +4,20 @@
 * Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
 * Note: Code is in draft form and is subject to change 
 */ 
-(function ( $ ) {
+(function($, undefined ) {
 $.widget( "mobile.button", $.mobile.widget, {
-	options: {},
+	options: {
+		theme: null, 
+		icon: null,
+		iconpos: null,
+		inline: null,
+		corners: true,
+		shadow: true,
+		iconshadow: true
+	},
 	_create: function(){
 		var $el = this.element,
+			o = this.options,
 			type = $el.attr('type');
 			$el
 				.addClass('ui-btn-hidden')
@@ -33,13 +42,13 @@ $.widget( "mobile.button", $.mobile.widget, {
 				return false;
 			})
 			.buttonMarkup({
-				theme: $el.data("theme"), 
-				icon: $el.data("icon"),
-				iconpos: $el.data("iconpos"),
-				inline: $el.data("inline"),
-				corners: $el.data("corners"),
-				shadow: $el.data("shadow"),
-				iconshadow: $el.data("icon-shadow")
+				theme: o.theme, 
+				icon: o.icon,
+				iconpos: o.iconpos,
+				inline: o.inline,
+				corners: o.corners,
+				shadow: o.shadow,
+				iconshadow: o.iconshadow
 			});
 	}
 });

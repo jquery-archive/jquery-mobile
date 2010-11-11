@@ -4,35 +4,37 @@
 * Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
 * Note: Code is in draft form and is subject to change 
 */  
-(function ( $ ) {
+(function($, undefined ) {
 $.widget( "mobile.slider", $.mobile.widget, {
 	options: {
-		theme: undefined,
-		trackTheme: undefined
+		theme: null,
+		trackTheme: null
 	},
 	_create: function(){	
 		var control = this.element,
-			themedParent = control.parents('[class*=ui-bar-],[class*=ui-body-]').eq(0),			
+		
+			parentTheme = control.parents('[class*=ui-bar-],[class*=ui-body-]').eq(0),	
 			
-			o = $.extend({
-				trackTheme: themedParent.length ? themedParent.attr('class').match(/ui-(bar|body)-([a-z])/)[2] : 'c',
-				theme: themedParent.length ? themedParent.attr('class').match(/ui-(bar|body)-([a-z])/)[2] : 'c'
-			},this.options),
+			parentTheme = parentTheme.length ? parentTheme.attr('class').match(/ui-(bar|body)-([a-z])/)[2] : 'c',
+					
+			theme = this.options.theme ? this.options.theme : parentTheme,
+			
+			trackTheme = this.options.trackTheme ? this.options.trackTheme : parentTheme,
 			
 			cType = control[0].nodeName.toLowerCase(),
 			selectClass = (cType == 'select') ? 'ui-slider-switch' : '',
 			controlID = control.attr('id'),
 			labelID = controlID + '-label',
 			label = $('[for='+ controlID +']').attr('id',labelID),
-			val = (cType == 'input') ? control.val() : control[0].selectedIndex,
+			val = (cType == 'input') ? parseFloat(control.val()) : control[0].selectedIndex,
 			min = (cType == 'input') ? parseFloat(control.attr('min')) : 0,
 			max = (cType == 'input') ? parseFloat(control.attr('max')) : control.find('option').length-1,
-			percent = val / (max - min) * 100,
+			percent = ((parseFloat(val) - min) / (max - min)) * 100,
 			snappedPercent = percent,
-			slider = $('<div class="ui-slider '+ selectClass +' ui-btn-down-'+o.trackTheme+' ui-btn-corner-all" role="application"></div>'),
+			slider = $('<div class="ui-slider '+ selectClass +' ui-btn-down-'+ trackTheme+' ui-btn-corner-all" role="application"></div>'),
 			handle = $('<a href="#" class="ui-slider-handle"></a>')
 				.appendTo(slider)
-				.buttonMarkup({corners: true, theme: o.theme, shadow: true})
+				.buttonMarkup({corners: true, theme: theme, shadow: true})
 				.attr({
 					'role': 'slider',
 					'aria-valuemin': min,
@@ -44,6 +46,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				}),
 			dragging = false;
 			
+						
 		if(cType == 'select'){
 			slider.wrapInner('<div class="ui-slider-inneroffset"></div>');
 			var options = control.find('option');
@@ -51,7 +54,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			control.find('option').each(function(i){
 				var side = (i==0) ?'b':'a',
 					corners = (i==0) ? 'right' :'left',
-					theme = (i==0) ? ' ui-btn-down-' + o.trackTheme :' ui-btn-active';
+					theme = (i==0) ? ' ui-btn-down-' + trackTheme :' ui-btn-active';
 				$('<div class="ui-slider-labelbg ui-slider-labelbg-'+ side + theme +' ui-btn-corner-'+ corners+'"></div>').prependTo(slider);	
 				$('<span class="ui-slider-label ui-slider-label-'+ side + theme +' ui-btn-corner-'+ corners+'" role="img">'+$(this).text()+'</span>').prependTo(handle);
 			});
@@ -70,11 +73,11 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			
 		function slideUpdate(event, val){
 			if (val){
-				percent = parseFloat(val) / (max - min) * 100;
+				percent = (parseFloat(val) - min) / (max - min) * 100;
 			} else {
 				var data = event.originalEvent.touches ? event.originalEvent.touches[ 0 ] : event,
 					// a slight tolerance helped get to the ends of the slider
-					tol = 4;
+					tol = 8;
 				if( !dragging 
 						|| data.pageX < slider.offset().left - tol 
 						|| data.pageX > slider.offset().left + slider.width() + tol ){ 
@@ -82,16 +85,18 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				}
 				percent = Math.round(((data.pageX - slider.offset().left) / slider.width() ) * 100);
 			}
+			
 			if( percent < 0 ) { percent = 0; }
 			if( percent > 100 ) { percent = 100; }
-			var newval = Math.round( (percent/100) * max );
+			var newval = Math.round( (percent/100) * (max-min) ) + min;
+			
 			if( newval < min ) { newval = min; }
 			if( newval > max ) { newval = max; }
 			//flip the stack of the bg colors
 			if(percent > 60 && cType == 'select'){ 
 				
 			}
-			snappedPercent = Math.round( newval / max * 100 );
+			snappedPercent = Math.round( newval / (max-min) * 100 );
 			handle.css('left', percent + '%');
 			handle.attr({
 					'aria-valuenow': (cType == 'input') ? newval : control.find('option').eq(newval).attr('value'),

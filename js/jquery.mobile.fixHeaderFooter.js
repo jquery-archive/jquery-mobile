@@ -4,7 +4,7 @@
 * Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
 * Note: Code is in draft form and is subject to change 
 */
-(function($){
+(function($, undefined ) {
 $.fn.fixHeaderFooter = function(options){
 	if( !$.support.scrollTop ){ return $(this); }
 	return $(this).each(function(){
@@ -58,7 +58,7 @@ $.fixedToolbars = (function(){
 		//function to return another footer already in the dom with the same data-id
 		function findStickyFooter(el){
 			var thisFooter = el.find('[data-role="footer"]');
-			return jQuery( '.ui-footer[data-id="'+ thisFooter.data('id') +'"]:not(.ui-footer-duplicate)' ).not(thisFooter);
+			return $( '.ui-footer[data-id="'+ thisFooter.data('id') +'"]:not(.ui-footer-duplicate)' ).not(thisFooter);
 		}
 		
 		//before page is shown, check for duplicate footer
@@ -85,9 +85,38 @@ $.fixedToolbars = (function(){
 		
 	});
 	
+	// element.getBoundingClientRect() is broken in iOS 3.2.1 on the iPad. The
+	// coordinates inside of the rect it returns don't have the page scroll position
+	// factored out of it like the other platforms do. To get around this,
+	// we'll just calculate the top offset the old fashioned way until core has
+	// a chance to figure out how to handle this situation.
+	//
+	// TODO: We'll need to get rid of getOffsetTop() once a fix gets folded into core.
+
+	function getOffsetTop(ele)
+	{
+		var top = 0;
+		if (ele)
+		{
+			var op = ele.offsetParent, body = document.body;
+			top = ele.offsetTop;
+			while (ele && ele != body)
+			{
+				top += ele.scrollTop || 0;
+				if (ele == op)
+				{
+					top += op.offsetTop;
+					op = ele.offsetParent;
+				}
+				ele = ele.parentNode;
+			}
+		}
+		return top;
+	}
+
 	function setTop(el){
 		var fromTop = $(window).scrollTop(),
-			thisTop = el.offset().top,
+			thisTop = getOffsetTop(el[0]), // el.offset().top returns the wrong value on iPad iOS 3.2.1, call our workaround instead.
 			thisCSStop = el.css('top') == 'auto' ? 0 : parseFloat(el.css('top')),
 			screenHeight = window.innerHeight,
 			thisHeight = el.outerHeight(),
@@ -99,8 +128,9 @@ $.fixedToolbars = (function(){
 			return el.css('top', ( useRelative ) ? relval : fromTop);
 		}
 		else{
-			relval = -1 * (thisTop - (fromTop + screenHeight) + thisCSStop + thisHeight);
-			if( relval > thisTop ){ relval = 0; }
+			//relval = -1 * (thisTop - (fromTop + screenHeight) + thisCSStop + thisHeight);
+			//if( relval > thisTop ){ relval = 0; }
+			relval = fromTop + screenHeight - thisHeight - thisTop;
 			return el.css('top', ( useRelative ) ? relval : fromTop + screenHeight - thisHeight );
 		}
 	}

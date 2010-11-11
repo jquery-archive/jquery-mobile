@@ -4,15 +4,14 @@
 * Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
 * Note: Code is in draft form and is subject to change 
 */  
-(function ( $ ) {
+(function($, undefined ) {
 $.widget( "mobile.checkboxradio", $.mobile.widget, {
 	options: {
-		theme: undefined,
-		icon: undefined
+		theme: null
 	},
 	_create: function(){
 		var input = this.element,
-			label = jQuery("label[for='" + input.attr( "id" ) + "']"),
+			label = $("label[for='" + input.attr( "id" ) + "']"),
 			inputtype = input.attr( "type" ),
 			checkedicon = "ui-icon-" + inputtype + "-on",
 			uncheckedicon = "ui-icon-" + inputtype + "-off";
@@ -21,9 +20,8 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 						
 		label
 			.buttonMarkup({
-				iconpos: this.options.icon,
 				theme: this.options.theme,
-				icon: this.options.icon ? uncheckedicon : ( this.element.parents( "[data-type='horizontal']" ).length ? undefined : uncheckedicon ),
+				icon: this.element.parents( "[data-type='horizontal']" ).length ? undefined : uncheckedicon,
 				shadow: false
 			});
 		
@@ -55,7 +53,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			.bind({
 
 				click: function() {
-					jQuery( "input[name='" + input.attr( "name" ) + "'][type='" + inputtype + "']" ).checkboxradio( "refresh" );
+					$( "input[name='" + input.attr( "name" ) + "'][type='" + inputtype + "']" ).checkboxradio( "refresh" );
 				},
 
 				focus: function() { 
@@ -73,7 +71,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 	
 	refresh: function( ){
 		var input = this.element,
-			label = jQuery("label[for='" + input.attr( "id" ) + "']"),
+			label = $("label[for='" + input.attr( "id" ) + "']"),
 			inputtype = input.attr( "type" ),
 			icon = label.find( ".ui-icon" ),
 			checkedicon = "ui-icon-" + inputtype + "-on",

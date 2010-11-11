@@ -1,4 +1,4 @@
-(function( $ ) {
+(function($, undefined ) {
 
 $.mobile.listview.prototype.options.filter = false;
 

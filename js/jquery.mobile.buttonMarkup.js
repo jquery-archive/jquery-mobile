@@ -4,12 +4,12 @@
 * Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
 * Note: Code is in draft form and is subject to change 
 */ 
-(function( jQuery ) {
+(function($, undefined ) {
 
-jQuery.fn.buttonMarkup = function( options ){
+$.fn.buttonMarkup = function( options ){
 	return this.each( function() {
-		var el = jQuery( this ),
-		    o = jQuery.extend( {}, jQuery.fn.buttonMarkup.defaults, el.data(), options),
+		var el = $( this ),
+		    o = $.extend( {}, $.fn.buttonMarkup.defaults, el.data(), options),
 
 			// Classes Defined
 			buttonClass,
@@ -74,7 +74,7 @@ jQuery.fn.buttonMarkup = function( options ){
 	});		
 };
 
-jQuery.fn.buttonMarkup.defaults = {
+$.fn.buttonMarkup.defaults = {
 	corners: true,
 	shadow: true,
 	iconshadow: true,
@@ -82,22 +82,22 @@ jQuery.fn.buttonMarkup.defaults = {
 };
 
 var attachEvents = function() {
-	jQuery(".ui-btn").live({
+	$(".ui-btn").live({
 		mousedown: function() {
-			var theme = jQuery(this).attr( "data-theme" );
-			jQuery(this).removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-down-" + theme );
+			var theme = $(this).attr( "data-theme" );
+			$(this).removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-down-" + theme );
 		},
 		mouseup: function() {
-			var theme = jQuery(this).attr( "data-theme" );
-			jQuery(this).removeClass( "ui-btn-down-" + theme ).addClass( "ui-btn-up-" + theme );
+			var theme = $(this).attr( "data-theme" );
+			$(this).removeClass( "ui-btn-down-" + theme ).addClass( "ui-btn-up-" + theme );
 		},
 		"mouseover focus": function() {
-			var theme = jQuery(this).attr( "data-theme" );
-			jQuery(this).removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-hover-" + theme );
+			var theme = $(this).attr( "data-theme" );
+			$(this).removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-hover-" + theme );
 		},
 		"mouseout blur": function() {
-			var theme = jQuery(this).attr( "data-theme" );
-			jQuery(this).removeClass( "ui-btn-hover-" + theme ).addClass( "ui-btn-up-" + theme );
+			var theme = $(this).attr( "data-theme" );
+			$(this).removeClass( "ui-btn-hover-" + theme ).addClass( "ui-btn-up-" + theme );
 		}
 	});
 

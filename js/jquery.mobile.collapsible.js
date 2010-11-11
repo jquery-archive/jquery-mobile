@@ -4,14 +4,14 @@
 * Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
 * Note: Code is in draft form and is subject to change 
 */ 
-(function ( $ ) {
+(function($, undefined ) {
 $.widget( "mobile.collapsible", $.mobile.widget, {
 	options: {
 		expandCueText: ' click to expand contents',
 		collapseCueText: ' click to collapse contents',
 		collapsed: false,
 		heading: '>:header,>legend',
-		theme: undefined,
+		theme: null,
 		iconTheme: 'd'
 	},
 	_create: function(){
