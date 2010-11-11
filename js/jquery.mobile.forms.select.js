@@ -246,13 +246,16 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		var self = this;
 		
 		function focusButton(){
-			self.select.focus();
-			self.listbox.append(self.list);
+			setTimeout(self.button.focus, 40);
+			self.listbox.removeAttr('style').append( self.list );
 		}
 		
 		if(self.menuType == "page"){			
 			$.changePage([self.menuPage,self.thisPage], 'pop', true, false);
-			self.menuPage.one("pagehide",focusButton);
+			self.menuPage.one("pagehide",function(){
+				focusButton();
+				//return false;
+			});
 		}
 		else{
 			self.screen.addClass( "ui-screen-hidden" );
