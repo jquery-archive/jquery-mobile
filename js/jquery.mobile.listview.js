@@ -125,7 +125,7 @@ jQuery.widget( "mobile.listview", jQuery.mobile.widget, {
 
 		item.find( "h1, h2, h3, h4, h5, h6" ).addClass( "ui-li-heading" );
 
-		item.find( "p, ul, dl" ).addClass( "ui-li-desc" );
+		item.find( "p, dl" ).addClass( "ui-li-desc" );
 
 		item.find( "img" ).addClass( "ui-li-thumb" ).each(function() {
 			jQuery( this ).closest( "li" )
