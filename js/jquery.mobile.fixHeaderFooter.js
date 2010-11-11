@@ -4,7 +4,7 @@
 * Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
 * Note: Code is in draft form and is subject to change 
 */
-(function($){
+(function($, undefined ) {
 $.fn.fixHeaderFooter = function(options){
 	if( !$.support.scrollTop ){ return $(this); }
 	return $(this).each(function(){
@@ -58,7 +58,7 @@ $.fixedToolbars = (function(){
 		//function to return another footer already in the dom with the same data-id
 		function findStickyFooter(el){
 			var thisFooter = el.find('[data-role="footer"]');
-			return jQuery( '.ui-footer[data-id="'+ thisFooter.data('id') +'"]:not(.ui-footer-duplicate)' ).not(thisFooter);
+			return $( '.ui-footer[data-id="'+ thisFooter.data('id') +'"]:not(.ui-footer-duplicate)' ).not(thisFooter);
 		}
 		
 		//before page is shown, check for duplicate footer

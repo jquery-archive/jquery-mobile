@@ -10,7 +10,7 @@
 (function( $, window, undefined ) {
 	
 	//jQuery.mobile configurable options
-	jQuery.mobile = {
+	$.mobile = {
 		
 		//define the url parameter used for referencing widget-generated sub-pages. 
 		//Translates to to example.html&ui-page=subpageIdentifier
@@ -51,7 +51,7 @@
 		
 		//support conditions that must be met in order to proceed
 		gradeA: function(){
-			return jQuery.support.mediaquery;
+			return $.support.mediaquery;
 		}
 	};
 	
@@ -60,14 +60,14 @@
 	
 	//if device support condition(s) aren't met, leave things as they are -> a basic, usable experience,
 	//otherwise, proceed with the enhancements
-	if ( !jQuery.mobile.gradeA() ) {
+	if ( !$.mobile.gradeA() ) {
 		return;
 	}	
 
 	//define vars for interal use
-	var $window = jQuery(window),
-		$html = jQuery('html'),
-		$head = jQuery('head'),
+	var $window = $(window),
+		$html = $('html'),
+		$head = $('head'),
 		
 		//to be populated at DOM ready
 		$body,
@@ -75,7 +75,7 @@
 		//loading div which appears during Ajax requests
 		//will not appear if $.mobile.loadingMessage is false
 		$loader = $.mobile.loadingMessage ? 
-			jQuery('<div class="ui-loader ui-body-a ui-corner-all">'+
+			$('<div class="ui-loader ui-body-a ui-corner-all">'+
 						'<span class="ui-icon ui-icon-loading spin"></span>'+
 						'<h1>'+ $.mobile.loadingMessage +'</h1>'+
 					'</div>')
@@ -140,12 +140,12 @@
 	// hide address bar
 	function silentScroll( ypos ) {
 		// prevent scrollstart and scrollstop events
-		jQuery.event.special.scrollstart.enabled = false;
+		$.event.special.scrollstart.enabled = false;
 		setTimeout(function() {
 			window.scrollTo( 0, ypos || 0 );
 		},20);	
 		setTimeout(function() {
-			jQuery.event.special.scrollstart.enabled = true;
+			$.event.special.scrollstart.enabled = true;
 		}, 150 );
 	}
 	
@@ -201,7 +201,7 @@
 	});	
 	
 	//click routing - direct to HTTP or Ajax, accordingly
-	jQuery( "a" ).live( "click", function(event) {
+	$( "a" ).live( "click", function(event) {
 		var $this = $(this),
 			//get href, remove same-domain protocol and host
 			href = $this.attr( "href" ).replace( location.protocol + "//" + location.host, ""),
@@ -352,7 +352,7 @@
 		function transitionPages() {
 				
 			//kill the keyboard
-			jQuery( window.document.activeElement ).blur();
+			$( window.document.activeElement ).blur();
 			
 			//get current scroll distance
 			var currScroll = $window.scrollTop();
@@ -415,12 +415,12 @@
 		
 		//get the actual file in a jq-mobile nested url
 		function getFileURL( url ){
-			return url.match( '&' + jQuery.mobile.subPageUrlKey ) ? url.split( '&' + jQuery.mobile.subPageUrlKey )[0] : url;
+			return url.match( '&' + $.mobile.subPageUrlKey ) ? url.split( '&' + $.mobile.subPageUrlKey )[0] : url;
 		}
 
 		//if url is a string
 		if( url ){
-			to = jQuery( "[id='" + url + "']" ),
+			to = $( "[id='" + url + "']" ),
 			fileUrl = getFileURL(url);
 		}
 		else{ //find base url of element, if avail
@@ -454,7 +454,7 @@
 				data: data,
 				success: function( html ) {
 					setBaseURL(fileUrl);
-					var all = jQuery("<div></div>");
+					var all = $("<div></div>");
 					//workaround to allow scripts to execute when included in page divs
 					all.get(0).innerHTML = html;
 					to = all.find('[data-role="page"]');
@@ -490,7 +490,7 @@
 				error: function() {
 					pageLoading( true );
 					removeActiveLinkClass(true);
-					jQuery("<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h1>Error Loading Page</h1></div>")
+					$("<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h1>Error Loading Page</h1></div>")
 						.css({ "display": "block", "opacity": 0.96, "top": $(window).scrollTop() + 100 })
 						.appendTo( $pageContainer )
 						.delay( 800 )
@@ -504,9 +504,9 @@
 	};
 
 	
-	jQuery(function() {
+	$(function() {
 
-		$body = jQuery( "body" );
+		$body = $( "body" );
 		pageLoading();
 		
 		// needs to be bound at domready (for IE6)
@@ -600,9 +600,9 @@
 	//animation complete callback
 	//TODO - update support test and create special event for transitions
 	//check out transitionEnd (opera per Paul's request)
-	jQuery.fn.animationComplete = function(callback){
-		if(jQuery.support.cssTransitions){
-			return jQuery(this).one('webkitAnimationEnd', callback);
+	$.fn.animationComplete = function(callback){
+		if($.support.cssTransitions){
+			return $(this).one('webkitAnimationEnd', callback);
 		}
 		else{
 			callback();
@@ -610,22 +610,22 @@
 	};	
 	
 	//TODO - add to jQuery.mobile, not $
-	jQuery.extend({
+	$.extend({
 		pageLoading: pageLoading,
 		changePage: changePage,
 		silentScroll: silentScroll
 	});
 
 	//dom-ready
-	jQuery(function(){
-		var $pages = jQuery("[data-role='page']");
+	$(function(){
+		var $pages = $("[data-role='page']");
 		//set up active page
 		$startPage = $.activePage = $pages.first();
 		
 		//set page container
 		$pageContainer = $startPage.parent().addClass('ui-mobile-viewport');
 		
-		jQuery.extend({
+		$.extend({
 			pageContainer: $pageContainer
 		});
 		
