@@ -46,9 +46,6 @@
 		//configure meta viewport tag's content attr:
 		metaViewportContent: "width=device-width, minimum-scale=1, maximum-scale=1",
 		
-		//additional markup to prepend to head
-		headExtras: null,
-		
 		//support conditions that must be met in order to proceed
 		gradeA: function(){
 			return $.support.mediaquery;
@@ -123,9 +120,6 @@
 	
 	//add mobile, initial load "rendering" classes to docEl
 	$html.addClass('ui-mobile ui-mobile-rendering');	
-		
-	//prepend head markup additions
-	if( $.mobile.headExtras ){ $head.prepend( $.mobile.headExtras ); }
 
 	// TODO: don't expose (temporary during code reorg)
 	$.mobile.urlStack = urlStack;
