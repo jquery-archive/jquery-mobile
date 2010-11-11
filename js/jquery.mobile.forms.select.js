@@ -242,12 +242,12 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 	
 	disable: function(){
 		this.element.attr("disabled",true);
-		this.element.prev('a').addClass('ui-disabled');
+		this.element.prev('a').addClass('ui-disabled').attr("aria-disabled", true);
 	},
 	
 	enable: function(){
 		this.element.attr("disabled",false);
-		this.element.prev('a').removeClass('ui-disabled');
+		this.element.prev('a').removeClass('ui-disabled').attr("aria-disabled", false);
 	}
 });
 })( jQuery );
