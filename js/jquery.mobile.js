@@ -182,7 +182,7 @@
 			url = getBaseURL() + url;
 		}
 			
-		$.changePage({
+		changePage({
 				url: url,
 				type: type,
 				data: $(this).serialize()
@@ -604,7 +604,7 @@
 	};	
 	
 	//TODO - add to jQuery.mobile, not $
-	$.extend({
+	$.extend($.mobile, {
 		pageLoading: pageLoading,
 		changePage: changePage,
 		silentScroll: silentScroll

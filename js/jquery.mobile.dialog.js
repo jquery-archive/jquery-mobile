@@ -52,7 +52,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 	},
 	
 	close: function(){
-		$.changePage([this.element, $.activePage], undefined, true, true );
+		$.mobile.changePage([this.element, $.activePage], undefined, true, true );
 	}
 });
 })( jQuery );
