@@ -7,8 +7,7 @@
 (function ( $ ) {
 $.widget( "mobile.checkboxradio", $.mobile.widget, {
 	options: {
-		theme: undefined,
-		icon: undefined
+		theme: null
 	},
 	_create: function(){
 		var input = this.element,
@@ -21,9 +20,8 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 						
 		label
 			.buttonMarkup({
-				iconpos: this.options.icon,
 				theme: this.options.theme,
-				icon: this.options.icon ? uncheckedicon : ( this.element.parents( "[data-type='horizontal']" ).length ? undefined : uncheckedicon ),
+				icon: this.element.parents( "[data-type='horizontal']" ).length ? undefined : uncheckedicon,
 				shadow: false
 			});
 		
