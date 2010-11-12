@@ -527,7 +527,7 @@
 			}
 			//there's no hash, the active page is not the start page, and it's not manually triggered hashchange
 			// > probably backed out to the first page visited
-			else if( $.mobile.activePage.length && !$startPage.is( $.mobile.activePage ) && !triggered ) {
+			else if( $.mobile.activePage.length && $startPage[0] !== $.mobile.activePage[0] && !triggered ) {
 				changePage( $startPage, transition, true );
 			}
 			else{
