@@ -3,7 +3,7 @@
 .ui-mobile #jqm-homeheader h1 { margin: 0 0 10px; }
 .ui-mobile #jqm-homeheader p { margin: 0; }
 .ui-mobile #jqm-version { text-indent: -99999px; background: url(../images/version.png) top right no-repeat; width: 119px; height: 122px; overflow: hidden; position: absolute; top: 0; right: 0; }
-.ui-mobile .jqm-themeswitcher { clear: both; margin: 20px 0 -15px; }
+.ui-mobile .jqm-themeswitcher { clear: both; margin: 20px 0 0; }
 
 h2 { margin-top:1.5em; }
 p code { font-size:1.2em; font-weight:bold; } 

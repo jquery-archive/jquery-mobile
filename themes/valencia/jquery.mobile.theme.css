@@ -782,6 +782,7 @@ a.ui-link-inherit {
   -moz-border-radius:     0; 
   -webkit-border-radius:  0;
   border-radius:          0;
+  background-size: 20px 20px;
 }
 
 .ui-icon-checkbox-off { background-image: url(images/form-check-off.png); }
@@ -789,7 +790,7 @@ a.ui-link-inherit {
 .ui-icon-radio-off {    background-image: url(images/form-radio-off.png); }
 .ui-icon-radio-on {     background-image: url(images/form-radio-on.png); }
 
-.ui-icon-search {       background-image: url(images/icon-search-black.png); }
+.ui-icon-search {       background-image: url(images/icon-search-black.png); background-size: 16px 16px; }
 
 /* loading icon */
 .ui-icon-loading {
@@ -799,6 +800,7 @@ a.ui-link-inherit {
   -moz-border-radius:                 20px;
   -webkit-border-radius:              20px;
   border-radius:                      20px;
+ background-size: 35px 35px;
 }
 
 /* btn Corner radius */

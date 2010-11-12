@@ -186,14 +186,14 @@ a.ui-link-inherit { text-decoration: none !important; }
 .ui-icon-checkbox-off,
 .ui-icon-checkbox-on,
 .ui-icon-radio-off,
-.ui-icon-radio-on { background-color: transparent; -moz-border-radius: 0; -webkit-border-radius: 0; border-radius: 0; }
+.ui-icon-radio-on { background-color: transparent; -moz-border-radius: 0; -webkit-border-radius: 0; border-radius: 0; background-size: 20px 20px; }
 
-.ui-icon-checkbox-off { background-image: url(images/form-check-off.png); }
-.ui-icon-checkbox-on { background-image: url(images/form-check-on.png); }
-.ui-icon-radio-off { background-image: url(images/form-radio-off.png); }
-.ui-icon-radio-on { background-image: url(images/form-radio-on.png); }
+.ui-icon-checkbox-off { background-image: url(images/form-check-off.png);  }
+.ui-icon-checkbox-on { background-image: url(images/form-check-on.png);  }
+.ui-icon-radio-off { background-image: url(images/form-radio-off.png);}
+.ui-icon-radio-on { background-image: url(images/form-radio-on.png);  }
 
-.ui-icon-search { background-image: url(images/icon-search-black.png); }
+.ui-icon-search { background-image: url(images/icon-search-black.png); background-size: 16px 16px; }
 
 /* loading icon */
 .ui-icon-loading { background-image: url(images/ajax-loader.png); width: 40px; height: 40px;  -moz-border-radius: 20px; -webkit-border-radius: 20px; border-radius: 20px; background-size: 35px 35px; }

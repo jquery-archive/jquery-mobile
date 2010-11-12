@@ -3,7 +3,7 @@
 	$.themeswitcher = function(){
 		var themesDir = 'http://jquerymobile.com/test/themes/',
 			themes = ['default','valencia'],
-			currentPage = $.activePage,
+			currentPage = $.mobile.activePage,
 			menuPage = $( '<div data-role=\'dialog\' data-theme=\'a\'>' +
 						'<div data-role=\'header\' data-theme=\'b\'>' +
 							'<div class=\'ui-title\'>Switch Theme:</div>'+
@@ -18,8 +18,6 @@
 			$('<li><a href=\'#\'>' + themes[ i ].charAt(0).toUpperCase() + themes[ i ].substr(1) + '</a></li>')
 				.click(function(){
 					addTheme( themes[i] );
-					done();
-					return false;
 				})
 				.appendTo(menu);
 		});	
@@ -29,17 +27,7 @@
 			$('head').append( '<link rel=\'stylesheet\' href=\''+ themesDir + theme +'/\' />' );
 		}
 		
-		//finished with this
-		function done(){
-			$.mobile.changePage([menuPage, currentPage], 'pop', true);
-			menuPage.bind('pagehide',function(){
-				menuPage.remove();
-			});
-			return false;
-		}
-				
-		//destroy
-		menuPage.find('.ui-btn-left').click(done);
+
 		
 		//create page, listview
 		menuPage.page();

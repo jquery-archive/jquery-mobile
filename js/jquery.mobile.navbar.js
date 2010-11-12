@@ -7,18 +7,19 @@
 (function($, undefined ) {
 $.widget( "mobile.navbar", $.mobile.widget, {
 	options: {
-		iconpos: 'top'
+		iconpos: 'top',
+		grid: null
 	},
 	_create: function(){
 		var $navbar = this.element,
 			$navbtns = $navbar.find("a"),
-			iconpos = $navbtns.filter('data-icon').length ? this.options.iconpos : undefined;
+			iconpos = $navbtns.filter('[data-icon]').length ? this.options.iconpos : undefined;
 		
 		$navbar
 			.addClass('ui-navbar')
 			.attr("role","navigation")
 			.find("ul")
-				.grid({grid: $navbtns.length > 2 ? "b" : "a"});		
+				.grid({grid: this.options.grid });		
 		
 		if( !iconpos ){ 
 			$navbar.addClass("ui-navbar-noicons");
