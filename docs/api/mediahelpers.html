@@ -71,6 +71,23 @@ $.mobile.addResolutionBreakpoints(1200);
 $.mobile.addResolutionBreakpoints([1200, 1440]);
 			</code>
 </pre>	
+
+<h3>Running Media Queries</h3>
+<p>jQuery Mobile provides a function that allows you to test whether a particular CSS Media Query applies. Simple call <code>$.mobile.media()</code> and pass a media type or query. If the browser supports that type or query, and it currently applies, the function will return true. If not, it'll return false.</p>
+
+<pre>
+			<code>
+//test for screen media type
+$.mobile.media("screen");
+
+//test  a min-width media query
+$.mobile.media("screen and (min-width: 480px)");
+
+//test for iOS retina display
+$.mobile.media("screen and (-webkit-min-device-pixel-ratio: 2)");
+
+			</code>
+</pre>
 					
 		
 	</div><!-- /content -->
