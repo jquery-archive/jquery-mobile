@@ -18,7 +18,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 			email: false,
 			month: false,
 			number: false,
-			range: true,
+			range: "number",
 			search: true,
 			tel: false,
 			time: false,
@@ -141,11 +141,13 @@ $.widget( "mobile.page", $.mobile.widget, {
 		var o = this.options;
 		// degrade inputs to avoid poorly implemented native functionality
 		this.element.find( "input" ).each(function() {
-			var type = this.getAttribute( "type" );
+			var type = this.getAttribute( "type" ),
+				optType = o.degradeInputs[ type ] || "text";
+			
 			if ( o.degradeInputs[ type ] ) {
 				$( this ).replaceWith(
 					$( "<div>" ).html( $(this).clone() ).html()
-						.replace( /type="([a-zA-Z]+)"/, "data-type='$1'" ) );
+						.replace( /type="([a-zA-Z]+)"/, "type="+ optType +" data-type='$1'" ) );
 			}
 		});
 		

@@ -4,7 +4,7 @@
 * Dual licensed under the MIT (MIT-LICENSE.txt) or GPL (GPL-LICENSE.txt) licenses.
 */
 label.ui-slider { display: block; }
-input.ui-slider-input, .min-width-480px input.ui-slider-input { display: inline-block; width: 40px; }
+input.ui-slider-input, .min-width-480px input.ui-slider-input { display: inline-block; width: 50px; }
 select.ui-slider-switch { display: none; }
 div.ui-slider { position: relative; display: inline-block; overflow: visible; height: 15px; padding: 0; margin: 0 2% 0 20px; top: 4px; width: 66%; }
 a.ui-slider-handle { position: absolute; z-index: 10;  top: 50%; width: 28px; height: 28px; margin-top: -15px; margin-left: -15px; }
