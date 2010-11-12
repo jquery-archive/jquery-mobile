@@ -18,8 +18,6 @@
 			$('<li><a href=\'#\'>' + themes[ i ].charAt(0).toUpperCase() + themes[ i ].substr(1) + '</a></li>')
 				.click(function(){
 					addTheme( themes[i] );
-					done();
-					return false;
 				})
 				.appendTo(menu);
 		});	
@@ -29,17 +27,7 @@
 			$('head').append( '<link rel=\'stylesheet\' href=\''+ themesDir + theme +'/\' />' );
 		}
 		
-		//finished with this
-		function done(){
-			$.mobile.changePage([menuPage, currentPage], 'pop', true);
-			menuPage.bind('pagehide',function(){
-				menuPage.remove();
-			});
-			return false;
-		}
-				
-		//destroy
-		menuPage.find('.ui-btn-left').click(done);
+
 		
 		//create page, listview
 		menuPage.page();
