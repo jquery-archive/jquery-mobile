@@ -130,7 +130,7 @@ $.fixedToolbars = (function(){
 		else{
 			//relval = -1 * (thisTop - (fromTop + screenHeight) + thisCSStop + thisHeight);
 			//if( relval > thisTop ){ relval = 0; }
-			relval = fromTop + screenHeight - thisHeight - thisTop;
+			relval = fromTop + screenHeight - thisHeight - (thisTop - thisCSStop);
 			return el.css('top', ( useRelative ) ? relval : fromTop + screenHeight - thisHeight );
 		}
 	}
@@ -164,20 +164,25 @@ $.fixedToolbars = (function(){
 			var $ap = $.mobile.activePage ? $.mobile.activePage : $(".ui-page-active");
 			return $ap.children( toolbarSelector ).each(function(){
 				var el = $(this);
+
+				var thisCSStop = el.css('top'); thisCSStop = thisCSStop == 'auto' ? 0 : parseFloat(thisCSStop);
 				
 				//add state class
 				el.addClass('ui-fixed-inline').removeClass('ui-fixed-overlay');
 				
-				if(immediately){
-					el.css('top',0);
-				}
-				else{
-					if( el.css('top') !== 'auto' && parseFloat(el.css('top')) !== 0 ){
-						var classes = 'out reverse';
-						el.addClass(classes).animationComplete(function(){
-							el.removeClass(classes);
-							el.css('top',0);
-						});	
+				if (thisCSStop < 0 || (el.is('.ui-header-fixed') && thisCSStop != 0))
+				{
+					if(immediately){
+						el.css('top',0);
+					}
+					else{
+						if( el.css('top') !== 'auto' && parseFloat(el.css('top')) !== 0 ){
+							var classes = 'out reverse';
+							el.addClass(classes).animationComplete(function(){
+								el.removeClass(classes);
+								el.css('top',0);
+							});	
+						}
 					}
 				}
 			});
