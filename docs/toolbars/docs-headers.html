@@ -103,6 +103,13 @@
 				<h1>Page Title</h1>
 				<a href="index.html" data-icon="gear" class="ui-btn-right">Options</a>
 			</div>
+			
+		<h2>Customizing the back button text</h2>	
+		
+		<p>If you'd like to configure the back button text, you can either use the <code>data-back-btn-text="previous"</code> attribute on your page element, or set it programmatically via the page plugin's options: <code>$.mobile.page.prototype.options.backBtnText = "previous";</code>. If you're doing this programmatically, set this option inside the mobileinit event handler.</p>
+		
+		
+		
 
 			<h2>Custom header configurations</h2>
 			<p>If you need to to create a header that doesn't follow the default configuration, simply wrap your custom styled markup in a container <code>div</code> inside the header container and the plugin won't apply the automatic button logic so you can write custom styles for laying out the content in your header.</p> 

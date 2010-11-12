@@ -84,6 +84,12 @@
 			<p>If lists are embedded in a page with other types of content, an inset list packages the list into a block that sits inside the content area with a bit of margin and rounded corners (theme controlled). By adding the <code>data-inset="true"</code> attribute to the list (ul or ol), applies the inset appearance.</p>
 			
 			<a href="lists-inset.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Inset list example</a>
+			
+			<h2>Updating lists</h2>
+			<p>If you add items to a listview, you'll need to call the <code>refresh()</code> method on it to update the styles and create any nested lists that are added. For example, <code>$('ul').listview('refresh');</code></p>
+			
+			<p>We're currently working on a few improvements to the refresh method, so keep your eye on Github for updates.</p>			
+			
 
 	</div><!-- /content -->
 </div><!-- /page -->

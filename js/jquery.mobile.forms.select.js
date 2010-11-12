@@ -246,7 +246,10 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		var self = this;
 		
 		function focusButton(){
-			setTimeout(self.button.focus, 40);
+			setTimeout(function(){
+				self.button.focus();
+			}, 40);
+			
 			self.listbox.removeAttr('style').append( self.list );
 		}
 		
