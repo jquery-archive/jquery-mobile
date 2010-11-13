@@ -7,7 +7,7 @@
 (function($, undefined ) {
 
 // test whether a CSS media type or query applies
-$.media = (function() {
+$.mobile.media = (function() {
 	// TODO: use window.matchMedia once at least one UA implements it
 	var cache = {},
 		$html = $( "html" ),
@@ -59,7 +59,7 @@ $.extend( $.support, {
 	touch: "ontouchend" in document,
 	cssTransitions: "WebKitTransitionEvent" in window,
 	pushState: !!history.pushState,
-	mediaquery: $.media('only all'),
+	mediaquery: $.mobile.media('only all'),
 	cssPseudoElement: !!propExists('content'),
 	boxShadow: !!propExists('boxShadow') && !bb,
 	scrollTop: ("pageXOffset" in window || "scrollTop" in document.documentElement || "scrollTop" in fakeBody[0]) && !webos,
