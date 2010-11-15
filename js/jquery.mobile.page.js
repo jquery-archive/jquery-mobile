@@ -154,25 +154,30 @@ $.widget( "mobile.page", $.mobile.widget, {
 		// enchance form controls
 		this.element
 			.find( "[type='radio'], [type='checkbox']" )
+			.not(".no-enhance")
 			.checkboxradio();
 
 		this.element
 			.find( "button, [type='button'], [type='submit'], [type='reset'], [type='image']" )
+			.not(".no-enhance")
 			.not( ".ui-nojs" )
 			.button();
 
 		this.element
 			.find( "input, textarea" )
+			.not(".no-enhance")
 			.not( "[type='radio'], [type='checkbox'], button, [type='button'], [type='submit'], [type='reset'], [type='image']" )
 			.textinput();
 
 		this.element
 			.find( "input, select" )
+			.not(".no-enhance")
 			.filter( "[data-role='slider'], [data-type='range']" )
 			.slider();
 
 		this.element
 			.find( "select:not([data-role='slider'])" )
+			.not(".no-enhance")
 			.selectmenu();
 	}
 });
