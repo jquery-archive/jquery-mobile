@@ -701,8 +701,11 @@ a.ui-link-inherit {
 /* Interaction Cues
 ----------------------------------*/
 .ui-disabled { 
-  cursor: default !important;
   opacity: .3;
+}
+
+.ui-disabled, .ui-disabled a { 
+  cursor: default !important;
 }
 
 /* Icons

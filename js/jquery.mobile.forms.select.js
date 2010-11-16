@@ -124,11 +124,11 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		//button events
 		button.click(function(event){
 			self.open();
-			event.preventDefault();
+			return false;
 		});
 		
 		//events for list items
-		list.delegate("li", "click", function(event){
+		list.delegate("li:not(.ui-disabled)",'click', function(){
 				//update select	
 				var newIndex = list.find( "li" ).index( this ),
 					prevIndex = select[0].selectedIndex;
@@ -144,14 +144,14 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				
 				//hide custom select
 				self.close();
-				event.preventDefault();
+				return false;
 			});	
 	
 		//events on "screen" overlay
-		screen.click(function(event){
+		screen.click(function(){
 			self.close();
-			event.preventDefault();
-		});
+			return false;
+		});	
 	},
 	
 	_buildList: function(){
@@ -161,19 +161,28 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		
 		//populate menu with options from select element
 		self.select.find( "option" ).each(function( i ){
-				var anchor = $("<a>", { 
-							"role": "option", 
-							"href": "#"
-						})
-						.text( $(this).text() );
+			var anchor = $("<a>", { 
+					"role": "option", 
+					"href": "#",
+					"text": $(this).text()
+				}),
+				
+				item = $( "<li>", {"data-icon": "checkbox-on"});
 			
-			$( "<li>", {"data-icon": "checkbox-on"})
+			// apply appropriate disabled logic
+			if( this.disabled ){
+				item
+					.addClass("ui-disabled")
+					.attr("aria-disabled", true);
+			}
+			
+			item
 				.append( anchor )
 				.appendTo( self.list );
 		});
 		
 		//now populated, create listview
-		self.list.listview();		
+		self.list.listview();
 	},
 	
 	refresh: function( forceRebuild ){
@@ -281,4 +290,3 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 	}
 });
 })( jQuery );
-	

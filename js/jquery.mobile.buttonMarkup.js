@@ -82,7 +82,7 @@ $.fn.buttonMarkup.defaults = {
 };
 
 var attachEvents = function() {
-	$(".ui-btn").live({
+	$(".ui-btn:not(.ui-disabled)").live({
 		mousedown: function() {
 			var theme = $(this).attr( "data-theme" );
 			$(this).removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-down-" + theme );
