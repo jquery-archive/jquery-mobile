@@ -14,7 +14,6 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 			$closeBtn = $('<a href="#" data-icon="delete" data-iconpos="notext">Close</a>');
 	
 		$el.delegate("a, form", "click submit", function(e){
-			
 			if( e.type == "click" && ( $(e.target).closest('[data-back]')[0] || this==$closeBtn[0] ) ){
 				self.close();
 				return false;
