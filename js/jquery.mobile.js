@@ -337,7 +337,10 @@
 			
 		// if the new href is the same as the previous one
 		if ( back ) {
-			transition = urlStack.pop().transition;
+			var pop = urlStack.pop();
+			if( pop ){
+				transition = pop.transition;
+			}
 		} else {
 			urlStack.push({ url: url, transition: transition });
 		}
