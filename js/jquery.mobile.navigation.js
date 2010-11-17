@@ -141,7 +141,11 @@
 	
 		//from is always the currently viewed page
 		var toIsArray = $.type(to) === "array",
-			from = toIsArray ? to[0] : $.mobile.activePage,
+            from = toIsArray ?
+                    to[0] :
+                    ($.mobile.activePage && $.mobile.activePage.length ?
+                            $.mobile.activePage :
+                            $(".ui-page-active"));
 			to = toIsArray ? to[1] : to,
 			url = fileUrl = $.type(to) === "string" ? to.replace( /^#/, "" ) : null,
 			data = undefined,
