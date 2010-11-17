@@ -8,10 +8,13 @@
 $.widget( "mobile.slider", $.mobile.widget, {
 	options: {
 		theme: null,
-		trackTheme: null
+		trackTheme: null,
+		disabled: false
 	},
 	_create: function(){	
-		var control = this.element,
+		var self = this,
+
+			control = this.element,
 		
 			parentTheme = control.parents('[class*=ui-bar-],[class*=ui-body-]').eq(0),	
 			
@@ -45,8 +48,11 @@ $.widget( "mobile.slider", $.mobile.widget, {
 					'aria-labelledby': labelID
 				}),
 			dragging = false;
-			
-						
+
+		$.extend(this, {
+			slider: slider
+		});
+
 		if(cType == 'select'){
 			slider.wrapInner('<div class="ui-slider-inneroffset"></div>');
 			var options = control.find('option');
@@ -72,6 +78,8 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		}
 			
 		function slideUpdate(event, val){
+			if( self.options.disabled ){ return; }
+
 			if (val){
 				percent = (parseFloat(val) - min) / (max - min) * 100;
 			} else {
@@ -173,6 +181,18 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		handle
 			.css('left', percent + '%')
 			.bind('click', function(e){ return false; });	
+	},
+
+	enable: function(){
+		this.element.attr("disabled", false);
+		this.slider.removeClass("ui-disabled").attr("aria-disabled", false);
+		return this._setOption("disabled", false);
+	},
+
+	disable: function(){
+		this.element.attr("disabled", true);
+		this.slider.addClass("ui-disabled").attr("aria-disabled", true);
+		return this._setOption("disabled", true);
 	}
 });
 })( jQuery );
