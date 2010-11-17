@@ -4,6 +4,7 @@ $elements = array(
 	'jquery.js',
 	'jquery.ui.widget.js',
 	'jquery.mobile.widget.js',
+	'jquery.mobile.media.js',
 	'jquery.mobile.support.js',
 	'jquery.mobile.event.js',
 	'jquery.mobile.hashchange.js',

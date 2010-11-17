@@ -113,10 +113,7 @@
 		
 		//enable/disable hashchange event listener
 		//toggled internally when location.hash is updated to match the url of a successful page load
-		hashListener = true,
-		
-		//media-query-like width breakpoints, which are translated to classes on the html element 
-		resolutionBreakpoints = [320,480,768,1024];
+		hashListener = true;
 	
 	//add mobile, initial load "rendering" classes to docEl
 	$html.addClass('ui-mobile ui-mobile-rendering');	
@@ -545,54 +542,6 @@
 
 		});
 	});	
-	
-	//add orientation class on flip/resize.
-	$window.bind( "orientationchange.htmlclass", function( event ) {
-		$html.removeClass( "portrait landscape" ).addClass( event.orientation );
-	});
-	
-	//add breakpoint classes for faux media-q support
-	function detectResolutionBreakpoints(){
-		var currWidth = $window.width(),
-			minPrefix = "min-width-",
-			maxPrefix = "max-width-",
-			minBreakpoints = [],
-			maxBreakpoints = [],
-			unit = "px",
-			breakpointClasses;
-			
-		$html.removeClass( minPrefix + resolutionBreakpoints.join(unit + " " + minPrefix) + unit + " " + 
-			maxPrefix + resolutionBreakpoints.join( unit + " " + maxPrefix) + unit );
-					
-		$.each(resolutionBreakpoints,function( i ){
-			if( currWidth >= resolutionBreakpoints[ i ] ){
-				minBreakpoints.push( minPrefix + resolutionBreakpoints[ i ] + unit );
-			}
-			if( currWidth <= resolutionBreakpoints[ i ] ){
-				maxBreakpoints.push( maxPrefix + resolutionBreakpoints[ i ] + unit );
-			}
-		});
-		
-		if( minBreakpoints.length ){ breakpointClasses = minBreakpoints.join(" "); }
-		if( maxBreakpoints.length ){ breakpointClasses += " " +  maxBreakpoints.join(" "); }
-		
-		$html.addClass( breakpointClasses );	
-	};
-	
-	//add breakpoints now and on oc/resize events
-	$window.bind( "orientationchange resize", detectResolutionBreakpoints);
-	detectResolutionBreakpoints();
-	
-	//common breakpoints, overrideable, changeable
-	$.mobile.addResolutionBreakpoints = function( newbps ){
-		if( $.type( newbps ) === "array" ){
-			resolutionBreakpoints = resolutionBreakpoints.concat( newbps );
-		}
-		else {
-			resolutionBreakpoints.push( newbps );
-		}
-		detectResolutionBreakpoints();
-	} 
 	
 	//animation complete callback
 	//TODO - update support test and create special event for transitions
