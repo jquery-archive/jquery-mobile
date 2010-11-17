@@ -581,9 +581,6 @@
 		//trigger a new hashchange, hash or not
 		$window.trigger( "hashchange", [ true ] );
 		
-		//update orientation 
-		$window.trigger( "orientationchange.htmlclass" );
-		
 		//remove rendering class
 		$html.removeClass('ui-mobile-rendering');
 	});

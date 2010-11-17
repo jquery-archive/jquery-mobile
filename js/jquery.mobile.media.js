@@ -86,16 +86,24 @@ $.mobile.addResolutionBreakpoints = function( newbps ){
 	}
 	resolutionBreakpoints.sort(function(a,b){ return a-b; })
 	detectResolutionBreakpoints();
-} 
+}
 
-
-/* bind to orientationchange, resize, and mobileinit 
-to add classes to HTML element for min/max breakpoints and orientation */
-$window.bind( "orientationchange.htmlclass resize.htmlclass mobileinit.htmlclass", function( event ) {
-	//add orientation class to HTML element on flip/resize.
-	$html.removeClass( "portrait landscape" ).addClass( event.orientation );
-	//add breakpoint classes for min/max widths
-	detectResolutionBreakpoints();
+/* 	on mobileinit, add classes to HTML element 
+	and set handlers to update those on orientationchange and resize*/
+$(document).bind("mobileinit.htmlclass", function(){
+	/* bind to orientationchange and resize  
+	to add classes to HTML element for min/max breakpoints and orientation */
+	$window.bind("orientationchange.htmlclass resize.htmlclass", function(event){
+		//add orientation class to HTML element on flip/resize.
+		if(event.orientation){
+			$html.removeClass( "portrait landscape" ).addClass( event.orientation );
+		}
+		//add classes to HTML element for min/max breakpoints	
+		detectResolutionBreakpoints();
+	});
+	
+	//trigger event manually
+	$window.trigger( "orientationchange.htmlclass" );
 });
 
 })(jQuery);
