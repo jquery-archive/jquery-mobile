@@ -84,6 +84,7 @@ $.mobile.addResolutionBreakpoints = function( newbps ){
 	else {
 		resolutionBreakpoints.push( newbps );
 	}
+	resolutionBreakpoints.sort(function(a,b){ return a-b; })
 	detectResolutionBreakpoints();
 } 
 
