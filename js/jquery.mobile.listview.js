@@ -14,7 +14,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		dividerTheme: "b",
 		splitIcon: "arrow-r",
 		splitTheme: "b",
-		inset: false
+		inset: false,
+        sublists: true
 	},
 	
 	_create: function() {
@@ -146,14 +147,17 @@ $.widget( "mobile.listview", $.mobile.widget, {
 	},
 	
 	refresh: function( create ) {
-		this._createSubPages();
-		
-		var o = this.options,
+	    var o = this.options,
 			$list = this.element,
 			self = this,
-			dividertheme = $list.data( "dividertheme" ) || o.dividerTheme,
-			li = $list.children( "li" ),
-			counter = $.support.cssPseudoElement || !$.nodeName( $list[0], "ol" ) ? 0 : 1;
+			dividertheme = $list.data("dividertheme") || o.dividerTheme,
+			li = $list.children("li"),
+			counter = $.support.cssPseudoElement || !$.nodeName($list[0], "ol") ? 0 : 1,
+            sublists = $list.data("sublists") || o.sublists;
+
+	    if ( sublists ) {
+	        this._createSubPages();
+	    }
 
 		if ( counter ) {
 			$list.find( ".ui-li-dec" ).remove();
