@@ -14,8 +14,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		dividerTheme: "b",
 		splitIcon: "arrow-r",
 		splitTheme: "b",
+        sublists: true,
 		inset: false,
-        sublists: true
 	},
 	
 	_create: function() {
