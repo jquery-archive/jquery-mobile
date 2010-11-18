@@ -277,31 +277,35 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			o = this.options,
 			persistentFooterID = parentPage.find( "[data-role='footer']" ).data( "id" );
 
-		$( parentList.find( "ul, ol" ).toArray().reverse() ).each(function( i ) {
-			var list = $( this ),
-				parent = list.parent(),
-				title = parent.contents()[ 0 ].nodeValue.split("\n")[0],
+		$( parentList.find( "ul, ol,[data-role='subpage']" ).not("[data-role='subpage'] *").toArray().reverse() ).each(function( i ) {
+			var content = $( this ),
+				parent = content.parent(),
+				titleElement = parent.children("[data-role='subpagetitle']").eq(0).wrapInner("<a/>"),
+				title = titleElement.length ? titleElement.text() : parent.contents()[ 0 ].nodeValue.split("\n")[0],
 				id = parentId + "&" + $.mobile.subPageUrlKey + "=" + $.mobile.idStringEscape(title + " " + i),
-				theme = list.data( "theme" ) || o.theme,
-				countTheme = list.data( "counttheme" ) || parentList.data( "counttheme" ) || o.countTheme,
-				newPage = list.wrap( "<div data-role='page'><div data-role='content'></div></div>" )
+				theme = content.data( "theme" ) || o.theme,
+				countTheme = content.data( "counttheme" ) || parentList.data( "counttheme" ) || o.countTheme,
+				newPage = (content.is("[data-role='subpage']") ? content.attr('data-role','content') : $("<div data-role='content'></div>").append(content))
+				            .wrap( "<div data-role='page'></div>" )
+							.before( "<div data-role='header' data-theme='" + o.headerTheme + "'><div class='ui-title'>" + title + "</div></div>" )
+							.after( persistentFooterID ? $( "<div>", { "data-role": "footer", "data-id": persistentFooterID, "class": "ui-footer-duplicate" } ) : "" )
 							.parent()
-								.before( "<div data-role='header' data-theme='" + o.headerTheme + "'><div class='ui-title'>" + title + "</div></div>" )
-								.after( persistentFooterID ? $( "<div>", { "data-role": "footer", "data-id": persistentFooterID, "class": "ui-footer-duplicate" } ) : "" )
-								.parent()
-									.attr({
-										id: id,
-										"data-theme": theme,
-										"data-count-theme": countTheme
-									})
-									.appendTo( $.pageContainer );
+								.attr({
+									id: id,
+									"data-theme": theme,
+									"data-count-theme": countTheme
+								})
+								.appendTo( $.pageContainer );
 				
-				
-				
-				newPage.page();		
+			newPage.page();		
 			
-			parent.html( "<a href='#" + id + "'>" + title + "</a>" );
-		}).listview();
+			if(titleElement.length==0) {
+			    parent.html("<a>" + title + "</a>");
+			}
+			
+			parent.find("a:eq(0)").attr("href","#" + id);
+			
+		}).filter("ul,ol").listview();
 	}
 });
 
