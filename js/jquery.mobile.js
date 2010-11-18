@@ -304,8 +304,7 @@
 		$activeClickedLink = null;
 	}
 
-
-	//for getting or creating a new page 
+	//for getting or creating a new page
 	function changePage( to, transition, back, changeHash){
 
 		//from is always the currently viewed page
@@ -501,6 +500,27 @@
 
 	};
 
+    //force page to be the active page. transition can be performed
+    //from current active page to page
+    function forceActivePage( page, transition) {
+        if( !page ) return;
+
+        //from needed if transition
+        //keep track of the current activePage
+        var from = $.mobile.activePage && $.mobile.activePage.length ?
+                            $.mobile.activePage :
+                            page;
+        //add active class
+        page.addClass($.mobile.activePageClass);
+
+        //set activePage to page
+        $.mobile.activePage = page;
+
+        if( transition ) {
+            changePage([from, page], transition);
+        }
+    }
+
 	
 	$(function() {
 
@@ -611,7 +631,8 @@
 	$.extend($.mobile, {
 		pageLoading: pageLoading,
 		changePage: changePage,
-		silentScroll: silentScroll
+		silentScroll: silentScroll,
+        forceActivePage: forceActivePage
 	});
 
 	//dom-ready
