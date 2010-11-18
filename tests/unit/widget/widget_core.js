@@ -3,7 +3,7 @@
  */
 
 (function( $ ) {
-	test( "getting data attributes from creation options", function(){
+	test( "getting data from creation options", function(){
 		expect( 1 );
 		var expected = "bizzle";
 
@@ -14,7 +14,7 @@
 				 expected);
 	});
 
-	test( "getting an no data when the options are empty", function(){
+	test( "getting no data when the options are empty", function(){
 		expect( 1 );
 		var expected = {};
 
