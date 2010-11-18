@@ -351,8 +351,29 @@
 
 	};
 
-	
-/* Event Bindings - hashchange, submit, and click */	
+    //force page to be the active page. transition can be performed
+    //from current active page to page
+    $.mobile.forceActivePage = function(page, transition) {
+        if (!page) return;
+
+        //from needed if transition
+        //keep track of the current activePage
+        var from = $.mobile.activePage && $.mobile.activePage.length ?
+                $.mobile.activePage :
+                page;
+        //add active class
+        page.addClass($.mobile.activePageClass);
+
+        //set activePage to page
+        $.mobile.activePage = page;
+
+        if (transition) {
+            changePage([from, page], transition);
+        }
+    };
+
+
+    /* Event Bindings - hashchange, submit, and click */
 	
 	//bind to form submit events, handle with Ajax
 	$('form').live('submit', function(event){
