@@ -24,7 +24,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 				.attr('tabindex','-1');
 		
 		//add ARIA role
-		$( "<a>", { 
+		this.button = $( "<a>", { 
 				"href": "#",
 				"role": "button",
 				"aria-label": $el.attr( "type" ) 
@@ -32,11 +32,13 @@ $.widget( "mobile.button", $.mobile.widget, {
 			.text( $el.text() || $el.val() )
 			.insertBefore( $el )
 			.click(function(){
-				if( type == "submit" ){
-					$(this).closest('form').submit();
-				}
-				else{
-					$el.click(); 
+				if(!o.disabled){
+					if( type == "submit" ){
+						$(this).closest('form').submit();
+					}
+					else{
+						$el.click(); 
+					}
 				}
 
 				return false;
@@ -50,6 +52,18 @@ $.widget( "mobile.button", $.mobile.widget, {
 				shadow: o.shadow,
 				iconshadow: o.iconshadow
 			});
+	},
+
+	enable: function(){
+		this.element.attr("disabled", false);
+		this.button.removeClass("ui-disabled").attr("aria-disabled", false);
+		return this._setOption("disabled", false);
+	},
+
+	disable: function(){
+		this.element.attr("disabled", true);
+		this.button.addClass("ui-disabled").attr("aria-disabled", true);
+		return this._setOption("disabled", true);
 	}
 });
 })( jQuery );

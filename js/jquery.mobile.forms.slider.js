@@ -8,10 +8,13 @@
 $.widget( "mobile.slider", $.mobile.widget, {
 	options: {
 		theme: null,
-		trackTheme: null
+		trackTheme: null,
+		disabled: false
 	},
 	_create: function(){	
-		var control = this.element,
+		var self = this,
+
+			control = this.element,
 		
 			parentTheme = control.parents('[class*=ui-bar-],[class*=ui-body-]').eq(0),	
 			
@@ -29,8 +32,6 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			val = (cType == 'input') ? parseFloat(control.val()) : control[0].selectedIndex,
 			min = (cType == 'input') ? parseFloat(control.attr('min')) : 0,
 			max = (cType == 'input') ? parseFloat(control.attr('max')) : control.find('option').length-1,
-			percent = ((parseFloat(val) - min) / (max - min)) * 100,
-			snappedPercent = percent,
 			slider = $('<div class="ui-slider '+ selectClass +' ui-btn-down-'+ trackTheme+' ui-btn-corner-all" role="application"></div>'),
 			handle = $('<a href="#" class="ui-slider-handle"></a>')
 				.appendTo(slider)
@@ -43,10 +44,15 @@ $.widget( "mobile.slider", $.mobile.widget, {
 					'aria-valuetext': val,
 					'title': val,
 					'aria-labelledby': labelID
-				}),
-			dragging = false;
-			
-						
+				});
+
+		$.extend(this, {
+			slider: slider,
+			handle: handle,
+			dragging: false,
+			beforeStart: null
+		});
+
 		if(cType == 'select'){
 			slider.wrapInner('<div class="ui-slider-inneroffset"></div>');
 			var options = control.find('option');
@@ -61,118 +67,133 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			
 		}	
 		
-		function updateControl(val){
-			if(cType == 'input'){ 
-				control.val(val); 
-			}
-			else { 
-				control[0].selectedIndex = val;
-			}
-			control.trigger("change");
-		}
-			
-		function slideUpdate(event, val){
-			if (val){
-				percent = (parseFloat(val) - min) / (max - min) * 100;
-			} else {
-				var data = event.originalEvent.touches ? event.originalEvent.touches[ 0 ] : event,
-					// a slight tolerance helped get to the ends of the slider
-					tol = 8;
-				if( !dragging 
-						|| data.pageX < slider.offset().left - tol 
-						|| data.pageX > slider.offset().left + slider.width() + tol ){ 
-					return; 
-				}
-				percent = Math.round(((data.pageX - slider.offset().left) / slider.width() ) * 100);
-			}
-			
-			if( percent < 0 ) { percent = 0; }
-			if( percent > 100 ) { percent = 100; }
-			var newval = Math.round( (percent/100) * (max-min) ) + min;
-			
-			if( newval < min ) { newval = min; }
-			if( newval > max ) { newval = max; }
-			//flip the stack of the bg colors
-			if(percent > 60 && cType == 'select'){ 
-				
-			}
-			snappedPercent = Math.round( newval / (max-min) * 100 );
-			handle.css('left', percent + '%');
-			handle.attr({
-					'aria-valuenow': (cType == 'input') ? newval : control.find('option').eq(newval).attr('value'),
-					'aria-valuetext': (cType == 'input') ? newval : control.find('option').eq(newval).text(),
-					'title': newval
-				});
-			updateSwitchClass(newval);
-			updateControl(newval);
-		}
-		
-		function updateSwitchClass(val){
-			if(cType == 'input'){return;}
-			if(val == 0){ slider.addClass('ui-slider-switch-a').removeClass('ui-slider-switch-b'); }
-			else { slider.addClass('ui-slider-switch-b').removeClass('ui-slider-switch-a'); }
-		}
-		
-		updateSwitchClass(val);
-		
-		function updateSnap(){
-			if(cType == 'select'){
-				handle
-					.addClass('ui-slider-handle-snapping')
-					.css('left', snappedPercent + '%')
-					.animationComplete(function(){
-						handle.removeClass('ui-slider-handle-snapping');
-					});
-			}
-		}
-		
 		label.addClass('ui-slider');
 		
 		control
 			.addClass((cType == 'input') ? 'ui-slider-input' : 'ui-slider-switch')
-			.keyup(function(e){
-				slideUpdate(e, $(this).val() );
+			.keyup(function(){
+				self.refresh( $(this).val() );
 			});
 			
 		$(document).bind($.support.touch ? "touchmove" : "mousemove", function(event){
-			if(dragging){
-				slideUpdate(event);
+			if ( self.dragging ) {
+				self.refresh( event );
 				return false;
 			}
 		});
 					
 		slider
 			.bind($.support.touch ? "touchstart" : "mousedown", function(event){
-				dragging = true;
-				if((cType == 'select')){
-					val = control[0].selectedIndex;
+				self.dragging = true;
+				if ( cType === "select" ) {
+					self.beforeStart = control[0].selectedIndex;
 				}
-				slideUpdate(event);
+				self.refresh( event );
 				return false;
 			});
 			
 		slider
 			.add(document)	
-			.bind($.support.touch ? "touchend" : "mouseup", function(event){
-				if(dragging){
-					dragging = false;
-					if(cType == 'select'){
-						if(val == control[0].selectedIndex){
-							val = val == 0 ? 1 : 0;
+			.bind($.support.touch ? "touchend" : "mouseup", function(){
+				if ( self.dragging ) {
+					self.dragging = false;
+					if ( cType === "select" ) {
+						if ( self.beforeStart === control[0].selectedIndex ) {
 							//tap occurred, but value didn't change. flip it!
-							slideUpdate(event,val);
+							self.refresh( self.beforeStart === 0 ? 1 : 0 );
 						}
-						updateSnap();
+						var curval = (cType === "input") ? parseFloat(control.val()) : control[ 0 ].selectedIndex;
+						var snapped = Math.round( curval / (max - min) * 100 );
+						handle
+							.addClass("ui-slider-handle-snapping")
+							.css("left", snapped + "%")
+							.animationComplete(function(){
+								handle.removeClass("ui-slider-handle-snapping");
+							});
 					}
 					return false;
 				}
 			});
+
+		slider.insertAfter(control);
+		handle.bind('click', function(e){ return false; });
+		this.refresh();
+	},
+
+	refresh: function(val){
+		if ( this.options.disabled ) { return; }
+
+		var control = this.element, percent,
+			cType = control[0].nodeName.toLowerCase(),
+			min = (cType === "input") ? parseFloat(control.attr("min")) : 0,
+			max = (cType === "input") ? parseFloat(control.attr("max")) : control.find("option").length - 1;
+
+		if ( typeof val === "object" ) {
+			var data = val.originalEvent.touches ? val.originalEvent.touches[ 0 ] : val,
+				// a slight tolerance helped get to the ends of the slider
+				tol = 8;
+			if ( !this.dragging
+					|| data.pageX < this.slider.offset().left - tol
+					|| data.pageX > this.slider.offset().left + this.slider.width() + tol ) {
+				return;
+			}
+			percent = Math.round( ((data.pageX - this.slider.offset().left) / this.slider.width() ) * 100 );
+		} else {
+			if ( val == null ) {
+				val = (cType === "input") ? parseFloat(control.val()) : control[ 0 ].selectedIndex;
+			}
+			percent = (parseFloat(val) - min) / (max - min) * 100;
+		}
+
+		if ( isNaN(percent) ) { return; }
+		if ( percent < 0 ) { percent = 0; }
+		if ( percent > 100 ) { percent = 100; }
+
+		var newval = Math.round( (percent / 100) * (max - min) ) + min;
+		if ( newval < min ) { newval = min; }
+		if ( newval > max ) { newval = max; }
+
+		//flip the stack of the bg colors
+		if ( percent > 60 && cType === "select" ) {
 			
-		slider.insertAfter(control);	
-		
-		handle
-			.css('left', percent + '%')
-			.bind('click', function(e){ return false; });	
+		}
+		this.handle.css("left", percent + "%");
+		this.handle.attr({
+				"aria-valuenow": (cType === "input") ? newval : control.find("option").eq(newval).attr("value"),
+				"aria-valuetext": (cType === "input") ? newval : control.find("option").eq(newval).text(),
+				title: newval
+			});
+
+		// add/remove classes for flip toggle switch
+		if ( cType === "select" ) {
+			if ( newval === 0 ) {
+				this.slider.addClass("ui-slider-switch-a")
+					.removeClass("ui-slider-switch-b");
+			} else {
+				this.slider.addClass("ui-slider-switch-b")
+					.removeClass("ui-slider-switch-a");
+			}
+		}
+
+		// update control's value
+		if ( cType === "input" ) {
+			control.val(newval);
+		} else {
+			control[ 0 ].selectedIndex = newval;
+		}
+		control.trigger("change");
+	},
+
+	enable: function(){
+		this.element.attr("disabled", false);
+		this.slider.removeClass("ui-disabled").attr("aria-disabled", false);
+		return this._setOption("disabled", false);
+	},
+
+	disable: function(){
+		this.element.attr("disabled", true);
+		this.slider.addClass("ui-disabled").attr("aria-disabled", true);
+		return this._setOption("disabled", true);
 	}
 });
 })( jQuery );
