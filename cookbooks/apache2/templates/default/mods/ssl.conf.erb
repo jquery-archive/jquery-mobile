@@ -1,0 +1,72 @@
+<IfModule mod_ssl.c>
+#
+# Pseudo Random Number Generator (PRNG):
+# Configure one or more sources to seed the PRNG of the SSL library.
+# The seed data should be of good random quality.
+# WARNING! On some platforms /dev/random blocks if not enough entropy
+# is available. This means you then cannot use the /dev/random device
+# because it would lead to very long connection times (as long as
+# it requires to make more entropy available). But usually those
+# platforms additionally provide a /dev/urandom device which doesn't
+# block. So, if available, use this one instead. Read the mod_ssl User
+# Manual for more details.
+#
+SSLRandomSeed startup builtin
+SSLRandomSeed startup file:/dev/urandom 512
+SSLRandomSeed connect builtin
+SSLRandomSeed connect file:/dev/urandom 512
+
+##
+##  SSL Global Context
+##
+##  All SSL configuration in this context applies both to
+##  the main server and all SSL-enabled virtual hosts.
+##
+
+#
+#   Some MIME-types for downloading Certificates and CRLs
+#
+AddType application/x-x509-ca-cert .crt
+AddType application/x-pkcs7-crl    .crl
+
+#   Pass Phrase Dialog:
+#   Configure the pass phrase gathering process.
+#   The filtering dialog program (`builtin' is a internal
+#   terminal dialog) has to provide the pass phrase on stdout.
+SSLPassPhraseDialog  builtin
+
+#   Inter-Process Session Cache:
+#   Configure the SSL Session Cache: First the mechanism 
+#   to use and second the expiring timeout (in seconds).
+#SSLSessionCache         dbm:/var/run/apache2/ssl_scache
+<% if @node[:platform] == "centos" || @node[:platform] == "redhat" || @node[:platform] == "fedora" -%>
+SSLSessionCache        shmcb:/var/cache/mod_ssl/scache(512000)
+<% else -%>
+SSLSessionCache        shmcb:/var/run/apache2/ssl_scache
+<% end -%> 
+SSLSessionCacheTimeout  300
+
+#   Semaphore:
+#   Configure the path to the mutual exclusion semaphore the
+#   SSL engine uses internally for inter-process synchronization. 
+<% if @node[:platform] == "centos" || @node[:platform] == "redhat" || @node[:platform] == "fedora" -%>
+SSLMutex  default
+<% else -%>
+SSLMutex  file:/var/run/apache2/ssl_mutex
+<% end -%>
+
+#   SSL Cipher Suite:
+#   List the ciphers that the client is permitted to negotiate.
+#   See the mod_ssl documentation for a complete list.
+#   enable only secure ciphers:
+SSLCipherSuite HIGH:MEDIUM:!ADH
+#   Use this instead if you want to allow cipher upgrades via SGC facility.
+#   In this case you also have to use something like 
+#        SSLRequire %{SSL_CIPHER_USEKEYSIZE} >= 128
+#   see http://httpd.apache.org/docs/2.2/ssl/ssl_howto.html.en#upgradeenc
+#SSLCipherSuite ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP:+eNULL
+
+# enable only secure protocols: SSLv3 and TLSv1, but not SSLv2
+SSLProtocol all -SSLv2
+
+</IfModule>

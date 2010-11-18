@@ -1,0 +1,19 @@
+God.watch do |w|
+  w.name = "apache2"
+  w.interval = 30.seconds # default
+  w.start = "<%= @params[:start] %>"
+  w.stop = "/etc/init.d/httpd stop"
+  w.restart = "<%= @params[:restart] %>"
+  w.start_grace = 10.seconds
+  w.restart_grace = 10.seconds
+  w.pid_file = "/var/run/httpd.pid"
+  w.behavior(:clean_pid_file)
+
+  w.start_if do |start|
+    start.condition(:process_running) do |c|
+        c.interval = 5.seconds
+        c.running = false
+        c.notify = 'admin'
+    end
+  end
+end

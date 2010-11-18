@@ -1,0 +1,19 @@
+<IfModule mod_proxy.c>
+        #turning ProxyRequests on and allowing proxying from all may allow
+        #spammers to use your proxy to send email.
+
+        ProxyRequests Off
+
+        <Proxy *>
+                AddDefaultCharset off
+                Order deny,allow
+                Deny from all
+                #Allow from .example.com
+        </Proxy>
+
+        # Enable/disable the handling of HTTP/1.1 "Via:" headers.
+        # ("Full" adds the server version; "Block" removes all outgoing Via: headers)
+        # Set to one of: Off | On | Full | Block
+
+        ProxyVia On
+</IfModule>

@@ -1,0 +1,2 @@
+These configs are taken from a Debian apache2.2-common 2.2.11-3 install. They 
+work on CentOS 5.3 with a few conditions using erb. 

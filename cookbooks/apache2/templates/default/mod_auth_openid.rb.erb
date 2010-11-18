@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+allowed_openids = Array.new
+<% @node[:apache][:allowed_openids].each do |id| -%>
+allowed_openids << "<%= id %>"
+<% end -%>
+
+if allowed_openids.grep(ARGV[0]).length > 0
+  exit 0
+else
+  exit 1
+end

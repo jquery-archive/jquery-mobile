@@ -1,0 +1,18 @@
+<IfModule mod_negotiation.c>
+#
+# LanguagePriority allows you to give precedence to some languages
+# in case of a tie during content negotiation.
+#
+# Just list the languages in decreasing order of preference. We have
+# more or less alphabetized them here. You probably want to change this.
+#
+LanguagePriority en ca cs da de el eo es et fr he hr it ja ko ltz nl nn no pl pt pt-BR ru sv tr zh-CN zh-TW
+
+#
+# ForceLanguagePriority allows you to serve a result page rather than
+# MULTIPLE CHOICES (Prefer) [in case of a tie] or NOT ACCEPTABLE (Fallback)
+# [in case no accepted languages matched the available variants]
+#
+ForceLanguagePriority Prefer Fallback
+
+</IfModule>

@@ -1,0 +1,22 @@
+#!/bin/sh -e
+
+SYSCONFDIR='<%= @node[:apache][:dir] %>'
+
+if [ -z $1 ]; then
+        echo "Which module would you like to disable?"
+        echo -n "Your choices are: "
+        ls $SYSCONFDIR/mods-enabled/*.load | \
+        sed -e "s,$SYSCONFDIR/mods-enabled/,,g" | sed -e 's/\.load$//g;' | xargs echo
+        echo -n "Module name? "
+        read MODNAME
+else
+        MODNAME=$1
+fi
+
+if ! [ -e $SYSCONFDIR/mods-enabled/$MODNAME.load ]; then
+        echo "This module is already disabled, or does not exist!"
+        exit 1
+fi
+
+rm -f $SYSCONFDIR/mods-enabled/$MODNAME.*
+echo "Module $MODNAME disabled; reload apache to fully disable."

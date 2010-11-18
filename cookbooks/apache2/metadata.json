@@ -1,0 +1,497 @@
+{
+    "maintainer": "Opscode, Inc.",
+    "attributes": {
+      "apache/traceenable": {
+        "default": "On",
+        "calculated": false,
+        "type": "string",
+        "choice": [
+
+        ],
+        "description": "Determine behavior of TRACE requests",
+        "display_name": "Apache Trace Enable",
+        "required": "optional",
+        "recipes": [
+
+        ]
+      },
+      "apache/timeout": {
+        "default": "300",
+        "calculated": false,
+        "type": "string",
+        "choice": [
+
+        ],
+        "description": "Connection timeout value",
+        "display_name": "Apache Timeout",
+        "required": "optional",
+        "recipes": [
+
+        ]
+      },
+      "apache/icondir": {
+        "default": "/usr/share/apache2/icons",
+        "calculated": false,
+        "type": "string",
+        "choice": [
+
+        ],
+        "description": "Directory location for icons",
+        "display_name": "Apache Icondir",
+        "required": "optional",
+        "recipes": [
+
+        ]
+      },
+      "apache/user": {
+        "default": "www-data",
+        "calculated": false,
+        "type": "string",
+        "choice": [
+
+        ],
+        "description": "User Apache runs as",
+        "display_name": "Apache User",
+        "required": "optional",
+        "recipes": [
+
+        ]
+      },
+      "apache/worker/threadsperchild": {
+        "default": "64",
+        "calculated": false,
+        "type": "string",
+        "choice": [
+
+        ],
+        "description": "Constant number of worker threads in each server process",
+        "display_name": "Apache Worker MPM ThreadsPerChild",
+        "required": "optional",
+        "recipes": [
+
+        ]
+      },
+      "apache/worker/maxclients": {
+        "default": "1024",
+        "calculated": false,
+        "type": "string",
+        "choice": [
+
+        ],
+        "description": "Maximum number of simultaneous connections",
+        "display_name": "Apache Worker MPM MaxClients",
+        "required": "optional",
+        "recipes": [
+
+        ]
+      },
+      "apache/worker": {
+        "calculated": false,
+        "type": "hash",
+        "choice": [
+
+        ],
+        "description": "Hash of Apache prefork tuning attributes.",
+        "display_name": "Apache Worker",
+        "required": "optional",
+        "recipes": [
+
+        ]
+      },
+      "apache/contact": {
+        "default": "ops@example.com",
+        "calculated": false,
+        "type": "string",
+        "choice": [
+
+        ],
+        "description": "Email address of webmaster",
+        "display_name": "Apache Contact",
+        "required": "optional",
+        "recipes": [
+
+        ]
+      },
+      "apache/prefork/startservers": {
+        "default": "16",
+        "calculated": false,
+        "type": "string",
+        "choice": [
+
+        ],
+        "description": "Number of MPM servers to start",
+        "display_name": "Apache Prefork MPM StartServers",
+        "required": "optional",
+        "recipes": [
+
+        ]
+      },
+      "apache/prefork/minspareservers": {
+        "default": "16",
+        "calculated": false,
+        "type": "string",
+        "choice": [
+
+        ],
+        "description": "Minimum number of spare server processes",
+        "display_name": "Apache Prefork MPM MinSpareServers",
+        "required": "optional",
+        "recipes": [
+
+        ]
+      },
+      "apache/allowed_openids": {
+        "default": "",
+        "calculated": false,
+        "type": "string",
+        "choice": [
+
+        ],
+        "description": "Array of OpenIDs allowed to authenticate",
+        "display_name": "Apache Allowed OpenIDs",
+        "required": "optional",
+        "recipes": [
+
+        ]
+      },
+      "apache/keepalivetimeout": {
+        "default": "5",
+        "calculated": false,
+        "type": "string",
+        "choice": [
+
+        ],
+        "description": "Time to wait for requests on persistent connection",
+        "display_name": "Apache Keepalive Timeout",
+        "required": "optional",
+        "recipes": [
+
+        ]
+      },
+      "apache/keepaliverequests": {
+        "default": "100",
+        "calculated": false,
+        "type": "string",
+        "choice": [
+
+        ],
+        "description": "Number of requests allowed on a persistent connection",
+        "display_name": "Apache Keepalive Requests",
+        "required": "optional",
+        "recipes": [
+
+        ]
+      },
+      "apache/worker/maxrequestsperchild": {
+        "default": "0",
+        "calculated": false,
+        "type": "string",
+        "choice": [
+
+        ],
+        "description": "Maximum number of request a child process will handle",
+        "display_name": "Apache Worker MPM MaxRequestsPerChild",
+        "required": "optional",
+        "recipes": [
+
+        ]
+      },
+      "apache/listen_ports": {
+        "default": [
+          "80",
+          "443"
+        ],
+        "calculated": false,
+        "type": "array",
+        "choice": [
+
+        ],
+        "description": "Ports that Apache should listen on",
+        "display_name": "Apache Listen Ports",
+        "required": "optional",
+        "recipes": [
+
+        ]
+      },
+      "apache/dir": {
+        "default": "/etc/apache2",
+        "calculated": false,
+        "type": "string",
+        "choice": [
+
+        ],
+        "description": "Location for Apache configuration",
+        "display_name": "Apache Directory",
+        "required": "optional",
+        "recipes": [
+
+        ]
+      },
+      "apache/worker/maxsparethreads": {
+        "default": "192",
+        "calculated": false,
+        "type": "string",
+        "choice": [
+
+        ],
+        "description": "Maximum number of spare worker threads",
+        "display_name": "Apache Worker MPM MaxSpareThreads",
+        "required": "optional",
+        "recipes": [
+
+        ]
+      },
+      "apache/prefork/maxrequestsperchild": {
+        "default": "10000",
+        "calculated": false,
+        "type": "string",
+        "choice": [
+
+        ],
+        "description": "Maximum number of request a child process will handle",
+        "display_name": "Apache Prefork MPM MaxRequestsPerChild",
+        "required": "optional",
+        "recipes": [
+
+        ]
+      },
+      "apache/prefork/serverlimit": {
+        "default": "400",
+        "calculated": false,
+        "type": "string",
+        "choice": [
+
+        ],
+        "description": "Upper limit on configurable server processes",
+        "display_name": "Apache Prefork MPM ServerLimit",
+        "required": "optional",
+        "recipes": [
+
+        ]
+      },
+      "apache/binary": {
+        "default": "/usr/sbin/apache2",
+        "calculated": false,
+        "type": "string",
+        "choice": [
+
+        ],
+        "description": "Apache server daemon program",
+        "display_name": "Apache Binary",
+        "required": "optional",
+        "recipes": [
+
+        ]
+      },
+      "apache/prefork/maxspareservers": {
+        "default": "32",
+        "calculated": false,
+        "type": "string",
+        "choice": [
+
+        ],
+        "description": "Maximum number of spare server processes",
+        "display_name": "Apache Prefork MPM MaxSpareServers",
+        "required": "optional",
+        "recipes": [
+
+        ]
+      },
+      "apache/keepalive": {
+        "default": "On",
+        "calculated": false,
+        "type": "string",
+        "choice": [
+
+        ],
+        "description": "HTTP persistent connections",
+        "display_name": "Apache Keepalive",
+        "required": "optional",
+        "recipes": [
+
+        ]
+      },
+      "apache": {
+        "calculated": false,
+        "type": "hash",
+        "choice": [
+
+        ],
+        "description": "Hash of Apache attributes",
+        "display_name": "Apache Hash",
+        "required": "optional",
+        "recipes": [
+
+        ]
+      },
+      "apache/worker/startservers": {
+        "default": "4",
+        "calculated": false,
+        "type": "string",
+        "choice": [
+
+        ],
+        "description": "Initial number of server processes to start",
+        "display_name": "Apache Worker MPM StartServers",
+        "required": "optional",
+        "recipes": [
+
+        ]
+      },
+      "apache/prefork/maxclients": {
+        "default": "400",
+        "calculated": false,
+        "type": "string",
+        "choice": [
+
+        ],
+        "description": "Maximum number of simultaneous connections",
+        "display_name": "Apache Prefork MPM MaxClients",
+        "required": "optional",
+        "recipes": [
+
+        ]
+      },
+      "apache/prefork": {
+        "calculated": false,
+        "type": "hash",
+        "choice": [
+
+        ],
+        "description": "Hash of Apache prefork tuning attributes.",
+        "display_name": "Apache Prefork",
+        "required": "optional",
+        "recipes": [
+
+        ]
+      },
+      "apache/servertokens": {
+        "default": "Prod",
+        "calculated": false,
+        "type": "string",
+        "choice": [
+
+        ],
+        "description": "Server response header",
+        "display_name": "Apache Server Tokens",
+        "required": "optional",
+        "recipes": [
+
+        ]
+      },
+      "apache/worker/minsparethreads": {
+        "default": "64",
+        "calculated": false,
+        "type": "string",
+        "choice": [
+
+        ],
+        "description": "Minimum number of spare worker threads",
+        "display_name": "Apache Worker MPM MinSpareThreads",
+        "required": "optional",
+        "recipes": [
+
+        ]
+      },
+      "apache/serversignature": {
+        "default": "On",
+        "calculated": false,
+        "type": "string",
+        "choice": [
+
+        ],
+        "description": "Configure footer on server-generated documents",
+        "display_name": "Apache Server Signature",
+        "required": "optional",
+        "recipes": [
+
+        ]
+      },
+      "apache/log_dir": {
+        "default": "/etc/apache2",
+        "calculated": false,
+        "type": "string",
+        "choice": [
+
+        ],
+        "description": "Location for Apache logs",
+        "display_name": "Apache Log Directory",
+        "required": "optional",
+        "recipes": [
+
+        ]
+      }
+    },
+    "suggestions": {
+    },
+    "platforms": {
+      "ubuntu": [
+
+      ],
+      "centos": [
+
+      ],
+      "debian": [
+
+      ],
+      "redhat": [
+
+      ]
+    },
+    "dependencies": {
+    },
+    "maintainer_email": "cookbooks@opscode.com",
+    "conflicting": {
+    },
+    "version": "0.11.0",
+    "name": "apache2",
+    "recipes": {
+      "apache2::mod_python": "Apache module 'python'",
+      "apache2::mod_authn_file": "Apache module 'authn_file'",
+      "apache2::mod_proxy_balancer": "Apache module 'proxy_balancer'",
+      "apache2::mod_php5": "Apache module 'php5'",
+      "apache2::mod_dir": "Apache module 'dir' with config file",
+      "apache2::mod_setenvif": "Apache module 'setenvif' with config file",
+      "apache2::mod_dav": "Apache module 'dav'",
+      "apache2::mod_authz_groupfile": "Apache module 'authz_groupfile'",
+      "apache2::mod_auth_basic": "Apache module 'auth_basic'",
+      "apache2::mod_deflate": "Apache module 'deflate' with config file",
+      "apache2::mod_authz_user": "Apache module 'authz_user'",
+      "apache2::mod_ssl": "Apache module 'ssl' with config file, adds port 443 to listen_ports",
+      "apache2::mod_rewrite": "Apache module 'rewrite'",
+      "apache2::mod_negotiation": "Apache module 'negotiation' with config file",
+      "apache2::mod_fcgid": "Apache module 'fcgid', package on ubuntu/debian, rhel/centos, compile source on suse; with config file",
+      "apache2::mod_dav_svn": "Apache module 'dav_svn'",
+      "apache2::mod_cgi": "Apache module 'cgi'",
+      "apache2::mod_authz_host": "Apache module 'authz_host'",
+      "apache2::mod_auth_digest": "Apache module 'auth_digest'",
+      "apache2::mod_headers": "Apache module 'headers'",
+      "apache2::mod_env": "Apache module 'env'",
+      "apache2::mod_proxy_connect": "Apache module 'proxy_connect'",
+      "apache2::mod_proxy": "Apache module 'proxy' with config file",
+      "apache2::mod_autoindex": "Apache module 'autoindex' with config file",
+      "apache2::mod_authnz_ldap": "Apache module 'authnz_ldap'",
+      "apache2::mod_status": "Apache module 'status' with config file",
+      "apache2::mod_proxy_http": "Apache module 'proxy_http'",
+      "apache2::mod_log_config": "Apache module 'log_config'",
+      "apache2::mod_ldap": "Apache module 'ldap'",
+      "apache2::mod_expires": "Apache module 'expires'",
+      "apache2::mod_authz_default": "Apache module 'authz_default'",
+      "apache2::mod_alias": "Apache module 'alias' with config file",
+      "apache2": "Main Apache configuration",
+      "apache2::mod_auth_openid": "Apache module 'authopenid'",
+      "apache2::mod_proxy_ajp": "Apache module 'proxy_ajp'",
+      "apache2::mod_mime": "Apache module 'mime' with config file"
+    },
+    "providing": {
+    },
+    "license": "Apache 2.0",
+    "replacing": {
+    },
+    "groupings": {
+    },
+    "long_description": "= DESCRIPTION:\n\nComplete Debian/Ubuntu style Apache2 configuration.\n\n= REQUIREMENTS:\n\nDebian or Ubuntu preferred.\n\nRed Hat/CentOS and Fedora can be used but will be converted to a Debian/Ubuntu style Apache as it's far easier to manage with chef. \n\n= ATTRIBUTES:\n\nThe file attributes/apache.rb contains the following attribute types:\n\n* platform specific locations and settings.\n* general settings\n* prefork attributes\n* worker attributes\n\nGeneral settings and prefork/worker attributes are tunable.\n\n= USAGE:\n\nInclude the apache2 recipe to install Apache2 and get 'sane' default settings. Configuration is modularized through Apache vhost sites a la Debian style configuration.\n\nFor Red Hat, CentOS and Fedora you should first disable selinux as it's not supported (yet), then remove the stock httpd and all it's dependencies prior to attempting to use this recipe. Many packages in these distributions drop conflicting configs into conf.d, all of which haven't been accounted for yet. Starting from scratch will also make it far easier to debug.\n\n== Defines:\n\n* apache_module: sets up an Apache module.\n* apache_conf: sets up a config file for an apache module.\n* apache_site: sets up a vhost site. The conf file must be available.\n* web_app: copies the template for a web app and enables it as a site via apache_site.\n\n== Web Apps:\n\nVarious applications that can be set up with Apache as the front end, such as PHP, Django, Rails and others can use the web_app define to set up the template and the Apache site. The define is kind of dumb, so the template needs have the application implementation settings, since we don't know what your app is or what is needed from Apache.\n\nWe only prototype one parameter for the web_app define, \"template\". This is used to specify the name of the template to use in the current cookbook. When you use web_app, you can set up any parameters you want to use in your template. They will get passed to the template through the params hash. For example, the sample web_app.conf.erb template in this cookbook makes use of these.\n\n* docroot\n* server_name\n* server_aliases\n\nThese are available as @params[:docroot], @params[:server_name], @params[:server_aliases] within the template. \n\nIf 'cookbook' and 'template' are not specified, the current cookbook's templates/default/web_app.conf.erb will be used. If this template is not suitable for your application, copy it to your cookbook and customize as needed.\n\n== God Monitor:\n\nThere's a new recipe, apache2::god_monitor. You will need to make sure to include the 'god' recipe before using the apache2::god_monitor recipe in your cookbook.\n\n== OpenID Auth\n\nInstalls the mod_auth_openid module from source. Specify an array of OpenIDs that are allowed to authenticate with the attribute apache[:allowed_openids]. Use the following in a vhost to protect with OpenID authentication:\n\n    AuthOpenIDEnabled On\n    AuthOpenIDDBLocation /var/cache/apache2/mod_auth_openid.db\n    AuthOpenIDUserProgram /usr/local/bin/mod_auth_openid.rb\n\nChange the DBLocation as appropriate for your platform. You'll need to change the file in the recipe to match. The UserProgram is optional if you don't want to limit access by certain OpenIDs.\n\n= LICENSE & AUTHOR:\n\nAuthor:: Joshua Timberman (<joshua@opscode.com>)\nCopyright:: 2009, Opscode, Inc\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n",
+    "recommendations": {
+    },
+    "description": "Installs and configures all aspects of apache2 using Debian style symlinks with helper definitions"
+  }

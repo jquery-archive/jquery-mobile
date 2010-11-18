@@ -1,0 +1,8 @@
+<VirtualHost *:80>
+    DocumentRoot <%= node[:vagrant][:directory] %>
+
+    <Directory <%= node[:vagrant][:directory] %>>
+        Allow from all
+        Options -MultiViews
+    </Directory>
+</VirtualHost>

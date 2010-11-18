@@ -1,0 +1,24 @@
+<IfModule alias_module>
+#
+# Aliases: Add here as many aliases as you need (with no limit). The format is 
+# Alias fakename realname
+#
+# Note that if you include a trailing / on fakename then the server will
+# require it to be present in the URL.  So "/icons" isn't aliased in this
+# example, only "/icons/".  If the fakename is slash-terminated, then the 
+# realname must also be slash terminated, and if the fakename omits the 
+# trailing slash, the realname must also omit it.
+#
+# We include the /icons/ alias for FancyIndexed directory listings.  If
+# you do not use FancyIndexing, you may comment this out.
+#
+Alias /icons/ "<%= @node[:apache][:icondir] %>"
+
+<Directory "<%= @node[:apache][:icondir] %>">
+    Options Indexes MultiViews
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+</Directory>
+
+</IfModule>

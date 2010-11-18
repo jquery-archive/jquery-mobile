@@ -9,3 +9,4 @@ combine/
 compiled/
 gitstatus.log
 refreshCDN
+.vagrant
