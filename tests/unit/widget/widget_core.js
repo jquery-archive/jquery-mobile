@@ -9,7 +9,6 @@
 
 		$.mobile.widget.prototype.options = { "fooBar" : true };
 		$.mobile.widget.prototype.element = $("<div data-foo-bar=" + expected + ">");
-
 		same($.mobile.widget.prototype._getCreateOptions()["fooBar"],
 				 expected);
 	});
@@ -33,5 +32,4 @@
 		same($.mobile.widget.prototype._getCreateOptions(),
 				 expected);
 	});
-
 })(jQuery);
