@@ -36,10 +36,17 @@
 		same($.mobile.media('screen 3'), true);
 	});
 
-	test( "adding breakpoints adds the appropriate width classes", function(){
+	test( "window widths smaller than the break points set max-width classes", function(){
 		$.fn.width = function(){ return 120; };
 
-		$.mobile.addResolutionBreakpoints(125);
+		$.mobile.addResolutionBreakpoints([125]);
 		ok($('html').hasClass('max-width-125px'));
+	});
+
+	test( "window widths larger than the break points set min-width classes", function(){
+		$.fn.width = function(){ return 1900; };
+
+		$.mobile.addResolutionBreakpoints([125]);
+		ok($('html').hasClass('min-width-125px'));
 	});
 })(jQuery);
