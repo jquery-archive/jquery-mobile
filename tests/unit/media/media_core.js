@@ -54,7 +54,7 @@
 		ok($('html').hasClass('min-width-2px'));
 	});
 
-	test( "triggering mobile init triggers orientationchange htmlclass", function(){
+	test( "triggering mobile init triggers orientationchange.htmlclass", function(){
 		expect( 1 );
 
 		$(window).bind("orientationchange.htmlclass", function(event){
@@ -62,5 +62,25 @@
 		});
 
 		$(document).trigger("mobileinit.htmlclass");
+	});
+
+	test( "binds remove of portrait and landscape classes resize/orientation fired", function(){
+		$.Event.prototype.orientation = true;
+
+		$("html").addClass("portrait landscape");
+		$(window).trigger("resize.htmlclass");
+		ok(!$("html").hasClass("portrait landscape"));
+
+		$("html").addClass("portrait landscape");
+		$(window).trigger("resize.htmlclass");
+		ok(!$("html").hasClass("portrait landscape"));
+	});
+
+	test( "sets break point class additions on resize/orientaion change", function(){
+		$.fn.width = function(){ return 1900; };
+
+		$("html").removeClass("min-width-320px");
+		$(window).trigger("resize.htmlclass");
+		ok($('html').hasClass('min-width-320px'));
 	});
 })(jQuery);
