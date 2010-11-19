@@ -33,9 +33,6 @@
 		//automatically handle form submissions through Ajax, when possible
 		ajaxFormsEnabled: true,
 		
-		//available CSS transitions
-		transitions: ['slide', 'slideup', 'slidedown', 'pop', 'flip', 'fade'],
-		
 		//set default transition - 'none' for no transitions
 		defaultTransition: 'slide',
 		
@@ -388,7 +385,7 @@
 				
 				// callback - remove classes, etc
 				to.animationComplete(function() {
-					from.add( to ).removeClass(" out in reverse " + $.mobile.transitions.join(' ') );
+					from.add( to ).removeClass("out in reverse " + transition );
 					from.removeClass( $.mobile.activePageClass );
 					loadComplete();
 					$pageContainer.removeClass('ui-mobile-viewport-transitioning');
