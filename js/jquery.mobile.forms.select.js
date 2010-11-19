@@ -70,7 +70,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					
 			menuPageContent = menuPage.find( ".ui-content" ),	
 					
-			screen = $( "<div>", {"class": "ui-listbox-screen ui-overlay ui-screen-hidden fade"})
+			screen = $( "<div>", {"class": "ui-listbox-screen ui-screen-hidden"})
 						.appendTo( thisPage ),		
 								
 			listbox = $( "<div>", { "class": "ui-listbox ui-listbox-hidden ui-overlay-shadow ui-corner-all pop ui-body-" + o.overlayTheme } )
