@@ -37,6 +37,7 @@
 	});
 
 	test( "window widths smaller than the break points set max-width classes", function(){
+		expect( 1 );
 		$.fn.width = function(){ return 120; };
 
 		$.mobile.addResolutionBreakpoints([125]);
@@ -44,9 +45,19 @@
 	});
 
 	test( "window widths larger than the break points set min-width classes", function(){
+		expect( 1 );
 		$.fn.width = function(){ return 1900; };
 
 		$.mobile.addResolutionBreakpoints([125]);
 		ok($('html').hasClass('min-width-125px'));
+	});
+
+	test( "many break points result in many class additions", function(){
+		expect( 2 );
+		$.fn.width = function(){ return 1900; };
+		$.mobile.addResolutionBreakpoints([1, 2]);
+
+		ok($('html').hasClass('min-width-1px'));
+		ok($('html').hasClass('min-width-2px'));
 	});
 })(jQuery);
