@@ -24,7 +24,7 @@ $elements = array(
 	'jquery.mobile.dialog.js',
 	'jquery.mobile.navbar.js',
 	'jquery.mobile.grid.js',
-	'jquery.mobile.js'
+	'jquery.mobile.core.js'
 );
 
 include('../combine.php');
