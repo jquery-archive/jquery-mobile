@@ -15,20 +15,16 @@
 	});
 
 	test( "media query check returns true when the position is absolute", function(){
-		expect( 1 );
 		$.fn.css = function(){ return "absolute"; };
 		same($.mobile.media('screen 1'), true);
 	});
 
 	test( "media query check returns false when the position is not absolute", function(){
-		expect( 1 );
 		$.fn.css = function(){ return "not absolute"; };
 		same($.mobile.media('screen 2'), false);
 	});
 
 	test( "media query check is cached", function(){
-		expect( 2 );
-
 		$.fn.css = function(){ return "absolute"; };
 		same($.mobile.media('screen 3'), true);
 
@@ -37,7 +33,6 @@
 	});
 
 	test( "window widths smaller than the break points set max-width classes", function(){
-		expect( 1 );
 		$.fn.width = function(){ return 120; };
 
 		$.mobile.addResolutionBreakpoints([125]);
@@ -45,7 +40,6 @@
 	});
 
 	test( "window widths larger than the break points set min-width classes", function(){
-		expect( 1 );
 		$.fn.width = function(){ return 1900; };
 
 		$.mobile.addResolutionBreakpoints([125]);
@@ -53,11 +47,20 @@
 	});
 
 	test( "many break points result in many class additions", function(){
-		expect( 2 );
 		$.fn.width = function(){ return 1900; };
 		$.mobile.addResolutionBreakpoints([1, 2]);
 
 		ok($('html').hasClass('min-width-1px'));
 		ok($('html').hasClass('min-width-2px'));
+	});
+
+	test( "triggering mobile init triggers orientationchange htmlclass", function(){
+		expect( 1 );
+
+		$(window).bind("orientationchange.htmlclass", function(event){
+			ok(event);
+		});
+
+		$(document).trigger("mobileinit.htmlclass");
 	});
 })(jQuery);

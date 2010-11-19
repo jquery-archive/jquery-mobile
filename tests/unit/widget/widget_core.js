@@ -6,7 +6,6 @@
 	module('mobile.widget');
 
 	test( "getting data from creation options", function(){
-		expect( 1 );
 		var expected = "bizzle";
 
 		$.mobile.widget.prototype.options = { "fooBar" : true };
@@ -16,7 +15,6 @@
 	});
 
 	test( "getting no data when the options are empty", function(){
-		expect( 1 );
 		var expected = {};
 
 		$.mobile.widget.prototype.options = {};
@@ -26,7 +24,6 @@
 	});
 
 	test( "getting no data when the element has none", function(){
-		expect( 1 );
 		var expected = {};
 
 		$.mobile.widget.prototype.options = { "fooBar" : true };
