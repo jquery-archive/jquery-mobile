@@ -196,9 +196,11 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		
 		var self = this,
 			menuHeight = self.list.outerHeight(),
+			menuWidth = self.list.outerWidth(),
 			scrollTop = $(window).scrollTop(),
 			btnOffset = self.button.offset().top,
-			screenHeight = window.innerHeight;
+			screenHeight = window.innerHeight,
+			screenWidth = window.innerWidth;
 			
 		function focusMenuItem(){
 			self.list.find( ".ui-btn-active" ).focus();
@@ -221,7 +223,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		}
 		else {
 			self.menuType = "overlay";
-			
+						
 			self.screen
 				.height( $(document).height() )
 				.removeClass('ui-screen-hidden');
@@ -229,11 +231,11 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			self.listbox
 				.append( self.list )
 				.removeClass( "ui-listbox-hidden" )
-				.css({
-					top: scrollTop + (screenHeight/2), 
-					"margin-top": -menuHeight/2,
-					left: window.innerWidth/2,
-					"margin-left": -1* self.listbox.outerWidth() / 2
+				.position({
+					my: "center center",
+					at: "center center",
+					of: self.button,
+					collision: "fit"
 				})
 				.addClass("in");
 				
