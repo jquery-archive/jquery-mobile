@@ -1,0 +1,77 @@
+@charset "utf-8";
+
+.ui-scrollview-clip {
+	overflow: hidden;
+	position: relative;
+}
+
+.ui-scrollview-view {
+	position: relative;
+	overflow: hidden;
+	top: 0;
+	left: 0;
+/*
+	min-width: 100%;
+	min-height: 100%;
+	padding: 0;
+	margin: 0;
+*/
+}
+
+.ui-scrolllistview .ui-li-divider {
+	z-index: 10;
+}
+
+.ui-scrollbar {
+	position: absolute;
+	overflow: hidden;
+
+	opacity: 0;
+	-webkit-transition: opacity 500ms;
+	-moz-transition: opacity 500ms;
+	transition: opacity 500ms;
+}
+
+.ui-scrollbar-visible {
+	opacity: 1;
+}
+
+.ui-scrollbar-vertical {
+	top: 2px;
+	right: 2px;
+	bottom: 8px;
+	width: 5px;
+}
+
+.ui-scrollbar-horizontal {
+	right: 8px;
+	bottom: 2px;
+	left: 2px;
+	height: 5px;
+}
+
+.ui-scrollbar-track {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.ui-scrollbar-thumb {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.3);
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+}
+
+.ui-scrollbar-vertical .ui-scrollbar-thumb {
+	width: 5px;
+	height: 100%;
+}
+
+.ui-scrollbar-horizontal .ui-scrollbar-thumb {
+	width: 100%;
+	height: 5px;
+}
