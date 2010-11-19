@@ -3,6 +3,8 @@
  */
 
 (function( $ ) {
+	module('mobile.widget');
+
 	test( "getting data from creation options", function(){
 		expect( 1 );
 		var expected = "bizzle";
