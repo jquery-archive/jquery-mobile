@@ -3,14 +3,10 @@
  */
 
 (function( $ ) {
-	var css_fn;
+	var css_fn = $.fn.css;
 
 	// make sure the original definition is replaced
 	module('mobile.media', {
-		setup: function(){
-			css_fn = $.fn.css;
-		},
-
 		teardown: function(){
 			$.fn.css = css_fn;
 		}
