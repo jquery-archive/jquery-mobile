@@ -3,12 +3,14 @@
  */
 
 (function( $ ) {
-	var css_fn = $.fn.css;
+	var cssFn = $.fn.css,
+	    widthFn = $.fn.width;
 
-	// make sure the original definition is replaced
+	// make sure original definitions are reset
 	module('mobile.media', {
 		teardown: function(){
-			$.fn.css = css_fn;
+			$.fn.css = cssFn;
+			$.fn.width = widthFn;
 		}
 	});
 
@@ -32,5 +34,12 @@
 
 		$.fn.css = function(){ return "not absolute"; };
 		same($.mobile.media('screen 3'), true);
+	});
+
+	test( "adding breakpoints adds the appropriate width classes", function(){
+		$.fn.width = function(){ return 120; };
+
+		$.mobile.addResolutionBreakpoints(125);
+		ok($('html').hasClass('max-width-125px'));
 	});
 })(jQuery);
