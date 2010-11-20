@@ -145,6 +145,12 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		}
 	},
 	
+	_removeCorners: function(li){
+		li
+			.add( li.find(".ui-btn-inner, .ui-li-link-alt, .ui-li-thumb") )
+			.removeClass( "ui-corner-top ui-corner-bottom ui-corner-br ui-corner-bl ui-corner-tr ui-corner-tl" );
+	},
+	
 	refresh: function( create ) {
 		this._createSubPages();
 		
@@ -226,34 +232,37 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			} else {
 				itemClass += " ui-li-static ui-btn-up-" + o.theme;
 			}
-				
-			if ( pos === 0 ) {
-				if ( o.inset ) {
-					itemClass += " ui-corner-top";
-
-					item
-						.add( item.find( ".ui-btn-inner" ) )
-						.find( ".ui-li-link-alt" )
-							.addClass( "ui-corner-tr" )
-						.end()
-						.find( ".ui-li-thumb" )
-							.addClass( "ui-corner-tl" );
-				}
-
-			} else if ( pos === li.length - 1 ) {
-
-				if ( o.inset ) {
-					itemClass += " ui-corner-bottom";
-
-					item
-						.add( item.find( ".ui-btn-inner" ) )
-						.find( ".ui-li-link-alt" )
-							.addClass( "ui-corner-br" )
-						.end()
-						.find( ".ui-li-thumb" )
-							.addClass( "ui-corner-bl" );
+			
+			
+			if( o.inset ){	
+				if ( pos === 0 ) {
+						itemClass += " ui-corner-top";
+	
+						item
+							.add( item.find( ".ui-btn-inner" ) )
+							.find( ".ui-li-link-alt" )
+								.addClass( "ui-corner-tr" )
+							.end()
+							.find( ".ui-li-thumb" )
+								.addClass( "ui-corner-tl" );
+						
+						self._removeCorners( item.next() );		
+	
+				} else if ( pos === li.length - 1 ) {
+						itemClass += " ui-corner-bottom";
+	
+						item
+							.add( item.find( ".ui-btn-inner" ) )
+							.find( ".ui-li-link-alt" )
+								.addClass( "ui-corner-br" )
+							.end()
+							.find( ".ui-li-thumb" )
+								.addClass( "ui-corner-bl" );
+						
+						self._removeCorners( item.prev() );		
 				}
 			}
+
 
 			if ( counter && itemClass.indexOf( "ui-li-divider" ) < 0 ) {
 				item
