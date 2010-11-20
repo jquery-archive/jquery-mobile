@@ -87,7 +87,7 @@
 		ok(!$("html").hasClass("portrait landscape"));
 	});
 
-	test( "sets break point class additions on resize/orientaion change", function(){
+	test( "sets break point class additions on resize/orientation change", function(){
 		$.fn.width = function(){ return 1900; };
 
 		$("html").removeClass("min-width-320px");
