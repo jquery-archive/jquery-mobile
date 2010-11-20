@@ -202,6 +202,9 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			screenHeight = window.innerHeight,
 			screenWidth = window.innerWidth;
 			
+		//add active class to button
+		self.button.addClass( $.mobile.activeBtnClass );
+			
 		function focusMenuItem(){
 			self.list.find( ".ui-btn-active" ).focus();
 		}
@@ -250,6 +253,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		function focusButton(){
 			setTimeout(function(){
 				self.button.focus();
+				//remove active class from button
+				self.button.removeClass( $.mobile.activeBtnClass );
 			}, 40);
 			
 			self.listbox.removeAttr('style').append( self.list );
