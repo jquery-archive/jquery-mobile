@@ -132,7 +132,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			set.last().data('collapsible-last', true)	
 		}
 					
-		collapsibleHeading.click(function(){ 
+		collapsibleHeading.bind( $.support.touch ? "touchstart" : "click", function(){ 
 			if( collapsibleHeading.is('.ui-collapsible-heading-collapsed') ){
 				collapsibleContain.trigger('expand'); 
 			}	
