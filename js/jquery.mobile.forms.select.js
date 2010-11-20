@@ -70,14 +70,14 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					
 			menuPageContent = menuPage.find( ".ui-content" ),	
 					
-			screen = $( "<div>", {"class": "ui-listbox-screen ui-overlay ui-screen-hidden fade"})
+			screen = $( "<div>", {"class": "ui-selectmenu-screen ui-screen-hidden"})
 						.appendTo( thisPage ),		
 								
-			listbox = $( "<div>", { "class": "ui-listbox ui-listbox-hidden ui-overlay-shadow ui-corner-all pop ui-body-" + o.overlayTheme } )
+			listbox = $( "<div>", { "class": "ui-selectmenu ui-selectmenu-hidden ui-overlay-shadow ui-corner-all pop ui-body-" + o.overlayTheme } )
 					.insertAfter(screen),
 					
 			list = $( "<ul>", { 
-					"class": "ui-listbox-list", 
+					"class": "ui-selectmenu-list", 
 					"id": menuId, 
 					"role": "listbox", 
 					"aria-labelledby": buttonId,
@@ -122,7 +122,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			});		
 		
 		//button events
-		button.click(function(event){
+		button.bind( $.support.touch ? "touchstart" : "click", function(event){
 			self.open();
 			return false;
 		});
@@ -196,9 +196,14 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		
 		var self = this,
 			menuHeight = self.list.outerHeight(),
+			menuWidth = self.list.outerWidth(),
 			scrollTop = $(window).scrollTop(),
 			btnOffset = self.button.offset().top,
-			screenHeight = window.innerHeight;
+			screenHeight = window.innerHeight,
+			screenWidth = window.innerWidth;
+			
+		//add active class to button
+		self.button.addClass( $.mobile.activeBtnClass );
 			
 		function focusMenuItem(){
 			self.list.find( ".ui-btn-active" ).focus();
@@ -221,19 +226,19 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		}
 		else {
 			self.menuType = "overlay";
-			
+						
 			self.screen
 				.height( $(document).height() )
 				.removeClass('ui-screen-hidden');
 				
 			self.listbox
 				.append( self.list )
-				.removeClass( "ui-listbox-hidden" )
-				.css({
-					top: scrollTop + (screenHeight/2), 
-					"margin-top": -menuHeight/2,
-					left: window.innerWidth/2,
-					"margin-left": -1* self.listbox.outerWidth() / 2
+				.removeClass( "ui-selectmenu-hidden" )
+				.position({
+					my: "center center",
+					at: "center center",
+					of: self.button,
+					collision: "fit"
 				})
 				.addClass("in");
 				
@@ -248,6 +253,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		function focusButton(){
 			setTimeout(function(){
 				self.button.focus();
+				//remove active class from button
+				self.button.removeClass( $.mobile.activeBtnClass );
 			}, 40);
 			
 			self.listbox.removeAttr('style').append( self.list );
@@ -262,7 +269,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		}
 		else{
 			self.screen.addClass( "ui-screen-hidden" );
-			self.listbox.addClass( "ui-listbox-hidden" ).removeAttr( "style" ).removeClass("in");
+			self.listbox.addClass( "ui-selectmenu-hidden" ).removeAttr( "style" ).removeClass("in");
 			focusButton();
 		}
 		

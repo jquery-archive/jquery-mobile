@@ -15,6 +15,7 @@ FILES = js/jquery.ui.widget.js \
   js/jquery.mobile.event.js \
   js/jquery.mobile.hashchange.js \
   js/jquery.mobile.page.js \
+  js/jquery.ui.position.js \
   js/jquery.mobile.fixHeaderFooter.js \
   js/jquery.mobile.forms.checkboxradio.js \
   js/jquery.mobile.forms.textinput.js \
@@ -55,19 +56,19 @@ clean:
 	@@rm -rf ${DIR}*
 
 css:
-	@@head -8 js/jquery.mobile.js | ${SED_VER} > ${CSS}
+	@@head -8 js/jquery.mobile.core.js | ${SED_VER} > ${CSS}
 	@@cat ${CSSFILES} >> ${CSS}
 
 cssmin: css
-	@@head -8 js/jquery.mobile.js | ${SED_VER} > ${CSSMIN}
+	@@head -8 js/jquery.mobile.core.js | ${SED_VER} > ${CSSMIN}
 	@@java -jar build/yuicompressor-2.4.2.jar --type css ${CSS} >> ${CSSMIN}
 
 mobile:
-	@@head -8 js/jquery.mobile.js | ${SED_VER} > ${MAX}
+	@@head -8 js/jquery.mobile.core.js | ${SED_VER} > ${MAX}
 	@@cat ${FILES} >> ${MAX}
 
 min: mobile
-	@@head -8 js/jquery.mobile.js | ${SED_VER} > ${MIN}
+	@@head -8 js/jquery.mobile.core.js | ${SED_VER} > ${MIN}
 	@@java -jar build/google-compiler-20100917.jar --js ${MAX} --warning_level QUIET --js_output_file ${MIN}.tmp
 	@@cat ${MIN}.tmp >> ${MIN}
 	@@rm -f ${MIN}.tmp
