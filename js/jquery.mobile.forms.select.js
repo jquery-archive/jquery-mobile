@@ -122,7 +122,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			});		
 		
 		//button events
-		button.click(function(event){
+		button.bind( $.support.touch ? "touchstart" : "click", function(event){
 			self.open();
 			return false;
 		});
