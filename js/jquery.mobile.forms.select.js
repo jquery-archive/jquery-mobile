@@ -70,14 +70,14 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					
 			menuPageContent = menuPage.find( ".ui-content" ),	
 					
-			screen = $( "<div>", {"class": "ui-listbox-screen ui-screen-hidden"})
+			screen = $( "<div>", {"class": "ui-selectmenu-screen ui-screen-hidden"})
 						.appendTo( thisPage ),		
 								
-			listbox = $( "<div>", { "class": "ui-listbox ui-listbox-hidden ui-overlay-shadow ui-corner-all pop ui-body-" + o.overlayTheme } )
+			listbox = $( "<div>", { "class": "ui-selectmenu ui-selectmenu-hidden ui-overlay-shadow ui-corner-all pop ui-body-" + o.overlayTheme } )
 					.insertAfter(screen),
 					
 			list = $( "<ul>", { 
-					"class": "ui-listbox-list", 
+					"class": "ui-selectmenu-list", 
 					"id": menuId, 
 					"role": "listbox", 
 					"aria-labelledby": buttonId,
@@ -230,7 +230,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				
 			self.listbox
 				.append( self.list )
-				.removeClass( "ui-listbox-hidden" )
+				.removeClass( "ui-selectmenu-hidden" )
 				.position({
 					my: "center center",
 					at: "center center",
@@ -264,7 +264,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		}
 		else{
 			self.screen.addClass( "ui-screen-hidden" );
-			self.listbox.addClass( "ui-listbox-hidden" ).removeAttr( "style" ).removeClass("in");
+			self.listbox.addClass( "ui-selectmenu-hidden" ).removeAttr( "style" ).removeClass("in");
 			focusButton();
 		}
 		
