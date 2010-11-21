@@ -66,7 +66,7 @@
 			var prependToFn = $.fn.prependTo;
 
 			$.fn.prependTo = function( selector ){
-				var result = prependToFn.call($(this), selector);
+				var result = prependToFn.call(this, selector);
 				if(this[0].href && this[0].href.indexOf("testurl") != -1)
 					result = [{href: url}];
 				return result;
