@@ -84,5 +84,8 @@
 			reloadLib();
 			ok(!$.support.dynamicBaseTag);
 		});
+
+		//TODO propExists testing, refactor propExists into mockable method
+		//TODO scrollTop testing, refactor scrollTop logic into mockable method
 	}
 })(jQuery);
