@@ -4,15 +4,8 @@
 
 (function( $ ) {
 	$.testHelper.excludeFileProtocol(function(){
-		var reloadCount = 0,
-		lib = $("script[src$=support.js]"),
-	  src = lib.attr('src'),
-	  reloadLib = function(){
-			//NOTE append "cache breaker" to force reload
-			lib.attr('src', src + "?" + reloadCount++);
-			$("body").append(lib);
-	  },
-		prependToFn = $.fn.prependTo;
+		var	prependToFn = $.fn.prependTo,
+				libName = "jquery.mobile.support.js";
 
 		module("mobile.support", {
 			teardown: function(){
@@ -35,7 +28,7 @@
 			history.pushState = function(){};
 			$.mobile.media = function(){ return true; };
 
-			reloadLib();
+			$.testHelper.reloadLib(libName);
 
 			ok($.support.orientation);
 			ok($.support.touch);
@@ -48,7 +41,7 @@
 			delete window["orientation"];
 			delete document["ontouchend"];
 
-			reloadLib();
+			$.testHelper.reloadLib(libName);
 
 			ok(!$.support.orientation);
 			ok(!$.support.touch);
@@ -68,13 +61,13 @@
 
 		test( "detects dynamic base tag when new base element added and base href updates", function(){
 			mockBaseCheck(location.protocol + '//' + location.host + location.pathname + "ui-dir/");
-			reloadLib();
+			$.testHelper.reloadLib(libName);
 			ok($.support.dynamicBaseTag);
 		});
 
 		test( "detects no dynamic base tag when new base element added and base href unchanged", function(){
 			mockBaseCheck('testurl');
-			reloadLib();
+			$.testHelper.reloadLib(libName);
 			ok(!$.support.dynamicBaseTag);
 		});
 
