@@ -3,14 +3,7 @@
  */
 
 (function( $ ) {
-	//NOTE alert tester that running the file locally will not work for these tests
-	if ( location.protocol == "file:" ) {
-		var message = "Tests require script reload and cannot be run via file: protocol";
-
-		test(message, function(){
-			ok(false, message);
-		});
-	} else {
+	$.testHelper.excludeFileProtocol(function(){
 		var reloadCount = 0,
 		lib = $("script[src$=support.js]"),
 	  src = lib.attr('src'),
@@ -87,5 +80,5 @@
 
 		//TODO propExists testing, refactor propExists into mockable method
 		//TODO scrollTop testing, refactor scrollTop logic into mockable method
-	}
+	});
 })(jQuery);
