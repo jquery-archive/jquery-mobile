@@ -16,18 +16,21 @@
 			}
 		},
 
-		reloadCounts: {},
+		reloads: {},
 
 		reloadLib: function(libName){
-			var lib = $("script[src$=" + libName + "]").clone(),
-					src = lib.attr('src');
-
-			if(this.reloadCounts[libName] === undefined) {
-				this.reloadCounts[libName] = 0;
+			if(this.reloads[libName] === undefined) {
+				this.reloads[libName] = {
+					lib: $("script[src$=" + libName + "]"),
+					count: 0
+				};
 			}
 
+			var	lib = this.reloads[libName].lib.clone(),
+			    src = lib.attr('src');
+
 			//NOTE append "cache breaker" to force reload
-			lib.attr('src', src + "?" + this.reloadCounts[libName]++);
+			lib.attr('src', src + "?" + this.reloads[libName].count++);
 			$("body").append(lib);
 		}
 	};
