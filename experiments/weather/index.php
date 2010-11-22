@@ -20,7 +20,7 @@ $forecast_list = $xml->xpath("/xml_api_reply/weather/forecast_conditions");
 <html> 
 	<head>
 	<meta charset="utf-8" /> 
-	<title>jQuery Mobile Framework - Weather for <?= print $information[0]->city['data']; ?></title> 
+	<title>jQuery Mobile Framework - Weather for <?= $information[0]->city['data']; ?></title> 
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a2/jquery.mobile-1.0a2.min.css" />
 <script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.0a2/jquery.mobile-1.0a2.min.js"></script>
@@ -47,7 +47,7 @@ $forecast_list = $xml->xpath("/xml_api_reply/weather/forecast_conditions");
 
 
 	<div data-role="content">
-		<h1>Currently in <?= print $information[0]->city['data']; ?>:</h1>
+		<h1>Currently in <?=$information[0]->city['data']; ?>:</h1>
 		<div class="current ui-body ui-bar-a ui-corner-all">
 
             <img src="<?= 'http://www.google.com' . $current[0]->icon['data']?>" alt="weather">
