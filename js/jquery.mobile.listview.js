@@ -1,8 +1,8 @@
 /*
 * jQuery Mobile Framework : "listview" plugin
 * Copyright (c) jQuery Project
-* Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
-* Note: Code is in draft form and is subject to change 
+* Dual licensed under the MIT or GPL Version 2 licenses.
+* http://jquery.org/license
 */
 (function($, undefined ) {
 
@@ -279,6 +279,11 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		});
 	},
 	
+	//create a string for ID/subpage url creation
+	_idStringEscape: function( str ){
+		return str.replace(/[^a-zA-Z0-9]/g, '-');
+	},
+	
 	_createSubPages: function() {
 		var parentList = this.element,
 			parentPage = parentList.closest( ".ui-page" ),
@@ -290,7 +295,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			var list = $( this ),
 				parent = list.parent(),
 				title = parent.contents()[ 0 ].nodeValue.split("\n")[0],
-				id = parentId + "&" + $.mobile.subPageUrlKey + "=" + $.mobile.idStringEscape(title + " " + i),
+				id = parentId + "&" + $.mobile.subPageUrlKey + "=" + self.idStringEscape(title + " " + i),
 				theme = list.data( "theme" ) || o.theme,
 				countTheme = list.data( "counttheme" ) || parentList.data( "counttheme" ) || o.countTheme,
 				newPage = list.wrap( "<div data-role='page'><div data-role='content'></div></div>" )
