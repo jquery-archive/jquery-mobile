@@ -1,5 +1,5 @@
 <?
-$location = isset($_GET['location']) ? $_GET['location'] : 'Boston';
+$location = isset($_GET['location']) ? $_GET['location'] : '02135';
 
 //get xml from google api
 $ch = curl_init();
@@ -27,20 +27,24 @@ $forecast_list = $xml->xpath("/xml_api_reply/weather/forecast_conditions");
 	
 	<style>
 		.current { text-align: left; }
-		
 		h1 { font-size: 1.3em; text-align: center;  }
-		.ui-listview img  { left: auto;margin: 10px;position: absolute;right: 10px; }
+		.ui-listview img { left: auto; margin: 10px;position: absolute;right: 10px; }
 		.current { position: relative; }
 		.current img { float: left; margin: 10px 10px 0 0; }
 		.current p { font-weight: bold; font-size: 1.1em; margin-left: 20px; }
 	</style>
+	<script>
+		$('div').live('pagecreate',function(){
+			$('.ui-listview img').removeClass('ui-corner-bl');
+		});
+	</script>
 </head> 
 <body> 
 
 <div data-role="page" data-theme="a">
 
 	<form action="" method="get" class="ui-body ui-body-a ">
-		<label for="location">Change location:</label>
+		<label for="location">Change zip code:</label>
 		<input type="search" name="location" id="location" value="<?=$location; ?>" data-theme="a" />
 		<input type="submit" data-role="nojs" value="submit" />
 			</form>
