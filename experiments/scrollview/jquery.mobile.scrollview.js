@@ -20,9 +20,9 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 	
 		useCSSTransform:   true,  // Use CSS "transform" property instead of "top" and "left" for positioning.
 	
-		startEventName:    "scrollstart.scrollview",
-		updateEventName:   "scrollupdate.scrollview",
-		stopEventName:     "scrollstop.scrollview",
+		startEventName:    "scrollstart",
+		updateEventName:   "scrollupdate",
+		stopEventName:     "scrollstop",
 	
 		eventType:         $.support.touch ? "touch" : "mouse",
 	
@@ -195,17 +195,33 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 	_getScrollHierarchy: function()
 	{
 		var svh = [];
-		this._$clip.parents(".ui-scrollview-clip").andSelf().each(function(){
+		this._$clip.parents(".ui-scrollview-clip").each(function(){
 			var d = $(this).data("scrollview");
-			if (d) svh.push(d);
+			if (d) svh.unshift(d);
 		});
 		return svh;
+	},
+
+	_getAncestorByDirection: function(dir)
+	{
+		var svh = this._getScrollHierarchy();
+		var n = svh.length;
+		while (0 < n--)
+		{
+			var sv = svh[n];
+			var svdir = sv.options.direction;
+
+			if (!svdir || svdir == dir)
+				return sv;
+		}
+		return null;
 	},
 
 	_handleDragStart: function(e, ex, ey)
 	{
 		// Stop any scrolling of elements in our parent hierarcy.
 		$.each(this._getScrollHierarchy(),function(i,sv){ sv._stopMScroll(); });
+		this._stopMScroll();
 
 		var c = this._$clip;
 		var v = this._$view;
@@ -217,6 +233,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		this._speedX = 0;
 		this._speedY = 0;
 		this._direction = "";
+		this._didDrag = false;
 
 		if (this._hTracker)
 		{
@@ -253,6 +270,15 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		e.stopPropagation();
 	},
 
+	_propagateDragMove: function(sv, e, ex, ey, dir)
+	{
+		this._hideScrollBars();
+		this._disableTracking();
+		sv._handleDragStart(e,ex,ey);
+		sv._direction = dir;
+		sv._didDrag = this.didDrag;
+	},
+
 	_handleDragMove: function(e, ex, ey)
 	{
 		this._lastMove = getCurrentTime();
@@ -283,23 +309,15 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 
 			if (this.options.direction != dir && dir)
 			{
-				var svh = this._getScrollHierarchy(); svh.pop();
-				var sv = null;
-				while (svh.length)
+				// This scrollview can't handle the direction the user
+				// is attempting to scroll. Find an ancestor scrollview
+				// that can handle the request.
+
+				var sv = this._getAncestorByDirection(dir);
+				if (sv)
 				{
-					var sv = svh.pop();
-
-					// If the scrollview can scroll in any direction, or
-					// inthe direction we care about, make it the new scrollview.
-
-					if (!sv.options.direction || sv.options.direction == dir)
-					{
-						this._hideScrollBars();
-						this._disableTracking();
-						sv._handleDragStart(e,ex,ey);
-						sv._direction = dir;
-						return false;
-					}
+					this._propagateDragMove(sv, e, ex, ey, dir);
+					return false;
 				}
 			}
 
@@ -320,6 +338,14 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 			this._doSnapBackX = false;
 			if (newX > 0 || newX < this._maxX)
 			{
+				var sv = this._getAncestorByDirection("horizontal");
+				if (sv)
+				{
+					this._setScrollPosition(newX > 0 ? 0 : this._maxX, newY);
+					this._propagateDragMove(sv, e, ex, ey, dir);
+					return false;
+				}
+
 				newX = x + (dx/2);
 				this._doSnapBackX = true;
 			}
@@ -336,12 +362,21 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 			this._doSnapBackY = false;
 			if (newY > 0 || newY < this._maxY)
 			{
+				var sv = this._getAncestorByDirection("vertical");
+				if (sv)
+				{
+					this._setScrollPosition(newX, newY > 0 ? 0 : this._maxY);
+					this._propagateDragMove(sv, e, ex, ey, dir);
+					return false;
+				}
+
 				newY = y + (dy/2);
 				this._doSnapBackY = true;
 			}
 
 		}
 
+		this._didDrag = true;
 		this._lastX = ex;
 		this._lastY = ey;
 
@@ -367,14 +402,17 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		var sy = (this._vTracker && this._speedY && doScroll) ? this._speedY : (this._doSnapBackY ? 1 : 0);
 	
 		if (sx || sy)
-		{
 			this._startMScroll(sx, sy);
-			e.preventDefault();
-		}
 		else
 			this._hideScrollBars();
 
 		this._disableTracking();
+
+		// If a view scrolled, then we need to absorb
+		// the event so that links etc, underneath our
+		// cursor/finger don't fire.
+
+		return this.didDrag ? false : undefined;
 	},
 
 	_enableTracking: function()
