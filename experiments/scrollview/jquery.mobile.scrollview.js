@@ -191,17 +191,31 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		return { x: this._sx, y: this._sy };
 	},
 
-	_handleMouseDown: function(e, ex, ey)
+	_getScrollHierarchy: function()
 	{
-		this._stopMScroll();
+		var svh = [];
+		this._$clip.parents(".ui-scrollview-clip").andSelf().each(function(){
+			var d = $(this).data("scrollview");
+			if (d) svh.push(d);
+		});
+		return svh;
+	},
+
+	_handleDragStart: function(e, ex, ey)
+	{
+		// Stop any scrolling of elements in our parent hierarcy.
+		$.each(this._getScrollHierarchy(),function(i,sv){ sv._stopMScroll(); });
 
 		var c = this._$clip;
 		var v = this._$view;
 
+		this._lastX = ex;
+		this._lastY = ey;
 		this._doSnapBackX = false;
 		this._doSnapBackY = false;
 		this._speedX = 0;
 		this._speedY = 0;
+		this._direction = "";
 
 		if (this._hTracker)
 		{
@@ -209,7 +223,6 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 			var vw = parseInt(v.css("width"), 10);
 			this._maxX = cw - vw;
 			if (this._maxX > 0) this._maxX = 0;
-			this._lastX = ex;
 			if (this._$hScrollBar)
 				this._$hScrollBar.find(".ui-scrollbar-thumb").css("width", (cw >= vw ? "100%" : Math.floor(cw/vw*100)+ "%"));
 		}
@@ -220,7 +233,6 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 			var vh = parseInt(v.css("height"), 10);
 			this._maxY = ch - vh;
 			if (this._maxY > 0) this._maxY = 0;
-			this._lastY = ey;
 			if (this._$vScrollBar)
 				this._$vScrollBar.find(".ui-scrollbar-thumb").css("height", (ch >= vh ? "100%" : Math.floor(ch/vh*100)+ "%"));
 		}
@@ -237,18 +249,63 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 
 		if (this.options.eventType == "mouse")
 			e.preventDefault();
+		e.stopPropagation();
 	},
 
-	_handleMouseMove: function(e, ex, ey)
+	_handleDragMove: function(e, ex, ey)
 	{
 		this._lastMove = getCurrentTime();
 
 		var v = this._$view;
 
+		if (!this._direction)
+		{
+			var x = Math.abs(ex - this._lastX);
+			var y = Math.abs(ey - this._lastY);
+			if (x == 0 && y == 0) {
+				return false;
+			}
+
+			var dir = null;
+			var r = 0;
+			if (x < y && (x/y) < 0.5) {
+				dir = "vertical";
+			}
+			else if (x > y && (y/x) < 0.5) {
+				dir = "horizontal";
+			}
+
+			if (this.options.direction != dir && dir)
+			{
+				var svh = this._getScrollHierarchy().pop();
+				var sv = null;
+				while (svh.length)
+				{
+					var sv = svh.pop();
+
+					// If the scrollview can scroll in any direction, or
+					// inthe direction we care about, make it the new scrollview.
+
+					if (!sv.options.direction || sv.options.direction == dir)
+					{
+						this._hideScrollBars();
+						this._disableTracking();
+						sv._handleDragStart(e,ex,ey);
+						sv._direction = dir;
+						return false;
+					}
+				}
+			}
+
+			this._direction = this.options.direction;
+			// var r = dir == "horizontal" ? y / x : (dir == "vertical" ? x/y : "");
+			// console.log("(" + x + "," + y + ") " + dir + "  " + r);
+		}
+
 		var newX = 0;
 		var newY = 0;
 
-		if (this._hTracker)
+		if (this._direction != "vertical" && this._hTracker)
 		{
 			var dx = ex - this._lastX;		
 			var x = this._sx;
@@ -263,11 +320,9 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 				newX = x + (dx/2);
 				this._doSnapBackX = true;
 			}
-
-			this._lastX = ex;
 		}
 
-		if (this._vTracker)
+		if (this._direction != "horizontal" && this._vTracker)
 		{
 			var dy = ey - this._lastY;		
 			var y = this._sy;
@@ -283,8 +338,10 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 				this._doSnapBackY = true;
 			}
 
-			this._lastY = ey;
 		}
+
+		this._lastX = ex;
+		this._lastY = ey;
 
 		this._setScrollPosition(newX, newY);
 
@@ -293,10 +350,12 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		// Call preventDefault() to prevent touch devices from
 		// scrolling the main window.
 
-		e.preventDefault();
+		// e.preventDefault();
+		
+		return false;
 	},
 
-	_handleMouseUp: function(e)
+	_handleDragStop: function(e)
 	{
 		var l = this._lastMove;
 		var t = getCurrentTime();
@@ -318,14 +377,14 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 
 	_enableTracking: function()
 	{
-		$(document).bind(this._mousemoveType, this._mousemoveCB);
-		$(document).bind(this._mouseupType, this._mouseupCB);
+		$(document).bind(this._dragMoveEvt, this._dragMoveCB);
+		$(document).bind(this._dragStopEvt, this._dragStopCB);
 	},
 
 	_disableTracking: function()
 	{
-		$(document).unbind(this._mousemoveType, this._mousemoveCB);
-		$(document).unbind(this._mouseupType, this._mouseupCB);
+		$(document).unbind(this._dragMoveEvt, this._dragMoveCB);
+		$(document).unbind(this._dragStopEvt, this._dragStopCB);
 	},
 
 	_showScrollBars: function()
@@ -347,36 +406,36 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		var self = this;
 		if (this.options.eventType == "mouse")
 		{
-			this._mousedownType = "mousedown";
-			this._mousedownCB = function(e){ return self._handleMouseDown(e, e.clientX, e.clientY); };
+			this._dragStartEvt = "mousedown";
+			this._dragStartCB = function(e){ return self._handleDragStart(e, e.clientX, e.clientY); };
 
-			this._mousemoveType = "mousemove";
-			this._mousemoveCB = function(e){ return self._handleMouseMove(e, e.clientX, e.clientY); };
+			this._dragMoveEvt = "mousemove";
+			this._dragMoveCB = function(e){ return self._handleDragMove(e, e.clientX, e.clientY); };
 
-			this._mouseupType = "mouseup";
-			this._mouseupCB = function(e){ return self._handleMouseUp(e); };
+			this._dragStopEvt = "mouseup";
+			this._dragStopCB = function(e){ return self._handleDragStop(e); };
 		}
 		else // "touch"
 		{
-			this._mousedownType = "touchstart";
-			this._mousedownCB = function(e)
+			this._dragStartEvt = "touchstart";
+			this._dragStartCB = function(e)
 			{
 				var t = e.originalEvent.targetTouches[0];
-				return self._handleMouseDown(e, t.pageX, t.pageY);
+				return self._handleDragStart(e, t.pageX, t.pageY);
 			};
 
-			this._mousemoveType = "touchmove";
-			this._mousemoveCB = function(e)
+			this._dragMoveEvt = "touchmove";
+			this._dragMoveCB = function(e)
 			{
 				var t = e.originalEvent.targetTouches[0];
-				return self._handleMouseMove(e, t.pageX, t.pageY);
+				return self._handleDragMove(e, t.pageX, t.pageY);
 			};
 
-			this._mouseupType = "touchend";
-			this._mouseupCB = function(e){ return self._handleMouseUp(e); };
+			this._dragStopEvt = "touchend";
+			this._dragStopCB = function(e){ return self._handleDragStop(e); };
 		}
 
-		this._$view.bind(this._mousedownType, this._mousedownCB);
+		this._$view.bind(this._dragStartEvt, this._dragStartCB);
 
 		if (this.options.showScrollBars)
 		{
