@@ -7,7 +7,7 @@
 		excludeFileProtocol: function(callback){
 			var message = "Tests require script reload and cannot be run via file: protocol";
 
-			if ( location.protocol == "file:" ) {
+			if (location.protocol == "file:") {
 				test(message, function(){
 					ok(false, message);
 				});
