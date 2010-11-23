@@ -15,7 +15,8 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		overshootDuration: 250,   // Duration of the overshoot animation in msecs.
 		snapbackDuration:  500,   // Duration of the snapback animation in msecs.
 	
-		moveThreshold:     100,   // Time between mousemoves must not exceed this threshold.
+		moveThreshold:     10,   // User must move this many pixels in any direction to trigger a scroll.
+		moveIntervalThreshold:     100,   // Time between mousemoves must not exceed this threshold.
 	
 		useCSSTransform:   true,  // Use CSS "transform" property instead of "top" and "left" for positioning.
 	
@@ -258,11 +259,16 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 
 		var v = this._$view;
 
+		var dx = ex - this._lastX;
+		var dy = ey - this._lastY;
+
 		if (!this._direction)
 		{
-			var x = Math.abs(ex - this._lastX);
-			var y = Math.abs(ey - this._lastY);
-			if (x == 0 && y == 0) {
+			var x = Math.abs(dx);
+			var y = Math.abs(dy);
+			var mt = this.options.moveThreshold;
+
+			if (x < mt && y < mt) {
 				return false;
 			}
 
@@ -277,7 +283,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 
 			if (this.options.direction != dir && dir)
 			{
-				var svh = this._getScrollHierarchy().pop();
+				var svh = this._getScrollHierarchy(); svh.pop();
 				var sv = null;
 				while (svh.length)
 				{
@@ -298,8 +304,6 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 			}
 
 			this._direction = this.options.direction;
-			// var r = dir == "horizontal" ? y / x : (dir == "vertical" ? x/y : "");
-			// console.log("(" + x + "," + y + ") " + dir + "  " + r);
 		}
 
 		var newX = 0;
@@ -307,7 +311,6 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 
 		if (this._direction != "vertical" && this._hTracker)
 		{
-			var dx = ex - this._lastX;		
 			var x = this._sx;
 			this._speedX = dx;
 			newX = x + dx;
@@ -324,7 +327,6 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 
 		if (this._direction != "horizontal" && this._vTracker)
 		{
-			var dy = ey - this._lastY;		
 			var y = this._sy;
 			this._speedY = dy;
 			newY = y + dy;
@@ -359,7 +361,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 	{
 		var l = this._lastMove;
 		var t = getCurrentTime();
-		var doScroll = l && (t - l) <= this.options.moveThreshold;
+		var doScroll = l && (t - l) <= this.options.moveIntervalThreshold;
 
 		var sx = (this._hTracker && this._speedX && doScroll) ? this._speedX : (this._doSnapBackX ? 1 : 0);
 		var sy = (this._vTracker && this._speedY && doScroll) ? this._speedY : (this._doSnapBackY ? 1 : 0);
