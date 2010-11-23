@@ -7,7 +7,7 @@
 		var	prependToFn = $.fn.prependTo,
 				libName = "jquery.mobile.support.js";
 
-		module("mobile.support", {
+		module(libName, {
 			teardown: function(){
 				//NOTE undo any mocking
 				$.fn.prependTo = prependToFn;
