@@ -6,7 +6,11 @@
 	var libName = "jquery.mobile.core.js",
 			setGradeA = function(value) { $.support.mediaquery = value; };
 
-	module(libName);
+	module(libName, {
+		setup: function(){
+			$('html').removeClass('ui-mobile');
+		}
+	});
 
 	$.testHelper.excludeFileProtocol(function(){
 
@@ -28,6 +32,21 @@
 			});
 
 			$.testHelper.reloadLib(libName);
+		});
+
+		test("enhancments are skipped when the browser is not grade A", function(){
+			setGradeA(false);
+			$.testHelper.reloadLib(libName);
+
+			//NOTE easiest way to check for enhancements, not the most obvious
+			ok(!$("html").hasClass("ui-mobile"));
+		});
+
+		test("enhancments are added when the browser is not grade A", function(){
+			setGradeA(true);
+			$.testHelper.reloadLib(libName);
+
+			ok($("html").hasClass("ui-mobile"));
 		});
 	});
 })(jQuery);
