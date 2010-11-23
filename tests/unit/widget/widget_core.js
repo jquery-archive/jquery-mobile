@@ -3,7 +3,7 @@
  */
 
 (function( $ ) {
-	module('mobile.widget');
+	module('jquery.mobile.widget.js');
 
 	test( "getting data from creation options", function(){
 		var expected = "bizzle";
