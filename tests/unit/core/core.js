@@ -45,7 +45,7 @@
 			ok(!$("html").hasClass("ui-mobile"));
 		});
 
-		test( "enhancments are added when the browser is not grade A", function(){
+		test( "enhancments are added when the browser is grade A", function(){
 			setGradeA(true);
 			$.testHelper.reloadLib(libName);
 
