@@ -7,7 +7,7 @@
 	    widthFn = $.fn.width;
 
 	// make sure original definitions are reset
-	module('mobile.media', {
+	module('jquery.mobile.media.js', {
 		teardown: function(){
 			$.fn.css = cssFn;
 			$.fn.width = widthFn;
