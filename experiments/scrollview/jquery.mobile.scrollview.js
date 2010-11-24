@@ -307,7 +307,8 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 				dir = "horizontal";
 			}
 
-			if (this.options.direction != dir && dir)
+			var svdir = this.options.direction;
+			if (svdir && dir && svdir != dir)
 			{
 				// This scrollview can't handle the direction the user
 				// is attempting to scroll. Find an ancestor scrollview
@@ -321,7 +322,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 				}
 			}
 
-			this._direction = this.options.direction;
+			this._direction = dir ? dir : "both";
 		}
 
 		var newX = 0;
@@ -338,14 +339,16 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 			this._doSnapBackX = false;
 			if (newX > 0 || newX < this._maxX)
 			{
-				var sv = this._getAncestorByDirection("horizontal");
-				if (sv)
+				if (this._direction == "horizontal")
 				{
-					this._setScrollPosition(newX > 0 ? 0 : this._maxX, newY);
-					this._propagateDragMove(sv, e, ex, ey, dir);
-					return false;
+					var sv = this._getAncestorByDirection("horizontal");
+					if (sv)
+					{
+						this._setScrollPosition(newX > 0 ? 0 : this._maxX, newY);
+						this._propagateDragMove(sv, e, ex, ey, dir);
+						return false;
+					}
 				}
-
 				newX = x + (dx/2);
 				this._doSnapBackX = true;
 			}
@@ -362,12 +365,15 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 			this._doSnapBackY = false;
 			if (newY > 0 || newY < this._maxY)
 			{
-				var sv = this._getAncestorByDirection("vertical");
-				if (sv)
+				if (this._direction == "vertical")
 				{
-					this._setScrollPosition(newX, newY > 0 ? 0 : this._maxY);
-					this._propagateDragMove(sv, e, ex, ey, dir);
-					return false;
+					var sv = this._getAncestorByDirection("vertical");
+					if (sv)
+					{
+						this._setScrollPosition(newX, newY > 0 ? 0 : this._maxY);
+						this._propagateDragMove(sv, e, ex, ey, dir);
+						return false;
+					}
 				}
 
 				newY = y + (dy/2);
