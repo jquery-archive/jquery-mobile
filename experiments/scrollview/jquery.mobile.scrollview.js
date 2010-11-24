@@ -232,7 +232,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		this._doSnapBackY = false;
 		this._speedX = 0;
 		this._speedY = 0;
-		this._direction = "";
+		this._directionLock = "";
 		this._didDrag = false;
 
 		if (this._hTracker)
@@ -275,7 +275,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		this._hideScrollBars();
 		this._disableTracking();
 		sv._handleDragStart(e,ex,ey);
-		sv._direction = dir;
+		sv._directionLock = dir;
 		sv._didDrag = this.didDrag;
 	},
 
@@ -288,7 +288,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		var dx = ex - this._lastX;
 		var dy = ey - this._lastY;
 
-		if (!this._direction)
+		if (!this._directionLock)
 		{
 			var x = Math.abs(dx);
 			var y = Math.abs(dy);
@@ -322,13 +322,13 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 				}
 			}
 
-			this._direction = dir ? dir : "both";
+			this._directionLock = dir ? dir : "none";
 		}
 
 		var newX = 0;
 		var newY = 0;
 
-		if (this._direction != "vertical" && this._hTracker)
+		if (this._directionLock != "vertical" && this._hTracker)
 		{
 			var x = this._sx;
 			this._speedX = dx;
@@ -339,7 +339,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 			this._doSnapBackX = false;
 			if (newX > 0 || newX < this._maxX)
 			{
-				if (this._direction == "horizontal")
+				if (this._directionLock == "horizontal")
 				{
 					var sv = this._getAncestorByDirection("horizontal");
 					if (sv)
@@ -354,7 +354,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 			}
 		}
 
-		if (this._direction != "horizontal" && this._vTracker)
+		if (this._directionLock != "horizontal" && this._vTracker)
 		{
 			var y = this._sy;
 			this._speedY = dy;
@@ -365,7 +365,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 			this._doSnapBackY = false;
 			if (newY > 0 || newY < this._maxY)
 			{
-				if (this._direction == "vertical")
+				if (this._directionLock == "vertical")
 				{
 					var sv = this._getAncestorByDirection("vertical");
 					if (sv)
