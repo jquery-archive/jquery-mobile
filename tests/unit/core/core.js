@@ -86,20 +86,21 @@
 			ok($(".ui-loader").length);
 		});
 
-    var metaViewportSelector = "head meta[name=viewport]";
+    var metaViewportSelector = "head meta[name=viewport]",
+        setViewPortContent = function(value){
+          $(metaViewportSelector).remove();
+          alterExtend({metaViewportContent: value});
+          $.testHelper.reloadLib(libName);
+        };
 
     //TODO lots of duplication
     test( "meta view port element is added to head when defined on mobile", function(){
-      $(metaViewportSelector).remove();
-      alterExtend({metaViewportContent: true});
-      $.testHelper.reloadLib(libName);
+      setViewPortContent(true);
       same($(metaViewportSelector).length, 1);
     });
 
     test( "meta view port element not added to head when not defined on mobile", function(){
-      $(metaViewportSelector).remove();
-      alterExtend({metaViewportContent: false});
-      $.testHelper.reloadLib(libName);
+      setViewPortContent(false);
       same($(metaViewportSelector).length, 0);
     });
 
