@@ -1,3 +1,4 @@
+
 /*
  * mobile core unit tests
  */
@@ -63,6 +64,7 @@
 			};
 		};
 
+    //TODO lots of duplication
 		test( "pageLoading doesn't add the dialog to the page when loading message is false", function(){
 			alterExtend({loadingMessage: false});
 			$.testHelper.reloadLib(libName);
@@ -83,6 +85,23 @@
 			$.mobile.pageLoading(false);
 			ok($(".ui-loader").length);
 		});
+
+    var metaViewportSelector = "head meta[name=viewport]";
+
+    //TODO lots of duplication
+    test( "meta view port element is added to head when defined on mobile", function(){
+      $(metaViewportSelector).remove();
+      alterExtend({metaViewportContent: true});
+      $.testHelper.reloadLib(libName);
+      same($(metaViewportSelector).length, 1);
+    });
+
+    test( "meta view port element not added to head when not defined on mobile", function(){
+      $(metaViewportSelector).remove();
+      alterExtend({metaViewportContent: false});
+      $.testHelper.reloadLib(libName);
+      same($(metaViewportSelector).length, 0);
+    });
 
 		//TODO test the rest of the library after the $loader definition
 	});
