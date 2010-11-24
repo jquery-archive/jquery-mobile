@@ -93,7 +93,6 @@
           $.testHelper.reloadLib(libName);
         };
 
-    //TODO lots of duplication
     test( "meta view port element is added to head when defined on mobile", function(){
       setViewPortContent(true);
       same($(metaViewportSelector).length, 1);
@@ -104,6 +103,9 @@
       same($(metaViewportSelector).length, 0);
     });
 
+    test( "getting the path directory removes the hash tag", function(){
+
+    });
 		//TODO test the rest of the library after the $loader definition
 	});
 })(jQuery);
