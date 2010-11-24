@@ -322,7 +322,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 				}
 			}
 
-			this._directionLock = dir ? dir : "none";
+			this._directionLock = svdir ? svdir : (dir ? dir : "none");
 		}
 
 		var newX = 0;
