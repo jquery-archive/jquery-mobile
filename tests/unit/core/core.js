@@ -5,11 +5,15 @@
 (function( $ ) {
 	var libName = "jquery.mobile.core.js",
 			setGradeA = function(value) { $.support.mediaquery = value; },
-	    extendFn = $.extend;
+			extendFn = $.extend;
 
 	module(libName, {
 		setup: function(){
+			// NOTE reset for gradeA tests
 			$('html').removeClass('ui-mobile');
+
+			// NOTE reset for pageLoading tests
+			$('.ui-loader').remove();
 		},
 		teardown: function(){
 			$.extend = extendFn;
@@ -45,7 +49,7 @@
 			ok(!$("html").hasClass("ui-mobile"));
 		});
 
-		test( "enhancments are added when the browser is not grade A", function(){
+		test( "enhancments are added when the browser is grade A", function(){
 			setGradeA(true);
 			$.testHelper.reloadLib(libName);
 
@@ -58,11 +62,14 @@
 			$.extend = function(object, extension){
 				// NOTE extend the object as normal
 				var result = extendFn.apply(this, arguments);
+
+				// NOTE add custom extensions
 				result = extendFn(result, extraExtension);
 				return result;
 			};
 		};
 
+		//TODO lots of duplication
 		test( "pageLoading doesn't add the dialog to the page when loading message is false", function(){
 			alterExtend({loadingMessage: false});
 			$.testHelper.reloadLib(libName);
@@ -73,6 +80,10 @@
 		test( "pageLoading doesn't add the dialog to the page when done is passed as true", function(){
 			alterExtend({loadingMessage: true});
 			$.testHelper.reloadLib(libName);
+
+			// TODO add post reload callback
+			$('.ui-loader').remove();
+			
 			$.mobile.pageLoading(true);
 			ok(!$(".ui-loader").length);
 		});
@@ -82,6 +93,23 @@
 			$.testHelper.reloadLib(libName);
 			$.mobile.pageLoading(false);
 			ok($(".ui-loader").length);
+		});
+
+		var metaViewportSelector = "head meta[name=viewport]",
+				setViewPortContent = function(value){
+					$(metaViewportSelector).remove();
+					alterExtend({metaViewportContent: value});
+					$.testHelper.reloadLib(libName);
+				};
+
+		test( "meta view port element is added to head when defined on mobile", function(){
+			setViewPortContent("width=device-width");
+			same($(metaViewportSelector).length, 1);
+		});
+
+		test( "meta view port element not added to head when not defined on mobile", function(){
+			setViewPortContent(false);
+			same($(metaViewportSelector).length, 0);
 		});
 
 		//TODO test the rest of the library after the $loader definition

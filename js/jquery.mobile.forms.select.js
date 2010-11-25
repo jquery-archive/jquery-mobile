@@ -65,7 +65,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 						"</div>"+
 						"<div data-role='content'></div>"+
 					"</div>" )
-					.appendTo( $.pageContainer )
+					.appendTo( $.mobile.pageContainer )
 					.page(),	
 					
 			menuPageContent = menuPage.find( ".ui-content" ),	
