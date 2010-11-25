@@ -172,7 +172,8 @@ $.widget( "mobile.page", $.mobile.widget, {
 			.slider();
 
 		this.element
-			.find( "select:not([data-role='slider'])" )
+			.find( "select" )
+			.not( "[data-role='slider' ], [data-role='none' ]" )
 			.selectmenu();
 	}
 });
