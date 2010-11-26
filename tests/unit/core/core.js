@@ -83,7 +83,7 @@
 
 			// TODO add post reload callback
 			$('.ui-loader').remove();
-			
+
 			$.mobile.pageLoading(true);
 			ok(!$(".ui-loader").length);
 		});
