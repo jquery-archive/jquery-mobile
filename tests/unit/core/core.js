@@ -145,5 +145,7 @@
 
 			$.testHelper.reloadLib(libName);
 		});
+
+		//TODO test that silentScroll is called on window load
 	});
 })(jQuery);
