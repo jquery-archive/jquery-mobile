@@ -32,6 +32,19 @@
 			//NOTE append "cache breaker" to force reload
 			lib.attr('src', src + "?" + this.reloads[libName].count++);
 			$("body").append(lib);
+		},
+
+		alterExtend: function(extraExtension){
+			var extendFn = $.extend;
+
+			$.extend = function(object, extension){
+				// NOTE extend the object as normal
+				var result = extendFn.apply(this, arguments);
+
+				// NOTE add custom extensions
+				result = extendFn(result, extraExtension);
+				return result;
+			};
 		}
 	};
 })(jQuery);
