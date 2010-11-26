@@ -17,10 +17,15 @@
 		}
 	});
 
-	var scrollUp = function(){
+	var scrollUp = function( pos ){
 		$(window).scrollTop(1000);
 		ok($(window).scrollTop() > 0);
-		$.mobile.silentScroll();
+
+		if(pos) {
+			$.mobile.silentScroll(pos);
+		} else {
+			$.mobile.silentScroll();
+		}
 	};
 
 	test( "silent scroll scrolls the page to the top by default", function(){
@@ -29,6 +34,17 @@
 		stop();
 		setTimeout(function(){
 			same($(window).scrollTop(), 0);
+			start();
+		}, scrollTimeout);
+	});
+
+	test( "silent scroll scrolls the page to the passed y position", function(){
+		var pos = 10;
+		scrollUp(pos);
+
+		stop();
+		setTimeout(function(){
+			same($(window).scrollTop(), pos);
 			start();
 		}, scrollTimeout);
 	});
