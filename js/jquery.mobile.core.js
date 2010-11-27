@@ -130,7 +130,7 @@
 		$.mobile.pageLoading();
 		
 		//initialize all pages present
-		$pages.page();
+		$pages.page({ url: window.location.toString() });
 		
 		//trigger a new hashchange, hash or not
 		$window.trigger( "hashchange", [ true ] );

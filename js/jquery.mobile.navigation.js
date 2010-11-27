@@ -241,7 +241,7 @@
 			}
 			
 			//run page plugin			
-			to.page();
+			to.page({ url: fileUrl });
 		};
 
 		//if url is a string
