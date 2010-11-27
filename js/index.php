@@ -26,7 +26,8 @@ $elements = array(
 	'jquery.mobile.listview.filter.js',
 	'jquery.mobile.dialog.js',
 	'jquery.mobile.navbar.js',
-	'jquery.mobile.grid.js'
+	'jquery.mobile.grid.js',
+	'jquery.mobile.page.cache.js'
 );
 
 include('../combine.php');

@@ -44,7 +44,8 @@
 	jquery.mobile.grid.js,
 	jquery.mobile.listview.js,
 	jquery.mobile.listview.filter.js,
-	jquery.mobile.navbar.js"
+	jquery.mobile.navbar.js,
+	jquery.mobile.page.cache.js"
 	/>
 
 	<target name="merge">
