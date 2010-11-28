@@ -9,6 +9,7 @@ $elements = array(
 	'jquery.mobile.event.js',
 	'jquery.mobile.hashchange.js',
 	'jquery.mobile.core.js',
+	'jquery.mobile.navigation.js',
 	'jquery.mobile.page.js',
 	'jquery.ui.position.js',
 	'jquery.mobile.fixHeaderFooter.js',

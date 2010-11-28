@@ -289,13 +289,14 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			parentPage = parentList.closest( ".ui-page" ),
 			parentId = parentPage.attr( "id" ),
 			o = this.options,
+			self = this,
 			persistentFooterID = parentPage.find( "[data-role='footer']" ).data( "id" );
 
 		$( parentList.find( "ul, ol" ).toArray().reverse() ).each(function( i ) {
 			var list = $( this ),
 				parent = list.parent(),
 				title = parent.contents()[ 0 ].nodeValue.split("\n")[0],
-				id = parentId + "&" + $.mobile.subPageUrlKey + "=" + self.idStringEscape(title + " " + i),
+				id = parentId + "&" + $.mobile.subPageUrlKey + "=" + self._idStringEscape(title + " " + i),
 				theme = list.data( "theme" ) || o.theme,
 				countTheme = list.data( "counttheme" ) || parentList.data( "counttheme" ) || o.countTheme,
 				newPage = list.wrap( "<div data-role='page'><div data-role='content'></div></div>" )
@@ -308,7 +309,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 										"data-theme": theme,
 										"data-count-theme": countTheme
 									})
-									.appendTo( $.pageContainer );
+									.appendTo( $.mobile.pageContainer );
 				
 				
 				
