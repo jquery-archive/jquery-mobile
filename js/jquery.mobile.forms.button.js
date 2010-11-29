@@ -33,12 +33,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 			.insertBefore( $el )
 			.click(function(){
 				if(!o.disabled){
-					if( type == "submit" ){
-						$(this).closest('form').submit();
-					}
-					else{
-						$el.click(); 
-					}
+					$el.click(); 
 				}
 
 				return false;

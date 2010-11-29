@@ -56,40 +56,28 @@
 			ok($("html").hasClass("ui-mobile"));
 		});
 
-		var alterExtend = function(extraExtension){
-			var extendFn = $.extend;
-
-			$.extend = function(object, extension){
-				// NOTE extend the object as normal
-				var result = extendFn.apply(this, arguments);
-
-				// NOTE add custom extensions
-				result = extendFn(result, extraExtension);
-				return result;
-			};
-		};
 
 		//TODO lots of duplication
 		test( "pageLoading doesn't add the dialog to the page when loading message is false", function(){
-			alterExtend({loadingMessage: false});
+			$.testHelper.alterExtend({loadingMessage: false});
 			$.testHelper.reloadLib(libName);
 			$.mobile.pageLoading(false);
 			ok(!$(".ui-loader").length);
 		});
 
 		test( "pageLoading doesn't add the dialog to the page when done is passed as true", function(){
-			alterExtend({loadingMessage: true});
+			$.testHelper.alterExtend({loadingMessage: true});
 			$.testHelper.reloadLib(libName);
 
 			// TODO add post reload callback
 			$('.ui-loader').remove();
-			
+
 			$.mobile.pageLoading(true);
 			ok(!$(".ui-loader").length);
 		});
 
 		test( "pageLoading adds the dialog to the page when done is true", function(){
-			alterExtend({loadingMessage: true});
+			$.testHelper.alterExtend({loadingMessage: true});
 			$.testHelper.reloadLib(libName);
 			$.mobile.pageLoading(false);
 			ok($(".ui-loader").length);
@@ -98,7 +86,7 @@
 		var metaViewportSelector = "head meta[name=viewport]",
 				setViewPortContent = function(value){
 					$(metaViewportSelector).remove();
-					alterExtend({metaViewportContent: value});
+					$.testHelper.alterExtend({metaViewportContent: value});
 					$.testHelper.reloadLib(libName);
 				};
 
@@ -112,6 +100,52 @@
 			same($(metaViewportSelector).length, 0);
 		});
 
-		//TODO test the rest of the library after the $loader definition
+		var findFirstPage = function() {
+			return $("[data-role='page']").first();
+		};
+
+		test( "active page and start page should be set to the fist page in the selected set", function(){
+			var firstPage = findFirstPage();
+			$.testHelper.reloadLib(libName);
+
+			same($.mobile.startPage, firstPage);
+			same($.mobile.activePage, firstPage);
+		});
+
+		test( "mobile viewport class is defined on the first page's parent", function(){
+			var firstPage = findFirstPage();
+			$.testHelper.reloadLib(libName);
+
+			ok(firstPage.parent().hasClass('ui-mobile-viewport'));
+		});
+
+		test( "mobile page container is the first page's parent", function(){
+			var firstPage = findFirstPage();
+			$.testHelper.reloadLib(libName);
+
+			same($.mobile.pageContainer, firstPage.parent());
+		});
+
+		test( "page loading is called on document ready", function(){
+			expect( 2 );
+
+			$.testHelper.alterExtend({ pageLoading: function(){
+				ok("called");
+			}});
+
+			$.testHelper.reloadLib(libName);
+		});
+
+		test( "hashchange triggered on document ready with single argument: true", function(){
+			expect( 2 );
+
+			$(window).bind("hashchange", function(ev, arg){
+				same(arg, true);
+			});
+
+			$.testHelper.reloadLib(libName);
+		});
+
+		//TODO test that silentScroll is called on window load
 	});
 })(jQuery);
