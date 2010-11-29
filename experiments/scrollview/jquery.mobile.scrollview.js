@@ -29,6 +29,12 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		showScrollBars:    true
 	},
 
+	_makePositioned: function($ele)
+	{
+		if ($ele.css("position") == "static")
+			$ele.css("position", "relative");
+	},
+
 	_create: function()
 	{ 
 		this._$clip = $(this.element).addClass("ui-scrollview-clip");
@@ -37,7 +43,18 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 			$child = this._$clip.wrapInner("<div></div>").children();
 		}
 		this._$view = $child.addClass("ui-scrollview-view");
-	
+
+		this._$clip.css("overflow", "hidden");
+		this._makePositioned(this._$clip);
+
+		this._$view.css("overflow", "hidden");
+
+		if (!this.options.useCSSTransform)
+		{
+			this._makePositioned(this._$view);
+			this._$view.css({ left: 0, top: 0 });
+		}
+
 		this._sx = 0;
 		this._sy = 0;
 	
