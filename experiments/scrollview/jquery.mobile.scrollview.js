@@ -155,16 +155,6 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 			this._stopMScroll();
 	},
 
-	_setElementTransform: function($ele, x, y)
-	{
-		var v = "translate3d(" + x + "," + y + ", 0px)";
-		$ele.css({
-			"-moz-transform": v,
-			"-webkit-transform": v,
-			"transform": v
-		});
-	},
-
 	_setScrollPosition: function(x, y)
 	{
 		this._sx = x;
@@ -175,7 +165,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		var uct = this.options.useCSSTransform;
 
 		if (uct)
-			this._setElementTransform($v, x + "px", y + "px");
+			setElementTransform($v, x + "px", y + "px");
 		else
 			$v.css({left: x + "px", top: y + "px"});
 
@@ -188,7 +178,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 			{
 				var $sbt = $vsb.find(".ui-scrollbar-thumb");
 				if (uct)
-					this._setElementTransform($sbt, "0px", -y/$v.height() * $sbt.parent().height() + "px");
+					setElementTransform($sbt, "0px", -y/$v.height() * $sbt.parent().height() + "px");
 				else
 					$sbt.css("top", -y/$v.height()*100 + "%");
 			}
@@ -197,7 +187,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 			{
 				var $sbt = $hsb.find(".ui-scrollbar-thumb");
 				if (uct)
-					this._setElementTransform($sbt,  -x/$v.width() * $sbt.parent().width() + "px", "0px");
+					setElementTransform($sbt,  -x/$v.width() * $sbt.parent().width() + "px", "0px");
 				else
 					$sbt.css("left", -x/$v.width()*100 + "%");
 			}
@@ -435,7 +425,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		// the event so that links etc, underneath our
 		// cursor/finger don't fire.
 
-		return this.didDrag ? false : undefined;
+		return this._didDrag ? false : undefined;
 	},
 
 	_enableTracking: function()
@@ -518,6 +508,17 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		}
 	}
 });
+
+function setElementTransform($ele, x, y)
+{
+	var v = "translate3d(" + x + "," + y + ", 0px)";
+	$ele.css({
+		"-moz-transform": v,
+		"-webkit-transform": v,
+		"transform": v
+	});
+}
+
 
 function MomentumTracker(options)
 {
@@ -688,15 +689,10 @@ jQuery.widget( "mobile.scrolllistview", jQuery.mobile.scrollview, {
 			// XXX: Need to convert this over to using $().css() and supporting the non-transform case.
 
 			var ld = this._lastDivider;
-			if (ld && d != ld)
-			{
-				var zt = "translate3d(0px,0px,0px)";				
-				// $(ld).css("-webkit-transform", zt).css("-moz-transform", zt).css("transform", zt);
-				ld.style.webkitTransform = zt; ld.style.MozTransform = zt; ld.style.transform = zt;
+			if (ld && d != ld) {
+				setElementTransform($(ld), 0, 0);
 			}
-			var str = "translate3d(0px," + y + "px,0px)";
-			// $(d).css("-webkit-transform", str).css("-moz-transform", str).css("transform", str);
-			d.style.webkitTransform = str; d.style.MozTransform = str; d.style.transform = str;
+			setElementTransform($(d), 0, y + "px");
 			this._lastDivider = d;
 
 		}
