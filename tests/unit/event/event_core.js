@@ -7,7 +7,13 @@
 			events = ("touchstart touchmove touchend orientationchange tap taphold " +
 								"swipe swipeleft swiperight scrollstart scrollstop").split( " " );
 
-	module(libName);
+	module(libName, {
+		teardown: function(){
+			$.each(events, function(i, name){
+				$("#main").unbind(name);
+			});
+		}
+	});
 
 	$.testHelper.excludeFileProtocol(function(){
 		test( "new events defined on the jquery object", function(){
@@ -32,6 +38,16 @@
 		});
 
 		$('#main').trigger(events[0]);
+	});
+
+	test( "defined event functions trigger the event with no arguments", function(){
+		expect( 1 );
+
+		$('#main')[events[0]](function(){
+			ok(true);
+		});
+
+		$('#main')[events[0]]();
 	});
 
 	test( "defining event functions sets the attrFn to true", function(){
