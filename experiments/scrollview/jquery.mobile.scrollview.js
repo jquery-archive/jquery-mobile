@@ -9,7 +9,7 @@
 jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 	options: {
 		fps:               60,    // Frames per second in msecs.
-		direction:         null,  // "vertical", "horizontal", or null for both.
+		direction:         null,  // "x", "y", or null for both.
 	
 		scrollDuration:    2000,  // Duration of the scrolling animation in msecs.
 		overshootDuration: 250,   // Duration of the overshoot animation in msecs.
@@ -59,8 +59,8 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		this._sy = 0;
 	
 		var direction = this.options.direction;
-		this._hTracker = (direction != "vertical")   ? new MomentumTracker(this.options) : null;
-		this._vTracker = (direction != "horizontal") ? new MomentumTracker(this.options) : null;
+		this._hTracker = (direction != "y")   ? new MomentumTracker(this.options) : null;
+		this._vTracker = (direction != "x") ? new MomentumTracker(this.options) : null;
 	
 		this._timerInterval = 1000/this.options.fps;
 		this._timerID = 0;
@@ -160,6 +160,10 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		this._sx = x;
 		this._sy = y;
 
+		var kdebug = 0;
+		if (y == 0)
+			++kdebug;
+
 		var $v = this._$view;
 
 		var uct = this.options.useCSSTransform;
@@ -192,6 +196,40 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 					$sbt.css("left", -x/$v.width()*100 + "%");
 			}
 		}
+	},
+
+	scrollTo: function(x, y, duration)
+	{
+		this._stopMScroll();
+		if (!duration)
+			return this._setScrollPosition(x, y);
+
+		x = -x;
+		y = -y;
+
+		var self = this;
+		var start = getCurrentTime();
+		var efunc = $.easing["easeOutQuad"];
+		var sx = this._sx;
+		var sy = this._sy;
+		var dx = x - sx;
+		var dy = y - sy;
+		var tfunc = function(){
+			var elapsed = getCurrentTime() - start;
+			if (elapsed >= duration)
+			{
+				self._timerID = 0;
+				self._setScrollPosition(x, y);
+			}
+			else
+			{
+				var ec = efunc(elapsed/duration, elapsed, 0, 1, duration);
+				self._setScrollPosition(sx + (dx * ec), sy + (dy * ec));
+				self._timerID = setTimeout(tfunc, self._timerInterval);
+			}
+		};
+
+		this._timerID = setTimeout(tfunc, this._timerInterval);
 	},
 
 	_getScrollPosition: function(x, y)
@@ -283,7 +321,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		this._disableTracking();
 		sv._handleDragStart(e,ex,ey);
 		sv._directionLock = dir;
-		sv._didDrag = this.didDrag;
+		sv._didDrag = this._didDrag;
 	},
 
 	_handleDragMove: function(e, ex, ey)
@@ -308,10 +346,10 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 			var dir = null;
 			var r = 0;
 			if (x < y && (x/y) < 0.5) {
-				dir = "vertical";
+				dir = "y";
 			}
 			else if (x > y && (y/x) < 0.5) {
-				dir = "horizontal";
+				dir = "x";
 			}
 
 			var svdir = this.options.direction;
@@ -332,10 +370,10 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 			this._directionLock = svdir ? svdir : (dir ? dir : "none");
 		}
 
-		var newX = 0;
-		var newY = 0;
+		var newX = this._sx;
+		var newY = this._sy;
 
-		if (this._directionLock != "vertical" && this._hTracker)
+		if (this._directionLock != "y" && this._hTracker)
 		{
 			var x = this._sx;
 			this._speedX = dx;
@@ -346,9 +384,9 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 			this._doSnapBackX = false;
 			if (newX > 0 || newX < this._maxX)
 			{
-				if (this._directionLock == "horizontal")
+				if (this._directionLock == "x")
 				{
-					var sv = this._getAncestorByDirection("horizontal");
+					var sv = this._getAncestorByDirection("x");
 					if (sv)
 					{
 						this._setScrollPosition(newX > 0 ? 0 : this._maxX, newY);
@@ -361,7 +399,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 			}
 		}
 
-		if (this._directionLock != "horizontal" && this._vTracker)
+		if (this._directionLock != "x" && this._vTracker)
 		{
 			var y = this._sy;
 			this._speedY = dy;
@@ -372,9 +410,9 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 			this._doSnapBackY = false;
 			if (newY > 0 || newY < this._maxY)
 			{
-				if (this._directionLock == "vertical")
+				if (this._directionLock == "y")
 				{
-					var sv = this._getAncestorByDirection("vertical");
+					var sv = this._getAncestorByDirection("y");
 					if (sv)
 					{
 						this._setScrollPosition(newX, newY > 0 ? 0 : this._maxY);
@@ -497,13 +535,13 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 			var suffix = "\"><div class=\"ui-scrollbar-track\"><div class=\"ui-scrollbar-thumb\"></div></div></div>";
 			if (this._vTracker)
 			{
-				$c.append(prefix + "vertical" + suffix);
-				this._$vScrollBar = $c.children(".ui-scrollbar-vertical");
+				$c.append(prefix + "y" + suffix);
+				this._$vScrollBar = $c.children(".ui-scrollbar-y");
 			}
 			if (this._hTracker)
 			{
-				$c.append(prefix + "horizontal" + suffix);
-				this._$hScrollBar = $c.children(".ui-scrollbar-horizontal");
+				$c.append(prefix + "x" + suffix);
+				this._$hScrollBar = $c.children(".ui-scrollbar-x");
 			}
 		}
 	}
@@ -629,7 +667,7 @@ $.extend(MomentumTracker.prototype, {
 
 jQuery.widget( "mobile.scrolllistview", jQuery.mobile.scrollview, {
 	options: {
-		direction: "vertical"
+		direction: "y"
 	},
 
 	_create: function() {

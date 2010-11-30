@@ -86,15 +86,6 @@
 	<script src="jquery.mobile.scrollview.js"></script>
 	<script src="scrollview.js"></script>
 	<script type="text/javascript" src="../../docs/lists/docs/docs.js"></script>
-    <script type="text/javascript">
-
-$("[data-role=page]").live("pageshow", function(event) {
-	var $page = $(event.target);
-	$page.find(".ui-scrollview-horizontal:not(.ui-scrollview-clip)").scrollview({ direction: "horizontal" });
-	$page.find(".ui-scrollview-vertical:not(.ui-scrollview-clip)").scrollview({ direction: "vertical" });
-});
-
-	</script>
 </head> 
 <body> 
 
@@ -107,17 +98,27 @@ $("[data-role=page]").live("pageshow", function(event) {
 	<div data-role="content">
       <h4>Example 1</h4>
       <p>In the following example the #4 is actually a vertical scrollview embedded within a horizontal scrollview.</p>
-      <div class="ui-scrollview-horizontal double-block-view-h">
+      <div data-scroll="x" class="double-block-view-h">
         <div class="view">
       	  <div class="square">1</div>
       	  <div class="square">2</div>
       	  <div class="square">3</div>
-      	  <div class="square ui-scrollview-vertical single-block-view-v">
+      	  <div data-scroll="y" class="square single-block-view-v">
             <div class="view">
               <div class="square">4</div>
               <div class="square">A</div>
               <div class="square">B</div>
-              <div class="square">C</div>
+              <div data-scroll="x" class="single-block-view-h">
+		        <div class="view">
+                    <div class="square">C</div>
+                    <div class="square">@</div>
+                    <div class="square">#</div>
+                    <div class="square">$</div>
+                    <div class="square">%</div>
+                    <div class="square">&amp;</div>
+                    <div class="square">*</div>
+                </div>
+              </div>
               <div class="square">D</div>
               <div class="square">E</div>
               <div class="square">F</div>
@@ -130,12 +131,12 @@ $("[data-role=page]").live("pageshow", function(event) {
       </div>
       <h4>Example 1</h4>
       <p>In the following example the #4 is actually a nested horizontal scrollview embedded within a horizontal scrollview. The idea here is that if you drag-scroll the nested scrollview, once it reaches either end of its view, it should start scrolling the outer view.</p>
-      <div class="ui-scrollview-horizontal double-block-view-h">
+      <div data-scroll="x" class="double-block-view-h">
         <div class="view">
       	  <div class="square">1</div>
       	  <div class="square">2</div>
       	  <div class="square">3</div>
-      	  <div class="square ui-scrollview-horizontal single-block-view-h">
+      	  <div data-scroll="x" class="square single-block-view-h">
             <div class="view">
               <div class="square">4</div>
               <div class="square">A</div>

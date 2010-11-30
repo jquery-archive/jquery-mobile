@@ -62,16 +62,6 @@
 	<script src="jquery.mobile.scrollview.js"></script>
 	<script src="scrollview.js"></script>
 	<script type="text/javascript" src="../../docs/lists/docs/docs.js"></script>
-    <script type="text/javascript">
-
-$("[data-role=page]").live("pageshow", function(event) {
-	var $page = $(event.target);
-	$page.find(".ui-scrollview:not(.ui-scrollview-clip)").scrollview();
-	$page.find(".ui-scrollview-horizontal:not(.ui-scrollview-clip)").scrollview({ direction: "horizontal" });
-	$page.find(".ui-scrollview-vertical:not(.ui-scrollview-clip)").scrollview({ direction: "vertical" });
-});
-
-	</script>
 </head> 
 <body> 
 
@@ -84,7 +74,7 @@ $("[data-role=page]").live("pageshow", function(event) {
 	<div data-role="content">
       <h4>Scrollview</h4>
       <p>To turn an element into a scrollview, simply add a data-scroll="true" to the element. By default, a scrollview can scroll in both the horizontal and vertical directions. If the user drags the view horizontally (left or right), or vertically (up or down), scrolling will be locked so that it only scrolls in that one dimension. If the user drags the view diagonally, he will be able to scroll in both directions at the same time.</p>
-      <div class="ui-scrollview threeByThree">
+      <div data-scroll="true" class="threeByThree">
         <div class="square">a</div>
         <div class="square">b</div>
         <div class="square">c</div>
@@ -257,8 +247,8 @@ $("[data-role=page]").live("pageshow", function(event) {
       </div>
       <p>When there are nested scrollviews, if the user drags in a single dimension and hits either end of the view, the drag will be propagated up to the next outer scrollview that can handle a drag in that dimension. So for example, if you drag the scrollview above so that it reaches the top of its view, the entire page will start to scroll upward if you continue dragging. This is because the drag was propagated from the scrollview with the letters in it, out to the scrollview containing the entire content for the page.</p>
       <h4>Horizontal Scrollview</h4>
-      <p>A scrollview can be set up so that it only scrolls in the horizontal direction. Simply place a data-scroll=&quot;horizontal&quot; on the element you want to scroll:</p>
-      <div class="ui-scrollview-horizontal threeByThree">
+      <p>A scrollview can be set up so that it only scrolls in the horizontal direction. Simply place a data-scroll=&quot;x&quot; on the element you want to scroll:</p>
+      <div data-scroll="x" class="threeByThree">
       	  <div class="square">a</div>
       	  <div class="square">b</div>
       	  <div class="square">c</div>
@@ -430,8 +420,8 @@ $("[data-role=page]").live("pageshow", function(event) {
       	  <div class="square">y</div>
       </div>
       <h4>Vertical Scrollview</h4>
-      <p>A scrollview can be set up so that it only scrolls in the vertical direction. Simply place a data-scroll=&quot;vertical&quot; on the element you want to scroll:</p>
-      <div class="ui-scrollview-vertical threeByThree">
+      <p>A scrollview can be set up so that it only scrolls in the vertical direction. Simply place a data-scroll=&quot;y&quot; on the element you want to scroll:</p>
+      <div data-scroll="y" class="threeByThree">
       	  <div class="square">a</div>
       	  <div class="square">b</div>
       	  <div class="square">c</div>
@@ -602,6 +592,188 @@ $("[data-role=page]").live("pageshow", function(event) {
       	  <div class="square">x</div>
       	  <div class="square">y</div>
       </div>
+      <h4>Scrollview Paging</h4>
+      <p>A scrollview can be set up so that it scrolls by pages. This feature is only enabled for horizontal or vertical scrollviews.</p>
+      <div id="ex4" data-scroll="true" class="threeByThree">
+        <div class="square">a</div>
+        <div class="square">b</div>
+        <div class="square">c</div>
+        <div class="square">d</div>
+        <div class="square">e</div>
+        <div class="square">f</div>
+        <div class="square">g</div>
+        <div class="square">h</div>
+        <div class="square">i</div>
+        <div class="square">j</div>
+        <div class="square">k</div>
+        <div class="square">l</div>
+        <div class="square">m</div>
+        <div class="square">n</div>
+        <div class="square">o</div>
+        <div class="square">p</div>
+        <div class="square">q</div>
+        <div class="square">r</div>
+        <div class="square">s</div>
+        <div class="square">t</div>
+        <div class="square">u</div>
+        <div class="square">v</div>
+        <div class="square">w</div>
+        <div class="square">x</div>
+        <div class="square">y</div>
+        <div class="square">z</div>
+        <div class="square">0</div>
+        <div class="square">1</div>
+        <div class="square">2</div>
+        <div class="square">3</div>
+        <div class="square">4</div>
+        <div class="square">5</div>
+        <div class="square">6</div>
+        <div class="square">7</div>
+        <div class="square">8</div>
+        <div class="square">9</div>
+        <div class="square">a</div>
+        <div class="square">b</div>
+        <div class="square">c</div>
+        <div class="square">d</div>
+        <div class="square">e</div>
+        <div class="square">f</div>
+        <div class="square">g</div>
+        <div class="square">h</div>
+        <div class="square">i</div>
+        <div class="square">j</div>
+        <div class="square">k</div>
+        <div class="square">l</div>
+        <div class="square">m</div>
+        <div class="square">n</div>
+        <div class="square">o</div>
+        <div class="square">p</div>
+        <div class="square">q</div>
+        <div class="square">r</div>
+        <div class="square">s</div>
+        <div class="square">t</div>
+        <div class="square">u</div>
+        <div class="square">v</div>
+        <div class="square">w</div>
+        <div class="square">x</div>
+        <div class="square">y</div>
+        <div class="square">z</div>
+        <div class="square">0</div>
+        <div class="square">1</div>
+        <div class="square">2</div>
+        <div class="square">3</div>
+        <div class="square">4</div>
+        <div class="square">5</div>
+        <div class="square">6</div>
+        <div class="square">7</div>
+        <div class="square">8</div>
+        <div class="square">9</div>
+        <div class="square">a</div>
+        <div class="square">b</div>
+        <div class="square">c</div>
+        <div class="square">d</div>
+        <div class="square">e</div>
+        <div class="square">f</div>
+        <div class="square">g</div>
+        <div class="square">h</div>
+        <div class="square">i</div>
+        <div class="square">j</div>
+        <div class="square">k</div>
+        <div class="square">l</div>
+        <div class="square">m</div>
+        <div class="square">n</div>
+        <div class="square">o</div>
+        <div class="square">p</div>
+        <div class="square">q</div>
+        <div class="square">r</div>
+        <div class="square">s</div>
+        <div class="square">t</div>
+        <div class="square">u</div>
+        <div class="square">v</div>
+        <div class="square">w</div>
+        <div class="square">x</div>
+        <div class="square">y</div>
+        <div class="square">z</div>
+        <div class="square">0</div>
+        <div class="square">1</div>
+        <div class="square">2</div>
+        <div class="square">3</div>
+        <div class="square">4</div>
+        <div class="square">5</div>
+        <div class="square">6</div>
+        <div class="square">7</div>
+        <div class="square">8</div>
+        <div class="square">9</div>
+        <div class="square">a</div>
+        <div class="square">b</div>
+        <div class="square">c</div>
+        <div class="square">d</div>
+        <div class="square">e</div>
+        <div class="square">f</div>
+        <div class="square">g</div>
+        <div class="square">h</div>
+        <div class="square">i</div>
+        <div class="square">j</div>
+        <div class="square">k</div>
+        <div class="square">l</div>
+        <div class="square">m</div>
+        <div class="square">n</div>
+        <div class="square">o</div>
+        <div class="square">p</div>
+        <div class="square">q</div>
+        <div class="square">r</div>
+        <div class="square">s</div>
+        <div class="square">t</div>
+        <div class="square">u</div>
+        <div class="square">v</div>
+        <div class="square">w</div>
+        <div class="square">x</div>
+        <div class="square">y</div>
+        <div class="square">z</div>
+        <div class="square">0</div>
+        <div class="square">1</div>
+        <div class="square">2</div>
+        <div class="square">3</div>
+        <div class="square">4</div>
+        <div class="square">5</div>
+        <div class="square">6</div>
+        <div class="square">7</div>
+        <div class="square">8</div>
+        <div class="square">9</div>
+        <div class="square">a</div>
+        <div class="square">b</div>
+        <div class="square">c</div>
+        <div class="square">d</div>
+        <div class="square">e</div>
+        <div class="square">f</div>
+        <div class="square">g</div>
+        <div class="square">h</div>
+        <div class="square">i</div>
+        <div class="square">j</div>
+        <div class="square">k</div>
+        <div class="square">l</div>
+        <div class="square">m</div>
+        <div class="square">n</div>
+        <div class="square">o</div>
+        <div class="square">p</div>
+        <div class="square">q</div>
+        <div class="square">r</div>
+        <div class="square">s</div>
+        <div class="square">t</div>
+        <div class="square">u</div>
+        <div class="square">v</div>
+        <div class="square">w</div>
+        <div class="square">x</div>
+        <div class="square">y</div>
+      </div>
+      <button type="button" onclick="doit();">Foo</button>
+      <script type="text/javascript">
+
+function doit()
+{
+	$("#ex4").scrollview("scrollTo", 300, 300, 500);
+}
+
+      </script>
       <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui.Donec non enim in turpis pulvinar facilisis. Ut felis.</p>
       <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui.Donec non enim in turpis pulvinar facilisis. Ut felis.</p>
       <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui.Donec non enim in turpis pulvinar facilisis. Ut felis.</p>
