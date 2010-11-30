@@ -24,12 +24,13 @@ $.widget( "mobile.page", $.mobile.widget, {
 			time: false,
 			url: false,
 			week: false
-		}
+		},
+		keepNative: "[data-role='none'], .ui-nojs"
 	},
 	
 	_create: function() {
 		var $elem = this.element,
-			o = this.options;
+			o = this.options;	
 
 		if ( this._trigger( "beforeCreate" ) === false ) {
 			return;
@@ -123,6 +124,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 		//links in bars, or those with data-role become buttons
 		$elem.find( "[data-role='button'], .ui-bar a, .ui-header a, .ui-footer a" )
 			.not( ".ui-btn" )
+			.not(o.keepNative)
 			.buttonMarkup();
 
 		$elem	
@@ -131,6 +133,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 		
 		//links within content areas
 		$elem.find( "a:not(.ui-btn):not(.ui-link-inherit)" )
+			.not(o.keepNative)
 			.addClass( "ui-link" );	
 		
 		//fix toolbars
@@ -139,8 +142,9 @@ $.widget( "mobile.page", $.mobile.widget, {
 	
 	_enchanceControls: function() {
 		var o = this.options;
+			
 		// degrade inputs to avoid poorly implemented native functionality
-		this.element.find( "input" ).each(function() {
+		this.element.find( "input" ).not(o.keepNative).each(function() {
 			var type = this.getAttribute( "type" ),
 				optType = o.degradeInputs[ type ] || "text";
 			
@@ -154,25 +158,29 @@ $.widget( "mobile.page", $.mobile.widget, {
 		// enchance form controls
 		this.element
 			.find( "[type='radio'], [type='checkbox']" )
+			.not(o.keepNative)
 			.checkboxradio();
 
 		this.element
 			.find( "button, [type='button'], [type='submit'], [type='reset'], [type='image']" )
-			.not( ".ui-nojs" )
+			.not(o.keepNative)
 			.button();
 
 		this.element
 			.find( "input, textarea" )
 			.not( "[type='radio'], [type='checkbox'], button, [type='button'], [type='submit'], [type='reset'], [type='image']" )
+			.not(o.keepNative)
 			.textinput();
 
 		this.element
 			.find( "input, select" )
+			.not(o.keepNative)
 			.filter( "[data-role='slider'], [data-type='range']" )
 			.slider();
 
 		this.element
 			.find( "select:not([data-role='slider'])" )
+			.not(o.keepNative)
 			.selectmenu();
 	}
 });
