@@ -190,11 +190,9 @@
 			
 			function loadComplete(){
 				$.mobile.pageLoading( true );
-				//trigger show/hide events, allow preventing focus change through return false		
-				if( from.data("page")._trigger("hide", null, {nextPage: to}) !== false && to.data("page")._trigger("show", null, {prevPage: from}) !== false ){
-					$.mobile.activePage = to;
-				}
+				
 				reFocus( to );
+				
 				if( changeHash !== false && url ){
 					path.set(url, true);
 				}
@@ -207,6 +205,11 @@
 				
 				//jump to top or prev scroll, if set
 				$.mobile.silentScroll( to.data( 'lastScroll' ) );
+				
+				//trigger show/hide events, allow preventing focus change through return false		
+				if( from.data("page")._trigger("hide", null, {nextPage: to}) !== false && to.data("page")._trigger("show", null, {prevPage: from}) !== false ){
+					$.mobile.activePage = to;
+				}
 			};
 			
 			if(transition && (transition !== 'none')){	
