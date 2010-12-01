@@ -8,6 +8,11 @@
 $.fn.controlgroup = function(options){
 		
 	return $(this).each(function(){
+	
+		if ($(this).hasClass("ui-fluid") && this.tagName != "FIELDSET") {
+			$(this).children().wrapAll("<div class='ui-table-row' />");
+		}
+	
 		var o = $.extend({
 			direction: $( this ).data( "type" ) || "vertical",
 			shadow: false
@@ -18,9 +23,9 @@ $.fn.controlgroup = function(options){
 		
 		//replace legend with more stylable replacement div	
 		if( groupheading.length ){
-			$(this).wrapInner('<div class="ui-controlgroup-controls"></div>');	
+			$(this).wrapInner('<div class="ui-controlgroup-controls"></div>');
 			$('<div role="heading" class="ui-controlgroup-label">'+ groupheading.html() +'</div>').insertBefore( $(this).children(0) );	
-			groupheading.remove();	
+			groupheading.remove();
 		}
 
 		$(this).addClass('ui-corner-all ui-controlgroup ui-controlgroup-'+o.direction);

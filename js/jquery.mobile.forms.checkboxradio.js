@@ -24,7 +24,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 				icon: this.element.parents( "[data-type='horizontal']" ).length ? undefined : uncheckedicon,
 				shadow: false
 			});
-		
+
 		// wrap the input + label in a div 
 		input
 			.add( label )
