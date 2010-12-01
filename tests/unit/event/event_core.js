@@ -72,7 +72,6 @@
 			ok(false);
 		});
 
-		console.log("foo");
 		$($.event.special.scrollstart).trigger("touchmove");
 	});
 
@@ -97,7 +96,7 @@
 		ok(!triggered);
 
 		$($.event.special.scrollstart).trigger("touchmove");
-		
+
 		stop();
 		setTimeout(function(){
 			start();
