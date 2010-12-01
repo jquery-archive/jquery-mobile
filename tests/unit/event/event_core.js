@@ -12,6 +12,8 @@
 			$.each(events, function(i, name){
 				$("#main").unbind(name);
 			});
+
+			$($.event.special.scrollstart).unbind("scrollstart");
 		}
 	});
 
@@ -54,5 +56,57 @@
 		$.each(events, function(i, name){
 			ok($.attrFn[name]);
 		});
+	});
+
+	test( "scrollstart enabled defaults to true", function(){
+		$.event.special.scrollstart.enabled = false;
+		$.testHelper.reloadLib(libName);
+		ok($.event.special.scrollstart.enabled);
+	});
+
+	test( "scrollstart setup binds a function that returns when its disabled", function(){
+		expect( 0 );
+		$.event.special.scrollstart.enabled = false;
+
+		$($.event.special.scrollstart).bind("scrollstart", function(){
+			ok(false);
+		});
+
+		$($.event.special.scrollstart).trigger("touchmove");
+	});
+
+	test( "scrollstart setup binds a function that triggers scroll start when enabled", function(){
+		$.event.special.scrollstart.enabled = true;
+
+		$($.event.special.scrollstart).bind("scrollstart", function(){
+			ok(true);
+		});
+
+		$($.event.special.scrollstart).trigger("touchmove");
+	});
+
+	test( "scrollstart setup binds a function that triggers scroll stop after 50 ms", function(){
+		var triggered = false;
+		$.event.special.scrollstart.enabled = true;
+
+		$($.event.special.scrollstart).bind("scrollstop", function(){
+			triggered = true;
+		});
+
+		ok(!triggered);
+
+		$($.event.special.scrollstart).trigger("touchmove");
+
+		stop();
+		setTimeout(function(){
+			start();
+			ok(!triggered);
+		}, 48);
+
+		stop();
+		setTimeout(function(){
+			start();
+			ok(triggered);
+		}, 50);
 	});
 })(jQuery);
