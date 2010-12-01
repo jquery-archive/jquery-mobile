@@ -85,4 +85,29 @@
 
 		$($.event.special.scrollstart).trigger("touchmove");
 	});
+
+	test( "scrollstart setup binds a function that triggers scroll stop after 50 ms", function(){
+		var triggered = false;
+		$.event.special.scrollstart.enabled = true;
+
+		$($.event.special.scrollstart).bind("scrollstop", function(){
+			triggered = true;
+		});
+
+		ok(!triggered);
+
+		$($.event.special.scrollstart).trigger("touchmove");
+		
+		stop();
+		setTimeout(function(){
+			start();
+			ok(!triggered);
+		}, 48);
+
+		stop();
+		setTimeout(function(){
+			start();
+			ok(triggered);
+		}, 50);
+	});
 })(jQuery);
