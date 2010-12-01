@@ -31,6 +31,6 @@
 .ui-fluid .ui-btn { display: table-cell; text-align: center; }
 .ui-fluid .ui-btn .ui-btn-inner { width: 100%; padding: 0.6em 0px; }
 
-.ui-fluid .ui-controlgroup-controls {width: 100%; display: table;}
-.ui-fluid .ui-checkbox, .ui-fluid .ui-radio {display: table-cell;}
-.ui-fluid .ui-checkbox label, .ui-fluid .ui-radio label {width: 100%;display: block; text-align: center;}
+.ui-fluid .ui-controlgroup-controls { width: 100%; display: table; }
+.ui-fluid .ui-checkbox, .ui-fluid .ui-radio { display: table-cell; }
+.ui-fluid .ui-checkbox label, .ui-fluid .ui-radio label { width: 100%;display: block; text-align: center; }

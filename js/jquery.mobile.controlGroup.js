@@ -9,8 +9,8 @@ $.fn.controlgroup = function(options){
 		
 	return $(this).each(function(){
 	
-		if ($(this).hasClass("ui-fluid") && this.tagName != "FIELDSET") {
-			$(this).children().wrapAll("<div class='ui-table-row' />");
+		if ( $(this).hasClass("ui-fluid") && this.tagName != "FIELDSET" ) {
+			$(this).children().wrapAll( "<div class='ui-table-row' />" ) ;
 		}
 	
 		var o = $.extend({
