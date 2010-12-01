@@ -1,21 +1,9 @@
 @charset "utf-8";
 
 .ui-scrollview-clip {
-	overflow: hidden;
-	position: relative;
 }
 
 .ui-scrollview-view {
-	position: relative;
-	overflow: hidden;
-	top: 0;
-	left: 0;
-/*
-	min-width: 100%;
-	min-height: 100%;
-	padding: 0;
-	margin: 0;
-*/
 }
 
 .ui-scrolllistview .ui-li-divider {
@@ -36,14 +24,14 @@
 	opacity: 1;
 }
 
-.ui-scrollbar-vertical {
+.ui-scrollbar-y {
 	top: 2px;
 	right: 2px;
 	bottom: 8px;
 	width: 5px;
 }
 
-.ui-scrollbar-horizontal {
+.ui-scrollbar-x {
 	right: 8px;
 	bottom: 2px;
 	left: 2px;
@@ -66,12 +54,12 @@
 	border-radius: 2px;
 }
 
-.ui-scrollbar-vertical .ui-scrollbar-thumb {
+.ui-scrollbar-y .ui-scrollbar-thumb {
 	width: 5px;
 	height: 100%;
 }
 
-.ui-scrollbar-horizontal .ui-scrollbar-thumb {
+.ui-scrollbar-x .ui-scrollbar-thumb {
 	width: 100%;
 	height: 5px;
 }
