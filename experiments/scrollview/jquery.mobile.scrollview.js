@@ -26,7 +26,9 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 	
 		eventType:         $.support.touch ? "touch" : "mouse",
 	
-		showScrollBars:    true
+		showScrollBars:    true,
+		
+		pagingEnabled:     false
 	},
 
 	_makePositioned: function($ele)
@@ -300,6 +302,18 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 				this._$vScrollBar.find(".ui-scrollbar-thumb").css("height", (ch >= vh ? "100%" : Math.floor(ch/vh*100)+ "%"));
 		}
 
+		var svdir = this.options.direction;
+
+		this._pageDelta = 0;
+		this._pageSize = 0;
+		this._pagePos = 0; 
+
+		if (this.options.pagingEnabled && (svdir == "x" || svdir == "y"))
+		{
+			this._pageSize = svdir == "x" ? cw : ch;
+			this._pagePos = svdir == "x" ? this._sx : this._sy;
+			this._pagePos -= this._pagePos % this._pageSize;
+		}
 		this._lastMove = 0;
 		this._enableTracking();
 
@@ -332,6 +346,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 
 		var dx = ex - this._lastX;
 		var dy = ey - this._lastY;
+		var svdir = this.options.direction;
 
 		if (!this._directionLock)
 		{
@@ -352,7 +367,6 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 				dir = "x";
 			}
 
-			var svdir = this.options.direction;
 			if (svdir && dir && svdir != dir)
 			{
 				// This scrollview can't handle the direction the user
@@ -427,6 +441,20 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 
 		}
 
+		if (this.options.pagingEnabled && (svdir == "x" || svdir == "y"))
+		{
+			if (this._doSnapBackX || this._doSnapBackY)
+				this._pageDelta = 0;
+			else
+			{
+				var opos = this._pagePos;
+				var cpos = svdir == "x" ? newX : newY;
+				var delta = svdir == "x" ? dx : dy;
+
+				this._pageDelta = (opos > cpos && delta < 0) ? this._pageSize : ((opos < cpos && delta > 0) ? -this._pageSize : 0);
+			}
+		}
+
 		this._didDrag = true;
 		this._lastX = ex;
 		this._lastY = ey;
@@ -451,8 +479,20 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 
 		var sx = (this._hTracker && this._speedX && doScroll) ? this._speedX : (this._doSnapBackX ? 1 : 0);
 		var sy = (this._vTracker && this._speedY && doScroll) ? this._speedY : (this._doSnapBackY ? 1 : 0);
-	
-		if (sx || sy)
+
+		var svdir = this.options.direction;
+		if (this.options.pagingEnabled && (svdir == "x" || svdir == "y") && !this._doSnapBackX && !this._doSnapBackY)
+		{
+			var x = this._sx;
+			var y = this._sy;
+			if (svdir == "x")
+				x = -this._pagePos + this._pageDelta;
+			else
+				y = -this._pagePos + this._pageDelta;
+
+			this.scrollTo(x, y, this.options.snapbackDuration);
+		}
+		else if (sx || sy)
 			this._startMScroll(sx, sy);
 		else
 			this._hideScrollBars();
