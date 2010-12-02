@@ -19,7 +19,7 @@
 			
 			<h2>jQuery Mobile's navigation model</h2> 
 
-			<p>A "page" in jQuery Mobile consists of an element (usually a <code>div</code>) with a <code>data-role</code> attribute set to <code>"page"</code>, within which there generally tends to be <code>div</code> elements with roles of <code>"header"</code>, <code>"content"</code>, and <code>"footer"</code>, each containing common markup, forms, and custom jQuery Mobile widgets.</p> 
+			<p>A "page" in jQuery Mobile consists of an element (usually a <code>div</code>) with a <code>data-role</code> attribute set to <code>"page"</code>, which generally contains <code>div</code> elements with roles of <code>"header"</code>, <code>"content"</code>, and <code>"footer"</code>, each containing common markup, forms, and custom jQuery Mobile widgets.</p> 
 
 			<p>The basic workflow with page loading is as follows: first, a page is requested with a normal HTTP request, and subsequent "pages" are then requested and injected into that page's DOM. Because of this, the DOM may have a number of "pages" in it at a time, each of which can be re-visited by linking to its <code>ID</code> attribute.</p> 
 
@@ -52,7 +52,7 @@
 			<p>jQuery Mobile manages http requests using a combination of generated absolute URL paths and manipulating a generated <code>&lt;base&gt;</code> element's href attribute. The combination of these two approaches allows us to create URLs that contain full path information for loading pages, and a base element to properly direct asset requests made by those loaded pages (such as images and stylesheets).</p> 
 
 			<p>jQuery Mobile core contains 4 internal functions for manipulating a base url to be used in normalizing relative http requests:</p> 
-
+<p><strong>Note: These functions have changed - docs will be updated soon!</strong></p>
 			<ul> 
 			<li><p>getPathDir: function that returns a path with the last "/"-split segment removed (which is assumed to be a file url).</p></li>
 			<li><p>getBaseURL: function that returns either the location.hash, or a path specified via its argument, with the last segment removed.</p></li> 
