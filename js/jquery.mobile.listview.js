@@ -24,7 +24,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		// create listview markup 
 		$list
 			.addClass( "ui-listview" )
-			.attr( "role", "listbox" )
+			.attr( "role", "listbox" );
 		
 		if ( o.inset ) {
 			$list.addClass( "ui-listview-inset ui-corner-all ui-shadow" );
@@ -233,13 +233,24 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				itemClass += " ui-li-static ui-btn-up-" + o.theme;
 			}
 			
-			
-			if( o.inset ){	
+			if(li.length === 1) {
+				if ( o.inset ) {
+					itemClass += " ui-corner-all";
+					
+					item
+						.add( item.find( ".ui-btn-inner" ).addClass('ui-corner-all') )
+						.find( ".ui-li-link-alt" )
+							.addClass( "ui-corner-right" )
+						.end()
+						.find( ".ui-li-thumb" )
+							.addClass( "ui-corner-left" );
+				}
+			}else if( o.inset ){	
 				if ( pos === 0 ) {
 						itemClass += " ui-corner-top";
-	
+						
 						item
-							.add( item.find( ".ui-btn-inner" ) )
+							.add( item.find( ".ui-btn-inner" ).addClass('ui-corner-top') )
 							.find( ".ui-li-link-alt" )
 								.addClass( "ui-corner-tr" )
 							.end()
@@ -248,12 +259,12 @@ $.widget( "mobile.listview", $.mobile.widget, {
 						if(item.next().next().length){
 							self._removeCorners( item.next() );		
 						}
-	
+					
 				} else if ( pos === li.length - 1 ) {
 						itemClass += " ui-corner-bottom";
-	
+						
 						item
-							.add( item.find( ".ui-btn-inner" ) )
+							.add( item.find( ".ui-btn-inner" ).addClass('ui-corner-bottom') )
 							.find( ".ui-li-link-alt" )
 								.addClass( "ui-corner-br" )
 							.end()
