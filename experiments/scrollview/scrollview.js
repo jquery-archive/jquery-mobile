@@ -12,7 +12,8 @@ function ResizePageContentHeight(page)
 
 $("[data-role=page]").live("pageshow", function(event) {
 	var $page = $(this);
-	$page.find(".ui-content, [data-scroll]").not(".ui-scrollview-clip").each(function(){
+	$page.find(".ui-content").attr("data-scroll", "y");
+	$page.find("[data-scroll]:not(.ui-scrollview-clip)").each(function(){
 		var $this = $(this);
 		// XXX: Remove this check for ui-scrolllistview once we've
 		//      integrated list divider support into the main scrollview class.
@@ -21,14 +22,14 @@ $("[data-role=page]").live("pageshow", function(event) {
 		else
 		{
 			var st = $this.data("scroll") + "";
-			var snap = st && st.search(/^[xy]s$/ != -1);
+			var paging = st && st.search(/^[xy]p$/) != -1;
 			var dir = st && st.search(/^[xy]/) != -1 ? st.charAt(0) : null;
 
 			var opts = {};
 			if (dir)
 				opts.direction = dir;
-			if (snap)
-				opts.snap = "viewport";
+			if (paging)
+				opts.pagingEnabled = true;
 
 			$this.scrollview(opts);
 		}
