@@ -128,7 +128,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		});
 		
 		//events for list items
-		list.delegate("li",'click', function(){
+		list.delegate("li:not(.ui-disabled)", "click", function(){
 				//update select	
 				var newIndex = list.find( "li" ).index( this ),
 					prevIndex = select[0].selectedIndex;
@@ -161,13 +161,22 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		
 		//populate menu with options from select element
 		self.select.find( "option" ).each(function( i ){
-				var anchor = $("<a>", { 
-							"role": "option", 
-							"href": "#"
-						})
-						.text( $(this).text() );
+			var anchor = $("<a>", { 
+				"role": "option", 
+				"href": "#",
+				"text": $(this).text()
+			}),
+		
+			item = $( "<li>", {"data-icon": "checkbox-on"});
 			
-			$( "<li>", {"data-icon": "checkbox-on"})
+			// support disabled option tags
+			if( this.disabled ){
+				item
+					.addClass("ui-disabled")
+					.attr("aria-disabled", true);
+			}
+
+			item
 				.append( anchor )
 				.appendTo( self.list );
 		});
