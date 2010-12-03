@@ -27,7 +27,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			
 			select = this.element
 						.attr( "tabindex", "-1" )
-						.wrap( "<div class='ui-select'>" ),		
+						.wrap( "<div class='ui-select' />" ),		
 							
 			selectID = select.attr( "id" ),
 			
@@ -39,7 +39,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			
 			thisPage = select.closest( ".ui-page" ),
 				
-			button = $( "<a>", { 
+			button = $( "<a />", { 
 					"href": "#",
 					"role": "button",
 					"id": buttonId,
@@ -71,13 +71,13 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					
 			menuPageContent = menuPage.find( ".ui-content" ),	
 					
-			screen = $( "<div>", {"class": "ui-selectmenu-screen ui-screen-hidden"})
+			screen = $( "<div />", {"class": "ui-selectmenu-screen ui-screen-hidden"})
 						.appendTo( thisPage ),		
 								
-			listbox = $( "<div>", { "class": "ui-selectmenu ui-selectmenu-hidden ui-overlay-shadow ui-corner-all pop ui-body-" + o.overlayTheme } )
+			listbox = $( "<div />", { "class": "ui-selectmenu ui-selectmenu-hidden ui-overlay-shadow ui-corner-all pop ui-body-" + o.overlayTheme } )
 					.insertAfter(screen),
 					
-			list = $( "<ul>", { 
+			list = $( "<ul />", { 
 					"class": "ui-selectmenu-list", 
 					"id": menuId, 
 					"role": "listbox", 
@@ -173,7 +173,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				
 				// has this optgroup already been built yet?
 				if( $.inArray(optLabel, optgroups) === -1 ){
-					var optgroup = $('<li data-role="list-divider"></li>')
+					var optgroup = $('<li data-role="list-divider" />')
 						.text( optLabel )
 						.appendTo( self.list );
 					
@@ -181,13 +181,13 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				}
 			}
 
-			var anchor = $("<a>", { 
+			var anchor = $("<a />", { 
 				"role": "option", 
 				"href": "#",
-				"text": $(this).text()
+				"text": $this.text()
 			}),
 		
-			item = $( "<li>", {"data-icon": "checkbox-on"});
+			item = $( "<li />", {"data-icon": "checkbox-on"});
 			
 			// support disabled option tags
 			if( this.disabled ){
@@ -197,7 +197,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			}
 			
 			if( o.hidePlaceholderMenuItems ){
-				if( !this.getAttribute('value') || $(this).text().length == 0 || $(this).data('placeholder')){
+				if( !this.getAttribute('value') || $this.text().length === 0 || $this.data('placeholder')){
 					item.addClass('ui-selectmenu-placeholder');
 				}
 			}
