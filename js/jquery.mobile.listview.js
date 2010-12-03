@@ -245,8 +245,9 @@ $.widget( "mobile.listview", $.mobile.widget, {
 							.end()
 							.find( ".ui-li-thumb" )
 								.addClass( "ui-corner-tl" );
-						
-						self._removeCorners( item.next() );		
+						if(item.next().next().length){
+							self._removeCorners( item.next() );		
+						}
 	
 				} else if ( pos === li.length - 1 ) {
 						itemClass += " ui-corner-bottom";
@@ -259,7 +260,9 @@ $.widget( "mobile.listview", $.mobile.widget, {
 							.find( ".ui-li-thumb" )
 								.addClass( "ui-corner-bl" );
 						
-						self._removeCorners( item.prev() );		
+						if(item.prev().prev().length){
+							self._removeCorners( item.prev() );		
+						}	
 				}
 			}
 
