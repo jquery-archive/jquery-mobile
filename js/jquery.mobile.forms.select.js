@@ -16,7 +16,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		shadow: true,
 		iconshadow: true,
 		menuPageTheme: 'b',
-		overlayTheme: 'a'
+		overlayTheme: 'a',
+		hidePlaceholderMenuItems: true
 	},
 	_create: function(){
 	
@@ -155,7 +156,9 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 	},
 	
 	_buildList: function(){
-		var self = this, optgroups = [];
+		var self = this, 
+			optgroups = [],
+			o = this.options;
 		
 		self.list.empty().filter('.ui-listview').listview('destroy');
 		
@@ -191,6 +194,12 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				item
 					.addClass("ui-disabled")
 					.attr("aria-disabled", true);
+			}
+			
+			if( o.hidePlaceholderMenuItems ){
+				if( !this.getAttribute('value') || $(this).text().length == 0 || $(this).data('placeholder')){
+					item.addClass('ui-selectmenu-placeholder');
+				}
 			}
 
 			item
