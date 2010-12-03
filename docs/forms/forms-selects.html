@@ -122,7 +122,62 @@
 			<option value="edit">Edit</option>
 			<option value="delete">Delete</option>
 		</select>
+	</div>	
+	
+	
+	<h2>Placeholder options</h2>
+	<p>It's common for developers to include a "null" option in their select element to force a user to choose an option. jQuery Mobile detects these null options and hides them in the overlay menu, showing only valid choices to the user. Examples of null options are either:</p>
+	<ul>
+		<li>An option with no value attribute (or an empty value attribute)</li>
+		<li>An option with no text node</li>
+		<li>An option with a <code>data-placeholder="true"</code> attribute. (This allows you to use an option that has a value and a textnode as a placeholder option).</li>
+	</ul>
+	
+	<p>You can disable this feature through the selectmenu plugin's <code>hidePlaceholderMenuItems</code> option, like this:</p>
+	<pre>
+	<code>
+$.mobile.selectmenu.prototype.options.hidePlaceholderMenuItems = false;		
+	</code>
+	</pre>
+	
+	
+	<p>Here's a demo of various placeholder options:</p>
+		 
+		 
+	<div data-role="fieldcontain">
+		<label for="select-choice-4" class="select">Choose shipping method:</label>
+		<select name="select-choice-4" id="select-choice-4">
+			<option></option>
+			<option value="standard">Standard: 7 day</option>
+			<option value="rush">Rush: 3 days</option>
+			<option value="express">Express: next day</option>
+			<option value="overnight">Overnight</option>
+		</select>
+	</div>	 
+		 
+		 
+	<div data-role="fieldcontain">
+		<label for="select-choice-5" class="select">Choose shipping method:</label>
+		<select name="select-choice-5" id="select-choice-5">
+			<option>Choose one...</option>
+			<option value="standard">Standard: 7 day</option>
+			<option value="rush">Rush: 3 days</option>
+			<option value="express">Express: next day</option>
+			<option value="overnight">Overnight</option>
+		</select>
 	</div>		 
+		 
+		 
+	<div data-role="fieldcontain">
+		<label for="select-choice-6" class="select">Choose shipping method:</label>
+		<select name="select-choice-6" id="select-choice-6">
+			<option value="choose-one" data-placeholder="true">Choose one...</option>
+			<option value="standard">Standard: 7 day</option>
+			<option value="rush">Rush: 3 days</option>
+			<option value="express">Express: next day</option>
+			<option value="overnight">Overnight</option>
+		</select>
+	</div>	 
 
 	</form>
 	
