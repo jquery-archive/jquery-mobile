@@ -128,24 +128,24 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		});
 		
 		//events for list items
-		list.delegate("li:not(.ui-disabled)", "click", function(){
-				//update select	
-				var newIndex = list.find( "li" ).index( this ),
-					prevIndex = select[0].selectedIndex;
-
-				select[0].selectedIndex = newIndex;
-				
-				//trigger change event
-				if(newIndex !== prevIndex){ 
-					select.trigger( "change" ); 
-				}
-				
-				self.refresh();
-				
-				//hide custom select
-				self.close();
-				return false;
-			});	
+		list.delegate("li:not(.ui-disabled, .ui-li-divider)", "click", function(){
+			//update select
+			var newIndex = list.find( "li:not(.ui-li-divider)" ).index( this ),
+				prevIndex = select[0].selectedIndex;
+			
+			select[0].selectedIndex = newIndex;
+			
+			//trigger change event
+			if(newIndex !== prevIndex){ 
+				select.trigger( "change" ); 
+			}
+			
+			self.refresh();
+			
+			//hide custom select
+			self.close();
+			return false;
+		});
 	
 		//events on "screen" overlay
 		screen.click(function(){
@@ -155,12 +155,29 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 	},
 	
 	_buildList: function(){
-		var self = this;
+		var self = this, optgroups = [];
 		
 		self.list.empty().filter('.ui-listview').listview('destroy');
 		
 		//populate menu with options from select element
 		self.select.find( "option" ).each(function( i ){
+			var $this = $(this),
+				$parent = $this.parent();
+			
+			// are we inside an optgroup?
+			if( $parent.is("optgroup") ){
+				var optLabel = $parent.attr("label");
+				
+				// has this optgroup already been built yet?
+				if( $.inArray(optLabel, optgroups) === -1 ){
+					var optgroup = $('<li data-role="list-divider"></li>')
+						.text( optLabel )
+						.appendTo( self.list );
+					
+					optgroups.push( optLabel );
+				}
+			}
+			
 			var anchor = $("<a>", { 
 				"role": "option", 
 				"href": "#",
@@ -182,7 +199,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		});
 		
 		//now populated, create listview
-		self.list.listview();		
+		self.list.listview();
 	},
 	
 	refresh: function( forceRebuild ){
@@ -192,12 +209,20 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		
 		if( forceRebuild || select[0].options.length > self.list.find('li').length ){
 			self._buildList();
-		}	
-			
-		self.button.find( ".ui-btn-text" ).text( $(select[0].options.item(selected)).text() ); 
+		}
+		
+		self.button
+			.find( ".ui-btn-text" )
+			.text( $(select[0].options.item(selected)).text() );
+		
 		self.list
-			.find('li').removeClass( $.mobile.activeBtnClass ).attr('aria-selected', false)
-			.eq(selected).addClass( $.mobile.activeBtnClass ).find('a').attr('aria-selected', true);		
+			.find('li:not(.ui-li-divider)')
+			.removeClass( $.mobile.activeBtnClass )
+			.attr('aria-selected', false)
+			.eq(selected)
+			.addClass( $.mobile.activeBtnClass )
+			.find('a')
+			.attr('aria-selected', true);
 	},
 	
 	open: function(){
