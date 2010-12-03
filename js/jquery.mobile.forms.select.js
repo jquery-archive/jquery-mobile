@@ -124,7 +124,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		//button events
 		button.bind( $.support.touch ? "touchstart" : "click", function(event){
 			self.open();
-			return false;
+			event.preventDefault();
 		});
 		
 		//events for list items
@@ -144,14 +144,14 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				
 				//hide custom select
 				self.close();
-				return false;
+				event.preventDefault();
 			});	
 	
 		//events on "screen" overlay
-		screen.click(function(){
+		screen.click(function(event){
 			self.close();
-			return false;
-		});	
+			event.preventDefault();
+		});
 	},
 	
 	_buildList: function(){
