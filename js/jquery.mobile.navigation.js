@@ -453,12 +453,12 @@
 			
 		//if to is defined, use it
 		if ( to ){
-			$.mobile.changePage( to, transition);
+			$.mobile.changePage( to, transition, undefined, false);
 		}
 		//there's no hash, the active page is not the start page, and it's not manually triggered hashchange
 		//we probably backed out to the first page visited
 		else if( $.mobile.activePage.length && $.mobile.startPage[0] !== $.mobile.activePage[0] && !triggered ) {
-			$.mobile.changePage( $.mobile.startPage, transition, true );
+			$.mobile.changePage( $.mobile.startPage, transition, true, false );
 		}
 		//probably the first page - show it
 		else{
