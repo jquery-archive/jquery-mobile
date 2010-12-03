@@ -31,12 +31,21 @@ $.widget( "mobile.button", $.mobile.widget, {
 			} )
 			.text( $el.text() || $el.val() )
 			.insertBefore( $el )
-			.click(function(){
+			.click(function(e){
 				if(!o.disabled){
-					$el.click(); 
+				if ( $el.attr("type") !== "reset" ){
+					var $buttonPlaceholder = $("<input>", 
+							{type: "hidden", name: $el.attr("name"), value: $el.attr("value")})
+							.insertBefore($el);
+							
+					}
+					$el.submit();	
+					$buttonPlaceholder.remove();				
 				}
-
-				return false;
+				else{
+					$el.trigger("click")
+				}
+				e.preventDefault();
 			})
 			.buttonMarkup({
 				theme: o.theme, 
