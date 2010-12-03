@@ -193,8 +193,8 @@
 				
 				reFocus( to );
 				
-				if( changeHash !== false && url ){
-					path.set(url, (back !== true));
+				if( changeHash && url ){
+					path.set(url, true);
 				}
 				removeActiveLinkClass();
 				
