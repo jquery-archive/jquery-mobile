@@ -1,0 +1,152 @@
+/*
+* jQuery Mobile Framework : carousel component
+* Copyright (c) 2010 Adobe Systems Incorporated - Alexandre Capt (acapt@adobe.com)
+* Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
+* Note: Code is in draft form and is subject to change
+*/
+
+.carousel {
+    position: relative;
+    width: 940px;
+    height: 270px;
+    overflow: hidden;
+}
+.carousel var {
+    display: none;
+}
+
+.carousel-banner-item {
+    width: 940px;
+    height: 270px;
+    left: 1000px;
+    position: absolute;
+    top: 0;
+    background-color: #eee;
+    overflow: hidden;
+}
+.carousel-banner-item img {
+    width: 940px;
+    height: 270px;
+    background: no-repeat center center;
+}
+
+.carousel-banner-item h3, .carousel-banner-item p {
+    padding: 10px;
+}
+
+.carousel-banner {
+    position: absolute;
+}
+
+.carousel-banner-switches,
+.carousel-banner-switches-tl,
+.carousel-banner-switches-tc,
+.carousel-banner-switches-tr,
+.carousel-banner-switches-bl,
+.carousel-banner-switches-bc,
+.carousel-banner-switches-br {
+    position: absolute;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+.carousel-banner-switches {
+    display: none;
+}
+.carousel-banner-switches-tl {
+    top: 0;
+    left: 0;
+}
+.carousel-banner-switches-tc {
+    top: 0;
+    left: 0;
+    text-align: center;
+}
+.carousel-banner-switches-tr {
+    top: 0;
+    left: 0;
+    text-align: right;
+}
+.carousel-banner-switches-bl {
+    bottom: 0;
+    left: 0;
+}
+.carousel-banner-switches-bc {
+    bottom: 0;
+    left: 0;
+    text-align: center;
+}
+.carousel-banner-switches-br {
+    bottom: 0;
+    left: 0;
+    text-align: right;
+}
+
+.carousel-banner-switch {
+    display: inline-block;
+    margin: 8px;
+    padding: 0;
+}
+.carousel-banner-switch-br {
+    position: absolute;
+    margin: 0;
+    padding:0;
+    bottom: 0;
+    right: 8px;
+}
+.carousel-banner-switch-bl {
+    position: absolute;
+    margin: 0;
+    padding:0;
+    bottom: 0;
+    left: 8px;
+}
+
+
+.carousel-controls a {
+    position: absolute;
+    width: 24px;
+    height: 48px;
+    top: 111px; /* 270/2 - 24 */
+    background: url("images/controls.png") no-repeat scroll 0 0 transparent;
+    visibility: hidden;
+}
+.carousel-controls a.carousel-active {
+    visibility: visible;
+}
+a.carousel-control-prev {
+    left: 0;
+    background-position: -24px 0;
+}
+a.carousel-control-prev:hover {
+    left: 0;
+    background-position: -72px 0;
+}
+a.carousel-control-next {
+    right: 0;
+}
+a.carousel-control-next:hover {
+    right: 0;
+    background-position: -48px 0;
+}
+
+.carousel-banner-switch a {
+    display: inline-block;
+    background: url("images/switcher.png") no-repeat scroll 0 0 transparent;
+}
+.carousel-banner-switch a img {
+    width: 25px;
+    height: 25px;
+    vertical-align:top;
+}
+
+.carousel-banner-switch a.carousel-active, .carousel-banner-switch a:hover {
+    background-position: -25px 0;
+}
+
+.carousel-banner-switch li {
+    background: none !important;
+    display: inline-block;
+    list-style: none;
+    float:left;
+}
