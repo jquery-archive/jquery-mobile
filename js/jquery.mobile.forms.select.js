@@ -128,9 +128,9 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		});
 		
 		//events for list items
-		list.delegate("li:not(.ui-disabled)", "click", function(event){
+		list.delegate("li:not(.ui-disabled, .ui-li-divider)", "click", function(event){
 				//update select	
-				var newIndex = list.find( "li" ).index( this ),
+				var newIndex = list.find( "li:not(.ui-li-divider)" ).index( this ),
 					prevIndex = select[0].selectedIndex;
 
 				select[0].selectedIndex = newIndex;
@@ -155,12 +155,29 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 	},
 	
 	_buildList: function(){
-		var self = this;
+		var self = this, optgroups = [];
 		
 		self.list.empty().filter('.ui-listview').listview('destroy');
 		
 		//populate menu with options from select element
 		self.select.find( "option" ).each(function( i ){
+			var $this = $(this),
+				$parent = $this.parent();
+			
+			// are we inside an optgroup?
+			if( $parent.is("optgroup") ){
+				var optLabel = $parent.attr("label");
+				
+				// has this optgroup already been built yet?
+				if( $.inArray(optLabel, optgroups) === -1 ){
+					var optgroup = $('<li data-role="list-divider"></li>')
+						.text( optLabel )
+						.appendTo( self.list );
+					
+					optgroups.push( optLabel );
+				}
+			}
+
 			var anchor = $("<a>", { 
 				"role": "option", 
 				"href": "#",
@@ -196,7 +213,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			
 		self.button.find( ".ui-btn-text" ).text( $(select[0].options.item(selected)).text() ); 
 		self.list
-			.find('li').removeClass( $.mobile.activeBtnClass ).attr('aria-selected', false)
+			.find('li:not(.ui-li-divider)').removeClass( $.mobile.activeBtnClass ).attr('aria-selected', false)
 			.eq(selected).addClass( $.mobile.activeBtnClass ).find('a').attr('aria-selected', true);		
 	},
 	
