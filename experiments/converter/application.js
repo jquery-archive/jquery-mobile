@@ -57,7 +57,6 @@ $(function() {
 		});
 		conversions.store();
 		list();
-		return false;
 	});
 	$( "#clear" ).click(function() {
 		conversions.clear();
