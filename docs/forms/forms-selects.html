@@ -179,6 +179,40 @@ $.mobile.selectmenu.prototype.options.hidePlaceholderMenuItems = false;
 		</select>
 	</div>	 
 
+	
+	<h2>Disabled options</h2>
+	<p>jQuery Mobile will automatically disable and style option tags with the <code>disabled=&quot;disabled&quot;</code> attribute.  In the demo below, the second option &quot;Rush: 3 days&quot; has been set to disabled.</p>
+
+	<div data-role="fieldcontain">
+		<label for="select-choice-7" class="select">Choose shipping method:</label>
+		<select name="select-choice-7" id="select-choice-7">
+			<option value="standard">Standard: 7 day</option>
+			<option value="rush" disabled="disabled">Rush: 3 days</option>
+			<option value="express">Express: next day</option>
+			<option value="overnight">Overnight</option>
+		</select>
+	</div>
+
+	
+	<h2>Optgroup support</h2>
+	<p>If a select menu contains <code>optgroup</code> elements, jQuery Mobile will create a divider based on their <code>label</code> attribute:</p>
+
+	<div data-role="fieldcontain">
+		<label for="select-choice-8" class="select">Choose shipping method:</label>
+		<select name="select-choice-8" id="select-choice-8">
+			<optgroup label="USPS">
+				<option value="standard">Standard: 7 day</option>
+				<option value="rush">Rush: 3 days</option>
+				<option value="express">Express: next day</option>
+				<option value="overnight">Overnight</option>
+			</optgroup>
+			<optgroup label="FedEx">
+				<option value="sameday">First Overnight</option>
+				<option value="sameday">Express Saver</option>
+				<option value="sameday">Ground</option>
+			</optgroup>
+		</select>
+	</div>
 	</form>
 	
 	</div><!-- /content -->
