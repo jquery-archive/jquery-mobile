@@ -166,6 +166,9 @@
 			
 		//reset base to pathname for new request
 		if(base){ base.reset(); }
+		
+		//kill the keyboard
+		$( window.document.activeElement ).add(':focus').blur();
 			
 		// if the new href is the same as the previous one
 		if ( back ) {
@@ -179,9 +182,6 @@
 		
 		//function for transitioning between two existing pages
 		function transitionPages() {
-				
-			//kill the keyboard
-			$( window.document.activeElement ).blur();
 			
 			//get current scroll distance
 			var currScroll = $window.scrollTop();
