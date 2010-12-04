@@ -18,6 +18,7 @@
 			$('<li><a href=\'#\'>' + themes[ i ].charAt(0).toUpperCase() + themes[ i ].substr(1) + '</a></li>')
 				.click(function(){
 					addTheme( themes[i] );
+					menuPage.dialog('close');
 				})
 				.appendTo(menu);
 		});	
