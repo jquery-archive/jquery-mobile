@@ -108,5 +108,35 @@
 			start();
 			ok(triggered);
 		}, 50);
+
+		//NOTE async tests below won't fire unless start is called (??)
+		start();
+	});
+
+	test( "long press fires tap hold after 750 ms", function(){
+		var taphold = false;
+		$.support.touch = true;
+
+		$.testHelper.reloadLib(libName);
+
+		stop();
+		$($.event.special.tap).bind("taphold", function(){
+			start();
+			taphold = true;
+		});
+
+		$($.event.special.tap).trigger("touchstart");
+
+		stop();
+		setTimeout(function(){
+			start();
+			ok(!taphold);
+		}, 749);
+
+		stop();
+		setTimeout(function(){
+			start();
+			ok(taphold);
+	  }, 751);
 	});
 })(jQuery);
