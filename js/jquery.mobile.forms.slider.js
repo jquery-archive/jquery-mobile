@@ -126,7 +126,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		var control = this.element, percent,
 			cType = control[0].nodeName.toLowerCase(),
 			min = (cType === "input") ? parseFloat(control.attr("min")) : 0,
-			max = (cType === "input") ? parseFloat(control.attr("max")) : control.find("option").length - 1;
+			max = (cType === "input") ? parseFloat(control.attr("max")) : control.find("option").length - 1,
+			step = (cType === "input") ? parseFloat(control.attr("step")) : 1.0;
+			fixed = (cType === "input") ? parseInt(control.attr("fixed")) : 0;
 
 		if ( typeof val === "object" ) {
 			var data = val.originalEvent.touches ? val.originalEvent.touches[ 0 ] : val,
@@ -149,7 +151,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		if ( percent < 0 ) { percent = 0; }
 		if ( percent > 100 ) { percent = 100; }
 
-		var newval = Math.round( (percent / 100) * (max - min) ) + min;
+		var newval = ((Math.round( (percent / 100) * (max - min) ) + min) * step).toFixed(fixed);
 		if ( newval < min ) { newval = min; }
 		if ( newval > max ) { newval = max; }
 
