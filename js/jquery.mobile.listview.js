@@ -233,10 +233,11 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				itemClass += " ui-li-static ui-btn-up-" + o.theme;
 			}
 			
-			if(li.length === 1) {
-				if ( o.inset ) {
+			
+			if( o.inset ){
+			  if(li.length === 1) {
 					itemClass += " ui-corner-all";
-					
+
 					item
 						.add( item.find( ".ui-btn-inner" ).addClass('ui-corner-all') )
 						.find( ".ui-li-link-alt" )
@@ -244,9 +245,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 						.end()
 						.find( ".ui-li-thumb" )
 							.addClass( "ui-corner-left" );
-				}
-			}else if( o.inset ){	
-				if ( pos === 0 ) {
+  			}else if ( pos === 0 ) {
 						itemClass += " ui-corner-top";
 						
 						item
