@@ -91,36 +91,15 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				})
 				.appendTo( listbox ),
 			
-			placeholder = this.placeholder = (function(){
-				var firstOption = $(select[0].options[0]),
-					text = firstOption.text(),
-					isPlaceholder = !firstOption[0].getAttribute('value') || text.length == 0 || firstOption.data('placeholder'),
-					ret = isPlaceholder ? text : '';
-				
-				// if this option should be hidden once markup is generated, add a flag
-				// store a flag in its data cache so the 'isPlaceholder' logic doesn't need to
-				// be run for each select
-				if( isPlaceholder ){
-					if( o.hidePlaceholderMenuItems ){
-						$.data(firstOption[0], "ui-selectmenu-placeholder", true);
-					}
-				
-					// remove this placeholder option for single selects, otherwise the browser will use it as the default.
-					if( !isMultiple ){
-						firstOption.remove();
-					}
-				}
-				
-				return ret;
-			})(),
-			
-			header = this.header = $( '<div data-role="header" data-nobackbtn="true"><h1>'+placeholder+'</h1></div>' )
+			header = this.header = $( '<div data-role="header" data-nobackbtn="true"><h1></h1></div>' )
 				.prependTo( listbox ),
 				
 			headerClose = this.headerClose = $( '<a href="#" data-iconpos="notext" data-icon="delete">'+o.closeText+'</a>' )
 				.appendTo( header ),
 				
 			menuType;
+		
+		this.placeholder = '';
 		
 		// add counter for multi selects
 		if( isMultiple ){
@@ -213,14 +192,16 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 	_buildList: function(){
 		var self = this, 
 			optgroups = [],
-			o = this.options;
+			o = this.options,
+			placeholder = this.placeholder;
 		
 		self.list.empty().filter('.ui-listview').listview('destroy');
 		
 		//populate menu with options from select element
 		self.select.find( "option" ).each(function( i ){
 			var $this = $(this),
-				$parent = $this.parent();
+				$parent = $this.parent(),
+				text = $this.text();
 			
 			// are we inside an optgroup?
 			if( $parent.is("optgroup") ){
@@ -239,14 +220,17 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			var anchor = $("<a>", { 
 				"role": "", 
 				"href": "#",
-				"text": $(this).text()
+				"text": text
 			}),
 		
 			item = $( "<li>", { "data-icon": false });
 			
-			// hide this item if it's a placeholder
-			if( $.data(this, "ui-selectmenu-placeholder") === true ){
-				item.addClass('ui-selectmenu-placeholder');
+			if( !this.getAttribute('value') || text.length == 0 || $this.data('placeholder') ){
+				if( o.hidePlaceholderMenuItems ){
+					item.addClass('ui-selectmenu-placeholder');
+				}
+				
+				placeholder = self.placeholder = text;
 			}
 		
 			// multiple select defaults
@@ -271,8 +255,10 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		}
 		
 		// hide header if it's not a multiselect and there's no placeholder
-		if( !this.isMultiple && !this.placeholder.length ){
+		if( !this.isMultiple && !placeholder.length ){
 			this.header.hide();
+		} else {
+			this.header.find('h1').text( this.placeholder );
 		}
 		
 		//now populated, create listview
