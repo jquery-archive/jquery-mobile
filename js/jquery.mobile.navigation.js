@@ -17,9 +17,15 @@
 			//get path from current hash, or from a file path
 			get: function( newPath ){
 				if( newPath == undefined ){
-					newPath = location.hash;
+					if( $.support.pushState ){
+						newPath = location.pathname;
+					}	
+					else{
+						newPath = location.hash.replace(/#/,'');
+					}
+					
 				}
-				newPath = newPath.replace(/#/,'').split('/');
+				newPath = newPath.split('/');
 				if(newPath.length){
 					var lastSegment = newPath[newPath.length-1];
 					if( lastSegment.indexOf('.') > -1 || lastSegment == ''){
@@ -30,21 +36,30 @@
 			},
 			
 			//return the substring of a filepath before the sub-page key, for making a server request 
-			getFilePath: function( path ){
+			getFilePath: function( newPath ){
 				var splitkey = '&' + $.mobile.subPageUrlKey;
-				return path && path.indexOf( splitkey ) > -1 ? path.split( splitkey )[0] : path;
+				return newPath && newPath.indexOf( splitkey ) > -1 ? newPath.split( splitkey )[0] : newPath;
 			},
 			
-			set: function( path, disableListening){
-				if(disableListening) { hashListener = false; }
-				location.hash = path;
+			set: function( newPath, disableListening){
+				if( $.support.pushState ){
+					var temptitle = Math.random()*1000;
+					history.pushState({"url": newPath}, temptitle, newPath );
+					$('title').text(temptitle);
+				}
+				else{
+					location.hash = newPath;
+					if(disableListening) { 
+						hashListener = false;
+					}
+				}
 			},
 			
 			//location pathname from intial directory request
 			origin: '',
 			
 			setOrigin: function(){
-				path.origin = path.get( location.protocol + '//' + location.host + location.pathname );
+				path.origin = path.get();
 			}
 		},
 				
@@ -56,7 +71,7 @@
 			
 			//set the generated BASE element's href attribute to a new page's base path
 			set: function( href ){
-				base.element.attr('href', path.origin + path.get( href ));
+				base.element.attr('href', path.get( href ));
 			},
 			
 			//set the generated BASE element's href attribute to a new page's base path
@@ -86,10 +101,14 @@
 		
 		//enable/disable hashchange event listener
 		//toggled internally when location.hash is updated to match the url of a successful page load
-		hashListener = true;	
+		hashListener = true,
+		
+		//dumb workaround to ignore the initial popstate event currently triggered on load in Chrome
+		popEnabled = false;
 		
 		//set location pathname from intial directory request
 		path.setOrigin();
+
 
 /* 
 	internal utility functions
@@ -429,23 +448,30 @@
 		}
 		event.preventDefault();
 	});
-		
-		
+	
+	//Again, for Chrome: set popstate listening to true after onload and an arbitrary timeout 
+	//(0 seemed to work, but playing it safe)
+	$window.load(function(){
+		setTimeout(function(){ popEnabled = true; }, 100);
+	});	
 	
 	//hashchange event handler	
-	$window.bind( "hashchange", function(e, triggered) {
+	$window.bind( "hashchange popstate", function(e, triggered) {
+		
 		if( !hashListener ){ 
 			hashListener = true;
 			return; 
-		} 
-		
-		if( $(".ui-page-active").is("[data-role=" + $.mobile.nonHistorySelectors + "]") ){
+		}
+
+		//return to ignore initial popstate event fired in Chrome
+		//or if the active page is a dialog
+		if( ( e.type === "popstate" && !popEnabled ) || $(".ui-page-active").is("[data-role=" + $.mobile.nonHistorySelectors + "]") ){
 			return;
 		}
 		
-		var to = location.hash,
+		var to = (e.type == "hashchange" || triggered) ? location.hash : location.pathname,
 			transition = triggered ? false : undefined;
-			
+
 		//if to is defined, use it
 		if ( to ){
 			$.mobile.changePage( to, transition, undefined, false);
