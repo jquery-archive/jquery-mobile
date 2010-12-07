@@ -252,7 +252,7 @@
 		function enhancePage(){
 			
 			//set next page role, if defined
-			if ( nextPageRole || to.data('role') == 'dialog' ) {
+			if ( nextPageRole || to.data('role') === 'dialog' ) {
 				changeHash = false;
 				if(nextPageRole){
 					to.attr( "data-role", nextPageRole );
