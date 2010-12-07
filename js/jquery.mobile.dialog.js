@@ -44,7 +44,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 			if( $el.is('.ui-page-active') ){
 				self.close();
 				$el.bind('pagehide',function(){
-					$.mobile.updateHash( $prevPage.attr('id'), true);
+					$.mobile.updateHash( $prevPage.attr('data-url'), true);
 				});
 			}
 		});		
