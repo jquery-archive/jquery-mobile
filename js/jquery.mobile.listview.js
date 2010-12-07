@@ -290,7 +290,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 	_createSubPages: function() {
 		var parentList = this.element,
 			parentPage = parentList.closest( ".ui-page" ),
-			parentId = parentPage.attr( "id" ),
+			parentId = parentPage.data( "url" ),
 			o = this.options,
 			self = this,
 			persistentFooterID = parentPage.find( "[data-role='footer']" ).data( "id" );
@@ -308,7 +308,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 								.after( persistentFooterID ? $( "<div>", { "data-role": "footer", "data-id": persistentFooterID, "class": "ui-footer-duplicate" } ) : "" )
 								.parent()
 									.attr({
-										id: id,
+										"data-url": id,
 										"data-theme": theme,
 										"data-count-theme": countTheme
 									})

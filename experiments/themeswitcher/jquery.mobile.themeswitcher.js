@@ -1,10 +1,11 @@
 //quick & dirty theme switcher, written to potentially work as a bookmarklet
 (function($){
 	$.themeswitcher = function(){
+		if( $('[data-url=themeswitcher]').length ){ return; }
 		var themesDir = 'http://jquerymobile.com/test/themes/',
 			themes = ['default','valencia'],
 			currentPage = $.mobile.activePage,
-			menuPage = $( '<div data-role=\'dialog\' data-theme=\'a\'>' +
+			menuPage = $( '<div data-url="themeswitcher" data-role=\'dialog\' data-theme=\'a\'>' +
 						'<div data-role=\'header\' data-theme=\'b\'>' +
 							'<div class=\'ui-title\'>Switch Theme:</div>'+
 						'</div>'+
@@ -32,8 +33,6 @@
 		
 		//create page, listview
 		menuPage.page();
-		
-		//change page now	
-		$.mobile.changePage([currentPage, menuPage], 'pop', false);
+
 	};	
 })(jQuery);
