@@ -114,7 +114,6 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				return ret;
 			})(),
 			
-			// TODO: how to enforce the height of the header w/o nsbp hack?
 			header = this.header = $( '<div data-role="header" data-nobackbtn="true"><h1>'+placeholder+'</h1></div>' )
 				.prependTo( listbox ),
 				
