@@ -95,10 +95,33 @@ $('div').live('pagehide',function(event, ui){
 			<dd>Triggered on the page being initialized, after initialization occurs.</dd>
 		</dl>	
 		
+		
+				<pre>
+		<code>
+$('#aboutPage').live('pagebeforecreate',function(event){
+  alert('This page was just inserted into the dom!');
+});
+
+$('#aboutPage').live('pagecreate',function(event){
+  alert('This page was just enhanced by jQuery Mobile!');
+});
+		</code>
+		</pre>
+		
 		<p>Note that by binding to <code>pagebeforecreate</code> and returning <code>false</code>, you can prevent the page plugin from making its manipulations.</p>
 		
+<pre>
+		<code>
+$('#aboutPage').live('pagebeforecreate',function(event){
+  //run your own enhancement scripting here...
+  return false;
+});
+
+		</code>
+		</pre>		
+		
 		<div class="ui-body ui-body-e">
-			<p><strong>Note on Page IDs: </strong> Page elements in jQuery Mobile utilize the <code>ID</code> attribute for storing the location from which they came. When you place an <code>ID</code> attribute on a page that is brought into jQuery Mobile's single-page environment through Ajax, jQuery Mobile wraps that page with a new "page" <code>div</code> element, preserving any CSS references to your <code>ID</code>. However, this means that your <code>ID</code> attribute is no longer on the "page" element, so you must keep this in mind when binding to page events (<code>pagebeforecreate</code>, <code>pagecreate</code>, etc). To avoid issues, try using a class if possible. </p>
+			<p><strong>Note on Page IDs in Alpha 2 release (<em>no longer an issue</em>): </strong> In jQuery Mobile Alpha 2 and older, page elements utilized the <code>ID</code> attribute for storing the location from which they came. When you place an <code>ID</code> attribute on a page that is brought into jQuery Mobile's single-page environment through Ajax, jQuery Mobile wraps that page with a new "page" <code>div</code> element, preserving any CSS references to your <code>ID</code>. However, this means that your <code>ID</code> attribute is no longer on the "page" element, so you must keep this in mind when binding to page events (<code>pagebeforecreate</code>, <code>pagecreate</code>, etc). To avoid issues, try using a class if possible. </p>
 		</div>
 		
 		

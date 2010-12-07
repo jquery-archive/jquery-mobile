@@ -120,6 +120,10 @@
 		//find present pages		
 		var $pages = $("[data-role='page']");
 		
+		$pages.each(function(){
+			$(this).attr('data-url', $(this).attr('id'));
+		});
+		
 		//set up active page
 		$.mobile.startPage = $.mobile.activePage = $pages.first();
 		

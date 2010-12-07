@@ -99,14 +99,50 @@
 
 		stop();
 		setTimeout(function(){
+			ok(triggered);
 			start();
-			ok(!triggered);
-		}, 48);
+		}, 50);
+	});
+
+	test( "long press fires tap hold after 750 ms", function(){
+		var taphold = false;
+		$.support.touch = true;
+
+		$.testHelper.reloadLib(libName);
+
+		$($.event.special.tap).bind("taphold", function(){
+			taphold = true;
+		});
+
+		$($.event.special.tap).trigger("touchstart");
 
 		stop();
 		setTimeout(function(){
+			ok(taphold);
 			start();
-			ok(triggered);
-		}, 50);
+	  }, 751);
+	});
+
+	test( "touchmove pushes back taphold", function(){
+		var taphold = false;
+		$.support.touch = true;
+
+		$.testHelper.reloadLib(libName);
+
+		$($.event.special.tap).bind("taphold", function(){
+			taphold = true;
+		});
+
+		$($.event.special.tap).trigger("touchstart");
+
+		setTimeout(function(){
+			$($.event.special.tap).trigger("touchmove");
+		}, 100);
+
+		stop();
+		setTimeout(function(){
+			ok(taphold);
+			start();
+	  }, 851);
 	});
 })(jQuery);
