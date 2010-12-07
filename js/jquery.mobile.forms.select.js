@@ -17,28 +17,33 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		iconshadow: true,
 		menuPageTheme: 'b',
 		overlayTheme: 'a',
-		hidePlaceholderMenuItems: true
+		hidePlaceholderMenuItems: true,
+		closeText: 'Close'
 	},
 	_create: function(){
 	
 		var self = this,
-		
+			
 			o = this.options,
 			
 			select = this.element
 						.attr( "tabindex", "-1" )
-						.wrap( "<div class='ui-select'>" ),		
+						.wrap( "<div class='ui-select'>" ),
 							
 			selectID = select.attr( "id" ),
 			
+			isMultiple = self.isMultiple = select[0].multiple,
+			
+			options = select.find("option"),
+			
 			label = $( "label[for="+ selectID +"]" ).addClass( "ui-select" ),
-									
+			
 			buttonId = selectID + "-button",
 			
 			menuId = selectID + "-menu",
 			
 			thisPage = select.closest( ".ui-page" ),
-				
+			
 			button = $( "<a>", { 
 					"href": "#",
 					"role": "button",
@@ -57,7 +62,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					shadow: o.shadow,
 					iconshadow: o.iconshadow
 				}),
-				
+			
 			theme = /ui-btn-up-([a-z])/.exec( button.attr("class") )[1],
 				
 			menuPage = $( "<div data-role='dialog' data-theme='"+ o.menuPageTheme +"'>" +
@@ -85,10 +90,48 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					"data-theme": theme
 				})
 				.appendTo( listbox ),
-				
-			menuType;	
 			
-		//expose to other methods	
+			placeholder = this.placeholder = (function(){
+				var firstOption = $(select[0].options[0]),
+					text = firstOption.text(),
+					isPlaceholder = !firstOption[0].getAttribute('value') || text.length == 0 || firstOption.data('placeholder'),
+					ret = isPlaceholder ? text : '';
+				
+				// if this option should be hidden once markup is generated, add a flag
+				// store a flag in its data cache so the 'isPlaceholder' logic doesn't need to
+				// be run for each select
+				if( isPlaceholder ){
+					if( o.hidePlaceholderMenuItems ){
+						$.data(firstOption[0], "ui-selectmenu-placeholder", true);
+					}
+				
+					// remove this placeholder option for single selects, otherwise the browser will use it as the default.
+					if( !isMultiple ){
+						firstOption.remove();
+					}
+				}
+				
+				return ret;
+			})(),
+			
+			// TODO: how to enforce the height of the header w/o nsbp hack?
+			header = this.header = $( '<div data-role="header" data-nobackbtn="true"><h1>'+placeholder+'</h1></div>' )
+				.prependTo( listbox ),
+				
+			headerClose = this.headerClose = $( '<a href="#" data-iconpos="notext" data-icon="delete">'+o.closeText+'</a>' )
+				.appendTo( header ),
+				
+			menuType;
+		
+		// add counter for multi selects
+		if( isMultiple ){
+			self.buttonCount = $('<span>')
+				.addClass( 'ui-li-count ui-btn-up-c ui-btn-corner-all' )
+				.hide()
+				.appendTo( button );
+		}
+		
+		//expose to other methods
 		$.extend(self, {
 			select: select,
 			selectID: selectID,
@@ -104,13 +147,12 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			list:list,
 			menuType:menuType
 		});
-					
 		
 		//create list from select, update state
 		self.refresh();
 		
 		//disable if specified
-		if( this.options.disabled ){ this.disable(); }
+		if( o.disabled ){ this.disable(); }
 
 		//events on native select
 		select
@@ -120,7 +162,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			.focus(function(){
 				$(this).blur();
 				button.focus();
-			});		
+			});
 		
 		//button events
 		button.bind( $.support.touch ? "touchstart" : "click", function(event){
@@ -130,26 +172,40 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		
 		//events for list items
 		list.delegate("li:not(.ui-disabled, .ui-li-divider)", "click", function(event){
-				//update select	
-				var newIndex = list.find( "li:not(.ui-li-divider)" ).index( this ),
-					prevIndex = select[0].selectedIndex;
-
-				select[0].selectedIndex = newIndex;
-				
-				//trigger change event
-				if(newIndex !== prevIndex){ 
-					select.trigger( "change" ); 
-				}
-				
-				self.refresh();
-				
-				//hide custom select
+			
+			// clicking on the list item fires click on the link in listview.js.
+			// to prevent this handler from firing twice if the link isn't clicked on,
+			// short circuit unless the target is the link
+			if( !$(event.target).is("a") ){ return; }
+			
+			// index of option tag to be selected 
+			var newIndex = list.find( "li:not(.ui-li-divider)" ).index( this ),
+				option = options.eq( newIndex )[0];
+			
+			// toggle selected status on the tag
+			option.selected = !option.selected;
+			
+			// toggle checkbox class for multiple selects
+			if( self.isMultiple ){
+				$(this)
+					.find('.ui-icon')
+					.toggleClass('ui-icon-checkbox-on', option.selected)
+					.toggleClass('ui-icon-checkbox-off', !option.selected);
+			}
+			
+			// trigger change
+			select.trigger( "change" ); 
+			
+			//hide custom select for single selects only
+			if( !isMultiple ){
 				self.close();
-				event.preventDefault();
-			});	
-	
-		//events on "screen" overlay
-		screen.click(function(event){
+			}
+			
+			event.preventDefault();
+		});
+		
+		//events on "screen" overlay + close button
+		screen.add( headerClose ).click(function(event){
 			self.close();
 			event.preventDefault();
 		});
@@ -180,50 +236,100 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					optgroups.push( optLabel );
 				}
 			}
-
+			
 			var anchor = $("<a>", { 
-				"role": "option", 
+				"role": "", 
 				"href": "#",
 				"text": $(this).text()
 			}),
 		
-			item = $( "<li>", {"data-icon": "checkbox-on"});
+			item = $( "<li>", { "data-icon": false });
+			
+			// hide this item if it's a placeholder
+			if( $.data(this, "ui-selectmenu-placeholder") === true ){
+				item.addClass('ui-selectmenu-placeholder');
+			}
+		
+			// multiple select defaults
+			if( self.isMultiple ){
+				item.data('icon', 'checkbox-off');
+			}
 			
 			// support disabled option tags
 			if( this.disabled ){
-				item
-					.addClass("ui-disabled")
+				item.addClass("ui-disabled")
 					.attr("aria-disabled", true);
 			}
 			
-			if( o.hidePlaceholderMenuItems ){
-				if( !this.getAttribute('value') || $(this).text().length == 0 || $(this).data('placeholder')){
-					item.addClass('ui-selectmenu-placeholder');
-				}
-			}
-
 			item
 				.append( anchor )
 				.appendTo( self.list );
 		});
 		
+		// hide header close link for single selects
+		if( !this.isMultiple ){
+			this.headerClose.hide();
+		}
+		
+		// hide header if it's not a multiselect and there's no placeholder
+		if( !this.isMultiple && !this.placeholder.length ){
+			this.header.hide();
+		}
+		
 		//now populated, create listview
-		self.list.listview();		
+		self.list.listview();
 	},
 	
 	refresh: function( forceRebuild ){
 		var self = this,
+			o = this.options,
 			select = this.element,
-			selected = select[0].selectedIndex;
+			isMultiple = this.isMultiple,
+			selected = select.find(":selected"),
+			
+			// return an array of all selected index's
+			indicies = selected.map(function(){
+				return $(this).index();
+			}).get();
 		
 		if( forceRebuild || select[0].options.length > self.list.find('li').length ){
 			self._buildList();
-		}	
-			
-		self.button.find( ".ui-btn-text" ).text( $(select[0].options.item(selected)).text() ); 
+		}
+		
+		self.button
+			.find( ".ui-btn-text" )
+			.text(function(){
+				if( !isMultiple ){
+					return selected.text();
+				}
+				
+				return selected.length ?
+					selected.map(function(){ return $(this).text(); }).get().join(', ') :
+					self.placeholder;
+			});
+		
+		// multiple count inside button
+		if( isMultiple ){
+			self.buttonCount[ selected.length > 1 ? 'show' : 'hide' ]().text( selected.length );
+		}
+		
 		self.list
-			.find('li:not(.ui-li-divider)').removeClass( $.mobile.activeBtnClass ).attr('aria-selected', false)
-			.eq(selected).addClass( $.mobile.activeBtnClass ).find('a').attr('aria-selected', true);		
+			.find( 'li:not(.ui-li-divider)' )
+			.removeClass( $.mobile.activeBtnClass )
+			.attr( 'aria-selected', false )
+			.each(function( i ){
+				if( $.inArray(i, indicies) > -1 ){
+					var item = $(this).addClass( $.mobile.activeBtnClass );
+					
+					// aria selected attr
+					item.find( 'a' ).attr( 'aria-selected', true );
+					
+					// multiple selects: add the "on" checkbox state to the icon
+					if( isMultiple ){
+						item.find('.ui-icon').removeClass('ui-icon-checkbox-off').addClass('ui-icon-checkbox-on');
+					}
+				}
+			});
 	},
 	
 	open: function(){

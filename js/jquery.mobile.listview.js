@@ -181,13 +181,15 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			var a = item.find( "a" );
 				
 			if ( a.length ) {	
+				var icon = item.data("icon");
+				
 				item
 					.buttonMarkup({
 						wrapperEls: "div",
 						shadow: false,
 						corners: false,
 						iconpos: "right",
-						icon: a.length > 1 ? false : item.data("icon") || "arrow-r",
+						icon: a.length > 1 || icon === false ? false : icon || "arrow-r",
 						theme: o.theme
 					});
 
