@@ -82,6 +82,7 @@ $('div').live('pagehide',function(event, ui){
 });
 		</code>
 		</pre>
+		<p>Also, for these handlers to be invoked during the initial page load, you must bind them before jQuery Mobile executes.  This can be done in the <code>mobileinit</code> handler, as described on the <a href="globalconfig.html">global config</a> page.
 		<h2>Page initialization events</h2>
 		
 		<p>Internally, jQuery Mobile auto-initializes plugins based on the markup conventions found in a given "page". For example, an <code>input</code> element with a <code>type</code> of <code>range</code> will automatically generate a custom slider control.</p>
