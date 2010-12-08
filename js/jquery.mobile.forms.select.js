@@ -173,11 +173,11 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			var newIndex = list.find( "li:not(.ui-li-divider)" ).index( this ),
 				option = options.eq( newIndex )[0];
 			
-			// toggle selected status on the tag
-			option.selected = !option.selected;
+			// toggle selected status on the tag for multi selects
+			option.selected = isMultiple ? !option.selected : true;
 			
 			// toggle checkbox class for multiple selects
-			if( self.isMultiple ){
+			if( isMultiple ){
 				$(this)
 					.find('.ui-icon')
 					.toggleClass('ui-icon-checkbox-on', option.selected)
