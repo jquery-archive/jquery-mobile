@@ -43,9 +43,10 @@
 			
 			set: function( newPath, disableListening){
 				if( $.support.pushState ){
-					var temptitle = Math.random()*1000;
+					//replace with a proper page title from the loaded page's title element, or title attr on a multipage
+					var temptitle = newPath; 
 					history.pushState({"url": newPath}, temptitle, newPath );
-					$('title').text(temptitle);
+					$('title').text(newPath);
 				}
 				else{
 					location.hash = newPath;
