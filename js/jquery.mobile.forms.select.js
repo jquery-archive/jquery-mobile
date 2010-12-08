@@ -91,15 +91,24 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				})
 				.appendTo( listbox ),
 			
-			header = this.header = $( '<div data-role="header" data-nobackbtn="true"><h1></h1></div>' )
+			header = $( "<div>", {
+					"data-role": "header",
+					"data-nobackbtn": true
+				})
 				.prependTo( listbox ),
 				
-			headerClose = this.headerClose = $( '<a href="#" data-iconpos="notext" data-icon="delete">'+o.closeText+'</a>' )
+			headerTitle = $( "<h1>" )
+				.appendTo( header ),
+				
+			headerClose = $( "<a>", {
+					"data-iconpos": "notext",
+					"data-icon": "delete",
+					"text": o.closeText,
+					"href": "#"
+				})
 				.appendTo( header ),
 				
 			menuType;
-		
-		this.placeholder = '';
 		
 		// add counter for multi selects
 		if( isMultiple ){
@@ -123,7 +132,11 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			screen:screen,
 			listbox:listbox,
 			list:list,
-			menuType:menuType
+			menuType:menuType,
+			header:header,
+			headerClose:headerClose,
+			headerTitle:headerTitle,
+			placeholder: ''
 		});
 		
 		//create list from select, update state
@@ -155,7 +168,9 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			// to prevent this handler from firing twice if the link isn't clicked on,
 			// short circuit unless the target is the link
 			if( !$(event.target).is("a") ){ return; }
-			
+
+			console.log("clicked on", this );
+
 			// index of option tag to be selected 
 			var newIndex = list.find( "li:not(.ui-li-divider)" ).index( this ),
 				option = options.eq( newIndex )[0];
@@ -209,9 +224,10 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				
 				// has this optgroup already been built yet?
 				if( $.inArray(optLabel, optgroups) === -1 ){
-					var optgroup = $('<li data-role="list-divider"></li>')
-						.text( optLabel )
-						.appendTo( self.list );
+					$("<li>", {
+						"data-role":"list-divider",
+						"text": optLabel
+					}).appendTo( self.list );
 					
 					optgroups.push( optLabel );
 				}
@@ -258,7 +274,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		if( !this.isMultiple && !placeholder.length ){
 			this.header.hide();
 		} else {
-			this.header.find('h1').text( this.placeholder );
+			this.headerTitle.text( this.placeholder );
 		}
 		
 		//now populated, create listview
@@ -267,14 +283,14 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 	
 	refresh: function( forceRebuild ){
 		var self = this,
-			o = this.options,
 			select = this.element,
 			isMultiple = this.isMultiple,
-			selected = select.find(":selected"),
+			options = select.find("option"),
+			selected = options.filter(":selected"),
 			
 			// return an array of all selected index's
 			indicies = selected.map(function(){
-				return $(this).index();
+				return options.index( this );
 			}).get();
 		
 		if( forceRebuild || select[0].options.length > self.list.find('li').length ){
