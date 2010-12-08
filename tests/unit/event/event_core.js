@@ -163,8 +163,18 @@
 		stop();
 		setTimeout(function(){
 			ok(!taphold);
+
+			//NOTE start and stop required to fire other events?
 			start();
+			stop();
 		}, 751);
+
+		//NOTE verify that the taphold hasn't been fired
+		//		 with the normal timing
+		setTimeout(function(){
+			ok(taphold);
+			start();
+		}, 851);
 	});
 
 	test( "tap event fired without movement", function(){
@@ -174,19 +184,20 @@
 
 		//NOTE record the tap event
 		$($.event.special.tap).bind("tap", function(){
+			start();
 			tap = true;
 		});
 
 		$($.event.special.tap).trigger("touchstart");
 		$($.event.special.tap).trigger("touchend");
+		stop();
 
 		ok(tap);
 	});
 
 	test( "tap event not fired when there is movement", function(){
 		var tap = false;
-		$.support.touch = true;
-		$.testHelper.reloadLib(libName);
+		forceTouchSupport();
 
 		//NOTE record tap event
 		$($.event.special.tap).bind("tap", function(){
@@ -206,5 +217,46 @@
 		}, 20);
 
 		ok(!tap);
+	});
+
+	var swipeTimedTest = function(timeout, expected){
+		var swipe = false;
+
+		forceTouchSupport();
+
+		$($.event.special.swipe).bind('swipe', function(){
+			swipe = true;
+			start();
+		});
+
+		//NOTE bypass the trigger source check
+		$.Event.prototype.originalEvent = {
+			touches: false
+		};
+
+		$($.event.special.swipe).trigger("touchstart");
+
+		//NOTE make sure the coordinates are calculated within range
+		//     to be registered as a swipe
+		mockAbs(35);
+
+		setTimeout(function(){
+			$($.event.special.swipe).trigger("touchmove");
+			$($.event.special.swipe).trigger("touchend");
+		}, timeout);
+
+		stop();
+		setTimeout(function(){
+			same(swipe, expected);
+			start();
+		}, timeout + 10);
+	};
+
+	test( "swipe fired when coords change in less than a second", function(){
+		swipeTimedTest(10, true);
+	});
+
+	test( "swipe not fired when coords change takes more than a second", function(){
+		swipeTimedTest(1000, false);
 	});
 })(jQuery);
