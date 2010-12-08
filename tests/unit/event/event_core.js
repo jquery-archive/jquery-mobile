@@ -4,6 +4,7 @@
 
 (function( $ ) {
 	var libName = "jquery.mobile.event.js",
+			absFn = Math.abs,
 			events = ("touchstart touchmove touchend orientationchange tap taphold " +
 								"swipe swipeleft swiperight scrollstart scrollstop").split( " " );
 
@@ -14,6 +15,9 @@
 			});
 
 			$($.event.special.scrollstart).unbind("scrollstart");
+
+			//NOTE unmock abs
+			Math.abs = absFn;
 		}
 	});
 
@@ -104,11 +108,15 @@
 		}, 50);
 	});
 
+	var forceTouchSupport = function(){
+		$.support.touch = true;
+		$.testHelper.reloadLib(libName);
+	};
+
 	test( "long press fires tap hold after 750 ms", function(){
 		var taphold = false;
-		$.support.touch = true;
 
-		$.testHelper.reloadLib(libName);
+		forceTouchSupport();
 
 		$($.event.special.tap).bind("taphold", function(){
 			taphold = true;
@@ -120,29 +128,83 @@
 		setTimeout(function(){
 			ok(taphold);
 			start();
-	  }, 751);
+		}, 751);
 	});
+
+	//NOTE used to simulate movement when checked
+	//TODO find a better way ...
+	var mockAbs = function(value){
+		Math.abs = function(){
+			return value;
+		};
+	};
 
 	test( "touchmove pushes back taphold", function(){
 		var taphold = false;
-		$.support.touch = true;
 
-		$.testHelper.reloadLib(libName);
+		forceTouchSupport();
+		mockAbs(100);
 
+		//NOTE record taphold event
 		$($.event.special.tap).bind("taphold", function(){
 			taphold = true;
 		});
 
+		//NOTE start the touch events
 		$($.event.special.tap).trigger("touchstart");
 
+		//NOTE fire touchmove to push back taphold
 		setTimeout(function(){
 			$($.event.special.tap).trigger("touchmove");
 		}, 100);
 
+		//NOTE verify that the taphold hasn't been fired
+		//		 with the normal timing
 		stop();
 		setTimeout(function(){
-			ok(taphold);
+			ok(!taphold);
 			start();
-	  }, 851);
+		}, 751);
+	});
+
+	test( "tap event fired without movement", function(){
+		var tap = false;
+
+		forceTouchSupport();
+
+		//NOTE record the tap event
+		$($.event.special.tap).bind("tap", function(){
+			tap = true;
+		});
+
+		$($.event.special.tap).trigger("touchstart");
+		$($.event.special.tap).trigger("touchend");
+
+		ok(tap);
+	});
+
+	test( "tap event not fired when there is movement", function(){
+		var tap = false;
+		$.support.touch = true;
+		$.testHelper.reloadLib(libName);
+
+		//NOTE record tap event
+		$($.event.special.tap).bind("tap", function(){
+			tap = true;
+		});
+
+		//NOTE make sure movement is recorded
+		mockAbs(100);
+
+		//NOTE start and move right away
+		$($.event.special.tap).trigger("touchstart");
+		$($.event.special.tap).trigger("touchmove");
+
+		//NOTE end touch sequence after 20 ms
+		setTimeout(function(){
+			$($.event.special.tap).trigger("touchend");
+		}, 20);
+
+		ok(!tap);
 	});
 })(jQuery);
