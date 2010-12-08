@@ -221,7 +221,8 @@
 				$.mobile.silentScroll( to.data( 'lastScroll' ) );
 				
 				//trigger show/hide events, allow preventing focus change through return false		
-				if( from.data("page")._trigger("hide", null, {nextPage: to}) !== false && to.data("page")._trigger("show", null, {prevPage: from}) !== false ){
+				from.data("page")._trigger("hide", null, {nextPage: to});
+				if( to.data("page")._trigger("show", null, {prevPage: from}) !== false ){
 					$.mobile.activePage = to;
 				}
 			};
@@ -389,8 +390,7 @@
 			//if target attr is specified, it's external, and we mimic _blank... for now
 			target = $this.is( "[target]" ),
 			//if it still starts with a protocol, it's external, or could be :mailto, etc
-			external = target || /^(:?\w+:)/.test( href ) || $this.is( "[rel=external]" ),
-			target = $this.is( "[target]" );
+			external = target || /^(:?\w+:)/.test( href ) || $this.is( "[rel=external]" );
 
 		if( href === '#' ){
 			//for links created purely for interaction - ignore
