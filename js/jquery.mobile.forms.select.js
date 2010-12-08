@@ -169,8 +169,6 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			// short circuit unless the target is the link
 			if( !$(event.target).is("a") ){ return; }
 
-			console.log("clicked on", this );
-
 			// index of option tag to be selected 
 			var newIndex = list.find( "li:not(.ui-li-divider)" ).index( this ),
 				option = options.eq( newIndex )[0];
