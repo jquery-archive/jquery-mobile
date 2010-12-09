@@ -15,6 +15,9 @@
 			});
 
 			$($.event.special.scrollstart).unbind("scrollstart");
+			$($.event.special.tap).unbind("tap");
+			$($.event.special.tap).unbind("taphold");
+			$($.event.special.swipe).unbind("swipe");
 
 			//NOTE unmock abs
 			Math.abs = absFn;
@@ -31,7 +34,7 @@
 			$.testHelper.reloadLib(libName);
 
 			$.each($.fn.clone(events), function( i, name ) {
-				ok($.fn[name] !== undefined);
+				ok($.fn[name] !== undefined, name + "is not undefined");
 			});
 		});
 	});
@@ -40,7 +43,7 @@
 		expect( 1 );
 
 		$('#main')[events[0]](function(){
-			ok(true);
+			ok(true, "event fired");
 		});
 
 		$('#main').trigger(events[0]);
@@ -50,7 +53,7 @@
 		expect( 1 );
 
 		$('#main')[events[0]](function(){
-			ok(true);
+			ok(true, "event fired");
 		});
 
 		$('#main')[events[0]]();
@@ -58,22 +61,21 @@
 
 	test( "defining event functions sets the attrFn to true", function(){
 		$.each(events, function(i, name){
-			ok($.attrFn[name]);
+			ok($.attrFn[name], "attribute function is true");
 		});
 	});
 
 	test( "scrollstart enabled defaults to true", function(){
 		$.event.special.scrollstart.enabled = false;
 		$.testHelper.reloadLib(libName);
-		ok($.event.special.scrollstart.enabled);
+		ok($.event.special.scrollstart.enabled, "scrollstart enabled");
 	});
 
 	test( "scrollstart setup binds a function that returns when its disabled", function(){
-		expect( 0 );
 		$.event.special.scrollstart.enabled = false;
 
 		$($.event.special.scrollstart).bind("scrollstart", function(){
-			ok(false);
+			ok(false, "scrollstart fired");
 		});
 
 		$($.event.special.scrollstart).trigger("touchmove");
@@ -83,7 +85,7 @@
 		$.event.special.scrollstart.enabled = true;
 
 		$($.event.special.scrollstart).bind("scrollstart", function(){
-			ok(true);
+			ok(true, "scrollstart fired");
 		});
 
 		$($.event.special.scrollstart).trigger("touchmove");
@@ -97,13 +99,13 @@
 			triggered = true;
 		});
 
-		ok(!triggered);
+		ok(!triggered, "not triggered");
 
 		$($.event.special.scrollstart).trigger("touchmove");
 
 		stop();
 		setTimeout(function(){
-			ok(triggered);
+			ok(triggered, "triggered");
 			start();
 		}, 50);
 	});
@@ -139,14 +141,16 @@
 		};
 	};
 
-	test( "touchmove pushes back taphold", function(){
+	test( "touchmove prevents taphold", function(){
 		var taphold = false;
 
 		forceTouchSupport();
 		mockAbs(100);
 
 		//NOTE record taphold event
+		stop();
 		$($.event.special.tap).bind("taphold", function(){
+			console.log('bak');
 			taphold = true;
 		});
 
@@ -155,26 +159,17 @@
 
 		//NOTE fire touchmove to push back taphold
 		setTimeout(function(){
+			console.log('foo');
 			$($.event.special.tap).trigger("touchmove");
 		}, 100);
 
 		//NOTE verify that the taphold hasn't been fired
 		//		 with the normal timing
-		stop();
 		setTimeout(function(){
-			ok(!taphold);
-
-			//NOTE start and stop required to fire other events?
+			console.log('bar');
+			ok(!taphold, "taphold not fired");
 			start();
-			stop();
 		}, 751);
-
-		//NOTE verify that the taphold hasn't been fired
-		//		 with the normal timing
-		setTimeout(function(){
-			ok(taphold);
-			start();
-		}, 851);
 	});
 
 	test( "tap event fired without movement", function(){
@@ -188,11 +183,11 @@
 			tap = true;
 		});
 
+		stop();
 		$($.event.special.tap).trigger("touchstart");
 		$($.event.special.tap).trigger("touchend");
-		stop();
 
-		ok(tap);
+		ok(tap, "tapped");
 	});
 
 	test( "tap event not fired when there is movement", function(){
@@ -212,14 +207,16 @@
 		$($.event.special.tap).trigger("touchmove");
 
 		//NOTE end touch sequence after 20 ms
+		stop();
 		setTimeout(function(){
 			$($.event.special.tap).trigger("touchend");
+			start();
 		}, 20);
 
-		ok(!tap);
+		ok(!tap, "not tapped");
 	});
 
-	var swipeTimedTest = function(timeout, expected){
+	var swipeTimedTest = function(opts){
 		var swipe = false;
 
 		forceTouchSupport();
@@ -238,25 +235,35 @@
 
 		//NOTE make sure the coordinates are calculated within range
 		//     to be registered as a swipe
-		mockAbs(35);
+		mockAbs(opts.coordChange);
 
 		setTimeout(function(){
 			$($.event.special.swipe).trigger("touchmove");
 			$($.event.special.swipe).trigger("touchend");
-		}, timeout);
+		}, opts.timeout);
 
 		stop();
 		setTimeout(function(){
-			same(swipe, expected);
-			start();
-		}, timeout + 10);
+			same(swipe, opts.expected, "swipe expected");
+
+			//NOTE the start in the event closure won't be fired, fire it here
+			if(!opts.expected) { start(); }
+		}, opts.timeout + 10);
 	};
 
-	test( "swipe fired when coords change in less than a second", function(){
-		swipeTimedTest(10, true);
+	test( "swipe fired when coordinate change in less than a second", function(){
+		swipeTimedTest({ timeout: 10, coordChange: 35, expected: true });
 	});
 
-	test( "swipe not fired when coords change takes more than a second", function(){
-		swipeTimedTest(1000, false);
+	test( "swipe not fired when coordinate change takes more than a second", function(){
+		swipeTimedTest({ timeout: 1000, coordChange: 35, expected: false });
+	});
+
+	test( "swipe not fired when coordinate change <= 30", function(){
+		swipeTimedTest({ timeout: 1000, coordChange: 30, expected: false });
+	});
+
+	test( "swipe not fired when coordinate change >= 75", function(){
+		swipeTimedTest({ timeout: 1000, coordChange: 75, expected: false });
 	});
 })(jQuery);
