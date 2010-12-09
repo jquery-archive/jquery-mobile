@@ -326,7 +326,7 @@
 					/*
 					 * If this is a form request and the data-role page element has the data attribute of data-error-state then swap out the current page with this HTML
 					 */
-					if(isFormRequest && all.find('[data-error-state="true"]').length > 0) {
+					if(isFormRequest && all.find('[data-replace-current-page="true"]').length > 0) {
 						urlStack.pop();
 						$.mobile.pageLoading( true );
 						from.replaceWith(to.page().addClass( $.mobile.activePageClass ));
