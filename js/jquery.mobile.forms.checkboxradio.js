@@ -11,7 +11,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 	},
 	_create: function(){
 		var input = this.element,
-			label = $("label[for='" + input.attr( "id" ) + "']"),
+			label = $(input).closest("form,fieldset,[data-role='page']").find("label[for='" + input.attr( "id" ) + "']"),
 			inputtype = input.attr( "type" ),
 			checkedicon = "ui-icon-" + inputtype + "-on",
 			uncheckedicon = "ui-icon-" + inputtype + "-off";
@@ -71,7 +71,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 	
 	refresh: function( ){
 		var input = this.element,
-			label = $("label[for='" + input.attr( "id" ) + "']"),
+			label = $(input).closest("form,fieldset,[data-role='page']").find("label[for='" + input.attr( "id" ) + "']"),
 			inputtype = input.attr( "type" ),
 			icon = label.find( ".ui-icon" ),
 			checkedicon = "ui-icon-" + inputtype + "-on",
