@@ -26,14 +26,17 @@ $.fixedToolbars = (function(){
 		touchStartEvent = supportTouch ? "touchstart" : "mousedown",
 		touchStopEvent = supportTouch ? "touchend" : "mouseup",
 		stateBefore = null,
-		scrollTriggered = false;
-		
+		scrollTriggered = false,
+        hideOnTouchEnabled = true;
+
 	$(function() {
 		$(document)
 			.bind(touchStartEvent,function(event){
 				if( $(event.target).closest(ignoreTargets).length ){ return; }
 				stateBefore = currentstate;
-				$.fixedToolbars.hide(true);
+                if( hideOnTouchEnabled ) {
+				    $.fixedToolbars.hide(true);
+                }
 			})
 			.bind('scrollstart',function(event){
 				if( $(event.target).closest(ignoreTargets).length ){ return; } //because it could be a touchmove...
@@ -44,14 +47,22 @@ $.fixedToolbars = (function(){
 			.bind(touchStopEvent,function(event){
 				if( $(event.target).closest(ignoreTargets).length ){ return; }
 				if( !scrollTriggered ){
-					$.fixedToolbars.toggle(stateBefore);
+                    if( hideOnTouchEnabled ) {
+					    $.fixedToolbars.toggle(stateBefore);
+                    } else {
+                        $.fixedToolbars.show();
+                    }
 					stateBefore = null;
 				}
 			})
 			.bind('scrollstop',function(event){
 				if( $(event.target).closest(ignoreTargets).length ){ return; }
 				scrollTriggered = false;
-				$.fixedToolbars.toggle( stateBefore == 'overlay' ? 'inline' : 'overlay' );
+                if( hideOnTouchEnabled ) {
+				    $.fixedToolbars.toggle( stateBefore == 'overlay' ? 'inline' : 'overlay' );
+                } else {
+                    $.fixedToolbars.show();
+                }
 				stateBefore = null;
 			});
 		
@@ -195,7 +206,10 @@ $.fixedToolbars = (function(){
 		toggle: function(from){
 			if(from){ currentstate = from; }
 			return (currentstate == 'overlay') ? $.fixedToolbars.hide() : $.fixedToolbars.show();
-		}
+		},
+        setHideOnTouch: function(enabled) {
+            hideOnTouchEnabled = enabled;
+        }
 	};
 })();
 
