@@ -124,7 +124,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 		});
 
 		//links in bars, or those with data-role become buttons
-		$elem.find( "[data-role='button'], .ui-bar a, .ui-header > a, .ui-footer > a" )
+		$elem.find( "[data-role='button'], .ui-bar > a, .ui-header > a, .ui-footer > a" )
 			.not( ".ui-btn" )
 			.not(this.keepNative)
 			.buttonMarkup();
