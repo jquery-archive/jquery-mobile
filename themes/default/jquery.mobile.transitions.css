@@ -142,6 +142,7 @@ Built by David Kaneda and maintained by Jonathan Stark.
 }
 .fade.out {
 	z-index: 0;
+	-webkit-animation-name: fadeout;
 }
 
 /* The properties in this body rule are only necessary for the 'flip' transition.
