@@ -27,42 +27,39 @@ $.fixedToolbars = (function(){
 		touchStopEvent = supportTouch ? "touchend" : "mouseup",
 		stateBefore = null,
 		scrollTriggered = false,
-        hideOnTouchEnabled = true;
+        touchToggleEnabled = true;
 
 	$(function() {
 		$(document)
 			.bind(touchStartEvent,function(event){
-				if( $(event.target).closest(ignoreTargets).length ){ return; }
-				stateBefore = currentstate;
-                if( hideOnTouchEnabled ) {
-				    $.fixedToolbars.hide(true);
-                }
+				if( touchToggleEnabled ) {
+					if( $(event.target).closest(ignoreTargets).length ){ return; }
+					stateBefore = currentstate;
+				}
 			})
 			.bind('scrollstart',function(event){
 				if( $(event.target).closest(ignoreTargets).length ){ return; } //because it could be a touchmove...
 				scrollTriggered = true;
 				if(stateBefore == null){ stateBefore = currentstate; }
-				$.fixedToolbars.hide(true);
+				if (stateBefore == 'overlay') {
+					$.fixedToolbars.hide(true);
+				}
 			})
 			.bind(touchStopEvent,function(event){
-				if( $(event.target).closest(ignoreTargets).length ){ return; }
-				if( !scrollTriggered ){
-                    if( hideOnTouchEnabled ) {
-					    $.fixedToolbars.toggle(stateBefore);
-                    } else {
-                        $.fixedToolbars.show();
-                    }
-					stateBefore = null;
+				if( touchToggleEnabled ) {
+					if( $(event.target).closest(ignoreTargets).length ){ return; }
+					if( !scrollTriggered ){
+						$.fixedToolbars.toggle(stateBefore);
+						stateBefore = null;
+					}
 				}
 			})
 			.bind('scrollstop',function(event){
 				if( $(event.target).closest(ignoreTargets).length ){ return; }
 				scrollTriggered = false;
-                if( hideOnTouchEnabled ) {
-				    $.fixedToolbars.toggle( stateBefore == 'overlay' ? 'inline' : 'overlay' );
-                } else {
-                    $.fixedToolbars.show();
-                }
+				if (stateBefore == 'overlay') {
+					$.fixedToolbars.show();
+				}
 				stateBefore = null;
 			});
 		
@@ -163,9 +160,9 @@ $.fixedToolbars = (function(){
 				el.addClass('ui-fixed-overlay').removeClass('ui-fixed-inline');	
 					
 				if( !alreadyVisible && !immediately ){
-					el.addClass('in').animationComplete(function(){
+					el.animationComplete(function(){
 						el.removeClass('in');
-					});
+					}).addClass('in');
 				}
 				setTop(el);
 			});	
@@ -189,10 +186,10 @@ $.fixedToolbars = (function(){
 					else{
 						if( el.css('top') !== 'auto' && parseFloat(el.css('top')) !== 0 ){
 							var classes = 'out reverse';
-							el.addClass(classes).animationComplete(function(){
+							el.animationComplete(function(){
 								el.removeClass(classes);
 								el.css('top',0);
-							});	
+							}).addClass(classes);	
 						}
 					}
 				}
@@ -207,8 +204,8 @@ $.fixedToolbars = (function(){
 			if(from){ currentstate = from; }
 			return (currentstate == 'overlay') ? $.fixedToolbars.hide() : $.fixedToolbars.show();
 		},
-        setHideOnTouch: function(enabled) {
-            hideOnTouchEnabled = enabled;
+        setTouchToggleEnabled: function(enabled) {
+            touchToggleEnabled = enabled;
         }
 	};
 })();
