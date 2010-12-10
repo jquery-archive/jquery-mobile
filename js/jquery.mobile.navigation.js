@@ -212,10 +212,7 @@
 				}
 				removeActiveLinkClass();
 				
-				//if there's a duplicateCachedPage, remove it from the DOM now that it's hidden
-				if( duplicateCachedPage != null ){
-					duplicateCachedPage.remove();
-				}
+				
 				
 				//jump to top or prev scroll, if set
 				$.mobile.silentScroll( to.data( 'lastScroll' ) );
@@ -224,6 +221,11 @@
 				from.data("page")._trigger("hide", null, {nextPage: to});
 				if( to.data("page")._trigger("show", null, {prevPage: from}) !== false ){
 					$.mobile.activePage = to;
+				}
+
+				//if there's a duplicateCachedPage, remove it from the DOM now that it's hidden
+				if (duplicateCachedPage != null) {
+				    duplicateCachedPage.remove();
 				}
 			};
 			
