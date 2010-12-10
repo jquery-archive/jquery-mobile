@@ -386,7 +386,7 @@
 		if( !$.mobile.ajaxLinksEnabled ){ return; }
 		var $this = $(this),
 			//get href, remove same-domain protocol and host
-			href = $this.attr( "href" ).replace( location.protocol + "//" + location.host, ""),
+			href = ($this.attr( "href" )) ? $this.attr( "href" ).replace( location.protocol + "//" + location.host, "") : "#",
 			//if target attr is specified, it's external, and we mimic _blank... for now
 			target = $this.is( "[target]" ),
 			//if it still starts with a protocol, it's external, or could be :mailto, etc
