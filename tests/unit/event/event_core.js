@@ -5,6 +5,8 @@
 (function( $ ) {
 	var libName = "jquery.mobile.event.js",
 			absFn = Math.abs,
+			originalEventFn = $.Event.prototype.originalEvent,
+			preventDefaultFn = $.Event.prototype.preventDefault,
 			events = ("touchstart touchmove touchend orientationchange tap taphold " +
 								"swipe swipeleft swiperight scrollstart scrollstop").split( " " );
 
@@ -19,8 +21,10 @@
 			$($.event.special.tap).unbind("taphold");
 			$($.event.special.swipe).unbind("swipe");
 
-			//NOTE unmock abs
+			//NOTE unmock
 			Math.abs = absFn;
+			$.Event.prototype.originalEvent = originalEventFn;
+			$.Event.prototype.preventDefault = preventDefaultFn;
 		}
 	});
 
@@ -72,10 +76,15 @@
 	});
 
 	test( "scrollstart setup binds a function that returns when its disabled", function(){
+		expect( 1 );
 		$.event.special.scrollstart.enabled = false;
 
 		$($.event.special.scrollstart).bind("scrollstart", function(){
 			ok(false, "scrollstart fired");
+		});
+
+		$($.event.special.scrollstart).bind("touchmove", function(){
+			ok(true, "touchmove fired");
 		});
 
 		$($.event.special.scrollstart).trigger("touchmove");
@@ -150,7 +159,6 @@
 		//NOTE record taphold event
 		stop();
 		$($.event.special.tap).bind("taphold", function(){
-			console.log('bak');
 			taphold = true;
 		});
 
@@ -159,14 +167,12 @@
 
 		//NOTE fire touchmove to push back taphold
 		setTimeout(function(){
-			console.log('foo');
 			$($.event.special.tap).trigger("touchmove");
 		}, 100);
 
 		//NOTE verify that the taphold hasn't been fired
 		//		 with the normal timing
 		setTimeout(function(){
-			console.log('bar');
 			ok(!taphold, "taphold not fired");
 			start();
 		}, 751);
@@ -234,7 +240,7 @@
 		$($.event.special.swipe).trigger("touchstart");
 
 		//NOTE make sure the coordinates are calculated within range
-		//     to be registered as a swipe
+		//		 to be registered as a swipe
 		mockAbs(opts.coordChange);
 
 		setTimeout(function(){
@@ -265,5 +271,44 @@
 
 	test( "swipe not fired when coordinate change >= 75", function(){
 		swipeTimedTest({ timeout: 1000, coordChange: 75, expected: false });
+	});
+
+	test( "scrolling prevented when coordinate change > 10", function(){
+		expect( 1 );
+
+		//NOTE bypass the trigger source check
+		$.Event.prototype.originalEvent = {
+			touches: false
+		};
+
+		$.Event.prototype.preventDefault = function(){
+			ok(true, "prevent default called");
+		};
+
+		mockAbs(11);
+
+		$($.event.special.swipe).trigger("touchstart");
+		$($.event.special.swipe).trigger("touchmove");
+	});
+
+	test( "move handler returns when touchstart has been fired since touchstop", function(){
+		expect( 1 );
+
+		$.Event.prototype.originalEvent = {
+			touches: false
+		};
+
+		$($.event.special.swipe).trigger("touchstart");
+		$($.event.special.swipe).trigger("touchend");
+
+		$($.event.special.swipe).bind("touchmove", function(){
+			ok(true, "touchmove bound functions are fired");
+		});
+
+		Math.abs = function(){
+			ok(false, "shouldn't compare coordinates");
+		};
+
+		$($.event.special.swipe).trigger("touchmove");
 	});
 })(jQuery);
