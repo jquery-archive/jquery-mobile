@@ -311,4 +311,43 @@
 
 		$($.event.special.swipe).trigger("touchmove");
 	});
+
+	var nativeSupportTest = function(opts){
+		$.support.orientation = opts.orientationSupport;
+
+		same($.event.special.orientationchange[opts.method](),
+				 opts.returnValue);
+	};
+
+	test( "orientation change setup should do nothing when natively supported", function(){
+		nativeSupportTest({
+			method: 'setup',
+			orientationSupport: true,
+			returnValue: false
+		});
+	});
+
+	test( "orientation change setup should bind resize when not supported natively", function(){
+		nativeSupportTest({
+			method: 'setup',
+			orientationSupport: false,
+			returnValue: undefined //NOTE result of bind function call
+		});
+	});
+
+	test( "orientation change teardown should do nothing when natively supported", function(){
+		nativeSupportTest({
+			method: 'teardown',
+			orientationSupport: true,
+			returnValue: false
+		});
+	});
+
+	test( "orientation change teardown should unbind resize when not supported natively", function(){
+		nativeSupportTest({
+			method: 'teardown',
+			orientationSupport: false,
+			returnValue: undefined //NOTE result of unbind function call
+		});
+	});
 })(jQuery);
