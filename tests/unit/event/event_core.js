@@ -314,9 +314,7 @@
 
 	var nativeSupportTest = function(opts){
 		$.support.orientation = opts.orientationSupport;
-
-		same($.event.special.orientationchange[opts.method](),
-				 opts.returnValue);
+		same($.event.special.orientationchange[opts.method](), opts.returnValue);
 	};
 
 	test( "orientation change setup should do nothing when natively supported", function(){
