@@ -41,3 +41,31 @@ ol.ui-listview .ui-li-jsnumbering:before { content: "" !important; } /* to avoid
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
     .ui-li .ui-btn-text { overflow:  visible; }
 }
+
+.no-border {border: none !important; -webkit-border-radius: 0 !important; -webkit-box-shadow: none !important; }
+/* listview animations */
+div[data-role=page] {-webkit-transform-style: preserve-3d;}
+
+/* 3D Swing Listview */
+.swing-wrapper {-webkit-perspective: 500;}
+.swing-wrapper li {-webkit-transform: rotateY(0deg);}
+.swing-wrapper.go li {
+	-webkit-transform-origin: right;
+	-webkit-animation-name: rotate-in;
+	-webkit-transition-timing-function: ease-out, cubic-bezier(0.5, 0.2, 0.3, 1.0);
+}
+@-webkit-keyframes rotate-in {
+  0%    {-webkit-transform: rotateY(-90deg);opacity: 0; }
+  100%  {-webkit-transform: rotateY(0deg);  opacity: 1;}
+}
+
+/* Blind Down */
+
+.blindDown-wrapper {-webkit-perspective: 1300;}
+.blindDown-wrapper > li {
+	opacity: 0;
+	-webkit-transition: 1s ease-in-out;	position:  absolute;
+}
+.ui-listview > li {
+	width: 100%;
+}

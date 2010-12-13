@@ -24,6 +24,7 @@ $elements = array(
 	'jquery.mobile.fieldContain.js',
 	'jquery.mobile.listview.js',
 	'jquery.mobile.listview.filter.js',
+	'jquery.mobile.listview.animation.js',
 	'jquery.mobile.dialog.js',
 	'jquery.mobile.navbar.js',
 	'jquery.mobile.grid.js'

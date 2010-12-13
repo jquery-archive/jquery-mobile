@@ -161,6 +161,19 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			li = $list.children( "li" ),
 			counter = $.support.cssPseudoElement || !$.nodeName( $list[0], "ol" ) ? 0 : 1;
 
+		var animationType = $list.attr("animation-type");
+		if (animationType != "undefined") {
+			switch(animationType) {
+				case "blind-down":
+					$list.blind("down");
+					break;
+				case "swing":
+					$list.swing();
+					break;
+			}
+		}
+
+
 		if ( counter ) {
 			$list.find( ".ui-li-dec" ).remove();
 		}
