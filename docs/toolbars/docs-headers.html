@@ -39,7 +39,7 @@
 				<h1>Page title</h1>
 			</div>
 
-			<p><strong>See that "back" button?</strong> The framework automatically generates a "back" button on every page, to simplify the process of including this common navigation element. To prevent the back button from being added to a header, either add your own button to the left slot (see below) or, add this attribute: <code>data-nobackbtn="true"</code> to the header container.
+			<p><strong>See that "back" button?</strong> The framework automatically generates a "back" button on every page, to simplify the process of including this common navigation element. To prevent the back button from being added to a header, either add your own button to the left slot (see below) or, add this attribute: <code>data-backbtn="false"</code> to the header container.
 	
 			<h2>Adding buttons</h2>
 	
@@ -86,20 +86,20 @@
 	
 			<p>The button position can also be controlled by adding classes to the button anchors, rather than relying on source order. This is especially useful if you only want a button in the right slot. To specify the button position, add the class of <code>ui-btn-left</code> or <code>ui-btn-right</code> to the anchor.</p> 
 			
-			<p>In this example, we're adding only a single button to the right slot so the <code>data-nobackbtn="true"</code> needs to be added to the header container to suppress the automatic Back button behavior and the button needs the <code>ui-btn-right</code> class on the link.</p>
+			<p>In this example, we're adding only a single button to the right slot so the <code>data-backbtn="false"</code> needs to be added to the header container to suppress the automatic Back button behavior and the button needs the <code>ui-btn-right</code> class on the link.</p>
 			
 
 
 <div class="highlight"> 
 <pre><code>
-&lt;div data-role=&quot;header&quot; data-position=&quot;inline&quot; data-nobackbtn=&quot;true&quot;&gt;
+&lt;div data-role=&quot;header&quot; data-position=&quot;inline&quot; data-backbtn=&quot;false&quot;&gt;
 	&lt;h1&gt;Page Title&lt;/h1&gt;
 	&lt;a href=&quot;index.html&quot; data-icon=&quot;gear&quot; class=&quot;ui-btn-right&quot;&gt;Options&lt;/a&gt;
 &lt;/div&gt;
 </code></pre> 
 </div> 
 
-			<div data-role="header" data-position="inline" data-nobackbtn="true">
+			<div data-role="header" data-position="inline" data-backbtn="false">
 				<h1>Page Title</h1>
 				<a href="index.html" data-icon="gear" class="ui-btn-right">Options</a>
 			</div>
