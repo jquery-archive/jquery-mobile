@@ -28,16 +28,16 @@
 	});
 
 
-	test( "changePage applys perspective class to mobile viewport for flip", function(){
+	test( "changePage applys does not apply perspective class to mobile viewport for transitions other than flip", function(){
 		//stub to prevent class removal
 		$.fn.animationComplete = function(){};
 
 		$("#bar > a").click();
 
-		ok(!$("body").hasClass(perspective), "has perspective class");
+		ok(!$("body").hasClass(perspective), "doesn't have perspective class");
 	});
 
-	test( "changePage applys perspective class to mobile viewport for flip", function(){
+	test( "changePage applys transition class to mobile viewport for default transition", function(){
 		//stub to prevent class removal
 		$.fn.animationComplete = function(){};
 
