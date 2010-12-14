@@ -66,6 +66,7 @@ div[data-role=page] {-webkit-transform-style: preserve-3d;}
 	opacity: 0;
 	-webkit-transition: 1s ease-in-out;	position:  absolute;
 }
+
 .ui-listview > li {
 	width: 100%;
 }

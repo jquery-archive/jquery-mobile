@@ -3,7 +3,6 @@
 		
 		return this.each(function() {
 			var $this = $(this);
-		console.log("hi");
 				$this.addClass("swing-wrapper no-border");
 				
 				$this.children("li").each(function(i, el) {
