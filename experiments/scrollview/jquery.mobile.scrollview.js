@@ -162,10 +162,6 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		this._sx = x;
 		this._sy = y;
 
-		var kdebug = 0;
-		if (y == 0)
-			++kdebug;
-
 		var $v = this._$view;
 
 		var uct = this.options.useCSSTransform;
