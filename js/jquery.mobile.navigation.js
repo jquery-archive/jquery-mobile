@@ -406,8 +406,14 @@
 		if( external || !$.mobile.ajaxLinksEnabled ){
 			//remove active link class if external
 			removeActiveLinkClass(true);
-			//allow the browser to handle it as it would without the framework
-			return true;
+			
+			//deliberately redirect, in case click was triggered
+			if( target ){
+				window.open(href);
+			}
+			else{
+				location.href = href;
+			}
 		}
 		else {	
 			//use ajax
