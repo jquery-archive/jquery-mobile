@@ -7,13 +7,7 @@
 	    animationCompleteFn = $.fn.animationComplete,
 
 			removeClasses = function(){
-				$("#main").removeClass([perspective, transitioning].join(" "));
-			},
-
-	    insertNewTestPage = function(i){
-				var id = "other" + i;
-				$("<div data-role='page' id='" + id + "'></div>").appendTo("#main");
-				return "#" + id;
+				$("body").removeClass([perspective, transitioning].join(" "));
 			};
 
 	module('jquery.mobile.navigation.js', {
@@ -26,10 +20,29 @@
 
 	test( "changePage applys perspective class to mobile viewport for flip", function(){
 		//stub to prevent class removal
-		$.mobile.changePage("#page0", "flip", false, false);
-		ok($("#main").
-			 hasClass(perspective), "has perspective class");
+		$.fn.animationComplete = function(){};
+
+		$("#foo > a").click();
+
+		ok($("body").hasClass(perspective), "has perspective class");
 	});
 
-	//TODO test negative case and normal class application
+
+	test( "changePage applys perspective class to mobile viewport for flip", function(){
+		//stub to prevent class removal
+		$.fn.animationComplete = function(){};
+
+		$("#bar > a").click();
+
+		ok(!$("body").hasClass(perspective), "has perspective class");
+	});
+
+	test( "changePage applys perspective class to mobile viewport for flip", function(){
+		//stub to prevent class removal
+		$.fn.animationComplete = function(){};
+
+		$("#baz > a").click();
+
+		ok($("body").hasClass(transitioning), "has transitioning class");
+	});
 })(jQuery);
