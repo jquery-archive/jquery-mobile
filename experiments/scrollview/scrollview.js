@@ -12,7 +12,16 @@ function ResizePageContentHeight(page)
 
 $("[data-role=page]").live("pageshow", function(event) {
 	var $page = $(this);
+
+	// For the demos that use this script, we want the content area of each
+	// page to be scrollable in the 'y' direction.
+
 	$page.find(".ui-content").attr("data-scroll", "y");
+
+	// This code that looks for [data-scroll] will eventually be folded
+	// into the jqm page processing code when scrollview support is "official"
+	// instead of "experimental".
+
 	$page.find("[data-scroll]:not(.ui-scrollview-clip)").each(function(){
 		var $this = $(this);
 		// XXX: Remove this check for ui-scrolllistview once we've
@@ -31,9 +40,17 @@ $("[data-role=page]").live("pageshow", function(event) {
 			if (paging)
 				opts.pagingEnabled = true;
 
+			var method = $this.data("scroll-method");
+			if (method)
+				opts.scrollMethod = method;
+
 			$this.scrollview(opts);
 		}
 	});
+
+	// For the demos, we want to make sure the page being shown has a content
+	// area that is sized to fit completely within the viewport. This should
+	// also handle the case where pages are loaded dynamically.
 
 	ResizePageContentHeight(event.target);
 });
