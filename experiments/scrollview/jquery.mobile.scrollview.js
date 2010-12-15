@@ -18,7 +18,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		moveThreshold:     10,   // User must move this many pixels in any direction to trigger a scroll.
 		moveIntervalThreshold:     100,   // Time between mousemoves must not exceed this threshold.
 	
-		useCSSTransform:   true,  // Use CSS "transform" property instead of "top" and "left" for positioning.
+		scrollMethod:      "translate",  // "translate", "position", "scroll"
 	
 		startEventName:    "scrollstart",
 		updateEventName:   "scrollupdate",
@@ -46,16 +46,22 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		}
 		this._$view = $child.addClass("ui-scrollview-view");
 
-		this._$clip.css("overflow", "hidden");
+		this._$clip.css("overflow", this.options.scrollMethod == "scroll" ? "scroll" : "hidden");
 		this._makePositioned(this._$clip);
 
 		this._$view.css("overflow", "hidden");
 
-		if (!this.options.useCSSTransform)
-		{
-			this._makePositioned(this._$view);
-			this._$view.css({ left: 0, top: 0 });
-		}
+		// Turn off our faux scrollbars if we are using native scrolling
+		// to position the view.
+
+		this.options.showScrollBars = this.options.scrollMethod == "scroll" ? false : this.options.showScrollBars;
+
+		// We really don't need this if we are using a translate transformation
+		// for scrolling. We set it just in case the user wants to switch methods
+		// on the fly.
+
+		this._makePositioned(this._$view);
+		this._$view.css({ left: 0, top: 0 });
 
 		this._sx = 0;
 		this._sy = 0;
@@ -164,35 +170,42 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 
 		var $v = this._$view;
 
-		var uct = this.options.useCSSTransform;
+		var sm = this.options.scrollMethod;
 
-		if (uct)
-			setElementTransform($v, x + "px", y + "px");
-		else
-			$v.css({left: x + "px", top: y + "px"});
+		switch (sm)
+		{
+			case "translate":
+				setElementTransform($v, x + "px", y + "px");
+				break;
+			case "position":
+				$v.css({left: x + "px", top: y + "px"});
+				break;
+			case "scroll":
+				var c = this._$clip[0];
+				c.scrollLeft = -x;
+				c.scrollTop = -y;
+				break;
+		}
 
 		var $vsb = this._$vScrollBar;
 		var $hsb = this._$hScrollBar;
 
-		if ($vsb || $hsb)
+		if ($vsb)
 		{
-			if ($vsb)
-			{
-				var $sbt = $vsb.find(".ui-scrollbar-thumb");
-				if (uct)
-					setElementTransform($sbt, "0px", -y/$v.height() * $sbt.parent().height() + "px");
-				else
-					$sbt.css("top", -y/$v.height()*100 + "%");
-			}
-	
-			if ($hsb)
-			{
-				var $sbt = $hsb.find(".ui-scrollbar-thumb");
-				if (uct)
-					setElementTransform($sbt,  -x/$v.width() * $sbt.parent().width() + "px", "0px");
-				else
-					$sbt.css("left", -x/$v.width()*100 + "%");
-			}
+			var $sbt = $vsb.find(".ui-scrollbar-thumb");
+			if (sm == "translate")
+				setElementTransform($sbt, "0px", -y/$v.height() * $sbt.parent().height() + "px");
+			else
+				$sbt.css("top", -y/$v.height()*100 + "%");
+		}
+
+		if ($hsb)
+		{
+			var $sbt = $hsb.find(".ui-scrollbar-thumb");
+			if (sm == "translate")
+				setElementTransform($sbt,  -x/$v.width() * $sbt.parent().width() + "px", "0px");
+			else
+				$sbt.css("left", -x/$v.width()*100 + "%");
 		}
 	},
 
@@ -230,9 +243,9 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		this._timerID = setTimeout(tfunc, this._timerInterval);
 	},
 
-	_getScrollPosition: function(x, y)
+	getScrollPosition: function()
 	{
-		return { x: this._sx, y: this._sy };
+		return { x: -this._sx, y: -this._sy };
 	},
 
 	_getScrollHierarchy: function()

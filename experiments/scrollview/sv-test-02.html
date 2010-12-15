@@ -48,6 +48,19 @@ $("[data-role=page]").live("pageshow", function(event) {
 	});
 });
 
+function changeScrollMethod()
+{
+	var val = $("#s_method").val();
+	var $sv = $("#evtCatcher").scrollview("scrollTo", 0, 0);
+	if (val == "scroll") {
+		$sv.css("overflow", "scroll");
+	}
+	else {
+		$sv.css("overflow", "hidden");
+	}
+	$sv.data("scrollview").options.scrollMethod = val;
+}
+
 var cb_hd_pd,
     cb_hd_sp,
     cb_hm_pd,
@@ -61,12 +74,6 @@ var hu = $.mobile.scrollview.prototype._handleDragStop;
 
 function getDummyEvent(o)
 {
-/*
-	var obj = new Object;
-	for (var k in o)
-		obj[k] = o[k];
-	return obj;
-*/
 	return { _pd: false, _sp: false, preventDefault: function(){ this._pd = true; }, stopPropagation: function(){ this._sp = true; }};
 }
 
@@ -116,6 +123,15 @@ $(function(){
       <div data-role="content">
     <h3>Test</h3>
     <p>This page wraps the _handleDragStart, _handleDragMove, and _handleDragStop events of the scrollview widget so that the checkboxes below can determine how the native event is treated. You can use this page to figure out what events need to be caught and what special treatment is necessary to prevent native scrolling. You can also test the effect of that treatment on form elements within the sample scrollview.</p>
+    <div data-role="fieldcontain">
+        <label for="s_method" class="select">Scrolling Method:</label>
+        <select name="s_method" id="s_method" onchange="changeScrollMethod();">
+            <option value="translate">CSS3 Transform/Translate</option>
+            <option value="position">CSS Top/Left Positioning</option>
+            <option value="scroll">scrollTop/scrollLeft</option>
+        </select>
+    </div>
+
     <div  data-role="fieldcontain">
           <fieldset data-role="controlgroup">
         <input type="checkbox" name="cb_hd_pd" id="cb_hd_pd" />

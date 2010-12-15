@@ -33,6 +33,7 @@
 	<script type="text/javascript" src="../../../tests/jquery.testHelper.js"></script>
 
 
+	<link rel="stylesheet" href="../../../themes/default" type="text/css"/>
 	<link rel="stylesheet" href="../../../external/qunit.css" type="text/css"/>
 	<script type="text/javascript" src="../../../external/qunit.js"></script>
 
@@ -46,14 +47,26 @@
 <ol id="qunit-tests">
 </ol>
 
-<div id="main" style="position: absolute; top: -10000px; left: -10000px;">
-	<div id="page0" data-role="page">
-	</div>
+<!-- NOTE body must be used in place of main otherwise transition behaviour fails -->
 
-	<div id="page1" data-url="page1" data-role="page">
-	</div>
+<style>
+	[data-role='page'] {
+	  position: absolute; top: -10000px; left: -10000px;
+	}
+</style>
 
-	<div id="page2" data-url="page2" data-role="page">
-	</div>
+<!-- NOTE the style here is a bit off from other test page, (margin) -->
+
+<div id="foo" data-role="page">
+	<a href="#bar" data-transition="flip"></a>
+</div>
+
+<div id="bar" data-role="page">
+	<a href="#baz"></a>
+</div>
+
+<div id="baz" data-role="page">
+	<a href="foo"></a>
+</div>
 </body>
 </html>
