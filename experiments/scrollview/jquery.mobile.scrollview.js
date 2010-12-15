@@ -29,8 +29,8 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		showScrollBars:    true,
 		
 		pagingEnabled:     false,
-		delayedClickSelector: "a,input,textarea,select,.ui-btn",
-		delayedClickEnabled: true
+		delayedClickSelector: "a,input,textarea,select,button,.ui-btn",
+		delayedClickEnabled: false
 	},
 
 	_makePositioned: function($ele)
@@ -330,7 +330,15 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		this._lastMove = 0;
 		this._enableTracking();
 
-		e.preventDefault();
+		// If we're using mouse events, we need to prevent the default
+		// behavior to suppress accidental selection of text, etc. We
+		// can't do this on touch devices because it will disable the
+		// generation of "click" events.
+		//
+		// XXX: We should test if this has an effect on links! - kin
+
+		if (this.options.eventType == "mouse" || this.options.delayedClickEnabled)
+			e.preventDefault();
 		e.stopPropagation();
 	},
 
