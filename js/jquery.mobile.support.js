@@ -1,8 +1,8 @@
 /*
 * jQuery Mobile Framework : support tests
 * Copyright (c) jQuery Project
-* Dual licensed under the MIT or GPL Version 2 licenses.
-* http://jquery.org/license
+* Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
+* Note: Code is in draft form and is subject to change 
 */
 (function($, undefined ) {
 
@@ -31,6 +31,7 @@ function baseTagTest(){
 		base = $("<base>", {"href": fauxBase}).appendTo("head"),
 		link = $( "<a href='testurl'></a>" ).prependTo( fakeBody ),
 		rebase = link[0].href;
+	base[0].href = location.pathname;	
 	base.remove();
 	return rebase.indexOf(fauxBase) === 0;
 };

@@ -17,32 +17,11 @@ $.widget( "mobile.button", $.mobile.widget, {
 	},
 	_create: function(){
 		var $el = this.element,
-			o = this.options,
-			type = $el.attr('type');
-			$el
-				.addClass('ui-btn-hidden')
-				.attr('tabindex','-1');
+			o = this.options;
 		
 		//add ARIA role
-		this.button = $( "<a>", { 
-				"href": "#",
-				"role": "button",
-				"aria-label": $el.attr( "type" ) 
-			} )
+		this.button = $( "<div></div>" )
 			.text( $el.text() || $el.val() )
-			.insertBefore( $el )
-			.click(function(){
-				if(!o.disabled){
-					if( type == "submit" ){
-						$(this).closest('form').submit();
-					}
-					else{
-						$el.click(); 
-					}
-				}
-
-				return false;
-			})
 			.buttonMarkup({
 				theme: o.theme, 
 				icon: o.icon,
@@ -51,7 +30,24 @@ $.widget( "mobile.button", $.mobile.widget, {
 				corners: o.corners,
 				shadow: o.shadow,
 				iconshadow: o.iconshadow
+			})
+			.insertBefore( $el )
+			.append( $el.addClass('ui-btn-hidden') );
+		
+		//add hidden input during submit
+		if( $el.attr('type') !== 'reset' ){
+			$el.click(function(){
+				var $buttonPlaceholder = $("<input>", 
+						{type: "hidden", name: $el.attr("name"), value: $el.attr("value")})
+						.insertBefore($el);
+						
+				//bind to doc to remove after submit handling	
+				$(document).submit(function(){
+					 $buttonPlaceholder.remove();
+				});
 			});
+		}
+			
 	},
 
 	enable: function(){
