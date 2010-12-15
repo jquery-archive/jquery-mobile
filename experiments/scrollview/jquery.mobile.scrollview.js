@@ -16,7 +16,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		snapbackDuration:  500,   // Duration of the snapback animation in msecs.
 	
 		moveThreshold:     10,   // User must move this many pixels in any direction to trigger a scroll.
-		moveIntervalThreshold:     100,   // Time between mousemoves must not exceed this threshold.
+		moveIntervalThreshold:     150,   // Time between mousemoves must not exceed this threshold.
 	
 		scrollMethod:      "translate",  // "translate", "position", "scroll"
 	
@@ -28,7 +28,9 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 	
 		showScrollBars:    true,
 		
-		pagingEnabled:     false
+		pagingEnabled:     false,
+		delayedClickSelector: "a,input,textarea,select,.ui-btn",
+		delayedClickEnabled: true
 	},
 
 	_makePositioned: function($ele)
@@ -46,7 +48,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		}
 		this._$view = $child.addClass("ui-scrollview-view");
 
-		this._$clip.css("overflow", this.options.scrollMethod == "scroll" ? "scroll" : "hidden");
+		this._$clip.css("overflow", this.options.scrollMethod === "scroll" ? "scroll" : "hidden");
 		this._makePositioned(this._$clip);
 
 		this._$view.css("overflow", "hidden");
@@ -54,7 +56,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		// Turn off our faux scrollbars if we are using native scrolling
 		// to position the view.
 
-		this.options.showScrollBars = this.options.scrollMethod == "scroll" ? false : this.options.showScrollBars;
+		this.options.showScrollBars = this.options.scrollMethod === "scroll" ? false : this.options.showScrollBars;
 
 		// We really don't need this if we are using a translate transformation
 		// for scrolling. We set it just in case the user wants to switch methods
@@ -67,8 +69,8 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		this._sy = 0;
 	
 		var direction = this.options.direction;
-		this._hTracker = (direction != "y")   ? new MomentumTracker(this.options) : null;
-		this._vTracker = (direction != "x") ? new MomentumTracker(this.options) : null;
+		this._hTracker = (direction !== "y")   ? new MomentumTracker(this.options) : null;
+		this._vTracker = (direction !== "x") ? new MomentumTracker(this.options) : null;
 	
 		this._timerInterval = 1000/this.options.fps;
 		this._timerID = 0;
@@ -193,7 +195,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		if ($vsb)
 		{
 			var $sbt = $vsb.find(".ui-scrollbar-thumb");
-			if (sm == "translate")
+			if (sm === "translate")
 				setElementTransform($sbt, "0px", -y/$v.height() * $sbt.parent().height() + "px");
 			else
 				$sbt.css("top", -y/$v.height()*100 + "%");
@@ -202,7 +204,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		if ($hsb)
 		{
 			var $sbt = $hsb.find(".ui-scrollbar-thumb");
-			if (sm == "translate")
+			if (sm === "translate")
 				setElementTransform($sbt,  -x/$v.width() * $sbt.parent().width() + "px", "0px");
 			else
 				$sbt.css("left", -x/$v.width()*100 + "%");
@@ -282,6 +284,8 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		var c = this._$clip;
 		var v = this._$view;
 
+		if (this.options.delayedClickEnabled)
+			this._$clickEle = $(e.target).closest(this.options.delayedClickSelector);
 		this._lastX = ex;
 		this._lastY = ey;
 		this._doSnapBackX = false;
@@ -317,24 +321,16 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		this._pageSize = 0;
 		this._pagePos = 0; 
 
-		if (this.options.pagingEnabled && (svdir == "x" || svdir == "y"))
+		if (this.options.pagingEnabled && (svdir === "x" || svdir === "y"))
 		{
-			this._pageSize = svdir == "x" ? cw : ch;
-			this._pagePos = svdir == "x" ? this._sx : this._sy;
+			this._pageSize = svdir === "x" ? cw : ch;
+			this._pagePos = svdir === "x" ? this._sx : this._sy;
 			this._pagePos -= this._pagePos % this._pageSize;
 		}
 		this._lastMove = 0;
 		this._enableTracking();
 
-		// If we're using mouse events, we need to prevent the default
-		// behavior to suppress accidental selection of text, etc. We
-		// can't do this on touch devices because it will disable the
-		// generation of "click" events.
-		//
-		// XXX: We should test if this has an effect on links! - kin
-
-		if (this.options.eventType == "mouse")
-			e.preventDefault();
+		e.preventDefault();
 		e.stopPropagation();
 	},
 
@@ -396,7 +392,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		var newX = this._sx;
 		var newY = this._sy;
 
-		if (this._directionLock != "y" && this._hTracker)
+		if (this._directionLock !== "y" && this._hTracker)
 		{
 			var x = this._sx;
 			this._speedX = dx;
@@ -407,7 +403,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 			this._doSnapBackX = false;
 			if (newX > 0 || newX < this._maxX)
 			{
-				if (this._directionLock == "x")
+				if (this._directionLock === "x")
 				{
 					var sv = this._getAncestorByDirection("x");
 					if (sv)
@@ -422,7 +418,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 			}
 		}
 
-		if (this._directionLock != "x" && this._vTracker)
+		if (this._directionLock !== "x" && this._vTracker)
 		{
 			var y = this._sy;
 			this._speedY = dy;
@@ -433,7 +429,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 			this._doSnapBackY = false;
 			if (newY > 0 || newY < this._maxY)
 			{
-				if (this._directionLock == "y")
+				if (this._directionLock === "y")
 				{
 					var sv = this._getAncestorByDirection("y");
 					if (sv)
@@ -450,15 +446,15 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 
 		}
 
-		if (this.options.pagingEnabled && (svdir == "x" || svdir == "y"))
+		if (this.options.pagingEnabled && (svdir === "x" || svdir === "y"))
 		{
 			if (this._doSnapBackX || this._doSnapBackY)
 				this._pageDelta = 0;
 			else
 			{
 				var opos = this._pagePos;
-				var cpos = svdir == "x" ? newX : newY;
-				var delta = svdir == "x" ? dx : dy;
+				var cpos = svdir === "x" ? newX : newY;
+				var delta = svdir === "x" ? dx : dy;
 
 				this._pageDelta = (opos > cpos && delta < 0) ? this._pageSize : ((opos < cpos && delta > 0) ? -this._pageSize : 0);
 			}
@@ -490,11 +486,11 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		var sy = (this._vTracker && this._speedY && doScroll) ? this._speedY : (this._doSnapBackY ? 1 : 0);
 
 		var svdir = this.options.direction;
-		if (this.options.pagingEnabled && (svdir == "x" || svdir == "y") && !this._doSnapBackX && !this._doSnapBackY)
+		if (this.options.pagingEnabled && (svdir === "x" || svdir === "y") && !this._doSnapBackX && !this._doSnapBackY)
 		{
 			var x = this._sx;
 			var y = this._sy;
-			if (svdir == "x")
+			if (svdir === "x")
 				x = -this._pagePos + this._pageDelta;
 			else
 				y = -this._pagePos + this._pageDelta;
@@ -507,6 +503,10 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 			this._hideScrollBars();
 
 		this._disableTracking();
+
+		if (this.options.delayedClickEnabled && !this._didDrag) {
+			this._$clickEle.click();
+		}
 
 		// If a view scrolled, then we need to absorb
 		// the event so that links etc, underneath our
@@ -544,7 +544,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 	_addBehaviors: function()
 	{
 		var self = this;
-		if (this.options.eventType == "mouse")
+		if (this.options.eventType === "mouse")
 		{
 			this._dragStartEvt = "mousedown";
 			this._dragStartCB = function(e){ return self._handleDragStart(e, e.clientX, e.clientY); };

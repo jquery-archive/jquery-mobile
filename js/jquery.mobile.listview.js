@@ -298,7 +298,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		$( parentList.find( "ul, ol" ).toArray().reverse() ).each(function( i ) {
 			var list = $( this ),
 				parent = list.parent(),
-				title = parent.contents()[ 0 ].nodeValue.split("\n")[0],
+				title = $.trim(parent.contents()[ 0 ].nodeValue.split("\n")[0]) || parent.find('a:first').text(),
 				id = parentId + "&" + $.mobile.subPageUrlKey + "=" + self._idStringEscape(title + " " + i),
 				theme = list.data( "theme" ) || o.theme,
 				countTheme = list.data( "counttheme" ) || parentList.data( "counttheme" ) || o.countTheme,
@@ -317,8 +317,11 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				
 				
 				newPage.page();		
-			
-			parent.html( "<a href='#" + id + "'>" + title + "</a>" );
+			var anchor = parent.find('a:first');
+			if (!anchor.length) {
+				anchor = $("<a></a>").html(title).prependTo(parent.empty());
+			}
+			anchor.attr('href','#' + id);
 		}).listview();
 	}
 });
