@@ -149,15 +149,11 @@
 			isFormRequest = false,
 			duplicateCachedPage = null,
 			back = (back !== undefined) ? back : ( urlStack.length > 1 && urlStack[ urlStack.length - 2 ].url === url );
-		//,
-			//transition = (transition !== undefined) ? transition : $.mobile.defaultTransition;
-
 
 		//If we are trying to transition to the same page that we are currently on ignore the request.
 		if(urlStack.length > 1 && url === urlStack[urlStack.length -1].url && !toIsArray ) {
 			return;
 		}
-
 
 		if( $.type(to) === "object" && to.url ){
 			url = to.url,
@@ -170,9 +166,6 @@
 				data = undefined;
 			}
 		}
-
-
-
 
 		//reset base to pathname for new request
 		if(base){ base.reset(); }
@@ -202,7 +195,7 @@
 			//get current scroll distance
 			var currScroll = $window.scrollTop(),
 					perspectiveTransitions = ["flip"],
-          pageContainerClasses = [];
+					pageContainerClasses = [];
 
 			//set as data for returning to that spot
 			from.data('lastScroll', currScroll);
@@ -253,6 +246,8 @@
 				if( perspectiveTransitions.indexOf(transition) >= 0 ){
 					addContainerClass('ui-mobile-viewport-perspective');
 				}
+
+				console.log(transition);
 
 				addContainerClass('ui-mobile-viewport-transitioning');
 

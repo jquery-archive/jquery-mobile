@@ -47,3 +47,25 @@ test( "changePage applys transition class to mobile viewport for default transit
 
 	ok($("body").hasClass(transitioning), "has transitioning class");
 });
+
+test( "explicit transition preferred for page navigation reversal (ie back)", function(){
+	$.fn.animationComplete = function(){};
+
+	stop();
+	setTimeout(function(){
+		$("#fade-trans > a").click();
+	}, 300);
+
+	setTimeout(function(){
+		$("#flip-trans > a").click();
+	}, 600);
+
+	setTimeout(function(){
+		$("#fade-trans > a").click();
+
+		ok($("#fade-trans").hasClass("in fade reverse"),
+			 "has fade class and back reverse");
+
+		start();
+	}, 900);
+});
