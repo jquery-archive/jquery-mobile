@@ -13,9 +13,12 @@ module('jquery.mobile.navigation.js', {
 	teardown: function(){
 		// unmock animation complete
 		$.fn.animationComplete = animationCompleteFn;
-
 		removeClasses();
-	}});
+		// Fix test layout issues from page styling needed for webkit transitions
+		$("body").attr('style', 'margin: 8px;');
+	}
+});
+
 
 test( "changePage applys perspective class to mobile viewport for flip", function(){
 	//stub to prevent class removal
@@ -27,7 +30,7 @@ test( "changePage applys perspective class to mobile viewport for flip", functio
 });
 
 
-test( "changePage applys does not apply perspective class to mobile viewport for transitions other than flip", function(){
+test( "changePage does not apply perspective class to mobile viewport for transitions other than flip", function(){
 	//stub to prevent class removal
 	$.fn.animationComplete = function(){};
 
