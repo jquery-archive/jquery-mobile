@@ -46,19 +46,26 @@ $("[data-role=page]").live("pageshow", function(event) {
 			$this.scrollview(opts);
 		}
 	});
+
+	changeDelayFormElementClick();
 });
 
 function changeScrollMethod()
 {
 	var val = $("#s_method").val();
 	var $sv = $("#evtCatcher").scrollview("scrollTo", 0, 0);
-	if (val == "scroll") {
+	if (val === "scroll") {
 		$sv.css("overflow", "scroll");
 	}
 	else {
 		$sv.css("overflow", "hidden");
 	}
 	$sv.data("scrollview").options.scrollMethod = val;
+}
+
+function changeDelayFormElementClick()
+{
+	$("#evtCatcher").data("scrollview").options.delayedClickEnabled = ($("#s_delay").val() === "yes");
 }
 
 var cb_hd_pd,
@@ -132,13 +139,21 @@ $(function(){
         </select>
     </div>
 
+    <div data-role="fieldcontain">
+        <label for="s_delay" class="select">Delay Form Element Click:</label>
+        <select name="s_delay" id="s_delay" onchange="changeDelayFormElementClick();">
+            <option value="yes">Yes</option>
+            <option value="no" selected="selected">No</option>
+        </select>
+    </div>
+
     <div  data-role="fieldcontain">
           <fieldset data-role="controlgroup">
         <input type="checkbox" name="cb_hd_pd" id="cb_hd_pd" />
         <label for="cb_hd_pd">touchstart - Prevent Default</label>
         <input type="checkbox" name="cb_hd_sp" id="cb_hd_sp" />
         <label for="cb_hd_sp">touchstart - Stop Propagation</label>
-        <input type="checkbox" name="cb_hm_pd" id="cb_hm_pd" />
+        <input type="checkbox" name="cb_hm_pd" id="cb_hm_pd" checked="checked" />
         <label for="cb_hm_pd">touchmove - Prevent Default</label>
         <input type="checkbox" name="cb_hm_sp" id="cb_hm_sp" />
         <label for="cb_hm_sp">touchmove - Stop Propagation</label>
