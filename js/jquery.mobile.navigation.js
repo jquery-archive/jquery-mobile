@@ -148,8 +148,9 @@
 			type = 'get',
 			isFormRequest = false,
 			duplicateCachedPage = null,
-			back = (back !== undefined) ? back : ( urlStack.length > 1 && urlStack[ urlStack.length - 2 ].url === url ),
-			transition = (transition !== undefined) ? transition : $.mobile.defaultTransition;
+			back = (back !== undefined) ? back : ( urlStack.length > 1 && urlStack[ urlStack.length - 2 ].url === url );
+		//,
+			//transition = (transition !== undefined) ? transition : $.mobile.defaultTransition;
 
 
 		//If we are trying to transition to the same page that we are currently on ignore the request.
@@ -182,10 +183,16 @@
 		// if the new href is the same as the previous one
 		if ( back ) {
 			var pop = urlStack.pop();
-			if( pop ){
+
+			// prefer the explicitly set transition
+			if( pop && !transition ){
 				transition = pop.transition;
 			}
 		} else {
+			// if no transition passed set the default
+			transition = transition || $.mobile.defaultTransition;
+
+			// push the url and transition onto the stack
 			urlStack.push({ url: url, transition: transition });
 		}
 
