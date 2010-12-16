@@ -65,8 +65,7 @@ test( "explicit transition preferred for page navigation reversal (ie back)", fu
 
 		$("#fade-trans > a").click();
 
-		ok($("#flip-trans").hasClass("fade"),
-			 "has fade class");
+		ok($("#flip-trans").hasClass("fade"), "has fade class");
 
 		start();
 	}, 900);
@@ -90,8 +89,7 @@ test( "previous transition used when not set and going back through url stack", 
 
 		$("#no-trans > a").click();
 
-		ok($("#pop-trans").hasClass("pop"),
-			 "has slide class from previous trans");
+		ok($("#pop-trans").hasClass("pop"), "has pop class");
 
 		start();
 	}, 900);
