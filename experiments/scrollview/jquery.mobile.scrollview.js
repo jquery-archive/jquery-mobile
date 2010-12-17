@@ -30,7 +30,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		
 		pagingEnabled:     false,
 		delayedClickSelector: "a,input,textarea,select,button,.ui-btn",
-		delayedClickEnabled: false
+		delayedClickEnabled: true
 	},
 
 	_makePositioned: function($ele)
@@ -284,8 +284,9 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		var c = this._$clip;
 		var v = this._$view;
 
-		if (this.options.delayedClickEnabled)
+		if (this.options.delayedClickEnabled) {
 			this._$clickEle = $(e.target).closest(this.options.delayedClickSelector);
+		}
 		this._lastX = ex;
 		this._lastY = ey;
 		this._doSnapBackX = false;
@@ -512,8 +513,12 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 
 		this._disableTracking();
 
-		if (this.options.delayedClickEnabled && !this._didDrag) {
-			this._$clickEle.click();
+		if (!this._didDrag && this.options.delayedClickEnabled && this._$clickEle.length) {
+			this._$clickEle
+				.trigger("mousedown")
+				//.trigger("focus")
+				.trigger("mouseup")
+				.trigger("click");
 		}
 
 		// If a view scrolled, then we need to absorb
