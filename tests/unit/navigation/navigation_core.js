@@ -4,14 +4,14 @@
 // TODO move tests to navigation_transitions.js
 var perspective = "ui-mobile-viewport-perspective",
 		transitioning = "ui-mobile-viewport-transitioning",
-	  animationCompleteFn = $.fn.animationComplete,
+		animationCompleteFn = $.fn.animationComplete,
 
 		removeBodyClasses = function(){
 			$("body").removeClass([perspective, transitioning].join(" "));
 		},
 
 		removePageTransClasses = function(){
-			$("[data-role='page']").removeClass("in out fade slide flip reverse");
+			$("[data-role='page']").removeClass("in out fade slide flip reverse pop");
 		};
 
 module('jquery.mobile.navigation.js', {
@@ -26,7 +26,7 @@ module('jquery.mobile.navigation.js', {
 
 		// required cleanup from animation complete mocking
 		removeBodyClasses();
-  }
+	}
 });
 
 test( "changePage applys perspective class to mobile viewport for flip", function(){
@@ -90,6 +90,20 @@ test( "previous transition used when not set and going back through url stack", 
 		$("#no-trans > a").click();
 
 		ok($("#pop-trans").hasClass("pop"), "has pop class");
+
+		start();
+	}, 900);
+});
+
+test( "default transition is slide", function(){
+	stop();
+	setTimeout(function(){
+		//guarantee that we check only the newest changes
+		removePageTransClasses();
+
+		$("#default-trans > a").click();
+
+		ok($("#no-trans").hasClass("slide"), "has slide class");
 
 		start();
 	}, 900);

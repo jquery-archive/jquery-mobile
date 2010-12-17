@@ -173,6 +173,12 @@
 		//kill the keyboard
 		$( window.document.activeElement ).add(':focus').blur();
 
+		function defaultTransition(){
+			if(transition === undefined){
+				transition = $.mobile.defaultTransition;
+			}
+		}
+
 		// if the new href is the same as the previous one
 		if ( back ) {
 			var pop = urlStack.pop();
@@ -181,9 +187,12 @@
 			if( pop && !transition ){
 				transition = pop.transition;
 			}
+
+			// ensure a transition has been set where pop is undefined
+			defaultTransition();
 		} else {
-			// if no transition passed set the default
-			transition = transition || $.mobile.defaultTransition;
+			// If no transition has been passed
+			defaultTransition();
 
 			// push the url and transition onto the stack
 			urlStack.push({ url: url, transition: transition });
@@ -246,8 +255,6 @@
 				if( perspectiveTransitions.indexOf(transition) >= 0 ){
 					addContainerClass('ui-mobile-viewport-perspective');
 				}
-
-				console.log(transition);
 
 				addContainerClass('ui-mobile-viewport-transitioning');
 
