@@ -1,8 +1,8 @@
 /*
 * jQuery Mobile Framework : "button" plugin - links that proxy to native input/buttons
 * Copyright (c) jQuery Project
-* Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
-* Note: Code is in draft form and is subject to change 
+* Dual licensed under the MIT or GPL Version 2 licenses.
+* http://jquery.org/license
 */ 
 (function($, undefined ) {
 $.widget( "mobile.button", $.mobile.widget, {
@@ -17,30 +17,11 @@ $.widget( "mobile.button", $.mobile.widget, {
 	},
 	_create: function(){
 		var $el = this.element,
-			o = this.options,
-			type = $el.attr('type');
-			$el
-				.addClass('ui-btn-hidden')
-				.attr('tabindex','-1');
+			o = this.options;
 		
 		//add ARIA role
-		$( "<a>", { 
-				"href": "#",
-				"role": "button",
-				"aria-label": $el.attr( "type" ) 
-			} )
+		this.button = $( "<div></div>" )
 			.text( $el.text() || $el.val() )
-			.insertBefore( $el )
-			.click(function(){
-				if( type == "submit" ){
-					$(this).closest('form').submit();
-				}
-				else{
-					$el.click(); 
-				}
-
-				return false;
-			})
 			.buttonMarkup({
 				theme: o.theme, 
 				icon: o.icon,
@@ -49,7 +30,36 @@ $.widget( "mobile.button", $.mobile.widget, {
 				corners: o.corners,
 				shadow: o.shadow,
 				iconshadow: o.iconshadow
+			})
+			.insertBefore( $el )
+			.append( $el.addClass('ui-btn-hidden') );
+		
+		//add hidden input during submit
+		if( $el.attr('type') !== 'reset' ){
+			$el.click(function(){
+				var $buttonPlaceholder = $("<input>", 
+						{type: "hidden", name: $el.attr("name"), value: $el.attr("value")})
+						.insertBefore($el);
+						
+				//bind to doc to remove after submit handling	
+				$(document).submit(function(){
+					 $buttonPlaceholder.remove();
+				});
 			});
+		}
+			
+	},
+
+	enable: function(){
+		this.element.attr("disabled", false);
+		this.button.removeClass("ui-disabled").attr("aria-disabled", false);
+		return this._setOption("disabled", false);
+	},
+
+	disable: function(){
+		this.element.attr("disabled", true);
+		this.button.addClass("ui-disabled").attr("aria-disabled", true);
+		return this._setOption("disabled", true);
 	}
 });
 })( jQuery );

@@ -1,8 +1,8 @@
 /*
 * jQuery Mobile Framework : "selectmenu" plugin
 * Copyright (c) jQuery Project
-* Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
-* Note: Code is in draft form and is subject to change 
+* Dual licensed under the MIT or GPL Version 2 licenses.
+* http://jquery.org/license
 */  
 (function($, undefined ) {
 $.widget( "mobile.selectmenu", $.mobile.widget, {
@@ -16,7 +16,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		shadow: true,
 		iconshadow: true,
 		menuPageTheme: 'b',
-		overlayTheme: 'a'
+		overlayTheme: 'a',
+		hidePlaceholderMenuItems: true
 	},
 	_create: function(){
 	
@@ -65,19 +66,19 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 						"</div>"+
 						"<div data-role='content'></div>"+
 					"</div>" )
-					.appendTo( $.pageContainer )
+					.appendTo( $.mobile.pageContainer )
 					.page(),	
 					
 			menuPageContent = menuPage.find( ".ui-content" ),	
 					
-			screen = $( "<div>", {"class": "ui-listbox-screen ui-overlay ui-screen-hidden fade"})
+			screen = $( "<div>", {"class": "ui-selectmenu-screen ui-screen-hidden"})
 						.appendTo( thisPage ),		
 								
-			listbox = $( "<div>", { "class": "ui-listbox ui-listbox-hidden ui-overlay-shadow ui-corner-all pop ui-body-" + o.overlayTheme } )
+			listbox = $( "<div>", { "class": "ui-selectmenu ui-selectmenu-hidden ui-overlay-shadow ui-corner-all pop ui-body-" + o.overlayTheme } )
 					.insertAfter(screen),
 					
 			list = $( "<ul>", { 
-					"class": "ui-listbox-list", 
+					"class": "ui-selectmenu-list", 
 					"id": menuId, 
 					"role": "listbox", 
 					"aria-labelledby": buttonId,
@@ -122,15 +123,15 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			});		
 		
 		//button events
-		button.click(function(event){
+		button.bind( $.support.touch ? "touchstart" : "click", function(event){
 			self.open();
-			return false;
+			event.preventDefault();
 		});
 		
 		//events for list items
-		list.delegate("li",'click', function(){
+		list.delegate("li:not(.ui-disabled, .ui-li-divider)", "click", function(event){
 				//update select	
-				var newIndex = list.find( "li" ).index( this ),
+				var newIndex = list.find( "li:not(.ui-li-divider)" ).index( this ),
 					prevIndex = select[0].selectedIndex;
 
 				select[0].selectedIndex = newIndex;
@@ -144,30 +145,64 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				
 				//hide custom select
 				self.close();
-				return false;
+				event.preventDefault();
 			});	
 	
 		//events on "screen" overlay
-		screen.click(function(){
+		screen.click(function(event){
 			self.close();
-			return false;
-		});	
+			event.preventDefault();
+		});
 	},
 	
 	_buildList: function(){
-		var self = this;
+		var self = this, 
+			optgroups = [],
+			o = this.options;
 		
 		self.list.empty().filter('.ui-listview').listview('destroy');
 		
 		//populate menu with options from select element
 		self.select.find( "option" ).each(function( i ){
-				var anchor = $("<a>", { 
-							"role": "option", 
-							"href": "#"
-						})
-						.text( $(this).text() );
+			var $this = $(this),
+				$parent = $this.parent();
 			
-			$( "<li>", {"data-icon": "checkbox-on"})
+			// are we inside an optgroup?
+			if( $parent.is("optgroup") ){
+				var optLabel = $parent.attr("label");
+				
+				// has this optgroup already been built yet?
+				if( $.inArray(optLabel, optgroups) === -1 ){
+					var optgroup = $('<li data-role="list-divider"></li>')
+						.text( optLabel )
+						.appendTo( self.list );
+					
+					optgroups.push( optLabel );
+				}
+			}
+
+			var anchor = $("<a>", { 
+				"role": "option", 
+				"href": "#",
+				"text": $(this).text()
+			}),
+		
+			item = $( "<li>", {"data-icon": "checkbox-on"});
+			
+			// support disabled option tags
+			if( this.disabled ){
+				item
+					.addClass("ui-disabled")
+					.attr("aria-disabled", true);
+			}
+			
+			if( o.hidePlaceholderMenuItems ){
+				if( !this.getAttribute('value') || $(this).text().length == 0 || $(this).data('placeholder')){
+					item.addClass('ui-selectmenu-placeholder');
+				}
+			}
+
+			item
 				.append( anchor )
 				.appendTo( self.list );
 		});
@@ -187,7 +222,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			
 		self.button.find( ".ui-btn-text" ).text( $(select[0].options.item(selected)).text() ); 
 		self.list
-			.find('li').removeClass( $.mobile.activeBtnClass ).attr('aria-selected', false)
+			.find('li:not(.ui-li-divider)').removeClass( $.mobile.activeBtnClass ).attr('aria-selected', false)
 			.eq(selected).addClass( $.mobile.activeBtnClass ).find('a').attr('aria-selected', true);		
 	},
 	
@@ -196,9 +231,14 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		
 		var self = this,
 			menuHeight = self.list.outerHeight(),
+			menuWidth = self.list.outerWidth(),
 			scrollTop = $(window).scrollTop(),
 			btnOffset = self.button.offset().top,
-			screenHeight = window.innerHeight;
+			screenHeight = window.innerHeight,
+			screenWidth = window.innerWidth;
+			
+		//add active class to button
+		self.button.addClass( $.mobile.activeBtnClass );
 			
 		function focusMenuItem(){
 			self.list.find( ".ui-btn-active" ).focus();
@@ -221,19 +261,19 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		}
 		else {
 			self.menuType = "overlay";
-			
+						
 			self.screen
 				.height( $(document).height() )
 				.removeClass('ui-screen-hidden');
 				
 			self.listbox
 				.append( self.list )
-				.removeClass( "ui-listbox-hidden" )
-				.css({
-					top: scrollTop + (screenHeight/2), 
-					"margin-top": -menuHeight/2,
-					left: window.innerWidth/2,
-					"margin-left": -1* self.listbox.outerWidth() / 2
+				.removeClass( "ui-selectmenu-hidden" )
+				.position({
+					my: "center center",
+					at: "center center",
+					of: self.button,
+					collision: "fit"
 				})
 				.addClass("in");
 				
@@ -248,6 +288,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		function focusButton(){
 			setTimeout(function(){
 				self.button.focus();
+				//remove active class from button
+				self.button.removeClass( $.mobile.activeBtnClass );
 			}, 40);
 			
 			self.listbox.removeAttr('style').append( self.list );
@@ -262,7 +304,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		}
 		else{
 			self.screen.addClass( "ui-screen-hidden" );
-			self.listbox.addClass( "ui-listbox-hidden" ).removeAttr( "style" ).removeClass("in");
+			self.listbox.addClass( "ui-selectmenu-hidden" ).removeAttr( "style" ).removeClass("in");
 			focusButton();
 		}
 		

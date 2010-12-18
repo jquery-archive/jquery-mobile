@@ -106,22 +106,71 @@ $('input').checkboxradio('enable');
 			<dd><code>disable</code>: disable a checkboxradio.</dd>
 			<dd>
 			<pre><code>
-$('textarea').checkboxradio('disable');			
+$('input').checkboxradio('disable');			
 			</code></pre>
 			</dd>
 			
 			<dd><code>refresh</code>: refresh a checkboxradio's value.</dd>
 			<dd>
 			<pre><code>
-$('textarea').checkboxradio('refresh');			
+$('input').checkboxradio('refresh');			
 			</code></pre>
 			</dd>
 		</dl>	
 		
 		
+		<h2>slider</h2>
+		<dl>
+			<dt>Methods</dt>
+			
+			<dd><code>enable</code>: enable a disabled slider.</dd>
+			<dd>
+			<pre><code>
+$('input').slider('enable');			
+			</code></pre>
+			</dd>
+			
+			<dd><code>disable</code>: disable a slider.</dd>
+			<dd>
+			<pre><code>
+$('input').slider('disable');			
+			</code></pre>
+			</dd>
+			
+			<dd><code>refresh</code>: refresh a slider's value.</dd>
+			<dd>
+			<pre><code>
+$('input').slider('refresh');			
+			</code></pre>
+			</dd>
+		</dl>
 		
 		
-						
+		<h2>Form buttons</h2>
+		<dl>
+			<dt>Methods</dt>
+			
+			<dd><code>enable</code>: enable a disabled button.</dd>
+			<dd>
+			<pre><code>
+$('input').button('enable');			
+			</code></pre>
+			</dd>
+			
+			<dd><code>disable</code>: disable a slider.</dd>
+			<dd>
+			<pre><code>
+$('input').button('disable');			
+			</code></pre>
+			</dd>
+
+		</dl>	
+		
+		<h2>Degraded Form Input Types</h2>
+		<p>jQuery Mobile degrades several HTML5 input types back to type=text, or type=number after adding enhanced controls. For example, inputs with a type of range are enhanced with a custom slider control, and their type is set to number to offer a usable form input alongside that slider. Inputs with a type of search are degraded back to type=text after we add our own themable search input styling.</p>
+		<p>The page plugin contains a list of input types that are set to either true which means they'll degrade to type=text, false which means they'll be left alone, or a string such as "number", which means they'll be converted to that type (such as the case of type=range).</p>
+		
+		<p>You can configure which types are changed via the page plugin's <code>degradeInputs</code> option, which can be manipulated externally via <code>$.mobile.page.prototype.options.degradeInputs</code>, which has properties: color, date, datetime, "datetime-local", email, month, number, range, search, tel, time, url, and week. Be sure to configure this inside an event handler bound to the <code>mobileinit</code> event, so that it applies to the first page as well as subsequent pages that are loaded.</p>				
 	</div><!-- /content -->
 	
 </div><!-- /page -->

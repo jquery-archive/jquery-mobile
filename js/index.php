@@ -4,10 +4,14 @@ $elements = array(
 	'jquery.js',
 	'jquery.ui.widget.js',
 	'jquery.mobile.widget.js',
+	'jquery.mobile.media.js',
 	'jquery.mobile.support.js',
 	'jquery.mobile.event.js',
 	'jquery.mobile.hashchange.js',
+	'jquery.mobile.core.js',
+	'jquery.mobile.navigation.js',
 	'jquery.mobile.page.js',
+	'jquery.ui.position.js',
 	'jquery.mobile.fixHeaderFooter.js',
 	'jquery.mobile.forms.checkboxradio.js',
 	'jquery.mobile.forms.textinput.js',
@@ -22,8 +26,7 @@ $elements = array(
 	'jquery.mobile.listview.filter.js',
 	'jquery.mobile.dialog.js',
 	'jquery.mobile.navbar.js',
-	'jquery.mobile.grid.js',
-	'jquery.mobile.js'
+	'jquery.mobile.grid.js'
 );
 
 include('../combine.php');

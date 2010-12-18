@@ -16,4 +16,4 @@ You need the Rewrite (mod_rewrite.so), Expire (mod_expires.so) and Header (mod_h
 Whenever this configuration becomes inconvenient, we can remove it, obviously it's not meant to stay!
 
 - when adding a js or css file, add it to the manifest in its directory and it'll be included in the request
-- As far as JS files go, jQuery.mobile.js is the starting point.
+- As far as JS files go, jQuery.mobile.core.js is the starting point.

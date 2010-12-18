@@ -1,8 +1,8 @@
 /*
 * jQuery Mobile Framework : "page" plugin
 * Copyright (c) jQuery Project
-* Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
-* Note: Code is in draft form and is subject to change 
+* Dual licensed under the MIT or GPL Version 2 licenses.
+* http://jquery.org/license
 */
 (function($, undefined ) {
 
@@ -24,46 +24,49 @@ $.widget( "mobile.page", $.mobile.widget, {
 			time: false,
 			url: false,
 			week: false
-		}
+		},
+		keepNative: null
 	},
-	
+
 	_create: function() {
 		var $elem = this.element,
 			o = this.options;
 
+		this.keepNative = "[data-role='none'], [data-role='nojs']" + (o.keepNative ? ", " + o.keepNative : "");
+
 		if ( this._trigger( "beforeCreate" ) === false ) {
 			return;
 		}
-		
+
 		//some of the form elements currently rely on the presence of ui-page and ui-content
 		// classes so we'll handle page and content roles outside of the main role processing
 		// loop below.
 		$elem.find( "[data-role='page'], [data-role='content']" ).andSelf().each(function() {
 			$(this).addClass( "ui-" + $(this).data( "role" ) );
 		});
-		
+
 		$elem.find( "[data-role='nojs']" ).addClass( "ui-nojs" );
 
 		this._enchanceControls();
-		
+
 		// pre-find data els
 		var $dataEls = $elem.find( "[data-role]" ).andSelf().each(function() {
 			var $this = $( this ),
 				role = $this.data( "role" ),
 				theme = $this.data( "theme" );
-			
+
 			//apply theming and markup modifications to page,header,content,footer
 			if ( role === "header" || role === "footer" ) {
 				$this.addClass( "ui-bar-" + (theme || $this.parent('[data-role=page]').data( "theme" ) || "a") );
-				
+
 				// add ARIA role
 				$this.attr( "role", role === "header" ? "banner" : "contentinfo" );
-				
+
 				//right,left buttons
 				var $headeranchors = $this.children( "a" ),
 					leftbtn = $headeranchors.hasClass( "ui-btn-left" ),
 					rightbtn = $headeranchors.hasClass( "ui-btn-right" );
-				
+
 				if ( !leftbtn ) {
 					leftbtn = $headeranchors.eq( 0 ).not( ".ui-btn-right" ).addClass( "ui-btn-left" ).length;
 				}
@@ -71,7 +74,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 				if ( !rightbtn ) {
 					rightbtn = $headeranchors.eq( 1 ).addClass( "ui-btn-right" ).length;
 				}
-				
+
 				// auto-add back btn on pages beyond first view
 				if ( o.addBackBtn && role === "header" &&
 						($.mobile.urlStack.length > 1 || $(".ui-page").length > 1) &&
@@ -84,8 +87,8 @@ $.widget( "mobile.page", $.mobile.widget, {
 						})
 						.prependTo( $this );
 				}
-				
-				//page title	
+
+				//page title
 				$this.children( "h1, h2, h3, h4, h5, h6" )
 					.addClass( "ui-title" )
 					//regardless of h element number in src, it becomes h1 for the enhanced page
@@ -102,7 +105,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 			} else if ( role === "page" ) {
 				$this.addClass( "ui-body-" + (theme || "c") );
 			}
-			
+
 			switch(role) {
 				case "header":
 				case "footer":
@@ -119,60 +122,67 @@ $.widget( "mobile.page", $.mobile.widget, {
 					break;
 			}
 		});
-		
+
 		//links in bars, or those with data-role become buttons
-		$elem.find( "[data-role='button'], .ui-bar a, .ui-header a, .ui-footer a" )
+		$elem.find( "[data-role='button'], .ui-bar > a, .ui-header > a, .ui-footer > a" )
 			.not( ".ui-btn" )
+			.not(this.keepNative)
 			.buttonMarkup();
 
-		$elem	
+		$elem
 			.find("[data-role='controlgroup']")
 			.controlgroup();
-		
+
 		//links within content areas
 		$elem.find( "a:not(.ui-btn):not(.ui-link-inherit)" )
-			.addClass( "ui-link" );	
-		
+			.not(this.keepNative)
+			.addClass( "ui-link" );
+
 		//fix toolbars
 		$elem.fixHeaderFooter();
 	},
-	
+
 	_enchanceControls: function() {
 		var o = this.options;
+
 		// degrade inputs to avoid poorly implemented native functionality
-		this.element.find( "input" ).each(function() {
+		this.element.find( "input" ).not(this.keepNative).each(function() {
 			var type = this.getAttribute( "type" ),
 				optType = o.degradeInputs[ type ] || "text";
-			
+
 			if ( o.degradeInputs[ type ] ) {
 				$( this ).replaceWith(
 					$( "<div>" ).html( $(this).clone() ).html()
 						.replace( /type="([a-zA-Z]+)"/, "type="+ optType +" data-type='$1'" ) );
 			}
 		});
-		
+
 		// enchance form controls
 		this.element
 			.find( "[type='radio'], [type='checkbox']" )
+			.not(this.keepNative)
 			.checkboxradio();
 
 		this.element
 			.find( "button, [type='button'], [type='submit'], [type='reset'], [type='image']" )
-			.not( ".ui-nojs" )
+			.not(this.keepNative)
 			.button();
 
 		this.element
 			.find( "input, textarea" )
 			.not( "[type='radio'], [type='checkbox'], button, [type='button'], [type='submit'], [type='reset'], [type='image']" )
+			.not(this.keepNative)
 			.textinput();
 
 		this.element
 			.find( "input, select" )
+			.not(this.keepNative)
 			.filter( "[data-role='slider'], [data-type='range']" )
 			.slider();
 
 		this.element
 			.find( "select:not([data-role='slider'])" )
+			.not(this.keepNative)
 			.selectmenu();
 	}
 });

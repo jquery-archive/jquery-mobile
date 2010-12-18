@@ -1,8 +1,8 @@
 /*
 * jQuery Mobile Framework : plugin for making button-like links
 * Copyright (c) jQuery Project
-* Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
-* Note: Code is in draft form and is subject to change 
+* Dual licensed under the MIT or GPL Version 2 licenses.
+* http://jquery.org/license
 */ 
 (function($, undefined ) {
 
@@ -82,7 +82,7 @@ $.fn.buttonMarkup.defaults = {
 };
 
 var attachEvents = function() {
-	$(".ui-btn").live({
+	$(".ui-btn:not(.ui-disabled)").live({
 		mousedown: function() {
 			var theme = $(this).attr( "data-theme" );
 			$(this).removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-down-" + theme );
