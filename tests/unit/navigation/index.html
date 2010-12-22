@@ -12,7 +12,7 @@
 	<script type="text/javascript" src="../../../js/jquery.mobile.event.js"></script>
 	<script type="text/javascript" src="../../../js/jquery.mobile.hashchange.js"></script>
 	<script type="text/javascript" src="../../../js/jquery.mobile.core.js"></script>
-	<script type="text/javascript" src="../../../js/jquery.mobile.navigation.js"></script>
+ 	<script type="text/javascript" src="../../../js/jquery.mobile.navigation.js"></script>
 	<script type="text/javascript" src="../../../js/jquery.mobile.page.js"></script>
 	<script type="text/javascript" src="../../../js/jquery.ui.position.js"></script>
 	<script type="text/javascript" src="../../../js/jquery.mobile.fixHeaderFooter.js"></script>
@@ -51,11 +51,11 @@
 
 <style>
 	[data-role='page'] {
-	  position: absolute; top: -10000px; left: -10000px;
+	  position: absolute;
+	  top: -10000px;
+	  left: -10000px;
 	}
 </style>
-
-<!-- NOTE the style here is a bit off from other test page, (margin) -->
 
 <div id="foo" data-role="page">
 	<a href="#bar" data-transition="flip"></a>
@@ -66,7 +66,27 @@
 </div>
 
 <div id="baz" data-role="page">
-	<a href="foo"></a>
+	<a href="#foo"></a>
+</div>
+
+<div id="fade-trans" data-role="page">
+	<a href="#flip-trans" data-transition="fade"></a>
+</div>
+
+<div id="flip-trans" data-role="page">
+	<a href="#fade-trans" data-transition="flip"></a>
+</div>
+
+<div id="no-trans" data-role="page">
+	<a href="#pop-trans"></a>
+</div>
+
+<div id="pop-trans" data-role="page">
+	<a href="#no-trans" data-transition="pop"></a>
+</div>
+
+<div id="default-trans" data-role="page">
+	<a href="#no-trans"></a>
 </div>
 </body>
 </html>
