@@ -111,6 +111,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 								handle.removeClass("ui-slider-handle-snapping");
 							});
 					}
+                                        control.mouseup();
 					return false;
 				}
 			});
