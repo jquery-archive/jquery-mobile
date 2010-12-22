@@ -181,13 +181,15 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			var a = item.find( "a" );
 				
 			if ( a.length ) {	
+				var icon = item.data("icon");
+				
 				item
 					.buttonMarkup({
 						wrapperEls: "div",
 						shadow: false,
 						corners: false,
 						iconpos: "right",
-						icon: a.length > 1 ? false : item.data("icon") || "arrow-r",
+						icon: a.length > 1 || icon === false ? false : icon || "arrow-r",
 						theme: o.theme
 					});
 
@@ -298,7 +300,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		$( parentList.find( "ul, ol" ).toArray().reverse() ).each(function( i ) {
 			var list = $( this ),
 				parent = list.parent(),
-				title = parent.contents()[ 0 ].nodeValue.split("\n")[0],
+				title = $.trim(parent.contents()[ 0 ].nodeValue.split("\n")[0]) || parent.find('a:first').text(),
 				id = parentId + "&" + $.mobile.subPageUrlKey + "=" + self._idStringEscape(title + " " + i),
 				theme = list.data( "theme" ) || o.theme,
 				countTheme = list.data( "counttheme" ) || parentList.data( "counttheme" ) || o.countTheme,
@@ -317,8 +319,11 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				
 				
 				newPage.page();		
-			
-			parent.html( "<a href='#" + id + "'>" + title + "</a>" );
+			var anchor = parent.find('a:first');
+			if (!anchor.length) {
+				anchor = $("<a></a>").html(title).prependTo(parent.empty());
+			}
+			anchor.attr('href','#' + id);
 		}).listview();
 	}
 });
