@@ -18,11 +18,11 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 
 		if ( inputtype != "checkbox" && inputtype != "radio" ) { return; }
 
-                // If there's no selected theme...
+		// If there's no selected theme...
 		if( !this.options.theme ) {
 			this.options.theme = this.element.data( "theme" );
 		}
-		
+
 		label
 			.buttonMarkup({
 				theme: this.options.theme,
