@@ -132,6 +132,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				return;
 			}
 
+			// In all cases prevent the default and mark the handle as active
 			switch ( event.keyCode ) {
 			 case $.mobile.keyCode.HOME:
 			 case $.mobile.keyCode.END:
@@ -150,6 +151,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				break;
 			}
 
+			// move the slider according to the keypress
 			switch ( event.keyCode ) {
 			 case $.mobile.keyCode.HOME:
 				self.refresh(min);
@@ -168,7 +170,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				self.refresh(index - step);
 				break;
 			}
-		})
+		}) // remove active mark
 			.keyup(function( event ) {
 				if ( self._keySliding ) {
 					self._keySliding = false;
@@ -176,7 +178,6 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				}
 			});
 
-		handle.bind('click', function(e){ return false; });
 		this.refresh();
 	},
 
