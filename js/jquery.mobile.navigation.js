@@ -213,11 +213,17 @@
 			from.data("page")._trigger("beforehide", {nextPage: to});
 			to.data("page")._trigger("beforeshow", {prevPage: from});
 
+			function updatePageTitle(){
+				if( to.data('page-title') ) {
+					document.title = to.data('page-title');
+				}
+			};
+			
 			function loadComplete(){
 				$.mobile.pageLoading( true );
 
 				reFocus( to );
-
+				updatePageTitle();
 				if( changeHash !== false && url ){
 					path.set(url, (back !== true));
 				}
@@ -335,7 +341,12 @@
 					//workaround to allow scripts to execute when included in page divs
 					all.get(0).innerHTML = html;
 					to = all.find('[data-role="page"], [data-role="dialog"]').first();
-
+					
+					// get the title of the page we are transitioning to we can update the location.title later
+					var $title = all.find('title:eq(0)');
+					var toPageTitle = ($title && $title.text()) ? $title.text().trim() : '';
+					if (toPageTitle) { to.attr("data-page-title", toPageTitle) };
+					
 					//rewrite src and href attrs to use a base url
 					if( !$.support.dynamicBaseTag ){
 						var newPath = path.get( fileUrl );

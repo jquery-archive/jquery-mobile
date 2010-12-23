@@ -162,7 +162,13 @@
 
 		//set up active page
 		$.mobile.startPage = $.mobile.activePage = $pages.first();
-
+		
+		// set the data-page-title attribute based upon the title of the first page to load
+		var $title = $("title");
+		if( $title && $title.text() ){
+			$.mobile.startPage.data('page-title', $title.text().trim()) 
+		};
+		
 		//set page container
 		$.mobile.pageContainer = $.mobile.startPage.parent().addClass('ui-mobile-viewport');
 
