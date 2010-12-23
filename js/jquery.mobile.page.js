@@ -82,6 +82,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 
 					$( "<a href='#' class='ui-btn-left' data-icon='arrow-l'>"+ o.backBtnText +"</a>" )
 						.click(function() {
+							debugger;
 							history.back();
 							return false;
 						})
