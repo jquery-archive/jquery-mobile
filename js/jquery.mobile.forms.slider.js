@@ -3,7 +3,7 @@
 * Copyright (c) jQuery Project
 * Dual licensed under the MIT or GPL Version 2 licenses.
 * http://jquery.org/license
-*/  
+*/
 (function($, undefined ) {
 $.widget( "mobile.slider", $.mobile.widget, {
 	options: {
@@ -11,19 +11,19 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		trackTheme: null,
 		disabled: false
 	},
-	_create: function(){	
+	_create: function(){
 		var self = this,
 
 			control = this.element,
-		
-			parentTheme = control.parents('[class*=ui-bar-],[class*=ui-body-]').eq(0),	
-			
+
+			parentTheme = control.parents('[class*=ui-bar-],[class*=ui-body-]').eq(0),
+
 			parentTheme = parentTheme.length ? parentTheme.attr('class').match(/ui-(bar|body)-([a-z])/)[2] : 'c',
-					
+
 			theme = this.options.theme ? this.options.theme : parentTheme,
-			
+
 			trackTheme = this.options.trackTheme ? this.options.trackTheme : parentTheme,
-			
+
 			cType = control[0].nodeName.toLowerCase(),
 			selectClass = (cType == 'select') ? 'ui-slider-switch' : '',
 			controlID = control.attr('id'),
@@ -56,32 +56,32 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		if(cType == 'select'){
 			slider.wrapInner('<div class="ui-slider-inneroffset"></div>');
 			var options = control.find('option');
-				
+
 			control.find('option').each(function(i){
 				var side = (i==0) ?'b':'a',
 					corners = (i==0) ? 'right' :'left',
 					theme = (i==0) ? ' ui-btn-down-' + trackTheme :' ui-btn-active';
-				$('<div class="ui-slider-labelbg ui-slider-labelbg-'+ side + theme +' ui-btn-corner-'+ corners+'"></div>').prependTo(slider);	
+				$('<div class="ui-slider-labelbg ui-slider-labelbg-'+ side + theme +' ui-btn-corner-'+ corners+'"></div>').prependTo(slider);
 				$('<span class="ui-slider-label ui-slider-label-'+ side + theme +' ui-btn-corner-'+ corners+'" role="img">'+$(this).text()+'</span>').prependTo(handle);
 			});
-			
-		}	
-		
+
+		}
+
 		label.addClass('ui-slider');
-		
+
 		control
 			.addClass((cType == 'input') ? 'ui-slider-input' : 'ui-slider-switch')
 			.keyup(function(){
 				self.refresh( $(this).val() );
 			});
-			
+
 		$(document).bind($.support.touch ? "touchmove" : "mousemove", function(event){
 			if ( self.dragging ) {
 				self.refresh( event );
 				return false;
 			}
 		});
-					
+
 		slider
 			.bind($.support.touch ? "touchstart" : "mousedown", function(event){
 				self.dragging = true;
@@ -91,9 +91,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				self.refresh( event );
 				return false;
 			});
-			
+
 		slider
-			.add(document)	
+			.add(document)
 			.bind($.support.touch ? "touchend" : "mouseup", function(){
 				if ( self.dragging ) {
 					self.dragging = false;
@@ -116,6 +116,96 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			});
 
 		slider.insertAfter(control);
+
+		// NOTE required to set focus properly :(
+    this.handle
+			.bind($.support.touch ? "touchstart" : "mousedown", function(){
+				$(this).focus();
+			});
+
+		this.handle.bind('keydown', function( event ) {
+			var ret = true,
+					index = $( this ).data( "aria-valuenow" ),
+					allowed,
+					curVal,
+					newVal,
+					step;
+
+				if ( self.options.disabled ) {
+					return;
+				}
+
+				switch ( event.keyCode ) {
+					case $.mobile.keyCode.HOME:
+					case $.mobile.keyCode.END:
+					case $.mobile.keyCode.PAGE_UP:
+					case $.mobile.keyCode.PAGE_DOWN:
+					case $.mobile.keyCode.UP:
+					case $.mobile.keyCode.RIGHT:
+					case $.mobile.keyCode.DOWN:
+					case $.mobile.keyCode.LEFT:
+						ret = false;
+						if ( !self._keySliding ) {
+							self._keySliding = true;
+							$( this ).addClass( "ui-state-active" );
+							// allowed = self._start( event, index );
+							// if ( allowed === false ) {
+							// 	return;
+							// }
+						}
+						break;
+				}
+
+				// step = self.options.step;
+				// if ( self.options.values && self.options.values.length ) {
+				// 	curVal = newVal = self.values( index );
+				// } else {
+				// 	curVal = newVal = self.value();
+				// }
+
+				switch ( event.keyCode ) {
+					case $.mobile.keyCode.HOME:
+					   self.refresh(min);
+						break;
+					case $.mobile.keyCode.END:
+					  self.refresh(max);
+						break;
+					case $.mobile.keyCode.PAGE_UP:
+						newVal = self._trimAlignValue( curVal + ( (self._valueMax() - self._valueMin()) / numPages ) );
+						break;
+					case $.mobile.keyCode.PAGE_DOWN:
+						newVal = self._trimAlignValue( curVal - ( (self._valueMax() - self._valueMin()) / numPages ) );
+						break;
+					case $.mobile.keyCode.UP:
+					case $.mobile.keyCode.RIGHT:
+						if ( curVal === self._valueMax() ) {
+							return;
+						}
+						newVal = self._trimAlignValue( curVal + step );
+						break;
+					case $.mobile.keyCode.DOWN:
+					case $.mobile.keyCode.LEFT:
+						if ( curVal === self._valueMin() ) {
+							return;
+						}
+						newVal = self._trimAlignValue( curVal - step );
+						break;
+				}
+
+				return ret;
+			})
+			.keyup(function( event ) {
+				var index = $( this ).data( "aria-valuenow" );
+
+				if ( self._keySliding ) {
+					self._keySliding = false;
+					// self._stop( event, index );
+					// self._change( event, index );
+					$( this ).removeClass( "ui-state-active" );
+				}
+
+			});
+
 		handle.bind('click', function(e){ return false; });
 		this.refresh();
 	},
@@ -155,7 +245,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 		//flip the stack of the bg colors
 		if ( percent > 60 && cType === "select" ) {
-			
+
 		}
 		this.handle.css("left", percent + "%");
 		this.handle.attr({
@@ -197,4 +287,4 @@ $.widget( "mobile.slider", $.mobile.widget, {
 	}
 });
 })( jQuery );
-	
+
