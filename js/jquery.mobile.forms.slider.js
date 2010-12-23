@@ -32,6 +32,8 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			val = (cType == 'input') ? parseFloat(control.val()) : control[0].selectedIndex,
 			min = (cType == 'input') ? parseFloat(control.attr('min')) : 0,
 			max = (cType == 'input') ? parseFloat(control.attr('max')) : control.find('option').length-1,
+			step = window.parseFloat(control.attr('data-step') || 1),
+
 			slider = $('<div class="ui-slider '+ selectClass +' ui-btn-down-'+ trackTheme+' ui-btn-corner-all" role="application"></div>'),
 			handle = $('<a href="#" class="ui-slider-handle"></a>')
 				.appendTo(slider)
@@ -117,93 +119,61 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 		slider.insertAfter(control);
 
-		// NOTE required to set focus properly :(
+		// NOTE force focus on handle
     this.handle
 			.bind($.support.touch ? "touchstart" : "mousedown", function(){
 				$(this).focus();
 			});
 
 		this.handle.bind('keydown', function( event ) {
-			var ret = true,
-					index = $( this ).data( "aria-valuenow" ),
-					allowed,
-					curVal,
-					newVal,
-					step;
+			var index = window.parseFloat($( this ).attr( "aria-valuenow" ), 10);
 
-				if ( self.options.disabled ) {
-					return;
+			if ( self.options.disabled ) {
+				return;
+			}
+
+			switch ( event.keyCode ) {
+			 case $.mobile.keyCode.HOME:
+			 case $.mobile.keyCode.END:
+			 case $.mobile.keyCode.PAGE_UP:
+			 case $.mobile.keyCode.PAGE_DOWN:
+			 case $.mobile.keyCode.UP:
+			 case $.mobile.keyCode.RIGHT:
+			 case $.mobile.keyCode.DOWN:
+			 case $.mobile.keyCode.LEFT:
+				event.preventDefault();
+
+				if ( !self._keySliding ) {
+					self._keySliding = true;
+					$( this ).addClass( "ui-state-active" );
 				}
+				break;
+			}
 
-				switch ( event.keyCode ) {
-					case $.mobile.keyCode.HOME:
-					case $.mobile.keyCode.END:
-					case $.mobile.keyCode.PAGE_UP:
-					case $.mobile.keyCode.PAGE_DOWN:
-					case $.mobile.keyCode.UP:
-					case $.mobile.keyCode.RIGHT:
-					case $.mobile.keyCode.DOWN:
-					case $.mobile.keyCode.LEFT:
-						ret = false;
-						if ( !self._keySliding ) {
-							self._keySliding = true;
-							$( this ).addClass( "ui-state-active" );
-							// allowed = self._start( event, index );
-							// if ( allowed === false ) {
-							// 	return;
-							// }
-						}
-						break;
-				}
-
-				// step = self.options.step;
-				// if ( self.options.values && self.options.values.length ) {
-				// 	curVal = newVal = self.values( index );
-				// } else {
-				// 	curVal = newVal = self.value();
-				// }
-
-				switch ( event.keyCode ) {
-					case $.mobile.keyCode.HOME:
-					   self.refresh(min);
-						break;
-					case $.mobile.keyCode.END:
-					  self.refresh(max);
-						break;
-					case $.mobile.keyCode.PAGE_UP:
-						newVal = self._trimAlignValue( curVal + ( (self._valueMax() - self._valueMin()) / numPages ) );
-						break;
-					case $.mobile.keyCode.PAGE_DOWN:
-						newVal = self._trimAlignValue( curVal - ( (self._valueMax() - self._valueMin()) / numPages ) );
-						break;
-					case $.mobile.keyCode.UP:
-					case $.mobile.keyCode.RIGHT:
-						if ( curVal === self._valueMax() ) {
-							return;
-						}
-						newVal = self._trimAlignValue( curVal + step );
-						break;
-					case $.mobile.keyCode.DOWN:
-					case $.mobile.keyCode.LEFT:
-						if ( curVal === self._valueMin() ) {
-							return;
-						}
-						newVal = self._trimAlignValue( curVal - step );
-						break;
-				}
-
-				return ret;
-			})
+			switch ( event.keyCode ) {
+			 case $.mobile.keyCode.HOME:
+				self.refresh(min);
+				break;
+			 case $.mobile.keyCode.END:
+				self.refresh(max);
+				break;
+			 case $.mobile.keyCode.PAGE_UP:
+			 case $.mobile.keyCode.UP:
+			 case $.mobile.keyCode.RIGHT:
+				self.refresh(index + step);
+				break;
+			 case $.mobile.keyCode.PAGE_DOWN:
+			 case $.mobile.keyCode.DOWN:
+			 case $.mobile.keyCode.LEFT:
+				self.refresh(index - step);
+				break;
+			}
+		})
 			.keyup(function( event ) {
-				var index = $( this ).data( "aria-valuenow" );
-
 				if ( self._keySliding ) {
 					self._keySliding = false;
-					// self._stop( event, index );
-					// self._change( event, index );
 					$( this ).removeClass( "ui-state-active" );
 				}
-
 			});
 
 		handle.bind('click', function(e){ return false; });
