@@ -35,4 +35,27 @@
 			increment: -1
 		});
 	});
+
+	test( "slider should move to range minimum on end key press", function(){
+		var selector = "#range-slider-end",
+				initialVal = window.parseFloat($(selector).val(), 10),
+		    max = window.parseFloat($(selector).attr('max'), 10);
+
+		keypressTest({
+			selector: selector,
+			keyCodes: ['END'],
+			increment: max - initialVal
+		});
+	});
+
+	test( "slider should move to range minimum on end key press", function(){
+		var selector = "#range-slider-home",
+				initialVal = window.parseFloat($(selector).val(), 10);
+
+		keypressTest({
+			selector: selector,
+			keyCodes: ['HOME'],
+			increment: 0 - initialVal
+		});
+	});
 })(jQuery);
