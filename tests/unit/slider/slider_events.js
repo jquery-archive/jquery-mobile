@@ -36,7 +36,7 @@
 		});
 	});
 
-	test( "slider should move to range minimum on end key press", function(){
+	test( "slider should move to range minimum on end keypress", function(){
 		var selector = "#range-slider-end",
 				initialVal = window.parseFloat($(selector).val(), 10),
 		    max = window.parseFloat($(selector).attr('max'), 10);
@@ -48,7 +48,7 @@
 		});
 	});
 
-	test( "slider should move to range minimum on end key press", function(){
+	test( "slider should move to range minimum on end keypress", function(){
 		var selector = "#range-slider-home",
 				initialVal = window.parseFloat($(selector).val(), 10);
 
