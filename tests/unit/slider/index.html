@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8" />
-	<title>jQuery Mobile Navigation Test Suite</title>
+	<title>jQuery Mobile Slider Events Test Suite</title>
 
 	<script type="text/javascript" src="../../../js/jquery.js"></script>
 	<script type="text/javascript" src="../../../js/jquery.ui.widget.js"></script>
@@ -37,17 +37,16 @@
 	<link rel="stylesheet" href="../../../external/qunit.css" type="text/css"/>
 	<script type="text/javascript" src="../../../external/qunit.js"></script>
 
-	<script type="text/javascript" src="navigation_core.js"></script>
+	<script type="text/javascript" src="slider_events.js"></script>
 </head>
 <body>
 
-<h1 id="qunit-header">jQuery Mobile Navigation Test Suite</h1>
+<h1 id="qunit-header">jQuery Mobile Slider Event Test Suite</h1>
 <h2 id="qunit-banner"></h2>
 <h2 id="qunit-userAgent"></h2>
 <ol id="qunit-tests">
 </ol>
-
-<!-- NOTE body must be used in place of main otherwise transition behaviour fails -->
+</body>
 
 <style>
 	[data-role='page'] {
@@ -63,35 +62,24 @@
 </style>
 
 <div id="foo" data-role="page">
-	<a href="#bar" data-transition="flip"></a>
-</div>
+	<div data-role="fieldcontain">
+		<label for="slider-1">Input slider:</label>
+		<input type="range" name="slider-1" id="range-slider-up" value="0" min="0" max="100" data-theme="b" data-track-theme="a" />
+	</div>
 
-<div id="bar" data-role="page">
-	<a href="#baz"></a>
-</div>
+	<div data-role="fieldcontain">
+		<label for="slider-1">Input slider:</label>
+		<input type="range" name="slider-1" id="range-slider-down" value="10" min="0" max="100" data-theme="b" data-track-theme="a" />
+	</div>
 
-<div id="baz" data-role="page">
-	<a href="#foo"></a>
-</div>
+	<div data-role="fieldcontain">
+		<label for="slider-1">Input slider:</label>
+		<input type="range" name="slider-1" id="range-slider-home" value="75" min="0" max="100" data-theme="b" data-track-theme="a" />
+	</div>
 
-<div id="fade-trans" data-role="page">
-	<a href="#flip-trans" data-transition="fade"></a>
+	<div data-role="fieldcontain">
+		<label for="slider-1">Input slider:</label>
+		<input type="range" name="slider-1" id="range-slider-end" value="15" min="0" max="100" data-theme="b" data-track-theme="a" />
+	</div>
 </div>
-
-<div id="flip-trans" data-role="page">
-	<a href="#fade-trans" data-transition="flip"></a>
-</div>
-
-<div id="no-trans" data-role="page">
-	<a href="#pop-trans"></a>
-</div>
-
-<div id="pop-trans" data-role="page">
-	<a href="#no-trans" data-transition="pop"></a>
-</div>
-
-<div id="default-trans" data-role="page">
-	<a href="#no-trans"></a>
-</div>
-</body>
 </html>
