@@ -1,29 +1,25 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-  "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <title>Integration Test Runner</title>
-	<link rel="stylesheet"  href="../../themes/default" />
-	<script type="text/javascript" src="../../js/"></script>
+	<meta charset="UTF-8" />
+	<title>jQuery Mobile Listview Integration Test</title>
 
-  <link rel="stylesheet" type="text/css" href="../../external/jasmine-1.0.1/jasmine.css">
-  <script type="text/javascript" src="../../external/jasmine-1.0.1/jasmine.js"></script>
-  <script type="text/javascript" src="../../external/jasmine-1.0.1/jasmine-html.js"></script>
-	<script type="text/javascript" src="./helpers/spec_helpers.js"></script>
+	<script type="text/javascript" src="../../../js/"></script>
+	<script type="text/javascript" src="../../jquery.testHelper.js"></script>
+	<link rel="stylesheet"  href="../../../themes/default" />
+	<link rel="stylesheet" href="../../../external/qunit.css" type="text/css"/>
+	<script type="text/javascript" src="../../../external/qunit.js"></script>
 
-  <!-- include source files here... -->
-
-
-  <!-- include spec files here... -->
-  <script type="text/javascript" src="specs/ListviewSpec.js"></script>
-
+	<script type="text/javascript" src="listview_integration.js"></script>
 </head>
 <body>
 
-<script type="text/javascript">
-  jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
-  jasmine.getEnv().execute();
-</script>
+<h1 id="qunit-header">jQuery Mobile Listview Integration Test</h1>
+<h2 id="qunit-banner"></h2>
+<h2 id="qunit-userAgent"></h2>
+<ol id="qunit-tests">
+</ol>
+
 <!-- Basic Linked view test -->
 <div data-role="page" id='basic-linked-test'>
 	<div data-role="header" data-position="inline">
@@ -169,7 +165,6 @@
 		</ul>
 	</div>
 </div>
-
 
 </body>
 </html>
