@@ -1,12 +1,3 @@
-/*function basicListViewHTML() {
-	var html = '<ul data-role="listview" data-theme="g">\
-								<li><a href="acura.html">Acura</a></li>\
-								<li><a href="audi.html">Audi</a></li>\
-								<li><a href="bmw.html">BMW</a></li>\
-							</ul>';
-							
-	return html;			
-}*/
 var listViewHelper = {};
 
 (function ($, lvh, undefined ) {

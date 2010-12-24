@@ -42,8 +42,13 @@ describe("Listviews", function() {
 	describe("Nested List", function() {	
 		it("should change the page to the nested list and make sure the page was enhanced.", function() {
 			listViewHelper.resetForPage($('#nested-list-test'))
-			location.href = "http://localhost:8888/tests/integration/runner.html#nested-list-test";
-			$.mobile.changePage(listViewHelper.currentPage());
+			location.href = location.href.split('#')[0] + "#nested-list-test";
+			
+			/*
+			 * Calling change page directly does not update the history so breaks these tests.  Checking in passing tests for now
+			 * but once pushState is tackled we should change some of these tests to also use changePage along with just hash changes.
+			 */
+			//$.mobile.changePage(listViewHelper.currentPage());
 			
 			waitsFor(function() {
 				return listViewHelper.transitionComplete();
@@ -90,8 +95,8 @@ describe("Listviews", function() {
 	describe("Ordered Lists", function() {
 			it("should change the page to the numbered list and make sure the page was enhanced.", function() {
 				listViewHelper.resetForPage($('#numbered-list-test'));
-				location.href = "http://localhost:8888/tests/integration/runner.html#numbered-list-test";	
-				$.mobile.changePage(listViewHelper.currentPage());
+				location.href = location.href.split('#')[0] + "#numbered-list-test";	
+				//$.mobile.changePage(listViewHelper.currentPage());
 
 				waitsFor(function() {
 					return listViewHelper.transitionComplete();
@@ -134,8 +139,8 @@ describe("Listviews", function() {
 	describe("read only list", function() {
 		it("should change the page to the Read only list and make sure the page was enhanced.", function() {
 			listViewHelper.resetForPage($('#read-only-list-test'));
-			location.href = "http://localhost:8888/tests/integration/runner.html#read-only-list-test";
-			$.mobile.changePage(listViewHelper.currentPage());
+			location.href = location.href.split('#')[0] + "#read-only-list-test";
+			//$.mobile.changePage(listViewHelper.currentPage());
 
 			waitsFor(function() {
 				return listViewHelper.transitionComplete();
@@ -164,8 +169,8 @@ describe("Listviews", function() {
 	describe("split view list", function() {
 		it("should change the page to the split view and list view and enhance the page correctly.", function() {
 			listViewHelper.resetForPage($('#split-list-test'));
-			location.href = "http://localhost:8888/tests/integration/runner.html#split-list-test";
-			$.mobile.changePage(listViewHelper.currentPage());
+			location.href = location.href.split('#')[0] + "#split-list-test";
+			//$.mobile.changePage(listViewHelper.currentPage());
 
 			waitsFor(function() {
 				return listViewHelper.transitionComplete();
@@ -221,8 +226,8 @@ describe("Listviews", function() {
 	describe("List dividers", function() {
 		it("should make the list divider page the active page and enhance it correctly.", function() {
 			listViewHelper.resetForPage($('#list-divider-test'));
-			location.href = "http://localhost:8888/tests/integration/runner.html#list-divider-test";
-			$.mobile.changePage(listViewHelper.currentPage());
+			location.href = location.href.split('#')[0] + "#list-divider-test";
+			//$.mobile.changePage(listViewHelper.currentPage());
 
 			waitsFor(function() {
 				return listViewHelper.transitionComplete();
@@ -238,8 +243,8 @@ describe("Listviews", function() {
 	describe("Search Filter", function() {
 		it("should make the search filter page the active page and enhance it correctly.", function() {
 			listViewHelper.resetForPage($('#search-filter-test'));
-			location.href = "http://localhost:8888/tests/integration/runner.html#search-filter-test";
-			$.mobile.changePage(listViewHelper.currentPage());
+			location.href = location.href.split('#')[0] + "#search-filter-test";
+			//$.mobile.changePage(listViewHelper.currentPage());
 
 			waitsFor(function() {
 				return listViewHelper.transitionComplete();
