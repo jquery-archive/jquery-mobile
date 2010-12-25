@@ -4,7 +4,7 @@
 * Dual licensed under the MIT (MIT-LICENSE.txt) or GPL (GPL-LICENSE.txt) licenses.
 */
 .ui-select { display: block; }
-.ui-select select { position: absolute; left: -99999px; }
+.ui-select select { position: absolute; left: -99999px; top: -99999px; }
 .ui-select .ui-btn-icon-right .ui-btn-inner { padding-right: 45px; } 
 .ui-select .ui-btn-icon-right .ui-icon { right: 15px;  }
 
