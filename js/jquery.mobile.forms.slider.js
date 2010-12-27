@@ -131,16 +131,16 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				var valuenow = $( this ).attr( "aria-valuenow" ),
 					  index;
 
-				// convert switch values to slider
-				if(valuenow.match(/off|on/)){
-					index = switchValues[valuenow];
-				} else {
-					index = window.parseFloat(valuenow, 10);
-				}
-
 				if ( self.options.disabled ) {
 					return;
 				}
+
+				// convert switch values to slider
+				if(valuenow.match(/off|on/)){
+					valuenow = switchValues[valuenow];
+				}
+
+				index = window.parseFloat(valuenow, 10);
 
 				// In all cases prevent the default and mark the handle as active
 				switch ( event.keyCode ) {
