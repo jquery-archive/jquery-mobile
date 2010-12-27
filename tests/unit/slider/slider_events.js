@@ -13,9 +13,12 @@
 		expect( opts.keyCodes.length );
 
 		$.each(opts.keyCodes, function(i, elem){
+
+			// stub the keycode value and trigger the keypress
 			$.Event.prototype.keyCode = $.mobile.keyCode[elem];
 			handle.trigger('keydown');
-			val = val + opts.increment;
+
+			val += opts.increment;
 			same(val, window.parseFloat(slider.val(), 10), "new value is one larger");
 		});
 	};
@@ -28,7 +31,7 @@
 		});
 	});
 
-	test( "slider should move right with down, left, and page down keypress", function(){
+	test( "slider should move left with down, left, and page down keypress", function(){
 		keypressTest({
 			selector: '#range-slider-down',
 			keyCodes: ['DOWN', 'LEFT', 'PAGE_DOWN'],
@@ -56,6 +59,49 @@
 			selector: selector,
 			keyCodes: ['HOME'],
 			increment: 0 - initialVal
+		});
+	});
+
+
+	// generic switch test function
+	var sliderSwitchTest = function(opts){
+		var slider = $("#slider-switch"),
+			  handle = slider.siblings('.ui-slider').find('a'),
+		    switchValues = {
+					'off' : 0,
+					'on' : 1
+				};
+
+		// One for the select and one for the aria-valuenow
+		expect( opts.keyCodes.length * 2 );
+
+		$.each(opts.keyCodes, function(i, elem){
+			// reset the values
+			slider[0].selectedIndex = switchValues[opts.start];
+			handle.attr({'aria-valuenow' : opts.start });
+
+			// stub the keycode and trigger the event
+			$.Event.prototype.keyCode = $.mobile.keyCode[elem];
+			handle.trigger('keydown');
+
+			same(handle.attr('aria-valuenow'), opts.finish, "handle value is " + opts.finish);
+			same(slider[0].selectedIndex, switchValues[opts.finish], "select input has correct index");
+		});
+	};
+
+	test( "switch should select on with up, right, page up and end", function(){
+		sliderSwitchTest({
+			start: 'off',
+			finish: 'on',
+			keyCodes: ['UP', 'RIGHT', 'PAGE_UP', 'END']
+		});
+	});
+
+	test( "switch should select off with down, left, page down and home", function(){
+		sliderSwitchTest({
+			start: 'on',
+			finish: 'off',
+		  keyCodes: ['DOWN', 'LEFT', 'PAGE_DOWN', 'HOME']
 		});
 	});
 })(jQuery);
