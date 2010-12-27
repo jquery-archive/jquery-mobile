@@ -46,7 +46,8 @@ $.widget( "mobile.slider", $.mobile.widget, {
 					'aria-valuetext': val,
 					'title': val,
 					'aria-labelledby': labelID
-				});
+				}),
+			switchValues = {'off' : 0, 'on': 1};
 
 		$.extend(this, {
 			slider: slider,
@@ -120,57 +121,66 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		slider.insertAfter(control);
 
 		// NOTE force focus on handle
-    this.handle
+		this.handle
 			.bind($.support.touch ? "touchstart" : "mousedown", function(){
 				$(this).focus();
 			});
 
-		this.handle.bind('keydown', function( event ) {
-			var index = window.parseFloat($( this ).attr( "aria-valuenow" ), 10);
+		this.handle
+			.bind('keydown', function( event ) {
+				var valuenow = $( this ).attr( "aria-valuenow" ),
+					  index;
 
-			if ( self.options.disabled ) {
-				return;
-			}
-
-			// In all cases prevent the default and mark the handle as active
-			switch ( event.keyCode ) {
-			 case $.mobile.keyCode.HOME:
-			 case $.mobile.keyCode.END:
-			 case $.mobile.keyCode.PAGE_UP:
-			 case $.mobile.keyCode.PAGE_DOWN:
-			 case $.mobile.keyCode.UP:
-			 case $.mobile.keyCode.RIGHT:
-			 case $.mobile.keyCode.DOWN:
-			 case $.mobile.keyCode.LEFT:
-				event.preventDefault();
-
-				if ( !self._keySliding ) {
-					self._keySliding = true;
-					$( this ).addClass( "ui-state-active" );
+				// convert switch values to slider
+				if(valuenow.match(/off|on/)){
+					index = switchValues[valuenow];
+				} else {
+					index = window.parseFloat(valuenow, 10);
 				}
-				break;
-			}
 
-			// move the slider according to the keypress
-			switch ( event.keyCode ) {
-			 case $.mobile.keyCode.HOME:
-				self.refresh(min);
-				break;
-			 case $.mobile.keyCode.END:
-				self.refresh(max);
-				break;
-			 case $.mobile.keyCode.PAGE_UP:
-			 case $.mobile.keyCode.UP:
-			 case $.mobile.keyCode.RIGHT:
-				self.refresh(index + step);
-				break;
-			 case $.mobile.keyCode.PAGE_DOWN:
-			 case $.mobile.keyCode.DOWN:
-			 case $.mobile.keyCode.LEFT:
-				self.refresh(index - step);
-				break;
-			}
-		}) // remove active mark
+				if ( self.options.disabled ) {
+					return;
+				}
+
+				// In all cases prevent the default and mark the handle as active
+				switch ( event.keyCode ) {
+				 case $.mobile.keyCode.HOME:
+				 case $.mobile.keyCode.END:
+				 case $.mobile.keyCode.PAGE_UP:
+				 case $.mobile.keyCode.PAGE_DOWN:
+				 case $.mobile.keyCode.UP:
+				 case $.mobile.keyCode.RIGHT:
+				 case $.mobile.keyCode.DOWN:
+				 case $.mobile.keyCode.LEFT:
+					event.preventDefault();
+
+					if ( !self._keySliding ) {
+						self._keySliding = true;
+						$( this ).addClass( "ui-state-active" );
+					}
+					break;
+				}
+
+				// move the slider according to the keypress
+				switch ( event.keyCode ) {
+				 case $.mobile.keyCode.HOME:
+					self.refresh(min);
+					break;
+				 case $.mobile.keyCode.END:
+					self.refresh(max);
+					break;
+				 case $.mobile.keyCode.PAGE_UP:
+				 case $.mobile.keyCode.UP:
+				 case $.mobile.keyCode.RIGHT:
+					self.refresh(index + step);
+					break;
+				 case $.mobile.keyCode.PAGE_DOWN:
+				 case $.mobile.keyCode.DOWN:
+				 case $.mobile.keyCode.LEFT:
+					self.refresh(index - step);
+					break;
+				}
+			}) // remove active mark
 			.keyup(function( event ) {
 				if ( self._keySliding ) {
 					self._keySliding = false;
