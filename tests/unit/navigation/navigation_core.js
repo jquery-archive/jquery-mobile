@@ -47,6 +47,22 @@ test( "changePage applys transition class to mobile viewport for default transit
 	ok($("body").hasClass(transitioning), "has transitioning class");
 });
 
+test( "Routing for dialogs with ajaxLinksEnabled false does not change href", function(){
+	var changePageFn = $.mobile.changePage;
+	var ajaxLinksEnabledVal = $.mobile.ajaxLinksEnabled;
+
+	try {
+		expect(1);
+		$.mobile.ajaxLinksEnabled = false;
+		$.mobile.changePage = function(){ ok(true, true, "changePage should be called when navigating to a dialog.") };
+		$("#dialog-link-anchor").click();
+	}
+	finally {
+		$.mobile.changePage = changePageFn;
+		$.mobile.ajaxLinksEnabled = ajaxLinksEnabledVal;
+	}
+});
+
 test( "explicit transition preferred for page navigation reversal (ie back)", function(){
 	$.fn.animationComplete = function(){};
 
@@ -108,3 +124,4 @@ test( "default transition is slide", function(){
 		start();
 	}, 900);
 });
+

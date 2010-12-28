@@ -411,11 +411,13 @@
 
 	//click routing - direct to HTTP or Ajax, accordingly
 	$( "a" ).live( "click", function(event) {
-
-		if( !$.mobile.ajaxLinksEnabled ){ return; }
 		var $this = $(this),
-			//get href, remove same-domain protocol and host
-			href = $this.attr( "href" ).replace( location.protocol + "//" + location.host, ""),
+			isTargetDialog = $this.data("rel") === "dialog";
+		
+		if( !$.mobile.ajaxLinksEnabled && !isTargetDialog ){ return; }
+
+		//get href, remove same-domain protocol and host
+		var	href = $this.attr( "href" ).replace( location.protocol + "//" + location.host, ""),
 			//if target attr is specified, it's external, and we mimic _blank... for now
 			target = $this.is( "[target]" ),
 			//if it still starts with a protocol, it's external, or could be :mailto, etc
@@ -428,7 +430,7 @@
 
 		$activeClickedLink = $this.closest( ".ui-btn" ).addClass( $.mobile.activeBtnClass );
 
-		if( external || !$.mobile.ajaxLinksEnabled ){
+		if( external || (!$.mobile.ajaxLinksEnabled && !isTargetDialog) ){
 			//remove active link class if external
 			removeActiveLinkClass(true);
 
