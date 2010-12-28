@@ -239,7 +239,14 @@
 			
 			href.replace(/^#/,'');
 			
-			changePage(href, transition, back, changeHashOnSuccess);			
+			// if the ref value is refresh, will ask to treat the href as a fresh page
+			var refresh = $this.is("[rel=refresh]");
+			if (refresh) {
+				var to = {url: href, type: 'get' };
+				changePage(to, transition, back, changeHashOnSuccess);
+			} else {
+				changePage(href, transition, back, changeHashOnSuccess);			
+			}	
 		}
 		event.preventDefault();
 	});
