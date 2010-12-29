@@ -175,7 +175,7 @@
 
 		function defaultTransition(){
 			if(transition === undefined){
-				transition = $.mobile.defaultTransition;
+				transition = ( nextPageRole && nextPageRole === 'dialog' ) ? 'pop' : $.mobile.defaultTransition;
 			}
 		}
 

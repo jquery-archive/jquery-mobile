@@ -108,3 +108,17 @@ test( "default transition is slide", function(){
 		start();
 	}, 900);
 });
+
+test( "default transition is pop for a dialog", function(){
+	stop();
+	setTimeout(function(){
+		//guarantee that we check only the newest changes
+		removePageTransClasses();
+
+		$("#default-trans-dialog > a").click();
+
+		ok($("#no-trans-dialog").hasClass("pop"), "expected the pop class to be present but instead was " + $("#no-trans-dialog").attr('class'));
+
+		start();
+	}, 900);
+});

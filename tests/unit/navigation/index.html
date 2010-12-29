@@ -50,7 +50,7 @@
 <!-- NOTE body must be used in place of main otherwise transition behaviour fails -->
 
 <style>
-	[data-role='page'] {
+	[data-role='page'], [data-role='dialog'] {
 	  position: absolute;
 	  top: -10000px;
 	  left: -10000px;
@@ -93,5 +93,14 @@
 <div id="default-trans" data-role="page">
 	<a href="#no-trans"></a>
 </div>
+
+<div id="default-trans-dialog" data-role="page">
+	<a href="#no-trans-dialog" data-rel="dialog"></a>
+</div>
+
+<div id="no-trans-dialog" data-role="page">
+</div>
+
+
 </body>
 </html>
