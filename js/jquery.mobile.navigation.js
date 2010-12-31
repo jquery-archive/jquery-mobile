@@ -17,7 +17,7 @@
 			//get path from current hash, or from a file path
 			get: function( newPath ){
 				if( newPath == undefined ){
-					newPath = location.hash;
+				    newPath = location.hash;
 				}
 				newPath = newPath.replace(/#/,'').split('/');
 				if(newPath.length){
@@ -392,7 +392,7 @@
 		}
 
 		//if it's a relative href, prefix href with base url
-		if( url.indexOf('/') && url.indexOf('#') !== 0 ){
+		if( url.indexOf('/') && url.indexOf('#') !== 0 && $.mobile.hashNavigationEnabled ){
 			url = path.get() + url;
 		}
 
@@ -411,7 +411,6 @@
 
 	//click routing - direct to HTTP or Ajax, accordingly
 	$( "a" ).live( "click", function(event) {
-
 		if( !$.mobile.ajaxLinksEnabled ){ return; }
 		var $this = $(this),
 			//get href, remove same-domain protocol and host
@@ -448,7 +447,7 @@
 			nextPageRole = $this.attr( "data-rel" );
 
 			//if it's a relative href, prefix href with base url
-			if( href.indexOf('/') && href.indexOf('#') !== 0 ){
+			if( href.indexOf('/') && href.indexOf('#') !== 0 && $.mobile.hashNavigationEnabled ){
 				href = path.get() + href;
 			}
 
@@ -456,6 +455,7 @@
 
 			$.mobile.changePage(href, transition, back);
 		}
+		
 		event.preventDefault();
 	});
 
@@ -471,8 +471,9 @@
 		if( $(".ui-page-active").is("[data-role=" + $.mobile.nonHistorySelectors + "]") ){
 			return;
 		}
-
-		var to = location.hash,
+        
+        //If hash navigation is disabled, to should be set to false
+		var to = $.mobile.hashNavigationEnabled && location.hash,
 			transition = triggered ? false : undefined;
 
 		//if to is defined, use it

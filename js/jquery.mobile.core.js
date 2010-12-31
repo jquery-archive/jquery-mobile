@@ -32,6 +32,9 @@
 
 		//automatically handle form submissions through Ajax, when possible
 		ajaxFormsEnabled: true,
+		
+		//automatically listen for hash changes and navigate accordingly
+		hashNavigationEnabled: true,
 
 		//set default transition - 'none' for no transitions
 		defaultTransition: 'slide',
