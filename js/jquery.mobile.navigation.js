@@ -463,6 +463,9 @@
 
 	//hashchange event handler
 	$window.bind( "hashchange", function(e, triggered) {
+	    if( !$.mobile.hashNavigationEnabled && !triggered )
+	        return;
+	        
 		if( !hashListener ){
 			hashListener = true;
 			return;
