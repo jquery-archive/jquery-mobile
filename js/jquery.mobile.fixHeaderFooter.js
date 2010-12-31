@@ -57,7 +57,7 @@ $.fixedToolbars = (function(){
 			.bind('scrollstop',function(event){
 				if( $(event.target).closest(ignoreTargets).length ){ return; }
 				scrollTriggered = false;
-				if (stateBefore == 'overlay') {
+				if (stateBefore == 'overlay' || stateBefore == 'inline') {
 					$.fixedToolbars.show();
 				}
 				stateBefore = null;
