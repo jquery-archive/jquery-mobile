@@ -4,7 +4,7 @@
 * Dual licensed under the MIT (MIT-LICENSE.txt) or GPL (GPL-LICENSE.txt) licenses.
 */
 .ui-select { display: block; }
-.ui-select select { position: absolute; left: -99999px; }
+.ui-select select { position: absolute; left: -99999px; top: -99999px; }
 .ui-select .ui-btn-icon-right .ui-btn-inner { padding-right: 45px; } 
 .ui-select .ui-btn-icon-right .ui-icon { right: 15px;  }
 
@@ -22,7 +22,7 @@ label.ui-select { font-size: 16px; line-height: 1.4;  font-weight: normal; margi
 .ui-selectmenu-screen { position: absolute; top: 0; left: 0; width: 100%; height: 100%;  z-index: 99; }
 .ui-screen-hidden, .ui-selectmenu-list .ui-li .ui-icon { display: none; }
 .ui-selectmenu-list .ui-li .ui-icon { display: block; }
-.ui-selectmenu-placeholder { display: none; }
+.ui-li.ui-selectmenu-placeholder { display: none; }
 
 .min-width-480px label.ui-select { display: inline-block;  width: 20%;  margin: 0 2% 0 0; }
 .min-width-480px .ui-select { width: 60%; display: inline-block; }

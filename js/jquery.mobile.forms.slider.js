@@ -3,7 +3,7 @@
 * Copyright (c) jQuery Project
 * Dual licensed under the MIT or GPL Version 2 licenses.
 * http://jquery.org/license
-*/  
+*/
 (function($, undefined ) {
 $.widget( "mobile.slider", $.mobile.widget, {
 	options: {
@@ -11,19 +11,19 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		trackTheme: null,
 		disabled: false
 	},
-	_create: function(){	
+	_create: function(){
 		var self = this,
 
 			control = this.element,
-		
-			parentTheme = control.parents('[class*=ui-bar-],[class*=ui-body-]').eq(0),	
-			
+
+			parentTheme = control.parents('[class*=ui-bar-],[class*=ui-body-]').eq(0),
+
 			parentTheme = parentTheme.length ? parentTheme.attr('class').match(/ui-(bar|body)-([a-z])/)[2] : 'c',
-					
+
 			theme = this.options.theme ? this.options.theme : parentTheme,
-			
+
 			trackTheme = this.options.trackTheme ? this.options.trackTheme : parentTheme,
-			
+
 			cType = control[0].nodeName.toLowerCase(),
 			selectClass = (cType == 'select') ? 'ui-slider-switch' : '',
 			controlID = control.attr('id'),
@@ -32,6 +32,8 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			val = (cType == 'input') ? parseFloat(control.val()) : control[0].selectedIndex,
 			min = (cType == 'input') ? parseFloat(control.attr('min')) : 0,
 			max = (cType == 'input') ? parseFloat(control.attr('max')) : control.find('option').length-1,
+			step = window.parseFloat(control.attr('data-step') || 1),
+
 			slider = $('<div class="ui-slider '+ selectClass +' ui-btn-down-'+ trackTheme+' ui-btn-corner-all" role="application"></div>'),
 			handle = $('<a href="#" class="ui-slider-handle"></a>')
 				.appendTo(slider)
@@ -44,7 +46,8 @@ $.widget( "mobile.slider", $.mobile.widget, {
 					'aria-valuetext': val,
 					'title': val,
 					'aria-labelledby': labelID
-				});
+				}),
+			switchValues = {'off' : 0, 'on': 1};
 
 		$.extend(this, {
 			slider: slider,
@@ -56,32 +59,32 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		if(cType == 'select'){
 			slider.wrapInner('<div class="ui-slider-inneroffset"></div>');
 			var options = control.find('option');
-				
+
 			control.find('option').each(function(i){
 				var side = (i==0) ?'b':'a',
 					corners = (i==0) ? 'right' :'left',
 					theme = (i==0) ? ' ui-btn-down-' + trackTheme :' ui-btn-active';
-				$('<div class="ui-slider-labelbg ui-slider-labelbg-'+ side + theme +' ui-btn-corner-'+ corners+'"></div>').prependTo(slider);	
+				$('<div class="ui-slider-labelbg ui-slider-labelbg-'+ side + theme +' ui-btn-corner-'+ corners+'"></div>').prependTo(slider);
 				$('<span class="ui-slider-label ui-slider-label-'+ side + theme +' ui-btn-corner-'+ corners+'" role="img">'+$(this).text()+'</span>').prependTo(handle);
 			});
-			
-		}	
-		
+
+		}
+
 		label.addClass('ui-slider');
-		
+
 		control
 			.addClass((cType == 'input') ? 'ui-slider-input' : 'ui-slider-switch')
 			.keyup(function(){
 				self.refresh( $(this).val() );
 			});
-			
+
 		$(document).bind($.support.touch ? "touchmove" : "mousemove", function(event){
 			if ( self.dragging ) {
 				self.refresh( event );
 				return false;
 			}
 		});
-					
+
 		slider
 			.bind($.support.touch ? "touchstart" : "mousedown", function(event){
 				self.dragging = true;
@@ -91,9 +94,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				self.refresh( event );
 				return false;
 			});
-			
+
 		slider
-			.add(document)	
+			.add(document)
 			.bind($.support.touch ? "touchend" : "mouseup", function(){
 				if ( self.dragging ) {
 					self.dragging = false;
@@ -116,7 +119,75 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			});
 
 		slider.insertAfter(control);
-		handle.bind('click', function(e){ return false; });
+
+		// NOTE force focus on handle
+		this.handle
+			.bind($.support.touch ? "touchstart" : "mousedown", function(){
+				$(this).focus();
+			});
+
+		this.handle
+			.bind('keydown', function( event ) {
+				var valuenow = $( this ).attr( "aria-valuenow" ),
+					  index;
+
+				if ( self.options.disabled ) {
+					return;
+				}
+
+				// convert switch values to slider
+				if(valuenow.match(/off|on/)){
+					valuenow = switchValues[valuenow];
+				}
+
+				index = window.parseFloat(valuenow, 10);
+
+				// In all cases prevent the default and mark the handle as active
+				switch ( event.keyCode ) {
+				 case $.mobile.keyCode.HOME:
+				 case $.mobile.keyCode.END:
+				 case $.mobile.keyCode.PAGE_UP:
+				 case $.mobile.keyCode.PAGE_DOWN:
+				 case $.mobile.keyCode.UP:
+				 case $.mobile.keyCode.RIGHT:
+				 case $.mobile.keyCode.DOWN:
+				 case $.mobile.keyCode.LEFT:
+					event.preventDefault();
+
+					if ( !self._keySliding ) {
+						self._keySliding = true;
+						$( this ).addClass( "ui-state-active" );
+					}
+					break;
+				}
+
+				// move the slider according to the keypress
+				switch ( event.keyCode ) {
+				 case $.mobile.keyCode.HOME:
+					self.refresh(min);
+					break;
+				 case $.mobile.keyCode.END:
+					self.refresh(max);
+					break;
+				 case $.mobile.keyCode.PAGE_UP:
+				 case $.mobile.keyCode.UP:
+				 case $.mobile.keyCode.RIGHT:
+					self.refresh(index + step);
+					break;
+				 case $.mobile.keyCode.PAGE_DOWN:
+				 case $.mobile.keyCode.DOWN:
+				 case $.mobile.keyCode.LEFT:
+					self.refresh(index - step);
+					break;
+				}
+			}) // remove active mark
+			.keyup(function( event ) {
+				if ( self._keySliding ) {
+					self._keySliding = false;
+					$( this ).removeClass( "ui-state-active" );
+				}
+			});
+
 		this.refresh();
 	},
 
@@ -155,7 +226,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 		//flip the stack of the bg colors
 		if ( percent > 60 && cType === "select" ) {
-			
+
 		}
 		this.handle.css("left", percent + "%");
 		this.handle.attr({
@@ -197,4 +268,4 @@ $.widget( "mobile.slider", $.mobile.widget, {
 	}
 });
 })( jQuery );
-	
+

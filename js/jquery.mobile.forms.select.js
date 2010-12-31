@@ -74,7 +74,9 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					.appendTo( $.mobile.pageContainer )
 					.page(),	
 					
-			menuPageContent = menuPage.find( ".ui-content" ),	
+			menuPageContent = menuPage.find( ".ui-content" ),
+			
+			menuPageClose = menuPage.find( ".ui-header a" ),
 					
 			screen = $( "<div>", {"class": "ui-selectmenu-screen ui-screen-hidden"})
 						.appendTo( thisPage ),		
@@ -196,9 +198,15 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		});
 		
 		//events on "screen" overlay + close button
-		screen.add( headerClose ).click(function(event){
+		screen.add( headerClose ).add( menuPageClose ).click(function(event){
 			self.close();
 			event.preventDefault();
+			
+			// if the dialog's close icon was clicked, prevent the dialog's close
+			// handler from firing. selectmenu's should take precedence
+			if( $.contains(menuPageClose[0], event.target) ){
+				event.stopImmediatePropagation();
+			}
 		});
 	},
 	
@@ -393,6 +401,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		function focusButton(){
 			setTimeout(function(){
 				self.button.focus();
+				
 				//remove active class from button
 				self.button.removeClass( $.mobile.activeBtnClass );
 			}, 40);
@@ -400,12 +409,9 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			self.listbox.removeAttr('style').append( self.list );
 		}
 		
-		if(self.menuType == "page"){			
+		if(self.menuType == "page"){
 			$.mobile.changePage([self.menuPage,self.thisPage], 'pop', true, false);
-			self.menuPage.one("pagehide",function(){
-				focusButton();
-				//return false;
-			});
+			self.menuPage.one("pagehide", focusButton);
 		}
 		else{
 			self.screen.addClass( "ui-screen-hidden" );

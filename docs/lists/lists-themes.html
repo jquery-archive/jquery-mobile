@@ -19,7 +19,7 @@
 	<div data-role="content" class="ui-body">
 		
 
-		<p>All the standard button swatches can be applied to lists. The framework assigns a default list theme swatch of "c" (silver in the default theme) and swatch "b" (blue in default theme) for dividers. Below is a default themed list.</p>
+		<p>All the standard button swatches can be applied to lists. The framework assigns a default list theme swatch of &quot;c&quot; (silver in the default theme) and swatch &quot;b&quot; (blue in default theme) for dividers. Below is a default themed list.</p>
 		
 <code>
 &lt;ul data-role=&quot;listview&quot; data-inset=&quot;true&quot;&gt;
@@ -30,9 +30,9 @@
 			<li><a href="index.html">Outbox</a> <span class="ui-li-count">0</span></li>
 			<li><a href="index.html">Sent</a> <span class="ui-li-count">328</span></li>
 		</ul>
-
-				<h2>Theming list items</h2>
-		<p>The list item color scheme can be changed to any button color theme swatch by adding the <code>data-theme</code> attribute to the list, and setting the letter theme swatch. Here is the same list above with the "a" swatch applied. </p>
+		
+		<h2>Theming list items</h2>
+		<p>The list item color scheme can be changed to any button color theme swatch by adding the <code>data-theme</code> attribute to the list, and setting the letter theme swatch. Here is the same list above with the &quot;a&quot; swatch applied. </p>
 		
 <code>
 &lt;ul data-role=&quot;listview&quot; data-inset=&quot;true&quot; data-theme=&quot;d&quot;&gt;
@@ -47,7 +47,7 @@
 		
 		<h2>Theming dividers</h2>
 		
-		<p>The theme for <strong>list dividers</strong> can be set by adding the <code>data-dividertheme</code> to the list and specifying a swatch letter. Here is an example of the same list above with swatch "d" set on the dividers.</p>
+		<p>The theme for <strong>list dividers</strong> can be set by adding the <code>data-dividertheme</code> to the list and specifying a swatch letter. Here is an example of the same list above with swatch &quot;d&quot; set on the dividers.</p>
 		
 <code>
 &lt;ul data-role=&quot;listview&quot; data-inset=&quot;true&quot; data-theme=&quot;d&quot; data-dividertheme=&quot;c&quot;&gt;
@@ -62,7 +62,7 @@
 		
 		<h2>Theming count bubbles</h2>
 		
-		<p>The theme for <strong>count bubbles</strong> can be set by adding the <code>data-counttheme</code> to the list and specifying a swatch letter. Here is an example with swatch "e" set on the dividers.</p>
+		<p>The theme for <strong>count bubbles</strong> can be set by adding the <code>data-counttheme</code> to the list and specifying a swatch letter. Here is an example with swatch &quot;e&quot; set on the dividers.</p>
 		
 <code>
 &lt;ul data-role=&quot;listview&quot; data-inset=&quot;true&quot; data-theme=&quot;a&quot; data-dividertheme=&quot;d&quot; data-counttheme=&quot;e&quot;&gt;
@@ -75,9 +75,26 @@
 			<li><a href="index.html">Sent</a> <span class="ui-li-count">328</span></li>
 		</ul>
 		
+		<h2>Theming icons</h2>
+		
+		<p>The default icon for each list item is <code>arrow-r</code>. To override this, set the <code>data-icon</code> attribute on the desired list item to the <a href="../buttons/buttons-icons.html">name of a standard icon</a>.  To prevent icons from appearing altogether, set the <code>data-icon</code> attribute to &quot;false&quot;.</p>
+<pre>
+<code>
+&lt;li data-icon=&quot;info&quot;&gt;&lt;a href="#"&gt;Notices&lt;/a&gt;&lt;/li&gt;
+&lt;li data-icon=&quot;alert&quot;&gt;&lt;a href="#"&gt;Alerts&lt;/a&gt;&lt;/li&gt;
+&lt;li data-icon=&quot;false&quot;&gt;&lt;a href="#"&gt;All Notifications&lt;/a&gt;&lt;/li&gt;
+</code>
+</pre>
+		<ul data-role="listview" data-inset="true" data-icon="false">
+			<li data-role="list-divider">Divider</li>
+			<li data-icon="info"><a href="index.html">Notices</a></li>
+			<li data-icon="alert"><a href="index.html">Alerts</a></li>
+			<li data-icon="false"><a href="index.html">All Notifications</a></li>
+		</ul>
+		
 		<h2>Theming split buttons</h2>
 		
-		<p>For split lists which a second button, the framework default to "b" for the theme swatch (blue in the default theme)  Here is a default split list:</p>
+		<p>For split lists which a second button, the framework default to &quot;b&quot; for the theme swatch (blue in the default theme)  Here is a default split list:</p>
 		
 		<ul data-role="listview" data-inset="true">
 			<li>
