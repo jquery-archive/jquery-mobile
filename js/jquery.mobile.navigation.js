@@ -170,8 +170,14 @@
 		//reset base to pathname for new request
 		if(base){ base.reset(); }
 
-		//kill the keyboard
-		$( window.document.activeElement ).add(':focus').blur();
+		/* kill the keyboard
+		 *
+		 * :XXX: This CAN fail, and when it does, the failure shouldn't
+		 *       terminate changePage().
+		 */
+		try {
+			$( window.document.activeElement ).add(':focus').blur();
+		} catch(e) {};
 
 		function defaultTransition(){
 			if(transition === undefined){
