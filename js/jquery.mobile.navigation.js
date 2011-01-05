@@ -138,9 +138,9 @@
 
 	// changepage function
 	$.mobile.changePage = function( to, transition, back, changeHash){
-
 		//from is always the currently viewed page
 		var toIsArray = $.type(to) === "array",
+		    toIsObject = $.type(to) === "object",
 			from = toIsArray ? to[0] : $.mobile.activePage,
 			to = toIsArray ? to[1] : to,
 			url = fileUrl = $.type(to) === "string" ? to.replace( /^#/, "" ) : null,
@@ -149,13 +149,13 @@
 			isFormRequest = false,
 			duplicateCachedPage = null,
 			back = (back !== undefined) ? back : ( urlStack.length > 1 && urlStack[ urlStack.length - 2 ].url === url );
-
+        
 		//If we are trying to transition to the same page that we are currently on ignore the request.
-		if(urlStack.length > 1 && url === urlStack[urlStack.length -1].url && !toIsArray ) {
+		if(urlStack.length > 1 && url === urlStack[urlStack.length -1].url && !toIsArray && !toIsObject) {
 			return;
 		}
 
-		if( $.type(to) === "object" && to.url ){
+		if( toIsObject && to.url ){
 			url = to.url,
 			data = to.data,
 			type = to.type,
