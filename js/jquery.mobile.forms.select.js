@@ -172,8 +172,12 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			if( !$(event.target).is("a") ){ return; }
 
 			// index of option tag to be selected 
+			/* :XXX: If we use 'options' from the current closure, then when
+			 *       the list is re-built, we won't have access to the new set
+			 *       of options.
+			 */
 			var newIndex = list.find( "li:not(.ui-li-divider)" ).index( this ),
-				option = options.eq( newIndex )[0];
+				option = select.find('option').eq( newIndex )[0];
 			
 			// toggle selected status on the tag for multi selects
 			option.selected = isMultiple ? !option.selected : true;
