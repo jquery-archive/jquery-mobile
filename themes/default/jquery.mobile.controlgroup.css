@@ -25,3 +25,6 @@
 
 .min-width-480px .ui-controlgroup-label { vertical-align: top; display: inline-block;  width: 20%;  margin: 0 2% 0 0;  }
 .min-width-480px .ui-controlgroup-controls { width: 60%; display: inline-block; } 
+
+.ui-header .ui-controlgroup,
+.ui-fotter .ui-controlgroup { margin:0 0 1em; }

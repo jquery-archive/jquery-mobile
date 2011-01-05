@@ -63,7 +63,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 				$this.attr( "role", role === "header" ? "banner" : "contentinfo" );
 
 				//right,left buttons
-				var $headeranchors = $this.children( "a" ),
+				var $headeranchors = $this.children( "a,[data-role='controlgroup']" ),
 					leftbtn = $headeranchors.hasClass( "ui-btn-left" ),
 					rightbtn = $headeranchors.hasClass( "ui-btn-right" );
 
