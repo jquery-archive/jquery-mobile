@@ -47,8 +47,6 @@ $.widget( "mobile.page", $.mobile.widget, {
 
 		$elem.find( "[data-role='nojs']" ).addClass( "ui-nojs" );
 
-		this._enchanceControls();
-
 		// pre-find data els
 		var $dataEls = $elem.find( "[data-role]" ).andSelf().each(function() {
 			var $this = $( this ),
@@ -122,6 +120,9 @@ $.widget( "mobile.page", $.mobile.widget, {
 					break;
 			}
 		});
+		
+		//enhance form controls
+  	this._enhanceControls();
 
 		//links in bars, or those with data-role become buttons
 		$elem.find( "[data-role='button'], .ui-bar > a, .ui-header > a, .ui-footer > a" )
@@ -142,7 +143,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 		$elem.fixHeaderFooter();
 	},
 
-	_enchanceControls: function() {
+	_enhanceControls: function() {
 		var o = this.options;
 
 		// degrade inputs to avoid poorly implemented native functionality
