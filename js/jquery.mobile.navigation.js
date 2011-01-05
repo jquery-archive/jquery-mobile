@@ -196,7 +196,12 @@
 
 			// ensure a transition has been set where pop is undefined
 			defaultTransition();
-		} else {
+		/* :XXX: Only push the url/transition onto the urlStack if a
+         *       destination URL was identified AND 'changeHash' is not
+         *       explicitly false.  Otherwise, the urlStack could become
+         *       cluttered with empty urls, causing history navigation issues.
+		 */
+		} else if( changeHash !== false && url ) {
 			// If no transition has been passed
 			defaultTransition();
 
