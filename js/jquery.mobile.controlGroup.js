@@ -27,13 +27,14 @@ $.fn.controlgroup = function(options){
 		
 		function flipClasses(els){
 			els
-				.removeClass('ui-btn-corner-all ui-shadow')
+				.removeClass('ui-btn-corner-all ui-corner-all ui-shadow')
 				.eq(0).addClass(flCorners[0])
 				.end()
 				.filter(':last').addClass(flCorners[1]).addClass('ui-controlgroup-last');
 		}
 		flipClasses($(this).find('.ui-btn'));
 		flipClasses($(this).find('.ui-btn-inner'));
+		flipClasses($(this).find('.ui-input-text'));
 		if(o.shadow){
 			$(this).addClass('ui-shadow');
 		}
