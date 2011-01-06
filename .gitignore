@@ -3,3 +3,6 @@
 *.diff
 *.patch
 .DS_Store
+cache/
+combined/
+combine/

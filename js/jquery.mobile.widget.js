@@ -1,4 +1,10 @@
-(function( $ ) {
+/*
+* jQuery Mobile Framework : widget factory extentions for mobile
+* Copyright (c) jQuery Project
+* Dual licensed under the MIT or GPL Version 2 licenses.
+* http://jquery.org/license
+*/
+(function($, undefined ) {
 
 $.widget( "mobile.widget", {
 	_getCreateOptions: function() {

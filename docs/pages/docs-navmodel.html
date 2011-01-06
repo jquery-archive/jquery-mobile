@@ -1,9 +1,11 @@
 <!DOCTYPE html> 
 <html> 
-	<head> 
+	<head>
+	<meta charset="utf-8" /> 
 	<title>jQuery Mobile Docs - Pages</title> 
-	<link rel="stylesheet"  href="../../themes/default" /> 
-	<script type="text/javascript" src="../../js/all"></script>
+	<link rel="stylesheet"  href="../../themes/default/" />  
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	<script type="text/javascript" src="../../js/"></script>
 </head> 
 <body> 
 
@@ -17,44 +19,51 @@
 			
 			<h2>jQuery Mobile's navigation model</h2> 
 
-			<p>A "page" in jQuery Mobile consists of an element (usually a <code>div</code>) with a <code>data-role</code> attribute set to <code>"page"</code>, within which ther generally tends to be <code>div</code> elements with roles of <code>"header"</code>, <code>"content"</code>, and <code>"footer"</code>, each containing common markup, forms, and custom jQuery Mobile widgets.</p> 
+			<p>A "page" in jQuery Mobile consists of an element (usually a <code>div</code>) with a <code>data-role</code> attribute set to <code>"page"</code>, which generally contains <code>div</code> elements with roles of <code>"header"</code>, <code>"content"</code>, and <code>"footer"</code>, each containing common markup, forms, and custom jQuery Mobile widgets.</p> 
 
 			<p>The basic workflow with page loading is as follows: first, a page is requested with a normal HTTP request, and subsequent "pages" are then requested and injected into that page's DOM. Because of this, the DOM may have a number of "pages" in it at a time, each of which can be re-visited by linking to its <code>ID</code> attribute.</p> 
 
-			<p>When a url is requested, there may be one or more "pages" in the response, but only the first one will be shown. The advantage of storing more than one "page" is that it allows you to pre-fetch static pages that are likely to be visited.</p> 
+			<p>When a url is initially requested, there may be one or more "pages" in the response, and only the first one will be shown. The advantage of storing more than one "page" is that it allows you to pre-fetch static pages that are likely to be visited.</p> 
 
-			<h2>Hash-driven page navigation</h2> 
+			<h2>Ajax-driven page navigation</h2> 
 
-			<p>All navigation within jQuery Mobile is based on changes in <code>location.hash</code>. Whenever possible, hash changes will trigger a smooth transition between the current "page" and the next, whether it is either already present in the DOM, or is automatically loaded via Ajax.</p> 
+			<p>All navigation within jQuery Mobile is based on changes and updates to <code>location.hash</code>. Whenever possible, page changes will use a smooth transition between the current "page" and the next, whether it is either already present in the DOM, or is automatically loaded via Ajax.</p> 
 
-			<p>Hash values created by jQuery Mobile are always normalized as full paths relative to the URL of the first "real" page that was loaded.  The hash is always maintained as a valid URL, so any "page" in jQuery mobile can be bookmarked or referenced in a link.</p> 
+			<p>Hash values created by jQuery Mobile are normalized as full paths relative to the URL of the first "real" page that was loaded.  The hash is always maintained as a valid URL, so any "page" in jQuery mobile can be bookmarked or referenced in a link. To retrieve a non-hash-based URL, simply remove the # from the address and refresh the page.</p> 
 
-			<p>In general, hash changes are created whenever a link is clicked  in jQuery mobile. Once clicked, jQuery mobile will make sure the link is referencing a local URL, and if so, it'll prevent the link's default click behavior from occurring, and set the location.hash to the value of the link's href attribute. However, before it can set the hash value, jQuery mobile must apply logic to convert a relative path into a full absolute path from the page that was initially loaded, because all Ajax requests are made relative to that initial page.</p> 
+			<p>In general, hash changes are created whenever a link is clicked in jQuery mobile. When a link is clicked, jQuery mobile will make sure the link is referencing a local URL, and if so, it'll prevent the link's default click behavior from occurring and request the referenced url via Ajax instead. When the page returns successfully, it will set the location.hash to the new page's relative url. </p> 
+			
+			<p>Within the framework, page changes - both for pages already in the DOM and for pages that need to be loaded via Ajax - use the <code>$.mobile.changePage()</code> function. <code>$.mobile.changePage()</code> contains all of the logic for finding pages to transition to and from, and how to handle various response conditions such as a page not found. <code>$.mobile.changePage()</code> can be called externally and accepts the following arguments (to, transition, back, changeHash). The <code>to</code> argument can accept either a string (such as a file url or local element's ID), an array (in which the first array item is any local page you'd like to transition from, and the second array item is the <code>to</code> page), or an object (with expected properties: url, type ("get" or "post"), and data (for serialized parameters)), the latter of which is useful for loading pages that expect form data. The <code>transition</code> argument accepts a string representing a named transition, such as "slide". The <code>back</code> argument accepts a boolean representing whether the transition should go forward or in reverse. Lastly, the <code>changeHash</code> argument accepts a boolean for whether you'd like the url to be updated upon a successful page change.</p>
+			
+			<p>The <code>$.mobile.changePage()</code> function is used in a number of places in jQuery Mobile. For example, when a link is clicked, its href attribute is normalized and then <code>$.mobile.changePage()</code> handles the rest. When forms are submitted, jQuery Mobile simply gathers a few of the form's attributes, serializes its data, and once again, <code>$.mobile.changePage()</code> is used to handle the submission and response. Also, links that create dialogs use <code>$.mobile.changePage()</code>to open a referenced page without updating the hash, which is useful for keeping dialogs out of history tracking. </p>
+			
+			<p>Another key ingredient to jQuery Mobile's page navigation model is the <code>base</code> element, which is injected into the <code>head</code> and modified on every page change to ensure that any assets (css,images,js,etc) referenced on that page will be requested from a proper path. In browsers that don't support dynamic updates to the <code>base</code> element (such as Firefox 3.6), jQuery Mobile loops through all of the referenced assets on the page and prefixes their href and src attributes with the base path.</p> 
 
-			<p>Hash changes are handled through the hashchange event, which is bound to the window object using Ben Alman's hashchange special event plugin (included in jQuery Mobile core).</p> 
 
-			<p>When a hash change occurs (and also when the first page loads), the hashchange event handler will run and check if the hash references an ID of an element already in the DOM, and if not, it will make an ajax request for the url referenced in the hash.  When the Ajax request is complete, the response is filtered to a subset of its content (a child element with a data-role attribute equal to "page"), and that element is then given an ID attribute equal to its hash path and inserted into the DOM.</p> 
 
-			<p>Before showing the new page, the <code>&lt;base&gt;</code> HTML tag is updated to match the newly loaded page's path, so that any assets (css,images,js,etc) referenced on that page will be requested from a proper path.</p> 
+			<p>Hash changes that occur independently of a click, such as when a user clicks the back button, are handled through the hashchange event, which is bound to the window object using Ben Alman's hashchange special event plugin (included in jQuery Mobile). When a hash change occurs (and also when the first page loads), the hashchange event handler will send the location.hash to the <code>$.mobile.changePage()</code> function, which in turn either loads or reveals the referenced page.</p> 
 
-			<p>Once the referenced page is present in the DOM, the changePage function is used to transition between the current active page and the page referenced in the hash. Page transitions happen through adding and removing classes that apply CSS animations. For example, in a slide-left transition, the exiting page is given the classes "slideleft" and "out", and the entering page is given the classes <code>"slideleft"</code> and <code>"in"</code>, as well as a class of <code>"ui-page-active"</code> to mark it as the new "active" page being viewed. When the animation is complete, the <code>"in"</code> and <code>"out"</code> classes are removed, and the exited page loses its <code>"ui-page-active"</code> class.</p> 
+			
+
+			<p>Once the referenced page is present in the DOM, the <code>$.mobile.changePage()</code> function applies a transition between the current active page and the new page. Page transitions happen through adding and removing classes that apply CSS animations. For example, in a slide-left transition, the exiting page is given the classes "slideleft" and "out", and the entering page is given the classes <code>"slideleft"</code> and <code>"in"</code>, as well as a class of <code>"ui-page-active"</code> to mark it as the new "active" page being viewed. When the animation is complete, the <code>"in"</code> and <code>"out"</code> classes are removed, and the exited page loses its <code>"ui-page-active"</code> class.</p> 
 
 			<h2>Developer explanation of base url management:</h2> 
 
 			<p>jQuery Mobile manages http requests using a combination of generated absolute URL paths and manipulating a generated <code>&lt;base&gt;</code> element's href attribute. The combination of these two approaches allows us to create URLs that contain full path information for loading pages, and a base element to properly direct asset requests made by those loaded pages (such as images and stylesheets).</p> 
 
-			<p>jQuery Mobile core contains 3 internal functions for manipulating a base url to be used in normalizing relative http requests:</p> 
-
+			<p>jQuery Mobile core contains 4 internal functions for manipulating a base url to be used in normalizing relative http requests:</p> 
+<p><strong>Note: These functions have changed - docs will be updated soon!</strong></p>
 			<ul> 
-			<li><p>getBaseURL: function that returns the location.hash with the '#' removed, also removing any url segment after the last "/" character, if it contains a "." or a "&amp;" character (which jQuery mobile assumes to mean that the segment is a file name).</p></li> 
+			<li><p>getPathDir: function that returns a path with the last "/"-split segment removed (which is assumed to be a file url).</p></li>
+			<li><p>getBaseURL: function that returns either the location.hash, or a path specified via its argument, with the last segment removed.</p></li> 
 			<li><p>setBaseURL: sets the <code>&lt;base&gt;</code> element's <code>href</code> attribute to the value of <code>getBaseURL()</code></p></li> 
-			<li><p>resetBaseURL: sets the <code>&lt;base&gt;</code> element's <code>href</code> attribute to <code>location.pathname</code> (the relative path of the initially-http-requested page).</p></li> 
+			<li><p>resetBaseURL: sets the <code>&lt;base&gt;</code> element's <code>href</code> attribute to the relative path of the initially-http-requested page.</p></li> 
 			</ul><p>These are called at certain times during page requests and transitions:
 			On DOM ready, during the initial page load, a <code>&lt;base&gt;</code> element is created and appended to the <code>&lt;head&gt;</code> of the page. Immediately after that, <code>resetBaseURL()</code> is called to set the <code>&lt;base&gt;</code> element's href to <code>location.pathname</code>.</p> 
 
-			<p>Whenever a link with a relative URL is clicked, the location.hash is set to that link's href value, prefixed with the value of <code>getBaseURL()</code>, which creates a full path to that file, relative to the document.</p> 
+			<p>Whenever a link with a relative URL is clicked, the <code>$.mobile.changePage()</code> function will prefixed that link's href with the value of <code>getBaseURL()</code>, which creates a full path to that file, relative to the document.</p> 
 
-			<p>Changing the hash value triggers our hashchange event handler, which first calls <code>resetBaseURL()</code>, allowing jQuery Mobile to make an Ajax request to the full value of the hash (which is already a full path, requiring no base url). After that request is sent, <code>setBaseURL()</code> is called, which resets the <code>&lt;base&gt;</code> element's <code>href</code> attribute to the value of <code>getBaseURL()</code> and allows any references to images, stylesheets, and scripts within that page to be requested with a proper base path.</p> 
+			<p>Changing the hash value triggers the hashchange event handler, which first calls <code>resetBaseURL()</code>, and makes an Ajax request to the value of the hash (which is already a full path, requiring no base url). After that request is sent, <code>setBaseURL()</code> is called, which resets the <code>&lt;base&gt;</code> element's <code>href</code> attribute to the value of <code>getBaseURL()</code> and allows any references to images, stylesheets, and scripts within that page to be requested with a proper base path.</p> 
 
 			<h2>Auto-generated pages and sub-hash urls</h2> 
 
@@ -75,10 +84,10 @@
 			<ul> 
 			<li><p>rel=external</p></li> 
 			<li><p>target (with any value, such as "_blank")</p></li> 
-			<li><p>note: we should probably add a custom attribute like data-request-type="http"</p></li> 
+
 			</ul><h2>Form submissions</h2> 
 
-			<p>When using the ajaxform plugin, form submissions can be automated through Ajax requests, and the results can either be appended into the existing page, or injected into a new page, causing a transition. In the case of the former, the "content" div of the current page will be replaced by the "content" div in the server's response HTML.</p> 
+			<p>Form submissions are handled automatically through the navigation model as well. Visit the forms section for more information.</p> 
 
 			<h2>Known limitations</h2> 
 
@@ -86,7 +95,7 @@
 
 			<ul> 
 			<li><p>When linking to directories, without a filename url, (such as href="typesofcats/" instead of href="typesofcats/index.html"), you must provide a trailing slash. This is because jQuery Mobile assumes the section after the last "/" character in a url is a filename, and it will remove that section when creating base urls from which future pages will be referenced.</p></li> 
-			<li><p>Any unique assets referenced by pages in a jQuery Mobile-driven site should be placed inside the "page" element (the element with a data-role attribute of "page"). For example, links to styles and scripts that are specific to a particular page should be referenced inside that div.</p></li> 
+			<li><p>Any unique assets referenced by pages in a jQuery Mobile-driven site should be placed inside the "page" element (the element with a data-role attribute of "page"). For example, links to styles and scripts that are specific to a particular page can be referenced inside that div. However, a better approach is to use jQuery Mobile's page events to trigger specific scripting when certain pages load.</p></li> 
 			<li><p>Conversely, any non-unique assets (those used site-wide) should be referenced in the <code>&lt;head&gt;</code> section of an HTML document, or at the very least, outside of the "page" element, to prevent running scripts more than once.</p></li> 
 			<li><p>The "ui-page" key name used in sub-hash url references can be set to any value you'd like, so as to blend into your URL structure. This value is stored in <code>jQuery.mobile.subPageUrlKey</code>.</p></li> 
 			</ul>

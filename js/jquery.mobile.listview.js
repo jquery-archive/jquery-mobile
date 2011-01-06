@@ -1,12 +1,12 @@
 /*
-* jQuery Mobile Framework : listview plugin
+* jQuery Mobile Framework : "listview" plugin
 * Copyright (c) jQuery Project
-* Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
-* Note: Code is in draft form and is subject to change 
+* Dual licensed under the MIT or GPL Version 2 licenses.
+* http://jquery.org/license
 */
-(function( jQuery ) {
+(function($, undefined ) {
 
-jQuery.widget( "mobile.listview", jQuery.mobile.widget, {
+$.widget( "mobile.listview", $.mobile.widget, {
 	options: {
 		theme: "c",
 		countTheme: "c",
@@ -31,7 +31,7 @@ jQuery.widget( "mobile.listview", jQuery.mobile.widget, {
 		}	
 
 		$list.delegate( ".ui-li", "focusin", function() {
-			jQuery( this ).attr( "tabindex", "0" );
+			$( this ).attr( "tabindex", "0" );
 		});
 
 		this._itemApply( $list, $list );
@@ -40,7 +40,7 @@ jQuery.widget( "mobile.listview", jQuery.mobile.widget, {
 	
 		//keyboard events for menu items
 		$list.keydown(function( e ) {
-			var target = jQuery( e.target ),
+			var target = $( e.target ),
 				li = target.closest( "li" );
 
 			// switch logic based on which key was pressed
@@ -111,8 +111,8 @@ jQuery.widget( "mobile.listview", jQuery.mobile.widget, {
 
 		// tapping the whole LI triggers click on the first link
 		$list.delegate( "li", "click", function(event) {
-			if ( !jQuery( event.target ).closest( "a" ).length ) {
-				jQuery( this ).find( "a" ).first().trigger( "click" );
+			if ( !$( event.target ).closest( "a" ).length ) {
+				$( this ).find( "a" ).first().trigger( "click" );
 				return false;
 			}
 		});
@@ -125,22 +125,30 @@ jQuery.widget( "mobile.listview", jQuery.mobile.widget, {
 
 		item.find( "h1, h2, h3, h4, h5, h6" ).addClass( "ui-li-heading" );
 
-		item.find( "p, ul, dl" ).addClass( "ui-li-desc" );
+		item.find( "p, dl" ).addClass( "ui-li-desc" );
 
 		item.find( "img" ).addClass( "ui-li-thumb" ).each(function() {
-			jQuery( this ).closest( "li" )
-				.addClass( jQuery(this).is( ".ui-li-icon" ) ? "ui-li-has-icon" : "ui-li-has-thumb" );
+			$( this ).closest( "li" )
+				.addClass( $(this).is( ".ui-li-icon" ) ? "ui-li-has-icon" : "ui-li-has-thumb" );
 		});
 
 		var aside = item.find( ".ui-li-aside" );
 
 		if ( aside.length ) {
-			aside.prependTo( aside.parent() ); //shift aside to front for css float
+            aside.each(function(i, el) {
+			    $(el).prependTo( $(el).parent() ); //shift aside to front for css float
+            });
 		}
 
-		if ( jQuery.support.cssPseudoElement || !jQuery.nodeName( item[0], "ol" ) ) {
+		if ( $.support.cssPseudoElement || !$.nodeName( item[0], "ol" ) ) {
 			return;
 		}
+	},
+	
+	_removeCorners: function(li){
+		li
+			.add( li.find(".ui-btn-inner, .ui-li-link-alt, .ui-li-thumb") )
+			.removeClass( "ui-corner-top ui-corner-bottom ui-corner-br ui-corner-bl ui-corner-tr ui-corner-tl" );
 	},
 	
 	refresh: function( create ) {
@@ -148,9 +156,10 @@ jQuery.widget( "mobile.listview", jQuery.mobile.widget, {
 		
 		var o = this.options,
 			$list = this.element,
+			self = this,
 			dividertheme = $list.data( "dividertheme" ) || o.dividerTheme,
 			li = $list.children( "li" ),
-			counter = jQuery.support.cssPseudoElement || !jQuery.nodeName( $list[0], "ol" ) ? 0 : 1;
+			counter = $.support.cssPseudoElement || !$.nodeName( $list[0], "ol" ) ? 0 : 1;
 
 		if ( counter ) {
 			$list.find( ".ui-li-dec" ).remove();
@@ -161,7 +170,7 @@ jQuery.widget( "mobile.listview", jQuery.mobile.widget, {
 		li.first().attr( "tabindex", "0" );
 
 		li.each(function( pos ) {
-			var item = jQuery( this ),
+			var item = $( this ),
 				itemClass = "ui-li";
 
 			// If we're creating the element, we update it regardless
@@ -172,13 +181,15 @@ jQuery.widget( "mobile.listview", jQuery.mobile.widget, {
 			var a = item.find( "a" );
 				
 			if ( a.length ) {	
+				var icon = item.data("icon");
+				
 				item
 					.buttonMarkup({
 						wrapperEls: "div",
 						shadow: false,
 						corners: false,
 						iconpos: "right",
-						icon: item.data("icon") || "arrow-r",
+						icon: a.length > 1 || icon === false ? false : icon || "arrow-r",
 						theme: o.theme
 					});
 
@@ -187,7 +198,8 @@ jQuery.widget( "mobile.listview", jQuery.mobile.widget, {
 				if ( a.length > 1 ) {
 					itemClass += " ui-li-has-alt";
 
-					var last = a.last();
+					var last = a.last(),
+						splittheme = $list.data( "splittheme" ) || last.data( "theme" ) || o.splitTheme;
 					
 					last
 						.attr( "title", last.text() )
@@ -201,10 +213,10 @@ jQuery.widget( "mobile.listview", jQuery.mobile.widget, {
 							iconpos: false
 						})
 						.find( ".ui-btn-inner" )
-							.append( jQuery( "<span>" ).buttonMarkup({
+							.append( $( "<span>" ).buttonMarkup({
 								shadow: true,
 								corners: true,
-								theme: $list.data( "splittheme" ) || last.data( "theme" ) || o.splitTheme,
+								theme: splittheme,
 								iconpos: "notext",
 								icon: $list.data( "spliticon" ) || last.data( "icon" ) ||  o.splitIcon
 							} ) );
@@ -222,37 +234,40 @@ jQuery.widget( "mobile.listview", jQuery.mobile.widget, {
 			} else {
 				itemClass += " ui-li-static ui-btn-up-" + o.theme;
 			}
-				
-			if ( pos === 0 ) {
-				item.find( "img" ).addClass( "ui-corner-tl" );
-
-				if ( o.inset ) {
-					itemClass += " ui-corner-top";
-
-					item
-						.add( item.find( ".ui-btn-inner" ) )
-						.find( ".ui-li-link-alt" )
-							.addClass( "ui-corner-tr" )
-						.end()
-						.find( ".ui-li-thumb" )
-							.addClass( "ui-corner-tl" );
-				}
-
-			} else if ( pos === li.length - 1 ) {
-				item.find( "img" ).addClass( "ui-corner-bl" );
-
-				if ( o.inset ) {
-					itemClass += " ui-corner-bottom";
-
-					item
-						.add( item.find( ".ui-btn-inner" ) )
-						.find( ".ui-li-link-alt" )
-							.addClass( "ui-corner-br" )
-						.end()
-						.find( ".ui-li-thumb" )
-							.addClass( "ui-corner-bl" );
+			
+			
+			if( o.inset ){	
+				if ( pos === 0 ) {
+						itemClass += " ui-corner-top";
+	
+						item
+							.add( item.find( ".ui-btn-inner" ) )
+							.find( ".ui-li-link-alt" )
+								.addClass( "ui-corner-tr" )
+							.end()
+							.find( ".ui-li-thumb" )
+								.addClass( "ui-corner-tl" );
+						if(item.next().next().length){
+							self._removeCorners( item.next() );		
+						}
+	
+				} else if ( pos === li.length - 1 ) {
+						itemClass += " ui-corner-bottom";
+	
+						item
+							.add( item.find( ".ui-btn-inner" ) )
+							.find( ".ui-li-link-alt" )
+								.addClass( "ui-corner-br" )
+							.end()
+							.find( ".ui-li-thumb" )
+								.addClass( "ui-corner-bl" );
+						
+						if(item.prev().prev().length){
+							self._removeCorners( item.prev() );		
+						}	
 				}
 			}
+
 
 			if ( counter && itemClass.indexOf( "ui-li-divider" ) < 0 ) {
 				item
@@ -264,23 +279,29 @@ jQuery.widget( "mobile.listview", jQuery.mobile.widget, {
 			item.addClass( itemClass );
 
 			if ( !create ) {
-				this._itemApply( $list, item );
+				self._itemApply( $list, item );
 			}
 		});
+	},
+	
+	//create a string for ID/subpage url creation
+	_idStringEscape: function( str ){
+		return str.replace(/[^a-zA-Z0-9]/g, '-');
 	},
 	
 	_createSubPages: function() {
 		var parentList = this.element,
 			parentPage = parentList.closest( ".ui-page" ),
-			parentId = parentPage.attr( "id" ),
+			parentId = parentPage.data( "url" ),
 			o = this.options,
+			self = this,
 			persistentFooterID = parentPage.find( "[data-role='footer']" ).data( "id" );
 
-		jQuery( parentList.find( "ul, ol" ).toArray().reverse() ).each(function( i ) {
-			var list = jQuery( this ),
+		$( parentList.find( "ul, ol" ).toArray().reverse() ).each(function( i ) {
+			var list = $( this ),
 				parent = list.parent(),
-				title = parent.contents()[ 0 ].nodeValue.split("\n")[0],
-				id = parentId + "&" + $.mobile.subPageUrlKey + "=" + $.mobile.idStringEscape(title + " " + i),
+				title = $.trim(parent.contents()[ 0 ].nodeValue.split("\n")[0]) || parent.find('a:first').text(),
+				id = parentId + "&" + $.mobile.subPageUrlKey + "=" + self._idStringEscape(title + " " + i),
 				theme = list.data( "theme" ) || o.theme,
 				countTheme = list.data( "counttheme" ) || parentList.data( "counttheme" ) || o.countTheme,
 				newPage = list.wrap( "<div data-role='page'><div data-role='content'></div></div>" )
@@ -289,17 +310,20 @@ jQuery.widget( "mobile.listview", jQuery.mobile.widget, {
 								.after( persistentFooterID ? $( "<div>", { "data-role": "footer", "data-id": persistentFooterID, "class": "ui-footer-duplicate" } ) : "" )
 								.parent()
 									.attr({
-										id: id,
+										"data-url": id,
 										"data-theme": theme,
 										"data-count-theme": countTheme
 									})
-									.appendTo( jQuery.pageContainer );
+									.appendTo( $.mobile.pageContainer );
 				
 				
 				
 				newPage.page();		
-			
-			parent.html( "<a href='#" + id + "'>" + title + "</a>" );
+			var anchor = parent.find('a:first');
+			if (!anchor.length) {
+				anchor = $("<a></a>").html(title).prependTo(parent.empty());
+			}
+			anchor.attr('href','#' + id);
 		}).listview();
 	}
 });

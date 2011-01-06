@@ -1,34 +1,56 @@
 <!DOCTYPE html> 
 <html> 
-	<head> 
+	<head>
+	<meta charset="utf-8" /> 
 	<title>jQuery Mobile Framework - Datepicker</title> 
-	<link rel="stylesheet"  href="../../themes/default" /> 
-	<script type="text/javascript" src="../../js/all"></script>
-	
+	<link rel="stylesheet"  href="../../themes/default/" />	
+	<link rel="stylesheet" href="../../docs/_assets/css/jqm-docs.css" />
+	<script type="text/javascript" src="../../js/"></script>	
 </head> 
 <body> 
 
 <div data-role="page">
 	<link rel="stylesheet"  href="jquery.ui.datepicker.css" /> 
-	<script type="text/javascript" src="jquery.ui.datepicker.js"></script>
+	<!-- style overrides -->
+	<style type="text/css">
+	.ui-datepicker-calendar th { padding-top: .3em; padding-bottom: .3em; }
+	.ui-datepicker-calendar th span, .ui-datepicker-calendar span.ui-state-default { opacity: .3; }
+	.ui-datepicker-calendar td a { padding-top: .5em; padding-bottom: .5em; }
+	</style>
+	
+	<script type="text/javascript" src="jQuery.ui.datepicker.js"></script>
 	<script type="text/javascript">
 		$(function(){
-			/*  datepicker workaround */
-			$('input[type=date]').hide().after( $('<div />').datepicker() );
-			$('.ui-datepicker-header').addClass('ui-body-c ui-corner-top').removeClass('ui-corner-all');
-			$('.ui-datepicker-prev').buttonMarkup({iconpos: 'notext', icon: 'arrow-l', shadow: true, corners: true});
-			$('.ui-datepicker-next').buttonMarkup({iconpos: 'notext', icon: 'arrow-r', shadow: true, corners: true});
-			$('.ui-datepicker-calendar thead').remove();
-			$('.ui-datepicker-calendar .ui-btn-text span').attr('class','');
-			$('.ui-datepicker-calendar td').addClass('ui-btn-up-c');
-			$('.ui-datepicker-calendar a').buttonMarkup({corners: false, shadow: false});
-			/* // datepicker workaround */
+		
+		  /*  datepicker workaround - update markup and classes for Mobile */
+			var updateDatepicker = function(){
+  			$('.ui-datepicker-header').addClass('ui-body-c ui-corner-top').removeClass('ui-corner-all');
+  			$('.ui-datepicker-prev, .ui-datepicker-next').attr('href', '#');
+  			$('.ui-datepicker-prev').buttonMarkup({iconpos: 'notext', icon: 'arrow-l', shadow: true, corners: true});
+  			$('.ui-datepicker-next').buttonMarkup({iconpos: 'notext', icon: 'arrow-r', shadow: true, corners: true});
+  			$('.ui-datepicker-calendar th').addClass('ui-bar-c');
+  			$('.ui-datepicker-calendar td').addClass('ui-body-c');
+  			$('.ui-datepicker-calendar a').buttonMarkup({corners: false, shadow: false}); 
+  			$('.ui-datepicker-calendar a.ui-state-active').addClass('ui-btn-active'); // selected date
+  			$('.ui-datepicker-calendar a.ui-state-highlight').addClass('ui-btn-up-e'); // today's date
+        $('.ui-datepicker-calendar .ui-btn').each(function(){
+          var el = $(this), text = el.find('.ui-btn-text');
+          el.html(text.text()); // remove extra button markup - necessary for date value to be interpreted correctly
+        });
+			};
+			
+      /* create the datepicker as usual */
+		  $('input[type=date]').after( $('<div />').datepicker({ altField: '#date', showOtherMonths: true }) );
+		    
+		  /* update the datepicker when it loads, or whenever it's clicked (required because it's redrawn) */
+		  updateDatepicker(); // if you show the datepicker on input focus, call updateDatepicker on the focus event instead
+		  $('.ui-datepicker').click(updateDatepicker);
+
 		});
 	</script>
 	
 	<div data-role="header">
-		<h1>Datepicker Styled for mobile</h1>
-		
+		<h1>Datepicker Styled for mobile</h1>		
 	</div>
 	
 	<div data-role="content">
@@ -37,7 +59,7 @@
 		<form action="#" method="get">
 			
 			<div data-role="fieldcontain">
-	     	    <label for="date">Date Input (non-functional):</label>
+	     	    <label for="date">Date Input:</label>
 	     	    <input type="date" name="date" id="date" value=""  />
 			</div>
 		

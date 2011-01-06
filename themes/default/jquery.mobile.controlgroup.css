@@ -9,13 +9,13 @@
 .ui-controlgroup-controls { display: block; width: 95%;}
 .ui-controlgroup li { list-style: none; }
 .ui-controlgroup-vertical .ui-btn,
-.ui-controlgroup-vertical div.ui-checkbox, .ui-controlgroup-vertical div.ui-radio { margin: 0; border-bottom-width: 0;  }
+.ui-controlgroup-vertical .ui-checkbox, .ui-controlgroup-vertical .ui-radio { margin: 0; border-bottom-width: 0;  }
 .ui-controlgroup-vertical .ui-controlgroup-last { border-bottom-width: 1px; }
 .ui-controlgroup-horizontal { padding: 0; }
 .ui-controlgroup-horizontal .ui-btn,
-.ui-controlgroup-horizontal div.ui-checkbox, .ui-controlgroup-horizontal div.ui-radio { margin: 0 -5px 0 0; display: inline-block;  }
-.ui-controlgroup-horizontal div.ui-checkbox .ui-btn, .ui-controlgroup-horizontal div.ui-radio .ui-btn,
-.ui-controlgroup-horizontal div.ui-checkbox:last-child, .ui-controlgroup-horizontal div.ui-radio:last-child { margin-right: 0; }
+.ui-controlgroup-horizontal .ui-checkbox, .ui-controlgroup-horizontal .ui-radio { margin: 0 -5px 0 0; display: inline-block;  }
+.ui-controlgroup-horizontal .ui-checkbox .ui-btn, .ui-controlgroup-horizontal .ui-radio .ui-btn,
+.ui-controlgroup-horizontal .ui-checkbox:last-child, .ui-controlgroup-horizontal .ui-radio:last-child { margin-right: 0; }
 .ui-controlgroup-horizontal .ui-controlgroup-last { margin-right: 0; }
 .ui-controlgroup .ui-checkbox label, .ui-controlgroup .ui-radio label { font-size: 16px;  }
 /* conflicts with listview..

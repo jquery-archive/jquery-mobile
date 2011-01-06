@@ -1,9 +1,11 @@
 <!DOCTYPE html> 
 <html> 
-	<head> 
+	<head>
+	<meta charset="utf-8" /> 
 	<title>jQuery Mobile Docs - Pages</title> 
-	<link rel="stylesheet"  href="../../themes/default" /> 
-	<script type="text/javascript" src="../../js/all"></script>
+	<link rel="stylesheet"  href="../../themes/default/" />  
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	<script type="text/javascript" src="../../js/"></script>
 </head> 
 <body> 
 
@@ -25,7 +27,7 @@
 			
 			<p>By default, when you click on link that points to an external page (ex. products.html), the framework will parse the link's <code>href</code> to formulate an Ajax request (Hijax) and displays the loading spinner.</p>
 				
-			<p>If the Ajax request is successful, the new page content is added to the DOM, the <code>mobilize()</code> function runs, then the new page is animated into view with a page transition.</p>
+			<p>If the Ajax request is successful, the new page content is added to the DOM, all mobile widgets are auto-initialized, then the new page is animated into view with a page transition.</p>
 			
 			<p>If the Ajax request fails, the framework will display a small error message overlay (styled in the "e" swatch) that disappears after a brief time so this doesn't break the navigation flow. View an <a href="notapage.html">example of the error message</a>.</p>
 

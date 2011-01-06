@@ -1,9 +1,11 @@
 <!DOCTYPE html> 
 <html> 
-	<head> 
+	<head>
+	<meta charset="utf-8" /> 
 	<title>jQuery Mobile Docs - Forms</title> 
-	<link rel="stylesheet"  href="../../themes/default" /> 
-	<script type="text/javascript" src="../../js/all"></script>
+	<link rel="stylesheet"  href="../../themes/default/" />  
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	<script type="text/javascript" src="../../js/"></script>
 	<script type="text/javascript" src="../docs/docs.js"></script>
 </head> 
 <body> 
@@ -32,6 +34,28 @@
 <h2>Markup Conventions</h2>
 <p>When constructing forms to be used in jQuery Mobile, most of the standard guidelines used to create forms that submit via normal HTTP post or get still apply. However, one thing to keep in mind is that the <code>id</code> attributes of form controls need to be not only unique on a given page, but also unique across the pages in a site. This is because jQuery Mobile's single-page navigation model allows many different "pages" to be present in the DOM at the same time, so you must be careful to use unique <code>id</code> attributes so there will be only one of each in the DOM (and of course, be sure to pair them properly with <code>label</code> elements via the <code>for</code> attribute).</p>
 
+	<h2>Auto-initialization of form elements</h2>
+	<p>By default, jQuery Mobile will automatically enhance certain native form controls into rich touch-friendly components. This is handled internally by finding form elements by tag name and running a plugin method on them, so for instance, a <code>select</code> element will be found and initialized with the "selectmenu" plugin, while an <code>input</code> element with a <code>type="checkbox"</code> will be enhanced with the "checkboxradio" plugin. Once initialized, you can address these enhanced components programmatically through their jQuery UI widget API methods (see documentation on available methods here: <a href="plugin-eventsmethods.html">Form Plugin Methods</a>). </p>
+	
+	<h2>Preventing auto-initialization of form elements</h2>
+	<p>If you'd prefer that a particular form control be left untouched by jQuery Mobile, simply give that element the attribute <code>data-role="none"</code>. For example:</p>
+	<pre><code>				
+&lt;label for=&quot;foo&quot;&gt;
+&lt;select name=&quot;foo&quot; id=&quot;foo&quot; <strong>data-role=&quot;none&quot;</strong>&gt;
+	&lt;option value="a" &gt;A&lt;/option&gt;
+	&lt;option value="b" &gt;B&lt;/option&gt;
+	&lt;option value="c" &gt;C&lt;/option&gt;
+&lt;/select&gt;
+</code></pre>
+	
+	
+	<p>Or, if you'd like to prevent auto-initialization without adding attributes to your markup, you can customize the selector that is used for preventing auto-initialization by setting the page plugin's <code>keepNative</code> option (which defaults to <code>"[data-role="none"]</code>. Be sure to configure this option inside an event handler bound to the <code>mobileinit</code> event, so that it applies to the first page as well as subsequent pages that are loaded.</p>
+		<pre><code>
+$(document).bind('mobileinit',function(){
+	<strong>$.mobile.page.prototype.options.keepNative = "select, input.foo, textarea.bar";</strong>
+});	
+		</pre></code>
+	
 			<h2>Dynamic form layout</h2>
 
 			<p>In jQuery Mobile, all form elements are designed to be a flexible width so they will comfortably fit the width of any mobile device. One optimization built into the framework is that we present labels and form elements differently based on screen width. </p>
@@ -46,7 +70,7 @@
 &lt;div data-role=&quot;fieldcontain&quot;&gt;
 	...label/input code goes here...
 &lt;/div&gt;
-</pre></code>
+</code></pre>
 			
 			
 	</div><!-- /content -->

@@ -1,4 +1,10 @@
-(function( $ ) {
+/*
+* jQuery Mobile Framework : "listview" filter extension
+* Copyright (c) jQuery Project
+* Dual licensed under the MIT or GPL Version 2 licenses.
+* http://jquery.org/license
+*/
+(function($, undefined ) {
 
 $.mobile.listview.prototype.options.filter = false;
 
@@ -24,10 +30,10 @@ $( "[data-role='listview']" ).live( "listviewcreate", function() {
 					}).hide();
 				}
 				
-				listview._numberItems();
+				//listview._numberItems();
 			})
 			.appendTo( wrapper )
-			.customTextInput();
+			.textinput();
 	
 	wrapper.insertBefore( list );
 });

@@ -1,29 +1,12 @@
 /*
-Possible additions:
-	scollTop
-	CSS Matrix
+* jQuery Mobile Framework : support tests
+* Copyright (c) jQuery Project
+* Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
+* Note: Code is in draft form and is subject to change 
 */
+(function($, undefined ) {
 
-// test whether a CSS media type or query applies
-$.media = (function() {
-	// TODO: use window.matchMedia once at least one UA implements it
-	var cache = {},
-		$html = $( "html" ),
-		testDiv = $( "<div id='jquery-mediatest'>" ),
-		fakeBody = $( "<body>" ).append( testDiv );
-	
-	return function( query ) {
-		if ( !( query in cache ) ) {
-			var styleBlock = $( "<style type='text/css'>" +
-				"@media " + query + "{#jquery-mediatest{position:absolute;}}" +
-				"</style>" );
-			$html.prepend( fakeBody ).prepend( styleBlock );
-			cache[ query ] = testDiv.css( "position" ) === "absolute";
-			fakeBody.add( styleBlock ).remove();
-		}
-		return cache[ query ];
-	};
-})();
+
 
 var fakeBody = $( "<body>" ).prependTo( "html" ),
 	fbCSS = fakeBody[0].style,
@@ -48,6 +31,7 @@ function baseTagTest(){
 		base = $("<base>", {"href": fauxBase}).appendTo("head"),
 		link = $( "<a href='testurl'></a>" ).prependTo( fakeBody ),
 		rebase = link[0].href;
+	base[0].href = location.pathname;	
 	base.remove();
 	return rebase.indexOf(fauxBase) === 0;
 };
@@ -55,9 +39,9 @@ function baseTagTest(){
 $.extend( $.support, {
 	orientation: "orientation" in window,
 	touch: "ontouchend" in document,
-	WebKitAnimationEvent: typeof WebKitTransitionEvent === "object",
+	cssTransitions: "WebKitTransitionEvent" in window,
 	pushState: !!history.pushState,
-	mediaquery: $.media('only all'),
+	mediaquery: $.mobile.media('only all'),
 	cssPseudoElement: !!propExists('content'),
 	boxShadow: !!propExists('boxShadow') && !bb,
 	scrollTop: ("pageXOffset" in window || "scrollTop" in document.documentElement || "scrollTop" in fakeBody[0]) && !webos,
@@ -68,3 +52,5 @@ fakeBody.remove();
 
 //for ruling out shadows via css
 if( !$.support.boxShadow ){ $('html').addClass('ui-mobile-nosupport-boxshadow'); }
+
+})( jQuery );

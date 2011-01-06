@@ -1,34 +1,43 @@
 /*
-* jQuery Mobile Framework : "slider" plugin (based on code from Filament Group,Inc)
+* jQuery Mobile Framework : "slider" plugin
 * Copyright (c) jQuery Project
-* Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
-* Note: Code is in draft form and is subject to change 
-*/  
-(function($){
-$.fn.slider = function(options){
-	return this.each(function(){	
-		var control = $(this),
-			themedParent = control.parents('[class*=ui-bar-],[class*=ui-body-]').eq(0),
-			
-			o = $.extend({
-				trackTheme: (themedParent.length ? themedParent.attr('class').match(/ui-(bar|body)-([a-z])/)[2] : 'c'),
-				theme: control.data("theme") || (themedParent.length ? themedParent.attr('class').match(/ui-(bar|body)-([a-z])/)[2] : 'c')
-			},options),
-			
+* Dual licensed under the MIT or GPL Version 2 licenses.
+* http://jquery.org/license
+*/
+(function($, undefined ) {
+$.widget( "mobile.slider", $.mobile.widget, {
+	options: {
+		theme: null,
+		trackTheme: null,
+		disabled: false
+	},
+	_create: function(){
+		var self = this,
+
+			control = this.element,
+
+			parentTheme = control.parents('[class*=ui-bar-],[class*=ui-body-]').eq(0),
+
+			parentTheme = parentTheme.length ? parentTheme.attr('class').match(/ui-(bar|body)-([a-z])/)[2] : 'c',
+
+			theme = this.options.theme ? this.options.theme : parentTheme,
+
+			trackTheme = this.options.trackTheme ? this.options.trackTheme : parentTheme,
+
 			cType = control[0].nodeName.toLowerCase(),
 			selectClass = (cType == 'select') ? 'ui-slider-switch' : '',
 			controlID = control.attr('id'),
 			labelID = controlID + '-label',
 			label = $('[for='+ controlID +']').attr('id',labelID),
-			val = (cType == 'input') ? control.val() : control[0].selectedIndex,
+			val = (cType == 'input') ? parseFloat(control.val()) : control[0].selectedIndex,
 			min = (cType == 'input') ? parseFloat(control.attr('min')) : 0,
 			max = (cType == 'input') ? parseFloat(control.attr('max')) : control.find('option').length-1,
-			percent = val / (max - min) * 100,
-			snappedPercent = percent,
-			slider = $('<div class="ui-slider '+ selectClass +' ui-btn-down-'+o.trackTheme+' ui-btn-corner-all" role="application"></div>'),
+			step = window.parseFloat(control.attr('data-step') || 1),
+
+			slider = $('<div class="ui-slider '+ selectClass +' ui-btn-down-'+ trackTheme+' ui-btn-corner-all" role="application"></div>'),
 			handle = $('<a href="#" class="ui-slider-handle"></a>')
 				.appendTo(slider)
-				.buttonMarkup({corners: true, theme: o.theme, shadow: true})
+				.buttonMarkup({corners: true, theme: theme, shadow: true})
 				.attr({
 					'role': 'slider',
 					'aria-valuemin': min,
@@ -38,124 +47,225 @@ $.fn.slider = function(options){
 					'title': val,
 					'aria-labelledby': labelID
 				}),
-			dragging = false;
-			
+			switchValues = {'off' : 0, 'on': 1};
+
+		$.extend(this, {
+			slider: slider,
+			handle: handle,
+			dragging: false,
+			beforeStart: null
+		});
+
 		if(cType == 'select'){
 			slider.wrapInner('<div class="ui-slider-inneroffset"></div>');
 			var options = control.find('option');
-				
+
 			control.find('option').each(function(i){
 				var side = (i==0) ?'b':'a',
 					corners = (i==0) ? 'right' :'left',
-					theme = (i==0) ? ' ui-btn-down-' + o.trackTheme :' ui-btn-active';
-				$('<div class="ui-slider-labelbg ui-slider-labelbg-'+ side + theme +' ui-btn-corner-'+ corners+'"></div>').prependTo(slider);	
+					theme = (i==0) ? ' ui-btn-down-' + trackTheme :' ui-btn-active';
+				$('<div class="ui-slider-labelbg ui-slider-labelbg-'+ side + theme +' ui-btn-corner-'+ corners+'"></div>').prependTo(slider);
 				$('<span class="ui-slider-label ui-slider-label-'+ side + theme +' ui-btn-corner-'+ corners+'" role="img">'+$(this).text()+'</span>').prependTo(handle);
 			});
-			
-		}	
-		
-		function updateControl(val){
-			if(cType == 'input'){ 
-				control.val(val); 
-			}
-			else { 
-				control[0].selectedIndex = val;
-			}
-			control.trigger("change");
+
 		}
-			
-		function slideUpdate(event, val){
-			if (val){
-				percent = parseFloat(val) / (max - min) * 100;
-			} else {
-				var data = event.originalEvent.touches ? event.originalEvent.touches[ 0 ] : event,
-					// a slight tolerance helped get to the ends of the slider
-					tol = 4;
-				if( !dragging 
-						|| data.pageX < slider.offset().left - tol 
-						|| data.pageX > slider.offset().left + slider.width() + tol ){ 
-					return; 
-				}
-				percent = Math.round(((data.pageX - slider.offset().left) / slider.width() ) * 100);
-			}
-			if( percent < 0 ) { percent = 0; }
-			if( percent > 100 ) { percent = 100; }
-			var newval = Math.round( (percent/100) * max );
-			if( newval < min ) { newval = min; }
-			if( newval > max ) { newval = max; }
-			//flip the stack of the bg colors
-			if(percent > 60 && cType == 'select'){ 
-				
-			}
-			snappedPercent = Math.round( newval / max * 100 );
-			handle.css('left', percent + '%');
-			handle.attr({
-					'aria-valuenow': (cType == 'input') ? newval : control.find('option').eq(newval).attr('value'),
-					'aria-valuetext': (cType == 'input') ? newval : control.find('option').eq(newval).text(),
-					'title': newval
-				});
-			updateSwitchClass(newval);
-			updateControl(newval);
-		}
-		
-		function updateSwitchClass(val){
-			if(cType == 'input'){return;}
-			if(val == 0){ slider.addClass('ui-slider-switch-a').removeClass('ui-slider-switch-b'); }
-			else { slider.addClass('ui-slider-switch-b').removeClass('ui-slider-switch-a'); }
-		}
-		
-		updateSwitchClass(val);
-		
-		function updateSnap(){
-			if(cType == 'select'){
-				handle
-					.addClass('ui-slider-handle-snapping')
-					.css('left', snappedPercent + '%')
-					.animationComplete(function(){
-						handle.removeClass('ui-slider-handle-snapping');
-					});
-			}
-		}
-		
+
 		label.addClass('ui-slider');
-		
+
 		control
 			.addClass((cType == 'input') ? 'ui-slider-input' : 'ui-slider-switch')
-			.keyup(function(e){
-				slideUpdate(e, $(this).val() );
+			.keyup(function(){
+				self.refresh( $(this).val() );
 			});
-					
+
+		$(document).bind($.support.touch ? "touchmove" : "mousemove", function(event){
+			if ( self.dragging ) {
+				self.refresh( event );
+				return false;
+			}
+		});
+
 		slider
 			.bind($.support.touch ? "touchstart" : "mousedown", function(event){
-				dragging = true;
-				if((cType == 'select')){
-					val = control[0].selectedIndex;
+				self.dragging = true;
+				if ( cType === "select" ) {
+					self.beforeStart = control[0].selectedIndex;
 				}
-				slideUpdate(event);
+				self.refresh( event );
 				return false;
-			})
-			.bind($.support.touch ? "touchmove" : "mousemove", function(event){
-				slideUpdate(event);
-				return false;
-			})
-			.bind($.support.touch ? "touchend" : "mouseup", function(event){
-				dragging = false;
-				if(cType == 'select'){
-					if(val == control[0].selectedIndex){
-						val = val == 0 ? 1 : 0;
-						//tap occurred, but value didn't change. flip it!
-						slideUpdate(event,val);
+			});
+
+		slider
+			.add(document)
+			.bind($.support.touch ? "touchend" : "mouseup", function(){
+				if ( self.dragging ) {
+					self.dragging = false;
+					if ( cType === "select" ) {
+						if ( self.beforeStart === control[0].selectedIndex ) {
+							//tap occurred, but value didn't change. flip it!
+							self.refresh( self.beforeStart === 0 ? 1 : 0 );
+						}
+						var curval = (cType === "input") ? parseFloat(control.val()) : control[ 0 ].selectedIndex;
+						var snapped = Math.round( curval / (max - min) * 100 );
+						handle
+							.addClass("ui-slider-handle-snapping")
+							.css("left", snapped + "%")
+							.animationComplete(function(){
+								handle.removeClass("ui-slider-handle-snapping");
+							});
 					}
-					updateSnap();
+					return false;
 				}
-				return false;
-			})
-			.insertAfter(control);
-		
-		handle
-			.css('left', percent + '%')
-			.bind('click', function(e){ return false; });	
-	});
-};
-})(jQuery);
-	
+			});
+
+		slider.insertAfter(control);
+
+		// NOTE force focus on handle
+		this.handle
+			.bind($.support.touch ? "touchstart" : "mousedown", function(){
+				$(this).focus();
+			});
+
+		this.handle
+			.bind('keydown', function( event ) {
+				var valuenow = $( this ).attr( "aria-valuenow" ),
+					  index;
+
+				if ( self.options.disabled ) {
+					return;
+				}
+
+				// convert switch values to slider
+				if(valuenow.match(/off|on/)){
+					valuenow = switchValues[valuenow];
+				}
+
+				index = window.parseFloat(valuenow, 10);
+
+				// In all cases prevent the default and mark the handle as active
+				switch ( event.keyCode ) {
+				 case $.mobile.keyCode.HOME:
+				 case $.mobile.keyCode.END:
+				 case $.mobile.keyCode.PAGE_UP:
+				 case $.mobile.keyCode.PAGE_DOWN:
+				 case $.mobile.keyCode.UP:
+				 case $.mobile.keyCode.RIGHT:
+				 case $.mobile.keyCode.DOWN:
+				 case $.mobile.keyCode.LEFT:
+					event.preventDefault();
+
+					if ( !self._keySliding ) {
+						self._keySliding = true;
+						$( this ).addClass( "ui-state-active" );
+					}
+					break;
+				}
+
+				// move the slider according to the keypress
+				switch ( event.keyCode ) {
+				 case $.mobile.keyCode.HOME:
+					self.refresh(min);
+					break;
+				 case $.mobile.keyCode.END:
+					self.refresh(max);
+					break;
+				 case $.mobile.keyCode.PAGE_UP:
+				 case $.mobile.keyCode.UP:
+				 case $.mobile.keyCode.RIGHT:
+					self.refresh(index + step);
+					break;
+				 case $.mobile.keyCode.PAGE_DOWN:
+				 case $.mobile.keyCode.DOWN:
+				 case $.mobile.keyCode.LEFT:
+					self.refresh(index - step);
+					break;
+				}
+			}) // remove active mark
+			.keyup(function( event ) {
+				if ( self._keySliding ) {
+					self._keySliding = false;
+					$( this ).removeClass( "ui-state-active" );
+				}
+			});
+
+		this.refresh();
+	},
+
+	refresh: function(val){
+		if ( this.options.disabled ) { return; }
+
+		var control = this.element, percent,
+			cType = control[0].nodeName.toLowerCase(),
+			min = (cType === "input") ? parseFloat(control.attr("min")) : 0,
+			max = (cType === "input") ? parseFloat(control.attr("max")) : control.find("option").length - 1;
+
+		if ( typeof val === "object" ) {
+			var data = val.originalEvent.touches ? val.originalEvent.touches[ 0 ] : val,
+				// a slight tolerance helped get to the ends of the slider
+				tol = 8;
+			if ( !this.dragging
+					|| data.pageX < this.slider.offset().left - tol
+					|| data.pageX > this.slider.offset().left + this.slider.width() + tol ) {
+				return;
+			}
+			percent = Math.round( ((data.pageX - this.slider.offset().left) / this.slider.width() ) * 100 );
+		} else {
+			if ( val == null ) {
+				val = (cType === "input") ? parseFloat(control.val()) : control[ 0 ].selectedIndex;
+			}
+			percent = (parseFloat(val) - min) / (max - min) * 100;
+		}
+
+		if ( isNaN(percent) ) { return; }
+		if ( percent < 0 ) { percent = 0; }
+		if ( percent > 100 ) { percent = 100; }
+
+		var newval = Math.round( (percent / 100) * (max - min) ) + min;
+		if ( newval < min ) { newval = min; }
+		if ( newval > max ) { newval = max; }
+
+		//flip the stack of the bg colors
+		if ( percent > 60 && cType === "select" ) {
+
+		}
+		this.handle.css("left", percent + "%");
+		this.handle.attr({
+				"aria-valuenow": (cType === "input") ? newval : control.find("option").eq(newval).attr("value"),
+				"aria-valuetext": (cType === "input") ? newval : control.find("option").eq(newval).text(),
+				title: newval
+			});
+
+		// add/remove classes for flip toggle switch
+		if ( cType === "select" ) {
+			if ( newval === 0 ) {
+				this.slider.addClass("ui-slider-switch-a")
+					.removeClass("ui-slider-switch-b");
+			} else {
+				this.slider.addClass("ui-slider-switch-b")
+					.removeClass("ui-slider-switch-a");
+			}
+		}
+
+		// update control's value
+		if ( cType === "input" ) {
+			control.val(newval);
+		} else {
+			control[ 0 ].selectedIndex = newval;
+		}
+		control.trigger("change");
+	},
+
+	enable: function(){
+		this.element.attr("disabled", false);
+		this.slider.removeClass("ui-disabled").attr("aria-disabled", false);
+		return this._setOption("disabled", false);
+	},
+
+	disable: function(){
+		this.element.attr("disabled", true);
+		this.slider.addClass("ui-disabled").attr("aria-disabled", true);
+		return this._setOption("disabled", true);
+	}
+});
+})( jQuery );
+

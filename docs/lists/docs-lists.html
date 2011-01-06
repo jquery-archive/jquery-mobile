@@ -1,9 +1,11 @@
 <!DOCTYPE html> 
 <html> 
-	<head> 
+	<head>
+	<meta charset="utf-8" /> 
 	<title>jQuery Mobile Docs - Lists</title> 
-	<link rel="stylesheet"  href="../../themes/default" /> 
-	<script type="text/javascript" src="../../js/all"></script>
+	<link rel="stylesheet"  href="../../themes/default/" />  
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	<script type="text/javascript" src="../../js/"></script>
 </head> 
 <body> 
 
@@ -44,7 +46,8 @@
 			<a href="lists-readonly.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Read-only list example</a>
 			
 			<h2>Split button lists</h2>
-			<p>In cases where there is more than one possible action per list item, a split button can be used to offer two independently clickable items -- the list item and a small arrow icon in the far right. To make a split list item, simply add a second link inside the <code>li</code> and the framework will add a vertical divider line, style the link as an icon-only arrow button, and sets the <code>title</code> attribute of the link to the text the link for accessibility. You can set the icon for the right icon by specifying a <code>data-icon</code> attribute with the <a href="../buttons/buttons-themes.html">icon name</a> you want.</p>
+			<p>In cases where there is more than one possible action per list item, a split button can be used to offer two independently clickable items -- the list item and a small arrow icon in the far right. To make a split list item, simply add a second link inside the <code>li</code> and the framework will add a vertical divider line, style the link as an icon-only arrow button, and sets the <code>title</code> attribute of the link to the text the link for accessibility. </p>
+			<p>You can set the icon for the right split icon by specifying a <code>data-split-icon</code> attribute with the <a href="../buttons/buttons-themes.html">icon name</a> you want. The theme swatch color of the split button can be set by specifying a swatch letter in the <code>data-split-theme</code> attribute</p>
 			
 			<a href="lists-split.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Split list example</a>
 			
@@ -81,6 +84,12 @@
 			<p>If lists are embedded in a page with other types of content, an inset list packages the list into a block that sits inside the content area with a bit of margin and rounded corners (theme controlled). By adding the <code>data-inset="true"</code> attribute to the list (ul or ol), applies the inset appearance.</p>
 			
 			<a href="lists-inset.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Inset list example</a>
+			
+			<h2>Updating lists</h2>
+			<p>If you add items to a listview, you'll need to call the <code>refresh()</code> method on it to update the styles and create any nested lists that are added. For example, <code>$('ul').listview('refresh');</code></p>
+			
+			<p>We're currently working on a few improvements to the refresh method, so keep your eye on Github for updates.</p>			
+			
 
 	</div><!-- /content -->
 </div><!-- /page -->

@@ -1,5 +1,6 @@
 
 VER = $(shell cat version.txt)
+SED_VER = sed "s/@VERSION/${VER}/"
 
 DIR = jquery.mobile-${VER}
 MAX = ${DIR}.js
@@ -9,10 +10,14 @@ CSSMIN = ${DIR}.min.css
 
 FILES = js/jquery.ui.widget.js \
   js/jquery.mobile.widget.js \
+  js/jquery.mobile.media.js \
   js/jquery.mobile.support.js \
   js/jquery.mobile.event.js \
   js/jquery.mobile.hashchange.js \
+  js/jquery.mobile.core.js \
+  js/jquery.mobile.navigation.js \
   js/jquery.mobile.page.js \
+  js/jquery.ui.position.js \
   js/jquery.mobile.fixHeaderFooter.js \
   js/jquery.mobile.forms.checkboxradio.js \
   js/jquery.mobile.forms.textinput.js \
@@ -27,8 +32,7 @@ FILES = js/jquery.ui.widget.js \
   js/jquery.mobile.listview.filter.js \
   js/jquery.mobile.dialog.js \
   js/jquery.mobile.navbar.js \
-  js/jquery.mobile.grid.js \
-  js/jquery.mobile.js
+  js/jquery.mobile.grid.js
 
 CSSFILES =  themes/default/jquery.mobile.theme.css \
   themes/default/jquery.mobile.core.css \
@@ -53,19 +57,19 @@ clean:
 	@@rm -rf ${DIR}*
 
 css:
-	@@head -8 js/jquery.mobile.js > ${CSS}
+	@@head -8 js/jquery.mobile.core.js | ${SED_VER} > ${CSS}
 	@@cat ${CSSFILES} >> ${CSS}
 
 cssmin: css
-	@@head -8 js/jquery.mobile.js > ${CSSMIN}
+	@@head -8 js/jquery.mobile.core.js | ${SED_VER} > ${CSSMIN}
 	@@java -jar build/yuicompressor-2.4.2.jar --type css ${CSS} >> ${CSSMIN}
 
 mobile:
-	@@head -8 js/jquery.mobile.js > ${MAX}
+	@@head -8 js/jquery.mobile.core.js | ${SED_VER} > ${MAX}
 	@@cat ${FILES} >> ${MAX}
 
 min: mobile
-	@@head -8 js/jquery.mobile.js > ${MIN}
+	@@head -8 js/jquery.mobile.core.js | ${SED_VER} > ${MIN}
 	@@java -jar build/google-compiler-20100917.jar --js ${MAX} --warning_level QUIET --js_output_file ${MIN}.tmp
 	@@cat ${MIN}.tmp >> ${MIN}
 	@@rm -f ${MIN}.tmp
@@ -97,7 +101,7 @@ deploy: zip
 	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|rel="stylesheet"  href="../../|rel="stylesheet"  href="|g' {} \;
 	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|rel="stylesheet"  href="../|rel="stylesheet"  href="|g' {} \;
 
-	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|href="themes/default"|href="http://code.jquery.com/mobile/${VER}/${DIR}.min.css"|g' {} \;
+	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|href="themes/default/"|href="http://code.jquery.com/mobile/${VER}/${DIR}.min.css"|g' {} \;
 	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|<script type="text/javascript" src="js/all|<script src="http://code.jquery.com/jquery-1.4.3.min.js"></script><script type="text/javascript" src="js/all|' {} \;
 	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|src="js/all"|src="http://code.jquery.com/mobile/${VER}/${DIR}.min.js"|g' {} \;
 
