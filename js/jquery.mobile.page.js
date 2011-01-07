@@ -171,7 +171,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 
 		this.element
 			.find( "input, textarea" )
-			.not( "[type='radio'], [type='checkbox'], button, [type='button'], [type='submit'], [type='reset'], [type='image']" )
+			.not( "[type='radio'], [type='checkbox'], button, [type='button'], [type='submit'], [type='reset'], [type='image'], [type='hidden']" )
 			.not(this.keepNative)
 			.textinput();
 
