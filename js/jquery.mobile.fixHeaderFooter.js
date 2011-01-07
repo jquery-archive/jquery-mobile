@@ -62,36 +62,38 @@ $.fixedToolbars = (function(){
 				}
 				stateBefore = null;
 			});
-		
-		//function to return another footer already in the dom with the same data-id
-		function findStickyFooter(el){
-			var thisFooter = el.find('[data-role="footer"]');
-			return $( '.ui-footer[data-id="'+ thisFooter.data('id') +'"]:not(.ui-footer-duplicate)' ).not(thisFooter);
-		}
-		
-		//before page is shown, check for duplicate footer
-		$('.ui-page').live('pagebeforeshow', function(event, ui){
-			stickyFooter = findStickyFooter( $(event.target) );
-			if( stickyFooter.length ){
-				//if the existing footer is the first of its kind, create a placeholder before stealing it 
-				if( stickyFooter.parents('.ui-page:eq(0)').find('.ui-footer[data-id="'+ stickyFooter.data('id') +'"]').length == 1 ){
-					stickyFooter.before( stickyFooter.clone().addClass('ui-footer-duplicate') );
-				}
-				$(event.target).find('[data-role="footer"]').addClass('ui-footer-duplicate');
-				stickyFooter.appendTo($.pageContainer).css('top',0);
-				setTop(stickyFooter);
-			}
-		});
-
-		//after page is shown, append footer to new page
-		$('.ui-page').live('pageshow', function(event, ui){
-			if( stickyFooter && stickyFooter.length ){
-				stickyFooter.appendTo(event.target).css('top',0);
-			}
-			$.fixedToolbars.show(true, this);
-		});
-		
 	});
+		
+	//before page is shown, check for duplicate footer
+	$('.ui-page').live('pagebeforeshow', function(event, ui){
+		var page = $(event.target);
+		var footer = page.find('[data-role="footer"]:not(.ui-sticky-footer)');
+		var id = footer.data('id');
+		if (id)
+		{
+			stickyFooter = $('.ui-footer[data-id="' + id + '"].ui-sticky-footer');
+			if (stickyFooter.length == 0) {
+				// No sticky footer exists for this data-id. We'll use this
+				// footer as the sticky footer for the group and then create
+				// a placeholder footer for the page.
+				stickyFooter = footer;
+				footer = stickyFooter.clone(); // footer placeholder
+				stickyFooter.addClass('ui-sticky-footer').before(footer);
+			}
+			footer.addClass('ui-footer-duplicate');
+			stickyFooter.appendTo($.pageContainer).css('top',0);
+			setTop(stickyFooter);
+		}
+	});
+
+	//after page is shown, append footer to new page
+	$('.ui-page').live('pageshow', function(event, ui){
+		if( stickyFooter && stickyFooter.length ){
+			stickyFooter.appendTo(event.target).css('top',0);
+		}
+		$.fixedToolbars.show(true, this);
+	});
+		
 	
 	// element.getBoundingClientRect() is broken in iOS 3.2.1 on the iPad. The
 	// coordinates inside of the rect it returns don't have the page scroll position
