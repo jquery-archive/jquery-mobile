@@ -101,7 +101,7 @@ deploy: zip
 	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|rel="stylesheet"  href="../../|rel="stylesheet"  href="|g' {} \;
 	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|rel="stylesheet"  href="../|rel="stylesheet"  href="|g' {} \;
 
-	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|href="themes/default"|href="http://code.jquery.com/mobile/${VER}/${DIR}.min.css"|g' {} \;
+	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|href="themes/default/"|href="http://code.jquery.com/mobile/${VER}/${DIR}.min.css"|g' {} \;
 	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|<script type="text/javascript" src="js/all|<script src="http://code.jquery.com/jquery-1.4.3.min.js"></script><script type="text/javascript" src="js/all|' {} \;
 	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|src="js/all"|src="http://code.jquery.com/mobile/${VER}/${DIR}.min.js"|g' {} \;
 
