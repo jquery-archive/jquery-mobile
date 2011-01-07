@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="../../../external/qunit.css" type="text/css"/>
 	<script type="text/javascript" src="../../../external/qunit.js"></script>
 
-	<script type="text/javascript" src="listview_integration.js"></script>
+	<script type="text/javascript" src="listview_core.js"></script>
 </head>
 <body>
 
@@ -19,6 +19,19 @@
 <h2 id="qunit-userAgent"></h2>
 <ol id="qunit-tests">
 </ol>
+
+<style>
+	[data-role='page'] {
+	  position: absolute;
+	  top: -10000px;
+	  left: -10000px;
+	}
+
+	/* maintain styling */
+	.ui-mobile-viewport {
+	  margin: 8px;
+	}
+</style>
 
 <!-- Basic Linked view test -->
 <div data-role="page" id='basic-linked-test'>
@@ -108,15 +121,15 @@
 		<ul data-role="listview">
 			<li>
 				<a href="#split-list-link1">link one</a>
-				<a href="#split-list-link2">link second</a>				
+				<a href="#split-list-link2">link second</a>
 			</li>
 			<li>
 				<a href="#split-list-link1">link one</a>
-				<a href="#split-list-link2">link second</a>								
+				<a href="#split-list-link2">link second</a>
 			</li>
 			<li>
 				<a href="#split-list-link1">link one</a>
-				<a href="#split-list-link2">link second</a>								
+				<a href="#split-list-link2">link second</a>
 			</li>
 		</ul>
 	</div>

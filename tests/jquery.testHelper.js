@@ -46,11 +46,10 @@
 				return result;
 			};
 		},
-		
+
 		hideActivePageWhenComplete: function() {
 			if( $('#qunit-testresult').length > 0 ) {
 				$('.ui-page-active').css('display', 'none');
-				//location.href = location.href.split('#')[0];
 			} else {
 				setTimeout($.testHelper.hideActivePageWhenComplete, 500);
 			}
