@@ -150,11 +150,6 @@
 			duplicateCachedPage = null,
 			back = (back !== undefined) ? back : ( urlStack.length > 1 && urlStack[ urlStack.length - 2 ].url === url );
 
-		//If we are trying to transition to the same page that we are currently on ignore the request.
-		if(urlStack.length > 1 && url === urlStack[urlStack.length -1].url && !toIsArray ) {
-			return;
-		}
-
 		if( $.type(to) === "object" && to.url ){
 			url = to.url,
 			data = to.data,
@@ -166,6 +161,13 @@
 				data = undefined;
 			}
 		}
+
+
+		//If we are trying to transition to the same page that we are currently on ignore the request.
+		if(urlStack.length > 1 && url === urlStack[urlStack.length -1].url && !toIsArray ) {
+			return;
+		}
+
 
 		//reset base to pathname for new request
 		if(base){ base.reset(); }
