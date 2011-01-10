@@ -37,6 +37,7 @@
 	<link rel="stylesheet" href="../../../external/qunit.css" type="text/css"/>
 	<script type="text/javascript" src="../../../external/qunit.js"></script>
 
+	<script type="text/javascript" src="navigation_transitions.js"></script>
 	<script type="text/javascript" src="navigation_core.js"></script>
 </head>
 <body>
@@ -92,6 +93,17 @@
 
 <div id="default-trans" data-role="page">
 	<a href="#no-trans"></a>
+</div>
+
+<div id="ajax-diabled-form" data-role="page">
+	<form method="POST" id="non-ajax-form" action="/ajax-disabled-form" data-ajax="false">
+	</form>
+
+	<form method="POST" id="ajax-form" action="/ajax-diabled-form">
+	</form>
+
+	<form method="POST" id="rand-ajax-form" action="/ajax-disabled-form" data-ajax="foo">
+	</form>
 </div>
 </body>
 </html>
