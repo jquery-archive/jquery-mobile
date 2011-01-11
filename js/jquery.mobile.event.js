@@ -70,6 +70,7 @@ $.event.special.tap = {
 				
 				var moved = false,
 					touching = true,
+					origTarget = event.target,
 					origPos = [ event.pageX, event.pageY ],
 					originalType,
 					timer;
@@ -97,7 +98,10 @@ $.event.special.tap = {
 						clearTimeout( timer );
 						touching = false;
 						
-						if ( !moved ) {
+						/* ONLY trigger a 'tap' event if the start target is
+						 * the same as the stop target.
+						 */
+						if ( !moved && (origTarget == event.target)) {
 							originalType = event.type;
 							event.type = "tap";
 							$.event.handle.call( thisObject, event );
