@@ -95,7 +95,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			
 			header = $( "<div>", {
 					"data-role": "header",
-					"data-nobackbtn": true
+					"data-backbtn": false
 				})
 				.prependTo( listbox ),
 				
