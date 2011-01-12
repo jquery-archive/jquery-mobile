@@ -95,7 +95,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			
 			header = $( "<div>", {
 					"data-role": "header",
-					"data-nobackbtn": true
+					"data-backbtn": false
 				})
 				.prependTo( listbox ),
 				
@@ -123,6 +123,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		//expose to other methods
 		$.extend(self, {
 			select: select,
+			options: options,
 			selectID: selectID,
 			label: label,
 			buttonId:buttonId,
@@ -173,7 +174,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 			// index of option tag to be selected 
 			var newIndex = list.find( "li:not(.ui-li-divider)" ).index( this ),
-				option = options.eq( newIndex )[0];
+				option = self.options.eq( newIndex )[0];
 			
 			// toggle selected status on the tag for multi selects
 			option.selected = isMultiple ? !option.selected : true;
@@ -291,7 +292,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		var self = this,
 			select = this.element,
 			isMultiple = this.isMultiple,
-			options = select.find("option"),
+			options = this.options = select.find("option"),
 			selected = options.filter(":selected"),
 			
 			// return an array of all selected index's

@@ -6,7 +6,7 @@
 */
 (function($, undefined ) {
 $.fn.controlgroup = function(options){
-		
+	
 	return $(this).each(function(){
 	    var inHeaderFooter = $(this).parents('[data-role="header"],[data-role="footer"]').length > 0 ? true : false;
 		var o = $.extend({
