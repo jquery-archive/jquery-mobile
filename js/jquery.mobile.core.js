@@ -43,6 +43,39 @@
 		//configure meta viewport tag's content attr:
 		metaViewportContent: "width=device-width, minimum-scale=1, maximum-scale=1",
 
+		//automatically activate page on dom-init
+		autoStart: true,
+
+		start: function() {
+			//hide elements if we are rendering for the first time
+			$.mobile.autoStart ? undefined : $html.addClass('ui-mobile-rendering');
+
+			//find present pages
+			var $pages = $("[data-role='page']");
+
+			$pages.each(function(){
+				$(this).attr('data-url', $(this).attr('id'));
+			});
+
+			//set up active page
+			$.mobile.startPage = $.mobile.activePage = $pages.first();
+
+			//set page container
+			$.mobile.pageContainer = $.mobile.startPage.parent().addClass('ui-mobile-viewport');
+
+			//cue page loading message
+			$.mobile.pageLoading();
+
+			//initialize all pages present
+			$pages.page();
+
+			//trigger a new hashchange, hash or not
+			$window.trigger( "hashchange", [ true ] );
+
+			//remove rendering class
+			$html.removeClass('ui-mobile-rendering');
+		},
+
 		//support conditions that must be met in order to proceed
 		gradeA: function(){
 			return $.support.mediaquery;
@@ -114,7 +147,7 @@
 
 
 //add mobile, initial load "rendering" classes to docEl
-	$html.addClass('ui-mobile ui-mobile-rendering');
+	$html.addClass('ui-mobile' + ($.mobile.autoStart ? ' ui-mobile-rendering' : ''));
 
 
 //define & prepend meta viewport tag, if content is defined
@@ -152,31 +185,18 @@
 
 //dom-ready inits
 	$(function(){
+		//check if dom-init initialization has been turned off
+		//this is useful for dynamic content which is added after DOMContentLoaded
+		if ( $.mobile.autoStart ) {
+			//initialize jQuery Mobile
+			$.mobile.start();
+		} else {
+			//set page container to be the document body
+			$.mobile.pageContainer = $( window.document.body );
 
-		//find present pages
-		var $pages = $("[data-role='page']");
-
-		$pages.each(function(){
-			$(this).attr('data-url', $(this).attr('id'));
-		});
-
-		//set up active page
-		$.mobile.startPage = $.mobile.activePage = $pages.first();
-
-		//set page container
-		$.mobile.pageContainer = $.mobile.startPage.parent().addClass('ui-mobile-viewport');
-
-		//cue page loading message
-		$.mobile.pageLoading();
-
-		//initialize all pages present
-		$pages.page();
-
-		//trigger a new hashchange, hash or not
-		$window.trigger( "hashchange", [ true ] );
-
-		//remove rendering class
-		$html.removeClass('ui-mobile-rendering');
+			//cue page loading message
+			$.mobile.pageLoading();
+		}
 	});
 
 
