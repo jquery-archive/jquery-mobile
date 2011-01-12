@@ -6,7 +6,7 @@
 */ 
 (function($, undefined ) {
 $.fn.grid = function(options){
-	return $(this).each(function(){
+	return this.each(function(){
 		var o = $.extend({
 			grid: null
 		},options);
