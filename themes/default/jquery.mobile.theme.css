@@ -12,9 +12,9 @@
 .ui-bar-a {
 	border: 1px solid 		#2A2A2A;
 	background: 			#111111;
-	color: 					#fff;
+	color: 					#ffffff;
 	font-weight: bold;
-	text-shadow: 0 -1px 1px #000;
+	text-shadow: 0 -1px 1px #000000;
 	background-image: -moz-linear-gradient(top, 
 							#3c3c3c, 
 							#111111);
@@ -378,7 +378,7 @@
 	background-image: -webkit-gradient(linear,left top,left bottom,
 		color-stop(0, 		#ddd),
 		color-stop(1, 		#bbb));
-  	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ddd', EndColorStr='#bbb')";
+  	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#dddddd', EndColorStr='#bbbbbb')";
 }
 .ui-bar-d,
 .ui-bar-d input,
