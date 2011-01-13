@@ -324,14 +324,32 @@
 
 			$.mobile.pageLoading();
 
+            // json-ptach
+            json = fileUrl.indexOf('mode=json');
+            if (json != -1) {
+                dType = 'json';
+            } else {
+                dType = 'text';
+            }
+            // json-patch END
+
 			$.ajax({
 				url: fileUrl,
 				type: type,
 				data: data,
+				dataType: dType, // json-patch
 				success: function( html ) {
 					if(base){ base.set(fileUrl); }
 
 					var all = $("<div></div>");
+                    // json-patch
+                    if (json != -1) {
+                        var myHtml;
+                        var jTemp = html.template;
+                        myHtml = $.tmpl($("#" + jTemp).html(), html);
+                        html = $('<div />').append(myHtml).html();
+                    }
+                    // json-patch END					
 					//workaround to allow scripts to execute when included in page divs
 					all.get(0).innerHTML = html;
 					to = all.find('[data-role="page"], [data-role="dialog"]').first();
