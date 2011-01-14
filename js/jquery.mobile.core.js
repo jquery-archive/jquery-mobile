@@ -156,7 +156,7 @@
 		//find present pages
 		var $pages = $("[data-role='page']");
 
-		$pages.each(function(){
+		$("[data-role='page'], [data-role='dialog']").each(function(){
 			$(this).attr('data-url', $(this).attr('id'));
 		});
 
