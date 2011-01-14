@@ -160,17 +160,30 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		
 		//button events
 		button
-			.bind( $.support.touch ? "touchend" : "click" , function( event ){
+			.bind( "touchstart" ,function( event ){
+				//set startTouches to cached copy of 
+				$( this ).data( "startTouches", $.extend({}, event.originalEvent.touches[ 0 ]) );
+			})
+			.bind( $.support.touch ? "touchend" : "mouseup" , function( event ){
+				//if it's a scroll, don't open
 				if( $( this ).data( "moved" ) ){
 					$( this ).removeData( "moved" );
 				}
 				else{
 					self.open();
-					event.preventDefault();
 				}	
+				event.preventDefault();
 			})
-			.bind( "touchmove", function(event){
-				$( this ).data( "moved", true );
+			.bind( "touchmove", function( event ){
+				//if touch moved enough, set data moved and don't open menu
+				var thisTouches = event.originalEvent.touches[ 0 ],
+					startTouches = $( this ).data( "startTouches" ),
+					deltaX = Math.abs(thisTouches.pageX - startTouches.pageX),
+					deltaY = Math.abs(thisTouches.pageY - startTouches.pageY);
+									
+				if( deltaX > 10 || deltaY > 10 ){
+					$( this ).data( "moved", true );
+				}	
 			});
 		
 		//events for list items
