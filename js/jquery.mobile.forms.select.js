@@ -159,10 +159,19 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			});
 		
 		//button events
-		button.bind( $.support.touch ? "touchstart" : "click", function(event){
-			self.open();
-			event.preventDefault();
-		});
+		button
+			.bind( $.support.touch ? "touchend" : "click" , function( event ){
+				if( $( this ).data( "moved" ) ){
+					$( this ).removeData( "moved" );
+				}
+				else{
+					self.open();
+					event.preventDefault();
+				}	
+			})
+			.bind( "touchmove", function(event){
+				$( this ).data( "moved", true );
+			});
 		
 		//events for list items
 		list.delegate("li:not(.ui-disabled, .ui-li-divider)", "click", function(event){
