@@ -94,21 +94,24 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				.appendTo( listbox ),
 			
 			header = $( "<div>", {
-					"data-role": "header",
-					"data-backbtn": false
+					"class": "ui-header ui-bar-" + theme
 				})
 				.prependTo( listbox ),
 				
-			headerTitle = $( "<h1>" )
+			headerTitle = $( "<h1>", {
+					"class": "ui-title"
+				})
 				.appendTo( header ),
 				
 			headerClose = $( "<a>", {
 					"data-iconpos": "notext",
 					"data-icon": "delete",
 					"text": o.closeText,
-					"href": "#"
+					"href": "#",
+					"class": "ui-btn-left"
 				})
-				.appendTo( header ),
+				.appendTo( header )
+				.buttonMarkup(),
 				
 			menuType;
 		
