@@ -18,7 +18,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		menuPageTheme: 'b',
 		overlayTheme: 'a',
 		hidePlaceholderMenuItems: true,
-		closeText: 'Close'
+		closeText: 'Close',
+		useNativeMenu: true
 	},
 	_create: function(){
 	
@@ -27,7 +28,6 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			o = this.options,
 			
 			select = this.element
-						.attr( "tabindex", "-1" )
 						.wrap( "<div class='ui-select'>" ),
 							
 			selectID = select.attr( "id" ),
@@ -152,26 +152,39 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		select
 			.change(function(){ 
 				self.refresh();
-			})
-			.focus(function(){
-				$(this).blur();
-				button.focus();
 			});
-		
-		//button events
-		button
-			.bind( $.support.touch ? "touchend" : "click" , function( event ){
-				if( $( this ).data( "moved" ) ){
-					$( this ).removeData( "moved" );
-				}
-				else{
-					self.open();
-					event.preventDefault();
-				}	
-			})
-			.bind( "touchmove", function(event){
-				$( this ).data( "moved", true );
-			});
+			
+		//support for using the native select menu with a custom button
+		if( o.useNativeMenu ){
+			
+			select
+				.appendTo(button)
+				.bind( "touchstart mousedown", function( e ){
+					//add active class to button
+					button.addClass( $.mobile.activeBtnClass );
+					
+					//ensure button isn't clicked
+					e.stopPropagation();	
+				})
+				.bind( "focus mouseover", function(){
+					button.trigger( "mouseover" );
+				})
+				.bind( "blur mouseout", function(){
+					button
+						.trigger( "mouseout" )
+						.removeClass( $.mobile.activeBtnClass );
+				});
+			
+			button.attr( "tabindex", "-1" );
+		}	
+		else {
+			select
+				.attr( "tabindex", "-1" )
+				.focus(function(){
+					$(this).blur();
+					button.focus();
+				});
+		}
 		
 		//events for list items
 		list.delegate("li:not(.ui-disabled, .ui-li-divider)", "click", function(event){
