@@ -123,7 +123,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		//expose to other methods
 		$.extend(self, {
 			select: select,
-			options: options,
+			optionElems: options,
 			selectID: selectID,
 			label: label,
 			buttonId:buttonId,
@@ -159,10 +159,19 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			});
 		
 		//button events
-		button.bind( $.support.touch ? "touchstart" : "click", function(event){
-			self.open();
-			event.preventDefault();
-		});
+		button
+			.bind( $.support.touch ? "touchend" : "click" , function( event ){
+				if( $( this ).data( "moved" ) ){
+					$( this ).removeData( "moved" );
+				}
+				else{
+					self.open();
+					event.preventDefault();
+				}	
+			})
+			.bind( "touchmove", function(event){
+				$( this ).data( "moved", true );
+			});
 		
 		//events for list items
 		list.delegate("li:not(.ui-disabled, .ui-li-divider)", "click", function(event){
@@ -174,7 +183,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 			// index of option tag to be selected 
 			var newIndex = list.find( "li:not(.ui-li-divider)" ).index( this ),
-				option = self.options.eq( newIndex )[0];
+				option = self.optionElems.eq( newIndex )[0];
 			
 			// toggle selected status on the tag for multi selects
 			option.selected = isMultiple ? !option.selected : true;
@@ -292,7 +301,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		var self = this,
 			select = this.element,
 			isMultiple = this.isMultiple,
-			options = this.options = select.find("option"),
+			options = this.optionElems = select.find("option"),
 			selected = options.filter(":selected"),
 			
 			// return an array of all selected index's

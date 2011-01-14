@@ -12,15 +12,18 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 			$el = self.element,
 			$prevPage = $.mobile.activePage,
 			$closeBtn = $('<a href="#" data-icon="delete" data-iconpos="notext">Close</a>');
-	
-		$el.delegate("a, form", "click submit", function(e){
+
+    var dialogClickHandler = function(e){
 			if( e.type == "click" && ( $(e.target).closest('[data-back]')[0] || this==$closeBtn[0] ) ){
 				self.close();
 				return false;
 			}
 			//otherwise, assume we're headed somewhere new. set activepage to dialog so the transition will work
 			$.mobile.activePage = self.element;
-		});
+		};
+	
+		$el.delegate("a", "click", dialogClickHandler);
+		$el.delegate("form", "submit", dialogClickHandler);
 	
 		this.element
 			.bind("pageshow",function(){
