@@ -18,7 +18,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		menuPageTheme: 'b',
 		overlayTheme: 'a',
 		hidePlaceholderMenuItems: true,
-		closeText: 'Close'
+		closeText: 'Close',
+		useNativeMenu: false
 	},
 	_create: function(){
 
@@ -27,7 +28,6 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			o = this.options,
 
 			select = this.element
-						.attr( "tabindex", "-1" )
 						.wrap( "<div class='ui-select'>" ),
 
 			selectID = select.attr( "id" ),
@@ -151,6 +151,36 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		//disable if specified
 		if( o.disabled ){ this.disable(); }
 
+		//support for using the native select menu with a custom button
+		if( o.useNativeMenu ){
+
+			select
+				.appendTo(button)
+				.bind( "touchstart mousedown", function( e ){
+					//add active class to button
+					button.addClass( $.mobile.activeBtnClass );
+
+					//ensure button isn't clicked
+					e.stopPropagation();
+				})
+				.bind( "focus mouseover", function(){
+					button.trigger( "mouseover" );
+				})
+				.bind( "blur mouseout", function(){
+					button
+						.trigger( "mouseout" )
+						.removeClass( $.mobile.activeBtnClass );
+				});
+
+			button.attr( "tabindex", "-1" );
+		}
+		else {
+			select
+				.attr( "tabindex", "-1" )
+				.focus(function(){
+					$(this).blur();
+					button.focus();
+				});
 		//events on native select
 		select
 			.change(function(){
@@ -188,6 +218,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					$( this ).data( "moved", true );
 				}
 			});
+
+		}
 
 		//events for list items
 		list.delegate("li:not(.ui-disabled, .ui-li-divider)", "click", function(event){
