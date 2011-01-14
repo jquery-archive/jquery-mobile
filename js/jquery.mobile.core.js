@@ -164,9 +164,9 @@
 		$.mobile.startPage = $.mobile.activePage = $pages.first();
 		
 		// set the data-page-title attribute based upon the title of the first page to load
-		var $title = $("title");
-		if( $title && $title.text() ){
-			$.mobile.startPage.data('page-title', $title.text().trim()) 
+		var title = window.document.title;
+		if( title ){
+			$.mobile.startPage.data('page-title', title.trim()) 
 		};
 		
 		//set page container

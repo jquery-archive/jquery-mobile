@@ -215,7 +215,7 @@
 
 			function updatePageTitle(){
 				if( to.data('page-title') ) {
-					document.title = to.data('page-title');
+					window.document.title = to.data('page-title');
 				}
 			};
 			
@@ -344,7 +344,7 @@
 					
 					// get the title of the page we are transitioning to we can update the location.title later
 					var $title = all.find('title:eq(0)');
-					var toPageTitle = ($title && $title.text()) ? $title.text().trim() : '';
+					var toPageTitle = ($title && $title.text()) ? $title.text().trim() : false;
 					if (toPageTitle) { to.attr("data-page-title", toPageTitle) };
 					
 					//rewrite src and href attrs to use a base url
