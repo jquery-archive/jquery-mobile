@@ -384,7 +384,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			self.list.find( ".ui-btn-active" ).focus();
 		}
 
-		// NOTE addresses issue with firefox outerHeight issue when the parent dialog
+		// NOTE addresses issue with firefox outerHeight when the parent dialog
 		//      is display: none. Upstream?
 		if( dialogUsed || menuHeight > screenHeight - 80 || !$.support.scrollTop ){
 
