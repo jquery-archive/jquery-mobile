@@ -178,7 +178,7 @@ $.event.special.swipe = {
 			// will bind to the event using DOM methods.
 			if ( $.support.orientation ) { return false; }
 			
-			// Because the orientationchange event doesn't exist, si
+			// Because the orientationchange event doesn't exist, simulate the
 			// event by testing window dimensions on resize.
 			win.bind( "resize", simulateOrientationChange);
 		},
@@ -217,7 +217,7 @@ $.event.special.swipe = {
 			win.trigger( "orientationchange" );
 		}
 	};
-
+	
 	// Get the current page orientation. This method is exposed publicly, should it
 	// be needed, as jQuery.event.special.orientationchange.orientation()
 	special_event.orientation = orientationByRatio = function() {
