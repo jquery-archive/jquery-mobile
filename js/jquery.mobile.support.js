@@ -28,11 +28,21 @@ function propExists( prop ){
 //test for dynamic-updating base tag support (allows us to avoid href,src attr rewriting)
 function baseTagTest(){
 	var fauxBase = location.protocol + '//' + location.host + location.pathname + "ui-dir/",
-		base = $("<base>", {"href": fauxBase}).appendTo("head"),
-		link = $( "<a href='testurl'></a>" ).prependTo( fakeBody ),
+		base = $("head base"),
+		fauxEle = null,
+		href = '';
+	if (!base.length) {
+		base = fauxEle = $("<base>", {"href": fauxBase}).appendTo("head");
+	}
+	else {
+		href = base.attr("href");
+	}
+	var link = $( "<a href='testurl'></a>" ).prependTo( fakeBody ),
 		rebase = link[0].href;
-	base[0].href = location.pathname;	
-	base.remove();
+	base[0].href = href ? href : location.pathname;
+	if (fauxEle) {
+		fauxEle.remove();
+	}
 	return rebase.indexOf(fauxBase) === 0;
 };
 
