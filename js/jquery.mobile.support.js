@@ -37,7 +37,7 @@ function baseTagTest(){
 };
 
 $.extend( $.support, {
-	orientation: ($.type(window.orientation) === 'number'),
+	orientation: (('orientation' in window) && ('orientationchange' in window)),
 	touch: "ontouchend" in document,
 	cssTransitions: "WebKitTransitionEvent" in window,
 	pushState: !!history.pushState,
