@@ -86,11 +86,11 @@
 	});
 
 
-//trigger mobileinit event - useful hook for configuring $.mobile settings before they're used
+	//trigger mobileinit event - useful hook for configuring $.mobile settings before they're used
 	$( window.document ).trigger('mobileinit');
 
 
-//support conditions
+	//support conditions
 	//if device support condition(s) aren't met, leave things as they are -> a basic, usable experience,
 	//otherwise, proceed with the enhancements
 	if ( !$.mobile.gradeA() ) {
@@ -98,7 +98,7 @@
 	}
 
 
-//define vars for interal use
+	//define vars for interal use
 	var $window = $(window),
 		$html = $('html'),
 		$head = $('head'),
@@ -113,15 +113,15 @@
 			: undefined;
 
 
-//add mobile, initial load "rendering" classes to docEl
+	//add mobile, initial load "rendering" classes to docEl
 	$html.addClass('ui-mobile ui-mobile-rendering');
 
 
-//define & prepend meta viewport tag, if content is defined
+	//define & prepend meta viewport tag, if content is defined
 	$.mobile.metaViewportContent ? $("<meta>", { name: "viewport", content: $.mobile.metaViewportContent}).prependTo( $head ) : undefined;
 
 
-//expose some core utilities
+	//expose some core utilities
 	$.extend($.mobile, {
 
 		// turn on/off page loading message.
@@ -150,7 +150,7 @@
 	});
 
 
-//dom-ready inits
+	//dom-ready inits
 	$(function(){
 
 		//find present pages
@@ -180,7 +180,7 @@
 	});
 
 
-//window load event
+	//window load event
 	//hide iOS browser chrome on load
 	$window.load( $.mobile.silentScroll );
 
