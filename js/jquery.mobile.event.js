@@ -172,8 +172,7 @@ $.event.special.swipe = {
  */
 (function($) {
 	var $win				= $(window);
-	var nativeOrientation	= (window.orientation !== undefined
-								? true : false);
+	var nativeOrientation	= (('orientation' in window) && ('orientationchange' in window));
 
 	/* orientation functions set by either setupNative() or setupNonNative()
 	 * depending on whether or not the current browser natively supports
