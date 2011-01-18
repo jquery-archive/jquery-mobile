@@ -164,33 +164,89 @@ $.event.special.swipe = {
 	}
 };
 
-/*  Ensure that there is 'orientation' property as well as an
- *  'orientationchange' event available on 'window'.
- *
- *  Depends upon:
- *      jquery
- */
-(function($) {
-	var $win				= $(window);
-	var nativeOrientation	= (('orientation' in window) && ('orientationchange' in window));
+(function($){
+	// "Cowboy" Ben Alman
+	
+	var win = $(window),
+		special_event,
+		get_orientation,
+		last_orientation;
+	
+	$.event.special.orientationchange = special_event = {
+		setup: function(){
+			// If the event is supported natively, return false so that jQuery
+			// will bind to the event using DOM methods.
+			if ( $.support.orientation ) { return false; }
+			
+			// Because the orientationchange event doesn't exist, si
+			// event by testing window dimensions on resize.
+			win.bind( "resize", simulateOrientationChange);
+		},
+		teardown: function(){
+			// If the event is not supported natively, return false so that
+			// jQuery will unbind the event using DOM methods.
+			if ( $.support.orientation ) { return false; }
+			
+			// Because the orientationchange event doesn't exist, unbind the
+			// resize event handler.
+			win.unbind( "resize", simulateOrientationChange);
+		},
+		add: function( handleObj ) {
+			// Save a reference to the bound event handler.
+			var old_handler = handleObj.handler;
+			
+			handleObj.handler = function( event ) {
+				// Modify event object, adding the .orientation property.
+				event.orientation = get_orientation();
+				
+				// Call the originally-bound event handler and return its result.
+				return old_handler.apply( this, arguments );
+			};
+		}
+	};
+	
+	// If the event is not supported natively, this handler will be bound to
+	// the window resize event to simulate the orientationchange event.
+	function simulateOrientationChange(event) {
+		// Get the current orientation.
+		event.orientation = get_orientation();
+		
+		if (event.orientation !== last_orientation) {
+			// The orientation has changed, so trigger the orientationchange event.
+			last_orientation = event.orientation;
+			win.trigger( "orientationchange" );
+		}
+	};
 
-	/* orientation functions set by either setupNative() or setupNonNative()
-	 * depending on whether or not the current browser natively supports
-	 * 'orientation'
-	 */
-	var getOrientation;
-	var orientationChange;
-
-
-	/** @brief  Return an orientation string based upon the current
-	 *          width/height ratio of the window.
-	 */
-	function orientationByRatio()
-	{
-		var ratio		= $win.width() / $win.height();
-		var orientation	= (ratio < 1.1 ? 'portrait' : 'landscape');
+	// Get the current page orientation. This method is exposed publicly, should it
+	// be needed, as jQuery.event.special.orientationchange.orientation()
+	special_event.orientation = orientationByRatio = function() {
+		var ratio       = win.width() / win.height();
+		var orientation = (ratio < 1.1 ? 'portrait' : 'landscape');
 
 		return orientation;
+	};
+
+	/*************************************************************************
+	 * Setup orientation support based upon whether it is natively supported.
+	 *
+	 */
+	if ( $.support.orientation )    setupNative();
+	else                            setupNonNative();
+
+
+	/** @brief If we do NOT have native orientation support, then we will use
+	 *         the window resize event to determine a textual orientation value
+	 *         based upon the window's width/height ratio.
+	 */
+	function setupNonNative()
+	{
+		get_orientation = orientationByRatio;
+
+		$(document).ready(function() {
+			// Force an initial orientation change
+			simulateOrientationChange( $.Event('orientationchange') );
+		});
 	}
 
 	/** @brief If we have native orientation support, then we need to map
@@ -261,7 +317,7 @@ $.event.special.swipe = {
 		 *  window.orientation values, measured in degrees, and a textual
 		 *  representaiton of the orientation (e.g. 'portrait', 'landscape')
 		 */
-		getOrientation = function orientation() {
+		get_orientation = function orientation() {
 			var orientation = orientationMap[window.orientation];
 
 			if (orientation !== undefined) {
@@ -303,90 +359,9 @@ $.event.special.swipe = {
 
 		$(document).ready(function() {
 			// Force an initial orientation change
-			$win.trigger('orientationchange');
+			win.trigger('orientationchange');
 		});
 	}
-
-	/** @brief If we do NOT have native orientation support, then we will use
-	 *         the window resize event to determine a textual orientation value
-	 *         based upon the window's width/height ratio.
-	 */
-	function setupNonNative()
-	{
-		getOrientation = orientationByRatio;
-
-		/* Orientation is not directly supported by this browser so we will add
-		 * our own 'orientation' property to window and simulate orientation by
-		 * monitoring the window 'resize' event
-		 */
-		var lastOrientation;
-		orientationChange = function(event) {
-			event.orientation = window.orientation; //getOrientation();
-			if (event.orientation !== lastOrientation) {
-				lastOrientation = event.orientation;
-
-				$win.trigger('orientationchange');
-			}
-		};
-
-		// Add a read-only 'orientation' property to window
-		Object.defineProperty(window, 'orientation', {
-			configurable:	false,
-			writeable:		false,
-			enumerable:		true,
-			get:			getOrientation
-		});
-
-		$(document).ready(function() {
-			// Force an initial orientation change
-			orientationChange( $.Event('orientationchange') );
-		});
-	}
-
-	/*************************************************************************
-	 * Setup orientation support based upon whether it is natively supported.
-	 *
-	 */
-	if (nativeOrientation)	setupNative();
-	else					setupNonNative();
-
-	// Create an 'orientationchange' event
-	$.event.special.orientationchange = {
-		setup: function() {
-			/* If orientaiton is supported natively, there is no need to
-			 * bind to 'resize' to emulate orientation.
-			 */
-			if (orientationChange === undefined) { return false; }
-
-			$win.bind('resize', orientationChange);
-		},
-		teardown: function() {
-			/* If orientaiton is supported natively, we will not have bound to
-			 * to 'resize'.
-			 */
-			if (orientationChange === undefined) { return false; }
-
-			$win.unbind('resize', orientationChange);
-		},
-		add: function(event) {
-			/* Regardless of whether orientation is supported natively, we want
-			 * to add an 'orientation' member to any such event.
-			 *
-			 * The value or 'orientation' will be a simple, textual
-			 * representaiton of the orientation (e.g. 'portrait', 'landscape')
-			 *
-			 * To accomplish this, we insert a pseudo-handler to add
-			 * 'orientation' to the event before invoking any handler.
-			 */
-			var handler = event.handler;
-
-			event.handler = function( event ) {
-				event.orientation = getOrientation();
-
-				return handler.apply( this, arguments );
-			};
-		}
-	};
 
 }(jQuery));
 
