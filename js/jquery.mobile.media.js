@@ -28,9 +28,17 @@ $.mobile.media = (function() {
 
 	return function( query ) {
 		if ( !( query in cache ) ) {
-			var styleBlock = $( "<style type='text/css'>" +
-				"@media " + query + "{#jquery-mediatest{position:absolute;}}" +
-				"</style>" );
+			var styleBlock = document.createElement('style'),
+        		cssrule = "@media " + query + " { #jquery-mediatest { position:absolute; } }";
+	        //must set type for IE!	
+	        styleBlock.type = "text/css";
+	        if (styleBlock.styleSheet){ 
+	          styleBlock.styleSheet.cssText = cssrule;
+	        } 
+	        else {
+	          styleBlock.appendChild(document.createTextNode(cssrule));
+	        } 
+				
 			$html.prepend( fakeBody ).prepend( styleBlock );
 			cache[ query ] = testDiv.css( "position" ) === "absolute";
 			fakeBody.add( styleBlock ).remove();
