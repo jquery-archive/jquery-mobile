@@ -163,6 +163,12 @@
 	//url stack, useful when plugins need to be aware of previous pages viewed
 	$.mobile.urlStack = urlStack;
 
+	//check for an external resource
+	$.mobile.isExternalLink = function(anchor){
+		var $anchor = $(anchor);
+		return /^(:?\w+:)/.test( $anchor.attr('href') ) || $anchor.is( "[rel=external]" );
+	},
+
 	// changepage function
 	$.mobile.changePage = function( to, transition, back, changeHash){
 
@@ -446,7 +452,7 @@
 			//if target attr is specified, it's external, and we mimic _blank... for now
 			target = $this.is( "[target]" ),
 			//if it still starts with a protocol, it's external, or could be :mailto, etc
-			external = target || /^(:?\w+:)/.test( href ) || $this.is( "[rel=external]" );
+			external = target || $.mobile.isExternalLink(this);
 
 		if( href === '#' ){
 			//for links created purely for interaction - ignore
