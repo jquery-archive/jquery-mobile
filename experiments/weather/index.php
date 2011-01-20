@@ -21,8 +21,9 @@ $forecast_list = $xml->xpath("/xml_api_reply/weather/forecast_conditions");
 	<head>
 	<meta charset="utf-8" /> 
 	<title>jQuery Mobile Framework - Weather for <?= $information[0]->city['data']; ?></title> 
-	<link rel="stylesheet"  href="../../themes/default/index.php" />
-	<script src="../../js/index.php"></script>
+	<link rel="stylesheet" href="../../themes/default/" />
+	<script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.0a2/jquery.mobile-1.0a2.min.js"></script>
 	<style>
 		.current { text-align: left; }
 		h1 { font-size: 1.3em; text-align: center;  }

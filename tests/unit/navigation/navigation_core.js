@@ -37,4 +37,10 @@
 
 		same(called, 2, "change page should be called twice");
 	});
+
+	test( "check for external link succeeds for when the protocol is included", function(){
+		same($.mobile.isExternalLink("<a href='mailto:'></a>"), true, "mailto");
+		same($.mobile.isExternalLink("<a href='http://foo.com'></a>"), true, "http protocol");
+		same($.mobile.isExternalLink("<a href='foo' rel='external'></a>"), true, "rel=external");
+	});
 })(jQuery);
