@@ -300,7 +300,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		$( parentList.find( "ul, ol" ).toArray().reverse() ).each(function( i ) {
 			var list = $( this ),
 				parent = list.parent(),
-				title = $.trim(parent.contents()[ 0 ].nodeValue.split("\n")[0]) || parent.find('a:first').text(),
+				title = $.trim(parent.contents()[ 0 ].nodeValue) || parent.find('a:first').text(),
 				id = parentId + "&" + $.mobile.subPageUrlKey + "=" + self._idStringEscape(title + " " + i),
 				theme = list.data( "theme" ) || o.theme,
 				countTheme = list.data( "counttheme" ) || parentList.data( "counttheme" ) || o.countTheme,
