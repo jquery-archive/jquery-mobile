@@ -165,8 +165,12 @@
 
 	//check for an external resource
 	$.mobile.isExternalLink = function(anchor){
-		var $anchor = $(anchor);
-		return /^(:?\w+:)/.test( $anchor.attr('href') ) || $anchor.is( "[rel=external]" );
+		var $anchor = $(anchor),
+			hasProtocol = /^(:?\w+:)/.test( $anchor.attr('href') ),
+			hasRelExternal = $anchor.is( "[rel=external]" ),
+			hasTarget = $anchor.is( "[target]" );
+
+		return hasProtocol || hasRelExternal || hasTarget;
 	},
 
 	// changepage function
@@ -451,8 +455,9 @@
 			href = $this.attr( "href" ).replace( location.protocol + "//" + location.host, ""),
 			//if target attr is specified, it's external, and we mimic _blank... for now
 			target = $this.is( "[target]" ),
+
 			//if it still starts with a protocol, it's external, or could be :mailto, etc
-			external = target || $.mobile.isExternalLink(this);
+			external = $.mobile.isExternalLink(this);
 
 		if( href === '#' ){
 			//for links created purely for interaction - ignore
