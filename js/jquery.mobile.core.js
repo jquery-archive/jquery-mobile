@@ -130,7 +130,9 @@
 				$html.removeClass( "ui-loading" );
 			} else {
 				if( $.mobile.loadingMessage ){
-					$loader.appendTo($.mobile.pageContainer).css({top: $(window).scrollTop() + 75});
+					var activeLink = $( "." + $.mobile.activeBtnClass ).eq(0),
+						yPos = activeLink.length ? activeLink.offset().top : $(window).scrollTop() + 75;
+					$loader.appendTo($.mobile.pageContainer).css({top: yPos});
 				}
 				$html.addClass( "ui-loading" );
 			}

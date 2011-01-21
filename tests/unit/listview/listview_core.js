@@ -62,6 +62,10 @@
 			start();
 		}, 1000);
 	})
+	
+	test( "nested list title should use first text node, regardless of line breaks", function(){
+		ok($('#nested-list-test .linebreaknode').text() === "More animals", 'Text should be "More animals"');
+	});
 
 	module('Ordered Lists')
 
