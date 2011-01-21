@@ -10,7 +10,8 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 		theme: null
 	},
 	_create: function(){
-		var input = this.element,
+		var self = this,
+			input = this.element,
 			label = input.closest("form,fieldset,[data-role='page']").find("label[for='" + input.attr( "id" ) + "']"),
 			inputtype = input.attr( "type" ),
 			checkedicon = "ui-icon-" + inputtype + "-on",
@@ -40,18 +41,13 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 				if( $(this).parent().is('.ui-disabled') ){ return false; }
 			},
 			
-			mousedown: function() {
-				if( $(this).parent().is('.ui-disabled') ){ return false; }
-				label.data( "state", input.attr( "checked" ) );
-			},
+			click: false
 			
-			click: function() {
-				setTimeout(function() {
-					if ( input.attr( "checked" ) === label.data( "state" ) ) {
-						input.trigger( "click" );
-					}
-				}, 1);
-			}
+		})
+		.bind( $.support.touch ? "touchend" : "mouseup", function(){
+			if( $(this).parent().is('.ui-disabled') ){ return false; }
+			input.attr( "checked", !input.is( ":checked" ) );
+			self.refresh();
 		});
 		
 		input
