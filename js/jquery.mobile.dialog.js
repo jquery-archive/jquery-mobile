@@ -12,13 +12,13 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 			$el = self.element,
 			$prevPage = $.mobile.activePage,
 			$closeBtn = $('<a href="#" data-icon="delete" data-iconpos="notext">Close</a>'),
-		
+
 			dialogClickHandler = function(e){
 				var $target = $(e.target);
 
 				// fixes issues with target links in dialogs breaking
 				// page transitions by reseting the active page below
-				if( $target.attr('target') || $.mobile.isExternalLink($target) ) {
+				if( $.mobile.isExternalLink($target) ) {
 					return;
 				}
 
