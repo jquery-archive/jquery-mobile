@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8" />
-	<title>jQuery Mobile Navigation Test Suite</title>
+	<title>jQuery Mobile Dialog Test Suite</title>
 
 	<script type="text/javascript" src="../../../js/jquery.js"></script>
 	<script type="text/javascript" src="../../../js/jquery.ui.widget.js"></script>
@@ -37,12 +37,11 @@
 	<link rel="stylesheet" href="../../../external/qunit.css" type="text/css"/>
 	<script type="text/javascript" src="../../../external/qunit.js"></script>
 
-	<script type="text/javascript" src="navigation_transitions.js"></script>
-	<script type="text/javascript" src="navigation_core.js"></script>
+	<script type="text/javascript" src="dialog_events.js"></script>
 </head>
 <body>
 
-<h1 id="qunit-header">jQuery Mobile Navigation Test Suite</h1>
+<h1 id="qunit-header">jQuery Mobile Dialog Test Suite</h1>
 <h2 id="qunit-banner"></h2>
 <h2 id="qunit-userAgent"></h2>
 <ol id="qunit-tests">
@@ -51,7 +50,7 @@
 <!-- NOTE body must be used in place of main otherwise transition behaviour fails -->
 
 <style>
-	[data-role='page'] {
+	[data-role='page'], [data-role='dialog']{
 	  position: absolute;
 	  top: -10000px;
 	  left: -10000px;
@@ -63,47 +62,17 @@
 	}
 </style>
 
-<div id="foo" data-role="page">
-	<a href="#bar" data-transition="flip"></a>
-</div>
-
 <div id="bar" data-role="page">
-	<a href="#baz"></a>
+	<a href="#foo-dialog" data-role="button" data-inline="true" data-rel="dialog"></a>
 </div>
 
-<div id="baz" data-role="page">
-	<a href="#foo"></a>
+<div id="foo-dialog" data-role="dialog">
+	<a href="http://google.com" id="http-link">foo</a>
+	<a href="mailto:foo@bar.com" id="mailto-link">foo</a>
+	<a href="#bar" rel="external" id="rel-link">foo</a>
+	<a href="#bar" target="foo" id="target-link">foo</a>
+	<a href="#bar" id="internal-link">foo</a>
 </div>
 
-<div id="fade-trans" data-role="page">
-	<a href="#flip-trans" data-transition="fade"></a>
-</div>
-
-<div id="flip-trans" data-role="page">
-	<a href="#fade-trans" data-transition="flip"></a>
-</div>
-
-<div id="no-trans" data-role="page">
-	<a href="#pop-trans"></a>
-</div>
-
-<div id="pop-trans" data-role="page">
-	<a href="#no-trans" data-transition="pop"></a>
-</div>
-
-<div id="default-trans" data-role="page">
-	<a href="#no-trans"></a>
-</div>
-
-<div id="ajax-diabled-form" data-role="page">
-	<form method="POST" id="non-ajax-form" action="/ajax-disabled-form" data-ajax="false">
-	</form>
-
-	<form method="POST" id="ajax-form" action="/ajax-diabled-form">
-	</form>
-
-	<form method="POST" id="rand-ajax-form" action="/ajax-disabled-form" data-ajax="foo">
-	</form>
-</div>
 </body>
 </html>

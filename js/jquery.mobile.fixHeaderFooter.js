@@ -6,13 +6,16 @@
 */
 (function($, undefined ) {
 $.fn.fixHeaderFooter = function(options){
-	if( !$.support.scrollTop ){ return $(this); }
-	return $(this).each(function(){
-		if( $(this).data('fullscreen') ){ $(this).addClass('ui-page-fullscreen'); }
-		$(this).find('.ui-header[data-position="fixed"]').addClass('ui-header-fixed ui-fixed-inline fade'); //should be slidedown
-		$(this).find('.ui-footer[data-position="fixed"]').addClass('ui-footer-fixed ui-fixed-inline fade'); //should be slideup		
+	if( !$.support.scrollTop ){ return this; }
+	
+	return this.each(function(){
+		var $this = $(this);
+		
+		if( $this.data('fullscreen') ){ $this.addClass('ui-page-fullscreen'); }
+		$this.find('.ui-header[data-position="fixed"]').addClass('ui-header-fixed ui-fixed-inline fade'); //should be slidedown
+		$this.find('.ui-footer[data-position="fixed"]').addClass('ui-footer-fixed ui-fixed-inline fade'); //should be slideup		
 	});
-};				
+};
 
 //single controller for all showing,hiding,toggling		
 $.fixedToolbars = (function(){
@@ -66,9 +69,10 @@ $.fixedToolbars = (function(){
 		
 	//before page is shown, check for duplicate footer
 	$('.ui-page').live('pagebeforeshow', function(event, ui){
-		var page = $(event.target);
-		var footer = page.find('[data-role="footer"]:not(.ui-sticky-footer)');
-		var id = footer.data('id');
+		var page = $(event.target),
+			footer = page.find('[data-role="footer"]:not(.ui-sticky-footer)'),
+			id = footer.data('id');
+		stickyFooter = null;
 		if (id)
 		{
 			stickyFooter = $('.ui-footer[data-id="' + id + '"].ui-sticky-footer');

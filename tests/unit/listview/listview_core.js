@@ -4,7 +4,7 @@
 
 
 // TODO splite out into seperate test files
-(function(){
+(function($){
 	module('Basic Linked list');
 
 	asyncTest( "The page should enhanced correctly", function(){
@@ -62,6 +62,10 @@
 			start();
 		}, 1000);
 	})
+	
+	test( "nested list title should use first text node, regardless of line breaks", function(){
+		ok($('#nested-list-test .linebreaknode').text() === "More animals", 'Text should be "More animals"');
+	});
 
 	module('Ordered Lists')
 
@@ -200,4 +204,4 @@
 			start();
 		}, 1000);
 	});
-})();
+})(jQuery);

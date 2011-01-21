@@ -19,14 +19,7 @@
 				if( newPath == undefined ){
 					newPath = location.hash;
 				}
-				newPath = newPath.replace(/#/,'').split('/');
-				if(newPath.length){
-					var lastSegment = newPath[newPath.length-1];
-					if( lastSegment.indexOf('.') > -1 || lastSegment == ''){
-						newPath.pop();
-					}
-				}
-				return newPath.join('/') + (newPath.length ? '/' : '');
+				return newPath.replace(/#/,'').replace(/[^\/]*\.[^\/*]+$/, '');
 			},
 
 			//return the substring of a filepath before the sub-page key, for making a server request
@@ -48,25 +41,6 @@
 			}
 		},
 
-		//base element management, defined depending on dynamic base tag support
-		base = $.support.dynamicBaseTag ? {
-
-			//define base element, for use in routing asset urls that are referenced in Ajax-requested markup
-			element: $("<base>", { href: path.origin }).prependTo( $head ),
-
-			//set the generated BASE element's href attribute to a new page's base path
-			set: function( href ){
-				base.element.attr('href', path.origin + path.get( href ));
-			},
-
-			//set the generated BASE element's href attribute to a new page's base path
-			reset: function(){
-				base.element.attr('href', path.origin );
-			}
-
-		} : undefined,
-
-
 		//will be defined when a link is clicked and given an active class
 		$activeClickedLink = null,
 
@@ -87,6 +61,59 @@
 		//enable/disable hashchange event listener
 		//toggled internally when location.hash is updated to match the url of a successful page load
 		hashListener = true;
+
+		//existing base tag?
+		var $base = $head.children("base"),
+			hostURL = location.protocol + '//' + location.host,
+			docLocation = path.get( hostURL + location.pathname ),
+			docBase = docLocation;
+
+		if ($base.length){
+			var href = $base.attr("href");
+			if (href){
+				if (href.search(/^[^:/]+:\/\/[^/]+\/?/) == -1){
+					//the href is not absolute, we need to turn it into one
+					//so that we can turn paths stored in our location hash into
+					//relative paths.
+					if (href.charAt(0) == '/'){
+						//site relative url
+						docBase = hostURL + href;
+					}
+					else {
+						//the href is a document relative url
+						docBase = docLocation + href;
+						//XXX: we need some code here to calculate the final path
+						//     just in case the docBase contains up-level (../) references.
+					}
+				}
+				else {
+					//the href is an absolute url
+					docBase = href;
+				}
+			}
+			//make sure docBase ends with a slash
+			docBase = docBase  + (docBase.charAt(docBase.length - 1) == '/' ? ' ' : '/');
+		}
+
+		//base element management, defined depending on dynamic base tag support
+		base = $.support.dynamicBaseTag ? {
+
+			//define base element, for use in routing asset urls that are referenced in Ajax-requested markup
+			element: ($base.length ? $base : $("<base>", { href: docBase }).prependTo( $head )),
+
+			//set the generated BASE element's href attribute to a new page's base path
+			set: function( href ){
+				base.element.attr('href', docBase + path.get( href ));
+			},
+
+			//set the generated BASE element's href attribute to a new page's base path
+			reset: function(){
+				base.element.attr('href', docBase );
+			}
+
+		} : undefined;
+
+
 
 		//set location pathname from intial directory request
 		path.setOrigin();
@@ -135,6 +162,16 @@
 
 	//url stack, useful when plugins need to be aware of previous pages viewed
 	$.mobile.urlStack = urlStack;
+
+	//check for an external resource
+	$.mobile.isExternalLink = function(anchor){
+		var $anchor = $(anchor),
+			hasProtocol = /^(:?\w+:)/.test( $anchor.attr('href') ),
+			hasRelExternal = $anchor.is( "[rel=external]" ),
+			hasTarget = $anchor.is( "[target]" );
+
+		return hasProtocol || hasRelExternal || hasTarget;
+	},
 
 	// changepage function
 	$.mobile.changePage = function( to, transition, back, changeHash){
@@ -223,11 +260,6 @@
 				}
 				removeActiveLinkClass();
 
-				//if there's a duplicateCachedPage, remove it from the DOM now that it's hidden
-				if( duplicateCachedPage != null ){
-					duplicateCachedPage.remove();
-				}
-
 				//jump to top or prev scroll, if set
 				$.mobile.silentScroll( to.data( 'lastScroll' ) );
 
@@ -235,6 +267,11 @@
 				from.data("page")._trigger("hide", null, {nextPage: to});
 				if( to.data("page")._trigger("show", null, {prevPage: from}) !== false ){
 					$.mobile.activePage = to;
+				}
+
+				//if there's a duplicateCachedPage, remove it from the DOM now that it's hidden
+				if (duplicateCachedPage != null) {
+				    duplicateCachedPage.remove();
 				}
 			};
 
@@ -380,7 +417,7 @@
 /* Event Bindings - hashchange, submit, and click */
 
 	//bind to form submit events, handle with Ajax
-	$('form').live('submit', function(event){
+	$("form[data-ajax!='false']").live('submit', function(event){
 		if( !$.mobile.ajaxFormsEnabled ){ return; }
 
 		var type = $(this).attr("method"),
@@ -418,8 +455,9 @@
 			href = $this.attr( "href" ).replace( location.protocol + "//" + location.host, ""),
 			//if target attr is specified, it's external, and we mimic _blank... for now
 			target = $this.is( "[target]" ),
+
 			//if it still starts with a protocol, it's external, or could be :mailto, etc
-			external = target || /^(:?\w+:)/.test( href ) || $this.is( "[rel=external]" );
+			external = $.mobile.isExternalLink(this);
 
 		if( href === '#' ){
 			//for links created purely for interaction - ignore

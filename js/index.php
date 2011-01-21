@@ -1,7 +1,6 @@
 <?php
 $type = "text/javascript";
 $elements = array(
-	'jquery.js',
 	'jquery.ui.widget.js',
 	'jquery.mobile.widget.js',
 	'jquery.mobile.media.js',
