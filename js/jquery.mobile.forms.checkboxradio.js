@@ -41,20 +41,34 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 				if( $(this).parent().is('.ui-disabled') ){ return false; }
 			},
 			
+			"touchend mouseup": function( event ){
+				//prevent both events from firing, keep the first
+				if( $(this).parent().is('.ui-disabled') || $(this).data("prevEvent") ){ 
+					return false;
+				}
+				$(this).data("prevEvent", event.type);
+				setTimeout(function(){
+					label.removeData("prevEvent");
+				}, 200);
+				
+				input.attr( "checked", inputtype === "radio" && true || !input.is( ":checked" ) );
+				input.trigger( "updateAll" );
+				return false;
+			},
+			
 			click: false
 			
-		})
-		.bind( $.support.touch ? "touchend" : "mouseup", function(){
-			if( $(this).parent().is('.ui-disabled') ){ return false; }
-			input.attr( "checked", !input.is( ":checked" ) );
-			self.refresh();
 		});
 		
 		input
 			.bind({
 
-				click: function() {
+				updateAll: function() {
 					$( "input[name='" + input.attr( "name" ) + "'][type='" + inputtype + "']" ).checkboxradio( "refresh" );
+				},
+				
+				click: function(){
+					$( this ).trigger( "updateAll" );
 				},
 
 				focus: function() { 
