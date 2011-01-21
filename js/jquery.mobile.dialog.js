@@ -11,25 +11,25 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		var self = this,
 			$el = self.element,
 			$prevPage = $.mobile.activePage,
-			$closeBtn = $('<a href="#" data-icon="delete" data-iconpos="notext">Close</a>');
+			$closeBtn = $('<a href="#" data-icon="delete" data-iconpos="notext">Close</a>'),
+		
+			dialogClickHandler = function(e){
+				var $target = $(e.target);
 
-    var dialogClickHandler = function(e){
-			var $target = $(e.target);
+				// fixes issues with target links in dialogs breaking
+				// page transitions by reseting the active page below
+				if( $target.attr('target') || $.mobile.isExternalLink($target) ) {
+					return;
+				}
 
-			// fixes issues with target links in dialogs breaking
-			// page transitions by reseting the active page below
-			if( $target.attr('target') || $.mobile.isExternalLink($target) ) {
-				return;
-			}
+				if( e.type == "click" && ( $(e.target).closest('[data-back]')[0] || this==$closeBtn[0] ) ){
+					self.close();
+					return false;
+				}
 
-			if( e.type == "click" && ( $(e.target).closest('[data-back]')[0] || this==$closeBtn[0] ) ){
-				self.close();
-				return false;
-			}
-
-			//otherwise, assume we're headed somewhere new. set activepage to dialog so the transition will work
-			$.mobile.activePage = self.element;
-		};
+				//otherwise, assume we're headed somewhere new. set activepage to dialog so the transition will work
+				$.mobile.activePage = self.element;
+			};
 
 		// NOTE avoid click handler in the case of an external resource
 		// TODO add function in navigation to handle external check
