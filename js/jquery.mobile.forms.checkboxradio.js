@@ -43,17 +43,17 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			
 			"touchend mouseup": function( event ){
 				//prevent both events from firing, keep the first
-				if( $(this).parent().is('.ui-disabled') || $(this).data("prevEvent") ){ 
+				if( $(this).parent().is('.ui-disabled') || $(this).data("prevEvent") && $(this).data("prevEvent") !== event.type ){ 
 					return false;
 				}
 				$(this).data("prevEvent", event.type);
 				setTimeout(function(){
 					label.removeData("prevEvent");
-				}, 200);
+				}, 1000);
 				
 				input.attr( "checked", inputtype === "radio" && true || !input.is( ":checked" ) );
 				input.trigger( "updateAll" );
-				return false;
+				event.preventDefault();
 			},
 			
 			click: false
