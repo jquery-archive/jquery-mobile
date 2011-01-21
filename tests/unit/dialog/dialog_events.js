@@ -34,6 +34,6 @@
 	test( "non external links set the active page", function(){
 		$.mobile.activePage = testValue;
 		$("a#internal-link").click();
-		ok( $.mobile.activePage !== testValue, "mobile active page remains untouched");
+		ok( $.mobile.activePage !== testValue, "mobile is altered");
 	});
 })(jQuery);
