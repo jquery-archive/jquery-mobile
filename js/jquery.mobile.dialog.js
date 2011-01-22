@@ -18,7 +18,9 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 
 				// fixes issues with target links in dialogs breaking
 				// page transitions by reseting the active page below
-				if( $.mobile.isExternalLink($target) ) {
+				if( $.mobile.path.isExternal( $target.closest("a").attr("href") ) ||
+						$target.closest("a[target]").length || 
+						$target.is( "[rel='external']" ) ) {
 					return;
 				}
 
