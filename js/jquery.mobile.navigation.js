@@ -184,6 +184,7 @@
 			data = undefined,
 			type = 'get',
 			isFormRequest = false,
+			isPreloadRequest = false,
 			duplicateCachedPage = null,
 			back = (back !== undefined) ? back : ( urlStack.length > 1 && urlStack[ urlStack.length - 2 ].url === url );
 
@@ -193,22 +194,26 @@
 		}
 
 		if( $.type(to) === "object" && to.url ){
-			url = to.url,
-			data = to.data,
-			type = to.type,
-			isFormRequest = true;
-			//make get requests bookmarkable
-			if( data && type == 'get' ){
-				url += "?" + data;
-				data = undefined;
-			}
+              url = to.url;
+			if( to.preload){
+			  isPreloadRequest = true;
+			} else {
+			    data = to.data,
+			    type = to.type,
+			    isFormRequest = true;
+			    //make get requests bookmarkable
+			    if( data && type == 'get' ){
+				    url += "?" + data;
+				    data = undefined;
+			    }
+		    }
 		}
 
 		//reset base to pathname for new request
 		if(base){ base.reset(); }
 
 		//kill the keyboard
-		$( window.document.activeElement ).add(':focus').blur();
+		if (!isPreloadRequest) $( window.document.activeElement ).add(':focus').blur();
 
 		function defaultTransition(){
 			if(transition === undefined){
@@ -227,7 +232,7 @@
 
 			// ensure a transition has been set where pop is undefined
 			defaultTransition();
-		} else {
+		} else if (!isPreloadRequest) {
 			// If no transition has been passed
 			defaultTransition();
 
@@ -359,7 +364,7 @@
 				duplicateCachedPage = to;
 			}
 
-			$.mobile.pageLoading();
+			if (!isPreloadRequest) $.mobile.pageLoading();
 
 			$.ajax({
 				url: fileUrl,
@@ -394,19 +399,23 @@
 						.appendTo( $.mobile.pageContainer );
 
 					enhancePage();
-					transitionPages();
+					if (!isPreloadRequest) transitionPages();
 				},
 				error: function() {
-					$.mobile.pageLoading( true );
-					removeActiveLinkClass(true);
-					base.set(path.get());
-					$("<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h1>Error Loading Page</h1></div>")
-						.css({ "display": "block", "opacity": 0.96, "top": $(window).scrollTop() + 100 })
-						.appendTo( $.mobile.pageContainer )
-						.delay( 800 )
-						.fadeOut( 400, function(){
-							$(this).remove();
-						});
+      				if (isPreloadRequest){
+      				    base.set(path.get());
+      				} else {
+					    $.mobile.pageLoading( true );
+					    removeActiveLinkClass(true);
+					    base.set(path.get());
+					    $("<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h1>Error Loading Page</h1></div>")
+						    .css({ "display": "block", "opacity": 0.96, "top": $(window).scrollTop() + 100 })
+						    .appendTo( $.mobile.pageContainer )
+						    .delay( 800 )
+						    .fadeOut( 400, function(){
+						 	    $(this).remove();
+						    });
+					}
 				}
 			});
 		}
