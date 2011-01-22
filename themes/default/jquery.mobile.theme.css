@@ -625,6 +625,7 @@ a.ui-link-inherit {
 		color-stop(0, 		#85bae4),
 		color-stop(1, 		#5393c5));
   	-msfilter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#85bae4', EndColorStr='#5393c5')";
+  	outline: none;
 }
 .ui-btn-active a.ui-link-inherit {
 	color: 					#fff;
@@ -984,7 +985,6 @@ a.ui-link-inherit {
 -----------------------------------------------------------------------------------------------------------*/
 
 .ui-focus {
-	outline-width: 0;
 	-moz-box-shadow: 0px 0px 12px 		#387bbe;
 	-webkit-box-shadow: 0px 0px 12px 	#387bbe;
 	box-shadow: 0px 0px 12px 			#387bbe;
