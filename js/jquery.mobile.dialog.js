@@ -10,7 +10,6 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 	_create: function(){
 		var self = this,
 			$el = self.element,
-			$prevPage = $.mobile.activePage,
 			$closeBtn = $('<a href="#" data-icon="delete" data-iconpos="notext">Close</a>'),
 
 			dialogClickHandler = function(e){
@@ -40,8 +39,15 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 
 		this.element
 			.bind("pageshow",function(){
+				self.thisPage = $.mobile.urlHistory.getActive();
+				self.prevPage = $.mobile.urlHistory.getPrev();
 				return false;
 			})
+			.bind("pagehide", function(){
+				$.mobile.urlHistory.stack = $.mobile.urlHistory.stack.slice(0,$.mobile.urlHistory.stack.length-2);
+				$.mobile.urlHistory.activeIndex = $.mobile.urlHistory.stack.length -1;
+			})
+			
 			//add ARIA role
 			.attr("role","dialog")
 			.addClass('ui-page ui-dialog ui-body-a')
@@ -56,11 +62,15 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 				.last()
 				.addClass('ui-corner-bottom ui-overlay-shadow');
 
+
+		
 		$(window).bind('hashchange',function(){
+			$.mobile.urlHistory.listeningEnabled = true;
 			if( $el.is('.ui-page-active') ){
 				self.close();
 				$el.bind('pagehide',function(){
-					$.mobile.updateHash( $prevPage.attr('data-url'), true);
+					$.mobile.urlHistory.listeningEnabled = false;
+					$.mobile.updateHash( self.prevPage.url );
 				});
 			}
 		});
@@ -68,7 +78,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 	},
 
 	close: function(){
-		$.mobile.changePage([this.element, $.mobile.activePage], undefined, true, true );
+		$.mobile.changePage([this.element, $.mobile.activePage], this.thisPage.transition, true, true, true );
 	}
 });
 })( jQuery );
