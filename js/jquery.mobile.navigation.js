@@ -93,7 +93,13 @@
 
 		//enable/disable hashchange event listener
 		//toggled internally when location.hash is updated to match the url of a successful page load
-		hashListener = true;
+		hashListener = true,
+		
+		//queue to hold simultanious page transitions
+		pageTransitionQueue = [],
+		
+		// indicates whether or not page is in process of transitioning
+		isPageTransitioning = false;
 
 		//existing base tag?
 		var $base = $head.children("base"),
@@ -221,6 +227,12 @@
 		if(urlStack.length > 1 && url === urlStack[urlStack.length -1].url && !toIsArray ) {
 			return;
 		}
+		else if(isPageTransitioning) {
+			pageTransitionQueue.unshift(arguments);
+			return;
+		}
+		
+		isPageTransitioning = true;
 
 		if( $.type(to) === "object" && to.url ){
 			url = to.url,
@@ -302,6 +314,11 @@
 				//if there's a duplicateCachedPage, remove it from the DOM now that it's hidden
 				if (duplicateCachedPage != null) {
 				    duplicateCachedPage.remove();
+				}
+
+				isPageTransitioning = false
+				if(pageTransitionQueue.length>0) {
+					$.mobile.changePage.apply($.mobile, pageTransitionQueue.pop());
 				}
 			};
 
