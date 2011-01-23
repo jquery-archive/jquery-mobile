@@ -19,7 +19,7 @@
 				if( newPath == undefined ){
 					newPath = location.hash;
 				}
-				return newPath.replace(/#/,'').replace(/[^\/]*\.[^\/*]+$/, '');
+				return path.stripHash( newPath ).replace(/[^\/]*\.[^\/*]+$/, '');
 			},
 
 			//return the substring of a filepath before the sub-page key, for making a server request
@@ -27,9 +27,12 @@
 				var splitkey = '&' + $.mobile.subPageUrlKey;
 				return path && path.indexOf( splitkey ) > -1 ? path.split( splitkey )[0] : path;
 			},
-
+			
+			//set location hash to path, optionally disable hash listening
 			set: function( path, disableListening){
-				if(disableListening) { hashListener = false; }
+				if( disableListening ) { 
+					hashListener = false;
+				}
 				location.hash = path;
 			},
 
@@ -38,6 +41,36 @@
 
 			setOrigin: function(){
 				path.origin = path.get( location.protocol + '//' + location.host + location.pathname );
+			},
+			
+			//prefix a relative url with the current path
+			makeAbsolute: function( url ){
+				return path.get() + url;
+			},
+			
+			//return a url path with the window's location protocol/hostname removed
+			clean: function( url ){
+				return url.replace( location.protocol + "//" + location.host, "");
+			},
+			
+			//just return the url without an initial #
+			stripHash: function( url ){
+				return url.replace( /^#/, "" );
+			},
+			
+			//check whether a url is referencing the same domain, or an external domain or different protocol
+			//could be mailto, etc
+			isExternal: function( url ){
+				return path.hasProtocol( path.clean( url ) );
+			},
+			
+			hasProtocol: function( url ){
+				return /^(:?\w+:)/.test( url );
+			},
+			
+			//check if the url is relative
+			isRelative: function( url ){
+				return  /^[^\/|#]/.test( url ) && !path.hasProtocol( url );
 			}
 		},
 
@@ -142,7 +175,6 @@
 		$activeClickedLink = null;
 	};
 
-
 	//animation complete callback
 	$.fn.animationComplete = function( callback ){
 		if($.support.cssTransitions){
@@ -158,20 +190,18 @@
 /* exposed $.mobile methods	 */
 
 	//update location.hash, with or without triggering hashchange event
+	//TODO - deprecate this one
 	$.mobile.updateHash = path.set;
+	
+	//expose path object on $.mobile
+	$.mobile.path = path;
+	
+	//expose base object on $.mobile
+	$.mobile.base = base;
 
 	//url stack, useful when plugins need to be aware of previous pages viewed
 	$.mobile.urlStack = urlStack;
 
-	//check for an external resource
-	$.mobile.isExternalLink = function(anchor){
-		var $anchor = $(anchor),
-			hasProtocol = /^(:?\w+:)/.test( $anchor.attr('href') ),
-			hasRelExternal = $anchor.is( "[rel=external]" ),
-			hasTarget = $anchor.is( "[target]" );
-
-		return hasProtocol || hasRelExternal || hasTarget;
-	},
 
 	// changepage function
 	$.mobile.changePage = function( to, transition, back, changeHash){
@@ -417,20 +447,20 @@
 /* Event Bindings - hashchange, submit, and click */
 
 	//bind to form submit events, handle with Ajax
-	$("form[data-ajax!='false']").live('submit', function(event){
+	$( "form[data-ajax!='false']" ).live('submit', function(event){
 		if( !$.mobile.ajaxFormsEnabled ){ return; }
 
 		var type = $(this).attr("method"),
-			url = $(this).attr( "action" ).replace( location.protocol + "//" + location.host, "");
+			url = path.clean( $(this).attr( "action" ) );
 
 		//external submits use regular HTTP
-		if( /^(:?\w+:)/.test( url ) ){
+		if( path.isExternal( url ) ){
 			return;
 		}
 
 		//if it's a relative href, prefix href with base url
-		if( url.indexOf('/') && url.indexOf('#') !== 0 ){
-			url = path.get() + url;
+		if( path.isRelative( url ) ){
+			url = path.makeAbsolute( url );
 		}
 
 		$.mobile.changePage({
@@ -448,34 +478,35 @@
 
 	//click routing - direct to HTTP or Ajax, accordingly
 	$( "a" ).live( "click", function(event) {
-
-		if( !$.mobile.ajaxLinksEnabled ){ return; }
+		
 		var $this = $(this),
 			//get href, remove same-domain protocol and host
-			href = $this.attr( "href" ).replace( location.protocol + "//" + location.host, ""),
-			//if target attr is specified, it's external, and we mimic _blank... for now
-			target = $this.is( "[target]" ),
+			url = path.clean( $this.attr( "href" ) ),
+			
+			//check if it's external
+			isExternal = path.isExternal( url ) || $this.is( "[rel='external']" ),
+			
+			//if target attr is specified we mimic _blank... for now
+			hasTarget = $this.is( "[target]" );
+			
 
-			//if it still starts with a protocol, it's external, or could be :mailto, etc
-			external = $.mobile.isExternalLink(this);
-
-		if( href === '#' ){
+		if( url === "#" ){
 			//for links created purely for interaction - ignore
 			return false;
 		}
 
 		$activeClickedLink = $this.closest( ".ui-btn" ).addClass( $.mobile.activeBtnClass );
 
-		if( external || !$.mobile.ajaxLinksEnabled ){
-			//remove active link class if external
+		if( isExternal || hasTarget || !$.mobile.ajaxLinksEnabled ){
+			//remove active link class if external (then it won't be there if you come back)
 			removeActiveLinkClass(true);
 
 			//deliberately redirect, in case click was triggered
-			if( target ){
-				window.open(href);
+			if( hasTarget ){
+				window.open( url );
 			}
 			else{
-				location.href = href;
+				location.href = url;
 			}
 		}
 		else {
@@ -486,13 +517,13 @@
 			nextPageRole = $this.attr( "data-rel" );
 
 			//if it's a relative href, prefix href with base url
-			if( href.indexOf('/') && href.indexOf('#') !== 0 ){
-				href = path.get() + href;
+			if( path.isRelative( url ) ){
+				url = path.makeAbsolute( url );
 			}
 
-			href.replace(/^#/,'');
+			url = path.stripHash( url );
 
-			$.mobile.changePage(href, transition, back);
+			$.mobile.changePage( url, transition, back);
 		}
 		event.preventDefault();
 	});
