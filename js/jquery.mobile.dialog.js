@@ -13,17 +13,24 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 			$closeBtn = $('<a href="#" data-icon="delete" data-iconpos="notext">Close</a>'),
 
 			dialogClickHandler = function(e){
-				var $target = $(e.target);
+				var $target = $(e.target),
+					href = $.mobile.path.stripHash( $target.closest("a").attr("href") ),
+					isRelative = $.mobile.path.isRelative( href ),
+					absUrl = isRelative ? $.mobile.path.makeAbsolute( href ) : href;
 
 				// fixes issues with target links in dialogs breaking
 				// page transitions by reseting the active page below
-				if( $.mobile.path.isExternal( $target.closest("a").attr("href") ) ||
+				if( $.mobile.path.isExternal( href ) ||
 						$target.closest("a[target]").length || 
 						$target.is( "[rel='external']" ) ) {
 					return;
 				}
-
-				if( e.type == "click" && this==$closeBtn[0] ){
+				
+				
+				//if it's a close button click
+				//or the href is the same as the page we're on, close the dialog
+				if( e.type == "click" &&
+					( this==$closeBtn[0] || absUrl == $.mobile.path.stripHash( location.hash ) ) ){
 					self.close();
 					return false;
 				}
