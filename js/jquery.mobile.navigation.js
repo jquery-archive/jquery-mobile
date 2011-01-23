@@ -573,7 +573,10 @@
 		else {
 			//use ajax
 			var transition = $this.data( "transition" ),
-				reverse = $this.data( "back" );
+				direction = $this.data("direction"),
+				reverse = direction && direction == "reverse" || 
+				// deprecated - remove by 1.0
+				$this.data( "back" );
 
 			nextPageRole = $this.attr( "data-rel" );
 

@@ -23,7 +23,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 					return;
 				}
 
-				if( e.type == "click" && ( $(e.target).closest('[data-back]')[0] || this==$closeBtn[0] ) ){
+				if( e.type == "click" && this==$closeBtn[0] ){
 					self.close();
 					return false;
 				}
