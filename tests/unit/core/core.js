@@ -127,22 +127,22 @@
 				});
 
 		test( "page loading is called on document ready", function(){
-			expect( 2 );
-
 			$.testHelper.alterExtend({ pageLoading: function(){
+				start();
 				ok("called");
 			}});
 
+			stop();
 			$.testHelper.reloadLib(libName);
 		});
 
 		test( "hashchange triggered on document ready with single argument: true", function(){
-			expect( 2 );
-
 			$(window).bind("hashchange", function(ev, arg){
 				same(arg, true);
+				start();
 			});
 
+			stop();
 			$.testHelper.reloadLib(libName);
 		});
 	});
