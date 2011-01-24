@@ -145,10 +145,12 @@
 
 		//scroll page vertically: scroll to 0 to hide iOS address bar, or pass a Y value
 		silentScroll: function( ypos ) {
+			ypos = ypos || 0;
 			// prevent scrollstart and scrollstop events
 			$.event.special.scrollstart.enabled = false;
 			setTimeout(function() {
-				window.scrollTo( 0, ypos || 0 );
+				window.scrollTo( 0, ypos );
+				$(document).trigger("silentscroll", { x: 0, y: ypos });
 			},20);
 			setTimeout(function() {
 				$.event.special.scrollstart.enabled = true;
