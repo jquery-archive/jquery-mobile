@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>jQuery Mobile: Event Logger</title>
+	<link rel="stylesheet"  href="../../themes/default/" />
+	<link rel="stylesheet" href="../../docs/_assets/css/jqm-docs.css" />
+	<script type="text/javascript" src="../../js/jquery.js"></script>
+	<script type="text/javascript" src="../../js/"></script>
+	
+	<script>
+	$(function(){
+	$( "a" ).bind("tap",function( e ){
+			$("#log")
+				.prepend("<li>"+ e.type +" event; target: "+ e.target.nodeName +"</li>")
+				.listview("refresh");
+			return false;
+		})
+		.bind("click", false);
+	});	
+	</script>
+</head> 
+<body> 
+<div data-role="page" data-theme="b" id="jqm-home">
+	<div data-role="header">
+		<h1>Event Logger</h1>
+	</div>
+	
+	<div data-role="content">
+		<p>Touch events on this page will log out below, prepending to the top as they arrive.</p>
+		
+		<a href="foo.html" data-role="button">Click me</a>
+		
+		<ul data-role="listview" id="log">
+			
+		</ul>
+
+	</div>
+</div>
+</body>
+</html>
