@@ -17,3 +17,15 @@ Whenever this configuration becomes inconvenient, we can remove it, obviously it
 
 - when adding a js or css file, add it to the manifest in its directory and it'll be included in the request
 - As far as JS files go, jQuery.mobile.core.js is the starting point.
+
+How to build your own jQuery Mobile
+===================================
+
+Clone this repo and build the js and css files:
+
+    git clone git://github.com/jquery/jquery-mobile.git
+    cd jquery-mobile
+    make
+
+Two complete versions, one minified, one not, of jQuery Mobile js and css files will be created.
+
