@@ -219,7 +219,7 @@
 /* exposed $.mobile methods	 */
 
 	//update location.hash, with or without triggering hashchange event
-	//TODO - deprecate this one
+	//TODO - deprecate this one at 1.0
 	$.mobile.updateHash = path.set;
 	
 	//expose path object on $.mobile
@@ -229,7 +229,7 @@
 	$.mobile.base = base;
 
 	//url stack, useful when plugins need to be aware of previous pages viewed
-	//TODO: deprecate this one
+	//TODO: deprecate this one at 1.0
 	$.mobile.urlstack = urlHistory.stack;
 	
 	//history stack
@@ -509,7 +509,9 @@
 
 	//bind to form submit events, handle with Ajax
 	$( "form[data-ajax!='false']" ).live('submit', function(event){
-		if( !$.mobile.ajaxFormsEnabled ){ return; }
+		if( !$.mobile.ajaxEnabled ||
+			//TODO: deprecated - remove at 1.0
+			!$.mobile.ajaxFormsEnabled ){ return; }
 
 		var type = $(this).attr("method"),
 			url = path.clean( $(this).attr( "action" ) );
@@ -558,7 +560,9 @@
 
 		$activeClickedLink = $this.closest( ".ui-btn" ).addClass( $.mobile.activeBtnClass );
 
-		if( isExternal || hasTarget || !$.mobile.ajaxLinksEnabled ){
+		if( isExternal || hasTarget || !$.mobile.ajaxEnabled ||
+			// TODO: deprecated - remove at 1.0
+			!$.mobile.ajaxLinksEnabled ){
 			//remove active link class if external (then it won't be there if you come back)
 			removeActiveLinkClass(true);
 
@@ -596,7 +600,10 @@
 
 	//hashchange event handler
 	$window.bind( "hashchange", function(e, triggered) {
-		if( !urlHistory.listeningEnabled ){
+		if( !urlHistory.listeningEnabled || !$.mobile.ajaxEnabled ||
+			// TODO: deprecated - remove at 1.0
+			// only links need to be checked here, as forms don't trigger a hashchange event (they just silently update the hash)
+			( !$.mobile.ajaxLinksEnabled ) ){
 			return;
 		}
 

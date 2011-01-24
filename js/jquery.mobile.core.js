@@ -27,11 +27,16 @@
 		//class used for "active" button state, from CSS framework
 		activeBtnClass: 'ui-btn-active',
 
-		//automatically handle link clicks through Ajax, when possible
-		ajaxLinksEnabled: true,
+		//automatically handle clicks and form submissions through Ajax, when same-domain
+		ajaxEnabled: true,
+		
+			// TODO: deprecated - remove at 1.0
+			//automatically handle link clicks through Ajax, when possible
+			ajaxLinksEnabled: true,
 
-		//automatically handle form submissions through Ajax, when possible
-		ajaxFormsEnabled: true,
+			// TODO: deprecated - remove at 1.0
+			//automatically handle form submissions through Ajax, when possible
+			ajaxFormsEnabled: true,
 
 		//set default transition - 'none' for no transitions
 		defaultTransition: 'slide',
