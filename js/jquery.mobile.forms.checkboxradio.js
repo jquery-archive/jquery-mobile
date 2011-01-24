@@ -51,8 +51,10 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 					label.removeData("prevEvent");
 				}, 1000);
 				
+				self._cacheVals();
+				
 				input.attr( "checked", inputtype === "radio" && true || !input.is( ":checked" ) );
-				input.trigger( "updateAll" );
+				self._updateAll();
 				event.preventDefault();
 			},
 			
@@ -62,13 +64,12 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 		
 		input
 			.bind({
-
-				updateAll: function() {
-					$( "input[name='" + input.attr( "name" ) + "'][type='" + inputtype + "']" ).checkboxradio( "refresh" );
+				mousedown: function(){
+					this._cacheVals();
 				},
 				
 				click: function(){
-					$( this ).trigger( "updateAll" );
+					self._updateAll();
 				},
 
 				focus: function() { 
@@ -82,6 +83,28 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			
 		this.refresh();
 		
+	},
+	
+	_cacheVals: function(){
+		this._getInputSet().each(function(){
+			$(this).data("cacheVal", $(this).is(":checked") );
+		});	
+	},
+		
+	//returns either a set of radios with the same name attribute, or a single checkbox
+	_getInputSet: function(){
+		return this.element.closest( "form,fieldset,[data-role='page']" )
+				.find( "input[name='"+ this.element.attr( "name" ) +"'][type='"+ this.element.attr( "type" ) +"']" );
+	},
+	
+	_updateAll: function(){
+		this._getInputSet().each(function(){
+			var dVal = $(this).data("cacheVal");
+			if( dVal && dVal !== $(this).is(":checked") || $(this).is( "[type='checkbox']" ) ){
+				$(this).trigger("change");
+			}
+		})
+		.checkboxradio( "refresh" );
 	},
 	
 	refresh: function( ){
