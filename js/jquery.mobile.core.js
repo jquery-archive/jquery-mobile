@@ -27,11 +27,16 @@
 		//class used for "active" button state, from CSS framework
 		activeBtnClass: 'ui-btn-active',
 
-		//automatically handle link clicks through Ajax, when possible
-		ajaxLinksEnabled: true,
+		//automatically handle clicks and form submissions through Ajax, when same-domain
+		ajaxEnabled: true,
+		
+			// TODO: deprecated - remove at 1.0
+			//automatically handle link clicks through Ajax, when possible
+			ajaxLinksEnabled: true,
 
-		//automatically handle form submissions through Ajax, when possible
-		ajaxFormsEnabled: true,
+			// TODO: deprecated - remove at 1.0
+			//automatically handle form submissions through Ajax, when possible
+			ajaxFormsEnabled: true,
 
 		//set default transition - 'none' for no transitions
 		defaultTransition: 'slide',
@@ -140,10 +145,12 @@
 
 		//scroll page vertically: scroll to 0 to hide iOS address bar, or pass a Y value
 		silentScroll: function( ypos ) {
+			ypos = ypos || 0;
 			// prevent scrollstart and scrollstop events
 			$.event.special.scrollstart.enabled = false;
 			setTimeout(function() {
-				window.scrollTo( 0, ypos || 0 );
+				window.scrollTo( 0, ypos );
+				$(document).trigger("silentscroll", { x: 0, y: ypos });
 			},20);
 			setTimeout(function() {
 				$.event.special.scrollstart.enabled = true;
