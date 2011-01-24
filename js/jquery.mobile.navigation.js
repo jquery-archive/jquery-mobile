@@ -19,7 +19,7 @@
 				if( newPath == undefined ){
 					newPath = location.hash;
 				}
-				return newPath.replace(/#/,'').replace(/[^\/]*\.[^\/*]+$/, '');
+				return path.stripHash( newPath ).replace(/[^\/]*\.[^\/*]+$/, '');
 			},
 
 			//return the substring of a filepath before the sub-page key, for making a server request
@@ -27,9 +27,9 @@
 				var splitkey = '&' + $.mobile.subPageUrlKey;
 				return path && path.indexOf( splitkey ) > -1 ? path.split( splitkey )[0] : path;
 			},
-
-			set: function( path, disableListening){
-				if(disableListening) { hashListener = false; }
+			
+			//set location hash to path
+			set: function( path ){
 				location.hash = path;
 			},
 
@@ -38,29 +38,91 @@
 
 			setOrigin: function(){
 				path.origin = path.get( location.protocol + '//' + location.host + location.pathname );
+			},
+			
+			//prefix a relative url with the current path
+			makeAbsolute: function( url ){
+				return path.get() + url;
+			},
+			
+			//return a url path with the window's location protocol/hostname removed
+			clean: function( url ){
+				return url.replace( location.protocol + "//" + location.host, "");
+			},
+			
+			//just return the url without an initial #
+			stripHash: function( url ){
+				return url.replace( /^#/, "" );
+			},
+			
+			//check whether a url is referencing the same domain, or an external domain or different protocol
+			//could be mailto, etc
+			isExternal: function( url ){
+				return path.hasProtocol( path.clean( url ) );
+			},
+			
+			hasProtocol: function( url ){
+				return /^(:?\w+:)/.test( url );
+			},
+			
+			//check if the url is relative
+			isRelative: function( url ){
+				return  /^[^\/|#]/.test( url ) && !path.hasProtocol( url );
 			}
 		},
 
 		//will be defined when a link is clicked and given an active class
 		$activeClickedLink = null,
-
-		//array of pages that are visited during a single page load
-		//length will grow as pages are visited, and shrink as "back" link/button is clicked
-		//each item has a url (string matches ID), and transition (saved for reuse when "back" link/button is clicked)
-		urlStack = [ {
-			url: location.hash.replace( /^#/, "" ),
-			transition: undefined
-		} ],
+		
+		//urlHistory is purely here to make guesses at whether the back or forward button was clicked
+		//and provide an appropriate transition
+		urlHistory = {
+			//array of pages that are visited during a single page load. each has a url and optional transition
+			stack: [],
+			
+			//maintain an index number for the active page in the stack
+			activeIndex: 0,
+			
+			//get active
+			getActive: function(){
+				return urlHistory.stack[ urlHistory.activeIndex ];
+			},
+			
+			getPrev: function(){
+				return urlHistory.stack[ urlHistory.activeIndex - 1 ];
+			},
+			
+			getNext: function(){
+				return urlHistory.stack[ urlHistory.activeIndex + 1 ];
+			},
+			
+			// addNew is used whenever a new page is added
+			addNew: function( url, transition ){
+				//if there's forward history, wipe it
+				if( urlHistory.getNext() ){
+					urlHistory.clearForward();
+				}
+				
+				urlHistory.stack.push( {url : url, transition: transition } );
+					
+				urlHistory.activeIndex = urlHistory.stack.length - 1;
+			},
+			
+			//wipe urls ahead of active index
+			clearForward: function(){
+				urlHistory.stack = urlHistory.stack.slice( 0, urlHistory.activeIndex + 1 );
+			},
+			
+			//enable/disable hashchange event listener
+			//toggled internally when location.hash is updated to match the url of a successful page load
+			listeningEnabled: true
+		},
 
 		//define first selector to receive focus when a page is shown
 		focusable = "[tabindex],a,button:visible,select:visible,input",
 
 		//contains role for next page, if defined on clicked link via data-rel
-		nextPageRole = null,
-
-		//enable/disable hashchange event listener
-		//toggled internally when location.hash is updated to match the url of a successful page load
-		hashListener = true;
+		nextPageRole = null;
 
 		//existing base tag?
 		var $base = $head.children("base"),
@@ -83,7 +145,7 @@
 						//the href is a document relative url
 						docBase = docLocation + href;
 						//XXX: we need some code here to calculate the final path
-						//     just in case the docBase contains up-level (../) references.
+						// just in case the docBase contains up-level (../) references.
 					}
 				}
 				else {
@@ -142,7 +204,6 @@
 		$activeClickedLink = null;
 	};
 
-
 	//animation complete callback
 	$.fn.animationComplete = function( callback ){
 		if($.support.cssTransitions){
@@ -158,41 +219,77 @@
 /* exposed $.mobile methods	 */
 
 	//update location.hash, with or without triggering hashchange event
+	//TODO - deprecate this one at 1.0
 	$.mobile.updateHash = path.set;
+	
+	//expose path object on $.mobile
+	$.mobile.path = path;
+	
+	//expose base object on $.mobile
+	$.mobile.base = base;
 
 	//url stack, useful when plugins need to be aware of previous pages viewed
-	$.mobile.urlStack = urlStack;
-
-	//check for an external resource
-	$.mobile.isExternalLink = function(anchor){
-		var $anchor = $(anchor),
-			hasProtocol = /^(:?\w+:)/.test( $anchor.attr('href') ),
-			hasRelExternal = $anchor.is( "[rel=external]" ),
-			hasTarget = $anchor.is( "[target]" );
-
-		return hasProtocol || hasRelExternal || hasTarget;
-	},
+	//TODO: deprecate this one at 1.0
+	$.mobile.urlstack = urlHistory.stack;
+	
+	//history stack
+	$.mobile.urlHistory = urlHistory;
 
 	// changepage function
-	$.mobile.changePage = function( to, transition, back, changeHash){
+	// TODO : consider moving args to an object hash
+	$.mobile.changePage = function( to, transition, reverse, changeHash, fromHashChange ){
 
 		//from is always the currently viewed page
 		var toIsArray = $.type(to) === "array",
+			toIsObject = $.type(to) === "object",
 			from = toIsArray ? to[0] : $.mobile.activePage,
 			to = toIsArray ? to[1] : to,
-			url = fileUrl = $.type(to) === "string" ? to.replace( /^#/, "" ) : null,
+			url = fileUrl = $.type(to) === "string" ? path.stripHash( to ) : "",
 			data = undefined,
 			type = 'get',
 			isFormRequest = false,
 			duplicateCachedPage = null,
-			back = (back !== undefined) ? back : ( urlStack.length > 1 && urlStack[ urlStack.length - 2 ].url === url );
-
-		//If we are trying to transition to the same page that we are currently on ignore the request.
-		if(urlStack.length > 1 && url === urlStack[urlStack.length -1].url && !toIsArray ) {
+			currPage = urlHistory.getActive(),
+			back = false,
+			forward = false;
+			
+		// If we are trying to transition to the same page that we are currently on ignore the request.
+		// an illegal same page request is defined by the current page being the same as the url, as long as there's history
+		// and to is not an array or object (those are allowed to be "same")
+		if( currPage && urlHistory.stack.length > 1 && currPage.url === url && !toIsArray && !toIsObject ) {
 			return;
+		}	
+			
+		// if the changePage was sent from a hashChange event
+		// guess if it came from the history menu
+		if( fromHashChange ){
+			
+			// check if url is in history and if it's ahead or behind current page
+			$.each( urlHistory.stack, function( i ){
+				//if the url is in the stack, it's a forward or a back
+				if( this.url == url ){
+					urlIndex = i;
+					//define back and forward by whether url is older or newer than current page
+					back = i < urlHistory.activeIndex;
+					//forward set to opposite of back
+					forward = !back;
+					//reset activeIndex to this one
+					urlHistory.activeIndex = i;
+				}
+			});
+			
+			//if it's a back, use reverse animation
+			if( back ){
+				reverse = true;
+				transition = transition || currPage.transition;
+			}
+			else if ( forward ){
+				transition = transition || urlHistory.getActive().transition;
+			}
 		}
+		
 
-		if( $.type(to) === "object" && to.url ){
+		if( toIsObject && to.url ){
 			url = to.url,
 			data = to.data,
 			type = to.type,
@@ -216,25 +313,6 @@
 			}
 		}
 
-		// if the new href is the same as the previous one
-		if ( back ) {
-			var pop = urlStack.pop();
-
-			// prefer the explicitly set transition
-			if( pop && !transition ){
-				transition = pop.transition;
-			}
-
-			// ensure a transition has been set where pop is undefined
-			defaultTransition();
-		} else {
-			// If no transition has been passed
-			defaultTransition();
-
-			// push the url and transition onto the stack
-			urlStack.push({ url: url, transition: transition });
-		}
-
 		//function for transitioning between two existing pages
 		function transitionPages() {
 
@@ -256,8 +334,18 @@
 				reFocus( to );
 
 				if( changeHash !== false && url ){
-					path.set(url, (back !== true));
+					if( !back  ){
+						urlHistory.listeningEnabled = false;
+					}
+					path.set( url );
+					urlHistory.listeningEnabled = true;
 				}
+				
+				//add page to history stack if it's not back or forward, or a dialog
+				if( !back && !forward ){
+					urlHistory.addNew( url, transition );
+				}
+				
 				removeActiveLinkClass();
 
 				//jump to top or prev scroll, if set
@@ -296,9 +384,9 @@
 				addContainerClass('ui-mobile-viewport-transitioning');
 
 				// animate in / out
-				from.addClass( transition + " out " + ( back ? "reverse" : "" ) );
+				from.addClass( transition + " out " + ( reverse ? "reverse" : "" ) );
 				to.addClass( $.mobile.activePageClass + " " + transition +
-					" in " + ( back ? "reverse" : "" ) );
+					" in " + ( reverse ? "reverse" : "" ) );
 
 				// callback - remove classes, etc
 				to.animationComplete(function() {
@@ -344,6 +432,9 @@
 				fileUrl = toIDfileurl;
 			}
 		}
+		
+		// ensure a transition has been set where pop is undefined
+		defaultTransition();
 
 		// find the "to" page, either locally existing in the dom or by creating it through ajax
 		if ( to.length && !isFormRequest ) {
@@ -417,20 +508,22 @@
 /* Event Bindings - hashchange, submit, and click */
 
 	//bind to form submit events, handle with Ajax
-	$("form[data-ajax!='false']").live('submit', function(event){
-		if( !$.mobile.ajaxFormsEnabled ){ return; }
+	$( "form[data-ajax!='false']" ).live('submit', function(event){
+		if( !$.mobile.ajaxEnabled ||
+			//TODO: deprecated - remove at 1.0
+			!$.mobile.ajaxFormsEnabled ){ return; }
 
 		var type = $(this).attr("method"),
-			url = $(this).attr( "action" ).replace( location.protocol + "//" + location.host, "");
+			url = path.clean( $(this).attr( "action" ) );
 
 		//external submits use regular HTTP
-		if( /^(:?\w+:)/.test( url ) ){
+		if( path.isExternal( url ) ){
 			return;
 		}
 
 		//if it's a relative href, prefix href with base url
-		if( url.indexOf('/') && url.indexOf('#') !== 0 ){
-			url = path.get() + url;
+		if( path.isRelative( url ) ){
+			url = path.makeAbsolute( url );
 		}
 
 		$.mobile.changePage({
@@ -448,51 +541,57 @@
 
 	//click routing - direct to HTTP or Ajax, accordingly
 	$( "a" ).live( "click", function(event) {
-
-		if( !$.mobile.ajaxLinksEnabled ){ return; }
+		
 		var $this = $(this),
 			//get href, remove same-domain protocol and host
-			href = $this.attr( "href" ).replace( location.protocol + "//" + location.host, ""),
-			//if target attr is specified, it's external, and we mimic _blank... for now
-			target = $this.is( "[target]" ),
+			url = path.clean( $this.attr( "href" ) ),
+			
+			//check if it's external
+			isExternal = path.isExternal( url ) || $this.is( "[rel='external']" ),
+			
+			//if target attr is specified we mimic _blank... for now
+			hasTarget = $this.is( "[target]" );
+			
 
-			//if it still starts with a protocol, it's external, or could be :mailto, etc
-			external = $.mobile.isExternalLink(this);
-
-		if( href === '#' ){
+		if( url === "#" ){
 			//for links created purely for interaction - ignore
 			return false;
 		}
 
 		$activeClickedLink = $this.closest( ".ui-btn" ).addClass( $.mobile.activeBtnClass );
 
-		if( external || !$.mobile.ajaxLinksEnabled ){
-			//remove active link class if external
+		if( isExternal || hasTarget || !$.mobile.ajaxEnabled ||
+			// TODO: deprecated - remove at 1.0
+			!$.mobile.ajaxLinksEnabled ){
+			//remove active link class if external (then it won't be there if you come back)
 			removeActiveLinkClass(true);
 
 			//deliberately redirect, in case click was triggered
-			if( target ){
-				window.open(href);
+			if( hasTarget ){
+				window.open( url );
 			}
 			else{
-				location.href = href;
+				location.href = url;
 			}
 		}
 		else {
 			//use ajax
 			var transition = $this.data( "transition" ),
-				back = $this.data( "back" );
+				direction = $this.data("direction"),
+				reverse = direction && direction == "reverse" || 
+				// deprecated - remove by 1.0
+				$this.data( "back" );
 
 			nextPageRole = $this.attr( "data-rel" );
 
 			//if it's a relative href, prefix href with base url
-			if( href.indexOf('/') && href.indexOf('#') !== 0 ){
-				href = path.get() + href;
+			if( path.isRelative( url ) ){
+				url = path.makeAbsolute( url );
 			}
 
-			href.replace(/^#/,'');
+			url = path.stripHash( url );
 
-			$.mobile.changePage(href, transition, back);
+			$.mobile.changePage( url, transition, reverse);
 		}
 		event.preventDefault();
 	});
@@ -501,8 +600,10 @@
 
 	//hashchange event handler
 	$window.bind( "hashchange", function(e, triggered) {
-		if( !hashListener ){
-			hashListener = true;
+		if( !urlHistory.listeningEnabled || !$.mobile.ajaxEnabled ||
+			// TODO: deprecated - remove at 1.0
+			// only links need to be checked here, as forms don't trigger a hashchange event (they just silently update the hash)
+			( !$.mobile.ajaxLinksEnabled ) ){
 			return;
 		}
 
@@ -510,20 +611,21 @@
 			return;
 		}
 
-		var to = location.hash,
+		var to = path.stripHash( location.hash ),
 			transition = triggered ? false : undefined;
 
 		//if to is defined, use it
 		if ( to ){
-			$.mobile.changePage( to, transition, undefined, false);
+			$.mobile.changePage( to, transition, undefined, false, true );
 		}
 		//there's no hash, the active page is not the start page, and it's not manually triggered hashchange
 		//we probably backed out to the first page visited
 		else if( $.mobile.activePage.length && $.mobile.startPage[0] !== $.mobile.activePage[0] && !triggered ) {
-			$.mobile.changePage( $.mobile.startPage, transition, true, false );
+			$.mobile.changePage( $.mobile.startPage, transition, true, false, true );
 		}
 		//probably the first page - show it
 		else{
+			urlHistory.addNew( "" );
 			$.mobile.startPage.trigger("pagebeforeshow", {prevPage: $('')});
 			$.mobile.startPage.addClass( $.mobile.activePageClass );
 			$.mobile.pageLoading( true );

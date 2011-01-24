@@ -37,16 +37,24 @@
 
 		same(called, 2, "change page should be called twice");
 	});
-
-	test( "check for external link succeeds", function(){
-		same($.mobile.isExternalLink("<a href='mailto:'></a>"), true, "mailto");
-		same($.mobile.isExternalLink("<a href='http://foo.com'></a>"), true, "http protocol");
-		same($.mobile.isExternalLink("<a href='foo' rel='external'></a>"), true, "rel=external");
-		same($.mobile.isExternalLink("<a href='foo' target='foo'></a>"), true, "target");
+	
+	test( "path.get method is working properly", function(){
+		same($.mobile.path.get(), window.location.hash, "get method returns location.hash");
+		same($.mobile.path.get( "#foo/bar/baz.html" ), "foo/bar/", "get method with hash arg returns path with no filename or hash prefix");
+		same($.mobile.path.get( "#foo/bar/baz.html/" ), "foo/bar/baz.html/", "last segment of hash is retained if followed by a trailing slash");
 	});
 
-	test( "check for external link fails", function(){
-		same($.mobile.isExternalLink("<a href='foo.html'></a>"), false, "mailto");
-		same($.mobile.isExternalLink("<a href='#foo'></a>"), false, "mailto");
+	test( "path.isExternal method is working properly", function(){
+		same($.mobile.path.isExternal("mailto:"), true, "mailto protocol");
+		same($.mobile.path.isExternal("http://foo.com"), true, "http protocol");
+		same($.mobile.path.isExternal("http://www.foo.com"), true, "http protocol with www");
+		same($.mobile.path.isExternal("tel:16178675309"), true, "tel protocol");
+		same($.mobile.path.isExternal("foo.html"), false, "filename");
+		same($.mobile.path.isExternal("foo/foo/foo.html"), false, "file path");
+		same($.mobile.path.isExternal("../../index.html"), false, "relative parent path");
+		same($.mobile.path.isExternal("/foo"), false, "root-relative path");
+		same($.mobile.path.isExternal("foo"), false, "simple string");
+		same($.mobile.path.isExternal("#foo"), false, "local id reference");
 	});
+	
 })(jQuery);

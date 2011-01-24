@@ -27,9 +27,9 @@
 	jquery.mobile.support.js,
 	jquery.mobile.event.js,
 	jquery.mobile.hashchange.js,
+	jquery.mobile.page.js,
 	jquery.mobile.core.js,
 	jquery.mobile.navigation.js,
-	jquery.mobile.page.js,
 	jquery.mobile.buttonMarkup.js,
 	jquery.mobile.collapsible.js,
 	jquery.mobile.controlGroup.js,
@@ -52,13 +52,13 @@
 		<antcall target="merge_js" />
 	</target>
 
-	<target name="merge_css">		
+	<target name="merge_css">
 		<concat destfile="combine/jquery.mobile.css">
 			<filelist dir="${cssdir}" files="${css-sources}"/>
 		</concat>
 	</target>
-	
-	<target name="merge_js">		
+
+	<target name="merge_js">
 		<concat destfile="combine/jquery.mobile.js">
 			<filelist dir="${jsdir}" files="${js-sources}"/>
 		</concat>
