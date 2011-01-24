@@ -36,6 +36,7 @@
 	<link rel="stylesheet" href="../../../external/qunit.css" type="text/css"/>
 	<script type="text/javascript" src="../../../external/qunit.js"></script>
 
+	<script type="text/javascript" src="widget.test.js"></script>
 	<script type="text/javascript" src="page_core.js"></script>
 </head>
 <body>
@@ -54,14 +55,20 @@
 			</div>
 			<a href="foo">foo</a>
 		</div><!-- /header -->
-
+  
+    <div data-role="content">
+			<div data-role="test">
+				bad
+			</div>			
+		</div><!-- /content -->
+		
 		<div data-role="footer">
 			<div>
 				<a href="foo">foo</a>
 			</div>
 
 			<a href="foo">foo</a>
-		</div><!-- /header -->
+		</div><!-- /footer -->
 
 		<div class="ui-bar">
 			<div>

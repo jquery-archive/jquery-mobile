@@ -27,3 +27,7 @@ test( "unnested bar anchors are styled", function(){
 	ok($('.ui-bar > a').hasClass('ui-btn'));
 });
 
+test( "external roles for widgets",function(){
+  ok("ok"==$("[data-role='test']").text());
+}) 
+

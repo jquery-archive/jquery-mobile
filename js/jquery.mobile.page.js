@@ -118,6 +118,15 @@ $.widget( "mobile.page", $.mobile.widget, {
 				case "dialog":
 					$this[ role ]();
 					break;
+				case "button": //skips checking widget avaliability for known roles
+				case "controlgroup":
+				  break;
+				default:
+					//The first idea was to search for roles starting with "widget" - /widget.*/, but this way roles are looking nicer and $.isFunction is quite fast.
+					if($.isFunction($this[ 'role-'+role ])){ 
+				        $this[ 'role-'+role ]();  
+				        }
+				  break;
 			}
 		});
 		
