@@ -333,17 +333,17 @@
 
 				reFocus( to );
 
-				if( changeHash !== false && url ){
+				if( changeHash !== false && fileUrl ){
 					if( !back  ){
 						urlHistory.listeningEnabled = false;
 					}
-					path.set( url );
+					path.set( fileUrl );
 					urlHistory.listeningEnabled = true;
 				}
 				
 				//add page to history stack if it's not back or forward, or a dialog
 				if( !back && !forward ){
-					urlHistory.addNew( url, transition );
+					urlHistory.addNew( fileUrl, transition );
 				}
 				
 				removeActiveLinkClass();
@@ -457,12 +457,24 @@
 				type: type,
 				data: data,
 				success: function( html ) {
-					if(base){ base.set(fileUrl); }
+					
 
 					var all = $("<div></div>");
 					//workaround to allow scripts to execute when included in page divs
 					all.get(0).innerHTML = html;
 					to = all.find('[data-role="page"], [data-role="dialog"]').first();
+					
+					//if page arrives with a data-url, use it as the new fileUrl, base path, etc
+					var redirectLoc = to.data( "url" );
+
+					if( redirectLoc ){
+						base.set( redirectLoc );
+						fileUrl = path.makeAbsolute( path.getFilePath( redirectLoc ) );
+					}
+					else {
+						base.set(fileUrl);
+						to.attr( "data-url", fileUrl );
+					}
 
 					//rewrite src and href attrs to use a base url
 					if( !$.support.dynamicBaseTag ){
@@ -479,10 +491,9 @@
 							}
 						});
 					}
-
-					to
-						.attr( "data-url", fileUrl )
-						.appendTo( $.mobile.pageContainer );
+					
+					//append to page and enhance
+					to.appendTo( $.mobile.pageContainer );
 
 					enhancePage();
 					transitionPages();
