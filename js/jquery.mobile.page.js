@@ -37,6 +37,9 @@ $.widget( "mobile.page", $.mobile.widget, {
 		if ( this._trigger( "beforeCreate" ) === false ) {
 			return;
 		}
+		
+		//Set the min-height to the size of the fullscreen.  This is to fix issue #455
+        $elem.css( 'minHeight' , ( $( "html" ).hasClass( 'landscape' )) ? screen.availWidth : screen.availHeight );
 
 		//some of the form elements currently rely on the presence of ui-page and ui-content
 		// classes so we'll handle page and content roles outside of the main role processing

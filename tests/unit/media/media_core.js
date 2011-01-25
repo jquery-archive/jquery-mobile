@@ -64,16 +64,6 @@ test( "adds all classes for default res breakpoints", function(){
 	});
 });
 
-test( "triggering mobile init triggers orientationchange.htmlclass", function(){
-	expect( 1 );
-
-	$(window).bind("orientationchange.htmlclass", function(event){
-		ok(event);
-	});
-
-	$(document).trigger("mobileinit.htmlclass");
-});
-
 test( "binds remove of portrait and landscape classes resize/orientation fired", function(){
 	$.Event.prototype.orientation = true;
 
@@ -84,6 +74,15 @@ test( "binds remove of portrait and landscape classes resize/orientation fired",
 	$("html").addClass("portrait landscape");
 	$(window).trigger("resize.htmlclass");
 	ok(!$("html").hasClass("portrait landscape"));
+});
+
+test( "orientation event should update the min-height of the pages", function() {
+    $.Event.prototype.orientation = true;
+    
+    $('.ui-page').css('minHeight', '0px');
+    ok($('.ui-page').css('minHeight') == '0px');
+    $(window).trigger("resize.htmlclass");
+    ok($('.ui-page').css('minHeight') != '0px');
 });
 
 test( "sets break point class additions on resize/orientation change", function(){

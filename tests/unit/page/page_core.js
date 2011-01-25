@@ -27,3 +27,8 @@ test( "unnested bar anchors are styled", function(){
 	ok($('.ui-bar > a').hasClass('ui-btn'));
 });
 
+test( "The min-height is set to the available screen height", function() {
+    var expectedHeight = ( $( 'html' ).hasClass('portrait') ) ? screen.availHeight + "px" : screen.availWidth + "px";
+    ok($('.ui-page').css('minHeight') == expectedHeight); 
+});
+
