@@ -468,11 +468,15 @@
 					var redirectLoc = to.data( "url" );
 
 					if( redirectLoc ){
-						base.set( redirectLoc );
+						if(base){
+							base.set( redirectLoc );
+						}	
 						fileUrl = path.makeAbsolute( path.getFilePath( redirectLoc ) );
 					}
 					else {
-						base.set(fileUrl);
+						if(base){
+							base.set(fileUrl);
+						}	
 						to.attr( "data-url", fileUrl );
 					}
 
