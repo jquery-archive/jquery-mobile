@@ -72,6 +72,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 		label.addClass('ui-slider');
 
+		// monitor the input for updated values
 		control
 			.addClass((cType == 'input') ? 'ui-slider-input' : 'ui-slider-switch')
 			.change(function(){
@@ -84,6 +85,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				self.refresh( val(), true );
 			});
 
+		// prevent screen drag when slider activated
 		$(document).bind($.support.touch ? "touchmove" : "mousemove", function(event){
 			if ( self.dragging ) {
 				self.refresh( event );
