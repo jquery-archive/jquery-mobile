@@ -10,7 +10,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		theme: null
 	},
 	_create: function(){
-		var input = this.element,
+		var $input = this.element,
 			o = this.options,
 			theme = o.theme,
 			themeclass;
@@ -24,19 +24,19 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		
 		themeclass = " ui-body-" + theme;
 		
-		$('label[for='+input.attr('id')+']').addClass('ui-input-text');
+		$('label[for='+$input.attr('id')+']').addClass('ui-input-text');
 		
-		input.addClass('ui-input-text ui-body-'+ o.theme);
+		$input.addClass('ui-input-text ui-body-'+ o.theme);
 		
-		var focusedEl = input;
+		var focusedEl = $input;
 		
 		//"search" input widget
-		if( input.is('[type="search"],[data-type="search"]') ){
-			focusedEl = input.wrap('<div class="ui-input-search ui-shadow-inset ui-btn-corner-all ui-btn-shadow ui-icon-search'+ themeclass +'"></div>').parent();
+		if( $input.is('[type="search"],[data-type="search"]') ){
+			focusedEl = $input.wrap('<div class="ui-input-search ui-shadow-inset ui-btn-corner-all ui-btn-shadow ui-icon-search'+ themeclass +'"></div>').parent();
 			var clearbtn = $('<a href="#" class="ui-input-clear" title="clear text">clear text</a>')
 				.click(function(){
-					input.val('').focus();
-					input.trigger('change'); 
+					$input.val('').focus();
+					$input.trigger('change'); 
 					clearbtn.addClass('ui-input-clear-hidden');
 					return false;
 				})
@@ -44,7 +44,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 				.buttonMarkup({icon: 'delete', iconpos: 'notext', corners:true, shadow:true});
 			
 			function toggleClear(){
-				if(input.val() == ''){
+				if($input.val() == ''){
 					clearbtn.addClass('ui-input-clear-hidden');
 				}
 				else{
@@ -53,13 +53,13 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			}
 			
 			toggleClear();
-			input.keyup(toggleClear);	
+			$input.keyup(toggleClear);	
 		}
 		else{
-			input.addClass('ui-corner-all ui-shadow-inset' + themeclass);
+			$input.addClass('ui-corner-all ui-shadow-inset' + themeclass);
 		}
 				
-		input
+		$input
 			.focus(function(){
 				focusedEl.addClass('ui-focus');
 			})
@@ -68,22 +68,33 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			});	
 			
 		//autogrow
-		if ( input.is('textarea') ) {
+		if ( $input.is('textarea') ) {
 			var extraLineHeight = 15,
 				keyupTimeoutBuffer = 100,
-				keyup = function() {
-					var scrollHeight = input[0].scrollHeight,
-						clientHeight = input[0].clientHeight;
+				resizeCheck = function() {
+					var scrollHeight = $input[0].scrollHeight,
+						clientHeight = $input[0].clientHeight;
 					if ( clientHeight < scrollHeight ) {
-						input.css({ height: (scrollHeight + extraLineHeight) });
+						$input.css({ height: (scrollHeight + extraLineHeight) });
 					}
 				},
 				keyupTimeout;
-			input.keyup(function() {
+			$input.keyup(function() {
 				clearTimeout( keyupTimeout );
-				keyupTimeout = setTimeout( keyup, keyupTimeoutBuffer );
+				keyupTimeout = setTimeout( resizeCheck, keyupTimeoutBuffer );
 			});
-		}
+			// Issue 509: the browser is not giving scrollHeight properly until after this function has run, adding in a setTimeout
+			// so we can properly access the scrollHeight
+      if ( $input.text().trim() ) {
+              setTimeout( function() {
+                // we want the textarea to show up as the correct size on load, so we remove the transition
+                $input.addClass( 'transition-none' );
+                resizeCheck();
+                // we need to delay the removing of the transition-none class otherwise the transition still takes place
+                setTimeout( function() { $input.removeClass( 'transition-none' ); }, 0 );
+              }, 0 );
+      }
+    };
 	},
 	
 	disable: function(){

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	
+	<title>jQuery Mobile Forms Test Suite</title>
+
+	<link rel="stylesheet"  href="../../../themes/default" />
+	<link rel="stylesheet" href="../../../external/qunit.css" type="text/css"/>
+
+	<script type="text/javascript" src="../../../js/jquery.js"></script>
+	<script type="text/javascript" src="../../../js/"></script>
+	<script type="text/javascript" src="../../jquery.testHelper.js"></script>
+	<script type="text/javascript" src="../../../external/qunit.js"></script>
+	<script type="text/javascript" src="form_textinput.js"></script>
+	
+</head>
+<body>
+<style>
+	[data-role='page'] {
+	  position: absolute;
+	  top: -10000px;
+	  left: -10000px;
+	}
+
+	/* maintain styling */
+	.ui-mobile-viewport {
+	  margin: 8px;
+	}
+</style>
+
+<h1 id="qunit-header">jQuery Mobile Forms Test Suite</h1>
+<h2 id="qunit-banner"></h2>
+<h2 id="qunit-userAgent"></h2>
+<ol id="qunit-tests">
+</ol>
+
+<div data-role="page" id='textarea-fixture'>
+	<div data-role="header" data-position="inline">
+		<h1>TextArea Fixture</h1>
+	</div>
+	<div data-role="content">
+	  <form action="#" method="get">		
+      <div data-role="fieldcontain">
+        <label for="textarea">Textarea:</label>
+        <textarea cols="40" rows="8" name="textarea" id="textAreaWithLargeText">
+          rafter of turkeys
+          pod of whales
+          mob of kangaroos
+          troop of monkeys
+       	</textarea>
+      </div>
+    </form>
+	</div>
+</div>
+  
+</body>
+</html>

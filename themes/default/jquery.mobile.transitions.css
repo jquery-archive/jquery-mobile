@@ -262,3 +262,9 @@ Built by David Kaneda and maintained by Jonathan Stark.
         opacity: 0;
     }
 }
+
+.transition-none {
+  -webkit-transition: none !important;
+  -o-transition: none !important;
+  -moz-transition: none !important; 
+}
