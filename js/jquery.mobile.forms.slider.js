@@ -77,6 +77,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				self.refresh( ((cType == 'input') ? parseFloat(control.val()) : control[0].selectedIndex), true );
 			})
 			.keyup(function(){ // necessary?
+				self.refresh( ((cType == 'input') ? parseFloat(control.val()) : control[0].selectedIndex), true, true );
+			})
+			.blur(function(){
 				self.refresh( ((cType == 'input') ? parseFloat(control.val()) : control[0].selectedIndex), true );
 			});
 
@@ -131,7 +134,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		this.handle
 			.bind('keydown', function( event ) {
 				var valuenow = $( this ).attr( "aria-valuenow" ),
-					  index;
+						index;
 
 				if ( self.options.disabled ) {
 					return;
@@ -193,7 +196,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		this.refresh();
 	},
 
-	refresh: function(val, isfromControl){
+	refresh: function(val, isfromControl, preventInputUpdate){
 		if ( this.options.disabled ) { return; }
 
 		var control = this.element, percent,
@@ -248,13 +251,15 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			}
 		}
 
-		// update control's value
-		if ( cType === "input" ) {
-			control.val(newval);
-		} else {
-			control[ 0 ].selectedIndex = newval;
+		if(!preventInputUpdate){
+			// update control's value
+			if ( cType === "input" ) {
+				control.val(newval);
+			} else {
+				control[ 0 ].selectedIndex = newval;
+			}
+			if (!isfromControl) { control.trigger("change"); }
 		}
-		if (!isfromControl) { control.trigger("change"); }
 	},
 
 	enable: function(){
