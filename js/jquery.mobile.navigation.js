@@ -458,14 +458,9 @@
 				data: data,
 				success: function( html ) {
 					
-
-					var all = $("<div></div>");
-					//workaround to allow scripts to execute when included in page divs
-					all.get(0).innerHTML = html;
-					to = all.find('[data-role="page"], [data-role="dialog"]').first();
-					
-					//if page arrives with a data-url, use it as the new fileUrl, base path, etc
-					var redirectLoc = to.data( "url" );
+					//pre-parse html to check for a data-url, 
+					//use it as the new fileUrl, base path, etc
+					var redirectLoc = / data-url="(.*)"/.test( html ) && RegExp.$1;
 
 					if( redirectLoc ){
 						if(base){
@@ -477,8 +472,12 @@
 						if(base){
 							base.set(fileUrl);
 						}	
-						to.attr( "data-url", fileUrl );
 					}
+					
+					var all = $("<div></div>");
+					//workaround to allow scripts to execute when included in page divs
+					all.get(0).innerHTML = html;
+					to = all.find('[data-role="page"], [data-role="dialog"]').first();
 
 					//rewrite src and href attrs to use a base url
 					if( !$.support.dynamicBaseTag ){
@@ -497,7 +496,9 @@
 					}
 					
 					//append to page and enhance
-					to.appendTo( $.mobile.pageContainer );
+					to
+						.attr( "data-url", fileUrl )
+						.appendTo( $.mobile.pageContainer );
 
 					enhancePage();
 					transitionPages();
