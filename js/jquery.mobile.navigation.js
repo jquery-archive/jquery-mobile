@@ -333,17 +333,17 @@
 
 				reFocus( to );
 
-				if( changeHash !== false && url ){
+				if( changeHash !== false && fileUrl ){
 					if( !back  ){
 						urlHistory.listeningEnabled = false;
 					}
-					path.set( url );
+					path.set( fileUrl );
 					urlHistory.listeningEnabled = true;
 				}
 				
 				//add page to history stack if it's not back or forward, or a dialog
 				if( !back && !forward ){
-					urlHistory.addNew( url, transition );
+					urlHistory.addNew( fileUrl, transition );
 				}
 				
 				removeActiveLinkClass();
@@ -457,8 +457,23 @@
 				type: type,
 				data: data,
 				success: function( html ) {
-					if(base){ base.set(fileUrl); }
+					
+					//pre-parse html to check for a data-url, 
+					//use it as the new fileUrl, base path, etc
+					var redirectLoc = / data-url="(.*)"/.test( html ) && RegExp.$1;
 
+					if( redirectLoc ){
+						if(base){
+							base.set( redirectLoc );
+						}	
+						fileUrl = path.makeAbsolute( path.getFilePath( redirectLoc ) );
+					}
+					else {
+						if(base){
+							base.set(fileUrl);
+						}	
+					}
+					
 					var all = $("<div></div>");
 					//workaround to allow scripts to execute when included in page divs
 					all.get(0).innerHTML = html;
@@ -479,7 +494,8 @@
 							}
 						});
 					}
-
+					
+					//append to page and enhance
 					to
 						.attr( "data-url", fileUrl )
 						.appendTo( $.mobile.pageContainer );

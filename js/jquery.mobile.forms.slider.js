@@ -29,7 +29,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			controlID = control.attr('id'),
 			labelID = controlID + '-label',
 			label = $('[for='+ controlID +']').attr('id',labelID),
-			val = (cType == 'input') ? parseFloat(control.val()) : control[0].selectedIndex,
+			val = function(){
+				return (cType == 'input') ? parseFloat(control.val()) : control[0].selectedIndex;
+			},
 			min = (cType == 'input') ? parseFloat(control.attr('min')) : 0,
 			max = (cType == 'input') ? parseFloat(control.attr('max')) : control.find('option').length-1,
 			step = window.parseFloat(control.attr('data-step') || 1),
@@ -41,12 +43,11 @@ $.widget( "mobile.slider", $.mobile.widget, {
 					'role': 'slider',
 					'aria-valuemin': min,
 					'aria-valuemax': max,
-					'aria-valuenow': val,
-					'aria-valuetext': val,
-					'title': val,
+					'aria-valuenow': val(),
+					'aria-valuetext': val(),
+					'title': val(),
 					'aria-labelledby': labelID
-				}),
-			switchValues = {'off' : 0, 'on': 1};
+				});
 
 		$.extend(this, {
 			slider: slider,
@@ -71,15 +72,20 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 		label.addClass('ui-slider');
 
+		// monitor the input for updated values
 		control
 			.addClass((cType == 'input') ? 'ui-slider-input' : 'ui-slider-switch')
 			.change(function(){
-				self.refresh( ((cType == 'input') ? parseFloat(control.val()) : control[0].selectedIndex), true );
+				self.refresh( val(), true );
 			})
 			.keyup(function(){ // necessary?
-				self.refresh( ((cType == 'input') ? parseFloat(control.val()) : control[0].selectedIndex), true );
+				self.refresh( val(), true, true );
+			})
+			.blur(function(){
+				self.refresh( val(), true );
 			});
 
+		// prevent screen drag when slider activated
 		$(document).bind($.support.touch ? "touchmove" : "mousemove", function(event){
 			if ( self.dragging ) {
 				self.refresh( event );
@@ -107,7 +113,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 							//tap occurred, but value didn't change. flip it!
 							self.refresh( self.beforeStart === 0 ? 1 : 0 );
 						}
-						var curval = (cType === "input") ? parseFloat(control.val()) : control[ 0 ].selectedIndex;
+						var curval = val();
 						var snapped = Math.round( curval / (max - min) * 100 );
 						handle
 							.addClass("ui-slider-handle-snapping")
@@ -130,19 +136,11 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 		this.handle
 			.bind('keydown', function( event ) {
-				var valuenow = $( this ).attr( "aria-valuenow" ),
-					  index;
+				var index = val();
 
 				if ( self.options.disabled ) {
 					return;
 				}
-
-				// convert switch values to slider
-				if(valuenow.match(/off|on/)){
-					valuenow = switchValues[valuenow];
-				}
-
-				index = window.parseFloat(valuenow, 10);
 
 				// In all cases prevent the default and mark the handle as active
 				switch ( event.keyCode ) {
@@ -193,7 +191,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		this.refresh();
 	},
 
-	refresh: function(val, isfromControl){
+	refresh: function(val, isfromControl, preventInputUpdate){
 		if ( this.options.disabled ) { return; }
 
 		var control = this.element, percent,
@@ -248,13 +246,15 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			}
 		}
 
-		// update control's value
-		if ( cType === "input" ) {
-			control.val(newval);
-		} else {
-			control[ 0 ].selectedIndex = newval;
+		if(!preventInputUpdate){
+			// update control's value
+			if ( cType === "input" ) {
+				control.val(newval);
+			} else {
+				control[ 0 ].selectedIndex = newval;
+			}
+			if (!isfromControl) { control.trigger("change"); }
 		}
-		if (!isfromControl) { control.trigger("change"); }
 	},
 
 	enable: function(){
