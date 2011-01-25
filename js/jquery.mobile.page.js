@@ -123,8 +123,8 @@ $.widget( "mobile.page", $.mobile.widget, {
 				  break;
 				default:
 					//The first idea was to search for roles starting with "widget" - /widget.*/, but this way roles are looking nicer and $.isFunction is quite fast.
-					if($.isFunction($this[ 'role-'+role ])){ 
-				        $this[ 'role-'+role ]();  
+					if($.isFunction($this[ 'role_'+role ])){ 
+				        $this[ 'role_'+role ]();  
 				        }
 				  break;
 			}
