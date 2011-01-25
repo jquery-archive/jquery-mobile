@@ -111,7 +111,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 							//tap occurred, but value didn't change. flip it!
 							self.refresh( self.beforeStart === 0 ? 1 : 0 );
 						}
-						var curval = val(); //(cType === "input") ? parseFloat(control.val()) : control[ 0 ].selectedIndex;
+						var curval = val();
 						var snapped = Math.round( curval / (max - min) * 100 );
 						handle
 							.addClass("ui-slider-handle-snapping")
