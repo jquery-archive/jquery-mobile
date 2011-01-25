@@ -122,7 +122,13 @@
 		focusable = "[tabindex],a,button:visible,select:visible,input",
 
 		//contains role for next page, if defined on clicked link via data-rel
-		nextPageRole = null;
+		nextPageRole = null,
+		
+		//queue to hold simultanious page transitions
+		pageTransitionQueue = [],
+		
+		// indicates whether or not page is in process of transitioning
+		isPageTransitioning = false;
 
 		//existing base tag?
 		var $base = $head.children("base"),
@@ -258,7 +264,13 @@
 		// and to is not an array or object (those are allowed to be "same")
 		if( currPage && urlHistory.stack.length > 1 && currPage.url === url && !toIsArray && !toIsObject ) {
 			return;
-		}	
+		}
+		else if(isPageTransitioning) {
+			pageTransitionQueue.unshift(arguments);
+			return;
+		}
+		
+		isPageTransitioning = true;
 			
 		// if the changePage was sent from a hashChange event
 		// guess if it came from the history menu
@@ -360,6 +372,11 @@
 				//if there's a duplicateCachedPage, remove it from the DOM now that it's hidden
 				if (duplicateCachedPage != null) {
 				    duplicateCachedPage.remove();
+				}
+				
+				isPageTransitioning = false
+				if(pageTransitionQueue.length>0) {
+					$.mobile.changePage.apply($.mobile, pageTransitionQueue.pop());
 				}
 			};
 
