@@ -87,6 +87,13 @@
 		same( $.mobile.path.hasProtocol( "foo/bar/baz.html" ), false, "simple directory path has no protocol" );
 		same( $.mobile.path.hasProtocol( "file://foo/bar/baz.html" ), true, "simple directory path with file:// has protocol" );
 	});
+	
+	test( "path.isRelative is working properly", function(){
+		same( $.mobile.path.isRelative("#foo/bar"), false, "path starting with a # is not relative" );
+		same( $.mobile.path.isRelative("/foo/bar"), false, "path starting with a / is not relative" );
+		same( $.mobile.path.isRelative("http://example.com/foo"), false, "full url path is not relative" );
+		same( $.mobile.path.isRelative("foo/bar.html"), true, "simple path is relative" );
+	});
 		
 	test( "path.isExternal is working properly", function(){
 		same( $.mobile.path.isExternal( location.href ), false, "same domain is not external" );
