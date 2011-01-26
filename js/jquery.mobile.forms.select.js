@@ -181,43 +181,44 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					$(this).blur();
 					button.focus();
 				});
-		//events on native select
-		select
-			.change(function(){
-				self.refresh();
-			})
-			.focus(function(){
-				$(this).blur();
-				button.focus();
-			});
 
-		//button events
-		button
-			.bind( "touchstart" ,function( event ){
-				//set startTouches to cached copy of
-				$( this ).data( "startTouches", $.extend({}, event.originalEvent.touches[ 0 ]) );
-			})
-			.bind( $.support.touch ? "touchend" : "mouseup" , function( event ){
-				//if it's a scroll, don't open
-				if( $( this ).data( "moved" ) ){
-					$( this ).removeData( "moved" );
-				}
-				else{
-					self.open();
-				}
-				event.preventDefault();
-			})
-			.bind( "touchmove", function( event ){
-				//if touch moved enough, set data moved and don't open menu
-				var thisTouches = event.originalEvent.touches[ 0 ],
+			//events on native select
+			select
+				.change(function(){
+					self.refresh();
+				})
+				.focus(function(){
+					$(this).blur();
+					button.focus();
+				});
+
+			//button events
+			button
+				.bind( "touchstart" ,function( event ){
+					//set startTouches to cached copy of
+					$( this ).data( "startTouches", $.extend({}, event.originalEvent.touches[ 0 ]) );
+				})
+				.bind( $.support.touch ? "touchend" : "mouseup" , function( event ){
+					//if it's a scroll, don't open
+					if( $( this ).data( "moved" ) ){
+						$( this ).removeData( "moved" );
+					}
+					else{
+						self.open();
+					}
+					event.preventDefault();
+				})
+				.bind( "touchmove", function( event ){
+					//if touch moved enough, set data moved and don't open menu
+					var thisTouches = event.originalEvent.touches[ 0 ],
 					startTouches = $( this ).data( "startTouches" ),
 					deltaX = Math.abs(thisTouches.pageX - startTouches.pageX),
 					deltaY = Math.abs(thisTouches.pageY - startTouches.pageY);
 
-				if( deltaX > 10 || deltaY > 10 ){
-					$( this ).data( "moved", true );
-				}
-			});
+					if( deltaX > 10 || deltaY > 10 ){
+						$( this ).data( "moved", true );
+					}
+				});
 
 		}
 
