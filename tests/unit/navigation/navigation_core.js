@@ -81,6 +81,12 @@
 	
 	});
 	
+	test( "path.hasProtocol is working properly", function(){
+		same( $.mobile.path.hasProtocol( "tel:5559999" ), true, "value in tel protocol format has protocol" );
+		same( $.mobile.path.hasProtocol( location.href ), true, "location href has protocol" );
+		same( $.mobile.path.hasProtocol( "foo/bar/baz.html" ), false, "simple directory path has no protocol" );
+		same( $.mobile.path.hasProtocol( "file://foo/bar/baz.html" ), true, "simple directory path with file:// has protocol" );
+	});
 		
 	test( "path.isExternal is working properly", function(){
 		same( $.mobile.path.isExternal( location.href ), false, "same domain is not external" );
