@@ -169,6 +169,9 @@
 		
 		
 		
+		<h2>Back linking</h2>
+		<p>If you use the attribute <code>data-rel="back"</code> on an anchor, any clicks on that anchor will mimic the back button, going back one history entry and ignoring the anchor's default href. This is particularly useful when linking back to a named page, such as a link that says "home", or when generating "back" buttons with JavaScript, such as a button to close a dialog. When using this feature in your source markup, <strong>be sure to provide a meaningful href that actually points to the URL of the referring page (this will allow the feature to work for users in C-Grade browsers</strong>. Also, pease keep in mind that if you just want a reverse transition without actually going back in history, you should use the <code>data-direction="reverse"</code> attribute instead.</p>
+		
 		<h2>Redirects and linking to directories</h2>
 		<p>When linking to directory indexes (such as href="typesofcats/" instead of href="typesofcats/index.html"), you must provide a trailing slash. This is because jQuery Mobile assumes the section after the last "/" character in a url is a filename, and it will remove that section when creating base urls from which future pages will be referenced.</p>
 		

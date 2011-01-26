@@ -25,7 +25,7 @@
 			//return the substring of a filepath before the sub-page key, for making a server request
 			getFilePath: function( path ){
 				var splitkey = '&' + $.mobile.subPageUrlKey;
-				return path && path.indexOf( splitkey ) > -1 ? path.split( splitkey )[0] : path;
+				return path && path.split( splitkey )[0].split( dialogHashKey )[0];
 			},
 			
 			//set location hash to path
@@ -128,7 +128,10 @@
 		pageTransitionQueue = [],
 		
 		// indicates whether or not page is in process of transitioning
-		isPageTransitioning = false;
+		isPageTransitioning = false,
+
+		//nonsense hash change key for dialogs, so they create a history entry
+		dialogHashKey = "&ui-state=dialog";
 
 		//existing base tag?
 		var $base = $head.children("base"),
@@ -244,7 +247,6 @@
 	// changepage function
 	// TODO : consider moving args to an object hash
 	$.mobile.changePage = function( to, transition, reverse, changeHash, fromHashChange ){
-
 		//from is always the currently viewed page
 		var toIsArray = $.type(to) === "array",
 			toIsObject = $.type(to) === "object",
@@ -258,6 +260,7 @@
 			currPage = urlHistory.getActive(),
 			back = false,
 			forward = false;
+			
 			
 		// If we are trying to transition to the same page that we are currently on ignore the request.
 		// an illegal same page request is defined by the current page being the same as the url, as long as there's history
@@ -332,6 +335,11 @@
 			var currScroll = $window.scrollTop(),
 					perspectiveTransitions = ["flip"],
 					pageContainerClasses = [];
+			
+			//support deep-links to generated sub-pages	
+			if( url.indexOf( "&" + $.mobile.subPageUrlKey ) > -1 ){
+				to = $( "[data-url='" + url + "']" );
+			}
 
 			//set as data for returning to that spot
 			from.data('lastScroll', currScroll);
@@ -345,17 +353,17 @@
 
 				reFocus( to );
 
-				if( changeHash !== false && fileUrl ){
+				if( changeHash !== false && url ){
 					if( !back  ){
 						urlHistory.listeningEnabled = false;
 					}
-					path.set( fileUrl );
+					path.set( url );
 					urlHistory.listeningEnabled = true;
 				}
 				
-				//add page to history stack if it's not back or forward, or a dialog
+				//add page to history stack if it's not back or forward
 				if( !back && !forward ){
-					urlHistory.addNew( fileUrl, transition );
+					urlHistory.addNew( url, transition );
 				}
 				
 				removeActiveLinkClass();
@@ -392,6 +400,8 @@
 
 				pageContainerClasses = [];
 			};
+			
+			
 
 			if(transition && (transition !== 'none')){
 				if( $.inArray(transition, perspectiveTransitions) >= 0 ){
@@ -425,7 +435,7 @@
 
 			//set next page role, if defined
 			if ( nextPageRole || to.data('role') == 'dialog' ) {
-				changeHash = false;
+				url = urlHistory.getActive().url + dialogHashKey;
 				if(nextPageRole){
 					to.attr( "data-role", nextPageRole );
 					nextPageRole = null;
@@ -483,7 +493,7 @@
 						if(base){
 							base.set( redirectLoc );
 						}	
-						fileUrl = path.makeAbsolute( path.getFilePath( redirectLoc ) );
+						url = fileUrl = path.makeAbsolute( path.getFilePath( redirectLoc ) );
 					}
 					else {
 						if(base){
@@ -584,7 +594,12 @@
 			
 			//if target attr is specified we mimic _blank... for now
 			hasTarget = $this.is( "[target]" );
-			
+		
+		//if there's a data-rel=back attr, go back in history
+		if( $this.is( "[data-rel='back']" ) ){
+			window.history.back();
+			return false;
+		}	
 
 		if( url === "#" ){
 			//for links created purely for interaction - ignore
@@ -614,7 +629,8 @@
 				reverse = direction && direction == "reverse" || 
 				// deprecated - remove by 1.0
 				$this.data( "back" );
-
+				
+			//this may need to be more specific as we use data-rel more	
 			nextPageRole = $this.attr( "data-rel" );
 
 			//if it's a relative href, prefix href with base url
@@ -633,19 +649,22 @@
 
 	//hashchange event handler
 	$window.bind( "hashchange", function(e, triggered) {
-		if( !urlHistory.listeningEnabled || !$.mobile.ajaxEnabled ||
+		if( !triggered && ( !urlHistory.listeningEnabled || !$.mobile.ajaxEnabled ||
 			// TODO: deprecated - remove at 1.0
 			// only links need to be checked here, as forms don't trigger a hashchange event (they just silently update the hash)
-			( !$.mobile.ajaxLinksEnabled ) ){
+			!$.mobile.ajaxLinksEnabled ) ){
 			return;
 		}
-
-		if( $(".ui-page-active").is("[data-role=" + $.mobile.nonHistorySelectors + "]") ){
-			return;
-		}
-
+		
 		var to = path.stripHash( location.hash ),
-			transition = triggered ? false : undefined;
+			transition = triggered ? false : undefined;	
+
+		//make sure that hash changes that produce a dialog url do nothing	
+		if( urlHistory.stack.length > 1 &&
+				to.indexOf( dialogHashKey ) > -1 &&
+				!$.mobile.activePage.is( ".ui-dialog" ) ){
+			return;
+		}	
 
 		//if to is defined, use it
 		if ( to ){

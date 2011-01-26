@@ -77,17 +77,6 @@
 		finishPageTransition();
 	});
 
-	test( "previous transition used when not set and going back through url stack", function(){
-		$("#no-trans > a").click();
-		finishPageTransition();
-
-		$("#pop-trans > a").click();
-		finishPageTransition();
-
-		$("#no-trans > a").click();
-		ok($("#pop-trans").hasClass("pop"), "has pop class");
-		finishPageTransition();
-	});
 
 	test( "default transition is slide", function(){
 		$("#default-trans > a").click();

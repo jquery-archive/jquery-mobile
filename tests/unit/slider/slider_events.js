@@ -62,6 +62,23 @@
 		});
 	});
 
+	test( "slider should validate input value on blur", function(){
+		var slider = $("#range-slider-up");
+		slider.focus();
+		slider.val(200);
+		same(slider.val(), "200");
+		slider.blur();
+		same(slider.val(), slider.attr('max'));
+	});
+
+	test( "slider should not validate input on keyup", function(){
+		var slider = $("#range-slider-up");
+		slider.focus();
+		slider.val(200);
+		same(slider.val(), "200");
+		slider.keyup();
+		same(slider.val(), "200");
+	});
 
 	// generic switch test function
 	var sliderSwitchTest = function(opts){
