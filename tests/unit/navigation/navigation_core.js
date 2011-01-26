@@ -78,7 +78,6 @@
 	
 	test( "path.stripHash is working properly", function(){
 		same( $.mobile.path.stripHash( "#bar" ), "bar", "returns a hash without the # prefix");
-	
 	});
 	
 	test( "path.hasProtocol is working properly", function(){
@@ -108,6 +107,58 @@
 		same($.mobile.path.isExternal("/foo"), false, "root-relative path");
 		same($.mobile.path.isExternal("foo"), false, "simple string");
 		same($.mobile.path.isExternal("#foo"), false, "local id reference");
+	});
+	
+	
+	test( "urlHistory is working properly", function(){
+		//urlHistory
+		same( $.type( $.mobile.urlHistory.stack ), "array", "urlHistory.stack is an array" );
+		
+		//preload the stack
+		$.mobile.urlHistory.stack[0] = { url: "foo", transition: "bar" };
+		$.mobile.urlHistory.stack[1] = { url: "baz", transition: "shizam" };
+		$.mobile.urlHistory.stack[2] = { url: "shizoo", transition: "shizaah" };
+		
+		//active index
+		same( $.mobile.urlHistory.activeIndex , 0, "urlHistory.activeIndex is 0" );
+		
+		//getActive
+		same( $.type( $.mobile.urlHistory.getActive() ) , "object", "active item is an object" );
+		same( $.mobile.urlHistory.getActive().url , "foo", "active item has url foo" );
+		same( $.mobile.urlHistory.getActive().transition , "bar", "active item has transition bar" );
+		
+		//get prev / next
+		same( $.mobile.urlHistory.getPrev(), undefined, "urlHistory.getPrev() is undefined when active index is 0" );
+		$.mobile.urlHistory.activeIndex = 1;
+		same( $.mobile.urlHistory.getPrev().url, "foo", "urlHistory.getPrev() has url foo when active index is 1" );
+		$.mobile.urlHistory.activeIndex = 0;
+		same( $.mobile.urlHistory.getNext().url, "baz", "urlHistory.getNext() has url baz when active index is 0" );
+		
+		//add new
+		$.mobile.urlHistory.activeIndex = 2;
+		$.mobile.urlHistory.addNew("test");
+		same( $.mobile.urlHistory.stack.length, 4, "urlHistory.addNew() adds an item after the active index" );
+		same( $.mobile.urlHistory.activeIndex, 3, "urlHistory.addNew() moves the activeIndex to the newly added item" );
+		
+		//clearForward
+		$.mobile.urlHistory.activeIndex = 0;
+		$.mobile.urlHistory.clearForward();
+		same( $.mobile.urlHistory.stack.length, 1, "urlHistory.clearForward() clears the url stack after the active index" );
+	});
+	
+	//url listening
+	asyncTest( "ability to disable our hash change event listening", function(){
+		$.mobile.urlHistory.listeningEnabled = false;
+		var stillListening = false;
+		$(document).bind("pagebeforehide", function(){
+			stillListening = true;
+		});
+		location.hash = "foozball";
+		setTimeout(function(){
+			start();
+			ok( $.mobile.urlHistory.listeningEnabled == stillListening, "urlHistory.listeningEnabled = false disables default hashchange event handler");
+			location.hash = "";
+		}, 1000);
 	});
 	
 })(jQuery);
