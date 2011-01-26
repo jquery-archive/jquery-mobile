@@ -75,7 +75,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 
 				// auto-add back btn on pages beyond first view
 				if ( o.addBackBtn && role === "header" &&
-						($.mobile.urlHistory.getPrev() || $(".ui-page").length > 1) &&
+						$.mobile.urlHistory.stack.length > 0  &&
 						!leftbtn && $this.data( "backbtn" ) !== false ) {
 
 					$( "<a href='#' class='ui-btn-left' data-icon='arrow-l'>"+ o.backBtnText +"</a>" )
