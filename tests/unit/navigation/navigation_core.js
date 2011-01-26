@@ -52,8 +52,17 @@
 	
 	
 	test( "path.set method is working properly", function(){
+		$.mobile.urlHistory.listeningEnabled = false;
 		$.mobile.path.set("foo");
 		same("foo", window.location.hash.replace(/^#/,""), "sets location.hash properly");
+		location.hash = "";
+	});
+	
+	test( "path.makeAbsolute is working properly", function(){
+		$.mobile.urlHistory.listeningEnabled = false;
+		$.mobile.path.set("bar/");
+		same( $.mobile.path.makeAbsolute("test.html"), "bar/test.html", "prefixes path with absolute base path from hash");
+		location.hash = "";
 	});
 
 
