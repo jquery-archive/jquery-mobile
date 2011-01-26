@@ -81,13 +81,10 @@
 	
 	});
 	
+		
 	test( "path.isExternal is working properly", function(){
 		same( $.mobile.path.isExternal( location.href ), false, "same domain is not external" );
 		same( $.mobile.path.isExternal( "http://example.com" ), true, "example.com is external" );
-	});
-
-
-	test( "path.isExternal method is working properly", function(){
 		same($.mobile.path.isExternal("mailto:"), true, "mailto protocol");
 		same($.mobile.path.isExternal("http://foo.com"), true, "http protocol");
 		same($.mobile.path.isExternal("http://www.foo.com"), true, "http protocol with www");
