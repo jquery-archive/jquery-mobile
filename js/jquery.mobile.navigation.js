@@ -25,7 +25,7 @@
 			//return the substring of a filepath before the sub-page key, for making a server request
 			getFilePath: function( path ){
 				var splitkey = '&' + $.mobile.subPageUrlKey;
-				return path && path.indexOf( splitkey ) > -1 ? path.split( splitkey )[0] : path;
+				return path && path.split( splitkey )[0].split( dialogHashKey )[0];
 			},
 			
 			//set location hash to path
@@ -122,7 +122,10 @@
 		focusable = "[tabindex],a,button:visible,select:visible,input",
 
 		//contains role for next page, if defined on clicked link via data-rel
-		nextPageRole = null;
+		nextPageRole = null,
+		
+		//nonsense hash change key for dialogs, so they create a history entry
+		dialogHashKey = "&ui-state=dialog";
 
 		//existing base tag?
 		var $base = $head.children("base"),
@@ -322,10 +325,7 @@
 					pageContainerClasses = [];
 			
 			//support deep-links to generated sub-pages	
-			var subkey = "&" + $.mobile.subPageUrlKey,
-				dialogkey = subkey + "=dialog";
-				
-			if( url.indexOf(subkey) > -1 && url.indexOf(dialogkey) == -1 ){
+			if( url.indexOf( "&" + $.mobile.subPageUrlKey ) > -1 ){
 				to = $( "[data-url='" + url + "']" );
 			}
 
@@ -349,7 +349,7 @@
 					urlHistory.listeningEnabled = true;
 				}
 				
-				//add page to history stack if it's not back or forward, or a dialog
+				//add page to history stack if it's not back or forward
 				if( !back && !forward ){
 					urlHistory.addNew( url, transition );
 				}
@@ -418,8 +418,7 @@
 
 			//set next page role, if defined
 			if ( nextPageRole || to.data('role') == 'dialog' ) {
-				//changeHash = false;
-				url = urlHistory.getActive().url + "&" + $.mobile.subPageUrlKey + "=dialog";
+				url = urlHistory.getActive().url + dialogHashKey;
 				if(nextPageRole){
 					to.attr( "data-role", nextPageRole );
 					nextPageRole = null;
@@ -645,7 +644,7 @@
 
 		//make sure that hash changes that produce a dialog url do nothing	
 		if( urlHistory.stack.length > 1 &&
-				to.indexOf( "&" + $.mobile.subPageUrlKey + "=dialog") > -1 &&
+				to.indexOf( dialogHashKey ) > -1 &&
 				!$.mobile.activePage.is( ".ui-dialog" ) ){
 			return;
 		}	
