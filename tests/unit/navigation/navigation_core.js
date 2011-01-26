@@ -75,6 +75,11 @@
 		same( $.mobile.path.clean( localpath ), fakepath, "removes location protocol, host, port from same-domain path");
 		same( $.mobile.path.clean( remotepath ), remotepath, "does nothing to an external domain path");
 	});
+	
+	test( "path.stripHash is working properly", function(){
+		same( $.mobile.path.stripHash( "#bar" ), "bar", "returns a hash without the # prefix");
+	
+	});
 
 
 	test( "path.isExternal method is working properly", function(){
