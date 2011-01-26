@@ -51,7 +51,10 @@
 	});
 	
 	
-	
+	test( "path.set method is working properly", function(){
+		$.mobile.path.set("foo");
+		same("foo", window.location.hash.replace(/^#/,""), "sets location.hash properly");
+	});
 
 
 	test( "path.isExternal method is working properly", function(){
