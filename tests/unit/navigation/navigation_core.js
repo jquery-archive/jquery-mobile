@@ -38,10 +38,16 @@
 		same(called, 2, "change page should be called twice");
 	});
 	
+	
+	
 	test( "path.get method is working properly", function(){
 		same($.mobile.path.get(), window.location.hash, "get method returns location.hash");
 		same($.mobile.path.get( "#foo/bar/baz.html" ), "foo/bar/", "get method with hash arg returns path with no filename or hash prefix");
 		same($.mobile.path.get( "#foo/bar/baz.html/" ), "foo/bar/baz.html/", "last segment of hash is retained if followed by a trailing slash");
+	});
+	
+	test( "path.getFilePath method is working properly", function(){
+		same($.mobile.path.getFilePath("foo.html" + "&" $.mobile.subPageUrlKey ), "foo.html", "returns path without sub page key");
 	});
 
 	test( "path.isExternal method is working properly", function(){
