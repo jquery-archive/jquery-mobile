@@ -47,8 +47,12 @@
 	});
 	
 	test( "path.getFilePath method is working properly", function(){
-		same($.mobile.path.getFilePath("foo.html" + "&" $.mobile.subPageUrlKey ), "foo.html", "returns path without sub page key");
+		same($.mobile.path.getFilePath("foo.html" + "&" + $.mobile.subPageUrlKey ), "foo.html", "returns path without sub page key");
 	});
+	
+	
+	
+
 
 	test( "path.isExternal method is working properly", function(){
 		same($.mobile.path.isExternal("mailto:"), true, "mailto protocol");
