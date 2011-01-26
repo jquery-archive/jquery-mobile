@@ -616,10 +616,10 @@
 
 	//hashchange event handler
 	$window.bind( "hashchange", function(e, triggered) {
-		if( !urlHistory.listeningEnabled || !$.mobile.ajaxEnabled ||
+		if( !triggered && ( !urlHistory.listeningEnabled || !$.mobile.ajaxEnabled ||
 			// TODO: deprecated - remove at 1.0
 			// only links need to be checked here, as forms don't trigger a hashchange event (they just silently update the hash)
-			( !$.mobile.ajaxLinksEnabled ) ){
+			!$.mobile.ajaxLinksEnabled ) ){
 			return;
 		}
 
