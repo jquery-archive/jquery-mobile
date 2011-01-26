@@ -115,6 +115,9 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 			menuType;
 
+		// set to native menu
+		o.useNativeMenu = select.is( "[data-native]");
+
 		// add counter for multi selects
 		if( isMultiple ){
 			self.buttonCount = $('<span>')
