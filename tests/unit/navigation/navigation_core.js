@@ -64,6 +64,17 @@
 		same( $.mobile.path.makeAbsolute("test.html"), "bar/test.html", "prefixes path with absolute base path from hash");
 		location.hash = "";
 	});
+	
+	test( "path.clean is working properly", function(){
+		var localroot = location.href.split("/").slice(0, 3).join("/"),
+			remoteroot = "http://google.com/",
+			fakepath = "foo/bar/baz.html",
+			localpath = localroot + fakepath,
+			remotepath = remoteroot + fakepath;
+			
+		same( $.mobile.path.clean( localpath ), fakepath, "removes location protocol, host, port from same-domain path");
+		same( $.mobile.path.clean( remotepath ), remotepath, "does nothing to an external domain path");
+	});
 
 
 	test( "path.isExternal method is working properly", function(){
