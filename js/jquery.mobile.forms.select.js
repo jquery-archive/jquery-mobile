@@ -154,8 +154,15 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		//disable if specified
 		if( o.disabled ){ this.disable(); }
 
+		//events on native select
+		select
+			.change(function(){
+				self.refresh();
+			});
+
 		//support for using the native select menu with a custom button
 		if( o.useNativeMenu ){
+
 			select
 				.appendTo(button)
 				.bind( "touchstart mousedown", function( e ){
@@ -176,18 +183,9 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 			button.attr( "tabindex", "-1" );
 		} else {
+
 			select
 				.attr( "tabindex", "-1" )
-				.focus(function(){
-					$(this).blur();
-					button.focus();
-				});
-
-			//events on native select
-			select
-				.change(function(){
-					self.refresh();
-				})
 				.focus(function(){
 					$(this).blur();
 					button.focus();
