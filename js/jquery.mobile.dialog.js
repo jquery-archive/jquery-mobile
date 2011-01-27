@@ -49,7 +49,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 				}
 			})
 			//destroy the dialog after hiding
-			.bind("pagehide",function(){
+			.bind("pagehide.dialog",function(){
 				self.destroy();
 				$(this).remove();
 			});

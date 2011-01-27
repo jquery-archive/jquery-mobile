@@ -160,6 +160,9 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				$(this).blur();
 				button.focus();
 			});
+			
+		//unbind dialog destroy on close
+		menuPage.unbind("pagehide.dialog");
 
 		//button events
 		button
