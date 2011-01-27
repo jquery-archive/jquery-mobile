@@ -299,6 +299,10 @@
 			isFormRequest = true;
 			//make get requests bookmarkable
 			if( data && type == 'get' ){
+				if($.type( data ) == "object" ){
+					data = $.param(data);
+				}
+			
 				url += "?" + data;
 				data = undefined;
 			}
