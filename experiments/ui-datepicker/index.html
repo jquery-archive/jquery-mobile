@@ -38,7 +38,16 @@
 		
 		<h2>Usage Instructions</h2>
 		
-		<p>This plugin is not included in jQuery Mobile by default, so you'll need to include the following files in order to use it:</p>
+		<p>The datepicker auto-generates from a regular <code>input</code> element with a <code>type="date"</code> attribute.</p>
+		
+		<pre><code>
+&lt;label for=&quot;date&quot;&gt;Date Input:&lt;/label&gt;
+&lt;input type=&quot;date&quot; name=&quot;date&quot; id=&quot;date&quot; value=&quot;&quot;  /&gt;		
+		</code></pre>
+		
+		<p>We'd recommend wrapping the label and input in a fieldcontain div for presentation purposes, and these elements should be placed within a <code>form</code> element for C-Grade browser accessibility.</p>
+		
+		<p><strong>Note:</strong> This plugin is not included in jQuery Mobile by default, so you'll need to include the following files in order to use it:</p>
 		
 <pre><code>
   &lt;link rel=&quot;stylesheet&quot; href=&quot;jquery.ui.datepicker.mobile.css&quot; /&gt; 
@@ -57,6 +66,8 @@
 </code></pre>
 
 <p>Be sure to place this event binding in a script that loads after jQuery, but before jQuery Mobile. Check this page's source for an example.</p>
+	
+	
 	
 		
 
