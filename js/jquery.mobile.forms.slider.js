@@ -3,7 +3,7 @@
 * Copyright (c) jQuery Project
 * Dual licensed under the MIT or GPL Version 2 licenses.
 * http://jquery.org/license
-*/  
+*/
 (function($, undefined ) {
 $.widget( "mobile.slider", $.mobile.widget, {
 	options: {
@@ -11,27 +11,30 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		trackTheme: null,
 		disabled: false
 	},
-	_create: function(){	
+	_create: function(){
 		var self = this,
 
 			control = this.element,
-		
-			parentTheme = control.parents('[class*=ui-bar-],[class*=ui-body-]').eq(0),	
-			
+
+			parentTheme = control.parents('[class*=ui-bar-],[class*=ui-body-]').eq(0),
+
 			parentTheme = parentTheme.length ? parentTheme.attr('class').match(/ui-(bar|body)-([a-z])/)[2] : 'c',
-					
+
 			theme = this.options.theme ? this.options.theme : parentTheme,
-			
+
 			trackTheme = this.options.trackTheme ? this.options.trackTheme : parentTheme,
-			
+
 			cType = control[0].nodeName.toLowerCase(),
 			selectClass = (cType == 'select') ? 'ui-slider-switch' : '',
 			controlID = control.attr('id'),
 			labelID = controlID + '-label',
 			label = $('[for='+ controlID +']').attr('id',labelID),
-			val = (cType == 'input') ? parseFloat(control.val()) : control[0].selectedIndex,
+			val = function(){
+				return (cType == 'input') ? parseFloat(control.val()) : control[0].selectedIndex;
+			},
 			min = (cType == 'input') ? parseFloat(control.attr('min')) : 0,
 			max = (cType == 'input') ? parseFloat(control.attr('max')) : control.find('option').length-1,
+			step = window.parseFloat(control.attr('data-step') || 1),
 			slider = $('<div class="ui-slider '+ selectClass +' ui-btn-down-'+ trackTheme+' ui-btn-corner-all" role="application"></div>'),
 			handle = $('<a href="#" class="ui-slider-handle"></a>')
 				.appendTo(slider)
@@ -40,9 +43,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 					'role': 'slider',
 					'aria-valuemin': min,
 					'aria-valuemax': max,
-					'aria-valuenow': val,
-					'aria-valuetext': val,
-					'title': val,
+					'aria-valuenow': val(),
+					'aria-valuetext': val(),
+					'title': val(),
 					'aria-labelledby': labelID
 				});
 
@@ -56,32 +59,40 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		if(cType == 'select'){
 			slider.wrapInner('<div class="ui-slider-inneroffset"></div>');
 			var options = control.find('option');
-				
+
 			control.find('option').each(function(i){
 				var side = (i==0) ?'b':'a',
 					corners = (i==0) ? 'right' :'left',
 					theme = (i==0) ? ' ui-btn-down-' + trackTheme :' ui-btn-active';
-				$('<div class="ui-slider-labelbg ui-slider-labelbg-'+ side + theme +' ui-btn-corner-'+ corners+'"></div>').prependTo(slider);	
+				$('<div class="ui-slider-labelbg ui-slider-labelbg-'+ side + theme +' ui-btn-corner-'+ corners+'"></div>').prependTo(slider);
 				$('<span class="ui-slider-label ui-slider-label-'+ side + theme +' ui-btn-corner-'+ corners+'" role="img">'+$(this).text()+'</span>').prependTo(handle);
 			});
-			
-		}	
-		
+
+		}
+
 		label.addClass('ui-slider');
-		
+
+		// monitor the input for updated values
 		control
 			.addClass((cType == 'input') ? 'ui-slider-input' : 'ui-slider-switch')
-			.keyup(function(){
-				self.refresh( $(this).val() );
+			.change(function(){
+				self.refresh( val(), true );
+			})
+			.keyup(function(){ // necessary?
+				self.refresh( val(), true, true );
+			})
+			.blur(function(){
+				self.refresh( val(), true );
 			});
-			
+
+		// prevent screen drag when slider activated
 		$(document).bind($.support.touch ? "touchmove" : "mousemove", function(event){
 			if ( self.dragging ) {
 				self.refresh( event );
 				return false;
 			}
 		});
-					
+
 		slider
 			.bind($.support.touch ? "touchstart" : "mousedown", function(event){
 				self.dragging = true;
@@ -91,9 +102,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				self.refresh( event );
 				return false;
 			});
-			
+
 		slider
-			.add(document)	
+			.add(document)
 			.bind($.support.touch ? "touchend" : "mouseup", function(){
 				if ( self.dragging ) {
 					self.dragging = false;
@@ -102,7 +113,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 							//tap occurred, but value didn't change. flip it!
 							self.refresh( self.beforeStart === 0 ? 1 : 0 );
 						}
-						var curval = (cType === "input") ? parseFloat(control.val()) : control[ 0 ].selectedIndex;
+						var curval = val();
 						var snapped = Math.round( curval / (max - min) * 100 );
 						handle
 							.addClass("ui-slider-handle-snapping")
@@ -116,11 +127,71 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			});
 
 		slider.insertAfter(control);
-		handle.bind('click', function(e){ return false; });
+
+		// NOTE force focus on handle
+		this.handle
+			.bind($.support.touch ? "touchstart" : "mousedown", function(){
+				$(this).focus();
+			});
+
+		this.handle
+			.bind('keydown', function( event ) {
+				var index = val();
+
+				if ( self.options.disabled ) {
+					return;
+				}
+
+				// In all cases prevent the default and mark the handle as active
+				switch ( event.keyCode ) {
+				 case $.mobile.keyCode.HOME:
+				 case $.mobile.keyCode.END:
+				 case $.mobile.keyCode.PAGE_UP:
+				 case $.mobile.keyCode.PAGE_DOWN:
+				 case $.mobile.keyCode.UP:
+				 case $.mobile.keyCode.RIGHT:
+				 case $.mobile.keyCode.DOWN:
+				 case $.mobile.keyCode.LEFT:
+					event.preventDefault();
+
+					if ( !self._keySliding ) {
+						self._keySliding = true;
+						$( this ).addClass( "ui-state-active" );
+					}
+					break;
+				}
+
+				// move the slider according to the keypress
+				switch ( event.keyCode ) {
+				 case $.mobile.keyCode.HOME:
+					self.refresh(min);
+					break;
+				 case $.mobile.keyCode.END:
+					self.refresh(max);
+					break;
+				 case $.mobile.keyCode.PAGE_UP:
+				 case $.mobile.keyCode.UP:
+				 case $.mobile.keyCode.RIGHT:
+					self.refresh(index + step);
+					break;
+				 case $.mobile.keyCode.PAGE_DOWN:
+				 case $.mobile.keyCode.DOWN:
+				 case $.mobile.keyCode.LEFT:
+					self.refresh(index - step);
+					break;
+				}
+			}) // remove active mark
+			.keyup(function( event ) {
+				if ( self._keySliding ) {
+					self._keySliding = false;
+					$( this ).removeClass( "ui-state-active" );
+				}
+			});
+
 		this.refresh();
 	},
 
-	refresh: function(val){
+	refresh: function(val, isfromControl, preventInputUpdate){
 		if ( this.options.disabled ) { return; }
 
 		var control = this.element, percent,
@@ -140,7 +211,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			percent = Math.round( ((data.pageX - this.slider.offset().left) / this.slider.width() ) * 100 );
 		} else {
 			if ( val == null ) {
-				val = (cType === "input") ? parseFloat(control.val()) : control[ 0 ].selectedIndex;
+				val = (cType === "input") ? parseFloat(control.val()) : control[0].selectedIndex;
 			}
 			percent = (parseFloat(val) - min) / (max - min) * 100;
 		}
@@ -155,7 +226,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 		//flip the stack of the bg colors
 		if ( percent > 60 && cType === "select" ) {
-			
+
 		}
 		this.handle.css("left", percent + "%");
 		this.handle.attr({
@@ -175,13 +246,15 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			}
 		}
 
-		// update control's value
-		if ( cType === "input" ) {
-			control.val(newval);
-		} else {
-			control[ 0 ].selectedIndex = newval;
+		if(!preventInputUpdate){
+			// update control's value
+			if ( cType === "input" ) {
+				control.val(newval);
+			} else {
+				control[ 0 ].selectedIndex = newval;
+			}
+			if (!isfromControl) { control.trigger("change"); }
 		}
-		control.trigger("change");
 	},
 
 	enable: function(){
@@ -197,4 +270,4 @@ $.widget( "mobile.slider", $.mobile.widget, {
 	}
 });
 })( jQuery );
-	
+

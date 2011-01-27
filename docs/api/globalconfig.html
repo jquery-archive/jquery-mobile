@@ -3,8 +3,9 @@
 	<head>
 	<meta charset="utf-8" /> 
 	<title>jQuery Mobile Docs - Configuring default settings</title> 
-	<link rel="stylesheet"  href="../../themes/default" /> 
+	<link rel="stylesheet"  href="../../themes/default/" /> 
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	<script type="text/javascript" src="../../js/jquery.js"></script>
 	<script type="text/javascript" src="../../js/"></script>
 </head> 
 <body> 
@@ -79,11 +80,14 @@ $(document).bind("mobileinit", function(){
 	
 	<dt>activeBtnClass (<em>string</em>, default: "ui-page-active"):</dt> 
 	<dd>The class used for "active" button state, from CSS framework.</dd>
+	
+	<dt>ajaxEnabled (<em>boolean</em>, default: true):</dt> 
+	<dd>jQuery Mobile will automatically handle link clicks and form submissions through Ajax, when possible. If false, url hash listening will be disabled as well, and urls will load as regular http requests.</dd>
 
-	<dt>ajaxLinksEnabled (<em>boolean</em>, default: true):</dt> 
+	<dt>ajaxLinksEnabled (<strong>deprecated</strong> <em>boolean</em>, default: true):</dt> 
 	<dd>jQuery Mobile will automatically handle link clicks through Ajax, when possible.</dd>
 
-	<dt>ajaxFormsEnabled (<em>boolean</em>, default: true):</dt> 
+	<dt>ajaxFormsEnabled (<strong>deprecated</strong> <em>boolean</em>, default: true):</dt> 
 	<dd>jQuery Mobile will automatically handle form submissions through Ajax, when possible.</dd>
 
 	<dt>defaultTransition (<em>string</em>, default: 'slide'):</dt> 

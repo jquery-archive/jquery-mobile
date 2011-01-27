@@ -142,6 +142,7 @@ Built by David Kaneda and maintained by Jonathan Stark.
 }
 .fade.out {
 	z-index: 0;
+	-webkit-animation-name: fadeout;
 }
 
 /* The properties in this body rule are only necessary for the 'flip' transition.
@@ -150,7 +151,7 @@ Built by David Kaneda and maintained by Jonathan Stark.
  * the viewer from the z-plane. According to the CSS3 spec, 1000 is a moderate
  * value.
  */
-.ui-mobile-viewport-transitioning {
+.ui-mobile-viewport-perspective {
 	-webkit-perspective: 1000;
 	position: absolute;
 }
@@ -159,7 +160,6 @@ Built by David Kaneda and maintained by Jonathan Stark.
 .ui-mobile-viewport-transitioning .ui-page {
 	width: 100%;
 	height: 100%;
-	overflow: hidden;
 }
 
 .flip {

@@ -27,46 +27,44 @@ $.widget( "mobile.page", $.mobile.widget, {
 		},
 		keepNative: null
 	},
-	
+
 	_create: function() {
 		var $elem = this.element,
 			o = this.options;
-			
-		this.keepNative = "[data-role='none'], [data-role='nojs']" + (o.keepNative ? ", " + o.keepNative : ""); 	
+
+		this.keepNative = "[data-role='none'], [data-role='nojs']" + (o.keepNative ? ", " + o.keepNative : "");
 
 		if ( this._trigger( "beforeCreate" ) === false ) {
 			return;
 		}
-		
+
 		//some of the form elements currently rely on the presence of ui-page and ui-content
 		// classes so we'll handle page and content roles outside of the main role processing
 		// loop below.
 		$elem.find( "[data-role='page'], [data-role='content']" ).andSelf().each(function() {
 			$(this).addClass( "ui-" + $(this).data( "role" ) );
 		});
-		
+
 		$elem.find( "[data-role='nojs']" ).addClass( "ui-nojs" );
 
-		this._enchanceControls();
-		
 		// pre-find data els
 		var $dataEls = $elem.find( "[data-role]" ).andSelf().each(function() {
 			var $this = $( this ),
 				role = $this.data( "role" ),
 				theme = $this.data( "theme" );
-			
+
 			//apply theming and markup modifications to page,header,content,footer
 			if ( role === "header" || role === "footer" ) {
 				$this.addClass( "ui-bar-" + (theme || $this.parent('[data-role=page]').data( "theme" ) || "a") );
-				
+
 				// add ARIA role
 				$this.attr( "role", role === "header" ? "banner" : "contentinfo" );
-				
+
 				//right,left buttons
 				var $headeranchors = $this.children( "a" ),
 					leftbtn = $headeranchors.hasClass( "ui-btn-left" ),
 					rightbtn = $headeranchors.hasClass( "ui-btn-right" );
-				
+
 				if ( !leftbtn ) {
 					leftbtn = $headeranchors.eq( 0 ).not( ".ui-btn-right" ).addClass( "ui-btn-left" ).length;
 				}
@@ -74,21 +72,16 @@ $.widget( "mobile.page", $.mobile.widget, {
 				if ( !rightbtn ) {
 					rightbtn = $headeranchors.eq( 1 ).addClass( "ui-btn-right" ).length;
 				}
-				
+
 				// auto-add back btn on pages beyond first view
 				if ( o.addBackBtn && role === "header" &&
-						($.mobile.urlStack.length > 1 || $(".ui-page").length > 1) &&
-						!leftbtn && !$this.data( "noBackBtn" ) ) {
+						$.mobile.urlHistory.stack.length > 0  &&
+						!leftbtn && $this.data( "backbtn" ) !== false ) {
 
-					$( "<a href='#' class='ui-btn-left' data-icon='arrow-l'>"+ o.backBtnText +"</a>" )
-						.click(function() {
-							history.back();
-							return false;
-						})
-						.prependTo( $this );
+					$( "<a href='#' class='ui-btn-left' data-rel='back' data-icon='arrow-l'>"+ o.backBtnText +"</a>" ).prependTo( $this );
 				}
-				
-				//page title	
+
+				//page title
 				$this.children( "h1, h2, h3, h4, h5, h6" )
 					.addClass( "ui-title" )
 					//regardless of h element number in src, it becomes h1 for the enhanced page
@@ -105,7 +98,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 			} else if ( role === "page" ) {
 				$this.addClass( "ui-body-" + (theme || "c") );
 			}
-			
+
 			switch(role) {
 				case "header":
 				case "footer":
@@ -123,66 +116,86 @@ $.widget( "mobile.page", $.mobile.widget, {
 			}
 		});
 		
+		//enhance form controls
+  	this._enhanceControls();
+
 		//links in bars, or those with data-role become buttons
-		$elem.find( "[data-role='button'], .ui-bar a, .ui-header a, .ui-footer a" )
+		$elem.find( "[data-role='button'], .ui-bar > a, .ui-header > a, .ui-footer > a" )
 			.not( ".ui-btn" )
 			.not(this.keepNative)
 			.buttonMarkup();
 
-		$elem	
+		$elem
 			.find("[data-role='controlgroup']")
 			.controlgroup();
-		
+
 		//links within content areas
 		$elem.find( "a:not(.ui-btn):not(.ui-link-inherit)" )
 			.not(this.keepNative)
-			.addClass( "ui-link" );	
-		
+			.addClass( "ui-link" );
+
 		//fix toolbars
 		$elem.fixHeaderFooter();
 	},
-	
-	_enchanceControls: function() {
+
+	_enhanceControls: function() {
 		var o = this.options;
-			
+
 		// degrade inputs to avoid poorly implemented native functionality
 		this.element.find( "input" ).not(this.keepNative).each(function() {
 			var type = this.getAttribute( "type" ),
 				optType = o.degradeInputs[ type ] || "text";
-			
+
 			if ( o.degradeInputs[ type ] ) {
 				$( this ).replaceWith(
 					$( "<div>" ).html( $(this).clone() ).html()
 						.replace( /type="([a-zA-Z]+)"/, "type="+ optType +" data-type='$1'" ) );
 			}
 		});
-		
+
+		// We re-find form elements since the degredation code above
+		// may have injected new elements. We cache the non-native control
+		// query to reduce the number of times we search through the entire page.
+
+		var allControls = this.element.find("input, textarea, select, button"),
+			nonNativeControls = allControls.not(this.keepNative);
+
+		// XXX: Temporary workaround for issue 785. Turn off autocorrect and
+		//      autocomplete since the popup they use can't be dismissed by
+		//      the user. Note that we test for the presence of the feature
+		//      by looking for the autocorrect property on the input element.
+
+		var textInputs = allControls.filter( "input[type=text]" );
+		if (textInputs.length && typeof textInputs[0].autocorrect !== "undefined") {
+			textInputs.each(function(){
+				// Set the attribute instead of the property just in case there
+				// is code that attempts to make modifications via HTML.
+				this.setAttribute("autocorrect", "off");
+				this.setAttribute("autocomplete", "off");
+			});
+		}
+
 		// enchance form controls
-		this.element
-			.find( "[type='radio'], [type='checkbox']" )
-			.not(this.keepNative)
+		nonNativeControls
+			.filter( "[type='radio'], [type='checkbox']" )
 			.checkboxradio();
 
-		this.element
-			.find( "button, [type='button'], [type='submit'], [type='reset'], [type='image']" )
-			.not(this.keepNative)
+		nonNativeControls
+			.filter( "button, [type='button'], [type='submit'], [type='reset'], [type='image']" )
 			.button();
 
-		this.element
-			.find( "input, textarea" )
-			.not( "[type='radio'], [type='checkbox'], button, [type='button'], [type='submit'], [type='reset'], [type='image']" )
-			.not(this.keepNative)
+		nonNativeControls
+			.filter( "input, textarea" )
+			.not( "[type='radio'], [type='checkbox'], [type='button'], [type='submit'], [type='reset'], [type='image'], [type='hidden']" )
 			.textinput();
 
-		this.element
-			.find( "input, select" )
-			.not(this.keepNative)
+		nonNativeControls
+			.filter( "input, select" )
 			.filter( "[data-role='slider'], [data-type='range']" )
 			.slider();
 
-		this.element
-			.find( "select:not([data-role='slider'])" )
-			.not(this.keepNative)
+		nonNativeControls
+			.filter( "select:not([data-role='slider'])" )
 			.selectmenu();
 	}
 });

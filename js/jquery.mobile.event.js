@@ -63,20 +63,37 @@ $.event.special.tap = {
 			$this = $( thisObject );
 		
 		$this
-			.bind( touchStartEvent, function( event ) {
-				if ( event.which && event.which !== 1 ) {
-					return;
+			.bind( "mousedown touchstart", function( event ) {
+				if ( event.which && event.which !== 1 ||
+					//check if event fired once already by a device that fires both mousedown and touchstart (while supporting both events)
+					$this.data( "prevEvent") && $this.data( "prevEvent") !== event.type ) {
+					return false;
 				}
+				
+				//save event type so only this type is let through for a temp duration, 
+				//allowing quick repetitive taps but not duplicative events 
+				$this.data( "prevEvent", event.type );
+				setTimeout(function(){
+					$this.removeData( "prevEvent" );
+				}, 800);
 				
 				var moved = false,
 					touching = true,
-					origPos = [ event.pageX, event.pageY ],
+					origTarget = event.target,
+					origEvent = event.originalEvent,
+					origPos = event.type == "touchstart" ? [origEvent.touches[0].pageX, origEvent.touches[0].pageY] : [ event.pageX, event.pageY ],
 					originalType,
 					timer;
+					
 				
-				function moveHandler() {
-					if ((Math.abs(origPos[0] - event.pageX) > 10) ||
-					    (Math.abs(origPos[1] - event.pageY) > 10)) {
+				function moveHandler( event ) {
+					if( event.type == "scroll" ){
+						moved = true;
+						return;
+					}
+					var newPageXY = event.type == "touchmove" ? event.originalEvent.touches[0] : event;
+					if ((Math.abs(origPos[0] - newPageXY.pageX) > 10) ||
+					    (Math.abs(origPos[1] - newPageXY.pageY) > 10)) {
 					    moved = true;
 					}
 				}
@@ -90,14 +107,21 @@ $.event.special.tap = {
 					}
 				}, 750 );
 				
+				//scroll now cancels tap
+				$(window).one("scroll", moveHandler);
+				
 				$this
-					.one( touchMoveEvent, moveHandler)
-					.one( touchStopEvent, function( event ) {
-						$this.unbind( touchMoveEvent, moveHandler );
+					.bind( "mousemove touchmove", moveHandler )
+					.one( "mouseup touchend", function( event ) {
+						$this.unbind( "mousemove touchmove", moveHandler );
+						$(window).unbind("scroll", moveHandler);
 						clearTimeout( timer );
 						touching = false;
 						
-						if ( !moved ) {
+						/* ONLY trigger a 'tap' event if the start target is
+						 * the same as the stop target.
+						 */
+						if ( !moved && ( origTarget == event.target ) ) {
 							originalType = event.type;
 							event.type = "tap";
 							$.event.handle.call( thisObject, event );

@@ -2,7 +2,7 @@
  * mobile core unit tests
  */
 
-(function( $ ) {
+(function($){
 	var libName = "jquery.mobile.core.js",
 			setGradeA = function(value) { $.support.mediaquery = value; },
 			extendFn = $.extend;
@@ -83,12 +83,12 @@
 			ok($(".ui-loader").length);
 		});
 
-		var metaViewportSelector = "head meta[name=viewport]",
-				setViewPortContent = function(value){
-					$(metaViewportSelector).remove();
-					$.testHelper.alterExtend({metaViewportContent: value});
-					$.testHelper.reloadLib(libName);
-				};
+				var metaViewportSelector = "head meta[name=viewport]",
+		setViewPortContent = function(value){
+			$(metaViewportSelector).remove();
+			$.testHelper.alterExtend({metaViewportContent: value});
+			$.testHelper.reloadLib(libName);
+		};
 
 		test( "meta view port element is added to head when defined on mobile", function(){
 			setViewPortContent("width=device-width");
@@ -119,33 +119,31 @@
 			ok(firstPage.parent().hasClass('ui-mobile-viewport'));
 		});
 
-		test( "mobile page container is the first page's parent", function(){
-			var firstPage = findFirstPage();
-			$.testHelper.reloadLib(libName);
+				test( "mobile page container is the first page's parent", function(){
+					var firstPage = findFirstPage();
+					$.testHelper.reloadLib(libName);
 
-			same($.mobile.pageContainer, firstPage.parent());
-		});
+					same($.mobile.pageContainer, firstPage.parent());
+				});
 
 		test( "page loading is called on document ready", function(){
-			expect( 2 );
-
 			$.testHelper.alterExtend({ pageLoading: function(){
+				start();
 				ok("called");
 			}});
 
+			stop();
 			$.testHelper.reloadLib(libName);
 		});
 
 		test( "hashchange triggered on document ready with single argument: true", function(){
-			expect( 2 );
-
 			$(window).bind("hashchange", function(ev, arg){
 				same(arg, true);
+				start();
 			});
 
+			stop();
 			$.testHelper.reloadLib(libName);
 		});
-
-		//TODO test that silentScroll is called on window load
 	});
 })(jQuery);

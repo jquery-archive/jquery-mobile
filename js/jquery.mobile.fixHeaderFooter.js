@@ -6,18 +6,23 @@
 */
 (function($, undefined ) {
 $.fn.fixHeaderFooter = function(options){
-	if( !$.support.scrollTop ){ return $(this); }
-	return $(this).each(function(){
-		if( $(this).data('fullscreen') ){ $(this).addClass('ui-page-fullscreen'); }
-		$(this).find('.ui-header[data-position="fixed"]').addClass('ui-header-fixed ui-fixed-inline fade'); //should be slidedown
-		$(this).find('.ui-footer[data-position="fixed"]').addClass('ui-footer-fixed ui-fixed-inline fade'); //should be slideup		
+	if( !$.support.scrollTop ){ return this; }
+	
+	return this.each(function(){
+		var $this = $(this);
+		
+		if( $this.data('fullscreen') ){ $this.addClass('ui-page-fullscreen'); }
+		$this.find('.ui-header[data-position="fixed"]').addClass('ui-header-fixed ui-fixed-inline fade'); //should be slidedown
+		$this.find('.ui-footer[data-position="fixed"]').addClass('ui-footer-fixed ui-fixed-inline fade'); //should be slideup		
 	});
-};				
+};
 
 //single controller for all showing,hiding,toggling		
 $.fixedToolbars = (function(){
 	if( !$.support.scrollTop ){ return; }
 	var currentstate = 'inline',
+		autoHideMode = false,
+		showDelay = 100,
 		delayTimer,
 		ignoreTargets = 'a,input,textarea,select,button,label,.ui-header-fixed,.ui-footer-fixed',
 		toolbarSelector = '.ui-header-fixed:first, .ui-footer-fixed:not(.ui-footer-duplicate):last',
@@ -26,64 +31,107 @@ $.fixedToolbars = (function(){
 		touchStartEvent = supportTouch ? "touchstart" : "mousedown",
 		touchStopEvent = supportTouch ? "touchend" : "mouseup",
 		stateBefore = null,
-		scrollTriggered = false;
-		
+		scrollTriggered = false,
+        touchToggleEnabled = true;
+
+	function showEventCallback(event)
+	{
+		// An event that affects the dimensions of the visual viewport has
+		// been triggered. If the header and/or footer for the current page are in overlay
+		// mode, we want to hide them, and then fire off a timer to show them at a later
+		// point. Events like a resize can be triggered continuously during a scroll, on
+		// some platforms, so the timer is used to delay the actual positioning until the
+		// flood of events have subsided.
+		//
+		// If we are in autoHideMode, we don't do anything because we know the scroll
+		// callbacks for the plugin will fire off a show when the scrolling has stopped.
+		if (!autoHideMode && currentstate == 'overlay') {
+			if (!delayTimer)
+				$.fixedToolbars.hide(true);
+			$.fixedToolbars.startShowTimer();
+		}
+	}
+
 	$(function() {
 		$(document)
 			.bind(touchStartEvent,function(event){
-				if( $(event.target).closest(ignoreTargets).length ){ return; }
-				stateBefore = currentstate;
-				$.fixedToolbars.hide(true);
+				if( touchToggleEnabled ) {
+					if( $(event.target).closest(ignoreTargets).length ){ return; }
+					stateBefore = currentstate;
+				}
+			})
+			.bind(touchStopEvent,function(event){
+				if( touchToggleEnabled ) {
+					if( $(event.target).closest(ignoreTargets).length ){ return; }
+					if( !scrollTriggered ){
+						$.fixedToolbars.toggle(stateBefore);
+						stateBefore = null;
+					}
+				}
 			})
 			.bind('scrollstart',function(event){
 				if( $(event.target).closest(ignoreTargets).length ){ return; } //because it could be a touchmove...
 				scrollTriggered = true;
 				if(stateBefore == null){ stateBefore = currentstate; }
-				$.fixedToolbars.hide(true);
-			})
-			.bind(touchStopEvent,function(event){
-				if( $(event.target).closest(ignoreTargets).length ){ return; }
-				if( !scrollTriggered ){
-					$.fixedToolbars.toggle(stateBefore);
-					stateBefore = null;
+
+				// We only enter autoHideMode if the headers/footers are in
+				// an overlay state or the show timer was started. If the
+				// show timer is set, clear it so the headers/footers don't
+				// show up until after we're done scrolling.
+				var isOverlayState = stateBefore == 'overlay';
+				autoHideMode = isOverlayState || !!delayTimer;
+				if (autoHideMode){
+					$.fixedToolbars.clearShowTimer();
+					if (isOverlayState) {
+						$.fixedToolbars.hide(true);
+					}
 				}
 			})
 			.bind('scrollstop',function(event){
 				if( $(event.target).closest(ignoreTargets).length ){ return; }
 				scrollTriggered = false;
-				$.fixedToolbars.toggle( stateBefore == 'overlay' ? 'inline' : 'overlay' );
-				stateBefore = null;
-			});
-		
-		//function to return another footer already in the dom with the same data-id
-		function findStickyFooter(el){
-			var thisFooter = el.find('[data-role="footer"]');
-			return $( '.ui-footer[data-id="'+ thisFooter.data('id') +'"]:not(.ui-footer-duplicate)' ).not(thisFooter);
-		}
-		
-		//before page is shown, check for duplicate footer
-		$('.ui-page').live('pagebeforeshow', function(event, ui){
-			stickyFooter = findStickyFooter( $(event.target) );
-			if( stickyFooter.length ){
-				//if the existing footer is the first of its kind, create a placeholder before stealing it 
-				if( stickyFooter.parents('.ui-page:eq(0)').find('.ui-footer[data-id="'+ stickyFooter.data('id') +'"]').length == 1 ){
-					stickyFooter.before( stickyFooter.clone().addClass('ui-footer-duplicate') );
+				if (autoHideMode) {
+					autoHideMode = false;
+					$.fixedToolbars.startShowTimer();
 				}
-				$(event.target).find('[data-role="footer"]').addClass('ui-footer-duplicate');
-				stickyFooter.appendTo($.pageContainer).css('top',0);
-				setTop(stickyFooter);
-			}
-		});
+				stateBefore = null;
+			})
+			.bind('silentscroll', showEventCallback);
 
-		//after page is shown, append footer to new page
-		$('.ui-page').live('pageshow', function(event, ui){
-			if( stickyFooter && stickyFooter.length ){
-				stickyFooter.appendTo(event.target).css('top',0);
-			}
-			$.fixedToolbars.show(true, this);
-		});
-		
+			$(window).bind('resize', showEventCallback);
 	});
+		
+	//before page is shown, check for duplicate footer
+	$('.ui-page').live('pagebeforeshow', function(event, ui){
+		var page = $(event.target),
+			footer = page.find('[data-role="footer"]:not(.ui-sticky-footer)'),
+			id = footer.data('id');
+		stickyFooter = null;
+		if (id)
+		{
+			stickyFooter = $('.ui-footer[data-id="' + id + '"].ui-sticky-footer');
+			if (stickyFooter.length == 0) {
+				// No sticky footer exists for this data-id. We'll use this
+				// footer as the sticky footer for the group and then create
+				// a placeholder footer for the page.
+				stickyFooter = footer;
+				footer = stickyFooter.clone(); // footer placeholder
+				stickyFooter.addClass('ui-sticky-footer').before(footer);
+			}
+			footer.addClass('ui-footer-duplicate');
+			stickyFooter.appendTo($.pageContainer).css('top',0);
+			setTop(stickyFooter);
+		}
+	});
+
+	//after page is shown, append footer to new page
+	$('.ui-page').live('pageshow', function(event, ui){
+		if( stickyFooter && stickyFooter.length ){
+			stickyFooter.appendTo(event.target).css('top',0);
+		}
+		$.fixedToolbars.show(true, this);
+	});
+		
 	
 	// element.getBoundingClientRect() is broken in iOS 3.2.1 on the iPad. The
 	// coordinates inside of the rect it returns don't have the page scroll position
@@ -138,6 +186,7 @@ $.fixedToolbars = (function(){
 	//exposed methods
 	return {
 		show: function(immediately, page){
+			$.fixedToolbars.clearShowTimer();
 			currentstate = 'overlay';
 			var $ap = page ? $(page) : ($.mobile.activePage ? $.mobile.activePage : $(".ui-page-active"));
 			return $ap.children( toolbarSelector ).each(function(){
@@ -152,9 +201,9 @@ $.fixedToolbars = (function(){
 				el.addClass('ui-fixed-overlay').removeClass('ui-fixed-inline');	
 					
 				if( !alreadyVisible && !immediately ){
-					el.addClass('in').animationComplete(function(){
+					el.animationComplete(function(){
 						el.removeClass('in');
-					});
+					}).addClass('in');
 				}
 				setTop(el);
 			});	
@@ -178,24 +227,36 @@ $.fixedToolbars = (function(){
 					else{
 						if( el.css('top') !== 'auto' && parseFloat(el.css('top')) !== 0 ){
 							var classes = 'out reverse';
-							el.addClass(classes).animationComplete(function(){
+							el.animationComplete(function(){
 								el.removeClass(classes);
 								el.css('top',0);
-							});	
+							}).addClass(classes);	
 						}
 					}
 				}
 			});
 		},
-		hideAfterDelay: function(){
+		startShowTimer: function(){
+			$.fixedToolbars.clearShowTimer();
+			var args = $.makeArray(arguments);
 			delayTimer = setTimeout(function(){
-				$.fixedToolbars.hide();
-			}, 3000);
+				delayTimer = undefined;
+				$.fixedToolbars.show.apply(null, args);
+			}, showDelay);
+		},
+		clearShowTimer: function() {
+			if (delayTimer) {
+				clearTimeout(delayTimer);
+			}
+			delayTimer = undefined;
 		},
 		toggle: function(from){
 			if(from){ currentstate = from; }
 			return (currentstate == 'overlay') ? $.fixedToolbars.hide() : $.fixedToolbars.show();
-		}
+		},
+        setTouchToggleEnabled: function(enabled) {
+            touchToggleEnabled = enabled;
+        }
 	};
 })();
 

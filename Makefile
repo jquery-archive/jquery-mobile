@@ -14,9 +14,9 @@ FILES = js/jquery.ui.widget.js \
   js/jquery.mobile.support.js \
   js/jquery.mobile.event.js \
   js/jquery.mobile.hashchange.js \
+  js/jquery.mobile.page.js \
   js/jquery.mobile.core.js \
   js/jquery.mobile.navigation.js \
-  js/jquery.mobile.page.js \
   js/jquery.ui.position.js \
   js/jquery.mobile.fixHeaderFooter.js \
   js/jquery.mobile.forms.checkboxradio.js \
@@ -101,7 +101,7 @@ deploy: zip
 	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|rel="stylesheet"  href="../../|rel="stylesheet"  href="|g' {} \;
 	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|rel="stylesheet"  href="../|rel="stylesheet"  href="|g' {} \;
 
-	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|href="themes/default"|href="http://code.jquery.com/mobile/${VER}/${DIR}.min.css"|g' {} \;
+	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|href="themes/default/"|href="http://code.jquery.com/mobile/${VER}/${DIR}.min.css"|g' {} \;
 	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|<script type="text/javascript" src="js/all|<script src="http://code.jquery.com/jquery-1.4.3.min.js"></script><script type="text/javascript" src="js/all|' {} \;
 	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|src="js/all"|src="http://code.jquery.com/mobile/${VER}/${DIR}.min.js"|g' {} \;
 

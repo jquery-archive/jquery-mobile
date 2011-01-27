@@ -2,7 +2,7 @@
  * mobile core unit tests
  */
 
-(function( $ ) {
+(function($){
 	var libName = "jquery.mobile.core.js",
 			scrollTimeout = 20, // TODO expose timing as an attribute
 			scrollStartEnabledTimeout = 150;
@@ -15,7 +15,7 @@
 		teardown: function(){
 			$("#scroll-testing").remove();
 		}
-	});
+			});
 
 	var scrollUp = function( pos ){
 		$(window).scrollTop(1000);
@@ -71,4 +71,6 @@
 			start();
 		}, scrollStartEnabledTimeout);
 	});
+
+	//TODO test that silentScroll is called on window load
 })(jQuery);

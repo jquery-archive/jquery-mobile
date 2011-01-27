@@ -7,7 +7,7 @@
 (function($, undefined ) {
 $.fn.controlgroup = function(options){
 		
-	return $(this).each(function(){
+	return this.each(function(){
 		var o = $.extend({
 			direction: $( this ).data( "type" ) || "vertical",
 			shadow: false

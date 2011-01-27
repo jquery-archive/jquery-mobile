@@ -3,8 +3,9 @@
 	<head>
 	<meta charset="utf-8" /> 
 	<title>jQuery Mobile Docs - Pages</title> 
-	<link rel="stylesheet" media="only all" href="../../themes/default" />  
+	<link rel="stylesheet" media="only all" href="../../themes/default/" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	<script type="text/javascript" src="../../js/jquery.js"></script>
 	<script type="text/javascript" src="../../js/"></script>
 </head> 
 <body> 
@@ -25,14 +26,14 @@
 
 			<p>A jQuery Mobile site must start with an HTML5 'doctype' to take full advantage of all of the framework's features. (Older devices with browsers that don't understand HTML5 will safely ignore the 'doctype' and various custom attributes.) In the 'head', references to jQuery, jQuery Mobile and the mobile theme CSS are all required to start things off:</p> 
 
-<pre></code>
+<pre><code>
 &lt;!DOCTYPE html&gt; 
 &lt;html&gt; 
 	&lt;head&gt; 
 	&lt;title&gt;Page Title&lt;/title&gt; 
 	&lt;link rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/mobile/1.0a2/jquery.mobile-1.0a2.min.css&quot; /&gt;
-	&lt;script src=&quot;http://code.jquery.com/jquery-1.4.3.min.js&quot;&gt;&lt;/script&gt;
-	&lt;script src=&quot;http://code.jquery.com/mobile/1.0a2/jquery.mobile-1.0a2.min.js&quot;&gt;&lt;/script&gt;
+	&lt;script type=&quot;text/javascript&quot; src=&quot;http://code.jquery.com/jquery-1.4.3.min.js&quot;&gt;&lt;/script&gt;
+	&lt;script type=&quot;text/javascript&quot; src=&quot;http://code.jquery.com/mobile/1.0a2/jquery.mobile-1.0a2.min.js&quot;&gt;&lt;/script&gt;
 &lt;/head&gt; 
 &lt;body&gt; 
 
@@ -67,14 +68,14 @@
 
 <p>Putting it all together, this is the standard boilerplate page template you should start with:</p>
 
-<pre></code>
+<pre><code>
 &lt;!DOCTYPE html&gt; 
 &lt;html&gt; 
 	&lt;head&gt; 
 	&lt;title&gt;Page Title&lt;/title&gt; 
 	&lt;link rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/mobile/1.0a2/jquery.mobile-1.0a2.min.css&quot; /&gt;
-	&lt;script src=&quot;http://code.jquery.com/jquery-1.4.3.min.js&quot;&gt;&lt;/script&gt;
-	&lt;script src=&quot;http://code.jquery.com/mobile/1.0a2/jquery.mobile-1.0a2.min.js&quot;&gt;&lt;/script&gt;
+	&lt;script type=&quot;text/javascript&quot; src=&quot;http://code.jquery.com/jquery-1.4.3.min.js&quot;&gt;&lt;/script&gt;
+	&lt;script type=&quot;text/javascript&quot; src=&quot;http://code.jquery.com/mobile/1.0a2/jquery.mobile-1.0a2.min.js&quot;&gt;&lt;/script&gt;
 &lt;/head&gt; 
 &lt;body&gt; 
 
@@ -90,7 +91,7 @@
 
 	&lt;div data-role=&quot;footer&quot;&gt;
 		&lt;h4&gt;Page Footer&lt;/h4&gt;
-	&lt;/div&gt;&lt;!-- /header --&gt;
+	&lt;/div&gt;&lt;!-- /footer --&gt;
 &lt;/div&gt;&lt;!-- /page --&gt;
 
 &lt;/body&gt;
@@ -120,7 +121,7 @@
 			
 			<p>Here is an example of a 2 "page" site built with two jQuery Mobile divs navigated by linking to an ID placed on each page wrapper. Note that the IDs on the page wrappers are only needed to support the internal page linking, and are optional if each page is a separate HTML document. Here is what two pages look inside the <code>body</code> element.</p> 
 
-<pre></code>
+<pre><code>
 &lt;body&gt; 
 
 &lt;!-- Start of first page --&gt;
@@ -160,11 +161,24 @@
 &lt;/body&gt;
 </code></pre>	
 
-		<a href="multipage-template.html" data-inline="true" data-theme="b" data-role="button">View multi-page template</a>
+		<a href="multipage-template.html" data-inline="true" data-theme="b" data-role="button" rel="external">View multi-page template</a>
 
 		<p> </p>
 		
 		<p>PLEASE NOTE: Since we are using the hash to track navigation history for all the Ajax 'pages', it's not currently possible to deep link to an anchor (<code>index.html#foo</code>) on a page in jQuery Mobile, because the framework will look for a 'page' with an <code>ID</code> of <code>#foo</code> instead of the native behavior of scrolling to the content with that <code>ID</code>.</p>
+		
+		
+		
+		<h2>Back linking</h2>
+		<p>If you use the attribute <code>data-rel="back"</code> on an anchor, any clicks on that anchor will mimic the back button, going back one history entry and ignoring the anchor's default href. This is particularly useful when linking back to a named page, such as a link that says "home", or when generating "back" buttons with JavaScript, such as a button to close a dialog. When using this feature in your source markup, <strong>be sure to provide a meaningful href that actually points to the URL of the referring page (this will allow the feature to work for users in C-Grade browsers</strong>. Also, pease keep in mind that if you just want a reverse transition without actually going back in history, you should use the <code>data-direction="reverse"</code> attribute instead.</p>
+		
+		<h2>Redirects and linking to directories</h2>
+		<p>When linking to directory indexes (such as href="typesofcats/" instead of href="typesofcats/index.html"), you must provide a trailing slash. This is because jQuery Mobile assumes the section after the last "/" character in a url is a filename, and it will remove that section when creating base urls from which future pages will be referenced.</p>
+		
+		<p>However, you can work around this issue by returning your page div with a <code>data-url</code> attribute already included, and jQuery Mobile will use that instead of the url used to request that page. This also allows you to return urls that change as the result of a redirect, for example, you might post a form to "/login.html" but return a page from the url "/account" after a successful submission. This tool allows you to take control of the jQuery Mobile history stack in these situations. Here's an example:</p>
+		
+		<p>The following link points to "docs-links-urltest/index.html": <a href="docs-links-urltest/index.html">Test Link</a> which is a directory with an index page. The return page will update the hash as "docs-links-urltest/" with a trailing slash. This is done via the data-url attribute in that page's source.</p>
+		
 		
 		<p>Learn more about the technical details of the navigation model and <a href="docs-navmodel.html">Ajax, hashes and history</a> in jQuery mobile.</p>
 		

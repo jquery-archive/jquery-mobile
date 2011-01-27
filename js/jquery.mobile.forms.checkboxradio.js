@@ -10,14 +10,20 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 		theme: null
 	},
 	_create: function(){
-		var input = this.element,
-			label = $("label[for='" + input.attr( "id" ) + "']"),
+		var self = this,
+			input = this.element,
+			label = input.closest("form,fieldset,[data-role='page']").find("label[for='" + input.attr( "id" ) + "']"),
 			inputtype = input.attr( "type" ),
 			checkedicon = "ui-icon-" + inputtype + "-on",
 			uncheckedicon = "ui-icon-" + inputtype + "-off";
 
 		if ( inputtype != "checkbox" && inputtype != "radio" ) { return; }
-						
+
+		// If there's no selected theme...
+		if( !this.options.theme ) {
+			this.options.theme = this.element.data( "theme" );
+		}
+
 		label
 			.buttonMarkup({
 				theme: this.options.theme,
@@ -35,25 +41,35 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 				if( $(this).parent().is('.ui-disabled') ){ return false; }
 			},
 			
-			mousedown: function() {
-				if( $(this).parent().is('.ui-disabled') ){ return false; }
-				label.data( "state", input.attr( "checked" ) );
+			"touchend mouseup": function( event ){
+				//prevent both events from firing, keep the first
+				if( $(this).parent().is('.ui-disabled') || $(this).data("prevEvent") && $(this).data("prevEvent") !== event.type ){ 
+					return false;
+				}
+				$(this).data("prevEvent", event.type);
+				setTimeout(function(){
+					label.removeData("prevEvent");
+				}, 1000);
+				
+				self._cacheVals();
+				
+				input.attr( "checked", inputtype === "radio" && true || !input.is( ":checked" ) );
+				self._updateAll();
+				event.preventDefault();
 			},
 			
-			click: function() {
-				setTimeout(function() {
-					if ( input.attr( "checked" ) === label.data( "state" ) ) {
-						input.trigger( "click" );
-					}
-				}, 1);
-			}
+			click: false
+			
 		});
 		
 		input
 			.bind({
-
-				click: function() {
-					$( "input[name='" + input.attr( "name" ) + "'][type='" + inputtype + "']" ).checkboxradio( "refresh" );
+				mousedown: function(){
+					this._cacheVals();
+				},
+				
+				click: function(){
+					self._updateAll();
 				},
 
 				focus: function() { 
@@ -69,9 +85,31 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 		
 	},
 	
+	_cacheVals: function(){
+		this._getInputSet().each(function(){
+			$(this).data("cacheVal", $(this).is(":checked") );
+		});	
+	},
+		
+	//returns either a set of radios with the same name attribute, or a single checkbox
+	_getInputSet: function(){
+		return this.element.closest( "form,fieldset,[data-role='page']" )
+				.find( "input[name='"+ this.element.attr( "name" ) +"'][type='"+ this.element.attr( "type" ) +"']" );
+	},
+	
+	_updateAll: function(){
+		this._getInputSet().each(function(){
+			var dVal = $(this).data("cacheVal");
+			if( dVal && dVal !== $(this).is(":checked") || $(this).is( "[type='checkbox']" ) ){
+				$(this).trigger("change");
+			}
+		})
+		.checkboxradio( "refresh" );
+	},
+	
 	refresh: function( ){
 		var input = this.element,
-			label = $("label[for='" + input.attr( "id" ) + "']"),
+			label = input.closest("form,fieldset,[data-role='page']").find("label[for='" + input.attr( "id" ) + "']"),
 			inputtype = input.attr( "type" ),
 			icon = label.find( ".ui-icon" ),
 			checkedicon = "ui-icon-" + inputtype + "-on",

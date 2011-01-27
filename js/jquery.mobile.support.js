@@ -1,8 +1,8 @@
 /*
 * jQuery Mobile Framework : support tests
 * Copyright (c) jQuery Project
-* Dual licensed under the MIT or GPL Version 2 licenses.
-* http://jquery.org/license
+* Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
+* Note: Code is in draft form and is subject to change 
 */
 (function($, undefined ) {
 
@@ -19,7 +19,7 @@ function propExists( prop ){
 	var uc_prop = prop.charAt(0).toUpperCase() + prop.substr(1),
 		props   = (prop + ' ' + vendors.join(uc_prop + ' ') + uc_prop).split(' ');
 	for(var v in props){
-		if( fbCSS[ props[v] ] !== undefined ){
+		if( fbCSS[ v ] !== undefined ){
 			return true;
 		}
 	}
@@ -28,10 +28,21 @@ function propExists( prop ){
 //test for dynamic-updating base tag support (allows us to avoid href,src attr rewriting)
 function baseTagTest(){
 	var fauxBase = location.protocol + '//' + location.host + location.pathname + "ui-dir/",
-		base = $("<base>", {"href": fauxBase}).appendTo("head"),
-		link = $( "<a href='testurl'></a>" ).prependTo( fakeBody ),
+		base = $("head base"),
+		fauxEle = null,
+		href = '';
+	if (!base.length) {
+		base = fauxEle = $("<base>", {"href": fauxBase}).appendTo("head");
+	}
+	else {
+		href = base.attr("href");
+	}
+	var link = $( "<a href='testurl'></a>" ).prependTo( fakeBody ),
 		rebase = link[0].href;
-	base.remove();
+	base[0].href = href ? href : location.pathname;
+	if (fauxEle) {
+		fauxEle.remove();
+	}
 	return rebase.indexOf(fauxBase) === 0;
 };
 
