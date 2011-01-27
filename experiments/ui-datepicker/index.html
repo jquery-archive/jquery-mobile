@@ -22,18 +22,43 @@
 <div data-role="page">
 
 	<div data-role="header">
-		<h1>Datepicker Styled for mobile</h1>		
+		<h1>jQuery UI's Datepicker Styled for mobile</h1>		
 	</div>
 	
 	<div data-role="content">
-		<p>The included files extend the jQuery UI datepicker to make it suitable for touch devices. Keep in mind that we're binding to the "mobileinit" event to set input types of "date" back to text after enhancing, so they don't clash with native datepicker implementations.</p>
-	
+		<p>The included files extend the jQuery UI datepicker to make it suitable for touch devices. This plugin is not included in jQuery Mobile by default, so you'll need to include the files yourself if you'd like to use them. Scroll down for usage instructions.</p>
+		
 		<form action="#" method="get">
 			<div data-role="fieldcontain">
 	     	    <label for="date">Date Input:</label>
 	     	    <input type="date" name="date" id="date" value=""  />
 			</div>		
 		</form>
+		
+		
+		<h2>Usage Instructions</h2>
+		
+		<p>This plugin is not included in jQuery Mobile by default, so you'll need to include the following files in order to use it:</p>
+		
+<pre><code>
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;jquery.ui.datepicker.mobile.css&quot; /&gt; 
+  &lt;script src=&quot;jQuery.ui.datepicker.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;jquery.ui.datepicker.mobile.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+		
+		<p>You'll also want to configure the page plugin to convert "date" input elements to "text" inputs after they're enhanced with our datepicker, so that no native datepicker will conflict with the custom one we're adding. To do this, bind to the "mobileinit" event and set input types of "date" back to text using the page plugin's options:</p>
+<pre><code>	
+&lt;script&gt;
+  //reset type=date inputs to text
+  $( document ).bind( &quot;mobileinit&quot;, function(){
+    $.mobile.page.prototype.options.degradeInputs.date = true;
+  });	
+&lt;/script&gt;	
+</code></pre>
+
+<p>Be sure to place this event binding in a script that loads after jQuery, but before jQuery Mobile. Check this page's source for an example.</p>
+	
+		
 
 	</div>
 	
