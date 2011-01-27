@@ -25,7 +25,7 @@
 			//return the substring of a filepath before the sub-page key, for making a server request
 			getFilePath: function( path ){
 				var splitkey = '&' + $.mobile.subPageUrlKey;
-				return path && path.indexOf( splitkey ) > -1 ? path.split( splitkey )[0] : path;
+				return path && path.split( splitkey )[0].split( dialogHashKey )[0];
 			},
 			
 			//set location hash to path
@@ -122,7 +122,10 @@
 		focusable = "[tabindex],a,button:visible,select:visible,input",
 
 		//contains role for next page, if defined on clicked link via data-rel
-		nextPageRole = null;
+		nextPageRole = null,
+		
+		//nonsense hash change key for dialogs, so they create a history entry
+		dialogHashKey = "&ui-state=dialog";
 
 		//existing base tag?
 		var $base = $head.children("base"),
@@ -238,7 +241,6 @@
 	// changepage function
 	// TODO : consider moving args to an object hash
 	$.mobile.changePage = function( to, transition, reverse, changeHash, fromHashChange ){
-
 		//from is always the currently viewed page
 		var toIsArray = $.type(to) === "array",
 			toIsObject = $.type(to) === "object",
@@ -252,6 +254,7 @@
 			currPage = urlHistory.getActive(),
 			back = false,
 			forward = false;
+			
 			
 		// If we are trying to transition to the same page that we are currently on ignore the request.
 		// an illegal same page request is defined by the current page being the same as the url, as long as there's history
@@ -296,6 +299,10 @@
 			isFormRequest = true;
 			//make get requests bookmarkable
 			if( data && type == 'get' ){
+				if($.type( data ) == "object" ){
+					data = $.param(data);
+				}
+			
 				url += "?" + data;
 				data = undefined;
 			}
@@ -315,11 +322,17 @@
 
 		//function for transitioning between two existing pages
 		function transitionPages() {
+		    $.mobile.silentScroll();
 
 			//get current scroll distance
 			var currScroll = $window.scrollTop(),
 					perspectiveTransitions = ["flip"],
 					pageContainerClasses = [];
+			
+			//support deep-links to generated sub-pages	
+			if( url.indexOf( "&" + $.mobile.subPageUrlKey ) > -1 ){
+				to = $( "[data-url='" + url + "']" );
+			}
 
 			//set as data for returning to that spot
 			from.data('lastScroll', currScroll);
@@ -329,27 +342,25 @@
 			to.data("page")._trigger("beforeshow", {prevPage: from});
 
 			function loadComplete(){
-				$.mobile.pageLoading( true );
 
-				reFocus( to );
-
-				if( changeHash !== false && fileUrl ){
+				if( changeHash !== false && url ){
 					if( !back  ){
 						urlHistory.listeningEnabled = false;
 					}
-					path.set( fileUrl );
+					path.set( url );
 					urlHistory.listeningEnabled = true;
 				}
 				
-				//add page to history stack if it's not back or forward, or a dialog
+				//add page to history stack if it's not back or forward
 				if( !back && !forward ){
-					urlHistory.addNew( fileUrl, transition );
+					urlHistory.addNew( url, transition );
 				}
 				
 				removeActiveLinkClass();
 
-				//jump to top or prev scroll, if set
-				$.mobile.silentScroll( to.data( 'lastScroll' ) );
+				//jump to top or prev scroll, sometimes on iOS the page has not rendered yet.  I could only get by this with a setTimeout, but would like to avoid that.
+				$.mobile.silentScroll( to.data( 'lastScroll' ) ); 
+				reFocus( to );
 
 				//trigger show/hide events, allow preventing focus change through return false
 				from.data("page")._trigger("hide", null, {nextPage: to});
@@ -375,18 +386,25 @@
 
 				pageContainerClasses = [];
 			};
+			
+			
 
 			if(transition && (transition !== 'none')){
+			    $.mobile.pageLoading( true );
 				if( $.inArray(transition, perspectiveTransitions) >= 0 ){
 					addContainerClass('ui-mobile-viewport-perspective');
 				}
 
 				addContainerClass('ui-mobile-viewport-transitioning');
 
-				// animate in / out
-				from.addClass( transition + " out " + ( reverse ? "reverse" : "" ) );
+				/* animate in / out
+				 * This is in a setTimeout because we were often seeing pages in not animate across but rather go straight to
+				 * the 'to' page.  The loadComplete would still fire, so the browser thought it was applying the animation.  From
+				 * what I could tell this was a problem with the classes not being applied yet.
+				 */ 
+				setTimeout(function() { from.addClass( transition + " out " + ( reverse ? "reverse" : "" ) );
 				to.addClass( $.mobile.activePageClass + " " + transition +
-					" in " + ( reverse ? "reverse" : "" ) );
+					" in " + ( reverse ? "reverse" : "" ) ); } , 0);
 
 				// callback - remove classes, etc
 				to.animationComplete(function() {
@@ -397,6 +415,7 @@
 				});
 			}
 			else{
+			    $.mobile.pageLoading( true );
 				from.removeClass( $.mobile.activePageClass );
 				to.addClass( $.mobile.activePageClass );
 				loadComplete();
@@ -408,7 +427,7 @@
 
 			//set next page role, if defined
 			if ( nextPageRole || to.data('role') == 'dialog' ) {
-				changeHash = false;
+				url = urlHistory.getActive().url + dialogHashKey;
 				if(nextPageRole){
 					to.attr( "data-role", nextPageRole );
 					nextPageRole = null;
@@ -466,7 +485,7 @@
 						if(base){
 							base.set( redirectLoc );
 						}	
-						fileUrl = path.makeAbsolute( path.getFilePath( redirectLoc ) );
+						url = fileUrl = path.makeAbsolute( path.getFilePath( redirectLoc ) );
 					}
 					else {
 						if(base){
@@ -567,7 +586,12 @@
 			
 			//if target attr is specified we mimic _blank... for now
 			hasTarget = $this.is( "[target]" );
-			
+		
+		//if there's a data-rel=back attr, go back in history
+		if( $this.is( "[data-rel='back']" ) ){
+			window.history.back();
+			return false;
+		}	
 
 		if( url === "#" ){
 			//for links created purely for interaction - ignore
@@ -597,7 +621,8 @@
 				reverse = direction && direction == "reverse" || 
 				// deprecated - remove by 1.0
 				$this.data( "back" );
-
+				
+			//this may need to be more specific as we use data-rel more	
 			nextPageRole = $this.attr( "data-rel" );
 
 			//if it's a relative href, prefix href with base url
@@ -622,13 +647,16 @@
 			!$.mobile.ajaxLinksEnabled ) ){
 			return;
 		}
-
-		if( $(".ui-page-active").is("[data-role=" + $.mobile.nonHistorySelectors + "]") ){
-			return;
-		}
-
+		
 		var to = path.stripHash( location.hash ),
-			transition = triggered ? false : undefined;
+			transition = triggered ? false : undefined;	
+
+		//make sure that hash changes that produce a dialog url do nothing	
+		if( urlHistory.stack.length > 1 &&
+				to.indexOf( dialogHashKey ) > -1 &&
+				!$.mobile.activePage.is( ".ui-dialog" ) ){
+			return;
+		}	
 
 		//if to is defined, use it
 		if ( to ){

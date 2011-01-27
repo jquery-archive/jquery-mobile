@@ -22,4 +22,36 @@
 		select.trigger(mouseUpTouchEnd);
 		same(menu.parents('.ui-dialog').length, 1);
 	});
+
+	test( "firing an immediate click on the select screen overlay doesn't close it", function(){
+		$.Event.prototype.originalEvent = {
+			touches: [ 'foo' ]
+		};
+
+		$("#select-choice-few-button").trigger(mouseUpTouchEnd);
+		$(".ui-selectmenu-screen").click();
+		same($("#select-choice-few-menu").parent(".ui-selectmenu-hidden").length, 0);
+	});
+
+	test( "firing a click at least 400 ms later on the select screen overlay does close it", function(){
+		$.Event.prototype.originalEvent = {
+			touches: [ 'foo' ]
+		};
+
+		$("#select-choice-few-button").trigger(mouseUpTouchEnd);
+
+		// click the first menu item
+		setTimeout(function(){
+			$("#select-choice-few-menu a:first").click();
+		}, 400);
+
+		// verify the menu is hidden
+		setTimeout(function(){
+			same($("#select-choice-few-menu").parent(".ui-selectmenu-hidden").length, 1);
+			start();
+		}, 500);
+
+		stop();
+	});
+
 })(jQuery);

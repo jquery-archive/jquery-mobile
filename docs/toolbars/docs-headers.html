@@ -46,6 +46,9 @@
 	
 			<p>In the standard header configuration, there are slots for buttons on either side of the text heading. Each button is typically an <code>anchor</code> element, but any valid <a href="../buttons/buttons-types.html">button markup</a> will work. To save space, buttons in toolbars are set to <a href="../buttons/buttons-inline.html">inline styling</a> so the button is only as wide as the text and icons it contains. </p>
 
+
+		<h2>Creating custom back buttons</h2>
+		<p>If you use the attribute <code>data-rel="back"</code> on an anchor, any clicks on that anchor will mimic the back button, going back one history entry and ignoring the anchor's default href. This is particularly useful when linking back to a named page, such as a link that says "home", or when generating "back" buttons with JavaScript, such as a button to close a dialog. When using this feature in your source markup, <strong>be sure to provide a meaningful href that actually points to the URL of the referring page (this will allow the feature to work for users in C-Grade browsers</strong>. Also, pease keep in mind that if you just want a reverse transition without actually going back in history, you should use the <code>data-direction="reverse"</code> attribute instead.</p>
 		
 			<h3>Default button positioning</h3>
 		
