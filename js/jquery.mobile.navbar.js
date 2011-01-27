@@ -34,7 +34,7 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 		
 		$navbar.delegate("a", "click",function(event){
 			$navbtns.removeClass( "ui-btn-active" );
-			$( this ).addClass( "ui-btn-active" );
+			$('li.' + this.parentNode.className + ' a').addClass( "ui-btn-active" );
 		});	
 	}
 });
