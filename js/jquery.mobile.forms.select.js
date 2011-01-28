@@ -116,7 +116,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			menuType;
 
 		// set to native menu
-		o.useNativeMenu = select.is( "[data-native]");
+		o.useNativeMenu = $.mobile.nativeSelectMenus || select.is( "[data-native]" );
 
 		// add counter for multi selects
 		if( isMultiple ){
@@ -159,7 +159,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			.change(function(){
 				self.refresh();
 			});
-			
+
 		//unbind dialog destroy on close
 		menuPage.unbind("pagehide.dialog");
 

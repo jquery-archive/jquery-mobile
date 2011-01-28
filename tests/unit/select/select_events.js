@@ -3,9 +3,10 @@
  */
 
 (function($){
-	var mouseUpTouchEnd = $.support.touch ? "touchend" : "mouseup";
+	var mouseUpTouchEnd = $.support.touch ? "touchend" : "mouseup",
+			libName = "jquery.mobile.forms.select.js";
 
-	module('jquery.mobile.select.js');
+	module(libName);
 
 	test( "a large select menu should come up in a dialog many times", function(){
 		var menu, select = $("#select-choice-many-container a");
@@ -16,7 +17,7 @@
 		same(menu.parents('.ui-dialog').length, 1);
 
 		// select and close the dialog
-		menu.find('li').click();
+		menu.parents('ui-dialog').find("span.ui-icon-delete").click();
 
 		//bring up the dialog again
 		select.trigger(mouseUpTouchEnd);
@@ -54,4 +55,8 @@
 		stop();
 	});
 
+	test( "selects marked with data-native=true should not bring up the custom menu", function(){
+		$("#select-choice-native-button").trigger(mouseUpTouchEnd);
+		same($("#select-choice-native-menu").parent(".ui-selectmenu-hidden").length, 1);
+	});
 })(jQuery);

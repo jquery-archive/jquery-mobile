@@ -1,15 +1,15 @@
-<!DOCTYPE html> 
-<html> 
+<!DOCTYPE html>
+<html>
 	<head>
-	<meta charset="utf-8" /> 
-	<title>jQuery Mobile Docs - Forms</title> 
-	<link rel="stylesheet"  href="../../themes/default/" />  
+	<meta charset="utf-8" />
+	<title>jQuery Mobile Docs - Forms</title>
+	<link rel="stylesheet"  href="../../themes/default/" />
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 	<script type="text/javascript" src="../../js/jquery.js"></script>
 	<script type="text/javascript" src="../../js/"></script>
 	<script type="text/javascript" src="../docs/docs.js"></script>
-</head> 
-<body> 
+</head>
+<body>
 
 <div data-role="page">
 
@@ -18,19 +18,19 @@
 	</div><!-- /header -->
 
 	<div data-role="content">
-		
+
 		<form action="#" method="get">
 
 			<h2>Select menus</h2>
-		
+
 			<p>The select menus are driven off native <code>select</code> elements, but the native selects are hidden from view and replaced with more style-friendly markup. The replacement buttons and menus are ARIA-enabled and are keyboard accessible on the desktop as well. </p>
 			<p>When clicked, if the menu has room it will appear as an overlay listbox, but if there are too many options to fit in the window without scrolling, the page content is wrapped in a div and hidden, and the menu is appended as a whole new page. This lets us take advantage of native scrolling while the menu is in use. </p>
-			
+
 			<p>To add a select widget to your page, start with a standard <code>select</code> element populated with a set of <code>option</code> elements. Set the <code>for</code> attribute of the <code>label</code> to match the ID of the <code>select</code> so they are semantically associated. Wrap them in a <code>div</code> with the <code>data-role="fieldcontain"</code> attribute to help visually group it in a longer form. </p>
-			
+
 			<p>The framework will find all <code>select</code> elements and automatically enhance them into the custom select menus.</p>
 
-<pre><code>	
+<pre><code>
 &lt;div data-role=&quot;fieldcontain&quot;&gt;
 	&lt;label for=&quot;select-choice-1&quot; class=&quot;select&quot;&gt;Choose shipping method:&lt;/label&gt;
 	&lt;select name=&quot;select-choice-1&quot; id=&quot;select-choice-1&quot;&gt;
@@ -41,7 +41,7 @@
 	&lt;/select&gt;
 &lt;/div&gt;
 </code></pre>
-			
+
 			<p> If there is a small number of options that will fit on the device's screen, it will appear as a small overlay with a pop transition.</p>
 
 					<div data-role="fieldcontain">
@@ -117,7 +117,17 @@
 
 					<h2>Option to use native menus</h2>
 					<p>The custom select menus add the ability to theme the select and provide visual consistency across platforms In addition, it fixes over some missing functionality on certain platforms: <code>optgroup</code> support on Android, multi-select capability on WebOS, and adds an elegant way to handle placeholder values (explained below).</p>
-					<p>However, there is overhead involved in parsing the native select to build a custom menu and if the number of selects or options within are fairly large, this can impact the performance of the page. By adding the <code>data-native="true"</code> attribute to the <code>select</code>, the framework will use the browesr's native select menu when the select button is clicked. Because this option doesn't use any of the custom menu parsing and menu generation logic, it is significantly faster than the custom menu version.</p>
+					<p>However, there is overhead involved in parsing the native select to build a custom menu and if the number of selects or options within are fairly large, this can impact the performance of the page. By adding the <code>data-native="true"</code> attribute to the <code>select</code>, the framework will use the browser's native select menu when the select button is clicked. Because this option doesn't use any of the custom menu parsing and menu generation logic, it is significantly faster than the custom menu version.</p>
+
+			<p>You can also set the global configuration <code>$.mobile.nativeSelectMenus</code> to true in a callback bound to the <code>mobileinit</code> event to achieve the same effect. The following must be included in the page after jQuery is loaded but before jQuery Mobile.</p>
+
+			<code>
+				<pre>
+$(document).bind('mobileinit',function(){
+	$.mobile.nativeSelectMenus = true;
+});
+				</pre>
+			</code>
 
 					<div data-role="fieldcontain">
 						<label for="select-choice-3" class="select">Your state:</label>
@@ -174,9 +184,7 @@
 							<option value="WY">Wyoming</option>
 						</select>
 					</div>
-					
-					
-	
+
 	<h2>Placeholder options</h2>
 	<p>It's common for developers to include a &quot;null&quot; option in their select element to force a user to choose an option. If a placeholder option is present in your markup, jQuery Mobile will hide them in the overlay menu, showing only valid choices to the user, and display the placeholder text inside the menu as a header.  A placeholder option is added when the framework finds:</p>
 	<ul>
@@ -184,17 +192,17 @@
 		<li>An option with no text node</li>
 		<li>An option with a <code>data-placeholder="true"</code> attribute. (This allows you to use an option that has a value and a textnode as a placeholder option).</li>
 	</ul>
-	
+
 	<p>You can disable this feature through the selectmenu plugin's <code>hidePlaceholderMenuItems</code> option, like this:</p>
 	<pre>
 	<code>
 $.mobile.selectmenu.prototype.options.hidePlaceholderMenuItems = false;
 	</code>
 	</pre>
-	
+
 	<p>Here's a demo of various placeholder options:</p>
-		 
-		 
+
+
 	<div data-role="fieldcontain">
 		<label for="select-choice-4" class="select">Choose shipping method:</label>
 		<select name="select-choice-4" id="select-choice-4">
@@ -204,9 +212,9 @@ $.mobile.selectmenu.prototype.options.hidePlaceholderMenuItems = false;
 			<option value="express">Express: next day</option>
 			<option value="overnight">Overnight</option>
 		</select>
-	</div>	 
-		 
-		 
+	</div>
+
+
 	<div data-role="fieldcontain">
 		<label for="select-choice-5" class="select">Choose shipping method:</label>
 		<select name="select-choice-5" id="select-choice-5">
@@ -217,8 +225,8 @@ $.mobile.selectmenu.prototype.options.hidePlaceholderMenuItems = false;
 			<option value="overnight">Overnight</option>
 		</select>
 	</div>
-		 
-		 
+
+
 	<div data-role="fieldcontain">
 		<label for="select-choice-6" class="select">Choose shipping method:</label>
 		<select name="select-choice-6" id="select-choice-6">
@@ -229,7 +237,7 @@ $.mobile.selectmenu.prototype.options.hidePlaceholderMenuItems = false;
 			<option value="overnight">Overnight</option>
 		</select>
 	</div>
-	
+
 	<h2>Disabled options</h2>
 	<p>jQuery Mobile will automatically disable and style option tags with the <code>disabled</code> attribute.  In the demo below, the second option &quot;Rush: 3 days&quot; has been set to disabled.</p>
 
@@ -242,7 +250,7 @@ $.mobile.selectmenu.prototype.options.hidePlaceholderMenuItems = false;
 			<option value="overnight">Overnight</option>
 		</select>
 	</div>
-	
+
 	<h2>Optgroup support</h2>
 	<p>If a select menu contains <code>optgroup</code> elements, jQuery Mobile will create a divider &amp; group items based on the <code>label</code> attribute's text:</p>
 
@@ -262,11 +270,11 @@ $.mobile.selectmenu.prototype.options.hidePlaceholderMenuItems = false;
 			</optgroup>
 		</select>
 	</div>
-	
-	
+
+
 	<h2>Multiple selects</h2>
 	<p>If the <code>multiple</code> attribute is present in your markup, jQuery Mobile will enhance the element with a few extra considerations:</p>
-	
+
 	<ul>
 	<li>A header element will be created inside the menu and display the placeholder text and a close button.</li>
 	<li>Clicking on an item inside the overlay menu will not close the widget.</li>
@@ -276,7 +284,7 @@ $.mobile.selectmenu.prototype.options.hidePlaceholderMenuItems = false;
 	<li>If no items are selected, the button's text will default to the placeholder text.</li>
 	<li>If no placeholder element exists, the default button text will be blank and the header will appear with just a close button. Because this isn't a friendly user experience, we recommended that you always specify a placeholder element when using multiple select boxes.</li>
 	</ul>
-	
+
 	<div data-role="fieldcontain">
 		<label for="select-choice-9" class="select">Choose shipping method(s):</label>
 		<select name="select-choice-9" id="select-choice-9" multiple="multiple">
@@ -287,9 +295,9 @@ $.mobile.selectmenu.prototype.options.hidePlaceholderMenuItems = false;
 			<option value="overnight">Overnight</option>
 		</select>
 	</div>
-	
+
 	<p>When a select is large enough to where the menu will open in a new page, the placeholder text is displayed in the button when no items are selected, and the <code>label</code> text is displayed in the menu's header.  This differs from smaller overlay menus where the placeholder text is displayed in both the button and the header, and from full-page single selects where the placeholder text is not used at all.</p>
-	
+
 	<div data-role="fieldcontain">
 		<label for="select-choice-10" class="select">Choose state(s):</label>
 		<select name="select-choice-10" id="select-choice-10" multiple="multiple">
@@ -347,12 +355,12 @@ $.mobile.selectmenu.prototype.options.hidePlaceholderMenuItems = false;
 		</select>
 	</div>
 
-	
+
 
 
 	<h2>Data attribute support</h2>
-	<p>You can specify any jQuery Mobile button data- attribute on a select element too. In this example, we're setting the theme, icon and inline properties though data- attributes.</p>		 
-			 
+	<p>You can specify any jQuery Mobile button data- attribute on a select element too. In this example, we're setting the theme, icon and inline properties though data- attributes.</p>
+
 	<div data-role="fieldcontain">
 		<label for="select-choice-11" class="select">Actions</label>
 		<select name="select-choice-11" id="select-choice-11" data-theme="a" data-icon="gear" data-inline="true">
