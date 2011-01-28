@@ -16,7 +16,7 @@
 		same(menu.parents('.ui-dialog').length, 1);
 
 		// select and close the dialog
-		menu.find('li').click();
+		menu.parents('ui-dialog').find("span.ui-icon-delete").click();
 
 		//bring up the dialog again
 		select.trigger(mouseUpTouchEnd);
