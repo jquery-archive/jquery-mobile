@@ -299,6 +299,10 @@
 			isFormRequest = true;
 			//make get requests bookmarkable
 			if( data && type == 'get' ){
+				if($.type( data ) == "object" ){
+					data = $.param(data);
+				}
+			
 				url += "?" + data;
 				data = undefined;
 			}
@@ -318,6 +322,7 @@
 
 		//function for transitioning between two existing pages
 		function transitionPages() {
+		    $.mobile.silentScroll();
 
 			//get current scroll distance
 			var currScroll = $window.scrollTop(),
@@ -337,9 +342,6 @@
 			to.data("page")._trigger("beforeshow", {prevPage: from});
 
 			function loadComplete(){
-				$.mobile.pageLoading( true );
-
-				reFocus( to );
 
 				if( changeHash !== false && url ){
 					if( !back  ){
@@ -356,8 +358,9 @@
 				
 				removeActiveLinkClass();
 
-				//jump to top or prev scroll, if set
-				$.mobile.silentScroll( to.data( 'lastScroll' ) );
+				//jump to top or prev scroll, sometimes on iOS the page has not rendered yet.  I could only get by this with a setTimeout, but would like to avoid that.
+				$.mobile.silentScroll( to.data( 'lastScroll' ) ); 
+				reFocus( to );
 
 				//trigger show/hide events, allow preventing focus change through return false
 				from.data("page")._trigger("hide", null, {nextPage: to});
@@ -387,16 +390,21 @@
 			
 
 			if(transition && (transition !== 'none')){
+			    $.mobile.pageLoading( true );
 				if( $.inArray(transition, perspectiveTransitions) >= 0 ){
 					addContainerClass('ui-mobile-viewport-perspective');
 				}
 
 				addContainerClass('ui-mobile-viewport-transitioning');
 
-				// animate in / out
-				from.addClass( transition + " out " + ( reverse ? "reverse" : "" ) );
+				/* animate in / out
+				 * This is in a setTimeout because we were often seeing pages in not animate across but rather go straight to
+				 * the 'to' page.  The loadComplete would still fire, so the browser thought it was applying the animation.  From
+				 * what I could tell this was a problem with the classes not being applied yet.
+				 */ 
+				setTimeout(function() { from.addClass( transition + " out " + ( reverse ? "reverse" : "" ) );
 				to.addClass( $.mobile.activePageClass + " " + transition +
-					" in " + ( reverse ? "reverse" : "" ) );
+					" in " + ( reverse ? "reverse" : "" ) ); } , 0);
 
 				// callback - remove classes, etc
 				to.animationComplete(function() {
@@ -407,6 +415,7 @@
 				});
 			}
 			else{
+			    $.mobile.pageLoading( true );
 				from.removeClass( $.mobile.activePageClass );
 				to.addClass( $.mobile.activePageClass );
 				loadComplete();

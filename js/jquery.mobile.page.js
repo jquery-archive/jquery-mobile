@@ -37,6 +37,12 @@ $.widget( "mobile.page", $.mobile.widget, {
 		if ( this._trigger( "beforeCreate" ) === false ) {
 			return;
 		}
+		
+		if( $( "html" ).hasClass( 'portrait' ) ) {
+		    $elem.css( 'minHeight', ( screen.availHeight >= screen.availWidth ) ? screen.availHeight : screen.availWidth);
+		} else {
+		    $elem.css( 'minHeight', ( screen.availHeight <= screen.availWidth ) ? screen.availHeight : screen.availWidth);
+		}
 
 		//some of the form elements currently rely on the presence of ui-page and ui-content
 		// classes so we'll handle page and content roles outside of the main role processing
@@ -75,15 +81,10 @@ $.widget( "mobile.page", $.mobile.widget, {
 
 				// auto-add back btn on pages beyond first view
 				if ( o.addBackBtn && role === "header" &&
-						($.mobile.urlHistory.getPrev() || $(".ui-page").length > 1) &&
+						$.mobile.urlHistory.stack.length > 0  &&
 						!leftbtn && $this.data( "backbtn" ) !== false ) {
 
-					$( "<a href='#' class='ui-btn-left' data-icon='arrow-l'>"+ o.backBtnText +"</a>" )
-						.click(function() {
-							history.back();
-							return false;
-						})
-						.prependTo( $this );
+					$( "<a href='#' class='ui-btn-left' data-rel='back' data-icon='arrow-l'>"+ o.backBtnText +"</a>" ).prependTo( $this );
 				}
 
 				//page title
