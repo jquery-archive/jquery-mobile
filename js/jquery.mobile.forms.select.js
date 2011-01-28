@@ -160,9 +160,6 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				self.refresh();
 			});
 
-		//unbind dialog destroy on close
-		menuPage.unbind("pagehide.dialog");
-
 		//support for using the native select menu with a custom button
 		if( o.useNativeMenu ){
 
