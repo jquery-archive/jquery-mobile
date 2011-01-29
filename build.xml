@@ -20,7 +20,6 @@
 	jquery.mobile.theme.css,
 	jquery.mobile.transitions.css"/>
 	<property name="js-sources" value="jquery.js,
-	jquery.ui.position.js,
 	jquery.ui.widget.js,
 	jquery.mobile.widget.js,
 	jquery.mobile.media.js,

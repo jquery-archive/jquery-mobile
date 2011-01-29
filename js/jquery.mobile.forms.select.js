@@ -160,9 +160,6 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				self.refresh();
 			});
 
-		//unbind dialog destroy on close
-		menuPage.unbind("pagehide.dialog");
-
 		//support for using the native select menu with a custom button
 		if( o.useNativeMenu ){
 
@@ -443,14 +440,29 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				.height( $(document).height() )
 				.removeClass('ui-screen-hidden');
 
+			//try and center the overlay over the button
+			var roomtop = btnOffset - scrollTop,
+				roombot = scrollTop + screenHeight - btnOffset,
+				halfheight = menuHeight / 2,
+				newtop,newleft;
+				
+				if( roomtop > menuHeight / 2 && roombot > menuHeight / 2 ){
+					newtop = btnOffset + ( self.button.outerHeight() / 2 ) - halfheight;
+				}
+				else{
+					//30px tolerance off the edges
+					newtop = roomtop > roombot ? scrollTop + screenHeight - menuHeight - 30 : scrollTop + 30;
+				}
+				
+				newleft = self.button.offset().left + self.button.outerWidth() / 2 - menuWidth / 2;
+				
+
 			self.listbox
 				.append( self.list )
 				.removeClass( "ui-selectmenu-hidden" )
-				.position({
-					my: "center center",
-					at: "center center",
-					of: self.button,
-					collision: "fit"
+				.css({
+					top: newtop,
+					left: newleft
 				})
 				.addClass("in");
 
