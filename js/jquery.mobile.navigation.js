@@ -213,7 +213,10 @@
 			return $(this).one('webkitAnimationEnd', callback);
 		}
 		else{
-			callback();
+			// defer execution for consistency between webkit/non webkit
+			setTimeout(function(){ 
+				callback(); 
+			})
 		}
 	};
 
