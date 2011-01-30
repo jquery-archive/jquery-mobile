@@ -50,7 +50,6 @@
 	test( "explicit transition preferred for page navigation reversal (ie back)", function(){
 		$.fn.animationComplete = function(){};
 
-		stop();
 		setTimeout(function(){
 			$("#fade-trans > a").click();
 		}, 300);
@@ -59,27 +58,26 @@
 			$("#flip-trans > a").click();
 		}, 600);
 
+		//guarantee that we check only the newest changes
+		removePageTransClasses();
+		$("#fade-trans > a").click();
+
+		stop();
 		setTimeout(function(){
-			//guarantee that we check only the newest changes
-			removePageTransClasses();
-
-			$("#fade-trans > a").click();
-
 			ok($("#flip-trans").hasClass("fade"), "has fade class");
 
 			start();
 		}, 900);
 	});
 
-	
+
 	test( "default transition is slide", function(){
+		//guarantee that we check only the newest changes
+		removePageTransClasses();
+		$("#default-trans > a").click();
+
 		stop();
 		setTimeout(function(){
-			//guarantee that we check only the newest changes
-			removePageTransClasses();
-
-			$("#default-trans > a").click();
-
 			ok($("#no-trans").hasClass("slide"), "has slide class");
 
 			start();
