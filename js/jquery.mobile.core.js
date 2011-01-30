@@ -137,10 +137,17 @@
 				$html.removeClass( "ui-loading" );
 			} else {
 				if( $.mobile.loadingMessage ){
-					var activeLink = $( "." + $.mobile.activeBtnClass ).eq(0),
-						yPos = activeLink.length ? activeLink.offset().top : $(window).scrollTop() + 75;
-					$loader.appendTo($.mobile.pageContainer).css({top: yPos});
+					var activeBtn =$( "." + $.mobile.activeBtnClass ).first();
+							
+					$loader
+						.appendTo( $.mobile.pageContainer )
+						//position at y center (if scrollTop supported), above the activeBtn (if defined), or just 100px from top
+						.css( {
+							top: $.support.scrollTop && $(window).scrollTop() + $(window).height() / 2 ||  
+							activeBtn.length && activeBtn.offset().top || 100
+						} );
 				}
+				
 				$html.addClass( "ui-loading" );
 			}
 		},
