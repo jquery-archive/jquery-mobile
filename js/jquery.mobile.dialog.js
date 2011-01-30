@@ -25,7 +25,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 			.end()
 			.find('.ui-content,[data-role=footer]')
 				.last()
-				.addClass('ui-corner-bottom ui-overlay-shadow')
+				.addClass('ui-corner-bottom ui-overlay-shadow');
 		
 		/* bind events 
 			- clicks and submits should use the closing transition that the dialog opened with
@@ -47,11 +47,6 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 						.attr("data-transition", $.mobile.urlHistory.getActive().transition )
 						.attr("data-direction", "reverse");
 				}
-			})
-			//destroy the dialog after hiding
-			.bind("pagehide",function(){
-				self.destroy();
-				$(this).remove();
 			});
 
 	},

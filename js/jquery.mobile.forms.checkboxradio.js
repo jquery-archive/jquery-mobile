@@ -41,18 +41,8 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 				if( $(this).parent().is('.ui-disabled') ){ return false; }
 			},
 			
-			"touchend mouseup": function( event ){
-				//prevent both events from firing, keep the first
-				if( $(this).parent().is('.ui-disabled') || $(this).data("prevEvent") && $(this).data("prevEvent") !== event.type ){ 
-					return false;
-				}
-				$(this).data("prevEvent", event.type);
-				setTimeout(function(){
-					label.removeData("prevEvent");
-				}, 1000);
-				
+			"tap": function( event ){
 				self._cacheVals();
-				
 				input.attr( "checked", inputtype === "radio" && true || !input.is( ":checked" ) );
 				self._updateAll();
 				event.preventDefault();

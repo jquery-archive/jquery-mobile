@@ -27,3 +27,6 @@ test( "unnested bar anchors are styled", function(){
 	ok($('.ui-bar > a').hasClass('ui-btn'));
 });
 
+test( "no auto-generated back button exists on first page", function(){
+	ok( !$('.ui-header > [data-rel="back"]').length );
+});

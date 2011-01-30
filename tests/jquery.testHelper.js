@@ -21,7 +21,7 @@
 		reloadLib: function(libName){
 			if(this.reloads[libName] === undefined) {
 				this.reloads[libName] = {
-					lib: $("script[src$=" + libName + "]"),
+					lib: $("script[src$='" + libName + "']"),
 					count: 0
 				};
 			}
