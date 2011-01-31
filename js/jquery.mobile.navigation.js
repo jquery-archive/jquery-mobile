@@ -113,6 +113,12 @@
 				urlHistory.stack = urlHistory.stack.slice( 0, urlHistory.activeIndex + 1 );
 			},
 			
+			//wipe all urls
+			clear: function(){
+				urlHistory.stack = [];
+				urlHistory.activeIndex = 0;
+			},
+			
 			//enable/disable hashchange event listener
 			//toggled internally when location.hash is updated to match the url of a successful page load
 			listeningEnabled: true
