@@ -595,7 +595,7 @@
 			//check for protocol or rel and its not an embedded page
 			//TODO overlap in logic from isExternal, rel=external check should be
 			//     moved into more comprehensive isExternalLink
-			isExternal = path.isExternal( url ) || isRelExternal && !isEmbeddedPage;
+			isExternal = path.isExternal( url ) || isRelExternal && !isEmbeddedPage,
 
 			//if target attr is specified we mimic _blank... for now
 			hasTarget = $this.is( "[target]" );
