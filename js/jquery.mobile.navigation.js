@@ -618,7 +618,10 @@
 			isExternal = path.isExternal( url ) || isRelExternal && !isEmbeddedPage,
 
 			//if target attr is specified we mimic _blank... for now
-			hasTarget = $this.is( "[target]" );
+			hasTarget = $this.is( "[target]" ),
+
+			//if data-ajax attr is set to false, use the default behavior of a link
+			hasAjaxDisabled = $this.is( "[data-ajax='false']" );
 
 		//if there's a data-rel=back attr, go back in history
 		if( $this.is( "[data-rel='back']" ) ){
@@ -633,7 +636,7 @@
 
 		$activeClickedLink = $this.closest( ".ui-btn" ).addClass( $.mobile.activeBtnClass );
 
-		if( isExternal || hasTarget || !$.mobile.ajaxEnabled ||
+		if( isExternal || hasAjaxDisabled || hasTarget || !$.mobile.ajaxEnabled ||
 			// TODO: deprecated - remove at 1.0
 			!$.mobile.ajaxLinksEnabled ){
 			//remove active link class if external (then it won't be there if you come back)
@@ -642,6 +645,9 @@
 			//deliberately redirect, in case click was triggered
 			if( hasTarget ){
 				window.open( url );
+			}
+			else if( hasAjaxDisabled ){
+			  return;
 			}
 			else{
 				location.href = url;
