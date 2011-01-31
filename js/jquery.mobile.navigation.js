@@ -68,6 +68,10 @@
 			//check if the url is relative
 			isRelative: function( url ){
 				return  /^[^\/|#]/.test( url ) && !path.hasProtocol( url );
+			},
+
+			isEmbeddedPage: function( url ){
+				return /^#/.test( url );
 			}
 		},
 
@@ -582,8 +586,16 @@
 			//get href, remove same-domain protocol and host
 			url = path.clean( $this.attr( "href" ) ),
 
-			//check if it's external
-			isExternal = path.isExternal( url ) || $this.is( "[rel='external']" ),
+			//rel set to external
+			isRelExternal = $this.is( "[rel='external']" ),
+
+			//rel set to external
+			isEmbeddedPage = path.isEmbeddedPage( url ),
+
+			//check for protocol or rel and its not an embedded page
+			//TODO overlap in logic from isExternal, rel=external check should be
+			//     moved into more comprehensive isExternalLink
+			isExternal = path.isExternal( url ) || isRelExternal && !isEmbeddedPage;
 
 			//if target attr is specified we mimic _blank... for now
 			hasTarget = $this.is( "[target]" );
