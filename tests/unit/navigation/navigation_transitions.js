@@ -49,7 +49,7 @@
 		}
 	});
 	
-	QUnit.testStart = function (name) {
+	QUnit.testDone = function (name) {
 		$.mobile.urlHistory.clear();
 		clearPageTransitionStack();
 	};
