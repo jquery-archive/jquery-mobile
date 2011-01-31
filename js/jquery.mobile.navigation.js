@@ -214,9 +214,7 @@
 		}
 		else{
 			// defer execution for consistency between webkit/non webkit
-			setTimeout(function(){ 
-				callback(); 
-			})
+			setTimeout(callback, 0)
 		}
 	};
 
