@@ -19,6 +19,7 @@
 		<h2>Foo</h2>
 		<p>I'm first in the source order so I'm shown as the page.</p>		
 		<p>View internal page called <a href="#bar">bar</a></p>	
+		<p>View internal page called <a href="#baz" data-rel="dialog" data-transition="pop">baz</a> as a dialog.</p>
 	</div><!-- /content -->
 	
 	<div data-role="footer">
@@ -36,8 +37,27 @@
 
 	<div data-role="content">	
 		<h2>Bar</h2>
-		<p>I'm first in the source order so I'm shown as the page.</p>		
+		<p>I'm the bar page.</p>		
 		<p><a href="#foo" data-direction="reverse">Back to foo</a></p>	
+	</div><!-- /content -->
+	
+	<div data-role="footer">
+		<h4>Page Footer</h4>
+	</div><!-- /footer -->
+</div><!-- /page -->
+
+
+<!-- Start of second page -->
+<div data-role="page" id="baz">
+
+	<div data-role="header">
+		<h1>Baz</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">	
+		<h2>Baz</h2>
+		<p>I'm the baz page, viewed as a dialog.</p>		
+		<p><a href="#foo" data-rel="back">Back to foo</a></p>	
 	</div><!-- /content -->
 	
 	<div data-role="footer">
