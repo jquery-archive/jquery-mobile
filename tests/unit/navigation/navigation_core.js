@@ -152,6 +152,17 @@
 		same( $.mobile.urlHistory.stack.length, 1, "urlHistory.clearForward() clears the url stack after the active index" );
 	});
 
+	asyncTest( "embedded page href should trump rel external", function(){
+		expect( 1 );
+
+		$.mobile.changePage = function(){
+			ok(true, "changePage called");
+			start();
+		};
+
+		$("#test-external a").click();
+	});
+
 	//url listening
 	asyncTest( "ability to disable our hash change event listening", function(){
 		$.mobile.urlHistory.listeningEnabled = false;
