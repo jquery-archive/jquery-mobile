@@ -167,34 +167,33 @@
 		}
 	});
 
-
 	//dom-ready inits
 	$(function(){
-
 		//find present pages
-		var $pages = $("[data-role='page']");
-
-		$("[data-role='page'], [data-role='dialog']").each(function(){
-			$(this).attr('data-url', $(this).attr('id'));
+		var $pages = $( "[data-role='page']" );
+		
+		//add dialogs, set data-url attrs
+		$pages.add( "[data-role='dialog']" ).each(function(){
+			$(this).attr( "data-url", $(this).attr( "id" ));
 		});
-
-		//set up active page
-		$.mobile.startPage = $.mobile.activePage = $pages.first();
-
-		//set page container
-		$.mobile.pageContainer = $.mobile.startPage.parent().addClass('ui-mobile-viewport');
-
+		
+		//define first page in dom case one backs out to the directory root (not always the first page visited, but defined as fallback)
+		$.mobile.firstPage = $pages.first();
+		
+		//define page container
+		$.mobile.pageContainer = $pages.first().parent().addClass( "ui-mobile-viewport" );
+		
 		//cue page loading message
 		$.mobile.pageLoading();
-
-		//initialize all pages present
-		$pages.page();
-
-		//trigger a new hashchange, hash or not
-		$window.trigger( "hashchange", [ true ] );
-
-		//remove rendering class
-		$html.removeClass('ui-mobile-rendering');
+		
+		// if hashchange listening is disabled or there's no hash deeplink, change to the first page in the DOM	
+		if( $.mobile.urlHistory.listeningEnabled == false || !$.mobile.path.stripHash( location.hash ) ){
+			$.mobile.changePage( $.mobile.firstPage, false, true, false, true );
+		}
+		// otherwise, trigger a hashchange to load a deeplink
+		else {
+			$window.trigger( "hashchange", [ true ] );
+		}
 	});
 
 

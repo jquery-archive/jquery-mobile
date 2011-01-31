@@ -431,7 +431,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 			self.menuType = "page";
 			self.menuPageContent.append( self.list );
-			$.mobile.changePage(self.menuPage, 'pop', false, false);
+			$.mobile.changePage(self.menuPage, 'pop', false, true);
 		}
 		else {
 			self.menuType = "overlay";
