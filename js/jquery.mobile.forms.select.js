@@ -172,6 +172,9 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					//ensure button isn't clicked
 					e.stopPropagation();
 				})
+				.bind("touchmove", function( e ){
+					button.removeClass( $.mobile.activeBtnClass );
+				})
 				.bind( "focus mouseover", function(){
 					button.trigger( "mouseover" );
 				})
