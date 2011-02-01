@@ -29,6 +29,9 @@
 
 		//automatically handle clicks and form submissions through Ajax, when same-domain
 		ajaxEnabled: true,
+		
+		//automatically load and show pages based on location.hash
+		hashListeningEnabled: true,
 
 		// TODO: deprecated - remove at 1.0
 		//automatically handle link clicks through Ajax, when possible
@@ -187,7 +190,7 @@
 		$.mobile.pageLoading();
 		
 		// if hashchange listening is disabled or there's no hash deeplink, change to the first page in the DOM	
-		if( $.mobile.urlHistory.listeningEnabled == false || !$.mobile.path.stripHash( location.hash ) ){
+		if( !$.mobile.hashListeningEnabled || !$.mobile.path.stripHash( location.hash ) ){
 			$.mobile.changePage( $.mobile.firstPage, false, true, false, true );
 		}
 		// otherwise, trigger a hashchange to load a deeplink

@@ -147,8 +147,8 @@
 	});
 	
 	//url listening
-	asyncTest( "ability to disable our hash change event listening", function(){
-		$.mobile.urlHistory.listeningEnabled = false;
+	function testListening( prop ){
+		prop = false;
 		var stillListening = false;
 		$(document).bind("pagebeforehide", function(){
 			stillListening = true;
@@ -156,9 +156,18 @@
 		location.hash = "foozball";
 		setTimeout(function(){
 			start();
-			ok( $.mobile.urlHistory.listeningEnabled == stillListening, "urlHistory.listeningEnabled = false disables default hashchange event handler");
+			ok( prop == stillListening, "urlHistory.listeningEnabled = false disables default hashchange event handler");
 			location.hash = "";
+			prop = true;
 		}, 1000);
+	}
+	
+	asyncTest( "ability to disable our hash change event listening internally", function(){
+		testListening( $.mobile.urlHistory.listeningEnabled );
+	});
+	
+	asyncTest( "ability to disable our hash change event listening globally", function(){
+		testListening( $.mobile.hashListeningEnabled );
 	});
 	
 })(jQuery);
