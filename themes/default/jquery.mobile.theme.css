@@ -12,9 +12,9 @@
 .ui-bar-a {
 	border: 1px solid 		#2A2A2A;
 	background: 			#111111;
-	color: 					#fff;
+	color: 					#ffffff;
 	font-weight: bold;
-	text-shadow: 0 -1px 1px #000;
+	text-shadow: 0 -1px 1px #000000;
 	background-image: -moz-linear-gradient(top, 
 							#3c3c3c, 
 							#111111);
@@ -259,7 +259,7 @@
 	color: 					#3E3E3E;
 	font-weight: bold;
 	text-shadow: 0 1px 1px 	#fff;
-	background-image: -moz-linear-gradient(, 
+	background-image: -moz-linear-gradient(top, 
 							#f0f0f0,
 							#e9eaeb);
 	background-image: -webkit-gradient(linear,left top,left bottom,
@@ -279,13 +279,13 @@
 	color: 					#333333;
 	text-shadow: 0 1px 0 	#fff;
 	background: 			#f0f0f0;
-	background-image: -moz-linear-gradient(, 
-							#fff, 
-							#f0f0f0);
+	background-image: -moz-linear-gradient(top, 
+							#eeeeee, 
+							#dddddd);
 	background-image: -webkit-gradient(linear,left top,left bottom,
-		color-stop(0, 		#fff),
-		color-stop(1, 		#f0f0f0));
-	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff', EndColorStr='#f0f0f0')";
+		color-stop(0, 		#eeeeee),
+		color-stop(1, 		#dddddd));
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#eeeeee', EndColorStr='#dddddd')";
 }
 .ui-body-c,
 .ui-body-c input,
@@ -310,8 +310,8 @@
 	cursor: pointer;
 	text-shadow: 0 1px 1px #f6f6f6;
 	text-decoration: none;
-	background-image: -moz-linear-gradient(, 
-							#fdfdfd, 
+	background-image: -moz-linear-gradient(top, 
+							#fefefe, 
 							#eeeeee);
 	background-image: -webkit-gradient(linear,left top,left bottom,
 		color-stop(0, 		#fdfdfd),
@@ -323,19 +323,19 @@
 }
 
 .ui-btn-hover-c {
-	border: 1px solid 		#aaa;
-	background: 			#f5f5f5;
+	border: 1px solid 		#bbb;
+	background: 			#dadada;
 	font-weight: bold;
-	color: 					#111111;
+	color: 					#101010;
 	text-decoration: none;
 	text-shadow: 0 1px 1px 	#fff;
-	background-image: -moz-linear-gradient(, 
-							#ffffff, 
-							#f5f5f5);
+	background-image: -moz-linear-gradient(top, 
+							#ededed, 
+							#dadada);
 	background-image: -webkit-gradient(linear,left top,left bottom,
-		color-stop(0, 		#ffffff),
-		color-stop(1, 		#f5f5f5));
-	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff', EndColorStr='#f5f5f5')";
+		color-stop(0, 		#ededed),
+		color-stop(1, 		#dadada));
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ededed', EndColorStr='#dadada')";
 }
 .ui-btn-hover-c a.ui-link-inherit {
 	color: 					#2F3E46;
@@ -346,7 +346,7 @@
 	font-weight: bold;
 	color: 					#111111;
 	text-shadow: 0 1px 1px 	#ffffff;
-	background-image: -moz-linear-gradient(, 
+	background-image: -moz-linear-gradient(top, 
 							#eeeeee, 
 							#fdfdfd);
 	background-image: -webkit-gradient(linear,left top,left bottom,
@@ -372,13 +372,13 @@
 	background: 			#bbb;
 	color: 					#333;
 	text-shadow: 0 1px 0 #eee;
-	background-image: -moz-linear-gradient(, 
+	background-image: -moz-linear-gradient(top, 
 							#ddd, 
 							#bbb);
 	background-image: -webkit-gradient(linear,left top,left bottom,
 		color-stop(0, 		#ddd),
 		color-stop(1, 		#bbb));
-  	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ddd', EndColorStr='#bbb')";
+  	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#dddddd', EndColorStr='#bbbbbb')";
 }
 .ui-bar-d,
 .ui-bar-d input,
@@ -433,7 +433,7 @@
 	cursor: pointer;
 	text-shadow: 0 1px 1px 	#fff;
 	text-decoration: none;
-	background-image: -moz-linear-gradient(, 
+	background-image: -moz-linear-gradient(top, 
 							#fdfdfd, 
 							#eeeeee);
 	background-image: -webkit-gradient(linear,left top,left bottom,
@@ -450,7 +450,7 @@
 	font-weight: bold;
 	color: 					#111;
 	text-shadow: 0 1px 1px 	#ffffff;
-	background-image: -moz-linear-gradient(, 
+	background-image: -moz-linear-gradient(top, 
 							#eeeeee, 
 							#ffffff);
 	background-image: -webkit-gradient(linear,left top,left bottom,
@@ -464,7 +464,7 @@
 	font-weight: bold;
 	color: 					#111;
 	text-shadow: none;
-	background-image: -moz-linear-gradient(, 
+	background-image: -moz-linear-gradient(top, 
 							#cccccc, 
 							#eeeeee);
 	background-image: -webkit-gradient(linear,left top,left bottom,
@@ -487,7 +487,7 @@
 	background: 			#fadb4e;
 	color: 					#333;
 	text-shadow: 0 1px 0 	#fff;
-	background-image: -moz-linear-gradient(, 
+	background-image: -moz-linear-gradient(top, 
 							#fceda7, 
 							#fadb4e);
 	background-image: -webkit-gradient(linear,left top,left bottom,
@@ -514,7 +514,7 @@
 	color: 					#333333;
 	text-shadow: 0 1px 0 	#fff;
 	background: 			#faeb9e;
-	background-image: -moz-linear-gradient(, 
+	background-image: -moz-linear-gradient(top, 
 							#fff, 
 							#faeb9e);
 	background-image: -webkit-gradient(linear,left top,left bottom,
@@ -545,7 +545,7 @@
 	text-shadow: 0 1px 1px 	#fe3;
 	text-decoration: none;
 	text-shadow: 0 1px 0 	#fff;
-	background-image: -moz-linear-gradient(, 
+	background-image: -moz-linear-gradient(top, 
 							#fceda7, 
 							#fadb4e);
 	background-image: -webkit-gradient(linear,left top,left bottom,
@@ -563,7 +563,7 @@
 	color: 					#111;
 	text-decoration: none;
 	text-shadow: 0 1px 1px 	#fff;
-	background-image: -moz-linear-gradient(, 
+	background-image: -moz-linear-gradient(top, 
 							#fcf0b5, 
 							#fbe26f);
 	background-image: -webkit-gradient(linear,left top,left bottom,
@@ -581,7 +581,7 @@
 	font-weight: bold;
 	color: 					#111;
 	text-shadow: 0 1px 1px 	#ffffff;
-	background-image: -moz-linear-gradient(, 
+	background-image: -moz-linear-gradient(top, 
 							#fadb4e, 
 							#fceda7);
 	background-image: -webkit-gradient(linear,left top,left bottom,
@@ -618,13 +618,14 @@ a.ui-link-inherit {
 	cursor: pointer;
 	text-shadow: 0 -1px 1px #145072;
 	text-decoration: none;
-	background-image: -moz-linear-gradient(, 
+	background-image: -moz-linear-gradient(top, 
 							#85bae4, 
 							#5393c5);
 	background-image: -webkit-gradient(linear,left top,left bottom,
 		color-stop(0, 		#85bae4),
 		color-stop(1, 		#5393c5));
   	-msfilter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#85bae4', EndColorStr='#5393c5')";
+  	outline: none;
 }
 .ui-btn-active a.ui-link-inherit {
 	color: 					#fff;
@@ -984,7 +985,6 @@ a.ui-link-inherit {
 -----------------------------------------------------------------------------------------------------------*/
 
 .ui-focus {
-	outline-width: 0;
 	-moz-box-shadow: 0px 0px 12px 		#387bbe;
 	-webkit-box-shadow: 0px 0px 12px 	#387bbe;
 	box-shadow: 0px 0px 12px 			#387bbe;

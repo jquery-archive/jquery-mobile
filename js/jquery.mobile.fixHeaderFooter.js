@@ -21,6 +21,8 @@ $.fn.fixHeaderFooter = function(options){
 $.fixedToolbars = (function(){
 	if( !$.support.scrollTop ){ return; }
 	var currentstate = 'inline',
+		autoHideMode = false,
+		showDelay = 100,
 		delayTimer,
 		ignoreTargets = 'a,input,textarea,select,button,label,.ui-header-fixed,.ui-footer-fixed',
 		toolbarSelector = '.ui-header-fixed:first, .ui-footer-fixed:not(.ui-footer-duplicate):last',
@@ -32,20 +34,30 @@ $.fixedToolbars = (function(){
 		scrollTriggered = false,
         touchToggleEnabled = true;
 
+	function showEventCallback(event)
+	{
+		// An event that affects the dimensions of the visual viewport has
+		// been triggered. If the header and/or footer for the current page are in overlay
+		// mode, we want to hide them, and then fire off a timer to show them at a later
+		// point. Events like a resize can be triggered continuously during a scroll, on
+		// some platforms, so the timer is used to delay the actual positioning until the
+		// flood of events have subsided.
+		//
+		// If we are in autoHideMode, we don't do anything because we know the scroll
+		// callbacks for the plugin will fire off a show when the scrolling has stopped.
+		if (!autoHideMode && currentstate == 'overlay') {
+			if (!delayTimer)
+				$.fixedToolbars.hide(true);
+			$.fixedToolbars.startShowTimer();
+		}
+	}
+
 	$(function() {
 		$(document)
 			.bind(touchStartEvent,function(event){
 				if( touchToggleEnabled ) {
 					if( $(event.target).closest(ignoreTargets).length ){ return; }
 					stateBefore = currentstate;
-				}
-			})
-			.bind('scrollstart',function(event){
-				if( $(event.target).closest(ignoreTargets).length ){ return; } //because it could be a touchmove...
-				scrollTriggered = true;
-				if(stateBefore == null){ stateBefore = currentstate; }
-				if (stateBefore == 'overlay') {
-					$.fixedToolbars.hide(true);
 				}
 			})
 			.bind(touchStopEvent,function(event){
@@ -57,21 +69,44 @@ $.fixedToolbars = (function(){
 					}
 				}
 			})
+			.bind('scrollstart',function(event){
+				if( $(event.target).closest(ignoreTargets).length ){ return; } //because it could be a touchmove...
+				scrollTriggered = true;
+				if(stateBefore == null){ stateBefore = currentstate; }
+
+				// We only enter autoHideMode if the headers/footers are in
+				// an overlay state or the show timer was started. If the
+				// show timer is set, clear it so the headers/footers don't
+				// show up until after we're done scrolling.
+				var isOverlayState = stateBefore == 'overlay';
+				autoHideMode = isOverlayState || !!delayTimer;
+				if (autoHideMode){
+					$.fixedToolbars.clearShowTimer();
+					if (isOverlayState) {
+						$.fixedToolbars.hide(true);
+					}
+				}
+			})
 			.bind('scrollstop',function(event){
 				if( $(event.target).closest(ignoreTargets).length ){ return; }
 				scrollTriggered = false;
-				if (stateBefore == 'overlay') {
-					$.fixedToolbars.show();
+				if (autoHideMode) {
+					autoHideMode = false;
+					$.fixedToolbars.startShowTimer();
 				}
 				stateBefore = null;
-			});
+			})
+			.bind('silentscroll', showEventCallback);
+
+			$(window).bind('resize', showEventCallback);
 	});
 		
 	//before page is shown, check for duplicate footer
 	$('.ui-page').live('pagebeforeshow', function(event, ui){
-		var page = $(event.target);
-		var footer = page.find('[data-role="footer"]:not(.ui-sticky-footer)');
-		var id = footer.data('id');
+		var page = $(event.target),
+			footer = page.find('[data-role="footer"]:not(.ui-sticky-footer)'),
+			id = footer.data('id');
+		stickyFooter = null;
 		if (id)
 		{
 			stickyFooter = $('.ui-footer[data-id="' + id + '"].ui-sticky-footer');
@@ -151,6 +186,7 @@ $.fixedToolbars = (function(){
 	//exposed methods
 	return {
 		show: function(immediately, page){
+			$.fixedToolbars.clearShowTimer();
 			currentstate = 'overlay';
 			var $ap = page ? $(page) : ($.mobile.activePage ? $.mobile.activePage : $(".ui-page-active"));
 			return $ap.children( toolbarSelector ).each(function(){
@@ -200,10 +236,19 @@ $.fixedToolbars = (function(){
 				}
 			});
 		},
-		hideAfterDelay: function(){
+		startShowTimer: function(){
+			$.fixedToolbars.clearShowTimer();
+			var args = $.makeArray(arguments);
 			delayTimer = setTimeout(function(){
-				$.fixedToolbars.hide();
-			}, 3000);
+				delayTimer = undefined;
+				$.fixedToolbars.show.apply(null, args);
+			}, showDelay);
+		},
+		clearShowTimer: function() {
+			if (delayTimer) {
+				clearTimeout(delayTimer);
+			}
+			delayTimer = undefined;
 		},
 		toggle: function(from){
 			if(from){ currentstate = from; }

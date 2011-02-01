@@ -15,26 +15,34 @@
 		//define the url parameter used for referencing widget-generated sub-pages.
 		//Translates to to example.html&ui-page=subpageIdentifier
 		//hash segment before &ui-page= is used to make Ajax request
-		subPageUrlKey: 'ui-page',
+		subPageUrlKey: "ui-page",
 
 		//anchor links with a data-rel, or pages with a data-role, that match these selectors will be untrackable in history
 		//(no change in URL, not bookmarkable)
-		nonHistorySelectors: 'dialog',
+		nonHistorySelectors: "dialog",
 
 		//class assigned to page currently in view, and during transitions
-		activePageClass: 'ui-page-active',
+		activePageClass: "ui-page-active",
 
 		//class used for "active" button state, from CSS framework
-		activeBtnClass: 'ui-btn-active',
+		activeBtnClass: "ui-btn-active",
 
+		//automatically handle clicks and form submissions through Ajax, when same-domain
+		ajaxEnabled: true,
+		
+		//automatically load and show pages based on location.hash
+		hashListeningEnabled: true,
+
+		// TODO: deprecated - remove at 1.0
 		//automatically handle link clicks through Ajax, when possible
 		ajaxLinksEnabled: true,
 
+		// TODO: deprecated - remove at 1.0
 		//automatically handle form submissions through Ajax, when possible
 		ajaxFormsEnabled: true,
 
 		//set default transition - 'none' for no transitions
-		defaultTransition: 'slide',
+		defaultTransition: "slide",
 
 		//show loading message during Ajax requests
 		//if false, message will not appear, but loading classes will still be toggled on html el
@@ -42,6 +50,8 @@
 
 		//configure meta viewport tag's content attr:
 		metaViewportContent: "width=device-width, minimum-scale=1, maximum-scale=1",
+
+		nativeSelectMenus: false,
 
 		//support conditions that must be met in order to proceed
 		gradeA: function(){
@@ -86,11 +96,11 @@
 	});
 
 
-//trigger mobileinit event - useful hook for configuring $.mobile settings before they're used
-	$( window.document ).trigger('mobileinit');
+	//trigger mobileinit event - useful hook for configuring $.mobile settings before they're used
+	$( window.document ).trigger( "mobileinit" );
 
 
-//support conditions
+	//support conditions
 	//if device support condition(s) aren't met, leave things as they are -> a basic, usable experience,
 	//otherwise, proceed with the enhancements
 	if ( !$.mobile.gradeA() ) {
@@ -98,30 +108,30 @@
 	}
 
 
-//define vars for interal use
+	//define vars for interal use
 	var $window = $(window),
-		$html = $('html'),
-		$head = $('head'),
+		$html = $( "html" ),
+		$head = $( "head" ),
 
 		//loading div which appears during Ajax requests
 		//will not appear if $.mobile.loadingMessage is false
 		$loader = $.mobile.loadingMessage ?
-			$('<div class="ui-loader ui-body-a ui-corner-all">'+
-						'<span class="ui-icon ui-icon-loading spin"></span>'+
-						'<h1>'+ $.mobile.loadingMessage +'</h1>'+
-					'</div>')
+			$( "<div class='ui-loader ui-body-a ui-corner-all'>" +
+						"<span class='ui-icon ui-icon-loading spin'></span>" +
+						"<h1>" + $.mobile.loadingMessage + "</h1>" +
+					"</div>" )
 			: undefined;
 
 
-//add mobile, initial load "rendering" classes to docEl
-	$html.addClass('ui-mobile ui-mobile-rendering');
+	//add mobile, initial load "rendering" classes to docEl
+	$html.addClass( "ui-mobile ui-mobile-rendering" );
 
 
-//define & prepend meta viewport tag, if content is defined
-	$.mobile.metaViewportContent ? $("<meta>", { name: "viewport", content: $.mobile.metaViewportContent}).prependTo( $head ) : undefined;
+	//define & prepend meta viewport tag, if content is defined
+	$.mobile.metaViewportContent ? $( "<meta>", { name: "viewport", content: $.mobile.metaViewportContent}).prependTo( $head ) : undefined;
 
 
-//expose some core utilities
+	//expose some core utilities
 	$.extend($.mobile, {
 
 		// turn on/off page loading message.
@@ -130,18 +140,29 @@
 				$html.removeClass( "ui-loading" );
 			} else {
 				if( $.mobile.loadingMessage ){
-					$loader.appendTo($.mobile.pageContainer).css({top: $(window).scrollTop() + 75});
+					var activeBtn =$( "." + $.mobile.activeBtnClass ).first();
+							
+					$loader
+						.appendTo( $.mobile.pageContainer )
+						//position at y center (if scrollTop supported), above the activeBtn (if defined), or just 100px from top
+						.css( {
+							top: $.support.scrollTop && $(window).scrollTop() + $(window).height() / 2 ||  
+							activeBtn.length && activeBtn.offset().top || 100
+						} );
 				}
+				
 				$html.addClass( "ui-loading" );
 			}
 		},
 
 		//scroll page vertically: scroll to 0 to hide iOS address bar, or pass a Y value
 		silentScroll: function( ypos ) {
+			ypos = ypos || 0;
 			// prevent scrollstart and scrollstop events
 			$.event.special.scrollstart.enabled = false;
 			setTimeout(function() {
-				window.scrollTo( 0, ypos || 0 );
+				window.scrollTo( 0, ypos );
+				$(document).trigger( "silentscroll", { x: 0, y: ypos });
 			},20);
 			setTimeout(function() {
 				$.event.special.scrollstart.enabled = true;
@@ -149,38 +170,37 @@
 		}
 	});
 
-
-//dom-ready inits
+	//dom-ready inits
 	$(function(){
-
 		//find present pages
-		var $pages = $("[data-role='page']");
-
-		$pages.each(function(){
-			$(this).attr('data-url', $(this).attr('id'));
+		var $pages = $( "[data-role='page']" );
+		
+		//add dialogs, set data-url attrs
+		$pages.add( "[data-role='dialog']" ).each(function(){
+			$(this).attr( "data-url", $(this).attr( "id" ));
 		});
-
-		//set up active page
-		$.mobile.startPage = $.mobile.activePage = $pages.first();
-
-		//set page container
-		$.mobile.pageContainer = $.mobile.startPage.parent().addClass('ui-mobile-viewport');
-
+		
+		//define first page in dom case one backs out to the directory root (not always the first page visited, but defined as fallback)
+		$.mobile.firstPage = $pages.first();
+		
+		//define page container
+		$.mobile.pageContainer = $pages.first().parent().addClass( "ui-mobile-viewport" );
+		
 		//cue page loading message
 		$.mobile.pageLoading();
-
-		//initialize all pages present
-		$pages.page();
-
-		//trigger a new hashchange, hash or not
-		$window.trigger( "hashchange", [ true ] );
-
-		//remove rendering class
-		$html.removeClass('ui-mobile-rendering');
+		
+		// if hashchange listening is disabled or there's no hash deeplink, change to the first page in the DOM	
+		if( !$.mobile.hashListeningEnabled || !$.mobile.path.stripHash( location.hash ) ){
+			$.mobile.changePage( $.mobile.firstPage, false, true, false, true );
+		}
+		// otherwise, trigger a hashchange to load a deeplink
+		else {
+			$window.trigger( "hashchange", [ true ] );
+		}
 	});
 
 
-//window load event
+	//window load event
 	//hide iOS browser chrome on load
 	$window.load( $.mobile.silentScroll );
 

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>jQuery Mobile Dialog Test Suite</title>
+
+	<script type="text/javascript" src="../../../js/jquery.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.ui.widget.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.widget.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.media.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.support.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.event.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.hashchange.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.core.js"></script>
+ 	<script type="text/javascript" src="../../../js/jquery.mobile.navigation.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.page.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.fixHeaderFooter.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.forms.checkboxradio.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.forms.textinput.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.forms.select.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.buttonMarkup.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.forms.button.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.forms.slider.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.collapsible.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.controlGroup.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.fieldContain.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.listview.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.listview.filter.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.dialog.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.navbar.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.grid.js"></script>
+	<script type="text/javascript" src="../../../tests/jquery.testHelper.js"></script>
+
+
+	<link rel="stylesheet" href="../../../themes/default/" type="text/css"/>
+	<link rel="stylesheet" href="../../../external/qunit.css" type="text/css"/>
+	<script type="text/javascript" src="../../../external/qunit.js"></script>
+
+	<script type="text/javascript" src="dialog_events.js"></script>
+</head>
+<body>
+
+<h1 id="qunit-header">jQuery Mobile Dialog Test Suite</h1>
+<h2 id="qunit-banner"></h2>
+<h2 id="qunit-userAgent"></h2>
+<ol id="qunit-tests">
+</ol>
+
+<!-- NOTE body must be used in place of main otherwise transition behaviour fails -->
+
+<style>
+	[data-role='page'], [data-role='dialog']{
+	  position: absolute;
+	  top: -10000px;
+	  left: -10000px;
+	}
+
+	/* maintain styling */
+	.ui-mobile-viewport {
+	  margin: 8px;
+	}
+</style>
+
+<div id="bar" data-role="page">
+	<a href="#foo-dialog" data-role="button" data-inline="true" data-rel="dialog"></a>
+</div>
+
+<div id="foo-dialog">
+	<a href="http://google.com" id="http-link">foo</a>
+	<a href="mailto:foo@bar.com" id="mailto-link">foo</a>
+	<a href="#bar" rel="external" id="rel-link">foo</a>
+	<a href="#bar" target="foo" id="target-link">foo</a>
+	<a href="#bar" id="internal-link">foo</a>
+</div>
+
+</body>
+</html>

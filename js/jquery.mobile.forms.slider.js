@@ -29,11 +29,12 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			controlID = control.attr('id'),
 			labelID = controlID + '-label',
 			label = $('[for='+ controlID +']').attr('id',labelID),
-			val = (cType == 'input') ? parseFloat(control.val()) : control[0].selectedIndex,
+			val = function(){
+				return (cType == 'input') ? parseFloat(control.val()) : control[0].selectedIndex;
+			},
 			min = (cType == 'input') ? parseFloat(control.attr('min')) : 0,
 			max = (cType == 'input') ? parseFloat(control.attr('max')) : control.find('option').length-1,
 			step = window.parseFloat(control.attr('data-step') || 1),
-
 			slider = $('<div class="ui-slider '+ selectClass +' ui-btn-down-'+ trackTheme+' ui-btn-corner-all" role="application"></div>'),
 			handle = $('<a href="#" class="ui-slider-handle"></a>')
 				.appendTo(slider)
@@ -42,12 +43,11 @@ $.widget( "mobile.slider", $.mobile.widget, {
 					'role': 'slider',
 					'aria-valuemin': min,
 					'aria-valuemax': max,
-					'aria-valuenow': val,
-					'aria-valuetext': val,
-					'title': val,
+					'aria-valuenow': val(),
+					'aria-valuetext': val(),
+					'title': val(),
 					'aria-labelledby': labelID
-				}),
-			switchValues = {'off' : 0, 'on': 1};
+				});
 
 		$.extend(this, {
 			slider: slider,
@@ -72,13 +72,21 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 		label.addClass('ui-slider');
 
+		// monitor the input for updated values
 		control
 			.addClass((cType == 'input') ? 'ui-slider-input' : 'ui-slider-switch')
-			.keyup(function(){
-				self.refresh( $(this).val() );
+			.change(function(){
+				self.refresh( val(), true );
+			})
+			.keyup(function(){ // necessary?
+				self.refresh( val(), true, true );
+			})
+			.blur(function(){
+				self.refresh( val(), true );
 			});
 
-		$(document).bind($.support.touch ? "touchmove" : "mousemove", function(event){
+		// prevent screen drag when slider activated
+		$(document).bind( "touchmove mousemove", function(event){
 			if ( self.dragging ) {
 				self.refresh( event );
 				return false;
@@ -86,7 +94,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		});
 
 		slider
-			.bind($.support.touch ? "touchstart" : "mousedown", function(event){
+			.bind( "touchstart mousedown", function(event){
 				self.dragging = true;
 				if ( cType === "select" ) {
 					self.beforeStart = control[0].selectedIndex;
@@ -97,7 +105,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 		slider
 			.add(document)
-			.bind($.support.touch ? "touchend" : "mouseup", function(){
+			.bind( "touchend mouseup", function(){
 				if ( self.dragging ) {
 					self.dragging = false;
 					if ( cType === "select" ) {
@@ -105,7 +113,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 							//tap occurred, but value didn't change. flip it!
 							self.refresh( self.beforeStart === 0 ? 1 : 0 );
 						}
-						var curval = (cType === "input") ? parseFloat(control.val()) : control[ 0 ].selectedIndex;
+						var curval = val();
 						var snapped = Math.round( curval / (max - min) * 100 );
 						handle
 							.addClass("ui-slider-handle-snapping")
@@ -122,25 +130,17 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 		// NOTE force focus on handle
 		this.handle
-			.bind($.support.touch ? "touchstart" : "mousedown", function(){
+			.bind( "touchstart mousedown", function(){
 				$(this).focus();
 			});
 
 		this.handle
-			.bind('keydown', function( event ) {
-				var valuenow = $( this ).attr( "aria-valuenow" ),
-					  index;
+			.bind( "keydown", function( event ) {
+				var index = val();
 
 				if ( self.options.disabled ) {
 					return;
 				}
-
-				// convert switch values to slider
-				if(valuenow.match(/off|on/)){
-					valuenow = switchValues[valuenow];
-				}
-
-				index = window.parseFloat(valuenow, 10);
 
 				// In all cases prevent the default and mark the handle as active
 				switch ( event.keyCode ) {
@@ -191,7 +191,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		this.refresh();
 	},
 
-	refresh: function(val){
+	refresh: function(val, isfromControl, preventInputUpdate){
 		if ( this.options.disabled ) { return; }
 
 		var control = this.element, percent,
@@ -211,7 +211,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			percent = Math.round( ((data.pageX - this.slider.offset().left) / this.slider.width() ) * 100 );
 		} else {
 			if ( val == null ) {
-				val = (cType === "input") ? parseFloat(control.val()) : control[ 0 ].selectedIndex;
+				val = (cType === "input") ? parseFloat(control.val()) : control[0].selectedIndex;
 			}
 			percent = (parseFloat(val) - min) / (max - min) * 100;
 		}
@@ -246,13 +246,15 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			}
 		}
 
-		// update control's value
-		if ( cType === "input" ) {
-			control.val(newval);
-		} else {
-			control[ 0 ].selectedIndex = newval;
+		if(!preventInputUpdate){
+			// update control's value
+			if ( cType === "input" ) {
+				control.val(newval);
+			} else {
+				control[ 0 ].selectedIndex = newval;
+			}
+			if (!isfromControl) { control.trigger("change"); }
 		}
-		control.trigger("change");
 	},
 
 	enable: function(){

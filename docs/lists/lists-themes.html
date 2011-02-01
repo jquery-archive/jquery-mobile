@@ -5,6 +5,7 @@
 	<title>jQuery Mobile Docs - Lists</title> 
 	<link rel="stylesheet"  href="../../themes/default/" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	<script type="text/javascript" src="../../js/jquery.js"></script>
 	<script type="text/javascript" src="../../js/"></script>
 	<script type="text/javascript" src="../docs/docs.js"></script>
 </head> 
@@ -43,6 +44,16 @@
 			<li><a href="index.html">Inbox</a> <span class="ui-li-count">12</span></li>
 			<li><a href="index.html">Outbox</a> <span class="ui-li-count">0</span></li>
 			<li><a href="index.html">Sent</a> <span class="ui-li-count">328</span></li>
+		</ul>
+		
+		<p>Data-theme attributes also work at the LI-level, for styling a single item.</p>
+		
+		<ul data-role="listview" data-inset="true" data-theme="d">
+			<li data-role="list-divider">Divider</li>
+			<li><a href="index.html">Inbox</a> <span class="ui-li-count">12</span></li>
+			<li><a href="index.html">Outbox</a> <span class="ui-li-count">0</span></li>
+			<li><a href="index.html">Sent</a> <span class="ui-li-count">328</span></li>
+			<li data-theme="a"><a href="index.html">Trash</a> <span class="ui-li-count">34</span></li>
 		</ul>
 		
 		<h2>Theming dividers</h2>

@@ -14,10 +14,9 @@ FILES = js/jquery.ui.widget.js \
   js/jquery.mobile.support.js \
   js/jquery.mobile.event.js \
   js/jquery.mobile.hashchange.js \
+  js/jquery.mobile.page.js \
   js/jquery.mobile.core.js \
   js/jquery.mobile.navigation.js \
-  js/jquery.mobile.page.js \
-  js/jquery.ui.position.js \
   js/jquery.mobile.fixHeaderFooter.js \
   js/jquery.mobile.forms.checkboxradio.js \
   js/jquery.mobile.forms.textinput.js \
