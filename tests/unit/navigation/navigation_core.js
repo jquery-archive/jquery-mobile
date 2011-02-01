@@ -40,6 +40,8 @@
 	
 	
 	
+	
+	
 	test( "path.get method is working properly", function(){
 		same($.mobile.path.get(), window.location.hash, "get method returns location.hash");
 		same($.mobile.path.get( "#foo/bar/baz.html" ), "foo/bar/", "get method with hash arg returns path with no filename or hash prefix");
@@ -168,6 +170,21 @@
 	
 	asyncTest( "ability to disable our hash change event listening globally", function(){
 		testListening( $.mobile.hashListeningEnabled );
+	});
+	
+	asynctest( "changepage will only run once when a new page is visited", function(){
+		var called = 0;
+		$.mobile.changePage = function(){
+			changePageFn( arguments );
+			called ++;
+		};
+
+		$('#foo a').click();
+		
+		setTimeout(function(){
+			start();
+			ok(called == 1, "change page should be called once");
+		}, 500);
 	});
 	
 })(jQuery);

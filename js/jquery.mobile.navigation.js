@@ -351,11 +351,10 @@
 			function loadComplete(){
 
 				if( changeHash !== false && url ){
-					if( !back  ){
-						urlHistory.listeningEnabled = false;
-					}
+					//disable hash listening temporarily
+					urlHistory.listeningEnabled = false;
+					//update hash and history
 					path.set( url );
-					urlHistory.listeningEnabled = true;
 				}
 
 				//add page to history stack if it's not back or forward
@@ -679,7 +678,12 @@
 		//if listening is disabled (either globally or temporarily), or it's a dialog hash
 		if( !$.mobile.hashListeningEnabled || !urlHistory.listeningEnabled ||
 				urlHistory.stack.length > 1 && to.indexOf( dialogHashKey ) > -1 && !$.mobile.activePage.is( ".ui-dialog" )
-		){ return; }
+		){
+			if( !urlHistory.listeningEnabled ){
+				urlHistory.listeningEnabled = true;
+			}
+			return;
+		}
 
 		//if to is defined, load it
 		if ( to ){
