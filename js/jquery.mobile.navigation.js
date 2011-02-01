@@ -506,7 +506,7 @@
 						if(base){
 							base.set( redirectLoc );
 						}
-						url = fileUrl = path.makeAbsolute( path.getFilePath( redirectLoc ) );
+						url = fileUrl = path.getFilePath( redirectLoc );
 					}
 					else {
 						if(base){
