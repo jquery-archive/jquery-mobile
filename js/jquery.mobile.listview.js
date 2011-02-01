@@ -178,6 +178,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				return;
 			}
 
+			var itemTheme = item.data("theme") || o.theme;
+
 			var a = item.find( "a" );
 				
 			if ( a.length ) {	
@@ -190,7 +192,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 						corners: false,
 						iconpos: "right",
 						icon: a.length > 1 || icon === false ? false : icon || "arrow-r",
-						theme: o.theme
+						theme: itemTheme
 					});
 
 				a.first().addClass( "ui-link-inherit" );
@@ -208,7 +210,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 						.buttonMarkup({
 							shadow: false,
 							corners: false,
-							theme: o.theme,
+							theme: itemTheme,
 							icon: false,
 							iconpos: false
 						})
@@ -232,7 +234,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				}
 
 			} else {
-				itemClass += " ui-li-static ui-btn-up-" + o.theme;
+				itemClass += " ui-li-static ui-btn-up-" + itemTheme;
 			}
 			
 			
@@ -251,7 +253,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
 							self._removeCorners( item.next() );		
 						}
 	
-				} else if ( pos === li.length - 1 ) {
+				}
+				if ( pos === li.length - 1 ) {
 						itemClass += " ui-corner-bottom";
 	
 						item

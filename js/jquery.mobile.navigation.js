@@ -117,9 +117,9 @@
 				urlHistory.stack = urlHistory.stack.slice( 0, urlHistory.activeIndex + 1 );
 			},
 
-			//enable/disable hashchange event listener
+			//disable hashchange event listener internally to ignore one change
 			//toggled internally when location.hash is updated to match the url of a successful page load
-			listeningEnabled: true
+			ignoreNextHashChange: true
 		},
 
 		//define first selector to receive focus when a page is shown
@@ -317,7 +317,7 @@
 		if(base){ base.reset(); }
 
 		//kill the keyboard
-		$( window.document.activeElement ).add(':focus').blur();
+		$( window.document.activeElement ).add('input:focus, textarea:focus').blur();
 
 		function defaultTransition(){
 			if(transition === undefined){
@@ -331,29 +331,29 @@
 
 			//get current scroll distance
 			var currScroll = $window.scrollTop(),
-					perspectiveTransitions = ["flip"],
+					perspectiveTransitions = [ "flip" ],
 					pageContainerClasses = [];
 
 			//support deep-links to generated sub-pages
 			if( url.indexOf( "&" + $.mobile.subPageUrlKey ) > -1 ){
 				to = $( "[data-url='" + url + "']" );
 			}
-
-			//set as data for returning to that spot
-			from.data('lastScroll', currScroll);
-
-			//trigger before show/hide events
-			from.data("page")._trigger("beforehide", {nextPage: to});
-			to.data("page")._trigger("beforeshow", {prevPage: from});
+			
+			if( from ){
+				//set as data for returning to that spot
+				from.data( "lastScroll", currScroll);
+				//trigger before show/hide events
+				from.data( "page" )._trigger( "beforehide", { nextPage: to } );
+			}	
+			to.data( "page" )._trigger( "beforeshow", { prevPage: from || $("") } );
 
 			function loadComplete(){
 
 				if( changeHash !== false && url ){
-					if( !back  ){
-						urlHistory.listeningEnabled = false;
-					}
+					//disable hash listening temporarily
+					urlHistory.ignoreNextHashChange = false;
+					//update hash and history
 					path.set( url );
-					urlHistory.listeningEnabled = true;
 				}
 
 				//add page to history stack if it's not back or forward
@@ -364,19 +364,27 @@
 				removeActiveLinkClass();
 
 				//jump to top or prev scroll, sometimes on iOS the page has not rendered yet.  I could only get by this with a setTimeout, but would like to avoid that.
-				$.mobile.silentScroll( to.data( 'lastScroll' ) );
+				$.mobile.silentScroll( to.data( "lastScroll" ) ); 
+
 				reFocus( to );
 
-				//trigger show/hide events, allow preventing focus change through return false
-				from.data("page")._trigger("hide", null, {nextPage: to});
-				if( to.data("page")._trigger("show", null, {prevPage: from}) !== false ){
-					$.mobile.activePage = to;
+				//trigger show/hide events
+				if( from ){
+					from.data( "page" )._trigger( "hide", null, { nextPage: to } );
 				}
+				//trigger pageshow, define prevPage as either from or empty jQuery obj
+				to.data( "page" )._trigger( "show", null, { prevPage: from || $("") } );
+				
+				//set "to" as activePage
+				$.mobile.activePage = to;
 
 				//if there's a duplicateCachedPage, remove it from the DOM now that it's hidden
 				if (duplicateCachedPage != null) {
 				    duplicateCachedPage.remove();
 				}
+				
+				//remove initial build class (only present on first pageshow)
+				$html.removeClass( "ui-mobile-rendering" );
 			};
 
 			function addContainerClass(className){
@@ -406,22 +414,30 @@
 				 * This is in a setTimeout because we were often seeing pages in not animate across but rather go straight to
 				 * the 'to' page.  The loadComplete would still fire, so the browser thought it was applying the animation.  From
 				 * what I could tell this was a problem with the classes not being applied yet.
-				 */
-				setTimeout(function() { from.addClass( transition + " out " + ( reverse ? "reverse" : "" ) );
-				to.addClass( $.mobile.activePageClass + " " + transition +
-					" in " + ( reverse ? "reverse" : "" ) ); } , 0);
+				 */ 
+				setTimeout(function() { 
+					if( from ){
+						from.addClass( transition + " out " + ( reverse ? "reverse" : "" ) );
+					}
+					to.addClass( $.mobile.activePageClass + " " + transition +
+						" in " + ( reverse ? "reverse" : "" ) ); 
+				} , 0);
 
 				// callback - remove classes, etc
 				to.animationComplete(function() {
 					from.add( to ).removeClass("out in reverse " + transition );
-					from.removeClass( $.mobile.activePageClass );
+					if( from ){
+						from.removeClass( $.mobile.activePageClass );
+					}	
 					loadComplete();
 					removeContainerClasses();
 				});
 			}
 			else{
 			    $.mobile.pageLoading( true );
-				from.removeClass( $.mobile.activePageClass );
+			    if( from ){
+					from.removeClass( $.mobile.activePageClass );
+				}	
 				to.addClass( $.mobile.activePageClass );
 				loadComplete();
 			}
@@ -464,7 +480,7 @@
 		if ( to.length && !isFormRequest ) {
 			if( fileUrl && base ){
 				base.set( fileUrl );
-			}
+			}			
 			enhancePage();
 			transitionPages();
 		} else {
@@ -490,7 +506,7 @@
 						if(base){
 							base.set( redirectLoc );
 						}
-						url = fileUrl = path.makeAbsolute( path.getFilePath( redirectLoc ) );
+						url = fileUrl = path.getFilePath( redirectLoc );
 					}
 					else {
 						if(base){
@@ -583,8 +599,12 @@
 	$( "a" ).live( "click", function(event) {
 
 		var $this = $(this),
+		
+			//get href, if defined, otherwise fall to null #
+			href = $this.attr( "href" ) || "#",
+			
 			//get href, remove same-domain protocol and host
-			url = path.clean( $this.attr( "href" ) ),
+			url = path.clean( href ),
 
 			//rel set to external
 			isRelExternal = $this.is( "[rel='external']" ),
@@ -598,7 +618,10 @@
 			isExternal = path.isExternal( url ) || isRelExternal && !isEmbeddedPage,
 
 			//if target attr is specified we mimic _blank... for now
-			hasTarget = $this.is( "[target]" );
+			hasTarget = $this.is( "[target]" ),
+
+			//if data-ajax attr is set to false, use the default behavior of a link
+			hasAjaxDisabled = $this.is( "[data-ajax='false']" );
 
 		//if there's a data-rel=back attr, go back in history
 		if( $this.is( "[data-rel='back']" ) ){
@@ -613,7 +636,7 @@
 
 		$activeClickedLink = $this.closest( ".ui-btn" ).addClass( $.mobile.activeBtnClass );
 
-		if( isExternal || hasTarget || !$.mobile.ajaxEnabled ||
+		if( isExternal || hasAjaxDisabled || hasTarget || !$.mobile.ajaxEnabled ||
 			// TODO: deprecated - remove at 1.0
 			!$.mobile.ajaxLinksEnabled ){
 			//remove active link class if external (then it won't be there if you come back)
@@ -622,6 +645,9 @@
 			//deliberately redirect, in case click was triggered
 			if( hasTarget ){
 				window.open( url );
+			}
+			else if( hasAjaxDisabled ){
+			  return;
 			}
 			else{
 				location.href = url;
@@ -651,45 +677,30 @@
 	});
 
 
-
 	//hashchange event handler
-	$window.bind( "hashchange", function(e, triggered) {
-		if( !triggered && ( !urlHistory.listeningEnabled || !$.mobile.ajaxEnabled ||
-			// TODO: deprecated - remove at 1.0
-			// only links need to be checked here, as forms don't trigger a hashchange event (they just silently update the hash)
-			!$.mobile.ajaxLinksEnabled ) ){
-			return;
-		}
-
+	$window.bind( "hashchange", function( e, triggered ) {
+		//find first page via hash
 		var to = path.stripHash( location.hash ),
-			transition = triggered ? false : undefined;
-
-		//make sure that hash changes that produce a dialog url do nothing
-		if( urlHistory.stack.length > 1 &&
-				to.indexOf( dialogHashKey ) > -1 &&
-				!$.mobile.activePage.is( ".ui-dialog" ) ){
+			//transition is false if it's the first page, undefined otherwise (and may be overridden by default)
+			transition = $.mobile.urlHistory.stack.length === 0 ? false : undefined;
+			
+		//if listening is disabled (either globally or temporarily), or it's a dialog hash
+		if( !$.mobile.hashListeningEnabled || !urlHistory.ignoreNextHashChange ||
+				urlHistory.stack.length > 1 && to.indexOf( dialogHashKey ) > -1 && !$.mobile.activePage.is( ".ui-dialog" )
+		){
+			if( !urlHistory.ignoreNextHashChange ){
+				urlHistory.ignoreNextHashChange = true;
+			}
 			return;
 		}
 
-		//if to is defined, use it
+		//if to is defined, load it
 		if ( to ){
 			$.mobile.changePage( to, transition, undefined, false, true );
 		}
-		//there's no hash, the active page is not the start page, and it's not manually triggered hashchange
-		//we probably backed out to the first page visited
-		else if( $.mobile.activePage.length && $.mobile.startPage[0] !== $.mobile.activePage[0] && !triggered ) {
-			$.mobile.changePage( $.mobile.startPage, transition, true, false, true );
-		}
-		//probably the first page - show it
-		else{
-			urlHistory.addNew( "" );
-			$.mobile.startPage.trigger("pagebeforeshow", {prevPage: $('')});
-			$.mobile.startPage.addClass( $.mobile.activePageClass );
-			$.mobile.pageLoading( true );
-
-			if( $.mobile.startPage.trigger("pageshow", {prevPage: $('')}) !== false ){
-				reFocus($.mobile.startPage);
-			}
+		//there's no hash, go to the first page in the dom
+		else {
+			$.mobile.changePage( $.mobile.firstPage, transition, true, false, true );
 		}
 	});
 })( jQuery );

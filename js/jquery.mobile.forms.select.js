@@ -19,7 +19,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		overlayTheme: 'a',
 		hidePlaceholderMenuItems: true,
 		closeText: 'Close',
-		useNativeMenu: false
+		nativeMenu: false
 	},
 	_create: function(){
 
@@ -115,9 +115,6 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 			menuType;
 
-		// set to native menu
-		o.useNativeMenu = $.mobile.nativeSelectMenus || select.is( "[data-native]" );
-
 		// add counter for multi selects
 		if( isMultiple ){
 			self.buttonCount = $('<span>')
@@ -161,7 +158,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			});
 
 		//support for using the native select menu with a custom button
-		if( o.useNativeMenu ){
+		if( o.nativeMenu ){
 
 			select
 				.appendTo(button)
@@ -431,7 +428,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 			self.menuType = "page";
 			self.menuPageContent.append( self.list );
-			$.mobile.changePage(self.menuPage, 'pop', false, false);
+			$.mobile.changePage(self.menuPage, 'pop', false, true);
 		}
 		else {
 			self.menuType = "overlay";
