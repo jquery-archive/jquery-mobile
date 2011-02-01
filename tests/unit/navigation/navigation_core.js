@@ -158,7 +158,7 @@
 		location.hash = "foozball";
 		setTimeout(function(){
 			start();
-			ok( prop == stillListening, "urlHistory.listeningEnabled = false disables default hashchange event handler");
+			ok( prop == stillListening, prop + " = false disables default hashchange event handler");
 			location.hash = "";
 			prop = true;
 		}, 1000);
