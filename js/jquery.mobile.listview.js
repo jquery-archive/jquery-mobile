@@ -251,7 +251,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
 							self._removeCorners( item.next() );		
 						}
 	
-				} else if ( pos === li.length - 1 ) {
+				}
+				if ( pos === li.length - 1 ) {
 						itemClass += " ui-corner-bottom";
 	
 						item
