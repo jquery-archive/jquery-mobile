@@ -54,7 +54,7 @@
 	
 	
 	test( "path.set method is working properly", function(){
-		$.mobile.urlHistory.listeningEnabled = false;
+		$.mobile.urlHistory.ignoreNextHashChange = false;
 		$.mobile.path.set("foo");
 		same("foo", window.location.hash.replace(/^#/,""), "sets location.hash properly");
 		location.hash = "";
@@ -165,7 +165,7 @@
 	}
 	
 	asyncTest( "ability to disable our hash change event listening internally", function(){
-		testListening( $.mobile.urlHistory.listeningEnabled );
+		testListening( $.mobile.urlHistory.ignoreNextHashChange );
 	});
 	
 	asyncTest( "ability to disable our hash change event listening globally", function(){

@@ -117,10 +117,9 @@
 				urlHistory.stack = urlHistory.stack.slice( 0, urlHistory.activeIndex + 1 );
 			},
 
-			//enable/disable hashchange event listener internally
-			//for use in toggling temporarily, rather than disabling globally
+			//disable hashchange event listener internally to ignore one change
 			//toggled internally when location.hash is updated to match the url of a successful page load
-			listeningEnabled: true
+			ignoreNextHashChange: true
 		},
 
 		//define first selector to receive focus when a page is shown
@@ -352,7 +351,7 @@
 
 				if( changeHash !== false && url ){
 					//disable hash listening temporarily
-					urlHistory.listeningEnabled = false;
+					urlHistory.ignoreNextHashChange = false;
 					//update hash and history
 					path.set( url );
 				}
@@ -676,11 +675,11 @@
 			transition = $.mobile.urlHistory.stack.length === 0 ? false : undefined;
 			
 		//if listening is disabled (either globally or temporarily), or it's a dialog hash
-		if( !$.mobile.hashListeningEnabled || !urlHistory.listeningEnabled ||
+		if( !$.mobile.hashListeningEnabled || !urlHistory.ignoreNextHashChange ||
 				urlHistory.stack.length > 1 && to.indexOf( dialogHashKey ) > -1 && !$.mobile.activePage.is( ".ui-dialog" )
 		){
-			if( !urlHistory.listeningEnabled ){
-				urlHistory.listeningEnabled = true;
+			if( !urlHistory.ignoreNextHashChange ){
+				urlHistory.ignoreNextHashChange = true;
 			}
 			return;
 		}
