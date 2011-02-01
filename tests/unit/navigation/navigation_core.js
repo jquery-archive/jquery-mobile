@@ -39,6 +39,22 @@
 	});
 	
 	
+	asyncTest( "anchors with no href attribute will do nothing when clicked", function(){
+		var fired = false;
+		
+		$(window).bind("hashchange.temp", function(){
+			fired = true;
+		});
+		
+		$( "<a>test</a>" ).appendTo( $.mobile.pageContainer ).click();
+		
+		setTimeout(function(){
+			start();
+			same(fired, false, "hash shouldn't change after click");
+			$(window).unbind("hashchange.temp");
+		}, 500);
+	});
+	
 	
 	
 	
@@ -172,10 +188,10 @@
 		testListening( $.mobile.hashListeningEnabled );
 	});
 	
-	asynctest( "changepage will only run once when a new page is visited", function(){
+	asyncTest( "changepage will only run once when a new page is visited", function(){
 		var called = 0;
-		$.mobile.changePage = function(){
-			changePageFn( arguments );
+		$.mobile.changePage = function(a,b,c,d,e){
+			changePageFn( a,b,c,d,e );
 			called ++;
 		};
 

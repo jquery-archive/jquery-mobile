@@ -599,8 +599,12 @@
 	$( "a" ).live( "click", function(event) {
 
 		var $this = $(this),
+		
+			//get href, if defined, otherwise fall to null #
+			href = $this.attr( "href" ) || "#",
+			
 			//get href, remove same-domain protocol and host
-			url = path.clean( $this.attr( "href" ) ),
+			url = path.clean( href ),
 
 			//rel set to external
 			isRelExternal = $this.is( "[rel='external']" ),
