@@ -130,6 +130,7 @@
 	
 	
 	test( "urlHistory is working properly", function(){
+		
 		//urlHistory
 		same( $.type( $.mobile.urlHistory.stack ), "array", "urlHistory.stack is an array" );
 		

@@ -24,7 +24,15 @@
 			
 			finishPageTransition = function(){
 				callbackQueue.pop()();
+			},
+			
+			clearPageTransitionStack = function(){
+				$.each(callbackQueue.reverse(), function(i, callback){
+					callback()
+				})
+				callbackQueue = []
 			};
+			
 
 	module('jquery.mobile.navigation.js', {
 		setup: function(){
@@ -40,29 +48,28 @@
 			$.fn.animationComplete = animationCompleteFn;
 		}
 	});
+	
+	QUnit.testStart = function (name) {
+		$.mobile.urlHistory.clear();
+		clearPageTransitionStack();
+	};
 
 	test( "changePage applys perspective class to mobile viewport for flip", function(){
 		$("#foo > a").click();
 		
 		ok($("body").hasClass(perspective), "has perspective class");
-		
-		finishPageTransition();
 	});
 
 	test( "changePage does not apply perspective class to mobile viewport for transitions other than flip", function(){
 		$("#bar > a").click();
 
 		ok(!$("body").hasClass(perspective), "doesn't have perspective class");
-		
-		finishPageTransition();
 	});
 
 	test( "changePage applys transition class to mobile viewport for default transition", function(){
 		$("#baz > a").click();
 		
 		ok($("body").hasClass(transitioning), "has transitioning class");
-		
-		finishPageTransition();
 	});
 
 	test( "explicit transition preferred for page navigation reversal (ie back)", function(){
@@ -74,13 +81,11 @@
 
 		$("#fade-trans > a").click();
 		ok($("#flip-trans").hasClass("fade"), "has fade class");		
-		finishPageTransition();
 	});
 
 	test( "default transition is slide", function(){
 		$("#default-trans > a").click();
 		ok($("#no-trans").hasClass("slide"), "has slide class");
-		finishPageTransition();
 	});
 	
 	test( "changePage queues requests", function(){
@@ -95,8 +100,6 @@
 		finishPageTransition();
 		ok(!isTransitioningIn(firstPage), "first page transition should be complete");
 		ok(isTransitioningIn(secondPage), "second page should begin transitioning");
-		
-		finishPageTransition();
 	});
 	
 })(jQuery);
