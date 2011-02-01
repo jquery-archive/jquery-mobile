@@ -61,7 +61,7 @@
 	});
 	
 	test( "path.makeAbsolute is working properly", function(){
-		$.mobile.urlHistory.listeningEnabled = false;
+		$.mobile.urlHistory.ignoreNextHashChange = false;
 		$.mobile.path.set("bar/");
 		same( $.mobile.path.makeAbsolute("test.html"), "bar/test.html", "prefixes path with absolute base path from hash");
 		location.hash = "";
