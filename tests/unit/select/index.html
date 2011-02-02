@@ -14,7 +14,6 @@
 	<script type="text/javascript" src="../../../js/jquery.mobile.core.js"></script>
  	<script type="text/javascript" src="../../../js/jquery.mobile.navigation.js"></script>
 	<script type="text/javascript" src="../../../js/jquery.mobile.page.js"></script>
-	<script type="text/javascript" src="../../../js/jquery.ui.position.js"></script>
 	<script type="text/javascript" src="../../../js/jquery.mobile.fixHeaderFooter.js"></script>
 	<script type="text/javascript" src="../../../js/jquery.mobile.forms.checkboxradio.js"></script>
 	<script type="text/javascript" src="../../../js/jquery.mobile.forms.textinput.js"></script>
@@ -61,6 +60,33 @@
 </style>
 
 <div id="foo" data-role="page">
+	<div data-role="fieldcontain" id="select-choice-few-container">
+		<select name="select-choice-few" id="select-choice-few">
+			<option value="standard">Standard: 7 day</option>
+			<option value="rush">Rush: 3 days</option>
+			<option value="express">Express: next day</option>
+			<option value="overnight">Overnight</option>
+		</select>
+	</div>
+
+	<div data-role="fieldcontain" id="select-choice-native-container">
+		<select name="select-choice-native" id="select-choice-native" data-native-menu="true">
+			<option value="standard">Standard: 7 day</option>
+			<option value="rush">Rush: 3 days</option>
+			<option value="express">Express: next day</option>
+			<option value="overnight">Overnight</option>
+		</select>
+	</div>
+
+	<div data-role="fieldcontain" id="select-choice-global-native-container">
+		<select name="select-choice-global-native" id="select-choice-global-native">
+			<option value="standard">Standard: 7 day</option>
+			<option value="rush">Rush: 3 days</option>
+			<option value="express">Express: next day</option>
+			<option value="overnight">Overnight</option>
+		</select>
+	</div>
+
 	<div data-role="fieldcontain" id="select-choice-many-container">
 		<label for="select-choice-many" class="select">Your state:</label>
 		<select name="select-choice-many" id="select-choice-many">

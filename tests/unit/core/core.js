@@ -108,7 +108,7 @@
 			var firstPage = findFirstPage();
 			$.testHelper.reloadLib(libName);
 
-			same($.mobile.startPage, firstPage);
+			same($.mobile.firstPage, firstPage);
 			same($.mobile.activePage, firstPage);
 		});
 

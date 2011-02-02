@@ -18,7 +18,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		menuPageTheme: 'b',
 		overlayTheme: 'a',
 		hidePlaceholderMenuItems: true,
-		closeText: 'Close'
+		closeText: 'Close',
+		nativeMenu: false
 	},
 	_create: function(){
 
@@ -27,7 +28,6 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			o = this.options,
 
 			select = this.element
-						.attr( "tabindex", "-1" )
 						.wrap( "<div class='ui-select'>" ),
 
 			selectID = select.attr( "id" ),
@@ -155,43 +155,69 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		select
 			.change(function(){
 				self.refresh();
-			})
-			.focus(function(){
-				$(this).blur();
-				button.focus();
 			});
 
-		//button events
-		button
-			.bind( "touchstart" ,function( event ){
-				//set startTouches to cached copy of
-				$( this ).data( "startTouches", $.extend({}, event.originalEvent.touches[ 0 ]) );
-			})
-			.bind( $.support.touch ? "touchend" : "mouseup" , function( event ){
-				//if it's a scroll, don't open
-				if( $( this ).data( "moved" ) ){
-					$( this ).removeData( "moved" );
-				}
-				else{
-					self.open();
-				}
-				event.preventDefault();
-			})
-			.bind( "touchmove", function( event ){
-				//if touch moved enough, set data moved and don't open menu
-				var thisTouches = event.originalEvent.touches[ 0 ],
+		//support for using the native select menu with a custom button
+		if( o.nativeMenu ){
+
+			select
+				.appendTo(button)
+				.bind( "touchstart mousedown", function( e ){
+					//add active class to button
+					button.addClass( $.mobile.activeBtnClass );
+
+					//ensure button isn't clicked
+					e.stopPropagation();
+				})
+				.bind( "focus mouseover", function(){
+					button.trigger( "mouseover" );
+				})
+				.bind( "blur mouseout", function(){
+					button
+						.trigger( "mouseout" )
+						.removeClass( $.mobile.activeBtnClass );
+				});
+
+			button.attr( "tabindex", "-1" );
+		} else {
+
+			select
+				.attr( "tabindex", "-1" )
+				.focus(function(){
+					$(this).blur();
+					button.focus();
+				});
+
+			//button events
+			button
+				.bind( "touchstart" , function( event ){
+					//set startTouches to cached copy of
+					$( this ).data( "startTouches", $.extend({}, event.originalEvent.touches[ 0 ]) );
+				})
+				.bind( $.support.touch ? "touchend" : "mouseup" , function( event ){
+					//if it's a scroll, don't open
+					if( $( this ).data( "moved" ) ){
+						$( this ).removeData( "moved" );
+					} else {
+						self.open();
+					}
+					event.preventDefault();
+				})
+				.bind( "touchmove", function( event ){
+					//if touch moved enough, set data moved and don't open menu
+					var thisTouches = event.originalEvent.touches[ 0 ],
 					startTouches = $( this ).data( "startTouches" ),
 					deltaX = Math.abs(thisTouches.pageX - startTouches.pageX),
 					deltaY = Math.abs(thisTouches.pageY - startTouches.pageY);
 
-				if( deltaX > 10 || deltaY > 10 ){
-					$( this ).data( "moved", true );
-				}
-			});
+					if( deltaX > 10 || deltaY > 10 ){
+						$( this ).data( "moved", true );
+					}
+				});
+		}
 
 		//events for list items
 		list.delegate("li:not(.ui-disabled, .ui-li-divider)", "click", function(event){
-
 			// clicking on the list item fires click on the link in listview.js.
 			// to prevent this handler from firing twice if the link isn't clicked on,
 			// short circuit unless the target is the link
@@ -224,23 +250,28 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		});
 
 		//events on "screen" overlay + close button
-		screen.add( headerClose ).add( menuPageClose ).click(function(event){
-			self.close();
-			event.preventDefault();
+		screen
+			.add( headerClose )
+			.add( menuPageClose )
+			.bind("click", function(event){
+				self.close();
+				event.preventDefault();
 
-			// if the dialog's close icon was clicked, prevent the dialog's close
-			// handler from firing. selectmenu's should take precedence
-			if( $.contains(menuPageClose[0], event.target) ){
-				event.stopImmediatePropagation();
-			}
-		});
+				// if the dialog's close icon was clicked, prevent the dialog's close
+				// handler from firing. selectmenu's should take precedence
+				if( $.contains(menuPageClose[0], event.target) ){
+					event.stopImmediatePropagation();
+				}
+			});
 	},
 
 	_buildList: function(){
 		var self = this,
-			optgroups = [],
 			o = this.options,
-			placeholder = this.placeholder;
+			placeholder = this.placeholder,
+			optgroups = [],
+			lis = [],
+			dataIcon = self.isMultiple ? "checkbox-off" : "false";
 
 		self.list.empty().filter('.ui-listview').listview('destroy');
 
@@ -248,7 +279,10 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		self.select.find( "option" ).each(function( i ){
 			var $this = $(this),
 				$parent = $this.parent(),
-				text = $this.text();
+				text = $this.text(),
+				anchor = "<a href='#'>"+ text +"</a>",
+				classes = [],
+				extraAttrs = [];
 
 			// are we inside an optgroup?
 			if( $parent.is("optgroup") ){
@@ -256,46 +290,29 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 				// has this optgroup already been built yet?
 				if( $.inArray(optLabel, optgroups) === -1 ){
-					$("<li>", {
-						"data-role":"list-divider",
-						"text": optLabel
-					}).appendTo( self.list );
-
+					lis.push( "<li data-role='list-divider'>"+ optLabel +"</li>" );
 					optgroups.push( optLabel );
 				}
 			}
-
-			var anchor = $("<a>", {
-				"role": "",
-				"href": "#",
-				"text": text
-			}),
-
-			item = $( "<li>", { "data-icon": false });
-
+			
+			//find placeholder text
 			if( !this.getAttribute('value') || text.length == 0 || $this.data('placeholder') ){
 				if( o.hidePlaceholderMenuItems ){
-					item.addClass('ui-selectmenu-placeholder');
+					classes.push( "ui-selectmenu-placeholder" );
 				}
-
 				placeholder = self.placeholder = text;
-			}
-
-			// multiple select defaults
-			if( self.isMultiple ){
-				item.data('icon', 'checkbox-off');
 			}
 
 			// support disabled option tags
 			if( this.disabled ){
-				item.addClass("ui-disabled")
-					.attr("aria-disabled", true);
+				classes.push( "ui-disabled" );
+				extraAttrs.push( "aria-disabled='true'" );
 			}
 
-			item
-				.append( anchor )
-				.appendTo( self.list );
+			lis.push( "<li data-icon='"+ dataIcon +"' class='"+ classes.join(" ") + "' " + extraAttrs.join(" ") +">"+ anchor +"</li>" )
 		});
+		
+		self.list.html( lis.join(" ") );
 
 		// hide header close link for single selects
 		if( !this.isMultiple ){
@@ -395,11 +412,18 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				});
 			}
 
-			self.menuPage.one('pageshow',focusMenuItem);
+			self.menuPage.one('pageshow', function() {
+				// silentScroll() is called whenever a page is shown to restore
+				// any previous scroll position the page may have had. We need to
+				// wait for the "silentscroll" event before setting focus to avoid
+				// the browser's "feature" which offsets rendering to make sure
+				// whatever has focus is in view.
+				$(window).one("silentscroll", function(){ focusMenuItem(); });
+			});
 
 			self.menuType = "page";
 			self.menuPageContent.append( self.list );
-			$.mobile.changePage(self.menuPage, 'pop', false, false);
+			$.mobile.changePage(self.menuPage, 'pop', false, true);
 		}
 		else {
 			self.menuType = "overlay";
@@ -408,23 +432,43 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				.height( $(document).height() )
 				.removeClass('ui-screen-hidden');
 
+			//try and center the overlay over the button
+			var roomtop = btnOffset - scrollTop,
+				roombot = scrollTop + screenHeight - btnOffset,
+				halfheight = menuHeight / 2,
+				newtop,newleft;
+				
+				if( roomtop > menuHeight / 2 && roombot > menuHeight / 2 ){
+					newtop = btnOffset + ( self.button.outerHeight() / 2 ) - halfheight;
+				}
+				else{
+					//30px tolerance off the edges
+					newtop = roomtop > roombot ? scrollTop + screenHeight - menuHeight - 30 : scrollTop + 30;
+				}
+				
+				newleft = self.button.offset().left + self.button.outerWidth() / 2 - menuWidth / 2;
+				
+
 			self.listbox
 				.append( self.list )
 				.removeClass( "ui-selectmenu-hidden" )
-				.position({
-					my: "center center",
-					at: "center center",
-					of: self.button,
-					collision: "fit"
+				.css({
+					top: newtop,
+					left: newleft
 				})
 				.addClass("in");
 
 			focusMenuItem();
 		}
+
+		// wait before the dialog can be closed
+		setTimeout(function(){
+		 	self.isOpen = true;
+		}, 400);
 	},
 
 	close: function(){
-		if( this.options.disabled ){ return; }
+		if( this.options.disabled || !this.isOpen ){ return; }
 		var self = this;
 
 		function focusButton(){
@@ -448,6 +492,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			focusButton();
 		}
 
+		// allow the dialog to be closed again
+		this.isOpen = false;
 	},
 
 	disable: function(){

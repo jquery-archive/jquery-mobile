@@ -10,7 +10,6 @@ $elements = array(
 	'jquery.mobile.page.js',
 	'jquery.mobile.core.js',
 	'jquery.mobile.navigation.js',
-	'jquery.ui.position.js',
 	'jquery.mobile.fixHeaderFooter.js',
 	'jquery.mobile.forms.checkboxradio.js',
 	'jquery.mobile.forms.textinput.js',
