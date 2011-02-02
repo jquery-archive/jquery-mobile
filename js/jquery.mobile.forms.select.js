@@ -44,13 +44,13 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 			thisPage = select.closest( ".ui-page" ),
 
-			button = $( "<a>", {
+			button = ( self.options.nativeMenu ? $( "<div/>" ) : $( "<a>", {
 					"href": "#",
 					"role": "button",
 					"id": buttonId,
 					"aria-haspopup": "true",
 					"aria-owns": menuId
-				})
+				}) )
 				.text( $( select[0].options.item(select[0].selectedIndex) ).text() )
 				.insertBefore( select )
 				.buttonMarkup({
@@ -145,9 +145,6 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			placeholder: ''
 		});
 
-		//create list from select, update state
-		self.refresh();
-
 		//disable if specified
 		if( o.disabled ){ this.disable(); }
 
@@ -180,6 +177,9 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 			button.attr( "tabindex", "-1" );
 		} else {
+		
+			//create list from select, update state
+			self.refresh();
 
 			select
 				.attr( "tabindex", "-1" )
@@ -214,55 +214,56 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 						$( this ).data( "moved", true );
 					}
 				});
-		}
-
-		//events for list items
-		list.delegate("li:not(.ui-disabled, .ui-li-divider)", "click", function(event){
-			// clicking on the list item fires click on the link in listview.js.
-			// to prevent this handler from firing twice if the link isn't clicked on,
-			// short circuit unless the target is the link
-			if( !$(event.target).is("a") ){ return; }
-
-			// index of option tag to be selected
-			var newIndex = list.find( "li:not(.ui-li-divider)" ).index( this ),
-				option = self.optionElems.eq( newIndex )[0];
-
-			// toggle selected status on the tag for multi selects
-			option.selected = isMultiple ? !option.selected : true;
-
-			// toggle checkbox class for multiple selects
-			if( isMultiple ){
-				$(this)
-					.find('.ui-icon')
-					.toggleClass('ui-icon-checkbox-on', option.selected)
-					.toggleClass('ui-icon-checkbox-off', !option.selected);
-			}
-
-			// trigger change
-			select.trigger( "change" );
-
-			//hide custom select for single selects only
-			if( !isMultiple ){
-				self.close();
-			}
-
-			event.preventDefault();
-		});
-
-		//events on "screen" overlay + close button
-		screen
-			.add( headerClose )
-			.add( menuPageClose )
-			.bind("click", function(event){
-				self.close();
-				event.preventDefault();
-
-				// if the dialog's close icon was clicked, prevent the dialog's close
-				// handler from firing. selectmenu's should take precedence
-				if( $.contains(menuPageClose[0], event.target) ){
-					event.stopImmediatePropagation();
+		
+	
+			//events for list items
+			list.delegate("li:not(.ui-disabled, .ui-li-divider)", "click", function(event){
+				// clicking on the list item fires click on the link in listview.js.
+				// to prevent this handler from firing twice if the link isn't clicked on,
+				// short circuit unless the target is the link
+				if( !$(event.target).is("a") ){ return; }
+	
+				// index of option tag to be selected
+				var newIndex = list.find( "li:not(.ui-li-divider)" ).index( this ),
+					option = self.optionElems.eq( newIndex )[0];
+	
+				// toggle selected status on the tag for multi selects
+				option.selected = isMultiple ? !option.selected : true;
+	
+				// toggle checkbox class for multiple selects
+				if( isMultiple ){
+					$(this)
+						.find('.ui-icon')
+						.toggleClass('ui-icon-checkbox-on', option.selected)
+						.toggleClass('ui-icon-checkbox-off', !option.selected);
 				}
+	
+				// trigger change
+				select.trigger( "change" );
+	
+				//hide custom select for single selects only
+				if( !isMultiple ){
+					self.close();
+				}
+	
+				event.preventDefault();
 			});
+	
+			//events on "screen" overlay + close button
+			screen
+				.add( headerClose )
+				.add( menuPageClose )
+				.bind("click", function(event){
+					self.close();
+					event.preventDefault();
+	
+					// if the dialog's close icon was clicked, prevent the dialog's close
+					// handler from firing. selectmenu's should take precedence
+					if( $.contains(menuPageClose[0], event.target) ){
+						event.stopImmediatePropagation();
+					}
+				});
+		}	
 	},
 
 	_buildList: function(){
@@ -342,7 +343,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				return options.index( this );
 			}).get();
 
-		if( forceRebuild || select[0].options.length > self.list.find('li').length ){
+		if( forceRebuild || select[0].options.length > self.list.find('li').length && !self.options.nativeMenu ){
 			self._buildList();
 		}
 
@@ -362,28 +363,30 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		if( isMultiple ){
 			self.buttonCount[ selected.length > 1 ? 'show' : 'hide' ]().text( selected.length );
 		}
-
-		self.list
-			.find( 'li:not(.ui-li-divider)' )
-			.removeClass( $.mobile.activeBtnClass )
-			.attr( 'aria-selected', false )
-			.each(function( i ){
-				if( $.inArray(i, indicies) > -1 ){
-					var item = $(this).addClass( $.mobile.activeBtnClass );
-
-					// aria selected attr
-					item.find( 'a' ).attr( 'aria-selected', true );
-
-					// multiple selects: add the "on" checkbox state to the icon
-					if( isMultiple ){
-						item.find('.ui-icon').removeClass('ui-icon-checkbox-off').addClass('ui-icon-checkbox-on');
+		
+		if( !self.options.nativeMenu ){
+			self.list
+				.find( 'li:not(.ui-li-divider)' )
+				.removeClass( $.mobile.activeBtnClass )
+				.attr( 'aria-selected', false )
+				.each(function( i ){
+					if( $.inArray(i, indicies) > -1 ){
+						var item = $(this).addClass( $.mobile.activeBtnClass );
+	
+						// aria selected attr
+						item.find( 'a' ).attr( 'aria-selected', true );
+	
+						// multiple selects: add the "on" checkbox state to the icon
+						if( isMultiple ){
+							item.find('.ui-icon').removeClass('ui-icon-checkbox-off').addClass('ui-icon-checkbox-on');
+						}
 					}
-				}
-			});
+				});
+		}	
 	},
 
 	open: function(){
-		if( this.options.disabled ){ return; }
+		if( this.options.disabled || this.options.nativeMenu ){ return; }
 
 		var self = this,
 			menuHeight = self.list.outerHeight(),
@@ -461,7 +464,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 	},
 
 	close: function(){
-		if( this.options.disabled || !this.isOpen ){ return; }
+		if( this.options.disabled || !this.isOpen || this.options.nativeMenu ){ return; }
 		var self = this;
 
 		function focusButton(){
