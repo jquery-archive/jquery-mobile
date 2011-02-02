@@ -205,7 +205,7 @@
 	//dom-ready inits
 	// make sure pageLoading is called with false (not done)
 	$(function(){ 
-		$.mobile.pageLoading(false);
+		$.mobile.pageLoading( false );
 	});
 	if( $.mobile.autoInitialize ){
 		$.mobile.initializePage();
