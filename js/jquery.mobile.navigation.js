@@ -317,7 +317,7 @@
 		if(base){ base.reset(); }
 
 		//kill the keyboard
-		$( window.document.activeElement ).add('input:focus, textarea:focus').blur();
+		$( window.document.activeElement ).add( "input:focus, textarea:focus, select:focus" ).blur();
 
 		function defaultTransition(){
 			if(transition === undefined){
