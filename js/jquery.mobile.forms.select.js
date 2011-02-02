@@ -29,20 +29,10 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 			select = this.element
 						.wrap( "<div class='ui-select'>" ),
-
-			selectID = select.attr( "id" ),
-
-			isMultiple = self.isMultiple = select[0].multiple,
-
-			options = select.find("option"),
-
+			
+			selectID = select.attr( "id" ),			
+			
 			label = $( "label[for="+ selectID +"]" ).addClass( "ui-select" ),
-
-			buttonId = selectID + "-button",
-
-			menuId = selectID + "-menu",
-
-			thisPage = select.closest( ".ui-page" ),
 
 			button = ( self.options.nativeMenu ? $( "<div/>" ) : $( "<a>", {
 					"href": "#",
@@ -62,58 +52,73 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					shadow: o.shadow,
 					iconshadow: o.iconshadow
 				}),
-
-			theme = /ui-btn-up-([a-z])/.exec( button.attr("class") )[1],
-
-			menuPage = $( "<div data-role='dialog' data-theme='"+ o.menuPageTheme +"'>" +
-						"<div data-role='header'>" +
-							"<div class='ui-title'>" + label.text() + "</div>"+
-						"</div>"+
-						"<div data-role='content'></div>"+
-					"</div>" )
-					.appendTo( $.mobile.pageContainer )
-					.page(),
-
-			menuPageContent = menuPage.find( ".ui-content" ),
-
-			menuPageClose = menuPage.find( ".ui-header a" ),
-
-			screen = $( "<div>", {"class": "ui-selectmenu-screen ui-screen-hidden"})
-						.appendTo( thisPage ),
-
-			listbox = $( "<div>", { "class": "ui-selectmenu ui-selectmenu-hidden ui-overlay-shadow ui-corner-all pop ui-body-" + o.overlayTheme } )
-					.insertAfter(screen),
-
-			list = $( "<ul>", {
-					"class": "ui-selectmenu-list",
-					"id": menuId,
-					"role": "listbox",
-					"aria-labelledby": buttonId,
-					"data-theme": theme
-				})
-				.appendTo( listbox ),
-
-			header = $( "<div>", {
-					"class": "ui-header ui-bar-" + theme
-				})
-				.prependTo( listbox ),
-
-			headerTitle = $( "<h1>", {
-					"class": "ui-title"
-				})
-				.appendTo( header ),
-
-			headerClose = $( "<a>", {
-					"data-iconpos": "notext",
-					"data-icon": "delete",
-					"text": o.closeText,
-					"href": "#",
-					"class": "ui-btn-left"
-				})
-				.appendTo( header )
-				.buttonMarkup(),
-
-			menuType;
+			
+			//multi select or not
+			isMultiple = self.isMultiple = select[0].multiple;
+			
+			//vars for non-native menus
+		if( !o.nativeMenu ){	
+			var options = select.find("option"),
+				
+				buttonId = selectID + "-button",
+	
+				menuId = selectID + "-menu",
+	
+				thisPage = select.closest( ".ui-page" ),
+				
+				//button theme
+				theme = /ui-btn-up-([a-z])/.exec( button.attr("class") )[1],
+	
+				menuPage = $( "<div data-role='dialog' data-theme='"+ o.menuPageTheme +"'>" +
+							"<div data-role='header'>" +
+								"<div class='ui-title'>" + label.text() + "</div>"+
+							"</div>"+
+							"<div data-role='content'></div>"+
+						"</div>" )
+						.appendTo( $.mobile.pageContainer )
+						.page(),
+	
+				menuPageContent = menuPage.find( ".ui-content" ),
+	
+				menuPageClose = menuPage.find( ".ui-header a" ),
+	
+				screen = $( "<div>", {"class": "ui-selectmenu-screen ui-screen-hidden"})
+							.appendTo( thisPage ),
+	
+				listbox = $( "<div>", { "class": "ui-selectmenu ui-selectmenu-hidden ui-overlay-shadow ui-corner-all pop ui-body-" + o.overlayTheme } )
+						.insertAfter(screen),
+	
+				list = $( "<ul>", {
+						"class": "ui-selectmenu-list",
+						"id": menuId,
+						"role": "listbox",
+						"aria-labelledby": buttonId,
+						"data-theme": theme
+					})
+					.appendTo( listbox ),
+	
+				header = $( "<div>", {
+						"class": "ui-header ui-bar-" + theme
+					})
+					.prependTo( listbox ),
+	
+				headerTitle = $( "<h1>", {
+						"class": "ui-title"
+					})
+					.appendTo( header ),
+	
+				headerClose = $( "<a>", {
+						"data-iconpos": "notext",
+						"data-icon": "delete",
+						"text": o.closeText,
+						"href": "#",
+						"class": "ui-btn-left"
+					})
+					.appendTo( header )
+					.buttonMarkup(),
+	
+				menuType;
+		} //end non native vars	
 
 		// add counter for multi selects
 		if( isMultiple ){
@@ -123,6 +128,15 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				.appendTo( button );
 		}
 
+		//disable if specified
+		if( o.disabled ){ this.disable(); }
+
+		//events on native select
+		select
+			.change(function(){
+				self.refresh();
+			});
+			
 		//expose to other methods
 		$.extend(self, {
 			select: select,
@@ -143,16 +157,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			headerClose:headerClose,
 			headerTitle:headerTitle,
 			placeholder: ''
-		});
-
-		//disable if specified
-		if( o.disabled ){ this.disable(); }
-
-		//events on native select
-		select
-			.change(function(){
-				self.refresh();
-			});
+		});	
 
 		//support for using the native select menu with a custom button
 		if( o.nativeMenu ){
@@ -264,6 +269,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					}
 				});
 		}	
+		
+		
 	},
 
 	_buildList: function(){
@@ -343,7 +350,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				return options.index( this );
 			}).get();
 
-		if( forceRebuild || select[0].options.length > self.list.find('li').length && !self.options.nativeMenu ){
+		if( !self.options.nativeMenu && forceRebuild || select[0].options.length > self.list.find('li').length ){
 			self._buildList();
 		}
 
