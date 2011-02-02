@@ -55,6 +55,14 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			
 			//multi select or not
 			isMultiple = self.isMultiple = select[0].multiple;
+		
+		//Opera does not properly support opacity on select elements
+		//In Mini, it hides the element, but not its text
+		//On the desktop,it seems to do the opposite
+		//for these reasons, using the nativeMenu option results in a full native select in Opera
+		if( o.nativeMenu && window.opera && window.opera.version ){
+			select.addClass( "ui-select-nativeonly" );
+		}	
 			
 			//vars for non-native menus
 		if( !o.nativeMenu ){	
