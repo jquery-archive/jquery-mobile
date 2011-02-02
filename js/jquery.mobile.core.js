@@ -206,9 +206,7 @@
 
 	//dom-ready inits
 	if($.mobile.autoInitialize){
-		$(function(){
-			$.mobile.initializePage();
-		});
+		$($.mobile.initializePage);
 	}
 
 
