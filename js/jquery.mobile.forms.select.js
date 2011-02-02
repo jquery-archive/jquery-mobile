@@ -168,13 +168,11 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					//add active class to button
 					button.addClass( $.mobile.activeBtnClass );
 
-					//ensure button isn't clicked
-					e.stopPropagation();
 				})
 				.bind( "focus mouseover", function(){
 					button.trigger( "mouseover" );
 				})
-				.bind( "blur mouseout", function(){
+				.bind( "change blur mouseout", function(){
 					button
 						.trigger( "mouseout" )
 						.removeClass( $.mobile.activeBtnClass );
