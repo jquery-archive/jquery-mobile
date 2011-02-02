@@ -57,6 +57,9 @@
 		gradeA: function(){
 			return $.support.mediaquery;
 		},
+		
+		//automatically initialize first pages or not.
+		autoInitialize: true,
 
 		//TODO might be useful upstream in jquery itself ?
 		keyCode: {
@@ -167,37 +170,44 @@
 			setTimeout(function() {
 				$.event.special.scrollstart.enabled = true;
 			}, 150 );
+		},
+		
+		// find and enhance the pages in the dom and transition to the first page.
+		initializePage: function(){
+			//find present pages
+			var $pages = $( "[data-role='page']" );
+
+			//add dialogs, set data-url attrs
+			$pages.add( "[data-role='dialog']" ).each(function(){
+				$(this).attr( "data-url", $(this).attr( "id" ));
+			});
+
+			//define first page in dom case one backs out to the directory root (not always the first page visited, but defined as fallback)
+			$.mobile.firstPage = $pages.first();
+
+			//define page container
+			$.mobile.pageContainer = $pages.first().parent().addClass( "ui-mobile-viewport" );
+
+			//cue page loading message
+			$.mobile.pageLoading();
+
+			// if hashchange listening is disabled or there's no hash deeplink, change to the first page in the DOM 
+			if( !$.mobile.hashListeningEnabled || !$.mobile.path.stripHash( location.hash ) ){
+				$.mobile.changePage( $.mobile.firstPage, false, true, false, true );
+			}
+			// otherwise, trigger a hashchange to load a deeplink
+			else {
+				$window.trigger( "hashchange", [ true ] );
+			}
 		}
 	});
 
 	//dom-ready inits
-	$(function(){
-		//find present pages
-		var $pages = $( "[data-role='page']" );
-		
-		//add dialogs, set data-url attrs
-		$pages.add( "[data-role='dialog']" ).each(function(){
-			$(this).attr( "data-url", $(this).attr( "id" ));
+	if($.mobile.autoInitialize){
+		$(function(){
+			$.mobile.initializePage();
 		});
-		
-		//define first page in dom case one backs out to the directory root (not always the first page visited, but defined as fallback)
-		$.mobile.firstPage = $pages.first();
-		
-		//define page container
-		$.mobile.pageContainer = $pages.first().parent().addClass( "ui-mobile-viewport" );
-		
-		//cue page loading message
-		$.mobile.pageLoading();
-		
-		// if hashchange listening is disabled or there's no hash deeplink, change to the first page in the DOM	
-		if( !$.mobile.hashListeningEnabled || !$.mobile.path.stripHash( location.hash ) ){
-			$.mobile.changePage( $.mobile.firstPage, false, true, false, true );
-		}
-		// otherwise, trigger a hashchange to load a deeplink
-		else {
-			$window.trigger( "hashchange", [ true ] );
-		}
-	});
+	}
 
 
 	//window load event
