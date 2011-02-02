@@ -155,6 +155,7 @@
 
 			ok($("html").hasClass("ui-mobile-rendering"), "Still in rendering state after library load.");
 			ok($("html").hasClass("ui-loading"), "pageLoading executed successfully");
+			ok($(".ui-loader").length, "loader is present");
 			$.mobile.initializePage();
 			ok(!$("html").hasClass("ui-mobile-rendering"), "Rendered ok after call to initializePage");
 			ok(!$("html").hasClass("ui-loading"), "pageLoading removed loading class");
