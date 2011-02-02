@@ -53,4 +53,8 @@
 	test( "selects marked with data-native-menu=true should not have a custom menu", function(){
 		same($("#select-choice-native-container ul").length, 0);
 	});
+	
+	test( "selects marked with data-native-menu=true should sit inside the button", function(){
+		same($("#select-choice-native-container div.ui-btn select").length, 1);
+	});
 })(jQuery);
