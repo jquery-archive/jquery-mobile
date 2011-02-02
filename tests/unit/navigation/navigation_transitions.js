@@ -40,6 +40,12 @@
 					}
 				};
 				checkTransitionStack();
+			},
+			
+			//wipe all urls
+			clearUrlHistory = function(){
+				$.mobile.urlHistory.stack = [];
+				$.mobile.urlHistory.activeIndex = 0;
 			};
 			
 
@@ -60,7 +66,7 @@
 	
 	QUnit.testStart = function (name) {
 		clearPageTransitionStack();
-		$.mobile.urlHistory.clear();
+		clearUrlHistory();
 	};
 	
 	test( "changePage applys perspective class to mobile viewport for flip", function(){
