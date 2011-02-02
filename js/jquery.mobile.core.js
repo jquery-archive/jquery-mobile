@@ -207,6 +207,7 @@
 	$(function(){ 
 		$.mobile.pageLoading( false );
 	});
+	
 	if( $.mobile.autoInitialize ){
 		$.mobile.initializePage();
 	}
