@@ -55,8 +55,5 @@
 		stop();
 	});
 
-	test( "selects marked with data-native-menu=true should not bring up the custom menu", function(){
-		$("#select-choice-native-button").trigger(mouseUpTouchEnd);
-		same($("#select-choice-native-menu").parent(".ui-selectmenu-hidden").length, 1);
-	});
+	
 })(jQuery);
