@@ -267,9 +267,11 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 	_buildList: function(){
 		var self = this,
-			optgroups = [],
 			o = this.options,
-			placeholder = this.placeholder;
+			placeholder = this.placeholder,
+			optgroups = [],
+			lis = [],
+			dataIcon = self.isMultiple ? "checkbox-off" : "false";
 
 		self.list.empty().filter('.ui-listview').listview('destroy');
 
@@ -277,7 +279,10 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		self.select.find( "option" ).each(function( i ){
 			var $this = $(this),
 				$parent = $this.parent(),
-				text = $this.text();
+				text = $this.text(),
+				anchor = "<a href='#'>"+ text +"</a>",
+				classes = [],
+				extraAttrs = [];
 
 			// are we inside an optgroup?
 			if( $parent.is("optgroup") ){
@@ -285,46 +290,29 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 				// has this optgroup already been built yet?
 				if( $.inArray(optLabel, optgroups) === -1 ){
-					$("<li>", {
-						"data-role":"list-divider",
-						"text": optLabel
-					}).appendTo( self.list );
-
+					lis.push( "<li data-role='list-divider'>"+ optLabel +"</li>" );
 					optgroups.push( optLabel );
 				}
 			}
-
-			var anchor = $("<a>", {
-				"role": "",
-				"href": "#",
-				"text": text
-			}),
-
-			item = $( "<li>", { "data-icon": false });
-
+			
+			//find placeholder text
 			if( !this.getAttribute('value') || text.length == 0 || $this.data('placeholder') ){
 				if( o.hidePlaceholderMenuItems ){
-					item.addClass('ui-selectmenu-placeholder');
+					classes.push( "ui-selectmenu-placeholder" );
 				}
-
 				placeholder = self.placeholder = text;
-			}
-
-			// multiple select defaults
-			if( self.isMultiple ){
-				item.data('icon', 'checkbox-off');
 			}
 
 			// support disabled option tags
 			if( this.disabled ){
-				item.addClass("ui-disabled")
-					.attr("aria-disabled", true);
+				classes.push( "ui-disabled" );
+				extraAttrs.push( "aria-disabled='true'" );
 			}
 
-			item
-				.append( anchor )
-				.appendTo( self.list );
+			lis.push( "<li data-icon='"+ dataIcon +"' class='"+ classes.join(" ") + "' " + extraAttrs.join(" ") +">"+ anchor +"</li>" )
 		});
+		
+		self.list.html( lis.join(" ") );
 
 		// hide header close link for single selects
 		if( !this.isMultiple ){
