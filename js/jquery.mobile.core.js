@@ -190,8 +190,10 @@
 			//define page container
 			$.mobile.pageContainer = $pages.first().parent().addClass( "ui-mobile-viewport" );
 
-			//cue page loading message
-			$.mobile.pageLoading();
+			//cue page loading message. pageLoading is already called on dom-ready when autoInitialize is false.
+			if( $.mobile.autoInitialize ){
+				$.mobile.pageLoading();
+			}
 
 			// if hashchange listening is disabled or there's no hash deeplink, change to the first page in the DOM
 			if( !$.mobile.hashListeningEnabled || !$.mobile.path.stripHash( location.hash ) ){
@@ -205,8 +207,13 @@
 	});
 
 	//dom-ready inits
-	if($.mobile.autoInitialize){
-		$($.mobile.initializePage);
+	if( $.mobile.autoInitialize ){
+		$( $.mobile.initializePage );
+	} else {
+		// make sure pageLoading is called with false (not done)
+		$(function(){ 
+			$.mobile.pageLoading(false);
+		});
 	}
 
 

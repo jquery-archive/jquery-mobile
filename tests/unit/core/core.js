@@ -152,10 +152,12 @@
 			});
 
 			$.testHelper.reloadLib(libName);
-			
+
 			ok($("html").hasClass("ui-mobile-rendering"), "Still in rendering state after library load.");
+			ok($("html").hasClass("ui-loading"), "pageLoading executed successfully");
 			$.mobile.initializePage();
 			ok(!$("html").hasClass("ui-mobile-rendering"), "Rendered ok after call to initializePage");
+			ok(!$("html").hasClass("ui-loading"), "pageLoading removed loading class");
 		});
 	});
 })(jQuery);
