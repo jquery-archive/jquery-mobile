@@ -29,7 +29,7 @@
 
 		//automatically handle clicks and form submissions through Ajax, when same-domain
 		ajaxEnabled: true,
-		
+
 		//automatically load and show pages based on location.hash
 		hashListeningEnabled: true,
 
@@ -57,6 +57,9 @@
 		gradeA: function(){
 			return $.support.mediaquery;
 		},
+
+		//automatically initialize first pages or not.
+		autoInitialize: true,
 
 		//TODO might be useful upstream in jquery itself ?
 		keyCode: {
@@ -141,16 +144,16 @@
 			} else {
 				if( $.mobile.loadingMessage ){
 					var activeBtn =$( "." + $.mobile.activeBtnClass ).first();
-							
+
 					$loader
 						.appendTo( $.mobile.pageContainer )
 						//position at y center (if scrollTop supported), above the activeBtn (if defined), or just 100px from top
 						.css( {
-							top: $.support.scrollTop && $(window).scrollTop() + $(window).height() / 2 ||  
+							top: $.support.scrollTop && $(window).scrollTop() + $(window).height() / 2 ||
 							activeBtn.length && activeBtn.offset().top || 100
 						} );
 				}
-				
+
 				$html.addClass( "ui-loading" );
 			}
 		},
@@ -160,44 +163,51 @@
 			ypos = ypos || 0;
 			// prevent scrollstart and scrollstop events
 			$.event.special.scrollstart.enabled = false;
+
 			setTimeout(function() {
 				window.scrollTo( 0, ypos );
 				$(document).trigger( "silentscroll", { x: 0, y: ypos });
 			},20);
+
 			setTimeout(function() {
 				$.event.special.scrollstart.enabled = true;
 			}, 150 );
+		},
+
+		// find and enhance the pages in the dom and transition to the first page.
+		initializePage: function(){
+			//find present pages
+			var $pages = $( "[data-role='page']" );
+
+			//add dialogs, set data-url attrs
+			$pages.add( "[data-role='dialog']" ).each(function(){
+				$(this).attr( "data-url", $(this).attr( "id" ));
+			});
+
+			//define first page in dom case one backs out to the directory root (not always the first page visited, but defined as fallback)
+			$.mobile.firstPage = $pages.first();
+
+			//define page container
+			$.mobile.pageContainer = $pages.first().parent().addClass( "ui-mobile-viewport" );
+
+			//cue page loading message
+			$.mobile.pageLoading();
+
+			// if hashchange listening is disabled or there's no hash deeplink, change to the first page in the DOM
+			if( !$.mobile.hashListeningEnabled || !$.mobile.path.stripHash( location.hash ) ){
+				$.mobile.changePage( $.mobile.firstPage, false, true, false, true );
+			}
+			// otherwise, trigger a hashchange to load a deeplink
+			else {
+				$window.trigger( "hashchange", [ true ] );
+			}
 		}
 	});
 
 	//dom-ready inits
-	$(function(){
-		//find present pages
-		var $pages = $( "[data-role='page']" );
-		
-		//add dialogs, set data-url attrs
-		$pages.add( "[data-role='dialog']" ).each(function(){
-			$(this).attr( "data-url", $(this).attr( "id" ));
-		});
-		
-		//define first page in dom case one backs out to the directory root (not always the first page visited, but defined as fallback)
-		$.mobile.firstPage = $pages.first();
-		
-		//define page container
-		$.mobile.pageContainer = $pages.first().parent().addClass( "ui-mobile-viewport" );
-		
-		//cue page loading message
-		$.mobile.pageLoading();
-		
-		// if hashchange listening is disabled or there's no hash deeplink, change to the first page in the DOM	
-		if( !$.mobile.hashListeningEnabled || !$.mobile.path.stripHash( location.hash ) ){
-			$.mobile.changePage( $.mobile.firstPage, false, true, false, true );
-		}
-		// otherwise, trigger a hashchange to load a deeplink
-		else {
-			$window.trigger( "hashchange", [ true ] );
-		}
-	});
+	if($.mobile.autoInitialize){
+		$($.mobile.initializePage);
+	}
 
 
 	//window load event
