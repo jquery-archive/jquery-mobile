@@ -125,14 +125,12 @@
 			ok(isTransitioningIn(firstPage), "first page begins transition");
 			ok(!isTransitioningIn(secondPage), "second page doesn't transition yet");
 			
+			finishPageTransition();
+			
 			setTimeout(function(){
-				finishPageTransition();
-				
-				setTimeout(function(){
-					ok(!isTransitioningIn(firstPage), "first page transition should be complete");
-					ok(isTransitioningIn(secondPage), "second page should begin transitioning");
-					start();
-				},0);
+				ok(!isTransitioningIn(firstPage), "first page transition should be complete");
+				ok(isTransitioningIn(secondPage), "second page should begin transitioning");
+				start();
 			},0);
 		},0);
 	});
