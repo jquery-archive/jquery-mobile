@@ -116,7 +116,13 @@
 			clearForward: function(){
 				urlHistory.stack = urlHistory.stack.slice( 0, urlHistory.activeIndex + 1 );
 			},
-
+			
+			//wipe all urls
+			clear: function(){
+				urlHistory.stack = [];
+				urlHistory.activeIndex = 0;
+			},
+			
 			//disable hashchange event listener internally to ignore one change
 			//toggled internally when location.hash is updated to match the url of a successful page load
 			ignoreNextHashChange: true
@@ -127,6 +133,12 @@
 
 		//contains role for next page, if defined on clicked link via data-rel
 		nextPageRole = null,
+
+		//queue to hold simultanious page transitions
+		pageTransitionQueue = [],
+
+		// indicates whether or not page is in process of transitioning
+		isPageTransitioning = false,
 
 		//nonsense hash change key for dialogs, so they create a history entry
 		dialogHashKey = "&ui-state=dialog";
@@ -267,6 +279,12 @@
 		if( currPage && urlHistory.stack.length > 1 && currPage.url === url && !toIsArray && !toIsObject ) {
 			return;
 		}
+		else if(isPageTransitioning) {
+			pageTransitionQueue.unshift(arguments);
+			return;
+		}
+		
+		isPageTransitioning = true;
 
 		// if the changePage was sent from a hashChange event
 		// guess if it came from the history menu
@@ -317,7 +335,7 @@
 		if(base){ base.reset(); }
 
 		//kill the keyboard
-		$( window.document.activeElement ).add('input:focus, textarea:focus').blur();
+		$( window.document.activeElement ).add( "input:focus, textarea:focus, select:focus" ).blur();
 
 		function defaultTransition(){
 			if(transition === undefined){
@@ -385,6 +403,11 @@
 				
 				//remove initial build class (only present on first pageshow)
 				$html.removeClass( "ui-mobile-rendering" );
+
+				isPageTransitioning = false
+				if(pageTransitionQueue.length>0) {
+					$.mobile.changePage.apply($.mobile, pageTransitionQueue.pop());
+				}
 			};
 
 			function addContainerClass(className){

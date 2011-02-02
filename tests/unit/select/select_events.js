@@ -24,15 +24,6 @@
 		same(menu.parents('.ui-dialog').length, 1);
 	});
 
-	test( "firing an immediate click on the select screen overlay doesn't close it", function(){
-		$.Event.prototype.originalEvent = {
-			touches: [ 'foo' ]
-		};
-
-		$("#select-choice-few-button").trigger(mouseUpTouchEnd);
-		$(".ui-selectmenu-screen").click();
-		same($("#select-choice-few-menu").parent(".ui-selectmenu-hidden").length, 0);
-	});
 
 	test( "firing a click at least 400 ms later on the select screen overlay does close it", function(){
 		$.Event.prototype.originalEvent = {
@@ -54,9 +45,16 @@
 
 		stop();
 	});
+	
+	test( "selects marked with data-native-menu=true should use a div as their button", function(){
+		same($("#select-choice-native-container div.ui-btn").length, 1);
+	});
 
-	test( "selects marked with data-native-menu=true should not bring up the custom menu", function(){
-		$("#select-choice-native-button").trigger(mouseUpTouchEnd);
-		same($("#select-choice-native-menu").parent(".ui-selectmenu-hidden").length, 1);
+	test( "selects marked with data-native-menu=true should not have a custom menu", function(){
+		same($("#select-choice-native-container ul").length, 0);
+	});
+	
+	test( "selects marked with data-native-menu=true should sit inside the button", function(){
+		same($("#select-choice-native-container div.ui-btn select").length, 1);
 	});
 })(jQuery);
