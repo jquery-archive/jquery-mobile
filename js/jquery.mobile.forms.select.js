@@ -171,6 +171,10 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				.bind( "focus mouseover", function(){
 					button.trigger( "mouseover" );
 				})
+				.bind( "touchmove", function(){
+					//remove active class on scroll/touchmove
+					button.removeClass( $.mobile.activeBtnClass );
+				})
 				.bind( "change blur mouseout", function(){
 					button
 						.trigger( "mouseout" )
