@@ -410,18 +410,11 @@
 
 				addContainerClass('ui-mobile-viewport-transitioning');
 
-				/* animate in / out
-				 * This is in a setTimeout because we were often seeing pages in not animate across but rather go straight to
-				 * the 'to' page.  The loadComplete would still fire, so the browser thought it was applying the animation.  From
-				 * what I could tell this was a problem with the classes not being applied yet.
-				 */ 
-				setTimeout(function() { 
-					if( from ){
-						from.addClass( transition + " out " + ( reverse ? "reverse" : "" ) );
-					}
-					to.addClass( $.mobile.activePageClass + " " + transition +
-						" in " + ( reverse ? "reverse" : "" ) ); 
-				} , 0);
+				if( from ){
+					from.addClass( transition + " out " + ( reverse ? "reverse" : "" ) );
+				}
+				to.addClass( $.mobile.activePageClass + " " + transition +
+					" in " + ( reverse ? "reverse" : "" ) );
 
 				// callback - remove classes, etc
 				to.animationComplete(function() {
@@ -541,7 +534,7 @@
 						.appendTo( $.mobile.pageContainer );
 
 					enhancePage();
-					transitionPages();
+					setTimeout(function() { transitionPages() }, 0);
 				},
 				error: function() {
 					$.mobile.pageLoading( true );
