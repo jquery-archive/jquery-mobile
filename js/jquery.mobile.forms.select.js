@@ -167,7 +167,6 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				.bind( "touchstart mousedown", function( e ){
 					//add active class to button
 					button.addClass( $.mobile.activeBtnClass );
-
 				})
 				.bind( "focus mouseover", function(){
 					button.trigger( "mouseover" );
