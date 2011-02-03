@@ -114,7 +114,11 @@ $.widget( "mobile.slider", $.mobile.widget, {
 							self.refresh( self.beforeStart === 0 ? 1 : 0 );
 						}
 						var curval = val();
-						var snapped = Math.round( curval / (max - min) * 100 );
+						if (step >= 1) {
+						  var snapped = Math.round( curval / (max - min) * 100 );
+						} else {
+						  var snapped = Math.round( curval / (max - min) * (100*1/step)) / (1/step);
+						}
 						handle
 							.addClass("ui-slider-handle-snapping")
 							.css("left", snapped + "%")
@@ -208,6 +212,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 					|| data.pageX > this.slider.offset().left + this.slider.width() + tol ) {
 				return;
 			}
+			
 			percent = Math.round( ((data.pageX - this.slider.offset().left) / this.slider.width() ) * 100 );
 		} else {
 			if ( val == null ) {
@@ -219,8 +224,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		if ( isNaN(percent) ) { return; }
 		if ( percent < 0 ) { percent = 0; }
 		if ( percent > 100 ) { percent = 100; }
-
-		var newval = Math.round( (percent / 100) * (max - min) ) + min;
+		var newval = ( (percent / 100) * (max - min) ) + min;
 		if ( newval < min ) { newval = min; }
 		if ( newval > max ) { newval = max; }
 
