@@ -754,7 +754,7 @@ a.ui-link-inherit {
 @media screen and (-webkit-min-device-pixel-ratio: 2), screen and (max--moz-device-pixel-ratio: 2) {
 	.ui-icon {
 	background-image: url(images/icons-36-white.png);
-	background-size: 558px 18px;
+	background-size: 630px 18px;
 }
 	.ui-icon-black {
 	background-image: url(images/icons-36-black.png);
@@ -816,6 +816,13 @@ a.ui-link-inherit {
 .ui-icon-info {
 	background-position: 	-540px 0;
 }
+.ui-icon-home {
+	background-position: 	-576px 0;
+}
+.ui-icon-search {
+	background-position: 	-612px 0;
+}
+
 
 /* checks,radios */
 .ui-icon-checkbox-off,
@@ -839,7 +846,7 @@ a.ui-link-inherit {
 .ui-icon-radio-on {
 	background-image: url(images/form-radio-on.png);
 }
-.ui-icon-search {
+.ui-icon-searchfield {
 	background-image: url(images/icon-search-black.png);
 	background-size: 16px 16px;
 }
