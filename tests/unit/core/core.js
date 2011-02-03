@@ -34,7 +34,7 @@
 		test( "loading the core library triggers mobilinit on the document", function(){
 			expect( 1 );
 
-			$(window.document).bind('mobileinit', function(event){
+			$(window.document).one('mobileinit', function(event){
 				ok(true);
 			});
 
@@ -119,12 +119,12 @@
 			ok(firstPage.parent().hasClass('ui-mobile-viewport'));
 		});
 
-				test( "mobile page container is the first page's parent", function(){
-					var firstPage = findFirstPage();
-					$.testHelper.reloadLib(libName);
+		test( "mobile page container is the first page's parent", function(){
+			var firstPage = findFirstPage();
+			$.testHelper.reloadLib(libName);
 
-					same($.mobile.pageContainer, firstPage.parent());
-				});
+			same($.mobile.pageContainer, firstPage.parent());
+		});
 
 		test( "page loading is called on document ready", function(){
 			$.testHelper.alterExtend({ pageLoading: function(){
@@ -144,6 +144,18 @@
 
 			stop();
 			$.testHelper.reloadLib(libName);
+		});
+
+		test( "auto initialization does not occur when set to false", function(){
+			$(window.document).one('mobileinit', function(event){
+				$.mobile.autoInitialize = false;
+			});
+
+			$.testHelper.reloadLib(libName);
+
+			ok($("html").hasClass("ui-mobile-rendering"), "Still in rendering state after library load.");
+			$.mobile.initializePage();
+			ok(!$("html").hasClass("ui-mobile-rendering"), "Rendered ok after call to initializePage");
 		});
 	});
 })(jQuery);

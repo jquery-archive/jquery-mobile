@@ -204,6 +204,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 						splittheme = $list.data( "splittheme" ) || last.data( "theme" ) || o.splitTheme;
 					
 					last
+						.appendTo(item)
 						.attr( "title", last.text() )
 						.addClass( "ui-li-link-alt" )
 						.empty()

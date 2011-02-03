@@ -34,7 +34,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			},
 			min = (cType == 'input') ? parseFloat(control.attr('min')) : 0,
 			max = (cType == 'input') ? parseFloat(control.attr('max')) : control.find('option').length-1,
-			step = window.parseFloat(control.attr('data-step') || 1),
+			step = window.parseFloat(control.attr('step') || 1),
 			slider = $('<div class="ui-slider '+ selectClass +' ui-btn-down-'+ trackTheme+' ui-btn-corner-all" role="application"></div>'),
 			handle = $('<a href="#" class="ui-slider-handle"></a>')
 				.appendTo(slider)
