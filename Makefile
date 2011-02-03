@@ -61,7 +61,7 @@ css:
 
 cssmin: css
 	@@head -8 js/jquery.mobile.core.js | ${SED_VER} > ${CSSMIN}
-	@@java -jar build/yuicompressor-2.4.2.jar --type css ${CSS} >> ${CSSMIN}
+	@@java -jar build/yuicompressor-2.4.4.jar --type css ${CSS} >> ${CSSMIN}
 
 mobile:
 	@@head -8 js/jquery.mobile.core.js | ${SED_VER} > ${MAX}
