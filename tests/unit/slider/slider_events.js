@@ -19,7 +19,7 @@
 			handle.trigger('keydown');
 
 			val += opts.increment;
-			same(val, window.parseFloat(slider.val(), 10), "new value is one larger");
+			same(val, window.parseFloat(slider.val(), 10), "new value is " + opts.increment + " different");
 		});
 	};
 
@@ -59,6 +59,22 @@
 			selector: selector,
 			keyCodes: ['HOME'],
 			increment: 0 - initialVal
+		});
+	});
+
+	test( "slider should move positive by steps on keypress", function(){
+		keypressTest({
+			selector: "#stepped",
+			keyCodes: ['RIGHT'],
+			increment: 10
+		});
+	});
+
+	test( "slider should move negative by steps on keypress", function(){
+		keypressTest({
+			selector: "#stepped",
+			keyCodes: ['LEFT'],
+			increment: -10
 		});
 	});
 

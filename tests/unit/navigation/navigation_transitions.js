@@ -40,6 +40,12 @@
 					}
 				};
 				checkTransitionStack();
+			},
+			
+			//wipe all urls
+			clearUrlHistory = function(){
+				$.mobile.urlHistory.stack = [];
+				$.mobile.urlHistory.activeIndex = 0;
 			};
 			
 
@@ -60,7 +66,7 @@
 	
 	QUnit.testStart = function (name) {
 		clearPageTransitionStack();
-		$.mobile.urlHistory.clear();
+		clearUrlHistory();
 	};
 	
 	test( "changePage applys perspective class to mobile viewport for flip", function(){
@@ -119,14 +125,12 @@
 			ok(isTransitioningIn(firstPage), "first page begins transition");
 			ok(!isTransitioningIn(secondPage), "second page doesn't transition yet");
 			
+			finishPageTransition();
+			
 			setTimeout(function(){
-				finishPageTransition();
-				
-				setTimeout(function(){
-					ok(!isTransitioningIn(firstPage), "first page transition should be complete");
-					ok(isTransitioningIn(secondPage), "second page should begin transitioning");
-					start();
-				},0);
+				ok(!isTransitioningIn(firstPage), "first page transition should be complete");
+				ok(isTransitioningIn(secondPage), "second page should begin transitioning");
+				start();
 			},0);
 		},0);
 	});
