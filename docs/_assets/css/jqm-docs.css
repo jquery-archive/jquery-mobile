@@ -11,3 +11,5 @@ p code { font-size:1.2em; font-weight:bold; }
 dt { font-weight: bold; margin: 2em 0 .5em; }
 dt code, dd code { font-size:1.3em; line-height:150%; }
 pre { white-space: pre; white-space: pre-wrap; word-wrap: break-word; }
+
+.ui-header .jqm-home { top:0.6em; }
