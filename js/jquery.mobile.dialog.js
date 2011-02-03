@@ -47,7 +47,15 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 						.attr("data-transition", $.mobile.urlHistory.getActive().transition )
 						.attr("data-direction", "reverse");
 				}
-			});
+			})
+
+      .bind( "pagehide.dialog", function(e) {
+        $(this).hide();
+      })
+      
+      .bind( "pagebeforeshow.dialog", function(e) {
+        $(this).show();
+      });
 
 	},
 	
