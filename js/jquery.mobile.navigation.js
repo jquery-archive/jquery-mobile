@@ -669,6 +669,13 @@
 		var to = (e.type == "hashchange" || triggered) ? path.stripHash( location.hash ) : location.pathname,
 			transition = triggered ? false : undefined;	
 
+		// replace current location in loading first page
+		if ($.support.pushState) {
+			if (triggered) {
+				history.replaceState({ "url": to }, null, to );
+			}
+		}
+
 		//make sure that hash changes that produce a dialog url do nothing	
 		if( urlHistory.stack.length > 1 &&
 				to.indexOf( dialogHashKey ) > -1 &&
