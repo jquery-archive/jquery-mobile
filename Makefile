@@ -92,9 +92,9 @@ deploy: zip
 	@@mkdir -p ${VER}
 	@@cp -r index.html themes experiments docs ${VER}/
 
-	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|"text/javascript" src="../../../js|"text/javascript" src="js|g' {} \;
-	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|"text/javascript" src="../../js|"text/javascript" src="js|g' {} \;
-	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|"text/javascript" src="../js|"text/javascript" src="js|g' {} \;
+	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|src="../../../js|src="js|g' {} \;
+	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|src="../../js|src="js|g' {} \;
+	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|src="../js|src="js|g' {} \;
 
 	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|media="only all"||g' {} \;
 	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|rel="stylesheet"  href="../../../|rel="stylesheet"  href="|g' {} \;
