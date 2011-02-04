@@ -17,7 +17,7 @@
 			//get path from current hash, or from a file path
 			get: function( newPath ){
 				if ( newPath == undefined ) {
-					if ( $.support.pushState ) {
+					if ( pushStateNavigate ) {
 						newPath = location.pathname;
 					} else {
 						newPath = location.hash;
@@ -34,7 +34,7 @@
 			
 			//set location hash to path
 			set: function( path ) {
-				if ( $.support.pushState ) {
+				if ( pushStateNavigate ) {
 					//replace with a proper page title from the loaded page's title element, or title attr on a multipage
 					history.pushState({ "url": path }, null, path );
 				} else {
@@ -140,7 +140,10 @@
 		popEnabled = false,
 		
 		//nonsense hash change key for dialogs, so they create a history entry
-		dialogHashKey = "&ui-state=dialog";
+		dialogHashKey = "&ui-state=dialog",
+
+		//using pushState navigation
+		pushStateNavigate = $.support.pushState;
 
 		//existing base tag?
 		var $base = $head.children("base"),
@@ -670,7 +673,7 @@
 			transition = triggered ? false : undefined;	
 
 		// replace current location in loading first page
-		if ($.support.pushState) {
+		if (pushStateNavigate) {
 			if (triggered) {
 				if (to == "") {
 					//using pathname for first page if hash is empty
@@ -709,4 +712,9 @@
 			}
 		}
 	});
+
+	$.mobile.pushStateNavigate = function( bool ){
+		pushStateNavigate = bool && $.support.pushState;
+	};
+
 })( jQuery );
