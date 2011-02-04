@@ -13,8 +13,9 @@
 
 <div data-role="page">
 
-	<div data-role="header">
+	<div data-role="header" data-theme="b">
 		<h1>Select Menus</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
 	<div data-role="content">
@@ -124,7 +125,7 @@
 			<code>
 				<pre>
 $(document).bind('mobileinit',function(){
-	$.mobile.selectmenu.prototype.options.nativemenu = true;
+	$.mobile.selectmenu.prototype.options.nativeMenu = true;
 });
 				</pre>
 			</code>

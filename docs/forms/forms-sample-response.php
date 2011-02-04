@@ -14,6 +14,7 @@
 
 	<div data-role="header" data-theme="e">
 		<h1>Sample form response</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
 	<div data-role="content" data-theme="c">

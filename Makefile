@@ -61,7 +61,7 @@ css:
 
 cssmin: css
 	@@head -8 js/jquery.mobile.core.js | ${SED_VER} > ${CSSMIN}
-	@@java -jar build/yuicompressor-2.4.2.jar --type css ${CSS} >> ${CSSMIN}
+	@@java -jar build/yuicompressor-2.4.4.jar --type css ${CSS} >> ${CSSMIN}
 
 mobile:
 	@@head -8 js/jquery.mobile.core.js | ${SED_VER} > ${MAX}
@@ -96,12 +96,13 @@ deploy: zip
 	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|"text/javascript" src="../../js|"text/javascript" src="js|g' {} \;
 	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|"text/javascript" src="../js|"text/javascript" src="js|g' {} \;
 
+	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|media="only all"||g' {} \;
 	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|rel="stylesheet"  href="../../../|rel="stylesheet"  href="|g' {} \;
 	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|rel="stylesheet"  href="../../|rel="stylesheet"  href="|g' {} \;
 	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|rel="stylesheet"  href="../|rel="stylesheet"  href="|g' {} \;
 
 	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|href="themes/default/"|href="http://code.jquery.com/mobile/${VER}/${DIR}.min.css"|g' {} \;
-	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|<script type="text/javascript" src="js/all|<script src="http://code.jquery.com/jquery-1.4.3.min.js"></script><script type="text/javascript" src="js/all|' {} \;
-	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|src="js/all"|src="http://code.jquery.com/mobile/${VER}/${DIR}.min.js"|g' {} \;
+	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|src="js/jquery.js"|src="http://code.jquery.com/jquery-1.5.min.js"|' {} \;
+	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|src="js/"|src="http://code.jquery.com/mobile/${VER}/${DIR}.min.js"|g' {} \;
 
 	@@scp -r ${VER} jqadmin@jquerymobile.com:/srv/jquerymobile.com/htdocs/demos/
