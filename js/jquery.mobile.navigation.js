@@ -672,6 +672,11 @@
 		// replace current location in loading first page
 		if ($.support.pushState) {
 			if (triggered) {
+				if (to == "") {
+					//using pathname for first page if hash is empty
+					//because URL does not accord with the contents of real contents.
+					to = location.pathname;
+				}
 				history.replaceState({ "url": to }, null, to );
 			}
 		}
