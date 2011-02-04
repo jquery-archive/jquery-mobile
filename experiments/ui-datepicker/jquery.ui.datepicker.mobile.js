@@ -49,7 +49,9 @@
 	//bind to pagecreate to automatically enhance date inputs	
 	$( ".ui-page" ).live( "pagecreate", function(){		
 		$( "input[type='date'], input[data-type='date']" ).each(function(){
-			$(this).after( $( "<div />" ).datepicker({ altField: "#" + $(this).attr( "id" ), showOtherMonths: true }) );
+			if (!$(this).next('div').is('.hasDatepicker')) {
+				$(this).after( $( "<div />" ).datepicker({ altField: "#" + $(this).attr( "id" ), showOtherMonths: true }) );
+			}
 		});	
 	});
 })( jQuery );
