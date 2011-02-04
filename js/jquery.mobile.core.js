@@ -56,6 +56,9 @@
 			return $.support.mediaquery;
 		},
 
+		//automatically initialize first pages or not.
+		autoInitialize: true,
+
 		//TODO might be useful upstream in jquery itself ?
 		keyCode: {
 			ALT: 18,
