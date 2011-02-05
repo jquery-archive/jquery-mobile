@@ -439,7 +439,7 @@
 
 				// callback - remove classes, etc
 				to.animationComplete(function() {
-					from.add( to ).removeClass("out in reverse " + transition );
+					to.add(from).removeClass("out in reverse " + transition );
 					if( from ){
 						from.removeClass( $.mobile.activePageClass );
 					}	
