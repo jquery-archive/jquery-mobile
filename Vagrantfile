@@ -1,6 +1,6 @@
 Vagrant::Config.run do |config|
   config.vm.box = "base"
-  config.vm.network("192.168.34.10")
+  config.vm.network("33.33.33.10")
   config.vm.forward_port("web", 80, 4567)
   config.vm.boot_mode = :gui
   config.vm.customize do |vm|
