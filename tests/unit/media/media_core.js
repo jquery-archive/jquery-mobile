@@ -7,6 +7,9 @@ var cssFn = $.fn.css,
 
 // make sure original definitions are reset
 module('jquery.mobile.media.js', {
+	setup: function(){
+		$(document).trigger('mobileinit.htmlclass');
+	},
 	teardown: function(){
 		$.fn.css = cssFn;
 		$.fn.width = widthFn;
@@ -64,26 +67,22 @@ test( "adds all classes for default res breakpoints", function(){
 	});
 });
 
-test( "triggering mobile init triggers orientationchange.htmlclass", function(){
-	expect( 1 );
+test( "binds remove of portrait and landscape classes resize/orientation fired", function(){
+	expect( 2 );
 
-	$(window).bind("orientationchange.htmlclass", function(event){
-		ok(event);
+	$.Event.prototype.orientation = "foo";
+
+	$(window).bind("orientationchange.htmlclass resize.htmlclass", function(event){
+		ok(!$("html").hasClass("portrait landscape"));
+		start();
 	});
 
-	$(document).trigger("mobileinit.htmlclass");
-});
-
-test( "binds remove of portrait and landscape classes resize/orientation fired", function(){
-	$.Event.prototype.orientation = true;
-
 	$("html").addClass("portrait landscape");
 	$(window).trigger("resize.htmlclass");
-	ok(!$("html").hasClass("portrait landscape"));
 
 	$("html").addClass("portrait landscape");
-	$(window).trigger("resize.htmlclass");
-	ok(!$("html").hasClass("portrait landscape"));
+	$(window).trigger("orientationchange.htmlclass");
+	stop();
 });
 
 test( "sets break point class additions on resize/orientation change", function(){
