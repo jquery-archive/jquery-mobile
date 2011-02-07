@@ -116,7 +116,7 @@
 			clearForward: function(){
 				urlHistory.stack = urlHistory.stack.slice( 0, urlHistory.activeIndex + 1 );
 			},
-			
+
 			//disable hashchange event listener internally to ignore one change
 			//toggled internally when location.hash is updated to match the url of a successful page load
 			ignoreNextHashChange: true
@@ -277,12 +277,15 @@
 			pageTransitionQueue.unshift(arguments);
 			return;
 		}
-		
+
 		isPageTransitioning = true;
 
 		// if the changePage was sent from a hashChange event
 		// guess if it came from the history menu
 		if( fromHashChange ){
+
+			// determine new page index
+			var newActiveIndex = null;
 
 			// check if url is in history and if it's ahead or behind current page
 			$.each( urlHistory.stack, function( i ){
@@ -294,9 +297,12 @@
 					//forward set to opposite of back
 					forward = !back;
 					//reset activeIndex to this one
-					urlHistory.activeIndex = i;
+					newActiveIndex = i;
 				}
 			});
+
+			// save new page index
+			urlHistory.activeIndex = ( newActiveIndex != null ? newActiveIndex : urlHistory.activeIndex );
 
 			//if it's a back, use reverse animation
 			if( back ){
@@ -350,13 +356,13 @@
 			if( url.indexOf( "&" + $.mobile.subPageUrlKey ) > -1 ){
 				to = $( "[data-url='" + url + "']" );
 			}
-			
+
 			if( from ){
 				//set as data for returning to that spot
 				from.data( "lastScroll", currScroll);
 				//trigger before show/hide events
 				from.data( "page" )._trigger( "beforehide", { nextPage: to } );
-			}	
+			}
 			to.data( "page" )._trigger( "beforeshow", { prevPage: from || $("") } );
 
 			function loadComplete(){
@@ -376,7 +382,7 @@
 				removeActiveLinkClass();
 
 				//jump to top or prev scroll, sometimes on iOS the page has not rendered yet.  I could only get by this with a setTimeout, but would like to avoid that.
-				$.mobile.silentScroll( to.data( "lastScroll" ) ); 
+				$.mobile.silentScroll( to.data( "lastScroll" ) );
 
 				reFocus( to );
 
@@ -386,7 +392,7 @@
 				}
 				//trigger pageshow, define prevPage as either from or empty jQuery obj
 				to.data( "page" )._trigger( "show", null, { prevPage: from || $("") } );
-				
+
 				//set "to" as activePage
 				$.mobile.activePage = to;
 
@@ -394,7 +400,7 @@
 				if (duplicateCachedPage != null) {
 				    duplicateCachedPage.remove();
 				}
-				
+
 				//remove initial build class (only present on first pageshow)
 				$html.removeClass( "ui-mobile-rendering" );
 
@@ -438,7 +444,7 @@
 					from.add( to ).removeClass("out in reverse " + transition );
 					if( from ){
 						from.removeClass( $.mobile.activePageClass );
-					}	
+					}
 					loadComplete();
 					removeContainerClasses();
 				});
@@ -447,7 +453,7 @@
 			    $.mobile.pageLoading( true );
 			    if( from ){
 					from.removeClass( $.mobile.activePageClass );
-				}	
+				}
 				to.addClass( $.mobile.activePageClass );
 				loadComplete();
 			}
@@ -490,7 +496,7 @@
 		if ( to.length && !isFormRequest ) {
 			if( fileUrl && base ){
 				base.set( fileUrl );
-			}			
+			}
 			enhancePage();
 			transitionPages();
 		} else {
@@ -611,10 +617,10 @@
 	$( "a" ).live( "click", function(event) {
 
 		var $this = $(this),
-		
+
 			//get href, if defined, otherwise fall to null #
 			href = $this.attr( "href" ) || "#",
-			
+
 			//get href, remove same-domain protocol and host
 			url = path.clean( href ),
 
@@ -695,7 +701,7 @@
 		var to = path.stripHash( location.hash ),
 			//transition is false if it's the first page, undefined otherwise (and may be overridden by default)
 			transition = $.mobile.urlHistory.stack.length === 0 ? false : undefined;
-			
+
 		//if listening is disabled (either globally or temporarily), or it's a dialog hash
 		if( !$.mobile.hashListeningEnabled || !urlHistory.ignoreNextHashChange ||
 				urlHistory.stack.length > 1 && to.indexOf( dialogHashKey ) > -1 && !$.mobile.activePage.is( ".ui-dialog" )
