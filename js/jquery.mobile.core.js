@@ -56,9 +56,6 @@
 			return $.support.mediaquery;
 		},
 
-		//automatically initialize first pages or not.
-		autoInitialize: true,
-
 		//TODO might be useful upstream in jquery itself ?
 		keyCode: {
 			ALT: 18,
@@ -203,13 +200,9 @@
 	});
 
 	//dom-ready inits
-	if($.mobile.autoInitialize){
-		$($.mobile.initializePage);
-	}
-
+	$($.mobile.initializePage);
 
 	//window load event
 	//hide iOS browser chrome on load
 	$window.load( $.mobile.silentScroll );
-
 })( jQuery, this );
