@@ -146,7 +146,7 @@
 		if ($base.length){
 			var href = $base.attr("href");
 			if (href){
-				if (href.search(/^[^:/]+:\/\/[^/]+\/?/) == -1){
+				if (href.search(/^[^:\/]+:\/\/[^\/]+\/?/) == -1){
 					//the href is not absolute, we need to turn it into one
 					//so that we can turn paths stored in our location hash into
 					//relative paths.
