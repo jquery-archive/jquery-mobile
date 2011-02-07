@@ -287,6 +287,9 @@
 		// guess if it came from the history menu
 		if( fromHashChange ){
 
+			// determine new page index
+			var newActiveIndex = null;
+
 			// check if url is in history and if it's ahead or behind current page
 			$.each( urlHistory.stack, function( i ){
 				//if the url is in the stack, it's a forward or a back
@@ -297,9 +300,12 @@
 					//forward set to opposite of back
 					forward = !back;
 					//reset activeIndex to this one
-					urlHistory.activeIndex = i;
+					newActiveIndex = i;
 				}
 			});
+
+			// save new page index
+			urlHistory.activeIndex = ( newActiveIndex != null ? newActiveIndex : urlHistory.activeIndex );
 
 			//if it's a back, use reverse animation
 			if( back ){
