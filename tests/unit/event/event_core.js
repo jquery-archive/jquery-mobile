@@ -113,15 +113,20 @@
 		$($.event.special.scrollstart).trigger("touchmove");
 
 		stop();
-				setTimeout(function(){
-					ok(triggered, "triggered");
-					start();
-				}, 50);
+		setTimeout(function(){
+			ok(triggered, "triggered");
+			start();
+		}, 50);
 	});
 
 	var forceTouchSupport = function(){
 		$.support.touch = true;
 		$.testHelper.reloadLib(libName);
+
+		// mock originalEvent information
+		$.Event.prototype.originalEvent = {
+			touches: [{ 'pageX' : 0 }, { 'pageY' : 0 }]
+		};
 	};
 
 	test( "long press fires tap hold after 750 ms", function(){
