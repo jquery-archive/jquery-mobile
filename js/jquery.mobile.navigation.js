@@ -337,6 +337,13 @@
 			}
 		}
 
+		function releasePageTransitionLock(){
+			isPageTransitioning = false;
+			if(pageTransitionQueue.length>0) {
+				$.mobile.changePage.apply($.mobile, pageTransitionQueue.pop());
+			}
+		}
+		
 		//function for transitioning between two existing pages
 		function transitionPages() {
 		    $.mobile.silentScroll();
@@ -398,10 +405,7 @@
 				//remove initial build class (only present on first pageshow)
 				$html.removeClass( "ui-mobile-rendering" );
 
-				isPageTransitioning = false
-				if(pageTransitionQueue.length>0) {
-					$.mobile.changePage.apply($.mobile, pageTransitionQueue.pop());
-				}
+				releasePageTransitionLock();
 			};
 
 			function addContainerClass(className){
@@ -435,7 +439,7 @@
 
 				// callback - remove classes, etc
 				to.animationComplete(function() {
-					from.add( to ).removeClass("out in reverse " + transition );
+					to.add(from).removeClass("out in reverse " + transition );
 					if( from ){
 						from.removeClass( $.mobile.activePageClass );
 					}	
@@ -566,6 +570,7 @@
 						.fadeOut( 400, function(){
 							$(this).remove();
 						});
+					releasePageTransitionLock();
 				}
 			});
 		}
