@@ -1,5 +1,5 @@
 /*!
- * jQuery JavaScript Library v1.5rc1
+ * jQuery JavaScript Library v1.5
  * http://jquery.com/
  *
  * Copyright 2011, John Resig
@@ -11,7 +11,7 @@
  * Copyright 2011, The Dojo Foundation
  * Released under the MIT, BSD, and GPL Licenses.
  *
- * Date: Mon Jan 24 17:14:04 2011 -0500
+ * Date: Mon Jan 31 08:31:29 2011 -0500
  */
 (function( window, undefined ) {
 
@@ -44,9 +44,6 @@ var jQuery = function( selector, context ) {
 	// Used for trimming whitespace
 	trimLeft = /^\s+/,
 	trimRight = /\s+$/,
-
-	// Check for non-word characters
-	rnonword = /\W/,
 
 	// Check for digits
 	rdigit = /\d/,
@@ -205,7 +202,7 @@ jQuery.fn = jQuery.prototype = {
 	selector: "",
 
 	// The current version of jQuery being used
-	jquery: "1.5rc1",
+	jquery: "1.5",
 
 	// The default length of a jQuery object is 0
 	length: 0,
@@ -951,10 +948,9 @@ jQuery.extend({
 
 		if ( length > 1 ) {
 			resolveArray = new Array( length );
-			jQuery.each( args, function( index, element, args ) {
+			jQuery.each( args, function( index, element ) {
 				jQuery.when( element ).then( function( value ) {
-					args = arguments;
-					resolveArray[ index ] = args.length > 1 ? slice.call( args, 0 ) : value;
+					resolveArray[ index ] = arguments.length > 1 ? slice.call( arguments, 0 ) : value;
 					if( ! --length ) {
 						deferred.resolveWith( promise, resolveArray );
 					}
@@ -980,18 +976,20 @@ jQuery.extend({
 		return { browser: match[1] || "", version: match[2] || "0" };
 	},
 
-	subclass: function(){
+	sub: function() {
 		function jQuerySubclass( selector, context ) {
 			return new jQuerySubclass.fn.init( selector, context );
 		}
+		jQuery.extend( true, jQuerySubclass, this );
 		jQuerySubclass.superclass = this;
 		jQuerySubclass.fn = jQuerySubclass.prototype = this();
 		jQuerySubclass.fn.constructor = jQuerySubclass;
 		jQuerySubclass.subclass = this.subclass;
 		jQuerySubclass.fn.init = function init( selector, context ) {
-			if (context && context instanceof jQuery && !(context instanceof jQuerySubclass)){
+			if ( context && context instanceof jQuery && !(context instanceof jQuerySubclass) ) {
 				context = jQuerySubclass(context);
 			}
+
 			return jQuery.fn.init.call( this, selector, context, rootjQuerySubclass );
 		};
 		jQuerySubclass.fn.init.prototype = jQuerySubclass.fn;
@@ -3792,14 +3790,14 @@ var Expr = Sizzle.selectors = {
 		},
 
 		ATTR: function( match, curLoop, inplace, result, not, isXML ) {
-			var name = match[1].replace(/\\/g, "");
+			var name = match[1] = match[1].replace(/\\/g, "");
 			
 			if ( !isXML && Expr.attrMap[name] ) {
 				match[1] = Expr.attrMap[name];
 			}
 
 			// Handle if an un-quoted value was used
-			match[4] = match[4] || match[5] || "";
+			match[4] = ( match[4] || match[5] || "" ).replace(/\\/g, "");
 
 			if ( match[2] === "~=" ) {
 				match[4] = " " + match[4] + " ";
@@ -5140,7 +5138,7 @@ jQuery.fn.extend({
 	clone: function( dataAndEvents, deepDataAndEvents ) {
 		dataAndEvents = dataAndEvents == null ? true : dataAndEvents;
 		deepDataAndEvents = deepDataAndEvents == null ? dataAndEvents : deepDataAndEvents;
-		
+
 		return this.map( function () {
 			return jQuery.clone( this, dataAndEvents, deepDataAndEvents );
 		});
@@ -5265,12 +5263,19 @@ jQuery.fn.extend({
 			if ( first ) {
 				table = table && jQuery.nodeName( first, "tr" );
 
-				for ( var i = 0, l = this.length; i < l; i++ ) {
+				for ( var i = 0, l = this.length, lastIndex = l - 1; i < l; i++ ) {
 					callback.call(
 						table ?
 							root(this[i], first) :
 							this[i],
-						i > 0 || results.cacheable || (this.length > 1 && i > 0) ?
+						// Make sure that we do not leak memory by inadvertently discarding
+						// the original fragment (which might have attached data) instead of
+						// using it; in addition, use the original fragment object for the last
+						// item instead of first because it can end up being emptied incorrectly
+						// in certain situations (Bug #8070).
+						// Fragments from the fragment cache must always be cloned and never used
+						// in place.
+						results.cacheable || (l > 1 && i < lastIndex) ?
 							jQuery.clone( fragment, true, true ) :
 							fragment
 					);
@@ -5438,9 +5443,9 @@ jQuery.each({
 
 jQuery.extend({
 	clone: function( elem, dataAndEvents, deepDataAndEvents ) {
-		var clone = elem.cloneNode(true), 
-				srcElements, 
-				destElements, 
+		var clone = elem.cloneNode(true),
+				srcElements,
+				destElements,
 				i;
 
 		if ( !jQuery.support.noCloneEvent && (elem.nodeType === 1 || elem.nodeType === 11) && !jQuery.isXMLDoc(elem) ) {
@@ -5986,15 +5991,13 @@ var r20 = /%20/g,
 	rheaders = /^(.*?):\s*(.*?)\r?$/mg, // IE leaves an \r character at EOL
 	rinput = /^(?:color|date|datetime|email|hidden|month|number|password|range|search|tel|text|time|url|week)$/i,
 	rnoContent = /^(?:GET|HEAD)$/,
+	rprotocol = /^\/\//,
 	rquery = /\?/,
 	rscript = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,
 	rselectTextarea = /^(?:select|textarea)/i,
 	rspacesAjax = /\s+/,
 	rts = /([?&])_=[^&]*/,
-	rurl = /^(\w+:)?\/\/([^\/?#:]+)(?::(\d+))?/,
-
-	// Slice function
-	sliceFunc = Array.prototype.slice,
+	rurl = /^(\w+:)\/\/([^\/?#:]+)(?::(\d+))?/,
 
 	// Keep a copy of the old load method
 	_load = jQuery.fn.load,
@@ -6029,7 +6032,7 @@ function addToPrefiltersOrTransports( structure ) {
 		}
 
 		if ( jQuery.isFunction( func ) ) {
-			var dataTypes = dataTypeExpression.split( rspacesAjax ),
+			var dataTypes = dataTypeExpression.toLowerCase().split( rspacesAjax ),
 				i = 0,
 				length = dataTypes.length,
 				dataType,
@@ -6043,7 +6046,7 @@ function addToPrefiltersOrTransports( structure ) {
 				// any existing element
 				placeBefore = /^\+/.test( dataType );
 				if ( placeBefore ) {
-					dataType = dataType.substr( 1 );
+					dataType = dataType.substr( 1 ) || "*";
 				}
 				list = structure[ dataType ] = structure[ dataType ] || [];
 				// then we add to the structure accordingly
@@ -6054,7 +6057,7 @@ function addToPrefiltersOrTransports( structure ) {
 }
 
 //Base inspection function for prefilters and transports
-function inspectPrefiltersOrTransports( structure, options, originalOptions,
+function inspectPrefiltersOrTransports( structure, options, originalOptions, jXHR,
 		dataType /* internal */, inspected /* internal */ ) {
 
 	dataType = dataType || options.dataTypes[ 0 ];
@@ -6069,7 +6072,7 @@ function inspectPrefiltersOrTransports( structure, options, originalOptions,
 		selection;
 
 	for(; i < length && ( executeOnly || !selection ); i++ ) {
-		selection = list[ i ]( options, originalOptions );
+		selection = list[ i ]( options, originalOptions, jXHR );
 		// If we got redirected to another dataType
 		// we try there if not done already
 		if ( typeof selection === "string" ) {
@@ -6078,7 +6081,7 @@ function inspectPrefiltersOrTransports( structure, options, originalOptions,
 			} else {
 				options.dataTypes.unshift( selection );
 				selection = inspectPrefiltersOrTransports(
-						structure, options, originalOptions, selection, inspected );
+						structure, options, originalOptions, jXHR, selection, inspected );
 			}
 		}
 	}
@@ -6086,7 +6089,7 @@ function inspectPrefiltersOrTransports( structure, options, originalOptions,
 	// we try the catchall dataType if not done already
 	if ( ( executeOnly || !selection ) && !inspected[ "*" ] ) {
 		selection = inspectPrefiltersOrTransports(
-				structure, options, originalOptions, "*", inspected );
+				structure, options, originalOptions, jXHR, "*", inspected );
 	}
 	// unnecessary when only executing (prefilters)
 	// but it'll be ignored by the caller in that case
@@ -6379,8 +6382,9 @@ jQuery.extend({
 
 				// Cancel the request
 				abort: function( statusText ) {
+					statusText = statusText || "abort";
 					if ( transport ) {
-						transport.abort( statusText || "abort" );
+						transport.abort( statusText );
 					}
 					done( 0, statusText );
 					return this;
@@ -6417,7 +6421,7 @@ jQuery.extend({
 
 			var isSuccess,
 				success,
-				error = ( statusText = statusText || "error" ),
+				error,
 				response = responses ? ajaxHandleResponses( s, jXHR, responses ) : undefined,
 				lastModified,
 				etag;
@@ -6452,7 +6456,17 @@ jQuery.extend({
 					} catch(e) {
 						// We have a parsererror
 						statusText = "parsererror";
-						error = "" + e;
+						error = e;
+					}
+				}
+			} else {
+				// We extract error from statusText
+				// then normalize statusText and status for non-aborts
+				error = statusText;
+				if( status ) {
+					statusText = "error";
+					if ( status < 0 ) {
+						status = 0;
 					}
 				}
 			}
@@ -6512,8 +6526,9 @@ jQuery.extend({
 		};
 
 		// Remove hash character (#7531: and string promotion)
+		// Add protocol if not provided (#5866: IE7 issue with protocol-less urls)
 		// We also use the url parameter if available
-		s.url = ( "" + ( url || s.url ) ).replace( rhash, "" );
+		s.url = ( "" + ( url || s.url ) ).replace( rhash, "" ).replace( rprotocol, protocol + "//" );
 
 		// Extract dataTypes list
 		s.dataTypes = jQuery.trim( s.dataType || "*" ).toLowerCase().split( rspacesAjax );
@@ -6521,12 +6536,10 @@ jQuery.extend({
 		// Determine if a cross-domain request is in order
 		if ( !s.crossDomain ) {
 			parts = rurl.exec( s.url.toLowerCase() );
-			s.crossDomain = !!(
-					parts &&
-					( parts[ 1 ] && parts[ 1 ] != protocol ||
-						parts[ 2 ] != loc.hostname ||
-						( parts[ 3 ] || ( ( parts[ 1 ] || protocol ) === "http:" ? 80 : 443 ) ) !=
-							( loc.port || ( protocol === "http:" ? 80 : 443 ) ) )
+			s.crossDomain = !!( parts &&
+				( parts[ 1 ] != protocol || parts[ 2 ] != loc.hostname ||
+					( parts[ 3 ] || ( parts[ 1 ] === "http:" ? 80 : 443 ) ) !=
+						( loc.port || ( protocol === "http:" ? 80 : 443 ) ) )
 			);
 		}
 
@@ -6536,7 +6549,7 @@ jQuery.extend({
 		}
 
 		// Apply prefilters
-		inspectPrefiltersOrTransports( prefilters, s, options );
+		inspectPrefiltersOrTransports( prefilters, s, options, jXHR );
 
 		// Uppercase the type
 		s.type = s.type.toUpperCase();
@@ -6609,11 +6622,11 @@ jQuery.extend({
 			}
 
 			// Get transport
-			transport = inspectPrefiltersOrTransports( transports, s, options );
+			transport = inspectPrefiltersOrTransports( transports, s, options, jXHR );
 
 			// If no transport, we auto-abort
 			if ( !transport ) {
-				done( 0, "notransport" );
+				done( -1, "No Transport" );
 			} else {
 				// Set state as sending
 				state = jXHR.readyState = 1;
@@ -6632,9 +6645,8 @@ jQuery.extend({
 					transport.send( requestHeaders, done );
 				} catch (e) {
 					// Propagate exception as error if not done
-					if ( status === 1 ) {
-						done( 0, "error", "" + e );
-						jXHR = false;
+					if ( status < 2 ) {
+						done( -1, e );
 					// Simply rethrow otherwise
 					} else {
 						jQuery.error( e );
@@ -6821,7 +6833,7 @@ function ajaxConvert( s, response ) {
 		conversion,
 		// Conversion function
 		conv,
-		// Conversion functions (when text is used in-between)
+		// Conversion functions (transitive conversion)
 		conv1,
 		conv2;
 
@@ -6879,13 +6891,13 @@ function ajaxConvert( s, response ) {
 
 
 var jsc = jQuery.now(),
-	jsre = /(\=)(?:\?|%3F)(&|$)|()(?:\?\?|%3F%3F)()/i;
+	jsre = /(\=)\?(&|$)|()\?\?()/i;
 
 // Default jsonp settings
 jQuery.ajaxSetup({
 	jsonp: "callback",
 	jsonpCallback: function() {
-		return "jsonp" + jsc++;
+		return jQuery.expando + "_" + ( jsc++ );
 	}
 });
 
@@ -6975,7 +6987,10 @@ jQuery.ajaxSetup({
 		script: /javascript/
 	},
 	converters: {
-		"text script": jQuery.globalEval
+		"text script": function( text ) {
+			jQuery.globalEval( text );
+			return text;
+		}
 	}
 });
 
@@ -7160,12 +7175,9 @@ if ( jQuery.support.ajax ) {
 					} catch( _ ) {}
 
 					// Do send the request
-					try {
-						xhr.send( ( s.hasContent && s.data ) || null );
-					} catch( e ) {
-						complete( 0, "error", "" + e );
-						return;
-					}
+					// This may raise an exception which is actually
+					// handled in jQuery.ajax (so no try/catch here)
+					xhr.send( ( s.hasContent && s.data ) || null );
 
 					// Listener
 					callback = function( _, isAbort ) {

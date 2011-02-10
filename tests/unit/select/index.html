@@ -14,7 +14,6 @@
 	<script type="text/javascript" src="../../../js/jquery.mobile.core.js"></script>
  	<script type="text/javascript" src="../../../js/jquery.mobile.navigation.js"></script>
 	<script type="text/javascript" src="../../../js/jquery.mobile.page.js"></script>
-	<script type="text/javascript" src="../../../js/jquery.ui.position.js"></script>
 	<script type="text/javascript" src="../../../js/jquery.mobile.fixHeaderFooter.js"></script>
 	<script type="text/javascript" src="../../../js/jquery.mobile.forms.checkboxradio.js"></script>
 	<script type="text/javascript" src="../../../js/jquery.mobile.forms.textinput.js"></script>
@@ -47,19 +46,6 @@
 <ol id="qunit-tests">
 </ol>
 
-<style>
-	[data-role='page'], [data-role='dialog'] {
-	  position: absolute;
-	  top: -10000px;
-	  left: -10000px;
-	}
-
-	/* maintain styling */
-	.ui-mobile-viewport {
-	  margin: 8px;
-	}
-</style>
-
 <div id="foo" data-role="page">
 	<div data-role="fieldcontain" id="select-choice-few-container">
 		<select name="select-choice-few" id="select-choice-few">
@@ -71,7 +57,7 @@
 	</div>
 
 	<div data-role="fieldcontain" id="select-choice-native-container">
-		<select name="select-choice-native" id="select-choice-native" data-native="true">
+		<select name="select-choice-native" id="select-choice-native" data-native-menu="true">
 			<option value="standard">Standard: 7 day</option>
 			<option value="rush">Rush: 3 days</option>
 			<option value="express">Express: next day</option>

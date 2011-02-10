@@ -34,7 +34,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			},
 			min = (cType == 'input') ? parseFloat(control.attr('min')) : 0,
 			max = (cType == 'input') ? parseFloat(control.attr('max')) : control.find('option').length-1,
-			step = window.parseFloat(control.attr('data-step') || 1),
+			step = window.parseFloat(control.attr('step') || 1),
 			slider = $('<div class="ui-slider '+ selectClass +' ui-btn-down-'+ trackTheme+' ui-btn-corner-all" role="application"></div>'),
 			handle = $('<a href="#" class="ui-slider-handle"></a>')
 				.appendTo(slider)
@@ -86,7 +86,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			});
 
 		// prevent screen drag when slider activated
-		$(document).bind($.support.touch ? "touchmove" : "mousemove", function(event){
+		$(document).bind( "touchmove mousemove", function(event){
 			if ( self.dragging ) {
 				self.refresh( event );
 				return false;
@@ -94,7 +94,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		});
 
 		slider
-			.bind($.support.touch ? "touchstart" : "mousedown", function(event){
+			.bind( "touchstart mousedown", function(event){
 				self.dragging = true;
 				if ( cType === "select" ) {
 					self.beforeStart = control[0].selectedIndex;
@@ -105,7 +105,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 		slider
 			.add(document)
-			.bind($.support.touch ? "touchend" : "mouseup", function(){
+			.bind( "touchend mouseup", function(){
 				if ( self.dragging ) {
 					self.dragging = false;
 					if ( cType === "select" ) {
@@ -130,12 +130,12 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 		// NOTE force focus on handle
 		this.handle
-			.bind($.support.touch ? "touchstart" : "mousedown", function(){
+			.bind( "touchstart mousedown", function(){
 				$(this).focus();
 			});
 
 		this.handle
-			.bind('keydown', function( event ) {
+			.bind( "keydown", function( event ) {
 				var index = val();
 
 				if ( self.options.disabled ) {

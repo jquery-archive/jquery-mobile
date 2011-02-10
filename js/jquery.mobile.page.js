@@ -30,18 +30,12 @@ $.widget( "mobile.page", $.mobile.widget, {
 
 	_create: function() {
 		var $elem = this.element,
-			o = this.options;
+			o = this.options;	
 
 		this.keepNative = "[data-role='none'], [data-role='nojs']" + (o.keepNative ? ", " + o.keepNative : "");
 
 		if ( this._trigger( "beforeCreate" ) === false ) {
 			return;
-		}
-		
-		if( $( "html" ).hasClass( 'portrait' ) ) {
-		    $elem.css( 'minHeight', ( screen.availHeight >= screen.availWidth ) ? screen.availHeight : screen.availWidth);
-		} else {
-		    $elem.css( 'minHeight', ( screen.availHeight <= screen.availWidth ) ? screen.availHeight : screen.availWidth);
 		}
 
 		//some of the form elements currently rely on the presence of ui-page and ui-content
@@ -81,7 +75,8 @@ $.widget( "mobile.page", $.mobile.widget, {
 
 				// auto-add back btn on pages beyond first view
 				if ( o.addBackBtn && role === "header" &&
-						$.mobile.urlHistory.stack.length > 0  &&
+						$( ".ui-page" ).length > 1 &&
+						$elem.data( "url" ) !== $.mobile.path.stripHash( location.hash ) &&
 						!leftbtn && $this.data( "backbtn" ) !== false ) {
 
 					$( "<a href='#' class='ui-btn-left' data-rel='back' data-icon='arrow-l'>"+ o.backBtnText +"</a>" ).prependTo( $this );

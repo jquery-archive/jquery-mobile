@@ -39,9 +39,28 @@
 	});
 	
 	
+	asyncTest( "anchors with no href attribute will do nothing when clicked", function(){
+		var fired = false;
+		
+		$(window).bind("hashchange.temp", function(){
+			fired = true;
+		});
+		
+		$( "<a>test</a>" ).appendTo( $.mobile.pageContainer ).click();
+		
+		setTimeout(function(){
+			start();
+			same(fired, false, "hash shouldn't change after click");
+			$(window).unbind("hashchange.temp");
+		}, 500);
+	});
+	
+	
+	
 	
 	test( "path.get method is working properly", function(){
-		same($.mobile.path.get(), window.location.hash, "get method returns location.hash");
+		window.location.hash = "foo"
+		same($.mobile.path.get(), "foo", "get method returns location.hash minus hash character");
 		same($.mobile.path.get( "#foo/bar/baz.html" ), "foo/bar/", "get method with hash arg returns path with no filename or hash prefix");
 		same($.mobile.path.get( "#foo/bar/baz.html/" ), "foo/bar/baz.html/", "last segment of hash is retained if followed by a trailing slash");
 	});
@@ -52,14 +71,14 @@
 	
 	
 	test( "path.set method is working properly", function(){
-		$.mobile.urlHistory.listeningEnabled = false;
+		$.mobile.urlHistory.ignoreNextHashChange = false;
 		$.mobile.path.set("foo");
 		same("foo", window.location.hash.replace(/^#/,""), "sets location.hash properly");
 		location.hash = "";
 	});
 	
 	test( "path.makeAbsolute is working properly", function(){
-		$.mobile.urlHistory.listeningEnabled = false;
+		$.mobile.urlHistory.ignoreNextHashChange = false;
 		$.mobile.path.set("bar/");
 		same( $.mobile.path.makeAbsolute("test.html"), "bar/test.html", "prefixes path with absolute base path from hash");
 		location.hash = "";
@@ -111,6 +130,7 @@
 	
 	
 	test( "urlHistory is working properly", function(){
+		
 		//urlHistory
 		same( $.type( $.mobile.urlHistory.stack ), "array", "urlHistory.stack is an array" );
 		
@@ -147,8 +167,8 @@
 	});
 	
 	//url listening
-	asyncTest( "ability to disable our hash change event listening", function(){
-		$.mobile.urlHistory.listeningEnabled = false;
+	function testListening( prop ){
+		prop = false;
 		var stillListening = false;
 		$(document).bind("pagebeforehide", function(){
 			stillListening = true;
@@ -156,9 +176,33 @@
 		location.hash = "foozball";
 		setTimeout(function(){
 			start();
-			ok( $.mobile.urlHistory.listeningEnabled == stillListening, "urlHistory.listeningEnabled = false disables default hashchange event handler");
+			ok( prop == stillListening, prop + " = false disables default hashchange event handler");
 			location.hash = "";
+			prop = true;
 		}, 1000);
+	}
+	
+	asyncTest( "ability to disable our hash change event listening internally", function(){
+		testListening( $.mobile.urlHistory.ignoreNextHashChange );
+	});
+	
+	asyncTest( "ability to disable our hash change event listening globally", function(){
+		testListening( $.mobile.hashListeningEnabled );
+	});
+	
+	asyncTest( "changepage will only run once when a new page is visited", function(){
+		var called = 0;
+		$.mobile.changePage = function(a,b,c,d,e){
+			changePageFn( a,b,c,d,e );
+			called ++;
+		};
+
+		$('#foo a').click();
+		
+		setTimeout(function(){
+			start();
+			ok(called == 1, "change page should be called once");
+		}, 500);
 	});
 	
 })(jQuery);

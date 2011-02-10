@@ -14,7 +14,6 @@
 	<script type="text/javascript" src="../../../js/jquery.mobile.core.js"></script>
  	<script type="text/javascript" src="../../../js/jquery.mobile.navigation.js"></script>
 	<script type="text/javascript" src="../../../js/jquery.mobile.page.js"></script>
-	<script type="text/javascript" src="../../../js/jquery.ui.position.js"></script>
 	<script type="text/javascript" src="../../../js/jquery.mobile.fixHeaderFooter.js"></script>
 	<script type="text/javascript" src="../../../js/jquery.mobile.forms.checkboxradio.js"></script>
 	<script type="text/javascript" src="../../../js/jquery.mobile.forms.textinput.js"></script>
@@ -47,19 +46,6 @@
 <ol id="qunit-tests">
 </ol>
 
-<style>
-	[data-role='page'] {
-	  position: absolute;
-	  top: -10000px;
-	  left: -10000px;
-	}
-
-	/* maintain styling */
-	.ui-mobile-viewport {
-	  margin: 8px;
-	}
-</style>
-
 <div id="foo" data-role="page">
 	<div data-role="fieldcontain">
 		<input type="range" name="slider-1" id="range-slider-up" value="0" min="0" max="100" data-theme="b" data-track-theme="a" />
@@ -76,6 +62,10 @@
 	<div data-role="fieldcontain">
 		<label for="slider-1">Input slider:</label>
 		<input type="range" name="slider-1" id="range-slider-end" value="15" min="0" max="100" data-theme="b" data-track-theme="a" />
+	</div>
+
+	<div data-role="fieldcontain">
+		<input type="range" name="stepped" id="stepped" value="15" min="0" max="100" step="10" data-theme="b" data-track-theme="a" />
 	</div>
 
 	<div data-role="fieldcontain">
