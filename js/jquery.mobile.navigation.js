@@ -86,6 +86,8 @@
 
 			//maintain an index number for the active page in the stack
 			activeIndex: 0,
+			
+			realActiveIndex: 0,
 
 			//get active
 			getActive: function(){
@@ -110,6 +112,8 @@
 				urlHistory.stack.push( {url : url, transition: transition } );
 
 				urlHistory.activeIndex = urlHistory.stack.length - 1;
+				
+				urlHistory.realActiveIndex = urlHistory.activeIndex;
 			},
 
 			//wipe urls ahead of active index
@@ -645,6 +649,12 @@
 
 		//if there's a data-rel=back attr, go back in history
 		if( $this.is( "[data-rel='back']" ) ){
+			for( $.mobile.urlHistory.realActiveIndex; $.mobile.urlHistory.realActiveIndex > 0; $.mobile.urlHistory.realActiveIndex-- ){
+				if( $.mobile.urlHistory.stack[($.mobile.urlHistory.realActiveIndex-1)].url.indexOf(dialogHashKey) > -1 ){
+					window.history.back();
+				}
+			}
+			$.mobile.urlHistory.realActiveIndex--;
 			window.history.back();
 			return false;
 		}
