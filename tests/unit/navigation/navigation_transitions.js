@@ -134,5 +134,9 @@
 			},0);
 		},0);
 	});
+
+	test( "animationComplete return value", function(){
+		equals($("#foo").animationComplete()[0], $("#foo")[0]);
+	});
 	
 })(jQuery);
