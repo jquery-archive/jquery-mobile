@@ -26,6 +26,7 @@
 (function($, window, document, undefined) {
 
 var dataSequencerName = "mouseEventSequencer";
+var touchEventProps = "clientX clientY pageX pageY screenX screenY".split(" ");
 
 function sequencerEventCallback(event, data)
 {
@@ -39,6 +40,8 @@ function MouseEventSequencer(element)
 {
 	this.element = element;
 	this.activeHandlers = {};
+	this.ignoreMouseEvents = false;
+	this.didScroll = false;
 }
 
 $.extend(MouseEventSequencer.prototype, {
@@ -46,6 +49,10 @@ $.extend(MouseEventSequencer.prototype, {
 		if (!this.activeHandlers[eventType]){
 			this.element.bind(eventType.substr(1), sequencerEventCallback);
 			this.activeHandlers[eventType] = 0;
+			if (!this.activeHandlers.touchstart){
+				this.element.bind("touchstart", sequencerEventCallback);
+				this.activeHandlers.touchstart = 1;
+			}
 		}
 		this.activeHandlers[eventType] = 1;
 	},
@@ -57,12 +64,36 @@ $.extend(MouseEventSequencer.prototype, {
 				this.element.unbind(eventType.substr(1), sequencerEventCallback);
 			}
 		}
-		this.activeHandlers[eventType] = 1;
+	},
+
+	getNativeEvent: function(event) {
+		while (event && typeof event.originalEvent !== "undefined")
+			event = event.originalEvent;
+		return event;
+	},
+
+	hasBindings: function() {
+		var ah = this.activeHandlers;
+		for (var e in ah){
+			if (ah[e]){
+				return true;
+			}
+		}
+		return false;
 	},
 
 	handleEvent: function(event, data) {
 		var result;
 		switch(event.type) {
+			case "touchstart":
+				result = this.handleTouchStart(event, data);
+				break;
+			case "touchmove":
+				result = this.handleTouchMove(event, data);
+				break;
+			case "touchend":
+				result = this.handleTouchEnd(event, data);
+				break;
 			case "mouseover":
 				result = this.handleOver(event, data);
 				break;
@@ -85,7 +116,62 @@ $.extend(MouseEventSequencer.prototype, {
 		return result;
 	},
 
+	trigger: function(eventType, event, data){
+		var t = event.type;
+		event = $.Event(event);
+		event.type = eventType;
+
+		var oe = event.originalEvent;
+		var props = $.event.props;
+
+		// copy original event properties over to the new event
+		// this would happen if we could call $.event.fix instead of $.Event
+		// but we don't have a way to force an event to be fixed multiple times
+		if (oe) {
+			for ( var i = props.length, prop; i; ) {
+				prop = props[ --i ];
+				event[prop] = oe[prop];
+			}
+		}
+
+		if (t.search(/^touch/) !== -1){
+			var ne = this.getNativeEvent(oe);
+			if (typeof ne.touches !== "undefined" && ne.touches[0]){
+				var touch = ne.touches[0];
+				for (var i = 0; i < touchEventProps.length; i++){
+					var prop = touchEventProps[i];
+					event[prop] = touch[prop];
+				}
+			}
+		}
+		return this.element.trigger(event, data);
+	},
+
 	handleTouchStart: function(event, data){
+		this.ignoreMouseEvents = true;
+		this.didScroll = false;
+
+		this.element.bind("touchmove", sequencerEventCallback);
+		this.element.bind("touchend", sequencerEventCallback);
+
+		this.trigger("vmouseover", event, data);
+		this.trigger("vmousedown", event, data);
+	},
+
+	handleTouchMove: function(event, data){
+		this.didScroll = true;
+		this.trigger("vmousemove", event, data);
+	},
+
+	handleTouchEnd: function(event, data){
+		this.element.unbind("touchmove", sequencerEventCallback);
+		this.element.unbind("touchend", sequencerEventCallback);
+
+		this.trigger("vmouseup", event, data);
+		if (!this.didScroll)
+			this.trigger("vclick", event, data);
+		this.trigger("vmouseout", event, data);
+		this.didScroll = false;
 	}
 });
 
@@ -93,9 +179,7 @@ function mouseEventCallback(event, data) {
 	if (this.ignoreMouseEvents) {
 		return;
 	}
-	event = $.Event(event);
-	event.type = "v" + event.type;
-	this.element.trigger(event, data);
+	this.trigger("v" + event.type, event, data);
 }
 
 var handleFuncNames = "handleOver handleDown handleMove handleUp handleClick handleOut".split(" ");
