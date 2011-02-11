@@ -125,14 +125,16 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 		item.find( "h1, h2, h3, h4, h5, h6" ).addClass( "ui-li-heading" );
 
-		item.find( "p, dl" ).addClass( "ui-li-desc" );
+		item.find( "p, dl, aside" ).addClass( "ui-li-desc" );
+
+    item.find( "aside" ).addClass("ui-li-aside");
 
 		item.find( "li" ).find( "img:eq(0)" ).addClass( "ui-li-thumb" ).each(function() {
 			$( this ).closest( "li" )
 				.addClass( $(this).is( ".ui-li-icon" ) ? "ui-li-has-icon" : "ui-li-has-thumb" );
 		});
 
-		var aside = item.find( ".ui-li-aside" );
+		var aside = item.find( "aside" );
 
 		if ( aside.length ) {
             aside.each(function(i, el) {
