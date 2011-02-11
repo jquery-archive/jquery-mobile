@@ -442,6 +442,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 			self.menuType = "page";
 			self.menuPageContent.append( self.list );
+			self.menuPage.data().listview = self.list.data().listview;
 			$.mobile.changePage(self.menuPage, 'pop', false, true);
 		}
 		else {

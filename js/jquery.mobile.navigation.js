@@ -464,7 +464,7 @@
 		function enhancePage(){
 
 			//set next page role, if defined
-			if ( nextPageRole || to.data('role') === 'dialog' ) {
+			if ( nextPageRole || to.data('role') === 'dialog' && !(to.data('listview')) ) {
 				url = urlHistory.getActive().url + dialogHashKey;
 				if(nextPageRole){
 					to.attr( "data-role", nextPageRole );
