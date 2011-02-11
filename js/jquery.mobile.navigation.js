@@ -645,7 +645,41 @@
 
 		//if there's a data-rel=back attr, go back in history
 		if( $this.is( "[data-rel='back']" ) ){
-			window.history.back();
+			var goBack = -1,
+				curr = $.mobile.urlHistory.stack[$.mobile.urlHistory.activeIndex],
+				prev = $.mobile.urlHistory.stack[($.mobile.urlHistory.activeIndex-1)],
+				currIsDialog = false,
+				prevIsDialog = false;
+				
+			if( $.mobile.urlHistory.activeIndex > 0 && prev.url.indexOf(dialogHashKey) > -1 ) {			
+				$.each( $.mobile.urlHistory.stack, function( i ){
+					curr = $.mobile.urlHistory.stack[i];
+					if( i > 0 ){
+						prev = $.mobile.urlHistory.stack[(i-1)];
+						if( curr.url.indexOf(dialogHashKey) > -1 && prev.url.indexOf(dialogHashKey) > -1 ){
+							goBack--;
+							currIsDialog = true;
+							prevIsDialog = true;
+						}else if( curr.url.indexOf(dialogHashKey) > -1 ){
+							currIsDialog = true;
+							prevIsDialog = false;
+						}
+					}
+					if( !($.mobile.urlHistory.stack[$.mobile.urlHistory.activeIndex].url.indexOf(dialogHashKey) > -1) ){
+						if( currIsDialog && !prevIsDialog && $.mobile.urlHistory.activeIndex === ($.mobile.urlHistory.stack.length - 1) ){
+							goBack = -1;
+						}
+					} else {
+						if( currIsDialog && !prevIsDialog ){
+							goBack++;
+						}
+					}
+				});
+				goBack--;
+				window.history.go(goBack);
+			} else {
+				window.history.back();
+			}
 			return false;
 		}
 
