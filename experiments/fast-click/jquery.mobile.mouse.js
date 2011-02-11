@@ -27,6 +27,7 @@
 
 var dataSequencerName = "mouseEventSequencer";
 var touchEventProps = "clientX clientY pageX pageY screenX screenY".split(" ");
+var clickBlockList = [];
 
 function sequencerEventCallback(event, data)
 {
@@ -154,7 +155,7 @@ $.extend(MouseEventSequencer.prototype, {
 		this.clearResetTimer();
 		this.resetTimerID = setTimeout(function(){
 			self.resetTimerID = 0;
-			self.ignoreMouseEvents = false;
+			self.enableMouseEvents();
 		}, 2000);
 	},
 
@@ -165,10 +166,33 @@ $.extend(MouseEventSequencer.prototype, {
 		}
 	},
 
+	disableMouseEvents: function() {
+		// Note that we are not automatically pushing
+		// our element on the clickBlockList because there
+		// are cases, such as clicks on links, where we
+		// need the click event to fire so that the
+		// default link handling is triggered.
+		this.ignoreMouseEvents = true;
+	},
+
+	enableMouseEvents: function() {
+		this.ignoreMouseEvents = false;
+	
+		// Remove any instances of our element in
+		// the click block list.
+		var ele = this.element[0];
+		var cnt = clickBlockList.length;
+		for (var i = cnt - 1; i >= 0; i--) {
+			if (ele == clickBlockList[i]){
+				clickBlockList.splice(i, 1);
+			}
+		}
+	},
+
 	handleTouchStart: function(event, data){
 		this.clearResetTimer();
 
-		this.ignoreMouseEvents = true;
+		this.disableMouseEvents();
 		this.didScroll = false;
 
 		this.element.bind("touchmove", sequencerEventCallback);
@@ -191,7 +215,9 @@ $.extend(MouseEventSequencer.prototype, {
 		this.trigger("vmouseup", event, data);
 		if (!this.didScroll){
 			if (this.trigger("vclick", event, data)){
-				// prevent the pending click.
+				// Push this element on the block list to prevent any clicks
+				// from getting to the bubble phase.
+				clickBlockList.push(this.element[0]);
 			}
 		}
 		this.trigger("vmouseout", event, data);
@@ -241,5 +267,20 @@ var vevents = "vmouseover vmousedown vmousemove vmouseup vclick vmouseout".split
 for (var i = 0; i < vevents.length; i++){
 	$.event.special[vevents[i]] = getSpecialEventObject(vevents[i]);
 }
+
+// Add a capture click handler to block clicks.
+document.addEventListener("click", function(e){
+	var cnt = clickBlockList.length;
+	var target = event.target;
+	while (target) {
+		for (var i = 0; i < cnt; i++) {
+			if (target == clickBlockList[i]){
+				e.preventDefault();
+				e.stopPropagation();
+			}
+		}
+		target = target.parentNode;
+	}
+}, true);
 
 })(jQuery, window, document);
