@@ -42,6 +42,7 @@ function MouseEventSequencer(element)
 	this.activeHandlers = {};
 	this.ignoreMouseEvents = false;
 	this.didScroll = false;
+	this.resetTimerID = 0;
 }
 
 $.extend(MouseEventSequencer.prototype, {
@@ -144,10 +145,29 @@ $.extend(MouseEventSequencer.prototype, {
 				}
 			}
 		}
-		return this.element.trigger(event, data);
+		this.element.trigger(event, data);
+		return event.isDefaultPrevented();
+	},
+
+	startResetTimer: function() {
+		var self = this;
+		this.clearResetTimer();
+		this.resetTimerID = setTimeout(function(){
+			self.resetTimerID = 0;
+			self.ignoreMouseEvents = false;
+		}, 2000);
+	},
+
+	clearResetTimer: function() {
+		if (this.resetTimerID){
+			clearTimeout(this.resetTimerID);
+			this.resetTimerID = 0;
+		}
 	},
 
 	handleTouchStart: function(event, data){
+		this.clearResetTimer();
+
 		this.ignoreMouseEvents = true;
 		this.didScroll = false;
 
@@ -161,6 +181,7 @@ $.extend(MouseEventSequencer.prototype, {
 	handleTouchMove: function(event, data){
 		this.didScroll = true;
 		this.trigger("vmousemove", event, data);
+		this.startResetTimer();
 	},
 
 	handleTouchEnd: function(event, data){
@@ -168,10 +189,15 @@ $.extend(MouseEventSequencer.prototype, {
 		this.element.unbind("touchend", sequencerEventCallback);
 
 		this.trigger("vmouseup", event, data);
-		if (!this.didScroll)
-			this.trigger("vclick", event, data);
+		if (!this.didScroll){
+			if (this.trigger("vclick", event, data)){
+				// prevent the pending click.
+			}
+		}
 		this.trigger("vmouseout", event, data);
 		this.didScroll = false;
+
+		this.startResetTimer();
 	}
 });
 
