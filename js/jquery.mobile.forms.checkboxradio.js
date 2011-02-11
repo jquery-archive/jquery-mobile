@@ -55,6 +55,11 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			},
 			
 			"touchend mouseup": function( event ){
+				if ( input.is( ":disabled" ) )
+				{
+					event.preventDefault();
+					return;
+				}
 				label.removeData("movestart");
 				if( label.data("etype") && label.data("etype") !== event.type || label.data("moved") ){
 					label.removeData("etype").removeData("moved");
