@@ -41,8 +41,8 @@
 			ok($('body > [data-url="nested-list-test&ui-page=More-animals-0"]').length == 1, "Adds first UL to the page");
 			ok($('body > [data-url="nested-list-test&ui-page=Groups-of-animals-1"]').length == 1, "Adds second nested UL to the page");
 			start();
-		}, 1000)
-	})
+		}, 1000);
+	});
 
 	asyncTest( "change to nested page when the li is clicked", function() {
 		$('.ui-page-active li:eq(1)').click();
@@ -53,7 +53,7 @@
 					ok($('.ui-listview', $new_page).find(":contains('Shoal of Bass')").length == 1, "The current page should have the proper text in the list.");
 					start();
 				}, 1000);
-	})
+	});
 
 	asyncTest( "should go back to top level when the back button is clicked", function() {
 		$('body > [data-url="nested-list-test&ui-page=More-animals-0"]').find('a:contains("Back")').click();
@@ -61,13 +61,13 @@
 			ok($('#nested-list-test').hasClass('ui-page-active'), 'Transitions back to the parent nested page');
 			start();
 		}, 1000);
-	})
-	
+	});
+
 	test( "nested list title should use first text node, regardless of line breaks", function(){
 		ok($('#nested-list-test .linebreaknode').text() === "More animals", 'Text should be "More animals"');
 	});
 
-	module('Ordered Lists')
+	module('Ordered Lists');
 
 	asyncTest( "changes to the numbered list page and enhances it", function() {
 		location.href = location.href.split('#')[0] + "#numbered-list-test";
@@ -83,7 +83,7 @@
 	asyncTest( "changes to number 1 page when the li is clicked", function() {
 		$('.ui-page-active li').first().click();
 		setTimeout(function() {
-			ok($('#numbered-list-results').hasClass('ui-page-active'), "The new numbered page was transitioned correctly.")
+			ok($('#numbered-list-results').hasClass('ui-page-active'), "The new numbered page was transitioned correctly.");
 			start();
 		}, 1000);
 	});
@@ -94,9 +94,9 @@
 			ok($('#numbered-list-test').hasClass('ui-page-active'));
 			start();
 		}, 1000);
-	})
+	});
 
-	module('Read only list')
+	module('Read only list');
 
 	asyncTest( "changes to the read only page when hash is changed", function() {
 		location.href = location.href.split('#')[0] + "#read-only-list-test";
@@ -110,14 +110,14 @@
 	});
 
 	asyncTest( "Does not go to new page when an item is clicked", function() {
-		$('li', $('#read-only-list-test').first().click())
+		$('li', $('#read-only-list-test').first().click());
 		setTimeout(function() {
-			ok($('.ui-page-active').attr('id') == "read-only-list-test", "Page does not change for read only lists")
+			ok($('.ui-page-active').attr('id') == "read-only-list-test", "Page does not change for read only lists");
 			start();
 		}, 1000);
 	});
 
-	module('Split view list')
+	module('Split view list');
 
 	asyncTest( "changes the page to the split view list and enhances it correctly.", function() {
 		location.href = location.href.split('#')[0] + "#split-list-test";
@@ -174,10 +174,13 @@
 		}, 1000);
 	});
 
-	module( "Search Filter" );
+	module( "Search Filter", {
+		setup: function(){
+			location.href = location.href.split('#')[0] + "#search-filter-test";
+		}
+	});
 
 	asyncTest( "Make the search filter page the actie page and enhance it correctly.", function() {
-		location.href = location.href.split('#')[0] + "#search-filter-test";
 		setTimeout(function() {
 			var $new_page = $('#search-filter-test');
 			ok($new_page.find('input').length == 1);
@@ -191,7 +194,7 @@
 		$('.ui-page-active input').trigger('change');
 
 		setTimeout(function() {
-			ok($('.ui-page-active li[style="display: none; "]').length == 2);
+			same($('.ui-page-active li[style="display: none;"]').length, 2);
 			start();
 		}, 1000);
 	});
@@ -200,7 +203,7 @@
 		$('.ui-page-active input').val('a');
 		$('.ui-page-active input').trigger('change');
 		setTimeout(function() {
-			ok($('.ui-page-active li[style="display: none; "]').length == 0);
+			same($('.ui-page-active li[style="display: none;"]').length, 0);
 			start();
 		}, 1000);
 	});
