@@ -127,7 +127,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 		item.find( "p, dl" ).addClass( "ui-li-desc" );
 
-		item.find( "img" ).addClass( "ui-li-thumb" ).each(function() {
+		item.find( "li" ).find( "img:eq(0)" ).addClass( "ui-li-thumb" ).each(function() {
 			$( this ).closest( "li" )
 				.addClass( $(this).is( ".ui-li-icon" ) ? "ui-li-has-icon" : "ui-li-has-thumb" );
 		});
@@ -178,17 +178,21 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				return;
 			}
 
+			var itemTheme = item.data("theme") || o.theme;
+
 			var a = item.find( "a" );
 				
 			if ( a.length ) {	
+				var icon = item.data("icon");
+				
 				item
 					.buttonMarkup({
 						wrapperEls: "div",
 						shadow: false,
 						corners: false,
 						iconpos: "right",
-						icon: a.length > 1 ? false : item.data("icon") || "arrow-r",
-						theme: o.theme
+						icon: a.length > 1 || icon === false ? false : icon || "arrow-r",
+						theme: itemTheme
 					});
 
 				a.first().addClass( "ui-link-inherit" );
@@ -200,13 +204,14 @@ $.widget( "mobile.listview", $.mobile.widget, {
 						splittheme = $list.data( "splittheme" ) || last.data( "theme" ) || o.splitTheme;
 					
 					last
+						.appendTo(item)
 						.attr( "title", last.text() )
 						.addClass( "ui-li-link-alt" )
 						.empty()
 						.buttonMarkup({
 							shadow: false,
 							corners: false,
-							theme: o.theme,
+							theme: itemTheme,
 							icon: false,
 							iconpos: false
 						})
@@ -230,7 +235,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				}
 
 			} else {
-				itemClass += " ui-li-static ui-btn-up-" + o.theme;
+				itemClass += " ui-li-static ui-btn-up-" + itemTheme;
 			}
 			
 			
@@ -249,7 +254,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
 							self._removeCorners( item.next() );		
 						}
 	
-				} else if ( pos === li.length - 1 ) {
+				}
+				if ( pos === li.length - 1 ) {
 						itemClass += " ui-corner-bottom";
 	
 						item
@@ -298,7 +304,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		$( parentList.find( "ul, ol" ).toArray().reverse() ).each(function( i ) {
 			var list = $( this ),
 				parent = list.parent(),
-				title = $.trim(parent.contents()[ 0 ].nodeValue.split("\n")[0]) || parent.find('a:first').text(),
+				title = $.trim(parent.contents()[ 0 ].nodeValue) || parent.find('a:first').text(),
 				id = parentId + "&" + $.mobile.subPageUrlKey + "=" + self._idStringEscape(title + " " + i),
 				theme = list.data( "theme" ) || o.theme,
 				countTheme = list.data( "counttheme" ) || parentList.data( "counttheme" ) || o.countTheme,

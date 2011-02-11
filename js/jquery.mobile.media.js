@@ -28,9 +28,17 @@ $.mobile.media = (function() {
 
 	return function( query ) {
 		if ( !( query in cache ) ) {
-			var styleBlock = $( "<style type='text/css'>" +
-				"@media " + query + "{#jquery-mediatest{position:absolute;}}" +
-				"</style>" );
+			var styleBlock = document.createElement('style'),
+        		cssrule = "@media " + query + " { #jquery-mediatest { position:absolute; } }";
+	        //must set type for IE!	
+	        styleBlock.type = "text/css";
+	        if (styleBlock.styleSheet){ 
+	          styleBlock.styleSheet.cssText = cssrule;
+	        } 
+	        else {
+	          styleBlock.appendChild(document.createTextNode(cssrule));
+	        } 
+				
 			$html.prepend( fakeBody ).prepend( styleBlock );
 			cache[ query ] = testDiv.css( "position" ) === "absolute";
 			fakeBody.add( styleBlock ).remove();
@@ -101,7 +109,14 @@ $(document).bind("mobileinit.htmlclass", function(){
 		//add classes to HTML element for min/max breakpoints
 		detectResolutionBreakpoints();
 	});
+});
 
+/* Manually trigger an orientationchange event when the dom ready event fires.
+   This will ensure that any viewport meta tag that may have been injected
+   has taken effect already, allowing us to properly calculate the width of the
+   document.
+*/
+$(function(){
 	//trigger event manually
 	$window.trigger( "orientationchange.htmlclass" );
 });

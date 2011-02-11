@@ -3,8 +3,9 @@
 	<head>
 	<meta charset="utf-8" /> 
 	<title>jQuery Mobile Docs - Lists</title> 
-	<link rel="stylesheet"  href="../../themes/default" />  
+	<link rel="stylesheet"  href="../../themes/default/" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	<script type="text/javascript" src="../../js/jquery.js"></script>
 	<script type="text/javascript" src="../../js/"></script>
 	<script type="text/javascript" src="docs/docs.js"></script>
 </head> 
@@ -12,13 +13,15 @@
 
 <div data-role="page">
 
-	<div data-role="header">
+	<div data-role="header" data-theme="b">
 		<h1>Nested list</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
 	<div data-role="content">
 		<ul data-role="listview">
-			<li>Animals
+			<li><h3><a href="#">Animals</a></h3>
+			<p>All your favorites from aarkvarks to zebras.</p>
 				<ul>
 					<li>Pets
 						<ul>
@@ -59,11 +62,13 @@
 							<li><a href="index.html">Panda bear</a></li>
 							<li><a href="index.html">Polar bear</a></li>
 							<li><a href="index.html">Tiger</a></li>
+							<li><a href="index.html">Zebra</a></li>
 						</ul>
 					</li>
 				</ul>
 			</li>
-			<li>Colors
+			<li><h3><a href="#">Colors</a></h3>
+			<p>Fresh colors from the magic rainbow.</p>
 				<ul>
 					<li><a href="index.html">Blue</a></li>
 					<li><a href="index.html">Green</a></li>
@@ -71,6 +76,7 @@
 					<li><a href="index.html">Purple</a></li>
 					<li><a href="index.html">Red</a></li>
 					<li><a href="index.html">Yellow</a></li>
+					<li><a href="index.html">Violet</a></li>
 				</ul>
 			</li>
 			<li>

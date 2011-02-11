@@ -3,16 +3,18 @@
 	<head>
 	<meta charset="utf-8" /> 
 	<title>jQuery Mobile Framework - Static Containers, States</title> 
-	<link rel="stylesheet"  href="../../themes/default" /> 
+	<link rel="stylesheet"  href="../../themes/default/" /> 
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	<script type="text/javascript" src="../../js/jquery.js"></script>
 	<script type="text/javascript" src="../../js/"></script>
 </head> 
 <body> 
 
 <div data-role="page">
 
-	<div data-role="header">
+	<div data-role="header" data-theme="b">
 		<h1>Themes</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div>
 
 	<div data-role="content">
@@ -90,7 +92,7 @@
 			</div>
 			<div class="ui-bar ui-bar-a">
 				<div data-role="controlgroup" data-type="horizontal" >
-					<a href="#" data-inline="true">Button</a><a href="#" data-inline="true">Button</a><a href="#" data-inline="true">Button</a>
+					<a href="#" data-role="button" data-inline="true">Button</a><a href="#" data-role="button" data-inline="true">Button</a><a href="#" data-role="button" data-inline="true">Button</a>
 				</div><!-- /controlgroup -->
 			</div>
 
@@ -151,49 +153,49 @@
 		<p>If you want to add visual emphasis to a button and help it stand out visually from its parent toolbar, an alternate swatch color can be set by adding a <code>data-theme="a"</code> to the anchor. Once an alternate swatch color is set on a button in the markup, the framework won't override that color if the parent theme is changed, because you made a conscious decision to set it.</p>
 		
 		<div class="swatch-bars">
-			<div data-role="header" data-theme="a" class="ui-bar" data-nobackbtn="true">
+			<div data-role="header" data-theme="a" class="ui-bar" data-backbtn="false">
 				<div><!-- wrapper div to have control over butttons -->
-					<a href="index.html" data-icon="arrow-l" data-theme="a">A</a>
-					<a href="index.html" data-icon="arrow-l" data-theme="b">B</a>
-					<a href="index.html" data-icon="arrow-l" data-theme="c">C</a>
-					<a href="index.html" data-icon="arrow-l" data-theme="d">D</a>
-					<a href="index.html" data-icon="arrow-l" data-theme="e">E</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="a">A</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="b">B</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="c">C</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="d">D</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="e">E</a>
 				</div>
 			</div>
-			<div data-role="header" data-theme="b" class="ui-bar" data-nobackbtn="true">
+			<div data-role="header" data-theme="b" class="ui-bar" data-backbtn="false">
 				<div><!-- wrapper div to have control over butttons -->
-					<a href="index.html" data-icon="arrow-l" data-theme="a">A</a>
-					<a href="index.html" data-icon="arrow-l" data-theme="b">B</a>
-					<a href="index.html" data-icon="arrow-l" data-theme="c">C</a>
-					<a href="index.html" data-icon="arrow-l" data-theme="d">D</a>
-					<a href="index.html" data-icon="arrow-l" data-theme="e">E</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="a">A</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="b">B</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="c">C</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="d">D</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="e">E</a>
 				</div>
 			</div>
-			<div data-role="header" data-theme="c" class="ui-bar" data-nobackbtn="true">
+			<div data-role="header" data-theme="c" class="ui-bar" data-backbtn="false">
 				<div><!-- wrapper div to have control over butttons -->
-					<a href="index.html" data-icon="arrow-l" data-theme="a">A</a>
-					<a href="index.html" data-icon="arrow-l" data-theme="b">B</a>
-					<a href="index.html" data-icon="arrow-l" data-theme="c">C</a>
-					<a href="index.html" data-icon="arrow-l" data-theme="d">D</a>
-					<a href="index.html" data-icon="arrow-l" data-theme="e">E</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="a">A</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="b">B</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="c">C</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="d">D</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="e">E</a>
 				</div>
 			</div>
-			<div data-role="header" data-theme="d" class="ui-bar" data-nobackbtn="true">
+			<div data-role="header" data-theme="d" class="ui-bar" data-backbtn="false">
 				<div><!-- wrapper div to have control over butttons -->
-					<a href="index.html" data-icon="arrow-l" data-theme="a">A</a>
-					<a href="index.html" data-icon="arrow-l" data-theme="b">B</a>
-					<a href="index.html" data-icon="arrow-l" data-theme="c">C</a>
-					<a href="index.html" data-icon="arrow-l" data-theme="d">D</a>
-					<a href="index.html" data-icon="arrow-l" data-theme="e">E</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="a">A</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="b">B</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="c">C</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="d">D</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="e">E</a>
 				</div>
 			</div>
-			<div data-role="header" data-theme="e" class="ui-bar" data-nobackbtn="true">
+			<div data-role="header" data-theme="e" class="ui-bar" data-backbtn="false">
 				<div><!-- wrapper div to have control over butttons -->
-					<a href="index.html" data-icon="arrow-l" data-theme="a">A</a>
-					<a href="index.html" data-icon="arrow-l" data-theme="b">B</a>
-					<a href="index.html" data-icon="arrow-l" data-theme="c">C</a>
-					<a href="index.html" data-icon="arrow-l" data-theme="d">D</a>
-					<a href="index.html" data-icon="arrow-l" data-theme="e">E</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="a">A</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="b">B</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="c">C</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="d">D</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="e">E</a>
 				</div>
 			</div>
 			
@@ -225,7 +227,8 @@
 			<li><a href="../toolbars/bars-themes.html">Toolbar theming</a></li>
 			<li><a href="../content/content-themes.html">Content theming</a></li>
 			<li><a href="../buttons/buttons-themes.html">Button theming</a></li>
-			<li><a href="../lists/lists-themes.html">List theming</a></li>
+            <li><a href="../forms/forms-themes.html">Form theming</a></li>
+            <li><a href="../lists/lists-themes.html">List theming</a></li>
 		</ul>
 	</div><!-- end content -->
 	

@@ -14,7 +14,6 @@
 	<script type="text/javascript" src="../../../js/jquery.mobile.core.js"></script>
  	<script type="text/javascript" src="../../../js/jquery.mobile.navigation.js"></script>
 	<script type="text/javascript" src="../../../js/jquery.mobile.page.js"></script>
-	<script type="text/javascript" src="../../../js/jquery.ui.position.js"></script>
 	<script type="text/javascript" src="../../../js/jquery.mobile.fixHeaderFooter.js"></script>
 	<script type="text/javascript" src="../../../js/jquery.mobile.forms.checkboxradio.js"></script>
 	<script type="text/javascript" src="../../../js/jquery.mobile.forms.textinput.js"></script>
@@ -33,10 +32,11 @@
 	<script type="text/javascript" src="../../../tests/jquery.testHelper.js"></script>
 
 
-	<link rel="stylesheet" href="../../../themes/default" type="text/css"/>
+	<link rel="stylesheet" href="../../../themes/default/" type="text/css"/>
 	<link rel="stylesheet" href="../../../external/qunit.css" type="text/css"/>
 	<script type="text/javascript" src="../../../external/qunit.js"></script>
 
+	<script type="text/javascript" src="navigation_transitions.js"></script>
 	<script type="text/javascript" src="navigation_core.js"></script>
 </head>
 <body>
@@ -46,16 +46,6 @@
 <h2 id="qunit-userAgent"></h2>
 <ol id="qunit-tests">
 </ol>
-
-<!-- NOTE body must be used in place of main otherwise transition behaviour fails -->
-
-<style>
-	[data-role='page'] {
-	  position: absolute;
-	  top: -10000px;
-	  left: -10000px;
-	}
-</style>
 
 <div id="foo" data-role="page">
 	<a href="#bar" data-transition="flip"></a>
@@ -87,6 +77,17 @@
 
 <div id="default-trans" data-role="page">
 	<a href="#no-trans"></a>
+</div>
+
+<div id="ajax-diabled-form" data-role="page">
+	<form method="POST" id="non-ajax-form" action="/ajax-disabled-form" data-ajax="false">
+	</form>
+
+	<form method="POST" id="ajax-form" action="/ajax-diabled-form">
+	</form>
+
+	<form method="POST" id="rand-ajax-form" action="/ajax-disabled-form" data-ajax="foo">
+	</form>
 </div>
 </body>
 </html>

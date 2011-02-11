@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>jQuery Mobile Select Events Test Suite</title>
+
+	<script type="text/javascript" src="../../../js/jquery.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.ui.widget.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.widget.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.media.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.support.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.event.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.hashchange.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.core.js"></script>
+ 	<script type="text/javascript" src="../../../js/jquery.mobile.navigation.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.page.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.fixHeaderFooter.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.forms.checkboxradio.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.forms.textinput.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.forms.select.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.buttonMarkup.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.forms.button.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.forms.slider.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.collapsible.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.controlGroup.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.fieldContain.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.listview.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.listview.filter.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.dialog.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.navbar.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.grid.js"></script>
+	<script type="text/javascript" src="../../../tests/jquery.testHelper.js"></script>
+
+
+	<link rel="stylesheet" href="../../../themes/default/" type="text/css"/>
+	<link rel="stylesheet" href="../../../external/qunit.css" type="text/css"/>
+	<script type="text/javascript" src="../../../external/qunit.js"></script>
+
+	<script type="text/javascript" src="select_events.js"></script>
+</head>
+<body>
+
+<h1 id="qunit-header">jQuery Mobile Select Event Test Suite</h1>
+<h2 id="qunit-banner"></h2>
+<h2 id="qunit-userAgent"></h2>
+<ol id="qunit-tests">
+</ol>
+
+<div id="foo" data-role="page">
+	<div data-role="fieldcontain" id="select-choice-few-container">
+		<select name="select-choice-few" id="select-choice-few">
+			<option value="standard">Standard: 7 day</option>
+			<option value="rush">Rush: 3 days</option>
+			<option value="express">Express: next day</option>
+			<option value="overnight">Overnight</option>
+		</select>
+	</div>
+
+	<div data-role="fieldcontain" id="select-choice-native-container">
+		<select name="select-choice-native" id="select-choice-native" data-native-menu="true">
+			<option value="standard">Standard: 7 day</option>
+			<option value="rush">Rush: 3 days</option>
+			<option value="express">Express: next day</option>
+			<option value="overnight">Overnight</option>
+		</select>
+	</div>
+
+	<div data-role="fieldcontain" id="select-choice-global-native-container">
+		<select name="select-choice-global-native" id="select-choice-global-native">
+			<option value="standard">Standard: 7 day</option>
+			<option value="rush">Rush: 3 days</option>
+			<option value="express">Express: next day</option>
+			<option value="overnight">Overnight</option>
+		</select>
+	</div>
+
+	<div data-role="fieldcontain" id="select-choice-many-container">
+		<label for="select-choice-many" class="select">Your state:</label>
+		<select name="select-choice-many" id="select-choice-many">
+			<option value="AL">Alabama</option>
+			<option value="AK">Alaska</option>
+			<option value="AZ">Arizona</option>
+			<option value="AR">Arkansas</option>
+			<option value="CA">California</option>
+			<option value="CO">Colorado</option>
+			<option value="CT">Connecticut</option>
+			<option value="DE">Delaware</option>
+			<option value="FL">Florida</option>
+			<option value="GA">Georgia</option>
+			<option value="HI">Hawaii</option>
+			<option value="ID">Idaho</option>
+			<option value="IL">Illinois</option>
+			<option value="IN">Indiana</option>
+			<option value="IA">Iowa</option>
+			<option value="KS">Kansas</option>
+			<option value="KY">Kentucky</option>
+			<option value="LA">Louisiana</option>
+			<option value="ME">Maine</option>
+			<option value="MD">Maryland</option>
+			<option value="MA">Massachusetts</option>
+			<option value="MI">Michigan</option>
+			<option value="MN">Minnesota</option>
+			<option value="MS">Mississippi</option>
+			<option value="MO">Missouri</option>
+			<option value="MT">Montana</option>
+			<option value="NE">Nebraska</option>
+			<option value="NV">Nevada</option>
+			<option value="NH">New Hampshire</option>
+			<option value="NJ">New Jersey</option>
+			<option value="NM">New Mexico</option>
+			<option value="NY">New York</option>
+			<option value="NC">North Carolina</option>
+			<option value="ND">North Dakota</option>
+			<option value="OH">Ohio</option>
+			<option value="OK">Oklahoma</option>
+			<option value="OR">Oregon</option>
+			<option value="PA">Pennsylvania</option>
+			<option value="RI">Rhode Island</option>
+			<option value="SC">South Carolina</option>
+			<option value="SD">South Dakota</option>
+			<option value="TN">Tennessee</option>
+			<option value="TX">Texas</option>
+			<option value="UT">Utah</option>
+			<option value="VT">Vermont</option>
+			<option value="VA">Virginia</option>
+			<option value="WA">Washington</option>
+			<option value="WV">West Virginia</option>
+			<option value="WI">Wisconsin</option>
+			<option value="WY">Wyoming</option>
+		</select>
+	</div>
+</div>
+</html>

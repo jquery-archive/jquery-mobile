@@ -2,9 +2,10 @@
 <html> 
 	<head>
 	<meta charset="utf-8" /> 
-	<title>jQuery Mobile Docs - Buttons</title> 
-	<link rel="stylesheet"  href="../../themes/default" />  
+	<title>jQuery Mobile Docs - Button Theming</title> 
+	<link rel="stylesheet"  href="../../themes/default/" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	<script type="text/javascript" src="../../js/jquery.js"></script>
 	<script type="text/javascript" src="../../js/"></script>
 	<script type="text/javascript" src="../docs/docs.js"></script>
 </head> 
@@ -12,15 +13,16 @@
 
 <div data-role="page">
 
-	<div data-role="header">
+	<div data-role="header" data-theme="b">
 		<h1>Theming buttons</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
 	<div data-role="content">
 			
 			<h2>Theming</h2>
 			
-			<p>jQuery Mobile has a rich <a href="../themes/index.html">theming system</a> that gives you full control of how buttons are styled. When a link is added to a container, it is automatically assigned a theme swatch letter that matches it's parent bar or content box to visually integrate the button into the parent container, like a chameleon. So a button placed inside a content container with a theme of "a" (black in the default theme) will be automatically assigned the button theme of "a" (charcoal in the default theme). Here are examples of the button theme pairings in the default theme. All buttons have the same HTML markup: </p>
+			<p>jQuery Mobile has a rich <a href="../api/themes.html">theming system</a> that gives you full control of how buttons are styled. When a link is added to a container, it is automatically assigned a theme swatch letter that matches it's parent bar or content box to visually integrate the button into the parent container, like a chameleon. So a button placed inside a content container with a theme of "a" (black in the default theme) will be automatically assigned the button theme of "a" (charcoal in the default theme). Here are examples of the button theme pairings in the default theme. All buttons have the same HTML markup: </p>
 			
 			<div data-role="content" data-theme="a"><h4>A swatch</h4><a href="index.html" data-role="button">Button</a></div>
 			<div data-role="content" data-theme="b"><h4>B swatch</h4><a href="index.html" data-role="button">Button</a></div>

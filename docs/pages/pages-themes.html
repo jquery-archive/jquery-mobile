@@ -3,8 +3,9 @@
 	<head>
 	<meta charset="utf-8" /> 
 	<title>jQuery Mobile Docs - Pages</title> 
-	<link rel="stylesheet"  href="../../themes/default" />  
+	<link rel="stylesheet"  href="../../themes/default/" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	<script type="text/javascript" src="../../js/jquery.js"></script>
 	<script type="text/javascript" src="../../js/"></script>
 	<script type="text/javascript" src="docs/docs.js"></script>
 </head> 
@@ -12,15 +13,16 @@
 
 <div data-role="page">
 
-	<div data-role="header">
+	<div data-role="header" data-theme="b">
 		<h1>Theming pages</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
 	<div data-role="content">
 			
 			<h2>Page Theming</h2>
 			
-			<p>jQuery Mobile has a rich <a href="../themes/index.html">theming system</a> that gives you full control of how pages are styled. There is detailed theming documentation within each page widget, but let's look at a few high-level examples of how theming is applied.</p>
+			<p>jQuery Mobile has a rich <a href="../api/themes.html">theming system</a> that gives you full control of how pages are styled. There is detailed theming documentation within each page widget, but let's look at a few high-level examples of how theming is applied.</p>
 			
 			<p>The <code>data-theme</code> attribute can be applied to the header and footer containers to apply any of the lettered theme color swatches. While the <code>data-theme</code> attribute could be added to the content container, we recommend adding it instead to <code>div</code> or container that has been assigned the <code>data-role="page"</code> attribute to ensure that the background color is applied to the full page.</p>
 			
@@ -43,7 +45,7 @@
 				 	<input type="range" name="slider1" id="slider1" value="50" min="0" max="100" />
 				     <fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
 				     	<legend>Cache settings:</legend>
-				         	<input type="radio" name="radio-choice-y1" id="radio-choice-y1" value="on" checked="checked" />
+				         	<input type="radio" name="radio-choice-z1" id="radio-choice-y1" value="on" checked="checked" />
 				         	<label for="radio-choice-y1">On</label>
 				         	<input type="radio" name="radio-choice-z1" id="radio-choice-z1" value="off"  />
 				         	<label for="radio-choice-z1">Off</label>
@@ -52,7 +54,7 @@
 			</div>
 			<div class="ui-bar ui-bar-a">
 				<div data-role="controlgroup" data-type="horizontal" >
-					<a href="#" data-inline="true">Button</a><a href="#" data-inline="true">Button</a><a href="#" data-inline="true">Button</a>
+					<a href="#" data-inline="true" data-role="button">Button</a><a href="#" data-inline="true" data-role="button">Button</a><a href="#" data-inline="true" data-role="button">Button</a>
 				</div><!-- /controlgroup -->
 			</div>
 
@@ -79,7 +81,7 @@
 			</div>
 			<div class="ui-bar ui-bar-a">
 				<div data-role="controlgroup" data-type="horizontal" >
-					<a href="#" data-inline="true">Button</a><a href="#" data-inline="true">Button</a><a href="#" data-inline="true">Button</a>
+					<a href="#" data-inline="true" data-role="button">Button</a><a href="#" data-inline="true" data-role="button">Button</a><a href="#" data-inline="true" data-role="button">Button</a>
 				</div><!-- /controlgroup -->
 			</div>
 
@@ -104,7 +106,7 @@
 			</div>
 			<div class="ui-bar ui-bar-b">
 				<div data-role="controlgroup" data-type="horizontal" >
-					<a href="#" data-inline="true">Button</a><a href="#" data-inline="true">Button</a><a href="#" data-inline="true">Button</a>
+					<a href="#" data-inline="true" data-role="button">Button</a><a href="#" data-inline="true" data-role="button">Button</a><a href="#" data-inline="true" data-role="button">Button</a>
 				</div><!-- /controlgroup -->
 			</div>
 			
@@ -128,7 +130,7 @@
 			</div>
 			<div class="ui-bar ui-bar-c">
 				<div data-role="controlgroup" data-type="horizontal" >
-					<a href="#" data-inline="true">Button</a><a href="#" data-inline="true">Button</a><a href="#" data-inline="true">Button</a>
+					<a href="#" data-inline="true" data-role="button">Button</a><a href="#" data-inline="true" data-role="button">Button</a><a href="#" data-inline="true" data-role="button">Button</a>
 				</div><!-- /controlgroup -->
 			</div>
 			
@@ -152,7 +154,7 @@
 			</div>
 			<div class="ui-bar ui-bar-d">
 				<div data-role="controlgroup" data-type="horizontal" >
-					<a href="#" data-inline="true">Button</a><a href="#" data-inline="true">Button</a><a href="#" data-inline="true">Button</a>
+					<a href="#" data-inline="true" data-role="button">Button</a><a href="#" data-inline="true" data-role="button">Button</a><a href="#" data-inline="true" data-role="button">Button</a>
 				</div><!-- /controlgroup -->
 			</div>
 			
@@ -176,7 +178,7 @@
 			</div>
 			<div class="ui-bar ui-bar-e">
 				<div data-role="controlgroup" data-type="horizontal" >
-					<a href="#" data-inline="true">Button</a><a href="#" data-inline="true">Button</a><a href="#" data-inline="true">Button</a>
+					<a href="#" data-inline="true" data-role="button">Button</a><a href="#" data-inline="true" data-role="button">Button</a><a href="#" data-inline="true" data-role="button">Button</a>
 				</div><!-- /controlgroup -->
 			</div>
 

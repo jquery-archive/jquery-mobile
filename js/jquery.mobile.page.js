@@ -30,7 +30,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 
 	_create: function() {
 		var $elem = this.element,
-			o = this.options;
+			o = this.options;	
 
 		this.keepNative = "[data-role='none'], [data-role='nojs']" + (o.keepNative ? ", " + o.keepNative : "");
 
@@ -46,8 +46,6 @@ $.widget( "mobile.page", $.mobile.widget, {
 		});
 
 		$elem.find( "[data-role='nojs']" ).addClass( "ui-nojs" );
-
-		this._enchanceControls();
 
 		// pre-find data els
 		var $dataEls = $elem.find( "[data-role]" ).andSelf().each(function() {
@@ -77,15 +75,11 @@ $.widget( "mobile.page", $.mobile.widget, {
 
 				// auto-add back btn on pages beyond first view
 				if ( o.addBackBtn && role === "header" &&
-						($.mobile.urlStack.length > 1 || $(".ui-page").length > 1) &&
-						!leftbtn && !$this.data( "noBackBtn" ) ) {
+						$( ".ui-page" ).length > 1 &&
+						$elem.data( "url" ) !== $.mobile.path.stripHash( location.hash ) &&
+						!leftbtn && $this.data( "backbtn" ) !== false ) {
 
-					$( "<a href='#' class='ui-btn-left' data-icon='arrow-l'>"+ o.backBtnText +"</a>" )
-						.click(function() {
-							history.back();
-							return false;
-						})
-						.prependTo( $this );
+					$( "<a href='#' class='ui-btn-left' data-rel='back' data-icon='arrow-l'>"+ o.backBtnText +"</a>" ).prependTo( $this );
 				}
 
 				//page title
@@ -122,6 +116,9 @@ $.widget( "mobile.page", $.mobile.widget, {
 					break;
 			}
 		});
+		
+		//enhance form controls
+  	this._enhanceControls();
 
 		//links in bars, or those with data-role become buttons
 		$elem.find( "[data-role='button'], .ui-bar > a, .ui-header > a, .ui-footer > a" )
@@ -142,7 +139,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 		$elem.fixHeaderFooter();
 	},
 
-	_enchanceControls: function() {
+	_enhanceControls: function() {
 		var o = this.options;
 
 		// degrade inputs to avoid poorly implemented native functionality
@@ -157,32 +154,49 @@ $.widget( "mobile.page", $.mobile.widget, {
 			}
 		});
 
+		// We re-find form elements since the degredation code above
+		// may have injected new elements. We cache the non-native control
+		// query to reduce the number of times we search through the entire page.
+
+		var allControls = this.element.find("input, textarea, select, button"),
+			nonNativeControls = allControls.not(this.keepNative);
+
+		// XXX: Temporary workaround for issue 785. Turn off autocorrect and
+		//      autocomplete since the popup they use can't be dismissed by
+		//      the user. Note that we test for the presence of the feature
+		//      by looking for the autocorrect property on the input element.
+
+		var textInputs = allControls.filter( "input[type=text]" );
+		if (textInputs.length && typeof textInputs[0].autocorrect !== "undefined") {
+			textInputs.each(function(){
+				// Set the attribute instead of the property just in case there
+				// is code that attempts to make modifications via HTML.
+				this.setAttribute("autocorrect", "off");
+				this.setAttribute("autocomplete", "off");
+			});
+		}
+
 		// enchance form controls
-		this.element
-			.find( "[type='radio'], [type='checkbox']" )
-			.not(this.keepNative)
+		nonNativeControls
+			.filter( "[type='radio'], [type='checkbox']" )
 			.checkboxradio();
 
-		this.element
-			.find( "button, [type='button'], [type='submit'], [type='reset'], [type='image']" )
-			.not(this.keepNative)
+		nonNativeControls
+			.filter( "button, [type='button'], [type='submit'], [type='reset'], [type='image']" )
 			.button();
 
-		this.element
-			.find( "input, textarea" )
-			.not( "[type='radio'], [type='checkbox'], button, [type='button'], [type='submit'], [type='reset'], [type='image']" )
-			.not(this.keepNative)
+		nonNativeControls
+			.filter( "input, textarea" )
+			.not( "[type='radio'], [type='checkbox'], [type='button'], [type='submit'], [type='reset'], [type='image'], [type='hidden']" )
 			.textinput();
 
-		this.element
-			.find( "input, select" )
-			.not(this.keepNative)
+		nonNativeControls
+			.filter( "input, select" )
 			.filter( "[data-role='slider'], [data-type='range']" )
 			.slider();
 
-		this.element
-			.find( "select:not([data-role='slider'])" )
-			.not(this.keepNative)
+		nonNativeControls
+			.filter( "select:not([data-role='slider'])" )
 			.selectmenu();
 	}
 });

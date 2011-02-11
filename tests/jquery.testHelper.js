@@ -21,7 +21,7 @@
 		reloadLib: function(libName){
 			if(this.reloads[libName] === undefined) {
 				this.reloads[libName] = {
-					lib: $("script[src$=" + libName + "]"),
+					lib: $("script[src$='" + libName + "']"),
 					count: 0
 				};
 			}
@@ -45,6 +45,14 @@
 				result = extendFn(result, extraExtension);
 				return result;
 			};
+		},
+
+		hideActivePageWhenComplete: function() {
+			if( $('#qunit-testresult').length > 0 ) {
+				$('.ui-page-active').css('display', 'none');
+			} else {
+				setTimeout($.testHelper.hideActivePageWhenComplete, 500);
+			}
 		}
 	};
 })(jQuery);

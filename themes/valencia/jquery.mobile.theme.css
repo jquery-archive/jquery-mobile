@@ -708,102 +708,153 @@ a.ui-link-inherit {
 }
 
 /* Icons
-----------------------------------*/
-/* .ui-icon { background-position: 50% 50%; background-repeat: no-repeat; background-color: #fff; background-color: rgba(0,0,0,.4);  -moz-border-radius: 9px; -webkit-border-radius: 9px; border-radius: 9px; } */
+-----------------------------------------------------------------------------------------------------------*/
 
 .ui-icon {
-  background-image:       url(images/icons-18-white.png);
-  background-repeat:      no-repeat; 
-  background-color:       #666; 
-  background-color:       rgba(0,0,0,.4);
-  -moz-border-radius:     9px;
-  -webkit-border-radius:  9px;
-  border-radius:          9px;
+	background-image: url(images/icons-18-white.png);
+	background-repeat: no-repeat;
+	background-color: 					#666;
+	background-color: rgba(0,0,0,.4);
+	-moz-border-radius: 				9px;
+	-webkit-border-radius: 				9px;
+	border-radius: 						9px;
 }
 .ui-icon-disc {
-  background-color:       #666;
-  background-color:       rgba(0,0,0,.3);
-  -moz-border-radius:     9px;
-  -webkit-border-radius:  9px;
-  border-radius:          9px;
+	background-color: 					#666;
+	background-color: 					rgba(0,0,0,.3);
+	-moz-border-radius: 				9px;
+	-webkit-border-radius: 				9px;
+	border-radius: 						9px;
 }
 
-/* alt color */
+/* Alt icon color
+-----------------------------------------------------------------------------------------------------------*/
+
 .ui-icon-black {
-  background-image:       url(images/icons-18-black.png);
+	background-image: url(images/icons-18-black.png);
 }
 .ui-icon-black-disc {
-  background-color:       #fff;
-  background-color:       rgba(255,255,255,.3);
-  -moz-border-radius:     9px;
-  -webkit-border-radius:  9px;
-  border-radius:          9px;
+	background-color: 					#fff;
+	background-color: 					rgba(255,255,255,.3);
+	-moz-border-radius: 				9px;
+	-webkit-border-radius: 				9px;
+	border-radius: 						9px;
 }
 
-/* retina */
-@media  screen and (-webkit-min-device-pixel-ratio: 2), screen and (max--moz-device-pixel-ratio: 2) {
-  .ui-icon {
-    background-size:  558px 18px;
-    background-image: url(images/icons-36-white.png);
-  }
+/* HD/"retina" sprite
+-----------------------------------------------------------------------------------------------------------*/
+
+@media screen and (-webkit-min-device-pixel-ratio: 2), screen and (max--moz-device-pixel-ratio: 2) {
+	.ui-icon {
+	background-image: url(images/icons-36-white.png);
+	background-size: 630px 18px;
+}
 	.ui-icon-black {
-    background-image: url(images/icons-36-black.png);
-  }
+	background-image: url(images/icons-36-black.png);
+}
 }
 
-/*plus minus*/
-.ui-icon-plus {     background-position: -0     0; }
-.ui-icon-minus {    background-position: -36px  0; }
+/* plus minus */
+.ui-icon-plus {
+	background-position: 	-0 0;
+}
+.ui-icon-minus {
+	background-position: 	-36px 0;
+}
 
 /* delete/close */
-.ui-icon-delete {   background-position: -72px  0; }
+.ui-icon-delete {
+	background-position: 	-72px 0;
+}
 
-/*arrows*/
-.ui-icon-arrow-r {  background-position: -108px 0; }
-.ui-icon-arrow-l {  background-position: -144px 0; }
-.ui-icon-arrow-u {  background-position: -180px 0; }
-.ui-icon-arrow-d {  background-position: -216px 0; }
+/* arrows */
+.ui-icon-arrow-r {
+	background-position: 	-108px 0;
+}
+.ui-icon-arrow-l {
+	background-position: 	-144px 0;
+}
+.ui-icon-arrow-u {
+	background-position: 	-180px 0;
+}
+.ui-icon-arrow-d {
+	background-position: 	-216px 0;
+}
 
-.ui-icon-check {    background-position: -252px 0; }
-.ui-icon-gear {     background-position: -288px 0; }
-.ui-icon-refresh {  background-position: -324px 0; }
-.ui-icon-forward {  background-position: -360px 0; }
-.ui-icon-back {     background-position: -396px 0; }
+/* misc */
+.ui-icon-check {
+	background-position: 	-252px 0;
+}
+.ui-icon-gear {
+	background-position: 	-288px 0;
+}
+.ui-icon-refresh {
+	background-position: 	-324px 0;
+}
+.ui-icon-forward {
+	background-position: 	-360px 0;
+}
+.ui-icon-back {
+	background-position: 	-396px 0;
+}
+.ui-icon-grid {
+	background-position: 	-432px 0;
+}
+.ui-icon-star {
+	background-position: 	-468px 0;
+}
+.ui-icon-alert {
+	background-position: 	-504px 0;
+}
+.ui-icon-info {
+	background-position: 	-540px 0;
+}
+.ui-icon-home {
+	background-position: 	-576px 0;
+}
+.ui-icon-search {
+	background-position: 	-612px 0;
+}
 
-.ui-icon-grid {     background-position: -432px 0; }
-.ui-icon-star {     background-position: -468px 0; }
-.ui-icon-alert {    background-position: -504px 0; }
-.ui-icon-info {     background-position: -540px 0; }
 
-/*checks,radios*/
+/* checks,radios */
 .ui-icon-checkbox-off,
 .ui-icon-checkbox-on,
 .ui-icon-radio-off,
 .ui-icon-radio-on {
-  background-color: transparent; 
-  -moz-border-radius:     0; 
-  -webkit-border-radius:  0;
-  border-radius:          0;
-  background-size: 20px 20px;
+	background-color: transparent;
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+	background-size: 20px 20px;
 }
-
-.ui-icon-checkbox-off { background-image: url(images/form-check-off.png); }
-.ui-icon-checkbox-on {  background-image: url(images/form-check-on.png); }
-.ui-icon-radio-off {    background-image: url(images/form-radio-off.png); }
-.ui-icon-radio-on {     background-image: url(images/form-radio-on.png); }
-
-.ui-icon-search {       background-image: url(images/icon-search-black.png); background-size: 16px 16px; }
+.ui-icon-checkbox-off {
+	background-image: url(images/form-check-off.png);
+}
+.ui-icon-checkbox-on {
+	background-image: url(images/form-check-on.png);
+}
+.ui-icon-radio-off {
+	background-image: url(images/form-radio-off.png);}
+.ui-icon-radio-on {
+	background-image: url(images/form-radio-on.png);
+}
+.ui-icon-searchfield {
+	background-image: url(images/icon-search-black.png);
+	background-size: 16px 16px;
+}
 
 /* loading icon */
 .ui-icon-loading {
-  background-image: url(images/ajax-loader.png); 
-  width:  40px;
-  height: 40px;
-  -moz-border-radius:                 20px;
-  -webkit-border-radius:              20px;
-  border-radius:                      20px;
- background-size: 35px 35px;
+	background-image: url(images/ajax-loader.png);
+	width: 40px;
+	height: 40px;
+	-moz-border-radius: 20px;
+	-webkit-border-radius: 20px;
+	border-radius: 20px;
+	background-size: 35px 35px;
 }
+
 
 /* btn Corner radius */
 .ui-btn-corner-tl { 

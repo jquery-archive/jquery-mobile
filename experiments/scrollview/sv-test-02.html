@@ -3,7 +3,7 @@
 	<head>
 	<meta charset="utf-8" />
 	<title>Scrollview Test 02 - Scrollview Events Test</title>
-	<link rel="stylesheet" href="../../themes/default"/>
+	<link rel="stylesheet" href="../../themes/default/"/>
 	<link rel="stylesheet"  href="jquery.mobile.scrollview.css" />
 	<link rel="stylesheet" href="../../docs/_assets/css/jqm-docs.css"/>
     <style type="text/css">
@@ -17,6 +17,7 @@
 	padding: 10px;
 }
 	</style>
+	<script type="text/javascript" src="../../js/jquery.js"></script>
 	<script type="text/javascript" src="../../js"></script>
 	<script type="text/javascript" src="../../docs/lists/docs/docs.js"></script>
 	<script src="jquery.easing.1.3.js"></script>
@@ -133,7 +134,7 @@ $(function(){
     <div data-role="fieldcontain">
         <label for="s_method" class="select">Scrolling Method:</label>
         <select name="s_method" id="s_method" onchange="changeScrollMethod();">
-            <option value="translate">CSS3 Transform/Translate</option>
+            <option value="translate" selected="selected">CSS3 Transform/Translate</option>
             <option value="position">CSS Top/Left Positioning</option>
             <option value="scroll">scrollTop/scrollLeft</option>
         </select>
@@ -142,16 +143,16 @@ $(function(){
     <div data-role="fieldcontain">
         <label for="s_delay" class="select">Delay Form Element Click:</label>
         <select name="s_delay" id="s_delay" onchange="changeDelayFormElementClick();">
-            <option value="yes">Yes</option>
-            <option value="no" selected="selected">No</option>
+            <option value="yes" selected="selected">Yes</option>
+            <option value="no">No</option>
         </select>
     </div>
 
     <div  data-role="fieldcontain">
           <fieldset data-role="controlgroup">
-        <input type="checkbox" name="cb_hd_pd" id="cb_hd_pd" />
+        <input type="checkbox" name="cb_hd_pd" id="cb_hd_pd" checked="checked" />
         <label for="cb_hd_pd">touchstart - Prevent Default</label>
-        <input type="checkbox" name="cb_hd_sp" id="cb_hd_sp" />
+        <input type="checkbox" name="cb_hd_sp" id="cb_hd_sp" checked="checked" />
         <label for="cb_hd_sp">touchstart - Stop Propagation</label>
         <input type="checkbox" name="cb_hm_pd" id="cb_hm_pd" checked="checked" />
         <label for="cb_hm_pd">touchmove - Prevent Default</label>
@@ -166,7 +167,7 @@ $(function(){
     <div id="evtCatcher" data-scroll="y">
 <div  data-role="fieldcontain">
     <label for="tf1">Textfield</label>
-    <input type="textfield" name="tf1" id="tf1" />
+    <input type="text" name="tf1" id="tf1" />
 </div>
 <div  data-role="fieldcontain">
     <label for="ta1">Textarea</label>
@@ -174,8 +175,8 @@ $(function(){
 </div>
 <div  data-role="fieldcontain">
     <label for="ta1">Select</label>
-    <select name="s1" id="s1" value="1">
-    	<option value="1">Option 1</option>
+    <select name="s1" id="s1">
+    	<option value="1" selected="selected">Option 1</option>
     	<option value="2">Option 2</option>
     	<option value="3">Option 3</option>
     	<option value="4">Option 4</option>
