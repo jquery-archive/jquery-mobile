@@ -5,19 +5,6 @@
 	var perspective = "ui-mobile-viewport-perspective",
 			transitioning = "ui-mobile-viewport-transitioning",
 			animationCompleteFn = $.fn.animationComplete,
-
-			//TODO centralize class names?
-			transitionTypes = "in out fade slide flip reverse pop",
-			
-			isTransitioning = function(page){
-				return $.grep(transitionTypes.split(" "), function(className, i){
-					return page.hasClass(className)
-				}).length > 0;
-			},
-			
-			isTransitioningIn = function(page){
-				return page.hasClass("in") && isTransitioning(page);
-			},
 			
 			//animationComplete callback queue
 			callbackQueue = [],
@@ -110,28 +97,6 @@
 		setTimeout(function(){
 			ok($("#no-trans").hasClass("slide"), "has slide class");
 			start();
-		},0);
-	});
-	
-	test( "changePage queues requests", function(){
-		var firstPage = $("#foo"),
-			secondPage = $("#bar");
-		
-		$.mobile.changePage(firstPage);
-		$.mobile.changePage(secondPage);
-		
-		stop();
-		setTimeout(function(){
-			ok(isTransitioningIn(firstPage), "first page begins transition");
-			ok(!isTransitioningIn(secondPage), "second page doesn't transition yet");
-			
-			finishPageTransition();
-			
-			setTimeout(function(){
-				ok(!isTransitioningIn(firstPage), "first page transition should be complete");
-				ok(isTransitioningIn(secondPage), "second page should begin transitioning");
-				start();
-			},0);
 		},0);
 	});
 	

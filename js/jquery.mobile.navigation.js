@@ -128,11 +128,8 @@
 		//contains role for next page, if defined on clicked link via data-rel
 		nextPageRole = null,
 
-		//queue to hold simultanious page transitions
-		pageTransitionQueue = [],
-
-		// indicates whether or not page is in process of transitioning
-		isPageTransitioning = false,
+		//page transition that is currently taking place (if there is one)
+		currentTransitioningPage,
 
 		//nonsense hash change key for dialogs, so they create a history entry
 		dialogHashKey = "&ui-state=dialog";
@@ -219,16 +216,26 @@
 
 	//animation complete callback
 	$.fn.animationComplete = function( callback ){
-		if($.support.cssTransitions){
-			return $(this).one('webkitAnimationEnd', callback);
+		var timer, 
+			self = this;
+		if(!$.support.cssTransitions){
+			timer = setTimeout(function(){
+				self.trigger('webkitAnimationEnd');
+			}, 0);
 		}
-		else{
-			// defer execution for consistency between webkit/non webkit
-			setTimeout(callback, 0);
-		}
+		
+		return this.one('webkitAnimationEnd', function(){
+			//clear timer in case it gets manually triggered
+			if(timer){
+				clearTimeout(timer);
+			}	
+			callback();
+		});
 	};
-
-
+	
+	function stopPageAnimation(page){
+		page.trigger('webkitAnimationEnd');
+	}
 
 /* exposed $.mobile methods	 */
 
@@ -252,6 +259,10 @@
 	// changepage function
 	// TODO : consider moving args to an object hash
 	$.mobile.changePage = function( to, transition, reverse, changeHash, fromHashChange ){
+		if(currentTransitioningPage){
+			stopPageAnimation(currentTransitioningPage);
+		}
+		
 		//from is always the currently viewed page
 		var toIsArray = $.type(to) === "array",
 			toIsObject = $.type(to) === "object",
@@ -276,12 +287,6 @@
 		if( currPage && urlHistory.stack.length > 1 && currPage.url === url && !toIsArray && !toIsObject ) {
 			return;
 		}
-		else if(isPageTransitioning) {
-			pageTransitionQueue.unshift(arguments);
-			return;
-		}
-		
-		isPageTransitioning = true;
 
 		// if the changePage was sent from a hashChange event
 		// guess if it came from the history menu
@@ -340,15 +345,10 @@
 			}
 		}
 
-		function releasePageTransitionLock(){
-			isPageTransitioning = false;
-			if(pageTransitionQueue.length>0) {
-				$.mobile.changePage.apply($.mobile, pageTransitionQueue.pop());
-			}
-		}
-		
 		//function for transitioning between two existing pages
 		function transitionPages() {
+			currentTransitioningPage = to;
+		
 		    $.mobile.silentScroll();
 
 			//get current scroll distance
@@ -408,7 +408,8 @@
 				//remove initial build class (only present on first pageshow)
 				$html.removeClass( "ui-mobile-rendering" );
 
-				releasePageTransitionLock();
+				currentTransitioningPage = null;
+
 			}
 
 			function addContainerClass(className){
@@ -573,7 +574,6 @@
 						.fadeOut( 400, function(){
 							$(this).remove();
 						});
-					releasePageTransitionLock();
 				}
 			});
 		}

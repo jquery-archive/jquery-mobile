@@ -2,7 +2,25 @@
  * mobile navigation unit tests
  */
 (function($){
-	var changePageFn = $.mobile.changePage;
+	var changePageFn = $.mobile.changePage,
+	
+		//TODO centralize class names?
+		transitionTypes = "in out fade slide flip reverse pop",
+		
+		isTransitioning = function(page){
+			return $.grep(transitionTypes.split(" "), function(className, i){
+				return page.hasClass(className)
+			}).length > 0;
+		},
+		
+		isTransitioningIn = function(page){
+			return page.hasClass("in") && isTransitioning(page);
+		},
+		
+		isTransitioningOut = function(page){
+			return page.hasClass("out") && isTransitioning(page);
+		};
+		
 	module('jquery.mobile.navigation.js', {
 		teardown: function(){
 			$.mobile.changePage = changePageFn;
@@ -203,6 +221,18 @@
 			start();
 			ok(called == 1, "change page should be called once");
 		}, 500);
+	});
+	
+	test( "changePage will interrupt current transition if another occurs before it completes", function(){
+		var firstPage = $("#foo"),
+			secondPage = $("#bar");
+		
+		$.mobile.changePage(firstPage);
+		ok(isTransitioningIn(firstPage), "first page begins transition in");
+		$.mobile.changePage(secondPage);
+		
+		ok(isTransitioningOut(firstPage), "first page is now transitioning out");
+		ok(isTransitioningIn(secondPage), "second page is now transitioning in");
 	});
 	
 })(jQuery);
