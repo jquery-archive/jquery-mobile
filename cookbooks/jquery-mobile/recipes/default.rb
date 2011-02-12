@@ -1,5 +1,6 @@
 require_recipe "apt"
 require_recipe "apache2::mod_php5"
+require_recipe "apache2::mod_expires"
 
 #--------------------------------------------------------------------------------
 # Apache
