@@ -4,6 +4,7 @@
 * Dual licensed under the MIT (MIT-LICENSE.txt) or GPL (GPL-LICENSE.txt) licenses.
 */
 .ui-controlgroup, fieldset.ui-controlgroup { padding: 0; margin: .5em 0 1em; }
+.ui-header .ui-controlgroup { margin-top: 0; border: none; }
 .ui-bar .ui-controlgroup { margin: 0 .3em; }
 .ui-controlgroup-label { font-size: 16px; line-height: 1.4; font-weight: normal; margin: 0 0 .3em; }
 .ui-controlgroup-controls { display: block; width: 95%;}
