@@ -652,8 +652,7 @@
 				prevIsDialog = false;
 				
 			if( $.mobile.urlHistory.activeIndex > 0 && prev.url.indexOf(dialogHashKey) > -1 ) {			
-				$.each( $.mobile.urlHistory.stack, function( i ){
-					curr = $.mobile.urlHistory.stack[i];
+				$.each( $.mobile.urlHistory.stack, function( i, curr ){
 					if( i > 0 ){
 						prev = $.mobile.urlHistory.stack[(i-1)];
 						if( curr.url.indexOf(dialogHashKey) > -1 && prev.url.indexOf(dialogHashKey) > -1 ){
