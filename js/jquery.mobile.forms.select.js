@@ -405,8 +405,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		if( this.options.disabled || this.options.nativeMenu ){ return; }
 
 		var self = this,
-			menuHeight = self.list.outerHeight(),
-			menuWidth = self.list.outerWidth(),
+			menuHeight = self.list.parent().outerHeight(),
+			menuWidth = self.list.parent().outerWidth(),
 			scrollTop = $(window).scrollTop(),
 			btnOffset = self.button.offset().top,
 			screenHeight = window.innerHeight,
@@ -455,6 +455,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			var roomtop = btnOffset - scrollTop,
 				roombot = scrollTop + screenHeight - btnOffset,
 				halfheight = menuHeight / 2,
+                maxwidth = parseFloat(self.list.parent().css('max-width')),
 				newtop,newleft;
 				
 				if( roomtop > menuHeight / 2 && roombot > menuHeight / 2 ){
@@ -465,8 +466,17 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					newtop = roomtop > roombot ? scrollTop + screenHeight - menuHeight - 30 : scrollTop + 30;
 				}
 				
-				newleft = self.button.offset().left + self.button.outerWidth() / 2 - menuWidth / 2;
-				
+				if (menuWidth < maxwidth) {
+					newleft = (screenWidth - menuWidth) / 2;
+				} else {
+					newleft = self.button.offset().left + self.button.outerWidth() / 2 - menuWidth / 2;
+					// 30px tolerance off the edges
+					if (newleft < 30) {
+						newleft = 30;
+					} else if ((newleft + menuWidth) > screenWidth) {
+						newleft = screenWidth - menuWidth - 30;
+					}
+				}
 
 			self.listbox
 				.append( self.list )
