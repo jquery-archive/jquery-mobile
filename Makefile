@@ -31,7 +31,8 @@ FILES = js/jquery.ui.widget.js \
   js/jquery.mobile.listview.filter.js \
   js/jquery.mobile.dialog.js \
   js/jquery.mobile.navbar.js \
-  js/jquery.mobile.grid.js
+  js/jquery.mobile.grid.js \
+  js/jquery.mobile.init.js
 
 CSSFILES =  themes/default/jquery.mobile.theme.css \
   themes/default/jquery.mobile.core.css \
