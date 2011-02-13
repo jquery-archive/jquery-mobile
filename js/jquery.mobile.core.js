@@ -106,14 +106,6 @@
 					"</div>" )
 			: undefined;
 
-	// TODO may be better in mobile.init
-	//add mobile, initial load "rendering" classes to docEl
-	$html.addClass( "ui-mobile ui-mobile-rendering" );
-
-	//define & prepend meta viewport tag, if content is defined
-	$.mobile.metaViewportContent ? $( "<meta>", { name: "viewport", content: $.mobile.metaViewportContent}).prependTo( $head ) : undefined;
-
-
 	//expose some core utilities
 	$.extend($.mobile, {
 

@@ -8,6 +8,9 @@
  */
 
 (function( $, window, undefined ) {
+	var	$html = $( "html" ),
+		$head = $( "head" );
+
 	// find and enhance the pages in the dom and transition to the first page.
 	$.mobile.initializePage = function(){
 		//find present pages
@@ -46,6 +49,12 @@
 	if ( !$.mobile.gradeA() ) {
 		return;
 	}
+
+	//add mobile, initial load "rendering" classes to docEl
+	$html.addClass( "ui-mobile ui-mobile-rendering" );
+
+	//define & prepend meta viewport tag, if content is defined
+	$.mobile.metaViewportContent ? $( "<meta>", { name: "viewport", content: $.mobile.metaViewportContent}).prependTo( $head ) : undefined;
 
 	//dom-ready inits
 	$( $.mobile.initializePage );
