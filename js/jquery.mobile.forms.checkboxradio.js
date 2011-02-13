@@ -66,11 +66,13 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 				label.data( "etype", event.type );
 				self._cacheVals();
 				input.attr( "checked", inputtype === "radio" && true || !input.is( ":checked" ) );
-				self._updateAll();
 				event.preventDefault();
 			},
 			
-			click: false
+			click: function( event ) {
+                input.trigger("click");
+                event.preventDefault();
+            }
 			
 		});
 		
@@ -80,8 +82,9 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 					this._cacheVals();
 				},
 				
-				click: function(){
+				click: function( event ){
 					self._updateAll();
+                    event.preventDefault();
 				},
 
 				focus: function() { 
