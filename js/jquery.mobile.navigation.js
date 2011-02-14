@@ -517,7 +517,7 @@
 
 					//pre-parse html to check for a data-url,
 					//use it as the new fileUrl, base path, etc
-					var redirectLoc = / data-url="(.*)"/.test( html ) && RegExp.$1;
+					var redirectLoc = / data-url="([^"]*)"/.test( html ) && RegExp.$1;
 
 					if( redirectLoc ){
 						if(base){
