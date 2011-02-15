@@ -514,12 +514,18 @@
 				type: type,
 				data: data,
 				success: function( html ) {
-
 					//pre-parse html to check for a data-url,
 					//use it as the new fileUrl, base path, etc
-					var redirectLoc = / data-url="([^"]*)"/.test( html ) && RegExp.$1;
+					var all = $("<div></div>"),
+							redirectLoc;
+
+					//workaround to allow scripts to execute when included in page divs
+					all.get(0).innerHTML = html;
+					to = all.find('[data-role="page"], [data-role="dialog"]').first();
+					redirectLoc = all.find('[data-url]').data('url');
 
 					if( redirectLoc ){
+						console.log(redirectLoc);
 						if(base){
 							base.set( redirectLoc );
 						}
@@ -530,11 +536,6 @@
 							base.set(fileUrl);
 						}
 					}
-
-					var all = $("<div></div>");
-					//workaround to allow scripts to execute when included in page divs
-					all.get(0).innerHTML = html;
-					to = all.find('[data-role="page"], [data-role="dialog"]').first();
 
 					//rewrite src and href attrs to use a base url
 					if( !$.support.dynamicBaseTag ){
