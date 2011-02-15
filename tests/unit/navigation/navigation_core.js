@@ -205,25 +205,25 @@
 		}, 500);
 	});
 
-	test( "when loading a page where data-url is defined on a sub element set the hash with that url", function(){
+	asyncTest( "when loading a page where data-url is defined on a sub element set the hash with that url", function(){
 		location.hash = "";
 		$("#data-url a").click();
 
 		setTimeout(function(){
 			ok(location.hash.indexOf("#foo/") >= 0);
 			start();
-		}, 500);
+		}, 1000);
 		stop();
 	});
 
-	test( "when loading a page where data-url is not defined on a sub element hash defaults to the url", function(){
+	asyncTest( "when loading a page where data-url is not defined on a sub element hash defaults to the url", function(){
 		location.hash = "";
 		$("#non-data-url a").click();
 
 		setTimeout(function(){
 			ok(location.hash.indexOf("#non-data-url.html") >= 0);
 			start();
-		}, 500);
+		}, 1000);
 		stop();
 	});
 })(jQuery);
