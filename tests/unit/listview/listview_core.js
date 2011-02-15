@@ -194,7 +194,7 @@
 		$('.ui-page-active input').trigger('change');
 
 		setTimeout(function() {
-			same($('.ui-page-active li[style="display: none;"]').length, 2);
+			same($('.ui-page-active li[style^="display: none;"]').length, 2);
 			start();
 		}, 1000);
 	});
@@ -203,7 +203,7 @@
 		$('.ui-page-active input').val('a');
 		$('.ui-page-active input').trigger('change');
 		setTimeout(function() {
-			same($('.ui-page-active li[style="display: none;"]').length, 0);
+			same($('.ui-page-active li[style^="display: none;"]').length, 0);
 			start();
 		}, 1000);
 	});
