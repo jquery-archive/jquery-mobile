@@ -525,7 +525,6 @@
 					redirectLoc = all.find('[data-url]').data('url');
 
 					if( redirectLoc ){
-						console.log(redirectLoc);
 						if(base){
 							base.set( redirectLoc );
 						}
