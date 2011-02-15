@@ -2,38 +2,23 @@
  * mobile dialog unit tests
  */
 (function($){
-	var wait = function(length){
-		setTimeout(start, length);
-		stop();
-	};
+	module('jquery.mobile.dialog.js');
 
-	module('jquery.mobile.dialog.js', {
-		setup: function(){
-			//bring up the dialog
-			$("a[href='#foo-dialog']").click();
+	asyncTest( "dialog hash is added when the dialog is opened and removed when closed", function(){
+		expect( 2 );
 
-			//wait for the dialog to appear
-			wait(500);
-		},
-		teardown: function(){
+		//bring up the dialog
+		$("a[href='#foo-dialog']").click();
+
+		setTimeout(function(){
+			ok(/&ui-state=dialog/.test(location.hash), "ui-state=dialog =~ location.hash");
 			// close the dialog
 			$(".ui-dialog .ui-icon-delete").parents("a").click();
-
-			// wait for the dialog to disappear
-			wait(500);
-		}
-	});
-
-	test( "dialog hash is added when the dialog is opened", function(){
-		ok(/&ui-state=dialog/.test(location.hash), "ui-state=dialog =~ location.hash");
-	});
-
-	asyncTest( "dialog hash param is removed on close", function(){
-		$(".ui-dialog .ui-icon-delete").parents("a").click();
+		}, 500);
 
 		setTimeout(function(){
 			ok(!/&ui-state=dialog/.test(location.hash), "ui-state=dialog !~ location.hash");
 			start();
-		}, 600);
+		}, 1000);
 	});
 })(jQuery);
