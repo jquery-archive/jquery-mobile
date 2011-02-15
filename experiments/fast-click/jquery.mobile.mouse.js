@@ -69,14 +69,15 @@ $.extend(MouseEventSequencer.prototype, {
 	},
 
 	getNativeEvent: function(event) {
-		while (event && typeof event.originalEvent !== "undefined")
+		while (event && typeof event.originalEvent !== "undefined") {
 			event = event.originalEvent;
+		}
 		return event;
 	},
 
 	hasBindings: function() {
-		var ah = this.activeHandlers;
-		for (var e in ah){
+		var e, ah = this.activeHandlers;
+		for (e in ah){
 			if (ah[e]){
 				return true;
 			}
@@ -271,7 +272,7 @@ for (var i = 0; i < vevents.length; i++){
 // Add a capture click handler to block clicks.
 document.addEventListener("click", function(e){
 	var cnt = clickBlockList.length;
-	var target = event.target;
+	var target = e.target;
 	while (target) {
 		for (var i = 0; i < cnt; i++) {
 			if (target == clickBlockList[i]){
