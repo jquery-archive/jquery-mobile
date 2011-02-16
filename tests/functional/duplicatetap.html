@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title>jQuery Mobile: Event Logger</title>
+	<title>jQuery Mobile: Duplicate Tap Events Test Case</title>
 	<link rel="stylesheet"  href="../../themes/default/" />
 	<link rel="stylesheet" href="../../docs/_assets/css/jqm-docs.css" />
 	
@@ -35,7 +35,7 @@
 
 	<script>
 	$( document )
-		.bind("tap taphold swipe swipeleft swiperight scrollstart scrollstop orientationchange",function( e ){
+		.bind("tap",function( e ){
 			$("#log")
 				.prepend("<li>"+ e.type +" event; target: "+ e.target.nodeName +"</li>")
 				.listview("refresh");
@@ -46,11 +46,13 @@
 <body> 
 <div data-role="page" data-theme="b" id="jqm-home">
 	<div data-role="header">
-		<h1>Event Logger</h1>
+		<h1>Duplicate Tap Events Test Case</h1>
 	</div>
 	
 	<div data-role="content">
-		<p>Touch events on this page will log out below, prepending to the top as they arrive.</p>
+		<p>Run this test case on an iPhone or other mobile devices - tap on the
+		screen, hold for about 1 sec. There should be no duplicate tap event
+		printouts.</p>
 		
 		<ul data-role="listview" id="log">
 			
