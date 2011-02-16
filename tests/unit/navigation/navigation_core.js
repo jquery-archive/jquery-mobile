@@ -216,10 +216,6 @@
 		stop();
 	};
 
-	test( "when loading a page where data-url is defined on a sub element set the hash with that url", function(){
-		testDataUrlHash("#data-url a", /^#foo\//);
-	});
-
 	test( "when loading a page where data-url is not defined on a sub element hash defaults to the url", function(){
 		testDataUrlHash("#non-data-url a", /^#data-url-tests\/non-data-url.html$/);
 	});
