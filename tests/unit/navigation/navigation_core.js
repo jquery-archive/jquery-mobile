@@ -205,25 +205,34 @@
 		}, 500);
 	});
 
-	asyncTest( "when loading a page where data-url is defined on a sub element set the hash with that url", function(){
-		location.hash = "";
-		$("#data-url a").click();
+	var testDataUrlHash = function(linkSelector, hashRegex){
+		window.location.hash = "";
+		$(linkSelector).click();
 
 		setTimeout(function(){
-			ok(location.hash.indexOf("#foo/") >= 0);
+			ok(hashRegex.test(location.hash));
 			start();
-		}, 1000);
+		}, 600);
 		stop();
+	};
+
+	test( "when loading a page where data-url is defined on a sub element set the hash with that url", function(){
+		testDataUrlHash("#data-url a", /^#foo\//);
 	});
 
-	asyncTest( "when loading a page where data-url is not defined on a sub element hash defaults to the url", function(){
-		location.hash = "";
-		$("#non-data-url a").click();
+	test( "when loading a page where data-url is not defined on a sub element hash defaults to the url", function(){
+		testDataUrlHash("#non-data-url a", /^#data-url-tests\/non-data-url.html$/);
+	});
 
-		setTimeout(function(){
-			ok(location.hash.indexOf("#non-data-url.html") >= 0);
-			start();
-		}, 1000);
-		stop();
+	test( "data url works for nested paths", function(){
+		testDataUrlHash("#nested-data-url a", /^#foo\/bar.html$/);
+	});
+
+	test( "data url works for single quoted paths and roles", function(){
+		testDataUrlHash("#single-quotes-data-url a", /^#foo\/bar\/single.html$/);
+	});
+
+	test( "data url works when role and url are reversed on the page element", function(){
+		testDataUrlHash("#reverse-attr-data-url a", /^#foo\/bar\/reverse.html$/);
 	});
 })(jQuery);
