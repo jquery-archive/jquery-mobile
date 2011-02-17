@@ -8,24 +8,24 @@
 
 			//TODO centralize class names?
 			transitionTypes = "in out fade slide flip reverse pop",
-			
+
 			isTransitioning = function(page){
 				return $.grep(transitionTypes.split(" "), function(className, i){
-					return page.hasClass(className)
+					return page.hasClass(className);
 				}).length > 0;
 			},
-			
+
 			isTransitioningIn = function(page){
 				return page.hasClass("in") && isTransitioning(page);
 			},
-			
+
 			//animationComplete callback queue
 			callbackQueue = [],
-			
+
 			finishPageTransition = function(){
 				callbackQueue.pop()();
 			},
-			
+
 			clearPageTransitionStack = function(){
 				stop();
 				var checkTransitionStack = function(){
@@ -33,7 +33,7 @@
 						setTimeout(function(){
 							finishPageTransition();
 							checkTransitionStack();
-						},0)
+						},0);
 					}
 					else {
 						start();
@@ -41,13 +41,13 @@
 				};
 				checkTransitionStack();
 			},
-			
+
 			//wipe all urls
 			clearUrlHistory = function(){
 				$.mobile.urlHistory.stack = [];
 				$.mobile.urlHistory.activeIndex = 0;
 			};
-			
+
 
 	module('jquery.mobile.navigation.js', {
 		setup: function(){
@@ -55,7 +55,7 @@
 			$.fn.animationComplete = function(callback){
 				callbackQueue.unshift(callback);
 			};
-			
+
 		},
 
 		teardown: function(){
@@ -63,15 +63,15 @@
 			$.fn.animationComplete = animationCompleteFn;
 		}
 	});
-	
+
 	QUnit.testStart = function (name) {
 		clearPageTransitionStack();
 		clearUrlHistory();
 	};
-	
+
 	test( "changePage applys perspective class to mobile viewport for flip", function(){
 		$("#foo > a").click();
-		
+
 		ok($("body").hasClass(perspective), "has perspective class");
 	});
 
@@ -83,7 +83,7 @@
 
 	test( "changePage applys transition class to mobile viewport for default transition", function(){
 		$("#baz > a").click();
-		
+
 		ok($("body").hasClass(transitioning), "has transitioning class");
 	});
 
@@ -112,21 +112,21 @@
 			start();
 		},0);
 	});
-	
+
 	test( "changePage queues requests", function(){
 		var firstPage = $("#foo"),
 			secondPage = $("#bar");
-		
+
 		$.mobile.changePage(firstPage);
 		$.mobile.changePage(secondPage);
-		
+
 		stop();
 		setTimeout(function(){
 			ok(isTransitioningIn(firstPage), "first page begins transition");
 			ok(!isTransitioningIn(secondPage), "second page doesn't transition yet");
-			
+
 			finishPageTransition();
-			
+
 			setTimeout(function(){
 				ok(!isTransitioningIn(firstPage), "first page transition should be complete");
 				ok(isTransitioningIn(secondPage), "second page should begin transitioning");
@@ -134,5 +134,16 @@
 			},0);
 		},0);
 	});
-	
+
+	test( "default transition is pop for a dialog", function(){
+		expect( 1 );
+		stop();
+		setTimeout(function(){
+			$("#default-trans-dialog > a").click();
+
+			ok($("#no-trans-dialog").hasClass("pop"), "expected the pop class to be present but instead was " + $("#no-trans-dialog").attr('class'));
+
+			start();
+		}, 900);
+	});
 })(jQuery);

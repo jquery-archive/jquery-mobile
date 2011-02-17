@@ -135,13 +135,13 @@
 		isPageTransitioning = false,
 
 		//nonsense hash change key for dialogs, so they create a history entry
-		dialogHashKey = "&ui-state=dialog";
+		dialogHashKey = "&ui-state=dialog",
 
 		//existing base tag?
-		var $base = $head.children("base"),
-			hostURL = location.protocol + '//' + location.host,
-			docLocation = path.get( hostURL + location.pathname ),
-			docBase = docLocation;
+		$base = $head.children("base"),
+		hostURL = location.protocol + '//' + location.host,
+		docLocation = path.get( hostURL + location.pathname ),
+		docBase = docLocation;
 
 		if ($base.length){
 			var href = $base.attr("href");
@@ -171,7 +171,7 @@
 		}
 
 		//base element management, defined depending on dynamic base tag support
-		base = $.support.dynamicBaseTag ? {
+		var base = $.support.dynamicBaseTag ? {
 
 			//define base element, for use in routing asset urls that are referenced in Ajax-requested markup
 			element: ($base.length ? $base : $("<base>", { href: docBase }).prependTo( $head )),
@@ -336,7 +336,7 @@
 
 		function defaultTransition(){
 			if(transition === undefined){
-				transition = $.mobile.defaultTransition;
+				transition = ( nextPageRole && nextPageRole === 'dialog' ) ? 'pop' : $.mobile.defaultTransition;
 			}
 		}
 
@@ -517,12 +517,16 @@
 					//pre-parse html to check for a data-url,
 					//use it as the new fileUrl, base path, etc
 					var all = $("<div></div>"),
-							redirectLoc;
+							redirectLoc,
+							// TODO handle dialogs again
+							pageElemRegex = /.*(<[^>]*\bdata-role=["']?page["']?[^>]*>).*/,
+							dataUrlRegex = /\bdata-url=["']?([^"'>]*)["']?/;
 
-					//workaround to allow scripts to execute when included in page divs
-					all.get(0).innerHTML = html;
-					to = all.find('[data-role="page"], [data-role="dialog"]').first();
-					redirectLoc = all.find('[data-url]').data('url');
+					// data-url must be provided for the base tag so resource requests can be directed to the
+					// correct url. loading into a temprorary element makes these requests immediately
+					if(pageElemRegex.test(html) && RegExp.$1 && dataUrlRegex.test(RegExp.$1) && RegExp.$1) {
+						redirectLoc = RegExp.$1;
+					}
 
 					if( redirectLoc ){
 						if(base){
@@ -535,6 +539,10 @@
 							base.set(fileUrl);
 						}
 					}
+
+					//workaround to allow scripts to execute when included in page divs
+					all.get(0).innerHTML = html;
+					to = all.find('[data-role="page"], [data-role="dialog"]').first();
 
 					//rewrite src and href attrs to use a base url
 					if( !$.support.dynamicBaseTag ){
