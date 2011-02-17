@@ -12,6 +12,8 @@ Vagrant::Config.run do |config|
   config.vm.share_folder("v-root", "/vagrant", ".", :nfs => true)
 
   # Configure to provision with local cookbooks
-  config.vm.provisioner = :chef_solo
-  config.chef.run_list = ["recipe[jquery-mobile]"]
+  config.vm.provision :chef_solo do |chef|
+    chef.cookbooks_path = "cookbooks"
+    chef.add_recipe "jquery-mobile"
+  end
 end
