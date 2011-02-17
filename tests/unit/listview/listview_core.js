@@ -207,4 +207,13 @@
 			start();
 		}, 1000);
 	});
+
+	test( "Refresh applys thumb styling", function(){
+		var ul = $('.ui-page-active ul');
+
+		ul.append("<li id='fiz'><img/></li>");
+		ok(!ul.find("#fiz img").hasClass("ui-li-thumb"));
+		ul.listview('refresh');
+		ok(ul.find("#fiz img").hasClass("ui-li-thumb"));
+	});
 })(jQuery);
