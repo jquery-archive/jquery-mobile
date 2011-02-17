@@ -55,9 +55,6 @@
 		}, 500);
 	});
 
-
-
-
 	test( "path.get method is working properly", function(){
 		window.location.hash = "foo"
 		same($.mobile.path.get(), "foo", "get method returns location.hash minus hash character");
@@ -232,3 +229,4 @@
 		testDataUrlHash("#reverse-attr-data-url a", /^#foo\/bar\/reverse.html$/);
 	});
 })(jQuery);
+
