@@ -20,243 +20,248 @@
 // The current version simply adds mBind and mUnbind to the $.fn space,
 // but we're considering other methods for making this easier. One alternative
 // would be to allow users to use virtual mouse event names, such as
-// "vmousedown", "vmouseup", etc, to trigger the traditional jQuery special/custom
-// event api, which would then trigger this same code.
+// "vmousedown", "vmouseup", etc, to triggerVirtualEvent the traditional jQuery special/custom
+// event api, which would then triggerVirtualEvent this same code.
 
 (function($, window, document, undefined) {
 
-var dataSequencerName = "mouseEventSequencer";
-var touchEventProps = "clientX clientY pageX pageY screenX screenY".split(" ");
-var clickBlockList = [];
+var dataPropertyName = "virtualMouseBindings",
+	touchEventProps = "clientX clientY pageX pageY screenX screenY".split(" "),
+	activeDocHandlers = {},
+	blockMouseEvents = false,
+	resetTimerID = 0,
+	didScroll = false,
+	clickBlockList = [];
 
-function sequencerEventCallback(event, data)
+function getNativeEvent(event)
 {
-	var seq = $(this).data(dataSequencerName);
-	if (seq){
-		seq.handleEvent(event, data);
+	while (event && typeof event.originalEvent !== "undefined") {
+		event = event.originalEvent;
+	}
+	return event;
+}
+
+function createVirtualEvent(event, eventType)
+{
+	var t = event.type;
+	event = $.Event(event);
+	event.type = eventType;
+	
+	var oe = event.originalEvent;
+	var props = $.event.props;
+	
+	// copy original event properties over to the new event
+	// this would happen if we could call $.event.fix instead of $.Event
+	// but we don't have a way to force an event to be fixed multiple times
+	if (oe) {
+		for ( var i = props.length, prop; i; ) {
+			prop = props[ --i ];
+			event[prop] = oe[prop];
+		}
+	}
+	
+	if (t.search(/^touch/) !== -1){
+		var ne = getNativeEvent(oe);
+		if (typeof ne.touches !== "undefined" && ne.touches[0]){
+			var touch = ne.touches[0];
+			for (var i = 0; i < touchEventProps.length; i++){
+				var prop = touchEventProps[i];
+				event[prop] = touch[prop];
+			}
+		}
+	}
+
+	return event;
+}
+
+function getClosestElementWithVirtualBinding(element, eventType)
+{
+	var $ele = $(element);
+	while ($ele){
+		var b = $ele.data(dataPropertyName);
+		if (b && (!eventType || b[eventType])) {
+			return $ele;
+		}
+		$ele = $ele.parent();
+	}
+	return null;
+}
+
+function disableMouseBindings()
+{
+	blockMouseEvents = true;
+}
+
+function enableMouseBindings()
+{
+	blockMouseEvents = false;
+	clickBlockList.length = 0;
+}
+
+function startResetTimer()
+{
+	clearResetTimer();
+	resetTimerID = setTimeout(function(){
+		resetTimerID = 0;
+		enableMouseBindings();
+	}, 2000);
+}
+
+function clearResetTimer()
+{
+	if (resetTimerID){
+		clearTimeout(resetTimerID);
+		resetTimerID = 0;
 	}
 }
 
-function MouseEventSequencer(element)
+function triggerVirtualEvent(eventType, event)
 {
-	this.element = element;
-	this.activeHandlers = {};
-	this.ignoreMouseEvents = false;
-	this.didScroll = false;
-	this.resetTimerID = 0;
+	var defaultPrevented = false;
+
+	if (getClosestElementWithVirtualBinding(event.target, eventType)) {
+		var ve = createVirtualEvent(event, eventType);
+		$(event.target).trigger(ve);
+		defaultPrevented = ve.isDefaultPrevented();
+	}
+
+	return defaultPrevented;
 }
 
-$.extend(MouseEventSequencer.prototype, {
-	bind: function(eventType, data, namespace) {
-		if (!this.activeHandlers[eventType]){
-			this.element.bind(eventType.substr(1), sequencerEventCallback);
-			this.activeHandlers[eventType] = 0;
-			if (!this.activeHandlers.touchstart){
-				this.element.bind("touchstart", sequencerEventCallback);
-				this.activeHandlers.touchstart = 1;
-			}
-		}
-		this.activeHandlers[eventType] = 1;
-	},
+function mouseEventCallback(event)
+{
+	if (blockMouseEvents){
+		return;
+	}
 
-	unbind: function(eventType, data, namespace) {
-		if (this.activeHandlers[eventType]){
-			--this.activeHandlers[eventType];
-			if (!this.activeHandlers[eventType]){
-				this.element.unbind(eventType.substr(1), sequencerEventCallback);
-			}
-		}
-	},
+	triggerVirtualEvent("v" + event.type, event);
+}
 
-	getNativeEvent: function(event) {
-		while (event && typeof event.originalEvent !== "undefined") {
-			event = event.originalEvent;
-		}
-		return event;
-	},
+function clearResetTimer()
+{
+	if (resetTimerID){
+		clearTimeout(resetTimerID);
+		resetTimerID = 0;
+	}
+}
 
-	hasBindings: function() {
-		var e, ah = this.activeHandlers;
-		for (e in ah){
-			if (ah[e]){
+function handleTouchStart(event)
+{
+	clearResetTimer();
+	
+	disableMouseBindings();
+	didScroll = false;
+
+	var $document = $(document);
+	$document.bind("touchmove", handleTouchMove);
+	$document.bind("touchend", handleTouchEnd);
+	
+	triggerVirtualEvent("vmouseover", event);
+	triggerVirtualEvent("vmousedown", event);
+}
+
+function handleTouchMove(event)
+{
+	didScroll = true;
+	triggerVirtualEvent("vmousemove", event);
+	startResetTimer();
+}
+
+function handleTouchEnd(event)
+{
+	var $document = $(document);
+	$document.unbind("touchmove", handleTouchMove);
+	$document.unbind("touchend", handleTouchEnd);
+	
+	triggerVirtualEvent("vmouseup", event);
+	if (!didScroll){
+		if (triggerVirtualEvent("vclick", event)){
+			// Push this element on the block list to prevent any clicks
+			// from getting to the bubble phase.
+			clickBlockList.push(event.target);
+		}
+	}
+	triggerVirtualEvent("vmouseout", event);
+	didScroll = false;
+	
+	startResetTimer();
+}
+
+function hasVirtualBindings($ele)
+{
+	var bindings = $ele.data(dataPropertyName), k;
+	if (bindings){
+		for (k in bindings){
+			if (bindings[k]){
 				return true;
 			}
 		}
-		return false;
-	},
-
-	handleEvent: function(event, data) {
-		var result;
-		switch(event.type) {
-			case "touchstart":
-				result = this.handleTouchStart(event, data);
-				break;
-			case "touchmove":
-				result = this.handleTouchMove(event, data);
-				break;
-			case "touchend":
-				result = this.handleTouchEnd(event, data);
-				break;
-			case "mouseover":
-				result = this.handleOver(event, data);
-				break;
-			case "mousedown":
-				result = this.handleDown(event, data);
-				break;
-			case "mousemove":
-				result = this.handleMove(event, data);
-				break;
-			case "mouseup":
-				result = this.handleUp(event, data);
-				break;
-			case "click":
-				result = this.handleClick(event, data);
-				break;
-			case "mouseout":
-				result = this.handleOut(event, data);
-				break;
-		}
-		return result;
-	},
-
-	trigger: function(eventType, event, data){
-		var t = event.type;
-		event = $.Event(event);
-		event.type = eventType;
-
-		var oe = event.originalEvent;
-		var props = $.event.props;
-
-		// copy original event properties over to the new event
-		// this would happen if we could call $.event.fix instead of $.Event
-		// but we don't have a way to force an event to be fixed multiple times
-		if (oe) {
-			for ( var i = props.length, prop; i; ) {
-				prop = props[ --i ];
-				event[prop] = oe[prop];
-			}
-		}
-
-		if (t.search(/^touch/) !== -1){
-			var ne = this.getNativeEvent(oe);
-			if (typeof ne.touches !== "undefined" && ne.touches[0]){
-				var touch = ne.touches[0];
-				for (var i = 0; i < touchEventProps.length; i++){
-					var prop = touchEventProps[i];
-					event[prop] = touch[prop];
-				}
-			}
-		}
-		this.element.trigger(event, data);
-		return event.isDefaultPrevented();
-	},
-
-	startResetTimer: function() {
-		var self = this;
-		this.clearResetTimer();
-		this.resetTimerID = setTimeout(function(){
-			self.resetTimerID = 0;
-			self.enableMouseEvents();
-		}, 2000);
-	},
-
-	clearResetTimer: function() {
-		if (this.resetTimerID){
-			clearTimeout(this.resetTimerID);
-			this.resetTimerID = 0;
-		}
-	},
-
-	disableMouseEvents: function() {
-		// Note that we are not automatically pushing
-		// our element on the clickBlockList because there
-		// are cases, such as clicks on links, where we
-		// need the click event to fire so that the
-		// default link handling is triggered.
-		this.ignoreMouseEvents = true;
-	},
-
-	enableMouseEvents: function() {
-		this.ignoreMouseEvents = false;
-	
-		// Remove any instances of our element in
-		// the click block list.
-		var ele = this.element[0];
-		var cnt = clickBlockList.length;
-		for (var i = cnt - 1; i >= 0; i--) {
-			if (ele == clickBlockList[i]){
-				clickBlockList.splice(i, 1);
-			}
-		}
-	},
-
-	handleTouchStart: function(event, data){
-		this.clearResetTimer();
-
-		this.disableMouseEvents();
-		this.didScroll = false;
-
-		this.element.bind("touchmove", sequencerEventCallback);
-		this.element.bind("touchend", sequencerEventCallback);
-
-		this.trigger("vmouseover", event, data);
-		this.trigger("vmousedown", event, data);
-	},
-
-	handleTouchMove: function(event, data){
-		this.didScroll = true;
-		this.trigger("vmousemove", event, data);
-		this.startResetTimer();
-	},
-
-	handleTouchEnd: function(event, data){
-		this.element.unbind("touchmove", sequencerEventCallback);
-		this.element.unbind("touchend", sequencerEventCallback);
-
-		this.trigger("vmouseup", event, data);
-		if (!this.didScroll){
-			if (this.trigger("vclick", event, data)){
-				// Push this element on the block list to prevent any clicks
-				// from getting to the bubble phase.
-				clickBlockList.push(this.element[0]);
-			}
-		}
-		this.trigger("vmouseout", event, data);
-		this.didScroll = false;
-
-		this.startResetTimer();
 	}
-});
-
-function mouseEventCallback(event, data) {
-	if (this.ignoreMouseEvents) {
-		return;
-	}
-	this.trigger("v" + event.type, event, data);
-}
-
-var handleFuncNames = "handleOver handleDown handleMove handleUp handleClick handleOut".split(" ");
-for (var i = 0; i < handleFuncNames.length; i++) {
-	MouseEventSequencer.prototype[handleFuncNames[i]] = mouseEventCallback;
+	return false;
 }
 
 function getSpecialEventObject(eventType)
 {
 	return {
 		setup: function(data, namespace) {
+			// If this is the first virtual mouse binding for this element,
+			// add a bindings object to its data.
+
 			var $this = $(this);
-			var seq = $this.data(dataSequencerName);
-			if (!seq){
-				$this.data(dataSequencerName, seq = new MouseEventSequencer($this));
+			if (!hasVirtualBindings($this)){
+				$this.data(dataPropertyName, {});
 			}
-			seq.bind(eventType, data, namespace);
+
+			// If setup is called, we know it is the first binding for this
+			// eventType, so initialize the count for the eventType to zero.
+
+			var bindings = $this.data(dataPropertyName);
+			bindings[eventType] = true;
+
+			// If this is the first virtual mouse event for this type,
+			// register a global handler on the document.
+
+			activeDocHandlers[eventType] = (activeDocHandlers[eventType] || 0) + 1;
+			if (activeDocHandlers[eventType] == 1){
+				$(document).bind(eventType.substr(1), mouseEventCallback);
+			}
+
+			// If this is the first virtual mouse binding for the document,
+			// register our touchstart handler on the document.
+
+			activeDocHandlers["touchstart"] = (activeDocHandlers["touchstart"] || 0) + 1;
+			if (activeDocHandlers["touchstart"] == 1) {
+				$(document).bind("touchstart", handleTouchStart);
+			}
 		},
 
 		teardown: function(data, namespace) {
+			// If this is the last virtual binding for this eventType,
+			// remove its global handler from the document.
+
+			--activeDocHandlers[eventType];
+			if (!activeEventHandlers[eventType]){
+				$(document).unbind(eventType.substr(1), mouseEventCallback);
+			}
+
+			// If this is the last virtual mouse binding in existence,
+			// remove our document touchstart listener.
+
+			--activeDocHandlers["touchstart"];
+			if (!activeDocHandlers["touchstart"]) {
+				$(document).unbind("touchstart", handleTouchStart);
+			}
+
+			var $this = $(this),
+				bindings = $this.data(dataPropertyName);
+			bindings[eventType] = false;
+
+			// If this is the last virtual mouse binding on the
+			// element, remove the binding data from the element.
+
 			var $this = $(this);
-			var seq = $this.data(dataSequencerName);
-			if (seq){
-				seq.unbind(eventType, data, namespace);
+			if (!hasVirtualBindings($this)){
+				$this.removeData(dataPropertyName);
 			}
 		}
 	};
