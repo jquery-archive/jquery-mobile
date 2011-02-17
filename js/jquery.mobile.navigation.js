@@ -135,13 +135,13 @@
 		isPageTransitioning = false,
 
 		//nonsense hash change key for dialogs, so they create a history entry
-		dialogHashKey = "&ui-state=dialog";
+		dialogHashKey = "&ui-state=dialog",
 
 		//existing base tag?
-		var $base = $head.children("base"),
-			hostURL = location.protocol + '//' + location.host,
-			docLocation = path.get( hostURL + location.pathname ),
-			docBase = docLocation;
+		$base = $head.children("base"),
+		hostURL = location.protocol + '//' + location.host,
+		docLocation = path.get( hostURL + location.pathname ),
+		docBase = docLocation;
 
 		if ($base.length){
 			var href = $base.attr("href");
@@ -171,7 +171,7 @@
 		}
 
 		//base element management, defined depending on dynamic base tag support
-		base = $.support.dynamicBaseTag ? {
+		var base = $.support.dynamicBaseTag ? {
 
 			//define base element, for use in routing asset urls that are referenced in Ajax-requested markup
 			element: ($base.length ? $base : $("<base>", { href: docBase }).prependTo( $head )),
