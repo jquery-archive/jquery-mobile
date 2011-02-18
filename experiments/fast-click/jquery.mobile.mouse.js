@@ -77,7 +77,7 @@ function createVirtualEvent(event, eventType)
 function getClosestElementWithVirtualBinding(element, eventType)
 {
 	var $ele = $(element);
-	while ($ele){
+	while ($ele && $ele.length){
 		var b = $ele.data(dataPropertyName);
 		if (b && (!eventType || b[eventType])) {
 			return $ele;
