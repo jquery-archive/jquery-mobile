@@ -196,6 +196,23 @@
 			else {
 				$window.trigger( "hashchange", [ true ] );
 			}
+		},
+
+		// display an auto-fade message box.
+		messageBox: function( message, delay ){
+			// default delay is 800ms.
+			if ( delay === undefined )
+				delay = 800;
+
+			// no duplicate message boxes.
+			$( "div[data-role='message-box']" ).remove();
+			var $box = $( "<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all' data-role='message-box'><h1></h1></div>" );
+			$box.find( "h1" ).text( message );
+			$box.css({ "display": "block", "opacity": 0.96, "top": $window.scrollTop() + 100 })
+				.appendTo( $.mobile.pageContainer )
+				.delay( delay )
+				.fadeOut( 400, function(){ $(this).remove(); } );
+			return $box;
 		}
 	});
 
