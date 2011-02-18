@@ -659,7 +659,8 @@
 
 		if( url === "#" ){
 			//for links created purely for interaction - ignore
-			return false;
+			event.preventDefault();
+			return;
 		}
 
 		$activeClickedLink = $this.closest( ".ui-btn" ).addClass( $.mobile.activeBtnClass );
