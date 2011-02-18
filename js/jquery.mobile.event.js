@@ -63,20 +63,7 @@ $.event.special.tap = {
 			$this = $( thisObject );
 		
 		$this
-			.bind( "mousedown touchstart", function( event ) {
-				if ( event.which && event.which !== 1 ||
-					//check if event fired once already by a device that fires both mousedown and touchstart (while supporting both events)
-					$this.data( "prevEvent") && $this.data( "prevEvent") !== event.type ) {
-					return false;
-				}
-				
-				//save event type so only this type is let through for a temp duration, 
-				//allowing quick repetitive taps but not duplicative events 
-				$this.data( "prevEvent", event.type );
-				setTimeout(function(){
-					$this.removeData( "prevEvent" );
-				}, 800);
-				
+			.bind( touchStartEvent, function( event ) {
 				var moved = false,
 					touching = true,
 					origTarget = event.target,
@@ -111,9 +98,9 @@ $.event.special.tap = {
 				$(window).one("scroll", moveHandler);
 				
 				$this
-					.bind( "mousemove touchmove", moveHandler )
-					.one( "mouseup touchend", function( event ) {
-						$this.unbind( "mousemove touchmove", moveHandler );
+					.bind( touchMoveEvent, moveHandler )
+					.one( touchStopEvent, function( event ) {
+						$this.unbind( touchMoveEvent, moveHandler );
 						$(window).unbind("scroll", moveHandler);
 						clearTimeout( timer );
 						touching = false;
