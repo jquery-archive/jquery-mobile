@@ -63,25 +63,16 @@ $.event.special.tap = {
 			$this = $( thisObject );
 		
 		$this
-			.bind( "mousedown touchstart", function( event ) {
-				if ( event.which && event.which !== 1 ||
-					//check if event fired once already by a device that fires both mousedown and touchstart (while supporting both events)
-					$this.data( "prevEvent") && $this.data( "prevEvent") !== event.type ) {
+			.bind("vmousedown", function( event ) {
+				if ( event.which && event.which !== 1 ) {
 					return false;
 				}
-				
-				//save event type so only this type is let through for a temp duration, 
-				//allowing quick repetitive taps but not duplicative events 
-				$this.data( "prevEvent", event.type );
-				setTimeout(function(){
-					$this.removeData( "prevEvent" );
-				}, 800);
 				
 				var moved = false,
 					touching = true,
 					origTarget = event.target,
 					origEvent = event.originalEvent,
-					origPos = event.type == "touchstart" ? [origEvent.touches[0].pageX, origEvent.touches[0].pageY] : [ event.pageX, event.pageY ],
+					origPos = [ event.pageX, event.pageY ],
 					originalType,
 					timer;
 					
@@ -91,7 +82,7 @@ $.event.special.tap = {
 						moved = true;
 						return;
 					}
-					var newPageXY = event.type == "touchmove" ? event.originalEvent.touches[0] : event;
+					var newPageXY = event;
 					if ((Math.abs(origPos[0] - newPageXY.pageX) > 10) ||
 					    (Math.abs(origPos[1] - newPageXY.pageY) > 10)) {
 					    moved = true;
@@ -111,9 +102,9 @@ $.event.special.tap = {
 				$(window).one("scroll", moveHandler);
 				
 				$this
-					.bind( "mousemove touchmove", moveHandler )
-					.one( "mouseup touchend", function( event ) {
-						$this.unbind( "mousemove touchmove", moveHandler );
+					.bind( "vmousemove", moveHandler )
+					.one( "vmouseup", function( event ) {
+						$this.unbind( "vmousemove", moveHandler );
 						$(window).unbind("scroll", moveHandler);
 						clearTimeout( timer );
 						touching = false;

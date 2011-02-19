@@ -240,7 +240,7 @@ function getSpecialEventObject(eventType)
 			// remove its global handler from the document.
 
 			--activeDocHandlers[eventType];
-			if (!activeEventHandlers[eventType]){
+			if (!activeDocHandlers[eventType]){
 				$(document).unbind(eventType.substr(1), mouseEventCallback);
 			}
 

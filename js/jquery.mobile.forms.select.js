@@ -172,20 +172,20 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 			select
 				.appendTo(button)
-				.bind( "touchstart mousedown", function( e ){
+				.bind( "vmousedown", function( e ){
 					//add active class to button
 					button.addClass( $.mobile.activeBtnClass );
 				})
-				.bind( "focus mouseover", function(){
-					button.trigger( "mouseover" );
+				.bind( "focus vmouseover", function(){
+					button.trigger( "vmouseover" );
 				})
-				.bind( "touchmove", function(){
+				.bind( "vmousemove", function(){
 					//remove active class on scroll/touchmove
 					button.removeClass( $.mobile.activeBtnClass );
 				})
-				.bind( "change blur mouseout", function(){
+				.bind( "change blur vmouseout", function(){
 					button
-						.trigger( "mouseout" )
+						.trigger( "vmouseout" )
 						.removeClass( $.mobile.activeBtnClass );
 				});
 
@@ -204,11 +204,11 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 			//button events
 			button
-				.bind( "touchstart" , function( event ){
+				.bind( "vmousedown" , function( event ){
 					//set startTouches to cached copy of
-					$( this ).data( "startTouches", $.extend({}, event.originalEvent.touches[ 0 ]) );
+					$( this ).data( "startTouches", $.extend({}, event) );
 				})
-				.bind( $.support.touch ? "touchend" : "mouseup" , function( event ){
+				.bind( "vmouseup" , function( event ){
 					//if it's a scroll, don't open
 					if( $( this ).data( "moved" ) ){
 						$( this ).removeData( "moved" );
@@ -217,9 +217,9 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					}
 					event.preventDefault();
 				})
-				.bind( "touchmove", function( event ){
+				.bind( "vmousemove", function( event ){
 					//if touch moved enough, set data moved and don't open menu
-					var thisTouches = event.originalEvent.touches[ 0 ],
+					var thisTouches = event,
 					startTouches = $( this ).data( "startTouches" ),
 					deltaX = Math.abs(thisTouches.pageX - startTouches.pageX),
 					deltaY = Math.abs(thisTouches.pageY - startTouches.pageY);
@@ -231,7 +231,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		
 	
 			//events for list items
-			list.delegate("li:not(.ui-disabled, .ui-li-divider)", "click", function(event){
+			list.delegate("li:not(.ui-disabled, .ui-li-divider)", "vclick", function(event){
 				// clicking on the list item fires click on the link in listview.js.
 				// to prevent this handler from firing twice if the link isn't clicked on,
 				// short circuit unless the target is the link
@@ -267,7 +267,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			screen
 				.add( headerClose )
 				.add( menuPageClose )
-				.bind("click", function(event){
+				.bind("vclick", function(event){
 					self.close();
 					event.preventDefault();
 	
