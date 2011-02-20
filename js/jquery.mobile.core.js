@@ -12,7 +12,7 @@
 	//jQuery.mobile configurable options
 	$.extend( $.mobile, {
 		
-		//namespace used framework-wide for data-attrs, widget naming, and CSS classes
+		//namespace used framework-wide for data-attrs
 		ns: "jq-",
 
 		//define the url parameter used for referencing widget-generated sub-pages.
@@ -112,11 +112,36 @@
 	var jqd = $.fn.data;
  
     $.fn.data = function( prop, value ){
- 		if( !value && !this.attr( "[data-" + prop + "]" ) && this.attr( "[data-" $.mobile.ns + prop + "]" ) ){
- 			prop = $.mobile.ns + prop;
- 			return jqd.call( this, prop );	
- 		}
+    	var pu = prop === undefined,
+    		vu = value === undefined;
+    		
+    	if( pu || vu ){
+	    	var ret,
+	    		nsret;
+	    	//if no args are passed, a data hash is expected. Remap non-namespaced props
+	    	if( pu ){
+	    		ret = jqd.call( this );
+	    		$.each( ret, function( i ){
+	    			var nsIndex = i.indexOf( $.mobile.ns );
+	    			if( nsIndex == 0 ){
+	    				ret[ i.substr( $.mobile.ns.length ) ] = ret[ i ];
+	    			}
+	    		});
+	    	}
+	    	//if it's a prop get, try namepaced version if prop is undefined
+	    	else if( vu ){
+	    		ret = jqd.call( this, prop );
+	    		if( ret === undefined ){
+	    			nsret = jqd.call( this, $.mobile.ns + prop );
+	    			if( nsret !== undefined ){
+	    				ret = nsret;
+	    			}
+	    		}
+	    	}
+	    	return ret;
+	    }	
     };
+    
 
 	//define vars for interal use
 	var $window = $(window),
