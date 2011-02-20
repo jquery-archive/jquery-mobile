@@ -8,7 +8,7 @@
 
 $.mobile.listview.prototype.options.filter = false;
 
-$( "[data-role='listview']" ).live( "listviewcreate", function() {
+$( "[data-" + $.mobile.ns + "role='listview']" ).live( "listviewcreate", function() {
 	var list = $( this ),
 		listview = list.data( "listview" );
 	if ( !listview.options.filter ) {
@@ -19,7 +19,7 @@ $( "[data-role='listview']" ).live( "listviewcreate", function() {
 
 		search = $( "<input>", {
 				placeholder: "Filter results...",
-				"data-type": "search"
+				"data-" + $.mobile.ns + "type": "search"
 			})
 			.bind( "keyup change", function() {
 				var val = this.value.toLowerCase(),

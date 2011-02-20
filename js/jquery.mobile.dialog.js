@@ -16,14 +16,14 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 			//add ARIA role
 			.attr("role","dialog")
 			.addClass('ui-page ui-dialog ui-body-a')
-			.find('[data-role=header]')
+			.find( "[data-" + $.mobile.ns + "role=header]" )
 			.addClass('ui-corner-top ui-overlay-shadow')
-				.prepend( '<a href="#" data-icon="delete" data-rel="back" data-iconpos="notext">Close</a>' )
+				.prepend( "<a href='#' data-" + $.mobile.ns + "icon='delete' data-" + $.mobile.ns + "rel='back' data-" + $.mobile.ns + "iconpos='notext'>Close</a>" )
 			.end()
 			.find('.ui-content:not([class*="ui-body-"])')
 				.addClass('ui-body-c')
 			.end()
-			.find('.ui-content,[data-role=footer]')
+			.find( ".ui-content,[data-" + $.mobile.ns + "role='footer']" )
 				.last()
 				.addClass('ui-corner-bottom ui-overlay-shadow');
 		
@@ -44,8 +44,8 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 				
 				if( $targetel.length && !$targetel.data("transition") ){
 					$targetel
-						.attr("data-transition", $.mobile.urlHistory.getActive().transition )
-						.attr("data-direction", "reverse");
+						.attr("data-" + $.mobile.ns + "transition", $.mobile.urlHistory.getActive().transition )
+						.attr("data-" + $.mobile.ns + "direction", "reverse");
 				}
 			});
 

@@ -32,7 +32,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 		var $elem = this.element,
 			o = this.options;	
 
-		this.keepNative = "[data-role='none'], [data-role='nojs']" + (o.keepNative ? ", " + o.keepNative : "");
+		this.keepNative = "[data-" + $.mobile.ns + "role='none'], [data-" + $.mobile.ns + "role='nojs']" + (o.keepNative ? ", " + o.keepNative : "");
 
 		if ( this._trigger( "beforeCreate" ) === false ) {
 			return;
@@ -41,21 +41,21 @@ $.widget( "mobile.page", $.mobile.widget, {
 		//some of the form elements currently rely on the presence of ui-page and ui-content
 		// classes so we'll handle page and content roles outside of the main role processing
 		// loop below.
-		$elem.find( "[data-role='page'], [data-role='content']" ).andSelf().each(function() {
-			$(this).addClass( "ui-" + $(this).data( "role" ) );
+		$elem.find( "[data-" + $.mobile.ns + "role='page'], [data-" + $.mobile.ns + "role='content']" ).andSelf().each(function() {
+			$(this).addClass( "ui-" + $.mobile.ns + $(this).data( "role" ) );
 		});
 
-		$elem.find( "[data-role='nojs']" ).addClass( "ui-nojs" );
+		$elem.find( "[data-" + $.mobile.ns + "role='nojs']" ).addClass( "ui-nojs" );
 
 		// pre-find data els
-		var $dataEls = $elem.find( "[data-role]" ).andSelf().each(function() {
+		var $dataEls = $elem.find( "[data-" + $.mobile.ns + "role]" ).andSelf().each(function() {
 			var $this = $( this ),
 				role = $this.data( "role" ),
 				theme = $this.data( "theme" );
 
 			//apply theming and markup modifications to page,header,content,footer
 			if ( role === "header" || role === "footer" ) {
-				$this.addClass( "ui-bar-" + (theme || $this.parent('[data-role=page]').data( "theme" ) || "a") );
+				$this.addClass( "ui-bar-" + (theme || $this.parent( "[data-" + $.mobile.ns + "role='page']" ).data( "theme" ) || "a") );
 
 				// add ARIA role
 				$this.attr( "role", role === "header" ? "banner" : "contentinfo" );
@@ -79,7 +79,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 						$elem.data( "url" ) !== $.mobile.path.stripHash( location.hash ) &&
 						!leftbtn && $this.data( "backbtn" ) !== false ) {
 
-					$( "<a href='#' class='ui-btn-left' data-rel='back' data-icon='arrow-l'>"+ o.backBtnText +"</a>" ).prependTo( $this );
+					$( "<a href='#' class='ui-btn-left' data-" + $.mobile.ns + "rel='back' data-" + $.mobile.ns + "icon='arrow-l'>"+ o.backBtnText +"</a>" ).prependTo( $this );
 				}
 
 				//page title
@@ -121,13 +121,13 @@ $.widget( "mobile.page", $.mobile.widget, {
   	this._enhanceControls();
 
 		//links in bars, or those with data-role become buttons
-		$elem.find( "[data-role='button'], .ui-bar > a, .ui-header > a, .ui-footer > a" )
+		$elem.find( "[data-" + $.mobile.ns + "role='button'], .ui-bar > a, .ui-header > a, .ui-footer > a" )
 			.not( ".ui-btn" )
 			.not(this.keepNative)
 			.buttonMarkup();
 
 		$elem
-			.find("[data-role='controlgroup']")
+			.find("[data-" + $.mobile.ns + "role='controlgroup']")
 			.controlgroup();
 
 		//links within content areas
@@ -150,7 +150,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 			if ( o.degradeInputs[ type ] ) {
 				$( this ).replaceWith(
 					$( "<div>" ).html( $(this).clone() ).html()
-						.replace( /type="([a-zA-Z]+)"/, "type="+ optType +" data-type='$1'" ) );
+						.replace( /type="([a-zA-Z]+)"/, "type="+ optType +" data-" + $.mobile.ns + "type='$1'" ) );
 			}
 		});
 
@@ -192,11 +192,11 @@ $.widget( "mobile.page", $.mobile.widget, {
 
 		nonNativeControls
 			.filter( "input, select" )
-			.filter( "[data-role='slider'], [data-type='range']" )
+			.filter( "[data-" + $.mobile.ns + "role='slider'], [data-" + $.mobile.ns + "type='range']" )
 			.slider();
 
 		nonNativeControls
-			.filter( "select:not([data-role='slider'])" )
+			.filter( "select:not([data-" + $.mobile.ns + "role='slider'])" )
 			.selectmenu();
 	}
 });

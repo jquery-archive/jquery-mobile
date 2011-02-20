@@ -63,7 +63,7 @@ $.fn.buttonMarkup = function( options ){
 		}
 
 		el
-			.attr( "data-theme", o.theme )
+			.attr( "data-" + $.mobile.ns + "theme", o.theme )
 			.addClass( buttonClass );
 
 		var wrap = ("<D class='" + innerClass + "'><D class='ui-btn-text'></D>" +
@@ -84,19 +84,19 @@ $.fn.buttonMarkup.defaults = {
 var attachEvents = function() {
 	$(".ui-btn:not(.ui-disabled)").live({
 		"touchstart mousedown": function() {
-			var theme = $(this).attr( "data-theme" );
+			var theme = $(this).attr( "data-" + $.mobile.ns + "theme" );
 			$(this).removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-down-" + theme );
 		},
 		"touchmove touchend mouseup": function() {
-			var theme = $(this).attr( "data-theme" );
+			var theme = $(this).attr( "data-" + $.mobile.ns + "theme" );
 			$(this).removeClass( "ui-btn-down-" + theme ).addClass( "ui-btn-up-" + theme );
 		},
 		"mouseover focus": function() {
-			var theme = $(this).attr( "data-theme" );
+			var theme = $(this).attr( "data-" + $.mobile.ns + "theme" );
 			$(this).removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-hover-" + theme );
 		},
 		"mouseout blur": function() {
-			var theme = $(this).attr( "data-theme" );
+			var theme = $(this).attr( "data-" + $.mobile.ns + "theme" );
 			$(this).removeClass( "ui-btn-hover-" + theme ).addClass( "ui-btn-up-" + theme );
 		}
 	});

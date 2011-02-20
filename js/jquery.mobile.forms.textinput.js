@@ -31,7 +31,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		var focusedEl = input;
 		
 		//"search" input widget
-		if( input.is('[type="search"],[data-type="search"]') ){
+		if( input.is( "[type='search'],[data-" + $.mobile.ns + "type='search']" ) ){
 			focusedEl = input.wrap('<div class="ui-input-search ui-shadow-inset ui-btn-corner-all ui-btn-shadow ui-icon-searchfield'+ themeclass +'"></div>').parent();
 			var clearbtn = $('<a href="#" class="ui-input-clear" title="clear text">clear text</a>')
 				.tap(function( e ){
@@ -87,11 +87,11 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 	},
 	
 	disable: function(){
-		( this.element.attr("disabled",true).is('[type="search"],[data-type="search"]') ? this.element.parent() : this.element ).addClass("ui-disabled");
+		( this.element.attr("disabled",true).is( "[type='search'],[data-" + $.mobile.ns + "type='search']" ) ? this.element.parent() : this.element ).addClass("ui-disabled");
 	},
 	
 	enable: function(){
-		( this.element.attr("disabled", false).is('[type="search"],[data-type="search"]') ? this.element.parent() : this.element ).removeClass("ui-disabled");
+		( this.element.attr("disabled", false).is( "[type='search'],[data-" + $.mobile.ns + "type='search']" ) ? this.element.parent() : this.element ).removeClass("ui-disabled");
 	}
 });
 })( jQuery );

@@ -364,7 +364,7 @@
 
 			//support deep-links to generated sub-pages
 			if( url.indexOf( "&" + $.mobile.subPageUrlKey ) > -1 ){
-				to = $( "[data-url='" + url + "']" );
+				to = $( "[data-" + $.mobile.ns + "url='" + url + "']" );
 			}
 
 			if( from ){
@@ -473,7 +473,7 @@
 			if ( nextPageRole || to.data('role') === 'dialog' ) {
 				url = urlHistory.getActive().url + dialogHashKey;
 				if(nextPageRole){
-					to.attr( "data-role", nextPageRole );
+					to.attr( "data-" + $.mobile.ns + "role", nextPageRole );
 					nextPageRole = null;
 				}
 			}
@@ -484,11 +484,11 @@
 
 		//if url is a string
 		if( url ){
-			to = $( "[data-url='" + url + "']" );
+			to = $( "[data-" + $.mobile.ns + "url='" + url + "']" );
 			fileUrl = path.getFilePath(url);
 		}
 		else{ //find base url of element, if avail
-			var toID = to.attr('data-url'),
+			var toID = to.attr('data-" + $.mobile.ns + "url'),
 				toIDfileurl = path.getFilePath(toID);
 
 			if(toID !== toIDfileurl){
@@ -527,7 +527,7 @@
 							redirectLoc,
 							// TODO handle dialogs again
 							pageElemRegex = /.*(<[^>]*\bdata-role=["']?page["']?[^>]*>).*/,
-							dataUrlRegex = /\bdata-url=["']?([^"'>]*)["']?/;
+							dataUrlRegex = new RegExp("\bdata-" + $.mobile.ns + "url=[\"']?([^\"'>]*)[\"']?");
 
 					// data-url must be provided for the base tag so resource requests can be directed to the
 					// correct url. loading into a temprorary element makes these requests immediately

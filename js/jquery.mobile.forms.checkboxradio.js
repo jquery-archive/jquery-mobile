@@ -12,7 +12,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 	_create: function(){
 		var self = this,
 			input = this.element,
-			label = input.closest("form,fieldset,[data-role='page']").find("label[for='" + input.attr( "id" ) + "']"),
+			label = input.closest("form,fieldset,[data-" + $.mobile.ns + "role='page']").find("label[for='" + input.attr( "id" ) + "']"),
 			inputtype = input.attr( "type" ),
 			checkedicon = "ui-icon-" + inputtype + "-on",
 			uncheckedicon = "ui-icon-" + inputtype + "-off";
@@ -27,7 +27,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 		label
 			.buttonMarkup({
 				theme: this.options.theme,
-				icon: this.element.parents( "[data-type='horizontal']" ).length ? undefined : uncheckedicon,
+				icon: this.element.parents( "[data-" + $.mobile.ns + "type='horizontal']" ).length ? undefined : uncheckedicon,
 				shadow: false
 			});
 
@@ -110,7 +110,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 
 	//returns either a set of radios with the same name attribute, or a single checkbox
 	_getInputSet: function(){
-		return this.element.closest( "form,fieldset,[data-role='page']" )
+		return this.element.closest( "form,fieldset,[data-" + $.mobile.ns + "role='page']" )
 				.find( "input[name='"+ this.element.attr( "name" ) +"'][type='"+ this.element.attr( "type" ) +"']" );
 	},
 
@@ -126,7 +126,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 
 	refresh: function( ){
 		var input = this.element,
-			label = input.closest("form,fieldset,[data-role='page']").find("label[for='" + input.attr( "id" ) + "']"),
+			label = input.closest("form,fieldset,[data-" + $.mobile.ns + "role='page']").find("label[for='" + input.attr( "id" ) + "']"),
 			inputtype = input.attr( "type" ),
 			icon = label.find( ".ui-icon" ),
 			checkedicon = "ui-icon-" + inputtype + "-on",

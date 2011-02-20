@@ -77,11 +77,11 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				//button theme
 				theme = /ui-btn-up-([a-z])/.exec( button.attr("class") )[1],
 	
-				menuPage = $( "<div data-role='dialog' data-theme='"+ o.menuPageTheme +"'>" +
-							"<div data-role='header'>" +
+				menuPage = $( "<div data-" + $.mobile.ns + "role='dialog' data-theme='"+ o.menuPageTheme +"'>" +
+							"<div data-" + $.mobile.ns + "role='header'>" +
 								"<div class='ui-title'>" + label.text() + "</div>"+
 							"</div>"+
-							"<div data-role='content'></div>"+
+							"<div data-" + $.mobile.ns + "role='content'></div>"+
 						"</div>" )
 						.appendTo( $.mobile.pageContainer )
 						.page(),
@@ -101,7 +101,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 						"id": menuId,
 						"role": "listbox",
 						"aria-labelledby": buttonId,
-						"data-theme": theme
+						"data-" + $.mobile.ns + "theme": theme
 					})
 					.appendTo( listbox ),
 	
@@ -116,8 +116,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					.appendTo( header ),
 	
 				headerClose = $( "<a>", {
-						"data-iconpos": "notext",
-						"data-icon": "delete",
+						"data-" + $.mobile.ns + "iconpos": "notext",
+						"data-" + $.mobile.ns + "icon": "delete",
 						"text": o.closeText,
 						"href": "#",
 						"class": "ui-btn-left"
@@ -307,7 +307,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 				// has this optgroup already been built yet?
 				if( $.inArray(optLabel, optgroups) === -1 ){
-					lis.push( "<li data-role='list-divider'>"+ optLabel +"</li>" );
+					lis.push( "<li data-" + $.mobile.ns + "role='list-divider'>"+ optLabel +"</li>" );
 					optgroups.push( optLabel );
 				}
 			}
@@ -326,7 +326,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				extraAttrs.push( "aria-disabled='true'" );
 			}
 
-			lis.push( "<li data-icon='"+ dataIcon +"' class='"+ classes.join(" ") + "' " + extraAttrs.join(" ") +">"+ anchor +"</li>" )
+			lis.push( "<li data-" + $.mobile.ns + "icon='"+ dataIcon +"' class='"+ classes.join(" ") + "' " + extraAttrs.join(" ") +">"+ anchor +"</li>" )
 		});
 		
 		self.list.html( lis.join(" ") );

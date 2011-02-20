@@ -21,7 +21,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			collapsibleContain = $el.addClass('ui-collapsible-contain'),
 			collapsibleHeading = $el.find(o.heading).eq(0),
 			collapsibleContent = collapsibleContain.wrapInner('<div class="ui-collapsible-content"></div>').find('.ui-collapsible-content'),
-			collapsibleParent = $el.closest('[data-role="collapsible-set"]').addClass('ui-collapsible-set');				
+			collapsibleParent = $el.closest( "[data-" + $.mobile.ns + "role='collapsible-set']" ).addClass('ui-collapsible-set');				
 		
 		//replace collapsibleHeading if it's a legend	
 		if(collapsibleHeading.is('legend')){
@@ -121,7 +121,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 						.not( "> .ui-collapsible-contain .ui-collapsible-contain" )
 						.trigger( "collapse" );
 				})
-			var set = collapsibleParent.find('[data-role=collapsible]')
+			var set = collapsibleParent.find( "[data-" + $.mobile.ns + "role=collapsible]" )
 					
 			set.first()
 				.find('a:eq(0)')	
