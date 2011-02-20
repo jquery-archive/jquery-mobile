@@ -112,14 +112,14 @@
 	var jqd = $.fn.data;
  
     $.fn.data = function( prop, value ){
-    	var pu = prop === undefined,
-    		vu = value === undefined;
+    	var pUndef = prop === undefined,
+    		vUndef = value === undefined;
     		
-    	if( pu || vu ){
+    	if( pUndef || vUndef ){
 	    	var ret,
 	    		nsret;
 	    	//if no args are passed, a data hash is expected. Remap non-namespaced props
-	    	if( pu ){
+	    	if( pUndef ){
 	    		ret = jqd.call( this );
 	    		$.each( ret, function( i ){
 	    			var nsIndex = i.indexOf( $.mobile.ns );
@@ -129,7 +129,7 @@
 	    		});
 	    	}
 	    	//if it's a prop get, try namepaced version if prop is undefined
-	    	else if( vu ){
+	    	else if( vUndef ){
 	    		ret = jqd.call( this, prop );
 	    		if( ret === undefined ){
 	    			nsret = jqd.call( this, $.mobile.ns + prop );
