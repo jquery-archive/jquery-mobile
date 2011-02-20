@@ -11,85 +11,85 @@
 </head> 
 <body> 
 
-<div data-role="page">
+<div data-jq-role="page">
 
-	<div data-role="header" data-theme="b">
+	<div data-jq-role="header" data-jq-theme="b">
 		<h1>Theming buttons</h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+		<a href="../../" data-jq-icon="home" data-jq-iconpos="notext" data-jq-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
-	<div data-role="content">
+	<div data-jq-role="content">
 			
 			<h2>Theming</h2>
 			
 			<p>jQuery Mobile has a rich <a href="../api/themes.html">theming system</a> that gives you full control of how buttons are styled. When a link is added to a container, it is automatically assigned a theme swatch letter that matches it's parent bar or content box to visually integrate the button into the parent container, like a chameleon. So a button placed inside a content container with a theme of "a" (black in the default theme) will be automatically assigned the button theme of "a" (charcoal in the default theme). Here are examples of the button theme pairings in the default theme. All buttons have the same HTML markup: </p>
 			
-			<div data-role="content" data-theme="a"><h4>A swatch</h4><a href="index.html" data-role="button">Button</a></div>
-			<div data-role="content" data-theme="b"><h4>B swatch</h4><a href="index.html" data-role="button">Button</a></div>
-			<div data-role="content" data-theme="c"><h4>C swatch</h4><a href="index.html" data-role="button">Button</a></div>
-			<div data-role="content" data-theme="d"><h4>D swatch</h4><a href="index.html" data-role="button">Button</a></div>
-			<div data-role="content" data-theme="e"><h4>E swatch</h4><a href="index.html" data-role="button">Button</a></div>
+			<div data-jq-role="content" data-jq-theme="a"><h4>A swatch</h4><a href="index.html" data-jq-role="button">Button</a></div>
+			<div data-jq-role="content" data-jq-theme="b"><h4>B swatch</h4><a href="index.html" data-jq-role="button">Button</a></div>
+			<div data-jq-role="content" data-jq-theme="c"><h4>C swatch</h4><a href="index.html" data-jq-role="button">Button</a></div>
+			<div data-jq-role="content" data-jq-theme="d"><h4>D swatch</h4><a href="index.html" data-jq-role="button">Button</a></div>
+			<div data-jq-role="content" data-jq-theme="e"><h4>E swatch</h4><a href="index.html" data-jq-role="button">Button</a></div>
 			
 			<h2>Assigning theme swatches</h2>
 			<p>Button can be manually assigned any of the button color swatches from the theme to add visual contrast with the container they sit inside by adding the <code>data-theme</code> attribute on the button markup and specifying a swatch letter. </p>
 
 <pre><code>			
-&lt;a href=&quot;index.html&quot; data-role=&quot;button&quot; data-theme=&quot;a&quot;&gt;Theme a&lt;/a&gt;			
+&lt;a href=&quot;index.html&quot; data-jq-role=&quot;button&quot; data-jq-theme=&quot;a&quot;&gt;Theme a&lt;/a&gt;			
 </code></pre>
 				
 		<p>Here are 4 buttons with icons that have a different swatch letter assigned via the <code>data-theme</code> attribute.</p>
 	
-		<a href="index.html" data-role="button" data-theme="a" data-icon="arrow-l" data-inline="true">Theme a</a>
-		<a href="index.html" data-role="button" data-theme="b" data-icon="arrow-l" data-inline="true">Theme b</a>
-		<a href="index.html" data-role="button" data-theme="c" data-icon="arrow-l" data-inline="true">Theme c</a>
-		<a href="index.html" data-role="button" data-theme="d" data-icon="arrow-l" data-inline="true">Theme d</a>
-		<a href="index.html" data-role="button" data-theme="e" data-icon="arrow-l" data-inline="true">Theme e</a>
+		<a href="index.html" data-jq-role="button" data-jq-theme="a" data-jq-icon="arrow-l" data-jq-inline="true">Theme a</a>
+		<a href="index.html" data-jq-role="button" data-jq-theme="b" data-jq-icon="arrow-l" data-jq-inline="true">Theme b</a>
+		<a href="index.html" data-jq-role="button" data-jq-theme="c" data-jq-icon="arrow-l" data-jq-inline="true">Theme c</a>
+		<a href="index.html" data-jq-role="button" data-jq-theme="d" data-jq-icon="arrow-l" data-jq-inline="true">Theme d</a>
+		<a href="index.html" data-jq-role="button" data-jq-theme="e" data-jq-icon="arrow-l" data-jq-inline="true">Theme e</a>
 		
 		<h2>Theme variations</h2>
 		
 		<p><strong>"a" theme</strong> on container with themed buttons inside</p>
-		<div data-role="content" data-theme="a">
-			<a href="index.html" data-role="button" data-theme="a" data-icon="arrow-l" data-inline="true">Theme a</a>
-			<a href="index.html" data-role="button" data-theme="b" data-icon="arrow-l" data-inline="true">Theme b</a>
-			<a href="index.html" data-role="button" data-theme="c" data-icon="arrow-l" data-inline="true">Theme c</a>
-			<a href="index.html" data-role="button" data-theme="d" data-icon="arrow-l" data-inline="true">Theme d</a>
-			<a href="index.html" data-role="button" data-theme="e" data-icon="arrow-l" data-inline="true">Theme e</a>
+		<div data-jq-role="content" data-jq-theme="a">
+			<a href="index.html" data-jq-role="button" data-jq-theme="a" data-jq-icon="arrow-l" data-jq-inline="true">Theme a</a>
+			<a href="index.html" data-jq-role="button" data-jq-theme="b" data-jq-icon="arrow-l" data-jq-inline="true">Theme b</a>
+			<a href="index.html" data-jq-role="button" data-jq-theme="c" data-jq-icon="arrow-l" data-jq-inline="true">Theme c</a>
+			<a href="index.html" data-jq-role="button" data-jq-theme="d" data-jq-icon="arrow-l" data-jq-inline="true">Theme d</a>
+			<a href="index.html" data-jq-role="button" data-jq-theme="e" data-jq-icon="arrow-l" data-jq-inline="true">Theme e</a>
 		</div>
 		
 		<p><strong>"b" theme</strong> on container with themed buttons inside</p>
-		<div data-role="content" data-theme="b">
-			<a href="index.html" data-role="button" data-theme="a" data-icon="arrow-l" data-inline="true">Theme a</a>
-			<a href="index.html" data-role="button" data-theme="b" data-icon="arrow-l" data-inline="true">Theme b</a>
-			<a href="index.html" data-role="button" data-theme="c" data-icon="arrow-l" data-inline="true">Theme c</a>
-			<a href="index.html" data-role="button" data-theme="d" data-icon="arrow-l" data-inline="true">Theme d</a>
-			<a href="index.html" data-role="button" data-theme="e" data-icon="arrow-l" data-inline="true">Theme e</a>
+		<div data-jq-role="content" data-jq-theme="b">
+			<a href="index.html" data-jq-role="button" data-jq-theme="a" data-jq-icon="arrow-l" data-jq-inline="true">Theme a</a>
+			<a href="index.html" data-jq-role="button" data-jq-theme="b" data-jq-icon="arrow-l" data-jq-inline="true">Theme b</a>
+			<a href="index.html" data-jq-role="button" data-jq-theme="c" data-jq-icon="arrow-l" data-jq-inline="true">Theme c</a>
+			<a href="index.html" data-jq-role="button" data-jq-theme="d" data-jq-icon="arrow-l" data-jq-inline="true">Theme d</a>
+			<a href="index.html" data-jq-role="button" data-jq-theme="e" data-jq-icon="arrow-l" data-jq-inline="true">Theme e</a>
 		</div>
 		
 		<p><strong>"c" theme</strong> on container with themed buttons inside</p>
-		<div data-role="content" data-theme="c">
-			<a href="index.html" data-role="button" data-theme="a" data-icon="arrow-l" data-inline="true">Theme a</a>
-			<a href="index.html" data-role="button" data-theme="b" data-icon="arrow-l" data-inline="true">Theme b</a>
-			<a href="index.html" data-role="button" data-theme="c" data-icon="arrow-l" data-inline="true">Theme c</a>
-			<a href="index.html" data-role="button" data-theme="d" data-icon="arrow-l" data-inline="true">Theme d</a>
-			<a href="index.html" data-role="button" data-theme="e" data-icon="arrow-l" data-inline="true">Theme e</a>
+		<div data-jq-role="content" data-jq-theme="c">
+			<a href="index.html" data-jq-role="button" data-jq-theme="a" data-jq-icon="arrow-l" data-jq-inline="true">Theme a</a>
+			<a href="index.html" data-jq-role="button" data-jq-theme="b" data-jq-icon="arrow-l" data-jq-inline="true">Theme b</a>
+			<a href="index.html" data-jq-role="button" data-jq-theme="c" data-jq-icon="arrow-l" data-jq-inline="true">Theme c</a>
+			<a href="index.html" data-jq-role="button" data-jq-theme="d" data-jq-icon="arrow-l" data-jq-inline="true">Theme d</a>
+			<a href="index.html" data-jq-role="button" data-jq-theme="e" data-jq-icon="arrow-l" data-jq-inline="true">Theme e</a>
 		</div>
 		
 		<p><strong>"d" theme</strong> on container with themed buttons inside</p>
-		<div data-role="content" data-theme="d">
-			<a href="index.html" data-role="button" data-theme="a" data-icon="arrow-l" data-inline="true">Theme a</a>
-			<a href="index.html" data-role="button" data-theme="b" data-icon="arrow-l" data-inline="true">Theme b</a>
-			<a href="index.html" data-role="button" data-theme="c" data-icon="arrow-l" data-inline="true">Theme c</a>
-			<a href="index.html" data-role="button" data-theme="d" data-icon="arrow-l" data-inline="true">Theme d</a>
-			<a href="index.html" data-role="button" data-theme="e" data-icon="arrow-l" data-inline="true">Theme e</a>
+		<div data-jq-role="content" data-jq-theme="d">
+			<a href="index.html" data-jq-role="button" data-jq-theme="a" data-jq-icon="arrow-l" data-jq-inline="true">Theme a</a>
+			<a href="index.html" data-jq-role="button" data-jq-theme="b" data-jq-icon="arrow-l" data-jq-inline="true">Theme b</a>
+			<a href="index.html" data-jq-role="button" data-jq-theme="c" data-jq-icon="arrow-l" data-jq-inline="true">Theme c</a>
+			<a href="index.html" data-jq-role="button" data-jq-theme="d" data-jq-icon="arrow-l" data-jq-inline="true">Theme d</a>
+			<a href="index.html" data-jq-role="button" data-jq-theme="e" data-jq-icon="arrow-l" data-jq-inline="true">Theme e</a>
 		</div>
 		
 		<p><strong>"d" theme</strong> on container with themed buttons inside</p>
-		<div data-role="content" data-theme="e">
-			<a href="index.html" data-role="button" data-theme="a" data-icon="arrow-l" data-inline="true">Theme a</a>
-			<a href="index.html" data-role="button" data-theme="b" data-icon="arrow-l" data-inline="true">Theme b</a>
-			<a href="index.html" data-role="button" data-theme="c" data-icon="arrow-l" data-inline="true">Theme c</a>
-			<a href="index.html" data-role="button" data-theme="d" data-icon="arrow-l" data-inline="true">Theme d</a>
-			<a href="index.html" data-role="button" data-theme="e" data-icon="arrow-l" data-inline="true">Theme e</a>
+		<div data-jq-role="content" data-jq-theme="e">
+			<a href="index.html" data-jq-role="button" data-jq-theme="a" data-jq-icon="arrow-l" data-jq-inline="true">Theme a</a>
+			<a href="index.html" data-jq-role="button" data-jq-theme="b" data-jq-icon="arrow-l" data-jq-inline="true">Theme b</a>
+			<a href="index.html" data-jq-role="button" data-jq-theme="c" data-jq-icon="arrow-l" data-jq-inline="true">Theme c</a>
+			<a href="index.html" data-jq-role="button" data-jq-theme="d" data-jq-icon="arrow-l" data-jq-inline="true">Theme d</a>
+			<a href="index.html" data-jq-role="button" data-jq-theme="e" data-jq-icon="arrow-l" data-jq-inline="true">Theme e</a>
 		</div>
 		
 	</div><!-- /content -->

@@ -1,7 +1,7 @@
 //set up the theme switcher on the homepage
 $('div').live('pagecreate',function(event){
 	if( !$(this).is('.ui-dialog')){ 
-		$('<a href="#themeswitcher" data-rel="dialog" data-transition="pop">Switch theme</a>')
+		$('<a href="#themeswitcher" data-'+ $.mobile.ns +'rel="dialog" data-'+ $.mobile.ns +'transition="pop">Switch theme</a>')
 			.buttonMarkup({
 				'icon':'gear',
 				'inline': true,

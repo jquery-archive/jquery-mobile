@@ -10,14 +10,14 @@
 </head> 
 <body> 
 
-<div data-role="page">
+<div data-jq-role="page">
 
-	<div data-role="header" data-theme="b">
+	<div data-jq-role="header" data-jq-theme="b">
 		<h1>Footer configuration</h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+		<a href="../../" data-jq-icon="home" data-jq-iconpos="notext" data-jq-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
-	<div data-role="content">
+	<div data-jq-role="content">
 			
 			<h2>Footer bar structure</h2>
 
@@ -34,7 +34,7 @@
 			
 			<p>The <code>footer</code> toolbar will be be themed with the "a" swatch by default (black in the default theme) but you can easily <a href="bars-themes.html">set the theme swatch color</a>.</p> 
 			
-			<div data-role="footer" data-position="inline">
+			<div data-jq-role="footer" data-jq-position="inline">
 				<h4>Footer content</h4>
 			</div>
 			
@@ -50,36 +50,36 @@
 			
 
 <pre><code>
-&lt;div data-role=&quot;footer&quot; class=&quot;ui-bar&quot;&gt;
-	&lt;a href=&quot;index.html&quot; data-role=&quot;button&quot; data-icon=&quot;delete&quot;&gt;Remove&lt;/a&gt;
-	&lt;a href=&quot;index.html&quot; data-role=&quot;button&quot; data-icon=&quot;plus&quot;&gt;Add&lt;/a&gt;
-	&lt;a href=&quot;index.html&quot; data-role=&quot;button&quot; data-icon=&quot;arrow-u&quot;&gt;Up&lt;/a&gt;
-	&lt;a href=&quot;index.html&quot; data-role=&quot;button&quot; data-icon=&quot;arrow-d&quot;&gt;Down&lt;/a&gt;
+&lt;div data-jq-role=&quot;footer&quot; class=&quot;ui-bar&quot;&gt;
+	&lt;a href=&quot;index.html&quot; data-jq-role=&quot;button&quot; data-jq-icon=&quot;delete&quot;&gt;Remove&lt;/a&gt;
+	&lt;a href=&quot;index.html&quot; data-jq-role=&quot;button&quot; data-jq-icon=&quot;plus&quot;&gt;Add&lt;/a&gt;
+	&lt;a href=&quot;index.html&quot; data-jq-role=&quot;button&quot; data-jq-icon=&quot;arrow-u&quot;&gt;Up&lt;/a&gt;
+	&lt;a href=&quot;index.html&quot; data-jq-role=&quot;button&quot; data-jq-icon=&quot;arrow-d&quot;&gt;Down&lt;/a&gt;
 &lt;/div&gt;
 </code></pre>
 
 			<p>This creates this toolbar with buttons sitting in a row</p>
 
 
-			<div data-role="footer" class="ui-bar" data-position="inline">
-				<a href="index.html" data-icon="delete">Remove</a>
-				<a href="index.html" data-icon="plus">Add</a>
-				<a href="index.html" data-icon="arrow-u">Up</a>
-				<a href="index.html" data-icon="arrow-d">Down</a>
+			<div data-jq-role="footer" class="ui-bar" data-jq-position="inline">
+				<a href="index.html" data-jq-icon="delete">Remove</a>
+				<a href="index.html" data-jq-icon="plus">Add</a>
+				<a href="index.html" data-jq-icon="arrow-u">Up</a>
+				<a href="index.html" data-jq-icon="arrow-d">Down</a>
 			</div>
 			
 			<p>To group buttons together into a button set, wrap the links in a wrapper with <code>data-role=&quot;controlgroup&quot;</code> and <code>data-type=&quot;horizontal&quot;</code> attributes.</p>
 			
-<code>&lt;div data-role=&quot;controlgroup&quot; data-type=&quot;horizontal&quot;&gt;</code>
+<code>&lt;div data-jq-role=&quot;controlgroup&quot; data-jq-type=&quot;horizontal&quot;&gt;</code>
 
 			<p>This creates a grouped set of buttons:</p>
 
-			<div data-role="footer" class="ui-bar" data-position="inline">
-				<div data-role="controlgroup" data-type="horizontal">
-					<a href="index.html" data-icon="delete">Remove</a>
-					<a href="index.html" data-icon="plus">Add</a>
-					<a href="index.html" data-icon="arrow-u">Up</a>
-					<a href="index.html" data-icon="arrow-d">Down</a>
+			<div data-jq-role="footer" class="ui-bar" data-jq-position="inline">
+				<div data-jq-role="controlgroup" data-jq-type="horizontal">
+					<a href="index.html" data-jq-icon="delete">Remove</a>
+					<a href="index.html" data-jq-icon="plus">Add</a>
+					<a href="index.html" data-jq-icon="arrow-u">Up</a>
+					<a href="index.html" data-jq-icon="arrow-d">Down</a>
 				</div>
 			</div>
 	
@@ -90,9 +90,9 @@
 			<p>Form elements and other content can also be added to toolbars. Here is an example of a select menu inside a footer bar:</p>
 		
 
-			<div data-role="footer" class="ui-bar" data-position="inline">
+			<div data-jq-role="footer" class="ui-bar" data-jq-position="inline">
 				<label for="select-choice-1">Shipping:</label>
-				<select name="select-choice-1" id="select-choice-1" data-theme="a">
+				<select name="select-choice-1" id="select-choice-1" data-jq-theme="a">
 					<option value="standard">Standard: 7 day</option>
 					<option value="rush">Rush: 3 days</option>
 					<option value="express">Express: next day</option>

@@ -11,14 +11,14 @@
 </head> 
 <body> 
 
-<div data-role="page">
+<div data-jq-role="page">
 
-	<div data-role="header" data-theme="b">
+	<div data-jq-role="header" data-jq-theme="b">
 		<h1>Button icons</h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+		<a href="../../" data-jq-icon="home" data-jq-iconpos="notext" data-jq-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
-	<div data-role="content">
+	<div data-jq-role="content">
 		
 		<h2>Adding Icons to Buttons</h2>
 		<p>The jQuery Mobile framework includes a selected set of icons most often needed for mobile apps. To minimize download size, jQuery Mobile includes a single white icon sprite, and automatically adds a semi-transparent black circle behind the icon to ensure that it has good contrast on any background color.</p> 
@@ -27,81 +27,81 @@
 			<p>An icon can be added to a button by adding a <code>data-icon</code> attribute on the anchor specifying the icon to display.  For example, the following markup:</p> 
 			
 			<code>
-			&lt;a href=&quot;index.html&quot; data-role=&quot;button&quot; <strong>data-icon=&quot;delete&quot;</strong>&gt;Delete&lt;/a&gt;
+			&lt;a href=&quot;index.html&quot; data-jq-role=&quot;button&quot; <strong>data-icon=&quot;delete&quot;</strong>&gt;Delete&lt;/a&gt;
 			</code>
 			
 			<p>Creates this button with an icon:</p>
-			<a href="index.html" data-role="button" data-icon="delete">Delete</a>
+			<a href="index.html" data-jq-role="button" data-jq-icon="delete">Delete</a>
 			
 			<h2>Icon set</h2>
 			
 			<p>The following <code>data-icon</code> attributes can be referenced to create the icons shown below:</p>
 			
-			<p><strong>Left arrow</strong> - data-icon="arrow-l"</p>
-			<a href="index.html" data-role="button" data-icon="arrow-l">My button</a>
-			<p><strong>Right arrow</strong> - data-icon="arrow-r"</p>
-			<a href="index.html" data-role="button" data-icon="arrow-r">My button</a>
-			<p><strong>Up arrow</strong> - data-icon="arrow-u"</p>
-			<a href="index.html" data-role="button" data-icon="arrow-u">My button</a>
-			<p><strong>Down arrow</strong> - data-icon="arrow-d"</p>
-			<a href="index.html" data-role="button" data-icon="arrow-d">My button</a>
-			<p><strong>Delete</strong> - data-icon="delete"</p>
-			<a href="index.html" data-role="button" data-icon="delete">My button</a>
-			<p><strong>Plus</strong> - data-icon="plus"</p>
-			<a href="index.html" data-role="button" data-icon="plus">My button</a>
-			<p><strong>Minus</strong> - data-icon="minus"</p>
-			<a href="index.html" data-role="button" data-icon="minus">My button</a>
-			<p><strong>Check</strong> - data-icon="check"</p>
-			<a href="index.html" data-role="button" data-icon="check">My button</a>
-			<p><strong>Gear</strong> - data-icon="gear"</p>
-			<a href="index.html" data-role="button" data-icon="gear">My button</a>
-			<p><strong>Refresh</strong> - data-icon="refresh"</p>
-			<a href="index.html" data-role="button" data-icon="refresh">My button</a>
-			<p><strong>Forward</strong> - data-icon="forward"</p>
-			<a href="index.html" data-role="button" data-icon="forward">My button</a>
-			<p><strong>Back</strong> - data-icon="back"</p>
-			<a href="index.html" data-role="button" data-icon="back">My button</a>
-			<p><strong>Grid</strong> - data-icon="grid"</p>
-			<a href="index.html" data-role="button" data-icon="grid">My button</a>
-			<p><strong>Star</strong> - data-icon="star"</p>
-			<a href="index.html" data-role="button" data-icon="star">My button</a>
-			<p><strong>Alert</strong> - data-icon="alert"</p>
-			<a href="index.html" data-role="button" data-icon="alert">My button</a>
-			<p><strong>Info</strong> - data-icon="info"</p>
-			<a href="index.html" data-role="button" data-icon="info">My button</a>
-			<p><strong>Home</strong> - data-icon="home"</p>
-			<a href="index.html" data-role="button" data-icon="home">My button</a>
-			<p><strong>Search</strong> - data-icon="search"</p>
-			<a href="index.html" data-role="button" data-icon="search">My button</a>
+			<p><strong>Left arrow</strong> - data-jq-icon="arrow-l"</p>
+			<a href="index.html" data-jq-role="button" data-jq-icon="arrow-l">My button</a>
+			<p><strong>Right arrow</strong> - data-jq-icon="arrow-r"</p>
+			<a href="index.html" data-jq-role="button" data-jq-icon="arrow-r">My button</a>
+			<p><strong>Up arrow</strong> - data-jq-icon="arrow-u"</p>
+			<a href="index.html" data-jq-role="button" data-jq-icon="arrow-u">My button</a>
+			<p><strong>Down arrow</strong> - data-jq-icon="arrow-d"</p>
+			<a href="index.html" data-jq-role="button" data-jq-icon="arrow-d">My button</a>
+			<p><strong>Delete</strong> - data-jq-icon="delete"</p>
+			<a href="index.html" data-jq-role="button" data-jq-icon="delete">My button</a>
+			<p><strong>Plus</strong> - data-jq-icon="plus"</p>
+			<a href="index.html" data-jq-role="button" data-jq-icon="plus">My button</a>
+			<p><strong>Minus</strong> - data-jq-icon="minus"</p>
+			<a href="index.html" data-jq-role="button" data-jq-icon="minus">My button</a>
+			<p><strong>Check</strong> - data-jq-icon="check"</p>
+			<a href="index.html" data-jq-role="button" data-jq-icon="check">My button</a>
+			<p><strong>Gear</strong> - data-jq-icon="gear"</p>
+			<a href="index.html" data-jq-role="button" data-jq-icon="gear">My button</a>
+			<p><strong>Refresh</strong> - data-jq-icon="refresh"</p>
+			<a href="index.html" data-jq-role="button" data-jq-icon="refresh">My button</a>
+			<p><strong>Forward</strong> - data-jq-icon="forward"</p>
+			<a href="index.html" data-jq-role="button" data-jq-icon="forward">My button</a>
+			<p><strong>Back</strong> - data-jq-icon="back"</p>
+			<a href="index.html" data-jq-role="button" data-jq-icon="back">My button</a>
+			<p><strong>Grid</strong> - data-jq-icon="grid"</p>
+			<a href="index.html" data-jq-role="button" data-jq-icon="grid">My button</a>
+			<p><strong>Star</strong> - data-jq-icon="star"</p>
+			<a href="index.html" data-jq-role="button" data-jq-icon="star">My button</a>
+			<p><strong>Alert</strong> - data-jq-icon="alert"</p>
+			<a href="index.html" data-jq-role="button" data-jq-icon="alert">My button</a>
+			<p><strong>Info</strong> - data-jq-icon="info"</p>
+			<a href="index.html" data-jq-role="button" data-jq-icon="info">My button</a>
+			<p><strong>Home</strong> - data-jq-icon="home"</p>
+			<a href="index.html" data-jq-role="button" data-jq-icon="home">My button</a>
+			<p><strong>Search</strong> - data-jq-icon="search"</p>
+			<a href="index.html" data-jq-role="button" data-jq-icon="search">My button</a>
 			
 
 		<h2>Icon positioning</h2>
 		<p>By default, all icons in buttons are placed to the left of the button text. </p>
-		<a href="index.html" data-role="button" data-icon="delete" data-iconpos="left">Delete</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="delete" data-jq-iconpos="left">Delete</a>
 		
 		<p>This default may be overridden using the <code>data-iconpos</code> attribute to set the icon to the right, above (top) or below (bottom) the text. For example, the markup:</p> 
 
 <code>
-&lt;a href=&quot;index.html&quot; data-role=&quot;button&quot; data-icon=&quot;delete&quot;<strong> data-iconpos=&quot;right&quot;</strong>&gt;Delete&lt;/a&gt;
+&lt;a href=&quot;index.html&quot; data-jq-role=&quot;button&quot; data-jq-icon=&quot;delete&quot;<strong> data-jq-iconpos=&quot;right&quot;</strong>&gt;Delete&lt;/a&gt;
 </code>
 
 		<p>Creates this button with right-aligned icon:</p>
-		<a href="index.html" data-role="button" data-icon="delete" data-iconpos="right">Delete</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="delete" data-jq-iconpos="right">Delete</a>
 
 		<p>Icons can also be positioned above the text by specifying <code>data-iconpos="top"</code></p>
-		<a href="index.html" data-role="button" data-icon="delete" data-iconpos="top">Delete</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="delete" data-jq-iconpos="top">Delete</a>
 		
 		<p>Or icons can also be positioned below the text by specifying <code>data-iconpos="bottom"</code></p>
-		<a href="index.html" data-role="button" data-icon="delete" data-iconpos="bottom">Delete</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="delete" data-jq-iconpos="bottom">Delete</a>
 		
 		<p>You can also create an icon-only button, by setting the <code>data-iconpos</code> attribute to <code>notext</code>. The button plugin will hide the text on-screen, but add it as a <code>title</code> attribute on the link to provide context for screen readers and devices that support tooltips. For example, replacing <code>data-iconpos="right"</code> on the previous example with <code>data-iconpos="notext"</code>:</p>
 
 <code>
-&lt;a href=&quot;index.html&quot; data-role=&quot;button&quot; data-icon=&quot;delete&quot;<strong> data-iconpos=&quot;notext&quot;</strong>&gt;Delete&lt;/a&gt;
+&lt;a href=&quot;index.html&quot; data-jq-role=&quot;button&quot; data-jq-icon=&quot;delete&quot;<strong> data-jq-iconpos=&quot;notext&quot;</strong>&gt;Delete&lt;/a&gt;
 </code>
 
 		<p>Creates this icon-only button:</p>
-			<a href="index.html" data-role="button" data-icon="delete" data-iconpos="notext">Delete</a>
+			<a href="index.html" data-jq-role="button" data-jq-icon="delete" data-jq-iconpos="notext">Delete</a>
 
 		<h2>Custom Icons</h2>
 		<p>To use custom icons, specify a <code>data-icon</code> value that has a unique name like <code>myapp-email</code> and the button plugin will generate a class by prefixing <code>ui-icon-</code> to the <code>data-icon</code> value and apply it to the button. You can then write a CSS rule that targets the <code>ui-icon-myapp-email</code> class to specify the icon background source. To maintain visual consistency, create a white icon 18x18 pixels saved as a PNG-8 with alpha transparency.</p>
@@ -112,71 +112,71 @@
 		
 		<!-- A themed -->
 		<p><strong>Swatch "A"</strong> themed buttons</p>
-		<div data-role="controlgroup"  data-type="horizontal">
-		<a href="index.html" data-role="button" data-icon="arrow-l" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="arrow-r" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="arrow-u" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="arrow-d" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="delete" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="plus" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="minus" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="check" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="gear" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="refresh" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="forward" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="back" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="star" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="alert" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="info" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
-        <a href="index.html" data-role="button" data-icon="home" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
-        <a href="index.html" data-role="button" data-icon="search" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
+		<div data-jq-role="controlgroup"  data-jq-type="horizontal">
+		<a href="index.html" data-jq-role="button" data-jq-icon="arrow-l" data-jq-iconpos="notext" data-jq-theme="a" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="arrow-r" data-jq-iconpos="notext" data-jq-theme="a" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="arrow-u" data-jq-iconpos="notext" data-jq-theme="a" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="arrow-d" data-jq-iconpos="notext" data-jq-theme="a" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="delete" data-jq-iconpos="notext" data-jq-theme="a" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="plus" data-jq-iconpos="notext" data-jq-theme="a" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="minus" data-jq-iconpos="notext" data-jq-theme="a" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="check" data-jq-iconpos="notext" data-jq-theme="a" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="gear" data-jq-iconpos="notext" data-jq-theme="a" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="refresh" data-jq-iconpos="notext" data-jq-theme="a" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="forward" data-jq-iconpos="notext" data-jq-theme="a" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="back" data-jq-iconpos="notext" data-jq-theme="a" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="grid" data-jq-iconpos="notext" data-jq-theme="a" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="star" data-jq-iconpos="notext" data-jq-theme="a" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="alert" data-jq-iconpos="notext" data-jq-theme="a" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="info" data-jq-iconpos="notext" data-jq-theme="a" data-jq-inline="true">My button</a>
+        <a href="index.html" data-jq-role="button" data-jq-icon="home" data-jq-iconpos="notext" data-jq-theme="a" data-jq-inline="true">My button</a>
+        <a href="index.html" data-jq-role="button" data-jq-icon="search" data-jq-iconpos="notext" data-jq-theme="a" data-jq-inline="true">My button</a>
 		</div>
 		
 		<!-- B themed -->
 		<p><strong>Swatch "B"</strong> themed buttons</p>
-		<div data-role="controlgroup"  data-type="horizontal">
-		<a href="index.html" data-role="button" data-icon="arrow-l" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="arrow-r" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="arrow-u" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="arrow-d" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="delete" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="plus" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="minus" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="check" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="gear" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="refresh" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="forward" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="back" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="star" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="alert" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="info" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
-        <a href="index.html" data-role="button" data-icon="home" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
-        <a href="index.html" data-role="button" data-icon="search" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
+		<div data-jq-role="controlgroup"  data-jq-type="horizontal">
+		<a href="index.html" data-jq-role="button" data-jq-icon="arrow-l" data-jq-iconpos="notext" data-jq-theme="b" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="arrow-r" data-jq-iconpos="notext" data-jq-theme="b" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="arrow-u" data-jq-iconpos="notext" data-jq-theme="b" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="arrow-d" data-jq-iconpos="notext" data-jq-theme="b" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="delete" data-jq-iconpos="notext" data-jq-theme="b" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="plus" data-jq-iconpos="notext" data-jq-theme="b" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="minus" data-jq-iconpos="notext" data-jq-theme="b" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="check" data-jq-iconpos="notext" data-jq-theme="b" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="gear" data-jq-iconpos="notext" data-jq-theme="b" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="refresh" data-jq-iconpos="notext" data-jq-theme="b" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="forward" data-jq-iconpos="notext" data-jq-theme="b" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="back" data-jq-iconpos="notext" data-jq-theme="b" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="grid" data-jq-iconpos="notext" data-jq-theme="b" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="star" data-jq-iconpos="notext" data-jq-theme="b" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="alert" data-jq-iconpos="notext" data-jq-theme="b" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="info" data-jq-iconpos="notext" data-jq-theme="b" data-jq-inline="true">My button</a>
+        <a href="index.html" data-jq-role="button" data-jq-icon="home" data-jq-iconpos="notext" data-jq-theme="b" data-jq-inline="true">My button</a>
+        <a href="index.html" data-jq-role="button" data-jq-icon="search" data-jq-iconpos="notext" data-jq-theme="b" data-jq-inline="true">My button</a>
 		</div>
 		
 		<!-- C themed -->
 		<p><strong>Swatch "C"</strong> themed buttons</p>
-		<div data-role="controlgroup"  data-type="horizontal">
-		<a href="index.html" data-role="button" data-icon="arrow-l" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="arrow-r" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="arrow-u" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="arrow-d" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="delete" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="plus" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="minus" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="check" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="gear" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="refresh" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="forward" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="back" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="star" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="alert" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
-		<a href="index.html" data-role="button" data-icon="info" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
-        <a href="index.html" data-role="button" data-icon="home" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
-        <a href="index.html" data-role="button" data-icon="search" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
+		<div data-jq-role="controlgroup"  data-jq-type="horizontal">
+		<a href="index.html" data-jq-role="button" data-jq-icon="arrow-l" data-jq-iconpos="notext" data-jq-theme="c" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="arrow-r" data-jq-iconpos="notext" data-jq-theme="c" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="arrow-u" data-jq-iconpos="notext" data-jq-theme="c" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="arrow-d" data-jq-iconpos="notext" data-jq-theme="c" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="delete" data-jq-iconpos="notext" data-jq-theme="c" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="plus" data-jq-iconpos="notext" data-jq-theme="c" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="minus" data-jq-iconpos="notext" data-jq-theme="c" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="check" data-jq-iconpos="notext" data-jq-theme="c" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="gear" data-jq-iconpos="notext" data-jq-theme="c" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="refresh" data-jq-iconpos="notext" data-jq-theme="c" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="forward" data-jq-iconpos="notext" data-jq-theme="c" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="back" data-jq-iconpos="notext" data-jq-theme="c" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="grid" data-jq-iconpos="notext" data-jq-theme="c" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="star" data-jq-iconpos="notext" data-jq-theme="c" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="alert" data-jq-iconpos="notext" data-jq-theme="c" data-jq-inline="true">My button</a>
+		<a href="index.html" data-jq-role="button" data-jq-icon="info" data-jq-iconpos="notext" data-jq-theme="c" data-jq-inline="true">My button</a>
+        <a href="index.html" data-jq-role="button" data-jq-icon="home" data-jq-iconpos="notext" data-jq-theme="c" data-jq-inline="true">My button</a>
+        <a href="index.html" data-jq-role="button" data-jq-icon="search" data-jq-iconpos="notext" data-jq-theme="c" data-jq-inline="true">My button</a>
 		</div>
 	
 	</div><!-- /content -->

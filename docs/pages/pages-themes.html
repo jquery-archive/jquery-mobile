@@ -11,14 +11,14 @@
 </head> 
 <body> 
 
-<div data-role="page">
+<div data-jq-role="page">
 
-	<div data-role="header" data-theme="b">
+	<div data-jq-role="header" data-jq-theme="b">
 		<h1>Theming pages</h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+		<a href="../../" data-jq-icon="home" data-jq-iconpos="notext" data-jq-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
-	<div data-role="content">
+	<div data-jq-role="content">
 			
 			<h2>Page Theming</h2>
 			
@@ -28,14 +28,14 @@
 			
 			<p>The default Theme mixes styles from multiple swatches to create visual texture and present the various elements in optimal contrast to one another:</p>
 			
-			<div data-role="header">
+			<div data-jq-role="header">
 				<h1>Default Theme</h1>
 			</div>
 			<div class="ui-bar ui-bar-c">
-				<div data-role="controlgroup" data-type="horizontal" >
-					<a href="#" data-icon="gear" data-role="button" data-inline="true">Tools</a>
-					<a href="#" data-icon="star" data-role="button" data-inline="true">Like</a>
-					<a href="#" data-icon="refresh" data-role="button" data-inline="true">Refresh</a>
+				<div data-jq-role="controlgroup" data-jq-type="horizontal" >
+					<a href="#" data-jq-icon="gear" data-jq-role="button" data-jq-inline="true">Tools</a>
+					<a href="#" data-jq-icon="star" data-jq-role="button" data-jq-inline="true">Like</a>
+					<a href="#" data-jq-icon="refresh" data-jq-role="button" data-jq-inline="true">Refresh</a>
 				</div><!-- /controlgroup -->
 			</div>
 			<div class="ui-body ui-body-c">
@@ -43,18 +43,18 @@
 				<p>This is the default content color swatch and a preview of a <a href="#" class="ui-link">link</a>.</p>
 					<label for="slider1">Input slider:</label>
 				 	<input type="range" name="slider1" id="slider1" value="50" min="0" max="100" />
-				     <fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
+				     <fieldset data-jq-role="controlgroup"  data-jq-type="horizontal" data-jq-role="fieldcontain">
 				     	<legend>Cache settings:</legend>
 				         	<input type="radio" name="radio-choice-z1" id="radio-choice-y1" value="on" checked="checked" />
 				         	<label for="radio-choice-y1">On</label>
 				         	<input type="radio" name="radio-choice-z1" id="radio-choice-z1" value="off"  />
 				         	<label for="radio-choice-z1">Off</label>
 				    </fieldset>
-				<a href="#" data-role="button" data-inline="true">Button</a>
+				<a href="#" data-jq-role="button" data-jq-inline="true">Button</a>
 			</div>
 			<div class="ui-bar ui-bar-a">
-				<div data-role="controlgroup" data-type="horizontal" >
-					<a href="#" data-inline="true" data-role="button">Button</a><a href="#" data-inline="true" data-role="button">Button</a><a href="#" data-inline="true" data-role="button">Button</a>
+				<div data-jq-role="controlgroup" data-jq-type="horizontal" >
+					<a href="#" data-jq-inline="true" data-jq-role="button">Button</a><a href="#" data-jq-inline="true" data-jq-role="button">Button</a><a href="#" data-jq-inline="true" data-jq-role="button">Button</a>
 				</div><!-- /controlgroup -->
 			</div>
 
@@ -62,123 +62,123 @@
 			<p>And each of the five "swatches" applies its style consistently across all page elements, as shown below:</p>
 						
 			<h2>Swatch A</h2>
-			<div data-role="header" data-position="inline">
+			<div data-jq-role="header" data-jq-position="inline">
 				<h1>Header A</h1>
 			</div>
 			<div class="ui-body ui-body-a">
 				<h3>Header</h3>
 				<p>This is content color swatch "A" and a preview of a <a href="#" class="ui-link">link</a>.</p>
 					<label for="slider1">Input slider:</label>
-				 	<input type="range" name="slider1" id="slider1" value="50" min="0" max="100" data-theme="a" />
-				     <fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
+				 	<input type="range" name="slider1" id="slider1" value="50" min="0" max="100" data-jq-theme="a" />
+				     <fieldset data-jq-role="controlgroup"  data-jq-type="horizontal" data-jq-role="fieldcontain">
 				     	<legend>Cache settings:</legend>
 				         	<input type="radio" name="radio-choice-a1" id="radio-choice-a1" value="on" checked="checked" />
 				         	<label for="radio-choice-a1">On</label>
 				         	<input type="radio" name="radio-choice-a1" id="radio-choice-b1" value="off"  />
 				         	<label for="radio-choice-b1">Off</label>
 				    </fieldset>
-				<a href="#" data-role="button" data-inline="true">Button</a>
+				<a href="#" data-jq-role="button" data-jq-inline="true">Button</a>
 			</div>
 			<div class="ui-bar ui-bar-a">
-				<div data-role="controlgroup" data-type="horizontal" >
-					<a href="#" data-inline="true" data-role="button">Button</a><a href="#" data-inline="true" data-role="button">Button</a><a href="#" data-inline="true" data-role="button">Button</a>
+				<div data-jq-role="controlgroup" data-jq-type="horizontal" >
+					<a href="#" data-jq-inline="true" data-jq-role="button">Button</a><a href="#" data-jq-inline="true" data-jq-role="button">Button</a><a href="#" data-jq-inline="true" data-jq-role="button">Button</a>
 				</div><!-- /controlgroup -->
 			</div>
 
 
 			<h2>Swatch B</h2>
-			<div data-role="header" data-theme="b">
+			<div data-jq-role="header" data-jq-theme="b">
 				<h1>Header B</h1>
 			</div>
 			<div class="ui-body ui-body-b">
 				<h3>Header</h3>
 				<p>This is content color swatch "B" and a preview of a <a href="#" class="ui-link">link</a>.</p>
 					<label for="slider1">Input slider:</label>
-				 	<input type="range" name="slider1" id="slider1" value="50" min="0" max="100" data-theme="b" />
-					<fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
+				 	<input type="range" name="slider1" id="slider1" value="50" min="0" max="100" data-jq-theme="b" />
+					<fieldset data-jq-role="controlgroup"  data-jq-type="horizontal" data-jq-role="fieldcontain">
 				     	<legend>Cache settings:</legend>
 				         	<input type="radio" name="radio-choice-a2" id="radio-choice-a2" value="on" checked="checked" />
 				         	<label for="radio-choice-a2">On</label>
 				         	<input type="radio" name="radio-choice-a2" id="radio-choice-b2" value="off"  />
 				         	<label for="radio-choice-b2">Off</label>
 				    </fieldset>
-				<a href="#" data-role="button" data-inline="true">Button</a>
+				<a href="#" data-jq-role="button" data-jq-inline="true">Button</a>
 			</div>
 			<div class="ui-bar ui-bar-b">
-				<div data-role="controlgroup" data-type="horizontal" >
-					<a href="#" data-inline="true" data-role="button">Button</a><a href="#" data-inline="true" data-role="button">Button</a><a href="#" data-inline="true" data-role="button">Button</a>
+				<div data-jq-role="controlgroup" data-jq-type="horizontal" >
+					<a href="#" data-jq-inline="true" data-jq-role="button">Button</a><a href="#" data-jq-inline="true" data-jq-role="button">Button</a><a href="#" data-jq-inline="true" data-jq-role="button">Button</a>
 				</div><!-- /controlgroup -->
 			</div>
 			
 			<h2>Swatch C</h2>
-			<div data-role="header" data-theme="c">
+			<div data-jq-role="header" data-jq-theme="c">
 				<h1>Header C</h1>
 			</div>
 			<div class="ui-body ui-body-c">
 				<h3>Header</h3>
 				<p>This is content color swatch "C" and a preview of a <a href="#" class="ui-link">link</a>.</p>
 					<label for="slider1">Input slider:</label>
-				 	<input type="range" name="slider1" id="slider1" value="50" min="0" max="100" data-theme="c" />
-					<fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
+				 	<input type="range" name="slider1" id="slider1" value="50" min="0" max="100" data-jq-theme="c" />
+					<fieldset data-jq-role="controlgroup"  data-jq-type="horizontal" data-jq-role="fieldcontain">
 				     	<legend>Cache settings:</legend>
 				         	<input type="radio" name="radio-choice-a3" id="radio-choice-a3" value="on" checked="checked" />
 				         	<label for="radio-choice-a3">On</label>
 				         	<input type="radio" name="radio-choice-a3" id="radio-choice-b3" value="off"  />
 				         	<label for="radio-choice-b3">Off</label>
 				    </fieldset>
-				<a href="#" data-role="button" data-inline="true">Button</a>
+				<a href="#" data-jq-role="button" data-jq-inline="true">Button</a>
 			</div>
 			<div class="ui-bar ui-bar-c">
-				<div data-role="controlgroup" data-type="horizontal" >
-					<a href="#" data-inline="true" data-role="button">Button</a><a href="#" data-inline="true" data-role="button">Button</a><a href="#" data-inline="true" data-role="button">Button</a>
+				<div data-jq-role="controlgroup" data-jq-type="horizontal" >
+					<a href="#" data-jq-inline="true" data-jq-role="button">Button</a><a href="#" data-jq-inline="true" data-jq-role="button">Button</a><a href="#" data-jq-inline="true" data-jq-role="button">Button</a>
 				</div><!-- /controlgroup -->
 			</div>
 			
 			<h2>Swatch D</h2>
-			<div data-role="header" data-theme="d">
+			<div data-jq-role="header" data-jq-theme="d">
 				<h1>Header D</h1>
 			</div>
 			<div class="ui-body ui-body-d">
 				<h3>Header</h3>
 				<p>This is content color swatch "D" and a preview of a <a href="#" class="ui-link">link</a>.</p>
 					<label for="slider1">Input slider:</label>
-				 	<input type="range" name="slider1" id="slider1" value="50" min="0" max="100" data-theme="d" />
-					<fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
+				 	<input type="range" name="slider1" id="slider1" value="50" min="0" max="100" data-jq-theme="d" />
+					<fieldset data-jq-role="controlgroup"  data-jq-type="horizontal" data-jq-role="fieldcontain">
 				     	<legend>Cache settings:</legend>
 				         	<input type="radio" name="radio-choice-a4" id="radio-choice-a4" value="on" checked="checked" />
 				         	<label for="radio-choice-a4">On</label>
 				         	<input type="radio" name="radio-choice-a4" id="radio-choice-b4" value="off"  />
 				         	<label for="radio-choice-b4">Off</label>
 				    </fieldset>
-				<a href="#" data-role="button" data-inline="true">Button</a>
+				<a href="#" data-jq-role="button" data-jq-inline="true">Button</a>
 			</div>
 			<div class="ui-bar ui-bar-d">
-				<div data-role="controlgroup" data-type="horizontal" >
-					<a href="#" data-inline="true" data-role="button">Button</a><a href="#" data-inline="true" data-role="button">Button</a><a href="#" data-inline="true" data-role="button">Button</a>
+				<div data-jq-role="controlgroup" data-jq-type="horizontal" >
+					<a href="#" data-jq-inline="true" data-jq-role="button">Button</a><a href="#" data-jq-inline="true" data-jq-role="button">Button</a><a href="#" data-jq-inline="true" data-jq-role="button">Button</a>
 				</div><!-- /controlgroup -->
 			</div>
 			
 			<h2>Swatch E</h2>
-			<div data-role="header" data-theme="e">
+			<div data-jq-role="header" data-jq-theme="e">
 				<h1>Header E</h1>
 			</div>
 			<div class="ui-body ui-body-e">
 				<h3>Header</h3>
 				<p>This is content color swatch "D" and a preview of a <a href="#" class="ui-link">link</a>.</p>
 					<label for="slider1">Input slider:</label>
-				 	<input type="range" name="slider1" id="slider1" value="50" min="0" max="100" data-theme="e" />
-					<fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
+				 	<input type="range" name="slider1" id="slider1" value="50" min="0" max="100" data-jq-theme="e" />
+					<fieldset data-jq-role="controlgroup"  data-jq-type="horizontal" data-jq-role="fieldcontain">
 				     	<legend>Cache settings:</legend>
 				         	<input type="radio" name="radio-choice-a5" id="radio-choice-a5" value="on" checked="checked" />
 				         	<label for="radio-choice-a5">On</label>
 				         	<input type="radio" name="radio-choice-a5" id="radio-choice-b5" value="off"  />
 				         	<label for="radio-choice-b5">Off</label>
 				    </fieldset>
-				<a href="#" data-role="button" data-inline="true">Button</a>
+				<a href="#" data-jq-role="button" data-jq-inline="true">Button</a>
 			</div>
 			<div class="ui-bar ui-bar-e">
-				<div data-role="controlgroup" data-type="horizontal" >
-					<a href="#" data-inline="true" data-role="button">Button</a><a href="#" data-inline="true" data-role="button">Button</a><a href="#" data-inline="true" data-role="button">Button</a>
+				<div data-jq-role="controlgroup" data-jq-type="horizontal" >
+					<a href="#" data-jq-inline="true" data-jq-role="button">Button</a><a href="#" data-jq-inline="true" data-jq-role="button">Button</a><a href="#" data-jq-inline="true" data-jq-role="button">Button</a>
 				</div><!-- /controlgroup -->
 			</div>
 

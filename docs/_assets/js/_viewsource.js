@@ -2,14 +2,14 @@
 $.fn.addSourceLink = function(style){
 
 	return $(this).each(function(){
-		var link = $('<a href="#" data-inline="true">View Source</a>'),
+		var link = $('<a href="#" data-jq-inline="true">View Source</a>'),
 			src = src = $('<div></div>').append( $(this).clone() ).html(),
-			page = $( "<div data-role='dialog' data-theme='a'>" +
-					"<div data-role='header' data-theme='b'>" +
-						"<a href='#' class='ui-btn-left' data-icon='delete' data-iconpos='notext'>Close</a>"+
+			page = $( "<div data-jq-role='dialog' data-jq-theme='a'>" +
+					"<div data-jq-role='header' data-jq-theme='b'>" +
+						"<a href='#' class='ui-btn-left' data-jq-icon='delete' data-jq-iconpos='notext'>Close</a>"+
 						"<div class='ui-title'>jQuery Mobile Source Excerpt</div>"+
 					"</div>"+
-					"<div data-role='content'></div>"+
+					"<div data-jq-role='content'></div>"+
 				"</div>" )
 				.appendTo( "body" )
 				.page();

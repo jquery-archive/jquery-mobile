@@ -10,14 +10,14 @@
 </head> 
 <body> 
 
-<div data-role="page" data-theme="c">
+<div data-jq-role="page" data-jq-theme="c">
 
-	<div data-role="header">
+	<div data-jq-role="header">
 		<h1>Forms</h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+		<a href="../../" data-jq-icon="home" data-jq-iconpos="notext" data-jq-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
-	<div data-role="content">
+	<div data-jq-role="content">
 			
 			<h2>Form submission</h2>
 
@@ -25,7 +25,7 @@
 			<p>This page demonstrates automated ajax handling of form submissions. The form below is configured to send regular a <code>get</code> request to <code>forms-sample-response.php</code>. On submit, jQuery Mobile will make sure that the Url specified is able to be retrieved via Ajax, and handle it appropriately. Keep in mind that just like ordinary HTTP form submissions, jQuery Mobile allows <code>get</code> result pages to be bookmarked by updating the Url hash when the response returns successfully. Also like ordinary form submissions, <code>post</code> requests do not contain query parameters in the hash, so they are not bookmarkable.</p>
 			<form action="forms-sample-response.php" method="get">
 				<fieldset>
-					<div data-role="fieldcontain">
+					<div data-jq-role="fieldcontain">
 						<label for="shipping" class="select">Choose shipping method:</label>
 						<select name="shipping" id="shipping">
 							<option value="Standard shipping">Standard: 7 day</option>
@@ -34,7 +34,7 @@
 							<option value="Overnight shipping">Overnight</option>
 						</select>
 					</div>
-					<button type="submit" data-theme="a" name="submit" value="submit-value">Submit</button>
+					<button type="submit" data-jq-theme="a" name="submit" value="submit-value">Submit</button>
 				</fieldset>
 			</form>
 

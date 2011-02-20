@@ -11,38 +11,38 @@
 </head> 
 <body> 
 
-<div data-role="page">
+<div data-jq-role="page">
 
-	<div data-role="header" data-theme="b">
+	<div data-jq-role="header" data-jq-theme="b">
 		<h1>Inline buttons</h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+		<a href="../../" data-jq-icon="home" data-jq-iconpos="notext" data-jq-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
-	<div data-role="content">
+	<div data-jq-role="content">
 		
 		<p>By default, all buttons in the body content are styled as block-level element so they fill the width of the screen:</p>
 		
-		<a href="index.html" data-role="button">Button</a>
+		<a href="index.html" data-jq-role="button">Button</a>
 		
 			
 		<p>However, if you want a more compact button that is only as wide as the text and icons inside, add the <code>data-inline="true"</code> attribute to the button:</p>
 		
 		
-		<a href="index.html" data-role="button" data-inline="true">Button</a>
+		<a href="index.html" data-jq-role="button" data-jq-inline="true">Button</a>
 		
 		<p>If you have multiple buttons that should sit side-by-side on the same line, wrap the buttons in a container that has a <code>data-inline="true"</code> attribute. This will style the buttons to be the width of their content and float the buttons so they sit on the same line. </p>
 			
 <pre><code>
-&lt;div data-inline=&quot;true&quot;&gt;
-	&lt;a href=&quot;index.html&quot; data-role=&quot;button&quot;&gt;Cancel&lt;/a&gt;
-	&lt;a href=&quot;index.html&quot; data-role=&quot;button&quot; data-theme=&quot;b&quot;&gt;Save&lt;/a&gt;
+&lt;div data-jq-inline=&quot;true&quot;&gt;
+	&lt;a href=&quot;index.html&quot; data-jq-role=&quot;button&quot;&gt;Cancel&lt;/a&gt;
+	&lt;a href=&quot;index.html&quot; data-jq-role=&quot;button&quot; data-jq-theme=&quot;b&quot;&gt;Save&lt;/a&gt;
 &lt;/div&gt;
 </code></pre>
 
 		<p>This creates an inline button set:</p>
 
-			<a href="index.html" data-role="button" data-inline="true">Cancel</a>
-			<a href="index.html" data-role="button" data-theme="b" data-inline="true">Save</a>
+			<a href="index.html" data-jq-role="button" data-jq-inline="true">Cancel</a>
+			<a href="index.html" data-jq-role="button" data-jq-theme="b" data-jq-inline="true">Save</a>
 
 		
 		<p>If you want buttons to sit side-by-side but stretch to fill the width of the screen, you can use the <a href="../content/content-grids.html">content column grids</a> to put normal full-width buttons into 2- or 3-columns.</p>	

@@ -11,37 +11,37 @@
 </head> 
 <body> 
 
-<div data-role="page">
+<div data-jq-role="page">
 
-	<div data-role="header" data-theme="b">
+	<div data-jq-role="header" data-jq-theme="b">
 		<h1>Link formats</h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+		<a href="../../" data-jq-icon="home" data-jq-iconpos="notext" data-jq-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
-	<div data-role="content">
+	<div data-jq-role="content">
 			
 			<p>All standard HTML link types are supported in jQuery Mobile. To make the experience as polished as possible, any links to pages within the same domain will be automatically turned into Ajax requests and displayed with an animated page transition by the framework. </p>
 			<p>Links that point to other domains or that have <code>rel="external"</code>, <code>data-ajax="false"</code> or <code>target</code> attributes will not be loaded with Ajax and will cause a full page refresh. If multiple "pages" are contained within a single HTML document, they can be linked by referencing the ID of the page as an anchor (#foo).</p>
 			<p>All other types of links like <code>mailto:</code> and <code>tel:</code> aren't impacted by the framework and will work as expected. Learn more about the <a href="docs-navmodel.html">linking and navigation model</a> in jQuery Mobile</p>
 			
-			<ul data-role="listview" data-inset="true">
-				<li data-role="list-divider">Links that will be Ajax-loaded with page transitions</li>
+			<ul data-jq-role="listview" data-jq-inset="true">
+				<li data-jq-role="list-divider">Links that will be Ajax-loaded with page transitions</li>
 				<li><a href="../../index.html">Link in the same domain</a></li>
-				<li><a href="../pages/dialog.html" data-rel="dialog">Dialog link: data-rel="dialog" (not tracked in history)</a></li>
-				<li data-role="list-divider">Links that will refresh the page</li>
+				<li><a href="../pages/dialog.html" data-jq-rel="dialog">Dialog link: data-jq-rel="dialog" (not tracked in history)</a></li>
+				<li data-jq-role="list-divider">Links that will refresh the page</li>
 				<li><a href="http://www.jquery.com">External domain</a></li>
 				<li><a href="../../index.html" rel="external">Link with rel="external"</a></li>
-				<li><a href="docs/pages/index.html" data-ajax="false">link with [data-ajax="false"]</a></li>
+				<li><a href="docs/pages/index.html" data-jq-ajax="false">link with [data-ajax="false"]</a></li>
 				<li><a href="../../index.html" target="foo">Link with target="foo"</a></li>
-				<li data-role="list-divider">Email links</li>
+				<li data-jq-role="list-divider">Email links</li>
 				<li><a href="mailto:jdoe@foo.com">Basic email: mailto:jdoe@foo.com</a></li>
 				<li><a href="mailto:jdoe@foo.com?cc=bill@bar.com&bcc=mark@abc.com&subject=Happy%20Birthday&body=Best%20wishes!">Mailto with a cc:, bcc:, subject and body pre-filled</a></li>
 
-				<li data-role="list-divider">Phone links</li>
+				<li data-jq-role="list-divider">Phone links</li>
 				<li><a href="tel:15555555555">Phone: tel:15555555555</a></li>
 				<li><a href="wtai://wp/mc;15555555555">Phone: wtai://wp/mc;15555555555</a></li>
 				<li><a href="dc:234*234*234">Phone: dc:234*234*234</a></li>
-				<li data-role="list-divider">Other</li>
+				<li data-jq-role="list-divider">Other</li>
 				<li><a href="#">A href="#" will return false</a></li>
 			</ul>
 	</div><!-- /content -->

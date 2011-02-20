@@ -11,14 +11,14 @@
 </head> 
 <body> 
 
-<div data-role="page">
+<div data-jq-role="page">
 
-	<div data-role="header" data-theme="b">
+	<div data-jq-role="header" data-jq-theme="b">
 		<h1>Button markup options</h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+		<a href="../../" data-jq-icon="home" data-jq-iconpos="notext" data-jq-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
-	<div data-role="content">
+	<div data-jq-role="content">
 	
 	<p>Buttons that are used for navigation should be coded as anchor links, and those that submit forms as <code>button</code> elements &mdash; each will be styled identically by the framework.</p>
 	
@@ -27,11 +27,11 @@
 		<p>In the main content block of a page, you can style any anchor link as a button by adding the <code>data-role="button"</code> to the link. The framework will add all necessary classes to style the link as a button. For example, this markup: </p>
 
 <code>
-&lt;a href=&quot;index.html&quot; data-role=&quot;button&quot;&gt;Link button&lt;/a&gt;
+&lt;a href=&quot;index.html&quot; data-jq-role=&quot;button&quot;&gt;Link button&lt;/a&gt;
 </code>
 
 		<p>Produces this <strong>link-based</strong> button:</p>
-		<a href="index.html" data-role="button">Link button</a>
+		<a href="index.html" data-jq-role="button">Link button</a>
 		
 		<h2>Form buttons</h2>
 		<p>For ease of styling, the framework automatically converts any <code>button</code> element or <code>input</code> with a <code>type</code> of <code>submit</code>, <code>reset</code>, <code>button</code>, or <code>image</code> into a custom styled link-based button &mdash; there is no need to add the <code>data-role="button"</code> attribute. </p>

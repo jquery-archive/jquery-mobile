@@ -10,14 +10,14 @@
 </head> 
 <body> 
 
-<div data-role="page">
+<div data-jq-role="page">
 
-	<div data-role="header" data-theme="b">
+	<div data-jq-role="header" data-jq-theme="b">
 		<h1>Themes</h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+		<a href="../../" data-jq-icon="home" data-jq-iconpos="notext" data-jq-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div>
 
-	<div data-role="content">
+	<div data-jq-role="content">
 	
 		<h2>Theming overview</h2>
 		
@@ -72,8 +72,8 @@
 
 		<p>If a theme isn't specified on a content block, the framework will default to "c" to maximize contrast against the default header "a", as shown here:</p>
 					
-			<div data-role="header" data-position="inline">
-				<a href="#" data-icon="arrow-l">Back</a>
+			<div data-jq-role="header" data-jq-position="inline">
+				<a href="#" data-jq-icon="arrow-l">Back</a>
 				<h1>Default Header</h1>
 			</div>
 			<div class="ui-body ui-body-c">
@@ -81,18 +81,18 @@
 				<p>This is the default content color swatch and a preview of a <a href="#" class="ui-link">link</a>.</p>
 					<label for="slider1">Input slider:</label>
 				 	<input type="range" name="slider1" id="slider1" value="50" min="0" max="100" />
-				     <fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
+				     <fieldset data-jq-role="controlgroup"  data-jq-type="horizontal" data-jq-role="fieldcontain">
 				     	<legend>Cache settings:</legend>
 				         	<input type="radio" name="radio-choice-a1" id="radio-choice-a1" value="on" checked="checked" />
 				         	<label for="radio-choice-a1">On</label>
 				         	<input type="radio" name="radio-choice-a1" id="radio-choice-b1" value="off"  />
 				         	<label for="radio-choice-b1">Off</label>
 				    </fieldset>
-				<a href="#" data-role="button" data-inline="true">Button</a>
+				<a href="#" data-jq-role="button" data-jq-inline="true">Button</a>
 			</div>
 			<div class="ui-bar ui-bar-a">
-				<div data-role="controlgroup" data-type="horizontal" >
-					<a href="#" data-role="button" data-inline="true">Button</a><a href="#" data-role="button" data-inline="true">Button</a><a href="#" data-role="button" data-inline="true">Button</a>
+				<div data-jq-role="controlgroup" data-jq-type="horizontal" >
+					<a href="#" data-jq-role="button" data-jq-inline="true">Button</a><a href="#" data-jq-role="button" data-jq-inline="true">Button</a><a href="#" data-jq-role="button" data-jq-inline="true">Button</a>
 				</div><!-- /controlgroup -->
 			</div>
 
@@ -101,27 +101,27 @@
 
 		<h2>Lists &amp; Buttons</h2>
 		<p>Each swatch also includes default styles for interactive elements like list items and buttons.</p>
-		<ul data-role="listview" data-inset="true" data-theme="a">
+		<ul data-jq-role="listview" data-jq-inset="true" data-jq-theme="a">
 			<li><a href="index.html">List item</a></li>
 			<li><a href="index.html">List item</a></li>
 		</ul>
 		
-		<ul data-role="listview" data-inset="true" data-theme="b">
+		<ul data-jq-role="listview" data-jq-inset="true" data-jq-theme="b">
 			<li><a href="index.html">List item</a></li>
 			<li><a href="index.html">List item</a></li>
 		</ul>
 		
-		<ul data-role="listview" data-inset="true" data-theme="c">
+		<ul data-jq-role="listview" data-jq-inset="true" data-jq-theme="c">
 			<li><a href="index.html">List item</a></li>
 			<li><a href="index.html">List item</a></li>
 		</ul>
 		
-		<ul data-role="listview" data-inset="true" data-theme="d">
+		<ul data-jq-role="listview" data-jq-inset="true" data-jq-theme="d">
 			<li><a href="index.html">List item</a></li>
 			<li><a href="index.html">List item</a></li>
 		</ul>
 		
-		<ul data-role="listview" data-inset="true" data-theme="e">
+		<ul data-jq-role="listview" data-jq-inset="true" data-jq-theme="e">
 			<li><a href="index.html">List item</a></li>
 			<li><a href="index.html">List item</a></li>
 		</ul>
@@ -130,22 +130,22 @@
 		<p>A button is included for each swatch in the theme. Each button has styles for normal, hover/focus and pressed states.</p>
 		
 		<div class="swatch-preview">
-			<a href="index.html" data-role="button" data-theme="a" data-icon="arrow-l">Button A</a>
-			<a href="index.html" data-role="button" data-theme="b" data-icon="arrow-l">Button B</a>
-			<a href="index.html" data-role="button" data-theme="c" data-icon="arrow-l">Button C</a>
-			<a href="index.html" data-role="button" data-theme="d" data-icon="arrow-l">Button D</a>
-			<a href="index.html" data-role="button" data-theme="e" data-icon="arrow-l">Button E</a>
+			<a href="index.html" data-jq-role="button" data-jq-theme="a" data-jq-icon="arrow-l">Button A</a>
+			<a href="index.html" data-jq-role="button" data-jq-theme="b" data-jq-icon="arrow-l">Button B</a>
+			<a href="index.html" data-jq-role="button" data-jq-theme="c" data-jq-icon="arrow-l">Button C</a>
+			<a href="index.html" data-jq-role="button" data-jq-theme="d" data-jq-icon="arrow-l">Button D</a>
+			<a href="index.html" data-jq-role="button" data-jq-theme="e" data-jq-icon="arrow-l">Button E</a>
 		</div><!-- end swatch-bars -->
 		
 		
 		<p>By default, any button that's placed in a bar is automatically assigned a swatch letter that matches its parent bar or content box, to visually integrate the button into the parent theme like a chameleon, as shown here:</p>
 		
 		<div class="swatch-preview">
-			<div data-role="header" data-theme="a"><h1>Bar A</h1><a href="index.html" data-icon="arrow-l">Button A</a></div>
-			<div data-role="header" data-theme="b"><h1>Bar B</h1><a href="index.html" data-icon="arrow-l">Button B</a></div>
-			<div data-role="header" data-theme="c"><h1>Bar C</h1><a href="index.html" data-icon="arrow-l">Button C</a></div>
-			<div data-role="header" data-theme="d"><h1>Bar D</h1><a href="index.html" data-icon="arrow-l">Button D</a></div>
-			<div data-role="header" data-theme="e"><h1>Bar E</h1><a href="index.html" data-icon="arrow-l">Button E</a></div>
+			<div data-jq-role="header" data-jq-theme="a"><h1>Bar A</h1><a href="index.html" data-jq-icon="arrow-l">Button A</a></div>
+			<div data-jq-role="header" data-jq-theme="b"><h1>Bar B</h1><a href="index.html" data-jq-icon="arrow-l">Button B</a></div>
+			<div data-jq-role="header" data-jq-theme="c"><h1>Bar C</h1><a href="index.html" data-jq-icon="arrow-l">Button C</a></div>
+			<div data-jq-role="header" data-jq-theme="d"><h1>Bar D</h1><a href="index.html" data-jq-icon="arrow-l">Button D</a></div>
+			<div data-jq-role="header" data-jq-theme="e"><h1>Bar E</h1><a href="index.html" data-jq-icon="arrow-l">Button E</a></div>
 		</div><!-- end swatch-bars -->
 		
 		<p>This default behavior makes it easy to ripple a theme change through a page by setting a theme swatch on a parent because you know the buttons will maintain the same relative visual weight across themes. Since form elements use the button styles, they will also adapt to their parent container too. </p>
@@ -153,49 +153,49 @@
 		<p>If you want to add visual emphasis to a button and help it stand out visually from its parent toolbar, an alternate swatch color can be set by adding a <code>data-theme="a"</code> to the anchor. Once an alternate swatch color is set on a button in the markup, the framework won't override that color if the parent theme is changed, because you made a conscious decision to set it.</p>
 		
 		<div class="swatch-bars">
-			<div data-role="header" data-theme="a" class="ui-bar" data-backbtn="false">
+			<div data-jq-role="header" data-jq-theme="a" class="ui-bar" data-jq-backbtn="false">
 				<div><!-- wrapper div to have control over butttons -->
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="a">A</a>
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="b">B</a>
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="c">C</a>
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="d">D</a>
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="e">E</a>
+					<a href="index.html" data-jq-role="button" data-jq-icon="arrow-l" data-jq-theme="a">A</a>
+					<a href="index.html" data-jq-role="button" data-jq-icon="arrow-l" data-jq-theme="b">B</a>
+					<a href="index.html" data-jq-role="button" data-jq-icon="arrow-l" data-jq-theme="c">C</a>
+					<a href="index.html" data-jq-role="button" data-jq-icon="arrow-l" data-jq-theme="d">D</a>
+					<a href="index.html" data-jq-role="button" data-jq-icon="arrow-l" data-jq-theme="e">E</a>
 				</div>
 			</div>
-			<div data-role="header" data-theme="b" class="ui-bar" data-backbtn="false">
+			<div data-jq-role="header" data-jq-theme="b" class="ui-bar" data-jq-backbtn="false">
 				<div><!-- wrapper div to have control over butttons -->
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="a">A</a>
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="b">B</a>
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="c">C</a>
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="d">D</a>
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="e">E</a>
+					<a href="index.html" data-jq-role="button" data-jq-icon="arrow-l" data-jq-theme="a">A</a>
+					<a href="index.html" data-jq-role="button" data-jq-icon="arrow-l" data-jq-theme="b">B</a>
+					<a href="index.html" data-jq-role="button" data-jq-icon="arrow-l" data-jq-theme="c">C</a>
+					<a href="index.html" data-jq-role="button" data-jq-icon="arrow-l" data-jq-theme="d">D</a>
+					<a href="index.html" data-jq-role="button" data-jq-icon="arrow-l" data-jq-theme="e">E</a>
 				</div>
 			</div>
-			<div data-role="header" data-theme="c" class="ui-bar" data-backbtn="false">
+			<div data-jq-role="header" data-jq-theme="c" class="ui-bar" data-jq-backbtn="false">
 				<div><!-- wrapper div to have control over butttons -->
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="a">A</a>
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="b">B</a>
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="c">C</a>
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="d">D</a>
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="e">E</a>
+					<a href="index.html" data-jq-role="button" data-jq-icon="arrow-l" data-jq-theme="a">A</a>
+					<a href="index.html" data-jq-role="button" data-jq-icon="arrow-l" data-jq-theme="b">B</a>
+					<a href="index.html" data-jq-role="button" data-jq-icon="arrow-l" data-jq-theme="c">C</a>
+					<a href="index.html" data-jq-role="button" data-jq-icon="arrow-l" data-jq-theme="d">D</a>
+					<a href="index.html" data-jq-role="button" data-jq-icon="arrow-l" data-jq-theme="e">E</a>
 				</div>
 			</div>
-			<div data-role="header" data-theme="d" class="ui-bar" data-backbtn="false">
+			<div data-jq-role="header" data-jq-theme="d" class="ui-bar" data-jq-backbtn="false">
 				<div><!-- wrapper div to have control over butttons -->
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="a">A</a>
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="b">B</a>
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="c">C</a>
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="d">D</a>
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="e">E</a>
+					<a href="index.html" data-jq-role="button" data-jq-icon="arrow-l" data-jq-theme="a">A</a>
+					<a href="index.html" data-jq-role="button" data-jq-icon="arrow-l" data-jq-theme="b">B</a>
+					<a href="index.html" data-jq-role="button" data-jq-icon="arrow-l" data-jq-theme="c">C</a>
+					<a href="index.html" data-jq-role="button" data-jq-icon="arrow-l" data-jq-theme="d">D</a>
+					<a href="index.html" data-jq-role="button" data-jq-icon="arrow-l" data-jq-theme="e">E</a>
 				</div>
 			</div>
-			<div data-role="header" data-theme="e" class="ui-bar" data-backbtn="false">
+			<div data-jq-role="header" data-jq-theme="e" class="ui-bar" data-jq-backbtn="false">
 				<div><!-- wrapper div to have control over butttons -->
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="a">A</a>
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="b">B</a>
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="c">C</a>
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="d">D</a>
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="e">E</a>
+					<a href="index.html" data-jq-role="button" data-jq-icon="arrow-l" data-jq-theme="a">A</a>
+					<a href="index.html" data-jq-role="button" data-jq-icon="arrow-l" data-jq-theme="b">B</a>
+					<a href="index.html" data-jq-role="button" data-jq-icon="arrow-l" data-jq-theme="c">C</a>
+					<a href="index.html" data-jq-role="button" data-jq-icon="arrow-l" data-jq-theme="d">D</a>
+					<a href="index.html" data-jq-role="button" data-jq-icon="arrow-l" data-jq-theme="e">E</a>
 				</div>
 			</div>
 			
@@ -206,7 +206,7 @@
 		<h3>Global "Active" state</h3>
 		<p>The jQuery Mobile framework uses a single Theme-level swatch called "active" (bright blue in the default theme) to consistently indicate the selected state, regardless of the individual swatch of the given widget. We apply this in navigation and form controls whenever there is a need to indicate what is currently selected. Because this theme swatch is designed for clear, consistent user feedback, it cannot be overridden via the markup; it is set once in the Theme and applied by the framework whenever a selected or active state is needed. The styling for this state is in the theme stylesheet under the <code>ui-btn-active</code> style rules.</p>
 		
-		<fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
+		<fieldset data-jq-role="controlgroup"  data-jq-type="horizontal" data-jq-role="fieldcontain">
 	     	<legend>Active is used for the on state of these toggles:</legend>
 	         	<input type="radio" name=" radio-choice-a" id="radio-choice-a" value="on" checked="checked" />
 	         	<label for="radio-choice-a">On</label>
@@ -222,7 +222,7 @@
 
 	
 		<p><strong>Learn more</strong> about theming individual components:</p>
-		<ul data-role="listview" data-inset="true">
+		<ul data-jq-role="listview" data-jq-inset="true">
 			<li><a href="../pages/pages-themes.html">Page theming</a></li>
 			<li><a href="../toolbars/bars-themes.html">Toolbar theming</a></li>
 			<li><a href="../content/content-themes.html">Content theming</a></li>

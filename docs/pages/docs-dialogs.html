@@ -10,24 +10,24 @@
 </head> 
 <body> 
 
-<div data-role="page">
+<div data-jq-role="page">
 
-	<div data-role="header" data-theme="b">
+	<div data-jq-role="header" data-jq-theme="b">
 		<h1>Dialogs</h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+		<a href="../../" data-jq-icon="home" data-jq-iconpos="notext" data-jq-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
-	<div data-role="content" class="ui-body">
+	<div data-jq-role="content" class="ui-body">
 			<h2>Creating dialogs</h2>
 			<p>Any page can be presented as a modal dialog by adding the <code>data-rel="dialog"</code> attribute to the page anchor link. When the "dialog" attribute is applied, the framework adds styles to add rounded corners, margins around the page and a dark background to make the "dialog" appear to be suspended above the page.</p>
 
 			<p>
 			<code>
-			&lt;a href=&quot;foo.html&quot; data-rel=&quot;dialog&quot;&gt;Open dialog&lt;/a&gt;
+			&lt;a href=&quot;foo.html&quot; data-jq-rel=&quot;dialog&quot;&gt;Open dialog&lt;/a&gt;
 			</code>
 			</p>
 			
-			<a href="dialog.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">Open dialog</a>
+			<a href="dialog.html" data-jq-role="button" data-jq-inline="true" data-jq-rel="dialog" data-jq-transition="pop">Open dialog</a>
 			
 
 			
@@ -35,13 +35,13 @@
 			<p>By default, the dialog will open with a 'pop' transition.  Like all pages, you can specify any page transition you want on the dialog by adding the <code>data-transition</code> attribute to the link. To make it feel more dialog-like, we recommend specifying a transition of "pop", "slideup" or "flip".</p>
 			
 <code>
-&lt;a href=&quot;foo.html&quot; data-rel=&quot;dialog&quot; data-transition=&quot;pop&quot;&gt;Open dialog&lt;/a&gt;
+&lt;a href=&quot;foo.html&quot; data-jq-rel=&quot;dialog&quot; data-jq-transition=&quot;pop&quot;&gt;Open dialog&lt;/a&gt;
 </code>
 			
 			<div>
-			<a href="dialog.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">data-transition="pop"</a>
-			<a href="dialog.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="slidedown">data-transition="slidedown"</a>
-			<a href="dialog.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="flip">data-transition="flip"</a>
+			<a href="dialog.html" data-jq-role="button" data-jq-inline="true" data-jq-rel="dialog" data-jq-transition="pop">data-transition="pop"</a>
+			<a href="dialog.html" data-jq-role="button" data-jq-inline="true" data-jq-rel="dialog" data-jq-transition="slidedown">data-transition="slidedown"</a>
+			<a href="dialog.html" data-jq-role="button" data-jq-inline="true" data-jq-rel="dialog" data-jq-transition="flip">data-transition="flip"</a>
 			</div>
 	
 	
@@ -54,11 +54,11 @@
 			
 			<h2>Styling &amp; theming</h2>
 			<p>Dialogs can be styled with different themes, just like any page. Here is a different dialog design:</p>
-				<a href="dialog-alt.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">An alternate color scheme</a>
+				<a href="dialog-alt.html" data-jq-role="button" data-jq-inline="true" data-jq-rel="dialog" data-jq-transition="pop">An alternate color scheme</a>
 		
 		
 			<p>And dialogs can be can used more like a control sheet to offer multiple buttons by removing the header:</p>
-						<a href="dialog-buttons.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="slidedown">Share photos...</a>
+						<a href="dialog-buttons.html" data-jq-role="button" data-jq-inline="true" data-jq-rel="dialog" data-jq-transition="slidedown">Share photos...</a>
 			
 			
 	</div><!-- /content -->

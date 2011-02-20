@@ -10,14 +10,14 @@
 </head> 
 <body> 
 
-<div data-role="page">
+<div data-jq-role="page">
 
-	<div data-role="header" data-theme="b">
+	<div data-jq-role="header" data-jq-theme="b">
 		<h1>Toolbar basics</h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+		<a href="../../" data-jq-icon="home" data-jq-iconpos="notext" data-jq-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
-	<div data-role="content">
+	<div data-jq-role="content">
 			
 	<h2>Toolbar types</h2>
 	
@@ -37,7 +37,7 @@
 			
 			<p>A <a href="bars-fixed.html"><strong>"fixed" positioning mode</strong></a> provides the convenience of static toolbars without the drawbacks of implementing faux-scrolling in JavaScript. The toolbars start in their natural positions on the page, like the "inline" mode, but when a bar scrolls out of the viewport, the framework animates the bar back into view by dynamically re-positioning the bar to the top or bottom of the viewport.</p>
 			<p> At any time, tapping the screen will toggle the visibility of the fixed toolbars: tapping the page when the toolbars aren't visible brings them into view, tapping again hides them until you tap again. This gives users the option to hide the toolbars until needed to maximize screen real estate. </p>
-			<p>To set this behavior on a header or footer, add the <code> data-position="fixed"</code> attribute to the toolbar container.</p>
+			<p>To set this behavior on a header or footer, add the <code> data-jq-position="fixed"</code> attribute to the toolbar container.</p>
 									
 			<p>A <a href="bars-fullscreen.html"><strong>"fullscreen" position mode</strong></a> works just like the fixed mode except that the toolbars aren't shown at the top and bottom of the page and only appear when the page is clicked. This is useful for immersive apps like photo or video viewers where you want the content to full when whole screen and toolbars can be summoned to appear by tapping the screen. Keep in mind that the toolbars in this mode will sit <strong>over</strong> page content so this is best used for specific situations.</p>
 

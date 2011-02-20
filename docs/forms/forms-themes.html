@@ -11,14 +11,14 @@
 </head> 
 <body> 
 
-<div data-role="page">
+<div data-jq-role="page">
 
-	<div data-role="header" data-theme="b">
+	<div data-jq-role="header" data-jq-theme="b">
 		<h1>Theming forms</h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+		<a href="../../" data-jq-icon="home" data-jq-iconpos="notext" data-jq-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
-	<div data-role="content">
+	<div data-jq-role="content">
     
     <h2>Form themes</h2>
     <p>jQuery Mobile has a rich <a href="../api/themes.html">theming system</a> that gives you full control of how pages and forms are styled. By default all form elements inside a container will automaticlaly adopt the same theme color swatch as their parent. This allows form elements to blend into their layouts with minimal work. The <code>data-theme</code> attribute can be applied any individual form element to apply any of the lettered theme color swatches to create contrast and emphasis in your designs.</p> 
@@ -29,27 +29,27 @@
 	<h2>Body swatch A</h2>
 	<div class="ui-body ui-body-a">
 			
-		<div data-role="fieldcontain">
+		<div data-jq-role="fieldcontain">
          <label for="name-a">Text Input:</label>
          <input type="text" name="name" id="name-a" value=""  />
 		</div>
 		
-		<div data-role="fieldcontain">
+		<div data-jq-role="fieldcontain">
 			<label for="switch-a">Flip switch:</label>
-			<select name="switch-a" id="switch-a" data-role="slider">
+			<select name="switch-a" id="switch-a" data-jq-role="slider">
 				<option value="off">Off</option>
 				<option value="on">On</option>
 			</select> 
 		</div>
 		
-		<div data-role="fieldcontain">
+		<div data-jq-role="fieldcontain">
 			<label for="slider-a">Slider:</label>
 		 	<input type="range" name="slider" id="slider-a" value="0" min="0" max="100"  />
 		</div>
 		
 		
-		<div data-role="fieldcontain">
-		<fieldset data-role="controlgroup" data-type="horizontal">
+		<div data-jq-role="fieldcontain">
+		<fieldset data-jq-role="controlgroup" data-jq-type="horizontal">
 	    	<legend>Font styling:</legend>
 	    	<input type="checkbox" name="checkbox-6a" id="checkbox-6a" class="custom" />
 			<label for="checkbox-6a">b</label>
@@ -62,8 +62,8 @@
 	    </fieldset>
 		</div>
 	
-		<div data-role="fieldcontain">
-		    <fieldset data-role="controlgroup">
+		<div data-jq-role="fieldcontain">
+		    <fieldset data-jq-role="controlgroup">
 		    	<legend>Choose a pet:</legend>
 		         	<input type="radio" name="radio-choice-1" id="radio-choice-1a" value="choice-1" />
 		         	<label for="radio-choice-1a">Cat</label>
@@ -79,7 +79,7 @@
 		    </fieldset>
 		</div>
 		
-		<div data-role="fieldcontain">
+		<div data-jq-role="fieldcontain">
 			<label for="select-choice-a" class="select">Choose shipping method:</label>
 			<select name="select-choice-a" id="select-choice-a">
 				<option value="standard">Standard: 7 day</option>
@@ -94,27 +94,27 @@
 		<h2>Body swatch B</h2>
 		<div class="ui-body ui-body-b">
 
-			<div data-role="fieldcontain">
+			<div data-jq-role="fieldcontain">
 	         <label for="name-b">Text Input:</label>
 	         <input type="text" name="name" id="name-b" value=""  />
 			</div>
 
-			<div data-role="fieldcontain">
+			<div data-jq-role="fieldcontain">
 				<label for="switch-b">Flip switch:</label>
-				<select name="switch-b" id="switch-b" data-role="slider">
+				<select name="switch-b" id="switch-b" data-jq-role="slider">
 					<option value="off">Off</option>
 					<option value="on">On</option>
 				</select> 
 			</div>
 
-			<div data-role="fieldcontain">
+			<div data-jq-role="fieldcontain">
 				<label for="slider-b">Slider:</label>
 			 	<input type="range" name="slider" id="slider-b" value="0" min="0" max="100"  />
 			</div>
 
 
-			<div data-role="fieldcontain">
-			<fieldset data-role="controlgroup" data-type="horizontal">
+			<div data-jq-role="fieldcontain">
+			<fieldset data-jq-role="controlgroup" data-jq-type="horizontal">
 		    	<legend>Font styling:</legend>
 		    	<input type="checkbox" name="checkbox-6b" id="checkbox-6b" class="custom" />
 				<label for="checkbox-6b">b</label>
@@ -127,8 +127,8 @@
 		    </fieldset>
 			</div>
 
-			<div data-role="fieldcontain">
-			    <fieldset data-role="controlgroup">
+			<div data-jq-role="fieldcontain">
+			    <fieldset data-jq-role="controlgroup">
 			    	<legend>Choose a pet:</legend>
 			         	<input type="radio" name="radio-choice-1" id="radio-choice-1b" value="choice-1" />
 			         	<label for="radio-choice-1b">Cat</label>
@@ -144,7 +144,7 @@
 			    </fieldset>
 			</div>
 
-			<div data-role="fieldcontain">
+			<div data-jq-role="fieldcontain">
 				<label for="select-choice-b" class="select">Choose shipping method:</label>
 				<select name="select-choice-b" id="select-choice-b">
 					<option value="standard">Standard: 7 day</option>
@@ -161,27 +161,27 @@
 			<h2>Body swatch C</h2>
 			<div class="ui-body ui-body-c">
 
-				<div data-role="fieldcontain">
+				<div data-jq-role="fieldcontain">
 		         <label for="name-c">Text Input:</label>
 		         <input type="text" name="name" id="name-c" value=""  />
 				</div>
 
-				<div data-role="fieldcontain">
+				<div data-jq-role="fieldcontain">
 					<label for="switch-c">Flip switch:</label>
-					<select name="switch-c" id="switch-c" data-role="slider">
+					<select name="switch-c" id="switch-c" data-jq-role="slider">
 						<option value="off">Off</option>
 						<option value="on">On</option>
 					</select> 
 				</div>
 
-				<div data-role="fieldcontain">
+				<div data-jq-role="fieldcontain">
 					<label for="slider-c">Slider:</label>
 				 	<input type="range" name="slider" id="slider-c" value="0" min="0" max="100"  />
 				</div>
 
 
-				<div data-role="fieldcontain">
-				<fieldset data-role="controlgroup" data-type="horizontal">
+				<div data-jq-role="fieldcontain">
+				<fieldset data-jq-role="controlgroup" data-jq-type="horizontal">
 			    	<legend>Font styling:</legend>
 			    	<input type="checkbox" name="checkbox-6c" id="checkbox-6c" class="custom" />
 					<label for="checkbox-6c">b</label>
@@ -194,8 +194,8 @@
 			    </fieldset>
 				</div>
 
-				<div data-role="fieldcontain">
-				    <fieldset data-role="controlgroup">
+				<div data-jq-role="fieldcontain">
+				    <fieldset data-jq-role="controlgroup">
 				    	<legend>Choose a pet:</legend>
 				         	<input type="radio" name="radio-choice-1" id="radio-choice-1c" value="choice-1" />
 				         	<label for="radio-choice-1c">Cat</label>
@@ -211,7 +211,7 @@
 				    </fieldset>
 				</div>
 
-				<div data-role="fieldcontain">
+				<div data-jq-role="fieldcontain">
 					<label for="select-choice-c" class="select">Choose shipping method:</label>
 					<select name="select-choice-c" id="select-choice-c">
 						<option value="standard">Standard: 7 day</option>
@@ -229,27 +229,27 @@
 				<h2>Body swatch D</h2>
 				<div class="ui-body ui-body-d">
 
-					<div data-role="fieldcontain">
+					<div data-jq-role="fieldcontain">
 			         <label for="name-d">Text Input:</label>
 			         <input type="text" name="name" id="name-d" value=""  />
 					</div>
 
-					<div data-role="fieldcontain">
+					<div data-jq-role="fieldcontain">
 						<label for="switch-d">Flip switch:</label>
-						<select name="switch-d" id="switch-d" data-role="slider">
+						<select name="switch-d" id="switch-d" data-jq-role="slider">
 							<option value="off">Off</option>
 							<option value="on">On</option>
 						</select> 
 					</div>
 
-					<div data-role="fieldcontain">
+					<div data-jq-role="fieldcontain">
 						<label for="slider-d">Slider:</label>
 					 	<input type="range" name="slider" id="slider-d" value="0" min="0" max="100"  />
 					</div>
 
 
-					<div data-role="fieldcontain">
-					<fieldset data-role="controlgroup" data-type="horizontal">
+					<div data-jq-role="fieldcontain">
+					<fieldset data-jq-role="controlgroup" data-jq-type="horizontal">
 				    	<legend>Font styling:</legend>
 				    	<input type="checkbox" name="checkbox-6d" id="checkbox-6d" class="custom" />
 						<label for="checkbox-6d">b</label>
@@ -262,8 +262,8 @@
 				    </fieldset>
 					</div>
 
-					<div data-role="fieldcontain">
-					    <fieldset data-role="controlgroup">
+					<div data-jq-role="fieldcontain">
+					    <fieldset data-jq-role="controlgroup">
 					    	<legend>Choose a pet:</legend>
 					         	<input type="radio" name="radio-choice-1" id="radio-choice-1d" value="choice-1" />
 					         	<label for="radio-choice-1d">Cat</label>
@@ -279,7 +279,7 @@
 					    </fieldset>
 					</div>
 
-					<div data-role="fieldcontain">
+					<div data-jq-role="fieldcontain">
 						<label for="select-choice-d" class="select">Choose shipping method:</label>
 						<select name="select-choice-d" id="select-choice-d">
 							<option value="standard">Standard: 7 day</option>
@@ -296,27 +296,27 @@
 					<h2>Body swatch E</h2>
 					<div class="ui-body ui-body-e">
 
-						<div data-role="fieldcontain">
+						<div data-jq-role="fieldcontain">
 				         <label for="name-e">Text Input:</label>
 				         <input type="text" name="name" id="name-e" value=""  />
 						</div>
 
-						<div data-role="fieldcontain">
+						<div data-jq-role="fieldcontain">
 							<label for="switch-e">Flip switch:</label>
-							<select name="switch-e" id="switch-e" data-role="slider">
+							<select name="switch-e" id="switch-e" data-jq-role="slider">
 								<option value="off">Off</option>
 								<option value="on">On</option>
 							</select> 
 						</div>
 
-						<div data-role="fieldcontain">
+						<div data-jq-role="fieldcontain">
 							<label for="slider-e">Slider:</label>
 						 	<input type="range" name="slider" id="slider-e" value="0" min="0" max="100"  />
 						</div>
 
 
-						<div data-role="fieldcontain">
-						<fieldset data-role="controlgroup" data-type="horizontal">
+						<div data-jq-role="fieldcontain">
+						<fieldset data-jq-role="controlgroup" data-jq-type="horizontal">
 					    	<legend>Font styling:</legend>
 					    	<input type="checkbox" name="checkbox-6e" id="checkbox-6e" class="custom" />
 							<label for="checkbox-6e">b</label>
@@ -329,8 +329,8 @@
 					    </fieldset>
 						</div>
 
-						<div data-role="fieldcontain">
-						    <fieldset data-role="controlgroup">
+						<div data-jq-role="fieldcontain">
+						    <fieldset data-jq-role="controlgroup">
 						    	<legend>Choose a pet:</legend>
 						         	<input type="radio" name="radio-choice-1" id="radio-choice-1e" value="choice-1" />
 						         	<label for="radio-choice-1e">Cat</label>
@@ -346,7 +346,7 @@
 						    </fieldset>
 						</div>
 
-						<div data-role="fieldcontain">
+						<div data-jq-role="fieldcontain">
 							<label for="select-choice-e" class="select">Choose shipping method:</label>
 							<select name="select-choice-e" id="select-choice-e">
 								<option value="standard">Standard: 7 day</option>

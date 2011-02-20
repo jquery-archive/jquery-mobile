@@ -11,14 +11,14 @@
 </head> 
 <body> 
 
-<div data-role="page">
+<div data-jq-role="page">
 
-	<div data-role="header" data-theme="b">
+	<div data-jq-role="header" data-jq-theme="b">
 		<h1>Search inputs</h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+		<a href="../../" data-jq-icon="home" data-jq-iconpos="notext" data-jq-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
-	<div data-role="content">
+	<div data-jq-role="content">
 		
 		<form action="#" method="get">
 
@@ -27,22 +27,22 @@
 			<p>Set the <code>for</code> attribute of the <code>label</code> to match the ID of the <code>input</code> so they are semantically associated and wrap them in a <code>div</code> with the <code>data-role="fieldcontain"</code> attribute to group them.</p>
 
 <pre><code>	
-&lt;div data-role=&quot;fieldcontain&quot;&gt;
+&lt;div data-jq-role=&quot;fieldcontain&quot;&gt;
     &lt;label for=&quot;search&quot;&gt;Search Input:&lt;/label&gt;
     &lt;input type=&quot;search&quot; name=&quot;password&quot; id=&quot;search&quot; value=&quot;&quot; /&gt;
 &lt;/div&gt;
 </code></pre>	
 			 
 			<p>The search input is displayed like this:</p>
-			<div data-role="fieldcontain">
+			<div data-jq-role="fieldcontain">
 	         <label for="search">Search Input:</label>
 	         <input type="search" name="password" id="search" value="" />
 			</div>
 
 			<p>Themed variation:</p>
-			<div data-role="fieldcontain">
+			<div data-jq-role="fieldcontain">
 	         <label for="searchA">Search Input:</label>
-	         <input type="search" name="searchA" id="searchA" value="" data-theme="a" />
+	         <input type="search" name="searchA" id="searchA" value="" data-jq-theme="a" />
 			</div>
 
 

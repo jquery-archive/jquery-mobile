@@ -11,14 +11,14 @@
 </head>
 <body>
 
-<div data-role="page">
+<div data-jq-role="page">
 
-	<div data-role="header" data-theme="b">
+	<div data-jq-role="header" data-jq-theme="b">
 		<h1>Select Menus</h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+		<a href="../../" data-jq-icon="home" data-jq-iconpos="notext" data-jq-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
-	<div data-role="content">
+	<div data-jq-role="content">
 
 		<form action="#" method="get">
 
@@ -32,7 +32,7 @@
 			<p>The framework will find all <code>select</code> elements and automatically enhance them into the custom select menus.</p>
 
 <pre><code>
-&lt;div data-role=&quot;fieldcontain&quot;&gt;
+&lt;div data-jq-role=&quot;fieldcontain&quot;&gt;
 	&lt;label for=&quot;select-choice-1&quot; class=&quot;select&quot;&gt;Choose shipping method:&lt;/label&gt;
 	&lt;select name=&quot;select-choice-1&quot; id=&quot;select-choice-1&quot;&gt;
 		&lt;option value=&quot;standard&quot;&gt;Standard: 7 day&lt;/option&gt;
@@ -45,7 +45,7 @@
 
 			<p> If there is a small number of options that will fit on the device's screen, it will appear as a small overlay with a pop transition.</p>
 
-					<div data-role="fieldcontain">
+					<div data-jq-role="fieldcontain">
 						<label for="select-choice-1" class="select">Choose shipping method:</label>
 						<select name="select-choice-1" id="select-choice-1">
 							<option value="standard">Standard: 7 day</option>
@@ -58,7 +58,7 @@
 
 					<p>If there is a select menu with too many options to show on the device's screen, the framework will automatically create a new &quot;page&quot; populated with a standard list view that contains all the options. This allows us to use the native scrolling included on the device for moving through a long list. The text inside the <code>label</code> is used as the title for this page.</p>
 
-					<div data-role="fieldcontain">
+					<div data-jq-role="fieldcontain">
 						<label for="select-choice-3" class="select">Your state:</label>
 						<select name="select-choice-3" id="select-choice-3">
 							<option value="AL">Alabama</option>
@@ -130,9 +130,9 @@ $(document).bind('mobileinit',function(){
 				</pre>
 			</code>
 
-					<div data-role="fieldcontain">
+					<div data-jq-role="fieldcontain">
 						<label for="select-choice-3" class="select">Your state:</label>
-						<select name="select-choice-3" id="select-choice-3" data-native-menu="true">
+						<select name="select-choice-3" id="select-choice-3" data-jq-native-menu="true">
 							<option value="AL">Alabama</option>
 							<option value="AK">Alaska</option>
 							<option value="AZ">Arizona</option>
@@ -204,7 +204,7 @@ $.mobile.selectmenu.prototype.options.hidePlaceholderMenuItems = false;
 	<p>Here's a demo of various placeholder options:</p>
 
 
-	<div data-role="fieldcontain">
+	<div data-jq-role="fieldcontain">
 		<label for="select-choice-4" class="select">Choose shipping method:</label>
 		<select name="select-choice-4" id="select-choice-4">
 			<option></option>
@@ -216,7 +216,7 @@ $.mobile.selectmenu.prototype.options.hidePlaceholderMenuItems = false;
 	</div>
 
 
-	<div data-role="fieldcontain">
+	<div data-jq-role="fieldcontain">
 		<label for="select-choice-5" class="select">Choose shipping method:</label>
 		<select name="select-choice-5" id="select-choice-5">
 			<option>Choose one...</option>
@@ -228,10 +228,10 @@ $.mobile.selectmenu.prototype.options.hidePlaceholderMenuItems = false;
 	</div>
 
 
-	<div data-role="fieldcontain">
+	<div data-jq-role="fieldcontain">
 		<label for="select-choice-6" class="select">Choose shipping method:</label>
 		<select name="select-choice-6" id="select-choice-6">
-			<option value="choose-one" data-placeholder="true">Choose one...</option>
+			<option value="choose-one" data-jq-placeholder="true">Choose one...</option>
 			<option value="standard">Standard: 7 day</option>
 			<option value="rush">Rush: 3 days</option>
 			<option value="express">Express: next day</option>
@@ -242,7 +242,7 @@ $.mobile.selectmenu.prototype.options.hidePlaceholderMenuItems = false;
 	<h2>Disabled options</h2>
 	<p>jQuery Mobile will automatically disable and style option tags with the <code>disabled</code> attribute.  In the demo below, the second option &quot;Rush: 3 days&quot; has been set to disabled.</p>
 
-	<div data-role="fieldcontain">
+	<div data-jq-role="fieldcontain">
 		<label for="select-choice-7" class="select">Choose shipping method:</label>
 		<select name="select-choice-7" id="select-choice-7">
 			<option value="standard">Standard: 7 day</option>
@@ -255,7 +255,7 @@ $.mobile.selectmenu.prototype.options.hidePlaceholderMenuItems = false;
 	<h2>Optgroup support</h2>
 	<p>If a select menu contains <code>optgroup</code> elements, jQuery Mobile will create a divider &amp; group items based on the <code>label</code> attribute's text:</p>
 
-	<div data-role="fieldcontain">
+	<div data-jq-role="fieldcontain">
 		<label for="select-choice-8" class="select">Choose shipping method:</label>
 		<select name="select-choice-8" id="select-choice-8">
 			<optgroup label="USPS">
@@ -286,7 +286,7 @@ $.mobile.selectmenu.prototype.options.hidePlaceholderMenuItems = false;
 	<li>If no placeholder element exists, the default button text will be blank and the header will appear with just a close button. Because this isn't a friendly user experience, we recommended that you always specify a placeholder element when using multiple select boxes.</li>
 	</ul>
 
-	<div data-role="fieldcontain">
+	<div data-jq-role="fieldcontain">
 		<label for="select-choice-9" class="select">Choose shipping method(s):</label>
 		<select name="select-choice-9" id="select-choice-9" multiple="multiple">
 			<option>Choose options</option>
@@ -299,7 +299,7 @@ $.mobile.selectmenu.prototype.options.hidePlaceholderMenuItems = false;
 
 	<p>When a select is large enough to where the menu will open in a new page, the placeholder text is displayed in the button when no items are selected, and the <code>label</code> text is displayed in the menu's header.  This differs from smaller overlay menus where the placeholder text is displayed in both the button and the header, and from full-page single selects where the placeholder text is not used at all.</p>
 
-	<div data-role="fieldcontain">
+	<div data-jq-role="fieldcontain">
 		<label for="select-choice-10" class="select">Choose state(s):</label>
 		<select name="select-choice-10" id="select-choice-10" multiple="multiple">
 			<option>Choose options</option>
@@ -360,11 +360,11 @@ $.mobile.selectmenu.prototype.options.hidePlaceholderMenuItems = false;
 
 
 	<h2>Data attribute support</h2>
-	<p>You can specify any jQuery Mobile button data- attribute on a select element too. In this example, we're setting the theme, icon and inline properties though data- attributes.</p>
+	<p>You can specify any jQuery Mobile button data-jq- attribute on a select element too. In this example, we're setting the theme, icon and inline properties though data-jq- attributes.</p>
 
-	<div data-role="fieldcontain">
+	<div data-jq-role="fieldcontain">
 		<label for="select-choice-11" class="select">Actions</label>
-		<select name="select-choice-11" id="select-choice-11" data-theme="a" data-icon="gear" data-inline="true">
+		<select name="select-choice-11" id="select-choice-11" data-jq-theme="a" data-jq-icon="gear" data-jq-inline="true">
 			<option value="edit">Edit user</option>
 			<option value="delete">Delete user</option>
 		</select>

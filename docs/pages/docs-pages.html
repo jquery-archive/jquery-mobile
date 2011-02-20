@@ -10,14 +10,14 @@
 </head> 
 <body> 
 
-<div data-role="page">
+<div data-jq-role="page">
 
-	<div data-role="header" data-theme="b">
+	<div data-jq-role="header" data-jq-theme="b">
 		<h1>Anatomy of a Page</h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+		<a href="../../" data-jq-icon="home" data-jq-iconpos="notext" data-jq-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
-	<div data-role="content">
+	<div data-jq-role="content">
 			
 			<p>The jQuery Mobile "page" structure is optimized to support either single pages, or local internal linked "pages" within a page.</p> 
 			
@@ -53,7 +53,7 @@
 </pre> 
 </div> 
 
-			<p>Within the "page" container, any valid HTML markup can be used, but for typical pages in jQuery Mobile, the immediate children of a "page" are divs with data-roles of <code>"header"</code>, <code>"content"</code>, and <code>"footer"</code>.</p> 
+			<p>Within the "page" container, any valid HTML markup can be used, but for typical pages in jQuery Mobile, the immediate children of a "page" are divs with data-jq-roles of <code>"header"</code>, <code>"content"</code>, and <code>"footer"</code>.</p> 
 
 <div class="highlight"> 
 <pre><span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"page"</span><span class="nt">&gt;</span> 
@@ -80,17 +80,17 @@
 &lt;/head&gt; 
 &lt;body&gt; 
 
-&lt;div data-role=&quot;page&quot;&gt;
+&lt;div data-jq-role=&quot;page&quot;&gt;
 
-	&lt;div data-role=&quot;header&quot;&gt;
+	&lt;div data-jq-role=&quot;header&quot;&gt;
 		&lt;h1&gt;Page Title&lt;/h1&gt;
 	&lt;/div&gt;&lt;!-- /header --&gt;
 
-	&lt;div data-role=&quot;content&quot;&gt;	
+	&lt;div data-jq-role=&quot;content&quot;&gt;	
 		&lt;p&gt;Page content goes here.&lt;/p&gt;		
 	&lt;/div&gt;&lt;!-- /content --&gt;
 
-	&lt;div data-role=&quot;footer&quot;&gt;
+	&lt;div data-jq-role=&quot;footer&quot;&gt;
 		&lt;h4&gt;Page Footer&lt;/h4&gt;
 	&lt;/div&gt;&lt;!-- /footer --&gt;
 &lt;/div&gt;&lt;!-- /page --&gt;
@@ -99,7 +99,7 @@
 &lt;/html&gt;
 </code></pre>
 
-			<a href="page-template.html" data-inline="true" data-theme="b" data-role="button">View boilerplate template</a>
+			<a href="page-template.html" data-jq-inline="true" data-jq-theme="b" data-jq-role="button">View boilerplate template</a>
 
 			<h2>External page linking</h2> 
 				
@@ -126,43 +126,43 @@
 &lt;body&gt; 
 
 &lt;!-- Start of first page --&gt;
-&lt;div data-role=&quot;page&quot; id=&quot;foo&quot;&gt;
+&lt;div data-jq-role=&quot;page&quot; id=&quot;foo&quot;&gt;
 
-	&lt;div data-role=&quot;header&quot;&gt;
+	&lt;div data-jq-role=&quot;header&quot;&gt;
 		&lt;h1&gt;Foo&lt;/h1&gt;
 	&lt;/div&gt;&lt;!-- /header --&gt;
 
-	&lt;div data-role=&quot;content&quot;&gt;	
+	&lt;div data-jq-role=&quot;content&quot;&gt;	
 		&lt;p&gt;I&#x27;m first in the source order so I&#x27;m shown as the page.&lt;/p&gt;		
 		&lt;p&gt;View internal page called &lt;a href=&quot;#bar&quot;&gt;bar&lt;/a&gt;&lt;/p&gt;	
 	&lt;/div&gt;&lt;!-- /content --&gt;
 
-	&lt;div data-role=&quot;footer&quot;&gt;
+	&lt;div data-jq-role=&quot;footer&quot;&gt;
 		&lt;h4&gt;Page Footer&lt;/h4&gt;
 	&lt;/div&gt;&lt;!-- /header --&gt;
 &lt;/div&gt;&lt;!-- /page --&gt;
 
 
 &lt;!-- Start of second page --&gt;
-&lt;div data-role=&quot;page&quot; id=&quot;bar&quot;&gt;
+&lt;div data-jq-role=&quot;page&quot; id=&quot;bar&quot;&gt;
 
-	&lt;div data-role=&quot;header&quot;&gt;
+	&lt;div data-jq-role=&quot;header&quot;&gt;
 		&lt;h1&gt;Bar&lt;/h1&gt;
 	&lt;/div&gt;&lt;!-- /header --&gt;
 
-	&lt;div data-role=&quot;content&quot;&gt;	
+	&lt;div data-jq-role=&quot;content&quot;&gt;	
 		&lt;p&gt;I&#x27;m first in the source order so I&#x27;m shown as the page.&lt;/p&gt;		
 		&lt;p&gt;&lt;a href=&quot;#foo&quot;&gt;Back to foo&lt;/a&gt;&lt;/p&gt;	
 	&lt;/div&gt;&lt;!-- /content --&gt;
 
-	&lt;div data-role=&quot;footer&quot;&gt;
+	&lt;div data-jq-role=&quot;footer&quot;&gt;
 		&lt;h4&gt;Page Footer&lt;/h4&gt;
 	&lt;/div&gt;&lt;!-- /header --&gt;
 &lt;/div&gt;&lt;!-- /page --&gt;
 &lt;/body&gt;
 </code></pre>	
 
-		<a href="multipage-template.html" data-inline="true" data-theme="b" data-role="button" rel="external">View multi-page template</a>
+		<a href="multipage-template.html" data-jq-inline="true" data-jq-theme="b" data-jq-role="button" rel="external">View multi-page template</a>
 
 		<p> </p>
 		
@@ -178,7 +178,7 @@
 		
 		<p>However, you can work around this issue by returning your page div with a <code>data-url</code> attribute already specified. When you do this, jQuery Mobile will use that attribute's value for updating the URL, instead of the url used to request that page. This also allows you to return urls that change as the result of a redirect, for example, you might post a form to "/login.html" but return a page from the url "/account" after a successful submission. This tool allows you to take control of the jQuery Mobile history stack in these situations. Here's an example:</p>
 		
-		<p>The following link points to "docs-links-urltest/index.html": <a href="docs-links-urltest/index.html">Test Link</a> which is a directory with an index page. The return page will update the hash as "docs/pages/docs-links-urltest/" with a trailing slash. This is done via the data-url attribute in that page's source. Keep in mind that the value will replace the entire hash, and it is up to you to replace it with a URL that actually resolves to the correct page when requested via refresh or deep link.</p>
+		<p>The following link points to "docs-links-urltest/index.html": <a href="docs-links-urltest/index.html">Test Link</a> which is a directory with an index page. The return page will update the hash as "docs/pages/docs-links-urltest/" with a trailing slash. This is done via the data-jq-url attribute in that page's source. Keep in mind that the value will replace the entire hash, and it is up to you to replace it with a URL that actually resolves to the correct page when requested via refresh or deep link.</p>
 		
 		
 		<p>Learn more about the technical details of the navigation model and <a href="docs-navmodel.html">Ajax, hashes and history</a> in jQuery mobile.</p>

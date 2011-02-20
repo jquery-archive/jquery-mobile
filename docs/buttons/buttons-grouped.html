@@ -11,52 +11,52 @@
 </head>
 <body> 
 
-<div data-role="page">
+<div data-jq-role="page">
 
-	<div data-role="header" data-theme="b">
+	<div data-jq-role="header" data-jq-theme="b">
 		<h1>Grouped buttons</h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+		<a href="../../" data-jq-icon="home" data-jq-iconpos="notext" data-jq-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
-	<div data-role="content">
+	<div data-jq-role="content">
 		<p>Occasionally, you may want to visually group a set of buttons together to form a single block that looks contained like a navigation component. To get this effect, wrap a set of buttons in a container with the <code>data-role="controlgroup"</code> attribute &mdash; the framework will create a vertical button group, remove all margins and drop shadows between the buttons, and only round the first and last buttons of the set to create the effect that they are grouped together. </p>
 <pre><code>
-&lt;div data-role=&quot;controlgroup&quot;&gt;
-&lt;a href=&quot;index.html&quot; data-role=&quot;button&quot;&gt;Yes&lt;/a&gt;
-&lt;a href=&quot;index.html&quot; data-role=&quot;button&quot;&gt;No&lt;/a&gt;
-&lt;a href=&quot;index.html&quot; data-role=&quot;button&quot;&gt;Maybe&lt;/a&gt;
+&lt;div data-jq-role=&quot;controlgroup&quot;&gt;
+&lt;a href=&quot;index.html&quot; data-jq-role=&quot;button&quot;&gt;Yes&lt;/a&gt;
+&lt;a href=&quot;index.html&quot; data-jq-role=&quot;button&quot;&gt;No&lt;/a&gt;
+&lt;a href=&quot;index.html&quot; data-jq-role=&quot;button&quot;&gt;Maybe&lt;/a&gt;
 &lt;/div&gt;
 </code></pre>
 
 		<p>By default, grouped buttons are presented as a vertical list:</p>
 		
-		<div data-role="controlgroup">
-			<a href="index.html" data-role="button">Yes</a>
-			<a href="index.html" data-role="button">No</a>
-			<a href="index.html" data-role="button">Maybe</a>
+		<div data-jq-role="controlgroup">
+			<a href="index.html" data-jq-role="button">Yes</a>
+			<a href="index.html" data-jq-role="button">No</a>
+			<a href="index.html" data-jq-role="button">Maybe</a>
 		</div>
 		
 		<p>By adding the <code>data-type="horizontal"</code> attribute to the <code>controlgroup</code> container, you can swap to a horizontal-style group that floats the buttons side-by-side and sets the width to only be large enough to fit the content. (Be aware that these will wrap to multiple lines if the number of buttons or the overall text length is too wide for the screen.)
 		
 		<p>Horizontal grouped buttons:</p>
-		<div data-role="controlgroup" data-type="horizontal">
-			<a href="index.html" data-role="button">Yes</a>
-			<a href="index.html" data-role="button">No</a>
-			<a href="index.html" data-role="button">Maybe</a>
+		<div data-jq-role="controlgroup" data-jq-type="horizontal">
+			<a href="index.html" data-jq-role="button">Yes</a>
+			<a href="index.html" data-jq-role="button">No</a>
+			<a href="index.html" data-jq-role="button">Maybe</a>
 		</div>
 			
 		<p>Horizontal grouped buttons with icons:</p>
-		<div data-role="controlgroup" data-type="horizontal" >
-			<a href="index.html" data-role="button" data-icon="arrow-u">Up</a>
-			<a href="index.html" data-role="button" data-icon="arrow-d">Down</a>
-			<a href="index.html" data-role="button" data-icon="delete">Delete</a>
+		<div data-jq-role="controlgroup" data-jq-type="horizontal" >
+			<a href="index.html" data-jq-role="button" data-jq-icon="arrow-u">Up</a>
+			<a href="index.html" data-jq-role="button" data-jq-icon="arrow-d">Down</a>
+			<a href="index.html" data-jq-role="button" data-jq-icon="delete">Delete</a>
 		</div>
 		
 		<p>Horizontal grouped buttons, icon only:</p>
-		<div data-role="controlgroup" data-type="horizontal" >
-			<a href="index.html" data-role="button" data-icon="arrow-u" data-iconpos="notext">Up</a>
-			<a href="index.html" data-role="button" data-icon="arrow-d" data-iconpos="notext">Down</a>
-			<a href="index.html" data-role="button" data-icon="delete" data-iconpos="notext">Delete</a>
+		<div data-jq-role="controlgroup" data-jq-type="horizontal" >
+			<a href="index.html" data-jq-role="button" data-jq-icon="arrow-u" data-jq-iconpos="notext">Up</a>
+			<a href="index.html" data-jq-role="button" data-jq-icon="arrow-d" data-jq-iconpos="notext">Down</a>
+			<a href="index.html" data-jq-role="button" data-jq-icon="delete" data-jq-iconpos="notext">Delete</a>
 		</div>
 		
 		

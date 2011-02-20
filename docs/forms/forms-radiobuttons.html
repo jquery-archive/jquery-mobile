@@ -11,14 +11,14 @@
 </head> 
 <body> 
 
-<div data-role="page">
+<div data-jq-role="page">
 
-	<div data-role="header" data-theme="b">
+	<div data-jq-role="header" data-jq-theme="b">
 		<h1>Radio buttons</h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+		<a href="../../" data-jq-icon="home" data-jq-iconpos="notext" data-jq-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
-	<div data-role="content">
+	<div data-jq-role="content">
 		
 		<form action="#" method="get">
 
@@ -36,8 +36,8 @@
 		<p>Lastly, need to wrap the <code>fieldset</code> in a <code>div</code> with <code>data-role="controlgroup"</code> attribute to the <code>fieldset</code> so it can be styled in a parallel way as text inputs, selects or other form elements.</p>
 				
 <pre><code>	
-&lt;div data-role=&quot;fieldcontain&quot;&gt;
-    &lt;fieldset data-role=&quot;controlgroup&quot;&gt;
+&lt;div data-jq-role=&quot;fieldcontain&quot;&gt;
+    &lt;fieldset data-jq-role=&quot;controlgroup&quot;&gt;
     	&lt;legend&gt;Choose a pet:&lt;/legend&gt;
          	&lt;input type=&quot;radio&quot; name=&quot;radio-choice-1&quot; id=&quot;radio-choice-1&quot; value=&quot;choice-1&quot; checked=&quot;checked&quot; /&gt;
          	&lt;label for=&quot;radio-choice-1&quot;&gt;Cat&lt;/label&gt;
@@ -56,8 +56,8 @@
 
 		<p>To visually integrate multiple radio buttons into a vertically grouped button set, the framework will automatically remove all margins between buttons and round only the top and bottom corners of the set if there is a <code>data-role="controlgroup"</code> attribute on the fie.</p>
 		
-	<div data-role="fieldcontain">
-	    <fieldset data-role="controlgroup">
+	<div data-jq-role="fieldcontain">
+	    <fieldset data-jq-role="controlgroup">
 	    	<legend>Choose a pet:</legend>
 	         	<input type="radio" name="radio-pet-1" id="radio-pet-1" value="choice-1" checked="checked"  />
 	         	<label for="radio-pet-1">Cat</label>
@@ -75,16 +75,16 @@
 
 			<h2>Horizontal radio button sets</h2>
 
-			<p>Radio buttons can also be used for grouped button sets only a single button can be selected at once, such as a view switcher control. To make a horizontal radio button set, add the <code> data-type="horizontal"</code> to the <code>fieldset</code>.</p>
+			<p>Radio buttons can also be used for grouped button sets only a single button can be selected at once, such as a view switcher control. To make a horizontal radio button set, add the <code> data-jq-type="horizontal"</code> to the <code>fieldset</code>.</p>
 
 	<code>
-	&lt;fieldset data-role=&quot;controlgroup&quot; <strong>data-type=&quot;horizontal&quot;</strong> data-role=&quot;fieldcontain&quot;&gt;
+	&lt;fieldset data-jq-role=&quot;controlgroup&quot; <strong>data-type=&quot;horizontal&quot;</strong> data-jq-role=&quot;fieldcontain&quot;&gt;
 	</code>
 
 				<p>The framework will float the labels so they sit side-by-side on a line, hide the radio button icons and only round the left and right edges of the group.</p>
 				
-	<div data-role="fieldcontain">
-	    <fieldset data-role="controlgroup" data-type="horizontal">
+	<div data-jq-role="fieldcontain">
+	    <fieldset data-jq-role="controlgroup" data-jq-type="horizontal">
 	     	<legend>Layout view:</legend>
 	         	<input type="radio" name="radio-view" id="radio-view-a" value="list"  />
 	         	<label for="radio-view-a">List</label>
@@ -100,8 +100,8 @@
 	
 	<p>If you don't want the default radiobutton icon to be added, add the <code></code> attribute to each radio <code>input</code>. </p>
 		
-		<div data-role="fieldcontain">
-	    <fieldset data-role="controlgroup">
+		<div data-jq-role="fieldcontain">
+	    <fieldset data-jq-role="controlgroup">
 	     	<legend>These don't have the radio state icons:</legend>
 	         	<input type="radio" name="radio-noicon" id="radio-noicon1" value="a"  checked="checked" />
 	         	<label for="radio-noicon1">Yes</label>

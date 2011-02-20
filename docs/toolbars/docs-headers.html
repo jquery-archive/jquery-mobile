@@ -10,14 +10,14 @@
 </head> 
 <body> 
 
-<div data-role="page">
+<div data-jq-role="page">
 
-	<div data-role="header" data-theme="b">
+	<div data-jq-role="header" data-jq-theme="b">
 		<h1>Header bars</h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+		<a href="../../" data-jq-icon="home" data-jq-iconpos="notext" data-jq-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
-	<div data-role="content">
+	<div data-jq-role="content">
 		
 			<h2>Header structure</h2>
 			<p>The <code>header</code> is a toolbar at the top of the page that usually contains the page title text and optional buttons positioned to the the left and/or right of the title for navigation or actions.</p> 
@@ -37,7 +37,7 @@
 
 
 			
-			<div data-role="header" data-position="inline">
+			<div data-jq-role="header" data-jq-position="inline">
 				<h1>Page title</h1>
 			</div>
 
@@ -57,34 +57,34 @@
 			
 
 <pre><code>			
-&lt;div data-role=&quot;header&quot; data-position=&quot;inline&quot;&gt;
-	&lt;a href=&quot;index.html&quot; data-icon=&quot;delete&quot;&gt;Cancel&lt;/a&gt;
+&lt;div data-jq-role=&quot;header&quot; data-jq-position=&quot;inline&quot;&gt;
+	&lt;a href=&quot;index.html&quot; data-jq-icon=&quot;delete&quot;&gt;Cancel&lt;/a&gt;
 	&lt;h1&gt;Edit Contact&lt;/h1&gt;
-	&lt;a href=&quot;index.html&quot; data-icon=&quot;check&quot;&gt;Save&lt;/a&gt;
+	&lt;a href=&quot;index.html&quot; data-jq-icon=&quot;check&quot;&gt;Save&lt;/a&gt;
 &lt;/div&gt;
 </code></pre>
 	
 	
-			<div data-role="header" data-position="inline">
-				<a href="index.html" data-icon="delete">Cancel</a>
+			<div data-jq-role="header" data-jq-position="inline">
+				<a href="index.html" data-jq-icon="delete">Cancel</a>
 				<h1>Edit Contact</h1>
-				<a href="index.html" data-icon="check">Save</a>
+				<a href="index.html" data-jq-icon="check">Save</a>
 			</div>
 			<p>Buttons automatically adopt the swatch color of the bar they sit in, so a link in a header bar with the "a" color will also be styled as "a" colored buttons. It's simple to make a button visually stand out &mdash; here, we add the <code>data-theme</code> attribute and set the color swatch for the button to "b" to make the "Save" button pop.</p>
 			
 			<pre><code>			
-&lt;div data-role=&quot;header&quot; data-position=&quot;inline&quot;&gt;
-	&lt;a href=&quot;index.html&quot; data-icon=&quot;delete&quot;&gt;Cancel&lt;/a&gt;
+&lt;div data-jq-role=&quot;header&quot; data-jq-position=&quot;inline&quot;&gt;
+	&lt;a href=&quot;index.html&quot; data-jq-icon=&quot;delete&quot;&gt;Cancel&lt;/a&gt;
 	&lt;h1&gt;Edit Contact&lt;/h1&gt;
-	&lt;a href=&quot;index.html&quot; data-icon=&quot;check&quot; data-theme=&quot;b&quot;&gt;Save&lt;/a&gt;
+	&lt;a href=&quot;index.html&quot; data-jq-icon=&quot;check&quot; data-jq-theme=&quot;b&quot;&gt;Save&lt;/a&gt;
 &lt;/div&gt;
 </code></pre>
 			
 						
-			<div data-role="header" data-position="inline">
-				<a href="index.html" data-icon="delete">Cancel</a>
+			<div data-jq-role="header" data-jq-position="inline">
+				<a href="index.html" data-jq-icon="delete">Cancel</a>
 				<h1>Edit Contact</h1>
-				<a href="index.html" data-icon="check" data-theme="b">Save</a>
+				<a href="index.html" data-jq-icon="check" data-jq-theme="b">Save</a>
 			</div>
 	
 			<h3>Controlling button position with classes</h3>
@@ -97,16 +97,16 @@
 
 <div class="highlight"> 
 <pre><code>
-&lt;div data-role=&quot;header&quot; data-position=&quot;inline&quot; data-backbtn=&quot;false&quot;&gt;
+&lt;div data-jq-role=&quot;header&quot; data-jq-position=&quot;inline&quot; data-jq-backbtn=&quot;false&quot;&gt;
 	&lt;h1&gt;Page Title&lt;/h1&gt;
-	&lt;a href=&quot;index.html&quot; data-icon=&quot;gear&quot; class=&quot;ui-btn-right&quot;&gt;Options&lt;/a&gt;
+	&lt;a href=&quot;index.html&quot; data-jq-icon=&quot;gear&quot; class=&quot;ui-btn-right&quot;&gt;Options&lt;/a&gt;
 &lt;/div&gt;
 </code></pre> 
 </div> 
 
-			<div data-role="header" data-position="inline" data-backbtn="false">
+			<div data-jq-role="header" data-jq-position="inline" data-jq-backbtn="false">
 				<h1>Page Title</h1>
-				<a href="index.html" data-icon="gear" class="ui-btn-right">Options</a>
+				<a href="index.html" data-jq-icon="gear" class="ui-btn-right">Options</a>
 			</div>
 			
 		<h2>Customizing the back button text</h2>	

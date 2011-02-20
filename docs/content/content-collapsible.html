@@ -12,14 +12,14 @@
 </head> 
 <body> 
 
-<div data-role="page">
+<div data-jq-role="page">
 
-	<div data-role="header" data-theme="b">
+	<div data-jq-role="header" data-jq-theme="b">
 		<h1>Collapsible content</h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+		<a href="../../" data-jq-icon="home" data-jq-iconpos="notext" data-jq-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
-	<div data-role="content">
+	<div data-jq-role="content">
 		
 		<h2>Collapsible content markup</h2>
 		<p>To create a collapsible blocks of content, create a container and add the <code>data-role="collapsible"</code> attribute.</p>
@@ -29,14 +29,14 @@
 		<p>After the header, add any HTML markup you want to be collapsible. The framework will wrap this markup in a container that will be hidden/shown when the heading is clicked.</p>
 
 	<pre><code>		
-	&lt;div data-role=&quot;collapsible&quot;&gt;
+	&lt;div data-jq-role=&quot;collapsible&quot;&gt;
 	&lt;h3&gt;I&#x27;m a header&lt;/h3&gt;
 	&lt;p&gt;I&#x27;m the collapsible content. By default I'm open and displayed on the page, but you can click the header to hide me.&lt;/p&gt;
 	&lt;/div&gt;
 	</code></pre>	
 	
 
-			<div data-role="collapsible">
+			<div data-jq-role="collapsible">
 				<h3>I'm a header</h3>
 				<p>I'm the collapsible content. By default I'm open and displayed on the page, but you can click the header to hide me.</p>
 			</div>
@@ -45,13 +45,13 @@
 		<p>As the example notes, by default the content will be expanded. To collapse the content when the page loads, add the <code>data-collapsed="true"</code> attribute to the wrapper.</p>
 
 	<code>		
-	&lt;div data-role=&quot;collapsible&quot; <strong>data-collapsed=&quot;true&quot;&gt;</strong>
+	&lt;div data-jq-role=&quot;collapsible&quot; <strong>data-collapsed=&quot;true&quot;&gt;</strong>
 	</code>
 
 		<p>This code will create a collapsible widget like this:</p>
 	
 
-			<div data-role="collapsible" data-collapsed="true">
+			<div data-jq-role="collapsible" data-jq-collapsed="true">
 				<h3>I'm a header</h3>
 				<p>I'm the collapsible content. I'm hidden by default because I have the "collapsed" state; you need to expand the header to see me.</p>
 			</div>
@@ -61,39 +61,39 @@
 		<h2>Collapsible example</h2>
 		<p>This page has 4 collapsible containers with different types of content inside.</p>
 		
-		<div data-role="collapsible" data-collapsed="true">
+		<div data-jq-role="collapsible" data-jq-collapsed="true">
 			<h3>Section 1: Collapsed text block</h3>
 			<p>I'm closed when the page loads because I have the <code>data-collapsed="true"</code> attribute on my container. </p>
 			<p>I'm the collapsible content. I'm the collapsible content. I'm the collapsible content. I'm the collapsible content. I'm the collapsible content. I'm the collapsible content. I'm the collapsible content. </p>
 		</div><!-- /section 1 -->
 		
-		<div data-role="collapsible">
+		<div data-jq-role="collapsible">
 			<h3>Section 2: Expanded on load</h3>
 			<p>I'm open when the page loads because I don't have the <code>data-collapsed="true"</code> attribute on my container. </p>
 			<p>I'm the collapsible content. I'm the collapsible content. I'm the collapsible content. I'm the collapsible content. I'm the collapsible content. I'm the collapsible content.</p>
 		</div><!-- /section 2 -->
 		
-		<div data-role="collapsible" data-collapsed="true">
+		<div data-jq-role="collapsible" data-jq-collapsed="true">
 			<h3>Section 3: Form elements</h3>
 			<form action="#" method="get">
-				<div data-role="fieldcontain">
+				<div data-jq-role="fieldcontain">
 					<label for="textarea">Textarea:</label>
 					<textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
 				</div>
-				<div data-role="fieldcontain">
+				<div data-jq-role="fieldcontain">
 					<label for="slider">Input slider:</label>
 				 	<input type="range" name="slider" id="slider" value="0" min="0" max="100"  />
 				</div>
 				<fieldset class="ui-grid-a">
-						<div class="ui-block-a"><button type="submit" data-theme="c">Cancel</button></div>
-						<div class="ui-block-b"><button type="submit" data-theme="b">Submit</button></div>	   
+						<div class="ui-block-a"><button type="submit" data-jq-theme="c">Cancel</button></div>
+						<div class="ui-block-b"><button type="submit" data-jq-theme="b">Submit</button></div>	   
 			    </fieldset>
 			</form>
 		</div><!-- /section 3 -->
 	
-		<div data-role="collapsible" data-collapsed="true">
+		<div data-jq-role="collapsible" data-jq-collapsed="true">
 			<h3>Section 4: Collapsed list</h3>
-			<ul data-role="listview" data-inset="true" data-theme="d">
+			<ul data-jq-role="listview" data-jq-inset="true" data-jq-theme="d">
 				<li><a href="index.html">Acura</a></li>
 				<li><a href="index.html">Audi</a></li>
 				<li><a href="index.html">BMW</a></li>
@@ -106,28 +106,28 @@
 		</div><!-- /section 4 -->
 		
 		<h2>Nested Collapsibles</h2>
-		<div data-role="collapsible">
+		<div data-jq-role="collapsible">
 			<h3>I'm a header</h3>
 			<p>I'm the collapsible content. By default I'm open and displayed on the page, but you can click the header to hide me.</p>
-			<div data-role="collapsible">
+			<div data-jq-role="collapsible">
 				<h3>I'm a nested collapsible header</h3>
 				<p>I'm the collapsible content. By default I'm open and displayed on the page, but you can click the header to hide me.</p>
 			</div>
 		</div>
 		
 		<h2>Collapsible sets</h2>
-		<p>By giving a parent element a data-role of collapsible-set, you can cause other collapsibles within that parent to close whenever a new one is opened, acting like an accordion widget:</p>
+		<p>By giving a parent element a data-jq-role of collapsible-set, you can cause other collapsibles within that parent to close whenever a new one is opened, acting like an accordion widget:</p>
 		
-		<div data-role="collapsible-set">
-			<div data-role="collapsible">
+		<div data-jq-role="collapsible-set">
+			<div data-jq-role="collapsible">
 				<h3>I'm a header in a set of collapsibles</h3>
 				<p>I'm the collapsible content. I'm hidden by default because I have the "collapsed" state; you need to expand the header to see me.</p>
 			</div>
-			<div data-role="collapsible" data-collapsed="true">
+			<div data-jq-role="collapsible" data-jq-collapsed="true">
 				<h3>I'm a header in a set of collapsibles</h3>
 				<p>I'm the collapsible content. I'm hidden by default because I have the "collapsed" state; you need to expand the header to see me.</p>
 			</div>
-			<div data-role="collapsible" data-collapsed="true">
+			<div data-jq-role="collapsible" data-jq-collapsed="true">
 				<h3>I'm a header in a set of collapsibles</h3>
 				<p>I'm the collapsible content. I'm hidden by default because I have the "collapsed" state; you need to expand the header to see me.</p>
 			</div>

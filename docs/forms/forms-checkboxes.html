@@ -11,14 +11,14 @@
 </head> 
 <body> 
 
-<div data-role="page">
+<div data-jq-role="page">
 
-	<div data-role="header" data-theme="b">
+	<div data-jq-role="header" data-jq-theme="b">
 		<h1>Checkboxes</h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+		<a href="../../" data-jq-icon="home" data-jq-iconpos="notext" data-jq-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
-	<div data-role="content">
+	<div data-jq-role="content">
 		
 		<form action="#" method="get">
 
@@ -35,8 +35,8 @@
 
 
 <pre><code>	
-&lt;div data-role=&quot;fieldcontain&quot;&gt;
- 	&lt;fieldset data-role=&quot;controlgroup&quot;&gt;
+&lt;div data-jq-role=&quot;fieldcontain&quot;&gt;
+ 	&lt;fieldset data-jq-role=&quot;controlgroup&quot;&gt;
 		&lt;legend&gt;Agree to the terms:&lt;/legend&gt;
 		&lt;input type=&quot;checkbox&quot; name=&quot;checkbox-1&quot; id=&quot;checkbox-1&quot; class=&quot;custom&quot; /&gt;
 		&lt;label for=&quot;checkbox-1&quot;&gt;I agree&lt;/label&gt;
@@ -44,8 +44,8 @@
 &lt;/div&gt;
 </code></pre>
 
-	<div data-role="fieldcontain">
-	 	<fieldset data-role="controlgroup">
+	<div data-jq-role="fieldcontain">
+	 	<fieldset data-jq-role="controlgroup">
 			<legend>Agree to the terms:</legend>
 			<input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" />
 			<label for="checkbox-1">I agree</label>
@@ -56,8 +56,8 @@
 		
 		<p>Typically, there are multiple checkboxes listed under a question title. To visually integrate multiple checkboxes into a grouped button set, the framework will automatically remove all margins between buttons and round only the top and bottom corners of the set if there is a <code>data-role="controlgroup"</code> attribute on the fie.</p>
 
-			<div  data-role="fieldcontain">
-			 	<fieldset data-role="controlgroup">
+			<div  data-jq-role="fieldcontain">
+			 	<fieldset data-jq-role="controlgroup">
 					<legend>Choose as many snacks as you'd like:</legend>
 					<input type="checkbox" name="checkbox-1a" id="checkbox-1a" class="custom" />
 					<label for="checkbox-1a">Cheetos</label>
@@ -75,16 +75,16 @@
 		
 		<h2>Horizontal toggle sets</h2>
 		
-		<p>Checkboxes can also be used for grouped button sets where more than one button can be selected at once, such as the bold, italic and underline button group seen in word processors. To make a horizontal button set, add the <code> data-type="horizontal"</code> to the <code>fieldset</code>.</p>
+		<p>Checkboxes can also be used for grouped button sets where more than one button can be selected at once, such as the bold, italic and underline button group seen in word processors. To make a horizontal button set, add the <code> data-jq-type="horizontal"</code> to the <code>fieldset</code>.</p>
 
 <code>
-&lt;fieldset data-role=&quot;controlgroup&quot; <strong>data-type=&quot;horizontal&quot;</strong> data-role=&quot;fieldcontain&quot;&gt;
+&lt;fieldset data-jq-role=&quot;controlgroup&quot; <strong>data-type=&quot;horizontal&quot;</strong> data-jq-role=&quot;fieldcontain&quot;&gt;
 </code>
 
 			<p>The framework will float the labels so they sit side-by-side on a line, hide the checkbox icons and only round the left and right edges of the group.</p>
 			
-		<div data-role="fieldcontain">
-		    <fieldset data-role="controlgroup" data-type="horizontal">
+		<div data-jq-role="fieldcontain">
+		    <fieldset data-jq-role="controlgroup" data-jq-type="horizontal">
 		    	<legend>Font styling:</legend>
 		    	<input type="checkbox" name="checkbox-6" id="checkbox-6" class="custom" />
 				<label for="checkbox-6">b</label>
