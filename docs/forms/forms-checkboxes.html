@@ -29,9 +29,9 @@
 
 		<p>To create a single checkbox, add an <code>input</code> with a <code>type="checkbox"</code> attribute and a corresponding <code>label</code>. Set the <code>for</code> attribute of the <code>label</code> to match the ID of the <code>input</code> so they are semantically associated.</p>
 		
-		<p>Because checkboxes use the <code>label</code> element for the text displayed next to the checkbox form element, we recommend wrapping the checkbox in a <code>fieldset</code> element that has a <code>legend</code> which acts as the title for the question. Add the  <code>data-role="controlgroup"</code> attribute to the <code>fieldset</code> so it can be styled in a parallel way as text inputs, selects or other form elements.</p>
+		<p>Because checkboxes use the <code>label</code> element for the text displayed next to the checkbox form element, we recommend wrapping the checkbox in a <code>fieldset</code> element that has a <code>legend</code> which acts as the title for the question. Add the  <code> data-jq-role="controlgroup"</code> attribute to the <code>fieldset</code> so it can be styled in a parallel way as text inputs, selects or other form elements.</p>
 		
-		<p>Lastly, need to wrap the <code>fieldset</code> in a <code>div</code> with <code>data-role="controlgroup"</code> attribute to the <code>fieldset</code> so it can be styled in a parallel way as text inputs, selects or other form elements.</p>
+		<p>Lastly, need to wrap the <code>fieldset</code> in a <code>div</code> with <code> data-jq-role="controlgroup"</code> attribute to the <code>fieldset</code> so it can be styled in a parallel way as text inputs, selects or other form elements.</p>
 
 
 <pre><code>	
@@ -54,7 +54,7 @@
 		
 		<h2>Vertically grouped checkboxes</h2>
 		
-		<p>Typically, there are multiple checkboxes listed under a question title. To visually integrate multiple checkboxes into a grouped button set, the framework will automatically remove all margins between buttons and round only the top and bottom corners of the set if there is a <code>data-role="controlgroup"</code> attribute on the fie.</p>
+		<p>Typically, there are multiple checkboxes listed under a question title. To visually integrate multiple checkboxes into a grouped button set, the framework will automatically remove all margins between buttons and round only the top and bottom corners of the set if there is a <code> data-jq-role="controlgroup"</code> attribute on the fie.</p>
 
 			<div  data-jq-role="fieldcontain">
 			 	<fieldset data-jq-role="controlgroup">

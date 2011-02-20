@@ -125,7 +125,7 @@
 		//define first selector to receive focus when a page is shown
 		focusable = "[tabindex],a,button:visible,select:visible,input",
 
-		//contains role for next page, if defined on clicked link via data-rel
+		//contains role for next page, if defined on clicked link via data-jq-rel
 		nextPageRole = null,
 
 		//queue to hold simultanious page transitions
@@ -651,7 +651,7 @@
 			//if data-ajax attr is set to false, use the default behavior of a link
 			hasAjaxDisabled = $this.is( "[data-" + $.mobile.ns + "ajax='false']" );
 
-		//if there's a data-rel=back attr, go back in history
+		//if there's a data-jq-rel=back attr, go back in history
 		if( $this.is( "[data-" + $.mobile.ns + "rel='back']" ) ){
 			window.history.back();
 			return false;
@@ -690,7 +690,7 @@
 				// deprecated - remove by 1.0
 				$this.data( "back" );
 
-			//this may need to be more specific as we use data-rel more
+			//this may need to be more specific as we use data-jq-rel more
 			nextPageRole = $this.attr( "data-" + $.mobile.ns + "rel" );
 
 			//if it's a relative href, prefix href with base url

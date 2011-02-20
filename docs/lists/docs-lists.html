@@ -20,7 +20,7 @@
 	<div data-jq-role="content">
 			
 			<h2>Basic linked lists</h2>
-			<p>A list view is coded as a simple unordered list containing linked list items with a <code>data-role="listview"</code> attribute. jQuery Mobile will apply all the necessary styles to transform the list into a mobile-friendly list view with right arrow indicator that fills the full width of the browser window. When you tap on the list item, the framework will trigger a click on the first link inside the list item, issue an AJAX request for the URL in the link, create the new page in the DOM, then kick off a page transition. Here is the HTML markup for a basic linked list.</p>
+			<p>A list view is coded as a simple unordered list containing linked list items with a <code> data-jq-role="listview"</code> attribute. jQuery Mobile will apply all the necessary styles to transform the list into a mobile-friendly list view with right arrow indicator that fills the full width of the browser window. When you tap on the list item, the framework will trigger a click on the first link inside the list item, issue an AJAX request for the URL in the link, create the new page in the DOM, then kick off a page transition. Here is the HTML markup for a basic linked list.</p>
 			
 <pre><code>
 &lt;ul data-jq-role=&quot;listview&quot; data-jq-theme=&quot;g&quot;&gt;
@@ -34,7 +34,7 @@
 			
 			<h2>Nested lists</h2>
 			<p>By nesting child <code>ul</code> or <code>ol</code> inside list items, you can create nested lists. When a list item with a child list is clicked, the framework will generate a new ui-page populated with the title of the parent in the header and the list of child elements. These dynamic nested lists are styled with the "b" theme swatch (blue in the default theme) to indicate that you are in a secondary level of navigation. Lists can be nested multiple level deep and all pages and linking will be automatically handled by the framework.</p>
-			<p>To set the swatch color of the child list views, <code>data-theme</code> attribute on each list inside.</p>
+			<p>To set the swatch color of the child list views, <code> data-jq-theme</code> attribute on each list inside.</p>
 			<a href="lists-nested.html" data-jq-role="button" data-jq-icon="arrow-r" data-jq-iconpos="right">Nested list example</a>
 			
 			<h2>Numbered lists</h2>
@@ -55,7 +55,7 @@
 			
 			
 			<h2>List dividers</h2>
-			<p>List items can be turned into dividers to organize and group the list items. This is done by adding the <code>data-role="list-divider"</code> to any list item. These items are styled with the body swatch "b" by default (light gray in the default theme) but you can specify a theme for dividers by adding the <code>data-dividertheme</code> attribute to the list element (ul or ol) and specifying a theme swatch letter.</p>
+			<p>List items can be turned into dividers to organize and group the list items. This is done by adding the <code> data-jq-role="list-divider"</code> to any list item. These items are styled with the body swatch "b" by default (light gray in the default theme) but you can specify a theme for dividers by adding the <code>data-jq-dividertheme</code> attribute to the list element (ul or ol) and specifying a theme swatch letter.</p>
 
 			<a href="lists-divider.html" data-jq-role="button" data-jq-icon="arrow-r" data-jq-iconpos="right">List divider example</a>
 			
@@ -83,7 +83,7 @@
 		 	<a href="lists-icons.html" data-jq-role="button" data-jq-icon="arrow-r" data-jq-iconpos="right">List with icon images</a>
 			
 			<h2>Inset lists</h2>
-			<p>If lists are embedded in a page with other types of content, an inset list packages the list into a block that sits inside the content area with a bit of margin and rounded corners (theme controlled). By adding the <code>data-inset="true"</code> attribute to the list (ul or ol), applies the inset appearance.</p>
+			<p>If lists are embedded in a page with other types of content, an inset list packages the list into a block that sits inside the content area with a bit of margin and rounded corners (theme controlled). By adding the <code> data-jq-inset="true"</code> attribute to the list (ul or ol), applies the inset appearance.</p>
 			
 			<a href="lists-inset.html" data-jq-role="button" data-jq-icon="arrow-r" data-jq-iconpos="right">Inset list example</a>
 			

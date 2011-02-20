@@ -28,5 +28,5 @@ test( "unnested bar anchors are styled", function(){
 });
 
 test( "no auto-generated back button exists on first page", function(){
-	ok( !$('.ui-header > [data-rel="back"]').length );
+	ok( !$(".ui-header > [data-"+ $.mobile.ns +"rel='back']").length );
 });

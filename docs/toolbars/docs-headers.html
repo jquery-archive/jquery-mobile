@@ -26,7 +26,7 @@
 
 <div class="highlight"> 
 <pre>
-<span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"header"</span><span class="nt">&gt;</span> 
+<span class="nt">&lt;div</span> <span class="na"> data-jq-role=</span><span class="s">"header"</span><span class="nt">&gt;</span> 
 	<span class="nt">&lt;h1&gt;</span>Page Title<span class="nt">&lt;/h1&gt;</span> 
 <span class="nt">&lt;/div&gt;</span> 
 </pre> 
@@ -41,7 +41,7 @@
 				<h1>Page title</h1>
 			</div>
 
-			<p><strong>See that "back" button?</strong> The framework automatically generates a "back" button on every page, to simplify the process of including this common navigation element. To prevent the back button from being added to a header, either add your own button to the left slot (see below) or, add this attribute: <code>data-backbtn="false"</code> to the header container.
+			<p><strong>See that "back" button?</strong> The framework automatically generates a "back" button on every page, to simplify the process of including this common navigation element. To prevent the back button from being added to a header, either add your own button to the left slot (see below) or, add this attribute: <code>data-jq-backbtn="false"</code> to the header container.
 	
 			<h2>Adding buttons</h2>
 	
@@ -49,7 +49,7 @@
 
 
 		<h2>Creating custom back buttons</h2>
-		<p>If you use the attribute <code>data-rel="back"</code> on an anchor, any clicks on that anchor will mimic the back button, going back one history entry and ignoring the anchor's default href. This is particularly useful when linking back to a named page, such as a link that says "home", or when generating "back" buttons with JavaScript, such as a button to close a dialog. When using this feature in your source markup, <strong>be sure to provide a meaningful href that actually points to the URL of the referring page (this will allow the feature to work for users in C-Grade browsers</strong>. Also, pease keep in mind that if you just want a reverse transition without actually going back in history, you should use the <code>data-direction="reverse"</code> attribute instead.</p>
+		<p>If you use the attribute <code>data-jq-rel="back"</code> on an anchor, any clicks on that anchor will mimic the back button, going back one history entry and ignoring the anchor's default href. This is particularly useful when linking back to a named page, such as a link that says "home", or when generating "back" buttons with JavaScript, such as a button to close a dialog. When using this feature in your source markup, <strong>be sure to provide a meaningful href that actually points to the URL of the referring page (this will allow the feature to work for users in C-Grade browsers</strong>. Also, pease keep in mind that if you just want a reverse transition without actually going back in history, you should use the <code>data-jq-direction="reverse"</code> attribute instead.</p>
 		
 			<h3>Default button positioning</h3>
 		
@@ -70,7 +70,7 @@
 				<h1>Edit Contact</h1>
 				<a href="index.html" data-jq-icon="check">Save</a>
 			</div>
-			<p>Buttons automatically adopt the swatch color of the bar they sit in, so a link in a header bar with the "a" color will also be styled as "a" colored buttons. It's simple to make a button visually stand out &mdash; here, we add the <code>data-theme</code> attribute and set the color swatch for the button to "b" to make the "Save" button pop.</p>
+			<p>Buttons automatically adopt the swatch color of the bar they sit in, so a link in a header bar with the "a" color will also be styled as "a" colored buttons. It's simple to make a button visually stand out &mdash; here, we add the <code> data-jq-theme</code> attribute and set the color swatch for the button to "b" to make the "Save" button pop.</p>
 			
 			<pre><code>			
 &lt;div data-jq-role=&quot;header&quot; data-jq-position=&quot;inline&quot;&gt;
@@ -91,7 +91,7 @@
 	
 			<p>The button position can also be controlled by adding classes to the button anchors, rather than relying on source order. This is especially useful if you only want a button in the right slot. To specify the button position, add the class of <code>ui-btn-left</code> or <code>ui-btn-right</code> to the anchor.</p> 
 			
-			<p>In this example, we're adding only a single button to the right slot so the <code>data-backbtn="false"</code> needs to be added to the header container to suppress the automatic Back button behavior and the button needs the <code>ui-btn-right</code> class on the link.</p>
+			<p>In this example, we're adding only a single button to the right slot so the <code>data-jq-backbtn="false"</code> needs to be added to the header container to suppress the automatic Back button behavior and the button needs the <code>ui-btn-right</code> class on the link.</p>
 			
 
 
@@ -111,7 +111,7 @@
 			
 		<h2>Customizing the back button text</h2>	
 		
-		<p>If you'd like to configure the back button text, you can either use the <code>data-back-btn-text="previous"</code> attribute on your page element, or set it programmatically via the page plugin's options: <code>$.mobile.page.prototype.options.backBtnText = "previous";</code>. If you're doing this programmatically, set this option inside the mobileinit event handler.</p>
+		<p>If you'd like to configure the back button text, you can either use the <code>data-jq-back-btn-text="previous"</code> attribute on your page element, or set it programmatically via the page plugin's options: <code>$.mobile.page.prototype.options.backBtnText = "previous";</code>. If you're doing this programmatically, set this option inside the mobileinit event handler.</p>
 		
 		
 		

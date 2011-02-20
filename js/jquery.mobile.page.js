@@ -120,7 +120,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 		//enhance form controls
   	this._enhanceControls();
 
-		//links in bars, or those with data-role become buttons
+		//links in bars, or those with  data-jq-role become buttons
 		$elem.find( "[data-" + $.mobile.ns + "role='button'], .ui-bar > a, .ui-header > a, .ui-footer > a" )
 			.not( ".ui-btn" )
 			.not(this.keepNative)

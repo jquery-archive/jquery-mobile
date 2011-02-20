@@ -195,7 +195,7 @@
 	left: -10000px;
 }
 
-[data-role='page'], [data-role='dialog'] {
+[ data-jq-role='page'], [ data-jq-role='dialog'] {
   position: absolute !important;
   top: -10000px !important;
 }

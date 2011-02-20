@@ -24,10 +24,10 @@
 		<p>The jQuery Mobile framework includes a selected set of icons most often needed for mobile apps. To minimize download size, jQuery Mobile includes a single white icon sprite, and automatically adds a semi-transparent black circle behind the icon to ensure that it has good contrast on any background color.</p> 
 		
 			
-			<p>An icon can be added to a button by adding a <code>data-icon</code> attribute on the anchor specifying the icon to display.  For example, the following markup:</p> 
+			<p>An icon can be added to a button by adding a <code> data-jq-icon</code> attribute on the anchor specifying the icon to display.  For example, the following markup:</p> 
 			
 			<code>
-			&lt;a href=&quot;index.html&quot; data-jq-role=&quot;button&quot; <strong>data-icon=&quot;delete&quot;</strong>&gt;Delete&lt;/a&gt;
+			&lt;a href=&quot;index.html&quot; data-jq-role=&quot;button&quot; <strong> data-jq-icon=&quot;delete&quot;</strong>&gt;Delete&lt;/a&gt;
 			</code>
 			
 			<p>Creates this button with an icon:</p>
@@ -35,7 +35,7 @@
 			
 			<h2>Icon set</h2>
 			
-			<p>The following <code>data-icon</code> attributes can be referenced to create the icons shown below:</p>
+			<p>The following <code> data-jq-icon</code> attributes can be referenced to create the icons shown below:</p>
 			
 			<p><strong>Left arrow</strong> - data-jq-icon="arrow-l"</p>
 			<a href="index.html" data-jq-role="button" data-jq-icon="arrow-l">My button</a>
@@ -79,7 +79,7 @@
 		<p>By default, all icons in buttons are placed to the left of the button text. </p>
 		<a href="index.html" data-jq-role="button" data-jq-icon="delete" data-jq-iconpos="left">Delete</a>
 		
-		<p>This default may be overridden using the <code>data-iconpos</code> attribute to set the icon to the right, above (top) or below (bottom) the text. For example, the markup:</p> 
+		<p>This default may be overridden using the <code> data-jq-iconpos</code> attribute to set the icon to the right, above (top) or below (bottom) the text. For example, the markup:</p> 
 
 <code>
 &lt;a href=&quot;index.html&quot; data-jq-role=&quot;button&quot; data-jq-icon=&quot;delete&quot;<strong> data-jq-iconpos=&quot;right&quot;</strong>&gt;Delete&lt;/a&gt;
@@ -88,13 +88,13 @@
 		<p>Creates this button with right-aligned icon:</p>
 		<a href="index.html" data-jq-role="button" data-jq-icon="delete" data-jq-iconpos="right">Delete</a>
 
-		<p>Icons can also be positioned above the text by specifying <code>data-iconpos="top"</code></p>
+		<p>Icons can also be positioned above the text by specifying <code> data-jq-iconpos="top"</code></p>
 		<a href="index.html" data-jq-role="button" data-jq-icon="delete" data-jq-iconpos="top">Delete</a>
 		
-		<p>Or icons can also be positioned below the text by specifying <code>data-iconpos="bottom"</code></p>
+		<p>Or icons can also be positioned below the text by specifying <code> data-jq-iconpos="bottom"</code></p>
 		<a href="index.html" data-jq-role="button" data-jq-icon="delete" data-jq-iconpos="bottom">Delete</a>
 		
-		<p>You can also create an icon-only button, by setting the <code>data-iconpos</code> attribute to <code>notext</code>. The button plugin will hide the text on-screen, but add it as a <code>title</code> attribute on the link to provide context for screen readers and devices that support tooltips. For example, replacing <code>data-iconpos="right"</code> on the previous example with <code>data-iconpos="notext"</code>:</p>
+		<p>You can also create an icon-only button, by setting the <code> data-jq-iconpos</code> attribute to <code>notext</code>. The button plugin will hide the text on-screen, but add it as a <code>title</code> attribute on the link to provide context for screen readers and devices that support tooltips. For example, replacing <code> data-jq-iconpos="right"</code> on the previous example with <code> data-jq-iconpos="notext"</code>:</p>
 
 <code>
 &lt;a href=&quot;index.html&quot; data-jq-role=&quot;button&quot; data-jq-icon=&quot;delete&quot;<strong> data-jq-iconpos=&quot;notext&quot;</strong>&gt;Delete&lt;/a&gt;
@@ -104,7 +104,7 @@
 			<a href="index.html" data-jq-role="button" data-jq-icon="delete" data-jq-iconpos="notext">Delete</a>
 
 		<h2>Custom Icons</h2>
-		<p>To use custom icons, specify a <code>data-icon</code> value that has a unique name like <code>myapp-email</code> and the button plugin will generate a class by prefixing <code>ui-icon-</code> to the <code>data-icon</code> value and apply it to the button. You can then write a CSS rule that targets the <code>ui-icon-myapp-email</code> class to specify the icon background source. To maintain visual consistency, create a white icon 18x18 pixels saved as a PNG-8 with alpha transparency.</p>
+		<p>To use custom icons, specify a <code> data-jq-icon</code> value that has a unique name like <code>myapp-email</code> and the button plugin will generate a class by prefixing <code>ui-icon-</code> to the <code> data-jq-icon</code> value and apply it to the button. You can then write a CSS rule that targets the <code>ui-icon-myapp-email</code> class to specify the icon background source. To maintain visual consistency, create a white icon 18x18 pixels saved as a PNG-8 with alpha transparency.</p>
 			
 		 	
 		<h2>Icons and themes</h2>

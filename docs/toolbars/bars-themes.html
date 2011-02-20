@@ -24,11 +24,11 @@
 		
 			
 		<h2>Theming headers and footers</h2>
-		<p>To set the header or footer bars to a different color in your theme, add the <code>data-theme</code> attribute and specify the letter of the theme swatch (a, b, c, etc.). For example, this will set the bar to swatch "b" (blue in the default theme):</p> 
+		<p>To set the header or footer bars to a different color in your theme, add the <code> data-jq-theme</code> attribute and specify the letter of the theme swatch (a, b, c, etc.). For example, this will set the bar to swatch "b" (blue in the default theme):</p> 
 
 <div class="highlight"> 
 <pre>
-<span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"header"</span> <span class="na">data-theme=</span><span class="s">"b"</span><span class="nt">&gt;</span> 
+<span class="nt">&lt;div</span> <span class="na"> data-jq-role=</span><span class="s">"header"</span> <span class="na"> data-jq-theme=</span><span class="s">"b"</span><span class="nt">&gt;</span> 
 	<span class="nt">&lt;h1&gt;</span>Page Title<span class="nt">&lt;/h1&gt;</span> 
 <span class="nt">&lt;/div&gt;</span> 
 </pre> 
@@ -37,11 +37,11 @@
 		
 		<h2>Theming buttons in toolbars</h2>
 
-		<p>Any link added inside the header block will be automatically styled as a button that matches the color of the bar's theme swatch. To make a button stand out as a primary call to action, the <code>data-theme</code> attribute can be used to specify a contrasting button color from a different theme swatch. For example, if we set the header to theme "c" (light gray), both buttons would be styled as the "c" button by default. If we wanted the Save button to visually pop, we can override the color by setting the <code>data-theme</code> attribute to "b" (blue in our default theme) on the Save button's anchor.</p> 
+		<p>Any link added inside the header block will be automatically styled as a button that matches the color of the bar's theme swatch. To make a button stand out as a primary call to action, the <code> data-jq-theme</code> attribute can be used to specify a contrasting button color from a different theme swatch. For example, if we set the header to theme "c" (light gray), both buttons would be styled as the "c" button by default. If we wanted the Save button to visually pop, we can override the color by setting the <code> data-jq-theme</code> attribute to "b" (blue in our default theme) on the Save button's anchor.</p> 
 
 <div class="highlight"> 
 <pre>
-<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"add-user.php"</span> <span class="na">data-theme=</span><span class="s">"b"</span><span class="nt">&gt;</span>Save<span class="nt">&lt;/a&gt;</span> 
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"add-user.php"</span> <span class="na"> data-jq-theme=</span><span class="s">"b"</span><span class="nt">&gt;</span>Save<span class="nt">&lt;/a&gt;</span> 
 </pre> 
 </div> 
 			

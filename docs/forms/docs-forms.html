@@ -40,10 +40,10 @@
 	<p>By default, jQuery Mobile will automatically enhance certain native form controls into rich touch-friendly components. This is handled internally by finding form elements by tag name and running a plugin method on them, so for instance, a <code>select</code> element will be found and initialized with the "selectmenu" plugin, while an <code>input</code> element with a <code>type="checkbox"</code> will be enhanced with the "checkboxradio" plugin. Once initialized, you can address these enhanced components programmatically through their jQuery UI widget API methods (see documentation on available methods here: <a href="plugin-eventsmethods.html">Form Plugin Methods</a>). </p>
 
 	<h2>Preventing auto-initialization of form elements</h2>
-	<p>If you'd prefer that a particular form control be left untouched by jQuery Mobile, simply give that element the attribute <code>data-role="none"</code>. For example:</p>
+	<p>If you'd prefer that a particular form control be left untouched by jQuery Mobile, simply give that element the attribute <code> data-jq-role="none"</code>. For example:</p>
 	<pre><code>
 &lt;label for=&quot;foo&quot;&gt;
-&lt;select name=&quot;foo&quot; id=&quot;foo&quot; <strong>data-role=&quot;none&quot;</strong>&gt;
+&lt;select name=&quot;foo&quot; id=&quot;foo&quot; <strong> data-jq-role=&quot;none&quot;</strong>&gt;
 	&lt;option value="a" &gt;A&lt;/option&gt;
 	&lt;option value="b" &gt;B&lt;/option&gt;
 	&lt;option value="c" &gt;C&lt;/option&gt;
@@ -51,7 +51,7 @@
 </code></pre>
 
 
-	<p>Or, if you'd like to prevent auto-initialization without adding attributes to your markup, you can customize the selector that is used for preventing auto-initialization by setting the page plugin's <code>keepNative</code> option (which defaults to <code>"[data-role="none"]</code>. Be sure to configure this option inside an event handler bound to the <code>mobileinit</code> event, so that it applies to the first page as well as subsequent pages that are loaded.</p>
+	<p>Or, if you'd like to prevent auto-initialization without adding attributes to your markup, you can customize the selector that is used for preventing auto-initialization by setting the page plugin's <code>keepNative</code> option (which defaults to <code>"[ data-jq-role="none"]</code>. Be sure to configure this option inside an event handler bound to the <code>mobileinit</code> event, so that it applies to the first page as well as subsequent pages that are loaded.</p>
 		<pre><code>
 $(document).bind('mobileinit',function(){
 	<strong>$.mobile.page.prototype.options.keepNative = "select, input.foo, textarea.bar";</strong>
@@ -68,7 +68,7 @@ $(document).bind('mobileinit',function(){
 
 			<h2>Field containers</h2>
 
-			<p>To improve the styling to labels and form elements on wider screens, we recommend wrapping a <code>div</code> or <code>fieldset </code>with the <code>data-role="fieldcontain"</code> attribute around each label/form element. The framework will add a thin vertical bottom border on this container to act as a field separator and visually align the label and form elements for quick scanning.</p>
+			<p>To improve the styling to labels and form elements on wider screens, we recommend wrapping a <code>div</code> or <code>fieldset </code>with the <code> data-jq-role="fieldcontain"</code> attribute around each label/form element. The framework will add a thin vertical bottom border on this container to act as a field separator and visually align the label and form elements for quick scanning.</p>
 
 <pre><code>
 &lt;div data-jq-role=&quot;fieldcontain&quot;&gt;

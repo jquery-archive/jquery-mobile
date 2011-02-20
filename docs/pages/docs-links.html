@@ -35,7 +35,7 @@
 
 		<h2>Local, internal linked "pages"</h2> 
 		
-			<p>A single HTML document can contain either a single 'page' or multiple 'pages' can be assembled and loaded together by stacking multiple divs with a <code>data-role</code> of <code>"page"</code>. This allows you to build a small site or application within a single HTML document; jQuery Mobile will simply display the first 'page' it finds in the source order when the page loads.</p> 
+			<p>A single HTML document can contain either a single 'page' or multiple 'pages' can be assembled and loaded together by stacking multiple divs with a <code> data-jq-role</code> of <code>"page"</code>. This allows you to build a small site or application within a single HTML document; jQuery Mobile will simply display the first 'page' it finds in the source order when the page loads.</p> 
 			
 			<p>If a link points to an anchor (<code>#foo</code>), the framework will looks for a page with that ID. If it finds a page in the HTML document, it will transition the new page into view.</p>
 			
@@ -43,16 +43,16 @@
 
 <pre>
 <div class="highlight"> 
-<code><span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"page"</span> <span class="na">id=</span><span class="s">"foo"</span><span class="nt">&gt;</span> 
-	<span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"content"</span><span class="nt">&gt;</span>
+<code><span class="nt">&lt;div</span> <span class="na"> data-jq-role=</span><span class="s">"page"</span> <span class="na">id=</span><span class="s">"foo"</span><span class="nt">&gt;</span> 
+	<span class="nt">&lt;div</span> <span class="na"> data-jq-role=</span><span class="s">"content"</span><span class="nt">&gt;</span>
 		I'm the "foo" page. Since I'm the first page 
 		in the source order, I will be displayed onLoad. 
    		<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#bar"</span><span class="nt">&gt;</span>Visit the bar "page"<span class="nt">&lt;/a&gt;</span> 
 	<span class="nt">&lt;/div&gt;&lt;!-- /content --&gt;</span>
 <span class="nt">&lt;/div&gt;&lt;!-- /foo page --&gt;</span> 
 
-<span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"page"</span> <span class="na">id=</span><span class="s">"bar"</span><span class="nt">&gt;</span> 
-	<span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"content"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;div</span> <span class="na"> data-jq-role=</span><span class="s">"page"</span> <span class="na">id=</span><span class="s">"bar"</span><span class="nt">&gt;</span> 
+	<span class="nt">&lt;div</span> <span class="na"> data-jq-role=</span><span class="s">"content"</span><span class="nt">&gt;</span>
 		I'm the "bar" page. I will be shown only if the 
 		anchor link on the <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#foo"</span><span class="nt">&gt;</span>foo<span class="nt">&lt;/a&gt;</span> 
 		page is clicked. 

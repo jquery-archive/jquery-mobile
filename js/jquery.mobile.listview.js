@@ -308,20 +308,16 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				id = parentId + "&" + $.mobile.subPageUrlKey + "=" + self._idStringEscape(title + " " + i),
 				theme = list.data( "theme" ) || o.theme,
 				countTheme = list.data( "counttheme" ) || parentList.data( "counttheme" ) || o.countTheme,
-				newPage = list.wrap( "<div data-role='page'><div data-role='content'></div></div>" )
+				newPage = list.wrap( "<div data-" + $.mobile.ns + "role='page'><div data-" + $.mobile.ns + "role='content'></div></div>" )
 							.parent()
-								.before( "<div data-role='header' data-theme='" + o.headerTheme + "'><div class='ui-title'>" + title + "</div></div>" )
-								.after( persistentFooterID ? $( "<div>", { "data-role": "footer", "data-id": persistentFooterID, "class": "ui-footer-duplicate" } ) : "" )
+								.before( "<div  data-" + $.mobile.ns + "role='header' data-" + $.mobile.ns + "theme='" + o.headerTheme + "'><div class='ui-title'>" + title + "</div></div>" )
+								.after( persistentFooterID ? $( "<div data-" + $.mobile.ns + "role='footer'  data-" + $.mobile.ns + "id='"+ persistentFooterID +"'>") : "" )
 								.parent()
-									.attr({
-										"data-url": id,
-										"data-theme": theme,
-										"data-count-theme": countTheme
-									})
+									.attr( "data-" + $.mobile.ns + "url", id )
+									.attr( "data-" + $.mobile.ns + "theme", theme )
+									.attr( "data-" + $.mobile.ns + "count-theme", countTheme )
 									.appendTo( $.mobile.pageContainer );
-				
-				
-				
+								
 				newPage.page();		
 			var anchor = parent.find('a:first');
 			if (!anchor.length) {

@@ -21,7 +21,7 @@
 			
 			<h2>jQuery Mobile's navigation model</h2> 
 
-			<p>A "page" in jQuery Mobile consists of an element (usually a <code>div</code>) with a <code>data-role</code> attribute set to <code>"page"</code>, which generally contains <code>div</code> elements with roles of <code>"header"</code>, <code>"content"</code>, and <code>"footer"</code>, each containing common markup, forms, and custom jQuery Mobile widgets.</p> 
+			<p>A "page" in jQuery Mobile consists of an element (usually a <code>div</code>) with a <code> data-jq-role</code> attribute set to <code>"page"</code>, which generally contains <code>div</code> elements with roles of <code>"header"</code>, <code>"content"</code>, and <code>"footer"</code>, each containing common markup, forms, and custom jQuery Mobile widgets.</p> 
 
 			<p>The basic workflow with page loading is as follows: first, a page is requested with a normal HTTP request, and subsequent "pages" are then requested and injected into that page's DOM. Because of this, the DOM may have a number of "pages" in it at a time, each of which can be re-visited by linking to its <code>data-url</code> attribute.</p> 
 

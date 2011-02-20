@@ -24,7 +24,7 @@
 	<script src="jquery.mobile.scrollview.js"></script>
 	<!-- script src="scrollview.js"></script -->
 	<script type="text/javascript">
-$("[data-role=page]").live("pageshow", function(event) {
+$("[ data-jq-role=page]").live("pageshow", function(event) {
 	var $page = $(this);
 	$page.find("[data-scroll]:not(.ui-scrollview-clip)").each(function(){
 		var $this = $(this);

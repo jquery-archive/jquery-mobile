@@ -20,7 +20,7 @@
 		//hash segment before &ui-page= is used to make Ajax request
 		subPageUrlKey: "ui-page",
 
-		//anchor links with a data-rel, or pages with a data-role, that match these selectors will be untrackable in history
+		//anchor links with a data-jq-rel, or pages with a  data-jq-role, that match these selectors will be untrackable in history
 		//(no change in URL, not bookmarkable)
 		nonHistorySelectors: "dialog",
 

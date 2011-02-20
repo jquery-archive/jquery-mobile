@@ -19,7 +19,7 @@
 
 	<div data-jq-role="content" class="ui-body">
 			<h2>Creating dialogs</h2>
-			<p>Any page can be presented as a modal dialog by adding the <code>data-rel="dialog"</code> attribute to the page anchor link. When the "dialog" attribute is applied, the framework adds styles to add rounded corners, margins around the page and a dark background to make the "dialog" appear to be suspended above the page.</p>
+			<p>Any page can be presented as a modal dialog by adding the <code>data-jq-rel="dialog"</code> attribute to the page anchor link. When the "dialog" attribute is applied, the framework adds styles to add rounded corners, margins around the page and a dark background to make the "dialog" appear to be suspended above the page.</p>
 
 			<p>
 			<code>
@@ -32,22 +32,22 @@
 
 			
 			<h2>Transitions</h2>
-			<p>By default, the dialog will open with a 'pop' transition.  Like all pages, you can specify any page transition you want on the dialog by adding the <code>data-transition</code> attribute to the link. To make it feel more dialog-like, we recommend specifying a transition of "pop", "slideup" or "flip".</p>
+			<p>By default, the dialog will open with a 'pop' transition.  Like all pages, you can specify any page transition you want on the dialog by adding the <code>data-jq-transition</code> attribute to the link. To make it feel more dialog-like, we recommend specifying a transition of "pop", "slideup" or "flip".</p>
 			
 <code>
 &lt;a href=&quot;foo.html&quot; data-jq-rel=&quot;dialog&quot; data-jq-transition=&quot;pop&quot;&gt;Open dialog&lt;/a&gt;
 </code>
 			
 			<div>
-			<a href="dialog.html" data-jq-role="button" data-jq-inline="true" data-jq-rel="dialog" data-jq-transition="pop">data-transition="pop"</a>
-			<a href="dialog.html" data-jq-role="button" data-jq-inline="true" data-jq-rel="dialog" data-jq-transition="slidedown">data-transition="slidedown"</a>
-			<a href="dialog.html" data-jq-role="button" data-jq-inline="true" data-jq-rel="dialog" data-jq-transition="flip">data-transition="flip"</a>
+			<a href="dialog.html" data-jq-role="button" data-jq-inline="true" data-jq-rel="dialog" data-jq-transition="pop">data-jq-transition="pop"</a>
+			<a href="dialog.html" data-jq-role="button" data-jq-inline="true" data-jq-rel="dialog" data-jq-transition="slidedown">data-jq-transition="slidedown"</a>
+			<a href="dialog.html" data-jq-role="button" data-jq-inline="true" data-jq-rel="dialog" data-jq-transition="flip">data-jq-transition="flip"</a>
 			</div>
 	
 	
 			<h2>Closing dialogs</h2>
-			<p>When any link is clicked within in a dialog, the framework will automatically close the dialog and transition to the requested page, just as if the dialog were a normal page. To create a "cancel" button in a dialog, just link to the page that triggered the dialog to open and add the <code>data-rel="back"</code> attribute to your link. This pattern of linking to the previous page is also usable in non-JS devices as well.</p>
-			<p>For JavaScript-generated links, you can simply set the href attribute to "#" and use the <code>data-rel="back"</code> attribute. You can also call the dialog's <code>close()</code> method to programmatically close dialogs, for example: <code>$('.ui-dialog').dialog('close')</code>. </p>
+			<p>When any link is clicked within in a dialog, the framework will automatically close the dialog and transition to the requested page, just as if the dialog were a normal page. To create a "cancel" button in a dialog, just link to the page that triggered the dialog to open and add the <code>data-jq-rel="back"</code> attribute to your link. This pattern of linking to the previous page is also usable in non-JS devices as well.</p>
+			<p>For JavaScript-generated links, you can simply set the href attribute to "#" and use the <code>data-jq-rel="back"</code> attribute. You can also call the dialog's <code>close()</code> method to programmatically close dialogs, for example: <code>$('.ui-dialog').dialog('close')</code>. </p>
 			
 			<h2>History &amp; Back button behavior</h2>
 			<p>Since dialogs are typically used to support actions within a page, the framework does not include dialogs in the hash state history tracking. This means that dialogs will not appear in your browsing history chronology when the Back button is clicked. For example, if you are on a page, click a link to open a dialog, close the dialog, then navigate to another page, if you were to click the browser's Back button at that point you will navigate back to the first page, not the dialog.</p>

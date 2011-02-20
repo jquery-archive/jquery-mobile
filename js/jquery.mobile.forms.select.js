@@ -77,7 +77,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				//button theme
 				theme = /ui-btn-up-([a-z])/.exec( button.attr("class") )[1],
 	
-				menuPage = $( "<div data-" + $.mobile.ns + "role='dialog' data-theme='"+ o.menuPageTheme +"'>" +
+				menuPage = $( "<div data-" + $.mobile.ns + "role='dialog' data-" +$.mobile.ns + "theme='"+ o.menuPageTheme +"'>" +
 							"<div data-" + $.mobile.ns + "role='header'>" +
 								"<div class='ui-title'>" + label.text() + "</div>"+
 							"</div>"+

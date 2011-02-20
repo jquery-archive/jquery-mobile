@@ -33,7 +33,7 @@
 		
 		<p>Because radio buttons use the <code>label</code> element for the text displayed next to the checkbox form element, we recommend wrapping the radio buttons in a <code>fieldset</code> element that has a <code>legend</code> which acts as the title for the question.</p>
 		
-		<p>Lastly, need to wrap the <code>fieldset</code> in a <code>div</code> with <code>data-role="controlgroup"</code> attribute to the <code>fieldset</code> so it can be styled in a parallel way as text inputs, selects or other form elements.</p>
+		<p>Lastly, need to wrap the <code>fieldset</code> in a <code>div</code> with <code> data-jq-role="controlgroup"</code> attribute to the <code>fieldset</code> so it can be styled in a parallel way as text inputs, selects or other form elements.</p>
 				
 <pre><code>	
 &lt;div data-jq-role=&quot;fieldcontain&quot;&gt;
@@ -54,7 +54,7 @@
 &lt;/div&gt;
 </code></pre>
 
-		<p>To visually integrate multiple radio buttons into a vertically grouped button set, the framework will automatically remove all margins between buttons and round only the top and bottom corners of the set if there is a <code>data-role="controlgroup"</code> attribute on the fie.</p>
+		<p>To visually integrate multiple radio buttons into a vertically grouped button set, the framework will automatically remove all margins between buttons and round only the top and bottom corners of the set if there is a <code> data-jq-role="controlgroup"</code> attribute on the fie.</p>
 		
 	<div data-jq-role="fieldcontain">
 	    <fieldset data-jq-role="controlgroup">

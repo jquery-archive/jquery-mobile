@@ -29,8 +29,8 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		
 		/* bind events 
 			- clicks and submits should use the closing transition that the dialog opened with
-			  unless a data-transition is specified on the link/form
-			- if the click was on the close button, or the link has a data-rel="back" it'll go back in history naturally
+			  unless a data-jq-transition is specified on the link/form
+			- if the click was on the close button, or the link has a data-jq-rel="back" it'll go back in history naturally
 		*/
 		this.element		
 			.bind( "click submit", function(e){

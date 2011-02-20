@@ -34,7 +34,7 @@
 		</ul>
 		
 		<h2>Theming list items</h2>
-		<p>The list item color scheme can be changed to any button color theme swatch by adding the <code>data-theme</code> attribute to the list, and setting the letter theme swatch. Here is the same list above with the &quot;a&quot; swatch applied. </p>
+		<p>The list item color scheme can be changed to any button color theme swatch by adding the <code> data-jq-theme</code> attribute to the list, and setting the letter theme swatch. Here is the same list above with the &quot;a&quot; swatch applied. </p>
 		
 <code>
 &lt;ul data-jq-role=&quot;listview&quot; data-jq-inset=&quot;true&quot; data-jq-theme=&quot;d&quot;&gt;
@@ -47,7 +47,7 @@
 			<li><a href="index.html">Sent</a> <span class="ui-li-count">328</span></li>
 		</ul>
 		
-		<p>Data-theme attributes also work at the LI-level, for styling a single item.</p>
+		<p> data-jq-theme attributes also work at the LI-level, for styling a single item.</p>
 		
 		<ul data-jq-role="listview" data-jq-inset="true" data-jq-theme="d">
 			<li data-jq-role="list-divider">Divider</li>
@@ -59,7 +59,7 @@
 		
 		<h2>Theming dividers</h2>
 		
-		<p>The theme for <strong>list dividers</strong> can be set by adding the <code>data-dividertheme</code> to the list and specifying a swatch letter. Here is an example of the same list above with swatch &quot;d&quot; set on the dividers.</p>
+		<p>The theme for <strong>list dividers</strong> can be set by adding the <code>data-jq-dividertheme</code> to the list and specifying a swatch letter. Here is an example of the same list above with swatch &quot;d&quot; set on the dividers.</p>
 		
 <code>
 &lt;ul data-jq-role=&quot;listview&quot; data-jq-inset=&quot;true&quot; data-jq-theme=&quot;d&quot; data-jq-dividertheme=&quot;c&quot;&gt;
@@ -89,7 +89,7 @@
 		
 		<h2>Theming icons</h2>
 		
-		<p>The default icon for each list item is <code>arrow-r</code>. To override this, set the <code>data-icon</code> attribute on the desired list item to the <a href="../buttons/buttons-icons.html">name of a standard icon</a>.  To prevent icons from appearing altogether, set the <code>data-icon</code> attribute to &quot;false&quot;.</p>
+		<p>The default icon for each list item is <code>arrow-r</code>. To override this, set the <code> data-jq-icon</code> attribute on the desired list item to the <a href="../buttons/buttons-icons.html">name of a standard icon</a>.  To prevent icons from appearing altogether, set the <code> data-jq-icon</code> attribute to &quot;false&quot;.</p>
 <pre>
 <code>
 &lt;li data-jq-icon=&quot;info&quot;&gt;&lt;a href="#"&gt;Notices&lt;/a&gt;&lt;/li&gt;
@@ -126,7 +126,7 @@
 <code>
 &lt;ul data-jq-role=&quot;listview&quot; data-jq-inset=&quot;true&quot; data-jq-splittheme=&quot;a&quot;&gt;
 </code>
-		<p>To specify the color swatch for the icon button on the right, add the <code>data-splittheme</code> to the list and specify a swatch letter. This attribute can also be added to individual split inside list items by adding a <code>data-theme</code> attribute to specific links  (see second list item).</p>
+		<p>To specify the color swatch for the icon button on the right, add the <code>data-splittheme</code> to the list and specify a swatch letter. This attribute can also be added to individual split inside list items by adding a <code> data-jq-theme</code> attribute to specific links  (see second list item).</p>
 		<ul data-jq-role="listview" data-jq-inset="true" data-jq-splittheme="a">
 			<li>
 				<img src="images/album-bb.jpg" />
@@ -142,7 +142,7 @@
 			</li>
 		</ul>
 
-		<p>The icon for the split theme can set at the list level by adding the <code>data-spliticon</code> to the list and specifying a <a href="../buttons/buttons-icons.html">standard icon</a>. This attribute can also be added to individual split inside list items by adding a <code>data-icon</code> attribute to specific links (see second list item).</p>
+		<p>The icon for the split theme can set at the list level by adding the <code>data-spliticon</code> to the list and specifying a <a href="../buttons/buttons-icons.html">standard icon</a>. This attribute can also be added to individual split inside list items by adding a <code> data-jq-icon</code> attribute to specific links (see second list item).</p>
 		
 <code>
 &lt;ul data-jq-role=&quot;listview&quot; data-jq-inset=&quot;true&quot; data-jq-splittheme=&quot;a&quot; data-jq-spliticon=&quot;plus&quot;&gt;

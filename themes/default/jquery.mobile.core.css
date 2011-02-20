@@ -13,7 +13,7 @@
 .ui-mobile-viewport {  margin: 0; overflow-x: hidden; -webkit-text-size-adjust: none; -ms-text-size-adjust:none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
 
 /* "page" containers - full-screen views, one should always be in view post-pageload */
-.ui-mobile [data-role=page], .ui-mobile [data-role=dialog], .ui-page { top: 0; left: 0; width: 100%; min-height: 100%; position: absolute; display: none; border: 0; } 
+.ui-mobile [ data-jq-role=page], .ui-mobile [ data-jq-role=dialog], .ui-page { top: 0; left: 0; width: 100%; min-height: 100%; position: absolute; display: none; border: 0; } 
 .ui-mobile .ui-page-active { display: block; overflow: visible; }
 
 /*orientations from js are available */

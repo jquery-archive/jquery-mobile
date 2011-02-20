@@ -44,10 +44,10 @@
 &lt;/html&gt;
 </code></pre>
 
-			<p>Inside the <code>&lt;body&gt;</code> tag, each view or "page" on the mobile device is identified with an element (usually a <code>div</code>) with the <code>data-role="page"</code> attribute:</p> 
+			<p>Inside the <code>&lt;body&gt;</code> tag, each view or "page" on the mobile device is identified with an element (usually a <code>div</code>) with the <code> data-jq-role="page"</code> attribute:</p> 
 
 <div class="highlight"> 
-<pre><span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"page"</span><span class="nt">&gt;</span> 
+<pre><span class="nt">&lt;div</span> <span class="na"> data-jq-role=</span><span class="s">"page"</span><span class="nt">&gt;</span> 
 	...
 <span class="nt">&lt;/div&gt;</span> 
 </pre> 
@@ -56,10 +56,10 @@
 			<p>Within the "page" container, any valid HTML markup can be used, but for typical pages in jQuery Mobile, the immediate children of a "page" are divs with data-jq-roles of <code>"header"</code>, <code>"content"</code>, and <code>"footer"</code>.</p> 
 
 <div class="highlight"> 
-<pre><span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"page"</span><span class="nt">&gt;</span> 
-	<span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"header"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/div&gt;</span> 
-	<span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"content"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/div&gt;</span> 
-	<span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"footer"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/div&gt;</span> 
+<pre><span class="nt">&lt;div</span> <span class="na"> data-jq-role=</span><span class="s">"page"</span><span class="nt">&gt;</span> 
+	<span class="nt">&lt;div</span> <span class="na"> data-jq-role=</span><span class="s">"header"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/div&gt;</span> 
+	<span class="nt">&lt;div</span> <span class="na"> data-jq-role=</span><span class="s">"content"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/div&gt;</span> 
+	<span class="nt">&lt;div</span> <span class="na"> data-jq-role=</span><span class="s">"footer"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/div&gt;</span> 
 <span class="nt">&lt;/div&gt;</span> 
 </pre> 
 </div> 
@@ -113,7 +113,7 @@
 
 		<h2>Local, internal linked "pages"</h2> 
 		
-			<p>A single HTML document can contain multiple 'pages' that are loaded together by stacking multiple divs with a <code>data-role</code> of <code>"page"</code>. Each 'page' block needs a unique ID (<code>id="foo"</code>) that will be used to link internally between 'pages' (<code>href="#foo"</code>). When a link is clicked, the framework will look for an internal 'page' with the ID and transition it into view.</p> 
+			<p>A single HTML document can contain multiple 'pages' that are loaded together by stacking multiple divs with a <code> data-jq-role</code> of <code>"page"</code>. Each 'page' block needs a unique ID (<code>id="foo"</code>) that will be used to link internally between 'pages' (<code>href="#foo"</code>). When a link is clicked, the framework will look for an internal 'page' with the ID and transition it into view.</p> 
 			
 			<p>It's important to note if you  are linking from a mobile page that was loaded via Ajax to a page with multiple internal pages, you need to add a <code>rel="external"</code> or <code>data-ajax="false"</code> to the link. This tells the framework to do a full page reload to clear out the Ajax hash in the URL. This is critical because Ajax pages use the hash (#) to track the Ajax history, while multiple internal pages use the hash to indicate internal pages so there will be a conflicts.</p>
 			<p>For example, a link to a page containing multiple internal pages would look like this:</p>
@@ -171,7 +171,7 @@
 		
 		
 		<h2>Back linking</h2>
-		<p>If you use the attribute <code>data-rel="back"</code> on an anchor, any clicks on that anchor will mimic the back button, going back one history entry and ignoring the anchor's default href. This is particularly useful when linking back to a named page, such as a link that says "home", or when generating "back" buttons with JavaScript, such as a button to close a dialog. When using this feature in your source markup, <strong>be sure to provide a meaningful href that actually points to the URL of the referring page (this will allow the feature to work for users in C-Grade browsers</strong>. Also, please keep in mind that if you just want a reverse transition without actually going back in history, you should use the <code>data-direction="reverse"</code> attribute instead.</p>
+		<p>If you use the attribute <code>data-jq-rel="back"</code> on an anchor, any clicks on that anchor will mimic the back button, going back one history entry and ignoring the anchor's default href. This is particularly useful when linking back to a named page, such as a link that says "home", or when generating "back" buttons with JavaScript, such as a button to close a dialog. When using this feature in your source markup, <strong>be sure to provide a meaningful href that actually points to the URL of the referring page (this will allow the feature to work for users in C-Grade browsers</strong>. Also, please keep in mind that if you just want a reverse transition without actually going back in history, you should use the <code>data-jq-direction="reverse"</code> attribute instead.</p>
 		
 		<h2>Redirects and linking to directories</h2>
 		<p>When linking to directory indexes (such as href="typesofcats/" instead of href="typesofcats/index.html"), you must provide a trailing slash. This is because jQuery Mobile assumes the section after the last "/" character in a url is a filename, and it will remove that section when creating base urls from which future pages will be referenced.</p>
