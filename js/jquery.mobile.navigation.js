@@ -178,7 +178,7 @@
 
 			//set the generated BASE element's href attribute to a new page's base path
 			set: function( href ){
-				base.element.attr('href', docBase + path.get( href ).replace(/^\//, ""));
+				base.element.attr('href', docBase + path.get( href ));
 			},
 
 			//set the generated BASE element's href attribute to a new page's base path
@@ -225,7 +225,6 @@
 		else{
 			// defer execution for consistency between webkit/non webkit
 			setTimeout(callback, 0);
-			return $(this);
 		}
 	};
 
@@ -288,24 +287,19 @@
 		// guess if it came from the history menu
 		if( fromHashChange ){
 
-			// determine new page index
-			var newActiveIndex;
-
 			// check if url is in history and if it's ahead or behind current page
 			$.each( urlHistory.stack, function( i ){
 				//if the url is in the stack, it's a forward or a back
 				if( this.url === url ){
+					urlIndex = i;
 					//define back and forward by whether url is older or newer than current page
 					back = i < urlHistory.activeIndex;
 					//forward set to opposite of back
 					forward = !back;
 					//reset activeIndex to this one
-					newActiveIndex = i;
+					urlHistory.activeIndex = i;
 				}
 			});
-
-			// save new page index
-			urlHistory.activeIndex = newActiveIndex !== undefined ? newActiveIndex : urlHistory.activeIndex;
 
 			//if it's a back, use reverse animation
 			if( back ){
@@ -488,7 +482,7 @@
 			fileUrl = path.getFilePath(url);
 		}
 		else{ //find base url of element, if avail
-			var toID = to.attr('data-" + $.mobile.ns + "url'),
+			var toID = to.attr( "data-" + $.mobile.ns + "url" ),
 				toIDfileurl = path.getFilePath(toID);
 
 			if(toID !== toIDfileurl){
@@ -519,14 +513,13 @@
 				url: fileUrl,
 				type: type,
 				data: data,
-				dataType: "html",
 				success: function( html ) {
 					//pre-parse html to check for a data-url,
 					//use it as the new fileUrl, base path, etc
 					var all = $("<div></div>"),
 							redirectLoc,
 							// TODO handle dialogs again
-							pageElemRegex = /.*(<[^>]*\bdata-role=["']?page["']?[^>]*>).*/,
+							pageElemRegex = new RegExp(".*(<[^>]*\bdata-" + $.mobile.ns + "role=[\"']?page[\"']?[^>]*>).*"),
 							dataUrlRegex = new RegExp("\bdata-" + $.mobile.ns + "url=[\"']?([^\"'>]*)[\"']?");
 
 					// data-url must be provided for the base tag so resource requests can be directed to the
@@ -549,7 +542,7 @@
 
 					//workaround to allow scripts to execute when included in page divs
 					all.get(0).innerHTML = html;
-					to = all.find('[data-role="page"], [data-role="dialog"]').first();
+					to = all.find( "[data-" + $.mobile.ns + "role='page'], [data-" + $.mobile.ns + "role='dialog']" ).first();
 
 					//rewrite src and href attrs to use a base url
 					if( !$.support.dynamicBaseTag ){
@@ -569,7 +562,7 @@
 
 					//append to page and enhance
 					to
-						.attr( "data-url", fileUrl )
+						.attr( "data-" + $.mobile.ns + "url", fileUrl )
 						.appendTo( $.mobile.pageContainer );
 
 					enhancePage();
@@ -656,24 +649,11 @@
 			hasTarget = $this.is( "[target]" ),
 
 			//if data-ajax attr is set to false, use the default behavior of a link
-			hasAjaxDisabled = $this.is( "[data-ajax='false']" );
+			hasAjaxDisabled = $this.is( "[data-" + $.mobile.ns + "ajax='false']" );
 
 		//if there's a data-rel=back attr, go back in history
-		if( $this.is( "[data-rel='back']" ) ){
-			var currentIndex = $.mobile.urlHistory.activeIndex, backToIndex;
-
-			// for each history entry that is not the current page (currentIndex - 1)
-			for(var i = currentIndex - 1; i >= 0; i--){
-				backToIndex = i;
-
-				// break when we've found the first page that isn't a dialog
-				if($.mobile.urlHistory.stack[i].url.indexOf(dialogHashKey) < 0 ){
-					break;
-				}
-			}
-
-			//use the difference between closest non dialog index and the current index
-			window.history.go(backToIndex - currentIndex);
+		if( $this.is( "[data-" + $.mobile.ns + "rel='back']" ) ){
+			window.history.back();
 			return false;
 		}
 
@@ -711,7 +691,7 @@
 				$this.data( "back" );
 
 			//this may need to be more specific as we use data-rel more
-			nextPageRole = $this.attr( "data-rel" );
+			nextPageRole = $this.attr( "data-" + $.mobile.ns + "rel" );
 
 			//if it's a relative href, prefix href with base url
 			if( path.isRelative( url ) ){

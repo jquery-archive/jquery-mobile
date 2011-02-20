@@ -12,7 +12,7 @@ $.fn.fixHeaderFooter = function(options){
 		var $this = $(this);
 		
 		if( $this.data('fullscreen') ){ $this.addClass('ui-page-fullscreen'); }
-		$this.find ".ui-header[data-" + $.mobile.ns + "position='fixed']" ).addClass('ui-header-fixed ui-fixed-inline fade'); //should be slidedown
+		$this.find( ".ui-header[data-" + $.mobile.ns + "position='fixed']" ).addClass('ui-header-fixed ui-fixed-inline fade'); //should be slidedown
 		$this.find( ".ui-footer[data-" + $.mobile.ns + "position='fixed']" ).addClass('ui-footer-fixed ui-fixed-inline fade'); //should be slideup		
 	});
 };

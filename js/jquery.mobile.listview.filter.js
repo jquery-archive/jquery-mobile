@@ -18,9 +18,9 @@ $( "[data-" + $.mobile.ns + "role='listview']" ).live( "listviewcreate", functio
 	var wrapper = $( "<form>", { "class": "ui-listview-filter ui-bar-c", "role": "search" } ),
 
 		search = $( "<input>", {
-				placeholder: "Filter results...",
-				"data-" + $.mobile.ns + "type": "search"
+				placeholder: "Filter results..."
 			})
+			.attr( "data-" + $.mobile.ns + "type", "search" )
 			.bind( "keyup change", function() {
 				var val = this.value.toLowerCase(),
 						listItems = list.children();

@@ -100,9 +100,9 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 						"class": "ui-selectmenu-list",
 						"id": menuId,
 						"role": "listbox",
-						"aria-labelledby": buttonId,
-						"data-" + $.mobile.ns + "theme": theme
+						"aria-labelledby": buttonId
 					})
+					.attr( "data-" + $.mobile.ns + "theme", theme )
 					.appendTo( listbox ),
 	
 				header = $( "<div>", {
@@ -116,12 +116,12 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					.appendTo( header ),
 	
 				headerClose = $( "<a>", {
-						"data-" + $.mobile.ns + "iconpos": "notext",
-						"data-" + $.mobile.ns + "icon": "delete",
 						"text": o.closeText,
 						"href": "#",
 						"class": "ui-btn-left"
 					})
+					.attr( "data-" + $.mobile.ns + "iconpos", "notext" )
+					.attr( "data-" + $.mobile.ns + "icon", "delete" )
 					.appendTo( header )
 					.buttonMarkup(),
 	
