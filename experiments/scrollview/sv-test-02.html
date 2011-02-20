@@ -122,16 +122,16 @@ $(function(){
 	</script>
 	</head>
 	<body>
-<div data-role="page">
-      <div data-role="header">
+<div data-jq-role="page">
+      <div data-jq-role="header">
     <h1>Scroll View Events Test</h1>
   </div>
       <!-- /header -->
       
-      <div data-role="content">
+      <div data-jq-role="content">
     <h3>Test</h3>
     <p>This page wraps the _handleDragStart, _handleDragMove, and _handleDragStop events of the scrollview widget so that the checkboxes below can determine how the native event is treated. You can use this page to figure out what events need to be caught and what special treatment is necessary to prevent native scrolling. You can also test the effect of that treatment on form elements within the sample scrollview.</p>
-    <div data-role="fieldcontain">
+    <div data-jq-role="fieldcontain">
         <label for="s_method" class="select">Scrolling Method:</label>
         <select name="s_method" id="s_method" onchange="changeScrollMethod();">
             <option value="translate" selected="selected">CSS3 Transform/Translate</option>
@@ -140,7 +140,7 @@ $(function(){
         </select>
     </div>
 
-    <div data-role="fieldcontain">
+    <div data-jq-role="fieldcontain">
         <label for="s_delay" class="select">Delay Form Element Click:</label>
         <select name="s_delay" id="s_delay" onchange="changeDelayFormElementClick();">
             <option value="yes" selected="selected">Yes</option>
@@ -148,8 +148,8 @@ $(function(){
         </select>
     </div>
 
-    <div  data-role="fieldcontain">
-          <fieldset data-role="controlgroup">
+    <div  data-jq-role="fieldcontain">
+          <fieldset data-jq-role="controlgroup">
         <input type="checkbox" name="cb_hd_pd" id="cb_hd_pd" checked="checked" />
         <label for="cb_hd_pd">touchstart - Prevent Default</label>
         <input type="checkbox" name="cb_hd_sp" id="cb_hd_sp" checked="checked" />
@@ -164,16 +164,16 @@ $(function(){
         <label for="cb_hu_sp">touchstop - Stop Propagation</label>
       </fieldset>
         </div>
-    <div id="evtCatcher" data-scroll="y">
-<div  data-role="fieldcontain">
+    <div id="evtCatcher" data-jq-scroll="y">
+<div  data-jq-role="fieldcontain">
     <label for="tf1">Textfield</label>
     <input type="text" name="tf1" id="tf1" />
 </div>
-<div  data-role="fieldcontain">
+<div  data-jq-role="fieldcontain">
     <label for="ta1">Textarea</label>
     <textarea name="ta1" id="ta1" rows="5" cols="10"></textarea>
 </div>
-<div  data-role="fieldcontain">
+<div  data-jq-role="fieldcontain">
     <label for="ta1">Select</label>
     <select name="s1" id="s1">
     	<option value="1" selected="selected">Option 1</option>
@@ -183,12 +183,12 @@ $(function(){
     	<option value="5">Option 5</option>
     </select>
 </div>
-<div  data-role="fieldcontain">
+<div  data-jq-role="fieldcontain">
     <label for="ta1">Button</label>
     <input type="button" name="b1" id="b1" value="Button" />
 </div>
-<div  data-role="fieldcontain">
-          <fieldset data-role="controlgroup">
+<div  data-jq-role="fieldcontain">
+          <fieldset data-jq-role="controlgroup">
         <input type="checkbox" name="cb1" id="cb1" />
         <label for="cb1">Checkbox 1</label>
         <input type="checkbox" name="cb2" id="cb2" />

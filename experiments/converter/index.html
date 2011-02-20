@@ -11,7 +11,7 @@
 </head> 
 <body> 
 
-<div data-role="page" id="start" data-theme="a">
+<div data-jq-role="page" id="start" data-jq-theme="a">
 	
 	<script type="text/javascript" src="jquery.tmpl.js"></script>
 	<script type="text/javascript" src="storage.js"></script>
@@ -32,66 +32,66 @@
 		</li>
 	</script>
 	
-	<div data-role="header" data-theme="e">
-		<a href="#customize" data-rel="dialog" data-transition="pop" data-icon="gear" class="ui-btn-right">Edit</a>
+	<div data-jq-role="header" data-jq-theme="e">
+		<a href="#customize" data-jq-rel="dialog" data-jq-transition="pop" data-jq-icon="gear" class="ui-btn-right">Edit</a>
 		<h1>Currency converter</h1>
 	</div>
 	<div class="ui-bar ui-bar-a">
-			<form method="get" action="" data-role="autoform" id="curr-form">
-				<label for="term" data-role="nojs">Search:</label>
-				<input type="search" name="term" id="term" placeholder="Type a value..." value="25" data-theme="a" />
+			<form method="get" action="" data-jq-role="autoform" id="curr-form">
+				<label for="term" data-jq-role="nojs">Search:</label>
+				<input type="search" name="term" id="term" placeholder="Type a value..." value="25" data-jq-theme="a" />
 			</form>
 	</div>
-	<div data-role="content">
-		<ul id="conversions" data-role="listview" data-theme="a">
+	<div data-jq-role="content">
+		<ul id="conversions" data-jq-role="listview" data-jq-theme="a">
 		</ul>
 	</div>
 </div>
 
-<div data-role="page" id="customize" class="ui-body-b">
+<div data-jq-role="page" id="customize" class="ui-body-b">
 	
-	<div data-role="header" data-theme="b" data-backbtn="false">
+	<div data-jq-role="header" data-jq-theme="b" data-jq-backbtn="false">
 		<h1>Edit conversions</h1>
-		<a href="#start" data-transition="fade" data-theme="b" data-icon="check" class="ui-btn-right">Done</a>
+		<a href="#start" data-jq-transition="fade" data-jq-theme="b" data-jq-icon="check" class="ui-btn-right">Done</a>
 	</div>
 	
-	<div data-role="content">
-		<ul id="edit-conversions" data-role="listview" data-theme="c" data-inset="true">
+	<div data-jq-role="content">
+		<ul id="edit-conversions" data-jq-role="listview" data-jq-theme="c" data-jq-inset="true">
 		</ul>
 	</div>
 	<div class="ui-body">
-		<a href="#add-currency-dialog" data-role="button">Add new...</a>
-		<a id="restore" href="#" data-role="button" data-theme="c">Restore defaults</a>
+		<a href="#add-currency-dialog" data-jq-role="button">Add new...</a>
+		<a id="restore" href="#" data-jq-role="button" data-jq-theme="c">Restore defaults</a>
 	</div>
 </div>
 
-<div data-role="page" id="add-currency-dialog" class="ui-body-b">
-	<div data-role="header" data-theme="a">
+<div data-jq-role="page" id="add-currency-dialog" class="ui-body-b">
+	<div data-jq-role="header" data-jq-theme="a">
 		<h1>Add new</h1>
-		<a href="#customize" class="ui-back" data-icon="arrow-l">Cancel</a>
+		<a href="#customize" class="ui-back" data-jq-icon="arrow-l">Cancel</a>
 	</div>
 	
-	<div data-role="content">
+	<div data-jq-role="content">
 		<h2>Select currencies to convert:</h2>
-		<div data-role="fieldcontain">
+		<div data-jq-role="fieldcontain">
 			<label for="currency-options-from">From</label>
-			<select name="currency-options" id="currency-options-from" data-theme="c">
+			<select name="currency-options" id="currency-options-from" data-jq-theme="c">
 				<option value="EUR">EUR to Euro</option>
 				<option value="USD">USD to US Dollar</option>
 				<option value="GBP">GBP to Great Britain Pound</option>
 			</select>
 		</div>
-		<div data-role="fieldcontain">
+		<div data-jq-role="fieldcontain">
 			<label for="currency-options-to">To</label>
-			<select name="currency-options" id="currency-options-to" data-theme="c">
+			<select name="currency-options" id="currency-options-to" data-jq-theme="c">
 				<option value="EUR">EUR to Euro</option>
 				<option value="USD">USD to US Dollar</option>
 				<option value="GBP">GBP to Great Britain Pound</option>
 			</select>
 		</div>
-		<div data-role="fieldcontain">
-		<a id="cancel" href="#customize" data-role="button" data-theme="c" data-inline="true">Cancel</a>
-		<a id="add" href="#customize" data-role="button" data-theme="b" data-inline="true">Add conversion</a>
+		<div data-jq-role="fieldcontain">
+		<a id="cancel" href="#customize" data-jq-role="button" data-jq-theme="c" data-jq-inline="true">Cancel</a>
+		<a id="add" href="#customize" data-jq-role="button" data-jq-theme="b" data-jq-inline="true">Add conversion</a>
 		</div>
 	</div>
 </div>

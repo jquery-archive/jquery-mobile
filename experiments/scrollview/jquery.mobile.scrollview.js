@@ -741,7 +741,7 @@ jQuery.widget( "mobile.scrolllistview", jQuery.mobile.scrollview, {
 		// XXX: Note that we need to update this cache if we ever support lists
 		//      that can dynamically update their content.
 	
-		this._$dividers = this._$view.find("[data-role=list-divider]");
+		this._$dividers = this._$view.find("[data-"+ $.mobile.ns +"role=list-divider]");
 		this._lastDivider = null;
 	},
 

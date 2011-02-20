@@ -90,26 +90,26 @@
 </head> 
 <body> 
 
-<div data-role="page">
+<div data-jq-role="page">
 
-	<div data-role="header">
+	<div data-jq-role="header">
 		<h1>Nested Scrollviews</h1>
 	</div><!-- /header -->
 
-	<div data-role="content">
+	<div data-jq-role="content">
       <h4>Example 1</h4>
       <p>In the following example the #4 is actually a vertical scrollview embedded within a horizontal scrollview.</p>
-      <div data-scroll="x" class="double-block-view-h">
+      <div data-jq-scroll="x" class="double-block-view-h">
         <div class="view">
       	  <div class="square">1</div>
       	  <div class="square">2</div>
       	  <div class="square">3</div>
-      	  <div data-scroll="y" class="square single-block-view-v">
+      	  <div data-jq-scroll="y" class="square single-block-view-v">
             <div class="view">
               <div class="square">4</div>
               <div class="square">A</div>
               <div class="square">B</div>
-              <div data-scroll="x" class="single-block-view-h">
+              <div data-jq-scroll="x" class="single-block-view-h">
 		        <div class="view">
                     <div class="square">C</div>
                     <div class="square">@</div>
@@ -132,12 +132,12 @@
       </div>
       <h4>Example 2</h4>
       <p>In the following example the #4 is actually a nested horizontal scrollview embedded within a horizontal scrollview. The idea here is that if you drag-scroll the nested scrollview, once it reaches either end of its view, it should start scrolling the outer view.</p>
-      <div data-scroll="x" class="double-block-view-h">
+      <div data-jq-scroll="x" class="double-block-view-h">
         <div class="view">
       	  <div class="square">1</div>
       	  <div class="square">2</div>
       	  <div class="square">3</div>
-      	  <div data-scroll="x" class="square single-block-view-h">
+      	  <div data-jq-scroll="x" class="square single-block-view-h">
             <div class="view">
               <div class="square">4</div>
               <div class="square">A</div>

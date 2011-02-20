@@ -37,17 +37,17 @@ $(function(){
 </script>
 </head>
 <body>
-<div data-role="page" data-theme="c">
-  <div data-role="header">
+<div data-jq-role="page" data-jq-theme="c">
+  <div data-jq-role="header">
     <h1>Form Element Event Test</h1>
   </div>
   <!-- /header -->
   
-  <div data-role="content" data-theme="c">
+  <div data-jq-role="content" data-jq-theme="c">
     <p>The form elements on this page are wrapped by a special div that has event handlers for touchstart, touchmove and touchstop. The checkboxes below control how the event within these handlers is treated when they fire. Use this page to figure out how the various event treatments impact the form elements on you mobile device, then add to the notes at the bottom of the page.</p>
     <p>All scrolling on this page is performed by the native viewport, there are no scrollviews on this page.</p>
-    <div  data-role="fieldcontain">
-      <fieldset data-role="controlgroup">
+    <div  data-jq-role="fieldcontain">
+      <fieldset data-jq-role="controlgroup">
         <input type="checkbox" name="cb_hd_pd" id="cb_hd_pd" />
         <label for="cb_hd_pd">touchstart - Prevent Default</label>
         <input type="checkbox" name="cb_hd_sp" id="cb_hd_sp" />
@@ -65,31 +65,31 @@ $(function(){
     <div id="evtCatcher">
       <form action="#" method="get">
         <h2>Form elements</h2>
-        <div data-role="fieldcontain">
+        <div data-jq-role="fieldcontain">
           <label for="name">Text Input:</label>
           <input type="text" name="name" id="name" value=""  />
         </div>
-        <div data-role="fieldcontain">
+        <div data-jq-role="fieldcontain">
           <label for="textarea">Textarea:</label>
           <textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
         </div>
-        <div data-role="fieldcontain">
+        <div data-jq-role="fieldcontain">
           <label for="search">Search Input:</label>
           <input type="search" name="password" id="search" value=""  />
         </div>
-        <div data-role="fieldcontain">
+        <div data-jq-role="fieldcontain">
           <label for="slider2">Flip switch:</label>
-          <select name="slider2" id="slider2" data-role="slider">
+          <select name="slider2" id="slider2" data-jq-role="slider">
             <option value="off">Off</option>
             <option value="on">On</option>
           </select>
         </div>
-        <div data-role="fieldcontain">
+        <div data-jq-role="fieldcontain">
           <label for="slider">Slider:</label>
           <input type="range" name="slider" id="slider" value="0" min="0" max="100"  />
         </div>
-        <div data-role="fieldcontain">
-          <fieldset data-role="controlgroup">
+        <div data-jq-role="fieldcontain">
+          <fieldset data-jq-role="controlgroup">
             <legend>Choose as many snacks as you'd like:</legend>
             <input type="checkbox" name="checkbox-1a" id="checkbox-1a" class="custom" />
             <label for="checkbox-1a">Cheetos</label>
@@ -101,8 +101,8 @@ $(function(){
             <label for="checkbox-4a">Sun Chips</label>
           </fieldset>
         </div>
-        <div data-role="fieldcontain">
-          <fieldset data-role="controlgroup" data-type="horizontal">
+        <div data-jq-role="fieldcontain">
+          <fieldset data-jq-role="controlgroup" data-jq-type="horizontal">
             <legend>Font styling:</legend>
             <input type="checkbox" name="checkbox-6" id="checkbox-6" class="custom" />
             <label for="checkbox-6">b</label>
@@ -112,8 +112,8 @@ $(function(){
             <label for="checkbox-8">u</label>
           </fieldset>
         </div>
-        <div data-role="fieldcontain">
-          <fieldset data-role="controlgroup">
+        <div data-jq-role="fieldcontain">
+          <fieldset data-jq-role="controlgroup">
             <legend>Choose a pet:</legend>
             <input type="radio" name="radio-choice-1" id="radio-choice-1" value="choice-1" checked="checked" />
             <label for="radio-choice-1">Cat</label>
@@ -125,8 +125,8 @@ $(function(){
             <label for="radio-choice-4">Lizard</label>
           </fieldset>
         </div>
-        <div data-role="fieldcontain">
-          <fieldset data-role="controlgroup" data-type="horizontal">
+        <div data-jq-role="fieldcontain">
+          <fieldset data-jq-role="controlgroup" data-jq-type="horizontal">
             <legend>Layout view:</legend>
             <input type="radio" name="radio-choice-b" id="radio-choice-c" value="on" checked="checked" />
             <label for="radio-choice-c">List</label>
@@ -136,7 +136,7 @@ $(function(){
             <label for="radio-choice-e">Gallery</label>
           </fieldset>
         </div>
-        <div data-role="fieldcontain">
+        <div data-jq-role="fieldcontain">
           <label for="select-choice-1" class="select">Choose shipping method:</label>
           <select name="select-choice-1" id="select-choice-1">
             <option value="standard">Standard: 7 day</option>
@@ -145,7 +145,7 @@ $(function(){
             <option value="overnight">Overnight</option>
           </select>
         </div>
-        <div data-role="fieldcontain">
+        <div data-jq-role="fieldcontain">
           <label for="select-choice-3" class="select">Your state:</label>
           <select name="select-choice-3" id="select-choice-3">
             <option value="AL">Alabama</option>
@@ -203,10 +203,10 @@ $(function(){
         <div class="ui-body ui-body-b">
           <fieldset class="ui-grid-a">
             <div class="ui-block-a">
-              <button type="submit" data-theme="d">Cancel</button>
+              <button type="submit" data-jq-theme="d">Cancel</button>
             </div>
             <div class="ui-block-b">
-              <button type="submit" data-theme="a">Submit</button>
+              <button type="submit" data-jq-theme="a">Submit</button>
             </div>
           </fieldset>
         </div>

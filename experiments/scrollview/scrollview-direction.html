@@ -66,16 +66,16 @@
 </head> 
 <body> 
 
-<div data-role="page">
+<div data-jq-role="page">
 
-	<div data-role="header">
+	<div data-jq-role="header">
 		<h1>Scroll View Direction Locking</h1>
 	</div><!-- /header -->
 
-	<div data-role="content">
+	<div data-jq-role="content">
       <h4>Scrollview</h4>
-      <p>To turn an element into a scrollview, simply add a data-scroll="true" to the element. By default, a scrollview can scroll in both the horizontal and vertical directions. If the user drags the view horizontally (left or right), or vertically (up or down), scrolling will be locked so that it only scrolls in that one dimension. If the user drags the view diagonally, he will be able to scroll in both directions at the same time.</p>
-      <div data-scroll="true" class="threeByThree">
+      <p>To turn an element into a scrollview, simply add a data-jq-scroll="true" to the element. By default, a scrollview can scroll in both the horizontal and vertical directions. If the user drags the view horizontally (left or right), or vertically (up or down), scrolling will be locked so that it only scrolls in that one dimension. If the user drags the view diagonally, he will be able to scroll in both directions at the same time.</p>
+      <div data-jq-scroll="true" class="threeByThree">
         <div class="square">a</div>
         <div class="square">b</div>
         <div class="square">c</div>
@@ -248,8 +248,8 @@
       </div>
       <p>When there are nested scrollviews, if the user drags in a single dimension and hits either end of the view, the drag will be propagated up to the next outer scrollview that can handle a drag in that dimension. So for example, if you drag the scrollview above so that it reaches the top of its view, the entire page will start to scroll upward if you continue dragging. This is because the drag was propagated from the scrollview with the letters in it, out to the scrollview containing the entire content for the page.</p>
       <h4>Horizontal Scrollview</h4>
-      <p>A scrollview can be set up so that it only scrolls in the horizontal direction. Simply place a data-scroll=&quot;x&quot; on the element you want to scroll:</p>
-      <div data-scroll="x" class="threeByThree">
+      <p>A scrollview can be set up so that it only scrolls in the horizontal direction. Simply place a data-jq-scroll=&quot;x&quot; on the element you want to scroll:</p>
+      <div data-jq-scroll="x" class="threeByThree">
       	  <div class="square">a</div>
       	  <div class="square">b</div>
       	  <div class="square">c</div>
@@ -421,8 +421,8 @@
       	  <div class="square">y</div>
       </div>
       <h4>Vertical Scrollview</h4>
-      <p>A scrollview can be set up so that it only scrolls in the vertical direction. Simply place a data-scroll=&quot;y&quot; on the element you want to scroll:</p>
-      <div data-scroll="y" class="threeByThree">
+      <p>A scrollview can be set up so that it only scrolls in the vertical direction. Simply place a data-jq-scroll=&quot;y&quot; on the element you want to scroll:</p>
+      <div data-jq-scroll="y" class="threeByThree">
       	  <div class="square">a</div>
       	  <div class="square">b</div>
       	  <div class="square">c</div>
@@ -594,8 +594,8 @@
       	  <div class="square">y</div>
       </div>
       <h4>Scrollview Paging</h4>
-      <p>A scrollview can be set up so that it scrolls by pages. This feature is only enabled for horizontal or vertical scrollviews. Use data-scroll=&quot;xp&quot; or data-scroll=&quot;yp&quot; to turn on paging. The following scrollview pages horizontally.</p>
-      <div id="ex4" data-scroll="xp" class="threeByThree">
+      <p>A scrollview can be set up so that it scrolls by pages. This feature is only enabled for horizontal or vertical scrollviews. Use data-jq-scroll=&quot;xp&quot; or data-jq-scroll=&quot;yp&quot; to turn on paging. The following scrollview pages horizontally.</p>
+      <div id="ex4" data-jq-scroll="xp" class="threeByThree">
         <div class="square">a</div>
         <div class="square">b</div>
         <div class="square">c</div>
