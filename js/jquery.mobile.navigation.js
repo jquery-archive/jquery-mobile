@@ -592,7 +592,7 @@
 /* Event Bindings - hashchange, submit, and click */
 
 	//bind to form submit events, handle with Ajax
-	$( "form[data-ajax!='false']" ).live('submit', function(event){
+	$( "form[data-"+ $.mobile.ns +"ajax!='false']" ).live('submit', function(event){
 		if( !$.mobile.ajaxEnabled ||
 			//TODO: deprecated - remove at 1.0
 			!$.mobile.ajaxFormsEnabled ){ return; }

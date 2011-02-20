@@ -46,15 +46,15 @@
 		stop();
 	});
 	
-	test( "selects marked with data-native-menu=true should use a div as their button", function(){
+	test( "selects marked with data-jq-native-menu=true should use a div as their button", function(){
 		same($("#select-choice-native-container div.ui-btn").length, 1);
 	});
 
-	test( "selects marked with data-native-menu=true should not have a custom menu", function(){
+	test( "selects marked with data-jq-native-menu=true should not have a custom menu", function(){
 		same($("#select-choice-native-container ul").length, 0);
 	});
 	
-	test( "selects marked with data-native-menu=true should sit inside the button", function(){
+	test( "selects marked with data-jq-native-menu=true should sit inside the button", function(){
 		same($("#select-choice-native-container div.ui-btn select").length, 1);
 	});
 })(jQuery);

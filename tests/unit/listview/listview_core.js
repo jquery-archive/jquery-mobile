@@ -38,8 +38,8 @@
 		setTimeout(function() {
 			ok($('#nested-list-test').hasClass('ui-page-active'), "makes nested list test page active");
 			ok($('[role="option"]', $('#nested-list-test')).length == 2, 'Adds data role to the two LIs');
-			ok($('body > [data-url="nested-list-test&ui-page=More-animals-0"]').length == 1, "Adds first UL to the page");
-			ok($('body > [data-url="nested-list-test&ui-page=Groups-of-animals-1"]').length == 1, "Adds second nested UL to the page");
+			ok($('body > [data-jq-url="nested-list-test&ui-page=More-animals-0"]').length == 1, "Adds first UL to the page");
+			ok($('body > [data-jq-url="nested-list-test&ui-page=Groups-of-animals-1"]').length == 1, "Adds second nested UL to the page");
 			start();
 		}, 1000);
 	});
@@ -47,7 +47,7 @@
 	asyncTest( "change to nested page when the li is clicked", function() {
 		$('.ui-page-active li:eq(1)').click();
 				setTimeout(function() {
-					var $new_page = $('body > [data-url="nested-list-test&ui-page=More-animals-0"]');
+					var $new_page = $('body > [data-jq-url="nested-list-test&ui-page=More-animals-0"]');
 					ok($new_page.hasClass('ui-page-active'), 'Makes the nested page the active page.');
 					ok($('.ui-listview', $new_page).find(":contains('Rhumba of rattlesnakes')").length == 1, "The current page should have the proper text in the list.");
 					ok($('.ui-listview', $new_page).find(":contains('Shoal of Bass')").length == 1, "The current page should have the proper text in the list.");
@@ -56,7 +56,7 @@
 	});
 
 	asyncTest( "should go back to top level when the back button is clicked", function() {
-		$('body > [data-url="nested-list-test&ui-page=More-animals-0"]').find('a:contains("Back")').click();
+		$('body > [data-jq-url="nested-list-test&ui-page=More-animals-0"]').find('a:contains("Back")').click();
 		setTimeout(function() {
 			ok($('#nested-list-test').hasClass('ui-page-active'), 'Transitions back to the parent nested page');
 			start();

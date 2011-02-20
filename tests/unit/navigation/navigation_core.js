@@ -213,7 +213,7 @@
 		stop();
 	};
 
-	test( "when loading a page where data-url is not defined on a sub element hash defaults to the url", function(){
+	test( "when loading a page where data-jq-url is not defined on a sub element hash defaults to the url", function(){
 		testDataUrlHash("#non-data-url a", /^#data-url-tests\/non-data-url.html$/);
 	});
 

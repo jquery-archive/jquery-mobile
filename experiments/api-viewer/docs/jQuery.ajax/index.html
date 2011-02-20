@@ -150,7 +150,7 @@
   }
 });</pre>
 <p>Such a simple example would generally be better served by using <code><a href="/load">.load()</a></code> or <code><a href="/jQuery.get">$.get()</a></code>.</p>
-<h4 id="data-types">Data Types</h4>
+<h4 id="data-jq-types">Data Types</h4>
 <p>The <code>$.ajax()</code> function relies on the server to provide information about the retrieved data. If the server reports the return data as XML, the result can be traversed using normal XML methods or jQuery's selectors. If another type is detected, such as HTML in the example above, the data is treated as text.</p>
 <p>Different data handling can be achieved by using the <code>dataType</code> option. Besides plain <code>xml</code>, the <code>dataType</code> can be <code>html</code>, <code>json</code>, <code>jsonp</code>, <code>script</code>, or <code>text</code>.</p>
 <p>The <code>text</code> and <code>xml</code> types return the data with no processing. The data is simply passed on to the success handler, either through the <code>responseText</code> or <code>responseHTML</code> property of the <code>XMLHttpRequest</code> object, respectively.</p>

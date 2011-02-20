@@ -21,7 +21,7 @@ $.fn.addSourceLink = function(style){
 			})
 			.click(function(){
 				var codeblock = $('<pre><code></code></pre>');
-				src = src.replace(/&/gmi, '&amp;').replace(/"/gmi, '&quot;').replace(/>/gmi, '&gt;').replace(/</gmi, '&lt;').replace('data-jqm-source="true"','');
+				src = src.replace(/&/gmi, '&amp;').replace(/"/gmi, '&quot;').replace(/>/gmi, '&gt;').replace(/</gmi, '&lt;').replace('data-jq-source="true"','');
 				codeblock.find('code').append(src);
 
 				var activePage = $(this).parents('.ui-page-active');
@@ -38,5 +38,5 @@ $.fn.addSourceLink = function(style){
 
 //set up view source links
 $('div').live('pagebeforecreate',function(){
-	$(this).find('[data-jqm-source="true"]').addSourceLink();
+	$(this).find('[data-jq-source="true"]').addSourceLink();
 });

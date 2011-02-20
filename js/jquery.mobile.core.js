@@ -211,7 +211,7 @@
 			//find present pages
 			var $pages = $( "[data-" + $.mobile.ns + "role='page']" );
 
-			//add dialogs, set data-url attrs
+			//add dialogs, set data-jq-url attrs
 			$pages.add( "[data-" + $.mobile.ns + "role='dialog']" ).each(function(){
 				$(this).attr( "data-" + $.mobile.ns + "url", $(this).attr( "id" ));
 			});

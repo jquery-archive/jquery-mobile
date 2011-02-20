@@ -118,7 +118,7 @@
 
 					<h2>Option to use native menus</h2>
 					<p>The custom select menus add the ability to theme the select and provide visual consistency across platforms In addition, it fixes over some missing functionality on certain platforms: <code>optgroup</code> support on Android, multi-select capability on WebOS, and adds an elegant way to handle placeholder values (explained below).</p>
-					<p>However, there is overhead involved in parsing the native select to build a custom menu and if the number of selects or options within are fairly large, this can impact the performance of the page. By adding the <code>data-native-menu="true"</code> attribute to the <code>select</code>, the framework will use the browser's native select menu when the select button is clicked. Because this option doesn't use any of the custom menu parsing and menu generation logic, it is significantly faster than the custom menu version.</p>
+					<p>However, there is overhead involved in parsing the native select to build a custom menu and if the number of selects or options within are fairly large, this can impact the performance of the page. By adding the <code>data-jq-native-menu="true"</code> attribute to the <code>select</code>, the framework will use the browser's native select menu when the select button is clicked. Because this option doesn't use any of the custom menu parsing and menu generation logic, it is significantly faster than the custom menu version.</p>
 
 			<p>You can also programmatically set the select menu's configuration option to true in a callback bound to the <code>mobileinit</code> event to achieve the same effect. The following must be included in the page after jQuery is loaded but before jQuery Mobile is loaded.</p>
 
@@ -191,7 +191,7 @@ $(document).bind('mobileinit',function(){
 	<ul>
 		<li>An option with no value attribute (or an empty value attribute)</li>
 		<li>An option with no text node</li>
-		<li>An option with a <code>data-placeholder="true"</code> attribute. (This allows you to use an option that has a value and a textnode as a placeholder option).</li>
+		<li>An option with a <code>data-jq-placeholder="true"</code> attribute. (This allows you to use an option that has a value and a textnode as a placeholder option).</li>
 	</ul>
 
 	<p>You can disable this feature through the selectmenu plugin's <code>hidePlaceholderMenuItems</code> option, like this:</p>

@@ -1,7 +1,7 @@
 //quick & dirty theme switcher, written to potentially work as a bookmarklet
 (function($){
 	$.themeswitcher = function(){
-		if( $('[data-url=themeswitcher]').length ){ return; }
+		if( $('[data-'+ $.mobile.ns +'-url=themeswitcher]').length ){ return; }
 		var themesDir = 'http://jquerymobile.com/test/themes/',
 			themes = ['default','valencia'],
 			currentPage = $.mobile.activePage,
