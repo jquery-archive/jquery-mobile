@@ -648,7 +648,7 @@
 			//if target attr is specified we mimic _blank... for now
 			hasTarget = $this.is( "[target]" ),
 
-			//if data-ajax attr is set to false, use the default behavior of a link
+			//if data-jq-ajax attr is set to false, use the default behavior of a link
 			hasAjaxDisabled = $this.is( "[data-" + $.mobile.ns + "ajax='false']" );
 
 		//if there's a data-jq-rel=back attr, go back in history

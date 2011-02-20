@@ -21,11 +21,11 @@
 			
 			<h2>Footer bar structure</h2>
 
-			<p>The <code>footer</code> bar has the same basic structure as the header except it uses the <code>data-role</code> attribute value of <code>footer</code>. </p> 
+			<p>The <code>footer</code> bar has the same basic structure as the header except it uses the <code> data-jq-role</code> attribute value of <code>footer</code>. </p> 
 
 <div class="highlight"> 
 <pre>
-<span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"footer"</span><span class="nt">&gt;</span> 
+<span class="nt">&lt;div</span> <span class="na"> data-jq-role=</span><span class="s">"footer"</span><span class="nt">&gt;</span> 
 	<span class="nt">&lt;h4&gt;</span>Footer content<span class="nt">&lt;/h4&gt;</span> 
 <span class="nt">&lt;/div&gt;</span> 
 </pre> 
@@ -68,7 +68,7 @@
 				<a href="index.html" data-jq-icon="arrow-d">Down</a>
 			</div>
 			
-			<p>To group buttons together into a button set, wrap the links in a wrapper with <code>data-role=&quot;controlgroup&quot;</code> and <code>data-type=&quot;horizontal&quot;</code> attributes.</p>
+			<p>To group buttons together into a button set, wrap the links in a wrapper with <code> data-jq-role=&quot;controlgroup&quot;</code> and <code>data-jq-type=&quot;horizontal&quot;</code> attributes.</p>
 			
 <code>&lt;div data-jq-role=&quot;controlgroup&quot; data-jq-type=&quot;horizontal&quot;&gt;</code>
 
@@ -108,7 +108,7 @@
 					<h2>Persistent footers</h2>
 					<p>In situations where the footer is a global navigation element, you may want it to appear fixed in place between page transitions. This can be accomplished by using the persistent footer feature included in jQuery Mobile.</p> 
 					
-					<p>To make a footer stay in place between transitions, add the <code>data-id</code> attribute to the footer of all relevant pages and use the same <code>id</code> value for each. For example, by adding <code>data-id="myfooter"</code> to the current page and the target page, the framework will keep the footer anchors in the same spot during the page animation. PLEASE NOTE: This effect will only work correctly if the header and footer toolbars are set to <code>data-position="fixed"</code> so they are in view during the transition.</p>
+					<p>To make a footer stay in place between transitions, add the <code>data-id</code> attribute to the footer of all relevant pages and use the same <code>id</code> value for each. For example, by adding <code>data-id="myfooter"</code> to the current page and the target page, the framework will keep the footer anchors in the same spot during the page animation. PLEASE NOTE: This effect will only work correctly if the header and footer toolbars are set to <code>data-jq-position="fixed"</code> so they are in view during the transition.</p>
 					
 					
 

@@ -21,7 +21,7 @@
 	<div data-jq-role="content">
 			
 			<p>All standard HTML link types are supported in jQuery Mobile. To make the experience as polished as possible, any links to pages within the same domain will be automatically turned into Ajax requests and displayed with an animated page transition by the framework. </p>
-			<p>Links that point to other domains or that have <code>rel="external"</code>, <code>data-ajax="false"</code> or <code>target</code> attributes will not be loaded with Ajax and will cause a full page refresh. If multiple "pages" are contained within a single HTML document, they can be linked by referencing the ID of the page as an anchor (#foo).</p>
+			<p>Links that point to other domains or that have <code>rel="external"</code>, <code>data-jq-ajax="false"</code> or <code>target</code> attributes will not be loaded with Ajax and will cause a full page refresh. If multiple "pages" are contained within a single HTML document, they can be linked by referencing the ID of the page as an anchor (#foo).</p>
 			<p>All other types of links like <code>mailto:</code> and <code>tel:</code> aren't impacted by the framework and will work as expected. Learn more about the <a href="docs-navmodel.html">linking and navigation model</a> in jQuery Mobile</p>
 			
 			<ul data-jq-role="listview" data-jq-inset="true">
@@ -31,7 +31,7 @@
 				<li data-jq-role="list-divider">Links that will refresh the page</li>
 				<li><a href="http://www.jquery.com">External domain</a></li>
 				<li><a href="../../index.html" rel="external">Link with rel="external"</a></li>
-				<li><a href="docs/pages/index.html" data-jq-ajax="false">link with [data-ajax="false"]</a></li>
+				<li><a href="docs/pages/index.html" data-jq-ajax="false">link with [data-jq-ajax="false"]</a></li>
 				<li><a href="../../index.html" target="foo">Link with target="foo"</a></li>
 				<li data-jq-role="list-divider">Email links</li>
 				<li><a href="mailto:jdoe@foo.com">Basic email: mailto:jdoe@foo.com</a></li>

@@ -115,7 +115,7 @@
 		
 			<p>A single HTML document can contain multiple 'pages' that are loaded together by stacking multiple divs with a <code> data-jq-role</code> of <code>"page"</code>. Each 'page' block needs a unique ID (<code>id="foo"</code>) that will be used to link internally between 'pages' (<code>href="#foo"</code>). When a link is clicked, the framework will look for an internal 'page' with the ID and transition it into view.</p> 
 			
-			<p>It's important to note if you  are linking from a mobile page that was loaded via Ajax to a page with multiple internal pages, you need to add a <code>rel="external"</code> or <code>data-ajax="false"</code> to the link. This tells the framework to do a full page reload to clear out the Ajax hash in the URL. This is critical because Ajax pages use the hash (#) to track the Ajax history, while multiple internal pages use the hash to indicate internal pages so there will be a conflicts.</p>
+			<p>It's important to note if you  are linking from a mobile page that was loaded via Ajax to a page with multiple internal pages, you need to add a <code>rel="external"</code> or <code>data-jq-ajax="false"</code> to the link. This tells the framework to do a full page reload to clear out the Ajax hash in the URL. This is critical because Ajax pages use the hash (#) to track the Ajax history, while multiple internal pages use the hash to indicate internal pages so there will be a conflicts.</p>
 			<p>For example, a link to a page containing multiple internal pages would look like this:</p>
 			
 <code>&lt;a href=&quot;multipage.html&quot; rel=&quot;external&quot;&gt;Multi-page link&lt;/a&gt;</code>

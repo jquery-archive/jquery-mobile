@@ -42,16 +42,16 @@ $forecast_list = $xml->xpath("/xml_api_reply/weather/forecast_conditions");
 </head> 
 <body> 
 
-<div data-role="page" data-theme="a">
+<div data-jq-role="page" data-jq-theme="a">
 
 	<form action="" method="get" class="ui-body ui-body-a ">
 		<label for="location">Change zip code:</label>
-		<input type="search" name="location" id="location" value="<?=$location; ?>" placeholder="zip code..." data-theme="a" />
-		<input type="submit" data-role="nojs" value="submit" />
+		<input type="search" name="location" id="location" value="<?=$location; ?>" placeholder="zip code..." data-jq-theme="a" />
+		<input type="submit" data-jq-role="nojs" value="submit" />
 			</form>
 
 
-	<div data-role="content">
+	<div data-jq-role="content">
 		<h1>Currently in <?=$information[0]->city['data']; ?>:</h1>
 		<div class="current ui-body ui-bar-a ui-corner-all">
 
@@ -64,8 +64,8 @@ $forecast_list = $xml->xpath("/xml_api_reply/weather/forecast_conditions");
         </div>
 
 
-        <ul data-role="listview" data-inset="true" data-theme="a">
-        	<li data-role="list-divider">This week's forecast</li>
+        <ul data-jq-role="listview" data-jq-inset="true" data-jq-theme="a">
+        	<li data-jq-role="list-divider">This week's forecast</li>
         <? foreach ($forecast_list as $forecast) : ?>
         
         	<li>
