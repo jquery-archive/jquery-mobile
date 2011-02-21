@@ -3,22 +3,22 @@
 
 	<property name="cssdir" location="themes/default"/>
 	<property name="jsdir" location="js"/>
-	<property name="css-sources" value="jquery.mobile.button.css,
+	<property name="css-sources" value="jquery.mobile.theme.css,
+	jquery.mobile.core.css,
+	jquery.mobile.transitions.css,
+	jquery.mobile.grids.css,
+	jquery.mobile.headerfooter.css,
+	jquery.mobile.navbar.css,
+	jquery.mobile.button.css,
 	jquery.mobile.collapsible.css,
 	jquery.mobile.controlgroup.css,
-	jquery.mobile.core.css,
 	jquery.mobile.dialog.css,
 	jquery.mobile.forms.checkboxradio.css,
 	jquery.mobile.forms.fieldcontain.css,
 	jquery.mobile.forms.select.css,
-	jquery.mobile.forms.slider.css,
 	jquery.mobile.forms.textinput.css,
-	jquery.mobile.grids.css,
-	jquery.mobile.headerfooter.css,
 	jquery.mobile.listview.css,
-	jquery.mobile.navbar.css,
-	jquery.mobile.theme.css,
-	jquery.mobile.transitions.css"/>
+	jquery.mobile.forms.slider.css"/>
 	<property name="js-sources" value="jquery.ui.widget.js,
 	jquery.mobile.widget.js,
 	jquery.mobile.media.js,
