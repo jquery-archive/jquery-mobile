@@ -45,7 +45,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 				var oe = event.originalEvent.touches[0];
 				if( label.data("movestart") ){
 					if( Math.abs( label.data("movestart")[0] - oe.pageX ) > 10 ||
-						Math.abs( abel.data("movestart")[1] - oe.pageY ) > 10 ){
+						Math.abs( label.data("movestart")[1] - oe.pageY ) > 10 ){
 							label.data("moved", true);
 						}
 				}
