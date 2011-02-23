@@ -3,6 +3,8 @@
  */
 
 (function( $ ) {
+	window.location.hash = "";
+	
 	$.testHelper = {
 		excludeFileProtocol: function(callback){
 			var message = "Tests require script reload and cannot be run via file: protocol";
