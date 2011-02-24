@@ -16,43 +16,41 @@ $( "[data-role='listview']" ).live( "listviewcreate", function() {
 	}
 
 	var wrapper = $( "<form>", { "class": "ui-listview-filter ui-bar-c", "role": "search" } ),
-		
+
 		search = $( "<input>", {
 				placeholder: "Filter results...",
 				"data-type": "search"
 			})
 			.bind( "keyup change", function() {
 				var val = this.value.toLowerCase(),
-						list_items = list.children();
-				list_items.show();
+						listItems = list.children();
+				listItems.show();
 				if ( val ) {
 					// This handles hiding regular rows without the text we search for
 					// and any list dividers without regular rows shown under it
-					var any_in_the_bucket = false,
+					var childItems = false,
 							item;
-					
-					for (var i = list_items.length; i >= 0; i--) {
-						item = $(list_items[i]);
+
+					for (var i = listItems.length; i >= 0; i--) {
+						item = $(listItems[i]);
 						if (item.is("li[data-role=list-divider]")) {
-							if (!any_in_the_bucket) {
+							if (!childItems) {
 								item.hide();
 							}
 							// New bucket!
-							any_in_the_bucket = false;
+							childItems = false;
 						} else if (item.text().toLowerCase().indexOf( val ) === -1) {
 							item.hide();
 						} else {
 							// There's a shown item in the bucket
-							any_in_the_bucket = true;
+							childItems = true;
 						}
 					}
 				}
-				
-				//listview._numberItems();
 			})
 			.appendTo( wrapper )
 			.textinput();
-	
+
 	wrapper.insertBefore( list );
 });
 
