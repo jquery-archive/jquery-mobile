@@ -30,8 +30,14 @@ var dataPropertyName = "virtualMouseBindings",
 	activeDocHandlers = {},
 	blockMouseEvents = false,
 	resetTimerID = 0,
+	startX = 0,
+	startY = 0,
+	startScrollX = 0,
+	startScrollY = 0,
+	scrollThreshold = 10,
 	didScroll = false,
-	clickBlockList = [];
+	clickBlockList = [],
+	scrollTopSupported = $.support.scrollTop;
 
 function getNativeEvent(event)
 {
@@ -87,15 +93,56 @@ function getClosestElementWithVirtualBinding(element, eventType)
 	return null;
 }
 
-function disableMouseBindings()
+function enableTouchBindings()
 {
-	blockMouseEvents = true;
+	if (!activeDocHandlers["touchbindings"]){
+		var $document = $(document);
+		$document.bind("touchend", handleTouchEnd);
+		
+		// On touch platforms, touching the screen and then dragging your finger
+		// causes the window content to scroll after some distance threshold is
+		// exceeded. On these platforms, a scroll prevents a click event from being
+		// dispatched, and on some platforms, even the touchend is suppressed. To
+		// mimic the suppression of the click event, we need to watch for a scroll
+		// event. Unfortunately, some platforms like iOS don't dispatch scroll
+		// events until *AFTER* the user lifts their finger (touchend). This means
+		// we need to watch both scroll and touchmove events to figure out whether
+		// or not a scroll happenens before the touchend event is fired.
+		
+		$document.bind("touchmove", handleTouchMove);
+		$document.bind("scroll", handleScroll);
+		activeDocHandlers["touchbindings"] = 1;
+	}
+}
+
+function disableTouchBindings()
+{
+	if (activeDocHandlers["touchbindings"]){
+		var $document = $(document);
+		$document.unbind("touchmove", handleTouchMove);
+		$document.unbind("touchend", handleTouchEnd);
+		$document.unbind("scroll", handleScroll);
+		activeDocHandlers["touchbindings"] = 0;
+	}
 }
 
 function enableMouseBindings()
 {
 	blockMouseEvents = false;
 	clickBlockList.length = 0;
+
+	// When mouse bindings are enabled, our
+	// touch bindings are disabled.
+	disableTouchBindings();
+}
+
+function disableMouseBindings()
+{
+	blockMouseEvents = true;
+
+	// When mouse bindings are disabled, our
+	// touch bindings are enabled.
+	enableTouchBindings();
 }
 
 function startResetTimer()
@@ -147,32 +194,48 @@ function clearResetTimer()
 
 function handleTouchStart(event)
 {
-	clearResetTimer();
+	if (getClosestElementWithVirtualBinding(event.target)){
+		clearResetTimer();
+		
+		disableMouseBindings();
+		didScroll = false;
+		
+		var t = getNativeEvent(event).touches[0];
+		startX = t.pageX;
+		startY = t.pageY;
 	
-	disableMouseBindings();
-	didScroll = false;
+		if (scrollTopSupported){
+			startScrollX = window.pageXOffset;
+			startScrollY = window.pageYOffset;
+		}
+	
+		triggerVirtualEvent("vmouseover", event);
+		triggerVirtualEvent("vmousedown", event);
+	}
+}
 
-	var $document = $(document);
-	$document.bind("touchmove", handleTouchMove);
-	$document.bind("touchend", handleTouchEnd);
-	
-	triggerVirtualEvent("vmouseover", event);
-	triggerVirtualEvent("vmousedown", event);
+function handleScroll(event)
+{
+	didScroll = true;
+	startResetTimer();
 }
 
 function handleTouchMove(event)
 {
-	didScroll = true;
+	var t = getNativeEvent(event).touches[0];
+
+	didScroll = didScroll
+		|| (scrollTopSupported && (startScrollX != window.pageXOffset || startScrollY != window.pageYOffset))
+		|| (Math.abs(t.pageX - startX) > scrollThreshold || Math.abs(t.pageY - startY) > scrollThreshold);
+
 	triggerVirtualEvent("vmousemove", event);
 	startResetTimer();
 }
 
 function handleTouchEnd(event)
 {
-	var $document = $(document);
-	$document.unbind("touchmove", handleTouchMove);
-	$document.unbind("touchend", handleTouchEnd);
-	
+	disableTouchBindings();
+
 	triggerVirtualEvent("vmouseup", event);
 	if (!didScroll){
 		if (triggerVirtualEvent("vclick", event)){
