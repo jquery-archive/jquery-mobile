@@ -216,8 +216,8 @@
 		ul.listview('refresh');
 		ok(ul.find("#fiz img").hasClass("ui-li-thumb"));
 	});
-	
-	
+
+
 	module( "Search Filter with dividers", {
 		setup: function(){
 			location.href = location.href.split('#')[0] + "#search-filter-with-dividers-test";
@@ -225,8 +225,11 @@
 	});
 
 	asyncTest( "Filter downs results when the user enters information", function() {
-		$('.ui-page-active input').val('at');
-		$('.ui-page-active input').trigger('change');
+		// wait for the page to become active/enhanced
+		setTimeout(function(){
+			$('.ui-page-active input').val('at');
+			$('.ui-page-active input').trigger('change');
+		}, 500);
 
 		setTimeout(function() {
 			same($('.ui-page-active li[style^="display: none;"]').length, 4);
@@ -237,13 +240,16 @@
 	});
 
 	asyncTest( "Redisplay results when user removes values", function() {
-		$('.ui-page-active input').val('a');
-		$('.ui-page-active input').trigger('change');
+		// wait for the page to become active/enhanced
+		setTimeout(function(){
+			$('.ui-page-active input').val('a');
+			$('.ui-page-active input').trigger('change');
+		}, 500);
+		
 		setTimeout(function() {
 			same($('.ui-page-active input').val(), 'a');
 			same($('.ui-page-active li[style^="display: none;"]').length, 0);
 			start();
 		}, 1000);
 	});
-
 })(jQuery);
