@@ -294,7 +294,6 @@
 			$.each( urlHistory.stack, function( i ){
 				//if the url is in the stack, it's a forward or a back
 				if( this.url === url ){
-					urlIndex = i;
 					//define back and forward by whether url is older or newer than current page
 					back = i < urlHistory.activeIndex;
 					//forward set to opposite of back
