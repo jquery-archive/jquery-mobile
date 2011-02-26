@@ -288,7 +288,7 @@
 		if( fromHashChange ){
 
 			// determine new page index
-			var newActiveIndex = null;
+			var newActiveIndex;
 
 			// check if url is in history and if it's ahead or behind current page
 			$.each( urlHistory.stack, function( i ){
@@ -304,7 +304,7 @@
 			});
 
 			// save new page index
-			urlHistory.activeIndex = ( newActiveIndex != null ? newActiveIndex : urlHistory.activeIndex );
+			urlHistory.activeIndex = newActiveIndex ? newActiveIndex : urlHistory.activeIndex;
 
 			//if it's a back, use reverse animation
 			if( back ){
