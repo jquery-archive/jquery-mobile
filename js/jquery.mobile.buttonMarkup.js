@@ -83,21 +83,21 @@ $.fn.buttonMarkup.defaults = {
 
 var attachEvents = function() {
 	$(".ui-btn:not(.ui-disabled)").live({
-		"touchstart mousedown": function() {
+		"vmousedown": function() {
 			var theme = $(this).attr( "data-theme" );
-			$(this).removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-down-" + theme );
+			$(this).removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-down-" + theme + " " + $.mobile.activeBtnClass);
 		},
-		"touchmove touchend mouseup": function() {
+		"vmousemove vmouseup": function() {
 			var theme = $(this).attr( "data-theme" );
-			$(this).removeClass( "ui-btn-down-" + theme ).addClass( "ui-btn-up-" + theme );
+			$(this).removeClass( "ui-btn-down-" + theme + " " + $.mobile.activeBtnClass ).addClass( "ui-btn-up-" + theme );
 		},
-		"mouseover focus": function() {
+		"vmouseover focus": function() {
 			var theme = $(this).attr( "data-theme" );
 			$(this).removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-hover-" + theme );
 		},
-		"mouseout blur": function() {
+		"vmouseout blur": function() {
 			var theme = $(this).attr( "data-theme" );
-			$(this).removeClass( "ui-btn-hover-" + theme ).addClass( "ui-btn-up-" + theme );
+			$(this).removeClass( "ui-btn-hover-" + theme + " " + $.mobile.activeBtnClass ).addClass( "ui-btn-up-" + theme );
 		}
 	});
 

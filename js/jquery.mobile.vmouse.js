@@ -216,6 +216,10 @@ function handleTouchStart(event)
 
 function handleScroll(event)
 {
+	if (!didScroll){
+		triggerVirtualEvent("vmousecancel", event);
+	}
+
 	didScroll = true;
 	startResetTimer();
 }
@@ -224,10 +228,14 @@ function handleTouchMove(event)
 {
 	var t = getNativeEvent(event).touches[0];
 
+	var didCancel = didScroll;
 	didScroll = didScroll
 		|| (scrollTopSupported && (startScrollX != window.pageXOffset || startScrollY != window.pageYOffset))
 		|| (Math.abs(t.pageX - startX) > scrollThreshold || Math.abs(t.pageY - startY) > scrollThreshold);
 
+	if (didScroll && !didCancel){
+		triggerVirtualEvent("vmousecancel", event);
+	}
 	triggerVirtualEvent("vmousemove", event);
 	startResetTimer();
 }
