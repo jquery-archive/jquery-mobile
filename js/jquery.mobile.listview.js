@@ -169,6 +169,23 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			self = this,
 			dividertheme = $list.data( "dividertheme" ) || o.dividerTheme;
 
+		// Insert item to cache.
+		if ( index >= this._listItems.length )
+			this._listItems.push( item );
+		else if ( index < 1 )
+			this._listItems.unshift( item );
+		else
+			this._listItems.splice( index, 0, item );
+
+		// Add the list item to DOM if it's not added.
+		if ( item.parent()[0] != $list[0] )
+		{
+			if ( index >= this._listItems.length - 1 )
+				$list.append( item );
+			else
+				this._listItems[ index + 1 ].before( item );
+		}
+
 		item.attr({ "role": "option", "tabindex": "-1" });
 		if ( index < 1 )
 			item.attr( "tabindex", "0" );
@@ -235,13 +252,6 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			itemClass += " ui-li-static ui-btn-up-" + itemTheme;
 		}
 		
-		if ( index >= this._listItems.length )
-			this._listItems.push( item );
-		else if ( index < 1 )
-			this._listItems.unshift( item );
-		else
-			this._listItems.splice( index, 0, item );
-
 		if( o.inset ){
 			if ( index === 0 ) {
 					// Add corner style for the new top list item.
@@ -313,12 +323,15 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		item.remove();
 
 		// Fix the top and bottom corner styles.
-		if ( this._listItems.length > 0 )
+		if ( this.options.inset )
 		{
-			if ( index < 1 )
-				this._addCorners( this._listItems[0], 0x01 );
-			if ( index >= this._listItems.length )
-				this._addCorners( this._listItems[ this._listItems.length - 1 ], 0x02 );
+			if ( this._listItems.length > 0 )
+			{
+				if ( index < 1 )
+					this._addCorners( this._listItems[0], 0x01 );
+				if ( index >= this._listItems.length )
+					this._addCorners( this._listItems[ this._listItems.length - 1 ], 0x02 );
+			}
 		}
 	},
 
@@ -379,7 +392,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 		var parent = list.parent(),
 				title = $.trim(parent.contents()[ 0 ].nodeValue) || parent.find('a:first').text(),
-				id = parentId + "&" + $.mobile.subPageUrlKey + "=" + self._idStringEscape(title + " " + ( ++this._subpageCount ) ),
+				id = parentId + "&" + $.mobile.subPageUrlKey + "=" + self._idStringEscape(title + " " + ( this._subpageCount++ ) ),
 				theme = list.data( "theme" ) || o.theme,
 				countTheme = list.data( "counttheme" ) || parentList.data( "counttheme" ) || o.countTheme,
 				newPage = list.wrap( "<div data-role='page'><div data-role='content'></div></div>" )

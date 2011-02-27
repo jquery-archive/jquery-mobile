@@ -267,4 +267,96 @@
 			start();
 		}, 1000);
 	});
+
+	module( "Add and Delete List Items", {
+		setup: function(){
+			location.href = location.href.split('#')[0] + "#dynamic-add-delete";
+		}
+	});
+
+	asyncTest( "Correct corner styles on item insertion", function() {
+		// wait for the page to become active/enhanced
+		setTimeout(function(){
+			var $list = $(".ui-page-active ul");
+			same($list.find("li").length, 0, "list should start empty");
+			$list.listview("push", $("<li>b is for batman</li>"));
+			same($list.find("li").length, 1, "one item added");
+
+			var $batman = $list.find("li:first");
+			ok($batman.hasClass("ui-corner-top ui-corner-bottom"), "both top and bottom styles on lone item");
+
+			$list.listview("push", $("<li>c is for catwoman</li>"));
+			var $catwoman = $list.find("li:last");
+			same($list.find("li").length, 2, "two items added");
+			ok($catwoman.hasClass("ui-corner-bottom"), "bottom item should have bottom style");
+			ok($batman.hasClass("ui-corner-top"), "top item should retain top style");
+			ok(!$batman.hasClass("ui-corner-bottom"), "top item should lose bottom style");
+
+			$list.listview("insert", $("<li>a is for aquaman</li>"), 0);
+			var $aquaman = $list.find("li:first");
+			same($list.find("li").length, 3, "three items added");
+			same($aquaman.prev("li").length, 0, "insertion order check");
+			ok($aquaman.hasClass("ui-corner-top"), "top item should acquire top style");
+			ok(!$batman.hasClass("ui-corner-top") && !$batman.hasClass("ui-corner-bottom"), "middle item should lose all corner styles");
+			ok($catwoman.hasClass("ui-corner-bottom"), "bottom item should retain bottom styles");
+			start();
+		}, 500);
+	});
+
+	asyncTest( "Correct corner styles on item deletion", function() {
+		// wait for the page to become active/enhanced
+		setTimeout(function(){
+			var $list = $(".ui-page-active ul");
+			same($list.find("li").length, 3, "three items should have been added");
+
+			var $aquaman = $list.find("li:first"),
+				$batman = $list.find("li:eq(1)"),
+				$catwoman = $list.find("li:last");
+
+			$list.listview("pop");
+			same($catwoman.parent().length, 0, "removed the last item");
+			ok($batman.hasClass("ui-corner-bottom"), "new bottom item acquires bottom styles");
+			ok(!$batman.hasClass("ui-corner-top"), "new bottom item has no top styles");
+			ok($aquaman.hasClass("ui-corner-top"), "top item retains top styles");
+
+			$list.listview("pop", 0);
+			same($aquaman.parent().length, 0, "removed the first item");
+			same($list.find("li").length, 1, "one item left in list");
+			ok($batman.hasClass("ui-corner-bottom ui-corner-top"), "lone item acquires both top and bottom styles");
+
+			start();
+		}, 500);
+	});
+
+	asyncTest( "Correct insertion orders and deletion", function() {
+		location.href = location.href.split('#')[0] + "#dynamic-add-delete-no-inset";
+
+		// wait for the page to become active/enhanced
+		setTimeout(function(){
+			var $list = $(".ui-page-active ul"),
+				$aquaman = $("<li>a is for aquaman</li>"),
+				$batman = $("<li>b is for batman</li>"),
+				$catwoman = $("<li>c is for catwoman</li>");
+
+			$list.listview("insert", $catwoman, 0);
+			$list.listview("insert", $aquaman, 0);
+			$list.listview("insert", $batman, 1);
+
+			same($aquaman.next("li")[0], $batman[0], "correct ordering 1");
+			same($batman.next("li")[0], $catwoman[0], "correct ordering 2");
+			ok(!$aquaman.hasClass("ui-corner-top"), "no top styles inserting to no-inset list");
+			ok(!$catwoman.hasClass("ui-corner-bottom"), "no bottom styles inserting to no-inset list");
+
+			$list.listview("remove", $batman);
+			same($batman.parent().length, 0, "deleted the correct item");
+
+			$list.listview("push", $batman);
+			same($catwoman.next("li")[0], $batman[0], "inserting already initialized items work");
+
+			$list.listview("remove", $aquaman);
+			ok(!$catwoman.hasClass("ui-corner-top"), "no top styles removing from no-inset list");
+
+			start();
+		}, 500);
+	});
 })(jQuery);
