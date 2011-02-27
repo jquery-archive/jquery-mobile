@@ -32,6 +32,7 @@ FILES = js/jquery.ui.widget.js \
   js/jquery.mobile.dialog.js \
   js/jquery.mobile.navbar.js \
   js/jquery.mobile.grid.js \
+  js/jquery.mobile.notification.js \
   js/jquery.mobile.init.js
 
 CSSFILES =  themes/default/jquery.mobile.theme.css \

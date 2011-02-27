@@ -25,6 +25,7 @@ $elements = array(
 	'jquery.mobile.dialog.js',
 	'jquery.mobile.navbar.js',
 	'jquery.mobile.grid.js',
+	'jquery.mobile.notification.js',
 	'jquery.mobile.init.js'
 );
 
