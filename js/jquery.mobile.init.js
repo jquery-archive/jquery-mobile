@@ -20,7 +20,12 @@
 
 			//add dialogs, set data-url attrs
 			$pages.add( "[data-role='dialog']" ).each(function(){
-				$(this).attr( "data-url", $(this).attr( "id" ));
+				var $this = $(this);
+
+				// unless the data url is already set set it to the id
+				if( !$this.data('url') ){
+					$this.attr( "data-url", $this.attr( "id" ) );
+				}
 			});
 
 			//define first page in dom case one backs out to the directory root (not always the first page visited, but defined as fallback)
