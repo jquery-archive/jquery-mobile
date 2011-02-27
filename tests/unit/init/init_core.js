@@ -1,7 +1,6 @@
 /*
  * mobile init tests
  */
-
 (function($){
 	var mobilePage = undefined, mobileSelect = undefined,
 	    libName = 'jquery.mobile.init.js',
@@ -121,5 +120,13 @@
 			stop();
 			$.testHelper.reloadLib(libName);
 		});
-	});
+
+		test( "pages without a data-url attribute have it set to their id", function(){
+			same($("#foo").data('url'), "foo");
+		});
+
+		test( "pages with a data-url attribute are left with the original value", function(){
+			same($("#bar").data('url'), "bak");
+		});
+});
 })(jQuery);
