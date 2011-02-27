@@ -128,5 +128,5 @@
 		test( "pages with a data-url attribute are left with the original value", function(){
 			same($("#bar").data('url'), "bak");
 		});
-});
+	});
 })(jQuery);
