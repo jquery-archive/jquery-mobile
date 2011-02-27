@@ -145,190 +145,269 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		}
 	},
 	
-	_removeCorners: function(li){
-		li
-			.add( li.find(".ui-btn-inner, .ui-li-link-alt, .ui-li-thumb") )
-			.removeClass( "ui-corner-top ui-corner-bottom ui-corner-br ui-corner-bl ui-corner-tr ui-corner-tl" );
-	},
-	
 	refresh: function( create ) {
+		// Cache some long-term attributes here to make adding items one-by-one fast.
+		this._parentPage = this.element.closest( ".ui-page" );
+		this._parentId = this._parentPage.data( "url" );
+		this._persistentFooterID = this._parentPage.find( "[data-role='footer']" ).data( "id" );
+		this._subpageCount = 0;
+		this._listItems = [];
+
 		this._createSubPages();
 		
+		var self = this;
+		var li = this.element.children( "li" );
+		$( li.toArray() ).each( function( i ) {
+			self.insert( $( this ), i, create );
+		});
+	},
+
+	insert: function( item, index, create )
+	{
 		var o = this.options,
 			$list = this.element,
 			self = this,
-			dividertheme = $list.data( "dividertheme" ) || o.dividerTheme,
-			li = $list.children( "li" ),
-			counter = $.support.cssPseudoElement || !$.nodeName( $list[0], "ol" ) ? 0 : 1;
+			dividertheme = $list.data( "dividertheme" ) || o.dividerTheme;
 
-		if ( counter ) {
-			$list.find( ".ui-li-dec" ).remove();
+		item.attr({ "role": "option", "tabindex": "-1" });
+		if ( index < 1 )
+			item.attr( "tabindex", "0" );
+
+		var itemClass = "ui-li";
+
+		// If we're creating the element, we update it regardless
+		if ( !create && item.hasClass( "ui-li" ) ) {
+			return;
 		}
 
-		li.attr({ "role": "option", "tabindex": "-1" });
+		var itemTheme = item.data("theme") || o.theme;
 
-		li.first().attr( "tabindex", "0" );
+		var a = item.find( "a" );
+			
+		if ( a.length ) {	
+			var icon = item.data("icon");
+			
+			item
+				.buttonMarkup({
+					wrapperEls: "div",
+					shadow: false,
+					corners: false,
+					iconpos: "right",
+					icon: a.length > 1 || icon === false ? false : icon || "arrow-r",
+					theme: itemTheme
+				});
 
-		li.each(function( pos ) {
-			var item = $( this ),
-				itemClass = "ui-li";
+			a.first().addClass( "ui-link-inherit" );
 
-			// If we're creating the element, we update it regardless
-			if ( !create && item.hasClass( "ui-li" ) ) {
-				return;
-			}
+			if ( a.length > 1 ) {
+				itemClass += " ui-li-has-alt";
 
-			var itemTheme = item.data("theme") || o.theme;
-
-			var a = item.find( "a" );
+				var last = a.last(),
+					splittheme = $list.data( "splittheme" ) || last.data( "theme" ) || o.splitTheme;
 				
-			if ( a.length ) {	
-				var icon = item.data("icon");
-				
-				item
+				last
+					.appendTo(item)
+					.attr( "title", last.text() )
+					.addClass( "ui-li-link-alt" )
+					.empty()
 					.buttonMarkup({
-						wrapperEls: "div",
 						shadow: false,
 						corners: false,
-						iconpos: "right",
-						icon: a.length > 1 || icon === false ? false : icon || "arrow-r",
-						theme: itemTheme
-					});
+						theme: itemTheme,
+						icon: false,
+						iconpos: false
+					})
+					.find( ".ui-btn-inner" )
+						.append( $( "<span>" ).buttonMarkup({
+							shadow: true,
+							corners: true,
+							theme: splittheme,
+							iconpos: "notext",
+							icon: $list.data( "spliticon" ) || last.data( "icon" ) ||  o.splitIcon
+						} ) );
+			}
 
-				a.first().addClass( "ui-link-inherit" );
+		} else if ( item.data( "role" ) === "list-divider" ) {
+			itemClass += " ui-li-divider ui-btn ui-bar-" + dividertheme;
+			item.attr( "role", "heading" );
 
-				if ( a.length > 1 ) {
-					itemClass += " ui-li-has-alt";
+		} else {
+			itemClass += " ui-li-static ui-btn-up-" + itemTheme;
+		}
+		
+		if ( index >= this._listItems.length )
+			this._listItems.push( item );
+		else if ( index < 1 )
+			this._listItems.unshift( item );
+		else
+			this._listItems.splice( index, 0, item );
 
-					var last = a.last(),
-						splittheme = $list.data( "splittheme" ) || last.data( "theme" ) || o.splitTheme;
+		if( o.inset ){
+			if ( index === 0 ) {
+					// Add corner style for the new top list item.
+					this._addCorners( item, 0x01 );
+
+					// Remove the corner styles for the previously top list item.
+					if( this._listItems.length > 1 ){
+						var li = this._listItems[ 1 ];
+						this._removeCorners( li, 0x01 );
+					}
+
+			}
+			if ( index === this._listItems.length - 1 ) {
+					// Add corner style for the new bottom list item.
+					this._addCorners( item, 0x02 );
 					
-					last
-						.appendTo(item)
-						.attr( "title", last.text() )
-						.addClass( "ui-li-link-alt" )
-						.empty()
-						.buttonMarkup({
-							shadow: false,
-							corners: false,
-							theme: itemTheme,
-							icon: false,
-							iconpos: false
-						})
-						.find( ".ui-btn-inner" )
-							.append( $( "<span>" ).buttonMarkup({
-								shadow: true,
-								corners: true,
-								theme: splittheme,
-								iconpos: "notext",
-								icon: $list.data( "spliticon" ) || last.data( "icon" ) ||  o.splitIcon
-							} ) );
-				}
-
-			} else if ( item.data( "role" ) === "list-divider" ) {
-				itemClass += " ui-li-divider ui-btn ui-bar-" + dividertheme;
-				item.attr( "role", "heading" );
-
-				//reset counter when a divider heading is encountered
-				if ( counter ) {
-					counter = 1;
-				}
-
-			} else {
-				itemClass += " ui-li-static ui-btn-up-" + itemTheme;
+					// Remove the corner styles for the previously bottom list item.
+					if( this._listItems.length > 1 ){
+						var li = this._listItems[ this._listItems.length - 2 ];
+						this._removeCorners( li, 0x02 );
+					}	
 			}
-			
-			
-			if( o.inset ){	
-				if ( pos === 0 ) {
-						itemClass += " ui-corner-top";
-	
-						item
-							.add( item.find( ".ui-btn-inner" ) )
-							.find( ".ui-li-link-alt" )
-								.addClass( "ui-corner-tr" )
-							.end()
-							.find( ".ui-li-thumb" )
-								.addClass( "ui-corner-tl" );
-						if(item.next().next().length){
-							self._removeCorners( item.next() );		
-						}
-	
-				}
-				if ( pos === li.length - 1 ) {
-						itemClass += " ui-corner-bottom";
-	
-						item
-							.add( item.find( ".ui-btn-inner" ) )
-							.find( ".ui-li-link-alt" )
-								.addClass( "ui-corner-br" )
-							.end()
-							.find( ".ui-li-thumb" )
-								.addClass( "ui-corner-bl" );
-						
-						if(item.prev().prev().length){
-							self._removeCorners( item.prev() );		
-						}	
-				}
+		}
+
+		item.addClass( itemClass );
+
+		if ( !create ) {
+			self._itemApply( $list, item );
+		}
+	},
+
+	push: function( item, create )
+	{
+		this.insert( item, this._listItems.length, create );
+	},
+
+	remove : function( item )
+	{
+		var index = -1;
+		for ( var i = 0 ; i < this._listItems.length ; i++ )
+		{
+			if ( item[0] == this._listItems[i][0] )
+			{
+				index = i;
+				break;
 			}
+		}
 
+		if ( index >= 0 )
+			this.pop( index );
+	},
 
-			if ( counter && itemClass.indexOf( "ui-li-divider" ) < 0 ) {
-				item
-					.find( ".ui-link-inherit" ).first()
-					.addClass( "ui-li-jsnumbering" )
-					.prepend( "<span class='ui-li-dec'>" + (counter++) + ". </span>" );
-			}
+	pop: function( index )
+	{
+		// If no index is given, remove the last item.
+		if ( index === undefined )
+			index = this._listItems.length - 1;
 
-			item.addClass( itemClass );
+		// Remove item from cache.
+		var item = null;
+		if ( index < 1 )
+			item = this._listItems.shift();
+		else if ( index >= this._listItems.length - 1 )
+			item = this._listItems.pop();
+		else
+			item = this._listItems.splice( index, 1 )[0];
 
-			if ( !create ) {
-				self._itemApply( $list, item );
-			}
-		});
+		// Remove item from DOM.
+		item.remove();
+
+		// Fix the top and bottom corner styles.
+		if ( this._listItems.length > 0 )
+		{
+			if ( index < 1 )
+				this._addCorners( this._listItems[0], 0x01 );
+			if ( index >= this._listItems.length )
+				this._addCorners( this._listItems[ this._listItems.length - 1 ], 0x02 );
+		}
+	},
+
+	_addCorners: function( item, positions )
+	{
+		// positions is a bitfield, 0x01 means top, 0x02 means bottom.
+		var itemClasses = [];
+		var leftClasses = [];
+		var rightClasses = [];
+
+		if ( positions & 0x01 )
+		{
+			itemClasses.push( "ui-corner-top" );
+			leftClasses.push( "ui-corner-tl" );
+			rightClasses.push( "ui-corner-tr" );
+		}
+		
+		if ( positions & 0x02 )
+		{
+			itemClasses.push( "ui-corner-bottom" );
+			leftClasses.push( "ui-corner-bl" );
+			rightClasses.push( "ui-corner-br" );
+		}
+
+		item.addClass( itemClasses.join( " " ) );
+		item
+			.add( item.find( ".ui-btn-inner" ) )
+			.find( ".ui-li-link-alt" )
+				.addClass( rightClasses.join( " " ) )
+			.end()
+			.find( ".ui-li-thumb" )
+				.addClass( leftClasses.join( " " ) );
+	},
+
+	_removeCorners: function( item, positions )
+	{
+		// positions is a bitfield, 0x01 means top, 0x02 means bottom.
+		var nodes = item.add( item.find(".ui-btn-inner, .ui-li-link-alt, .ui-li-thumb") );
+
+		if ( positions & 0x01 )
+			nodes.removeClass( "ui-corner-top ui-corner-tr ui-corner-tl" );
+		if ( positions & 0x02 )
+			nodes.removeClass( "ui-corner-bottom ui-corner-br ui-corner-bl" );
 	},
 	
 	//create a string for ID/subpage url creation
 	_idStringEscape: function( str ){
 		return str.replace(/[^a-zA-Z0-9]/g, '-');
 	},
-	
-	_createSubPages: function() {
+
+	_createSubPage: function(list) {
 		var parentList = this.element,
-			parentPage = parentList.closest( ".ui-page" ),
-			parentId = parentPage.data( "url" ),
+			parentPage = this._parentPage,
+			parentId = this._parentId,
 			o = this.options,
 			self = this,
-			persistentFooterID = parentPage.find( "[data-role='footer']" ).data( "id" );
+			persistentFooterID = this._persistentFooterID;
 
-		$( parentList.find( "ul, ol" ).toArray().reverse() ).each(function( i ) {
-			var list = $( this ),
-				parent = list.parent(),
+		var parent = list.parent(),
 				title = $.trim(parent.contents()[ 0 ].nodeValue) || parent.find('a:first').text(),
-				id = parentId + "&" + $.mobile.subPageUrlKey + "=" + self._idStringEscape(title + " " + i),
+				id = parentId + "&" + $.mobile.subPageUrlKey + "=" + self._idStringEscape(title + " " + ( ++this._subpageCount ) ),
 				theme = list.data( "theme" ) || o.theme,
 				countTheme = list.data( "counttheme" ) || parentList.data( "counttheme" ) || o.countTheme,
 				newPage = list.wrap( "<div data-role='page'><div data-role='content'></div></div>" )
-							.parent()
-								.before( "<div data-role='header' data-theme='" + o.headerTheme + "'><div class='ui-title'>" + title + "</div></div>" )
-								.after( persistentFooterID ? $( "<div>", { "data-role": "footer", "data-id": persistentFooterID, "class": "ui-footer-duplicate" } ) : "" )
-								.parent()
-									.attr({
-										"data-url": id,
-										"data-theme": theme,
-										"data-count-theme": countTheme
-									})
-									.appendTo( $.mobile.pageContainer );
-				
-				
-				
-				newPage.page();		
+					.parent()
+						.before( "<div data-role='header' data-theme='" + o.headerTheme + "'><div class='ui-title'>" + title + "</div></div>" )
+						.after( persistentFooterID ? $( "<div>", { "data-role": "footer", "data-id": persistentFooterID, "class": "ui-footer-duplicate" } ) : "" )
+						.parent()
+							.attr({
+								"data-url": id,
+								"data-theme": theme,
+								"data-count-theme": countTheme
+							})
+							.appendTo( $.mobile.pageContainer );
+		
+			newPage.page();		
 			var anchor = parent.find('a:first');
 			if (!anchor.length) {
 				anchor = $("<a></a>").html(title).prependTo(parent.empty());
 			}
 			anchor.attr('href','#' + id);
-		}).listview();
+			list.listview();
+	},
+	
+	_createSubPages: function() {
+		var self = this;
+		$( this.element.find( "ul, ol" ).toArray().reverse() ).each(function( i ) {
+			self._createSubPage( $( this ) );
+		});
 	}
 });
 
