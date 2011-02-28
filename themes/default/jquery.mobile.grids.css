@@ -8,6 +8,10 @@
 .ui-grid-a, .ui-grid-b, .ui-grid-c, .ui-grid-d { overflow: hidden; }
 .ui-block-a, .ui-block-b, .ui-block-c, .ui-block-d, .ui-block-e { margin: 0; padding: 0; border: 0; float: left; }
 
+/* grid a: 100 */
+.ui-grid-e .ui-block-a { width: 100%; }
+.ui-grid-e .ui-block-a { clear: left; }
+
 /* grid a: 50/50 */
 .ui-grid-a .ui-block-a, .ui-grid-a .ui-block-b { width: 50%; }
 .ui-grid-a .ui-block-a { clear: left; }
