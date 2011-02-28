@@ -94,5 +94,23 @@
 <div id="no-trans-dialog" data-role="page">
 </div>
 
+<div id="dup-history-first" data-role="page">
+  <a href="#dup-history-second" data-transition="slideup" data-role="button" >
+		Page 2
+	</a>
+</div>
+
+<div id="dup-history-second" data-role="page">
+  <a href="#dup-history-first" data-transition="slideup" data-role="button">
+		Page 1
+	</a>
+  <a href="#dup-history-dialog" data-role="button" data-transition="pop" data-rel="dialog">Dialog</a>
+</div>
+
+<div id="dup-history-dialog" data-role="dialog">
+   <div data-role="header" data-position="inline">
+     <h1>Dialog</h1>
+   </div>
+</div>
 </body>
 </html>

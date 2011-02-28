@@ -146,4 +146,9 @@
 			start();
 		}, 900);
 	});
+
+	test( "animationComplete return value", function(){
+		$.fn.animationComplete = animationCompleteFn;
+		equals($("#foo").animationComplete(function(){})[0], $("#foo")[0]);
+	});
 })(jQuery);
