@@ -32,3 +32,5 @@ label.ui-select { font-size: 16px; line-height: 1.4;  font-weight: normal; margi
 
 /* when no placeholder is defined in a multiple select, the header height doesn't even extend past the close button.  this shim's content in there */
 .ui-selectmenu .ui-header h1:after { content: '.'; visibility: hidden; }
+
+.ui-selectmenu .ui-header .ui-title { margin: 0.6em 46px 0.8em }
