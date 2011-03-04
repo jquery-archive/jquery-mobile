@@ -12,7 +12,54 @@
 			$head = $( "head" ),
 			$window = $( window );
 
+ 	//trigger mobileinit event - useful hook for configuring $.mobile settings before they're used
+	$( window.document ).trigger( "mobileinit" );
+
+	//support conditions
+	//if device support condition(s) aren't met, leave things as they are -> a basic, usable experience,
+	//otherwise, proceed with the enhancements
+	if ( !$.mobile.gradeA() ) {
+		return;
+	}
+
+	//add mobile, initial load "rendering" classes to docEl
+	$html.addClass( "ui-mobile ui-mobile-rendering" );
+
+	//define & prepend meta viewport tag, if content is defined
+	$.mobile.metaViewportContent ? $( "<meta>", { name: "viewport", content: $.mobile.metaViewportContent}).prependTo( $head ) : undefined;
+
+	//loading div which appears during Ajax requests
+	//will not appear if $.mobile.loadingMessage is false
+	var $loader = $.mobile.loadingMessage ?
+		$( "<div class='ui-loader ui-body-a ui-corner-all'>" +
+				 "<span class='ui-icon ui-icon-loading spin'></span>" +
+				 "<h1>" + $.mobile.loadingMessage + "</h1>" +
+			 "</div>" )
+		: undefined;
+
+
 	$.extend($.mobile, {
+		// turn on/off page loading message.
+		pageLoading: function ( done ) {
+			if ( done ) {
+				$html.removeClass( "ui-loading" );
+			} else {
+				if( $.mobile.loadingMessage ){
+					var activeBtn = $( "." + $.mobile.activeBtnClass ).first();
+
+					$loader
+						.appendTo( $.mobile.pageContainer )
+						//position at y center (if scrollTop supported), above the activeBtn (if defined), or just 100px from top
+						.css( {
+							top: $.support.scrollTop && $(window).scrollTop() + $(window).height() / 2 ||
+							activeBtn.length && activeBtn.offset().top || 100
+						} );
+				}
+
+				$html.addClass( "ui-loading" );
+			}
+		},
+
 		// find and enhance the pages in the dom and transition to the first page.
 		initializePage: function(){
 			//find present pages
@@ -47,22 +94,6 @@
 			}
 		}
 	});
-
- 	//trigger mobileinit event - useful hook for configuring $.mobile settings before they're used
-	$( window.document ).trigger( "mobileinit" );
-
-	//support conditions
-	//if device support condition(s) aren't met, leave things as they are -> a basic, usable experience,
-	//otherwise, proceed with the enhancements
-	if ( !$.mobile.gradeA() ) {
-		return;
-	}
-
-	//add mobile, initial load "rendering" classes to docEl
-	$html.addClass( "ui-mobile ui-mobile-rendering" );
-
-	//define & prepend meta viewport tag, if content is defined
-	$.mobile.metaViewportContent ? $( "<meta>", { name: "viewport", content: $.mobile.metaViewportContent}).prependTo( $head ) : undefined;
 
 	//dom-ready inits
 	$( $.mobile.initializePage );
