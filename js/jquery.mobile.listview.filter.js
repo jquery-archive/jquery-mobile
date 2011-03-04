@@ -16,25 +16,41 @@ $( "[data-role='listview']" ).live( "listviewcreate", function() {
 	}
 
 	var wrapper = $( "<form>", { "class": "ui-listview-filter ui-bar-c", "role": "search" } ),
-		
+
 		search = $( "<input>", {
 				placeholder: "Filter results...",
 				"data-type": "search"
 			})
 			.bind( "keyup change", function() {
-				var val = this.value.toLowerCase();;
-				list.children().show();
+				var val = this.value.toLowerCase(),
+						listItems = list.children();
+				listItems.show();
 				if ( val ) {
-					list.children().filter(function() {
-						return $( this ).text().toLowerCase().indexOf( val ) === -1;
-					}).hide();
+					// This handles hiding regular rows without the text we search for
+					// and any list dividers without regular rows shown under it
+					var childItems = false,
+							item;
+
+					for (var i = listItems.length; i >= 0; i--) {
+						item = $(listItems[i]);
+						if (item.is("li[data-role=list-divider]")) {
+							if (!childItems) {
+								item.hide();
+							}
+							// New bucket!
+							childItems = false;
+						} else if (item.text().toLowerCase().indexOf( val ) === -1) {
+							item.hide();
+						} else {
+							// There's a shown item in the bucket
+							childItems = true;
+						}
+					}
 				}
-				
-				//listview._numberItems();
 			})
 			.appendTo( wrapper )
 			.textinput();
-	
+
 	wrapper.insertBefore( list );
 });
 

@@ -228,5 +228,21 @@
 	test( "data url works when role and url are reversed on the page element", function(){
 		testDataUrlHash("#reverse-attr-data-url a", /^#foo\/bar\/reverse.html$/);
 	});
+
+	asyncTest( "last entry choosen amongst multiple identical url history stack entries on hash change", function(){
+		$.testHelper.openPage("#dup-history-first");
+
+		$.testHelper.sequence([
+			function(){ $("#dup-history-first a").click(); },
+			function(){ $("#dup-history-second a:first").click(); },
+			function(){ $("#dup-history-first a").click(); },
+			function(){ $("#dup-history-second a:last").click(); },
+			function(){ $("#dup-history-dialog .ui-icon-delete").click(); },
+			function(){
+				// third page because the first opened page is manual hash manip
+				same($.mobile.urlHistory.activeIndex, 3, "should be the third page in the stack");
+				start();
+			}], 1000);
+	});
 })(jQuery);
 

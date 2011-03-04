@@ -53,6 +53,16 @@
 			} else {
 				setTimeout($.testHelper.hideActivePageWhenComplete, 500);
 			}
+		},
+
+		openPage: function(hash){
+			location.href = location.href.split('#')[0] + hash;
+		},
+
+		sequence: function(fns, interval){
+			$.each(fns, function(i, fn){
+				setTimeout(fn, i * interval);
+			});
 		}
 	};
 })(jQuery);

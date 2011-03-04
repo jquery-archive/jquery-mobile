@@ -15,7 +15,7 @@
 		teardown: function(){
 			$("#scroll-testing").remove();
 		}
-			});
+	});
 
 	var scrollUp = function( pos ){
 		$(window).scrollTop(1000);

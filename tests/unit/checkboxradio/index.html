@@ -2,37 +2,36 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8" />
-	<title>jQuery Mobile Dialog Test Suite</title>
+	<title>jQuery Mobile Page Test Suite</title>
 
 	<script type="text/javascript" src="../../../js/jquery.js"></script>
 	<script type="text/javascript" src="../../../js/"></script>
 	<script type="text/javascript" src="../../../tests/jquery.testHelper.js"></script>
 
-
-	<link rel="stylesheet" href="../../../themes/default/" type="text/css"/>
 	<link rel="stylesheet" href="../../../external/qunit.css" type="text/css"/>
 	<script type="text/javascript" src="../../../external/qunit.js"></script>
 
-	<script type="text/javascript" src="dialog_events.js"></script>
+	<script type="text/javascript" src="checkboxradio_core.js"></script>
 </head>
 <body>
 
-<h1 id="qunit-header">jQuery Mobile Dialog Test Suite</h1>
+<h1 id="qunit-header">jQuery Mobile Page Test Suite</h1>
 <h2 id="qunit-banner"></h2>
 <h2 id="qunit-userAgent"></h2>
 <ol id="qunit-tests">
 </ol>
 
-<div id="bar" data-role="page">
-	<a href="#foo-dialog" data-role="button" data-inline="true" data-rel="dialog"></a>
-</div>
-
-<div id="foo-dialog" data-role="dialog">
-	<div data-role="header" data-theme="d" data-position="inline">
-		<h1>Dialog</h1>
+<div id="qunit-fixture">
+	<div data-role="page">
+		<div data-role="content">
+			<div data-role="fieldcontain">
+				<fieldset data-role="controlgroup">
+					<legend>Agree to the terms:</legend>
+					<input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" />
+					<label for="checkbox-1">I agree</label>
+					</fieldset>
+			</div>
+		</div>
 	</div>
-	<a href="#" id="internal-link">foo</a>
-</div>
-
 </body>
 </html>
