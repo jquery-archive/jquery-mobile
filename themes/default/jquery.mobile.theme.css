@@ -73,7 +73,6 @@
 	background: 			#333333;
 	font-weight: bold;
 	color: 					#fff;
-	cursor: pointer;
 	text-shadow: 0 -1px 1px #000;
 	text-decoration: none;
 	background-image: -moz-linear-gradient(top, 
@@ -194,7 +193,6 @@
 	background: 			#2567ab;
 	font-weight: bold;
 	color: 					#fff;
-	cursor: pointer;
 	text-shadow: 0 -1px 1px #145072;
 	text-decoration: none;
 	background-image: -moz-linear-gradient(top, 
@@ -307,7 +305,6 @@
 	background: 			#eee;
 	font-weight: bold;
 	color: 					#444;
-	cursor: pointer;
 	text-shadow: 0 1px 1px #f6f6f6;
 	text-decoration: none;
 	background-image: -moz-linear-gradient(top, 
@@ -541,7 +538,6 @@
 	background: 			#fadb4e;
 	font-weight: bold;
 	color: 					#333;
-	cursor: pointer;
 	text-shadow: 0 1px 1px 	#fe3;
 	text-decoration: none;
 	text-shadow: 0 1px 0 	#fff;
