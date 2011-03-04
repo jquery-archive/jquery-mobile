@@ -95,41 +95,10 @@
 	//define vars for interal use
 	var $window = $(window),
 		$html = $( "html" ),
-		$head = $( "head" ),
-
-		//loading div which appears during Ajax requests
-		//will not appear if $.mobile.loadingMessage is false
-		$loader = $.mobile.loadingMessage ?
-			$( "<div class='ui-loader ui-body-a ui-corner-all'>" +
-						"<span class='ui-icon ui-icon-loading spin'></span>" +
-						"<h1>" + $.mobile.loadingMessage + "</h1>" +
-					"</div>" )
-			: undefined;
+		$head = $( "head" );
 
 	//expose some core utilities
 	$.extend($.mobile, {
-
-		// turn on/off page loading message.
-		pageLoading: function ( done ) {
-			if ( done ) {
-				$html.removeClass( "ui-loading" );
-			} else {
-				if( $.mobile.loadingMessage ){
-					var activeBtn =$( "." + $.mobile.activeBtnClass ).first();
-
-					$loader
-						.appendTo( $.mobile.pageContainer )
-						//position at y center (if scrollTop supported), above the activeBtn (if defined), or just 100px from top
-						.css( {
-							top: $.support.scrollTop && $(window).scrollTop() + $(window).height() / 2 ||
-							activeBtn.length && activeBtn.offset().top || 100
-						} );
-				}
-
-				$html.addClass( "ui-loading" );
-			}
-		},
-
 		//scroll page vertically: scroll to 0 to hide iOS address bar, or pass a Y value
 		silentScroll: function( ypos ) {
 			ypos = ypos || 0;
