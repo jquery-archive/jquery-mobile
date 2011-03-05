@@ -56,7 +56,7 @@
 	});
 
 	test( "path.get method is working properly", function(){
-		window.location.hash = "foo"
+		window.location.hash = "foo";
 		same($.mobile.path.get(), "foo", "get method returns location.hash minus hash character");
 		same($.mobile.path.get( "#foo/bar/baz.html" ), "foo/bar/", "get method with hash arg returns path with no filename or hash prefix");
 		same($.mobile.path.get( "#foo/bar/baz.html/" ), "foo/bar/baz.html/", "last segment of hash is retained if followed by a trailing slash");
@@ -241,6 +241,19 @@
 			function(){
 				// third page because the first opened page is manual hash manip
 				same($.mobile.urlHistory.activeIndex, 3, "should be the third page in the stack");
+				start();
+			}], 1000);
+	});
+
+	asyncTest( "going back from a page entered from a dialog skips the dialog and goes to the last page", function(){
+		$.testHelper.openPage("#skip-dialog-first");
+
+		$.testHelper.sequence([
+			function(){ $("#skip-dialog-first a").click(); },
+			function(){ $("#skip-dialog a").click(); },
+			function(){ $("#skip-dialog-second a").click(); },
+			function(){
+				same(location.hash, "#skip-dialog-first", "should be the first page in the sequence");
 				start();
 			}], 1000);
 	});
