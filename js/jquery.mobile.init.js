@@ -32,8 +32,8 @@
 	//will not appear if $.mobile.loadingMessage is false
 	var $loader = $.mobile.loadingMessage ?
 		$( "<div class='ui-loader ui-body-a ui-corner-all'>" +
-				 "<span class='ui-icon ui-icon-loading spin'></span>" +
-				 "<h1>" + $.mobile.loadingMessage + "</h1>" +
+		 	 "<span class='ui-icon ui-icon-loading spin'></span>" +
+			 "<h1>" + $.mobile.loadingMessage + "</h1>" +
 			 "</div>" )
 		: undefined;
 
