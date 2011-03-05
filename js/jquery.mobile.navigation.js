@@ -140,7 +140,7 @@
 		//existing base tag?
 		$base = $head.children("base"),
 		hostURL = location.protocol + '//' + location.host,
-		docLocation = path.get( hostURL + location.pathname ),
+		docLocation = (location.pathname == '/') ? hostURL : path.get( hostURL + location.pathname ),
 		docBase = docLocation;
 
 		if ($base.length){
