@@ -14,35 +14,29 @@
 
 		teardown: function(){
 			$("#scroll-testing").remove();
+			window.fizz = '';
 		}
 	});
 
 	var scrollUp = function( pos ){
 		$(window).scrollTop(1000);
-		ok($(window).scrollTop() > 0);
-
-		if(pos) {
-			$.mobile.silentScroll(pos);
-		} else {
-			$.mobile.silentScroll();
-		}
+		ok($(window).scrollTop() > 0, $(window).scrollTop());
+		$.mobile.silentScroll(pos);
 	};
 
-	test( "silent scroll scrolls the page to the top by default", function(){
+	asyncTest( "silent scroll scrolls the page to the top by default", function(){
 		scrollUp();
 
-		stop();
 		setTimeout(function(){
 			same($(window).scrollTop(), 0);
 			start();
 		}, scrollTimeout);
 	});
 
-	test( "silent scroll scrolls the page to the passed y position", function(){
+	asyncTest( "silent scroll scrolls the page to the passed y position", function(){
 		var pos = 10;
 		scrollUp(pos);
 
-		stop();
 		setTimeout(function(){
 			same($(window).scrollTop(), pos);
 			start();
@@ -50,22 +44,20 @@
 	});
 
 	// NOTE may be brittle depending on timing
-	test( "silent scroll takes at least 20 ms to scroll to the top", function(){
+	asyncTest( "silent scroll takes at least 20 ms to scroll to the top", function(){
 		scrollUp();
 
-		stop();
 		setTimeout(function(){
-			ok($(window).scrollTop() != 0);
+			ok($(window).scrollTop() != 0, "scrolltop position should not be zero");
 			start();
-		}, scrollTimeout - 1);
+		}, scrollTimeout - 2);
 	});
 
-	test( "scrolling marks scrollstart as disabled for 150 ms", function(){
+	asyncTest( "scrolling marks scrollstart as disabled for 150 ms", function(){
 		$.event.special.scrollstart.enabled = true;
 		scrollUp();
 		ok(!$.event.special.scrollstart.enabled);
 
-		stop();
 		setTimeout(function(){
 			ok($.event.special.scrollstart.enabled);
 			start();
