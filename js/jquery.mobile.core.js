@@ -89,17 +89,8 @@
 			TAB: 9,
 			UP: 38,
 			WINDOWS: 91 // COMMAND
-		}
-	});
+		},
 
-	//define vars for interal use
-	var $window = $(window),
-		$html = $( "html" ),
-		$head = $( "head" );
-
-	//expose some core utilities
-	$.extend($.mobile, {
-		//scroll page vertically: scroll to 0 to hide iOS address bar, or pass a Y value
 		silentScroll: function( ypos ) {
 			ypos = ypos || 0;
 			// prevent scrollstart and scrollstop events
