@@ -660,20 +660,7 @@
 
 		//if there's a data-rel=back attr, go back in history
 		if( $this.is( "[data-rel='back']" ) ){
-			var currentIndex = $.mobile.urlHistory.activeIndex, backToIndex;
-
-			// for each history entry that is not the current page (currentIndex - 1)
-			for(var i = currentIndex - 1; i >= 0; i--){
-				backToIndex = i;
-
-				// break when we've found the first page that isn't a dialog
-				if($.mobile.urlHistory.stack[i].url.indexOf(dialogHashKey) < 0 ){
-					break;
-				}
-			}
-
-			//use the difference between closest non dialog index and the current index
-			window.history.go(backToIndex - currentIndex);
+			window.history.back();
 			return false;
 		}
 
@@ -731,7 +718,32 @@
 		//find first page via hash
 		var to = path.stripHash( location.hash ),
 			//transition is false if it's the first page, undefined otherwise (and may be overridden by default)
-			transition = $.mobile.urlHistory.stack.length === 0 ? false : undefined;
+			transition = $.mobile.urlHistory.stack.length === 0 ? false : undefined,
+			back , forward, newActiveIndex;
+
+
+		if(urlHistory.stack.length > 1 && to.indexOf( dialogHashKey ) > -1 && !$.mobile.activePage.is( ".ui-dialog" )){
+			// check if url is in history and if it's ahead or behind current page
+			$.each( urlHistory.stack, function( i ){
+				//if the url is in the stack, it's a forward or a back
+				if( this.url === to ){
+					//define back and forward by whether url is older or newer than current page
+					back = i < urlHistory.activeIndex;
+					forward = !back;
+					newActiveIndex = i;
+				}
+			});
+
+			// save new page index
+			urlHistory.activeIndex = newActiveIndex ? newActiveIndex : urlHistory.activeIndex;
+
+			if(back){
+				window.history.back();
+			} else if(forward){
+				window.history.forward();
+			}
+			return;
+		}
 
 		//if listening is disabled (either globally or temporarily), or it's a dialog hash
 		if( !$.mobile.hashListeningEnabled || !urlHistory.ignoreNextHashChange ||
