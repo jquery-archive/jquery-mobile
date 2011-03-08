@@ -724,8 +724,7 @@
 		//find first page via hash
 		var to = path.stripHash( location.hash ),
 			//transition is false if it's the first page, undefined otherwise (and may be overridden by default)
-			transition = $.mobile.urlHistory.stack.length === 0 ? false : undefined,
-			back , forward, newActiveIndex;
+			transition = $.mobile.urlHistory.stack.length === 0 ? false : undefined;
 
 		//if listening is disabled (either globally or temporarily), or it's a dialog hash
 		if( !$.mobile.hashListeningEnabled || !urlHistory.ignoreNextHashChange ){
