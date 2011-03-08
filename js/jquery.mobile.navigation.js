@@ -118,7 +118,7 @@
 			},
 
 			directHashChange: function(opts){
-				var back , forward, newActiveIndex;
+				var back , forward, newActiveIndex = null;
 
 				// check if url isp in history and if it's ahead or behind current page
 				$.each( this.stack, function( i, historyEntry ){
@@ -132,8 +132,8 @@
 					}
 				});
 
-				// save new page index
-				this.activeIndex = newActiveIndex ? newActiveIndex : this.activeIndex;
+				// save new page index, null check to prevent falsey 0 result
+				this.activeIndex = newActiveIndex != null ? newActiveIndex : this.activeIndex;
 
 				if( back ){
 					opts.isBack();
