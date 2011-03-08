@@ -11,9 +11,15 @@
 		setup: function(){
 			// NOTE reset for gradeA tests
 			$('html').removeClass('ui-mobile');
+
+			// TODO add post reload callback
+			$('.ui-loader').remove();
 		},
 		teardown: function(){
 			$.extend = extendFn;
+
+			// NOTE reset for pageLoading tests
+			$('.ui-loader').remove();
 		}
 	});
 
@@ -127,6 +133,65 @@
 
 		test( "pages with a data-url attribute are left with the original value", function(){
 			same($("#bar").data('url'), "bak");
+		});
+
+		//TODO lots of duplication
+		asyncTest( "pageLoading doesn't add the dialog to the page when loading message is false", function(){
+			$.testHelper.alterExtend({loadingMessage: false});
+			$.testHelper.reloadLib(libName);
+			$.mobile.pageLoading(false);
+
+			setTimeout(function(){
+				ok(!$(".ui-loader").length);
+				start();
+			}, 500);
+		});
+
+		asyncTest( "pageLoading doesn't add the dialog to the page when done is passed as true", function(){
+			$.testHelper.alterExtend({loadingMessage: true});
+			$.testHelper.reloadLib(libName);
+			$.mobile.pageLoading(true);
+
+			setTimeout(function(){
+				ok(!$(".ui-loader").length);
+				start();
+			}, 500);
+		});
+
+		asyncTest( "pageLoading adds the dialog to the page when done is true", function(){
+			$.testHelper.alterExtend({loadingMessage: true});
+			$.testHelper.reloadLib(libName);
+			$.mobile.pageLoading(false);
+
+			setTimeout(function(){
+				ok($(".ui-loader").length);
+				start();
+			}, 500);
+		});
+
+		asyncTest( "page loading should contain default loading message", function(){
+			$.testHelper.reloadLib('jquery.mobile.core.js');
+			$.testHelper.reloadLib(libName);
+			$.mobile.pageLoading(false);
+
+			setTimeout(function(){
+				same($(".ui-loader h1").text(), "loading");
+				start();
+			}, 500);
+		});
+
+		asyncTest( "page loading should contain custom loading message", function(){
+			$(document).bind('mobileinit', function(){
+				$.mobile.loadingMessage = "foo";
+			});
+
+			$.testHelper.reloadLib(libName);
+			$.mobile.pageLoading(false);
+
+			setTimeout(function(){
+				same($(".ui-loader h1").text(), "foo");
+				start();
+			}, 500);
 		});
 	});
 })(jQuery);
