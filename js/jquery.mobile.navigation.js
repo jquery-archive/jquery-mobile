@@ -305,7 +305,7 @@
 			});
 
 			// save new page index
-			urlHistory.activeIndex = newActiveIndex ? newActiveIndex : urlHistory.activeIndex;
+			urlHistory.activeIndex = newActiveIndex !== undefined ? newActiveIndex : urlHistory.activeIndex;
 
 			//if it's a back, use reverse animation
 			if( back ){
