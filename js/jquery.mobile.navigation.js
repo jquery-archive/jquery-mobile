@@ -727,6 +727,14 @@
 			transition = $.mobile.urlHistory.stack.length === 0 ? false : undefined,
 			back , forward, newActiveIndex;
 
+		//if listening is disabled (either globally or temporarily), or it's a dialog hash
+		if( !$.mobile.hashListeningEnabled || !urlHistory.ignoreNextHashChange ){
+			if( !urlHistory.ignoreNextHashChange ){
+				urlHistory.ignoreNextHashChange = true;
+			}
+
+			return;
+		}
 
 		// special case for dialogs requires heading back or forward until we find a non dialog page
 		if( urlHistory.stack.length > 1 &&
@@ -740,15 +748,6 @@
 				isBack: function(){ window.history.back(); },
 				isForward: function(){ window.history.forward(); }
 			});
-
-			return;
-		}
-
-		//if listening is disabled (either globally or temporarily), or it's a dialog hash
-		if( !$.mobile.hashListeningEnabled || !urlHistory.ignoreNextHashChange ){
-			if( !urlHistory.ignoreNextHashChange ){
-				urlHistory.ignoreNextHashChange = true;
-			}
 
 			return;
 		}
