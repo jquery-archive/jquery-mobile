@@ -117,6 +117,31 @@
 				urlHistory.stack = urlHistory.stack.slice( 0, urlHistory.activeIndex + 1 );
 			},
 
+			directHashChange: function(opts){
+				var back , forward, newActiveIndex;
+
+				// check if url is in history and if it's ahead or behind current page
+				$.each( urlHistory.stack, function( i, historyEntry ){
+
+					//if the url is in the stack, it's a forward or a back
+					if( opts.currentUrl === historyEntry.url ){
+						//define back and forward by whether url is older or newer than current page
+						back = i < urlHistory.activeIndex;
+						forward = !back;
+						newActiveIndex = i;
+					}
+				});
+
+				// save new page index
+				urlHistory.activeIndex = newActiveIndex ? newActiveIndex : urlHistory.activeIndex;
+
+				if( back ){
+					opts.isBack();
+				} else if( forward ){
+					opts.isForward();
+				}
+			},
+
 			//disable hashchange event listener internally to ignore one change
 			//toggled internally when location.hash is updated to match the url of a successful page load
 			ignoreNextHashChange: true
@@ -284,39 +309,20 @@
 
 		isPageTransitioning = true;
 
-		// if the changePage was sent from a hashChange event
-		// guess if it came from the history menu
+		// if the changePage was sent from a hashChange event guess if it came from the history menu
+		// and match the transition accordingly
 		if( fromHashChange ){
-
-			// determine new page index
-			var newActiveIndex;
-
-			// check if url is in history and if it's ahead or behind current page
-			$.each( urlHistory.stack, function( i ){
-				//if the url is in the stack, it's a forward or a back
-				if( this.url === url ){
-					//define back and forward by whether url is older or newer than current page
-					back = i < urlHistory.activeIndex;
-					//forward set to opposite of back
-					forward = !back;
-					//reset activeIndex to this one
-					newActiveIndex = i;
+			urlHistory.directHashChange({
+				currentUrl: url,
+				isBack: function(){
+					reverse = true;
+					transition = transition || currPage.transition;
+				},
+				isForward: function(){
+					transition = transition || urlHistory.getActive().transition;
 				}
 			});
-
-			// save new page index
-			urlHistory.activeIndex = newActiveIndex !== undefined ? newActiveIndex : urlHistory.activeIndex;
-
-			//if it's a back, use reverse animation
-			if( back ){
-				reverse = true;
-				transition = transition || currPage.transition;
-			}
-			else if ( forward ){
-				transition = transition || urlHistory.getActive().transition;
-			}
 		}
-
 
 		if( toIsObject && to.url ){
 			url = to.url;
@@ -722,36 +728,28 @@
 			back , forward, newActiveIndex;
 
 
-		if(urlHistory.stack.length > 1 && to.indexOf( dialogHashKey ) > -1 && !$.mobile.activePage.is( ".ui-dialog" )){
-			// check if url is in history and if it's ahead or behind current page
-			$.each( urlHistory.stack, function( i ){
-				//if the url is in the stack, it's a forward or a back
-				if( this.url === to ){
-					//define back and forward by whether url is older or newer than current page
-					back = i < urlHistory.activeIndex;
-					forward = !back;
-					newActiveIndex = i;
-				}
+		// special case for dialogs requires heading back or forward until we find a non dialog page
+		if( urlHistory.stack.length > 1 &&
+				to.indexOf( dialogHashKey ) > -1 &&
+				!$.mobile.activePage.is( ".ui-dialog" ) ){
+
+			//determine if we're heading forward or backward and continue accordingly past
+			//the current dialog
+			urlHistory.directHashChange({
+				currentUrl: to,
+				isBack: function(){ window.history.back(); },
+				isForward: function(){ window.history.forward(); }
 			});
 
-			// save new page index
-			urlHistory.activeIndex = newActiveIndex ? newActiveIndex : urlHistory.activeIndex;
-
-			if(back){
-				window.history.back();
-			} else if(forward){
-				window.history.forward();
-			}
 			return;
 		}
 
 		//if listening is disabled (either globally or temporarily), or it's a dialog hash
-		if( !$.mobile.hashListeningEnabled || !urlHistory.ignoreNextHashChange ||
-				(urlHistory.stack.length > 1 && to.indexOf( dialogHashKey ) > -1 && !$.mobile.activePage.is( ".ui-dialog" ))
-		){
+		if( !$.mobile.hashListeningEnabled || !urlHistory.ignoreNextHashChange ){
 			if( !urlHistory.ignoreNextHashChange ){
 				urlHistory.ignoreNextHashChange = true;
 			}
+
 			return;
 		}
 
