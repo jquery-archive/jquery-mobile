@@ -85,11 +85,11 @@ var attachEvents = function() {
 	$(".ui-btn:not(.ui-disabled)").live({
 		"vmousedown": function() {
 			var theme = $(this).attr( "data-theme" );
-			$(this).removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-down-" + theme + " " + $.mobile.activeBtnClass);
+			$(this).removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-down-" + theme );
 		},
 		"vmousecancel vmouseup": function() {
 			var theme = $(this).attr( "data-theme" );
-			$(this).removeClass( "ui-btn-down-" + theme + " " + $.mobile.activeBtnClass ).addClass( "ui-btn-up-" + theme );
+			$(this).removeClass( "ui-btn-down-" + theme ).addClass( "ui-btn-up-" + theme );
 		},
 		"vmouseover focus": function() {
 			var theme = $(this).attr( "data-theme" );
@@ -97,7 +97,7 @@ var attachEvents = function() {
 		},
 		"vmouseout blur": function() {
 			var theme = $(this).attr( "data-theme" );
-			$(this).removeClass( "ui-btn-hover-" + theme + " " + $.mobile.activeBtnClass ).addClass( "ui-btn-up-" + theme );
+			$(this).removeClass( "ui-btn-hover-" + theme ).addClass( "ui-btn-up-" + theme );
 		}
 	});
 
