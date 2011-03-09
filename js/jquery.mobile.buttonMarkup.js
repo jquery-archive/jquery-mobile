@@ -87,7 +87,7 @@ var attachEvents = function() {
 			var theme = $(this).attr( "data-theme" );
 			$(this).removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-down-" + theme + " " + $.mobile.activeBtnClass);
 		},
-		"vmousemove vmouseup": function() {
+		"vmousecancel vmouseup": function() {
 			var theme = $(this).attr( "data-theme" );
 			$(this).removeClass( "ui-btn-down-" + theme + " " + $.mobile.activeBtnClass ).addClass( "ui-btn-up-" + theme );
 		},
