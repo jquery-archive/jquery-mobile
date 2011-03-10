@@ -2,14 +2,14 @@
 $.fn.addSourceLink = function(style){
 
 	return $(this).each(function(){
-		var link = $('<a href="#" data-jq-inline="true">View Source</a>'),
+		var link = $('<a href="#" data-'+ $.mobile.ns +'inline="true">View Source</a>'),
 			src = src = $('<div></div>').append( $(this).clone() ).html(),
-			page = $( "<div data-jq-role='dialog' data-jq-theme='a'>" +
-					"<div data-jq-role='header' data-jq-theme='b'>" +
-						"<a href='#' class='ui-btn-left' data-jq-icon='delete' data-jq-iconpos='notext'>Close</a>"+
+			page = $( "<div data-"+ $.mobile.ns +"role='dialog' data-"+ $.mobile.ns +"theme='a'>" +
+					"<div data-"+ $.mobile.ns +"role='header' data-"+ $.mobile.ns +"theme='b'>" +
+						"<a href='#' class='ui-btn-left' data-"+ $.mobile.ns +"icon='delete' data-"+ $.mobile.ns +"iconpos='notext'>Close</a>"+
 						"<div class='ui-title'>jQuery Mobile Source Excerpt</div>"+
 					"</div>"+
-					"<div data-jq-role='content'></div>"+
+					"<div data-"+ $.mobile.ns +"role='content'></div>"+
 				"</div>" )
 				.appendTo( "body" )
 				.page();
@@ -21,7 +21,7 @@ $.fn.addSourceLink = function(style){
 			})
 			.click(function(){
 				var codeblock = $('<pre><code></code></pre>');
-				src = src.replace(/&/gmi, '&amp;').replace(/"/gmi, '&quot;').replace(/>/gmi, '&gt;').replace(/</gmi, '&lt;').replace('data-jq-source="true"','');
+				src = src.replace(/&/gmi, '&amp;').replace(/"/gmi, '&quot;').replace(/>/gmi, '&gt;').replace(/</gmi, '&lt;').replace('data-'+ $.mobile.ns +'source="true"','');
 				codeblock.find('code').append(src);
 
 				var activePage = $(this).parents('.ui-page-active');
@@ -38,5 +38,5 @@ $.fn.addSourceLink = function(style){
 
 //set up view source links
 $('div').live('pagebeforecreate',function(){
-	$(this).find('[data-jq-source="true"]').addSourceLink();
+	$(this).find('[data-'+ $.mobile.ns +'source="true"]').addSourceLink();
 });
