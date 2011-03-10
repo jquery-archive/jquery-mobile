@@ -118,10 +118,10 @@
 			},
 
 			directHashChange: function(opts){
-				var back , forward, newActiveIndex = null;
+				var back , forward, newActiveIndex;
 
 				// check if url isp in history and if it's ahead or behind current page
-				$.each( this.stack, function( i, historyEntry ){
+				$.each( urlHistory.stack, function( i, historyEntry ){
 
 					//if the url is in the stack, it's a forward or a back
 					if( opts.currentUrl === historyEntry.url ){
@@ -133,7 +133,7 @@
 				});
 
 				// save new page index, null check to prevent falsey 0 result
-				this.activeIndex = newActiveIndex != null ? newActiveIndex : this.activeIndex;
+				this.activeIndex = newActiveIndex !== undefined ? newActiveIndex : this.activeIndex;
 
 				if( back ){
 					opts.isBack();
@@ -315,13 +315,17 @@
 			urlHistory.directHashChange({
 				currentUrl: url,
 				isBack: function(){
+					forward = !(back = true);
 					reverse = true;
 					transition = transition || currPage.transition;
 				},
 				isForward: function(){
+					forward = !(back = false);
 					transition = transition || urlHistory.getActive().transition;
 				}
 			});
+
+			//TODO forward = !back was breaking for some reason
 		}
 
 		if( toIsObject && to.url ){
