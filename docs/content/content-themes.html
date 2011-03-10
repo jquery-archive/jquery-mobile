@@ -11,27 +11,27 @@
 </head> 
 <body> 
 
-<div data-jq-role="page">
+<div data-role="page">
 
-	<div data-jq-role="header" data-jq-theme="b">
+	<div data-role="header" data-theme="b">
 		<h1>Theming content</h1>
-		<a href="../../" data-jq-icon="home" data-jq-iconpos="notext" data-jq-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
-	<div data-jq-role="content">
+	<div data-role="content">
 			
 			
 		<h2>Theming the content area</h2>
-		<p>The main content area of a page (container with the <code> data-jq-role="content"</code> attribute) should be themed by adding the <code> data-jq-theme</code> attribute to the <code> data-jq-role="page"</code> container to ensure that the background colors are applied to the full page, regardless of the content length. (If you add to the <code> data-jq-theme</code> to the content container, the background color will stop after the content so there may be a gap in color between the content and fixed footer.)</p>
+		<p>The main content area of a page (container with the <code> data-role="content"</code> attribute) should be themed by adding the <code> data-theme</code> attribute to the <code> data-role="page"</code> container to ensure that the background colors are applied to the full page, regardless of the content length. (If you add to the <code> data-theme</code> to the content container, the background color will stop after the content so there may be a gap in color between the content and fixed footer.)</p>
 		
 <code>
-&lt;div data-jq-role=&quot;page&quot; <strong> data-jq-theme=&quot;a&quot;</strong>&gt;
+&lt;div data-role=&quot;page&quot; <strong> data-theme=&quot;a&quot;</strong>&gt;
 </code>	
 		<h2>Theming collapsible blocks</h2>
-		<p>To set the color of the collapsible header, add the <code> data-jq-theme</code> attribute to the collapsible container. The icon and body are not currently themable through data attributes, but can be styled directly with custom css.</p>
+		<p>To set the color of the collapsible header, add the <code> data-theme</code> attribute to the collapsible container. The icon and body are not currently themable through data attributes, but can be styled directly with custom css.</p>
 
 <code>		
-&lt;div data-jq-role=&quot;collapsible&quot; data-jq-collapsed=&quot;true&quot; <strong> data-jq-theme=&quot;a&quot;&gt;</strong>
+&lt;div data-role=&quot;collapsible&quot; data-collapsed=&quot;true&quot; <strong> data-theme=&quot;a&quot;&gt;</strong>
 </code>
 		<h2>Themed examples</h2>
 		
@@ -39,9 +39,9 @@
 		<div class="ui-body ui-body-a">
 			<h1>H1 Heading</h1>
 			<p>This is a paragraph that contains <strong>strong</strong>, <em>emphasized</em> and <a href="index.html">linked</a> text. Here is more text so you can see how HTML markup works in content. Here is more text so you can see how HTML markup works in content.</p>
-			<div data-jq-role="collapsible" data-jq-collapsed="true" data-jq-theme="a">
+			<div data-role="collapsible" data-collapsed="true" data-theme="a">
 				<h3>I'm an themed collapsible</h3>
-				<p>I have <code> data-jq-theme</code> attribute set manually on my container to set the color to match the content block I'm in. </p>
+				<p>I have <code> data-theme</code> attribute set manually on my container to set the color to match the content block I'm in. </p>
 			</div><!-- /collapsible -->
 		</div><!-- /themed container -->
 		
@@ -49,9 +49,9 @@
 		<div class="ui-body ui-body-b">
 			<h1>H1 Heading</h1>
 			<p>This is a paragraph that contains <strong>strong</strong>, <em>emphasized</em> and <a href="index.html">linked</a> text. Here is more text so you can see how HTML markup works in content. Here is more text so you can see how HTML markup works in content.</p>
-			<div data-jq-role="collapsible" data-jq-collapsed="true" data-jq-theme="b">
+			<div data-role="collapsible" data-collapsed="true" data-theme="b">
 				<h3>I'm an themed collapsible</h3>
-				<p>I have <code> data-jq-theme</code> attribute set manually on my container to set the color to match the content block I'm in. </p>
+				<p>I have <code> data-theme</code> attribute set manually on my container to set the color to match the content block I'm in. </p>
 			</div><!-- /collapsible -->
 		</div><!-- /themed container -->
 		
@@ -59,9 +59,9 @@
 		<div class="ui-body ui-body-c">
 			<h1>H1 Heading</h1>
 			<p>This is a paragraph that contains <strong>strong</strong>, <em>emphasized</em> and <a href="index.html">linked</a> text. Here is more text so you can see how HTML markup works in content. Here is more text so you can see how HTML markup works in content.</p>
-			<div data-jq-role="collapsible" data-jq-collapsed="true" data-jq-theme="c">
+			<div data-role="collapsible" data-collapsed="true" data-theme="c">
 				<h3>I'm an themed collapsible</h3>
-				<p>I have <code> data-jq-theme</code> attribute set manually on my container to set the color to match the content block I'm in. </p>
+				<p>I have <code> data-theme</code> attribute set manually on my container to set the color to match the content block I'm in. </p>
 			</div><!-- /collapsible -->
 		</div><!-- /themed container -->
 		
@@ -69,9 +69,9 @@
 		<div class="ui-body ui-body-d">
 			<h1>H1 Heading</h1>
 			<p>This is a paragraph that contains <strong>strong</strong>, <em>emphasized</em> and <a href="index.html">linked</a> text. Here is more text so you can see how HTML markup works in content. Here is more text so you can see how HTML markup works in content.</p>
-			<div data-jq-role="collapsible" data-jq-collapsed="true" data-jq-theme="d">
+			<div data-role="collapsible" data-collapsed="true" data-theme="d">
 				<h3>I'm an themed collapsible</h3>
-				<p>I have <code> data-jq-theme</code> attribute set manually on my container to set the color to match the content block I'm in. </p>
+				<p>I have <code> data-theme</code> attribute set manually on my container to set the color to match the content block I'm in. </p>
 			</div><!-- /collapsible -->
 		</div><!-- /themed container -->
 		
@@ -79,9 +79,9 @@
 		<div class="ui-body ui-body-e">
 			<h1>H1 Heading</h1>
 			<p>This is a paragraph that contains <strong>strong</strong>, <em>emphasized</em> and <a href="index.html">linked</a> text. Here is more text so you can see how HTML markup works in content. Here is more text so you can see how HTML markup works in content.</p>
-			<div data-jq-role="collapsible" data-jq-collapsed="true" data-jq-theme="e">
+			<div data-role="collapsible" data-collapsed="true" data-theme="e">
 				<h3>I'm an themed collapsible</h3>
-				<p>I have <code> data-jq-theme</code> attribute set manually on my container to set the color to match the content block I'm in. </p>
+				<p>I have <code> data-theme</code> attribute set manually on my container to set the color to match the content block I'm in. </p>
 			</div><!-- /collapsible -->
 		</div><!-- /themed container -->
 		

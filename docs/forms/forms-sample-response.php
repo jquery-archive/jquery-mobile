@@ -10,14 +10,14 @@
 </head> 
 <body> 
 
-<div data-jq-role="page" data-jq-theme="c">
+<div data-role="page" data-theme="c">
 
-	<div data-jq-role="header" data-jq-theme="e">
+	<div data-role="header" data-theme="e">
 		<h1>Sample form response</h1>
-		<a href="../../" data-jq-icon="home" data-jq-iconpos="notext" data-jq-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
-	<div data-jq-role="content" data-jq-theme="c">
+	<div data-role="content" data-theme="c">
 		
 		<form action="index.html" method="get">
 			

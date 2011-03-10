@@ -12,15 +12,15 @@
 	//jQuery.mobile configurable options
 	$.extend( $.mobile, {
 		
-		//namespace used framework-wide for data-attrs
-		ns: "jq-",
+		//namespace used framework-wide for data-attrs. Default is no namespace
+		ns: "",
 
 		//define the url parameter used for referencing widget-generated sub-pages.
 		//Translates to to example.html&ui-page=subpageIdentifier
 		//hash segment before &ui-page= is used to make Ajax request
 		subPageUrlKey: "ui-page",
 
-		//anchor links with a data-jq-rel, or pages with a  data-jq-role, that match these selectors will be untrackable in history
+		//anchor links with a data-rel, or pages with a  data-role, that match these selectors will be untrackable in history
 		//(no change in URL, not bookmarkable)
 		nonHistorySelectors: "dialog",
 
@@ -108,10 +108,10 @@
 		return;
 	}
 	
-	//extend data() to treat namespaced data-attrs the same as non-namespaced ones
-	var jqd = $.fn.data;
+	//mobile version of data() method
+	//treats namespaced data-attrs the same as non-namespaced ones
  
-    $.fn.data = function( prop, value ){
+    $.mobile.data = function( prop, value ){
     	var pUndef = prop === undefined,
     		vUndef = value === undefined;
     		
@@ -120,7 +120,7 @@
 	    		nsret;
 	    	//if no args are passed, a data hash is expected. Remap non-namespaced props
 	    	if( pUndef ){
-	    		ret = jqd.call( this );
+	    		ret = this.data();
 	    		$.each( ret, function( i ){
 	    			var nsIndex = i.indexOf( $.mobile.ns );
 	    			if( nsIndex == 0 ){
@@ -132,7 +132,7 @@
 	    	else if( vUndef ){
 	    		ret = jqd.call( this, prop );
 	    		if( ret === undefined ){
-	    			nsret = jqd.call( this, $.mobile.ns + prop );
+	    			nsret = this.data( $.mobile.ns + prop );
 	    			if( nsret !== undefined ){
 	    				ret = nsret;
 	    			}
@@ -211,7 +211,7 @@
 			//find present pages
 			var $pages = $( "[data-" + $.mobile.ns + "role='page']" );
 
-			//add dialogs, set data-jq-url attrs
+			//add dialogs, set data-url attrs
 			$pages.add( "[data-" + $.mobile.ns + "role='dialog']" ).each(function(){
 				$(this).attr( "data-" + $.mobile.ns + "url", $(this).attr( "id" ));
 			});
