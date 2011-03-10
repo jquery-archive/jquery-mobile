@@ -178,7 +178,7 @@
 
 			//set the generated BASE element's href attribute to a new page's base path
 			set: function( href ){
-				base.element.attr('href', docBase + path.get( href ));
+				base.element.attr('href', docBase + path.get( href ).replace(/^\//, ""));
 			},
 
 			//set the generated BASE element's href attribute to a new page's base path
