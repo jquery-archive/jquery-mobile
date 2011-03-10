@@ -5,6 +5,7 @@
 	<title>jQuery Mobile Slider Events Test Suite</title>
 
 	<script type="text/javascript" src="../../../js/jquery.js"></script>
+	<script src="../jquery.setNameSpace.js"></script>
 	<script type="text/javascript" src="../../../js/"></script>
 	<script type="text/javascript" src="../../../tests/jquery.testHelper.js"></script>
 
@@ -23,30 +24,30 @@
 <ol id="qunit-tests">
 </ol>
 
-<div id="foo"  data-jq-role="page">
-	<div  data-jq-role="fieldcontain">
-		<input type="range" name="slider-1" id="range-slider-up" value="0" min="0" max="100"  data-jq-theme="b" data-jq-track-theme="a" />
+<div id="foo"  data-nstest-role="page">
+	<div  data-nstest-role="fieldcontain">
+		<input type="range" name="slider-1" id="range-slider-up" value="0" min="0" max="100"  data-nstest-theme="b" data-nstest-track-theme="a" />
 	</div>
 
-	<div  data-jq-role="fieldcontain">
-		<input type="range" name="slider-1" id="range-slider-down" value="10" min="0" max="100"  data-jq-theme="b" data-jq-track-theme="a" />
+	<div  data-nstest-role="fieldcontain">
+		<input type="range" name="slider-1" id="range-slider-down" value="10" min="0" max="100"  data-nstest-theme="b" data-nstest-track-theme="a" />
 	</div>
 
-	<div  data-jq-role="fieldcontain">
-		<input type="range" name="slider-1" id="range-slider-home" value="75" min="0" max="100"  data-jq-theme="b" data-jq-track-theme="a" />
+	<div  data-nstest-role="fieldcontain">
+		<input type="range" name="slider-1" id="range-slider-home" value="75" min="0" max="100"  data-nstest-theme="b" data-nstest-track-theme="a" />
 	</div>
 
-	<div  data-jq-role="fieldcontain">
+	<div  data-nstest-role="fieldcontain">
 		<label for="slider-1">Input slider:</label>
-		<input type="range" name="slider-1" id="range-slider-end" value="15" min="0" max="100"  data-jq-theme="b" data-jq-track-theme="a" />
+		<input type="range" name="slider-1" id="range-slider-end" value="15" min="0" max="100"  data-nstest-theme="b" data-nstest-track-theme="a" />
 	</div>
 
-	<div  data-jq-role="fieldcontain">
-		<input type="range" name="stepped" id="stepped" value="15" min="0" max="100" step="10"  data-jq-theme="b" data-jq-track-theme="a" />
+	<div  data-nstest-role="fieldcontain">
+		<input type="range" name="stepped" id="stepped" value="15" min="0" max="100" step="10"  data-nstest-theme="b" data-nstest-track-theme="a" />
 	</div>
 
-	<div  data-jq-role="fieldcontain">
-		<select name="slider" id="slider-switch"  data-jq-role="slider">
+	<div  data-nstest-role="fieldcontain">
+		<select name="slider" id="slider-switch"  data-nstest-role="slider">
 			<option value="off">Off</option>
 			<option value="on">On</option>
 		</select>
