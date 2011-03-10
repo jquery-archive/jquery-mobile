@@ -42,7 +42,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 		// classes so we'll handle page and content roles outside of the main role processing
 		// loop below.
 		$elem.find( "[data-" + $.mobile.ns + "role='page'], [data-" + $.mobile.ns + "role='content']" ).andSelf().each(function() {
-			$(this).addClass( "ui-" + $.mobile.ns + $(this).data( "role" ) );
+			$(this).addClass( "ui-" + $(this).data( $.mobile.ns + "role" ) );
 		});
 
 		$elem.find( "[data-" + $.mobile.ns + "role='nojs']" ).addClass( "ui-nojs" );
