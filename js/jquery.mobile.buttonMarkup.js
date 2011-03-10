@@ -9,7 +9,7 @@
 $.fn.buttonMarkup = function( options ){
 	return this.each( function() {
 		var el = $( this ),
-		    o = $.extend( {}, $.fn.buttonMarkup.defaults, el.data(), options),
+		    o = $.extend( {}, $.fn.buttonMarkup.defaults, el.mobileData(), options),
 
 			// Classes Defined
 			buttonClass,

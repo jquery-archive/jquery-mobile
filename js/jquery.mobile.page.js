@@ -42,7 +42,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 		// classes so we'll handle page and content roles outside of the main role processing
 		// loop below.
 		$elem.find( "[data-" + $.mobile.ns + "role='page'], [data-" + $.mobile.ns + "role='content']" ).andSelf().each(function() {
-			$(this).addClass( "ui-" + $(this).data( $.mobile.ns + "role" ) );
+			$(this).addClass( "ui-" + $(this).mobileData( $.mobile.ns + "role" ) );
 		});
 
 		$elem.find( "[data-" + $.mobile.ns + "role='nojs']" ).addClass( "ui-nojs" );
@@ -50,12 +50,12 @@ $.widget( "mobile.page", $.mobile.widget, {
 		// pre-find data els
 		var $dataEls = $elem.find( "[data-" + $.mobile.ns + "role]" ).andSelf().each(function() {
 			var $this = $( this ),
-				role = $this.data( "role" ),
-				theme = $this.data( "theme" );
+				role = $this.mobileData( "role" ),
+				theme = $this.mobileData( "theme" );
 
 			//apply theming and markup modifications to page,header,content,footer
 			if ( role === "header" || role === "footer" ) {
-				$this.addClass( "ui-bar-" + (theme || $this.parent( "[data-" + $.mobile.ns + "role='page']" ).data( "theme" ) || "a") );
+				$this.addClass( "ui-bar-" + (theme || $this.parent( "[data-" + $.mobile.ns + "role='page']" ).mobileData( "theme" ) || "a") );
 
 				// add ARIA role
 				$this.attr( "role", role === "header" ? "banner" : "contentinfo" );
@@ -76,8 +76,8 @@ $.widget( "mobile.page", $.mobile.widget, {
 				// auto-add back btn on pages beyond first view
 				if ( o.addBackBtn && role === "header" &&
 						$( ".ui-page" ).length > 1 &&
-						$elem.data( "url" ) !== $.mobile.path.stripHash( location.hash ) &&
-						!leftbtn && $this.data( "backbtn" ) !== false ) {
+						$elem.mobileData( "url" ) !== $.mobile.path.stripHash( location.hash ) &&
+						!leftbtn && $this.mobileData( "backbtn" ) !== false ) {
 
 					$( "<a href='#' class='ui-btn-left' data-" + $.mobile.ns + "rel='back' data-" + $.mobile.ns + "icon='arrow-l'>"+ o.backBtnText +"</a>" ).prependTo( $this );
 				}

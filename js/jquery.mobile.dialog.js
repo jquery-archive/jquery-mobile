@@ -42,7 +42,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 					$targetel = $(e.target).closest("form");
 				}
 				
-				if( $targetel.length && !$targetel.data("transition") ){
+				if( $targetel.length && !$targetel.mobileData("transition") ){
 					$targetel
 						.attr("data-" + $.mobile.ns + "transition", $.mobile.urlHistory.getActive().transition )
 						.attr("data-" + $.mobile.ns + "direction", "reverse");

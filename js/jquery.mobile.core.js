@@ -111,7 +111,7 @@
 	//mobile version of data() method
 	//treats namespaced data-attrs the same as non-namespaced ones
  
-    $.mobile.data = function( prop, value ){
+    $.fn.mobileData = function( prop, value ){
     	var pUndef = prop === undefined,
     		vUndef = value === undefined;
     		
@@ -130,7 +130,7 @@
 	    	}
 	    	//if it's a prop get, try namepaced version if prop is undefined
 	    	else if( vUndef ){
-	    		ret = jqd.call( this, prop );
+	    		ret = this.data( prop );
 	    		if( ret === undefined ){
 	    			nsret = this.data( $.mobile.ns + prop );
 	    			if( nsret !== undefined ){

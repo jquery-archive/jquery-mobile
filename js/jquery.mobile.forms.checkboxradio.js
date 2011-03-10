@@ -21,7 +21,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 
 		// If there's no selected theme...
 		if( !this.options.theme ) {
-			this.options.theme = this.element.data( "theme" );
+			this.options.theme = this.element.mobileData( "theme" );
 		}
 
 		label
@@ -43,14 +43,14 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 
 			"touchmove": function( event ){
 				var oe = event.originalEvent.touches[0];
-				if( label.data("movestart") ){
-					if( Math.abs( label.data("movestart")[0] - oe.pageX ) > 10 ||
-						Math.abs( label.data("movestart")[1] - oe.pageY ) > 10 ){
-							label.data("moved", true);
+				if( label.mobileData("movestart") ){
+					if( Math.abs( label.mobileData("movestart")[0] - oe.pageX ) > 10 ||
+						Math.abs( label.mobileData("movestart")[1] - oe.pageY ) > 10 ){
+							label.mobileData("moved", true);
 						}
 				}
 				else{
-					label.data("movestart", [ parseFloat( oe.pageX ), parseFloat( oe.pageY ) ]);
+					label.mobileData("movestart", [ parseFloat( oe.pageX ), parseFloat( oe.pageY ) ]);
 				}
 			},
 
@@ -61,14 +61,14 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 				}
 				
 				label.removeData("movestart");
-				if( label.data("etype") && label.data("etype") !== event.type || label.data("moved") ){
+				if( label.mobileData("etype") && label.mobileData("etype") !== event.type || label.mobileData("moved") ){
 					label.removeData("etype").removeData("moved");
-					if( label.data("moved") ){
+					if( label.mobileData("moved") ){
 						label.removeData("moved");
 					}
 					return false;
 				}
-				label.data( "etype", event.type );
+				label.mobileData( "etype", event.type );
 				self._cacheVals();
 				input.attr( "checked", inputtype === "radio" && true || !input.is( ":checked" ) );
 				self._updateAll();
@@ -104,7 +104,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 
 	_cacheVals: function(){
 		this._getInputSet().each(function(){
-			$(this).data("cacheVal", $(this).is(":checked") );
+			$(this).mobileData("cacheVal", $(this).is(":checked") );
 		});
 	},
 
@@ -116,7 +116,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 
 	_updateAll: function(){
 		this._getInputSet().each(function(){
-			var dVal = $(this).data("cacheVal");
+			var dVal = $(this).mobileData("cacheVal");
 			if( dVal && dVal !== $(this).is(":checked") || $(this).is( "[type='checkbox']" ) ){
 				$(this).trigger("change");
 			}

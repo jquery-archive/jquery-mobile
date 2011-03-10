@@ -70,7 +70,7 @@
 				var $this = $(this);
 
 				// unless the data url is already set set it to the id
-				if( !$this.data('url') ){
+				if( !$this.mobileData('url') ){
 					$this.attr( "data-" + $.mobile.ns + "url", $this.attr( "id" ) );
 				}
 			});

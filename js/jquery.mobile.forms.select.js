@@ -206,11 +206,11 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			button
 				.bind( "touchstart" , function( event ){
 					//set startTouches to cached copy of
-					$( this ).data( "startTouches", $.extend({}, event.originalEvent.touches[ 0 ]) );
+					$( this ).mobileData( "startTouches", $.extend({}, event.originalEvent.touches[ 0 ]) );
 				})
 				.bind( $.support.touch ? "touchend" : "mouseup" , function( event ){
 					//if it's a scroll, don't open
-					if( $( this ).data( "moved" ) ){
+					if( $( this ).mobileData( "moved" ) ){
 						$( this ).removeData( "moved" );
 					} else {
 						self.open();
@@ -220,12 +220,12 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				.bind( "touchmove", function( event ){
 					//if touch moved enough, set data moved and don't open menu
 					var thisTouches = event.originalEvent.touches[ 0 ],
-					startTouches = $( this ).data( "startTouches" ),
+					startTouches = $( this ).mobileData( "startTouches" ),
 					deltaX = Math.abs(thisTouches.pageX - startTouches.pageX),
 					deltaY = Math.abs(thisTouches.pageY - startTouches.pageY);
 
 					if( deltaX > 10 || deltaY > 10 ){
-						$( this ).data( "moved", true );
+						$( this ).mobileData( "moved", true );
 					}
 				});
 		
@@ -313,7 +313,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			}
 			
 			//find placeholder text
-			if( !this.getAttribute('value') || text.length == 0 || $this.data('placeholder') ){
+			if( !this.getAttribute('value') || text.length == 0 || $this.mobileData('placeholder') ){
 				if( o.hidePlaceholderMenuItems ){
 					classes.push( "ui-selectmenu-placeholder" );
 				}
@@ -427,7 +427,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			//for webos (set lastscroll using button offset)
 			if( scrollTop == 0 && btnOffset > screenHeight ){
 				self.thisPage.one('pagehide',function(){
-					$(this).data('lastScroll', btnOffset);
+					$(this).mobileData('lastScroll', btnOffset);
 				});
 			}
 

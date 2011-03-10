@@ -10,7 +10,7 @@ $.mobile.listview.prototype.options.filter = false;
 
 $( "[data-" + $.mobile.ns + "role='listview']" ).live( "listviewcreate", function() {
 	var list = $( this ),
-		listview = list.data( "listview" );
+		listview = list.mobileData( "listview" );
 	if ( !listview.options.filter ) {
 		return;
 	}

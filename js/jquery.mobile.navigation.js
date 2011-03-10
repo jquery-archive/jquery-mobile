@@ -363,11 +363,11 @@
 
 			if( from ){
 				//set as data for returning to that spot
-				from.data( "lastScroll", currScroll);
+				from.mobileData( "lastScroll", currScroll);
 				//trigger before show/hide events
-				from.data( "page" )._trigger( "beforehide", { nextPage: to } );
+				from.mobileData( "page" )._trigger( "beforehide", { nextPage: to } );
 			}
-			to.data( "page" )._trigger( "beforeshow", { prevPage: from || $("") } );
+			to.mobileData( "page" )._trigger( "beforeshow", { prevPage: from || $("") } );
 
 			function loadComplete(){
 
@@ -386,16 +386,16 @@
 				removeActiveLinkClass();
 
 				//jump to top or prev scroll, sometimes on iOS the page has not rendered yet.  I could only get by this with a setTimeout, but would like to avoid that.
-				$.mobile.silentScroll( to.data( "lastScroll" ) );
+				$.mobile.silentScroll( to.mobileData( "lastScroll" ) );
 
 				reFocus( to );
 
 				//trigger show/hide events
 				if( from ){
-					from.data( "page" )._trigger( "hide", null, { nextPage: to } );
+					from.mobileData( "page" )._trigger( "hide", null, { nextPage: to } );
 				}
 				//trigger pageshow, define prevPage as either from or empty jQuery obj
-				to.data( "page" )._trigger( "show", null, { prevPage: from || $("") } );
+				to.mobileData( "page" )._trigger( "show", null, { prevPage: from || $("") } );
 
 				//set "to" as activePage
 				$.mobile.activePage = to;
@@ -464,7 +464,7 @@
 		function enhancePage(){
 
 			//set next page role, if defined
-			if ( nextPageRole || to.data('role') === 'dialog' ) {
+			if ( nextPageRole || to.mobileData('role') === 'dialog' ) {
 				url = urlHistory.getActive().url + dialogHashKey;
 				if(nextPageRole){
 					to.attr( "data-" + $.mobile.ns + "role", nextPageRole );
@@ -684,11 +684,11 @@
 		}
 		else {
 			//use ajax
-			var transition = $this.data( "transition" ),
-				direction = $this.data("direction"),
+			var transition = $this.mobileData( "transition" ),
+				direction = $this.mobileData("direction"),
 				reverse = (direction && direction === "reverse") ||
 				// deprecated - remove by 1.0
-				$this.data( "back" );
+				$this.mobileData( "back" );
 
 			//this may need to be more specific as we use data-rel more
 			nextPageRole = $this.attr( "data-" + $.mobile.ns + "rel" );

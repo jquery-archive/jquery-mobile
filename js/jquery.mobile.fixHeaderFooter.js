@@ -11,7 +11,7 @@ $.fn.fixHeaderFooter = function(options){
 	return this.each(function(){
 		var $this = $(this);
 		
-		if( $this.data('fullscreen') ){ $this.addClass('ui-page-fullscreen'); }
+		if( $this.mobileData('fullscreen') ){ $this.addClass('ui-page-fullscreen'); }
 		$this.find( ".ui-header[data-" + $.mobile.ns + "position='fixed']" ).addClass('ui-header-fixed ui-fixed-inline fade'); //should be slidedown
 		$this.find( ".ui-footer[data-" + $.mobile.ns + "position='fixed']" ).addClass('ui-footer-fixed ui-fixed-inline fade'); //should be slideup		
 	});
@@ -105,7 +105,7 @@ $.fixedToolbars = (function(){
 	$('.ui-page').live('pagebeforeshow', function(event, ui){
 		var page = $(event.target),
 			footer = page.find( "[data-" + $.mobile.ns + "role='footer']:not(.ui-sticky-footer)" ),
-			id = footer.data('id');
+			id = footer.mobileData('id');
 		stickyFooter = null;
 		if (id)
 		{
