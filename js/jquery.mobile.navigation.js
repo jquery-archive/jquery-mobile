@@ -178,7 +178,7 @@
 
 			//set the generated BASE element's href attribute to a new page's base path
 			set: function( href ){
-				base.element.attr('href', docBase + path.get( href ));
+				base.element.attr('href', docBase + path.get( href ).replace(/^\//, ""));
 			},
 
 			//set the generated BASE element's href attribute to a new page's base path
@@ -305,7 +305,7 @@
 			});
 
 			// save new page index
-			urlHistory.activeIndex = newActiveIndex ? newActiveIndex : urlHistory.activeIndex;
+			urlHistory.activeIndex = newActiveIndex !== undefined ? newActiveIndex : urlHistory.activeIndex;
 
 			//if it's a back, use reverse animation
 			if( back ){
