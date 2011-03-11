@@ -47,6 +47,9 @@
 		//show loading message during Ajax requests
 		//if false, message will not appear, but loading classes will still be toggled on html el
 		loadingMessage: "loading",
+		
+		//configure meta viewport tag's content attr:
+		metaViewportContent: "width=device-width, minimum-scale=1, maximum-scale=1",
 
 		//support conditions that must be met in order to proceed
 		gradeA: function(){
