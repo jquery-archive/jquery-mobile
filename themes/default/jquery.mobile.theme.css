@@ -66,7 +66,10 @@
 	font-weight: bold;
 }
 .ui-br {
-	border-bottom: 1px solid rgba(130,130,130,.3);
+	border-bottom: rgb(130,130,130);
+	border-bottom: rgba(130,130,130,.3);
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
 }
 .ui-btn-up-a {
 	border: 1px solid 		#222;
@@ -718,34 +721,24 @@ a.ui-link-inherit {
 -----------------------------------------------------------------------------------------------------------*/
 
 .ui-icon {
+	background: 						#666;
+	background: 						rgba(0,0,0,.4);
 	background-image: url(images/icons-18-white.png);
 	background-repeat: no-repeat;
-	background-color: 					#666;
-	background-color: rgba(0,0,0,.4);
 	-moz-border-radius: 				9px;
 	-webkit-border-radius: 				9px;
 	border-radius: 						9px;
 }
-.ui-icon-disc {
-	background-color: 					#666;
-	background-color: 					rgba(0,0,0,.3);
-	-moz-border-radius: 				9px;
-	-webkit-border-radius: 				9px;
-	border-radius: 						9px;
-}
+
 
 /* Alt icon color
 -----------------------------------------------------------------------------------------------------------*/
 
 .ui-icon-black {
+	background: 						#fff;
+	background: 						rgba(255,255,255,.3);
 	background-image: url(images/icons-18-black.png);
-}
-.ui-icon-black-disc {
-	background-color: 					#fff;
-	background-color: 					rgba(255,255,255,.3);
-	-moz-border-radius: 				9px;
-	-webkit-border-radius: 				9px;
-	border-radius: 						9px;
+	background-repeat: no-repeat;
 }
 
 /* HD/"retina" sprite
