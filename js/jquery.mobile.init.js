@@ -26,7 +26,9 @@
 	$html.addClass( "ui-mobile ui-mobile-rendering" );
 
 	//define & prepend meta viewport tag, if content is defined
-	$.mobile.metaViewportContent ? $( "<meta>", { name: "viewport", content: $.mobile.metaViewportContent}).prependTo( $head ) : undefined;
+	//NOTE: this is now deprecated. We recommend placing the meta viewport element in
+	//the markup from the start.
+	$.mobile.metaViewportContent && !$head.find( "meta[viewport]" ).length ? $( "<meta>", { name: "viewport", content: $.mobile.metaViewportContent}).prependTo( $head ) : undefined;
 
 	//loading div which appears during Ajax requests
 	//will not appear if $.mobile.loadingMessage is false
