@@ -340,7 +340,7 @@ function getSpecialEventObject(eventType)
 
 // Expose our custom events to the jQuery bind/unbind mechanism.
 
-var vevents = "vmouseover vmousedown vmousemove vmouseup vclick vmouseout".split(" ");
+var vevents = "vmouseover vmousedown vmousemove vmouseup vclick vmouseout vmousecancel".split(" ");
 for (var i = 0; i < vevents.length; i++){
 	$.event.special[vevents[i]] = getSpecialEventObject(vevents[i]);
 }
