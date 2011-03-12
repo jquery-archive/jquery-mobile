@@ -92,42 +92,42 @@
 	<a href="#no-trans-dialog" data-nstest-rel="dialog"></a>
 </div>
 
-<div id="no-trans-dialog"  data-nstest-role="page">
+<div id="no-trans-dialog" data-nstest-role="page">
 </div>
 
-<div id="dup-history-first" data-role="page">
-  <a href="#dup-history-second" data-transition="slideup" data-role="button" >
+<div id="dup-history-first" data-nstest-role="page">
+  <a href="#dup-history-second" data-transition="slideup" data-nstest-role="button" >
 		Page 2
 	</a>
 </div>
 
-<div id="dup-history-second" data-role="page">
-  <a href="#dup-history-first" data-transition="slideup" data-role="button">
+<div id="dup-history-second" data-nstest-role="page">
+  <a href="#dup-history-first" data-nstest-transition="slideup" data-nstest-role="button">
 		Page 1
 	</a>
-  <a href="#dup-history-dialog" data-role="button" data-transition="pop" data-rel="dialog">Dialog</a>
+  <a href="#dup-history-dialog" data-nstest-role="button" data-nstest-transition="pop" data-nstest-rel="dialog">Dialog</a>
 </div>
 
-<div id="dup-history-dialog" data-role="dialog">
-   <div data-role="header" data-position="inline">
+<div id="dup-history-dialog" data-nstest-role="dialog">
+   <div data-nstest-role="header" data-nstest-position="inline">
      <h1>Dialog</h1>
    </div>
 </div>
 
-<div id="skip-dialog-first" data-role="page">
-  <div data-role="content">
-    <a href="#skip-dialog" data-role="button" data-transition="pop" data-rel="dialog">Dialog</a>
+<div id="skip-dialog-first" data-nstest-role="page">
+  <div data-nstest-role="content">
+    <a href="#skip-dialog" data-nstest-role="button" data-nstest-transition="pop" data-nstest-rel="dialog">Dialog</a>
   </div>
 </div>
 
-<div id="skip-dialog" data-role="dialog">
-  <div data-role="content">
+<div id="skip-dialog" data-nstest-role="dialog">
+  <div data-nstest-role="content">
     <a href="#skip-dialog-second">Page 2</a>
   </div>
 </div>
 
-<div id="skip-dialog-second" data-role="page">
-	<a href="#" data-rel="back">Go Back</a>
+<div id="skip-dialog-second" data-nstest-role="page">
+	<a href="#" data-nstest-rel="back">Go Back</a>
 </div>
 </body>
 </html>

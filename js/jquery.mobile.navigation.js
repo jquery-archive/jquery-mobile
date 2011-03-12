@@ -519,8 +519,10 @@
 					var all = $("<div></div>"),
 							redirectLoc,
 							// TODO handle dialogs again
-							pageElemRegex = new RegExp(".*(<[^>]*\bdata-" + $.mobile.ns + "role=[\"']?page[\"']?[^>]*>).*"),
-							dataUrlRegex = new RegExp("\bdata-" + $.mobile.ns + "url=[\"']?([^\"'>]*)[\"']?");
+							// NOTE word boundries behave as expected with regex literals, but not RegEx objects
+							// /.*(<[^>]*\bdata-nstest-role=["']?page["']?[^>]*>).*/.test(html));
+							pageElemRegex = new RegExp(".*(<[^>]+data-" + $.mobile.ns + "role=[\"']?page[\"']?[^>]*>).*"),
+							dataUrlRegex = new RegExp("data-" + $.mobile.ns + "url=[\"']?([^\"'>]*)[\"']?");
 
 					// data-url must be provided for the base tag so resource requests can be directed to the
 					// correct url. loading into a temprorary element makes these requests immediately
