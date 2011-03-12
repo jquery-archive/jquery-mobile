@@ -45,7 +45,7 @@
 				return path.get() + url;
 			},
 
-			//return a url path with the window's location protocol/hostname removed
+			//return a url path with the window's location protocol/hostname/pathname removed
 			clean: function( url ){
 				// Replace the protocol, host, and pathname only once at the beginning of the url to avoid
 				// problems when it's included as a part of a param
@@ -682,8 +682,10 @@
 			window.history.back();
 			return false;
 		}
-
-		if( url === "#" ){
+		
+		//prevent # urls from bubbling
+		//path.get() is replaced to combat abs url prefixing in IE
+		if( url.replace(path.get(), "") == "#"  ){
 			//for links created purely for interaction - ignore
 			event.preventDefault();
 			return;
