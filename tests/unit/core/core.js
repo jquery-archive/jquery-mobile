@@ -56,7 +56,6 @@
 			ok($("html").hasClass("ui-mobile"));
 		});
 
-
 		//TODO lots of duplication
 		test( "pageLoading doesn't add the dialog to the page when loading message is false", function(){
 			$.testHelper.alterExtend({loadingMessage: false});
@@ -101,15 +100,15 @@
 		});
 
 		var findFirstPage = function() {
-			return $("[ data-"+ $.mobile.ns +"-role='page']").first();
+			return $("[ data-"+ $.mobile.ns + "role='page']").first();
 		};
 
 		test( "active page and start page should be set to the fist page in the selected set", function(){
-			var firstPage = findFirstPage();
 			$.testHelper.reloadLib(libName);
+			var firstPage = findFirstPage();
 
-			same($.mobile.firstPage, firstPage);
-			same($.mobile.activePage, firstPage);
+			same($.mobile.firstPage[0], firstPage[0]);
+			same($.mobile.activePage[0], firstPage[0]);
 		});
 
 		test( "mobile viewport class is defined on the first page's parent", function(){
@@ -123,7 +122,7 @@
 			var firstPage = findFirstPage();
 			$.testHelper.reloadLib(libName);
 
-			same($.mobile.pageContainer, firstPage.parent());
+			same($.mobile.pageContainer[0], firstPage.parent()[0]);
 		});
 
 		test( "page loading is called on document ready", function(){
