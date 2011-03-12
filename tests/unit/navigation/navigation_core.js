@@ -207,7 +207,6 @@
 		$(linkSelector).click();
 
 		setTimeout(function(){
-			console.log(location.hash);
 			ok(hashRegex.test(location.hash));
 			start();
 		}, 600);
