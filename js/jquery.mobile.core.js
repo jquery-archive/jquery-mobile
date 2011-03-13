@@ -53,17 +53,9 @@
 		metaViewportContent: "width=device-width, minimum-scale=1, maximum-scale=1",
 
 		//support conditions that must be met in order to proceed
-		gradeA: function(){
-			
-			//non-UA-based IE version check by James Padolsey, modified by jdalton - from http://gist.github.com/527683
-			//allows for inclusion of IE 6+, including Windows Mobile 7
-			var ie = (function() {
-			    var v = 3, div = document.createElement('div'), a = div.all || [];
-			    while (div.innerHTML = '<!--[if gt IE '+(++v)+']><br><![endif]-->', a[0]); 
-			    return v > 4 ? v : !v;
-			}());
-		
-			return $.support.mediaquery || ie && ie >= 6;
+		//default enhanced qualifications are media query support OR IE 6+
+		gradeA: function(){			
+			return $.support.mediaquery || $.mobile.browser.ie && $.mobile.browser.ie >= 6;
 		},
 
 		//TODO might be useful upstream in jquery itself ?
