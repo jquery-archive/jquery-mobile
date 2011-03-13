@@ -18,8 +18,8 @@ div.ui-slider-handle-snapping { -webkit-transition: left 100ms linear; }
 div.ui-slider-labelbg { position: absolute; top:0; margin: 0; border-width: 0; }
 div.ui-slider-switch div.ui-slider-labelbg-a { width: 60%; height: 100%; left: 0; }
 div.ui-slider-switch div.ui-slider-labelbg-b { width: 60%; height: 100%; right: 0; }
-.ui-slider-switch-a div.ui-slider-labelbg-a, .ui-slider-switch-b div.ui-slider-labelbg-b { z-index: 1; }
-.ui-slider-switch-a div.ui-slider-labelbg-b, .ui-slider-switch-b div.ui-slider-labelbg-a { z-index: 10; }
+.ui-slider-switch-a div.ui-slider-labelbg-a, .ui-slider-switch-b div.ui-slider-labelbg-b { z-index: -1; }
+.ui-slider-switch-a div.ui-slider-labelbg-b, .ui-slider-switch-b div.ui-slider-labelbg-a { z-index: 0; }
 
 div.ui-slider-switch a.ui-slider-handle { z-index: 20;  width: 101%; height: 32px; margin-top: -18px; margin-left: -101%; }
 span.ui-slider-label { width: 100%; position: absolute;height: 32px;  font-size: 16px; text-align: center; line-height: 2; background: none; border-color: transparent; }
