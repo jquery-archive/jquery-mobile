@@ -29,9 +29,9 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 			select = this.element
 						.wrap( "<div class='ui-select'>" ),
-			
-			selectID = select.attr( "id" ),			
-			
+
+			selectID = select.attr( "id" ),
+
 			label = $( "label[for="+ selectID +"]" ).addClass( "ui-select" ),
 
 			button = ( self.options.nativeMenu ? $( "<div/>" ) : $( "<a>", {
@@ -52,31 +52,31 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					shadow: o.shadow,
 					iconshadow: o.iconshadow
 				}),
-			
+
 			//multi select or not
 			isMultiple = self.isMultiple = select[0].multiple;
-		
+
 		//Opera does not properly support opacity on select elements
 		//In Mini, it hides the element, but not its text
 		//On the desktop,it seems to do the opposite
 		//for these reasons, using the nativeMenu option results in a full native select in Opera
 		if( o.nativeMenu && window.opera && window.opera.version ){
 			select.addClass( "ui-select-nativeonly" );
-		}	
-			
-			//vars for non-native menus
-		if( !o.nativeMenu ){	
+		}
+
+		//vars for non-native menus
+		if( !o.nativeMenu ){
 			var options = select.find("option"),
-				
+
 				buttonId = selectID + "-button",
-	
+
 				menuId = selectID + "-menu",
-	
+
 				thisPage = select.closest( ".ui-page" ),
-				
+
 				//button theme
 				theme = /ui-btn-up-([a-z])/.exec( button.attr("class") )[1],
-	
+
 				menuPage = $( "<div data-role='dialog' data-theme='"+ o.menuPageTheme +"'>" +
 							"<div data-role='header'>" +
 								"<div class='ui-title'>" + label.text() + "</div>"+
@@ -85,17 +85,17 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 						"</div>" )
 						.appendTo( $.mobile.pageContainer )
 						.page(),
-	
+
 				menuPageContent = menuPage.find( ".ui-content" ),
-	
+
 				menuPageClose = menuPage.find( ".ui-header a" ),
-	
+
 				screen = $( "<div>", {"class": "ui-selectmenu-screen ui-screen-hidden"})
 							.appendTo( thisPage ),
-	
+
 				listbox = $( "<div>", { "class": "ui-selectmenu ui-selectmenu-hidden ui-overlay-shadow ui-corner-all pop ui-body-" + o.overlayTheme } )
 						.insertAfter(screen),
-	
+
 				list = $( "<ul>", {
 						"class": "ui-selectmenu-list",
 						"id": menuId,
@@ -104,17 +104,17 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 						"data-theme": theme
 					})
 					.appendTo( listbox ),
-	
+
 				header = $( "<div>", {
 						"class": "ui-header ui-bar-" + theme
 					})
 					.prependTo( listbox ),
-	
+
 				headerTitle = $( "<h1>", {
 						"class": "ui-title"
 					})
 					.appendTo( header ),
-	
+
 				headerClose = $( "<a>", {
 						"data-iconpos": "notext",
 						"data-icon": "delete",
@@ -124,9 +124,9 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					})
 					.appendTo( header )
 					.buttonMarkup(),
-	
+
 				menuType;
-		} //end non native vars	
+		} //end non native vars
 
 		// add counter for multi selects
 		if( isMultiple ){
@@ -144,7 +144,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			.change(function(){
 				self.refresh();
 			});
-			
+
 		//expose to other methods
 		$.extend(self, {
 			select: select,
@@ -165,7 +165,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			headerClose:headerClose,
 			headerTitle:headerTitle,
 			placeholder: ''
-		});	
+		});
 
 		//support for using the native select menu with a custom button
 		if( o.nativeMenu ){
@@ -191,7 +191,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 			button.attr( "tabindex", "-1" );
 		} else {
-		
+
 			//create list from select, update state
 			self.refresh();
 
@@ -228,22 +228,22 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 						$( this ).data( "moved", true );
 					}
 				});
-		
-	
+
+
 			//events for list items
 			list.delegate("li:not(.ui-disabled, .ui-li-divider)", "click", function(event){
 				// clicking on the list item fires click on the link in listview.js.
 				// to prevent this handler from firing twice if the link isn't clicked on,
 				// short circuit unless the target is the link
 				if( !$(event.target).is("a") ){ return; }
-	
+
 				// index of option tag to be selected
 				var newIndex = list.find( "li:not(.ui-li-divider)" ).index( this ),
 					option = self.optionElems.eq( newIndex )[0];
-	
+
 				// toggle selected status on the tag for multi selects
 				option.selected = isMultiple ? !option.selected : true;
-	
+
 				// toggle checkbox class for multiple selects
 				if( isMultiple ){
 					$(this)
@@ -251,18 +251,18 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 						.toggleClass('ui-icon-checkbox-on', option.selected)
 						.toggleClass('ui-icon-checkbox-off', !option.selected);
 				}
-	
+
 				// trigger change
 				select.trigger( "change" );
-	
+
 				//hide custom select for single selects only
 				if( !isMultiple ){
 					self.close();
 				}
-	
+
 				event.preventDefault();
 			});
-	
+
 			//events on "screen" overlay + close button
 			screen
 				.add( headerClose )
@@ -270,16 +270,16 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				.bind("click", function(event){
 					self.close();
 					event.preventDefault();
-	
+
 					// if the dialog's close icon was clicked, prevent the dialog's close
 					// handler from firing. selectmenu's should take precedence
 					if( $.contains(menuPageClose[0], event.target) ){
 						event.stopImmediatePropagation();
 					}
 				});
-		}	
-		
-		
+		}
+
+
 	},
 
 	_buildList: function(){
@@ -311,7 +311,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					optgroups.push( optLabel );
 				}
 			}
-			
+
 			//find placeholder text
 			if( !this.getAttribute('value') || text.length == 0 || $this.data('placeholder') ){
 				if( o.hidePlaceholderMenuItems ){
@@ -328,7 +328,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 			lis.push( "<li data-icon='"+ dataIcon +"' class='"+ classes.join(" ") + "' " + extraAttrs.join(" ") +">"+ anchor +"</li>" )
 		});
-		
+
 		self.list.html( lis.join(" ") );
 
 		// hide header close link for single selects
@@ -379,7 +379,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		if( isMultiple ){
 			self.buttonCount[ selected.length > 1 ? 'show' : 'hide' ]().text( selected.length );
 		}
-		
+
 		if( !self.options.nativeMenu ){
 			self.list
 				.find( 'li:not(.ui-li-divider)' )
@@ -388,17 +388,17 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				.each(function( i ){
 					if( $.inArray(i, indicies) > -1 ){
 						var item = $(this).addClass( $.mobile.activeBtnClass );
-	
+
 						// aria selected attr
 						item.find( 'a' ).attr( 'aria-selected', true );
-	
+
 						// multiple selects: add the "on" checkbox state to the icon
 						if( isMultiple ){
 							item.find('.ui-icon').removeClass('ui-icon-checkbox-off').addClass('ui-icon-checkbox-on');
 						}
 					}
 				});
-		}	
+		}
 	},
 
 	open: function(){
@@ -457,7 +457,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				halfheight = menuHeight / 2,
                 maxwidth = parseFloat(self.list.parent().css('max-width')),
 				newtop,newleft;
-				
+
 				if( roomtop > menuHeight / 2 && roombot > menuHeight / 2 ){
 					newtop = btnOffset + ( self.button.outerHeight() / 2 ) - halfheight;
 				}
@@ -465,7 +465,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					//30px tolerance off the edges
 					newtop = roomtop > roombot ? scrollTop + screenHeight - menuHeight - 30 : scrollTop + 30;
 				}
-				
+
 				if (menuWidth < maxwidth) {
 					newleft = (screenWidth - menuWidth) / 2;
 				} else {
