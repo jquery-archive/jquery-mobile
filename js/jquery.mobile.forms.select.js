@@ -455,8 +455,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			var roomtop = btnOffset - scrollTop,
 				roombot = scrollTop + screenHeight - btnOffset,
 				halfheight = menuHeight / 2,
-                maxwidth = parseFloat(self.list.parent().css('max-width')),
-				newtop,newleft;
+				maxwidth = parseFloat(self.list.parent().css('max-width')),
+				newtop, newleft;
 
 			if( roomtop > menuHeight / 2 && roombot > menuHeight / 2 ){
 				newtop = btnOffset + ( self.button.outerHeight() / 2 ) - halfheight;
@@ -466,10 +466,10 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				newtop = roomtop > roombot ? scrollTop + screenHeight - menuHeight - 30 : scrollTop + 30;
 			}
 
-
+			// if the menuwidth is smaller than the screen center is
 			if (menuWidth < maxwidth) {
 				newleft = (screenWidth - menuWidth) / 2;
-			} else {
+			} else { //otherwise insure a >= 30px offset from the left
 				newleft = self.button.offset().left + self.button.outerWidth() / 2 - menuWidth / 2;
 				// 30px tolerance off the edges
 				if (newleft < 30) {
