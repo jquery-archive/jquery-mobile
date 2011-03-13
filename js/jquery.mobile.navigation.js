@@ -47,7 +47,10 @@
 
 			//return a url path with the window's location protocol/hostname removed
 			clean: function( url ){
-				return url.replace( location.protocol + "//" + location.host, "");
+				// Replace the protocol and host only once at the beginning of the url to avoid
+				// problems when it's included as a part of a param
+				var leadingUrlRootRegex = new RegExp("^" + location.protocol + "//" + location.host);
+				return url.replace(leadingUrlRootRegex, "");
 			},
 
 			//just return the url without an initial #

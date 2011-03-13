@@ -6,7 +6,9 @@
 	var mouseUpTouchEnd = $.support.touch ? "touchend" : "mouseup",
 			libName = "jquery.mobile.forms.select.js";
 
-	module(libName);
+	module(libName, {
+		teardown: function(){ location.hash = ""; }
+	});
 
 	test( "a large select menu should come up in a dialog many times", function(){
 		var menu, select = $("#select-choice-many-container a");
@@ -45,7 +47,7 @@
 
 		stop();
 	});
-	
+
 	test( "selects marked with data-native-menu=true should use a div as their button", function(){
 		same($("#select-choice-native-container div.ui-btn").length, 1);
 	});
@@ -53,7 +55,7 @@
 	test( "selects marked with data-native-menu=true should not have a custom menu", function(){
 		same($("#select-choice-native-container ul").length, 0);
 	});
-	
+
 	test( "selects marked with data-native-menu=true should sit inside the button", function(){
 		same($("#select-choice-native-container div.ui-btn select").length, 1);
 	});
