@@ -6,7 +6,9 @@
 	var mouseUpTouchEnd = $.support.touch ? "touchend" : "mouseup",
 			libName = "jquery.mobile.forms.select.js";
 
-	module(libName);
+	module(libName, {
+		teardown: function(){ location.hash = ""; }
+	});
 
 	test( "a large select menu should come up in a dialog many times", function(){
 		var menu, select = $("#select-choice-many-container a");
