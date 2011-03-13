@@ -458,25 +458,26 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
                 maxwidth = parseFloat(self.list.parent().css('max-width')),
 				newtop,newleft;
 
-				if( roomtop > menuHeight / 2 && roombot > menuHeight / 2 ){
-					newtop = btnOffset + ( self.button.outerHeight() / 2 ) - halfheight;
-				}
-				else{
-					//30px tolerance off the edges
-					newtop = roomtop > roombot ? scrollTop + screenHeight - menuHeight - 30 : scrollTop + 30;
-				}
+			if( roomtop > menuHeight / 2 && roombot > menuHeight / 2 ){
+				newtop = btnOffset + ( self.button.outerHeight() / 2 ) - halfheight;
+			}
+			else{
+				//30px tolerance off the edges
+				newtop = roomtop > roombot ? scrollTop + screenHeight - menuHeight - 30 : scrollTop + 30;
+			}
 
-				if (menuWidth < maxwidth) {
-					newleft = (screenWidth - menuWidth) / 2;
-				} else {
-					newleft = self.button.offset().left + self.button.outerWidth() / 2 - menuWidth / 2;
-					// 30px tolerance off the edges
-					if (newleft < 30) {
-						newleft = 30;
-					} else if ((newleft + menuWidth) > screenWidth) {
-						newleft = screenWidth - menuWidth - 30;
-					}
+
+			if (menuWidth < maxwidth) {
+				newleft = (screenWidth - menuWidth) / 2;
+			} else {
+				newleft = self.button.offset().left + self.button.outerWidth() / 2 - menuWidth / 2;
+				// 30px tolerance off the edges
+				if (newleft < 30) {
+					newleft = 30;
+				} else if ((newleft + menuWidth) > screenWidth) {
+					newleft = screenWidth - menuWidth - 30;
 				}
+			}
 
 			self.listbox
 				.append( self.list )
