@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8" />
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
 	<title>jQuery Mobile Select Events Test Suite</title>
 
 	<script type="text/javascript" src="../../../js/jquery.js"></script>
@@ -14,6 +15,7 @@
 	<script type="text/javascript" src="../../../external/qunit.js"></script>
 
 	<script type="text/javascript" src="select_events.js"></script>
+	<script type="text/javascript" src="select_core.js"></script>
 </head>
 <body>
 
@@ -106,5 +108,25 @@
 			<option value="WY">Wyoming</option>
 		</select>
 	</div>
+
+	<div data-role="fieldcontain" id="select-offscreen-container">
+		<style>
+			/* keep the select small and close to the screen border to test rendering */
+			#select-offscreen-container {
+			width: 100px;
+			position: absolute;
+			left: 0px;
+			top: 0px;
+			}
+		</style>
+
+		<select name="select-choice-few" id="select-offscreen">
+			<option value="standard">Standard: 7 day</option>
+			<option value="rush">Rush: 3 days</option>
+			<option value="express">Express: next day</option>
+			<option value="overnight">Overnight</option>
+		</select>
+	</div>
 </div>
+</body>
 </html>

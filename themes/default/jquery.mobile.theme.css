@@ -21,7 +21,7 @@
 	background-image: -webkit-gradient(linear,left top,left bottom,
 		color-stop(0, 	#3c3c3c),
 		color-stop(1, 		#111111));
-  	-msfilter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#3c3c3c', EndColorStr='#111111')";
+  	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#3c3c3c', EndColorStr='#111111')";
 }
 .ui-bar-a, 
 .ui-bar-a input, 
@@ -66,7 +66,10 @@
 	font-weight: bold;
 }
 .ui-br {
-	border-bottom: 1px solid rgba(130,130,130,.3);
+	border-bottom: rgb(130,130,130);
+	border-bottom: rgba(130,130,130,.3);
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
 }
 .ui-btn-up-a {
 	border: 1px solid 		#222;
@@ -352,7 +355,7 @@
 	background-image: -webkit-gradient(linear,left top,left bottom,
 		color-stop(0, 		#eeeeee),
 		color-stop(1, 		#fdfdfd));
-  	-msfilter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#eeeeee', EndColorStr='#fdfdfd')";
+  	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#eeeeee', EndColorStr='#fdfdfd')";
 }
 .ui-btn-down-c a.ui-link-inherit {
 	color: 					#2F3E46;
@@ -439,7 +442,7 @@
 	background-image: -webkit-gradient(linear,left top,left bottom,
 		color-stop(0, 		#fdfdfd),
 		color-stop(1, 		#eeeeee));
-  	-msfilter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fdfdfd', EndColorStr='#eeeeee')";
+  	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fdfdfd', EndColorStr='#eeeeee')";
 }
 .ui-btn-hover-d a.ui-link-inherit {
 	color: 					#222;
@@ -456,7 +459,7 @@
 	background-image: -webkit-gradient(linear,left top,left bottom,
 		color-stop(0, 		#eeeeee),
 		color-stop(1, 		#ffffff));
-  	-msfilter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#eeeeee', EndColorStr='#ffffff')";
+  	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#eeeeee', EndColorStr='#ffffff')";
 }
 .ui-btn-down-d a.ui-link-inherit {
 	border: 1px solid 		#808080;
@@ -470,7 +473,7 @@
 	background-image: -webkit-gradient(linear,left top,left bottom,
 		color-stop(0, 		#cccccc),
 		color-stop(1, 		#eeeeee));
-  	-msfilter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#cccccc', EndColorStr='#eeeeee')";
+  	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#cccccc', EndColorStr='#eeeeee')";
 }
 .ui-btn-up-d,
 .ui-btn-hover-d,
@@ -493,7 +496,7 @@
 	background-image: -webkit-gradient(linear,left top,left bottom,
 		color-stop(0, 		#fceda7),
 		color-stop(1, 		#fadb4e));
-  	-msfilter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fceda7', EndColorStr='#fadb4e')";
+  	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fceda7', EndColorStr='#fadb4e')";
 }
 .ui-bar-e,
 .ui-bar-e input,
@@ -520,7 +523,7 @@
 	background-image: -webkit-gradient(linear,left top,left bottom,
 		color-stop(0, 		#fff),
 		color-stop(1, 		#faeb9e));
-  	-msfilter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff', EndColorStr='#faeb9e')";
+  	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff', EndColorStr='#faeb9e')";
 }
 .ui-body-e,
 .ui-body-e input,
@@ -569,7 +572,7 @@
 	background-image: -webkit-gradient(linear,left top,left bottom,
 		color-stop(0, 		#fcf0b5),
 		color-stop(1, 		#fbe26f));
-  	-msfilter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fcf0b5', EndColorStr='#fbe26f')";
+  	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fcf0b5', EndColorStr='#fbe26f')";
 }
 
 .ui-btn-hover-e a.ui-link-inherit {
@@ -624,7 +627,7 @@ a.ui-link-inherit {
 	background-image: -webkit-gradient(linear,left top,left bottom,
 		color-stop(0, 		#85bae4),
 		color-stop(1, 		#5393c5));
-  	-msfilter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#85bae4', EndColorStr='#5393c5')";
+  	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#85bae4', EndColorStr='#5393c5')";
   	outline: none;
 }
 .ui-btn-active a.ui-link-inherit {
@@ -718,34 +721,24 @@ a.ui-link-inherit {
 -----------------------------------------------------------------------------------------------------------*/
 
 .ui-icon {
+	background: 						#666;
+	background: 						rgba(0,0,0,.4);
 	background-image: url(images/icons-18-white.png);
 	background-repeat: no-repeat;
-	background-color: 					#666;
-	background-color: rgba(0,0,0,.4);
 	-moz-border-radius: 				9px;
 	-webkit-border-radius: 				9px;
 	border-radius: 						9px;
 }
-.ui-icon-disc {
-	background-color: 					#666;
-	background-color: 					rgba(0,0,0,.3);
-	-moz-border-radius: 				9px;
-	-webkit-border-radius: 				9px;
-	border-radius: 						9px;
-}
+
 
 /* Alt icon color
 -----------------------------------------------------------------------------------------------------------*/
 
 .ui-icon-black {
+	background: 						#fff;
+	background: 						rgba(255,255,255,.3);
 	background-image: url(images/icons-18-black.png);
-}
-.ui-icon-black-disc {
-	background-color: 					#fff;
-	background-color: 					rgba(255,255,255,.3);
-	-moz-border-radius: 				9px;
-	-webkit-border-radius: 				9px;
-	border-radius: 						9px;
+	background-repeat: no-repeat;
 }
 
 /* HD/"retina" sprite

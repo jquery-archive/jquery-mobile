@@ -1,7 +1,8 @@
 <!DOCTYPE html> 
 <html> 
 	<head>
-	<meta charset="utf-8" /> 
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1"> 
 	<title>jQuery Mobile Docs - Configuring default settings</title> 
 	<link rel="stylesheet"  href="../../themes/default/" /> 
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
@@ -96,9 +97,6 @@ $(document).bind("mobileinit", function(){
 	
 	<dt>loadingMessage (<em>string</em>, default: "loading"):</dt> 
 	<dd>Set the text that appears when a page is loading. If set to false, the message will not appear at all.</dd>
-	
-	<dt>metaViewportContent (<em>string</em>, default: "width=device-width, minimum-scale=1, maximum-scale=1"):</dt> 
-	<dd>Configure the auto-generated meta viewport tag's content attribute. If false, no meta tag will be appended to the DOM.</dd>
 
 	<dt>gradeA (<em>function that returns a boolean</em>, default: a function returning the value of $.support.mediaquery):</dt> 
 	<dd>Any support conditions that must be met in order to proceed.</dd>

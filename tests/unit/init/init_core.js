@@ -2,7 +2,9 @@
  * mobile init tests
  */
 (function($){
-	var mobilePage = undefined, mobileSelect = undefined,
+	var mobilePage = undefined,
+			mobileSelect = undefined,
+			metaViewportContentDefault = $.mobile.metaViewportContent,
 	    libName = 'jquery.mobile.init.js',
 			setGradeA = function(value) { $.mobile.gradeA = function(){ return value; }; },
 			extendFn = $.extend;
@@ -20,6 +22,9 @@
 
 			// NOTE reset for pageLoading tests
 			$('.ui-loader').remove();
+
+			// reset meta view port content
+			$.mobile.metaViewportContent = metaViewportContentDefault;
 		}
 	});
 
@@ -64,24 +69,34 @@
 			ok($("html").hasClass("ui-mobile"));
 		});
 
-		var metaViewportSelector = "head meta[name=viewport]",
-				setViewPortContent = function(value){
-					$(metaViewportSelector).remove();
-					$.mobile.metaViewportContent = value;
-					$.testHelper.reloadLib( libName );
-				};
+		var findMeta = function(){
+				return $("head meta[name='viewport']");
+			},
+			setViewPortContent = function(){
+				$.testHelper.reloadLib( libName );
+			};
 
-		test( "meta view port element not added to head when not defined on mobile", function(){
-			setViewPortContent(false);
-			same($(metaViewportSelector).length, 0);
+		test( "meta viewport element not added to head when not defined on mobile", function(){
+			$.mobile.metaViewportContent = null;
+			findMeta().remove();
+			setViewPortContent();
+			same( findMeta().length, 0);
 		});
 
-		test( "meta view port element is added to head when defined on mobile", function(){
-			setViewPortContent("width=device-width");
-			same($(metaViewportSelector).length, 1);
+		test( "meta viewport element is added to head when defined on mobile and no meta already exists", function(){
+			findMeta().remove();
+			setViewPortContent();
+			same( findMeta().length, 1);
 		});
 
-				var findFirstPage = function() {
+		test( "meta viewport element is not added to head when defined on mobile and a meta already exists", function(){
+			findMeta().remove();
+			$( '<meta name="viewport" content="width=device-width">').prependTo("head");
+			setViewPortContent();
+			same( findMeta().length, 1);
+		});
+
+		var findFirstPage = function() {
 			return $("[data-role='page']").first();
 		};
 
