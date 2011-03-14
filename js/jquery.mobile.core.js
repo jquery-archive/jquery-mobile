@@ -53,9 +53,9 @@
 		metaViewportContent: "width=device-width, minimum-scale=1, maximum-scale=1",
 
 		//support conditions that must be met in order to proceed
-		//default enhanced qualifications are media query support OR IE 6+
+		//default enhanced qualifications are media query support OR IE 7+
 		gradeA: function(){			
-			return $.support.mediaquery || $.mobile.browser.ie && $.mobile.browser.ie >= 6;
+			return $.support.mediaquery || $.mobile.browser.ie && $.mobile.browser.ie >= 7;
 		},
 
 		//TODO might be useful upstream in jquery itself ?
