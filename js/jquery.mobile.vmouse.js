@@ -26,6 +26,7 @@
 (function($, window, document, undefined) {
 
 var dataPropertyName = "virtualMouseBindings",
+	virtualEventNames = "vmouseover vmousedown vmousemove vmouseup vclick vmouseout vmousecancel".split(" "),
 	touchEventProps = "clientX clientY pageX pageY screenX screenY".split(" "),
 	activeDocHandlers = {},
 	blockMouseEvents = false,
@@ -79,6 +80,22 @@ function createVirtualEvent(event, eventType)
 	}
 
 	return event;
+}
+
+function getVirtualBindingFlags(element)
+{
+	var flags = {};
+	var $ele = $(element);
+	while ($ele && $ele.length){
+		var b = $ele.data(dataPropertyName);
+		for (var k in b) {
+			if (b[k]){
+				flags[k] = flags.hasVirtualBinding = true;
+			}
+		}
+		$ele = $ele.parent();
+	}
+	return flags;
 }
 
 function getClosestElementWithVirtualBinding(element, eventType)
@@ -163,11 +180,11 @@ function clearResetTimer()
 	}
 }
 
-function triggerVirtualEvent(eventType, event)
+function triggerVirtualEvent(eventType, event, flags)
 {
 	var defaultPrevented = false;
 
-	if (getClosestElementWithVirtualBinding(event.target, eventType)) {
+	if ((flags && flags[eventType]) || (!flags && getClosestElementWithVirtualBinding(event.target, eventType))) {
 		var ve = createVirtualEvent(event, eventType);
 		$(event.target).trigger(ve);
 		defaultPrevented = ve.isDefaultPrevented();
@@ -195,7 +212,9 @@ function clearResetTimer()
 
 function handleTouchStart(event)
 {
-	if (getClosestElementWithVirtualBinding(event.target)){
+	var flags = getVirtualBindingFlags(event.target);
+
+	if (flags.hasVirtualBinding){
 		clearResetTimer();
 		
 		disableMouseBindings();
@@ -210,15 +229,15 @@ function handleTouchStart(event)
 			startScrollY = window.pageYOffset;
 		}
 	
-		triggerVirtualEvent("vmouseover", event);
-		triggerVirtualEvent("vmousedown", event);
+		triggerVirtualEvent("vmouseover", event, flags);
+		triggerVirtualEvent("vmousedown", event, flags);
 	}
 }
 
 function handleScroll(event)
 {
 	if (!didScroll){
-		triggerVirtualEvent("vmousecancel", event);
+		triggerVirtualEvent("vmousecancel", event, getVirtualBindingFlags(event.target));
 	}
 
 	didScroll = true;
@@ -234,10 +253,11 @@ function handleTouchMove(event)
 		|| (scrollTopSupported && (startScrollX != window.pageXOffset || startScrollY != window.pageYOffset))
 		|| (Math.abs(t.pageX - startX) > scrollThreshold || Math.abs(t.pageY - startY) > scrollThreshold);
 
+	var flags = getVirtualBindingFlags(event.target);
 	if (didScroll && !didCancel){
-		triggerVirtualEvent("vmousecancel", event);
+		triggerVirtualEvent("vmousecancel", event, flags);
 	}
-	triggerVirtualEvent("vmousemove", event);
+	triggerVirtualEvent("vmousemove", event, flags);
 	startResetTimer();
 }
 
@@ -245,15 +265,16 @@ function handleTouchEnd(event)
 {
 	disableTouchBindings();
 
-	triggerVirtualEvent("vmouseup", event);
+	var flags = getVirtualBindingFlags(event.target);
+	triggerVirtualEvent("vmouseup", event, flags);
 	if (!didScroll){
-		if (triggerVirtualEvent("vclick", event)){
+		if (triggerVirtualEvent("vclick", event, flags)){
 			// Push this element on the block list to prevent any clicks
 			// from getting to the bubble phase.
 			clickBlockList.push(event.target);
 		}
 	}
-	triggerVirtualEvent("vmouseout", event);
+	triggerVirtualEvent("vmouseout", event, flags);
 	didScroll = false;
 	
 	startResetTimer();
@@ -346,9 +367,8 @@ function getSpecialEventObject(eventType)
 
 // Expose our custom events to the jQuery bind/unbind mechanism.
 
-var vevents = "vmouseover vmousedown vmousemove vmouseup vclick vmouseout vmousecancel".split(" ");
-for (var i = 0; i < vevents.length; i++){
-	$.event.special[vevents[i]] = getSpecialEventObject(vevents[i]);
+for (var i = 0; i < virtualEventNames.length; i++){
+	$.event.special[virtualEventNames[i]] = getSpecialEventObject(virtualEventNames[i]);
 }
 
 // Add a capture click handler to block clicks.
