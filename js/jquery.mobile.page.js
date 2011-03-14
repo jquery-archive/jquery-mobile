@@ -30,7 +30,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 
 	_create: function() {
 		var $elem = this.element,
-			o = this.options;	
+			o = this.options;
 
 		this.keepNative = "[data-role='none'], [data-role='nojs']" + (o.keepNative ? ", " + o.keepNative : "");
 
@@ -116,7 +116,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 					break;
 			}
 		});
-		
+
 		//enhance form controls
   	this._enhanceControls();
 
@@ -150,7 +150,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 			if ( o.degradeInputs[ type ] ) {
 				$( this ).replaceWith(
 					$( "<div>" ).html( $(this).clone() ).html()
-						.replace( /type="([a-zA-Z]+)"/, "type="+ optType +" data-type='$1'" ) );
+						.replace( / type="?([a-zA-Z]+)"?/, " type=\""+ optType +"\" data-type=\""+type+"\" " ) );
 			}
 		});
 

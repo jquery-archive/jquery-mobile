@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	<meta charset="utf-8" />
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
 	<title>jQuery Mobile Docs - Forms</title>
 	<link rel="stylesheet"  href="../../themes/default/" />
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
@@ -51,7 +52,7 @@
 </code></pre>
 
 
-	<p>Or, if you'd like to prevent auto-initialization without adding attributes to your markup, you can customize the selector that is used for preventing auto-initialization by setting the page plugin's <code>keepNative</code> option (which defaults to <code>"[data-role="none"]</code>. Be sure to configure this option inside an event handler bound to the <code>mobileinit</code> event, so that it applies to the first page as well as subsequent pages that are loaded.</p>
+	<p>Or, if you'd like to prevent auto-initialization without adding attributes to your markup, you can customize the selector that is used for preventing auto-initialization by setting the page plugin's <code>keepNative</code> option (which defaults to <code>[data-role="none"]</code>. Be sure to configure this option inside an event handler bound to the <code>mobileinit</code> event, so that it applies to the first page as well as subsequent pages that are loaded.</p>
 		<pre><code>
 $(document).bind('mobileinit',function(){
 	<strong>$.mobile.page.prototype.options.keepNative = "select, input.foo, textarea.bar";</strong>
@@ -76,7 +77,43 @@ $(document).bind('mobileinit',function(){
 &lt;/div&gt;
 </code></pre>
 
+        <h2>Refreshing form elements</h2>
+        
+        <p>Every form control -- where applicable -- has a refresh method. Here are some examples:</p>
 
+<p>Checkboxes:</p>
+
+<code>
+$("input[type='checkbox']").attr("checked",true).checkboxradio("refresh");
+</code>
+
+<p>Radios:</p>
+<code>
+$("input[type='radio']").attr("checked",true).checkboxradio("refresh");
+</code>
+
+<p>Selects:</p>
+<code><pre>
+var myselect = $("select#foo");
+myselect[0].selectedIndex = 3;
+myselect.selectmenu("refresh");
+</pre></code>
+
+<p>Sliders:</p>
+<code>
+$("input[type=range]").val(60).slider("refresh");
+</code>
+
+<p>Flip switches (they use slider):</p>
+
+<code><pre>
+var myswitch = $("select#bar");
+myswitch[0].selectedIndex = 1;
+myswitch .slider("refresh");
+</pre></code>
+
+<p>We're considering adding a refresh method to forms to let the framework refresh all the individual elemnts withing but that is a future enhancement.</p>
+        
 	</div><!-- /content -->
 </div><!-- /page -->
 

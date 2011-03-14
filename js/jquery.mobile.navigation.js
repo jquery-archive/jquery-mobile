@@ -45,11 +45,12 @@
 				return path.get() + url;
 			},
 
-			//return a url path with the window's location protocol/hostname removed
+			//return a url path with the window's location protocol/hostname/pathname removed
 			clean: function( url ){
-				// Replace the protocol and host only once at the beginning of the url to avoid
+				// Replace the protocol, host, and pathname only once at the beginning of the url to avoid
 				// problems when it's included as a part of a param
-				var leadingUrlRootRegex = new RegExp("^" + location.protocol + "//" + location.host);
+				// Also, since all urls are absolute in IE, we need to remove the pathname as well.
+				var leadingUrlRootRegex = new RegExp("^" + location.protocol + "//" + location.host + location.pathname);
 				return url.replace(leadingUrlRootRegex, "");
 			},
 
@@ -279,7 +280,6 @@
 	$.mobile.urlHistory = urlHistory;
 
 	// changepage function
-	// TODO : consider moving args to an object hash
 	$.mobile.changePage = function( to, transition, reverse, changeHash, fromHashChange ){
 		//from is always the currently viewed page
 		var toIsArray = $.type(to) === "array",
@@ -650,6 +650,12 @@
 
 			//get href, if defined, otherwise fall to null #
 			href = $this.attr( "href" ) || "#",
+			
+			//cache a check for whether the link had a protocol
+			//if this is true and the link was same domain, we won't want
+			//to prefix the url with a base (esp helpful in IE, where every
+			//url is absolute
+			hadProtocol = path.hasProtocol( href ),
 
 			//get href, remove same-domain protocol and host
 			url = path.clean( href ),
@@ -676,8 +682,10 @@
 			window.history.back();
 			return false;
 		}
-
-		if( url === "#" ){
+		
+		//prevent # urls from bubbling
+		//path.get() is replaced to combat abs url prefixing in IE
+		if( url.replace(path.get(), "") == "#"  ){
 			//for links created purely for interaction - ignore
 			event.preventDefault();
 			return;
@@ -714,7 +722,7 @@
 			nextPageRole = $this.attr( "data-rel" );
 
 			//if it's a relative href, prefix href with base url
-			if( path.isRelative( url ) ){
+			if( path.isRelative( url ) && !hadProtocol ){
 				url = path.makeAbsolute( url );
 			}
 

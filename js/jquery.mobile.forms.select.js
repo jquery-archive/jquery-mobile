@@ -189,7 +189,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 						.removeClass( $.mobile.activeBtnClass );
 				});
 
-			button.attr( "tabindex", "-1" );
+			
 		} else {
 
 			//create list from select, update state

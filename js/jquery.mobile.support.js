@@ -46,6 +46,16 @@ function baseTagTest(){
 	return rebase.indexOf(fauxBase) === 0;
 };
 
+
+//non-UA-based IE version check by James Padolsey, modified by jdalton - from http://gist.github.com/527683
+//allows for inclusion of IE 6+, including Windows Mobile 7
+$.mobile.browser = {};
+$.mobile.browser.ie = (function() {
+    var v = 3, div = document.createElement('div'), a = div.all || [];
+    while (div.innerHTML = '<!--[if gt IE '+(++v)+']><br><![endif]-->', a[0]); 
+    return v > 4 ? v : !v;
+}());
+
 $.extend( $.support, {
 	orientation: "orientation" in window,
 	touch: "ontouchend" in document,

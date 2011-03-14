@@ -48,11 +48,14 @@
 		loadingMessage: "loading",
 
 		//configure meta viewport tag's content attr:
+		//note: this feature is deprecated in A4 in favor of adding 
+		//the meta viewport element directly in the markup
 		metaViewportContent: "width=device-width, minimum-scale=1, maximum-scale=1",
 
 		//support conditions that must be met in order to proceed
-		gradeA: function(){
-			return $.support.mediaquery;
+		//default enhanced qualifications are media query support OR IE 7+
+		gradeA: function(){			
+			return $.support.mediaquery || $.mobile.browser.ie && $.mobile.browser.ie >= 7;
 		},
 
 		//TODO might be useful upstream in jquery itself ?
