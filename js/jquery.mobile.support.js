@@ -65,7 +65,8 @@ $.extend( $.support, {
 	cssPseudoElement: !!propExists('content'),
 	boxShadow: !!propExists('boxShadow') && !bb,
 	scrollTop: ("pageXOffset" in window || "scrollTop" in document.documentElement || "scrollTop" in fakeBody[0]) && !webos,
-	dynamicBaseTag: baseTagTest()
+	dynamicBaseTag: baseTagTest(),
+	eventCapture: ("addEventListener" in document) // This is a weak test. We may want to beef this up later.
 });
 
 fakeBody.remove();

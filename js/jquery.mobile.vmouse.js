@@ -37,7 +37,8 @@ var dataPropertyName = "virtualMouseBindings",
 	scrollThreshold = 10,
 	didScroll = false,
 	clickBlockList = [],
-	scrollTopSupported = $.support.scrollTop;
+	scrollTopSupported = $.support.scrollTop,
+	eventCaptureSupported = $.support.eventCapture;
 
 function getNativeEvent(event)
 {
@@ -297,12 +298,15 @@ function getSpecialEventObject(eventType)
 				$(document).bind(eventType.substr(1), mouseEventCallback);
 			}
 
-			// If this is the first virtual mouse binding for the document,
-			// register our touchstart handler on the document.
-
-			activeDocHandlers["touchstart"] = (activeDocHandlers["touchstart"] || 0) + 1;
-			if (activeDocHandlers["touchstart"] == 1) {
-				$(document).bind("touchstart", handleTouchStart);
+			// For now, if event capture is not supported, we rely on mouse handlers.
+			if (eventCaptureSupported){
+				// If this is the first virtual mouse binding for the document,
+				// register our touchstart handler on the document.
+	
+				activeDocHandlers["touchstart"] = (activeDocHandlers["touchstart"] || 0) + 1;
+				if (activeDocHandlers["touchstart"] == 1) {
+					$(document).bind("touchstart", handleTouchStart);
+				}
 			}
 		},
 
@@ -315,12 +319,14 @@ function getSpecialEventObject(eventType)
 				$(document).unbind(eventType.substr(1), mouseEventCallback);
 			}
 
-			// If this is the last virtual mouse binding in existence,
-			// remove our document touchstart listener.
-
-			--activeDocHandlers["touchstart"];
-			if (!activeDocHandlers["touchstart"]) {
-				$(document).unbind("touchstart", handleTouchStart);
+			if (eventCaptureSupported){
+				// If this is the last virtual mouse binding in existence,
+				// remove our document touchstart listener.
+	
+				--activeDocHandlers["touchstart"];
+				if (!activeDocHandlers["touchstart"]) {
+					$(document).unbind("touchstart", handleTouchStart);
+				}
 			}
 
 			var $this = $(this),
@@ -346,18 +352,21 @@ for (var i = 0; i < vevents.length; i++){
 }
 
 // Add a capture click handler to block clicks.
-document.addEventListener("click", function(e){
-	var cnt = clickBlockList.length;
-	var target = e.target;
-	while (target) {
-		for (var i = 0; i < cnt; i++) {
-			if (target == clickBlockList[i]){
-				e.preventDefault();
-				e.stopPropagation();
+// Note that we require event capture support for this so if the device
+// doesn't support it, we punt for now and rely solely on mouse events.
+if (eventCaptureSupported){
+	document.addEventListener("click", function(e){
+		var cnt = clickBlockList.length;
+		var target = e.target;
+		while (target) {
+			for (var i = 0; i < cnt; i++) {
+				if (target == clickBlockList[i]){
+					e.preventDefault();
+					e.stopPropagation();
+				}
 			}
+			target = target.parentNode;
 		}
-		target = target.parentNode;
-	}
-}, true);
-
+	}, true);
+}
 })(jQuery, window, document);
