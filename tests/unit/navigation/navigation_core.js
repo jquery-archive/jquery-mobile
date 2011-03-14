@@ -83,14 +83,14 @@
 	});
 
 	test( "path.clean is working properly", function(){
-		var localroot = location.href.split("/").slice(0, 3).join("/"),
+		var localroot = location.protocol + "//" + location.host + location.pathname,
 			remoteroot = "http://google.com/",
-			fakepath = "foo/bar/baz.html",
+			fakepath = "#foo/bar/baz.html",
 			pathWithParam = localroot + "/bar?baz=" + localroot,
 			localpath = localroot + fakepath,
 			remotepath = remoteroot + fakepath;
 
-		same( $.mobile.path.clean( localpath ), fakepath, "removes location protocol, host, port from same-domain path");
+		same( $.mobile.path.clean( localpath ), fakepath, "removes location protocol, host, port, pathname from same-domain path");
 		same( $.mobile.path.clean( remotepath ), remotepath, "does nothing to an external domain path");
 		same( $.mobile.path.clean( pathWithParam ), "/bar?baz=" + localroot, "doesn't remove params with localroot value");
 	});
