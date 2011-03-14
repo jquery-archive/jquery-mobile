@@ -279,7 +279,6 @@
 	$.mobile.urlHistory = urlHistory;
 
 	// changepage function
-	// TODO : consider moving args to an object hash
 	$.mobile.changePage = function( to, transition, reverse, changeHash, fromHashChange ){
 		//from is always the currently viewed page
 		var toIsArray = $.type(to) === "array",
