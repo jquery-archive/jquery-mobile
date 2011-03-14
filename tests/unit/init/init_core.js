@@ -2,7 +2,9 @@
  * mobile init tests
  */
 (function($){
-	var mobilePage = undefined, mobileSelect = undefined,
+	var mobilePage = undefined,
+			mobileSelect = undefined,
+			metaViewportContentDefault = $.mobile.metaViewportContent,
 	    libName = 'jquery.mobile.init.js',
 			setGradeA = function(value) { $.mobile.gradeA = function(){ return value; }; },
 			extendFn = $.extend;
@@ -20,6 +22,9 @@
 
 			// NOTE reset for pageLoading tests
 			$('.ui-loader').remove();
+
+			// reset meta view port content
+			$.mobile.metaViewportContent = metaViewportContentDefault;
 		}
 	});
 
@@ -65,12 +70,11 @@
 		});
 
 		var findMeta = function(){
-		
-			return $("head meta").filter("[name='viewport']");
-		},
+				return $("head meta[name='viewport']");
+			},
 			setViewPortContent = function(){
-					$.testHelper.reloadLib( libName );
-				};
+				$.testHelper.reloadLib( libName );
+			};
 
 		test( "meta viewport element not added to head when not defined on mobile", function(){
 			$.mobile.metaViewportContent = null;
@@ -84,14 +88,15 @@
 			setViewPortContent();
 			same( findMeta().length, 1);
 		});
-		
+
 		test( "meta viewport element is not added to head when defined on mobile and a meta already exists", function(){
+			findMeta().remove();
 			$( '<meta name="viewport" content="width=device-width">').prependTo("head");
 			setViewPortContent();
 			same( findMeta().length, 1);
 		});
 
-				var findFirstPage = function() {
+		var findFirstPage = function() {
 			return $("[data-role='page']").first();
 		};
 
