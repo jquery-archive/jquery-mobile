@@ -45,6 +45,15 @@
 
 
 
+<h2>Refreshing a flip switch</h2>
+        
+<p>If you manipulate a flip switch via JavaScript, you must call the refresh method on it to update the visual styling. Here is an example:</p>
+
+<code><pre>
+var myswitch = $("select#bar");
+myswitch[0].selectedIndex = 1;
+myswitch .slider("refresh");
+</pre></code>
 
 	</form>
 	

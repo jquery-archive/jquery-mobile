@@ -369,6 +369,19 @@ $.mobile.selectmenu.prototype.options.hidePlaceholderMenuItems = false;
 			<option value="delete">Delete user</option>
 		</select>
 	</div>
+    
+            
+        
+<h2>Refreshing a select</h2>
+        
+<p>If you manipulate a select via JavaScript, you must call the refresh  method on it to update the visual styling. Here is an example:</p>
+
+<code><pre>
+var myselect = $("select#foo");
+myselect[0].selectedIndex = 3;
+myselect.selectmenu("refresh");
+</pre></code>
+    
 	</form>
 	</div><!-- /content -->
 </div><!-- /page -->
