@@ -71,12 +71,18 @@
 					$.testHelper.reloadLib( libName );
 				};
 
-		test( "meta view port element not added to head when not defined on mobile", function(){
+		test( "meta viewport element not added to head when not defined on mobile", function(){
 			setViewPortContent(false);
 			same($(metaViewportSelector).length, 0);
 		});
 
-		test( "meta view port element is added to head when defined on mobile", function(){
+		test( "meta viewport element is added to head when defined on mobile and no meta already exists", function(){
+			setViewPortContent("width=device-width");
+			same($(metaViewportSelector).length, 1);
+		});
+		
+		test( "meta viewport element is not added to head when defined on mobile and a meta already exists", function(){
+			$("<meta name='viewport'/>").prependTo("head");
 			setViewPortContent("width=device-width");
 			same($(metaViewportSelector).length, 1);
 		});
