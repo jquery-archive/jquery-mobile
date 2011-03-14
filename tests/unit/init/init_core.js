@@ -64,27 +64,31 @@
 			ok($("html").hasClass("ui-mobile"));
 		});
 
-		var metaViewportSelector = "head meta[name=viewport]",
-				setViewPortContent = function(value){
-					$(metaViewportSelector).remove();
-					$.mobile.metaViewportContent = value;
+		var findMeta = function(){
+		
+			return $("head meta").filter("[name='viewport']");
+		},
+			setViewPortContent = function(){
 					$.testHelper.reloadLib( libName );
 				};
 
 		test( "meta viewport element not added to head when not defined on mobile", function(){
-			setViewPortContent(false);
-			same($(metaViewportSelector).length, 0);
+			$.mobile.metaViewportContent = null;
+			findMeta().remove();
+			setViewPortContent();
+			same( findMeta().length, 0);
 		});
 
 		test( "meta viewport element is added to head when defined on mobile and no meta already exists", function(){
-			setViewPortContent("width=device-width");
-			same($(metaViewportSelector).length, 1);
+			findMeta().remove();
+			setViewPortContent();
+			same( findMeta().length, 1);
 		});
 		
 		test( "meta viewport element is not added to head when defined on mobile and a meta already exists", function(){
-			$("<meta name='viewport'/>").prependTo("head");
-			setViewPortContent("width=device-width");
-			same($(metaViewportSelector).length, 1);
+			$( '<meta name="viewport" content="width=device-width">').prependTo("head");
+			setViewPortContent();
+			same( findMeta().length, 1);
 		});
 
 				var findFirstPage = function() {
