@@ -632,7 +632,7 @@
 
 		$.mobile.changePage({
 				url: url,
-				type: ( type ? type : 'get' ),
+				type: type || "get",
 				data: $(this).serialize()
 			},
 			undefined,
