@@ -697,7 +697,7 @@
 			// TODO: deprecated - remove at 1.0
 			!$.mobile.ajaxLinksEnabled ){
 			//remove active link class if external (then it won't be there if you come back)
-			removeActiveLinkClass(true);
+			window.setTimeout(function() {removeActiveLinkClass(true);}, 200);
 
 			//deliberately redirect, in case click was triggered
 			if( hasTarget ){
