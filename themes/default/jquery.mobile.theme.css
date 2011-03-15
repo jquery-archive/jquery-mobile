@@ -730,7 +730,7 @@ a.ui-link-inherit {
 /* Alt icon color
 -----------------------------------------------------------------------------------------------------------*/
 
-.ui-icon-black {
+.ui-icon-alt {
 	background: 						#fff;
 	background: 						rgba(255,255,255,.3);
 	background-image: url(images/icons-18-black.png);
@@ -754,7 +754,7 @@ a.ui-link-inherit {
 		-webkit-background-size: 630px 18px;
 		background-size: 630px 18px;
 	}
-	.ui-icon-black {
+	.ui-icon-alt {
 		background-image: url(images/icons-36-black.png);
 	}
 }
