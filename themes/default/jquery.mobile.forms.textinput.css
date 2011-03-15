@@ -19,3 +19,4 @@ textarea.ui-input-text { height: 50px; -webkit-transition: height 200ms linear; 
 .min-width-480px textarea.ui-input-text, 
 .min-width-480px .ui-input-search { width: 60%; display: inline-block; } 
 .min-width-480px .ui-input-search { width: 50%; }
+.min-width-480px .ui-input-search input.ui-input-text { width: 98%; /*echos rule from above*/ }

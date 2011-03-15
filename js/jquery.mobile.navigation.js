@@ -384,9 +384,9 @@
 				//set as data for returning to that spot
 				from.data( "lastScroll", currScroll);
 				//trigger before show/hide events
-				from.data( "page" )._trigger( "beforehide", { nextPage: to } );
+				from.data( "page" )._trigger( "beforehide", null, { nextPage: to } );
 			}
-			to.data( "page" )._trigger( "beforeshow", { prevPage: from || $("") } );
+			to.data( "page" )._trigger( "beforeshow", null, { prevPage: from || $("") } );
 
 			function loadComplete(){
 
@@ -632,7 +632,7 @@
 
 		$.mobile.changePage({
 				url: url,
-				type: type,
+				type: type || "get",
 				data: $(this).serialize()
 			},
 			undefined,
@@ -697,7 +697,7 @@
 			// TODO: deprecated - remove at 1.0
 			!$.mobile.ajaxLinksEnabled ){
 			//remove active link class if external (then it won't be there if you come back)
-			removeActiveLinkClass(true);
+			window.setTimeout(function() {removeActiveLinkClass(true);}, 200);
 
 			//deliberately redirect, in case click was triggered
 			if( hasTarget ){
