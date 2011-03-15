@@ -11,6 +11,7 @@
 .ui-navbar li .ui-btn, .ui-navbar .ui-navbar-toggle .ui-btn { display: block; font-size: 12px; text-align: center; margin: 0; border-right-width: 0; }
 .ui-navbar li .ui-btn {  margin-right: -1px; }
 .ui-navbar li .ui-btn:last-child { margin-right: 0; }
+.ui-navbar li .ui-btn .ui-btn-text { line-height: 1.2; }
 .ui-header .ui-navbar li .ui-btn, .ui-header .ui-navbar .ui-navbar-toggle .ui-btn,
 .ui-footer .ui-navbar li .ui-btn, .ui-footer .ui-navbar .ui-navbar-toggle .ui-btn { border-top-width: 0; border-bottom-width: 0; }
 .ui-navbar .ui-btn-inner { padding-left: 2px; padding-right: 2px; }
