@@ -236,6 +236,17 @@
 		}
 	});
 
+	// Monkey-patching Sizzle to filter the :jqdata selector
+	var oldFind = jQuery.find;
+
+	jQuery.find = function( selector, context, ret ) {
+		selector = selector.replace(/:jqdata\((.*)\)/g, "[data-" + (jQuery.mobile.ns || "") + "$1]");
+
+		return oldFind.call( this, selector, context, ret );
+	};
+
+	jQuery.extend( jQuery.find, oldFind );
+
 	//dom-ready inits
 	$($.mobile.initializePage);
 
