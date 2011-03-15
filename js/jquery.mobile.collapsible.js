@@ -12,7 +12,10 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 		collapsed: false,
 		heading: '>:header,>legend',
 		theme: null,
-		iconTheme: 'd'
+		iconTheme: 'd',
+        headingontop: true,
+        collapsedheadingtext: '',
+        expandedheadingtext: ''
 	},
 	_create: function(){
 
@@ -29,8 +32,16 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			collapsibleHeading.next().remove();
 		}	
 		
-		//drop heading in before content
-		collapsibleHeading.insertBefore(collapsibleContent);
+        if (o.headingontop){
+		    //drop heading in before content
+		    collapsibleHeading.insertBefore(collapsibleContent);
+        } else {
+		    //drop heading in after content
+		    collapsibleHeading.insertAfter(collapsibleContent);
+        }
+
+        //the container for the alternating heading text
+        var $headingText = collapsibleHeading.find('[data-role="text"]');
 		
 		//modify markup & attributes
 		collapsibleHeading.addClass('ui-collapsible-heading')
@@ -69,6 +80,10 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 				}					
 			}
 			
+        if ($headingText.length) {
+            $headingText.addClass('ui-collapsible-heading-text');	
+        }
+
 		
 		//events
 		collapsibleContain	
@@ -77,7 +92,9 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 					event.preventDefault();
 					collapsibleHeading
 						.addClass('ui-collapsible-heading-collapsed')
-						.find('.ui-collapsible-heading-status').text(o.expandCueText);
+						.find('.ui-collapsible-heading-status').text(o.expandCueText)
+                        .end()
+                        .find('.ui-collapsible-heading-text').text(o.collapsedheadingtext);
 					
 					collapsibleHeading.find('.ui-icon').removeClass('ui-icon-minus').addClass('ui-icon-plus');	
 					collapsibleContent.addClass('ui-collapsible-content-collapsed').attr('aria-hidden',true);
@@ -95,7 +112,9 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 					event.preventDefault();
 					collapsibleHeading
 						.removeClass('ui-collapsible-heading-collapsed')
-						.find('.ui-collapsible-heading-status').text(o.collapseCueText);
+						.find('.ui-collapsible-heading-status').text(o.collapseCueText)
+                        .end()
+                        .find('.ui-collapsible-heading-text').text(o.expandedheadingtext);
 					
 					collapsibleHeading.find('.ui-icon').removeClass('ui-icon-plus').addClass('ui-icon-minus');	
 					collapsibleContent.removeClass('ui-collapsible-content-collapsed').attr('aria-hidden',false);
@@ -120,8 +139,8 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 						.not( $(event.target).closest( ".ui-collapsible-contain" ) )
 						.not( "> .ui-collapsible-contain .ui-collapsible-contain" )
 						.trigger( "collapse" );
-				})
-			var set = collapsibleParent.find('[data-role=collapsible]')
+				});
+			var set = collapsibleParent.find('[data-role=collapsible]');
 					
 			set.first()
 				.find('a:eq(0)')	
@@ -129,7 +148,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 					.find('.ui-btn-inner')
 					.addClass('ui-corner-top');
 					
-			set.last().data('collapsible-last', true)	
+			set.last().data('collapsible-last', true);
 		}
 					
 		collapsibleHeading
