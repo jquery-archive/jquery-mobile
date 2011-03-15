@@ -51,8 +51,8 @@ $( "[data-role='listview']" ).live( "listviewcreate", function() {
 			.appendTo( wrapper )
 			.textinput();
 
-	if ($(this).data("inset") == true ) {
-		wrapper.addClass("ui-listview-filter-inset");
+	if ($( this ).data( "inset" ) ) {
+		wrapper.addClass( "ui-listview-filter-inset" );
 	}
 	
 	wrapper.insertBefore( list );
