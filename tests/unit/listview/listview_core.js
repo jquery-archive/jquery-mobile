@@ -180,7 +180,7 @@
 		}
 	});
 
-	asyncTest( "Make the search filter page the actie page and enhance it correctly.", function() {
+	asyncTest( "Make the search filter page the active page and enhance it correctly.", function() {
 		setTimeout(function() {
 			var $new_page = $('#search-filter-test');
 			ok($new_page.find('input').length == 1);
@@ -233,8 +233,8 @@
 
 		setTimeout(function() {
 			same($('.ui-page-active li[style^="display: none;"]').length, 4);
-			same($('.ui-page-active li[data-role=list-divider][style^="display: none;"]').length, 2);
-			same($('.ui-page-active li:not([data-role=list-divider])[style^="display: none;"]').length, 2);
+			same($('.ui-page-active li:jqdata(role=list-divider)[style^="display: none;"]').length, 2);
+			same($('.ui-page-active li:not(:jqdata(role=list-divider))[style^="display: none;"]').length, 2);
 			start();
 		}, 1000);
 	});
@@ -245,14 +245,14 @@
 			$('.ui-page-active input').val('a');
 			$('.ui-page-active input').trigger('change');
 		}, 500);
-		
+
 		setTimeout(function() {
 			same($('.ui-page-active input').val(), 'a');
 			same($('.ui-page-active li[style^="display: none;"]').length, 0);
 			start();
 		}, 1000);
 	});
-	
+
 	asyncTest( "Dividers are hidden when preceding hidden rows and shown when preceding shown rows", function () {
 		// wait for the page to become active/enhanced
 		setTimeout(function(){
@@ -261,9 +261,9 @@
 		}, 500);
 
 		setTimeout(function() {
-			same($('.ui-page-active li[data-role=list-divider][style^="display: none;"]').length, 2);
-			same($('.ui-page-active li[data-role=list-divider][style^="display: none;"] + li:not([data-role=list-divider])[style^="display: none;"]').length, 2);
-			same($('.ui-page-active li[data-role=list-divider]:not([style^="display: none;"]) + li:not([data-role=list-divider]):not([style^="display: none;"])').length, 2);
+			same($('.ui-page-active li[:jqdata(role=list-divider)[style^="display: none;"]').length, 2);
+			same($('.ui-page-active li[:jqdata(role=list-divider)[style^="display: none;"] + li:not([:jqdata(role=list-divider))[style^="display: none;"]').length, 2);
+			same($('.ui-page-active li[:jqdata(role=list-divider):not([style^="display: none;"]) + li:not([:jqdata(role=list-divider)):not([style^="display: none;"])').length, 2);
 			start();
 		}, 1000);
 	});
