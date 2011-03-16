@@ -27,6 +27,7 @@ label.ui-select { font-size: 16px; line-height: 1.4;  font-weight: normal; margi
 .ui-screen-hidden, .ui-selectmenu-list .ui-li .ui-icon { display: none; }
 .ui-selectmenu-list .ui-li .ui-icon { display: block; }
 .ui-li.ui-selectmenu-placeholder { display: none; }
+.ui-selectmenu .ui-header .ui-title { margin: 0.6em 46px 0.8em; }
 
 .min-width-480px label.ui-select { display: inline-block;  width: 20%;  margin: 0 2% 0 0; }
 .min-width-480px .ui-select { width: 60%; display: inline-block; }

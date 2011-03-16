@@ -612,10 +612,11 @@
 /* Event Bindings - hashchange, submit, and click */
 
 	//bind to form submit events, handle with Ajax
-	$( "form[data-ajax!='false']" ).live('submit', function(event){
+	$( "form" ).live('submit', function(event){
 		if( !$.mobile.ajaxEnabled ||
 			//TODO: deprecated - remove at 1.0
-			!$.mobile.ajaxFormsEnabled ){ return; }
+			!$.mobile.ajaxFormsEnabled ||
+			$(this).is( "[data-ajax='false']" ) ){ return; }
 
 		var type = $(this).attr("method"),
 			url = path.clean( $(this).attr( "action" ) );
