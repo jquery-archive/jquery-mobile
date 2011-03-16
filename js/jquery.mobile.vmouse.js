@@ -31,6 +31,7 @@ var dataPropertyName = "virtualMouseBindings",
 	activeDocHandlers = {},
 	blockMouseEvents = false,
 	resetTimerID = 0,
+	lastTarget = null,
 	startX = 0,
 	startY = 0,
 	startScrollX = 0,
@@ -39,7 +40,8 @@ var dataPropertyName = "virtualMouseBindings",
 	didScroll = false,
 	clickBlockList = [],
 	scrollTopSupported = $.support.scrollTop,
-	eventCaptureSupported = $.support.eventCapture;
+	eventCaptureSupported = $.support.eventCapture,
+	$document = $(document);
 
 function getNativeEvent(event)
 {
@@ -111,24 +113,29 @@ function getClosestElementWithVirtualBinding(element, eventType)
 	return null;
 }
 
+function touchInProgress()
+{
+	return activeDocHandlers["touchbindings"] ? true : false;
+}
+
 function enableTouchBindings()
 {
 	if (!activeDocHandlers["touchbindings"]){
-		var $document = $(document);
-		$document.bind("touchend", handleTouchEnd);
+		$document.bind("touchend", handleTouchEnd)
 		
-		// On touch platforms, touching the screen and then dragging your finger
-		// causes the window content to scroll after some distance threshold is
-		// exceeded. On these platforms, a scroll prevents a click event from being
-		// dispatched, and on some platforms, even the touchend is suppressed. To
-		// mimic the suppression of the click event, we need to watch for a scroll
-		// event. Unfortunately, some platforms like iOS don't dispatch scroll
-		// events until *AFTER* the user lifts their finger (touchend). This means
-		// we need to watch both scroll and touchmove events to figure out whether
-		// or not a scroll happenens before the touchend event is fired.
+			// On touch platforms, touching the screen and then dragging your finger
+			// causes the window content to scroll after some distance threshold is
+			// exceeded. On these platforms, a scroll prevents a click event from being
+			// dispatched, and on some platforms, even the touchend is suppressed. To
+			// mimic the suppression of the click event, we need to watch for a scroll
+			// event. Unfortunately, some platforms like iOS don't dispatch scroll
+			// events until *AFTER* the user lifts their finger (touchend). This means
+			// we need to watch both scroll and touchmove events to figure out whether
+			// or not a scroll happenens before the touchend event is fired.
 		
-		$document.bind("touchmove", handleTouchMove);
-		$document.bind("scroll", handleScroll);
+			.bind("touchmove", handleTouchMove)
+			.bind("scroll", handleScroll);
+
 		activeDocHandlers["touchbindings"] = 1;
 	}
 }
@@ -136,16 +143,16 @@ function enableTouchBindings()
 function disableTouchBindings()
 {
 	if (activeDocHandlers["touchbindings"]){
-		var $document = $(document);
-		$document.unbind("touchmove", handleTouchMove);
-		$document.unbind("touchend", handleTouchEnd);
-		$document.unbind("scroll", handleScroll);
+		$document.unbind("touchmove", handleTouchMove)
+			.unbind("touchend", handleTouchEnd)
+			.unbind("scroll", handleScroll);
 		activeDocHandlers["touchbindings"] = 0;
 	}
 }
 
 function enableMouseBindings()
 {
+	lastTarget = null;
 	blockMouseEvents = false;
 	clickBlockList.length = 0;
 
@@ -196,7 +203,21 @@ function triggerVirtualEvent(eventType, event, flags)
 function mouseEventCallback(event)
 {
 	if (blockMouseEvents){
-		return;
+		// There are times where the user touches a link on screen, but the browser determines
+		// that the touch is outside of the link. This happens most often when the user's finger
+		// overlaps the link and areas outside of the link. In this specific case, the browser
+		// will generate touch events with a target that is the parent or ancestor of the link,
+		// but it will then generate synthesized mouse events with a target that is the link
+		// itself. We need to catch this touch and mouse target mismatch case and re-enable our
+		// mouse bindings when it occurs so we can dispatch our virtual events appropriately.
+		var curTarget = event.target;
+		if (touchInProgress() || lastTarget == curTarget || !$.contains(lastTarget, curTarget)){
+			return;
+		}
+		// We had a mismatch between touch and mouse targets so reset things so we
+		// can process the incoming mouse events.
+		clearResetTimer();
+		enableMouseBindings();
 	}
 
 	triggerVirtualEvent("v" + event.type, event);
@@ -215,6 +236,8 @@ function handleTouchStart(event)
 	var flags = getVirtualBindingFlags(event.target);
 
 	if (flags.hasVirtualBinding){
+		lastTarget = event.target;
+
 		clearResetTimer();
 		
 		disableMouseBindings();
@@ -316,7 +339,7 @@ function getSpecialEventObject(eventType)
 
 			activeDocHandlers[eventType] = (activeDocHandlers[eventType] || 0) + 1;
 			if (activeDocHandlers[eventType] == 1){
-				$(document).bind(eventType.substr(1), mouseEventCallback);
+				$document.bind(eventType.substr(1), mouseEventCallback);
 			}
 
 			// For now, if event capture is not supported, we rely on mouse handlers.
@@ -326,7 +349,7 @@ function getSpecialEventObject(eventType)
 	
 				activeDocHandlers["touchstart"] = (activeDocHandlers["touchstart"] || 0) + 1;
 				if (activeDocHandlers["touchstart"] == 1) {
-					$(document).bind("touchstart", handleTouchStart);
+					$document.bind("touchstart", handleTouchStart);
 				}
 			}
 		},
@@ -337,7 +360,7 @@ function getSpecialEventObject(eventType)
 
 			--activeDocHandlers[eventType];
 			if (!activeDocHandlers[eventType]){
-				$(document).unbind(eventType.substr(1), mouseEventCallback);
+				$document.unbind(eventType.substr(1), mouseEventCallback);
 			}
 
 			if (eventCaptureSupported){
@@ -346,7 +369,7 @@ function getSpecialEventObject(eventType)
 	
 				--activeDocHandlers["touchstart"];
 				if (!activeDocHandlers["touchstart"]) {
-					$(document).unbind("touchstart", handleTouchStart);
+					$document.unbind("touchstart", handleTouchStart);
 				}
 			}
 
