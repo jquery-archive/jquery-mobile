@@ -185,7 +185,6 @@
 		});
 
 		asyncTest( "page loading should contain default loading message", function(){
-			$.testHelper.reloadLib('jquery.mobile.core.js');
 			$.testHelper.reloadLib(libName);
 			$.mobile.pageLoading(false);
 
