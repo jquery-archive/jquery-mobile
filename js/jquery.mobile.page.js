@@ -30,7 +30,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 
 	_create: function() {
 		var $elem = this.element,
-			o = this.options;	
+			o = this.options;
 
 		this.keepNative = "[data-" + $.mobile.ns + "role='none'], [data-" + $.mobile.ns + "role='nojs']" + (o.keepNative ? ", " + o.keepNative : "");
 
@@ -116,7 +116,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 					break;
 			}
 		});
-		
+
 		//enhance form controls
   	this._enhanceControls();
 
@@ -139,8 +139,10 @@ $.widget( "mobile.page", $.mobile.widget, {
 		$elem.fixHeaderFooter();
 	},
 
+	_typeAttributeRegex: /\s+type=["']?\w+['"]?/,
+
 	_enhanceControls: function() {
-		var o = this.options;
+		var o = this.options, self = this;
 
 		// degrade inputs to avoid poorly implemented native functionality
 		this.element.find( "input" ).not(this.keepNative).each(function() {
@@ -150,7 +152,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 			if ( o.degradeInputs[ type ] ) {
 				$( this ).replaceWith(
 					$( "<div>" ).html( $(this).clone() ).html()
-						.replace( /type="([a-zA-Z]+)"/, "type="+ optType +" data-" + $.mobile.ns + "type='$1'" ) );
+						.replace( self._typeAttributeRegex, " type=\""+ optType +"\" data-" + $.mobile.ns + "type=\""+type+"\" " ) );
 			}
 		});
 

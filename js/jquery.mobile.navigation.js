@@ -45,9 +45,13 @@
 				return path.get() + url;
 			},
 
-			//return a url path with the window's location protocol/hostname removed
+			//return a url path with the window's location protocol/hostname/pathname removed
 			clean: function( url ){
-				return url.replace( location.protocol + "//" + location.host, "");
+				// Replace the protocol, host, and pathname only once at the beginning of the url to avoid
+				// problems when it's included as a part of a param
+				// Also, since all urls are absolute in IE, we need to remove the pathname as well.
+				var leadingUrlRootRegex = new RegExp("^" + location.protocol + "//" + location.host + location.pathname);
+				return url.replace(leadingUrlRootRegex, "");
 			},
 
 			//just return the url without an initial #
@@ -115,6 +119,31 @@
 			//wipe urls ahead of active index
 			clearForward: function(){
 				urlHistory.stack = urlHistory.stack.slice( 0, urlHistory.activeIndex + 1 );
+			},
+
+			directHashChange: function(opts){
+				var back , forward, newActiveIndex;
+
+				// check if url isp in history and if it's ahead or behind current page
+				$.each( urlHistory.stack, function( i, historyEntry ){
+
+					//if the url is in the stack, it's a forward or a back
+					if( opts.currentUrl === historyEntry.url ){
+						//define back and forward by whether url is older or newer than current page
+						back = i < urlHistory.activeIndex;
+						forward = !back;
+						newActiveIndex = i;
+					}
+				});
+
+				// save new page index, null check to prevent falsey 0 result
+				this.activeIndex = newActiveIndex !== undefined ? newActiveIndex : this.activeIndex;
+
+				if( back ){
+					opts.isBack();
+				} else if( forward ){
+					opts.isForward();
+				}
 			},
 
 			//disable hashchange event listener internally to ignore one change
@@ -250,7 +279,6 @@
 	$.mobile.urlHistory = urlHistory;
 
 	// changepage function
-	// TODO : consider moving args to an object hash
 	$.mobile.changePage = function( to, transition, reverse, changeHash, fromHashChange ){
 		//from is always the currently viewed page
 		var toIsArray = $.type(to) === "array",
@@ -283,34 +311,24 @@
 
 		isPageTransitioning = true;
 
-		// if the changePage was sent from a hashChange event
-		// guess if it came from the history menu
+		// if the changePage was sent from a hashChange event guess if it came from the history menu
+		// and match the transition accordingly
 		if( fromHashChange ){
-
-			// check if url is in history and if it's ahead or behind current page
-			$.each( urlHistory.stack, function( i ){
-				//if the url is in the stack, it's a forward or a back
-				if( this.url === url ){
-					urlIndex = i;
-					//define back and forward by whether url is older or newer than current page
-					back = i < urlHistory.activeIndex;
-					//forward set to opposite of back
-					forward = !back;
-					//reset activeIndex to this one
-					urlHistory.activeIndex = i;
+			urlHistory.directHashChange({
+				currentUrl: url,
+				isBack: function(){
+					forward = !(back = true);
+					reverse = true;
+					transition = transition || currPage.transition;
+				},
+				isForward: function(){
+					forward = !(back = false);
+					transition = transition || urlHistory.getActive().transition;
 				}
 			});
 
-			//if it's a back, use reverse animation
-			if( back ){
-				reverse = true;
-				transition = transition || currPage.transition;
-			}
-			else if ( forward ){
-				transition = transition || urlHistory.getActive().transition;
-			}
+			//TODO forward = !back was breaking for some reason
 		}
-
 
 		if( toIsObject && to.url ){
 			url = to.url;
@@ -365,9 +383,9 @@
 				//set as data for returning to that spot
 				from.mobileData( "lastScroll", currScroll);
 				//trigger before show/hide events
-				from.mobileData( "page" )._trigger( "beforehide", { nextPage: to } );
+				from.data( "page" )._trigger( "beforehide", null, { nextPage: to } );
 			}
-			to.mobileData( "page" )._trigger( "beforeshow", { prevPage: from || $("") } );
+			to.data( "page" )._trigger( "beforeshow", null, { prevPage: from || $("") } );
 
 			function loadComplete(){
 
@@ -592,10 +610,11 @@
 /* Event Bindings - hashchange, submit, and click */
 
 	//bind to form submit events, handle with Ajax
-	$( "form[data-"+ $.mobile.ns +"ajax!='false']" ).live('submit', function(event){
+	$( "form" ).live('submit', function(event){
 		if( !$.mobile.ajaxEnabled ||
 			//TODO: deprecated - remove at 1.0
-			!$.mobile.ajaxFormsEnabled ){ return; }
+			!$.mobile.ajaxFormsEnabled ||
+			$(this).is( "[data-"+ $.mobile.ns +"ajax='false']" ) ){ return; }
 
 		var type = $(this).attr("method"),
 			url = path.clean( $(this).attr( "action" ) );
@@ -612,7 +631,7 @@
 
 		$.mobile.changePage({
 				url: url,
-				type: type,
+				type: type || "get",
 				data: $(this).serialize()
 			},
 			undefined,
@@ -630,6 +649,12 @@
 
 			//get href, if defined, otherwise fall to null #
 			href = $this.attr( "href" ) || "#",
+
+			//cache a check for whether the link had a protocol
+			//if this is true and the link was same domain, we won't want
+			//to prefix the url with a base (esp helpful in IE, where every
+			//url is absolute
+			hadProtocol = path.hasProtocol( href ),
 
 			//get href, remove same-domain protocol and host
 			url = path.clean( href ),
@@ -657,7 +682,9 @@
 			return false;
 		}
 
-		if( url === "#" ){
+		//prevent # urls from bubbling
+		//path.get() is replaced to combat abs url prefixing in IE
+		if( url.replace(path.get(), "") == "#"  ){
 			//for links created purely for interaction - ignore
 			event.preventDefault();
 			return;
@@ -669,7 +696,7 @@
 			// TODO: deprecated - remove at 1.0
 			!$.mobile.ajaxLinksEnabled ){
 			//remove active link class if external (then it won't be there if you come back)
-			removeActiveLinkClass(true);
+			window.setTimeout(function() {removeActiveLinkClass(true);}, 200);
 
 			//deliberately redirect, in case click was triggered
 			if( hasTarget ){
@@ -694,7 +721,7 @@
 			nextPageRole = $this.attr( "data-" + $.mobile.ns + "rel" );
 
 			//if it's a relative href, prefix href with base url
-			if( path.isRelative( url ) ){
+			if( path.isRelative( url ) && !hadProtocol ){
 				url = path.makeAbsolute( url );
 			}
 
@@ -714,12 +741,27 @@
 			transition = $.mobile.urlHistory.stack.length === 0 ? false : undefined;
 
 		//if listening is disabled (either globally or temporarily), or it's a dialog hash
-		if( !$.mobile.hashListeningEnabled || !urlHistory.ignoreNextHashChange ||
-				(urlHistory.stack.length > 1 && to.indexOf( dialogHashKey ) > -1 && !$.mobile.activePage.is( ".ui-dialog" ))
-		){
+		if( !$.mobile.hashListeningEnabled || !urlHistory.ignoreNextHashChange ){
 			if( !urlHistory.ignoreNextHashChange ){
 				urlHistory.ignoreNextHashChange = true;
 			}
+
+			return;
+		}
+
+		// special case for dialogs requires heading back or forward until we find a non dialog page
+		if( urlHistory.stack.length > 1 &&
+				to.indexOf( dialogHashKey ) > -1 &&
+				!$.mobile.activePage.is( ".ui-dialog" ) ){
+
+			//determine if we're heading forward or backward and continue accordingly past
+			//the current dialog
+			urlHistory.directHashChange({
+				currentUrl: to,
+				isBack: function(){ window.history.back(); },
+				isForward: function(){ window.history.forward(); }
+			});
+
 			return;
 		}
 

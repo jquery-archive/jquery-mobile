@@ -6,6 +6,7 @@
 	module('jquery.mobile.navigation.js', {
 		teardown: function(){
 			$.mobile.changePage = changePageFn;
+			location.hash = "";
 		}
 	});
 
@@ -82,14 +83,16 @@
 	});
 
 	test( "path.clean is working properly", function(){
-		var localroot = location.href.split("/").slice(0, 3).join("/"),
+		var localroot = location.protocol + "//" + location.host + location.pathname,
 			remoteroot = "http://google.com/",
-			fakepath = "foo/bar/baz.html",
+			fakepath = "#foo/bar/baz.html",
+			pathWithParam = localroot + "/bar?baz=" + localroot,
 			localpath = localroot + fakepath,
 			remotepath = remoteroot + fakepath;
 
-		same( $.mobile.path.clean( localpath ), fakepath, "removes location protocol, host, port from same-domain path");
+		same( $.mobile.path.clean( localpath ), fakepath, "removes location protocol, host, port, pathname from same-domain path");
 		same( $.mobile.path.clean( remotepath ), remotepath, "does nothing to an external domain path");
+		same( $.mobile.path.clean( pathWithParam ), "/bar?baz=" + localroot, "doesn't remove params with localroot value");
 	});
 
 	test( "path.stripHash is working properly", function(){
@@ -230,6 +233,8 @@
 	});
 
 	asyncTest( "last entry choosen amongst multiple identical url history stack entries on hash change", function(){
+		$.mobile.urlHistory.activeIndex = 0;
+		$.mobile.urlHistory.stack = [];
 		$.testHelper.openPage("#dup-history-first");
 
 		$.testHelper.sequence([
@@ -239,21 +244,52 @@
 			function(){ $("#dup-history-second a:last").click(); },
 			function(){ $("#dup-history-dialog .ui-icon-delete").click(); },
 			function(){
-				// third page because the first opened page is manual hash manip
+
+				// third page in the stack to account for first page being hash manipulation
 				same($.mobile.urlHistory.activeIndex, 3, "should be the third page in the stack");
 				start();
 			}], 1000);
 	});
 
-	asyncTest( "going back from a page entered from a dialog skips the dialog and goes to the last page", function(){
+	asyncTest( "going back from a page entered from a dialog skips the dialog and goes to the previous page", function(){
 		$.testHelper.openPage("#skip-dialog-first");
 
 		$.testHelper.sequence([
+			// transition to the dialog
 			function(){ $("#skip-dialog-first a").click(); },
+
+			// transition to the second page
 			function(){ $("#skip-dialog a").click(); },
+
+			// transition past the dialog via data-rel=back link on the second page
 			function(){ $("#skip-dialog-second a").click(); },
+
+			// make sure we're at the first page and not the dialog
 			function(){
 				same(location.hash, "#skip-dialog-first", "should be the first page in the sequence");
+				start();
+			}], 1000);
+	});
+
+	asyncTest( "going forward from a page entered from a dialog skips the dialog and goes to the next page", function(){
+		$.testHelper.openPage("#skip-dialog-first");
+
+		$.testHelper.sequence([
+			// transition to the dialog
+			function(){ $("#skip-dialog-first a").click(); },
+
+			// transition to the second page
+			function(){ $("#skip-dialog a").click(); },
+
+			// transition to back past the dialog
+			function(){ window.history.back(); },
+
+			// transition to the second page past the dialog through history
+			function(){ window.history.forward(); },
+
+			// make sure we're on the second page and not the dialog
+			function(){
+				same(location.hash, "#skip-dialog-second", "should be the second page after the dialog");
 				start();
 			}], 1000);
 	});

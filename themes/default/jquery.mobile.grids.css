@@ -6,7 +6,10 @@
 
 /* content configurations. */
 .ui-grid-a, .ui-grid-b, .ui-grid-c, .ui-grid-d { overflow: hidden; }
-.ui-block-a, .ui-block-b, .ui-block-c, .ui-block-d, .ui-block-e { margin: 0; padding: 0; border: 0; float: left; }
+.ui-block-a, .ui-block-b, .ui-block-c, .ui-block-d, .ui-block-e { margin: 0; padding: 0; border: 0; float: left; min-height:1px;}
+
+/* grid solo: 100 - single item fallback */
+.ui-grid-solo .ui-block-a { width: 100%; float: none; }
 
 /* grid a: 50/50 */
 .ui-grid-a .ui-block-a, .ui-grid-a .ui-block-b { width: 50%; }

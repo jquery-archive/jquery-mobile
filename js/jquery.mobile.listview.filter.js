@@ -51,6 +51,10 @@ $( "[data-" + $.mobile.ns + "role='listview']" ).live( "listviewcreate", functio
 			.appendTo( wrapper )
 			.textinput();
 
+	if ($( this ).data( "inset" ) ) {
+		wrapper.addClass( "ui-listview-filter-inset" );
+	}
+	
 	wrapper.insertBefore( list );
 });
 

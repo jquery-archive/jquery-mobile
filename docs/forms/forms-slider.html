@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	<meta charset="utf-8" />
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
 	<title>jQuery Mobile Docs - Forms</title>
 	<link rel="stylesheet"  href="../../themes/default/" />
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
@@ -49,6 +50,14 @@
 
 			<p>Sliders also respond to the keyboards shortcuts. To increase the current value the Right Arrow, Up Arrow, and Page Up keys can be used. To decrease the current value the Left Arrow, Down Arrow, and Page Down keys can be used. To move the slider to its minimum or maximum value use the Home and End keys respectively.</p>
 
+
+<h2>Refreshing a slider</h2>
+        
+<p>If you manipulate a slider via JavaScript, you must call the refresh method on it to update the visual styling. Here is an example:</p>
+
+<code>
+$("input[type=range]").val(60).slider("refresh");
+</code>
 
 	</form>
 

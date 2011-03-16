@@ -69,6 +69,23 @@ $.testHelper.excludeFileProtocol(function(){
 		$.testHelper.reloadLib(libName);
 		ok(!$.support.dynamicBaseTag);
 	});
+	
+	test( "jQM's IE browser check properly detects IE versions", function(){
+		$.testHelper.reloadLib(libName);
+	
+		//here we're just comparing our version to what the conditional compilation finds
+		 var ie 			= !!$.browser.msie, //get a boolean
+		 	 version 		= parseInt( $.browser.version, 10),
+		 	 jqmdetectedver = $.mobile.browser.ie;
+		 	
+		 	if( ie ){
+		 		same(version, jqmdetectedver, "It's IE and the version is correct");
+		 	}
+		 	else{
+		 		same(ie, jqmdetectedver, "It's not IE");
+		 	}
+	});
+	
 
 	//TODO propExists testing, refactor propExists into mockable method
 	//TODO scrollTop testing, refactor scrollTop logic into mockable method

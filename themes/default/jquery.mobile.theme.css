@@ -21,7 +21,7 @@
 	background-image: -webkit-gradient(linear,left top,left bottom,
 		color-stop(0, 	#3c3c3c),
 		color-stop(1, 		#111111));
-  	-msfilter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#3c3c3c', EndColorStr='#111111')";
+  	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#3c3c3c', EndColorStr='#111111')";
 }
 .ui-bar-a, 
 .ui-bar-a input, 
@@ -66,14 +66,16 @@
 	font-weight: bold;
 }
 .ui-br {
-	border-bottom: 1px solid rgba(130,130,130,.3);
+	border-bottom: rgb(130,130,130);
+	border-bottom: rgba(130,130,130,.3);
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
 }
 .ui-btn-up-a {
 	border: 1px solid 		#222;
 	background: 			#333333;
 	font-weight: bold;
 	color: 					#fff;
-	cursor: pointer;
 	text-shadow: 0 -1px 1px #000;
 	text-decoration: none;
 	background-image: -moz-linear-gradient(top, 
@@ -194,7 +196,6 @@
 	background: 			#2567ab;
 	font-weight: bold;
 	color: 					#fff;
-	cursor: pointer;
 	text-shadow: 0 -1px 1px #145072;
 	text-decoration: none;
 	background-image: -moz-linear-gradient(top, 
@@ -307,7 +308,6 @@
 	background: 			#eee;
 	font-weight: bold;
 	color: 					#444;
-	cursor: pointer;
 	text-shadow: 0 1px 1px #f6f6f6;
 	text-decoration: none;
 	background-image: -moz-linear-gradient(top, 
@@ -352,7 +352,7 @@
 	background-image: -webkit-gradient(linear,left top,left bottom,
 		color-stop(0, 		#eeeeee),
 		color-stop(1, 		#fdfdfd));
-  	-msfilter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#eeeeee', EndColorStr='#fdfdfd')";
+  	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#eeeeee', EndColorStr='#fdfdfd')";
 }
 .ui-btn-down-c a.ui-link-inherit {
 	color: 					#2F3E46;
@@ -439,7 +439,7 @@
 	background-image: -webkit-gradient(linear,left top,left bottom,
 		color-stop(0, 		#fdfdfd),
 		color-stop(1, 		#eeeeee));
-  	-msfilter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fdfdfd', EndColorStr='#eeeeee')";
+  	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fdfdfd', EndColorStr='#eeeeee')";
 }
 .ui-btn-hover-d a.ui-link-inherit {
 	color: 					#222;
@@ -456,7 +456,7 @@
 	background-image: -webkit-gradient(linear,left top,left bottom,
 		color-stop(0, 		#eeeeee),
 		color-stop(1, 		#ffffff));
-  	-msfilter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#eeeeee', EndColorStr='#ffffff')";
+  	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#eeeeee', EndColorStr='#ffffff')";
 }
 .ui-btn-down-d a.ui-link-inherit {
 	border: 1px solid 		#808080;
@@ -470,7 +470,7 @@
 	background-image: -webkit-gradient(linear,left top,left bottom,
 		color-stop(0, 		#cccccc),
 		color-stop(1, 		#eeeeee));
-  	-msfilter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#cccccc', EndColorStr='#eeeeee')";
+  	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#cccccc', EndColorStr='#eeeeee')";
 }
 .ui-btn-up-d,
 .ui-btn-hover-d,
@@ -493,7 +493,7 @@
 	background-image: -webkit-gradient(linear,left top,left bottom,
 		color-stop(0, 		#fceda7),
 		color-stop(1, 		#fadb4e));
-  	-msfilter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fceda7', EndColorStr='#fadb4e')";
+  	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fceda7', EndColorStr='#fadb4e')";
 }
 .ui-bar-e,
 .ui-bar-e input,
@@ -520,7 +520,7 @@
 	background-image: -webkit-gradient(linear,left top,left bottom,
 		color-stop(0, 		#fff),
 		color-stop(1, 		#faeb9e));
-  	-msfilter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff', EndColorStr='#faeb9e')";
+  	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff', EndColorStr='#faeb9e')";
 }
 .ui-body-e,
 .ui-body-e input,
@@ -541,7 +541,6 @@
 	background: 			#fadb4e;
 	font-weight: bold;
 	color: 					#333;
-	cursor: pointer;
 	text-shadow: 0 1px 1px 	#fe3;
 	text-decoration: none;
 	text-shadow: 0 1px 0 	#fff;
@@ -569,7 +568,7 @@
 	background-image: -webkit-gradient(linear,left top,left bottom,
 		color-stop(0, 		#fcf0b5),
 		color-stop(1, 		#fbe26f));
-  	-msfilter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fcf0b5', EndColorStr='#fbe26f')";
+  	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fcf0b5', EndColorStr='#fbe26f')";
 }
 
 .ui-btn-hover-e a.ui-link-inherit {
@@ -624,7 +623,7 @@ a.ui-link-inherit {
 	background-image: -webkit-gradient(linear,left top,left bottom,
 		color-stop(0, 		#85bae4),
 		color-stop(1, 		#5393c5));
-  	-msfilter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#85bae4', EndColorStr='#5393c5')";
+  	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#85bae4', EndColorStr='#5393c5')";
   	outline: none;
 }
 .ui-btn-active a.ui-link-inherit {
@@ -718,47 +717,46 @@ a.ui-link-inherit {
 -----------------------------------------------------------------------------------------------------------*/
 
 .ui-icon {
+	background: 						#666;
+	background: 						rgba(0,0,0,.4);
 	background-image: url(images/icons-18-white.png);
 	background-repeat: no-repeat;
-	background-color: 					#666;
-	background-color: rgba(0,0,0,.4);
 	-moz-border-radius: 				9px;
 	-webkit-border-radius: 				9px;
 	border-radius: 						9px;
 }
-.ui-icon-disc {
-	background-color: 					#666;
-	background-color: 					rgba(0,0,0,.3);
-	-moz-border-radius: 				9px;
-	-webkit-border-radius: 				9px;
-	border-radius: 						9px;
-}
+
 
 /* Alt icon color
 -----------------------------------------------------------------------------------------------------------*/
 
-.ui-icon-black {
+.ui-icon-alt {
+	background: 						#fff;
+	background: 						rgba(255,255,255,.3);
 	background-image: url(images/icons-18-black.png);
-}
-.ui-icon-black-disc {
-	background-color: 					#fff;
-	background-color: 					rgba(255,255,255,.3);
-	-moz-border-radius: 				9px;
-	-webkit-border-radius: 				9px;
-	border-radius: 						9px;
+	background-repeat: no-repeat;
 }
 
 /* HD/"retina" sprite
 -----------------------------------------------------------------------------------------------------------*/
 
-@media screen and (-webkit-min-device-pixel-ratio: 2), screen and (max--moz-device-pixel-ratio: 2) {
-	.ui-icon {
-	background-image: url(images/icons-36-white.png);
-	background-size: 630px 18px;
-}
-	.ui-icon-black {
-	background-image: url(images/icons-36-black.png);
-}
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+       only screen and (min--moz-device-pixel-ratio: 1.5),
+       only screen and (min-resolution: 240dpi) {
+	
+	.ui-icon-plus, .ui-icon-minus, .ui-icon-delete, .ui-icon-arrow-r,
+	.ui-icon-arrow-l, .ui-icon-arrow-u, .ui-icon-arrow-d, .ui-icon-check,
+	.ui-icon-gear, .ui-icon-refresh, .ui-icon-forward, .ui-icon-back,
+	.ui-icon-grid, .ui-icon-star, .ui-icon-alert, .ui-icon-info, .ui-icon-home, .ui-icon-search {
+		background-image: url(images/icons-36-white.png);
+		-moz-background-size: 630px 18px;
+		-o-background-size: 630px 18px;
+		-webkit-background-size: 630px 18px;
+		background-size: 630px 18px;
+	}
+	.ui-icon-alt {
+		background-image: url(images/icons-36-black.png);
+	}
 }
 
 /* plus minus */

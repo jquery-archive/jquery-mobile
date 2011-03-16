@@ -12,12 +12,22 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 	_create: function(){
 		var self = this,
 			input = this.element,
-			label = input.closest("form,fieldset,[data-" + $.mobile.ns + "role='page']").find("label[for='" + input.attr( "id" ) + "']"),
+			//NOTE: Windows Phone could not find the label through a selector
+			//filter works though.
+			label = input.closest("form,fieldset,[data-" + $.mobile.ns + "role='page']").find("label").filter("[for=" + input[0].id + "]"),
 			inputtype = input.attr( "type" ),
 			checkedicon = "ui-icon-" + inputtype + "-on",
 			uncheckedicon = "ui-icon-" + inputtype + "-off";
 
 		if ( inputtype != "checkbox" && inputtype != "radio" ) { return; }
+
+		//expose for other methods
+		$.extend( this,{
+			label			: label,
+			inputtype		: inputtype,
+			checkedicon		: checkedicon,
+			uncheckedicon	: uncheckedicon
+		});
 
 		// If there's no selected theme...
 		if( !this.options.theme ) {
@@ -59,7 +69,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 					event.preventDefault();
 					return;
 				}
-				
+
 				label.removeData("movestart");
 				if( label.mobileData("etype") && label.mobileData("etype") !== event.type || label.mobileData("moved") ){
 					label.removeData("etype").removeData("moved");
@@ -111,13 +121,13 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 	//returns either a set of radios with the same name attribute, or a single checkbox
 	_getInputSet: function(){
 		return this.element.closest( "form,fieldset,[data-" + $.mobile.ns + "role='page']" )
-				.find( "input[name='"+ this.element.attr( "name" ) +"'][type='"+ this.element.attr( "type" ) +"']" );
+				.find( "input[name='"+ this.element.attr( "name" ) +"'][type='"+ this.inputetype +"']" );
 	},
 
 	_updateAll: function(){
 		this._getInputSet().each(function(){
 			var dVal = $(this).mobileData("cacheVal");
-			if( dVal && dVal !== $(this).is(":checked") || $(this).is( "[type='checkbox']" ) ){
+			if( dVal && dVal !== $(this).is(":checked") || this.inputtype === "checkbox" ){
 				$(this).trigger("change");
 			}
 		})
@@ -126,21 +136,16 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 
 	refresh: function( ){
 		var input = this.element,
-			label = input.closest("form,fieldset,[data-" + $.mobile.ns + "role='page']").find("label[for='" + input.attr( "id" ) + "']"),
-			inputtype = input.attr( "type" ),
-			icon = label.find( ".ui-icon" ),
-			checkedicon = "ui-icon-" + inputtype + "-on",
-			uncheckedicon = "ui-icon-" + inputtype + "-off";
+			label = this.label,
+			icon = label.find( ".ui-icon" );
 
 		if ( input[0].checked ) {
-			label.addClass( "ui-btn-active" );
-			icon.addClass( checkedicon );
-			icon.removeClass( uncheckedicon );
+			label.addClass( $.mobile.activeBtnClass );
+			icon.addClass( this.checkedicon ).removeClass( this.uncheckedicon );
 
 		} else {
-			label.removeClass( "ui-btn-active" );
-			icon.removeClass( checkedicon );
-			icon.addClass( uncheckedicon );
+			label.removeClass( $.mobile.activeBtnClass );
+			icon.removeClass( this.checkedicon ).addClass( this.uncheckedicon );
 		}
 
 		if( input.is( ":disabled" ) ){
