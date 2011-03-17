@@ -24,7 +24,7 @@
 		setTimeout(function(){
 			$('#basic-linked-test li').first().click();
 		}, 500);
-		
+
 		setTimeout(function() {
 			ok($('#basic-link-results').hasClass('ui-page-active'));
 			start();
@@ -184,36 +184,37 @@
 		}, 1000);
 	});
 
-	module( "Search Filter", {
-		setup: function(){
-			location.href = location.href.split('#')[0] + "#search-filter-test";
-		}
-	});
+	module( "Search Filter");
 
-	asyncTest( "Make the search filter page the active page and enhance it correctly.", function() {
-		setTimeout(function() {
-			var $new_page = $('#search-filter-test');
-			ok($new_page.find('input').length == 1);
-			ok($new_page.hasClass('ui-page-active'));
-			start();
-		}, 1000);
-	});
+	var searchFilterId = "#search-filter-test";
+
 
 	asyncTest( "Filter downs results when the user enters information", function() {
-		$('.ui-page-active input').val('at');
-		$('.ui-page-active input').trigger('change');
+		var $searchPage = $(searchFilterId);
+		$.testHelper.openPage(searchFilterId);
+
+		setTimeout(function(){
+			$searchPage.find('input').val('at');
+			$searchPage.find('input').trigger('change');
+		}, 500);
 
 		setTimeout(function() {
-			same($('.ui-page-active li[style^="display: none;"]').length, 2);
+			same($searchPage.find('li[style^="display: none;"]').length, 2);
 			start();
 		}, 1000);
 	});
 
 	asyncTest( "Redisplay results when user removes values", function() {
-		$('.ui-page-active input').val('a');
-		$('.ui-page-active input').trigger('change');
+		var $searchPage = $(searchFilterId);
+		$.testHelper.openPage(searchFilterId);
+
+		setTimeout(function(){
+			$searchPage.find('input').val('a');
+			$searchPage.find('input').trigger('change');
+		}, 500);
+
 		setTimeout(function() {
-			same($('.ui-page-active li[style^="display: none;"]').length, 0);
+			same($searchPage.find('li[style^="display: none;"]').length, 0);
 			start();
 		}, 1000);
 	});
@@ -227,54 +228,50 @@
 		ok(ul.find("#fiz img").hasClass("ui-li-thumb"));
 	});
 
+	asyncTest( "Filter downs results and dividers when the user enters information", function() {
+		var	$searchPage = $("#search-filter-with-dividers-test");
+		$.testHelper.openPage("#search-filter-with-dividers-test");
 
-	module( "Search Filter with dividers", {
-		setup: function(){
-			location.href = location.href.split('#')[0] + "#search-filter-with-dividers-test";
-		}
+		// wait for the page to become active/enhanced
+		setTimeout(function(){
+			$searchPage.find('input').val('at');
+			$searchPage.find('input').trigger('change');
+		}, 500);
+
+		setTimeout(function() {
+			same($searchPage.find('li[style^="display: none;"]').length, 4);
+			same($searchPage.find('li:jqdata(role=list-divider)[style^="display: none;"]').length, 2);
+			//same($searchPage.find('li:not(:jqdata(role=list-divider)[style^="display: none;"]').length, 2);
+			start();
+		}, 1000);
 	});
 
-	// asyncTest( "Filter downs results and dividers when the user enters information", function() {
-	// 	// wait for the page to become active/enhanced
-	// 	setTimeout(function(){
-	// 		$('.ui-page-active input').val('at');
-	// 		$('.ui-page-active input').trigger('change');
-	// 	}, 500);
+	asyncTest( "Redisplay results when user removes values", function() {
+		// wait for the page to become active/enhanced
+		setTimeout(function(){
+			$('.ui-page-active input').val('a');
+			$('.ui-page-active input').trigger('change');
+		}, 500);
 
-	// 	setTimeout(function() {
-	// 		same($('.ui-page-active li[style^="display: none;"]').length, 4);
-	// 		same($('.ui-page-active li:jqdata(role=list-divider)[style^="display: none;"]').length, 2);
-	// 		same($('.ui-page-active li:not(:jqdata(role=list-divider))[style^="display: none;"]').length, 2);
-	// 		start();
-	// 	}, 1000);
-	// });
+		setTimeout(function() {
+			same($('.ui-page-active input').val(), 'a');
+			same($('.ui-page-active li[style^="display: none;"]').length, 0);
+			start();
+		}, 1000);
+	});
 
-	// asyncTest( "Redisplay results when user removes values", function() {
-	// 	// wait for the page to become active/enhanced
-	// 	setTimeout(function(){
-	// 		$('.ui-page-active input').val('a');
-	// 		$('.ui-page-active input').trigger('change');
-	// 	}, 500);
+	asyncTest( "Dividers are hidden when preceding hidden rows and shown when preceding shown rows", function () {
+		// wait for the page to become active/enhanced
+		setTimeout(function(){
+			$('.ui-page-active input').val('at');
+			$('.ui-page-active input').trigger('change');
+		}, 500);
 
-	// 	setTimeout(function() {
-	// 		same($('.ui-page-active input').val(), 'a');
-	// 		same($('.ui-page-active li[style^="display: none;"]').length, 0);
-	// 		start();
-	// 	}, 1000);
-	// });
-
-	// asyncTest( "Dividers are hidden when preceding hidden rows and shown when preceding shown rows", function () {
-	// 	// wait for the page to become active/enhanced
-	// 	setTimeout(function(){
-	// 		$('.ui-page-active input').val('at');
-	// 		$('.ui-page-active input').trigger('change');
-	// 	}, 500);
-
-	// 	setTimeout(function() {
-	// 		same($('.ui-page-active li[:jqdata(role=list-divider)[style^="display: none;"]').length, 2);
-	// 		same($('.ui-page-active li[:jqdata(role=list-divider)[style^="display: none;"] + li:not([:jqdata(role=list-divider))[style^="display: none;"]').length, 2);
-	// 		same($('.ui-page-active li[:jqdata(role=list-divider):not([style^="display: none;"]) + li:not([:jqdata(role=list-divider)):not([style^="display: none;"])').length, 2);
-	// 		start();
-	// 	}, 1000);
-	// });
+		setTimeout(function() {
+			same($('.ui-page-active li[:jqdata(role=list-divider)[style^="display: none;"]').length, 2);
+			same($('.ui-page-active li[:jqdata(role=list-divider)[style^="display: none;"] + li:not([:jqdata(role=list-divider))[style^="display: none;"]').length, 2);
+			same($('.ui-page-active li[:jqdata(role=list-divider):not([style^="display: none;"]) + li:not([:jqdata(role=list-divider)):not([style^="display: none;"])').length, 2);
+			start();
+		}, 1000);
+	});
 })(jQuery);
