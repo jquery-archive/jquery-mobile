@@ -150,7 +150,6 @@
 			same($("#bar").mobileData('url'), "bak");
 		});
 
-		//TODO lots of duplication
 		asyncTest( "pageLoading doesn't add the dialog to the page when loading message is false", function(){
 			$.testHelper.alterExtend({loadingMessage: false});
 			$.testHelper.reloadLib(libName);
@@ -162,30 +161,33 @@
 			}, 500);
 		});
 
-		asyncTest( "pageLoading doesn't add the dialog to the page when done is passed as true", function(){
+		asyncTest( "pageLoading removes the loading class from the page when done is passed as true", function(){
 			$.testHelper.alterExtend({loadingMessage: true});
 			$.testHelper.reloadLib(libName);
 			$.mobile.pageLoading(true);
 
 			setTimeout(function(){
-				ok(!$(".ui-loader").length);
+				console.log($(".ui-loading").length);
+				same($(".ui-loading").length, 0, "page should not be in the loading state");
 				start();
 			}, 500);
 		});
 
-		asyncTest( "pageLoading adds the dialog to the page when done is true", function(){
+		var coreLib = 'jquery.mobile.core.js';
+
+		asyncTest( "pageLoading adds the loading class to the page when done is false", function(){
 			$.testHelper.alterExtend({loadingMessage: true});
-			$.testHelper.reloadLib(libName);
+			$.testHelper.reloadLib(coreLib);
 			$.mobile.pageLoading(false);
 
 			setTimeout(function(){
-				ok($(".ui-loader").length);
+				same($(".ui-loading").length, 1, "page should be in the loading state");
 				start();
 			}, 500);
 		});
 
 		asyncTest( "page loading should contain default loading message", function(){
-			$.testHelper.reloadLib(libName);
+			$.testHelper.reloadLib(coreLib);
 			$.mobile.pageLoading(false);
 
 			setTimeout(function(){
@@ -199,7 +201,7 @@
 				$.mobile.loadingMessage = "foo";
 			});
 
-			$.testHelper.reloadLib(libName);
+			$.testHelper.reloadLib(coreLib);
 			$.mobile.pageLoading(false);
 
 			setTimeout(function(){
