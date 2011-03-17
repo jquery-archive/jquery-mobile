@@ -11,6 +11,7 @@ $.mobile.listview.prototype.options.filter = false;
 $( "[data-" + $.mobile.ns + "role='listview']" ).live( "listviewcreate", function() {
 	var list = $( this ),
 		listview = list.mobileData( "listview" );
+
 	if ( !listview.options.filter ) {
 		return;
 	}
@@ -33,7 +34,7 @@ $( "[data-" + $.mobile.ns + "role='listview']" ).live( "listviewcreate", functio
 
 					for (var i = listItems.length; i >= 0; i--) {
 						item = $(listItems[i]);
-						if (item.is("li[data-role=list-divider]")) {
+						if (item.is("li[data" + $.mobile.ns + "role=list-divider]")) {
 							if (!childItems) {
 								item.hide();
 							}
@@ -51,10 +52,10 @@ $( "[data-" + $.mobile.ns + "role='listview']" ).live( "listviewcreate", functio
 			.appendTo( wrapper )
 			.textinput();
 
-	if ($( this ).data( "inset" ) ) {
+	if ($( this ).mobileData( "inset" ) ) {
 		wrapper.addClass( "ui-listview-filter-inset" );
 	}
-	
+
 	wrapper.insertBefore( list );
 });
 
