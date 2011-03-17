@@ -167,7 +167,6 @@
 			$.mobile.pageLoading(true);
 
 			setTimeout(function(){
-				console.log($(".ui-loading").length);
 				same($(".ui-loading").length, 0, "page should not be in the loading state");
 				start();
 			}, 500);
