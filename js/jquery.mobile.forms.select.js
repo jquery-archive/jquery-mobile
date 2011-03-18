@@ -264,22 +264,10 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			});
 
 			//events on "screen" overlay + close button
-			screen
-				.add( headerClose )
-				.add( menuPageClose )
-				.bind("vclick", function(event){
-					self.close();
-					event.preventDefault();
-
-					// if the dialog's close icon was clicked, prevent the dialog's close
-					// handler from firing. selectmenu's should take precedence
-					if( $.contains(menuPageClose[0], event.target) ){
-						event.stopImmediatePropagation();
-					}
-				});
+			screen.bind("vclick", function( event ){
+				self.close();
+			});
 		}
-
-
 	},
 
 	_buildList: function(){
@@ -359,7 +347,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				return options.index( this );
 			}).get();
 
-		if( !self.options.nativeMenu && ( forceRebuild || select[0].options.length > self.list.find('li').length )){
+		if( !self.options.nativeMenu && ( forceRebuild || select[0].options.length != self.list.find('li').length )){
 			self._buildList();
 		}
 
@@ -415,6 +403,11 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 		//add active class to button
 		self.button.addClass( $.mobile.activeBtnClass );
+		
+		//remove after delay
+		setTimeout(function(){
+			self.button.removeClass( $.mobile.activeBtnClass );
+		}, 300);
 
 		function focusMenuItem(){
 			self.list.find( ".ui-btn-active" ).focus();
@@ -504,9 +497,6 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		function focusButton(){
 			setTimeout(function(){
 				self.button.focus();
-
-				//remove active class from button
-				self.button.removeClass( $.mobile.activeBtnClass );
 			}, 40);
 
 			self.listbox.removeAttr('style').append( self.list );

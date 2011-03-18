@@ -76,7 +76,6 @@
 	background: 			#333333;
 	font-weight: bold;
 	color: 					#fff;
-	cursor: pointer;
 	text-shadow: 0 -1px 1px #000;
 	text-decoration: none;
 	background-image: -moz-linear-gradient(top, 
@@ -197,7 +196,6 @@
 	background: 			#2567ab;
 	font-weight: bold;
 	color: 					#fff;
-	cursor: pointer;
 	text-shadow: 0 -1px 1px #145072;
 	text-decoration: none;
 	background-image: -moz-linear-gradient(top, 
@@ -310,7 +308,6 @@
 	background: 			#eee;
 	font-weight: bold;
 	color: 					#444;
-	cursor: pointer;
 	text-shadow: 0 1px 1px #f6f6f6;
 	text-decoration: none;
 	background-image: -moz-linear-gradient(top, 
@@ -544,7 +541,6 @@
 	background: 			#fadb4e;
 	font-weight: bold;
 	color: 					#333;
-	cursor: pointer;
 	text-shadow: 0 1px 1px 	#fe3;
 	text-decoration: none;
 	text-shadow: 0 1px 0 	#fff;
@@ -734,7 +730,7 @@ a.ui-link-inherit {
 /* Alt icon color
 -----------------------------------------------------------------------------------------------------------*/
 
-.ui-icon-black {
+.ui-icon-alt {
 	background: 						#fff;
 	background: 						rgba(255,255,255,.3);
 	background-image: url(images/icons-18-black.png);
@@ -744,14 +740,23 @@ a.ui-link-inherit {
 /* HD/"retina" sprite
 -----------------------------------------------------------------------------------------------------------*/
 
-@media screen and (-webkit-min-device-pixel-ratio: 2), screen and (max--moz-device-pixel-ratio: 2) {
-	.ui-icon {
-	background-image: url(images/icons-36-white.png);
-	background-size: 630px 18px;
-}
-	.ui-icon-black {
-	background-image: url(images/icons-36-black.png);
-}
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+       only screen and (min--moz-device-pixel-ratio: 1.5),
+       only screen and (min-resolution: 240dpi) {
+	
+	.ui-icon-plus, .ui-icon-minus, .ui-icon-delete, .ui-icon-arrow-r,
+	.ui-icon-arrow-l, .ui-icon-arrow-u, .ui-icon-arrow-d, .ui-icon-check,
+	.ui-icon-gear, .ui-icon-refresh, .ui-icon-forward, .ui-icon-back,
+	.ui-icon-grid, .ui-icon-star, .ui-icon-alert, .ui-icon-info, .ui-icon-home, .ui-icon-search {
+		background-image: url(images/icons-36-white.png);
+		-moz-background-size: 630px 18px;
+		-o-background-size: 630px 18px;
+		-webkit-background-size: 630px 18px;
+		background-size: 630px 18px;
+	}
+	.ui-icon-alt {
+		background-image: url(images/icons-36-black.png);
+	}
 }
 
 /* plus minus */
