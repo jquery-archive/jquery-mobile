@@ -243,7 +243,7 @@
 	var oldFind = jQuery.find;
 
 	jQuery.find = function( selector, context, ret ) {
-		selector = selector.replace(/:jqdata\((.*)\)/g, "[data-" + (jQuery.mobile.ns || "") + "$1]");
+		selector = selector.replace(/:jqdata\(([^)]*)\)/g, "[data-" + (jQuery.mobile.ns || "") + "$1]");
 
 		return oldFind.call( this, selector, context, ret );
 	};
