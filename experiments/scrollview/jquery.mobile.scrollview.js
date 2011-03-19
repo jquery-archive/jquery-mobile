@@ -157,7 +157,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		}
 
 		this._setScrollPosition(x, y);
-		this._$clip.trigger(this.options.updateEventName, { x: x, y: y });
+		this._$clip.trigger(this.options.updateEventName, [ { x: x, y: y } ]);
 
 		if (keepGoing)
 			this._timerID = setTimeout(this._timerCB, this._timerInterval);	
