@@ -2,8 +2,7 @@
  * mobile listview unit tests
  */
 
-
-// TODO splite out into seperate test files
+// TODO split out into seperate test files
 (function($){
 	module('Basic Linked list', {
 		setup: function(){
@@ -130,7 +129,8 @@
 	module('Split view list');
 
 	asyncTest( "changes the page to the split view list and enhances it correctly.", function() {
-		location.href = location.href.split('#')[0] + "#split-list-test";
+		$.testHelper.openPage("#split-list-test");
+
 		setTimeout(function() {
 			var $new_page = $('#split-list-test');
 			ok($('[role="option"]', $new_page).length == 3);
@@ -141,6 +141,8 @@
 	});
 
 	asyncTest( "change the page to the split view page 1 when the first link is clicked", function() {
+		$.testHelper.openPage("#split-list-test");
+
 		$('.ui-page-active [role="option"]:eq(0)').click();
 		setTimeout(function() {
 			ok($('#split-list-link1').hasClass('ui-page-active'));
@@ -149,6 +151,8 @@
 	});
 
 	asyncTest( "Slide back to the parent list view when the back button is clicked", function() {
+		$.testHelper.openPage("#split-list-test");
+		
 		$('.ui-page-active a:contains("Back")').click();
 		setTimeout(function() {
 			ok($('#split-list-test').hasClass('ui-page-active'));
@@ -239,14 +243,21 @@
 		}, 500);
 
 		setTimeout(function() {
+			//there should be four hidden list entries
 			same($searchPage.find('li[style^="display: none;"]').length, 4);
+
+			//there should be two list entries that are list dividers and hidden
 			same($searchPage.find('li:jqdata(role=list-divider)[style^="display: none;"]').length, 2);
-			//same($searchPage.find('li:not(:jqdata(role=list-divider)[style^="display: none;"]').length, 2);
+
+			//there should be two list entries that are not list dividers and hidden
+			same($searchPage.find('li:not(:jqdata(role=list-divider))[style^="display: none;"]').length, 2);
 			start();
 		}, 1000);
 	});
 
 	asyncTest( "Redisplay results when user removes values", function() {
+		$.testHelper.openPage("#search-filter-with-dividers-test");
+
 		// wait for the page to become active/enhanced
 		setTimeout(function(){
 			$('.ui-page-active input').val('a');
@@ -261,16 +272,19 @@
 	});
 
 	asyncTest( "Dividers are hidden when preceding hidden rows and shown when preceding shown rows", function () {
+		$.testHelper.openPage("#search-filter-with-dividers-test");
+		var $page = $('.ui-page-active');
+
 		// wait for the page to become active/enhanced
 		setTimeout(function(){
-			$('.ui-page-active input').val('at');
-			$('.ui-page-active input').trigger('change');
+			$page.find('input').val('at');
+			$page.find('input').trigger('change');
 		}, 500);
 
 		setTimeout(function() {
-			same($('.ui-page-active li[:jqdata(role=list-divider)[style^="display: none;"]').length, 2);
-			same($('.ui-page-active li[:jqdata(role=list-divider)[style^="display: none;"] + li:not([:jqdata(role=list-divider))[style^="display: none;"]').length, 2);
-			same($('.ui-page-active li[:jqdata(role=list-divider):not([style^="display: none;"]) + li:not([:jqdata(role=list-divider)):not([style^="display: none;"])').length, 2);
+			same($page.find('li:jqdata(role=list-divider)[style^="display: none;"]').length, 2);
+			same($page.find('li:jqdata(role=list-divider)[style^="display: none;"] + li:not(:jqdata(role=list-divider))[style^="display: none;"]').length, 2);
+			same($page.find('li:jqdata(role=list-divider):not([style^="display: none;"]) + li:not(:jqdata(role=list-divider)):not([style^="display: none;"])').length, 2);
 			start();
 		}, 1000);
 	});
