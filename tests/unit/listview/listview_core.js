@@ -143,7 +143,10 @@
 	asyncTest( "change the page to the split view page 1 when the first link is clicked", function() {
 		$.testHelper.openPage("#split-list-test");
 
-		$('.ui-page-active [role="option"]:eq(0)').click();
+		setTimeout(function(){
+			$('.ui-page-active [role="option"]:eq(0)').click();
+		}, 500);
+
 		setTimeout(function() {
 			ok($('#split-list-link1').hasClass('ui-page-active'));
 			start();
@@ -152,26 +155,32 @@
 
 	asyncTest( "Slide back to the parent list view when the back button is clicked", function() {
 		$.testHelper.openPage("#split-list-test");
-		
-		$('.ui-page-active a:contains("Back")').click();
-		setTimeout(function() {
-			ok($('#split-list-test').hasClass('ui-page-active'));
-			start();
-		}, 1000);
+
+		$.testHelper.sequence([
+			function(){
+				$('.ui-page-active [role="option"]:eq(0)').click();
+			},
+
+			function(){
+				$('.ui-page-active a:contains("Back")').click();
+			},
+
+			function() {
+				ok($('#split-list-test').hasClass('ui-page-active'));
+				start();
+			}
+		], 1000);
 	});
 
 	asyncTest( "Clicking on the icon (the second link) should take the user to other a href of this LI", function() {
-		$('.ui-page-active .ui-li-link-alt:eq(0)').click();
+		$.testHelper.openPage("#split-list-test");
+
+		setTimeout(function(){
+			$('.ui-page-active .ui-li-link-alt:eq(0)').click();
+		}, 500);
+
 		setTimeout(function() {
 			ok($('#split-list-link2').hasClass('ui-page-active'));
-			start();
-		}, 1000);
-	});
-
-	asyncTest( "Slide back to the parent list view when the back button is clicked", function() {
-		$('.ui-page-active a:contains("Back")').click();
-		setTimeout(function() {
-			ok($('#split-list-test').hasClass('ui-page-active'));
 			start();
 		}, 1000);
 	});
