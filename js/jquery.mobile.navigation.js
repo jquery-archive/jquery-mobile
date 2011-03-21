@@ -670,30 +670,24 @@
 			//rel set to external
 			isEmbeddedPage = path.isEmbeddedPage( url ),
 
-			//is the url something browser should handle?
-			isExternal = false,
-
-			//if target attr is specified we mimic _blank... for now
-			hasTarget = $this.is( "[target]" ),
-
-			//if data-ajax attr is set to false, use the default behavior of a link
-			hasAjaxDisabled = $this.is( "[data-ajax='false']" );
-
-		//check for protocol or rel and its not an embedded page
-		//TODO overlap in logic from isExternal, rel=external check should be
-		//     moved into more comprehensive isExternalLink
-		if (path.isExternal(url)) {
 			// Some embedded browsers, like the web view in Phone Gap, allow cross-domain XHR
 			// requests if the document doing the request was loaded via the file:// protocol.
 			// This is usually to allow the application to "phone home" and fetch app specific
 			// data. We normally let the browser handle external/cross-domain urls, but if the
 			// allowCrossDomainPages option is true, we will allow cross-domain http/https
 			// requests to go through our page loading logic.
-			isExternal = ($.mobile.allowCrossDomainPages && location.protocol === "file:" && url.search(/^https?:/) != -1) ? false : true;
-		}
-		else {
-			isExternal = (isRelExternal && !isEmbeddedPage);
-		}
+			isCrossDomainPageLoad = ($.mobile.allowCrossDomainPages && location.protocol === "file:" && url.search(/^https?:/) != -1),
+
+			//check for protocol or rel and its not an embedded page
+			//TODO overlap in logic from isExternal, rel=external check should be
+			//     moved into more comprehensive isExternalLink
+			isExternal = (path.isExternal(url) && !isCrossDomainPageLoad) || (isRelExternal && !isEmbeddedPage),
+
+			//if target attr is specified we mimic _blank... for now
+			hasTarget = $this.is( "[target]" ),
+
+			//if data-ajax attr is set to false, use the default behavior of a link
+			hasAjaxDisabled = $this.is( "[data-ajax='false']" );
 
 		//if there's a data-rel=back attr, go back in history
 		if( $this.is( "[data-rel='back']" ) ){
