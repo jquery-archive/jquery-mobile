@@ -16,12 +16,12 @@
 			// ensure bindings are removed
 			$.each(events, function(i, name){
 				$.each([$("#qunit-fixture"),
-								$($.event.special.scrollstart),
-								$($.event.special.tap),
-								$($.event.special.tap),
-								$($.event.special.swipe)], function(j, obj){
-									obj.unbind(name);
-								});
+					$($.event.special.scrollstart),
+					$($.event.special.tap),
+					$($.event.special.tap),
+					$($.event.special.swipe)], function(j, obj){
+						obj.unbind(name);
+					});
 			});
 
 			//NOTE unmock
