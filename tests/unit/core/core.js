@@ -4,7 +4,7 @@
 
 (function($){
 	var libName = "jquery.mobile.core.js",
-			setGradeA = function(value, version) { \
+			setGradeA = function(value, version) { 
 				$.support.mediaquery = value;
 				$.mobile.browser.ie = version;
 			},
