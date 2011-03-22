@@ -14,7 +14,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			input = this.element,
 			//NOTE: Windows Phone could not find the label through a selector
 			//filter works though.
-			label = input.closest("form,fieldset,[data-" + $.mobile.ns + "role='page']").find("label").filter("[for=" + input[0].id + "]"),
+			label = input.closest("form,fieldset,:jqdata(role='page')").find("label").filter("[for=" + input[0].id + "]"),
 			inputtype = input.attr( "type" ),
 			checkedicon = "ui-icon-" + inputtype + "-on",
 			uncheckedicon = "ui-icon-" + inputtype + "-off";
@@ -37,7 +37,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 		label
 			.buttonMarkup({
 				theme: this.options.theme,
-				icon: this.element.parents( "[data-" + $.mobile.ns + "type='horizontal']" ).length ? undefined : uncheckedicon,
+				icon: this.element.parents( ":jqdata(type='horizontal')" ).length ? undefined : uncheckedicon,
 				shadow: false
 			});
 
@@ -120,7 +120,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 
 	//returns either a set of radios with the same name attribute, or a single checkbox
 	_getInputSet: function(){
-		return this.element.closest( "form,fieldset,[data-" + $.mobile.ns + "role='page']" )
+		return this.element.closest( "form,fieldset,:jqdata(role='page')" )
 				.find( "input[name='"+ this.element.attr( "name" ) +"'][type='"+ this.inputetype +"']" );
 	},
 

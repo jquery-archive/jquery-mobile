@@ -16,14 +16,14 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 			//add ARIA role
 			.attr("role","dialog")
 			.addClass('ui-page ui-dialog ui-body-a')
-			.find( "[data-" + $.mobile.ns + "role=header]" )
+			.find( ":jqdata(role=header)" )
 			.addClass('ui-corner-top ui-overlay-shadow')
 				.prepend( "<a href='#' data-" + $.mobile.ns + "icon='delete' data-" + $.mobile.ns + "rel='back' data-" + $.mobile.ns + "iconpos='notext'>Close</a>" )
 			.end()
 			.find('.ui-content:not([class*="ui-body-"])')
 				.addClass('ui-body-c')
 			.end()
-			.find( ".ui-content,[data-" + $.mobile.ns + "role='footer']" )
+			.find( ".ui-content,:jqdata(role='footer')" )
 				.last()
 				.addClass('ui-corner-bottom ui-overlay-shadow');
 		

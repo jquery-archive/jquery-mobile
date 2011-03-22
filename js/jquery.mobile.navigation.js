@@ -376,7 +376,7 @@
 
 			//support deep-links to generated sub-pages
 			if( url.indexOf( "&" + $.mobile.subPageUrlKey ) > -1 ){
-				to = $( "[data-" + $.mobile.ns + "url='" + url + "']" );
+				to = $( ":jqdata(url='" + url + "')" );
 			}
 
 			if( from ){
@@ -496,7 +496,7 @@
 
 		//if url is a string
 		if( url ){
-			to = $( "[data-" + $.mobile.ns + "url='" + url + "']" );
+			to = $( ":jqdata(url='" + url + "')" );
 			fileUrl = path.getFilePath(url);
 		}
 		else{ //find base url of element, if avail
@@ -560,7 +560,7 @@
 
 					//workaround to allow scripts to execute when included in page divs
 					all.get(0).innerHTML = html;
-					to = all.find( "[data-" + $.mobile.ns + "role='page'], [data-" + $.mobile.ns + "role='dialog']" ).first();
+					to = all.find( ":jqdata(role='page'), :jqdata(role='dialog')" ).first();
 
 					//rewrite src and href attrs to use a base url
 					if( !$.support.dynamicBaseTag ){
@@ -614,7 +614,7 @@
 		if( !$.mobile.ajaxEnabled ||
 			//TODO: deprecated - remove at 1.0
 			!$.mobile.ajaxFormsEnabled ||
-			$(this).is( "[data-"+ $.mobile.ns +"ajax='false']" ) ){ return; }
+			$(this).is( ":jqdata(ajax='false')" ) ){ return; }
 
 		var type = $(this).attr("method"),
 			url = path.clean( $(this).attr( "action" ) );
@@ -674,10 +674,10 @@
 			hasTarget = $this.is( "[target]" ),
 
 			//if data-ajax attr is set to false, use the default behavior of a link
-			hasAjaxDisabled = $this.is( "[data-" + $.mobile.ns + "ajax='false']" );
+			hasAjaxDisabled = $this.is( ":jqdata(ajax='false')" );
 
 		//if there's a data-rel=back attr, go back in history
-		if( $this.is( "[data-" + $.mobile.ns + "rel='back']" ) ){
+		if( $this.is( ":jqdata(rel='back')" ) ){
 			window.history.back();
 			return false;
 		}

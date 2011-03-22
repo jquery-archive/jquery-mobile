@@ -32,7 +32,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 		var $elem = this.element,
 			o = this.options;
 
-		this.keepNative = "[data-" + $.mobile.ns + "role='none'], [data-" + $.mobile.ns + "role='nojs']" + (o.keepNative ? ", " + o.keepNative : "");
+		this.keepNative = ":jqdata(role='none'), :jqdata(role='nojs')" + (o.keepNative ? ", " + o.keepNative : "");
 
 		if ( this._trigger( "beforeCreate" ) === false ) {
 			return;
@@ -41,21 +41,21 @@ $.widget( "mobile.page", $.mobile.widget, {
 		//some of the form elements currently rely on the presence of ui-page and ui-content
 		// classes so we'll handle page and content roles outside of the main role processing
 		// loop below.
-		$elem.find( "[data-" + $.mobile.ns + "role='page'], [data-" + $.mobile.ns + "role='content']" ).andSelf().each(function() {
+		$elem.find( ":jqdata(role='page'), :jqdata(role='content')" ).andSelf().each(function() {
 			$(this).addClass( "ui-" + $(this).mobileData( $.mobile.ns + "role" ) );
 		});
 
 		$elem.find( "[data-" + $.mobile.ns + "role='nojs']" ).addClass( "ui-nojs" );
 
 		// pre-find data els
-		var $dataEls = $elem.find( "[data-" + $.mobile.ns + "role]" ).andSelf().each(function() {
+		var $dataEls = $elem.find( ":jqdata(role)" ).andSelf().each(function() {
 			var $this = $( this ),
 				role = $this.mobileData( "role" ),
 				theme = $this.mobileData( "theme" );
 
 			//apply theming and markup modifications to page,header,content,footer
 			if ( role === "header" || role === "footer" ) {
-				$this.addClass( "ui-bar-" + (theme || $this.parent( "[data-" + $.mobile.ns + "role='page']" ).mobileData( "theme" ) || "a") );
+				$this.addClass( "ui-bar-" + (theme || $this.parent( ":jqdata(role='page')" ).mobileData( "theme" ) || "a") );
 
 				// add ARIA role
 				$this.attr( "role", role === "header" ? "banner" : "contentinfo" );
@@ -121,13 +121,13 @@ $.widget( "mobile.page", $.mobile.widget, {
   	this._enhanceControls();
 
 		//links in bars, or those with  data-role become buttons
-		$elem.find( "[data-" + $.mobile.ns + "role='button'], .ui-bar > a, .ui-header > a, .ui-footer > a" )
+		$elem.find( ":jqdata(role='button'), .ui-bar > a, .ui-header > a, .ui-footer > a" )
 			.not( ".ui-btn" )
 			.not(this.keepNative)
 			.buttonMarkup();
 
 		$elem
-			.find("[data-" + $.mobile.ns + "role='controlgroup']")
+			.find(":jqdata(role='controlgroup')")
 			.controlgroup();
 
 		//links within content areas
@@ -194,11 +194,11 @@ $.widget( "mobile.page", $.mobile.widget, {
 
 		nonNativeControls
 			.filter( "input, select" )
-			.filter( "[data-" + $.mobile.ns + "role='slider'], [data-" + $.mobile.ns + "type='range']" )
+			.filter( ":jqdata(role='slider'), :jqdata(type='range')" )
 			.slider();
 
 		nonNativeControls
-			.filter( "select:not([data-" + $.mobile.ns + "role='slider'])" )
+			.filter( "select:not(:jqdata(role='slider'))" )
 			.selectmenu();
 	}
 });

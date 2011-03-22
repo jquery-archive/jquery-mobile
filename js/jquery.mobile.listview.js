@@ -310,7 +310,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			parentId = parentPage.mobileData( "url" ),
 			o = this.options,
 			self = this,
-			persistentFooterID = parentPage.find( "[data-" + $.mobile.ns + "role='footer']" ).mobileData( "id" );
+			persistentFooterID = parentPage.find( ":jqdata(role='footer')" ).mobileData( "id" );
 
 		$( parentList.find( "ul, ol" ).toArray().reverse() ).each(function( i ) {
 			var list = $( this ),

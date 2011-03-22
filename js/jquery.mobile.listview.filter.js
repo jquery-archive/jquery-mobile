@@ -8,7 +8,7 @@
 
 $.mobile.listview.prototype.options.filter = false;
 
-$( "[data-" + $.mobile.ns + "role='listview']" ).live( "listviewcreate", function() {
+$( ":jqdata(role='listview')" ).live( "listviewcreate", function() {
 	var list = $( this ),
 		listview = list.mobileData( "listview" );
 
@@ -34,7 +34,7 @@ $( "[data-" + $.mobile.ns + "role='listview']" ).live( "listviewcreate", functio
 
 					for (var i = listItems.length; i >= 0; i--) {
 						item = $(listItems[i]);
-						if (item.is("li[data-" + $.mobile.ns + "role=list-divider]")) {
+						if (item.is("li:jqdata(role=list-divider)")) {
 							if (!childItems) {
 								item.hide();
 							}
