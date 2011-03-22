@@ -151,11 +151,19 @@
 	// Monkey-patching Sizzle to filter the :jqdata selector
 	var oldFind = jQuery.find;
 
-	jQuery.find = function( selector, context, ret ) {
+	jQuery.find = function( selector, context, ret, extra ) {
 		selector = selector.replace(/:jqdata\(([^)]*)\)/g, "[data-" + (jQuery.mobile.ns || "") + "$1]");
 
-		return oldFind.call( this, selector, context, ret );
+		return oldFind.call( this, selector, context, ret, extra );
 	};
 
 	jQuery.extend( jQuery.find, oldFind );
+
+	jQuery.find.matches = function( expr, set ) {
+		return jQuery.find( expr, null, null, set );
+	};
+
+	jQuery.find.matchesSelector = function( node, expr ) {
+		return jQuery.find( expr, null, null, [node] ).length > 0;
+	};
 })( jQuery, this );
