@@ -6,8 +6,15 @@
 			mobileSelect = undefined,
 			metaViewportContentDefault = $.mobile.metaViewportContent,
 	    libName = 'jquery.mobile.init.js',
+			coreLib = 'jquery.mobile.core.js',
+			extendFn = $.extend,
 			setGradeA = function(value) { $.mobile.gradeA = function(){ return value; }; },
-			extendFn = $.extend;
+			reloadCoreNSandInit = function(){
+				$.testHelper.reloadLib(coreLib);
+				$.testHelper.reloadLib("jquery.setNamespace.js");
+				$.testHelper.reloadLib(libName);
+			};
+
 
 	module(libName, {
 		setup: function(){
@@ -35,6 +42,7 @@
 		mobileSelect = $.mobile.selectmenu;
 	});
 
+	// NOTE for the following two tests see index html for the binding
 	test( "mobile.page is available when mobile init is fired", function(){
 		ok(mobilePage !== undefined, "$.mobile.page is defined");
 	});
@@ -172,11 +180,9 @@
 			}, 500);
 		});
 
-		var coreLib = 'jquery.mobile.core.js';
-
 		asyncTest( "pageLoading adds the loading class to the page when done is false", function(){
 			$.testHelper.alterExtend({loadingMessage: true});
-			$.testHelper.reloadLib(coreLib);
+			reloadCoreNSandInit();
 			$.mobile.pageLoading(false);
 
 			setTimeout(function(){
@@ -186,7 +192,7 @@
 		});
 
 		asyncTest( "page loading should contain default loading message", function(){
-			$.testHelper.reloadLib(coreLib);
+			reloadCoreNSandInit();
 			$.mobile.pageLoading(false);
 
 			setTimeout(function(){
@@ -200,7 +206,7 @@
 				$.mobile.loadingMessage = "foo";
 			});
 
-			$.testHelper.reloadLib(coreLib);
+			reloadCoreNSandInit();
 			$.mobile.pageLoading(false);
 
 			setTimeout(function(){
