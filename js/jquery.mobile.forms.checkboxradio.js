@@ -121,7 +121,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 	//returns either a set of radios with the same name attribute, or a single checkbox
 	_getInputSet: function(){
 		return this.element.closest( "form,fieldset,[data-" + $.mobile.ns + "role='page']" )
-				.find( "input[name='"+ this.element.attr( "name" ) +"'][type='"+ this.inputetype +"']" );
+				.find( "input[name='"+ this.element.attr( "name" ) +"'][type='"+ this.inputtype +"']" );
 	},
 
 	_updateAll: function(){
