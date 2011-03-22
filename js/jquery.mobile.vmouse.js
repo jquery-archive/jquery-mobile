@@ -26,12 +26,11 @@
 (function($, window, document, undefined) {
 
 var dataPropertyName = "virtualMouseBindings",
+	touchTargetPropertyName = "virtualTouchID",
 	virtualEventNames = "vmouseover vmousedown vmousemove vmouseup vclick vmouseout vmousecancel".split(" "),
 	touchEventProps = "clientX clientY pageX pageY screenX screenY".split(" "),
 	activeDocHandlers = {},
-	blockMouseEvents = false,
 	resetTimerID = 0,
-	lastTarget = null,
 	startX = 0,
 	startY = 0,
 	startScrollX = 0,
@@ -41,7 +40,9 @@ var dataPropertyName = "virtualMouseBindings",
 	clickBlockList = [],
 	scrollTopSupported = $.support.scrollTop,
 	eventCaptureSupported = $.support.eventCapture,
-	$document = $(document);
+	$document = $(document),
+	nextTouchID = 1,
+	lastTouchID = 0;
 
 function getNativeEvent(event)
 {
@@ -113,11 +114,6 @@ function getClosestElementWithVirtualBinding(element, eventType)
 	return null;
 }
 
-function touchInProgress()
-{
-	return activeDocHandlers["touchbindings"] ? true : false;
-}
-
 function enableTouchBindings()
 {
 	if (!activeDocHandlers["touchbindings"]){
@@ -152,8 +148,7 @@ function disableTouchBindings()
 
 function enableMouseBindings()
 {
-	lastTarget = null;
-	blockMouseEvents = false;
+	lastTouchID = 0;
 	clickBlockList.length = 0;
 
 	// When mouse bindings are enabled, our
@@ -163,8 +158,6 @@ function enableMouseBindings()
 
 function disableMouseBindings()
 {
-	blockMouseEvents = true;
-
 	// When mouse bindings are disabled, our
 	// touch bindings are enabled.
 	enableTouchBindings();
@@ -202,58 +195,40 @@ function triggerVirtualEvent(eventType, event, flags)
 
 function mouseEventCallback(event)
 {
-	if (blockMouseEvents){
-		// There are times where the user touches a link on screen, but the browser determines
-		// that the touch is outside of the link. This happens most often when the user's finger
-		// overlaps the link and areas outside of the link. In this specific case, the browser
-		// will generate touch events with a target that is the parent or ancestor of the link,
-		// but it will then generate synthesized mouse events with a target that is the link
-		// itself. We need to catch this touch and mouse target mismatch case and re-enable our
-		// mouse bindings when it occurs so we can dispatch our virtual events appropriately.
-		var curTarget = event.target;
-		if (touchInProgress() || lastTarget == curTarget || !$.contains(lastTarget, curTarget)){
-			return;
-		}
-		// We had a mismatch between touch and mouse targets so reset things so we
-		// can process the incoming mouse events.
-		clearResetTimer();
-		enableMouseBindings();
-	}
-
-	triggerVirtualEvent("v" + event.type, event);
-}
-
-function clearResetTimer()
-{
-	if (resetTimerID){
-		clearTimeout(resetTimerID);
-		resetTimerID = 0;
+	var touchID = $(event.target).data(touchTargetPropertyName);
+	if (!lastTouchID || lastTouchID !== touchID){
+		triggerVirtualEvent("v" + event.type, event);
 	}
 }
 
 function handleTouchStart(event)
 {
-	var flags = getVirtualBindingFlags(event.target);
-
-	if (flags.hasVirtualBinding){
-		lastTarget = event.target;
-
-		clearResetTimer();
-		
-		disableMouseBindings();
-		didScroll = false;
-		
-		var t = getNativeEvent(event).touches[0];
-		startX = t.pageX;
-		startY = t.pageY;
+	var touches = getNativeEvent(event).touches;
+	if (touches.length === 1){
+		var target = event.target,
+			flags = getVirtualBindingFlags(target);
 	
-		if (scrollTopSupported){
-			startScrollX = window.pageXOffset;
-			startScrollY = window.pageYOffset;
+		if (flags.hasVirtualBinding){
+			lastTouchID = nextTouchID++;
+			$(target).data(touchTargetPropertyName, lastTouchID);
+	
+			clearResetTimer();
+			
+			disableMouseBindings();
+			didScroll = false;
+			
+			var t = getNativeEvent(event).touches[0];
+			startX = t.pageX;
+			startY = t.pageY;
+		
+			if (scrollTopSupported){
+				startScrollX = window.pageXOffset;
+				startScrollY = window.pageYOffset;
+			}
+		
+			triggerVirtualEvent("vmouseover", event, flags);
+			triggerVirtualEvent("vmousedown", event, flags);
 		}
-	
-		triggerVirtualEvent("vmouseover", event, flags);
-		triggerVirtualEvent("vmousedown", event, flags);
 	}
 }
 
