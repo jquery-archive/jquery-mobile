@@ -206,6 +206,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
 						theme: itemTheme
 					});
 
+				a.first().addClass( "ui-link-inherit" );
+
 				if ( a.length > 1 ) {
 					itemClass += " ui-li-has-alt";
 
