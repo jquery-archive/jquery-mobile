@@ -35,14 +35,20 @@ var dataPropertyName = "virtualMouseBindings",
 	startY = 0,
 	startScrollX = 0,
 	startScrollY = 0,
-	scrollThreshold = 10,
 	didScroll = false,
 	clickBlockList = [],
+	blockMouseTriggers = false,
 	scrollTopSupported = $.support.scrollTop,
 	eventCaptureSupported = $.support.eventCapture,
 	$document = $(document),
 	nextTouchID = 1,
 	lastTouchID = 0;
+
+$.vmouse = {
+	moveDistanceThreshold: 10,
+	clickDistanceThreshold: 10,
+	resetTimerDuration: 1500
+};
 
 function getNativeEvent(event)
 {
@@ -150,6 +156,7 @@ function enableMouseBindings()
 {
 	lastTouchID = 0;
 	clickBlockList.length = 0;
+	blockMouseTriggers = false;
 
 	// When mouse bindings are enabled, our
 	// touch bindings are disabled.
@@ -169,7 +176,7 @@ function startResetTimer()
 	resetTimerID = setTimeout(function(){
 		resetTimerID = 0;
 		enableMouseBindings();
-	}, 2000);
+	}, $.vmouse.resetTimerDuration);
 }
 
 function clearResetTimer()
@@ -196,7 +203,7 @@ function triggerVirtualEvent(eventType, event, flags)
 function mouseEventCallback(event)
 {
 	var touchID = $(event.target).data(touchTargetPropertyName);
-	if (!lastTouchID || lastTouchID !== touchID){
+	if (!blockMouseTriggers && (!lastTouchID || lastTouchID !== touchID)){
 		triggerVirtualEvent("v" + event.type, event);
 	}
 }
@@ -246,10 +253,11 @@ function handleTouchMove(event)
 {
 	var t = getNativeEvent(event).touches[0];
 
-	var didCancel = didScroll;
+	var didCancel = didScroll
+		moveThreshold = $.vmouse.moveDistanceThreshold;
 	didScroll = didScroll
 		|| (scrollTopSupported && (startScrollX != window.pageXOffset || startScrollY != window.pageYOffset))
-		|| (Math.abs(t.pageX - startX) > scrollThreshold || Math.abs(t.pageY - startY) > scrollThreshold);
+		|| (Math.abs(t.pageX - startX) > moveThreshold || Math.abs(t.pageY - startY) > moveThreshold);
 
 	var flags = getVirtualBindingFlags(event.target);
 	if (didScroll && !didCancel){
@@ -267,9 +275,16 @@ function handleTouchEnd(event)
 	triggerVirtualEvent("vmouseup", event, flags);
 	if (!didScroll){
 		if (triggerVirtualEvent("vclick", event, flags)){
-			// Push this element on the block list to prevent any clicks
-			// from getting to the bubble phase.
-			clickBlockList.push(event.target);
+			// The target of the mouse events that follow the touchend
+			// event don't necessarily match the target used during the
+			// touch. This means we need to rely on coordinates for blocking
+			// any click that is generated.
+			var t = getNativeEvent(event).changedTouches[0];
+			clickBlockList.push({ x: t.clientX, y: t.clientY });
+
+			// Prevent any mouse events that follow from triggering
+			// virtual event notifications.
+			blockMouseTriggers = true;
 		}
 	}
 	triggerVirtualEvent("vmouseout", event, flags);
@@ -376,14 +391,18 @@ if (eventCaptureSupported){
 	document.addEventListener("click", function(e){
 		var cnt = clickBlockList.length;
 		var target = e.target;
-		while (target) {
+		if (cnt) {
+			var x = e.clientX,
+				y = e.clientY,
+				threshold = $.vmouse.clickDistanceThreshold;
 			for (var i = 0; i < cnt; i++) {
-				if (target == clickBlockList[i]){
+				var o = clickBlockList[i];
+				if (Math.abs(o.x - x) < threshold && Math.abs(o.y - y) < threshold){
 					e.preventDefault();
 					e.stopPropagation();
+					return;
 				}
 			}
-			target = target.parentNode;
 		}
 	}, true);
 }
