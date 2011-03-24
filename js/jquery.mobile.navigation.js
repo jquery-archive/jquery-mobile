@@ -282,6 +282,25 @@
 	//enable cross-domain page support
 	$.mobile.allowCrossDomainPages = false;
 
+	$.mobile.urlMappings = {
+		// default mapping: matches all urls, does no transformations
+		all : {
+			// lowest priority
+			"priority" : 0,
+			// returns true if this mapping handles the specified url
+			"matches" : function(url) { return true; },
+
+			// rewrites the url before resolving, so nicer urls can be shown in the hash
+			"rewrite" : function(url) { return url; },
+
+			// data type for ajax retrieval
+			"dataType" : "html",
+
+			// applies a transforation to the retrieved data, for example json->html
+			"transform" : function(data) { return data; }
+		}
+	}
+
 	// changepage function
 	$.mobile.changePage = function( to, transition, reverse, changeHash, fromHashChange ){
 		//from is always the currently viewed page
@@ -531,12 +550,23 @@
 
 			$.mobile.pageLoading();
 
+			var urlMapping = $.mobile.urlMappings.all;
+			for(key in $.mobile.urlMappings) {
+				m = $.mobile.urlMappings[key];
+				if(m.matches(fileUrl) && m.priority > urlMapping.priority) {
+					urlMapping = m;
+				}
+			}
+
 			$.ajax({
-				url: fileUrl,
+				url: urlMapping.rewrite(fileUrl),
 				type: type,
 				data: data,
-				dataType: "html",
+				dataType: urlMapping.dataType,
 				success: function( html ) {
+
+					html = urlMapping.transform(html);
+
 					//pre-parse html to check for a data-url,
 					//use it as the new fileUrl, base path, etc
 					var all = $("<div></div>"),
