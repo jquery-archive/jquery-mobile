@@ -636,7 +636,7 @@
 
 		$.mobile.changePage({
 				url: url,
-				type: type || "get",
+				type: type && type.toLowerCase() || "get",
 				data: $(this).serialize()
 			},
 			undefined,
