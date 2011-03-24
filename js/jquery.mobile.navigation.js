@@ -639,8 +639,8 @@
 				type: type.length && type.toLowerCase() || "get",
 				data: $(this).serialize()
 			},
-			undefined,
-			undefined,
+			$(this).data("transition"),
+			$(this).data("direction"),
 			true
 		);
 		event.preventDefault();
