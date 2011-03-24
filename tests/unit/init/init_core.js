@@ -109,23 +109,26 @@
 		};
 
 		test( "active page and start page should be set to the fist page in the selected set", function(){
-			var firstPage = findFirstPage();
+			expect( 2 );
 			$.testHelper.reloadLib(libName);
+			var firstPage = findFirstPage();
 
 			same($.mobile.firstPage, firstPage);
 			same($.mobile.activePage, firstPage);
 		});
 
 		test( "mobile viewport class is defined on the first page's parent", function(){
-			var firstPage = findFirstPage();
+			expect( 1 );
 			$.testHelper.reloadLib(libName);
+			var firstPage = findFirstPage();
 
 			ok(firstPage.parent().hasClass('ui-mobile-viewport'));
 		});
 
 		test( "mobile page container is the first page's parent", function(){
-			var firstPage = findFirstPage();
+			expect( 1 );
 			$.testHelper.reloadLib(libName);
+			var firstPage = findFirstPage();
 
 			same($.mobile.pageContainer, firstPage.parent());
 		});
@@ -159,8 +162,7 @@
 		});
 
 		asyncTest( "pageLoading doesn't add the dialog to the page when loading message is false", function(){
-			$.testHelper.alterExtend({loadingMessage: false});
-			$.testHelper.reloadLib(libName);
+			$.mobile.loadingMessage = false;
 			$.mobile.pageLoading(false);
 
 			setTimeout(function(){
@@ -169,9 +171,8 @@
 			}, 500);
 		});
 
-		asyncTest( "pageLoading removes the loading class from the page when done is passed as true", function(){
-			$.testHelper.alterExtend({loadingMessage: true});
-			$.testHelper.reloadLib(libName);
+		asyncTest( "pageLoading doesn't add the dialog to the page when done is passed as true", function(){
+			$.mobile.loadingMessage = true;
 			$.mobile.pageLoading(true);
 
 			setTimeout(function(){
@@ -180,9 +181,8 @@
 			}, 500);
 		});
 
-		asyncTest( "pageLoading adds the loading class to the page when done is false", function(){
-			$.testHelper.alterExtend({loadingMessage: true});
-			reloadCoreNSandInit();
+		asyncTest( "pageLoading adds the dialog to the page when done is true", function(){
+			$.mobile.loadingMessage = true;
 			$.mobile.pageLoading(false);
 
 			setTimeout(function(){

@@ -122,7 +122,6 @@
 		$($.event.special.scrollstart).trigger("touchmove");
 
 		setTimeout(function(){
-			console.log('huh?');
 			ok(triggered, "triggered");
 			start();
 		}, 50);
@@ -196,7 +195,6 @@
 		expect( 1 );
 		var tap = false,
 				checkTap = function(){
-					console.log('hur?');
 					ok(true, "tap fired");
 				};
 
