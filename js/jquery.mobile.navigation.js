@@ -279,6 +279,9 @@
 	//history stack
 	$.mobile.urlHistory = urlHistory;
 
+	//enable cross-domain page support
+	$.mobile.allowCrossDomainPages = false;
+
 	// changepage function
 	$.mobile.changePage = function( to, transition, reverse, changeHash, fromHashChange ){
 		//from is always the currently viewed page
@@ -619,10 +622,11 @@
 			$(this).is( "[data-ajax='false']" ) ){ return; }
 
 		var type = $(this).attr("method"),
-			url = path.clean( $(this).attr( "action" ) );
+			url = path.clean( $(this).attr( "action" ) ),
+			target = $(this).attr("target");
 
 		//external submits use regular HTTP
-		if( path.isExternal( url ) ){
+		if( path.isExternal( url ) || target ){
 			return;
 		}
 
@@ -632,12 +636,12 @@
 		}
 
 		$.mobile.changePage({
-				url: url,
-				type: type || "get",
+				url: url.length && url || path.get(),
+				type: type.length && type.toLowerCase() || "get",
 				data: $(this).serialize()
 			},
-			undefined,
-			undefined,
+			$(this).data("transition"),
+			$(this).data("direction"),
 			true
 		);
 		event.preventDefault();
@@ -667,10 +671,18 @@
 			//rel set to external
 			isEmbeddedPage = path.isEmbeddedPage( url ),
 
+			// Some embedded browsers, like the web view in Phone Gap, allow cross-domain XHR
+			// requests if the document doing the request was loaded via the file:// protocol.
+			// This is usually to allow the application to "phone home" and fetch app specific
+			// data. We normally let the browser handle external/cross-domain urls, but if the
+			// allowCrossDomainPages option is true, we will allow cross-domain http/https
+			// requests to go through our page loading logic.
+			isCrossDomainPageLoad = ($.mobile.allowCrossDomainPages && location.protocol === "file:" && url.search(/^https?:/) != -1),
+
 			//check for protocol or rel and its not an embedded page
 			//TODO overlap in logic from isExternal, rel=external check should be
 			//     moved into more comprehensive isExternalLink
-			isExternal = path.isExternal( url ) || (isRelExternal && !isEmbeddedPage),
+			isExternal = (path.isExternal(url) && !isCrossDomainPageLoad) || (isRelExternal && !isEmbeddedPage),
 
 			//if target attr is specified we mimic _blank... for now
 			hasTarget = $this.is( "[target]" ),

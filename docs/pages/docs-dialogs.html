@@ -28,8 +28,11 @@
 			</code>
 			</p>
 			
-			<a href="dialog.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">Open dialog</a>
+			<a href="dialog.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">Open dialog (Ajax)</a>
 			
+			<p>To load the dialog as a completely new page instead of pulling it in via Ajax, add <code>rel="external"</code> attribute, just like any standard link. This is useful when linking from a <a href="docs-pages.html">multi-page template</a> to a dialog that's not part of that HTML document. The dialog will by styled exactly like the Ajax version, but there won't be page transition.</p>
+			
+			<a href="dialog.html" data-role="button" data-inline="true" data-rel="dialog" rel="external" data-transition="pop">Open dialog (rel=external)</a>
 
 			
 			<h2>Transitions</h2>
