@@ -108,14 +108,6 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				break;	
 			}
 		});	
-
-		// tapping the whole LI triggers click on the first link
-		$list.delegate( "li", "click", function(event) {
-			if ( !$( event.target ).closest( "a" ).length ) {
-				$( this ).find( "a" ).first().trigger( "click" );
-				return false;
-			}
-		});
 		
 	},
 
@@ -128,7 +120,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 		item.find( "p, dl" ).addClass( "ui-li-desc" );
 
-		$list.find( "li" ).find( ">img:eq(0)" ).addClass( "ui-li-thumb" ).each(function() {
+		$list.find( "li" ).find( ">a>img:eq(0)" ).addClass( "ui-li-thumb" ).each(function() {
 			$( this ).closest( "li" )
 				.addClass( $(this).is( ".ui-li-icon" ) ? "ui-li-has-icon" : "ui-li-has-thumb" );
 		});
