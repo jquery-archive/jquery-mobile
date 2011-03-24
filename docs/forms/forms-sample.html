@@ -22,7 +22,8 @@
 			
 			<h2>Ajax form submission</h2>
 
-			<p>In jQuery Mobile, form submissions are automatically handled using Ajax whenever possible, creating a smooth transition between the form and the result page. To ensure your form submits as intended, be sure to specify <code>action</code> and <code>method</code> properties on your form element.</p>
+			<p>In jQuery Mobile, form submissions are automatically handled using Ajax whenever possible, creating a smooth transition between the form and the result page. To ensure your form submits as intended, be sure to specify <code>action</code> and <code>method</code> properties on your form element. When unspecified, the method will default to <code>get</code>, and the <code>action</code> will default to the current page's relative path (found via <code>$.mobile.path.get()</code></p>
+			<p>Forms also accept attributes for transitions just like anchors, such as <code>data-transition="pop"</code> and <code>data-direction="reverse"</code>. To submit a form without Ajax, you can either disable Ajax form handling globally, or per form via the <code>data-ajax="false"</code> attribute. The <code>target</code> attribute (as in <code>target="_blank"</code>) is respected on forms as well, and will default to the browser's handling of that target when the form submits. Note that unlike anchors, the <code>rel</code> attribute is not allowed on forms.</p>
 			
             <h2>Non-Ajax handling</h2>
 

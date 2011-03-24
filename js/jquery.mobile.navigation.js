@@ -622,10 +622,11 @@
 			$(this).is( "[data-ajax='false']" ) ){ return; }
 
 		var type = $(this).attr("method"),
-			url = path.clean( $(this).attr( "action" ) );
+			url = path.clean( $(this).attr( "action" ) ),
+			target = $(this).attr("target");
 
 		//external submits use regular HTTP
-		if( path.isExternal( url ) ){
+		if( path.isExternal( url ) || target ){
 			return;
 		}
 
