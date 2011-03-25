@@ -8,9 +8,9 @@
 
 $.mobile.listview.prototype.options.filter = false;
 
-$( ":jqdata(role='listview')" ).live( "listviewcreate", function() {
+$( ":jqmData(role='listview')" ).live( "listviewcreate", function() {
 	var list = $( this ),
-		listview = list.mobileData( "listview" );
+		listview = list.jqmData( "listview" );
 
 	if ( !listview.options.filter ) {
 		return;
@@ -34,7 +34,7 @@ $( ":jqdata(role='listview')" ).live( "listviewcreate", function() {
 
 					for (var i = listItems.length; i >= 0; i--) {
 						item = $(listItems[i]);
-						if (item.is("li:jqdata(role=list-divider)")) {
+						if (item.is("li:jqmData(role=list-divider)")) {
 							if (!childItems) {
 								item.hide();
 							}
@@ -52,7 +52,7 @@ $( ":jqdata(role='listview')" ).live( "listviewcreate", function() {
 			.appendTo( wrapper )
 			.textinput();
 
-	if ($( this ).mobileData( "inset" ) ) {
+	if ($( this ).jqmData( "inset" ) ) {
 		wrapper.addClass( "ui-listview-filter-inset" );
 	}
 

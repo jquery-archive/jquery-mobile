@@ -256,10 +256,10 @@
 			same($searchPage.find('li[style^="display: none;"]').length, 4);
 
 			//there should be two list entries that are list dividers and hidden
-			same($searchPage.find('li:jqdata(role=list-divider)[style^="display: none;"]').length, 2);
+			same($searchPage.find('li:jqmData(role=list-divider)[style^="display: none;"]').length, 2);
 
 			//there should be two list entries that are not list dividers and hidden
-			same($searchPage.find('li:not(:jqdata(role=list-divider))[style^="display: none;"]').length, 2);
+			same($searchPage.find('li:not(:jqmData(role=list-divider))[style^="display: none;"]').length, 2);
 			start();
 		}, 1000);
 	});
@@ -291,9 +291,9 @@
 		}, 500);
 
 		setTimeout(function() {
-			same($page.find('li:jqdata(role=list-divider)[style^="display: none;"]').length, 2);
-			same($page.find('li:jqdata(role=list-divider)[style^="display: none;"] + li:not(:jqdata(role=list-divider))[style^="display: none;"]').length, 2);
-			same($page.find('li:jqdata(role=list-divider):not([style^="display: none;"]) + li:not(:jqdata(role=list-divider)):not([style^="display: none;"])').length, 2);
+			same($page.find('li:jqmData(role=list-divider)[style^="display: none;"]').length, 2);
+			same($page.find('li:jqmData(role=list-divider)[style^="display: none;"] + li:not(:jqmData(role=list-divider))[style^="display: none;"]').length, 2);
+			same($page.find('li:jqmData(role=list-divider):not([style^="display: none;"]) + li:not(:jqmData(role=list-divider)):not([style^="display: none;"])').length, 2);
 			start();
 		}, 1000);
 	});

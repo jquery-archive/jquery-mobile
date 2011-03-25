@@ -68,14 +68,14 @@
 		// find and enhance the pages in the dom and transition to the first page.
 		initializePage: function(){
 			//find present pages
-			var $pages = $( ":jqdata(role='page')" );
+			var $pages = $( ":jqmData(role='page')" );
 
 			//add dialogs, set data-url attrs
-			$pages.add( ":jqdata(role='dialog')" ).each(function(){
+			$pages.add( ":jqmData(role='dialog')" ).each(function(){
 				var $this = $(this);
 
 				// unless the data url is already set set it to the id
-				if( !$this.mobileData('url') ){
+				if( !$this.jqmData('url') ){
 					$this.attr( "data-" + $.mobile.ns + "url", $this.attr( "id" ) );
 				}
 			});

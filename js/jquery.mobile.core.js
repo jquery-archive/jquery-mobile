@@ -117,7 +117,7 @@
 
 	//mobile version of data() method
 	//treats namespaced data-attrs the same as non-namespaced ones
-    $.fn.mobileData = function( prop, value ){
+    $.fn.jqmData = function( prop, value ){
     	var pUndef = prop === undefined,
     		vUndef = value === undefined;
 
@@ -148,11 +148,11 @@
 	    }
     };
 
-	// Monkey-patching Sizzle to filter the :jqdata selector
+	// Monkey-patching Sizzle to filter the :jqmData selector
 	var oldFind = jQuery.find;
 
 	jQuery.find = function( selector, context, ret, extra ) {
-		selector = selector.replace(/:jqdata\(([^)]*)\)/g, "[data-" + (jQuery.mobile.ns || "") + "$1]");
+		selector = selector.replace(/:jqmData\(([^)]*)\)/g, "[data-" + (jQuery.mobile.ns || "") + "$1]");
 
 		return oldFind.call( this, selector, context, ret, extra );
 	};

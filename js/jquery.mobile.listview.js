@@ -122,7 +122,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 	_itemApply: function( $list, item ) {
 		// TODO class has to be defined in markup
 		item.find( ".ui-li-count" )
-			.addClass( "ui-btn-up-" + ($list.mobileData( "counttheme" ) || this.options.countTheme) + " ui-btn-corner-all" );
+			.addClass( "ui-btn-up-" + ($list.jqmData( "counttheme" ) || this.options.countTheme) + " ui-btn-corner-all" );
 
 		item.find( "h1, h2, h3, h4, h5, h6" ).addClass( "ui-li-heading" );
 
@@ -158,7 +158,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		var o = this.options,
 			$list = this.element,
 			self = this,
-			dividertheme = $list.mobileData( "dividertheme" ) || o.dividerTheme,
+			dividertheme = $list.jqmData( "dividertheme" ) || o.dividerTheme,
 			li = $list.children( "li" ),
 			counter = $.support.cssPseudoElement || !$.nodeName( $list[0], "ol" ) ? 0 : 1;
 
@@ -189,12 +189,12 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				return;
 			}
 
-			var itemTheme = item.mobileData("theme") || o.theme;
+			var itemTheme = item.jqmData("theme") || o.theme;
 
 			var a = item.find( "a" );
 				
 			if ( a.length ) {	
-				var icon = item.mobileData("icon");
+				var icon = item.jqmData("icon");
 				
 				item
 					.buttonMarkup({
@@ -212,7 +212,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 					itemClass += " ui-li-has-alt";
 
 					var last = a.last(),
-						splittheme = $list.mobileData( "splittheme" ) || last.mobileData( "theme" ) || o.splitTheme;
+						splittheme = $list.jqmData( "splittheme" ) || last.jqmData( "theme" ) || o.splitTheme;
 					
 					last
 						.appendTo(item)
@@ -232,11 +232,11 @@ $.widget( "mobile.listview", $.mobile.widget, {
 								corners: true,
 								theme: splittheme,
 								iconpos: "notext",
-								icon: $list.mobileData( "spliticon" ) || last.mobileData( "icon" ) ||  o.splitIcon
+								icon: $list.jqmData( "spliticon" ) || last.jqmData( "icon" ) ||  o.splitIcon
 							} ) );
 				}
 
-			} else if ( item.mobileData( "role" ) === "list-divider" ) {
+			} else if ( item.jqmData( "role" ) === "list-divider" ) {
 				itemClass += " ui-li-divider ui-btn ui-bar-" + dividertheme;
 				item.attr( "role", "heading" );
 
@@ -307,18 +307,18 @@ $.widget( "mobile.listview", $.mobile.widget, {
 	_createSubPages: function() {
 		var parentList = this.element,
 			parentPage = parentList.closest( ".ui-page" ),
-			parentId = parentPage.mobileData( "url" ),
+			parentId = parentPage.jqmData( "url" ),
 			o = this.options,
 			self = this,
-			persistentFooterID = parentPage.find( ":jqdata(role='footer')" ).mobileData( "id" );
+			persistentFooterID = parentPage.find( ":jqmData(role='footer')" ).jqmData( "id" );
 
 		$( parentList.find( "ul, ol" ).toArray().reverse() ).each(function( i ) {
 			var list = $( this ),
 				parent = list.parent(),
 				title = $.trim(parent.contents()[ 0 ].nodeValue) || parent.find('a:first').text(),
 				id = parentId + "&" + $.mobile.subPageUrlKey + "=" + self._idStringEscape(title + " " + i),
-				theme = list.mobileData( "theme" ) || o.theme,
-				countTheme = list.mobileData( "counttheme" ) || parentList.mobileData( "counttheme" ) || o.countTheme,
+				theme = list.jqmData( "theme" ) || o.theme,
+				countTheme = list.jqmData( "counttheme" ) || parentList.jqmData( "counttheme" ) || o.countTheme,
 				newPage = list.wrap( "<div data-" + $.mobile.ns + "role='page'><div data-" + $.mobile.ns + "role='content'></div></div>" )
 							.parent()
 								.before( "<div  data-" + $.mobile.ns + "role='header' data-" + $.mobile.ns + "theme='" + o.headerTheme + "'><div class='ui-title'>" + title + "</div></div>" )

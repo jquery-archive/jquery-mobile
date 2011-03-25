@@ -16,14 +16,14 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 			//add ARIA role
 			.attr("role","dialog")
 			.addClass('ui-page ui-dialog ui-body-a')
-			.find( ":jqdata(role=header)" )
+			.find( ":jqmData(role=header)" )
 			.addClass('ui-corner-top ui-overlay-shadow')
 				.prepend( "<a href='#' data-" + $.mobile.ns + "icon='delete' data-" + $.mobile.ns + "rel='back' data-" + $.mobile.ns + "iconpos='notext'>Close</a>" )
 			.end()
 			.find('.ui-content:not([class*="ui-body-"])')
 				.addClass('ui-body-c')
 			.end()
-			.find( ".ui-content,:jqdata(role='footer')" )
+			.find( ".ui-content,:jqmData(role='footer')" )
 				.last()
 				.addClass('ui-corner-bottom ui-overlay-shadow');
 		
@@ -42,7 +42,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 					$targetel = $(e.target).closest("form");
 				}
 				
-				if( $targetel.length && !$targetel.mobileData("transition") ){
+				if( $targetel.length && !$targetel.jqmData("transition") ){
 					$targetel
 						.attr("data-" + $.mobile.ns + "transition", $.mobile.urlHistory.getActive().transition )
 						.attr("data-" + $.mobile.ns + "direction", "reverse");

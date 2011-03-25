@@ -11,9 +11,9 @@ $.fn.fixHeaderFooter = function(options){
 	return this.each(function(){
 		var $this = $(this);
 		
-		if( $this.mobileData('fullscreen') ){ $this.addClass('ui-page-fullscreen'); }
-		$this.find( ".ui-header:jqdata(position='fixed')" ).addClass('ui-header-fixed ui-fixed-inline fade'); //should be slidedown
-		$this.find( ".ui-footer:jqdata(position='fixed')" ).addClass('ui-footer-fixed ui-fixed-inline fade'); //should be slideup		
+		if( $this.jqmData('fullscreen') ){ $this.addClass('ui-page-fullscreen'); }
+		$this.find( ".ui-header:jqmData(position='fixed')" ).addClass('ui-header-fixed ui-fixed-inline fade'); //should be slidedown
+		$this.find( ".ui-footer:jqmData(position='fixed')" ).addClass('ui-footer-fixed ui-fixed-inline fade'); //should be slideup		
 	});
 };
 
@@ -104,12 +104,12 @@ $.fixedToolbars = (function(){
 	//before page is shown, check for duplicate footer
 	$('.ui-page').live('pagebeforeshow', function(event, ui){
 		var page = $(event.target),
-			footer = page.find( ":jqdata(role='footer'):not(.ui-sticky-footer)" ),
-			id = footer.mobileData('id');
+			footer = page.find( ":jqmData(role='footer'):not(.ui-sticky-footer)" ),
+			id = footer.jqmData('id');
 		stickyFooter = null;
 		if (id)
 		{
-			stickyFooter = $( ".ui-footer:jqdata(id='" + id + "').ui-sticky-footer" );
+			stickyFooter = $( ".ui-footer:jqmData(id='" + id + "').ui-sticky-footer" );
 			if (stickyFooter.length == 0) {
 				// No sticky footer exists for this data-id. We'll use this
 				// footer as the sticky footer for the group and then create

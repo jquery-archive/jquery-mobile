@@ -32,7 +32,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 		var $elem = this.element,
 			o = this.options;
 
-		this.keepNative = ":jqdata(role='none'), :jqdata(role='nojs')" + (o.keepNative ? ", " + o.keepNative : "");
+		this.keepNative = ":jqmData(role='none'), :jqmData(role='nojs')" + (o.keepNative ? ", " + o.keepNative : "");
 
 		if ( this._trigger( "beforeCreate" ) === false ) {
 			return;
@@ -41,21 +41,21 @@ $.widget( "mobile.page", $.mobile.widget, {
 		//some of the form elements currently rely on the presence of ui-page and ui-content
 		// classes so we'll handle page and content roles outside of the main role processing
 		// loop below.
-		$elem.find( ":jqdata(role='page'), :jqdata(role='content')" ).andSelf().each(function() {
-			$(this).addClass( "ui-" + $(this).mobileData( $.mobile.ns + "role" ) );
+		$elem.find( ":jqmData(role='page'), :jqmData(role='content')" ).andSelf().each(function() {
+			$(this).addClass( "ui-" + $(this).jqmData( $.mobile.ns + "role" ) );
 		});
 
 		$elem.find( "[data-" + $.mobile.ns + "role='nojs']" ).addClass( "ui-nojs" );
 
 		// pre-find data els
-		var $dataEls = $elem.find( ":jqdata(role)" ).andSelf().each(function() {
+		var $dataEls = $elem.find( ":jqmData(role)" ).andSelf().each(function() {
 			var $this = $( this ),
-				role = $this.mobileData( "role" ),
-				theme = $this.mobileData( "theme" );
+				role = $this.jqmData( "role" ),
+				theme = $this.jqmData( "theme" );
 
 			//apply theming and markup modifications to page,header,content,footer
 			if ( role === "header" || role === "footer" ) {
-				$this.addClass( "ui-bar-" + (theme || $this.parent( ":jqdata(role='page')" ).mobileData( "theme" ) || "a") );
+				$this.addClass( "ui-bar-" + (theme || $this.parent( ":jqmData(role='page')" ).jqmData( "theme" ) || "a") );
 
 				// add ARIA role
 				$this.attr( "role", role === "header" ? "banner" : "contentinfo" );
@@ -76,8 +76,8 @@ $.widget( "mobile.page", $.mobile.widget, {
 				// auto-add back btn on pages beyond first view
 				if ( o.addBackBtn && role === "header" &&
 						$( ".ui-page" ).length > 1 &&
-						$elem.mobileData( "url" ) !== $.mobile.path.stripHash( location.hash ) &&
-						!leftbtn && $this.mobileData( "backbtn" ) !== false ) {
+						$elem.jqmData( "url" ) !== $.mobile.path.stripHash( location.hash ) &&
+						!leftbtn && $this.jqmData( "backbtn" ) !== false ) {
 
 					$( "<a href='#' class='ui-btn-left' data-" + $.mobile.ns + "rel='back' data-" + $.mobile.ns + "icon='arrow-l'>"+ o.backBtnText +"</a>" ).prependTo( $this );
 				}
@@ -121,13 +121,13 @@ $.widget( "mobile.page", $.mobile.widget, {
   	this._enhanceControls();
 
 		//links in bars, or those with  data-role become buttons
-		$elem.find( ":jqdata(role='button'), .ui-bar > a, .ui-header > a, .ui-footer > a" )
+		$elem.find( ":jqmData(role='button'), .ui-bar > a, .ui-header > a, .ui-footer > a" )
 			.not( ".ui-btn" )
 			.not(this.keepNative)
 			.buttonMarkup();
 
 		$elem
-			.find(":jqdata(role='controlgroup')")
+			.find(":jqmData(role='controlgroup')")
 			.controlgroup();
 
 		//links within content areas
@@ -194,11 +194,11 @@ $.widget( "mobile.page", $.mobile.widget, {
 
 		nonNativeControls
 			.filter( "input, select" )
-			.filter( ":jqdata(role='slider'), :jqdata(type='range')" )
+			.filter( ":jqmData(role='slider'), :jqmData(type='range')" )
 			.slider();
 
 		nonNativeControls
-			.filter( "select:not(:jqdata(role='slider'))" )
+			.filter( "select:not(:jqmData(role='slider'))" )
 			.selectmenu();
 	}
 });

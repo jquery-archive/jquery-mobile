@@ -154,11 +154,11 @@
 		});
 
 		test( "pages without a data-url attribute have it set to their id", function(){
-			same($("#foo").mobileData('url'), "foo");
+			same($("#foo").jqmData('url'), "foo");
 		});
 
 		test( "pages with a data-url attribute are left with the original value", function(){
-			same($("#bar").mobileData('url'), "bak");
+			same($("#bar").jqmData('url'), "bak");
 		});
 
 		asyncTest( "pageLoading doesn't add the dialog to the page when loading message is false", function(){

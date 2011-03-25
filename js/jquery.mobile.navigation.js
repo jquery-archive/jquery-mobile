@@ -376,12 +376,12 @@
 
 			//support deep-links to generated sub-pages
 			if( url.indexOf( "&" + $.mobile.subPageUrlKey ) > -1 ){
-				to = $( ":jqdata(url='" + url + "')" );
+				to = $( ":jqmData(url='" + url + "')" );
 			}
 
 			if( from ){
 				//set as data for returning to that spot
-				from.mobileData( "lastScroll", currScroll);
+				from.jqmData( "lastScroll", currScroll);
 				//trigger before show/hide events
 				from.data( "page" )._trigger( "beforehide", null, { nextPage: to } );
 			}
@@ -404,16 +404,16 @@
 				removeActiveLinkClass();
 
 				//jump to top or prev scroll, sometimes on iOS the page has not rendered yet.  I could only get by this with a setTimeout, but would like to avoid that.
-				$.mobile.silentScroll( to.mobileData( "lastScroll" ) );
+				$.mobile.silentScroll( to.jqmData( "lastScroll" ) );
 
 				reFocus( to );
 
 				//trigger show/hide events
 				if( from ){
-					from.mobileData( "page" )._trigger( "hide", null, { nextPage: to } );
+					from.jqmData( "page" )._trigger( "hide", null, { nextPage: to } );
 				}
 				//trigger pageshow, define prevPage as either from or empty jQuery obj
-				to.mobileData( "page" )._trigger( "show", null, { prevPage: from || $("") } );
+				to.jqmData( "page" )._trigger( "show", null, { prevPage: from || $("") } );
 
 				//set "to" as activePage
 				$.mobile.activePage = to;
@@ -482,7 +482,7 @@
 		function enhancePage(){
 
 			//set next page role, if defined
-			if ( nextPageRole || to.mobileData('role') === 'dialog' ) {
+			if ( nextPageRole || to.jqmData('role') === 'dialog' ) {
 				url = urlHistory.getActive().url + dialogHashKey;
 				if(nextPageRole){
 					to.attr( "data-" + $.mobile.ns + "role", nextPageRole );
@@ -496,7 +496,7 @@
 
 		//if url is a string
 		if( url ){
-			to = $( ":jqdata(url='" + url + "')" );
+			to = $( ":jqmData(url='" + url + "')" );
 			fileUrl = path.getFilePath(url);
 		}
 		else{ //find base url of element, if avail
@@ -560,7 +560,7 @@
 
 					//workaround to allow scripts to execute when included in page divs
 					all.get(0).innerHTML = html;
-					to = all.find( ":jqdata(role='page'), :jqdata(role='dialog')" ).first();
+					to = all.find( ":jqmData(role='page'), :jqmData(role='dialog')" ).first();
 
 					//rewrite src and href attrs to use a base url
 					if( !$.support.dynamicBaseTag ){
@@ -614,7 +614,7 @@
 		if( !$.mobile.ajaxEnabled ||
 			//TODO: deprecated - remove at 1.0
 			!$.mobile.ajaxFormsEnabled ||
-			$(this).is( ":jqdata(ajax='false')" ) ){ return; }
+			$(this).is( ":jqmData(ajax='false')" ) ){ return; }
 
 		var type = $(this).attr("method"),
 			url = path.clean( $(this).attr( "action" ) );
@@ -674,10 +674,10 @@
 			hasTarget = $this.is( "[target]" ),
 
 			//if data-ajax attr is set to false, use the default behavior of a link
-			hasAjaxDisabled = $this.is( ":jqdata(ajax='false')" );
+			hasAjaxDisabled = $this.is( ":jqmData(ajax='false')" );
 
 		//if there's a data-rel=back attr, go back in history
-		if( $this.is( ":jqdata(rel='back')" ) ){
+		if( $this.is( ":jqmData(rel='back')" ) ){
 			window.history.back();
 			return false;
 		}
@@ -711,11 +711,11 @@
 		}
 		else {
 			//use ajax
-			var transition = $this.mobileData( "transition" ),
-				direction = $this.mobileData("direction"),
+			var transition = $this.jqmData( "transition" ),
+				direction = $this.jqmData("direction"),
 				reverse = (direction && direction === "reverse") ||
 				// deprecated - remove by 1.0
-				$this.mobileData( "back" );
+				$this.jqmData( "back" );
 
 			//this may need to be more specific as we use data-rel more
 			nextPageRole = $this.attr( "data-" + $.mobile.ns + "rel" );
