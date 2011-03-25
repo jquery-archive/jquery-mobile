@@ -15,8 +15,8 @@
 		}, 100);
 	});
 
-	asyncTest( "Slides to the listview page when the li is clicked", function() {
-		$('.ui-page-active li').first().click();
+	asyncTest( "Slides to the listview page when the li>a is clicked", function() {
+		$('.ui-page-active li a').first().click();
 		setTimeout(function() {
 			ok($('#basic-link-results').hasClass('ui-page-active'));
 			start();
@@ -45,7 +45,7 @@
 	});
 
 	asyncTest( "change to nested page when the li is clicked", function() {
-		$('.ui-page-active li:eq(1)').click();
+		$('.ui-page-active li:eq(1) a:eq(0)').click();
 				setTimeout(function() {
 					var $new_page = $('body > [data-url="nested-list-test&ui-page=More-animals-0"]');
 					ok($new_page.hasClass('ui-page-active'), 'Makes the nested page the active page.');
