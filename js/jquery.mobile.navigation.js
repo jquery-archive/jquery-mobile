@@ -622,10 +622,11 @@
 			$(this).is( "[data-ajax='false']" ) ){ return; }
 
 		var type = $(this).attr("method"),
-			url = path.clean( $(this).attr( "action" ) );
+			url = path.clean( $(this).attr( "action" ) ),
+			target = $(this).attr("target");
 
 		//external submits use regular HTTP
-		if( path.isExternal( url ) ){
+		if( path.isExternal( url ) || target ){
 			return;
 		}
 
@@ -635,12 +636,12 @@
 		}
 
 		$.mobile.changePage({
-				url: url,
-				type: type || "get",
+				url: url.length && url || path.get(),
+				type: type.length && type.toLowerCase() || "get",
 				data: $(this).serialize()
 			},
-			undefined,
-			undefined,
+			$(this).data("transition"),
+			$(this).data("direction"),
 			true
 		);
 		event.preventDefault();

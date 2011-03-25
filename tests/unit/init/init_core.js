@@ -152,8 +152,7 @@
 
 		//TODO lots of duplication
 		asyncTest( "pageLoading doesn't add the dialog to the page when loading message is false", function(){
-			$.testHelper.alterExtend({loadingMessage: false});
-			$.testHelper.reloadLib(libName);
+			$.mobile.loadingMessage = false;
 			$.mobile.pageLoading(false);
 
 			setTimeout(function(){
@@ -163,8 +162,7 @@
 		});
 
 		asyncTest( "pageLoading doesn't add the dialog to the page when done is passed as true", function(){
-			$.testHelper.alterExtend({loadingMessage: true});
-			$.testHelper.reloadLib(libName);
+			$.mobile.loadingMessage = true;
 			$.mobile.pageLoading(true);
 
 			setTimeout(function(){
@@ -174,8 +172,7 @@
 		});
 
 		asyncTest( "pageLoading adds the dialog to the page when done is true", function(){
-			$.testHelper.alterExtend({loadingMessage: true});
-			$.testHelper.reloadLib(libName);
+			$.mobile.loadingMessage = true;
 			$.mobile.pageLoading(false);
 
 			setTimeout(function(){
