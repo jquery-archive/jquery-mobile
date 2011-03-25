@@ -354,7 +354,8 @@
 		if(base){ base.reset(); }
 
 		//kill the keyboard
-		$( window.document.activeElement ).add( "input:focus, textarea:focus, select:focus" ).blur();
+                if(!$.mobile.browser.id || $.mobile.browser.ie > 7)
+                        $( window.document.activeElement ).add( "input:focus, textarea:focus, select:focus" ).blur();
 
 		function defaultTransition(){
 			if(transition === undefined){
@@ -655,7 +656,7 @@
 
 			//get href, if defined, otherwise fall to null #
 			href = $this.attr( "href" ) || "#",
-			
+
 			//cache a check for whether the link had a protocol
 			//if this is true and the link was same domain, we won't want
 			//to prefix the url with a base (esp helpful in IE, where every
@@ -695,7 +696,7 @@
 			window.history.back();
 			return false;
 		}
-		
+
 		//prevent # urls from bubbling
 		//path.get() is replaced to combat abs url prefixing in IE
 		if( url.replace(path.get(), "") == "#"  ){
