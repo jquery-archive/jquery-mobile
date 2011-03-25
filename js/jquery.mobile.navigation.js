@@ -712,16 +712,8 @@
 			//remove active link class if external (then it won't be there if you come back)
 			window.setTimeout(function() {removeActiveLinkClass(true);}, 200);
 
-			//deliberately redirect, in case click was triggered
-			if( hasTarget ){
-				window.open( url );
-			}
-			else if( hasAjaxDisabled ){
-			  return;
-			}
-			else{
-				location.href = url;
-			}
+			//use default click handling
+			return;
 		}
 		else {
 			//use ajax
