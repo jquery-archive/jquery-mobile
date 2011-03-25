@@ -354,7 +354,7 @@
 		if(base){ base.reset(); }
 
 		//kill the keyboard
-                if(!$.mobile.browser.id || $.mobile.browser.ie > 7)
+                if(!$.mobile.browser.ie || $.mobile.browser.ie > 7)
                         $( window.document.activeElement ).add( "input:focus, textarea:focus, select:focus" ).blur();
 
 		function defaultTransition(){
