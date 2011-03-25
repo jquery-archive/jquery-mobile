@@ -79,7 +79,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 						$elem.data( "url" ) !== $.mobile.path.stripHash( location.hash ) &&
 						!leftbtn && $this.data( "backbtn" ) !== false ) {
 
-					$( "<a href='#' class='ui-btn-left' data-rel='back' data-icon='arrow-l'>"+ o.backBtnText +"</a>" ).prependTo( $this );
+					$( "<a href='#' class='ui-btn-left' data-rel='back' data-icon='arrow-l' data-theme='"+ (o.backBtnTheme || 'a') +">"+ o.backBtnText +"</a>" ).prependTo( $this );
 				}
 
 				//page title
