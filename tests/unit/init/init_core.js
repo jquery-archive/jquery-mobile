@@ -119,8 +119,8 @@
 			$.testHelper.reloadLib(libName);
 			var firstPage = findFirstPage();
 
-			same($.mobile.firstPage, firstPage);
-			same($.mobile.activePage, firstPage);
+			same($.mobile.firstPage[0], firstPage[0]);
+			same($.mobile.activePage[0], firstPage[0]);
 		});
 
 		test( "mobile viewport class is defined on the first page's parent", function(){
@@ -136,7 +136,7 @@
 			$.testHelper.reloadLib(libName);
 			var firstPage = findFirstPage();
 
-			same($.mobile.pageContainer, firstPage.parent());
+			same($.mobile.pageContainer[0], firstPage.parent()[0]);
 		});
 
 		test( "page loading is called on document ready", function(){
