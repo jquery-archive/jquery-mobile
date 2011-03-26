@@ -306,14 +306,18 @@ function hasVirtualBindings($ele)
 	return false;
 }
 
+function dummyMouseHandler(){}
+
 function getSpecialEventObject(eventType)
 {
+	var realType = eventType.substr(1);
 	return {
 		setup: function(data, namespace) {
 			// If this is the first virtual mouse binding for this element,
 			// add a bindings object to its data.
 
 			var $this = $(this);
+
 			if (!hasVirtualBindings($this)){
 				$this.data(dataPropertyName, {});
 			}
@@ -329,8 +333,14 @@ function getSpecialEventObject(eventType)
 
 			activeDocHandlers[eventType] = (activeDocHandlers[eventType] || 0) + 1;
 			if (activeDocHandlers[eventType] == 1){
-				$document.bind(eventType.substr(1), mouseEventCallback);
+				$document.bind(realType, mouseEventCallback);
 			}
+
+			// Some browsers, like Opera Mini, won't dispatch mouse/click events
+			// for elements unless they actually have handlers registered on them.
+			// To get around this, we register dummy handlers on the elements.
+
+			$this.bind(realType, dummyMouseHandler);
 
 			// For now, if event capture is not supported, we rely on mouse handlers.
 			if (eventCaptureSupported){
@@ -350,7 +360,7 @@ function getSpecialEventObject(eventType)
 
 			--activeDocHandlers[eventType];
 			if (!activeDocHandlers[eventType]){
-				$document.unbind(eventType.substr(1), mouseEventCallback);
+				$document.unbind(realType, mouseEventCallback);
 			}
 
 			if (eventCaptureSupported){
@@ -366,6 +376,10 @@ function getSpecialEventObject(eventType)
 			var $this = $(this),
 				bindings = $this.data(dataPropertyName);
 			bindings[eventType] = false;
+
+			// Unregister the dummy event handler.
+
+			$this.unbind(realType, dummyMouseHandler);
 
 			// If this is the last virtual mouse binding on the
 			// element, remove the binding data from the element.
