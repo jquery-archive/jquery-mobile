@@ -120,7 +120,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 						.not( $(event.target).closest( ".ui-collapsible-contain" ) )
 						.not( "> .ui-collapsible-contain .ui-collapsible-contain" )
 						.trigger( "collapse" );
-				})
+				});
 			var set = collapsibleParent.find( ":jqmData(role=collapsible)" )
 					
 			set.first()
