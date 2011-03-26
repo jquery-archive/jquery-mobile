@@ -253,10 +253,10 @@ function handleTouchMove(event)
 {
 	var t = getNativeEvent(event).touches[0];
 
-	var didCancel = didScroll
+	var didCancel = didScroll,
 		moveThreshold = $.vmouse.moveDistanceThreshold;
 	didScroll = didScroll
-		|| (scrollTopSupported && (startScrollX != window.pageXOffset || startScrollY != window.pageYOffset))
+		|| (scrollTopSupported && (startScrollX !== window.pageXOffset || startScrollY !== window.pageYOffset))
 		|| (Math.abs(t.pageX - startX) > moveThreshold || Math.abs(t.pageY - startY) > moveThreshold);
 
 	var flags = getVirtualBindingFlags(event.target);
@@ -332,7 +332,7 @@ function getSpecialEventObject(eventType)
 			// register a global handler on the document.
 
 			activeDocHandlers[eventType] = (activeDocHandlers[eventType] || 0) + 1;
-			if (activeDocHandlers[eventType] == 1){
+			if (activeDocHandlers[eventType] === 1){
 				$document.bind(realType, mouseEventCallback);
 			}
 
@@ -348,7 +348,7 @@ function getSpecialEventObject(eventType)
 				// register our touchstart handler on the document.
 	
 				activeDocHandlers["touchstart"] = (activeDocHandlers["touchstart"] || 0) + 1;
-				if (activeDocHandlers["touchstart"] == 1) {
+				if (activeDocHandlers["touchstart"] === 1) {
 					$document.bind("touchstart", handleTouchStart);
 				}
 			}
@@ -384,7 +384,6 @@ function getSpecialEventObject(eventType)
 			// If this is the last virtual mouse binding on the
 			// element, remove the binding data from the element.
 
-			var $this = $(this);
 			if (!hasVirtualBindings($this)){
 				$this.removeData(dataPropertyName);
 			}
