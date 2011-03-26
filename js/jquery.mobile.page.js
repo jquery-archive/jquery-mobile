@@ -42,10 +42,10 @@ $.widget( "mobile.page", $.mobile.widget, {
 		// classes so we'll handle page and content roles outside of the main role processing
 		// loop below.
 		$elem.find( ":jqmData(role='page'), :jqmData(role='content')" ).andSelf().each(function() {
-			$(this).addClass( "ui-" + $(this).jqmData( $.mobile.ns + "role" ) );
+			$(this).addClass( "ui-" + $(this).jqmData( "role" ) );
 		});
 
-		$elem.find( "[data-" + $.mobile.ns + "role='nojs']" ).addClass( "ui-nojs" );
+		$elem.find( ":jqmData(role='nojs')" ).addClass( "ui-nojs" );
 
 		// pre-find data els
 		var $dataEls = $elem.find( ":jqmData(role)" ).andSelf().each(function() {
