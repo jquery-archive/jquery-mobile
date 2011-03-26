@@ -263,14 +263,12 @@
 		setTimeout(function(){
 			$($.event.special.swipe).trigger("touchmove");
 			$($.event.special.swipe).trigger("touchend");
-		}, opts.timeout);
+		}, opts.timeout + 100);
 
 		setTimeout(function(){
 			same(swipe, opts.expected, "swipe expected");
-
-			//NOTE the start in the event closure won't be fired, fire it here
 			start();
-		}, opts.timeout + 400);
+		}, opts.timeout + 200);
 
 		stop();
 	};
