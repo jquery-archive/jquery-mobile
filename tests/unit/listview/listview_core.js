@@ -31,7 +31,7 @@
 	});
 
 	asyncTest( "Slides back to main page when back button is clicked", function() {
-		$.testHelper.openPage("#basic-linked-results");
+		$.testHelper.openPage("#basic-link-results");
 
 		$('#basic-link-results a:contains("Back")').click();
 		setTimeout(function() {
@@ -227,7 +227,7 @@
 		}, 500);
 
 		setTimeout(function() {
-			same($searchPage.find('li[style^="display: none;"]').length, 0);
+			same($searchPage.find("li[style^='display: none;']").length, 0);
 			start();
 		}, 1000);
 	});
