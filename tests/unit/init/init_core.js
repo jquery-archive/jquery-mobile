@@ -52,14 +52,20 @@
 	});
 
 	$.testHelper.excludeFileProtocol(function(){
-		test( "loading the init library triggers mobilinit on the document", function(){
+		asyncTest( "loading the init library triggers mobilinit on the document", function(){
+			var initFired = false;
 			expect( 1 );
 
 			$(window.document).bind('mobileinit', function(event){
-				ok(true);
+				initFired = true;
 			});
 
 			$.testHelper.reloadLib(libName);
+
+			setTimeout(function(){
+				ok(initFired, "init fired");
+				start();
+			}, 1000);
 		});
 
 		test( "enhancments are skipped when the browser is not grade A", function(){
@@ -202,11 +208,8 @@
 		});
 
 		asyncTest( "page loading should contain custom loading message", function(){
-			$(document).bind('mobileinit', function(){
-				$.mobile.loadingMessage = "foo";
-			});
-
-			reloadCoreNSandInit();
+			$.mobile.loadingMessage = "foo";
+			$.testHelper.reloadLib(libName);
 			$.mobile.pageLoading(false);
 
 			setTimeout(function(){
