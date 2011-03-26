@@ -30,7 +30,7 @@ $(":jqmData(role='page')").live("pageshow", function(event) {
 			$this.scrolllistview();
 		else
 		{
-			var st = $this.data("scroll") + "";
+			var st = $this.jqmData("scroll") + "";
 			var paging = st && st.search(/^[xy]p$/) != -1;
 			var dir = st && st.search(/^[xy]/) != -1 ? st.charAt(0) : null;
 
@@ -40,7 +40,7 @@ $(":jqmData(role='page')").live("pageshow", function(event) {
 			if (paging)
 				opts.pagingEnabled = true;
 
-			var method = $this.data("scroll-method");
+			var method = $this.jqmData("scroll-method");
 			if (method)
 				opts.scrollMethod = method;
 
