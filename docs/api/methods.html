@@ -68,6 +68,21 @@ $.mobile.changePage("../alerts/confirm.html", "pop", false, false);
 			
 			</dd>
 			
+			
+			<dt><code>jqmData()</code> (<em>method</em>)</dt>
+			<dd>When working with jQuery Mobile, <code>jqmData</code> should be used in place of jQuery core's <code>data</code> method, as it automatically incorporates getting and setting of namespaced data attributes (even if no namespace is currently in use).</dd>
+			<dd>
+				<dl>
+					<dt>Arguments:</dt>
+					<dd>See jQuery's data method: http://api.jquery.com/jQuery.data/</dd>
+					<dt>Also:</dt>
+					<dd>When finding elements by their jQuery Mobile data attribute, please use the custom selector <code>:jqmData()</code>, as it automatically incorporates namespaced data attributes into the lookup when they are in use. For example, instead of calling <code>$("div[data-role='page']")</code>, you should use <code>$("div:jqmData(role='page')")</code>, which internally maps to <code>$("div[data-"+ $.mobile.ns +"role='page']")</code> without forcing you to concatenate a namespace into your selectors manually.</dd>
+				</dl>
+			</dd>
+
+			
+			
+			
 			<dt><code>$.mobile.pageLoading</code> (<em>method</em>)</dt>
 			<dd>Show or hide the page loading message, which is configurable via $.mobile.loadingMessage.</dd>
 			<dd>
