@@ -413,10 +413,10 @@
 
 				//trigger show/hide events
 				if( from ){
-					from.jqmData( "page" )._trigger( "hide", null, { nextPage: to } );
+					from.data( "page" )._trigger( "hide", null, { nextPage: to } );
 				}
 				//trigger pageshow, define prevPage as either from or empty jQuery obj
-				to.jqmData( "page" )._trigger( "show", null, { prevPage: from || $("") } );
+				to.data( "page" )._trigger( "show", null, { prevPage: from || $("") } );
 
 				//set "to" as activePage
 				$.mobile.activePage = to;
@@ -638,8 +638,8 @@
 				type: type.length && type.toLowerCase() || "get",
 				data: $(this).serialize()
 			},
-			$(this).data("transition"),
-			$(this).data("direction"),
+			$(this).jqmData("transition"),
+			$(this).jqmData("direction"),
 			true
 		);
 		event.preventDefault();
