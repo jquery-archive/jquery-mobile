@@ -4,13 +4,20 @@
 
 (function($){
 	var libName = "jquery.mobile.core.js",
-			setGradeA = function(value, version) { \
+			setGradeA = function(value, version) {
 				$.support.mediaquery = value;
 				$.mobile.browser.ie = version;
 			},
 			extendFn = $.extend;
 
 	module(libName, {
+		setup: function(){
+			// NOTE reset for gradeA tests
+			$('html').removeClass('ui-mobile');
+
+			// NOTE reset for pageLoading tests
+			$('.ui-loader').remove();
+		},
 		teardown: function(){
 			$.extend = extendFn;
 		}
