@@ -254,7 +254,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 	{
 		var svh = [];
 		this._$clip.parents(".ui-scrollview-clip").each(function(){
-			var d = $(this).data("scrollview");
+			var d = $(this).jqmData("scrollview");
 			if (d) svh.unshift(d);
 		});
 		return svh;
