@@ -6,16 +6,16 @@
 	<title>jQuery Mobile Select Events Test Suite</title>
 
 	<script type="text/javascript" src="../../../js/jquery.js"></script>
-	<script type="text/javascript" src="../../../js/"></script>
+	<script src="../jquery.setNameSpace.js"></script>
+	<script type="text/javascript" src="../../../external/qunit.js"></script>
 	<script type="text/javascript" src="../../../tests/jquery.testHelper.js"></script>
+	<script type="text/javascript" src="select_events.js"></script>
+	<script type="text/javascript" src="select_core.js"></script>
+	<script type="text/javascript" src="../../../js"></script>
 
 
 	<link rel="stylesheet" href="../../../themes/default/" type="text/css"/>
 	<link rel="stylesheet" href="../../../external/qunit.css" type="text/css"/>
-	<script type="text/javascript" src="../../../external/qunit.js"></script>
-
-	<script type="text/javascript" src="select_events.js"></script>
-	<script type="text/javascript" src="select_core.js"></script>
 </head>
 <body>
 
@@ -25,8 +25,8 @@
 <ol id="qunit-tests">
 </ol>
 
-<div id="foo" data-role="page">
-	<div data-role="fieldcontain" id="select-choice-few-container">
+<div id="foo"  data-nstest-role="page">
+	<div  data-nstest-role="fieldcontain" id="select-choice-few-container">
 		<select name="select-choice-few" id="select-choice-few">
 			<option value="standard">Standard: 7 day</option>
 			<option value="rush">Rush: 3 days</option>
@@ -35,8 +35,8 @@
 		</select>
 	</div>
 
-	<div data-role="fieldcontain" id="select-choice-native-container">
-		<select name="select-choice-native" id="select-choice-native" data-native-menu="true">
+	<div  data-nstest-role="fieldcontain" id="select-choice-native-container">
+		<select name="select-choice-native" id="select-choice-native" data-nstest-native-menu="true">
 			<option value="standard">Standard: 7 day</option>
 			<option value="rush">Rush: 3 days</option>
 			<option value="express">Express: next day</option>
@@ -44,7 +44,7 @@
 		</select>
 	</div>
 
-	<div data-role="fieldcontain" id="select-choice-global-native-container">
+	<div  data-nstest-role="fieldcontain" id="select-choice-global-native-container">
 		<select name="select-choice-global-native" id="select-choice-global-native">
 			<option value="standard">Standard: 7 day</option>
 			<option value="rush">Rush: 3 days</option>
@@ -53,7 +53,7 @@
 		</select>
 	</div>
 
-	<div data-role="fieldcontain" id="select-choice-many-container">
+	<div  data-nstest-role="fieldcontain" id="select-choice-many-container">
 		<label for="select-choice-many" class="select">Your state:</label>
 		<select name="select-choice-many" id="select-choice-many">
 			<option value="AL">Alabama</option>
@@ -109,7 +109,7 @@
 		</select>
 	</div>
 
-	<div data-role="fieldcontain" id="select-offscreen-container">
+	<div data-nstest-role="fieldcontain" id="select-offscreen-container">
 		<style>
 			/* keep the select small and close to the screen border to test rendering */
 			#select-offscreen-container {

@@ -29,9 +29,9 @@
 			
 			<p>When the select button is clicked, the native select menu picker for the OS will open. When a value is selected in the menu, the custom select button is updated to match the new selection. </p>
 
-			<p>To add a select widget to your page, start with a standard <code>select</code> element populated with a set of <code>option</code> elements. Set the <code>for</code> attribute of the <code>label</code> to match the ID of the <code>select</code> so they are semantically associated. Wrap them in a <code>div</code> with the <code>data-role="fieldcontain"</code> attribute to help visually group it in a longer form. </p>
+			<p>To add a select widget to your page, start with a standard <code>select</code> element populated with a set of <code>option</code> elements. Set the <code>for</code> attribute of the <code>label</code> to match the ID of the <code>select</code> so they are semantically associated. Wrap them in a <code>div</code> with the <code> data-role="fieldcontain"</code> attribute to help visually group it in a longer form. </p>
 
-			<p>The framework will find all <code>select</code> elements and automatically enhance them into the custom select menus.</p>
+			<p>The framework will find all <code>select</code> elements and automatically enhance them into the custom select menus. Here is a typical select menu:</p>
 
 <pre><code>
 &lt;div data-role=&quot;fieldcontain&quot;&gt;
@@ -45,7 +45,8 @@
 &lt;/div&gt;
 </code></pre>
 
-<p>When clicked, if the menu has room it will appear as an overlay listbox, but if there are too many options to fit in the window without scrolling, the page content is wrapped in a div and hidden, and the menu is appended as a whole new page. This lets us take advantage of native scrolling while the menu is in use. </p>
+<p>This produces this select:</p>
+
 
 <div data-role="fieldcontain">
 	<label for="select-choice-1" class="select">Choose shipping method:</label>
@@ -115,15 +116,40 @@
 	</select>
 </div>
 
+<p>This example organizes the options with optgroup elements and has a disabled option.</p>
+
+<div data-role="fieldcontain">
+	<label for="select-choice-nc" class="select">Preferred delivery:</label>
+	<select name="select-choice-8" id="select-choice-nc">
+		<optgroup label="FedEx">
+			<option value="firstOvernight">First Overnight</option>
+			<option value="expressSaver">Express Saver</option>
+			<option value="ground">Ground</option>
+		</optgroup>
+		<optgroup label="UPS">
+			<option value="firstOvernight">First Overnight</option>
+			<option value="expressSaver">Express Saver</option>
+			<option value="ground">Ground</option>
+		</optgroup>
+		<optgroup label="US Mail">
+			<option value="standard">Standard: 7 day</option>
+			<option value="rush">Rush: 3 days</option>
+			<option value="express" disabled="disabled">Express: next day (disabled)</option>
+			<option value="overnight">Overnight</option>
+		</optgroup>
+	</select>
+</div>
+
+<p>Note that the native menus don't support multiple selection via the <code>multiple="multiple"</code> attribute. If this feature is needed, we recommend using custom menus.
 
 <h2>Option to use custom menus</h2>
-<p>You can optionally use custom-styled select menus instead of the native versions. This adds the ability to theme the menu to better match the look and feel of your site and provides visual consistency across platforms. In addition, it restores  missing functionality on certain platforms such as <code>optgroup</code> support on Android,  and adds an elegant way to handle placeholder values (explained below). Lastly, the custom menus will look better on desktop browsers because native menus on the desktop tend to be fairly small compared their mobile counterparts and this can look a bit odd if desktop if a priority for your project.</p>
+<p>You can optionally use custom-styled select menus instead of the native versions. This adds the ability to theme the menu to better match the look and feel of your site and provides visual consistency across platforms. In addition, it supports multiple selection, restores missing functionality on certain platforms such as <code>optgroup</code> support on Android,  and adds an elegant way to handle placeholder values (explained below). Lastly, the custom menus will look better on desktop browsers because native menus on the desktop tend to be fairly small compared their mobile counterparts and this can look a bit odd if desktop if a priority for your project.</p>
 
 	<p>Keep in mind that there is overhead involved in parsing the native select to build a custom menu. If there are a lot of selects on a page, or a select has a long list of options, this can impact the performance of the page so we recommend using custom menus sparingly. </p>
 	
 	<p>To use custom menus on a specific <code>select</code>, just add the <code>data-native-menu="false"</code> attribute. Alternately, this can also programmatically set the select menu's <code>nativeMenu</code> configuration option to <code>false</code> in a callback bound to the <code>mobileinit</code> event to achieve the same effect. This will globally make all selects use the custom menu by default. The following must be included in the page after jQuery is loaded but before jQuery Mobile is loaded.</p>
 	
-		<p></p>
+
 				<code>
 					<pre>
 	$(document).bind('mobileinit',function(){
@@ -144,10 +170,8 @@
 				</select>
 			</div>
 
-					<p>If there is a select menu with too many options to show on the device's screen, the framework will automatically create a new &quot;page&quot; populated with a standard list view that contains all the options. This allows us to use the native scrolling included on the device for moving through a long list. The text inside the <code>label</code> is used as the title for this page.</p>
+			<p>If there is a select menu with too many options to show on the device's screen, the framework will automatically create a new &quot;page&quot; populated with a standard list view that contains all the options. This allows us to use the native scrolling included on the device for moving through a long list. The text inside the <code>label</code> is used as the title for this page.</p>
 
-
-<p>When clicked, the native select picker menu will open. When a value is selected in the menu, the custom select button will be updated to match the new selection. if the menu has room it will appear as an overlay listbox, but if there are too many options to fit in the window without scrolling, the page content is wrapped in a div and hidden, and the menu is appended as a whole new page. This lets us take advantage of native scrolling while the menu is in use. </p>
 
 
 

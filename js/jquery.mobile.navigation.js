@@ -207,7 +207,7 @@
 
 			//set the generated BASE element's href attribute to a new page's base path
 			set: function( href ){
-				base.element.attr('href', docBase + path.get( href ).replace(/^\//, ""));
+				base.element.attr('href', docBase + path.get( href ));
 			},
 
 			//set the generated BASE element's href attribute to a new page's base path
@@ -380,12 +380,12 @@
 
 			//support deep-links to generated sub-pages
 			if( url.indexOf( "&" + $.mobile.subPageUrlKey ) > -1 ){
-				to = $( "[data-url='" + url + "']" );
+				to = $( ":jqmData(url='" + url + "')" );
 			}
 
 			if( from ){
 				//set as data for returning to that spot
-				from.data( "lastScroll", currScroll);
+				from.jqmData( "lastScroll", currScroll);
 				//trigger before show/hide events
 				from.data( "page" )._trigger( "beforehide", null, { nextPage: to } );
 			}
@@ -408,7 +408,7 @@
 				removeActiveLinkClass();
 
 				//jump to top or prev scroll, sometimes on iOS the page has not rendered yet.  I could only get by this with a setTimeout, but would like to avoid that.
-				$.mobile.silentScroll( to.data( "lastScroll" ) );
+				$.mobile.silentScroll( to.jqmData( "lastScroll" ) );
 
 				reFocus( to );
 
@@ -486,10 +486,10 @@
 		function enhancePage(){
 
 			//set next page role, if defined
-			if ( nextPageRole || to.data('role') === 'dialog' ) {
+			if ( nextPageRole || to.jqmData('role') === 'dialog' ) {
 				url = urlHistory.getActive().url + dialogHashKey;
 				if(nextPageRole){
-					to.attr( "data-role", nextPageRole );
+					to.attr( "data-" + $.mobile.ns + "role", nextPageRole );
 					nextPageRole = null;
 				}
 			}
@@ -500,11 +500,11 @@
 
 		//if url is a string
 		if( url ){
-			to = $( "[data-url='" + url + "']" );
+			to = $( ":jqmData(url='" + url + "')" );
 			fileUrl = path.getFilePath(url);
 		}
 		else{ //find base url of element, if avail
-			var toID = to.attr('data-url'),
+			var toID = to.attr( "data-" + $.mobile.ns + "url" ),
 				toIDfileurl = path.getFilePath(toID);
 
 			if(toID !== toIDfileurl){
@@ -535,15 +535,14 @@
 				url: fileUrl,
 				type: type,
 				data: data,
-				dataType: "html",
 				success: function( html ) {
 					//pre-parse html to check for a data-url,
 					//use it as the new fileUrl, base path, etc
 					var all = $("<div></div>"),
 							redirectLoc,
 							// TODO handle dialogs again
-							pageElemRegex = /.*(<[^>]*\bdata-role=["']?page["']?[^>]*>).*/,
-							dataUrlRegex = /\bdata-url=["']?([^"'>]*)["']?/;
+							pageElemRegex = new RegExp(".*(<[^>]+\\bdata-" + $.mobile.ns + "role=[\"']?page[\"']?[^>]*>).*"),
+							dataUrlRegex = new RegExp("\\bdata-" + $.mobile.ns + "url=[\"']?([^\"'>]*)[\"']?");
 
 					// data-url must be provided for the base tag so resource requests can be directed to the
 					// correct url. loading into a temprorary element makes these requests immediately
@@ -565,7 +564,7 @@
 
 					//workaround to allow scripts to execute when included in page divs
 					all.get(0).innerHTML = html;
-					to = all.find('[data-role="page"], [data-role="dialog"]').first();
+					to = all.find( ":jqmData(role='page'), :jqmData(role='dialog')" ).first();
 
 					//rewrite src and href attrs to use a base url
 					if( !$.support.dynamicBaseTag ){
@@ -585,7 +584,7 @@
 
 					//append to page and enhance
 					to
-						.attr( "data-url", fileUrl )
+						.attr( "data-" + $.mobile.ns + "url", fileUrl )
 						.appendTo( $.mobile.pageContainer );
 
 					enhancePage();
@@ -619,7 +618,7 @@
 		if( !$.mobile.ajaxEnabled ||
 			//TODO: deprecated - remove at 1.0
 			!$.mobile.ajaxFormsEnabled ||
-			$(this).is( "[data-ajax='false']" ) ){ return; }
+			$(this).is( ":jqmData(ajax='false')" ) ){ return; }
 
 		var type = $(this).attr("method"),
 			url = path.clean( $(this).attr( "action" ) ),
@@ -640,8 +639,8 @@
 				type: type.length && type.toLowerCase() || "get",
 				data: $(this).serialize()
 			},
-			$(this).data("transition"),
-			$(this).data("direction"),
+			$(this).jqmData("transition"),
+			$(this).jqmData("direction"),
 			true
 		);
 		event.preventDefault();
@@ -655,7 +654,7 @@
 
 			//get href, if defined, otherwise fall to null #
 			href = $this.attr( "href" ) || "#",
-			
+
 			//cache a check for whether the link had a protocol
 			//if this is true and the link was same domain, we won't want
 			//to prefix the url with a base (esp helpful in IE, where every
@@ -688,14 +687,14 @@
 			hasTarget = $this.is( "[target]" ),
 
 			//if data-ajax attr is set to false, use the default behavior of a link
-			hasAjaxDisabled = $this.is( "[data-ajax='false']" );
+			hasAjaxDisabled = $this.is( ":jqmData(ajax='false')" );
 
 		//if there's a data-rel=back attr, go back in history
-		if( $this.is( "[data-rel='back']" ) ){
+		if( $this.is( ":jqmData(rel='back')" ) ){
 			window.history.back();
 			return false;
 		}
-		
+
 		//prevent # urls from bubbling
 		//path.get() is replaced to combat abs url prefixing in IE
 		if( url.replace(path.get(), "") == "#"  ){
@@ -725,14 +724,14 @@
 		}
 		else {
 			//use ajax
-			var transition = $this.data( "transition" ),
-				direction = $this.data("direction"),
+			var transition = $this.jqmData( "transition" ),
+				direction = $this.jqmData("direction"),
 				reverse = (direction && direction === "reverse") ||
 				// deprecated - remove by 1.0
-				$this.data( "back" );
+				$this.jqmData( "back" );
 
 			//this may need to be more specific as we use data-rel more
-			nextPageRole = $this.attr( "data-rel" );
+			nextPageRole = $this.attr( "data-" + $.mobile.ns + "rel" );
 
 			//if it's a relative href, prefix href with base url
 			if( path.isRelative( url ) && !hadProtocol ){

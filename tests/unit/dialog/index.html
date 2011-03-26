@@ -6,6 +6,7 @@
 	<title>jQuery Mobile Dialog Test Suite</title>
 
 	<script type="text/javascript" src="../../../js/jquery.js"></script>
+	<script src="../jquery.setNameSpace.js"></script>
 	<script type="text/javascript" src="../../../js/"></script>
 	<script type="text/javascript" src="../../../tests/jquery.testHelper.js"></script>
 
@@ -24,12 +25,12 @@
 <ol id="qunit-tests">
 </ol>
 
-<div id="bar" data-role="page">
-	<a href="#foo-dialog" data-role="button" data-inline="true" data-rel="dialog"></a>
+<div id="bar"  data-nstest-role="page">
+	<a href="#foo-dialog"  data-nstest-role="button"  data-nstest-inline="true" data-nstest-rel="dialog"></a>
 </div>
 
-<div id="foo-dialog" data-role="dialog">
-	<div data-role="header" data-theme="d" data-position="inline">
+<div id="foo-dialog"  data-nstest-role="dialog">
+	<div  data-nstest-role="header"  data-nstest-theme="d" data-nstest-position="inline">
 		<h1>Dialog</h1>
 	</div>
 	<a href="#" id="internal-link">foo</a>

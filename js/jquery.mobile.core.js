@@ -8,15 +8,19 @@
  */
 
 (function( $, window, undefined ) {
+
 	//jQuery.mobile configurable options
 	$.extend( $.mobile, {
+
+		//namespace used framework-wide for data-attrs. Default is no namespace
+		ns: "",
 
 		//define the url parameter used for referencing widget-generated sub-pages.
 		//Translates to to example.html&ui-page=subpageIdentifier
 		//hash segment before &ui-page= is used to make Ajax request
 		subPageUrlKey: "ui-page",
 
-		//anchor links with a data-rel, or pages with a data-role, that match these selectors will be untrackable in history
+		//anchor links with a data-rel, or pages with a  data-role, that match these selectors will be untrackable in history
 		//(no change in URL, not bookmarkable)
 		nonHistorySelectors: "dialog",
 
@@ -48,13 +52,13 @@
 		loadingMessage: "loading",
 
 		//configure meta viewport tag's content attr:
-		//note: this feature is deprecated in A4 in favor of adding 
+		//note: this feature is deprecated in A4 in favor of adding
 		//the meta viewport element directly in the markup
 		metaViewportContent: "width=device-width, minimum-scale=1, maximum-scale=1",
 
 		//support conditions that must be met in order to proceed
 		//default enhanced qualifications are media query support OR IE 7+
-		gradeA: function(){			
+		gradeA: function(){
 			return $.support.mediaquery || $.mobile.browser.ie && $.mobile.browser.ie >= 7;
 		},
 
@@ -94,6 +98,7 @@
 			WINDOWS: 91 // COMMAND
 		},
 
+		//scroll page vertically: scroll to 0 to hide iOS address bar, or pass a Y value
 		silentScroll: function( ypos ) {
 			ypos = ypos || 0;
 			// prevent scrollstart and scrollstop events
@@ -109,4 +114,56 @@
 			}, 150 );
 		}
 	});
+
+	//mobile version of data() method
+	//treats namespaced data-attrs the same as non-namespaced ones
+    $.fn.jqmData = function( prop, value ){
+    	var pUndef = prop === undefined,
+    		vUndef = value === undefined;
+
+    	if( pUndef || vUndef ){
+	    	var ret,
+	    		nsret;
+	    	//if no args are passed, a data hash is expected. Remap non-namespaced props
+	    	if( pUndef ){
+	    		ret = this.data();
+	    		$.each( ret, function( i ){
+	    			var nsIndex = i.indexOf( $.mobile.ns );
+	    			if( nsIndex == 0 ){
+	    				ret[ i.substr( $.mobile.ns.length ) ] = ret[ i ];
+	    			}
+	    		});
+	    	}
+	    	//if it's a prop get, try namepaced version if prop is undefined
+	    	else if( vUndef ){
+	    		ret = this.data( prop );
+	    		if( ret === undefined ){
+	    			nsret = this.data( $.mobile.ns + prop );
+	    			if( nsret !== undefined ){
+	    				ret = nsret;
+	    			}
+	    		}
+	    	}
+	    	return ret;
+	    }
+    };
+
+	// Monkey-patching Sizzle to filter the :jqmData selector
+	var oldFind = jQuery.find;
+
+	jQuery.find = function( selector, context, ret, extra ) {
+		selector = selector.replace(/:jqmData\(([^)]*)\)/g, "[data-" + (jQuery.mobile.ns || "") + "$1]");
+
+		return oldFind.call( this, selector, context, ret, extra );
+	};
+
+	jQuery.extend( jQuery.find, oldFind );
+
+	jQuery.find.matches = function( expr, set ) {
+		return jQuery.find( expr, null, null, set );
+	};
+
+	jQuery.find.matchesSelector = function( node, expr ) {
+		return jQuery.find( expr, null, null, [node] ).length > 0;
+	};
 })( jQuery, this );

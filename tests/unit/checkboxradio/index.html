@@ -5,9 +5,11 @@
 	<title>jQuery Mobile Page Test Suite</title>
 
 	<script type="text/javascript" src="../../../js/jquery.js"></script>
+	<script src="../jquery.setNameSpace.js"></script>
 	<script type="text/javascript" src="../../../js/"></script>
 	<script type="text/javascript" src="../../../tests/jquery.testHelper.js"></script>
 
+	<link rel="stylesheet" href="../../../themes/default/" type="text/css"/>
 	<link rel="stylesheet" href="../../../external/qunit.css" type="text/css"/>
 	<script type="text/javascript" src="../../../external/qunit.js"></script>
 
@@ -22,14 +24,14 @@
 </ol>
 
 <div id="qunit-fixture">
-	<div data-role="page">
-		<div data-role="content">
-			<div data-role="fieldcontain">
-				<fieldset data-role="controlgroup">
+	<div data-nstest-role="page">
+		<div data-nstest-role="content">
+			<div data-nstest-role="fieldcontain">
+				<fieldset data-nstest-role="controlgroup">
 					<legend>Agree to the terms:</legend>
 					<input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" />
 					<label for="checkbox-1">I agree</label>
-					</fieldset>
+				</fieldset>
 			</div>
 		</div>
 	</div>
