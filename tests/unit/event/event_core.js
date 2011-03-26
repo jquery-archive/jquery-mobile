@@ -11,7 +11,7 @@
 								"swipe swipeleft swiperight scrollstart scrollstop").split( " " );
 
 	module(libName, {
-		teardown: function(){
+		setup: function(){
 
 			// ensure bindings are removed
 			$.each(events, function(i, name){
@@ -247,7 +247,6 @@
 
 		$($.event.special.swipe).bind('swipe', function(){
 			swipe = true;
-			start();
 		});
 
 		//NOTE bypass the trigger source check
@@ -270,7 +269,7 @@
 			same(swipe, opts.expected, "swipe expected");
 
 			//NOTE the start in the event closure won't be fired, fire it here
-			if(!opts.expected) { start(); }
+			start();
 		}, opts.timeout + 10);
 
 		stop();
