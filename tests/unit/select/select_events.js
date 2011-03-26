@@ -6,6 +6,10 @@
 	var mouseUpTouchEnd = $.support.touch ? "touchend" : "mouseup",
 			libName = "jquery.mobile.forms.select.js";
 
+	$(document).bind('mobileinit', function(){
+		$.mobile.selectmenu.prototype.options.nativeMenu = false;
+	});
+
 	module(libName, {
 		teardown: function(){ location.hash = ""; }
 	});
