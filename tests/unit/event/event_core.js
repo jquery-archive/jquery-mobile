@@ -270,7 +270,7 @@
 
 			//NOTE the start in the event closure won't be fired, fire it here
 			start();
-		}, opts.timeout + 10);
+		}, opts.timeout + 400);
 
 		stop();
 	};
