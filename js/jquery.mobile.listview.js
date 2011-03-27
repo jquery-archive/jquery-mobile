@@ -162,15 +162,6 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 		li.first().attr( "tabindex", "0" );
 		
-		//workaround for Windows Phone 7 focus/active tap color 
-		//without this, delegated events will highlight the whole list, rather than the LI
-		if( $.mobile.browser.ie && $.mobile.browser.ie <= 8 ){
-			li
-				.unbind( "mousedown.iefocus" )
-				.bind( "mousedown.iefocus", function(e){
-					e.preventDefault();
-				});
-		}
 
 		li.each(function( pos ) {
 			var item = $( this ),
