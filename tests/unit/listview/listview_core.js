@@ -297,9 +297,9 @@
 		}, 500);
 
 		setTimeout(function() {
-			same($page.find('li:jqmData(role=list-divider)[style^="display: none;"]').length, 2);
-			same($page.find('li:jqmData(role=list-divider)[style^="display: none;"] + li:not(:jqmData(role=list-divider))[style^="display: none;"]').length, 2);
-			same($page.find('li:jqmData(role=list-divider):not([style^="display: none;"]) + li:not(:jqmData(role=list-divider)):not([style^="display: none;"])').length, 2);
+			same($page.find('li:jqmData(role=list-divider):hidden').length, 2);
+			same($page.find('li:jqmData(role=list-divider):hidden + li:not(:jqmData(role=list-divider)):hidden').length, 2);
+			same($page.find('li:jqmData(role=list-divider):not(:hidden) + li:not(:jqmData(role=list-divider)):not([:hidden)').length, 2);
 			start();
 		}, 1000);
 	});
