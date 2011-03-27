@@ -10,6 +10,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 	options: {
 		backBtnText: "Back",
 		addBackBtn: true,
+		backBtnTheme: null,
 		degradeInputs: {
 			color: false,
 			date: false,
@@ -79,7 +80,12 @@ $.widget( "mobile.page", $.mobile.widget, {
 						$elem.jqmData( "url" ) !== $.mobile.path.stripHash( location.hash ) &&
 						!leftbtn && $this.jqmData( "backbtn" ) !== false ) {
 
-					$( "<a href='#' class='ui-btn-left' data-" + $.mobile.ns + "rel='back' data-" + $.mobile.ns + "icon='arrow-l'>"+ o.backBtnText +"</a>" ).prependTo( $this );
+					var backBtn = $( "<a href='#' class='ui-btn-left' data-"+ $.mobile.ns +"rel='back' data-"+ $.mobile.ns +"icon='arrow-l'>"+ o.backBtnText +"</a>" ).prependTo( $this );
+					
+					//if theme is provided, override default inheritance
+					if( o.backBtnTheme ){
+						backBtn.attr( "data-"+ $.mobile.ns +"theme", o.backBtnTheme );
+					}
 				}
 
 				//page title
