@@ -6,7 +6,9 @@
 */
 (function($, undefined ) {
 $.widget( "mobile.dialog", $.mobile.widget, {
-	options: {},
+	options: {
+		closeBtnText: "Close"
+	},
 	_create: function(){
 		var self = this,
 			$el = self.element;
@@ -18,7 +20,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 			.addClass('ui-page ui-dialog ui-body-a')
 			.find( ":jqmData(role=header)" )
 			.addClass('ui-corner-top ui-overlay-shadow')
-				.prepend( "<a href='#' data-" + $.mobile.ns + "icon='delete' data-" + $.mobile.ns + "rel='back' data-" + $.mobile.ns + "iconpos='notext'>Close</a>" )
+				.prepend( "<a href='#' data-" + $.mobile.ns + "icon='delete' data-" + $.mobile.ns + "rel='back' data-" + $.mobile.ns + "iconpos='notext'>"+ this.options.closeBtnText +"</a>" )
 			.end()
 			.find('.ui-content:not([class*="ui-body-"])')
 				.addClass('ui-body-c')
