@@ -1,0 +1,59 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1"> 
+	<title>jQuery Mobile Framework - Dialog Example</title> 
+	<link rel="stylesheet"  href="../../themes/default/" />  
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	<script type="text/javascript" src="../../js/jquery.js"></script>
+	<script type="text/javascript" src="../../js/"></script>
+</head> 
+<body> 
+
+
+<div id="foo" data-role="page">
+	
+		<div data-role="header">
+			<h1>Dialog select test</h1>
+		</div>
+		<div data-role="content" >
+			<a href="#bar" data-role="button" data-rel="dialog">Open dialog</a>
+		</div>
+		
+</div>		
+
+
+
+
+
+
+
+<div data-role="page" id="bar">
+	
+		<div data-role="header" data-theme="d" data-position="inline">
+			<h1>Choose Shipping</h1>
+		</div>
+
+		<div data-role="content" data-theme="c">
+			
+			<form action>
+				<div data-role="fieldcontain">
+					<label for="select-choice-1" class="select">Choose shipping method:</label>
+					<select name="select-choice-1" id="select-choice-1" data-native-menu="false">
+						<option value="standard">Standard: 7 day</option>
+						<option value="rush">Rush: 3 days</option>
+						<option value="express">Express: next day</option>
+						<option value="overnight">Overnight</option>
+					</select>
+				</div>
+			
+				<a href="#foo" data-role="button" data-rel="back" data-theme="c">Real Submit Would go here</a>      
+			</form>
+			<a href="#foo" data-role="button" data-rel="back" data-theme="c">Cancel</a>    
+		</div>
+	</div>
+
+
+</body>
+</html>
