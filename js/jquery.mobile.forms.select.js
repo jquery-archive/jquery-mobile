@@ -268,10 +268,18 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				event.preventDefault();
 			});
 
-			//events on "screen" overlay + close button
+			//events on "screen" overlay
 			screen.click(function( event ){
 				self.close();
 			});
+			
+			//close button on small overlays
+			self.headerClose.click(function(){
+				if( self.menuType == "overlay" ){
+					self.close();
+					return false;
+				}
+			})
 		}
 	},
 
