@@ -4,6 +4,7 @@
 
 // TODO split out into seperate test files
 (function($){
+	$.mobile.defaultTransition = "none";
 	module('Basic Linked list', {
 		setup: function(){
 			$.testHelper.openPage("#basic-linked-test");
@@ -17,11 +18,11 @@
 		}, 100);
 	});
 
-	asyncTest( "Slides to the listview page when the li is clicked", function() {
+	asyncTest( "Slides to the listview page when the li a is clicked", function() {
 		$.testHelper.openPage("#basic-linked-test");
 
 		setTimeout(function(){
-			$('#basic-linked-test li').first().click();
+			$('#basic-linked-test li a').first().click();
 		}, 500);
 
 		setTimeout(function() {
@@ -32,8 +33,9 @@
 
 	asyncTest( "Slides back to main page when back button is clicked", function() {
 		$.testHelper.openPage("#basic-link-results");
-
-		$('#basic-link-results a:contains("Back")').click();
+		
+		$('.ui-page-active a:jqmData(rel="back")').click();
+		
 		setTimeout(function() {
 			ok($('#basic-linked-test').hasClass('ui-page-active'));
 			start();
@@ -43,20 +45,22 @@
 	module('Nested List Test');
 
 	asyncTest( "Changes page to nested list test and enhances", function() {
-		location.href = location.href.split('#')[0] + "#nested-list-test";
+		$.testHelper.openPage("#nested-list-test");
 		setTimeout(function() {
 			ok($('#nested-list-test').hasClass('ui-page-active'), "makes nested list test page active");
 			ok($('[role="option"]', $('#nested-list-test')).length == 2, 'Adds data role to the two LIs');
-			ok($('body > [data-'+ $.mobile.ns +'url="nested-list-test&ui-page=More-animals-0"]').length == 1, "Adds first UL to the page");
-			ok($('body > [data-'+ $.mobile.ns +'url="nested-list-test&ui-page=Groups-of-animals-1"]').length == 1, "Adds second nested UL to the page");
+			ok($(':jqmData(url="nested-list-test&ui-page=More-animals-0")').length == 1, "Adds first UL to the page");
+			ok($(':jqmData(url="nested-list-test&ui-page=Groups-of-animals-1")').length == 1, "Adds second nested UL to the page");
 			start();
 		}, 1000);
 	});
 
-	asyncTest( "change to nested page when the li is clicked", function() {
-		$('.ui-page-active li:eq(1)').click();
+	asyncTest( "change to nested page when the li a is clicked", function() {
+		$.testHelper.openPage("#nested-list-test");
+		$('.ui-page-active li:eq(1) a:eq(0)').click();
 				setTimeout(function() {
-					var $new_page = $('body > [data-'+ $.mobile.ns +'url="nested-list-test&ui-page=More-animals-0"]');
+					var $new_page = $(':jqmData(url="nested-list-test&ui-page=More-animals-0")');
+					
 					ok($new_page.hasClass('ui-page-active'), 'Makes the nested page the active page.');
 					ok($('.ui-listview', $new_page).find(":contains('Rhumba of rattlesnakes')").length == 1, "The current page should have the proper text in the list.");
 					ok($('.ui-listview', $new_page).find(":contains('Shoal of Bass')").length == 1, "The current page should have the proper text in the list.");
@@ -65,7 +69,9 @@
 	});
 
 	asyncTest( "should go back to top level when the back button is clicked", function() {
-		$('body > [data-'+ $.mobile.ns +'url="nested-list-test&ui-page=More-animals-0"]').find('a:contains("Back")').click();
+
+		$('.ui-page-active a:jqmData(rel="back")').click();
+				
 		setTimeout(function() {
 			ok($('#nested-list-test').hasClass('ui-page-active'), 'Transitions back to the parent nested page');
 			start();
@@ -89,8 +95,8 @@
 		}, 1000);
 	});
 
-	asyncTest( "changes to number 1 page when the li is clicked", function() {
-		$('.ui-page-active li').first().click();
+	asyncTest( "changes to number 1 page when the li a is clicked", function() {
+		$('.ui-page-active li a').first().click();
 		setTimeout(function() {
 			ok($('#numbered-list-results').hasClass('ui-page-active'), "The new numbered page was transitioned correctly.");
 			start();
@@ -98,7 +104,7 @@
 	});
 
 	asyncTest( "takes us back to the numbered list when the back button is clicked", function() {
-		$('.ui-page-active a:contains("Back")').click();
+		$('.ui-page-active a:jqmData(rel="back")').click();
 		setTimeout(function() {
 			ok($('#numbered-list-test').hasClass('ui-page-active'));
 			start();
@@ -144,7 +150,7 @@
 		$.testHelper.openPage("#split-list-test");
 
 		setTimeout(function(){
-			$('.ui-page-active [role="option"]:eq(0)').click();
+			$('.ui-page-active [role="option"]:eq(0) a:eq(0)').click();
 		}, 500);
 
 		setTimeout(function() {
@@ -162,7 +168,7 @@
 			},
 
 			function(){
-				$('.ui-page-active a:contains("Back")').click();
+				$('.ui-page-active a:jqmData(rel="back")').click();
 			},
 
 			function() {
@@ -232,7 +238,7 @@
 		}, 1000);
 	});
 
-	test( "Refresh applys thumb styling", function(){
+	test( "Refresh applies thumb styling", function(){
 		var ul = $('.ui-page-active ul');
 
 		ul.append("<li id='fiz'><img/></li>");
@@ -291,10 +297,11 @@
 		}, 500);
 
 		setTimeout(function() {
-			same($page.find('li:jqmData(role=list-divider)[style^="display: none;"]').length, 2);
-			same($page.find('li:jqmData(role=list-divider)[style^="display: none;"] + li:not(:jqmData(role=list-divider))[style^="display: none;"]').length, 2);
-			same($page.find('li:jqmData(role=list-divider):not([style^="display: none;"]) + li:not(:jqmData(role=list-divider)):not([style^="display: none;"])').length, 2);
+			same($page.find('li:jqmData(role=list-divider):hidden').length, 2);
+			same($page.find('li:jqmData(role=list-divider):hidden + li:not(:jqmData(role=list-divider)):hidden').length, 2);
+			same($page.find('li:jqmData(role=list-divider):not(:hidden) + li:not(:jqmData(role=list-divider)):not([:hidden)').length, 2);
 			start();
 		}, 1000);
 	});
+	
 })(jQuery);

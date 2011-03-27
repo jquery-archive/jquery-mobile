@@ -111,7 +111,7 @@
 		});
 
 		var findFirstPage = function() {
-			return $("[data-"+ $.mobile.ns +"role='page']").first();
+			return $(":jqmData(role='page')").first();
 		};
 
 		test( "active page and start page should be set to the fist page in the selected set", function(){

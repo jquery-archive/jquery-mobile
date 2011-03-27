@@ -108,14 +108,6 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				break;	
 			}
 		});	
-
-		// tapping the whole LI triggers click on the first link
-		$list.delegate( "li", "click", function(event) {
-			if ( !$( event.target ).closest( "a" ).length ) {
-				$( this ).find( "a" ).first().trigger( "click" );
-				return false;
-			}
-		});
 		
 	},
 
@@ -128,7 +120,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 		item.find( "p, dl" ).addClass( "ui-li-desc" );
 
-		$list.find( "li" ).find( ">img:eq(0)" ).addClass( "ui-li-thumb" ).each(function() {
+		$list.find( "li" ).find( ">img:eq(0), >a:first>img:eq(0)" ).addClass( "ui-li-thumb" ).each(function() {
 			$( this ).closest( "li" )
 				.addClass( $(this).is( ".ui-li-icon" ) ? "ui-li-has-icon" : "ui-li-has-thumb" );
 		});
@@ -170,15 +162,6 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 		li.first().attr( "tabindex", "0" );
 		
-		//workaround for Windows Phone 7 focus/active tap color 
-		//without this, delegated events will highlight the whole list, rather than the LI
-		if( $.mobile.browser.ie && $.mobile.browser.ie <= 8 ){
-			li
-				.unbind( "mousedown.iefocus" )
-				.bind( "mousedown.iefocus", function(e){
-					e.preventDefault();
-				});
-		}
 
 		li.each(function( pos ) {
 			var item = $( this ),
@@ -291,7 +274,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 					.prepend( "<span class='ui-li-dec'>" + (counter++) + ". </span>" );
 			}
 
-			item.addClass( itemClass );
+			item.add( item.find( ".ui-btn-inner" ) ).addClass( itemClass );
 
 			if ( !create ) {
 				self._itemApply( $list, item );

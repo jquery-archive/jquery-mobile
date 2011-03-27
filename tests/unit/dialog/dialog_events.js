@@ -13,7 +13,7 @@
 		setTimeout(function(){
 			ok(/&ui-state=dialog/.test(location.hash), "ui-state=dialog =~ location.hash");
 			// close the dialog
-			$(".ui-dialog .ui-icon-delete").parents("a").click();
+			$(".ui-dialog").dialog("close");
 		}, 500);
 
 		setTimeout(function(){

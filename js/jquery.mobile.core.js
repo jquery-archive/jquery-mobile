@@ -115,55 +115,45 @@
 		}
 	});
 
-	//mobile version of data() method
-	//treats namespaced data-attrs the same as non-namespaced ones
+	//mobile version of data and removeData and hasData methods
+	//ensures all data is set and retrieved using jQuery Mobile's data namespace
     $.fn.jqmData = function( prop, value ){
-    	var pUndef = prop === undefined,
-    		vUndef = value === undefined;
-
-    	if( pUndef || vUndef ){
-	    	var ret,
-	    		nsret;
-	    	//if no args are passed, a data hash is expected. Remap non-namespaced props
-	    	if( pUndef ){
-	    		ret = this.data();
-	    		$.each( ret, function( i ){
-	    			var nsIndex = i.indexOf( $.mobile.ns );
-	    			if( nsIndex == 0 ){
-	    				ret[ i.substr( $.mobile.ns.length ) ] = ret[ i ];
-	    			}
-	    		});
-	    	}
-	    	//if it's a prop get, try namepaced version if prop is undefined
-	    	else if( vUndef ){
-	    		ret = this.data( prop );
-	    		if( ret === undefined ){
-	    			nsret = this.data( $.mobile.ns + prop );
-	    			if( nsret !== undefined ){
-	    				ret = nsret;
-	    			}
-	    		}
-	    	}
-	    	return ret;
-	    }
+    	return this.data( prop ? $.mobile.ns + prop : prop, value );
     };
+    
+    $.jqmData = function( elem, prop, value ){
+    	return $.data( elem, prop && $.mobile.ns + prop, value );
+    };
+    
+    $.fn.jqmRemoveData = function( prop ){
+    	return this.removeData( $.mobile.ns + prop );
+    };
+    
+    $.jqmRemoveData = function( elem, prop ){
+    	return $.removeData( elem, prop && $.mobile.ns + prop );
+    };
+    
+    $.jqmHasData = function( elem, prop ){
+    	return $.hasData( elem, prop && $.mobile.ns + prop );
+    };
+    
 
 	// Monkey-patching Sizzle to filter the :jqmData selector
-	var oldFind = jQuery.find;
+	var oldFind = $.find;
 
-	jQuery.find = function( selector, context, ret, extra ) {
-		selector = selector.replace(/:jqmData\(([^)]*)\)/g, "[data-" + (jQuery.mobile.ns || "") + "$1]");
+	$.find = function( selector, context, ret, extra ) {
+		selector = selector.replace(/:jqmData\(([^)]*)\)/g, "[data-" + ($.mobile.ns || "") + "$1]");
 
 		return oldFind.call( this, selector, context, ret, extra );
 	};
 
-	jQuery.extend( jQuery.find, oldFind );
+	$.extend( $.find, oldFind );
 
-	jQuery.find.matches = function( expr, set ) {
-		return jQuery.find( expr, null, null, set );
+	$.find.matches = function( expr, set ) {
+		return $.find( expr, null, null, set );
 	};
 
-	jQuery.find.matchesSelector = function( node, expr ) {
-		return jQuery.find( expr, null, null, [node] ).length > 0;
+	$.find.matchesSelector = function( node, expr ) {
+		return $.find( expr, null, null, [node] ).length > 0;
 	};
 })( jQuery, this );
