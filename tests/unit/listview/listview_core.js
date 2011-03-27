@@ -33,7 +33,7 @@
 	asyncTest( "Slides back to main page when back button is clicked", function() {
 		$.testHelper.openPage("#basic-link-results");
 
-		$('#basic-link-results a:contains("Back")').click();
+		$('#basic-link-results a:jqmData(rel="Back")').click();
 		setTimeout(function() {
 			ok($('#basic-linked-test').hasClass('ui-page-active'));
 			start();
@@ -65,7 +65,7 @@
 	});
 
 	asyncTest( "should go back to top level when the back button is clicked", function() {
-		$('body > :jqmData(url="nested-list-test&ui-page=More-animals-0")').find('a:contains("Back")').click();
+		$('body > :jqmData(url="nested-list-test&ui-page=More-animals-0")').find('a:jqmData(rel="Back")').click();
 		setTimeout(function() {
 			ok($('#nested-list-test').hasClass('ui-page-active'), 'Transitions back to the parent nested page');
 			start();
@@ -98,7 +98,7 @@
 	});
 
 	asyncTest( "takes us back to the numbered list when the back button is clicked", function() {
-		$('.ui-page-active a:contains("Back")').click();
+		$('.ui-page-active a:jqmData(rel="Back")').click();
 		setTimeout(function() {
 			ok($('#numbered-list-test').hasClass('ui-page-active'));
 			start();
@@ -162,7 +162,7 @@
 			},
 
 			function(){
-				$('.ui-page-active a:contains("Back")').click();
+				$('.ui-page-active a:jqmData(rel="Back")').click();
 			},
 
 			function() {
