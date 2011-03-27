@@ -6,6 +6,7 @@
 */
 
 /* some unsets - more probably needed */
+.ui-mobile, .ui-mobile body { height: 100%; }
 .ui-mobile fieldset, .ui-page { padding: 0; margin: 0; }
 .ui-mobile a img, .ui-mobile fieldset { border: 0; }
 
@@ -18,9 +19,9 @@
 
 /*orientations from js are available */
 .portrait,
-.portrait .ui-page { min-height: 480px; }
+.portrait .ui-page { min-height: 100%; }
 .landscape,
-.landscape .ui-page  { min-height: 320px; }
+.landscape .ui-page  { min-height: 100%; }
 
 /* loading screen */
 .ui-loading .ui-mobile-viewport { overflow: hidden !important; }
