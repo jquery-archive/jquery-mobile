@@ -237,10 +237,6 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 			//events for list items
 			list.delegate("li:not(.ui-disabled, .ui-li-divider)", "click", function(event){
-				// clicking on the list item fires click on the link in listview.js.
-				// to prevent this handler from firing twice if the link isn't clicked on,
-				// short circuit unless the target is the link
-				if( !$(event.target).is("a") ){ return; }
 
 				// index of option tag to be selected
 				var newIndex = list.find( "li:not(.ui-li-divider)" ).index( this ),
