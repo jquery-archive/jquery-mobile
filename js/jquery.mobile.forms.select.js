@@ -239,7 +239,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			list.delegate("li:not(.ui-disabled, .ui-li-divider)", "click", function(event){
 
 				// index of option tag to be selected
-				var newIndex = list.find( "li:not(.ui-li-divider)" ).index( this ),
+				var oldIndex = select[0].selectedIndex,
+					newIndex = list.find( "li:not(.ui-li-divider)" ).index( this ),
 					option = self.optionElems.eq( newIndex )[0];
 
 				// toggle selected status on the tag for multi selects
@@ -253,8 +254,10 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 						.toggleClass('ui-icon-checkbox-off', !option.selected);
 				}
 
-				// trigger change
-				select.trigger( "change" );
+				// trigger change if value changed
+				if( oldIndex !== newIndex ){
+					select.trigger( "change" );
+				}
 
 				//hide custom select for single selects only
 				if( !isMultiple ){
