@@ -283,7 +283,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 					.prepend( "<span class='ui-li-dec'>" + (counter++) + ". </span>" );
 			}
 
-			item.addClass( itemClass );
+			item.add( item.find( ".ui-btn-inner" ) ).addClass( itemClass );
 
 			if ( !create ) {
 				self._itemApply( $list, item );
