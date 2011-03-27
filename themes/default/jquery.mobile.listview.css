@@ -33,7 +33,7 @@ ol.ui-listview .ui-li-jsnumbering:before { content: "" !important; } /* to avoid
 .ui-li-has-alt .ui-li-count { right: 55px; }
 .ui-li-link-alt { position: absolute; width: 40px; height: 100%; border-width: 0; border-left-width: 1px; top: 0; right: 0; margin: 0; padding: 0; }
 .ui-li-link-alt .ui-btn { overflow: hidden; position: absolute; right: 8px; top: 50%; margin: -11px 0 0 0; border-bottom-width: 1px; }
-.ui-li-link-alt .ui-btn-inner a { padding: 0; position: static; }
+.ui-li-link-alt .ui-btn-inner { padding: 0; position: static; }
 .ui-li-link-alt .ui-btn .ui-icon { right: 50%; margin-right: -9px;  }
 
 .ui-listview-filter { border-width: 0; overflow: hidden; margin: -15px -15px 15px -15px }
