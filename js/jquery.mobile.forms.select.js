@@ -403,8 +403,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			scrollTop = $(window).scrollTop(),
 			btnOffset = self.button.offset().top,
 			screenHeight = window.innerHeight,
-			screenWidth = window.innerWidth,
-			dialogUsed = self.list.parents('.ui-dialog').length;
+			screenWidth = window.innerWidth;
 
 		//add active class to button
 		self.button.addClass( $.mobile.activeBtnClass );
@@ -418,9 +417,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			self.list.find( ".ui-btn-active" ).focus();
 		}
 
-		// NOTE addresses issue with firefox outerHeight when the parent dialog
-		//      is display: none. Upstream?
-		if( dialogUsed || menuHeight > screenHeight - 80 || !$.support.scrollTop ){
+		if( menuHeight > screenHeight - 80 || !$.support.scrollTop ){
 
 			//for webos (set lastscroll using button offset)
 			if( scrollTop == 0 && btnOffset > screenHeight ){
