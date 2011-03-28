@@ -295,5 +295,27 @@
 				start();
 			}], 1000);
 	});
+
+	asyncTest( "going back from a dialog triggered from a dialog should result in the first dialog ", function(){
+		$.mobile.urlHistory.activeIndex = 0;
+		$.mobile.urlHistory.stack = [];
+		$.testHelper.openPage("#nested-dialog-page");
+
+		$.testHelper.sequence([
+			// transition to the dialog
+			function(){ $("#nested-dialog-page a").click(); },
+
+			// transition to the second dialog
+			function(){ $("#nested-dialog-first a").click(); },
+
+			// transition to back to the first dialog
+			function(){ window.history.back(); },
+
+			// make sure we're on first dialog
+			function(){
+				same($(".ui-page-active")[0], $("#nested-dialog-first")[0], "should be the first dialog");
+				start();
+			}], 1000);
+	});
 })(jQuery);
 
