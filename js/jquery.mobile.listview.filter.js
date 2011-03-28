@@ -7,6 +7,7 @@
 (function($, undefined ) {
 
 $.mobile.listview.prototype.options.filter = false;
+$.mobile.listview.prototype.options.filterPlaceholder = "Filter items...";
 
 $( ":jqmData(role='listview')" ).live( "listviewcreate", function() {
 	var list = $( this ),
@@ -19,7 +20,7 @@ $( ":jqmData(role='listview')" ).live( "listviewcreate", function() {
 	var wrapper = $( "<form>", { "class": "ui-listview-filter ui-bar-c", "role": "search" } ),
 
 		search = $( "<input>", {
-				placeholder: "Filter results..."
+				placeholder: listview.options.filterPlaceholder
 			})
 			.attr( "data-" + $.mobile.ns + "type", "search" )
 			.bind( "keyup change", function() {

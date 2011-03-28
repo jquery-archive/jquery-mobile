@@ -105,13 +105,13 @@
 			},
 
 			// addNew is used whenever a new page is added
-			addNew: function( url, transition ){
+			addNew: function( url, transition, storedTo ){
 				//if there's forward history, wipe it
 				if( urlHistory.getNext() ){
 					urlHistory.clearForward();
 				}
 
-				urlHistory.stack.push( {url : url, transition: transition } );
+				urlHistory.stack.push( {url : url, transition: transition, page: storedTo } );
 
 				urlHistory.activeIndex = urlHistory.stack.length - 1;
 			},
@@ -402,7 +402,7 @@
 
 				//add page to history stack if it's not back or forward
 				if( !back && !forward ){
-					urlHistory.addNew( url, transition );
+					urlHistory.addNew( url, transition, to );
 				}
 
 				removeActiveLinkClass();
@@ -591,19 +591,29 @@
 					setTimeout(function() { transitionPages(); }, 0);
 				},
 				error: function() {
+					
+					//remove loading message
 					$.mobile.pageLoading( true );
+					
+					//clear out the active button state
 					removeActiveLinkClass(true);
-					if(base){
-						base.set(path.get());
+					
+					//set base back to current path
+					if( base ){
+						base.set( path.get() );
 					}
-					$("<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h1>Error Loading Page</h1></div>")
+					
+					//release transition lock so navigation is free again
+					releasePageTransitionLock();
+					
+					//show error message
+					$("<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h1>"+ $.mobile.pageLoadErrorMessage +"</h1></div>")
 						.css({ "display": "block", "opacity": 0.96, "top": $(window).scrollTop() + 100 })
 						.appendTo( $.mobile.pageContainer )
 						.delay( 800 )
 						.fadeOut( 400, function(){
 							$(this).remove();
 						});
-					releasePageTransitionLock();
 				}
 			});
 		}
@@ -754,20 +764,29 @@
 			return;
 		}
 
-		// special case for dialogs requires heading back or forward until we find a non dialog page
+		// special case for dialogs
 		if( urlHistory.stack.length > 1 &&
-				to.indexOf( dialogHashKey ) > -1 &&
-				!$.mobile.activePage.is( ".ui-dialog" ) ){
+				to.indexOf( dialogHashKey ) > -1 ){
 
-			//determine if we're heading forward or backward and continue accordingly past
-			//the current dialog
-			urlHistory.directHashChange({
-				currentUrl: to,
-				isBack: function(){ window.history.back(); },
-				isForward: function(){ window.history.forward(); }
-			});
+			// If current active page is not a dialog skip the dialog and continue
+			// in the same direction
+			if(!$.mobile.activePage.is( ".ui-dialog" )) {
+				//determine if we're heading forward or backward and continue accordingly past
+				//the current dialog
+				urlHistory.directHashChange({
+					currentUrl: to,
+					isBack: function(){ window.history.back(); },
+					isForward: function(){ window.history.forward(); }
+				});
 
-			return;
+				// prevent changepage
+				return;
+			} else {
+				var setTo = function(){ to = $.mobile.urlHistory.getActive().page; };
+				// if the current active page is a dialog and we're navigating
+				// to a dialog use the dialog objected saved in the stack
+				urlHistory.directHashChange({	currentUrl: to, isBack: setTo, isForward: setTo	});
+			}
 		}
 
 		//if to is defined, load it

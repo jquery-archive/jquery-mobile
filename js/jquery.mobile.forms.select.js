@@ -237,13 +237,10 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 			//events for list items
 			list.delegate("li:not(.ui-disabled, .ui-li-divider)", "click", function(event){
-				// clicking on the list item fires click on the link in listview.js.
-				// to prevent this handler from firing twice if the link isn't clicked on,
-				// short circuit unless the target is the link
-				if( !$(event.target).is("a") ){ return; }
 
 				// index of option tag to be selected
-				var newIndex = list.find( "li:not(.ui-li-divider)" ).index( this ),
+				var oldIndex = select[0].selectedIndex,
+					newIndex = list.find( "li:not(.ui-li-divider)" ).index( this ),
 					option = self.optionElems.eq( newIndex )[0];
 
 				// toggle selected status on the tag for multi selects
@@ -257,8 +254,10 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 						.toggleClass('ui-icon-checkbox-off', !option.selected);
 				}
 
-				// trigger change
-				select.trigger( "change" );
+				// trigger change if value changed
+				if( oldIndex !== newIndex ){
+					select.trigger( "change" );
+				}
 
 				//hide custom select for single selects only
 				if( !isMultiple ){
@@ -268,10 +267,18 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				event.preventDefault();
 			});
 
-			//events on "screen" overlay + close button
+			//events on "screen" overlay
 			screen.click(function( event ){
 				self.close();
 			});
+			
+			//close button on small overlays
+			self.headerClose.click(function(){
+				if( self.menuType == "overlay" ){
+					self.close();
+					return false;
+				}
+			})
 		}
 	},
 
@@ -403,8 +410,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			scrollTop = $(window).scrollTop(),
 			btnOffset = self.button.offset().top,
 			screenHeight = window.innerHeight,
-			screenWidth = window.innerWidth,
-			dialogUsed = self.list.parents('.ui-dialog').length;
+			screenWidth = window.innerWidth;
 
 		//add active class to button
 		self.button.addClass( $.mobile.activeBtnClass );
@@ -418,9 +424,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			self.list.find( ".ui-btn-active" ).focus();
 		}
 
-		// NOTE addresses issue with firefox outerHeight when the parent dialog
-		//      is display: none. Upstream?
-		if( dialogUsed || menuHeight > screenHeight - 80 || !$.support.scrollTop ){
+		if( menuHeight > screenHeight - 80 || !$.support.scrollTop ){
 
 			//for webos (set lastscroll using button offset)
 			if( scrollTop == 0 && btnOffset > screenHeight ){

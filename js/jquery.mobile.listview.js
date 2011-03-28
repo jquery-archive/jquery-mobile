@@ -295,27 +295,29 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			self = this,
 			persistentFooterID = parentPage.find( ":jqmData(role='footer')" ).jqmData( "id" );
 
-		$( parentList.find( "ul, ol" ).toArray().reverse() ).each(function( i ) {
+		$( parentList.find( "li>ul, li>ol" ).toArray().reverse() ).each(function( i ) {
 			var list = $( this ),
 				parent = list.parent(),
-				title = $.trim(parent.contents()[ 0 ].nodeValue) || parent.find('a:first').text(),
+				nodeEls = $( list.prevAll().toArray().reverse() ),
+				nodeEls = nodeEls.length ? nodeEls : $( "<span>" + $.trim(parent.contents()[ 0 ].nodeValue) + "</span>" ),
+				title = nodeEls.first().text(),//url limits to first 30 chars of text
 				id = parentId + "&" + $.mobile.subPageUrlKey + "=" + self._idStringEscape(title + " " + i),
 				theme = list.jqmData( "theme" ) || o.theme,
 				countTheme = list.jqmData( "counttheme" ) || parentList.jqmData( "counttheme" ) || o.countTheme,
 				newPage = list.wrap( "<div data-" + $.mobile.ns + "role='page'><div data-" + $.mobile.ns + "role='content'></div></div>" )
 							.parent()
-								.before( "<div  data-" + $.mobile.ns + "role='header' data-" + $.mobile.ns + "theme='" + o.headerTheme + "'><div class='ui-title'>" + title + "</div></div>" )
+								.before( "<div data-" + $.mobile.ns + "role='header' data-" + $.mobile.ns + "theme='" + o.headerTheme + "'><div class='ui-title'>" + title + "</div></div>" )
 								.after( persistentFooterID ? $( "<div data-" + $.mobile.ns + "role='footer'  data-" + $.mobile.ns + "id='"+ persistentFooterID +"'>") : "" )
 								.parent()
 									.attr( "data-" + $.mobile.ns + "url", id )
 									.attr( "data-" + $.mobile.ns + "theme", theme )
 									.attr( "data-" + $.mobile.ns + "count-theme", countTheme )
 									.appendTo( $.mobile.pageContainer );
-								
+
 				newPage.page();		
 			var anchor = parent.find('a:first');
 			if (!anchor.length) {
-				anchor = $("<a></a>").html(title).prependTo(parent.empty());
+				anchor = $("<a></a>").html( nodeEls || title ).prependTo(parent.empty());
 			}
 			anchor.attr('href','#' + id);
 		}).listview();
