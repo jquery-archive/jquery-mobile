@@ -6,6 +6,7 @@
 	<title>jQuery Mobile Navigation Test Suite</title>
 
 	<script type="text/javascript" src="../../../js/jquery.js"></script>
+	<script src="../jquery.setNameSpace.js"></script>
 	<script type="text/javascript" src="../../../js/"></script>
 	<script type="text/javascript" src="../../../tests/jquery.testHelper.js"></script>
 
@@ -25,109 +26,124 @@
 <ol id="qunit-tests">
 </ol>
 
-<div id="foo" data-role="page">
-	<a href="#bar" data-transition="flip"></a>
+<div id="foo"  data-nstest-role="page">
+	<a href="#bar" data-nstest-transition="flip"></a>
 </div>
 
-<div id="bar" data-role="page">
+<div id="bar"  data-nstest-role="page">
 	<a href="#baz"></a>
 </div>
 
-<div id="baz" data-role="page">
+<div id="baz"  data-nstest-role="page">
 	<a href="#foo"></a>
 </div>
 
-<div id="fade-trans" data-role="page">
-	<a href="#flip-trans" data-transition="fade"></a>
+<div id="fade-trans"  data-nstest-role="page">
+	<a href="#flip-trans" data-nstest-transition="fade"></a>
 </div>
 
-<div id="flip-trans" data-role="page">
-	<a href="#fade-trans" data-transition="flip"></a>
+<div id="flip-trans"  data-nstest-role="page">
+	<a href="#fade-trans" data-nstest-transition="flip"></a>
 </div>
 
-<div id="no-trans" data-role="page">
+<div id="no-trans"  data-nstest-role="page">
 	<a href="#pop-trans"></a>
 </div>
 
-<div id="pop-trans" data-role="page">
-	<a href="#no-trans" data-transition="pop"></a>
+<div id="pop-trans"  data-nstest-role="page">
+	<a href="#no-trans" data-nstest-transition="pop"></a>
 </div>
 
-<div id="default-trans" data-role="page">
+<div id="default-trans"  data-nstest-role="page">
 	<a href="#no-trans"></a>
 </div>
 
-<div id="data-url" data-role="page">
+<div id="data-url"  data-nstest-role="page">
 	<a href="data-url-tests/data-url.html"></a>
 </div>
 
-<div id="non-data-url" data-role="page">
+<div id="non-data-url"  data-nstest-role="page">
 	<a href="data-url-tests/non-data-url.html"></a>
 </div>
 
-<div id="nested-data-url" data-role="page">
+<div id="nested-data-url"  data-nstest-role="page">
 	<a href="data-url-tests/nested.html"></a>
 </div>
 
-<div id="single-quotes-data-url" data-role="page">
+<div id="single-quotes-data-url"  data-nstest-role="page">
 	<a href="data-url-tests/single-quotes.html"></a>
 </div>
 
-<div id="reverse-attr-data-url" data-role="page">
+<div id="reverse-attr-data-url"  data-nstest-role="page">
 	<a href="data-url-tests/reverse-attr.html"></a>
 </div>
 
-<div id="ajax-diabled-form" data-role="page">
-	<form method="POST" id="non-ajax-form" action="/ajax-disabled-form" data-ajax="false">
+<div id="ajax-diabled-form"  data-nstest-role="page">
+	<form method="POST" id="non-ajax-form" action="/ajax-disabled-form" data-nstest-ajax="false">
 	</form>
 
 	<form method="POST" id="ajax-form" action="/ajax-diabled-form">
 	</form>
 
-	<form method="POST" id="rand-ajax-form" action="/ajax-disabled-form" data-ajax="foo">
+	<form method="POST" id="rand-ajax-form" action="/ajax-disabled-form" data-nstest-ajax="foo">
 	</form>
 </div>
 
-<div id="default-trans-dialog" data-role="page">
-	<a href="#no-trans-dialog" data-rel="dialog"></a>
+<div id="default-trans-dialog"  data-nstest-role="page">
+	<a href="#no-trans-dialog" data-nstest-rel="dialog"></a>
 </div>
 
-<div id="no-trans-dialog" data-role="page">
+<div id="no-trans-dialog" data-nstest-role="page">
 </div>
 
-<div id="dup-history-first" data-role="page">
-  <a href="#dup-history-second" data-transition="slideup" data-role="button" >
+<div id="dup-history-first" data-nstest-role="page">
+  <a href="#dup-history-second" data-nstest-transition="slideup" data-nstest-role="button" >
 		Page 2
 	</a>
 </div>
 
-<div id="dup-history-second" data-role="page">
-  <a href="#dup-history-first" data-transition="slideup" data-role="button">
+<div id="dup-history-second" data-nstest-role="page">
+  <a href="#dup-history-first" data-nstest-transition="slideup" data-nstest-role="button">
 		Page 1
 	</a>
-  <a href="#dup-history-dialog" data-role="button" data-transition="pop" data-rel="dialog">Dialog</a>
+  <a href="#dup-history-dialog" data-nstest-role="button" data-nstest-transition="pop" data-nstest-rel="dialog">Dialog</a>
 </div>
 
-<div id="dup-history-dialog" data-role="dialog">
-   <div data-role="header" data-position="inline">
+<div id="dup-history-dialog" data-nstest-role="dialog">
+   <div data-nstest-role="header" data-nstest-position="inline">
      <h1>Dialog</h1>
    </div>
 </div>
 
-<div id="skip-dialog-first" data-role="page">
-  <div data-role="content">
-    <a href="#skip-dialog" data-role="button" data-transition="pop" data-rel="dialog">Dialog</a>
+<div id="skip-dialog-first" data-nstest-role="page">
+  <div data-nstest-role="content">
+    <a href="#skip-dialog" data-nstest-role="button" data-nstest-transition="pop" data-nstest-rel="dialog">Dialog</a>
   </div>
 </div>
 
-<div id="skip-dialog" data-role="dialog">
-  <div data-role="content">
+<div id="skip-dialog" data-nstest-role="dialog">
+  <div data-nstest-role="content">
     <a href="#skip-dialog-second">Page 2</a>
   </div>
 </div>
 
-<div id="skip-dialog-second" data-role="page">
-	<a href="#" data-rel="back">Go Back</a>
+<div id="skip-dialog-second" data-nstest-role="page">
+	<a href="#" data-nstest-rel="back">Go Back</a>
+</div>
+
+<div id="nested-dialog-page" data-nstest-role="page">
+  <div data-nstest-role="content">
+    <a href="#nested-dialog-first">Dialog</a>
+  </div>
+</div>
+
+<div id="nested-dialog-first" data-nstest-role="dialog">
+  <div data-nstest-role="content">
+    <a href="#nested-dialog-second">Dialog 2</a>
+  </div>
+</div>
+
+<div id="nested-dialog-second" data-nstest-role="dialog">
 </div>
 </body>
 </html>

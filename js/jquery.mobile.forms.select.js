@@ -82,11 +82,11 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				//button theme
 				theme = /ui-btn-up-([a-z])/.exec( button.attr("class") )[1],
 
-				menuPage = $( "<div data-role='dialog' data-theme='"+ o.menuPageTheme +"'>" +
-							"<div data-role='header'>" +
+				menuPage = $( "<div data-" + $.mobile.ns + "role='dialog' data-" +$.mobile.ns + "theme='"+ o.menuPageTheme +"'>" +
+							"<div data-" + $.mobile.ns + "role='header'>" +
 								"<div class='ui-title'>" + label.text() + "</div>"+
 							"</div>"+
-							"<div data-role='content'></div>"+
+							"<div data-" + $.mobile.ns + "role='content'></div>"+
 						"</div>" )
 						.appendTo( $.mobile.pageContainer )
 						.page(),
@@ -105,9 +105,9 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 						"class": "ui-selectmenu-list",
 						"id": menuId,
 						"role": "listbox",
-						"aria-labelledby": buttonId,
-						"data-theme": theme
+						"aria-labelledby": buttonId
 					})
+					.attr( "data-" + $.mobile.ns + "theme", theme )
 					.appendTo( listbox ),
 
 				header = $( "<div>", {
@@ -121,12 +121,12 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					.appendTo( header ),
 
 				headerClose = $( "<a>", {
-						"data-iconpos": "notext",
-						"data-icon": "delete",
 						"text": o.closeText,
 						"href": "#",
 						"class": "ui-btn-left"
 					})
+					.attr( "data-" + $.mobile.ns + "iconpos", "notext" )
+					.attr( "data-" + $.mobile.ns + "icon", "delete" )
 					.appendTo( header )
 					.buttonMarkup(),
 
@@ -194,7 +194,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 						.removeClass( $.mobile.activeBtnClass );
 				});
 
-			
+
 		} else {
 
 			//create list from select, update state
@@ -211,11 +211,11 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			button
 				.bind( "touchstart" , function( event ){
 					//set startTouches to cached copy of
-					$( this ).data( "startTouches", $.extend({}, event.originalEvent.touches[ 0 ]) );
+					$( this ).jqmData( "startTouches", $.extend({}, event.originalEvent.touches[ 0 ]) );
 				})
 				.bind( $.support.touch ? "touchend" : "mouseup" , function( event ){
 					//if it's a scroll, don't open
-					if( $( this ).data( "moved" ) ){
+					if( $( this ).jqmData( "moved" ) ){
 						$( this ).removeData( "moved" );
 					} else {
 						self.open();
@@ -225,25 +225,22 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				.bind( "touchmove", function( event ){
 					//if touch moved enough, set data moved and don't open menu
 					var thisTouches = event.originalEvent.touches[ 0 ],
-					startTouches = $( this ).data( "startTouches" ),
+					startTouches = $( this ).jqmData( "startTouches" ),
 					deltaX = Math.abs(thisTouches.pageX - startTouches.pageX),
 					deltaY = Math.abs(thisTouches.pageY - startTouches.pageY);
 
 					if( deltaX > 10 || deltaY > 10 ){
-						$( this ).data( "moved", true );
+						$( this ).jqmData( "moved", true );
 					}
 				});
 
 
 			//events for list items
 			list.delegate("li:not(.ui-disabled, .ui-li-divider)", "click", function(event){
-				// clicking on the list item fires click on the link in listview.js.
-				// to prevent this handler from firing twice if the link isn't clicked on,
-				// short circuit unless the target is the link
-				if( !$(event.target).is("a") ){ return; }
 
 				// index of option tag to be selected
-				var newIndex = list.find( "li:not(.ui-li-divider)" ).index( this ),
+				var oldIndex = select[0].selectedIndex,
+					newIndex = list.find( "li:not(.ui-li-divider)" ).index( this ),
 					option = self.optionElems.eq( newIndex )[0];
 
 				// toggle selected status on the tag for multi selects
@@ -257,8 +254,10 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 						.toggleClass('ui-icon-checkbox-off', !option.selected);
 				}
 
-				// trigger change
-				select.trigger( "change" );
+				// trigger change if value changed
+				if( oldIndex !== newIndex ){
+					select.trigger( "change" );
+				}
 
 				//hide custom select for single selects only
 				if( !isMultiple ){
@@ -268,10 +267,18 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				event.preventDefault();
 			});
 
-			//events on "screen" overlay + close button
+			//events on "screen" overlay
 			screen.click(function( event ){
 				self.close();
 			});
+			
+			//close button on small overlays
+			self.headerClose.click(function(){
+				if( self.menuType == "overlay" ){
+					self.close();
+					return false;
+				}
+			})
 		}
 	},
 
@@ -300,13 +307,13 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 				// has this optgroup already been built yet?
 				if( $.inArray(optLabel, optgroups) === -1 ){
-					lis.push( "<li data-role='list-divider'>"+ optLabel +"</li>" );
+					lis.push( "<li data-" + $.mobile.ns + "role='list-divider'>"+ optLabel +"</li>" );
 					optgroups.push( optLabel );
 				}
 			}
 
 			//find placeholder text
-			if( !this.getAttribute('value') || text.length == 0 || $this.data('placeholder') ){
+			if( !this.getAttribute('value') || text.length == 0 || $this.jqmData('placeholder') ){
 				if( o.hidePlaceholderMenuItems ){
 					classes.push( "ui-selectmenu-placeholder" );
 				}
@@ -319,7 +326,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				extraAttrs.push( "aria-disabled='true'" );
 			}
 
-			lis.push( "<li data-icon='"+ dataIcon +"' class='"+ classes.join(" ") + "' " + extraAttrs.join(" ") +">"+ anchor +"</li>" )
+			lis.push( "<li data-" + $.mobile.ns + "icon='"+ dataIcon +"' class='"+ classes.join(" ") + "' " + extraAttrs.join(" ") +">"+ anchor +"</li>" )
 		});
 
 		self.list.html( lis.join(" ") );
@@ -403,12 +410,11 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			scrollTop = $(window).scrollTop(),
 			btnOffset = self.button.offset().top,
 			screenHeight = window.innerHeight,
-			screenWidth = window.innerWidth,
-			dialogUsed = self.list.parents('.ui-dialog').length;
+			screenWidth = window.innerWidth;
 
 		//add active class to button
 		self.button.addClass( $.mobile.activeBtnClass );
-		
+
 		//remove after delay
 		setTimeout(function(){
 			self.button.removeClass( $.mobile.activeBtnClass );
@@ -418,14 +424,12 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			self.list.find( ".ui-btn-active" ).focus();
 		}
 
-		// NOTE addresses issue with firefox outerHeight when the parent dialog
-		//      is display: none. Upstream?
-		if( dialogUsed || menuHeight > screenHeight - 80 || !$.support.scrollTop ){
+		if( menuHeight > screenHeight - 80 || !$.support.scrollTop ){
 
 			//for webos (set lastscroll using button offset)
 			if( scrollTop == 0 && btnOffset > screenHeight ){
 				self.thisPage.one('pagehide',function(){
-					$(this).data('lastScroll', btnOffset);
+					$(this).jqmData('lastScroll', btnOffset);
 				});
 			}
 

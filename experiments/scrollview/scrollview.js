@@ -10,19 +10,19 @@ function ResizePageContentHeight(page)
 	$content.height(wh - (hh + fh) - (pt + pb));
 }
 
-$("[data-role=page]").live("pageshow", function(event) {
+$(":jqmData(role='page')").live("pageshow", function(event) {
 	var $page = $(this);
 
 	// For the demos that use this script, we want the content area of each
 	// page to be scrollable in the 'y' direction.
 
-	$page.find(".ui-content").attr("data-scroll", "y");
+	$page.find(".ui-content").attr("data-"+ $.mobile.ns +"scroll", "y");
 
 	// This code that looks for [data-scroll] will eventually be folded
 	// into the jqm page processing code when scrollview support is "official"
 	// instead of "experimental".
 
-	$page.find("[data-scroll]:not(.ui-scrollview-clip)").each(function(){
+	$page.find(":jqmData(scroll):not(.ui-scrollview-clip)").each(function(){
 		var $this = $(this);
 		// XXX: Remove this check for ui-scrolllistview once we've
 		//      integrated list divider support into the main scrollview class.
@@ -30,7 +30,7 @@ $("[data-role=page]").live("pageshow", function(event) {
 			$this.scrolllistview();
 		else
 		{
-			var st = $this.data("scroll") + "";
+			var st = $this.jqmData("scroll") + "";
 			var paging = st && st.search(/^[xy]p$/) != -1;
 			var dir = st && st.search(/^[xy]/) != -1 ? st.charAt(0) : null;
 
@@ -40,7 +40,7 @@ $("[data-role=page]").live("pageshow", function(event) {
 			if (paging)
 				opts.pagingEnabled = true;
 
-			var method = $this.data("scroll-method");
+			var method = $this.jqmData("scroll-method");
 			if (method)
 				opts.scrollMethod = method;
 

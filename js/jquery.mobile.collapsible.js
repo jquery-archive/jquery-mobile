@@ -21,7 +21,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			collapsibleContain = $el.addClass('ui-collapsible-contain'),
 			collapsibleHeading = $el.find(o.heading).eq(0),
 			collapsibleContent = collapsibleContain.wrapInner('<div class="ui-collapsible-content"></div>').find('.ui-collapsible-content'),
-			collapsibleParent = $el.closest('[data-role="collapsible-set"]').addClass('ui-collapsible-set');				
+			collapsibleParent = $el.closest( ":jqmData(role='collapsible-set')" ).addClass('ui-collapsible-set');				
 		
 		//replace collapsibleHeading if it's a legend	
 		if(collapsibleHeading.is('legend')){
@@ -62,7 +62,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 						.addClass('ui-corner-all');
 			}
 			else {
-				if( collapsibleContain.data('collapsible-last') ){
+				if( collapsibleContain.jqmData('collapsible-last') ){
 					collapsibleHeading
 						.find('a:eq(0), .ui-btn-inner')	
 							.addClass('ui-corner-bottom');
@@ -82,7 +82,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 					collapsibleHeading.find('.ui-icon').removeClass('ui-icon-minus').addClass('ui-icon-plus');	
 					collapsibleContent.addClass('ui-collapsible-content-collapsed').attr('aria-hidden',true);
 					
-					if( collapsibleContain.data('collapsible-last') ){
+					if( collapsibleContain.jqmData('collapsible-last') ){
 						collapsibleHeading
 							.find('a:eq(0), .ui-btn-inner')
 							.addClass('ui-corner-bottom');
@@ -100,7 +100,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 					collapsibleHeading.find('.ui-icon').removeClass('ui-icon-plus').addClass('ui-icon-minus');	
 					collapsibleContent.removeClass('ui-collapsible-content-collapsed').attr('aria-hidden',false);
 					
-					if( collapsibleContain.data('collapsible-last') ){
+					if( collapsibleContain.jqmData('collapsible-last') ){
 						collapsibleHeading
 							.find('a:eq(0), .ui-btn-inner')
 							.removeClass('ui-corner-bottom');
@@ -112,16 +112,16 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			
 		
 		//close others in a set
-		if( collapsibleParent.length && !collapsibleParent.data("collapsiblebound") ){
+		if( collapsibleParent.length && !collapsibleParent.jqmData("collapsiblebound") ){
 			collapsibleParent
-				.data("collapsiblebound", true)
+				.jqmData("collapsiblebound", true)
 				.bind("expand", function( event ){
 					$(this).find( ".ui-collapsible-contain" )
 						.not( $(event.target).closest( ".ui-collapsible-contain" ) )
 						.not( "> .ui-collapsible-contain .ui-collapsible-contain" )
 						.trigger( "collapse" );
-				})
-			var set = collapsibleParent.find('[data-role=collapsible]')
+				});
+			var set = collapsibleParent.find( ":jqmData(role=collapsible)" )
 					
 			set.first()
 				.find('a:eq(0)')	
@@ -129,7 +129,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 					.find('.ui-btn-inner')
 					.addClass('ui-corner-top');
 					
-			set.last().data('collapsible-last', true)	
+			set.last().jqmData('collapsible-last', true)	
 		}
 					
 		collapsibleHeading

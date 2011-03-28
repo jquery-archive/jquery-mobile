@@ -66,13 +66,13 @@ $.event.special.tap = {
 			.bind( "mousedown touchstart", function( event ) {
 				if ( event.which && event.which !== 1 ||
 					//check if event fired once already by a device that fires both mousedown and touchstart (while supporting both events)
-					$this.data( "prevEvent") && $this.data( "prevEvent") !== event.type ) {
+					$this.jqmData( "prevEvent") && $this.jqmData( "prevEvent") !== event.type ) {
 					return false;
 				}
 				
 				//save event type so only this type is let through for a temp duration, 
 				//allowing quick repetitive taps but not duplicative events 
-				$this.data( "prevEvent", event.type );
+				$this.jqmData( "prevEvent", event.type );
 				setTimeout(function(){
 					$this.removeData( "prevEvent" );
 				}, 800);

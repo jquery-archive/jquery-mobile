@@ -8,15 +8,16 @@
 .ui-content .ui-listview-inset { margin: 1em 0;  }
 .ui-listview, .ui-li { list-style:none; padding:0; }
 .ui-li { display: block; margin:0; position: relative; overflow: visible; text-align: left; border-width: 0; border-top-width: 1px; }
-.ui-li .ui-btn-text { text-overflow: ellipsis; overflow: hidden; white-space: nowrap;  }
+.ui-li .ui-btn-text a { text-overflow: ellipsis; overflow: hidden; white-space: nowrap;  }
 .ui-li-divider, .ui-li-static { padding: .5em 15px; font-size: 14px; font-weight: bold; counter-reset: listnumbering;  }
 ol.ui-listview .ui-link-inherit:before, .ui-li-dec { font-size: .8em; display: inline-block; padding-right: .3em; font-weight: normal;counter-increment: listnumbering; content: counter(listnumbering) ". "; }
 ol.ui-listview .ui-li-jsnumbering:before { content: "" !important; } /* to avoid chance of duplication */
 .ui-listview-inset .ui-li { border-right-width: 1px; border-left-width: 1px; }
 .ui-li:last-child { border-bottom-width: 1px; }
-.ui-li .ui-btn-inner { display: block; position: relative; padding: .7em 75px .7em 15px; }
-.ui-li-has-thumb .ui-btn-inner { min-height: 60px; padding-left: 100px; }
-.ui-li-has-icon .ui-btn-inner {  min-height: 20px; padding-left: 40px; }
+.ui-li .ui-btn-inner { display: block; position: relative; padding: 0; }
+.ui-li .ui-btn-inner a { padding: .7em 75px .7em 15px; display: block; }
+.ui-li-has-thumb .ui-btn-inner a { min-height: 60px; padding-left: 100px; }
+.ui-li-has-icon .ui-btn-inner a {  min-height: 20px; padding-left: 40px; }
 .ui-li-heading { font-size: 16px; font-weight: bold; display: block; margin: .6em 0; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;  }
 .ui-li-desc {  font-size: 12px; font-weight: normal; display: block; margin: -.5em 0 .6em; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; }
 .ui-li-thumb, .ui-li-icon { position: absolute; left: 1px; top: 0; max-height: 80px; max-width: 80px; }
@@ -26,7 +27,7 @@ ol.ui-listview .ui-li-jsnumbering:before { content: "" !important; } /* to avoid
 .ui-li-aside { float: right; width: 50%; text-align: right; margin: .3em 0; }
 .min-width-480px .ui-li-aside { width: 45%; }
 .ui-li-divider { cursor: default; }
-.ui-li-has-alt .ui-btn-inner { padding-right: 95px; }
+.ui-li-has-alt .ui-btn-inner a { padding-right: 95px; }
 .ui-li-count { position: absolute; font-size: 11px; font-weight: bold; padding: .2em .5em; top: 50%; margin-top: -.9em; right: 38px; }
 .ui-li-divider .ui-li-count { right: 10px; }
 .ui-li-has-alt .ui-li-count { right: 55px; }

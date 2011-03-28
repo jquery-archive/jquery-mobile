@@ -7,10 +7,12 @@
 (function($, undefined ) {
 
 $.mobile.listview.prototype.options.filter = false;
+$.mobile.listview.prototype.options.filterPlaceholder = "Filter items...";
 
-$( "[data-role='listview']" ).live( "listviewcreate", function() {
+$( ":jqmData(role='listview')" ).live( "listviewcreate", function() {
 	var list = $( this ),
 		listview = list.data( "listview" );
+
 	if ( !listview.options.filter ) {
 		return;
 	}
@@ -18,9 +20,9 @@ $( "[data-role='listview']" ).live( "listviewcreate", function() {
 	var wrapper = $( "<form>", { "class": "ui-listview-filter ui-bar-c", "role": "search" } ),
 
 		search = $( "<input>", {
-				placeholder: "Filter results...",
-				"data-type": "search"
+				placeholder: listview.options.filterPlaceholder
 			})
+			.attr( "data-" + $.mobile.ns + "type", "search" )
 			.bind( "keyup change", function() {
 				var val = this.value.toLowerCase(),
 						listItems = list.children();
@@ -33,7 +35,7 @@ $( "[data-role='listview']" ).live( "listviewcreate", function() {
 
 					for (var i = listItems.length; i >= 0; i--) {
 						item = $(listItems[i]);
-						if (item.is("li[data-role=list-divider]")) {
+						if (item.is("li:jqmData(role=list-divider)")) {
 							if (!childItems) {
 								item.hide();
 							}
@@ -51,10 +53,10 @@ $( "[data-role='listview']" ).live( "listviewcreate", function() {
 			.appendTo( wrapper )
 			.textinput();
 
-	if ($( this ).data( "inset" ) ) {
+	if ($( this ).jqmData( "inset" ) ) {
 		wrapper.addClass( "ui-listview-filter-inset" );
 	}
-	
+
 	wrapper.insertBefore( list );
 });
 

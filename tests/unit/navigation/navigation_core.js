@@ -47,7 +47,7 @@
 			fired = true;
 		});
 
-		$( "<a>test</a>" ).appendTo( $.mobile.pageContainer ).click();
+		$( "<a>test</a>" ).appendTo( $.mobile.firstPage ).click();
 
 		setTimeout(function(){
 			start();
@@ -242,10 +242,12 @@
 			function(){ $("#dup-history-second a:first").click(); },
 			function(){ $("#dup-history-first a").click(); },
 			function(){ $("#dup-history-second a:last").click(); },
-			function(){ $("#dup-history-dialog .ui-icon-delete").click(); },
+			function(){ $("#dup-history-dialog :jqmData(rel=back)").click(); },
 			function(){
 
-				// third page in the stack to account for first page being hash manipulation
+				// fourth page (third index) in the stack to account for first page being hash manipulation,
+				// the third page is dup-history-second which has two entries in history
+				// the test is to make sure the index isn't 1 in this case, or the first entry for dup-history-second
 				same($.mobile.urlHistory.activeIndex, 3, "should be the third page in the stack");
 				start();
 			}], 1000);
@@ -290,6 +292,28 @@
 			// make sure we're on the second page and not the dialog
 			function(){
 				same(location.hash, "#skip-dialog-second", "should be the second page after the dialog");
+				start();
+			}], 1000);
+	});
+
+	asyncTest( "going back from a dialog triggered from a dialog should result in the first dialog ", function(){
+		$.mobile.urlHistory.activeIndex = 0;
+		$.mobile.urlHistory.stack = [];
+		$.testHelper.openPage("#nested-dialog-page");
+
+		$.testHelper.sequence([
+			// transition to the dialog
+			function(){ $("#nested-dialog-page a").click(); },
+
+			// transition to the second dialog
+			function(){ $("#nested-dialog-first a").click(); },
+
+			// transition to back to the first dialog
+			function(){ window.history.back(); },
+
+			// make sure we're on first dialog
+			function(){
+				same($(".ui-page-active")[0], $("#nested-dialog-first")[0], "should be the first dialog");
 				start();
 			}], 1000);
 	});

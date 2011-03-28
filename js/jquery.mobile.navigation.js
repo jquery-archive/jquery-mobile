@@ -105,13 +105,13 @@
 			},
 
 			// addNew is used whenever a new page is added
-			addNew: function( url, transition ){
+			addNew: function( url, transition, storedTo ){
 				//if there's forward history, wipe it
 				if( urlHistory.getNext() ){
 					urlHistory.clearForward();
 				}
 
-				urlHistory.stack.push( {url : url, transition: transition } );
+				urlHistory.stack.push( {url : url, transition: transition, page: storedTo } );
 
 				urlHistory.activeIndex = urlHistory.stack.length - 1;
 			},
@@ -207,7 +207,7 @@
 
 			//set the generated BASE element's href attribute to a new page's base path
 			set: function( href ){
-				base.element.attr('href', docBase + path.get( href ).replace(/^\//, ""));
+				base.element.attr('href', docBase + path.get( href ));
 			},
 
 			//set the generated BASE element's href attribute to a new page's base path
@@ -380,12 +380,12 @@
 
 			//support deep-links to generated sub-pages
 			if( url.indexOf( "&" + $.mobile.subPageUrlKey ) > -1 ){
-				to = $( "[data-url='" + url + "']" );
+				to = $( ":jqmData(url='" + url + "')" );
 			}
 
 			if( from ){
 				//set as data for returning to that spot
-				from.data( "lastScroll", currScroll);
+				from.jqmData( "lastScroll", currScroll);
 				//trigger before show/hide events
 				from.data( "page" )._trigger( "beforehide", null, { nextPage: to } );
 			}
@@ -402,13 +402,13 @@
 
 				//add page to history stack if it's not back or forward
 				if( !back && !forward ){
-					urlHistory.addNew( url, transition );
+					urlHistory.addNew( url, transition, to );
 				}
 
 				removeActiveLinkClass();
 
 				//jump to top or prev scroll, sometimes on iOS the page has not rendered yet.  I could only get by this with a setTimeout, but would like to avoid that.
-				$.mobile.silentScroll( to.data( "lastScroll" ) );
+				$.mobile.silentScroll( to.jqmData( "lastScroll" ) );
 
 				reFocus( to );
 
@@ -486,10 +486,10 @@
 		function enhancePage(){
 
 			//set next page role, if defined
-			if ( nextPageRole || to.data('role') === 'dialog' ) {
+			if ( nextPageRole || to.jqmData('role') === 'dialog' ) {
 				url = urlHistory.getActive().url + dialogHashKey;
 				if(nextPageRole){
-					to.attr( "data-role", nextPageRole );
+					to.attr( "data-" + $.mobile.ns + "role", nextPageRole );
 					nextPageRole = null;
 				}
 			}
@@ -500,11 +500,11 @@
 
 		//if url is a string
 		if( url ){
-			to = $( "[data-url='" + url + "']" );
+			to = $( ":jqmData(url='" + url + "')" );
 			fileUrl = path.getFilePath(url);
 		}
 		else{ //find base url of element, if avail
-			var toID = to.attr('data-url'),
+			var toID = to.attr( "data-" + $.mobile.ns + "url" ),
 				toIDfileurl = path.getFilePath(toID);
 
 			if(toID !== toIDfileurl){
@@ -535,15 +535,14 @@
 				url: fileUrl,
 				type: type,
 				data: data,
-				dataType: "html",
 				success: function( html ) {
 					//pre-parse html to check for a data-url,
 					//use it as the new fileUrl, base path, etc
 					var all = $("<div></div>"),
 							redirectLoc,
 							// TODO handle dialogs again
-							pageElemRegex = /.*(<[^>]*\bdata-role=["']?page["']?[^>]*>).*/,
-							dataUrlRegex = /\bdata-url=["']?([^"'>]*)["']?/;
+							pageElemRegex = new RegExp(".*(<[^>]+\\bdata-" + $.mobile.ns + "role=[\"']?page[\"']?[^>]*>).*"),
+							dataUrlRegex = new RegExp("\\bdata-" + $.mobile.ns + "url=[\"']?([^\"'>]*)[\"']?");
 
 					// data-url must be provided for the base tag so resource requests can be directed to the
 					// correct url. loading into a temprorary element makes these requests immediately
@@ -565,7 +564,7 @@
 
 					//workaround to allow scripts to execute when included in page divs
 					all.get(0).innerHTML = html;
-					to = all.find('[data-role="page"], [data-role="dialog"]').first();
+					to = all.find( ":jqmData(role='page'), :jqmData(role='dialog')" ).first();
 
 					//rewrite src and href attrs to use a base url
 					if( !$.support.dynamicBaseTag ){
@@ -585,26 +584,36 @@
 
 					//append to page and enhance
 					to
-						.attr( "data-url", fileUrl )
+						.attr( "data-" + $.mobile.ns + "url", fileUrl )
 						.appendTo( $.mobile.pageContainer );
 
 					enhancePage();
 					setTimeout(function() { transitionPages(); }, 0);
 				},
 				error: function() {
+					
+					//remove loading message
 					$.mobile.pageLoading( true );
+					
+					//clear out the active button state
 					removeActiveLinkClass(true);
-					if(base){
-						base.set(path.get());
+					
+					//set base back to current path
+					if( base ){
+						base.set( path.get() );
 					}
-					$("<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h1>Error Loading Page</h1></div>")
+					
+					//release transition lock so navigation is free again
+					releasePageTransitionLock();
+					
+					//show error message
+					$("<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h1>"+ $.mobile.pageLoadErrorMessage +"</h1></div>")
 						.css({ "display": "block", "opacity": 0.96, "top": $(window).scrollTop() + 100 })
 						.appendTo( $.mobile.pageContainer )
 						.delay( 800 )
 						.fadeOut( 400, function(){
 							$(this).remove();
 						});
-					releasePageTransitionLock();
 				}
 			});
 		}
@@ -619,7 +628,7 @@
 		if( !$.mobile.ajaxEnabled ||
 			//TODO: deprecated - remove at 1.0
 			!$.mobile.ajaxFormsEnabled ||
-			$(this).is( "[data-ajax='false']" ) ){ return; }
+			$(this).is( ":jqmData(ajax='false')" ) ){ return; }
 
 		var type = $(this).attr("method"),
 			url = path.clean( $(this).attr( "action" ) ),
@@ -640,8 +649,8 @@
 				type: type.length && type.toLowerCase() || "get",
 				data: $(this).serialize()
 			},
-			$(this).data("transition"),
-			$(this).data("direction"),
+			$(this).jqmData("transition"),
+			$(this).jqmData("direction"),
 			true
 		);
 		event.preventDefault();
@@ -655,7 +664,7 @@
 
 			//get href, if defined, otherwise fall to null #
 			href = $this.attr( "href" ) || "#",
-			
+
 			//cache a check for whether the link had a protocol
 			//if this is true and the link was same domain, we won't want
 			//to prefix the url with a base (esp helpful in IE, where every
@@ -688,14 +697,14 @@
 			hasTarget = $this.is( "[target]" ),
 
 			//if data-ajax attr is set to false, use the default behavior of a link
-			hasAjaxDisabled = $this.is( "[data-ajax='false']" );
+			hasAjaxDisabled = $this.is( ":jqmData(ajax='false')" );
 
 		//if there's a data-rel=back attr, go back in history
-		if( $this.is( "[data-rel='back']" ) ){
+		if( $this.is( ":jqmData(rel='back')" ) ){
 			window.history.back();
 			return false;
 		}
-		
+
 		//prevent # urls from bubbling
 		//path.get() is replaced to combat abs url prefixing in IE
 		if( url.replace(path.get(), "") == "#"  ){
@@ -712,27 +721,19 @@
 			//remove active link class if external (then it won't be there if you come back)
 			window.setTimeout(function() {removeActiveLinkClass(true);}, 200);
 
-			//deliberately redirect, in case click was triggered
-			if( hasTarget ){
-				window.open( url );
-			}
-			else if( hasAjaxDisabled ){
-			  return;
-			}
-			else{
-				location.href = url;
-			}
+			//use default click handling
+			return;
 		}
 		else {
 			//use ajax
-			var transition = $this.data( "transition" ),
-				direction = $this.data("direction"),
+			var transition = $this.jqmData( "transition" ),
+				direction = $this.jqmData("direction"),
 				reverse = (direction && direction === "reverse") ||
 				// deprecated - remove by 1.0
-				$this.data( "back" );
+				$this.jqmData( "back" );
 
 			//this may need to be more specific as we use data-rel more
-			nextPageRole = $this.attr( "data-rel" );
+			nextPageRole = $this.attr( "data-" + $.mobile.ns + "rel" );
 
 			//if it's a relative href, prefix href with base url
 			if( path.isRelative( url ) && !hadProtocol ){
@@ -763,20 +764,29 @@
 			return;
 		}
 
-		// special case for dialogs requires heading back or forward until we find a non dialog page
+		// special case for dialogs
 		if( urlHistory.stack.length > 1 &&
-				to.indexOf( dialogHashKey ) > -1 &&
-				!$.mobile.activePage.is( ".ui-dialog" ) ){
+				to.indexOf( dialogHashKey ) > -1 ){
 
-			//determine if we're heading forward or backward and continue accordingly past
-			//the current dialog
-			urlHistory.directHashChange({
-				currentUrl: to,
-				isBack: function(){ window.history.back(); },
-				isForward: function(){ window.history.forward(); }
-			});
+			// If current active page is not a dialog skip the dialog and continue
+			// in the same direction
+			if(!$.mobile.activePage.is( ".ui-dialog" )) {
+				//determine if we're heading forward or backward and continue accordingly past
+				//the current dialog
+				urlHistory.directHashChange({
+					currentUrl: to,
+					isBack: function(){ window.history.back(); },
+					isForward: function(){ window.history.forward(); }
+				});
 
-			return;
+				// prevent changepage
+				return;
+			} else {
+				var setTo = function(){ to = $.mobile.urlHistory.getActive().page; };
+				// if the current active page is a dialog and we're navigating
+				// to a dialog use the dialog objected saved in the stack
+				urlHistory.directHashChange({	currentUrl: to, isBack: setTo, isForward: setTo	});
+			}
 		}
 
 		//if to is defined, load it

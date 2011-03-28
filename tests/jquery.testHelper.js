@@ -34,6 +34,16 @@
 			$("body").append(lib);
 		},
 
+		rerunQunit: function(){
+			var self = this;
+			QUnit.init();
+			$("script:not([src*='.\/'])").each(function(i, elem){
+				var src = elem.src.split("/");
+				self.reloadLib(src[src.length - 1]);
+			});
+			QUnit.start();
+		},
+
 		alterExtend: function(extraExtension){
 			var extendFn = $.extend;
 
