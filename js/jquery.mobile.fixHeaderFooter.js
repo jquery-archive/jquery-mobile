@@ -104,21 +104,15 @@ $.fixedToolbars = (function(){
 	//before page is shown, check for duplicate footer
 	$('.ui-page').live('pagebeforeshow', function(event, ui){
 		var page = $(event.target),
-			footer = page.find( ":jqmData(role='footer'):not(.ui-sticky-footer)" ),
-			id = footer.jqmData('id');
-		stickyFooter = null;
-		if (id)
-		{
-			stickyFooter = $( ".ui-footer:jqmData(id='" + id + "').ui-sticky-footer" );
-			if (stickyFooter.length == 0) {
-				// No sticky footer exists for this data-id. We'll use this
-				// footer as the sticky footer for the group and then create
-				// a placeholder footer for the page.
-				stickyFooter = footer;
-				footer = stickyFooter.clone(); // footer placeholder
-				stickyFooter.addClass('ui-sticky-footer').before(footer);
-			}
-			footer.addClass('ui-footer-duplicate');
+			footer = page.find( ":jqmData(role='footer')" ),
+			id = footer.data('id'),
+			prevPage = ui.prevPage;
+		
+		prevFooter = prevPage && prevPage.find( ":jqmData(role='footer')" );
+		var prevFooterMatches = prevFooter.jqmData( "id" ) === id;
+		
+		if( prevFooterMatches ){
+			stickyFooter = footer;
 			stickyFooter.appendTo($.mobile.pageContainer).css('top',0);
 			setTop(stickyFooter);
 		}
@@ -126,8 +120,14 @@ $.fixedToolbars = (function(){
 
 	//after page is shown, append footer to new page
 	$('.ui-page').live('pageshow', function(event, ui){
-		if( stickyFooter && stickyFooter.length ){
-			stickyFooter.appendTo(event.target).css('top',0);
+		if( stickyFooter && stickyFooter.length ){			
+			stickyFooter
+				.appendTo(event.target)
+				.css('top',0)
+				.removeClass("fade");
+				
+			stickyFooter = null;	
+			
 		}
 		$.fixedToolbars.show(true, this);
 	});
@@ -202,7 +202,7 @@ $.fixedToolbars = (function(){
 					
 				if( !alreadyVisible && !immediately ){
 					el.animationComplete(function(){
-						el.removeClass('in');
+						el.removeClass('in').addClass("fade");
 					}).addClass('in');
 				}
 				setTop(el);
