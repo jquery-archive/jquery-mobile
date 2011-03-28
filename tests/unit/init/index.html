@@ -5,13 +5,14 @@
 	<title>jQuery Mobile Init Test Suite</title>
 	<!-- meta viewport left out on purpose for test append -->
 	<script type="text/javascript" src="../../../js/jquery.js"></script>
+	<script src="../jquery.setNameSpace.js"></script>
 	<script type="text/javascript" src="../../../js/"></script>
 	<script type="text/javascript" src="../../../external/qunit.js"></script>
 	<script type="text/javascript" src="../../jquery.testHelper.js"></script>
 	<script type="text/javascript" src="init_core.js"></script>
 	<!-- added explicitly for library reloading (see testHelper )  -->
-	<script type="text/javascript" src="../../../js/jquery.mobile.init.js"></script>
 	<script type="text/javascript" src="../../../js/jquery.mobile.core.js"></script>
+	<script type="text/javascript" src="../../../js/jquery.mobile.init.js"></script>
 	<link rel="stylesheet"  href="../../../themes/default" />
 	<link rel="stylesheet" href="../../../external/qunit.css" type="text/css"/>
 </head>
@@ -23,10 +24,10 @@
 <ol id="qunit-tests">
 </ol>
 
-<div data-role="page" id="foo">
+<div data-nstest-role="page" id="foo">
 </div>
 
-<div data-role="page" id="bar" data-url="bak">
+<div data-nstest-role="page" id="bar" data-nstest-url="bak">
 </div>
 
 </body>

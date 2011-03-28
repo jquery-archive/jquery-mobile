@@ -47,7 +47,7 @@
 			fired = true;
 		});
 
-		$( "<a>test</a>" ).appendTo( $.mobile.pageContainer ).click();
+		$( "<a>test</a>" ).appendTo( $.mobile.firstPage ).click();
 
 		setTimeout(function(){
 			start();
@@ -242,10 +242,12 @@
 			function(){ $("#dup-history-second a:first").click(); },
 			function(){ $("#dup-history-first a").click(); },
 			function(){ $("#dup-history-second a:last").click(); },
-			function(){ $("#dup-history-dialog .ui-icon-delete").click(); },
+			function(){ $("#dup-history-dialog :jqmData(rel=back)").click(); },
 			function(){
 
-				// third page in the stack to account for first page being hash manipulation
+				// fourth page (third index) in the stack to account for first page being hash manipulation,
+				// the third page is dup-history-second which has two entries in history
+				// the test is to make sure the index isn't 1 in this case, or the first entry for dup-history-second
 				same($.mobile.urlHistory.activeIndex, 3, "should be the third page in the stack");
 				start();
 			}], 1000);

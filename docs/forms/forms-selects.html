@@ -25,12 +25,13 @@
 
 			<h2>Select menus</h2>
 
-			<p>The select menus are driven off native <code>select</code> elements, but the native selects are hidden from view and replaced with more style-friendly markup. The replacement buttons and menus are ARIA-enabled and are keyboard accessible on the desktop as well. </p>
-			<p>When clicked, if the menu has room it will appear as an overlay listbox, but if there are too many options to fit in the window without scrolling, the page content is wrapped in a div and hidden, and the menu is appended as a whole new page. This lets us take advantage of native scrolling while the menu is in use. </p>
+			<p>The select menus are driven off native <code>select</code> elements, but the native selects are hidden from view and replaced with a custom-styled select button that matches the look and feel of the jQuery Mobile framework. The replacement selects are ARIA-enabled and are keyboard accessible on the desktop as well.</p>
+			
+			<p>When the select button is clicked, the native select menu picker for the OS will open. When a value is selected in the menu, the custom select button is updated to match the new selection. </p>
 
-			<p>To add a select widget to your page, start with a standard <code>select</code> element populated with a set of <code>option</code> elements. Set the <code>for</code> attribute of the <code>label</code> to match the ID of the <code>select</code> so they are semantically associated. Wrap them in a <code>div</code> with the <code>data-role="fieldcontain"</code> attribute to help visually group it in a longer form. </p>
+			<p>To add a select widget to your page, start with a standard <code>select</code> element populated with a set of <code>option</code> elements. Set the <code>for</code> attribute of the <code>label</code> to match the ID of the <code>select</code> so they are semantically associated. Wrap them in a <code>div</code> with the <code> data-role="fieldcontain"</code> attribute to help visually group it in a longer form. </p>
 
-			<p>The framework will find all <code>select</code> elements and automatically enhance them into the custom select menus.</p>
+			<p>The framework will find all <code>select</code> elements and automatically enhance them into the custom select menus. Here is a typical select menu:</p>
 
 <pre><code>
 &lt;div data-role=&quot;fieldcontain&quot;&gt;
@@ -44,96 +45,140 @@
 &lt;/div&gt;
 </code></pre>
 
+<p>This produces this select:</p>
+
+
+<div data-role="fieldcontain">
+	<label for="select-choice-1" class="select">Choose shipping method:</label>
+	<select name="select-choice-1" id="select-choice-1">
+		<option value="standard">Standard: 7 day</option>
+		<option value="rush">Rush: 3 days</option>
+		<option value="express">Express: next day</option>
+		<option value="overnight">Overnight</option>
+	</select>
+</div>
+
+<p>Here is an example of a select with a long list of options:</p>
+
+<div data-role="fieldcontain">
+	<label for="select-choice-3" class="select">Your state:</label>
+	<select name="select-choice-3" id="select-choice-3">
+		<option value="AL">Alabama</option>
+		<option value="AK">Alaska</option>
+		<option value="AZ">Arizona</option>
+		<option value="AR">Arkansas</option>
+		<option value="CA">California</option>
+		<option value="CO">Colorado</option>
+		<option value="CT">Connecticut</option>
+		<option value="DE">Delaware</option>
+		<option value="FL">Florida</option>
+		<option value="GA">Georgia</option>
+		<option value="HI">Hawaii</option>
+		<option value="ID">Idaho</option>
+		<option value="IL">Illinois</option>
+		<option value="IN">Indiana</option>
+		<option value="IA">Iowa</option>
+		<option value="KS">Kansas</option>
+		<option value="KY">Kentucky</option>
+		<option value="LA">Louisiana</option>
+		<option value="ME">Maine</option>
+		<option value="MD">Maryland</option>
+		<option value="MA">Massachusetts</option>
+		<option value="MI">Michigan</option>
+		<option value="MN">Minnesota</option>
+		<option value="MS">Mississippi</option>
+		<option value="MO">Missouri</option>
+		<option value="MT">Montana</option>
+		<option value="NE">Nebraska</option>
+		<option value="NV">Nevada</option>
+		<option value="NH">New Hampshire</option>
+		<option value="NJ">New Jersey</option>
+		<option value="NM">New Mexico</option>
+		<option value="NY">New York</option>
+		<option value="NC">North Carolina</option>
+		<option value="ND">North Dakota</option>
+		<option value="OH">Ohio</option>
+		<option value="OK">Oklahoma</option>
+		<option value="OR">Oregon</option>
+		<option value="PA">Pennsylvania</option>
+		<option value="RI">Rhode Island</option>
+		<option value="SC">South Carolina</option>
+		<option value="SD">South Dakota</option>
+		<option value="TN">Tennessee</option>
+		<option value="TX">Texas</option>
+		<option value="UT">Utah</option>
+		<option value="VT">Vermont</option>
+		<option value="VA">Virginia</option>
+		<option value="WA">Washington</option>
+		<option value="WV">West Virginia</option>
+		<option value="WI">Wisconsin</option>
+		<option value="WY">Wyoming</option>
+	</select>
+</div>
+
+<p>This example organizes the options with optgroup elements and has a disabled option.</p>
+
+<div data-role="fieldcontain">
+	<label for="select-choice-nc" class="select">Preferred delivery:</label>
+	<select name="select-choice-8" id="select-choice-nc">
+		<optgroup label="FedEx">
+			<option value="firstOvernight">First Overnight</option>
+			<option value="expressSaver">Express Saver</option>
+			<option value="ground">Ground</option>
+		</optgroup>
+		<optgroup label="UPS">
+			<option value="firstOvernight">First Overnight</option>
+			<option value="expressSaver">Express Saver</option>
+			<option value="ground">Ground</option>
+		</optgroup>
+		<optgroup label="US Mail">
+			<option value="standard">Standard: 7 day</option>
+			<option value="rush">Rush: 3 days</option>
+			<option value="express" disabled="disabled">Express: next day (disabled)</option>
+			<option value="overnight">Overnight</option>
+		</optgroup>
+	</select>
+</div>
+
+<p>Note that the native menus don't support multiple selection via the <code>multiple="multiple"</code> attribute. If this feature is needed, we recommend using custom menus.
+
+<h2>Option to use custom menus</h2>
+<p>You can optionally use custom-styled select menus instead of the native versions. This adds the ability to theme the menu to better match the look and feel of your site and provides visual consistency across platforms. In addition, it supports multiple selection, restores missing functionality on certain platforms such as <code>optgroup</code> support on Android,  and adds an elegant way to handle placeholder values (explained below). Lastly, the custom menus will look better on desktop browsers because native menus on the desktop tend to be fairly small compared their mobile counterparts and this can look a bit odd if desktop if a priority for your project.</p>
+
+	<p>Keep in mind that there is overhead involved in parsing the native select to build a custom menu. If there are a lot of selects on a page, or a select has a long list of options, this can impact the performance of the page so we recommend using custom menus sparingly. </p>
+	
+	<p>To use custom menus on a specific <code>select</code>, just add the <code>data-native-menu="false"</code> attribute. Alternately, this can also programmatically set the select menu's <code>nativeMenu</code> configuration option to <code>false</code> in a callback bound to the <code>mobileinit</code> event to achieve the same effect. This will globally make all selects use the custom menu by default. The following must be included in the page after jQuery is loaded but before jQuery Mobile is loaded.</p>
+	
+
+				<code>
+					<pre>
+	$(document).bind('mobileinit',function(){
+		$.mobile.selectmenu.prototype.options.nativeMenu = false;
+	});
+					</pre>
+				</code>
+
 			<p> If there is a small number of options that will fit on the device's screen, it will appear as a small overlay with a pop transition.</p>
 
-					<div data-role="fieldcontain">
-						<label for="select-choice-1" class="select">Choose shipping method:</label>
-						<select name="select-choice-1" id="select-choice-1">
-							<option value="standard">Standard: 7 day</option>
-							<option value="rush">Rush: 3 days</option>
-							<option value="express">Express: next day</option>
-							<option value="overnight">Overnight</option>
-						</select>
-					</div>
+			<div data-role="fieldcontain">
+				<label for="select-choice-custom" class="select">Choose shipping method:</label>
+				<select name="select-choice-1" id="select-choice-custom" data-native-menu="false">
+					<option value="standard">Standard: 7 day</option>
+					<option value="rush">Rush: 3 days</option>
+					<option value="express">Express: next day</option>
+					<option value="overnight">Overnight</option>
+				</select>
+			</div>
 
-
-					<p>If there is a select menu with too many options to show on the device's screen, the framework will automatically create a new &quot;page&quot; populated with a standard list view that contains all the options. This allows us to use the native scrolling included on the device for moving through a long list. The text inside the <code>label</code> is used as the title for this page.</p>
-
-					<div data-role="fieldcontain">
-						<label for="select-choice-3" class="select">Your state:</label>
-						<select name="select-choice-3" id="select-choice-3">
-							<option value="AL">Alabama</option>
-							<option value="AK">Alaska</option>
-							<option value="AZ">Arizona</option>
-							<option value="AR">Arkansas</option>
-							<option value="CA">California</option>
-							<option value="CO">Colorado</option>
-							<option value="CT">Connecticut</option>
-							<option value="DE">Delaware</option>
-							<option value="FL">Florida</option>
-							<option value="GA">Georgia</option>
-							<option value="HI">Hawaii</option>
-							<option value="ID">Idaho</option>
-							<option value="IL">Illinois</option>
-							<option value="IN">Indiana</option>
-							<option value="IA">Iowa</option>
-							<option value="KS">Kansas</option>
-							<option value="KY">Kentucky</option>
-							<option value="LA">Louisiana</option>
-							<option value="ME">Maine</option>
-							<option value="MD">Maryland</option>
-							<option value="MA">Massachusetts</option>
-							<option value="MI">Michigan</option>
-							<option value="MN">Minnesota</option>
-							<option value="MS">Mississippi</option>
-							<option value="MO">Missouri</option>
-							<option value="MT">Montana</option>
-							<option value="NE">Nebraska</option>
-							<option value="NV">Nevada</option>
-							<option value="NH">New Hampshire</option>
-							<option value="NJ">New Jersey</option>
-							<option value="NM">New Mexico</option>
-							<option value="NY">New York</option>
-							<option value="NC">North Carolina</option>
-							<option value="ND">North Dakota</option>
-							<option value="OH">Ohio</option>
-							<option value="OK">Oklahoma</option>
-							<option value="OR">Oregon</option>
-							<option value="PA">Pennsylvania</option>
-							<option value="RI">Rhode Island</option>
-							<option value="SC">South Carolina</option>
-							<option value="SD">South Dakota</option>
-							<option value="TN">Tennessee</option>
-							<option value="TX">Texas</option>
-							<option value="UT">Utah</option>
-							<option value="VT">Vermont</option>
-							<option value="VA">Virginia</option>
-							<option value="WA">Washington</option>
-							<option value="WV">West Virginia</option>
-							<option value="WI">Wisconsin</option>
-							<option value="WY">Wyoming</option>
-						</select>
-					</div>
+			<p>If there is a select menu with too many options to show on the device's screen, the framework will automatically create a new &quot;page&quot; populated with a standard list view that contains all the options. This allows us to use the native scrolling included on the device for moving through a long list. The text inside the <code>label</code> is used as the title for this page.</p>
 
 
 
-					<h2>Option to use native menus</h2>
-					<p>The custom select menus add the ability to theme the select and provide visual consistency across platforms In addition, it fixes over some missing functionality on certain platforms: <code>optgroup</code> support on Android, multi-select capability on WebOS, and adds an elegant way to handle placeholder values (explained below).</p>
-					<p>However, there is overhead involved in parsing the native select to build a custom menu and if the number of selects or options within are fairly large, this can impact the performance of the page. By adding the <code>data-native-menu="true"</code> attribute to the <code>select</code>, the framework will use the browser's native select menu when the select button is clicked. Because this option doesn't use any of the custom menu parsing and menu generation logic, it is significantly faster than the custom menu version.</p>
 
-			<p>You can also programmatically set the select menu's configuration option to true in a callback bound to the <code>mobileinit</code> event to achieve the same effect. The following must be included in the page after jQuery is loaded but before jQuery Mobile is loaded.</p>
-
-			<code>
-				<pre>
-$(document).bind('mobileinit',function(){
-	$.mobile.selectmenu.prototype.options.nativeMenu = true;
-});
-				</pre>
-			</code>
 
 					<div data-role="fieldcontain">
 						<label for="select-choice-3" class="select">Your state:</label>
-						<select name="select-choice-3" id="select-choice-3" data-native-menu="true">
+						<select name="select-choice-3" id="select-choice-3" data-native-menu="false">
 							<option value="AL">Alabama</option>
 							<option value="AK">Alaska</option>
 							<option value="AZ">Arizona</option>
@@ -207,7 +252,7 @@ $.mobile.selectmenu.prototype.options.hidePlaceholderMenuItems = false;
 
 	<div data-role="fieldcontain">
 		<label for="select-choice-4" class="select">Choose shipping method:</label>
-		<select name="select-choice-4" id="select-choice-4">
+		<select name="select-choice-4" id="select-choice-4" data-native-menu="false">
 			<option></option>
 			<option value="standard">Standard: 7 day</option>
 			<option value="rush">Rush: 3 days</option>
@@ -219,7 +264,7 @@ $.mobile.selectmenu.prototype.options.hidePlaceholderMenuItems = false;
 
 	<div data-role="fieldcontain">
 		<label for="select-choice-5" class="select">Choose shipping method:</label>
-		<select name="select-choice-5" id="select-choice-5">
+		<select name="select-choice-5" id="select-choice-5" data-native-menu="false">
 			<option>Choose one...</option>
 			<option value="standard">Standard: 7 day</option>
 			<option value="rush">Rush: 3 days</option>
@@ -231,7 +276,7 @@ $.mobile.selectmenu.prototype.options.hidePlaceholderMenuItems = false;
 
 	<div data-role="fieldcontain">
 		<label for="select-choice-6" class="select">Choose shipping method:</label>
-		<select name="select-choice-6" id="select-choice-6">
+		<select name="select-choice-6" id="select-choice-6" data-native-menu="false">
 			<option value="choose-one" data-placeholder="true">Choose one...</option>
 			<option value="standard">Standard: 7 day</option>
 			<option value="rush">Rush: 3 days</option>
@@ -245,7 +290,7 @@ $.mobile.selectmenu.prototype.options.hidePlaceholderMenuItems = false;
 
 	<div data-role="fieldcontain">
 		<label for="select-choice-7" class="select">Choose shipping method:</label>
-		<select name="select-choice-7" id="select-choice-7">
+		<select name="select-choice-7" id="select-choice-7" data-native-menu="false">
 			<option value="standard">Standard: 7 day</option>
 			<option value="rush" disabled="disabled">Rush: 3 days</option>
 			<option value="express">Express: next day</option>
@@ -258,7 +303,7 @@ $.mobile.selectmenu.prototype.options.hidePlaceholderMenuItems = false;
 
 	<div data-role="fieldcontain">
 		<label for="select-choice-8" class="select">Choose shipping method:</label>
-		<select name="select-choice-8" id="select-choice-8">
+		<select name="select-choice-8" id="select-choice-8" data-native-menu="false">
 			<optgroup label="USPS">
 				<option value="standard">Standard: 7 day</option>
 				<option value="rush">Rush: 3 days</option>
@@ -289,7 +334,7 @@ $.mobile.selectmenu.prototype.options.hidePlaceholderMenuItems = false;
 
 	<div data-role="fieldcontain">
 		<label for="select-choice-9" class="select">Choose shipping method(s):</label>
-		<select name="select-choice-9" id="select-choice-9" multiple="multiple">
+		<select name="select-choice-9" id="select-choice-9" multiple="multiple" data-native-menu="false">
 			<option>Choose options</option>
 			<option value="standard">Standard: 7 day</option>
 			<option value="rush">Rush: 3 days</option>
@@ -302,7 +347,7 @@ $.mobile.selectmenu.prototype.options.hidePlaceholderMenuItems = false;
 
 	<div data-role="fieldcontain">
 		<label for="select-choice-10" class="select">Choose state(s):</label>
-		<select name="select-choice-10" id="select-choice-10" multiple="multiple">
+		<select name="select-choice-10" id="select-choice-10" multiple="multiple" data-native-menu="false">
 			<option>Choose options</option>
 			<option value="AL">Alabama</option>
 			<option value="AK">Alaska</option>
@@ -365,7 +410,7 @@ $.mobile.selectmenu.prototype.options.hidePlaceholderMenuItems = false;
 
 	<div data-role="fieldcontain">
 		<label for="select-choice-11" class="select">Actions</label>
-		<select name="select-choice-11" id="select-choice-11" data-theme="a" data-icon="gear" data-inline="true">
+		<select name="select-choice-11" id="select-choice-11" data-theme="a" data-icon="gear" data-inline="true" data-native-menu="false">
 			<option value="edit">Edit user</option>
 			<option value="delete">Delete user</option>
 		</select>

@@ -254,7 +254,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 	{
 		var svh = [];
 		this._$clip.parents(".ui-scrollview-clip").each(function(){
-			var d = $(this).data("scrollview");
+			var d = $(this).jqmData("scrollview");
 			if (d) svh.unshift(d);
 		});
 		return svh;
@@ -741,7 +741,7 @@ jQuery.widget( "mobile.scrolllistview", jQuery.mobile.scrollview, {
 		// XXX: Note that we need to update this cache if we ever support lists
 		//      that can dynamically update their content.
 	
-		this._$dividers = this._$view.find("[data-role=list-divider]");
+		this._$dividers = this._$view.find(":jqmData(role='list-divider')");
 		this._lastDivider = null;
 	},
 

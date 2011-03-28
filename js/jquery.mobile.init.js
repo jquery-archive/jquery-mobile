@@ -32,13 +32,11 @@
 
 	//loading div which appears during Ajax requests
 	//will not appear if $.mobile.loadingMessage is false
-	var $loader = $.mobile.loadingMessage ?
-		$( "<div class='ui-loader ui-body-a ui-corner-all'>" +
-		 	 "<span class='ui-icon ui-icon-loading spin'></span>" +
-			 "<h1>" + $.mobile.loadingMessage + "</h1>" +
-			 "</div>" )
-		: undefined;
+	var $loader = $.mobile.loadingMessage ?		$( "<div class='ui-loader ui-body-a ui-corner-all'>" + "<span class='ui-icon ui-icon-loading spin'></span>" + "<h1>" + $.mobile.loadingMessage + "</h1>" + "</div>" )	: undefined;
 
+	if(typeof $loader === "undefined"){
+		alert($.mobile.loadingMessage);
+	}
 
 	$.extend($.mobile, {
 		// turn on/off page loading message.
@@ -48,6 +46,11 @@
 			} else {
 				if( $.mobile.loadingMessage ){
 					var activeBtn = $( "." + $.mobile.activeBtnClass ).first();
+
+
+					if(typeof $loader === "undefined"){
+						 alert($.mobile.loadingMessage);
+					}
 
 					$loader
 						.appendTo( $.mobile.pageContainer )
@@ -65,15 +68,15 @@
 		// find and enhance the pages in the dom and transition to the first page.
 		initializePage: function(){
 			//find present pages
-			var $pages = $( "[data-role='page']" );
+			var $pages = $( ":jqmData(role='page')" );
 
 			//add dialogs, set data-url attrs
-			$pages.add( "[data-role='dialog']" ).each(function(){
+			$pages.add( ":jqmData(role='dialog')" ).each(function(){
 				var $this = $(this);
 
 				// unless the data url is already set set it to the id
-				if( !$this.data('url') ){
-					$this.attr( "data-url", $this.attr( "id" ) );
+				if( !$this.jqmData('url') ){
+					$this.attr( "data-" + $.mobile.ns + "url", $this.attr( "id" ) );
 				}
 			});
 

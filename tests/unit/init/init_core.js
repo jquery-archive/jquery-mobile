@@ -6,8 +6,15 @@
 			mobileSelect = undefined,
 			metaViewportContentDefault = $.mobile.metaViewportContent,
 	    libName = 'jquery.mobile.init.js',
+			coreLib = 'jquery.mobile.core.js',
+			extendFn = $.extend,
 			setGradeA = function(value) { $.mobile.gradeA = function(){ return value; }; },
-			extendFn = $.extend;
+			reloadCoreNSandInit = function(){
+				$.testHelper.reloadLib(coreLib);
+				$.testHelper.reloadLib("jquery.setNamespace.js");
+				$.testHelper.reloadLib(libName);
+			};
+
 
 	module(libName, {
 		setup: function(){
@@ -35,6 +42,7 @@
 		mobileSelect = $.mobile.selectmenu;
 	});
 
+	// NOTE for the following two tests see index html for the binding
 	test( "mobile.page is available when mobile init is fired", function(){
 		ok(mobilePage !== undefined, "$.mobile.page is defined");
 	});
@@ -44,14 +52,20 @@
 	});
 
 	$.testHelper.excludeFileProtocol(function(){
-		test( "loading the init library triggers mobilinit on the document", function(){
+		asyncTest( "loading the init library triggers mobilinit on the document", function(){
+			var initFired = false;
 			expect( 1 );
 
 			$(window.document).bind('mobileinit', function(event){
-				ok(true);
+				initFired = true;
 			});
 
 			$.testHelper.reloadLib(libName);
+
+			setTimeout(function(){
+				ok(initFired, "init fired");
+				start();
+			}, 1000);
 		});
 
 		test( "enhancments are skipped when the browser is not grade A", function(){
@@ -97,29 +111,32 @@
 		});
 
 		var findFirstPage = function() {
-			return $("[data-role='page']").first();
+			return $(":jqmData(role='page')").first();
 		};
 
 		test( "active page and start page should be set to the fist page in the selected set", function(){
-			var firstPage = findFirstPage();
+			expect( 2 );
 			$.testHelper.reloadLib(libName);
+			var firstPage = findFirstPage();
 
-			same($.mobile.firstPage, firstPage);
-			same($.mobile.activePage, firstPage);
+			same($.mobile.firstPage[0], firstPage[0]);
+			same($.mobile.activePage[0], firstPage[0]);
 		});
 
 		test( "mobile viewport class is defined on the first page's parent", function(){
-			var firstPage = findFirstPage();
+			expect( 1 );
 			$.testHelper.reloadLib(libName);
+			var firstPage = findFirstPage();
 
 			ok(firstPage.parent().hasClass('ui-mobile-viewport'));
 		});
 
 		test( "mobile page container is the first page's parent", function(){
-			var firstPage = findFirstPage();
+			expect( 1 );
 			$.testHelper.reloadLib(libName);
+			var firstPage = findFirstPage();
 
-			same($.mobile.pageContainer, firstPage.parent());
+			same($.mobile.pageContainer[0], firstPage.parent()[0]);
 		});
 
 		test( "page loading is called on document ready", function(){
@@ -143,17 +160,15 @@
 		});
 
 		test( "pages without a data-url attribute have it set to their id", function(){
-			same($("#foo").data('url'), "foo");
+			same($("#foo").jqmData('url'), "foo");
 		});
 
 		test( "pages with a data-url attribute are left with the original value", function(){
-			same($("#bar").data('url'), "bak");
+			same($("#bar").jqmData('url'), "bak");
 		});
 
-		//TODO lots of duplication
 		asyncTest( "pageLoading doesn't add the dialog to the page when loading message is false", function(){
-			$.testHelper.alterExtend({loadingMessage: false});
-			$.testHelper.reloadLib(libName);
+			$.mobile.loadingMessage = false;
 			$.mobile.pageLoading(false);
 
 			setTimeout(function(){
@@ -163,30 +178,27 @@
 		});
 
 		asyncTest( "pageLoading doesn't add the dialog to the page when done is passed as true", function(){
-			$.testHelper.alterExtend({loadingMessage: true});
-			$.testHelper.reloadLib(libName);
+			$.mobile.loadingMessage = true;
 			$.mobile.pageLoading(true);
 
 			setTimeout(function(){
-				ok(!$(".ui-loader").length);
+				same($(".ui-loading").length, 0, "page should not be in the loading state");
 				start();
 			}, 500);
 		});
 
 		asyncTest( "pageLoading adds the dialog to the page when done is true", function(){
-			$.testHelper.alterExtend({loadingMessage: true});
-			$.testHelper.reloadLib(libName);
+			$.mobile.loadingMessage = true;
 			$.mobile.pageLoading(false);
 
 			setTimeout(function(){
-				ok($(".ui-loader").length);
+				same($(".ui-loading").length, 1, "page should be in the loading state");
 				start();
 			}, 500);
 		});
 
 		asyncTest( "page loading should contain default loading message", function(){
-			$.testHelper.reloadLib('jquery.mobile.core.js');
-			$.testHelper.reloadLib(libName);
+			reloadCoreNSandInit();
 			$.mobile.pageLoading(false);
 
 			setTimeout(function(){
@@ -196,10 +208,7 @@
 		});
 
 		asyncTest( "page loading should contain custom loading message", function(){
-			$(document).bind('mobileinit', function(){
-				$.mobile.loadingMessage = "foo";
-			});
-
+			$.mobile.loadingMessage = "foo";
 			$.testHelper.reloadLib(libName);
 			$.mobile.pageLoading(false);
 

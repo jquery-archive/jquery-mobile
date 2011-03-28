@@ -48,6 +48,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 				});
 			});
 		}
+		this.refresh();
 			
 	},
 
@@ -61,6 +62,15 @@ $.widget( "mobile.button", $.mobile.widget, {
 		this.element.attr("disabled", true);
 		this.button.addClass("ui-disabled").attr("aria-disabled", true);
 		return this._setOption("disabled", true);
+	},
+
+	refresh: function(){
+		if( this.element.attr('disabled') ){
+			this.disable();
+		}
+		else{
+			this.enable();
+		}
 	}
 });
 })( jQuery );
