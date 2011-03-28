@@ -51,27 +51,17 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 				if( $(this).parent().is('.ui-disabled') ){ return false; }
 			},
 
-			vmousecancel: function( event ){
-				label.jqmData("moved", true);
-			},
-
-			vmouseup: function( event ){
+			vclick: function( event ){
 				if ( input.is( ":disabled" ) ){
 					event.preventDefault();
 					return;
 				}
 
-				if( label.jqmData("moved") ){
-					label.jqmRemoveData("moved");
-					return false;
-				}
 				self._cacheVals();
 				input.attr( "checked", inputtype === "radio" && true || !input.is( ":checked" ) );
 				self._updateAll();
-				event.preventDefault();
-			},
-
-			vclick: false
+				return false;
+			}
 
 		});
 
