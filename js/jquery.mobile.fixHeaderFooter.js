@@ -113,25 +113,25 @@ $.fixedToolbars = (function(){
 		
 		if( prevFooterMatches ){
 			stickyFooter = footer;
-			stickyFooter.appendTo($.mobile.pageContainer).css('top',0);
-			setTop(stickyFooter);
+			setTop( stickyFooter.removeClass("fade").appendTo( $.mobile.pageContainer ) );
 		}
 	});
 
 	//after page is shown, append footer to new page
 	$('.ui-page').live('pageshow', function(event, ui){
-		if( stickyFooter && stickyFooter.length ){			
-			stickyFooter
-				.appendTo(event.target)
-				.css('top',0)
-				.removeClass("fade");
-				
-			stickyFooter = null;	
-			
-		}
-		$.fixedToolbars.show(true, this);
-	});
+		var $this = $(this);
 		
+		if( stickyFooter && stickyFooter.length ){	
+			
+			setTimeout(function(){
+				setTop( stickyFooter.appendTo( $this ) );
+				stickyFooter = null;
+			},400);	
+		}
+		
+		$.fixedToolbars.show(true, this);	
+	});
+
 	
 	// element.getBoundingClientRect() is broken in iOS 3.2.1 on the iPad. The
 	// coordinates inside of the rect it returns don't have the page scroll position
@@ -202,7 +202,7 @@ $.fixedToolbars = (function(){
 					
 				if( !alreadyVisible && !immediately ){
 					el.animationComplete(function(){
-						el.removeClass('in').addClass("fade");
+						el.removeClass('in');
 					}).addClass('in');
 				}
 				setTop(el);
