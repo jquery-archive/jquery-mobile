@@ -35,9 +35,9 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 			- if the click was on the close button, or the link has a data-rel="back" it'll go back in history naturally
 		*/
 		this.element		
-			.bind( "click submit", function(e){
+			.bind( "vclick submit", function(e){
 				var $targetel;
-				if( e.type == "click" ){
+				if( e.type == "vclick" ){
 					$targetel = $(e.target).closest("a");
 				}
 				else{

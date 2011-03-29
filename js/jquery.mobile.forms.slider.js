@@ -86,7 +86,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			});
 
 		// prevent screen drag when slider activated
-		$(document).bind( "touchmove mousemove", function(event){
+		$(document).bind( "vmousemove", function(event){
 			if ( self.dragging ) {
 				self.refresh( event );
 				return false;
@@ -94,7 +94,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		});
 
 		slider
-			.bind( "touchstart mousedown", function(event){
+			.bind( "vmousedown", function(event){
 				self.dragging = true;
 				if ( cType === "select" ) {
 					self.beforeStart = control[0].selectedIndex;
@@ -105,7 +105,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 		slider
 			.add(document)
-			.bind( "touchend mouseup", function(){
+			.bind( "vmouseup", function(){
 				if ( self.dragging ) {
 					self.dragging = false;
 					if ( cType === "select" ) {
@@ -130,7 +130,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 		// NOTE force focus on handle
 		this.handle
-			.bind( "touchstart mousedown", function(){
+			.bind( "vmousedown", function(){
 				$(this).focus();
 			});
 
@@ -200,7 +200,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			max = (cType === "input") ? parseFloat(control.attr("max")) : control.find("option").length - 1;
 
 		if ( typeof val === "object" ) {
-			var data = val.originalEvent.touches ? val.originalEvent.touches[ 0 ] : val,
+			var data = val,
 				// a slight tolerance helped get to the ends of the slider
 				tol = 8;
 			if ( !this.dragging
@@ -268,6 +268,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		this.slider.addClass("ui-disabled").attr("aria-disabled", true);
 		return this._setOption("disabled", true);
 	}
+
 });
 })( jQuery );
 

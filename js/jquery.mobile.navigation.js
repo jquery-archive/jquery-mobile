@@ -658,7 +658,7 @@
 
 
 	//click routing - direct to HTTP or Ajax, accordingly
-	$( "a" ).live( "click", function(event) {
+	$( "a" ).live( "vclick", function(event) {
 
 		var $this = $(this),
 

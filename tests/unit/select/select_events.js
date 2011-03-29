@@ -3,8 +3,7 @@
  */
 
 (function($){
-	var mouseUpTouchEnd = $.support.touch ? "touchend" : "mouseup",
-			libName = "jquery.mobile.forms.select.js";
+	var libName = "jquery.mobile.forms.select.js";
 
 	$(document).bind('mobileinit', function(){
 		$.mobile.selectmenu.prototype.options.nativeMenu = false;
@@ -18,7 +17,7 @@
 		var menu, select = $("#select-choice-many-container a");
 
 		// bring up the dialog
-		select.trigger(mouseUpTouchEnd);
+		select.trigger("click");
 		menu = $("#select-choice-many-menu");
 		same(menu.parents('.ui-dialog').length, 1);
 
@@ -26,7 +25,7 @@
 		menu.parents('ui-dialog').find("span.ui-icon-delete").click();
 
 		//bring up the dialog again
-		select.trigger(mouseUpTouchEnd);
+		select.trigger("click");
 		same(menu.parents('.ui-dialog').length, 1);
 	});
 
@@ -36,7 +35,7 @@
 			touches: [ 'foo' ]
 		};
 
-		$("#select-choice-few-button").trigger(mouseUpTouchEnd);
+		$("#select-choice-few-button").trigger("click");
 
 		// click the first menu item
 		setTimeout(function(){

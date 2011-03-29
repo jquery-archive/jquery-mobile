@@ -47,55 +47,31 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			.wrapAll( "<div class='ui-" + inputtype +"'></div>" );
 
 		label.bind({
-			mouseover: function() {
+			vmouseover: function() {
 				if( $(this).parent().is('.ui-disabled') ){ return false; }
 			},
 
-			"touchmove": function( event ){
-				var oe = event.originalEvent.touches[0];
-				if( label.jqmData("movestart") ){
-					if( Math.abs( label.jqmData("movestart")[0] - oe.pageX ) > 10 ||
-						Math.abs( label.jqmData("movestart")[1] - oe.pageY ) > 10 ){
-							label.jqmData("moved", true);
-						}
-				}
-				else{
-					label.jqmData("movestart", [ parseFloat( oe.pageX ), parseFloat( oe.pageY ) ]);
-				}
-			},
-
-			"touchend mouseup": function( event ){
+			vclick: function( event ){
 				if ( input.is( ":disabled" ) ){
 					event.preventDefault();
 					return;
 				}
 
-				label.removeData("movestart");
-				if( label.jqmData("etype") && label.jqmData("etype") !== event.type || label.jqmData("moved") ){
-					label.removeData("etype").removeData("moved");
-					if( label.jqmData("moved") ){
-						label.removeData("moved");
-					}
-					return false;
-				}
-				label.jqmData( "etype", event.type );
 				self._cacheVals();
 				input.attr( "checked", inputtype === "radio" && true || !input.is( ":checked" ) );
 				self._updateAll();
-				event.preventDefault();
-			},
-
-			click: false
+				return false;
+			}
 
 		});
 
 		input
 			.bind({
-				mousedown: function(){
+				vmousedown: function(){
 					this._cacheVals();
 				},
 
-				click: function(){
+				vclick: function(){
 					self._updateAll();
 				},
 

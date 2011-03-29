@@ -102,7 +102,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				// if enter or space is pressed, trigger click
 				case 13:
 				case 32:
-					 target.trigger( "click" );
+					 target.trigger( "vclick" );
 
 					 return false;
 				break;	

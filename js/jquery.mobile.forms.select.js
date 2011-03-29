@@ -177,20 +177,20 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 			select
 				.appendTo(button)
-				.bind( "touchstart mousedown", function( e ){
+				.bind( "vmousedown", function( e ){
 					//add active class to button
 					button.addClass( $.mobile.activeBtnClass );
 				})
-				.bind( "focus mouseover", function(){
-					button.trigger( "mouseover" );
+				.bind( "focus vmouseover", function(){
+					button.trigger( "vmouseover" );
 				})
-				.bind( "touchmove", function(){
+				.bind( "vmousemove", function(){
 					//remove active class on scroll/touchmove
 					button.removeClass( $.mobile.activeBtnClass );
 				})
-				.bind( "change blur mouseout", function(){
+				.bind( "change blur vmouseout", function(){
 					button
-						.trigger( "mouseout" )
+						.trigger( "vmouseout" )
 						.removeClass( $.mobile.activeBtnClass );
 				});
 
@@ -209,34 +209,13 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 			//button events
 			button
-				.bind( "touchstart" , function( event ){
-					//set startTouches to cached copy of
-					$( this ).jqmData( "startTouches", $.extend({}, event.originalEvent.touches[ 0 ]) );
-				})
-				.bind( $.support.touch ? "touchend" : "mouseup" , function( event ){
-					//if it's a scroll, don't open
-					if( $( this ).jqmData( "moved" ) ){
-						$( this ).removeData( "moved" );
-					} else {
-						self.open();
-					}
+				.bind( "vclick" , function( event ){
+					self.open();
 					event.preventDefault();
-				})
-				.bind( "touchmove", function( event ){
-					//if touch moved enough, set data moved and don't open menu
-					var thisTouches = event.originalEvent.touches[ 0 ],
-					startTouches = $( this ).jqmData( "startTouches" ),
-					deltaX = Math.abs(thisTouches.pageX - startTouches.pageX),
-					deltaY = Math.abs(thisTouches.pageY - startTouches.pageY);
-
-					if( deltaX > 10 || deltaY > 10 ){
-						$( this ).jqmData( "moved", true );
-					}
 				});
 
-
 			//events for list items
-			list.delegate("li:not(.ui-disabled, .ui-li-divider)", "click", function(event){
+			list.delegate("li:not(.ui-disabled, .ui-li-divider)", "vclick", function(event){
 
 				// index of option tag to be selected
 				var oldIndex = select[0].selectedIndex,
@@ -268,7 +247,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			});
 
 			//events on "screen" overlay
-			screen.click(function( event ){
+			screen.bind("vclick", function( event ){
 				self.close();
 			});
 			
