@@ -211,7 +211,7 @@ function mouseEventCallback(event)
 function handleTouchStart(event)
 {
 	var touches = getNativeEvent(event).touches;
-	if (touches.length === 1){
+	if (touches && touches.length === 1){
 		var target = event.target,
 			flags = getVirtualBindingFlags(target);
 	
