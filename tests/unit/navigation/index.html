@@ -130,5 +130,20 @@
 <div id="skip-dialog-second" data-nstest-role="page">
 	<a href="#" data-nstest-rel="back">Go Back</a>
 </div>
+
+<div id="nested-dialog-page" data-nstest-role="page">
+  <div data-nstest-role="content">
+    <a href="#nested-dialog-first">Dialog</a>
+  </div>
+</div>
+
+<div id="nested-dialog-first" data-nstest-role="dialog">
+  <div data-nstest-role="content">
+    <a href="#nested-dialog-second">Dialog 2</a>
+  </div>
+</div>
+
+<div id="nested-dialog-second" data-nstest-role="dialog">
+</div>
 </body>
 </html>

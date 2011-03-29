@@ -104,34 +104,34 @@ $.fixedToolbars = (function(){
 	//before page is shown, check for duplicate footer
 	$('.ui-page').live('pagebeforeshow', function(event, ui){
 		var page = $(event.target),
-			footer = page.find( ":jqmData(role='footer'):not(.ui-sticky-footer)" ),
-			id = footer.jqmData('id');
-		stickyFooter = null;
-		if (id)
-		{
-			stickyFooter = $( ".ui-footer:jqmData(id='" + id + "').ui-sticky-footer" );
-			if (stickyFooter.length == 0) {
-				// No sticky footer exists for this data-id. We'll use this
-				// footer as the sticky footer for the group and then create
-				// a placeholder footer for the page.
-				stickyFooter = footer;
-				footer = stickyFooter.clone(); // footer placeholder
-				stickyFooter.addClass('ui-sticky-footer').before(footer);
-			}
-			footer.addClass('ui-footer-duplicate');
-			stickyFooter.appendTo($.mobile.pageContainer).css('top',0);
-			setTop(stickyFooter);
+			footer = page.find( ":jqmData(role='footer')" ),
+			id = footer.data('id'),
+			prevPage = ui.prevPage;
+		
+		prevFooter = prevPage && prevPage.find( ":jqmData(role='footer')" );
+		var prevFooterMatches = prevFooter.jqmData( "id" ) === id;
+		
+		if( prevFooterMatches ){
+			stickyFooter = footer;
+			setTop( stickyFooter.removeClass("fade").appendTo( $.mobile.pageContainer ) );
 		}
 	});
 
 	//after page is shown, append footer to new page
 	$('.ui-page').live('pageshow', function(event, ui){
-		if( stickyFooter && stickyFooter.length ){
-			stickyFooter.appendTo(event.target).css('top',0);
-		}
-		$.fixedToolbars.show(true, this);
-	});
+		var $this = $(this);
 		
+		if( stickyFooter && stickyFooter.length ){	
+			
+			setTimeout(function(){
+				setTop( stickyFooter.appendTo( $this ) );
+				stickyFooter = null;
+			},400);	
+		}
+		
+		$.fixedToolbars.show(true, this);	
+	});
+
 	
 	// element.getBoundingClientRect() is broken in iOS 3.2.1 on the iPad. The
 	// coordinates inside of the rect it returns don't have the page scroll position

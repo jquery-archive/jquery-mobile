@@ -77,7 +77,6 @@
 	font-weight: bold;
 	color: 					#fff;
 	text-shadow: 0 -1px 1px #000;
-	text-decoration: none;
 	background-image: -moz-linear-gradient(top, 
 							#555555, 
 							#333333);
@@ -95,7 +94,6 @@
 	font-weight: bold;
 	color: 					#fff;
 	text-shadow: 0 -1px 1px #000;
-	text-decoration: none;
 	background-image: -moz-linear-gradient(top, 
 							#666666, 
 							#444444);
@@ -128,6 +126,7 @@
 .ui-btn-hover-a,
 .ui-btn-down-a {
 	font-family: Helvetica, Arial, sans-serif;
+	text-decoration: none;
 }
 
 
@@ -197,7 +196,6 @@
 	font-weight: bold;
 	color: 					#fff;
 	text-shadow: 0 -1px 1px #145072;
-	text-decoration: none;
 	background-image: -moz-linear-gradient(top, 
 							#4e89c5, 
 							#2567ab);
@@ -218,7 +216,6 @@
 	background-image: -moz-linear-gradient(top, 
 							#72b0d4, 
 							#4b88b6);
-	text-decoration: none;
 	background-image: -webkit-gradient(linear,left top,left bottom,
 			color-stop(0, 	#72b0d4),
 			color-stop(1, 	#4b88b6));
@@ -248,6 +245,7 @@
 .ui-btn-hover-b,
 .ui-btn-down-b {
 	font-family: Helvetica, Arial, sans-serif;
+	text-decoration: none;
 }
 
 
@@ -309,7 +307,6 @@
 	font-weight: bold;
 	color: 					#444;
 	text-shadow: 0 1px 1px #f6f6f6;
-	text-decoration: none;
 	background-image: -moz-linear-gradient(top, 
 							#fefefe, 
 							#eeeeee);
@@ -327,7 +324,6 @@
 	background: 			#dadada;
 	font-weight: bold;
 	color: 					#101010;
-	text-decoration: none;
 	text-shadow: 0 1px 1px 	#fff;
 	background-image: -moz-linear-gradient(top, 
 							#ededed, 
@@ -361,6 +357,7 @@
 .ui-btn-hover-c,
 .ui-btn-down-c {
 	font-family: Helvetica, Arial, sans-serif;
+	text-decoration: none;
 }
 
 
@@ -419,7 +416,6 @@
 	background: 			#fff;
 	font-weight: bold;
 	color: 					#444;
-	text-decoration: none;
 	text-shadow: 0 1px 1px #fff;
 }
 .ui-btn-up-d a.ui-link-inherit {
@@ -432,7 +428,6 @@
 	color: 					#222;
 	cursor: pointer;
 	text-shadow: 0 1px 1px 	#fff;
-	text-decoration: none;
 	background-image: -moz-linear-gradient(top, 
 							#fdfdfd, 
 							#eeeeee);
@@ -476,6 +471,7 @@
 .ui-btn-hover-d,
 .ui-btn-down-d {
 	font-family: Helvetica, Arial, sans-serif;
+	text-decoration: none;
 }
 
 
@@ -542,7 +538,6 @@
 	font-weight: bold;
 	color: 					#333;
 	text-shadow: 0 1px 1px 	#fe3;
-	text-decoration: none;
 	text-shadow: 0 1px 0 	#fff;
 	background-image: -moz-linear-gradient(top, 
 							#fceda7, 
@@ -560,7 +555,6 @@
 	background: 			#fbe26f;
 	font-weight: bold;
 	color: 					#111;
-	text-decoration: none;
 	text-shadow: 0 1px 1px 	#fff;
 	background-image: -moz-linear-gradient(top, 
 							#fcf0b5, 
@@ -595,6 +589,7 @@
 .ui-btn-hover-e,
 .ui-btn-down-e {
 	font-family: Helvetica, Arial, sans-serif;
+	text-decoration: none;
 }
 
 

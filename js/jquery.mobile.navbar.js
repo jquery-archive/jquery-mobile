@@ -33,8 +33,8 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 			});
 		
 		$navbar.delegate("a", "vclick",function(event){
-			$navbtns.removeClass( "ui-btn-active" );
-			$( this ).addClass( "ui-btn-active" );
+			$navbtns.not( ".ui-state-persist" ).removeClass( $.mobile.activeBtnClass );
+			$( this ).addClass( $.mobile.activeBtnClass );
 		});	
 	}
 });
