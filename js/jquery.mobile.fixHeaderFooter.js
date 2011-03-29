@@ -54,13 +54,12 @@ $.fixedToolbars = (function(){
 
 	$(function() {
 		$(document)
-			.bind(touchStartEvent,function(event){
+			.bind( "vmousedown",function(event){
 				if( touchToggleEnabled ) {
-					if( $(event.target).closest(ignoreTargets).length ){ return; }
 					stateBefore = currentstate;
 				}
 			})
-			.bind(touchStopEvent,function(event){
+			.bind( "vclick",function(event){
 				if( touchToggleEnabled ) {
 					if( $(event.target).closest(ignoreTargets).length ){ return; }
 					if( !scrollTriggered ){
@@ -70,7 +69,6 @@ $.fixedToolbars = (function(){
 				}
 			})
 			.bind('scrollstart',function(event){
-				if( $(event.target).closest(ignoreTargets).length ){ return; } //because it could be a touchmove...
 				scrollTriggered = true;
 				if(stateBefore == null){ stateBefore = currentstate; }
 
