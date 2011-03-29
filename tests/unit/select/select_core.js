@@ -18,7 +18,7 @@
 		expect( 1 );
 		var select = $("ul#select-offscreen-menu");
 
-		$('#select-offscreen-container a').trigger($.support.touch ? "touchend" : "mouseup");
+		$('#select-offscreen-container a').trigger("click");
 
 		setTimeout(function(){
 			ok(select.offset().left >= 30);
