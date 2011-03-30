@@ -146,7 +146,7 @@
 			taphold = true;
 		});
 
-		$($.event.special.tap).trigger("touchstart");
+		$($.event.special.tap).trigger("vmousedown");
 
 		setTimeout(function(){
 			ok(taphold);
@@ -162,7 +162,7 @@
 		};
 	};
 
-	asyncTest( "touchmove prevents taphold", function(){
+	asyncTest( "move prevents taphold", function(){
 		expect( 1 );
 		var taphold = false;
 
@@ -176,11 +176,11 @@
 		});
 
 		//NOTE start the touch events
-		$($.event.special.tap).trigger("touchstart");
+		$($.event.special.tap).trigger("vmousedown");
 
 		//NOTE fire touchmove to push back taphold
 		setTimeout(function(){
-			$($.event.special.tap).trigger("touchmove");
+			$($.event.special.tap).trigger("vmousecancel");
 		}, 100);
 
 		//NOTE verify that the taphold hasn't been fired
@@ -203,8 +203,9 @@
 		//NOTE record the tap event
 		$($.event.special.tap).bind("tap", checkTap);
 
-		$($.event.special.tap).trigger("touchstart");
-		$($.event.special.tap).trigger("touchend");
+		$($.event.special.tap).trigger("vmousedown");
+		$($.event.special.tap).trigger("vmouseup");
+		$($.event.special.tap).trigger("vclick");
 
 		setTimeout(function(){
 			start();

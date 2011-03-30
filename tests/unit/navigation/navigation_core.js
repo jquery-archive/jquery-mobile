@@ -19,8 +19,8 @@
 		stop();
 		$('#non-ajax-form').live('submit', function(event){
 			ok(true, 'submit callbacks are fired');
-			start();
 			event.preventDefault();
+			start();
 		}).submit();
 
 		ok(!called, "change page should not be called");
@@ -50,9 +50,9 @@
 		$( "<a>test</a>" ).appendTo( $.mobile.firstPage ).click();
 
 		setTimeout(function(){
-			start();
 			same(fired, false, "hash shouldn't change after click");
 			$(window).unbind("hashchange.temp");
+			start();
 		}, 500);
 	});
 
@@ -61,6 +61,14 @@
 		same($.mobile.path.get(), "foo", "get method returns location.hash minus hash character");
 		same($.mobile.path.get( "#foo/bar/baz.html" ), "foo/bar/", "get method with hash arg returns path with no filename or hash prefix");
 		same($.mobile.path.get( "#foo/bar/baz.html/" ), "foo/bar/baz.html/", "last segment of hash is retained if followed by a trailing slash");
+	});
+
+	test( "path.isPath method is working properly", function(){
+		ok(!$.mobile.path.isPath('bar'), "anything without a slash is not a path");
+		ok($.mobile.path.isPath('bar/'), "anything with a slash is a path");
+		ok($.mobile.path.isPath('/bar'), "anything with a slash is a path");
+		ok($.mobile.path.isPath('a/r'), "anything with a slash is a path");
+		ok($.mobile.path.isPath('/'), "anything with a slash is a path");
 	});
 
 	test( "path.getFilePath method is working properly", function(){
@@ -79,6 +87,8 @@
 		$.mobile.urlHistory.ignoreNextHashChange = false;
 		$.mobile.path.set("bar/");
 		same( $.mobile.path.makeAbsolute("test.html"), "bar/test.html", "prefixes path with absolute base path from hash");
+		$.mobile.path.set("bar");
+		same( $.mobile.path.makeAbsolute("test.html"), "test.html", "returns the relative path unaltered for non path hash");
 		location.hash = "";
 	});
 
@@ -175,10 +185,10 @@
 		});
 		location.hash = "foozball";
 		setTimeout(function(){
-			start();
 			ok( prop == stillListening, prop + " = false disables default hashchange event handler");
 			location.hash = "";
 			prop = true;
+			start();
 		}, 1000);
 	}
 
@@ -200,8 +210,8 @@
 		$('#foo a').click();
 
 		setTimeout(function(){
-			start();
 			ok(called == 1, "change page should be called once");
+			start();
 		}, 500);
 	});
 
@@ -314,6 +324,24 @@
 			// make sure we're on first dialog
 			function(){
 				same($(".ui-page-active")[0], $("#nested-dialog-first")[0], "should be the first dialog");
+				start();
+			}], 1000);
+	});
+
+	asyncTest( "loading a relative file path after an embeded page works", function(){
+		$.testHelper.openPage("#relative-after-embeded-page-first");
+
+		$.testHelper.sequence([
+			// transition second page
+			function(){ $("#relative-after-embeded-page-first a").click(); },
+
+			// transition to the relative ajax loaded page
+			function(){ $("#relative-after-embeded-page-second a").click(); },
+
+			// make sure the page was loaded properly via ajax
+			function(){
+				// data attribute intentionally left without namespace
+				same($(".ui-page-active").data("other"), "for testing", "should be relative ajax loaded page");
 				start();
 			}], 1000);
 	});

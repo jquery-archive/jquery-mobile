@@ -145,5 +145,17 @@
 
 <div id="nested-dialog-second" data-nstest-role="dialog">
 </div>
+
+<div id="relative-after-embeded-page-first" data-nstest-role="page">
+  <div data-nstest-role="content">
+    <a href="#relative-after-embeded-page-second">second page</a>
+  </div>
+</div>
+
+<div id="relative-after-embeded-page-second" data-nstest-role="page">
+  <div data-nstest-role="content">
+    <a href="data-url-tests/data-url.html">file path page</a>
+  </div>
+</div>
 </body>
 </html>

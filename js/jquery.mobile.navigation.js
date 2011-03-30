@@ -41,8 +41,16 @@
 			},
 
 			//prefix a relative url with the current path
+			// TODO rename to reflect conditional functionality
 			makeAbsolute: function( url ){
-				return path.get() + url;
+				// only create an absolute path when the hash can be used as one
+				return path.isPath(window.location.hash) ? path.get() + url : url;
+			},
+
+			// test if a given url (string) is a path
+			// NOTE might be exceptionally naive
+			isPath: function( url ){
+				return /\//.test(url);
 			},
 
 			//return a url path with the window's location protocol/hostname/pathname removed
@@ -591,21 +599,21 @@
 					setTimeout(function() { transitionPages(); }, 0);
 				},
 				error: function() {
-					
+
 					//remove loading message
 					$.mobile.pageLoading( true );
-					
+
 					//clear out the active button state
 					removeActiveLinkClass(true);
-					
+
 					//set base back to current path
 					if( base ){
 						base.set( path.get() );
 					}
-					
+
 					//release transition lock so navigation is free again
 					releasePageTransitionLock();
-					
+
 					//show error message
 					$("<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h1>"+ $.mobile.pageLoadErrorMessage +"</h1></div>")
 						.css({ "display": "block", "opacity": 0.96, "top": $(window).scrollTop() + 100 })
