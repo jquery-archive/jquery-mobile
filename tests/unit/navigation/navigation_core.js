@@ -19,8 +19,8 @@
 		stop();
 		$('#non-ajax-form').live('submit', function(event){
 			ok(true, 'submit callbacks are fired');
-			start();
 			event.preventDefault();
+			start();
 		}).submit();
 
 		ok(!called, "change page should not be called");
@@ -50,9 +50,9 @@
 		$( "<a>test</a>" ).appendTo( $.mobile.firstPage ).click();
 
 		setTimeout(function(){
-			start();
 			same(fired, false, "hash shouldn't change after click");
 			$(window).unbind("hashchange.temp");
+			start();
 		}, 500);
 	});
 
@@ -175,10 +175,10 @@
 		});
 		location.hash = "foozball";
 		setTimeout(function(){
-			start();
 			ok( prop == stillListening, prop + " = false disables default hashchange event handler");
 			location.hash = "";
 			prop = true;
+			start();
 		}, 1000);
 	}
 
@@ -200,8 +200,8 @@
 		$('#foo a').click();
 
 		setTimeout(function(){
-			start();
 			ok(called == 1, "change page should be called once");
+			start();
 		}, 500);
 	});
 
