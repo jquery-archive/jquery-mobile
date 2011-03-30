@@ -327,5 +327,23 @@
 				start();
 			}], 1000);
 	});
+
+	asyncTest( "loading a relative file path after an embeded page works", function(){
+		$.testHelper.openPage("#relative-after-embeded-page-first");
+
+		$.testHelper.sequence([
+			// transition second page
+			function(){ $("#relative-after-embeded-page-first a").click(); },
+
+			// transition to the relative ajax loaded page
+			function(){ $("#relative-after-embeded-page-second a").click(); },
+
+			// make sure the page was loaded properly via ajax
+			function(){
+				// data attribute intentionally left without namespace
+				same($(".ui-page-active").data("other"), "for testing", "should be relative ajax loaded page");
+				start();
+			}], 1000);
+	});
 })(jQuery);
 
