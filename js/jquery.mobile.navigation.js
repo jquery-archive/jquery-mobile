@@ -577,7 +577,7 @@
 					//rewrite src and href attrs to use a base url
 					if( !$.support.dynamicBaseTag ){
 						var newPath = path.get( fileUrl );
-						to.find('[src],link[href]').each(function(){
+						to.find('[src],link[href],a[rel="external"],a:jqmData(ajax="none")').each(function(){
 							var thisAttr = $(this).is('[href]') ? 'href' : 'src',
 								thisUrl = $(this).attr(thisAttr);
 
