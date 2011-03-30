@@ -63,6 +63,14 @@
 		same($.mobile.path.get( "#foo/bar/baz.html/" ), "foo/bar/baz.html/", "last segment of hash is retained if followed by a trailing slash");
 	});
 
+	test( "path.isPath method is working properly", function(){
+		ok(!$.mobile.path.isPath('bar'), "anything without a slash is not a path");
+		ok($.mobile.path.isPath('bar/'), "anything with a slash is a path");
+		ok($.mobile.path.isPath('/bar'), "anything with a slash is a path");
+		ok($.mobile.path.isPath('a/r'), "anything with a slash is a path");
+		ok($.mobile.path.isPath('/'), "anything with a slash is a path");
+	});
+
 	test( "path.getFilePath method is working properly", function(){
 		same($.mobile.path.getFilePath("foo.html" + "&" + $.mobile.subPageUrlKey ), "foo.html", "returns path without sub page key");
 	});
@@ -79,6 +87,8 @@
 		$.mobile.urlHistory.ignoreNextHashChange = false;
 		$.mobile.path.set("bar/");
 		same( $.mobile.path.makeAbsolute("test.html"), "bar/test.html", "prefixes path with absolute base path from hash");
+		$.mobile.path.set("bar");
+		same( $.mobile.path.makeAbsolute("test.html"), "test.html", "returns the relative path unaltered for non path hash");
 		location.hash = "";
 	});
 
