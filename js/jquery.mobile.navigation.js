@@ -710,7 +710,17 @@
 
 		//if there's a data-rel=back attr, go back in history
 		if( $this.is( ":jqmData(rel='back')" ) ){
-			window.history.back();
+		
+			//get the #url of the previous page in history, or the first page if there is no previous
+			var url = $.mobile.urlHistory.getPrev().url;
+			if (url === null || url == "") url = $.mobile.firstPage.attr("data-url");
+			url = "#" + url;
+			
+			//get the transition last used, or use default
+			var transition = $.mobile.urlHistory.getActive().transition || "slide";
+			
+			// change the page using the reverse transition
+			$.mobile.changePage(url, transition , true, true, true);
 			return false;
 		}
 
