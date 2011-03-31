@@ -189,8 +189,10 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 
 			if ( counter && itemClass.indexOf( "ui-li-divider" ) < 0 ) {
-				item
-					.find( ".ui-link-inherit" ).first()
+			
+				var countParent = item.is(".ui-li-static:first") ? item : item.find( ".ui-link-inherit" );
+				
+				countParent
 					.addClass( "ui-li-jsnumbering" )
 					.prepend( "<span class='ui-li-dec'>" + (counter++) + ". </span>" );
 			}
