@@ -577,12 +577,13 @@
 					//rewrite src and href attrs to use a base url
 					if( !$.support.dynamicBaseTag ){
 						var newPath = path.get( fileUrl );
-						to.find('[src],link[href],a[rel="external"],a:jqmData(ajax="none")').each(function(){
+						to.find( "[src], link[href], a[rel='external'], :jqmData(ajax='false'), a[target]" ).each(function(){
 							var thisAttr = $(this).is('[href]') ? 'href' : 'src',
 								thisUrl = $(this).attr(thisAttr);
+														
 
 							//if full path exists and is same, chop it - helps IE out
-							thisUrl.replace( location.protocol + '//' + location.host + location.pathname, '' );
+							thisUrl = thisUrl.replace( location.protocol + '//' + location.host + location.pathname, '' );
 
 							if( !/^(\w+:|#|\/)/.test(thisUrl) ){
 								$(this).attr(thisAttr, newPath + thisUrl);
