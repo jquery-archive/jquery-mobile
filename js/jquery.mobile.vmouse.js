@@ -17,11 +17,8 @@
 // the traditional mouse environment, should multiple handlers be registered
 // on the same element for different events.
 //
-// The current version simply adds mBind and mUnbind to the $.fn space,
-// but we're considering other methods for making this easier. One alternative
-// would be to allow users to use virtual mouse event names, such as
-// "vmousedown", "vmouseup", etc, to triggerVirtualEvent the traditional jQuery special/custom
-// event api, which would then triggerVirtualEvent this same code.
+// The current version exposes the following virtual events to jQuery bind methods:
+// "vmouseover vmousedown vmousemove vmouseup vclick vmouseout vmousecancel"
 
 (function($, window, document, undefined) {
 
