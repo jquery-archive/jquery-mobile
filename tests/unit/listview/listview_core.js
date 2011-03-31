@@ -68,8 +68,8 @@
 	});
 
 	asyncTest( "should go back to top level when the back button is clicked", function() {
-
-		$('.ui-page-active a:jqmData(rel="back")').click();
+		$.testHelper.openPage("nested-list-test&ui-page=More-animals-0");
+		window.history.back();
 				
 		setTimeout(function() {
 			ok($('#nested-list-test').hasClass('ui-page-active'), 'Transitions back to the parent nested page');
@@ -94,7 +94,7 @@
 	});
 
 	asyncTest( "changes to number 1 page when the li a is clicked", function() {
-		$('.ui-page-active li a').first().click();
+		$('#numbered-list-test li a').first().click();
 		setTimeout(function() {
 			ok($('#numbered-list-results').hasClass('ui-page-active'), "The new numbered page was transitioned correctly.");
 			start();
@@ -102,7 +102,9 @@
 	});
 
 	asyncTest( "takes us back to the numbered list when the back button is clicked", function() {
-		$('.ui-page-active a:jqmData(rel="back")').click();
+		$.testHelper.openPage('#numbered-list-test')
+		$.testHelper.openPage('#numbered-list-results')
+		window.history.back();
 		setTimeout(function() {
 			ok($('#numbered-list-test').hasClass('ui-page-active'));
 			start();
@@ -117,14 +119,6 @@
 			var $new_page = $('#read-only-list-test');
 			ok($new_page.hasClass('ui-page-active'), "makes the read only page the active page");
 			ok($('li', $new_page).first().text() === "Read", "The first LI has the proper text.");
-			start();
-		}, 1000);
-	});
-
-	asyncTest( "Does not go to new page when an item is clicked", function() {
-		$('li', $('#read-only-list-test').first().click());
-		setTimeout(function() {
-			ok($('.ui-page-active').attr('id') == "read-only-list-test", "Page does not change for read only lists");
 			start();
 		}, 1000);
 	});
@@ -146,7 +140,7 @@
 		$.testHelper.openPage("#split-list-test");
 
 		setTimeout(function(){
-			$('.ui-page-active .ui-li>a:eq(0) a:eq(0)').click();
+			$('.ui-page-active .ui-li a:eq(0)').click();
 		}, 500);
 
 		setTimeout(function() {
