@@ -355,9 +355,9 @@
 				//set as data for returning to that spot
 				from.data( "lastScroll", currScroll);
 				//trigger before show/hide events
-				from.data( "page" )._trigger( "beforehide", { nextPage: to } );
+				from.data( "page" )._trigger( "beforehide", null, { reverse: typeof reverse !== "undefined", nextPage: to } );
 			}	
-			to.data( "page" )._trigger( "beforeshow", { prevPage: from || $("") } );
+			to.data( "page" )._trigger( "beforeshow", null, { reverse: typeof reverse !== "undefined", prevPage: from || $("") } );
 
 			function loadComplete(){
 
