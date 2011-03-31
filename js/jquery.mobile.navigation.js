@@ -684,6 +684,9 @@
 	});
 
 
+	//temporary fix for allowing 3rd party onclick handlers to still function.
+	var preventClickDefault = false, stopClickPropagation = false;
+
 	//click routing - direct to HTTP or Ajax, accordingly
 	$( "a" ).live( "vclick", function(event) {
 
@@ -726,10 +729,14 @@
 			//if data-ajax attr is set to false, use the default behavior of a link
 			hasAjaxDisabled = $this.is( ":jqmData(ajax='false')" );
 
+		//reset our prevDefault value because I'm paranoid.
+		preventClickDefault = stopClickPropagation = false;
+
 		//if there's a data-rel=back attr, go back in history
 		if( $this.is( ":jqmData(rel='back')" ) ){
 			window.history.back();
-			return false;
+			preventClickDefault = stopClickPropagation = true;
+			return;
 		}
 
 		//prevent # urls from bubbling
@@ -742,6 +749,7 @@
 			//3rd party onclick handlers get triggered. If and when
 			//a mouse click event is generated, our live("click") handler
 			//will get triggered and do the preventDefault.
+			preventClickDefault = true;
 			return;
 		}
 
@@ -756,29 +764,36 @@
 			//use default click handling
 			return;
 		}
-		else {
-			//use ajax
-			var transition = $this.jqmData( "transition" ),
-				direction = $this.jqmData("direction"),
-				reverse = (direction && direction === "reverse") ||
-				// deprecated - remove by 1.0
-				$this.jqmData( "back" );
 
-			//this may need to be more specific as we use data-rel more
-			nextPageRole = $this.attr( "data-" + $.mobile.ns + "rel" );
+		//use ajax
+		var transition = $this.jqmData( "transition" ),
+			direction = $this.jqmData("direction"),
+			reverse = (direction && direction === "reverse") ||
+			// deprecated - remove by 1.0
+			$this.jqmData( "back" );
 
-			//if it's a relative href, prefix href with base url
-			if( path.isRelative( url ) && !hadProtocol ){
-				url = path.makeAbsolute( url );
-			}
+		//this may need to be more specific as we use data-rel more
+		nextPageRole = $this.attr( "data-" + $.mobile.ns + "rel" );
 
-			url = path.stripHash( url );
-
-			$.mobile.changePage( url, transition, reverse);
+		//if it's a relative href, prefix href with base url
+		if( path.isRelative( url ) && !hadProtocol ){
+			url = path.makeAbsolute( url );
 		}
-		event.preventDefault();
+
+		url = path.stripHash( url );
+
+		$.mobile.changePage( url, transition, reverse);
+		preventClickDefault = true;
 	});
 
+	$( "a" ).live( "click", function(event) {
+		if (preventClickDefault){
+			event.preventDefault();
+		}
+		if (stopClickPropagation){
+			event.stopPropagation();
+		}
+	});
 
 	//hashchange event handler
 	$window.bind( "hashchange", function( e, triggered ) {
@@ -831,10 +846,4 @@
 		}
 		});
 
-		$( "a" ).live( "click", function(event) {
-			//preventDefault for links that are purely for interaction
-			if ($(this).is("a[href='#']")){
-				event.preventDefault();
-			}
-		});
 })( jQuery );
