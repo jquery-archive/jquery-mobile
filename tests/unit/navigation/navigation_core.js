@@ -364,7 +364,7 @@
 	});
 	
 	asyncTest( "Page title updates properly when clicking back to previous page", function(){
-		$.testHelper.openPage("index.html");
+		$.testHelper.openPage("#relative-after-embeded-page-first");
 		window.history.back();
 		setTimeout(function(){
 			same(document.title, "jQuery Mobile Navigation Test Suite");
