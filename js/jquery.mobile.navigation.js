@@ -789,9 +789,11 @@
 	$( "a" ).live( "click", function(event) {
 		if (preventClickDefault){
 			event.preventDefault();
+			preventClickDefault = false;
 		}
 		if (stopClickPropagation){
 			event.stopPropagation();
+			stopClickPropagation = false;
 		}
 	});
 
