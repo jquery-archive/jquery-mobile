@@ -718,9 +718,12 @@
 		//path.get() is replaced to combat abs url prefixing in IE
 		if( url.replace(path.get(), "") == "#"  ){
 			//for links created purely for interaction - ignore
-			//we'll let our live "click" handler call event.preventDefault()
-			//on this event so that 3rd party code clicks handlers can
-			//get called.
+			//don't call preventDefault on the event here, vclick
+			//may have been triggered by a touchend, before any moues
+			//click event was dispatched and we want to make sure
+			//3rd party onclick handlers get triggered. If and when
+			//a mouse click event is generated, our live("click") handler
+			//will get triggered and do the preventDefault.
 			return;
 		}
 
