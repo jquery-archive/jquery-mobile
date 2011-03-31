@@ -717,7 +717,9 @@
 		//path.get() is replaced to combat abs url prefixing in IE
 		if( url.replace(path.get(), "") == "#"  ){
 			//for links created purely for interaction - ignore
-			event.preventDefault();
+			//we'll let our live "click" handler call event.preventDefault()
+			//on this event so that 3rd party code clicks handlers can
+			//get called.
 			return;
 		}
 
@@ -805,5 +807,12 @@
 		else {
 			$.mobile.changePage( $.mobile.firstPage, transition, true, false, true );
 		}
-	});
+		});
+
+		$( "a" ).live( "click", function(event) {
+			//preventDefault for links that are purely for interaction
+			if ($(this).is("a[href='#']")){
+				event.preventDefault();
+			}
+		});
 })( jQuery );
