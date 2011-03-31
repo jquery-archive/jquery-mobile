@@ -113,14 +113,14 @@
 			},
 
 			// addNew is used whenever a new page is added
-			addNew: function( url, transition, storedTo ){
+			addNew: function( url, transition, title, storedTo ){
 				//if there's forward history, wipe it
 				if( urlHistory.getNext() ){
 					urlHistory.clearForward();
 				}
 
-				urlHistory.stack.push( {url : url, transition: transition, page: storedTo } );
-
+				urlHistory.stack.push( {url : url, transition: transition, title: title, page: storedTo } );
+				
 				urlHistory.activeIndex = urlHistory.stack.length - 1;
 			},
 
@@ -307,7 +307,8 @@
 			duplicateCachedPage = null,
 			currPage = urlHistory.getActive(),
 			back = false,
-			forward = false;
+			forward = false
+			pageTitle = document.title;
 
 
 		// If we are trying to transition to the same page that we are currently on ignore the request.
@@ -408,10 +409,19 @@
 					path.set( url );
 				}
 
+				//if title element wasn't found, try the page div data attr too
+				var newPageTitle = to.attr( ":jqmData(title)" );
+				if( pageTitle == document.title && newPageTitle ){
+					pageTitle = newPageTitle;
+				}
+
 				//add page to history stack if it's not back or forward
 				if( !back && !forward ){
-					urlHistory.addNew( url, transition, to );
+					urlHistory.addNew( url, transition, pageTitle, to );
 				}
+				
+				//set page title
+				document.title = urlHistory.getActive().title;
 
 				removeActiveLinkClass();
 
@@ -453,8 +463,6 @@
 
 				pageContainerClasses = [];
 			}
-
-
 
 			if(transition && (transition !== 'none')){
 			    $.mobile.pageLoading( true );
@@ -548,9 +556,14 @@
 					//use it as the new fileUrl, base path, etc
 					var all = $("<div></div>"),
 							redirectLoc,
+							
+							//page title regexp
+							newPageTitle = html.match( /<title[^>]*>([^<]*)/ ) && RegExp.$1,
+							
 							// TODO handle dialogs again
 							pageElemRegex = new RegExp(".*(<[^>]+\\bdata-" + $.mobile.ns + "role=[\"']?page[\"']?[^>]*>).*"),
 							dataUrlRegex = new RegExp("\\bdata-" + $.mobile.ns + "url=[\"']?([^\"'>]*)[\"']?");
+							
 
 					// data-url must be provided for the base tag so resource requests can be directed to the
 					// correct url. loading into a temprorary element makes these requests immediately
@@ -573,6 +586,11 @@
 					//workaround to allow scripts to execute when included in page divs
 					all.get(0).innerHTML = html;
 					to = all.find( ":jqmData(role='page'), :jqmData(role='dialog')" ).first();
+					
+					//finally, if it's defined now, set the page title for storage in urlHistory
+					if( newPageTitle ){
+						pageTitle = newPageTitle;
+					}					
 
 					//rewrite src and href attrs to use a base url
 					if( !$.support.dynamicBaseTag ){
