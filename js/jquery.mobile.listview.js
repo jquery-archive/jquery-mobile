@@ -97,9 +97,6 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			if ( a.length ) {	
 				var icon = item.jqmData("icon");
 				
-				//readonly lists need style exceptions
-				item.not( "li:has(>a)" ).addClass( "ui-li-readonly" );
-				
 				item
 					.buttonMarkup({
 						wrapperEls: "div",
