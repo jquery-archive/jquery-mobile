@@ -360,23 +360,24 @@
 		setTimeout(function(){
 			same(document.title, "Title Tag");
 			start();
-		},1000);
+		},500);
 	});
 	
 	asyncTest( "Page title updates properly when clicking back to previous page", function(){
+		$.testHelper.openPage("index.html");
 		window.history.back();
 		setTimeout(function(){
 			same(document.title, "jQuery Mobile Navigation Test Suite");
 			start();
-		},1500);
+		},500);
 	});
 	
-	asyncTest( "Page title updates properly from title element  when loading an external page", function(){
+	asyncTest( "Page title updates properly from data-title attr  when loading an external page", function(){
 		$("#titletest2").click();
 		setTimeout(function(){
 			same(document.title, "Title Tag");
 			start();
-		},1500);
+		},500);
 	});
 	
 	
@@ -385,8 +386,10 @@
 		setTimeout(function(){
 			same(document.title, "Title Heading"); 
 			start();
-		},1500);
+		},500);
 	});
+	
+	
 
 })(jQuery);
 
