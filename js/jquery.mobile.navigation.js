@@ -509,6 +509,13 @@
 					nextPageRole = null;
 				}
 			}
+			
+			//if title element wasn't found, try the page div data attr too
+			var newPageTitle = to.attr( ":jqmData(title)" ) || to.find(".ui-header .ui-title" ).text();
+			if( !!newPageTitle ){
+				
+				pageTitle = newPageTitle;
+			}
 
 			//run page plugin
 			to.page();
