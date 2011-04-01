@@ -9,13 +9,6 @@
 			location.hash = "";
 		}
 	});
-	
-	
-	
-
-	
-	
-	
 
 	test( "forms with data attribute ajax set to false will not call changePage", function(){
 		var called = false;
@@ -353,8 +346,7 @@
 				start();
 			}], 1000);
 	});
-	
-	
+
 	asyncTest( "Page title updates properly from title tag when loading an external page", function(){
 		$("#titletest1").click();
 		setTimeout(function(){
@@ -362,7 +354,7 @@
 			start();
 		},500);
 	});
-	
+
 	asyncTest( "Page title updates properly when clicking back to previous page", function(){
 		$.testHelper.openPage("#relative-after-embeded-page-first");
 		window.history.back();
@@ -371,7 +363,7 @@
 			start();
 		},500);
 	});
-	
+
 	asyncTest( "Page title updates properly from data-title attr  when loading an external page", function(){
 		$("#titletest2").click();
 		setTimeout(function(){
@@ -379,17 +371,13 @@
 			start();
 		},500);
 	});
-	
-	
+
 	asyncTest( "Page title updates properly from heading text in header when loading an external page", function(){
 		$("#titletest3").click();
 		setTimeout(function(){
-			same(document.title, "Title Heading"); 
+			same(document.title, "Title Heading");
 			start();
 		},500);
 	});
-	
-	
-
 })(jQuery);
 
