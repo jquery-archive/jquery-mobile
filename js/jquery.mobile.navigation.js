@@ -739,6 +739,13 @@
 			return;
 		}
 
+		//if there's a data-rel=home attr, go back home
+		if( $this.is( ":jqmData(rel='home')" ) ){
+			$.mobile.path.set("");
+			preventClickDefault = stopClickPropagation = true;
+			return;
+		}
+
 		//prevent # urls from bubbling
 		//path.get() is replaced to combat abs url prefixing in IE
 		if( url.replace(path.get(), "") == "#"  ){

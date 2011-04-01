@@ -9,8 +9,11 @@
 $.widget( "mobile.page", $.mobile.widget, {
 	options: {
 		backBtnText: "Back",
+		homeBtnText: "Home",
 		addBackBtn: true,
+		addHomeBtn: true,
 		backBtnTheme: null,
+		homeBtnTheme: null,
 		degradeInputs: {
 			color: false,
 			date: false,
@@ -87,6 +90,20 @@ $.widget( "mobile.page", $.mobile.widget, {
 						backBtn.attr( "data-"+ $.mobile.ns +"theme", o.backBtnTheme );
 					}
 				}
+
+				// auto-add home btn on pages beyond first view
+				if ( o.addHomeBtn && role === "header" &&
+						$( ".ui-page" ).length > 1 &&
+						!rightbtn && $this.jqmData( "homebtn" ) !== false ) {
+
+					var homeBtn = $( "<a href='#' class='ui-btn-right' data-"+ $.mobile.ns +"rel='home' data-"+ $.mobile.ns +"icon='home' data-iconpos='notext' alt='"+o.HomeBtnText+"'></a>" ).prependTo( $this );
+					
+					//if theme is provided, override default inheritance
+					if( o.homeBtnTheme ){
+						homeBtn.attr( "data-"+ $.mobile.ns +"theme", o.homeBtnTheme );
+					}
+				}
+
 
 				//page title
 				$this.children( "h1, h2, h3, h4, h5, h6" )
