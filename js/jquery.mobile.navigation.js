@@ -120,7 +120,7 @@
 				}
 
 				urlHistory.stack.push( {url : url, transition: transition, title: title, page: storedTo } );
-				
+
 				urlHistory.activeIndex = urlHistory.stack.length - 1;
 			},
 
@@ -408,7 +408,7 @@
 					//update hash and history
 					path.set( url );
 				}
-				
+
 				//if title element wasn't found, try the page div data attr too
 				var newPageTitle = to.attr( ":jqmData(title)" ) || to.find(".ui-header .ui-title" ).text();
 				if( !!newPageTitle && pageTitle == document.title ){
@@ -419,7 +419,7 @@
 				if( !back && !forward ){
 					urlHistory.addNew( url, transition, pageTitle, to );
 				}
-				
+
 				//set page title
 				document.title = urlHistory.getActive().title;
 
@@ -556,14 +556,14 @@
 					//use it as the new fileUrl, base path, etc
 					var all = $("<div></div>"),
 							redirectLoc,
-							
+
 							//page title regexp
 							newPageTitle = html.match( /<title[^>]*>([^<]*)/ ) && RegExp.$1,
-							
+
 							// TODO handle dialogs again
 							pageElemRegex = new RegExp(".*(<[^>]+\\bdata-" + $.mobile.ns + "role=[\"']?page[\"']?[^>]*>).*"),
 							dataUrlRegex = new RegExp("\\bdata-" + $.mobile.ns + "url=[\"']?([^\"'>]*)[\"']?");
-							
+
 
 					// data-url must be provided for the base tag so resource requests can be directed to the
 					// correct url. loading into a temprorary element makes these requests immediately
@@ -586,11 +586,11 @@
 					//workaround to allow scripts to execute when included in page divs
 					all.get(0).innerHTML = html;
 					to = all.find( ":jqmData(role='page'), :jqmData(role='dialog')" ).first();
-					
+
 					//finally, if it's defined now, set the page title for storage in urlHistory
 					if( newPageTitle ){
 						pageTitle = newPageTitle;
-					}					
+					}
 
 					//rewrite src and href attrs to use a base url
 					if( !$.support.dynamicBaseTag ){
@@ -598,7 +598,7 @@
 						to.find( "[src], link[href], a[rel='external'], :jqmData(ajax='false'), a[target]" ).each(function(){
 							var thisAttr = $(this).is('[href]') ? 'href' : 'src',
 								thisUrl = $(this).attr(thisAttr);
-														
+
 
 							//if full path exists and is same, chop it - helps IE out
 							thisUrl = thisUrl.replace( location.protocol + '//' + location.host + location.pathname, '' );
