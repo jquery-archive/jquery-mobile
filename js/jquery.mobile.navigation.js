@@ -307,7 +307,7 @@
 			duplicateCachedPage = null,
 			currPage = urlHistory.getActive(),
 			back = false,
-			forward = false
+			forward = false,
 			pageTitle = document.title;
 
 
