@@ -56,6 +56,8 @@
 				callbackQueue.unshift(callback);
 			};
 
+			clearPageTransitionStack();
+			clearUrlHistory();
 		},
 
 		teardown: function(){
@@ -63,11 +65,6 @@
 			$.fn.animationComplete = animationCompleteFn;
 		}
 	});
-
-	QUnit.testStart = function (name) {
-		clearPageTransitionStack();
-		clearUrlHistory();
-	};
 
 	test( "changePage applys perspective class to mobile viewport for flip", function(){
 		$("#foo > a").click();
