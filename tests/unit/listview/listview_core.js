@@ -33,9 +33,9 @@
 
 	asyncTest( "Slides back to main page when back button is clicked", function() {
 		$.testHelper.openPage("#basic-link-results");
-		
+
 		$('.ui-page-active a:jqmData(rel="back")').click();
-		
+
 		setTimeout(function() {
 			ok($('#basic-linked-test').hasClass('ui-page-active'));
 			start();
@@ -57,20 +57,20 @@
 	asyncTest( "change to nested page when the li a is clicked", function() {
 		$.testHelper.openPage("#nested-list-test");
 		$('.ui-page-active li:eq(1) a:eq(0)').click();
-				setTimeout(function() {
-					var $new_page = $(':jqmData(url="nested-list-test&ui-page=More-animals-0")');
-					
-					ok($new_page.hasClass('ui-page-active'), 'Makes the nested page the active page.');
-					ok($('.ui-listview', $new_page).find(":contains('Rhumba of rattlesnakes')").length == 1, "The current page should have the proper text in the list.");
-					ok($('.ui-listview', $new_page).find(":contains('Shoal of Bass')").length == 1, "The current page should have the proper text in the list.");
-					start();
-				}, 1000);
+		setTimeout(function() {
+			var $new_page = $(':jqmData(url="nested-list-test&ui-page=More-animals-0")');
+
+			ok($new_page.hasClass('ui-page-active'), 'Makes the nested page the active page.');
+			ok($('.ui-listview', $new_page).find(":contains('Rhumba of rattlesnakes')").length == 1, "The current page should have the proper text in the list.");
+			ok($('.ui-listview', $new_page).find(":contains('Shoal of Bass')").length == 1, "The current page should have the proper text in the list.");
+			start();
+		}, 1000);
 	});
 
 	asyncTest( "should go back to top level when the back button is clicked", function() {
 		$.testHelper.openPage("nested-list-test&ui-page=More-animals-0");
 		window.history.back();
-				
+
 		setTimeout(function() {
 			ok($('#nested-list-test').hasClass('ui-page-active'), 'Transitions back to the parent nested page');
 			start();
@@ -293,5 +293,5 @@
 			start();
 		}, 1000);
 	});
-	
+
 })(jQuery);
