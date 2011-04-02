@@ -1,5 +1,5 @@
 /*
- * mobile page unit tests
+ * mobile checkboxradio unit tests
  */
 (function($){
 	module('jquery.mobile.forms.checkboxradio.js');
