@@ -68,7 +68,7 @@
 	});
 
 	asyncTest( "should go back to top level when the back button is clicked", function() {
-		$.testHelper.openPage("nested-list-test&ui-page=More-animals-0");
+		$.testHelper.openPage("#nested-list-test&ui-page=More-animals-0");
 		window.history.back();
 
 		setTimeout(function() {
