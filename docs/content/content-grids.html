@@ -3,7 +3,7 @@
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1"> 
-	<title>jQuery Mobile Docs - Content formatting</title> 
+	<title>jQuery Mobile Docs - Content Grids</title> 
 	<link rel="stylesheet"  href="../../themes/default/" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 	<script type="text/javascript" src="../../js/jquery.js"></script>
@@ -26,6 +26,7 @@
 		<p>Using multiple column layouts isn't generally recommended on a mobile device because of the narrow screen width, but there are times where you may need to place small elements side-by-side (like buttons or navigation tabs, for example). </p>
 		
 		<p>The jQuery Mobile framework provides a simple way to build CSS-based columns through a  block style class convention called <code>ui-grid</code>. </p>
+		
 		<p>There are two preset configurations layouts &mdash; two-column (using the <code>class</code> of <code>ui-grid-a</code>), and three-column (using the <code>class</code> of <code>ui-grid-b</code>) &mdash; that can be used in any situation that requires columns. Grids are 100% width, completely invisible (no borders or backgrounds) and don't have padding or margins, so they shouldn't interfere with the styles of elements placed inside them.</p>
 		
 		<h2>Two column grids</h2>
@@ -47,7 +48,7 @@
 			<div class="ui-block-b"><strong>I'm Block B</strong> and text inside will wrap.</div>
 		</div><!-- /grid-a -->
 		
-		<p>As you see above, by default grid blocks have no styles for appearance; they simply present content side-by-side.</p>
+		<p>As you see above, by default grid blocks have no visual styling; they simply present content side-by-side.</p>
 		
 		<p>Grid classes can be applied to any container. In this next example, we add <code>ui-grid-a</code> to a <code>fieldset</code>, and apply the <code>ui-block</code> classes to the two buttons inside to stretch them each to 50% of the screen width:</p>
 
@@ -64,7 +65,7 @@
 	    </fieldset>
 	    
 	    
-	    <p>And, grid blocks can adopt presentation styles from the <a href="../themes/index.html">theming system</a> &mdash; by adding a height and color swatch reference to the grid blocks, we can achieve this style appearance:</p>
+	    <p>Theme classes (not data-theme attributes) from the <a href="../themes/index.html">theming system</a> can be added to an element, including grids. On the blocks below, we're adding two classes: <code>ui-bar</code> to add the default bar padding and <code>ui-bar-e</code> to apply the background gradient and font styling for the "e" toolbar theme swatch. For illustration purposes, an inline <code>style="height:120px"</code> attribute is also added to each grid to set each to a standard height. </p>
 			
 		<div class="ui-grid-a">
 			<div class="ui-block-a"><div class="ui-bar ui-bar-e" style="height:120px">Block A</div></div>
@@ -72,7 +73,7 @@
 		</div><!-- /grid-a -->
 
 		<h2>Three-column grids</h2>
-		<p>The other grid layout configuration uses <code>class=ui-grid-b</code> on the parent, and 3 child container elements, each with its respective <code>ui-block-a/b/c</code> class, to create a three-column layout (33/33/33%).</p>
+		<p>The other grid layout configuration uses <code>class=ui-grid-b</code> on the parent, and 3 child container elements, each with its respective <code>ui-block-a/b/c</code> class, to create a three-column layout (33/33/33%). Note: These blocks are also styled with theme classes so the grid layout is clearly visible.</p>
 	
 <pre><code>
 &lt;div class=&quot;ui-grid-b&quot;&gt;
@@ -100,7 +101,7 @@
 		
 		<h2>Four-column grids</h2>
 		
-		<p>A four-column, 25/25/25/25% grid is created by specifying <code>class=ui-grid-c</code> on the parent and adding a fourth block.</p>
+		<p>A four-column, 25/25/25/25% grid is created by specifying <code>class=ui-grid-c</code> on the parent and adding a fourth block. Note: These blocks are also styled with theme classes so the grid layout is clearly visible.</p>
 			
 		<div class="ui-grid-c">
 			<div class="ui-block-a"><div class="ui-bar ui-bar-e" style="height:120px">A</div></div>
@@ -110,7 +111,7 @@
 		</div><!-- /grid-c -->
 		
 		<h2>Five-column grids</h2>
-		<p>A five-column, 20/20/20/20/20% grid is created by specifying <code>class=ui-grid-d</code> on the parent and adding a fourth block.</p>
+		<p>A five-column, 20/20/20/20/20% grid is created by specifying <code>class=ui-grid-d</code> on the parent and adding a fourth block. Note: These blocks are also styled with theme classes so the grid layout is clearly visible.</p>
 			
 		<div class="ui-grid-d">
 			<div class="ui-block-a"><div class="ui-bar ui-bar-e" style="height:120px">A</div></div>

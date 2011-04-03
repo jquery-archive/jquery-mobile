@@ -2,41 +2,78 @@
  * mobile navigation unit tests
  */
 (function($){
-	var changePageFn = $.mobile.changePage;
+	var changePageFn = $.mobile.changePage,
+			originalTitle = document.title;
 	module('jquery.mobile.navigation.js', {
-		teardown: function(){
+		setup: function(){
+			$.mobile.urlHistory.stack = [];
+			$.mobile.urlHistory.activeIndex = 0;
 			$.mobile.changePage = changePageFn;
+			document.title = originalTitle;
 			location.hash = "";
 		}
 	});
 
-	test( "forms with data attribute ajax set to false will not call changePage", function(){
-		var called = false;
-		$.mobile.changePage = function(){
-			called = true;
-		};
+	asyncTest( "changepage will only run once when a new page is visited", function(){
+		var called = 0,
+				newChangePage = function(a,b,c,d,e){
+					changePageFn( a,b,c,d,e );
+					called ++;
+				};
 
-		stop();
-		$('#non-ajax-form').live('submit', function(event){
-			ok(true, 'submit callbacks are fired');
-			event.preventDefault();
-			start();
-		}).submit();
+		$.testHelper.sequence([
+			// avoid initial page load triggering changePage early
+			function(){
+				$.mobile.changePage = newChangePage;
+				$('#foo a').click();
+			},
 
-		ok(!called, "change page should not be called");
+			function(){
+				ok(called == 1, "change page should be called once");
+				start();
+			}], 500);
 	});
 
-	test( "forms with data attribute ajax not set or set to anything but false will call changepage", function(){
-		var called = 0;
-		$.mobile.changePage = function(){
-			called += 1;
-			if(called > 1){ start(); }
-		};
+	asyncTest( "forms with data attribute ajax set to false will not call changePage", function(){
+		var called = false,
+				newChangePage = function(){
+					called = truue;
+				};
 
-		stop();
-		$('#ajax-form, #rand-ajax-form').submit();
+		$.testHelper.sequence([
+			// avoid initial page load triggering changePage early
+			function(){
+				$.mobile.changePage = newChangePage;
 
-		same(called, 2, "change page should be called twice");
+ 				$('#non-ajax-form').one('submit', function(event){
+					ok(true, 'submit callbacks are fired');
+					event.preventDefault();
+				}).submit();
+			},
+
+			function(){
+				ok(!called, "change page should not be called");
+				start();
+			}], 500);
+	});
+
+	asyncTest( "forms with data attribute ajax not set or set to anything but false will call changepage", function(){
+		var called = 0,
+				newChangePage = function(){
+					called++;
+				};
+
+		$.testHelper.sequence([
+			// avoid initial page load triggering changePage early
+			function(){
+				$.mobile.changePage = newChangePage;
+				$('#ajax-form, #rand-ajax-form').submit();
+			},
+
+			function(){
+				ok(called >= 2, "change page should be called at least twice");
+				start();
+			}], 300);
 	});
 
 
@@ -80,7 +117,6 @@
 		$.mobile.urlHistory.ignoreNextHashChange = false;
 		$.mobile.path.set("foo");
 		same("foo", window.location.hash.replace(/^#/,""), "sets location.hash properly");
-		location.hash = "";
 	});
 
 	test( "path.makeAbsolute is working properly", function(){
@@ -89,7 +125,6 @@
 		same( $.mobile.path.makeAbsolute("test.html"), "bar/test.html", "prefixes path with absolute base path from hash");
 		$.mobile.path.set("bar");
 		same( $.mobile.path.makeAbsolute("test.html"), "test.html", "returns the relative path unaltered for non path hash");
-		location.hash = "";
 	});
 
 	test( "path.clean is working properly", function(){
@@ -200,27 +235,12 @@
 		testListening( $.mobile.hashListeningEnabled );
 	});
 
-	asyncTest( "changepage will only run once when a new page is visited", function(){
-		var called = 0;
-		$.mobile.changePage = function(a,b,c,d,e){
-			changePageFn( a,b,c,d,e );
-			called ++;
-		};
-
-		$('#foo a').click();
-
-		setTimeout(function(){
-			ok(called == 1, "change page should be called once");
-			start();
-		}, 500);
-	});
-
 	var testDataUrlHash = function(linkSelector, hashRegex){
 		window.location.hash = "";
 		$(linkSelector).click();
 
 		setTimeout(function(){
-			ok(hashRegex.test(location.hash));
+			ok(hashRegex.test(location.hash), "should match the regex");
 			start();
 		}, 600);
 		stop();
@@ -243,8 +263,6 @@
 	});
 
 	asyncTest( "last entry choosen amongst multiple identical url history stack entries on hash change", function(){
-		$.mobile.urlHistory.activeIndex = 0;
-		$.mobile.urlHistory.stack = [];
 		$.testHelper.openPage("#dup-history-first");
 
 		$.testHelper.sequence([
@@ -306,9 +324,8 @@
 			}], 1000);
 	});
 
+
 	asyncTest( "going back from a dialog triggered from a dialog should result in the first dialog ", function(){
-		$.mobile.urlHistory.activeIndex = 0;
-		$.mobile.urlHistory.stack = [];
 		$.testHelper.openPage("#nested-dialog-page");
 
 		$.testHelper.sequence([
@@ -345,5 +362,62 @@
 				start();
 			}], 1000);
 	});
-})(jQuery);
 
+	asyncTest( "Page title updates properly when clicking back to previous page", function(){
+		$.testHelper.openPage("#relative-after-embeded-page-first");
+
+		$.testHelper.sequence([
+			function(){
+				window.history.back();
+			},
+
+			function(){
+				same(document.title, "jQuery Mobile Navigation Test Suite");
+				start();
+			}
+		], 500);
+	});
+
+	asyncTest( "Page title updates properly from title tag when loading an external page", function(){
+		$.testHelper.openPage("#ajax-title-page");
+
+		$.testHelper.sequence([
+			function(){
+				$("#titletest1").click();
+			},
+
+			function(){
+				same(document.title, "Title Tag");
+				start();
+			}
+		], 500);
+	});
+
+	asyncTest( "Page title updates properly from data-title attr  when loading an external page", function(){
+		$.testHelper.openPage("#ajax-title-page");
+		$.testHelper.sequence([
+			function(){
+				$("#titletest2").click();
+			},
+
+			function(){
+				same(document.title, "Title Attr");
+				start();
+			}
+		], 500);
+	});
+
+	asyncTest( "Page title updates properly from heading text in header when loading an external page", function(){
+		$.testHelper.openPage("#ajax-title-page");
+		$.testHelper.sequence([
+			function(){
+				$("#titletest3").click();
+			},
+
+			function(){
+				same(document.title, "Title Heading");
+				start();
+			}
+		], 500);
+	});
+})(jQuery);

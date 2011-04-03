@@ -1,1 +1,1 @@
-1.0a4pre
+1.0beta-pre

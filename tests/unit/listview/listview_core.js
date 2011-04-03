@@ -13,9 +13,9 @@
 
 	asyncTest( "The page should enhanced correctly", function(){
 		setTimeout(function() {
-			ok($('#basic-linked-test [role="option"]').length == 3, "roles added to li elements");
+			ok($('#basic-linked-test .ui-li').length, ".ui-li classes added to li elements");
 			start();
-		}, 100);
+		}, 500);
 	});
 
 	asyncTest( "Slides to the listview page when the li a is clicked", function() {
@@ -33,9 +33,9 @@
 
 	asyncTest( "Slides back to main page when back button is clicked", function() {
 		$.testHelper.openPage("#basic-link-results");
-		
+
 		$('.ui-page-active a:jqmData(rel="back")').click();
-		
+
 		setTimeout(function() {
 			ok($('#basic-linked-test').hasClass('ui-page-active'));
 			start();
@@ -48,7 +48,6 @@
 		$.testHelper.openPage("#nested-list-test");
 		setTimeout(function() {
 			ok($('#nested-list-test').hasClass('ui-page-active'), "makes nested list test page active");
-			ok($('[role="option"]', $('#nested-list-test')).length == 2, 'Adds data role to the two LIs');
 			ok($(':jqmData(url="nested-list-test&ui-page=More-animals-0")').length == 1, "Adds first UL to the page");
 			ok($(':jqmData(url="nested-list-test&ui-page=Groups-of-animals-1")').length == 1, "Adds second nested UL to the page");
 			start();
@@ -58,20 +57,20 @@
 	asyncTest( "change to nested page when the li a is clicked", function() {
 		$.testHelper.openPage("#nested-list-test");
 		$('.ui-page-active li:eq(1) a:eq(0)').click();
-				setTimeout(function() {
-					var $new_page = $(':jqmData(url="nested-list-test&ui-page=More-animals-0")');
-					
-					ok($new_page.hasClass('ui-page-active'), 'Makes the nested page the active page.');
-					ok($('.ui-listview', $new_page).find(":contains('Rhumba of rattlesnakes')").length == 1, "The current page should have the proper text in the list.");
-					ok($('.ui-listview', $new_page).find(":contains('Shoal of Bass')").length == 1, "The current page should have the proper text in the list.");
-					start();
-				}, 1000);
+		setTimeout(function() {
+			var $new_page = $(':jqmData(url="nested-list-test&ui-page=More-animals-0")');
+
+			ok($new_page.hasClass('ui-page-active'), 'Makes the nested page the active page.');
+			ok($('.ui-listview', $new_page).find(":contains('Rhumba of rattlesnakes')").length == 1, "The current page should have the proper text in the list.");
+			ok($('.ui-listview', $new_page).find(":contains('Shoal of Bass')").length == 1, "The current page should have the proper text in the list.");
+			start();
+		}, 1000);
 	});
 
 	asyncTest( "should go back to top level when the back button is clicked", function() {
+		$.testHelper.openPage("#nested-list-test&ui-page=More-animals-0");
+		window.history.back();
 
-		$('.ui-page-active a:jqmData(rel="back")').click();
-				
 		setTimeout(function() {
 			ok($('#nested-list-test').hasClass('ui-page-active'), 'Transitions back to the parent nested page');
 			start();
@@ -89,14 +88,13 @@
 		setTimeout(function() {
 			var $new_page = $('#numbered-list-test');
 			ok($new_page.hasClass('ui-page-active'), "Makes the new page active when the hash is changed.");
-			ok($('[role="option"]', $new_page).length == 3, "There should be three LI that are enhanced");
 			ok($('.ui-link-inherit', $new_page).first().text() == "Number 1", "The text of the first LI should be Number 1");
 			start();
 		}, 1000);
 	});
 
 	asyncTest( "changes to number 1 page when the li a is clicked", function() {
-		$('.ui-page-active li a').first().click();
+		$('#numbered-list-test li a').first().click();
 		setTimeout(function() {
 			ok($('#numbered-list-results').hasClass('ui-page-active'), "The new numbered page was transitioned correctly.");
 			start();
@@ -104,7 +102,9 @@
 	});
 
 	asyncTest( "takes us back to the numbered list when the back button is clicked", function() {
-		$('.ui-page-active a:jqmData(rel="back")').click();
+		$.testHelper.openPage('#numbered-list-test')
+		$.testHelper.openPage('#numbered-list-results')
+		window.history.back();
 		setTimeout(function() {
 			ok($('#numbered-list-test').hasClass('ui-page-active'));
 			start();
@@ -118,16 +118,7 @@
 		setTimeout(function() {
 			var $new_page = $('#read-only-list-test');
 			ok($new_page.hasClass('ui-page-active'), "makes the read only page the active page");
-			ok($('[role="option"]', $new_page).length === 4, "There are 4 li that enhanced as role options");
 			ok($('li', $new_page).first().text() === "Read", "The first LI has the proper text.");
-			start();
-		}, 1000);
-	});
-
-	asyncTest( "Does not go to new page when an item is clicked", function() {
-		$('li', $('#read-only-list-test').first().click());
-		setTimeout(function() {
-			ok($('.ui-page-active').attr('id') == "read-only-list-test", "Page does not change for read only lists");
 			start();
 		}, 1000);
 	});
@@ -139,7 +130,6 @@
 
 		setTimeout(function() {
 			var $new_page = $('#split-list-test');
-			ok($('[role="option"]', $new_page).length == 3);
 			ok($('.ui-li-link-alt', $new_page).length == 3);
 			ok($('.ui-link-inherit', $new_page).length == 3);
 			start();
@@ -150,7 +140,7 @@
 		$.testHelper.openPage("#split-list-test");
 
 		setTimeout(function(){
-			$('.ui-page-active [role="option"]:eq(0) a:eq(0)').click();
+			$('.ui-page-active .ui-li a:eq(0)').click();
 		}, 500);
 
 		setTimeout(function() {
@@ -164,7 +154,7 @@
 
 		$.testHelper.sequence([
 			function(){
-				$('.ui-page-active [role="option"]:eq(0)').click();
+				$('.ui-page-active .ui-listview a:eq(0)').click();
 			},
 
 			function(){
@@ -303,5 +293,5 @@
 			start();
 		}, 1000);
 	});
-	
+
 })(jQuery);

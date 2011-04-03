@@ -102,8 +102,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 
 	_updateAll: function(){
 		this._getInputSet().each(function(){
-			var dVal = $(this).jqmData("cacheVal");
-			if( dVal && dVal !== $(this).is(":checked") || this.inputtype === "checkbox" ){
+			if( $(this).is(":checked") || this.inputtype === "checkbox" ){
 				$(this).trigger("change");
 			}
 		})

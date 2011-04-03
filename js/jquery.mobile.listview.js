@@ -23,92 +23,16 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 		// create listview markup 
 		$list
-			.addClass( "ui-listview" )
-			.attr( "role", "listbox" )
+			.addClass( "ui-listview" );
 		
 		if ( o.inset ) {
 			$list.addClass( "ui-listview-inset ui-corner-all ui-shadow" );
-		}	
-
-		$list.delegate( ".ui-li", "focusin", function() {
-			$( this ).attr( "tabindex", "0" );
-		});
+		}
 
 		this._itemApply( $list, $list );
 		
 		this.refresh( true );
-	
-		//keyboard events for menu items
-		$list.keydown(function( e ) {
-			var target = $( e.target ),
-				li = target.closest( "li" );
 
-			// switch logic based on which key was pressed
-			switch ( e.keyCode ) {
-				// up or left arrow keys
-				case 38:
-					var prev = li.prev();
-
-					// if there's a previous option, focus it
-					if ( prev.length ) {
-						target
-							.blur()
-							.attr( "tabindex", "-1" );
-
-						prev.find( "a" ).first().focus();
-					}	
-
-					return false;
-				break;
-
-				// down or right arrow keys
-				case 40:
-					var next = li.next();
-				
-					// if there's a next option, focus it
-					if ( next.length ) {
-						target
-							.blur()
-							.attr( "tabindex", "-1" );
-						
-						next.find( "a" ).first().focus();
-					}	
-
-					return false;
-				break;
-
-				case 39:
-					var a = li.find( "a.ui-li-link-alt" );
-
-					if ( a.length ) {
-						target.blur();
-						a.first().focus();
-					}
-
-					return false;
-				break;
-
-				case 37:
-					var a = li.find( "a.ui-link-inherit" );
-
-					if ( a.length ) {
-						target.blur();
-						a.first().focus();
-					}
-
-					return false;
-				break;
-
-				// if enter or space is pressed, trigger click
-				case 13:
-				case 32:
-					 target.trigger( "vclick" );
-
-					 return false;
-				break;	
-			}
-		});	
-		
 	},
 
 	_itemApply: function( $list, item ) {
@@ -120,9 +44,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 		item.find( "p, dl" ).addClass( "ui-li-desc" );
 
-		$list.find( "li" ).find( ">img:eq(0), >a:first>img:eq(0)" ).addClass( "ui-li-thumb" ).each(function() {
-			$( this ).closest( "li" )
-				.addClass( $(this).is( ".ui-li-icon" ) ? "ui-li-has-icon" : "ui-li-has-thumb" );
+		$list.find( "li" ).find( ">img:eq(0), >:first>img:eq(0)" ).addClass( "ui-li-thumb" ).each(function() {
+			$( this ).closest( "li" ).addClass( $(this).is( ".ui-li-icon" ) ? "ui-li-has-icon" : "ui-li-has-thumb" );
 		});
 
 		var aside = item.find( ".ui-li-aside" );
@@ -158,11 +81,6 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			$list.find( ".ui-li-dec" ).remove();
 		}
 
-		li.attr({ "role": "option", "tabindex": "-1" });
-
-		li.first().attr( "tabindex", "0" );
-		
-
 		li.each(function( pos ) {
 			var item = $( this ),
 				itemClass = "ui-li";
@@ -174,7 +92,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 			var itemTheme = item.jqmData("theme") || o.theme;
 
-			var a = item.find( "a" );
+			var a = item.find( ">a" );
 				
 			if ( a.length ) {	
 				var icon = item.jqmData("icon");
@@ -229,7 +147,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				}
 
 			} else {
-				itemClass += " ui-li-static ui-btn-up-" + itemTheme;
+				itemClass += " ui-li-static ui-body-" + itemTheme;
 			}
 			
 			
@@ -268,8 +186,10 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 
 			if ( counter && itemClass.indexOf( "ui-li-divider" ) < 0 ) {
-				item
-					.find( ".ui-link-inherit" ).first()
+			
+				var countParent = item.is(".ui-li-static:first") ? item : item.find( ".ui-link-inherit" );
+				
+				countParent
 					.addClass( "ui-li-jsnumbering" )
 					.prepend( "<span class='ui-li-dec'>" + (counter++) + ". </span>" );
 			}

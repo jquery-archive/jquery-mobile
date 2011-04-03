@@ -113,13 +113,13 @@
 			},
 
 			// addNew is used whenever a new page is added
-			addNew: function( url, transition, storedTo ){
+			addNew: function( url, transition, title, storedTo ){
 				//if there's forward history, wipe it
 				if( urlHistory.getNext() ){
 					urlHistory.clearForward();
 				}
 
-				urlHistory.stack.push( {url : url, transition: transition, page: storedTo } );
+				urlHistory.stack.push( {url : url, transition: transition, title: title, page: storedTo } );
 
 				urlHistory.activeIndex = urlHistory.stack.length - 1;
 			},
@@ -307,7 +307,8 @@
 			duplicateCachedPage = null,
 			currPage = urlHistory.getActive(),
 			back = false,
-			forward = false;
+			forward = false,
+			pageTitle = document.title;
 
 
 		// If we are trying to transition to the same page that we are currently on ignore the request.
@@ -362,7 +363,9 @@
 		if(base){ base.reset(); }
 
 		//kill the keyboard
-		$( window.document.activeElement ).add( "input:focus, textarea:focus, select:focus" ).blur();
+		if( window.document.activeElement ){
+			$( window.document.activeElement || "" ).add( "input:focus, textarea:focus, select:focus" ).blur();
+		}
 
 		function defaultTransition(){
 			if(transition === undefined){
@@ -408,10 +411,19 @@
 					path.set( url );
 				}
 
+				//if title element wasn't found, try the page div data attr too
+				var newPageTitle = to.jqmData("title") || to.find(".ui-header .ui-title" ).text();
+				if( !!newPageTitle && pageTitle == document.title ){
+					pageTitle = newPageTitle;
+				}
+
 				//add page to history stack if it's not back or forward
 				if( !back && !forward ){
-					urlHistory.addNew( url, transition, to );
+					urlHistory.addNew( url, transition, pageTitle, to );
 				}
+
+				//set page title
+				document.title = urlHistory.getActive().title;
 
 				removeActiveLinkClass();
 
@@ -453,8 +465,6 @@
 
 				pageContainerClasses = [];
 			}
-
-
 
 			if(transition && (transition !== 'none')){
 			    $.mobile.pageLoading( true );
@@ -543,14 +553,20 @@
 				url: fileUrl,
 				type: type,
 				data: data,
+				dataType: "html",
 				success: function( html ) {
 					//pre-parse html to check for a data-url,
 					//use it as the new fileUrl, base path, etc
 					var all = $("<div></div>"),
 							redirectLoc,
+
+							//page title regexp
+							newPageTitle = html.match( /<title[^>]*>([^<]*)/ ) && RegExp.$1,
+
 							// TODO handle dialogs again
 							pageElemRegex = new RegExp(".*(<[^>]+\\bdata-" + $.mobile.ns + "role=[\"']?page[\"']?[^>]*>).*"),
 							dataUrlRegex = new RegExp("\\bdata-" + $.mobile.ns + "url=[\"']?([^\"'>]*)[\"']?");
+
 
 					// data-url must be provided for the base tag so resource requests can be directed to the
 					// correct url. loading into a temprorary element makes these requests immediately
@@ -574,15 +590,21 @@
 					all.get(0).innerHTML = html;
 					to = all.find( ":jqmData(role='page'), :jqmData(role='dialog')" ).first();
 
+					//finally, if it's defined now, set the page title for storage in urlHistory
+					if( newPageTitle ){
+						pageTitle = newPageTitle;
+					}
+
 					//rewrite src and href attrs to use a base url
 					if( !$.support.dynamicBaseTag ){
 						var newPath = path.get( fileUrl );
-						to.find('[src],link[href]').each(function(){
+						to.find( "[src], link[href], a[rel='external'], :jqmData(ajax='false'), a[target]" ).each(function(){
 							var thisAttr = $(this).is('[href]') ? 'href' : 'src',
 								thisUrl = $(this).attr(thisAttr);
 
+
 							//if full path exists and is same, chop it - helps IE out
-							thisUrl.replace( location.protocol + '//' + location.host + location.pathname, '' );
+							thisUrl = thisUrl.replace( location.protocol + '//' + location.host + location.pathname, '' );
 
 							if( !/^(\w+:|#|\/)/.test(thisUrl) ){
 								$(this).attr(thisAttr, newPath + thisUrl);
@@ -665,6 +687,9 @@
 	});
 
 
+	//temporary fix for allowing 3rd party onclick handlers to still function.
+	var preventClickDefault = false, stopClickPropagation = false;
+
 	//click routing - direct to HTTP or Ajax, accordingly
 	$( "a" ).live( "vclick", function(event) {
 
@@ -707,17 +732,27 @@
 			//if data-ajax attr is set to false, use the default behavior of a link
 			hasAjaxDisabled = $this.is( ":jqmData(ajax='false')" );
 
+		//reset our prevDefault value because I'm paranoid.
+		preventClickDefault = stopClickPropagation = false;
+
 		//if there's a data-rel=back attr, go back in history
 		if( $this.is( ":jqmData(rel='back')" ) ){
 			window.history.back();
-			return false;
+			preventClickDefault = stopClickPropagation = true;
+			return;
 		}
 
 		//prevent # urls from bubbling
 		//path.get() is replaced to combat abs url prefixing in IE
 		if( url.replace(path.get(), "") == "#"  ){
 			//for links created purely for interaction - ignore
-			event.preventDefault();
+			//don't call preventDefault on the event here, vclick
+			//may have been triggered by a touchend, before any moues
+			//click event was dispatched and we want to make sure
+			//3rd party onclick handlers get triggered. If and when
+			//a mouse click event is generated, our live("click") handler
+			//will get triggered and do the preventDefault.
+			preventClickDefault = true;
 			return;
 		}
 
@@ -732,29 +767,38 @@
 			//use default click handling
 			return;
 		}
-		else {
-			//use ajax
-			var transition = $this.jqmData( "transition" ),
-				direction = $this.jqmData("direction"),
-				reverse = (direction && direction === "reverse") ||
-				// deprecated - remove by 1.0
-				$this.jqmData( "back" );
 
-			//this may need to be more specific as we use data-rel more
-			nextPageRole = $this.attr( "data-" + $.mobile.ns + "rel" );
+		//use ajax
+		var transition = $this.jqmData( "transition" ),
+			direction = $this.jqmData("direction"),
+			reverse = (direction && direction === "reverse") ||
+			// deprecated - remove by 1.0
+			$this.jqmData( "back" );
 
-			//if it's a relative href, prefix href with base url
-			if( path.isRelative( url ) && !hadProtocol ){
-				url = path.makeAbsolute( url );
-			}
+		//this may need to be more specific as we use data-rel more
+		nextPageRole = $this.attr( "data-" + $.mobile.ns + "rel" );
 
-			url = path.stripHash( url );
-
-			$.mobile.changePage( url, transition, reverse);
+		//if it's a relative href, prefix href with base url
+		if( path.isRelative( url ) && !hadProtocol ){
+			url = path.makeAbsolute( url );
 		}
-		event.preventDefault();
+
+		url = path.stripHash( url );
+
+		$.mobile.changePage( url, transition, reverse);
+		preventClickDefault = true;
 	});
 
+	$( "a" ).live( "click", function(event) {
+		if (preventClickDefault){
+			event.preventDefault();
+			preventClickDefault = false;
+		}
+		if (stopClickPropagation){
+			event.stopPropagation();
+			stopClickPropagation = false;
+		}
+	});
 
 	//hashchange event handler
 	$window.bind( "hashchange", function( e, triggered ) {
@@ -805,5 +849,6 @@
 		else {
 			$.mobile.changePage( $.mobile.firstPage, transition, true, false, true );
 		}
-	});
+		});
+
 })( jQuery );
