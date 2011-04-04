@@ -687,11 +687,8 @@
 	});
 
 
-	//temporary fix for allowing 3rd party onclick handlers to still function.
-	var preventClickDefault = false, stopClickPropagation = false;
-
 	//click routing - direct to HTTP or Ajax, accordingly
-	$( "a" ).live( "vclick", function(event) {
+	$( "a" ).live( "click", function(event) {
 
 		var $this = $(this),
 
@@ -732,27 +729,17 @@
 			//if data-ajax attr is set to false, use the default behavior of a link
 			hasAjaxDisabled = $this.is( ":jqmData(ajax='false')" );
 
-		//reset our prevDefault value because I'm paranoid.
-		preventClickDefault = stopClickPropagation = false;
-
 		//if there's a data-rel=back attr, go back in history
 		if( $this.is( ":jqmData(rel='back')" ) ){
 			window.history.back();
-			preventClickDefault = stopClickPropagation = true;
-			return;
+			return false;
 		}
 
 		//prevent # urls from bubbling
 		//path.get() is replaced to combat abs url prefixing in IE
 		if( url.replace(path.get(), "") == "#"  ){
 			//for links created purely for interaction - ignore
-			//don't call preventDefault on the event here, vclick
-			//may have been triggered by a touchend, before any moues
-			//click event was dispatched and we want to make sure
-			//3rd party onclick handlers get triggered. If and when
-			//a mouse click event is generated, our live("click") handler
-			//will get triggered and do the preventDefault.
-			preventClickDefault = true;
+			event.preventDefault();
 			return;
 		}
 
@@ -786,18 +773,7 @@
 		url = path.stripHash( url );
 
 		$.mobile.changePage( url, transition, reverse);
-		preventClickDefault = true;
-	});
-
-	$( "a" ).live( "click", function(event) {
-		if (preventClickDefault){
-			event.preventDefault();
-			preventClickDefault = false;
-		}
-		if (stopClickPropagation){
-			event.stopPropagation();
-			stopClickPropagation = false;
-		}
+		event.preventDefault();
 	});
 
 	//hashchange event handler
