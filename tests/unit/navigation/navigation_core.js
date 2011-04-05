@@ -420,4 +420,18 @@
 			}
 		], 500);
 	});
+
+	asyncTest( "Page links to the current active page result in the same active page", function(){
+		$.testHelper.openPage("#self-link");
+		$.testHelper.sequence([
+			function(){
+				$("a[href='#self-link']").click();
+			},
+
+			function(){
+				same($.mobile.activePage[0], $("#self-link")[0], "self-link page is still the active page" );
+				start();
+			}
+		], 500);
+	});
 })(jQuery);
