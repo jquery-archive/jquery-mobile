@@ -727,7 +727,10 @@
 			hasTarget = $this.is( "[target]" ),
 
 			//if data-ajax attr is set to false, use the default behavior of a link
-			hasAjaxDisabled = $this.is( ":jqmData(ajax='false')" );
+			hasAjaxDisabled = $this.is( ":jqmData(ajax='false')" ),
+
+			//if the url matches the active page's url
+			isCurrentPage = path.stripHash(url) == $.mobile.activePage.jqmData("url");
 
 		//if there's a data-rel=back attr, go back in history
 		if( $this.is( ":jqmData(rel='back')" ) ){
@@ -737,7 +740,8 @@
 
 		//prevent # urls from bubbling
 		//path.get() is replaced to combat abs url prefixing in IE
-		if( url.replace(path.get(), "") == "#"  ){
+		//or if the link is to the current page
+		if( url.replace(path.get(), "") == "#" || isCurrentPage ){
 			//for links created purely for interaction - ignore
 			event.preventDefault();
 			return;
