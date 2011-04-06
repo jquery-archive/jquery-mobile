@@ -27,7 +27,7 @@
 .ui-loading .ui-mobile-viewport { overflow: hidden !important; }
 .ui-loading .ui-loader { display: block; }
 .ui-loading .ui-page { overflow: hidden;  }
-.ui-loader { display: none; position: absolute; opacity: .85; z-index: 10; left: 50%; width: 200px; margin-left: -130px; margin-top: -35px; padding: 10px 30px; }
+.ui-loader { display: none; position: absolute; opacity: .85; z-index: 100; left: 50%; width: 200px; margin-left: -130px; margin-top: -35px; padding: 10px 30px; }
 .ui-loader h1 { font-size: 15px; text-align: center; }
 .ui-loader .ui-icon { position: static; display: block; opacity: .9; margin: 0 auto; width: 35px; height: 35px; background-color: transparent; }
 
