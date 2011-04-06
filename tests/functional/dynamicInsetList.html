@@ -10,12 +10,15 @@
 	
 	<script>
 	$('#jqm-home').live('pagebeforeshow', function(event, ui){
-		tpl = '<li role="option" id="option%s"><a>Option %s</a></li>';
+		tpl = '<li role="option" id="option%s"><a href="#">';
+		tpl += '<img src="../../docs/lists/images/%img"/>';
+		tpl += '<h3>Option %s</h3>';
+		tpl += '<p>Option %s</p></a></li>';
 
-		$('#test').prepend(tpl.replace(/%s/g, '0.5'));
-		$('#option2').before(tpl.replace(/%s/g, '1.5'));
-		$('#option2').after(tpl.replace(/%s/g, '2.5'));
-		$('#test').append(tpl.replace(/%s/g, '3.5'));
+		$('#test').prepend(tpl.replace(/%s/g, '0.5').replace(/%img/g, 'album-bb.jpg'));
+		$('#option2').before(tpl.replace(/%s/g, '1.5').replace(/%img/g, 'album-p.jpg'));
+		$('#option2').after(tpl.replace(/%s/g, '2.5').replace(/%img/g, 'album-ws.jpg'));
+		$('#test').append(tpl.replace(/%s/g, '3.5').replace(/%img/g, 'album-xx.jpg'));
 		$('#test').listview("refresh");
 
 		$("li[id!='option2']").bind("tap click", function(e){
@@ -38,11 +41,23 @@
 		
 		<p>Option *.5s are dynamicly inserted when 'pagebeforeshow' event invoked. Click options to remove it.</p>
 		
-		<div data-role="listview" data-inset="true" id="test">
-			<li role="option" id="option1"><a>Option 1</a></li>
-			<li role="option" id="option2"><a href="#">Option 2</a></li>
-			<li role="option" id="option3"><a href="#">Option 3</a></li>
-		</div>
+		<ul data-role="listview" data-inset="true" id="test">
+			<li role="option" id="option1"><a href="#">
+				<img src="../../docs/lists/images/album-hc.jpg" />
+				<h3>Option 1</h3>
+				<p>Option 1</p>
+			</a></li>
+			<li role="option" id="option2"><a href="#">
+				<img src="../../docs/lists/images/album-ok.jpg" />
+				<h3>Option 2</h3>
+				<p>Option 2</p>
+			</a></li>
+			<li role="option" id="option3"><a href="#">
+				<img src="../../docs/lists/images/album-rh.jpg" />
+				<h3>Option 3</h3>
+				<p>Option 3</p>
+			</a></li>
+		</ul>
 		
 		<ul data-role="listview" id="log">
 			
