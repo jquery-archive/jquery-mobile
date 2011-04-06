@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>jQuery Mobile: Grid Layout</title>
+	<link rel="stylesheet"  href="../../themes/default/" />
+	<link rel="stylesheet" href="../../docs/_assets/css/jqm-docs.css" />
+	<script type="text/javascript" src="../../js/jquery.js"></script>
+	<script type="text/javascript" src="../../js/"></script>
+	
+	<script>
+	$('#jqm-home').live('pagebeforeshow', function(event, ui){
+		tpl = '<li role="option" id="option%s"><a>Option %s</a></li>';
+
+		$('#test').prepend(tpl.replace(/%s/g, '0.5'));
+		$('#option2').before(tpl.replace(/%s/g, '1.5'));
+		$('#option2').after(tpl.replace(/%s/g, '2.5'));
+		$('#test').append(tpl.replace(/%s/g, '3.5'));
+		$('#test').listview("refresh");
+
+		$("li[id!='option2']").bind("tap click", function(e){
+			$(this).remove();
+			$("#log")
+				.prepend("<li>"+ e.type +" event; target: "+ e.target.nodeName +"; message: grid '"+$(this).text()+"' hidden</li>")
+				.listview("refresh");
+		}).bind("tap click", false);
+	});	
+	</script>
+</head> 
+<body> 
+<div data-role="page" data-theme="b" id="jqm-home">
+	<div data-role="header">
+		<h1>Dynamic Inset List</h1>
+	</div>
+	
+	<div data-role="content">
+		<p>Touch events on this page will log out below, prepending to the top as they arrive.</p>
+		
+		<p>Option *.5s are dynamicly inserted when 'pagebeforeshow' event invoked. Click options to remove it.</p>
+		
+		<div data-role="listview" data-inset="true" id="test">
+			<li role="option" id="option1"><a>Option 1</a></li>
+			<li role="option" id="option2"><a href="#">Option 2</a></li>
+			<li role="option" id="option3"><a href="#">Option 3</a></li>
+		</div>
+		
+		<ul data-role="listview" id="log">
+			
+		</ul>
+
+	</div>
+</div>
+</body>
+</html>
