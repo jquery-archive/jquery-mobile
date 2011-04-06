@@ -41,7 +41,7 @@
 
 		$checkboxLabel.trigger("click");
 
-		//test above will be triggered twice as will the start here
+		//test above will be triggered twice, and the start here once	
 		$checkbox.change(function(){
 			start();
 		});
