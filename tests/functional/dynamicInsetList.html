@@ -21,7 +21,7 @@
 		$('#test').append(tpl.replace(/%s/g, '3.5').replace(/%img/g, 'album-xx.jpg'));
 		$('#test').listview("refresh");
 
-		$("li[id!='option2']").bind("tap click", function(e){
+		$("li").bind("tap click", function(e){
 			$(this).remove();
 			$("#log")
 				.prepend("<li>"+ e.type +" event; target: "+ e.target.nodeName +"; message: grid '"+$(this).text()+"' hidden</li>")
