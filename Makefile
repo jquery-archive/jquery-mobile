@@ -1,8 +1,10 @@
 
 VER = $(shell cat version.txt)
+COMMITVER = $(shell git log -1 --format=format:"SHA1: %H %nDate: %cd %nTitle: %s")
 SED_VER = sed "s/@VERSION/${VER}/"
 
 DIR = jquery.mobile-${VER}
+DONE = done
 MAX = ${DIR}.js
 MIN = ${DIR}.min.js
 CSS = ${DIR}.css
@@ -52,35 +54,43 @@ CSSFILES =  themes/default/jquery.mobile.theme.css \
   themes/default/jquery.mobile.listview.css \
   themes/default/jquery.mobile.forms.slider.css
 
-all: mobile min css cssmin
+all: log mobile min css cssmin zip
 
 clean:
 	@@rm -rf ${DIR}*
 
 css:
 	@@head -8 js/jquery.mobile.core.js | ${SED_VER} > ${CSS}
-	@@cat ${CSSFILES} >> ${CSS}
+	@@cat ${CSSFILES} >> ${DONE}/${CSS}
 
 cssmin: css
 	@@head -8 js/jquery.mobile.core.js | ${SED_VER} > ${CSSMIN}
-	@@java -jar build/yuicompressor-2.4.4.jar --type css ${CSS} >> ${CSSMIN}
+	@@java -jar build/yuicompressor-2.4.4.jar --type css ${DONE}/${CSS} >> ${DONE}/${CSSMIN}
+
+log:
+	@@mkdir ${DONE}
+	@@echo "Git Release Version: " >> ${DONE}/README.txt
+	@@echo ${VER} >> ${DONE}/README.txt
+	@@echo "\nGit Information for this build:\n" >> ${DONE}/README.txt
+	@@echo ${COMMITVER} >> ${DONE}/README.txt
 
 mobile:
 	@@head -8 js/jquery.mobile.core.js | ${SED_VER} > ${MAX}
-	@@cat ${FILES} >> ${MAX}
+	@@cat ${FILES} >> ${DONE}/${MAX}
 
 min: mobile
 	@@head -8 js/jquery.mobile.core.js | ${SED_VER} > ${MIN}
-	@@java -jar build/google-compiler-20100917.jar --js ${MAX} --warning_level QUIET --js_output_file ${MIN}.tmp
-	@@cat ${MIN}.tmp >> ${MIN}
-	@@rm -f ${MIN}.tmp
+	@@java -jar build/google-compiler-20100917.jar --js ${DONE}/${MAX} --warning_level QUIET --js_output_file ${MIN}.tmp
+	@@cat ${MIN}.tmp >> ${DONE}/${MIN}
+	@@rm -f tmp
 
 zip: clean min cssmin
 	@@mkdir -p ${DIR}
-	@@cp ${DIR}*.js ${DIR}/
-	@@cp ${DIR}*.css ${DIR}/
+	@@cp ${DONE}/${DIR}*.js ${DIR}/
+	@@cp ${DONE}/${DIR}*.css ${DIR}/
 	@@cp -R themes/default/images ${DIR}/
 	@@zip -r ${DIR}.zip ${DIR}
+	@@rm -fr ${DIR}
 
 # Used by the jQuery team to deploy a build to the CDN
 deploy: zip
