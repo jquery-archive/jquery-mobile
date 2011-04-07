@@ -237,17 +237,20 @@
 
 	//direct focus to the page title, or otherwise first focusable element
 	function reFocus( page ){
-		var pageTitle = page.find( ".ui-title:eq(0)" ),
-			lastClicked = page.jqmData( "lastClicked" );
+		var lastClicked = page.jqmData( "lastClicked" );
 			
 		if( lastClicked && lastClicked.length ){
 			lastClicked.focus();
 		}
-		else if( pageTitle.length ){
-			pageTitle.focus();
-		}
-		else{
-			page.find( focusable ).eq(0).focus();
+		else {
+			var pageTitle = page.find( ".ui-title:eq(0)" );
+			
+			if( pageTitle.length ){
+				pageTitle.focus();
+			}
+			else{
+				page.find( focusable ).eq(0).focus();
+			}
 		}
 	}
 
