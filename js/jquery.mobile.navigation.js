@@ -237,8 +237,13 @@
 
 	//direct focus to the page title, or otherwise first focusable element
 	function reFocus( page ){
-		var pageTitle = page.find( ".ui-title:eq(0)" );
-		if( pageTitle.length ){
+		var pageTitle = page.find( ".ui-title:eq(0)" ),
+			lastClicked = page.jqmData( "lastClicked" );
+			
+		if( lastClicked && lastClicked.length ){
+			lastClicked.focus();
+		}
+		else if( pageTitle.length ){
 			pageTitle.focus();
 		}
 		else{
@@ -396,7 +401,9 @@
 
 			if( from ){
 				//set as data for returning to that spot
-				from.jqmData( "lastScroll", currScroll);
+				from
+					.jqmData( "lastScroll", currScroll)
+					.jqmData( "lastClicked", $activeClickedLink);
 				//trigger before show/hide events
 				from.data( "page" )._trigger( "beforehide", null, { nextPage: to } );
 			}
