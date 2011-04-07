@@ -71,7 +71,7 @@ mobile:
 
 min: mobile
 	@@head -8 js/jquery.mobile.core.js | ${SED_VER} > ${MIN}
-	@@java -jar build/google-compiler-20100917.jar --js ${MAX} --warning_level QUIET --js_output_file ${MIN}.tmp
+	@@java -jar build/google-compiler-20110405.jar --js ${MAX} --warning_level QUIET --js_output_file ${MIN}.tmp
 	@@cat ${MIN}.tmp >> ${MIN}
 	@@rm -f ${MIN}.tmp
 
