@@ -402,7 +402,7 @@
 			}
 			to.data( "page" )._trigger( "beforeshow", null, { prevPage: from || $("") } );
 
-			function loadComplete(){
+			function pageChangeComplete(){
 
 				if( changeHash !== false && url ){
 					//disable hash listening temporarily
@@ -486,7 +486,7 @@
 					if( from ){
 						from.removeClass( $.mobile.activePageClass );
 					}
-					loadComplete();
+					pageChangeComplete();
 					removeContainerClasses();
 				});
 			}
@@ -496,7 +496,7 @@
 					from.removeClass( $.mobile.activePageClass );
 				}
 				to.addClass( $.mobile.activePageClass );
-				loadComplete();
+				pageChangeComplete();
 			}
 		}
 
