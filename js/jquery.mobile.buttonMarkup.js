@@ -98,9 +98,6 @@ var attachEvents = function() {
 		"vmouseout blur": function() {
 			var theme = $(this).attr( "data-" + $.mobile.ns + "theme" );
 			$(this).removeClass( "ui-btn-hover-" + theme ).addClass( "ui-btn-up-" + theme );
-		},
-		"vclick": function() {
-			$(this).addClass( $.mobile.activeBtnClass );
 		}
 	});
 

@@ -685,6 +685,11 @@
 		);
 		event.preventDefault();
 	});
+	
+	//add active state on vclick
+	$( "a" ).live( "vclick", function(){
+		$(this).closest( ".ui-btn" ).addClass( $.mobile.activeBtnClass );
+	});
 
 
 	//click routing - direct to HTTP or Ajax, accordingly
