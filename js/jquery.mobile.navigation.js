@@ -363,9 +363,7 @@
 		if(base){ base.reset(); }
 
 		//kill the keyboard
-		if( window.document.activeElement ){
-			$( window.document.activeElement || "" ).add( "input:focus, textarea:focus, select:focus" ).blur();
-		}
+		$( window.document.activeElement ).add( "input:focus, textarea:focus, select:focus" ).blur();
 
 		function defaultTransition(){
 			if(transition === undefined){
@@ -402,7 +400,7 @@
 			}
 			to.data( "page" )._trigger( "beforeshow", null, { prevPage: from || $("") } );
 
-			function loadComplete(){
+			function changePageComplete(){
 
 				if( changeHash !== false && url ){
 					//disable hash listening temporarily
@@ -486,7 +484,7 @@
 					if( from ){
 						from.removeClass( $.mobile.activePageClass );
 					}
-					loadComplete();
+					changePageComplete();
 					removeContainerClasses();
 				});
 			}
@@ -496,7 +494,7 @@
 					from.removeClass( $.mobile.activePageClass );
 				}
 				to.addClass( $.mobile.activePageClass );
-				loadComplete();
+				changePageComplete();
 			}
 		}
 
@@ -687,8 +685,11 @@
 	});
 
 
+	//temporary fix for allowing 3rd party onclick handlers to still function.
+	var preventClickDefault = false, stopClickPropagation = false;
+
 	//click routing - direct to HTTP or Ajax, accordingly
-	$( "a" ).live( "click", function(event) {
+	$( "a" ).live( "vclick", function(event) {
 
 		var $this = $(this),
 
@@ -727,23 +728,29 @@
 			hasTarget = $this.is( "[target]" ),
 
 			//if data-ajax attr is set to false, use the default behavior of a link
-			hasAjaxDisabled = $this.is( ":jqmData(ajax='false')" ),
+			hasAjaxDisabled = $this.is( ":jqmData(ajax='false')" );
 
-			//if the url matches the active page's url
-			isCurrentPage = path.stripHash(url) == $.mobile.activePage.jqmData("url");
+		//reset our prevDefault value because I'm paranoid.
+		preventClickDefault = stopClickPropagation = false;
 
 		//if there's a data-rel=back attr, go back in history
 		if( $this.is( ":jqmData(rel='back')" ) ){
 			window.history.back();
-			return false;
+			preventClickDefault = stopClickPropagation = true;
+			return;
 		}
 
 		//prevent # urls from bubbling
 		//path.get() is replaced to combat abs url prefixing in IE
-		//or if the link is to the current page
-		if( url.replace(path.get(), "") == "#" || isCurrentPage ){
+		if( url.replace(path.get(), "") == "#"  ){
 			//for links created purely for interaction - ignore
-			event.preventDefault();
+			//don't call preventDefault on the event here, vclick
+			//may have been triggered by a touchend, before any moues
+			//click event was dispatched and we want to make sure
+			//3rd party onclick handlers get triggered. If and when
+			//a mouse click event is generated, our live("click") handler
+			//will get triggered and do the preventDefault.
+			preventClickDefault = true;
 			return;
 		}
 
@@ -777,7 +784,18 @@
 		url = path.stripHash( url );
 
 		$.mobile.changePage( url, transition, reverse);
-		event.preventDefault();
+		preventClickDefault = true;
+	});
+
+	$( "a" ).live( "click", function(event) {
+		if (preventClickDefault){
+			event.preventDefault();
+			preventClickDefault = false;
+		}
+		if (stopClickPropagation){
+			event.stopPropagation();
+			stopClickPropagation = false;
+		}
 	});
 
 	//hashchange event handler
