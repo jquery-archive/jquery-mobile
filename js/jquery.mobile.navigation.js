@@ -688,7 +688,7 @@
 	
 	//add active state on vclick
 	$( "a" ).live( "vclick", function(){
-		$(this).closest( ".ui-btn" ).addClass( $.mobile.activeBtnClass );
+		$(this).closest( ".ui-btn" ).not( ".ui-disabled" ).addClass( $.mobile.activeBtnClass );
 	});
 
 
