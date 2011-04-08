@@ -10,4 +10,5 @@ combine/
 *.iml
 *.ipr
 *.iws
-
+jquery.mobile-*.css
+jquery.mobile-*.js
