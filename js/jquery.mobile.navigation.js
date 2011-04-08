@@ -16,10 +16,20 @@
 
 			//get path from current hash, or from a file path
 			get: function( newPath ){
+				var segments, i;
 				if( newPath === undefined ){
 					newPath = location.hash;
 				}
-				return path.stripHash( newPath ).replace(/[^\/]*\.[^\/*]+$/, '');
+				// Making a regexp that returns the path
+				// (and does not have obscure failure cases)
+				// is not so simple - try a simpler approach instead
+				i = newPath.indexOf("?");
+				if (i > -1) { // Remove any parameters (which might contain slashes!)
+					newPath = newPath.slice(0, i);
+				}
+				segments = path.stripHash( newPath ).split("/");
+				segments.pop();
+				return segments.join("/") + (segments.length > 0 ? "/" : "");
 			},
 
 			//return the substring of a filepath before the sub-page key, for making a server request
@@ -30,7 +40,12 @@
 
 			//set location hash to path
 			set: function( path ){
-				location.hash = path;
+				//console.log("path.set:", path);
+				if (path === "#" && location.href.indexOf("#") === -1) {
+					location.href += "#"; // Only way to set empty hash for non-hash url
+				} else {
+					location.hash = path;
+				}
 			},
 
 			//location pathname from intial directory request
@@ -53,13 +68,104 @@
 				return /\//.test(url);
 			},
 
-			//return a url path with the window's location protocol/hostname/pathname removed
+			// There are several supported url formats, which are cleaned (converted to canonical form) in this function.
+			// Syntax:                        current_location        + url                     => resulting_location         (returned canonical form)
+
+			// 1) Relative:                   example.com/a/#b/c.html + ../d/e.html             => example.com/a/#d/e.html    (#d/e.html)
+			// 2) Hash-relative:              example.com/a/#b/c.html + #d/e.html               => example.com/a/#d/e.html    (#d/e.html)
+			// 3) Hash-absolute:              example.com/a/#b/c.html + #/d/e.html              => example.com/a/#d/e.html    (#d/e.html)
+			// 4) Absolute path:              example.com/a/#b/c.html + /d/e.html               => example.com/a/#../d/e.html (#../d/e.html)
+			// 5) Absolute same-host:         example.com/a/#b/c.html + example.com/d/e.html    => example.com/a/#../d/e.html (#../d/e.html)
+			// 6) Absolute diff-host:         example.com/a/#b/c.html + other.com/d/e.html      => other.com/d/e.html         (other.com/d/e.html)
+			// 7) Hashed same-host same-path: example.com/a/#b/c.html + example.com/a/#d/e.html => example.com/a/#d/e.html    (#d/e.html)
+			// 8) Hashed same-host diff-path: example.com/a/#b/c.html + example.com/d/#e.html   => example.com/d/#e.html      (example.com/d/#e.html)
+			// 9) Hashed diff-host:           example.com/a/#b/c.html + other.com/d/#e.html     => other.com/d/#e.html        (other.com/d/#e.html)
+
+			// The canonical form is hash-relative (e.g. #d/e.html) for urls on the same host
+			// and original form (no change) for urls on a different host.
+			// A hashed url (cases 7-9) must always use the canonical form in the hash part.
+			// E.g. example.com/a/#/b/c.html is illegal, you must use example.com/a/#b/c.html instead.
+			// In non-external urls index.* is never explicitly included at the end (ends in slash instead).
+			// Hash-absolute form is same as hash-relative, just with a slash prefix. The reason it is supported
+			// is to allow you to write "#/" to refer to $.mobile.firstPage (and to write other hash urls in
+			// a way consistent with that).
+			// You can refer to $.mobile.firstPage in several ways:
+			// 1) Hash-absolute: example.com/a/#b/c.html      + #/                   => example.com/a/# (#)
+			// 2) Relative: example.com/a/#b/c.html           + ..                   => example.com/a/# (#)
+			// 3) Absolute path: example.com/a/#b/c.html      + /a/                  => example.com/a/# (#)
+			// You can of course also refer to $.mobile.firstPage using its data-url attribute
+			// (=== ID if not defined), e.g. "#MyFirstPageId".
+			// This will be handled equivalently to "#/".
+			// Note that the location (url bar) will always have a hash character, event when on first page.
 			clean: function( url ){
+				//console.log("clean:", url);
 				// Replace the protocol, host, and pathname only once at the beginning of the url to avoid
 				// problems when it's included as a part of a param
-				// Also, since all urls are absolute in IE, we need to remove the pathname as well.
-				var leadingUrlRootRegex = new RegExp("^" + location.protocol + "//" + location.host + location.pathname);
-				return url.replace(leadingUrlRootRegex, "");
+				var leadingUrlRootRegex;
+				if (url.indexOf("#") > 0) {
+					// Absolute (with hostname) urls that contain a hash are converted to canonical form
+					// only if the pathname (before hash) matches current location.pathname.
+					// Otherwise it is considered an external URL and returned as-is
+					// (because regexp will not match and protocol is thus not removed).
+					// Such an URL should always be loaded as external, and isExternal will return true for it
+					// since protocol remains in the URL after path.clean.
+					leadingUrlRootRegex = new RegExp("^" + location.protocol + "//" + location.host + location.pathname);
+				} else {
+					leadingUrlRootRegex = new RegExp("^" + location.protocol + "//" + location.host);
+				}
+				url = url.replace(leadingUrlRootRegex, "");
+				//console.log("Without host & pathname:", url);
+				if (path.hasProtocol(url)) {
+					return url; // External
+				} else {
+					// canonize url
+					//console.log("canonize url:", url);
+					var urlSegments, locSegments, i, canonPath = [];
+					var checkForIndex = /^(.*\/)index\.[^/]*$/i.exec(url);
+					if (checkForIndex) {
+						//console.log("Removing index:", checkForIndex);
+						url = checkForIndex[1];
+					}
+					if (url.charAt(0) === "#") { // Hash-absolute - nothing to do since we already removed extra index file (if present)
+						if (url.charAt(1) === "/") {
+							return "#" + url.slice(2); // Allow "absolute" form of hash
+						} else if (url === $.mobile.firstPageUrl) {
+							return "#";
+						} else {
+							return url;
+						}
+					} else if (url.charAt(0) === "/") { // Absolute
+						//console.log("url:", url);
+						//console.log("pathname:", location.pathname);
+						locSegments = location.pathname.split("/");
+						urlSegments = url.split("/");
+						locSegments.pop(); // Remove filename part
+						for (i=0; locSegments[i] === urlSegments[i]; i++); // Count common elements
+						//console.log("common elements:", i);
+						urlSegments.splice(0, i); // Remove common elements from url
+						//console.log("removed common:", urlSegments);
+						for (;i < locSegments.length; i++) {
+							canonPath.push("..");
+						}
+						canonPath = canonPath.concat(urlSegments);
+						return "#" + canonPath.join("/");
+					} else { // Relative
+						//console.log("path:", path.get());
+						canonPath = (path.get() + url).split("/");
+						//console.log("canonPath:" + canonPath);
+						// Remove dot-dot parts where possible by removing both the dot-dot and the preceding segment
+						i = 0;
+						while(i < canonPath.length) {
+							if (canonPath[i] === ".." && i > 0 && canonPath[i-1] !== "..") {
+								i--;
+								canonPath.splice(i,2);
+							} else {
+								i++;
+							}
+						}
+						return "#" + canonPath.join("/");
+					}
+				}
 			},
 
 			//just return the url without an initial #
@@ -147,9 +253,12 @@
 				// save new page index, null check to prevent falsey 0 result
 				this.activeIndex = newActiveIndex !== undefined ? newActiveIndex : this.activeIndex;
 
+				//console.log("Checking history");
 				if( back ){
+					//console.log("It's back");
 					opts.isBack();
 				} else if( forward ){
+					//console.log("It's forward");
 					opts.isForward();
 				}
 			},
@@ -292,12 +401,21 @@
 
 	// changepage function
 	$.mobile.changePage = function( to, transition, reverse, changeHash, fromHashChange ){
+		//console.log("to:", to);
+
+		if ($.type(to) === "string") {
+			to = path.clean(to);
+			if (to === "#") {
+				to = $.mobile.firstPage;
+			}
+		}
+
 		//from is always the currently viewed page
 		var toIsArray = $.type(to) === "array",
 			toIsObject = $.type(to) === "object",
 			from = toIsArray ? to[0] : $.mobile.activePage;
 
-			to = toIsArray ? to[1] : to;
+		to = toIsArray ? to[1] : to;
 
 		var url = $.type(to) === "string" ? path.stripHash( to ) : "",
 			fileUrl = url,
@@ -344,7 +462,7 @@
 		}
 
 		if( toIsObject && to.url ){
-			url = to.url;
+			url = path.clean(to.url);
 			data = to.data;
 			type = to.type;
 			isFormRequest = true;
@@ -403,12 +521,20 @@
 			to.data( "page" )._trigger( "beforeshow", null, { prevPage: from || $("") } );
 
 			function loadComplete(){
+				//console.log("loadComplete:", url);
 
-				if( changeHash !== false && url ){
-					//disable hash listening temporarily
-					urlHistory.ignoreNextHashChange = false;
-					//update hash and history
-					path.set( url );
+				if (changeHash !== false) {
+					if (to === $.mobile.firstPage) {
+						//console.log("firstPage, setting url to #");
+						//disable hash listening temporarily
+						urlHistory.ignoreNextHashChange = false;					
+						path.set("#");
+					} else if(url) {
+						//disable hash listening temporarily
+						urlHistory.ignoreNextHashChange = false;
+						//update hash and history
+						path.set( url );
+					 }
 				}
 
 				//if title element wasn't found, try the page div data attr too
@@ -734,7 +860,6 @@
 
 		//reset our prevDefault value because I'm paranoid.
 		preventClickDefault = stopClickPropagation = false;
-
 		//if there's a data-rel=back attr, go back in history
 		if( $this.is( ":jqmData(rel='back')" ) ){
 			window.history.back();
@@ -744,7 +869,9 @@
 
 		//prevent # urls from bubbling
 		//path.get() is replaced to combat abs url prefixing in IE
-		if( url.replace(path.get(), "") == "#"  ){
+		//if( url.replace(path.get(), "") == "#"  ){
+		if( href == "#" ){
+			//console.log("Url was:", url);
 			//for links created purely for interaction - ignore
 			//don't call preventDefault on the event here, vclick
 			//may have been triggered by a touchend, before any moues
@@ -777,14 +904,14 @@
 
 		//this may need to be more specific as we use data-rel more
 		nextPageRole = $this.attr( "data-" + $.mobile.ns + "rel" );
-
+/*
 		//if it's a relative href, prefix href with base url
 		if( path.isRelative( url ) && !hadProtocol ){
 			url = path.makeAbsolute( url );
 		}
 
 		url = path.stripHash( url );
-
+*/
 		$.mobile.changePage( url, transition, reverse);
 		preventClickDefault = true;
 	});
@@ -802,8 +929,10 @@
 
 	//hashchange event handler
 	$window.bind( "hashchange", function( e, triggered ) {
+		//console.log("hashchange:", location.href);
 		//find first page via hash
-		var to = path.stripHash( location.hash ),
+		//var to = path.stripHash( location.hash ),
+		var to = location.hash,
 			//transition is false if it's the first page, undefined otherwise (and may be overridden by default)
 			transition = $.mobile.urlHistory.stack.length === 0 ? false : undefined;
 
@@ -823,10 +952,12 @@
 			// If current active page is not a dialog skip the dialog and continue
 			// in the same direction
 			if(!$.mobile.activePage.is( ".ui-dialog" )) {
+				//console.log("active page is not .ui-dialog", to);
+				//console.log("urlHistory", urlHistory.stack);
 				//determine if we're heading forward or backward and continue accordingly past
 				//the current dialog
 				urlHistory.directHashChange({
-					currentUrl: to,
+					currentUrl: path.stripHash(to),
 					isBack: function(){ window.history.back(); },
 					isForward: function(){ window.history.forward(); }
 				});
@@ -834,10 +965,11 @@
 				// prevent changepage
 				return;
 			} else {
+				//console.log("active page is .ui-dialog", $.mobile.urlHistory.getActive().page);
 				var setTo = function(){ to = $.mobile.urlHistory.getActive().page; };
 				// if the current active page is a dialog and we're navigating
 				// to a dialog use the dialog objected saved in the stack
-				urlHistory.directHashChange({	currentUrl: to, isBack: setTo, isForward: setTo	});
+				urlHistory.directHashChange({	currentUrl: path.stripHash(to), isBack: setTo, isForward: setTo	});
 			}
 		}
 

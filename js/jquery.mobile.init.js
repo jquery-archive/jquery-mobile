@@ -82,6 +82,7 @@
 
 			//define first page in dom case one backs out to the directory root (not always the first page visited, but defined as fallback)
 			$.mobile.firstPage = $pages.first();
+			$.mobile.firstPageUrl = "#" + $.mobile.firstPage.attr("data-" + $.mobile.ns + "url");
 
 			//define page container
 			$.mobile.pageContainer = $pages.first().parent().addClass( "ui-mobile-viewport" );
@@ -91,7 +92,7 @@
 
 			// if hashchange listening is disabled or there's no hash deeplink, change to the first page in the DOM
 			if( !$.mobile.hashListeningEnabled || !$.mobile.path.stripHash( location.hash ) ){
-				$.mobile.changePage( $.mobile.firstPage, false, true, false, true );
+				$.mobile.changePage( $.mobile.firstPage, false, true, true, true );
 			}
 			// otherwise, trigger a hashchange to load a deeplink
 			else {

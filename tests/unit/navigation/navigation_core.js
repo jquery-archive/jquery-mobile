@@ -95,7 +95,7 @@
 
 	test( "path.get method is working properly", function(){
 		window.location.hash = "foo";
-		same($.mobile.path.get(), "foo", "get method returns location.hash minus hash character");
+		same($.mobile.path.get(), "", "get method for location.hash #foo returns empty string");
 		same($.mobile.path.get( "#foo/bar/baz.html" ), "foo/bar/", "get method with hash arg returns path with no filename or hash prefix");
 		same($.mobile.path.get( "#foo/bar/baz.html/" ), "foo/bar/baz.html/", "last segment of hash is retained if followed by a trailing slash");
 	});
@@ -128,16 +128,51 @@
 	});
 
 	test( "path.clean is working properly", function(){
+
+		$.testHelper.openPage("#data-url-tests/data-url.html");
+
 		var localroot = location.protocol + "//" + location.host + location.pathname,
 			remoteroot = "http://google.com/",
 			fakepath = "#foo/bar/baz.html",
-			pathWithParam = localroot + "/bar?baz=" + localroot,
+			pathWithParam = localroot + "bar?baz=" + localroot,
 			localpath = localroot + fakepath,
-			remotepath = remoteroot + fakepath;
+			remotepath = remoteroot + fakepath,
+			relpath1 = "../foo.html",
+			relpath2 = "../foo/bar.html",
+			relpath3 = "../../foo/bar.html",
+			abspath1 = "/foo/bar.html",
+			abspath2 = location.pathname + "foo/bar.html",
+			hrelpath1 = "#foo.html",
+			hrelpath2 = "#foo/bar.html",
+			hrelpath3 = "#../../foo/bar.html",
+			habspath1 = "#/foo.html",
+			habspath2 = "#/foo/bar.html",
+			habspath3 = "#/../../foo/bar.html",
+			segments = location.pathname.split("/"),
+			uppath = "#",
+			i;
+
+		// pathname ends and begins with slash, so first and last elements are empty
+		for (i=0; i<segments.length-2; i++) {
+			uppath += "../"
+		}
+		// We are in a subdirectory, so one more ..
+		uppath += "foo/bar.html";
 
 		same( $.mobile.path.clean( localpath ), fakepath, "removes location protocol, host, port, pathname from same-domain path");
 		same( $.mobile.path.clean( remotepath ), remotepath, "does nothing to an external domain path");
-		same( $.mobile.path.clean( pathWithParam ), "/bar?baz=" + localroot, "doesn't remove params with localroot value");
+		same( $.mobile.path.clean( pathWithParam ), "#bar?baz=" + localroot, "doesn't remove params with localroot value");
+		same( $.mobile.path.clean( relpath1 ), "#foo.html", ".. removed from current path, no dirs left");
+		same( $.mobile.path.clean( relpath2 ), "#foo/bar.html", ".. removed from current path, one dir left");
+		same( $.mobile.path.clean( relpath3 ), "#../foo/bar.html", ".. removed from current path, one .. still left");
+		same( $.mobile.path.clean( abspath1 ), uppath, "absolute path above localroot");
+		same( $.mobile.path.clean( abspath2 ), "#foo/bar.html", "absolute path below localroot");
+		same( $.mobile.path.clean( hrelpath1 ), "#foo.html", "hash-relative path stays the same 1");
+		same( $.mobile.path.clean( hrelpath2 ), "#foo/bar.html", "hash-relative path stays the same 2");
+		same( $.mobile.path.clean( hrelpath3 ), "#../../foo/bar.html", "hash-relative path stays the same 3");
+		same( $.mobile.path.clean( habspath1 ), "#foo.html", "hash-absolute path stays the same minus leading slash 1");
+		same( $.mobile.path.clean( habspath2 ), "#foo/bar.html", "hash-absolute path stays the same minus leading slash 2");
+		same( $.mobile.path.clean( habspath3 ), "#../../foo/bar.html", "hash-absolute path stays the same minus leading slash 3");
 	});
 
 	test( "path.stripHash is working properly", function(){
@@ -213,26 +248,26 @@
 
 	//url listening
 	function testListening( prop ){
-		prop = false;
+		eval(prop + " = false;");
 		var stillListening = false;
 		$(document).bind("pagebeforehide", function(){
 			stillListening = true;
 		});
 		location.hash = "foozball";
 		setTimeout(function(){
-			ok( prop == stillListening, prop + " = false disables default hashchange event handler");
+			ok( stillListening == false, prop + " = false disables default hashchange event handler");
 			location.hash = "";
-			prop = true;
+			eval(prop +"= true;");
 			start();
-		}, 1000);
+		}, 2000);
 	}
 
 	asyncTest( "ability to disable our hash change event listening internally", function(){
-		testListening( $.mobile.urlHistory.ignoreNextHashChange );
+		testListening( "$.mobile.urlHistory.ignoreNextHashChange" );
 	});
 
 	asyncTest( "ability to disable our hash change event listening globally", function(){
-		testListening( $.mobile.hashListeningEnabled );
+		testListening( "$.mobile.hashListeningEnabled" );
 	});
 
 	var testDataUrlHash = function(linkSelector, hashRegex){
@@ -419,5 +454,50 @@
 				start();
 			}
 		], 500);
+	});
+
+	asyncTest( "navigating to # with changePage() takes you to first page", function(){
+		$.testHelper.openPage("#canonicaltest");
+
+		$.testHelper.sequence([
+			// transition to the firstpage
+			function(){ $.mobile.changePage("#"); },
+
+			// make sure we're at the first page
+			function(){
+				same($.mobile.activePage.attr("id"), "foo", "should be back to first page (id='foo')");
+				same(window.location.hash.replace(/^#/, ""), "", "hash should be empty (not id value)");
+				start();
+			}], 1000);
+	});
+
+	asyncTest( "navigating to #/ with changePage() takes you to first page", function(){
+		$.testHelper.openPage("#canonicaltest");
+
+		$.testHelper.sequence([
+			// transition to the first oage
+			function(){ $.mobile.changePage("#/"); },
+
+			// make sure we're at the first page
+			function(){
+				same($.mobile.activePage.attr("id"), "foo", "should be back to first page (id='foo')");
+				same(window.location.hash.replace(/^#/, ""), "", "hash should be empty (not id value)");
+				start();
+			}], 1000);
+	});
+
+	asyncTest( "navigating to #/ with a link takes you to first page", function(){
+		$.testHelper.openPage("#canonicaltest");
+
+		$.testHelper.sequence([
+			// transition to the first page
+			function(){ $("#canonicaltest a").click(); },
+
+			// make sure we're at the first page
+			function(){
+				same($.mobile.activePage.attr("id"), "foo", "should be back to first page (id='foo')");
+				same(window.location.hash.replace(/^#/, ""), "", "hash should be empty (not id value)");
+				start();
+			}], 1000);
 	});
 })(jQuery);
