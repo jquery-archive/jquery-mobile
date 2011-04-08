@@ -6,3 +6,8 @@
 cache/
 combined/
 combine/
+.idea
+*.iml
+*.ipr
+*.iws
+
