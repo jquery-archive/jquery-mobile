@@ -499,6 +499,7 @@
 				same(window.location.hash.replace(/^#/, ""), "", "hash should be empty (not id value)");
 				start();
 			}], 1000);
+	});
 
 	asyncTest( "Page links to the current active page result in the same active page", function(){
 		$.testHelper.openPage("#self-link");
