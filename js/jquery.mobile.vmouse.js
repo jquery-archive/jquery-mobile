@@ -30,12 +30,9 @@ var dataPropertyName = "virtualMouseBindings",
 	resetTimerID = 0,
 	startX = 0,
 	startY = 0,
-	startScrollX = 0,
-	startScrollY = 0,
 	didScroll = false,
 	clickBlockList = [],
 	blockMouseTriggers = false,
-	scrollTopSupported = $.support.scrollTop,
 	eventCaptureSupported = $.support.eventCapture,
 	$document = $(document),
 	nextTouchID = 1,
@@ -75,10 +72,12 @@ function createVirtualEvent(event, eventType)
 	}
 	
 	if (t.search(/^touch/) !== -1){
-		var ne = getNativeEvent(oe);
-		if (typeof ne.touches !== "undefined" && ne.touches[0]){
-			var touch = ne.touches[0];
-			for (var i = 0; i < touchEventProps.length; i++){
+		var ne = getNativeEvent(oe),
+			t = ne.touches,
+			ct = ne.changedTouches,
+			touch = (t && t.length) ? t[0] : ((ct && ct.length) ? ct[0] : undefined);
+		if (touch){
+			for (var i = 0, len = touchEventProps.length; i < len; i++){
 				var prop = touchEventProps[i];
 				event[prop] = touch[prop];
 			}
@@ -225,11 +224,6 @@ function handleTouchStart(event)
 			startX = t.pageX;
 			startY = t.pageY;
 		
-			if (scrollTopSupported){
-				startScrollX = window.pageXOffset;
-				startScrollY = window.pageYOffset;
-			}
-		
 			triggerVirtualEvent("vmouseover", event, flags);
 			triggerVirtualEvent("vmousedown", event, flags);
 		}
@@ -253,7 +247,6 @@ function handleTouchMove(event)
 	var didCancel = didScroll,
 		moveThreshold = $.vmouse.moveDistanceThreshold;
 	didScroll = didScroll
-		|| (scrollTopSupported && (startScrollX !== window.pageXOffset || startScrollY !== window.pageYOffset))
 		|| (Math.abs(t.pageX - startX) > moveThreshold || Math.abs(t.pageY - startY) > moveThreshold);
 
 	var flags = getVirtualBindingFlags(event.target);

@@ -26,4 +26,26 @@
 		ok(!input.attr("checked"), "not checked after click");
 		ok(!button.hasClass("ui-btn-active"), "no active styles after click");
 	});
+
+	asyncTest( "change events fired on checkbox for both check and uncheck", function(){
+		var $checkbox = $("#checkbox-2"),
+				$checkboxLabel = $("[for=checkbox-2]");
+
+		$checkbox.unbind("change");
+
+		expect( 2 );
+
+		$checkbox.change(function(){
+			ok(true, "change fired on click to check the box");
+		});
+
+		$checkboxLabel.trigger("click");
+
+		//test above will be triggered twice, and the start here once	
+		$checkbox.change(function(){
+			start();
+		});
+
+		$checkboxLabel.trigger("click");
+	});
 })(jQuery);

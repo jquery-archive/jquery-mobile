@@ -133,15 +133,16 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 		}
 					
 		collapsibleHeading
-			.bind("vclick", function(e){ 
-					if( collapsibleHeading.is('.ui-collapsible-heading-collapsed') ){
-						collapsibleContain.trigger('expand'); 
-					}	
-					else {
-						collapsibleContain.trigger('collapse'); 
-					}
-					e.preventDefault();
-				});
+			.bind("vmouseup", function(e){ 
+				if( collapsibleHeading.is('.ui-collapsible-heading-collapsed') ){
+					collapsibleContain.trigger('expand'); 
+				}	
+				else {
+					collapsibleContain.trigger('collapse'); 
+				}
+				e.preventDefault();
+			})
+			.bind("vclick",false );
 	}
 });
 })( jQuery );

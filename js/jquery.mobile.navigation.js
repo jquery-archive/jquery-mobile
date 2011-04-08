@@ -346,12 +346,20 @@
 
 	//direct focus to the page title, or otherwise first focusable element
 	function reFocus( page ){
-		var pageTitle = page.find( ".ui-title:eq(0)" );
-		if( pageTitle.length ){
-			pageTitle.focus();
+		var lastClicked = page.jqmData( "lastClicked" );
+			
+		if( lastClicked && lastClicked.length ){
+			lastClicked.focus();
 		}
-		else{
-			page.find( focusable ).eq(0).focus();
+		else {
+			var pageTitle = page.find( ".ui-title:eq(0)" );
+			
+			if( pageTitle.length ){
+				pageTitle.focus();
+			}
+			else{
+				page.find( focusable ).eq(0).focus();
+			}
 		}
 	}
 
@@ -514,14 +522,16 @@
 
 			if( from ){
 				//set as data for returning to that spot
-				from.jqmData( "lastScroll", currScroll);
+				from
+					.jqmData( "lastScroll", currScroll)
+					.jqmData( "lastClicked", $activeClickedLink);
 				//trigger before show/hide events
 				from.data( "page" )._trigger( "beforehide", null, { nextPage: to } );
 			}
 			to.data( "page" )._trigger( "beforeshow", null, { prevPage: from || $("") } );
 
-			function loadComplete(){
-				//console.log("loadComplete:", url);
+			function pageChangeComplete(){
+				//console.log("pageChangeComplete:", url);
 
 				if (changeHash !== false) {
 					if (to === $.mobile.firstPage) {
@@ -612,7 +622,7 @@
 					if( from ){
 						from.removeClass( $.mobile.activePageClass );
 					}
-					loadComplete();
+					pageChangeComplete();
 					removeContainerClasses();
 				});
 			}
@@ -622,7 +632,7 @@
 					from.removeClass( $.mobile.activePageClass );
 				}
 				to.addClass( $.mobile.activePageClass );
-				loadComplete();
+				pageChangeComplete();
 			}
 		}
 
@@ -811,13 +821,15 @@
 		);
 		event.preventDefault();
 	});
+	
+	//add active state on vclick
+	$( "a" ).live( "vclick", function(){
+		$(this).closest( ".ui-btn" ).not( ".ui-disabled" ).addClass( $.mobile.activeBtnClass );
+	});
 
-
-	//temporary fix for allowing 3rd party onclick handlers to still function.
-	var preventClickDefault = false, stopClickPropagation = false;
 
 	//click routing - direct to HTTP or Ajax, accordingly
-	$( "a" ).live( "vclick", function(event) {
+	$( "a" ).live( "click", function(event) {
 
 		var $this = $(this),
 
@@ -856,34 +868,27 @@
 			hasTarget = $this.is( "[target]" ),
 
 			//if data-ajax attr is set to false, use the default behavior of a link
-			hasAjaxDisabled = $this.is( ":jqmData(ajax='false')" );
+			hasAjaxDisabled = $this.is( ":jqmData(ajax='false')" ),
 
-		//reset our prevDefault value because I'm paranoid.
-		preventClickDefault = stopClickPropagation = false;
+			//if the url matches the active page's url
+			isCurrentPage = path.stripHash(url) == $.mobile.activePage.jqmData("url");
+
 		//if there's a data-rel=back attr, go back in history
 		if( $this.is( ":jqmData(rel='back')" ) ){
 			window.history.back();
-			preventClickDefault = stopClickPropagation = true;
-			return;
+			return false;
 		}
 
 		//prevent # urls from bubbling
 		//path.get() is replaced to combat abs url prefixing in IE
-		//if( url.replace(path.get(), "") == "#"  ){
-		if( href == "#" ){
+		if( href == "#" || isCurrentPage){
 			//console.log("Url was:", url);
 			//for links created purely for interaction - ignore
-			//don't call preventDefault on the event here, vclick
-			//may have been triggered by a touchend, before any moues
-			//click event was dispatched and we want to make sure
-			//3rd party onclick handlers get triggered. If and when
-			//a mouse click event is generated, our live("click") handler
-			//will get triggered and do the preventDefault.
-			preventClickDefault = true;
+			event.preventDefault();
 			return;
 		}
 
-		$activeClickedLink = $this.closest( ".ui-btn" ).addClass( $.mobile.activeBtnClass );
+		$activeClickedLink = $this.closest( ".ui-btn" );
 
 		if( isExternal || hasAjaxDisabled || hasTarget || !$.mobile.ajaxEnabled ||
 			// TODO: deprecated - remove at 1.0
@@ -904,27 +909,8 @@
 
 		//this may need to be more specific as we use data-rel more
 		nextPageRole = $this.attr( "data-" + $.mobile.ns + "rel" );
-/*
-		//if it's a relative href, prefix href with base url
-		if( path.isRelative( url ) && !hadProtocol ){
-			url = path.makeAbsolute( url );
-		}
-
-		url = path.stripHash( url );
-*/
 		$.mobile.changePage( url, transition, reverse);
-		preventClickDefault = true;
-	});
-
-	$( "a" ).live( "click", function(event) {
-		if (preventClickDefault){
-			event.preventDefault();
-			preventClickDefault = false;
-		}
-		if (stopClickPropagation){
-			event.stopPropagation();
-			stopClickPropagation = false;
-		}
+		event.preventDefault();
 	});
 
 	//hashchange event handler
