@@ -11,10 +11,9 @@
 /** Resets */
 
 #qunit-tests, #qunit-tests ol, #qunit-header, #qunit-banner, #qunit-userAgent, #qunit-testresult {
-	margin: 0;
+	margin: 0 8px;
 	padding: 0;
 }
-
 
 /** Header */
 
@@ -32,6 +31,8 @@
 	-moz-border-radius: 15px 15px 0 0;
 	-webkit-border-top-right-radius: 15px;
 	-webkit-border-top-left-radius: 15px;
+
+	margin-top: 8px;
 }
 
 #qunit-header a {
@@ -64,6 +65,7 @@
 
 #qunit-tests {
 	list-style-position: inside;
+	margin-bottom: 8px;
 }
 
 #qunit-tests li {
@@ -195,13 +197,7 @@
 	left: -10000px;
 }
 
-[ data-nstest-role='page'], [ data-nstest-role='dialog'] {
+[data-nstest-role='page'], [data-nstest-role='dialog'] {
   position: absolute !important;
   top: -10000px !important;
 }
-
-/* maintain styling */
-.ui-mobile-viewport {
-  margin: 8px;
-}
-

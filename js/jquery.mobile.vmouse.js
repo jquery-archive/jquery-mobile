@@ -30,12 +30,9 @@ var dataPropertyName = "virtualMouseBindings",
 	resetTimerID = 0,
 	startX = 0,
 	startY = 0,
-	startScrollX = 0,
-	startScrollY = 0,
 	didScroll = false,
 	clickBlockList = [],
 	blockMouseTriggers = false,
-	scrollTopSupported = $.support.scrollTop,
 	eventCaptureSupported = $.support.eventCapture,
 	$document = $(document),
 	nextTouchID = 1,
@@ -227,11 +224,6 @@ function handleTouchStart(event)
 			startX = t.pageX;
 			startY = t.pageY;
 		
-			if (scrollTopSupported){
-				startScrollX = window.pageXOffset;
-				startScrollY = window.pageYOffset;
-			}
-		
 			triggerVirtualEvent("vmouseover", event, flags);
 			triggerVirtualEvent("vmousedown", event, flags);
 		}
@@ -255,7 +247,6 @@ function handleTouchMove(event)
 	var didCancel = didScroll,
 		moveThreshold = $.vmouse.moveDistanceThreshold;
 	didScroll = didScroll
-		|| (scrollTopSupported && (startScrollX !== window.pageXOffset || startScrollY !== window.pageYOffset))
 		|| (Math.abs(t.pageX - startX) > moveThreshold || Math.abs(t.pageY - startY) > moveThreshold);
 
 	var flags = getVirtualBindingFlags(event.target);
