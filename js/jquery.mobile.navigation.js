@@ -371,9 +371,7 @@
 		if(base){ base.reset(); }
 
 		//kill the keyboard
-		if( window.document.activeElement ){
-			$( window.document.activeElement || "" ).add( "input:focus, textarea:focus, select:focus" ).blur();
-		}
+		$( window.document.activeElement || "" ).add( "input:focus, textarea:focus, select:focus" ).blur();
 
 		function defaultTransition(){
 			if(transition === undefined){
