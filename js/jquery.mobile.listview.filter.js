@@ -41,19 +41,12 @@ $( ":jqmData(role='listview')" ).live( "listviewcreate", function() {
 							}
 							// New bucket!
 							childItems = false;
-                        } else {
-                            var c = item.children();
-                            if(c.length && c.filter(':not([data-filtered=false])').text().toLowerCase().indexOf( val ) === -1) {
-                                // list is complex - takes text from child elements and do not include direct childs having data-filtered attribute to false
-                                item.hide();
-                            } else if (item.text().toLowerCase().indexOf( val ) === -1) {
-                                // list is simple - take all text directly
-                                item.hide();
-                            } else {
-                                // There's a shown item in the bucket
-                                childItems = true;
-                            }
-                        }
+						} else if (item.text().toLowerCase().indexOf( val ) === -1) {
+							item.hide();
+						} else {
+							// There's a shown item in the bucket
+							childItems = true;
+						}
 					}
 				}
 			})
