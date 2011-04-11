@@ -31,17 +31,20 @@ $( ":jqmData(role='listview')" ).live( "listviewcreate", function() {
 					// This handles hiding regular rows without the text we search for
 					// and any list dividers without regular rows shown under it
 					var childItems = false,
-							item;
+							item,
+                            itemtext;
 
 					for (var i = listItems.length; i >= 0; i--) {
 						item = $(listItems[i]);
+                        // look for custom attribute for text to filter on before getting text from DOM
+                        itemtext = item.data("filtertext") || item.text();
 						if (item.is("li:jqmData(role=list-divider)")) {
 							if (!childItems) {
 								item.hide();
 							}
 							// New bucket!
 							childItems = false;
-						} else if (item.text().toLowerCase().indexOf( val ) === -1) {
+						} else if (itemtext.toLowerCase().indexOf( val ) === -1) {
 							item.hide();
 						} else {
 							// There's a shown item in the bucket
