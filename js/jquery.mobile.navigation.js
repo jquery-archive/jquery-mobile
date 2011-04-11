@@ -238,13 +238,13 @@
 	//direct focus to the page title, or otherwise first focusable element
 	function reFocus( page ){
 		var lastClicked = page.jqmData( "lastClicked" );
-			
+
 		if( lastClicked && lastClicked.length ){
 			lastClicked.focus();
 		}
 		else {
 			var pageTitle = page.find( ".ui-title:eq(0)" );
-			
+
 			if( pageTitle.length ){
 				pageTitle.focus();
 			}
@@ -695,7 +695,7 @@
 		);
 		event.preventDefault();
 	});
-	
+
 	//add active state on vclick
 	$( "a" ).live( "vclick", function(){
 		$(this).closest( ".ui-btn" ).not( ".ui-disabled" ).addClass( $.mobile.activeBtnClass );
