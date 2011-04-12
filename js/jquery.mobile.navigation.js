@@ -82,12 +82,8 @@
 				return url.replace( /^#/, "" );
 			},
 
-			stripQuery: function( url ){
-				return url.replace( /\?.*/, "");
-			},
-
-			cleanHash: function( url ){
-				return path.stripHash( path.stripQuery ( url ));
+			cleanHash: function( hash ){
+				return path.stripHash( hash.replace( /\?.*$/, "" ) );
 			},
 
 			//check whether a url is referencing the same domain, or an external domain or different protocol

@@ -105,9 +105,4 @@
 		ok( $.mobile.path.isQuery( "?foo=bar" ), "string prefixed with ?");
 		ok( !$.mobile.path.isQuery( "anything else" ), "string not prefixed with ?");
 	});
-
-	test( "path.stripQuery", function(){
-		same( $.mobile.path.stripQuery( "anything/atall?akjfdjjf" ), "anything/atall", "removes query param");
-		same( $.mobile.path.stripQuery( "nothing/atall" ), "nothing/atall", "removes query param");
-	});
 })(jQuery);
