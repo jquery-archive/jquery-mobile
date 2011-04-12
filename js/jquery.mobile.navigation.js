@@ -44,14 +44,13 @@
 			// TODO rename to reflect conditional functionality
 			makeAbsolute: function( url ){
 				var hash = window.location.hash,
-						isHashPath = path.isPath( hash ),
-						relativePathname = location.pathname.replace(/^\//, "");
+						isHashPath = path.isPath( hash );
 
 				if(path.isQuery( url )){
 					// if the path is a list of query params and the hash is a path
 					// append the query params to it. otherwise use the pathname and append
 					// the query params
-					return ( isHashPath ? path.stripHash( hash ) : relativePathname ) + url;
+					return ( isHashPath ? path.stripHash( hash ) : location.pathname ) + url;
 				}
 
 				// otherwise use the hash as the path prefix with the file and

@@ -46,10 +46,10 @@
 		same( $.mobile.path.makeAbsolute("?foo=bar&bak=baz"), "bar/bing/bang?foo=bar&bak=baz", "appends query string paths to current path");
 
 		$.mobile.path.set("");
-		same( $.mobile.path.makeAbsolute("?foo=bar&bak=baz"), "tests/unit/navigation/?foo=bar&bak=baz", "uses pathname for empty hash");
+		same( $.mobile.path.makeAbsolute("?foo=bar&bak=baz"), "/tests/unit/navigation/?foo=bar&bak=baz", "uses pathname for empty hash");
 
 		$.mobile.path.set("bar");
-		same( $.mobile.path.makeAbsolute("?foo=bar&bak=baz"), "tests/unit/navigation/?foo=bar&bak=baz", "uses pathname for embedded pages");
+		same( $.mobile.path.makeAbsolute("?foo=bar&bak=baz"), "/tests/unit/navigation/?foo=bar&bak=baz", "uses pathname for embedded pages");
 	});
 
 	test( "path.clean is working properly", function(){
