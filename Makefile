@@ -107,7 +107,7 @@ init:
 
 # Pull the latest commits. This is used for the nightly build but can be used to save some keystrokes
 pull: 
-	@@git pull --quiet upstream master
+	@@git pull --quiet
 
 # Zip the 4 files and the theme images into one convenient package
 zip: init js min css cssmin
