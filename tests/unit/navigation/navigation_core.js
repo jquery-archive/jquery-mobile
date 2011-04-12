@@ -145,9 +145,13 @@
 			hrelpath1 = "#foo.html",
 			hrelpath2 = "#foo/bar.html",
 			hrelpath3 = "#../../foo/bar.html",
-			habspath1 = "#/foo.html",
-			habspath2 = "#/foo/bar.html",
-			habspath3 = "#/../../foo/bar.html",
+			hrootpath1 = "#/foo.html",
+			hrootpath2 = "#/foo/bar.html",
+			hrootpath3 = "#/../../foo/bar.html",
+			hashedrel1 = "../foo/#bar.html",
+			hashedrel2 = "../#foo/bar.html",
+			hashedabs1 = "/foo/#bar.html",
+			hashedabs2 = location.pathname + "#foo/bar.html",
 			segments = location.pathname.split("/"),
 			uppath = "#",
 			i;
@@ -159,20 +163,57 @@
 		// We are in a subdirectory, so one more ..
 		uppath += "foo/bar.html";
 
-		same( $.mobile.path.clean( localpath ), fakepath, "removes location protocol, host, port, pathname from same-domain path");
-		same( $.mobile.path.clean( remotepath ), remotepath, "does nothing to an external domain path");
-		same( $.mobile.path.clean( pathWithParam ), "#bar?baz=" + localroot, "doesn't remove params with localroot value");
-		same( $.mobile.path.clean( relpath1 ), "#foo.html", ".. removed from current path, no dirs left");
-		same( $.mobile.path.clean( relpath2 ), "#foo/bar.html", ".. removed from current path, one dir left");
-		same( $.mobile.path.clean( relpath3 ), "#../foo/bar.html", ".. removed from current path, one .. still left");
-		same( $.mobile.path.clean( abspath1 ), uppath, "absolute path above localroot");
-		same( $.mobile.path.clean( abspath2 ), "#foo/bar.html", "absolute path below localroot");
-		same( $.mobile.path.clean( hrelpath1 ), "#foo.html", "hash-relative path stays the same 1");
-		same( $.mobile.path.clean( hrelpath2 ), "#foo/bar.html", "hash-relative path stays the same 2");
-		same( $.mobile.path.clean( hrelpath3 ), "#../../foo/bar.html", "hash-relative path stays the same 3");
-		same( $.mobile.path.clean( habspath1 ), "#foo.html", "hash-absolute path stays the same minus leading slash 1");
-		same( $.mobile.path.clean( habspath2 ), "#foo/bar.html", "hash-absolute path stays the same minus leading slash 2");
-		same( $.mobile.path.clean( habspath3 ), "#../../foo/bar.html", "hash-absolute path stays the same minus leading slash 3");
+		same( $.mobile.path.clean( localpath ), fakepath,
+			"removes location protocol, host, port, pathname from same-domain path");
+		same( $.mobile.path.clean( pathWithParam ), "#bar?baz=" + localroot,
+			"doesn't remove params with localroot value");
+		// relative
+		same( $.mobile.path.clean( relpath1 ), "#foo.html",
+			".. removed from current path, no dirs left");
+		same( $.mobile.path.clean( relpath2 ), "#foo/bar.html",
+			".. removed from current path, one dir left");
+		same( $.mobile.path.clean( relpath3 ), "#../foo/bar.html",
+			".. removed from current path, one .. still left");
+		// hash-relative
+		same( $.mobile.path.clean( hrelpath1 ), "#foo.html", 
+			"hash-relative path stays the same 1");
+		same( $.mobile.path.clean( hrelpath2 ), "#foo/bar.html",
+			"hash-relative path stays the same 2");
+		same( $.mobile.path.clean( hrelpath3 ), "#../../foo/bar.html",
+			"hash-relative path stays the same 3");
+		// hash-root
+		same( $.mobile.path.clean( hrootpath1 ), "#foo.html",
+			"hash-absolute path stays the same minus leading slash 1");
+		same( $.mobile.path.clean( hrootpath2 ), "#foo/bar.html",
+			"hash-absolute path stays the same minus leading slash 2");
+		same( $.mobile.path.clean( hrootpath3 ), "#../../foo/bar.html",
+			"hash-absolute path stays the same minus leading slash 3");
+		// absolute
+		same( $.mobile.path.clean( abspath1 ), uppath,
+			"absolute path above localroot");
+		same( $.mobile.path.clean( abspath2 ), "#foo/bar.html",
+			"absolute path below localroot");
+		// hashed relative
+		same( $.mobile.path.clean( hashedrel1 ),
+			location.protocol + "//" + location.host + location.pathname + "foo/#bar.html",
+			"hashed relative, different path: returns full url");
+		same( $.mobile.path.clean( hashedrel2 ), "#foo/bar.html",
+ 			"hashed relative, same path: returns hash-relative path");
+		// hashed absolute
+		same( $.mobile.path.clean( hashedabs1 ),
+			location.protocol + "//" + location.host + "/foo/#bar.html",
+			"hashed absolute, different path: return full url");
+		same( $.mobile.path.clean( hashedabs2 ), "#foo/bar.html",
+			"hashed absolute, same path: returns hash-relative path");		
+		// hashed host-absolute
+		same( $.mobile.path.clean( location.protocol + "//" + location.host + hashedabs1 ),
+			location.protocol + "//" + location.host + "/foo/#bar.html",
+			"hashed host-absolute, different path: return full url");
+		same( $.mobile.path.clean( location.protocol + "//" + location.host + hashedabs2 ),
+			"#foo/bar.html",
+			"hashed host-absolute, same path: return hash-relative path");
+		same( $.mobile.path.clean( remotepath ), remotepath,
+			"Hashed host-absolute, different host: return full url");
 	});
 
 	test( "path.stripHash is working properly", function(){

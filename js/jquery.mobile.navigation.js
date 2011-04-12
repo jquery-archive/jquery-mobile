@@ -69,30 +69,45 @@
 			},
 
 			// There are several supported url formats, which are cleaned (converted to canonical form) in this function.
-			// Syntax:                        current_location        + url                     => resulting_location         (returned canonical form)
+			// The returned value will contain protocol and hostname part only if the url is an external url which should
+			// not be loaded with XHR.
+			// Note that the entry page (the page which loads the jQuery Mobile library) should preferably always be an
+			// index.* file, so that you can refer to it with path that ends in a slash.
+			// E.g. example.com/a/#b/c.html rather than example.com/a/app.html#b/c.html
+			// This makes the hashed urls look more clean and intuitive. 
+			// Common use case examples are given below.
+			// Note: For brevity protocol has been omitted from urls, but it would be present whenever hostname is present.
+			// Syntax:                         current_location        + url                     => resulting_location         (returned canonical form)
 
-			// 1) Relative:                   example.com/a/#b/c.html + ../d/e.html             => example.com/a/#d/e.html    (#d/e.html)
-			// 2) Hash-relative:              example.com/a/#b/c.html + #d/e.html               => example.com/a/#d/e.html    (#d/e.html)
-			// 3) Hash-absolute:              example.com/a/#b/c.html + #/d/e.html              => example.com/a/#d/e.html    (#d/e.html)
-			// 4) Absolute path:              example.com/a/#b/c.html + /d/e.html               => example.com/a/#../d/e.html (#../d/e.html)
-			// 5) Absolute same-host:         example.com/a/#b/c.html + example.com/d/e.html    => example.com/a/#../d/e.html (#../d/e.html)
-			// 6) Absolute diff-host:         example.com/a/#b/c.html + other.com/d/e.html      => other.com/d/e.html         (other.com/d/e.html)
-			// 7) Hashed same-host same-path: example.com/a/#b/c.html + example.com/a/#d/e.html => example.com/a/#d/e.html    (#d/e.html)
-			// 8) Hashed same-host diff-path: example.com/a/#b/c.html + example.com/d/#e.html   => example.com/d/#e.html      (example.com/d/#e.html)
-			// 9) Hashed diff-host:           example.com/a/#b/c.html + other.com/d/#e.html     => other.com/d/#e.html        (other.com/d/#e.html)
+			// 01) Relative:                    example.com/a/#b/c.html + ../d/e.html             => example.com/a/#d/e.html    (#d/e.html)
+			// 02) Hash-relative:               example.com/a/#b/c.html + #d/e.html               => example.com/a/#d/e.html    (#d/e.html)
+			// 03) Hash-root:                   example.com/a/#b/c.html + #/d/e.html              => example.com/a/#d/e.html    (#d/e.html)
+			// 04) Absolute path:               example.com/a/#b/c.html + /d/e.html               => example.com/a/#../d/e.html (#../d/e.html)
+			// 05) Host-absolute (same host):   example.com/a/#b/c.html + example.com/d/e.html    => example.com/a/#../d/e.html (#../d/e.html)
+			// 06) Host-absolute (diff host):   example.com/a/#b/c.html + other.com/d/e.html      => other.com/d/e.html         (other.com/d/e.html)
+			// 07) Hashed relative (same path): example.com/a/#b/c.html + ../#d/e.html            => example.com/a/#d/e.html    (#d/e.html)
+			// 08) Hashed relative (diff path): example.com/a/#b/c.html + ../d/#e.html            => example.com/d/#e.html      (example.com/d/#e.html)
+			// 09) Hashed absolute (same path): example.com/a/#b/c.html + /a/#d/e.html            => example.com/a/#d/e.html    (#d/e.html)
+			// 10) Hashed absolute (diff path): example.com/a/#b/c.html + /d/#e.html              => example.com/d/#e.html      (example.com/d/#e.html)
+			// 11) Hashed host-abs (same path): example.com/a/#b/c.html + example.com/a/#d/e.html => example.com/a/#d/e.html    (#d/e.html)
+			// 12) Hashed host-abs (diff path): example.com/a/#b/c.html + example.com/d/#e.html   => example.com/d/#e.html      (example.com/d/#e.html)
+			// 13) Hashed host-abs (diff host): example.com/a/#b/c.html + other.com/d/#e.html     => other.com/d/#e.html        (other.com/d/#e.html)
 
 			// The canonical form is hash-relative (e.g. #d/e.html) for urls on the same host
 			// and original form (no change) for urls on a different host.
-			// A hashed url (cases 7-9) must always use the canonical form in the hash part.
+			// A hashed url (cases 07-13) must always use the canonical form in the hash part.
 			// E.g. example.com/a/#/b/c.html is illegal, you must use example.com/a/#b/c.html instead.
 			// In non-external urls index.* is never explicitly included at the end (ends in slash instead).
-			// Hash-absolute form is same as hash-relative, just with a slash prefix. The reason it is supported
+			// Hash-root form is same as hash-relative, just with a slash prefix. The reason it is supported
 			// is to allow you to write "#/" to refer to $.mobile.firstPage (and to write other hash urls in
 			// a way consistent with that).
 			// You can refer to $.mobile.firstPage in several ways:
-			// 1) Hash-absolute: example.com/a/#b/c.html      + #/                   => example.com/a/# (#)
-			// 2) Relative: example.com/a/#b/c.html           + ..                   => example.com/a/# (#)
-			// 3) Absolute path: example.com/a/#b/c.html      + /a/                  => example.com/a/# (#)
+			// 1) Hash-root:       example.com/a/#b/c.html + #/   => example.com/a/# (#)
+			// 2) Relative:        example.com/a/#b/c.html + ..   => example.com/a/# (#)
+			// 3) Absolute path:   example.com/a/#b/c.html + /a/  => example.com/a/# (#)
+			// 4) Hashed relative: example.com/a/#b/c.html + ../# => example.com/a/# (#)
+			// 5) Hashed absolute: example.com/a/#b/c.html + /a/# => example.com/a/# (#)
+			// The recommended way is hash-root (#/), because it has not depend on current url.
 			// You can of course also refer to $.mobile.firstPage using its data-url attribute
 			// (=== ID if not defined), e.g. "#MyFirstPageId".
 			// This will be handled equivalently to "#/".
@@ -101,17 +116,31 @@
 				//console.log("clean:", url);
 				// Replace the protocol, host, and pathname only once at the beginning of the url to avoid
 				// problems when it's included as a part of a param
-				var leadingUrlRootRegex;
-				if (url.indexOf("#") > 0) {
+				var leadingUrlRootRegex, checkForRoot;
+				var hashIndex = url.indexOf("#");
+				if (hashIndex > 0) { // Hash, but not at beginning
+					// Add protocol and host to absolute and relative hashed urls so that they will be considered external
+					// if the pathname (before hash) does not match current pathname.
+					if (url.charAt(0) === "/") { // hashed absolute
+						url = location.protocol + "//" + location.host + url;
+					} else if (url.slice(0, location.protocol.length) !== location.protocol) { // hashed relative
+						url = location.protocol + "//" + location.host +
+							path.canonize(location.pathname + path.get() + url.slice(0, hashIndex)) +
+							url.slice(hashIndex);
+					}
 					// Absolute (with hostname) urls that contain a hash are converted to canonical form
 					// only if the pathname (before hash) matches current location.pathname.
 					// Otherwise it is considered an external URL and returned as-is
 					// (because regexp will not match and protocol is thus not removed).
 					// Such an URL should always be loaded as external, and isExternal will return true for it
 					// since protocol remains in the URL after path.clean.
-					leadingUrlRootRegex = new RegExp("^" + location.protocol + "//" + location.host + location.pathname);
+					leadingUrlRootRegex = new RegExp("^" + location.protocol + "//" + location.host + location.pathname + "(#.*)$");
 				} else {
-					leadingUrlRootRegex = new RegExp("^" + location.protocol + "//" + location.host);
+					leadingUrlRootRegex = new RegExp("^" + location.protocol + "//" + location.host + "(.*)$");
+				}
+				checkForRoot = leadingUrlRootRegex.exec(url);
+				if (checkForRoot) {
+					url = checkForRoot[1];
 				}
 				url = url.replace(leadingUrlRootRegex, "");
 				//console.log("Without host & pathname:", url);
@@ -151,21 +180,32 @@
 						return "#" + canonPath.join("/");
 					} else { // Relative
 						//console.log("path:", path.get());
-						canonPath = (path.get() + url).split("/");
-						//console.log("canonPath:" + canonPath);
-						// Remove dot-dot parts where possible by removing both the dot-dot and the preceding segment
-						i = 0;
-						while(i < canonPath.length) {
-							if (canonPath[i] === ".." && i > 0 && canonPath[i-1] !== "..") {
-								i--;
-								canonPath.splice(i,2);
-							} else {
-								i++;
-							}
-						}
-						return "#" + canonPath.join("/");
+						return  "#" + path.canonize(path.get() + url);
 					}
 				}
+			},
+
+			// Remove dot-dot segments where possible by removing both the dot-dot segment and the preceding segment.
+			// E.g. a/b/../c becomes a/c, but ../a/b remains the same.
+			// Dot or empty segments are simply removed.
+			// e.g. a/./b/c or a//b/c becomes a/b/c
+			canonize: function( path ) {
+				var canonPath = path.split("/"), i = 0;
+				//console.log("canonPath:" + canonPath);
+				while(i < canonPath.length) {
+					if (canonPath[i] === ".." && i > 0 && canonPath[i-1] !== "..") {
+						i--;
+						canonPath.splice(i,2);
+					} else if (canonPath[i] === "." ||
+						// Cannot remove first/last because they mark beginning/trailing slash
+						(canonPath[i] === "" && i > 0 && i < canonPath.length-1)) {
+						canonPath.splice(i,1);
+					} else {
+						i++;
+					}
+				}
+				return canonPath.join("/");
+				
 			},
 
 			//just return the url without an initial #
