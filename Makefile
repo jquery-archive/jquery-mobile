@@ -18,6 +18,10 @@ DIR = jquery.mobile-${VER}
 # The output folder for the finished files
 OUTPUT = compiled
 
+# The output folder for the nightly files.
+NIGHTLY_OUTPUT = /srv/jquerymobile.com/htdocs/nightlies/${DATE}
+NIGHTLY_WEBPATH = http://jquerymobile.com/nightlies/${DATE}
+
 # The filenames
 JS = ${DIR}.js
 MIN = ${DIR}.min.js
@@ -146,15 +150,21 @@ nightly: pull zip
 	@@find ${VER} -type f -name '*.html' -exec sed -i 's|rel="stylesheet"  href="../|rel="stylesheet"  href="|g' {} \;
 
 	# Change the empty paths to the location of this nightly file
-	@@find ${VER} -type f -name '*.html' -exec sed -i 's|href="themes/default/"|href="http://jquerymobile.com/nightlies/${DATE}/${DIR}.min.css"|g' {} \;
+	@@find ${VER} -type f -name '*.html' -exec sed -i 's|href="themes/default/"|href="${NIGHTLY_WEBPATH}/${DIR}.min.css"|g' {} \;
 	@@find ${VER} -type f -name '*.html' -exec sed -i 's|src="js/jquery.js"|src="http://code.jquery.com/jquery-${JQUERY}.min.js"|' {} \;
-	@@find ${VER} -type f -name '*.html' -exec sed -i 's|src="js/"|src="http://jquerymobile.com/nightlies/${DATE}/${DIR}.min.js"|g' {} \;	
+	@@find ${VER} -type f -name '*.html' -exec sed -i 's|src="js/"|src="${NIGHTLY_WEBPATH}/${DIR}.min.js"|g' {} \;	
 
 	# Move the demos into the output folder
 	@@mv ${VER} ${OUTPUT}/demos
 
+	# Copy the images as well
+	@@cp -R themes/default/images ${OUTPUT}
+
+	# Remove the output folder so its not placed in there.
+	@@rm -rf ${NIGHTLY_OUTPUT}
+	
 	# Move the output folder to the nightlies folder
-	@@mv ${OUTPUT} /srv/jquerymobile.com/htdocs/nightlies/${DATE}
+	@@mv ${OUTPUT} ${NIGHTLY_OUTPUT}
 
 
 # Used by the jQuery team to deploy a build to the CDN
