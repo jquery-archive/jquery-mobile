@@ -58,14 +58,29 @@
 			//prefix a relative url with the current path
 			// TODO rename to reflect conditional functionality
 			makeAbsolute: function( url ){
-				// only create an absolute path when the hash can be used as one
-				return path.isPath(window.location.hash) ? path.get() + url : url;
+				var hash = window.location.hash,
+						isHashPath = path.isPath( hash );
+
+				if(path.isQuery( url )){
+					// if the path is a list of query params and the hash is a path
+					// append the query params to the paramless version of it.
+					// otherwise use the pathname and append the query params
+					return ( isHashPath ? path.cleanHash( hash ) : location.pathname ) + url;
+				}
+
+				// otherwise use the hash as the path prefix with the file and
+				// extension removed by path.get if it is indeed a path
+				return ( isHashPath ? path.get() : "" ) + url;
 			},
 
 			// test if a given url (string) is a path
 			// NOTE might be exceptionally naive
 			isPath: function( url ){
 				return /\//.test(url);
+			},
+
+			isQuery: function( url ){
+				return /^\?/.test(url);
 			},
 
 			// There are several supported url formats, which are cleaned (converted to canonical form) in this function.
@@ -107,11 +122,12 @@
 			// 3) Absolute path:   example.com/a/#b/c.html + /a/  => example.com/a/# (#)
 			// 4) Hashed relative: example.com/a/#b/c.html + ../# => example.com/a/# (#)
 			// 5) Hashed absolute: example.com/a/#b/c.html + /a/# => example.com/a/# (#)
-			// The recommended way is hash-root (#/), because it has not depend on current url.
+			// The recommended way is hash-root (#/), because it does not depend on current url.
 			// You can of course also refer to $.mobile.firstPage using its data-url attribute
 			// (=== ID if not defined), e.g. "#MyFirstPageId".
 			// This will be handled equivalently to "#/".
 			// Note that the location (url bar) will always have a hash character, event when on first page.
+
 			clean: function( url ){
 				//console.log("clean:", url);
 				// Replace the protocol, host, and pathname only once at the beginning of the url to avoid
@@ -211,6 +227,10 @@
 			//just return the url without an initial #
 			stripHash: function( url ){
 				return url.replace( /^#/, "" );
+			},
+
+			cleanHash: function( hash ){
+				return path.stripHash( hash.replace( /\?.*$/, "" ) );
 			},
 
 			//check whether a url is referencing the same domain, or an external domain or different protocol
@@ -387,13 +407,13 @@
 	//direct focus to the page title, or otherwise first focusable element
 	function reFocus( page ){
 		var lastClicked = page.jqmData( "lastClicked" );
-			
+
 		if( lastClicked && lastClicked.length ){
 			lastClicked.focus();
 		}
 		else {
 			var pageTitle = page.find( ".ui-title:eq(0)" );
-			
+
 			if( pageTitle.length ){
 				pageTitle.focus();
 			}
@@ -480,7 +500,7 @@
 		// If we are trying to transition to the same page that we are currently on ignore the request.
 		// an illegal same page request is defined by the current page being the same as the url, as long as there's history
 		// and to is not an array or object (those are allowed to be "same")
-		if( currPage && urlHistory.stack.length > 1 && currPage.url === url && !toIsArray && !toIsObject ) {
+		if( currPage && urlHistory.stack.length >= 1 && currPage.url === url && !toIsArray && !toIsObject ) {
 			return;
 		}
 		else if(isPageTransitioning) {
@@ -529,9 +549,7 @@
 		if(base){ base.reset(); }
 
 		//kill the keyboard
-		if( window.document.activeElement ){
-			$( window.document.activeElement || "" ).add( "input:focus, textarea:focus, select:focus" ).blur();
-		}
+		$( window.document.activeElement || "" ).add( "input:focus, textarea:focus, select:focus" ).blur();
 
 		function defaultTransition(){
 			if(transition === undefined){
@@ -861,7 +879,7 @@
 		);
 		event.preventDefault();
 	});
-	
+
 	//add active state on vclick
 	$( "a" ).live( "vclick", function(){
 		$(this).closest( ".ui-btn" ).not( ".ui-disabled" ).addClass( $.mobile.activeBtnClass );
@@ -908,10 +926,7 @@
 			hasTarget = $this.is( "[target]" ),
 
 			//if data-ajax attr is set to false, use the default behavior of a link
-			hasAjaxDisabled = $this.is( ":jqmData(ajax='false')" ),
-
-			//if the url matches the active page's url
-			isCurrentPage = path.stripHash(url) == $.mobile.activePage.jqmData("url");
+			hasAjaxDisabled = $this.is( ":jqmData(ajax='false')" );
 
 		//if there's a data-rel=back attr, go back in history
 		if( $this.is( ":jqmData(rel='back')" ) ){
@@ -921,8 +936,7 @@
 
 		//prevent # urls from bubbling
 		//path.get() is replaced to combat abs url prefixing in IE
-		if( href == "#" || isCurrentPage){
-			//console.log("Url was:", url);
+		if( href == "#" ){
 			//for links created purely for interaction - ignore
 			event.preventDefault();
 			return;
