@@ -154,7 +154,7 @@ nightly: pull zip
 	@@mv ${VER} ${OUTPUT}/demos
 
 	# Move the output folder to the nightlies folder
-	@@mv ${OUTPUT} ../htdocs/nightlies/${DATE}
+	@@mv ${OUTPUT} /srv/jquerymobile.com/htdocs/nightlies/${DATE}
 
 
 # Used by the jQuery team to deploy a build to the CDN
