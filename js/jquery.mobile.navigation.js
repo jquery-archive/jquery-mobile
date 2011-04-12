@@ -48,9 +48,9 @@
 
 				if(path.isQuery( url )){
 					// if the path is a list of query params and the hash is a path
-					// append the query params to it. otherwise use the pathname and append
-					// the query params
-					return ( isHashPath ? path.stripHash( hash ) : location.pathname ) + url;
+					// append the query params to the paramless version of it.
+					// otherwise use the pathname and append the query params
+					return ( isHashPath ? path.cleanHash( hash ) : location.pathname ) + url;
 				}
 
 				// otherwise use the hash as the path prefix with the file and
@@ -80,6 +80,14 @@
 			//just return the url without an initial #
 			stripHash: function( url ){
 				return url.replace( /^#/, "" );
+			},
+
+			stripQuery: function( url ){
+				return url.replace( /\?.*/, "");
+			},
+
+			cleanHash: function( url ){
+				return path.stripHash( path.stripQuery ( url ));
 			},
 
 			//check whether a url is referencing the same domain, or an external domain or different protocol
