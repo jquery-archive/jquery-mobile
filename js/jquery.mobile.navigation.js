@@ -43,14 +43,30 @@
 			//prefix a relative url with the current path
 			// TODO rename to reflect conditional functionality
 			makeAbsolute: function( url ){
-				// only create an absolute path when the hash can be used as one
-				return path.isPath(window.location.hash) ? path.get() + url : url;
+				var hash = window.location.hash,
+						isHashPath = path.isPath( hash ),
+						relativePathname = location.pathname.replace(/^\//, "");
+
+				if(path.isQuery( url )){
+					// if the path is a list of query params and the hash is a path
+					// append the query params to it. otherwise use the pathname and append
+					// the query params
+					return ( isHashPath ? path.stripHash( hash ) : relativePathname ) + url;
+				}
+
+				// otherwise use the hash as the path prefix with the file and
+				// extension removed by path.get if it is indeed a path
+				return ( isHashPath ? path.get() : "" ) + url;
 			},
 
 			// test if a given url (string) is a path
 			// NOTE might be exceptionally naive
 			isPath: function( url ){
 				return /\//.test(url);
+			},
+
+			isQuery: function( url ){
+				return /^\?/.test(url);
 			},
 
 			//return a url path with the window's location protocol/hostname/pathname removed
