@@ -322,7 +322,7 @@
 		// If we are trying to transition to the same page that we are currently on ignore the request.
 		// an illegal same page request is defined by the current page being the same as the url, as long as there's history
 		// and to is not an array or object (those are allowed to be "same")
-		if( currPage && urlHistory.stack.length > 1 && currPage.url === url && !toIsArray && !toIsObject ) {
+		if( currPage && urlHistory.stack.length >= 1 && currPage.url === url && !toIsArray && !toIsObject ) {
 			return;
 		}
 		else if(isPageTransitioning) {
@@ -740,10 +740,7 @@
 			hasTarget = $this.is( "[target]" ),
 
 			//if data-ajax attr is set to false, use the default behavior of a link
-			hasAjaxDisabled = $this.is( ":jqmData(ajax='false')" ),
-
-			//if the url matches the active page's url
-			isCurrentPage = path.stripHash(url) == $.mobile.activePage.jqmData("url");
+			hasAjaxDisabled = $this.is( ":jqmData(ajax='false')" );
 
 		//if there's a data-rel=back attr, go back in history
 		if( $this.is( ":jqmData(rel='back')" ) ){
@@ -753,8 +750,7 @@
 
 		//prevent # urls from bubbling
 		//path.get() is replaced to combat abs url prefixing in IE
-		//or if the link is to the current page
-		if( url.replace(path.get(), "") == "#" || isCurrentPage ){
+		if( url.replace(path.get(), "") == "#" ){
 			//for links created purely for interaction - ignore
 			event.preventDefault();
 			return;
