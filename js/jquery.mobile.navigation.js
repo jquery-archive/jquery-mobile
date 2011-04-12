@@ -767,15 +767,18 @@
 			return false;
 		}
 
+    // activeClickedLink needs to be set before returning early if ajax is disabled
+		$activeClickedLink = $this.closest( ".ui-btn" );
+
 		//prevent # urls from bubbling
 		//path.get() is replaced to combat abs url prefixing in IE
 		if( url.replace(path.get(), "") == "#" ){
 			//for links created purely for interaction - ignore
 			event.preventDefault();
+      // remove active class
+			window.setTimeout(function() {removeActiveLinkClass(true);}, 200);
 			return;
 		}
-
-		$activeClickedLink = $this.closest( ".ui-btn" );
 
 		if( isExternal || hasAjaxDisabled || hasTarget || !$.mobile.ajaxEnabled ||
 			// TODO: deprecated - remove at 1.0
