@@ -50,6 +50,9 @@
 
 		$.mobile.path.set("bar");
 		same( $.mobile.path.makeAbsolute("?foo=bar&bak=baz"), "/tests/unit/navigation/?foo=bar&bak=baz", "uses pathname for embedded pages");
+
+		$.mobile.path.set("bar/bing?foo=bar");
+		same( $.mobile.path.makeAbsolute("?foo=bar&bak=baz"), "bar/bing?foo=bar&bak=baz", "prevents addition of many sets of query params");
 	});
 
 	test( "path.clean is working properly", function(){
@@ -101,5 +104,10 @@
 	test( "path.isQuery is working properly", function(){
 		ok( $.mobile.path.isQuery( "?foo=bar" ), "string prefixed with ?");
 		ok( !$.mobile.path.isQuery( "anything else" ), "string not prefixed with ?");
+	});
+
+	test( "path.stripQuery", function(){
+		same( $.mobile.path.stripQuery( "anything/atall?akjfdjjf" ), "anything/atall", "removes query param");
+		same( $.mobile.path.stripQuery( "nothing/atall" ), "nothing/atall", "removes query param");
 	});
 })(jQuery);

@@ -353,4 +353,45 @@
 			}
 		], 500);
 	});
+
+	asyncTest( "links on subdirectory pages with query params use an absolute path", function(){
+		$.testHelper.sequence([
+			function(){
+				$.testHelper.openPage("#data-url-tests/non-data-url.html");
+			},
+
+			function(){
+				$("#query-param-anchor").click();
+			},
+
+			function(){
+				same(location.hash, "#data-url-tests/non-data-url.html?foo=bar");
+				ok($(".ui-page-active").jqmData("url").indexOf("?foo=bar") > -1, "the query params are in the hash");
+				start();
+			}
+		], 1000);
+	});
+
+	asyncTest( "identical query param link doesn't add additional set of query params", function(){
+		$.testHelper.sequence([
+			function(){
+				$.testHelper.openPage("#data-url-tests/non-data-url.html");
+			},
+
+			function(){
+				$("#query-param-anchor").click();
+			},
+
+			function(){
+				same(location.hash, "#data-url-tests/non-data-url.html?foo=bar");
+				$("#query-param-anchor").click();
+			},
+
+			function(){
+				same(location.hash, "#data-url-tests/non-data-url.html?foo=bar");
+				start();
+			}
+], 1000);
+	});
+
 })(jQuery);
