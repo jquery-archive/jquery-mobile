@@ -44,21 +44,15 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 		item.find( "p, dl" ).addClass( "ui-li-desc" );
 
-		$list.find( "li" ).find( ">img:eq(0), >:first>img:eq(0)" ).addClass( "ui-li-thumb" ).each(function() {
-			$( this ).closest( "li" ).addClass( $(this).is( ".ui-li-icon" ) ? "ui-li-has-icon" : "ui-li-has-thumb" );
+		var children = item.children();
+		children.filter("img:eq(0)").add(children.eq(0).children("img:eq(0)")).addClass( "ui-li-thumb" ).each(function() {
+			item.addClass( $(this).is( ".ui-li-icon" ) ? "ui-li-has-icon" : "ui-li-has-thumb" );
 		});
 
-		var aside = item.find( ".ui-li-aside" );
-
-		if ( aside.length ) {
-            aside.each(function(i, el) {
-			    $(el).prependTo( $(el).parent() ); //shift aside to front for css float
-            });
-		}
-
-		if ( $.support.cssPseudoElement || !$.nodeName( item[0], "ol" ) ) {
-			return;
-		}
+		item.find( ".ui-li-aside" ).each(function() {
+			var $this = $(this);
+			$this.prependTo( $this.parent() ); //shift aside to front for css float
+		});
 	},
 	
 	_removeCorners: function(li){
@@ -74,6 +68,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			$list = this.element,
 			self = this,
 			dividertheme = $list.jqmData( "dividertheme" ) || o.dividerTheme,
+			listsplittheme = $list.jqmData( "splittheme" ),
+			listspliticon = $list.jqmData( "spliticon" ),
 			li = $list.children( "li" ),
 			counter = $.support.cssPseudoElement || !$.nodeName( $list[0], "ol" ) ? 0 : 1;
 
@@ -81,18 +77,19 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			$list.find( ".ui-li-dec" ).remove();
 		}
 
-		li.each(function( pos ) {
-			var item = $( this ),
+		var numli = li.length;
+		for (var pos = 0; pos < numli; pos++) {
+			var item = li.eq(pos),
 				itemClass = "ui-li";
 
 			// If we're creating the element, we update it regardless
 			if ( !create && item.hasClass( "ui-li" ) ) {
-				return;
+				continue;
 			}
 
 			var itemTheme = item.jqmData("theme") || o.theme;
 
-			var a = item.find( ">a" );
+			var a = item.children( "a" );
 				
 			if ( a.length ) {	
 				var icon = item.jqmData("icon");
@@ -113,7 +110,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 					itemClass += " ui-li-has-alt";
 
 					var last = a.last(),
-						splittheme = $list.jqmData( "splittheme" ) || last.jqmData( "theme" ) || o.splitTheme;
+						splittheme = listsplittheme || last.jqmData( "theme" ) || o.splitTheme;
 					
 					last
 						.appendTo(item)
@@ -133,7 +130,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 								corners: true,
 								theme: splittheme,
 								iconpos: "notext",
-								icon: $list.jqmData( "spliticon" ) || last.jqmData( "icon" ) ||  o.splitIcon
+								icon: listspliticon || last.jqmData( "icon" ) ||  o.splitIcon
 							} ) );
 				}
 
@@ -199,7 +196,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			if ( !create ) {
 				self._itemApply( $list, item );
 			}
-		});
+		}
 	},
 	
 	//create a string for ID/subpage url creation
@@ -212,6 +209,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			parentPage = parentList.closest( ".ui-page" ),
 			parentId = parentPage.jqmData( "url" ),
 			o = this.options,
+			dns = "data-" + $.mobile.ns,
 			self = this,
 			persistentFooterID = parentPage.find( ":jqmData(role='footer')" ).jqmData( "id" );
 
@@ -224,14 +222,12 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				id = parentId + "&" + $.mobile.subPageUrlKey + "=" + self._idStringEscape(title + " " + i),
 				theme = list.jqmData( "theme" ) || o.theme,
 				countTheme = list.jqmData( "counttheme" ) || parentList.jqmData( "counttheme" ) || o.countTheme,
-				newPage = list.wrap( "<div data-" + $.mobile.ns + "role='page'><div data-" + $.mobile.ns + "role='content'></div></div>" )
+				newPage = list.detach()
+							.wrap( "<div " + dns + "role='page'" +  dns + "url='" + id + "' " + dns + "theme='" + theme + "' " + dns + "count-theme='" + countTheme + "'><div " + dns + "role='content'></div></div>" )
 							.parent()
-								.before( "<div data-" + $.mobile.ns + "role='header' data-" + $.mobile.ns + "theme='" + o.headerTheme + "'><div class='ui-title'>" + title + "</div></div>" )
-								.after( persistentFooterID ? $( "<div data-" + $.mobile.ns + "role='footer'  data-" + $.mobile.ns + "id='"+ persistentFooterID +"'>") : "" )
+								.before( "<div " + dns + "role='header' " + dns + "theme='" + o.headerTheme + "'><div class='ui-title'>" + title + "</div></div>" )
+								.after( persistentFooterID ? $( "<div " + dns + "role='footer' " + dns + "id='"+ persistentFooterID +"'>") : "" )
 								.parent()
-									.attr( "data-" + $.mobile.ns + "url", id )
-									.attr( "data-" + $.mobile.ns + "theme", theme )
-									.attr( "data-" + $.mobile.ns + "count-theme", countTheme )
 									.appendTo( $.mobile.pageContainer );
 
 				newPage.page();		
