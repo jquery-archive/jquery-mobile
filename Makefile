@@ -18,12 +18,14 @@ DIR = jquery.mobile-${VER}
 # The output folder for the finished files
 OUTPUT = compiled
 
+# Command to remove the latest directory from the CDN before uploading, only if using latest target
+RMLATEST = ''
+
 # The output folder for the nightly files.
 NIGHTLY_OUTPUT = nightlies/${DATE}
 ifeq (${NIGHTLY_OUTPUT}, latest)
 	RMLATEST = ssh jqadmin@code.origin.jquery.com 'rm -rf /var/www/html/code.jquery.com/mobile/latest'
-else
-	RMLATEST = ''
+	DIR = jquery.mobile
 endif
 NIGHTLY_WEBPATH = http://code.jquery.com/mobile/${NIGHTLY_OUTPUT}
 
