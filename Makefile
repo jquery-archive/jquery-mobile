@@ -10,7 +10,7 @@ SED_VER = sed "s/@VERSION/${VER}/"
 nightly: SED_VER = sed "s/@VERSION/Nightly-${DATE}/"
 
 # The version of jQuery core used
-JQUERY = 1.5.2
+JQUERY = $(shell grep Library js/jquery.js | sed s'/ \* jQuery JavaScript Library v//')
 
 # The directory to create the zipped files in and also serves as the filenames
 DIR = jquery.mobile-${VER}
@@ -163,7 +163,6 @@ nightly: pull zip
 	# Move the output folder to the nightlies folder
 	@@scp -r ${OUTPUT} jqadmin@code.origin.jquery.com:/var/www/html/code.jquery.com/mobile/${NIGHTLY_OUTPUT}
 	@@rm -rf ${OUTPUT}
-
 
 # Used by the jQuery team to deploy a build to the CDN
 deploy: zip
