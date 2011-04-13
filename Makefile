@@ -19,8 +19,8 @@ DIR = jquery.mobile-${VER}
 OUTPUT = compiled
 
 # The output folder for the nightly files.
-NIGHTLY_OUTPUT = /srv/jquerymobile.com/htdocs/nightlies/${DATE}
-NIGHTLY_WEBPATH = http://jquerymobile.com/nightlies/${DATE}
+NIGHTLY_OUTPUT = nightlies/${DATE}
+NIGHTLY_WEBPATH = http://code.jquery.com/mobile/${NIGHTLY_OUTPUT}
 
 # The filenames
 JS = ${DIR}.js
@@ -160,11 +160,9 @@ nightly: pull zip
 	# Copy the images as well
 	@@cp -R themes/default/images ${OUTPUT}
 
-	# Remove the output folder so its not placed in there.
-	@@rm -rf ${NIGHTLY_OUTPUT}
-	
 	# Move the output folder to the nightlies folder
-	@@mv ${OUTPUT} ${NIGHTLY_OUTPUT}
+	@@scp -r ${OUTPUT} jqadmin@code.origin.jquery.com:/var/www/html/code.jquery.com/mobile/${NIGHTLY_OUTPUT}
+	@@rm -rf ${OUTPUT}
 
 
 # Used by the jQuery team to deploy a build to the CDN
