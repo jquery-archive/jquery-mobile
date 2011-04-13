@@ -20,6 +20,11 @@ OUTPUT = compiled
 
 # The output folder for the nightly files.
 NIGHTLY_OUTPUT = nightlies/${DATE}
+ifeq (${NIGHTLY_OUTPUT}, latest)
+	RMLATEST = ssh jqadmin@code.origin.jquery.com 'rm -rf /var/www/html/code.jquery.com/mobile/latest'
+else
+	RMLATEST = ''
+endif
 NIGHTLY_WEBPATH = http://code.jquery.com/mobile/${NIGHTLY_OUTPUT}
 
 # The filenames
@@ -160,7 +165,7 @@ nightly: pull zip
 	# Copy the images as well
 	@@cp -R themes/default/images ${OUTPUT}
 
-	# Move the output folder to the nightlies folder
+	@@${RMLATEST}
 	@@scp -r ${OUTPUT} jqadmin@code.origin.jquery.com:/var/www/html/code.jquery.com/mobile/${NIGHTLY_OUTPUT}
 	@@rm -rf ${OUTPUT}
 
