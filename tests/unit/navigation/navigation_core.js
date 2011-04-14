@@ -394,4 +394,31 @@
 ], 1000);
 	});
 
+	asyncTest( "query param link from a dialog to a dialog should be a no op", function(){
+		var firstDialogHash;
+
+		$.testHelper.sequence([
+			function(){
+				$.testHelper.openPage("#dialog-param-link");
+			},
+
+			function(){
+				$("#dialog_param-link a").click();
+			},
+
+			function(){
+				firstDialogHash = location.hash;
+				$("#dialog-param-link-dialog a").click();
+			},
+
+			function(){
+				$("#dialog-param-link-dialog a").click();
+			},
+
+			function(){
+				same(location.hash, firstDialogHash, "additional dialog param not added");
+				start();
+			}
+], 1000);
+	});
 })(jQuery);
