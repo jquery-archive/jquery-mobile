@@ -40,7 +40,6 @@
 
 			//set location hash to path
 			set: function( path ){
-				//console.log("path.set:", path);
 				if (path === "#" && location.href.indexOf("#") === -1) {
 					location.href += "#"; // Only way to set empty hash for non-hash url
 				} else {
@@ -129,10 +128,7 @@
 			// Note that the location (url bar) will always have a hash character, event when on first page.
 
 			clean: function( url ){
-				//console.log("clean:", url);
-
 				if(path.isQuery(url)){
-					//console.log("it's a query, returning #" + path.cleanHash(location.hash) + url);
 					return "#" + path.cleanHash(location.hash) + url;
 				}
 
@@ -165,46 +161,35 @@
 					url = checkForRoot[1];
 				}
 				url = url.replace(leadingUrlRootRegex, "");
-				//console.log("Without host & pathname:", url);
 				if (path.hasProtocol(url)) {
 					return url; // External
 				} else {
 					// canonize url
-					//console.log("canonize url:", url);
 					var urlSegments, locSegments, i, canonPath = [];
 					var checkForIndex = /^(.*\/)index\.[^\/?]*(\?.*)?$/i.exec(url);
 					if (checkForIndex) {
-						//console.log("Removing index:", checkForIndex);
-						url = checkForIndex[1];
-						if (checkForIndex[2]) {
-							url += checkForIndex[2];
-						}
+						url = checkForIndex[1] + (checkForIndex[2] ? checkForIndex[2] : "");
 					}
-					if (url.charAt(0) === "#") { // Hash-absolute - nothing to do since we already removed extra index file (if present)
-						if (url.charAt(1) === "/") {
-							return "#" + url.slice(2); // Allow "absolute" form of hash
-						} else if (url === $.mobile.firstPageUrl) {
+					if (url.charAt(0) === "#") {
+						if (url.charAt(1) === "/") { // Hash-absolute
+							return "#" + url.slice(2);
+						} else if (url === $.mobile.firstPageUrl) { // First page
 							return "#";
-						} else {
+						} else { // Hash-relative
 							return url;
 						}
 					} else if (url.charAt(0) === "/") { // Absolute
-						//console.log("url:", url);
-						//console.log("pathname:", location.pathname);
 						locSegments = location.pathname.split("/");
 						urlSegments = url.split("/");
 						locSegments.pop(); // Remove filename part
 						for (i=0; locSegments[i] === urlSegments[i]; i++); // Count common elements
-						//console.log("common elements:", i);
 						urlSegments.splice(0, i); // Remove common elements from url
-						//console.log("removed common:", urlSegments);
 						for (;i < locSegments.length; i++) {
 							canonPath.push("..");
 						}
 						canonPath = canonPath.concat(urlSegments);
 						return "#" + canonPath.join("/");
 					} else { // Relative
-						//console.log("path:", path.get());
 						return  "#" + path.canonize(path.get() + url);
 					}
 				}
@@ -216,7 +201,6 @@
 			// e.g. a/./b/c or a//b/c becomes a/b/c
 			canonize: function( path ) {
 				var canonPath = path.split("/"), i = 0;
-				//console.log("canonPath:" + canonPath);
 				while(i < canonPath.length) {
 					if (canonPath[i] === ".." && i > 0 && canonPath[i-1] !== "..") {
 						i--;
@@ -322,12 +306,9 @@
 				// save new page index, null check to prevent falsey 0 result
 				this.activeIndex = newActiveIndex !== undefined ? newActiveIndex : this.activeIndex;
 
-				//console.log("Checking history");
 				if( back ){
-					//console.log("It's back");
 					opts.isBack();
 				} else if( forward ){
-					//console.log("It's forward");
 					opts.isForward();
 				}
 			},
@@ -478,8 +459,6 @@
 
 	// changepage function
 	$.mobile.changePage = function( to, transition, reverse, changeHash, fromHashChange ){
-		//console.log("changePage to:", to);
-
 		if ($.type(to) === "string") {
 			to = path.clean(to);
 			if (to === "#") {
@@ -598,11 +577,8 @@
 			to.data( "page" )._trigger( "beforeshow", null, { prevPage: from || $("") } );
 
 			function pageChangeComplete(){
-				//console.log("pageChangeComplete:", url);
-
 				if (changeHash !== false) {
 					if (to === $.mobile.firstPage) {
-						//console.log("firstPage, setting url to #");
 						//disable hash listening temporarily
 						urlHistory.ignoreNextHashChange = false;					
 						path.set("#");
@@ -936,7 +912,6 @@
 
 			//if data-ajax attr is set to false, use the default behavior of a link
 			hasAjaxDisabled = $this.is( ":jqmData(ajax='false')" );
-		//console.log("linkHander; url is now: " + url);
 		//if there's a data-rel=back attr, go back in history
 		if( $this.is( ":jqmData(rel='back')" ) ){
 			window.history.back();
@@ -978,9 +953,7 @@
 
 	//hashchange event handler
 	$window.bind( "hashchange", function( e, triggered ) {
-		//console.log("hashchange:", location.href);
 		//find first page via hash
-		//var to = path.stripHash( location.hash ),
 		var to = location.hash,
 			//transition is false if it's the first page, undefined otherwise (and may be overridden by default)
 			transition = $.mobile.urlHistory.stack.length === 0 ? false : undefined;
@@ -1001,8 +974,6 @@
 			// If current active page is not a dialog skip the dialog and continue
 			// in the same direction
 			if(!$.mobile.activePage.is( ".ui-dialog" )) {
-				//console.log("active page is not .ui-dialog", to);
-				//console.log("urlHistory", urlHistory.stack);
 				//determine if we're heading forward or backward and continue accordingly past
 				//the current dialog
 				urlHistory.directHashChange({
@@ -1014,7 +985,6 @@
 				// prevent changepage
 				return;
 			} else {
-				//console.log("active page is .ui-dialog", $.mobile.urlHistory.getActive().page);
 				var setTo = function(){ to = $.mobile.urlHistory.getActive().page; };
 				// if the current active page is a dialog and we're navigating
 				// to a dialog use the dialog objected saved in the stack
