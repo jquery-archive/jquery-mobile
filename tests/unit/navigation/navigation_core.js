@@ -37,7 +37,7 @@
 	asyncTest( "forms with data attribute ajax set to false will not call changePage", function(){
 		var called = false,
 				newChangePage = function(){
-					called = truue;
+					called = true;
 				};
 
 		$.testHelper.sequence([
