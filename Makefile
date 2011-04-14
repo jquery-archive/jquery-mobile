@@ -19,7 +19,7 @@ DIR = jquery.mobile-${VER}
 OUTPUT = compiled
 
 # Command to remove the latest directory from the CDN before uploading, only if using latest target
-RMLATEST = ''
+RMLATEST = echo ""
 
 # The output folder for the nightly files.
 NIGHTLY_OUTPUT = nightlies/${DATE}
