@@ -26,6 +26,7 @@ NIGHTLY_OUTPUT = nightlies/${DATE}
 ifeq (${NIGHTLY_OUTPUT}, latest)
 	RMLATEST = ssh jqadmin@code.origin.jquery.com 'rm -rf /var/www/html/code.jquery.com/mobile/latest'
 	DIR = jquery.mobile
+	SED_VER = sed "s/@VERSION/ LatestBuild/"
 endif
 NIGHTLY_WEBPATH = http://code.jquery.com/mobile/${NIGHTLY_OUTPUT}
 
