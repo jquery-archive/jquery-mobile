@@ -130,9 +130,15 @@
 
 			clean: function( url ){
 				//console.log("clean:", url);
+
+				if(path.isQuery(url)){
+					//console.log("it's a query, returning #" + path.cleanHash(location.hash) + url);
+					return "#" + path.cleanHash(location.hash) + url;
+				}
+
 				// Replace the protocol, host, and pathname only once at the beginning of the url to avoid
 				// problems when it's included as a part of a param
-				var leadingUrlRootRegex, checkForRoot;
+				var leadingUrlRootRegex;
 				var hashIndex = url.indexOf("#");
 				if (hashIndex > 0) { // Hash, but not at beginning
 					// Add protocol and host to absolute and relative hashed urls so that they will be considered external
@@ -154,7 +160,7 @@
 				} else {
 					leadingUrlRootRegex = new RegExp("^" + location.protocol + "//" + location.host + "(.*)$");
 				}
-				checkForRoot = leadingUrlRootRegex.exec(url);
+				var checkForRoot = leadingUrlRootRegex.exec(url);
 				if (checkForRoot) {
 					url = checkForRoot[1];
 				}
@@ -166,10 +172,13 @@
 					// canonize url
 					//console.log("canonize url:", url);
 					var urlSegments, locSegments, i, canonPath = [];
-					var checkForIndex = /^(.*\/)index\.[^/]*$/i.exec(url);
+					var checkForIndex = /^(.*\/)index\.[^\/?]*(\?.*)?$/i.exec(url);
 					if (checkForIndex) {
 						//console.log("Removing index:", checkForIndex);
 						url = checkForIndex[1];
+						if (checkForIndex[2]) {
+							url += checkForIndex[2];
+						}
 					}
 					if (url.charAt(0) === "#") { // Hash-absolute - nothing to do since we already removed extra index file (if present)
 						if (url.charAt(1) === "/") {
@@ -212,8 +221,8 @@
 					if (canonPath[i] === ".." && i > 0 && canonPath[i-1] !== "..") {
 						i--;
 						canonPath.splice(i,2);
-					} else if (canonPath[i] === "." ||
-						// Cannot remove first/last because they mark beginning/trailing slash
+					} else if (canonPath[i] === "." || // remove same-dir (dot) segments
+						// Remove empty segments - cannot remove first/last because they mark beginning/trailing slash
 						(canonPath[i] === "" && i > 0 && i < canonPath.length-1)) {
 						canonPath.splice(i,1);
 					} else {
@@ -469,7 +478,7 @@
 
 	// changepage function
 	$.mobile.changePage = function( to, transition, reverse, changeHash, fromHashChange ){
-		//console.log("to:", to);
+		//console.log("changePage to:", to);
 
 		if ($.type(to) === "string") {
 			to = path.clean(to);
@@ -927,7 +936,7 @@
 
 			//if data-ajax attr is set to false, use the default behavior of a link
 			hasAjaxDisabled = $this.is( ":jqmData(ajax='false')" );
-
+		//console.log("linkHander; url is now: " + url);
 		//if there's a data-rel=back attr, go back in history
 		if( $this.is( ":jqmData(rel='back')" ) ){
 			window.history.back();

@@ -10,7 +10,7 @@
 
 	test( "path.get method is working properly", function(){
 		window.location.hash = "foo";
-		same($.mobile.path.get(), "foo", "get method returns location.hash minus hash character");
+		same($.mobile.path.get(), "", "get method for location.hash #foo returns empty string");
 		same($.mobile.path.get( "#foo/bar/baz.html" ), "foo/bar/", "get method with hash arg returns path with no filename or hash prefix");
 		same($.mobile.path.get( "#foo/bar/baz.html/" ), "foo/bar/baz.html/", "last segment of hash is retained if followed by a trailing slash");
 	});
@@ -46,10 +46,10 @@
 		same( $.mobile.path.makeAbsolute("?foo=bar&bak=baz"), "bar/bing/bang?foo=bar&bak=baz", "appends query string paths to current path");
 
 		$.mobile.path.set("");
-		same( $.mobile.path.makeAbsolute("?foo=bar&bak=baz"), "/tests/unit/navigation/?foo=bar&bak=baz", "uses pathname for empty hash");
+		same( $.mobile.path.makeAbsolute("?foo=bar&bak=baz"), location.pathname + "?foo=bar&bak=baz", "uses pathname for empty hash");
 
 		$.mobile.path.set("bar");
-		same( $.mobile.path.makeAbsolute("?foo=bar&bak=baz"), "/tests/unit/navigation/?foo=bar&bak=baz", "uses pathname for embedded pages");
+		same( $.mobile.path.makeAbsolute("?foo=bar&bak=baz"), location.pathname + "?foo=bar&bak=baz", "uses pathname for embedded pages");
 
 		$.mobile.path.set("bar/bing?foo=bar");
 		same( $.mobile.path.makeAbsolute("?foo=bar&bak=baz"), "bar/bing?foo=bar&bak=baz", "prevents addition of many sets of query params");
@@ -80,6 +80,8 @@
 			hashedrel2 = "../#foo/bar.html",
 			hashedabs1 = "/foo/#bar.html",
 			hashedabs2 = location.pathname + "#foo/bar.html",
+			indexpath = "#foo/index.chm",
+			indexparampath = "#foo/index.chm?foo=" + localroot,
 			segments = location.pathname.split("/"),
 			uppath = "#",
 			i;
@@ -142,6 +144,12 @@
 			"hashed host-absolute, same path: return hash-relative path");
 		same( $.mobile.path.clean( remotepath ), remotepath,
 			"Hashed host-absolute, different host: return full url");
+		// with index.* at the end
+		same( $.mobile.path.clean( indexpath ), "#foo/",
+			"Remove index.* from path");
+		same( $.mobile.path.clean( indexparampath ), "#foo/?foo=" + localroot,
+			"Remove index.* from path but preserve parameters");
+
 	});
 
 	test( "path.stripHash is working properly", function(){

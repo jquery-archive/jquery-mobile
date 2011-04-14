@@ -29,9 +29,10 @@
 			},
 
 			function(){
-				ok(called == 1, "change page should be called once");
+				ok(called >= 1, "change page should be called at least once");
+				ok(called <= 1, "change page should be called at most once");
 				start();
-			}], 500);
+			}], 1000);
 	});
 
 	asyncTest( "forms with data attribute ajax set to false will not call changePage", function(){
@@ -385,6 +386,34 @@
 			}], 1000);
 	});
 
+	asyncTest( "navigating to a page via several paths only loads it to DOM once", function(){
+		$.testHelper.sequence([
+			// transition to the first page
+			function(){ $.mobile.changePage("#/"); },
+
+			// transition to title2.html directly
+			function(){ $.mobile.changePage("domcopies.html"); },
+
+			// transition to subdirectory
+			function(){ $.mobile.changePage("#data-url-tests/non-data-url.html"); },
+
+			// and then back to title2.html
+			function(){ $.mobile.changePage("../domcopies.html"); },
+
+			// transition to subdirectory again
+			function(){ $.mobile.changePage("#data-url-tests/non-data-url.html"); },
+
+			// and then back to title2.html using absolute url
+			function(){ $.mobile.changePage(location.pathname + "domcopies.html"); },
+
+			// make sure we only have one copy of the dom
+			function(){
+				ok($("p.domcopy_count").length <= 1 , "There should be at most one copy of the page in DOM");
+				ok($("p.domcopy_count").length >= 1 , "There should be at least one copy of the page in DOM");
+				start();
+			}], 1000);
+	});
+
 	asyncTest( "Page links to the current active page result in the same active page", function(){
 		$.testHelper.openPage("#self-link");
 		$.testHelper.sequence([
@@ -436,7 +465,6 @@
 				same(location.hash, "#data-url-tests/non-data-url.html?foo=bar");
 				start();
 			}
-], 1000);
+		], 1000);
 	});
-
 })(jQuery);
