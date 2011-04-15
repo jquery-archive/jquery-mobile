@@ -82,8 +82,9 @@
 				return url.replace( /^#/, "" );
 			},
 
+			//remove the preceding hash, any query params, and dialog notations
 			cleanHash: function( hash ){
-				return path.stripHash( hash.replace( /\?.*$/, "" ) );
+				return path.stripHash( hash.replace( /\?.*$/, "" ).replace( dialogHashKey, "") );
 			},
 
 			//check whether a url is referencing the same domain, or an external domain or different protocol
