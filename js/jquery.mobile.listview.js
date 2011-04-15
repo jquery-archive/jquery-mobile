@@ -29,10 +29,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			$list.addClass( "ui-listview-inset ui-corner-all ui-shadow" );
 		}
 
-		this._itemApply( $list, $list );
-		
-		this.refresh( true );
-
+		this.refresh();
 	},
 
 	_itemApply: function( $list, item ) {
@@ -44,8 +41,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 		item.find( "p, dl" ).addClass( "ui-li-desc" );
 
-		var children = item.children();
-		children.filter("img:eq(0)").add(children.eq(0).children("img:eq(0)")).addClass( "ui-li-thumb" ).each(function() {
+		item.find("img:first-child:eq(0)").addClass( "ui-li-thumb" ).each(function() {
 			item.addClass( $(this).is( ".ui-li-icon" ) ? "ui-li-has-icon" : "ui-li-has-thumb" );
 		});
 
