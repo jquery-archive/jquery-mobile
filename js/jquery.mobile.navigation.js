@@ -82,8 +82,9 @@
 				return url.replace( /^#/, "" );
 			},
 
+			//remove the preceding hash, any query params, and dialog notations
 			cleanHash: function( hash ){
-				return path.stripHash( hash.replace( /\?.*$/, "" ) );
+				return path.stripHash( hash.replace( /\?.*$/, "" ).replace( dialogHashKey, "") );
 			},
 
 			//check whether a url is referencing the same domain, or an external domain or different protocol
@@ -332,7 +333,7 @@
 			type = 'get',
 			isFormRequest = false,
 			duplicateCachedPage = null,
-			currPage = urlHistory.getActive(),
+			active = urlHistory.getActive(),
 			back = false,
 			forward = false,
 			pageTitle = document.title;
@@ -341,7 +342,9 @@
 		// If we are trying to transition to the same page that we are currently on ignore the request.
 		// an illegal same page request is defined by the current page being the same as the url, as long as there's history
 		// and to is not an array or object (those are allowed to be "same")
-		if( currPage && urlHistory.stack.length >= 1 && currPage.url === url && !toIsArray && !toIsObject ) {
+		if( urlHistory.stack.length > 0
+				&& active.page.jqmData("url") === url
+				&& !toIsArray && !toIsObject ) {
 			return;
 		}
 		else if(isPageTransitioning) {
@@ -359,7 +362,7 @@
 				isBack: function(){
 					forward = !(back = true);
 					reverse = true;
-					transition = transition || currPage.transition;
+					transition = transition || active.transition;
 				},
 				isForward: function(){
 					forward = !(back = false);
