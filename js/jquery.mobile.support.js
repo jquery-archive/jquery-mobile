@@ -11,7 +11,7 @@
 var fakeBody = $( "<body>" ).prependTo( "html" ),
 	fbCSS = fakeBody[0].style,
 	vendors = ['webkit','moz','o'],
-	webos = window.palmGetResource || window.PalmServiceBridge, //only used to rule out scrollTop 
+	webos = "palmGetResource" in window, //only used to rule out scrollTop 
 	bb = window.blackberry; //only used to rule out box shadow, as it's filled opaque on BB
 
 //thx Modernizr
