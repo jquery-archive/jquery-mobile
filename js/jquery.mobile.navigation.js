@@ -321,9 +321,10 @@
 	// changepage function
 	$.mobile.changePage = function( to, transition, reverse, changeHash, fromHashChange ){
 		//from is always the currently viewed page
-		var toIsArray = $.type(to) === "array",
-			toIsObject = $.type(to) === "object",
-			from = toIsArray ? to[0] : $.mobile.activePage;
+		var toType 		= $.type(to),
+			toIsArray 	= toType === "array",
+			toIsObject 	= toType === "object",
+			from 		= toIsArray ? to[0] : $.mobile.activePage;
 
 			to = toIsArray ? to[1] : to;
 
