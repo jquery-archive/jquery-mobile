@@ -496,9 +496,11 @@
 
 				pageContainerClasses = [];
 			}
-
+			
+			//clear page loader
+			$.mobile.pageLoading( true );
+			
 			if(transition && (transition !== 'none')){
-			    $.mobile.pageLoading( true );
 				if( $.inArray(transition, perspectiveTransitions) >= 0 ){
 					addContainerClass('ui-mobile-viewport-perspective');
 				}
@@ -522,7 +524,6 @@
 				});
 			}
 			else{
-			    $.mobile.pageLoading( true );
 			    if( from ){
 					from.removeClass( $.mobile.activePageClass );
 				}
