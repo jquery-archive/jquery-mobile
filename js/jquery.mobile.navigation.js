@@ -744,6 +744,10 @@
 			//rel set to external
 			isRelExternal = $this.is( "[rel='external']" ),
 
+			//if this attribute is set, load the dialog from an external url in same domain but not in jQuery base path
+            //i.e. pages are in http://www.site.com/mobile/page.html and dialog content is at at http://www.site.com/resource/dialog.html
+			isExternalDialog = $this.is( "[rel='external-dialog']" ),
+
 			//rel set to external
 			isEmbeddedPage = path.isEmbeddedPage( url ),
 
@@ -758,7 +762,7 @@
 			//check for protocol or rel and its not an embedded page
 			//TODO overlap in logic from isExternal, rel=external check should be
 			//     moved into more comprehensive isExternalLink
-			isExternal = (path.isExternal(url) && !isCrossDomainPageLoad) || (isRelExternal && !isEmbeddedPage),
+			isExternal = !isExternalDialog && (path.isExternal(url) && !isCrossDomainPageLoad) || (isRelExternal && !isEmbeddedPage),
 
 			//if target attr is specified we mimic _blank... for now
 			hasTarget = $this.is( "[target]" ),
