@@ -82,8 +82,9 @@
 				return url.replace( /^#/, "" );
 			},
 
+			//remove the preceding hash, any query params, and dialog notations
 			cleanHash: function( hash ){
-				return path.stripHash( hash.replace( /\?.*$/, "" ) );
+				return path.stripHash( hash.replace( /\?.*$/, "" ).replace( dialogHashKey, "") );
 			},
 
 			//check whether a url is referencing the same domain, or an external domain or different protocol
@@ -320,9 +321,10 @@
 	// changepage function
 	$.mobile.changePage = function( to, transition, reverse, changeHash, fromHashChange ){
 		//from is always the currently viewed page
-		var toIsArray = $.type(to) === "array",
-			toIsObject = $.type(to) === "object",
-			from = toIsArray ? to[0] : $.mobile.activePage;
+		var toType 		= $.type(to),
+			toIsArray 	= toType === "array",
+			toIsObject 	= toType === "object",
+			from 		= toIsArray ? to[0] : $.mobile.activePage;
 
 			to = toIsArray ? to[1] : to;
 
@@ -332,7 +334,7 @@
 			type = 'get',
 			isFormRequest = false,
 			duplicateCachedPage = null,
-			currPage = urlHistory.getActive(),
+			active = urlHistory.getActive(),
 			back = false,
 			forward = false,
 			pageTitle = document.title;
@@ -341,7 +343,9 @@
 		// If we are trying to transition to the same page that we are currently on ignore the request.
 		// an illegal same page request is defined by the current page being the same as the url, as long as there's history
 		// and to is not an array or object (those are allowed to be "same")
-		if( currPage && urlHistory.stack.length >= 1 && currPage.url === url && !toIsArray && !toIsObject ) {
+		if( urlHistory.stack.length > 0
+				&& active.page.jqmData("url") === url
+				&& !toIsArray && !toIsObject ) {
 			return;
 		}
 		else if(isPageTransitioning) {
@@ -359,7 +363,7 @@
 				isBack: function(){
 					forward = !(back = true);
 					reverse = true;
-					transition = transition || currPage.transition;
+					transition = transition || active.transition;
 				},
 				isForward: function(){
 					forward = !(back = false);
@@ -492,9 +496,11 @@
 
 				pageContainerClasses = [];
 			}
-
+			
+			//clear page loader
+			$.mobile.pageLoading( true );
+			
 			if(transition && (transition !== 'none')){
-			    $.mobile.pageLoading( true );
 				if( $.inArray(transition, perspectiveTransitions) >= 0 ){
 					addContainerClass('ui-mobile-viewport-perspective');
 				}
@@ -518,7 +524,6 @@
 				});
 			}
 			else{
-			    $.mobile.pageLoading( true );
 			    if( from ){
 					from.removeClass( $.mobile.activePageClass );
 				}

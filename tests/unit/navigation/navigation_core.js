@@ -37,7 +37,7 @@
 	asyncTest( "forms with data attribute ajax set to false will not call changePage", function(){
 		var called = false,
 				newChangePage = function(){
-					called = truue;
+					called = true;
 				};
 
 		$.testHelper.sequence([
@@ -391,7 +391,41 @@
 				same(location.hash, "#data-url-tests/non-data-url.html?foo=bar");
 				start();
 			}
-], 1000);
+		], 1000);
 	});
 
+	// Special handling inside navigation because query params must be applied to the hash
+	// or absolute reference and dialogs apply extra information int the hash that must be removed
+	asyncTest( "query param link from a dialog to itself should be a not add another dialog", function(){
+		var firstDialogHash;
+
+		$.testHelper.sequence([
+			// open our test page
+			function(){
+				$.testHelper.openPage("#dialog-param-link");
+			},
+
+			// navigate to the subdirectory page with the query link
+			function(){
+				$("#dialog-param-link a").click();
+			},
+
+			// navigate to the query param self reference link
+			function(){
+				$("#dialog-param-link-page a").click();
+			},
+
+			// attempt to navigate to the same link
+			function(){
+				// store the current hash for comparison (with one dialog hash key)
+				firstDialogHash = location.hash;
+				$("#dialog-param-link-page a").click();
+			},
+
+			function(){
+				same(location.hash, firstDialogHash, "additional dialog hash key not added");
+				start();
+			}
+], 1000);
+	});
 })(jQuery);

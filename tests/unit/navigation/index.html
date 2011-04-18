@@ -5,19 +5,19 @@
 	<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
 	<title>jQuery Mobile Navigation Test Suite</title>
 
-	<script type="text/javascript" src="../../../js/jquery.js"></script>
+	<script src="../../../js/jquery.js"></script>
 	<script src="../jquery.setNameSpace.js"></script>
-	<script type="text/javascript" src="../../../js/"></script>
-	<script type="text/javascript" src="../../../tests/jquery.testHelper.js"></script>
+	<script src="../../../js/"></script>
+	<script src="../../../tests/jquery.testHelper.js"></script>
 
 
-	<link rel="stylesheet" href="../../../themes/default/" type="text/css"/>
-	<link rel="stylesheet" href="../../../external/qunit.css" type="text/css"/>
-	<script type="text/javascript" src="../../../external/qunit.js"></script>
+	<link rel="stylesheet" href="../../../themes/default/"/>
+	<link rel="stylesheet" href="../../../external/qunit.css"/>
+	<script src="../../../external/qunit.js"></script>
 
-	<script type="text/javascript" src="navigation_transitions.js"></script>
-	<script type="text/javascript" src="navigation_helpers.js"></script>
-	<script type="text/javascript" src="navigation_core.js"></script>
+	<script src="navigation_transitions.js"></script>
+	<script src="navigation_helpers.js"></script>
+	<script src="navigation_core.js"></script>
 </head>
 <body>
 
@@ -176,6 +176,10 @@
 
 <div data-nstest-role="page" id="self-link">
 	<a href="#self-link">self!</a>
+</div>
+
+<div data-nstest-role="page" id="dialog-param-link">
+	<a href="dialog-param-test/dialog-param.html">go</a>
 </div>
 </body>
 </html>

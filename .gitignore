@@ -6,6 +6,8 @@
 cache/
 combined/
 combine/
+compiled/
+gitstatus.log
 .idea
 *.iml
 *.ipr
