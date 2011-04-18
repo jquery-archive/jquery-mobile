@@ -30,12 +30,10 @@ var dataPropertyName = "virtualMouseBindings",
 	resetTimerID = 0,
 	startX = 0,
 	startY = 0,
-	startScrollX = 0,
-	startScrollY = 0,
 	didScroll = false,
 	clickBlockList = [],
 	blockMouseTriggers = false,
-	scrollTopSupported = $.support.scrollTop,
+	blockTouchTriggers = false,
 	eventCaptureSupported = $.support.eventCapture,
 	$document = $(document),
 	nextTouchID = 1,
@@ -121,34 +119,12 @@ function getClosestElementWithVirtualBinding(element, eventType)
 
 function enableTouchBindings()
 {
-	if (!activeDocHandlers["touchbindings"]){
-		$document.bind("touchend", handleTouchEnd)
-		
-			// On touch platforms, touching the screen and then dragging your finger
-			// causes the window content to scroll after some distance threshold is
-			// exceeded. On these platforms, a scroll prevents a click event from being
-			// dispatched, and on some platforms, even the touchend is suppressed. To
-			// mimic the suppression of the click event, we need to watch for a scroll
-			// event. Unfortunately, some platforms like iOS don't dispatch scroll
-			// events until *AFTER* the user lifts their finger (touchend). This means
-			// we need to watch both scroll and touchmove events to figure out whether
-			// or not a scroll happenens before the touchend event is fired.
-		
-			.bind("touchmove", handleTouchMove)
-			.bind("scroll", handleScroll);
-
-		activeDocHandlers["touchbindings"] = 1;
-	}
+	blockTouchTriggers = false;
 }
 
 function disableTouchBindings()
 {
-	if (activeDocHandlers["touchbindings"]){
-		$document.unbind("touchmove", handleTouchMove)
-			.unbind("touchend", handleTouchEnd)
-			.unbind("scroll", handleScroll);
-		activeDocHandlers["touchbindings"] = 0;
-	}
+	blockTouchTriggers = true;
 }
 
 function enableMouseBindings()
@@ -227,11 +203,6 @@ function handleTouchStart(event)
 			startX = t.pageX;
 			startY = t.pageY;
 		
-			if (scrollTopSupported){
-				startScrollX = window.pageXOffset;
-				startScrollY = window.pageYOffset;
-			}
-		
 			triggerVirtualEvent("vmouseover", event, flags);
 			triggerVirtualEvent("vmousedown", event, flags);
 		}
@@ -240,6 +211,10 @@ function handleTouchStart(event)
 
 function handleScroll(event)
 {
+	if (blockTouchTriggers){
+		return;
+	}
+
 	if (!didScroll){
 		triggerVirtualEvent("vmousecancel", event, getVirtualBindingFlags(event.target));
 	}
@@ -250,12 +225,15 @@ function handleScroll(event)
 
 function handleTouchMove(event)
 {
+	if (blockTouchTriggers){
+		return;
+	}
+
 	var t = getNativeEvent(event).touches[0];
 
 	var didCancel = didScroll,
 		moveThreshold = $.vmouse.moveDistanceThreshold;
 	didScroll = didScroll
-		|| (scrollTopSupported && (startScrollX !== window.pageXOffset || startScrollY !== window.pageYOffset))
 		|| (Math.abs(t.pageX - startX) > moveThreshold || Math.abs(t.pageY - startY) > moveThreshold);
 
 	var flags = getVirtualBindingFlags(event.target);
@@ -268,6 +246,10 @@ function handleTouchMove(event)
 
 function handleTouchEnd(event)
 {
+	if (blockTouchTriggers){
+		return;
+	}
+
 	disableTouchBindings();
 
 	var flags = getVirtualBindingFlags(event.target);
@@ -348,7 +330,22 @@ function getSpecialEventObject(eventType)
 	
 				activeDocHandlers["touchstart"] = (activeDocHandlers["touchstart"] || 0) + 1;
 				if (activeDocHandlers["touchstart"] === 1) {
-					$document.bind("touchstart", handleTouchStart);
+					$document.bind("touchstart", handleTouchStart)
+
+						.bind("touchend", handleTouchEnd)
+					
+						// On touch platforms, touching the screen and then dragging your finger
+						// causes the window content to scroll after some distance threshold is
+						// exceeded. On these platforms, a scroll prevents a click event from being
+						// dispatched, and on some platforms, even the touchend is suppressed. To
+						// mimic the suppression of the click event, we need to watch for a scroll
+						// event. Unfortunately, some platforms like iOS don't dispatch scroll
+						// events until *AFTER* the user lifts their finger (touchend). This means
+						// we need to watch both scroll and touchmove events to figure out whether
+						// or not a scroll happenens before the touchend event is fired.
+					
+						.bind("touchmove", handleTouchMove)
+						.bind("scroll", handleScroll);			
 				}
 			}
 		},
@@ -368,7 +365,10 @@ function getSpecialEventObject(eventType)
 	
 				--activeDocHandlers["touchstart"];
 				if (!activeDocHandlers["touchstart"]) {
-					$document.unbind("touchstart", handleTouchStart);
+					$document.unbind("touchstart", handleTouchStart)
+						.unbind("touchmove", handleTouchMove)
+						.unbind("touchend", handleTouchEnd)
+						.unbind("scroll", handleScroll);
 				}
 			}
 
