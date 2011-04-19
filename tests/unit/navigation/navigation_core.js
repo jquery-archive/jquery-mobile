@@ -166,7 +166,7 @@
 	};
 
 	test( "when loading a page where data-url is not defined on a sub element hash defaults to the url", function(){
-		testDataUrlHash("#non-data-url a", /^#data-url-tests\/non-data-url.html$/);
+		testDataUrlHash("#non-data-url a", new RegExp("^#/tests/unit/navigation/data-url-tests/non-data-url.html$"));
 	});
 
 	test( "data url works for nested paths", function(){
