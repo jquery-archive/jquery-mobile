@@ -81,23 +81,51 @@ $.fn.buttonMarkup.defaults = {
 	wrapperEls: "span"
 };
 
+function closestEnabledButton(element)
+{
+	while (element){
+		var $ele = $(element);
+		if ($ele.hasClass("ui-btn") && !ele.hasClass("ui-disabled")){
+			break;
+		}
+		element = element.parentNode;
+	}
+	return element;
+}
+
 var attachEvents = function() {
-	$(".ui-btn:not(.ui-disabled)").live({
+	$(document).bind({
 		"vmousedown": function() {
-			var theme = $(this).attr( "data-" + $.mobile.ns + "theme" );
-			$(this).removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-down-" + theme );
+			var btn = closestEnabledButton(this);
+			if (btn){
+				var $btn = $(btn),
+					theme = $btn.attr( "data-" + $.mobile.ns + "theme" );
+				$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-down-" + theme );
+			}
 		},
 		"vmousecancel vmouseup": function() {
-			var theme = $(this).attr( "data-" + $.mobile.ns + "theme" );
-			$(this).removeClass( "ui-btn-down-" + theme ).addClass( "ui-btn-up-" + theme );
+			var btn = closestEnabledButton(this);
+			if (btn){
+				var $btn = $(btn),
+					theme = $btn.attr( "data-" + $.mobile.ns + "theme" );
+				$btn.removeClass( "ui-btn-down-" + theme ).addClass( "ui-btn-up-" + theme );
+			}
 		},
 		"vmouseover focus": function() {
-			var theme = $(this).attr( "data-" + $.mobile.ns + "theme" );
-			$(this).removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-hover-" + theme );
+			var btn = closestEnabledButton(this);
+			if (btn){
+				var $btn = $(btn),
+					theme = $btn.attr( "data-" + $.mobile.ns + "theme" );
+				$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-hover-" + theme );
+			}
 		},
 		"vmouseout blur": function() {
-			var theme = $(this).attr( "data-" + $.mobile.ns + "theme" );
-			$(this).removeClass( "ui-btn-hover-" + theme ).addClass( "ui-btn-up-" + theme );
+			var btn = closestEnabledButton(this);
+			if (btn){
+				var $btn = $(btn),
+					theme = $btn.attr( "data-" + $.mobile.ns + "theme" );
+				$btn.removeClass( "ui-btn-hover-" + theme ).addClass( "ui-btn-up-" + theme );
+			}
 		}
 	});
 
