@@ -121,6 +121,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 						.not( "> .ui-collapsible-contain .ui-collapsible-contain" )
 						.trigger( "collapse" );
 				});
+
 			var set = collapsibleParent.find( ":jqmData(role=collapsible)" )
 					
 			set.first()
@@ -133,16 +134,15 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 		}
 					
 		collapsibleHeading
-			.bind("vmouseup", function(e){ 
+			.bind("vclick", function(e){ 
 				if( collapsibleHeading.is('.ui-collapsible-heading-collapsed') ){
 					collapsibleContain.trigger('expand'); 
 				}	
 				else {
 					collapsibleContain.trigger('collapse'); 
 				}
-				e.preventDefault();
-			})
-			.bind("vclick",false );
+				return false;
+			});
 	}
 });
 })( jQuery );
