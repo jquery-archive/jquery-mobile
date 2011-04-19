@@ -171,6 +171,9 @@
 		
 		
 		
+		<h2>Auto-updating page titles for Ajax navigation</h2>
+		<p>When you load the first page of a jQuery Mobile based site, then click a link or submit a form, the jQuery Mobile uses Ajax to pull in the content of the requested page. Having both pages in the DOM is essential to enable the animated page transitions but one downside of this approach is that the page title is always that of the first page, not the subsequent page you’re viewing. To remedy this, the framework automatically parses the <code>title</code> of the page pulled via Ajax and changes the <code>title</code> attribute of the parent document to match. On multi-page sites, add the <code>data-title</code> attribute to each page container to manually define a title. Since we already support the browser’s history stack, back button and bookmarking of these Ajax-based pages, this really helps when looking through your browsing history.</p>
+
 		<h2>Back linking</h2>
 		<p>If you use the attribute <code>data-rel="back"</code> on an anchor, any clicks on that anchor will mimic the back button, going back one history entry and ignoring the anchor's default href. This is particularly useful when linking back to a named page, such as a link that says "home", or when generating "back" buttons with JavaScript, such as a button to close a dialog. When using this feature in your source markup, <strong>be sure to provide a meaningful href that actually points to the URL of the referring page (this will allow the feature to work for users in C-Grade browsers</strong>. Also, please keep in mind that if you just want a reverse transition without actually going back in history, you should use the <code>data-direction="reverse"</code> attribute instead.</p>
 		
