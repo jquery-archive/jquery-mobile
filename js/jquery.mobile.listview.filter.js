@@ -24,31 +24,48 @@ $( ":jqmData(role='listview')" ).live( "listviewcreate", function() {
 			})
 			.attr( "data-" + $.mobile.ns + "type", "search" )
 			.bind( "keyup change", function() {
-				var val = this.value.toLowerCase(),
-						listItems = list.children();
-				listItems.show();
+                lastval=$(this).jqmData('lastval')+"";
+				var val = this.value.toLowerCase(),listItems=null;
+                //change val as lastval for next execution  
+                $(this).jqmData('lastval',val);
+                  
+                change=val.replace(new RegExp("^"+lastval),"");
+                  
+                if(val.length<lastval.length || change.length!=(val.length-lastval.length)){
+                    //removed chars or pasted something totaly different, check all items
+                    listItems = list.children()
+                }else{
+                    //only chars added, not removed, only use visible subset
+                    listItems = list.children(':visible');
+                }
 				if ( val ) {
 					// This handles hiding regular rows without the text we search for
 					// and any list dividers without regular rows shown under it
 					var childItems = false,
-							item;
+							item,itemtext="";
 
 					for (var i = listItems.length; i >= 0; i--) {
 						item = $(listItems[i]);
+                        itemtext=item.jqmData('filtertext') || item.text();
 						if (item.is("li:jqmData(role=list-divider)")) {
 							if (!childItems) {
 								item.hide();
-							}
+                            }else{
+                                item.show();
+                            }
 							// New bucket!
 							childItems = false;
-						} else if (item.text().toLowerCase().indexOf( val ) === -1) {
+						} else if (itemtext.toLowerCase().indexOf( val ) === -1) {
 							item.hide();
 						} else {
+                            item.show();
 							// There's a shown item in the bucket
 							childItems = true;
 						}
 					}
-				}
+                }else{
+                    listItems.show();
+                }
 			})
 			.appendTo( wrapper )
 			.textinput();
