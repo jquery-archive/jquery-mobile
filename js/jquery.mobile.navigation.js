@@ -40,8 +40,8 @@
 				path.origin = path.get( location.protocol + '//' + location.host + location.pathname );
 			},
 
-			//prefix a relative url with the current path
-			// TODO rename to reflect conditional functionality
+			// prefix a relative url with the current path
+			// TODO force old relative deeplinks into new absolute path
 			makeAbsolute: function( url ){
 				var isHashPath = path.isPath( location.hash );
 
@@ -69,9 +69,8 @@
 
 			//return a url path with the window's location protocol/hostname/pathname removed
 			clean: function( url ){
-				// Replace the protocol, host, and pathname only once at the beginning of the url to avoid
+				// Replace the protocol host only once at the beginning of the url to avoid
 				// problems when it's included as a part of a param
-				// Also, since all urls are absolute in IE, we need to remove the pathname as well.
 				var leadingUrlRootRegex = new RegExp("^" + location.protocol + "//" + location.host );
 				return url.replace(leadingUrlRootRegex, "");
 			},
@@ -495,10 +494,10 @@
 
 				pageContainerClasses = [];
 			}
-			
+
 			//clear page loader
 			$.mobile.pageLoading( true );
-			
+
 			if(transition && (transition !== 'none')){
 				if( $.inArray(transition, perspectiveTransitions) >= 0 ){
 					addContainerClass('ui-mobile-viewport-perspective');
