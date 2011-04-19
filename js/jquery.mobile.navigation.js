@@ -43,19 +43,18 @@
 			//prefix a relative url with the current path
 			// TODO rename to reflect conditional functionality
 			makeAbsolute: function( url ){
-				var hash = window.location.hash,
-						isHashPath = path.isPath( hash );
+				var isHashPath = path.isPath( location.hash );
 
 				if(path.isQuery( url )){
 					// if the path is a list of query params and the hash is a path
-					// append the query params to the paramless version of it.
+					// append the query params to the hash (without params or dialog keys).
 					// otherwise use the pathname and append the query params
-					return ( isHashPath ? path.cleanHash( hash ) : location.pathname ) + url;
+					return ( isHashPath ? path.cleanHash( location.hash ) : location.pathname ) + url;
 				}
 
-				// otherwise use the hash as the path prefix with the file and
-				// extension removed by path.get if it is indeed a path
-				return ( isHashPath ? path.get() : "" ) + url;
+				// If the hash is a path, even if its not absolute, use it to prepend to the url
+				// otherwise use the path with the trailing segement removed
+				return ( isHashPath ? path.get() : path.get( location.pathname ) ) + url;
 			},
 
 			// test if a given url (string) is a path
@@ -73,7 +72,7 @@
 				// Replace the protocol, host, and pathname only once at the beginning of the url to avoid
 				// problems when it's included as a part of a param
 				// Also, since all urls are absolute in IE, we need to remove the pathname as well.
-				var leadingUrlRootRegex = new RegExp("^" + location.protocol + "//" + location.host + location.pathname);
+				var leadingUrlRootRegex = new RegExp("^" + location.protocol + "//" + location.host );
 				return url.replace(leadingUrlRootRegex, "");
 			},
 
@@ -827,7 +826,7 @@
 
 		url = path.stripHash( url );
 
-		$.mobile.changePage( url, transition, reverse);
+		$.mobile.changePage( url, transition, reverse );
 		event.preventDefault();
 	});
 
