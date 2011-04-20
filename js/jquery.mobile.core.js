@@ -30,6 +30,9 @@
 		//class used for "active" button state, from CSS framework
 		activeBtnClass: "ui-btn-active",
 
+		//class for active navbar button state
+		activeNavClass: "ui-nav-active",
+
 		//automatically handle clicks and form submissions through Ajax, when same-domain
 		ajaxEnabled: true,
 

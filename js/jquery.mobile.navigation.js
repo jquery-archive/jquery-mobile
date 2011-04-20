@@ -731,7 +731,7 @@
 	$( document).bind( "vclick", function(event){
 		var link = findClosestLink(event.target);
 		if (link){
-			$(link).closest( ".ui-btn" ).not( ".ui-disabled" ).addClass( $.mobile.activeBtnClass );
+			$(link).closest( ".ui-btn" ).not( ".ui-disabled, .ui-btn-nav" ).addClass( $.mobile.activeBtnClass );
 		}
 	});
 

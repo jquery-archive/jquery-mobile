@@ -613,7 +613,7 @@ a.ui-link-inherit {
 }
 
 /* Active class used as the "on" state across all themes */
-.ui-btn-active {
+.ui-btn-active, .ui-nav-active {
   font-weight: bold;
   cursor: pointer;
   text-decoration: none;
