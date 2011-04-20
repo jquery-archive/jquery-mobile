@@ -48,21 +48,18 @@ $( ":jqmData(role='listview')" ).live( "listviewcreate", function() {
 						item = $(listItems[i]);
                         itemtext=item.jqmData('filtertext') || item.text();
 						if (item.is("li:jqmData(role=list-divider)")) {
-							if (!childItems) {
-								item.hide();
-                            }else{
-                                item.show();
-                            }
+                            item.toggleClass('ui-filter-hidequeue',!childItems);
 							// New bucket!
 							childItems = false;
 						} else if (itemtext.toLowerCase().indexOf( val ) === -1) {
-							item.hide();
+                            item.toggleClass('ui-filter-hidequeue',true);
 						} else {
-                            item.show();
 							// There's a shown item in the bucket
 							childItems = true;
 						}
 					}
+                    listItems.filter(':not(.ui-filter-hidequeue)').show();
+                    listItems.filter('.ui-filter-hidequeue').hide().toggleClass('ui-filter-hidequeue',false);
                 }else{
                     listItems.show();
                 }
