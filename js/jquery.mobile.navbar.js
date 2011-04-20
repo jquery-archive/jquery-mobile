@@ -30,11 +30,12 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 				corners:	false, 
 				shadow:		false, 
 				iconpos:	iconpos
-			});
+			})
+			.addClass('ui-btn-nav');
 		
 		$navbar.delegate("a", "vclick",function(event){
-			$navbtns.not( ".ui-state-persist" ).removeClass( $.mobile.activeBtnClass );
-			$( this ).addClass( $.mobile.activeBtnClass );
+			$navbtns.not( ".ui-state-persist" ).removeClass( $.mobile.activeNavClass );
+			$( this ).addClass( $.mobile.activeNavClass );
 		});	
 	}
 });
