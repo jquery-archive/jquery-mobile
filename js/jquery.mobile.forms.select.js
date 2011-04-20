@@ -554,8 +554,10 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		}
 
 		if(self.menuType == "page"){
-			$.mobile.changePage([self.menuPage,self.thisPage], 'pop', true, false);
-			self.menuPage.one("pagehide", focusButton);
+			// doesn't solve the possible issue with calling change page
+			// where the objects don't define data urls which prevents dialog key
+			// stripping - changePage has incoming refactor
+			window.history.back();
 		}
 		else{
 			self.screen.addClass( "ui-screen-hidden" );
