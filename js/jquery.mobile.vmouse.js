@@ -370,7 +370,15 @@ function getSpecialEventObject(eventType)
 
 			var $this = $(this),
 				bindings = $.data(this, dataPropertyName);
-			bindings[eventType] = false;
+
+			// teardown may be called when an element was
+			// removed from the DOM. If this is the case,
+			// jQuery core may have already stripped the element
+			// of any data bindings so we need to check it before
+			// using it.
+			if (bindings){
+				bindings[eventType] = false;
+			}
 
 			// Unregister the dummy event handler.
 
