@@ -458,8 +458,7 @@
 
 				//jump to top or prev scroll, sometimes on iOS the page has not rendered yet.  I could only get by this with a setTimeout, but would like to avoid that.
 				$.mobile.silentScroll( to.jqmData( "lastScroll" ) );
-
-				reFocus( to );
+				$(document).one("silentscroll", function(){ reFocus( to ); });
 
 				//trigger show/hide events
 				if( from ){
