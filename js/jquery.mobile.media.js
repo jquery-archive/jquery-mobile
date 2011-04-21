@@ -59,24 +59,35 @@ function detectResolutionBreakpoints(){
 		minBreakpoints = [],
 		maxBreakpoints = [],
 		unit = "px",
-		breakpointClasses;
+		breakpointClasses = "",
+		allBreakpointClasses = "",
+		newHtmlClassList = [],
+		finalClasses = "";
 
-	$html.removeClass( minPrefix + resolutionBreakpoints.join(unit + " " + minPrefix) + unit + " " +
-		maxPrefix + resolutionBreakpoints.join( unit + " " + maxPrefix) + unit );
-
+	newHtmlClassList = $html.attr('className').split(/\s+/);
+	
+	allBreakpointClasses = (minPrefix + resolutionBreakpoints.join(unit + " " + minPrefix) + unit + " " +
+		maxPrefix + resolutionBreakpoints.join( unit + " " + maxPrefix) + unit).split(/\s+/);
+	
+	$.each(allBreakpointClasses, function (i, breakpointClassName) {
+		var loc = jQuery.inArray(breakpointClassName, newHtmlClassList);
+		if (loc != -1) newHtmlClassList.splice(loc,1);
+	});
+	
 	$.each(resolutionBreakpoints,function( i, breakPoint ){
 		if( currWidth >= breakPoint ){
-			minBreakpoints.push( minPrefix + breakPoint + unit );
+ 	 	minBreakpoints.push( minPrefix + breakPoint + unit );
 		}
 		if( currWidth <= breakPoint ){
-			maxBreakpoints.push( maxPrefix + breakPoint + unit );
+ 	 	maxBreakpoints.push( maxPrefix + breakPoint + unit );
 		}
 	});
-
+	
 	if( minBreakpoints.length ){ breakpointClasses = minBreakpoints.join(" "); }
-	if( maxBreakpoints.length ){ breakpointClasses += " " +  maxBreakpoints.join(" "); }
-
-	$html.addClass( breakpointClasses );
+	if( maxBreakpoints.length ){ breakpointClasses += " " + maxBreakpoints.join(" "); }
+	
+	finalClasses = newHtmlClassList.join(" ") + " " + breakpointClasses;
+	if ($html.attr('className') != finalClasses) $html.attr('className', finalClasses);
 };
 
 /* $.mobile.addResolutionBreakpoints method:
