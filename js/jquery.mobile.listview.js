@@ -126,7 +126,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 				//reset counter when a divider heading is encountered
 				if ( counter ) {
-					counter = ! counter || 1;
+					counter = 1;
 				}
 
 			} else {
