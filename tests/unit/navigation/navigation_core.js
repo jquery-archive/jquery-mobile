@@ -426,6 +426,6 @@
 				same(location.hash, firstDialogHash, "additional dialog hash key not added");
 				start();
 			}
-], 1000);
+		], 1000);
 	});
 })(jQuery);

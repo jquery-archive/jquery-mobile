@@ -85,14 +85,14 @@
 					},
 
 					function(){
-						ok(location.hash.indexOf(dialogHashKey) > -1);
+						ok(location.hash.indexOf(dialogHashKey) > -1, "hash should have the dialog hash key");
 						$(".ui-page-active li").trigger("click");
 					}
 				],
 
 				sequence = openDialogSequence.concat(openDialogSequence).concat([start]);
 
-		$.testHelper.sequence(sequence, 500);
+		$.testHelper.sequence(sequence, 1000);
 	});
 
 })(jQuery);
