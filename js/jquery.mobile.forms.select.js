@@ -554,6 +554,10 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		}
 
 		if(self.menuType == "page"){
+			// button refocus ensures proper height calculation
+			// by removing the inline style and ensuring page inclusion
+			self.menuPage.one("pagehide", focusButton);
+
 			// doesn't solve the possible issue with calling change page
 			// where the objects don't define data urls which prevents dialog key
 			// stripping - changePage has incoming refactor

@@ -13,37 +13,6 @@
 		teardown: function(){ location.hash = ""; }
 	});
 
-	asyncTest( "a large select menu should come up in a dialog many times", function(){
-		var menu, select = $("#select-choice-many-container a");
-
-		$.testHelper.sequence([
-			function(){
-				// bring up the dialog
-				select.trigger("click");
-			},
-
-			function(){
-				menu = $("#select-choice-many-menu");
-				same(menu.parents('.ui-dialog').length, 1);
-			},
-
-			function(){
-				// select and close the dialog
-				menu.parents('ui-dialog').find("span.ui-icon-delete").click();
-			},
-
-			function(){
-				//bring up the dialog again
-				select.trigger("click");
-			},
-
-			function(){
-				same(menu.parents('.ui-dialog').length, 1);
-				start();
-			}
-		], 500);
-	});
-
 	asyncTest( "firing a click at least 400 ms later on the select screen overlay does close it", function(){
 		$.Event.prototype.originalEvent = {
 			touches: [ 'foo' ]
