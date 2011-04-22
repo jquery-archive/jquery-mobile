@@ -730,7 +730,10 @@
 	$( document).bind( "vclick", function(event){
 		var link = findClosestLink(event.target);
 		if (link){
-			$(link).closest( ".ui-btn" ).not( ".ui-disabled" ).addClass( $.mobile.activeBtnClass );
+			var  url = path.clean(link.getAttribute("href") || "#");
+			if (url !== "#" && url.replace(path.get(), "") !== "#"){
+				$(link).closest( ".ui-btn" ).not( ".ui-disabled" ).addClass( $.mobile.activeBtnClass );
+			}
 		}
 	});
 
