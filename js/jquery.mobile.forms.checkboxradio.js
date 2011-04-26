@@ -14,7 +14,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			input = this.element,
 			//NOTE: Windows Phone could not find the label through a selector
 			//filter works though.
-			label = input.closest("form,fieldset,:jqmData(role='page')").find("label").filter("[for=" + input[0].id + "]"),
+			label = input.closest("form,fieldset,:jqmData(role='page')").find("label").filter("[for=\"" + input[0].id + "\"]"),
 			inputtype = input.attr( "type" ),
 			checkedicon = "ui-icon-" + inputtype + "-on",
 			uncheckedicon = "ui-icon-" + inputtype + "-off";
