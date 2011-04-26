@@ -315,7 +315,7 @@
 
 	//default non-animation transition handler
 	$.mobile.noneTransitionHandler = function(name, reverse, $to, $from){
-		if ($from && $from.length){
+		if ($from){
 			$from.removeClass( $.mobile.activePageClass );
 		}
 		$to.addClass( $.mobile.activePageClass );

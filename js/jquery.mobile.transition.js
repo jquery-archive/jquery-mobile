@@ -16,7 +16,9 @@ function css3TransitionHandler(name, reverse, $to, $from)
 		viewportClass = "ui-mobile-viewport-transitioning viewport-" + name,
 		doneFunc = function(){
 			$to.add($from).removeClass("out in reverse " + name);
-			$from.removeClass($.mobile.activePageClass);
+			if ($from){
+				$from.removeClass($.mobile.activePageClass);
+			}
 			$to.parent().removeClass(viewportClass);
 	
 			deferred.resolve(name, reverse, $to, $from);
@@ -25,7 +27,7 @@ function css3TransitionHandler(name, reverse, $to, $from)
 	$to.animationComplete(doneFunc);
 	
 	$to.parent().addClass(viewportClass);
-	if ($from.length){
+	if ($from){
 		$from.addClass(name + " out" + reverseClass);
 	}
 	$to.addClass($.mobile.activePageClass + " " + name + " in" + reverseClass);
