@@ -145,13 +145,13 @@ Built by David Kaneda and maintained by Jonathan Stark.
 	-webkit-animation-name: fadeout;
 }
 
-/* The properties in this body rule are only necessary for the 'flip' transition.
+/* The properties in this rule are only necessary for the 'flip' transition.
  * We need specify the perspective to create a projection matrix. This will add
  * some depth as the element flips. The depth number represents the distance of
  * the viewer from the z-plane. According to the CSS3 spec, 1000 is a moderate
  * value.
  */
-.ui-mobile-viewport-perspective {
+.viewport-flip {
 	-webkit-perspective: 1000;
 	position: absolute;
 }

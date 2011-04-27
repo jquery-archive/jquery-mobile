@@ -313,6 +313,24 @@
 	//history stack
 	$.mobile.urlHistory = urlHistory;
 
+	//default non-animation transition handler
+	$.mobile.noneTransitionHandler = function(name, reverse, $to, $from){
+		if ($from){
+			$from.removeClass( $.mobile.activePageClass );
+		}
+		$to.addClass( $.mobile.activePageClass );
+
+		return $.Deferred().resolve(name, reverse, $to, $from).promise();
+	};
+
+	//default handler for unknown transitions
+	$.mobile.defaultTransitionHandler = $.mobile.noneTransitionHandler;
+
+	//transition handler dictionary for 3rd party transitions
+	$.mobile.transitionHandlers = {
+		none: $.mobile.defaultTransitionHandler
+	};
+
 	//enable cross-domain page support
 	$.mobile.allowCrossDomainPages = false;
 
@@ -412,9 +430,7 @@
 		    $.mobile.silentScroll();
 
 			//get current scroll distance
-			var currScroll = $window.scrollTop(),
-					perspectiveTransitions = [ "flip" ],
-					pageContainerClasses = [];
+			var currScroll = $window.scrollTop();
 
 			//support deep-links to generated sub-pages
 			if( url.indexOf( "&" + $.mobile.subPageUrlKey ) > -1 ){
@@ -481,52 +497,19 @@
 				releasePageTransitionLock();
 			}
 
-			function addContainerClass(className){
-				$.mobile.pageContainer.addClass(className);
-				pageContainerClasses.push(className);
-			}
-
-			function removeContainerClasses(){
-				$.mobile
-					.pageContainer
-					.removeClass(pageContainerClasses.join(" "));
-
-				pageContainerClasses = [];
-			}
-
 			//clear page loader
 			$.mobile.pageLoading( true );
 
-			if(transition && (transition !== 'none')){
-				if( $.inArray(transition, perspectiveTransitions) >= 0 ){
-					addContainerClass('ui-mobile-viewport-perspective');
-				}
+			//find the transition handler for the specified transition. If there
+			//isn't one in our transitionHandlers dictionary, use the default one.
+			//call the handler immediately to kick-off the transition.
+			var th = $.mobile.transitionHandlers[transition || "none"] || $.mobile.defaultTransitionHandler,
+				deferred = th(transition, reverse, to, from);
 
-				addContainerClass('ui-mobile-viewport-transitioning');
-
-				if( from ){
-					from.addClass( transition + " out " + ( reverse ? "reverse" : "" ) );
-				}
-				to.addClass( $.mobile.activePageClass + " " + transition +
-					" in " + ( reverse ? "reverse" : "" ) );
-
-				// callback - remove classes, etc
-				to.animationComplete(function() {
-					to.add(from).removeClass("out in reverse " + transition );
-					if( from ){
-						from.removeClass( $.mobile.activePageClass );
-					}
-					pageChangeComplete();
-					removeContainerClasses();
-				});
-			}
-			else{
-			    if( from ){
-					from.removeClass( $.mobile.activePageClass );
-				}
-				to.addClass( $.mobile.activePageClass );
+			//register a done callback on the transition so we can do some book-keeping cleanup. 
+			deferred.done(function(){
 				pageChangeComplete();
-			}
+			});
 		}
 
 		//shared page enhancements
