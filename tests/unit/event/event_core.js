@@ -40,7 +40,7 @@
 
 			$.testHelper.reloadLib(libName);
 
-			$.each($.fn.clone(events), function( i, name ) {
+			$.each(events, function( i, name ) {
 				ok($.fn[name] !== undefined, name + "is not undefined");
 			});
 		});
