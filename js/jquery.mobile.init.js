@@ -47,11 +47,6 @@
 				if( $.mobile.loadingMessage ){
 					var activeBtn = $( "." + $.mobile.activeBtnClass ).first();
 
-
-					if(typeof $loader === "undefined"){
-						 alert($.mobile.loadingMessage);
-					}
-
 					$loader
 						.appendTo( $.mobile.pageContainer )
 						//position at y center (if scrollTop supported), above the activeBtn (if defined), or just 100px from top
