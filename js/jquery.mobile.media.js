@@ -64,30 +64,42 @@ function detectResolutionBreakpoints(){
 		newHtmlClassList = [],
 		finalClasses = "";
 
-	newHtmlClassList = $html.attr('className').split(/\s+/);
-	
-	allBreakpointClasses = (minPrefix + resolutionBreakpoints.join(unit + " " + minPrefix) + unit + " " +
-		maxPrefix + resolutionBreakpoints.join( unit + " " + maxPrefix) + unit).split(/\s+/);
-	
-	$.each(allBreakpointClasses, function (i, breakpointClassName) {
-		var loc = jQuery.inArray(breakpointClassName, newHtmlClassList);
-		if (loc != -1) newHtmlClassList.splice(loc,1);
-	});
-	
-	$.each(resolutionBreakpoints,function( i, breakPoint ){
-		if( currWidth >= breakPoint ){
- 	 	minBreakpoints.push( minPrefix + breakPoint + unit );
-		}
-		if( currWidth <= breakPoint ){
- 	 	maxBreakpoints.push( maxPrefix + breakPoint + unit );
+	// Get classes, strip any existing resolution breakpoint classes
+	newHtmlClassList = $html.attr( 'className' ).split(/\s+/);
+
+	allBreakpointClasses = ( minPrefix + resolutionBreakpoints.join( unit + " " + minPrefix ) + unit + " " +
+		maxPrefix + resolutionBreakpoints.join( unit + " " + maxPrefix ) + unit ).split(/\s+/);
+
+	$.each( allBreakpointClasses, function ( i, breakpointClassName ) {
+		var loc = jQuery.inArray( breakpointClassName, newHtmlClassList );
+		if ( loc !== -1 ) {
+			newHtmlClassList.splice( loc, 1 );
 		}
 	});
-	
-	if( minBreakpoints.length ){ breakpointClasses = minBreakpoints.join(" "); }
-	if( maxBreakpoints.length ){ breakpointClasses += " " + maxBreakpoints.join(" "); }
-	
-	finalClasses = newHtmlClassList.join(" ") + " " + breakpointClasses;
-	if ($html.attr('className') != finalClasses) $html.attr('className', finalClasses);
+
+	// Calculate new resolution breakpoint classes for window size
+	$.each(resolutionBreakpoints,function( i, breakPoint ) {
+		if ( currWidth >= breakPoint ) {
+			minBreakpoints.push( minPrefix + breakPoint + unit );
+		}
+		if ( currWidth <= breakPoint ) {
+			maxBreakpoints.push( maxPrefix + breakPoint + unit );
+		}
+	});
+
+	if ( minBreakpoints.length ) { 
+		breakpointClasses = minBreakpoints.join( " " );
+	}
+	if ( maxBreakpoints.length ) { 
+		breakpointClasses += " " + maxBreakpoints.join( " " );
+	}
+
+	// Compose new class list, compare with current class assignment and assign only if necessary
+	// Fixes #1422 - IE7 infinite event loop - changing className fires resize event, which calls this f(x)
+	finalClasses = newHtmlClassList.join( " " ) + " " + breakpointClasses;
+	if ( $html.attr( 'className' ) !== finalClasses ) { 
+		$html.attr( 'className', finalClasses );
+	}
 };
 
 /* $.mobile.addResolutionBreakpoints method:
