@@ -24,48 +24,75 @@ $( ":jqmData(role='listview')" ).live( "listviewcreate", function() {
 			})
 			.attr( "data-" + $.mobile.ns + "type", "search" )
 			.bind( "keyup change", function() {
-                lastval=$(this).jqmData('lastval')+"";
-				var val = this.value.toLowerCase(),listItems=null;
-                //change val as lastval for next execution  
-                $(this).jqmData('lastval',val);
-                  
-                change=val.replace(new RegExp("^"+lastval),"");
-                  
-                if(val.length<lastval.length || change.length!=(val.length-lastval.length)){
-                    //removed chars or pasted something totaly different, check all items
-                    listItems = list.children()
-                }else{
-                    //only chars added, not removed, only use visible subset
-                    listItems = list.children(':visible');
-                }
-				if ( val ) {
-					// This handles hiding regular rows without the text we search for
-					// and any list dividers without regular rows shown under it
-					var childItems = false,
-							item,itemtext="";
+                            
+                            var val = this.value.toLowerCase(),
+                                listItems=null,
+                                lastval = $( this ).jqmData('lastval')+"";;
 
-					for (var i = listItems.length; i >= 0; i--) {
-						item = $(listItems[i]);
-                        itemtext=item.jqmData('filtertext') || item.text();
-						if (item.is("li:jqmData(role=list-divider)")) {
-                            item.toggleClass('ui-filter-hidequeue',!childItems);
-							// New bucket!
-							childItems = false;
-						} else if (itemtext.toLowerCase().indexOf( val ) === -1) {
-                            item.toggleClass('ui-filter-hidequeue',true);
-						} else {
-							// There's a shown item in the bucket
-							childItems = true;
-						}
-					}
-                    listItems.filter(':not(.ui-filter-hidequeue)').show();
-                    listItems.filter('.ui-filter-hidequeue').hide().toggleClass('ui-filter-hidequeue',false);
-                }else{
-                    listItems.show();
-                }
-			})
-			.appendTo( wrapper )
-			.textinput();
+                            //change val as lastval for next execution  
+                            $(this).jqmData( 'lastval' , val );
+
+                            change = val.replace( new RegExp( "^" + lastval ) , "" );
+
+                            if( val.length < lastval.length || change.length != ( val.length - lastval.length ) ){
+
+                                //removed chars or pasted something totaly different, check all items
+                                listItems = list.children()
+                            } else {
+
+                                //only chars added, not removed, only use visible subset
+                                listItems = list.children( ':visible' );
+                            }
+                            
+                            if ( val ) {
+
+                                // This handles hiding regular rows without the text we search for
+                                // and any list dividers without regular rows shown under it
+                                var item, 
+                                    childItems = false,                        
+                                    itemtext="";
+
+                                for (var i = listItems.length; i >= 0; i--) {
+                                        item = $( listItems[i] );
+                                        itemtext = item.jqmData( 'filtertext' ) || item.text();
+
+                                        if ( item.is( "li:jqmData(role=list-divider)" ) ) {
+
+                                                item.toggleClass( 'ui-filter-hidequeue' , !childItems );
+
+                                                // New bucket!
+                                                childItems = false;
+
+                                        } else if ( itemtext.toLowerCase().indexOf( val ) === -1) {
+
+                                                //mark to be hidden
+                                                item.toggleClass( 'ui-filter-hidequeue' , true );
+                                        } else {
+
+                                                // There's a shown item in the bucket
+                                                childItems = true;
+                                        }
+                                }
+
+                                // show items, not marked to be hidden
+                                listItems
+                                    .filter( ':not(.ui-filter-hidequeue)' )
+                                    .show();
+
+                                // hide items, marked to be hidden
+                                listItems
+                                    .filter( '.ui-filter-hidequeue' )
+                                    .hide()
+                                    .toggleClass( 'ui-filter-hidequeue' , false );
+
+                            }else{
+
+                                //filtervalue is empty => show all
+                                listItems.show();
+                            }
+                        })
+                        .appendTo( wrapper )
+                        .textinput();
 
 	if ($( this ).jqmData( "inset" ) ) {
 		wrapper.addClass( "ui-listview-filter-inset" );
