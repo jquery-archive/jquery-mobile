@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+	<title>jQuery Mobile Media helpers</title>
+	<link rel="stylesheet"  href="../../themes/default/" />
+	<script src="../../js/jquery.js"></script>
+	<script src="breakpoints.js"></script>
+	<script src="../../js/"></script>
+	<script src="media-helpers.js"></script>
+  </head>
+  <body>
+    <div data-role="page">
+      <div data-role="header" data-theme="b">
+        <h1>Media helpers</h1>
+	  </div>
+      <div data-role="content">
+        <ul data-inset="true" data-role="listview" id="widthList">
+          <li class="title" data-role="list-divider">
+            Active Width Breakpoints:
+            <em>
+              These change depending on window size
+            </em>
+          </li>
+          <li class="min320">min-width-320px</li>
+          <li class="max320">max-width-320px</li>
+          <li class="min360">min-width-360px</li>
+          <li class="max360">max-width-360px</li>
+          <li class="min480">min-width-480px</li>
+          <li class="max480">max-width-480px</li>
+          <li class="min600">min-width-600px</li>
+          <li class="max600">max-width-600px</li>
+          <li class="min640">min-width-640px</li>
+          <li class="max640">max-width-640px</li>
+          <li class="min768">min-width-768px</li>
+          <li class="max768">max-width-768px</li>
+          <li class="min800">min-width-800px</li>
+          <li class="max800">max-width-800px</li>
+          <li class="min960">min-width-960px</li>
+          <li class="max960">max-width-960px</li>
+          <li class="min1024">min-width-1024px</li>
+          <li class="max1024">max-width-1024px</li>
+          <li class="min1200">min-width-1200px</li>
+          <li class="max1200">max-width-1200px</li>
+          <li class="min1280">min-width-1280px</li>
+          <li class="max1280">max-width-1280px</li>
+        </ul>
+        <ul data-inset="true" data-role="listview" id="orientList">
+          <li class="title" data-role="list-divider">
+            Orientation
+            <em>
+              This changes depending on window orientation
+            </em>
+          </li>
+          <li class="port">Portrait</li>
+          <li class="land">Landscape</li>
+        </ul>
+		<div class="ui-body ui-body-b" id="mediademo">
+			<h3>Media Type &amp; Query Function <em class="subh">(Runs an actual media query)</em></h2>
+			<input data-theme="a" type="text" id="mq" value="screen and (min-width: 480px)">
+			<a href="#" data-role="button" data-inline="true" id="mhtest">Test type/query</a>
+			<strong><p id="mhresult"></p></strong>
+		</div>
+      	<p>Taken from <a href="https://github.com/scottjehl/jQuery-Media-Helpers/blob/master/sample.html">Scott Jehl</a>.</p>
+      </div>
+    </div>
+  </body>
+</html>
