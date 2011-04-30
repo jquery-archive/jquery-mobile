@@ -15,7 +15,7 @@
 		var dp = this;
 	
 		//call cached datepicker plugin
-		prevDp.call( this, options );
+		prevDp.apply( this, arguments );
 		
 		//extend with some dom manipulation to update the markup for jQM
 		//call immediately
