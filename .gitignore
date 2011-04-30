@@ -1,4 +1,3 @@
-.project
 *~
 *.diff
 *.patch
@@ -8,3 +7,4 @@ combined/
 combine/
 compiled/
 gitstatus.log
+.tmp_*
