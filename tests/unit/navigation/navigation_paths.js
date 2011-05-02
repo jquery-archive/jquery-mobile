@@ -29,7 +29,7 @@
 		], 800);
 	};
 
-	// both of these alterations assumes location.pathname will be a directory
+	// all of these alterations assume location.pathname will be a directory
 	// this is required to prevent the tests breaking in a subdirectory
 	// TODO could potentially be fragile since the tests could be running while
 	//      the urls are being updated
