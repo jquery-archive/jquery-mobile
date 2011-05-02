@@ -41,11 +41,46 @@
 
 		$checkboxLabel.trigger("click");
 
-		//test above will be triggered twice, and the start here once	
+		//test above will be triggered twice, and the start here once
 		$checkbox.change(function(){
 			start();
 		});
 
 		$checkboxLabel.trigger("click");
+	});
+
+	asyncTest( "radio button labels should update the active button class to last clicked and clear checked", function(){
+		var $radioBtns = $('#radio-active-btn-test input');
+
+		$.testHelper.sequence([
+			function(){
+				$radioBtns.last().siblings('label').click();
+			},
+
+			function(){
+				ok($radioBtns.last().attr('checked'));
+				ok($radioBtns.last().siblings('label').hasClass('ui-btn-active'),
+					"last input label is an active button");
+
+				ok(!$radioBtns.first().attr('checked'));
+				ok(!$radioBtns.first().siblings('label').hasClass('ui-btn-active'),
+					"first input label is not active");
+
+				$radioBtns.first().siblings('label').click();
+			},
+
+			function(){
+				ok($radioBtns.first().attr('checked'));
+				ok($radioBtns.first().siblings('label').hasClass('ui-btn-active'),
+					"first input label is an active button");
+
+				ok(!$radioBtns.last().attr('checked'));
+				ok(!$radioBtns.last().siblings('label').hasClass('ui-btn-active'),
+					"last input label is not active");
+
+				start();
+			}
+		], 1000);
+
 	});
 })(jQuery);
