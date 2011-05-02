@@ -48,7 +48,7 @@
 		
 	//bind to pagecreate to automatically enhance date inputs	
 	$( ".ui-page" ).live( "pagecreate", function(){		
-		$( "input[type='date'], input:jqmData(type='date')" ).each(function(){
+		$( "input[type='date'], input:jqmData(type='date')", this ).each(function(){
 			$(this).after( $( "<div />" ).datepicker({ altField: "#" + $(this).attr( "id" ), showOtherMonths: true }) );
 		});	
 	});

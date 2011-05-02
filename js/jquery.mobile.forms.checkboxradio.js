@@ -58,7 +58,14 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 				}
 
 				self._cacheVals();
+
 				input.attr( "checked", inputtype === "radio" && true || !input.is( ":checked" ) );
+
+				// input set for common radio buttons will contain all the radio
+				// buttons, but will not for checkboxes. clearing the checked status
+				// of other radios ensures the active button state is applied properly
+				self._getInputSet().not(input).removeAttr('checked');
+
 				self._updateAll();
 				return false;
 			}
@@ -116,7 +123,9 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			label = this.label,
 			icon = label.find( ".ui-icon" );
 
-		if ( input[0].checked ) {
+		// input[0].checked expando doesn't always report the proper value
+		// for checked='checked'
+		if ( $(input[0]).attr('checked') ) {
 			label.addClass( $.mobile.activeBtnClass );
 			icon.addClass( this.checkedicon ).removeClass( this.uncheckedicon );
 
