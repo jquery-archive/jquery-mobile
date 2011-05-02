@@ -50,7 +50,11 @@
 	});
 
 	asyncTest( "radio button labels should update the active button class to last clicked and clear checked", function(){
-		var $radioBtns = $('#radio-active-btn-test input');
+		var $radioBtns = $('#radio-active-btn-test input'),
+				singleActiveAndChecked = function(){
+					same($("#radio-active-btn-test .ui-btn-active").length, 1, "there should be only one active button");
+					same($("#radio-active-btn-test [checked]").length, 1, "there should be only one checked");
+				};
 
 		$.testHelper.sequence([
 			function(){
@@ -66,6 +70,8 @@
 				ok(!$radioBtns.first().siblings('label').hasClass('ui-btn-active'),
 					"first input label is not active");
 
+				singleActiveAndChecked();
+
 				$radioBtns.first().siblings('label').click();
 			},
 
@@ -78,9 +84,11 @@
 				ok(!$radioBtns.last().siblings('label').hasClass('ui-btn-active'),
 					"last input label is not active");
 
+				singleActiveAndChecked();
+
 				start();
 			}
-		], 1000);
+		], 500);
 
 	});
 })(jQuery);
