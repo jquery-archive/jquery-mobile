@@ -745,7 +745,7 @@
 
 			//if this attribute is set, load the dialog from an external url in same domain but not in jQuery base path
             //i.e. pages are in http://www.site.com/mobile/page.html and dialog content is at at http://www.site.com/resource/dialog.html
-			isExternalDialog = $this.is( "[rel='external-dialog']" ),
+			isExternalDialog = $link.is( "[rel='external-dialog']" ),
 
 			//rel set to external
 			isEmbeddedPage = path.isEmbeddedPage( url ),
