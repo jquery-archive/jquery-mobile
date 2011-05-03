@@ -50,7 +50,7 @@
 		setTimeout(function(){
 			ok($(window).scrollTop() != 0, "scrolltop position should not be zero");
 			start();
-		}, scrollTimeout - 2);
+		}, scrollTimeout - 5);
 	});
 
 	asyncTest( "scrolling marks scrollstart as disabled for 150 ms", function(){

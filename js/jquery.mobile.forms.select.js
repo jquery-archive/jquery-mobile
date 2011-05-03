@@ -22,7 +22,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		nativeMenu: true
 	},
 	_create: function(){
-		
+
 		var self = this,
 
 			o = this.options,
@@ -33,12 +33,12 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			selectID = select.attr( "id" ),
 
 			label = $( "label[for="+ selectID +"]" ).addClass( "ui-select" ),
-			
+
 			//IE throws an exception at options.item() function when
 			//there is no selected item
-			//select first in this case 
+			//select first in this case
 			selectedIndex = select[0].selectedIndex == -1 ? 0 : select[0].selectedIndex,
-			
+
 			button = ( self.options.nativeMenu ? $( "<div/>" ) : $( "<a>", {
 					"href": "#",
 					"role": "button",
@@ -205,12 +205,12 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				.focus(function(){
 					$(this).blur();
 					button.focus();
-				});	
+				});
 
 			//button events
 			button
 				.bind( "vclick keydown" , function( event ){
-					if( event.type == "vclick" || 
+					if( event.type == "vclick" ||
 						event.keyCode && ( event.keyCode === $.mobile.keyCode.ENTER || event.keyCode === $.mobile.keyCode.SPACE ) ){
 						self.open();
 						event.preventDefault();
@@ -260,56 +260,56 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			.keydown(function( e ) {
 				var target = $( e.target ),
 					li = target.closest( "li" );
-	
+
 				// switch logic based on which key was pressed
 				switch ( e.keyCode ) {
 					// up or left arrow keys
 					case 38:
 						var prev = li.prev();
-	
+
 						// if there's a previous option, focus it
 						if ( prev.length ) {
 							target
 								.blur()
 								.attr( "tabindex", "-1" );
-	
+
 							prev.find( "a" ).first().focus();
-						}	
-	
+						}
+
 						return false;
 					break;
-	
+
 					// down or right arrow keys
 					case 40:
 						var next = li.next();
-					
+
 						// if there's a next option, focus it
 						if ( next.length ) {
 							target
 								.blur()
 								.attr( "tabindex", "-1" );
-							
+
 							next.find( "a" ).first().focus();
-						}	
-	
+						}
+
 						return false;
 					break;
-	
+
 					// if enter or space is pressed, trigger click
 					case 13:
 					case 32:
 						 target.trigger( "vclick" );
-	
+
 						 return false;
-					break;	
+					break;
 				}
-			});	
+			});
 
 			//events on "screen" overlay
 			screen.bind("vclick", function( event ){
 				self.close();
 			});
-			
+
 			//close button on small overlays
 			self.headerClose.click(function(){
 				if( self.menuType == "overlay" ){
@@ -368,7 +368,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		});
 
 		self.list.html( lis.join(" ") );
-		
+
 		self.list.find( "li" )
 			.attr({ "role": "option", "tabindex": "-1" })
 			.first().attr( "tabindex", "0" );
@@ -554,8 +554,14 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		}
 
 		if(self.menuType == "page"){
-			$.mobile.changePage([self.menuPage,self.thisPage], 'pop', true, false);
+			// button refocus ensures proper height calculation
+			// by removing the inline style and ensuring page inclusion
 			self.menuPage.one("pagehide", focusButton);
+
+			// doesn't solve the possible issue with calling change page
+			// where the objects don't define data urls which prevents dialog key
+			// stripping - changePage has incoming refactor
+			window.history.back();
 		}
 		else{
 			self.screen.addClass( "ui-screen-hidden" );
