@@ -205,53 +205,53 @@
 		docLocation = path.get( hostURL + location.pathname ),
 		docBase = docLocation;
 
-		if ( $base.length ) {
-			var href = $base.attr( "href" );
-			if ( href ) {
-				if ( href.search( /^[^:\/]+:\/\/[^\/]+\/?/ ) === -1 ) {
-					//the href is not absolute, we need to turn it into one
-					//so that we can turn paths stored in our location hash into
-					//relative paths.
-					if ( href.charAt( 0 ) === "/" ) {
-						//site relative url
-						docBase = hostURL + href;
-					}
-					else {
-						//the href is a document relative url
-						docBase = docLocation + href;
-						//XXX: we need some code here to calculate the final path
-						// just in case the docBase contains up-level (../) references.
-					}
+	if ( $base.length ) {
+		var href = $base.attr( "href" );
+		if ( href ) {
+			if ( href.search( /^[^:\/]+:\/\/[^\/]+\/?/ ) === -1 ) {
+				//the href is not absolute, we need to turn it into one
+				//so that we can turn paths stored in our location hash into
+				//relative paths.
+				if ( href.charAt( 0 ) === "/" ) {
+					//site relative url
+					docBase = hostURL + href;
 				}
 				else {
-					//the href is an absolute url
-					docBase = href;
+					//the href is a document relative url
+					docBase = docLocation + href;
+					//XXX: we need some code here to calculate the final path
+					// just in case the docBase contains up-level (../) references.
 				}
 			}
-			//make sure docBase ends with a slash
-			docBase = docBase  + ( docBase.charAt( docBase.length - 1 ) === "/" ? " " : "/" );
+			else {
+				//the href is an absolute url
+				docBase = href;
+			}
+		}
+		//make sure docBase ends with a slash
+		docBase = docBase  + ( docBase.charAt( docBase.length - 1 ) === "/" ? " " : "/" );
+	}
+
+	//base element management, defined depending on dynamic base tag support
+	var base = $.support.dynamicBaseTag ? {
+
+		//define base element, for use in routing asset urls that are referenced in Ajax-requested markup
+		element: ( $base.length ? $base : $( "<base>", { href: docBase } ).prependTo( $head ) ),
+
+		//set the generated BASE element's href attribute to a new page's base path
+		set: function( href ) {
+			base.element.attr( "href", docBase + path.get( href ) );
+		},
+
+		//set the generated BASE element's href attribute to a new page's base path
+		reset: function() {
+			base.element.attr( "href", docBase );
 		}
 
-		//base element management, defined depending on dynamic base tag support
-		var base = $.support.dynamicBaseTag ? {
+	} : undefined;
 
-			//define base element, for use in routing asset urls that are referenced in Ajax-requested markup
-			element: ( $base.length ? $base : $( "<base>", { href: docBase } ).prependTo( $head ) ),
-
-			//set the generated BASE element's href attribute to a new page's base path
-			set: function( href ) {
-				base.element.attr( "href", docBase + path.get( href ) );
-			},
-
-			//set the generated BASE element's href attribute to a new page's base path
-			reset: function() {
-				base.element.attr( "href", docBase );
-			}
-
-		} : undefined;
-
-		//set location pathname from intial directory request
-		path.setOrigin();
+	//set location pathname from intial directory request
+	path.setOrigin();
 
 /*
 	internal utility functions
