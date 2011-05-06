@@ -606,14 +606,27 @@
 					if( !$.support.dynamicBaseTag ) {
 						var newPath = path.get( fileUrl );
 						to.find( "[src], link[href], a[rel='external'], :jqmData(ajax='false'), a[target]" ).each( function() {
-							var thisAttr = $( this ).is( "[href]" ) ? "href" : "src",
-								thisUrl = $( this ).attr( thisAttr );
+							var attrs = [ "href", "src", "action" ],
+								thisAttr = undefined,
+								thisUrl = undefined;
 
-							//if full path exists and is same, chop it - helps IE out
-							thisUrl = thisUrl.replace( location.protocol + "//" + location.host + location.pathname, "" );
+							for (var i = 0; i < attrs.length; i++) {
+								var a = attrs[i],
+									v = $( this ).attr( a );
+								if (v) {
+									thisAttr = a;
+									thisUrl = v;
+									break;
+								}
+							}
 
-							if( ! /^(\w+:|#|\/)/.test( thisUrl ) ) {
-								$( this ).attr( thisAttr, newPath + thisUrl );
+							if ( thisAttr && thisUrl ) {
+								//if full path exists and is same, chop it - helps IE out
+								thisUrl = thisUrl.replace( location.protocol + "//" + location.host + location.pathname, "" );
+	
+								if( ! /^(\w+:|#|\/)/.test( thisUrl ) ) {
+									$( this ).attr( thisAttr, newPath + thisUrl );
+								}
 							}
 						});
 					}
