@@ -240,7 +240,7 @@
 
 			//set the generated BASE element's href attribute to a new page's base path
 			reset: function() {
-				base.element.attr( "href", docBase );
+				base.element.attr( "href", initialPath );
 			}
 
 		} : undefined;
