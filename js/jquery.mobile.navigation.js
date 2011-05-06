@@ -201,33 +201,28 @@
 
 		//existing base tag?
 		$base = $head.children( "base" ),
-		hostURL = location.protocol + "//" + location.host,
-		docLocation = path.get( hostURL + location.pathname ),
-		docBase = docLocation;
-
+		
+		//get domain path 
+		//(note: use explicit protocol here, protocol-relative urls won't work as expected on localhost)
+		docBase = location.protocol + "//" + location.host,
+		
+		//initialPath for first page load without hash. pathname (href - search)
+		initialPath = docBase + location.pathname;
+		
+		//already a base element?
 		if ( $base.length ) {
 			var href = $base.attr( "href" );
 			if ( href ) {
 				if ( href.search( /^[^:\/]+:\/\/[^\/]+\/?/ ) === -1 ) {
 					//the href is not absolute, we need to turn it into one
-					//so that we can turn paths stored in our location hash into
-					//relative paths.
-					if ( href.charAt( 0 ) === "/" ) {
-						//site relative url
-						docBase = hostURL + href;
-					}
-					else {
-						//the href is a document relative url
-						docBase = docLocation + href;
-						//XXX: we need some code here to calculate the final path
-						// just in case the docBase contains up-level (../) references.
-					}
+					docBase = docBase + href;
 				}
 				else {
 					//the href is an absolute url
 					docBase = href;
 				}
 			}
+			
 			//make sure docBase ends with a slash
 			docBase = docBase  + ( docBase.charAt( docBase.length - 1 ) === "/" ? " " : "/" );
 		}
@@ -236,7 +231,7 @@
 		var base = $.support.dynamicBaseTag ? {
 
 			//define base element, for use in routing asset urls that are referenced in Ajax-requested markup
-			element: ( $base.length ? $base : $( "<base>", { href: docBase } ).prependTo( $head ) ),
+			element: ( $base.length ? $base : $( "<base>", { href: initialPath } ).prependTo( $head ) ),
 
 			//set the generated BASE element's href attribute to a new page's base path
 			set: function( href ) {
