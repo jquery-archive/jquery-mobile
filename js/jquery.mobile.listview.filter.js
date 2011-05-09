@@ -23,6 +23,7 @@ $( ":jqmData(role='listview')" ).live( "listviewcreate", function() {
 				placeholder: listview.options.filterPlaceholder
 			})
 			.attr( "data-" + $.mobile.ns + "type", "search" )
+			.jqmData( 'lastval', "" )
 			.bind( "keyup change", function() {
 
 				var val = this.value.toLowerCase(),
