@@ -11,23 +11,26 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 	},
 	_create: function(){
 		var self = this,
-			$el = self.element;
-		
+			$dialog = self.element,
+			dialogTheme = $dialog.jqmData( "theme" );
+				
+				
 		/* class the markup for dialog styling */	
-		this.element			
+		$dialog			
 			//add ARIA role
 			.attr("role","dialog")
-			.addClass('ui-page ui-dialog ui-body-a')
-			.find( ":jqmData(role=header)" )
-			.addClass('ui-corner-top ui-overlay-shadow')
-				.prepend( "<a href='#' data-" + $.mobile.ns + "icon='delete' data-" + $.mobile.ns + "rel='back' data-" + $.mobile.ns + "iconpos='notext'>"+ this.options.closeBtnText +"</a>" )
-			.end()
-			.find('.ui-content:not([class*="ui-body-"])')
-				.addClass('ui-body-c')
-			.end()
-			.find( ".ui-content,:jqmData(role='footer')" )
-				.last()
-				.addClass('ui-corner-bottom ui-overlay-shadow');
+			.addClass( "ui-page ui-dialog ui-body-" + (dialogTheme || "a"));
+			
+		var $header = $dialog.find( ":jqmData(role=header)" );
+		$header.addClass('ui-corner-top ui-overlay-shadow ui-bar-' + ($header.jqmData( "theme" ) || dialogTheme || "a"))
+			   .prepend( "<a href='#' data-" + $.mobile.ns + "icon='delete' data-" + $.mobile.ns + "rel='back' data-" + $.mobile.ns + "iconpos='notext'>"+ this.options.closeBtnText +"</a>" );
+		
+		var $content = $dialog.find('.ui-content:not([class*="ui-body-"])');
+		$content.addClass('ui-body-' + ($content.jqmData( "theme" ) || dialogTheme || "c"));
+			
+		var $footer = $dialog.find( ".ui-content,:jqmData(role='footer')" ).last();
+		$footer.addClass('ui-corner-bottom ui-overlay-shadow ui-bar-' + ($footer.jqmData( "theme" ) || dialogTheme || "a"));
+				
 		
 		/* bind events 
 			- clicks and submits should use the closing transition that the dialog opened with
