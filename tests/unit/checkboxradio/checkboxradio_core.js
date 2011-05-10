@@ -29,7 +29,7 @@
 
 	asyncTest( "change events fired on checkbox for both check and uncheck", function(){
 		var $checkbox = $("#checkbox-2"),
-				$checkboxLabel = $("[for=checkbox-2]");
+				$checkboxLabel = $checkbox.parent().find(".ui-btn");
 
 		$checkbox.unbind("change");
 
@@ -53,7 +53,7 @@
 		var $radioBtns = $('#radio-active-btn-test input'),
 				singleActiveAndChecked = function(){
 					same($("#radio-active-btn-test .ui-btn-active").length, 1, "there should be only one active button");
-					same($("#radio-active-btn-test [checked]").length, 1, "there should be only one checked");
+					same($("#radio-active-btn-test :checked").length, 1, "there should be only one checked");
 				};
 
 		$.testHelper.sequence([
