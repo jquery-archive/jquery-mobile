@@ -28,7 +28,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			selectClass = (cType == 'select') ? 'ui-slider-switch' : '',
 			controlID = control.attr('id'),
 			labelID = controlID + '-label',
-			label = $('[for='+ controlID +']').attr('id',labelID),
+			label = $('[for="'+ controlID +'"]').attr('id',labelID),
 			val = function(){
 				return (cType == 'input') ? parseFloat(control.val()) : control[0].selectedIndex;
 			},
