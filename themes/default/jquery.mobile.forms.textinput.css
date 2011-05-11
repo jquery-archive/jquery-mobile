@@ -14,7 +14,7 @@ textarea.ui-input-text { height: 50px; -webkit-transition: height 200ms linear; 
 
 /* orientation adjustments - incomplete!*/
 @media all and (min-width: 450px){
-	label.ui-input-text  { vertical-align: top; display: inline-block;  width: 20%;   }
+	label.ui-input-text  { vertical-align: top; display: inline-block;  width: 20%;  margin: 0 2% 0 0 }
 	input.ui-input-text, 
 	textarea.ui-input-text, 
 	.ui-input-search { width: 60%; display: inline-block; } 
