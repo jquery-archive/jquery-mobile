@@ -24,5 +24,7 @@
 .ui-controlgroup .ui-btn-icon-notext .ui-btn-inner {  padding: 5px 6px 5px 5px; }
 */
 
-.min-width-480px .ui-controlgroup-label { vertical-align: top; display: inline-block;  width: 20%;  margin: 0 2% 0 0;  }
-.min-width-480px .ui-controlgroup-controls { width: 60%; display: inline-block; } 
+@media all and (min-width: 450px){
+	.ui-controlgroup-label { vertical-align: top; display: inline-block;  width: 20%;  margin: 0 2% 0 0;  }
+	.ui-controlgroup-controls { width: 60%; display: inline-block; } 
+}	
