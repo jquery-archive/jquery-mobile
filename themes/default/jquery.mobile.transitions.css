@@ -15,7 +15,13 @@
 }
 
 /* Transitions from jQtouch (with small modifications): http://www.jqtouch.com/
-Built by David Kaneda and maintained by Jonathan Stark.
+ * Built by David Kaneda and maintained by Jonathan Stark.
+ * Note: single-axis translate, & scale, functions changed for 3d counterparts
+ * to take advantage of hardware acceleration: 
+ * http://mir.aculo.us/2010/08/05/html5-buzzwords-in-action/
+ * Holding off on changing rotateY to rotate3d as it did not behave as expected 
+ * on my iOS device, although it worked in desktop safari.
+ * Reference: https://developer.apple.com/library/safari/#documentation/AppleApplications/Reference/SafariCSSRef/Articles/Functions.html
 */
 .in, .out {
 	-webkit-animation-timing-function: ease-in-out;
@@ -23,27 +29,27 @@ Built by David Kaneda and maintained by Jonathan Stark.
 }
 
 .slide.in {
-	-webkit-transform: translateX(0);
+	-webkit-transform: translate3d(0, 0, 0);
 	-webkit-animation-name: slideinfromright;
 }
 
 .slide.out {
-	-webkit-transform: translateX(-100%);
+	-webkit-transform: translate3d(-100%, 0, 0);
 	-webkit-animation-name: slideouttoleft;
 }
 
 .slide.in.reverse {
-	-webkit-transform: translateX(0);
+	-webkit-transform: translate3d(0, 0, 0);
 	-webkit-animation-name: slideinfromleft;
 }
 
 .slide.out.reverse {
-	-webkit-transform: translateX(100%);
+	-webkit-transform: translate3d(100%, 0, 0);
 	-webkit-animation-name: slideouttoright;
 }
 
 .slideup.in {
-	-webkit-transform: translateY(0);
+	-webkit-transform: translate3d(0, 0, 0);
 	-webkit-animation-name: slideinfrombottom;
 	z-index: 10;
 }
@@ -54,7 +60,7 @@ Built by David Kaneda and maintained by Jonathan Stark.
 }
 
 .slideup.out.reverse {
-	-webkit-transform: translateY(100%);
+	-webkit-transform: translate3d(0, 100%, 0);
 	z-index: 10;
 	-webkit-animation-name: slideouttobottom;
 }
@@ -64,7 +70,7 @@ Built by David Kaneda and maintained by Jonathan Stark.
 	-webkit-animation-name: dontmove;
 }
 .slidedown.in {
-	-webkit-transform: translateY(0);
+	-webkit-transform: translate3d(0, 0, 0);
 	-webkit-animation-name: slideinfromtop;
 	z-index: 10;
 }
@@ -75,7 +81,7 @@ Built by David Kaneda and maintained by Jonathan Stark.
 }
 
 .slidedown.out.reverse {
-	-webkit-transform: translateY(-100%);
+	-webkit-transform: translate3d(0, -100%, 0);
 	z-index: 10;
 	-webkit-animation-name: slideouttotop;
 }
@@ -86,44 +92,44 @@ Built by David Kaneda and maintained by Jonathan Stark.
 }
 
 @-webkit-keyframes slideinfromright {
-    from { -webkit-transform: translateX(100%); }
-    to { -webkit-transform: translateX(0); }
+    from { -webkit-transform: translate3d(100%, 0, 0); }
+    to { -webkit-transform: translate3d(0, 0, 0); }
 }
 
 @-webkit-keyframes slideinfromleft {
-    from { -webkit-transform: translateX(-100%); }
-    to { -webkit-transform: translateX(0); }
+    from { -webkit-transform: translate3d(-100%, 0, 0); }
+    to { -webkit-transform: translate3d(0, 0, 0); }
 }
 
 @-webkit-keyframes slideouttoleft {
-    from { -webkit-transform: translateX(0); }
-    to { -webkit-transform: translateX(-100%); }
+    from { -webkit-transform: translate3d(0, 0, 0); }
+    to { -webkit-transform: translate3d(-100%, 0, 0); }
 }
 
 @-webkit-keyframes slideouttoright {
-    from { -webkit-transform: translateX(0); }
-    to { -webkit-transform: translateX(100%); }
+    from { -webkit-transform: translate3d(0, 0, 0); }
+    to { -webkit-transform: translate3d(100%, 0, 0); }
 }
 
 
 @-webkit-keyframes slideinfromtop {
-    from { -webkit-transform: translateY(-100%); }
-    to { -webkit-transform: translateY(0); }
+    from { -webkit-transform: translate3d(0, -100%, 0); }
+    to { -webkit-transform: translate3d(0, 0, 0); }
 }
 
 @-webkit-keyframes slideinfrombottom {
-    from { -webkit-transform: translateY(100%); }
-    to { -webkit-transform: translateY(0); }
+    from { -webkit-transform: translate3d(0, 100%, 0); }
+    to { -webkit-transform: translate3d(0, 0, 0); }
 }
 
 @-webkit-keyframes slideouttobottom {
-    from { -webkit-transform: translateY(0); }
-    to { -webkit-transform: translateY(100%); }
+    from { -webkit-transform: translate3d(0, 0, 0); }
+    to { -webkit-transform: translate3d(0, 100%, 0); }
 }
 
 @-webkit-keyframes slideouttotop {
-    from { -webkit-transform: translateY(0); }
-    to { -webkit-transform: translateY(-100%); }
+    from { -webkit-transform: translate3d(0, 0, 0); }
+    to { -webkit-transform: translate3d(0, -100%, 0); }
 }
 @-webkit-keyframes fadein {
     from { opacity: 0; }
@@ -166,49 +172,49 @@ Built by David Kaneda and maintained by Jonathan Stark.
 .flip {
 	-webkit-animation-duration: .65s;
 	-webkit-backface-visibility:hidden;
-	-webkit-transform:translateX(0); /* Needed to work around an iOS 3.1 bug that causes listview thumbs to disappear when -webkit-visibility:hidden is used. */
+	-webkit-transform:translate3d(0, 0, 0); /* Needed to work around an iOS 3.1 bug that causes listview thumbs to disappear when -webkit-visibility:hidden is used. */
 }
 
 .flip.in {
-	-webkit-transform: rotateY(0) scale(1);
+	-webkit-transform: rotateY(0) scale3d(1, 1, 1);
 	-webkit-animation-name: flipinfromleft;
 }
 
 .flip.out {
-	-webkit-transform: rotateY(-180deg) scale(.8);
+	-webkit-transform: rotateY(-180deg) scale3d(.8, .8, 1);
 	-webkit-animation-name: flipouttoleft;
 }
 
 /* Shake it all about */
 
 .flip.in.reverse {
-	-webkit-transform: rotateY(0) scale(1);
+	-webkit-transform: rotateY(0) scale3d(1, 1, 1);
 	-webkit-animation-name: flipinfromright;
 }
 
 .flip.out.reverse {
-	-webkit-transform: rotateY(180deg) scale(.8);
+	-webkit-transform: rotateY(180deg) scale3d(.8, .8, 1);
 	-webkit-animation-name: flipouttoright;
 }
 
 @-webkit-keyframes flipinfromright {
-    from { -webkit-transform: rotateY(-180deg) scale(.8); }
-    to { -webkit-transform: rotateY(0) scale(1); }
+    from { -webkit-transform: rotateY(-180deg) scale3d(.8, .8, 1); }
+    to { -webkit-transform: rotateY(0) scale3d(1, 1, 1); }
 }
 
 @-webkit-keyframes flipinfromleft {
-    from { -webkit-transform: rotateY(180deg) scale(.8); }
-    to { -webkit-transform: rotateY(0) scale(1); }
+    from { -webkit-transform: rotateY(180deg) scale3d(.8, .8, 1); }
+    to { -webkit-transform: rotateY(0) scale3d(1, 1, 1); }
 }
 
 @-webkit-keyframes flipouttoleft {
-    from { -webkit-transform: rotateY(0) scale(1); }
-    to { -webkit-transform: rotateY(-180deg) scale(.8); }
+    from { -webkit-transform: rotateY(0) scale3d(1, 1, 1); }
+    to { -webkit-transform: rotateY(-180deg) scale3d(.8, .8, 1); }
 }
 
 @-webkit-keyframes flipouttoright {
-    from { -webkit-transform: rotateY(0) scale(1); }
-    to { -webkit-transform: rotateY(180deg) scale(.8); }
+    from { -webkit-transform: rotateY(0) scale3d(1, 1, 1); }
+    to { -webkit-transform: rotateY(180deg) scale3d(.8, .8, 1); }
 }
 
 
@@ -224,14 +230,14 @@ Built by David Kaneda and maintained by Jonathan Stark.
 }
 
 .pop.in {
-	-webkit-transform: scale(1);
+	-webkit-transform: scale3d(1, 1, 1);
     opacity: 1;
 	-webkit-animation-name: popin;
 	z-index: 10;
 }
 
 .pop.out.reverse {
-	-webkit-transform: scale(.2);
+	-webkit-transform: scale3d(.2, .2, 1);
 	opacity: 0;
 	-webkit-animation-name: popout;
 	z-index: 10;
@@ -244,22 +250,22 @@ Built by David Kaneda and maintained by Jonathan Stark.
 
 @-webkit-keyframes popin {
     from {
-        -webkit-transform: scale(.2);
+        -webkit-transform: scale3d(.2, .2, 1);
         opacity: 0;
     }
     to {
-        -webkit-transform: scale(1);
+        -webkit-transform: scale3d(1, 1, 1);
         opacity: 1;
     }
 }
 
 @-webkit-keyframes popout {
     from {
-        -webkit-transform: scale(1);
+        -webkit-transform: scale3d(1, 1, 1);
         opacity: 1;
     }
     to {
-        -webkit-transform: scale(.2);
+        -webkit-transform: scale3d(.2, .2, 1);
         opacity: 0;
     }
 }
