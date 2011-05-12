@@ -24,7 +24,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		
 		themeclass = " ui-body-" + theme;
 		
-		$('label[for='+input.attr('id')+']').addClass('ui-input-text');
+		$('label[for="'+input.attr('id')+'"]').addClass('ui-input-text');
 		
 		input.addClass('ui-input-text ui-body-'+ o.theme);
 		

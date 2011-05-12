@@ -32,7 +32,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 			selectID = select.attr( "id" ),
 
-			label = $( "label[for="+ selectID +"]" ).addClass( "ui-select" ),
+			label = $( 'label[for="'+ selectID +'"]' ).addClass( "ui-select" ),
 
 			//IE throws an exception at options.item() function when
 			//there is no selected item
