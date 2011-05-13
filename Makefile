@@ -3,11 +3,10 @@ DATE = $(shell date "+%Y%m%d")
 
 # The version according to the source file. If this is the nightly build, use a different version
 VER = $(shell cat version.txt)
-nightly: VER = nightly
 
 # The command to replace the @VERSION in the files with the actual version
-SED_VER = sed "s/@VERSION/${VER}/"
-nightly: SED_VER = sed "s/@VERSION/Nightly-${DATE}/"
+SED_VER = sed "s/@VERSION/$(shell git log -1 --format=format:" Git Build\n * Git Info SHA1: %H Date: %cd")/"
+deploy:  SED_VER = sed "s/@VERSION/${VER}/"
 
 # The version of jQuery core used
 JQUERY = $(shell grep Library js/jquery.js | sed s'/ \* jQuery JavaScript Library v//')
@@ -26,7 +25,6 @@ NIGHTLY_OUTPUT = nightlies/${DATE}
 ifeq (${NIGHTLY_OUTPUT}, latest)
 	RMLATEST = ssh jqadmin@code.origin.jquery.com 'rm -rf /var/www/html/code.jquery.com/mobile/latest'
 	DIR = jquery.mobile
-	SED_VER = sed "s/@VERSION/ LatestBuild/"
 endif
 NIGHTLY_WEBPATH = http://code.jquery.com/mobile/${NIGHTLY_OUTPUT}
 
@@ -139,7 +137,7 @@ nightly: pull zip
 	@@echo $$"\nGit Release Version: " >> ${OUTPUT}/log.txt
 	@@cat version.txt >> ${OUTPUT}/log.txt
 	@@echo $$"\nGit Information for this build:" >> ${OUTPUT}/log.txt
-	@@git log -1 --format=format:"SHA1: %H %nDate: %cd %nTitle: %s" >> ${OUTPUT}/log.txt
+	@@git log -1 --format=format:"SHA1: %H \nDate: %cd \nTitle: %s" >> ${OUTPUT}/log.txt
 	
 	# Create the folder to hold the files for the demos
 	@@mkdir -p ${VER}
@@ -199,3 +197,4 @@ deploy: zip
 	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|src="js/"|src="http://code.jquery.com/mobile/${VER}/${DIR}.min.js"|g' {} \;
 
 	@@scp -r ${VER} jqadmin@jquerymobile.com:/srv/jquerymobile.com/htdocs/demos/
+
