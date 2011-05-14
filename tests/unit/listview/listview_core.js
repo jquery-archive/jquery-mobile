@@ -208,7 +208,7 @@
 		}, 500);
 
 		setTimeout(function() {
-			same($searchPage.find('li[style^="display: none;"]').length, 2);
+			same($searchPage.find('li.ui-screen-hidden').length, 2);
 			start();
 		}, 1000);
 	});
@@ -249,13 +249,13 @@
 
 		setTimeout(function() {
 			//there should be four hidden list entries
-			same($searchPage.find('li[style^="display: none;"]').length, 4);
+			same($searchPage.find('li.ui-screen-hidden').length, 4);
 
 			//there should be two list entries that are list dividers and hidden
-			same($searchPage.find('li:jqmData(role=list-divider)[style^="display: none;"]').length, 2);
+			same($searchPage.find('li.ui-screen-hidden:jqmData(role=list-divider)').length, 2);
 
 			//there should be two list entries that are not list dividers and hidden
-			same($searchPage.find('li:not(:jqmData(role=list-divider))[style^="display: none;"]').length, 2);
+			same($searchPage.find('li.ui-screen-hidden:not(:jqmData(role=list-divider))').length, 2);
 			start();
 		}, 1000);
 	});
