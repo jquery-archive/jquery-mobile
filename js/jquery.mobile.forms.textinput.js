@@ -53,7 +53,8 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			}
 			
 			toggleClear();
-			input.keyup(toggleClear);	
+			input.keyup(toggleClear);
+	                input.focus(toggleClear);   
 		}
 		else{
 			input.addClass('ui-corner-all ui-shadow-inset' + themeclass);
