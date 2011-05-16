@@ -83,23 +83,30 @@ $.mobile.changePage("../alerts/confirm.html", "pop", false, false);
 			
 			
 			
-			<dt><code>$.mobile.pageLoading</code> (<em>method</em>)</dt>
-			<dd>Show or hide the page loading message, which is configurable via $.mobile.loadingMessage.</dd>
-			<dd>
-				<dl>
-					<dt>Arguments:</dt>
-					<dd><code>Done</code> (<em>boolean</em>, defaults to false, meaning loading has started). True will hide the loading message.</dd>
-				</dl>
-			</dd>
+			<dt><code>$.mobile.showPageLoadingMsg</code> (<em></em>)</dt>
+			<dd>Show the page loading message, which is configurable via $.mobile.loadingMessage.</dd>
 			
-			<dd>Examples:
+			<dd>Example:
 			<pre>
 			<code>
 <strong>//cue the page loader</strong> 			
-$.mobile.pageLoading();	
+$.mobile.showPageLoadingMsg();	
+			</code>
+			</pre>
+			
+			</dd>
 
-<strong>//hide the page loader</strong> 			
-$.mobile.pageLoading( true );	
+			
+			
+			
+			<dt><code>$.mobile.hidePageLoadingMsg</code> (<em></em>)</dt>
+			<dd>Hide the page loading message, which is configurable via $.mobile.loadingMessage.</dd>
+			
+			<dd>Example:
+			<pre>
+			<code>
+<strong>//cue the page loader</strong> 			
+$.mobile.hidePageLoadingMsg();	
 			</code>
 			</pre>
 			

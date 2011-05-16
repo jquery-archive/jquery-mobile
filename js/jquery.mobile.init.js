@@ -36,23 +36,32 @@
 
 	$.extend($.mobile, {
 		// turn on/off page loading message.
+		showPageLoadingMsg: function() {
+			if( $.mobile.loadingMessage ){
+				var activeBtn = $( "." + $.mobile.activeBtnClass ).first();
+			
+				$loader
+					.appendTo( $.mobile.pageContainer )
+					//position at y center (if scrollTop supported), above the activeBtn (if defined), or just 100px from top
+					.css( {
+						top: $.support.scrollTop && $(window).scrollTop() + $(window).height() / 2 ||
+						activeBtn.length && activeBtn.offset().top || 100
+					} );
+			}
+			
+			$html.addClass( "ui-loading" );
+		},
+
+		hidePageLoadingMsg: function() {
+			$html.removeClass( "ui-loading" );
+		},
+
+		// XXX: deprecate for 1.0
 		pageLoading: function ( done ) {
 			if ( done ) {
-				$html.removeClass( "ui-loading" );
+				$.mobile.hidePageLoadingMsg();
 			} else {
-				if( $.mobile.loadingMessage ){
-					var activeBtn = $( "." + $.mobile.activeBtnClass ).first();
-
-					$loader
-						.appendTo( $.mobile.pageContainer )
-						//position at y center (if scrollTop supported), above the activeBtn (if defined), or just 100px from top
-						.css( {
-							top: $.support.scrollTop && $(window).scrollTop() + $(window).height() / 2 ||
-							activeBtn.length && activeBtn.offset().top || 100
-						} );
-				}
-
-				$html.addClass( "ui-loading" );
+				$.mobile.showPageLoadingMsg();
 			}
 		},
 
@@ -78,11 +87,11 @@
 			$.mobile.pageContainer = $pages.first().parent().addClass( "ui-mobile-viewport" );
 
 			//cue page loading message
-			$.mobile.pageLoading();
+			$.mobile.showPageLoadingMsg();
 
 			// if hashchange listening is disabled or there's no hash deeplink, change to the first page in the DOM
 			if( !$.mobile.hashListeningEnabled || !$.mobile.path.stripHash( location.hash ) ){
-				$.mobile.changePage( $.mobile.firstPage, false, true, false, true );
+				$.mobile.changePage( $.mobile.firstPage, { transition: "none", reverse: true, changeHash: false, fromHashChange: true } );
 			}
 			// otherwise, trigger a hashchange to load a deeplink
 			else {
