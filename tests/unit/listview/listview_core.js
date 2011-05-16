@@ -81,6 +81,18 @@
 		ok($('#nested-list-test .linebreaknode').text() === "More animals", 'Text should be "More animals"');
 	});
 
+	asyncTest( "Multiple nested lists on a page", function() {
+        // https://github.com/jquery/jquery-mobile/issues/1617
+		$.testHelper.openPage("#nested-lists-test");
+
+		setTimeout(function() {
+            $('.ui-page-active li:eq(2) a:eq(0)').click();
+
+            equal($('.ui-page-active .ui-content .ui-listview li').text(), "Sub Item 10Sub Item 11Sub Item 12", 'Text should be "Sub Item 10Sub Item 11Sub Item 12"');
+			start();
+		}, 500);
+	});
+
 	module('Ordered Lists');
 
 	asyncTest( "changes to the numbered list page and enhances it", function() {
