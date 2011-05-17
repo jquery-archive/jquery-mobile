@@ -57,7 +57,7 @@
 		//configure meta viewport tag's content attr:
 		//note: this feature is deprecated in A4 in favor of adding
 		//the meta viewport element directly in the markup
-		metaViewportContent: "width=device-width, minimum-scale=1, maximum-scale=1",
+		metaViewportContent: "width=device-width, initial-scale=1",
 
 		//support conditions that must be met in order to proceed
 		//default enhanced qualifications are media query support OR IE 7+
