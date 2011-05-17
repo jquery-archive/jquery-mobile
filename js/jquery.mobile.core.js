@@ -59,6 +59,11 @@
 		//the meta viewport element directly in the markup
 		metaViewportContent: "width=device-width, minimum-scale=1, maximum-scale=1",
 
+		//Keeps track of the number of lists per page UID
+		//This allows support for multiple nested list in the same page
+		//https://github.com/jquery/jquery-mobile/issues/1617
+		listCountPerPage: {},
+
 		//support conditions that must be met in order to proceed
 		//default enhanced qualifications are media query support OR IE 7+
 		gradeA: function(){

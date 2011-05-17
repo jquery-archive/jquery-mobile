@@ -194,10 +194,17 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		var parentList = this.element,
 			parentPage = parentList.closest( ".ui-page" ),
 			parentId = parentPage.jqmData( "url" ),
+			listCountPerPage = $.mobile.listCountPerPage,
+			listIdInPage,
 			o = this.options,
 			dns = "data-" + $.mobile.ns,
 			self = this,
 			persistentFooterID = parentPage.find( ":jqmData(role='footer')" ).jqmData( "id" );
+
+        if (typeof(listCountPerPage[parentPage[0][ $.expando ]]) === 'undefined') {
+        	listCountPerPage[parentPage[0][ $.expando ]] = -1;
+        }
+        listIdInPage = ++listCountPerPage[parentPage[0][ $.expando ]];
 
 		$( parentList.find( "li>ul, li>ol" ).toArray().reverse() ).each(function( i ) {
 			var list = $( this ),
@@ -205,7 +212,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				nodeEls = $( list.prevAll().toArray().reverse() ),
 				nodeEls = nodeEls.length ? nodeEls : $( "<span>" + $.trim(parent.contents()[ 0 ].nodeValue) + "</span>" ),
 				title = nodeEls.first().text(),//url limits to first 30 chars of text
-				id = parentId + "&" + $.mobile.subPageUrlKey + "=" + self._idStringEscape(title + " " + i),
+				id = parentId + "&" + $.mobile.subPageUrlKey + "=" + self._idStringEscape(title + " " + listIdInPage + " " + i),
 				theme = list.jqmData( "theme" ) || o.theme,
 				countTheme = list.jqmData( "counttheme" ) || parentList.jqmData( "counttheme" ) || o.countTheme,
 				newPage = list.detach()
