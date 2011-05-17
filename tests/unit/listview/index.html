@@ -71,6 +71,37 @@
 	</div>
 </div>
 
+
+<div data-nstest-role="page" id='nested-lists-test'>
+	<div  data-nstest-role="header" data-nstest-position="inline">
+		<h1>Basic multiple lists view</h1>
+	</div>
+    <div data-nstest-role="content">
+        <ul data-nstest-role="listview" data-nstest-inset="true">
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>Parent Item
+                <ul data-nstest-role="listview">
+                    <li>Sub Item 10</li>
+                    <li>Sub Item 11</li>
+                    <li>Sub Item 12</li>
+                </ul>
+            </li>
+        </ul>
+        <ul data-nstest-role="listview" data-nstest-inset="true">
+            <li>Item 3</li>
+            <li>Item 4</li>
+            <li>Parent Item
+                <ul data-nstest-role="listview">
+                    <li>Sub Item 20</li>
+                    <li>Sub Item 21</li>
+                    <li>Sub Item 22</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
 <!-- Numbered List -->
 <div  data-nstest-role="page" id='numbered-list-test'>
 	<div  data-nstest-role="header" data-nstest-position="inline">
