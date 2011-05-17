@@ -57,7 +57,7 @@
 		//configure meta viewport tag's content attr:
 		//note: this feature is deprecated in A4 in favor of adding
 		//the meta viewport element directly in the markup
-		metaViewportContent: "width=device-width, minimum-scale=1, maximum-scale=1",
+		metaViewportContent: "width=device-width, initial-scale=1",
 
 		//Keeps track of the number of lists per page UID
 		//This allows support for multiple nested list in the same page
