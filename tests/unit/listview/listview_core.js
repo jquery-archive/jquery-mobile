@@ -93,6 +93,28 @@
 		}, 500);
 	});
 
+	asyncTest( "Nested list title should use list-title data-role", function() {
+        // https://github.com/jquery/jquery-mobile/issues/1595
+		$.testHelper.openPage("#nested-list-title-test");
+		$('.ui-page-active ul:eq(0) li:eq(0) a:eq(0)').click();
+		setTimeout(function() {
+			var $new_page = $(':jqmData(url="nested-list-title-test&ui-page=Number-1-p-2")');
+            equal($('.ui-title', $new_page).text(), "Number 1 p", 'Text should be "Number 1 p"');
+			start();
+		}, 1000);
+	});
+
+	asyncTest( "Nested list: in absence of list-title data-role, first non-image el text should be used", function() {
+        // https://github.com/jquery/jquery-mobile/issues/1595
+		$.testHelper.openPage("#nested-list-title-test");
+		$('.ui-page-active ul:eq(0) li:eq(1) a:eq(0)').click();
+		setTimeout(function() {
+			var $new_page = $(':jqmData(url="nested-list-title-test&ui-page=Number-2-h3-1")');
+            equal($('.ui-title', $new_page).text(), "Number 2 h3", 'Text should be "Number 2 h3"');
+			start();
+		}, 1000);
+	});
+
 	module('Ordered Lists');
 
 	asyncTest( "changes to the numbered list page and enhances it", function() {
