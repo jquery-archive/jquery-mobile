@@ -204,7 +204,9 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				parent = list.parent(),
 				nodeEls = $( list.prevAll().toArray().reverse() ),
 				nodeEls = nodeEls.length ? nodeEls : $( "<span>" + $.trim(parent.contents()[ 0 ].nodeValue) + "</span>" ),
-				title = nodeEls.first().text(),//url limits to first 30 chars of text
+                                title = list.prevAll( ":jqmData(role='list-title')" ),
+                                title = (title.length ?  title : nodeEls.not('img'))
+                                	.first().text(),//url limits to first 30 chars of text
 				id = parentId + "&" + $.mobile.subPageUrlKey + "=" + self._idStringEscape(title + " " + i),
 				theme = list.jqmData( "theme" ) || o.theme,
 				countTheme = list.jqmData( "counttheme" ) || parentList.jqmData( "counttheme" ) || o.countTheme,
