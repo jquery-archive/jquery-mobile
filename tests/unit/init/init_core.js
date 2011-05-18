@@ -3,9 +3,7 @@
  */
 (function($){
 	var mobilePage = undefined,
-			mobileSelect = undefined,
-			metaViewportContentDefault = $.mobile.metaViewportContent,
-	    libName = 'jquery.mobile.init.js',
+	    	libName = 'jquery.mobile.init.js',
 			coreLib = 'jquery.mobile.core.js',
 			extendFn = $.extend,
 			setGradeA = function(value) { $.mobile.gradeA = function(){ return value; }; },
@@ -39,16 +37,11 @@
 	//      the event before the test check below
 	$(document).one("mobileinit", function(){
 		mobilePage = $.mobile.page;
-		mobileSelect = $.mobile.selectmenu;
 	});
 
 	// NOTE for the following two tests see index html for the binding
 	test( "mobile.page is available when mobile init is fired", function(){
 		ok(mobilePage !== undefined, "$.mobile.page is defined");
-	});
-
-	test( "mobile.selectmenu is available when mobile init is fired", function(){
-		ok(mobileSelect !== undefined, "$.mobile.selectmenu is defined");
 	});
 
 	$.testHelper.excludeFileProtocol(function(){
@@ -83,32 +76,7 @@
 			ok($("html").hasClass("ui-mobile"));
 		});
 
-		var findMeta = function(){
-				return $("head meta[name='viewport']");
-			},
-			setViewPortContent = function(){
-				$.testHelper.reloadLib( libName );
-			};
-
-		test( "meta viewport element not added to head when not defined on mobile", function(){
-			$.mobile.metaViewportContent = null;
-			findMeta().remove();
-			setViewPortContent();
-			same( findMeta().length, 0);
-		});
-
-		test( "meta viewport element is added to head when defined on mobile and no meta already exists", function(){
-			findMeta().remove();
-			setViewPortContent();
-			same( findMeta().length, 1);
-		});
-
-		test( "meta viewport element is not added to head when defined on mobile and a meta already exists", function(){
-			findMeta().remove();
-			$( '<meta name="viewport" content="width=device-width">').prependTo("head");
-			setViewPortContent();
-			same( findMeta().length, 1);
-		});
+		
 
 		var findFirstPage = function() {
 			return $(":jqmData(role='page')").first();
