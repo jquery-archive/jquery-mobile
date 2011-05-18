@@ -43,10 +43,16 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		});
 	},
 	
-	_removeCorners: function( li ) {
+	_removeCorners: function( li, which ) {
+        which = which || ["top", "bottom"];
+        var classes = {
+            top: "ui-corner-top ui-corner-tr ui-corner-tl",
+            bottom: "ui-corner-bottom ui-corner-br ui-corner-bl"
+        };
+        var classesToRemove = $.map(which, function(pos) { return classes[pos];}).join(" ");
 		li
 			.add( li.find(".ui-btn-inner, .ui-li-link-alt, .ui-li-thumb") )
-			.removeClass( "ui-corner-top ui-corner-bottom ui-corner-br ui-corner-bl ui-corner-tr ui-corner-tl" );
+			.removeClass( classesToRemove );
 	},
 	
 	refresh: function( create ) {
@@ -163,7 +169,9 @@ $.widget( "mobile.listview", $.mobile.widget, {
 						
 						if(item.prev().prev().length){
 							self._removeCorners( item.prev() );		
-						}	
+						} else if (item.prev().length) {
+                            self._removeCorners( item.prev(), ["bottom"]);
+                        }
 				}
 			}
 
