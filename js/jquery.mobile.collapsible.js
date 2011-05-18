@@ -87,7 +87,6 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 							.find('a:eq(0), .ui-btn-inner')
 							.addClass('ui-corner-bottom');
 					}
-				        $(window).trigger('resize');
 				}						
 				
 			})
@@ -106,7 +105,6 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 							.find('a:eq(0), .ui-btn-inner')
 							.removeClass('ui-corner-bottom');
 					}
-				        $(window).trigger('resize');
 				}
 			})
 			.trigger(o.collapsed ? 'collapse' : 'expand');
