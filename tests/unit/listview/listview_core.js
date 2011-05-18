@@ -306,4 +306,37 @@
 		}, 1000);
 	});
 
+    module( "Programmatically generated list items", {
+		setup: function(){
+            var item,
+                data = [
+                {id: 1,
+                    label: "Item 1"
+                },
+                {id: 2,
+                    label: "Item 2"
+                },
+                {id: 3,
+                    label: "Item 3"
+                },
+                {id: 4,
+                    label: "Item 4"
+                }
+            ];
+
+			$.testHelper.openPage("#programmatically-generated-list");
+
+            for (var i = 0, len = data.length; i < len; i++) {
+                item = $('<li id="myItem' + data[i].id + '">');
+                label = $("<strong>" + data[i].label + "</strong>").appendTo(item);
+                $('#programmatically-generated-list-items').append(item);
+                $('#programmatically-generated-list-items').listview('refresh');
+            }
+		}
+	});
+
+    test( "Corner styling issue (#1470)", function() {
+        ok(!$('#programmatically-generated-list-items li:first-child').hasClass("ui-corner-bottom"), "First list item should not have class ui-corner-bottom");
+    });
+
 })(jQuery);
