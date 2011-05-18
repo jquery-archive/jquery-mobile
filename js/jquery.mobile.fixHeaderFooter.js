@@ -128,9 +128,9 @@ $.fixedToolbars = (function(){
 		
 		$.fixedToolbars.show(true, this);	
 	});
-        //When a collapsiable is hidden or shown we need to trigger the fixed toolbar to reposition itself (#1635)
-        $('.ui-collapsible-contain').live('collapse',showEventCallback);
-        $('.ui-collapsible-contain').live('expand',showEventCallback);
+    
+    //When a collapsiable is hidden or shown we need to trigger the fixed toolbar to reposition itself (#1635)
+	$( ".ui-collapsible-contain" ).live( "collapse expand", showEventCallback );
 
 	// element.getBoundingClientRect() is broken in iOS 3.2.1 on the iPad. The
 	// coordinates inside of the rect it returns don't have the page scroll position
