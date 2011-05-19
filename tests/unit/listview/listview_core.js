@@ -34,7 +34,7 @@
 	asyncTest( "Slides back to main page when back button is clicked", function() {
 		$.testHelper.openPage("#basic-link-results");
 
-		$('.ui-page-active a:jqmData(rel="back")').click();
+		window.history.back();
 
 		setTimeout(function() {
 			ok($('#basic-linked-test').hasClass('ui-page-active'));
@@ -170,7 +170,7 @@
 			},
 
 			function(){
-				$('.ui-page-active a:jqmData(rel="back")').click();
+				history.back();
 			},
 
 			function() {
