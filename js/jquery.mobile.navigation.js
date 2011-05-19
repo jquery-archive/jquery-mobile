@@ -411,6 +411,9 @@
 			// page is loaded off the network.
 			dupCachedPage = null;
 
+		// Make sure we have a pageContainer to work with.
+		settings.pageContainer = settings.pageContainer || $.mobile.pageContainer;
+
 		// If the caller provided data, and we're using "get" request,
 		// append the data to the URL.
 		if ( settings.data && settings.type === "get" ) {
@@ -423,7 +426,7 @@
 		}
 
 		// Check to see if the page already exists in the DOM.
-		page = $.mobile.pageContainer.children( ":jqmData(url='" + absUrl + "')" );
+		page = settings.pageContainer.children( ":jqmData(url='" + absUrl + "')" );
 
 		// Reset base to the default document base.
 		if ( base ) {
@@ -508,7 +511,7 @@
 				//append to page and enhance
 				page
 					.attr( "data-" + $.mobile.ns + "url", fileUrl )
-					.appendTo( $.mobile.pageContainer );
+					.appendTo( settings.pageContainer );
 
 				enhancePage( page, settings.role );
 
@@ -516,7 +519,7 @@
 				// into the DOM. If the original absUrl refers to a sub-page, that is the
 				// real page we are interested in.
 				if ( absUrl.indexOf( "&" + $.mobile.subPageUrlKey ) > -1 ) {
-					page = $.mobile.pageContainer.children( ":jqmData(url='" + absUrl + "')" );
+					page = settings.pageContainer.children( ":jqmData(url='" + absUrl + "')" );
 				}
 
 				// Remove loading message.
@@ -539,7 +542,7 @@
 					//show error message
 					$( "<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h1>"+ $.mobile.pageLoadErrorMessage +"</h1></div>" )
 						.css({ "display": "block", "opacity": 0.96, "top": $window.scrollTop() + 100 })
-						.appendTo( $.mobile.pageContainer )
+						.appendTo( settings.pageContainer )
 						.delay( 800 )
 						.fadeOut( 400, function() {
 							$( this ).remove();
@@ -558,7 +561,8 @@
 		data: "undefined",
 		reloadPage: false,
 		role: "page",
-		showLoadMsg: true
+		showLoadMsg: true,
+		pageContainer: undefined
 	};
 
 	// Show a specific page in the page container.
@@ -572,6 +576,9 @@
 		}
 
 		var settings = $.extend( {}, $.mobile.changePage.defaults, options );
+
+		// Make sure we have a pageContainer to work with.
+		settings.pageContainer = settings.pageContainer || $.mobile.pageContainer;
 
 		// If the caller passed us a url, call loadPage()
 		// to make sure it is loaded into the DOM. We'll listen
@@ -602,7 +609,7 @@
 
 		// The caller passed us a real page DOM element. Update our
 		// internal state and then trigger a transition to the page.
-		var mpc = $.mobile.pageContainer,
+		var mpc = settings.pageContainer,
 			fromPage = $.mobile.activePage,
 			url = toPage.jqmData( "url" ),
 			fileUrl = path.getFilePath( url ),
@@ -712,7 +719,8 @@
 		changeHash: true,
 		fromHashChange: false,
 		role: "page",
-		duplicateCachedPage: undefined
+		duplicateCachedPage: undefined,
+		pageContainer: undefined
 	};
 
 /* Event Bindings - hashchange, submit, and click */
