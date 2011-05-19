@@ -604,7 +604,7 @@
 
 					//rewrite src and href attrs to use a base url
 					if( !$.support.dynamicBaseTag ) {
-						var newPath = path.get( fileUrl );
+						var newPath = path.clean( path.origin );
 						to.find( "[src], link[href], a[rel='external'], :jqmData(ajax='false'), a[target]" ).each( function() {
 							var attrs = [ "href", "src", "action" ],
 								thisAttr = undefined,
