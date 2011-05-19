@@ -310,7 +310,7 @@
 
     test( "Removing list items", 4, function() {
         $.testHelper.openPage("#removing-items-from-list-test");
-        var ul = $('.ui-page-active ul');
+        var ul = $('#removing-items-from-list-test ul');
         ul.find("li").first().remove();
         equal(ul.find("li").length, 3, "There should be only 3 list items left");
 
