@@ -120,11 +120,7 @@
 		nsNormalize: function(prop){
 			if(!prop) return;
 
-			// NOTE the spec specifies that attributes will be converted to lower case
-			//      ascii so the regex can remain simple
-			return ($.mobile.ns + prop).replace(this.normalizeRegex, function(s, capture){
-				return capture.toUpperCase();
-			});
+			return $.camelCase($.mobile.ns + prop);
 		}
 	});
 
