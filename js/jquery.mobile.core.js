@@ -116,7 +116,7 @@
 			if(!prop) return;
 
 			// NOTE the spec specifies that attributes will be converted to lower case
-			//			ascii so the regex can remain simple
+			//      ascii so the regex can remain simple
 			return ($.mobile.ns + prop).replace(/-([a-z])/g, function(s, capture){
 				return capture.toUpperCase();
 			});
