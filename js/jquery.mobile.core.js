@@ -120,7 +120,7 @@
 		nsNormalize: function(prop){
 			if(!prop) return;
 
-			return $.camelCase($.mobile.ns + prop);
+			return $.camelCase( $.mobile.ns + prop );
 		}
 	});
 
