@@ -115,25 +115,25 @@
 
 	//mobile version of data and removeData and hasData methods
 	//ensures all data is set and retrieved using jQuery Mobile's data namespace
-  $.fn.jqmData = function( prop, value ){
-    return this.data( prop ? $.mobile.ns + prop : prop, value );
-  };
+	$.fn.jqmData = function( prop, value ){
+		return this.data( prop ? $.mobile.ns + prop : prop, value );
+	};
 
-  $.jqmData = function( elem, prop, value ){
-    return $.data( elem, prop && $.mobile.ns + prop, value );
-  };
+	$.jqmData = function( elem, prop, value ){
+		return $.data( elem, prop && $.mobile.ns + prop, value );
+	};
 
-  $.fn.jqmRemoveData = function( prop ){
-    return this.removeData( $.mobile.ns + prop );
-  };
+	$.fn.jqmRemoveData = function( prop ){
+		return this.removeData( $.mobile.ns + prop );
+	};
 
-  $.jqmRemoveData = function( elem, prop ){
-    return $.removeData( elem, prop && $.mobile.ns + prop );
-  };
+	$.jqmRemoveData = function( elem, prop ){
+		return $.removeData( elem, prop && $.mobile.ns + prop );
+	};
 
-  $.jqmHasData = function( elem, prop ){
-    return $.hasData( elem, prop && $.mobile.ns + prop );
-  };
+	$.jqmHasData = function( elem, prop ){
+		return $.hasData( elem, prop && $.mobile.ns + prop );
+	};
 
 
 	// Monkey-patching Sizzle to filter the :jqmData selector
