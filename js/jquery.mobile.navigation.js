@@ -614,6 +614,9 @@
 							var thisAttr = $( this ).is( "[href]" ) ? "href" : "src",
 								thisUrl = $( this ).attr( thisAttr );
 
+							//if full path exists and is same, chop it - helps IE out
+							thisUrl = thisUrl.replace( location.protocol + "//" + location.host + location.pathname, "" );
+
 							if( ! /^(\w+:|#|\/)/.test( thisUrl ) ) {
 								$( this ).attr( thisAttr, newPath + thisUrl );
 							}
