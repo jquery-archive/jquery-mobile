@@ -35,6 +35,26 @@
 		});
 	});
 
+	test( "$.mobile.nsNormalize works properly with namespace defined (test default)", function(){
+		equal($.mobile.nsNormalize("foo"), "nstestFoo", "appends ns and initcaps");
+		equal($.mobile.nsNormalize("fooBar"), "nstestFooBar", "leaves capped strings intact");
+		equal($.mobile.nsNormalize("foo-bar"), "nstestFooBar", "changes dashed strings");
+		equal($.mobile.nsNormalize("foo-bar-bak"), "nstestFooBarBak", "changes multiple dashed strings");
+	});
+
+	test( "$.mobile.nsNormalize works properly with an empty namespace", function(){
+		var realNs = $.mobile.ns;
+
+		$.mobile.ns = "";
+
+		equal($.mobile.nsNormalize("foo"), "foo", "leaves uncapped and undashed");
+		equal($.mobile.nsNormalize("fooBar"), "fooBar", "leaves capped strings intact");
+		equal($.mobile.nsNormalize("foo-bar"), "fooBar", "changes dashed strings");
+		equal($.mobile.nsNormalize("foo-bar-bak"), "fooBarBak", "changes multiple dashed strings");
+
+		$.mobile.ns = realNs;
+	});
+
 	//data tests
 	test( "$.fn.jqmData and $.fn.jqmRemoveData methods are working properly", function(){
 		same( $("body").jqmData("foo", true), $("body"), "setting data returns the element" );
@@ -85,6 +105,4 @@
 		same( $.jqmHasData(document.body, "foo"), true, "after setting, body has data defined under 'foo' equal to true" );
 		$.jqmRemoveData(document.body, "foo");
 	});
-
-
 })(jQuery);
