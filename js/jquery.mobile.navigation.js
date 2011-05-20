@@ -174,7 +174,7 @@
 
 			//disable hashchange event listener internally to ignore one change
 			//toggled internally when location.hash is updated to match the url of a successful page load
-			ignoreNextHashChange: true
+			ignoreNextHashChange: false
 		},
 
 		//define first selector to receive focus when a page is shown
@@ -663,7 +663,7 @@
 		// Set the location hash.
 		if( settings.changeHash !== false && url ) {
 			//disable hash listening temporarily
-			urlHistory.ignoreNextHashChange = false;
+			urlHistory.ignoreNextHashChange = true;
 			//update hash and history
 			path.set( url );
 		}
@@ -883,14 +883,11 @@
 		//find first page via hash
 		var to = path.stripHash( location.hash ),
 			//transition is false if it's the first page, undefined otherwise (and may be overridden by default)
-			transition = $.mobile.urlHistory.stack.length === 0 ? false : undefined;
+			transition = $.mobile.urlHistory.stack.length === 0 ? "none" : undefined;
 
 		//if listening is disabled (either globally or temporarily), or it's a dialog hash
-		if( !$.mobile.hashListeningEnabled || !urlHistory.ignoreNextHashChange ) {
-			if( !urlHistory.ignoreNextHashChange ) {
-				urlHistory.ignoreNextHashChange = true;
-			}
-
+		if( !$.mobile.hashListeningEnabled || urlHistory.ignoreNextHashChange ) {
+			urlHistory.ignoreNextHashChange = false;
 			return;
 		}
 
