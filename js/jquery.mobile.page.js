@@ -9,7 +9,7 @@
 $.widget( "mobile.page", $.mobile.widget, {
 	options: {
 		backBtnText: "Back",
-		addBackBtn: true,
+		addBackBtn: false,
 		backBtnTheme: null,
 		degradeInputs: {
 			color: false,

@@ -24,7 +24,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		
 		themeclass = " ui-body-" + theme;
 		
-		$('label[for='+input.attr('id')+']').addClass('ui-input-text');
+		$('label[for="'+input.attr('id')+'"]').addClass('ui-input-text');
 		
 		input.addClass('ui-input-text ui-body-'+ o.theme);
 		
@@ -53,7 +53,8 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			}
 			
 			toggleClear();
-			input.keyup(toggleClear);	
+			input.keyup(toggleClear);
+	                input.focus(toggleClear);   
 		}
 		else{
 			input.addClass('ui-corner-all ui-shadow-inset' + themeclass);

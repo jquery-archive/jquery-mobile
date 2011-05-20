@@ -34,7 +34,7 @@
 	asyncTest( "Slides back to main page when back button is clicked", function() {
 		$.testHelper.openPage("#basic-link-results");
 
-		$('.ui-page-active a:jqmData(rel="back")').click();
+		window.history.back();
 
 		setTimeout(function() {
 			ok($('#basic-linked-test').hasClass('ui-page-active'));
@@ -79,6 +79,18 @@
 
 	test( "nested list title should use first text node, regardless of line breaks", function(){
 		ok($('#nested-list-test .linebreaknode').text() === "More animals", 'Text should be "More animals"');
+	});
+
+	asyncTest( "Multiple nested lists on a page", function() {
+        // https://github.com/jquery/jquery-mobile/issues/1617
+		$.testHelper.openPage("#nested-lists-test");
+
+		setTimeout(function() {
+            $('.ui-page-active li:eq(2) a:eq(0)').click();
+
+            equal($('.ui-page-active .ui-content .ui-listview li').text(), "Sub Item 10Sub Item 11Sub Item 12", 'Text should be "Sub Item 10Sub Item 11Sub Item 12"');
+			start();
+		}, 500);
 	});
 
 	module('Ordered Lists');
@@ -158,7 +170,7 @@
 			},
 
 			function(){
-				$('.ui-page-active a:jqmData(rel="back")').click();
+				history.back();
 			},
 
 			function() {
@@ -208,7 +220,7 @@
 		}, 500);
 
 		setTimeout(function() {
-			same($searchPage.find('li[style^="display: none;"]').length, 2);
+			same($searchPage.find('li.ui-screen-hidden').length, 2);
 			start();
 		}, 1000);
 	});
@@ -249,13 +261,13 @@
 
 		setTimeout(function() {
 			//there should be four hidden list entries
-			same($searchPage.find('li[style^="display: none;"]').length, 4);
+			same($searchPage.find('li.ui-screen-hidden').length, 4);
 
 			//there should be two list entries that are list dividers and hidden
-			same($searchPage.find('li:jqmData(role=list-divider)[style^="display: none;"]').length, 2);
+			same($searchPage.find('li.ui-screen-hidden:jqmData(role=list-divider)').length, 2);
 
 			//there should be two list entries that are not list dividers and hidden
-			same($searchPage.find('li:not(:jqmData(role=list-divider))[style^="display: none;"]').length, 2);
+			same($searchPage.find('li.ui-screen-hidden:not(:jqmData(role=list-divider))').length, 2);
 			start();
 		}, 1000);
 	});

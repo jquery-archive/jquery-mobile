@@ -2,7 +2,7 @@
 <html> 
 	<head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<title>jQuery Mobile Docs - Radio Buttons</title> 
 	<link rel="stylesheet"  href="../../themes/default/" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
@@ -79,11 +79,9 @@
 			<p>Radio buttons can also be used for grouped button sets only a single button can be selected at once, such as a view switcher control. To make a horizontal radio button set, add the <code> data-type="horizontal"</code> to the <code>fieldset</code>.</p>
 
 	<code>
-	&lt;fieldset data-role=&quot;controlgroup&quot; <strong>data-type=&quot;horizontal&quot;</strong> data-role=&quot;fieldcontain&quot;&gt;
+	&lt;fieldset data-role=&quot;controlgroup&quot; <strong>data-type=&quot;horizontal&quot;</strong> &gt;
 	</code>
 
-				<p>The framework will float the labels so they sit side-by-side on a line, hide the radio button icons and only round the left and right edges of the group.</p>
-				
 	<div data-role="fieldcontain">
 	    <fieldset data-role="controlgroup" data-type="horizontal">
 	     	<legend>Layout view:</legend>
@@ -95,24 +93,11 @@
 	         	<label for="radio-view-c">Gallery</label>
 	    </fieldset>
 	</div>
+
+				<p>The framework will float the labels so they sit side-by-side on a line, hide the radio button icons and only round the left and right edges of the group.</p>
+				
+
 	
-	<!--
-	<h2>No icon option</h2>
-	
-	<p>If you don't want the default radiobutton icon to be added, add the <code></code> attribute to each radio <code>input</code>. </p>
-		
-		<div data-role="fieldcontain">
-	    <fieldset data-role="controlgroup">
-	     	<legend>These don't have the radio state icons:</legend>
-	         	<input type="radio" name="radio-noicon" id="radio-noicon1" value="a"  checked="checked" />
-	         	<label for="radio-noicon1">Yes</label>
-	         	<input type="radio" name="radio-noicon" id="radio-noicon2" value="b"  />
-	         	<label for="radio-noicon2">No</label>
-	         	<input type="radio" name="radio-noicon" id="radio-noicon3" value="c"  />
-	         	<label for="radio-noicon3">Maybe</label>
-	    </fieldset>
-		</div>
-	-->
 		
         
         

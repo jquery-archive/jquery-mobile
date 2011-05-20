@@ -29,7 +29,7 @@
 
 	asyncTest( "change events fired on checkbox for both check and uncheck", function(){
 		var $checkbox = $("#checkbox-2"),
-				$checkboxLabel = $("[for=checkbox-2]");
+				$checkboxLabel = $checkbox.parent().find(".ui-btn");
 
 		$checkbox.unbind("change");
 
@@ -41,11 +41,54 @@
 
 		$checkboxLabel.trigger("click");
 
-		//test above will be triggered twice, and the start here once	
+		//test above will be triggered twice, and the start here once
 		$checkbox.change(function(){
 			start();
 		});
 
 		$checkboxLabel.trigger("click");
+	});
+
+	asyncTest( "radio button labels should update the active button class to last clicked and clear checked", function(){
+		var $radioBtns = $('#radio-active-btn-test input'),
+				singleActiveAndChecked = function(){
+					same($("#radio-active-btn-test .ui-btn-active").length, 1, "there should be only one active button");
+					same($("#radio-active-btn-test :checked").length, 1, "there should be only one checked");
+				};
+
+		$.testHelper.sequence([
+			function(){
+				$radioBtns.last().siblings('label').click();
+			},
+
+			function(){
+				ok($radioBtns.last().attr('checked'));
+				ok($radioBtns.last().siblings('label').hasClass('ui-btn-active'),
+					"last input label is an active button");
+
+				ok(!$radioBtns.first().attr('checked'));
+				ok(!$radioBtns.first().siblings('label').hasClass('ui-btn-active'),
+					"first input label is not active");
+
+				singleActiveAndChecked();
+
+				$radioBtns.first().siblings('label').click();
+			},
+
+			function(){
+				ok($radioBtns.first().attr('checked'));
+				ok($radioBtns.first().siblings('label').hasClass('ui-btn-active'),
+					"first input label is an active button");
+
+				ok(!$radioBtns.last().attr('checked'));
+				ok(!$radioBtns.last().siblings('label').hasClass('ui-btn-active'),
+					"last input label is not active");
+
+				singleActiveAndChecked();
+
+				start();
+			}
+		], 500);
+
 	});
 })(jQuery);

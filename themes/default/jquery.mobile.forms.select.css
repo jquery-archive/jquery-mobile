@@ -29,8 +29,10 @@ label.ui-select { font-size: 16px; line-height: 1.4;  font-weight: normal; margi
 .ui-li.ui-selectmenu-placeholder { display: none; }
 .ui-selectmenu .ui-header .ui-title { margin: 0.6em 46px 0.8em; }
 
-.min-width-480px label.ui-select { display: inline-block;  width: 20%;  margin: 0 2% 0 0; }
-.min-width-480px .ui-select { width: 60%; display: inline-block; }
+@media all and (min-width: 450px){
+	label.ui-select { display: inline-block;  width: 20%;  margin: 0 2% 0 0; }
+	.ui-select { width: 60%; display: inline-block; }
+}	
 
 /* when no placeholder is defined in a multiple select, the header height doesn't even extend past the close button.  this shim's content in there */
 .ui-selectmenu .ui-header h1:after { content: '.'; visibility: hidden; }
