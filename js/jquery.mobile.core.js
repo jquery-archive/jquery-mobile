@@ -112,6 +112,9 @@
 			}, 150 );
 		},
 
+		// compile the namespace normalization regex once
+		normalizeRegex: /-([a-z])/g,
+
 		// take a data attribute property, prepend the namespace
 		// and then camel case the attribute string
 		nsNormalize: function(prop){
@@ -119,7 +122,7 @@
 
 			// NOTE the spec specifies that attributes will be converted to lower case
 			//      ascii so the regex can remain simple
-			return ($.mobile.ns + prop).replace(/-([a-z])/g, function(s, capture){
+			return ($.mobile.ns + prop).replace(this.normalizeRegex, function(s, capture){
 				return capture.toUpperCase();
 			});
 		}
