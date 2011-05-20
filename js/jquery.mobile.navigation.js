@@ -656,7 +656,7 @@
 		// If we're displaying the page as a dialog, we don't want the url
 		// for the dialog content to be used in the hash. Instead, we want
 		// to append the dialogHashKey to the url of the current page.
-		if ( isDialog ) {
+		if ( isDialog && active ) {
 			url = active.url + dialogHashKey;
 		}
 
