@@ -2,6 +2,8 @@
  * mobile navigation unit tests
  */
 (function($){
+	var siteDirectory = location.pathname.replace(/[^/]+$/, "");
+
 	module('jquery.mobile.navigation.js', {
 		setup: function(){
 			location.hash = "";
@@ -40,16 +42,16 @@
 		same( $.mobile.path.makeAbsolute("test.html"), "bar/test.html", "prefixes path with absolute base path from hash");
 
 		$.mobile.path.set("bar");
-		same( $.mobile.path.makeAbsolute("test.html"), "/tests/unit/navigation/test.html", "returns the absolute path unaltered ignoring non path hash");
+		same( $.mobile.path.makeAbsolute("test.html"), siteDirectory + "test.html", "returns the absolute path unaltered ignoring non path hash");
 
 		$.mobile.path.set("bar/bing/bang");
 		same( $.mobile.path.makeAbsolute("?foo=bar&bak=baz"), "bar/bing/bang?foo=bar&bak=baz", "appends query string paths to current path");
 
 		$.mobile.path.set("");
-		same( $.mobile.path.makeAbsolute("?foo=bar&bak=baz"), "/tests/unit/navigation/?foo=bar&bak=baz", "uses pathname for empty hash");
+		same( $.mobile.path.makeAbsolute("?foo=bar&bak=baz"), siteDirectory + "?foo=bar&bak=baz", "uses pathname for empty hash");
 
 		$.mobile.path.set("bar");
-		same( $.mobile.path.makeAbsolute("?foo=bar&bak=baz"), "/tests/unit/navigation/?foo=bar&bak=baz", "uses pathname for embedded pages");
+		same( $.mobile.path.makeAbsolute("?foo=bar&bak=baz"), siteDirectory + "?foo=bar&bak=baz", "uses pathname for embedded pages");
 
 		$.mobile.path.set("bar/bing?foo=bar");
 		same( $.mobile.path.makeAbsolute("?foo=bar&bak=baz"), "bar/bing?foo=bar&bak=baz", "prevents addition of many sets of query params");

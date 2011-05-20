@@ -3,7 +3,8 @@
  */
 (function($){
 	var changePageFn = $.mobile.changePage,
-			originalTitle = document.title;
+			originalTitle = document.title,
+			siteDirectory = location.pathname.replace(/[^/]+$/, "");
 	module('jquery.mobile.navigation.js', {
 		setup: function(){
 			$.mobile.urlHistory.stack = [];
@@ -14,7 +15,28 @@
 		}
 	});
 
-	asyncTest( "changepage will only run once when a new page is visited", function(){
+	asyncTest( "changepage runs once when called with an element", function(){
+		var called = 0,
+				newChangePage = function(a,b,c,d,e){
+					changePageFn( a,b,c,d,e );
+					called ++;
+				};
+
+		$.testHelper.sequence([
+			// avoid initial page load triggering changePage early
+			function(){
+				$.mobile.changePage = newChangePage;
+				newChangePage($("#bar"));
+			},
+
+			function(){
+				ok(called == 1, "change page should be called once");
+				$.mobile.changePage = changePageFn;
+				start();
+			}], 500);
+	});
+
+	asyncTest( "changepage runs twice when triggered by a link", function(){
 		var called = 0,
 				newChangePage = function(a,b,c,d,e){
 					changePageFn( a,b,c,d,e );
@@ -29,7 +51,8 @@
 			},
 
 			function(){
-				ok(called == 1, "change page should be called once");
+				ok(called == 2, "change page should be called twice");
+				$.mobile.changePage = changePageFn;
 				start();
 			}], 500);
 	});
@@ -166,7 +189,7 @@
 	};
 
 	test( "when loading a page where data-url is not defined on a sub element hash defaults to the url", function(){
-		testDataUrlHash("#non-data-url a", new RegExp("^#/tests/unit/navigation/data-url-tests/non-data-url.html$"));
+		testDataUrlHash("#non-data-url a", new RegExp("^#" + siteDirectory + "data-url-tests/non-data-url.html$"));
 	});
 
 	test( "data url works for nested paths", function(){
