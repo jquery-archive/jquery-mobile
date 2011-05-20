@@ -13,10 +13,11 @@ textarea.ui-input-text { height: 50px; -webkit-transition: height 200ms linear; 
 .ui-input-search .ui-input-clear-hidden { display: none; }
 
 /* orientation adjustments - incomplete!*/
-.min-width-480px label.ui-input-text  { vertical-align: top;   }
-.min-width-480px label.ui-input-text { display: inline-block;  width: 20%;  margin: 0 2% 0 0; }
-.min-width-480px input.ui-input-text, 
-.min-width-480px textarea.ui-input-text, 
-.min-width-480px .ui-input-search { width: 60%; display: inline-block; } 
-.min-width-480px .ui-input-search { width: 50%; }
-.min-width-480px .ui-input-search input.ui-input-text { width: 98%; /*echos rule from above*/ }
+@media all and (min-width: 450px){
+	label.ui-input-text  { vertical-align: top; display: inline-block;  width: 20%;  margin: 0 2% 0 0 }
+	input.ui-input-text, 
+	textarea.ui-input-text, 
+	.ui-input-search { width: 60%; display: inline-block; } 
+	.ui-input-search { width: 50%; }
+	.ui-input-search input.ui-input-text { width: 98%; /*echos rule from above*/ }
+}

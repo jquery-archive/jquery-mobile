@@ -8,6 +8,7 @@ combined/
 combine/
 compiled/
 gitstatus.log
+refreshCDN
 .idea
 *.iml
 *.ipr

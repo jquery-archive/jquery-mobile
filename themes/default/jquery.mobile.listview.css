@@ -26,7 +26,9 @@ ol.ui-listview .ui-li-jsnumbering:before { content: "" !important; } /* to avoid
 .ui-li-thumb, .ui-li-icon, .ui-li-content { float: left; margin-right: 10px; }
 
 .ui-li-aside { float: right; width: 50%; text-align: right; margin: .3em 0; }
-.min-width-480px .ui-li-aside { width: 45%; }
+@media all and (min-width: 480px){
+	 .ui-li-aside { width: 45%; }
+}	 
 .ui-li-divider { cursor: default; }
 .ui-li-has-alt .ui-btn-inner a.ui-link-inherit, .ui-li-static.ui-li-has-alt { padding-right: 95px; }
 .ui-li-count { position: absolute; font-size: 11px; font-weight: bold; padding: .2em .5em; top: 50%; margin-top: -.9em; right: 38px; }
@@ -41,7 +43,7 @@ ol.ui-listview .ui-li-jsnumbering:before { content: "" !important; } /* to avoid
 .ui-listview-filter .ui-input-search { margin: 5px; width: auto; display: block; }
 
 .ui-listview-filter-inset { margin: -15px -5px -15px -5px; background: transparent; }
-
+.ui-li.ui-screen-hidden{display:none;}
 /* Odd iPad positioning issue. */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
     .ui-li .ui-btn-text { overflow:  visible; }
