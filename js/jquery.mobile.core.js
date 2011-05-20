@@ -112,6 +112,8 @@
 			}, 150 );
 		},
 
+		// take a data attribute property, prepend the namespace
+		// and then camel case the attribute string
 		nsNormalize: function(prop){
 			if(!prop) return;
 
