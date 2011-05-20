@@ -20,7 +20,7 @@
 		//hash segment before &ui-page= is used to make Ajax request
 		subPageUrlKey: "ui-page",
 
-		//anchor links with a data-rel, or pages with a  data-role, that match these selectors will be untrackable in history
+		//anchor links with a data-rel, or pages with a	 data-role, that match these selectors will be untrackable in history
 		//(no change in URL, not bookmarkable)
 		nonHistorySelectors: "dialog",
 
@@ -110,31 +110,40 @@
 			setTimeout(function() {
 				$.event.special.scrollstart.enabled = true;
 			}, 150 );
+		},
+
+		nsNormalize: function(prop){
+			if(!prop) return;
+
+			// NOTE the spec specifies that attributes will be converted to lower case
+			//			ascii so the regex can remain simple
+			return ($.mobile.ns + prop).replace(/-([a-z])/g, function(s, capture){
+				return capture.toUpperCase();
+			});
 		}
 	});
 
 	//mobile version of data and removeData and hasData methods
 	//ensures all data is set and retrieved using jQuery Mobile's data namespace
 	$.fn.jqmData = function( prop, value ){
-		return this.data( prop ? $.mobile.ns + prop : prop, value );
+		return this.data( prop ? $.mobile.nsNormalize(prop) : prop, value );
 	};
 
 	$.jqmData = function( elem, prop, value ){
-		return $.data( elem, prop && $.mobile.ns + prop, value );
+		return $.data( elem, $.mobile.nsNormalize(prop), value );
 	};
 
 	$.fn.jqmRemoveData = function( prop ){
-		return this.removeData( $.mobile.ns + prop );
+		return this.removeData( $.mobile.nsNormalize(prop) );
 	};
 
 	$.jqmRemoveData = function( elem, prop ){
-		return $.removeData( elem, prop && $.mobile.ns + prop );
+		return $.removeData( elem, $.mobile.nsNormalize(prop) );
 	};
 
 	$.jqmHasData = function( elem, prop ){
-		return $.hasData( elem, prop && $.mobile.ns + prop );
+		return $.hasData( elem, $.mobile.nsNormalize(prop) );
 	};
-
 
 	// Monkey-patching Sizzle to filter the :jqmData selector
 	var oldFind = $.find;

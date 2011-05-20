@@ -41,15 +41,15 @@
 
 		same( $("body").jqmData("foo"), true, "getting data returns the right value" );
 
-		same( $("body").data($.mobile.ns + "foo"), true, "data was set using namespace" );
+		same( $("body").data($.mobile.nsNormalize("foo")), true, "data was set using namespace" );
 
 		same( $("body").jqmData("foo", undefined), true, "getting data still returns the value if there's an undefined second arg" );
 
-		same( $("body").jqmData(), { "nstest-foo": true}, "passing no arguments returns a hash with all set properties" );
+		same( $("body").jqmData(), { "nstestFoo": true}, "passing no arguments returns a hash with all set properties" );
 
-		same( $("body").jqmData(undefined), { "nstest-foo": true}, "passing a single undefined argument returns a hash with all set properties" );
+		same( $("body").jqmData(undefined), { "nstestFoo": true}, "passing a single undefined argument returns a hash with all set properties" );
 
-		same( $("body").jqmData(undefined, undefined), {"nstest-foo": true}, "passing 2 undefined arguments returns a hash with all set properties" );
+		same( $("body").jqmData(undefined, undefined), {"nstestFoo": true}, "passing 2 undefined arguments returns a hash with all set properties" );
 
 		same( $("body").jqmRemoveData("foo"), $("body"), "jqmRemoveData returns the element" );
 
@@ -63,15 +63,15 @@
 
 		same( $.jqmData(document.body, "foo"), true, "getting data returns the right value" );
 
-		same( $.data(document.body, $.mobile.ns + "foo"), true, "data was set using namespace" );
+		same( $.data(document.body, $.mobile.nsNormalize("foo")), true, "data was set using namespace" );
 
 		same( $.jqmData(document.body, "foo", undefined), true, "getting data still returns the value if there's an undefined second arg" );
 
-		same( $.jqmData(document.body), { "nstest-foo": true}, "passing no arguments returns a hash with all set properties" );
+		same( $.jqmData(document.body), { "nstestFoo": true}, "passing no arguments returns a hash with all set properties" );
 
-		same( $.jqmData(document.body, undefined), { "nstest-foo": true}, "passing a single undefined argument returns a hash with all set properties" );
+		same( $.jqmData(document.body, undefined), { "nstestFoo": true}, "passing a single undefined argument returns a hash with all set properties" );
 
-		same( $.jqmData(document.body, undefined, undefined), {"nstest-foo": true}, "passing 2 undefined arguments returns a hash with all set properties" );
+		same( $.jqmData(document.body, undefined, undefined), {"nstestFoo": true}, "passing 2 undefined arguments returns a hash with all set properties" );
 
 		same( $.jqmRemoveData(document.body, "foo"), undefined, "jqmRemoveData returns the undefined value" );
 
