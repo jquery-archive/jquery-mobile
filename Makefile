@@ -94,7 +94,6 @@ css: init
 # Build the minified CSS file
 cssmin: init css
 	# Build the minified CSS file
-	@@head -8 js/jquery.mobile.core.js | ${SED_VER} > ${OUTPUT}/${CSSMIN}
 	@@java -jar build/yuicompressor-2.4.4.jar --type css ${OUTPUT}/${CSS} >> ${OUTPUT}/${CSSMIN}
 
 # Build the normal JS file
