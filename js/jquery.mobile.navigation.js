@@ -191,14 +191,14 @@
 
 		//existing base tag?
 		$base = $head.children( "base" ),
-		
-		//get domain path 
+
+		//get domain path
 		//(note: use explicit protocol here, protocol-relative urls won't work as expected on localhost)
 		docBase = location.protocol + "//" + location.host,
-		
+
 		//initialPath for first page load without hash. pathname (href - search)
 		initialPath = docBase + location.pathname;
-		
+
 		//already a base element?
 		if ( $base.length ) {
 			var href = $base.attr( "href" );
@@ -212,7 +212,7 @@
 					docBase = href;
 				}
 			}
-			
+
 			//make sure docBase ends with a slash
 			docBase = docBase  + ( docBase.charAt( docBase.length - 1 ) === "/" ? " " : "/" );
 		}
@@ -307,14 +307,14 @@
 			//jump to top or prev scroll, sometimes on iOS the page has not rendered yet.
 			$.mobile.silentScroll( toPage.jqmData( "lastScroll" ) || 0 );
 			$( document ).one( "silentscroll", function() { reFocus( toPage ); } );
-	
+
 			//trigger show/hide events
 			if( fromPage ) {
 				fromPage.data( "page" )._trigger( "hide", null, { nextPage: toPage } );
 			}
 			//trigger pageshow, define prevPage as either fromPage or empty jQuery obj
 			toPage.data( "page" )._trigger( "show", null, { prevPage: fromPage || $( "" ) } );
-	
+
 		});
 
 		return promise;
@@ -538,7 +538,7 @@
 				// Remove loading message.
 				if ( settings.showLoadMsg ) {
 					$.mobile.hidePageLoadingMsg();
-		
+
 					//show error message
 					$( "<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h1>"+ $.mobile.pageLoadErrorMessage +"</h1></div>" )
 						.css({ "display": "block", "opacity": 0.96, "top": $window.scrollTop() + 100 })
@@ -697,17 +697,17 @@
 
 		promise.done(function() {
 			removeActiveLinkClass();
-	
+
 			//if there's a duplicateCachedPage, remove it from the DOM now that it's hidden
 			if ( settings.duplicateCachedPage ) {
 				settings.duplicateCachedPage.remove();
 			}
-	
+
 			//remove initial build class (only present on first pageshow)
 			$html.removeClass( "ui-mobile-rendering" );
-	
+
 			releasePageTransitionLock();
-			
+
 			// Let listeners know we're all done changing the current page.
 			mpc.trigger( "changepage" );
 		});

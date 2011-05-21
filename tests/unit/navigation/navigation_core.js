@@ -6,7 +6,7 @@
 			originalTitle = document.title,
 			siteDirectory = location.pathname.replace(/[^/]+$/, "");
 	module('jquery.mobile.navigation.js', {
-		setup: function(){
+		teardown: function(){
 			$.mobile.urlHistory.stack = [];
 			$.mobile.urlHistory.activeIndex = 0;
 			$.mobile.changePage = changePageFn;
@@ -58,10 +58,10 @@
 	});
 
 	asyncTest( "forms with data attribute ajax set to false will not call changePage", function(){
-		var called = false,
-				newChangePage = function(){
-					called = true;
-				};
+		var called = false;
+		var newChangePage = function(){
+			called = true;
+		};
 
 		$.testHelper.sequence([
 			// avoid initial page load triggering changePage early
@@ -77,7 +77,7 @@
 			function(){
 				ok(!called, "change page should not be called");
 				start();
-			}], 500);
+			}], 1000);
 	});
 
 	asyncTest( "forms with data attribute ajax not set or set to anything but false will call changepage", function(){

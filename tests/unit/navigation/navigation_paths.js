@@ -3,9 +3,12 @@
  */
 (function($){
 	var testPageLoad = function(testPageAnchorSelector, expectedTextValue){
-		expect( 1 );
+		expect( 2 );
 
-		$.testHelper.sequence([
+		// remove cached pages to make sure the page request hits the test
+		$(".ui-page > .test-value").parents(".ui-page").remove();
+
+		$.testHelper.pageSequence([
 			// open our test page
 			function(){
 				$.testHelper.openPage("#pathing-tests");
@@ -13,20 +16,25 @@
 
 			// navigate to the linked page
 			function(){
-				$( ".ui-page-active a" + testPageAnchorSelector ).click();
+				var page = $.mobile.activePage;
+
+				// check that the reset page isn't still open
+				equal("", page.find(".reset-value").text());
+
+				//click he test page link to execute the path
+				page.find("a" + testPageAnchorSelector).click();
 			},
 
 			// verify that the page has changed and the expected text value is present
 			function(){
-				same($(".ui-page-active .test-value").text(), expectedTextValue);
+				same($.mobile.activePage.find(".test-value").text(), expectedTextValue);
+				$.testHelper.openPage("#pathing-tests-reset");
 			},
 
-			// open the reset page to help signify when pages aren't changing
 			function(){
-				$.testHelper.openPage("#pathing-tests-reset");
 				start();
 			}
-		], 800);
+		]);
 	};
 
 	// all of these alterations assume location.pathname will be a directory
