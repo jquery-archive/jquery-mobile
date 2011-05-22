@@ -5,9 +5,6 @@
 	var testPageLoad = function(testPageAnchorSelector, expectedTextValue){
 		expect( 2 );
 
-		// remove cached pages to make sure the page request hits the test
-		$(".ui-page > .test-value").parents(".ui-page").remove();
-
 		$.testHelper.pageSequence([
 			// open our test page
 			function(){
