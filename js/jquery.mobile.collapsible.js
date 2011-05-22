@@ -57,9 +57,8 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			if( !collapsibleParent.length ){
 				collapsibleHeading
 					.find('a:eq(0)')	
-					.addClass('ui-corner-all')
-						.find('.ui-btn-inner')
-						.addClass('ui-corner-all');
+				                 .find('.ui-btn-inner')
+				                        .addClass('ui-corner-all');
 			}
 			else {
 				if( collapsibleContain.jqmData('collapsible-last') ){
