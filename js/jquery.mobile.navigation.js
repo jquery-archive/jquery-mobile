@@ -575,6 +575,12 @@
 			return;
 		}
 
+		// Set the isPageTransitioning flag to prevent any requests from
+		// entering this method while we are in the midst of loading a page
+		// or transitioning.
+
+		isPageTransitioning = true;
+
 		var settings = $.extend( {}, $.mobile.changePage.defaults, options );
 
 		// Make sure we have a pageContainer to work with.
@@ -628,10 +634,9 @@
 		// XXX_jblas: We need to remove this at some point when we allow for transitions
 		//            to the same page.
 		if( active && active.page[0] === toPage[0] ) {
+			isPageTransitioning = false;
 			return;
 		}
-
-		isPageTransitioning = true;
 
 		// We need to make sure the page we are given has already been enhanced.
 		enhancePage( toPage, settings.role );
@@ -707,6 +712,7 @@
 			$html.removeClass( "ui-mobile-rendering" );
 
 			releasePageTransitionLock();
+
 
 			// Let listeners know we're all done changing the current page.
 			mpc.trigger( "changepage" );
@@ -924,6 +930,6 @@
 		else {
 			$.mobile.changePage( $.mobile.firstPage, { transition: transition, changeHash: false, fromHashChange: true } );
 		}
-		});
+	});
 
 })( jQuery );

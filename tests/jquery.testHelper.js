@@ -92,7 +92,9 @@
 			// bind the recursive call to the event
 			$.mobile.pageContainer.one(event, function(){
 				clearTimeout(warnTimer);
-				self.pageSequence(fns, event);
+
+				// Let the current stack unwind before we fire off the next item in the sequence.
+				setTimeout(function(){ self.pageSequence(fns, event); }, 0);
 			});
 
 			// invoke the function which should, in some fashion,
