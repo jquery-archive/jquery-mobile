@@ -6,8 +6,8 @@
 .ui-select { display: block; position: relative; }
 .ui-select select { position: absolute; left: -9999px; top: -9999px; }
 .ui-select .ui-btn { overflow: hidden; }
-.ui-select .ui-btn select { cursor: pointer; -webkit-appearance: button; left: 0; top:0; width: 100%; height: 100%; opacity: 0; -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; filter: alpha(opacity=0); }
-.ui-select .ui-btn select.ui-select-nativeonly { opacity: 1; }
+.ui-select .ui-btn select { cursor: pointer; -webkit-appearance: button; left: 0; top:0; width: 100%; height: 100%; text-indent: -999em; opacity: 0.0001; -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; filter: alpha(opacity=0); }
+.ui-select .ui-btn select.ui-select-nativeonly { opacity: 1; text-indent: 0; }
 
 .ui-select .ui-btn-icon-right .ui-btn-inner { padding-right: 45px; } 
 .ui-select .ui-btn-icon-right .ui-icon { right: 15px;  }
