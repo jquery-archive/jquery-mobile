@@ -315,8 +315,11 @@
 	});
 
 	asyncTest( "Page title updates properly from heading text in header when loading an external page", function(){
-		$.testHelper.openPage("#ajax-title-page");
-		$.testHelper.sequence([
+		$.testHelper.pageSequence([
+			function(){
+				$.testHelper.openPage("#ajax-title-page");
+			},
+
 			function(){
 				$("#titletest3").click();
 			},
@@ -325,7 +328,7 @@
 				same(document.title, "Title Heading");
 				start();
 			}
-		], 500);
+		]);
 	});
 
 	asyncTest( "Page links to the current active page result in the same active page", function(){
