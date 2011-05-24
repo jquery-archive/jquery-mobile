@@ -735,8 +735,6 @@
 	$( "form" ).live('submit', function( event ) {
 		var $this = $( this );
 		if( !$.mobile.ajaxEnabled ||
-			//TODO: deprecated - remove at 1.0
-			!$.mobile.ajaxFormsEnabled ||
 			$this.is( ":jqmData(ajax='false')" ) ) {
 				return;
 			}
@@ -853,9 +851,7 @@
 
 		$activeClickedLink = $link.closest( ".ui-btn" );
 
-		if( isExternal || hasAjaxDisabled || hasTarget || !$.mobile.ajaxEnabled ||
-			// TODO: deprecated - remove at 1.0
-			!$.mobile.ajaxLinksEnabled ) {
+		if( isExternal || hasAjaxDisabled || hasTarget || !$.mobile.ajaxEnabled ) {
 			//remove active link class if external (then it won't be there if you come back)
 			window.setTimeout( function() { removeActiveLinkClass( true ); }, 200 );
 

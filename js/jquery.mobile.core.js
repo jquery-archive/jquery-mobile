@@ -36,14 +36,6 @@
 		//automatically load and show pages based on location.hash
 		hashListeningEnabled: true,
 
-		// TODO: deprecated - remove at 1.0
-		//automatically handle link clicks through Ajax, when possible
-		ajaxLinksEnabled: true,
-
-		// TODO: deprecated - remove at 1.0
-		//automatically handle form submissions through Ajax, when possible
-		ajaxFormsEnabled: true,
-
 		//set default page transition - 'none' for no transitions
 		defaultPageTransition: "slide",
 
