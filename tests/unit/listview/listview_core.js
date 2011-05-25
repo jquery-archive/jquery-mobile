@@ -119,10 +119,10 @@
 				// https://github.com/jquery/jquery-mobile/issues/1617
 				$.testHelper.openPage("#nested-lists-test");
 			},
-
-			function(){
+			function() {
 				$('.ui-page-active li:eq(2) a:eq(0)').click();
-	
+			},
+			function(){
 				equal($('.ui-page-active .ui-content .ui-listview li').text(), "Sub Item 10Sub Item 11Sub Item 12", 'Text should be "Sub Item 10Sub Item 11Sub Item 12"');
 				start();
 			}
