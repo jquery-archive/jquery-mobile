@@ -16,8 +16,7 @@
 label.ui-select { font-size: 16px; line-height: 1.4;  font-weight: normal; margin: 0 0 .3em; display: block; }
 
 /*listbox*/
-.ui-select .ui-btn-text, .ui-selectmenu .ui-btn-text { display: inline-block; min-height: 1em; }
-.ui-select .ui-btn-text { text-overflow: ellipsis; overflow: hidden; display: block;}
+.ui-select .ui-btn-text, .ui-selectmenu .ui-btn-text { text-overflow: ellipsis; overflow: hidden; display: block; min-height: 1em; }
 
 .ui-selectmenu { position: absolute; padding: 0; z-index: 100 !important; width: 80%; max-width: 350px; padding: 6px; }
 .ui-selectmenu .ui-listview { margin: 0; }
