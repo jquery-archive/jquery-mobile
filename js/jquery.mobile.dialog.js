@@ -45,8 +45,9 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 				}
 				
 				if( $targetel.length && !$targetel.jqmData("transition") ){
+					var active = $.mobile.urlHistory.getActive();
 					$targetel
-						.attr("data-" + $.mobile.ns + "transition", $.mobile.urlHistory.getActive().transition )
+						.attr("data-" + $.mobile.ns + "transition", ( active ? active.transition : $.mobile.defaultDialogTransition ) )
 						.attr("data-" + $.mobile.ns + "direction", "reverse");
 				}
 			});
