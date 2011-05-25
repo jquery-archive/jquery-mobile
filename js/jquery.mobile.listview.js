@@ -5,6 +5,10 @@
 * http://jquery.org/license
 */
 (function($, undefined ) {
+//Keeps track of the number of lists per page UID
+//This allows support for multiple nested list in the same page
+//https://github.com/jquery/jquery-mobile/issues/1617
+var listCountPerPage = {};
 
 $.widget( "mobile.listview", $.mobile.widget, {
 	options: {
@@ -199,13 +203,18 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			self = this,
 			persistentFooterID = parentPage.find( ":jqmData(role='footer')" ).jqmData( "id" );
 
+		if (typeof(listCountPerPage[parentPage[0][$.expando]]) === 'undefined') {
+            listCountPerPage[parentPage[0][$.expando]] = -1;
+        }
+
 		$( parentList.find( "li>ul, li>ol" ).toArray().reverse() ).each(function( i ) {
 			var list = $( this ),
+				listId = list.attr("id") || ++listCountPerPage[parentPage[0][$.expando]],
 				parent = list.parent(),
 				nodeEls = $( list.prevAll().toArray().reverse() ),
 				nodeEls = nodeEls.length ? nodeEls : $( "<span>" + $.trim(parent.contents()[ 0 ].nodeValue) + "</span>" ),
 				title = nodeEls.first().text(),//url limits to first 30 chars of text
-				id = parentId + "&" + $.mobile.subPageUrlKey + "=" + self._idStringEscape(title + " " + i),
+				id = (parentId ? (parentId + "&") : "") + $.mobile.subPageUrlKey + "=" + listId + "-" + i,
 				theme = list.jqmData( "theme" ) || o.theme,
 				countTheme = list.jqmData( "counttheme" ) || parentList.jqmData( "counttheme" ) || o.countTheme,
 				newPage = list.detach()
