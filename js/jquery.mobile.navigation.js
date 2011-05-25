@@ -728,6 +728,23 @@
 		duplicateCachedPage: undefined,
 		pageContainer: undefined
 	};
+	
+	//remove page(s) from the DOM
+	//removes all pages passed by selector or reference EXCEPT the active page and the root/origin page.
+	$.mobile.removePage = function( selector ) {
+		var toRemove;
+		if ( typeof selector !== "string" ) {
+			toRemove= jQuery( selector );
+		} else {
+			// by url, id, class, or other user-supplied selector
+			var toRemove= $( ":jqmData(url='" + selector + "'), " + selector );
+		}
+		if ( toRemove.length ) {
+			// remove only pages that aren't currently active, nor origin.
+			toRemove.filter( ":jqmData(role=page)" ).not( ".ui-page-active, :jqmData(url='" + $.mobile.urlHistory.stack[0].url + "')" ).remove();
+		}
+	};
+	
 
 /* Event Bindings - hashchange, submit, and click */
 
