@@ -736,8 +736,15 @@
 		if ( typeof selector !== "string" ) {
 			toRemove= jQuery( selector );
 		} else {
-			// by url, id, class, or other user-supplied selector
-			var toRemove= $( ":jqmData(url='" + selector + "'), " + selector );
+			//by data-url...
+			try {
+				//there are failure cases to trap, for example when selector= ":jqmData(url='anything')", a plausible passed-in parameter.
+				toRemove= $( ":jqmData(url='" + selector + "')");
+			} catch( e ) {
+				toRemove= $();
+			}
+			//... and/or id, class, or other user-supplied selector
+			toRemove.add( selector );
 		}
 		if ( toRemove.length ) {
 			// remove only pages that aren't currently active, nor origin.
