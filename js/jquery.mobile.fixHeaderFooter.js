@@ -75,7 +75,7 @@ $.fixedToolbars = (function(){
 
 		Works with $(document), not $(window) : Opera Mobile (WinMO phone; kinda broken anyway)
 		Works with $(window), not $(document) : IE 7/8
-		Works with either $(window) or $(document) : Chrome, FF 3.6/4, IE 7/8, Android 1.6/2.1, iOS
+		Works with either $(window) or $(document) : Chrome, FF 3.6/4, Android 1.6/2.1, iOS
 		Needs work either way : BB5, Opera Mobile (iOS)
 
 */
