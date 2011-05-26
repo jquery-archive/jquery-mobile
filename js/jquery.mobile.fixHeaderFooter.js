@@ -67,7 +67,8 @@ $.fixedToolbars = (function(){
 						stateBefore = null;
 					}
 				}
-			});
+			})
+			.bind('silentscroll', showEventCallback);
 
 /*		
 		The below checks first for a $(document).scrollTop() value, and if zero, binds scroll events to $(window) instead. If the scrollTop value is actually zero, both will return zero anyway.
@@ -105,8 +106,7 @@ $.fixedToolbars = (function(){
 					$.fixedToolbars.startShowTimer();
 				}
 				stateBefore = null;
-			})
-			.bind('silentscroll', showEventCallback);
+			});
 
 			$(window).bind('resize', showEventCallback);
 	});
