@@ -755,6 +755,14 @@
 
 /* Event Bindings - hashchange, submit, and click */
 
+	//data-cache="false" on pages -- invoke $.mobile.removePage()
+	$( document ).bind( "pagehide", function( event, data ) {
+		var hiddenPage= $( event.target );
+		if ( hiddenPage.jqmData( "cache" ) === false ) {
+ 			$.mobile.removePage( hiddenPage );
+		}
+    });
+
 	//bind to form submit events, handle with Ajax
 	$( "form" ).live('submit', function( event ) {
 		var $this = $( this );

@@ -432,7 +432,6 @@
 			function(){ $("#removePageTest-first a:first").click(); },
 			function(){ $("#removePageTest-second a:first").click(); },
 			function(){
-				
 				// how many pages are we starting with
 				var numPages= $( ":jqmData(role='page')" ).length,
 					numElements= $("*").length;
@@ -460,8 +459,14 @@
 				//try deleting the home page
 				$.mobile.removePage( $.mobile.urlHistory.stack[0].url );
 				same( numPages, numPages= $( ":jqmData(role='page')" ).length, "$.mobile.removePage() doesn\'t remove the home page");
-
+			},
+			//testing data-cache="false"
+			function() { $("#removePageTest-third a:first").click(); },
+			// transition back past the dialog
+			function() { window.history.back(); },
+			function() {
+				same(  $("#removePageTest-fourth").length, 0, "page with data-cache=\"false\" does not persist in the DOM" );
 				start();
-			}], 1000);
+		}], 1000);
 	});
-})(jQuery);
+})( jQuery );
