@@ -223,6 +223,27 @@
 
 </div>
 
+<div id="removePageTest-first" data-nstest-role="page">
+  <a href="#removePageTest-second" data-nstest-transition="slideup" data-nstest-role="button" >
+		Page 2
+	</a>
+</div>
+
+<div id="removePageTest-second" data-nstest-role="page">
+	<a href="#removePageTest-third" data-nstest-transition="slideup" data-nstest-role="button" >
+		Page 3
+	</a>
+</div>
+
+<div id="removePageTest-third" data-nstest-role="page">
+  <a href="#removePageTest-first" data-nstest-transition="slideup" data-nstest-role="button">
+		Page 1
+	</a>
+  <a href="#removePageTest-second" data-nstest-transition="slideup" data-nstest-role="button">
+		Page 2
+	</a>
+</div>
+
 <div data-nstest-role="page" id="pathing-tests-reset">
 	<div class="reset-value">page didn't change!</div>
 </div>
