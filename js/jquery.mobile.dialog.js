@@ -35,7 +35,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		*/
 		$el
 			.bind( "vclick submit", function( e ) {
-				var $target = $( e.target ).closest( e.type == "vclick" ? "a" : "form" );
+				var $target = $( e.target ).closest( e.type === "vclick" ? "a" : "form" );
 				
 				if( $target.length && !$target.jqmData( "transition" ) ) {
 					$target
