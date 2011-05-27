@@ -110,7 +110,7 @@ init:
 
 # Build the minified JS file
 min: init js
-	# Build the minified Javascript file
+	# Build the minified JavaScript file
 	@@head -8 js/jquery.mobile.core.js | ${SED_VER} > ${OUTPUT}/${MIN}
 	@@java -jar build/google-compiler-20110405.jar --js ${OUTPUT}/${JS} --warning_level QUIET --js_output_file ${MIN}.tmp
 	@@cat ${MIN}.tmp >> ${OUTPUT}/${MIN}
