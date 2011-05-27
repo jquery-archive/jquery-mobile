@@ -558,7 +558,7 @@
 
 	$.mobile.loadPage.defaults = {
 		type: "get",
-		data: "undefined",
+		data: undefined,
 		reloadPage: false,
 		role: "page",
 		showLoadMsg: true,
