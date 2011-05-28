@@ -30,7 +30,11 @@ $.widget( "mobile.page", $.mobile.widget, {
 	},
 
 	_create: function() {
-		var $elem = this.element,
+    this.enhance();
+	},
+	
+	enhance: function() {
+	  var $elem = this.element,
 			o = this.options;
 
 		this.keepNative = ":jqmData(role='none'), :jqmData(role='nojs')" + (o.keepNative ? ", " + o.keepNative : "");
