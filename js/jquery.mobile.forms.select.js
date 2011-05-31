@@ -245,7 +245,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				}
 
 				// trigger change if value changed
-				if( oldIndex !== newIndex ){
+				if( oldIndex !== newIndex || isMultiple ){
 					select.trigger( "change" );
 				}
 
