@@ -38,8 +38,9 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 				var $target = $( e.target ).closest( e.type === "vclick" ? "a" : "form" );
 				
 				if( $target.length && !$target.jqmData( "transition" ) ) {
+					var active = $.mobile.urlHistory.getActive() || {};
 					$target
-						.attr( "data-" + $.mobile.ns + "transition", $.mobile.urlHistory.getActive().transition )
+						.attr( "data-" + $.mobile.ns + "transition", ( active.transition || $.mobile.defaultDialogTransition ) )
 						.attr( "data-" + $.mobile.ns + "direction", "reverse" );
 				}
 			});

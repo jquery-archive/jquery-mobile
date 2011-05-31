@@ -396,7 +396,7 @@
 
 			// The absolute version of the URL passed into the function. This
 			// version of the URL may contain dialog/subpage params in it.
-			absUrl = url, // XXX_jblas: path.makeAbsolute( url ),
+			absUrl = path.stripHash( url ), // XXX_jblas: path.makeAbsolute( url ),
 
 			// The absolute version of the URL minus any dialog/subpage params.
 			// In otherwords the real URL of the page to be loaded.
@@ -421,8 +421,9 @@
 				settings.data = $.param( settings.data );
 			}
 			// XXX_jblas: We should be checking to see if the url already has a query in it.
-			url += url + "?" + settings.data;
+			absUrl += absUrl + "?" + settings.data;
 			settings.data = undefined;
+			fileUrl = path.getFilePath( absUrl );
 		}
 
 		// Check to see if the page already exists in the DOM.
@@ -440,7 +441,7 @@
 		if ( page.length ) {
 			if ( !settings.reloadPage ) {
 				enhancePage( page, settings.role );
-				deferred.resolve( url, options, page );
+				deferred.resolve( absUrl, options, page );
 				return deferred.promise();
 			}
 			dupCachedPage = page;
@@ -527,7 +528,7 @@
 					$.mobile.hidePageLoadingMsg();
 				}
 
-				deferred.resolve( url, options, page, dupCachedPage );
+				deferred.resolve( absUrl, options, page, dupCachedPage );
 			},
 			error: function() {
 				//set base back to current path
@@ -549,7 +550,7 @@
 						});
 				}
 
-				deferred.reject( url, options );
+				deferred.reject( absUrl, options );
 			}
 		});
 
@@ -558,7 +559,7 @@
 
 	$.mobile.loadPage.defaults = {
 		type: "get",
-		data: "undefined",
+		data: undefined,
 		reloadPage: false,
 		role: "page",
 		showLoadMsg: true,
@@ -567,6 +568,43 @@
 
 	// Show a specific page in the page container.
 	$.mobile.changePage = function( toPage, options ) {
+		// XXX: REMOVE_BEFORE_SHIPPING_1.0
+		// This is temporary code that makes changePage() compatible with previous alpha versions.
+		if ( typeof options !== "object" ) {
+			var opts = null;
+
+			// Map old-style call signature for form submit to the new options object format.
+			if ( typeof toPage === "object" && toPage.url && toPage.type ) {
+				opts = {
+					type: toPage.type,
+					data: toPage.data,
+					forcePageLoad: true
+				};
+				toPage = toPage.url;
+			}
+
+			// The arguments passed into the function need to be re-mapped
+			// to the new options object format.
+			var len = arguments.length;
+			if ( len > 1 ) {
+				var argNames = [ "transition", "reverse", "changeHash", "fromHashChange" ], i;
+				for ( i = 1; i < len; i++ ) {
+					var a = arguments[ i ];
+					if ( typeof a !== "undefined" ) {
+						opts = opts || {};
+						opts[ argNames[ i - 1 ] ] = a;
+					}
+				}
+			}
+
+			// If an options object was created, then we know changePage() was called
+			// with an old signature.
+			if ( opts ) {
+				return $.mobile.changePage( toPage, opts );
+			}
+		}
+		// XXX: REMOVE_BEFORE_SHIPPING_1.0
+
 		// If we are in the midst of a transition, queue the current request.
 		// We'll call changePage() once we're done with the current transition to
 		// service the request.
