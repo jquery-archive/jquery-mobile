@@ -37,7 +37,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 			.bind( "vclick submit", function( e ) {
 				var $target = $( e.target ).closest( e.type === "vclick" ? "a" : "form" );
 				
-				if( $target.length && !$target.jqmData( "transition" ) ) {
+				if( $target.length && ! $target.jqmData( "transition" ) ) {
 					var active = $.mobile.urlHistory.getActive() || {};
 					$target
 						.attr( "data-" + $.mobile.ns + "transition", ( active.transition || $.mobile.defaultDialogTransition ) )
