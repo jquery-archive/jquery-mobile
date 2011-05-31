@@ -10,11 +10,10 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		closeBtnText: "Close"
 	},
 	_create: function() {
-		var self = this,
-			$el = self.element;
+		var $el = this.element;
 		
 		/* class the markup for dialog styling */	
-		this.element			
+		$el
 			//add ARIA role
 			.attr( "role", "dialog" )
 			.addClass( "ui-page ui-dialog ui-body-a" )
@@ -34,17 +33,11 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 			  unless a data-transition is specified on the link/form
 			- if the click was on the close button, or the link has a data-rel="back" it'll go back in history naturally
 		*/
-		this.element
+		$el
 			.bind( "vclick submit", function( e ) {
-				var $target;
-				if( e.type == "vclick" ){
-					$target = $( e.target ).closest( "a" );
-				}
-				else{
-					$target = $( e.target ).closest( "form" );
-				}
+				var $target = $( e.target ).closest( e.type === "vclick" ? "a" : "form" );
 				
-				if( $target.length && !$target.jqmData("transition") ){
+				if( $target.length && ! $target.jqmData( "transition" ) ) {
 					var active = $.mobile.urlHistory.getActive() || {};
 					$target
 						.attr( "data-" + $.mobile.ns + "transition", ( active.transition || $.mobile.defaultDialogTransition ) )
