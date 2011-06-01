@@ -215,7 +215,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				nodeEls = $( list.prevAll().toArray().reverse() ),
 				nodeEls = nodeEls.length ? nodeEls : $( "<span>" + $.trim(parent.contents()[ 0 ].nodeValue) + "</span>" ),
 				title = nodeEls.first().text(),//url limits to first 30 chars of text
-				id = ( parentUrl ? ( parentUrl + "&" ) : "" ) + $.mobile.subPageUrlKey + "=" + listId + "-" + i,
+				id = ( parentUrl ? ( parentUrl + "&") : "" ) + $.mobile.subPageUrlKey + "=" + listId + "-" + i,
 				theme = list.jqmData( "theme" ) || o.theme,
 				countTheme = list.jqmData( "counttheme" ) || parentList.jqmData( "counttheme" ) || o.countTheme,
 				newPage = list.detach()
