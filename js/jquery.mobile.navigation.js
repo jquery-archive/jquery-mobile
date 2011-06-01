@@ -14,6 +14,113 @@
 		//url path helpers for use in relative url management
 		path = {
 
+			// This scary looking regular expression parses an absolute URL or its relative
+			// variants (protocol, site, document, query, and hash), into the various
+			// components (protocol, host, path, query, fragment, etc that make up the
+			// URL as well as some other commonly used sub-parts. When used with RegExp.exec()
+			// or String.match, it parses the URL into a results array that looks like this:
+			//
+			//     [0]: http://jblas:password@mycompany.com:8080/mail/inbox?msg=1234&type=unread#msg-content
+			//     [1]: http://jblas:password@mycompany.com:8080
+			//     [2]: http:
+			//     [3]: jblas:password@mycompany.com:8080
+			//     [4]: jblas:password
+			//     [5]: jblas
+			//     [6]: password
+			//     [7]: mycompany.com:8080
+			//     [8]: mycompany.com
+			//     [9]: 8080
+			//    [10]: /mail/inbox
+			//    [11]: /mail/
+			//    [12]: inbox
+			//    [13]: ?msg=1234&type=unread
+			//    [14]: #msg-content
+			//
+			urlParseRE: /^(([^:\/#\?]+:)?\/\/((?:(([^:@\/#\?]+)(?:\:([^:@\/#\?]+))?)@)?(([^:\/#\?]+)(?:\:([0-9]+))?))?)?((\/?(?:[^\/\?#]+\/)*)([^\?#]*))?(\?[^#]+)?(#.*)?/,
+
+			// Parse a URL into a structure that allows easy access to
+			// all of the URL components by name.
+			parseUrl: function( url ) {
+				var u = url || "",
+					matches = path.urlParseRE.exec(url),
+					results;
+				if ( matches ) {
+					results = {
+						href:      matches[0],
+						domain:    matches[1],
+						protocol:  matches[2],
+						authority: matches[3],
+						username:  matches[5],
+						password:  matches[6],
+						host:      matches[7],
+						hostname:  matches[8],
+						port:      matches[9],
+						pathname:  matches[10],
+						directory: matches[11],
+						filename:  matches[12],
+						search:    matches[13],
+						hash:      matches[14]
+					};
+				}
+				return results || {};
+			},
+
+			// Turn relPath into an asbolute path. absPath is
+			// an optional absolute path which describes what
+			// relPath is relative to.
+			makePathAbsolute: function( relPath, absPath ) {
+				if ( relPath && relPath.charAt( 0 ) === "/" ) {
+					return relPath
+				}
+		
+				relPath = relPath || "";
+				absPath = absPath ? absPath.replace( /^\/|\/?[^\/]*$/g, "" ) : "";
+		
+				var absStack = absPath ? absPath.split( "/" ) : [],
+					relStack = relPath.split("/");
+				for ( var i = 0; i < relStack.length; i++ ) {
+					var d = relStack[ i ];
+					switch ( d ) {
+						case ".":
+							break;
+						case "..":
+							if ( absStack.length ) {
+								absStack.pop();
+							}
+							break;
+						default:
+							absStack.push( d );
+							break;
+					}
+				}
+				return "/" + absStack.join( "/" );
+			},
+
+			// Returns true for any relative variant.
+			isRelativeUrl: function( url ) {
+				// All relative Url variants have one thing in common, no protocol.
+				return path.parseUrl(url).protocol === undefined;
+			},
+
+			// Turn the specified realtive URL into an absolute one. This function
+			// can handle all relative variants (protocol, site, document, query, fragment).
+			makeUrlAbsolute: function( relUrl, absUrl ) {
+				if ( !path.isRelativeUrl(relUrl) ) {
+					return relUrl;
+				}
+		
+				var relObj = path.parseUrl(relUrl),
+					absObj = path.parseUrl(absUrl),
+					protocol = relObj.protocol || absObj.protocol,
+					authority = relObj.authority || absObj.authority || "",
+					hasPath = relObj.pathname !== undefined,
+					pathname = path.isRelativeUrl() ? path.makePathAbsolute( relObj.pathname || absObj.filename, absObj.pathname ) : relObj.pathName,
+					search = relObj.search || ( hasPath ? "" : absObj.search ),
+					hash = relObj.hash || "";
+		
+				return protocol + "//" + authority + pathname + search + hash;
+			},
+
 			//get path from current hash, or from a file path
 			get: function( newPath ) {
 				if( newPath === undefined ) {
@@ -45,7 +152,7 @@
 			makeAbsolute: function( url ) {
 				var isHashPath = path.isPath( location.hash );
 
-				if(path.isQuery( url )) {
+				if( path.isQuery( url ) ) {
 					// if the path is a list of query params and the hash is a path
 					// append the query params to the hash (without params or dialog keys).
 					// otherwise use the pathname and append the query params
@@ -192,45 +299,30 @@
 		//existing base tag?
 		$base = $head.children( "base" ),
 
-		//get domain path
-		//(note: use explicit protocol here, protocol-relative urls won't work as expected on localhost)
-		docBase = location.protocol + "//" + location.host,
+		//tuck away the original document URL
+		documentUrl = location.href,
 
-		//initialPath for first page load without hash. pathname (href - search)
-		initialPath = docBase + location.pathname;
+		//extract out the domain and path of the documentUrl
+		documentDomainPath = documentUrl.replace(/[\?#].*/, ""),
 
-		//already a base element?
-		if ( $base.length ) {
-			var href = $base.attr( "href" );
-			if ( href ) {
-				if ( href.search( /^[^:\/]+:\/\/[^\/]+\/?/ ) === -1 ) {
-					//the href is not absolute, we need to turn it into one
-					docBase = docBase + href;
-				}
-				else {
-					//the href is an absolute url
-					docBase = href;
-				}
-			}
-
-			//make sure docBase ends with a slash
-			docBase = docBase  + ( docBase.charAt( docBase.length - 1 ) === "/" ? " " : "/" );
-		}
+		//if the document has an embedded base tag, documentBase is set to its
+		//initial value. If a base tag does not exist, then we default to the documentDomainPath.
+		documentBase = $base.length ? path.makePathAbsolute( $base.attr( "href" ), documentDomainPath ) : documentDomainPath;
 
 		//base element management, defined depending on dynamic base tag support
 		var base = $.support.dynamicBaseTag ? {
 
 			//define base element, for use in routing asset urls that are referenced in Ajax-requested markup
-			element: ( $base.length ? $base : $( "<base>", { href: initialPath } ).prependTo( $head ) ),
+			element: ( $base.length ? $base : $( "<base>", { href: documentBase } ).prependTo( $head ) ),
 
 			//set the generated BASE element's href attribute to a new page's base path
 			set: function( href ) {
-				base.element.attr( "href", docBase + path.get( href ) );
+				base.element.attr( "href", path.makeUrlAbsolute( href, documentBase ) );
 			},
 
 			//set the generated BASE element's href attribute to a new page's base path
 			reset: function() {
-				base.element.attr( "href", initialPath );
+				base.element.attr( "href", documentBase );
 			}
 
 		} : undefined;
