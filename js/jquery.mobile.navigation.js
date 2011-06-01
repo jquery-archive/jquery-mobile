@@ -766,8 +766,40 @@
 		duplicateCachedPage: undefined,
 		pageContainer: undefined
 	};
+	
+	//remove page(s) from the DOM
+	//removes all pages passed by selector or reference EXCEPT the active page and the root/origin page.
+	$.mobile.removePage = function( selector ) {
+		var toRemove;
+		if ( typeof selector !== "string" ) {
+			toRemove= jQuery( selector );
+		} else {
+			//by data-url...
+			try {
+				//there are failure cases to trap, for example when selector= ":jqmData(url='anything')", a plausible passed-in parameter.
+				toRemove= $( ":jqmData(url='" + selector + "')");
+			} catch( e ) {
+				toRemove= $();
+			}
+			//... and/or id, class, or other user-supplied selector
+			toRemove.add( selector );
+		}
+		if ( toRemove.length ) {
+			// remove only pages that aren't currently active, nor origin.
+			toRemove.filter( ":jqmData(role=page)" ).not( ".ui-page-active, :jqmData(url='" + $.mobile.urlHistory.stack[0].url + "')" ).remove();
+		}
+	};
+	
 
 /* Event Bindings - hashchange, submit, and click */
+
+	//data-cache="false" on pages -- invoke $.mobile.removePage()
+	$( document ).bind( "pagehide", function( event, data ) {
+		var hiddenPage= $( event.target );
+		if ( hiddenPage.jqmData( "cache" ) === false ) {
+ 			$.mobile.removePage( hiddenPage );
+		}
+    });
 
 	//bind to form submit events, handle with Ajax
 	$( "form" ).live('submit', function( event ) {

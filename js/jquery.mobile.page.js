@@ -11,6 +11,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 		backBtnText: "Back",
 		addBackBtn: false,
 		backBtnTheme: null,
+		cache: true,
 		degradeInputs: {
 			color: false,
 			date: false,
@@ -104,6 +105,9 @@ $.widget( "mobile.page", $.mobile.widget, {
 
 			} else if ( role === "page" ) {
 				$this.addClass( "ui-body-" + (theme || "c") );
+				if ( o.cache === false ) {
+					$this.attr( "data-"+ $.mobile.ns +"cache", "false" )
+				}
 			}
 
 			switch(role) {
