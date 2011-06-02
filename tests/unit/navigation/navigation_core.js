@@ -422,4 +422,47 @@
 			}
 		], 1000);
 	});
-})(jQuery);
+	
+	//$.mobile.removePage() tests.   This test REMOVES PAGES so best keep this last.
+	asyncTest( "$.mobile.removePage() tests", function() {
+
+		$.testHelper.openPage( "#removePageTest-first" );
+
+		$.testHelper.sequence( [
+			function() { $( "#removePageTest-first a:first" ).click(); },
+			function() { $( "#removePageTest-second a:first" ).click(); },
+			function() {
+
+				// how many pages are we starting with
+				var numPages= $( ":jqmData(role='page')" ).length,
+					numElements= $( "*" ).length;
+
+				//passing nothing to $.mobile.removePage()
+				$.mobile.removePage();
+				same( numElements, numElements= $( "*" ).length, "Passing nothing to $.mobile.removePage() does nothing" );
+
+				//passing nonsense to $.mobile.removePage()
+				$.mobile.removePage( "qwuyetshets" );
+				same( numElements, numElements= $( "*" ).length, "Passing nonsense to $.mobile.removePage() does nothing" );
+
+				//passing unrelated selectors to $.mobile.removePage()
+				$.mobile.removePage( "a" );
+				same( numElements, numElements= $( "*" ).length, "Passing unrelated but valid string selectors to $.mobile.removePage() does nothing" );
+
+				//passing unrelated jQuery collections to $.mobile.removePage()
+				$.mobile.removePage( $( "a" ) );
+				same( numPages, numPages= $( ":jqmData(role='page')" ).length, "Passing unrelated jQuery collections to $.mobile.removePage() does nothing" );
+
+				//try deleting the active page
+				$.mobile.removePage( ".ui-page-active" );
+				same( numPages, numPages= $( ":jqmData(role='page')" ).length, "$.mobile.removePage() doesn\'t remove the active page" );
+
+				//try deleting the home page
+				$.mobile.removePage( $.mobile.urlHistory.stack[0].url );
+				same( numPages, numPages= $( ":jqmData(role='page')" ).length, "$.mobile.removePage() doesn\'t remove the home page" );
+
+				start();
+			}], 1000 );
+	} );
+	
+})( jQuery );
