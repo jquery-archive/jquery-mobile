@@ -5,6 +5,10 @@
 * http://jquery.org/license
 */
 (function($, undefined ) {
+//Keeps track of the number of lists per page UID
+//This allows support for multiple nested list in the same page
+//https://github.com/jquery/jquery-mobile/issues/1617
+var listCountPerPage = {};
 
 $.widget( "mobile.listview", $.mobile.widget, {
 	options: {
@@ -193,19 +197,25 @@ $.widget( "mobile.listview", $.mobile.widget, {
 	_createSubPages: function() {
 		var parentList = this.element,
 			parentPage = parentList.closest( ".ui-page" ),
-			parentId = parentPage.jqmData( "url" ),
+			parentUrl = parentPage.jqmData( "url" ),
+			parentId  = parentUrl || parentPage[0][$.expando],
 			o = this.options,
 			dns = "data-" + $.mobile.ns,
 			self = this,
 			persistentFooterID = parentPage.find( ":jqmData(role='footer')" ).jqmData( "id" );
 
+		if (typeof(listCountPerPage[parentId]) === 'undefined') {
+            listCountPerPage[parentId] = -1;
+        }
+
 		$( parentList.find( "li>ul, li>ol" ).toArray().reverse() ).each(function( i ) {
 			var list = $( this ),
+				listId = list.attr("id") || ++listCountPerPage[parentId],
 				parent = list.parent(),
 				nodeEls = $( list.prevAll().toArray().reverse() ),
 				nodeEls = nodeEls.length ? nodeEls : $( "<span>" + $.trim(parent.contents()[ 0 ].nodeValue) + "</span>" ),
 				title = nodeEls.first().text(),//url limits to first 30 chars of text
-				id = parentId + "&" + $.mobile.subPageUrlKey + "=" + self._idStringEscape(title + " " + i),
+				id = (parentUrl ? (parentUrl + "&") : "") + $.mobile.subPageUrlKey + "=" + listId + "-" + i,
 				theme = list.jqmData( "theme" ) || o.theme,
 				countTheme = list.jqmData( "counttheme" ) || parentList.jqmData( "counttheme" ) || o.countTheme,
 				newPage = list.detach()
