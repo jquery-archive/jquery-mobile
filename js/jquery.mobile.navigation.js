@@ -421,7 +421,7 @@
 				settings.data = $.param( settings.data );
 			}
 			// XXX_jblas: We should be checking to see if the url already has a query in it.
-			absUrl += absUrl + "?" + settings.data;
+			absUrl += "?" + settings.data;
 			settings.data = undefined;
 			fileUrl = path.getFilePath( absUrl );
 		}
