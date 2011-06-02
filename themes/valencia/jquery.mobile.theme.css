@@ -995,11 +995,6 @@ a.ui-btn.ui-btn-inline.ui-btn-corner-all .ui-btn-inner{
   border-radius:          2em;
 }
 
-/* Give the search input a stronger border */
-.ui-input-search{
-  border: 1px solid #999;
-}
-
 /* Adjustment for indicator icons inside split list & Search Input - Well I hope so :) */
 .ui-input-search .ui-btn-icon-notext,
 .ui-btn-inner .ui-btn-icon-notext{
