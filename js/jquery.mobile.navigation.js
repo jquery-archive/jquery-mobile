@@ -105,17 +105,17 @@
 			// Turn the specified realtive URL into an absolute one. This function
 			// can handle all relative variants (protocol, site, document, query, fragment).
 			makeUrlAbsolute: function( relUrl, absUrl ) {
-				if ( !path.isRelativeUrl(relUrl) ) {
+				if ( !path.isRelativeUrl( relUrl ) ) {
 					return relUrl;
 				}
 		
-				var relObj = path.parseUrl(relUrl),
-					absObj = path.parseUrl(absUrl),
+				var relObj = path.parseUrl( relUrl ),
+					absObj = path.parseUrl( absUrl ),
 					protocol = relObj.protocol || absObj.protocol,
 					authority = relObj.authority || absObj.authority || "",
 					hasPath = relObj.pathname !== undefined,
-					pathname = path.isRelativeUrl() ? path.makePathAbsolute( relObj.pathname || absObj.filename, absObj.pathname ) : relObj.pathName,
-					search = relObj.search || ( hasPath ? "" : absObj.search ),
+					pathname = path.makePathAbsolute( relObj.pathname || absObj.filename, absObj.pathname ),
+					search = relObj.search || ( !hasPath && absObj.search ) || "",
 					hash = relObj.hash || "";
 		
 				return protocol + "//" + authority + pathname + search + hash;
@@ -307,7 +307,7 @@
 
 		//if the document has an embedded base tag, documentBase is set to its
 		//initial value. If a base tag does not exist, then we default to the documentDomainPath.
-		documentBase = $base.length ? path.makePathAbsolute( $base.attr( "href" ), documentDomainPath ) : documentDomainPath;
+		documentBase = $base.length ? path.makeUrlAbsolute( $base.attr( "href" ), documentDomainPath ) : documentDomainPath;
 
 		//base element management, defined depending on dynamic base tag support
 		var base = $.support.dynamicBaseTag ? {
@@ -907,12 +907,26 @@
 		return ele;
 	}
 
+	// The base URL for any given element depends on the page it resides in.
+	function getClosestBaseUrl( ele )
+	{
+		// Find the closest page and extract out its url.
+		var url = $( ele ).closest( ".ui-page" ).jqmData( "url" );
+
+		// If the data-url is an id instead of a path, default to using
+		// the documentBase.
+		if ( url && !path.isPath( url ) ) {
+			url = documentBase;
+		}
+
+		return path.makeUrlAbsolute( ( url && !path.isPath( url ) ) ? url : documentBase, documentBase);
+	}
+
 	//add active state on vclick
 	$( document ).bind( "vclick", function( event ) {
 		var link = findClosestLink( event.target );
 		if ( link ) {
-			var  url = path.clean( link.getAttribute( "href" ) || "#" );
-			if (url !== "#" && url.replace( path.get(), "") !== "#" ) {
+			if ( path.parseUrl( link.getAttribute( "href" ) || "#" ).hash !== "#" ) {
 				$( link ).closest( ".ui-btn" ).not( ".ui-disabled" ).addClass( $.mobile.activeBtnClass );
 			}
 		}
@@ -965,6 +979,7 @@
 			//if data-ajax attr is set to false, use the default behavior of a link
 			hasAjaxDisabled = $link.is( ":jqmData(ajax='false')" );
 
+alert("a: " + $link.attr("href") + "\np: " + $link.prop("href") + "\nd: " + $link.closest(".ui-page").jqmData("url") + "\nb: " + getClosestBaseUrl($link) + "\nc: " + path.makeUrlAbsolute($link.attr("href"), getClosestBaseUrl($link)));
 		//if there's a data-rel=back attr, go back in history
 		if( $link.is( ":jqmData(rel='back')" ) ) {
 			window.history.back();
