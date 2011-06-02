@@ -13,6 +13,7 @@ JQUERY = $(shell grep Library js/jquery.js | sed s'/ \* jQuery JavaScript Librar
 
 # The directory to create the zipped files in and also serves as the filenames
 DIR = jquery.mobile-${VER}
+nightly: DIR = jquery.mobile
 
 # The output folder for the finished files
 OUTPUT = compiled
@@ -24,7 +25,6 @@ RMLATEST = echo ""
 NIGHTLY_OUTPUT = nightlies/${DATE}
 ifeq (${NIGHTLY_OUTPUT}, latest)
 	RMLATEST = ssh jqadmin@code.origin.jquery.com 'rm -rf /var/www/html/code.jquery.com/mobile/latest'
-	DIR = jquery.mobile
 endif
 NIGHTLY_WEBPATH = http://code.jquery.com/mobile/${NIGHTLY_OUTPUT}
 
@@ -136,12 +136,6 @@ zip: init js min css cssmin
 
 # Used by the jQuery team to make the nightly builds
 nightly: pull zip
-	# Create a log that lists the current version according to the code and the git information for the last commit
-	@@echo $$"\nGit Release Version: " >> ${OUTPUT}/log.txt
-	@@cat version.txt >> ${OUTPUT}/log.txt
-	@@echo $$"\nGit Information for this build:" >> ${OUTPUT}/log.txt
-	@@git log -1 --format=format:"SHA1: %H \nDate: %cd \nTitle: %s" >> ${OUTPUT}/log.txt
-	
 	# Create the folder to hold the files for the demos
 	@@mkdir -p ${VER}
 
