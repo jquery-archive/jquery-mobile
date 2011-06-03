@@ -198,24 +198,26 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		var parentList = this.element,
 			parentPage = parentList.closest( ".ui-page" ),
 			parentUrl = parentPage.jqmData( "url" ),
-			parentId  = parentUrl || parentPage[0][$.expando],
+			parentId  = parentUrl || parentPage[ 0 ][ $.expando ],
+			parentListId = parentList.attr( "id" ),
 			o = this.options,
 			dns = "data-" + $.mobile.ns,
 			self = this,
 			persistentFooterID = parentPage.find( ":jqmData(role='footer')" ).jqmData( "id" );
 
-		if (typeof( listCountPerPage[parentId] ) === 'undefined') {
-            listCountPerPage[parentId] = -1;
+		if ( typeof( listCountPerPage[ parentId ] ) === 'undefined' ) {
+            listCountPerPage[ parentId ] = -1;
         }
-
+        parentListId = parentListId || ++listCountPerPage[ parentId ];
+        
 		$( parentList.find( "li>ul, li>ol" ).toArray().reverse() ).each(function( i ) {
 			var list = $( this ),
-				listId = list.attr( "id" ) || ++listCountPerPage[parentId],
+				listId = list.attr( "id" ) || parentListId + "-" + i,
 				parent = list.parent(),
 				nodeEls = $( list.prevAll().toArray().reverse() ),
 				nodeEls = nodeEls.length ? nodeEls : $( "<span>" + $.trim(parent.contents()[ 0 ].nodeValue) + "</span>" ),
 				title = nodeEls.first().text(),//url limits to first 30 chars of text
-				id = ( parentUrl ? ( parentUrl + "&") : "" ) + $.mobile.subPageUrlKey + "=" + listId + "-" + i,
+				id = ( parentUrl || "" ) + "&" + $.mobile.subPageUrlKey + "=" + listId;
 				theme = list.jqmData( "theme" ) || o.theme,
 				countTheme = list.jqmData( "counttheme" ) || parentList.jqmData( "counttheme" ) || o.countTheme,
 				newPage = list.detach()
