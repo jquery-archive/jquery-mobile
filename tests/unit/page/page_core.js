@@ -45,4 +45,16 @@
 
 		ok(!typeAttributeRegex.test( "<inputtype=\"range\"" ), "requires preceding space" );
 	});
+
+	asyncTest( "subsequent page with backbtn spec has a back button", function(){
+		$.testHelper.sequence([
+			// transition to the second page
+			function(){ $("#secondPage").click(); },
+			function(){
+				ok( $( "[data-nstest-rel='back']" ).length === 1 );
+				start();
+			}
+		], 1000);
+	});
+
 })(jQuery);

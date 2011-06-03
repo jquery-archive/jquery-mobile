@@ -25,20 +25,21 @@
 </ol>
 
 <div id="qunit-fixture">
-	<div  data-nstest-role="page">
-		<div  data-nstest-role="header">
+	<div data-nstest-role="page">
+		<div data-nstest-role="header">
 			<div>
 				<a href="foo">foo</a>
 			</div>
 			<a href="foo">foo</a>
 		</div><!-- /header -->
 
-		<div  data-nstest-role="footer">
+		<div data-nstest-role="footer">
 			<div>
 				<a href="foo">foo</a>
 			</div>
 
 			<a href="foo">foo</a>
+			<a id="secondPage" href="#page-with-backbtn">next page</a>
 		</div><!-- /header -->
 
 		<div class="ui-bar">
@@ -49,5 +50,11 @@
 			<a href="foo">foo</a>
 		</div>
 	</div>
+	<div id="page-with-backbtn" data-nstest-role="page">
+		<div data-nstest-role="header" data-nstest-backbtn="true">
+			<h3>Header Title</h3>
+		</div><!-- /header -->
+	</div>
+</div>
 </body>
 </html>

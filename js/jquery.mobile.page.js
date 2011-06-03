@@ -31,8 +31,8 @@ $.widget( "mobile.page", $.mobile.widget, {
 
 	_create: function() {
 		var $elem = this.element,
-			o = this.options;
-
+			o = this.options,
+			factory= this;
 		this.keepNative = ":jqmData(role='none'), :jqmData(role='nojs')" + (o.keepNative ? ", " + o.keepNative : "");
 
 		if ( this._trigger( "beforeCreate" ) === false ) {
@@ -49,7 +49,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 		$elem.find( ":jqmData(role='nojs')" ).addClass( "ui-nojs" );
 
 		// pre-find data els
-		var $dataEls = $elem.find( ":jqmData(role)" ).andSelf().each(function() {
+		var $dataEls = $elem.find( ":jqmData(role)" ).andSelf().each( function() {
 			var $this = $( this ),
 				role = $this.jqmData( "role" ),
 				theme = $this.jqmData( "theme" );
@@ -74,17 +74,24 @@ $.widget( "mobile.page", $.mobile.widget, {
 					rightbtn = $headeranchors.eq( 1 ).addClass( "ui-btn-right" ).length;
 				}
 
-				// auto-add back btn on pages beyond first view
-				if ( o.addBackBtn && role === "header" &&
-						$( ".ui-page" ).length > 1 &&
-						$elem.jqmData( "url" ) !== $.mobile.path.stripHash( location.hash ) &&
-						!leftbtn && $this.jqmData( "backbtn" ) !== false ) {
+				// Back button reckoning on pages beyond first view and header position is available
+				if ( role === "header" && 
+						$( ".ui-page" ).length > 1 && 
+						!leftbtn && 
+						$elem.jqmData( "url" ) !== $.mobile.path.stripHash( location.hash ) ) {
 
-					var backBtn = $( "<a href='#' class='ui-btn-left' data-"+ $.mobile.ns +"rel='back' data-"+ $.mobile.ns +"icon='arrow-l'>"+ o.backBtnText +"</a>" ).prependTo( $this );
-					
-					//if theme is provided, override default inheritance
-					if( o.backBtnTheme ){
-						backBtn.attr( "data-"+ $.mobile.ns +"theme", o.backBtnTheme );
+					var elemBackBtnSpec = $this.jqmData( "backbtn" );
+
+					//if specified globally and not overridden, or on the page element via data-add-back-btn="true", then add the back btn 
+					if ( o.addBackBtn  ) {
+						if ( elemBackBtnSpec !== false ) {
+							factory._addBackButton( $this );
+						}	
+					} else {
+						// alternately, the header element may specify a back button
+						if ( elemBackBtnSpec === true ) {
+							factory._addBackButton( $this );
+						}
 					}
 				}
 
@@ -124,7 +131,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 		});
 
 		//enhance form controls
-  	this._enhanceControls();
+		this._enhanceControls();
 
 		//links in bars, or those with  data-role become buttons
 		$elem.find( ":jqmData(role='button'), .ui-bar > a, .ui-header > a, .ui-footer > a" )
@@ -206,7 +213,16 @@ $.widget( "mobile.page", $.mobile.widget, {
 		nonNativeControls
 			.filter( "select:not(:jqmData(role='slider'))" )
 			.selectmenu();
+	},
+	_addBackButton: function( target ) {
+		var o = this.options, 
+			backBtn = $( "<a href='#' class='ui-btn-left' data-"+ $.mobile.ns +"rel='back' data-"+ $.mobile.ns +"icon='arrow-l'>"+ o.backBtnText +"</a>" ).prependTo( target );
+		//if theme is provided, override default inheritance
+		if( o.backBtnTheme ){
+			backBtn.attr( "data-"+ $.mobile.ns +"theme", o.backBtnTheme );
+		}
 	}
 });
 
 })( jQuery );
+
