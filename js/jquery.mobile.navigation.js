@@ -77,7 +77,7 @@
 				absPath = absPath ? absPath.replace( /^\/|\/?[^\/]*$/g, "" ) : "";
 		
 				var absStack = absPath ? absPath.split( "/" ) : [],
-					relStack = relPath.split("/");
+					relStack = relPath.split( "/" );
 				for ( var i = 0; i < relStack.length; i++ ) {
 					var d = relStack[ i ];
 					switch ( d ) {
@@ -94,6 +94,11 @@
 					}
 				}
 				return "/" + absStack.join( "/" );
+			},
+
+			// Returns true if both urls have the same domain.
+			isSameDomain: function( absUrl1, absUrl2 ) {
+				return path.parseUrl( absUrl1 ).domain === path.parseUrl( absUrl2 ).domain;
 			},
 
 			// Returns true for any relative variant.
@@ -979,7 +984,7 @@
 			//if data-ajax attr is set to false, use the default behavior of a link
 			hasAjaxDisabled = $link.is( ":jqmData(ajax='false')" );
 
-alert("a: " + $link.attr("href") + "\np: " + $link.prop("href") + "\nd: " + $link.closest(".ui-page").jqmData("url") + "\nb: " + getClosestBaseUrl($link) + "\nc: " + path.makeUrlAbsolute($link.attr("href"), getClosestBaseUrl($link)));
+//alert("a: " + $link.attr("href") + "\np: " + $link.prop("href") + "\nd: " + $link.closest(".ui-page").jqmData("url") + "\nb: " + getClosestBaseUrl($link) + "\nc: " + path.makeUrlAbsolute($link.attr("href"), getClosestBaseUrl($link)));
 		//if there's a data-rel=back attr, go back in history
 		if( $link.is( ":jqmData(rel='back')" ) ) {
 			window.history.back();
