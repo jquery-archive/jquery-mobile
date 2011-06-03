@@ -30,6 +30,10 @@ $.widget( "mobile.page", $.mobile.widget, {
 	},
 
 	_create: function() {
+		if ( this._trigger( "beforeCreate" ) === false ) {
+			return;
+		}
+
     this.enhance();
 	},
 	
@@ -38,10 +42,6 @@ $.widget( "mobile.page", $.mobile.widget, {
 			o = this.options;
 
 		this.keepNative = ":jqmData(role='none'), :jqmData(role='nojs')" + (o.keepNative ? ", " + o.keepNative : "");
-
-		if ( this._trigger( "beforeCreate" ) === false ) {
-			return;
-		}
 
 		//some of the form elements currently rely on the presence of ui-page and ui-content
 		// classes so we'll handle page and content roles outside of the main role processing
