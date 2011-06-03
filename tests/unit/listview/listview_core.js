@@ -63,8 +63,8 @@
 
 			function(){
 				ok($('#nested-list-test').hasClass('ui-page-active'), "makes nested list test page active");
-				ok($(':jqmData(url="nested-list-test&ui-page=More-animals-0")').length == 1, "Adds first UL to the page");
-				ok($(':jqmData(url="nested-list-test&ui-page=Groups-of-animals-1")').length == 1, "Adds second nested UL to the page");
+				ok($(':jqmData(url="nested-list-test&ui-page=0-0")').length == 1, "Adds first UL to the page");
+				ok($(':jqmData(url="nested-list-test&ui-page=0-1")').length == 1, "Adds second nested UL to the page");
 				start();
 			}
 		]);
@@ -82,7 +82,7 @@
 			},
 
 			function(){
-				var $new_page = $(':jqmData(url="nested-list-test&ui-page=More-animals-0")');
+				var $new_page = $(':jqmData(url="nested-list-test&ui-page=0-0")');
 	
 				ok($new_page.hasClass('ui-page-active'), 'Makes the nested page the active page.');
 				ok($('.ui-listview', $new_page).find(":contains('Rhumba of rattlesnakes')").length == 1, "The current page should have the proper text in the list.");
@@ -95,7 +95,7 @@
 	asyncTest( "should go back to top level when the back button is clicked", function() {
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage("#nested-list-test&ui-page=More-animals-0");
+				$.testHelper.openPage("#nested-list-test&ui-page=0-0");
 			},
 
 			function(){
@@ -113,7 +113,7 @@
 		ok($('#nested-list-test .linebreaknode').text() === "More animals", 'Text should be "More animals"');
 	});
 
-	asyncTest( "Multiple nested lists on a page", function() {
+	asyncTest( "Multiple nested lists on a page with same labels", function() {
 		$.testHelper.pageSequence([
 			function(){
 				// https://github.com/jquery/jquery-mobile/issues/1617
@@ -121,8 +121,11 @@
 			},
 
 			function(){
+				// Click on the link of the third li element
 				$('.ui-page-active li:eq(2) a:eq(0)').click();
-	
+			},
+
+			function(){
 				equal($('.ui-page-active .ui-content .ui-listview li').text(), "Sub Item 10Sub Item 11Sub Item 12", 'Text should be "Sub Item 10Sub Item 11Sub Item 12"');
 				start();
 			}
