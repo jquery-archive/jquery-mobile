@@ -4,7 +4,7 @@
 * Dual licensed under the MIT or GPL Version 2 licenses.
 * http://jquery.org/license
 */
-(function($, undefined ) {
+( function( $, undefined ) {
 
 	//define vars for interal use
 	var $window = $( window ),
@@ -21,45 +21,55 @@
 			// or String.match, it parses the URL into a results array that looks like this:
 			//
 			//     [0]: http://jblas:password@mycompany.com:8080/mail/inbox?msg=1234&type=unread#msg-content
-			//     [1]: http://jblas:password@mycompany.com:8080
-			//     [2]: http:
-			//     [3]: jblas:password@mycompany.com:8080
-			//     [4]: jblas:password
-			//     [5]: jblas
-			//     [6]: password
-			//     [7]: mycompany.com:8080
-			//     [8]: mycompany.com
-			//     [9]: 8080
-			//    [10]: /mail/inbox
-			//    [11]: /mail/
-			//    [12]: inbox
-			//    [13]: ?msg=1234&type=unread
-			//    [14]: #msg-content
+			//     [1]: http://jblas:password@mycompany.com:8080/mail/inbox?msg=1234&type=unread
+			//     [2]: http://jblas:password@mycompany.com:8080/mail/inbox
+			//     [3]: http://jblas:password@mycompany.com:8080
+			//     [4]: http:
+			//     [5]: jblas:password@mycompany.com:8080
+			//     [6]: jblas:password
+			//     [7]: jblas
+			//     [8]: password
+			//     [9]: mycompany.com:8080
+			//    [10]: mycompany.com
+			//    [11]: 8080
+			//    [12]: /mail/inbox
+			//    [13]: /mail/
+			//    [14]: inbox
+			//    [15]: ?msg=1234&type=unread
+			//    [16]: #msg-content
 			//
-			urlParseRE: /^(([^:\/#\?]+:)?\/\/((?:(([^:@\/#\?]+)(?:\:([^:@\/#\?]+))?)@)?(([^:\/#\?]+)(?:\:([0-9]+))?))?)?((\/?(?:[^\/\?#]+\/)*)([^\?#]*))?(\?[^#]+)?(#.*)?/,
+			urlParseRE: /^(((([^:\/#\?]+:)?(?:\/\/((?:(([^:@\/#\?]+)(?:\:([^:@\/#\?]+))?)@)?(([^:\/#\?]+)(?:\:([0-9]+))?))?)?)?((\/?(?:[^\/\?#]+\/)*)([^\?#]*)))?(\?[^#]+)?)(#.*)?/,
 
 			// Parse a URL into a structure that allows easy access to
 			// all of the URL components by name.
 			parseUrl: function( url ) {
+				// If we're passed an object, we'll assume that it is
+				// a parsed url object and just return it back to the caller.
+				if ( typeof url === "object" ) {
+					return url;
+				}
+
 				var u = url || "",
-					matches = path.urlParseRE.exec(url),
+					matches = path.urlParseRE.exec( url ),
 					results;
 				if ( matches ) {
 					results = {
-						href:      matches[0],
-						domain:    matches[1],
-						protocol:  matches[2],
-						authority: matches[3],
-						username:  matches[5],
-						password:  matches[6],
-						host:      matches[7],
-						hostname:  matches[8],
-						port:      matches[9],
-						pathname:  matches[10],
-						directory: matches[11],
-						filename:  matches[12],
-						search:    matches[13],
-						hash:      matches[14]
+						href:         matches[0],
+						hrefNoHash:   matches[1],
+						hrefNoSearch: matches[2],
+						domain:       matches[3],
+						protocol:     matches[4],
+						authority:    matches[5],
+						username:     matches[7],
+						password:     matches[8],
+						host:         matches[9],
+						hostname:     matches[10],
+						port:         matches[11],
+						pathname:     matches[12],
+						directory:    matches[13],
+						filename:     matches[14],
+						search:       matches[15],
+						hash:         matches[16]
 					};
 				}
 				return results || {};
@@ -70,7 +80,7 @@
 			// relPath is relative to.
 			makePathAbsolute: function( relPath, absPath ) {
 				if ( relPath && relPath.charAt( 0 ) === "/" ) {
-					return relPath
+					return relPath;
 				}
 		
 				relPath = relPath || "";
@@ -104,7 +114,12 @@
 			// Returns true for any relative variant.
 			isRelativeUrl: function( url ) {
 				// All relative Url variants have one thing in common, no protocol.
-				return path.parseUrl(url).protocol === undefined;
+				return path.parseUrl( url ).protocol === undefined;
+			},
+
+			// Returns true for an absolute url.
+			isAbsoluteUrl: function( url ) {
+				return path.parseUrl( url ).protocol !== undefined;
 			},
 
 			// Turn the specified realtive URL into an absolute one. This function
@@ -172,18 +187,18 @@
 			// test if a given url (string) is a path
 			// NOTE might be exceptionally naive
 			isPath: function( url ) {
-				return /\//.test( url );
+				return ( /\// ).test( url );
 			},
 
 			isQuery: function( url ) {
-				return /^\?/.test( url );
+				return ( /^\?/ ).test( url );
 			},
 
 			//return a url path with the window's location protocol/hostname/pathname removed
 			clean: function( url ) {
 				// Replace the protocol host only once at the beginning of the url to avoid
 				// problems when it's included as a part of a param
-				var leadingUrlRootRegex = new RegExp("^" + location.protocol + "//" + location.host );
+				var leadingUrlRootRegex = new RegExp( "^" + location.protocol + "//" + location.host );
 				return url.replace( leadingUrlRootRegex, "" );
 			},
 
@@ -200,11 +215,12 @@
 			//check whether a url is referencing the same domain, or an external domain or different protocol
 			//could be mailto, etc
 			isExternal: function( url ) {
-				return path.hasProtocol( path.clean( url ) );
+				var u = path.parseUrl( url );
+				return u.protocol && u.domain !== documentUrl.domain;
 			},
 
 			hasProtocol: function( url ) {
-				return (/^(:?\w+:)/).test( url );
+				return ( /^(:?\w+:)/ ).test( url );
 			},
 
 			//check if the url is relative
@@ -213,6 +229,16 @@
 			},
 
 			isEmbeddedPage: function( url ) {
+				var u = path.parseUrl( url );
+
+				//if the path is absolute, then we need to compare the url against
+				//both the documentUrl and the documentBase. The main reason for this
+				//is that links embedded within external documents will refer to the
+				//application document, whereas links embedded within the application
+				//document will be resolved against the document base.
+				if ( u.protocol !== undefined ) {
+					return ( u.hash && ( u.hrefNoHash === documentUrl.hrefNoHash || ( documentBaseDiffers && u.hrefNoHash === documentBase.hrefNoHash ) ) );
+				}
 				return (/^#/).test( url );
 			}
 		},
@@ -295,7 +321,7 @@
 		//queue to hold simultanious page transitions
 		pageTransitionQueue = [],
 
-		// indicates whether or not page is in process of transitioning
+		//indicates whether or not page is in process of transitioning
 		isPageTransitioning = false,
 
 		//nonsense hash change key for dialogs, so they create a history entry
@@ -304,15 +330,15 @@
 		//existing base tag?
 		$base = $head.children( "base" ),
 
-		//tuck away the original document URL
-		documentUrl = location.href,
-
-		//extract out the domain and path of the documentUrl
-		documentDomainPath = documentUrl.replace(/[\?#].*/, ""),
+		//tuck away the original document URL minus any fragment.
+		documentUrl = path.parseUrl( location.href ),
 
 		//if the document has an embedded base tag, documentBase is set to its
-		//initial value. If a base tag does not exist, then we default to the documentDomainPath.
-		documentBase = $base.length ? path.makeUrlAbsolute( $base.attr( "href" ), documentDomainPath ) : documentDomainPath;
+		//initial value. If a base tag does not exist, then we default to the documentUrl.
+		documentBase = $base.length ? path.parseUrl( path.makeUrlAbsolute( $base.attr( "href" ), documentUrl.href ) ) : documentUrl,
+
+		//cache the comparison once.
+		documentBaseDiffers = ( documentUrl.hrefNoHash === documentBase.hrefNoHash );
 
 		//base element management, defined depending on dynamic base tag support
 		var base = $.support.dynamicBaseTag ? {
@@ -361,7 +387,7 @@
 
 	//remove active classes after page transition or error
 	function removeActiveLinkClass( forceRemoval ) {
-		if( !!$activeClickedLink && (!$activeClickedLink.closest( '.ui-page-active' ).length || forceRemoval )) {
+		if( !!$activeClickedLink && ( !$activeClickedLink.closest( '.ui-page-active' ).length || forceRemoval ) ) {
 			$activeClickedLink.removeClass( $.mobile.activeBtnClass );
 		}
 		$activeClickedLink = null;
@@ -370,7 +396,7 @@
 	function releasePageTransitionLock() {
 		isPageTransitioning = false;
 		if( pageTransitionQueue.length > 0 ) {
-			$.mobile.changePage.apply(null, pageTransitionQueue.pop());
+			$.mobile.changePage.apply( null, pageTransitionQueue.pop() );
 		}
 	}
 
@@ -726,26 +752,23 @@
 		// to the promise object it returns so we know when
 		// it is done loading or if an error ocurred.
 		if ( typeof toPage == "string" ) {
-			var promise = $.mobile.loadPage( toPage, settings );
-			if ( promise ) {
-				promise
-					.done(function( url, options, newPage, dupCachedPage ) {
-						isPageTransitioning = false;
-						options.duplicateCachedPage = dupCachedPage
-						$.mobile.changePage( newPage, options );
-					})
-					.fail(function( url, options ) {
-						// XXX_jblas: Fire off changepagefailed notificaiton.
-						isPageTransitioning = false;
+			$.mobile.loadPage( toPage, settings )
+				.done(function( url, options, newPage, dupCachedPage ) {
+					isPageTransitioning = false;
+					options.duplicateCachedPage = dupCachedPage;
+					$.mobile.changePage( newPage, options );
+				})
+				.fail(function( url, options ) {
+					// XXX_jblas: Fire off changepagefailed notificaiton.
+					isPageTransitioning = false;
 
-						//clear out the active button state
-						removeActiveLinkClass( true );
+					//clear out the active button state
+					removeActiveLinkClass( true );
 
-						//release transition lock so navigation is free again
-						releasePageTransitionLock();
-					});
-				return;
-			}
+					//release transition lock so navigation is free again
+					releasePageTransitionLock();
+				});
+			return;
 		}
 
 		// The caller passed us a real page DOM element. Update our
@@ -833,25 +856,23 @@
 		// If we're navigating back in the URL history, set reverse accordingly.
 		settings.reverse = settings.reverse || historyDir < 0;
 
-		var promise = transitionPages( toPage, fromPage, settings.transition, settings.reverse, settings.changeHash );
-
-		promise.done(function() {
-			removeActiveLinkClass();
-
-			//if there's a duplicateCachedPage, remove it from the DOM now that it's hidden
-			if ( settings.duplicateCachedPage ) {
-				settings.duplicateCachedPage.remove();
-			}
-
-			//remove initial build class (only present on first pageshow)
-			$html.removeClass( "ui-mobile-rendering" );
-
-			releasePageTransitionLock();
-
-
-			// Let listeners know we're all done changing the current page.
-			mpc.trigger( "changepage" );
-		});
+		transitionPages( toPage, fromPage, settings.transition, settings.reverse )
+			.done(function() {
+				removeActiveLinkClass();
+	
+				//if there's a duplicateCachedPage, remove it from the DOM now that it's hidden
+				if ( settings.duplicateCachedPage ) {
+					settings.duplicateCachedPage.remove();
+				}
+	
+				//remove initial build class (only present on first pageshow)
+				$html.removeClass( "ui-mobile-rendering" );
+	
+				releasePageTransitionLock();
+	
+				// Let listeners know we're all done changing the current page.
+				mpc.trigger( "changepage" );
+			});
 	};
 
 	$.mobile.changePage.defaults = {
@@ -947,23 +968,27 @@
 
 		var $link = $( link ),
 
-			//get href, if defined, otherwise fall to null #
-			href = $link.attr( "href" ) || "#",
+			//get href, if defined, otherwise default to empty hash
+			href = $link.prop( "href" ) || $.mobile.documentBase.hrefNoHash + "#";
+		
+		//if there's a data-rel=back attr, go back in history
+		if( $link.is( ":jqmData(rel='back')" ) ) {
+			window.history.back();
+			return false;
+		}
 
-			//cache a check for whether the link had a protocol
-			//if this is true and the link was same domain, we won't want
-			//to prefix the url with a base (esp helpful in IE, where every
-			//url is absolute
-			hadProtocol = path.hasProtocol( href ),
+		//for links created purely for interaction - ignore
+		if( href.search( /#$/ ) !== -1 ) {
+			//prevent # urls from bubbling
+			event.preventDefault();
+			return;
+		}
 
-			//get href, remove same-domain protocol and host
-			url = path.clean( href ),
+			// Should we handle this link, or let the browser deal with it?
+		var useDefaultUrlHandling = $link.is( "[rel='external']" ) || $link.is( ":jqmData(ajax='false')" ) || $link.is( "[target]" ),
 
 			//rel set to external
-			isRelExternal = $link.is( "[rel='external']" ),
-
-			//rel set to external
-			isEmbeddedPage = path.isEmbeddedPage( url ),
+			isEmbeddedPage = path.isEmbeddedPage( href ),
 
 			// Some embedded browsers, like the web view in Phone Gap, allow cross-domain XHR
 			// requests if the document doing the request was loaded via the file:// protocol.
@@ -971,37 +996,16 @@
 			// data. We normally let the browser handle external/cross-domain urls, but if the
 			// allowCrossDomainPages option is true, we will allow cross-domain http/https
 			// requests to go through our page loading logic.
-			isCrossDomainPageLoad = ( $.mobile.allowCrossDomainPages && location.protocol === "file:" && url.search( /^https?:/ ) != -1 ),
+			isCrossDomainPageLoad = ( $.mobile.allowCrossDomainPages && documentUrl.protocol === "file:" && href.search( /^https?:/ ) != -1 ),
 
 			//check for protocol or rel and its not an embedded page
 			//TODO overlap in logic from isExternal, rel=external check should be
 			//     moved into more comprehensive isExternalLink
-			isExternal = ( path.isExternal( url ) && !isCrossDomainPageLoad ) || ( isRelExternal && !isEmbeddedPage ),
-
-			//if target attr is specified we mimic _blank... for now
-			hasTarget = $link.is( "[target]" ),
-
-			//if data-ajax attr is set to false, use the default behavior of a link
-			hasAjaxDisabled = $link.is( ":jqmData(ajax='false')" );
-
-//alert("a: " + $link.attr("href") + "\np: " + $link.prop("href") + "\nd: " + $link.closest(".ui-page").jqmData("url") + "\nb: " + getClosestBaseUrl($link) + "\nc: " + path.makeUrlAbsolute($link.attr("href"), getClosestBaseUrl($link)));
-		//if there's a data-rel=back attr, go back in history
-		if( $link.is( ":jqmData(rel='back')" ) ) {
-			window.history.back();
-			return false;
-		}
-
-		//prevent # urls from bubbling
-		//path.get() is replaced to combat abs url prefixing in IE
-		if( url.replace( path.get(), "" ) == "#" ) {
-			//for links created purely for interaction - ignore
-			event.preventDefault();
-			return;
-		}
+			isExternal = useDefaultUrlHandling || ( path.isExternal( href ) && !isCrossDomainPageLoad );
 
 		$activeClickedLink = $link.closest( ".ui-btn" );
 
-		if( isExternal || hasAjaxDisabled || hasTarget || !$.mobile.ajaxEnabled ) {
+		if( isExternal || !$.mobile.ajaxEnabled ) {
 			//remove active link class if external (then it won't be there if you come back)
 			window.setTimeout( function() { removeActiveLinkClass( true ); }, 200 );
 
@@ -1013,20 +1017,13 @@
 		var transition = $link.jqmData( "transition" ),
 			direction = $link.jqmData( "direction" ),
 			reverse = ( direction && direction === "reverse" ) ||
-			// deprecated - remove by 1.0
-			$link.jqmData( "back" ),
+						// deprecated - remove by 1.0
+						$link.jqmData( "back" ),
 
 			//this may need to be more specific as we use data-rel more
 			role = $link.attr( "data-" + $.mobile.ns + "rel" ) || "page";
 
-		//if it's a relative href, prefix href with base url
-		if( path.isRelative( url ) && !hadProtocol ) {
-			url = path.makeAbsolute( url );
-		}
-
-		url = path.stripHash( url );
-
-		$.mobile.changePage( url, { transition: transition, reverse: reverse, role: role } );
+		$.mobile.changePage( href, { transition: transition, reverse: reverse, role: role } );
 		event.preventDefault();
 	});
 
