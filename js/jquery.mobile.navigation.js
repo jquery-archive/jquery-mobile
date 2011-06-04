@@ -344,7 +344,7 @@
 		var base = $.support.dynamicBaseTag ? {
 
 			//define base element, for use in routing asset urls that are referenced in Ajax-requested markup
-			element: ( $base.length ? $base : $( "<base>", { href: documentBase } ).prependTo( $head ) ),
+			element: ( $base.length ? $base : $( "<base>", { href: documentBase.hrefNoHash } ).prependTo( $head ) ),
 
 			//set the generated BASE element's href attribute to a new page's base path
 			set: function( href ) {
@@ -353,7 +353,7 @@
 
 			//set the generated BASE element's href attribute to a new page's base path
 			reset: function() {
-				base.element.attr( "href", documentBase );
+				base.element.attr( "href", documentBase.hrefNoHash );
 			}
 
 		} : undefined;
