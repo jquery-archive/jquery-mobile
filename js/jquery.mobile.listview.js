@@ -206,8 +206,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			persistentFooterID = parentPage.find( ":jqmData(role='footer')" ).jqmData( "id" );
 
 		if ( typeof( listCountPerPage[ parentId ] ) === 'undefined' ) {
-            listCountPerPage[ parentId ] = -1;
-        }
+			listCountPerPage[ parentId ] = -1;
+		}
 		parentListId = parentListId || ++listCountPerPage[ parentId ];
 
 		$( parentList.find( "li>ul, li>ol" ).toArray().reverse() ).each(function( i ) {
