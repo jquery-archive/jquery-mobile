@@ -40,8 +40,8 @@
 			//
 			urlParseRE: /^(((([^:\/#\?]+:)?(?:\/\/((?:(([^:@\/#\?]+)(?:\:([^:@\/#\?]+))?)@)?(([^:\/#\?]+)(?:\:([0-9]+))?))?)?)?((\/?(?:[^\/\?#]+\/)*)([^\?#]*)))?(\?[^#]+)?)(#.*)?/,
 
-			// Parse a URL into a structure that allows easy access to
-			// all of the URL components by name.
+			//Parse a URL into a structure that allows easy access to
+			//all of the URL components by name.
 			parseUrl: function( url ) {
 				// If we're passed an object, we'll assume that it is
 				// a parsed url object and just return it back to the caller.
@@ -75,9 +75,9 @@
 				return results || {};
 			},
 
-			// Turn relPath into an asbolute path. absPath is
-			// an optional absolute path which describes what
-			// relPath is relative to.
+			//Turn relPath into an asbolute path. absPath is
+			//an optional absolute path which describes what
+			//relPath is relative to.
 			makePathAbsolute: function( relPath, absPath ) {
 				if ( relPath && relPath.charAt( 0 ) === "/" ) {
 					return relPath;
@@ -106,24 +106,24 @@
 				return "/" + absStack.join( "/" );
 			},
 
-			// Returns true if both urls have the same domain.
+			//Returns true if both urls have the same domain.
 			isSameDomain: function( absUrl1, absUrl2 ) {
 				return path.parseUrl( absUrl1 ).domain === path.parseUrl( absUrl2 ).domain;
 			},
 
-			// Returns true for any relative variant.
+			//Returns true for any relative variant.
 			isRelativeUrl: function( url ) {
 				// All relative Url variants have one thing in common, no protocol.
 				return path.parseUrl( url ).protocol === undefined;
 			},
 
-			// Returns true for an absolute url.
+			//Returns true for an absolute url.
 			isAbsoluteUrl: function( url ) {
 				return path.parseUrl( url ).protocol !== undefined;
 			},
 
-			// Turn the specified realtive URL into an absolute one. This function
-			// can handle all relative variants (protocol, site, document, query, fragment).
+			//Turn the specified realtive URL into an absolute one. This function
+			//can handle all relative variants (protocol, site, document, query, fragment).
 			makeUrlAbsolute: function( relUrl, absUrl ) {
 				if ( !path.isRelativeUrl( relUrl ) ) {
 					return relUrl;
@@ -139,6 +139,14 @@
 					hash = relObj.hash || "";
 		
 				return protocol + "//" + authority + pathname + search + hash;
+			},
+
+			//Add search (aka query) params to the specified url.
+			addSearchParams: function( url, params ) {
+				var u = path.parseUrl( url ),
+					p = ( typeof params === "object" ) ? $.param( params ) : params,
+					s = u.search || "?";
+				return u.hrefNoSearch + s + ( s.charAt( s.length - 1 ) !== "?" ? "&" : "" ) + p + ( u.hash || "" );
 			},
 
 			//get path from current hash, or from a file path
@@ -160,38 +168,10 @@
 				location.hash = path;
 			},
 
-			//location pathname from intial directory request
-			origin: '',
-
-			setOrigin: function() {
-				path.origin = path.get( location.protocol + '//' + location.host + location.pathname );
-			},
-
-			// prefix a relative url with the current path
-			// TODO force old relative deeplinks into new absolute path
-			makeAbsolute: function( url ) {
-				var isHashPath = path.isPath( location.hash );
-
-				if( path.isQuery( url ) ) {
-					// if the path is a list of query params and the hash is a path
-					// append the query params to the hash (without params or dialog keys).
-					// otherwise use the pathname and append the query params
-					return ( isHashPath ? path.cleanHash( location.hash ) : location.pathname ) + url;
-				}
-
-				// If the hash is a path, even if its not absolute, use it to prepend to the url
-				// otherwise use the path with the trailing segement removed
-				return ( isHashPath ? path.get() : path.get( location.pathname ) ) + url;
-			},
-
-			// test if a given url (string) is a path
-			// NOTE might be exceptionally naive
+			//test if a given url (string) is a path
+			//NOTE might be exceptionally naive
 			isPath: function( url ) {
 				return ( /\// ).test( url );
-			},
-
-			isQuery: function( url ) {
-				return ( /^\?/ ).test( url );
 			},
 
 			//return a url path with the window's location protocol/hostname/pathname removed
@@ -357,9 +337,6 @@
 			}
 
 		} : undefined;
-
-		//set location pathname from intial directory request
-		path.setOrigin();
 
 /*
 	internal utility functions
@@ -540,11 +517,7 @@
 		// If the caller provided data, and we're using "get" request,
 		// append the data to the URL.
 		if ( settings.data && settings.type === "get" ) {
-			if ( $.type( settings.data ) === "object" ) {
-				settings.data = $.param( settings.data );
-			}
-			// XXX_jblas: We should be checking to see if the url already has a query in it.
-			absUrl += "?" + settings.data;
+			absUrl = path.addSearchParams( absUrl, settings.data );
 			settings.data = undefined;
 			fileUrl = path.getFilePath( absUrl );
 		}
@@ -935,11 +908,11 @@
 		var url = $( ele ).closest( ".ui-page" ).jqmData( "url" ),
 			base = documentBase.hrefNoHash;
 
-		if ( url && !path.isPath( url ) ) {
+		if ( !url || !path.isPath( url ) ) {
 			url = base;
 		}
 
-		return path.makeUrlAbsolute( url || base, base);
+		return path.makeUrlAbsolute( url, base);
 	}
 
 	//add active state on vclick
@@ -963,7 +936,7 @@
 		var $link = $( link ),
 
 			//get href, if defined, otherwise default to empty hash
-			href = $link.prop( "href" ) || $.mobile.documentBase.hrefNoHash + "#";
+			href = path.makeUrlAbsolute( $link.attr( "href" ) || "#", getClosestBaseUrl( $link ) );
 		
 		//if there's a data-rel=back attr, go back in history
 		if( $link.is( ":jqmData(rel='back')" ) ) {
