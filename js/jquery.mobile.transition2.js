@@ -54,10 +54,13 @@ $.mobile.css3Transition2Handler = css3Transition2Handler;
 // If the css3transitionHandler ist set, but we are on android, replace it with our handler.
 if ( $.mobile.browser.android && $.mobile.defaultTransitionHandler === $.mobile.css3TransitionHandler ) {
     $.mobile.defaultTransitionHandler = css3Transition2Handler;
-    // For android, we need to set a special style to the page container to prevent flickering
-    $('div').live('pagebeforeshow',function(event, ui){
-        $(this).parent().css('-webkit-transform', 'translate3d(0,0,0)');
-    });
+    // For android, we need to set a special style to the page container to prevent flickering.
+    // This is also needed for native select popups, as they
+    // would otherwise not receive the click event.
+    var rules = '.ui-mobile-viewport { -webkit-transform: translate3d(0,0,0); }\n'+
+            '.ui-select .ui-btn { -webkit-transform: translate3d(0,0,0); }' +
+            '.ui-select { -webkit-transform: translate3d(0,0,0); }';
+    $("head").append('<style type="text/css">'+rules+'</style>');
 }
 
 })( jQuery, this );
