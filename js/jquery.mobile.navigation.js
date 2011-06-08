@@ -1065,7 +1065,7 @@
 
 		//if to is defined, load it
 		if ( to ) {
-			$.mobile.changePage( to, { transition: transition, changeHash: false, fromHashChange: true } );
+			$.mobile.changePage( ( path.isPath(to) ? "" : "#" ) + to, { transition: transition, changeHash: false, fromHashChange: true } );
 		}
 		//there's no hash, go to the first page in the dom
 		else {
