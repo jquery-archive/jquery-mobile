@@ -422,4 +422,41 @@
 			}
 		], 1000);
 	});
+
+	asyncTest( "query data passed as string to changePage is appended to URL", function(){
+
+		$.testHelper.pageSequence([
+			// open our test page
+			function(){
+				$.mobile.changePage( "form-tests/changepage-data.html", {
+					data: "foo=1&bar=2"
+				} );
+			},
+
+			function(){
+				same(location.hash, "#form-tests/changepage-data.html?foo=1&bar=2");
+				start();
+			}
+		]);
+	});
+
+	asyncTest( "query data passed as object to changePage is appended to URL", function(){
+
+		$.testHelper.pageSequence([
+			// open our test page
+			function(){
+				$.mobile.changePage( "form-tests/changepage-data.html", {
+					data: {
+						foo: 3,
+						bar: 4
+					}
+				} );
+			},
+
+			function(){
+				same(location.hash, "#form-tests/changepage-data.html?foo=3&bar=4");
+				start();
+			}
+		]);
+	});
 })(jQuery);
