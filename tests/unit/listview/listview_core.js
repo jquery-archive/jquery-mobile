@@ -126,7 +126,7 @@
 			},
 
 			function(){
-				equal($('.ui-page-active .ui-content .ui-listview li').text(), "Sub Item 10Sub Item 11Sub Item 12", 'Text should be "Sub Item 10Sub Item 11Sub Item 12"');
+				equal($('.ui-page-active .ui-content .ui-listview li').text(), "Item A-3-0Item A-3-1Item A-3-2", 'Text should be "Item A-3-0Item A-3-1Item A-3-2"');
 				start();
 			}
 		]);
