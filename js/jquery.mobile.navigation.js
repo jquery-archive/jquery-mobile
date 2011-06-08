@@ -149,6 +149,16 @@
 				return u.hrefNoSearch + s + ( s.charAt( s.length - 1 ) !== "?" ? "&" : "" ) + p + ( u.hash || "" );
 			},
 
+			convertUrlToDataUrl: function( absUrl ) {
+				var u = path.parseUrl( absUrl );
+				if ( path.isEmbeddedPage( u ) ) {
+					return u.hash.replace( /^#/, "" );
+				} else if ( path.isSameDomain( u, documentBase ) ) {
+					return u.hrefNoHash.replace( documentBase.domain, "" );
+				}
+				return absUrl;
+			},
+
 			//get path from current hash, or from a file path
 			get: function( newPath ) {
 				if( newPath === undefined ) {
@@ -176,10 +186,7 @@
 
 			//return a url path with the window's location protocol/hostname/pathname removed
 			clean: function( url ) {
-				// Replace the protocol host only once at the beginning of the url to avoid
-				// problems when it's included as a part of a param
-				var leadingUrlRootRegex = new RegExp( "^" + location.protocol + "//" + location.host );
-				return url.replace( leadingUrlRootRegex, "" );
+				return url.replace( documentBase.domain, "" );
 			},
 
 			//just return the url without an initial #
@@ -219,7 +226,7 @@
 				if ( u.protocol !== undefined ) {
 					return ( u.hash && ( u.hrefNoHash === documentUrl.hrefNoHash || ( documentBaseDiffers && u.hrefNoHash === documentBase.hrefNoHash ) ) );
 				}
-				return (/^#/).test( url );
+				return (/^#/).test( u.href );
 			}
 		},
 
@@ -494,14 +501,6 @@
 			// the caller.
 			settings = $.extend( {}, $.mobile.loadPage.defaults, options ),
 
-			// The absolute version of the URL passed into the function. This
-			// version of the URL may contain dialog/subpage params in it.
-			absUrl = path.makeUrlAbsolute( url );
-
-			// The absolute version of the URL minus any dialog/subpage params.
-			// In otherwords the real URL of the page to be loaded.
-			fileUrl = path.getFilePath( absUrl ),
-
 			// The DOM element for the page after it has been loaded.
 			page = null,
 
@@ -509,21 +508,36 @@
 			// in the DOM, dupCachedPage will be set to the page element
 			// so that it can be removed after the new version of the
 			// page is loaded off the network.
-			dupCachedPage = null;
+			dupCachedPage = null,
 
-		// Make sure we have a pageContainer to work with.
-		settings.pageContainer = settings.pageContainer || $.mobile.pageContainer;
+			// The absolute version of the URL passed into the function. This
+			// version of the URL may contain dialog/subpage params in it.
+			absUrl = path.makeUrlAbsolute( url, documentBase.hrefNoHash );
+
 
 		// If the caller provided data, and we're using "get" request,
 		// append the data to the URL.
 		if ( settings.data && settings.type === "get" ) {
 			absUrl = path.addSearchParams( absUrl, settings.data );
 			settings.data = undefined;
-			fileUrl = path.getFilePath( absUrl );
 		}
 
+			// The absolute version of the URL minus any dialog/subpage params.
+			// In otherwords the real URL of the page to be loaded.
+		var fileUrl = path.getFilePath( absUrl ),
+
+			// The version of the Url actually stored in the data-url attribute of
+			// the page. For embedded pages, it is just the id of the page. For pages
+			// within the same domain as the document base, it is the site relative
+			// path. For cross-domain pages (Phone Gap only) the entire absolute Url
+			// used to load the page.
+			dataUrl = path.convertUrlToDataUrl( absUrl );
+
+		// Make sure we have a pageContainer to work with.
+		settings.pageContainer = settings.pageContainer || $.mobile.pageContainer;
+
 		// Check to see if the page already exists in the DOM.
-		page = settings.pageContainer.children( ":jqmData(url='" + absUrl + "')" );
+		page = settings.pageContainer.children( ":jqmData(url='" + dataUrl + "')" );
 
 		// Reset base to the default document base.
 		if ( base ) {
@@ -607,7 +621,7 @@
 
 				//append to page and enhance
 				page
-					.attr( "data-" + $.mobile.ns + "url", fileUrl )
+					.attr( "data-" + $.mobile.ns + "url", path.convertUrlToDataUrl( fileUrl ) )
 					.appendTo( settings.pageContainer );
 
 				enhancePage( page, settings.role );
@@ -616,7 +630,7 @@
 				// into the DOM. If the original absUrl refers to a sub-page, that is the
 				// real page we are interested in.
 				if ( absUrl.indexOf( "&" + $.mobile.subPageUrlKey ) > -1 ) {
-					page = settings.pageContainer.children( ":jqmData(url='" + absUrl + "')" );
+					page = settings.pageContainer.children( ":jqmData(url='" + dataUrl + "')" );
 				}
 
 				// Remove loading message.
@@ -933,29 +947,46 @@
 			return;
 		}
 
-		var $link = $( link ),
+		var $link = $( link );
 
-			//get href, if defined, otherwise default to empty hash
-			href = path.makeUrlAbsolute( $link.attr( "href" ) || "#", getClosestBaseUrl( $link ) );
-		
 		//if there's a data-rel=back attr, go back in history
 		if( $link.is( ":jqmData(rel='back')" ) ) {
 			window.history.back();
 			return false;
 		}
 
-		//for links created purely for interaction - ignore
-		if( href.search( /#$/ ) !== -1 ) {
-			//prevent # urls from bubbling
-			event.preventDefault();
-			return;
+		var baseUrl = getClosestBaseUrl( $link ),
+
+			//get href, if defined, otherwise default to empty hash
+			href = path.makeUrlAbsolute( $link.attr( "href" ) || "#", baseUrl );
+
+		// XXX_jblas: Ideally links to application pages should be specified as
+		//            an url to the application document with a hash that is either
+		//            the site relative path or id to the page. But some of the
+		//            internal code that dynamically generates sub-pages for nested
+		//            lists and select dialogs, just write a hash in the link they
+		//            create. This means the actual URL path is based on whatever
+		//            the current value of the base tag is at the time this code
+		//            is called. For now we are just assuming that any url with a
+		//            hash in it is an application page reference.
+		if ( href.search( "#" ) != -1 ) {
+			href = href.replace( /[^#]*#/, "" );
+			if ( !href ) {
+				//link was an empty hash meant purely
+				//for interaction, so we ignore it.
+				event.preventDefault();
+				return;
+			} else if ( path.isPath( href ) ) {
+				//we have apath so make it the href we want to load.
+				href = path.makeUrlAbsolute( href, baseUrl );
+			} else {
+				//we have a simple id so use the documentUrl as its base.
+				href = path.makeUrlAbsolute( "#" + href, documentUrl.hrefNoHash );
+			}
 		}
 
 			// Should we handle this link, or let the browser deal with it?
 		var useDefaultUrlHandling = $link.is( "[rel='external']" ) || $link.is( ":jqmData(ajax='false')" ) || $link.is( "[target]" ),
-
-			//rel set to external
-			isEmbeddedPage = path.isEmbeddedPage( href ),
 
 			// Some embedded browsers, like the web view in Phone Gap, allow cross-domain XHR
 			// requests if the document doing the request was loaded via the file:// protocol.
