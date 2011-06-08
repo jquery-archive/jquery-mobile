@@ -72,7 +72,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 		//events
 		collapsibleContain
 			.bind( "collapse", function( event ){
-				if( !event.isDefaultPrevented() ){
+				if( !event.isDefaultPrevented() && $( event.target ).closest( ".ui-collapsible-contain" ).is( collapsibleContain ) ){
 					event.preventDefault();
 					collapsibleHeading
 						.addClass( "ui-collapsible-heading-collapsed" )
@@ -89,7 +89,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 				}
 
 			} )
-			.bind( "expand", function( event ){
+			.bind( "expand", function( event ){	
 				if( !event.isDefaultPrevented() ){
 					event.preventDefault();
 					collapsibleHeading
@@ -114,14 +114,16 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			collapsibleParent
 				.jqmData( "collapsiblebound", true )
 				.bind( "expand", function( event ){
-					$( this ).find( ".ui-collapsible-contain" )
-						.not( $( event.target ).closest( ".ui-collapsible-contain" ) )
-						.not( "> .ui-collapsible-contain .ui-collapsible-contain" )
+					
+					$( event.target )
+						.closest( ".ui-collapsible-contain" )
+						.siblings( ".ui-collapsible-contain" )
 						.trigger( "collapse" );
+					
 				} );
 
 
-			var set = collapsibleParent.find( ":jqmData(role=collapsible )" );
+			var set = collapsibleParent.find( ":jqmData(role=collapsible ):first" );
 
 			set.first()
 				.find( "a:eq(0)" )
