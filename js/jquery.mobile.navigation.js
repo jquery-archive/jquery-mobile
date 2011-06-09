@@ -77,7 +77,7 @@
 
 			//just return the url without an initial #
 			stripHash: function( url ) {
-				return url.replace( /^#/, "" );
+				return encodeURI(url.replace( /^#/, "" ));
 			},
 
 			//remove the preceding hash, any query params, and dialog notations
