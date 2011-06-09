@@ -486,7 +486,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 			self.menuType = "page";
 			self.menuPageContent.append( self.list );
-			$.mobile.changePage( self.menuPage, { transition: 'pop' } );
+			$.mobile.changePage( self.menuPage, { transition: 'pop', changeHash: false } );
 		}
 		else {
 			self.menuType = "overlay";
@@ -558,10 +558,10 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			// by removing the inline style and ensuring page inclusion
 			self.menuPage.one("pagehide", focusButton);
 
-			// doesn't solve the possible issue with calling change page
-			// where the objects don't define data urls which prevents dialog key
-			// stripping - changePage has incoming refactor
-			window.history.back();
+			// set changeHash to false so that navigation/history handling is
+			// consistent with menuType="overlay" and selects within dialogs
+			// don't cause any navigation issues and will work properly
+			$.mobile.changePage( $.mobile.urlHistory.getPrev().page, { transition: 'pop', reverse: true, changeHash: false } );
 		}
 		else{
 			self.screen.addClass( "ui-screen-hidden" );
