@@ -62,7 +62,7 @@ $.fixedToolbars = (function(){
 			.bind( "vclick",function(event){
 				if( touchToggleEnabled ) {
 					if( $(event.target).closest(ignoreTargets).length ){ return; }
-					if( !scrollTriggered ){
+					if( !scrollTriggered && !$.mobile.toolbarAlwaysOverlay){
 						$.fixedToolbars.toggle(stateBefore);
 						stateBefore = null;
 					}

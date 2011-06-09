@@ -49,6 +49,9 @@
 		//error response message - appears when an Ajax page request fails
 		pageLoadErrorMessage: "Error Loading Page",
 
+		//configure if you want the toolbar to always be presented as an overlay
+		toolbarAlwaysOverlay: false,
+
 		//support conditions that must be met in order to proceed
 		//default enhanced qualifications are media query support OR IE 7+
 		gradeA: function(){
