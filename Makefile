@@ -149,9 +149,9 @@ nightly: pull zip
 
 	# Then change all the paths from super deep to the same level for CSS files
 	@@find ${VER} -type f -name '*.html' -exec sed -i 's|media="only all"||g' {} \;
-	@@find ${VER} -type f -name '*.html' -exec sed -i 's|rel="stylesheet"  href="../../../|rel="stylesheet"  href="|g' {} \;
-	@@find ${VER} -type f -name '*.html' -exec sed -i 's|rel="stylesheet"  href="../../|rel="stylesheet"  href="|g' {} \;
-	@@find ${VER} -type f -name '*.html' -exec sed -i 's|rel="stylesheet"  href="../|rel="stylesheet"  href="|g' {} \;
+	@@find ${VER} -type f -name '*.html' -exec sed -i 's|rel="stylesheet" href="../../../|rel="stylesheet" href="|g' {} \;
+	@@find ${VER} -type f -name '*.html' -exec sed -i 's|rel="stylesheet" href="../../|rel="stylesheet" href="|g' {} \;
+	@@find ${VER} -type f -name '*.html' -exec sed -i 's|rel="stylesheet" href="../|rel="stylesheet" href="|g' {} \;
 
 	# Change the empty paths to the location of this nightly file
 	@@find ${VER} -type f -name '*.html' -exec sed -i 's|href="themes/default/"|href="${NIGHTLY_WEBPATH}/${DIR}.min.css"|g' {} \;
@@ -184,9 +184,9 @@ deploy: zip
 	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|src="../js|src="js|g' {} \;
 
 	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|media="only all"||g' {} \;
-	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|rel="stylesheet"  href="../../../|rel="stylesheet"  href="|g' {} \;
-	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|rel="stylesheet"  href="../../|rel="stylesheet"  href="|g' {} \;
-	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|rel="stylesheet"  href="../|rel="stylesheet"  href="|g' {} \;
+	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|rel="stylesheet" href="../../../|rel="stylesheet" href="|g' {} \;
+	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|rel="stylesheet" href="../../|rel="stylesheet" href="|g' {} \;
+	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|rel="stylesheet" href="../|rel="stylesheet" href="|g' {} \;
 
 	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|href="themes/default/"|href="http://code.jquery.com/mobile/${VER}/${DIR}.min.css"|g' {} \;
 	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|src="js/jquery.js"|src="http://code.jquery.com/jquery-${JQUERY}.min.js"|' {} \;
