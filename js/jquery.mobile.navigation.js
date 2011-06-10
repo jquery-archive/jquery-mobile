@@ -329,7 +329,7 @@
 		documentBase = $base.length ? path.parseUrl( path.makeUrlAbsolute( $base.attr( "href" ), documentUrl.href ) ) : documentUrl,
 
 		//cache the comparison once.
-		documentBaseDiffers = ( documentUrl.hrefNoHash === documentBase.hrefNoHash );
+		documentBaseDiffers = ( documentUrl.hrefNoHash !== documentBase.hrefNoHash );
 
 		//base element management, defined depending on dynamic base tag support
 		var base = $.support.dynamicBaseTag ? {
