@@ -152,9 +152,8 @@ $.event.special.swipe = {
 									Math.abs( start.coords[0] - stop.coords[0]) > 30 &&
 									Math.abs( start.coords[1] - stop.coords[1]) < 75 ) {
 								start.origin
-								.trigger( "swipe" )
-
-								.trigger( start.coords[0] > stop.coords[0] ? "swipeleft" : "swiperight" );
+									.trigger("swipe", { direction: left ? "left" : "right" })
+									.trigger( start.coords[0] > stop.coords[0] ? "swipeleft" : "swiperight" );
 							}
 						}
 						start = stop = undefined;
