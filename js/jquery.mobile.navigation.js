@@ -53,23 +53,27 @@
 					matches = path.urlParseRE.exec( url ),
 					results;
 				if ( matches ) {
+					// Create an object that allows the caller to access the sub-matches
+					// by name. Note that IE returns an empty string instead of undefined,
+					// like all other browsers do, so we normalize everything so its consistent
+					// no matter what browser we're running on.
 					results = {
-						href:         matches[0],
-						hrefNoHash:   matches[1],
-						hrefNoSearch: matches[2],
-						domain:       matches[3],
-						protocol:     matches[4],
-						authority:    matches[5],
-						username:     matches[7],
-						password:     matches[8],
-						host:         matches[9],
-						hostname:     matches[10],
-						port:         matches[11],
-						pathname:     matches[12],
-						directory:    matches[13],
-						filename:     matches[14],
-						search:       matches[15],
-						hash:         matches[16]
+						href:         matches[0] || "",
+						hrefNoHash:   matches[1] || "",
+						hrefNoSearch: matches[2] || "",
+						domain:       matches[3] || "",
+						protocol:     matches[4] || "",
+						authority:    matches[5] || "",
+						username:     matches[7] || "",
+						password:     matches[8] || "",
+						host:         matches[9] || "",
+						hostname:     matches[10] || "",
+						port:         matches[11] || "",
+						pathname:     matches[12] || "",
+						directory:    matches[13] || "",
+						filename:     matches[14] || "",
+						search:       matches[15] || "",
+						hash:         matches[16] || ""
 					};
 				}
 				return results || {};
@@ -114,12 +118,12 @@
 			//Returns true for any relative variant.
 			isRelativeUrl: function( url ) {
 				// All relative Url variants have one thing in common, no protocol.
-				return path.parseUrl( url ).protocol === undefined;
+				return path.parseUrl( url ).protocol === "";
 			},
 
 			//Returns true for an absolute url.
 			isAbsoluteUrl: function( url ) {
-				return path.parseUrl( url ).protocol !== undefined;
+				return path.parseUrl( url ).protocol !== "";
 			},
 
 			//Turn the specified realtive URL into an absolute one. This function
@@ -132,11 +136,11 @@
 				var relObj = path.parseUrl( relUrl ),
 					absObj = path.parseUrl( absUrl ),
 					protocol = relObj.protocol || absObj.protocol,
-					authority = relObj.authority || absObj.authority || "",
-					hasPath = relObj.pathname !== undefined,
+					authority = relObj.authority || absObj.authority,
+					hasPath = relObj.pathname !== "",
 					pathname = path.makePathAbsolute( relObj.pathname || absObj.filename, absObj.pathname ),
 					search = relObj.search || ( !hasPath && absObj.search ) || "",
-					hash = relObj.hash || "";
+					hash = relObj.hash;
 		
 				return protocol + "//" + authority + pathname + search + hash;
 			},
@@ -223,7 +227,7 @@
 				//is that links embedded within external documents will refer to the
 				//application document, whereas links embedded within the application
 				//document will be resolved against the document base.
-				if ( u.protocol !== undefined ) {
+				if ( u.protocol !== "" ) {
 					return ( u.hash && ( u.hrefNoHash === documentUrl.hrefNoHash || ( documentBaseDiffers && u.hrefNoHash === documentBase.hrefNoHash ) ) );
 				}
 				return (/^#/).test( u.href );
