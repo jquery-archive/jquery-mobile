@@ -53,7 +53,7 @@ $( ":jqmData(role='listview')" ).live( "listviewcreate", function() {
 						childItems = false,                        
 						itemtext="";
 
-					for (var i = listItems.length; i >= 0; i--) {
+					for ( var i = listItems.length - 1; i >= 0; i-- ) {
 						item = $( listItems[i] );
 						itemtext = item.jqmData( 'filtertext' ) || item.text();
 
