@@ -53,7 +53,15 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			}
 			
 			toggleClear();
-			input.keyup(toggleClear);
+      var timer;
+      input.focus(function(){
+        timer = setInterval(toggleClear, 100)
+      });
+      input.blur(function(){
+        clearTimeout(timer);
+      });
+      
+      
 	                input.focus(toggleClear);   
 		}
 		else{
