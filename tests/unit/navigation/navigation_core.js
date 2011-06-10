@@ -11,7 +11,14 @@
 			$.mobile.urlHistory.activeIndex = 0;
 			$.mobile.changePage = changePageFn;
 			document.title = originalTitle;
-			location.hash = "";
+			
+			if ( location.hash ) {
+				stop();
+				$(document).one("changepage", function() {
+					start();
+				} );
+				location.hash = "";
+			}
 		}
 	});
 
@@ -113,7 +120,6 @@
 
 	//url listening
 	function testListening( prop ){
-		prop = false;
 		var stillListening = false;
 		$(document).bind("pagebeforehide", function(){
 			stillListening = true;
@@ -128,7 +134,7 @@
 	}
 
 	asyncTest( "ability to disable our hash change event listening internally", function(){
-		testListening( $.mobile.urlHistory.ignoreNextHashChange );
+		testListening( ! $.mobile.urlHistory.ignoreNextHashChange );
 	});
 
 	asyncTest( "ability to disable our hash change event listening globally", function(){
@@ -163,9 +169,8 @@
 	});
 
 	asyncTest( "last entry choosen amongst multiple identical url history stack entries on hash change", function(){
-		$.testHelper.openPage("#dup-history-first");
-
-		$.testHelper.sequence([
+		$.testHelper.pageSequence([
+			function(){ $.testHelper.openPage("#dup-history-first"); },
 			function(){ $("#dup-history-first a").click(); },
 			function(){ $("#dup-history-second a:first").click(); },
 			function(){ $("#dup-history-first a").click(); },
@@ -176,15 +181,15 @@
 				// fourth page (third index) in the stack to account for first page being hash manipulation,
 				// the third page is dup-history-second which has two entries in history
 				// the test is to make sure the index isn't 1 in this case, or the first entry for dup-history-second
-				same($.mobile.urlHistory.activeIndex, 3, "should be the third page in the stack");
+				same($.mobile.urlHistory.activeIndex, 4, "should be the fourth page in the stack");
 				start();
-			}], 1000);
+			}]);
 	});
-
 	asyncTest( "going back from a page entered from a dialog skips the dialog and goes to the previous page", function(){
-		$.testHelper.openPage("#skip-dialog-first");
+		$.testHelper.pageSequence([
+			// setup
+			function(){ $.testHelper.openPage("#skip-dialog-first"); },
 
-		$.testHelper.sequence([
 			// transition to the dialog
 			function(){ $("#skip-dialog-first a").click(); },
 
@@ -198,13 +203,14 @@
 			function(){
 				same(location.hash, "#skip-dialog-first", "should be the first page in the sequence");
 				start();
-			}], 1000);
+			}]);
 	});
 
 	asyncTest( "going forward from a page entered from a dialog skips the dialog and goes to the next page", function(){
-		$.testHelper.openPage("#skip-dialog-first");
+		$.testHelper.pageSequence([
+			// setup
+			function(){ $.testHelper.openPage("#skip-dialog-first"); },
 
-		$.testHelper.sequence([
 			// transition to the dialog
 			function(){ $("#skip-dialog-first a").click(); },
 
@@ -221,14 +227,15 @@
 			function(){
 				same(location.hash, "#skip-dialog-second", "should be the second page after the dialog");
 				start();
-			}], 1000);
+			}]);
 	});
 
 
 	asyncTest( "going back from a dialog triggered from a dialog should result in the first dialog ", function(){
-		$.testHelper.openPage("#nested-dialog-page");
+		$.testHelper.pageSequence([
+			// setup
+			function(){ $.testHelper.openPage("#nested-dialog-page"); },
 
-		$.testHelper.sequence([
 			// transition to the dialog
 			function(){ $("#nested-dialog-page a").click(); },
 
@@ -242,13 +249,14 @@
 			function(){
 				same($(".ui-page-active")[0], $("#nested-dialog-first")[0], "should be the first dialog");
 				start();
-			}], 1000);
+			}]);
 	});
 
 	asyncTest( "loading a relative file path after an embeded page works", function(){
-		$.testHelper.openPage("#relative-after-embeded-page-first");
+		$.testHelper.pageSequence([
+			// transition second page
+			function(){ $.testHelper.openPage("#relative-after-embeded-page-first"); },
 
-		$.testHelper.sequence([
 			// transition second page
 			function(){ $("#relative-after-embeded-page-first a").click(); },
 
@@ -260,7 +268,7 @@
 				// data attribute intentionally left without namespace
 				same($(".ui-page-active").data("other"), "for testing", "should be relative ajax loaded page");
 				start();
-			}], 1000);
+			}]);
 	});
 
 	asyncTest( "Page title updates properly when clicking back to previous page", function(){
@@ -359,7 +367,7 @@
 			},
 
 			function(){
-				same(location.hash, "#data-url-tests/non-data-url.html?foo=bar");
+				same(location.hash, "#" + siteDirectory + "data-url-tests/non-data-url.html?foo=bar");
 				ok($(".ui-page-active").jqmData("url").indexOf("?foo=bar") > -1, "the query params are in the data url");
 				start();
 			}
@@ -367,7 +375,7 @@
 	});
 
 	asyncTest( "identical query param link doesn't add additional set of query params", function(){
-		$.testHelper.sequence([
+		$.testHelper.pageSequence([
 			function(){
 				$.testHelper.openPage("#data-url-tests/non-data-url.html");
 			},
@@ -377,15 +385,15 @@
 			},
 
 			function(){
-				same(location.hash, "#data-url-tests/non-data-url.html?foo=bar");
+				same(location.hash, "#" + siteDirectory + "data-url-tests/non-data-url.html?foo=bar");
 				$("#query-param-anchor").click();
 			},
 
 			function(){
-				same(location.hash, "#data-url-tests/non-data-url.html?foo=bar");
+				same(location.hash, "#" + siteDirectory + "data-url-tests/non-data-url.html?foo=bar");
 				start();
 			}
-		], 1000);
+		]);
 	});
 
 	// Special handling inside navigation because query params must be applied to the hash
@@ -393,7 +401,7 @@
 	asyncTest( "query param link from a dialog to itself should be a not add another dialog", function(){
 		var firstDialogHash;
 
-		$.testHelper.sequence([
+		$.testHelper.pageSequence([
 			// open our test page
 			function(){
 				$.testHelper.openPage("#dialog-param-link");
@@ -420,7 +428,7 @@
 				same(location.hash, firstDialogHash, "additional dialog hash key not added");
 				start();
 			}
-		], 1000);
+		]);
 	});
 
 	asyncTest( "query data passed as string to changePage is appended to URL", function(){
@@ -434,7 +442,7 @@
 			},
 
 			function(){
-				same(location.hash, "#form-tests/changepage-data.html?foo=1&bar=2");
+				same(location.hash, "#" + siteDirectory + "form-tests/changepage-data.html?foo=1&bar=2");
 				start();
 			}
 		]);
@@ -454,7 +462,7 @@
 			},
 
 			function(){
-				same(location.hash, "#form-tests/changepage-data.html?foo=3&bar=4");
+				same(location.hash, "#" + siteDirectory + "form-tests/changepage-data.html?foo=3&bar=4");
 				start();
 			}
 		]);
