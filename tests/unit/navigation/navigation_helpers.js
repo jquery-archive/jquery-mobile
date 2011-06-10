@@ -115,7 +115,7 @@
 			same( mua( "http://jqm.com/?foo=1&bar=2",                p5 ), "http://jqm.com/?foo=1&bar=2", "absolute root with query - absolute root" );
 			same( mua( "//jqm.com/?foo=1&bar=2",                     p5 ), "http://jqm.com/?foo=1&bar=2", "protocol relative root with query - absolute root" );
 			same( mua( "/?foo=1&bar=2",                              p5 ), "http://jqm.com/?foo=1&bar=2", "site relative root with query - absolute root" );
-			same( mua( "?foo=1&bar=2",                               p5 ), "http://jqm.com/?foo=1&bar=2", "query relative - absolute root" );
+			same( mua( "?foo=1&bar=2",                               p5 ), "http://jqm.com/test.php?foo=1&bar=2", "query relative - absolute root" );
 
 			same( mua( "http://jqm.com/#spaz",                       p5 ), "http://jqm.com/#spaz", "absolute root with fragment - absolute root" );
 			same( mua( "//jqm.com/#spaz",                            p5 ), "http://jqm.com/#spaz", "protocol relative root with fragment - absolute root" );
