@@ -6,7 +6,7 @@
 			originalTitle = document.title,
 			siteDirectory = location.pathname.replace(/[^/]+$/, "");
 	module('jquery.mobile.navigation.js', {
-		teardown: function(){
+		setup: function(){
 			$.mobile.urlHistory.stack = [];
 			$.mobile.urlHistory.activeIndex = 0;
 			$.mobile.changePage = changePageFn;

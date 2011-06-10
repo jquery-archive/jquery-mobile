@@ -6,7 +6,13 @@
 
 	module('jquery.mobile.navigation.js', {
 		setup: function(){
-			location.hash = "";
+			if ( location.hash ) {
+				stop();
+				$(document).one("changepage", function() {
+					start();
+				} );
+				location.hash = "";
+			}
 		}
 	});
 
