@@ -152,11 +152,23 @@
 		same( $.mobile.path.hasProtocol( "file://foo/bar/baz.html" ), true, "simple directory path with file:// has protocol" );
 	});
 
-	test( "path.isRelative is working properly", function(){
-		same( $.mobile.path.isRelative("#foo/bar"), false, "path starting with a # is not relative" );
-		same( $.mobile.path.isRelative("/foo/bar"), false, "path starting with a / is not relative" );
-		same( $.mobile.path.isRelative("http://example.com/foo"), false, "full url path is not relative" );
-		same( $.mobile.path.isRelative("foo/bar.html"), true, "simple path is relative" );
+	test( "path.isRelativeUrl is working properly", function(){
+		same( $.mobile.path.isRelativeUrl("http://company.com/"), false, "absolute url is not relative" );
+		same( $.mobile.path.isRelativeUrl("//company.com/"), true, "protocol relative url is relative" );
+		same( $.mobile.path.isRelativeUrl("/"), true, "site relative url is relative" );
+		
+		same( $.mobile.path.isRelativeUrl("http://company.com/test.php"), false, "absolute url is not relative" );
+		same( $.mobile.path.isRelativeUrl("//company.com/test.php"), true, "protocol relative url is relative" );
+		same( $.mobile.path.isRelativeUrl("/test.php"), true, "site relative url is relative" );
+		same( $.mobile.path.isRelativeUrl("test.php"), true, "document relative url is relative" );
+		
+		same( $.mobile.path.isRelativeUrl("http://company.com/dir1/dir2/test.php?foo=1&bar=2#frag"), false, "absolute url is not relative" );
+		same( $.mobile.path.isRelativeUrl("//company.com/dir1/dir2/test.php?foo=1&bar=2#frag"), true, "protocol relative url is relative" );
+		same( $.mobile.path.isRelativeUrl("/dir1/dir2/test.php?foo=1&bar=2#frag"), true, "site relative url is relative" );
+		same( $.mobile.path.isRelativeUrl("dir1/dir2/test.php?foo=1&bar=2#frag"), true, "document relative path url is relative" );
+		same( $.mobile.path.isRelativeUrl("test.php?foo=1&bar=2#frag"), true, "document relative file url is relative" );
+		same( $.mobile.path.isRelativeUrl("?foo=1&bar=2#frag"), true, "query relative url is relative" );
+		same( $.mobile.path.isRelativeUrl("#frag"), true, "fragments are relative" );
 	});
 
 	test( "path.isExternal is working properly", function(){

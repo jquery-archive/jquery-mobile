@@ -214,11 +214,6 @@
 				return ( /^(:?\w+:)/ ).test( url );
 			},
 
-			//check if the url is relative
-			isRelative: function( url ) {
-				return  (/^[^\/|#]/).test( url ) && !path.hasProtocol( url );
-			},
-
 			isEmbeddedPage: function( url ) {
 				var u = path.parseUrl( url );
 
