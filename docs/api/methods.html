@@ -26,24 +26,48 @@
 
 		<dl>
 			<dt><code>$.mobile.changePage</code> (<em>method</em>)</dt>
-			<dd>Programmatically change from one page to another. This method is used internally for transitions that occur as a result of clicking a link or submitting a form, when those features are enabled.</dd>
+			<dd>Programmatically change from one page to another. This method is used internally for the page loading and transitioning that occurs as a result of clicking a link or submitting a form, when those features are enabled.</dd>
 			
 			<dd>
 				
 				<dl>
 					<dt>Arguments</dt>
-					<dd><code>to</code>					
-						<ul>
-							<li>String, url to transition to (<code>"about/us.html"</code>)</li>
-							<li>jQuery object (<code>$("#about")</code>)</li>
-							<li>Array specifying two page references [from,to] for transitioning from a known page. From is otherwise assumed to be the current page in view (or $.mobile.activePage ).</li>
-							<li>Object for sending form data. (<code>{url: url, data: serialized form data, type: "get" or "post"}</code></li>  
-						</ul>	
-						</dd>	
+					<dd><code>to</code> (<em>string or object</em>, required)
+<ul>
+				<li>String: Absolute or relative URL. (&quot;about/us.html&quot;)</li>
+							<li>Object: jQuery collection object. (<code>$("#about")</code>)</li>
+						</ul>
+					</dd>	
 						
-					<dd><code>transition</code> (<em>string</em>, examples: "pop", "slide"," "none")</dd>
-					<dd><code>reverse</code> (<em>boolean</em>, default: false). True will cause a reverse-direction transition.</dd>
-					<dd><code>changeHash</code> (<em>boolean</em>, default: true). Update the hash to the to page's URL when page change is complete.</dd>
+					<dd><code>options</code> (<em>object</em>, optional)
+						<ul>
+							<li>Properties:
+								<ul>
+									<li><code>transition</code> (<em>string</em>,	default:	$.mobile.defaultPageTransition)	The transition to use when showing the page. </li>
+									<li><code>reverse</code> (<em>boolean</em>,	default:	false) Decides what direction the transition will run when showing the page. </li>
+									<li><code>changeHash</code> (<em>boolean</em>,	default:	true) Decides if the hash in the location bar should be updated. </li>
+									<li><code>role</code> (<em>string</em>,	default:	&quot;page&quot;) The data-role value to be used when displaying the page. </li>
+									<li><code>pageContainer</code> (jQuery collection,	default:	$.mobile.pageContainer) Specifies the element that should contain the page. </li>
+									<li><code>type</code> (<em>string</em>, default: &quot;get&quot;) Specifies the method ("get" or "post") to use when making a page request. 
+										<ul>
+											<li>Used only when the 'to' argument of changePage() is a URL.</li>
+										</ul>
+									</li>
+									<li><code>data</code> (<em>object</em> or	string,	default: undefined) The data to send with an Ajax page request.
+										<ul>
+											<li>Used only when the 'to' argument of changePage() is a URL.</li>
+										</ul>
+									</li>
+									<li><code>reloadPage</code> (<em>boolean</em>, default: false) Forces a reload of a page, even if it is already in the DOM of the page container.
+										<ul>
+											<li>Used only when the 'to' argument of changePage() is a URL.</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</dd>	
+
 				</dl>
 			</dd>
 			
@@ -51,18 +75,65 @@
 			<pre>
 			<code>
 <strong>//transition to the "about us" page with a slideup transition</strong> 			
-$.mobile.changePage("about/us.html", "slideup");	
+$.mobile.changePage( "about/us.html", { transition: "slideup"} );	
 
 <strong>//transition to the "search results" page, using data from a form with an ID of "search"" 	</strong>	
-$.mobile.changePage({
-	url: "searchresults.php", 
-	type: "get", 
+$.mobile.changePage( "searchresults.php", {
+	type: "post", 
 	data: $("form#search").serialize()
 });		
 
 <strong>//transition to the "confirm" page with a "pop" transition without tracking it in history	</strong>		
-$.mobile.changePage("../alerts/confirm.html", "pop", false, false);	
+$.mobile.changePage( "../alerts/confirm.html", {
+	transition: "pop",
+	reverse: false,
+	changeHash: false
+});	
 		
+			</code>
+			</pre>
+			
+			</dd>
+			
+			
+			<dt><code>$.mobile.loadPage</code> (<em>method</em>)</dt>
+			<dd>Load an external page, enhance its content, and insert it into the DOM. This method is called internally by the changePage() function when its first argument is a URL. This function does not affect the current active page so it can be used to load pages in the background. The function returns a deferred promise object that gets resolved after the page has been enhanced and inserted into the document.</dd>
+			
+			<dd>
+				
+				<dl>
+					<dt>Arguments</dt>
+					<dd><code>url</code> (<em>string or object</em>, required) A relative or absolute URL.</dd>	
+						
+					<dd><code>options</code> (<em>object</em>, optional)
+						<ul>
+							<li>Properties:
+								<ul>
+									<li><code>role</code> (<em>string</em>,	default:	&quot;page&quot;) The data-role value to be used when displaying the page. </li>
+									<li><code>pageContainer</code> (jQuery collection,	default:	$.mobile.pageContainer) Specifies the element that should contain the page after it is loaded. </li>
+									<li><code>type</code> (<em>string</em>, default: &quot;get&quot;) Specifies the method ("get" or "post") to use when making a page request. 
+									</li>
+									<li><code>data</code> (<em>object</em> or	string,	default: undefined) The data to send with an Ajax page request. </li>
+									<li><code>reloadPage</code> (<em>boolean</em>, default: false) Forces a reload of a page, even if it is already in the DOM of the page container. </li>
+								</ul>
+							</li>
+						</ul>
+					</dd>	
+
+				</dl>
+			</dd>
+			
+			<dd>Examples:
+			<pre>
+			<code>
+<strong>//load the "about us" page into the DOM</strong>			
+$.mobile.loadPage( "about/us.html" );	
+
+<strong>//load a "search results" page, using data from a form with an ID of "search"" 	</strong>	
+$.mobile.loadPage( "searchresults.php", {
+	type: "post", 
+	data: $("form#search").serialize()
+});				
 			</code>
 			</pre>
 			
