@@ -766,6 +766,7 @@
 			url = toPage.jqmData( "url" ),
 			fileUrl = path.getFilePath( url ),
 			active = urlHistory.getActive(),
+			activeIsInitialPage = urlHistory.activeIndex === 0,
 			historyDir = 0,
 			pageTitle = document.title,
 			isDialog = settings.role === "dialog" || toPage.jqmData( "role" ) === "dialog";
@@ -839,7 +840,7 @@
 
 		// Make sure we have a transition defined.
 		settings.transition = settings.transition
-			|| ( historyDir ? active.transition : undefined )
+			|| ( ( historyDir && !activeIsInitialPage ) ? active.transition : undefined )
 			|| ( settings.role === "dialog" ? $.mobile.defaultDialogTransition : $.mobile.defaultPageTransition );
 
 		// If we're navigating back in the URL history, set reverse accordingly.
