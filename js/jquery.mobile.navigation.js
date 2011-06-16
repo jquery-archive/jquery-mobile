@@ -490,6 +490,16 @@
 	//enable cross-domain page support
 	$.mobile.allowCrossDomainPages = false;
 
+	//return the original document url
+	$.mobile.getDocumentUrl = function(asParsedObject) {
+		return asParsedObject ? $.extend( {}, documentUrl ) : documentUrl.href;
+	};
+
+	//return the original document base url
+	$.mobile.getDocumentBase = function(asParsedObject) {
+		return asParsedObject ? $.extend( {}, documentBase ) : documentBase.href;
+	};
+
 	// Load a page into the DOM.
 	$.mobile.loadPage = function( url, options ) {
 		// This function uses deferred notifications to let callers
