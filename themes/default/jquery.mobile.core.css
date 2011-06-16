@@ -19,9 +19,9 @@
 
 /*orientations from js are available */
 .portrait,
-.portrait .ui-page,
+.portrait .ui-page { min-height: 420px; }
 .landscape,
-.landscape .ui-page  { min-height: 100%; }
+.landscape .ui-page  { min-height: 300px; }
 
 /* loading screen */
 .ui-loading .ui-mobile-viewport { overflow: hidden !important; }

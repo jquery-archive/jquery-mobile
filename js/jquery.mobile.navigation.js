@@ -403,7 +403,7 @@
 			fromPage.data( "page" )._trigger( "beforehide", null, { nextPage: toPage } );
 		}
 		toPage
-			.height( toScroll )
+			.height( screen.height )
 			.data( "page" )._trigger( "beforeshow", null, { prevPage: fromPage || $( "" ) } );
 
 		//clear page loader
@@ -422,15 +422,15 @@
 
 			//trigger show/hide events
 			if( fromPage ) {
-				fromPage.width("").height("").data( "page" )._trigger( "hide", null, { nextPage: toPage } );
+				fromPage.height("").data( "page" )._trigger( "hide", null, { nextPage: toPage } );
 			}
 			//trigger pageshow, define prevPage as either fromPage or empty jQuery obj
-			toPage.width("").height("").data( "page" )._trigger( "show", null, { prevPage: fromPage || $( "" ) } );
+			toPage.height("").data( "page" )._trigger( "show", null, { prevPage: fromPage || $( "" ) } );
 
 		});
 
 		return promise;
-	}
+	};
 
 	//shared page enhancements
 	function enhancePage( $page, role ) {
