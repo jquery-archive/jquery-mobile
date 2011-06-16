@@ -46,7 +46,7 @@
 									<li><code>transition</code> (<em>string</em>,	default:	$.mobile.defaultPageTransition)	The transition to use when showing the page. </li>
 									<li><code>reverse</code> (<em>boolean</em>,	default:	false) Decides what direction the transition will run when showing the page. </li>
 									<li><code>changeHash</code> (<em>boolean</em>,	default:	true) Decides if the hash in the location bar should be updated. </li>
-									<li><code>role</code> (<em>string</em>,	default:	&quot;page&quot;) The data-role value to be used when displaying the page. </li>
+									<li><code>role</code> (<em>string</em>,	default:	undefined) The data-role value to be used when displaying the page. By default this is undefined which means rely on the value of the @data-role attribute defined on the element.</li>
 									<li><code>pageContainer</code> (jQuery collection,	default:	$.mobile.pageContainer) Specifies the element that should contain the page. </li>
 									<li><code>type</code> (<em>string</em>, default: &quot;get&quot;) Specifies the method ("get" or "post") to use when making a page request. 
 										<ul>
@@ -109,7 +109,7 @@ $.mobile.changePage( "../alerts/confirm.html", {
 						<ul>
 							<li>Properties:
 								<ul>
-									<li><code>role</code> (<em>string</em>,	default:	&quot;page&quot;) The data-role value to be used when displaying the page. </li>
+									<li><code>role</code> (<em>string</em>,	default:	undefined) The data-role value to be used when displaying the page. By default this is undefined which means rely on the value of the @data-role attribute defined on the element.</li>
 									<li><code>pageContainer</code> (jQuery collection,	default:	$.mobile.pageContainer) Specifies the element that should contain the page after it is loaded. </li>
 									<li><code>type</code> (<em>string</em>, default: &quot;get&quot;) Specifies the method ("get" or "post") to use when making a page request. 
 									</li>
