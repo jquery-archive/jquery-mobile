@@ -403,7 +403,7 @@
 		if( fromPage ) {
 			//set as data for returning to that spot
 			fromPage
-				.height( screen.height )
+				.height( screen.height + currScroll )
 				.jqmData( "lastScroll", currScroll )
 				.jqmData( "lastClicked", $activeClickedLink );
 				
@@ -411,7 +411,7 @@
 			fromPage.data( "page" )._trigger( "beforehide", null, { nextPage: toPage } );
 		}
 		toPage
-			.height( screen.height )
+			.height( screen.height + toScroll )
 			.data( "page" )._trigger( "beforeshow", null, { prevPage: fromPage || $( "" ) } );
 
 		//clear page loader
