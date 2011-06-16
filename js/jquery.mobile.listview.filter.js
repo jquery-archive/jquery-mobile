@@ -17,7 +17,14 @@ $( ":jqmData(role='listview')" ).live( "listviewcreate", function() {
 		return;
 	}
 
-	var wrapper = $( "<form>", { "class": "ui-listview-filter ui-bar-c", "role": "search" } ),
+	var theme = list.data('filter-theme');
+
+	if (!theme) {
+		var themedParent = list.closest("[class*='ui-bar-'],[class*='ui-body-']");
+		themedParent.length ? /ui-(bar|body)-([a-z])/.exec( themedParent.attr("class") )[2] : "c";
+	}
+
+	var wrapper = $( "<form>", { "class": "ui-listview-filter ui-bar-" + theme, "role": "search" } ),
 
 		search = $( "<input>", {
 				placeholder: listview.options.filterPlaceholder
