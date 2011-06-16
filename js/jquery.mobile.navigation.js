@@ -386,19 +386,27 @@
 	//function for transitioning between two existing pages
 	function transitionPages( toPage, fromPage, transition, reverse ) {
 		
-
 		//get current scroll distance
 		var currScroll = $window.scrollTop(),
 			toScroll	= toPage.data( "lastScroll" ) || 0;
 		
-		$.mobile.silentScroll();
-
+		//if scrolled down, scroll to top
+		if( currScroll ){
+			window.scrollTo( 0, 0 );
+		}
+		
+		//if the Y location we're scrolling to is less than 10px, let it go for sake of smoothness
+		if( toScroll < 20 ){
+			toScroll = 0;
+		}
+		
 		if( fromPage ) {
 			//set as data for returning to that spot
 			fromPage
 				.height( screen.height )
 				.jqmData( "lastScroll", currScroll )
 				.jqmData( "lastClicked", $activeClickedLink );
+				
 			//trigger before show/hide events
 			fromPage.data( "page" )._trigger( "beforehide", null, { nextPage: toPage } );
 		}
@@ -416,16 +424,25 @@
 			promise = th( transition, reverse, toPage, fromPage );
 
 		promise.done(function() {
+			//reset toPage height bac
+			toPage.height( "" );
+			
 			//jump to top or prev scroll, sometimes on iOS the page has not rendered yet.
-			$.mobile.silentScroll( toPage.jqmData( "lastScroll" ) || 0 );
-			$( document ).one( "silentscroll", function() { reFocus( toPage ); } );
+			if( toScroll ){
+				$.mobile.silentScroll( toScroll );
+				$( document ).one( "silentscroll", function() { reFocus( toPage ); } );
+			}
+			else{
+				reFocus( toPage ); 
+			}
 
 			//trigger show/hide events
 			if( fromPage ) {
 				fromPage.height("").data( "page" )._trigger( "hide", null, { nextPage: toPage } );
 			}
+			
 			//trigger pageshow, define prevPage as either fromPage or empty jQuery obj
-			toPage.height("").data( "page" )._trigger( "show", null, { prevPage: fromPage || $( "" ) } );
+			toPage.data( "page" )._trigger( "show", null, { prevPage: fromPage || $( "" ) } );
 
 		});
 
