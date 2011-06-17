@@ -13,6 +13,7 @@ JQUERY = $(shell grep Library js/jquery.js | sed s'/ \* jQuery JavaScript Librar
 
 # The directory to create the zipped files in and also serves as the filenames
 DIR = jquery.mobile-${VER}
+nightly: DIR = jquery.mobile
 
 # The output folder for the finished files
 OUTPUT = compiled
@@ -24,7 +25,6 @@ RMLATEST = echo ""
 NIGHTLY_OUTPUT = nightlies/${DATE}
 ifeq (${NIGHTLY_OUTPUT}, latest)
 	RMLATEST = ssh jqadmin@code.origin.jquery.com 'rm -rf /var/www/html/code.jquery.com/mobile/latest'
-	DIR = jquery.mobile
 endif
 NIGHTLY_WEBPATH = http://code.jquery.com/mobile/${NIGHTLY_OUTPUT}
 
@@ -87,21 +87,30 @@ all: init js min css cssmin notify
 
 # Build the normal CSS file.
 css: init
+	# Build the CSS file
 	@@head -8 js/jquery.mobile.core.js | ${SED_VER} > ${OUTPUT}/${CSS}
 	@@cat ${CSSFILES} >> ${OUTPUT}/${CSS}
 
 # Build the minified CSS file
 cssmin: init css
-	@@head -8 js/jquery.mobile.core.js | ${SED_VER} > ${OUTPUT}/${CSSMIN}
+	# Build the minified CSS file
 	@@java -jar build/yuicompressor-2.4.4.jar --type css ${OUTPUT}/${CSS} >> ${OUTPUT}/${CSSMIN}
 
 # Build the normal JS file
 js: init
+	# Build the JavaScript file
 	@@head -8 js/jquery.mobile.core.js | ${SED_VER} > ${OUTPUT}/${JS}
 	@@cat ${JSFILES} >> ${OUTPUT}/${JS}
 
+# Create the output directory. This is in a separate step so its not dependant on other targets
+init:
+	# Building jQuery Mobile in the "${OUTPUT}" folder
+	@@rm -rf ${OUTPUT}
+	@@mkdir ${OUTPUT}
+
 # Build the minified JS file
 min: init js
+	# Build the minified JavaScript file
 	@@head -8 js/jquery.mobile.core.js | ${SED_VER} > ${OUTPUT}/${MIN}
 	@@java -jar build/google-compiler-20110405.jar --js ${OUTPUT}/${JS} --warning_level QUIET --js_output_file ${MIN}.tmp
 	@@cat ${MIN}.tmp >> ${OUTPUT}/${MIN}
@@ -111,18 +120,12 @@ min: init js
 notify:
 	@@echo "The files have been built and are in " $$(pwd)/${OUTPUT}
 
-# Create the output directory. This is in a separate step so its not dependant on other targets
-init:
-	@@rm -rf ${OUTPUT}
-	@@mkdir ${OUTPUT}
-
 # Pull the latest commits. This is used for the nightly build but can be used to save some keystrokes
 pull: 
 	@@git pull --quiet
 
 # Zip the 4 files and the theme images into one convenient package
 zip: init js min css cssmin
-	@@rm -rf ${DIR}
 	@@mkdir -p ${DIR}
 	@@cp ${OUTPUT}/${DIR}*.js ${DIR}/
 	@@cp ${OUTPUT}/${DIR}*.css ${DIR}/
@@ -133,12 +136,6 @@ zip: init js min css cssmin
 
 # Used by the jQuery team to make the nightly builds
 nightly: pull zip
-	# Create a log that lists the current version according to the code and the git information for the last commit
-	@@echo $$"\nGit Release Version: " >> ${OUTPUT}/log.txt
-	@@cat version.txt >> ${OUTPUT}/log.txt
-	@@echo $$"\nGit Information for this build:" >> ${OUTPUT}/log.txt
-	@@git log -1 --format=format:"SHA1: %H \nDate: %cd \nTitle: %s" >> ${OUTPUT}/log.txt
-	
 	# Create the folder to hold the files for the demos
 	@@mkdir -p ${VER}
 
@@ -174,12 +171,11 @@ nightly: pull zip
 # Used by the jQuery team to deploy a build to the CDN
 deploy: zip
 	# Deploy to CDN
-	@@mv ${DIR} ${VER}
-	@@cp ${DIR}.zip ${VER}/
+	@@mv ${OUTPUT} ${VER}
 	@@scp -r ${VER} jqadmin@code.origin.jquery.com:/var/www/html/code.jquery.com/mobile/
-	@@mv ${VER} ${DIR}
+	@@mv ${VER} ${OUTPUT}
 
-	# Deploy Demos
+	# Deploy Demos to the jQueryMobile.com site
 	@@mkdir -p ${VER}
 	@@cp -r index.html themes experiments docs ${VER}/
 
@@ -198,3 +194,6 @@ deploy: zip
 
 	@@scp -r ${VER} jqadmin@jquerymobile.com:/srv/jquerymobile.com/htdocs/demos/
 
+	# Clean up the local files
+	@@rm -rf ${VER}
+	@@echo "All Done"

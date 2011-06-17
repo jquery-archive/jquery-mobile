@@ -3,7 +3,7 @@
  */
 (function($){
 	var mobilePage = undefined,
-	    	libName = 'jquery.mobile.init.js',
+			libName = 'jquery.mobile.init.js',
 			coreLib = 'jquery.mobile.core.js',
 			extendFn = $.extend,
 			setGradeA = function(value) { $.mobile.gradeA = function(){ return value; }; },
@@ -27,9 +27,6 @@
 
 			// NOTE reset for pageLoading tests
 			$('.ui-loader').remove();
-
-			// reset meta view port content
-			$.mobile.metaViewportContent = metaViewportContentDefault;
 		}
 	});
 
@@ -76,7 +73,7 @@
 			ok($("html").hasClass("ui-mobile"));
 		});
 
-		
+
 
 		var findFirstPage = function() {
 			return $(":jqmData(role='page')").first();
