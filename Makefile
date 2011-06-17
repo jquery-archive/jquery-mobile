@@ -13,6 +13,7 @@ JQUERY = $(shell grep Library js/jquery.js | sed s'/ \* jQuery JavaScript Librar
 
 # The directory to create the zipped files in and also serves as the filenames
 DIR = jquery.mobile-${VER}
+nightly: DIR = jquery.mobile
 
 # The output folder for the finished files
 OUTPUT = compiled
@@ -24,7 +25,6 @@ RMLATEST = echo ""
 NIGHTLY_OUTPUT = nightlies/${DATE}
 ifeq (${NIGHTLY_OUTPUT}, latest)
 	RMLATEST = ssh jqadmin@code.origin.jquery.com 'rm -rf /var/www/html/code.jquery.com/mobile/latest'
-	DIR = jquery.mobile
 endif
 NIGHTLY_WEBPATH = http://code.jquery.com/mobile/${NIGHTLY_OUTPUT}
 
@@ -94,7 +94,6 @@ css: init
 # Build the minified CSS file
 cssmin: init css
 	# Build the minified CSS file
-	@@head -8 js/jquery.mobile.core.js | ${SED_VER} > ${OUTPUT}/${CSSMIN}
 	@@java -jar build/yuicompressor-2.4.4.jar --type css ${OUTPUT}/${CSS} >> ${OUTPUT}/${CSSMIN}
 
 # Build the normal JS file
@@ -111,7 +110,7 @@ init:
 
 # Build the minified JS file
 min: init js
-	# Build the minified Javascript file
+	# Build the minified JavaScript file
 	@@head -8 js/jquery.mobile.core.js | ${SED_VER} > ${OUTPUT}/${MIN}
 	@@java -jar build/google-compiler-20110405.jar --js ${OUTPUT}/${JS} --warning_level QUIET --js_output_file ${MIN}.tmp
 	@@cat ${MIN}.tmp >> ${OUTPUT}/${MIN}
@@ -137,12 +136,6 @@ zip: init js min css cssmin
 
 # Used by the jQuery team to make the nightly builds
 nightly: pull zip
-	# Create a log that lists the current version according to the code and the git information for the last commit
-	@@echo $$"\nGit Release Version: " >> ${OUTPUT}/log.txt
-	@@cat version.txt >> ${OUTPUT}/log.txt
-	@@echo $$"\nGit Information for this build:" >> ${OUTPUT}/log.txt
-	@@git log -1 --format=format:"SHA1: %H \nDate: %cd \nTitle: %s" >> ${OUTPUT}/log.txt
-	
 	# Create the folder to hold the files for the demos
 	@@mkdir -p ${VER}
 

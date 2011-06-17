@@ -56,6 +56,7 @@ $.mobile.browser.ie = ( function() {
     return v > 4 ? v : !v;
 }() );
 
+
 $.extend( $.support, {
 	orientation: "orientation" in window,
 	touch: "ontouchend" in document,

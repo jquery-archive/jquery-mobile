@@ -8,7 +8,7 @@
 .ui-collapsible-heading a { text-align: left; margin: 0;  }
 .ui-collapsible-heading a .ui-btn-inner { padding-left: 40px; }
 .ui-collapsible-heading a span.ui-btn { position: absolute; left: 6px; top: 50%; margin: -12px 0 0 0; width: 20px; height: 20px; padding: 1px 0px 1px 2px; text-indent: -9999px; }
-.ui-collapsible-heading a span.ui-btn .ui-btn-inner { padding: 0; }
+.ui-collapsible-heading a span.ui-btn .ui-btn-inner { padding: 10px 0; }
 .ui-collapsible-heading a span.ui-btn .ui-icon { left: 0; margin-top: -10px; }
 .ui-collapsible-heading-status { position:absolute; left:-9999px; }
 .ui-collapsible-content {  display: block; padding: 10px 0 10px 8px; }

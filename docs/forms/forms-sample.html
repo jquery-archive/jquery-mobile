@@ -27,7 +27,7 @@
 			
             <h2>Non-Ajax handling</h2>
 
-            <p>To prevent form submissions from being automatically handled with Ajax, add the <code>data-ajax="false"</code> attribute to the form element. You can also turn of Ajax form handling completely via the <code>ajaxFormsEnabled</code> <a href="../api/globalconfig.html">global config option</a>.</p>
+            <p>To prevent form submissions from being automatically handled with Ajax, add the <code>data-ajax="false"</code> attribute to the form element. You can also turn of Ajax form handling completely via the <code>ajaxEnabled</code> <a href="../api/globalconfig.html">global config option</a>.</p>
             
             <h2>Simple Ajax form example</h2>
             <p>This page demonstrates automated ajax handling of form submissions. The form below is configured to send regular a <code>get</code> request to <code>forms-sample-response.php</code>. On submit, jQuery Mobile will make sure that the Url specified is able to be retrieved via Ajax, and handle it appropriately. Keep in mind that just like ordinary HTTP form submissions, jQuery Mobile allows <code>get</code> result pages to be bookmarked by updating the Url hash when the response returns successfully. Also like ordinary form submissions, <code>post</code> requests do not contain query parameters in the hash, so they are not bookmarkable.</p>

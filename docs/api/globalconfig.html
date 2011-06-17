@@ -95,17 +95,14 @@ $(document).bind("mobileinit", function(){
 	<dt>ajaxEnabled (<em>boolean</em>, default: true):</dt> 
 	<dd>jQuery Mobile will automatically handle link clicks and form submissions through Ajax, when possible. If false, url hash listening will be disabled as well, and urls will load as regular http requests.</dd>
 
-	<dt>ajaxLinksEnabled (<strong>deprecated</strong> <em>boolean</em>, default: true):</dt> 
-	<dd>jQuery Mobile will automatically handle link clicks through Ajax, when possible.</dd>
-
-	<dt>ajaxFormsEnabled (<strong>deprecated</strong> <em>boolean</em>, default: true):</dt> 
-	<dd>jQuery Mobile will automatically handle form submissions through Ajax, when possible.</dd>
-	
 	<dt>hashListeningEnabled (<em>boolean</em>, default: true):</dt> 
 	<dd>jQuery Mobile will automatically listen and handle changes to the location.hash. Disabling this will prevent jQuery Mobile from handling hash changes, which allows you to handle them yourself, or simply to use simple deep-links within a document that scroll to a particular ID.</dd>
 
-	<dt>defaultTransition (<em>string</em>, default: 'slide'):</dt> 
-	<dd>Set the default transition for page changes that use Ajax. The default transition for dialog presentation is 'pop'. Set to 'none' for no transitions by default.</dd>
+	<dt>defaultPageTransition (<em>string</em>, default: 'slide'):</dt> 
+	<dd>Set the default transition for page changes that use Ajax. Set to 'none' for no transitions by default.</dd>
+	
+	<dt>defaultDialogTransition (<em>string</em>, default: 'pop'):</dt> 
+	<dd>Set the default transition for dialog changes that use Ajax. Set to 'none' for no transitions by default.</dd>
 	
 	<dt>loadingMessage (<em>string</em>, default: "loading"):</dt> 
 	<dd>Set the text that appears when a page is loading. If set to false, the message will not appear at all.</dd>

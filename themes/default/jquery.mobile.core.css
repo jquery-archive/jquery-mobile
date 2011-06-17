@@ -19,7 +19,7 @@
 
 /*orientations from js are available */
 .portrait,
-.portrait .ui-page { min-height: 100%; }
+.portrait .ui-page,
 .landscape,
 .landscape .ui-page  { min-height: 100%; }
 
