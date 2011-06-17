@@ -38,6 +38,9 @@
 
 		//set default page transition - 'none' for no transitions
 		defaultPageTransition: "slide",
+		
+		//minimum scroll distance that will be remembered when returning to a page
+		minScrollBack: screen.height / 2,
 
 		//set default dialog transition - 'none' for no transitions
 		defaultDialogTransition: "pop",

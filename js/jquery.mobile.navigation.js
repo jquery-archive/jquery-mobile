@@ -396,7 +396,7 @@
 		}
 		
 		//if the Y location we're scrolling to is less than 10px, let it go for sake of smoothness
-		if( toScroll < 20 ){
+		if( toScroll < $.mobile.minScrollBack ){
 			toScroll = 0;
 		}
 		
@@ -453,7 +453,7 @@
 	
 	//simply set the active page's minimum height to screen height, depending on orientation
 	function resetActivePageHeight(){
-		var height = jQuery.event.special.orientationchange.orientation() == "portrait" ? screen.height : screen.width,
+		var height = jQuery.event.special.orientationchange.orientation() === "portrait" ? screen.height : screen.width,
 			winHeight = $( window ).height(),
 			pageMin = Math.min( height, winHeight );
 
