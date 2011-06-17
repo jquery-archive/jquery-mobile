@@ -392,20 +392,28 @@
 
     module("Programmatic list items manipulation");
 
-    test( "Removing list items", 4, function() {
-        $.testHelper.openPage("#removing-items-from-list-test");
-        var ul = $('#removing-items-from-list-test ul');
-        ul.find("li").first().remove();
-        equal(ul.find("li").length, 3, "There should be only 3 list items left");
+    asyncTest( "Removing list items", 4, function() {
+	    $.testHelper.pageSequence([
+		    function(){
+                $.testHelper.openPage("#removing-items-from-list-test");
+		    },
 
-        ul.listview('refresh');
-        ok(ul.find("li").first().hasClass("ui-corner-top"), "First list item should have class ui-corner-top");
+			function(){
+				var ul = $('#removing-items-from-list-test ul');
+				ul.find("li").first().remove();
+				equal(ul.find("li").length, 3, "There should be only 3 list items left");
 
-        ul.find("li").last().remove();
-        equal(ul.find("li").length, 2, "There should be only 2 list items left");
+				ul.listview('refresh');
+				ok(ul.find("li").first().hasClass("ui-corner-top"), "First list item should have class ui-corner-top");
 
-        ul.listview('refresh');
-        ok(ul.find("li").last().hasClass("ui-corner-bottom"), "Last list item should have class ui-corner-bottom");
+				ul.find("li").last().remove();
+				equal(ul.find("li").length, 2, "There should be only 2 list items left");
+
+				ul.listview('refresh');
+				ok(ul.find("li").last().hasClass("ui-corner-bottom"), "Last list item should have class ui-corner-bottom");
+				start();
+			}
+		]);
     });
 
 })(jQuery);
