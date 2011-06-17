@@ -453,9 +453,12 @@
 	
 	//simply set the active page's minimum height to screen height, depending on orientation
 	function resetActivePageHeight(){
-		var height = jQuery.event.special.orientationchange.orientation() === "portrait" ? screen.height : screen.width,
-			winHeight = $( window ).height(),
-			pageMin = Math.min( height, winHeight );
+		var orientation 	= jQuery.event.special.orientationchange.orientation(),
+			port			= orientation === "portrait",
+			winMin			= port ? 480 : 320,
+			screenHeight	= port ? screen.height : screen.width,
+			winHeight		= Math.max( winMin, $( window ).height() ),
+			pageMin			= Math.min( screenHeight, winHeight );
 
 		$( ".ui-page-active" ).css( "min-height", pageMin );
 	}
