@@ -5,7 +5,7 @@ http://jquerymobile.com
 
 Demos and documentation
 ===================================
-http://jquerymobile.com/demos/
+http://jquerymobile.com/test/
 
 
 How to build your own jQuery Mobile CSS and JS files
