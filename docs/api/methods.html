@@ -183,10 +183,91 @@ $.mobile.hidePageLoadingMsg();
 			
 			</dd>
 			
+            
+			<dt><code>$.mobile.path.parseUrl</code> (<em>method</em>)</dt>
+			<dd>Utility method for parsing a URL and its relative variants into an object that makes accessing the components of the URL easy. When parsing relative variants, the resulting object will contain empty string values for missing components (like protocol, host, etc). Also, when parsing URLs that have no authority, such as tel: urls, the pathname property of the object will contain the data after the protocol/scheme colon.</dd>
 			
-			<dt><code>$.mobile.path</code> (<em>methods, properties</em>)</dt>
-			<dd>Utilities for getting, setting, and manipulating url paths. TODO: document as public API is finalized.</dd>
+			<dd>
+				
+				<dl>
+					<dt>Arguments</dt>
+					<dd><code>url</code> (<em>string</em>, required) A relative or absolute URL.</dd>	
+						
+					<dt>Return Value</dt>
+					<dd>
+						<p>This function returns an object that contains the various components of the URL as strings. The properties on the object mimic the browser's location object:</p>
+						<dl>	
+							<dt>hash</dt>
+							<dd>The fragment conponent of the URL, including the leading '#' character.</dd>
+							<dt>host</dt>
+							<dd>The host and port number of the URL.</dd>
+							<dt>hostname</dt>
+							<dd>The name of the host within the URL.</dd>
+							<dt>href</dt>
+							<dd>The original URL that was parsed.</dd>
+							<dt>pathname</dt>
+							<dd>The path of the file or directory referenced by the URL.</dd>
+							<dt>port</dt>
+							<dd>The port specified within the URL. Most URLs rely on the default port for the protocol used, so this may be an empty string most of the time.</dd>
+							<dt>protocol</dt>
+							<dd>The protocol for the URL including the trailing ':' character.</dd>
+							<dt>search</dt>
+							<dd>The query component of the URL including the leading '?' character.</dd>
+						</dl>	
+						<p>But it also contains additional properties that provide access to additional components as well as some common forms of the URL developers access:</p>
+						<dl>	
+							<dt>authority</dt>	
+							<dd>The username, password, and host components of the URL</dd>	
+							<dt>directory</dt>
+							<dd>The directory component of the pathname, minus any filename.</dd>	
+							<dt>domain</dt>	
+							<dd>The protocol and authority components of the URL.</dd>	
+							<dt>filename</dt>	
+							<dd>The filename within the pathname component, minus the directory.</dd>	
+							<dt>hrefNoHash</dt>	
+							<dd>The original URL minus the fragment (hash) components.</dd>	
+							<dt>hrefNoSearch</dt>	
+							<dd>The original URL minus the query (search) and fragment (hash) components.</dd>	
+							<dt>password</dt>	
+							<dd>The password contained within the authority component.</dd>	
+							<dt>username</dt>	
+							<dd>The username contained within the authority component.</dd>	
+						</dl>	
+					</dd>	
+						
+				</dl>
+			</dd>
 			
+			<dd>Examples:
+			<pre>
+			<code>
+<strong>// Parsing the Url below results an object that is returned with the
+// following properties:
+//
+//  obj.href:         http://jblas:password@mycompany.com:8080/mail/inbox?msg=1234&type=unread#msg-content
+//  obj.hrefNoHash:   http://jblas:password@mycompany.com:8080/mail/inbox?msg=1234&type=unread
+//  obj.hrefNoSearch: http://jblas:password@mycompany.com:8080/mail/inbox
+//  obj.domain:       http://jblas:password@mycompany.com:8080
+//  obj.protocol:     http:
+//  obj.authority:    jblas:password@mycompany.com:8080
+//  obj.username:     jblas
+//  obj.password:     password
+//  obj.host:         mycompany.com:8080
+//  obj.hostname:     mycompany.com
+//  obj.port:         8080
+//  obj.pathname:     /mail/inbox
+//  obj.directory:    /mail/
+//  obj.filename:     inbox
+//  obj.search:       ?msg=1234&type=unread
+//  obj.hash:         #msg-content</strong>
+
+var obj = $.mobile.path.parseUrl("http://jblas:password@mycompany.com:8080/mail/inbox?msg=1234");
+			</code>
+			</pre>
+			
+			</dd>
+			
+            
 			<dt><code>$.mobile.base</code> (<em>methods, properties</em>)</dt>
 			<dd>Utilities for working with generated base element. TODO: document as public API is finalized.</dd>
 			
