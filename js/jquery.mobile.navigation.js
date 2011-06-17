@@ -443,11 +443,22 @@
 			
 			//trigger pageshow, define prevPage as either fromPage or empty jQuery obj
 			toPage.data( "page" )._trigger( "show", null, { prevPage: fromPage || $( "" ) } );
+			
+			resetActivePageHeight();
 
 		});
 
 		return promise;
 	};
+	
+	//simply set the active page's minimum height to screen height, depending on orientation
+	function resetActivePageHeight(){
+		var height = jQuery.event.special.orientationchange.orientation() == "portrait" ? screen.height : screen.width,
+			winHeight = $( window ).height(),
+			pageMin = Math.min( height, winHeight );
+
+		$( ".ui-page-active" ).css( "min-height", pageMin );
+	}
 
 	//shared page enhancements
 	function enhancePage( $page, role ) {
@@ -1117,5 +1128,8 @@
 			$.mobile.changePage( $.mobile.firstPage, { transition: transition, changeHash: false, fromHashChange: true } );
 		}
 	});
+	
+	//set page min-heights to be device specific
+	$( document ).bind( "pagecreate orientationchange", resetActivePageHeight );
 
 })( jQuery );
