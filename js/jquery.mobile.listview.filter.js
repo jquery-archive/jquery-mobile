@@ -17,12 +17,10 @@ $( ":jqmData(role='listview')" ).live( "listviewcreate", function() {
 		return;
 	}
 
-	var placeholder = list.data("filter-placeholder") ? list.data("filter-placeholder") : listview.options.filterPlaceholder;
-
 	var wrapper = $( "<form>", { "class": "ui-listview-filter ui-bar-c", "role": "search" } ),
 
 		search = $( "<input>", {
-				placeholder: placeholder
+				placeholder: listview.options.filterPlaceholder
 			})
 			.attr( "data-" + $.mobile.ns + "type", "search" )
 			.jqmData( 'lastval', "" )
