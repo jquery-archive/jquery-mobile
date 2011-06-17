@@ -16,10 +16,9 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			themeclass;
 			
 		if ( !theme ) {
-			var themedParent = this.element.closest("[class*='ui-bar-'],[class*='ui-body-']"); 
-				theme = themedParent.length ?
-					/ui-(bar|body)-([a-z])/.exec( themedParent.attr("class") )[2] :
-					"c";
+			var themedParent = this.element.closest("[class*='ui-bar-'],[class*='ui-body-']"),
+				themeLetter = themedParent.length && /ui-(bar|body)-([a-z])/.exec( themedParent.attr("class") ),
+				theme = themeLetter && themeLetter[2] || "c";
 		}	
 		
 		themeclass = " ui-body-" + theme;
