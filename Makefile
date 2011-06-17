@@ -46,6 +46,7 @@ JSFILES = 	  js/jquery.ui.widget.js \
 			  js/jquery.mobile.core.js \
 			  js/jquery.mobile.navigation.js \
 			  js/jquery.mobile.transition.js \
+			  js/jquery.mobile.transition2.js \
 			  js/jquery.mobile.fixHeaderFooter.js \
 			  js/jquery.mobile.forms.checkboxradio.js \
 			  js/jquery.mobile.forms.textinput.js \
@@ -67,6 +68,7 @@ JSFILES = 	  js/jquery.ui.widget.js \
 CSSFILES =    themes/default/jquery.mobile.theme.css \
 			  themes/default/jquery.mobile.core.css \
 			  themes/default/jquery.mobile.transitions.css \
+			  themes/default/jquery.mobile.transitions2.css \
 			  themes/default/jquery.mobile.grids.css \
 			  themes/default/jquery.mobile.headerfooter.css \
 			  themes/default/jquery.mobile.navbar.css \
