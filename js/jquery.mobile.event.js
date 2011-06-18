@@ -222,7 +222,7 @@ $.event.special.swipe = {
 	
 	// Get the current page orientation. This method is exposed publicly, should it
 	// be needed, as jQuery.event.special.orientationchange.orientation()
-	special_event.orientation = get_orientation = function() {
+	$.event.special.orientationchange.orientation = get_orientation = function() {
 		var elem = document.documentElement;
 		return elem && elem.clientWidth / elem.clientHeight < 1.1 ? "portrait" : "landscape";
 	};
