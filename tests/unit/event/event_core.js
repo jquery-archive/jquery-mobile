@@ -69,6 +69,8 @@
 		$('#qunit-fixture').touchstart();
 		stop();
 	});
+	
+	
 
 	test( "defining event functions sets the attrFn to true", function(){
 		$.each(events, function(i, name){
@@ -378,4 +380,68 @@
 			returnValue: undefined //NOTE result of unbind function call
 		});
 	});
+	
+	/* The following 4 tests are async so that the throttled event triggers don't interfere with subsequent tests */
+	
+	asyncTest( "throttledresize event proxies resize events", function(){
+		var called = false;
+		$(window).bind( "throttledresize", function(){
+			called = true;
+		});
+
+		$(window).trigger("resize");
+		
+		setTimeout(function(){
+			ok( called );
+			$(window).unbind( "throttledresize" );
+			setTimeout(start, 500);
+		}, 500);	
+	});
+
+	asyncTest( "throttledresize event prevents resize events from firing more frequently than 250ms", function(){
+		var called = 0;
+		$(window).bind( "throttledresize", function(){
+			called ++;
+		});
+
+		$(window).trigger( "resize" ).trigger( "resize" );
+		
+		setTimeout(function(){
+			ok( called == 1 );
+			$(window).unbind( "throttledresize" );
+			setTimeout(start, 500);
+		}, 100);	
+	});
+	
+	asyncTest( "throttledresize event promises that a held call will execute after trottled timeout", function(){
+		var called = 0;			
+		
+		$(window).bind( "throttledresize", function(){
+			called ++;
+		});
+
+		$(window).trigger( "resize" ).trigger( "resize" );
+		setTimeout(function(){
+			ok( called == 2 );
+			$(window).unbind( "throttledresize" );
+			setTimeout(start, 500);	
+		}, 500);	
+	});	
+	
+	asyncTest( "throttledresize event promises that a held call will execute only once after trottled timeout", function(){
+		var called = 0;			
+		
+		$(window).bind( "throttledresize", function(){
+			called ++;
+		});
+
+		$(window).trigger( "resize" ).trigger( "resize" ).trigger( "resize" );
+		
+		setTimeout(function(){
+			ok( called == 2 );
+			$(window).unbind( "throttledresize" );
+			setTimeout(start, 500);	
+		}, 500);	
+	});
+	
 })(jQuery);
