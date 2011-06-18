@@ -101,7 +101,7 @@ $.mobile.addResolutionBreakpoints = function( newbps ){
 $(document).bind("mobileinit.htmlclass", function(){
 	/* bind to orientationchange and resize
 	to add classes to HTML element for min/max breakpoints and orientation */
-	$window.bind("orientationchange.htmlclass resize.htmlclass", function(event){
+	$window.bind("orientationchange.htmlclass", function(event){
 		//add orientation class to HTML element on flip/resize.
 		if(event.orientation){
 			$html.removeClass( "portrait landscape" ).addClass( event.orientation );
