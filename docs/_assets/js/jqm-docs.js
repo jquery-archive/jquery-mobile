@@ -10,7 +10,7 @@ $('div').live('pagecreate',function(event){
 			})
 			.appendTo( $(this).find('.ui-content') )
 			.wrap('<div class="jqm-themeswitcher">')
-			.click(function(){
+			.bind("vclick", function(){
 				$.themeswitcher();
 			});
 	}	

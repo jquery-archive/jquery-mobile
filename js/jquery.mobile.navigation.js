@@ -385,20 +385,34 @@
 
 	//function for transitioning between two existing pages
 	function transitionPages( toPage, fromPage, transition, reverse ) {
-		$.mobile.silentScroll();
-
+		
 		//get current scroll distance
-		var currScroll = $window.scrollTop();
-
+		var currScroll = $window.scrollTop(),
+			toScroll	= toPage.data( "lastScroll" ) || 0;
+		
+		//if scrolled down, scroll to top
+		if( currScroll ){
+			window.scrollTo( 0, 0 );
+		}
+		
+		//if the Y location we're scrolling to is less than 10px, let it go for sake of smoothness
+		if( toScroll < $.mobile.minScrollBack ){
+			toScroll = 0;
+		}
+		
 		if( fromPage ) {
 			//set as data for returning to that spot
 			fromPage
+				.height( screen.height + currScroll )
 				.jqmData( "lastScroll", currScroll )
 				.jqmData( "lastClicked", $activeClickedLink );
+				
 			//trigger before show/hide events
 			fromPage.data( "page" )._trigger( "beforehide", null, { nextPage: toPage } );
 		}
-		toPage.data( "page" )._trigger( "beforeshow", null, { prevPage: fromPage || $( "" ) } );
+		toPage
+			.height( screen.height + toScroll )
+			.data( "page" )._trigger( "beforeshow", null, { prevPage: fromPage || $( "" ) } );
 
 		//clear page loader
 		$.mobile.hidePageLoadingMsg();
@@ -410,20 +424,43 @@
 			promise = th( transition, reverse, toPage, fromPage );
 
 		promise.done(function() {
+			//reset toPage height bac
+			toPage.height( "" );
+			
 			//jump to top or prev scroll, sometimes on iOS the page has not rendered yet.
-			$.mobile.silentScroll( toPage.jqmData( "lastScroll" ) || 0 );
-			$( document ).one( "silentscroll", function() { reFocus( toPage ); } );
+			if( toScroll ){
+				$.mobile.silentScroll( toScroll );
+				$( document ).one( "silentscroll", function() { reFocus( toPage ); } );
+			}
+			else{
+				reFocus( toPage ); 
+			}
 
 			//trigger show/hide events
 			if( fromPage ) {
-				fromPage.data( "page" )._trigger( "hide", null, { nextPage: toPage } );
+				fromPage.height("").data( "page" )._trigger( "hide", null, { nextPage: toPage } );
 			}
+			
 			//trigger pageshow, define prevPage as either fromPage or empty jQuery obj
 			toPage.data( "page" )._trigger( "show", null, { prevPage: fromPage || $( "" ) } );
+			
+			resetActivePageHeight();
 
 		});
 
 		return promise;
+	};
+	
+	//simply set the active page's minimum height to screen height, depending on orientation
+	function resetActivePageHeight(){
+		var orientation 	= jQuery.event.special.orientationchange.orientation(),
+			port			= orientation === "portrait",
+			winMin			= port ? 480 : 320,
+			screenHeight	= port ? screen.height : screen.width,
+			winHeight		= Math.max( winMin, $( window ).height() ),
+			pageMin			= Math.min( screenHeight, winHeight );
+
+		$( ".ui-page-active" ).css( "min-height", pageMin );
 	}
 
 	//shared page enhancements
@@ -952,9 +989,8 @@
 		}
 	});
 
-
 	//click routing - direct to HTTP or Ajax, accordingly
-	$( document ).bind( "click", function( event ) {
+	$( document ).bind( "vclick click", function( event ) {
 		var link = findClosestLink( event.target );
 		if ( !link ) {
 			return;
@@ -1095,5 +1131,8 @@
 			$.mobile.changePage( $.mobile.firstPage, { transition: transition, changeHash: false, fromHashChange: true } );
 		}
 	});
+	
+	//set page min-heights to be device specific
+	$( document ).bind( "pagecreate orientationchange", resetActivePageHeight );
 
 })( jQuery );
