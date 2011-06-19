@@ -388,11 +388,11 @@
 		
 		//get current scroll distance
 		var currScroll = $window.scrollTop(),
-			toScroll	= toPage.data( "lastScroll" ) || 0;
+			toScroll	= toPage.data( "lastScroll" ) || $.mobile.defaultHomeScroll;
 		
 		//if scrolled down, scroll to top
 		if( currScroll ){
-			window.scrollTo( 0, 0 );
+			window.scrollTo( 0, $.mobile.defaultHomeScroll );
 		}
 		
 		//if the Y location we're scrolling to is less than 10px, let it go for sake of smoothness

@@ -96,7 +96,10 @@
 
 		//scroll page vertically: scroll to 0 to hide iOS address bar, or pass a Y value
 		silentScroll: function( ypos ) {
-			ypos = ypos || 0;
+			if( $.type( ypos ) !== "number" ){
+				ypos = $.mobile.defaultHomeScroll;
+			}
+
 			// prevent scrollstart and scrollstop events
 			$.event.special.scrollstart.enabled = false;
 
