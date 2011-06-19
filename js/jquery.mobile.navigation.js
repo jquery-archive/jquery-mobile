@@ -489,6 +489,18 @@
 		}
 	};
 
+	//transition complete callback
+	$.fn.transitionComplete = function( callback ) {
+		if( $.support.cssTransitions ) {
+			return $( this ).one( 'webkitTransitionEnd', callback );
+		}
+		else{
+			// defer execution for consistency between webkit/non webkit
+			setTimeout( callback, 0 );
+			return $( this );
+		}
+	};
+
 	//update location.hash, with or without triggering hashchange event
 	//TODO - deprecate this one at 1.0
 	$.mobile.updateHash = path.set;

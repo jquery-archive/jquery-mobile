@@ -56,6 +56,11 @@ $.mobile.browser.ie = ( function() {
     return v > 4 ? v : !v;
 }() );
 
+// Detect android browsers base on ua
+$.mobile.browser.android = (function() {
+    return navigator.userAgent.match(/Android/i);
+})();
+
 
 $.extend( $.support, {
 	orientation: "orientation" in window,

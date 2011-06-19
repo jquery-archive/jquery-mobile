@@ -1,0 +1,39 @@
+/* New page transitions using css transitions instead of css animations.
+ * These transitions prevent flickering back to the old page at the end
+ * of the page transition.
+ * <p>
+ * Only implemented for the slide effect.
+ */
+.transition2 {
+    -webkit-transition-property: -webkit-transform;
+    -webkit-transition-duration: 350ms;
+    -webkit-transition-timing-function: ease-in-out
+}
+
+.slide.in2.start {
+    -webkit-transform: translateX(100%);
+}
+
+.slide.in2.end, .slide.out2.start {
+    -webkit-transform: translateX(0);
+}
+
+.slide.out2.end {
+    -webkit-transform: translateX(-100%);
+}
+
+.slide.out2.reverse.start {
+    -webkit-transform: translateX(0);
+}
+
+.slide.out2.reverse.end {
+    -webkit-transform: translateX(100%);
+}
+
+.slide.in2.reverse.start {
+    -webkit-transform: translateX(-100%);
+}
+
+.slide.in2.reverse.end {
+    -webkit-transform: translateX(0);
+}
