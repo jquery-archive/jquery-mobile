@@ -447,7 +447,7 @@
 		});
 
 		return promise;
-	};
+	}
 	
 	//simply set the active page's minimum height to screen height, depending on orientation
 	function getScreenHeight(){
@@ -936,7 +936,7 @@
 			}
 
 		var type = $this.attr( "method" ),
-			url = path.makeUrlAbsolute( $this.attr( "action" ), getClosestBaseUrl($this) );
+			url = path.makeUrlAbsolute( $this.attr( "action" ), getClosestBaseUrl($this) ),
 			target = $this.attr( "target" );
 
 		//external submits use regular HTTP
