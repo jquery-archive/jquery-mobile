@@ -11,7 +11,7 @@
 </head> 
 <body> 
 
-<div data-role="page">
+<div data-role="page" class="type-interior">
 
 	<div data-role="header" data-theme="b">
 		<h1>Supported platforms</h1>
@@ -19,7 +19,9 @@
 	</div><!-- /header -->
 
 	<div data-role="content">
-			
+		
+		
+			<div class="content-primary">
 				<h2>Supported platforms in Beta 1</h2>
 
 <p>jQuery Mobile is the most broadly compatible HTML5 library for building web sites and apps and we've very proud of our commitment to accessibility, universal access, and staying true to the principles of the web. For anyone who needs to reach the greatest number of people worldwide, our broad support for all popular platforms is a distinct advantage.In Beta 1, we've added support for both Blackberry 5 devices and Opera Mini in Beta 1 which dramatically increases the reach of the framework. Both of these platforms had issues with handling the Ajax-based navigation so they receive a B grade experience with all the enhancements <a href="http://jquerymobile.com/blog/2011/05/27/jquery-mobile-team-update-week-of-may-23/">except for Ajax navigation</a>.</p>
@@ -64,13 +66,53 @@
 	<li><strong>Meego</strong> - Originally a target platform, but Nokia decision to relegate this platform to "experimental", we are considering dropping support.</li>
 	<li><strong>Samsung Bada</strong> - The project doesn't currently have test devices or emulators, but current support is known to be fairly good. Support level undecided for 1.0.</li>
 	<li><strong>Palm WebOS 3.0</strong> - We're hoping to get test devices from Palm soon to start testing but have heard that rendering is quite good in 3.0</li>
-</ul>				
-				<p>For more information about browser support, view the <a href="https://github.com/jquery/jquery-mobile/wiki/Current-development-status">current browser support status and known issues</a> and the project's target <a href="http://jquerymobile.com/gbs/" rel="external"><strong>graded browser matrix</strong>.</p>
+</ul>
 				
+				
+				<p>Since jQuery Mobile is built on the jQuery core, all pages should also work great on most recent versions of desktop browsers too - Firefox, Chrome, Safari, Internet Explorer, Opera, etc.</p>
+				
+				<p>For more information about browser support, view the <a href="https://github.com/jquery/jquery-mobile/wiki/Current-development-status">current browser support status and known issues</a> and the project's target <a href="http://jquerymobile.com/gbs/" rel="external"><strong>graded browser matrix</strong></a>.</p>
+				
+				
+				</div>
 
-						
+				<div class="content-secondary">
 
-	</div><!-- /content -->
+					<div data-role="collapsible" data-collapsed="true" data-theme="b">
+
+							<h3>Demos &amp; Docs Sections</h3>
+
+							<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b">
+								<li data-role="list-divider">Overview</li>
+								<li><a href="../../docs/about/intro.html">Intro to jQuery Mobile</a></li>
+								<li><a href="../../docs/about/features.html">Features</a></li>
+								<li><a href="../../docs/about/accessibility.html">Accessibility</a></li>
+								<li data-theme="a"><a href="../../docs/about/platforms.html">Supported platforms</a></li>
+
+								<li data-role="list-divider">API</li>
+								<li><a href="../../docs/api/globalconfig.html">Configuring defaults</a></li>
+								<li><a href="../../docs/api/events.html">Events</a></li>
+								<li><a href="../../docs/api/methods.html">Methods &amp; Utilities</a></li>
+								<li><a href="../../docs/api/mediahelpers.html">Responsive Layout</a></li> 
+								<li><a href="../../docs/api/themes.html">Theme framework</a></li>
+
+								<li data-role="list-divider">Components</li>
+								<li><a href="../../docs/pages/index.html">Pages &amp; dialogs</a></li>
+								<li><a href="../../docs/toolbars/index.html">Toolbars</a></li>
+								<li><a href="../../docs/buttons/index.html">Buttons</a></li>
+								<li><a href="../../docs/content/index.html">Content formatting</a></li>
+								<li><a href="../../docs/forms/index.html">Form elements</a></li>
+								<li><a href="../../docs/lists/index.html">List views</a></li>
+							</ul>
+					</div>
+				</div>		
+
+			</div><!-- /content -->
+
+			<div data-role="footer" class="footer-docs" data-theme="c">
+					<p>&copy;2011 The jQuery Project</p>
+			</div>				
+			
 	
 </div><!-- /page -->
 

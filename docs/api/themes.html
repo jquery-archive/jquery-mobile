@@ -11,7 +11,7 @@
 </head> 
 <body> 
 
-<div data-role="page">
+<div data-role="page" class="type-interior">
 
 	<div data-role="header" data-theme="b">
 		<h1>Themes</h1>
@@ -20,6 +20,7 @@
 
 	<div data-role="content">
 	
+	<div class="content-primary">
 		<h2>Theming overview</h2>
 		
 			<p>Every layout and widget in jQuery Mobile is designed around a new object-oriented CSS framework that makes it possible to apply a complete unified visual design Theme to sites and applications. The theming system is similar to the ThemeRoller system in jQuery UI, but adds a few important improvements:</p> 
@@ -231,9 +232,46 @@
             <li><a href="../forms/forms-themes.html">Form theming</a></li>
             <li><a href="../lists/lists-themes.html">List theming</a></li>
 		</ul>
-	</div><!-- end content -->
+	</div><!--/content-secondary -->		
 	
-</div><!-- end page -->
+	<div class="content-secondary ui-body-d">
+		
+		<div data-role="collapsible" data-collapsed="true" data-theme="b">
+			
+				<h3>Demos &amp; Docs Sections</h3>
+				
+				<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b">
+					<li>Overview</li>
+					<li><a href="../../docs/about/intro.html">Intro to jQuery Mobile</a></li>
+					<li><a href="../../docs/about/features.html">Features</a></li>
+					<li><a href="../../docs/about/accessibility.html">Accessibility</a></li>
+					<li><a href="../../docs/about/platforms.html">Supported platforms</a></li>
+
+					<li data-role="list-divider">API</li>
+					<li><a href="../../docs/api/globalconfig.html">Configuring defaults</a></li>
+					<li><a href="../../docs/api/events.html">Events</a></li>
+					<li><a href="../../docs/api/methods.html">Methods &amp; Utilities</a></li>
+					<li><a href="../../docs/api/mediahelpers.html">Responsive Layout</a></li> 
+					<li data-theme="a"><a href="../../docs/api/themes.html">Theme framework</a></li>
+	
+					<li data-role="list-divider">Components</li>
+					<li><a href="../../docs/pages/index.html">Pages &amp; dialogs</a></li>
+					<li><a href="../../docs/toolbars/index.html">Toolbars</a></li>
+					<li><a href="../../docs/buttons/index.html">Buttons</a></li>
+					<li><a href="../../docs/content/index.html">Content formatting</a></li>
+					<li><a href="../../docs/forms/index.html">Form elements</a></li>
+					<li><a href="../../docs/lists/index.html">List views</a></li>
+				</ul>
+		</div>
+	</div>		
+
+</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p>&copy;2011 The jQuery Project</p>
+</div>
+	
+</div><!-- /page -->
 
 </body>
 </html>
