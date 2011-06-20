@@ -1,4 +1,3 @@
-/*
 * jQuery Mobile Framework : "navbar" plugin
 * Copyright (c) jQuery Project
 * Dual licensed under the MIT or GPL Version 2 licenses.
@@ -7,24 +6,28 @@
 (function($, undefined ) {
 $.widget( "mobile.navbar", $.mobile.widget, {
 	options: {
-		iconpos: 'top',
+		iconpos:"top",
 		grid: null
 	},
 	_create: function(){
+		var icon=this.element.find("a").attr("data-iconpos").length ? this.element.find("a").attr("data-iconpos"):this.options.iconpos;
 		var $navbar = this.element,
 			$navbtns = $navbar.find("a"),
-			iconpos = $navbtns.filter( ":jqmData(icon)").length ? this.options.iconpos : undefined;
-		
+			iconpos = $navbtns.filter( ":jqmData(icon)").length ? icon : undefined;
+			
 		$navbar
 			.addClass('ui-navbar')
 			.attr("role","navigation")
 			.find("ul")
 				.grid({grid: this.options.grid });		
 		
-		if( !iconpos ){ 
+		if( !iconpos){ 
 			$navbar.addClass("ui-navbar-noicons");
 		}
-		
+		if(icon=="notext") {
+			iconpos="top"
+			$navbtns = $navbar.find("a").text("");
+		}		
 		$navbtns
 			.buttonMarkup({
 				corners:	false, 
