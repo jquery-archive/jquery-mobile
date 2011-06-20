@@ -993,8 +993,13 @@
 		}
 	});
 
-	//click routing - direct to HTTP or Ajax, accordingly
-	$( document ).bind( $.mobile.useFastClick ? "vclick" : "click", function( event ) {
+	// click routing - direct to HTTP or Ajax, accordingly
+	// TODO: most of the time, vclick will be all we need for fastClick bulletproofing.
+	// However, it seems that in Android 2.1, a click event
+	// will occasionally arrive independently of the bound vclick
+	// binding to click as well seems to help in this edge case
+	// we'll dig into this further in the next release cycle
+	$( document ).bind( $.mobile.useFastClick ? "vclick click" : "click", function( event ) {
 		var link = findClosestLink( event.target );
 		if ( !link ) {
 			return;
