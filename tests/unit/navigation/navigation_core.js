@@ -11,7 +11,7 @@
 			$.mobile.urlHistory.activeIndex = 0;
 			$.mobile.changePage = changePageFn;
 			document.title = originalTitle;
-			
+
 			if ( location.hash ) {
 				stop();
 				$(document).one("changepage", function() {
@@ -185,6 +185,7 @@
 				start();
 			}]);
 	});
+
 	asyncTest( "going back from a page entered from a dialog skips the dialog and goes to the previous page", function(){
 		$.testHelper.pageSequence([
 			// setup
