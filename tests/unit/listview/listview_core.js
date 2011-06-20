@@ -408,19 +408,27 @@
 				}
 			];
 
-			$.testHelper.openPage("#programmatically-generated-list");
+			$( "#programmatically-generated-list-items" ).html("");
 
 			for (var i = 0, len = data.length; i < len; i++) {
 				item = $('<li id="myItem' + data[i].id + '">');
-				label = $("<strong>" + data[i].label + "</strong>").appendTo(item);
-				$('#programmatically-generated-list-items').append(item);
-				$('#programmatically-generated-list-items').listview('refresh');
+				label = $( "<strong>" + data[i].label + "</strong>").appendTo( item );
+				$( "#programmatically-generated-list-items" ).append( item );
 			}
 		}
 	});
 
-	test( "Corner styling issue (#1470)", function() {
-		ok(!$('#programmatically-generated-list-items li:first-child').hasClass("ui-corner-bottom"), "First list item should not have class ui-corner-bottom");
+	asyncTest( "Corner styling on programmatically created list items", function() {
+		// https://github.com/jquery/jquery-mobile/issues/1470
+		$.testHelper.pageSequence([
+			function() {
+				$.testHelper.openPage( "#programmatically-generated-list" );
+			},
+			function() {
+				ok(!$( "#programmatically-generated-list-items li:first-child" ).hasClass( "ui-corner-bottom" ), "First list item should not have class ui-corner-bottom" );
+				start();
+			}
+		]);
 	});
     
 	module("Programmatic list items manipulation");
