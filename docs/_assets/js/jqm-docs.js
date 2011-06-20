@@ -31,7 +31,7 @@ $(function(){
 });
 
 function setDefaultTransition(){
-	$.mobile.defaultPageTransition = $( window ).width() >= 600 ? "fade" : "slide";
+	$.mobile.defaultPageTransition = $( window ).width() >= 650 ? "fade" : "slide";
 }
 
 //set default documentation 

@@ -50,11 +50,12 @@ p.intro {
 }
 .content-secondary .ui-collapsible-contain {
 	padding: 10px 15px;
-	margin: 0;
+
 }
 .content-secondary .ui-collapsible-heading {
-	margin: 0;
+	margin: 0 0 30px;
 }
+.content-secondary .ui-collapsible-heading-collapsed,
 .content-secondary .ui-collapsible-content {
 	padding:0;
 	margin: 0;
@@ -91,7 +92,7 @@ p.intro {
 
 /* docs site layout */
 
-@media all and (min-width: 550px){
+@media all and (min-width: 650px){
 	.ui-mobile #jqm-homeheader {max-width: 340px;}
 	.ui-mobile .jqm-themeswitcher {float: right;
 	}
