@@ -7,8 +7,6 @@
 			siteDirectory = location.pathname.replace(/[^/]+$/, "");
 	module('jquery.mobile.navigation.js', {
 		setup: function(){
-			$.mobile.urlHistory.stack = [];
-			$.mobile.urlHistory.activeIndex = 0;
 			$.mobile.changePage = changePageFn;
 			document.title = originalTitle;
 
@@ -19,6 +17,9 @@
 				} );
 				location.hash = "";
 			}
+
+			$.mobile.urlHistory.stack = [];
+			$.mobile.urlHistory.activeIndex = 0;
 		}
 	});
 
@@ -142,13 +143,15 @@
 	});
 
 	var testDataUrlHash = function(linkSelector, hashRegex){
-		window.location.hash = "";
-		$(linkSelector).click();
+		$.testHelper.pageSequence([
+			function(){ window.location.hash = ""; },
+			function(){ $(linkSelector).click(); },
+			function(){
+				ok(hashRegex.test(location.hash), "should match the regex");
+				start();
+			}
+		]);
 
-		setTimeout(function(){
-			ok(hashRegex.test(location.hash), "should match the regex");
-			start();
-		}, 600);
 		stop();
 	};
 
@@ -181,7 +184,7 @@
 				// fourth page (third index) in the stack to account for first page being hash manipulation,
 				// the third page is dup-history-second which has two entries in history
 				// the test is to make sure the index isn't 1 in this case, or the first entry for dup-history-second
-				same($.mobile.urlHistory.activeIndex, 4, "should be the fourth page in the stack");
+				same($.mobile.urlHistory.activeIndex, 3, "should be the fourth page in the stack");
 				start();
 			}]);
 	});
