@@ -105,7 +105,7 @@ p.intro {
 	.type-home .ui-content,
 	.type-interior .ui-content {
 		padding: 0;
-		background: url(../images/px-ccc.gif) 49% 0 repeat-y;
+		background: url(../images/px-ccc.gif) 50% 0 repeat-y;
 	}
 	.content-secondary {
 		text-align: left;
@@ -161,7 +161,7 @@ p.intro {
 @media all and (min-width: 750px){
 	.type-home .ui-content,
 	.type-interior .ui-content {
-		background-position: 38%;
+		background-position: 39%;
 	}
 	.content-secondary {
 		width: 34%;
@@ -173,6 +173,10 @@ p.intro {
 }
 
 @media all and (min-width: 1200px){
+	.type-home .ui-content,
+	.type-interior .ui-content {
+		background-position: 38.5%;
+	}
 	.content-secondary {
 		width: 30%;
 		padding-right:6%;

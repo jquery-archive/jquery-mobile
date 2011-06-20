@@ -1,7 +1,7 @@
 //set up the theme switcher on the homepage
 $('div').live('pagecreate',function(event){
 	if( !$(this).is('.ui-dialog')){ 
-		var appendEl = $(this).find('.ui-footer');
+		var appendEl = $(this).find('.ui-footer:last');
 		
 		if( !appendEl.length ){
 			appendEl = $(this).find('.ui-content');
@@ -16,7 +16,7 @@ $('div').live('pagecreate',function(event){
 			})
 			.appendTo( appendEl )
 			.wrap('<div class="jqm-themeswitcher">')
-			.bind("vclick", function(){
+			.bind( "vclick", function(){
 				$.themeswitcher();
 			});
 	}	
