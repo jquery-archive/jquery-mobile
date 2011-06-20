@@ -5,7 +5,7 @@ body { background: #dddddd; }
 .ui-mobile #jqm-homeheader h1 { margin: 0 0 ; }
 .ui-mobile #jqm-homeheader p { margin: 0; }
 .ui-mobile #jqm-version { text-indent: -99999px; background: url(../images/version.png) top right no-repeat; width: 119px; height: 122px; overflow: hidden; position: absolute; z-index: 50; top: 0; right: 0; }
-.ui-mobile .jqm-themeswitcher { margin: 10px 25px 10px 10px; float: right; }
+.ui-mobile .jqm-themeswitcher { margin: 10px 25px 10px 10px;  }
 
 h2 { margin-top:1.5em; }
 p code { font-size:1.2em; font-weight:bold; } 
@@ -13,7 +13,7 @@ p code { font-size:1.2em; font-weight:bold; }
 dt { font-weight: bold; margin: 2em 0 .5em; }
 dt code, dd code { font-size:1.3em; line-height:150%; }
 pre { white-space: pre; white-space: pre-wrap; word-wrap: break-word; }
-img { max-width: 100%; }
+
 #jqm-homeheader img { width: 235px; }
 
 .ui-header .jqm-home { top:0.65em; }
@@ -29,7 +29,7 @@ p.intro {
 	border-bottom: 1px solid #ccc;
 }
 .footer-docs {
-	padding: 5px;
+	padding: 5px 0;
 }
 .footer-docs p {
 	float: left;
@@ -93,7 +93,8 @@ p.intro {
 
 @media all and (min-width: 550px){
 	.ui-mobile #jqm-homeheader {max-width: 340px;}
-	
+	.ui-mobile .jqm-themeswitcher {float: right;
+	}
 	p.intro {
 		border-top-color: #75ae18;
 		border-bottom: 0;
@@ -115,9 +116,9 @@ p.intro {
 	}
 	.content-secondary,
 	.type-interior .content-secondary {
-		margin: 30px 2% 20px 1%;
+		margin: 30px 0 20px 2%;
 		padding: 20px 4% 0 0;
-
+			background: none;
 	}
 
 	.ui-mobile #jqm-homeheader {
