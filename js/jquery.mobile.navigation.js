@@ -387,8 +387,9 @@
 	function transitionPages( toPage, fromPage, transition, reverse ) {
 		
 		//get current scroll distance
-		var currScroll = $window.scrollTop(),
-			toScroll	= toPage.data( "lastScroll" ) || $.mobile.defaultHomeScroll;
+		var currScroll = $.support.scrollTop ? $window.scrollTop() : true,
+			toScroll	= toPage.data( "lastScroll" ) || $.mobile.defaultHomeScroll,
+			screenHeight = getScreenHeight();
 		
 		//if scrolled down, scroll to top
 		if( currScroll ){
@@ -403,7 +404,7 @@
 		if( fromPage ) {
 			//set as data for returning to that spot
 			fromPage
-				.height( screen.height + currScroll )
+				.height( screenHeight + currScroll )
 				.jqmData( "lastScroll", currScroll )
 				.jqmData( "lastClicked", $activeClickedLink );
 				
@@ -411,7 +412,7 @@
 			fromPage.data( "page" )._trigger( "beforehide", null, { nextPage: toPage } );
 		}
 		toPage
-			.height( screen.height + toScroll )
+			.height( screenHeight + toScroll )
 			.data( "page" )._trigger( "beforeshow", null, { prevPage: fromPage || $( "" ) } );
 
 		//clear page loader
@@ -443,24 +444,26 @@
 			
 			//trigger pageshow, define prevPage as either fromPage or empty jQuery obj
 			toPage.data( "page" )._trigger( "show", null, { prevPage: fromPage || $( "" ) } );
-			
-			resetActivePageHeight();
-
 		});
 
 		return promise;
 	};
 	
 	//simply set the active page's minimum height to screen height, depending on orientation
-	function resetActivePageHeight(){
+	function getScreenHeight(){
 		var orientation 	= jQuery.event.special.orientationchange.orientation(),
 			port			= orientation === "portrait",
 			winMin			= port ? 480 : 320,
-			screenHeight	= port ? screen.height : screen.width,
+			screenHeight	= port ? screen.availHeight : screen.availWidth,
 			winHeight		= Math.max( winMin, $( window ).height() ),
 			pageMin			= Math.min( screenHeight, winHeight );
 
-		$( ".ui-page-active" ).css( "min-height", pageMin );
+		return pageMin;
+	}
+	
+	//simply set the active page's minimum height to screen height, depending on orientation
+	function resetActivePageHeight(){
+		$( "." + $.mobile.activePageClass ).css( "min-height", getScreenHeight() );
 	}
 
 	//shared page enhancements
@@ -1134,6 +1137,7 @@
 	});
 	
 	//set page min-heights to be device specific
-	$( document ).bind( "pagecreate orientationchange", resetActivePageHeight );
+	$( document ).bind( "pageshow", resetActivePageHeight );
+	$( window ).bind( "throttledresize", resetActivePageHeight );
 
 })( jQuery );
