@@ -92,7 +92,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 				}
 
 			} )
-			.bind( "expand", function( event ) {	
+			.bind( "expand", function( event ) {
 				if ( ! event.isDefaultPrevented() ) {
 					event.preventDefault();
 					collapsibleHeading
@@ -126,7 +126,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 				} );
 
 
-			var set = collapsibleParent.find( ":jqmData(role='collapsible'):first" );
+			var set = collapsibleParent.find( ":jqmData(role='collapsible')" );
 
 			set.first()
 				.find( "a:eq(0)" )
