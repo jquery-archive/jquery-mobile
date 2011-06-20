@@ -21,8 +21,7 @@
 	</div><!-- /header -->
 
 	<div data-role="content">
-			
-			
+			<div class="content-primary">
 		<h2>Theming the content area</h2>
 		<p>The main content area of a page (container with the <code> data-role="content"</code> attribute) should be themed by adding the <code> data-theme</code> attribute to the <code> data-role="page"</code> container to ensure that the background colors are applied to the full page, regardless of the content length. (If you add to the <code> data-theme</code> to the content container, the background color will stop after the content so there may be a gap in color between the content and fixed footer.)</p>
 		
@@ -88,10 +87,34 @@
 		</div><!-- /themed container -->
 		
 	
-		
+	</div><!--/content-primary -->		
 	
+	<div class="content-secondary">
 		
-	</div><!-- /content -->
+		<div data-role="collapsible" data-collapsed="true" data-theme="b">
+			
+				<h3>Demos &amp; Docs Sections</h3>
+				
+				<ul data-role="listview" data-theme="c" data-dividertheme="d">
+				
+					<li data-role="list-divider">Components</li>
+					<li><a href="../../docs/pages/index.html">Pages &amp; dialogs</a></li>
+					<li><a href="../../docs/toolbars/index.html">Toolbars</a></li>
+					<li><a href="../../docs/buttons/index.html">Buttons</a></li>
+					<li data-theme="a"><a href="../../docs/content/index.html">Content formatting</a></li>
+					<li><a href="../../docs/forms/index.html">Form elements</a></li>
+					<li><a href="../../docs/lists/index.html">List views</a></li>
+	
+				</ul>
+		</div>
+	</div>		
+
+</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p>&copy;2011 The jQuery Project</p>
+</div>
+	
 </div><!-- /page -->
 
 </body>

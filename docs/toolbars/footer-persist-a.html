@@ -21,7 +21,7 @@
 	</div>
 	
 	<div data-role="content">
-	
+		<div class="content-primary">
 				<p>This page is a demo of a persistent footer navigation bar. At the foot of the page, you'll see a persistent horizontal navigation bar. Click on any of the links, and you'll see the page content transition but the footer remain fixed: The footer sticks persistently even when transitioning to a new HTML page, because the footer on all four HTML pages has the same <code>data-id</code> attribute. <strong>Note:</strong> If you'd like an active button in your navbar to remain active when you return to it again, add a class of <code>ui-state-persist</code> in addition to <code>ui-btn-active</code></p>
 
 	
@@ -64,8 +64,38 @@
 					<li data-role="list-divider">S</li>
 					<li><a href="index.html">Sawyer Wakefield</a></li>
 				</ul>
-	</div>
 	
+
+
+
+
+
+
+
+		</div><!--/content-primary -->		
+
+		<div class="content-secondary">
+
+			<div data-role="collapsible" data-collapsed="true" data-theme="b">
+
+					<h3>Demos &amp; Docs Sections</h3>
+
+					<ul data-role="listview" data-theme="c" data-dividertheme="d">
+
+						<li data-role="list-divider">Components</li>
+						<li><a href="../../docs/pages/index.html">Pages &amp; dialogs</a></li>
+						<li data-theme="a"><a href="../../docs/toolbars/index.html">Toolbars</a></li>
+						<li><a href="../../docs/buttons/index.html">Buttons</a></li>
+						<li><a href="../../docs/content/index.html">Content formatting</a></li>
+						<li><a href="../../docs/forms/index.html">Form elements</a></li>
+						<li><a href="../../docs/lists/index.html">List views</a></li>
+
+					</ul>
+			</div>
+		</div>		
+
+	</div><!-- /content -->
+
 	<div data-role="footer" data-id="foo1" data-position="fixed">
 		<div data-role="navbar">
 			<ul>
@@ -75,7 +105,8 @@
 			</ul>
 		</div><!-- /navbar -->
 	</div><!-- /footer -->
-</div><!-- /page -->
 
-</body>
-</html>
+	</div><!-- /page -->
+
+	</body>
+	</html>

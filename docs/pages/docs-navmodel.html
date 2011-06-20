@@ -21,7 +21,7 @@
 	</div><!-- /header -->
 
 	<div data-role="content">
-			
+		<div class="content-primary">		
 			<h2>jQuery Mobile's navigation model</h2> 
 
 			<p>A "page" in jQuery Mobile consists of an element (usually a <code>div</code>) with a <code> data-role</code> attribute set to <code>"page"</code>, which generally contains <code>div</code> elements with roles of <code>"header"</code>, <code>"content"</code>, and <code>"footer"</code>, each containing common markup, forms, and custom jQuery Mobile widgets.</p> 
@@ -94,9 +94,36 @@
 			<li><p>The "ui-page" key name used in sub-hash url references can be set to any value you'd like, so as to blend into your URL structure. This value is stored in <code>jQuery.mobile.subPageUrlKey</code>.</p></li> 
 			</ul>
 			
-			
-	</div><!-- /content -->
-</div><!-- /page -->
 
-</body>
-</html>
+				</div><!--/content-primary -->		
+
+				<div class="content-secondary">
+
+					<div data-role="collapsible" data-collapsed="true" data-theme="b">
+
+							<h3>Demos &amp; Docs Sections</h3>
+
+							<ul data-role="listview" data-theme="c" data-dividertheme="d">
+
+								<li data-role="list-divider">Components</li>
+								<li data-theme="a"><a href="../../docs/pages/index.html">Pages &amp; dialogs</a></li>
+								<li><a href="../../docs/toolbars/index.html">Toolbars</a></li>
+								<li><a href="../../docs/buttons/index.html">Buttons</a></li>
+								<li><a href="../../docs/content/index.html">Content formatting</a></li>
+								<li><a href="../../docs/forms/index.html">Form elements</a></li>
+								<li><a href="../../docs/lists/index.html">List views</a></li>
+
+							</ul>
+					</div>
+				</div>		
+
+			</div><!-- /content -->
+
+			<div data-role="footer" class="footer-docs" data-theme="c">
+					<p>&copy;2011 The jQuery Project</p>
+			</div>
+
+			</div><!-- /page -->
+
+			</body>
+			</html>

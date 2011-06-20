@@ -21,6 +21,7 @@
 	</div><!-- /header -->
 
 	<div data-role="content">
+		<div class="content-primary">
 
 		<p>After jQuery Mobile auto-enhances form controls into custom controls, you can manipulate many of their properties via plugin methods. The currently available methods are listed below. Check Github for updates - we're working on complete coverage.</p>
 		
@@ -176,9 +177,36 @@ $('input').button('disable');
 		<p>The page plugin contains a list of input types that are set to either true which means they'll degrade to type=text, false which means they'll be left alone, or a string such as "number", which means they'll be converted to that type (such as the case of type=range).</p>
 		
 		<p>You can configure which types are changed via the page plugin's <code>degradeInputs</code> option, which can be manipulated externally via <code>$.mobile.page.prototype.options.degradeInputs</code>, which has properties: color, date, datetime, "datetime-local", email, month, number, range, search, tel, time, url, and week. Be sure to configure this inside an event handler bound to the <code>mobileinit</code> event, so that it applies to the first page as well as subsequent pages that are loaded.</p>				
-	</div><!-- /content -->
-	
-</div><!-- /page -->
+		</div><!--/content-primary -->		
 
-</body>
-</html>
+		<div class="content-secondary">
+
+			<div data-role="collapsible" data-collapsed="true" data-theme="b">
+
+					<h3>Demos &amp; Docs Sections</h3>
+
+					<ul data-role="listview" data-theme="c" data-dividertheme="d">
+
+						<li data-role="list-divider">Components</li>
+						<li><a href="../../docs/pages/index.html">Pages &amp; dialogs</a></li>
+						<li><a href="../../docs/toolbars/index.html">Toolbars</a></li>
+						<li><a href="../../docs/buttons/index.html">Buttons</a></li>
+						<li><a href="../../docs/content/index.html">Content formatting</a></li>
+						<li data-theme="a"><a href="../../docs/forms/index.html">Form elements</a></li>
+						<li><a href="../../docs/lists/index.html">List views</a></li>
+
+					</ul>
+			</div>
+		</div>		
+
+	</div><!-- /content -->
+
+	<div data-role="footer" class="footer-docs" data-theme="c">
+			<p>&copy;2011 The jQuery Project</p>
+	</div>
+
+	</div><!-- /page -->
+
+	</body>
+	</html>
+	

@@ -21,6 +21,8 @@
 	</div><!-- /header -->
 
 	<div data-role="content">
+		<div class="content-primary">
+		
 		<p>Occasionally, you may want to visually group a set of buttons together to form a single block that looks contained like a navigation component. To get this effect, wrap a set of buttons in a container with the <code> data-role="controlgroup"</code> attribute &mdash; the framework will create a vertical button group, remove all margins and drop shadows between the buttons, and only round the first and last buttons of the set to create the effect that they are grouped together. </p>
 <pre><code>
 &lt;div data-role=&quot;controlgroup&quot;&gt;
@@ -62,9 +64,34 @@
 		</div>
 		
 		
-
+	</div><!--/content-primary -->		
+	
+	<div class="content-secondary">
 		
-	</div><!-- /content -->
+		<div data-role="collapsible" data-collapsed="true" data-theme="b">
+			
+				<h3>Demos &amp; Docs Sections</h3>
+				
+				<ul data-role="listview" data-theme="c" data-dividertheme="d">
+				
+					<li data-role="list-divider">Components</li>
+					<li><a href="../../docs/pages/index.html">Pages &amp; dialogs</a></li>
+					<li><a href="../../docs/toolbars/index.html">Toolbars</a></li>
+					<li data-theme="a"><a href="../../docs/buttons/index.html">Buttons</a></li>
+					<li><a href="../../docs/content/index.html">Content formatting</a></li>
+					<li><a href="../../docs/forms/index.html">Form elements</a></li>
+					<li><a href="../../docs/lists/index.html">List views</a></li>
+	
+				</ul>
+		</div>
+	</div>		
+
+</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p>&copy;2011 The jQuery Project</p>
+</div>
+	
 </div><!-- /page -->
 
 </body>

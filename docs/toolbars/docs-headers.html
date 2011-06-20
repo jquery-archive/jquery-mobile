@@ -21,7 +21,7 @@
 	</div><!-- /header -->
 
 	<div data-role="content">
-		
+		<div class="content-primary">	
 			<h2>Header structure</h2>
 			<p>The <code>header</code> is a toolbar at the top of the page that usually contains the page title text and optional buttons positioned to the the left and/or right of the title for navigation or actions.</p> 
 			
@@ -133,8 +133,36 @@
 			<p>If you need to to create a header that doesn't follow the default configuration, simply wrap your custom styled markup in a container <code>div</code> inside the header container and the plugin won't apply the automatic button logic so you can write custom styles for laying out the content in your header.</p> 
 
 
-	</div><!-- /content -->
-</div><!-- /page -->
 
-</body>
-</html>
+				</div><!--/content-primary -->		
+
+				<div class="content-secondary">
+
+					<div data-role="collapsible" data-collapsed="true" data-theme="b">
+
+							<h3>Demos &amp; Docs Sections</h3>
+
+							<ul data-role="listview" data-theme="c" data-dividertheme="d">
+
+								<li data-role="list-divider">Components</li>
+								<li><a href="../../docs/pages/index.html">Pages &amp; dialogs</a></li>
+								<li data-theme="a"><a href="../../docs/toolbars/index.html">Toolbars</a></li>
+								<li><a href="../../docs/buttons/index.html">Buttons</a></li>
+								<li><a href="../../docs/content/index.html">Content formatting</a></li>
+								<li><a href="../../docs/forms/index.html">Form elements</a></li>
+								<li><a href="../../docs/lists/index.html">List views</a></li>
+
+							</ul>
+					</div>
+				</div>		
+
+			</div><!-- /content -->
+
+			<div data-role="footer" class="footer-docs" data-theme="c">
+					<p>&copy;2011 The jQuery Project</p>
+			</div>
+
+			</div><!-- /page -->
+
+			</body>
+			</html>

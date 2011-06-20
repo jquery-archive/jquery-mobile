@@ -21,7 +21,8 @@
 	</div>
 	
 	<div data-role="content">
-			<ul data-role="listview" data-split-icon="gear" data-split-theme="d">
+		<div class="content-primary">
+					<ul data-role="listview" data-split-icon="gear" data-split-theme="d">
 			<li><a href="index.html">
 				<img src="../lists/images/album-bb.jpg" />
 				<h3>Broken Bells</h3>
@@ -94,18 +95,42 @@
 		</ul>
 		
 
-	</div>
-	
-	<div data-role="footer" data-id="foo1" data-position="fixed">
-		<div data-role="navbar">
-			<ul>
-				<li><a href="footer-persist-a.html">Friends</a></li>
-				<li><a href="footer-persist-b.html" class="ui-btn-active ui-state-persist">Albums</a></li>
-				<li><a href="footer-persist-c.html">Emails</a></li>
-			</ul>
-		</div><!-- /navbar -->
-	</div><!-- /footer -->
-</div><!-- /page -->
 
-</body>
-</html>
+			</div><!--/content-primary -->		
+
+			<div class="content-secondary">
+
+				<div data-role="collapsible" data-collapsed="true" data-theme="b">
+
+						<h3>Demos &amp; Docs Sections</h3>
+
+						<ul data-role="listview" data-theme="c" data-dividertheme="d">
+
+							<li data-role="list-divider">Components</li>
+							<li><a href="../../docs/pages/index.html">Pages &amp; dialogs</a></li>
+							<li data-theme="a"><a href="../../docs/toolbars/index.html">Toolbars</a></li>
+							<li><a href="../../docs/buttons/index.html">Buttons</a></li>
+							<li><a href="../../docs/content/index.html">Content formatting</a></li>
+							<li><a href="../../docs/forms/index.html">Form elements</a></li>
+							<li><a href="../../docs/lists/index.html">List views</a></li>
+
+						</ul>
+				</div>
+			</div>		
+
+		</div><!-- /content -->
+
+		<div data-role="footer" data-id="foo1" data-position="fixed">
+			<div data-role="navbar">
+				<ul>
+					<li><a href="footer-persist-a.html">Friends</a></li>
+					<li><a href="footer-persist-b.html" class="ui-btn-active ui-state-persist">Albums</a></li>
+					<li><a href="footer-persist-c.html">Emails</a></li>
+				</ul>
+			</div><!-- /navbar -->
+		</div><!-- /footer -->
+
+		</div><!-- /page -->
+
+		</body>
+		</html>

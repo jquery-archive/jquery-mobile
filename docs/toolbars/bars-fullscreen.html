@@ -21,7 +21,8 @@
 	</div>
 	
 	<div data-role="content">
-		<img src="images/photo-run.jpeg" width="640" height="480" alt="Photo Run">
+			<div class="content-primary">
+				<img src="images/photo-run.jpeg" width="640" height="480" alt="Photo Run">
 	
 		<p class="ui-body">This page demonstrates the "fullscreen" toolbar mode. This toolbar treatment is used in special cases where you want the content to fill the whole screen, and you want the header and footer toolbars to appear and disappear when the page is clicked responsively &mdash; a common scenario for photo, image or video viewers.</p>
 		
@@ -29,16 +30,36 @@
 		
 		<p class="ui-body">Keep in mind that the toolbars in this mode will sit <strong>over</strong> page content, so not all content will be accessible with the toolbars open, just as shown in this demo.</p>
 			       
-			   
-		
-	</div>
-	
-	<div data-role="footer" data-position="fixed">
-			<h1>Fullscreen fixed footer</h1>
-	</div>
 
+				</div><!--/content-primary -->		
 
-</div>
+				<div class="content-secondary">
 
-</body>
-</html>
+					<div data-role="collapsible" data-collapsed="true" data-theme="b">
+
+							<h3>Demos &amp; Docs Sections</h3>
+
+							<ul data-role="listview" data-theme="c" data-dividertheme="d">
+
+								<li data-role="list-divider">Components</li>
+								<li><a href="../../docs/pages/index.html">Pages &amp; dialogs</a></li>
+								<li data-theme="a"><a href="../../docs/toolbars/index.html">Toolbars</a></li>
+								<li><a href="../../docs/buttons/index.html">Buttons</a></li>
+								<li><a href="../../docs/content/index.html">Content formatting</a></li>
+								<li><a href="../../docs/forms/index.html">Form elements</a></li>
+								<li><a href="../../docs/lists/index.html">List views</a></li>
+
+							</ul>
+					</div>
+				</div>		
+
+			</div><!-- /content -->
+
+			<div data-role="footer" class="footer-docs" data-theme="a" data-position="fixed">
+					<h1>Fullscreen Fixed Footer</h1>
+			</div>
+
+			</div><!-- /page -->
+
+			</body>
+			</html>

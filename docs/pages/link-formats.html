@@ -21,7 +21,7 @@
 	</div><!-- /header -->
 
 	<div data-role="content">
-			
+		<div class="content-primary">		
 			<p>All standard HTML link types are supported in jQuery Mobile. To make the experience as polished as possible, any links to pages within the same domain will be automatically turned into Ajax requests and displayed with an animated page transition by the framework. </p>
 			<p>Links that point to other domains or that have <code>rel="external"</code>, <code>data-ajax="false"</code> or <code>target</code> attributes will not be loaded with Ajax and will cause a full page refresh. If multiple "pages" are contained within a single HTML document, they can be linked by referencing the ID of the page as an anchor (#foo).</p>
 			<p>All other types of links like <code>mailto:</code> and <code>tel:</code> aren't impacted by the framework and will work as expected. Learn more about the <a href="docs-navmodel.html">linking and navigation model</a> in jQuery Mobile</p>
@@ -44,8 +44,36 @@
 				<li data-role="list-divider">Other</li>
 				<li><a href="#">A href="#" will return false</a></li>
 			</ul>
-	</div><!-- /content -->
-</div><!-- /page -->
 
-</body>
-</html>
+				</div><!--/content-primary -->		
+
+				<div class="content-secondary">
+
+					<div data-role="collapsible" data-collapsed="true" data-theme="b">
+
+							<h3>Demos &amp; Docs Sections</h3>
+
+							<ul data-role="listview" data-theme="c" data-dividertheme="d">
+
+								<li data-role="list-divider">Components</li>
+								<li data-theme="a"><a href="../../docs/pages/index.html">Pages &amp; dialogs</a></li>
+								<li><a href="../../docs/toolbars/index.html">Toolbars</a></li>
+								<li><a href="../../docs/buttons/index.html">Buttons</a></li>
+								<li><a href="../../docs/content/index.html">Content formatting</a></li>
+								<li><a href="../../docs/forms/index.html">Form elements</a></li>
+								<li><a href="../../docs/lists/index.html">List views</a></li>
+
+							</ul>
+					</div>
+				</div>		
+
+			</div><!-- /content -->
+
+			<div data-role="footer" class="footer-docs" data-theme="c">
+					<p>&copy;2011 The jQuery Project</p>
+			</div>
+
+			</div><!-- /page -->
+
+			</body>
+			</html>
