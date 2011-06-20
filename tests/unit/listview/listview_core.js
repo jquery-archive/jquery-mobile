@@ -394,24 +394,28 @@
 		setup: function(){
 			var item,
 				data = [
-				{id: 1,
-					label: "Item 1"
-				},
-				{id: 2,
-					label: "Item 2"
-				},
-				{id: 3,
-					label: "Item 3"
-				},
-				{id: 4,
-					label: "Item 4"
-				}
-			];
+					{
+						id: 1,
+						label: "Item 1"
+					},
+					{
+						id: 2,
+						label: "Item 2"
+					},
+					{
+						id: 3,
+						label: "Item 3"
+					},
+					{
+						id: 4,
+						label: "Item 4"
+					}
+				];
 
 			$( "#programmatically-generated-list-items" ).html("");
 
-			for (var i = 0, len = data.length; i < len; i++) {
-				item = $('<li id="myItem' + data[i].id + '">');
+			for ( var i = 0, len = data.length; i < len; i++ ) {
+				item = $( '<li id="myItem' + data[i].id + '">' );
 				label = $( "<strong>" + data[i].label + "</strong>").appendTo( item );
 				$( "#programmatically-generated-list-items" ).append( item );
 			}
