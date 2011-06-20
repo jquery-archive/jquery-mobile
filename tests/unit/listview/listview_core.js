@@ -422,5 +422,31 @@
 	test( "Corner styling issue (#1470)", function() {
 		ok(!$('#programmatically-generated-list-items li:first-child').hasClass("ui-corner-bottom"), "First list item should not have class ui-corner-bottom");
 	});
+    
+	module("Programmatic list items manipulation");
+
+	asyncTest("Removing list items", 4, function() {
+		$.testHelper.pageSequence([
+			function() {
+				$.testHelper.openPage("#removing-items-from-list-test");
+			},
+
+			function() {
+				var ul = $('#removing-items-from-list-test ul');
+				ul.find("li").first().remove();
+				equal(ul.find("li").length, 3, "There should be only 3 list items left");
+
+				ul.listview('refresh');
+				ok(ul.find("li").first().hasClass("ui-corner-top"), "First list item should have class ui-corner-top");
+
+				ul.find("li").last().remove();
+				equal(ul.find("li").length, 2, "There should be only 2 list items left");
+
+				ul.listview('refresh');
+				ok(ul.find("li").last().hasClass("ui-corner-bottom"), "Last list item should have class ui-corner-bottom");
+				start();
+			}
+		]);
+	});
 
 })(jQuery);

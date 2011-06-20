@@ -17,13 +17,13 @@ Clone this repo and build the js and css files (you'll need Git and Make install
     cd jquery-mobile
     make
 
-Two complete versions, one minified, one not, of jQuery Mobile js and css files will be created.
+A full, complete version and a minified, complete version of the jQuery Mobile JavaScript and CSS files will be created in a folder named "compiled".
 
 
 Submitting bugs
 ===================================
 
-If you think you've found a bug, please visit the Issue tracker (https://github.com/jquery/jquery-mobile/issues) and create an issue explaining the problem and expected result. Be sure to include any relevant information for reproducing the issue, such as the browser/device (with version #), and the version of the jQuery Mobile code you're running. It also helps a lot to make sure that the bug still exists on jquerymobile.com/test/, as it's possible we may have fixed it already! 
+If you think you've found a bug, please visit the Issue tracker (https://github.com/jquery/jquery-mobile/issues) and create an issue explaining the problem and expected result. Be sure to include any relevant information for reproducing the issue, such as the browser/device (with version #), and the version of the jQuery Mobile code you're running. It also helps a lot to make sure that the bug still exists on jquerymobile.com/test/, as it's possible we may have fixed it already! It is also best to include code to reproduce the bug. 
 
 
 Submitting patches
@@ -31,6 +31,8 @@ Submitting patches
 
 To contribute code and bug fixes to jQuery Mobile: fork this project on Github, make changes to the code in your fork, and then send a 
 "pull request" to notify the team of updates that are ready to be reviewed for inclusion.
+
+Detailed instructions can be found at https://gist.github.com/726275
 
 
 Running the jQuery Mobile demos & docs locally
@@ -44,7 +46,3 @@ Another quick way to get up and running is to download and install MAMP for Mac 
 
 Another alternative is XAMPP, which is also available for Windows, though you need to actually modify Apache's httpd.conf to point to your checkout: http://www.apachefriends.org/en/xampp.html
 You need the Rewrite (mod_rewrite.so), Expire (mod_expires.so) and Header (mod_headers.so) modules loaded.
-
-
-
-
