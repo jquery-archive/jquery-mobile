@@ -112,7 +112,9 @@ p.intro strong {
 		left: 10px;
 		top: 0;
 	}
-	
+	.type-home .ui-content {
+		margin-top: 5px;
+	}
 	.ui-mobile #jqm-homeheader {
 		max-width: 340px;
 	}
