@@ -107,6 +107,9 @@ p.intro {
 		padding: 0;
 		background: url(../images/px-ccc.gif) 50% 0 repeat-y;
 	}
+	.type-interior .ui-content {
+		background-position: 45%;
+	}
 	.content-secondary {
 		text-align: left;
 		float: left;
@@ -138,7 +141,10 @@ p.intro {
 		position: absolute;
 		left: -9999px;
 	}
-	
+	.type-interior .content-primary {
+		padding: 0 6% 3em 0;
+		margin: 0;
+	}
 	/* fix up the collapsibles - expanded on desktop */
 	.content-secondary .ui-collapsible-heading {
 		display: none;
@@ -153,8 +159,8 @@ p.intro {
 	}
 	
 	.type-interior .content-secondary {
-		margin-bottom: 0;
-		margin-top: 0;
+		margin: 0;
+		padding: 0;
 	}
 	
 }
@@ -170,12 +176,17 @@ p.intro {
 		width: 56%;
 		padding-right: 1%;
 	}	
+	.type-interior .ui-content {
+		background-position: 34%;
+	}
 }
 
 @media all and (min-width: 1200px){
-	.type-home .ui-content,
-	.type-interior .ui-content {
+	.type-home .ui-content{
 		background-position: 38.5%;
+	}
+	.type-interior .ui-content {
+		background-position: 30%;
 	}
 	.content-secondary {
 		width: 30%;
@@ -183,11 +194,15 @@ p.intro {
 		margin: 30px 0 20px 5%;
 	}
 	.type-interior .content-secondary {
-		margin: 0 0 0 5%;
+		margin: 0;
+		padding: 0;
 	}
 	.content-primary {
 		width: 50%;
 		margin-right: 5%;
 		padding-right: 3%;
+	}
+	.type-interior .content-primary {
+		width: 60%;
 	}
 }
