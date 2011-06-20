@@ -19,7 +19,8 @@
 				if( newPath === undefined ) {
 					newPath = location.hash;
 				}
-				return path.stripHash( newPath ).replace( /[^\/]*\.[^\/*]+$/, "" );
+				newPath = path.stripHash( newPath ).replace( /[^\/]*\.[^\/*]+$/, "" );
+				return ( /\/$/ ).test( newPath ) ? newPath : newPath + "/";
 			},
 
 			//return the substring of a filepath before the sub-page key, for making a server request
@@ -604,7 +605,7 @@
 
 					//rewrite src and href attrs to use a base url
 					if( !$.support.dynamicBaseTag ) {
-						var newPath = path.clean( path.origin );
+						var newPath = path.get( fileUrl );
 						to.find( "[src], link[href], a[rel='external'], :jqmData(ajax='false'), a[target]" ).each( function() {
 							var attrs = [ "href", "src", "action" ],
 								thisAttr = undefined,
@@ -622,7 +623,7 @@
 
 							if ( thisAttr && thisUrl ) {
 								//if full path exists and is same, chop it - helps IE out
-								thisUrl = thisUrl.replace( location.protocol + "//" + location.host + location.pathname, "" );
+								thisUrl = thisUrl.replace( location.protocol + "//" + location.host + newPath, "" );
 	
 								if( ! /^(\w+:|#|\/)/.test( thisUrl ) ) {
 									$( this ).attr( thisAttr, newPath + thisUrl );
