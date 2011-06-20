@@ -143,8 +143,9 @@ p.intro {
 		left: -9999px;
 	}
 	.type-interior .content-primary {
-		padding: 0 6% 3em 0;
+		padding: 1.5em 6% 3em 0;
 		margin: 0;
+		
 	}
 	/* fix up the collapsibles - expanded on desktop */
 	.content-secondary .ui-collapsible-heading {
