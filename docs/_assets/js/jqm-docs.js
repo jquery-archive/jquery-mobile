@@ -29,3 +29,13 @@ $(function(){
 		$(this).trigger("collapse")
 	});
 });
+
+function setDefaultTransition(){
+	$.mobile.defaultPageTransition = $( window ).width() >= 600 ? "fade" : "slide";
+}
+
+//set default documentation 
+$( document ).bind( "mobileinit", setDefaultTransition );
+$(function(){
+	$( window ).bind( "throttledresize", setDefaultTransition );
+});
