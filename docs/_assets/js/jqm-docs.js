@@ -7,6 +7,10 @@ $('div').live('pagecreate',function(event){
 			appendEl = $(this).find('.ui-content');
 		}
 		
+		if( appendEl.is("[data-position]") ){
+			return;
+		}
+		
 		$('<a href="#themeswitcher" data-'+ $.mobile.ns +'rel="dialog" data-'+ $.mobile.ns +'transition="pop">Switch theme</a>')
 			.buttonMarkup({
 				'icon':'gear',
@@ -20,7 +24,7 @@ $('div').live('pagecreate',function(event){
 				$.themeswitcher();
 			});
 	}	
-	event.stopPropagation();
+
 });
 
 //collapse page navs after use
@@ -31,7 +35,17 @@ $(function(){
 });
 
 function setDefaultTransition(){
-	$.mobile.defaultPageTransition = $( window ).width() >= 650 ? "fade" : "slide";
+	var winwidth = $( window ).width(),
+		trans ="slide";
+		
+	if( winwidth >= 1000 ){
+		trans = "none";
+	}
+	else if( winwidth >= 650 ){
+		trans = "fade";
+	}
+
+	$.mobile.defaultPageTransition = trans;
 }
 
 //set default documentation 

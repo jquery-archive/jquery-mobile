@@ -1,3 +1,9 @@
+/* jqm docs css
+
+Beware: lots of last-minute CSS going on in here 
+cobblers, shoes, 
+*/
+
 body { background: #dddddd; }
 
 .ui-mobile #jqm-home {  background: #e5e5e5 url(../images/jqm-sitebg.png) top center repeat-x; }
@@ -93,8 +99,18 @@ p.intro {
 /* docs site layout */
 
 @media all and (min-width: 650px){
-	.ui-mobile #jqm-homeheader {max-width: 340px;}
-	.ui-mobile .jqm-themeswitcher {float: right;
+	
+	.jqm-home {
+		position: absolute;
+		left: 10px;
+		top: 0;
+	}
+	
+	.ui-mobile #jqm-homeheader {
+		max-width: 340px;
+	}
+	.ui-mobile .jqm-themeswitcher {
+		float: right;
 	}
 	p.intro {
 		border-top-color: #75ae18;
@@ -110,6 +126,7 @@ p.intro {
 	}
 	.type-interior .ui-content {
 		background-position: 45%;
+		overflow: hidden;
 	}
 	.content-secondary {
 		text-align: left;
@@ -123,6 +140,12 @@ p.intro {
 		margin: 30px 0 20px 2%;
 		padding: 20px 4% 0 0;
 			background: none;
+	}
+	.type-index .content-secondary {
+		padding: 0;
+	}
+	.type-index .content-secondary .ui-listview {
+		margin: 0;
 	}
 
 	.ui-mobile #jqm-homeheader {
@@ -145,7 +168,6 @@ p.intro {
 	.type-interior .content-primary {
 		padding: 1.5em 6% 3em 0;
 		margin: 0;
-		
 	}
 	/* fix up the collapsibles - expanded on desktop */
 	.content-secondary .ui-collapsible-heading {
@@ -159,7 +181,10 @@ p.intro {
 		margin: 0;
 		padding: 0;
 	}
-	
+	.type-interior  .content-secondary .ui-li-divider {
+		padding-top: 1em;
+		padding-bottom: 1em;
+	}
 	.type-interior .content-secondary {
 		margin: 0;
 		padding: 0;
