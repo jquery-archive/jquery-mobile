@@ -833,9 +833,9 @@ a.ui-link-inherit {
 }
 .ui-icon-radio-off,
 .ui-icon-radio-on {
-	-moz-border-radius: 18px;
-	-webkit-border-radius: 18px;
-	border-radius: 18px;
+	-moz-border-radius: 9px;
+	-webkit-border-radius: 9px;
+	border-radius: 9px;
 }
 .ui-icon-checkbox-on,
 .ui-icon-radio-on {
