@@ -28,6 +28,8 @@
 			Math.abs = absFn;
 			$.Event.prototype.originalEvent = originalEventFn;
 			$.Event.prototype.preventDefault = preventDefaultFn;
+
+			$(window).unbind( "throttledresize" );
 		}
 	});
 
@@ -387,58 +389,59 @@
 			called = true;
 		});
 
-		$(window).trigger("resize");
-
-		setTimeout(function(){
-			ok( called );
-			$(window).unbind( "throttledresize" );
-			setTimeout(start, 500);
-		}, 500);
+		$.testHelper.sequence([
+			function(){	$(window).trigger( "resize" ); },
+			function(){ ok( called ); },
+			function(){
+				start();
+			}
+		], 200);
 	});
 
 	asyncTest( "throttledresize event prevents resize events from firing more frequently than 250ms", function(){
 		var called = 0;
+
 		$(window).bind( "throttledresize", function(){
-			called ++;
+			called++;
 		});
 
-		$(window).trigger( "resize" ).trigger( "resize" );
+		// NOTE 250 ms * 3 = 750ms which is plenty of time
+		// for the events to trigger before the next test, but
+		// not so much time that the second resize will be triggered
+		// before the call to same() is made
+		$.testHelper.sequence([
+			function(){
+				$(window).trigger( "resize" ).trigger( "resize" );
+			},
 
-		setTimeout(function(){
-			ok( called == 1 );
-			$(window).unbind( "throttledresize" );
-			setTimeout(start, 500);
-		}, 100);
+			// verify that only one throttled resize was called after 250ms
+			function(){ same( called, 1 ); },
+
+			function(){
+				start();
+			}
+		], 250);
 	});
 
-	asyncTest( "throttledresize event promises that a held call will execute after trottled timeout", function(){
+	asyncTest( "throttledresize event promises that a held call will execute only once after throttled timeout", function(){
 		var called = 0;
 
 		$(window).bind( "throttledresize", function(){
-			called ++;
+			called++;
 		});
 
-		$(window).trigger( "resize" ).trigger( "resize" );
-		setTimeout(function(){
-			ok( called == 2 );
-			$(window).unbind( "throttledresize" );
-			setTimeout(start, 500);
-		}, 500);
-	});
+		$.testHelper.sequence([
+			// trigger a ton of throttledresize events
+			function(){
+				$(window).trigger( "resize" ).trigger( "resize" ).trigger( "resize" );
+			},
 
-	asyncTest( "throttledresize event promises that a held call will execute only once after trottled timeout", function(){
-		var called = 0;
-
-		$(window).bind( "throttledresize", function(){
-			called ++;
-		});
-
-		$(window).trigger( "resize" ).trigger( "resize" ).trigger( "resize" );
-
-		setTimeout(function(){
-			ok( called == 2 );
-			$(window).unbind( "throttledresize" );
-			setTimeout(start, 500);
-		}, 500);
+			// verify that after enough time has gone by to accomodate all of them
+			// ie 750ms, only to calls to the bound function were made
+			function(){
+				same( called, 2 );
+				start();
+			}
+		], 750);
 	});
 })(jQuery);
