@@ -55,6 +55,6 @@ $(":jqmData(role='page')").live("pageshow", function(event) {
 	ResizePageContentHeight(event.target);
 });
 
-$(document).live("orientationchange", function(event) {
+$(window).bind("orientationchange", function(event) {
 	ResizePageContentHeight($(".ui-page"));
 });

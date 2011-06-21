@@ -8,6 +8,7 @@
 
 $.mobile.listview.prototype.options.filter = false;
 $.mobile.listview.prototype.options.filterPlaceholder = "Filter items...";
+$.mobile.listview.prototype.options.filterTheme = "c";
 
 $( ":jqmData(role='listview')" ).live( "listviewcreate", function() {
 	var list = $( this ),
@@ -17,7 +18,7 @@ $( ":jqmData(role='listview')" ).live( "listviewcreate", function() {
 		return;
 	}
 
-	var wrapper = $( "<form>", { "class": "ui-listview-filter ui-bar-c", "role": "search" } ),
+	var wrapper = $( "<form>", { "class": "ui-listview-filter ui-bar-" + listview.options.filterTheme, "role": "search" } ),
 
 		search = $( "<input>", {
 				placeholder: listview.options.filterPlaceholder
@@ -53,7 +54,7 @@ $( ":jqmData(role='listview')" ).live( "listviewcreate", function() {
 						childItems = false,                        
 						itemtext="";
 
-					for (var i = listItems.length; i >= 0; i--) {
+					for ( var i = listItems.length - 1; i >= 0; i-- ) {
 						item = $( listItems[i] );
 						itemtext = item.jqmData( 'filtertext' ) || item.text();
 

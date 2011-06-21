@@ -7,19 +7,21 @@
 	<link rel="stylesheet"  href="../../themes/default/" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 	<script src="../../js/jquery.js"></script>
+	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../_assets/js/jqm-docs.js"></script>
 	<script src="../../js/"></script>
 </head> 
 <body> 
 
-<div data-role="page">
+	<div data-role="page" class="type-interior">
 
-	<div data-role="header" data-theme="b">
+		<div data-role="header" data-theme="f">
 		<h1>Linking pages</h1>
 		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
 	<div data-role="content">
-			
+			<div class="content-primary">	
 			<p>jQuery Mobile is designed to work with simple page linking conventions. Essentially, you can link pages and assets as you normally would, and jQuery Mobile will automatically handle page requests in a single-page model, using Ajax when possible. When Ajax isn't possible (such as a non-same-domain url, or if specified using certain attributes on the link), a normal http request is used instead.</p> 
 
 			<p>The goal of this model is to allow developers to create websites using best practices &mdash; where ordinary links will "just work" without any special configuration &mdash; while creating a rich, native-like experience that can't be achieved with standard HTTP requests.</p> 
@@ -70,9 +72,36 @@
 		<p>Learn more about the technical details of the <a href="docs-navmodel.html">Ajax, hashes and history</a> in jQuery mobile.</p>
 		
 
-			
-	</div><!-- /content -->
-</div><!-- /page -->
 
-</body>
-</html>
+				</div><!--/content-primary -->		
+
+				<div class="content-secondary">
+
+					<div data-role="collapsible" data-collapsed="true" data-theme="b">
+
+							<h3>More in this section</h3>
+
+							<ul data-role="listview" data-theme="c" data-dividertheme="d">
+
+								<li data-role="list-divider">Pages &amp; Dialogs</li>
+								<li data-theme="a"><a href="docs-pages.html">Anatomy of a page</a></li>
+								<li><a href="docs-transitions.html">Page transitions</a></li>
+								<li><a href="docs-dialogs.html">Dialogs</a></li>
+								<li><a href="docs-navmodel.html">Navigation: Ajax, hashes &amp; history</a></li>
+								<li><a href="link-formats.html">Link format examples</a></li>
+								<li><a href="pages-themes.html">Theming pages</a></li>
+
+							</ul>
+					</div>
+				</div>		
+
+			</div><!-- /content -->
+
+			<div data-role="footer" class="footer-docs" data-theme="c">
+					<p>&copy; 2011 The jQuery Project</p>
+			</div>
+
+			</div><!-- /page -->
+
+			</body>
+			</html>

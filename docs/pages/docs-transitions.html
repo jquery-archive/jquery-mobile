@@ -7,19 +7,21 @@
 	<link rel="stylesheet"  href="../../themes/default/" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 	<script src="../../js/jquery.js"></script>
+	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../_assets/js/jqm-docs.js"></script>
 	<script src="../../js/"></script>
 </head> 
 <body> 
 
-<div data-role="page">
+	<div data-role="page" class="type-interior">
 
-	<div data-role="header" data-theme="b">
+		<div data-role="header" data-theme="f">
 		<h1>Transitions</h1>
 		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
 	<div data-role="content">
-			
+		<div class="content-primary">		
 		<h2>Page transitions</h2> 
 
 		<p>The jQuery Mobile framework includes a set of six CSS-based transition effects that can be applied to any object or page change event, which apply the chosen transition when navigating to a new page and the reverse transition for the Back button. By default, the framework applies the right to left slide transition.</p>
@@ -36,17 +38,46 @@
 		<a href="transition-success.html" data-role="button" data-rel="dialog" data-transition="slidedown">slidedown</a>
 		<a href="transition-success.html" data-role="button" data-rel="dialog" data-transition="pop">pop</a>
 		<a href="transition-success.html" data-role="button" data-rel="dialog" data-transition="fade">fade</a>
-		<a href="transition-success.html" data-role="button" data-rel="dialog" data-transition="flip">flip</a>
+		<a href="transition-success.html" data-role="button" data-rel="dialog" data-transition="flip">flip *</a>
 		</p>
 		
+        <p>NOTE: The flip transition isn't rendered correctly on most versions of Android because it lacks 3D CSS transform capabilities. Unfortunately, instead of ignoring the flip, Android makes the page "cartwheel" away by rotating instead of flipping. We recommend using this transition sparingly until support improves.</p>
 		<p>In addition, you can also force a "backwards" transition by specifying <code>data-direction="reverse"</code> on your link. Note: (this was formerly <code>data-back="true"</code>, which will remain supported until 1.0)</p>
 		
 		<div class="ui-body ui-body-e">
 			<p><strong>Transitions from <a href="http://www.jqtouch.com/">jQtouch</a></strong> (<em>with small modifications</em>): Built by David Kaneda and maintained by Jonathan Stark.</p>
 		</div>
 			
-	</div><!-- /content -->
-</div><!-- /page -->
 
-</body>
-</html>
+				</div><!--/content-primary -->		
+
+				<div class="content-secondary">
+
+					<div data-role="collapsible" data-collapsed="true" data-theme="b">
+
+							<h3>More in this section</h3>
+
+							<ul data-role="listview" data-theme="c" data-dividertheme="d">
+
+								<li data-role="list-divider">Pages &amp; Dialogs</li>
+								<li><a href="docs-pages.html">Anatomy of a page</a></li>
+								<li data-theme="a"><a href="docs-transitions.html">Page transitions</a></li>
+								<li><a href="docs-dialogs.html">Dialogs</a></li>
+								<li><a href="docs-navmodel.html">Navigation: Ajax, hashes &amp; history</a></li>
+								<li><a href="link-formats.html">Link format examples</a></li>
+								<li><a href="pages-themes.html">Theming pages</a></li>
+
+							</ul>
+					</div>
+				</div>		
+
+			</div><!-- /content -->
+
+			<div data-role="footer" class="footer-docs" data-theme="c">
+					<p>&copy; 2011 The jQuery Project</p>
+			</div>
+
+			</div><!-- /page -->
+
+			</body>
+			</html>

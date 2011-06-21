@@ -245,7 +245,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				}
 
 				// trigger change if value changed
-				if( oldIndex !== newIndex ){
+				if( isMultiple || oldIndex !== newIndex ){
 					select.trigger( "change" );
 				}
 
@@ -486,7 +486,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 			self.menuType = "page";
 			self.menuPageContent.append( self.list );
-			$.mobile.changePage(self.menuPage, 'pop', false, true);
+			$.mobile.changePage( self.menuPage, { transition: 'pop' } );
 		}
 		else {
 			self.menuType = "overlay";

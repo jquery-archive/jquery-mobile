@@ -7,19 +7,22 @@
 	<link rel="stylesheet"  href="../../themes/default/" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 	<script src="../../js/jquery.js"></script>
+	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../_assets/js/jqm-docs.js"></script>
 	<script src="../../js/"></script>
 </head> 
 <body> 
 
-<div data-role="page" data-fullscreen="true">
+<div data-role="page" data-fullscreen="true" class="type-interior">
 	
-	<div data-role="header" data-position="fixed">
+	<div data-role="header" data-position="fixed" data-theme="f">
 		<h1>Fullscreen fixed header</h1>
 		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div>
 	
 	<div data-role="content">
-		<img src="images/photo-run.jpeg" width="640" height="480" alt="Photo Run">
+			<div class="content-primary">
+				<img src="images/photo-run.jpeg" width="640" height="480" alt="Photo Run">
 	
 		<p class="ui-body">This page demonstrates the "fullscreen" toolbar mode. This toolbar treatment is used in special cases where you want the content to fill the whole screen, and you want the header and footer toolbars to appear and disappear when the page is clicked responsively &mdash; a common scenario for photo, image or video viewers.</p>
 		
@@ -27,16 +30,38 @@
 		
 		<p class="ui-body">Keep in mind that the toolbars in this mode will sit <strong>over</strong> page content, so not all content will be accessible with the toolbars open, just as shown in this demo.</p>
 			       
-			   
-		
-	</div>
-	
-	<div data-role="footer" data-position="fixed">
-			<h1>Fullscreen fixed footer</h1>
-	</div>
 
+				</div><!--/content-primary -->		
 
-</div>
+				<div class="content-secondary">
 
-</body>
-</html>
+					<div data-role="collapsible" data-collapsed="true" data-theme="b">
+
+							<h3>More in this section</h3>
+
+							<ul data-role="listview" data-theme="c" data-dividertheme="d">
+
+								<li data-role="list-divider">Toolbars</li>
+								<li><a href="docs-bars.html">Toolbar basics</a></li>
+								<li><a href="docs-headers.html">Header bars</a></li>
+								<li><a href="docs-footers.html">Footer bars</a></li>
+								<li><a href="docs-navbar.html">Navbars</a></li>
+								<li><a href="bars-fixed.html">Fixed positioning</a></li>
+								<li data-theme="a"><a href="bars-fullscreen.html">Fullscreen positioning</a></li>
+								<li><a href="footer-persist-a.html">Persistent footer nav bar</a></li>
+								<li><a href="bars-themes.html">Theming toolbars</a></li>
+
+							</ul>
+					</div>
+				</div>		
+
+			</div><!-- /content -->
+
+			<div data-role="footer" class="footer-docs" data-theme="a" data-position="fixed">
+					<h1>Fullscreen Fixed Footer</h1>
+			</div>
+
+			</div><!-- /page -->
+
+			</body>
+			</html>

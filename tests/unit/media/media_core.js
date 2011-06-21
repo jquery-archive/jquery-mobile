@@ -68,29 +68,26 @@
 		});
 	});
 
-	test( "binds remove of portrait and landscape classes resize/orientation fired", function(){
-		expect( 2 );
+	test( "binds remove of portrait and landscape classes orientation fired", function(){
+		expect( 1 );
 
 		$.Event.prototype.orientation = "foo";
 
-		$(window).bind("orientationchange.htmlclass resize.htmlclass", function(event){
+		$(window).bind("orientationchange.htmlclass", function(event){
 			ok(!$("html").hasClass("portrait landscape"));
 			start();
 		});
-
-		$("html").addClass("portrait landscape");
-		$(window).trigger("resize.htmlclass");
 
 		$("html").addClass("portrait landscape");
 		$(window).trigger("orientationchange.htmlclass");
 		stop();
 	});
 
-	test( "sets break point class additions on resize/orientation change", function(){
+	test( "sets break point class additions on orientation change", function(){
 		$.fn.width = function(){ return 1900; };
 
 		$("html").removeClass("min-width-320px");
-		$(window).trigger("resize.htmlclass");
+		$(window).trigger("orientationchange.htmlclass");
 		ok($("html").hasClass("min-width-320px"));
 	});
 })(jQuery);

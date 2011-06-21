@@ -80,22 +80,40 @@
         <ul data-nstest-role="listview" data-nstest-inset="true">
             <li>Item 1</li>
             <li>Item 2</li>
-            <li>Parent Item
+            <li>Item 3
                 <ul data-nstest-role="listview">
-                    <li>Sub Item 10</li>
-                    <li>Sub Item 11</li>
-                    <li>Sub Item 12</li>
+                    <li>Item A-3-0</li>
+                    <li>Item A-3-1</li>
+                    <li>Item A-3-2</li>
                 </ul>
             </li>
         </ul>
         <ul data-nstest-role="listview" data-nstest-inset="true">
-            <li>Item 3</li>
-            <li>Item 4</li>
-            <li>Parent Item
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>Item 3
                 <ul data-nstest-role="listview">
-                    <li>Sub Item 20</li>
-                    <li>Sub Item 21</li>
-                    <li>Sub Item 22</li>
+                    <li>Item B-3-0
+                        <ul data-nstest-role="listview">
+							<li>Item B-3-0-0</li>
+							<li>Item B-3-0-1
+								<ul data-nstest-role="listview">
+									<li>Item B-3-0-1-0</li>
+									<li>Item B-3-0-1-1</li>
+									<li>Item B-3-0-1-2</li>
+								</ul>
+							</li>
+							<li>Item B-3-0-2</li>
+						</ul>
+                    </li>
+                    <li>Item B-3-1
+						<ul data-nstest-role="listview">
+							<li>Item B-3-1-0</li>
+							<li>Item B-3-1-1</li>
+							<li>Item B-3-1-2</li>
+						</ul>
+                    </li>
+                    <li>Item B-3-2</li>
                 </ul>
             </li>
         </ul>
@@ -219,6 +237,21 @@
 			<li>c is for catwoman</li>
 			<li data-nstest-role="list-divider">d</li>
 			<li>d is for darkwing</li>
+		</ul>
+	</div>
+</div>
+
+<!-- Removing items from list -->
+<div  data-nstest-role="page" id='removing-items-from-list-test'>
+	<div  data-nstest-role="header" data-nstest-position="inline">
+		<h1>Basic List View</h1>
+	</div>
+	<div  data-nstest-role="content">
+		<ul  data-nstest-role="listview" data-nstest-inset="true">
+			<li>Item 1</li>
+			<li>Item 2</li>
+			<li>Item 3</li>
+			<li>Item 4</li>
 		</ul>
 	</div>
 </div>

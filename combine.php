@@ -1,18 +1,17 @@
 <?php
 
-if (!isset($type) || !isset($elements))
+if ( ! isset($type) || ! isset($elements) )
 {
-	echo "\$type and \$elements must be specified!";
+	echo '$type and $elements must be specified!';
 	exit;
 }
 
 $contents = '';
-reset($elements);
-while (list(,$element) = each($elements)) {
-	$contents .= "\n\n" . file_get_contents($element);
+
+foreach ( $elements as $file ) {
+	$contents .= file_get_contents($file). "\n\n";
 }
 
-header("Content-Type: " . $type);
-header("Content-Length: " . strlen($contents));
+header('Content-Type: ' . $type);
+header('Content-Length: ' . strlen($contents));
 echo $contents;
-?>

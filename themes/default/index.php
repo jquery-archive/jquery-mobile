@@ -20,4 +20,3 @@ $elements = array(
 );
 
 include('../../combine.php');
-?>
