@@ -75,6 +75,8 @@
 			});
 		},
 
+		// TODO move to eventSequence and invoke pageSequence with default of
+		// changepage event
 		pageSequence: function(fns, event){
 			var fn = fns.shift(),
 					self = this;
@@ -94,6 +96,7 @@
 				clearTimeout(warnTimer);
 
 				// Let the current stack unwind before we fire off the next item in the sequence.
+				// TODO setTimeout(self.pageSequence, 0, [fns, event]);
 				setTimeout(function(){ self.pageSequence(fns, event); }, 0);
 			});
 
