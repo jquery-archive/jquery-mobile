@@ -101,6 +101,9 @@
 		}
 	});
 	
+	//initialize events now, after mobileinit has occurred
+	$.mobile._registerInternalEvents();
+	
 	//check which scrollTop value should be used by scrolling to 1 immediately at domready
 	//then check what the scroll top is. Android will report 0... others 1
 	//note that this initial scroll won't hide the address bar. It's just for the check.
