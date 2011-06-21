@@ -387,8 +387,9 @@
 	function transitionPages( toPage, fromPage, transition, reverse ) {
 		
 		//get current scroll distance
-		var currScroll = $window.scrollTop(),
-			toScroll	= toPage.data( "lastScroll" ) || $.mobile.defaultHomeScroll;
+		var currScroll = $.support.scrollTop ? $window.scrollTop() : true,
+			toScroll	= toPage.data( "lastScroll" ) || $.mobile.defaultHomeScroll,
+			screenHeight = getScreenHeight();
 		
 		//if scrolled down, scroll to top
 		if( currScroll ){
@@ -403,7 +404,7 @@
 		if( fromPage ) {
 			//set as data for returning to that spot
 			fromPage
-				.height( screen.height + currScroll )
+				.height( screenHeight + currScroll )
 				.jqmData( "lastScroll", currScroll )
 				.jqmData( "lastClicked", $activeClickedLink );
 				
@@ -411,7 +412,7 @@
 			fromPage.data( "page" )._trigger( "beforehide", null, { nextPage: toPage } );
 		}
 		toPage
-			.height( screen.height + toScroll )
+			.height( screenHeight + toScroll )
 			.data( "page" )._trigger( "beforeshow", null, { prevPage: fromPage || $( "" ) } );
 
 		//clear page loader
@@ -443,24 +444,26 @@
 			
 			//trigger pageshow, define prevPage as either fromPage or empty jQuery obj
 			toPage.data( "page" )._trigger( "show", null, { prevPage: fromPage || $( "" ) } );
-			
-			resetActivePageHeight();
-
 		});
 
 		return promise;
-	};
+	}
 	
 	//simply set the active page's minimum height to screen height, depending on orientation
-	function resetActivePageHeight(){
+	function getScreenHeight(){
 		var orientation 	= jQuery.event.special.orientationchange.orientation(),
 			port			= orientation === "portrait",
 			winMin			= port ? 480 : 320,
-			screenHeight	= port ? screen.height : screen.width,
+			screenHeight	= port ? screen.availHeight : screen.availWidth,
 			winHeight		= Math.max( winMin, $( window ).height() ),
 			pageMin			= Math.min( screenHeight, winHeight );
 
-		$( ".ui-page-active" ).css( "min-height", pageMin );
+		return pageMin;
+	}
+	
+	//simply set the active page's minimum height to screen height, depending on orientation
+	function resetActivePageHeight(){
+		$( "." + $.mobile.activePageClass ).css( "min-height", getScreenHeight() );
 	}
 
 	//shared page enhancements
@@ -933,7 +936,7 @@
 			}
 
 		var type = $this.attr( "method" ),
-			url = path.makeUrlAbsolute( $this.attr( "action" ), getClosestBaseUrl($this) );
+			url = path.makeUrlAbsolute( $this.attr( "action" ), getClosestBaseUrl($this) ),
 			target = $this.attr( "target" );
 
 		//external submits use regular HTTP
@@ -978,162 +981,170 @@
 
 		return path.makeUrlAbsolute( url, base);
 	}
-
-	//add active state on vclick
-	$( document ).bind( "vclick", function( event ) {
-		var link = findClosestLink( event.target );
-		if ( link ) {
-			if ( path.parseUrl( link.getAttribute( "href" ) || "#" ).hash !== "#" ) {
-				$( link ).closest( ".ui-btn" ).not( ".ui-disabled" ).addClass( $.mobile.activeBtnClass );
-				$( "." + $.mobile.activePageClass + " .ui-btn" ).not( link ).blur();
-			}
-		}
-	});
-
-	//click routing - direct to HTTP or Ajax, accordingly
-	$( document ).bind( "vclick click", function( event ) {
-		var link = findClosestLink( event.target );
-		if ( !link ) {
-			return;
-		}
-
-		var $link = $( link ),
-			//remove active link class if external (then it won't be there if you come back)
-			httpCleanup = function(){
-				window.setTimeout( function() { removeActiveLinkClass( true ); }, 200 );
-			};
-
-		//if there's a data-rel=back attr, go back in history
-		if( $link.is( ":jqmData(rel='back')" ) ) {
-			window.history.back();
-			return false;
-		}
-		
-		//if ajax is disabled, exit early
-		if( !$.mobile.ajaxEnabled ){
-			httpCleanup();
-			//use default click handling
-			return;
-		}
-		
-		var baseUrl = getClosestBaseUrl( $link ),
-
-			//get href, if defined, otherwise default to empty hash
-			href = path.makeUrlAbsolute( $link.attr( "href" ) || "#", baseUrl );
-
-		// XXX_jblas: Ideally links to application pages should be specified as
-		//            an url to the application document with a hash that is either
-		//            the site relative path or id to the page. But some of the
-		//            internal code that dynamically generates sub-pages for nested
-		//            lists and select dialogs, just write a hash in the link they
-		//            create. This means the actual URL path is based on whatever
-		//            the current value of the base tag is at the time this code
-		//            is called. For now we are just assuming that any url with a
-		//            hash in it is an application page reference.
-		if ( href.search( "#" ) != -1 ) {
-			href = href.replace( /[^#]*#/, "" );
-			if ( !href ) {
-				//link was an empty hash meant purely
-				//for interaction, so we ignore it.
-				event.preventDefault();
-				return;
-			} else if ( path.isPath( href ) ) {
-				//we have apath so make it the href we want to load.
-				href = path.makeUrlAbsolute( href, baseUrl );
-			} else {
-				//we have a simple id so use the documentUrl as its base.
-				href = path.makeUrlAbsolute( "#" + href, documentUrl.hrefNoHash );
-			}
-		}
-
-			// Should we handle this link, or let the browser deal with it?
-		var useDefaultUrlHandling = $link.is( "[rel='external']" ) || $link.is( ":jqmData(ajax='false')" ) || $link.is( "[target]" ),
-
-			// Some embedded browsers, like the web view in Phone Gap, allow cross-domain XHR
-			// requests if the document doing the request was loaded via the file:// protocol.
-			// This is usually to allow the application to "phone home" and fetch app specific
-			// data. We normally let the browser handle external/cross-domain urls, but if the
-			// allowCrossDomainPages option is true, we will allow cross-domain http/https
-			// requests to go through our page loading logic.
-			isCrossDomainPageLoad = ( $.mobile.allowCrossDomainPages && documentUrl.protocol === "file:" && href.search( /^https?:/ ) != -1 ),
-
-			//check for protocol or rel and its not an embedded page
-			//TODO overlap in logic from isExternal, rel=external check should be
-			//     moved into more comprehensive isExternalLink
-			isExternal = useDefaultUrlHandling || ( path.isExternal( href ) && !isCrossDomainPageLoad );
-
-		$activeClickedLink = $link.closest( ".ui-btn" );
-
-		if( isExternal ) {
-			httpCleanup();
-			//use default click handling
-			return;
-		}
-
-		//use ajax
-		var transition = $link.jqmData( "transition" ),
-			direction = $link.jqmData( "direction" ),
-			reverse = ( direction && direction === "reverse" ) ||
-						// deprecated - remove by 1.0
-						$link.jqmData( "back" ),
-
-			//this may need to be more specific as we use data-rel more
-			role = $link.attr( "data-" + $.mobile.ns + "rel" ) || undefined;
-
-		$.mobile.changePage( href, { transition: transition, reverse: reverse, role: role } );
-		event.preventDefault();
-	});
-
-	//hashchange event handler
-	$window.bind( "hashchange", function( e, triggered ) {
-		//find first page via hash
-		var to = path.stripHash( location.hash ),
-			//transition is false if it's the first page, undefined otherwise (and may be overridden by default)
-			transition = $.mobile.urlHistory.stack.length === 0 ? "none" : undefined;
-
-		//if listening is disabled (either globally or temporarily), or it's a dialog hash
-		if( !$.mobile.hashListeningEnabled || urlHistory.ignoreNextHashChange ) {
-			urlHistory.ignoreNextHashChange = false;
-			return;
-		}
-
-		// special case for dialogs
-		if( urlHistory.stack.length > 1 &&
-				to.indexOf( dialogHashKey ) > -1 ) {
-
-			// If current active page is not a dialog skip the dialog and continue
-			// in the same direction
-			if(!$.mobile.activePage.is( ".ui-dialog" )) {
-				//determine if we're heading forward or backward and continue accordingly past
-				//the current dialog
-				urlHistory.directHashChange({
-					currentUrl: to,
-					isBack: function() { window.history.back(); },
-					isForward: function() { window.history.forward(); }
-				});
-
-				// prevent changepage
-				return;
-			} else {
-				var setTo = function() { to = $.mobile.urlHistory.getActive().page; };
-				// if the current active page is a dialog and we're navigating
-				// to a dialog use the dialog objected saved in the stack
-				urlHistory.directHashChange({	currentUrl: to, isBack: setTo, isForward: setTo	});
-			}
-		}
-
-		//if to is defined, load it
-		if ( to ) {
-			to = ( typeof to === "string" && !path.isPath( to ) ) ? ( '#' + to ) : to;
-			$.mobile.changePage( to, { transition: transition, changeHash: false, fromHashChange: true } );
-		}
-		//there's no hash, go to the first page in the dom
-		else {
-			$.mobile.changePage( $.mobile.firstPage, { transition: transition, changeHash: false, fromHashChange: true } );
-		}
-	});
 	
-	//set page min-heights to be device specific
-	$( document ).bind( "pagecreate orientationchange", resetActivePageHeight );
+	
+	//The following event bindings should be bound after mobileinit has been triggered
+	//the following function is called in the init file
+	$.mobile._registerInternalEvents = function(){
+
+		//add active state on vclick
+		$( document ).bind( "vclick", function( event ) {
+			var link = findClosestLink( event.target );
+			if ( link ) {
+				if ( path.parseUrl( link.getAttribute( "href" ) || "#" ).hash !== "#" ) {
+					$( link ).closest( ".ui-btn" ).not( ".ui-disabled" ).addClass( $.mobile.activeBtnClass );
+					$( "." + $.mobile.activePageClass + " .ui-btn" ).not( link ).blur();
+				}
+			}
+		});
+
+		// click routing - direct to HTTP or Ajax, accordingly
+		$( document ).bind( $.mobile.useFastClick ? "vclick" : "click", function( event ) {
+			var link = findClosestLink( event.target );
+			if ( !link ) {
+				return;
+			}
+
+			var $link = $( link ),
+				//remove active link class if external (then it won't be there if you come back)
+				httpCleanup = function(){
+					window.setTimeout( function() { removeActiveLinkClass( true ); }, 200 );
+				};
+
+			//if there's a data-rel=back attr, go back in history
+			if( $link.is( ":jqmData(rel='back')" ) ) {
+				window.history.back();
+				return false;
+			}
+		
+			//if ajax is disabled, exit early
+			if( !$.mobile.ajaxEnabled ){
+				httpCleanup();
+				//use default click handling
+				return;
+			}
+		
+			var baseUrl = getClosestBaseUrl( $link ),
+
+				//get href, if defined, otherwise default to empty hash
+				href = path.makeUrlAbsolute( $link.attr( "href" ) || "#", baseUrl );
+
+			// XXX_jblas: Ideally links to application pages should be specified as
+			//            an url to the application document with a hash that is either
+			//            the site relative path or id to the page. But some of the
+			//            internal code that dynamically generates sub-pages for nested
+			//            lists and select dialogs, just write a hash in the link they
+			//            create. This means the actual URL path is based on whatever
+			//            the current value of the base tag is at the time this code
+			//            is called. For now we are just assuming that any url with a
+			//            hash in it is an application page reference.
+			if ( href.search( "#" ) != -1 ) {
+				href = href.replace( /[^#]*#/, "" );
+				if ( !href ) {
+					//link was an empty hash meant purely
+					//for interaction, so we ignore it.
+					event.preventDefault();
+					return;
+				} else if ( path.isPath( href ) ) {
+					//we have apath so make it the href we want to load.
+					href = path.makeUrlAbsolute( href, baseUrl );
+				} else {
+					//we have a simple id so use the documentUrl as its base.
+					href = path.makeUrlAbsolute( "#" + href, documentUrl.hrefNoHash );
+				}
+			}
+
+				// Should we handle this link, or let the browser deal with it?
+			var useDefaultUrlHandling = $link.is( "[rel='external']" ) || $link.is( ":jqmData(ajax='false')" ) || $link.is( "[target]" ),
+
+				// Some embedded browsers, like the web view in Phone Gap, allow cross-domain XHR
+				// requests if the document doing the request was loaded via the file:// protocol.
+				// This is usually to allow the application to "phone home" and fetch app specific
+				// data. We normally let the browser handle external/cross-domain urls, but if the
+				// allowCrossDomainPages option is true, we will allow cross-domain http/https
+				// requests to go through our page loading logic.
+				isCrossDomainPageLoad = ( $.mobile.allowCrossDomainPages && documentUrl.protocol === "file:" && href.search( /^https?:/ ) != -1 ),
+
+				//check for protocol or rel and its not an embedded page
+				//TODO overlap in logic from isExternal, rel=external check should be
+				//     moved into more comprehensive isExternalLink
+				isExternal = useDefaultUrlHandling || ( path.isExternal( href ) && !isCrossDomainPageLoad );
+
+			$activeClickedLink = $link.closest( ".ui-btn" );
+
+			if( isExternal ) {
+				httpCleanup();
+				//use default click handling
+				return;
+			}
+
+			//use ajax
+			var transition = $link.jqmData( "transition" ),
+				direction = $link.jqmData( "direction" ),
+				reverse = ( direction && direction === "reverse" ) ||
+							// deprecated - remove by 1.0
+							$link.jqmData( "back" ),
+
+				//this may need to be more specific as we use data-rel more
+				role = $link.attr( "data-" + $.mobile.ns + "rel" ) || undefined;
+
+			$.mobile.changePage( href, { transition: transition, reverse: reverse, role: role } );
+			event.preventDefault();
+		});
+
+		//hashchange event handler
+		$window.bind( "hashchange", function( e, triggered ) {
+			//find first page via hash
+			var to = path.stripHash( location.hash ),
+				//transition is false if it's the first page, undefined otherwise (and may be overridden by default)
+				transition = $.mobile.urlHistory.stack.length === 0 ? "none" : undefined;
+
+			//if listening is disabled (either globally or temporarily), or it's a dialog hash
+			if( !$.mobile.hashListeningEnabled || urlHistory.ignoreNextHashChange ) {
+				urlHistory.ignoreNextHashChange = false;
+				return;
+			}
+
+			// special case for dialogs
+			if( urlHistory.stack.length > 1 &&
+					to.indexOf( dialogHashKey ) > -1 ) {
+
+				// If current active page is not a dialog skip the dialog and continue
+				// in the same direction
+				if(!$.mobile.activePage.is( ".ui-dialog" )) {
+					//determine if we're heading forward or backward and continue accordingly past
+					//the current dialog
+					urlHistory.directHashChange({
+						currentUrl: to,
+						isBack: function() { window.history.back(); },
+						isForward: function() { window.history.forward(); }
+					});
+
+					// prevent changepage
+					return;
+				} else {
+					var setTo = function() { to = $.mobile.urlHistory.getActive().page; };
+					// if the current active page is a dialog and we're navigating
+					// to a dialog use the dialog objected saved in the stack
+					urlHistory.directHashChange({	currentUrl: to, isBack: setTo, isForward: setTo	});
+				}
+			}
+
+			//if to is defined, load it
+			if ( to ) {
+				to = ( typeof to === "string" && !path.isPath( to ) ) ? ( '#' + to ) : to;
+				$.mobile.changePage( to, { transition: transition, changeHash: false, fromHashChange: true } );
+			}
+			//there's no hash, go to the first page in the dom
+			else {
+				$.mobile.changePage( $.mobile.firstPage, { transition: transition, changeHash: false, fromHashChange: true } );
+			}
+		});
+		
+		//set page min-heights to be device specific
+		$( document ).bind( "pageshow", resetActivePageHeight );
+		$( window ).bind( "throttledresize", resetActivePageHeight );
+	
+	};//_registerInternalEvents callback	
 
 })( jQuery );

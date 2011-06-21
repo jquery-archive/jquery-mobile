@@ -7,19 +7,21 @@
 	<link rel="stylesheet"  href="../../themes/default/" /> 
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 	<script src="../../js/jquery.js"></script>
+	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../_assets/js/jqm-docs.js"></script>
 	<script src="../../js/"></script>
 </head> 
 <body> 
 
-<div data-role="page" data-theme="b">
+<div data-role="page" class="type-interior">
 
-	<div data-role="header">
+	<div data-role="header" data-theme="f">
 		<h1>Methods</h1>
 		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
 	<div data-role="content">
-	
+	<div class="content-primary">
 
 	  <p>jQuery Mobile exposes several methods and properties on the $.mobile object for use in your applications.</p>
 		
@@ -505,7 +507,31 @@ $.mobile.addResolutionBreakpoints([600,800]);
 			
 			
 		</dl>			
-	</div><!-- /content -->
+	</div><!--/content-secondary -->		
+	
+	<div class="content-secondary">
+		
+		<div data-role="collapsible" data-collapsed="true" data-theme="b">
+			
+				<h3>More in this section</h3>
+				
+				<ul data-role="listview"  data-theme="c" data-dividertheme="d">
+				
+					<li data-role="list-divider">API</li>
+					<li><a href="../../docs/api/globalconfig.html">Configuring defaults</a></li>
+					<li><a href="../../docs/api/events.html">Events</a></li>
+					<li data-theme="a"><a href="../../docs/api/methods.html">Methods &amp; Utilities</a></li>
+					<li><a href="../../docs/api/mediahelpers.html">Responsive Layout</a></li> 
+					<li><a href="../../docs/api/themes.html">Theme framework</a></li>
+				</ul>
+		</div>
+	</div>		
+
+</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p>&copy; 2011 The jQuery Project</p>
+</div>
 	
 </div><!-- /page -->
 

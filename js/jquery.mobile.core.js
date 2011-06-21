@@ -32,6 +32,11 @@
 
 		//automatically handle clicks and form submissions through Ajax, when same-domain
 		ajaxEnabled: true,
+		
+		//When enabled, clicks and taps that result in Ajax page changes will happen slightly sooner on touch devices.
+		//Also, it will prevent the address bar from appearing on platforms like iOS during page transitions.
+		//This option has no effect on non-touch devices, but enabling it may interfere with jQuery plugins that bind to click events
+		useFastClick: true,
 
 		//automatically load and show pages based on location.hash
 		hashListeningEnabled: true,

@@ -72,6 +72,17 @@
 
 			ok($("html").hasClass("ui-mobile"));
 		});
+		
+		test( "useFastClick is configurable via mobileinit", function(){
+			$(document).bind( "mobileinit", function(){
+				$.mobile.useFastClick = false;
+			});
+		
+			$.testHelper.reloadLib(libName);
+
+			ok( $.mobile.useFastClick == false );
+			$.mobile.useFastClick = true;
+		});
 
 
 

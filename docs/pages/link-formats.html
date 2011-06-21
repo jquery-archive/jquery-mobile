@@ -7,20 +7,21 @@
 	<link rel="stylesheet"  href="../../themes/default/" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 	<script src="../../js/jquery.js"></script>
+	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../_assets/js/jqm-docs.js"></script>
 	<script src="../../js/"></script>
-	<script src="docs/docs.js"></script>
 </head> 
 <body> 
 
-<div data-role="page">
+	<div data-role="page" class="type-interior">
 
-	<div data-role="header" data-theme="b">
+		<div data-role="header" data-theme="f">
 		<h1>Link formats</h1>
 		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
 	<div data-role="content">
-			
+		<div class="content-primary">		
 			<p>All standard HTML link types are supported in jQuery Mobile. To make the experience as polished as possible, any links to pages within the same domain will be automatically turned into Ajax requests and displayed with an animated page transition by the framework. </p>
 			<p>Links that point to other domains or that have <code>rel="external"</code>, <code>data-ajax="false"</code> or <code>target</code> attributes will not be loaded with Ajax and will cause a full page refresh. If multiple "pages" are contained within a single HTML document, they can be linked by referencing the ID of the page as an anchor (#foo).</p>
 			<p>All other types of links like <code>mailto:</code> and <code>tel:</code> aren't impacted by the framework and will work as expected. Learn more about the <a href="docs-navmodel.html">linking and navigation model</a> in jQuery Mobile</p>
@@ -43,8 +44,36 @@
 				<li data-role="list-divider">Other</li>
 				<li><a href="#">A href="#" will return false</a></li>
 			</ul>
-	</div><!-- /content -->
-</div><!-- /page -->
 
-</body>
-</html>
+				</div><!--/content-primary -->		
+
+				<div class="content-secondary">
+
+					<div data-role="collapsible" data-collapsed="true" data-theme="b">
+
+							<h3>More in this section</h3>
+
+							<ul data-role="listview" data-theme="c" data-dividertheme="d">
+
+								<li data-role="list-divider">Pages &amp; Dialogs</li>
+								<li><a href="docs-pages.html">Anatomy of a page</a></li>
+								<li><a href="docs-transitions.html">Page transitions</a></li>
+								<li><a href="docs-dialogs.html">Dialogs</a></li>
+								<li><a href="docs-navmodel.html">Navigation: Ajax, hashes &amp; history</a></li>
+								<li data-theme="a"><a href="link-formats.html">Link format examples</a></li>
+								<li><a href="pages-themes.html">Theming pages</a></li>
+
+							</ul>
+					</div>
+				</div>		
+
+			</div><!-- /content -->
+
+			<div data-role="footer" class="footer-docs" data-theme="c">
+					<p>&copy; 2011 The jQuery Project</p>
+			</div>
+
+			</div><!-- /page -->
+
+			</body>
+			</html>

@@ -7,19 +7,23 @@
 	<link rel="stylesheet"  href="../../themes/default/" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 	<script src="../../js/jquery.js"></script>
+	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../_assets/js/jqm-docs.js"></script>
 	<script src="../../js/"></script>
 </head> 
 <body> 
 
-<div data-role="page">
-	
-	<div data-role="header" data-position="fixed" data-theme="b">
+<div data-role="page" class="type-interior">
+
+	<div data-role="header" data-position="fixed" data-theme="f">
+
 		<h1>Fixed toolbars</h1>
 		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div>
 	
 	<div data-role="content">
-		<h2>Fixed toolbars will re-appear after you scroll</h2>
+		<div class="content-primary">
+				<h2>Fixed toolbars will re-appear after you scroll</h2>
 		<p>This is a demo of the "fixed" headers and footers used in the jQuery Mobile framework. The page content flows naturally, allowing us to take advantage of native scrolling instead of a scripting a faux-scrolling workaround. The header and footer divs are right in the flow of the document, but whenever they are out of view, you can tap the screen to make them appear. Tapping again or scrolling the page will cause them to appear back in the flow of the page (at the top and bottom). </p>
 		<p>To set this behavior on a header or footer, add the <code> data-position="fixed"</code> attribute to the toolbar container.</p>
 		
@@ -106,14 +110,40 @@
 		
 		<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui.Donec non enim in turpis pulvinar facilisis. Ut felis.</p>
 		
-	</div>
-	
-	<div data-role="footer" data-position="fixed" data-theme="a">
-			<h1>Fixed Footer</h1>
-	</div>
 
 
-</div>
 
-</body>
-</html>
+				</div><!--/content-primary -->		
+
+				<div class="content-secondary">
+
+					<div data-role="collapsible" data-collapsed="true" data-theme="b">
+
+							<h3>More in this section</h3>
+
+							<ul data-role="listview" data-theme="c" data-dividertheme="d">
+
+								<li data-role="list-divider">Toolbars</li>
+								<li><a href="docs-bars.html">Toolbar basics</a></li>
+								<li><a href="docs-headers.html">Header bars</a></li>
+								<li><a href="docs-footers.html">Footer bars</a></li>
+								<li><a href="docs-navbar.html">Navbars</a></li>
+								<li data-theme="a"><a href="bars-fixed.html">Fixed positioning</a></li>
+								<li><a href="bars-fullscreen.html">Fullscreen positioning</a></li>
+								<li><a href="footer-persist-a.html">Persistent footer nav bar</a></li>
+								<li><a href="bars-themes.html">Theming toolbars</a></li>
+
+							</ul>
+					</div>
+				</div>		
+
+			</div><!-- /content -->
+
+			<div data-role="footer" class="footer-docs" data-theme="a" data-position="fixed">
+					<h1>Fixed Footer</h1>
+			</div>
+
+			</div><!-- /page -->
+
+			</body>
+			</html>
