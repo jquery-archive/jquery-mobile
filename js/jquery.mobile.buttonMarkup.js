@@ -81,8 +81,7 @@ $.fn.buttonMarkup.defaults = {
 	wrapperEls: "span"
 };
 
-function closestEnabledButton( element )
-{
+function closestEnabledButton( element ) {
 	while ( element ) {
 		var $ele = $( element );
 		if ( $ele.hasClass( "ui-btn" ) && !$ele.hasClass( "ui-disabled" ) ) {
