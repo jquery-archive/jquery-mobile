@@ -926,37 +926,6 @@
 	};
 
 /* Event Bindings - hashchange, submit, and click */
-
-	//bind to form submit events, handle with Ajax
-	$( "form" ).live('submit', function( event ) {
-		var $this = $( this );
-		if( !$.mobile.ajaxEnabled ||
-			$this.is( ":jqmData(ajax='false')" ) ) {
-				return;
-			}
-
-		var type = $this.attr( "method" ),
-			url = path.makeUrlAbsolute( $this.attr( "action" ), getClosestBaseUrl($this) ),
-			target = $this.attr( "target" );
-
-		//external submits use regular HTTP
-		if( path.isExternal( url ) || target ) {
-			return;
-		}
-
-		$.mobile.changePage(
-			url,
-			{
-				type:		type.length && type.toLowerCase() || "get",
-				data:		$this.serialize(),
-				transition:	$this.jqmData( "transition" ),
-				direction:	$this.jqmData( "direction" ),
-				reloadPage:	true
-			}
-		);
-		event.preventDefault();
-	});
-
 	function findClosestLink( ele )
 	{
 		while ( ele ) {
@@ -986,6 +955,36 @@
 	//The following event bindings should be bound after mobileinit has been triggered
 	//the following function is called in the init file
 	$.mobile._registerInternalEvents = function(){
+		
+		//bind to form submit events, handle with Ajax
+		$( "form" ).live('submit', function( event ) {
+			var $this = $( this );
+			if( !$.mobile.ajaxEnabled ||
+				$this.is( ":jqmData(ajax='false')" ) ) {
+					return;
+				}
+
+			var type = $this.attr( "method" ),
+				url = path.makeUrlAbsolute( $this.attr( "action" ), getClosestBaseUrl($this) ),
+				target = $this.attr( "target" );
+
+			//external submits use regular HTTP
+			if( path.isExternal( url ) || target ) {
+				return;
+			}
+
+			$.mobile.changePage(
+				url,
+				{
+					type:		type.length && type.toLowerCase() || "get",
+					data:		$this.serialize(),
+					transition:	$this.jqmData( "transition" ),
+					direction:	$this.jqmData( "direction" ),
+					reloadPage:	true
+				}
+			);
+			event.preventDefault();
+		});
 
 		//add active state on vclick
 		$( document ).bind( "vclick", function( event ) {
