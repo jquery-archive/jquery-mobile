@@ -926,37 +926,6 @@
 	};
 
 /* Event Bindings - hashchange, submit, and click */
-
-	//bind to form submit events, handle with Ajax
-	$( "form" ).live('submit', function( event ) {
-		var $this = $( this );
-		if( !$.mobile.ajaxEnabled ||
-			$this.is( ":jqmData(ajax='false')" ) ) {
-				return;
-			}
-
-		var type = $this.attr( "method" ),
-			url = path.makeUrlAbsolute( $this.attr( "action" ), getClosestBaseUrl($this) ),
-			target = $this.attr( "target" );
-
-		//external submits use regular HTTP
-		if( path.isExternal( url ) || target ) {
-			return;
-		}
-
-		$.mobile.changePage(
-			url,
-			{
-				type:		type.length && type.toLowerCase() || "get",
-				data:		$this.serialize(),
-				transition:	$this.jqmData( "transition" ),
-				direction:	$this.jqmData( "direction" ),
-				reloadPage:	true
-			}
-		);
-		event.preventDefault();
-	});
-
 	function findClosestLink( ele )
 	{
 		while ( ele ) {
@@ -986,6 +955,36 @@
 	//The following event bindings should be bound after mobileinit has been triggered
 	//the following function is called in the init file
 	$.mobile._registerInternalEvents = function(){
+		
+		//bind to form submit events, handle with Ajax
+		$( "form" ).live('submit', function( event ) {
+			var $this = $( this );
+			if( !$.mobile.ajaxEnabled ||
+				$this.is( ":jqmData(ajax='false')" ) ) {
+					return;
+				}
+
+			var type = $this.attr( "method" ),
+				url = path.makeUrlAbsolute( $this.attr( "action" ), getClosestBaseUrl($this) ),
+				target = $this.attr( "target" );
+
+			//external submits use regular HTTP
+			if( path.isExternal( url ) || target ) {
+				return;
+			}
+
+			$.mobile.changePage(
+				url,
+				{
+					type:		type.length && type.toLowerCase() || "get",
+					data:		$this.serialize(),
+					transition:	$this.jqmData( "transition" ),
+					direction:	$this.jqmData( "direction" ),
+					reloadPage:	true
+				}
+			);
+			event.preventDefault();
+		});
 
 		//add active state on vclick
 		$( document ).bind( "vclick", function( event ) {
@@ -999,12 +998,7 @@
 		});
 
 		// click routing - direct to HTTP or Ajax, accordingly
-		// TODO: most of the time, vclick will be all we need for fastClick bulletproofing.
-		// However, it seems that in Android 2.1, a click event
-		// will occasionally arrive independently of the bound vclick
-		// binding to click as well seems to help in this edge case
-		// we'll dig into this further in the next release cycle
-		$( document ).bind( $.mobile.useFastClick ? "vclick click" : "click", function( event ) {
+		$( document ).bind( $.mobile.useFastClick ? "vclick" : "click", function( event ) {
 			var link = findClosestLink( event.target );
 			if ( !link ) {
 				return;

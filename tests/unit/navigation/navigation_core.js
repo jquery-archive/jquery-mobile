@@ -172,6 +172,11 @@
 	});
 
 	asyncTest( "last entry choosen amongst multiple identical url history stack entries on hash change", function(){
+		// make sure the stack is clear after initial page load an any other delayed page loads
+		// TODO better browser state management
+		$.mobile.urlHistory.stack = [];
+		$.mobile.urlHistory.activeIndex = 0;
+
 		$.testHelper.pageSequence([
 			function(){ $.testHelper.openPage("#dup-history-first"); },
 			function(){ $("#dup-history-first a").click(); },
