@@ -133,11 +133,9 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 		// input[0].checked expando doesn't always report the proper value
 		// for checked='checked'
 		if ( $(input[0]).prop('checked') ) {
-			label.addClass( $.mobile.activeBtnClass );
 			icon.addClass( this.checkedicon ).removeClass( this.uncheckedicon );
 
 		} else {
-			label.removeClass( $.mobile.activeBtnClass );
 			icon.removeClass( this.checkedicon ).addClass( this.uncheckedicon );
 		}
 
