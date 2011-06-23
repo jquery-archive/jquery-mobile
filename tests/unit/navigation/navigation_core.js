@@ -476,4 +476,21 @@
 			}
 		]);
 	});
+
+	asyncTest( "refresh of a dialog url should not duplicate page", function(){
+
+		$.testHelper.pageSequence([
+			// open our test page
+			function(){
+				same($(".foo-class").length, 1, "should only have one instance of foo-class in the document");
+				location.hash = "#foo&ui-state=dialog";
+			},
+
+			function(){
+				same(location.hash, "#foo&ui-state=dialog", "hash should match what was loaded");
+				same($(".foo-class").length, 1, "should only have one instance of foo-class in the document");
+				start();
+			}
+		]);
+	});
 })(jQuery);
