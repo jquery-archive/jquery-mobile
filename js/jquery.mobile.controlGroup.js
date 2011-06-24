@@ -27,6 +27,7 @@ $.fn.controlgroup = function(options){
 		
 		function flipClasses(els){
 			els
+				.filter( ":visible" )
 				.removeClass('ui-btn-corner-all ui-shadow')
 				.eq(0).addClass(flCorners[0])
 				.end()
