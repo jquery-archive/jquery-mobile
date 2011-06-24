@@ -34,8 +34,7 @@ $.fixedToolbars = (function(){
 		scrollTriggered = false,
         touchToggleEnabled = true;
 
-	function showEventCallback(event)
-	{
+	function showEventCallback(event) {
 		// An event that affects the dimensions of the visual viewport has
 		// been triggered. If the header and/or footer for the current page are in overlay
 		// mode, we want to hide them, and then fire off a timer to show them at a later
@@ -80,10 +79,10 @@ $.fixedToolbars = (function(){
 
 */
 
-		(( $(document).scrollTop() == 0 ) ? $(window) : $(document))
+		(( $(document).scrollTop() === 0 ) ? $(window) : $(document))
 			.bind('scrollstart',function(event){
 				scrollTriggered = true;
-				if(stateBefore == null){ stateBefore = currentstate; }
+				if(stateBefore === null){ stateBefore = currentstate; }
 
 				// We only enter autoHideMode if the headers/footers are in
 				// an overlay state or the show timer was started. If the
@@ -152,18 +151,14 @@ $.fixedToolbars = (function(){
 	//
 	// TODO: We'll need to get rid of getOffsetTop() once a fix gets folded into core.
 
-	function getOffsetTop(ele)
-	{
+	function getOffsetTop(ele) {
 		var top = 0;
-		if (ele)
-		{
+		if (ele) {
 			var op = ele.offsetParent, body = document.body;
 			top = ele.offsetTop;
-			while (ele && ele != body)
-			{
+			while (ele && ele != body) {
 				top += ele.scrollTop || 0;
-				if (ele == op)
-				{
+				if (ele == op){
 					top += op.offsetTop;
 					op = ele.offsetParent;
 				}
