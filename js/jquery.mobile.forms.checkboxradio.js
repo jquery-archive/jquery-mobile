@@ -16,8 +16,12 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			//filter works though.
 			label = input.closest("form,fieldset,:jqmData(role='page')").find("label").filter('[for="' + input[0].id + '"]'),
 			inputtype = input.attr( "type" ),
-			checkedicon = "ui-icon-" + inputtype + "-on",
-			uncheckedicon = "ui-icon-" + inputtype + "-off";
+			checkedState = inputtype + "-on",
+			uncheckedState = inputtype + "-off",
+			checkedClass = "ui-"+ checkedState,
+			uncheckedClass = "ui-"+ uncheckedState,
+			checkedicon = "ui-icon-" + checkedState,
+			uncheckedicon = "ui-icon-" + uncheckedState;
 
 		if ( inputtype != "checkbox" && inputtype != "radio" ) { return; }
 
@@ -25,6 +29,8 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 		$.extend( this,{
 			label			: label,
 			inputtype		: inputtype,
+			checkedClass    : checkedClass,
+			uncheckedClass  : uncheckedClass,
 			checkedicon		: checkedicon,
 			uncheckedicon	: uncheckedicon
 		});
@@ -37,7 +43,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 		label
 			.buttonMarkup({
 				theme: this.options.theme,
-				icon: this.element.parents( ":jqmData(type='horizontal')" ).length ? undefined : uncheckedicon,
+				icon: this.element.parents( ":jqmData(type='horizontal')" ).length ? undefined : uncheckedState,
 				shadow: false
 			});
 
@@ -133,9 +139,11 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 		// input[0].checked expando doesn't always report the proper value
 		// for checked='checked'
 		if ( $(input[0]).prop('checked') ) {
+			label.addClass( this.checkedClass ).removeClass( this.uncheckedClass );
 			icon.addClass( this.checkedicon ).removeClass( this.uncheckedicon );
 
 		} else {
+			label.removeClass( this.checkedClass ).addClass( this.uncheckedClass );
 			icon.removeClass( this.checkedicon ).addClass( this.uncheckedicon );
 		}
 
