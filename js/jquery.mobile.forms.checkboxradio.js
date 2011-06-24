@@ -16,10 +16,12 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			//filter works though.
 			label = input.closest("form,fieldset,:jqmData(role='page')").find("label").filter('[for="' + input[0].id + '"]'),
 			inputtype = input.attr( "type" ),
-			checkedClass = "ui-"+ inputtype + "-on",
-			uncheckedClass = "ui-"+ inputtype + "-off",
-			checkedicon = "ui-icon-" + inputtype + "-on",
-			uncheckedicon = "ui-icon-" + inputtype + "-off";
+			checkedState = inputtype + "-on",
+			uncheckedState = inputtype + "-off",
+			checkedClass = "ui-"+ checkedState,
+			uncheckedClass = "ui-"+ uncheckedState,
+			checkedicon = "ui-icon-" + checkedState,
+			uncheckedicon = "ui-icon-" + uncheckedState;
 
 		if ( inputtype != "checkbox" && inputtype != "radio" ) { return; }
 
@@ -41,7 +43,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 		label
 			.buttonMarkup({
 				theme: this.options.theme,
-				icon: this.element.parents( ":jqmData(type='horizontal')" ).length ? undefined : uncheckedicon,
+				icon: this.element.parents( ":jqmData(type='horizontal')" ).length ? undefined : uncheckedState,
 				shadow: false
 			});
 
