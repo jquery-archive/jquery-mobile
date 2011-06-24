@@ -162,6 +162,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			button:button,
 			menuPage:menuPage,
 			menuPageContent:menuPageContent,
+			menuPageClose:menuPageClose,
 			screen:screen,
 			listbox:listbox,
 			list:list,
@@ -311,12 +312,16 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			});
 
 			//close button on small overlays
-			self.headerClose.click(function(){
-				if( self.menuType == "overlay" ){
-					self.close();
-					return false;
-				}
-			})
+			self.headerClose.click(function( event ){
+				self.close();
+				return false;
+			});
+
+			//close button on fullscreen overlays
+			self.menuPageClose.click(function( event ){
+				self.close();
+				return false;
+			});
 		}
 	},
 
