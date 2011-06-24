@@ -263,3 +263,180 @@ Built by David Kaneda and maintained by Jonathan Stark.
         opacity: 0;
     }
 }
+
+/* Gecko equivalents */
+
+.spin  {
+	-moz-transform: rotate(360deg);
+	-moz-animation-name: spin;
+	-moz-animation-duration: 1s;
+	-moz-animation-iteration-count:  infinite;
+}
+@-moz-keyframes spin {
+	from {-moz-transform: rotate(0deg);}
+  	to {-moz-transform: rotate(360deg);}
+}
+
+.in, .out {
+	-moz-animation-timing-function: ease-in-out;
+	-moz-animation-duration: 350ms;
+}
+
+.slide.in {
+	-moz-transform: translateX(0);
+	-moz-animation-name: slideinfromright;
+}
+
+.slide.out {
+	-moz-transform: translateX(-100%);
+	-moz-animation-name: slideouttoleft;
+}
+
+.slide.in.reverse {
+	-moz-transform: translateX(0);
+	-moz-animation-name: slideinfromleft;
+}
+
+.slide.out.reverse {
+	-moz-transform: translateX(100%);
+	-moz-animation-name: slideouttoright;
+}
+
+.slideup.in {
+	-moz-transform: translateY(0);
+	-moz-animation-name: slideinfrombottom;
+}
+
+.slideup.out {
+	-moz-animation-name: dontmove;
+}
+
+.slideup.out.reverse {
+	-moz-transform: translateY(100%);
+	-moz-animation-name: slideouttobottom;
+}
+
+.slideup.in.reverse {
+	-moz-animation-name: dontmove;
+}
+.slidedown.in {
+	-moz-transform: translateY(0);
+	-moz-animation-name: slideinfromtop;
+}
+
+.slidedown.out {
+	-moz-animation-name: dontmove;
+}
+
+.slidedown.out.reverse {
+	-moz-transform: translateY(-100%);
+	-moz-animation-name: slideouttotop;
+}
+
+.slidedown.in.reverse {
+	-moz-animation-name: dontmove;
+}
+
+@-moz-keyframes slideinfromright {
+    from { -moz-transform: translateX(100%); }
+    to { -moz-transform: translateX(0); }
+}
+
+@-moz-keyframes slideinfromleft {
+    from { -moz-transform: translateX(-100%); }
+    to { -moz-transform: translateX(0); }
+}
+
+@-moz-keyframes slideouttoleft {
+    from { -moz-transform: translateX(0); }
+    to { -moz-transform: translateX(-100%); }
+}
+
+@-moz-keyframes slideouttoright {
+    from { -moz-transform: translateX(0); }
+    to { -moz-transform: translateX(100%); }
+}
+
+
+@-moz-keyframes slideinfromtop {
+    from { -moz-transform: translateY(-100%); }
+    to { -moz-transform: translateY(0); }
+}
+
+@-moz-keyframes slideinfrombottom {
+    from { -moz-transform: translateY(100%); }
+    to { -moz-transform: translateY(0); }
+}
+
+@-moz-keyframes slideouttobottom {
+    from { -moz-transform: translateY(0); }
+    to { -moz-transform: translateY(100%); }
+}
+
+@-moz-keyframes slideouttotop {
+    from { -moz-transform: translateY(0); }
+    to { -moz-transform: translateY(-100%); }
+}
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@-moz-keyframes fadeout {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+.fade.in {
+	-moz-animation-name: fadein;
+}
+.fade.out {
+	-moz-animation-name: fadeout;
+}
+
+/* Hackish, but reliable. */
+
+@-moz-keyframes dontmove {
+    from { opacity: 1; }
+    to { opacity: 1; }
+}
+
+.pop {
+	-moz-transform-origin: 50% 50%;
+}
+
+.pop.in {
+	-moz-transform: scale(1);
+	-moz-animation-name: popin;
+}
+
+.pop.out.reverse {
+	-moz-transform: scale(.2);
+	-moz-animation-name: popout;
+}
+
+.pop.in.reverse {
+	-moz-animation-name: dontmove;
+}
+
+@-moz-keyframes popin {
+    from {
+        -moz-transform: scale(.2);
+        opacity: 0;
+    }
+    to {
+        -moz-transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes popout {
+    from {
+        -moz-transform: scale(1);
+        opacity: 1;
+    }
+    to {
+        -moz-transform: scale(.2);
+        opacity: 0;
+    }
+}
