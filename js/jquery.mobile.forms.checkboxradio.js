@@ -18,7 +18,9 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			inputtype = input.attr( "type" ),
 			checkedState = inputtype + "-on",
 			uncheckedState = inputtype + "-off",
-			checkedClass = "ui-"+ checkedState,
+			icon = input.parents( ":jqmData(type='horizontal')" ).length ? undefined : uncheckedState,
+			activeBtn = icon ? "" : " " + $.mobile.activeBtnClass,
+			checkedClass = "ui-"+ checkedState + activeBtn,
 			uncheckedClass = "ui-"+ uncheckedState,
 			checkedicon = "ui-icon-" + checkedState,
 			uncheckedicon = "ui-icon-" + uncheckedState;
@@ -43,7 +45,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 		label
 			.buttonMarkup({
 				theme: this.options.theme,
-				icon: this.element.parents( ":jqmData(type='horizontal')" ).length ? undefined : uncheckedState,
+				icon: icon,
 				shadow: false
 			});
 
