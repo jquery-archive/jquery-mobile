@@ -15,7 +15,7 @@
 		ok(!input.attr("checked"), "not checked before click");
 		button.trigger("click");
 		ok(input.attr("checked"), "checked after click");
-		ok(button.hasClass("ui-btn-active"), "active styles after click");
+		ok(button.hasClass("ui-checkbox-on"), "active styles after click");
 		button.trigger("click");
 
 		input.checkboxradio("disable");
@@ -24,7 +24,7 @@
 		ok(!input.attr("checked"), "not checked before click");
 		button.trigger("click");
 		ok(!input.attr("checked"), "not checked after click");
-		ok(!button.hasClass("ui-btn-active"), "no active styles after click");
+		ok(!button.hasClass("ui-checkbox-on"), "no active styles after click");
 	});
 
 	asyncTest( "change events fired on checkbox for both check and uncheck", function(){
@@ -52,7 +52,7 @@
 	asyncTest( "radio button labels should update the active button class to last clicked and clear checked", function(){
 		var $radioBtns = $('#radio-active-btn-test input'),
 				singleActiveAndChecked = function(){
-					same($("#radio-active-btn-test .ui-btn-active").length, 1, "there should be only one active button");
+					same($("#radio-active-btn-test .ui-radio-on").length, 1, "there should be only one active button");
 					same($("#radio-active-btn-test :checked").length, 1, "there should be only one checked");
 				};
 
@@ -63,11 +63,11 @@
 
 			function(){
 				ok($radioBtns.last().attr('checked'));
-				ok($radioBtns.last().siblings('label').hasClass('ui-btn-active'),
+				ok($radioBtns.last().siblings('label').hasClass('ui-radio-on'),
 					"last input label is an active button");
 
 				ok(!$radioBtns.first().attr('checked'));
-				ok(!$radioBtns.first().siblings('label').hasClass('ui-btn-active'),
+				ok(!$radioBtns.first().siblings('label').hasClass('ui-radio-on'),
 					"first input label is not active");
 
 				singleActiveAndChecked();
@@ -77,11 +77,11 @@
 
 			function(){
 				ok($radioBtns.first().attr('checked'));
-				ok($radioBtns.first().siblings('label').hasClass('ui-btn-active'),
+				ok($radioBtns.first().siblings('label').hasClass('ui-radio-on'),
 					"first input label is an active button");
 
 				ok(!$radioBtns.last().attr('checked'));
-				ok(!$radioBtns.last().siblings('label').hasClass('ui-btn-active'),
+				ok(!$radioBtns.last().siblings('label').hasClass('ui-radio-on'),
 					"last input label is not active");
 
 				singleActiveAndChecked();
