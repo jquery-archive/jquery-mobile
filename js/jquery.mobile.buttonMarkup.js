@@ -66,9 +66,9 @@ $.fn.buttonMarkup = function( options ) {
 			.attr( "data-" + $.mobile.ns + "theme", o.theme )
 			.addClass( buttonClass );
 
-		var wrap = ( "<D class='" + innerClass + "'><D class='ui-btn-text'></D>" +
+		var wrap = "<"+o.wrapperEls+" class='" + innerClass + "'><"+o.wrapperEls+" class='ui-btn-text'></"+o.wrapperEls+">" +
 			( o.icon ? "<span class='" + iconClass + "'></span>" : "" ) +
-			"</D>" ).replace( /D/g, o.wrapperEls );
+			"</"+o.wrapperEls+">";
 
 		el.wrapInner( wrap );
 	});

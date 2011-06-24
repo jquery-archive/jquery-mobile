@@ -671,6 +671,9 @@
 					});
 				}
 
+				//append data-containers to page
+				all.find( ":jqmData(role='data')" ).appendTo($.mobile.pageContainer);
+
 				//append to page and enhance
 				page
 					.attr( "data-" + $.mobile.ns + "url", path.convertUrlToDataUrl( fileUrl ) )
