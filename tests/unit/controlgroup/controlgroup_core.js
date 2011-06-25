@@ -24,7 +24,7 @@
 		setup: function() {
 			this.vcontrolgroup = $( "#vertical-controlgroup" );
 			this.vcontrolgroup.find( ".ui-btn" ).show();
-			this.vcontrolgroup.controlgroup("refresh");
+			this.vcontrolgroup.controlgroup();
 		}
 	});
 
@@ -33,7 +33,7 @@
 
 		//We hide the first button and refresh
 		this.vcontrolgroup.find( ".ui-btn" ).first().hide();
-		this.vcontrolgroup.controlgroup("refresh");
+		this.vcontrolgroup.controlgroup();
 
 		var buttons = this.vcontrolgroup.find( ".ui-btn" ).filter( ":visible" ),
 			middlebuttons = buttons.filter(function(index) { return index > 0 && index < (length-1)}),
@@ -50,7 +50,7 @@
 
 		//We hide the last button and refresh
 		this.vcontrolgroup.find( ".ui-btn" ).last().hide();
-		this.vcontrolgroup.controlgroup("refresh");
+		this.vcontrolgroup.controlgroup();
 
 		var buttons = this.vcontrolgroup.find( ".ui-btn" ).filter( ":visible" ),
 			middlebuttons = buttons.filter(function(index) { return index > 0 && index < (length-1)}),
@@ -84,14 +84,14 @@
 		setup: function() {
 			this.hcontrolgroup = $( "#horizontal-controlgroup" );
 			this.hcontrolgroup.find( ".ui-btn" ).show();
-			this.hcontrolgroup.controlgroup("refresh");
+			this.hcontrolgroup.controlgroup();
 		}
 	});
 
 	test( "horizontal controlgroup after first button was hidden", function() {
 		//We hide the first button and refresh
 		this.hcontrolgroup.find( ".ui-btn" ).first().hide();
-		this.hcontrolgroup.controlgroup("refresh");
+		this.hcontrolgroup.controlgroup();
 
 		var buttons = this.hcontrolgroup.find( ".ui-btn" ).filter( ":visible" ),
 			middlebuttons = buttons.filter(function(index) { return index > 0 && index < (length-1)}),
@@ -106,7 +106,7 @@
 	test( "horizontal controlgroup after last button was hidden", function() {
 		//We hide the last button and refresh
 		this.hcontrolgroup.find( ".ui-btn" ).last().hide();
-		this.hcontrolgroup.controlgroup("refresh");
+		this.hcontrolgroup.controlgroup();
 
 		var buttons = this.hcontrolgroup.find( ".ui-btn" ).filter( ":visible" ),
 			middlebuttons = buttons.filter(function(index) { return index > 0 && index < (length-1)}),
