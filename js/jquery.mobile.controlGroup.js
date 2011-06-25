@@ -32,7 +32,7 @@ $.fn.controlgroup = function(options){
 				.end()
 				.filter(':last').addClass(flCorners[1]).addClass('ui-controlgroup-last');
 		}
-		flipClasses($(this).find('.ui-btn'));
+		flipClasses($(this).find('.ui-btn'+(o.dontFilterOutInvisible?'':':visible')));
 		flipClasses($(this).find('.ui-btn-inner'));
 		if(o.shadow){
 			$(this).addClass('ui-shadow');
