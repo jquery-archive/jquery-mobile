@@ -10,10 +10,10 @@
     <ol id="qunit-tests">
     </ol>
   </div>
-	<iframe data-src="/tests/unit/{{testdir}}" name="testFrame" id="testFrame" width="800px" height="100%" style="float: left; border: 0px;" scrolling="no">
+	<iframe data-src="../../tests/unit/{{testdir}}" name="testFrame" id="testFrame" width="800px" height="100%" style="float: left; border: 0px;" scrolling="no">
 	</iframe>
 	<link rel="stylesheet" href="../../external/qunit.css"></link>
-	<script src="/js/jquery.js"></script>
+	<script src="../../js/jquery.js"></script>
 	<script src="../../external/qunit.js"></script>
   <script type="text/javascript">
     window.testDirectories = [
