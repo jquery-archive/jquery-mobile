@@ -111,7 +111,7 @@
 			setTimeout(function() {
 				window.scrollTo( 0, ypos );
 				$(document).trigger( "silentscroll", { x: 0, y: ypos });
-			},20);
+			}, 20);
 
 			setTimeout(function() {
 				$.event.special.scrollstart.enabled = true;
