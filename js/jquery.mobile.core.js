@@ -118,9 +118,6 @@
 			}, 150 );
 		},
 
-		// compile the namespace normalization regex once
-		normalizeRegex: /-([a-z])/g,
-
 		// take a data attribute property, prepend the namespace
 		// and then camel case the attribute string
 		nsNormalize: function(prop){
