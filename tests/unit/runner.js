@@ -9,7 +9,6 @@
 		asyncTest( dir, function(){
 			// give each test a maximum of two minutes to finish
 			var testTimeout = setTimeout( function(){
-				console.log("wtf");
 				start();
 			}, 2 * 60 * 1000 );
 
