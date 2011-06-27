@@ -819,14 +819,18 @@ a.ui-link-inherit {
 
 
 /* checks,radios */
+.ui-checkbox .ui-icon {
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
 .ui-icon-checkbox-off,
-.ui-icon-checkbox-on,
-.ui-icon-radio-off,
-.ui-icon-radio-on {
-	background-color: transparent;
-	-moz-border-radius: 0;
-	-webkit-border-radius: 0;
-	border-radius: 0;
+.ui-icon-radio-off {
+	background-color: transparent;	
+}
+.ui-checkbox-on .ui-icon,
+.ui-radio-on .ui-icon {
+	background-color: #4596ce; /* NOTE: this hex should match the active state color. It's repeated here for cascade */
 }
 .ui-icon-searchfield {
 	background-image: url(images/icon-search-black.png);

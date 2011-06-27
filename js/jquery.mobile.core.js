@@ -32,7 +32,7 @@
 
 		//automatically handle clicks and form submissions through Ajax, when same-domain
 		ajaxEnabled: true,
-		
+
 		//When enabled, clicks and taps that result in Ajax page changes will happen slightly sooner on touch devices.
 		//Also, it will prevent the address bar from appearing on platforms like iOS during page transitions.
 		//This option has no effect on non-touch devices, but enabling it may interfere with jQuery plugins that bind to click events
@@ -43,7 +43,7 @@
 
 		//set default page transition - 'none' for no transitions
 		defaultPageTransition: "slide",
-		
+
 		//minimum scroll distance that will be remembered when returning to a page
 		minScrollBack: screen.height / 2,
 
@@ -111,15 +111,12 @@
 			setTimeout(function() {
 				window.scrollTo( 0, ypos );
 				$(document).trigger( "silentscroll", { x: 0, y: ypos });
-			},20);
+			}, 20);
 
 			setTimeout(function() {
 				$.event.special.scrollstart.enabled = true;
 			}, 150 );
 		},
-
-		// compile the namespace normalization regex once
-		normalizeRegex: /-([a-z])/g,
 
 		// take a data attribute property, prepend the namespace
 		// and then camel case the attribute string

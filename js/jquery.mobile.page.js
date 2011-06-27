@@ -134,7 +134,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 
 		$elem
 			.find(":jqmData(role='controlgroup')")
-			.controlgroup();
+			.controlgroup({dontFilterOutInvisible: true});
 
 		//links within content areas
 		$elem.find( "a:not(.ui-btn):not(.ui-link-inherit)" )
