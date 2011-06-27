@@ -111,4 +111,45 @@
 				start();
 			}]);
 	});
+
+	asyncTest( "internal form with no action submits to document URL", function(){
+
+		$.testHelper.pageSequence([
+			// open our test page
+			function(){
+				$.testHelper.openPage("#internal-no-action-form-page");
+			},
+
+			function(){
+				$("#internal-no-action-form-page form").eq(0).submit();
+			},
+
+			function(){
+				same(location.hash, "#" + location.pathname + "?foo=1&bar=2", "hash should match document url and not base url");
+				start();
+			}
+		]);
+	});
+
+	asyncTest( "external page form with no action submits to external page URL", function(){
+		$.testHelper.pageSequence([
+			function(){
+				// Go to an external page that has a form.
+				$("#internal-page-1 .cp1").click();
+			},
+
+			function(){
+				// Make sure we actually navigated to the external page.
+				same(location.hash, "#" + contentDir + "content-page-1.html", "should be on content-page-1.html");
+
+				// Now submit the form in the external page.
+				$("#content-page-1 form").eq(0).submit();
+			},
+
+			function(){
+				same(location.hash, "#" + contentDir + "content-page-1.html?foo=1&bar=2", "hash should match page url and not document url");
+				start();
+			}]);
+	});
+
 })(jQuery);

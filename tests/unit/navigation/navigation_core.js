@@ -493,4 +493,46 @@
 			}
 		]);
 	});
+
+	asyncTest( "internal form with no action submits to document URL", function(){
+
+		$.testHelper.pageSequence([
+			// open our test page
+			function(){
+				$.testHelper.openPage("#internal-no-action-form-page");
+			},
+
+			function(){
+				$("#internal-no-action-form-page form").eq(0).submit();
+			},
+
+			function(){
+				same(location.hash, "#" + location.pathname + "?foo=1&bar=2", "hash should match what was loaded");
+				start();
+			}
+		]);
+	});
+
+	asyncTest( "external page containing form with no action submits to page URL", function(){
+
+		$.testHelper.pageSequence([
+			// open our test page
+			function(){
+				$.testHelper.openPage("#internal-no-action-form-page");
+			},
+
+			function(){
+				$("#internal-no-action-form-page a").eq(0).click();
+			},
+
+			function(){
+				$("#external-form-no-action-page form").eq(0).submit();
+			},
+
+			function(){
+				same(location.hash, "#" + siteDirectory + "form-tests/form-no-action.html?foo=1&bar=2", "hash should match page url and not document url");
+				start();
+			}
+		]);
+	});
 })(jQuery);

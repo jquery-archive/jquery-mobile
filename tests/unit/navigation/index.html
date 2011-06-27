@@ -83,11 +83,11 @@
 	<a href="data-url-tests/reverse-attr.html"></a>
 </div>
 
-<div id="ajax-diabled-form"  data-nstest-role="page">
+<div id="ajax-disabled-form"  data-nstest-role="page">
 	<form method="POST" id="non-ajax-form" action="/ajax-disabled-form" data-nstest-ajax="false">
 	</form>
 
-	<form method="POST" id="ajax-form" action="/ajax-diabled-form">
+	<form method="POST" id="ajax-form" action="/ajax-disabled-form">
 	</form>
 
 	<form method="POST" id="rand-ajax-form" action="/ajax-disabled-form" data-nstest-ajax="foo">
@@ -229,5 +229,17 @@
 <div data-nstest-role="page" id="pathing-tests-reset">
 	<div class="reset-value">page didn't change!</div>
 </div>
+
+<div data-nstest-role="page" id="internal-no-action-form-page">
+	<div data-nstest-role="content">
+		<form>
+			<input type="hidden" name="foo" value="1">
+			<input type="hidden" name="bar" value="2">
+		</form>
+        <a href="form-tests/form-no-action.html">External page containing form with no action.</a>
+    </div>
+</div>
+
+
 </body>
 </html>

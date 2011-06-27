@@ -967,8 +967,27 @@
 				}
 
 			var type = $this.attr( "method" ),
-				url = path.makeUrlAbsolute( $this.attr( "action" ), getClosestBaseUrl($this) ),
-				target = $this.attr( "target" );
+				target = $this.attr( "target" ),
+				url = $this.attr( "action" );
+
+			// If no action is specified, browsers default to using the
+			// URL of the document containing the form. Since we dynamically
+			// pull in pages from external documents, the form should submit
+			// to the URL for the source document of the page containing
+			// the form.
+			if ( !url ) {
+				// Get the @data-url for the page containing the form.
+				url = getClosestBaseUrl( $this );
+				if ( url === documentBase.hrefNoHash ) {
+					// The url we got back matches the document base,
+					// which means the page must be an internal/embedded page,
+					// so default to using the actual document url as a browser
+					// would.
+					url = documentUrl.hrefNoSearch;
+				}
+			}
+
+			url = path.makeUrlAbsolute(  url, getClosestBaseUrl($this) );
 
 			//external submits use regular HTTP
 			if( path.isExternal( url ) || target ) {
@@ -978,7 +997,7 @@
 			$.mobile.changePage(
 				url,
 				{
-					type:		type.length && type.toLowerCase() || "get",
+					type:		type && type.length && type.toLowerCase() || "get",
 					data:		$this.serialize(),
 					transition:	$this.jqmData( "transition" ),
 					direction:	$this.jqmData( "direction" ),
