@@ -100,7 +100,11 @@ $( ":jqmData(role='listview')" ).live( "listviewcreate", function() {
 		wrapper.addClass( "ui-listview-filter-inset" );
 	}
 
-	wrapper.insertBefore( list );
+	wrapper
+		.bind( "submit", function() {
+			return false;
+		})
+		.insertBefore( list );
 });
 
 })( jQuery );
