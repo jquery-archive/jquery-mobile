@@ -6,7 +6,7 @@
 </head>
 <body>
   <div style="float: left; width: 500px;">
-    <h1 id="qunit-header"><a href="#">jQuery Mobile Complete Test Suite</a></h1>
+    <h1 id="qunit-header"><a href="#">jQuery Mobile Test Suite</a></h1>
     <h2 id="qunit-banner"></h2>
     <ol id="qunit-tests">
     </ol>

@@ -8,7 +8,7 @@
 
 		$.each(data.directories, function(i, dir){
 			asyncTest( dir, function(){
-				var testTimeout = 2 * 60 * 1000, checkInterval = 2000;
+				var testTimeout = 3 * 60 * 1000, checkInterval = 2000;
 
 				// establish a timeout for a given suite in case of async tests hanging
 				var testTimer = setTimeout( function(){
