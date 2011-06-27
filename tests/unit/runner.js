@@ -10,7 +10,7 @@
 			asyncTest( dir, function(){
 				var nextCheck = null;
 
-					  // establish a timeout for a given suite in case of async tests hanging
+				// establish a timeout for a given suite in case of async tests hanging
 				var testTimeout = setTimeout( function(){
 					// prevent any schedule checks for completion
 					clearTimeout(nextCheck);
@@ -25,7 +25,7 @@
 				// check the iframe for success or failure and respond accordingly
 				check = function(){
 
-						  // check for the frames jquery object each time
+					// check for the frames jquery object each time
 					var framejQuery = window.frames["testFrame"].jQuery;
 
 					// if the iframe hasn't loaded (ie loaded jQuery) check back again shortly
