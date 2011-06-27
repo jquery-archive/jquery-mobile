@@ -13,11 +13,17 @@
 				// establish a timeout for a given suite in case of async tests hanging
 				var testTimer = setTimeout( function(){
 					// prevent any schedule checks for completion
-					clearTimeout( checkTimer );
+					clearTimeouts();
 					start();
 				}, testTimeout ),
 
-				checkTimer = setInterval( check, checkInterval );
+				checkTimer = setInterval( check, checkInterval ),
+
+				clearTimeouts = function(){
+					// prevent the next interval of the check function and the test timeout
+					clearTimeout( checkTimer );
+					clearTimeout( testTimer );
+				};
 
 				// check the iframe for success or failure and respond accordingly
 				function check(){
@@ -34,10 +40,7 @@
 					// if we have a result check it, otherwise check back shortly
 					if( result ){
 						ok( result === "qunit-pass" );
-
-						// prevent the next interval of the check function and the test timeout
-						clearTimeout( checkTimer );
-						clearTimeout( testTimer );
+						clearTimeouts();
 						start();
 					}
 				};
