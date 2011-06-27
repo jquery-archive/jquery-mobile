@@ -27,6 +27,9 @@
 
 			// NOTE reset for pageLoading tests
 			$('.ui-loader').remove();
+
+			// clear the classes added by reloading the init
+			$("html").attr('class', '');
 		}
 	});
 
@@ -38,7 +41,7 @@
 
 	// NOTE for the following two tests see index html for the binding
 	test( "mobile.page is available when mobile init is fired", function(){
-		ok(mobilePage !== undefined, "$.mobile.page is defined");
+		ok( mobilePage !== undefined, "$.mobile.page is defined" );
 	});
 
 	$.testHelper.excludeFileProtocol(function(){
@@ -46,7 +49,7 @@
 			var initFired = false;
 			expect( 1 );
 
-			$(window.document).bind('mobileinit', function(event){
+			$(window.document).one('mobileinit', function(event){
 				initFired = true;
 			});
 
@@ -63,24 +66,25 @@
 			$.testHelper.reloadLib(libName);
 
 			//NOTE easiest way to check for enhancements, not the most obvious
-			ok(!$("html").hasClass("ui-mobile"));
+			ok(!$("html").hasClass("ui-mobile"), "html elem doesn't have class ui-mobile");
 		});
 
 		test( "enhancments are added when the browser is grade A", function(){
 			setGradeA(true);
 			$.testHelper.reloadLib(libName);
 
-			ok($("html").hasClass("ui-mobile"));
+			ok($("html").hasClass("ui-mobile"), "html elem has class mobile");
 		});
-		
-		test( "useFastClick is configurable via mobileinit", function(){
-			$(document).bind( "mobileinit", function(){
+
+		asyncTest( "useFastClick is configurable via mobileinit", function(){
+			$(document).one( "mobileinit", function(){
 				$.mobile.useFastClick = false;
+				start();
 			});
-		
+
 			$.testHelper.reloadLib(libName);
 
-			ok( $.mobile.useFastClick == false );
+			same( $.mobile.useFastClick, false , "fast click is set to false after init" );
 			$.mobile.useFastClick = true;
 		});
 
@@ -104,7 +108,7 @@
 			$.testHelper.reloadLib(libName);
 			var firstPage = findFirstPage();
 
-			ok(firstPage.parent().hasClass('ui-mobile-viewport'));
+			ok(firstPage.parent().hasClass("ui-mobile-viewport"), "first page has viewport");
 		});
 
 		test( "mobile page container is the first page's parent", function(){
@@ -115,23 +119,14 @@
 			same($.mobile.pageContainer[0], firstPage.parent()[0]);
 		});
 
-		test( "page loading is called on document ready", function(){
-			$.testHelper.alterExtend({ pageLoading: function(){
-				start();
-				ok("called");
-			}});
-
-			stop();
-			$.testHelper.reloadLib(libName);
-		});
-
-		test( "hashchange triggered on document ready with single argument: true", function(){
-			$(window).bind("hashchange", function(ev, arg){
+		asyncTest( "hashchange triggered on document ready with single argument: true", function(){
+			$(window).one("hashchange", function(ev, arg){
 				same(arg, true);
 				start();
 			});
 
-			stop();
+			// a hash must be set to guarantee the trigger
+			location.hash = "#foo";
 			$.testHelper.reloadLib(libName);
 		});
 
@@ -144,16 +139,18 @@
 		});
 
 		asyncTest( "pageLoading doesn't add the dialog to the page when loading message is false", function(){
+			expect( 1 );
 			$.mobile.loadingMessage = false;
 			$.mobile.pageLoading(false);
 
 			setTimeout(function(){
-				ok(!$(".ui-loader").length);
+				ok(!$(".ui-loader").length, "no ui-loader element");
 				start();
 			}, 500);
 		});
 
 		asyncTest( "pageLoading doesn't add the dialog to the page when done is passed as true", function(){
+			expect( 1 );
 			$.mobile.loadingMessage = true;
 			$.mobile.pageLoading(true);
 
@@ -164,6 +161,7 @@
 		});
 
 		asyncTest( "pageLoading adds the dialog to the page when done is true", function(){
+			expect( 1 );
 			$.mobile.loadingMessage = true;
 			$.mobile.pageLoading(false);
 
@@ -174,6 +172,7 @@
 		});
 
 		asyncTest( "page loading should contain default loading message", function(){
+			expect( 1 );
 			reloadCoreNSandInit();
 			$.mobile.pageLoading(false);
 
