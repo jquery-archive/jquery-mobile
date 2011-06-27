@@ -35,6 +35,7 @@
 					}
 
 					// grab the result of the iframe test suite
+          // TODO strip extra white space
 					var result = framejQuery("#qunit-banner").attr('class');
 
 					// if we have a result check it, otherwise check back shortly
