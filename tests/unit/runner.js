@@ -33,7 +33,7 @@
 
 					// if we have a result check it, otherwise check back shortly
 					if( result ){
-						ok( result == "qunit-pass" );
+						ok( result === "qunit-pass" );
 
             // prevent the next interval of the check function and the test timeout
 						clearTimeout( checkTimer );
