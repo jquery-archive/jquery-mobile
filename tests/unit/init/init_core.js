@@ -120,14 +120,23 @@
 		});
 
 		asyncTest( "hashchange triggered on document ready with single argument: true", function(){
-			$(window).one("hashchange", function(ev, arg){
-				same(arg, true);
-				start();
-			});
+			$.testHelper.sequence([
+				function(){
+					location.hash = "#foo";
+				},
 
-			// a hash must be set to guarantee the trigger
-			location.hash = "#foo";
-			$.testHelper.reloadLib(libName);
+				// delay the bind until the first hashchange
+				function(){
+					$(window).one("hashchange", function(ev, arg){
+						same(arg, true);
+						start();
+					});
+				},
+
+				function(){
+					$.testHelper.reloadLib(libName);
+				}
+			], 1000);
 		});
 
 		test( "pages without a data-url attribute have it set to their id", function(){
