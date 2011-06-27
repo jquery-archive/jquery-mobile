@@ -35,16 +35,16 @@
 					if( result ){
 						ok( result === "qunit-pass" );
 
-            // prevent the next interval of the check function and the test timeout
+						// prevent the next interval of the check function and the test timeout
 						clearTimeout( checkTimer );
-            clearTimeout( testTimer );
+						clearTimeout( testTimer );
 						start();
 					}
 				};
 
 				expect( 1 );
 
-        // set the test suite page on the iframe
+				// set the test suite page on the iframe
 				updateFrame( dir );
 			});
 		});
