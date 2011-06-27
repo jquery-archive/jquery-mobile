@@ -10,7 +10,9 @@
     <ol id="qunit-tests">
     </ol>
   </div>
-	<iframe data-src="../../tests/unit/{{testdir}}" name="testFrame" id="testFrame" width="800px" height="100%" style="float: left; border: 0px;" scrolling="no">
+  <!-- under normal circumstances inline styles would be a poor choice, but in this case
+       I think an entire link and stylesheet is a waste -->
+	<iframe data-src="../../tests/unit/{{testdir}}" name="testFrame" id="testFrame" width="800px" height="100%" style="float: left; border: 0px; height: 100%;" scrolling="no">
 	</iframe>
 	<link rel="stylesheet" href="../../external/qunit.css"></link>
 	<script src="../../js/jquery.js"></script>

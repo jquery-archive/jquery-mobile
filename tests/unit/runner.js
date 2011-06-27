@@ -7,22 +7,30 @@
 
 	$.each(testDirectories, function(i, dir){
 		asyncTest( dir, function(){
-			// give each test a maximum of two minutes to finish
+			var nextCheck = null;
+
+			// establish a timeout for a given suite in case of async tests hanging
 			var testTimeout = setTimeout( function(){
+				// prevent any schedule checks for completion
+				clearTimeout(nextCheck);
 				start();
-			}, 2 * 60 * 1000 );
+			}, 2 * 60 * 1000 ),
 
-			expect( 1 );
-			updateFrame( dir );
+			// setup the next state check and record the timer id for removal
+			scheduleCheck = function(){
+				nextCheck = setTimeout( check, 2000 );
+			},
 
-			function check(){
+			// check the iframe for success or failure and respond accordingly
+			check = function(){
+
 				// check for the frames jquery object each time
 				var framejQuery = window.frames["testFrame"].jQuery;
 
 				// if the iframe hasn't loaded (ie loaded jQuery) check back again shortly
 				if( !framejQuery ){
+					scheduleCheck();
 					return;
-					setTimeout( arguments.callee, 2000 );
 				}
 
 				// grab the result of the iframe test suite
@@ -34,11 +42,14 @@
 					clearTimeout(testTimeout);
 					start();
 				} else {
-					setTimeout( arguments.callee, 2000 );
+					scheduleCheck();
 				}
-			}
+			};
 
-			setTimeout( check, 2000 );
+
+			expect( 1 );
+			updateFrame( dir );
+			scheduleCheck();
 		});
 	});
 })();
