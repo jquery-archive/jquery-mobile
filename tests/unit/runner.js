@@ -1,63 +1,55 @@
 (function(){
-  var test = function(data){
+	var test = function(data){
 		var $frameElem = $("#testFrame"),
-		    template = $frameElem.attr("data-src"),
-		    updateFrame = function(dir){
-			    return $frameElem.attr("src", template.replace("{{testdir}}", dir));
-		    };
+				template = $frameElem.attr("data-src"),
+				updateFrame = function(dir){
+					return $frameElem.attr("src", template.replace("{{testdir}}", dir));
+				};
 
 		$.each(data.directories, function(i, dir){
 			asyncTest( dir, function(){
-				var nextCheck = null;
+				var testTimeout = 2 * 60 * 1000, checkInterval = 2000;
 
 				// establish a timeout for a given suite in case of async tests hanging
-				var testTimeout = setTimeout( function(){
+				var testTimer = setTimeout( function(){
 					// prevent any schedule checks for completion
-					clearTimeout(nextCheck);
+					clearTimeout( checkTimer );
 					start();
-				}, 2 * 60 * 1000 ),
+				}, testTimeout ),
 
-				// setup the next state check and record the timer id for removal
-				scheduleCheck = function(){
-					nextCheck = setTimeout( check, 2000 );
-				},
+				checkTimer = setInterval( check, checkInterval );
 
 				// check the iframe for success or failure and respond accordingly
-				check = function(){
-
+				function check(){
 					// check for the frames jquery object each time
 					var framejQuery = window.frames["testFrame"].jQuery;
 
 					// if the iframe hasn't loaded (ie loaded jQuery) check back again shortly
-					if( !framejQuery ){
-						scheduleCheck();
-						return;
-					}
+					if( !framejQuery ) return;
 
 					// grab the result of the iframe test suite
-          // TODO strip extra white space
-					var result = framejQuery("#qunit-banner").attr('class');
+					// TODO strip extra white space
+					var result = framejQuery( "#qunit-banner" ).attr( "class" );
 
 					// if we have a result check it, otherwise check back shortly
 					if( result ){
 						ok( result == "qunit-pass" );
-						clearTimeout(testTimeout);
+
+            // prevent the next interval of the check function and the test timeout
+						clearTimeout( checkTimer );
+            clearTimeout( testTimer );
 						start();
-					} else {
-						scheduleCheck();
 					}
 				};
 
 				expect( 1 );
+
+        // set the test suite page on the iframe
 				updateFrame( dir );
-				scheduleCheck();
 			});
 		});
 	};
 
 	// get the test directories
-	$.ajax({
-		url: "ls.php",
-		success: test
-	});
+	$.get("ls.php", test);
 })();
