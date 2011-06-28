@@ -33,7 +33,12 @@
 
 	//loading div which appears during Ajax requests
 	//will not appear if $.mobile.loadingMessage is false
-	var $loader = $.mobile.loadingMessage ?		$( "<div class='ui-loader ui-body-a ui-corner-all'>" + "<span class='ui-icon ui-icon-loading spin'></span>" + "<h1>" + $.mobile.loadingMessage + "</h1>" + "</div>" )	: undefined;
+	//NOTE: interior h1 will not be added if $.mobile.loadingMessage == true instead of a string such as 'loading'
+	var $loader;
+	if ( $.mobile.loadingMessage )
+		$loader = $( "<div class='ui-loader ui-corner-all "+ $.mobile.loadingMessageClass +"'>" + "<span class='ui-icon ui-icon-loading spin'></span>" + ($.mobile.loadingMessage == true ? '' : "<h1>" + $.mobile.loadingMessage + "</h1>") + "</div>" );
+	else
+		$loader = undefined;
 
 	$.extend($.mobile, {
 		// turn on/off page loading message.

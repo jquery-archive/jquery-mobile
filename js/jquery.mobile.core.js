@@ -52,7 +52,11 @@
 
 		//show loading message during Ajax requests
 		//if false, message will not appear, but loading classes will still be toggled on html el
+		//if true, spinner will appear without message
 		loadingMessage: "loading",
+
+		//class used for loading message
+		loadingMessageClass: "ui-body-a",
 
 		//error response message - appears when an Ajax page request fails
 		pageLoadErrorMessage: "Error Loading Page",
