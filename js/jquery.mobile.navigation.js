@@ -700,16 +700,8 @@
 
 				// Remove loading message.
 				if ( settings.showLoadMsg ) {
-					$.mobile.hidePageLoadingMsg();
-
 					//show error message
-					$( "<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h1>"+ $.mobile.pageLoadErrorMessage +"</h1></div>" )
-						.css({ "display": "block", "opacity": 0.96, "top": $window.scrollTop() + 100 })
-						.appendTo( settings.pageContainer )
-						.delay( 800 )
-						.fadeOut( 400, function() {
-							$( this ).remove();
-						});
+					$.mobile.showMessage( $.mobile.pageLoadErrorMessage, { pageContainer: settings.pageContainer, delayTime: 800 } );
 				}
 
 				deferred.reject( absUrl, options );
@@ -725,6 +717,28 @@
 		reloadPage: false,
 		role: undefined, // By default we rely on the role defined by the @data-role attribute.
 		showLoadMsg: true,
+		pageContainer: undefined
+	};
+
+	// Show a custom message to the user (will be shown in the active page unless specified otherwise in options)
+	$.mobile.showMessage = function( message, options ) {
+		$.mobile.hidePageLoadingMsg();
+
+		var showMessageOptions = $.extend( {}, $.mobile.showMessage.defaults, options );
+		$( "<div class='ui-loader ui-overlay-shadow ui-corner-all "+ showMessageOptions.wrapperClass +"'><h1>"+ message +"</h1></div>" )
+			.css({ "display": "block", "opacity": 0.96, "top": $window.scrollTop() + 100 })
+			.appendTo( showMessageOptions.pageContainer == undefined ? $.mobile.activePage : showMessageOptions.pageContainer )
+			.delay( showMessageOptions.delayTime )
+			.fadeOut( showMessageOptions.fadeTime, function() {
+			$( this ).remove();
+		});
+	};
+
+	// Default options for showMessage()
+	$.mobile.showMessage.defaults = {
+		delayTime: 2500,
+		fadeTime: 400,
+		wrapperClass: 'ui-body-e',
 		pageContainer: undefined
 	};
 
