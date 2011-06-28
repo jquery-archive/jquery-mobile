@@ -59,7 +59,7 @@
 	asyncTest( "selecting an item from a dialog sized custom select menu leaves no dialog hash key", function(){
 		var dialogHashKey = "ui-state=dialog";
 
-		$.testHelper.sequence([
+		$.testHelper.pageSequence([
 			function(){
 				$("#select-choice-many-container-hash-check a").trigger("click");
 			},
@@ -73,7 +73,7 @@
 				ok(location.hash.indexOf(dialogHashKey) == -1);
 				start();
 			}
-		], 500);
+		]);
 	});
 
 	asyncTest( "dialog sized select menu opened many times remains a dialog", function(){
