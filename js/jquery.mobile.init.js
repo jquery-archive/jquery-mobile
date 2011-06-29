@@ -37,8 +37,11 @@
 
 	$.extend($.mobile, {
 		// turn on/off page loading message.
-		showPageLoadingMsg: function() {
-			if( $.mobile.loadingMessage ){
+			if(customMessage) {
+				var $loader = $( "<div class='ui-loader ui-body-a ui-corner-all'>" + "<span class='ui-icon ui-icon-loading spin'></span>" + "<h1>" + customMessage + "</h1>" + "</div>" );				
+			}
+			
+			if( $.mobile.loadingMessage || customMessage ){
 				var activeBtn = $( "." + $.mobile.activeBtnClass ).first();
 			
 				$loader
@@ -54,6 +57,7 @@
 		},
 
 		hidePageLoadingMsg: function() {
+			var $loader = $.mobile.loadingMessage ?		$( "<div class='ui-loader ui-body-a ui-corner-all'>" + "<span class='ui-icon ui-icon-loading spin'></span>" + "<h1>" + $.mobile.loadingMessage + "</h1>" + "</div>" )	: undefined;
 			$html.removeClass( "ui-loading" );
 		},
 
