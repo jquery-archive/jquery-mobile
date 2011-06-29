@@ -417,7 +417,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				}
 
 				return selected.length ? selected.map(function() {
-								return $(this).text();
+								return $( this ).text();
 							}).get().join( ", " ) : self.placeholder;
 			});
 
@@ -441,7 +441,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 						// Multiple selects: add the "on" checkbox state to the icon
 						if ( isMultiple ) {
-							item.find(".ui-icon").removeClass( "ui-icon-checkbox-off" ).addClass( "ui-icon-checkbox-on" );
+							item.find( ".ui-icon" ).removeClass( "ui-icon-checkbox-off" ).addClass( "ui-icon-checkbox-on" );
 						}
 					}
 				});
@@ -477,18 +477,18 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 			//for webos (set lastscroll using button offset)
 			if ( scrollTop == 0 && btnOffset > screenHeight ) {
-				self.thisPage.one("pagehide", function() {
+				self.thisPage.one( "pagehide", function() {
 					$( this ).jqmData( "lastScroll", btnOffset );
 				});
 			}
 
-			self.menuPage.one("pageshow", function() {
+			self.menuPage.one( "pageshow", function() {
 				// silentScroll() is called whenever a page is shown to restore
 				// any previous scroll position the page may have had. We need to
 				// wait for the "silentscroll" event before setting focus to avoid
 				// the browser"s "feature" which offsets rendering to make sure
 				// whatever has focus is in view.
-				$( window ).one("silentscroll", function() {
+				$( window ).one( "silentscroll", function() {
 					focusMenuItem();
 				});
 			});
@@ -503,7 +503,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			self.menuType = "overlay";
 
 			self.screen.height( $(document).height() )
-				.removeClass("ui-screen-hidden");
+				.removeClass( "ui-screen-hidden" );
 
 			// Try and center the overlay over the button
 			var roomtop = btnOffset - scrollTop,
@@ -541,7 +541,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					top: newtop,
 					left: newleft
 				})
-				.addClass("in");
+				.addClass( "in" );
 
 			focusMenuItem();
 		}
@@ -588,8 +588,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 	},
 
 	disable: function() {
-		this.element.attr( "disabled", true);
-		this.button.addClass( "ui-disabled").attr( "aria-disabled", true );
+		this.element.attr( "disabled", true );
+		this.button.addClass( "ui-disabled" ).attr( "aria-disabled", true );
 		return this._setOption( "disabled", true );
 	},
 
