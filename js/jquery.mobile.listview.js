@@ -207,7 +207,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			self = this,
 			persistentFooterID = parentPage.find( ":jqmData(role='footer')" ).jqmData( "id" );
 
-		if ( !listCountPerPage[ parentId ] ) {
+		if ( typeof listCountPerPage[ parentId ] === "undefined" ) {
 			listCountPerPage[ parentId ] = -1;
 		}
 
