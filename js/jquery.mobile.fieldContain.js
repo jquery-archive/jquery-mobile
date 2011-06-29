@@ -11,4 +11,4 @@ $.fn.fieldcontain = function( options ) {
 	return this.addClass( "ui-field-contain ui-body ui-br" );
 };
 
-})(jQuery);
+})( jQuery );
