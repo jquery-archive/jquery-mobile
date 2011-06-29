@@ -390,15 +390,60 @@
 		}, 1000);
 	});
 
-    module("Programmatic list items manipulation");
+	module( "Programmatically generated list items", {
+		setup: function(){
+			var item,
+				data = [
+					{
+						id: 1,
+						label: "Item 1"
+					},
+					{
+						id: 2,
+						label: "Item 2"
+					},
+					{
+						id: 3,
+						label: "Item 3"
+					},
+					{
+						id: 4,
+						label: "Item 4"
+					}
+				];
 
-    asyncTest( "Removing list items", 4, function() {
-	    $.testHelper.pageSequence([
-		    function(){
-                $.testHelper.openPage("#removing-items-from-list-test");
-		    },
+			$( "#programmatically-generated-list-items" ).html("");
 
-			function(){
+			for ( var i = 0, len = data.length; i < len; i++ ) {
+				item = $( '<li id="myItem' + data[i].id + '">' );
+				label = $( "<strong>" + data[i].label + "</strong>").appendTo( item );
+				$( "#programmatically-generated-list-items" ).append( item );
+			}
+		}
+	});
+
+	asyncTest( "Corner styling on programmatically created list items", function() {
+		// https://github.com/jquery/jquery-mobile/issues/1470
+		$.testHelper.pageSequence([
+			function() {
+				$.testHelper.openPage( "#programmatically-generated-list" );
+			},
+			function() {
+				ok(!$( "#programmatically-generated-list-items li:first-child" ).hasClass( "ui-corner-bottom" ), "First list item should not have class ui-corner-bottom" );
+				start();
+			}
+		]);
+	});
+    
+	module("Programmatic list items manipulation");
+
+	asyncTest("Removing list items", 4, function() {
+		$.testHelper.pageSequence([
+			function() {
+				$.testHelper.openPage("#removing-items-from-list-test");
+			},
+
+			function() {
 				var ul = $('#removing-items-from-list-test ul');
 				ul.find("li").first().remove();
 				equal(ul.find("li").length, 3, "There should be only 3 list items left");
@@ -414,6 +459,6 @@
 				start();
 			}
 		]);
-    });
+	});
 
 })(jQuery);
