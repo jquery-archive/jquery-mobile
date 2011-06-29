@@ -9,7 +9,7 @@
 
 $.widget( "mobile.navbar", $.mobile.widget, {
 	options: {
-		iconpos: 'top',
+		iconpos: "top",
 		grid: null
 	},
 
@@ -20,10 +20,10 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 			iconpos = $navbtns.filter( ":jqmData(icon)" ).length ?
 									this.options.iconpos : undefined;
 
-		$navbar.addClass('ui-navbar')
-			.attr("role","navigation")
-			.find("ul")
-				.grid({grid: this.options.grid });
+		$navbar.addClass( "ui-navbar ")
+			.attr( "role","navigation" )
+			.find( "ul" )
+				.grid({ grid: this.options.grid });
 
 		if ( !iconpos ) {
 			$navbar.addClass( "ui-navbar-noicons" );
