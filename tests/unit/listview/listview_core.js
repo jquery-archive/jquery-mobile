@@ -91,8 +91,8 @@
 			}
 		]);
 	});
-
-	asyncTest( "should go back to top level when the back button is clicked", function() {
+	
+	asyncTest( "should go back to top level when the (browser) back button is clicked", function() {
 		$.testHelper.pageSequence([
 			function(){
 				$.testHelper.openPage("#nested-list-test&ui-page=0-0");
@@ -104,6 +104,92 @@
 
 			function(){
 				ok($('#nested-list-test').hasClass('ui-page-active'), 'Transitions back to the parent nested page');
+				start();
+			}
+		]);
+	});
+	
+	asyncTest( "nested page should have back button by default", function() {
+		$.testHelper.pageSequence([
+			function(){
+				$.testHelper.openPage("#nested-list-backbtn-test");
+			},
+
+			function(){
+				$('.ui-page-active ul:first li.first a:first').click();
+			},
+
+			function(){
+				var $new_page = $('.ui-page-active'),
+					$header = $new_page.find(":jqmData(role='header')");
+					
+				ok($header.has("a:jqmData(rel='back')").length > 0, 'The nested page has a back button in the header.');
+				
+				start();
+			}
+		]);
+	});
+	
+	asyncTest( "nested page should not have back button when data-backbtn='false'", function() {
+		$.testHelper.pageSequence([
+			function(){
+				$.testHelper.openPage("#nested-list-backbtn-test");
+			},
+
+			function(){
+				$('.ui-page-active ul:first li.third a:first').click();
+			},
+
+			function(){
+				var $new_page = $('.ui-page-active'),
+					$header = $new_page.find(":jqmData(role='header')");
+					
+				ok($header.has("a:jqmData(rel='back')").length === 0, 'The nested page does not have a back button in the header.');
+				
+				start();
+			}
+		]);
+	});
+	
+	asyncTest( "nested page should have back button text default to 'Back'", function() {
+		$.testHelper.pageSequence([
+			function(){
+				$.testHelper.openPage("#nested-list-backbtn-test");
+			},
+
+			function(){
+				$('.ui-page-active ul:first li.first a:first').click();
+			},
+
+			function(){
+				var $new_page = $('.ui-page-active'),
+					$header = $new_page.find(":jqmData(role='header')"),
+					$backBtn = $header.find("a:jqmData(rel='back')");
+					
+				ok($backBtn.text() === 'Back', 'back button text was "Back"; ' + $backBtn.text());
+				
+				start();
+			}
+		]);
+	});
+	
+	asyncTest( "nested page should have back button text set to backbtn-text data attribute", function() {
+		$.testHelper.pageSequence([
+			function(){
+				$.testHelper.openPage("#nested-list-backbtn-test");
+			},
+
+			function(){
+				$('.ui-page-active ul:first li.second a:first').click();
+			},
+
+			function(){
+				var $new_page = $('.ui-page-active'),
+					$header = $new_page.find(":jqmData(role='header')"),
+					$backBtn = $header.find("a:jqmData(rel='back')");
+					
+				ok($backBtn.text() === 'Previous', 'back button text was "Previous"; ' + $backBtn.text());
+				
 				start();
 			}
 		]);
