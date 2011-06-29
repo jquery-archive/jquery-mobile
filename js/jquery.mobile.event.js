@@ -136,7 +136,7 @@ $.event.special.swipe = {
 				}
 
 				var data = event.originalEvent.touches ?
-									event.originalEvent.touches[ 0 ] : event;
+						event.originalEvent.touches[ 0 ] : event;
 
 				stop = {
 					time: ( new Date() ).getTime(),
