@@ -7,26 +7,30 @@
  * http://jquery.org/license
  */
 
-( function( $, window, undefined ) {
+(function( $, window, undefined ) {
 
-function css3TransitionHandler( name, reverse, $to, $from )
-{
+function css3TransitionHandler( name, reverse, $to, $from ) {
+
 	var deferred = new $.Deferred(),
 		reverseClass = reverse ? " reverse" : "",
 		viewportClass = "ui-mobile-viewport-transitioning viewport-" + name,
 		doneFunc = function() {
+
 			$to.add( $from ).removeClass( "out in reverse " + name );
+
 			if ( $from ) {
 				$from.removeClass( $.mobile.activePageClass );
 			}
+
 			$to.parent().removeClass( viewportClass );
-	
+
 			deferred.resolve( name, reverse, $to, $from );
 		};
-	
+
 	$to.animationComplete( doneFunc );
-	
+
 	$to.parent().addClass( viewportClass );
+
 	if ( $from ) {
 		$from.addClass( name + " out" + reverseClass );
 	}

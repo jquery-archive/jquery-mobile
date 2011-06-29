@@ -491,6 +491,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				$( window ).one( "silentscroll", function() {
 					focusMenuItem();
 				});
+
+				self.isOpen = true;
 			});
 
 			self.menuType = "page";
@@ -544,12 +546,10 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				.addClass( "in" );
 
 			focusMenuItem();
-		}
 
-		// wait before the dialog can be closed
-		setTimeout(function() {
-		 	self.isOpen = true;
-		}, 400);
+			// duplicate with value set in page show for dialog sized selects
+			self.isOpen = true;
+		}
 	},
 
 	close: function() {

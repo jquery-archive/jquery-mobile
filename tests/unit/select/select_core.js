@@ -66,7 +66,7 @@
 
 			function(){
 				ok(location.hash.indexOf(dialogHashKey) > -1);
-				$(".ui-page-active li").trigger("click");
+				$(".ui-page-active li:first a").trigger("click");
 			},
 
 			function(){
@@ -76,7 +76,7 @@
 		]);
 	});
 
-	asyncTest( "dialog sized select menu opened many times remains a dialog", function(){
+ 	asyncTest( "dialog sized select menu opened many times remains a dialog", function(){
 		var dialogHashKey = "ui-state=dialog",
 
 				openDialogSequence = [
@@ -123,5 +123,4 @@
 		], 500);
 
 	});
-
 })(jQuery);
