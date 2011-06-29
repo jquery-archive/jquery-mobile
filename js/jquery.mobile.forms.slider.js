@@ -135,7 +135,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 					if ( cType === "select" ) {
 
 						if ( self.beforeStart === control[ 0 ].selectedIndex ) {
-							//tap occurred, but value didn"t change. flip it!
+							//tap occurred, but value didn't change. flip it!
 							self.refresh( !self.beforeStart ? 1 : 0 );
 						}
 						var curval = val();
