@@ -160,17 +160,15 @@ $.widget( "mobile.page", $.mobile.widget, {
 	_typeAttributeRegex: /\s+type=["']?\w+['"]?/,
 
 	_enhanceControls: function() {
-		var o = this.options, self = this,
-			$this = $( this ),
-			type, optType,
+		var o = this.options,
+			self = this,
 			allControls, nonNativeControls, textInputs;
 
 		// degrade inputs to avoid poorly implemented native functionality
 		this.element.find( "input" ).not(this.keepNative).each(function() {
-			var $this = $( this );
-
-			type = this.getAttribute( "type" );
-			optType = o.degradeInputs[ type ] || "text";
+			var $this = $( this ),
+				type = this.getAttribute( "type" ),
+				optType = o.degradeInputs[ type ] || "text";
 
 			if ( o.degradeInputs[ type ] ) {
 				$this.replaceWith(
