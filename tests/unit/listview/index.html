@@ -56,17 +56,52 @@
 					<li>quiver of cobras</li>
 					<li>troop of baboons</li>
 				</ul>
-			</li>
+			</li>			
 			<li class="linebreaknode">
 
 			More animals
-
 
 				<ul>
 					<li>Shoal of Bass</li>
 					<li>Rhumba of rattlesnakes</li>
 				</ul>
+			</li>			
+		</ul>
+	</div>
+</div>
+
+<!-- Nested List, with backbtn attributes -->
+<div  data-nstest-role="page" id='nested-list-backbtn-test'>
+	<div  data-nstest-role="header" data-nstest-position="inline">
+		<h1>Basic List View</h1>
+	</div>
+	<div  data-nstest-role="content">
+		<ul  data-nstest-role="listview">
+			<li class="first">Groups of animals
+				<ul>
+					<li>pod of whales</li>
+					<li>quiver of cobras</li>
+					<li>troop of baboons</li>
+				</ul>
+			</li>			
+			<li class="linebreaknode second">
+
+			More animals
+
+				<ul data-nstest-backbtn="true" data-nstest-backbtn-text="Previous" data-nstest-backbtn-theme="a">
+					<li>Shoal of Bass</li>
+					<li>Rhumba of rattlesnakes</li>
+				</ul>
 			</li>
+			<li class="linebreaknode third">
+
+			Even More animals
+
+				<ul data-nstest-backbtn="false">
+					<li>Flock of Seagulls</li>
+					<li>Murder of Counting Crows</li>
+				</ul>
+			</li>				
 		</ul>
 	</div>
 </div>

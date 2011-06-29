@@ -233,7 +233,21 @@ $.widget( "mobile.listview", $.mobile.widget, {
 							.after( persistentFooterID ? $( "<div " + dns + "role='footer' " + dns + "id='"+ persistentFooterID +"'>") : "" )
 							.parent()
 								.appendTo( $.mobile.pageContainer );
+								
+			if ( list.jqmData("backbtn") !== false ) {
+                // Add back btn on sub-list pages
+                // Mostly taken from the jquery.mobile.page.js file; _create function.
+                o.backBtnText = list.jqmData("backbtn-text") || "Back";
+                o.backBtnTheme = list.jqmData("backbtn-theme") || o.headerTheme;    
+                var $header = $(newPage).find(":jqmData(role='header')"),
+				    backBtn = $( "<a href='#' class='ui-btn-left' data-"+ $.mobile.ns +"rel='back' data-"+ $.mobile.ns +"icon='arrow-l'>"+ o.backBtnText +"</a>" ).prependTo( $header );
 
+				//if theme is provided, override default inheritance
+				if( o.backBtnTheme ){
+					backBtn.attr( "data-"+ $.mobile.ns +"theme", o.backBtnTheme );
+				}
+			}
+			
 			newPage.page();
 
 			anchor = parent.find('a:first');
