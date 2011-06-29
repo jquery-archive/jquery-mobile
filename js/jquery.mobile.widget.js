@@ -4,20 +4,27 @@
 * Dual licensed under the MIT or GPL Version 2 licenses.
 * http://jquery.org/license
 */
-(function($, undefined ) {
+
+(function( $, undefined ) {
 
 $.widget( "mobile.widget", {
 	_getCreateOptions: function() {
+
 		var elem = this.element,
 			options = {};
+
 		$.each( this.options, function( option ) {
+
 			var value = elem.jqmData( option.replace( /[A-Z]/g, function( c ) {
-				return "-" + c.toLowerCase();
-			} ) );
+							return "-" + c.toLowerCase();
+						})
+					);
+
 			if ( value !== undefined ) {
 				options[ option ] = value;
 			}
 		});
+
 		return options;
 	}
 });
