@@ -167,6 +167,8 @@ $.widget( "mobile.page", $.mobile.widget, {
 
 		// degrade inputs to avoid poorly implemented native functionality
 		this.element.find( "input" ).not(this.keepNative).each(function() {
+			var $this = $( this );
+
 			type = this.getAttribute( "type" );
 			optType = o.degradeInputs[ type ] || "text";
 
