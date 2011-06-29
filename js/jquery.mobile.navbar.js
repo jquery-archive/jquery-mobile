@@ -20,7 +20,7 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 			iconpos = $navbtns.filter( ":jqmData(icon)" ).length ?
 									this.options.iconpos : undefined;
 
-		$navbar.addClass( "ui-navbar ")
+		$navbar.addClass( "ui-navbar" )
 			.attr( "role","navigation" )
 			.find( "ul" )
 				.grid({ grid: this.options.grid });
