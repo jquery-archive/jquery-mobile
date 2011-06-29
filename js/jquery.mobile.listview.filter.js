@@ -84,18 +84,18 @@ $( ":jqmData(role='listview')" ).live( "listviewcreate", function() {
 				// Show items, not marked to be hidden
 				listItems
 					.filter( ":not(.ui-filter-hidequeue)" )
-					.toggleClass("ui-screen-hidden",false);
+					.toggleClass( "ui-screen-hidden", false );
 
 				// Hide items, marked to be hidden
 				listItems
 					.filter( ".ui-filter-hidequeue" )
-					.toggleClass("ui-screen-hidden",true)
-					.toggleClass( "ui-filter-hidequeue" , false );
+					.toggleClass( "ui-screen-hidden", true )
+					.toggleClass( "ui-filter-hidequeue", false );
 
 			} else {
 
 				//filtervalue is empty => show all
-				listItems.toggleClass("ui-screen-hidden",false);
+				listItems.toggleClass( "ui-screen-hidden", false );
 			}
 		})
 		.appendTo( wrapper )
