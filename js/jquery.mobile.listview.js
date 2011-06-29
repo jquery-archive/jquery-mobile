@@ -53,8 +53,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			top: "ui-corner-top ui-corner-tr ui-corner-tl",
 			bottom: "ui-corner-bottom ui-corner-br ui-corner-bl"
 		};
-		li
-			.add( li.find(".ui-btn-inner, .ui-li-link-alt, .ui-li-thumb") )
+		li.add( li.find( ".ui-btn-inner, .ui-li-link-alt, .ui-li-thumb" ) )
 			.removeClass( "ui-corner-top ui-corner-bottom ui-corner-br ui-corner-bl ui-corner-tr ui-corner-tl" );
 	},
 	
@@ -68,20 +67,22 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			listsplittheme = $list.jqmData( "splittheme" ),
 			listspliticon = $list.jqmData( "spliticon" ),
 			li = $list.children( "li" ),
-			counter = $.support.cssPseudoElement || !$.nodeName( $list[0], "ol" ) ? 0 : 1;
+			counter = $.support.cssPseudoElement || !$.nodeName( $list[0], "ol" ) ? 0 : 1,
+			item, itemClass, itemTheme,
+			a, last, splittheme, countParent;
 
 		if ( counter ) {
 			$list.find( ".ui-li-dec" ).remove();
 		}
 
 		for (var pos = 0, numli = li.length; pos < numli; pos++) {
-			var item = li.eq(pos),
-				itemClass = "ui-li";
+			item = li.eq( pos );
+			itemClass = "ui-li";
 
 			// If we're creating the element, we update it regardless
 			if ( create || !item.hasClass( "ui-li" ) ) {
-                var itemTheme = item.jqmData("theme") || o.theme,
-                    a = item.children( "a" );
+                itemTheme = item.jqmData("theme") || o.theme;
+                a = item.children( "a" );
 
                 if ( a.length ) {
                     var icon = item.jqmData("icon");
@@ -101,8 +102,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
                     if ( a.length > 1 ) {
                         itemClass += " ui-li-has-alt";
 
-                        var last = a.last(),
-                            splittheme = listsplittheme || last.jqmData( "theme" ) || o.splitTheme;
+                        last = a.last();
+                        splittheme = listsplittheme || last.jqmData( "theme" ) || o.splitTheme;
 
                         last
                             .appendTo(item)
@@ -143,43 +144,42 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			
 			if( o.inset ){	
 				if ( pos === 0 ) {
-						itemClass += " ui-corner-top";
-	
-						item
-							.add( item.find( ".ui-btn-inner" ) )
-							.find( ".ui-li-link-alt" )
-								.addClass( "ui-corner-tr" )
-							.end()
-							.find( ".ui-li-thumb" )
-								.addClass( "ui-corner-tl" );
-						if(item.next().next().length){
-							self._removeCorners( item.next() );		
-						}
+					itemClass += " ui-corner-top";
+
+					item
+						.add( item.find( ".ui-btn-inner" ) )
+						.find( ".ui-li-link-alt" )
+							.addClass( "ui-corner-tr" )
+						.end()
+						.find( ".ui-li-thumb" )
+							.addClass( "ui-corner-tl" );
+					if(item.next().next().length){
+						self._removeCorners( item.next() );
+					}
 	
 				}
 				if ( pos === li.length - 1 ) {
-						itemClass += " ui-corner-bottom";
-	
-						item
-							.add( item.find( ".ui-btn-inner" ) )
-							.find( ".ui-li-link-alt" )
-								.addClass( "ui-corner-br" )
-							.end()
-							.find( ".ui-li-thumb" )
-								.addClass( "ui-corner-bl" );
-						
-						if(item.prev().prev().length){
-							self._removeCorners( item.prev() );		
-						} else if (item.prev().length) {
-							self._removeCorners( item.prev(), ["bottom"]);
-						}
+					itemClass += " ui-corner-bottom";
+
+					item
+						.add( item.find( ".ui-btn-inner" ) )
+						.find( ".ui-li-link-alt" )
+							.addClass( "ui-corner-br" )
+						.end()
+						.find( ".ui-li-thumb" )
+							.addClass( "ui-corner-bl" );
+
+					if(item.prev().prev().length){
+						self._removeCorners( item.prev() );
+					} else if (item.prev().length) {
+						self._removeCorners( item.prev(), ["bottom"]);
+					}
 				}
 			}
 
 
 			if ( counter && itemClass.indexOf( "ui-li-divider" ) < 0 ) {
-			
-				var countParent = item.is(".ui-li-static:first") ? item : item.find( ".ui-link-inherit" );
+				countParent = item.is( ".ui-li-static:first" ) ? item : item.find( ".ui-link-inherit" );
 				
 				countParent
 					.addClass( "ui-li-jsnumbering" )
@@ -222,7 +222,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				nodeEls = $( list.prevAll().toArray().reverse() ),
 				nodeEls = nodeEls.length ? nodeEls : $( "<span>" + $.trim(parent.contents()[ 0 ].nodeValue) + "</span>" ),
 				title = nodeEls.first().text(),//url limits to first 30 chars of text
-				id = ( parentUrl || "" ) + "&" + $.mobile.subPageUrlKey + "=" + listId;
+				id = ( parentUrl || "" ) + "&" + $.mobile.subPageUrlKey + "=" + listId,
 				theme = list.jqmData( "theme" ) || o.theme,
 				countTheme = list.jqmData( "counttheme" ) || parentList.jqmData( "counttheme" ) || o.countTheme,
 				newPage = list.detach()
