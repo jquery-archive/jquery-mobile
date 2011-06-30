@@ -98,9 +98,6 @@ $(document).bind("mobileinit", function(){
 	
 	<dt>ajaxEnabled (<em>boolean</em>, default: true):</dt> 
 	<dd>jQuery Mobile will automatically handle link clicks and form submissions through Ajax, when possible. If false, url hash listening will be disabled as well, and urls will load as regular http requests.</dd>
-	
-	<dt>useFastClick (<em>boolean</em>, default: true):</dt> 
-	<dd>When handling clicks and taps automatically with Ajax, this option will use jQuery Mobile's <code>vclick</code> event, enabling page changes to happen slightly sooner on devices that support touch events, and keeping the address bar hidden during page transtions. When disabled, the automatied Ajax handling will use an ordinary <code>click</code> event instead. This option has no effect on non-touch devices, but when enabled, it may interfere with jQuery plugins that bind to click events rather than vclick events.</dd>
 
 
 	<dt>hashListeningEnabled (<em>boolean</em>, default: true):</dt> 

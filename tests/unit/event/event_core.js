@@ -29,7 +29,7 @@
 			$.Event.prototype.originalEvent = originalEventFn;
 			$.Event.prototype.preventDefault = preventDefaultFn;
 
-			$(window).unbind( "throttledresize" );
+			$($.mobile.pageContainer).unbind( "throttledresize" );
 		}
 	});
 
@@ -384,18 +384,12 @@
 	/* The following 4 tests are async so that the throttled event triggers don't interfere with subsequent tests */
 
 	asyncTest( "throttledresize event proxies resize events", function(){
-		var called = false;
-		$(window).bind( "throttledresize", function(){
-			called = true;
+		$( window ).one( "throttledresize", function(){
+			ok( true, "throttledresize called");
+			start();
 		});
 
-		$.testHelper.sequence([
-			function(){	$(window).trigger( "resize" ); },
-			function(){ ok( called ); },
-			function(){
-				start();
-			}
-		], 200);
+		$( window ).trigger( "resize" );
 	});
 
 	asyncTest( "throttledresize event prevents resize events from firing more frequently than 250ms", function(){
@@ -426,22 +420,25 @@
 	asyncTest( "throttledresize event promises that a held call will execute only once after throttled timeout", function(){
 		var called = 0;
 
-		$(window).bind( "throttledresize", function(){
-			called++;
-		});
+		expect( 2 );
 
-		$.testHelper.sequence([
-			// trigger a ton of throttledresize events
+		$.testHelper.eventSequence( "throttledresize", [
+			// ignore the first call
+			$.noop,
+
 			function(){
-				$(window).trigger( "resize" ).trigger( "resize" ).trigger( "resize" );
+				ok( true, "second throttled resize should run" );
 			},
 
-			// verify that after enough time has gone by to accomodate all of them
-			// ie 750ms, only to calls to the bound function were made
-			function(){
-				same( called, 2 );
+			function(timedOut){
+				ok( timedOut, "third throttled resize should not run");
 				start();
 			}
-		], 750);
+		]);
+
+		$.mobile.pageContainer
+			.trigger( "resize" )
+			.trigger( "resize" )
+			.trigger( "resize" );
 	});
 })(jQuery);
