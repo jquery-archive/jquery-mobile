@@ -1019,7 +1019,7 @@
 		});
 
 		// click routing - direct to HTTP or Ajax, accordingly
-		$( document ).bind( $.mobile.useFastClick ? "vclick" : "click", function( event ) {
+		$( document ).bind( "click", function( event ) {
 			var link = findClosestLink( event.target );
 			if ( !link ) {
 				return;
