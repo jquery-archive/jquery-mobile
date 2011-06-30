@@ -33,9 +33,6 @@
 		// Automatically handle clicks and form submissions through Ajax, when same-domain
 		ajaxEnabled: true,
 
-		// Allow cross domain XHR, use at your own risks
-		ajaxCrossDomainEnabled: false,
-
 		// Automatically load and show pages based on location.hash
 		hashListeningEnabled: true,
 
