@@ -612,6 +612,15 @@
 			$.mobile.showPageLoadingMsg();
 		}
 
+		$.ajaxTransport("+*", function( s ) {
+			if ( s.crossDomain && !$.mobile.ajaxCrossDomainEnabled ) {
+				return {
+					send: $.noop,
+					abort: $.noop
+				};
+			}
+		});
+		
 		// Load the new page.
 		$.ajax({
 			url: fileUrl,
