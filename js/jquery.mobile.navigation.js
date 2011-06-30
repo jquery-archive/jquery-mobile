@@ -615,7 +615,9 @@
 		$.ajaxTransport("+*", function( s ) {
 			if ( s.crossDomain && !$.mobile.ajaxCrossDomainEnabled ) {
 				return {
-					send: $.noop,
+					send: function() {
+						$.error( "Cross domain .ajax() calls are disabled." );
+					},
 					abort: $.noop
 				};
 			}
