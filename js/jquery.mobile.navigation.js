@@ -612,7 +612,7 @@
 			$.mobile.showPageLoadingMsg();
 		}
 
-		$.ajaxTransport("+*", function( s ) {
+		$.ajaxTransport( "+*", function( s ) {
 			if ( s.crossDomain && !$.mobile.ajaxCrossDomainEnabled ) {
 				return {
 					send: function() {
