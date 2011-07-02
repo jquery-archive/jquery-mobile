@@ -115,6 +115,14 @@ $.event.special.tap = {
 
 // also handles swipeleft, swiperight
 $.event.special.swipe = {
+	scrollSupressionThreshold: 10, // More than this horizontal displacement, and we will suppress scrolling.
+	
+	durationThreshold: 1000, // More time than this, and it isn't a swipe.
+	
+	horizontalDistanceThreshold: 30,  // Swipe horizontal displacement must be more than this.
+	
+	verticalDistanceThreshold: 75,  // Swipe vertical displacement must be less than this.
+
 	setup: function() {
 		var thisObject = this,
 			$this = $( thisObject );
@@ -144,7 +152,7 @@ $.event.special.swipe = {
 				};
 
 				// prevent scrolling
-				if ( Math.abs( start.coords[ 0 ] - stop.coords[ 0 ] ) > 10 ) {
+				if ( Math.abs( start.coords[ 0 ] - stop.coords[ 0 ] ) > $.event.special.swipe.scrollSupressionThreshold ) {
 					event.preventDefault();
 				}
 			}
@@ -154,9 +162,9 @@ $.event.special.swipe = {
 					$this.unbind( touchMoveEvent, moveHandler );
 
 					if ( start && stop ) {
-						if ( stop.time - start.time < 1000 &&
-								Math.abs( start.coords[ 0 ] - stop.coords[ 0 ] ) > 30 &&
-								Math.abs( start.coords[ 1 ] - stop.coords[ 1 ] ) < 75 ) {
+						if ( stop.time - start.time < $.event.special.swipe.durationThreshold &&
+								Math.abs( start.coords[ 0 ] - stop.coords[ 0 ] ) > $.event.special.swipe.horizontalDistanceThreshold &&
+								Math.abs( start.coords[ 1 ] - stop.coords[ 1 ] ) < $.event.special.swipe.verticalDistanceThreshold ) {
 
 							start.origin.trigger( "swipe" )
 								.trigger( start.coords[0] > stop.coords[ 0 ] ? "swipeleft" : "swiperight" );
