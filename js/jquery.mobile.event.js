@@ -124,7 +124,7 @@ $.event.special.swipe = {
 								event.originalEvent.touches[ 0 ] : event,
 				start = {
 					time: ( new Date() ).getTime(),
-					coords: [ data.pageX, data.pageY ],
+					coords: [ data.pageX, data.pageY + document.body.scrollTop ],
 					origin: $( event.target )
 				},
 				stop;
@@ -140,7 +140,7 @@ $.event.special.swipe = {
 
 				stop = {
 					time: ( new Date() ).getTime(),
-					coords: [ data.pageX, data.pageY ]
+					coords: [ data.pageX, data.pageY + document.body.scrollTop]
 				};
 
 				// prevent scrolling
