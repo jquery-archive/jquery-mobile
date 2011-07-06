@@ -886,6 +886,9 @@
 
 		//set page title
 		document.title = urlHistory.getActive().title;
+		
+		//set "prevPage" as previous $.mobile.activePage if it exists
+		if($.mobile.activePage) $.mobile.prevPage = $.mobile.activePage;
 
 		//set "toPage" as activePage
 		$.mobile.activePage = toPage;
@@ -1033,7 +1036,14 @@
 
 			//if there's a data-rel=back attr, go back in history
 			if( $link.is( ":jqmData(rel='back')" ) ) {
-				window.history.back();
+				if($.mobile.prevPage){
+					$.mobile.changePage($.mobile.prevPage, {
+						reverse: true,
+						fromHashChange: true
+					});
+				}else{
+					window.history.back();
+				}
 				return false;
 			}
 		
