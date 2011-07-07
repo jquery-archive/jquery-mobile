@@ -100,7 +100,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				screen = $( "<div>", {"class": "ui-selectmenu-screen ui-screen-hidden"})
 							.appendTo( thisPage ),
 
-				listbox = $( "<div>", { "class": "ui-selectmenu ui-selectmenu-hidden ui-overlay-shadow ui-corner-all pop ui-body-" + o.overlayTheme } )
+				listbox = $("<div>", { "class": "ui-selectmenu ui-selectmenu-hidden ui-overlay-shadow ui-corner-all ui-body-" + o.overlayTheme + " " + $.mobile.defaultDialogTransition })
 						.insertAfter(screen),
 
 				list = $( "<ul>", {
@@ -498,7 +498,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			self.menuType = "page";
 			self.menuPageContent.append( self.list );
 			$.mobile.changePage( self.menuPage, {
-				transition: "pop"
+			   transition: $.mobile.defaultDialogTransition
 			});
 		} else {
 
