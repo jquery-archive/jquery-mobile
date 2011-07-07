@@ -612,16 +612,19 @@
 			$.mobile.showPageLoadingMsg();
 		}
 
-		// Load the new page.
-		$.ajax({
-			url: fileUrl,
-			type: settings.type,
-			data: settings.data,
-			dataType: "html",
-			success: function( html ) {
-				//pre-parse html to check for a data-url,
-				//use it as the new fileUrl, base path, etc
-				var all = $( "<div></div>" ),
+		if ( !( $.mobile.allowCrossDomainPages || path.isSameDomain( documentUrl, absUrl ) ) ) {
+			deferred.reject( absUrl, options );
+		} else {
+			// Load the new page.
+			$.ajax({
+				url: fileUrl,
+				type: settings.type,
+				data: settings.data,
+				dataType: "html",
+				success: function( html ) {
+					//pre-parse html to check for a data-url,
+					//use it as the new fileUrl, base path, etc
+					var all = $( "<div></div>" ),
 
 						//page title regexp
 						newPageTitle = html.match( /<title[^>]*>([^<]*)/ ) && RegExp.$1,
@@ -631,90 +634,91 @@
 						dataUrlRegex = new RegExp( "\\bdata-" + $.mobile.ns + "url=[\"']?([^\"'>]*)[\"']?" );
 
 
-				// data-url must be provided for the base tag so resource requests can be directed to the
-				// correct url. loading into a temprorary element makes these requests immediately
-				if( pageElemRegex.test( html )
-						&& RegExp.$1
-						&& dataUrlRegex.test( RegExp.$1 )
-						&& RegExp.$1 ) {
-					url = fileUrl = path.getFilePath( RegExp.$1 );
-				}
+					// data-url must be provided for the base tag so resource requests can be directed to the
+					// correct url. loading into a temprorary element makes these requests immediately
+					if( pageElemRegex.test( html )
+							&& RegExp.$1
+							&& dataUrlRegex.test( RegExp.$1 )
+							&& RegExp.$1 ) {
+						url = fileUrl = path.getFilePath( RegExp.$1 );
+					}
 
-				if ( base ) {
-					base.set( fileUrl );
-				}
+					if ( base ) {
+						base.set( fileUrl );
+					}
 
-				//workaround to allow scripts to execute when included in page divs
-				all.get( 0 ).innerHTML = html;
-				page = all.find( ":jqmData(role='page'), :jqmData(role='dialog')" ).first();
+					//workaround to allow scripts to execute when included in page divs
+					all.get( 0 ).innerHTML = html;
+					page = all.find( ":jqmData(role='page'), :jqmData(role='dialog')" ).first();
 
-				if ( newPageTitle && !page.jqmData( "title" ) ) {
-					page.jqmData( "title", newPageTitle );
-				}
+					if ( newPageTitle && !page.jqmData( "title" ) ) {
+						page.jqmData( "title", newPageTitle );
+					}
 
-				//rewrite src and href attrs to use a base url
-				if( !$.support.dynamicBaseTag ) {
-					var newPath = path.get( fileUrl );
-					page.find( "[src], link[href], a[rel='external'], :jqmData(ajax='false'), a[target]" ).each(function() {
-						var thisAttr = $( this ).is( '[href]' ) ? 'href' :
-								$(this).is('[src]') ? 'src' : 'action',
-							thisUrl = $( this ).attr( thisAttr );
+					//rewrite src and href attrs to use a base url
+					if( !$.support.dynamicBaseTag ) {
+						var newPath = path.get( fileUrl );
+						page.find( "[src], link[href], a[rel='external'], :jqmData(ajax='false'), a[target]" ).each(function() {
+							var thisAttr = $( this ).is( '[href]' ) ? 'href' :
+									$(this).is('[src]') ? 'src' : 'action',
+								thisUrl = $( this ).attr( thisAttr );
 
-						// XXX_jblas: We need to fix this so that it removes the document
-						//            base URL, and then prepends with the new page URL.
-						//if full path exists and is same, chop it - helps IE out
-						thisUrl = thisUrl.replace( location.protocol + '//' + location.host + location.pathname, '' );
+							// XXX_jblas: We need to fix this so that it removes the document
+							//            base URL, and then prepends with the new page URL.
+							//if full path exists and is same, chop it - helps IE out
+							thisUrl = thisUrl.replace( location.protocol + '//' + location.host + location.pathname, '' );
 
-						if( !/^(\w+:|#|\/)/.test( thisUrl ) ) {
-							$( this ).attr( thisAttr, newPath + thisUrl );
-						}
-					});
-				}
-
-				//append to page and enhance
-				page
-					.attr( "data-" + $.mobile.ns + "url", path.convertUrlToDataUrl( fileUrl ) )
-					.appendTo( settings.pageContainer );
-
-				enhancePage( page, settings.role );
-
-				// Enhancing the page may result in new dialogs/sub pages being inserted
-				// into the DOM. If the original absUrl refers to a sub-page, that is the
-				// real page we are interested in.
-				if ( absUrl.indexOf( "&" + $.mobile.subPageUrlKey ) > -1 ) {
-					page = settings.pageContainer.children( ":jqmData(url='" + dataUrl + "')" );
-				}
-
-				// Remove loading message.
-				if ( settings.showLoadMsg ) {
-					$.mobile.hidePageLoadingMsg();
-				}
-
-				deferred.resolve( absUrl, options, page, dupCachedPage );
-			},
-			error: function() {
-				//set base back to current path
-				if( base ) {
-					base.set( path.get() );
-				}
-
-				// Remove loading message.
-				if ( settings.showLoadMsg ) {
-					$.mobile.hidePageLoadingMsg();
-
-					//show error message
-					$( "<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h1>"+ $.mobile.pageLoadErrorMessage +"</h1></div>" )
-						.css({ "display": "block", "opacity": 0.96, "top": $window.scrollTop() + 100 })
-						.appendTo( settings.pageContainer )
-						.delay( 800 )
-						.fadeOut( 400, function() {
-							$( this ).remove();
+							if( !/^(\w+:|#|\/)/.test( thisUrl ) ) {
+								$( this ).attr( thisAttr, newPath + thisUrl );
+							}
 						});
-				}
+					}
 
-				deferred.reject( absUrl, options );
-			}
-		});
+					//append to page and enhance
+					page
+						.attr( "data-" + $.mobile.ns + "url", path.convertUrlToDataUrl( fileUrl ) )
+						.appendTo( settings.pageContainer );
+
+					enhancePage( page, settings.role );
+
+					// Enhancing the page may result in new dialogs/sub pages being inserted
+					// into the DOM. If the original absUrl refers to a sub-page, that is the
+					// real page we are interested in.
+					if ( absUrl.indexOf( "&" + $.mobile.subPageUrlKey ) > -1 ) {
+						page = settings.pageContainer.children( ":jqmData(url='" + dataUrl + "')" );
+					}
+
+					// Remove loading message.
+					if ( settings.showLoadMsg ) {
+						$.mobile.hidePageLoadingMsg();
+					}
+
+					deferred.resolve( absUrl, options, page, dupCachedPage );
+				},
+				error: function() {
+					//set base back to current path
+					if( base ) {
+						base.set( path.get() );
+					}
+
+					// Remove loading message.
+					if ( settings.showLoadMsg ) {
+						$.mobile.hidePageLoadingMsg();
+
+						//show error message
+						$( "<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h1>"+ $.mobile.pageLoadErrorMessage +"</h1></div>" )
+							.css({ "display": "block", "opacity": 0.96, "top": $window.scrollTop() + 100 })
+							.appendTo( settings.pageContainer )
+							.delay( 800 )
+							.fadeOut( 400, function() {
+								$( this ).remove();
+							});
+					}
+
+					deferred.reject( absUrl, options );
+				}
+			});
+		}
 
 		return deferred.promise();
 	};

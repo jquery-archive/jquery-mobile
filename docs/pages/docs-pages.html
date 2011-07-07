@@ -35,6 +35,9 @@
 &lt;html&gt; 
 	&lt;head&gt; 
 	&lt;title&gt;Page Title&lt;/title&gt; 
+	
+	&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt; 
+
 	&lt;link rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.css&quot; /&gt;
 	&lt;script type=&quot;text/javascript&quot; src=&quot;http://code.jquery.com/jquery-1.6.1.min.js&quot;&gt;&lt;/script&gt;
 	&lt;script type=&quot;text/javascript&quot; src=&quot;http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.js&quot;&gt;&lt;/script&gt;
@@ -46,6 +49,8 @@
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
+			
+			<p>Note that you should also include a meta <code>viewport</code> tag in the <code>head</code> to specify how the browser should display your page zoom level and dimensions. If this isn't set, many mobile browsers will use a "virtual" page width around 900 pixels to make it work well with exisitng desktop sites but the screens may look zoomed out and too wide. By setting the <code>content=&quot;width=device-width, initial-scale=1</code> in the code example above, the width will be set to the pixel width of the device screen. These settings do not disable the user's ability to zoom the pages which is nice from an accessibility perspective. There is a minor issue in iOS that doesn't properly set the width when changing orientations with these viewport settings, but this will hopefully be fixed a a future release. You can set other viewport values to disable zooming if required since this is part of your page content, not the library. </p>
 
 			<p>Inside the <code>&lt;body&gt;</code> tag, each view or "page" on the mobile device is identified with an element (usually a <code>div</code>) with the <code> data-role="page"</code> attribute:</p> 
 
@@ -77,6 +82,9 @@
 &lt;html&gt; 
 	&lt;head&gt; 
 	&lt;title&gt;Page Title&lt;/title&gt; 
+	
+	&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt; 
+
 	&lt;link rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.css&quot; /&gt;
 	&lt;script type=&quot;text/javascript&quot; src=&quot;http://code.jquery.com/jquery-1.6.1.min.js&quot;&gt;&lt;/script&gt;
 	&lt;script type=&quot;text/javascript&quot; src=&quot;http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.js&quot;&gt;&lt;/script&gt;

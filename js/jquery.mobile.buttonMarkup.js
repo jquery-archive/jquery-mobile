@@ -40,7 +40,7 @@ $.fn.buttonMarkup = function( options ) {
 
 			iconClass = "ui-icon " + o.icon;
 
-			if ( o.shadow ) {
+			if ( o.iconshadow ) {
 				iconClass += " ui-icon-shadow";
 			}
 		}
