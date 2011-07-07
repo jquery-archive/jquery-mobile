@@ -132,7 +132,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 
 				});
 
-			var set = collapsibleParent.find( ":jqmData(role='collapsible'):first" );
+			var set = collapsibleParent.children( ":jqmData(role='collapsible')" );
 
 			set.first()
 				.find( "a:eq(0)" )
