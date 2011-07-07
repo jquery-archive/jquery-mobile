@@ -86,10 +86,10 @@
 				if ( relPath && relPath.charAt( 0 ) === "/" ) {
 					return relPath;
 				}
-		
+
 				relPath = relPath || "";
 				absPath = absPath ? absPath.replace( /^\/|(\/[^\/]*|[^\/]+)$/g, "" ) : "";
-		
+
 				var absStack = absPath ? absPath.split( "/" ) : [],
 					relStack = relPath.split( "/" );
 				for ( var i = 0; i < relStack.length; i++ ) {
@@ -132,7 +132,7 @@
 				if ( !path.isRelativeUrl( relUrl ) ) {
 					return relUrl;
 				}
-		
+
 				var relObj = path.parseUrl( relUrl ),
 					absObj = path.parseUrl( absUrl ),
 					protocol = relObj.protocol || absObj.protocol,
@@ -141,7 +141,7 @@
 					pathname = path.makePathAbsolute( relObj.pathname || absObj.filename, absObj.pathname ),
 					search = relObj.search || ( !hasPath && absObj.search ) || "",
 					hash = relObj.hash;
-		
+
 				return protocol + "//" + authority + pathname + search + hash;
 			},
 
@@ -387,29 +387,29 @@
 
 	//function for transitioning between two existing pages
 	function transitionPages( toPage, fromPage, transition, reverse ) {
-		
+
 		//get current scroll distance
 		var currScroll = $.support.scrollTop ? $window.scrollTop() : true,
 			toScroll	= toPage.data( "lastScroll" ) || $.mobile.defaultHomeScroll,
 			screenHeight = getScreenHeight();
-		
+
 		//if scrolled down, scroll to top
 		if( currScroll ){
 			window.scrollTo( 0, $.mobile.defaultHomeScroll );
 		}
-		
+
 		//if the Y location we're scrolling to is less than 10px, let it go for sake of smoothness
 		if( toScroll < $.mobile.minScrollBack ){
 			toScroll = 0;
 		}
-		
+
 		if( fromPage ) {
 			//set as data for returning to that spot
 			fromPage
 				.height( screenHeight + currScroll )
 				.jqmData( "lastScroll", currScroll )
 				.jqmData( "lastClicked", $activeClickedLink );
-				
+
 			//trigger before show/hide events
 			fromPage.data( "page" )._trigger( "beforehide", null, { nextPage: toPage } );
 		}
@@ -429,28 +429,28 @@
 		promise.done(function() {
 			//reset toPage height bac
 			toPage.height( "" );
-			
+
 			//jump to top or prev scroll, sometimes on iOS the page has not rendered yet.
 			if( toScroll ){
 				$.mobile.silentScroll( toScroll );
 				$( document ).one( "silentscroll", function() { reFocus( toPage ); } );
 			}
 			else{
-				reFocus( toPage ); 
+				reFocus( toPage );
 			}
 
 			//trigger show/hide events
 			if( fromPage ) {
 				fromPage.height("").data( "page" )._trigger( "hide", null, { nextPage: toPage } );
 			}
-			
+
 			//trigger pageshow, define prevPage as either fromPage or empty jQuery obj
 			toPage.data( "page" )._trigger( "show", null, { prevPage: fromPage || $( "" ) } );
 		});
 
 		return promise;
 	}
-	
+
 	//simply set the active page's minimum height to screen height, depending on orientation
 	function getScreenHeight(){
 		var orientation 	= jQuery.event.special.orientationchange.orientation(),
@@ -462,7 +462,7 @@
 
 		return pageMin;
 	}
-	
+
 	//simply set the active page's minimum height to screen height, depending on orientation
 	function resetActivePageHeight(){
 		$( "." + $.mobile.activePageClass ).css( "min-height", getScreenHeight() );
@@ -905,17 +905,17 @@
 		transitionPages( toPage, fromPage, settings.transition, settings.reverse )
 			.done(function() {
 				removeActiveLinkClass();
-	
+
 				//if there's a duplicateCachedPage, remove it from the DOM now that it's hidden
 				if ( settings.duplicateCachedPage ) {
 					settings.duplicateCachedPage.remove();
 				}
-	
+
 				//remove initial build class (only present on first pageshow)
 				$html.removeClass( "ui-mobile-rendering" );
-	
+
 				releasePageTransitionLock();
-	
+
 				// Let listeners know we're all done changing the current page.
 				mpc.trigger( "changepage" );
 			});
@@ -956,12 +956,12 @@
 
 		return path.makeUrlAbsolute( url, base);
 	}
-	
-	
+
+
 	//The following event bindings should be bound after mobileinit has been triggered
 	//the following function is called in the init file
 	$.mobile._registerInternalEvents = function(){
-		
+
 		//bind to form submit events, handle with Ajax
 		$( "form" ).live('submit', function( event ) {
 			var $this = $( this );
@@ -1040,14 +1040,14 @@
 				window.history.back();
 				return false;
 			}
-		
+
 			//if ajax is disabled, exit early
 			if( !$.mobile.ajaxEnabled ){
 				httpCleanup();
 				//use default click handling
 				return;
 			}
-		
+
 			var baseUrl = getClosestBaseUrl( $link ),
 
 				//get href, if defined, otherwise default to empty hash
@@ -1164,11 +1164,11 @@
 				$.mobile.changePage( $.mobile.firstPage, { transition: transition, changeHash: false, fromHashChange: true } );
 			}
 		});
-		
+
 		//set page min-heights to be device specific
 		$( document ).bind( "pageshow", resetActivePageHeight );
 		$( window ).bind( "throttledresize", resetActivePageHeight );
-	
-	};//_registerInternalEvents callback	
+
+	};//_registerInternalEvents callback
 
 })( jQuery );
