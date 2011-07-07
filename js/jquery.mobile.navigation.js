@@ -45,7 +45,7 @@
 			parseUrl: function( url ) {
 				// If we're passed an object, we'll assume that it is
 				// a parsed url object and just return it back to the caller.
-				if ( typeof url === "object" ) {
+				if ( $.type( url ) === "object" ) {
 					return url;
 				}
 
