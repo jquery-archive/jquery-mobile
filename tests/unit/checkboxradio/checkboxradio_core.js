@@ -27,6 +27,24 @@
 		ok( !button.hasClass( "ui-checkbox-on" ), "no active styles after click" );
 	});
 
+    test( "clicking a checkbox within a controlgroup does not affect checkboxes with the same name in the same controlgroup", function(){
+        var input1 = $("#checkbox-31");
+        var button1 = input1.parent().find(".ui-btn");
+        var input2 = $("#checkbox-32");
+        var button2 = input2.parent().find(".ui-btn");
+
+        ok(!input1.attr("checked"), "input1 not checked before click");
+        ok(!input2.attr("checked"), "input2 not checked before click");
+
+        button1.trigger("click");
+        ok(input1.attr("checked"), "input1 checked after click on input1");
+        ok(!input2.attr("checked"), "input2 not checked after click on input1");
+
+        button2.trigger("click");
+        ok(input1.attr("checked"), "input1 not changed after click on input2");
+        ok(input2.attr("checked"), "input2 checked after click on input2");
+    });
+
 	asyncTest( "change events fired on checkbox for both check and uncheck", function(){
 		var $checkbox = $( "#checkbox-2" ),
 			$checkboxLabel = $checkbox.parent().find( ".ui-btn" );
