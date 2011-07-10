@@ -114,7 +114,6 @@ $.widget( "mobile.page", $.mobile.widget, {
 				$this.attr( "role", "main" );
 
 			} else if ( role === "page" ) {
-				$('body').trigger("globalpagecreate", $this);
 				$this.addClass( "ui-body-" + (theme || "c") );
 			}
 
