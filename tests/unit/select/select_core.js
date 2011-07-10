@@ -14,24 +14,24 @@
 	});
 	
 	asyncTest( "a large select menu should use the default dialog transition", function(){
-		var select = $("#select-choice-many-container a"),
+		var select = $("#select-choice-many-container-1 a"),
 			prevDefault = $.mobile.defaultDialogTransition,
 			menu;
-		//set to something else	
-		$.mobile.defaultDialogTransition = "slideup";
+			
+			
+			
+			//set to something else	
+			$.mobile.defaultDialogTransition = "fooz";
 		
 		$.testHelper.sequence([
 			function(){
 				// bring up the dialog
 				select.trigger("click");
-				setTimeout(function(){
-					menu = $("#select-choice-many-menu").closest('.ui-dialog');
-					ok( menu.is( "." + $.mobile.defaultDialogTransition ));
-					$.mobile.defaultDialogTransition = prevDefault;
-				}, 100)
+				ok( menu.hasClass( $.mobile.defaultDialogTransition ) );
+				window.history.back();
 			},
+			
 			function(){
-				menu.dialog("close");
 				start();
 			}
 		], 500);
@@ -65,7 +65,7 @@
 				same(menu.parents('.ui-dialog').length, 1);
 				start();
 			}
-		], 500);
+		], 1000);
 	});
 
 	asyncTest( "custom select menu always renders screen from the left", function(){
