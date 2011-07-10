@@ -27,7 +27,7 @@
 			function(){
 				// bring up the dialog
 				select.trigger("click");
-				ok( menu.hasClass( $.mobile.defaultDialogTransition ) );
+				ok( $("#select-choice-many-1").closest(".ui-page").hasClass( $.mobile.defaultDialogTransition ) );
 				window.history.back();
 			},
 			
@@ -48,12 +48,12 @@
 
 			function(){
 				menu = $("#select-choice-many-menu");
-				same(menu.parents('.ui-dialog').length, 1);
+				same(menu.closest('.ui-dialog').length, 1);
 			},
 
 			function(){
 				// select and close the dialog
-				menu.parents('.ui-dialog').find("span.ui-icon-delete").click();
+				menu.closest('.ui-dialog').dialog("close");
 			},
 
 			function(){
@@ -63,6 +63,10 @@
 
 			function(){
 				same(menu.parents('.ui-dialog').length, 1);
+				console.log(menu)
+				menu.closest('.ui-dialog').dialog("close");
+			},
+			function(){
 				start();
 			}
 		], 1000);
