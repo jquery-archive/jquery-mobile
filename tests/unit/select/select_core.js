@@ -12,6 +12,30 @@
 	module(libName, {
 		teardown: function(){ location.hash = ""; }
 	});
+	
+	asyncTest( "a large select menu should use the default dialog transition", function(){
+		var select = $("#select-choice-many-container a"),
+			prevDefault = $.mobile.defaultDialogTransition,
+			menu;
+		//set to something else	
+		$.mobile.defaultDialogTransition = "slideup";
+		
+		$.testHelper.sequence([
+			function(){
+				// bring up the dialog
+				select.trigger("click");
+				setTimeout(function(){
+					menu = $("#select-choice-many-menu").closest('.ui-dialog');
+					ok( menu.is( "." + $.mobile.defaultDialogTransition ));
+					$.mobile.defaultDialogTransition = prevDefault;
+				}, 100)
+			},
+			function(){
+				menu.dialog("close");
+				start();
+			}
+		], 500);
+	});
 
 	asyncTest( "a large select menu should come up in a dialog many times", function(){
 		var menu, select = $("#select-choice-many-container a");
@@ -29,7 +53,7 @@
 
 			function(){
 				// select and close the dialog
-				menu.parents('ui-dialog').find("span.ui-icon-delete").click();
+				menu.parents('.ui-dialog').find("span.ui-icon-delete").click();
 			},
 
 			function(){
