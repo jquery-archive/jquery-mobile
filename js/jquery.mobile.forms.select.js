@@ -305,6 +305,13 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					break;
 				}
 			});
+			
+			// button refocus ensures proper height calculation
+			// by removing the inline style and ensuring page inclusion
+			self.menuPage.bind( "pagehide", function(){
+				self.list.appendTo( self.listbox );
+				self._focusButton();
+			});
 
 			// Events on "screen" overlay
 			screen.bind( "vclick", function( event ) {
@@ -551,6 +558,13 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			self.isOpen = true;
 		}
 	},
+	
+	_focusButton : function(){
+		var self = this;
+		setTimeout(function() {
+			self.button.focus();
+		}, 40);
+	},
 
 	close: function() {
 		if ( this.options.disabled || !this.isOpen || this.options.nativeMenu ) {
@@ -559,19 +573,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 		var self = this;
 
-		function focusButton() {
-			setTimeout(function() {
-				self.button.focus();
-			}, 40);
-
-			self.listbox.removeAttr( "style" ).append( self.list );
-		}
-
 		if ( self.menuType == "page" ) {
-			// button refocus ensures proper height calculation
-			// by removing the inline style and ensuring page inclusion
-			self.menuPage.one( "pagehide", focusButton);
-
 			// doesn't solve the possible issue with calling change page
 			// where the objects don't define data urls which prevents dialog key
 			// stripping - changePage has incoming refactor
@@ -580,7 +582,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		else{
 			self.screen.addClass( "ui-screen-hidden" );
 			self.listbox.addClass( "ui-selectmenu-hidden" ).removeAttr( "style" ).removeClass( "in" );
-			focusButton();
+			self._focusButton();
 		}
 
 		// allow the dialog to be closed again
