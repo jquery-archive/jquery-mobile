@@ -308,7 +308,7 @@
 	color: 					#444;
 	text-shadow: 0 1px 1px #f6f6f6;
 	background-image: -moz-linear-gradient(top, 
-							#fefefe, 
+							#fdfdfd, 
 							#eeeeee);
 	background-image: -webkit-gradient(linear,left top,left bottom,
 		color-stop(0, 		#fdfdfd),
@@ -484,7 +484,7 @@
 .ui-bar-e input,
 .ui-bar-e select,
 .ui-bar-e textarea,
-.ui-bar-d button {
+.ui-bar-e button {
 	font-family: Helvetica, Arial, sans-serif;
 }
 .ui-bar-e .ui-link-inherit {
@@ -693,7 +693,7 @@ a.ui-link-inherit {
 }
 .ui-disabled,
 .ui-disabled a {
-	cursor: default !important;
+	cursor: default;
 }
 
 /* Icons
@@ -819,14 +819,18 @@ a.ui-link-inherit {
 
 
 /* checks,radios */
+.ui-checkbox .ui-icon {
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
 .ui-icon-checkbox-off,
-.ui-icon-checkbox-on,
-.ui-icon-radio-off,
-.ui-icon-radio-on {
-	background-color: transparent;
-	-moz-border-radius: 0;
-	-webkit-border-radius: 0;
-	border-radius: 0;
+.ui-icon-radio-off {
+	background-color: transparent;	
+}
+.ui-checkbox-on .ui-icon,
+.ui-radio-on .ui-icon {
+	background-color: #4596ce; /* NOTE: this hex should match the active state color. It's repeated here for cascade */
 }
 .ui-icon-searchfield {
 	background-image: url(images/icon-search-black.png);

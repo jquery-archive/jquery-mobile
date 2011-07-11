@@ -14,7 +14,6 @@
 
 		teardown: function(){
 			$("#scroll-testing").remove();
-			window.fizz = '';
 		}
 	});
 
@@ -43,14 +42,10 @@
 		}, scrollTimeout);
 	});
 
-	// NOTE may be brittle depending on timing
-	asyncTest( "silent scroll takes at least 20 ms to scroll to the top", function(){
+	test( "silent scroll is async", function(){
 		scrollUp();
-
-		setTimeout(function(){
-			ok($(window).scrollTop() != 0, "scrolltop position should not be zero");
-			start();
-		}, scrollTimeout - 5);
+		ok($(window).scrollTop() != 0, "scrolltop position should not be zero");
+		start();
 	});
 
 	asyncTest( "scrolling marks scrollstart as disabled for 150 ms", function(){

@@ -7,43 +7,100 @@
 	<link rel="stylesheet"  href="../../themes/default/" /> 
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 	<script src="../../js/jquery.js"></script>
+	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../_assets/js/jqm-docs.js"></script>
 	<script src="../../js/"></script>
 </head> 
 <body> 
 
-<div data-role="page">
+<div data-role="page" class="type-interior">
 
-	<div data-role="header" data-theme="b">
+	<div data-role="header" data-theme="f">
 		<h1>Supported platforms</h1>
 		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
 	<div data-role="content">
-			
-				<h2>Supported platforms in Alpha 4</h2>
-				<p>In the alpha 4 release, the following platforms and browsers have a solid jQuery Mobile experience with pages fully functional and rendering as designed. New in this release is WP7 support. </p>
-				<ul>
-					<li>Apple iOS (3.1-4.2): tested on iPhone, iPod Touch, iPad</li>
-					<li>Android (1.6-2.3): all devices, tested on the HTC Incredible, Motorola Droid, Google G1 and Nook Color</li>
-					<li>Blackberry 6: tested on Torch and Style</li>
-					<li>Windows Phone 7: tested on HTC Surround</li>
-					<li>Palm WebOS (1.4): tested on Pre, Pixi</li>
-                    <li>Opera Mobile (10.1): Android</li>
-                    <li>Opera Mini (5.02): iOS, Android</li>
-                    <li>Firefox Mobile (beta): Android</li>
-				</ul>
+		
+		
+			<div class="content-primary">
+				<h2>Supported platforms in Beta 1</h2>
+
+<p>jQuery Mobile is the most broadly compatible HTML5 library for building web sites and apps and we've very proud of our commitment to accessibility, universal access, and staying true to the principles of the web. For anyone who needs to reach the greatest number of people worldwide, our broad support for all popular platforms is a distinct advantage.In Beta 1, we've added support for both Blackberry 5 devices and Opera Mini in Beta 1 which dramatically increases the reach of the framework. Both of these platforms had issues with handling the Ajax-based navigation so they receive a B grade experience with all the enhancements <a href="http://jquerymobile.com/blog/2011/05/27/jquery-mobile-team-update-week-of-may-23/">except for Ajax navigation</a>.</p>
+
+<p>At this stage, jQuery Mobile works on the vast majority of all modern desktop, smartphone, tablet, and e-reader platforms. In addition, feature phones and older browsers are also supported because of our progressive enhancement approach. The only notable platform still in the works is Nokia’s Symbian S60 platform and we have this targeted for Beta 2.</p>
+
+<p>Our <a href="http://jquerymobile.com/gbs/">graded support matrix</a> was created over a year ago based on our goals as a project. Since that time, we've been refining our grading system based on real-world device testing and the quickly evolving mobile landscape. To provide a quick summary of our browser support in Beta 1, we've created a simple A (full), B (full minus Ajax), C (basic) grade system with notes of the actual devices and versions we've been testing on in our lab.</p>
+
+<p>The visual fidelity of the experience is highly dependent on CSS rendering capabilities of the device and platform so not all A grade experience will be pixel-perfect but that’s the nature of the web. We’ll be adding additional vendor-prefixed CSS rules to bring transitions, gradients and other visual improvements to non-WebKit browsers in future releases so look for even more added visual polish as we move towards 1.0.</p>
+
+<h3 style="font-weight: normal; background: #fff; border-left: 7px solid #74B64A; padding: 5px 0 5px 8px;"><strong> A-grade</strong> - Full enhanced experience with Ajax-based animated page transitions.</h3>
+<ul>
+	<li><strong>Apple iOS 3.2-5.0 beta</strong>: Tested on the original iPad (3.2 / 4.3), iPad 2 (4.3), original iPhone (3.1), iPhone 3 (3.2), 3GS (4.3), and 4 (4.3 / 5.0 beta)</li>
+	<li><strong>Android 2.1-2.3</strong>: Tested on the HTC Incredible (2.2), original Droid (2.2), Nook Color (2.2), HTC Aria (2.1), emulator (2.3). Functional on 1.5 &amp; 1.6 but performance may be sluggish, tested on Google G1 (1.5)</li>
+	<li><strong>Windows Phone 7</strong>: Tested on the HTC 7 Surround</li>
+	<li><strong>Blackberry 6.0</strong>: Tested on the Torch 9800 and Style 9670</li>
+	<li><strong>Blackberry Playbook</strong>: Tested on PlayBook version 1.0.1 / 1.0.5</li>
+	<li><strong>Palm WebOS (1.4-2.0)</strong>: Tested on the Palm Pixi (1.4), Pre (1.4), Pre 2 (2.0)</li>
+	<li><strong>Firebox Mobile (Beta)</strong>: Tested on Android 2.2</li>
+	<li><strong>Opera Mobile 11.0</strong>: Tested on the iPhone 3GS and 4 (5.0/6.0), Android 2.2 (5.0/6.0), Windows Mobile 6.5 (5.0)</li>
+	<li><strong>Kindle 3</strong>: Tested on the built-in WebKit browser included in the Kindle 3 device</li>
+	<li><strong>Chrome <strong>Desktop </strong>11-13</strong> - Tested on OS X 10.6.7 and Windows 7</li>
+	<li><strong>Firefox Desktop 3.6-4.0</strong> - Tested on OS X 10.6.7 and Windows 7</li>
+	<li><strong>Internet Explorer 7-9</strong> - Tested on Windows XP, Vista and 7 (minor CSS issues)</li>
+	<li><strong>Opera Desktop 10-11</strong> - Tested on OS X 10.6.7 and Windows 7</li>
+</ul>
+<h3 style="font-weight: normal; background: #fff; border-left: 7px solid #6699cc; padding: 5px 0 5px 8px;"><strong>B-grade</strong> - Enhanced experience except without Ajax navigation features.</h3>
+<ul>
+	<li><strong>Blackberry 5.0</strong>: Tested on the Storm 2 9550, Bold 9770</li>
+	<li><strong>Opera Mini (5.0-6.0)</strong> - Tested on iOS 3.2/4.3</li>
+	<li><strong>Windows Phone 6.5</strong> - Tested on the HTC</li>
+</ul>
+<h3 style="font-weight: normal; background: #fff; border-left: 7px solid #FFCC33; padding: 5px 0 5px 8px;"><strong>C<strong>-grade</strong></strong> - Basic, non-enhanced HTML experience that is still functional</h3>
+<ul>
+	<li><strong>Blackberry4.x</strong>: Tested on the Curve 8330</li>
+	<li><strong>All older smartphone platforms and featurephones</strong> - Any device that doesn't support media queries will receive the basic, C grade experience</li>
+</ul>
+<h3 style="font-weight: normal; background: #fff; border-left: 7px solid #aaaaaa; padding: 6px 0 8px 8px;"><strong>Not Currently Supported in Beta 1</strong></h3>
+<ul>
+	<li><strong>Nokia S60</strong> - Targeted for Beta 2 release. A/B grade support will depend on results of device testing.</li>
+	<li><strong>Meego</strong> - Originally a target platform, but Nokia decision to relegate this platform to "experimental", we are considering dropping support.</li>
+	<li><strong>Samsung Bada</strong> - The project doesn't currently have test devices or emulators, but current support is known to be fairly good. Support level undecided for 1.0.</li>
+	<li><strong>Palm WebOS 3.0</strong> - We're hoping to get test devices from Palm soon to start testing but have heard that rendering is quite good in 3.0</li>
+</ul>
 				
-                <h2>Target platform additions for beta</h2>
-				<p>The team is now focusing on bringing support to Blackberry 5, Nokia/Symbian for the upcoming beta release. We don't yet have phones to test bada or MeeGo but these will be added as soon as we can get devices.</p>
 				
 				<p>Since jQuery Mobile is built on the jQuery core, all pages should also work great on most recent versions of desktop browsers too - Firefox, Chrome, Safari, Internet Explorer, Opera, etc.</p>
 				
-				<p>For more information about browser support, view the <a href="https://github.com/jquery/jquery-mobile/wiki/Current-development-status">current browser support status and known issues</a> and the project's target <a href="http://jquerymobile.com/gbs/" rel="external"><strong>graded browser matrix</strong>.</p>
+				<p>For more information about browser support, view the <a href="https://github.com/jquery/jquery-mobile/wiki/Current-development-status">current browser support status and known issues</a> and the project's target <a href="http://jquerymobile.com/gbs/" rel="external"><strong>graded browser matrix</strong></a>.</p>
 				
+				
+				</div>
+
+				<div class="content-secondary">
+
+					<div data-role="collapsible" data-collapsed="true" data-theme="b">
+
+							<h3>More in this section</h3>
+
+							<ul data-role="listview" data-theme="c" data-dividertheme="d">
+								<li data-role="list-divider">Overview</li>
+								<li><a href="../../docs/about/intro.html">Intro to jQuery Mobile</a></li>
+								<li><a href="../../docs/about/features.html">Features</a></li>
+								<li><a href="../../docs/about/accessibility.html">Accessibility</a></li>
+								<li data-theme="a"><a href="../../docs/about/platforms.html">Supported platforms</a></li>
 
 						
+							</ul>
+					</div>
+				</div>		
 
-	</div><!-- /content -->
+			</div><!-- /content -->
+
+			<div data-role="footer" class="footer-docs" data-theme="c">
+					<p>&copy; 2011 The jQuery Project</p>
+			</div>				
+			
 	
 </div><!-- /page -->
 

@@ -4,9 +4,9 @@
 * Dual licensed under the MIT or GPL Version 2 licenses.
 * http://jquery.org/license
 */ 
-(function($, undefined ) {
-$.fn.grid = function(options){
-	return this.each(function(){
+(function( $, undefined ) {
+$.fn.grid = function(options) {
+	return this.each(function() {
 		var o = $.extend({
 				grid: null 
 			}, options),

@@ -7,20 +7,21 @@
 	<link rel="stylesheet"  href="../../themes/default/" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 	<script src="../../js/jquery.js"></script>
+	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../_assets/js/jqm-docs.js"></script>
 	<script src="../../js/"></script>
-	
-
 </head> 
 <body> 
 
-<div data-role="page">
+	<div data-role="page" class="type-interior">
 
-	<div data-role="header" data-theme="b">
+		<div data-role="header" data-theme="f">
 		<h1>Collapsible content</h1>
 		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
 	<div data-role="content">
+		<div class="content-primary">
 		
 		<h2>Collapsible content markup</h2>
 		<p>To create a collapsible blocks of content, create a container and add the <code> data-role="collapsible"</code> attribute.</p>
@@ -117,25 +118,36 @@
 		</div>
 		
 		<h2>Collapsible sets</h2>
-		<p>By giving a parent element a data-role of collapsible-set, you can cause other collapsibles within that parent to close whenever a new one is opened, acting like an accordion widget:</p>
+		<p>It's possible to combine multiple collapsibles into a grouped sets that acts like an accordion widget. <a href="content-collapsible-set.html">Learn more</a></p>
 		
-		<div data-role="collapsible-set">
-			<div data-role="collapsible">
-				<h3>I'm a header in a set of collapsibles</h3>
-				<p>I'm the collapsible content. I'm hidden by default because I have the "collapsed" state; you need to expand the header to see me.</p>
-			</div>
-			<div data-role="collapsible" data-collapsed="true">
-				<h3>I'm a header in a set of collapsibles</h3>
-				<p>I'm the collapsible content. I'm hidden by default because I have the "collapsed" state; you need to expand the header to see me.</p>
-			</div>
-			<div data-role="collapsible" data-collapsed="true">
-				<h3>I'm a header in a set of collapsibles</h3>
-				<p>I'm the collapsible content. I'm hidden by default because I have the "collapsed" state; you need to expand the header to see me.</p>
-			</div>
-		</div>
 		
+	</div><!--/content-primary -->		
 	
-	</div><!-- /content -->
+	<div class="content-secondary">
+		
+		<div data-role="collapsible" data-collapsed="true" data-theme="b">
+			
+				<h3>More in this section</h3>
+				
+				<ul data-role="listview" data-theme="c" data-dividertheme="d">
+				
+					<li data-role="list-divider">Content Formatting</li>
+					<li><a href="content-html.html">Basic HTML styles</a></li>
+					<li><a href="content-grids.html">Layout grids (columns)</a></li>
+					<li data-theme="a"><a href="content-collapsible.html">Collapsible content blocks</a></li>
+					<li><a href="content-collapsible-set.html">Collapsible sets (accordions)</a></li>
+					<li><a href="content-themes.html">Theming content</a></li>
+	
+				</ul>
+		</div>
+	</div>		
+
+</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p>&copy; 2011 The jQuery Project</p>
+</div>
+	
 </div><!-- /page -->
 
 </body>

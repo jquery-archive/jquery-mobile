@@ -390,4 +390,100 @@
 		}, 1000);
 	});
 
+	module( "Programmatically generated list items", {
+		setup: function(){
+			var item,
+				data = [
+					{
+						id: 1,
+						label: "Item 1"
+					},
+					{
+						id: 2,
+						label: "Item 2"
+					},
+					{
+						id: 3,
+						label: "Item 3"
+					},
+					{
+						id: 4,
+						label: "Item 4"
+					}
+				];
+
+			$( "#programmatically-generated-list-items" ).html("");
+
+			for ( var i = 0, len = data.length; i < len; i++ ) {
+				item = $( '<li id="myItem' + data[i].id + '">' );
+				label = $( "<strong>" + data[i].label + "</strong>").appendTo( item );
+				$( "#programmatically-generated-list-items" ).append( item );
+			}
+		}
+	});
+
+	asyncTest( "Corner styling on programmatically created list items", function() {
+		// https://github.com/jquery/jquery-mobile/issues/1470
+		$.testHelper.pageSequence([
+			function() {
+				$.testHelper.openPage( "#programmatically-generated-list" );
+			},
+			function() {
+				ok(!$( "#programmatically-generated-list-items li:first-child" ).hasClass( "ui-corner-bottom" ), "First list item should not have class ui-corner-bottom" );
+				start();
+			}
+		]);
+	});
+    
+	module("Programmatic list items manipulation");
+
+	asyncTest("Removing list items", 4, function() {
+		$.testHelper.pageSequence([
+			function() {
+				$.testHelper.openPage("#removing-items-from-list-test");
+			},
+
+			function() {
+				var ul = $('#removing-items-from-list-test ul');
+				ul.find("li").first().remove();
+				equal(ul.find("li").length, 3, "There should be only 3 list items left");
+
+				ul.listview('refresh');
+				ok(ul.find("li").first().hasClass("ui-corner-top"), "First list item should have class ui-corner-top");
+
+				ul.find("li").last().remove();
+				equal(ul.find("li").length, 2, "There should be only 2 list items left");
+				
+				ul.listview('refresh');
+				ok(ul.find("li").last().hasClass("ui-corner-bottom"), "Last list item should have class ui-corner-bottom");
+				start();
+			}
+		]);
+	});
+
+	module("Rounded corners");
+
+	asyncTest("Top and bottom corners rounded in inset list", 10, function() {
+		$.testHelper.pageSequence([
+			function() {
+				$.testHelper.openPage("#corner-rounded-test");
+			},
+
+			function() {
+				var ul = $('#corner-rounded-test ul');
+				
+				for( var t = 0; t<5; t++){
+					ul.append("<li>Item " + t + "</li>");
+					ul.listview('refresh');					
+					ok(ul.find("li").first().hasClass("ui-corner-top"), "First list item should have class ui-corner-top in list with " + ul.find("li").length + " item(s)");
+					ok(ul.find("li").last().hasClass("ui-corner-bottom"), "Last list item should have class ui-corner-bottom in list with " + ul.find("li").length + " item(s)");
+				}
+				
+				start();
+			}
+		]);
+	});
+
+
+
 })(jQuery);

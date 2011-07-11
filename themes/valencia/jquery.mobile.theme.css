@@ -618,7 +618,7 @@ a.ui-link-inherit {
   cursor: pointer;
   text-decoration: none;
   border: 1px solid       #FFBC19;
-  background:             #4596ce;
+  background:             #FFBC19;
   color:                  #222;
   text-shadow: 0 1px 0px  #eee;
   background-image: -moz-linear-gradient(top, 
@@ -830,14 +830,18 @@ a.ui-link-inherit {
 
 
 /* checks,radios */
+.ui-checkbox .ui-icon {
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
 .ui-icon-checkbox-off,
-.ui-icon-checkbox-on,
-.ui-icon-radio-off,
-.ui-icon-radio-on {
-	background-color: transparent;
-	-moz-border-radius: 0;
-	-webkit-border-radius: 0;
-	border-radius: 0;
+.ui-icon-radio-off {
+	background-color: transparent;	
+}
+.ui-checkbox-on .ui-icon,
+.ui-radio-on .ui-icon {
+	background-color: #FFBC19; /* NOTE: this hex should match the active state color. It's repeated here for cascade */
 }
 .ui-icon-searchfield {
 	background-image: url(images/icon-search-black.png);

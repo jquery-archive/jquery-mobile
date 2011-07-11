@@ -75,18 +75,20 @@
 			});
 		},
 
-		pageSequence: function(fns, event){
+		pageSequence: function(fns){
+			this.eventSequence("changepage", fns);
+		},
+
+		eventSequence: function(event, fns, timedOut){
 			var fn = fns.shift(),
 					self = this;
 
-			if(fn === undefined) return;
-
-			event = event || "changepage";
+			if( fn === undefined ) return;
 
 			// if a changepage or defined event is never triggered
 			// continue in the sequence to alert possible failures
 			var warnTimer = setTimeout(function(){
-				self.pageSequence(fns, event);
+				self.eventSequence(event, fns, true);
 			}, 2000);
 
 			// bind the recursive call to the event
@@ -94,12 +96,13 @@
 				clearTimeout(warnTimer);
 
 				// Let the current stack unwind before we fire off the next item in the sequence.
-				setTimeout(function(){ self.pageSequence(fns, event); }, 0);
+				// TODO setTimeout(self.pageSequence, 0, [fns, event]);
+				setTimeout(function(){ self.eventSequence(event, fns); }, 0);
 			});
 
 			// invoke the function which should, in some fashion,
 			// trigger the defined event
-			fn();
+			fn(timedOut);
 		}
 	};
 })(jQuery);

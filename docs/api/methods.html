@@ -7,43 +7,69 @@
 	<link rel="stylesheet"  href="../../themes/default/" /> 
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 	<script src="../../js/jquery.js"></script>
+	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../_assets/js/jqm-docs.js"></script>
 	<script src="../../js/"></script>
 </head> 
 <body> 
 
-<div data-role="page" data-theme="b">
+<div data-role="page" class="type-interior">
 
-	<div data-role="header">
+	<div data-role="header" data-theme="f">
 		<h1>Methods</h1>
 		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
 	<div data-role="content">
-	
+	<div class="content-primary">
 
-		<p>jQuery Mobile exposes several methods and properties on the $.mobile object for use in your applications.</p>
+	  <p>jQuery Mobile exposes several methods and properties on the $.mobile object for use in your applications.</p>
 		
 
 		<dl>
 			<dt><code>$.mobile.changePage</code> (<em>method</em>)</dt>
-			<dd>Programmatically change from one page to another. This method is used internally for transitions that occur as a result of clicking a link or submitting a form, when those features are enabled.</dd>
+			<dd>Programmatically change from one page to another. This method is used internally for the page loading and transitioning that occurs as a result of clicking a link or submitting a form, when those features are enabled.</dd>
 			
 			<dd>
 				
 				<dl>
 					<dt>Arguments</dt>
-					<dd><code>to</code>					
-						<ul>
-							<li>String, url to transition to (<code>"about/us.html"</code>)</li>
-							<li>jQuery object (<code>$("#about")</code>)</li>
-							<li>Array specifying two page references [from,to] for transitioning from a known page. From is otherwise assumed to be the current page in view (or $.mobile.activePage ).</li>
-							<li>Object for sending form data. (<code>{url: url, data: serialized form data, type: "get" or "post"}</code></li>  
-						</ul>	
-						</dd>	
+					<dd><code>to</code> (<em>string or object</em>, required)
+<ul>
+				<li>String: Absolute or relative URL. (&quot;about/us.html&quot;)</li>
+							<li>Object: jQuery collection object. (<code>$("#about")</code>)</li>
+						</ul>
+					</dd>	
 						
-					<dd><code>transition</code> (<em>string</em>, examples: "pop", "slide"," "none")</dd>
-					<dd><code>reverse</code> (<em>boolean</em>, default: false). True will cause a reverse-direction transition.</dd>
-					<dd><code>changeHash</code> (<em>boolean</em>, default: true). Update the hash to the to page's URL when page change is complete.</dd>
+					<dd><code>options</code> (<em>object</em>, optional)
+						<ul>
+							<li>Properties:
+								<ul>
+									<li><code>transition</code> (<em>string</em>,	default:	$.mobile.defaultPageTransition)	The transition to use when showing the page. </li>
+									<li><code>reverse</code> (<em>boolean</em>,	default:	false) Decides what direction the transition will run when showing the page. </li>
+									<li><code>changeHash</code> (<em>boolean</em>,	default:	true) Decides if the hash in the location bar should be updated. </li>
+									<li><code>role</code> (<em>string</em>,	default:	undefined) The data-role value to be used when displaying the page. By default this is undefined which means rely on the value of the @data-role attribute defined on the element.</li>
+									<li><code>pageContainer</code> (jQuery collection,	default:	$.mobile.pageContainer) Specifies the element that should contain the page. </li>
+									<li><code>type</code> (<em>string</em>, default: &quot;get&quot;) Specifies the method ("get" or "post") to use when making a page request. 
+										<ul>
+											<li>Used only when the 'to' argument of changePage() is a URL.</li>
+										</ul>
+									</li>
+									<li><code>data</code> (<em>object</em> or	string,	default: undefined) The data to send with an Ajax page request.
+										<ul>
+											<li>Used only when the 'to' argument of changePage() is a URL.</li>
+										</ul>
+									</li>
+									<li><code>reloadPage</code> (<em>boolean</em>, default: false) Forces a reload of a page, even if it is already in the DOM of the page container.
+										<ul>
+											<li>Used only when the 'to' argument of changePage() is a URL.</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</dd>	
+
 				</dl>
 			</dd>
 			
@@ -51,18 +77,65 @@
 			<pre>
 			<code>
 <strong>//transition to the "about us" page with a slideup transition</strong> 			
-$.mobile.changePage("about/us.html", "slideup");	
+$.mobile.changePage( "about/us.html", { transition: "slideup"} );	
 
 <strong>//transition to the "search results" page, using data from a form with an ID of "search"" 	</strong>	
-$.mobile.changePage({
-	url: "searchresults.php", 
-	type: "get", 
+$.mobile.changePage( "searchresults.php", {
+	type: "post", 
 	data: $("form#search").serialize()
 });		
 
 <strong>//transition to the "confirm" page with a "pop" transition without tracking it in history	</strong>		
-$.mobile.changePage("../alerts/confirm.html", "pop", false, false);	
+$.mobile.changePage( "../alerts/confirm.html", {
+	transition: "pop",
+	reverse: false,
+	changeHash: false
+});	
 		
+			</code>
+			</pre>
+			
+			</dd>
+			
+			
+			<dt><code>$.mobile.loadPage</code> (<em>method</em>)</dt>
+			<dd>Load an external page, enhance its content, and insert it into the DOM. This method is called internally by the changePage() function when its first argument is a URL. This function does not affect the current active page so it can be used to load pages in the background. The function returns a deferred promise object that gets resolved after the page has been enhanced and inserted into the document.</dd>
+			
+			<dd>
+				
+				<dl>
+					<dt>Arguments</dt>
+					<dd><code>url</code> (<em>string or object</em>, required) A relative or absolute URL.</dd>	
+						
+					<dd><code>options</code> (<em>object</em>, optional)
+						<ul>
+							<li>Properties:
+								<ul>
+									<li><code>role</code> (<em>string</em>,	default:	undefined) The data-role value to be used when displaying the page. By default this is undefined which means rely on the value of the @data-role attribute defined on the element.</li>
+									<li><code>pageContainer</code> (jQuery collection,	default:	$.mobile.pageContainer) Specifies the element that should contain the page after it is loaded. </li>
+									<li><code>type</code> (<em>string</em>, default: &quot;get&quot;) Specifies the method ("get" or "post") to use when making a page request. 
+									</li>
+									<li><code>data</code> (<em>object</em> or	string,	default: undefined) The data to send with an Ajax page request. </li>
+									<li><code>reloadPage</code> (<em>boolean</em>, default: false) Forces a reload of a page, even if it is already in the DOM of the page container. </li>
+								</ul>
+							</li>
+						</ul>
+					</dd>	
+
+				</dl>
+			</dd>
+			
+			<dd>Examples:
+			<pre>
+			<code>
+<strong>//load the "about us" page into the DOM</strong>			
+$.mobile.loadPage( "about/us.html" );	
+
+<strong>//load a "search results" page, using data from a form with an ID of "search"" 	</strong>	
+$.mobile.loadPage( "searchresults.php", {
+	type: "post", 
+	data: $("form#search").serialize()
+});				
 			</code>
 			</pre>
 			
@@ -112,10 +185,273 @@ $.mobile.hidePageLoadingMsg();
 			
 			</dd>
 			
+            
+			<dt><code>$.mobile.path.parseUrl</code> (<em>method</em>)</dt>
+			<dd>Utility method for parsing a URL and its relative variants into an object that makes accessing the components of the URL easy. When parsing relative variants, the resulting object will contain empty string values for missing components (like protocol, host, etc). Also, when parsing URLs that have no authority, such as tel: urls, the pathname property of the object will contain the data after the protocol/scheme colon.</dd>
 			
-			<dt><code>$.mobile.path</code> (<em>methods, properties</em>)</dt>
-			<dd>Utilities for getting, setting, and manipulating url paths. TODO: document as public API is finalized.</dd>
+			<dd>
+				
+				<dl>
+					<dt>Arguments</dt>
+					<dd><code>url</code> (<em>string</em>, required) A relative or absolute URL.</dd>	
+						
+					<dt>Return Value</dt>
+					<dd>
+						<p>This function returns an object that contains the various components of the URL as strings. The properties on the object mimic the browser's location object:</p>
+						<dl>	
+							<dt>hash</dt>
+							<dd>The fragment conponent of the URL, including the leading '#' character.</dd>
+							<dt>host</dt>
+							<dd>The host and port number of the URL.</dd>
+							<dt>hostname</dt>
+							<dd>The name of the host within the URL.</dd>
+							<dt>href</dt>
+							<dd>The original URL that was parsed.</dd>
+							<dt>pathname</dt>
+							<dd>The path of the file or directory referenced by the URL.</dd>
+							<dt>port</dt>
+							<dd>The port specified within the URL. Most URLs rely on the default port for the protocol used, so this may be an empty string most of the time.</dd>
+							<dt>protocol</dt>
+							<dd>The protocol for the URL including the trailing ':' character.</dd>
+							<dt>search</dt>
+							<dd>The query component of the URL including the leading '?' character.</dd>
+						</dl>	
+						<p>But it also contains additional properties that provide access to additional components as well as some common forms of the URL developers access:</p>
+						<dl>	
+							<dt>authority</dt>	
+							<dd>The username, password, and host components of the URL</dd>	
+							<dt>directory</dt>
+							<dd>The directory component of the pathname, minus any filename.</dd>	
+							<dt>domain</dt>	
+							<dd>The protocol and authority components of the URL.</dd>	
+							<dt>filename</dt>	
+							<dd>The filename within the pathname component, minus the directory.</dd>	
+							<dt>hrefNoHash</dt>	
+							<dd>The original URL minus the fragment (hash) components.</dd>	
+							<dt>hrefNoSearch</dt>	
+							<dd>The original URL minus the query (search) and fragment (hash) components.</dd>	
+							<dt>password</dt>	
+							<dd>The password contained within the authority component.</dd>	
+							<dt>username</dt>	
+							<dd>The username contained within the authority component.</dd>	
+						</dl>	
+					</dd>	
+						
+				</dl>
+			</dd>
 			
+			<dd>Examples:
+			<pre>
+			<code>
+<strong>// Parsing the Url below results an object that is returned with the
+// following properties:
+//
+//  obj.href:         http://jblas:password@mycompany.com:8080/mail/inbox?msg=1234&amp;type=unread#msg-content
+//  obj.hrefNoHash:   http://jblas:password@mycompany.com:8080/mail/inbox?msg=1234&amp;type=unread
+//  obj.hrefNoSearch: http://jblas:password@mycompany.com:8080/mail/inbox
+//  obj.domain:       http://jblas:password@mycompany.com:8080
+//  obj.protocol:     http:
+//  obj.authority:    jblas:password@mycompany.com:8080
+//  obj.username:     jblas
+//  obj.password:     password
+//  obj.host:         mycompany.com:8080
+//  obj.hostname:     mycompany.com
+//  obj.port:         8080
+//  obj.pathname:     /mail/inbox
+//  obj.directory:    /mail/
+//  obj.filename:     inbox
+//  obj.search:       ?msg=1234&amp;type=unread
+//  obj.hash:         #msg-content</strong>
+
+var obj = $.mobile.path.parseUrl("http://jblas:password@mycompany.com:8080/mail/inbox?msg=1234");
+			</code>
+			</pre>
+			
+			</dd>
+			
+            
+			<dt><code>$.mobile.path.makePathAbsolute</code> (<em>method</em>)</dt>
+			<dd>Utility method for converting a relative file or directory path into an absolute path.</dd>
+			<dd>
+				<dl>
+					<dt>Arguments</dt>
+					<dd><code>relPath</code> (<em>string</em>, required) A relative file or directory path.</dd>	
+					<dd><code>absPath</code> (<em>string</em>, required) An absolute file or relative path to resolve against.</dd>	
+						
+					<dt>Return Value</dt>
+					<dd>This function returns a string that is an absolute version of the relative path passed in.</dd>	
+						
+				</dl>
+			</dd>
+			<dd>Examples:
+			<pre>
+			<code>
+<strong>// Returns: /a/b/c/file.html</strong>
+var absPath = $.mobile.path.makePathAbsolute("file.html", "/a/b/c/bar.html");
+
+<strong>// Returns: /a/foo/file.html</strong>
+var absPath = $.mobile.path.makePathAbsolute("../../foo/file.html", "/a/b/c/bar.html");
+
+			</code>
+			</pre>
+			</dd>
+			
+            
+			<dt><code>$.mobile.path.makeUrlAbsolute</code> (<em>method</em>)</dt>
+			<dd>Utility method for converting a relative URL to an absolute URL.</dd>
+			<dd>
+				
+				<dl>
+					<dt>Arguments</dt>
+					<dd><code>relUrl</code> (<em>string</em>, required) A relative URL.</dd>	
+					<dd><code>absUrl</code> (<em>string</em>, required) An absolute URL to resolve against.</dd>	
+						
+					<dt>Return Value</dt>
+					<dd>This function returns a string that is an absolute version of the relative URL passed in.</dd>	
+						
+				</dl>
+			</dd>
+			<dd>Examples:
+			<pre>
+			<code>
+<strong>// Returns: http://foo.com/a/b/c/file.html</strong>
+var absUrl = $.mobile.path.makeUrlAbsolute("file.html", "http://foo.com/a/b/c/test.html");
+
+<strong>// Returns: http://foo.com/a/foo/file.html</strong>
+var absUrl = $.mobile.path.makeUrlAbsolute("../../foo/file.html", "http://foo.com/a/b/c/test.html");
+
+<strong>// Returns: http://foo.com/bar/file.html</strong>
+var absUrl = $.mobile.path.makeUrlAbsolute("//foo.com/bar/file.html", "http://foo.com/a/b/c/test.html");
+
+<strong>// Returns: http://foo.com/a/b/c/test.html?a=1&amp;b=2</strong>
+var absUrl = $.mobile.path.makeUrlAbsolute("?a=1&amp;b=2", "http://foo.com/a/b/c/test.html");
+
+<strong>// Returns: http://foo.com/a/b/c/test.html#bar</strong>
+var absUrl = $.mobile.path.makeUrlAbsolute("#bar", "http://foo.com/a/b/c/test.html");
+
+			</code>
+			</pre>
+			
+			</dd>
+			
+            
+			<dt><code>$.mobile.path.isSameDomain</code> (<em>method</em>)</dt>
+			<dd>Utility method for comparing the domain of 2 URLs.</dd>
+			<dd>
+				
+				<dl>
+					<dt>Arguments</dt>
+					<dd><code>url1</code> (<em>string</em>, required) A relative URL.</dd>	
+					<dd><code>url2</code> (<em>string</em>, required) An absolute URL to resolve against.</dd>	
+						
+					<dt>Return Value</dt>
+					<dd>This function returns a boolean true if the domains match, false if they don't.</dd>	
+						
+				</dl>
+			</dd>
+			<dd>Examples:
+			<pre>
+			<code>
+<strong>// Returns: true</strong>
+var same = $.mobile.path.isSameDomain("http://foo.com/a/file.html", "http://foo.com/a/b/c/test.html");
+
+<strong>// Returns: false</strong>
+var same = $.mobile.path.isSameDomain("file://foo.com/a/file.html", "http://foo.com/a/b/c/test.html");
+
+<strong>// Returns: false</strong>
+var same = $.mobile.path.isSameDomain("https://foo.com/a/file.html", "http://foo.com/a/b/c/test.html");
+
+<strong>// Returns: false</strong>
+var same = $.mobile.path.isSameDomain("http://foo.com/a/file.html", "http://bar.com/a/b/c/test.html");
+
+			</code>
+			</pre>
+			
+			</dd>
+			
+            
+			<dt><code>$.mobile.path.isRelativeUrl</code> (<em>method</em>)</dt>
+			<dd>Utility method for determining if a URL is a relative variant.</dd>
+			<dd>
+				
+				<dl>
+					<dt>Arguments</dt>
+					<dd><code>url</code> (<em>string</em>, required) A relative or absolute URL.</dd>	
+						
+					<dt>Return Value</dt>
+					<dd>This function returns a boolean true if the URL is relative, false if it is absolute.</dd>	
+						
+				</dl>
+			</dd>
+			<dd>Examples:
+			<pre>
+			<code>
+<strong>// Returns: false</strong>
+var isRel = $.mobile.path.isRelativeUrl("http://foo.com/a/file.html");
+
+<strong>// Returns: true</strong>
+var isRel = $.mobile.path.isRelativeUrl("//foo.com/a/file.html");
+
+<strong>// Returns: true</strong>
+var isRel = $.mobile.path.isRelativeUrl("/a/file.html");
+
+<strong>// Returns: true</strong>
+var isRel = $.mobile.path.isRelativeUrl("file.html");
+
+<strong>// Returns: true</strong>
+var isRel = $.mobile.path.isRelativeUrl("?a=1&amp;b=2");
+
+<strong>// Returns: true</strong>
+var isRel = $.mobile.path.isRelativeUrl("#foo");
+
+
+			</code>
+			</pre>
+			
+			</dd>
+			
+            
+			<dt><code>$.mobile.path.isAbsoluteUrl</code> (<em>method</em>)</dt>
+			<dd>Utility method for determining if a URL is absolute.</dd>
+			<dd>
+				
+				<dl>
+					<dt>Arguments</dt>
+					<dd><code>url</code> (<em>string</em>, required) A relative or absolute URL.</dd>	
+						
+					<dt>Return Value</dt>
+					<dd>This function returns a boolean true if the URL is absolute, false if it is absolute.</dd>	
+						
+				</dl>
+			</dd>
+			<dd>Examples:
+			<pre>
+			<code>
+<strong>// Returns: true</strong>
+var isAbs = $.mobile.path.isAbsoluteUrl("http://foo.com/a/file.html");
+
+<strong>// Returns: false</strong>
+var isAbs = $.mobile.path.isAbsoluteUrl("//foo.com/a/file.html");
+
+<strong>// Returns: false</strong>
+var isAbs = $.mobile.path.isAbsoluteUrl("/a/file.html");
+
+<strong>// Returns: false</strong>
+var isAbs = $.mobile.path.isAbsoluteUrl("file.html");
+
+<strong>// Returns: false</strong>
+var isAbs = $.mobile.path.isAbsoluteUrl("?a=1&amp;b=2");
+
+<strong>// Returns: false</strong>
+var isAbs = $.mobile.path.isAbsoluteUrl("#foo");
+
+
+			</code>
+			</pre>
+			
+			</dd>
+			
+            
 			<dt><code>$.mobile.base</code> (<em>methods, properties</em>)</dt>
 			<dd>Utilities for working with generated base element. TODO: document as public API is finalized.</dd>
 			
@@ -171,7 +507,31 @@ $.mobile.addResolutionBreakpoints([600,800]);
 			
 			
 		</dl>			
-	</div><!-- /content -->
+	</div><!--/content-secondary -->		
+	
+	<div class="content-secondary">
+		
+		<div data-role="collapsible" data-collapsed="true" data-theme="b">
+			
+				<h3>More in this section</h3>
+				
+				<ul data-role="listview"  data-theme="c" data-dividertheme="d">
+				
+					<li data-role="list-divider">API</li>
+					<li><a href="../../docs/api/globalconfig.html">Configuring defaults</a></li>
+					<li><a href="../../docs/api/events.html">Events</a></li>
+					<li data-theme="a"><a href="../../docs/api/methods.html">Methods &amp; Utilities</a></li>
+					<li><a href="../../docs/api/mediahelpers.html">Responsive Layout</a></li> 
+					<li><a href="../../docs/api/themes.html">Theme framework</a></li>
+				</ul>
+		</div>
+	</div>		
+
+</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p>&copy; 2011 The jQuery Project</p>
+</div>
 	
 </div><!-- /page -->
 

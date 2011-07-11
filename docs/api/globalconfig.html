@@ -7,18 +7,22 @@
 	<link rel="stylesheet"  href="../../themes/default/" /> 
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 	<script src="../../js/jquery.js"></script>
+	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../_assets/js/jqm-docs.js"></script>
 	<script src="../../js/"></script>
 </head> 
 <body> 
 
-<div data-role="page">
+<div data-role="page" class="type-interior">
 
-	<div data-role="header" data-theme="b">
+	<div data-role="header" data-theme="f">
 		<h1>Configuring Defaults</h1>
 		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
 	<div data-role="content" data-theme="c">
+		<div class="content-primary">
+		
 			<h2>Working with jQuery Mobile's Auto-initialization</h2>
 			<p>Unlike other jQuery projects, such as jQuery and jQuery UI, jQuery Mobile automatically applies many markup enhancements as soon as it loads (long before document.ready event fires). These enhancements are applied based on jQuery Mobile's default configuration, which is designed to work with common scenarios, but may or may not match your particular needs. Fortunately, these settings are easy to configure.</p>
 			
@@ -95,6 +99,7 @@ $(document).bind("mobileinit", function(){
 	<dt>ajaxEnabled (<em>boolean</em>, default: true):</dt> 
 	<dd>jQuery Mobile will automatically handle link clicks and form submissions through Ajax, when possible. If false, url hash listening will be disabled as well, and urls will load as regular http requests.</dd>
 
+
 	<dt>hashListeningEnabled (<em>boolean</em>, default: true):</dt> 
 	<dd>jQuery Mobile will automatically listen and handle changes to the location.hash. Disabling this will prevent jQuery Mobile from handling hash changes, which allows you to handle them yourself, or simply to use simple deep-links within a document that scroll to a particular ID.</dd>
 
@@ -103,6 +108,9 @@ $(document).bind("mobileinit", function(){
 	
 	<dt>defaultDialogTransition (<em>string</em>, default: 'pop'):</dt> 
 	<dd>Set the default transition for dialog changes that use Ajax. Set to 'none' for no transitions by default.</dd>
+
+	<dt>minScrollBack (<em>string</em>, default: 150):</dt> 
+	<dd>Minimum scroll distance that will be remembered when returning to a page. </dd>
 	
 	<dt>loadingMessage (<em>string</em>, default: "loading"):</dt> 
 	<dd>Set the text that appears when a page is loading. If set to false, the message will not appear at all.</dd>
@@ -115,9 +123,32 @@ $(document).bind("mobileinit", function(){
 
 
 </dl>
+	</div><!--/content-secondary -->		
 	
+	<div class="content-secondary">
 		
-	</div><!-- /content -->
+		<div data-role="collapsible" data-collapsed="true" data-theme="b">
+			
+				<h3>More in this section</h3>
+				
+				<ul data-role="listview"  data-theme="c" data-dividertheme="d">
+			
+					<li data-role="list-divider">API</li>
+					<li data-theme="a"><a href="../../docs/api/globalconfig.html">Configuring defaults</a></li>
+					<li><a href="../../docs/api/events.html">Events</a></li>
+					<li><a href="../../docs/api/methods.html">Methods &amp; Utilities</a></li>
+					<li><a href="../../docs/api/mediahelpers.html">Responsive Layout</a></li> 
+					<li><a href="../../docs/api/themes.html">Theme framework</a></li>
+				</ul>
+		</div>
+	</div>		
+
+</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p>&copy; 2011 The jQuery Project</p>
+</div>
+	
 </div><!-- /page -->
 
 </body>
