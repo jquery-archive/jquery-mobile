@@ -196,6 +196,17 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 						.removeClass( $.mobile.activeBtnClass );
 				});
 
+			// Hide placeholder items if desired
+			if( o.hidePlaceholderMenuItems ){
+				select.find( "option" ).each(function( i ){
+					var $this = $(this),
+					text = $this.text();
+					if( !this.getAttribute('value') || text.length == 0 || $this.jqmData('placeholder') ){
+						$this.detach();
+					}
+				});
+			}
+
 
 		} else {
 
