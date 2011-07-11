@@ -9,3 +9,9 @@ combine/
 compiled/
 gitstatus.log
 refreshCDN
+.idea
+*.iml
+*.ipr
+*.iws
+jquery.mobile-*.css
+jquery.mobile-*.js
