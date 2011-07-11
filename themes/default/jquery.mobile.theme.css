@@ -906,7 +906,7 @@ a.ui-link-inherit {
 .ui-btn-corner-left,
 .ui-btn-corner-all {
   -webkit-background-clip: padding-box;
-     -moz-background-clip: padding-box;
+     -moz-background-clip: padding;
           background-clip: padding-box;
 }
 
