@@ -3,6 +3,10 @@
  */
 
 (function($){
+	var onChangeCnt = 0;
+	window.onChangeCounter = function() {
+		onChangeCnt++;
+	}
 	module('jquery.mobile.slider.js');
 
 	var keypressTest = function(opts){
@@ -136,5 +140,15 @@
 			finish: 'off',
 		  keyCodes: ['DOWN', 'LEFT', 'PAGE_DOWN', 'HOME']
 		});
+	});
+
+	test( "onchange should not be called on create", function(){
+		equals(onChangeCnt, 0, "onChange should not have been called");
+	});
+
+	test( "onchange should be called onchange", function(){
+		onChangeCnt = 0;
+		$( "#onchange" ).slider( "refresh", 50 );
+		equals(onChangeCnt, 1, "onChange should have been called once");
 	});
 })(jQuery);
