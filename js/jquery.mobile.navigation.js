@@ -563,7 +563,7 @@
 
 			// The absolute version of the URL passed into the function. This
 			// version of the URL may contain dialog/subpage params in it.
-			absUrl = path.makeUrlAbsolute( url, documentBase.hrefNoHash );
+			absUrl = path.makeUrlAbsolute( url, ( $.mobile.activePage && getClosestBaseUrl( $.mobile.activePage ) ) || documentBase.hrefNoHash);
 
 
 		// If the caller provided data, and we're using "get" request,
