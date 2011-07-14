@@ -40,7 +40,11 @@ Running the jQuery Mobile demos & docs locally
 
 To preview locally, you'll need to clone a local copy of this repository and point your Apache & PHP webserver at its root directory (a webserver is required, as PHP and .htaccess are used for combining development files).
 
-If you don't currently have a webserver running locally, there are a few options. If you're on a Mac, you can try dropping jQuery Mobile into your sites folder and turning on Web Sharing via System Prefs. From there, you'll find a URL where you can browse folders in your sites directory from a browser.
+If you don't currently have a webserver running locally, there are a few options. 
+
+If you have python installed (most Linux distributions) and Mac OSX, you use the built-in simple web server. Open a terminal/shell and change to the jQuery Mobile folder then type 'python -m SimpleHTTPServer', and voila you can then browse via http://localhost:8000. 
+
+If you're on a Mac, you can try dropping jQuery Mobile into your sites folder and turning on Web Sharing via System Prefs. From there, you'll find a URL where you can browse folders in your sites directory from a browser.
 
 Another quick way to get up and running is to download and install MAMP for Mac OSX. Once installed, just open MAMP, click preferences, go to the Apache tab, and select your local jQuery Mobile folder as the root. Then you can open a browser to http://localhost:8888 to preview the code.
 
