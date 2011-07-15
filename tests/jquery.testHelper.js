@@ -103,6 +103,19 @@
 			// invoke the function which should, in some fashion,
 			// trigger the defined event
 			fn(timedOut);
+		},
+
+		decorate: function(opts){
+			var thisVal = opts.this || window;
+
+			return function(){
+				var returnVal;
+				opts.before && opts.before.apply(thisVal, arguments);
+				returnVal = opts.fn.apply(thisVal, arguments);
+				opts.after && opts.after.apply(thisVal, arguments);
+
+				return returnVal;
+			};
 		}
 	};
 })(jQuery);
