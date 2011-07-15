@@ -35,9 +35,11 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 			iconpos:	iconpos
 		});
 
-		$navbar.delegate( "a", "vclick", function( event ) {
-			$navbtns.not( ".ui-state-persist" ).removeClass( $.mobile.activeBtnClass );
-			$( this ).addClass( $.mobile.activeBtnClass );
+		$navbar.delegate("a", "vclick",function(event){
+			if ( !$( this ).hasClass( "ui-disabled" ) ) {
+				$navbtns.not( ".ui-state-persist" ).removeClass( $.mobile.activeBtnClass );
+				$( this ).addClass( $.mobile.activeBtnClass );
+			}
 		});
 	}
 });
