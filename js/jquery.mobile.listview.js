@@ -45,7 +45,17 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		.find( ".ui-li-aside" ).each(function() {
 			var $this = $(this);
 			$this.prependTo( $this.parent() ); //shift aside to front for css float
+		}).end()
+		.find( ".ui-link-inherit" ).each(function (i, el) {
+			var $el = $(el);
+			if ( !( $el.find( ".ui-li-count" ).length ) ) {
+				$el.addClass( "ui-li-has-count-or-linkicon" );
+			}
 		});
+
+		if ( !item.find( ".ui-li-count" ).length ) {
+			item.addClass( "ui-li-no-count-no-linkicon" );
+		}
 	},
 
 	_removeCorners: function( li, which ) {
