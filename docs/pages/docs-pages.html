@@ -197,7 +197,20 @@
 		
 		<p>Learn more about the technical details of the navigation model and <a href="docs-navmodel.html">Ajax, hashes and history</a> in jQuery mobile.</p>
 		
+		<h2>Automatically Pre-fetching Pages</h2>
+		<p>Any HTML anchor element may specify that its page be prefetched by jQuery Mobile through the use of a data-prefetch attribute. After pagecreate, jQuery Mobile will
+			automatically find all links in a page that have an attribute of <code>data-prefetch</code> and automatically load that page so it's available as soon as the user
+			navigates to it.</p> 
+			
+			<p>Pre-fetching links will naturally cause additional HTTP requests that may never be used, so it's important to use this feature only in situations where it's highly 
+				likely that a page will be visited.</p>
+		
+	
+<pre><code>
+ &lt;a href="foo/bar/baz" data-prefetch&gt;link text&lt;/a&gt;
+</code></pre>
 
+<p>Pages can also be pre-fetched programmatically by calling <code>$.mobile.loadpage( url )</code></p>
 
 
 				</div><!--/content-primary -->		

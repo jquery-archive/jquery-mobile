@@ -1121,6 +1121,18 @@
 			$.mobile.changePage( href, { transition: transition, reverse: reverse, role: role } );
 			event.preventDefault();
 		});
+		
+		//prefetch pages when anchors with data-prefetch are encountered
+		$( ".ui-page" ).live( "pageshow.prefetch", function(){
+			var urls = [];
+			$( this ).find( "a:jqmData(prefetch)" ).each(function(){
+				var url = $( this ).attr( "href" );
+				if ( url && $.inArray( url, urls ) === -1 ) {
+					urls.push( url );
+					$.mobile.loadPage( url );
+				}
+			});
+		} );
 
 		//hashchange event handler
 		$window.bind( "hashchange", function( e, triggered ) {
