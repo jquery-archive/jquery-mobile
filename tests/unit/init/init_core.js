@@ -201,5 +201,16 @@
 				start();
 			}, 500);
 		});
+		
+		asyncTest( "page loading should contain custom loading message when set during runtime", function(){
+			$.mobile.loadingMessage = "bar";
+			$.mobile.pageLoading(false);
+
+			setTimeout(function(){
+				same($(".ui-loader h1").text(), "bar");
+				start();
+			}, 500);
+		});
+		
 	});
 })(jQuery);
