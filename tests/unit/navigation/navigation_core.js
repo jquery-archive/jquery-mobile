@@ -22,6 +22,8 @@
 			$.mobile.urlHistory.activeIndex = 0;
 		}
 	});
+	
+	
 
 	asyncTest( "forms with data attribute ajax set to false will not call changePage", function(){
 		var called = false;
@@ -63,6 +65,28 @@
 				ok(called >= 2, "change page should be called at least twice");
 				start();
 			}], 300);
+	});
+	
+	//testing the data-prefetch attr
+	var prefetched = false;
+	$('#prefetch').live('pagecreate',function(event){
+		prefetched = true;
+		ok( true, 'Page fetched properly' );
+		window.history.back();
+		start();
+	});
+	
+	asyncTest( "data-prefetch attribute on an anchor will preload the referenced page when its parent page is shown", function(){
+		
+		setTimeout(function(){
+			if( !prefetched ){
+				ok( false, 'Page wasn\'t fetched properly' );
+				window.history.back();
+				start();
+			}
+		}, 1000);
+		
+		$.mobile.changePage( "#prefetch" );
 	});
 
 
