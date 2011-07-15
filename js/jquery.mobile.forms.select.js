@@ -305,7 +305,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					break;
 				}
 			});
-			
+
 			// button refocus ensures proper height calculation
 			// by removing the inline style and ensuring page inclusion
 			self.menuPage.bind( "pagehide", function(){
@@ -324,7 +324,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					self.close();
 					return false;
 				}
-			})
+			});
 		}
 	},
 
@@ -558,7 +558,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			self.isOpen = true;
 		}
 	},
-	
+
 	_focusButton : function(){
 		var self = this;
 		setTimeout(function() {
