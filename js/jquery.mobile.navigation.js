@@ -561,9 +561,15 @@
 			// page is loaded off the network.
 			dupCachedPage = null,
 
+			// determine the current base url
+			findBaseWithDefault = function(){
+				var closestBase = ( $.mobile.activePage && getClosestBaseUrl( $.mobile.activePage ) );
+				return closestBase || documentBase.hrefNoHash;
+			},
+
 			// The absolute version of the URL passed into the function. This
 			// version of the URL may contain dialog/subpage params in it.
-			absUrl = path.makeUrlAbsolute( url, ( $.mobile.activePage && getClosestBaseUrl( $.mobile.activePage ) ) || documentBase.hrefNoHash);
+			absUrl = path.makeUrlAbsolute( url, findBaseWithDefault() );
 
 
 		// If the caller provided data, and we're using "get" request,
