@@ -10,6 +10,7 @@
 $.mobile.listview.prototype.options.filter = false;
 $.mobile.listview.prototype.options.filterPlaceholder = "Filter items...";
 $.mobile.listview.prototype.options.filterTheme = "c";
+$.mobile.listview.prototype.options.filterTerms = false;
 
 $( ":jqmData(role='listview')" ).live( "listviewcreate", function() {
 
@@ -63,22 +64,45 @@ $( ":jqmData(role='listview')" ).live( "listviewcreate", function() {
 					item = $( listItems[ i ] );
 					itemtext = item.jqmData( "filtertext" ) || item.text();
 
-					if ( item.is( "li:jqmData(role=list-divider)" ) ) {
-
-						item.toggleClass( "ui-filter-hidequeue" , !childItems );
-
-						// New bucket!
-						childItems = false;
-
-					} else if ( itemtext.toLowerCase().indexOf( val ) === -1 ) {
-
-						//mark to be hidden
-						item.toggleClass( "ui-filter-hidequeue" , true );
-					} else {
-
-						// There"s a shown item in the bucket
-						childItems = true;
+					// array of the val text terms to match on. 
+					//Only create arrays and continue loop if data-filter-terms="true" 
+					if ( listview.options.filterTerms == true ){
+					
+						var subVals = val.toLowerCase().split(' ');
+						var j = subVals.length - 1;
+						
+						//switch val over to the individual terms if this filter should run
+    					val = subVals[j];
+    					
+					}else{
+					
+						//loop should only run once
+						var j = 0;
 					}
+    				
+					
+                    do {
+    				  
+                        if ( item.is( "li:jqmData(role=list-divider)" ) ) {
+
+							item.toggleClass( 'ui-filter-hidequeue' , !childItems );
+
+							// New bucket!
+							childItems = false;
+
+						} else if ( itemtext.toLowerCase().indexOf( val ) === -1 ) {
+
+							//mark to be hidden
+							item.toggleClass( 'ui-filter-hidequeue' , true );
+						} else {
+
+							// There's a shown item in the bucket
+							childItems = true;
+						}
+
+    					j--;
+    					
+					} while ( j >= 0 )
 				}
 
 				// Show items, not marked to be hidden
