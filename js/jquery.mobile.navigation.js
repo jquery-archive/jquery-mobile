@@ -648,6 +648,9 @@
 							&& RegExp.$1 ) {
 						url = fileUrl = path.getFilePath( RegExp.$1 );
 					}
+					else{
+						
+					}
 
 					if ( base ) {
 						base.set( fileUrl );
@@ -656,6 +659,11 @@
 					//workaround to allow scripts to execute when included in page divs
 					all.get( 0 ).innerHTML = html;
 					page = all.find( ":jqmData(role='page'), :jqmData(role='dialog')" ).first();
+					
+					//if page elem couldn't be found, create one and insert the body element's contents
+					if( !page.length ){
+						page = $( "<div data-" + $.mobile.ns + "role='page'>" + html.split( /<\/?body[^>]*>/gmi )[1] + "</div>" );
+					}
 
 					if ( newPageTitle && !page.jqmData( "title" ) ) {
 						page.jqmData( "title", newPageTitle );
