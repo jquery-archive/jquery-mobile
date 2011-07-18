@@ -81,26 +81,26 @@ $( ":jqmData(role='listview')" ).live( "listviewcreate", function() {
 					}
     				
 					
-                    do {
+                                        do {
     				  
-                        if ( item.is( "li:jqmData(role=list-divider)" ) ) {
+                                            if ( item.is( "li:jqmData(role=list-divider)" ) ) {
 
-							item.toggleClass( 'ui-filter-hidequeue' , !childItems );
+					        item.toggleClass( 'ui-filter-hidequeue' , !childItems );
 
-							// New bucket!
-							childItems = false;
+					        // New bucket!
+					        childItems = false;
 
-						} else if ( itemtext.toLowerCase().indexOf( val ) === -1 ) {
+					    } else if ( itemtext.toLowerCase().indexOf( val ) === -1 ) {
 
-							//mark to be hidden
-							item.toggleClass( 'ui-filter-hidequeue' , true );
-						} else {
+					        //mark to be hidden
+					        item.toggleClass( 'ui-filter-hidequeue' , true );
+					    } else {
 
-							// There's a shown item in the bucket
-							childItems = true;
-						}
+					        // There's a shown item in the bucket
+					        childItems = true;
+					    }
 
-    					j--;
+    					    j--;
     					
 					} while ( j >= 0 )
 				}
