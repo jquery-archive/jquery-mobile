@@ -11,7 +11,8 @@ $.widget( "mobile.slider", $.mobile.widget, {
 	options: {
 		theme: null,
 		trackTheme: null,
-		disabled: false
+		disabled: false,
+		change: null
 	},
 
 	_create: function() {
@@ -111,7 +112,11 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		// prevent screen drag when slider activated
 		$( document ).bind( "vmousemove", function( event ) {
 			if ( self.dragging ) {
-				self.refresh( event );
+				if (cType === "select") {
+					self.refresh(event, undefined, true);
+				} else {
+					self.refresh(event);
+				}
 				return false;
 			}
 		});
@@ -121,8 +126,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			if ( cType === "select" ) {
 				self.beforeStart = control[0].selectedIndex;
+			} else {
+				self.refresh(event);
 			}
-			self.refresh( event );
 			return false;
 		});
 
@@ -293,8 +299,15 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			} else {
 				control[ 0 ].selectedIndex = newval;
 			}
-			if ( !isfromControl ) {
-				control.trigger( "change" );
+			if (!isfromControl) {
+				control.trigger("change");
+
+				if (this.options.change) {
+					if (typeof this.options.change === "string")
+						eval(this.options.change).call(this.element, newval);
+					else
+						this.options.change.call(this.element, newval);
+				}
 			}
 		}
 	},
