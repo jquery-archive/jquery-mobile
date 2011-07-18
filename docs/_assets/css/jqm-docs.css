@@ -88,8 +88,7 @@ p.intro strong {
 							#56A00E);
 	background-image: -webkit-gradient(linear,left top,left bottom,
 		color-stop(0, 		#74b042),
-		color-stop(1, 		#56A00E));
-	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#74b042', EndColorStr='#56A00E')";
+		color-stop(1, 		#56A00E));	
 }
 .ui-bar-f,
 .ui-bar-f .ui-link-inherit {
