@@ -2,6 +2,7 @@
 * jQuery Mobile Framework : "dialog" plugin.
 * Copyright (c) jQuery Project
 * Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
+* Note: Code is in draft form and is subject to change
 */
 
 (function( $, window, undefined ) {
@@ -16,7 +17,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		// Class the markup for dialog styling
 		// Set aria role
 		$el.attr( "role", "dialog" )
-			.addClass( "ui-page ui-dialog ui-body-a" )
+			.addClass( "ui-page ui-dialog ui-body-" + ( $el.jqmData( "theme" ) || "a" ) )
 			.find( ":jqmData(role=header)" )
 			.addClass( "ui-corner-top ui-overlay-shadow" )
 				.prepend( "<a href='#' data-" + $.mobile.ns + "icon='delete' data-" + $.mobile.ns + "rel='back' data-" + $.mobile.ns + "iconpos='notext'>"+ this.options.closeBtnText + "</a>" )
