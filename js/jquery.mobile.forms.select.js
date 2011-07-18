@@ -229,17 +229,19 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				})
 				.delegate( "li:not(.ui-disabled, .ui-li-divider)", "vclick", function( event ) {
 
-					// index of option tag to be selected
-					var oldIndex = select[ 0 ].selectedIndex,
-						newIndex = list.find( "li:not(.ui-li-divider)" ).index( this ),
-						option = self.optionElems.eq( newIndex )[ 0 ];
+					
+					var $this = $( this ),
+						// index of option tag to be selected
+						oldIndex = select[ 0 ].selectedIndex,
+						newIndex = $this.jqmData("option-index"),
+						option = self.optionElems[ newIndex ];
 
 					// toggle selected status on the tag for multi selects
 					option.selected = isMultiple ? !option.selected : true;
 
 					// toggle checkbox class for multiple selects
 					if ( isMultiple ) {
-						$( this ).find( ".ui-icon" )
+						$this.find( ".ui-icon" )
 							.toggleClass( "ui-icon-checkbox-on", option.selected )
 							.toggleClass( "ui-icon-checkbox-off", !option.selected );
 					}
@@ -373,7 +375,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				extraAttrs.push( "aria-disabled='true'" );
 			}
 
-			lis.push( "<li data-" + $.mobile.ns + "icon='"+ dataIcon +"' class='"+ classes.join(" ") + "' " + extraAttrs.join(" ") +">"+ anchor +"</li>" )
+			lis.push( "<li data-" + $.mobile.ns + "option-index='" + i + "' data-" + $.mobile.ns + "icon='"+ dataIcon +"' class='"+ classes.join(" ") + "' " + extraAttrs.join(" ") +">"+ anchor +"</li>" )
 		});
 
 		self.list.html( lis.join(" ") );
