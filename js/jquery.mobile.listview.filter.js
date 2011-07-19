@@ -54,7 +54,7 @@ $( ":jqmData(role='listview')" ).live( "listviewcreate", function() {
 
 			change = val.replace( new RegExp( "^" + lastval ) , "" );
 
-			if ( val.length < lastval.length || change.length != ( val.length - lastval.length ) ) {
+			if ( val.length < lastval.length || change.length != ( val.length - lastval.length ) || listview.options.filterType == 'end') {
 
 				// Removed chars or pasted something totaly different, check all items
 				listItems = list.children();
@@ -70,13 +70,12 @@ $( ":jqmData(role='listview')" ).live( "listviewcreate", function() {
 				// and any list dividers without regular rows shown under it
 
 				for ( var i = listItems.length - 1; i >= 0; i-- ) {
+				
 					item = $( listItems[ i ] );
 					itemtext = item.jqmData( "filtertext" ) || item.text();
 					
 					//additional pre-filtering of <li> contents before comparison
 					//regex version is working with the input filter mentioned above
-					var subItems = item.text().toLowerCase().split(' ');
-					
 					if ( listview.options.filterType == 'regex' ) {
 					
 						//make sure text has same items removed
@@ -84,13 +83,21 @@ $( ":jqmData(role='listview')" ).live( "listviewcreate", function() {
 						
 					} else if ( listview.options.filterType == 'start' ){
 						
-						//only match on the first segment of the string
-						itemtext = subItems[0];
+						//only match on the beginning of the string
+						if( itemtext.toLowerCase().indexOf( val ) != 0 ){
+							itemtext = false;
+						}
 						
 					} else if ( listview.options.filterType == 'end' ){ 
 						
-						//only match on the last segment of the string
-						itemtext = subItems[subItems.length-1];
+						//only match to the end of the string
+						var totalchars = item.text().length;
+						var totalval = val.length;
+						var currentSubstring = itemtext.substring(totalchars - totalval,totalchars);
+
+						if(val != currentSubstring){
+							itemtext = false;
+						}
 						
 					}
 
@@ -101,7 +108,7 @@ $( ":jqmData(role='listview')" ).live( "listviewcreate", function() {
 						// New bucket!
 						childItems = false;
 
-					} else if ( itemtext.toLowerCase().indexOf( val ) === -1 ) {
+					} else if ( itemtext == false || itemtext.toLowerCase().indexOf( val ) === -1 ) {
 
 						//mark to be hidden
 						item.toggleClass( "ui-filter-hidequeue" , true );
