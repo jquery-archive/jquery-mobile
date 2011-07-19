@@ -4,15 +4,22 @@
 * Dual licensed under the MIT or GPL Version 2 licenses.
 * http://jquery.org/license
 */
-(function($, undefined ) {
+(function( $, undefined ) {
+
+//auto self-init widgets
+$( document ).bind( "pagecreate", function( e ){
+	$( ":jqmData(role='controlgroup')", e.target ).controlgroup({ excludeInvisible: false });
+});
 
 $.fn.controlgroup = function( options ) {
 
 	return this.each(function() {
+
 		var $el = $( this ),
 			o = $.extend({
 						direction: $el.jqmData( "type" ) || "vertical",
-						shadow: false
+						shadow: false,
+						excludeInvisible: true
 					}, options ),
 			groupheading = $el.find( ">legend" ),
 			flCorners = o.direction == "horizontal" ? [ "ui-corner-left", "ui-corner-right" ] : [ "ui-corner-top", "ui-corner-bottom" ],
@@ -36,7 +43,7 @@ $.fn.controlgroup = function( options ) {
 				.filter( ":last" ).addClass( flCorners[ 1 ] ).addClass( "ui-controlgroup-last" );
 		}
 
-		flipClasses( $el.find( ".ui-btn" + ( o.dontFilterOutInvisible ? "" : ":visible" ) ) );
+		flipClasses( $el.find( ".ui-btn" + ( o.excludeInvisible ? ":visible" : "" ) ) );
 		flipClasses( $el.find( ".ui-btn-inner" ) );
 
 		if ( o.shadow ) {

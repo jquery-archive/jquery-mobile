@@ -46,21 +46,25 @@ JSFILES = 	  js/jquery.ui.widget.js \
 			  js/jquery.mobile.core.js \
 			  js/jquery.mobile.navigation.js \
 			  js/jquery.mobile.transition.js \
-			  js/jquery.mobile.fixHeaderFooter.js \
+			  js/jquery.mobile.dialog.js \
+			  js/jquery.mobile.page.sections.js \
+			  js/jquery.mobile.collapsible.js \
+			  js/jquery.mobile.fieldContain.js \
+			  js/jquery.mobile.grid.js \
+			  js/jquery.mobile.navbar.js \
+			  js/jquery.mobile.listview.js \
+			  js/jquery.mobile.listview.filter.js \
+			  js/jquery.mobile.nojs.js \
 			  js/jquery.mobile.forms.checkboxradio.js \
+			  js/jquery.mobile.forms.button.js \
+			  js/jquery.mobile.forms.slider.js \
 			  js/jquery.mobile.forms.textinput.js \
 			  js/jquery.mobile.forms.select.js \
 			  js/jquery.mobile.buttonMarkup.js \
-			  js/jquery.mobile.forms.button.js \
-			  js/jquery.mobile.forms.slider.js \
-			  js/jquery.mobile.collapsible.js \
 			  js/jquery.mobile.controlGroup.js \
-			  js/jquery.mobile.fieldContain.js \
-			  js/jquery.mobile.listview.js \
-			  js/jquery.mobile.listview.filter.js \
-			  js/jquery.mobile.dialog.js \
-			  js/jquery.mobile.navbar.js \
-			  js/jquery.mobile.grid.js \
+			  js/jquery.mobile.links.js \
+			  js/jquery.mobile.fixHeaderFooter.js \
+			  js/jquery.mobile.media.classes.js \
 			  js/jquery.mobile.init.js
 
 # The files to include when compiling the CSS files

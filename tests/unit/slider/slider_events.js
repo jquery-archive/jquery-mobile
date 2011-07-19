@@ -99,6 +99,10 @@
 		slider.keyup();
 		same(slider.val(), "200");
 	});
+	
+	test( "input type should degrade to number when slider is created", function(){
+		same($("#range-slider-up").attr( "type" ), "number");
+	});
 
 	// generic switch test function
 	var sliderSwitchTest = function(opts){

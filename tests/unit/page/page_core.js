@@ -2,47 +2,77 @@
  * mobile page unit tests
  */
 (function($){
-	var libName = 'jquery.mobile.page.js',
-			typeAttributeRegex = $.mobile.page.prototype._typeAttributeRegex;
+	var libName = 'jquery.mobile.page.sections.js',
+		themedefault = $.mobile.page.prototype.options.theme;
 
 	module(libName);
+	
+	
+	var eventStack = [],
+		etargets = [],
+		cEvents=[],
+		cTargets=[];
 
-	test( "nested header anchors aren't altered", function(){
-		ok(!$('.ui-header > div > a').hasClass('ui-btn'));
+	
+	$( document ).bind( "pagebeforecreate pagecreate", function( e ){
+		eventStack.push( e.type );
+		etargets.push( e.target );
+	});
+	
+	$("#c").live( "pagebeforecreate", function( e ){
+	
+		cEvents.push( e.type );
+		cTargets.push( e.target );
+		return false;
 	});
 
-	test( "nested footer anchors aren't altered", function(){
-		ok(!$('.ui-footer > div > a').hasClass('ui-btn'));
+	test( "pagecreate event fires when page is created", function(){
+			ok( eventStack[0] === "pagecreate" || eventStack[1] === "pagecreate" );		
+	});
+	
+	test( "pagebeforecreate event fires when page is created", function(){		
+			ok( eventStack[0] === "pagebeforecreate" || eventStack[1] === "pagebeforecreate" );
+	});
+	
+	test( "pagebeforecreate fires before pagecreate", function(){
+			ok( eventStack[0] === "pagebeforecreate" );		
+	});
+	
+	test( "target of pagebeforecreate event was div #a", function(){
+			ok( $( etargets[0] ).is("#a") );	
+	});
+	
+	test( "target of pagecreate event was div #a" , function(){
+			ok( $( etargets[0] ).is("#a") );	
+	});
+	
+	test( "page element has ui-page class" , function(){
+			ok( $( "#a" ).hasClass( "ui-page" ) );	
+	});
+	
+	test( "page element has default body theme when not overidden" , function(){
+			ok( $( "#a" ).hasClass( "ui-body-" + themedefault ) );	
+	});
+	
+	test( "B page has non-default theme matching its data-theme attr" , function(){
+		$( "#b" ).page();
+		var btheme = $( "#b" ).jqmData( "theme" );
+		ok( $( "#b" ).hasClass( "ui-body-" + btheme ) );	
 	});
 
-	test( "nested bar anchors aren't styled", function(){
-		ok(!$('.ui-bar > div > a').hasClass('ui-btn'));
-	});
 
-	test( "unnested footer anchors are styled", function(){
-		ok($('.ui-footer > a').hasClass('ui-btn'));
-	});
+	test( "Binding to pagebeforecreate and returning false prevents pagecreate event from firing" , function(){
+		$("#c").page();
 
-	test( "unnested footer anchors are styled", function(){
-		ok($('.ui-footer > a').hasClass('ui-btn'));
+		ok( cEvents[0] === "pagebeforecreate" );	
+		ok( !cTargets[1] );			
 	});
-
-	test( "unnested bar anchors are styled", function(){
-		ok($('.ui-bar > a').hasClass('ui-btn'));
+	
+	test( "Binding to pagebeforecreate and returning false prevents classes from being applied to page" , function(){
+		ok( !$( "#b" ).hasClass( "ui-body-" + themedefault ) );	
+		ok( !$( "#b" ).hasClass( "ui-page" ) );			
 	});
+	
+	
 
-	test( "no auto-generated back button exists on first page", function(){
-		ok( !$(".ui-header > :jqmData(rel='back')").length );
-	});
-
-	test( "input type replacement regex works properly", function(){
-		ok(typeAttributeRegex.test( "<input type=range" ), "test no quotes" );
-		ok(typeAttributeRegex.test( "<input type='range'" ), "test single quotes" );
-		ok(typeAttributeRegex.test( "<input type=\"range\"" ), "test double quotes" );
-		ok(typeAttributeRegex.test( "<input type=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_"), "test \w" );
-		ok(typeAttributeRegex.test( "<input        type=\"range\"" ), "test many preceding spaces" );
-		ok(typeAttributeRegex.test( "<input type='range'>" ), "test final attribute (FF)" );
-
-		ok(!typeAttributeRegex.test( "<inputtype=\"range\"" ), "requires preceding space" );
-	});
 })(jQuery);

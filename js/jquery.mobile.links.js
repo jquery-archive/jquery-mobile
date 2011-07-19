@@ -7,13 +7,14 @@
 
 (function( $, undefined ) {
 
-//auto self-init widgets
 $( document ).bind( "pagecreate", function( e ){
-	$( ":jqmData(role='fieldcontain')", e.target ).fieldcontain();
-});
+	
+	//links within content areas
+	$( e.target )
+		.find( "a" )
+		.not( ".ui-btn, .ui-link-inherit, :jqmData(role='none'), :jqmData(role='nojs')" )
+		.addClass( "ui-link" );
 
-$.fn.fieldcontain = function( options ) {
-	return this.addClass( "ui-field-contain ui-body ui-br" );
-};
+});
 
 })( jQuery );

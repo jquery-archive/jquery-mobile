@@ -7,6 +7,11 @@
 
 (function( $, undefined ) {
 
+//auto self-init widgets
+$( document ).bind( "pagecreate", function( e ){
+	$( ":jqmData(role='navbar')", e.target ).navbar();
+});
+
 $.widget( "mobile.navbar", $.mobile.widget, {
 	options: {
 		iconpos: "top",

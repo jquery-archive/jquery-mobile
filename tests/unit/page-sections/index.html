@@ -25,12 +25,29 @@
 </ol>
 
 <div id="qunit-fixture">
-	<div id="a" data-nstest-role="page"></div>
-	
-	
-	<div id="b" data-nstest-role="page" data-nstest-theme="e"></div>
-	
-	<div id="c" data-nstest-role="page"></div>
-</div>	
+	<div  data-nstest-role="page">
+		<div  data-nstest-role="header">
+			<div>
+				<a href="foo">foo</a>
+			</div>
+			<a href="foo">foo</a>
+		</div><!-- /header -->
+
+		<div  data-nstest-role="footer">
+			<div>
+				<a href="foo">foo</a>
+			</div>
+
+			<a href="foo">foo</a>
+		</div><!-- /header -->
+
+		<div class="ui-bar">
+			<div>
+				<a href="foo">foo</a>
+			</div>
+
+			<a href="foo">foo</a>
+		</div>
+	</div>
 </body>
 </html>

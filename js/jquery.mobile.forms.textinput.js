@@ -7,6 +7,13 @@
 
 (function( $, undefined ) {
 
+//auto self-init widgets
+$( document ).bind( "pagecreate", function( e ){
+	$( "input[type='text'], input[type='search'], input[type='number'], input[type='password'], textarea", e.target )
+		.not( ":jqmData(role='none'), :jqmData(role='nojs')" )
+		.textinput();
+});
+
 $.widget( "mobile.textinput", $.mobile.widget, {
 	options: {
 		theme: null

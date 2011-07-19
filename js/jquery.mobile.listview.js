@@ -6,6 +6,12 @@
 */
 
 (function( $, undefined ) {
+
+//auto self-init widgets
+$( document ).bind( "pagecreate", function( e ){
+	$( ":jqmData(role='listview')", e.target ).listview();
+});
+
 //Keeps track of the number of lists per page UID
 //This allows support for multiple nested list in the same page
 //https://github.com/jquery/jquery-mobile/issues/1617
