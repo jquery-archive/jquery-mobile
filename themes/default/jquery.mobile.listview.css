@@ -12,6 +12,7 @@
 .ui-li-divider, .ui-li-static { padding: .5em 15px; font-size: 14px; font-weight: bold;  }
 .ui-li-divider { counter-reset: listnumbering;  }
 ol.ui-listview .ui-link-inherit:before, ol.ui-listview .ui-li-static:before, .ui-li-dec { font-size: .8em; display: inline-block; padding-right: .3em; font-weight: normal;counter-increment: listnumbering; content: counter(listnumbering) ". "; }
+ol.ui-listview .ui-li-has-thumb .ui-link-inherit:before {float: left; margin-top: 0.8em;}
 ol.ui-listview .ui-li-jsnumbering:before { content: "" !important; } /* to avoid chance of duplication */
 .ui-listview-inset .ui-li { border-right-width: 1px; border-left-width: 1px; }
 .ui-li:last-child, .ui-li.ui-field-contain:last-child { border-bottom-width: 1px; }
