@@ -47,4 +47,10 @@
 	test( "selects marked with data-native-menu=true should sit inside the button", function(){
 		same($("#select-choice-native-container div.ui-btn select").length, 1);
 	});
+	
+	test( "select controls will create when inside a container that receives an 'enhance' event", function(){
+		ok( !$("#enhancetest").appendTo(".ui-page-active").find(".ui-select").length, "did not have enhancements applied" );
+		ok( $("#enhancetest").trigger("enhance").find(".ui-select").length, "enhancements applied" );
+	});
+	
 })(jQuery);

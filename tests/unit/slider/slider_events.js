@@ -155,4 +155,10 @@
 		$( "#onchange" ).slider( "refresh", 50 );
 		equals(onChangeCnt, 1, "onChange should have been called once");
 	});
+	
+	
+	test( "slider controls will create when inside a container that receives an 'enhance' event", function(){
+		ok( !$("#enhancetest").appendTo(".ui-page-active").find(".ui-slider").length, "did not have enhancements applied" );
+		ok( $("#enhancetest").trigger("enhance").find(".ui-slider").length, "enhancements applied" );
+	});
 })(jQuery);

@@ -483,6 +483,11 @@
 			}
 		]);
 	});
+	
+	test( "Listview will create when inside a container that receives an 'enhance' event", function(){
+		ok( !$("#enhancetest").appendTo(".ui-page-active").find(".ui-listview").length, "did not have enhancements applied" );
+		ok( $("#enhancetest").trigger("enhance").find(".ui-listview").length, "enhancements applied" );
+	});
 
 
 

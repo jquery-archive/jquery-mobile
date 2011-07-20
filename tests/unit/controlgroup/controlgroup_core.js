@@ -119,4 +119,11 @@
 	});
 
 
+	test( "controlgroups will create when inside a container that receives an 'enhance' event", function(){
+		ok( !$("#enhancetest").appendTo(".ui-page-active").find(".ui-controlgroup").length, "did not have enhancements applied" );
+		ok( $("#enhancetest").trigger("enhance").find(".ui-controlgroup").length, "enhancements applied" );
+	});
+
+
+
 })(jQuery);

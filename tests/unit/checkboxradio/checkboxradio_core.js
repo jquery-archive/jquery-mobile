@@ -111,8 +111,9 @@
 	});
 	
 	test( "checkboxradio controls will create when inside a container that receives an 'enhance' event", function(){
-		ok( $("#fragment").appendTo(".ui-page-active").find(".ui-btn").length );
-	})
+		ok( !$("#enhancetest").appendTo(".ui-page-active").find(".ui-checkbox").length, "did not have enhancements applied" );
+		ok( $("#enhancetest").trigger("enhance").find(".ui-checkbox").length, "enhancements applied" );
+	});
 	
 	
 })(jQuery);
