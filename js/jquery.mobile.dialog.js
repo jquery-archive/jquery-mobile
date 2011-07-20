@@ -17,10 +17,15 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		theme			: "a"
 	},
 	_create: function() {
-		var $el = this.element;
+		var $el = this.element,
+			pageTheme = $el.attr( "class" ).match( /ui-body-[a-z]/ );
+			
+		if( pageTheme.length ){
+			$el.removeClass( pageTheme[ 0 ] );
+		}	
 		
-		$el.jqmData( "theme", this.options.theme );
-
+		$el.addClass( "ui-body-" + this.options.theme );
+		
 		// Class the markup for dialog styling
 		// Set aria role
 		$el.attr( "role", "dialog" )
