@@ -62,7 +62,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 
 			//apply theming and markup modifications to page,header,content,footer
 			if ( role === "header" || role === "footer" ) {
-				$this.addClass( "ui-bar-" + (theme || $this.parent( ":jqmData(role='page')" ).jqmData( "theme" ) || "a") );
+				$this.addClass( "ui-bar-" + (theme || $this.parent( ":jqmData(role='page'), :jqmData(role='dialog')" ).jqmData( "theme" ) || "a") );
 
 				// Add ARIA role
 				$this.attr( "role", role === "header" ? "banner" : "contentinfo" );
