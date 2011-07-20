@@ -9,7 +9,7 @@
 
 //auto self-init widgets
 $( document ).bind( "pagecreate enhance", function( e ){
-	$( "input[type='text'], input[type='search'], input[type='number'], input[type='password'], input[type='email'], textarea", e.target )
+	$( "input[type='text'], input[type='search'], input[type='number'], input[type='password'], input[type='email'], input[type='url'], input[type='tel'], textarea", e.target )
 		.not( ":jqmData(role='none'), :jqmData(role='nojs')" )
 		.textinput();
 });
