@@ -9,7 +9,7 @@
 			function(){
 				// reset before each test, all tests expect original page
 				// for relative urls
-				$.testHelper.openPage("#/tests/unit/navigation/");
+				$.testHelper.openPage( "#" + location.pathname);
 			},
 
 			// open our test page
