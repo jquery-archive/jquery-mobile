@@ -39,6 +39,18 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		input.addClass("ui-input-text ui-body-"+ o.theme );
 
 		focusedEl = input;
+		
+		// XXX: Temporary workaround for issue 785. Turn off autocorrect and
+		//      autocomplete since the popup they use can't be dismissed by
+		//      the user. Note that we test for the presence of the feature
+		//      by looking for the autocorrect property on the input element.
+		if ( typeof input[0].autocorrect !== "undefined" ) {
+			// Set the attribute instead of the property just in case there
+			// is code that attempts to make modifications via HTML.
+			input[0].setAttribute( "autocorrect", "off" );
+			input[0].setAttribute( "autocomplete", "off" );
+		}
+		
 
 		//"search" input widget
 		if ( input.is( "[type='search'],:jqmData(type='search')" ) ) {
