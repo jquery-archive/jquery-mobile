@@ -34,7 +34,7 @@ $( ":jqmData(role='page'), :jqmData(role='dialog')" ).live( "pagecreate", functi
 		//apply theming and markup modifications to page,header,content,footer
 		if ( role === "header" || role === "footer" ) {
 			
-			var thisTheme = theme || pageTheme || ( role === "header" ? o.headerTheme : o.footerTheme );
+			var thisTheme = theme || ( role === "header" ? o.headerTheme : o.footerTheme ) || pageTheme;
 
 			//add theme class
 			$this.addClass( "ui-bar-" + thisTheme );
