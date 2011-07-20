@@ -8,7 +8,7 @@
 (function( $, undefined ) {
 
 //auto self-init widgets
-$( document ).bind( "pagecreate", function( e ){
+$( document ).bind( "pagecreate enhance", function( e ){
 	$( "select:not(:jqmData(role='slider'))", e.target )
 		.not( ":jqmData(role='none'), :jqmData(role='nojs')" )
 		.selectmenu();

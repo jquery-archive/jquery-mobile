@@ -7,7 +7,7 @@
 
 (function( $, undefined ) {
 
-$( document ).bind( "pagecreate", function( e ){
+$( document ).bind( "pagecreate enhance", function( e ){
 	$( ":jqmData(role='nojs')", e.target ).addClass( "ui-nojs" );
 	
 });
