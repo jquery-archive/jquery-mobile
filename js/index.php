@@ -12,7 +12,6 @@ $elements = array(
 	'jquery.mobile.core.js',
 	'jquery.mobile.navigation.js',
 	'jquery.mobile.transition.js',
-	
 	'jquery.mobile.dialog.js',
 	'jquery.mobile.page.sections.js',
 	'jquery.mobile.collapsible.js',
