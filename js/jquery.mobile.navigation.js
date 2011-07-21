@@ -742,7 +742,7 @@
 		data: undefined,
 		reloadPage: false,
 		role: undefined, // By default we rely on the role defined by the @data-role attribute.
-		showLoadMsg: true,
+		showLoadMsg: false,
 		pageContainer: undefined
 	};
 
@@ -942,7 +942,8 @@
 		fromHashChange: false,
 		role: undefined, // By default we rely on the role defined by the @data-role attribute.
 		duplicateCachedPage: undefined,
-		pageContainer: undefined
+		pageContainer: undefined,
+		showLoadMsg: true //loading message shows by default when pages are being fetched during changePage
 	};
 
 /* Event Bindings - hashchange, submit, and click */
