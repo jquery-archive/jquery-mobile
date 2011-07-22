@@ -7,7 +7,7 @@
 (function( $, undefined ) {
 
 //auto self-init widgets
-$( document ).bind( "pagecreate enhance", function( e ){
+$( document ).bind( "pagecreate create", function( e ){
 	$( ":jqmData(role='controlgroup')", e.target ).controlgroup({ excludeInvisible: false });
 });
 

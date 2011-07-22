@@ -484,9 +484,9 @@
 		]);
 	});
 	
-	test( "Listview will create when inside a container that receives an 'enhance' event", function(){
+	test( "Listview will create when inside a container that receives a 'create' event", function(){
 		ok( !$("#enhancetest").appendTo(".ui-page-active").find(".ui-listview").length, "did not have enhancements applied" );
-		ok( $("#enhancetest").trigger("enhance").find(".ui-listview").length, "enhancements applied" );
+		ok( $("#enhancetest").trigger("create").find(".ui-listview").length, "enhancements applied" );
 	});
 
 

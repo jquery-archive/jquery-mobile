@@ -119,9 +119,9 @@
 	});
 
 
-	test( "controlgroups will create when inside a container that receives an 'enhance' event", function(){
+	test( "controlgroups will create when inside a container that receives a 'create' event", function(){
 		ok( !$("#enhancetest").appendTo(".ui-page-active").find(".ui-controlgroup").length, "did not have enhancements applied" );
-		ok( $("#enhancetest").trigger("enhance").find(".ui-controlgroup").length, "enhancements applied" );
+		ok( $("#enhancetest").trigger("create").find(".ui-controlgroup").length, "enhancements applied" );
 	});
 
 
