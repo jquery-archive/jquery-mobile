@@ -285,6 +285,7 @@
 						back = i < urlHistory.activeIndex;
 						forward = !back;
 						newActiveIndex = i;
+						return false;
 					}
 				});
 
