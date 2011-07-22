@@ -46,7 +46,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 				.buttonMarkup({
 					shadow: !collapsibleParent.length,
 					corners: false,
-					iconPos: "left",
+					iconpos: $el.jqmData("iconpos") || "left",
 					icon: "plus",
 					theme: o.theme
 				})
@@ -55,7 +55,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 					.buttonMarkup({
 						shadow: true,
 						corners: true,
-						iconPos: "notext",
+						iconpos: "notext",
 						icon: "plus",
 						theme: o.iconTheme
 					});
