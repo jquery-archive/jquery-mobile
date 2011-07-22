@@ -34,6 +34,10 @@ if ( $.cleanData ) {
 	};
 }
 
+if( !! $.widget ) {
+	return;
+}
+
 $.widget = function( name, base, prototype ) {
 	var namespace = name.split( "." )[ 0 ],
 		fullName;
