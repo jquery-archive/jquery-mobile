@@ -93,7 +93,7 @@
 			$.mobile.firstPage = $pages.first();
 
 			//define page container
-			$.mobile.pageContainer = $pages.first().parent().addClass( "ui-mobile-viewport" );
+			$.mobile.pageContainer = ($.mobile.pageContainer || $pages.first().parent()).addClass( "ui-mobile-viewport" );
 
 			//cue page loading message
 			$.mobile.showPageLoadingMsg();
