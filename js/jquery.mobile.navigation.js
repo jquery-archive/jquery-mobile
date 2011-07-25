@@ -701,6 +701,14 @@
 					if ( absUrl.indexOf( "&" + $.mobile.subPageUrlKey ) > -1 ) {
 						page = settings.pageContainer.children( ":jqmData(url='" + dataUrl + "')" );
 					}
+					
+					//bind pageHide to removePage after it's hidden, if the page options specify to do so
+					if( !page.jqmData("page").options.ajaxDomCaching ){
+						page
+							.bind( "pagehide.remove", function(){
+								$(this).remove();
+							});
+					}
 
 					// Remove loading message.
 					if ( settings.showLoadMsg ) {

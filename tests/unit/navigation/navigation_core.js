@@ -23,6 +23,26 @@
 		}
 	});
 	
+	asyncTest( "External page is removed from the DOM after pagehide", function(){
+
+
+		$( "#external-test" )
+			.live( "pageshow", function(){
+				setTimeout(function(){
+					window.history.back();
+				}, 500):
+			})
+			.live( "pagehide", function(){
+				setTimeout(function(){
+					same( $( "#external-test" ).length, 0 );
+					start();
+				}, 500):	
+			})
+
+		$.mobile.changePage( "external.html" );
+
+	});
+	
 	
 
 	asyncTest( "forms with data attribute ajax set to false will not call changePage", function(){

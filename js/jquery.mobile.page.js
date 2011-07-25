@@ -9,7 +9,8 @@
 
 $.widget( "mobile.page", $.mobile.widget, {
 	options: {
-		theme: "c"
+		theme: "c",
+		ajaxDomCaching: false
 	},
 
 	_create: function() {
