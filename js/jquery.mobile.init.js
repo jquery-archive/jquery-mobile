@@ -125,7 +125,7 @@
 	
 		//dom-ready inits
 		if( $.mobile.autoInitializePage ){
-			$( $.mobile.initializePage );
+			$.mobile.initializePage();
 		}
 		
 		//window load event
