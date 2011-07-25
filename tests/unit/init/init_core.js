@@ -213,14 +213,53 @@
 		});
 
 		
-		asyncTest( "page element is generated when not present in ajax'd markup", function(){
-			expect( 1 );
-			$.mobile.changePage( "nopage.html" );
+
+		// NOTE: the next two tests work on timeouts that assume a page will be created within 2 seconds
+		// it'd be great to get these using a more reliable callback or event
+		
+		asyncTest( "page does auto-initialize at domready when autoinitialize option is true (default) ", function(){
 			
-			$( ":jqmData(url$='nopage.html')" ).live( "pagecreate", function(){
-					ok(true, "page was created from dynamically loaded HTML that contained no page div" );
-					start();
-			} );
+			$( "<div />", { "data-nstest-role": "page", "id": "autoinit-on" } ).prependTo( "body" )
+			
+			$(document).one("mobileinit", function(){
+				$.mobile.autoInitializePage = true;
+			});
+			
+			location.hash = "";
+			
+			reloadCoreNSandInit();
+			
+			setTimeout(function(){
+				same( $( "#autoinit-on.ui-page" ).length, 1 );
+				
+				start();
+			}, 2000);
+		});
+		
+		
+		asyncTest( "page does not initialize at domready when autoinitialize option is false ", function(){
+			$(document).one("mobileinit", function(){
+				$.mobile.autoInitializePage = false;
+			});
+			
+			$( "<div />", { "data-nstest-role": "page", "id": "autoinit-off" } ).prependTo( "body" )
+			
+			location.hash = "";
+			
+			
+			reloadCoreNSandInit();
+			
+			setTimeout(function(){
+				same( $( "#autoinit-off.ui-page" ).length, 0 );
+				
+				$(document).bind("mobileinit", function(){
+					$.mobile.autoInitializePage = true;
+				});
+
+				reloadCoreNSandInit();
+				
+				start();
+			}, 2000);
 		});
 		
 		
