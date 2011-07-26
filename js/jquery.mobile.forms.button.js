@@ -8,8 +8,10 @@
 (function( $, undefined ) {
 
 //auto self-init widgets
+var initSelector = "button, [type='button'], [type='submit'], [type='reset'], [type='image']";
+
 $( document ).bind( "pagecreate create", function( e ){
-	$( "button, [type='button'], [type='submit'], [type='reset'], [type='image']", e.target )
+	$( initSelector, e.target )
 		.not( ":jqmData(role='none'), :jqmData(role='nojs')" )
 		.button();
 });
@@ -22,7 +24,8 @@ $.widget( "mobile.button", $.mobile.widget, {
 		inline: null,
 		corners: true,
 		shadow: true,
-		iconshadow: true
+		iconshadow: true,
+		initSelector: initSelector
 	},
 	_create: function() {
 		var $el = this.element,

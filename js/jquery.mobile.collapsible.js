@@ -7,8 +7,10 @@
 (function( $, undefined ) {
 
 //auto self-init widgets
+var initSelector = ":jqmData(role='collapsible')";
+
 $( document ).bind( "pagecreate create", function( e ){
-	$( ":jqmData(role='collapsible')", e.target ).collapsible();
+	$( initSelector, e.target ).collapsible();
 });
 
 $.widget( "mobile.collapsible", $.mobile.widget, {
@@ -18,7 +20,8 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 		collapsed: false,
 		heading: ">:header,>legend",
 		theme: null,
-		iconTheme: "d"
+		iconTheme: "d",
+		initSelector: initSelector
 	},
 	_create: function() {
 

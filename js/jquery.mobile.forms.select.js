@@ -8,8 +8,10 @@
 (function( $, undefined ) {
 
 //auto self-init widgets
+var initSelector = "select:not(:jqmData(role='slider'))";
+
 $( document ).bind( "pagecreate create", function( e ){
-	$( "select:not(:jqmData(role='slider'))", e.target )
+	$( initSelector, e.target )
 		.not( ":jqmData(role='none'), :jqmData(role='nojs')" )
 		.selectmenu();
 });
@@ -28,7 +30,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		overlayTheme: "a",
 		hidePlaceholderMenuItems: true,
 		closeText: "Close",
-		nativeMenu: true
+		nativeMenu: true,
+		initSelector: initSelector
 	},
 	_create: function() {
 

@@ -7,8 +7,10 @@
 (function( $, undefined ) {
 
 //auto self-init widgets
+var initSelector = ":jqmData(role='controlgroup')";
+
 $( document ).bind( "pagecreate create", function( e ){
-	$( ":jqmData(role='controlgroup')", e.target ).controlgroup({ excludeInvisible: false });
+	$( initSelector, e.target ).controlgroup({ excludeInvisible: false });
 });
 
 $.fn.controlgroup = function( options ) {

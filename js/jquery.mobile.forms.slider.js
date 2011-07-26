@@ -8,10 +8,12 @@
 ( function( $, undefined ) {
 
 //auto self-init widgets
+var initSelector = "input[type='range'], :jqmData(type='range'), :jqmData(role='slider')";
+
 $( document ).bind( "pagecreate create", function( e ){
 
 	//now self-init
-	$( "input[type='range'], :jqmData(type='range'), :jqmData(role='slider')", e.target )
+	$( initSelector, e.target )
 		.not( ":jqmData(role='none'), :jqmData(role='nojs')" )
 		.slider();
 
@@ -21,7 +23,8 @@ $.widget( "mobile.slider", $.mobile.widget, {
 	options: {
 		theme: null,
 		trackTheme: null,
-		disabled: false
+		disabled: false,
+		initSelector: initSelector
 	},
 
 	_create: function() {

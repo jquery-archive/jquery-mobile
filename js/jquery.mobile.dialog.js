@@ -7,14 +7,17 @@
 (function( $, window, undefined ) {
 
 //auto self-init widgets
-$( ":jqmData(role='dialog')" ).live( "pagecreate", function(){
+var initSelector = ":jqmData(role='dialog')";
+
+$( initSelector ).live( "pagecreate", function(){
 	$( this ).dialog();
 });
 
 $.widget( "mobile.dialog", $.mobile.widget, {
 	options: {
 		closeBtnText 	: "Close",
-		theme			: "a"
+		theme			: "a",
+		initSelector	: initSelector
 	},
 	_create: function() {
 		var $el = this.element,

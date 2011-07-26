@@ -8,15 +8,18 @@
 (function( $, undefined ) {
 
 //auto self-init widgets
+var initSelector = "input[type='text'], input[type='search'], :jqmData(type='search'), input[type='number'], :jqmData(type='number'), input[type='password'], input[type='email'], input[type='url'], input[type='tel'], textarea";
+
 $( document ).bind( "pagecreate create", function( e ){
-	$( "input[type='text'], input[type='search'], :jqmData(type='search'), input[type='number'], :jqmData(type='number'), input[type='password'], input[type='email'], input[type='url'], input[type='tel'], textarea", e.target )
+	$( initSelector, e.target )
 		.not( ":jqmData(role='none'), :jqmData(role='nojs')" )
 		.textinput();
 });
 
 $.widget( "mobile.textinput", $.mobile.widget, {
 	options: {
-		theme: null
+		theme: null,
+		initSelector: initSelector
 	},
 
 	_create: function() {

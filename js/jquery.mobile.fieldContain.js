@@ -8,8 +8,10 @@
 (function( $, undefined ) {
 
 //auto self-init widgets
+var initSelector = ":jqmData(role='fieldcontain')";
+
 $( document ).bind( "pagecreate create", function( e ){
-	$( ":jqmData(role='fieldcontain')", e.target ).fieldcontain();
+	$( initSelector, e.target ).fieldcontain();
 });
 
 $.fn.fieldcontain = function( options ) {

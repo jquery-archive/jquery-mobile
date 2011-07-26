@@ -8,9 +8,11 @@
 (function( $, undefined ) {
 	
 //auto self-init widgets
+var initSelector = ":jqmData(position='fixed')";
+
 $( document ).bind( "pagecreate create", function( e ){
 	
-	if( $( ":jqmData(position='fixed')", e.target ).length ){
+	if( $( initSelector, e.target ).length ){
 		$( e.target ).each(function(){
 			
 			if ( !$.support.scrollTop ) {
