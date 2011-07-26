@@ -649,13 +649,9 @@
                         $.mobile.hidePageLoadingMsg();
                     }
                     deferred.resolve(absUrl, options, page, dupCachedPage);
-                    //Event trigger before the page is successfully loaded and .ui-page-active is afected to page
-                    page.bind("DOMAttrModified onpropertychange", function(event){
-                        if ('attrChange' in event || 'propertyName' in event) { // Firefox, Opera, Internet Explorer from version 9
-                            if (event.attrName == "class" && event.newValue.indexOf("ui-page-active") != -1) {
-                                $(window.document).trigger("afterPageLoaded", page);
-                            }
-                        }
+                    //Event trigger before the page is successfully loaded but not active yet
+                    deferred.done(function(){
+                        $(window.document).trigger("afterPageLoaded", page);
                     });
                 },
                 error: function(){
