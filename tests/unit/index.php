@@ -13,7 +13,7 @@
   </div>
   <!-- under normal circumstances inline styles would be a poor choice, but in this case
        I think an entire link and stylesheet is a waste -->
-	<iframe data-src="../../tests/unit/{{testdir}}" name="testFrame" id="testFrame" width="800px" height="100%" style="float: left; border: 0px; height: 100%;" scrolling="no">
+	<iframe data-src="../../tests/unit/{{testdir}}/index.html" name="testFrame" id="testFrame" width="800px" height="100%" style="float: left; border: 0px; height: 100%; ">
 	</iframe>
 	<script src="../../js/jquery.js"></script>
 	<script src="../../external/qunit.js"></script>

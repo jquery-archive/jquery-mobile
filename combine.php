@@ -13,5 +13,4 @@ foreach ( $elements as $file ) {
 }
 
 header('Content-Type: ' . $type);
-header('Content-Length: ' . strlen($contents));
 echo $contents;
