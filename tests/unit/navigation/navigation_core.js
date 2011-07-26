@@ -24,21 +24,24 @@
 		}
 	});
 
-	asyncTest( "External page is removed from the DOM after pagehide", function(){
+	asyncTest( "external page is removed from the DOM after pagehide", function(){
+		$.testHelper.pageSequence([
+			function(){
+				$.mobile.changePage( "external.html" );
+			},
 
-		$( "#external-test" )
-			.live( "pageshow", function(){
+			// page is pulled and displayed in the dom
+			function(){
+				same( $( "#external-test" ).length, 1 );
 				window.history.back();
-			})
-			.live( "pagehide", function(){
-				setTimeout(function(){
-					same( $( "#external-test" ).length, 0 );
-					start();
-				}, 500);
-			});
+			},
 
-		$.mobile.changePage( "external.html" );
-
+			// external-test is *NOT* cached in the dom after transitioning away
+			function(){
+				same( $( "#external-test" ).length, 0 );
+				start();
+			}
+		]);
 	});
 
 	asyncTest( "forms with data attribute ajax set to false will not call changePage", function(){
