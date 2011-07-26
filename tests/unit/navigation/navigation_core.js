@@ -5,6 +5,7 @@
 	var changePageFn = $.mobile.changePage,
 			originalTitle = document.title,
 			siteDirectory = location.pathname.replace(/[^/]+$/, "");
+
 	module('jquery.mobile.navigation.js', {
 		setup: function(){
 			$.mobile.changePage = changePageFn;
@@ -22,10 +23,9 @@
 			$.mobile.urlHistory.activeIndex = 0;
 		}
 	});
-	
+
 	asyncTest( "External page is removed from the DOM after pagehide", function(){
 
-		
 		$( "#external-test" )
 			.live( "pageshow", function(){
 				window.history.back();
@@ -35,10 +35,10 @@
 					same( $( "#external-test" ).length, 0 );
 					start();
 				}, 500);
-			})
-		
+			});
+
 		$.mobile.changePage( "external.html" );
-		
+
 	});
 
 	asyncTest( "forms with data attribute ajax set to false will not call changePage", function(){
