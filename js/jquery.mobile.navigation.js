@@ -703,7 +703,7 @@
 					}
 					
 					//bind pageHide to removePage after it's hidden, if the page options specify to do so
-					if( !page.jqmData("page").options.ajaxDomCaching ){
+					if( !page.data("page").options.ajaxDomCaching ){
 						page
 							.bind( "pagehide.remove", function(){
 								$(this).remove();
