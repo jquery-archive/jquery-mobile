@@ -1,5 +1,5 @@
 Vagrant::Config.run do |config|
-  config.vm.box = "base"
+  config.vm.box = "lucid64"
   config.vm.network("33.33.33.10")
   config.vm.forward_port("web", 80, 4567)
   config.vm.boot_mode = :gui
