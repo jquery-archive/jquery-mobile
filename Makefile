@@ -46,6 +46,7 @@ JSFILES = 	  js/jquery.ui.widget.js \
 			  js/jquery.mobile.core.js \
 			  js/jquery.mobile.navigation.js \
 			  js/jquery.mobile.transition.js \
+			  js/jquery.mobile.degradeInputs.js \
 			  js/jquery.mobile.dialog.js \
 			  js/jquery.mobile.page.sections.js \
 			  js/jquery.mobile.collapsible.js \

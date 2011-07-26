@@ -10,17 +10,10 @@
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ){
 
-	var nativeSel = ":jqmData(role='none'), :jqmData(role='nojs')";
-
-	//degrade range back to number type
-	$( "input[type='range']:not("+ nativeSel +")", e.target ).each(function(){
-		$(this).replaceWith(
-			$( "<div>" ).html( $(this).clone() ).html()
-				.replace( /\s+type=["']?\w+['"]?/, " type=\"number\" data-" + $.mobile.ns + "role=\"slider\" " ) );
-	});				
-
 	//now self-init
-	$( ":jqmData(role='slider'):not("+ nativeSel +")", e.target ).slider();
+	$( "input[type='range'], :jqmData(type='range'), :jqmData(role='slider')", e.target )
+		.not( ":jqmData(role='none'), :jqmData(role='nojs')" )
+		.slider();
 
 });
 
