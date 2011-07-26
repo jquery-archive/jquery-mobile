@@ -8,7 +8,7 @@
 (function( $, undefined ) {
 	
 //auto self-init widgets
-$( document ).bind( "pagecreate enhance", function( e ){
+$( document ).bind( "pagecreate create", function( e ){
 	
 	if( $( ":jqmData(position='fixed')", e.target ).length ){
 		$( e.target ).each(function(){

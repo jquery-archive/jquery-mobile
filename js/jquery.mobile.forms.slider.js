@@ -8,7 +8,7 @@
 ( function( $, undefined ) {
 
 //auto self-init widgets
-$( document ).bind( "pagecreate enhance", function( e ){
+$( document ).bind( "pagecreate create", function( e ){
 
 	var nativeSel = ":jqmData(role='none'), :jqmData(role='nojs')";
 

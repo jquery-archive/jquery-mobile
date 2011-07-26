@@ -7,7 +7,7 @@
 
 (function( $, undefined ) {
 
-$( document ).bind( "pagecreate enhance", function( e ){
+$( document ).bind( "pagecreate create", function( e ){
 	
 	//links within content areas
 	$( e.target )
