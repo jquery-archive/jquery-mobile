@@ -44,6 +44,26 @@
 		]);
 	});
 
+	asyncTest( "external page is cached in the DOM after pagehide", function(){
+		$.testHelper.pageSequence([
+			function(){
+				$.mobile.changePage( "cached-external.html" );
+			},
+
+			// page is pulled and displayed in the dom
+			function(){
+				same( $( "#external-test-cached" ).length, 1 );
+				window.history.back();
+			},
+
+			// external test page is cached in the dom after transitioning away
+			function(){
+				same( $( "#external-test-cached" ).length, 1 );
+				start();
+			}
+		]);
+	});
+
 	asyncTest( "forms with data attribute ajax set to false will not call changePage", function(){
 		var called = false;
 		var newChangePage = function(){
