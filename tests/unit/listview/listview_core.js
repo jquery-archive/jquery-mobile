@@ -488,12 +488,4 @@
 		ok( !$("#enhancetest").appendTo(".ui-page-active").find(".ui-listview").length, "did not have enhancements applied" );
 		ok( $("#enhancetest").trigger("create").find(".ui-listview").length, "enhancements applied" );
 	});
-
-	asyncTest( "nested pages are removed from the dom by default", function(){
-		$.testHelper.pageSequence([
-			function(){
-
-			}
-		]);
-	});
 })(jQuery);
