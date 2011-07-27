@@ -915,7 +915,7 @@
 		// Make sure we have a transition defined.
 		settings.transition = settings.transition
 			|| ( ( historyDir && !activeIsInitialPage ) ? active.transition : undefined )
-			|| ( settings.role === "dialog" ? $.mobile.defaultDialogTransition : $.mobile.defaultPageTransition );
+			|| ( isDialog ? $.mobile.defaultDialogTransition : $.mobile.defaultPageTransition );
 
 		// If we're navigating back in the URL history, set reverse accordingly.
 		settings.reverse = settings.reverse || historyDir < 0;
