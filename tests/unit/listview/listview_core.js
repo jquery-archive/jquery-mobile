@@ -83,7 +83,7 @@
 
 			function(){
 				var $new_page = $(':jqmData(url="nested-list-test&ui-page=0-0")');
-	
+
 				ok($new_page.hasClass('ui-page-active'), 'Makes the nested page the active page.');
 				ok($('.ui-listview', $new_page).find(":contains('Rhumba of rattlesnakes')").length == 1, "The current page should have the proper text in the list.");
 				ok($('.ui-listview', $new_page).find(":contains('Shoal of Bass')").length == 1, "The current page should have the proper text in the list.");
@@ -165,11 +165,11 @@
 	asyncTest( "takes us back to the numbered list when the back button is clicked", function() {
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage('#numbered-list-test')
+				$.testHelper.openPage('#numbered-list-test');
 			},
 
 			function(){
-				$.testHelper.openPage('#numbered-list-results')
+				$.testHelper.openPage('#numbered-list-results');
 			},
 
 			function(){
@@ -434,7 +434,7 @@
 			}
 		]);
 	});
-    
+
 	module("Programmatic list items manipulation");
 
 	asyncTest("Removing list items", 4, function() {
@@ -453,7 +453,7 @@
 
 				ul.find("li").last().remove();
 				equal(ul.find("li").length, 2, "There should be only 2 list items left");
-				
+
 				ul.listview('refresh');
 				ok(ul.find("li").last().hasClass("ui-corner-bottom"), "Last list item should have class ui-corner-bottom");
 				start();
@@ -471,24 +471,29 @@
 
 			function() {
 				var ul = $('#corner-rounded-test ul');
-				
+
 				for( var t = 0; t<5; t++){
 					ul.append("<li>Item " + t + "</li>");
-					ul.listview('refresh');					
+					ul.listview('refresh');
 					ok(ul.find("li").first().hasClass("ui-corner-top"), "First list item should have class ui-corner-top in list with " + ul.find("li").length + " item(s)");
 					ok(ul.find("li").last().hasClass("ui-corner-bottom"), "Last list item should have class ui-corner-bottom in list with " + ul.find("li").length + " item(s)");
 				}
-				
+
 				start();
 			}
 		]);
 	});
-	
+
 	test( "Listview will create when inside a container that receives a 'create' event", function(){
 		ok( !$("#enhancetest").appendTo(".ui-page-active").find(".ui-listview").length, "did not have enhancements applied" );
 		ok( $("#enhancetest").trigger("create").find(".ui-listview").length, "enhancements applied" );
 	});
 
+	asyncTest( "nested pages are removed from the dom by default", function(){
+		$.testHelper.pageSequence([
+			function(){
 
-
+			}
+		]);
+	});
 })(jQuery);
