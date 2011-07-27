@@ -7,15 +7,6 @@
 
 (function( $, undefined ) {
 
-//auto self-init widgets
-var initSelector = "select:not(:jqmData(role='slider'))";
-
-$( document ).bind( "pagecreate create", function( e ){
-	$( initSelector, e.target )
-		.not( ":jqmData(role='none'), :jqmData(role='nojs')" )
-		.selectmenu();
-});
-
 $.widget( "mobile.selectmenu", $.mobile.widget, {
 	options: {
 		theme: null,
@@ -31,7 +22,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		hidePlaceholderMenuItems: true,
 		closeText: "Close",
 		nativeMenu: true,
-		initSelector: initSelector
+		initSelector: "select:not(:jqmData(role='slider'))"
 	},
 	_create: function() {
 
@@ -611,5 +602,13 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		return this._setOption( "disabled", false );
 	}
 });
+
+//auto self-init widgets
+$( document ).bind( "pagecreate create", function( e ){
+	$( $.mobile.selectmenu.prototype.options.initSelector, e.target )
+		.not( ":jqmData(role='none'), :jqmData(role='nojs')" )
+		.selectmenu();
+});
+
 })( jQuery );
 

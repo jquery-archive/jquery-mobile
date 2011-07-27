@@ -7,15 +7,6 @@
 
 (function( $, undefined ) {
 
-//auto self-init widgets
-var initSelector = "button, [type='button'], [type='submit'], [type='reset'], [type='image']";
-
-$( document ).bind( "pagecreate create", function( e ){
-	$( initSelector, e.target )
-		.not( ":jqmData(role='none'), :jqmData(role='nojs')" )
-		.button();
-});
-
 $.widget( "mobile.button", $.mobile.widget, {
 	options: {
 		theme: null,
@@ -25,7 +16,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 		corners: true,
 		shadow: true,
 		iconshadow: true,
-		initSelector: initSelector
+		initSelector: "button, [type='button'], [type='submit'], [type='reset'], [type='image']"
 	},
 	_create: function() {
 		var $el = this.element,
@@ -91,4 +82,12 @@ $.widget( "mobile.button", $.mobile.widget, {
 		}
 	}
 });
+
+//auto self-init widgets
+$( document ).bind( "pagecreate create", function( e ){
+	$( $.mobile.button.prototype.options.initSelector, e.target )
+		.not( ":jqmData(role='none'), :jqmData(role='nojs')" )
+		.button();
+});
+
 })( jQuery );
