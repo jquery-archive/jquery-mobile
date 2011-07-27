@@ -116,7 +116,9 @@
 	//then check what the scroll top is. Android will report 0... others 1
 	//note that this initial scroll won't hide the address bar. It's just for the check.
 	$(function(){
-		window.scrollTo( 0, 1 );
+    //don't scroll if the user has already scrolled the device, particularly visible when jQM
+    //being used on a desktop browser
+		if (!window.pageYOffset) window.scrollTo( 0, 1 );
 	
 		//if defaultHomeScroll hasn't been set yet, see if scrollTop is 1
 		//it should be 1 in most browsers, but android treats 1 as 0 (for hiding addr bar)
