@@ -223,7 +223,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		parentListId = parentListId || ++listCountPerPage[ parentId ];
 
 		$( parentList.find( "li>ul, li>ol" ).toArray().reverse() ).each(function( i ) {
-			var list = $( this ),
+			var self = this,
+				list = $( this ),
 				listId = list.attr( "id" ) || parentListId + "-" + i,
 				parent = list.parent(),
 				nodeEls = $( list.prevAll().toArray().reverse() ),
@@ -268,7 +269,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 					if( ui.nextPage ){
 						npURL = nextPage.jqmData( "url" );
 						if( npURL.indexOf( parentUrl + "&" + $.mobile.subPageUrlKey ) !== 0 ){
-							$( ":jqmData(url^='"+  parentUrl + "&" + $.mobile.subPageUrlKey +"')").remove();
+							self.childPages().remove();
 							parentPage.remove();
 						}
 					}
