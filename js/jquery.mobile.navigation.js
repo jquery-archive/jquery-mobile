@@ -874,7 +874,11 @@
 		// XXX_jblas: We need to stop crawling the entire document to kill focus. Instead,
 		//            we should be tracking focus with a live() handler so we already have
 		//            the element in hand at this point.
-		$( document.activeElement || "" ).add( "input:focus, textarea:focus, select:focus" ).blur();
+		// Wrap this in a try/catch block since IE9 throw "Unspecified error" if document.activeElement
+		// is undefined when we are in an IFrame.
+		try {
+			$( document.activeElement || "" ).add( "input:focus, textarea:focus, select:focus" ).blur();
+		} catch(e) {}
 
 		// If we're displaying the page as a dialog, we don't want the url
 		// for the dialog content to be used in the hash. Instead, we want
