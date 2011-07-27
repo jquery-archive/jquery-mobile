@@ -11,7 +11,7 @@
 var initSelector = "input[type='checkbox'],input[type='radio']";
 
 $( document ).bind( "pagecreate create", function( e ){
-	$( $.mobile.checkboxradio.prototype.options.initSelector, e.target )
+	$( initSelector, e.target )
 		.not( ":jqmData(role='none'), :jqmData(role='nojs')" )
 		.checkboxradio();
 });
