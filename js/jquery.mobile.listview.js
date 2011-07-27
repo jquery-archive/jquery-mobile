@@ -277,6 +277,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		}
 	},
 
+	// TODO sort out a better way to track sub pages of the listview this is brittle
 	childPages: function(){
 		var parentUrl = this.parentPage.jqmData( "url" );
 
