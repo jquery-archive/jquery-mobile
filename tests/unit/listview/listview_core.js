@@ -491,21 +491,44 @@
 
 	asyncTest( "nested pages are removed from the dom by default", function(){
     var findNestedPages = function(){
-      return $("#cached-nested-list #topmost").listview('childPages');
+      return $( "#cached-nested-list #topmost" ).listview( 'childPages' );
     };
 
 		$.testHelper.pageSequence([
 			function(){
 				//reset for relative url refs
-				$.testHelper.openPage( "#" + location.pathname);
+				$.testHelper.openPage( "#" + location.pathname );
 			},
 
 			function(){
-				$.testHelper.openPage("#cache-tests/nested.html");
+				$.testHelper.openPage( "#cache-tests/nested.html" );
 			},
 
 			function(){
-				ok(findNestedPages().length > 0, "verify that there are nested pages");
+				ok( findNestedPages().length > 0, "verify that there are nested pages" );
+				$.testHelper.openPage( "#" + location.pathname + "cache-tests/clear.html" );
+			},
+
+			function(){
+				same( findNestedPages().length, 0 );
+				start();
+			}
+		]);
+	});
+
+	asyncTest( "parent page is not removed when visiting a sub page", function(){
+		$.testHelper.pageSequence([
+			function(){
+				//reset for relative url refs
+				$.testHelper.openPage( "#" + location.pathname );
+			},
+
+			function(){
+				$.testHelper.openPage( "#cache-tests/nested.html" );
+			},
+
+			function(){
+				same( ("#cached-nested-list").length, 1 );
 				$.testHelper.openPage("#" + location.pathname + "cache-tests/clear.html");
 			},
 
@@ -515,4 +538,5 @@
 			}
 		]);
 	});
+
 })(jQuery);
