@@ -65,11 +65,9 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		
 		if ( which === "top" ) {
 			li.removeClass( top );
-		}
-		else if ( which === "bottom"  ) {
+		} else if ( which === "bottom" ) {
 			li.removeClass( bot );
-		}
-		else {
+		} else {
 			li.removeClass( top + " " + bot );
 		}
 	},
