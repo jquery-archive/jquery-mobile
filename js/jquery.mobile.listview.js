@@ -66,6 +66,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 	},
 
 	refresh: function( create ) {
+		this.parentPage = this.element.closest( ".ui-page" );
 		this._createSubPages();
 
 		var o = this.options,
@@ -273,6 +274,12 @@ $.widget( "mobile.listview", $.mobile.widget, {
 					}
 				});
 		}
+	},
+
+	childPages: function(){
+		var parentUrl = this.parentPage.jqmData( "url" );
+
+		return $( ":jqmData(url^='"+  parentUrl + "&" + $.mobile.subPageUrlKey +"')");
 	}
 });
 

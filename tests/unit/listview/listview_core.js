@@ -488,4 +488,31 @@
 		ok( !$("#enhancetest").appendTo(".ui-page-active").find(".ui-listview").length, "did not have enhancements applied" );
 		ok( $("#enhancetest").trigger("create").find(".ui-listview").length, "enhancements applied" );
 	});
+
+	asyncTest( "nested pages are removed from the dom by default", function(){
+    var findNestedPages = function(){
+      return $("#cached-nested-list #topmost").listview('childPages');
+    };
+
+		$.testHelper.pageSequence([
+			function(){
+				//reset for relative url refs
+				$.testHelper.openPage( "#" + location.pathname);
+			},
+
+			function(){
+				$.testHelper.openPage("#cache-tests/nested.html");
+			},
+
+			function(){
+				ok(findNestedPages().length > 0, "verify that there are nested pages");
+				$.testHelper.openPage("#" + location.pathname + "cache-tests/clear.html");
+			},
+
+			function(){
+				same(findNestedPages().length, 0);
+				start();
+			}
+		]);
+	});
 })(jQuery);
