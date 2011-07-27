@@ -649,7 +649,7 @@
 						url = fileUrl = path.getFilePath( RegExp.$1 );
 					}
 					else{
-						
+
 					}
 
 					if ( base ) {
@@ -659,7 +659,7 @@
 					//workaround to allow scripts to execute when included in page divs
 					all.get( 0 ).innerHTML = html;
 					page = all.find( ":jqmData(role='page'), :jqmData(role='dialog')" ).first();
-					
+
 					//if page elem couldn't be found, create one and insert the body element's contents
 					if( !page.length ){
 						page = $( "<div data-" + $.mobile.ns + "role='page'>" + html.split( /<\/?body[^>]*>/gmi )[1] + "</div>" );
@@ -693,6 +693,13 @@
 						.attr( "data-" + $.mobile.ns + "url", path.convertUrlToDataUrl( fileUrl ) )
 						.appendTo( settings.pageContainer );
 
+					// when dom caching is not enabled bind to remove the page on hide
+					if( !page.jqmData("ajaxDomCaching") ){
+						page.bind( "pagehide.remove", function(){
+							$(this).remove();
+						});
+					}
+
 					enhancePage( page, settings.role );
 
 					// Enhancing the page may result in new dialogs/sub pages being inserted
@@ -701,14 +708,8 @@
 					if ( absUrl.indexOf( "&" + $.mobile.subPageUrlKey ) > -1 ) {
 						page = settings.pageContainer.children( ":jqmData(url='" + dataUrl + "')" );
 					}
-					
+
 					//bind pageHide to removePage after it's hidden, if the page options specify to do so
-					if( !page.data("page").options.ajaxDomCaching ){
-						page
-							.bind( "pagehide.remove", function(){
-								$(this).remove();
-							});
-					}
 
 					// Remove loading message.
 					if ( settings.showLoadMsg ) {
@@ -1142,7 +1143,7 @@
 			$.mobile.changePage( href, { transition: transition, reverse: reverse, role: role } );
 			event.preventDefault();
 		});
-		
+
 		//prefetch pages when anchors with data-prefetch are encountered
 		$( ".ui-page" ).live( "pageshow.prefetch", function(){
 			var urls = [];
