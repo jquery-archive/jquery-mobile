@@ -42,7 +42,13 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			// select first in this case
 			selectedIndex = select[ 0 ].selectedIndex == -1 ? 0 : select[ 0 ].selectedIndex,
 
-			button = 	$( "<div/>" )
+			button = ( self.options.nativeMenu ? $( "<div/>" ) : $( "<a>", {
+					"href": "#",
+					"role": "button",
+					"id": buttonId,
+					"aria-haspopup": "true",
+					"aria-owns": menuId
+				}) )
 				.text( $( select[ 0 ].options.item( selectedIndex ) ).text() )
 				.insertBefore( select )
 				.buttonMarkup({
@@ -66,6 +72,70 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			select.addClass( "ui-select-nativeonly" );
 		}
 
+		//vars for non-native menus
+		if ( !o.nativeMenu ) {
+			var options = select.find("option"),
+
+				buttonId = selectID + "-button",
+
+				menuId = selectID + "-menu",
+
+				thisPage = select.closest( ".ui-page" ),
+
+				//button theme
+				theme = /ui-btn-up-([a-z])/.exec( button.attr( "class" ) )[1],
+
+				menuPage = $( "<div data-" + $.mobile.ns + "role='dialog' data-" +$.mobile.ns + "theme='"+ o.menuPageTheme +"'>" +
+							"<div data-" + $.mobile.ns + "role='header'>" +
+								"<div class='ui-title'>" + label.text() + "</div>"+
+							"</div>"+
+							"<div data-" + $.mobile.ns + "role='content'></div>"+
+						"</div>" )
+						.appendTo( $.mobile.pageContainer )
+						.page(),
+
+				menuPageContent = menuPage.find( ".ui-content" ),
+
+				menuPageClose = menuPage.find( ".ui-header a" ),
+
+				screen = $( "<div>", {"class": "ui-selectmenu-screen ui-screen-hidden"})
+							.appendTo( thisPage ),
+
+				listbox = $("<div>", { "class": "ui-selectmenu ui-selectmenu-hidden ui-overlay-shadow ui-corner-all ui-body-" + o.overlayTheme + " " + $.mobile.defaultDialogTransition })
+						.insertAfter(screen),
+
+				list = $( "<ul>", {
+						"class": "ui-selectmenu-list",
+						"id": menuId,
+						"role": "listbox",
+						"aria-labelledby": buttonId
+					})
+					.attr( "data-" + $.mobile.ns + "theme", theme )
+					.appendTo( listbox ),
+
+				header = $( "<div>", {
+						"class": "ui-header ui-bar-" + theme
+					})
+					.prependTo( listbox ),
+
+				headerTitle = $( "<h1>", {
+						"class": "ui-title"
+					})
+					.appendTo( header ),
+
+				headerClose = $( "<a>", {
+						"text": o.closeText,
+						"href": "#",
+						"class": "ui-btn-left"
+					})
+					.attr( "data-" + $.mobile.ns + "iconpos", "notext" )
+					.attr( "data-" + $.mobile.ns + "icon", "delete" )
+					.appendTo( header )
+					.buttonMarkup(),
+
+				menuType;
+		} // End non native vars
+
 		// Add counter for multi selects
 		if ( isMultiple ) {
 			self.buttonCount = $( "<span>" )
@@ -87,9 +157,24 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		// Expose to other methods
 		$.extend( self, {
 			select: select,
+			optionElems: options,
 			selectID: selectID,
 			label: label,
-			button: button
+			button: button,
+			buttonId: buttonId,
+			menuId: menuId,
+			thisPage: thisPage,
+			button: button,
+			menuPage: menuPage,
+			menuPageContent: menuPageContent,
+			screen: screen,
+			listbox: listbox,
+			list: list,
+			menuType: menuType,
+			header: header,
+			headerClose: headerClose,
+			headerTitle: headerTitle,
+			placeholder: ""
 		});
 
 		// Support for using the native select menu with a custom button
@@ -146,18 +231,17 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				})
 				.delegate( "li:not(.ui-disabled, .ui-li-divider)", "vclick", function( event ) {
 
-					var $this = $( this ),
-						// index of option tag to be selected
-						oldIndex = select[ 0 ].selectedIndex,
-						newIndex = $this.jqmData( "option-index" ),
-						option = self.optionElems[ newIndex ];
+					// index of option tag to be selected
+					var oldIndex = select[ 0 ].selectedIndex,
+						newIndex = list.find( "li:not(.ui-li-divider)" ).index( this ),
+						option = self.optionElems.eq( newIndex )[ 0 ];
 
 					// toggle selected status on the tag for multi selects
 					option.selected = isMultiple ? !option.selected : true;
 
 					// toggle checkbox class for multiple selects
 					if ( isMultiple ) {
-						$this.find( ".ui-icon" )
+						$( this ).find( ".ui-icon" )
 							.toggleClass( "ui-icon-checkbox-on", option.selected )
 							.toggleClass( "ui-icon-checkbox-off", !option.selected );
 					}
@@ -173,7 +257,76 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					}
 
 					event.preventDefault();
-				});
+			})
+			//keyboard events for menu items
+			.keydown(function( event ) {
+				var target = $( event.target ),
+					li = target.closest( "li" ),
+					prev, next;
+
+				// switch logic based on which key was pressed
+				switch ( event.keyCode ) {
+					// up or left arrow keys
+					case 38:
+						prev = li.prev();
+
+						// if there's a previous option, focus it
+						if ( prev.length ) {
+							target
+								.blur()
+								.attr( "tabindex", "-1" );
+
+							prev.find( "a" ).first().focus();
+						}
+
+						return false;
+					break;
+
+					// down or right arrow keys
+					case 40:
+						next = li.next();
+
+						// if there's a next option, focus it
+						if ( next.length ) {
+							target
+								.blur()
+								.attr( "tabindex", "-1" );
+
+							next.find( "a" ).first().focus();
+						}
+
+						return false;
+					break;
+
+					// If enter or space is pressed, trigger click
+					case 13:
+					case 32:
+						 target.trigger( "vclick" );
+
+						 return false;
+					break;
+				}
+			});
+
+			// button refocus ensures proper height calculation
+			// by removing the inline style and ensuring page inclusion
+			self.menuPage.bind( "pagehide", function(){
+				self.list.appendTo( self.listbox );
+				self._focusButton();
+			});
+
+			// Events on "screen" overlay
+			screen.bind( "vclick", function( event ) {
+				self.close();
+			});
+
+			// Close button on small overlays
+			self.headerClose.click(function() {
+				if ( self.menuType == "overlay" ) {
+					self.close();
+					return false;
+				}
+			});
 		}
 	},
 
@@ -245,8 +398,6 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 		// Now populated, create listview
 		self.list.listview();
-=======
->>>>>>> removed the custom menu portions of the selectmenu, which will be moved to select.custom.js, which is non-functional in this commit
 	},
 
 	refresh: function( forceRebuild ) {
@@ -261,6 +412,12 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				return options.index( this );
 			}).get();
 
+		if ( !self.options.nativeMenu &&
+					( forceRebuild || select[0].options.length != self.list.find( "li" ).length ) ) {
+
+			self._buildList();
+		}
+
 		self.button.find( ".ui-btn-text" )
 			.text(function() {
 
@@ -268,9 +425,9 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					return selected.text();
 				}
 
-				return selected.map(function() {
+				return selected.length ? selected.map(function() {
 								return $( this ).text();
-							}).get().join( ", " );
+							}).get().join( ", " ) : self.placeholder;
 			});
 
 		// multiple count inside button
