@@ -489,11 +489,11 @@
 		ok( $("#enhancetest").trigger("create").find(".ui-listview").length, "enhancements applied" );
 	});
 
-	asyncTest( "nested pages are removed from the dom by default", function(){
-    var findNestedPages = function(){
-      return $( "#uncached-nested-list #topmost" ).listview( 'childPages' );
-    };
+	var findNestedPages = function(selector){
+		return $( selector + " #topmost" ).listview( 'childPages' );
+	};
 
+	asyncTest( "nested pages are removed from the dom by default", function(){
 		$.testHelper.pageSequence([
 			function(){
 				//reset for relative url refs
@@ -505,12 +505,36 @@
 			},
 
 			function(){
-				ok( findNestedPages().length > 0, "verify that there are nested pages" );
+				ok( findNestedPages( "#uncached-nested-list" ).length > 0, "verify that there are nested pages" );
 				$.testHelper.openPage( "#" + location.pathname + "cache-tests/clear.html" );
 			},
 
 			function(){
-				same( findNestedPages().length, 0 );
+				same( findNestedPages( "#uncached-nested-list" ).length, 0 );
+				start();
+			}
+		]);
+	});
+
+	asyncTest( "nested pages preserved when parent page is cached", function(){
+
+		$.testHelper.pageSequence([
+			function(){
+				//reset for relative url refs
+				$.testHelper.openPage( "#" + location.pathname );
+			},
+
+			function(){
+				$.testHelper.openPage( "#cache-tests/cached-nested.html" );
+			},
+
+			function(){
+				ok( findNestedPages( "#cached-nested-list" ).length > 0, "verify that there are nested pages" );
+				$.testHelper.openPage( "#" + location.pathname + "cache-tests/clear.html" );
+			},
+
+			function(){
+				ok( findNestedPages( "#cached-nested-list" ).length > 0, "nested pages remain" );
 				start();
 			}
 		]);
