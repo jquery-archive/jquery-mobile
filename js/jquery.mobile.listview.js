@@ -259,7 +259,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		}).listview();
 
 		//on pagehide, remove any nested pages along with the parent page, as long as they aren't active
-		if( hasSubPages && parentPage.data("page").options.ajaxDomCaching === false ){
+		if( hasSubPages && parentPage.data("page").options.domCache === false ){
 			parentPage
 				.unbind( "pagehide.remove" )
 				.bind( "pagehide.remove", function( e, ui ){

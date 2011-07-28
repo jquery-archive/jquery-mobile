@@ -694,7 +694,7 @@
 						.appendTo( settings.pageContainer );
 
 					// when dom caching is not enabled bind to remove the page on hide
-					if( !page.jqmData("ajaxDomCaching") ){
+					if( !page.jqmData("domCache") ){
 						page.bind( "pagehide.remove", function(){
 							$(this).remove();
 						});

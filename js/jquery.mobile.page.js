@@ -10,7 +10,7 @@
 $.widget( "mobile.page", $.mobile.widget, {
 	options: {
 		theme: "c",
-		ajaxDomCaching: false
+		domCache: false
 	},
 
 	_create: function() {
@@ -20,8 +20,8 @@ $.widget( "mobile.page", $.mobile.widget, {
 		if ( this._trigger( "beforeCreate" ) === false ) {
 			return;
 		}
-		
-		$elem.addClass( "ui-page ui-body-" + o.theme );	
+
+		$elem.addClass( "ui-page ui-body-" + o.theme );
 	}
 });
 
