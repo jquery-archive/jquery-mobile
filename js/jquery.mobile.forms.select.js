@@ -25,14 +25,19 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		initSelector: "select:not(:jqmData(role='slider'))"
 	},
 
-	_native: function(element){
-		var self = this;
+	_common: function(){
 		return {
+			select: this.element.wrap( "<div class='ui-select'>" )
+		};
+	},
+
+	_native: function(){
+		var self = this;
+
+		return $.extend(this._common(), {
 			typeName: 'native',
 
 			button: $( "<div/>" ),
-
-			select: self.element.wrap( "<div class='ui-select'>" ),
 
 			create: function(){
 				var self = this;
@@ -56,11 +61,13 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 							.removeClass( $.mobile.activeBtnClass );
 					});
 			}
-		};
+		});
 	},
 
 	_custom: function(){
-		return {
+		var self = this;
+
+		return $.extend(this._common(), {
 			typeName: 'custom',
 
 			button:	$( "<a>", {
@@ -75,9 +82,24 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			}),
 
 			create: function(){
+				this.select.attr( "tabindex", "-1" )
+					.focus(function() {
+						$(this).blur();
+						button.focus();
+					});
 
+				// Button events
+				this.button.bind( "vclick keydown" , function( event ) {
+					if ( event.type == "vclick" ||
+							event.keyCode && ( event.keyCode === $.mobile.keyCode.ENTER ||
+							event.keyCode === $.mobile.keyCode.SPACE ) ) {
+
+						self.open();
+						event.preventDefault();
+					}
+				});
 			}
-		};
+		});
 	},
 
 	_create: function() {
@@ -238,22 +260,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			// Create list from select, update state
 			self.refresh();
 
-			select.attr( "tabindex", "-1" )
-				.focus(function() {
-					$(this).blur();
-					button.focus();
-				});
-
-			// Button events
-			button.bind( "vclick keydown" , function( event ) {
-				if ( event.type == "vclick" ||
-							event.keyCode && ( event.keyCode === $.mobile.keyCode.ENTER ||
-																		event.keyCode === $.mobile.keyCode.SPACE ) ) {
-
-					self.open();
-					event.preventDefault();
-				}
-			});
+			menu.create();
 
 			// Events for list items
 			list.attr( "role", "listbox" )
