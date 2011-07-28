@@ -4,7 +4,10 @@
 (function($){
 	var changePageFn = $.mobile.changePage,
 			originalTitle = document.title,
-			siteDirectory = location.pathname.replace(/[^/]+$/, "");
+			siteDirectory = location.pathname.replace(/[^/]+$/, ""),
+			navigateTestRoot = function(){
+				$.testHelper.openPage( "#" + location.pathname );
+			};
 
 	module('jquery.mobile.navigation.js', {
 		setup: function(){
@@ -26,6 +29,8 @@
 
 	asyncTest( "external page is removed from the DOM after pagehide", function(){
 		$.testHelper.pageSequence([
+			navigateTestRoot,
+
 			function(){
 				$.mobile.changePage( "external.html" );
 			},
@@ -46,6 +51,8 @@
 
 	asyncTest( "external page is cached in the DOM after pagehide", function(){
 		$.testHelper.pageSequence([
+			navigateTestRoot,
+			
 			function(){
 				$.mobile.changePage( "cached-external.html" );
 			},
