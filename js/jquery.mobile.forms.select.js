@@ -32,14 +32,14 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 	},
 
 	_native: function(){
-		var self = this;
+		var widget = this;
 
 		return $.extend(this._common(), {
 			typeName: 'native',
 
 			button: $( "<div/>" ),
 
-			create: function(){
+			build: function(){
 				var self = this;
 
 				this.select
@@ -65,7 +65,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 	},
 
 	_custom: function(){
-		var self = this;
+		var widget = this;
 
 		return $.extend(this._common(), {
 			typeName: 'custom',
@@ -81,7 +81,9 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				// "aria-owns": menuId
 			}),
 
-			create: function(){
+			build: function(list, isMultiple){
+				var self = this;
+
 				this.select.attr( "tabindex", "-1" )
 					.focus(function() {
 						$(this).blur();
@@ -94,10 +96,96 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 							event.keyCode && ( event.keyCode === $.mobile.keyCode.ENTER ||
 							event.keyCode === $.mobile.keyCode.SPACE ) ) {
 
-						self.open();
+						widget.open();
 						event.preventDefault();
 					}
 				});
+
+				// Events for list items
+				list.attr( "role", "listbox" )
+					.delegate( ".ui-li>a", "focusin", function() {
+						$( this ).attr( "tabindex", "0" );
+					})
+					.delegate( ".ui-li>a", "focusout", function() {
+						$( this ).attr( "tabindex", "-1" );
+					})
+					.delegate( "li:not(.ui-disabled, .ui-li-divider)", "vclick", function( event ) {
+
+						// index of option tag to be selected
+						var oldIndex = self.select[ 0 ].selectedIndex,
+								newIndex = list.find( "li:not(.ui-li-divider)" ).index( this ),
+								option = widget.optionElems.eq( newIndex )[ 0 ];
+
+						// toggle selected status on the tag for multi selects
+						option.selected = isMultiple ? !option.selected : true;
+
+						// toggle checkbox class for multiple selects
+						if ( isMultiple ) {
+							$( this ).find( ".ui-icon" )
+								.toggleClass( "ui-icon-checkbox-on", option.selected )
+								.toggleClass( "ui-icon-checkbox-off", !option.selected );
+						}
+
+						// trigger change if value changed
+						if ( isMultiple || oldIndex !== newIndex ) {
+							select.trigger( "change" );
+						}
+
+						//hide custom select for single selects only
+						if ( !isMultiple ) {
+							widget.close();
+						}
+
+						event.preventDefault();
+					})
+					.keydown(function( event ) {  //keyboard events for menu items
+						var target = $( event.target ),
+						li = target.closest( "li" ),
+						prev, next;
+
+						// switch logic based on which key was pressed
+						switch ( event.keyCode ) {
+							// up or left arrow keys
+						 case 38:
+							prev = li.prev();
+
+							// if there's a previous option, focus it
+							if ( prev.length ) {
+								target
+									.blur()
+									.attr( "tabindex", "-1" );
+
+								prev.find( "a" ).first().focus();
+							}
+
+							return false;
+							break;
+
+							// down or right arrow keys
+						 case 40:
+							next = li.next();
+
+							// if there's a next option, focus it
+							if ( next.length ) {
+								target
+									.blur()
+									.attr( "tabindex", "-1" );
+
+								next.find( "a" ).first().focus();
+							}
+
+							return false;
+							break;
+
+							// If enter or space is pressed, trigger click
+						 case 13:
+						 case 32:
+							target.trigger( "vclick" );
+
+							return false;
+									break;
+						}
+					});
 			}
 		});
 	},
@@ -108,8 +196,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 			o = this.options,
 
-			select = this.element
-						.wrap( "<div class='ui-select'>" ),
+			select = this.element.wrap( "<div class='ui-select'>" ),
 
 			menu = self.options.nativeMenu ? this._native(this.element) : this._custom(),
 
@@ -254,100 +341,13 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 		// Support for using the native select menu with a custom button
 		if ( o.nativeMenu ) {
-			menu.create();
+			menu.build();
 		} else {
 
 			// Create list from select, update state
 			self.refresh();
 
-			menu.create();
-
-			// Events for list items
-			list.attr( "role", "listbox" )
-				.delegate( ".ui-li>a", "focusin", function() {
-					$( this ).attr( "tabindex", "0" );
-				})
-				.delegate( ".ui-li>a", "focusout", function() {
-					$( this ).attr( "tabindex", "-1" );
-				})
-				.delegate( "li:not(.ui-disabled, .ui-li-divider)", "vclick", function( event ) {
-
-					// index of option tag to be selected
-					var oldIndex = select[ 0 ].selectedIndex,
-						newIndex = list.find( "li:not(.ui-li-divider)" ).index( this ),
-						option = self.optionElems.eq( newIndex )[ 0 ];
-
-					// toggle selected status on the tag for multi selects
-					option.selected = isMultiple ? !option.selected : true;
-
-					// toggle checkbox class for multiple selects
-					if ( isMultiple ) {
-						$( this ).find( ".ui-icon" )
-							.toggleClass( "ui-icon-checkbox-on", option.selected )
-							.toggleClass( "ui-icon-checkbox-off", !option.selected );
-					}
-
-					// trigger change if value changed
-					if ( isMultiple || oldIndex !== newIndex ) {
-						select.trigger( "change" );
-					}
-
-					//hide custom select for single selects only
-					if ( !isMultiple ) {
-						self.close();
-					}
-
-					event.preventDefault();
-			})
-			//keyboard events for menu items
-			.keydown(function( event ) {
-				var target = $( event.target ),
-					li = target.closest( "li" ),
-					prev, next;
-
-				// switch logic based on which key was pressed
-				switch ( event.keyCode ) {
-					// up or left arrow keys
-					case 38:
-						prev = li.prev();
-
-						// if there's a previous option, focus it
-						if ( prev.length ) {
-							target
-								.blur()
-								.attr( "tabindex", "-1" );
-
-							prev.find( "a" ).first().focus();
-						}
-
-						return false;
-					break;
-
-					// down or right arrow keys
-					case 40:
-						next = li.next();
-
-						// if there's a next option, focus it
-						if ( next.length ) {
-							target
-								.blur()
-								.attr( "tabindex", "-1" );
-
-							next.find( "a" ).first().focus();
-						}
-
-						return false;
-					break;
-
-					// If enter or space is pressed, trigger click
-					case 13:
-					case 32:
-						 target.trigger( "vclick" );
-
-						 return false;
-					break;
-				}
-			});
+			menu.build(list, isMultiple);
 
 			// button refocus ensures proper height calculation
 			// by removing the inline style and ensuring page inclusion
