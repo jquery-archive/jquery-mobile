@@ -24,6 +24,62 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		nativeMenu: true,
 		initSelector: "select:not(:jqmData(role='slider'))"
 	},
+
+	_native: function(element){
+		var self = this;
+		return {
+			typeName: 'native',
+
+			button: $( "<div/>" ),
+
+			select: self.element.wrap( "<div class='ui-select'>" ),
+
+			create: function(){
+				var self = this;
+
+				this.select
+					.appendTo( self.button )
+					.bind( "vmousedown", function() {
+						// Add active class to button
+						self.button.addClass( $.mobile.activeBtnClass );
+					})
+					.bind( "focus vmouseover", function() {
+						self.button.trigger( "vmouseover" );
+					})
+					.bind( "vmousemove", function() {
+						// Remove active class on scroll/touchmove
+						self.button.removeClass( $.mobile.activeBtnClass );
+					})
+					.bind( "change blur vmouseout", function() {
+
+						self.button.trigger( "vmouseout" )
+							.removeClass( $.mobile.activeBtnClass );
+					});
+			}
+		};
+	},
+
+	_custom: function(){
+		return {
+			typeName: 'custom',
+
+			button:	$( "<a>", {
+				"href": "#",
+				"role": "button",
+				// TODO value is undefined at creation
+				// "id": buttonId,
+				"aria-haspopup": "true"
+
+				// TODO value is undefined at creation
+				// "aria-owns": menuId
+			}),
+
+			create: function(){
+
+			}
+		};
+	},
+
 	_create: function() {
 
 		var self = this,
@@ -32,6 +88,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 			select = this.element
 						.wrap( "<div class='ui-select'>" ),
+
+			menu = self.options.nativeMenu ? this._native(this.element) : this._custom(),
 
 			selectID = select.attr( "id" ),
 
@@ -42,13 +100,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			// select first in this case
 			selectedIndex = select[ 0 ].selectedIndex == -1 ? 0 : select[ 0 ].selectedIndex,
 
-			button = ( self.options.nativeMenu ? $( "<div/>" ) : $( "<a>", {
-					"href": "#",
-					"role": "button",
-					"id": buttonId,
-					"aria-haspopup": "true",
-					"aria-owns": menuId
-				}) )
+			// TODO values buttonId and menuId are undefined here
+			button = menu.button
 				.text( $( select[ 0 ].options.item( selectedIndex ) ).text() )
 				.insertBefore( select )
 				.buttonMarkup({
@@ -179,26 +232,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 		// Support for using the native select menu with a custom button
 		if ( o.nativeMenu ) {
-
-			select.appendTo( button )
-				.bind( "vmousedown", function() {
-					// Add active class to button
-					button.addClass( $.mobile.activeBtnClass );
-				})
-				.bind( "focus vmouseover", function() {
-					button.trigger( "vmouseover" );
-				})
-				.bind( "vmousemove", function() {
-					// Remove active class on scroll/touchmove
-					button.removeClass( $.mobile.activeBtnClass );
-				})
-				.bind( "change blur vmouseout", function() {
-
-					button.trigger( "vmouseout" )
-						.removeClass( $.mobile.activeBtnClass );
-				});
-
-
+			menu.create();
 		} else {
 
 			// Create list from select, update state
