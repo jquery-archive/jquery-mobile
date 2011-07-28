@@ -234,7 +234,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					var $this = $( this ),
 						// index of option tag to be selected
 						oldIndex = select[ 0 ].selectedIndex,
-						newIndex = $this.jqmData("option-index"),
+						newIndex = $this.jqmData( "option-index" ),
 						option = self.optionElems[ newIndex ];
 
 					// toggle selected status on the tag for multi selects
