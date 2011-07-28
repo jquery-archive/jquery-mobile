@@ -6,37 +6,6 @@
 */
 
 (function( $, undefined ) {
-	
-//auto self-init widgets
-var initSelector = ":jqmData(position='fixed')";
-
-$( document ).bind( "pagecreate create", function( e ){
-	
-	if( $( initSelector, e.target ).length ){
-		$( e.target ).each(function(){
-			
-			if ( !$.support.scrollTop ) {
-				return this;
-			}
-
-			var $this = $( this );
-
-			if ( $this.jqmData( "fullscreen" ) ) {
-				$this.addClass( "ui-page-fullscreen" );
-			}
-
-			// Should be slidedown
-			$this.find( ".ui-header:jqmData(position='fixed')" ).addClass( "ui-header-fixed ui-fixed-inline fade" );
-
-			// Should be slideup
-			$this.find( ".ui-footer:jqmData(position='fixed')" ).addClass( "ui-footer-fixed ui-fixed-inline fade" );
-			
-		})
-		
-	}
-});
-
-
 
 $.fn.fixHeaderFooter = function( options ) {
 
@@ -375,5 +344,32 @@ $.fixedToolbars = (function() {
 		}
 	};
 })();
+
+//auto self-init widgets
+$( document ).bind( "pagecreate create", function( e ){
+	
+	if( $( ":jqmData(position='fixed')", e.target ).length ){
+		$( e.target ).each(function(){
+			
+			if ( !$.support.scrollTop ) {
+				return this;
+			}
+
+			var $this = $( this );
+
+			if ( $this.jqmData( "fullscreen" ) ) {
+				$this.addClass( "ui-page-fullscreen" );
+			}
+
+			// Should be slidedown
+			$this.find( ".ui-header:jqmData(position='fixed')" ).addClass( "ui-header-fixed ui-fixed-inline fade" );
+
+			// Should be slideup
+			$this.find( ".ui-footer:jqmData(position='fixed')" ).addClass( "ui-footer-fixed ui-fixed-inline fade" );
+			
+		})
+		
+	}
+});
 
 })(jQuery);

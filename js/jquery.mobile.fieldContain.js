@@ -7,15 +7,13 @@
 
 (function( $, undefined ) {
 
-//auto self-init widgets
-var initSelector = ":jqmData(role='fieldcontain')";
-
-$( document ).bind( "pagecreate create", function( e ){
-	$( initSelector, e.target ).fieldcontain();
-});
-
 $.fn.fieldcontain = function( options ) {
 	return this.addClass( "ui-field-contain ui-body ui-br" );
 };
+
+//auto self-init widgets
+$( document ).bind( "pagecreate create", function( e ){
+	$( ":jqmData(role='fieldcontain')", e.target ).fieldcontain();
+});
 
 })( jQuery );

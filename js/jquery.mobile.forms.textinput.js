@@ -7,19 +7,10 @@
 
 (function( $, undefined ) {
 
-//auto self-init widgets
-var initSelector = "input[type='text'], input[type='search'], :jqmData(type='search'), input[type='number'], :jqmData(type='number'), input[type='password'], input[type='email'], input[type='url'], input[type='tel'], textarea";
-
-$( document ).bind( "pagecreate create", function( e ){
-	$( initSelector, e.target )
-		.not( ":jqmData(role='none'), :jqmData(role='nojs')" )
-		.textinput();
-});
-
 $.widget( "mobile.textinput", $.mobile.widget, {
 	options: {
 		theme: null,
-		initSelector: initSelector
+		initSelector: "input[type='text'], input[type='search'], :jqmData(type='search'), input[type='number'], :jqmData(type='number'), input[type='password'], input[type='email'], input[type='url'], input[type='tel'], textarea"
 	},
 
 	_create: function() {
@@ -131,4 +122,14 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			this.element.parent() : this.element ).removeClass( "ui-disabled" );
 	}
 });
+
+//auto self-init widgets
+$( document ).bind( "pagecreate create", function( e ){
+	
+	$( $.mobile.textinput.prototype.options.initSelector, e.target )
+		.not( ":jqmData(role='none'), :jqmData(role='nojs')" )
+		.textinput();
+		
+});
+
 })( jQuery );
