@@ -66,6 +66,16 @@
 				<pre><code>$('select').selectmenu(<strong>{ iconshadow: "false" }</strong>);</code></pre>
 			</dd>
 			
+			<dt><code>initSelector</code> <em>CSS selector string</em></dt>
+			<dd>
+				<p class="default">default: "select:not(:jqmData(role='slider'))"</p>
+				<p>This is used to define the selectors (element types, data roles, etc.) that should be used as the trigger to automatic initialization of the widget plugin. To affect all selects, this option can be set by binding to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
+				<pre><code>$( document ).bind( "mobileinit", function(){
+	<strong>$.mobile.selectmenu.prototype.options.initSelector = ".myselect";</strong>
+});
+</code></pre>
+			</dd>
+			
 			<dt><code>inline</code> <em>boolean</em></dt>
 			<dd>
 				<p class="default">default: null (false)</p>
