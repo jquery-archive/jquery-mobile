@@ -16,7 +16,7 @@
 		setTimeout(function() {
 			ok($('#basic-linked-test .ui-li').length, ".ui-li classes added to li elements");
 			start();
-		}, 500);
+		}, 800);
 	});
 
 	asyncTest( "Slides to the listview page when the li a is clicked", function() {
@@ -491,7 +491,7 @@
 
 	asyncTest( "nested pages are removed from the dom by default", function(){
     var findNestedPages = function(){
-      return $( "#cached-nested-list #topmost" ).listview( 'childPages' );
+      return $( "#uncached-nested-list #topmost" ).listview( 'childPages' );
     };
 
 		$.testHelper.pageSequence([
@@ -501,7 +501,7 @@
 			},
 
 			function(){
-				$.testHelper.openPage( "#cache-tests/nested.html" );
+				$.testHelper.openPage( "#cache-tests/uncached-nested.html" );
 			},
 
 			function(){
@@ -524,19 +524,18 @@
 			},
 
 			function(){
-				$.testHelper.openPage( "#cache-tests/nested.html" );
+				$.testHelper.openPage( "#cache-tests/cached-nested.html" );
 			},
 
 			function(){
-				same( ("#cached-nested-list").length, 1 );
+				same( $("#cached-nested-list").length, 1 );
 				$.testHelper.openPage("#" + location.pathname + "cache-tests/clear.html");
 			},
 
 			function(){
-				same(findNestedPages().length, 0);
+				same( $("#cached-nested-list").length, 1 );
 				start();
 			}
 		]);
 	});
-
 })(jQuery);
