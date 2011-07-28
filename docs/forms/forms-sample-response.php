@@ -49,7 +49,7 @@
 					<li data-role="list-divider">Form elements</li>
 					<li><a href="docs-forms.html">Form basics</a></li>
 					<li><a href="forms-all.html">Form element gallery</a></li>
-					<li><a href="forms-text.html">Text inputs</a></li>
+					<li><a href="texts/index.html">Text inputs</a></li>
 					<li><a href="forms-search.html">Search inputs</a></li>
 					<li><a href="forms-slider.html">Slider</a></li>
 					<li><a href="forms-switch.html">Flip toggle switch</a></li>
