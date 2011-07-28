@@ -6,13 +6,6 @@
 */
 (function( $, undefined ) {
 
-//auto self-init widgets
-var initSelector = ":jqmData(role='controlgroup')";
-
-$( document ).bind( "pagecreate create", function( e ){
-	$( initSelector, e.target ).controlgroup({ excludeInvisible: false });
-});
-
 $.fn.controlgroup = function( options ) {
 
 	return this.each(function() {
@@ -53,4 +46,10 @@ $.fn.controlgroup = function( options ) {
 		}
 	});
 };
+
+//auto self-init widgets
+$( document ).bind( "pagecreate create", function( e ){
+	$( ":jqmData(role='controlgroup')", e.target ).controlgroup({ excludeInvisible: false });
+});
+
 })(jQuery);

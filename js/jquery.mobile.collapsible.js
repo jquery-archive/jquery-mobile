@@ -6,13 +6,6 @@
 */
 (function( $, undefined ) {
 
-//auto self-init widgets
-var initSelector = ":jqmData(role='collapsible')";
-
-$( document ).bind( "pagecreate create", function( e ){
-	$( initSelector, e.target ).collapsible();
-});
-
 $.widget( "mobile.collapsible", $.mobile.widget, {
 	options: {
 		expandCueText: " click to expand contents",
@@ -21,7 +14,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 		heading: ">:header,>legend",
 		theme: null,
 		iconTheme: "d",
-		initSelector: initSelector
+		initSelector: ":jqmData(role='collapsible')"
 	},
 	_create: function() {
 
@@ -163,4 +156,10 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			});
 	}
 });
+
+//auto self-init widgets
+$( document ).bind( "pagecreate create", function( e ){
+	$( $.mobile.collapsible.prototype.options.initSelector, e.target ).collapsible();
+});
+
 })( jQuery );
