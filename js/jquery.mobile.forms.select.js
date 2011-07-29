@@ -26,8 +26,92 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 	},
 
 	_common: function(){
+
+		var widget = this,
+				select = this.element.wrap( "<div class='ui-select'>" );
+
+		// if not, try to find closest theme container
+		if ( !widget.options.theme ) {
+			var themedParent = select.closest( "[class*='ui-bar-'],[class*='ui-body-']" );
+			widget.options.theme = themedParent.length ?
+				/ui-(bar|body)-([a-z])/.exec( themedParent.attr( "class" ) )[2] :
+				"c";
+		}
+
+		var selectID  = select.attr( "id" ),
+				label = $( "label[for='"+ selectID +"']" ).addClass( "ui-select" ),
+				thisPage = select.closest( ".ui-page" ),
+				screen = $( "<div>", {"class": "ui-selectmenu-screen ui-screen-hidden"})
+							.appendTo( thisPage ),
+		    options = select.find("option"),
+				isMultiple = widget.isMultiple = select[ 0 ].multiple,
+				buttonId = selectID + "-button",
+				menuId = selectID + "-menu",
+				menuPage = $( "<div data-" + $.mobile.ns + "role='dialog' data-" +$.mobile.ns + "theme='"+ widget.options.menuPageTheme +"'>" +
+							"<div data-" + $.mobile.ns + "role='header'>" +
+								"<div class='ui-title'>" + label.text() + "</div>"+
+							"</div>"+
+							"<div data-" + $.mobile.ns + "role='content'></div>"+
+						"</div>" )
+						.appendTo( $.mobile.pageContainer )
+						.page(),
+
+				listbox =  $("<div>", { "class": "ui-selectmenu ui-selectmenu-hidden ui-overlay-shadow ui-corner-all ui-body-" + widget.options.overlayTheme + " " + $.mobile.defaultDialogTransition })
+						.insertAfter(screen),
+
+				list = $( "<ul>", {
+						"class": "ui-selectmenu-list",
+						"id": menuId,
+						"role": "listbox",
+						"aria-labelledby": buttonId
+					})
+					.attr( "data-" + $.mobile.ns + "theme", widget.options.theme )
+					.appendTo( listbox ),
+
+				header = $( "<div>", {
+						"class": "ui-header ui-bar-" + widget.options.theme
+					})
+					.prependTo( listbox ),
+
+				headerTitle = $( "<h1>", {
+						"class": "ui-title"
+					})
+					.appendTo( header ),
+
+				headerClose = $( "<a>", {
+						"text": widget.options.closeText,
+						"href": "#",
+						"class": "ui-btn-left"
+					})
+					.attr( "data-" + $.mobile.ns + "iconpos", "notext" )
+					.attr( "data-" + $.mobile.ns + "icon", "delete" )
+					.appendTo( header )
+					.buttonMarkup(),
+
+				menuPageContent = menuPage.find( ".ui-content" ),
+
+				menuPageClose = menuPage.find( ".ui-header a" );
+
 		return {
-			select: this.element.wrap( "<div class='ui-select'>" )
+			select: select,
+			selectID: selectID,
+			buttonId: buttonId,
+			menuId: menuId,
+			thisPage: thisPage,
+			menuPage: menuPage,
+			label: label,
+			screen: screen,
+		  options: options,
+			isMultiple: isMultiple,
+			theme: widget.options.theme,
+			listbox: listbox,
+			list: list,
+			header: header,
+			headerTitle: headerTitle,
+      headerClose: headerClose,
+			menuPageContent: menuPageContent,
+			menuPageClose: menuPageClose,
+			placeholder: ""
 		};
 	},
 
@@ -35,7 +119,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		var widget = this;
 
 		return $.extend(this._common(), {
-			typeName: 'native',
+			t: 'native',
 
 			button: $( "<div/>" ),
 
@@ -65,90 +149,27 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 	},
 
 	_custom: function(){
-		var widget = this;
+		var widget = this, common = this._common();
 
-		return $.extend(this._common(), {
+		return $.extend(common, {
 			typeName: 'custom',
 
 			button:	$( "<a>", {
 				"href": "#",
 				"role": "button",
 				// TODO value is undefined at creation
-				// "id": buttonId,
-				"aria-haspopup": "true"
+				"id": common.buttonId,
+				"aria-haspopup": "true",
 
 				// TODO value is undefined at creation
-				// "aria-owns": menuId
+				"aria-owns": common.menuId
 			}),
 
 			build: function(){
-				var self = this;
+				var self = this, parentWidget = widget;
 
 				// Create list from select, update state
 				widget.refresh();
-
-				var options = self.select.find("option"),
-						selectID = self.select.attr( "id" ),
-						isMultiple = widget.isMultiple = self.select[ 0 ].multiple,
-						label = $( "label[for='"+ selectID +"']" ).addClass( "ui-select" ),
-				buttonId = self.selectID + "-button",
-
-				menuId = self.selectID + "-menu",
-
-				thisPage = self.select.closest( ".ui-page" ),
-
-				//button theme
-				theme = /ui-btn-up-([a-z])/.exec( self.button.attr( "class" ) )[1],
-
-				menuPage = $( "<div data-" + $.mobile.ns + "role='dialog' data-" +$.mobile.ns + "theme='"+ widget.options.menuPageTheme +"'>" +
-							"<div data-" + $.mobile.ns + "role='header'>" +
-								"<div class='ui-title'>" + label.text() + "</div>"+
-							"</div>"+
-							"<div data-" + $.mobile.ns + "role='content'></div>"+
-						"</div>" )
-						.appendTo( $.mobile.pageContainer )
-						.page(),
-
-				menuPageContent = menuPage.find( ".ui-content" ),
-
-				menuPageClose = menuPage.find( ".ui-header a" ),
-
-				screen = $( "<div>", {"class": "ui-selectmenu-screen ui-screen-hidden"})
-							.appendTo( thisPage ),
-
-				listbox = $("<div>", { "class": "ui-selectmenu ui-selectmenu-hidden ui-overlay-shadow ui-corner-all ui-body-" + widget.options.overlayTheme + " " + $.mobile.defaultDialogTransition })
-						.insertAfter(screen),
-
-				list = $( "<ul>", {
-						"class": "ui-selectmenu-list",
-						"id": menuId,
-						"role": "listbox",
-						"aria-labelledby": buttonId
-					})
-					.attr( "data-" + $.mobile.ns + "theme", theme )
-					.appendTo( listbox ),
-
-				header = $( "<div>", {
-						"class": "ui-header ui-bar-" + theme
-					})
-					.prependTo( listbox ),
-
-				headerTitle = $( "<h1>", {
-						"class": "ui-title"
-					})
-					.appendTo( header ),
-
-				headerClose = $( "<a>", {
-						"text": widget.options.closeText,
-						"href": "#",
-						"class": "ui-btn-left"
-					})
-					.attr( "data-" + $.mobile.ns + "iconpos", "notext" )
-					.attr( "data-" + $.mobile.ns + "icon", "delete" )
-					.appendTo( header )
-					.buttonMarkup(),
-
-				menuType;
 
 
 				self.select.attr( "tabindex", "-1" )
@@ -169,7 +190,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				});
 
 				// Events for list items
-				list.attr( "role", "listbox" )
+				self.list.attr( "role", "listbox" )
 					.delegate( ".ui-li>a", "focusin", function() {
 						$( this ).attr( "tabindex", "0" );
 					})
@@ -180,26 +201,26 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 						// index of option tag to be selected
 						var oldIndex = self.select[ 0 ].selectedIndex,
-								newIndex = list.find( "li:not(.ui-li-divider)" ).index( this ),
+								newIndex = self.list.find( "li:not(.ui-li-divider)" ).index( this ),
 								option = widget.optionElems.eq( newIndex )[ 0 ];
 
 						// toggle selected status on the tag for multi selects
-						option.selected = isMultiple ? !option.selected : true;
+						option.selected = self.isMultiple ? !option.selected : true;
 
 						// toggle checkbox class for multiple selects
-						if ( isMultiple ) {
+						if ( self.isMultiple ) {
 							$( this ).find( ".ui-icon" )
 								.toggleClass( "ui-icon-checkbox-on", option.selected )
 								.toggleClass( "ui-icon-checkbox-off", !option.selected );
 						}
 
 						// trigger change if value changed
-						if ( isMultiple || oldIndex !== newIndex ) {
-							select.trigger( "change" );
+						if ( self.isMultiple || oldIndex !== newIndex ) {
+							self.select.trigger( "change" );
 						}
 
 						//hide custom select for single selects only
-						if ( !isMultiple ) {
+						if ( !self.isMultiple ) {
 							widget.close();
 						}
 
@@ -255,12 +276,12 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					});
 
 				// Events on "screen" overlay
-				screen.bind( "vclick", function( event ) {
-					widget1.close();
+				self.screen.bind( "vclick", function( event ) {
+					widget.close();
 				});
 
 				// Close button on small overlays
-				headerClose.click(function() {
+				self.headerClose.click(function() {
 					if ( menuType == "overlay" ) {
 						widget.close();
 						return false;
@@ -278,21 +299,15 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 			menu = self.options.nativeMenu ? this._native(this.element) : this._custom(),
 
-			select = menu.select,
-
-			selectID = select.attr( "id" ),
-
-			label = $( "label[for='"+ selectID +"']" ).addClass( "ui-select" ),
-
 			// IE throws an exception at options.item() function when
 			// there is no selected item
 			// select first in this case
-			selectedIndex = select[ 0 ].selectedIndex == -1 ? 0 : select[ 0 ].selectedIndex,
+			selectedIndex = menu.select[ 0 ].selectedIndex == -1 ? 0 : menu.select[ 0 ].selectedIndex,
 
 			// TODO values buttonId and menuId are undefined here
 			button = menu.button
-				.text( $( select[ 0 ].options.item( selectedIndex ) ).text() )
-				.insertBefore( select )
+				.text( $( menu.select[ 0 ].options.item( selectedIndex ) ).text() )
+				.insertBefore( menu.select )
 				.buttonMarkup({
 					theme: o.theme,
 					icon: o.icon,
@@ -304,82 +319,18 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				}),
 
 			// Multi select or not
-			isMultiple = self.isMultiple = select[ 0 ].multiple;
+			isMultiple = self.isMultiple = menu.select[ 0 ].multiple;
 
 		// Opera does not properly support opacity on select elements
 		// In Mini, it hides the element, but not its text
 		// On the desktop,it seems to do the opposite
 		// for these reasons, using the nativeMenu option results in a full native select in Opera
 		if ( o.nativeMenu && window.opera && window.opera.version ) {
-			select.addClass( "ui-select-nativeonly" );
+			menu.select.addClass( "ui-select-nativeonly" );
 		}
 
-		//vars for non-native menus
-		if ( !o.nativeMenu ) {
-			var options = select.find("option"),
-
-				buttonId = selectID + "-button",
-
-				menuId = selectID + "-menu",
-
-				thisPage = select.closest( ".ui-page" ),
-
-				//button theme
-				theme = /ui-btn-up-([a-z])/.exec( button.attr( "class" ) )[1],
-
-				menuPage = $( "<div data-" + $.mobile.ns + "role='dialog' data-" +$.mobile.ns + "theme='"+ o.menuPageTheme +"'>" +
-							"<div data-" + $.mobile.ns + "role='header'>" +
-								"<div class='ui-title'>" + label.text() + "</div>"+
-							"</div>"+
-							"<div data-" + $.mobile.ns + "role='content'></div>"+
-						"</div>" )
-						.appendTo( $.mobile.pageContainer )
-						.page(),
-
-				menuPageContent = menuPage.find( ".ui-content" ),
-
-				menuPageClose = menuPage.find( ".ui-header a" ),
-
-				screen = $( "<div>", {"class": "ui-selectmenu-screen ui-screen-hidden"})
-							.appendTo( thisPage ),
-
-				listbox = $("<div>", { "class": "ui-selectmenu ui-selectmenu-hidden ui-overlay-shadow ui-corner-all ui-body-" + o.overlayTheme + " " + $.mobile.defaultDialogTransition })
-						.insertAfter(screen),
-
-				list = $( "<ul>", {
-						"class": "ui-selectmenu-list",
-						"id": menuId,
-						"role": "listbox",
-						"aria-labelledby": buttonId
-					})
-					.attr( "data-" + $.mobile.ns + "theme", theme )
-					.appendTo( listbox ),
-
-				header = $( "<div>", {
-						"class": "ui-header ui-bar-" + theme
-					})
-					.prependTo( listbox ),
-
-				headerTitle = $( "<h1>", {
-						"class": "ui-title"
-					})
-					.appendTo( header ),
-
-				headerClose = $( "<a>", {
-						"text": o.closeText,
-						"href": "#",
-						"class": "ui-btn-left"
-					})
-					.attr( "data-" + $.mobile.ns + "iconpos", "notext" )
-					.attr( "data-" + $.mobile.ns + "icon", "delete" )
-					.appendTo( header )
-					.buttonMarkup(),
-
-				menuType;
-		} // End non native vars
-
 		// Add counter for multi selects
-		if ( isMultiple ) {
+		if ( menu.isMultiple ) {
 			self.buttonCount = $( "<span>" )
 				.addClass( "ui-li-count ui-btn-up-c ui-btn-corner-all" )
 				.hide()
@@ -392,32 +343,12 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		}
 
 		// Events on native select
-		select.change(function() {
+		menu.select.change(function() {
 			self.refresh();
 		});
 
 		// Expose to other methods
-		$.extend( self, {
-			select: select,
-			optionElems: options,
-			selectID: selectID,
-			label: label,
-			button: button,
-			buttonId: buttonId,
-			menuId: menuId,
-			thisPage: thisPage,
-			button: button,
-			menuPage: menuPage,
-			menuPageContent: menuPageContent,
-			screen: screen,
-			listbox: listbox,
-			list: list,
-			menuType: menuType,
-			header: header,
-			headerClose: headerClose,
-			headerTitle: headerTitle,
-			placeholder: ""
-		});
+		$.extend( self, menu );
 
 		menu.build();
 	},
@@ -523,7 +454,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			});
 
 		// multiple count inside button
-		if ( isMultiple ) {
+		if ( self.isMultiple ) {
 			self.buttonCount[ selected.length > 1 ? "show" : "hide" ]().text( selected.length );
 		}
 
@@ -541,7 +472,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 						item.find( "a" ).attr( "aria-selected", true );
 
 						// Multiple selects: add the "on" checkbox state to the icon
-						if ( isMultiple ) {
+						if ( self.isMultiple ) {
 							item.find( ".ui-icon" ).removeClass( "ui-icon-checkbox-off" ).addClass( "ui-icon-checkbox-on" );
 						}
 					}
@@ -606,7 +537,6 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			   transition: $.mobile.defaultDialogTransition
 			});
 		} else {
-
 			self.menuType = "overlay";
 
 			self.screen.height( $(document).height() )
@@ -715,4 +645,3 @@ $( document ).bind( "pagecreate create", function( e ){
 });
 
 })( jQuery );
-
