@@ -693,12 +693,16 @@
 						.attr( "data-" + $.mobile.ns + "url", path.convertUrlToDataUrl( fileUrl ) )
 						.appendTo( settings.pageContainer );
 
-					// when dom caching is not enabled bind to remove the page on hide
-					if( !page.jqmData("domCache") ){
-						page.bind( "pagehide.remove", function(){
-							$(this).remove();
-						});
-					}
+					// wait for page creation to leverage options defined on widget
+					page.one('pagecreate', function(){
+
+						// when dom caching is not enabled bind to remove the page on hide
+						if( !page.data("page").options.domCache ){
+							page.bind( "pagehide.remove", function(){
+								$(this).remove();
+							});
+						}
+					});
 
 					enhancePage( page, settings.role );
 
