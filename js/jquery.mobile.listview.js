@@ -260,20 +260,22 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 		//on pagehide, remove any nested pages along with the parent page, as long as they aren't active
 		if( hasSubPages && parentPage.data("page").options.domCache === false ){
+			var newRemove = function( e, ui ){
+				var nextPage = ui.nextPage, npURL;
+
+				if( ui.nextPage ){
+					npURL = nextPage.jqmData( "url" );
+					if( npURL.indexOf( parentUrl + "&" + $.mobile.subPageUrlKey ) !== 0 ){
+						self.childPages().remove();
+						parentPage.remove();
+					}
+				}
+			};
+
+			// unbind the original page remove and replace with our specialized version
 			parentPage
 				.unbind( "pagehide.remove" )
-				.bind( "pagehide.remove", function( e, ui ){
-					var nextPage = ui.nextPage,
-						npURL;
-
-					if( ui.nextPage ){
-						npURL = nextPage.jqmData( "url" );
-						if( npURL.indexOf( parentUrl + "&" + $.mobile.subPageUrlKey ) !== 0 ){
-							self.childPages().remove();
-							parentPage.remove();
-						}
-					}
-				});
+				.bind( "pagehide.remove", newRemove);
 		}
 	},
 
