@@ -276,9 +276,9 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 			o = this.options,
 
-			select = this.element.wrap( "<div class='ui-select'>" ),
-
 			menu = self.options.nativeMenu ? this._native(this.element) : this._custom(),
+
+			select = menu.select,
 
 			selectID = select.attr( "id" ),
 
