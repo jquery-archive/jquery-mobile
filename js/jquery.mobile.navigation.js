@@ -257,13 +257,13 @@
 			},
 
 			// addNew is used whenever a new page is added
-			addNew: function( url, transition, title, storedTo ) {
+			addNew: function( url, transition, title ) {
 				//if there's forward history, wipe it
 				if( urlHistory.getNext() ) {
 					urlHistory.clearForward();
 				}
 
-				urlHistory.stack.push( {url : url, transition: transition, title: title, page: storedTo } );
+				urlHistory.stack.push( {url : url, transition: transition, title: title } );
 
 				urlHistory.activeIndex = urlHistory.stack.length - 1;
 			},
@@ -916,7 +916,7 @@
 
 		//add page to history stack if it's not back or forward
 		if( !historyDir ) {
-			urlHistory.addNew( url, settings.transition, pageTitle, toPage );
+			urlHistory.addNew( url, settings.transition, pageTitle );
 		}
 
 		//set page title
@@ -1191,7 +1191,7 @@
 					// prevent changepage
 					return;
 				} else {
-					var setTo = function() { to = $.mobile.urlHistory.getActive().page; };
+					var setTo = function() { to = $( ":jqmData(url='" + $.mobile.urlHistory.getActive().url + "')" ); };
 					// if the current active page is a dialog and we're navigating
 					// to a dialog use the dialog objected saved in the stack
 					urlHistory.directHashChange({	currentUrl: to, isBack: setTo, isForward: setTo	});
