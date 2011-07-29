@@ -73,9 +73,9 @@
 </div> 
 
 
-<h2>Complete single page template</h2> 
+<h2>Default page template</h2> 
 
-<p>Putting it all together, this is the standard boilerplate page template you should start with:</p>
+<p>Putting it all together, this is the standard boilerplate page template you should start with on a project. :</p>
 
 <pre><code>
 &lt;!DOCTYPE html&gt; 
@@ -112,25 +112,11 @@
 
 			<a href="page-template.html" data-inline="true" data-theme="b" data-role="button">View boilerplate template</a>
 
-			<h2>External page linking</h2> 
-				
-			<p>jQuery Mobile automates the process of building Ajax powered sites and applications. </p>
-			
-			<p>By default, when you click on a link that points to an external page (ex. products.html), the framework will parse the link's <code>href</code> to formulate an Ajax request (Hijax) and displays the loading spinner.</p>
-				
-			<p>If the Ajax request is successful, the new page content is added to the DOM, all mobile widgets are auto-initialized, then the new page is animated into view with a page transition.</p>
-			
-			<p>If the Ajax request fails, the framework will display a small error message overlay (styled in the "e" swatch) that disappears after a brief time so this doesn't break the navigation flow. View an <a href="notapage.html">example of the error message</a>.</p>
 
-		<h2>Local, internal linked "pages"</h2> 
+		<h2>Multi-page template structure</h2> 
 		
 			<p>A single HTML document can contain multiple 'pages' that are loaded together by stacking multiple divs with a <code> data-role</code> of <code>"page"</code>. Each 'page' block needs a unique ID (<code>id="foo"</code>) that will be used to link internally between 'pages' (<code>href="#foo"</code>). When a link is clicked, the framework will look for an internal 'page' with the ID and transition it into view.</p> 
-			
-			<p>It's important to note if you  are linking from a mobile page that was loaded via Ajax to a page that contains multiple internal pages, you need to add a <code>rel="external"</code> or <code>data-ajax="false"</code> to the link. This tells the framework to do a full page reload to clear out the Ajax hash in the URL. This is critical because Ajax pages use the hash (#) to track the Ajax history, while multiple internal pages use the hash to indicate internal pages so there will be conflicts in the hash between these two modes.</p>
-			<p>For example, a link to a page containing multiple internal pages would look like this:</p>
-			
-<code>&lt;a href=&quot;multipage.html&quot; rel=&quot;external&quot;&gt;Multi-page link&lt;/a&gt;</code>
-			
+						
 			<p>Here is an example of a 2 "page" site built with two jQuery Mobile divs navigated by linking to an ID placed on each page wrapper. Note that the IDs on the page wrappers are only needed to support the internal page linking, and are optional if each page is a separate HTML document. Here is what two pages look inside the <code>body</code> element.</p> 
 
 <pre><code>
@@ -180,37 +166,13 @@
 		<p>PLEASE NOTE: Since we are using the hash to track navigation history for all the Ajax 'pages', it's not currently possible to deep link to an anchor (<code>index.html#foo</code>) on a page in jQuery Mobile, because the framework will look for a 'page' with an <code>ID</code> of <code>#foo</code> instead of the native behavior of scrolling to the content with that <code>ID</code>.</p>
 		
 		
-		
-		<h2>Auto-updating page titles for Ajax navigation</h2>
-		<p>When you load the first page of a jQuery Mobile based site, then click a link or submit a form, the jQuery Mobile uses Ajax to pull in the content of the requested page. Having both pages in the DOM is essential to enable the animated page transitions but one downside of this approach is that the page title is always that of the first page, not the subsequent page you’re viewing. To remedy this, the framework automatically parses the <code>title</code> of the page pulled via Ajax and changes the <code>title</code> attribute of the parent document to match. On multi-page sites, add the <code>data-title</code> attribute to each page container to manually define a title. Since we already support the browser’s history stack, back button and bookmarking of these Ajax-based pages, this really helps when looking through your browsing history.</p>
+<h2>Conventions, not requirements</h2>
 
-		<h2>Back linking</h2>
-		<p>If you use the attribute <code>data-rel="back"</code> on an anchor, any clicks on that anchor will mimic the back button, going back one history entry and ignoring the anchor's default href. This is particularly useful when linking back to a named page, such as a link that says "home", or when generating "back" buttons with JavaScript, such as a button to close a dialog. When using this feature in your source markup, <strong>be sure to provide a meaningful href that actually points to the URL of the referring page (this will allow the feature to work for users in C-Grade browsers</strong>. Also, please keep in mind that if you just want a reverse transition without actually going back in history, you should use the <code>data-direction="reverse"</code> attribute instead.</p>
-		
-		<h2>Redirects and linking to directories</h2>
-		<p>When linking to directory indexes (such as href="typesofcats/" instead of href="typesofcats/index.html"), you must provide a trailing slash. This is because jQuery Mobile assumes the section after the last "/" character in a url is a filename, and it will remove that section when creating base urls from which future pages will be referenced.</p>
-		
-		<p>However, you can work around this issue by returning your page div with a <code>data-url</code> attribute already specified. When you do this, jQuery Mobile will use that attribute's value for updating the URL, instead of the url used to request that page. This also allows you to return urls that change as the result of a redirect, for example, you might post a form to "/login.html" but return a page from the url "/account" after a successful submission. This tool allows you to take control of the jQuery Mobile history stack in these situations. Here's an example:</p>
-		
-		<p>The following link points to "docs-links-urltest/index.html": <a href="docs-links-urltest/index.html">Test Link</a> which is a directory with an index page. The return page will update the hash as "/docs/pages/docs-links-urltest/" with a trailing slash. This is done via the data-url attribute in that page's source. Keep in mind that the value will replace the entire hash, and it is up to you to replace it with a URL that actually resolves to the correct page when requested via refresh or deep link.</p>
-		
-		
-		<p>Learn more about the technical details of the navigation model and <a href="docs-navmodel.html">Ajax, hashes and history</a> in jQuery mobile.</p>
-		
-		<h2>Automatically Pre-fetching Pages</h2>
-		<p>Any HTML anchor element may specify that its page be prefetched by jQuery Mobile through the use of a data-prefetch attribute. After pagecreate, jQuery Mobile will
-			automatically find all links in a page that have an attribute of <code>data-prefetch</code> and automatically load that page so it's available as soon as the user
-			navigates to it.</p> 
-			
-			<p>Pre-fetching links will naturally cause additional HTTP requests that may never be used, so it's important to use this feature only in situations where it's highly 
-				likely that a page will be visited.</p>
-		
-	
-<pre><code>
- &lt;a href="foo/bar/baz" data-prefetch&gt;link text&lt;/a&gt;
-</code></pre>
+<p>Although the page structure outlined above is a recommended approach for a standard web app built with jQuery Mobile, the framework is very flexible with document structure. The page, header, content, and footer data-role elements are optional and are mostly helpful for providing some basic formatting and structure. The page wrapper used to be required for auto-initialization to work but this too is now optional for single page documents so there isn't any required markup at all. For a web page with a custom layout, all of these structural elements can be omitted but the Ajax navigation and all widgets will work just like they do in the boilerplate structure. Behind the scenes, the framework will inject the page wrapper if it's not included in the markup because it’s needed for managing pages, but the starting markup can now be extremely simple. </p>
 
-<p>Pages can also be pre-fetched programmatically by calling <code>$.mobile.loadpage( url )</code></p>
+<p>Note that in a multi-page setup, you are required to have page wrappers in your markup in order to group the content into multiple pages.</p>
+
+		
 
 
 				</div><!--/content-primary -->		
@@ -224,13 +186,15 @@
 							<ul data-role="listview" data-theme="c" data-dividertheme="d">
 
 								<li data-role="list-divider">Pages &amp; Dialogs</li>
-								<li data-theme="a"><a href="docs-pages.html">Anatomy of a page</a></li>
+								<li data-theme="a"><a href="page-anatomy.html">Anatomy of a page</a></li>
 								<li><a href="page-template.html" data-ajax="false">Single page template</a></li>
 								<li><a href="multipage-template.html" data-ajax="false">Multi-page template</a></li>
-								<li><a href="docs-transitions.html">Page transitions</a></li>
-								<li><a href="docs-dialogs.html">Dialogs</a></li>
-								<li><a href="docs-navmodel.html">Navigation: Ajax, hashes &amp; history</a></li>
-								<li><a href="link-formats.html">Link format examples</a></li>
+								<li><a href="page-titles.html">Page titles</a></li>
+								<li><a href="page-links.html">Linking pages</a></li>
+								<li><a href="page-transitions.html">Page transitions</a></li>
+								<li><a href="page-dialogs.html">Dialogs</a></li>
+								<li><a href="page-cache.html">Preload & cache pages</a></li>
+								<li><a href="page-navmodel.html">Ajax, hashes &amp; history</a></li>
 								<li><a href="pages-themes.html">Theming pages</a></li>
 
 							</ul>
