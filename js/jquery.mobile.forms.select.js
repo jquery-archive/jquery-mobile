@@ -81,17 +81,84 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				// "aria-owns": menuId
 			}),
 
-			build: function(list, isMultiple){
+			build: function(){
 				var self = this;
 
-				this.select.attr( "tabindex", "-1" )
+				// Create list from select, update state
+				widget.refresh();
+
+				var options = self.select.find("option"),
+						selectID = self.select.attr( "id" ),
+						isMultiple = widget.isMultiple = self.select[ 0 ].multiple,
+						label = $( "label[for='"+ selectID +"']" ).addClass( "ui-select" ),
+				buttonId = self.selectID + "-button",
+
+				menuId = self.selectID + "-menu",
+
+				thisPage = self.select.closest( ".ui-page" ),
+
+				//button theme
+				theme = /ui-btn-up-([a-z])/.exec( self.button.attr( "class" ) )[1],
+
+				menuPage = $( "<div data-" + $.mobile.ns + "role='dialog' data-" +$.mobile.ns + "theme='"+ widget.options.menuPageTheme +"'>" +
+							"<div data-" + $.mobile.ns + "role='header'>" +
+								"<div class='ui-title'>" + label.text() + "</div>"+
+							"</div>"+
+							"<div data-" + $.mobile.ns + "role='content'></div>"+
+						"</div>" )
+						.appendTo( $.mobile.pageContainer )
+						.page(),
+
+				menuPageContent = menuPage.find( ".ui-content" ),
+
+				menuPageClose = menuPage.find( ".ui-header a" ),
+
+				screen = $( "<div>", {"class": "ui-selectmenu-screen ui-screen-hidden"})
+							.appendTo( thisPage ),
+
+				listbox = $("<div>", { "class": "ui-selectmenu ui-selectmenu-hidden ui-overlay-shadow ui-corner-all ui-body-" + widget.options.overlayTheme + " " + $.mobile.defaultDialogTransition })
+						.insertAfter(screen),
+
+				list = $( "<ul>", {
+						"class": "ui-selectmenu-list",
+						"id": menuId,
+						"role": "listbox",
+						"aria-labelledby": buttonId
+					})
+					.attr( "data-" + $.mobile.ns + "theme", theme )
+					.appendTo( listbox ),
+
+				header = $( "<div>", {
+						"class": "ui-header ui-bar-" + theme
+					})
+					.prependTo( listbox ),
+
+				headerTitle = $( "<h1>", {
+						"class": "ui-title"
+					})
+					.appendTo( header ),
+
+				headerClose = $( "<a>", {
+						"text": widget.options.closeText,
+						"href": "#",
+						"class": "ui-btn-left"
+					})
+					.attr( "data-" + $.mobile.ns + "iconpos", "notext" )
+					.attr( "data-" + $.mobile.ns + "icon", "delete" )
+					.appendTo( header )
+					.buttonMarkup(),
+
+				menuType;
+
+
+				self.select.attr( "tabindex", "-1" )
 					.focus(function() {
 						$(this).blur();
 						button.focus();
 					});
 
 				// Button events
-				this.button.bind( "vclick keydown" , function( event ) {
+				self.button.bind( "vclick keydown" , function( event ) {
 					if ( event.type == "vclick" ||
 							event.keyCode && ( event.keyCode === $.mobile.keyCode.ENTER ||
 							event.keyCode === $.mobile.keyCode.SPACE ) ) {
@@ -186,6 +253,19 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 									break;
 						}
 					});
+
+				// Events on "screen" overlay
+				screen.bind( "vclick", function( event ) {
+					widget1.close();
+				});
+
+				// Close button on small overlays
+				headerClose.click(function() {
+					if ( menuType == "overlay" ) {
+						widget.close();
+						return false;
+					}
+				});
 			}
 		});
 	},
@@ -339,36 +419,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			placeholder: ""
 		});
 
-		// Support for using the native select menu with a custom button
-		if ( o.nativeMenu ) {
-			menu.build();
-		} else {
-
-			// Create list from select, update state
-			self.refresh();
-
-			menu.build(list, isMultiple);
-
-			// button refocus ensures proper height calculation
-			// by removing the inline style and ensuring page inclusion
-			self.menuPage.bind( "pagehide", function(){
-				self.list.appendTo( self.listbox );
-				self._focusButton();
-			});
-
-			// Events on "screen" overlay
-			screen.bind( "vclick", function( event ) {
-				self.close();
-			});
-
-			// Close button on small overlays
-			self.headerClose.click(function() {
-				if ( self.menuType == "overlay" ) {
-					self.close();
-					return false;
-				}
-			});
-		}
+		menu.build();
 	},
 
 	_buildList: function() {
