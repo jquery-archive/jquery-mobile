@@ -44,7 +44,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				thisPage = select.closest( ".ui-page" ),
 				screen = $( "<div>", {"class": "ui-selectmenu-screen ui-screen-hidden"})
 							.appendTo( thisPage ),
-		    options = select.find("option"),
+				options = select.find("option"),
 				isMultiple = widget.isMultiple = select[ 0 ].multiple,
 				buttonId = selectID + "-button",
 				menuId = selectID + "-menu",
@@ -102,14 +102,14 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			menuPage: menuPage,
 			label: label,
 			screen: screen,
-		  options: options,
+			options: options,
 			isMultiple: isMultiple,
 			theme: widget.options.theme,
 			listbox: listbox,
 			list: list,
 			header: header,
 			headerTitle: headerTitle,
-      headerClose: headerClose,
+			headerClose: headerClose,
 			menuPageContent: menuPageContent,
 			menuPageClose: menuPageClose,
 			placeholder: ""
@@ -120,7 +120,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		var widget = this;
 
 		return $.extend(this._common(), {
-			t: 'native',
+			typeName: 'native',
 
 			button: $( "<div/>" ),
 
