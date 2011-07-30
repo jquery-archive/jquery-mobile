@@ -615,7 +615,21 @@
 		}
 
 		if ( settings.showLoadMsg ) {
-			$.mobile.showPageLoadingMsg();
+			
+			// This configurable timeout allows cached pages a brief delay to load without showing a message
+			var loadMsgDelay = setTimeout(function(){
+					$.mobile.showPageLoadingMsg();
+				}, settings.loadMsgDelay ),
+				
+				// Shared logic for clearing timeout and removing message.
+				hideMsg = function(){
+					
+					// Stop message show timer
+					clearTimeout( loadMsgDelay );
+					
+					// Hide loading message
+					$.mobile.hidePageLoadingMsg();
+				};
 		}
 
 		if ( !( $.mobile.allowCrossDomainPages || path.isSameDomain( documentUrl, absUrl ) ) ) {
@@ -717,7 +731,7 @@
 
 					// Remove loading message.
 					if ( settings.showLoadMsg ) {
-						$.mobile.hidePageLoadingMsg();
+						hideMsg();
 					}
 
 					deferred.resolve( absUrl, options, page, dupCachedPage );
@@ -730,7 +744,9 @@
 
 					// Remove loading message.
 					if ( settings.showLoadMsg ) {
-						$.mobile.hidePageLoadingMsg();
+						
+						// Remove loading message.
+						hideMsg();
 
 						//show error message
 						$( "<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h1>"+ $.mobile.pageLoadErrorMessage +"</h1></div>" )
@@ -756,7 +772,8 @@
 		reloadPage: false,
 		role: undefined, // By default we rely on the role defined by the @data-role attribute.
 		showLoadMsg: false,
-		pageContainer: undefined
+		pageContainer: undefined,
+		loadMsgDelay: 50 // This delay allows loads that pull from browser cache to occur without showing the loading message.
 	};
 
 	// Show a specific page in the page container.
