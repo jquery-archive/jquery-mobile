@@ -74,6 +74,9 @@
 	asyncTest( "a large select menu should come up in a dialog many times", function(){
 		var menu, select;
 
+		// if the second test doesn't run the dialog didn't come back up
+		expect( 2 );
+
 		$.testHelper.pageSequence([
 			resetHash,
 

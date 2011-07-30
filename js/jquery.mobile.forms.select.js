@@ -31,6 +31,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				select = this.element.wrap( "<div class='ui-select'>" );
 
 		// if not, try to find closest theme container
+		// TODO move to core as findCurrentTheme
 		if ( !widget.options.theme ) {
 			var themedParent = select.closest( "[class*='ui-bar-'],[class*='ui-body-']" );
 			widget.options.theme = themedParent.length ?
