@@ -237,7 +237,8 @@
 		//urlHistory is purely here to make guesses at whether the back or forward button was clicked
 		//and provide an appropriate transition
 		urlHistory = {
-			//array of pages that are visited during a single page load. each has a url and optional transition
+			// Array of pages that are visited during a single page load. 
+			// Each has a url and optional transition, title, and pageUrl (which represents the file path, in cases where URL is obscured, such as dialogs)
 			stack: [],
 
 			//maintain an index number for the active page in the stack
@@ -257,13 +258,13 @@
 			},
 
 			// addNew is used whenever a new page is added
-			addNew: function( url, transition, title ) {
+			addNew: function( url, transition, title, pageUrl ) {
 				//if there's forward history, wipe it
 				if( urlHistory.getNext() ) {
 					urlHistory.clearForward();
 				}
 
-				urlHistory.stack.push( {url : url, transition: transition, title: title } );
+				urlHistory.stack.push( {url : url, transition: transition, title: title, pageUrl: pageUrl } );
 
 				urlHistory.activeIndex = urlHistory.stack.length - 1;
 			},
@@ -864,6 +865,8 @@
 		var mpc = settings.pageContainer,
 			fromPage = $.mobile.activePage,
 			url = toPage.jqmData( "url" ),
+			// The pageUrl var is usually the same as url, except when url is obscured as a dialog url. pageUrl always contains the file path
+			pageUrl = url,
 			fileUrl = path.getFilePath( url ),
 			active = urlHistory.getActive(),
 			activeIsInitialPage = urlHistory.activeIndex === 0,
@@ -933,7 +936,7 @@
 
 		//add page to history stack if it's not back or forward
 		if( !historyDir ) {
-			urlHistory.addNew( url, settings.transition, pageTitle );
+			urlHistory.addNew( url, settings.transition, pageTitle, pageUrl );
 		}
 
 		//set page title
@@ -1208,13 +1211,13 @@
 					// prevent changepage
 					return;
 				} else {
-					var setTo = function() { to = $( ":jqmData(url='" + $.mobile.urlHistory.getActive().url + "')" ); };
+					var setTo = function() { to = $.mobile.urlHistory.getActive().pageUrl; };
 					// if the current active page is a dialog and we're navigating
 					// to a dialog use the dialog objected saved in the stack
 					urlHistory.directHashChange({	currentUrl: to, isBack: setTo, isForward: setTo	});
 				}
 			}
-
+			
 			//if to is defined, load it
 			if ( to ) {
 				to = ( typeof to === "string" && !path.isPath( to ) ) ? ( '#' + to ) : to;
