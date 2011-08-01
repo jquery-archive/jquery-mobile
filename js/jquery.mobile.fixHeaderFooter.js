@@ -29,7 +29,7 @@ $.fn.fixHeaderFooter = function( options ) {
 };
 
 //single controller for all showing,hiding,toggling
-$.fixedToolbars = (function() {
+$.mobile.fixedToolbars = (function() {
 
 	if ( !$.support.scrollTop ) {
 		return;
@@ -62,10 +62,10 @@ $.fixedToolbars = (function() {
 		// callbacks for the plugin will fire off a show when the scrolling has stopped.
 		if ( !autoHideMode && currentstate === "overlay" ) {
 			if ( !delayTimer ) {
-				$.fixedToolbars.hide( true );
+				$.mobile.fixedToolbars.hide( true );
 			}
 
-			$.fixedToolbars.startShowTimer();
+			$.mobile.fixedToolbars.startShowTimer();
 		}
 	}
 
@@ -87,7 +87,7 @@ $.fixedToolbars = (function() {
 					}
 
 					if ( !scrollTriggered ) {
-						$.fixedToolbars.toggle( stateBefore );
+						$.mobile.fixedToolbars.toggle( stateBefore );
 						stateBefore = null;
 					}
 				}
@@ -121,10 +121,10 @@ $.fixedToolbars = (function() {
 				autoHideMode = isOverlayState || !!delayTimer;
 
 				if ( autoHideMode ) {
-					$.fixedToolbars.clearShowTimer();
+					$.mobile.fixedToolbars.clearShowTimer();
 
 					if ( isOverlayState ) {
-						$.fixedToolbars.hide( true );
+						$.mobile.fixedToolbars.hide( true );
 					}
 				}
 			})
@@ -137,7 +137,7 @@ $.fixedToolbars = (function() {
 				scrollTriggered = false;
 
 				if ( autoHideMode ) {
-					$.fixedToolbars.startShowTimer();
+					$.mobile.fixedToolbars.startShowTimer();
 					autoHideMode = false;
 				}
 				stateBefore = null;
@@ -175,7 +175,7 @@ $.fixedToolbars = (function() {
 				}, 500);
 			}
 
-			$.fixedToolbars.show( true, this );
+			$.mobile.fixedToolbars.show( true, this );
 		});
 
 	//When a collapsiable is hidden or shown we need to trigger the fixed toolbar to reposition itself (#1635)
@@ -244,7 +244,7 @@ $.fixedToolbars = (function() {
 
 		show: function( immediately, page ) {
 
-			$.fixedToolbars.clearShowTimer();
+			$.mobile.fixedToolbars.clearShowTimer();
 
 			currentstate = "overlay";
 
@@ -314,13 +314,13 @@ $.fixedToolbars = (function() {
 
 		startShowTimer: function() {
 
-			$.fixedToolbars.clearShowTimer();
+			$.mobile.fixedToolbars.clearShowTimer();
 
 			var args = $.makeArray(arguments);
 
 			delayTimer = setTimeout(function() {
 				delayTimer = undefined;
-				$.fixedToolbars.show.apply( null, args );
+				$.mobile.fixedToolbars.show.apply( null, args );
 			}, showDelay);
 		},
 
@@ -335,8 +335,8 @@ $.fixedToolbars = (function() {
 			if ( from ) {
 				currentstate = from;
 			}
-			return ( currentstate === "overlay" ) ? $.fixedToolbars.hide() :
-								$.fixedToolbars.show();
+			return ( currentstate === "overlay" ) ? $.mobile.fixedToolbars.hide() :
+								$.mobile.fixedToolbars.show();
 		},
 
 		setTouchToggleEnabled: function(enabled) {
@@ -344,6 +344,9 @@ $.fixedToolbars = (function() {
 		}
 	};
 })();
+
+// TODO - Deprecated namepace on $. Remove in a later release
+$.fixedToolbars = $.mobile.fixedToolbars;
 
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ){
