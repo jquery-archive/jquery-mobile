@@ -1,58 +1,82 @@
-(function(){
-	var test = function(data){
-		var $frameElem = $("#testFrame"),
-				template = $frameElem.attr("data-src"),
-				updateFrame = function(dir){
-					return $frameElem.attr("src", template.replace("{{testdir}}", dir));
-				};
+$(function() {
+	var Runner = function( ) {
+		var self = this;
 
-		$.each(data.directories, function(i, dir){
-			asyncTest( dir, function(){
-				var testTimeout = 3 * 60 * 1000, checkInterval = 2000;
+		$.extend( self, {
+			frame: window.frames[ "testFrame" ],
 
+			testTimeout: 3 * 60 * 1000,
+
+			$frameElem: $( "#testFrame" ),
+
+			assertionResultPrefix: "assertion result for test:",
+
+			onTimeout: QUnit.start,
+
+			onFrameLoad: function() {
 				// establish a timeout for a given suite in case of async tests hanging
-				var testTimer = setTimeout( function(){
-					// prevent any schedule checks for completion
-					clearTimeouts();
-					start();
-				}, testTimeout ),
+				self.testTimer = setTimeout( self.onTimeout, self.testTimeout );
 
-				checkTimer = setInterval( check, checkInterval ),
+				// when the QUnit object reports done in the iframe
+				// run the onFrameDone method
+				self.frame.QUnit.done = self.onFrameDone;
+				self.frame.QUnit.testDone = self.onTestDone;
+			},
 
-				clearTimeouts = function(){
-					// prevent the next interval of the check function and the test timeout
-					clearTimeout( checkTimer );
-					clearTimeout( testTimer );
-				};
+			onTestDone: function( name, bad, assertCount ) {
+				QUnit.ok( !bad, name );
+				self.recordAssertions( assertCount - 1, name );
+			},
 
-				// check the iframe for success or failure and respond accordingly
-				function check(){
-					// check for the frames jquery object each time
-					var framejQuery = window.frames["testFrame"].jQuery;
+			onFrameDone: function( failed, passed, total, runtime ){
+				// make sure we don't time out the tests
+				clearTimeout( self.testTimer );
 
-					// if the iframe hasn't loaded (ie loaded jQuery) check back again shortly
-					if( !framejQuery ) return;
+				// TODO decipher actual cause of multiple test results firing twice
+				// clear the done call to prevent early completion of other test cases
+				self.frame.QUnit.done = $.noop;
+				self.frame.QUnit.testDone = $.noop;
 
-					// grab the result of the iframe test suite
-					// TODO strip extra white space
-					var result = framejQuery( "#qunit-banner" ).attr( "class" );
+				// hide the extra assertions made to propogate the count
+				// to the suite level test
+				self.hideAssertionResults();
 
-					// if we have a result check it, otherwise check back shortly
-					if( result ){
-						ok( result === "qunit-pass" );
-						clearTimeouts();
-						start();
-					}
-				};
+				// continue on to the next suite
+				QUnit.start();
+			},
 
-				expect( 1 );
+			recordAssertions: function( count, parentTest ) {
+				for( var i = 0; i < count; i++ ) {
+					ok( true, self.assertionResultPrefix + parentTest );
+				}
+			},
 
-				// set the test suite page on the iframe
-				updateFrame( dir );
-			});
+			hideAssertionResults: function() {
+				$( "li:not([id]):contains('" + self.assertionResultPrefix + "')" ).hide();
+			},
+
+			exec: function( data ) {
+				var template = self.$frameElem.attr( "data-src" );
+
+				$.each( data.testPages, function(i, dir) {
+					QUnit.asyncTest( dir, function() {
+						self.dir = dir;
+						self.$frameElem.one( "load", self.onFrameLoad );
+						self.$frameElem.attr( "src", template.replace("{{testdir}}", dir) );
+					});
+				});
+
+				// having defined all suite level tests let QUnit run
+				QUnit.start();
+			}
 		});
 	};
 
+	// prevent qunit from starting the test suite until all tests are defined
+	QUnit.begin = function(  ) {
+		this.config.autostart = false;
+	};
+
 	// get the test directories
-	$.get("ls.php", test);
-})();
+	$.get( "ls.php", (new Runner()).exec );
+});

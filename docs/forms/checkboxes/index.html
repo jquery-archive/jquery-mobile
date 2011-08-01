@@ -4,12 +4,12 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<title>jQuery Mobile Docs - Checkboxes</title> 
-	<link rel="stylesheet"  href="../../themes/default/" />  
-	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
-	<script src="../../js/jquery.js"></script>
-	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
-	<script src="../_assets/js/jqm-docs.js"></script>
-	<script src="../../js/"></script>
+	<link rel="stylesheet"  href="../../../themes/default/" />  
+	<link rel="stylesheet" href="../../_assets/css/jqm-docs.css"/>
+	<script src="../../../js/jquery.js"></script>
+	<script src="../../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../../_assets/js/jqm-docs.js"></script>
+	<script src="../../../js/"></script>
 </head> 
 <body> 
 
@@ -17,7 +17,7 @@
 
 		<div data-role="header" data-theme="f">
 		<h1>Checkboxes</h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+		<a href="../../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
 	<div data-role="content">
@@ -26,6 +26,14 @@
 		<form action="#" method="get">
 
 		<h2>Checkboxes</h2>
+
+    <ul data-role="controlgroup" data-type="horizontal" class="localnav">
+      <li><a href="index.html" data-role="button" data-transition="fade" class="ui-btn-active">Basics</a></li>
+      <li><a href="options.html" data-role="button" data-transition="fade">Options</a></li>
+      <li><a href="methods.html" data-role="button" data-transition="fade">Methods</a></li>
+      <li><a href="events.html" data-role="button" data-transition="fade">Events</a></li>
+    </ul>
+
 		<p>Checkboxes are used to provide a list of options where more than one can be selected. Traditional desktop checkboxes are not optimized for touch input so in jQuery Mobile, we style the <code>label</code> for the checkboxes so they are larger and look clickable. A custom set of icons are added to the label to provide additional visual feedback.</p>
 		
 		<p>Both the radio and checkbox controls below use standard input/label markup, but are styled to be more touch-friendly. The styled control you see is actually the label element, which sits over the real input, so if images fail to load, you'll still have a functional control. In most browsers, clicking the label automatically triggers a click on the input, but we've had to trigger the update manually for a few mobile browsers that don't do this natively. On the desktop, these controls are keyboard and screen-reader accessible. </p>
@@ -122,19 +130,19 @@ $("input[type='checkbox']").attr("checked",true).checkboxradio("refresh");
 				<ul data-role="listview" data-theme="c" data-dividertheme="d">
 				
 					<li data-role="list-divider">Form elements</li>
-					<li><a href="docs-forms.html">Form basics</a></li>
-					<li><a href="forms-all.html">Form element gallery</a></li>
-					<li><a href="texts/index.html">Text inputs</a></li>
-					<li><a href="forms-search.html">Search inputs</a></li>
-					<li><a href="forms-slider.html">Slider</a></li>
-					<li><a href="forms-switch.html">Flip toggle switch</a></li>
-					<li><a href="forms-radiobuttons.html">Radio buttons</a></li>
-					<li data-theme="a"><a href="forms-checkboxes.html">Checkboxes</a></li>
-					<li><a href="selects/index.html">Select menus</a></li>
-					<li><a href="forms-themes.html">Theming forms</a></li>
-					<li><a href="forms-all-native.html">Native form elements</a></li>
-					<li><a href="forms-sample.html">Submitting forms</a></li>
-					<li><a href="plugin-eventsmethods.html">Plugin methods</a></li>
+					<li><a href="../docs-forms.html">Form basics</a></li>
+					<li><a href="../forms-all.html">Form element gallery</a></li>
+					<li><a href="../texts/index.html">Text inputs</a></li>
+					<li><a href="../forms-search.html">Search inputs</a></li>
+					<li><a href="../forms-slider.html">Slider</a></li>
+					<li><a href="../forms-switch.html">Flip toggle switch</a></li>
+					<li><a href="../radiobuttons/index.html">Radio buttons</a></li>
+					<li data-theme="a"><a href="index.html">Checkboxes</a></li>
+					<li><a href="../selects/index.html">Select menus</a></li>
+					<li><a href="../forms-themes.html">Theming forms</a></li>
+					<li><a href="../forms-all-native.html">Native form elements</a></li>
+					<li><a href="../forms-sample.html">Submitting forms</a></li>
+					<li><a href="../plugin-eventsmethods.html">Plugin methods</a></li>
 	
 				</ul>
 		</div>

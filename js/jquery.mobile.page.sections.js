@@ -79,7 +79,9 @@ $( ":jqmData(role='page'), :jqmData(role='dialog')" ).live( "pagecreate", functi
 
 		} else if ( role === "content" ) {
 
-			$this.addClass( "ui-body-" + ( theme || pageTheme || o.contentTheme ) );
+			if (theme || o.contentTheme) {
+			    $this.addClass( "ui-body-" + ( theme || o.contentTheme ) );
+			}
 
 			// Add ARIA role
 			$this.attr( "role", "main" );

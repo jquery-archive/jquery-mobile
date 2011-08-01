@@ -7,6 +7,12 @@
 
 (function( $, undefined ) {
 
+var slideDownClass = "ui-header-fixed ui-fixed-inline fade",
+	slideUpClass = "ui-footer-fixed ui-fixed-inline fade",
+
+	slideDownSelector = ".ui-header:jqmData(position='fixed')",
+	slideUpSelector = ".ui-footer:jqmData(position='fixed')";
+
 $.fn.fixHeaderFooter = function( options ) {
 
 	if ( !$.support.scrollTop ) {
@@ -21,34 +27,33 @@ $.fn.fixHeaderFooter = function( options ) {
 		}
 
 		// Should be slidedown
-		$this.find( ".ui-header:jqmData(position='fixed')" ).addClass( "ui-header-fixed ui-fixed-inline fade" );
+		$this.find( slideDownSelector ).addClass( slideDownClass );
 
 		// Should be slideup
-		$this.find( ".ui-footer:jqmData(position='fixed')" ).addClass( "ui-footer-fixed ui-fixed-inline fade" );
+		$this.find( slideUpSelector ).addClass( slideUpClass );
 	});
 };
 
-//single controller for all showing,hiding,toggling
-$.fixedToolbars = (function() {
+// single controller for all showing,hiding,toggling
+$.mobile.fixedToolbars = (function() {
 
 	if ( !$.support.scrollTop ) {
 		return;
 	}
 
-	var currentstate = "inline",
+	var stickyFooter, delayTimer,
+		currentstate = "inline",
 		autoHideMode = false,
 		showDelay = 100,
-		delayTimer,
 		ignoreTargets = "a,input,textarea,select,button,label,.ui-header-fixed,.ui-footer-fixed",
 		toolbarSelector = ".ui-header-fixed:first, .ui-footer-fixed:not(.ui-footer-duplicate):last",
-		//for storing quick references to duplicate footers
-		stickyFooter,
+		// for storing quick references to duplicate footers
 		supportTouch = $.support.touch,
 		touchStartEvent = supportTouch ? "touchstart" : "mousedown",
 		touchStopEvent = supportTouch ? "touchend" : "mouseup",
 		stateBefore = null,
 		scrollTriggered = false,
-        touchToggleEnabled = true;
+		touchToggleEnabled = true;
 
 	function showEventCallback( event ) {
 		// An event that affects the dimensions of the visual viewport has
@@ -62,16 +67,16 @@ $.fixedToolbars = (function() {
 		// callbacks for the plugin will fire off a show when the scrolling has stopped.
 		if ( !autoHideMode && currentstate === "overlay" ) {
 			if ( !delayTimer ) {
-				$.fixedToolbars.hide( true );
+				$.mobile.fixedToolbars.hide( true );
 			}
 
-			$.fixedToolbars.startShowTimer();
+			$.mobile.fixedToolbars.startShowTimer();
 		}
 	}
 
 	$(function() {
 		var $document = $( document ),
-			$window = $(window);
+			$window = $( window );
 
 		$document
 			.bind( "vmousedown", function( event ) {
@@ -79,7 +84,7 @@ $.fixedToolbars = (function() {
 					stateBefore = currentstate;
 				}
 			})
-			.bind( "vclick", function( event) {
+			.bind( "vclick", function( event ) {
 				if ( touchToggleEnabled ) {
 
 					if ( $(event.target).closest( ignoreTargets ).length ) {
@@ -87,7 +92,7 @@ $.fixedToolbars = (function() {
 					}
 
 					if ( !scrollTriggered ) {
-						$.fixedToolbars.toggle( stateBefore );
+						$.mobile.fixedToolbars.toggle( stateBefore );
 						stateBefore = null;
 					}
 				}
@@ -121,10 +126,10 @@ $.fixedToolbars = (function() {
 				autoHideMode = isOverlayState || !!delayTimer;
 
 				if ( autoHideMode ) {
-					$.fixedToolbars.clearShowTimer();
+					$.mobile.fixedToolbars.clearShowTimer();
 
 					if ( isOverlayState ) {
-						$.fixedToolbars.hide( true );
+						$.mobile.fixedToolbars.hide( true );
 					}
 				}
 			})
@@ -137,7 +142,7 @@ $.fixedToolbars = (function() {
 				scrollTriggered = false;
 
 				if ( autoHideMode ) {
-					$.fixedToolbars.startShowTimer();
+					$.mobile.fixedToolbars.startShowTimer();
 					autoHideMode = false;
 				}
 				stateBefore = null;
@@ -175,10 +180,10 @@ $.fixedToolbars = (function() {
 				}, 500);
 			}
 
-			$.fixedToolbars.show( true, this );
+			$.mobile.fixedToolbars.show( true, this );
 		});
 
-	//When a collapsiable is hidden or shown we need to trigger the fixed toolbar to reposition itself (#1635)
+	// When a collapsiable is hidden or shown we need to trigger the fixed toolbar to reposition itself (#1635)
 	$( ".ui-collapsible-contain" ).live( "collapse expand", showEventCallback );
 
 	// element.getBoundingClientRect() is broken in iOS 3.2.1 on the iPad. The
@@ -191,10 +196,11 @@ $.fixedToolbars = (function() {
 
 	function getOffsetTop( ele ) {
 		var top = 0,
-			op;
+			op, body;
 
 		if ( ele ) {
-			op = ele.offsetParent, body = document.body;
+			body = document.body;
+			op = ele.offsetParent;
 			top = ele.offsetTop;
 
 			while ( ele && ele != body ) {
@@ -224,13 +230,12 @@ $.fixedToolbars = (function() {
 
 			relval = fromTop - thisTop + thisCSStop;
 
-			if ( relval < thisTop) {
+			if ( relval < thisTop ) {
 				relval = 0;
 			}
 
 			return el.css( "top", useRelative ? relval : fromTop );
-		}
-		else{
+		} else {
 			// relval = -1 * (thisTop - (fromTop + screenHeight) + thisCSStop + thisHeight);
 			// if ( relval > thisTop ) { relval = 0; }
 			relval = fromTop + screenHeight - thisHeight - (thisTop - thisCSStop );
@@ -244,19 +249,20 @@ $.fixedToolbars = (function() {
 
 		show: function( immediately, page ) {
 
-			$.fixedToolbars.clearShowTimer();
+			$.mobile.fixedToolbars.clearShowTimer();
 
 			currentstate = "overlay";
 
 			var $ap = page ? $( page ) :
-								( $.mobile.activePage ? $.mobile.activePage :
-									$( ".ui-page-active" ) );
+					( $.mobile.activePage ? $.mobile.activePage :
+						$( ".ui-page-active" ) );
 
 			return $ap.children( toolbarSelector ).each(function() {
 
 				var el = $( this ),
 					fromTop = $( window ).scrollTop(),
-					thisTop = getOffsetTop( el[ 0 ] ), // el.offset().top returns the wrong value on iPad iOS 3.2.1, call our workaround instead.
+					// el.offset().top returns the wrong value on iPad iOS 3.2.1, call our workaround instead.
+					thisTop = getOffsetTop( el[ 0 ] ),
 					screenHeight = window.innerHeight,
 					thisHeight = el.outerHeight(),
 					alreadyVisible = ( el.is( ".ui-header-fixed" ) && fromTop <= thisTop + thisHeight ) ||
@@ -314,13 +320,13 @@ $.fixedToolbars = (function() {
 
 		startShowTimer: function() {
 
-			$.fixedToolbars.clearShowTimer();
+			$.mobile.fixedToolbars.clearShowTimer();
 
-			var args = $.makeArray(arguments);
+			var args = [].slice.call( arguments );
 
 			delayTimer = setTimeout(function() {
 				delayTimer = undefined;
-				$.fixedToolbars.show.apply( null, args );
+				$.mobile.fixedToolbars.show.apply( null, args );
 			}, showDelay);
 		},
 
@@ -335,22 +341,26 @@ $.fixedToolbars = (function() {
 			if ( from ) {
 				currentstate = from;
 			}
-			return ( currentstate === "overlay" ) ? $.fixedToolbars.hide() :
-								$.fixedToolbars.show();
+			return ( currentstate === "overlay" ) ? $.mobile.fixedToolbars.hide() :
+								$.mobile.fixedToolbars.show();
 		},
 
-		setTouchToggleEnabled: function(enabled) {
+		setTouchToggleEnabled: function( enabled ) {
 			touchToggleEnabled = enabled;
 		}
 	};
 })();
 
+// TODO - Deprecated namepace on $. Remove in a later release
+$.fixedToolbars = $.mobile.fixedToolbars;
+
 //auto self-init widgets
-$( document ).bind( "pagecreate create", function( e ){
-	
-	if( $( ":jqmData(position='fixed')", e.target ).length ){
-		$( e.target ).each(function(){
-			
+$( document ).bind( "pagecreate create", function( event ) {
+
+	if ( $( ":jqmData(position='fixed')", event.target ).length ) {
+
+		$( event.target ).each(function() {
+
 			if ( !$.support.scrollTop ) {
 				return this;
 			}
@@ -362,14 +372,14 @@ $( document ).bind( "pagecreate create", function( e ){
 			}
 
 			// Should be slidedown
-			$this.find( ".ui-header:jqmData(position='fixed')" ).addClass( "ui-header-fixed ui-fixed-inline fade" );
+			$this.find( slideDownSelector ).addClass( slideDownClass );
 
 			// Should be slideup
-			$this.find( ".ui-footer:jqmData(position='fixed')" ).addClass( "ui-footer-fixed ui-fixed-inline fade" );
-			
+			$this.find( slideUpSelector ).addClass( slideUpClass );
+
 		})
-		
+
 	}
 });
 
-})(jQuery);
+})( jQuery );

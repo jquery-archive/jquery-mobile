@@ -36,10 +36,14 @@ $.widget( "mobile.listview", $.mobile.widget, {
 	},
 
 	_itemApply: function( $list, item ) {
+		var $countli = item.find( ".ui-li-count" );
+		if ( $countli.length ) {
+			item.addClass( "ui-li-has-count" );
+		}
+		$countli.addClass( "ui-btn-up-" + ( $list.jqmData( "counttheme" ) || this.options.countTheme ) + " ui-btn-corner-all" );
+
 		// TODO class has to be defined in markup
-		item.find( ".ui-li-count" )
-			.addClass( "ui-btn-up-" + ( $list.jqmData( "counttheme" ) || this.options.countTheme ) + " ui-btn-corner-all" ).end()
-		.find( "h1, h2, h3, h4, h5, h6" ).addClass( "ui-li-heading" ).end()
+		item.find( "h1, h2, h3, h4, h5, h6" ).addClass( "ui-li-heading" ).end()
 		.find( "p, dl" ).addClass( "ui-li-desc" ).end()
 		.find( ">img:eq(0), .ui-link-inherit>img:eq(0)" ).addClass( "ui-li-thumb" ).each(function() {
 			item.addClass( $(this).is( ".ui-li-icon" ) ? "ui-li-has-icon" : "ui-li-has-thumb" );
@@ -62,6 +66,42 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			li.removeClass( bot );
 		} else {
 			li.removeClass( top + " " + bot );
+		}
+	},
+
+	_refreshCorners: function() {
+		var $li,
+			$visibleli,
+			$topli,
+			$bottomli;
+
+		if ( this.options.inset ) {
+			$li = this.element.children( "li" );
+			$visibleli = $li.not( ".ui-screen-hidden" );
+			
+			this._removeCorners( $li );
+
+			// Select the first visible li element
+			$topli = $visibleli.first()
+				.addClass( "ui-corner-top" );
+
+			$topli.add( $topli.find( ".ui-btn-inner" ) )
+				.find( ".ui-li-link-alt" )
+					.addClass( "ui-corner-tr" )
+				.end()
+				.find( ".ui-li-thumb" )
+					.addClass( "ui-corner-tl" );
+
+			// Select the last visible li element
+			$bottomli = $visibleli.last()
+				.addClass( "ui-corner-bottom" );
+
+			$bottomli.add( $bottomli.find( ".ui-btn-inner" ) )
+				.find( ".ui-li-link-alt" )
+					.addClass( "ui-corner-br" )
+				.end()
+				.find( ".ui-li-thumb" )
+					.addClass( "ui-corner-bl" );
 		}
 	},
 
@@ -150,40 +190,6 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				}
 			}
 
-			if ( o.inset ) {
-				if ( pos === 0 ) {
-					itemClass += " ui-corner-top";
-
-					item.add( item.find( ".ui-btn-inner" ) )
-						.find( ".ui-li-link-alt" )
-							.addClass( "ui-corner-tr" )
-						.end()
-						.find( ".ui-li-thumb" )
-							.addClass( "ui-corner-tl" );
-
-					if ( item.next().next().length ) {
-						self._removeCorners( item.next() );
-					}
-				}
-
-				if ( pos === li.length - 1 ) {
-					itemClass += " ui-corner-bottom";
-
-					item.add( item.find( ".ui-btn-inner" ) )
-						.find( ".ui-li-link-alt" )
-							.addClass( "ui-corner-br" )
-						.end()
-						.find( ".ui-li-thumb" )
-							.addClass( "ui-corner-bl" );
-
-					if ( item.prev().prev().length ) {
-						self._removeCorners( item.prev() );
-					} else if ( item.prev().length ) {
-						self._removeCorners( item.prev(), "bottom" );
-					}
-				}
-			}
-
 			if ( counter && itemClass.indexOf( "ui-li-divider" ) < 0 ) {
 				countParent = item.is( ".ui-li-static:first" ) ? item : item.find( ".ui-link-inherit" );
 
@@ -197,6 +203,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				self._itemApply( $list, item );
 			}
 		}
+		
+		this._refreshCorners();
 	},
 
 	//create a string for ID/subpage url creation
@@ -260,20 +268,22 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 		//on pagehide, remove any nested pages along with the parent page, as long as they aren't active
 		if( hasSubPages && parentPage.data("page").options.domCache === false ){
+			var newRemove = function( e, ui ){
+				var nextPage = ui.nextPage, npURL;
+
+				if( ui.nextPage ){
+					npURL = nextPage.jqmData( "url" );
+					if( npURL.indexOf( parentUrl + "&" + $.mobile.subPageUrlKey ) !== 0 ){
+						self.childPages().remove();
+						parentPage.remove();
+					}
+				}
+			};
+
+			// unbind the original page remove and replace with our specialized version
 			parentPage
 				.unbind( "pagehide.remove" )
-				.bind( "pagehide.remove", function( e, ui ){
-					var nextPage = ui.nextPage,
-						npURL;
-
-					if( ui.nextPage ){
-						npURL = nextPage.jqmData( "url" );
-						if( npURL.indexOf( parentUrl + "&" + $.mobile.subPageUrlKey ) !== 0 ){
-							self.childPages().remove();
-							parentPage.remove();
-						}
-					}
-				});
+				.bind( "pagehide.remove", newRemove);
 		}
 	},
 

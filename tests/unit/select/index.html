@@ -10,9 +10,9 @@
 	<script src="../../../external/qunit.js"></script>
 	<script src="../../../tests/jquery.testHelper.js"></script>
 	<script src="../../../js"></script>
+  <script src="select_native.js"></script>
 	<script src="select_events.js"></script>
 	<script src="select_core.js"></script>
-
 
 	<link rel="stylesheet" href="../../../themes/default/"/>
 	<link rel="stylesheet" href="../../../external/qunit.css"/>
@@ -25,9 +25,19 @@
 <ol id="qunit-tests">
 </ol>
 
-<div id="foo"  data-nstest-role="page">
+<div id="default"  data-nstest-role="page">
 	<div  data-nstest-role="fieldcontain" id="select-choice-few-container">
 		<select name="select-choice-few" id="select-choice-few" data-nstest-native-menu="false">
+			<option value="standard">Standard: 7 day</option>
+			<option value="rush">Rush: 3 days</option>
+			<option value="express">Express: next day</option>
+			<option value="overnight">Overnight</option>
+		</select>
+	</div>
+
+	<div  data-nstest-role="fieldcontain" id="native-select-choice-few-container">
+	  <label for="native-select-choice-few" class="select">Choose shipping method:</label>
+		<select name="native-select-choice-few" id="native-select-choice-few" data-nstest-native-menu="true">
 			<option value="standard">Standard: 7 day</option>
 			<option value="rush">Rush: 3 days</option>
 			<option value="express">Express: next day</option>
@@ -46,6 +56,15 @@
 
 	<div  data-nstest-role="fieldcontain" id="select-choice-global-native-container">
 		<select name="select-choice-global-native" id="select-choice-global-native"  data-nstest-native-menu="false">
+			<option value="standard">Standard: 7 day</option>
+			<option value="rush">Rush: 3 days</option>
+			<option value="express">Express: next day</option>
+			<option value="overnight">Overnight</option>
+		</select>
+	</div>
+
+	<div data-nstest-role="fieldcontain" id="select-choice-focus-test">
+		<select name="select-choice-focus-test" id="select-choice-focus-test"  data-nstest-native-menu="false">
 			<option value="standard">Standard: 7 day</option>
 			<option value="rush">Rush: 3 days</option>
 			<option value="express">Express: next day</option>

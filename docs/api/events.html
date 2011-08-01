@@ -38,7 +38,14 @@
 			<dd>Triggers after a held complete touch event (close to one second).</dd>
 			
 			<dt><code>swipe</code></dt>
-			<dd>Triggers when a horizontal drag of 30px or more (and less than 20px vertically) occurs within 1 second duration.</dd>
+			<dd><p>Triggers when a horizontal drag of 30px or more (and less than 20px vertically) occurs within 1 second duration but these can be configured:</p>
+			  <ul>
+			  	<li><code>scrollSupressionThreshold</code> (default: 10px) – More than this horizontal displacement, and we will suppress scrolling</li>
+			  	<li><code>durationThreshold</code> (default: 1000ms) – More time than this, and it isn’t a swipe</li>
+			  	<li><code>horizontalDistanceThreshold</code> (default: 30px) – Swipe horizontal displacement must be more than this.</li>
+			  	<li><code>verticalDistanceThreshold</code> (default: 75px) – Swipe vertical displacement must be less than this.</li>
+			  	</ul>
+			</dd>
 			
 			<dt><code>swipeleft</code></dt>
 			<dd>Triggers when a swipe event occurred moving in the left direction.</dd>
@@ -126,6 +133,30 @@ $('#aboutPage').live('pagecreate',function(event){
 			</dd>
 		</dl>
 
+		
+		
+		<h2>Virtual mouse events</h2>
+		<p>We provide a set of "virtual" click events that normalize mouse and touch events. This allows the developer to register listeners for the basic mouse events, such as mousedown, mousemove, mouseup, and click, and the plugin will take care of registering the correct listeners behind the scenes to invoke the listener at the fastest possible time for that device. This still retains the order of event firing in the traditional mouse environment, should multiple handlers be registered on the same element for different events.</p>
+		<dl>
+			<dt><code>vmouseover</code></dt>
+			<dd>Normalized event for handling touch or mouse <code>mouseover</code> events</dd>
+			
+			<dt><code>vmousedown</code></dt>
+			<dd>Normalized event for handling touch or mouse <code>mousedown</code> events</dd>
+			
+			<dt><code>vmousemove</code></dt>
+			<dd>Normalized event for handling touch or mouse <code>mousemove</code> events</dd>
+			
+			<dt><code>vmouseup</code></dt>
+			<dd>Normalized event for handling touch or mouse <code>mouseup</code> events</dd>
+			
+			<dt><code>vclick</code></dt>
+			<dd>Normalized event for handling touch or mouse <code>click</code> events</dd>
+			
+			<dt><code>vmousecancel</code></dt>
+			<dd>Normalized event for handling touch or mouse <code>mousecancel</code> events</dd>
+		</dl>
+		
 		
 		
 		<h2>Animation Events</h2>

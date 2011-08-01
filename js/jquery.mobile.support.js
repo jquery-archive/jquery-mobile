@@ -4,21 +4,21 @@
 * Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
 */
 
-(function( $, undefined  ) {
+(function( $, undefined ) {
 
-var fakeBody = $( "<body>"  ).prependTo( "html" ),
+var fakeBody = $( "<body>" ).prependTo( "html" ),
 	fbCSS = fakeBody[ 0 ].style,
 	vendors = [ "webkit", "moz", "o" ],
 	webos = "palmGetResource" in window, //only used to rule out scrollTop
 	bb = window.blackberry; //only used to rule out box shadow, as it's filled opaque on BB
 
 // thx Modernizr
-function propExists( prop  ) {
+function propExists( prop ) {
 	var uc_prop = prop.charAt( 0 ).toUpperCase() + prop.substr( 1 ),
-		props   = ( prop + " " + vendors.join( uc_prop + " " ) + uc_prop ).split( " " );
+		props = ( prop + " " + vendors.join( uc_prop + " " ) + uc_prop ).split( " " );
 
 	for ( var v in props ){
-		if ( fbCSS[ v ] !== undefined  ) {
+		if ( fbCSS[ props[ v ] ] !== undefined ) {
 			return true;
 		}
 	}
@@ -33,12 +33,12 @@ function baseTagTest() {
 		link, rebase;
 
 	if ( !base.length ) {
-		base = fauxEle = $( "<base>", { "href": fauxBase} ).appendTo( "head" );
+		base = fauxEle = $( "<base>", { "href": fauxBase }).appendTo( "head" );
 	} else {
 		href = base.attr( "href" );
 	}
 
-	link = $( "<a href='testurl'></a>"  ).prependTo( fakeBody  );
+	link = $( "<a href='testurl'></a>" ).prependTo( fakeBody );
 	rebase = link[ 0 ].href;
 	base[ 0 ].href = href ? href : location.pathname;
 
@@ -79,8 +79,41 @@ $.extend( $.support, {
 
 fakeBody.remove();
 
+
+// $.mobile.ajaxBlacklist is used to override ajaxEnabled on platforms that have known conflicts with hash history updates (BB5, Symbian)
+// or that generally work better browsing in regular http for full page refreshes (Opera Mini)
+// Note: This detection below is used as a last resort.
+// We recommend only using these detection methods when all other more reliable/forward-looking approaches are not possible
+var nokiaLTE7_3 = (function(){
+
+	var ua = window.navigator.userAgent;
+
+	//The following is an attempt to match Nokia browsers that are running Symbian/s60, with webkit, version 7.3 or older
+	return ua.indexOf( "Nokia" ) > -1 &&
+			( ua.indexOf( "Symbian/3" ) > -1 || ua.indexOf( "Series60/5" ) > -1 ) &&
+			ua.indexOf( "AppleWebKit" ) > -1 &&
+			ua.match( /(BrowserNG|NokiaBrowser)\/7\.[0-3]/ );
+})();
+
+$.mobile.ajaxBlacklist =
+			// BlackBerry browsers, pre-webkit
+			window.blackberry && !window.WebKitPoint ||
+			// Opera Mini
+			window.operamini && Object.prototype.toString.call( window.operamini ) === "[object OperaMini]" ||
+			// Symbian webkits pre 7.3
+			nokiaLTE7_3;
+
+// Lastly, this workaround is the only way we've found so far to get pre 7.3 Symbian webkit devices
+// to render the stylesheets when they're referenced before this script, as we'd recommend doing.
+// This simply reappends the CSS in place, which for some reason makes it apply
+if ( nokiaLTE7_3 ) {
+	$(function() {
+		$( "head link[rel=stylesheet]" ).attr( "rel", "alternate stylesheet" ).attr( "rel", "stylesheet" );
+	});
+}
+
 // For ruling out shadows via css
-if ( !$.support.boxShadow  ){
+if ( !$.support.boxShadow ) {
 	$( "html" ).addClass( "ui-mobile-nosupport-boxshadow" );
 }
 

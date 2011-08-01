@@ -3,20 +3,38 @@
 <head>
   <meta charset="utf-8">
 	<link rel="stylesheet" href="../../external/qunit.css"></link>
+	<script src="../../js/jquery.js"></script>
+	<script src="../../external/qunit.js"></script>
+	<script src="runner.js"></script>
+  <style type="text/css">
+    html, body {
+      width:100%;
+      height:100%;
+      margin:0px;
+      padding:0px;
+    }
+
+    #testFrame {
+      float: left;
+      border: 0px;
+      height: 100%;
+      width: 60%;
+    }
+
+    #results {
+      float: left;
+      width: 30%;
+    }
+  </style>
 </head>
 <body>
-  <div style="float: left; width: 500px;">
+  <div id="results">
     <h1 id="qunit-header"><a href="#">jQuery Mobile Test Suite</a></h1>
     <h2 id="qunit-banner"></h2>
     <ol id="qunit-tests">
     </ol>
   </div>
-  <!-- under normal circumstances inline styles would be a poor choice, but in this case
-       I think an entire link and stylesheet is a waste -->
-	<iframe data-src="../../tests/unit/{{testdir}}" name="testFrame" id="testFrame" width="800px" height="100%" style="float: left; border: 0px; height: 100%;" scrolling="no">
+	<iframe data-src="../../tests/unit/{{testdir}}" name="testFrame" id="testFrame" scrolling="no">
 	</iframe>
-	<script src="../../js/jquery.js"></script>
-	<script src="../../external/qunit.js"></script>
-	<script src="runner.js"></script>
 </body>
 </html>

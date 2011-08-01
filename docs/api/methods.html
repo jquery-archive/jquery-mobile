@@ -117,6 +117,8 @@ $.mobile.changePage( "../alerts/confirm.html", {
 									</li>
 									<li><code>data</code> (<em>object</em> or	string,	default: undefined) The data to send with an Ajax page request. </li>
 									<li><code>reloadPage</code> (<em>boolean</em>, default: false) Forces a reload of a page, even if it is already in the DOM of the page container. </li>
+
+									<li><code>loadMsgDelay</code> (<em>number (in ms)</em>, default: 50) Forced delay before the loading message is shown. This is meant to allow time for a page that has already been visited to be fetched from cache without a loading message.</li>
 								</ul>
 							</li>
 						</ul>
