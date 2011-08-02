@@ -230,7 +230,6 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				})
 				.delegate( "li:not(.ui-disabled, .ui-li-divider)", "vclick", function( event ) {
 
-					
 					var $this = $( this ),
 						// index of option tag to be selected
 						oldIndex = select[ 0 ].selectedIndex,
@@ -484,6 +483,10 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		}
 
 		if ( menuHeight > screenHeight - 80 || !$.support.scrollTop ) {
+			// prevent the parent page from being removed from the DOM,
+			// otherwise the results of selecting a list item in the dialog
+			// fall into a black hole
+			self.thisPage.unbind( "pagehide.remove" );
 
 			//for webos (set lastscroll using button offset)
 			if ( scrollTop == 0 && btnOffset > screenHeight ) {
@@ -577,6 +580,13 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		var self = this;
 
 		if ( self.menuType == "page" ) {
+			// rebind the page remove that was unbound in the open function
+			// to allow for the parent page removal from actions other than the use
+			// of a dialog sized custom select
+			self.thisPage.bind( "pagehide.remove", function(){
+				$(this).remove();
+			});
+
 			// doesn't solve the possible issue with calling change page
 			// where the objects don't define data urls which prevents dialog key
 			// stripping - changePage has incoming refactor
