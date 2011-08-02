@@ -48,8 +48,8 @@ function setDefaultTransition(){
 	$.mobile.defaultPageTransition = trans;
 }
 
-//set default documentation 
-$( document ).bind( "mobileinit", setDefaultTransition );
+
 $(function(){
+	setDefaultTransition();
 	$( window ).bind( "throttledresize", setDefaultTransition );
 });
