@@ -122,6 +122,20 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 			selected: function(){
 				return this.options.filter( ":selected" );
+			},
+
+			setButtonText: function(){
+				var self = this;
+
+				this.button.find( ".ui-btn-text" ).text(function() {
+					if ( !self.isMultiple ) {
+						return self.selected().text();
+					}
+
+					return self.selected().length ? self.selected().map(function() {
+						return $( this ).text();
+					}).get().join( ", " ) : self.placeholder;
+				});
 			}
 		};
 	},
@@ -159,23 +173,9 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 			refresh: function(){
 				var self = this,
-					select = widget.element,
-					options = this.optionElems = select.find( "option" ),
-					selected = this.selected(),
-					// return an array of all selected index's
-					indicies = this.selectedIndices();
+					selected = this.selected();
 
-				self.button.find( ".ui-btn-text" )
-					.text(function() {
-
-						if ( !self.isMultiple ) {
-							return selected.text();
-						}
-
-						return selected.length ? selected.map(function() {
-							return $( this ).text();
-						}).get().join( ", " ) : self.placeholder;
-					});
+				self.setButtonText();
 
 				// multiple count inside button
 				if ( self.isMultiple ) {
@@ -207,7 +207,6 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 				// Create list from select, update state
 				widget.refresh();
-
 
 				self.select.attr( "tabindex", "-1" )
 					.focus(function() {
@@ -346,17 +345,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					self._buildList();
 				}
 
-				self.button.find( ".ui-btn-text" )
-					.text(function() {
-
-						if ( !isMultiple ) {
-							return selected.text();
-						}
-
-						return selected.length ? selected.map(function() {
-							return $( this ).text();
-						}).get().join( ", " ) : self.placeholder;
-					});
+				self.setButtonText();
 
 				// multiple count inside button
 				if ( self.isMultiple ) {
