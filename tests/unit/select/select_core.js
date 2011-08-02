@@ -88,8 +88,7 @@
 			},
 
 			function(){
-				menu = $("#select-choice-many-menu");
-				same(menu.closest('.ui-dialog').length, 1);
+				ok( $.mobile.activePage.is( ".ui-dialog "), "current page is a dialog" );
 				closeDialog();
 			},
 
@@ -98,7 +97,10 @@
 				select.trigger("click");
 			},
 
-			closeDialog,
+			function(){
+				ok( $.mobile.activePage.is( ".ui-dialog "), "current page is a dialog" );
+				closeDialog();
+			},
 
 			start
 		]);
