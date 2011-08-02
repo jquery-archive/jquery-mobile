@@ -110,9 +110,9 @@
 
 	});
 	
-	test( "checkboxradio controls will create when inside a container that receives an 'enhance' event", function(){
+	test( "checkboxradio controls will create when inside a container that receives a 'create' event", function(){
 		ok( !$("#enhancetest").appendTo(".ui-page-active").find(".ui-checkbox").length, "did not have enhancements applied" );
-		ok( $("#enhancetest").trigger("enhance").find(".ui-checkbox").length, "enhancements applied" );
+		ok( $("#enhancetest").trigger("create").find(".ui-checkbox").length, "enhancements applied" );
 	});
 	
 	

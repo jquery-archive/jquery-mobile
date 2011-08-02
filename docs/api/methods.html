@@ -33,7 +33,7 @@
 			<dd>
 				
 				<dl>
-					<dt>Arguments</dt>
+					<dt><code>&#183;</code> Arguments</dt>
 					<dd><code>to</code> (<em>string or object</em>, required)
 <ul>
 				<li>String: Absolute or relative URL. (&quot;about/us.html&quot;)</li>
@@ -104,7 +104,7 @@ $.mobile.changePage( "../alerts/confirm.html", {
 			<dd>
 				
 				<dl>
-					<dt>Arguments</dt>
+					<dt><code>&#183;</code> Arguments</dt>
 					<dd><code>url</code> (<em>string or object</em>, required) A relative or absolute URL.</dd>	
 						
 					<dd><code>options</code> (<em>object</em>, optional)
@@ -117,6 +117,8 @@ $.mobile.changePage( "../alerts/confirm.html", {
 									</li>
 									<li><code>data</code> (<em>object</em> or	string,	default: undefined) The data to send with an Ajax page request. </li>
 									<li><code>reloadPage</code> (<em>boolean</em>, default: false) Forces a reload of a page, even if it is already in the DOM of the page container. </li>
+
+									<li><code>loadMsgDelay</code> (<em>number (in ms)</em>, default: 50) Forced delay before the loading message is shown. This is meant to allow time for a page that has already been visited to be fetched from cache without a loading message.</li>
 								</ul>
 							</li>
 						</ul>
@@ -146,9 +148,9 @@ $.mobile.loadPage( "searchresults.php", {
 			<dd>When working with jQuery Mobile, <code>jqmData</code> and <code>jqmRemoveData</code> should be used in place of jQuery core's <code>data</code> and <code>removeData</code> methods (note that this includes $.fn.data, $.fn.removeData, and the $.data, $.removeData, and $.hasData utilities), as they automatically incorporate getting and setting of namespaced data attributes (even if no namespace is currently in use).</dd>
 			<dd>
 				<dl>
-					<dt>Arguments:</dt>
+					<dt><code>&#183;</code> Arguments:</dt>
 					<dd>See jQuery's <a href="http://api.jquery.com/jQuery.data/">data</a> and <a href="http://api.jquery.com/jQuery.removeData/">removeData</a> methods</dd>
-					<dt>Also:</dt>
+					<dt><code>&#183;</code> Also:</dt>
 					<dd>When finding elements by their jQuery Mobile data attribute, please use the custom selector <code>:jqmData()</code>, as it automatically incorporates namespaced data attributes into the lookup when they are in use. For example, instead of calling <code>$("div[data-role='page']")</code>, you should use <code>$("div:jqmData(role='page')")</code>, which internally maps to <code>$("div[data-"+ $.mobile.ns +"role='page']")</code> without forcing you to concatenate a namespace into your selectors manually.</dd>
 				</dl>
 			</dd>
@@ -192,47 +194,47 @@ $.mobile.hidePageLoadingMsg();
 			<dd>
 				
 				<dl>
-					<dt>Arguments</dt>
+					<dt><code>&#183;</code> Arguments</dt>
 					<dd><code>url</code> (<em>string</em>, required) A relative or absolute URL.</dd>	
 						
-					<dt>Return Value</dt>
+					<dt><code>&#183;</code> Return Value</dt>
 					<dd>
 						<p>This function returns an object that contains the various components of the URL as strings. The properties on the object mimic the browser's location object:</p>
 						<dl>	
-							<dt>hash</dt>
+							<dt><code>hash</code></dt>
 							<dd>The fragment conponent of the URL, including the leading '#' character.</dd>
-							<dt>host</dt>
+							<dt><code>host</code></dt>
 							<dd>The host and port number of the URL.</dd>
-							<dt>hostname</dt>
+							<dt><code>hostname</code></dt>
 							<dd>The name of the host within the URL.</dd>
-							<dt>href</dt>
+							<dt><code>href</code></dt>
 							<dd>The original URL that was parsed.</dd>
-							<dt>pathname</dt>
+							<dt><code>pathname</code></dt>
 							<dd>The path of the file or directory referenced by the URL.</dd>
-							<dt>port</dt>
+							<dt><code>port</code></dt>
 							<dd>The port specified within the URL. Most URLs rely on the default port for the protocol used, so this may be an empty string most of the time.</dd>
-							<dt>protocol</dt>
+							<dt><code>protocol</code></dt>
 							<dd>The protocol for the URL including the trailing ':' character.</dd>
-							<dt>search</dt>
+							<dt><code>search<</code>/dt>
 							<dd>The query component of the URL including the leading '?' character.</dd>
 						</dl>	
 						<p>But it also contains additional properties that provide access to additional components as well as some common forms of the URL developers access:</p>
 						<dl>	
-							<dt>authority</dt>	
+							<dt><code>authority</code></dt>	
 							<dd>The username, password, and host components of the URL</dd>	
-							<dt>directory</dt>
+							<dt><code>directory</code></dt>
 							<dd>The directory component of the pathname, minus any filename.</dd>	
-							<dt>domain</dt>	
+							<dt><code>domain</code></dt>	
 							<dd>The protocol and authority components of the URL.</dd>	
-							<dt>filename</dt>	
+							<dt><code>filename</code></dt>	
 							<dd>The filename within the pathname component, minus the directory.</dd>	
-							<dt>hrefNoHash</dt>	
+							<dt><code>hrefNoHash</code></dt>	
 							<dd>The original URL minus the fragment (hash) components.</dd>	
-							<dt>hrefNoSearch</dt>	
+							<dt><code>hrefNoSearch</code></dt>	
 							<dd>The original URL minus the query (search) and fragment (hash) components.</dd>	
-							<dt>password</dt>	
+							<dt><code>password</code></dt>	
 							<dd>The password contained within the authority component.</dd>	
-							<dt>username</dt>	
+							<dt><code>username</code></dt>	
 							<dd>The username contained within the authority component.</dd>	
 						</dl>	
 					</dd>	
@@ -274,11 +276,11 @@ var obj = $.mobile.path.parseUrl("http://jblas:password@mycompany.com:8080/mail/
 			<dd>Utility method for converting a relative file or directory path into an absolute path.</dd>
 			<dd>
 				<dl>
-					<dt>Arguments</dt>
+					<dt><code>&#183;</code> Arguments</dt>
 					<dd><code>relPath</code> (<em>string</em>, required) A relative file or directory path.</dd>	
 					<dd><code>absPath</code> (<em>string</em>, required) An absolute file or relative path to resolve against.</dd>	
 						
-					<dt>Return Value</dt>
+					<dt><code>&#183;</code> Return Value</dt>
 					<dd>This function returns a string that is an absolute version of the relative path passed in.</dd>	
 						
 				</dl>
@@ -340,7 +342,7 @@ var absUrl = $.mobile.path.makeUrlAbsolute("#bar", "http://foo.com/a/b/c/test.ht
 			<dd>
 				
 				<dl>
-					<dt>Arguments</dt>
+					<dt><code>&#183;</code> Arguments</dt>
 					<dd><code>url1</code> (<em>string</em>, required) A relative URL.</dd>	
 					<dd><code>url2</code> (<em>string</em>, required) An absolute URL to resolve against.</dd>	
 						
@@ -375,10 +377,10 @@ var same = $.mobile.path.isSameDomain("http://foo.com/a/file.html", "http://bar.
 			<dd>
 				
 				<dl>
-					<dt>Arguments</dt>
+					<dt><code>&#183;</code> Arguments</dt>
 					<dd><code>url</code> (<em>string</em>, required) A relative or absolute URL.</dd>	
 						
-					<dt>Return Value</dt>
+					<dt><code>&#183;</code> Return Value</dt>
 					<dd>This function returns a boolean true if the URL is relative, false if it is absolute.</dd>	
 						
 				</dl>
@@ -416,10 +418,10 @@ var isRel = $.mobile.path.isRelativeUrl("#foo");
 			<dd>
 				
 				<dl>
-					<dt>Arguments</dt>
+					<dt><code>&#183;</code> Arguments</dt>
 					<dd><code>url</code> (<em>string</em>, required) A relative or absolute URL.</dd>	
 						
-					<dt>Return Value</dt>
+					<dt><code>&#183;</code> Return Value</dt>
 					<dd>This function returns a boolean true if the URL is absolute, false if it is absolute.</dd>	
 						
 				</dl>
@@ -461,7 +463,7 @@ var isAbs = $.mobile.path.isAbsoluteUrl("#foo");
 			<dd>Scroll to a particular Y position without triggering scroll event listeners.</dd>
 			<dd>
 				<dl>
-					<dt>Arguments:</dt>
+					<dt><code>&#183;</code> Arguments:</dt>
 					<dd><code>yPos</code> (<em>number</em>, defaults to 0). Pass any number to scroll to that Y location.</dd>
 				</dl>
 			</dd>
@@ -481,7 +483,7 @@ $.mobile.silentScroll(100);
 			<dd>Add width breakpoints to the min/max width classes that are added to the HTML element.</dd>
 			<dd>
 				<dl>
-					<dt>Arguments:</dt>
+					<dt><code>&#183;</code> Arguments:</dt>
 					<dd><code>values</code> (<em>number or array</em>). Pass any number or array of numbers to add to the resolution classes. Read more about this feature here: <a href="mediahelpers.html">Orientation &amp; resolution targeting</a>.</dd>
 				</dl>
 			</dd>

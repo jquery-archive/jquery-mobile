@@ -6,15 +6,11 @@
 
 (function( $, window, undefined ) {
 
-//auto self-init widgets
-$( ":jqmData(role='dialog')" ).live( "pagecreate", function(){
-	$( this ).dialog();
-});
-
 $.widget( "mobile.dialog", $.mobile.widget, {
 	options: {
 		closeBtnText 	: "Close",
-		theme			: "a"
+		theme			: "a",
+		initSelector	: ":jqmData(role='dialog')"
 	},
 	_create: function() {
 		var $el = this.element,
@@ -65,4 +61,10 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		window.history.back();
 	}
 });
+
+//auto self-init widgets
+$( $.mobile.dialog.prototype.options.initSelector ).live( "pagecreate", function(){
+	$( this ).dialog();
+});
+
 })( jQuery, this );

@@ -7,16 +7,10 @@
 
 (function( $, undefined ) {
 
-//auto self-init widgets
-$( document ).bind( "pagecreate enhance", function( e ){
-	$( "input[type='checkbox'],input[type='radio']", e.target )
-		.not( ":jqmData(role='none'), :jqmData(role='nojs')" )
-		.checkboxradio();
-});
-
 $.widget( "mobile.checkboxradio", $.mobile.widget, {
 	options: {
-		theme: null
+		theme: null,
+		initSelector: "input[type='checkbox'],input[type='radio']"
 	},
 	_create: function() {
 		var self = this,
@@ -189,4 +183,12 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 		this.element.prop( "disabled", false ).parent().removeClass( "ui-disabled" );
 	}
 });
+
+//auto self-init widgets
+$( document ).bind( "pagecreate create", function( e ){
+	$( $.mobile.checkboxradio.prototype.options.initSelector, e.target )
+		.not( ":jqmData(role='none'), :jqmData(role='nojs')" )
+		.checkboxradio();
+});
+
 })( jQuery );

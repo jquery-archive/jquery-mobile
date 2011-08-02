@@ -4,7 +4,11 @@
 (function($){
 	var changePageFn = $.mobile.changePage,
 			originalTitle = document.title,
-			siteDirectory = location.pathname.replace(/[^/]+$/, "");
+			siteDirectory = location.pathname.replace(/[^/]+$/, ""),
+			navigateTestRoot = function(){
+				$.testHelper.openPage( "#" + location.pathname );
+			};
+
 	module('jquery.mobile.navigation.js', {
 		setup: function(){
 			$.mobile.changePage = changePageFn;
@@ -22,9 +26,76 @@
 			$.mobile.urlHistory.activeIndex = 0;
 		}
 	});
-	
-	
 
+	asyncTest( "external page is removed from the DOM after pagehide", function(){
+		$.testHelper.pageSequence([
+			navigateTestRoot,
+
+			function(){
+				$.mobile.changePage( "external.html" );
+			},
+
+			// page is pulled and displayed in the dom
+			function(){
+				same( $( "#external-test" ).length, 1 );
+				window.history.back();
+			},
+
+			// external-test is *NOT* cached in the dom after transitioning away
+			function(){
+				same( $( "#external-test" ).length, 0 );
+				start();
+			}
+		]);
+	});
+
+	asyncTest( "external page is cached in the DOM after pagehide", function(){
+		$.testHelper.pageSequence([
+			navigateTestRoot,
+			
+			function(){
+				$.mobile.changePage( "cached-external.html" );
+			},
+
+			// page is pulled and displayed in the dom
+			function(){
+				same( $( "#external-test-cached" ).length, 1 );
+				window.history.back();
+			},
+
+			// external test page is cached in the dom after transitioning away
+			function(){
+				same( $( "#external-test-cached" ).length, 1 );
+				start();
+			}
+		]);
+	});
+
+	asyncTest( "external page is cached in the DOM after pagehide when option is set globally", function(){
+			$.testHelper.pageSequence([
+				navigateTestRoot,
+			
+				function(){
+					$.mobile.page.prototype.options.domCache = true;
+					$.mobile.changePage( "external.html" );
+				},
+
+				// page is pulled and displayed in the dom
+				function(){
+					same( $( "#external-test" ).length, 1 );
+					window.history.back();
+				},
+
+				// external test page is cached in the dom after transitioning away
+				function(){
+					same( $( "#external-test" ).length, 1 );
+					$.mobile.page.prototype.options.domCache = false;
+					$( "#external-test" ).remove();
+					start();
+				}
+			]);
+		});
+		
 	asyncTest( "forms with data attribute ajax set to false will not call changePage", function(){
 		var called = false;
 		var newChangePage = function(){
@@ -65,28 +136,6 @@
 				ok(called >= 2, "change page should be called at least twice");
 				start();
 			}], 300);
-	});
-	
-	//testing the data-prefetch attr
-	var prefetched = false;
-	$('#prefetch').live('pagecreate',function(event){
-		prefetched = true;
-		ok( true, 'Page fetched properly' );
-		window.history.back();
-		start();
-	});
-	
-	asyncTest( "data-prefetch attribute on an anchor will preload the referenced page when its parent page is shown", function(){
-		
-		setTimeout(function(){
-			if( !prefetched ){
-				ok( false, 'Page wasn\'t fetched properly' );
-				window.history.back();
-				start();
-			}
-		}, 1000);
-		
-		$.mobile.changePage( "#prefetch" );
 	});
 
 

@@ -157,8 +157,8 @@
 	});
 	
 	
-	test( "slider controls will create when inside a container that receives an 'enhance' event", function(){
+	test( "slider controls will create when inside a container that receives a 'create' event", function(){
 		ok( !$("#enhancetest").appendTo(".ui-page-active").find(".ui-slider").length, "did not have enhancements applied" );
-		ok( $("#enhancetest").trigger("enhance").find(".ui-slider").length, "enhancements applied" );
+		ok( $("#enhancetest").trigger("create").find(".ui-slider").length, "enhancements applied" );
 	});
 })(jQuery);

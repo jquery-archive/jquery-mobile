@@ -124,8 +124,10 @@
 		$.mobile.defaultHomeScroll = ( !$.support.scrollTop || $(window).scrollTop() === 1 ) ? 0 : 1;
 	
 		//dom-ready inits
-		$( $.mobile.initializePage );
-	
+		if( $.mobile.autoInitializePage ){
+			$( $.mobile.initializePage );
+		}
+		
 		//window load event
 		//hide iOS browser chrome on load
 		$window.load( $.mobile.silentScroll );
