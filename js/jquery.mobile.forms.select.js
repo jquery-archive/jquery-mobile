@@ -112,7 +112,17 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			headerClose: headerClose,
 			menuPageContent: menuPageContent,
 			menuPageClose: menuPageClose,
-			placeholder: ""
+			placeholder: "",
+
+			selectedIndices: function(){
+				this.selected().map(function() {
+					return options.index( this );
+				}).get();
+			},
+
+			selected: function(){
+				return this.options.filter( ":selected" );
+			}
 		};
 	},
 
@@ -145,6 +155,32 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 						self.button.trigger( "vmouseout" )
 							.removeClass( $.mobile.activeBtnClass );
 					});
+			},
+
+			refresh: function(){
+				var self = this,
+					select = widget.element,
+					options = this.optionElems = select.find( "option" ),
+					selected = this.selected(),
+					// return an array of all selected index's
+					indicies = this.selectedIndices();
+
+				self.button.find( ".ui-btn-text" )
+					.text(function() {
+
+						if ( !self.isMultiple ) {
+							return selected.text();
+						}
+
+						return selected.length ? selected.map(function() {
+							return $( this ).text();
+						}).get().join( ", " ) : self.placeholder;
+					});
+
+				// multiple count inside button
+				if ( self.isMultiple ) {
+					self.buttonCount[ selected.length > 1 ? "show" : "hide" ]().text( selected.length );
+				}
 			}
 		});
 	},
@@ -295,6 +331,55 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 						return false;
 					}
 				});
+			},
+
+			refresh: function(forceRebuild){
+				var self = this,
+					select = this.element,
+					isMultiple = this.isMultiple,
+					options = this.optionElems = select.find( "option" ),
+					selected = this.selected(),
+					// return an array of all selected index's
+					indicies = this.selectedIndices();
+
+				if (  forceRebuild || select[0].options.length != self.list.find( "li" ).length ) {
+					self._buildList();
+				}
+
+				self.button.find( ".ui-btn-text" )
+					.text(function() {
+
+						if ( !isMultiple ) {
+							return selected.text();
+						}
+
+						return selected.length ? selected.map(function() {
+							return $( this ).text();
+						}).get().join( ", " ) : self.placeholder;
+					});
+
+				// multiple count inside button
+				if ( self.isMultiple ) {
+					self.buttonCount[ selected.length > 1 ? "show" : "hide" ]().text( selected.length );
+				}
+
+				self.list.find( "li:not(.ui-li-divider)" )
+					.removeClass( $.mobile.activeBtnClass )
+					.attr( "aria-selected", false )
+					.each(function( i ) {
+
+						if ( $.inArray( i, indicies ) > -1 ) {
+							var item = $( this ).addClass( $.mobile.activeBtnClass );
+
+							// Aria selected attr
+							item.find( "a" ).attr( "aria-selected", true );
+
+							// Multiple selects: add the "on" checkbox state to the icon
+							if ( self.isMultiple ) {
+								item.find( ".ui-icon" ).removeClass( "ui-icon-checkbox-off" ).addClass( "ui-icon-checkbox-on" );
+							}
+						}
+					});
 			}
 		});
 	},
@@ -429,63 +514,6 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 		// Now populated, create listview
 		self.list.listview();
-	},
-
-	refresh: function( forceRebuild ) {
-		var self = this,
-			select = this.element,
-			isMultiple = this.isMultiple,
-			options = this.optionElems = select.find( "option" ),
-			selected = options.filter( ":selected" ),
-
-			// return an array of all selected index's
-			indicies = selected.map(function() {
-				return options.index( this );
-			}).get();
-
-		if ( !self.options.nativeMenu &&
-					( forceRebuild || select[0].options.length != self.list.find( "li" ).length ) ) {
-
-			self._buildList();
-		}
-
-		self.button.find( ".ui-btn-text" )
-			.text(function() {
-
-				if ( !isMultiple ) {
-					return selected.text();
-				}
-
-				return selected.length ? selected.map(function() {
-								return $( this ).text();
-							}).get().join( ", " ) : self.placeholder;
-			});
-
-		// multiple count inside button
-		if ( self.isMultiple ) {
-			self.buttonCount[ selected.length > 1 ? "show" : "hide" ]().text( selected.length );
-		}
-
-		if ( !self.options.nativeMenu ) {
-
-			self.list.find( "li:not(.ui-li-divider)" )
-				.removeClass( $.mobile.activeBtnClass )
-				.attr( "aria-selected", false )
-				.each(function( i ) {
-
-					if ( $.inArray( i, indicies ) > -1 ) {
-						var item = $( this ).addClass( $.mobile.activeBtnClass );
-
-						// Aria selected attr
-						item.find( "a" ).attr( "aria-selected", true );
-
-						// Multiple selects: add the "on" checkbox state to the icon
-						if ( self.isMultiple ) {
-							item.find( ".ui-icon" ).removeClass( "ui-icon-checkbox-off" ).addClass( "ui-icon-checkbox-on" );
-						}
-					}
-				});
-		}
 	},
 
 	open: function() {
