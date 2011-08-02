@@ -79,6 +79,41 @@ $.extend( $.support, {
 
 fakeBody.remove();
 
+
+// $.mobile.ajaxBlacklist is used to override ajaxEnabled on platforms that have known conflicts with hash history updates (BB5, Symbian)
+// or that generally work better browsing in regular http for full page refreshes (Opera Mini)
+// Note: This detection below is used as a last resort. 
+// We recommend only using these detection methods when all other more reliable/forward-looking approaches are not possible
+var nokiaLTE7_3 = function(){
+	
+	var ua = window.navigator.userAgent;
+
+	//The following is an attempt to match Nokia browsers that are running Symbian/s60, with webkit, version 7.3 or older
+	return ua.indexOf( "Nokia" ) > -1
+			&& ( ua.indexOf( "Symbian/3" ) > -1 || ua.indexOf( "Series60/5" ) > -1 )
+			&& ua.indexOf( "AppleWebKit" ) > -1
+			&& ua.match( /(BrowserNG|NokiaBrowser)\/7\.[0-3]/ );		
+}();
+
+$.mobile.ajaxBlacklist =
+        // BlackBerry browsers, pre-webkit
+        window.blackberry && !window.WebKitPoint
+        // Opera Mini
+        || window.operamini && Object.prototype.toString.call( window.operamini ) === "[object OperaMini]"
+        // Symbian webkits pre 7.3
+        || nokiaLTE7_3;
+
+// Lastly, this workaround is the only way we've found so far to get pre 7.3 Symbian webkit devices
+// to render the stylesheets when they're referenced before this script, as we'd recommend doing.
+// This simply reappends the CSS in place, which for some reason makes it apply
+if( nokiaLTE7_3 ){
+	$(function(){
+		$( "head link[rel=stylesheet]" ).each(function(){
+			$( this ).attr( "rel", "alternate stylesheet" ).attr( "rel", "stylesheet" );
+		});
+	});	
+}
+
 // For ruling out shadows via css
 if ( !$.support.boxShadow  ){
 	$( "html" ).addClass( "ui-mobile-nosupport-boxshadow" );
