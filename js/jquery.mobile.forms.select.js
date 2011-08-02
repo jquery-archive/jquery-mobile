@@ -276,6 +276,13 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 						}
 					});
 
+				// button refocus ensures proper height calculation
+				// by removing the inline style and ensuring page inclusion
+				self.menuPage.bind( "pagehide", function(){
+					self.list.appendTo( self.listbox );
+					widget._focusButton();
+				});
+
 				// Events on "screen" overlay
 				self.screen.bind( "vclick", function( event ) {
 					widget.close();
