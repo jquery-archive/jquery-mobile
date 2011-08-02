@@ -4,9 +4,9 @@
 
 (function($){
 	var libName = "jquery.mobile.forms.select.js",
-			originalDefaultDialogTrans = $.mobile.defaultDialogTransition,
-			originalDefTransitionHandler = $.mobile.defaultTransitionHandler,
-			resetHash, closeDialog;
+		originalDefaultDialogTrans = $.mobile.defaultDialogTransition,
+		originalDefTransitionHandler = $.mobile.defaultTransitionHandler,
+		resetHash, closeDialog;
 
 	resetHash = function(timeout){
 		$.testHelper.openPage( location.hash.indexOf("#default") >= 0 ? "#" : "#default" );

@@ -10,6 +10,7 @@
 	<script src="../../../external/qunit.js"></script>
 	<script src="../../../tests/jquery.testHelper.js"></script>
 	<script src="../../../js"></script>
+  <script src="select_native.js"></script>
 	<script src="select_events.js"></script>
 	<script src="select_core.js"></script>
 
@@ -27,6 +28,15 @@
 <div id="default"  data-nstest-role="page">
 	<div  data-nstest-role="fieldcontain" id="select-choice-few-container">
 		<select name="select-choice-few" id="select-choice-few" data-nstest-native-menu="false">
+			<option value="standard">Standard: 7 day</option>
+			<option value="rush">Rush: 3 days</option>
+			<option value="express">Express: next day</option>
+			<option value="overnight">Overnight</option>
+		</select>
+	</div>
+
+	<div  data-nstest-role="fieldcontain" id="native-select-choice-few-container">
+		<select name="native-select-choice-few" id="native-select-choice-few" data-nstest-native-menu="true">
 			<option value="standard">Standard: 7 day</option>
 			<option value="rush">Rush: 3 days</option>
 			<option value="express">Express: next day</option>
