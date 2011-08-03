@@ -37,7 +37,7 @@ $( ":jqmData(role='listview')" ).live( "listviewcreate", function() {
 				lastval = $this.jqmData( "lastval" ) + "",
 				childItems = false,
 				itemtext = "",
-				item;
+				item, change;
 
 			// Change val as lastval for next execution
 			$this.jqmData( "lastval" , val );
