@@ -594,6 +594,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		} else{
 			self.screen.addClass( "ui-screen-hidden" );
 			self.listbox.addClass( "ui-selectmenu-hidden" ).removeAttr( "style" ).removeClass( "in" );
+			self.list.appendTo( self.listbox );
 			self._focusButton();
 		}
 
