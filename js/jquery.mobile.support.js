@@ -84,7 +84,7 @@ fakeBody.remove();
 // or that generally work better browsing in regular http for full page refreshes (Opera Mini)
 // Note: This detection below is used as a last resort. 
 // We recommend only using these detection methods when all other more reliable/forward-looking approaches are not possible
-var nokiaLTE7_3 = function(){
+var nokiaLTE7_3 = (function(){
 	
 	var ua = window.navigator.userAgent;
 
@@ -93,7 +93,7 @@ var nokiaLTE7_3 = function(){
 			&& ( ua.indexOf( "Symbian/3" ) > -1 || ua.indexOf( "Series60/5" ) > -1 )
 			&& ua.indexOf( "AppleWebKit" ) > -1
 			&& ua.match( /(BrowserNG|NokiaBrowser)\/7\.[0-3]/ );		
-}();
+})();
 
 $.mobile.ajaxBlacklist =
         // BlackBerry browsers, pre-webkit
