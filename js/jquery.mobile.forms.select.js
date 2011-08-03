@@ -545,7 +545,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				// 30px tolerance off the edges
 				if ( newleft < 30 ) {
 					newleft = 30;
-				} else if ( (newleft + menuWidth) > screenWidth ) {
+				} else if ( ( newleft + menuWidth ) > screenWidth ) {
 					newleft = screenWidth - menuWidth - 30;
 				}
 			}
@@ -591,8 +591,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			// where the objects don't define data urls which prevents dialog key
 			// stripping - changePage has incoming refactor
 			window.history.back();
-		}
-		else{
+		} else{
 			self.screen.addClass( "ui-screen-hidden" );
 			self.listbox.addClass( "ui-selectmenu-hidden" ).removeAttr( "style" ).removeClass( "in" );
 			self._focusButton();
