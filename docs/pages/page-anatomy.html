@@ -28,7 +28,7 @@
 
 			<h2>Mobile page structure</h2> 
 
-			<p>A jQuery Mobile site must start with an HTML5 'doctype' to take full advantage of all of the framework's features. (Older devices with browsers that don't understand HTML5 will safely ignore the 'doctype' and various custom attributes.) In the 'head', references to jQuery, jQuery Mobile and the mobile theme CSS are all required to start things off:</p> 
+			<p>A jQuery Mobile site must start with an HTML5 'doctype' to take full advantage of all of the framework's features. (Older devices with browsers that don't understand HTML5 will safely ignore the 'doctype' and various custom attributes.) In the 'head', references to jQuery, jQuery Mobile and the mobile theme CSS are all required to start things off. We recommend linking to the files hosted on the jQuery CDN for best performance:</p> 
 
 <pre><code>
 &lt;!DOCTYPE html&gt; 
@@ -38,20 +38,25 @@
 	
 	&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt; 
 
-	&lt;link rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.css&quot; /&gt;
-	&lt;script type=&quot;text/javascript&quot; src=&quot;http://code.jquery.com/jquery-1.6.1.min.js&quot;&gt;&lt;/script&gt;
-	&lt;script type=&quot;text/javascript&quot; src=&quot;http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.js&quot;&gt;&lt;/script&gt;
+	&lt;link rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/mobile/1.0b2/jquery.mobile-1.0b2.min.css&quot; /&gt;
+	&lt;script type=&quot;text/javascript&quot; src=&quot;http://code.jquery.com/jquery-1.6.2.min.js&quot;&gt;&lt;/script&gt;
+	&lt;script type=&quot;text/javascript&quot; src=&quot;http://code.jquery.com/mobile/1.0b2/jquery.mobile-1.0b2.min.js&quot;&gt;&lt;/script&gt;
 &lt;/head&gt; 
+
 &lt;body&gt; 
-
-...
-
+...content goes here...
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
 			
-			<p>Note that you should also include a meta <code>viewport</code> tag in the <code>head</code> to specify how the browser should display your page zoom level and dimensions. If this isn't set, many mobile browsers will use a "virtual" page width around 900 pixels to make it work well with exisitng desktop sites but the screens may look zoomed out and too wide. By setting the <code>content=&quot;width=device-width, initial-scale=1</code> in the code example above, the width will be set to the pixel width of the device screen. These settings do not disable the user's ability to zoom the pages which is nice from an accessibility perspective. There is a minor issue in iOS that doesn't properly set the width when changing orientations with these viewport settings, but this will hopefully be fixed a a future release. You can set other viewport values to disable zooming if required since this is part of your page content, not the library. </p>
-
+			<h2>Viewport meta tag</h2>
+			<p>Note above that there is a meta <code>viewport</code> tag in the <code>head</code> to specify how the browser should display the page zoom level and dimensions. If this isn't set, many mobile browsers will use a "virtual" page width around 900 pixels to make it work well with exisitng desktop sites but the screens may look zoomed out and too wide. By setting the viewport attributes to <code>content=&quot;width=device-width, initial-scale=1</code>, the width will be set to the pixel width of the device screen. </p>
+			
+			<pre><code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt; </code></pre>
+			
+			<p>These settings do not disable the user's ability to zoom the pages which is nice from an accessibility perspective. There is a minor issue in iOS that doesn't properly set the width when changing orientations with these viewport settings, but this will hopefully be fixed a a future release. You can set other viewport values to disable zooming if required since this is part of your page content, not the library. </p>
+			
+			<h2>Inside the body: Pages</h2>
 			<p>Inside the <code>&lt;body&gt;</code> tag, each view or "page" on the mobile device is identified with an element (usually a <code>div</code>) with the <code> data-role="page"</code> attribute:</p> 
 
 <div class="highlight"> 
@@ -64,16 +69,16 @@
 			<p>Within the "page" container, any valid HTML markup can be used, but for typical pages in jQuery Mobile, the immediate children of a "page" are divs with data-roles of <code>"header"</code>, <code>"content"</code>, and <code>"footer"</code>.</p> 
 
 <div class="highlight"> 
-<pre><span class="nt">&lt;div</span> <span class="na"> data-role=</span><span class="s">"page"</span><span class="nt">&gt;</span> 
-	<span class="nt">&lt;div</span> <span class="na"> data-role=</span><span class="s">"header"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/div&gt;</span> 
-	<span class="nt">&lt;div</span> <span class="na"> data-role=</span><span class="s">"content"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/div&gt;</span> 
-	<span class="nt">&lt;div</span> <span class="na"> data-role=</span><span class="s">"footer"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/div&gt;</span> 
+<pre><span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"page"</span><span class="nt">&gt;</span> 
+	<span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"header"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/div&gt;</span> 
+	<span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"content"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/div&gt;</span> 
+	<span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"footer"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/div&gt;</span> 
 <span class="nt">&lt;/div&gt;</span> 
 </pre> 
 </div> 
 
 
-<h2>Default page template</h2> 
+<h2>Putting it together: Basic single page template</h2> 
 
 <p>Putting it all together, this is the standard boilerplate page template you should start with on a project. :</p>
 
@@ -85,9 +90,9 @@
 	
 	&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt; 
 
-	&lt;link rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.css&quot; /&gt;
-	&lt;script type=&quot;text/javascript&quot; src=&quot;http://code.jquery.com/jquery-1.6.1.min.js&quot;&gt;&lt;/script&gt;
-	&lt;script type=&quot;text/javascript&quot; src=&quot;http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.js&quot;&gt;&lt;/script&gt;
+	&lt;link rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/mobile/1.0b2/jquery.mobile-1.0b2.min.css&quot; /&gt;
+	&lt;script type=&quot;text/javascript&quot; src=&quot;http://code.jquery.com/jquery-1.6.2.min.js&quot;&gt;&lt;/script&gt;
+	&lt;script type=&quot;text/javascript&quot; src=&quot;http://code.jquery.com/mobile/1.0b2/jquery.mobile-1.0b2.min.js&quot;&gt;&lt;/script&gt;
 &lt;/head&gt; 
 &lt;body&gt; 
 
@@ -194,7 +199,8 @@
 								<li><a href="page-transitions.html">Page transitions</a></li>
 								<li><a href="page-dialogs.html">Dialogs</a></li>
 								<li><a href="page-cache.html">Preload & cache pages</a></li>
-								<li><a href="page-navmodel.html">Ajax, hashes &amp; history</a></li>
+								<li><a href="page-navmodel.html">Ajax, hashes &amp; history</a></li></li>
+								<li><a href="page-scripting.html">Scripting pages</a></li>
 								<li><a href="pages-themes.html">Theming pages</a></li>
 
 							</ul>

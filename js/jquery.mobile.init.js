@@ -24,7 +24,7 @@
 	
 	// override ajaxEnabled on platforms that have known conflicts with hash history updates 
 	// or generally work better browsing in regular http for full page refreshes (BB5, Opera Mini)
-	if( window.blackberry && !window.WebKitPoint || window.operamini && Object.prototype.toString.call( window.operamini ) === "[object OperaMini]" ){
+	if( $.mobile.ajaxBlacklist ){
 		$.mobile.ajaxEnabled = false;
 	}
 
@@ -117,7 +117,7 @@
 	//note that this initial scroll won't hide the address bar. It's just for the check.
 	$(function(){
 		window.scrollTo( 0, 1 );
-	
+
 		//if defaultHomeScroll hasn't been set yet, see if scrollTop is 1
 		//it should be 1 in most browsers, but android treats 1 as 0 (for hiding addr bar)
 		//so if it's 1, use 0 from now on
