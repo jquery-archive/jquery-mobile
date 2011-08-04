@@ -22,28 +22,27 @@
 
 	<div data-role="content">
 		<div class="content-primary">
-
+		<h2>Form methods reference</h2>
 		<p>After jQuery Mobile auto-enhances form controls into custom controls, you can manipulate many of their properties via plugin methods. The currently available methods are listed below. Check Github for updates - we're working on complete coverage.</p>
 		
 		<h2>Selectmenu</h2>
 		<dl>
-			<dt>Methods</dt>
-			<dd><code>open</code> open a closed select menu</dd>
+			<dt><code>open</code> open a closed select menu</dt>
 			<dd>
 			<pre><code>
 $('select').selectmenu('open');			
 			</code></pre>
 			</dd>
 			
-			<dd><code>close</code> close an open select menu</dd>
+			<dt><code>close</code> close an open select menu</dt>
 			<dd>
 			<pre><code>
 $('select').selectmenu('close');			
 			</code></pre>
 			</dd>
 			
-			<dd><code>refresh</code>: Update the custom menu to reflect the native select element's value. If the number of options in the select are different than the number of items in the custom menu, it'll rebuild the custom menu. Also, if you pass a true argument you can force the rebuild to happen.</dd>
-			<dd>
+			<dt><code>refresh</code>: Update the custom menu to reflect the native select element's value. </dt>
+			<dd><p>If the number of options in the select are different than the number of items in the custom menu, it'll rebuild the custom menu. Also, if you pass a true argument you can force the rebuild to happen.</p>
 			<pre><code>
 //refresh value			
 $('select').selectmenu('refresh');
@@ -53,14 +52,14 @@ $('select').selectmenu('refresh', true);
 			</code></pre>
 			</dd>
 			
-			<dd><code>enable</code>: enable a disabled select.</dd>
+			<dt><code>enable</code>: enable a disabled select.</dt>
 			<dd>
 			<pre><code>
 $('select').selectmenu('enable');			
 			</code></pre>
 			</dd>
 			
-			<dd><code>disable</code>: disable a select.</dd>
+			<dt><code>disable</code>: disable a select.</dt>
 			<dd>
 			<pre><code>
 $('select').selectmenu('disable');			
@@ -75,17 +74,16 @@ $('select').selectmenu('disable');
 		
 		
 		<h2>Textinput</h2>
+
 		<dl>
-			<dt>Methods</dt>
-			
-			<dd><code>enable</code>: enable a disabled textinput/textarea.</dd>
+			<dt><code>enable</code>: enable a disabled textinput/textarea.</dt>
 			<dd>
 			<pre><code>
 $('input').textinput('enable');			
 			</code></pre>
 			</dd>
 			
-			<dd><code>disable</code>: disable a textinput/textarea.</dd>
+			<dt><code>disable</code>: disable a textinput/textarea.</dt>
 			<dd>
 			<pre><code>
 $('textarea').textinput('disable');			
@@ -99,24 +97,23 @@ $('textarea').textinput('disable');
 		
 				
 		<h2>checkboxradio</h2>
+
 		<dl>
-			<dt>Methods</dt>
-			
-			<dd><code>enable</code>: enable a disabled checkboxradio.</dd>
+			<dt><code>enable</code>: enable a disabled checkboxradio.</dt>
 			<dd>
 			<pre><code>
 $('input').checkboxradio('enable');			
 			</code></pre>
 			</dd>
 			
-			<dd><code>disable</code>: disable a checkboxradio.</dd>
+			<dt><code>disable</code>: disable a checkboxradio.</dt>
 			<dd>
 			<pre><code>
 $('input').checkboxradio('disable');			
 			</code></pre>
 			</dd>
 			
-			<dd><code>refresh</code>: refresh a checkboxradio's value.</dd>
+			<dt><code>refresh</code>: refresh a checkboxradio's value.</dt>
 			<dd>
 			<pre><code>
 $('input').checkboxradio('refresh');			
@@ -125,25 +122,24 @@ $('input').checkboxradio('refresh');
 		</dl>	
 		
 		
-		<h2>slider</h2>
+		<h2>Slider</h2>		
+
 		<dl>
-			<dt>Methods</dt>
-			
-			<dd><code>enable</code>: enable a disabled slider.</dd>
+			<dt><code>enable</code>: enable a disabled slider.</dt>
 			<dd>
 			<pre><code>
 $('input').slider('enable');			
 			</code></pre>
 			</dd>
 			
-			<dd><code>disable</code>: disable a slider.</dd>
+			<dt><code>disable</code>: disable a slider.</dt>
 			<dd>
 			<pre><code>
 $('input').slider('disable');			
 			</code></pre>
 			</dd>
 			
-			<dd><code>refresh</code>: refresh a slider's value.</dd>
+			<dt><code>refresh</code>: refresh a slider's value.</dt>
 			<dd>
 			<pre><code>
 $('input').slider('refresh');			
@@ -152,18 +148,17 @@ $('input').slider('refresh');
 		</dl>
 		
 		
-		<h2>Form buttons</h2>
+		<h2>Form buttons</h2>	
+
 		<dl>
-			<dt>Methods</dt>
-			
-			<dd><code>enable</code>: enable a disabled button.</dd>
+			<dt><code>enable</code>: enable a disabled button.</dt>
 			<dd>
 			<pre><code>
 $('input').button('enable');			
 			</code></pre>
 			</dd>
 			
-			<dd><code>disable</code>: disable a slider.</dd>
+			<dt><code>disable</code>: disable a slider.</dt>
 			<dd>
 			<pre><code>
 $('input').button('disable');			
