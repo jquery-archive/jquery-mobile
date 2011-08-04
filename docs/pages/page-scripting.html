@@ -64,7 +64,7 @@ $.mobile.loadPage( "about/us.html" );
 			<h2>Enhancing new markup</h2> 
 			<p>The page plugin dispatches a &#8220;pagecreate&#8221; event, which most widgets use to auto-initialize themselves. As long as a widget plugin script is referenced, it will automatically enhance any instances of the widgets it finds on the page.</p>		
 			<p>However, if you generate new markup client-side or load in content via Ajax and inject it into a page, you can trigger the <code>create</code> event to handle the auto-initialization for all the plugins contained within the new markup. This can be triggered on any element (even the page div itself), saving you the task of manually initializing each plugin (listview button, select, etc.).</p> 
-			<p>For example, if a block of HTML markup (say a login form) was loaded in through Ajax, trigger the <code>create</code> event to automatically transform all the widgets it contains (<a href="http://jquerymobile.com/test/docs/forms/forms-text.html">inputs</a> and <a href="http://jquerymobile.com/test/docs/buttons/index.html">buttons</a> in this case) into the enhanced versions. The code for this scenario would be:</p> 
+			<p>For example, if a block of HTML markup (say a login form) was loaded in through Ajax, trigger the <code>create</code> event to automatically transform all the widgets it contains (<a href="http://jquerymobile.com/test/docs/forms/texts/index.html">inputs</a> and <a href="http://jquerymobile.com/test/docs/buttons/index.html">buttons</a> in this case) into the enhanced versions. The code for this scenario would be:</p> 
 <pre style="margin: 25px 0;"><code style="font-size: 12px;">$( ...new markup that contains widgets... ).appendTo( ".ui-page" ).trigger( "create" );
 </code></pre> 
 
