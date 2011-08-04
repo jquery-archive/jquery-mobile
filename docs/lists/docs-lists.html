@@ -1,17 +1,17 @@
-<!DOCTYPE html> 
-<html> 
+<!DOCTYPE html>
+<html>
 	<head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<title>jQuery Mobile Docs - Lists Overview</title> 
-	<link rel="stylesheet"  href="../../themes/default/" />  
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Docs - Lists Overview</title>
+	<link rel="stylesheet"  href="../../themes/default/" />
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 	<script src="../../js/jquery.js"></script>
 	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
 	<script src="../_assets/js/jqm-docs.js"></script>
 	<script src="../../js/"></script>
-</head> 
-<body> 
+</head>
+<body>
 
 	<div data-role="page" class="type-interior">
 
@@ -24,7 +24,7 @@
 			<div class="content-primary">
 			<h2>Basic linked lists</h2>
 			<p>A list view is coded as a simple unordered list containing linked list items with a <code> data-role="listview"</code> attribute. jQuery Mobile will apply all the necessary styles to transform the list into a mobile-friendly list view with right arrow indicator that fills the full width of the browser window. When you tap on the list item, the framework will trigger a click on the first link inside the list item, issue an AJAX request for the URL in the link, create the new page in the DOM, then kick off a page transition. Here is the HTML markup for a basic linked list.</p>
-			
+
 <pre><code>
 &lt;ul data-role=&quot;listview&quot; data-theme=&quot;g&quot;&gt;
 	&lt;li&gt;&lt;a href=&quot;acura.html&quot;&gt;Acura&lt;/a&gt;&lt;/li&gt;
@@ -32,46 +32,56 @@
 	&lt;li&gt;&lt;a href=&quot;bmw.html&quot;&gt;BMW&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </code></pre>
-			
+
 			<a href="lists-ul.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Basic list example</a>
-			
+
 			<h2>Nested lists</h2>
 			<p>By nesting child <code>ul</code> or <code>ol</code> inside list items, you can create nested lists. When a list item with a child list is clicked, the framework will generate a new ui-page populated with the title of the parent in the header and the list of child elements. These dynamic nested lists are styled with the "b" theme swatch (blue in the default theme) to indicate that you are in a secondary level of navigation. Lists can be nested multiple level deep and all pages and linking will be automatically handled by the framework.</p>
 			<p>To set the swatch color of the child list views, <code> data-theme</code> attribute on each list inside.</p>
 			<a href="lists-nested.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Nested list example</a>
-			
+
 			<h2>Numbered lists</h2>
 			<p>Lists can also be created from ordered lists <code>(ol)</code> which is useful when presented items that are in a sequence such as search results or a movie queue. When the enhanced markup is applied to the list view, jQuery Mobile will try to first use CSS to add numbers to the list and, if not supported, will fall back to injecting numbers with JavaScript.</p>
-			
+
 			<a href="lists-ol.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Numbered list example</a>
-			
+
 			<h2>Read-only lists</h2>
 			<p>List views can also be used to display a non-interactive list of items, usually as an inset list. This list is built from an unordered or ordered list that don't have linked list items. The framework defaults to styling these list with the "c" theme swatch (flat white in the default theme) and sets the text size to a smaller size than the clickable lists to save a bit of space.</p>
-			
+
 			<a href="lists-readonly.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Read-only list example</a>
-			
+
 			<h2>Split button lists</h2>
 			<p>In cases where there is more than one possible action per list item, a split button can be used to offer two independently clickable items -- the list item and a small arrow icon in the far right. To make a split list item, simply add a second link inside the <code>li</code> and the framework will add a vertical divider line, style the link as an icon-only arrow button, and sets the <code>title</code> attribute of the link to the text the link for accessibility. </p>
 			<p>You can set the icon for the right split icon by specifying a <code>data-split-icon</code> attribute with the <a href="../buttons/buttons-themes.html">icon name</a> you want. The theme swatch color of the split button can be set by specifying a swatch letter in the <code>data-split-theme</code> attribute</p>
-			
+
 			<a href="lists-split.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Split list example</a>
-			
-			
+
+
 			<h2>List dividers</h2>
 			<p>List items can be turned into dividers to organize and group the list items. This is done by adding the <code> data-role="list-divider"</code> to any list item. These items are styled with the body swatch "b" by default (light gray in the default theme) but you can specify a theme for dividers by adding the <code>data-dividertheme</code> attribute to the list element (ul or ol) and specifying a theme swatch letter.</p>
 
 			<a href="lists-divider.html" data-role="button" data-icon="arrow-r" data-iconpos="right">List divider example</a>
-			
-			
+
+
 			<h2>Search filter</h2>
 			<p>jQuery Mobile provides a very easy way to filter a list with a simple client-side search feature. To make a list filterable, simply add the <code>data-filter="true"</code> attribute to the list. The framework will then append a search box above the list and add the behavior to filter out list items that don't contain the current search string as the user types. The input's placeholder text defaults to "Filter items...". To configure the placeholder text in the search input, you can either bind to the <code>mobileinit</code> event and set the <code>$.mobile.listview.prototype.options.filterPlaceholder</code> option to a string of your choosing, or use the data-attribute <code>data-filter-placeholder</code> on your listview. By default the search box will inherit its theme from its parent. The search box theme can be configured using the data-attribute <code>data-filter-theme</code> on your listview.</p>
 
 			<a href="lists-search.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Search filter example</a>
-			
-			
+
+      <p>If you want to change the way in which list items are filtered, ie fuzzy search or matching from the beginning of the string, you can configure the callback used internally by defining <code>$.mobile.listview.prototype.options.filterCallback</code> during <code>mobileinit</code> or after the widget has been created with <code>$("#mylist").listview('option', 'filterCallback', yourFilterFunction)</code>. Any function defined for the callback will be provided two arguments. First, the text of the current list item and second the value being searched for. A truthy value will result in a hidden list item. The default callback which filters entries without the <code>searchValue</code> as a substring is described below:
+      </p>
+
+      <pre>
+        <code>
+function( text, searchValue ){
+  return text.toLowerCase().indexOf( searchValue ) === -1;
+};
+        </code>
+      </pre>
+
 			<h2>Text formatting &amp; counts</h2>
 			<p>The framework includes text formatting conventions for common list patterns like header/descriptions, secondary information, counts through HTML semantic markup. </p>
-			
+
 			<ul>
 				<li>To add a count indicator to the right of the list item, wrap the number in an element with a class of <code>ui-li-count</code></li>
 				<li>To add text hierarchy, use headings to increase font emphasis and use paragraphs to reduce emphasis. </li>
@@ -79,24 +89,24 @@
 			</ul>
 			<a href="lists-count.html" data-role="button" data-icon="arrow-r" data-iconpos="right">List with count bubbles</a>
 			<a href="lists-formatting.html" data-role="button" data-icon="arrow-r" data-iconpos="right">List with text formatting</a>
-			
+
 			<h2>Thumbnails &amp; icons</h2>
 			<p>To add thumbnails to the left of a list item, simply add an image inside a list item as the first child element. The framework will scale the image to 80 pixels square. To use standard 16x16 pixel icons in list items, add the class of <code>ui-li-icon</code> to the image element to size.</p>
 			<a href="lists-thumbnails.html" data-role="button" data-icon="arrow-r" data-iconpos="right">List with thumbnail images</a>
 		 	<a href="lists-icons.html" data-role="button" data-icon="arrow-r" data-iconpos="right">List with icon images</a>
-			
+
 			<h2>Inset lists</h2>
 			<p>If lists are embedded in a page with other types of content, an inset list packages the list into a block that sits inside the content area with a bit of margin and rounded corners (theme controlled). By adding the <code> data-inset="true"</code> attribute to the list (ul or ol), applies the inset appearance.</p>
-			
+
 			<a href="lists-inset.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Inset list example</a>
-			
+
 			<h2>Updating lists</h2>
 			<p>If you add items to a listview, you'll need to call the <code>refresh()</code> method on it to update the styles and create any nested lists that are added. For example, <code>$('ul').listview('refresh');</code></p>
-			
-			<p>We're currently working on a few improvements to the refresh method, so keep your eye on Github for updates.</p>			
-			
 
-			</div><!--/content-primary -->		
+			<p>We're currently working on a few improvements to the refresh method, so keep your eye on Github for updates.</p>
+
+
+			</div><!--/content-primary -->
 
 			<div class="content-secondary">
 
@@ -112,7 +122,7 @@
 							<li><a href="lists-nested.html">Nested list</a></li>
 							<li><a href="lists-ol.html">Numbered list</a></li>
 
-							<li><a href="lists-split.html">Split button list</a></li>	
+							<li><a href="lists-split.html">Split button list</a></li>
 							<li><a href="lists-divider.html">List dividers</a></li>
 							<li><a href="lists-count.html">Count bubble</a></li>
 							<li><a href="lists-thumbnails.html">Thumbnails</a></li>
@@ -133,7 +143,7 @@
 
 						</ul>
 				</div>
-			</div>		
+			</div>
 
 		</div><!-- /content -->
 
@@ -145,4 +155,4 @@
 
 		</body>
 		</html>
-	
+
