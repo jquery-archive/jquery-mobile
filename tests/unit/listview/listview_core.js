@@ -562,4 +562,28 @@
 			}
 		]);
 	});
+
+	asyncTest( "filterCallback can be altered after widget creation", function(){
+		var listPage = $("#search-filter-test");
+		expect( listPage.find("li").length );
+
+		$.testHelper.pageSequence([
+			function(){
+				$.testHelper.openPage("#search-filter-test");
+			},
+
+			function(){
+				// set the listview instance callback
+				listPage.find("ul").listview("option", "filterCallback", function(){
+					ok(true, "custom callback invoked");
+				});
+
+				// trigger a change in the search filter
+				listPage.find("input").val("foo").trigger("change");
+
+				//NOTE beware a poossible issue with timing here
+				start();
+			}
+		]);
+	});
 })(jQuery);
