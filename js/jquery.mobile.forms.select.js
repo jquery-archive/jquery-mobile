@@ -43,7 +43,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				thisPage = select.closest( ".ui-page" ),
 				screen = $( "<div>", {"class": "ui-selectmenu-screen ui-screen-hidden"} )
 							.appendTo( thisPage ),
-				options = select.find("option"),
+				selectOptions = select.find("option"),
 				isMultiple = widget.isMultiple = select[ 0 ].multiple,
 				buttonId = selectID + "-button",
 				menuId = selectID + "-menu",
@@ -101,7 +101,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			menuPage: menuPage,
 			label: label,
 			screen: screen,
-			options: options,
+			selectOptions: selectOptions,
 			isMultiple: isMultiple,
 			theme: widget.options.theme,
 			listbox: listbox,
@@ -115,12 +115,12 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 			selectedIndices: function() {
 				this.selected().map( function() {
-					return options.index( this );
+					return selectOptions.index( this );
 				}).get();
 			},
 
 			selected: function() {
-				return this.options.filter( ":selected" );
+				return this.selectOptions.filter( ":selected" );
 			},
 
 			setButtonText: function() {
@@ -188,9 +188,11 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 						self.button.removeClass( $.mobile.activeBtnClass );
 					})
 					.bind( "change blur vmouseout", function() {
-
 						self.button.trigger( "vmouseout" )
 							.removeClass( $.mobile.activeBtnClass );
+					})
+					.bind( "change blur", function() {
+						self.button.removeClass( "ui-btn-down-" + widget.options.theme );
 					});
 			},
 
@@ -422,6 +424,113 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 				// allow the dialog to be closed again
 				this.isOpen = false;
+			},
+
+			open: function() {
+				if ( this.options.disabled ) {
+					return;
+				}
+
+				var self = this,
+				menuHeight = self.list.parent().outerHeight(),
+				menuWidth = self.list.parent().outerWidth(),
+						scrollTop = $( window ).scrollTop(),
+						btnOffset = self.button.offset().top,
+						screenHeight = window.innerHeight,
+						screenWidth = window.innerWidth;
+
+				//add active class to button
+				self.button.addClass( $.mobile.activeBtnClass );
+
+				//remove after delay
+				setTimeout( function() {
+					self.button.removeClass( $.mobile.activeBtnClass );
+				}, 300);
+
+				function focusMenuItem() {
+					self.list.find( ".ui-btn-active" ).focus();
+				}
+
+				if ( menuHeight > screenHeight - 80 || !$.support.scrollTop ) {
+					// prevent the parent page from being removed from the DOM,
+					// otherwise the results of selecting a list item in the dialog
+					// fall into a black hole
+					self.thisPage.unbind( "pagehide.remove" );
+
+					//for webos (set lastscroll using button offset)
+					if ( scrollTop == 0 && btnOffset > screenHeight ) {
+						self.thisPage.one( "pagehide", function() {
+							$( this ).jqmData( "lastScroll", btnOffset );
+						});
+					}
+
+					self.menuPage.one( "pageshow", function() {
+						// silentScroll() is called whenever a page is shown to restore
+						// any previous scroll position the page may have had. We need to
+						// wait for the "silentscroll" event before setting focus to avoid
+						// the browser"s "feature" which offsets rendering to make sure
+						// whatever has focus is in view.
+						$( window ).one( "silentscroll", function() {
+							focusMenuItem();
+						});
+
+						self.isOpen = true;
+					});
+
+					self.menuType = "page";
+					self.menuPageContent.append( self.list );
+					$.mobile.changePage( self.menuPage, {
+						transition: $.mobile.defaultDialogTransition
+					});
+				} else {
+					self.menuType = "overlay";
+
+					self.screen.height( $(document).height() )
+						.removeClass( "ui-screen-hidden" );
+
+					// Try and center the overlay over the button
+					var roomtop = btnOffset - scrollTop,
+					roombot = scrollTop + screenHeight - btnOffset,
+					halfheight = menuHeight / 2,
+					maxwidth = parseFloat( self.list.parent().css( "max-width" ) ),
+					newtop, newleft;
+
+					if ( roomtop > menuHeight / 2 && roombot > menuHeight / 2 ) {
+						newtop = btnOffset + ( self.button.outerHeight() / 2 ) - halfheight;
+					} else {
+						// 30px tolerance off the edges
+						newtop = roomtop > roombot ? scrollTop + screenHeight - menuHeight - 30 : scrollTop + 30;
+					}
+
+					// If the menuwidth is smaller than the screen center is
+					if ( menuWidth < maxwidth ) {
+						newleft = ( screenWidth - menuWidth ) / 2;
+					} else {
+
+						//otherwise insure a >= 30px offset from the left
+						newleft = self.button.offset().left + self.button.outerWidth() / 2 - menuWidth / 2;
+
+						// 30px tolerance off the edges
+						if ( newleft < 30 ) {
+							newleft = 30;
+						} else if ( (newleft + menuWidth) > screenWidth ) {
+							newleft = screenWidth - menuWidth - 30;
+						}
+					}
+
+					self.listbox.append( self.list )
+						.removeClass( "ui-selectmenu-hidden" )
+						.css({
+							top: newtop,
+							left: newleft
+						})
+						.addClass( "in" );
+
+					focusMenuItem();
+
+					// duplicate with value set in page show for dialog sized selects
+					self.isOpen = true;
+				}
 			}
 		});
 	},
@@ -556,113 +665,6 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 		// Now populated, create listview
 		self.list.listview();
-	},
-
-	open: function() {
-		if ( this.options.disabled || this.options.nativeMenu ) {
-			return;
-		}
-
-		var self = this,
-			menuHeight = self.list.parent().outerHeight(),
-			menuWidth = self.list.parent().outerWidth(),
-			scrollTop = $( window ).scrollTop(),
-			btnOffset = self.button.offset().top,
-			screenHeight = window.innerHeight,
-			screenWidth = window.innerWidth;
-
-		//add active class to button
-		self.button.addClass( $.mobile.activeBtnClass );
-
-		//remove after delay
-		setTimeout( function() {
-			self.button.removeClass( $.mobile.activeBtnClass );
-		}, 300);
-
-		function focusMenuItem() {
-			self.list.find( ".ui-btn-active" ).focus();
-		}
-
-		if ( menuHeight > screenHeight - 80 || !$.support.scrollTop ) {
-			// prevent the parent page from being removed from the DOM,
-			// otherwise the results of selecting a list item in the dialog
-			// fall into a black hole
-			self.thisPage.unbind( "pagehide.remove" );
-
-			//for webos (set lastscroll using button offset)
-			if ( scrollTop == 0 && btnOffset > screenHeight ) {
-				self.thisPage.one( "pagehide", function() {
-					$( this ).jqmData( "lastScroll", btnOffset );
-				});
-			}
-
-			self.menuPage.one( "pageshow", function() {
-				// silentScroll() is called whenever a page is shown to restore
-				// any previous scroll position the page may have had. We need to
-				// wait for the "silentscroll" event before setting focus to avoid
-				// the browser"s "feature" which offsets rendering to make sure
-				// whatever has focus is in view.
-				$( window ).one( "silentscroll", function() {
-					focusMenuItem();
-				});
-
-				self.isOpen = true;
-			});
-
-			self.menuType = "page";
-			self.menuPageContent.append( self.list );
-			$.mobile.changePage( self.menuPage, {
-			   transition: $.mobile.defaultDialogTransition
-			});
-		} else {
-			self.menuType = "overlay";
-
-			self.screen.height( $(document).height() )
-				.removeClass( "ui-screen-hidden" );
-
-			// Try and center the overlay over the button
-			var roomtop = btnOffset - scrollTop,
-				roombot = scrollTop + screenHeight - btnOffset,
-				halfheight = menuHeight / 2,
-				maxwidth = parseFloat( self.list.parent().css( "max-width" ) ),
-				newtop, newleft;
-
-			if ( roomtop > menuHeight / 2 && roombot > menuHeight / 2 ) {
-				newtop = btnOffset + ( self.button.outerHeight() / 2 ) - halfheight;
-			} else {
-				// 30px tolerance off the edges
-				newtop = roomtop > roombot ? scrollTop + screenHeight - menuHeight - 30 : scrollTop + 30;
-			}
-
-			// If the menuwidth is smaller than the screen center is
-			if ( menuWidth < maxwidth ) {
-				newleft = ( screenWidth - menuWidth ) / 2;
-			} else {
-
-				//otherwise insure a >= 30px offset from the left
-				newleft = self.button.offset().left + self.button.outerWidth() / 2 - menuWidth / 2;
-
-				// 30px tolerance off the edges
-				if ( newleft < 30 ) {
-					newleft = 30;
-				} else if ( (newleft + menuWidth) > screenWidth ) {
-					newleft = screenWidth - menuWidth - 30;
-				}
-			}
-
-			self.listbox.append( self.list )
-				.removeClass( "ui-selectmenu-hidden" )
-				.css({
-					top: newtop,
-					left: newleft
-				})
-				.addClass( "in" );
-
-			focusMenuItem();
-
-			// duplicate with value set in page show for dialog sized selects
-			self.isOpen = true;
-		}
 	}
 });
 
