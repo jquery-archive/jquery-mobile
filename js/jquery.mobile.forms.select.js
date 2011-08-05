@@ -357,7 +357,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				});
 			},
 
-			refresh: function(forceRebuild){
+			refresh: function( forceRebuild ){
 				var self = this,
 					select = this.element,
 					isMultiple = this.isMultiple,
@@ -531,6 +531,76 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					// duplicate with value set in page show for dialog sized selects
 					self.isOpen = true;
 				}
+			},
+
+			_buildList: function() {
+				var self = this,
+					o = this.options,
+					placeholder = this.placeholder,
+					optgroups = [],
+					lis = [],
+					dataIcon = self.isMultiple ? "checkbox-off" : "false";
+
+				self.list.empty().filter( ".ui-listview" ).listview( "destroy" );
+
+				// Populate menu with options from select element
+				self.select.find( "option" ).each( function( i ) {
+					var $this = $( this ),
+					$parent = $this.parent(),
+					text = $this.text(),
+					anchor = "<a href='#'>"+ text +"</a>",
+							classes = [],
+					extraAttrs = [];
+
+					// Are we inside an optgroup?
+					if ( $parent.is( "optgroup" ) ) {
+						var optLabel = $parent.attr( "label" );
+
+						// has this optgroup already been built yet?
+						if ( $.inArray( optLabel, optgroups ) === -1 ) {
+							lis.push( "<li data-" + $.mobile.ns + "role='list-divider'>"+ optLabel +"</li>" );
+							optgroups.push( optLabel );
+						}
+					}
+
+					// Find placeholder text
+					// TODO: Are you sure you want to use getAttribute? ^RW
+					if ( !this.getAttribute( "value" ) || text.length == 0 || $this.jqmData( "placeholder" ) ) {
+						if ( o.hidePlaceholderMenuItems ) {
+							classes.push( "ui-selectmenu-placeholder" );
+						}
+						placeholder = self.placeholder = text;
+					}
+
+					// support disabled option tags
+					if ( this.disabled ) {
+						classes.push( "ui-disabled" );
+						extraAttrs.push( "aria-disabled='true'" );
+					}
+
+					lis.push( "<li data-" + $.mobile.ns + "option-index='" + i + "' data-" + $.mobile.ns + "icon='"+ dataIcon +"' class='"+ classes.join(" ") + "' " + extraAttrs.join(" ") +">"+ anchor +"</li>" );
+				});
+
+				self.list.html( lis.join(" ") );
+
+				self.list.find( "li" )
+					.attr({ "role": "option", "tabindex": "-1" })
+					.first().attr( "tabindex", "0" );
+
+				// Hide header close link for single selects
+				if ( !this.isMultiple ) {
+					this.headerClose.hide();
+				}
+
+				// Hide header if it's not a multiselect and there's no placeholder
+				if ( !this.isMultiple && !placeholder.length ) {
+					this.header.hide();
+				} else {
+					this.headerTitle.text( this.placeholder );
+				}
+
+				// Now populated, create listview
+				self.list.listview();
 			}
 		});
 	},
@@ -595,76 +665,6 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		$.extend( self, menu );
 
 		menu.build();
-	},
-
-	_buildList: function() {
-		var self = this,
-			o = this.options,
-			placeholder = this.placeholder,
-			optgroups = [],
-			lis = [],
-			dataIcon = self.isMultiple ? "checkbox-off" : "false";
-
-		self.list.empty().filter( ".ui-listview" ).listview( "destroy" );
-
-		// Populate menu with options from select element
-		self.select.find( "option" ).each( function( i ) {
-			var $this = $( this ),
-				$parent = $this.parent(),
-				text = $this.text(),
-				anchor = "<a href='#'>"+ text +"</a>",
-				classes = [],
-				extraAttrs = [];
-
-			// Are we inside an optgroup?
-			if ( $parent.is( "optgroup" ) ) {
-				var optLabel = $parent.attr( "label" );
-
-				// has this optgroup already been built yet?
-				if ( $.inArray( optLabel, optgroups ) === -1 ) {
-					lis.push( "<li data-" + $.mobile.ns + "role='list-divider'>"+ optLabel +"</li>" );
-					optgroups.push( optLabel );
-				}
-			}
-
-			// Find placeholder text
-			// TODO: Are you sure you want to use getAttribute? ^RW
-			if ( !this.getAttribute( "value" ) || text.length == 0 || $this.jqmData( "placeholder" ) ) {
-				if ( o.hidePlaceholderMenuItems ) {
-					classes.push( "ui-selectmenu-placeholder" );
-				}
-				placeholder = self.placeholder = text;
-			}
-
-			// support disabled option tags
-			if ( this.disabled ) {
-				classes.push( "ui-disabled" );
-				extraAttrs.push( "aria-disabled='true'" );
-			}
-
-			lis.push( "<li data-" + $.mobile.ns + "option-index='" + i + "' data-" + $.mobile.ns + "icon='"+ dataIcon +"' class='"+ classes.join(" ") + "' " + extraAttrs.join(" ") +">"+ anchor +"</li>" );
-		});
-
-		self.list.html( lis.join(" ") );
-
-		self.list.find( "li" )
-			.attr({ "role": "option", "tabindex": "-1" })
-			.first().attr( "tabindex", "0" );
-
-		// Hide header close link for single selects
-		if ( !this.isMultiple ) {
-			this.headerClose.hide();
-		}
-
-		// Hide header if it's not a multiselect and there's no placeholder
-		if ( !this.isMultiple && !placeholder.length ) {
-			this.header.hide();
-		} else {
-			this.headerTitle.text( this.placeholder );
-		}
-
-		// Now populated, create listview
-		self.list.listview();
 	}
 });
 
