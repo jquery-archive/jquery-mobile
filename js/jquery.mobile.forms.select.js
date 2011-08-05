@@ -26,7 +26,6 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 	},
 
 	_common: function(){
-
 		var widget = this,
 				select = this.element.wrap( "<div class='ui-select'>" );
 
@@ -136,6 +135,30 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 						return $( this ).text();
 					}).get().join( ", " ) : self.placeholder;
 				});
+			},
+
+			_focusButton : function() {
+				var self = this;
+
+				setTimeout( function() {
+					self.button.focus();
+				}, 40);
+			},
+
+			disable: function() {
+				this._setDisable( true );
+				this.button.addClass( "ui-disabled" );
+			},
+
+			enable: function() {
+				this._setDisable( false );
+				this.button.removeClass( "ui-disabled" );
+			},
+
+			_setDisable: function( value ) {
+				this.element.attr( "disabled", value );
+				this.button.attr( "aria-disabled", value );
+				return this._setOption( "disabled", value );
 			}
 		};
 	},
@@ -315,7 +338,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				// by removing the inline style and ensuring page inclusion
 				self.menuPage.bind( "pagehide", function() {
 					self.list.appendTo( self.listbox );
-					widget._focusButton();
+					self._focusButton();
 				});
 
 				// Events on "screen" overlay
@@ -369,6 +392,36 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 							}
 						}
 					});
+			},
+
+			close: function() {
+				if ( this.options.disabled || !this.isOpen ) {
+					return;
+				}
+
+				var self = this;
+
+				if ( self.menuType == "page" ) {
+					// rebind the page remove that was unbound in the open function
+					// to allow for the parent page removal from actions other than the use
+					// of a dialog sized custom select
+					self.thisPage.bind( "pagehide.remove", function() {
+						$(this).remove();
+					});
+
+					// doesn't solve the possible issue with calling change page
+					// where the objects don't define data urls which prevents dialog key
+					// stripping - changePage has incoming refactor
+					window.history.back();
+				}	else {
+					self.screen.addClass( "ui-screen-hidden" );
+					self.listbox.addClass( "ui-selectmenu-hidden" ).removeAttr( "style" ).removeClass( "in" );
+					self.list.appendTo( self.listbox );
+					self._focusButton();
+				}
+
+				// allow the dialog to be closed again
+				this.isOpen = false;
 			}
 		});
 	},
@@ -390,7 +443,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			button = menu.button
 				.text( $( menu.select[ 0 ].options.item( selectedIndex ) ).text() )
 				.insertBefore( menu.select )
-				.buttonMarkup({
+				.buttonMarkup( {
 					theme: o.theme,
 					icon: o.icon,
 					iconpos: o.iconpos,
@@ -425,7 +478,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		}
 
 		// Events on native select
-		menu.select.change(function() {
+		menu.select.change( function() {
 			self.refresh();
 		});
 
@@ -446,7 +499,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		self.list.empty().filter( ".ui-listview" ).listview( "destroy" );
 
 		// Populate menu with options from select element
-		self.select.find( "option" ).each(function( i ) {
+		self.select.find( "option" ).each( function( i ) {
 			var $this = $( this ),
 				$parent = $this.parent(),
 				text = $this.text(),
@@ -480,7 +533,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				extraAttrs.push( "aria-disabled='true'" );
 			}
 
-			lis.push( "<li data-" + $.mobile.ns + "option-index='" + i + "' data-" + $.mobile.ns + "icon='"+ dataIcon +"' class='"+ classes.join(" ") + "' " + extraAttrs.join(" ") +">"+ anchor +"</li>" )
+			lis.push( "<li data-" + $.mobile.ns + "option-index='" + i + "' data-" + $.mobile.ns + "icon='"+ dataIcon +"' class='"+ classes.join(" ") + "' " + extraAttrs.join(" ") +">"+ anchor +"</li>" );
 		});
 
 		self.list.html( lis.join(" ") );
@@ -522,7 +575,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		self.button.addClass( $.mobile.activeBtnClass );
 
 		//remove after delay
-		setTimeout(function() {
+		setTimeout( function() {
 			self.button.removeClass( $.mobile.activeBtnClass );
 		}, 300);
 
@@ -610,56 +663,6 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			// duplicate with value set in page show for dialog sized selects
 			self.isOpen = true;
 		}
-	},
-
-	_focusButton : function(){
-		var self = this;
-		setTimeout(function() {
-			self.button.focus();
-		}, 40);
-	},
-
-	close: function() {
-		if ( this.options.disabled || !this.isOpen || this.options.nativeMenu ) {
-			return;
-		}
-
-		var self = this;
-
-		if ( self.menuType == "page" ) {
-			// rebind the page remove that was unbound in the open function
-			// to allow for the parent page removal from actions other than the use
-			// of a dialog sized custom select
-			self.thisPage.bind( "pagehide.remove", function(){
-				$(this).remove();
-			});
-
-			// doesn't solve the possible issue with calling change page
-			// where the objects don't define data urls which prevents dialog key
-			// stripping - changePage has incoming refactor
-			window.history.back();
-		}
-		else{
-			self.screen.addClass( "ui-screen-hidden" );
-			self.listbox.addClass( "ui-selectmenu-hidden" ).removeAttr( "style" ).removeClass( "in" );
-			self.list.appendTo( self.listbox );
-			self._focusButton();
-		}
-
-		// allow the dialog to be closed again
-		this.isOpen = false;
-	},
-
-	disable: function() {
-		this.element.attr( "disabled", true );
-		this.button.addClass( "ui-disabled" ).attr( "aria-disabled", true );
-		return this._setOption( "disabled", true );
-	},
-
-	enable: function() {
-		this.element.attr( "disabled", false );
-		this.button.removeClass( "ui-disabled" ).attr( "aria-disabled", false );
-		return this._setOption( "disabled", false );
 	}
 });
 

@@ -288,4 +288,22 @@
 			}
 		], 1000);
 	});
+
+	test( "enabling and disabling", function(){
+		var select = $( "select" ).first(), button;
+
+		button = select.siblings( "a" ).first();
+
+		select.selectmenu( 'disable' );
+		same( select.attr('disabled'), "disabled", "select is disabled" );
+		ok( button.hasClass("ui-disabled"), "disabled class added" );
+		same( button.attr('aria-disabled'), "true", "select is disabled" );
+		same( select.selectmenu( 'option', 'disabled' ), true, "disbaled option set" );
+
+		select.selectmenu( 'enable' );
+		same( select.attr('disabled'), undefined, "select is disabled" );
+		ok( !button.hasClass("ui-disabled"), "disabled class added" );
+		same( button.attr('aria-disabled'), "false", "select is disabled" );
+		same( select.selectmenu( 'option', 'disabled' ), false, "disbaled option set" );
+	});
 })(jQuery);
