@@ -255,11 +255,37 @@
 				$.mobile.activePage.find( "li a" ).last().click();
 			},
 
-			function(){
-				window.history.back();
-			},
-
 			start
 		]);
+	});
+
+	asyncTest( "using custom refocuses the button after close", function() {
+		var select, button, triggered = false;
+
+		expect( 1 );
+
+		$.testHelper.sequence([
+			resetHash,
+
+			function() {
+				select = $("#select-choice-focus-test");
+				button = select.find( "a" );
+				button.trigger( "click" );
+			},
+
+			function() {
+				// NOTE this is called twice per triggered click
+				button.focus(function() {
+					triggered = true;
+				});
+
+				$(".ui-selectmenu-screen:not(.ui-screen-hidden)").trigger("click");
+			},
+
+			function(){
+				ok(triggered, "focus is triggered");
+				start();
+			}
+		], 1000);
 	});
 })(jQuery);
