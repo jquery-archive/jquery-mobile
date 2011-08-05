@@ -21,6 +21,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		splitIcon: "arrow-r",
 		splitTheme: "b",
 		inset: false,
+		listStyle: false,
 		initSelector: ":jqmData(role='listview')"
 	},
 
@@ -29,9 +30,10 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 		// create listview markup
 		t.element.addClass(function( i, orig ) {
-			return orig + " ui-listview " + ( t.options.inset ? " ui-listview-inset ui-corner-all ui-shadow " : "" );
+			return orig + " ui-listview " + ( t.options.inset ? " ui-listview-inset ui-corner-all ui-shadow " : "" )
+						+ ( t.options.listStyle === "keyvalue" ? " ui-listview-keyvalue" : "" );
 		});
-
+		
 		t.refresh();
 	},
 
@@ -78,7 +80,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			li = $list.children( "li" ),
 			counter = $.support.cssPseudoElement || !$.nodeName( $list[ 0 ], "ol" ) ? 0 : 1,
 			item, itemClass, itemTheme,
-			a, last, splittheme, countParent, icon;
+			a, last, splittheme, countParent, icon,
+			div;
 
 		if ( counter ) {
 			$list.find( ".ui-li-dec" ).remove();
@@ -147,6 +150,27 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 				} else {
 					itemClass += " ui-li-static ui-body-" + itemTheme;
+					
+					// Key-value pairs with div tags
+					div = item.children( "div" );
+					
+					if ( div.length == 1 && $list.jqmData( "list-style" ) === "keyvalue" ) {
+						var kvp = div.eq( 0 );
+						var pair = div.children( "div" );
+						
+						kvp.addClass( "ui-li-keyvalue" );
+						
+						if ( item.jqmData( "wrap" ) ) {
+							kvp.addClass( "ui-wrap" );
+						}
+						
+						if ( pair.length == 2 ) {
+							var key = pair.eq( 0 );
+							var value = pair.eq( 1 );
+							key.addClass( "ui-li-key" );
+							value.addClass( "ui-li-value" );
+						}
+					}
 				}
 			}
 

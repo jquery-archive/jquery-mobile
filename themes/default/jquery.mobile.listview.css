@@ -39,6 +39,13 @@ ol.ui-listview .ui-li-jsnumbering:before { content: "" !important; } /* to avoid
 .ui-li-link-alt .ui-btn-inner { padding: 0; position: static; }
 .ui-li-link-alt .ui-btn .ui-icon { right: 50%; margin-right: -9px;  }
 
+.ui-listview-keyvalue .ui-li-static { padding-right: 15px; }
+.ui-li-keyvalue { clear: both; display: inline-block; width: 100%; }
+.ui-li-key { float: left; }
+.ui-li-value { float: right; font-weight: normal; text-align: right; }
+.ui-li-key, .ui-li-value { display: block; margin: 0; max-width: 48%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: auto; }
+.ui-li-keyvalue.ui-wrap .ui-li-key, .ui-li-keyvalue.ui-wrap .ui-li-value { overflow: visible; white-space: normal; }
+
 .ui-listview-filter { border-width: 0; overflow: hidden; margin: -15px -15px 15px -15px }
 .ui-listview-filter .ui-input-search { margin: 5px; width: auto; display: block; }
 
