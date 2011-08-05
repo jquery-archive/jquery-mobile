@@ -14,10 +14,10 @@
 			ok(/&ui-state=dialog/.test(location.hash), "ui-state=dialog =~ location.hash");
 			
 			// Assert dialog theme inheritance (issue 1375):
-			ok($('#foo-dialog').hasClass('ui-body-b'), 'Expected theme ui-body-b');
-			ok($('#foo-dialog').find( ":jqmData(role=header)" ).hasClass('ui-bar-b'), 'Expected header theme inherited from parent ui-bar-b');
-			ok($('#foo-dialog').find( ":jqmData(role=content)" ).hasClass('ui-body-b'), 'Expect content inheritance from dialog theme ui-body-b');
-			ok($('#foo-dialog').find( ":jqmData(role=footer)" ).hasClass('ui-bar-c'), 'Expected footer theme ui-bar-c');
+			ok($('#foo-dialog').hasClass('ui-body-b'), 'Expected explicit theme ui-body-b');
+			ok($('#foo-dialog').find( ":jqmData(role=header)" ).hasClass('ui-bar-a'), 'Expected header to inherit from $.mobile.page.prototype.options.headerTheme');
+			ok($('#foo-dialog').find( ":jqmData(role=content)" ).hasClass('ui-body-d'), 'Expect content to inherit from $.mobile.page.prototype.options.contentTheme');
+			ok($('#foo-dialog').find( ":jqmData(role=footer)" ).hasClass('ui-bar-a'), 'Expected footer to inherit from $.mobile.page.prototype.options.footerTheme');
 			
 			// close the dialog
 			$(".ui-dialog").dialog("close");
