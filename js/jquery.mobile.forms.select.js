@@ -42,7 +42,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		var selectID  = select.attr( "id" ),
 				label = $( "label[for='"+ selectID +"']" ).addClass( "ui-select" ),
 				thisPage = select.closest( ".ui-page" ),
-				screen = $( "<div>", {"class": "ui-selectmenu-screen ui-screen-hidden"})
+				screen = $( "<div>", {"class": "ui-selectmenu-screen ui-screen-hidden"} )
 							.appendTo( thisPage ),
 				options = select.find("option"),
 				isMultiple = widget.isMultiple = select[ 0 ].multiple,
@@ -57,7 +57,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 						.appendTo( $.mobile.pageContainer )
 						.page(),
 
-				listbox =  $("<div>", { "class": "ui-selectmenu ui-selectmenu-hidden ui-overlay-shadow ui-corner-all ui-body-" + widget.options.overlayTheme + " " + $.mobile.defaultDialogTransition })
+				listbox =  $("<div>", { "class": "ui-selectmenu ui-selectmenu-hidden ui-overlay-shadow ui-corner-all ui-body-" + widget.options.overlayTheme + " " + $.mobile.defaultDialogTransition } )
 						.insertAfter(screen),
 
 				list = $( "<ul>", {
@@ -114,25 +114,25 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			menuPageClose: menuPageClose,
 			placeholder: "",
 
-			selectedIndices: function(){
-				this.selected().map(function() {
+			selectedIndices: function() {
+				this.selected().map( function() {
 					return options.index( this );
 				}).get();
 			},
 
-			selected: function(){
+			selected: function() {
 				return this.options.filter( ":selected" );
 			},
 
-			setButtonText: function(){
+			setButtonText: function() {
 				var self = this;
 
-				this.button.find( ".ui-btn-text" ).text(function() {
+				this.button.find( ".ui-btn-text" ).text( function() {
 					if ( !self.isMultiple ) {
 						return self.selected().text();
 					}
 
-					return self.selected().length ? self.selected().map(function() {
+					return self.selected().length ? self.selected().map( function() {
 						return $( this ).text();
 					}).get().join( ", " ) : self.placeholder;
 				});
@@ -140,15 +140,15 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		};
 	},
 
-	_native: function(){
+	_native: function() {
 		var widget = this;
 
-		return $.extend(this._common(), {
+		return $.extend( this._common(), {
 			typeName: 'native',
 
 			button: $( "<div/>" ),
 
-			build: function(){
+			build: function() {
 				var self = this;
 
 				this.select
@@ -171,7 +171,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					});
 			},
 
-			refresh: function(){
+			refresh: function() {
 				var self = this,
 					selected = this.selected();
 
@@ -185,7 +185,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		});
 	},
 
-	_custom: function(){
+	_custom: function() {
 		var widget = this, common = this._common();
 
 		return $.extend(common, {
@@ -202,7 +202,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				"aria-owns": common.menuId
 			}),
 
-			build: function(){
+			build: function() {
 				var self = this, parentWidget = widget;
 
 				// Create list from select, update state
@@ -313,7 +313,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 				// button refocus ensures proper height calculation
 				// by removing the inline style and ensuring page inclusion
-				self.menuPage.bind( "pagehide", function(){
+				self.menuPage.bind( "pagehide", function() {
 					self.list.appendTo( self.listbox );
 					widget._focusButton();
 				});
@@ -324,7 +324,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				});
 
 				// Close button on small overlays
-				self.headerClose.click(function() {
+				self.headerClose.click( function() {
 					if ( menuType == "overlay" ) {
 						widget.close();
 						return false;
