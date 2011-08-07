@@ -17,6 +17,9 @@ ol.ui-listview .ui-li-jsnumbering:before { content: "" !important; } /* to avoid
 .ui-li:last-child, .ui-li.ui-field-contain:last-child { border-bottom-width: 1px; }
 .ui-li>.ui-btn-inner { display: block; position: relative; padding: 0; }
 .ui-li .ui-btn-inner a.ui-link-inherit, .ui-li-static.ui-li { padding: .7em 75px .7em 15px; display: block; }
+.ui-li-static.ui-li:not(.ui-btn-inner) { padding-right: 40px; }
+.ui-li .ui-li-has-count-or-linkicon { padding-right: 40px !important; }
+.ui-li-static.ui-li.ui-li-no-count-no-linkicon { padding-right: 15px; }
 .ui-li-has-thumb .ui-btn-inner a.ui-link-inherit, .ui-li-static.ui-li-has-thumb  { min-height: 60px; padding-left: 100px; }
 .ui-li-has-icon .ui-btn-inner a.ui-link-inherit, .ui-li-static.ui-li-has-icon {  min-height: 20px; padding-left: 40px; }
 .ui-li-heading { font-size: 16px; font-weight: bold; display: block; margin: .6em 0; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;  }
