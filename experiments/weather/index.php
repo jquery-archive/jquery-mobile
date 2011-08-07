@@ -3,7 +3,8 @@ $location = isset($_GET['location']) ? $_GET['location'] : '02135';
 
 //get xml from google api
 $ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, 'http://www.google.com/ig/api?weather='. $location);
+//curl_setopt($ch, CURLOPT_URL, 'http://www.google.com/ig/api?weather='. $location); //original US units
+curl_setopt($ch, CURLOPT_URL, 'http://www.google.com/api?hl=en-GB&weather='. $location); //English ISO readings  
 curl_setopt($ch, CURLOPT_HEADER, 0);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_TIMEOUT, 10); 
@@ -11,7 +12,8 @@ $result = curl_exec($ch);
 curl_close($ch);
 
 //parse xml (thx KomunitasWeb.com for pointers)
-$xml = simplexml_load_string($result);
+//$xml = simplexml_load_string($result); //original XML load
+$xml = simplexml_load_string(iconv("iso-8859-2","UTF-8",$result)); //conversion of XML load
 $information = $xml->xpath("/xml_api_reply/weather/forecast_information");
 $current = $xml->xpath("/xml_api_reply/weather/current_conditions");
 $forecast_list = $xml->xpath("/xml_api_reply/weather/forecast_conditions");
@@ -58,7 +60,8 @@ $forecast_list = $xml->xpath("/xml_api_reply/weather/forecast_conditions");
 
             <img src="<?php echo 'http://www.google.com' . $current[0]->icon['data']?>" alt="weather">
             <p class="condition">
-            <?php echo $current[0]->temp_f['data']; ?>&deg; F,
+            //<?php echo $current[0]->temp_f['data']; ?>&deg; F, // Fahrenheit
+            <?php echo $current[0]->temp_c['data']; ?>&deg; C, // Celsius [ISO]
             <?php echo $current[0]->condition['data']; ?>
             
             </p>
@@ -73,7 +76,8 @@ $forecast_list = $xml->xpath("/xml_api_reply/weather/forecast_conditions");
             <img src="<?php echo 'http://www.google.com' . $forecast->icon['data']; ?>"> 
             <h3><?php echo $forecast->day_of_week['data']; ?></h3>
             <p>
-	            <?php echo $forecast->low['data']; ?>&deg; F - <?php echo $forecast->high['data']; ?>&deg; F,
+	            //<?php echo $forecast->low['data']; ?>&deg; F - <?php echo $forecast->high['data']; ?>&deg; F, 
+                    <?php echo $forecast->low['data']; ?>&deg; C - <?php echo $forecast->high['data']; ?>&deg; C,
 	            <?php echo $forecast->condition['data']; ?>
             </p>
             </li>
