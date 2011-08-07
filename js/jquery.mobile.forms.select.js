@@ -583,9 +583,11 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			// rebind the page remove that was unbound in the open function
 			// to allow for the parent page removal from actions other than the use
 			// of a dialog sized custom select
-			self.thisPage.bind( "pagehide.remove", function(){
-				$(this).remove();
-			});
+			if( !self.thisPage.data("page").options.domCache ){
+				self.thisPage.bind( "pagehide.remove", function(){
+					$(this).remove();
+				});
+			}
 
 			// doesn't solve the possible issue with calling change page
 			// where the objects don't define data urls which prevents dialog key
