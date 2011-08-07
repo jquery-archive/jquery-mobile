@@ -390,14 +390,12 @@
 	function transitionPages( toPage, fromPage, transition, reverse ) {
 
 		//get current scroll distance
-		var currScroll = $.support.scrollTop ? $window.scrollTop() : true,
-			toScroll	= toPage.data( "lastScroll" ) || $.mobile.defaultHomeScroll,
+		var active	= $.mobile.urlHistory.getActive(),
+			toScroll = active.lastScroll || $.mobile.defaultHomeScroll,
 			screenHeight = getScreenHeight();
 
-		//if scrolled down, scroll to top
-		if( currScroll ){
-			window.scrollTo( 0, $.mobile.defaultHomeScroll );
-		}
+		// Scroll to top
+		window.scrollTo( 0, $.mobile.defaultHomeScroll );
 
 		//if the Y location we're scrolling to is less than 10px, let it go for sake of smoothness
 		if( toScroll < $.mobile.minScrollBack ){
@@ -405,12 +403,6 @@
 		}
 
 		if( fromPage ) {
-			//set as data for returning to that spot
-			fromPage
-				.height( screenHeight + currScroll )
-				.jqmData( "lastScroll", currScroll )
-				.jqmData( "lastClicked", $activeClickedLink );
-
 			//trigger before show/hide events
 			fromPage.data( "page" )._trigger( "beforehide", null, { nextPage: toPage } );
 		}
@@ -430,15 +422,12 @@
 		promise.done(function() {
 			//reset toPage height bac
 			toPage.height( "" );
-
-			//jump to top or prev scroll, sometimes on iOS the page has not rendered yet.
-			if( toScroll ){
-				$.mobile.silentScroll( toScroll );
-				$( document ).one( "silentscroll", function() { reFocus( toPage ); } );
-			}
-			else{
-				reFocus( toPage );
-			}
+			
+			// Send focus to the newly shown page
+			reFocus( toPage );
+			
+			// Jump to top or prev scroll, sometimes on iOS the page has not rendered yet.
+			$.mobile.silentScroll( toScroll );
 
 			//trigger show/hide events
 			if( fromPage ) {
@@ -903,6 +892,11 @@
 				isBack:		function() { historyDir = -1; },
 				isForward:	function() { historyDir = 1; }
 			});
+		}
+		
+		// Set active item's lastScroll prop
+		if( active ){
+			active.lastScroll = $( window ).scrollTop();
 		}
 
 		// Kill the keyboard.
