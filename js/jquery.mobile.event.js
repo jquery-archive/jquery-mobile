@@ -75,7 +75,7 @@ $.event.special.tap = {
 		$this.bind( "vmousedown", function( event ) {
 
 			if ( event.which && event.which !== 1 ) {
-				return false;
+				return;
 			}
 
 			var touching = true,
