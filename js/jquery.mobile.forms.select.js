@@ -124,17 +124,41 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			},
 
 			setButtonText: function() {
-				var self = this;
+				var self = this, selected = this.selected();
 
 				this.button.find( ".ui-btn-text" ).text( function() {
 					if ( !self.isMultiple ) {
-						return self.selected().text();
+						return selected.text();
 					}
 
-					return self.selected().length ? self.selected().map( function() {
+					return selected.length ? selected.map( function() {
 						return $( this ).text();
 					}).get().join( ", " ) : self.placeholder;
 				});
+			},
+
+			setButtonCount: function() {
+				var selected = this.selected();
+				// multiple count inside button
+				if ( this.isMultiple ) {
+					this.buttonCount[ selected.length > 1 ? "show" : "hide" ]().text( selected.length );
+				}
+			},
+
+			disable: function() {
+				this._setDisabled( true );
+				this.button.addClass( "ui-disabled" );
+			},
+
+			enable: function() {
+				this._setDisabled( false );
+				this.button.removeClass( "ui-disabled" );
+			},
+
+			_setDisabled: function( value ) {
+				this.element.attr( "disabled", value );
+				this.button.attr( "aria-disabled", value );
+				return this._setOption( "disabled", value );
 			},
 
 			_focusButton : function() {
@@ -143,22 +167,6 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				setTimeout( function() {
 					self.button.focus();
 				}, 40);
-			},
-
-			disable: function() {
-				this._setDisable( true );
-				this.button.addClass( "ui-disabled" );
-			},
-
-			enable: function() {
-				this._setDisable( false );
-				this.button.removeClass( "ui-disabled" );
-			},
-
-			_setDisable: function( value ) {
-				this.element.attr( "disabled", value );
-				this.button.attr( "aria-disabled", value );
-				return this._setOption( "disabled", value );
 			}
 		};
 	},
@@ -201,11 +209,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					selected = this.selected();
 
 				self.setButtonText();
-
-				// multiple count inside button
-				if ( self.isMultiple ) {
-					self.buttonCount[ selected.length > 1 ? "show" : "hide" ]().text( selected.length );
-				}
+				self.setButtonCount();
 			}
 		});
 	},
@@ -350,7 +354,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 				// Close button on small overlays
 				self.headerClose.click( function() {
-					if ( menuType == "overlay" ) {
+					if ( self.menuType == "overlay" ) {
 						widget.close();
 						return false;
 					}
@@ -371,11 +375,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				}
 
 				self.setButtonText();
-
-				// multiple count inside button
-				if ( self.isMultiple ) {
-					self.buttonCount[ selected.length > 1 ? "show" : "hide" ]().text( selected.length );
-				}
+				self.setButtonCount();
 
 				self.list.find( "li:not(.ui-li-divider)" )
 					.removeClass( $.mobile.activeBtnClass )
