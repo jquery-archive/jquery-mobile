@@ -22,7 +22,7 @@ $.widget( "mobile.nativeselect", $.mobile.widget, {
 		hidePlaceholderMenuItems: true,
 		closeText: "Close",
 		nativeMenu: true,
-		initSelector: "select:not(jqmData(native-menu='false')):not(:jqmData(role='slider'))"
+		initSelector: "select:not(:jqmData(role='slider'))"
 	},
 
 	_shared: $.mobile.selectShared,
@@ -31,7 +31,7 @@ $.widget( "mobile.nativeselect", $.mobile.widget, {
 		var widget = this;
 
 		return $.extend( this._shared(), {
-			typeName: 'native',
+			typgeName: 'native',
 
 			button: $( "<div/>" ),
 
@@ -65,7 +65,7 @@ $.widget( "mobile.nativeselect", $.mobile.widget, {
 				selected = this.selected();
 
 				self.setButtonText();
-						self.setButtonCount();
+				self.setButtonCount();
 			}
 		});
 	},
