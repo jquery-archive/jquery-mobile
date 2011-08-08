@@ -27,58 +27,47 @@ $.widget( "mobile.nativeselect", $.mobile.widget, {
 
 	_shared: $.mobile.selectShared,
 
-	_native: function() {
+	_create: function() {
 		var widget = this;
 
-		return $.extend( this._shared(), {
+		$.extend( widget, widget._shared(), {
 			typgeName: 'native',
 
-			button: $( "<div/>" ),
-
-			build: function() {
-				var self = this;
-
-				this.select
-					.appendTo( self.button )
-					.bind( "vmousedown", function() {
-						// Add active class to button
-						self.button.addClass( $.mobile.activeBtnClass );
-					})
-					.bind( "focus vmouseover", function() {
-						self.button.trigger( "vmouseover" );
-					})
-					.bind( "vmousemove", function() {
-						// Remove active class on scroll/touchmove
-						self.button.removeClass( $.mobile.activeBtnClass );
-					})
-					.bind( "change blur vmouseout", function() {
-						self.button.trigger( "vmouseout" )
-							.removeClass( $.mobile.activeBtnClass );
-					})
-					.bind( "change blur", function() {
-						self.button.removeClass( "ui-btn-down-" + widget.options.theme );
-					});
-			},
-
-			refresh: function() {
-				var self = this,
-				selected = this.selected();
-
-				self.setButtonText();
-				self.setButtonCount();
-			}
+			button: $( "<div/>" )
 		});
 	},
 
-	_create: function() {
+	build: function() {
+		var self = this;
+
+		this.select
+			.appendTo( self.button )
+			.bind( "vmousedown", function() {
+				// Add active class to button
+				self.button.addClass( $.mobile.activeBtnClass );
+			})
+			.bind( "focus vmouseover", function() {
+				self.button.trigger( "vmouseover" );
+			})
+			.bind( "vmousemove", function() {
+				// Remove active class on scroll/touchmove
+				self.button.removeClass( $.mobile.activeBtnClass );
+			})
+			.bind( "change blur vmouseout", function() {
+				self.button.trigger( "vmouseout" )
+					.removeClass( $.mobile.activeBtnClass );
+			})
+			.bind( "change blur", function() {
+				self.button.removeClass( "ui-btn-down-" + self.options.theme );
+			});
+	},
+
+	refresh: function() {
 		var self = this,
+		selected = this.selected();
 
-		o = this.options,
-
-		menu = this._native();
-
-		// Expose to other methods
-		$.extend( self, menu );
+		self.setButtonText();
+		self.setButtonCount();
 	}
 });
 })( jQuery );

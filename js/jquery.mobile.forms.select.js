@@ -98,5 +98,4 @@ $( document ).bind( "pagecreate create", function( e ){
 		.not( ":jqmData(role='none'), :jqmData(role='nojs')" )
 		.selectmenu();
 });
-
 })( jQuery );
