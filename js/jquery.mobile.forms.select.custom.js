@@ -8,10 +8,8 @@
 (function( $, undefined ) {
 
 $.widget( "mobile.customselect", $.mobile.widget, {
-	_shared: $.mobile.selectShared,
-
 	_create: function() {
-		var widget = this, shared = this._shared();
+		var widget = this, shared = $.mobile.selectShared.call(this);
 
 		$.extend( widget, shared, {
 			typeName: 'custom',

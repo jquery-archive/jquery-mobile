@@ -8,12 +8,10 @@
 (function( $, undefined ) {
 
 $.widget( "mobile.nativeselect", $.mobile.widget, {
-	_shared: $.mobile.selectShared,
-
 	_create: function() {
 		var widget = this;
 
-		$.extend( widget, widget._shared(), {
+		$.extend( widget, $.mobile.selectShared.call(this), {
 			typgeName: 'native',
 
 			button: $( "<div/>" )
@@ -46,11 +44,8 @@ $.widget( "mobile.nativeselect", $.mobile.widget, {
 	},
 
 	refresh: function() {
-		var self = this,
-		selected = this.selected();
-
-		self.setButtonText();
-		self.setButtonCount();
+		this.setButtonText();
+		this.setButtonCount();
 	}
 });
 })( jQuery );

@@ -26,13 +26,14 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 	},
 
 	_create: function() {
+		var menu;
 
 		if (this.options.nativeMenu ) {
-			var menu = $( this.element ).nativeselect().data( "nativeselect" );
+			menu = $( this.element ).nativeselect().data( "nativeselect" );
 		} else {
-			var menu = $( this.element ).customselect().data( "customselect" );
+			menu = $( this.element ).customselect().data( "customselect" );
 		}
-
+		
 		var self = this,
 
 			o = this.options,
