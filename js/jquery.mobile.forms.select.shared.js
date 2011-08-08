@@ -11,6 +11,23 @@
 		var widget = this,
 				select = this.element.wrap( "<div class='ui-select'>" );
 
+		this.options = {
+			theme: null,
+			disabled: false,
+			icon: "arrow-d",
+			iconpos: "right",
+			inline: null,
+			corners: true,
+			shadow: true,
+			iconshadow: true,
+			menuPageTheme: "b",
+			overlayTheme: "a",
+			hidePlaceholderMenuItems: true,
+			closeText: "Close",
+			nativeMenu: true,
+			initSelector: "select:not(:jqmData(role='slider'))"
+		};
+
 		// if not, try to find closest theme container
 		// TODO move to core as findCurrentTheme
 		if ( !widget.options.theme ) {
