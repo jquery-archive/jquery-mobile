@@ -25,16 +25,19 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		initSelector: "select:not(:jqmData(role='slider'))"
 	},
 
-	_create: function() {
-		var menu;
+	_button: function(){
+		return $( "<div/>" );
+	},
 
-		if (this.options.nativeMenu ) {
-			menu = $( this.element ).nativeselect().data( "nativeselect" );
-		} else {
-			menu = $( this.element ).customselect().data( "customselect" );
-		}
-		
+	_create: function() {
+		this._trigger( "beforeCreate" );
+
+		this.button = this._button();
+
+		$.extend( this, $.mobile.selectShared.call(this));
+
 		var self = this,
+			menu = this,
 
 			o = this.options,
 
@@ -90,6 +93,36 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		$.extend( self, menu );
 
 		menu.build();
+	},
+
+	build: function() {
+		var self = this;
+
+		this.select
+			.appendTo( self.button )
+			.bind( "vmousedown", function() {
+				// Add active class to button
+				self.button.addClass( $.mobile.activeBtnClass );
+			})
+			.bind( "focus vmouseover", function() {
+				self.button.trigger( "vmouseover" );
+			})
+			.bind( "vmousemove", function() {
+				// Remove active class on scroll/touchmove
+				self.button.removeClass( $.mobile.activeBtnClass );
+			})
+			.bind( "change blur vmouseout", function() {
+				self.button.trigger( "vmouseout" )
+					.removeClass( $.mobile.activeBtnClass );
+			})
+			.bind( "change blur", function() {
+				self.button.removeClass( "ui-btn-down-" + self.options.theme );
+			});
+	},
+
+	refresh: function() {
+		this.setButtonText();
+		this.setButtonCount();
 	}
 });
 
