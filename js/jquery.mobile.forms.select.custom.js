@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework : "selectmenu" plugin
+* jQuery Mobile Framework : custom "selectmenu" plugin
 * Copyright (c) jQuery Project
 * Dual licensed under the MIT or GPL Version 2 licenses.
 * http://jquery.org/license
@@ -393,7 +393,7 @@
 		}
 	};
 
-	$( "select" ).live( "selectmenubeforecreate", function(){
+	$( "select:jqmData(native-menu='false')" ).live( "selectmenubeforecreate", function(){
 		$.extend( $( this ).data( "selectmenu" ), custom );
 	});
 })( jQuery );
