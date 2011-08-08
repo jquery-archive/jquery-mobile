@@ -607,11 +607,15 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 	_create: function() {
 
+		if (this.options.nativeMenu ) {
+			var menu = $( this.element ).nativeselect().data( "nativeselect" );
+		}
+
 		var self = this,
 
 			o = this.options,
 
-			menu = self.options.nativeMenu ? this._native(this.element) : this._custom(),
+			menu = self.options.nativeMenu ? menu : this._custom(),
 
 			// IE throws an exception at options.item() function when
 			// there is no selected item
