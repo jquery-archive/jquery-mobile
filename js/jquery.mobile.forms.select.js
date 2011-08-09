@@ -76,15 +76,20 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		}
 	},
 
-	_create: function() {
-		// Allows for extension of the native select for custom selects and other plugins
-		// see select.custom for example extension
-		// TODO explore plugin registration
+	// setup items that are generally necessary for select menu extension
+	_preExtension: function(){
 		this.select = this.element.wrap( "<div class='ui-select'>" );
 		this.isMultiple = this.select[ 0 ].multiple;
 		this.options.theme = this._theme();
-		this.selectOptions = this.select.find("option");
+		this.selectOptions = this.select.find( "option" );
+	},
 
+	_create: function() {
+		this._preExtension();
+
+ 		// Allows for extension of the native select for custom selects and other plugins
+		// see select.custom for example extension
+		// TODO explore plugin registration
 		this._trigger( "beforeCreate" );
 
 		this.button = this._button();

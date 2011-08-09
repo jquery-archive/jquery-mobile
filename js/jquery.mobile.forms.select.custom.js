@@ -6,7 +6,7 @@
 */
 
 (function( $, undefined ) {
-	var custom = {
+	var extensionMethods = {
 		build: function() {
 			var self = this, widget = this;
 
@@ -394,7 +394,7 @@
 		}
 	};
 
-	var setup = function(){
+	var extensionAttributes = function(){
 		var	widget = this,
 			select = this.select,
 			selectID  = this.select.attr( "id" ),
@@ -411,7 +411,7 @@
 									"</div>"+
 									"<div data-" + $.mobile.ns + "role='content'></div>"+
 									"</div>" ).appendTo( $.mobile.pageContainer ).page(),
-		
+
 			listbox =  $("<div>", { "class": "ui-selectmenu ui-selectmenu-hidden ui-overlay-shadow ui-corner-all ui-body-" + widget.options.overlayTheme + " " + $.mobile.defaultDialogTransition } ).insertAfter(screen),
 
 			list = $( "<ul>", {
@@ -466,7 +466,7 @@
 	$( "select:jqmData(native-menu='false')" ).live( "selectmenubeforecreate", function(){
 		var selectmenu = $( this ).data( "selectmenu" );
 
-		$.extend( selectmenu, setup.call(selectmenu) );
-		$.extend( selectmenu, custom );
+		$.extend( selectmenu, extensionAttributes.call( selectmenu ) );
+		$.extend( selectmenu, extensionMethods );
 	});
 })( jQuery );
