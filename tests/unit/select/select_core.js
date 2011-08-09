@@ -169,6 +169,10 @@
 		$.testHelper.sequence(sequence, 1000);
 	});
 
+	test( "make sure the label for the select gets the ui-select class", function(){
+		ok( $( "#native-select-choice-few-container label" ).hasClass( "ui-select" ), "created label has ui-select class" );
+	});
+
 	module("Non native menus", {
 		setup: function() {
 			$.mobile.selectmenu.prototype.options.nativeMenu = false;
