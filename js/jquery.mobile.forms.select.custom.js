@@ -146,7 +146,6 @@
 			// return an array of all selected index's
 			indicies = this.selectedIndices();
 
-			console.log( self );
 			if (  forceRebuild || select[0].options.length != self.list.find( "li" ).length ) {
 				self._buildList();
 			}

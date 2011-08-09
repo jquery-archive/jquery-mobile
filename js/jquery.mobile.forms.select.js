@@ -96,62 +96,54 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 		var self = this,
 
-			menu = this,
-
-			o = this.options,
+			options = this.options,
 
 			// IE throws an exception at options.item() function when
 			// there is no selected item
 			// select first in this case
-			selectedIndex = menu.select[ 0 ].selectedIndex == -1 ? 0 : menu.select[ 0 ].selectedIndex,
+			selectedIndex = this.select[ 0 ].selectedIndex == -1 ? 0 : this.select[ 0 ].selectedIndex,
 
 			// TODO values buttonId and menuId are undefined here
-			button = menu.button
-				.text( $( menu.select[ 0 ].options.item( selectedIndex ) ).text() )
-				.insertBefore( menu.select )
+			button = this.button
+				.text( $( this.select[ 0 ].options.item( selectedIndex ) ).text() )
+				.insertBefore( this.select )
 				.buttonMarkup( {
-					theme: o.theme,
-					icon: o.icon,
-					iconpos: o.iconpos,
-					inline: o.inline,
-					corners: o.corners,
-					shadow: o.shadow,
-					iconshadow: o.iconshadow
-				}),
-
-			// Multi select or not
-			isMultiple = self.isMultiple = menu.select[ 0 ].multiple;
+					theme: options.theme,
+					icon: options.icon,
+					iconpos: options.iconpos,
+					inline: options.inline,
+					corners: options.corners,
+					shadow: options.shadow,
+					iconshadow: options.iconshadow
+				});
 
 		// Opera does not properly support opacity on select elements
 		// In Mini, it hides the element, but not its text
 		// On the desktop,it seems to do the opposite
 		// for these reasons, using the nativeMenu option results in a full native select in Opera
-		if ( o.nativeMenu && window.opera && window.opera.version ) {
-			menu.select.addClass( "ui-select-nativeonly" );
+		if ( options.nativeMenu && window.opera && window.opera.version ) {
+			this.select.addClass( "ui-select-nativeonly" );
 		}
 
 		// Add counter for multi selects
-		if ( menu.isMultiple ) {
-			menu.buttonCount = $( "<span>" )
+		if ( this.isMultiple ) {
+			this.buttonCount = $( "<span>" )
 				.addClass( "ui-li-count ui-btn-up-c ui-btn-corner-all" )
 				.hide()
 				.appendTo( button );
 		}
 
 		// Disable if specified
-		if ( o.disabled ) {
+		if ( options.disabled ) {
 			this.disable();
 		}
 
 		// Events on native select
-		menu.select.change( function() {
+		this.select.change( function() {
 			self.refresh();
 		});
 
-		// Expose to other methods
-		$.extend( self, menu );
-
-		menu.build();
+		this.build();
 	},
 
 	build: function() {
