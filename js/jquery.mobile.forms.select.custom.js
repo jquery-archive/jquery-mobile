@@ -8,16 +8,15 @@
 (function( $, undefined ) {
 	var extensionMethods = {
 		build: function() {
-			var self = this, widget = this;
+			var self = this;
 
 			// Create list from select, update state
-			widget.refresh();
+			self.refresh();
 
-			self.select.attr( "tabindex", "-1" )
-				.focus(function() {
-					$(this).blur();
-					button.focus();
-				});
+			self.select.attr( "tabindex", "-1" ).focus(function() {
+				$( this ).blur();
+				self.button.focus();
+			});
 
 			// Button events
 			self.button.bind( "vclick keydown" , function( event ) {
@@ -25,7 +24,7 @@
 						 event.keyCode && ( event.keyCode === $.mobile.keyCode.ENTER ||
 																event.keyCode === $.mobile.keyCode.SPACE ) ) {
 
-					widget.open();
+					self.open();
 					event.preventDefault();
 				}
 			});
@@ -43,7 +42,7 @@
 					// index of option tag to be selected
 					var oldIndex = self.select[ 0 ].selectedIndex,
 					newIndex = self.list.find( "li:not(.ui-li-divider)" ).index( this ),
-					option = widget.optionElems.eq( newIndex )[ 0 ];
+					option = self.optionElems.eq( newIndex )[ 0 ];
 
 					// toggle selected status on the tag for multi selects
 					option.selected = self.isMultiple ? !option.selected : true;
@@ -62,7 +61,7 @@
 
 					//hide custom select for single selects only
 					if ( !self.isMultiple ) {
-						widget.close();
+						self.close();
 					}
 
 					event.preventDefault();
@@ -125,15 +124,15 @@
 
 			// Events on "screen" overlay
 			self.screen.bind( "vclick", function( event ) {
-				widget.close();
+				self.close();
 			});
 
 			// Close button on small overlays
 			self.headerClose.click( function() {
 				if ( self.menuType == "overlay" ) {
-					widget.close();
+					self.close();
 					return false;
-						}
+				}
 			});
 		},
 
