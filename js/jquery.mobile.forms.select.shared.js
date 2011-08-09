@@ -8,36 +8,10 @@
 
 (function( $, undefined ) {
 	$.mobile.selectShared = function(){
-		var widget = this,
-				select = this.element.wrap( "<div class='ui-select'>" );
+		var widget = this;
 
-		this.options = {
-			theme: null,
-			disabled: false,
-			icon: "arrow-d",
-			iconpos: "right",
-			inline: null,
-			corners: true,
-			shadow: true,
-			iconshadow: true,
-			menuPageTheme: "b",
-			overlayTheme: "a",
-			hidePlaceholderMenuItems: true,
-			closeText: "Close",
-			nativeMenu: true,
-			initSelector: "select:not(:jqmData(role='slider'))"
-		};
-
-		// if not, try to find closest theme container
-		// TODO move to core as findCurrentTheme
-		if ( !widget.options.theme ) {
-			var themedParent = select.closest( "[class*='ui-bar-'],[class*='ui-body-']" );
-			widget.options.theme = themedParent.length ?
-				/ui-(bar|body)-([a-z])/.exec( themedParent.attr( "class" ) )[2] :
-				"c";
-		}
-
-		var selectID  = select.attr( "id" ),
+		var	select = this.select,
+				selectID  = select.attr( "id" ),
 			label = $( "label[for='"+ selectID +"']" ).addClass( "ui-select" ),
 			thisPage = select.closest( ".ui-page" ),
 			screen = $( "<div>", {"class": "ui-selectmenu-screen ui-screen-hidden"} ).appendTo( thisPage ),

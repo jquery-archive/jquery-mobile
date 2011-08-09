@@ -29,14 +29,33 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		return $( "<div/>" );
 	},
 
+	_theme: function(){
+		var themedParent, theme;
+		// if no theme is defined, try to find closest theme container
+		// TODO move to core as something like findCurrentTheme
+		themedParent = this.select.closest( "[class*='ui-bar-'], [class*='ui-body-']" );
+		theme = themedParent.length ?
+			/ui-(bar|body)-([a-z])/.exec( themedParent.attr( "class" ) )[2] :
+			"c";
+
+		return theme;
+	},
+
 	_create: function() {
+		// Allows for extension of the native select for custom selects and other plugins
+		// see select.custom for example extension
+		// TODO explore plugin registration
+		this.select = this.element.wrap( "<div class='ui-select'>" );
 		this._trigger( "beforeCreate" );
 
-		this.button = this._button();
 
-		$.extend( this, $.mobile.selectShared.call(this));
+		this.button = this._button();
+		this.options.theme = this._theme();
+
+		$.extend( this, $.mobile.selectShared.call(this) );
 
 		var self = this,
+
 			menu = this,
 
 			o = this.options,
