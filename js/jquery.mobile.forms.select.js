@@ -215,7 +215,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 							event.keyCode && ( event.keyCode === $.mobile.keyCode.ENTER ||
 																		event.keyCode === $.mobile.keyCode.SPACE ) ) {
 
-					self.open();
+					select.trigger( "vclick" );
+                    self.open();
 					event.preventDefault();
 				}
 			});
