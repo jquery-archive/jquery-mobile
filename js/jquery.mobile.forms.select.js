@@ -41,18 +41,53 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		return theme;
 	},
 
+	selected: function() {
+		return this.selectOptions.filter( ":selected" );
+	},
+
+	selectedIndices: function() {
+		var self = this;
+
+		this.selected().map( function() {
+			return self.selectOptions.index( this );
+		}).get();
+	},
+
+	setButtonText: function() {
+		var self = this, selected = this.selected();
+
+		this.button.find( ".ui-btn-text" ).text( function() {
+			if ( !self.isMultiple ) {
+				return self.selected().text();
+			}
+
+			return self.selected().length ? self.selected().map( function() {
+				return $( this ).text();
+			}).get().join( ", " ) : self.placeholder;
+		});
+	},
+
+	setButtonCount: function() {
+		var selected = this.selected();
+
+		// multiple count inside button
+		if ( this.isMultiple ) {
+			this.buttonCount[ selected.length > 1 ? "show" : "hide" ]().text( selected.length );
+		}
+	},
+
 	_create: function() {
 		// Allows for extension of the native select for custom selects and other plugins
 		// see select.custom for example extension
 		// TODO explore plugin registration
 		this.select = this.element.wrap( "<div class='ui-select'>" );
+		this.isMultiple = this.select[ 0 ].multiple;
+		this.options.theme = this._theme();
+		this.selectOptions = this.select.find("option");
+
 		this._trigger( "beforeCreate" );
 
-
 		this.button = this._button();
-		this.options.theme = this._theme();
-
-		$.extend( this, $.mobile.selectShared.call(this) );
 
 		var self = this,
 
@@ -142,6 +177,30 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 	refresh: function() {
 		this.setButtonText();
 		this.setButtonCount();
+	},
+
+	disable: function() {
+		this._setDisabled( true );
+		this.button.addClass( "ui-disabled" );
+	},
+
+	enable: function() {
+		this._setDisabled( false );
+		this.button.removeClass( "ui-disabled" );
+	},
+
+	_setDisabled: function( value ) {
+		this.element.attr( "disabled", value );
+		this.button.attr( "aria-disabled", value );
+		return this._setOption( "disabled", value );
+	},
+
+	_focusButton : function() {
+		var self = this;
+
+		setTimeout( function() {
+			self.button.focus();
+		}, 40);
 	}
 });
 
