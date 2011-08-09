@@ -58,10 +58,10 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 		this.button.find( ".ui-btn-text" ).text( function() {
 			if ( !self.isMultiple ) {
-				return self.selected().text();
+				return selected.text();
 			}
 
-			return self.selected().length ? self.selected().map( function() {
+			return selected.length ? selected.map( function() {
 				return $( this ).text();
 			}).get().join( ", " ) : self.placeholder;
 		});
