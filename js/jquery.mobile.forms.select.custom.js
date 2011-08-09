@@ -395,8 +395,8 @@
 	var extensionAttributes = function(){
 		var	widget = this,
 			select = this.select,
-			selectID  = this.select.attr( "id" ),
-			label = $( "label[for='"+ selectID +"']" ).addClass( "ui-select" ),
+			selectID  = this.selectID,
+			label = this.label,
 			thisPage = this.select.closest( ".ui-page" ),
 			screen = $( "<div>", {"class": "ui-selectmenu-screen ui-screen-hidden"} ).appendTo( thisPage ),
 			selectOptions = this.select.find("option"),

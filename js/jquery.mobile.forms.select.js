@@ -79,6 +79,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 	// setup items that are generally necessary for select menu extension
 	_preExtension: function(){
 		this.select = this.element.wrap( "<div class='ui-select'>" );
+		this.selectID  = this.select.attr( "id" );
+		this.label = $( "label[for='"+ this.selectID +"']" ).addClass( "ui-select" );
 		this.isMultiple = this.select[ 0 ].multiple;
 		this.options.theme = this._theme();
 		this.selectOptions = this.select.find( "option" );
