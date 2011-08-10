@@ -289,7 +289,7 @@
 				}, 300);
 
 				function focusMenuItem() {
-					self.list.find( ".ui-btn-active" ).focus();
+					self.list.find(  $.mobile.activeBtnClass ).focus();
 				}
 
 				if ( menuHeight > screenHeight - 80 || !$.support.scrollTop ) {

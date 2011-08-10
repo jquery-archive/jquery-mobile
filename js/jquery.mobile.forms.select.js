@@ -159,7 +159,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 	selectedIndices: function() {
 		var self = this;
 
-		this.selected().map( function() {
+		return this.selected().map( function() {
 			return self.selectOptions.index( this );
 		}).get();
 	},
