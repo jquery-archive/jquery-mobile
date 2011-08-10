@@ -293,6 +293,40 @@
 		], 1000);
 	});
 
+	asyncTest( "selected items are highlighted", function(){
+		$.testHelper.sequence([
+			function(){
+				// bring up the smaller choice menu
+				ok($("#select-choice-few-container a").length > 0, "there is in fact a button in the page");
+				$("#select-choice-few-container a").trigger("click");
+			},
+
+			function(){
+				var firstMenuChoice = $("#select-choice-few-menu li:first");
+				ok( firstMenuChoice.hasClass( $.mobile.activeBtnClass ),
+						"default menu choice has the active button class" );
+
+				$("#select-choice-few-menu a:last").click();
+			},
+
+			function(){
+				// bring up the menu again
+				$("#select-choice-few-container a").trigger("click");
+			},
+
+			function(){
+				var lastMenuChoice = $("#select-choice-few-menu li:last");
+				ok( lastMenuChoice.hasClass( $.mobile.activeBtnClass ),
+						"previously slected item has the active button class" );
+
+				// close the dialog
+				lastMenuChoice.find( "a" ).click();
+			},
+
+			start
+		], 1000);
+	});
+
 	test( "enabling and disabling", function(){
 		var select = $( "select" ).first(), button;
 
