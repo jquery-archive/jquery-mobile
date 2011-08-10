@@ -8,7 +8,7 @@
 (function( $, undefined ) {
 	var extendSelect = function( widget ){
 
-		var	select = widget.select,
+		var select = widget.select,
 			selectID  = widget.selectID,
 			label = widget.label,
 			thisPage = widget.select.closest( ".ui-page" ),
@@ -444,7 +444,7 @@
 				self.list.listview();
 			},
 
-			_button:	function(){
+			_button: function(){
 				return $( "<a>", {
 					"href": "#",
 					"role": "button",
