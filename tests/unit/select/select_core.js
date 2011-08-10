@@ -142,7 +142,7 @@
 			},
 
 			function(){
-				ok(location.hash.indexOf(dialogHashKey) == -1);
+				same(location.hash.indexOf(dialogHashKey), -1);
 				start();
 			}
 		]);
@@ -248,7 +248,7 @@
 			},
 
 			function(){
-				selectButton = $.mobile.activePage.find( "#cached-page-select" ).siblings( 'a' ),
+				selectButton = $.mobile.activePage.find( "#cached-page-select" ).siblings( 'a' );
 				parentPageId = $.mobile.activePage.attr( 'id' );
 				same( $("#" + parentPageId).length, 1, "establish the parent page exists" );
 				selectButton.click();
