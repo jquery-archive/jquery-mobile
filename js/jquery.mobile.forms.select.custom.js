@@ -364,7 +364,7 @@
 						.css({
 							top: newtop,
 							left: newleft
-								})
+						})
 						.addClass( "in" );
 
 					focusMenuItem();
