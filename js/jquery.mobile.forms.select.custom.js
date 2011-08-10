@@ -18,11 +18,11 @@
 			buttonId = selectID + "-button",
 			menuId = selectID + "-menu",
 			menuPage = $( "<div data-" + $.mobile.ns + "role='dialog' data-" +$.mobile.ns + "theme='"+ widget.options.menuPageTheme +"'>" +
-									"<div data-" + $.mobile.ns + "role='header'>" +
-									"<div class='ui-title'>" + label.text() + "</div>"+
-									"</div>"+
-									"<div data-" + $.mobile.ns + "role='content'></div>"+
-									"</div>" ).appendTo( $.mobile.pageContainer ).page(),
+				"<div data-" + $.mobile.ns + "role='header'>" +
+				"<div class='ui-title'>" + label.text() + "</div>"+
+				"</div>"+
+				"<div data-" + $.mobile.ns + "role='content'></div>"+
+				"</div>" ).appendTo( $.mobile.pageContainer ).page(),
 
 			listbox =  $("<div>", { "class": "ui-selectmenu ui-selectmenu-hidden ui-overlay-shadow ui-corner-all ui-body-" + widget.options.overlayTheme + " " + $.mobile.defaultDialogTransition } ).insertAfter(screen),
 
