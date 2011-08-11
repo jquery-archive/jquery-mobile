@@ -423,31 +423,33 @@
 
 			function() {
 				var $page = $('.ui-page-active');
+				$.testHelper.sequence([
+					function() {
+						checkClasses();
 
-				checkClasses()
+						$page.find('input').val('man');
+						$page.find('input').trigger('change');
+					},
 
-				$page.find('input').val('man');
-				$page.find('input').trigger('change');
+					function() {
+						checkClasses();
 
-				setTimeout(function() {
+						$page.find('input').val('at');
+						$page.find('input').trigger('change');
+					},
 
-					checkClasses();
-
-					$page.find('input').val('at');
-					$page.find('input').trigger('change');
-
-					setTimeout(function() {
+					function() {
 						checkClasses();
 
 						$page.find('input').val('catwoman');
 						$page.find('input').trigger('change');
+					},
 
-						setTimeout(function() {
-							checkClasses();
-							start();
-						}, 50)
-					}, 50);
-				}, 50);
+					function() {
+						checkClasses();
+						start();
+					}
+				], 50);
 			}
 		]);
 	});
