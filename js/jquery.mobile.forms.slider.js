@@ -224,8 +224,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		var control = this.element, percent,
 			cType = control[0].nodeName.toLowerCase(),
 			min = cType === "input" ? parseFloat( control.attr( "min" ) ) : 0,
-			max = cType === "input" ? parseFloat( control.attr( "max" ) ) : control.find( "option" ).length - 1;
-
+			max = cType === "input" ? parseFloat( control.attr( "max" ) ) : control.find( "option" ).length - 1,
+			step = (cType === "input" && parseFloat(control.attr("step"))>0) ? parseFloat(control.attr("step")) : 1; 
+			
 		if ( typeof val === "object" ) {
 			var data = val,
 				// a slight tolerance helped get to the ends of the slider
