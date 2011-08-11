@@ -10,19 +10,19 @@
 	
 	<script>
 	$(function(){
-		$(".ui-grid-d a").bind("tap", function(e){
+		$(".ui-grid-d a").bind("tap click", function(e){
 			$(this).hide();
 			$("#log")
 				.prepend("<li>"+ e.type +" event; target: "+ e.target.nodeName +"; message: grid '"+$(this).text()+"' hidden</li>")
 				.listview("refresh");
 			return false;
-		}).bind("click", false);
-		$("#showbtn").bind("tap", function(e){
+		}).bind("tap click", false);
+		$("#showbtn").bind("tap click", function(e){
 			$(".ui-grid-d a").show();
 			$("#log")
 				.prepend("<li>"+ e.type +" event; target: "+ e.target.nodeName +"; message: show all buttons</li>")
 				.listview("refresh");
-		}).bind("click", false);
+		}).bind("tap click", false);
 	});	
 	</script>
 </head> 

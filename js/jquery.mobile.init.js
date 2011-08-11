@@ -123,9 +123,9 @@
 		// so if it's 1, use 0 from now on
 		$.mobile.defaultHomeScroll = ( !$.support.scrollTop || $(window).scrollTop() === 1 ) ? 0 : 1;
 
-		// dom-ready inits
-		if ( $.mobile.autoInitializePage ) {
-			$( $.mobile.initializePage );
+		//dom-ready inits
+		if( $.mobile.autoInitializePage ){
+			$.mobile.initializePage();
 		}
 
 		// window load event
