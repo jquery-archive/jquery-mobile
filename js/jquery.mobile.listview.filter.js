@@ -100,6 +100,7 @@ $( ":jqmData(role='listview')" ).live( "listviewcreate", function() {
 				//filtervalue is empty => show all
 				listItems.toggleClass( "ui-screen-hidden", false );
 			}
+			listview._refreshCorners();
 		})
 		.appendTo( wrapper )
 		.textinput();
