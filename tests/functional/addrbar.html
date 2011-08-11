@@ -11,13 +11,13 @@
 	
 	<script>
 	$(function(){
-	$( "a" ).bind("tap",function( e ){
+	$( "a" ).bind("tap click",function( e ){
 			$("#log")
 				.prepend("<li>"+ e.type +" event; target: "+ e.target.nodeName +"</li>")
 				.listview("refresh");
 			return false;
 		})
-		.bind("click", false);
+		.bind("tap click", false);
 	});	
 	</script>
 	
