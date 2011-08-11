@@ -408,6 +408,50 @@
 		]);
 	});
 
+	asyncTest( "Inset List View should refresh corner classes after filtering", 4 * 2, function () {
+		var checkClasses = function() {
+			var $page = $( ".ui-page-active" ),
+				$li = $page.find( "li:visible" );
+			ok($li.first().hasClass( "ui-corner-top" ), $li.length+" li elements: First visible element should have class ui-corner-top");
+			ok($li.last().hasClass( "ui-corner-bottom" ), $li.length+" li elements: Last visible element should have class ui-corner-bottom");
+		}
+
+		$.testHelper.pageSequence([
+			function() {
+				$.testHelper.openPage("#search-filter-inset-test");
+			},
+
+			function() {
+				var $page = $('.ui-page-active');
+
+				checkClasses()
+
+				$page.find('input').val('man');
+				$page.find('input').trigger('change');
+
+				setTimeout(function() {
+
+					checkClasses();
+
+					$page.find('input').val('at');
+					$page.find('input').trigger('change');
+
+					setTimeout(function() {
+						checkClasses();
+
+						$page.find('input').val('catwoman');
+						$page.find('input').trigger('change');
+
+						setTimeout(function() {
+							checkClasses();
+							start();
+						}, 50)
+					}, 50);
+				}, 50);
+			}
+		]);
+	});
+
 	module( "Programmatically generated list items", {
 		setup: function(){
 			var item,
