@@ -65,7 +65,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		}
 	},
 
-	refreshCorners: function() {
+	_refreshCorners: function() {
 		var $li,
 			$visibleli,
 			$topli,
@@ -200,7 +200,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			}
 		}
 		
-		this.refreshCorners();
+		this._refreshCorners();
 	},
 
 	//create a string for ID/subpage url creation
