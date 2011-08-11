@@ -75,7 +75,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			$li = this.element.children( "li" );
 			$visibleli = $li.not( ".ui-screen-hidden" );
 			
-			this._removeCorners( $li.filter( ".ui-corner-top" ).add( ".ui-corner-bottom" ) );
+			this._removeCorners( $li );
 
 			// Select the first visible li element
 			$topli = $visibleli.first()
