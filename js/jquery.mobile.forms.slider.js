@@ -257,6 +257,17 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 		var newval = Math.round( ( percent / 100 ) * ( max - min ) ) + min;
 
+		//from jQuery UI slider, the following source will round to the neraest step
+		var valModStep = (newval - min) % step;	
+		var alignValue = newval - valModStep;	
+
+		if ( Math.abs(valModStep) * 2 >= step ) {
+			alignValue += ( valModStep > 0 ) ? step : ( -step );
+		}
+		// Since JavaScript has problems with large floats, round
+		// the final value to 5 digits after the decimal point (see jQuery UI: #4124)
+		newval = parseFloat( alignValue.toFixed(5) );
+
 		if ( newval < min ) {
 			newval = min;
 		}
