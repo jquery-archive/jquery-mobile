@@ -23,7 +23,7 @@ $(function() {
 			onFrameDone: function( failed, passed, total, runtime ){
 				// record success
 				self.recordResult( false , failed );
-				self.recordResult( true ,  passed );
+				self.recordResult( true , passed );
 
 				// make sure we don't time out the tests
 				clearTimeout( self.testTimer );
@@ -48,7 +48,7 @@ $(function() {
 				$.each( data.directories, function(i, dir) {
 					QUnit.asyncTest( dir, function() {
 						self.dir = dir;
-					  self.$frameElem.one( "load", self.onFrameLoad );
+						self.$frameElem.one( "load", self.onFrameLoad );
 						self.$frameElem.attr( "src", template.replace("{{testdir}}", dir) );
 					});
 				});
