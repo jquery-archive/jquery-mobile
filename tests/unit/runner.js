@@ -52,8 +52,16 @@ $(function() {
 						self.$frameElem.attr( "src", template.replace("{{testdir}}", dir) );
 					});
 				});
+
+				// having defined all suite level tests let QUnit run
+				QUnit.start();
 			}
 		});
+	};
+
+	// prevent qunit from starting the test suite until all tests are defined
+	QUnit.begin = function(  ) {
+		this.config.autostart = false;
 	};
 
 	// get the test directories
