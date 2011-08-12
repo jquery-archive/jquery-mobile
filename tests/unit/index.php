@@ -3,6 +3,9 @@
 <head>
   <meta charset="utf-8">
 	<link rel="stylesheet" href="../../external/qunit.css"></link>
+	<script src="../../js/jquery.js"></script>
+	<script src="../../external/qunit.js"></script>
+	<script src="runner.js"></script>
 </head>
 <body>
   <div style="float: left; width: 500px;">
@@ -15,8 +18,5 @@
        I think an entire link and stylesheet is a waste -->
 	<iframe data-src="../../tests/unit/{{testdir}}" name="testFrame" id="testFrame" width="800px" height="100%" style="float: left; border: 0px; height: 100%;" scrolling="no">
 	</iframe>
-	<script src="../../js/jquery.js"></script>
-	<script src="../../external/qunit.js"></script>
-	<script src="runner.js"></script>
 </body>
 </html>

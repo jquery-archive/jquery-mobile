@@ -11,6 +11,15 @@ $(function() {
 
 			onTimeout: QUnit.start,
 
+			onFrameLoad: function() {
+				// establish a timeout for a given suite in case of async tests hanging
+				self.testTimer = setTimeout( self.onTimeout, self.testTimeout );
+
+				// when the QUnit object reports done in the iframe
+				// run the onFrameDone method
+				self.frame.QUnit.done = self.onFrameDone;
+			},
+
 			onFrameDone: function( failed, passed, total, runtime ){
 				// record success
 				self.recordResult( false , failed );
@@ -33,25 +42,13 @@ $(function() {
 				}
 			},
 
-			createTest: function( dir ) {
-				// check for the frames jquery object each time
-				$( "iframe#testFrame" ).one( "load", function() {
-
-					// establish a timeout for a given suite in case of async tests hanging
-					self.testTimer = setTimeout( self.onTimeout, self.testTimeout );
-
-					// when the QUnit object reports done in the iframe
-					// run the onFrameDone method
-					self.frame.QUnit.done = self.onFrameDone;
-				});
-			},
-
 			exec: function( data ) {
 				var template = self.$frameElem.attr( "data-src" );
 
 				$.each( data.directories, function(i, dir) {
-					asyncTest( dir, function() {
-						self.createTest( dir );
+					QUnit.asyncTest( dir, function() {
+						self.dir = dir;
+					  self.$frameElem.one( "load", self.onFrameLoad );
 						self.$frameElem.attr( "src", template.replace("{{testdir}}", dir) );
 					});
 				});
