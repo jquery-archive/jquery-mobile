@@ -4,7 +4,7 @@
 * Dual licensed under the MIT or GPL Version 2 licenses.
 * http://jquery.org/license
 */
-( function( $ ) {
+( function( $, window ) {
 
 	// For now, let's Monkeypatch this onto the end of $.mobile._registerInternalEvents
 	var oldRegisterInternalEvents = $.mobile._registerInternalEvents;
@@ -25,10 +25,13 @@
 			subkey = "&" + $.mobile.subPageUrlKey,
 			
 			// Support for dialog hash urls
-			dialog	= "&ui-state";
-
-		$( window ).bind( "hashchange replacehash", function( e ) {
+			dialog	= "&ui-state",
 			
+			// Cache window
+			$win = $( window );
+
+		$win.bind( "hashchange replacehash", function( e ) {
+
 			if( $.support.pushState ){
 				var hash = location.hash || "#" + initialFilePath,
 					href = hash.replace( "#", "" );
@@ -42,29 +45,44 @@
 						href = href.split( subkey ).join( "#" + subkey );
 					}
 				}
-				
 
 				history.replaceState( { hash: hash, title: document.title }, document.title, href );
 			}
 		});
 
 		// Handle popstate events the occur through history changes
-		$( window ).bind( "popstate", function( e ) {
+		$win.bind( "popstate", function( e ) {
 			if( popListeningEnabled ){
 				
 				if( e.originalEvent.state ){
 					history.replaceState( e.originalEvent.state, e.originalEvent.state.title, initialFilePath + e.originalEvent.state.hash );
-					$( window ).trigger( "hashchange" );
+
+					// Urls that reference subpages will fire their own hashchange, so we don't want to trigger 2 in that case.
+					var fired = false;
+
+					$win.bind( "hashchange.popstatetest", function(){
+						fired = true;
+					});
+
+					setTimeout(function(){
+
+						$win.unbind( "hashchange.popstatetest" );
+
+						if( !fired ){
+							$win.trigger( "hashchange" );
+						}
+					}, 100);
+
 				}
 			}
 		});
 		
 		// Replace the hash before pushstate listening is enabled
-		$( window ).trigger( "replacehash" );
+		$win.trigger( "replacehash" );
 
 		// Enable pushstate listening *after window onload
 		// to ignore the initial pop that Chrome calls at onload
-		$( window ).load( function(){
+		$win.load( function(){
 			setTimeout(function(){
 				popListeningEnabled = true;
 			}, 0 );
@@ -72,4 +90,4 @@
 
 	};
 
-})( jQuery );
+})( jQuery, this );
