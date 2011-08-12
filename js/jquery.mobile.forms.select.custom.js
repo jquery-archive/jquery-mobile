@@ -459,9 +459,11 @@
 		});
 	};
 
-	$( "select:jqmData(native-menu='false')" ).live( "selectmenubeforecreate", function(){
+	$( "select" ).live( "selectmenubeforecreate", function(){
 		var selectmenuWidget = $( this ).data( "selectmenu" );
 
-		extendSelect( selectmenuWidget );
+		if( !selectmenuWidget.options.nativeMenu ){
+			extendSelect( selectmenuWidget );
+		}
 	});
 })( jQuery );
