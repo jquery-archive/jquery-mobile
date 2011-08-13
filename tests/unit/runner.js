@@ -9,6 +9,8 @@ $(function() {
 
 			$frameElem: $( "#testFrame" ),
 
+			assertionResultPrefix: "assertion result for test:",
+
 			onTimeout: QUnit.start,
 
 			onFrameLoad: function() {
@@ -18,28 +20,39 @@ $(function() {
 				// when the QUnit object reports done in the iframe
 				// run the onFrameDone method
 				self.frame.QUnit.done = self.onFrameDone;
+				self.frame.QUnit.testDone = self.onTestDone;
+			},
+
+			onTestDone: function( name, bad, assertCount ) {
+				QUnit.ok( !bad, name );
+				self.recordAssertions( assertCount - 1, name );
 			},
 
 			onFrameDone: function( failed, passed, total, runtime ){
-				// record success
-				self.recordResult( false , failed );
-				self.recordResult( true , passed );
-
 				// make sure we don't time out the tests
 				clearTimeout( self.testTimer );
 
 				// TODO decipher actual cause of multiple test results firing twice
 				// clear the done call to prevent early completion of other test cases
 				self.frame.QUnit.done = $.noop;
+				self.frame.QUnit.testDone = $.noop;
+
+				// hide the extra assertions made to propogate the count
+				// to the suite level test
+				self.hideAssertionResults();
 
 				// continue on to the next suite
 				QUnit.start();
 			},
 
-			recordResult: function( result, count ) {
+			recordAssertions: function( count, parentTest ) {
 				for( var i = 0; i < count; i++ ) {
-					ok( result );
+					ok( true, self.assertionResultPrefix + parentTest );
 				}
+			},
+
+			hideAssertionResults: function() {
+				$( "li:not([id]):contains('" + self.assertionResultPrefix + "')" ).hide();
 			},
 
 			exec: function( data ) {
