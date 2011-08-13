@@ -14,6 +14,8 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 		heading: ">:header,>legend",
 		theme: null,
 		iconTheme: "d",
+		iconClosed: "plus",
+		iconOpened: "minus",
 		initSelector: ":jqmData(role='collapsible')"
 	},
 	_create: function() {
@@ -43,7 +45,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 					shadow: !collapsibleParent.length,
 					corners: false,
 					iconPos: "left",
-					icon: "plus",
+					icon: o.iconClosed,
 					theme: o.theme
 				})
 				.find( ".ui-icon" )
@@ -52,7 +54,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 						shadow: true,
 						corners: true,
 						iconPos: "notext",
-						icon: "plus",
+						icon: o.iconClosed,
 						theme: o.iconTheme
 					});
 
@@ -84,8 +86,8 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 							.text( o.expandCueText )
 						.end()
 						.find( ".ui-icon" )
-							.removeClass( "ui-icon-minus" )
-							.addClass( "ui-icon-plus" );
+							.removeClass( "ui-icon-" + o.iconOpened )
+							.addClass( "ui-icon-" + o.iconClosed );
 
 					collapsibleContent.addClass( "ui-collapsible-content-collapsed" ).attr( "aria-hidden", true );
 
@@ -105,7 +107,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 						.removeClass( "ui-collapsible-heading-collapsed" )
 						.find( ".ui-collapsible-heading-status" ).text( o.collapseCueText );
 
-					collapsibleHeading.find( ".ui-icon" ).removeClass( "ui-icon-plus" ).addClass( "ui-icon-minus" );
+					collapsibleHeading.find( ".ui-icon" ).removeClass( "ui-icon-" + o.iconClosed ).addClass( "ui-icon-" + o.iconOpened );
 
 					collapsibleContent.removeClass( "ui-collapsible-content-collapsed" ).attr( "aria-hidden", false );
 
