@@ -15,7 +15,7 @@
 		oldRegisterInternalEvents();
 		
 		// Initial href without hash becomes base for hash changes
-		var initialFilePath		= location.pathname,
+		var initialFilePath = location.pathname,
 		
 			// Begin with popstate listening disabled, since it fires at onload in chrome
 			popListeningEnabled	= false,
@@ -24,7 +24,7 @@
 			subkey = "&" + $.mobile.subPageUrlKey,
 			
 			// Support for dialog hash urls
-			dialog	= "&ui-state",
+			dialog = "&ui-state",
 			
 			// Cache window
 			$win = $( window );
@@ -37,10 +37,9 @@
 				
 				//support dialog urls	
 				if( href ){
-					if( href.indexOf( dialog ) > -1 ){
+					if( href.indexOf( dialog ) > -1 ) {
 						href = href.split( dialog ).join( "#" + dialog );
-					}
-					else if( href.indexOf( subkey ) > -1 ){
+					} else if( href.indexOf( subkey ) > -1 ) {
 						href = href.split( subkey ).join( "#" + subkey );
 					}
 				}
@@ -53,7 +52,7 @@
 		$win.bind( "popstate", function( e ) {
 			if( popListeningEnabled ){
 				
-				if( e.originalEvent.state ){
+				if( e.originalEvent.state ) {
 					history.replaceState( e.originalEvent.state, e.originalEvent.state.title, initialFilePath + e.originalEvent.state.hash );
 
 					// Urls that reference subpages will fire their own hashchange, so we don't want to trigger 2 in that case.
@@ -64,10 +63,8 @@
 					});
 
 					setTimeout(function(){
-
 						$win.unbind( "hashchange.popstatetest" );
-
-						if( !fired ){
+						if( !fired ) {
 							$win.trigger( "hashchange" );
 						}
 					}, 100);
@@ -81,7 +78,7 @@
 
 		// Enable pushstate listening *after window onload
 		// to ignore the initial pop that Chrome calls at onload
-		$win.load( function(){
+		$win.load(function(){
 			setTimeout(function(){
 				popListeningEnabled = true;
 			}, 0 );
