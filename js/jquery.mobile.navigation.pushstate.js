@@ -27,9 +27,14 @@
 			dialog = "&ui-state",
 			
 			// Cache window
-			$win = $( window );
+			$win = $( window ),
+
+			// Flag for tracking if a Hashchange naturally occurs after each popstate + replace
+			hashchangeFired = false;
 
 		$win.bind( "hashchange replacehash", function( e ) {
+
+			hashchangeFired = true;
 
 			if( $.support.pushState ){
 				var hash = location.hash || "#" + initialFilePath,
@@ -56,17 +61,13 @@
 					history.replaceState( e.originalEvent.state, e.originalEvent.state.title, initialFilePath + e.originalEvent.state.hash );
 
 					// Urls that reference subpages will fire their own hashchange, so we don't want to trigger 2 in that case.
-					var fired = false;
-
-					$win.bind( "hashchange.popstatetest", function(){
-						fired = true;
-					});
+					hashchangeFired = false;
 
 					setTimeout(function(){
-						$win.unbind( "hashchange.popstatetest" );
-						if( !fired ) {
+						if( !hashchangeFired ) {
 							$win.trigger( "hashchange" );
 						}
+						hashchangeFired = false;
 					}, 0);
 
 				}
@@ -77,7 +78,7 @@
 		$win.trigger( "replacehash" );
 
 		// Enable pushstate listening *after window onload
-		// to ignore the initial pop that Chrome calls at onload
+		// To ignore the initial pop that Chrome calls at onload
 		$win.load(function(){
 			setTimeout(function(){
 				popListeningEnabled = true;
