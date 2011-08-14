@@ -67,7 +67,7 @@
 						if( !fired ) {
 							$win.trigger( "hashchange" );
 						}
-					}, 100);
+					}, 0);
 
 				}
 			}
