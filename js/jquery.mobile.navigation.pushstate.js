@@ -15,8 +15,7 @@
 		oldRegisterInternalEvents();
 		
 		// Initial href without hash becomes base for hash changes
-		// TODO - get this value from $.mobile.path ?
-		var initialFilePath		= location.href.split( "#" )[0].match( /[^\/]*\/\/[^\/]+(.*)/ ) && RegExp.$1,
+		var initialFilePath		= location.pathname,
 		
 			// Begin with popstate listening disabled, since it fires at onload in chrome
 			popListeningEnabled	= false,
