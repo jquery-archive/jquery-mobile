@@ -261,7 +261,7 @@
 			resetHash,
 
 			function(){
-				$.mobile.changePage( "cached-tests.html" );
+				$.mobile.changePage( "cached.html" );
 			},
 
 			function(){
@@ -293,7 +293,7 @@
 			resetHash,
 
 			function(){
-				$.mobile.changePage( "cached-tests.html" );
+				$.mobile.changePage( "cached.html" );
 			},
 
 			function(){
