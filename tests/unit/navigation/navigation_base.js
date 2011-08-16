@@ -18,24 +18,33 @@
 	});
 
 	asyncTest( "can navigate between internal and external pages", function(){
+		$.support.pushState = true;
+
 		$.testHelper.pageSequence([
 			function(){
 				// Navigate from default internal page to another internal page.
-				$.testHelper.openPage("#internal-page-2"); 
+				$.testHelper.openPage( "#internal-page-2" );
 			},
 
 			function(){
 				// Verify that we are on the 2nd internal page.
-				same(location.hash, "#internal-page-2", "navigate to internal page");
+				$.testHelper.assertUrlLocation({
+					push: location.pathname + "#internal-page-2",
+					hash: "internal-page-2",
+					report: "navigate to internal page"
+				});
 
 				// Navigate to a page that is in the base directory. Note that the application
-				// document and this new page are *NOT* in the same directory.
-				$("#internal-page-2 .bp1").click();
+ 				// document and this new page are *NOT* in the same directory.
+ 				$("#internal-page-2 .bp1").click();
 			},
 
 			function(){
 				// Verify that we are on the expected page.
-				same(location.hash, "#" + baseDir + "base-page-1.html", "navigate from internal page to page in base directory");
+				$.testHelper.assertUrlLocation({
+					hashOrPush: baseDir + "base-page-1.html",
+					report: "navigate from internal page to page in base directory"
+				});
 
 				// Navigate to another page in the same directory as the current page.
 				$("#base-page-1 .bp2").click();
@@ -43,7 +52,10 @@
 
 			function(){
 				// Verify that we are on the expected page.
-				same(location.hash, "#" + baseDir + "base-page-2.html", "navigate from base directory page to another base directory page");
+				$.testHelper.assertUrlLocation({
+					hashOrPush: baseDir + "base-page-2.html",
+					report: "navigate from base directory page to another base directory page"
+				});
 
 				// Navigate to another page in a directory that is the sibling of the base.
 				$("#base-page-2 .cp1").click();
@@ -51,7 +63,10 @@
 
 			function(){
 				// Verify that we are on the expected page.
-				same(location.hash, "#" + contentDir + "content-page-1.html", "navigate from base directory page to a page in a different directory hierarchy");
+				$.testHelper.assertUrlLocation({
+					hashOrPush: contentDir + "content-page-1.html",
+					report: "navigate from base directory page to a page in a different directory hierarchy"
+				});
 
 				// Navigate to another page in a directory that is the sibling of the base.
 				$("#content-page-1 .cp2").click();
@@ -59,7 +74,10 @@
 
 			function(){
 				// Verify that we are on the expected page.
-				same(location.hash, "#" + contentDir + "content-page-2.html", "navigate to another page within the same non-base directory hierarchy");
+				$.testHelper.assertUrlLocation({
+					hashOrPush: contentDir + "content-page-2.html",
+					report: "navigate to another page within the same non-base directory hierarchy"
+				});
 
 				// Navigate to an internal page.
 				$("#content-page-2 .ip1").click();
@@ -67,7 +85,11 @@
 
 			function(){
 				// Verify that we are on the expected page.
-				same(location.hash, "#internal-page-1", "navigate from a page in a non-base directory to an internal page");
+				$.testHelper.assertUrlLocation({
+					push: location.pathname + "#internal-page-1",
+					hash: "internal-page-1",
+					report: "navigate from a page in a non-base directory to an internal page"
+				});
 
 				// Try calling changePage() directly with a relative path.
 				$.mobile.changePage("base-page-1.html");
@@ -75,7 +97,10 @@
 
 			function(){
 				// Verify that we are on the expected page.
-				same(location.hash, "#" + baseDir + "base-page-1.html", "call changePage() with a filename (no path)");
+				$.testHelper.assertUrlLocation({
+					hashOrPush: baseDir + "base-page-1.html",
+					report: "call changePage() with a filename (no path)"
+				});
 
 				// Try calling changePage() directly with a relative path.
 				$.mobile.changePage("../content/content-page-1.html");
@@ -83,7 +108,10 @@
 
 			function(){
 				// Verify that we are on the expected page.
-				same(location.hash, "#" + contentDir + "content-page-1.html", "call changePage() with a relative path containing up-level references");
+				$.testHelper.assertUrlLocation({
+					hashOrPush: contentDir + "content-page-1.html",
+					report: "call changePage() with a relative path containing up-level references"
+				});
 
 				// Try calling changePage() with an id
 				$.mobile.changePage("content-page-2.html");
@@ -91,41 +119,58 @@
 
 			function(){
 				// Verify that we are on the expected page.
-				same(location.hash, "#" + contentDir + "content-page-2.html", "call changePage() with a relative path should resolve relative to current page");
+				$.testHelper.assertUrlLocation({
+					hashOrPush: contentDir + "content-page-2.html",
+					report: "call changePage() with a relative path should resolve relative to current page"
+				});
 
 				// Try calling changePage() with an id
-				$.mobile.changePage("#internal-page-2");
+				$("a.ip2").click();
 			},
 
 			function(){
 				// Verify that we are on the expected page.
-				same(location.hash, "#internal-page-2", "call changePage() with a page id");
+				$.testHelper.assertUrlLocation({
+					hash:  "internal-page-2",
+					push: location.pathname + "#internal-page-2",
+					report: "call changePage() with a page id"
+				});
 
 				// Try calling changePage() with an id
 				$.mobile.changePage("internal-page-1");
 			},
 
 			function(){
+				// Verify that we are on the expected page.
+				$.testHelper.assertUrlLocation({
+					hash:  "internal-page-2",
+					push: location.pathname + "#internal-page-2",
+					report: "calling changePage() with a page id that is not prefixed with '#' should not change page"
+				});
+
 				// Previous load should have failed and left us on internal-page-2.
-				same(location.hash, "#internal-page-2", "calling changePage() with a page id that is not prefixed with '#' should not change page");
 				start();
-			}]);
+			}
+		]);
 	});
 
 	asyncTest( "internal form with no action submits to document URL", function(){
-
 		$.testHelper.pageSequence([
 			// open our test page
 			function(){
-				$.testHelper.openPage("#internal-no-action-form-page");
+				$.testHelper.openPage( "#internal-no-action-form-page" );
 			},
 
 			function(){
-				$("#internal-no-action-form-page form").eq(0).submit();
+				$( "#internal-no-action-form-page form" ).eq( 0 ).submit();
 			},
 
 			function(){
-				same(location.hash, "#" + location.pathname + "?foo=1&bar=2", "hash should match document url and not base url");
+				$.testHelper.assertUrlLocation({
+					hashOrPush: location.pathname + "?foo=1&bar=2",
+					report: "hash should match document url and not base url"
+				});
+
 				start();
 			}
 		]);
@@ -140,16 +185,22 @@
 
 			function(){
 				// Make sure we actually navigated to the external page.
-				same(location.hash, "#" + contentDir + "content-page-1.html", "should be on content-page-1.html");
+				$.testHelper.assertUrlLocation({
+					hashOrPush: contentDir + "content-page-1.html",
+					report: "should be on content-page-1.html"
+				});
 
 				// Now submit the form in the external page.
 				$("#content-page-1 form").eq(0).submit();
 			},
 
 			function(){
-				same(location.hash, "#" + contentDir + "content-page-1.html?foo=1&bar=2", "hash should match page url and not document url");
+				$.testHelper.assertUrlLocation({
+					hashOrPush: contentDir + "content-page-1.html?foo=1&bar=2",
+					report: "hash should match page url and not document url"
+				});
+
 				start();
 			}]);
 	});
-
 })(jQuery);
