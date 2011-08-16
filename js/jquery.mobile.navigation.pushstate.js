@@ -30,7 +30,7 @@
 
 			// only replaceState when pushState support is present and
 			// the hash doesn't represent an embeded page
-			if( $.support.pushState && location.hash.search("/") > 0) {
+			if( $.support.pushState && !$.mobile.path.isEmbeddedPage(location.hash) ) {
 				var hash = location.hash || "#" + self.initialFilePath,
 					href = hash.replace( "#", "" );
 
