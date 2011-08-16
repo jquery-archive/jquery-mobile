@@ -28,9 +28,11 @@
 		onHashAlter: function( e ) {
 			self.hashchangeFired = true;
 
-			if( $.support.pushState ) {
+			// only replaceState when pushState support is present and
+			// the hash doesn't represent an embeded page
+			if( $.support.pushState && location.hash.search("/") > 0) {
 				var hash = location.hash || "#" + self.initialFilePath,
-				href = hash.replace( "#", "" );
+					href = hash.replace( "#", "" );
 
 				//support dialog urls
 				if( href ) {
