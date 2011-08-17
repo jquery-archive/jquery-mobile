@@ -527,7 +527,7 @@
 
 	module("Rounded corners");
 
-	asyncTest("Top and bottom corners rounded in inset list", 20, function() {
+	asyncTest("Top and bottom corners rounded in inset list", 14, function() {
 		$.testHelper.pageSequence([
 			function() {
 				$.testHelper.openPage("#corner-rounded-test");
@@ -536,7 +536,7 @@
 			function() {
 				var ul = $('#corner-rounded-test ul');
 
-				for( var t = 0; t<5; t++){
+				for( var t = 0; t<3; t++){
 					ul.append("<li>Item " + t + "</li>");
 					ul.listview('refresh');
 					equals(ul.find(".ui-corner-top").length, 1, "There should be only one element with class ui-corner-top");
@@ -544,6 +544,14 @@
 					equals(ul.find(".ui-corner-bottom").length, 1, "There should be only one element with class ui-corner-bottom");
 					equals(ul.find("li:visible").last()[0], ul.find(".ui-corner-bottom")[0], "Last list item should have class ui-corner-bottom in list with " + ul.find("li").length + " item(s)");
 				}
+
+				ul.find( "li" ).first().hide();
+				ul.listview( "refresh" );
+				equals(ul.find("li:visible").first()[0], ul.find(".ui-corner-top")[0], "First visible list item should have class ui-corner-top");
+
+				ul.find( "li" ).last().hide();
+				ul.listview( "refresh" );
+				equals(ul.find("li:visible").last()[0], ul.find(".ui-corner-bottom")[0], "Last visible list item should have class ui-corner-bottom");
 
 				start();
 			}
