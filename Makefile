@@ -61,6 +61,7 @@ JSFILES = 	  js/jquery.ui.widget.js \
 			  js/jquery.mobile.forms.button.js \
 			  js/jquery.mobile.forms.slider.js \
 			  js/jquery.mobile.forms.textinput.js \
+			  js/jquery.mobile.forms.select.custom.js \
 			  js/jquery.mobile.forms.select.js \
 			  js/jquery.mobile.buttonMarkup.js \
 			  js/jquery.mobile.controlGroup.js \
@@ -127,7 +128,7 @@ notify:
 	@@echo "The files have been built and are in " $$(pwd)/${OUTPUT}
 
 # Pull the latest commits. This is used for the nightly build but can be used to save some keystrokes
-pull: 
+pull:
 	@@git pull --quiet
 
 # Zip the 4 files and the theme images into one convenient package
@@ -162,7 +163,7 @@ nightly: pull zip
 	# Change the empty paths to the location of this nightly file
 	@@find ${VER} -type f -name '*.html' -exec sed -i 's|href="themes/default/"|href="${NIGHTLY_WEBPATH}/${DIR}.min.css"|g' {} \;
 	@@find ${VER} -type f -name '*.html' -exec sed -i 's|src="js/jquery.js"|src="http://code.jquery.com/jquery-${JQUERY}.min.js"|' {} \;
-	@@find ${VER} -type f -name '*.html' -exec sed -i 's|src="js/"|src="${NIGHTLY_WEBPATH}/${DIR}.min.js"|g' {} \;	
+	@@find ${VER} -type f -name '*.html' -exec sed -i 's|src="js/"|src="${NIGHTLY_WEBPATH}/${DIR}.min.js"|g' {} \;
 
 	# Move the demos into the output folder
 	@@mv ${VER} ${OUTPUT}/demos

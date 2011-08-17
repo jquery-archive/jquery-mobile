@@ -4,9 +4,9 @@
 
 (function($){
 	var libName = "jquery.mobile.forms.select.js",
-			originalDefaultDialogTrans = $.mobile.defaultDialogTransition,
-			originalDefTransitionHandler = $.mobile.defaultTransitionHandler,
-			resetHash, closeDialog;
+		originalDefaultDialogTrans = $.mobile.defaultDialogTransition,
+		originalDefTransitionHandler = $.mobile.defaultTransitionHandler,
+		resetHash, closeDialog;
 
 	resetHash = function(timeout){
 		$.testHelper.openPage( location.hash.indexOf("#default") >= 0 ? "#" : "#default" );
@@ -71,36 +71,6 @@
 		]);
 	});
 
-	asyncTest( "a large select menu should come up in a dialog many times", function(){
-		var menu, select;
-
-		$.testHelper.pageSequence([
-			resetHash,
-
-			function(){
-				select = $("#select-choice-many-container a");
-
-				// bring up the dialog
-				select.trigger("click");
-			},
-
-			function(){
-				menu = $("#select-choice-many-menu");
-				same(menu.closest('.ui-dialog').length, 1);
-				closeDialog();
-			},
-
-			function(){
-				//bring up the dialog again
-				select.trigger("click");
-			},
-
-			closeDialog,
-
-			start
-		]);
-	});
-
 	asyncTest( "custom select menu always renders screen from the left", function(){
 		var select;
 
@@ -137,7 +107,7 @@
 			},
 
 			function(){
-				ok(location.hash.indexOf(dialogHashKey) == -1);
+				same(location.hash.indexOf(dialogHashKey), -1);
 				start();
 			}
 		]);
@@ -162,6 +132,10 @@
 				sequence = openDialogSequence.concat(openDialogSequence).concat([start]);
 
 		$.testHelper.sequence(sequence, 1000);
+	});
+
+	test( "make sure the label for the select gets the ui-select class", function(){
+		ok( $( "#native-select-choice-few-container label" ).hasClass( "ui-select" ), "created label has ui-select class" );
 	});
 
 	module("Non native menus", {
@@ -195,66 +169,88 @@
 		], 500);
 	});
 
-	// https://github.com/jquery/jquery-mobile/issues/2181
-	asyncTest( "dialog sized select should alter the value of its parent select", function(){
-		var selectButton, value;
+	asyncTest( "using custom refocuses the button after close", function() {
+		var select, button, triggered = false;
 
-		$.testHelper.pageSequence([
+		expect( 1 );
+
+		$.testHelper.sequence([
 			resetHash,
 
-			function(){
-				$.mobile.changePage( "cached-tests.html" );
+			function() {
+				select = $("#select-choice-focus-test");
+				button = select.find( "a" );
+				button.trigger( "click" );
+			},
+
+			function() {
+				// NOTE this is called twice per triggered click
+				button.focus(function() {
+					triggered = true;
+				});
+
+				$(".ui-selectmenu-screen:not(.ui-screen-hidden)").trigger("click");
 			},
 
 			function(){
-				selectButton = $( "#cached-page-select" ).siblings( 'a' );
-				selectButton.click();
-			},
-
-			function(){
-				ok( $.mobile.activePage.hasClass('ui-dialog'), "the dialog came up" );
-				var option = $.mobile.activePage.find( "li a" ).not(":contains('" + selectButton.text() + "')").last();
-				value = option.text();
-				option.click();
-			},
-
-			function(){
-				same( value, selectButton.text(), "the selected value is propogated back to the button text" );
+				ok(triggered, "focus is triggered");
 				start();
 			}
-		]);
+		], 5000);
 	});
 
-	// https://github.com/jquery/jquery-mobile/issues/2181
-	asyncTest( "dialog sized select should prevent the removal of its parent page from the dom", function(){
-		var selectButton, parentPageId;
-
-		expect( 2 );
-
-		$.testHelper.pageSequence([
+	asyncTest( "selected items are highlighted", function(){
+		$.testHelper.sequence([
 			resetHash,
 
 			function(){
-				$.mobile.changePage( "cached-tests.html" );
+				// bring up the smaller choice menu
+				ok($("#select-choice-few-container a").length > 0, "there is in fact a button in the page");
+				$("#select-choice-few-container a").trigger("click");
 			},
 
 			function(){
-				selectButton = $.mobile.activePage.find( "#cached-page-select" ).siblings( 'a' ),
-				parentPageId = $.mobile.activePage.attr( 'id' );
-				same( $("#" + parentPageId).length, 1, "establish the parent page exists" );
-				selectButton.click();
+				var firstMenuChoice = $("#select-choice-few-menu li:first");
+				ok( firstMenuChoice.hasClass( $.mobile.activeBtnClass ),
+						"default menu choice has the active button class" );
+
+				$("#select-choice-few-menu a:last").click();
 			},
 
 			function(){
-				same( $( "#" + parentPageId).length, 1, "make sure parent page is still there after opening the dialog" );
-				$.mobile.activePage.find( "li a" ).last().click();
+				// bring up the menu again
+				$("#select-choice-few-container a").trigger("click");
 			},
 
 			function(){
-				window.history.back();
+				var lastMenuChoice = $("#select-choice-few-menu li:last");
+				ok( lastMenuChoice.hasClass( $.mobile.activeBtnClass ),
+						"previously slected item has the active button class" );
+
+				// close the dialog
+				lastMenuChoice.find( "a" ).click();
 			},
 
 			start
-		]);
+		], 1000);
 	});
+
+	test( "enabling and disabling", function(){
+		var select = $( "select" ).first(), button;
+
+		button = select.siblings( "a" ).first();
+
+		select.selectmenu( 'disable' );
+		same( select.attr('disabled'), "disabled", "select is disabled" );
+		ok( button.hasClass("ui-disabled"), "disabled class added" );
+		same( button.attr('aria-disabled'), "true", "select is disabled" );
+		same( select.selectmenu( 'option', 'disabled' ), true, "disbaled option set" );
+
+		select.selectmenu( 'enable' );
+		same( select.attr('disabled'), undefined, "select is disabled" );
+		ok( !button.hasClass("ui-disabled"), "disabled class added" );
+		same( button.attr('aria-disabled'), "false", "select is disabled" );
+		same( select.selectmenu( 'option', 'disabled' ), false, "disbaled option set" );
+	});
+
 })(jQuery);

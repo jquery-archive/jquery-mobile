@@ -18,7 +18,7 @@ function propExists( prop ) {
 		props = ( prop + " " + vendors.join( uc_prop + " " ) + uc_prop ).split( " " );
 
 	for ( var v in props ){
-		if ( fbCSS[ v ] !== undefined ) {
+		if ( fbCSS[ props[ v ] ] !== undefined ) {
 			return true;
 		}
 	}

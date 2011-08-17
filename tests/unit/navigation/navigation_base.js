@@ -122,7 +122,7 @@
 					report: "call changePage() with a relative path should resolve relative to current page"
 				});
 
-				// Try calling changePage() with an id
+				// test that an internal page works
 				$("a.ip2").click();
 			},
 
