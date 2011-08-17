@@ -5,17 +5,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>jQuery Mobile Navigation Test Suite</title>
 
-    <script>
+  <script>
+	  // This unit test requires a base tag to be set within the file.
+	  // Most browsers require a base tag with an @href URL that is absolute.
+	  // We need to dynamically inject the base tag so we can prefix it with
+	  // the location of this test on the server without any server-side language
+	  // requirements.
 
-	// This unit test requires a base tag to be set within the file.
-	// Most browsers require a base tag with an @href URL that is absolute.
-	// We need to dynamically inject the base tag so we can prefix it with
-	// the location of this test on the server without any server-side language
-	// requirements.
-
-	var baseUrl = location.href.replace(/[^\?\#\/]*(\?[^#]*)?(#.*)?$/, "");
-	document.write("<base href=\"" + baseUrl + "base-tests/app-base/\"/>\n");
-
+	  var baseUrl = location.href.replace(/[^\?\#\/]*(\?[^#]*)?(#.*)?$/, "");
+	  document.write("<base href=\"" + baseUrl + "base-tests/app-base/\"/>\n");
 	</script>
 	<script src="../../../../../js/jquery.js"></script>
 	<script src="../../../jquery.setNameSpace.js"></script>
@@ -26,8 +24,9 @@
 	<link rel="stylesheet" href="../../../../../themes/default/"/>
 	<link rel="stylesheet" href="../../../../../external/qunit.css"/>
 	<script src="../../../../../external/qunit.js"></script>
-	<script src="../../../jquery.disablePushState.js"></script>
-	<script src="../../navigation_base.js"></script>
+	<script type="text/javascript">
+    $.testHelper.disablePushStateFor([ "../../navigation_base.js" ]);
+	</script>
 
 </head>
 <body>

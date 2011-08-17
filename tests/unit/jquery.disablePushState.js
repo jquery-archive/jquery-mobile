@@ -1,1 +1,0 @@
-$.support.pushState = false;

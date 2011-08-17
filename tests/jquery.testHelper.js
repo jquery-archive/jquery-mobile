@@ -16,6 +16,16 @@
 			}
 		},
 
+		disablePushStateFor: function( libs ) {
+			if( $.support.pushState ) {
+				$.support.pushState = false;
+				
+				$.each(libs, function(i, l) {
+					$( "<script>", { src: l }).appendTo("head");
+				});
+			}
+		},
+
 		reloads: {},
 
 		reloadLib: function(libName){
