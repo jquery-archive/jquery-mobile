@@ -71,41 +71,6 @@
 		]);
 	});
 
-	asyncTest( "a large select menu should come up in a dialog many times", function(){
-		var menu, select;
-
-		// if the second test doesn't run the dialog didn't come back up
-		expect( 2 );
-
-		$.testHelper.pageSequence([
-			resetHash,
-
-			function(){
-				select = $("#select-choice-many-container a");
-
-				// bring up the dialog
-				select.trigger("click");
-			},
-
-			function(){
-				ok( $.mobile.activePage.is( ".ui-dialog "), "current page is a dialog" );
-				closeDialog();
-			},
-
-			function(){
-				//bring up the dialog again
-				select.trigger("click");
-			},
-
-			function(){
-				ok( $.mobile.activePage.is( ".ui-dialog "), "current page is a dialog" );
-				closeDialog();
-			},
-
-			start
-		]);
-	});
-
 	asyncTest( "custom select menu always renders screen from the left", function(){
 		var select;
 
@@ -204,65 +169,6 @@
 		], 500);
 	});
 
-	// https://github.com/jquery/jquery-mobile/issues/2181
-	asyncTest( "dialog sized select should alter the value of its parent select", function(){
-		var selectButton, value;
-
-		$.testHelper.pageSequence([
-			resetHash,
-
-			function(){
-				$.mobile.changePage( "cached-tests.html" );
-			},
-
-			function(){
-				selectButton = $( "#cached-page-select" ).siblings( 'a' );
-				selectButton.click();
-			},
-
-			function(){
-				ok( $.mobile.activePage.hasClass('ui-dialog'), "the dialog came up" );
-				var option = $.mobile.activePage.find( "li a" ).not(":contains('" + selectButton.text() + "')").last();
-				value = option.text();
-				option.click();
-			},
-
-			function(){
-				same( value, selectButton.text(), "the selected value is propogated back to the button text" );
-				start();
-			}
-		]);
-	});
-
-	// https://github.com/jquery/jquery-mobile/issues/2181
-	asyncTest( "dialog sized select should prevent the removal of its parent page from the dom", function(){
-		var selectButton, parentPageId;
-
-		expect( 2 );
-
-		$.testHelper.pageSequence([
-			resetHash,
-
-			function(){
-				$.mobile.changePage( "cached-tests.html" );
-			},
-
-			function(){
-				selectButton = $.mobile.activePage.find( "#cached-page-select" ).siblings( 'a' );
-				parentPageId = $.mobile.activePage.attr( 'id' );
-				same( $("#" + parentPageId).length, 1, "establish the parent page exists" );
-				selectButton.click();
-			},
-
-			function(){
-				same( $( "#" + parentPageId).length, 1, "make sure parent page is still there after opening the dialog" );
-				$.mobile.activePage.find( "li a" ).last().click();
-			},
-
-			start
-		]);
-	});
-
 	asyncTest( "using custom refocuses the button after close", function() {
 		var select, button, triggered = false;
 
@@ -290,11 +196,13 @@
 				ok(triggered, "focus is triggered");
 				start();
 			}
-		], 1000);
+		], 5000);
 	});
 
 	asyncTest( "selected items are highlighted", function(){
 		$.testHelper.sequence([
+			resetHash,
+
 			function(){
 				// bring up the smaller choice menu
 				ok($("#select-choice-few-container a").length > 0, "there is in fact a button in the page");
@@ -344,4 +252,5 @@
 		same( button.attr('aria-disabled'), "false", "select is disabled" );
 		same( select.selectmenu( 'option', 'disabled' ), false, "disbaled option set" );
 	});
+
 })(jQuery);

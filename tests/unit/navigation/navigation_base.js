@@ -21,7 +21,7 @@
 		$.testHelper.pageSequence([
 			function(){
 				// Navigate from default internal page to another internal page.
-				$.testHelper.openPage("#internal-page-2"); 
+				$.testHelper.openPage("#internal-page-2");
 			},
 
 			function(){
@@ -93,8 +93,8 @@
 				// Verify that we are on the expected page.
 				same(location.hash, "#" + contentDir + "content-page-2.html", "call changePage() with a relative path should resolve relative to current page");
 
-				// Try calling changePage() with an id
-				$.mobile.changePage("#internal-page-2");
+				// test that an internal page works
+				$("a.ip2").click();
 			},
 
 			function(){
