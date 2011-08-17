@@ -16,12 +16,6 @@
 		// Begin with popstate listening disabled, since it fires at onload in chrome
 		popListeningEnabled: false,
 
-		// Support for nested lists and any other clientside-generated subpages
-		subkey: "&" + $.mobile.subPageUrlKey,
-
-		// Support for dialog hash urls
-		dialog: "&ui-state",
-
 		// Flag for tracking if a Hashchange naturally occurs after each popstate + replace
 		hashchangeFired: false,
 
@@ -34,12 +28,12 @@
 			if( $.support.pushState && $.mobile.path.isPath(location.hash) ) {
 
 				// propulate the hash when its not available
-				var hash = location.hash || "#" + self.initialFilePath, href;
+				var hash = location.hash || self.initialFilePath, href;
 
 				// make the hash abolute with the current href
-				href = $.mobile.path.makeUrlAbsolute(hash.replace("#", "") , location.href);
+				href = $.mobile.path.makeUrlAbsolute( hash.replace("#", "") , location.href );
 
-				// replace the current url with the new href and store the state 
+				// replace the current url with the new href and store the state
 				history.replaceState( { hash: hash, title: document.title }, document.title, href );
 			}
 		},
