@@ -187,7 +187,9 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		}
 	},
 
-	refresh: function() {
+refresh: function () {
+    this.selectOptions = this.select.find("option");
+
 		this.setButtonText();
 		this.setButtonCount();
 	},
