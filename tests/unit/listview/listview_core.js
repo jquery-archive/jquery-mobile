@@ -4,11 +4,13 @@
 
 // TODO split out into seperate test files
 (function($){
+  var home = $.mobile.path.parseUrl( location.href ).pathname;
 
 	$.mobile.defaultTransition = "none";
-	module('Basic Linked list', {
+
+	module( "Basic Linked list", {
 		setup: function(){
-			$.testHelper.openPage("#basic-linked-test");
+			$.testHelper.openPage( "#basic-linked-test" );
 		}
 	});
 
@@ -188,7 +190,7 @@
 	asyncTest( "changes to the read only page when hash is changed", function() {
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage("#read-only-list-test")
+				$.testHelper.openPage("#read-only-list-test");
 			},
 
 			function(){
@@ -555,6 +557,8 @@
 		ok( $("#enhancetest").trigger("create").find(".ui-listview").length, "enhancements applied" );
 	});
 
+	module( "Cached Linked List" );
+
 	var findNestedPages = function(selector){
 		return $( selector + " #topmost" ).listview( 'childPages' );
 	};
@@ -563,7 +567,7 @@
 		$.testHelper.pageSequence([
 			function(){
 				//reset for relative url refs
-				$.testHelper.openPage( "#" + location.pathname );
+				$.testHelper.openPage( "#" + home );
 			},
 
 			function(){
@@ -572,7 +576,11 @@
 
 			function(){
 				ok( findNestedPages( "#uncached-nested-list" ).length > 0, "verify that there are nested pages" );
-				$.testHelper.openPage( "#" + location.pathname + "cache-tests/clear.html" );
+				$.testHelper.openPage( "#" + home );
+			},
+
+			function() {
+				$.testHelper.openPage( "#cache-tests/clear.html" );
 			},
 
 			function(){
@@ -587,7 +595,7 @@
 		$.testHelper.pageSequence([
 			function(){
 				//reset for relative url refs
-				$.testHelper.openPage( "#" + location.pathname );
+				$.testHelper.openPage( "#" + home );
 			},
 
 			function(){
@@ -596,7 +604,11 @@
 
 			function(){
 				ok( findNestedPages( "#cached-nested-list" ).length > 0, "verify that there are nested pages" );
-				$.testHelper.openPage( "#" + location.pathname + "cache-tests/clear.html" );
+				$.testHelper.openPage( "#" + home );
+			},
+
+			function() {
+				$.testHelper.openPage( "#cache-tests/clear.html" );
 			},
 
 			function(){
@@ -610,7 +622,7 @@
 		$.testHelper.pageSequence([
 			function(){
 				//reset for relative url refs
-				$.testHelper.openPage( "#" + location.pathname );
+				$.testHelper.openPage( "#" + home );
 			},
 
 			function(){
@@ -619,7 +631,11 @@
 
 			function(){
 				same( $("#cached-nested-list").length, 1 );
-				$.testHelper.openPage("#" + location.pathname + "cache-tests/clear.html");
+				$.testHelper.openPage( "#" + home );
+			},
+
+			function() {
+				$.testHelper.openPage( "#cache-tests/clear.html" );
 			},
 
 			function(){
@@ -634,6 +650,11 @@
 		expect( listPage.find("li").length );
 
 		$.testHelper.pageSequence( [
+			function(){
+				//reset for relative url refs
+				$.testHelper.openPage( "#" + home );
+			},
+
 			function() {
 				$.testHelper.openPage( "#search-filter-test" );
 			},
