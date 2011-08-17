@@ -18,8 +18,6 @@
 	});
 
 	asyncTest( "can navigate between internal and external pages", function(){
-		$.support.pushState = true;
-
 		$.testHelper.pageSequence([
 			function(){
 				// Navigate from default internal page to another internal page.
