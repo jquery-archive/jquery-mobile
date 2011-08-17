@@ -30,19 +30,16 @@
 
 			// only replaceState when pushState support is present and
 			// the hash doesn't represent an embeded page
+			// TODO alot of duplication with logic in nav
 			if( $.support.pushState && $.mobile.path.isPath(location.hash) ) {
-				var hash = location.hash || "#" + self.initialFilePath,
-					href = hash.replace( "#", "" );
 
-				//support dialog urls
-				if( href ) {
-					if( href.indexOf( self.dialog ) > -1 ) {
-						href = href.split( self.dialog ).join( "#" + self.dialog );
-					} else if( href.indexOf( self.subkey ) > -1 ) {
-						href = href.split( self.subkey ).join( "#" + self.subkey );
-					}
-				}
+				// propulate the hash when its not available
+				var hash = location.hash || "#" + self.initialFilePath, href;
 
+				// make the hash abolute with the current href
+				href = $.mobile.path.makeUrlAbsolute(hash.replace("#", "") , location.href);
+
+				// replace the current url with the new href and store the state 
 				history.replaceState( { hash: hash, title: document.title }, document.title, href );
 			}
 		},
