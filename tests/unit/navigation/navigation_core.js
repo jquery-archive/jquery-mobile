@@ -52,7 +52,7 @@
 	asyncTest( "external page is cached in the DOM after pagehide", function(){
 		$.testHelper.pageSequence([
 			navigateTestRoot,
-			
+
 			function(){
 				$.mobile.changePage( "cached-external.html" );
 			},
@@ -72,30 +72,29 @@
 	});
 
 	asyncTest( "external page is cached in the DOM after pagehide when option is set globally", function(){
-			$.testHelper.pageSequence([
-				navigateTestRoot,
-			
-				function(){
-					$.mobile.page.prototype.options.domCache = true;
-					$.mobile.changePage( "external.html" );
-				},
+		$.testHelper.pageSequence([
+			navigateTestRoot,
 
-				// page is pulled and displayed in the dom
-				function(){
-					same( $( "#external-test" ).length, 1 );
-					window.history.back();
-				},
+			function(){
+				$.mobile.page.prototype.options.domCache = true;
+				$.mobile.changePage( "external.html" );
+			},
 
-				// external test page is cached in the dom after transitioning away
-				function(){
-					same( $( "#external-test" ).length, 1 );
-					$.mobile.page.prototype.options.domCache = false;
-					$( "#external-test" ).remove();
-					start();
-				}
-			]);
-		});
-		
+			// page is pulled and displayed in the dom
+			function(){
+				same( $( "#external-test" ).length, 1 );
+				window.history.back();
+			},
+
+			// external test page is cached in the dom after transitioning away
+			function(){
+				same( $( "#external-test" ).length, 1 );
+				$.mobile.page.prototype.options.domCache = false;
+				$( "#external-test" ).remove();
+				start();
+			}]);
+	});
+
 	asyncTest( "forms with data attribute ajax set to false will not call changePage", function(){
 		var called = false;
 		var newChangePage = function(){
