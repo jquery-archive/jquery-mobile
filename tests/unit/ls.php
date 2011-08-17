@@ -16,5 +16,5 @@
   $test_pages = array_merge($directories, glob("**/*-tests.html"));
   sort($test_pages);
 
-  echo json_encode( array('testPages' => $test_pages));
+  echo '{ "testPages":["' . implode( '","', $test_pages ) . '"]}';
 ?>
