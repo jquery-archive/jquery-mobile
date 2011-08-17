@@ -58,7 +58,7 @@ $(function() {
 			exec: function( data ) {
 				var template = self.$frameElem.attr( "data-src" );
 
-				$.each( data.directories, function(i, dir) {
+				$.each( data.testPages, function(i, dir) {
 					QUnit.asyncTest( dir, function() {
 						self.dir = dir;
 						self.$frameElem.one( "load", self.onFrameLoad );
