@@ -2,6 +2,8 @@
  * mobile navigation path unit tests
  */
 (function($){
+	var home = $.mobile.path.parseUrl(location.pathname).directory;
+
 	var testPageLoad = function(testPageAnchorSelector, expectedTextValue){
 		expect( 2 );
 
@@ -9,7 +11,7 @@
 			function(){
 				// reset before each test, all tests expect original page
 				// for relative urls
-				$.testHelper.openPage( "#" + location.pathname);
+				$.testHelper.openPage( "#" + home);
 			},
 
 			// open our test page
