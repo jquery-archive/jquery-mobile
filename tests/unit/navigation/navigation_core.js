@@ -2,12 +2,13 @@
  * mobile navigation unit tests
  */
 (function($){
+	// TODO move siteDirectory over to the nav path helper
 	var changePageFn = $.mobile.changePage,
-			originalTitle = document.title,
-			siteDirectory = location.pathname.replace(/[^/]+$/, ""),
-			navigateTestRoot = function(){
-				$.testHelper.openPage( "#" + location.pathname );
-			};
+		originalTitle = document.title,
+		siteDirectory = location.pathname.replace( /[^/]+$/, "" ),
+		navigateTestRoot = function(){
+			$.testHelper.openPage( "#" + location.pathname );
+		};
 
 	module('jquery.mobile.navigation.js', {
 		setup: function(){
@@ -16,10 +17,12 @@
 
 			if ( location.hash ) {
 				stop();
-				$(document).one("changepage", function() {
+
+				$(document).one( "changepage", function() {
 					start();
-				} );
-				location.hash = "";
+				});
+
+				location.hash = "#";
 			}
 
 			$.mobile.urlHistory.stack = [];
@@ -214,12 +217,17 @@
 		testListening( $.mobile.hashListeningEnabled );
 	});
 
-	var testDataUrlHash = function(linkSelector, hashRegex){
+	var testDataUrlHash = function( linkSelector, matches ) {
 		$.testHelper.pageSequence([
 			function(){ window.location.hash = ""; },
 			function(){ $(linkSelector).click(); },
 			function(){
-				ok(hashRegex.test(location.hash), "should match the regex");
+				$.testHelper.assertUrlLocation(
+					$.extend(matches, {
+						report: "url or hash should match"
+					})
+				);
+
 				start();
 			}
 		]);
@@ -228,19 +236,22 @@
 	};
 
 	test( "when loading a page where data-url is not defined on a sub element hash defaults to the url", function(){
-		testDataUrlHash("#non-data-url a", new RegExp("^#" + siteDirectory + "data-url-tests/non-data-url.html$"));
+		testDataUrlHash( "#non-data-url a", {hashOrPush: siteDirectory + "data-url-tests/non-data-url.html"} );
 	});
 
 	test( "data url works for nested paths", function(){
-		testDataUrlHash("#nested-data-url a", /^#foo\/bar.html$/);
+		var url = "foo/bar.html";
+		testDataUrlHash( "#nested-data-url a", {hash: url, push: $.mobile.path.makeUrlAbsolute(location.href, url)} );
 	});
 
 	test( "data url works for single quoted paths and roles", function(){
-		testDataUrlHash("#single-quotes-data-url a", /^#foo\/bar\/single.html$/);
+		var url = "foo/bar/single.html";
+		testDataUrlHash( "#single-quotes-data-url a", {hash: url, push: $.mobile.path.makeUrlAbsolute(location.href, url)} );
 	});
 
 	test( "data url works when role and url are reversed on the page element", function(){
-		testDataUrlHash("#reverse-attr-data-url a", /^#foo\/bar\/reverse.html$/);
+		var url = "foo/bar/reverse.html";
+		testDataUrlHash( "#reverse-attr-data-url a", {hash: url, push: $.mobile.path.makeUrlAbsolute(location.href, url)} );
 	});
 
 	asyncTest( "last entry choosen amongst multiple identical url history stack entries on hash change", function(){
