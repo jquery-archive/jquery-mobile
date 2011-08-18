@@ -31,7 +31,7 @@
 				var hash = location.hash || self.initialFilePath, href;
 
 				// make the hash abolute with the current href
-				href = $.mobile.path.makeUrlAbsolute( hash.replace("#", "") , location.href );
+				href = $.mobile.path.makeUrlAbsolute( hash.replace("#", ""), location.href );
 
 				// replace the current url with the new href and store the state
 				history.replaceState( { hash: hash, title: document.title }, document.title, href );
@@ -56,13 +56,10 @@
 		},
 
 		init: function() {
-			$win.bind( "hashchange replacehash", self.onHashAlter );
+			$win.bind( "hashchange", self.onHashAlter );
 
 			// Handle popstate events the occur through history changes
 			$win.bind( "popstate", self.onPopState );
-
-			// Replace the hash before pushstate listening is enabled
-			$win.trigger( "replacehash" );
 
 			// Enable pushstate listening *after window onload
 			// To ignore the initial pop that Chrome calls at onload
