@@ -1,0 +1,129 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>jQuery Mobile Docs - Scripting pages</title> 
+	<link rel="stylesheet" media="only all" href="../../themes/default/" />  
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	<script src="../../js/jquery.js"></script>
+	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../_assets/js/jqm-docs.js"></script>
+	<script src="../../js/"></script>
+	
+	<script>
+		function myFakeTemplater( data, type ){
+			
+			// Dumb check to see if response is JSON
+			if( data.indexOf( "{" === 0) ){
+			
+				//convert server JSON response to data
+				var obj = $.parseJSON( data );
+
+				//return string markup
+				return '<div data-role="page">' + 
+							'<div data-role="header"><h1>' + obj.title + '</h1></div>' +
+							'<div data-role="content">' + obj.content + '</div>' +
+						'</div>';
+			} else {
+				// Otherwise, return it, as it's probably HTML
+				return data;
+			}			
+		};
+		
+		//set the loadPage default filter to run through myFakeTemplater
+		$.mobile.loadPage.defaults.filterResponseText = myFakeTemplater;	
+	</script>
+	
+</head> 
+<body> 
+
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="f">
+		<h1>Generating pages from a data source</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="content-primary">		
+		
+			<p>jQuery Mobile's loadPage method includes a <code>filterResponseText</code> option for filtering the data that is returned from the server after an page is loaded, before it is injected into the DOM. You can use this method to transform the server response in a variety of ways, whether it's replacing image paths, or implementing client-side templating system.</p>
+			
+			<p>To use the <code>filterResponseText</code> option, simply define it as a function that has a single argument representing the raw Ajax response text, and that returns a string (presumably, that same data, modified in some way)</p>
+			
+<pre><code>
+$.mobile.loadPage.defaults.filterResponseText = function( data ){
+	return data.replace( "e", "EEEOOO" );
+};
+</code></pre>
+
+<p>The following linked page is configured to return HTML or JSON, depending on whether it is requested through regular HTTP or Ajax.</p>
+
+<p><a href="pages-dynamic-data-example.php" data-role="button">View Dynamic Page</a><p> 
+		
+<p>In the head of this page, the following script handles the templating for that page's JSON response</p>
+
+<pre><code>
+function myFakeTemplater( data, type ){
+	
+	// Dumb check to see if response is JSON
+	if( data.indexOf( "{" === 0) ){
+	
+		//convert server JSON response to data
+		var obj = $.parseJSON( data );
+
+		//return string markup
+		return '<div data-role="page">' + 
+					'<div data-role="header"><h1>' + obj.title + '</h1></div>' +
+					'<div data-role="content">' + obj.content + '</div>' +
+				'</div>';
+	} else {
+		// Otherwise, return it, as it's probably HTML
+		return data;
+	}			
+};
+
+//set the loadPage default filter to run through myFakeTemplater
+$.mobile.loadPage.defaults.filterResponseText = myFakeTemplater;
+</pre></code>			
+			
+
+
+		</div><!--/content-primary -->		
+
+		<div class="content-secondary">
+
+			<div data-role="collapsible" data-collapsed="true" data-theme="b">
+
+					<h3>More in this section</h3>
+
+					<ul data-role="listview" data-theme="c" data-dividertheme="d">
+
+						<li data-role="list-divider">Pages &amp; Dialogs</li>
+						<li><a href="page-anatomy.html" data-ajax="false">Anatomy of a page</a></li>
+						<li><a href="page-template.html" data-ajax="false">Single page template</a></li>
+						<li><a href="multipage-template.html" data-ajax="false">Multi-page template</a></li>
+						<li><a href="page-titles.html" data-ajax="false">Page titles</a></li>
+						<li><a href="page-links.html" data-ajax="false">Linking pages</a></li>
+						<li><a href="page-transitions.html" data-ajax="false">Page transitions</a></li>
+						<li><a href="page-dialogs.html" data-ajax="false">Dialogs</a></li>
+						<li><a href="page-cache.html" data-ajax="false">Preload & cache pages</a></li>
+						<li><a href="page-navmodel.html" data-ajax="false">Ajax, hashes &amp; history</a></li>
+						<li data-theme="a"><a href="page-scripting.html" data-ajax="false">Scripting pages</a></li>
+						<li><a href="pages-themes.html" data-ajax="false">Theming pages</a></li>
+
+					</ul>
+			</div>
+		</div>		
+
+	</div><!-- /content -->
+
+	<div data-role="footer" class="footer-docs" data-theme="c">
+			<p>&copy; 2011 The jQuery Project</p>
+	</div>
+
+	</div><!-- /page -->
+
+	</body>
+	</html>

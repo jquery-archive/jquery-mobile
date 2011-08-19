@@ -643,6 +643,10 @@
 				data: settings.data,
 				dataType: "html",
 				success: function( html ) {
+					
+					// Use the filterResponseText method to filter the server response
+					var html = settings.filterResponseText( html );
+
 					//pre-parse html to check for a data-url,
 					//use it as the new fileUrl, base path, etc
 					var all = $( "<div></div>" ),
@@ -774,7 +778,10 @@
 		role: undefined, // By default we rely on the role defined by the @data-role attribute.
 		showLoadMsg: false,
 		pageContainer: undefined,
-		loadMsgDelay: 50 // This delay allows loads that pull from browser cache to occur without showing the loading message.
+		loadMsgDelay: 50, // This delay allows loads that pull from browser cache to occur without showing the loading message.
+		filterResponseText: function( data ){
+			return data;
+		}
 	};
 
 	// Show a specific page in the page container.
