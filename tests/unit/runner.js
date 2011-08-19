@@ -24,8 +24,8 @@ $(function() {
 			},
 
 			onTestDone: function( name, bad, assertCount ) {
-				QUnit.ok( !bad, name );
-				self.recordAssertions( assertCount - 1, name );
+				QUnit.ok( !(bad > 0), name );
+				self.recordAssertions( assertCount - bad, name );
 			},
 
 			onFrameDone: function( failed, passed, total, runtime ){
