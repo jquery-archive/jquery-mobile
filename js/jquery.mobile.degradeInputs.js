@@ -16,7 +16,7 @@ $.mobile.page.prototype.options.degradeInputs = {
 	month: false,
 	number: false,
 	range: "number",
-	search: true,
+	search: "text",
 	tel: false,
 	time: false,
 	url: false,
