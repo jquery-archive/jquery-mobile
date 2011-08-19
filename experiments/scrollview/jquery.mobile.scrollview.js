@@ -29,6 +29,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		showScrollBars:    true,
 		
 		pagingEnabled:     false,
+		pagerEnabled:     false,
 		delayedClickSelector: "a,input,textarea,select,button,.ui-btn",
 		delayedClickEnabled: false
 	},
@@ -79,6 +80,45 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		this._timerCB = function(){ self._handleMomentumScroll(); };
 	
 		this._addBehaviors();
+		this._setupPager();
+	},
+	
+	_setupPager: function(){
+		if(this.options.pagingEnabled && this.options.pagerEnabled && (this.options.direction === "x" || this.options.direction === "y")){
+			var self = this;
+			var dimension = (this.options.direction === "x") ? "width" : "height";
+			
+			var clipSize = parseInt(this._$clip.css(dimension), 10);
+			var viewSize = parseInt(this._$view.css(dimension), 10);
+			
+			var pages = parseInt(viewSize / clipSize);
+			
+			var pager ='<ul class="ui-scrollview-pager">';
+			for(i = 1; i <= pages; i++) {
+				pager += '<li';
+				if(i==1) pager += ' class="active"';
+				pager += '></li>';
+			}
+			pager += '</ul>';
+			this._$clip.append(pager);
+			
+			$('.ui-scrollview-pager li').click(function(e){
+				self.scrollTo($(this).index() * clipSize, 0, self.options.snapbackDuration);
+			});
+			
+		}
+	}, 
+	
+	_updatePager: function(){
+		if(this.options.pagingEnabled && this.options.pagerEnabled && (this.options.direction === "x" || this.options.direction === "y")){
+			var dimension = (this.options.direction === "x") ? "width" : "height";
+			
+			var clipSize = parseInt(this._$clip.css(dimension), 10);
+			var currPos = (this.options.direction === "x") ? this.getScrollPosition().x : this.getScrollPosition().y;
+			
+			var index = parseInt((currPos + (clipSize / 2)) / clipSize);
+			this._$clip.find('.ui-scrollview-pager li').eq(index).addClass('active').siblings().removeClass('active');
+		}
 	},
 
 	_startMScroll: function(speedX, speedY)
@@ -240,6 +280,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 				self._setScrollPosition(sx + (dx * ec), sy + (dy * ec));
 				self._timerID = setTimeout(tfunc, self._timerInterval);
 			}
+			self._updatePager();
 		};
 
 		this._timerID = setTimeout(tfunc, this._timerInterval);

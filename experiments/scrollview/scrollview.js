@@ -37,8 +37,10 @@ $(":jqmData(role='page')").live("pageshow", function(event) {
 			var opts = {};
 			if (dir)
 				opts.direction = dir;
-			if (paging)
+			if (paging) {
 				opts.pagingEnabled = true;
+				opts.pagerEnabled = true;
+			}
 
 			var method = $this.jqmData("scroll-method");
 			if (method)
