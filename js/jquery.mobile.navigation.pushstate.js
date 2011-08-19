@@ -60,6 +60,11 @@
 
 			// Handle popstate events the occur through history changes
 			$win.bind( "popstate", self.onPopState );
+			
+			// if there's no hash, we need to replacestate for returning to home
+			if( location.hash === "" ){
+				history.replaceState( { hash: location.hash, title: document.title }, document.title, location.href );
+			}
 
 			// Enable pushstate listening *after window onload
 			// To ignore the initial pop that Chrome calls at onload
