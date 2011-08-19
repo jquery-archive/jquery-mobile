@@ -26,8 +26,11 @@
 	<link rel="stylesheet" href="../../../../../themes/default/"/>
 	<link rel="stylesheet" href="../../../../../external/qunit.css"/>
 	<script src="../../../../../external/qunit.js"></script>
-
-	<script src="../../navigation_base.js"></script>
+	<script type="text/javascript">
+		$.testHelper.setPushStateFor([
+			"../../navigation_base.js"
+		]);
+	</script>
 </head>
 <body>
 

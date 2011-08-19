@@ -2,7 +2,8 @@
  * mobile navigation path unit tests
  */
 (function($){
-	var home = $.mobile.path.parseUrl(location.pathname).directory;
+	var url = $.mobile.path.parseUrl( location.href ),
+		home = location.href.replace( url.domain, "" );
 
 	var testPageLoad = function(testPageAnchorSelector, expectedTextValue){
 		expect( 2 );
