@@ -11,7 +11,12 @@
 		$win = $( window );
 
 	$.extend( pushStateHandler, {
-		initialFilePath: location.pathname,
+		// TODO move to a path helper, this is rather common functionality
+		initialFilePath: (function() {
+			var url = $.mobile.path.parseUrl( location.href );
+
+			return url.pathname + url.search;
+		})(),
 
 		// Begin with popstate listening disabled, since it fires at onload in chrome
 		popListeningEnabled: false,
