@@ -28,6 +28,8 @@
 		},
 
 		onHashChange: function( e ) {
+			var href, state;
+
 			self.hashchangeFired = true;
 
 			// only replaceState when pushState support is present and
@@ -35,7 +37,7 @@
 			if( $.support.pushState && $.mobile.path.isPath(location.hash) ) {
 
 				// propulate the hash when its not available
-				var href, state = self.state();
+				state = self.state();
 
 				// make the hash abolute with the current href
 				href = $.mobile.path.makeUrlAbsolute( state.hash.replace("#", ""), location.href );
