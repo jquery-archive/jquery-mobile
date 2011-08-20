@@ -19,28 +19,36 @@
 		// Flag for tracking if a Hashchange naturally occurs after each popstate + replace
 		hashchangeFired: false,
 
-		onHashAlter: function( e ) {
+		state: function() {
+			return {
+				hash: location.hash || "#" + self.initialFilePath,
+				title: document.title,
+				originalHref: self.initialFilePath
+			};
+		},
+
+		onHashChange: function( e ) {
 			self.hashchangeFired = true;
 
 			// only replaceState when pushState support is present and
 			// the hash doesn't represent an embeded page
-			// TODO alot of duplication with logic in nav
 			if( $.support.pushState && $.mobile.path.isPath(location.hash) ) {
 
 				// propulate the hash when its not available
-				var hash = location.hash || self.initialFilePath, href;
+				var href, state = self.state();
 
 				// make the hash abolute with the current href
-				href = $.mobile.path.makeUrlAbsolute( hash.replace("#", ""), location.href );
+				href = $.mobile.path.makeUrlAbsolute( state.hash.replace("#", ""), location.href );
 
 				// replace the current url with the new href and store the state
-				history.replaceState( { hash: hash, title: document.title }, document.title, href );
+				history.replaceState( state, document.title, href );
 			}
 		},
 
 		onPopState: function( e ) {
-			if( self.popListeningEnabled && e.originalEvent.state ) {
-				history.replaceState( e.originalEvent.state, e.originalEvent.state.title, self.initialFilePath + e.originalEvent.state.hash );
+			var poppedState = e.originalEvent.state;
+			if( self.popListeningEnabled && poppedState ) {
+				history.replaceState( poppedState, poppedState.title, poppedState.originalHref + poppedState.hash );
 
 				// Urls that reference subpages will fire their own hashchange, so we don't want to trigger 2 in that case.
 				self.hashchangeFired = false;
@@ -56,14 +64,14 @@
 		},
 
 		init: function() {
-			$win.bind( "hashchange", self.onHashAlter );
+			$win.bind( "hashchange", self.onHashChange );
 
 			// Handle popstate events the occur through history changes
 			$win.bind( "popstate", self.onPopState );
-			
+
 			// if there's no hash, we need to replacestate for returning to home
-			if( location.hash === "" ){
-				history.replaceState( { hash: location.hash, title: document.title }, document.title, location.href );
+			if ( location.hash === "" ) {
+				history.replaceState( self.state(), document.title, location.href );
 			}
 
 			// Enable pushstate listening *after window onload
