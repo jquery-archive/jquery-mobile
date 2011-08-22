@@ -6,7 +6,8 @@
 */
 ( function( $, window ) {
 	// For now, let's Monkeypatch this onto the end of $.mobile._registerInternalEvents
-	var pushStateHandler = self = {},
+	var self,
+		pushStateHandler = self = {},
 		oldRegisterInternalEvents = $.mobile._registerInternalEvents,
 		$win = $( window );
 
