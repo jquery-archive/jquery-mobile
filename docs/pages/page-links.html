@@ -34,7 +34,7 @@
 				
 			<p>If the Ajax request is successful, the new page content is added to the DOM, all mobile widgets are auto-initialized, then the new page is animated into view with a page transition.</p>
 			
-			<p>If the Ajax request fails, the framework will display a small error message overlay (styled in the "e" swatch) that disappears after a brief time so this doesn't break the navigation flow. View an <a href="notapage.html">example of the error message</a>.</p>
+			<p>If the Ajax request fails, the framework will display a small error message overlay (styled in the "e" swatch) that disappears after a brief time so this doesn't break the navigation flow. View an <a href="notapage.html">example of the error message</a>. (See pageLoadErrorMessage on <a href="../../docs/api/globalconfig.html">Configuring Defaults</a>, if you want to change the message)</p>
 
 
 <h2>Linking without Ajax</h2>
@@ -53,7 +53,8 @@
 		
 		<p>For example, a link to a page containing multiple internal pages would look like this:</p>
 			
-			<code>&lt;a href=&quot;multipage.html&quot; rel=&quot;external&quot;&gt;Multi-page link&lt;/a&gt;</code>
+			<code>&lt;a href=&quot;multipage-template.html&quot; rel=&quot;external&quot;&gt;Multi-page link&lt;/a&gt;</code> <br />
+			<code>&lt;a href=&quot;multipage-template.html#two&quot; rel=&quot;external&quot;&gt;Direct to page 'two'&lt;/a&gt;</code>
 
 				
 
