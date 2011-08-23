@@ -11,15 +11,16 @@
 	var	pushStateHandler = {},
 		self = pushStateHandler,
 		oldRegisterInternalEvents = $.mobile._registerInternalEvents,
-		$win = $( window );
+		$win = $( window ),
+		url = $.mobile.path.parseUrl( location.href );
 
 	$.extend( pushStateHandler, {
 		// TODO move to a path helper, this is rather common functionality
 		initialFilePath: (function() {
-			var url = $.mobile.path.parseUrl( location.href );
-
 			return url.pathname + url.search;
 		})(),
+
+		initialHref: url.hrefNoHash,
 
 		// Begin with popstate listening disabled, since it fires at onload in chrome
 		popListeningEnabled: false,
@@ -31,7 +32,9 @@
 			return {
 				hash: location.hash || "#" + self.initialFilePath,
 				title: document.title,
-				originalHref: self.initialFilePath
+
+				// persiste across refresh
+				initialHref: self.initialHref
 			};
 		},
 
@@ -58,7 +61,7 @@
 		onPopState: function( e ) {
 			var poppedState = e.originalEvent.state;
 			if( self.popListeningEnabled && poppedState ) {
-				history.replaceState( poppedState, poppedState.title, poppedState.originalHref + poppedState.hash );
+				history.replaceState( poppedState, poppedState.title, poppedState.initialHref + poppedState.hash );
 
 				// Urls that reference subpages will fire their own hashchange, so we don't want to trigger 2 in that case.
 				self.hashchangeFired = false;
