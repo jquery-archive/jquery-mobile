@@ -32,7 +32,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			return orig + " ui-listview " + ( t.options.inset ? " ui-listview-inset ui-corner-all ui-shadow " : "" );
 		});
 
-		t.refresh();
+		t.refresh( true );
 	},
 
 	_itemApply: function( $list, item ) {
@@ -69,7 +69,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		}
 	},
 
-	_refreshCorners: function() {
+	_refreshCorners: function( create ) {
 		var $li,
 			$visibleli,
 			$topli,
@@ -77,7 +77,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 		if ( this.options.inset ) {
 			$li = this.element.children( "li" );
-			$visibleli = $li.not( ".ui-screen-hidden" );
+			// at create time the li are not visible yet so we need to rely on .ui-screen-hidden
+			$visibleli = create?$li.not( ".ui-screen-hidden" ):$li.filter( ":visible" );
 			
 			this._removeCorners( $li );
 
@@ -199,12 +200,10 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 			item.add( item.children( ".ui-btn-inner" ) ).addClass( itemClass );
 
-			if ( !create ) {
-				self._itemApply( $list, item );
-			}
+			self._itemApply( $list, item );
 		}
 		
-		this._refreshCorners();
+		this._refreshCorners( create );
 	},
 
 	//create a string for ID/subpage url creation

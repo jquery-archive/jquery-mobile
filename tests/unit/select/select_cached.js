@@ -67,4 +67,35 @@
 			start
 		]);
 	});
+	
+	asyncTest( "dialog sized select shouldn't rebind its parent page remove handler when closing, if the parent page domCache option is true", function(){
+		expect( 3 );
+
+		$.testHelper.pageSequence([
+			resetHash,
+
+			function(){
+				$.mobile.changePage( "cached-dom-cache-true.html" );
+			},
+
+			function(){
+				$.mobile.activePage.find( "#domcache-page-select" ).siblings( 'a' ).click();
+			},
+
+			function(){
+				ok( $.mobile.activePage.hasClass('ui-dialog'), "the dialog came up" );
+				$.mobile.activePage.find( "li a" ).last().click();
+			},
+
+			function(){
+				ok( $.mobile.activePage.is( "#dialog-select-parent-domcache-test" ), "the dialog closed" );
+				$.mobile.changePage( $( "#default" ) );
+			},
+
+			function(){
+				same( $("#dialog-select-parent-domcache-test").length, 1, "make sure the select parent page is still cached in the dom after changing page" );
+				start();
+			}
+		]);
+	});
 })(jQuery);

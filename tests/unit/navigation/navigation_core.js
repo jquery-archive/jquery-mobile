@@ -608,4 +608,55 @@
 			}
 		]);
 	});
+
+	asyncTest( "handling of active button state when navigating", 1, function(){
+
+		$.testHelper.pageSequence([
+			// open our test page
+			function(){
+				$.testHelper.openPage("#active-state-page1");
+			},
+
+			function(){
+				$("#active-state-page1 a").eq(0).click();
+			},
+
+			function(){
+				$("#active-state-page2 a").eq(0).click();
+			},
+
+			function(){
+				ok(!$("#active-state-page1 a").hasClass( $.mobile.activeBtnClass ), "No button should not have class " + $.mobile.activeBtnClass );
+				start();
+			}
+		]);
+	});
+
+	asyncTest( "handling of button active state when navigating by clicking back button", 1, function(){
+
+		$.testHelper.pageSequence([
+			// open our test page
+			function(){
+				$.testHelper.openPage("#active-state-page1");
+			},
+
+			function(){
+				$("#active-state-page1 a").eq(0).click();
+			},
+
+			function(){
+				$("#active-state-page2 a").eq(1).click();
+			},
+
+			function(){
+				$("#active-state-page1 a").eq(0).click();
+			},
+
+			function(){
+				ok(!$("#active-state-page2 a").hasClass( $.mobile.activeBtnClass ), "No button should not have class " + $.mobile.activeBtnClass );
+				start();
+			}
+		]);
+	});
+
 })(jQuery);

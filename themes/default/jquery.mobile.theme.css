@@ -658,8 +658,11 @@ a.ui-link-inherit {
 	-webkit-border-radius: 				.6em;
 	border-radius: 						.6em;
 }
-
-
+.ui-corner-none {
+	-moz-border-radius: 				   0;
+	-webkit-border-radius: 				   0;
+	border-radius: 						   0;
+}
 
 /* Interaction cues
 -----------------------------------------------------------------------------------------------------------*/
