@@ -33,8 +33,13 @@
 			<textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
 			</li>
 			<li data-role="fieldcontain">
-	        	<label for="search">Search Input:</label>
-	         	<input type="search" name="password" id="search" value=""  />
+				<div data-role="controlgroup">
+					<legend>Search Input:</legend>
+					<div data-role="controlgroup" data-type="horizontal">
+						<input type="search" name="password" id="search" value=""  />
+						<div>Comments about this input control</div>
+					</div>
+				</div>
 			</li>
 			<li data-role="fieldcontain">
 	        	<label for="slider2">Flip switch:</label>
