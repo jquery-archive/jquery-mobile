@@ -917,7 +917,11 @@
 		// for the dialog content to be used in the hash. Instead, we want
 		// to append the dialogHashKey to the url of the current page.
 		if ( isDialog && active ) {
-			url = active.url + dialogHashKey;
+			// on the initial page load active.url is undefined and in that case should
+			// be an empty string. Moving the undefined -> empty string back into
+			// urlHistory.addNew seemed imprudent given undefined better represents
+			// the url state
+			url = ( active.url || "" ) + dialogHashKey;
 		}
 
 		// Set the location hash.
