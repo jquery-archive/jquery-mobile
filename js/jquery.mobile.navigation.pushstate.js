@@ -22,9 +22,6 @@
 
 		initialHref: url.hrefNoHash,
 
-		// Begin with popstate listening disabled, since it fires at onload in chrome
-		popListeningEnabled: false,
-
 		// Flag for tracking if a Hashchange naturally occurs after each popstate + replace
 		hashchangeFired: false,
 
@@ -33,7 +30,7 @@
 				hash: location.hash || "#" + self.initialFilePath,
 				title: document.title,
 
-				// persiste across refresh
+				// persist across refresh
 				initialHref: self.initialHref
 			};
 		},
@@ -60,8 +57,14 @@
 
 		onPopState: function( e ) {
 			var poppedState = e.originalEvent.state;
-			if( self.popListeningEnabled && poppedState ) {
-				history.replaceState( poppedState, poppedState.title, poppedState.initialHref + poppedState.hash );
+
+			// if there's no state its not a popstate we care about, ie chrome's initial popstate
+			// or forward popstate
+			if( poppedState ) {
+
+				// replace the current url with the equivelant hash so that the hashchange binding in vanilla nav
+				// can load the page
+			 	history.replaceState( poppedState, poppedState.title, poppedState.initialHref + poppedState.hash );
 
 				// Urls that reference subpages will fire their own hashchange, so we don't want to trigger 2 in that case.
 				self.hashchangeFired = false;
@@ -86,20 +89,8 @@
 			if ( location.hash === "" ) {
 				history.replaceState( self.state(), document.title, location.href );
 			}
-
-			// Enable pushstate listening *after window onload
-			// To ignore the initial pop that Chrome calls at onload
-			$win.load(function() {
-				setTimeout(function() {
-					self.popListeningEnabled = true;
-				}, 0 );
-			});
 		}
 	});
 
-	$.mobile._registerInternalEvents = function(){
-		// Call previous function
-		oldRegisterInternalEvents();
-		pushStateHandler.init();
-	};
+	$( pushStateHandler.init );
 })( jQuery, this );
