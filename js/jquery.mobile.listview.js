@@ -146,6 +146,10 @@ $.widget( "mobile.listview", $.mobile.widget, {
 						theme: itemTheme
 					});
 
+					if ( ( icon != false ) && ( a.length == 1 ) ) {
+						item.addClass( "ui-li-has-arrow" );
+					}
+
 					a.first().addClass( "ui-link-inherit" );
 
 					if ( a.length > 1 ) {
