@@ -10,7 +10,6 @@
 	// methods handed off as event handlers
 	var	pushStateHandler = {},
 		self = pushStateHandler,
-		oldRegisterInternalEvents = $.mobile._registerInternalEvents,
 		$win = $( window ),
 		url = $.mobile.path.parseUrl( location.href );
 
@@ -40,9 +39,8 @@
 
 			self.hashchangeFired = true;
 
-			// only replaceState when pushState support is present and
-			// the hash doesn't represent an embeded page
-			if( $.support.pushState && $.mobile.path.isPath(location.hash) ) {
+			// only replaceState when the hash doesn't represent an embeded page
+			if( $.mobile.path.isPath(location.hash) ) {
 
 				// propulate the hash when its not available
 				state = self.state();
@@ -92,5 +90,9 @@
 		}
 	});
 
-	$( pushStateHandler.init );
+	$( function() {
+		if( $.mobile.pushStateEnabled && $.support.pushState ){
+			pushStateHandler.init();
+		}
+	});
 })( jQuery, this );

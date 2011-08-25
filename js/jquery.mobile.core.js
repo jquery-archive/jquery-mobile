@@ -47,9 +47,11 @@
 
 		// Error response message - appears when an Ajax page request fails
 		pageLoadErrorMessage: "Error Loading Page",
-		
+
 		//automatically initialize the DOM when it's ready
 		autoInitializePage: true,
+
+		pushStateEnabled: true,
 
 		// Support conditions that must be met in order to proceed
 		// default enhanced qualifications are media query support OR IE 7+
@@ -164,3 +166,4 @@
 		return $.find( expr, null, null, [ node ] ).length > 0;
 	};
 })( jQuery, this );
+
