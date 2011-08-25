@@ -2,24 +2,40 @@
  * mobile navigation unit tests
  */
 (function($){
+	// TODO move siteDirectory over to the nav path helper
 	var changePageFn = $.mobile.changePage,
-			originalTitle = document.title,
-			siteDirectory = location.pathname.replace(/[^/]+$/, ""),
-			navigateTestRoot = function(){
-				$.testHelper.openPage( "#" + location.pathname );
-			};
+		originalTitle = document.title,
+		siteDirectory = location.pathname.replace( /[^/]+$/, "" ),
+		home = $.mobile.path.parseUrl(location.pathname).directory,
+		navigateTestRoot = function(){
+			$.testHelper.openPage( "#" + location.pathname );
+		};
 
 	module('jquery.mobile.navigation.js', {
 		setup: function(){
 			$.mobile.changePage = changePageFn;
 			document.title = originalTitle;
 
-			if ( location.hash ) {
+			var pageReset = function( hash ) {
+				hash = hash || "";
+
 				stop();
-				$(document).one("changepage", function() {
+
+				$(document).one( "changepage", function() {
 					start();
-				} );
-				location.hash = "";
+				});
+
+				location.hash = "#" + hash;
+			};
+
+			// force the page reset for hash based tests
+			if ( location.hash && !$.support.pushState ) {
+				pageReset();
+			}
+
+			// force the page reset for all pushstate tests
+			if ( $.support.pushState ) {
+				pageReset( home );
 			}
 
 			$.mobile.urlHistory.stack = [];
@@ -52,7 +68,7 @@
 	asyncTest( "external page is cached in the DOM after pagehide", function(){
 		$.testHelper.pageSequence([
 			navigateTestRoot,
-			
+
 			function(){
 				$.mobile.changePage( "cached-external.html" );
 			},
@@ -72,30 +88,29 @@
 	});
 
 	asyncTest( "external page is cached in the DOM after pagehide when option is set globally", function(){
-			$.testHelper.pageSequence([
-				navigateTestRoot,
-			
-				function(){
-					$.mobile.page.prototype.options.domCache = true;
-					$.mobile.changePage( "external.html" );
-				},
+		$.testHelper.pageSequence([
+			navigateTestRoot,
 
-				// page is pulled and displayed in the dom
-				function(){
-					same( $( "#external-test" ).length, 1 );
-					window.history.back();
-				},
+			function(){
+				$.mobile.page.prototype.options.domCache = true;
+				$.mobile.changePage( "external.html" );
+			},
 
-				// external test page is cached in the dom after transitioning away
-				function(){
-					same( $( "#external-test" ).length, 1 );
-					$.mobile.page.prototype.options.domCache = false;
-					$( "#external-test" ).remove();
-					start();
-				}
-			]);
-		});
-		
+			// page is pulled and displayed in the dom
+			function(){
+				same( $( "#external-test" ).length, 1 );
+				window.history.back();
+			},
+
+			// external test page is cached in the dom after transitioning away
+			function(){
+				same( $( "#external-test" ).length, 1 );
+				$.mobile.page.prototype.options.domCache = false;
+				$( "#external-test" ).remove();
+				start();
+			}]);
+	});
+
 	asyncTest( "forms with data attribute ajax set to false will not call changePage", function(){
 		var called = false;
 		var newChangePage = function(){
@@ -215,12 +230,17 @@
 		testListening( $.mobile.hashListeningEnabled );
 	});
 
-	var testDataUrlHash = function(linkSelector, hashRegex){
+	var testDataUrlHash = function( linkSelector, matches ) {
 		$.testHelper.pageSequence([
 			function(){ window.location.hash = ""; },
 			function(){ $(linkSelector).click(); },
 			function(){
-				ok(hashRegex.test(location.hash), "should match the regex");
+				$.testHelper.assertUrlLocation(
+					$.extend(matches, {
+						report: "url or hash should match"
+					})
+				);
+
 				start();
 			}
 		]);
@@ -229,19 +249,22 @@
 	};
 
 	test( "when loading a page where data-url is not defined on a sub element hash defaults to the url", function(){
-		testDataUrlHash("#non-data-url a", new RegExp("^#" + siteDirectory + "data-url-tests/non-data-url.html$"));
+		testDataUrlHash( "#non-data-url a", {hashOrPush: siteDirectory + "data-url-tests/non-data-url.html"} );
 	});
 
 	test( "data url works for nested paths", function(){
-		testDataUrlHash("#nested-data-url a", /^#foo\/bar.html$/);
+		var url = "foo/bar.html";
+		testDataUrlHash( "#nested-data-url a", {hash: url, push: home + url} );
 	});
 
 	test( "data url works for single quoted paths and roles", function(){
-		testDataUrlHash("#single-quotes-data-url a", /^#foo\/bar\/single.html$/);
+		var url = "foo/bar/single.html";
+		testDataUrlHash( "#single-quotes-data-url a", {hash: url, push: home + url} );
 	});
 
 	test( "data url works when role and url are reversed on the page element", function(){
-		testDataUrlHash("#reverse-attr-data-url a", /^#foo\/bar\/reverse.html$/);
+		var url = "foo/bar/reverse.html";
+		testDataUrlHash( "#reverse-attr-data-url a", {hash: url, push: home + url} );
 	});
 
 	asyncTest( "last entry choosen amongst multiple identical url history stack entries on hash change", function(){
@@ -283,7 +306,12 @@
 
 			// make sure we're at the first page and not the dialog
 			function(){
-				same(location.hash, "#skip-dialog-first", "should be the first page in the sequence");
+				$.testHelper.assertUrlLocation({
+					hash: "skip-dialog-first",
+					push: home + "#skip-dialog-first",
+					report: "should be the first page in the sequence"
+				});
+
 				start();
 			}]);
 	});
@@ -307,11 +335,15 @@
 
 			// make sure we're on the second page and not the dialog
 			function(){
-				same(location.hash, "#skip-dialog-second", "should be the second page after the dialog");
+				$.testHelper.assertUrlLocation({
+					hash: "skip-dialog-second",
+					push: home + "#skip-dialog-second",
+					report: "should be the second page after the dialog"
+				});
+
 				start();
 			}]);
 	});
-
 
 	asyncTest( "going back from a dialog triggered from a dialog should result in the first dialog ", function(){
 		$.testHelper.pageSequence([
@@ -449,7 +481,11 @@
 			},
 
 			function(){
-				same(location.hash, "#" + siteDirectory + "data-url-tests/non-data-url.html?foo=bar");
+				$.testHelper.assertUrlLocation({
+					hashOrPush: home + "data-url-tests/non-data-url.html?foo=bar",
+					report: "the hash or url has query params"
+				});
+
 				ok($(".ui-page-active").jqmData("url").indexOf("?foo=bar") > -1, "the query params are in the data url");
 				start();
 			}
@@ -467,12 +503,20 @@
 			},
 
 			function(){
-				same(location.hash, "#" + siteDirectory + "data-url-tests/non-data-url.html?foo=bar");
+				$.testHelper.assertUrlLocation({
+					hashOrPush: home + "data-url-tests/non-data-url.html?foo=bar",
+					report: "the hash or url has query params"
+				});
+
 				$("#query-param-anchor").click();
 			},
 
 			function(){
-				same(location.hash, "#" + siteDirectory + "data-url-tests/non-data-url.html?foo=bar");
+				$.testHelper.assertUrlLocation({
+					hashOrPush: home + "data-url-tests/non-data-url.html?foo=bar",
+					report: "the hash or url still has query params"
+				});
+
 				start();
 			}
 		]);
@@ -481,7 +525,7 @@
 	// Special handling inside navigation because query params must be applied to the hash
 	// or absolute reference and dialogs apply extra information int the hash that must be removed
 	asyncTest( "query param link from a dialog to itself should be a not add another dialog", function(){
-		var firstDialogHash;
+		var firstDialogLoc;
 
 		$.testHelper.pageSequence([
 			// open our test page
@@ -502,19 +546,18 @@
 			// attempt to navigate to the same link
 			function(){
 				// store the current hash for comparison (with one dialog hash key)
-				firstDialogHash = location.hash;
+				firstDialogLoc = location.hash || location.href;
 				$("#dialog-param-link-page a").click();
 			},
 
 			function(){
-				same(location.hash, firstDialogHash, "additional dialog hash key not added");
+				same(location.hash || location.href, firstDialogLoc, "additional dialog hash key not added");
 				start();
 			}
 		]);
 	});
 
-	asyncTest( "query data passed as string to changePage is appended to URL", function(){
-
+ 	asyncTest( "query data passed as string to changePage is appended to URL", function(){
 		$.testHelper.pageSequence([
 			// open our test page
 			function(){
@@ -524,14 +567,17 @@
 			},
 
 			function(){
-				same(location.hash, "#" + siteDirectory + "form-tests/changepage-data.html?foo=1&bar=2");
+				$.testHelper.assertUrlLocation({
+					hashOrPush: home + "form-tests/changepage-data.html?foo=1&bar=2",
+					report: "the hash or url still has query params"
+				});
+
 				start();
 			}
 		]);
 	});
 
 	asyncTest( "query data passed as object to changePage is appended to URL", function(){
-
 		$.testHelper.pageSequence([
 			// open our test page
 			function(){
@@ -544,14 +590,17 @@
 			},
 
 			function(){
-				same(location.hash, "#" + siteDirectory + "form-tests/changepage-data.html?foo=3&bar=4");
+				$.testHelper.assertUrlLocation({
+					hashOrPush: home + "form-tests/changepage-data.html?foo=3&bar=4",
+					report: "the hash or url still has query params"
+				});
+
 				start();
 			}
 		]);
 	});
 
 	asyncTest( "refresh of a dialog url should not duplicate page", function(){
-
 		$.testHelper.pageSequence([
 			// open our test page
 			function(){
@@ -560,15 +609,19 @@
 			},
 
 			function(){
-				same(location.hash, "#foo&ui-state=dialog", "hash should match what was loaded");
-				same($(".foo-class").length, 1, "should only have one instance of foo-class in the document");
+				$.testHelper.assertUrlLocation({
+					hash: "foo&ui-state=dialog",
+					push: home + "#foo&ui-state=dialog",
+					report: "hash should match what was loaded"
+				});
+
+				same( $(".foo-class").length, 1, "should only have one instance of foo-class in the document" );
 				start();
 			}
 		]);
 	});
 
 	asyncTest( "internal form with no action submits to document URL", function(){
-
 		$.testHelper.pageSequence([
 			// open our test page
 			function(){
@@ -580,14 +633,17 @@
 			},
 
 			function(){
-				same(location.hash, "#" + location.pathname + "?foo=1&bar=2", "hash should match what was loaded");
+				$.testHelper.assertUrlLocation({
+					hashOrPush: home + "?foo=1&bar=2",
+					report: "hash should match what was loaded"
+				});
+
 				start();
 			}
 		]);
 	});
 
 	asyncTest( "external page containing form with no action submits to page URL", function(){
-
 		$.testHelper.pageSequence([
 			// open our test page
 			function(){
@@ -603,7 +659,11 @@
 			},
 
 			function(){
-				same(location.hash, "#" + siteDirectory + "form-tests/form-no-action.html?foo=1&bar=2", "hash should match page url and not document url");
+				$.testHelper.assertUrlLocation({
+					hashOrPush: home + "form-tests/form-no-action.html?foo=1&bar=2",
+					report: "hash should match page url and not document url"
+				});
+
 				start();
 			}
 		]);

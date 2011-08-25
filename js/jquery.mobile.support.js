@@ -67,7 +67,7 @@ $.extend( $.support, {
 	orientation: "orientation" in window,
 	touch: "ontouchend" in document,
 	cssTransitions: "WebKitTransitionEvent" in window,
-	pushState: !!history.pushState,
+	pushState: "pushState" in history && "replaceState" in history,
 	mediaquery: $.mobile.media( "only all" ),
 	cssPseudoElement: !!propExists( "content" ),
 	boxShadow: !!propExists( "boxShadow" ) && !bb,
