@@ -250,7 +250,7 @@
 					// of a dialog sized custom select
 					if( !self.thisPage.data("page").options.domCache ){
 						self.thisPage.bind( "pagehide.remove", function() {
-							$(this).remove();
+							$(self).remove();
 						});
 					}
 
