@@ -34,6 +34,9 @@
 			};
 		},
 
+		// on hash change we want to clean up the url
+		// NOTE this takes place *after* the vanilla navigation hash change
+		// handling has taken place and set the state of the DOM
 		onHashChange: function( e ) {
 			var href, state;
 
@@ -53,6 +56,8 @@
 			}
 		},
 
+		// on popstate (ie back or forward) we need to replace the hash that was there previously
+		// cleaned up by the additional hash handling
 		onPopState: function( e ) {
 			var poppedState = e.originalEvent.state;
 
@@ -61,7 +66,7 @@
 			if( poppedState ) {
 
 				// replace the current url with the equivelant hash so that the hashchange binding in vanilla nav
-				// can load the page
+				// can do its thing one triggered below
 			 	history.replaceState( poppedState, poppedState.title, poppedState.initialHref + poppedState.hash );
 
 				// Urls that reference subpages will fire their own hashchange, so we don't want to trigger 2 in that case.
