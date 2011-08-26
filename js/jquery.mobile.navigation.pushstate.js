@@ -34,6 +34,19 @@
 			};
 		},
 
+		resetUIState: function( url ) {
+			var dialog = $.mobile.dialogHashKey,
+				subkey = "&" + $.mobile.subPageUrlKey;
+
+			if( url.indexOf( dialog ) > -1 ) {
+        url = url.split( dialog ).join( "#" + dialog );
+      } else if( url.indexOf( subkey ) > -1 ) {
+				url = url.split( subkey ).join( "#" + subkey );
+			}
+
+			return url;
+		},
+
 		// on hash change we want to clean up the url
 		// NOTE this takes place *after* the vanilla navigation hash change
 		// handling has taken place and set the state of the DOM
@@ -50,6 +63,8 @@
 
 				// make the hash abolute with the current href
 				href = $.mobile.path.makeUrlAbsolute( state.hash.replace("#", ""), location.href );
+
+				href = self.resetUIState( href );
 
 				// replace the current url with the new href and store the state
 				history.replaceState( state, document.title, href );

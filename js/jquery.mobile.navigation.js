@@ -512,6 +512,8 @@
 	//history stack
 	$.mobile.urlHistory = urlHistory;
 
+	$.mobile.dialogHashKey = dialogHashKey;
+
 	//default non-animation transition handler
 	$.mobile.noneTransitionHandler = function( name, reverse, $toPage, $fromPage ) {
 		if ( $fromPage ) {
