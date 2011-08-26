@@ -706,4 +706,28 @@
 			}
 		]);
 	});
+
+	asyncTest( "nested pages hash key is always in the hash (replaceState)", function(){
+		$.testHelper.pageSequence([
+			function(){
+				//reset for relative url refs
+				$.testHelper.openPage( "#" + home );
+			},
+
+			function(){
+				// https://github.com/jquery/jquery-mobile/issues/1617
+				$.testHelper.openPage("#nested-lists-test");
+			},
+
+			function(){
+				// Click on the link of the third li element
+				$('.ui-page-active li:eq(2) a:eq(0)').click();
+			},
+
+			function(){
+				ok( location.hash.search($.mobile.subPageUrlKey) >= 0 );
+				start();
+			}
+		]);
+	});
 })(jQuery);
