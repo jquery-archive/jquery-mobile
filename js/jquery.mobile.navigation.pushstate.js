@@ -34,7 +34,7 @@
 			};
 		},
 
-		resetUIState: function( url ) {
+		resetUIKeys: function( url ) {
 			var dialog = $.mobile.dialogHashKey,
 				subkey = "&" + $.mobile.subPageUrlKey;
 
@@ -64,7 +64,7 @@
 				// make the hash abolute with the current href
 				href = $.mobile.path.makeUrlAbsolute( state.hash.replace("#", ""), location.href );
 
-				href = self.resetUIState( href );
+				href = self.resetUIKeys( href );
 
 				// replace the current url with the new href and store the state
 				history.replaceState( state, document.title, href );
