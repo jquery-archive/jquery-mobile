@@ -692,6 +692,30 @@
 		]);
 	});
 
+	asyncTest( "dialog ui-state should be part of the hash", function(){
+		$.testHelper.sequence([
+			function() {
+				// open the test page
+				$.testHelper.openPage("#nested-dialog-page");
+			},
+
+			function() {
+				// open the dialog
+				$("#nested-dialog-page a").click();
+			},
+
+			function() {
+				// verify that the hash contains the dialogHashKey
+				ok( location.hash.search($.mobile.dialogHashKey) >= 0 );
+				$.testHelper.openPage( "#" + home );
+			},
+
+			function() {
+				start();
+			}
+		]);
+	});
+
 	asyncTest( "handling of button active state when navigating by clicking back button", 1, function(){
 
 		$.testHelper.pageSequence([
@@ -718,5 +742,4 @@
 			}
 		]);
 	});
-
 })(jQuery);
