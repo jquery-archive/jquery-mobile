@@ -385,6 +385,15 @@
 			$.mobile.changePage.apply( null, pageTransitionQueue.pop() );
 		}
 	}
+	
+	// Save last scroll distance
+	$( document ).bind( "beforechangepage", function(){
+		var active	= $.mobile.urlHistory.getActive();
+		if( active ){
+			active.lastScroll = $( window ).scrollTop();
+		}
+	});
+	
 
 	//function for transitioning between two existing pages
 	function transitionPages( toPage, fromPage, transition, reverse ) {
@@ -452,6 +461,8 @@
 
 		return pageMin;
 	}
+	
+	$.mobile.getScreenHeight = getScreenHeight;
 
 	//simply set the active page's minimum height to screen height, depending on orientation
 	function resetActivePageHeight(){
@@ -892,11 +903,6 @@
 				isBack:		function() { historyDir = -1; },
 				isForward:	function() { historyDir = 1; }
 			});
-		}
-		
-		// Set active item's lastScroll prop
-		if( active ){
-			active.lastScroll = $( window ).scrollTop();
 		}
 
 		// Kill the keyboard.
