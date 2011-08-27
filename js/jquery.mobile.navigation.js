@@ -275,7 +275,7 @@
 			},
 
 			directHashChange: function( opts ) {
-				var back , forward, newActiveIndex;
+				var back , forward, newActiveIndex, prev = this.getActive();
 
 				// check if url isp in history and if it's ahead or behind current page
 				$.each( urlHistory.stack, function( i, historyEntry ) {
@@ -293,9 +293,9 @@
 				this.activeIndex = newActiveIndex !== undefined ? newActiveIndex : this.activeIndex;
 
 				if( back ) {
-					opts.isBack();
+					opts.isBack( prev, back );
 				} else if( forward ) {
-					opts.isForward();
+					opts.isForward( prev, back );
 				}
 			},
 
@@ -1185,12 +1185,17 @@
 			});
 		} );
 
-		//hashchange event handler
-		$window.bind( "hashchange", function( e, triggered ) {
+		$.mobile.handleHashChange = function( hash ) {
 			//find first page via hash
-			var role, to = path.stripHash( location.hash ),
+			var reverse, role, to = path.stripHash( hash ),
 				//transition is false if it's the first page, undefined otherwise (and may be overridden by default)
-				transition = $.mobile.urlHistory.stack.length === 0 ? "none" : undefined;
+				transition = $.mobile.urlHistory.stack.length === 0 ? "none" : undefined,
+
+				changePageOptions = {
+					transition: transition,
+					changeHash: false,
+					fromHashChange: true
+				};
 
 			//if listening is disabled (either globally or temporarily), or it's a dialog hash
 			if( !$.mobile.hashListeningEnabled || urlHistory.ignoreNextHashChange ) {
@@ -1215,10 +1220,13 @@
 					// prevent changepage
 					return;
 				} else {
-					var setTo = function() {
+					var setTo = function( previousPage, isBack ) {
 						var active = $.mobile.urlHistory.getActive();
+
 						to = active.pageUrl;
 						role = active.role;
+						transition = active.transition;
+						reverse = isBack;
 					};
 					// if the current active page is a dialog and we're navigating
 					// to a dialog use the dialog objected saved in the stack
@@ -1229,12 +1237,17 @@
 			//if to is defined, load it
 			if ( to ) {
 				to = ( typeof to === "string" && !path.isPath( to ) ) ? ( '#' + to ) : to;
-				$.mobile.changePage( to, { transition: transition, changeHash: false, fromHashChange: true , role: role} );
+				$.mobile.changePage( to, { transition: transition, changeHash: false, fromHashChange: true , role: role, reverse: reverse } );
 			}
 			//there's no hash, go to the first page in the dom
 			else {
-				$.mobile.changePage( $.mobile.firstPage, { transition: transition, changeHash: false, fromHashChange: true, roll: rolle } );
+				$.mobile.changePage( $.mobile.firstPage, { transition: transition, changeHash: false, fromHashChange: true, roll: roll, reverse: reverse } );
 			}
+		};
+
+		//hashchange event handler
+		$window.bind( "hashchange", function( e, triggered ) {
+			$.mobile.handleHashChange( location.hash );
 		});
 
 		//set page min-heights to be device specific

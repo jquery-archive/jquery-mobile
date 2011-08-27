@@ -34,13 +34,20 @@
 			};
 		},
 
+		isSubHashPage: function( page ) {
+			return page.is( "[role='dialog']" ) ||
+				page.jqmData("url").indexOf( $.mobile.subPageUrlKey ) >= 0;
+		},
+
 		resetUIKeys: function( url ) {
 			var dialog = $.mobile.dialogHashKey,
 				subkey = "&" + $.mobile.subPageUrlKey;
 
 			if( url.indexOf( dialog ) > -1 ) {
-        url = url.split( dialog ).join( "#" + dialog );
-      } else if( url.indexOf( subkey ) > -1 ) {
+				var split = url.split( dialog );
+				split.push( "" );
+				url = split[0] + "#" + split.slice( 1, split.length ).join( dialog );
+			} else if( url.indexOf( subkey ) > -1 ) {
 				url = url.split( subkey ).join( "#" + subkey );
 			}
 
@@ -74,26 +81,21 @@
 		// on popstate (ie back or forward) we need to replace the hash that was there previously
 		// cleaned up by the additional hash handling
 		onPopState: function( e ) {
-			var poppedState = e.originalEvent.state;
+			var poppedState = e.originalEvent.state, holdnexthashchange = false;
 
 			// if there's no state its not a popstate we care about, ie chrome's initial popstate
 			// or forward popstate
 			if( poppedState ) {
+				// can't test the hash directly because the url has already been altered, possibly to
+				// one without a hash, so we check if the page on display is one that would have
+				// generated a hash
+				if( self.isSubHashPage( $.mobile.activePage ) ){
+					holdnexthashchange = true;
+				}
 
-				// replace the current url with the equivelant hash so that the hashchange binding in vanilla nav
-				// can do its thing one triggered below
-			 	history.replaceState( poppedState, poppedState.title, poppedState.initialHref + poppedState.hash );
+				$.mobile.handleHashChange( poppedState.hash );
 
-				// Urls that reference subpages will fire their own hashchange, so we don't want to trigger 2 in that case.
-				self.hashchangeFired = false;
-
-				setTimeout(function() {
-					if( !self.hashchangeFired ) {
-						$win.trigger( "hashchange" );
-					}
-
-					self.hashchangeFired = false;
-				}, 0);
+				$.mobile.urlHistory.ignoreNextHashChange = holdnexthashchange;
 			}
 		},
 
