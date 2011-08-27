@@ -106,18 +106,17 @@ $('div').live('pagehide',function(event, ui){
 		<dl>
 			<dt><code>pagebeforecreate</code></dt>
 			<dd>
-				<p>Triggered on the page being initialized, before initialization occurs.</p>
+				<p>Triggered on the page being initialized, before most plugin auto-initialization occurs.</p>
 <pre><code>
 $('#aboutPage').live('pagebeforecreate',function(event){
   alert('This page was just inserted into the dom!');
 });
 </code></pre>
-				<p>Note that by binding to <code>pagebeforecreate</code> and returning <code>false</code>, you can prevent the page plugin from making its manipulations.</p>
+				<p>Note that by binding to <code>pagebeforecreate</code>, you can manipulate markup before jQuery Mobile's default widgets are auto-initialized. For example, say you want to add data-attributes via JavaScript instead of in the HTML source, this is the event you'd use.</p>
 		
 <pre><code>
 $('#aboutPage').live('pagebeforecreate',function(event){
-  //run your own enhancement scripting here...
-  return false;
+  // manipulate this page before its widgets are auto-initialized
 });
 </code></pre>		
 			</dd>

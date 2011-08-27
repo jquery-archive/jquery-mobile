@@ -15,11 +15,9 @@ $.widget( "mobile.page", $.mobile.widget, {
 
 	_create: function() {
 
-		if ( this._trigger( "beforeCreate" ) === false ) {
-			return;
-		}
-		
-		this.element.addClass( "ui-page ui-body-" + this.options.theme );	
+		this._trigger( "beforecreate" );
+
+		this.element.addClass( "ui-page ui-body-" + this.options.theme );
 	}
 });
 
