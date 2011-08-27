@@ -35,11 +35,13 @@
 		},
 
 		isSubHashPage: function( page ) {
+			var pageUrl = page.jqmData("url") || "";
+
 			// if the page is a dialog, a subpage, or an embedded page
 			// then the hash will have been maintained
 			return page.is( "[role='dialog']" ) ||
-				page.jqmData("url").indexOf( $.mobile.subPageUrlKey ) >= 0 ||
-				page.jqmData("url") == page.attr( "id" );
+				pageUrl.indexOf( $.mobile.subPageUrlKey ) >= 0 ||
+				pageUrl === page.attr( "id" );
 		},
 
 		resetUIKeys: function( url ) {
