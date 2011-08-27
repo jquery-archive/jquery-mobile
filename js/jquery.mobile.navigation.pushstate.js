@@ -34,16 +34,6 @@
 			};
 		},
 
-		isSubHashPage: function( page ) {
-			var pageUrl = page.jqmData("url") || "";
-
-			// if the page is a dialog, a subpage, or an embedded page
-			// then the hash will have been maintained
-			return page.is( "[role='dialog']" ) ||
-				pageUrl.indexOf( $.mobile.subPageUrlKey ) >= 0 ||
-				pageUrl === page.attr( "id" );
-		},
-
 		resetUIKeys: function( url ) {
 			var dialog = $.mobile.dialogHashKey,
 				subkey = "&" + $.mobile.subPageUrlKey,
@@ -90,18 +80,18 @@
 			// if there's no state its not a popstate we care about, ie chrome's initial popstate
 			// or forward popstate
 			if( poppedState ) {
-				// can't test the hash directly because the url has already been altered, possibly to
-				// one without a hash, so we check if the page on display is one that would have
-				// generated a hash. Generally speaking a crappy solution.
-				if( self.isSubHashPage( $.mobile.activePage ) ){
-					holdnexthashchange = true;
-				}
+				// disable any hashchange triggered by the browser
+				$.mobile.urlHistory.ignoreNextHashChange = true;
 
-				// change the page based on the hash
-				$.mobile._handleHashChange( poppedState.hash );
-
-				// disable the next hash change if the page we came from has a hash
-				$.mobile.urlHistory.ignoreNextHashChange = holdnexthashchange;
+				// defer our manual hashchange until after the browser fired
+				// version has come and gone
+				setTimeout(function() {
+					// make sure that the manual hash handling takes place
+					$.mobile.urlHistory.ignoreNextHashChange = false;
+					
+					// change the page based on the hash
+					$.mobile._handleHashChange( poppedState.hash );
+				});
 			}
 		},
 
