@@ -14,12 +14,12 @@ $.widget( "mobile.page", $.mobile.widget, {
 	},
 
 	_create: function() {
-		
-		this.element.addClass( "ui-page ui-body-" + this.options.theme );	
 
 		if ( this._trigger( "beforeCreate" ) === false ) {
 			return;
 		}
+		
+		this.element.addClass( "ui-page ui-body-" + this.options.theme );	
 	}
 });
 
