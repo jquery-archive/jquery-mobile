@@ -293,9 +293,9 @@
 				this.activeIndex = newActiveIndex !== undefined ? newActiveIndex : this.activeIndex;
 
 				if( back ) {
-					opts.isBack( prev, back );
+					(opts.either || opts.isBack)( back );
 				} else if( forward ) {
-					opts.isForward( prev, back );
+					(opts.either || opts.isForward)( back );
 				}
 			},
 
@@ -1185,12 +1185,14 @@
 			});
 		} );
 
-		$.mobile.handleHashChange = function( hash ) {
+		$.mobile._handleHashChange = function( hash ) {
 			//find first page via hash
-			var reverse, role, to = path.stripHash( hash ),
+			var to = path.stripHash( hash ),
 				//transition is false if it's the first page, undefined otherwise (and may be overridden by default)
 				transition = $.mobile.urlHistory.stack.length === 0 ? "none" : undefined,
 
+				// default options for the changPage calls made after examining the current state
+				// of the page and the hash
 				changePageOptions = {
 					transition: transition,
 					changeHash: false,
@@ -1220,34 +1222,43 @@
 					// prevent changepage
 					return;
 				} else {
-					var setTo = function( previousPage, isBack ) {
-						var active = $.mobile.urlHistory.getActive();
-
-						to = active.pageUrl;
-						role = active.role;
-						transition = active.transition;
-						reverse = isBack;
-					};
 					// if the current active page is a dialog and we're navigating
 					// to a dialog use the dialog objected saved in the stack
-					urlHistory.directHashChange({	currentUrl: to, isBack: setTo, isForward: setTo	});
+					urlHistory.directHashChange({
+						currentUrl: to,
+
+						// regardless of the direction of the history change
+						// do the following
+						either: function( isBack ) {
+							var active = $.mobile.urlHistory.getActive();
+
+							to = active.pageUrl;
+
+							// make sure to set the role, transition and reversal
+							// as most of this is lost by the domCache cleaning
+							$.extend( changePageOptions, {
+								role: active.role,
+								transition:	 active.transition,
+								reverse: isBack
+							});
+						}
+					});
 				}
 			}
 
 			//if to is defined, load it
 			if ( to ) {
 				to = ( typeof to === "string" && !path.isPath( to ) ) ? ( '#' + to ) : to;
-				$.mobile.changePage( to, { transition: transition, changeHash: false, fromHashChange: true , role: role, reverse: reverse } );
-			}
-			//there's no hash, go to the first page in the dom
-			else {
-				$.mobile.changePage( $.mobile.firstPage, { transition: transition, changeHash: false, fromHashChange: true, roll: roll, reverse: reverse } );
+				$.mobile.changePage( to, changePageOptions );
+			}	else {
+				//there's no hash, go to the first page in the dom
+				$.mobile.changePage( $.mobile.firstPage, changePageOptions );
 			}
 		};
 
 		//hashchange event handler
 		$window.bind( "hashchange", function( e, triggered ) {
-			$.mobile.handleHashChange( location.hash );
+			$.mobile._handleHashChange( location.hash );
 		});
 
 		//set page min-heights to be device specific

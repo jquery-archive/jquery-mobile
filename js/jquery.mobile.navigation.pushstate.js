@@ -35,18 +35,20 @@
 		},
 
 		isSubHashPage: function( page ) {
+			// if the page is a dialog, a subpage, or an embedded page
+			// then the hash will have been maintained
 			return page.is( "[role='dialog']" ) ||
-				page.jqmData("url").indexOf( $.mobile.subPageUrlKey ) >= 0;
+				page.jqmData("url").indexOf( $.mobile.subPageUrlKey ) >= 0 ||
+				page.jqmData("url") == page.attr( "id" );
 		},
 
 		resetUIKeys: function( url ) {
 			var dialog = $.mobile.dialogHashKey,
-				subkey = "&" + $.mobile.subPageUrlKey;
+				subkey = "&" + $.mobile.subPageUrlKey,
+				dialogIndex = url.indexOf( dialog );
 
-			if( url.indexOf( dialog ) > -1 ) {
-				var split = url.split( dialog );
-				split.push( "" );
-				url = split[0] + "#" + split.slice( 1, split.length ).join( dialog );
+			if( dialogIndex > -1 ) {
+				url = url.slice( 0, dialogIndex ) + "#" + url.slice( dialogIndex );
 			} else if( url.indexOf( subkey ) > -1 ) {
 				url = url.split( subkey ).join( "#" + subkey );
 			}
@@ -88,13 +90,15 @@
 			if( poppedState ) {
 				// can't test the hash directly because the url has already been altered, possibly to
 				// one without a hash, so we check if the page on display is one that would have
-				// generated a hash
+				// generated a hash. Generally speaking a crappy solution.
 				if( self.isSubHashPage( $.mobile.activePage ) ){
 					holdnexthashchange = true;
 				}
 
-				$.mobile.handleHashChange( poppedState.hash );
+				// change the page based on the hash
+				$.mobile._handleHashChange( poppedState.hash );
 
+				// disable the next hash change if the page we came from has a hash
 				$.mobile.urlHistory.ignoreNextHashChange = holdnexthashchange;
 			}
 		},
