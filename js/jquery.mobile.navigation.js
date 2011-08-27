@@ -258,13 +258,13 @@
 			},
 
 			// addNew is used whenever a new page is added
-			addNew: function( url, transition, title, pageUrl ) {
+			addNew: function( url, transition, title, pageUrl, role ) {
 				//if there's forward history, wipe it
 				if( urlHistory.getNext() ) {
 					urlHistory.clearForward();
 				}
 
-				urlHistory.stack.push( {url : url, transition: transition, title: title, pageUrl: pageUrl } );
+				urlHistory.stack.push( {url : url, transition: transition, title: title, pageUrl: pageUrl, role: role } );
 
 				urlHistory.activeIndex = urlHistory.stack.length - 1;
 			},
@@ -942,7 +942,7 @@
 
 		//add page to history stack if it's not back or forward
 		if( !historyDir ) {
-			urlHistory.addNew( url, settings.transition, pageTitle, pageUrl );
+			urlHistory.addNew( url, settings.transition, pageTitle, pageUrl, settings.role );
 		}
 
 		//set page title
@@ -1188,7 +1188,7 @@
 		//hashchange event handler
 		$window.bind( "hashchange", function( e, triggered ) {
 			//find first page via hash
-			var to = path.stripHash( location.hash ),
+			var role, to = path.stripHash( location.hash ),
 				//transition is false if it's the first page, undefined otherwise (and may be overridden by default)
 				transition = $.mobile.urlHistory.stack.length === 0 ? "none" : undefined;
 
@@ -1199,8 +1199,7 @@
 			}
 
 			// special case for dialogs
-			if( urlHistory.stack.length > 1 &&
-					to.indexOf( dialogHashKey ) > -1 ) {
+			if( urlHistory.stack.length > 1 && to.indexOf( dialogHashKey ) > -1 ) {
 
 				// If current active page is not a dialog skip the dialog and continue
 				// in the same direction
@@ -1216,7 +1215,11 @@
 					// prevent changepage
 					return;
 				} else {
-					var setTo = function() { to = $.mobile.urlHistory.getActive().pageUrl; };
+					var setTo = function() {
+						var active = $.mobile.urlHistory.getActive();
+						to = active.pageUrl;
+						role = active.role;
+					};
 					// if the current active page is a dialog and we're navigating
 					// to a dialog use the dialog objected saved in the stack
 					urlHistory.directHashChange({	currentUrl: to, isBack: setTo, isForward: setTo	});
@@ -1226,11 +1229,11 @@
 			//if to is defined, load it
 			if ( to ) {
 				to = ( typeof to === "string" && !path.isPath( to ) ) ? ( '#' + to ) : to;
-				$.mobile.changePage( to, { transition: transition, changeHash: false, fromHashChange: true } );
+				$.mobile.changePage( to, { transition: transition, changeHash: false, fromHashChange: true , role: role} );
 			}
 			//there's no hash, go to the first page in the dom
 			else {
-				$.mobile.changePage( $.mobile.firstPage, { transition: transition, changeHash: false, fromHashChange: true } );
+				$.mobile.changePage( $.mobile.firstPage, { transition: transition, changeHash: false, fromHashChange: true, roll: rolle } );
 			}
 		});
 
