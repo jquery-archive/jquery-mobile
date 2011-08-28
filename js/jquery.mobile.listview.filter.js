@@ -9,7 +9,7 @@
 
 $.mobile.listview.prototype.options.filter = false;
 $.mobile.listview.prototype.options.filterPlaceholder = "Filter items...";
-$.mobile.listview.prototype.options.filterTheme = "c";
+$.mobile.listview.prototype.options.filterTheme = $.mobile.listview.prototype.options.filterTheme || $.mobile.getTheme("c");
 $.mobile.listview.prototype.options.filterCallback = function( text, searchValue ){
 	return text.toLowerCase().indexOf( searchValue ) === -1;
 };

@@ -33,7 +33,7 @@
 
 	// loading div which appears during Ajax requests
 	// will not appear if $.mobile.loadingMessage is false
-	var $loader = $( "<div class='ui-loader ui-body-a ui-corner-all'><span class='ui-icon ui-icon-loading spin'></span><h1></h1></div>" );
+	var $loader = $( "<div class='ui-loader ui-body-" + $.mobile.getTheme("a") + " ui-corner-all'><span class='ui-icon ui-icon-loading spin'></span><h1></h1></div>" );
 
 	$.extend($.mobile, {
 		// turn on/off page loading message.

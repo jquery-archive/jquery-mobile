@@ -10,16 +10,16 @@
 $.mobile.page.prototype.options.backBtnText		= "Back";
 $.mobile.page.prototype.options.addBackBtn		= false;
 $.mobile.page.prototype.options.backBtnTheme	= null;
-$.mobile.page.prototype.options.headerTheme		= "a";
-$.mobile.page.prototype.options.footerTheme		= "a";
+$.mobile.page.prototype.options.headerTheme		= $.mobile.page.prototype.options.headerTheme || $.mobile.getTheme("a");
+$.mobile.page.prototype.options.footerTheme		= $.mobile.page.prototype.options.footerTheme || $.mobile.getTheme("a");
 $.mobile.page.prototype.options.contentTheme	= null;
 
 $( ":jqmData(role='page'), :jqmData(role='dialog')" ).live( "pagecreate", function( e ) {
-	
+
 	var $page		= $( this ),
 		o			= $page.data( "page" ).options,
 		pageTheme	= o.theme;
-	
+
 	$( ":jqmData(role='header'), :jqmData(role='footer'), :jqmData(role='content')", this ).each(function() {
 		var $this	= $( this ),
 			role	= $this.jqmData( "role" ),
@@ -28,12 +28,12 @@ $( ":jqmData(role='page'), :jqmData(role='dialog')" ).live( "pagecreate", functi
 			leftbtn,
 			rightbtn,
 			backBtn;
-			
-		$this.addClass( "ui-" + role );	
+
+		$this.addClass( "ui-" + role );
 
 		//apply theming and markup modifications to page,header,content,footer
 		if ( role === "header" || role === "footer" ) {
-			
+
 			var thisTheme = theme || ( role === "header" ? o.headerTheme : o.footerTheme ) || pageTheme;
 
 			//add theme class

@@ -6,15 +6,13 @@
 */
 
 (function( $, undefined ) {
-
 $.widget( "mobile.page", $.mobile.widget, {
 	options: {
-		theme: "c",
+		theme: {toString: (function() { return $.mobile.getTheme("c"); })},
 		domCache: false
 	},
 
 	_create: function() {
-
 		this._trigger( "beforecreate" );
 
 		this.element.addClass( "ui-page ui-body-" + this.options.theme );

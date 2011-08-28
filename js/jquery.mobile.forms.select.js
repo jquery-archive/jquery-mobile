@@ -17,8 +17,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		corners: true,
 		shadow: true,
 		iconshadow: true,
-		menuPageTheme: "b",
-		overlayTheme: "a",
+		menuPageTheme: {toString: (function() { return $.mobile.getTheme("b"); })},
+		overlayTheme: {toString: (function() { return $.mobile.getTheme("a"); })},
 		hidePlaceholderMenuItems: true,
 		closeText: "Close",
 		nativeMenu: true,
@@ -36,7 +36,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		themedParent = this.select.closest( "[class*='ui-bar-'], [class*='ui-body-']" );
 		theme = themedParent.length ?
 			/ui-(bar|body)-([a-z])/.exec( themedParent.attr( "class" ) )[2] :
-			"c";
+			$.mobile.getTheme("c");
 
 		return theme;
 	},

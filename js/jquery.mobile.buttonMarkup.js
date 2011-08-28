@@ -25,7 +25,7 @@ $.fn.buttonMarkup = function( options ) {
 			themedParent = el.closest( "[class*='ui-bar-'],[class*='ui-body-']" );
 			o.theme = themedParent.length ?
 				/ui-(bar|body)-([a-z])/.exec( themedParent.attr( "class" ) )[2] :
-				"c";
+				$.mobile.getTheme("c");
 		}
 
 		buttonClass = "ui-btn ui-btn-up-" + o.theme;

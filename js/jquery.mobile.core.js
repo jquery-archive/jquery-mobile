@@ -122,6 +122,20 @@
 			}
 
 			return $.camelCase( $.mobile.ns + prop );
+		},
+
+		// Define all default themes
+		defaultThemes: {
+		    a: "a",
+		    b: "b",
+		    c: "c",
+		    d: "d",
+		    e: "e"
+		},
+
+		// Get the theme value
+		getTheme: function(theme) {
+		    return this.defaultThemes[theme];
 		}
 	});
 

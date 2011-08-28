@@ -24,7 +24,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			parentTheme = control.parents( "[class*='ui-bar-'],[class*='ui-body-']" ).eq( 0 ),
 
-			parentTheme = parentTheme.length ? parentTheme.attr( "class" ).match( /ui-(bar|body)-([a-z])/ )[ 2 ] : "c",
+			parentTheme = parentTheme.length ? parentTheme.attr( "class" ).match( /ui-(bar|body)-([a-z])/ )[ 2 ] : $.mobile.getTheme("c"),
 
 			theme = this.options.theme ? this.options.theme : parentTheme,
 
@@ -82,7 +82,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			control.find( "option" ).each(function( i ) {
 
-				var side = !i ? "b":"a",
+				var side = !i ? $.mobile.getTheme("b"):$.mobile.getTheme("a"),
 					corners = !i ? "right" :"left",
 					theme = !i ? " ui-btn-down-" + trackTheme :( " " + $.mobile.activeBtnClass );
 

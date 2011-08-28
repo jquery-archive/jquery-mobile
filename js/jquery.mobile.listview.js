@@ -14,12 +14,12 @@ var listCountPerPage = {};
 
 $.widget( "mobile.listview", $.mobile.widget, {
 	options: {
-		theme: "c",
-		countTheme: "c",
-		headerTheme: "b",
-		dividerTheme: "b",
+		theme: {toString: (function() { return $.mobile.getTheme("c"); })},
+		countTheme: {toString: (function() { return $.mobile.getTheme("c"); })},
+		headerTheme: {toString: (function() { return $.mobile.getTheme("b"); })},
+		dividerTheme: {toString: (function() { return $.mobile.getTheme("b"); })},
 		splitIcon: "arrow-r",
-		splitTheme: "b",
+		splitTheme: {toString: (function() { return $.mobile.getTheme("b"); })},
 		inset: false,
 		initSelector: ":jqmData(role='listview')"
 	},
@@ -79,7 +79,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			$li = this.element.children( "li" );
 			// at create time the li are not visible yet so we need to rely on .ui-screen-hidden
 			$visibleli = create?$li.not( ".ui-screen-hidden" ):$li.filter( ":visible" );
-			
+
 			this._removeCorners( $li );
 
 			// Select the first visible li element
@@ -206,7 +206,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 			self._itemApply( $list, item );
 		}
-		
+
 		this._refreshCorners( create );
 	},
 

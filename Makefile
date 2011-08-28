@@ -42,8 +42,8 @@ JSFILES = 	  js/jquery.ui.widget.js \
 			  js/jquery.mobile.vmouse.js \
 			  js/jquery.mobile.event.js \
 			  js/jquery.mobile.hashchange.js \
+              js/jquery.mobile.core.js \
 			  js/jquery.mobile.page.js \
-			  js/jquery.mobile.core.js \
 			  js/jquery.mobile.navigation.js \
 			  js/jquery.mobile.navigation.pushstate.js \
 			  js/jquery.mobile.transition.js \
