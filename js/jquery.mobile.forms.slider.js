@@ -71,7 +71,8 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			slider: slider,
 			handle: handle,
 			dragging: false,
-			beforeStart: null
+			beforeStart: null,
+			userModified: false
 		});
 
 		if ( cType == "select" ) {
@@ -113,12 +114,14 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		$( document ).bind( "vmousemove", function( event ) {
 			if ( self.dragging ) {
 				self.refresh( event );
+				self.userModified = self.userModified || self.beforeStart !== control[0].selectedIndex;
 				return false;
 			}
 		});
 
 		slider.bind( "vmousedown", function( event ) {
 			self.dragging = true;
+			self.userModified = false;
 
 			if ( cType === "select" ) {
 				self.beforeStart = control[0].selectedIndex;
@@ -135,7 +138,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 					if ( cType === "select" ) {
 
-						if ( self.beforeStart === control[ 0 ].selectedIndex ) {
+						if ( !self.userModified ) {
 							//tap occurred, but value didn't change. flip it!
 							self.refresh( !self.beforeStart ? 1 : 0 );
 						}
