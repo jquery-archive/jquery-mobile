@@ -293,9 +293,9 @@
 				this.activeIndex = newActiveIndex !== undefined ? newActiveIndex : this.activeIndex;
 
 				if( back ) {
-					(opts.either || opts.isBack)( back );
+					( opts.either || opts.isBack )( true );
 				} else if( forward ) {
-					(opts.either || opts.isForward)( back );
+					( opts.either || opts.isForward )( false );
 				}
 			},
 
