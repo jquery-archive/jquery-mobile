@@ -127,6 +127,32 @@
 		same( mua( "?foo=1&bar=2#spaz",                          p5 ), "http://jqm.com/test.php?foo=1&bar=2#spaz", "query relative and fragment - absolute root" );
 	});
 
+	// https://github.com/jquery/jquery-mobile/issues/2362
+	test( "ipv6 host support", function(){
+		// http://www.ietf.org/rfc/rfc2732.txt ipv6 examples for tests
+		// most definitely not comprehensive
+		var	ipv6_1 = "http://[FEDC:BA98:7654:3210:FEDC:BA98:7654:3210]:80/index.html",
+			ipv6_2 = "http://[1080:0:0:0:8:800:200C:417A]/index.html",
+			ipv6_3 = "http://[3ffe:2a00:100:7031::1]",
+			ipv6_4 = "http://[1080::8:800:200C:417A]/foo",
+			ipv6_5 = "http://[::192.9.5.5]/ipng",
+			ipv6_6 = "http://[::FFFF:129.144.52.38]:80/index.html",
+			ipv6_7 = "http://[2010:836B:4179::836B:4179]",
+		  fromIssue = "http://[3fff:cafe:babe::]:443/foo";
+
+		same( $.mobile.path.parseUrl(ipv6_1).host, "[FEDC:BA98:7654:3210:FEDC:BA98:7654:3210]:80");
+		same( $.mobile.path.parseUrl(ipv6_1).hostname, "[FEDC:BA98:7654:3210:FEDC:BA98:7654:3210]");
+		same( $.mobile.path.parseUrl(ipv6_2).host, "[1080:0:0:0:8:800:200C:417A]");
+		same( $.mobile.path.parseUrl(ipv6_3).host, "[3ffe:2a00:100:7031::1]");
+		same( $.mobile.path.parseUrl(ipv6_4).host, "[1080::8:800:200C:417A]");
+		same( $.mobile.path.parseUrl(ipv6_5).host, "[::192.9.5.5]");
+		same( $.mobile.path.parseUrl(ipv6_6).host, "[::FFFF:129.144.52.38]:80");
+		same( $.mobile.path.parseUrl(ipv6_6).hostname, "[::FFFF:129.144.52.38]");
+		same( $.mobile.path.parseUrl(ipv6_7).host, "[2010:836B:4179::836B:4179]");
+		same( $.mobile.path.parseUrl(fromIssue).host, "[3fff:cafe:babe::]:443");
+		same( $.mobile.path.parseUrl(fromIssue).hostname, "[3fff:cafe:babe::]");
+	});
+
 	test( "path.clean is working properly", function(){
 		var localroot = location.protocol + "//" + location.host + location.pathname,
 			remoteroot = "http://google.com/",
