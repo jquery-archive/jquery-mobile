@@ -206,7 +206,7 @@
 				var self = this,
 				select = this.element,
 				isMultiple = this.isMultiple,
-				options = this.optionElems = select.find( "option" ),
+				options = this.optionElems = this.selectOptions = select.find( "option" ),
 				selected = this.selected(),
 				// return an array of all selected index's
 				indicies = this.selectedIndices();
