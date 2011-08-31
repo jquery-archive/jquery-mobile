@@ -227,7 +227,7 @@
 							var item = $( this );
 
 							// Aria selected attr
-							item.find( "a" ).attr( "aria-selected", true );
+							item.attr( "aria-selected", true );
 
 							// Multiple selects: add the "on" checkbox state to the icon
 							if ( self.isMultiple ) {
