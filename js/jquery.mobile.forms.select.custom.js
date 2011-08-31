@@ -224,7 +224,7 @@
 					.each(function( i ) {
 
 						if ( $.inArray( i, indicies ) > -1 ) {
-							var item = $( this ).addClass( $.mobile.activeBtnClass );
+							var item = $( this );
 
 							// Aria selected attr
 							item.find( "a" ).attr( "aria-selected", true );
