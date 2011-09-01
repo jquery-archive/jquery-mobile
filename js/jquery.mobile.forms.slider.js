@@ -140,16 +140,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 						if ( !self.userModified ) {
 							//tap occurred, but value didn't change. flip it!
+							handle.addClass( "ui-slider-handle-snapping" );
 							self.refresh( !self.beforeStart ? 1 : 0 );
 						}
-						var curval = val();
-						var snapped = Math.round( curval / ( max - min ) * 100 );
-						handle
-							.addClass( "ui-slider-handle-snapping" )
-							.css( "left", snapped + "%" )
-							.animationComplete( function() {
-								handle.removeClass( "ui-slider-handle-snapping" );
-							});
 					}
 					return false;
 				}
