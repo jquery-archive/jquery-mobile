@@ -9,3 +9,5 @@ combine/
 compiled/
 gitstatus.log
 refreshCDN
+*.swp
+.gitignore
