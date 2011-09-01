@@ -945,10 +945,15 @@ a.ui-btn.ui-btn-inline.ui-btn-corner-all .ui-btn-inner{
   border-radius:          2em;
 }
 
-/* Give the search input a stronger border */
-.ui-input-search{
-  border: 1px solid #999;
+.ui-input-search
+{
+  padding:0 30px;
+  width:77%;
+  background-position:8px 50%;
+  border:1px solid #999;
+  background-repeat:no-repeat
 }
+
 
 /* Adjustment for indicator icons inside split list & Search Input - Well I hope so :) */
 .ui-input-search .ui-btn-icon-notext,
