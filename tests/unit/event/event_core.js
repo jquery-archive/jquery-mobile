@@ -241,6 +241,95 @@
 		}, 40);
 	});
 
+	asyncTest( "tap event propagates up DOM tree", function(){
+		var tap = 0,
+			$qf = $( "#qunit-fixture" ),
+			$doc = $( document ),
+			docTapCB = function(){
+				same(++tap, 2, "document tap callback called once after #qunit-fixture callback");
+			};
+
+		$qf.bind( "tap", function() {
+			same(++tap, 1, "#qunit-fixture tap callback called once");
+		});
+
+		$doc.bind( "tap", docTapCB );
+
+		$qf.trigger( "vmousedown" )
+			.trigger( "vmouseup" )
+			.trigger( "vclick" );
+
+		// tap binding should be triggered twice, once for
+		// #qunit-fixture, and a second time for document.
+		same( tap, 2, "final tap callback count is 2" );
+
+		$doc.unbind( "tap", docTapCB );
+
+		start();
+	});
+
+	asyncTest( "stopPropagation() prevents tap from propagating up DOM tree", function(){
+		var tap = 0,
+			$qf = $( "#qunit-fixture" ),
+			$doc = $( document ),
+			docTapCB = function(){
+				ok(false, "tap should NOT be triggered on document");
+			};
+
+		$qf.bind( "tap", function(e) {
+			same(++tap, 1, "tap callback 1 triggered once on #qunit-fixture");
+			e.stopPropagation();
+		})
+		.bind( "tap", function(e) {
+			same(++tap, 2, "tap callback 2 triggered once on #qunit-fixture");
+		});
+
+		$doc.bind( "tap", docTapCB);
+
+		$qf.trigger( "vmousedown" )
+			.trigger( "vmouseup" )
+			.trigger( "vclick" );
+
+		// tap binding should be triggered twice.
+		same( tap, 2, "final tap count is 2" );
+
+		$doc.unbind( "tap", docTapCB );
+
+		start();
+	});
+
+	asyncTest( "stopImmediatePropagation() prevents tap propagation and execution of 2nd handler", function(){
+		var tap = 0,
+			$cf = $( "#qunit-fixture" );
+			$doc = $( document ),
+			docTapCB = function(){
+				ok(false, "tap should NOT be triggered on document");
+			};
+
+		// Bind 2 tap callbacks on qunit-fixture. Only the first
+		// one should ever be called.
+		$cf.bind( "tap", function(e) {
+			same(++tap, 1, "tap callback 1 triggered once on #qunit-fixture");
+			e.stopImmediatePropagation();
+		})
+		.bind( "tap", function(e) {
+			ok(false, "tap callback 2 should NOT be triggered on #qunit-fixture");
+		});
+
+		$doc.bind( "tap", docTapCB);
+
+		$cf.trigger( "vmousedown" )
+			.trigger( "vmouseup" )
+			.trigger( "vclick" );
+
+		// tap binding should be triggered once.
+		same( tap, 1, "final tap count is 1" );
+
+		$doc.unbind( "tap", docTapCB );
+
+		start();
+	});
+
 	var swipeTimedTest = function(opts){
 		var swipe = false;
 
