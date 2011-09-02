@@ -14,20 +14,15 @@
 		setup: function(){
 
 			// ensure bindings are removed
-			$.each(events, function(i, name){
-				$.each([$("#qunit-fixture"),
-					$($.event.special.scrollstart),
-					$($.event.special.tap),
-					$($.event.special.tap),
-					$($.event.special.swipe)], function(j, obj){
-						obj.unbind(name);
-					});
+			$.each(events + "vmouseup vmousedown".split(" "), function(i, name){
+				$("#qunit-fixture").unbind();
 			});
 
 			//NOTE unmock
 			Math.abs = absFn;
 			$.Event.prototype.originalEvent = originalEventFn;
 			$.Event.prototype.preventDefault = preventDefaultFn;
+			$.Event.prototype.touches = [{pageX: 1, pageY: 1 }];
 
 			$($.mobile.pageContainer).unbind( "throttledresize" );
 		}
@@ -43,7 +38,7 @@
 			$.testHelper.reloadLib(libName);
 
 			$.each(events, function( i, name ) {
-				ok($.fn[name] !== undefined, name + "is not undefined");
+				ok($.fn[name] !== undefined, name + " is not undefined");
 			});
 		});
 	});
@@ -88,40 +83,40 @@
 		expect( 1 );
 		$.event.special.scrollstart.enabled = false;
 
-		$($.event.special.scrollstart).bind("scrollstart", function(){
+		$( "#qunit-fixture" ).bind("scrollstart", function(){
 			ok(false, "scrollstart fired");
 		});
 
-		$($.event.special.scrollstart).bind("touchmove", function(){
+		$( "#qunit-fixture" ).bind("touchmove", function(){
 			ok(true, "touchmove fired");
 			start();
 		});
 
-		$($.event.special.scrollstart).trigger("touchmove");
+		$( "#qunit-fixture" ).trigger("touchmove");
 	});
 
 	asyncTest( "scrollstart setup binds a function that triggers scroll start when enabled", function(){
 		$.event.special.scrollstart.enabled = true;
 
-		$($.event.special.scrollstart).bind("scrollstart", function(){
+		$( "#qunit-fixture" ).bind("scrollstart", function(){
 			ok(true, "scrollstart fired");
 			start();
 		});
 
-		$($.event.special.scrollstart).trigger("touchmove");
+		$( "#qunit-fixture" ).trigger("touchmove");
 	});
 
 	asyncTest( "scrollstart setup binds a function that triggers scroll stop after 50 ms", function(){
 		var triggered = false;
 		$.event.special.scrollstart.enabled = true;
 
-		$($.event.special.scrollstart).bind("scrollstop", function(){
+		$( "#qunit-fixture" ).bind("scrollstop", function(){
 			triggered = true;
 		});
 
 		ok(!triggered, "not triggered");
 
-		$($.event.special.scrollstart).trigger("touchmove");
+		$( "#qunit-fixture" ).trigger("touchmove");
 
 		setTimeout(function(){
 			ok(triggered, "triggered");
@@ -144,11 +139,11 @@
 
 		forceTouchSupport();
 
-		$($.event.special.tap).bind("taphold", function(){
+		$( "#qunit-fixture" ).bind("taphold", function(){
 			taphold = true;
 		});
 
-		$($.event.special.tap).trigger("vmousedown");
+		$( "#qunit-fixture" ).trigger("vmousedown");
 
 		setTimeout(function(){
 			ok(taphold);
@@ -172,17 +167,17 @@
 		mockAbs(100);
 
 		//NOTE record taphold event
-		$($.event.special.tap).bind("taphold", function(){
+		$( "#qunit-fixture" ).bind("taphold", function(){
 			ok(false, "taphold fired");
 			taphold = true;
 		});
 
 		//NOTE start the touch events
-		$($.event.special.tap).trigger("vmousedown");
+		$( "#qunit-fixture" ).trigger("vmousedown");
 
 		//NOTE fire touchmove to push back taphold
 		setTimeout(function(){
-			$($.event.special.tap).trigger("vmousecancel");
+			$( "#qunit-fixture" ).trigger("vmousecancel");
 		}, 100);
 
 		//NOTE verify that the taphold hasn't been fired
@@ -203,11 +198,11 @@
 		forceTouchSupport();
 
 		//NOTE record the tap event
-		$($.event.special.tap).bind("tap", checkTap);
+		$( "#qunit-fixture" ).bind("tap", checkTap);
 
-		$($.event.special.tap).trigger("vmousedown");
-		$($.event.special.tap).trigger("vmouseup");
-		$($.event.special.tap).trigger("vclick");
+		$( "#qunit-fixture" ).trigger("vmousedown");
+		$( "#qunit-fixture" ).trigger("vmouseup");
+		$( "#qunit-fixture" ).trigger("vclick");
 
 		setTimeout(function(){
 			start();
@@ -220,7 +215,7 @@
 		forceTouchSupport();
 
 		//NOTE record tap event
-		$($.event.special.tap).bind("tap", function(){
+		$( "#qunit-fixture" ).bind("tap", function(){
 			ok(false, "tap fired");
 			tap = true;
 		});
@@ -229,12 +224,12 @@
 		mockAbs(100);
 
 		//NOTE start and move right away
-		$($.event.special.tap).trigger("touchstart");
-		$($.event.special.tap).trigger("touchmove");
+		$( "#qunit-fixture" ).trigger("touchstart");
+		$( "#qunit-fixture" ).trigger("touchmove");
 
 		//NOTE end touch sequence after 20 ms
 		setTimeout(function(){
-			$($.event.special.tap).trigger("touchend");
+			$( "#qunit-fixture" ).trigger("touchend");
 		}, 20);
 
 		setTimeout(function(){
@@ -248,7 +243,7 @@
 
 		forceTouchSupport();
 
-		$($.event.special.swipe).bind('swipe', function(){
+		$( "#qunit-fixture" ).bind('swipe', function(){
 			swipe = true;
 		});
 
@@ -257,15 +252,15 @@
 			touches: false
 		};
 
-		$($.event.special.swipe).trigger("touchstart");
+		$( "#qunit-fixture" ).trigger("touchstart");
 
 		//NOTE make sure the coordinates are calculated within range
 		//		 to be registered as a swipe
 		mockAbs(opts.coordChange);
 
 		setTimeout(function(){
-			$($.event.special.swipe).trigger("touchmove");
-			$($.event.special.swipe).trigger("touchend");
+			$( "#qunit-fixture" ).trigger("touchmove");
+			$( "#qunit-fixture" ).trigger("touchend");
 		}, opts.timeout + 100);
 
 		setTimeout(function(){
@@ -298,7 +293,7 @@
 		forceTouchSupport();
 
 		// ensure the swipe custome event is setup
-		$($.event.special.swipe).bind('swipe', function(){});
+		$( "#qunit-fixture" ).bind('swipe', function(){});
 
 		//NOTE bypass the trigger source check
 		$.Event.prototype.originalEvent = {
@@ -312,8 +307,8 @@
 
 		mockAbs(11);
 
-		$($.event.special.swipe).trigger("touchstart");
-		$($.event.special.swipe).trigger("touchmove");
+		$( "#qunit-fixture" ).trigger("touchstart");
+		$( "#qunit-fixture" ).trigger("touchmove");
 	});
 
 	asyncTest( "move handler returns when touchstart has been fired since touchstop", function(){
@@ -327,12 +322,12 @@
 		forceTouchSupport();
 
 		// ensure the swipe custome event is setup
-		$($.event.special.swipe).bind('swipe', function(){});
+		$( "#qunit-fixture" ).bind('swipe', function(){});
 
-		$($.event.special.swipe).trigger("touchstart");
-		$($.event.special.swipe).trigger("touchend");
+		$( "#qunit-fixture" ).trigger("touchstart");
+		$( "#qunit-fixture" ).trigger("touchend");
 
-		$($.event.special.swipe).bind("touchmove", function(){
+		$( "#qunit-fixture" ).bind("touchmove", function(){
 			ok(true, "touchmove bound functions are fired");
 			start();
 		});
@@ -341,7 +336,7 @@
 			ok(false, "shouldn't compare coordinates");
 		};
 
-		$($.event.special.swipe).trigger("touchmove");
+		$( "#qunit-fixture" ).trigger("touchmove");
 	});
 
 	var nativeSupportTest = function(opts){
