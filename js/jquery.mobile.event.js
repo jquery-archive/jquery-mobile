@@ -108,7 +108,7 @@ $.event.special.tap = {
 				if ( touching ) {
 					triggerCustomEvent( thisObject, "taphold", event );
 				}
-			}, 750 );
+			}, $.mobile.tapholdDuration );
 		});
 	}
 };
