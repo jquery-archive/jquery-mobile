@@ -22,6 +22,9 @@
 			Math.abs = absFn;
 			$.Event.prototype.originalEvent = originalEventFn;
 			$.Event.prototype.preventDefault = preventDefaultFn;
+
+			// make sure the event objects respond to touches to simulate
+			// the collections existence in non touch enabled test browsers
 			$.Event.prototype.touches = [{pageX: 1, pageY: 1 }];
 
 			$($.mobile.pageContainer).unbind( "throttledresize" );
