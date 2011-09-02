@@ -49,7 +49,9 @@
 
 			menuPageContent = menuPage.find( ".ui-content" ),
 
-			menuPageClose = menuPage.find( ".ui-header a" );
+			menuPageClose = menuPage.find( ".ui-header a" ),
+			
+			itemTheme = null;
 
 
 		$.extend( widget, {
@@ -75,6 +77,8 @@
 
 			build: function() {
 				var self = this;
+
+				itemTheme = self.select.jqmData("itemTheme") || self.theme;
 
 				// Create list from select, update state
 				self.refresh();
@@ -426,7 +430,7 @@
 						extraAttrs.push( "aria-disabled='true'" );
 					}
 
-					lis.push( "<li data-" + $.mobile.ns + "option-index='" + i + "' data-" + $.mobile.ns + "icon='"+ dataIcon +"' class='"+ classes.join(" ") + "' " + extraAttrs.join(" ") +">"+ anchor +"</li>" );
+					lis.push( "<li data-" + $.mobile.ns + "option-index='" + i + "' data-" + $.mobile.ns + "icon='"+ dataIcon +"' data-" + $.mobile.ns + "theme='" + itemTheme + "' class='"+ classes.join(" ") + "' " + extraAttrs.join(" ") +">"+ anchor +"</li>" );
 				});
 
 				self.list.html( lis.join(" ") );
