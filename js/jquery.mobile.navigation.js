@@ -597,7 +597,7 @@
 		settings.pageContainer = settings.pageContainer || $.mobile.pageContainer;
 
 		// Check to see if the page already exists in the DOM.
-		page = settings.pageContainer.children( ":jqmData(url='" + dataUrl + "')" );
+		page = settings.pageContainer.children( ":jqmData(url='" + dataUrl.replace(/\'/g, "%27").replace(/\)/g, "%29") + "')" );
 
 		// Reset base to the default document base.
 		if ( base ) {
