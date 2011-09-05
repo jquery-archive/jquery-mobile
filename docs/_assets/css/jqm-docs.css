@@ -6,7 +6,7 @@ cobblers, shoes,
 
 body { background: #dddddd; }
 
-.ui-mobile #jqm-home {  background: #e5e5e5 url(../images/jqm-sitebg.png) top center repeat-x; }
+.ui-mobile .type-home {  background: #e5e5e5 url(../images/jqm-sitebg.png) top center repeat-x; }
 .ui-mobile #jqm-homeheader { padding: 40px 10px 0; text-align: center;  margin: 0 auto; }
 .ui-mobile #jqm-homeheader h1 { margin: 0 0 ; }
 .ui-mobile #jqm-homeheader p { margin: .3em 0 0; line-height: 1.3; font-size: .9em; font-weight: bold; color: #666; }

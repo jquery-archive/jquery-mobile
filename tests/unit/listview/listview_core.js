@@ -4,11 +4,13 @@
 
 // TODO split out into seperate test files
 (function($){
+  var home = $.mobile.path.parseUrl( location.href ).pathname;
 
 	$.mobile.defaultTransition = "none";
-	module('Basic Linked list', {
+
+	module( "Basic Linked list", {
 		setup: function(){
-			$.testHelper.openPage("#basic-linked-test");
+			$.testHelper.openPage( "#basic-linked-test" );
 		}
 	});
 
@@ -48,6 +50,31 @@
 
 			function(){
 				ok($('#basic-linked-test').hasClass('ui-page-active'));
+				start();
+			}
+		]);
+	});
+
+	asyncTest( "Presence of ui-li-has- classes", function(){
+		$.testHelper.pageSequence( [
+			function() {
+				$.testHelper.openPage( "#ui-li-has-test" );
+			},
+
+			function() {
+				var page = $( ".ui-page-active" ),
+					items = page.find( "li" );
+
+				ok(  items.eq( 0 ).hasClass( "ui-li-has-count"), "First LI should have ui-li-has-count class" );
+				ok(  items.eq( 0 ).hasClass( "ui-li-has-arrow"), "First LI should have ui-li-has-arrow class" );
+				ok( !items.eq( 1 ).hasClass( "ui-li-has-count"), "Second LI should NOT have ui-li-has-count class" );
+				ok(  items.eq( 1 ).hasClass( "ui-li-has-arrow"), "Second LI should have ui-li-has-arrow class" );
+				ok( !items.eq( 2 ).hasClass( "ui-li-has-count"), "Third LI should NOT have ui-li-has-count class" );
+				ok( !items.eq( 2 ).hasClass( "ui-li-has-arrow"), "Third LI should NOT have ui-li-has-arrow class" );
+				ok(  items.eq( 3 ).hasClass( "ui-li-has-count"), "Fourth LI should have ui-li-has-count class" );
+				ok( !items.eq( 3 ).hasClass( "ui-li-has-arrow"), "Fourth LI should NOT have ui-li-has-arrow class" );
+				ok( !items.eq( 4 ).hasClass( "ui-li-has-count"), "Fifth LI should NOT have ui-li-has-count class" );
+				ok( !items.eq( 4 ).hasClass( "ui-li-has-arrow"), "Fifth LI should NOT have ui-li-has-arrow class" );
 				start();
 			}
 		]);
@@ -188,7 +215,7 @@
 	asyncTest( "changes to the read only page when hash is changed", function() {
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage("#read-only-list-test")
+				$.testHelper.openPage("#read-only-list-test");
 			},
 
 			function(){
@@ -563,6 +590,8 @@
 		ok( $("#enhancetest").trigger("create").find(".ui-listview").length, "enhancements applied" );
 	});
 
+	module( "Cached Linked List" );
+
 	var findNestedPages = function(selector){
 		return $( selector + " #topmost" ).listview( 'childPages' );
 	};
@@ -571,7 +600,7 @@
 		$.testHelper.pageSequence([
 			function(){
 				//reset for relative url refs
-				$.testHelper.openPage( "#" + location.pathname );
+				$.testHelper.openPage( "#" + home );
 			},
 
 			function(){
@@ -580,7 +609,11 @@
 
 			function(){
 				ok( findNestedPages( "#uncached-nested-list" ).length > 0, "verify that there are nested pages" );
-				$.testHelper.openPage( "#" + location.pathname + "cache-tests/clear.html" );
+				$.testHelper.openPage( "#" + home );
+			},
+
+			function() {
+				$.testHelper.openPage( "#cache-tests/clear.html" );
 			},
 
 			function(){
@@ -595,7 +628,7 @@
 		$.testHelper.pageSequence([
 			function(){
 				//reset for relative url refs
-				$.testHelper.openPage( "#" + location.pathname );
+				$.testHelper.openPage( "#" + home );
 			},
 
 			function(){
@@ -604,7 +637,11 @@
 
 			function(){
 				ok( findNestedPages( "#cached-nested-list" ).length > 0, "verify that there are nested pages" );
-				$.testHelper.openPage( "#" + location.pathname + "cache-tests/clear.html" );
+				$.testHelper.openPage( "#" + home );
+			},
+
+			function() {
+				$.testHelper.openPage( "#cache-tests/clear.html" );
 			},
 
 			function(){
@@ -618,7 +655,7 @@
 		$.testHelper.pageSequence([
 			function(){
 				//reset for relative url refs
-				$.testHelper.openPage( "#" + location.pathname );
+				$.testHelper.openPage( "#" + home );
 			},
 
 			function(){
@@ -627,7 +664,11 @@
 
 			function(){
 				same( $("#cached-nested-list").length, 1 );
-				$.testHelper.openPage("#" + location.pathname + "cache-tests/clear.html");
+				$.testHelper.openPage( "#" + home );
+			},
+
+			function() {
+				$.testHelper.openPage( "#cache-tests/clear.html" );
 			},
 
 			function(){
@@ -642,6 +683,11 @@
 		expect( listPage.find("li").length );
 
 		$.testHelper.pageSequence( [
+			function(){
+				//reset for relative url refs
+				$.testHelper.openPage( "#" + home );
+			},
+
 			function() {
 				$.testHelper.openPage( "#search-filter-test" );
 			},
@@ -656,6 +702,30 @@
 				listPage.find( "input" ).val( "foo" ).trigger( "change" );
 
 				//NOTE beware a poossible issue with timing here
+				start();
+			}
+		]);
+	});
+
+	asyncTest( "nested pages hash key is always in the hash (replaceState)", function(){
+		$.testHelper.pageSequence([
+			function(){
+				//reset for relative url refs
+				$.testHelper.openPage( "#" + home );
+			},
+
+			function(){
+				// https://github.com/jquery/jquery-mobile/issues/1617
+				$.testHelper.openPage("#nested-lists-test");
+			},
+
+			function(){
+				// Click on the link of the third li element
+				$('.ui-page-active li:eq(2) a:eq(0)').click();
+			},
+
+			function(){
+				ok( location.hash.search($.mobile.subPageUrlKey) >= 0 );
 				start();
 			}
 		]);

@@ -17,6 +17,13 @@ $(function() {
 				// establish a timeout for a given suite in case of async tests hanging
 				self.testTimer = setTimeout( self.onTimeout, self.testTimeout );
 
+				// it might be a redirect with query params for push state
+				// tests skip this call and expect another
+				if( !self.frame.QUnit ) {
+					self.$frameElem.one( "load", self.onFrameLoad );
+					return;
+				}
+
 				// when the QUnit object reports done in the iframe
 				// run the onFrameDone method
 				self.frame.QUnit.done = self.onFrameDone;

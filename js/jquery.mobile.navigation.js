@@ -38,7 +38,7 @@
 			//    [15]: ?msg=1234&type=unread
 			//    [16]: #msg-content
 			//
-			urlParseRE: /^(((([^:\/#\?]+:)?(?:\/\/((?:(([^:@\/#\?]+)(?:\:([^:@\/#\?]+))?)@)?(([^:\/#\?]+)(?:\:([0-9]+))?))?)?)?((\/?(?:[^\/\?#]+\/+)*)([^\?#]*)))?(\?[^#]+)?)(#.*)?/,
+			urlParseRE: /^(((([^:\/#\?]+:)?(?:\/\/((?:(([^:@\/#\?]+)(?:\:([^:@\/#\?]+))?)@)?(([^:\/#\?\]\[]+|\[[^\/\]@#?]+\])(?:\:([0-9]+))?))?)?)?((\/?(?:[^\/\?#]+\/+)*)([^\?#]*)))?(\?[^#]+)?)(#.*)?/,
 
 			//Parse a URL into a structure that allows easy access to
 			//all of the URL components by name.
@@ -237,7 +237,7 @@
 		//urlHistory is purely here to make guesses at whether the back or forward button was clicked
 		//and provide an appropriate transition
 		urlHistory = {
-			// Array of pages that are visited during a single page load. 
+			// Array of pages that are visited during a single page load.
 			// Each has a url and optional transition, title, and pageUrl (which represents the file path, in cases where URL is obscured, such as dialogs)
 			stack: [],
 
@@ -258,13 +258,13 @@
 			},
 
 			// addNew is used whenever a new page is added
-			addNew: function( url, transition, title, pageUrl ) {
+			addNew: function( url, transition, title, pageUrl, role ) {
 				//if there's forward history, wipe it
 				if( urlHistory.getNext() ) {
 					urlHistory.clearForward();
 				}
 
-				urlHistory.stack.push( {url : url, transition: transition, title: title, pageUrl: pageUrl } );
+				urlHistory.stack.push( {url : url, transition: transition, title: title, pageUrl: pageUrl, role: role } );
 
 				urlHistory.activeIndex = urlHistory.stack.length - 1;
 			},
@@ -275,7 +275,7 @@
 			},
 
 			directHashChange: function( opts ) {
-				var back , forward, newActiveIndex;
+				var back , forward, newActiveIndex, prev = this.getActive();
 
 				// check if url isp in history and if it's ahead or behind current page
 				$.each( urlHistory.stack, function( i, historyEntry ) {
@@ -293,9 +293,9 @@
 				this.activeIndex = newActiveIndex !== undefined ? newActiveIndex : this.activeIndex;
 
 				if( back ) {
-					opts.isBack();
+					( opts.either || opts.isBack )( true );
 				} else if( forward ) {
-					opts.isForward();
+					( opts.either || opts.isForward )( false );
 				}
 			},
 
@@ -512,6 +512,8 @@
 	//history stack
 	$.mobile.urlHistory = urlHistory;
 
+	$.mobile.dialogHashKey = dialogHashKey;
+
 	//default non-animation transition handler
 	$.mobile.noneTransitionHandler = function( name, reverse, $toPage, $fromPage ) {
 		if ( $fromPage ) {
@@ -616,18 +618,18 @@
 		}
 
 		if ( settings.showLoadMsg ) {
-			
+
 			// This configurable timeout allows cached pages a brief delay to load without showing a message
 			var loadMsgDelay = setTimeout(function(){
 					$.mobile.showPageLoadingMsg();
 				}, settings.loadMsgDelay ),
-				
+
 				// Shared logic for clearing timeout and removing message.
 				hideMsg = function(){
-					
+
 					// Stop message show timer
 					clearTimeout( loadMsgDelay );
-					
+
 					// Hide loading message
 					$.mobile.hidePageLoadingMsg();
 				};
@@ -745,7 +747,7 @@
 
 					// Remove loading message.
 					if ( settings.showLoadMsg ) {
-						
+
 						// Remove loading message.
 						hideMsg();
 
@@ -917,7 +919,11 @@
 		// for the dialog content to be used in the hash. Instead, we want
 		// to append the dialogHashKey to the url of the current page.
 		if ( isDialog && active ) {
-			url = active.url + dialogHashKey;
+			// on the initial page load active.url is undefined and in that case should
+			// be an empty string. Moving the undefined -> empty string back into
+			// urlHistory.addNew seemed imprudent given undefined better represents
+			// the url state
+			url = ( active.url || "" ) + dialogHashKey;
 		}
 
 		// Set the location hash.
@@ -936,7 +942,7 @@
 
 		//add page to history stack if it's not back or forward
 		if( !historyDir ) {
-			urlHistory.addNew( url, settings.transition, pageTitle, pageUrl );
+			urlHistory.addNew( url, settings.transition, pageTitle, pageUrl, settings.role );
 		}
 
 		//set page title
@@ -1068,6 +1074,7 @@
 			var link = findClosestLink( event.target );
 			if ( link ) {
 				if ( path.parseUrl( link.getAttribute( "href" ) || "#" ).hash !== "#" ) {
+					removeActiveLinkClass( true );
 					$activeClickedLink = $( link ).closest( ".ui-btn" ).not( ".ui-disabled" );
 					$activeClickedLink.addClass( $.mobile.activeBtnClass );
 					$( "." + $.mobile.activePageClass + " .ui-btn" ).not( link ).blur();
@@ -1179,12 +1186,19 @@
 			});
 		} );
 
-		//hashchange event handler
-		$window.bind( "hashchange", function( e, triggered ) {
+		$.mobile._handleHashChange = function( hash ) {
 			//find first page via hash
-			var to = path.stripHash( location.hash ),
+			var to = path.stripHash( hash ),
 				//transition is false if it's the first page, undefined otherwise (and may be overridden by default)
-				transition = $.mobile.urlHistory.stack.length === 0 ? "none" : undefined;
+				transition = $.mobile.urlHistory.stack.length === 0 ? "none" : undefined,
+
+				// default options for the changPage calls made after examining the current state
+				// of the page and the hash
+				changePageOptions = {
+					transition: transition,
+					changeHash: false,
+					fromHashChange: true
+				};
 
 			//if listening is disabled (either globally or temporarily), or it's a dialog hash
 			if( !$.mobile.hashListeningEnabled || urlHistory.ignoreNextHashChange ) {
@@ -1193,8 +1207,7 @@
 			}
 
 			// special case for dialogs
-			if( urlHistory.stack.length > 1 &&
-					to.indexOf( dialogHashKey ) > -1 ) {
+			if( urlHistory.stack.length > 1 && to.indexOf( dialogHashKey ) > -1 ) {
 
 				// If current active page is not a dialog skip the dialog and continue
 				// in the same direction
@@ -1210,22 +1223,43 @@
 					// prevent changepage
 					return;
 				} else {
-					var setTo = function() { to = $.mobile.urlHistory.getActive().pageUrl; };
 					// if the current active page is a dialog and we're navigating
 					// to a dialog use the dialog objected saved in the stack
-					urlHistory.directHashChange({	currentUrl: to, isBack: setTo, isForward: setTo	});
+					urlHistory.directHashChange({
+						currentUrl: to,
+
+						// regardless of the direction of the history change
+						// do the following
+						either: function( isBack ) {
+							var active = $.mobile.urlHistory.getActive();
+
+							to = active.pageUrl;
+
+							// make sure to set the role, transition and reversal
+							// as most of this is lost by the domCache cleaning
+							$.extend( changePageOptions, {
+								role: active.role,
+								transition:	 active.transition,
+								reverse: isBack
+							});
+						}
+					});
 				}
 			}
-			
+
 			//if to is defined, load it
 			if ( to ) {
 				to = ( typeof to === "string" && !path.isPath( to ) ) ? ( '#' + to ) : to;
-				$.mobile.changePage( to, { transition: transition, changeHash: false, fromHashChange: true } );
+				$.mobile.changePage( to, changePageOptions );
+			}	else {
+				//there's no hash, go to the first page in the dom
+				$.mobile.changePage( $.mobile.firstPage, changePageOptions );
 			}
-			//there's no hash, go to the first page in the dom
-			else {
-				$.mobile.changePage( $.mobile.firstPage, { transition: transition, changeHash: false, fromHashChange: true } );
-			}
+		};
+
+		//hashchange event handler
+		$window.bind( "hashchange", function( e, triggered ) {
+			$.mobile._handleHashChange( location.hash );
 		});
 
 		//set page min-heights to be device specific

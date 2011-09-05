@@ -44,14 +44,14 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 		// TODO class has to be defined in markup
 		item.find( "h1, h2, h3, h4, h5, h6" ).addClass( "ui-li-heading" ).end()
-		.find( "p, dl" ).addClass( "ui-li-desc" ).end()
-		.find( ">img:eq(0), .ui-link-inherit>img:eq(0)" ).addClass( "ui-li-thumb" ).each(function() {
-			item.addClass( $(this).is( ".ui-li-icon" ) ? "ui-li-has-icon" : "ui-li-has-thumb" );
-		}).end()
-		.find( ".ui-li-aside" ).each(function() {
-			var $this = $(this);
-			$this.prependTo( $this.parent() ); //shift aside to front for css float
-		});
+			.find( "p, dl" ).addClass( "ui-li-desc" ).end()
+			.find( ">img:eq(0), .ui-link-inherit>img:eq(0)" ).addClass( "ui-li-thumb" ).each(function() {
+				item.addClass( $(this).is( ".ui-li-icon" ) ? "ui-li-has-icon" : "ui-li-has-thumb" );
+			}).end()
+			.find( ".ui-li-aside" ).each(function() {
+				var $this = $(this);
+				$this.prependTo( $this.parent() ); //shift aside to front for css float
+			});
 	},
 
 	_removeCorners: function( li, which ) {
@@ -145,6 +145,10 @@ $.widget( "mobile.listview", $.mobile.widget, {
 						icon: a.length > 1 || icon === false ? false : icon || "arrow-r",
 						theme: itemTheme
 					});
+
+					if ( ( icon != false ) && ( a.length == 1 ) ) {
+						item.addClass( "ui-li-has-arrow" );
+					}
 
 					a.first().addClass( "ui-link-inherit" );
 

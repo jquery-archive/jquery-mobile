@@ -16,6 +16,18 @@
 			}
 		},
 
+		// TODO prevent test suite loads when the browser doesn't support push state
+		// and push-state false is defined.
+		setPushStateFor: function( libs ) {
+			if( $.support.pushState && location.search.indexOf( "push-state" ) >= 0 ) {
+				$.support.pushState = false;
+			}
+
+			$.each(libs, function(i, l) {
+				$( "<script>", { src: l }).appendTo("head");
+			});
+		},
+
 		reloads: {},
 
 		reloadLib: function(libName){
@@ -26,8 +38,8 @@
 				};
 			}
 
-			var	lib = this.reloads[libName].lib.clone(),
-			    src = lib.attr('src');
+			var lib = this.reloads[libName].lib.clone(),
+				src = lib.attr('src');
 
 			//NOTE append "cache breaker" to force reload
 			lib.attr('src', src + "?" + this.reloads[libName].count++);
@@ -116,6 +128,17 @@
 
 				return returnVal;
 			};
+		},
+
+		assertUrlLocation: function( args ) {
+			var parts = $.mobile.path.parseUrl( location.href ),
+				pathnameOnward = location.href.replace( parts.domain, "" );
+
+			if( $.support.pushState ) {
+				same( pathnameOnward, args.hashOrPush || args.push, args.report );
+			} else {
+				same( parts.hash, "#" + (args.hashOrPush || args.hash), args.report );
+			}
 		}
 	};
 })(jQuery);
