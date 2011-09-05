@@ -837,6 +837,19 @@
 		// Make sure we have a pageContainer to work with.
 		settings.pageContainer = settings.pageContainer || $.mobile.pageContainer;
 
+		var mpc = settings.pageContainer,
+			bcpEvent = new $.Event( "beforechangepage" ),
+			url = toPage;
+
+		// Let listeners know we're about to change the current page.
+		mpc.trigger( bcpEvent, url, settings );
+		
+		// If the default behavior is prevented, stop here!
+		if( bcpEvent.isDefaultPrevented() ){
+			return;
+		}
+			
+		
 		// If the caller passed us a url, call loadPage()
 		// to make sure it is loaded into the DOM. We'll listen
 		// to the promise object it returns so we know when
@@ -864,8 +877,7 @@
 
 		// The caller passed us a real page DOM element. Update our
 		// internal state and then trigger a transition to the page.
-		var mpc = settings.pageContainer,
-			fromPage = $.mobile.activePage,
+		var fromPage = $.mobile.activePage,
 			url = toPage.jqmData( "url" ),
 			// The pageUrl var is usually the same as url, except when url is obscured as a dialog url. pageUrl always contains the file path
 			pageUrl = url,
@@ -875,9 +887,6 @@
 			historyDir = 0,
 			pageTitle = document.title,
 			isDialog = settings.role === "dialog" || toPage.jqmData( "role" ) === "dialog";
-
-		// Let listeners know we're about to change the current page.
-		mpc.trigger( "beforechangepage" );
 
 		// If we are trying to transition to the same page that we are currently on ignore the request.
 		// an illegal same page request is defined by the current page being the same as the url, as long as there's history
