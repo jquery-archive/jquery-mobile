@@ -71,12 +71,6 @@ $.mobile.addResolutionBreakpoints = function( newbps ) {
 /* on mobileinit, add classes to HTML element
 	and set handlers to update those on orientationchange and resize
 */
-$( document ).bind( "mobileinit.htmlclass", function() {
-	// bind to orientationchange and resize
-	// to add classes to HTML element for min/max breakpoints and orientation
-
-	var ev = $.support.orientation;
-
 	$window.bind( "orientationchange.htmlclass throttledResize.htmlclass", function( event ) {
 
 		// add orientation class to HTML element on flip/resize.
@@ -87,7 +81,6 @@ $( document ).bind( "mobileinit.htmlclass", function() {
 		// add classes to HTML element for min/max breakpoints
 		detectResolutionBreakpoints();
 	});
-});
 
 /* Manually trigger an orientationchange event when the dom ready event fires.
 	This will ensure that any viewport meta tag that may have been injected
