@@ -22,6 +22,17 @@
 .landscape,
 .landscape .ui-page  { min-height: 300px; }
 
+/* native overflow scrolling */
+.ui-mobile.ui-mobile-overflow-scrolling .ui-page {
+	overflow: auto;
+	height: 100%;
+	-webkit-overflow-scrolling: touch;
+	-moz-overflow-scrolling: touch;
+	-o-overflow-scrolling: touch;
+	-ms-overflow-scrolling: touch;
+	overflow-scrolling: touch;
+}
+
 /* loading screen */
 .ui-loading .ui-mobile-viewport { overflow: hidden !important; }
 .ui-loading .ui-loader { display: block; }
