@@ -826,12 +826,6 @@
 			return;
 		}
 
-		// Set the isPageTransitioning flag to prevent any requests from
-		// entering this method while we are in the midst of loading a page
-		// or transitioning.
-
-		isPageTransitioning = true;
-
 		var settings = $.extend( {}, $.mobile.changePage.defaults, options );
 
 		// Make sure we have a pageContainer to work with.
@@ -842,14 +836,19 @@
 			url = toPage;
 
 		// Let listeners know we're about to change the current page.
-		mpc.trigger( bcpEvent, url, settings );
+		mpc.trigger( bcpEvent, { url: url, settings: settings } );
 		
 		// If the default behavior is prevented, stop here!
 		if( bcpEvent.isDefaultPrevented() ){
 			return;
 		}
 			
-		
+		// Set the isPageTransitioning flag to prevent any requests from
+		// entering this method while we are in the midst of loading a page
+		// or transitioning.
+
+		isPageTransitioning = true;
+
 		// If the caller passed us a url, call loadPage()
 		// to make sure it is loaded into the DOM. We'll listen
 		// to the promise object it returns so we know when
