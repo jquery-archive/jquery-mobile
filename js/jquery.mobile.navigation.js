@@ -383,7 +383,14 @@
 	$( document ).bind( "beforechangepage", function(){
 		var active	= $.mobile.urlHistory.getActive();
 		if( active ){
-			active.lastScroll = $( window ).scrollTop();
+			var lastScroll = $( window ).scrollTop();
+			
+			//if the Y location we're scrolling to is less than minScrollBack, let it go for sake of smoothness
+			if( lastScroll < $.mobile.minScrollBack ){
+				lastScroll = $.mobile.defaultHomeScroll;
+			}
+			
+			active.lastScroll = lastScroll;
 		}
 	});
 	
@@ -398,11 +405,6 @@
 
 		// Scroll to top
 		window.scrollTo( 0, $.mobile.defaultHomeScroll );
-
-		//if the Y location we're scrolling to is less than 10px, let it go for sake of smoothness
-		if( toScroll < $.mobile.minScrollBack ){
-			toScroll = 0;
-		}
 
 		if( fromPage ) {
 			//trigger before show/hide events
