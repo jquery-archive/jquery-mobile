@@ -70,7 +70,7 @@ $.extend( $.support, {
 	pushState: "pushState" in history && "replaceState" in history,
 	mediaquery: $.mobile.media( "only all" ),
 	cssPseudoElement: !!propExists( "content" ),
-	overflowScrollingTouch: !!propExists( "overflowScrolling" ),
+	touchOverflow: !!propExists( "overflowScrolling" ),
 	boxShadow: !!propExists( "boxShadow" ) && !bb,
 	scrollTop: ( "pageXOffset" in window || "scrollTop" in document.documentElement || "scrollTop" in fakeBody[ 0 ] ) && !webos,
 	dynamicBaseTag: baseTagTest(),
@@ -119,8 +119,8 @@ if ( !$.support.boxShadow ) {
 }
 
 // For opting into touch overflow scrolling
-if( $.support.overflowScrollingTouch ){
-	$( "html" ).addClass( "ui-mobile-overflow-scrolling" );
+if( $.support.touchOverflow ){
+	$( "html" ).addClass( "ui-mobile-touch-overflow" );
 }
 
 })( jQuery );

@@ -23,7 +23,7 @@
 .landscape .ui-page  { min-height: 300px; }
 
 /* native overflow scrolling */
-.ui-mobile.ui-mobile-overflow-scrolling .ui-page {
+.ui-mobile.ui-mobile-touch-overflow .ui-page {
 	overflow: auto;
 	height: 100%;
 	-webkit-overflow-scrolling: touch;
