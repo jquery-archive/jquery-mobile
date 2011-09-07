@@ -412,8 +412,8 @@
 			var active = $.mobile.urlHistory.getActive();
 			
 			if( active ){
-				var lastScroll = $( window ).scrollTop();
-				
+				var lastScroll = $.support.touchOverflow ? $( ".ui-page-active" ).scrollTop() : $( window ).scrollTop();
+
 				// Set active page's lastScroll prop.
 				// If the Y location we're scrolling to is less than minScrollBack, let it go.
 				active.lastScroll = lastScroll < $.mobile.minScrollBack ? $.mobile.defaultHomeScroll : lastScroll;
@@ -434,19 +434,31 @@
 			toScroll = active.lastScroll || $.mobile.defaultHomeScroll,
 			screenHeight = getScreenHeight();
 
-		// Scroll to top
+		// Scroll to top, hide addr bar
 		window.scrollTo( 0, $.mobile.defaultHomeScroll );
 
 		if( fromPage ) {
 			//trigger before show/hide events
 			fromPage.data( "page" )._trigger( "beforehide", null, { nextPage: toPage } );
 		}
-		toPage
-			.height( screenHeight + toScroll )
-			.data( "page" )._trigger( "beforeshow", null, { prevPage: fromPage || $( "" ) } );
+		
+		if( !$.support.touchOverflow ){
+			toPage.height( screenHeight + toScroll );
+		}	
+		
+		toPage.data( "page" )._trigger( "beforeshow", null, { prevPage: fromPage || $( "" ) } );
 
 		//clear page loader
 		$.mobile.hidePageLoadingMsg();
+		
+		if( $.support.touchOverflow && toScroll ){
+			toPage.addClass( "ui-mobile-pre-transition" );
+			// Send focus to page as it is now display: block
+			reFocus( toPage );
+			
+			//set page's scrollTop to remembered distance
+			toPage.scrollTop( toScroll );
+		}
 
 		//find the transition handler for the specified transition. If there
 		//isn't one in our transitionHandlers dictionary, use the default one.
@@ -455,18 +467,25 @@
 			promise = th( transition, reverse, toPage, fromPage );
 
 		promise.done(function() {
-			//reset toPage height bac
-			toPage.height( "" );
-			
-			// Send focus to the newly shown page
-			reFocus( toPage );
+			//reset toPage height back
+			if( !$.support.touchOverflow ){
+				toPage.height( "" );
+				// Send focus to the newly shown page
+				reFocus( toPage );
+			}
 			
 			// Jump to top or prev scroll, sometimes on iOS the page has not rendered yet.
-			$.mobile.silentScroll( toScroll );
+			if( !$.support.touchOverflow ){
+				$.mobile.silentScroll( toScroll );
+			}
 
 			//trigger show/hide events
 			if( fromPage ) {
-				fromPage.height("").data( "page" )._trigger( "hide", null, { nextPage: toPage } );
+				if( !$.support.touchOverflow ){
+					fromPage.height( "" );
+				}
+				
+				fromPage.data( "page" )._trigger( "hide", null, { nextPage: toPage } );
 			}
 
 			//trigger pageshow, define prevPage as either fromPage or empty jQuery obj

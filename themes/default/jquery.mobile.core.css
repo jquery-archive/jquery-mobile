@@ -32,6 +32,9 @@
 	-ms-overflow-scrolling: touch;
 	overflow-scrolling: touch;
 }
+.ui-page.ui-mobile-pre-transition {
+	display: block;
+}
 
 /* loading screen */
 .ui-loading .ui-mobile-viewport { overflow: hidden !important; }
