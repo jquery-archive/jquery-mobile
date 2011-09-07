@@ -83,9 +83,9 @@
 			$pages.add( ":jqmData(role='dialog')" ).each(function() {
 				var $this = $(this);
 
-				// unless the data url is already set set it to the id
+				// unless the data url is already set set it to the pathname
 				if ( !$this.jqmData("url") ) {
-					$this.attr( "data-" + $.mobile.ns + "url", $this.attr( "id" ) );
+					$this.attr( "data-" + $.mobile.ns + "url", $this.attr( "id" ) || location.pathname );
 				}
 			});
 

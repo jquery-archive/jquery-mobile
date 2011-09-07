@@ -63,69 +63,94 @@
 			p15 = "http://jqm.com/dir1/dir2/test.php#spaz",
 			p16 = "http://jqm.com/dir1/dir2/test.php?foo=1&bar=2#spaz";
 
-			// Test URL conversion against an absolute URL to the site root.
+		// Test URL conversion against an absolute URL to the site root.
+		// directory tests
+		same( mua( "http://jqm.com/",                            p1 ), "http://jqm.com/", "absolute root - absolute root" );
+		same( mua( "//jqm.com/",                                 p1 ), "http://jqm.com/", "protocol relative root - absolute root" );
+		same( mua( "/",                                          p1 ), "http://jqm.com/", "site relative root - absolute root" );
 
-			// directory tests
-			same( mua( "http://jqm.com/",                            p1 ), "http://jqm.com/", "absolute root - absolute root" );
-			same( mua( "//jqm.com/",                                 p1 ), "http://jqm.com/", "protocol relative root - absolute root" );
-			same( mua( "/",                                          p1 ), "http://jqm.com/", "site relative root - absolute root" );
+		same( mua( "http://jqm.com/?foo=1&bar=2",                p1 ), "http://jqm.com/?foo=1&bar=2", "absolute root with query - absolute root" );
+		same( mua( "//jqm.com/?foo=1&bar=2",                     p1 ), "http://jqm.com/?foo=1&bar=2", "protocol relative root with query - absolute root" );
+		same( mua( "/?foo=1&bar=2",                              p1 ), "http://jqm.com/?foo=1&bar=2", "site relative root with query - absolute root" );
+		same( mua( "?foo=1&bar=2",                               p1 ), "http://jqm.com/?foo=1&bar=2", "query relative - absolute root" );
 
-			same( mua( "http://jqm.com/?foo=1&bar=2",                p1 ), "http://jqm.com/?foo=1&bar=2", "absolute root with query - absolute root" );
-			same( mua( "//jqm.com/?foo=1&bar=2",                     p1 ), "http://jqm.com/?foo=1&bar=2", "protocol relative root with query - absolute root" );
-			same( mua( "/?foo=1&bar=2",                              p1 ), "http://jqm.com/?foo=1&bar=2", "site relative root with query - absolute root" );
-			same( mua( "?foo=1&bar=2",                               p1 ), "http://jqm.com/?foo=1&bar=2", "query relative - absolute root" );
+		same( mua( "http://jqm.com/#spaz",                       p1 ), "http://jqm.com/#spaz", "absolute root with fragment - absolute root" );
+		same( mua( "//jqm.com/#spaz",                            p1 ), "http://jqm.com/#spaz", "protocol relative root with fragment - absolute root" );
+		same( mua( "/#spaz",                                     p1 ), "http://jqm.com/#spaz", "site relative root with fragment - absolute root" );
+		same( mua( "#spaz",                                      p1 ), "http://jqm.com/#spaz", "fragment relative - absolute root" );
 
-			same( mua( "http://jqm.com/#spaz",                       p1 ), "http://jqm.com/#spaz", "absolute root with fragment - absolute root" );
-			same( mua( "//jqm.com/#spaz",                            p1 ), "http://jqm.com/#spaz", "protocol relative root with fragment - absolute root" );
-			same( mua( "/#spaz",                                     p1 ), "http://jqm.com/#spaz", "site relative root with fragment - absolute root" );
-			same( mua( "#spaz",                                      p1 ), "http://jqm.com/#spaz", "fragment relative - absolute root" );
+		same( mua( "http://jqm.com/?foo=1&bar=2#spaz",           p1 ), "http://jqm.com/?foo=1&bar=2#spaz", "absolute root with query and fragment - absolute root" );
+		same( mua( "//jqm.com/?foo=1&bar=2#spaz",                p1 ), "http://jqm.com/?foo=1&bar=2#spaz", "protocol relative root with query and fragment - absolute root" );
+		same( mua( "/?foo=1&bar=2#spaz",                         p1 ), "http://jqm.com/?foo=1&bar=2#spaz", "site relative root with query and fragment - absolute root" );
+		same( mua( "?foo=1&bar=2#spaz",                          p1 ), "http://jqm.com/?foo=1&bar=2#spaz", "query relative and fragment - absolute root" );
 
-			same( mua( "http://jqm.com/?foo=1&bar=2#spaz",           p1 ), "http://jqm.com/?foo=1&bar=2#spaz", "absolute root with query and fragment - absolute root" );
-			same( mua( "//jqm.com/?foo=1&bar=2#spaz",                p1 ), "http://jqm.com/?foo=1&bar=2#spaz", "protocol relative root with query and fragment - absolute root" );
-			same( mua( "/?foo=1&bar=2#spaz",                         p1 ), "http://jqm.com/?foo=1&bar=2#spaz", "site relative root with query and fragment - absolute root" );
-			same( mua( "?foo=1&bar=2#spaz",                          p1 ), "http://jqm.com/?foo=1&bar=2#spaz", "query relative and fragment - absolute root" );
+		// file tests
+		same( mua( "http://jqm.com/test.php",                    p1 ), "http://jqm.com/test.php", "absolute file at root - absolute root" );
+		same( mua( "//jqm.com/test.php",                         p1 ), "http://jqm.com/test.php", "protocol relative file at root - absolute root" );
+		same( mua( "/test.php",                                  p1 ), "http://jqm.com/test.php", "site relative file at root - absolute root" );
+		same( mua( "test.php",                                   p1 ), "http://jqm.com/test.php", "document relative file at root - absolute root" );
 
-			// file tests
-			same( mua( "http://jqm.com/test.php",                    p1 ), "http://jqm.com/test.php", "absolute file at root - absolute root" );
-			same( mua( "//jqm.com/test.php",                         p1 ), "http://jqm.com/test.php", "protocol relative file at root - absolute root" );
-			same( mua( "/test.php",                                  p1 ), "http://jqm.com/test.php", "site relative file at root - absolute root" );
-			same( mua( "test.php",                                   p1 ), "http://jqm.com/test.php", "document relative file at root - absolute root" );
+		same( mua( "http://jqm.com/test.php?foo=1&bar=2",        p1 ), "http://jqm.com/test.php?foo=1&bar=2", "absolute file at root with query - absolute root" );
+		same( mua( "//jqm.com/test.php?foo=1&bar=2",             p1 ), "http://jqm.com/test.php?foo=1&bar=2", "protocol relative file at root with query - absolute root" );
+		same( mua( "/test.php?foo=1&bar=2",                      p1 ), "http://jqm.com/test.php?foo=1&bar=2", "site relative file at root with query - absolute root" );
+		same( mua( "test.php?foo=1&bar=2",                       p1 ), "http://jqm.com/test.php?foo=1&bar=2", "document relative file at root with query - absolute root" );
 
-			same( mua( "http://jqm.com/test.php?foo=1&bar=2",        p1 ), "http://jqm.com/test.php?foo=1&bar=2", "absolute file at root with query - absolute root" );
-			same( mua( "//jqm.com/test.php?foo=1&bar=2",             p1 ), "http://jqm.com/test.php?foo=1&bar=2", "protocol relative file at root with query - absolute root" );
-			same( mua( "/test.php?foo=1&bar=2",                      p1 ), "http://jqm.com/test.php?foo=1&bar=2", "site relative file at root with query - absolute root" );
-			same( mua( "test.php?foo=1&bar=2",                       p1 ), "http://jqm.com/test.php?foo=1&bar=2", "document relative file at root with query - absolute root" );
+		same( mua( "http://jqm.com/test.php#spaz",               p1 ), "http://jqm.com/test.php#spaz", "absolute file at root with fragment - absolute root" );
+		same( mua( "//jqm.com/test.php#spaz",                    p1 ), "http://jqm.com/test.php#spaz", "protocol relative file at root with fragment - absolute root" );
+		same( mua( "/test.php#spaz",                             p1 ), "http://jqm.com/test.php#spaz", "site relative file at root with fragment - absolute root" );
+		same( mua( "test.php#spaz",                              p1 ), "http://jqm.com/test.php#spaz", "file at root with fragment - absolute root" );
 
-			same( mua( "http://jqm.com/test.php#spaz",               p1 ), "http://jqm.com/test.php#spaz", "absolute file at root with fragment - absolute root" );
-			same( mua( "//jqm.com/test.php#spaz",                    p1 ), "http://jqm.com/test.php#spaz", "protocol relative file at root with fragment - absolute root" );
-			same( mua( "/test.php#spaz",                             p1 ), "http://jqm.com/test.php#spaz", "site relative file at root with fragment - absolute root" );
-			same( mua( "test.php#spaz",                              p1 ), "http://jqm.com/test.php#spaz", "file at root with fragment - absolute root" );
+		same( mua( "http://jqm.com/test.php?foo=1&bar=2#spaz",   p1 ), "http://jqm.com/test.php?foo=1&bar=2#spaz", "absolute file at root with query and fragment - absolute root" );
+		same( mua( "//jqm.com/test.php?foo=1&bar=2#spaz",        p1 ), "http://jqm.com/test.php?foo=1&bar=2#spaz", "protocol relative file at root with query and fragment - absolute root" );
+		same( mua( "/test.php?foo=1&bar=2#spaz",                 p1 ), "http://jqm.com/test.php?foo=1&bar=2#spaz", "site relative file at root with query and fragment - absolute root" );
+		same( mua( "test.php?foo=1&bar=2#spaz",                  p1 ), "http://jqm.com/test.php?foo=1&bar=2#spaz", "query relative file at root fragment - absolute root" );
 
-			same( mua( "http://jqm.com/test.php?foo=1&bar=2#spaz",   p1 ), "http://jqm.com/test.php?foo=1&bar=2#spaz", "absolute file at root with query and fragment - absolute root" );
-			same( mua( "//jqm.com/test.php?foo=1&bar=2#spaz",        p1 ), "http://jqm.com/test.php?foo=1&bar=2#spaz", "protocol relative file at root with query and fragment - absolute root" );
-			same( mua( "/test.php?foo=1&bar=2#spaz",                 p1 ), "http://jqm.com/test.php?foo=1&bar=2#spaz", "site relative file at root with query and fragment - absolute root" );
-			same( mua( "test.php?foo=1&bar=2#spaz",                  p1 ), "http://jqm.com/test.php?foo=1&bar=2#spaz", "query relative file at root fragment - absolute root" );
+		// Test URL conversion against an absolute URL to a file at the site root.
 
-			// Test URL conversion against an absolute URL to a file at the site root.
+		same( mua( "http://jqm.com/",                            p5 ), "http://jqm.com/", "absolute root - absolute root" );
+		same( mua( "//jqm.com/",                                 p5 ), "http://jqm.com/", "protocol relative root - absolute root" );
+		same( mua( "/",                                          p5 ), "http://jqm.com/", "site relative root - absolute root" );
 
-			same( mua( "http://jqm.com/",                            p5 ), "http://jqm.com/", "absolute root - absolute root" );
-			same( mua( "//jqm.com/",                                 p5 ), "http://jqm.com/", "protocol relative root - absolute root" );
-			same( mua( "/",                                          p5 ), "http://jqm.com/", "site relative root - absolute root" );
+		same( mua( "http://jqm.com/?foo=1&bar=2",                p5 ), "http://jqm.com/?foo=1&bar=2", "absolute root with query - absolute root" );
+		same( mua( "//jqm.com/?foo=1&bar=2",                     p5 ), "http://jqm.com/?foo=1&bar=2", "protocol relative root with query - absolute root" );
+		same( mua( "/?foo=1&bar=2",                              p5 ), "http://jqm.com/?foo=1&bar=2", "site relative root with query - absolute root" );
+		same( mua( "?foo=1&bar=2",                               p5 ), "http://jqm.com/test.php?foo=1&bar=2", "query relative - absolute root" );
 
-			same( mua( "http://jqm.com/?foo=1&bar=2",                p5 ), "http://jqm.com/?foo=1&bar=2", "absolute root with query - absolute root" );
-			same( mua( "//jqm.com/?foo=1&bar=2",                     p5 ), "http://jqm.com/?foo=1&bar=2", "protocol relative root with query - absolute root" );
-			same( mua( "/?foo=1&bar=2",                              p5 ), "http://jqm.com/?foo=1&bar=2", "site relative root with query - absolute root" );
-			same( mua( "?foo=1&bar=2",                               p5 ), "http://jqm.com/test.php?foo=1&bar=2", "query relative - absolute root" );
+		same( mua( "http://jqm.com/#spaz",                       p5 ), "http://jqm.com/#spaz", "absolute root with fragment - absolute root" );
+		same( mua( "//jqm.com/#spaz",                            p5 ), "http://jqm.com/#spaz", "protocol relative root with fragment - absolute root" );
+		same( mua( "/#spaz",                                     p5 ), "http://jqm.com/#spaz", "site relative root with fragment - absolute root" );
+		same( mua( "#spaz",                                      p5 ), "http://jqm.com/test.php#spaz", "fragment relative - absolute root" );
 
-			same( mua( "http://jqm.com/#spaz",                       p5 ), "http://jqm.com/#spaz", "absolute root with fragment - absolute root" );
-			same( mua( "//jqm.com/#spaz",                            p5 ), "http://jqm.com/#spaz", "protocol relative root with fragment - absolute root" );
-			same( mua( "/#spaz",                                     p5 ), "http://jqm.com/#spaz", "site relative root with fragment - absolute root" );
-			same( mua( "#spaz",                                      p5 ), "http://jqm.com/test.php#spaz", "fragment relative - absolute root" );
+		same( mua( "http://jqm.com/?foo=1&bar=2#spaz",           p5 ), "http://jqm.com/?foo=1&bar=2#spaz", "absolute root with query and fragment - absolute root" );
+		same( mua( "//jqm.com/?foo=1&bar=2#spaz",                p5 ), "http://jqm.com/?foo=1&bar=2#spaz", "protocol relative root with query and fragment - absolute root" );
+		same( mua( "/?foo=1&bar=2#spaz",                         p5 ), "http://jqm.com/?foo=1&bar=2#spaz", "site relative root with query and fragment - absolute root" );
+		same( mua( "?foo=1&bar=2#spaz",                          p5 ), "http://jqm.com/test.php?foo=1&bar=2#spaz", "query relative and fragment - absolute root" );
+	});
 
-			same( mua( "http://jqm.com/?foo=1&bar=2#spaz",           p5 ), "http://jqm.com/?foo=1&bar=2#spaz", "absolute root with query and fragment - absolute root" );
-			same( mua( "//jqm.com/?foo=1&bar=2#spaz",                p5 ), "http://jqm.com/?foo=1&bar=2#spaz", "protocol relative root with query and fragment - absolute root" );
-			same( mua( "/?foo=1&bar=2#spaz",                         p5 ), "http://jqm.com/?foo=1&bar=2#spaz", "site relative root with query and fragment - absolute root" );
-			same( mua( "?foo=1&bar=2#spaz",                          p5 ), "http://jqm.com/test.php?foo=1&bar=2#spaz", "query relative and fragment - absolute root" );
+	// https://github.com/jquery/jquery-mobile/issues/2362
+	test( "ipv6 host support", function(){
+		// http://www.ietf.org/rfc/rfc2732.txt ipv6 examples for tests
+		// most definitely not comprehensive
+		var	ipv6_1 = "http://[FEDC:BA98:7654:3210:FEDC:BA98:7654:3210]:80/index.html",
+			ipv6_2 = "http://[1080:0:0:0:8:800:200C:417A]/index.html",
+			ipv6_3 = "http://[3ffe:2a00:100:7031::1]",
+			ipv6_4 = "http://[1080::8:800:200C:417A]/foo",
+			ipv6_5 = "http://[::192.9.5.5]/ipng",
+			ipv6_6 = "http://[::FFFF:129.144.52.38]:80/index.html",
+			ipv6_7 = "http://[2010:836B:4179::836B:4179]",
+		  fromIssue = "http://[3fff:cafe:babe::]:443/foo";
+
+		same( $.mobile.path.parseUrl(ipv6_1).host, "[FEDC:BA98:7654:3210:FEDC:BA98:7654:3210]:80");
+		same( $.mobile.path.parseUrl(ipv6_1).hostname, "[FEDC:BA98:7654:3210:FEDC:BA98:7654:3210]");
+		same( $.mobile.path.parseUrl(ipv6_2).host, "[1080:0:0:0:8:800:200C:417A]");
+		same( $.mobile.path.parseUrl(ipv6_3).host, "[3ffe:2a00:100:7031::1]");
+		same( $.mobile.path.parseUrl(ipv6_4).host, "[1080::8:800:200C:417A]");
+		same( $.mobile.path.parseUrl(ipv6_5).host, "[::192.9.5.5]");
+		same( $.mobile.path.parseUrl(ipv6_6).host, "[::FFFF:129.144.52.38]:80");
+		same( $.mobile.path.parseUrl(ipv6_6).hostname, "[::FFFF:129.144.52.38]");
+		same( $.mobile.path.parseUrl(ipv6_7).host, "[2010:836B:4179::836B:4179]");
+		same( $.mobile.path.parseUrl(fromIssue).host, "[3fff:cafe:babe::]:443");
+		same( $.mobile.path.parseUrl(fromIssue).hostname, "[3fff:cafe:babe::]");
 	});
 
 	test( "path.clean is working properly", function(){
@@ -156,12 +181,12 @@
 		same( $.mobile.path.isRelativeUrl("http://company.com/"), false, "absolute url is not relative" );
 		same( $.mobile.path.isRelativeUrl("//company.com/"), true, "protocol relative url is relative" );
 		same( $.mobile.path.isRelativeUrl("/"), true, "site relative url is relative" );
-		
+
 		same( $.mobile.path.isRelativeUrl("http://company.com/test.php"), false, "absolute url is not relative" );
 		same( $.mobile.path.isRelativeUrl("//company.com/test.php"), true, "protocol relative url is relative" );
 		same( $.mobile.path.isRelativeUrl("/test.php"), true, "site relative url is relative" );
 		same( $.mobile.path.isRelativeUrl("test.php"), true, "document relative url is relative" );
-		
+
 		same( $.mobile.path.isRelativeUrl("http://company.com/dir1/dir2/test.php?foo=1&bar=2#frag"), false, "absolute url is not relative" );
 		same( $.mobile.path.isRelativeUrl("//company.com/dir1/dir2/test.php?foo=1&bar=2#frag"), true, "protocol relative url is relative" );
 		same( $.mobile.path.isRelativeUrl("/dir1/dir2/test.php?foo=1&bar=2#frag"), true, "site relative url is relative" );

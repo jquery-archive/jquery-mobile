@@ -77,7 +77,7 @@ $( document ).bind( "mobileinit.htmlclass", function() {
 
 	var ev = $.support.orientation;
 
-	$window.bind( "orientationchange.htmlclass throttledResize.htmlclass", function( event ) {
+	$window.bind( "orientationchange.htmlclass throttledresize.htmlclass", function( event ) {
 
 		// add orientation class to HTML element on flip/resize.
 		if ( event.orientation ) {

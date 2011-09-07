@@ -103,12 +103,12 @@
 					.delegate( ".ui-li>a", "focusout", function() {
 						$( this ).attr( "tabindex", "-1" );
 					})
-					.delegate( "li:not(.ui-disabled, .ui-li-divider)", "vclick", function( event ) {
+					.delegate( "li:not(.ui-disabled, .ui-li-divider)", "click", function( event ) {
 
 						// index of option tag to be selected
 						var oldIndex = self.select[ 0 ].selectedIndex,
 							newIndex = self.list.find( "li:not(.ui-li-divider)" ).index( this ),
-							option = self.optionElems.eq( newIndex )[ 0 ];
+							option = self.selectOptions.eq( newIndex )[ 0 ];
 
 						// toggle selected status on the tag for multi selects
 						option.selected = self.isMultiple ? !option.selected : true;
@@ -174,7 +174,7 @@
 							// If enter or space is pressed, trigger click
 						 case 13:
 						 case 32:
-							target.trigger( "vclick" );
+							target.trigger( "click" );
 
 							return false;
 							break;
@@ -206,7 +206,7 @@
 				var self = this,
 				select = this.element,
 				isMultiple = this.isMultiple,
-				options = this.optionElems = select.find( "option" ),
+				options = this.selectOptions = select.find( "option" ),
 				selected = this.selected(),
 				// return an array of all selected index's
 				indicies = this.selectedIndices();
@@ -224,14 +224,16 @@
 					.each(function( i ) {
 
 						if ( $.inArray( i, indicies ) > -1 ) {
-							var item = $( this ).addClass( $.mobile.activeBtnClass );
+							var item = $( this );
 
 							// Aria selected attr
-							item.find( "a" ).attr( "aria-selected", true );
+							item.attr( "aria-selected", true );
 
 							// Multiple selects: add the "on" checkbox state to the icon
 							if ( self.isMultiple ) {
 								item.find( ".ui-icon" ).removeClass( "ui-icon-checkbox-off" ).addClass( "ui-icon-checkbox-on" );
+							} else {
+								item.addClass( $.mobile.activeBtnClass );
 							}
 						}
 					});
@@ -245,6 +247,9 @@
 				var self = this;
 
 				if ( self.menuType == "page" ) {
+					// TODO centralize page removal binding / handling in the page plugin.
+					// Suggestion from @jblas to do refcounting
+					//
 					// rebind the page remove that was unbound in the open function
 					// to allow for the parent page removal from actions other than the use
 					// of a dialog sized custom select
