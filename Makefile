@@ -67,6 +67,7 @@ JSFILES = 	  js/jquery.ui.widget.js \
 			  js/jquery.mobile.controlGroup.js \
 			  js/jquery.mobile.links.js \
 			  js/jquery.mobile.fixHeaderFooter.js \
+			  js/jquery.mobile.fixHeaderFooter.native.js \
 			  js/jquery.mobile.media.classes.js \
 			  js/jquery.mobile.init.js
 

@@ -118,9 +118,4 @@ if ( !$.support.boxShadow ) {
 	$( "html" ).addClass( "ui-mobile-nosupport-boxshadow" );
 }
 
-// For opting into touch overflow scrolling
-if( $.support.touchOverflow ){
-	$( "html" ).addClass( "ui-mobile-touch-overflow" );
-}
-
 })( jQuery );

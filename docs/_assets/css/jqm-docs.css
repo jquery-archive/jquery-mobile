@@ -21,6 +21,7 @@ dt code, dd code { font-size:1.3em; line-height:150%; }
 pre { white-space: pre; white-space: pre-wrap; word-wrap: break-word; }
 
 #jqm-homeheader img { width: 235px; }
+img { max-width: 100%; }
 
 .ui-header .jqm-home { top:0.65em; }
 nav { margin: 0; }

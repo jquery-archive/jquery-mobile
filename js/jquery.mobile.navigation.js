@@ -409,10 +409,17 @@
 			
 			lastScrollEnabled = false;
 		
-			var active = $.mobile.urlHistory.getActive();
+			var active = $.mobile.urlHistory.getActive(),
+				activePage = $( ".ui-page-active" ),
+				scrollElem = $( window ),
+				touchOverflow = $.support.touchOverflow && $.mobile.touchOverflowEnabled;
+			
+			if( touchOverflow ){
+				scrollElem = activePage.is( ".ui-native-fixed" ) ? activePage.find( ".ui-content" ) : activePage;
+			}	
 			
 			if( active ){
-				var lastScroll = $.support.touchOverflow ? $( ".ui-page-active" ).scrollTop() : $( window ).scrollTop();
+				var lastScroll = scrollElem.scrollTop();
 
 				// Set active page's lastScroll prop.
 				// If the Y location we're scrolling to is less than minScrollBack, let it go.
@@ -429,11 +436,13 @@
 	// Make the iOS clock quick-scroll work again if we're using native overflow scrolling
 	/*
 	if( $.support.touchOverflow ){
-		$( window ).bind( "scrollstop", function(){
-			if( $( this ).scrollTop() === 0 ){
-				$.mobile.activePage.scrollTop( 0 );
-			}
-		});
+		if( $.mobile.touchOverflowEnabled ){
+			$( window ).bind( "scrollstop", function(){
+				if( $( this ).scrollTop() === 0 ){
+					$.mobile.activePage.scrollTop( 0 );
+				}
+			});
+		}
 	}
 	*/
 
@@ -442,9 +451,10 @@
 
 		//get current scroll distance
 		var active	= $.mobile.urlHistory.getActive(),
-			toScroll = active.lastScroll || ( $.support.touchOverflow ? 0 : $.mobile.defaultHomeScroll ),
+			touchOverflow = $.support.touchOverflow && $.mobile.touchOverflowEnabled,
+			toScroll = active.lastScroll || ( touchOverflow ? 0 : $.mobile.defaultHomeScroll ),
 			screenHeight = getScreenHeight();
-
+			
 		// Scroll to top, hide addr bar
 		window.scrollTo( 0, $.mobile.defaultHomeScroll );
 
@@ -453,7 +463,7 @@
 			fromPage.data( "page" )._trigger( "beforehide", null, { nextPage: toPage } );
 		}
 		
-		if( !$.support.touchOverflow ){
+		if( !touchOverflow){
 			toPage.height( screenHeight + toScroll );
 		}	
 		
@@ -462,13 +472,19 @@
 		//clear page loader
 		$.mobile.hidePageLoadingMsg();
 		
-		if( $.support.touchOverflow && toScroll ){
+		if( touchOverflow && toScroll ){
+			
 			toPage.addClass( "ui-mobile-pre-transition" );
 			// Send focus to page as it is now display: block
 			reFocus( toPage );
 			
 			//set page's scrollTop to remembered distance
-			toPage.scrollTop( toScroll );
+			if( toPage.is( ".ui-native-fixed" ) ){
+				toPage.find( ".ui-content" ).scrollTop( toScroll );
+			}
+			else{
+				toPage.scrollTop( toScroll );
+			}
 		}
 
 		//find the transition handler for the specified transition. If there
@@ -479,20 +495,20 @@
 
 		promise.done(function() {
 			//reset toPage height back
-			if( !$.support.touchOverflow ){
+			if( !touchOverflow ){
 				toPage.height( "" );
 				// Send focus to the newly shown page
 				reFocus( toPage );
 			}
 			
 			// Jump to top or prev scroll, sometimes on iOS the page has not rendered yet.
-			if( !$.support.touchOverflow ){
+			if( !touchOverflow ){
 				$.mobile.silentScroll( toScroll );
 			}
 
 			//trigger show/hide events
 			if( fromPage ) {
-				if( !$.support.touchOverflow ){
+				if( !touchOverflow ){
 					fromPage.height( "" );
 				}
 				
