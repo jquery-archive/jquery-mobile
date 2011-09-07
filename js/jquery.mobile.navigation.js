@@ -426,6 +426,17 @@
 	$( document ).bind( "beforechangepage", getLastScroll );
 	$( window ).bind( $.support.pushState ? "popstate" : "hashchange", getLastScroll );
 	
+	// Make the iOS clock quick-scroll work again if we're using native overflow scrolling
+	/*
+	if( $.support.touchOverflow ){
+		$( window ).bind( "scrollstop", function(){
+			if( $( this ).scrollTop() === 0 ){
+				$.mobile.activePage.scrollTop( 0 );
+			}
+		});
+	}
+	*/
+
 	//function for transitioning between two existing pages
 	function transitionPages( toPage, fromPage, transition, reverse ) {
 
