@@ -118,7 +118,7 @@
 		},
 
 		decorate: function(opts){
-			var thisVal = opts.this || window;
+			var thisVal = opts.self || window;
 
 			return function(){
 				var returnVal;
