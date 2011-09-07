@@ -11,6 +11,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 	options: {
 		theme: null,
 		trackTheme: null,
+		rangeTheme: null,
 		disabled: false,
 		initSelector: "input[type='range'], :jqmData(type='range'), :jqmData(role='slider')"
 	},
@@ -28,7 +29,11 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			theme = this.options.theme ? this.options.theme : parentTheme,
 
+			// theme of the outer track-bar
 			trackTheme = this.options.trackTheme ? this.options.trackTheme : parentTheme,
+
+		    // theme for the part between start & current slider position
+			rangeTheme = this.options.rangeTheme ? this.options.rangeTheme : trackTheme,
 
 			cType = control[ 0 ].nodeName.toLowerCase(),
 
@@ -94,6 +99,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 					.prependTo( handle );
 			});
 
+		}
+		else if (trackTheme != rangeTheme) {
+		    slider.wrapInner( "<div class='ui-slider-range-background ui-btn-down-" + rangeTheme + " ui-btn-corner-all' role='application'></div>" );
 		}
 
 		label.addClass( "ui-slider" );
@@ -265,6 +273,8 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		if ( percent > 60 && cType === "select" ) {
 			// TODO: Dead path?
 		}
+
+		this.slider.find('div.ui-slider-range-background').css('width', percent + "%");
 		this.handle.css( "left", percent + "%" );
 		this.handle.attr( {
 				"aria-valuenow": cType === "input" ? newval : control.find( "option" ).eq( newval ).attr( "value" ),

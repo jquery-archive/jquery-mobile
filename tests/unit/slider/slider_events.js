@@ -6,7 +6,7 @@
 	var onChangeCnt = 0;
 	window.onChangeCounter = function() {
 		onChangeCnt++;
-	}
+	};
 	module('jquery.mobile.slider.js');
 
 	var keypressTest = function(opts){
@@ -99,10 +99,19 @@
 		slider.keyup();
 		same(slider.val(), "200");
 	});
-	
+
 	test( "input type should degrade to number when slider is created", function(){
 		same($("#range-slider-up").attr( "type" ), "number");
 	});
+
+    test( "slider with range-background theme should have a inner range-div with corresponding theme and width", function(){
+        var slider = $("#range-background");
+        slider.focus();
+        same(slider.val(), "15");
+        var backgroundDiv = slider.next().find('.ui-slider-range-background');
+        same((parseInt(100 * parseFloat(backgroundDiv.css('width')) / parseFloat(backgroundDiv.parent().css('width')) ) + '%'), '15%');
+        ok(backgroundDiv.hasClass('ui-btn-down-c'));
+    });
 
 	// generic switch test function
 	var sliderSwitchTest = function(opts){
@@ -155,8 +164,8 @@
 		$( "#onchange" ).slider( "refresh", 50 );
 		equals(onChangeCnt, 1, "onChange should have been called once");
 	});
-	
-	
+
+
 	test( "slider controls will create when inside a container that receives a 'create' event", function(){
 		ok( !$("#enhancetest").appendTo(".ui-page-active").find(".ui-slider").length, "did not have enhancements applied" );
 		ok( $("#enhancetest").trigger("create").find(".ui-slider").length, "enhancements applied" );
