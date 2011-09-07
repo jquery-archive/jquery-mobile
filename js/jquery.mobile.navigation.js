@@ -379,21 +379,32 @@
 		}
 	}
 	
-	// Save last scroll distance
-	$( document ).bind( "beforechangepage", function(){
-		var active	= $.mobile.urlHistory.getActive();
-		if( active ){
-			var lastScroll = $( window ).scrollTop();
-			
-			//if the Y location we're scrolling to is less than minScrollBack, let it go for sake of smoothness
-			if( lastScroll < $.mobile.minScrollBack ){
-				lastScroll = $.mobile.defaultHomeScroll;
+	// Save the last scroll distance per page, before it is hidden
+	var getLastScroll = (function( lastScrollEnabled ){
+		return function(){
+			if( !lastScrollEnabled ){
+				lastScrollEnabled = true;
+				return;
 			}
 			
-			active.lastScroll = lastScroll;
-		}
-	});
+			lastScrollEnabled = false;
+		
+			var active = $.mobile.urlHistory.getActive();
+			
+			if( active ){
+				var lastScroll = $( window ).scrollTop();
+				
+				// Set active page's lastScroll prop.
+				// If the Y location we're scrolling to is less than minScrollBack, let it go.
+				active.lastScroll = lastScroll < $.mobile.minScrollBack ? $.mobile.defaultHomeScroll : lastScroll;
+			}
+		};
+	})( true );
 	
+	// to get last scroll, we need to get scrolltop before the page change
+	// using beforechangepage or popstate/hashchange (whichever comes first)
+	$( document ).bind( "beforechangepage", getLastScroll );
+	$( window ).bind( $.support.pushState ? "popstate" : "hashchange", getLastScroll );
 
 	//function for transitioning between two existing pages
 	function transitionPages( toPage, fromPage, transition, reverse ) {
