@@ -91,7 +91,7 @@
 					
 					// change the page based on the hash
 					$.mobile._handleHashChange( poppedState.hash );
-				});
+				}, 100);
 			}
 		},
 
