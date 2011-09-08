@@ -7,7 +7,7 @@
 
 (function( $, undefined ) {
 
-$.mobile.touchOverflowEnabled = true;
+$.mobile.touchOverflowEnabled = false;
 
 $( document ).bind( "pagecreate", function( event ) {
 	if( $.support.touchOverflow && $.mobile.touchOverflowEnabled ){
@@ -48,7 +48,7 @@ $( document ).bind( "pagecreate", function( event ) {
 								.animationComplete(function(){
 									$(this).not( ".in" ).addClass( "ui-native-bars-hidden" );
 								});
-						} );
+						});
 					}
 				}
 			});
