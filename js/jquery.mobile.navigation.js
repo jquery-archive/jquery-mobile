@@ -354,20 +354,13 @@
 
 	//direct focus to the page title, or otherwise first focusable element
 	function reFocus( page ) {
-		var lastClicked = page.jqmData( "lastClicked" );
+		var pageTitle = page.find( ".ui-title:eq(0)" );
 
-		if( lastClicked && lastClicked.length ) {
-			lastClicked.focus();
+		if( pageTitle.length ) {
+			pageTitle.focus();
 		}
-		else {
-			var pageTitle = page.find( ".ui-title:eq(0)" );
-
-			if( pageTitle.length ) {
-				pageTitle.focus();
-			}
-			else{
-				page.find( focusable ).eq( 0 ).focus();
-			}
+		else{
+			page.focus();
 		}
 	}
 
@@ -385,32 +378,46 @@
 			$.mobile.changePage.apply( null, pageTransitionQueue.pop() );
 		}
 	}
+	
+	// Save the last scroll distance per page, before it is hidden
+	var getLastScroll = (function( lastScrollEnabled ){
+		return function(){
+			if( !lastScrollEnabled ){
+				lastScrollEnabled = true;
+				return;
+			}
+			
+			lastScrollEnabled = false;
+		
+			var active = $.mobile.urlHistory.getActive();
+			
+			if( active ){
+				var lastScroll = $( window ).scrollTop();
+				
+				// Set active page's lastScroll prop.
+				// If the Y location we're scrolling to is less than minScrollBack, let it go.
+				active.lastScroll = lastScroll < $.mobile.minScrollBack ? $.mobile.defaultHomeScroll : lastScroll;
+			}
+		};
+	})( true );
+	
+	// to get last scroll, we need to get scrolltop before the page change
+	// using beforechangepage or popstate/hashchange (whichever comes first)
+	$( document ).bind( "beforechangepage", getLastScroll );
+	$( window ).bind( $.support.pushState ? "popstate" : "hashchange", getLastScroll );
 
 	//function for transitioning between two existing pages
 	function transitionPages( toPage, fromPage, transition, reverse ) {
 
 		//get current scroll distance
-		var currScroll = $.support.scrollTop ? $window.scrollTop() : true,
-			toScroll	= toPage.data( "lastScroll" ) || $.mobile.defaultHomeScroll,
+		var active	= $.mobile.urlHistory.getActive(),
+			toScroll = active.lastScroll || $.mobile.defaultHomeScroll,
 			screenHeight = getScreenHeight();
 
-		//if scrolled down, scroll to top
-		if( currScroll ){
-			window.scrollTo( 0, $.mobile.defaultHomeScroll );
-		}
-
-		//if the Y location we're scrolling to is less than 10px, let it go for sake of smoothness
-		if( toScroll < $.mobile.minScrollBack ){
-			toScroll = 0;
-		}
+		// Scroll to top
+		window.scrollTo( 0, $.mobile.defaultHomeScroll );
 
 		if( fromPage ) {
-			//set as data for returning to that spot
-			fromPage
-				.height( screenHeight + currScroll )
-				.jqmData( "lastScroll", currScroll )
-				.jqmData( "lastClicked", $activeClickedLink );
-
 			//trigger before show/hide events
 			fromPage.data( "page" )._trigger( "beforehide", null, { nextPage: toPage } );
 		}
@@ -430,15 +437,12 @@
 		promise.done(function() {
 			//reset toPage height bac
 			toPage.height( "" );
-
-			//jump to top or prev scroll, sometimes on iOS the page has not rendered yet.
-			if( toScroll ){
-				$.mobile.silentScroll( toScroll );
-				$( document ).one( "silentscroll", function() { reFocus( toPage ); } );
-			}
-			else{
-				reFocus( toPage );
-			}
+			
+			// Send focus to the newly shown page
+			reFocus( toPage );
+			
+			// Jump to top or prev scroll, sometimes on iOS the page has not rendered yet.
+			$.mobile.silentScroll( toScroll );
 
 			//trigger show/hide events
 			if( fromPage ) {
@@ -463,6 +467,8 @@
 
 		return pageMin;
 	}
+	
+	$.mobile.getScreenHeight = getScreenHeight;
 
 	//simply set the active page's minimum height to screen height, depending on orientation
 	function resetActivePageHeight(){
