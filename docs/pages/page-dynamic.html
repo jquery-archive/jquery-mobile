@@ -120,7 +120,7 @@ var categoryData = {
     &lt;/ul&gt;
 </code>
 </pre>
-<p>Internally, when the user clicks on one of these links, the application intercepts the internal $.mobile.changePage() call that is invoked by the frameworks' default link hijacking behavior. It then annalyzes the URL for the page about to be loaded, and then decides whether or not it should handle the loading itself, or to let the normal changePage() code handle things.</p>
+<p>Internally, when the user clicks on one of these links, the application intercepts the internal $.mobile.changePage() call that is invoked by the frameworks' default link hijacking behavior. It then analyzes the URL for the page about to be loaded, and then decides whether or not it should handle the loading itself, or to let the normal changePage() code handle things.</p>
 <p>The application was able to insert itself into the changePage() flow by binding to the &quot;pagebeforechange&quot; event at the document level:</p>
 <pre>
 <code>
@@ -168,8 +168,8 @@ $(document).bind( &quot;pagebeforechange&quot;, function( e, data ) {
   </li>
   </ul>
 <p>For our sample application, we are only interested in changePage() calls where URLs are initially passed in, so the first thing our callback does is check the type for the toPage. Next, with the help of some URL parsing utilities, it checks to make sure if the URL contains a hash that we are interested in handling ourselves. If so, it then calls an application function called showCategory() which will dynamically create the content for the category specified by the URL hash, and then it calls preventDefault() on the event.</p>
-<p>Calling preventDefault() on a pagebeforechange event causes the originating $.mobile.changePage() call to exit without peforming any work. Calling the preventDefault() method on the event is the equivalent of telling jQuery Mobile that you have handled the changePage() request yourself.</p>
-<p>If preventDefault() is not called, changePage() will continue on processing as it normally does. One thing to point out about the data object that is passed into our callback, is that any changes you make to the toPage property, or options properties, will affect changePage() processing if preventDefault() is not called. So for example, if I wanted to redirect or map a specific URL to another internal/external page, my callback could simply set the data.toPage property in the callback to the URL or DOM element of the page to redirect to. Likewise, I could set, or unset any option from within my callback, and changePage() would use the new settings.</p>
+<p>Calling preventDefault() on a pagebeforechange event causes the originating $.mobile.changePage() call to exit without performing any work. Calling the preventDefault() method on the event is the equivalent of telling jQuery Mobile that you have handled the changePage() request yourself.</p>
+<p>If preventDefault() is not called, changePage() will continue on processing as it normally does. One thing to point out about the data object that is passed into our callback, is that any changes you make to the toPage property, or options properties, will affect changePage() processing if preventDefault() is not called. So for example, if I wanted to redirect or map a specific URL to another internal/external page, my callback could simply set the data.toPage property in the callback to the URL or DOM element of the page to redirect to. Likewise, I could set, or un-set any option from within my callback, and changePage() would use the new settings.</p>
 <p>So now that we know how to intercept changePage() calls, let's take a closer look at how this sample actually generates the markup for a page. Our example actually uses, or I should say, re-uses the same page to display each of the categories. Each time one of our special links is clicked, the function showCategory() gets invoked:</p>
 <pre><code>
 // Load the data for a specific category, based on
@@ -247,7 +247,15 @@ function showCategory( urlObj, options )
 	}
 }
 </code></pre>
-<p>&nbsp;</p>
+<p>In our sample app, the hash of the URL we handle contains 2 parts:</p>
+<pre><code>
+#category-items?category=vehicles
+</code></pre>
+<p>The first part, before the '?' is actually the id of the page to write content into, the part after the '?' is info the app uses to figure out what data it should use when generating the markup for the page. The first thing showCategory() does is deconstruct this hash to extract out the id of the page to write content into, and the name of the category it should use to get the correct set of data from our in-memory JavaScript category object. After it figures out what category data to use, it then generates the markup for the category, and then injects it into the header and content area of the page, wiping out any other markup that previously existed in those elements.</p>
+<p>After it injects the markup, it then calls the appropriate jQuery Mobile widget calls to enhance the list markup it just injected. This is what turns the normal list markup into a fully styled listview with all its behaviors.</p>
+<p>Once that's done, it then calls $.mobile.changePage(), passing it the DOM element of the page we just modified, to tell the framework that it wants to show that page.</p>
+<p>Now an interesting problem here is that jQuery Mobile typically updates the browser's location hash with the URL associated with the page it is showing. Because we are re-using the same page for each category, this wouldn't be ideal, because the URL for that page has no specific category info associated with it. To get around this problem, showCategory() simply sets the dataUrl property on the options object it passes into changePage() to tell it to display our original URL instead.</p>
+<p>That's the sample in a nutshell. It should be noted that this particular sample and its usage is not a very good example of an app that degrades gracefully when JavaScript is turned off. We will be posting other examples that demonstrate how to degrade gracefully in the future.</p>
       </div>
 		<!--/content-primary -->
 
