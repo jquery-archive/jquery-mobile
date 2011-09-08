@@ -47,7 +47,7 @@
 		  </ul>
 			<p>These notifications are triggered on  the parent container element ($.mobile.pageContainer) of pages, and will bubble all the way up to the document element and window.</p>
 <p>For applications wishing to inject pages, or radically modify the content of an existing page, based on some non-HTML data, such as JSON or in-memory JS object, the pagebeforechange event is very useful since it gives you a hook for analyzing the URL or page element the application is being asked to load or switch to, and short-circuit the default changePage() behavior by simply calling preventDefault() on the pagebeforechange event.</p>
-<p>To illustrate this technique, take a look at this <a href="dynamic-samples/sample-reuse" rel="external">working sample</a>. In this sample, the main page starts off with a list of categories that the user can navigate into. The actual items in each category are stored in a JavaScript object in memory, for illustrative purposes, but the data can really come from anywhere.</p>
+<p>To illustrate this technique, take a look at this <a href="dynamic-samples/sample-reuse-page.html" rel="external">working sample</a>. In this sample, the main page starts off with a list of categories that the user can navigate into. The actual items in each category are stored in a JavaScript object in memory, for illustrative purposes, but the data can really come from anywhere.</p>
 <pre><code>
 var categoryData = {
 	animals: {
