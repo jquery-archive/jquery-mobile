@@ -832,16 +832,38 @@
 			return;
 		}
 
+		var settings = $.extend( {}, $.mobile.changePage.defaults, options );
+
+		// Make sure we have a pageContainer to work with.
+		settings.pageContainer = settings.pageContainer || $.mobile.pageContainer;
+
+		// Make sure we have a fromPage.
+		settings.fromPage = settings.fromPage || $.mobile.activePage;
+
+		var mpc = settings.pageContainer,
+			pbcEvent = new $.Event( "pagebeforechange" ),
+			triggerData = { toPage: toPage, options: settings };
+
+		// Let listeners know we're about to change the current page.
+		mpc.trigger( pbcEvent, triggerData );
+
+		mpc.trigger( "beforechangepage", triggerData ); // XXX: DEPRECATED for 1.0
+		
+		// If the default behavior is prevented, stop here!
+		if( pbcEvent.isDefaultPrevented() ){
+			return;
+		}
+
+		// We allow "pagebeforechange" observers to modify the toPage in the trigger
+		// data to allow for redirects. Make sure our toPage is updated.
+
+		toPage = triggerData.toPage;
+
 		// Set the isPageTransitioning flag to prevent any requests from
 		// entering this method while we are in the midst of loading a page
 		// or transitioning.
 
 		isPageTransitioning = true;
-
-		var settings = $.extend( {}, $.mobile.changePage.defaults, options );
-
-		// Make sure we have a pageContainer to work with.
-		settings.pageContainer = settings.pageContainer || $.mobile.pageContainer;
 
 		// If the caller passed us a url, call loadPage()
 		// to make sure it is loaded into the DOM. We'll listen
@@ -863,16 +885,16 @@
 
 					//release transition lock so navigation is free again
 					releasePageTransitionLock();
-					settings.pageContainer.trigger("changepagefailed");
+					settings.pageContainer.trigger( "pagechangefailed", triggerData );
+					settings.pageContainer.trigger( "changepagefailed", triggerData ); // XXX: DEPRECATED for 1.0
 				});
 			return;
 		}
 
 		// The caller passed us a real page DOM element. Update our
 		// internal state and then trigger a transition to the page.
-		var mpc = settings.pageContainer,
-			fromPage = $.mobile.activePage,
-			url = toPage.jqmData( "url" ),
+		var fromPage = settings.fromPage,
+			url = ( settings.dataUrl && path.convertUrlToDataUrl( settings.dataUrl ) ) || toPage.jqmData( "url" ),
 			// The pageUrl var is usually the same as url, except when url is obscured as a dialog url. pageUrl always contains the file path
 			pageUrl = url,
 			fileUrl = path.getFilePath( url ),
@@ -882,9 +904,6 @@
 			pageTitle = document.title,
 			isDialog = settings.role === "dialog" || toPage.jqmData( "role" ) === "dialog";
 
-		// Let listeners know we're about to change the current page.
-		mpc.trigger( "beforechangepage" );
-
 		// If we are trying to transition to the same page that we are currently on ignore the request.
 		// an illegal same page request is defined by the current page being the same as the url, as long as there's history
 		// and toPage is not an array or object (those are allowed to be "same")
@@ -893,7 +912,8 @@
 		//            to the same page.
 		if( fromPage && fromPage[0] === toPage[0] ) {
 			isPageTransitioning = false;
-			mpc.trigger( "changepage" );
+			mpc.trigger( "pagechange", triggerData );
+			mpc.trigger( "changepage", triggerData ); // XXX: DEPRECATED for 1.0
 			return;
 		}
 
@@ -980,7 +1000,9 @@
 				releasePageTransitionLock();
 
 				// Let listeners know we're all done changing the current page.
-				mpc.trigger( "changepage" );
+				mpc.trigger( "pagechange", triggerData );
+
+				mpc.trigger( "changepage", triggerData ); // XXX: DEPRECATED for 1.0
 			});
 	};
 
@@ -992,7 +1014,9 @@
 		role: undefined, // By default we rely on the role defined by the @data-role attribute.
 		duplicateCachedPage: undefined,
 		pageContainer: undefined,
-		showLoadMsg: true //loading message shows by default when pages are being fetched during changePage
+		showLoadMsg: true, //loading message shows by default when pages are being fetched during changePage
+		dataUrl: undefined,
+		fromPage: undefined
 	};
 
 /* Event Bindings - hashchange, submit, and click */
