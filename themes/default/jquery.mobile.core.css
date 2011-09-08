@@ -22,6 +22,21 @@
 .landscape,
 .landscape .ui-page  { min-height: 300px; }
 
+/* native overflow scrolling */
+.ui-page.ui-mobile-touch-overflow,
+.ui-mobile-touch-overflow.ui-native-fixed .ui-content {
+	overflow: auto;
+	height: 100%;
+	-webkit-overflow-scrolling: touch;
+	-moz-overflow-scrolling: touch;
+	-o-overflow-scrolling: touch;
+	-ms-overflow-scrolling: touch;
+	overflow-scrolling: touch;
+}
+.ui-page.ui-mobile-pre-transition {
+	display: block;
+}
+
 /* loading screen */
 .ui-loading .ui-mobile-viewport { overflow: hidden !important; }
 .ui-loading .ui-loader { display: block; }
@@ -47,6 +62,43 @@
 /*content area*/
 .ui-content { border-width: 0; overflow: visible; overflow-x: hidden; padding: 15px; }
 .ui-page-fullscreen .ui-content { padding:0; }
+
+/* native fixed headers and footers */
+.ui-mobile-touch-overflow.ui-page.ui-native-fixed,
+.ui-mobile-touch-overflow.ui-page.ui-native-fullscreen {
+	overflow: visible;
+}
+.ui-mobile-touch-overflow.ui-native-fixed .ui-header,
+.ui-mobile-touch-overflow.ui-native-fixed .ui-footer {
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	z-index: 200;
+}
+.ui-mobile-touch-overflow.ui-page.ui-native-fixed .ui-footer {
+	top: auto;
+	bottom: 0;
+}
+.ui-mobile-touch-overflow.ui-native-fixed .ui-content {
+	padding-top: 2.5em;
+	padding-bottom: 3em;
+	top: 0;
+	bottom: 0;
+	height: auto;
+	position: absolute;
+}
+.ui-mobile-touch-overflow.ui-native-fullscreen .ui-content {
+	padding-top: 0;
+	padding-bottom: 0;
+}
+.ui-mobile-touch-overflow.ui-native-fullscreen .ui-header,
+.ui-mobile-touch-overflow.ui-native-fullscreen .ui-footer {
+	opacity: .9;
+}
+.ui-native-bars-hidden {
+	display: none;
+}
 
 /* icons sizing */
 .ui-icon { width: 18px; height: 18px; }

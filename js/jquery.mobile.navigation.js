@@ -216,6 +216,26 @@
 				return ( /^(:?\w+:)/ ).test( url );
 			},
 
+			//check if the specified url refers to the first page in the main application document.
+			isFirstPageUrl: function( url ) {
+				// We only deal with absolute paths.
+				var u = path.parseUrl( path.makeUrlAbsolute( url, documentBase ) ),
+
+					// Does the url have the same path as the document?
+					samePath = u.hrefNoHash === documentUrl.hrefNoHash || ( documentBaseDiffers && u.hrefNoHash === documentBase.hrefNoHash ),
+
+					// Get the first page element.
+					fp = $.mobile.firstPage,
+
+					// Get the id of the first page element if it has one.
+					fpId = fp && fp[0] ? fp[0].id : undefined;
+
+					// The url refers to the first page if the path matches the document and
+					// it either has no hash value, or the hash is exactly equal to the id of the
+					// first page element.
+					return samePath && ( !u.hash || u.hash === "#" || ( fpId && u.hash.replace( /^#/, "" ) === fpId ) );
+			},
+
 			isEmbeddedPage: function( url ) {
 				var u = path.parseUrl( url );
 
@@ -389,11 +409,18 @@
 			
 			lastScrollEnabled = false;
 		
-			var active = $.mobile.urlHistory.getActive();
+			var active = $.mobile.urlHistory.getActive(),
+				activePage = $( ".ui-page-active" ),
+				scrollElem = $( window ),
+				touchOverflow = $.support.touchOverflow && $.mobile.touchOverflowEnabled;
+			
+			if( touchOverflow ){
+				scrollElem = activePage.is( ".ui-native-fixed" ) ? activePage.find( ".ui-content" ) : activePage;
+			}	
 			
 			if( active ){
-				var lastScroll = $( window ).scrollTop();
-				
+				var lastScroll = scrollElem.scrollTop();
+
 				// Set active page's lastScroll prop.
 				// If the Y location we're scrolling to is less than minScrollBack, let it go.
 				active.lastScroll = lastScroll < $.mobile.minScrollBack ? $.mobile.defaultHomeScroll : lastScroll;
@@ -405,28 +432,60 @@
 	// using beforechangepage or popstate/hashchange (whichever comes first)
 	$( document ).bind( "beforechangepage", getLastScroll );
 	$( window ).bind( $.support.pushState ? "popstate" : "hashchange", getLastScroll );
+	
+	// Make the iOS clock quick-scroll work again if we're using native overflow scrolling
+	/*
+	if( $.support.touchOverflow ){
+		if( $.mobile.touchOverflowEnabled ){
+			$( window ).bind( "scrollstop", function(){
+				if( $( this ).scrollTop() === 0 ){
+					$.mobile.activePage.scrollTop( 0 );
+				}
+			});
+		}
+	}
+	*/
 
 	//function for transitioning between two existing pages
 	function transitionPages( toPage, fromPage, transition, reverse ) {
 
 		//get current scroll distance
 		var active	= $.mobile.urlHistory.getActive(),
-			toScroll = active.lastScroll || $.mobile.defaultHomeScroll,
+			touchOverflow = $.support.touchOverflow && $.mobile.touchOverflowEnabled,
+			toScroll = active.lastScroll || ( touchOverflow ? 0 : $.mobile.defaultHomeScroll ),
 			screenHeight = getScreenHeight();
-
-		// Scroll to top
+			
+		// Scroll to top, hide addr bar
 		window.scrollTo( 0, $.mobile.defaultHomeScroll );
 
 		if( fromPage ) {
 			//trigger before show/hide events
 			fromPage.data( "page" )._trigger( "beforehide", null, { nextPage: toPage } );
 		}
-		toPage
-			.height( screenHeight + toScroll )
-			.data( "page" )._trigger( "beforeshow", null, { prevPage: fromPage || $( "" ) } );
+		
+		if( !touchOverflow){
+			toPage.height( screenHeight + toScroll );
+		}	
+		
+		toPage.data( "page" )._trigger( "beforeshow", null, { prevPage: fromPage || $( "" ) } );
 
 		//clear page loader
 		$.mobile.hidePageLoadingMsg();
+		
+		if( touchOverflow && toScroll ){
+			
+			toPage.addClass( "ui-mobile-pre-transition" );
+			// Send focus to page as it is now display: block
+			reFocus( toPage );
+			
+			//set page's scrollTop to remembered distance
+			if( toPage.is( ".ui-native-fixed" ) ){
+				toPage.find( ".ui-content" ).scrollTop( toScroll );
+			}
+			else{
+				toPage.scrollTop( toScroll );
+			}
+		}
 
 		//find the transition handler for the specified transition. If there
 		//isn't one in our transitionHandlers dictionary, use the default one.
@@ -435,18 +494,25 @@
 			promise = th( transition, reverse, toPage, fromPage );
 
 		promise.done(function() {
-			//reset toPage height bac
-			toPage.height( "" );
-			
-			// Send focus to the newly shown page
-			reFocus( toPage );
+			//reset toPage height back
+			if( !touchOverflow ){
+				toPage.height( "" );
+				// Send focus to the newly shown page
+				reFocus( toPage );
+			}
 			
 			// Jump to top or prev scroll, sometimes on iOS the page has not rendered yet.
-			$.mobile.silentScroll( toScroll );
+			if( !touchOverflow ){
+				$.mobile.silentScroll( toScroll );
+			}
 
 			//trigger show/hide events
 			if( fromPage ) {
-				fromPage.height("").data( "page" )._trigger( "hide", null, { nextPage: toPage } );
+				if( !touchOverflow ){
+					fromPage.height( "" );
+				}
+				
+				fromPage.data( "page" )._trigger( "hide", null, { nextPage: toPage } );
 			}
 
 			//trigger pageshow, define prevPage as either fromPage or empty jQuery obj
@@ -604,6 +670,12 @@
 
 		// Check to see if the page already exists in the DOM.
 		page = settings.pageContainer.children( ":jqmData(url='" + dataUrl + "')" );
+
+		// If we failed to find a page in the DOM, check the URL to see if it
+		// refers to the first page in the application.
+		if ( page.length === 0 && $.mobile.firstPage && path.isFirstPageUrl( absUrl ) ) {
+			page = $( $.mobile.firstPage );
+		}
 
 		// Reset base to the default document base.
 		if ( base ) {
