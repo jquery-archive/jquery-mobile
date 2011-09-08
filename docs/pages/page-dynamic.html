@@ -172,7 +172,7 @@ $(document).bind( &quot;pagebeforechange&quot;, function( e, data ) {
 <p>If preventDefault() is not called, changePage() will continue on processing as it normally does. One thing to point out about the data object that is passed into our callback, is that any changes you make to the toPage property, or options properties, will affect changePage() processing if preventDefault() is not called. So for example, if I wanted to redirect or map a specific URL to another internal/external page, my callback could simply set the data.toPage property in the callback to the URL or DOM element of the page to redirect to. Likewise, I could set, or unset any option from within my callback, and changePage() would use the new settings.</p>
 <p>So now that we know how to intercept changePage() calls, let's take a closer look at how this sample actually generates the markup for a page. Our example actually uses, or I should say, re-uses the same page to display each of the categories. Each time one of our special links is clicked, the function showCategory() gets invoked:</p>
 <pre><code>
-// Load a the data for a specific category, based on
+// Load the data for a specific category, based on
 // the URL passed in. Generate markup for the items in the
 // category, inject it into an embedded page, and then make
 // that page the current active page.
