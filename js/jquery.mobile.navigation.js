@@ -216,6 +216,26 @@
 				return ( /^(:?\w+:)/ ).test( url );
 			},
 
+			//check if the specified url refers to the first page in the main application document.
+			isFirstPageUrl: function( url ) {
+				// We only deal with absolute paths.
+				var u = path.parseUrl( path.makeUrlAbsolute( url, documentBase ) ),
+
+					// Does the url have the same path as the document?
+					samePath = u.hrefNoHash === documentUrl.hrefNoHash || ( documentBaseDiffers && u.hrefNoHash === documentBase.hrefNoHash ),
+
+					// Get the first page element.
+					fp = $.mobile.firstPage,
+
+					// Get the id of the first page element if it has one.
+					fpId = fp && fp[0] ? fp[0].id : undefined;
+
+					// The url refers to the first page if the path matches the document and
+					// it either has no hash value, or the hash is exactly equal to the id of the
+					// first page element.
+					return samePath && ( !u.hash || u.hash === "#" || ( fpId && u.hash.replace( /^#/, "" ) === fpId ) );
+			},
+
 			isEmbeddedPage: function( url ) {
 				var u = path.parseUrl( url );
 
@@ -604,6 +624,12 @@
 
 		// Check to see if the page already exists in the DOM.
 		page = settings.pageContainer.children( ":jqmData(url='" + dataUrl + "')" );
+
+		// If we failed to find a page in the DOM, check the URL to see if it
+		// refers to the first page in the application.
+		if ( page.length === 0 && $.mobile.firstPage && path.isFirstPageUrl( absUrl ) ) {
+			page = $( $.mobile.firstPage );
+		}
 
 		// Reset base to the default document base.
 		if ( base ) {
