@@ -255,7 +255,7 @@ function showCategory( urlObj, options )
 <p>After it injects the markup, it then calls the appropriate jQuery Mobile widget calls to enhance the list markup it just injected. This is what turns the normal list markup into a fully styled listview with all its behaviors.</p>
 <p>Once that's done, it then calls $.mobile.changePage(), passing it the DOM element of the page we just modified, to tell the framework that it wants to show that page.</p>
 <p>Now an interesting problem here is that jQuery Mobile typically updates the browser's location hash with the URL associated with the page it is showing. Because we are re-using the same page for each category, this wouldn't be ideal, because the URL for that page has no specific category info associated with it. To get around this problem, showCategory() simply sets the dataUrl property on the options object it passes into changePage() to tell it to display our original URL instead.</p>
-<p>That's the sample in a nutshell. It should be noted that this particular sample and its usage is not a very good example of an app that degrades gracefully when JavaScript is turned off. We will be posting other examples that demonstrate how to degrade gracefully in the future.</p>
+<p>That's the sample in a nutshell. It should be noted that this particular sample and its usage is not a very good example of an app that degrades gracefully when JavaScript is turned off. That means it probably won't work very well on C-Grade browsers. We will be posting other examples that demonstrate how to degrade gracefully in the future. Check this <a href="http://jquerymobile.com/test/docs/pages/dynamic-samples/">page</a> for updates.</p>
       </div>
 		<!--/content-primary -->
 
