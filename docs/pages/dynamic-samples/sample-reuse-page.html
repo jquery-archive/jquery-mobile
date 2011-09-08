@@ -76,9 +76,9 @@ var categoryData = {
 // the URL passed in. Generate markup for the items in the
 // category, inject it into an embedded page, and then make
 // that page the current active page.
-function showCategory( urlObj, options )
+function showCategory( url, options )
 {
-	var categoryName = urlObj.hash.replace( /.*category=/, "" ),
+	var categoryName = url.split( "." )[ 0 ],
 
 		// Get the object that represents the category we
 		// are interested in. Note, that at this point we could
@@ -88,8 +88,8 @@ function showCategory( urlObj, options )
 
 		// The pages we use to display our content are already in
 		// the DOM. The id of the page we are going to write our
-		// content into is specified in the hash before the '?'.
-		pageSelector = urlObj.hash.replace( /\?.*$/, "" );
+		// content into is category-items
+		pageSelector = "#category-items";
 
 	if ( category ) {
 		// Get the page we are going to dump our content into.
@@ -139,7 +139,7 @@ function showCategory( urlObj, options )
 		// to be the url that shows up in the browser's location field,
 		// so set the dataUrl option to the URL for the category
 		// we just loaded.
-		options.dataUrl = urlObj.href;
+		options.dataUrl = url;
 
 		// Now call changePage() and tell it to switch to
 		// the page we just modified.
@@ -156,16 +156,15 @@ $(document).bind( "pagebeforechange", function( e, data ) {
 		// We are being asked to load a page by URL, but we only
 		// want to handle URLs that request the data for a specific
 		// category.
-		var u = $.mobile.path.parseUrl( data.toPage ),
-			re = /^#category-item/;
-		if ( u.hash.search(re) !== -1 ) {
+		var u = data.toPage;
+
+		if ( u.match( /\/([^\/\.]+\.html)/ ) ) {
+
 			// We're being asked to display the items for a specific category.
 			// Call our internal method that builds the content for the category
 			// on the fly based on our in-memory category data structure.
-			showCategory( u, data.options );
-
-			// Make sure to tell changepage we've handled this call so it doesn't
-			// have to do anything.
+			showCategory( RegExp.$1, data.options );
+			
 			e.preventDefault();
 		}
 	}
@@ -175,14 +174,14 @@ $(document).bind( "pagebeforechange", function( e, data ) {
 </head>
 
 <body>
-<div id="home" data-role="page">
+<div data-role="page">
   <div data-role="header"><h1>Categories</h1></div>
   <div data-role="content">
   	<h2>Select a Category Below:</h2>
   	<ul data-role="listview" data-inset="true">
-    	<li><a href="#category-items?category=animals">Animals</a></li>
-    	<li><a href="#category-items?category=colors">Colors</a></li>
-    	<li><a href="#category-items?category=vehicles">Vehicles</a></li>
+    	<li><a href="animals.html">Animals</a></li>
+    	<li><a href="colors.html">Colors</a></li>
+    	<li><a href="vehicles.html">Vehicles</a></li>
     </ul>
   </div>
 </div>
