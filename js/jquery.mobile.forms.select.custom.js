@@ -13,7 +13,7 @@
 			label = widget.label,
 			thisPage = widget.select.closest( ".ui-page" ),
 			screen = $( "<div>", {"class": "ui-selectmenu-screen ui-screen-hidden"} ).appendTo( thisPage ),
-			selectOptions = widget.select.find("option"),
+			selectOptions = widget._selectOptions(),
 			isMultiple = widget.isMultiple = widget.select[ 0 ].multiple,
 			buttonId = selectID + "-button",
 			menuId = selectID + "-menu",
@@ -108,7 +108,7 @@
 						// index of option tag to be selected
 						var oldIndex = self.select[ 0 ].selectedIndex,
 							newIndex = self.list.find( "li:not(.ui-li-divider)" ).index( this ),
-							option = self.selectOptions.eq( newIndex )[ 0 ];
+							option = self._selectOptions().eq( newIndex )[ 0 ];
 
 						// toggle selected status on the tag for multi selects
 						option.selected = self.isMultiple ? !option.selected : true;
@@ -206,7 +206,7 @@
 				var self = this,
 				select = this.element,
 				isMultiple = this.isMultiple,
-				options = this.selectOptions = select.find( "option" ),
+				options = this._selectOptions(),
 				selected = this.selected(),
 				// return an array of all selected index's
 				indicies = this.selectedIndices();
