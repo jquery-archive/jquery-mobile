@@ -53,6 +53,38 @@ function getNativeEvent( event ) {
 	return event;
 }
 
+function getElementPositionLeft( element ) {
+	var x = 0,
+		e;
+	for ( e = element; e; e = e.offsetParent ) {
+		x += e.offsetLeft;
+	}
+
+	for ( e = element.parentNode; e && e != document.body; e = e.parentNode ) {
+		if ( e.scrollLeft ) {
+			x -= e.scrollLeft;
+		}
+	}
+
+	return x;
+}
+
+function getElementPositionTop( element ) {
+	var y = 0,
+		e;
+	for ( e = element; e; e = e.offsetParent ) {
+		y += e.offsetTop;
+	}
+
+	for ( e = element.parentNode; e && e != document.body ; e = e.parentNode ) {
+		if ( e.scrollTop ) {
+			y -= e.scrollTop;
+		}
+	}
+
+	return y;
+}
+
 function createVirtualEvent( event, eventType ) {
 
 	var t = event.type,
@@ -85,6 +117,10 @@ function createVirtualEvent( event, eventType ) {
 				prop = touchEventProps[ j ];
 				event[ prop ] = touch[ prop ];
 			}
+			// TouchEvent doesn't have offsetX and offsetY.
+			// add offsetX, offsetY property to virtual event.
+			event[ "offsetX" ] = touch.pageX - getElementPositionLeft( event.target );
+			event[ "offsetY" ] = touch.pageY - getElementPositionTop( event.target );
 		}
 	}
 
