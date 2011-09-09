@@ -41,21 +41,22 @@ $.widget( "mobile.button", $.mobile.widget, {
 		// Add hidden input during submit
 		type = $el.attr( "type" );
 
-		if ( type !== "button" && type !== "reset" ) {
-
+		// button.type = submit
+		// button's default type is submit when the button is child of form	
+		if ( type === "submit" || ( !type && $el.parents("form") ) ) {
 			$el.bind( "vclick", function() {
-
-				var $buttonPlaceholder = $( "<input>", {
-							type: "hidden",
-							name: $el.attr( "name" ),
-							value: $el.attr( "value" )
-						})
-						.insertBefore( $el );
-
-				// Bind to doc to remove after submit handling
-				$( document ).submit(function(){
-					 $buttonPlaceholder.remove();
-				});
+				if ( !$el.attr( "aria-disabled" ) ) {
+					var $buttonPlaceholder = $( "<input>", {
+								type: "hidden",
+								name: $el.attr( "name" ),
+								value: $el.attr( "value" )
+							})
+							.insertBefore( $el );
+					// Bind to doc to remove after submit handling
+					$( document ).submit(function(){
+						$buttonPlaceholder.remove();
+					});
+				}
 			});
 		}
 
