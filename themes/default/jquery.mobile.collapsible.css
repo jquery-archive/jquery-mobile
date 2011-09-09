@@ -3,7 +3,7 @@
 * Copyright (c) jQuery Project
 * Dual licensed under the MIT (MIT-LICENSE.txt) or GPL (GPL-LICENSE.txt) licenses.
 */
-.ui-collapsible-contain { margin: .5em 0; }
+.ui-collapsible { margin: .5em 0; }
 .ui-collapsible-heading { font-size: 16px; display: block; margin: 0 -8px; padding: 0; border-width: 0 0 1px 0; position: relative; }
 .ui-collapsible-heading a { text-align: left; margin: 0;  }
 .ui-collapsible-heading a .ui-btn-inner { padding-left: 40px; }
@@ -15,4 +15,4 @@
 .ui-collapsible-content-collapsed { display: none; }
 
 .ui-collapsible-set { margin: .5em 0; }
-.ui-collapsible-set .ui-collapsible-contain { margin: -1px 0 0; }
+.ui-collapsible-set .ui-collapsible { margin: -1px 0 0; }
