@@ -110,6 +110,38 @@
 				start();
 			}]);
 	});
+	
+	asyncTest( "page last scroll distance is remembered while navigating to and from pages", function(){
+		$.testHelper.pageSequence([
+			navigateTestRoot,
+			
+			function(){
+				$( "body" ).height( $( window ).height() + 500 );
+			},
+
+			function(){
+				$.mobile.changePage( "external.html" );
+			},
+			
+			function(){
+				window.scrollTo( 0, 300 );
+			},
+			
+			navigateTestRoot,
+			
+			function(){
+				$.mobile.changePage( "external.html" );
+			},
+			
+			function(){
+				same( $(window).scrollTop(), 300 );
+				$( "body" ).height( "" );
+				start();
+			}
+			
+		]);	
+		
+	});
 
 	asyncTest( "forms with data attribute ajax set to false will not call changePage", function(){
 		var called = false;

@@ -33,6 +33,7 @@ $elements = array(
 	'jquery.mobile.controlGroup.js',
 	'jquery.mobile.links.js',
 	'jquery.mobile.fixHeaderFooter.js',
+	'jquery.mobile.fixHeaderFooter.native.js',
 	'jquery.mobile.media.classes.js',
 	'jquery.mobile.init.js'
 );

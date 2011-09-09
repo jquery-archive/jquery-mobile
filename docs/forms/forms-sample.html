@@ -27,17 +27,14 @@
 
 			<p>In jQuery Mobile, form submissions are automatically handled using Ajax whenever possible, creating a smooth transition between the form and the result page. To ensure your form submits as intended, be sure to specify <code>action</code> and <code>method</code> properties on your form element. When unspecified, the method will default to <code>get</code>, and the <code>action</code> will default to the current page's relative path (found via <code>$.mobile.path.get()</code></p>
 			<p>Forms also accept attributes for transitions just like anchors, such as <code>data-transition="pop"</code> and <code>data-direction="reverse"</code>. To submit a form without Ajax, you can either disable Ajax form handling globally, or per form via the <code>data-ajax="false"</code> attribute. The <code>target</code> attribute (as in <code>target="_blank"</code>) is respected on forms as well, and will default to the browser's handling of that target when the form submits. Note that unlike anchors, the <code>rel</code> attribute is not allowed on forms.</p>
-			
-            <h2>Non-Ajax handling</h2>
-
-            <p>To prevent form submissions from being automatically handled with Ajax, add the <code>data-ajax="false"</code> attribute to the form element. You can also turn of Ajax form handling completely via the <code>ajaxEnabled</code> <a href="../api/globalconfig.html">global config option</a>.</p>
+			           
             
-            <h2>Simple Ajax form example</h2>
-            <p>This page demonstrates automated ajax handling of form submissions. The form below is configured to send regular a <code>get</code> request to <code>forms-sample-response.php</code>. On submit, jQuery Mobile will make sure that the Url specified is able to be retrieved via Ajax, and handle it appropriately. Keep in mind that just like ordinary HTTP form submissions, jQuery Mobile allows <code>get</code> result pages to be bookmarked by updating the Url hash when the response returns successfully. Also like ordinary form submissions, <code>post</code> requests do not contain query parameters in the hash, so they are not bookmarkable.</p>
-			<form action="forms-sample-response.php" method="get">
+            <h2>Default Ajax form example</h2>
+            <p>This demonstrates automated ajax handling of form submissions. The form below is configured to send regular a <code>get</code> request to <code>forms-sample-response.php</code>. On submit, jQuery Mobile will make sure that the Url specified is able to be retrieved via Ajax, and handle it appropriately. Keep in mind that just like ordinary HTTP form submissions, jQuery Mobile allows <code>get</code> result pages to be bookmarked by updating the Url hash when the response returns successfully. Also like ordinary form submissions, <code>post</code> requests do not contain query parameters in the hash, so they are not bookmarkable.</p>
+			<form action="forms-sample-response.php" method="get" class="ui-body ui-body-a ui-corner-all">
 				<fieldset>
 					<div data-role="fieldcontain">
-						<label for="shipping" class="select">Choose shipping method:</label>
+						<label for="shipping" class="select">Shipping method:</label>
 						<select name="shipping" id="shipping">
 							<option value="Standard shipping">Standard: 7 day</option>
 							<option value="Rush shipping">Rush: 3 days</option>
@@ -45,7 +42,27 @@
 							<option value="Overnight shipping">Overnight</option>
 						</select>
 					</div>
-					<button type="submit" data-theme="a" name="submit" value="submit-value">Submit</button>
+					<button type="submit" data-theme="b" name="submit" value="submit-value">Submit</button>
+				</fieldset>
+			</form>
+			
+			<h2>Non-Ajax form example</h2>
+			
+			 <p>To prevent form submissions from being automatically handled with Ajax, add the <code>data-ajax="false"</code> attribute to the form element. You can also turn of Ajax form handling completely via the <code>ajaxEnabled</code> <a href="../api/globalconfig.html">global config option</a>.</p>
+			
+            <p>The form below is identical to the one above except for the addition of the <code>data-ajax="false"</code> attribute attribute. When the submit button is pressed, it will result in a full page refresh.</p>
+			<form action="forms-sample-response.php" method="get" data-ajax="false" class="ui-body ui-body-a ui-corner-all">
+				<fieldset>
+					<div data-role="fieldcontain">
+						<label for="shipping" class="select">Shipping method:</label>
+						<select name="shipping" id="shipping">
+							<option value="Standard shipping">Standard: 7 day</option>
+							<option value="Rush shipping">Rush: 3 days</option>
+							<option value="Express shipping">Express: next day</option>
+							<option value="Overnight shipping">Overnight</option>
+						</select>
+					</div>
+					<button type="submit" data-theme="b" name="submit" value="submit-value">Submit</button>
 				</fieldset>
 			</form>
 

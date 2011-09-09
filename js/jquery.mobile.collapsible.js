@@ -10,7 +10,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 	options: {
 		expandCueText: " click to expand contents",
 		collapseCueText: " click to collapse contents",
-		collapsed: false,
+		collapsed: true,
 		heading: ">:header,>legend",
 		theme: null,
 		iconTheme: "d",
