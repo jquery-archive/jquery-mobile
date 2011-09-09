@@ -396,7 +396,8 @@
 					var $this = $( this ),
 						$parent = $this.parent(),
 						text = $this.text(),
-						anchor = "<a href='#'>"+ text +"</a>",
+ 				//previous: anchor = "<a href='#'>"+ text +"</a>", which allows js injection
+						anchor = "<a href='#'>"+ $this.text(text).html() +"</a>",
 						classes = [],
 						extraAttrs = [];
 
