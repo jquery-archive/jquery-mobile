@@ -49,7 +49,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		//"search" input widget
 		if ( input.is( "[type='search'],:jqmData(type='search')" ) ) {
 
-			focusedEl = input.wrap( "<div class='ui-input-search ui-shadow-inset ui-btn-corner-all ui-btn-shadow ui-icon-searchfield" + themeclass + "'></div>" ).parent();
+			focusedEl = input.wrap( "<div class='ui-input-search'><div class='ui-input-search-inner ui-shadow-inset ui-btn-corner-all ui-btn-shadow ui-icon-searchfield" + themeclass + "'></div></div>" ).parent();
 			clearbtn = $( "<a href='#' class='ui-input-clear' title='clear text'>clear text</a>" )
 				.tap(function( event ) {
 					input.val( "" ).focus();
