@@ -10,8 +10,6 @@
 	<script src="../../../external/qunit.js"></script>
 	<script src="../../../tests/jquery.testHelper.js"></script>
 	<script src="../../../js"></script>
-  <script src="select_native.js"></script>
-	<script src="select_events.js"></script>
 	<script src="select_core.js"></script>
 
 	<link rel="stylesheet"  href="../../../themes/default/"/>
@@ -325,6 +323,14 @@
   <select name="native-refresh" id="native-refresh">
     <option value="-1">default</option>
     <option value="-1">other</option>
+  </select>
+
+  <select name="custom-refresh" id="custom-refresh" data-nstest-native-menu="false">
+    <option value="-1">default</option>
+  </select>
+
+  <select name="custom-refresh-opts-list" id="custom-refresh-opts-list" data-nstest-native-menu="false">
+    <option value="-1">default</option>
   </select>
 </div>
 

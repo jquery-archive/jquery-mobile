@@ -253,4 +253,51 @@
 		same( select.selectmenu( 'option', 'disabled' ), false, "disbaled option set" );
 	});
 
+	test( "adding options and refreshing a custom select defaults the text", function() {
+		var select = $( "#custom-refresh" ),
+      button = select.siblings( "a" ).find( ".ui-btn-inner" ),
+      text = "foo";
+
+    same(button.text(), "default");
+    select.find( "option" ).remove(); //remove the loading message
+    select.append('<option value="1">' + text + '</option>');
+    select.selectmenu( 'refresh' );
+		same(button.text(), text);
+	});
+
+	asyncTest( "adding options and refreshing a custom select changes the options list", function(){
+		var select = $( "#custom-refresh-opts-list" ),
+      button = select.siblings( "a" ).find( ".ui-btn-inner" ),
+      text = "foo";
+
+		$.testHelper.sequence([
+			// bring up the dialog
+			function() {
+				button.click();
+			},
+
+			function() {
+				same( $( ".ui-selectmenu.in ul" ).text(), "default" );
+				$( ".ui-selectmenu-screen" ).click();
+			},
+
+			function() {
+				select.find( "option" ).remove(); //remove the loading message
+				select.append('<option value="1">' + text + '</option>');
+				select.selectmenu( 'refresh' );
+			},
+
+			function() {
+				button.click();
+			},
+
+			function() {
+				same( $( ".ui-selectmenu.in ul" ).text(), text );
+				$( ".ui-selectmenu-screen" ).click();
+			},
+
+			start
+		], 500);
+
+	});
 })(jQuery);
