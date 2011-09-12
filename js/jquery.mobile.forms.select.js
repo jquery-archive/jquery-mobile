@@ -30,6 +30,10 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 	},
 
 	_theme: function(){
+		if ( this.options.theme ){
+			return this.options.theme;
+		}
+
 		var themedParent, theme;
 		// if no theme is defined, try to find closest theme container
 		// TODO move to core as something like findCurrentTheme
