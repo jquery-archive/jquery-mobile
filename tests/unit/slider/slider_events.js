@@ -144,6 +144,17 @@
        });
    });
 
+   test( "slider with range-background theme should have a inner range-div with corresponding theme and width", function(){
+       var slider = $("#range-background"),
+           backgroundDiv = slider.next().find('.ui-slider-range-background');
+
+       expect(4);
+       same(slider.val(), "25");
+       same((parseInt(100 * parseFloat(backgroundDiv.css('width')) / parseFloat(backgroundDiv.parent().css('width')) ) + '%'), '25%');
+       same(backgroundDiv.css('margin-left'), '0%', "Margin-left should be 0, as there is only one handle");
+       ok(backgroundDiv.hasClass('ui-btn-down-c'), "Background-Track has swatch c");
+   });
+
 	test( "input type should degrade to number when slider is created", function(){
 		same($("#range-slider-up").attr( "type" ), "number");
 	});

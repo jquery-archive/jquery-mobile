@@ -11,6 +11,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 	options: {
 		theme: null,
 		trackTheme: null,
+		rangeTheme: null,
 		disabled: false,
 		initSelector: "input[type='range'], :jqmData(type='range'), :jqmData(role='slider')",
 		handleData: ['handle-min', 'handle-max']
@@ -35,7 +36,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		// TODO: Each of these should have comments explain what they're for
 		var self = this,
 
-			control = this.element,
+		    control = this.element,
 
 			o = this.options,
 
@@ -45,7 +46,11 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			theme = this.options.theme ? o.theme : parentTheme,
 
+			// theme of the outer track-bar
 			trackTheme = o.trackTheme ? o.trackTheme : parentTheme,
+
+			// theme for the part between start & current slider position
+			rangeTheme = this.options.rangeTheme ? this.options.rangeTheme : trackTheme,
 
 			cTypeIsSelect = control[ 0 ].nodeName.toLowerCase() === "select",
 
@@ -63,10 +68,19 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			step = window.parseFloat( control.attr( "step" ) || 1 ),
 
+			// the slider-wrapper
 			slider = $( "<div class='ui-slider " + selectClass + " ui-btn-down-" + trackTheme +
 									" ui-btn-corner-all' role='application'></div>" ),
+
+			// handle-container
 			handles = [],
+
+			// the current handle-values
 			values = self.values(),
+
+			// the track-background-container
+			rangeBar,
+
 			options;
 
 		control.addClass(values.length > 1 ? 'ui-slider-range' : 'ui-slider-single');
@@ -85,14 +99,6 @@ $.widget( "mobile.slider", $.mobile.widget, {
                 })
                 .data('handle', values.length > 1 ? o.handleData[i] : 'single')
             );
-		});
-
-		$.extend( this, {
-			slider: slider,
-			handles: handles,
-			dragging: false,
-			beforeStart: null,
-			userModified: false
 		});
 
 		if ( cTypeIsSelect ) {
@@ -115,6 +121,19 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			});
 
 		}
+		else if (trackTheme != rangeTheme) {
+		    slider.wrapInner( "<div class='ui-slider-range-background ui-btn-down-" + rangeTheme + " ui-btn-corner-all' role='application'></div>" );
+		    rangeBar = slider.find('div.ui-slider-range-background');
+		}
+
+        $.extend( this, {
+            slider: slider,
+            handles: handles,
+            rangeBar: rangeBar,
+            dragging: false,
+            beforeStart: null,
+            userModified: false
+        });
 
 		label.addClass( "ui-slider" );
 
@@ -242,7 +261,13 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		    percent,
 			cTypeIsSelect = control[ 0 ].nodeName.toLowerCase() === "select",
 			min = !cTypeIsSelect ? parseFloat( control.attr( "min" ) ) : 0,
-			max = !cTypeIsSelect ? parseFloat( control.attr( "max" ) ) : control.find( "option" ).length - 1;
+			max = !cTypeIsSelect ? parseFloat( control.attr( "max" ) ) : control.find( "option" ).length - 1,
+
+	        // the handle on which the new-value will be applied
+	        actHandle,
+
+	        // the left-value of the range-theme
+	        rangeLeft = 0;
 
 		if ( val instanceof jQuery.Event ) {
 			var data = val,
@@ -283,7 +308,6 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			newval = max;
 		}
 
-		var actHandle;
 		jQuery.each(this.handles, function(i, handle) {
 		    if (typeof actHandle !== 'object' || Math.abs(actHandle.attr('title') - newval) > Math.abs(handle.attr('title') - newval)) {
 		        actHandle = handle;
@@ -295,6 +319,14 @@ $.widget( "mobile.slider", $.mobile.widget, {
                 "aria-valuenow": (cTypeIsSelect) ? control.find( "option" ).eq( newval ).attr( "value" ) : newval,
                 "aria-valuetext": (cTypeIsSelect) ? control.find( "option" ).eq( newval ).text() : newval,
                 title: newval
+            });
+		}
+
+		if (this.rangeBar) {
+		    rangeLeft = (this.handles.length > 1) ? this.handles[0].attr('title') : 0;
+		    this.rangeBar.css({
+		        'margin-left': rangeLeft + "%",
+	            'width': (percent-rangeLeft) + "%"
             });
 		}
 
