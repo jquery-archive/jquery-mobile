@@ -117,26 +117,26 @@
 			
 			function(){
 				$( "body" ).height( $( window ).height() + 500 );
-			},
-
-			function(){
 				$.mobile.changePage( "external.html" );
 			},
 			
 			function(){
 				window.scrollTo( 0, 300 );
-			},
-			
-			navigateTestRoot,
-			
-			function(){
-				$.mobile.changePage( "external.html" );
+				same( $(window).scrollTop(), 300, "scrollTop is 300" );
+				navigateTestRoot();
 			},
 			
 			function(){
-				same( $(window).scrollTop(), 300 );
-				$( "body" ).height( "" );
-				start();
+				window.history.back();
+			},
+			
+			function(){
+				// Give the silentScroll function some time to kick in.
+				setTimeout(function() {
+					same( $(window).scrollTop(), 300, "scrollTop is 300" );
+					$( "body" ).height( "" );
+					start();
+				}, 100 );
 			}
 			
 		]);	

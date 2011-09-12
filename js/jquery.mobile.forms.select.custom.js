@@ -202,7 +202,17 @@
 				});
 			},
 
-			refresh: function( forceRebuild ){
+			_isRebuildRequired: function() {
+				var list = this.list.find( "li" ),
+					options = this._selectOptions();
+
+				// TODO exceedingly naive method to determine difference
+				// ignores value changes etc in favor of a forcedRebuild
+				// from the user in the refresh method
+				return options.text() !== list.text();
+			},
+
+			refresh: function( forceRebuild , foo ){
 				var self = this,
 				select = this.element,
 				isMultiple = this.isMultiple,
@@ -211,7 +221,7 @@
 				// return an array of all selected index's
 				indicies = this.selectedIndices();
 
-				if (  forceRebuild || select[0].options.length != self.list.find( "li" ).length ) {
+				if (  forceRebuild || this._isRebuildRequired() ) {
 					self._buildList();
 				}
 
