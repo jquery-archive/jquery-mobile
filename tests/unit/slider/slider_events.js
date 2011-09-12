@@ -13,7 +13,7 @@
 	var keypressTest = function(opts){
 		var slider = $(opts.selector),
 		    val = window.parseFloat(slider.val()),
-				handle = slider.siblings('.ui-slider').find('.ui-slider-handle');
+			handle = slider.siblings('.ui-slider').find('.ui-slider-handle').eq(0);
 
 		expect( opts.keyCodes.length );
 
@@ -24,7 +24,9 @@
 			handle.trigger('keydown');
 
 			val += opts.increment;
-			same(val, window.parseFloat(slider.val(), 10), "new value is " + opts.increment + " different");
+			if (opts.assert !== false) {
+			    same(val, window.parseFloat(slider.val(), 10), "new value is " + opts.increment + " different");
+			}
 		});
 	};
 
@@ -101,6 +103,47 @@
 		same(slider.val(), "200");
 	});
 
+   test( "set the value via refresh", function(){
+        var slider = $("#range-slider-up");
+        slider.slider("refresh", 50);
+        same(slider.val(), "50");
+    });
+
+   test( "two handle slider should not modified the value attribute", function(){
+       var slider = $("#two-handles"),
+           orig = slider.val(),
+           values = slider.slider("values"),
+           increment = 10;
+
+       keypressTest({
+           selector: "#two-handles",
+           keyCodes: ['RIGHT'],
+           increment: increment,
+           assert: false
+       });
+
+       expect(3);
+       same(slider.val(), orig);
+
+       var newValues = slider.slider("values");
+       same(values[0] + increment, newValues[0]);
+       same(values[1], newValues[1]);
+   });
+
+   test( "value-setter for two-handle-slider", function(){
+       var slider = $("#two-handles"),
+           handles = slider.siblings('.ui-slider').find('a'),
+           values = [27, 87];
+
+       expect(values.length * 2);
+       slider.slider("refresh", values);
+       handles.each(function(i, handle) {
+           handle = jQuery(handle);
+           same(handle.attr('aria-valuenow'), values[i].toString(), "handle value is " + values[i]);
+           same(handle.css('left'), values[i].toString() + "%", "handle style is left:" + values[i] + "%");
+       });
+   });
+
 	test( "input type should degrade to number when slider is created", function(){
 		same($("#range-slider-up").attr( "type" ), "number");
 	});
@@ -108,7 +151,7 @@
 	// generic switch test function
 	var sliderSwitchTest = function(opts){
 		var slider = $("#slider-switch"),
-			  handle = slider.siblings('.ui-slider').find('a'),
+			handle = slider.siblings('.ui-slider').find('a'),
 		    switchValues = {
 					'off' : 0,
 					'on' : 1
@@ -156,7 +199,6 @@
 		$( "#onchange" ).slider( "refresh", 50 );
 		equals(onChangeCnt, 1, "onChange should have been called once");
 	});
-
 
 	test( "slider controls will create when inside a container that receives a 'create' event", function(){
 		ok( !$("#enhancetest").appendTo(".ui-page-active").find(".ui-slider").length, "did not have enhancements applied" );
