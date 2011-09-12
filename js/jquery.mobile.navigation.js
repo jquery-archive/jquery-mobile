@@ -398,7 +398,7 @@
 			$.mobile.changePage.apply( null, pageTransitionQueue.pop() );
 		}
 	}
-	
+
 	// Save the last scroll distance per page, before it is hidden
 	var getLastScroll = (function( lastScrollEnabled ){
 		return function(){
@@ -406,18 +406,18 @@
 				lastScrollEnabled = true;
 				return;
 			}
-			
+
 			lastScrollEnabled = false;
-		
+
 			var active = $.mobile.urlHistory.getActive(),
 				activePage = $( ".ui-page-active" ),
 				scrollElem = $( window ),
 				touchOverflow = $.support.touchOverflow && $.mobile.touchOverflowEnabled;
-			
+
 			if( touchOverflow ){
 				scrollElem = activePage.is( ".ui-native-fixed" ) ? activePage.find( ".ui-content" ) : activePage;
-			}	
-			
+			}
+
 			if( active ){
 				var lastScroll = scrollElem.scrollTop();
 
@@ -427,12 +427,12 @@
 			}
 		};
 	})( true );
-	
+
 	// to get last scroll, we need to get scrolltop before the page change
 	// using beforechangepage or popstate/hashchange (whichever comes first)
 	$( document ).bind( "beforechangepage", getLastScroll );
 	$( window ).bind( $.support.pushState ? "popstate" : "hashchange", getLastScroll );
-	
+
 	// Make the iOS clock quick-scroll work again if we're using native overflow scrolling
 	/*
 	if( $.support.touchOverflow ){
@@ -454,7 +454,7 @@
 			touchOverflow = $.support.touchOverflow && $.mobile.touchOverflowEnabled,
 			toScroll = active.lastScroll || ( touchOverflow ? 0 : $.mobile.defaultHomeScroll ),
 			screenHeight = getScreenHeight();
-			
+
 		// Scroll to top, hide addr bar
 		window.scrollTo( 0, $.mobile.defaultHomeScroll );
 
@@ -462,22 +462,22 @@
 			//trigger before show/hide events
 			fromPage.data( "page" )._trigger( "beforehide", null, { nextPage: toPage } );
 		}
-		
+
 		if( !touchOverflow){
 			toPage.height( screenHeight + toScroll );
-		}	
-		
+		}
+
 		toPage.data( "page" )._trigger( "beforeshow", null, { prevPage: fromPage || $( "" ) } );
 
 		//clear page loader
 		$.mobile.hidePageLoadingMsg();
-		
+
 		if( touchOverflow && toScroll ){
-			
+
 			toPage.addClass( "ui-mobile-pre-transition" );
 			// Send focus to page as it is now display: block
 			reFocus( toPage );
-			
+
 			//set page's scrollTop to remembered distance
 			if( toPage.is( ".ui-native-fixed" ) ){
 				toPage.find( ".ui-content" ).scrollTop( toScroll );
@@ -500,7 +500,7 @@
 				// Send focus to the newly shown page
 				reFocus( toPage );
 			}
-			
+
 			// Jump to top or prev scroll, sometimes on iOS the page has not rendered yet.
 			if( !touchOverflow ){
 				$.mobile.silentScroll( toScroll );
@@ -511,7 +511,7 @@
 				if( !touchOverflow ){
 					fromPage.height( "" );
 				}
-				
+
 				fromPage.data( "page" )._trigger( "hide", null, { nextPage: toPage } );
 			}
 
@@ -533,7 +533,7 @@
 
 		return pageMin;
 	}
-	
+
 	$.mobile.getScreenHeight = getScreenHeight;
 
 	//simply set the active page's minimum height to screen height, depending on orientation
@@ -920,7 +920,7 @@
 		mpc.trigger( pbcEvent, triggerData );
 
 		mpc.trigger( "beforechangepage", triggerData ); // XXX: DEPRECATED for 1.0
-		
+
 		// If the default behavior is prevented, stop here!
 		if( pbcEvent.isDefaultPrevented() ){
 			return;
