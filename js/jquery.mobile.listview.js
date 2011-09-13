@@ -79,7 +79,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			$li = this.element.children( "li" );
 			// at create time the li are not visible yet so we need to rely on .ui-screen-hidden
 			$visibleli = create?$li.not( ".ui-screen-hidden" ):$li.filter( ":visible" );
-			
+
 			this._removeCorners( $li );
 
 			// Select the first visible li element
@@ -206,7 +206,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 			self._itemApply( $list, item );
 		}
-		
+
 		this._refreshCorners( create );
 	},
 
@@ -269,8 +269,12 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 		}).listview();
 
-		//on pagehide, remove any nested pages along with the parent page, as long as they aren't active
-		if( hasSubPages && parentPage.data("page").options.domCache === false ){
+		// on pagehide, remove any nested pages along with the parent page, as long as they aren't active
+		// and aren't embedded
+		if( hasSubPages &&
+			parentPage.is( "jqmData(external-page='true')" ) &&
+			parentPage.data("page").options.domCache === false ) {
+
 			var newRemove = function( e, ui ){
 				var nextPage = ui.nextPage, npURL;
 
