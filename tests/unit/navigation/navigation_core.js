@@ -43,6 +43,36 @@
 		}
 	});
 
+	asyncTest( "window.history.back() from external to internal page", function(){
+
+		$.testHelper.pageSequence([
+
+			// open our test page
+			function(){
+				$.testHelper.openPage("#active-state-page1");
+			},
+
+			function(){
+				ok( $.mobile.activePage[0] === $( "#active-state-page1" )[ 0 ], "successful navigation to internal page." );
+
+				//location.hash = siteDirectory + "external.html";
+				$.mobile.changePage("external.html");
+			},
+
+			function(){
+				ok( $.mobile.activePage[0] !== $( "#active-state-page1" )[ 0 ], "successful navigation to external page." );
+
+				window.history.back();
+			},
+
+			function(){
+				ok( $.mobile.activePage[0] === $( "#active-state-page1" )[ 0 ], "successful navigation back to internal page." );
+
+				start();
+			}
+		]);
+	});
+
 	asyncTest( "external page is removed from the DOM after pagehide", function(){
 		$.testHelper.pageSequence([
 			navigateTestRoot,

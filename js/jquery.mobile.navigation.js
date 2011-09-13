@@ -1351,7 +1351,12 @@
 
 			//if to is defined, load it
 			if ( to ) {
-				to = ( typeof to === "string" && !path.isPath( to ) ) ? ( '#' + to ) : to;
+				// At this point, 'to' can be one of 3 things, a cached page element from
+				// a history stack entry, an id, or site-relative/absolute URL. If 'to' is
+				// an id, we need to resolve it against the documentBase, not the location.href,
+				// since the hashchange could've been the result of a forward/backward navigation
+				// that crosses from an external page/dialog to an internal page/dialog.
+				to = ( typeof to === "string" && !path.isPath( to ) ) ? ( path.makeUrlAbsolute( '#' + to, documentBase ) ) : to;
 				$.mobile.changePage( to, changePageOptions );
 			}	else {
 				//there's no hash, go to the first page in the dom
