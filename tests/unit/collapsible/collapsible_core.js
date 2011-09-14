@@ -19,7 +19,7 @@
 				ok($page.find( ".ui-content >:eq(0) > div" ).hasClass( "ui-collapsible-content" ), ".ui-collapsible-content class added to collapsible content" );
 				ok($page.find( ".ui-content >:eq(0)" ).hasClass( "ui-collapsible-collapsed" ), ".ui-collapsible-collapsed added to collapsed elements" );
 				ok(!$page.find( ".ui-content >:eq(1)" ).hasClass( "ui-collapsible-collapsed" ), ".ui-collapsible-collapsed not added to expanded elements" );
-				ok($page.find( ".ui-collapsible.ui-collapsible-collapsed" ).find( ".ui-collapsible-heading-toggle > .ui-btn-inner" ).hasClass( "ui-corner-all" ), "Collapsible header button should have class ui-corner-all" );
+				ok($page.find( ".ui-collapsible.ui-collapsible-collapsed" ).find( ".ui-collapsible-heading-toggle > .ui-btn-inner" ).hasClass( "ui-corner-top ui-corner-bottom" ), "Collapsible header button should have class ui-corner-all" );
 				start();
 			}
 		]);
