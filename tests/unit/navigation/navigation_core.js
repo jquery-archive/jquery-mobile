@@ -140,26 +140,26 @@
 				start();
 			}]);
 	});
-	
+
 	asyncTest( "page last scroll distance is remembered while navigating to and from pages", function(){
 		$.testHelper.pageSequence([
 			navigateTestRoot,
-			
+
 			function(){
 				$( "body" ).height( $( window ).height() + 500 );
 				$.mobile.changePage( "external.html" );
 			},
-			
+
 			function(){
 				window.scrollTo( 0, 300 );
 				same( $(window).scrollTop(), 300, "scrollTop is 300" );
 				navigateTestRoot();
 			},
-			
+
 			function(){
 				window.history.back();
 			},
-			
+
 			function(){
 				// Give the silentScroll function some time to kick in.
 				setTimeout(function() {
@@ -168,9 +168,9 @@
 					start();
 				}, 100 );
 			}
-			
-		]);	
-		
+
+		]);
+
 	});
 
 	asyncTest( "forms with data attribute ajax set to false will not call changePage", function(){
@@ -754,8 +754,40 @@
 		]);
 	});
 
-	asyncTest( "handling of button active state when navigating by clicking back button", 1, function(){
+	// issue 2444 https://github.com/jquery/jquery-mobile/issues/2444
+	// results from preventing spurious hash changes
+	asyncTest( "dialog should return to its parent page when open and closed multiple times", function() {
+		$.testHelper.pageSequence([
+			// open our test page
+			function(){
+				$.testHelper.openPage("#default-trans-dialog");
+			},
 
+			function(){
+				$.mobile.activePage.find( "a" ).click();
+			},
+
+			function(){
+				window.history.back();
+			},
+
+			function(){
+				same( $.mobile.activePage[0], $( "#default-trans-dialog" )[0] );
+				$.mobile.activePage.find( "a" ).click();
+			},
+
+			function(){
+				window.history.back();
+			},
+
+			function(){
+				same( $.mobile.activePage[0], $( "#default-trans-dialog" )[0] );
+				start();
+			}
+		]);
+	});
+
+	asyncTest( "handling of button active state when navigating by clicking back button", 1, function(){
 		$.testHelper.pageSequence([
 			// open our test page
 			function(){
