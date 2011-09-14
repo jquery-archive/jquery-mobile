@@ -48,6 +48,12 @@
 			return url;
 		},
 
+		// TODO sort out a single barrier to hashchange functionality
+		nextHashChangePrevented: function( value ) {
+			$.mobile.urlHistory.ignoreNextHashChange = value;
+			self.onHashChangeDisabled = value;
+		},
+
 		// on hash change we want to clean up the url
 		// NOTE this takes place *after* the vanilla navigation hash change
 		// handling has taken place and set the state of the DOM
@@ -57,7 +63,10 @@
 				isPath = $.mobile.path.isPath( hash );
 			hash = isPath ? hash.replace( "#", "" ) : hash;
 
-			self.hashchangeFired = true;
+			// disable this hash change
+			if( self.onHashChangeDisabled ){
+				return;
+			}
 
 			// propulate the hash when its not available
 			state = self.state();
@@ -91,14 +100,14 @@
 			// or forward popstate
 			if( poppedState ) {
 				// disable any hashchange triggered by the browser
-				$.mobile.urlHistory.ignoreNextHashChange = true;
+				self.nextHashChangePrevented( true );
 
 				// defer our manual hashchange until after the browser fired
 				// version has come and gone
 				setTimeout(function() {
 					// make sure that the manual hash handling takes place
-					$.mobile.urlHistory.ignoreNextHashChange = false;
-					
+					self.nextHashChangePrevented( false );
+
 					// change the page based on the hash
 					$.mobile._handleHashChange( poppedState.hash );
 				}, 100);
