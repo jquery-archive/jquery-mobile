@@ -20,6 +20,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 
 		var $el = this.element,
 			o = this.options,
+			expandedCls = "ui-btn-up-" + (o.theme || "c"),
 			collapsible = $el.addClass( "ui-collapsible" ),
 			collapsibleHeading = $el.find( o.heading ).eq( 0 ),
 			collapsibleContent = collapsible.wrapInner( "<div class='ui-collapsible-content'></div>" ).find( ".ui-collapsible-content" ),
@@ -40,7 +41,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			.wrapInner( "<a href='#' class='ui-collapsible-heading-toggle'></a>" )
 			.find( "a:eq(0)" )
 				.buttonMarkup({
-					shadow: !collapsibleParent.length,
+					shadow: false,
 					corners: false,
 					iconPos: "left",
 					icon: "plus",
@@ -58,10 +59,8 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 
 		if ( !collapsibleParent.length ) {
 			collapsibleHeading
-				.find( "a:eq(0)" )
-					.addClass( "ui-corner-all" )
-					.find( ".ui-btn-inner" )
-						.addClass( "ui-corner-all" );
+				.find( "a:eq(0), .ui-btn-inner" )
+					.addClass( "ui-corner-top ui-corner-bottom" );
 		} else {
 			if ( collapsible.jqmData( "collapsible-last" ) ) {
 				collapsibleHeading
@@ -72,50 +71,31 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 
 		//events
 		collapsible
-			.bind( "collapse", function( event ) {
-				if ( ! event.isDefaultPrevented() &&
-							$( event.target ).closest( ".ui-collapsible" ).is( collapsible ) ) {
-
-					event.preventDefault();
-
-					collapsibleHeading
-						.addClass( "ui-collapsible-heading-collapsed" )
-						.find( ".ui-collapsible-heading-status" )
-							.text( o.expandCueText )
-						.end()
-						.find( ".ui-icon" )
-							.removeClass( "ui-icon-minus" )
-							.addClass( "ui-icon-plus" );
-
-					collapsible.toggleClass( "ui-collapsible-collapsed", true );
-					collapsibleContent.addClass( "ui-collapsible-content-collapsed" ).attr( "aria-hidden", true );
-
-					if ( collapsible.jqmData( "collapsible-last" ) ) {
-						collapsibleHeading
-							.find( "a:eq(0), .ui-btn-inner" )
-							.addClass( "ui-corner-bottom" );
-					}
-				}
-			})
-			.bind( "expand", function( event ) {
+			.bind( "expand collapse", function( event ) {
 				if ( !event.isDefaultPrevented() ) {
 
 					event.preventDefault();
 
+					var isCollapse = ( event.type === "collapse" );
+
 					collapsibleHeading
-						.removeClass( "ui-collapsible-heading-collapsed" )
-						.find( ".ui-collapsible-heading-status" ).text( o.collapseCueText );
+						.toggleClass( "ui-collapsible-heading-collapsed", isCollapse)
+						.find( ".ui-collapsible-heading-status" )
+							.text( o.expandCueText )
+						.end()
+						.find( ".ui-icon" )
+							.toggleClass( "ui-icon-minus", !isCollapse )
+							.toggleClass( "ui-icon-plus", isCollapse );
 
-					collapsibleHeading.find( ".ui-icon" ).removeClass( "ui-icon-plus" ).addClass( "ui-icon-minus" );
+					collapsible.toggleClass( "ui-collapsible-collapsed", isCollapse );
+					collapsibleContent.toggleClass( "ui-collapsible-content-collapsed", isCollapse ).attr( "aria-hidden", isCollapse );
+					collapsibleContent.toggleClass( expandedCls, !isCollapse );
 
-					collapsible.toggleClass( "ui-collapsible-collapsed", false );
-					collapsibleContent.removeClass( "ui-collapsible-content-collapsed" ).attr( "aria-hidden", false );
-
-					if ( collapsible.jqmData( "collapsible-last" ) ) {
-
+					if ( !collapsibleParent.length || collapsible.jqmData( "collapsible-last" ) ) {
 						collapsibleHeading
 							.find( "a:eq(0), .ui-btn-inner" )
-							.removeClass( "ui-corner-bottom" );
+							.toggleClass( "ui-corner-bottom", isCollapse );
+						collapsibleContent.toggleClass( "ui-corner-bottom", !isCollapse );
 					}
 				}
 			})
