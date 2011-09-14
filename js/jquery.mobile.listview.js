@@ -53,7 +53,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				$this.prependTo( $this.parent() ); //shift aside to front for css float
 			});
 			
-		// TODO hook - send item apply event
+		// hook - send item apply event
+		item.trigger('itemApply');
 	},
 
 	_removeCorners: function( li, which ) {
