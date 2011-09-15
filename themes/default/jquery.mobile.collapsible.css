@@ -12,11 +12,11 @@
 .ui-collapsible-heading a span.ui-btn .ui-icon { left: 0; margin-top: -10px; }
 .ui-collapsible-heading-status { position:absolute; left:-9999px; }
 .ui-collapsible-content {
-	border-top:  none;
 	display: block;
 	margin:  0 -8px;
 	padding: 10px 16px;
-	background-image: none;
+	border-top:  none;      /* Overrides ui-btn-up-* */
+	background-image: none; /* Overrides ui-btn-up-* */
 	font-weight: normal;    /* Overrides ui-btn-up-* */
 }
 .ui-collapsible-content-collapsed { display: none; }
