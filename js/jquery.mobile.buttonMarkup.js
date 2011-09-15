@@ -9,7 +9,11 @@
 $.fn.buttonMarkup = function( options ) {
 	return this.each( function() {
 		var el = $( this ),
-			o = $.extend( {}, $.fn.buttonMarkup.defaults, el.jqmData(), options ),
+			o = $.extend( {}, $.fn.buttonMarkup.defaults, {
+				icon: el.jqmData( "icon" ),
+				iconpos: el.jqmData( "iconpos" ),
+				theme: el.jqmData( "theme" )
+			}, options ),
 
 			// Classes Defined
 			innerClass = "ui-btn-inner",
