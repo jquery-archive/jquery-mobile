@@ -47,15 +47,6 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 					icon: "plus",
 					theme: o.theme
 				})
-				.find( ".ui-icon" )
-					.removeAttr( "class" )
-					.buttonMarkup({
-						shadow: true,
-						corners: true,
-						iconPos: "notext",
-						icon: "plus",
-						theme: o.iconTheme
-					});
 
 		if ( !collapsibleParent.length ) {
 			collapsibleHeading
