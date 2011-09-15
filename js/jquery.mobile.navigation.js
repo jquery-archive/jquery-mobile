@@ -25,20 +25,21 @@
 			//     [2]: http://jblas:password@mycompany.com:8080/mail/inbox
 			//     [3]: http://jblas:password@mycompany.com:8080
 			//     [4]: http:
-			//     [5]: jblas:password@mycompany.com:8080
-			//     [6]: jblas:password
-			//     [7]: jblas
-			//     [8]: password
-			//     [9]: mycompany.com:8080
-			//    [10]: mycompany.com
-			//    [11]: 8080
-			//    [12]: /mail/inbox
-			//    [13]: /mail/
-			//    [14]: inbox
-			//    [15]: ?msg=1234&type=unread
-			//    [16]: #msg-content
+			//     [5]: //
+			//     [6]: jblas:password@mycompany.com:8080
+			//     [7]: jblas:password
+			//     [8]: jblas
+			//     [9]: password
+			//    [10]: mycompany.com:8080
+			//    [11]: mycompany.com
+			//    [12]: 8080
+			//    [13]: /mail/inbox
+			//    [14]: /mail/
+			//    [15]: inbox
+			//    [16]: ?msg=1234&type=unread
+			//    [17]: #msg-content
 			//
-			urlParseRE: /^(((([^:\/#\?]+:)?(?:\/\/((?:(([^:@\/#\?]+)(?:\:([^:@\/#\?]+))?)@)?(([^:\/#\?\]\[]+|\[[^\/\]@#?]+\])(?:\:([0-9]+))?))?)?)?((\/?(?:[^\/\?#]+\/+)*)([^\?#]*)))?(\?[^#]+)?)(#.*)?/,
+			urlParseRE: /^(((([^:\/#\?]+:)?(?:(\/\/)((?:(([^:@\/#\?]+)(?:\:([^:@\/#\?]+))?)@)?(([^:\/#\?\]\[]+|\[[^\/\]@#?]+\])(?:\:([0-9]+))?))?)?)?((\/?(?:[^\/\?#]+\/+)*)([^\?#]*)))?(\?[^#]+)?)(#.*)?/,
 
 			//Parse a URL into a structure that allows easy access to
 			//all of the URL components by name.
@@ -49,34 +50,31 @@
 					return url;
 				}
 
-				var u = url || "",
-					matches = path.urlParseRE.exec( url ),
-					results;
-				if ( matches ) {
+				var matches = path.urlParseRE.exec( url || "" ) || [];
+
 					// Create an object that allows the caller to access the sub-matches
 					// by name. Note that IE returns an empty string instead of undefined,
 					// like all other browsers do, so we normalize everything so its consistent
 					// no matter what browser we're running on.
-					results = {
-						href:         matches[0] || "",
-						hrefNoHash:   matches[1] || "",
-						hrefNoSearch: matches[2] || "",
-						domain:       matches[3] || "",
-						protocol:     matches[4] || "",
-						authority:    matches[5] || "",
-						username:     matches[7] || "",
-						password:     matches[8] || "",
-						host:         matches[9] || "",
-						hostname:     matches[10] || "",
-						port:         matches[11] || "",
-						pathname:     matches[12] || "",
-						directory:    matches[13] || "",
-						filename:     matches[14] || "",
-						search:       matches[15] || "",
-						hash:         matches[16] || ""
+					return {
+						href:         matches[  0 ] || "",
+						hrefNoHash:   matches[  1 ] || "",
+						hrefNoSearch: matches[  2 ] || "",
+						domain:       matches[  3 ] || "",
+						protocol:     matches[  4 ] || "",
+						doubleSlash:  matches[  5 ] || "",
+						authority:    matches[  6 ] || "",
+						username:     matches[  8 ] || "",
+						password:     matches[  9 ] || "",
+						host:         matches[ 10 ] || "",
+						hostname:     matches[ 11 ] || "",
+						port:         matches[ 12 ] || "",
+						pathname:     matches[ 13 ] || "",
+						directory:    matches[ 14 ] || "",
+						filename:     matches[ 15 ] || "",
+						search:       matches[ 16 ] || "",
+						hash:         matches[ 17 ] || ""
 					};
-				}
-				return results || {};
 			},
 
 			//Turn relPath into an asbolute path. absPath is
@@ -136,13 +134,14 @@
 				var relObj = path.parseUrl( relUrl ),
 					absObj = path.parseUrl( absUrl ),
 					protocol = relObj.protocol || absObj.protocol,
+					doubleSlash = relObj.protocol ? relObj.doubleSlash : ( relObj.doubleSlash || absObj.doubleSlash );
 					authority = relObj.authority || absObj.authority,
 					hasPath = relObj.pathname !== "",
 					pathname = path.makePathAbsolute( relObj.pathname || absObj.filename, absObj.pathname ),
 					search = relObj.search || ( !hasPath && absObj.search ) || "",
 					hash = relObj.hash;
 
-				return protocol + "//" + authority + pathname + search + hash;
+				return protocol + doubleSlash + authority + pathname + search + hash;
 			},
 
 			//Add search (aka query) params to the specified url.
