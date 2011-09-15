@@ -40,6 +40,7 @@
 
 			$.mobile.urlHistory.stack = [];
 			$.mobile.urlHistory.activeIndex = 0;
+			$.Event.prototype.which = undefined;
 		}
 	});
 
