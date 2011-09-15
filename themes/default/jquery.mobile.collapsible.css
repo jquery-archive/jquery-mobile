@@ -17,6 +17,7 @@
 	margin:  0 -8px;
 	padding: 10px 16px;
 	background-image: none;
+	font-weight: normal;    /* Overrides ui-btn-up-* */
 }
 .ui-collapsible-content-collapsed { display: none; }
 
