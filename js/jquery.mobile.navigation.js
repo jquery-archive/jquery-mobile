@@ -1176,6 +1176,12 @@
 
 		//add active state on vclick
 		$( document ).bind( "vclick", function( event ) {
+			// if this isn't a left click we don't care. Its important to note
+			// that when the virtual event is generated it will create
+			if ( event.which > 1 ){
+				return;
+			}
+
 			var link = findClosestLink( event.target );
 			if ( link ) {
 				if ( path.parseUrl( link.getAttribute( "href" ) || "#" ).hash !== "#" ) {
@@ -1190,7 +1196,10 @@
 		// click routing - direct to HTTP or Ajax, accordingly
 		$( document ).bind( "click", function( event ) {
 			var link = findClosestLink( event.target );
-			if ( !link ) {
+
+			// If there is no link associated with the click or its not a left
+			// click we want to ignore the click
+			if ( !link || event.which > 1) {
 				return;
 			}
 

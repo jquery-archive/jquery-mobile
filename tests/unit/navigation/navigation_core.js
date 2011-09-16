@@ -40,6 +40,7 @@
 
 			$.mobile.urlHistory.stack = [];
 			$.mobile.urlHistory.activeIndex = 0;
+			$.Event.prototype.which = undefined;
 		}
 	});
 
@@ -782,6 +783,38 @@
 
 			function(){
 				same( $.mobile.activePage[0], $( "#default-trans-dialog" )[0] );
+				start();
+			}
+		]);
+	});
+
+	asyncTest( "clicks with middle mouse button are ignored", function() {
+		$.testHelper.pageSequence([
+			function() {
+				$.testHelper.openPage( "#odd-clicks-page" );
+			},
+
+			function() {
+				$( "#right-or-middle-click" ).click();
+			},
+
+			// make sure the page is opening first without the mocked button click value
+			// only necessary to prevent issues with test specific fixtures
+			function() {
+				same($.mobile.activePage[0], $("#odd-clicks-page-dest")[0]);
+				$.testHelper.openPage( "#odd-clicks-page" );
+
+				// mock the which value to simulate a middle click
+				$.Event.prototype.which = 2;
+			},
+
+			function() {
+				$( "#right-or-middle-click" ).click();
+			},
+
+			function( timeout ) {
+				ok( timeout, "page event handler timed out due to ignored click" );
+				ok($.mobile.activePage[0] !== $("#odd-clicks-page-dest")[0], "pages are not the same");
 				start();
 			}
 		]);

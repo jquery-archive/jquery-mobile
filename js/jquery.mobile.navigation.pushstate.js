@@ -58,15 +58,15 @@
 		// NOTE this takes place *after* the vanilla navigation hash change
 		// handling has taken place and set the state of the DOM
 		onHashChange: function( e ) {
-			var href, state,
-				hash = location.hash,
-				isPath = $.mobile.path.isPath( hash );
-			hash = isPath ? hash.replace( "#", "" ) : hash;
-
 			// disable this hash change
 			if( self.onHashChangeDisabled ){
 				return;
 			}
+			
+			var href, state,
+				hash = location.hash,
+				isPath = $.mobile.path.isPath( hash );
+			hash = isPath ? hash.replace( "#", "" ) : hash;
 
 			// propulate the hash when its not available
 			state = self.state();

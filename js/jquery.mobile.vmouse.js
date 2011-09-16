@@ -74,6 +74,12 @@ function createVirtualEvent( event, eventType ) {
 		}
 	}
 
+	// make sure that if the mouse and click virtual events are generated
+	// without a .which one is defined
+	if ( t.search(/mouse(down|up)|click/) > -1 && !event.which ){
+		event.which = 1;
+	}
+
 	if ( t.search(/^touch/) !== -1 ) {
 		ne = getNativeEvent( oe );
 		t = ne.touches;
