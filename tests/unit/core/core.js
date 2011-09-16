@@ -100,11 +100,4 @@
 		same( $("body").jqmData("foo"), undefined, "jqmRemoveData properly removes namespaced data" );
 
 	});
-
-	test( "jqmHasData method is working properly", function(){
-		same( $.jqmHasData(document.body, "foo"), false, "body has no data defined under 'foo'" );
-		$.jqmData(document.body, "foo", true);
-		same( $.jqmHasData(document.body, "foo"), true, "after setting, body has data defined under 'foo' equal to true" );
-		$.jqmRemoveData(document.body, "foo");
-	});
 })(jQuery);
