@@ -147,10 +147,6 @@
 		return $.removeData( elem, $.mobile.nsNormalize( prop ) );
 	};
 
-	$.jqmHasData = function( elem, prop ) {
-		return $.hasData( elem, $.mobile.nsNormalize( prop ) );
-	};
-
 	// Monkey-patching Sizzle to filter the :jqmData selector
 	var oldFind = $.find;
 
