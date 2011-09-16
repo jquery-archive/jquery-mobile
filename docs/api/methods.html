@@ -150,6 +150,7 @@ $.mobile.loadPage( "searchresults.php", {
 				<dl>
 					<dt><code>&#183;</code> Arguments:</dt>
 					<dd>See jQuery's <a href="http://api.jquery.com/jQuery.data/">data</a> and <a href="http://api.jquery.com/jQuery.removeData/">removeData</a> methods</dd>
+					<strong>Note: </strong>Calling jqmData() with no argument will return <code>undefined</code>. This behavior is subject to change in future versions.
 					<dt><code>&#183;</code> Also:</dt>
 					<dd>When finding elements by their jQuery Mobile data attribute, please use the custom selector <code>:jqmData()</code>, as it automatically incorporates namespaced data attributes into the lookup when they are in use. For example, instead of calling <code>$("div[data-role='page']")</code>, you should use <code>$("div:jqmData(role='page')")</code>, which internally maps to <code>$("div[data-"+ $.mobile.ns +"role='page']")</code> without forcing you to concatenate a namespace into your selectors manually.</dd>
 				</dl>
