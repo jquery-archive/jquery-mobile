@@ -128,11 +128,7 @@
 	// Mobile version of data and removeData and hasData methods
 	// ensures all data is set and retrieved using jQuery Mobile's data namespace
 	$.fn.jqmData = function( prop, value ) {
-		var result;
-		if ( typeof prop != "undefined" ) {
-			result = this.data( prop ? $.mobile.nsNormalize( prop ) : prop, value );
-		}
-		return result;
+		return this.data( prop ? $.mobile.nsNormalize( prop ) : prop, value );
 	};
 
 	$.jqmData = function( elem, prop, value ) {
