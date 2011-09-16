@@ -65,11 +65,13 @@
 
 		same( $("body").jqmData("foo", undefined), true, "getting data still returns the value if there's an undefined second arg" );
 
-		same( $("body").jqmData(), { "nstestFoo": true}, "passing no arguments returns a hash with all set properties" );
+		same( $("body").data(), { "nstestFoo": true }, "passing .data() no arguments returns a hash with all set properties" );
 
-		same( $("body").jqmData(undefined), { "nstestFoo": true}, "passing a single undefined argument returns a hash with all set properties" );
+		same( $("body").jqmData(), undefined, "passing no arguments returns undefined" );
 
-		same( $("body").jqmData(undefined, undefined), {"nstestFoo": true}, "passing 2 undefined arguments returns a hash with all set properties" );
+		same( $("body").jqmData(undefined), undefined, "passing a single undefined argument returns undefined" );
+
+		same( $("body").jqmData(undefined, undefined), undefined, "passing 2 undefined arguments returns undefined" );
 
 		same( $("body").jqmRemoveData("foo"), $("body"), "jqmRemoveData returns the element" );
 
