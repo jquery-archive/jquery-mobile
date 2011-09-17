@@ -21,7 +21,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		splitIcon: "arrow-r",
 		splitTheme: "b",
 		inset: false,
-		initSelector: ":jqmData(role='listview')"
+		initSelector: ":jqmData(role='listview')",
+		autodivide: false
 	},
 
 	_create: function() {
@@ -117,9 +118,11 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			listsplittheme = $list.jqmData( "splittheme" ),
 			listspliticon = $list.jqmData( "spliticon" ),
 			li = $list.children( "li" ),
+			autodivideLastLetter = "NONE",
 			counter = $.support.cssPseudoElement || !$.nodeName( $list[ 0 ], "ol" ) ? 0 : 1,
 			item, itemClass, itemTheme,
-			a, last, splittheme, countParent, icon;
+			a, last, splittheme, countParent, icon,
+			firstChar, autodividerElem;
 
 		if ( counter ) {
 			$list.find( ".ui-li-dec" ).remove();
@@ -194,6 +197,27 @@ $.widget( "mobile.listview", $.mobile.widget, {
 					itemClass += " ui-li-static ui-body-" + itemTheme;
 				}
 			}
+
+			if(self.options.autodivide) {
+				// get the first character of the text
+				firstChar = item.text()[0];
+				if(firstChar != autodivideLastLetter) {
+					autodivideLastLetter = firstChar;
+
+					// Create a new element for the autodivider
+					autodividerElem = $("<li/>");
+					autodividerElem.addClass ("ui-li ui-li-divider ui-btn ui-bar-" + dividertheme);
+					autodividerElem.attr("data-role", "list-divider");
+					autodividerElem.attr("role", "heading");
+					autodividerElem.text(firstChar);
+					item.before(autodividerElem);
+
+					if( counter ) {
+						counter = 1;
+					}
+				}
+			}
+
 
 			if ( counter && itemClass.indexOf( "ui-li-divider" ) < 0 ) {
 				countParent = item.is( ".ui-li-static:first" ) ? item : item.find( ".ui-link-inherit" );
