@@ -110,7 +110,7 @@ $.event.special.tap = {
 
 			timer = setTimeout(function() {
 					triggerCustomEvent( thisObject, "taphold", $.Event( "taphold" ) );
-			}, 750 );
+			}, $.mobile.tapholdDuration);
 		});
 	}
 };

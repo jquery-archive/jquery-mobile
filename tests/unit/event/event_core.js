@@ -151,7 +151,7 @@
 		setTimeout(function(){
 			ok(taphold);
 			start();
-		}, 751);
+		}, $.mobile.tapholdDuration + 1);
 	});
 
 	//NOTE used to simulate movement when checked
