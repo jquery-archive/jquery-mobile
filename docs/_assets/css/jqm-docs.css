@@ -55,7 +55,6 @@ p.intro strong {
 	margin: 10px -15px 0;
 	background: #fff;
 	border-top: 1px solid #ccc;
-	min-height: 68px;
 }
 .type-home .ui-content {
 	margin-top: 5px;
@@ -66,10 +65,6 @@ p.intro strong {
 .content-secondary .ui-collapsible-contain {
 	padding: 10px 15px;
 
-}
-.content-primary > .ui-collapsible,
-.content-secondary > .ui-collapsible {
-	margin: 15px;
 }
 .content-secondary .ui-collapsible-heading {
 	margin: 0 0 30px;
