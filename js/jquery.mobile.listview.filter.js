@@ -40,12 +40,16 @@ $( ":jqmData(role='listview')" ).live( "listviewcreate", function() {
 				lastval = $this.jqmData( "lastval" ) + "",
 				childItems = false,
 				itemtext = "",
-				item, change;
+				item, change,
+				regex = "";
+
+			try {
+			    regex = new RegExp( "^" + lastval );
+			} catch (e) {}
 
 			// Change val as lastval for next execution
 			$this.jqmData( "lastval" , val );
-
-			change = val.replace( new RegExp( "^" + lastval ) , "" );
+			change = val.replace( regex , "" );
 
 			if ( val.length < lastval.length || change.length != ( val.length - lastval.length ) ) {
 
