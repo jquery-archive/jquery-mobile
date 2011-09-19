@@ -15,7 +15,7 @@ var slideDownClass = "ui-header-fixed ui-fixed-inline fade",
 
 $.fn.fixHeaderFooter = function( options ) {
 
-	if ( !$.support.scrollTop ) {
+	if ( !$.support.scrollTop || ( $.support.touchOverflow && $.mobile.touchOverflowEnabled ) ) {
 		return this;
 	}
 
@@ -37,7 +37,7 @@ $.fn.fixHeaderFooter = function( options ) {
 // single controller for all showing,hiding,toggling
 $.mobile.fixedToolbars = (function() {
 
-	if ( !$.support.scrollTop ) {
+	if ( !$.support.scrollTop || ( $.support.touchOverflow && $.mobile.touchOverflowEnabled ) ) {
 		return;
 	}
 
@@ -361,7 +361,7 @@ $( document ).bind( "pagecreate create", function( event ) {
 
 		$( event.target ).each(function() {
 
-			if ( !$.support.scrollTop ) {
+			if ( !$.support.scrollTop || ( $.support.touchOverflow && $.mobile.touchOverflowEnabled ) ) {
 				return this;
 			}
 

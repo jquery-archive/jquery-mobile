@@ -5,11 +5,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>jQuery Mobile Widget Test Suite</title>
 
+	<script src="../../../external/qunit.js"></script>
 	<script src="../../../js/jquery.js"></script>
+	<script src="widget_init.js"></script>
 	<script src="../../../js/"></script>
 
 	<link rel="stylesheet" href="../../../external/qunit.css"/>
-	<script src="../../../external/qunit.js"></script>
 
 	<script src="widget_core.js"></script>
 </head>
@@ -32,8 +33,8 @@
 </div>
 
 <div id="foo"  data-role="page">
+  <input type="range" id="foo-slider" name="foo-slider" value="" />
 </div>
-
 
 </body>
 </html>

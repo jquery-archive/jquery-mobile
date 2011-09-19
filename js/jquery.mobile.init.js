@@ -85,7 +85,7 @@
 
 				// unless the data url is already set set it to the pathname
 				if ( !$this.jqmData("url") ) {
-					$this.attr( "data-" + $.mobile.ns + "url", $this.attr( "id" ) || location.pathname );
+					$this.attr( "data-" + $.mobile.ns + "url", $this.attr( "id" ) || location.pathname + location.search );
 				}
 			});
 

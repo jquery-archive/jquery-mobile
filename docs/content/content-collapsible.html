@@ -44,7 +44,7 @@
 			</div>
 
 
-		<p>As the example notes, by default the content will be expanded. To collapse the content when the page loads, add the <code>data-collapsed="true"</code> attribute to the wrapper.</p>
+		<p>As the example notes, by default the content will be collapsed. To expand the content when the page loads, add the <code>data-collapsed="false"</code> attribute to the wrapper.</p>
 
 	<code>		
 	&lt;div data-role=&quot;collapsible&quot; <strong>data-collapsed=&quot;true&quot;&gt;</strong>
@@ -53,9 +53,9 @@
 		<p>This code will create a collapsible widget like this:</p>
 	
 
-			<div data-role="collapsible" data-collapsed="true">
+			<div data-role="collapsible" data-collapsed="false">
 				<h3>I'm a header</h3>
-				<p>I'm the collapsible content. I'm hidden by default because I have the "collapsed" state; you need to expand the header to see me.</p>
+				<p>I'm the collapsible content. I'm expanded by default because I have the "collapsed" state set to false; you need to expand the header to see me.</p>
 			</div>
 	
 		<p>Collapsible content is minimally styled &mdash; we add only a bit of margin between the bar and content, and the header adopts the default Theme styles of the container it sits within.</p>
@@ -71,7 +71,7 @@
 		
 		<div data-role="collapsible">
 			<h3>Section 2: Expanded on load</h3>
-			<p>I'm open when the page loads because I don't have the <code>data-collapsed="true"</code> attribute on my container. </p>
+			<p>I'm closed when the page loads because I don't have the <code>data-collapsed="false"</code> attribute on my container. </p>
 			<p>I'm the collapsible content. I'm the collapsible content. I'm the collapsible content. I'm the collapsible content. I'm the collapsible content. I'm the collapsible content.</p>
 		</div><!-- /section 2 -->
 		

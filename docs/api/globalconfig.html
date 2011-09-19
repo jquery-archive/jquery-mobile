@@ -92,7 +92,7 @@ $(document).bind("mobileinit", function(){
 	<dd>The class assigned to page currently in view, and during transitions</dd>
 	
 	
-	<dt><code>activeBtnClass</code> <em>string</em>, default: "ui-page-active"</dt> 
+	<dt><code>activeBtnClass</code> <em>string</em>, default: "ui-btn-active"</dt> 
 	<dd>The class used for "active" button state, from CSS framework.</dd>
 	
 	<dt><code>ajaxEnabled</code> <em>boolean</em>, default: true</dt> 
@@ -104,6 +104,9 @@ $(document).bind("mobileinit", function(){
 
 	<dt><code>defaultPageTransition</code> <em>string</em>, default: 'slide'</dt> 
 	<dd>Set the default transition for page changes that use Ajax. Set to 'none' for no transitions by default.</dd>
+	
+	<dt><code>touchOverflowEnabled</code> <em>boolean</em>, default: false</dt> 
+	<dd>Enable pages to have self-contained native scrolling and fixed toolbars in devices that support the <code>overflow-scrolling: touch; </code> property.</dd>
 	
 	<dt><code>defaultDialogTransition</code> <em>string</em>, default: 'pop'</dt> 
 	<dd>Set the default transition for dialog changes that use Ajax. Set to 'none' for no transitions by default.</dd>

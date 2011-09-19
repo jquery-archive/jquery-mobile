@@ -40,7 +40,38 @@
 
 			$.mobile.urlHistory.stack = [];
 			$.mobile.urlHistory.activeIndex = 0;
+			$.Event.prototype.which = undefined;
 		}
+	});
+
+	asyncTest( "window.history.back() from external to internal page", function(){
+
+		$.testHelper.pageSequence([
+
+			// open our test page
+			function(){
+				$.testHelper.openPage("#active-state-page1");
+			},
+
+			function(){
+				ok( $.mobile.activePage[0] === $( "#active-state-page1" )[ 0 ], "successful navigation to internal page." );
+
+				//location.hash = siteDirectory + "external.html";
+				$.mobile.changePage("external.html");
+			},
+
+			function(){
+				ok( $.mobile.activePage[0] !== $( "#active-state-page1" )[ 0 ], "successful navigation to external page." );
+
+				window.history.back();
+			},
+
+			function(){
+				ok( $.mobile.activePage[0] === $( "#active-state-page1" )[ 0 ], "successful navigation back to internal page." );
+
+				start();
+			}
+		]);
 	});
 
 	asyncTest( "external page is removed from the DOM after pagehide", function(){
@@ -109,6 +140,38 @@
 				$( "#external-test" ).remove();
 				start();
 			}]);
+	});
+
+	asyncTest( "page last scroll distance is remembered while navigating to and from pages", function(){
+		$.testHelper.pageSequence([
+			navigateTestRoot,
+
+			function(){
+				$( "body" ).height( $( window ).height() + 500 );
+				$.mobile.changePage( "external.html" );
+			},
+
+			function(){
+				window.scrollTo( 0, 300 );
+				same( $(window).scrollTop(), 300, "scrollTop is 300" );
+				navigateTestRoot();
+			},
+
+			function(){
+				window.history.back();
+			},
+
+			function(){
+				// Give the silentScroll function some time to kick in.
+				setTimeout(function() {
+					same( $(window).scrollTop(), 300, "scrollTop is 300" );
+					$( "body" ).height( "" );
+					start();
+				}, 100 );
+			}
+
+		]);
+
 	});
 
 	asyncTest( "forms with data attribute ajax set to false will not call changePage", function(){
@@ -692,8 +755,72 @@
 		]);
 	});
 
-	asyncTest( "handling of button active state when navigating by clicking back button", 1, function(){
+	// issue 2444 https://github.com/jquery/jquery-mobile/issues/2444
+	// results from preventing spurious hash changes
+	asyncTest( "dialog should return to its parent page when open and closed multiple times", function() {
+		$.testHelper.pageSequence([
+			// open our test page
+			function(){
+				$.testHelper.openPage("#default-trans-dialog");
+			},
 
+			function(){
+				$.mobile.activePage.find( "a" ).click();
+			},
+
+			function(){
+				window.history.back();
+			},
+
+			function(){
+				same( $.mobile.activePage[0], $( "#default-trans-dialog" )[0] );
+				$.mobile.activePage.find( "a" ).click();
+			},
+
+			function(){
+				window.history.back();
+			},
+
+			function(){
+				same( $.mobile.activePage[0], $( "#default-trans-dialog" )[0] );
+				start();
+			}
+		]);
+	});
+
+	asyncTest( "clicks with middle mouse button are ignored", function() {
+		$.testHelper.pageSequence([
+			function() {
+				$.testHelper.openPage( "#odd-clicks-page" );
+			},
+
+			function() {
+				$( "#right-or-middle-click" ).click();
+			},
+
+			// make sure the page is opening first without the mocked button click value
+			// only necessary to prevent issues with test specific fixtures
+			function() {
+				same($.mobile.activePage[0], $("#odd-clicks-page-dest")[0]);
+				$.testHelper.openPage( "#odd-clicks-page" );
+
+				// mock the which value to simulate a middle click
+				$.Event.prototype.which = 2;
+			},
+
+			function() {
+				$( "#right-or-middle-click" ).click();
+			},
+
+			function( timeout ) {
+				ok( timeout, "page event handler timed out due to ignored click" );
+				ok($.mobile.activePage[0] !== $("#odd-clicks-page-dest")[0], "pages are not the same");
+				start();
+			}
+		]);
+	});
+
+	asyncTest( "handling of button active state when navigating by clicking back button", 1, function(){
 		$.testHelper.pageSequence([
 			// open our test page
 			function(){

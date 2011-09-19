@@ -27,12 +27,15 @@
 			
 			<h2>You Chose:</h2>
 
-
+			<div class="ui-body ui-body-d ui-corner-all">
 
 			<?php
 				echo "<p> " . $_REQUEST['shipping'] . "</p>";
 			?>
-
+			
+			</div>
+			
+			<a href="forms-sample.html" data-role="button" data-theme="b" data-icon="arrow-l">Change shipping method</a>
 
 	</form>
 	

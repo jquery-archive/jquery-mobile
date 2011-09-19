@@ -74,6 +74,12 @@ function createVirtualEvent( event, eventType ) {
 		}
 	}
 
+	// make sure that if the mouse and click virtual events are generated
+	// without a .which one is defined
+	if ( t.search(/mouse(down|up)|click/) > -1 && !event.which ){
+		event.which = 1;
+	}
+
 	if ( t.search(/^touch/) !== -1 ) {
 		ne = getNativeEvent( oe );
 		t = ne.touches;
@@ -164,8 +170,7 @@ function clearResetTimer() {
 }
 
 function triggerVirtualEvent( eventType, event, flags ) {
-	var defaultPrevented = false,
-		ve;
+	var ve;
 
 	if ( ( flags && flags[ eventType ] ) ||
 				( !flags && getClosestElementWithVirtualBinding( event.target, eventType ) ) ) {
@@ -173,18 +178,27 @@ function triggerVirtualEvent( eventType, event, flags ) {
 		ve = createVirtualEvent( event, eventType );
 
 		$( event.target).trigger( ve );
-
-		defaultPrevented = ve.isDefaultPrevented();
 	}
 
-	return defaultPrevented;
+	return ve;
 }
 
 function mouseEventCallback( event ) {
 	var touchID = $.data(event.target, touchTargetPropertyName);
 
 	if ( !blockMouseTriggers && ( !lastTouchID || lastTouchID !== touchID ) ){
-		triggerVirtualEvent( "v" + event.type, event );
+		var ve = triggerVirtualEvent( "v" + event.type, event );
+		if ( ve ) {
+			if ( ve.isDefaultPrevented() ) {
+				event.preventDefault();
+			}
+			if ( ve.isPropagationStopped() ) {
+				event.stopPropagation();
+			}
+			if ( ve.isImmediatePropagationStopped() ) {
+				event.stopImmediatePropagation();
+			}
+		}
 	}
 }
 
@@ -264,7 +278,8 @@ function handleTouchEnd( event ) {
 	triggerVirtualEvent( "vmouseup", event, flags );
 
 	if ( !didScroll ) {
-		if ( triggerVirtualEvent( "vclick", event, flags ) ) {
+		var ve = triggerVirtualEvent( "vclick", event, flags );
+		if ( ve && ve.isDefaultPrevented() ) {
 			// The target of the mouse events that follow the touchend
 			// event don't necessarily match the target used during the
 			// touch. This means we need to rely on coordinates for blocking
