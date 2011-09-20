@@ -8,7 +8,7 @@
 		setup: function(){
 			if ( location.hash ) {
 				stop();
-				$(document).one("changepage", function() {
+				$(document).one("pagechange", function() {
 					start();
 				} );
 				location.hash = "";

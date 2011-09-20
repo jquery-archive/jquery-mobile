@@ -88,7 +88,7 @@
 		},
 
 		pageSequence: function(fns){
-			this.eventSequence("changepage", fns);
+			this.eventSequence("pagechange", fns);
 		},
 
 		eventSequence: function(event, fns, timedOut){
@@ -97,7 +97,7 @@
 
 			if( fn === undefined ) return;
 
-			// if a changepage or defined event is never triggered
+			// if a pagechange or defined event is never triggered
 			// continue in the sequence to alert possible failures
 			var warnTimer = setTimeout(function(){
 				self.eventSequence(event, fns, true);

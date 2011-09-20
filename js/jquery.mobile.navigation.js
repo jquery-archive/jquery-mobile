@@ -428,8 +428,8 @@
 	})( true );
 
 	// to get last scroll, we need to get scrolltop before the page change
-	// using beforechangepage or popstate/hashchange (whichever comes first)
-	$( document ).bind( "beforechangepage", getLastScroll );
+	// using pagebeforechange or popstate/hashchange (whichever comes first)
+	$( document ).bind( "pagebeforechange", getLastScroll );
 	$( window ).bind( $.support.pushState ? "popstate" : "hashchange", getLastScroll );
 
 	// Make the iOS clock quick-scroll work again if we're using native overflow scrolling
@@ -877,8 +877,6 @@
 		// Let listeners know we're about to change the current page.
 		mpc.trigger( pbcEvent, triggerData );
 
-		mpc.trigger( "beforechangepage", triggerData ); // XXX: DEPRECATED for 1.0
-
 		// If the default behavior is prevented, stop here!
 		if( pbcEvent.isDefaultPrevented() ){
 			return;
@@ -907,7 +905,6 @@
 					$.mobile.changePage( newPage, options );
 				})
 				.fail(function( url, options ) {
-					// XXX_jblas: Fire off changepagefailed notificaiton.
 					isPageTransitioning = false;
 
 					//clear out the active button state
@@ -916,7 +913,6 @@
 					//release transition lock so navigation is free again
 					releasePageTransitionLock();
 					settings.pageContainer.trigger( "pagechangefailed", triggerData );
-					settings.pageContainer.trigger( "changepagefailed", triggerData ); // XXX: DEPRECATED for 1.0
 				});
 			return;
 		}
@@ -943,7 +939,6 @@
 		if( fromPage && fromPage[0] === toPage[0] ) {
 			isPageTransitioning = false;
 			mpc.trigger( "pagechange", triggerData );
-			mpc.trigger( "changepage", triggerData ); // XXX: DEPRECATED for 1.0
 			return;
 		}
 
@@ -1031,8 +1026,6 @@
 
 				// Let listeners know we're all done changing the current page.
 				mpc.trigger( "pagechange", triggerData );
-
-				mpc.trigger( "changepage", triggerData ); // XXX: DEPRECATED for 1.0
 			});
 	};
 
@@ -1289,7 +1282,7 @@
 						isForward: function() { window.history.forward(); }
 					});
 
-					// prevent changepage
+					// prevent changePage()
 					return;
 				} else {
 					// if the current active page is a dialog and we're navigating

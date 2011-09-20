@@ -21,7 +21,7 @@
 
 				stop();
 
-				$(document).one( "changepage", function() {
+				$(document).one( "pagechange", function() {
 					start();
 				});
 
@@ -197,7 +197,7 @@
 			}], 1000);
 	});
 
-	asyncTest( "forms with data attribute ajax not set or set to anything but false will call changepage", function(){
+	asyncTest( "forms with data attribute ajax not set or set to anything but false will call changePage", function(){
 		var called = 0,
 				newChangePage = function(){
 					called++;
