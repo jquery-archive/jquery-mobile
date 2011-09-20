@@ -8,7 +8,7 @@
 
 // add new event shortcuts
 $.each( ( "touchstart touchmove touchend orientationchange throttledresize " +
-					"tap taphold swipe swipeleft swiperight scrollstart scrollstop" ).split( " " ), function( i, name ) {
+					"tap taphold swipe swipeleft swiperight swipeup swipedown scrollstart scrollstop" ).split( " " ), function( i, name ) {
 
 	$.fn[ name ] = function( fn ) {
 		return fn ? this.bind( name, fn ) : this.trigger( name );
@@ -125,15 +125,19 @@ $.event.special.swipe = {
 
 	setup: function() {
 		var thisObject = this,
-			$this = $( thisObject );
+			$this = $( thisObject ),
+			touching = false;
 
 		$this.bind( touchStartEvent, function( event ) {
+			if (touching == true) return;
+			touching = true;
 			var data = event.originalEvent.touches ?
 								event.originalEvent.touches[ 0 ] : event,
 				start = {
 					time: ( new Date() ).getTime(),
 					coords: [ data.pageX, data.pageY ],
-					origin: $( event.target )
+					origin: $( event.target ),
+					touchcount: event.originalEvent.touches ? event.originalEvent.touches.length : 1
 				},
 				stop;
 
@@ -159,15 +163,31 @@ $.event.special.swipe = {
 
 			$this.bind( touchMoveEvent, moveHandler )
 				.one( touchStopEvent, function( event ) {
+					touching=false;
 					$this.unbind( touchMoveEvent, moveHandler );
 
 					if ( start && stop ) {
+						var eventdata = {start:start, stop:stop};
+						
 						if ( stop.time - start.time < $.event.special.swipe.durationThreshold &&
 								Math.abs( start.coords[ 0 ] - stop.coords[ 0 ] ) > $.event.special.swipe.horizontalDistanceThreshold &&
 								Math.abs( start.coords[ 1 ] - stop.coords[ 1 ] ) < $.event.special.swipe.verticalDistanceThreshold ) {
-
-							start.origin.trigger( "swipe" )
-								.trigger( start.coords[0] > stop.coords[ 0 ] ? "swipeleft" : "swiperight" );
+								
+							eventdata.direction = start.coords[0] > stop.coords[ 0 ] ? "left" : "right";
+								
+							start.origin.trigger( "swipe", eventdata )
+								.trigger( "swipe"+eventdata.direction , eventdata);
+						}
+						
+						if ( stop.time - start.time < $.event.special.swipe.durationThreshold &&
+								Math.abs( start.coords[ 1 ] - stop.coords[ 1 ] ) > $.event.special.swipe.horizontalDistanceThreshold &&
+								Math.abs( start.coords[ 0 ] - stop.coords[ 0 ] ) < $.event.special.swipe.verticalDistanceThreshold ) {
+								
+							eventdata.direction = start.coords[1] > stop.coords[ 1 ] ? "up" : "down";
+								
+							start.origin.trigger( "swipe", eventdata )
+								.trigger( "swipe"+eventdata.direction , eventdata);
+							
 						}
 					}
 					start = stop = undefined;
@@ -290,7 +310,9 @@ $.each({
 	scrollstop: "scrollstart",
 	taphold: "tap",
 	swipeleft: "swipe",
-	swiperight: "swipe"
+	swiperight: "swipe",
+	swipeup: "swipe",
+	swipedown: "swipe"
 }, function( event, sourceEvent ) {
 
 	$.event.special[ event ] = {
