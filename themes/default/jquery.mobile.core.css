@@ -22,6 +22,9 @@
 .landscape,
 .landscape .ui-page  { min-height: 300px; }
 
+/* on ios4, setting focus on the page element causes flashing during transitions when there is an outline, so we turn off outlines */
+.ui-page { outline: none; }
+
 /* native overflow scrolling */
 .ui-page.ui-mobile-touch-overflow,
 .ui-mobile-touch-overflow.ui-native-fixed .ui-content {
