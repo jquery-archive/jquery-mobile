@@ -45,7 +45,8 @@ $( ":jqmData(role='listview')" ).live( "listviewcreate", function() {
 				item;
 			
 			// Get level count for list dividers 
-			$("li:jqmData(role=list-divider)").each(function() {levelCount = $(this).attr('divider-level') > levelCount ? $(this).attr('divider-level') : levelCount;	});
+			$("li:jqmData(role=list-divider)").each(function() {levelCount = $(this).attr('data-divider-level') > levelCount ? $(this).attr('data-divider-level') : levelCount;	});
+
 			
 			// Change val as lastval for next execution
 			$this.jqmData( "lastval" , val );
@@ -72,7 +73,8 @@ $( ":jqmData(role='listview')" ).live( "listviewcreate", function() {
 					itemtext = item.jqmData( "filtertext" ) || item.text();
 
 					if ( item.is( "li:jqmData(role=list-divider)" ) ) {
-						level = item.attr('divider-level');
+						level = item.attr('data-divider-level');
+
 						item.toggleClass( "ui-filter-hidequeue" , !levels[level] );
 
 						if(level > 1){
