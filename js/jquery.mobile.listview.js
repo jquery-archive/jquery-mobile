@@ -198,7 +198,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				}
 			}
 
-			if(self.options.autodivide) {
+			if(self.options.autodivide && (item.text().length > 0)) {
 				// get the first character of the text
 				firstChar = item.text()[0];
 				if(firstChar != autodivideLastLetter) {
