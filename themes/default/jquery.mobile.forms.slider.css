@@ -10,7 +10,7 @@ div.ui-slider { position: relative; display: inline-block; overflow: visible; he
 a.ui-slider-handle { position: absolute; z-index: 10;  top: 50%; width: 28px; height: 28px; margin-top: -15px; margin-left: -15px; }
 a.ui-slider-handle .ui-btn-inner { padding-left: 0; padding-right: 0; }
 @media all and (min-width: 480px){
-	label.ui-slider { display: inline-block;  width: 20%;  margin: 0 2% 0 0; }
+	label.ui-slider { vertical-align: top;  display: inline-block;  width: 20%;  margin: 0 2% 0 0; }
 	div.ui-slider { width: 45%; }
 }	
 
