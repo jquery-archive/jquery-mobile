@@ -144,34 +144,37 @@
 
 	asyncTest( "page last scroll distance is remembered while navigating to and from pages", function(){
 		$.testHelper.pageSequence([
-			navigateTestRoot,
-
 			function(){
 				$( "body" ).height( $( window ).height() + 500 );
 				$.mobile.changePage( "external.html" );
 			},
 
 			function(){
-				window.scrollTo( 0, 300 );
-				same( $(window).scrollTop(), 300, "scrollTop is 300" );
-				navigateTestRoot();
+				// wait for the initial scroll to 0
+				setTimeout( function() {
+					window.scrollTo( 0, 300 );
+					same( $(window).scrollTop(), 300, "scrollTop is 300 after setting it" );
+				}, 300);
+
+				// wait for the scrollstop to fire and for the scroll to be
+				// recorded 100 ms afterward (see changes made to handle hash
+				// scrolling in some browsers)
+				setTimeout( navigateTestRoot, 500 );
 			},
 
 			function(){
-				window.history.back();
+				history.back();
 			},
 
 			function(){
 				// Give the silentScroll function some time to kick in.
 				setTimeout(function() {
-					same( $(window).scrollTop(), 300, "scrollTop is 300" );
+					same( $(window).scrollTop(), 300, "scrollTop is 300 after returning to the page" );
 					$( "body" ).height( "" );
 					start();
-				}, 100 );
+				}, 300 );
 			}
-
 		]);
-
 	});
 
 	asyncTest( "forms with data attribute ajax set to false will not call changePage", function(){
