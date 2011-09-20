@@ -405,11 +405,12 @@
 		}
 
 		var active = $.mobile.urlHistory.getActive(),
-			activePage = $( ".ui-page-active" ),
-			scrollElem = $( window ),
-			touchOverflow = $.support.touchOverflow && $.mobile.touchOverflowEnabled;
+			scrollElem = $window,
+			touchOverflow = $.support.touchOverflow && $.mobile.touchOverflowEnabled,
+			activePage;
 
 		if( touchOverflow ){
+			activePage = $( ".ui-page-active" );
 			scrollElem = activePage.is( ".ui-native-fixed" ) ? activePage.find( ".ui-content" ) : activePage;
 		}
 
