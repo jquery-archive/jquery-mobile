@@ -38,10 +38,15 @@ $( ":jqmData(role='listview')" ).live( "listviewcreate", function() {
 				val = this.value.toLowerCase(),
 				listItems = null,
 				lastval = $this.jqmData( "lastval" ) + "",
-				childItems = false,
+				levels = [],
+				level = null,
 				itemtext = "",
-				item, change;
-
+				levelCount = 0,
+				item;
+			
+			// Get level count for list dividers 
+			$("li:jqmData(role=list-divider)").each(function() {levelCount = $(this).attr('divider-level') > levelCount ? $(this).attr('divider-level') : levelCount;	});
+			
 			// Change val as lastval for next execution
 			$this.jqmData( "lastval" , val );
 
@@ -67,20 +72,26 @@ $( ":jqmData(role='listview')" ).live( "listviewcreate", function() {
 					itemtext = item.jqmData( "filtertext" ) || item.text();
 
 					if ( item.is( "li:jqmData(role=list-divider)" ) ) {
+						level = item.attr('divider-level');
+						item.toggleClass( "ui-filter-hidequeue" , !levels[level] );
 
-						item.toggleClass( "ui-filter-hidequeue" , !childItems );
-
+						if(level > 1){
+							for (var j = level; j>1; j-- ){
+								levels[j] = true;
+							}
+						}
 						// New bucket!
-						childItems = false;
+						levels[level] = false;
+					
+					} else if ( itemtext.toLowerCase().indexOf( val ) === -1 ) {
 
-					} else if ( listview.options.filterCallback( itemtext, val ) ) {
-
-						//mark to be hidden
+						// Mark to be hidden
 						item.toggleClass( "ui-filter-hidequeue" , true );
 					} else {
-
 						// There"s a shown item in the bucket
-						childItems = true;
+						for (var j = levelCount; j>0; j-- ){
+								levels[j] = true;
+						}
 					}
 				}
 
