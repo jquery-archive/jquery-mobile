@@ -83,8 +83,13 @@
 			// define first page in dom case one backs out to the directory root (not always the first page visited, but defined as fallback)
 			$.mobile.firstPage = $pages.first();
 
+
 			// define page container
 			$.mobile.pageContainer = $pages.first().parent().addClass( "ui-mobile-viewport" );
+
+			// alert listeners that the pagecontainer has been determined for binding
+			// to events triggered on it
+			$window.trigger( "pagecontainercreate" );
 
 			// cue page loading message
 			$.mobile.showPageLoadingMsg();
