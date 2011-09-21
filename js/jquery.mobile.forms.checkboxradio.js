@@ -21,7 +21,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			inputtype = input.attr( "type" ),
 			checkedState = inputtype + "-on",
 			uncheckedState = inputtype + "-off",
-			icon = input.parents( ":jqmData(type='horizontal')" ).length ? undefined : uncheckedState,
+			icon = input.parents( ":jqmData(type='horizontal')" ).length ? (input.parents( ":jqmData(iconpos)" ).length ? uncheckedState : undefined) : uncheckedState,
 			activeBtn = icon ? "" : " " + $.mobile.activeBtnClass,
 			checkedClass = "ui-" + checkedState + activeBtn,
 			uncheckedClass = "ui-" + uncheckedState,
