@@ -3,7 +3,7 @@
 * Copyright (c) jQuery Project
 * Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
 */
-html { overflow-y: scroll; }
+.ui-mobile { overflow-y: scroll; }
 
 /* some unsets - more probably needed */
 .ui-mobile, .ui-mobile body { height: 100%; }
