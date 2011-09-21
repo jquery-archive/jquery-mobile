@@ -148,9 +148,9 @@ function showCategory( urlObj, options )
 }
 
  
-// Listen for any attempts to call changepage.
+// Listen for any attempts to call changePage().
 $(document).bind( "pagebeforechange", function( e, data ) {
-	// We only want to handle changepage calls where the caller is
+	// We only want to handle changePage() calls where the caller is
 	// asking us to load a page by URL.
 	if ( typeof data.toPage === "string" ) {
 		// We are being asked to load a page by URL, but we only
@@ -164,7 +164,7 @@ $(document).bind( "pagebeforechange", function( e, data ) {
 			// on the fly based on our in-memory category data structure.
 			showCategory( u, data.options );
 
-			// Make sure to tell changepage we've handled this call so it doesn't
+			// Make sure to tell changePage() we've handled this call so it doesn't
 			// have to do anything.
 			e.preventDefault();
 		}

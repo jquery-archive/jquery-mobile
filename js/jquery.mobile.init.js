@@ -60,15 +60,6 @@
 			$html.removeClass( "ui-loading" );
 		},
 
-		// XXX: deprecate for 1.0
-		pageLoading: function ( done ) {
-			if ( done ) {
-				$.mobile.hidePageLoadingMsg();
-			} else {
-				$.mobile.showPageLoadingMsg();
-			}
-		},
-
 		// find and enhance the pages in the dom and transition to the first page.
 		initializePage: function() {
 			// find present pages
