@@ -5,7 +5,7 @@ DATE = $(shell date "+%Y%m%d")
 VER = $(shell cat version.txt)
 
 # The command to replace the @VERSION in the files with the actual version
-SED_VER = sed "s/@VERSION/$(shell git log -1 --format=format:" Git Build\n * Git Info SHA1: %H Date: %cd")/"
+SED_VER = sed "s/@VERSION/$(shell git log -1 --format=format:" Git || Date: %cd Info SHA1: %H")/"
 deploy:  SED_VER = sed "s/@VERSION/${VER}/"
 
 # The version of jQuery core used
