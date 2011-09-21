@@ -19,7 +19,13 @@ function css3TransitionHandler( name, reverse, $to, $from ) {
 			$to.add( $from ).removeClass( "out in reverse " + name );
 
 			if ( $from ) {
-				$from.removeClass( $.mobile.activePageClass );
+			    $from.removeClass($.mobile.activePageClass);
+			    if ($to.attr("data-role") == "dialog") {
+			        $from.addClass("ui-dialog-background");
+			    }
+			    if ($from.attr("data-role") == "dialog") {
+			        $to.removeClass("ui-dialog-background");
+			    }
 			}
 
 			$to.parent().removeClass( viewportClass );
