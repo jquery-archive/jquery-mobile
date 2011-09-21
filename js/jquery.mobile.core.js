@@ -38,6 +38,9 @@
 		// Minimum scroll distance that will be remembered when returning to a page
 		minScrollBack: 250,
 
+        // The timeout for taphold events, in milliseconds
+        tapholdDuration: 750,
+
 		// Set default dialog transition - 'none' for no transitions
 		defaultDialogTransition: "pop",
 
