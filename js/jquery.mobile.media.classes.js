@@ -68,25 +68,16 @@ $.mobile.addResolutionBreakpoints = function( newbps ) {
 	detectResolutionBreakpoints();
 };
 
-/* on mobileinit, add classes to HTML element
-	and set handlers to update those on orientationchange and resize
-*/
-$( document ).bind( "mobileinit.htmlclass", function() {
-	// bind to orientationchange and resize
-	// to add classes to HTML element for min/max breakpoints and orientation
+/* add classes to HTML element and set handlers to update those on orientationchange and resize */	
+$window.bind( "orientationchange.htmlclass throttledresize.htmlclass", function( event ) {
 
-	var ev = $.support.orientation;
+	// add orientation class to HTML element on flip/resize.
+	if ( event.orientation ) {
+		$html.removeClass( "portrait landscape" ).addClass( event.orientation );
+	}
 
-	$window.bind( "orientationchange.htmlclass throttledresize.htmlclass", function( event ) {
-
-		// add orientation class to HTML element on flip/resize.
-		if ( event.orientation ) {
-			$html.removeClass( "portrait landscape" ).addClass( event.orientation );
-		}
-
-		// add classes to HTML element for min/max breakpoints
-		detectResolutionBreakpoints();
-	});
+	// add classes to HTML element for min/max breakpoints
+	detectResolutionBreakpoints();
 });
 
 /* Manually trigger an orientationchange event when the dom ready event fires.
