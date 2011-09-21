@@ -662,6 +662,15 @@
 		// Check to see if the page already exists in the DOM.
 		page = settings.pageContainer.children( ":jqmData(url='" + dataUrl + "')" );
 
+		// If we failed to find the page, check to see if the url is a
+		// reference to an embedded page. If so, it may have been dynamically
+		// injected by a developer, in which case it would be lacking a data-url
+		// attribute and in need of enhancement.
+		if ( page.length === 0 && !path.isPath( dataUrl ) ) {
+			page = settings.pageContainer.children( "#" + dataUrl )
+				.attr( "data-" + $.mobile.ns + "url", dataUrl )
+		}
+
 		// If we failed to find a page in the DOM, check the URL to see if it
 		// refers to the first page in the application.
 		if ( page.length === 0 && $.mobile.firstPage && path.isFirstPageUrl( absUrl ) ) {
