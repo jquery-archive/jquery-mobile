@@ -20,7 +20,6 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 
 		var $el = this.element,
 			o = this.options,
-			expandedCls = "ui-btn-up-" + (o.theme || "c"),
 			collapsible = $el.addClass( "ui-collapsible" ),
 			collapsibleHeading = $el.find( o.heading ).eq( 0 ),
 			collapsibleContent = collapsible.wrapInner( "<div class='ui-collapsible-content'></div>" ).find( ".ui-collapsible-content" ),
@@ -67,7 +66,9 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 
 					event.preventDefault();
 
-					var isCollapse = ( event.type === "collapse" );
+					var isCollapse = ( event.type === "collapse" ),
+					    contentTheme = collapsible.jqmData( "content-theme" ),
+						expandedCls = ( contentTheme ) ? ( "ui-btn-up-" + contentTheme ) : "";
 
 					collapsibleHeading
 						.toggleClass( "ui-collapsible-heading-collapsed", isCollapse)
@@ -80,9 +81,11 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 
 					collapsible.toggleClass( "ui-collapsible-collapsed", isCollapse );
 					collapsibleContent.toggleClass( "ui-collapsible-content-collapsed", isCollapse ).attr( "aria-hidden", isCollapse );
-					collapsibleContent.toggleClass( expandedCls, !isCollapse );
+					if ( expandedCls ) {
+						collapsibleContent.toggleClass( expandedCls, !isCollapse );
+					}
 
-					if ( !collapsibleParent.length || collapsible.jqmData( "collapsible-last" ) ) {
+					if ( contentTheme && ( !collapsibleParent.length || collapsible.jqmData( "collapsible-last" ) ) ) {
 						collapsibleHeading
 							.find( "a:eq(0), .ui-btn-inner" )
 							.toggleClass( "ui-corner-bottom", isCollapse );
@@ -107,6 +110,8 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 				});
 
 			var set = collapsibleParent.children( ":jqmData(role='collapsible')" );
+
+			set.jqmData( "content-theme", collapsibleParent.jqmData( "content-theme" ) );
 
 			set.first()
 				.find( "a:eq(0)" )
