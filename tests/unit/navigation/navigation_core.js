@@ -21,7 +21,7 @@
 
 				stop();
 
-				$(document).one( "changepage", function() {
+				$(document).one( "pagechange", function() {
 					start();
 				});
 
@@ -197,7 +197,7 @@
 			}], 1000);
 	});
 
-	asyncTest( "forms with data attribute ajax not set or set to anything but false will call changepage", function(){
+	asyncTest( "forms with data attribute ajax not set or set to anything but false will call changePage", function(){
 		var called = 0,
 				newChangePage = function(){
 					called++;
@@ -841,6 +841,37 @@
 
 			function(){
 				ok(!$("#active-state-page2 a").hasClass( $.mobile.activeBtnClass ), "No button should not have class " + $.mobile.activeBtnClass );
+				start();
+			}
+		]);
+	});
+
+	asyncTest( "can navigate to dynamically injected page with dynamically injected link", function(){
+		$.testHelper.pageSequence([
+			// open our test page
+			function(){
+				$.testHelper.openPage("#inject-links-page");
+			},
+
+			function(){
+				var $ilpage = $( "#inject-links-page" ),
+					$link = $( "<a href='#injected-test-page'>injected-test-page link</a>" );
+
+				// Make sure we actually navigated to the expected page.
+				ok( $.mobile.activePage[ 0 ] == $ilpage[ 0 ], "navigated successfully to #inject-links-page" );
+
+				// Now dynamically insert a page.
+				$ilpage.parent().append( "<div data-role='page' id='injected-test-page'>testing...</div>" );
+
+				// Now inject a link to this page dynamically and attempt to navigate
+				// to the page we just inserted.
+				$link.appendTo( $ilpage ).click();
+			},
+
+			function(){
+				// Make sure we actually navigated to the expected page.
+				ok( $.mobile.activePage[ 0 ] == $( "#injected-test-page" )[ 0 ], "navigated successfully to #injected-test-page" );
+
 				start();
 			}
 		]);

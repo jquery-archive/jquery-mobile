@@ -128,7 +128,11 @@
 	// Mobile version of data and removeData and hasData methods
 	// ensures all data is set and retrieved using jQuery Mobile's data namespace
 	$.fn.jqmData = function( prop, value ) {
-		return this.data( prop ? $.mobile.nsNormalize( prop ) : prop, value );
+		var result;
+		if ( typeof prop != "undefined" ) {
+			result = this.data( prop ? $.mobile.nsNormalize( prop ) : prop, value );
+		}
+		return result;
 	};
 
 	$.jqmData = function( elem, prop, value ) {
@@ -141,10 +145,6 @@
 
 	$.jqmRemoveData = function( elem, prop ) {
 		return $.removeData( elem, $.mobile.nsNormalize( prop ) );
-	};
-
-	$.jqmHasData = function( elem, prop ) {
-		return $.hasData( elem, $.mobile.nsNormalize( prop ) );
 	};
 
 	// Monkey-patching Sizzle to filter the :jqmData selector
