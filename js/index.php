@@ -1,6 +1,6 @@
 <?php
-$type = "text/javascript";
-$elements = array(
+$type = 'text/javascript';
+$files = array(
 	'jquery.ui.widget.js',
 	'jquery.mobile.widget.js',
 	'jquery.mobile.media.js',
@@ -38,4 +38,4 @@ $elements = array(
 	'jquery.mobile.init.js'
 );
 
-include('../combine.php');
+require_once('../combine.php');
