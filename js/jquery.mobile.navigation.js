@@ -436,8 +436,8 @@
 	// event to fire and disable scroll recording in the case where the browser scrolls
 	// to the hash targets location (sometimes the top of the page). once pagechange fires
 	// getLastScroll is again permitted to operate
-	delayedSetLastScroll = function( opts ) {
-		setTimeout(setLastScroll, 100, opts.data.scrollElem );
+	delayedSetLastScroll = function() {
+		setTimeout( setLastScroll, 100, $(this) );
 	};
 
 	// disable an scroll setting when a hashchange has been fired, this only works
@@ -463,11 +463,11 @@
 			// remove any binding that previously existed on the get scroll
 			// which may or may not be different than the scroll element determined for
 			// this page previously
-			scrollElem.unbind( "scrollstop", delayedSetLastScroll);
+			scrollElem.unbind( "scrollstop", delayedSetLastScroll );
 
 			// determine and bind to the current scoll element which may be the window
 			// or in the case of touch overflow the element with touch overflow
-			scrollElem.bind( "scrollstop", { scrollElem: scrollElem }, delayedSetLastScroll);
+			scrollElem.bind( "scrollstop", delayedSetLastScroll );
 		});
 	});
 
@@ -475,7 +475,7 @@
 	firstScrollElem = getScrollElem();
 
 	// bind to scrollstop for the first page as "pagechange" won't befired in that case
-	firstScrollElem.bind( "scrollstop", { scrollElem: firstScrollElem }, delayedSetLastScroll);
+	firstScrollElem.bind( "scrollstop", delayedSetLastScroll );
 
 	// Make the iOS clock quick-scroll work again if we're using native overflow scrolling
 	/*
