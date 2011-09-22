@@ -75,7 +75,12 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 
 			var set = collapsibleParent.children( ":jqmData(role='collapsible')" );
 
-			set.jqmData( "content-theme", collapsibleParent.jqmData( "content-theme" ) );
+			set.each(function() {
+				var $this = $( this );
+				if ( !$this.jqmData( "content-theme" ) ) {
+					$this.jqmData( "content-theme", collapsibleParent.jqmData( "content-theme" ) );
+				}
+			});
 
 			set.first()
 				.find( "a:eq(0)" )
