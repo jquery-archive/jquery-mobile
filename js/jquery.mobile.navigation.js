@@ -471,11 +471,8 @@
 		});
 	});
 
-	// avoid duplicate execution
-	firstScrollElem = getScrollElem();
-
-	// bind to scrollstop for the first page as "pagechange" won't befired in that case
-	firstScrollElem.bind( "scrollstop", delayedSetLastScroll );
+	// bind to scrollstop for the first page as "pagechange" won't be fired in that case
+	getScrollElem().bind( "scrollstop", delayedSetLastScroll );
 
 	// Make the iOS clock quick-scroll work again if we're using native overflow scrolling
 	/*
