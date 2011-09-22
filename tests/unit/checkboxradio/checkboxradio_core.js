@@ -80,11 +80,11 @@
 			},
 
 			function(){
-				ok( $radioBtns.last().attr( 'checked' ) );
+				ok( $radioBtns.last().prop( 'checked' ) );
 				ok( $radioBtns.last().siblings( 'label' ).hasClass( 'ui-radio-on' ),
 					"last input label is an active button" );
 
-				ok( !$radioBtns.first().attr( 'checked' ) );
+				ok( !$radioBtns.first().prop( 'checked' ) );
 				ok( !$radioBtns.first().siblings( 'label' ).hasClass( 'ui-radio-on' ),
 					"first input label is not active" );
 
@@ -94,11 +94,11 @@
 			},
 
 			function(){
-				ok( $radioBtns.first().attr( 'checked' ));
+				ok( $radioBtns.first().prop( 'checked' ));
 				ok( $radioBtns.first().siblings( 'label' ).hasClass( 'ui-radio-on' ),
 					"first input label is an active button" );
 
-				ok( !$radioBtns.last().attr( 'checked' ));
+				ok( !$radioBtns.last().prop( 'checked' ));
 				ok( !$radioBtns.last().siblings( 'label' ).hasClass( 'ui-radio-on' ),
 					"last input label is not active" );
 
