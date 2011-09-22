@@ -59,6 +59,38 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			}
 		}
 
+		// Close others in a set
+		if ( collapsibleParent.length && !collapsibleParent.jqmData( "collapsiblebound" ) ) {
+
+			collapsibleParent
+				.jqmData( "collapsiblebound", true )
+				.bind( "expand", function( event ) {
+
+					$( event.target )
+						.closest( ".ui-collapsible" )
+						.siblings( ".ui-collapsible" )
+						.trigger( "collapse" );
+
+				});
+
+			var set = collapsibleParent.children( ":jqmData(role='collapsible')" );
+
+			set.jqmData( "content-theme", collapsibleParent.jqmData( "content-theme" ) );
+
+			set.first()
+				.find( "a:eq(0)" )
+					.addClass( "ui-corner-top" )
+						.find( ".ui-btn-inner" )
+							.addClass( "ui-corner-top" );
+
+			set.last()
+				.jqmData( "collapsible-last", true )
+				.find( "a:eq(0)" )
+					.addClass( "ui-corner-bottom" )
+						.find( ".ui-btn-inner" )
+							.addClass( "ui-corner-bottom" );
+		}
+		
 		//events
 		collapsible
 			.bind( "expand collapse", function( event ) {
@@ -94,38 +126,6 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 				}
 			})
 			.trigger( o.collapsed ? "collapse" : "expand" );
-
-		// Close others in a set
-		if ( collapsibleParent.length && !collapsibleParent.jqmData( "collapsiblebound" ) ) {
-
-			collapsibleParent
-				.jqmData( "collapsiblebound", true )
-				.bind( "expand", function( event ) {
-
-					$( event.target )
-						.closest( ".ui-collapsible" )
-						.siblings( ".ui-collapsible" )
-						.trigger( "collapse" );
-
-				});
-
-			var set = collapsibleParent.children( ":jqmData(role='collapsible')" );
-
-			set.jqmData( "content-theme", collapsibleParent.jqmData( "content-theme" ) );
-
-			set.first()
-				.find( "a:eq(0)" )
-					.addClass( "ui-corner-top" )
-						.find( ".ui-btn-inner" )
-							.addClass( "ui-corner-top" );
-
-			set.last()
-				.jqmData( "collapsible-last", true )
-				.find( "a:eq(0)" )
-					.addClass( "ui-corner-bottom" )
-						.find( ".ui-btn-inner" )
-							.addClass( "ui-corner-bottom" );
-		}
 
 		collapsibleHeading
 			.bind( "vclick", function( event ) {
