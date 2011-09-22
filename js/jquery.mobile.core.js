@@ -48,6 +48,9 @@
 		// Error response message - appears when an Ajax page request fails
 		pageLoadErrorMessage: "Error Loading Page",
 
+		// Custom error handler function - allows user to specify own error handling logic.
+		customErrorHandler: undefined,
+
 		//automatically initialize the DOM when it's ready
 		autoInitializePage: true,
 

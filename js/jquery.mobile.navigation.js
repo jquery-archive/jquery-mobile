@@ -821,7 +821,12 @@
 
 					deferred.resolve( absUrl, options, page, dupCachedPage );
 				},
-				error: function() {
+				error: function(jqXHR, textStatus, errorThrown) {
+					// Allow user to specify custom error handling
+					if (typeof $.mobile.customErrorHandler === 'function') {
+						$.mobile.customErrorHandler(jqXHR, textStatus, errorThrown);
+					}
+
 					//set base back to current path
 					if( base ) {
 						base.set( path.get() );
