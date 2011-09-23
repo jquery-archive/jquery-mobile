@@ -686,6 +686,11 @@
 			absUrl = path.addSearchParams( absUrl, settings.data );
 			settings.data = undefined;
 		}
+		
+		// If the caller is using a "post" request, reloadPage must be true
+		if(  settings.data && settings.type === "post" ){
+			settings.reloadPage = true;
+		}
 
 			// The absolute version of the URL minus any dialog/subpage params.
 			// In otherwords the real URL of the page to be loaded.
