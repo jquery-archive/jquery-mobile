@@ -13,26 +13,35 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		initSelector	: ":jqmData(role='dialog')"
 	},
 	_create: function() {
-		var $el = this.element,
-			pageTheme = $el.attr( "class" ).match( /ui-body-[a-z]/ );
-			
+		var self = this,
+			$el = this.element,
+			pageTheme = $el.attr( "class" ).match( /ui-body-[a-z]/ ),
+			headerCloseButton = $( "<a href='#' data-" + $.mobile.ns + "icon='delete' data-" + $.mobile.ns + "iconpos='notext'>"+ this.options.closeBtnText + "</a>" );
+
 		if( pageTheme.length ){
 			$el.removeClass( pageTheme[ 0 ] );
-		}	
-		
+		}
+
 		$el.addClass( "ui-body-" + this.options.theme );
-		
+
 		// Class the markup for dialog styling
 		// Set aria role
 		$el.attr( "role", "dialog" )
 			.addClass( "ui-dialog" )
 			.find( ":jqmData(role='header')" )
 			.addClass( "ui-corner-top ui-overlay-shadow" )
-				.prepend( "<a href='#' data-" + $.mobile.ns + "icon='delete' data-" + $.mobile.ns + "rel='back' data-" + $.mobile.ns + "iconpos='notext'>"+ this.options.closeBtnText + "</a>" )
+				.prepend( headerCloseButton )
 			.end()
 			.find( ":jqmData(role='content'),:jqmData(role='footer')" )
 				.last()
 				.addClass( "ui-corner-bottom ui-overlay-shadow" );
+
+		// this must be an anonymous function so that select menu dialogs can replace
+		// the close method. This is a change from previously just defining data-rel=back
+		// on the button and letting nav handle it
+		headerCloseButton.bind( "vclick", function() {
+			self.close();
+		});
 
 		/* bind events
 			- clicks and submits should use the closing transition that the dialog opened with

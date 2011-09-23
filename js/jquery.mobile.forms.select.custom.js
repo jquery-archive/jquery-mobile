@@ -201,12 +201,9 @@
 					}
 				});
 
+				// track this dependency so that when the parent page
+				// is removed on pagehide it will also remove the menupage
 				self.thisPage.addDependent( this.menuPage );
-
-				self.menuPage.find(":jqmData(role='header') :jqmData(rel='back')").click(function() {
-					self.close();
-					return false;
-				});
 			},
 
 			_isRebuildRequired: function() {
@@ -270,11 +267,7 @@
 					// rebind the page remove that was unbound in the open function
 					// to allow for the parent page removal from actions other than the use
 					// of a dialog sized custom select
-					if( !self.thisPage.data("page").options.domCache ){
-						self.thisPage.bind( "pagehide.remove", function() {
-							$(this).removeWithDependents();
-						});
-					}
+					$.mobile._bindPageRemove.call( self.thisPage );
 
 					// doesn't solve the possible issue with calling change page
 					// where the objects don't define data urls which prevents dialog key
@@ -328,6 +321,11 @@
 							$( this ).jqmData( "lastScroll", btnOffset );
 						});
 					}
+
+					// set the dialog close function to that of the custom dialog
+					self.menuPage.data( 'dialog' ).close = function() {
+						self.close();
+					};
 
 					self.menuPage.one( "pageshow", function() {
 						// silentScroll() is called whenever a page is shown to restore
