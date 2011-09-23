@@ -65,6 +65,10 @@
 					<button type="submit" data-theme="b" name="submit" value="submit-value">Submit</button>
 				</fieldset>
 			</form>
+			
+			<h2>Self-submitting Forms</h2>
+			<p>Just like in ordinary HTML, can also submit forms to the same URL you're currently viewing by setting the form's <code>action</code> attribute to that URL. <A href="forms-sample-selfsubmit.php">This page demonstrates.</a></p>
+			<p>When a <code>post</code> request is submitted to a page that's already in the DOM (which would commonly happen when submitting a form to the same URL currently in view), the response URL will be identical to that existing page, as <code>post</code> requests do not append query string parameters to the URL. In this situation, jQuery Mobile will replace the page that submitted the form with the page returned in the response body.</p>
 
 			</div><!--/content-primary -->		
 
