@@ -21,7 +21,9 @@ $.widget( "mobile.button", $.mobile.widget, {
 	_create: function() {
 		var $el = this.element,
 			o = this.options,
-			type;
+			type,
+			name,
+			$buttonPlaceholder;
 
 		// Add ARIA role
 		this.button = $( "<div></div>" )
@@ -38,25 +40,27 @@ $.widget( "mobile.button", $.mobile.widget, {
 			.insertBefore( $el )
 			.append( $el.addClass( "ui-btn-hidden" ) );
 
-		// Add hidden input during submit
 		type = $el.attr( "type" );
+		name = $el.attr( "name" );
 
-		if ( type !== "button" && type !== "reset" ) {
+		// Add hidden input during submit if input type="submit" has a name.
+		if ( type !== "button" && type !== "reset" && name ) {
+				$el.bind( "vclick", function() {
+					// Add hidden input if it doesn’t already exist.
+					if( $buttonPlaceholder === undefined ) {
+						$buttonPlaceholder = $( "<input>", {
+									type: "hidden",
+									name: $el.attr( "name" ),
+									value: $el.attr( "value" )
+								})
+								.insertBefore( $el );
 
-			$el.bind( "vclick", function() {
-
-				var $buttonPlaceholder = $( "<input>", {
-							type: "hidden",
-							name: $el.attr( "name" ),
-							value: $el.attr( "value" )
-						})
-						.insertBefore( $el );
-
-				// Bind to doc to remove after submit handling
-				$( document ).submit(function(){
-					 $buttonPlaceholder.remove();
+						// Bind to doc to remove after submit handling
+						$( document ).submit(function(){
+							 $buttonPlaceholder.remove();
+						});
+					}
 				});
-			});
 		}
 
 		this.refresh();
