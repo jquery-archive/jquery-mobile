@@ -200,6 +200,13 @@
 						return false;
 					}
 				});
+
+				self.thisPage.addDependent( this.menuPage );
+
+				self.menuPage.find(":jqmData(role='header') :jqmData(rel='back')").click(function() {
+					self.close();
+					return false;
+				});
 			},
 
 			_isRebuildRequired: function() {
@@ -265,7 +272,7 @@
 					// of a dialog sized custom select
 					if( !self.thisPage.data("page").options.domCache ){
 						self.thisPage.bind( "pagehide.remove", function() {
-							$(self).remove();
+							$(this).removeWithDependents();
 						});
 					}
 

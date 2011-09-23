@@ -151,6 +151,27 @@
 		return $.removeData( elem, $.mobile.nsNormalize( prop ) );
 	};
 
+	$.fn.removeWithDependents = function() {
+		$.removeWithDependents( this );
+	};
+
+	$.removeWithDependents = function( elem ) {
+		var $elem = $( elem );
+
+		( $elem.jqmData('dependents') || $() ).remove();
+		$elem.remove();
+	};
+
+	$.fn.addDependent = function( newDependents ) {
+		$.addDependent( $(this), newDependents );
+	};
+
+	$.addDependent = function( elem, newDependents ) {
+		var dependents = $(elem).jqmData( 'dependents' ) || $();
+
+		$(elem).jqmData( 'dependents', $.merge(dependents, newDependents) );
+	};
+
 	// Monkey-patching Sizzle to filter the :jqmData selector
 	var oldFind = $.find;
 

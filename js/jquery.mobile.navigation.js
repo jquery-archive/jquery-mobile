@@ -854,7 +854,7 @@
 						// when dom caching is not enabled bind to remove the page on hide
 						if( !page.data("page").options.domCache ){
 							page.bind( "pagehide.remove", function(){
-								$(this).remove();
+								$(this).removeWithDependents();
 							});
 						}
 					});
