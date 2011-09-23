@@ -7,7 +7,7 @@
 
 (function( $, undefined ) {
 
-$.mobile.touchOverflowEnabled = false;
+$.mobile.touchOverflowEnabled = true;
 
 $( document ).bind( "pagecreate", function( event ) {
 	if( $.support.touchOverflow && $.mobile.touchOverflowEnabled ){
