@@ -203,7 +203,7 @@
 
 				// track this dependency so that when the parent page
 				// is removed on pagehide it will also remove the menupage
-				self.thisPage.addDependent( this.menuPage );
+				self.thisPage.addDependents( this.menuPage );
 			},
 
 			_isRebuildRequired: function() {

@@ -162,11 +162,11 @@
 		$elem.remove();
 	};
 
-	$.fn.addDependent = function( newDependents ) {
-		$.addDependent( $(this), newDependents );
+	$.fn.addDependents = function( newDependents ) {
+		$.addDependents( $(this), newDependents );
 	};
 
-	$.addDependent = function( elem, newDependents ) {
+	$.addDependents = function( elem, newDependents ) {
 		var dependents = $(elem).jqmData( 'dependents' ) || $();
 
 		$(elem).jqmData( 'dependents', $.merge(dependents, newDependents) );
