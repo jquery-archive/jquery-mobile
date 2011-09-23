@@ -658,7 +658,6 @@
 				&& page.is(":jqmData(external-page='true')") ) {
 
 			page.bind( 'pagehide.remove', function() {
-				debugger;
 				$( this ).removeWithDependents();
 			});
 		}
@@ -700,7 +699,7 @@
 			absUrl = path.addSearchParams( absUrl, settings.data );
 			settings.data = undefined;
 		}
-		
+
 		// If the caller is using a "post" request, reloadPage must be true
 		if(  settings.data && settings.type === "post" ){
 			settings.reloadPage = true;
