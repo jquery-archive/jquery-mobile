@@ -107,12 +107,12 @@
 
 	test( "addDependents works properly", function() {
 		same( $("#parent").jqmData('dependents'), undefined );
-		$( "#parent" ).addDependent( $("#dependent") );
+		$( "#parent" ).addDependents( $("#dependent") );
 		same( $("#parent").jqmData('dependents').length, 1 );
 	});
 
 	test( "removeWithDependents removes the parent element and ", function(){
-		$( "#parent" ).addDependent( $("#dependent") );
+		$( "#parent" ).addDependents( $("#dependent") );
 		same($( "#parent, #dependent" ).length, 2);
 		$( "#parent" ).removeWithDependents();
 		same($( "#parent, #dependent" ).length, 0);
