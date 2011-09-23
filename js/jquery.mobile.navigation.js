@@ -424,7 +424,7 @@
 		var active = $.mobile.urlHistory.getActive();
 
 		if( active ) {
-			var lastScroll = scrollElem.scrollTop();
+			var lastScroll = scrollElem && scrollElem.scrollTop();
 
 			// Set active page's lastScroll prop.
 			// If the location we're scrolling to is less than minScrollBack, let it go.
