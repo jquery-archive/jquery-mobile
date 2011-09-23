@@ -359,6 +359,25 @@
 		]);
 	});
 
+    asyncTest( "Filter works fine with \\W- or regexp-special-characters", function() {
+        var $searchPage = $(searchFilterId);
+        $.testHelper.pageSequence([
+            function() {
+                $.testHelper.openPage(searchFilterId);
+            },
+
+            function() {
+                $searchPage.find('input').val('*');
+                $searchPage.find('input').trigger('change');
+
+                setTimeout(function() {
+                    same($searchPage.find('li.ui-screen-hidden').length, 4);
+                    start();
+                }, 1000);
+            }
+        ]);
+    });
+
 	test( "Refresh applies thumb styling", function(){
 		var ul = $('.ui-page-active ul');
 
@@ -441,7 +460,7 @@
 				$li = $page.find( "li:visible" );
 			ok($li.first().hasClass( "ui-corner-top" ), $li.length+" li elements: First visible element should have class ui-corner-top");
 			ok($li.last().hasClass( "ui-corner-bottom" ), $li.length+" li elements: Last visible element should have class ui-corner-bottom");
-		}
+		};
 
 		$.testHelper.pageSequence([
 			function() {
