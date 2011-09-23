@@ -50,4 +50,4 @@
 .ui-btn-icon-top .ui-icon { top: 5px; }
 .ui-btn-icon-bottom .ui-icon { bottom: 5px; }
 /*hiding native button,inputs */
-.ui-btn-hidden {  position: absolute; top: 0; left: 0; width: 100%; height: 100%; -webkit-appearance: button; opacity: 0; cursor: pointer; -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; filter: alpha(opacity=0); background: transparent; }
+.ui-btn-hidden { position: absolute; top: 0; left: 0; width: 100%; height: 100%; -webkit-appearance: button; opacity: .1; cursor: pointer; background: transparent; font-size: 1px; border: none; line-height: 999px; }
