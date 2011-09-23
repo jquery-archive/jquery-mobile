@@ -742,6 +742,18 @@
 			dupCachedPage = page;
 		}
 
+		var mpc = settings.pageContainer,
+			pblEvent = new $.Event( "pagebeforeload" ),
+			triggerData = { url: url, absUrl: absUrl, dataUrl: dataUrl, deferred: deferred, options: settings };
+
+		// Let listeners know we're about to load a page.
+		mpc.trigger( pblEvent, triggerData );
+
+		// If the default behavior is prevented, stop here!
+		if( pblEvent.isDefaultPrevented() ){
+			return deferred.promise();
+		}
+
 		if ( settings.showLoadMsg ) {
 
 			// This configurable timeout allows cached pages a brief delay to load without showing a message
@@ -863,12 +875,31 @@
 						hideMsg();
 					}
 
+					// Add the page reference to our triggerData.
+					triggerData.page = page;
+
+					// Let listeners know the page loaded successfully.
+					settings.pageContainer.trigger( "pageload", triggerData );
+
 					deferred.resolve( absUrl, options, page, dupCachedPage );
 				},
 				error: function() {
 					//set base back to current path
 					if( base ) {
 						base.set( path.get() );
+					}
+
+					var plfEvent = new $.Event( "pageloadfailed" );
+
+					// Let listeners know the page load failed.
+					settings.pageContainer.trigger( plfEvent, triggerData );
+
+					// If the default behavior is prevented, stop here!
+					// Note that it is the responsibility of the listener/handler
+					// that called preventDefault(), to resolve/reject the
+					// deferred object within the triggerData.
+					if( plfEvent.isDefaultPrevented() ){
+						return;
 					}
 
 					// Remove loading message.
