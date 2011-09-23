@@ -34,7 +34,7 @@ ol.ui-listview .ui-li-jsnumbering:before { content: "" !important; } /* to avoid
 }	 
 .ui-li-divider { cursor: default; }
 .ui-li-has-alt .ui-btn-inner a.ui-link-inherit, .ui-li-static.ui-li-has-alt { padding-right: 95px; }
-.ui-li-count { position: absolute; font-size: 11px; font-weight: bold; padding: .2em .5em; top: 50%; margin-top: -.9em; right: 38px; }
+.ui-li-has-count .ui-li-count { position: absolute; font-size: 11px; font-weight: bold; padding: .2em .5em; top: 50%; margin-top: -.9em; right: 38px; }
 .ui-li-divider .ui-li-count, .ui-li-static .ui-li-count { right: 10px; }
 .ui-li-has-alt .ui-li-count { right: 55px; }
 .ui-li-link-alt { position: absolute; width: 40px; height: 100%; border-width: 0; border-left-width: 1px; top: 0; right: 0; margin: 0; padding: 0; }
