@@ -567,7 +567,7 @@
 	function getScreenHeight(){
 		var orientation 	= jQuery.event.special.orientationchange.orientation(),
 			port			= orientation === "portrait",
-			winMin			= port ? 480 : 320,
+			winMin			= port ? 420 : 270,
 			screenHeight	= port ? screen.availHeight : screen.availWidth,
 			winHeight		= Math.max( winMin, $( window ).height() ),
 			pageMin			= Math.min( screenHeight, winHeight );
