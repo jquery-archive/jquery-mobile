@@ -10,7 +10,7 @@
 $.widget( "mobile.textinput", $.mobile.widget, {
 	options: {
 		theme: null,
-		initSelector: "input[type='text'], input[type='search'], :jqmData(type='search'), input[type='number'], :jqmData(type='number'), input[type='password'], input[type='email'], input[type='url'], input[type='tel'], textarea"
+		initSelector: "input[type='text'], input[type='search'], :jqmData(type='search'), input[type='number'], :jqmData(type='number'), input[type='password'], input[type='email'], input[type='url'], input[type='tel'], textarea, input:not([type])"
 	},
 
 	_create: function() {
