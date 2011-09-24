@@ -650,6 +650,19 @@
 		return asParsedObject ? $.extend( {}, documentBase ) : documentBase.href;
 	};
 
+	$.mobile._bindPageRemove = function() {
+		var page = $(this);
+
+		// when dom caching is not enabled or the page is embedded bind to remove the page on hide
+		if( !page.data("page").options.domCache
+				&& page.is(":jqmData(external-page='true')") ) {
+
+			page.bind( 'pagehide.remove', function() {
+				$( this ).removeWithDependents();
+			});
+		}
+	};
+
 	// Load a page into the DOM.
 	$.mobile.loadPage = function( url, options ) {
 		// This function uses deferred notifications to let callers
@@ -686,7 +699,7 @@
 			absUrl = path.addSearchParams( absUrl, settings.data );
 			settings.data = undefined;
 		}
-		
+
 		// If the caller is using a "post" request, reloadPage must be true
 		if(  settings.data && settings.type === "post" ){
 			settings.reloadPage = true;
@@ -849,15 +862,7 @@
 						.appendTo( settings.pageContainer );
 
 					// wait for page creation to leverage options defined on widget
-					page.one('pagecreate', function(){
-
-						// when dom caching is not enabled bind to remove the page on hide
-						if( !page.data("page").options.domCache ){
-							page.bind( "pagehide.remove", function(){
-								$(this).remove();
-							});
-						}
-					});
+					page.one( 'pagecreate', $.mobile._bindPageRemove );
 
 					enhancePage( page, settings.role );
 

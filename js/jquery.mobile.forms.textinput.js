@@ -10,7 +10,7 @@
 $.widget( "mobile.textinput", $.mobile.widget, {
 	options: {
 		theme: null,
-		initSelector: "input[type='text'], input[type='search'], :jqmData(type='search'), input[type='number'], :jqmData(type='number'), input[type='password'], input[type='email'], input[type='url'], input[type='tel'], textarea"
+		initSelector: "input[type='text'], input[type='search'], :jqmData(type='search'), input[type='number'], :jqmData(type='number'), input[type='password'], input[type='email'], input[type='url'], input[type='tel'], textarea, input:not([type])"
 	},
 
 	_create: function() {
@@ -33,7 +33,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		input.addClass("ui-input-text ui-body-"+ o.theme );
 
 		focusedEl = input;
-		
+
 		// XXX: Temporary workaround for issue 785. Turn off autocorrect and
 		//      autocomplete since the popup they use can't be dismissed by
 		//      the user. Note that we test for the presence of the feature
@@ -44,7 +44,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			input[0].setAttribute( "autocorrect", "off" );
 			input[0].setAttribute( "autocomplete", "off" );
 		}
-		
+
 
 		//"search" input widget
 		if ( input.is( "[type='search'],:jqmData(type='search')" ) ) {
@@ -125,11 +125,11 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ){
-	
+
 	$( $.mobile.textinput.prototype.options.initSelector, e.target )
 		.not( ":jqmData(role='none'), :jqmData(role='nojs')" )
 		.textinput();
-		
+
 });
 
 })( jQuery );
