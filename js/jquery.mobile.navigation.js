@@ -567,7 +567,7 @@
 	function getScreenHeight(){
 		var orientation 	= jQuery.event.special.orientationchange.orientation(),
 			port			= orientation === "portrait",
-			winMin			= port ? 420 : 270,
+			winMin			= port ? 480 : 320,
 			screenHeight	= port ? screen.availHeight : screen.availWidth,
 			winHeight		= Math.max( winMin, $( window ).height() ),
 			pageMin			= Math.min( screenHeight, winHeight );
@@ -579,6 +579,10 @@
 
 	//simply set the active page's minimum height to screen height, depending on orientation
 	function resetActivePageHeight(){
+		// Don't apply this height in touch overflow enabled mode
+		if( $.support.touchOverflow && $.mobile.touchOverflowEnabled ){
+			return;
+		}
 		$( "." + $.mobile.activePageClass ).css( "min-height", getScreenHeight() );
 	}
 
