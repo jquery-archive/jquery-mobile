@@ -35,6 +35,8 @@
 	-o-overflow-scrolling: touch;
 	-ms-overflow-scrolling: touch;
 	overflow-scrolling: touch;
+	/* some level of transform keeps elements from blinking out of visibility on iOS */
+	-webkit-transform: rotateY(0);
 }
 .ui-page.ui-mobile-pre-transition {
 	display: block;
