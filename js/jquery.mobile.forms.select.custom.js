@@ -298,7 +298,10 @@
 				var self = this,
 					menuHeight = self.list.parent().outerHeight(),
 					menuWidth = self.list.parent().outerWidth(),
-					scrollTop = $( window ).scrollTop(),
+					activePage = $( ".ui-page-active" ),
+					tOverflow = $.support.touchOverflow && $.mobile.touchOverflowEnabled,
+					tScrollElem = activePage.is( ".ui-native-fixed" ) ? activePage.find( ".ui-content" ) : activePage;
+					scrollTop = tOverflow ? tScrollElem.scrollTop() : $( window ).scrollTop(),
 					btnOffset = self.button.offset().top,
 					screenHeight = window.innerHeight,
 					screenWidth = window.innerWidth;
