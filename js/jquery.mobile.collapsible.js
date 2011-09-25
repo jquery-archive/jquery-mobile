@@ -33,18 +33,36 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			collapsibleHeading.next().remove();
 		}
 
-		// Close others in a set
-		if ( collapsibleSet.length && !collapsibleSet.jqmData( "collapsiblebound" ) ) {
+		// If we are in a collapsible set
+		if ( collapsibleSet.length ) {
 
-			collapsibleSet
-				.bind( "expand", function( event ) {
+			// Initialize the collapsible set if it's not already initialized
+			if ( !collapsibleSet.jqmData( "collapsiblebound" ) ) {
 
-					$( event.target )
-						.closest( ".ui-collapsible" )
-						.siblings( ".ui-collapsible" )
-						.trigger( "collapse" );
+				collapsibleSet
+					.jqmData( "collapsiblebound", true )
+					.bind( "expand", function( event ) {
 
-				});
+						$( event.target )
+							.closest( ".ui-collapsible" )
+							.siblings( ".ui-collapsible" )
+							.trigger( "collapse" );
+
+					});
+			}
+
+			colllapsiblesInSet.first()
+				.find( "a:eq(0)" )
+					.addClass( "ui-corner-top" )
+						.find( ".ui-btn-inner" )
+							.addClass( "ui-corner-top" );
+
+			colllapsiblesInSet.last()
+				.jqmData( "collapsible-last", true )
+				.find( "a:eq(0)" )
+					.addClass( "ui-corner-bottom" )
+						.find( ".ui-btn-inner" )
+							.addClass( "ui-corner-bottom" );
 
 			// Inherit the theme from collapsible-set
 			if ( !o.theme ) {
@@ -54,16 +72,6 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			if ( !o.contentTheme ) {
 				o.contentTheme = collapsibleSet.jqmData( "content-theme" );
 			}
-
-			colllapsiblesInSet.each(function() {
-				var $this = $( this );
-				if ( !$this.jqmData( "theme" ) ) {
-					$this.jqmData( "theme", collapsibleSet.jqmData( "theme" ) );
-				}
-				if ( !$this.jqmData( "content-theme" ) ) {
-					$this.jqmData( "content-theme", collapsibleSet.jqmData( "content-theme" ) );
-				}
-			});
 		}
 
 		collapsibleContent.addClass( ( o.contentTheme ) ? ( "ui-btn-up-" + o.contentTheme ) : "");
@@ -83,23 +91,6 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 					icon: "plus",
 					theme: o.theme
 				})
-
-		if ( collapsibleSet.length && !collapsibleSet.jqmData( "collapsiblebound" ) ) {
-			collapsibleSet.jqmData( "collapsiblebound", true );
-
-			colllapsiblesInSet.first()
-				.find( "a:eq(0)" )
-					.addClass( "ui-corner-top" )
-						.find( ".ui-btn-inner" )
-							.addClass( "ui-corner-top" );
-
-			colllapsiblesInSet.last()
-				.jqmData( "collapsible-last", true )
-				.find( "a:eq(0)" )
-					.addClass( "ui-corner-bottom" )
-						.find( ".ui-btn-inner" )
-							.addClass( "ui-corner-bottom" );
-		}
 
 		if ( !collapsibleSet.length ) {
 			collapsibleHeading
