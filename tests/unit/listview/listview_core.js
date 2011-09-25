@@ -332,10 +332,8 @@
 				$searchPage.find('input').val('at');
 				$searchPage.find('input').trigger('change');
 
-				setTimeout(function() {
-					same($searchPage.find('li.ui-screen-hidden').length, 2);
-					start();
-				}, 1000);
+				same($searchPage.find('li.ui-screen-hidden').length, 2);
+				start();
 			}
 		]);
 	});
@@ -351,10 +349,8 @@
 				$searchPage.find('input').val('a');
 				$searchPage.find('input').trigger('change');
 
-				setTimeout(function() {
-					same($searchPage.find("li[style^='display: none;']").length, 0);
-					start();
-				}, 1000);
+				same($searchPage.find("li[style^='display: none;']").length, 0);
+				start();
 			}
 		]);
 	});
@@ -370,10 +366,8 @@
                 $searchPage.find('input').val('*');
                 $searchPage.find('input').trigger('change');
 
-                setTimeout(function() {
-                    same($searchPage.find('li.ui-screen-hidden').length, 4);
-                    start();
-                }, 1000);
+                same($searchPage.find('li.ui-screen-hidden').length, 4);
+                start();
             }
         ]);
     });
