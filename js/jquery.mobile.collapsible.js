@@ -35,35 +35,6 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 
 		// If we are in a collapsible set
 		if ( collapsibleSet.length ) {
-
-			// Initialize the collapsible set if it's not already initialized
-			if ( !collapsibleSet.jqmData( "collapsiblebound" ) ) {
-
-				collapsibleSet
-					.jqmData( "collapsiblebound", true )
-					.bind( "expand", function( event ) {
-
-						$( event.target )
-							.closest( ".ui-collapsible" )
-							.siblings( ".ui-collapsible" )
-							.trigger( "collapse" );
-
-					});
-			}
-
-			colllapsiblesInSet.first()
-				.find( "a:eq(0)" )
-					.addClass( "ui-corner-top" )
-						.find( ".ui-btn-inner" )
-							.addClass( "ui-corner-top" );
-
-			colllapsiblesInSet.last()
-				.jqmData( "collapsible-last", true )
-				.find( "a:eq(0)" )
-					.addClass( "ui-corner-bottom" )
-						.find( ".ui-btn-inner" )
-							.addClass( "ui-corner-bottom" );
-
 			// Inherit the theme from collapsible-set
 			if ( !o.theme ) {
 				o.theme = collapsibleSet.jqmData( "theme" );
@@ -97,6 +68,37 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 				.find( "a:eq(0), .ui-btn-inner" )
 					.addClass( "ui-corner-top ui-corner-bottom" );
 		} else {
+			// If we are in a collapsible set
+
+			// Initialize the collapsible set if it's not already initialized
+			if ( !collapsibleSet.jqmData( "collapsiblebound" ) ) {
+
+				collapsibleSet
+					.jqmData( "collapsiblebound", true )
+					.bind( "expand", function( event ) {
+
+						$( event.target )
+							.closest( ".ui-collapsible" )
+							.siblings( ".ui-collapsible" )
+							.trigger( "collapse" );
+
+					});
+			}
+
+			colllapsiblesInSet.first()
+				.find( "a:eq(0)" )
+					.addClass( "ui-corner-top" )
+						.find( ".ui-btn-inner" )
+							.addClass( "ui-corner-top" );
+
+			colllapsiblesInSet.last()
+				.jqmData( "collapsible-last", true )
+				.find( "a:eq(0)" )
+					.addClass( "ui-corner-bottom" )
+						.find( ".ui-btn-inner" )
+							.addClass( "ui-corner-bottom" );
+
+
 			if ( collapsible.jqmData( "collapsible-last" ) ) {
 				collapsibleHeading
 					.find( "a:eq(0), .ui-btn-inner" )
