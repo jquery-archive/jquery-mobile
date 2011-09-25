@@ -116,5 +116,50 @@
 		]);
 	});
 
+	module( "Theming", {});
+
+	asyncTest( "Collapsible", 6, function(){
+		$.testHelper.pageSequence([
+			function(){
+				$.testHelper.openPage( "#collapsible-with-theming" );
+			},
+
+			function() {
+				var collapsibles = $.mobile.activePage.find( ".ui-collapsible" );
+				ok( collapsibles.eq(0).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-up-a" ), "Heading of first collapsible should have class ui-btn-up-a");
+				ok( !collapsibles.eq(0).find( ".ui-collapsible-content" ).hasClass( "ui-btn-up-a" ), "Content of first collapsible should NOT have class ui-btn-up-a");
+				ok( collapsibles.eq(1).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-up-b" ), "Heading of second collapsible should have class ui-btn-up-b");
+				ok( !collapsibles.eq(1).find( ".ui-collapsible-content" ).hasClass( "ui-btn-up-b" ), "Content of second collapsible should NOT have class ui-btn-up-b");
+				ok( collapsibles.eq(2).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-up-c" ), "Heading of third collapsible should have class ui-btn-up-c");
+				ok( collapsibles.eq(2).find( ".ui-collapsible-content" ).hasClass( "ui-btn-up-c" ), "Content of third collapsible should have class ui-btn-up-c");
+				start();
+			}
+		]);
+	});
+
+
+	asyncTest( "Collapsible Set", function(){
+		$.testHelper.pageSequence([
+			function(){
+				$.testHelper.openPage( "#collapsible-set-with-theming" );
+			},
+
+			function() {
+				var collapsibles = $.mobile.activePage.find( ".ui-collapsible" );
+				ok( collapsibles.eq(0).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-up-a" ), "Heading of first collapsible should have class ui-btn-up-a");
+				ok( !collapsibles.eq(0).find( ".ui-collapsible-content" ).hasClass( "ui-btn-up-a" ), "Content of first collapsible should NOT have class ui-btn-up-a");
+				ok( collapsibles.eq(0).find( ".ui-collapsible-content" ).hasClass( "ui-btn-up-d" ), "Content of first collapsible should NOT have class ui-btn-up-d");
+				ok( collapsibles.eq(1).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-up-b" ), "Heading of second collapsible should have class ui-btn-up-b");
+				ok( collapsibles.eq(1).find( ".ui-collapsible-content" ).hasClass( "ui-btn-up-b" ), "Content of second collapsible should have class ui-btn-up-b");
+				ok( collapsibles.eq(2).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-up-d" ), "Heading of third collapsible should have class ui-btn-up-d");
+				ok( collapsibles.eq(2).find( ".ui-collapsible-content" ).hasClass( "ui-btn-up-d" ), "Content of third collapsible should have class ui-btn-up-d");
+				ok( !collapsibles.eq(2).find( ".ui-collapsible-content" ).hasClass( "ui-collapsible-content-collapsed" ), "Content of third collapsible should NOT have class ui-collapsible-content-collapsed");
+				ok( collapsibles.eq(3).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-up-d" ), "Heading of fourth collapsible should have class ui-btn-up-d");
+				ok( collapsibles.eq(3).find( ".ui-collapsible-content" ).hasClass( "ui-btn-up-d" ), "Content of fourth collapsible should have class ui-btn-up-d");
+				start();
+			}
+		]);
+	});
+
 
 })( jQuery );
