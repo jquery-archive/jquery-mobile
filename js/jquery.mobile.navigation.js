@@ -1023,13 +1023,17 @@
 			pageTitle = document.title,
 			isDialog = settings.role === "dialog" || toPage.jqmData( "role" ) === "dialog";
 
-		// If we are trying to transition to the same page that we are currently on ignore the request.
-		// an illegal same page request is defined by the current page being the same as the url, as long as there's history
-		// and toPage is not an array or object (those are allowed to be "same")
-		//
-		// XXX_jblas: We need to remove this at some point when we allow for transitions
-		//            to the same page.
-		if( fromPage && fromPage[0] === toPage[0] ) {
+		// By default, we prevent changePage requests when the fromPage and toPage
+		// are the same element, but folks that generate content manually/dynamically
+		// and reuse pages want to be able to transition to the same page. To allow
+		// this, they will need to change the default value of allowSamePageTransition
+		// to true, *OR*, pass it in as an option when they manually call changePage().
+		// It should be noted that our default transition animations assume that the
+		// formPage and toPage are different elements, so they may behave unexpectedly.
+		// It is up to the developer that turns on the allowSamePageTransitiona option
+		// to either turn off transition animations, or make sure that an appropriate
+		// animation transition is used.
+		if( fromPage && fromPage[0] === toPage[0] && !settings.allowSamePageTransition ) {
 			isPageTransitioning = false;
 			mpc.trigger( "pagechange", triggerData );
 			return;
@@ -1132,7 +1136,8 @@
 		pageContainer: undefined,
 		showLoadMsg: true, //loading message shows by default when pages are being fetched during changePage
 		dataUrl: undefined,
-		fromPage: undefined
+		fromPage: undefined,
+		allowSamePageTransition: false
 	};
 
 /* Event Bindings - hashchange, submit, and click */
