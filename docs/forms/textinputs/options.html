@@ -3,7 +3,7 @@
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>jQuery Mobile Docs - Text Input events</title>
+	<title>jQuery Mobile Docs - Text Input options</title>
 	<link rel="stylesheet"  href="../../../themes/default/" />
 	<link rel="stylesheet" href="../../_assets/css/jqm-docs.css"/>
 	<script src="../../../js/jquery.js"></script>
@@ -29,35 +29,24 @@
 			
 			<ul data-role="controlgroup" data-type="horizontal" class="localnav">
 				<li><a href="index.html" data-role="button" data-transition="fade">Basics</a></li>
-				<li><a href="options.html" data-role="button" data-transition="fade">Options</a></li>
+				<li><a href="options.html" data-role="button" data-transition="fade" class="ui-btn-active">Options</a></li>
 				<li><a href="methods.html" data-role="button" data-transition="fade">Methods</a></li>
-				<li><a href="events.html" data-role="button" data-transition="fade" class="ui-btn-active">Events</a></li>
+				<li><a href="events.html" data-role="button" data-transition="fade">Events</a></li>
 			</ul>
 			
-			<p>Since the native text inputs and textareas are used as a proxy for the custom text inputs, you can watch for events on the original, native text input and textareas instead of needing to go through the text input plugin. Bind to the change event by type: change, blur, focus, keypress, click, etc.</p>
-			<pre><code> 
-$( ".selector" ).bind( "change", function(event, ui) {
-  ...
-});
-</code></pre> 
+			<p>The text input plugin has the following options:</p>
+
+		<dl>
 			
-			<p>The text input plugin has the following custom events:</p>
-
-	<dl>
-				
-		<dt><code>create</code> triggered when a text input is created</dt>
-		<dd>
-			<p>This event is used to find out when a custom text input was created. It is not used to create a custom text input. The text input create event can be used like this: </p>
-
-			<pre><code>
-$( ".selector" ).textinput({
-   create: function(event, ui) { ... }
-});		
-			</code></pre>
+			<dt><code>theme</code> <em>string</em></dt>
+			<dd>
+				<p class="default">default: null, inherited from parent</p>
+				<p>Sets the theme swatch color scheme for the text input element. This is a single letter from a-z that maps to the swatches included in your theme. By default, a text input will inherit the same swatch color as it's parent container if not explicitly set. This option is also exposed as a data attribute, like <code>data-theme=&quot;a&quot;</code>.</p>		
+				<pre><code>$('.selector').textinput(<strong>{ theme: "a" }</strong>);</code></pre>
 			</dd>
 			
-	</dl>
-	    
+		</dl>	
+    
 	</form>
 	</div><!--/content-primary -->		
 	
