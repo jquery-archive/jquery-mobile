@@ -345,7 +345,7 @@
 			function(){ $("#dup-history-second a:first").click(); },
 			function(){ $("#dup-history-first a").click(); },
 			function(){ $("#dup-history-second a:last").click(); },
-			function(){ $("#dup-history-dialog :jqmData(rel=back)").click(); },
+			function(){ $("#dup-history-dialog a:contains('Close')").click(); },
 			function(){
 
 				// fourth page (third index) in the stack to account for first page being hash manipulation,

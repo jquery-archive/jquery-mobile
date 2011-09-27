@@ -216,7 +216,7 @@ $.mobile.hidePageLoadingMsg();
 							<dd>The port specified within the URL. Most URLs rely on the default port for the protocol used, so this may be an empty string most of the time.</dd>
 							<dt><code>protocol</code></dt>
 							<dd>The protocol for the URL including the trailing ':' character.</dd>
-							<dt><code>search<</code>/dt>
+							<dt><code>search</code></dt>
 							<dd>The query component of the URL including the leading '?' character.</dd>
 						</dl>	
 						<p>But it also contains additional properties that provide access to additional components as well as some common forms of the URL developers access:</p>
@@ -481,7 +481,9 @@ $.mobile.silentScroll(100);
 			
 			
 			<dt><code>$.mobile.addResolutionBreakpoints</code> (<em>method</em>)</dt>
-			<dd>Add width breakpoints to the min/max width classes that are added to the HTML element.</dd>
+			<dd>
+			<p class="ui-bar-e ui-body"><strong>Note: This feature is deprecated in beta, and will be removed after that. We recommend using CSS3 Media Queries instead.</strong></p>
+			Add width breakpoints to the min/max width classes that are added to the HTML element.</dd>
 			<dd>
 				<dl>
 					<dt><code>&#183;</code> Arguments:</dt>
