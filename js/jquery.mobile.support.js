@@ -64,7 +64,7 @@ $.mobile.browser.ie = (function() {
 
 
 $.extend( $.support, {
-	orientation: "orientation" in window,
+	orientation: "orientation" in window && "onorientationchange" in window,
 	touch: "ontouchend" in document,
 	cssTransitions: "WebKitTransitionEvent" in window,
 	pushState: "pushState" in history && "replaceState" in history,
