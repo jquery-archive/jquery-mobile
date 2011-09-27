@@ -348,23 +348,27 @@
 		//cache the comparison once.
 		documentBaseDiffers = ( documentUrl.hrefNoHash !== documentBase.hrefNoHash );
 
-		//base element management, defined depending on dynamic base tag support
-		var base = $.support.dynamicBaseTag ? {
+		//base element management, defined depending on dynamic base tag support and if rewriteBase is enabled
+		if ($.mobile.rewriteBase) {
+			var base = $.support.dynamicBaseTag ? {
 
-			//define base element, for use in routing asset urls that are referenced in Ajax-requested markup
-			element: ( $base.length ? $base : $( "<base>", { href: documentBase.hrefNoHash } ).prependTo( $head ) ),
+				//define base element, for use in routing asset urls that are referenced in Ajax-requested markup
+				element: ( $base.length ? $base : $( "<base>", { href: documentBase.hrefNoHash } ).prependTo( $head ) ),
 
-			//set the generated BASE element's href attribute to a new page's base path
-			set: function( href ) {
-				base.element.attr( "href", path.makeUrlAbsolute( href, documentBase ) );
-			},
+				//set the generated BASE element's href attribute to a new page's base path
+				set: function( href ) {
+					base.element.attr( "href", path.makeUrlAbsolute( href, documentBase ) );
+				},
 
-			//set the generated BASE element's href attribute to a new page's base path
-			reset: function() {
-				base.element.attr( "href", documentBase.hrefNoHash );
-			}
+				//set the generated BASE element's href attribute to a new page's base path
+				reset: function() {
+					base.element.attr( "href", documentBase.hrefNoHash );
+				}
 
-		} : undefined;
+			} : undefined;
+		} else {
+			var base = jQuery("head base").attr("href");
+		}
 
 /*
 	internal utility functions
@@ -837,23 +841,25 @@
 						page.jqmData( "title", newPageTitle );
 					}
 
-					//rewrite src and href attrs to use a base url
-					if( !$.support.dynamicBaseTag ) {
-						var newPath = path.get( fileUrl );
-						page.find( "[src], link[href], a[rel='external'], :jqmData(ajax='false'), a[target]" ).each(function() {
-							var thisAttr = $( this ).is( '[href]' ) ? 'href' :
-									$(this).is('[src]') ? 'src' : 'action',
-								thisUrl = $( this ).attr( thisAttr );
+					//rewrite src and href attrs to use a base url if rewriteBase is enabled
+					if ($.mobile.rewriteBase) {
+						if( !$.support.dynamicBaseTag ) {
+							var newPath = path.get( fileUrl );
+							page.find( "[src], link[href], a[rel='external'], :jqmData(ajax='false'), a[target]" ).each(function() {
+								var thisAttr = $( this ).is( '[href]' ) ? 'href' :
+										$(this).is('[src]') ? 'src' : 'action',
+									thisUrl = $( this ).attr( thisAttr );
 
-							// XXX_jblas: We need to fix this so that it removes the document
-							//            base URL, and then prepends with the new page URL.
-							//if full path exists and is same, chop it - helps IE out
-							thisUrl = thisUrl.replace( location.protocol + '//' + location.host + location.pathname, '' );
+								// XXX_jblas: We need to fix this so that it removes the document
+								//            base URL, and then prepends with the new page URL.
+								//if full path exists and is same, chop it - helps IE out
+								thisUrl = thisUrl.replace( location.protocol + '//' + location.host + location.pathname, '' );
 
-							if( !/^(\w+:|#|\/)/.test( thisUrl ) ) {
-								$( this ).attr( thisAttr, newPath + thisUrl );
-							}
-						});
+								if( !/^(\w+:|#|\/)/.test( thisUrl ) ) {
+									$( this ).attr( thisAttr, newPath + thisUrl );
+								}
+							});
+						}
 					}
 
 					//append to page and enhance
