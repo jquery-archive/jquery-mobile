@@ -6,6 +6,7 @@
 	var libName = "jquery.mobile.forms.select.js",
 		originalDefaultDialogTrans = $.mobile.defaultDialogTransition,
 		originalDefTransitionHandler = $.mobile.defaultTransitionHandler,
+		originalGetEncodedText = $.fn.getEncodedText,
 		resetHash, closeDialog;
 
 	resetHash = function(timeout){
@@ -20,6 +21,9 @@
 		teardown: function(){
 			$.mobile.defaultDialogTransition = originalDefaultDialogTrans;
 			$.mobile.defaultTransitionHandler = originalDefTransitionHandler;
+
+			$.fn.getEncodedText = originalGetEncodedText;
+			window.encodedValueIsDefined = undefined;
 		}
 	});
 
@@ -313,4 +317,21 @@
 			.siblings( "a" )
 			.hasClass("ui-btn-up-" + select.parents(":jqmData(role='page')").jqmData('theme')));
 	});
+
+	// issue #2547
+	test( "custom select list item links have encoded option text values", function() {
+		$( "#encoded-option" ).data( 'selectmenu' )._buildList();
+		same(window.encodedValueIsDefined, undefined);
+	});
+
+	// issue #2547
+	test( "custom select list item links have unencoded option text values when using vanilla $.fn.text", function() {
+		// undo our changes, undone in teardown
+		$.fn.getEncodedText = $.fn.text;
+
+		$( "#encoded-option" ).data( 'selectmenu' )._buildList();
+
+		same(window.encodedValueIsDefined, true);
+	});
+
 })(jQuery);

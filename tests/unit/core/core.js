@@ -117,4 +117,9 @@
 		$( "#parent" ).removeWithDependents();
 		same($( "#parent, #dependent" ).length, 0);
 	});
+
+	test( "$.fn.getEncodedText should return the encoded value where $.fn.text doesn't", function() {
+		same( $("#encoded").text(), "foo>");
+		same( $("#encoded").getEncodedText(), "foo&gt;");
+	});
 })(jQuery);
