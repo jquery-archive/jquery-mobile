@@ -77,6 +77,163 @@
 			<dd>Triggers when a scroll finishes.</dd>
 		</dl>
 
+		<h2>Page Loading Events</h2>
+        <p>Whenever an external page is loaded into the application 2 events are fired. The first is pagebeforeload. The 2nd event will be either pageload or pageloadfailed.</p>
+		<dl>
+			<dt><code>pagebeforeload</code></dt>
+			<dd><p>Triggered before any load request is made. Callbacks bound to this event can call preventDefault() on the event to indicate that they are handling the load request. Callbacks that do this *MUST* make sure they call resolve() or reject() on the deferred object reference contained in the data object passed to the callback.</p>
+			<p>The data object, passed as the 2nd arg to the callback function contains the following properties:</p>
+            <ul>
+            	<li><code>url</code> (string)
+<ul>
+           	    <li>The absolute or relative URL that was passed into $.mobile.loadPage() by the caller.</li>
+          	    </ul>
+            	</li>
+            	<li><code>absUrl</code> (string)
+            	  <ul>
+            	    <li>The absolute version of the url. If url was relative, it is resolved against the url used to load the current active page.</li>
+          	    </ul>
+            	</li>
+            	<li><code>dataUrl</code> (string)
+            	  <ul>
+            	    <li>The filtered version of absUrl to be used when identifying the page and updating the browser location when the page is made active.</li>
+          	    </ul>
+            	</li>
+            	<li><code>deferred</code> (object)
+            	  <ul>
+            	    <li>Callbacks that call preventDefault() on the event, *MUST* call resolve() or reject() on this object so that changePage() requests resume processing. Deferred object observers expect the deferred object to be resolved like this:</p>
+                    <pre><code>
+$( document ).bind( &quot;pagebeforeload&quot;, function( event, data ){
+
+	// Let the framework know we're going to handle the load.
+
+	event.preventDefault();
+
+	// ... load the document then insert it into the DOM ...
+	// at some point, either in this callback, or through
+	// some other async means, call resolve, passing in
+	// the following args, plus a jQuery collection object
+	// containing the DOM element for the page.
+
+	data.deferred.resolve( data.absUrl, data.options, page );
+
+});</code></pre>
+                    <p>or rejected like this:
+                    <pre><code>
+$( document ).bind( &quot;pagebeforeload&quot;, function( event, data ){
+
+	// Let the framework know we're going to handle the load.
+
+	event.preventDefault();
+
+	// ... load the document then insert it into the DOM ...
+	// at some point, if the load fails, either in this
+	// callback, or through some other async means, call
+	// reject like this:
+
+	data.deferred.reject( data.absUrl, data.options );
+
+});</code></pre>
+                    </li>
+          	    </ul>
+            	</li>
+            	<li><code>options</code> (object)
+            	  <ul>
+            	    <li>This object contains the options that were passed into $.mobile.loadPage().</li>
+          	    </ul>
+            	</li>
+           	  </ul>
+            </dd>
+			<dt><code>pageload</code></dt>
+			<dd>Triggered after the page is successfully loaded and inserted into the DOM. Callbacks bound to this event will be passed a data object as its 2nd arg. This object contains the following information:
+            <ul>
+            	<li><code>url</code> (string)
+<ul>
+           	    <li>The absolute or relative URL that was passed into $.mobile.loadPage() by the caller.</li>
+          	    </ul>
+            	</li>
+            	<li><code>absUrl</code> (string)
+            	  <ul>
+            	    <li>The absolute version of the url. If url was relative, it is resolved against the url used to load the current active page.</li>
+          	    </ul>
+            	</li>
+            	<li><code>dataUrl</code> (string)
+            	  <ul>
+            	    <li>The filtered version of absUrl to be used when identifying the page and updating the browser location when the page is made active.</li>
+          	    </ul>
+            	</li>
+            	<li><code>options</code> (object)
+            	  <ul>
+            	    <li>This object contains the options that were passed into $.mobile.loadPage().</li>
+          	    </ul>
+            	</li>
+           	  </ul>
+            </dd>
+			<dt><code>pageloadfailed</code></dt>
+			<dd>Triggered if the page load request failed. By default, after dispatching this event, the framework will display a page failed message and call reject() on the deferred object contained within the event's data object. Callbacks can prevent this default behavior from executing by calling preventDefault() on the event.
+			  <p>The data object, passed as the 2nd arg to the callback function contains the following properties:</p>
+              <ul>
+            	<li><code>url</code> (string)
+<ul>
+           	    <li>The absolute or relative URL that was passed into $.mobile.loadPage() by the caller.</li>
+          	    </ul>
+            	</li>
+            	<li><code>absUrl</code> (string)
+            	  <ul>
+            	    <li>The absolute version of the url. If url was relative, it is resolved against the url used to load the current active page.</li>
+          	    </ul>
+            	</li>
+            	<li><code>dataUrl</code> (string)
+            	  <ul>
+            	    <li>The filtered version of absUrl to be used when identifying the page and updating the browser location when the page is made active.</li>
+          	    </ul>
+            	</li>
+            	<li><code>deferred</code> (object)
+            	  <ul>
+            	    <li>Callbacks that call preventDefault() on the event, *MUST* call resolve() or reject() on this object so that changePage() requests resume processing. Deferred object observers expect the deferred object to be resolved like this:</p>
+                    <pre><code>
+$( document ).bind( &quot;pageloadfailed&quot;, function( event, data ){
+
+	// Let the framework know we're going to handle things.
+
+	event.preventDefault();
+
+	// ... attempt to load some other page ...
+	// at some point, either in this callback, or through
+	// some other async means, call resolve, passing in
+	// the following args, plus a jQuery collection object
+	// containing the DOM element for the page.
+
+	data.deferred.resolve( data.absUrl, data.options, page );
+
+});</code></pre>
+                    <p>or rejected like this:
+                    <pre><code>
+$( document ).bind( &quot;pageloadfailed&quot;, function( event, data ){
+
+	// Let the framework know we're going to handle things.
+
+	event.preventDefault();
+
+	// ... attempt to load some other page ...
+	// at some point, if the load fails, either in this
+	// callback, or through some other async means, call
+	// reject like this:
+
+	data.deferred.reject( data.absUrl, data.options );
+
+});</code></pre>
+                    </li>
+          	    </ul>
+            	</li>
+            	<li><code>options</code> (object)            
+            	  <ul>
+            	    <li>This object contains the options that were passed into $.mobile.loadPage().</li>
+          	    </ul>
+            	</li>
+           	  </ul>
+			</dd>
+		</dl>
 		<h2>Page show/hide events</h2>
 		<p>Whenever a page is shown or hidden in jQuery Mobile, two events are triggered on that page. The events triggered depend on whether that page is being shown or hidden, so when a page transition occurs, there are actually 4 events triggered: 2 for each page. </p>
 		<dl>
