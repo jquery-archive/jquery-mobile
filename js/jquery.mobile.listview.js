@@ -52,6 +52,11 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				var $this = $(this);
 				$this.prependTo( $this.parent() ); //shift aside to front for css float
 			});
+
+		if ( item.find( "h1, h2, h3, h4, h5, p, dl" ).length > 1 ) {
+			item.addClass( "ui-li-multiline" );
+		}
+
 	},
 
 	_removeCorners: function( li, which ) {
