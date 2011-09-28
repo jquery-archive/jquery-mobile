@@ -34,8 +34,9 @@
 				<li><a href="events.html" data-role="button" data-transition="fade" class="ui-btn-active">Events</a></li>
 			</ul>
 			
-			<p>Since the native  radio button is used as a proxy for the custom radio button, you can watch for events on the original, native radio button instead of needing to go through the radio button plugin. Bind to the change event by type: change, blur, focus, keypress, click, etc.</p>
-      <pre><code>
+			
+			<p>Bind events directly to the <code>input</code> element.  Use jQuery Mobile's <a href="../../api/events.html">virtual events</a>, or bind standard JavaScript events, like change, focus, blur, etc.:</p>
+			<pre><code> 
 $("input[type='radio']").bind( "change", function(event, ui) {
   ...
 });
@@ -47,7 +48,7 @@ $("input[type='radio']").bind( "change", function(event, ui) {
 				
 		<dt><code>create</code> triggered when a radio button is created</dt>
 		<dd>
-			<p>This event is used to find out when a custom radio button was created. It is not used to create a custom radio button. The radio button create event can be used like this: </p>
+			
 
 			<pre><code>
 $("input[type='radio']").checkboxradio({
@@ -74,7 +75,7 @@ $("input[type='radio']").checkboxradio({
 					<li><a href="../docs-forms.html">Form basics</a></li>
 					<li><a href="../forms-all.html">Form element gallery</a></li>
 					<li><a href="../textinputs/index.html">Text inputs</a></li>
-					<li><a href="../forms-search.html">Search inputs</a></li>
+					<li><a href="../search/index.html">Search inputs</a></li>
 					<li><a href="../slider/index.html">Slider</a></li>
 					<li><a href="../forms-switch.html">Flip toggle switch</a></li>
 					<li data-theme="a"><a href="index.html">Radio buttons</a></li>
