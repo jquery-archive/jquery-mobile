@@ -45,7 +45,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			}
 		}
 
-		collapsibleContent.addClass( ( o.contentTheme ) ? ( "ui-btn-up-" + o.contentTheme ) : "");
+		collapsibleContent.addClass( ( o.contentTheme ) ? ( "ui-body-" + o.contentTheme ) : "");
 
 		collapsibleHeading
 			//drop heading in before content
