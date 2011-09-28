@@ -36,7 +36,6 @@
 
 			<p>Text inputs and textareas are coded with standard HTML elements, then enhanced by jQuery Mobile to make them more attractive and useable on a mobile device.</p>
 			
-         <h2>Text inputs</h2>
 			<p>To collect standard alphanmeric text, use an <code>input</code> with a <code>type="text"</code> attribute. It's important to  set the <code>for</code> attribute of the <code>label</code> to match the ID of the <code>input</code> so they are semantically associated and wrap them in a <code>div</code> with the <code> data-role="fieldcontain"</code> attribute to group them.</p>
 
 <pre><code>	
@@ -99,6 +98,13 @@
 			<textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
 			</div>
 		
+			
+			<h2>Calling the textinput plugin</h2>
+
+<p>This plugin will auto initialize on any page that contains a text input, no need for a <code>data-role</code> attribute in the markup. However, if needed you can directly call the <code>textinput</code> plugin on any selector, just like any jQuery plugin:</p>
+<pre><code>
+$('input').textinput();			
+</code></pre>
 			
 
 	</form>
