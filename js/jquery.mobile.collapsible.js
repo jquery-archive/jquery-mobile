@@ -45,7 +45,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			}
 		}
 
-		collapsibleContent.addClass( ( o.contentTheme ) ? ( "ui-btn-up-" + o.contentTheme ) : "");
+		collapsibleContent.addClass( ( o.contentTheme ) ? ( "ui-body-" + o.contentTheme ) : "");
 
 		collapsibleHeading
 			//drop heading in before content
@@ -61,7 +61,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 					iconPos: "left",
 					icon: "plus",
 					theme: o.theme
-				})
+				});
 
 		if ( !collapsibleSet.length ) {
 			collapsibleHeading
