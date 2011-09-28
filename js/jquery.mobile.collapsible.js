@@ -61,7 +61,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 					iconPos: "left",
 					icon: "plus",
 					theme: o.theme
-				})
+				});
 
 		if ( !collapsibleSet.length ) {
 			collapsibleHeading
