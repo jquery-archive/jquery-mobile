@@ -34,7 +34,7 @@
 				<li><a href="events.html" data-role="button" data-transition="fade" class="ui-btn-active">Events</a></li>
 			</ul>
 			
-			<p>Since the native text inputs and textareas are used as a proxy for the custom text inputs, you can watch for events on the original, native text input and textareas instead of needing to go through the text input plugin. Bind to the change event by type: change, blur, focus, keypress, click, etc.</p>
+			<p>Bind events directly to the input element.  Use jQuery Mobile's <a href="../../api/events.html">virtual events</a>, or bind standard JavaScript events, like change, focus, blur, etc.:</p>
 			<pre><code> 
 $( ".selector" ).bind( "change", function(event, ui) {
   ...
@@ -47,7 +47,6 @@ $( ".selector" ).bind( "change", function(event, ui) {
 				
 		<dt><code>create</code> triggered when a text input is created</dt>
 		<dd>
-			<p>This event is used to find out when a custom text input was created. It is not used to create a custom text input. The text input create event can be used like this: </p>
 
 			<pre><code>
 $( ".selector" ).textinput({
@@ -74,7 +73,7 @@ $( ".selector" ).textinput({
 					<li><a href="../forms-all.html">Form element gallery</a></li>
 					<li data-theme="a"><a href="index.html">Text inputs</a></li>
 					<li><a href="../forms-search.html">Search inputs</a></li>
-					<li><a href="../forms-slider.html">Slider</a></li>
+					<li><a href="../slider/index.html">Slider</a></li>
 					<li><a href="../forms-switch.html">Flip toggle switch</a></li>
 					<li><a href="../radiobuttons/index.html">Radio buttons</a></li>
 					<li><a href="../checkboxes/index.html">Checkboxes</a></li>

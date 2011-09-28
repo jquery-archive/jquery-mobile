@@ -3,7 +3,7 @@
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>jQuery Mobile Docs - Slider events</title>
+	<title>jQuery Mobile Docs - Slider options</title>
 	<link rel="stylesheet"  href="../../../themes/default/" />
 	<link rel="stylesheet" href="../../_assets/css/jqm-docs.css"/>
 	<script src="../../../js/jquery.js"></script>
@@ -16,7 +16,7 @@
 	<div data-role="page" class="type-interior">
 
 		<div data-role="header" data-theme="f">
-		<h1>Sliders</h1>
+		<h2>Slider</h2>
 		<a href="../../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
@@ -25,40 +25,53 @@
 
 		<form action="#" method="get">
 
-			<h2>Sliders</h2>
+			<h2>Slider</h2>
 			
 			<ul data-role="controlgroup" data-type="horizontal" class="localnav">
 				<li><a href="index.html" data-role="button" data-transition="fade">Basics</a></li>
-				<li><a href="options.html" data-role="button" data-transition="fade">Options</a></li>
+				<li><a href="options.html" data-role="button" data-transition="fade" class="ui-btn-active">Options</a></li>
 				<li><a href="methods.html" data-role="button" data-transition="fade">Methods</a></li>
-				<li><a href="events.html" data-role="button" data-transition="fade" class="ui-btn-active">Events</a></li>
+				<li><a href="events.html" data-role="button" data-transition="fade">Events</a></li>
 			</ul>
 			
-			<p>Since the input field is changed by slider, you can watch for events on the input field instead of needing to go through the slider plugin. Bind to the change event.</p>
-			<pre><code> 
-$( ".selector" ).bind( "change", function(event, ui) {
-  ...
-});
-</code></pre> 
+			<p>The slider plugin has the following options:</p>
+
+		<dl>
+			<dt><code>disabled</code> <em>string</em></dt>
+			<dd>
+				<p class="default">default: false</p>
+				<p>Sets the default state of the slider to disabled when "true".</p>		
+				<pre><code>$('.selector').slider(<strong>{ disabled: "true" }</strong>);</code></pre>
+			</dd>
 			
-			<p>The slider plugin has the following custom event:</p>
-
-	<dl>
-				
-		<dt><code>create</code> triggered when a slider is created</dt>
-		<dd>
-			<p>This event is used to find out when a custom slider was created. It is not used to create a custom slider. The slider create event can be used like this: </p>
-
-			<pre><code>
-$( ".selector" ).slider({
-   create: function(event, ui) { ... }
-});		
-			</code></pre>
-		</dd>
-		
-
-	</dl>
-	    
+			<dt><code>initSelector</code> <em>CSS selector string</em></dt>
+			<dd>
+				<p class="default">default: "input[type='range'], :jqmData(type='range'), :jqmData(role='slider')"</p>
+				<p>This is used to define the selectors (element types, data roles, etc.) that will automatically be initialized as textinputs. To change which elements are initialized, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
+<pre><code>$( document ).bind( "mobileinit", function(){
+   <strong>$.mobile.slider.prototype.options.initSelector = ".myslider";</strong>
+});
+</code></pre>
+			</dd>
+						
+			<dt><code>theme</code> <em>string</em></dt>
+			<dd>
+				<p class="default">default: null, inherited from parent</p>
+				<p>Sets the color scheme (swatch) for all instances of this widget. It accepts a single letter from a-z that maps to the swatches included in your theme.</p>		
+				<pre><code>$('.selector').slider(<strong>{ theme: "a" }</strong>);</code></pre>
+				<p>This option can be overridden in the markup by assigning a data attribute to the input, e.g. <code>data-theme=&quot;a&quot;</code>.</p>
+			</dd>
+			
+			<dt><code>trackTheme</code> <em>string</em></dt>
+			<dd>
+				<p class="default">default: null, inherited from parent</p>
+				<p>Sets the color scheme (swatch) for the slider's track, specifically. It accepts a single letter from a-z that maps to the swatches included in your theme.</p>		
+				<pre><code>$('.selector').slider(<strong>{ theme: "a" }</strong>);</code></pre>
+				<p>This option can be overridden in the markup by assigning a data attribute to the input, e.g. <code>data-track-theme=&quot;a&quot;</code>.</p>
+			</dd>
+			
+		</dl>	
+    
 	</form>
 	</div><!--/content-primary -->		
 	
@@ -73,7 +86,7 @@ $( ".selector" ).slider({
 					<li data-role="list-divider">Form elements</li>
 					<li><a href="../docs-forms.html">Form basics</a></li>
 					<li><a href="../forms-all.html">Form element gallery</a></li>
-					<li><a href="../texts/index.html">Text inputs</a></li>
+					<li><a href="../textinputs/index.html">Text inputs</a></li>
 					<li><a href="../forms-search.html">Search inputs</a></li>
 					<li data-theme="a"><a href="index.html">Slider</a></li>
 					<li><a href="../forms-switch.html">Flip toggle switch</a></li>

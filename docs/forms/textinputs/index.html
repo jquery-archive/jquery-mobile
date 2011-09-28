@@ -34,10 +34,9 @@
 				<li><a href="events.html" data-role="button" data-transition="fade">Events</a></li>
 			</ul>
 
-
-			<p>Text inputs and textareas are coded with standard HTML elements, then enhanced by jQuery Mobile to make them more attractive and useable on a mobile.</p>
+			<p>Text inputs and textareas are coded with standard HTML elements, then enhanced by jQuery Mobile to make them more attractive and useable on a mobile device.</p>
 			
-						<h2>Text inputs</h2>
+         <h2>Text inputs</h2>
 			<p>To collect standard alphanmeric text, use an <code>input</code> with a <code>type="text"</code> attribute. It's important to  set the <code>for</code> attribute of the <code>label</code> to match the ID of the <code>input</code> so they are semantically associated and wrap them in a <code>div</code> with the <code> data-role="fieldcontain"</code> attribute to group them.</p>
 
 <pre><code>	
@@ -50,55 +49,42 @@
 			<p>The text input is displayed like this:</p>
 	    	<div data-role="fieldcontain">
 	         <label for="name">Text Input:</label>
-	         <input type="text" name="name" id="name" value=""  />
+	         <input type="text" name="name" id="name" value="" />
 			</div>
-
+						
 			
+			<h3>Standard text input types</h3>
+			<p>In jQuery Mobile, you can use existing and new HTML5 input types such as <code>password</code>, <code>email</code>, <code>tel</code>, <code>number</code>, and more.  Some type values are rendered differently across browsers &#8212; for example, Chrome displays the <code>range</code> input renders as a slider &#8212; so we standardize their appearance by dynamically changing their type to <code>text</code> (currently, this applies to <code>range</code> and <code>search</code>). You can configure which input types are degraded to <code>text</code> with the <code>page</code> plugin's options.</p>
 			
-			<h2>Password inputs</h2>
-			<p>For password fields, use an <code>input</code> with a <code>type="password"</code> attribute. Set the <code>for</code> attribute of the <code>label</code> to match the ID of the <code>input</code> so they are semantically associated and wrap them in a <code>div</code> with the <code> data-role="fieldcontain"</code> attribute to group them.</p>
-
-<pre><code>	
-&lt;div data-role=&quot;fieldcontain&quot;&gt;
-    &lt;label for=&quot;password&quot;&gt;Password Input:&lt;/label&gt;
-    &lt;input type=&quot;password&quot; name=&quot;password&quot; id=&quot;password&quot; value=&quot;&quot; /&gt;
-&lt;/div&gt;	
-</code></pre>	
-			 
-			<p>The password input is displayed like this:</p>
 			<div data-role="fieldcontain">
-	         <label for="password">Password Input:</label>
+	         <label for="password">Password:</label>
 	         <input type="password" name="password" id="password" value="" />
 			</div>
 			
-			
-			<h2>More standard HTML5 input types</h2>
-			<p>In jQuery Mobile, you can use new HTML5 input types such as <code>email</code>, <code>tel</code>, <code>number</code>, and more. We actively degrade certain types to <code>type=text</code> (currently, <code>range</code> and <code>search</code>) in certain cases when we provide a replacement for that type's native control. You can configure which types are degraded to text through the <code>page</code> plugin's options.</p>
-			
 			<div data-role="fieldcontain">
 	         <label for="number">Number:</label>
-	         <input type="number" name="number" id="number" value=""  />
+	         <input type="number" name="number" id="number" value="" />
 			</div>
 			
 			<div data-role="fieldcontain">
 	         <label for="email">Email:</label>
-	         <input type="email" name="email" id="email" value=""  />
+	         <input type="email" name="email" id="email" value="" />
 			</div>
 			
 			<div data-role="fieldcontain">
 	         <label for="url">Url:</label>
-	         <input type="url" name="url" id="url" value=""  />
+	         <input type="url" name="url" id="url" value="" />
 			</div>
 			
 			<div data-role="fieldcontain">
 	         <label for="tel">Tel:</label>
-	         <input type="tel" name="tel" id="tel" value=""  />
+	         <input type="tel" name="tel" id="tel" value="" />
 			</div>
 		
 
 			<h2>Textareas</h2>
-			<p>For multi-line text inputs, use a <code>textarea</code> element. The framework will auto-grow the height of the textarea to avoid the need for an internal scrollbar which is very hard to use on a mobile device. </p>
-			<p>Set the <code>for</code> attribute of the <code>label</code> to match the ID of the <code>input</code> so they are semantically associated and wrap them in a <code>div</code> with the <code> data-role="fieldcontain"</code> attribute to group them.</p>
+			<p>For multi-line text inputs, use a <code>textarea</code> element. The framework will auto-grow the height of the textarea to avoid the need for an internal scrollbar. </p>
+			<p>Set the <code>for</code> attribute of the <code>label</code> to match the ID of the <code>textarea</code> so they are semantically associated, and wrap them in a <code>div</code> with the <code> data-role="fieldcontain"</code> attribute to group them.</p>
 
 <pre><code>	
 &lt;div data-role=&quot;fieldcontain&quot;&gt;
@@ -107,7 +93,7 @@
 &lt;/div&gt;
 </code></pre>	
 			 
-			<p>The textarea is displayed like this and will grow as you type:</p>
+			<p>The textarea is displayed like this and will grow to fit new lines as you type:</p>
 			<div data-role="fieldcontain">
 			<label for="textarea">Textarea:</label>
 			<textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
@@ -132,7 +118,7 @@
 					<li><a href="../forms-all.html">Form element gallery</a></li>
 					<li data-theme="a"><a href="index.html">Text inputs</a></li>
 					<li><a href="../forms-search.html">Search inputs</a></li>
-					<li><a href="../forms-slider.html">Slider</a></li>
+					<li><a href="../slider/index.html">Slider</a></li>
 					<li><a href="../forms-switch.html">Flip toggle switch</a></li>
 					<li><a href="../radiobuttons/index.html">Radio buttons</a></li>
 					<li><a href="../checkboxes/index.html">Checkboxes</a></li>

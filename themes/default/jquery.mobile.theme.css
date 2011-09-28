@@ -716,7 +716,8 @@ a.ui-link-inherit {
 /* Icons
 -----------------------------------------------------------------------------------------------------------*/
 
-.ui-icon {
+.ui-icon,
+.ui-icon-searchfield:after {
 	background: 						#666 /*{global-icon-color}*/;
 	background: 						rgba(0,0,0,.4) /*{global-icon-disc}*/;
 	background-image: url(images/icons-18-white.png) /*{global-icon-set}*/;
@@ -747,7 +748,7 @@ a.ui-link-inherit {
 	.ui-icon-plus, .ui-icon-minus, .ui-icon-delete, .ui-icon-arrow-r,
 	.ui-icon-arrow-l, .ui-icon-arrow-u, .ui-icon-arrow-d, .ui-icon-check,
 	.ui-icon-gear, .ui-icon-refresh, .ui-icon-forward, .ui-icon-back,
-	.ui-icon-grid, .ui-icon-star, .ui-icon-alert, .ui-icon-info, .ui-icon-home, .ui-icon-search, 
+	.ui-icon-grid, .ui-icon-star, .ui-icon-alert, .ui-icon-info, .ui-icon-home, .ui-icon-search, .ui-icon-searchfield:after, 
 	.ui-icon-checkbox-off, .ui-icon-checkbox-on, .ui-icon-radio-off, .ui-icon-radio-on {
 		background-image: url(images/icons-36-white.png);
 		-moz-background-size: 776px 18px;
@@ -818,7 +819,8 @@ a.ui-link-inherit {
 .ui-icon-home {
 	background-position: 	-576px 50%;
 }
-.ui-icon-search {
+.ui-icon-search,
+.ui-icon-searchfield:after {
 	background-position: 	-612px 50%;
 }
 .ui-icon-checkbox-off {
@@ -848,10 +850,6 @@ a.ui-link-inherit {
 .ui-checkbox-on .ui-icon,
 .ui-radio-on .ui-icon {
 	background-color: #4596ce /*{global-active-background-color}*/; /* NOTE: this hex should match the active state color. It's repeated here for cascade */
-}
-.ui-icon-searchfield {
-	background-image: url(images/icon-search-black.png);
-	background-size: 16px 16px;
 }
 
 /* loading icon */
@@ -988,4 +986,27 @@ a.ui-link-inherit {
 	-moz-box-shadow: 0px 1px 0 				rgba(255,255,255,.4);
 	-webkit-box-shadow: 0px 1px 0 			rgba(255,255,255,.4);
 	box-shadow: 0px 1px 0 					rgba(255,255,255,.4);
+}
+
+/* Focus state - set here for specificity
+-----------------------------------------------------------------------------------------------------------*/
+
+.ui-focus {
+	-moz-box-shadow: 0px 0px 12px 		#387bbe /*{global-active-background-color}*/;
+	-webkit-box-shadow: 0px 0px 12px 	#387bbe /*{global-active-background-color}*/;
+	box-shadow: 0px 0px 12px 			#387bbe /*{global-active-background-color}*/;
+}
+
+/* unset box shadow in browsers that don't do it right
+-----------------------------------------------------------------------------------------------------------*/
+
+.ui-mobile-nosupport-boxshadow * {
+	-moz-box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+}
+
+/* ...and bring back focus */
+.ui-mobile-nosupport-boxshadow .ui-focus {
+	outline-width: 2px;
 }

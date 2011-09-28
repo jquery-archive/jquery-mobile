@@ -19,7 +19,7 @@
 			menuId = selectID + "-menu",
 			menuPage = $( "<div data-" + $.mobile.ns + "role='dialog' data-" +$.mobile.ns + "theme='"+ widget.options.menuPageTheme +"'>" +
 				"<div data-" + $.mobile.ns + "role='header'>" +
-				"<div class='ui-title'>" + label.text() + "</div>"+
+				"<div class='ui-title'>" + label.getEncodedText() + "</div>"+
 				"</div>"+
 				"<div data-" + $.mobile.ns + "role='content'></div>"+
 				"</div>" ).appendTo( $.mobile.pageContainer ).page(),
@@ -414,7 +414,7 @@
 				self.select.find( "option" ).each( function( i ) {
 					var $this = $( this ),
 						$parent = $this.parent(),
-						text = $this.text(),
+						text = $this.getEncodedText(),
 						anchor = "<a href='#'>"+ text +"</a>",
 						classes = [],
 						extraAttrs = [];
