@@ -118,7 +118,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			this.buttonCount = $( "<span>" )
 				.addClass( "ui-li-count ui-btn-up-c ui-btn-corner-all" )
 				.hide()
-				.appendTo( button );
+				.appendTo( button.addClass('ui-li-has-count') );
 		}
 
 		// Disable if specified
