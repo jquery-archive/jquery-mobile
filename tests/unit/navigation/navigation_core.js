@@ -96,6 +96,56 @@
 		]);
 	});
 
+	asyncTest( "preventDefault on pageremove event can prevent external page from being removed from the DOM", function(){
+		var preventRemoval = true,
+			removeCallback = function( e ) {
+				if ( preventRemoval ) {
+					e.preventDefault();
+				}
+			};
+
+		$( document ).bind( "pageremove", removeCallback );
+
+		$.testHelper.pageSequence([
+			navigateTestRoot,
+
+			function(){
+				$.mobile.changePage( "external.html" );
+			},
+
+			// page is pulled and displayed in the dom
+			function(){
+				same( $( "#external-test" ).length, 1 );
+				window.history.back();
+			},
+
+			// external-test *IS* cached in the dom after transitioning away
+			function(){
+				same( $( "#external-test" ).length, 1 );
+
+				// Switch back to the page again!
+				$.mobile.changePage( "external.html" );
+			},
+
+			// page is still present and displayed in the dom
+			function(){
+				same( $( "#external-test" ).length, 1 );
+
+				// Now turn off our removal prevention.
+				preventRemoval = false;
+
+				window.history.back();
+			},
+
+			// external-test is *NOT* cached in the dom after transitioning away
+			function(){
+				same( $( "#external-test" ).length, 0 );
+				$( document ).unbind( "pageremove", removeCallback );
+				start();
+			}
+		]);
+	});
+
 	asyncTest( "external page is cached in the DOM after pagehide", function(){
 		$.testHelper.pageSequence([
 			navigateTestRoot,
