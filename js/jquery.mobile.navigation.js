@@ -814,7 +814,7 @@
 						newPageTitle = html.match( /<title[^>]*>([^<]*)/ ) && RegExp.$1,
 
 						// TODO handle dialogs again
-						pageElemRegex = new RegExp( ".*(<[^>]+\\bdata-" + $.mobile.ns + "role=[\"']?page[\"']?[^>]*>).*" ),
+						pageElemRegex = new RegExp( "(<[^>]+\\bdata-" + $.mobile.ns + "role=[\"']?page[\"']?[^>]*>)" ),
 						dataUrlRegex = new RegExp( "\\bdata-" + $.mobile.ns + "url=[\"']?([^\"'>]*)[\"']?" );
 
 
