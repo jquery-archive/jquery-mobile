@@ -3,7 +3,7 @@
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>jQuery Mobile Docs - Slider methods</title>
+	<title>jQuery Mobile Docs - Search Input methods</title>
 	<link rel="stylesheet"  href="../../../themes/default/" />
 	<link rel="stylesheet" href="../../_assets/css/jqm-docs.css"/>
 	<script src="../../../js/jquery.js"></script>
@@ -16,7 +16,7 @@
 	<div data-role="page" class="type-interior">
 
 		<div data-role="header" data-theme="f">
-		<h1>Slider</h1>
+		<h1>Search input</h1>
 		<a href="../../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
@@ -25,7 +25,7 @@
 
 		<form action="#" method="get">
 
-			<h2>Slider</h2>
+			<h2>Search input</h2>
 			
 			<ul data-role="controlgroup" data-type="horizontal" class="localnav">
 				<li><a href="index.html" data-role="button" data-transition="fade">Basics</a></li>
@@ -34,29 +34,21 @@
 				<li><a href="events.html" data-role="button" data-transition="fade">Events</a></li>
 			</ul>
 			
-			<p>The slider plugin has the following methods:</p>
+			<p>The text input plugin has the following methods:</p>
 
-		<dl>									
-			<dt><code>enable</code> enable a disabled slider</dt>
-			<dd>
-				<pre><code>
-$('.selector').slider('enable');			
-				</code></pre>
-			</dd>
-			
-			<dt><code>disable</code> disable a slider</dt>
-			<dd>
-				<pre><code>
-$('.selector').slider('disable');			
-				</code></pre>
-			</dd>
+		<dl>
 						
-			<dt><code>refresh</code> update the slider</dt>
+			<dt><code>enable</code> enable a disabled text input</dt>
 			<dd>
-			<p>If you manipulate a slider via JavaScript, you must call the refresh method on it to update the visual styling.</p> 				
+				<pre><code>
+$('.selector').textinput('enable');			
+				</code></pre>
+			</dd>
 			
-			<pre><code>			
-$('.selector').slider('refresh');
+			<dt><code>disable</code> disable a text input</dt>
+			<dd>
+				<pre><code>
+$('.selector').textinput('disable');			
 				</code></pre>
 			</dd>
 			
@@ -77,8 +69,8 @@ $('.selector').slider('refresh');
 					<li><a href="../docs-forms.html">Form basics</a></li>
 					<li><a href="../forms-all.html">Form element gallery</a></li>
 					<li><a href="../textinputs/index.html">Text inputs</a></li>
-					<li><a href="../search/">Search input</a></li>
-					<li data-theme="a"><a href="index.html">Slider</a></li>
+					<li data-theme="a"><a href="index.html">Search input</a></li>
+					<li><a href="../slider/">Slider</a></li>
 					<li><a href="../switch/">Flip toggle switch</a></li>
 					<li><a href="../radiobuttons/">Radio buttons</a></li>
 					<li><a href="../checkboxes/">Checkboxes</a></li>

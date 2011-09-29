@@ -32,9 +32,9 @@
       <p>
 		<div class="ui-body ui-body-e">
 		<h4 style="margin:.5em 0">Important: pageCreate() vs pageInit()</h4>
-    Prior to Beta 2 the recommendation to users wishing to manipulate jQuery Mobile enhanced page and child widget markup was to bind to the <code><strong>pagecreate</strong></code> event. In Beta 2 an internal change was made to decouple each of the widgets by binding to the <code><strong>pagecreate</strong></code> event in place of direct calls to the widget methods. As a result, users binding to the <code><strong>pagecreate</strong></code> in <code><strong>mobileinit</code></strong> would find their binding executing before the markup had been enhanced by each of the plugins. In keeping with the lifecycle of the jQuery UI Widget Factory, the initialization method is invoked <strong>after</strong> the create method, so the <code><strong>pageinit</code></strong> event provides the correct timing for post enhancement manipulation of the DOM and/or Javascript objects.
+    Prior to Beta 2 the recommendation to users wishing to manipulate jQuery Mobile enhanced page and child widget markup was to bind to the <code><strong>pagecreate</strong></code> event. In Beta 2 an internal change was made to decouple each of the widgets by binding to the <code><strong>pagecreate</strong></code> event in place of direct calls to the widget methods. As a result, users binding to the <code><strong>pagecreate</strong></code> in <code><strong>mobileinit</strong></code> would find their binding executing before the markup had been enhanced by each of the plugins. In keeping with the lifecycle of the jQuery UI Widget Factory, the initialization method is invoked <strong>after</strong> the create method, so the <code><strong>pageinit</strong></code> event provides the correct timing for post enhancement manipulation of the DOM and/or Javascript objects.
 
-		In short, if you were previously using <code><strong>pagecreate</code></strong> to manipulate the enhanced markup before the page was shown its very likely you'll want to migrate to 'pageinit'.
+		In short, if you were previously using <code><strong>pagecreate</strong></code> to manipulate the enhanced markup before the page was shown its very likely you'll want to migrate to 'pageinit'.
 		</div></p>
 
 		<h2>Touch events</h2>
@@ -77,24 +77,265 @@
 			<dd>Triggers when a scroll finishes.</dd>
 		</dl>
 
-		<h2>Page show/hide events</h2>
-		<p>Whenever a page is shown or hidden in jQuery Mobile, two events are triggered on that page. The events triggered depend on whether that page is being shown or hidden, so when a page transition occurs, there are actually 4 events triggered: 2 for each page. </p>
+		<h2>Page load events</h2>
+        <p>Whenever an external page is loaded into the application DOM, 2 events are fired. The first is pagebeforeload. The 2nd event will be either pageload or pageloadfailed.</p>
+		<dl>
+			<dt><code>pagebeforeload</code></dt>
+			<dd><p>Triggered before any load request is made. Callbacks bound to this event can call preventDefault() on the event to indicate that they are handling the load request. Callbacks that do this *MUST* make sure they call resolve() or reject() on the deferred object reference contained in the data object passed to the callback.</p>
+			<p>The data object, passed as the 2nd arg to the callback function contains the following properties:</p>
+            <ul>
+            	<li><code>url</code> (string)
+<ul>
+           	    <li>The absolute or relative URL that was passed into $.mobile.loadPage() by the caller.</li>
+          	    </ul>
+            	</li>
+            	<li><code>absUrl</code> (string)
+            	  <ul>
+            	    <li>The absolute version of the url. If url was relative, it is resolved against the url used to load the current active page.</li>
+          	    </ul>
+            	</li>
+            	<li><code>dataUrl</code> (string)
+            	  <ul>
+            	    <li>The filtered version of absUrl to be used when identifying the page and updating the browser location when the page is made active.</li>
+          	    </ul>
+            	</li>
+            	<li><code>deferred</code> (object)
+            	  <ul>
+            	    <li>Callbacks that call preventDefault() on the event, *MUST* call resolve() or reject() on this object so that changePage() requests resume processing. Deferred object observers expect the deferred object to be resolved like this:</p>
+                    <pre><code>
+$( document ).bind( &quot;pagebeforeload&quot;, function( event, data ){
+
+	// Let the framework know we're going to handle the load.
+
+	event.preventDefault();
+
+	// ... load the document then insert it into the DOM ...
+	// at some point, either in this callback, or through
+	// some other async means, call resolve, passing in
+	// the following args, plus a jQuery collection object
+	// containing the DOM element for the page.
+
+	data.deferred.resolve( data.absUrl, data.options, page );
+
+});</code></pre>
+                    <p>or rejected like this:
+                    <pre><code>
+$( document ).bind( &quot;pagebeforeload&quot;, function( event, data ){
+
+	// Let the framework know we're going to handle the load.
+
+	event.preventDefault();
+
+	// ... load the document then insert it into the DOM ...
+	// at some point, if the load fails, either in this
+	// callback, or through some other async means, call
+	// reject like this:
+
+	data.deferred.reject( data.absUrl, data.options );
+
+});</code></pre>
+                    </li>
+          	    </ul>
+            	</li>
+            	<li><code>options</code> (object)
+            	  <ul>
+            	    <li>This object contains the options that were passed into $.mobile.loadPage().</li>
+          	    </ul>
+            	</li>
+           	  </ul>
+            </dd>
+			<dt><code>pageload</code></dt>
+			<dd>Triggered after the page is successfully loaded and inserted into the DOM. Callbacks bound to this event will be passed a data object as its 2nd arg. This object contains the following information:
+            <ul>
+            	<li><code>url</code> (string)
+<ul>
+           	    <li>The absolute or relative URL that was passed into $.mobile.loadPage() by the caller.</li>
+          	    </ul>
+            	</li>
+            	<li><code>absUrl</code> (string)
+            	  <ul>
+            	    <li>The absolute version of the url. If url was relative, it is resolved against the url used to load the current active page.</li>
+          	    </ul>
+            	</li>
+            	<li><code>dataUrl</code> (string)
+            	  <ul>
+            	    <li>The filtered version of absUrl to be used when identifying the page and updating the browser location when the page is made active.</li>
+          	    </ul>
+            	</li>
+            	<li><code>options</code> (object)
+            	  <ul>
+            	    <li>This object contains the options that were passed into $.mobile.loadPage().</li>
+          	    </ul>
+            	</li>
+           	  </ul>
+            </dd>
+			<dt><code>pageloadfailed</code></dt>
+			<dd>Triggered if the page load request failed. By default, after dispatching this event, the framework will display a page failed message and call reject() on the deferred object contained within the event's data object. Callbacks can prevent this default behavior from executing by calling preventDefault() on the event.
+			  <p>The data object, passed as the 2nd arg to the callback function contains the following properties:</p>
+              <ul>
+            	<li><code>url</code> (string)
+<ul>
+           	    <li>The absolute or relative URL that was passed into $.mobile.loadPage() by the caller.</li>
+          	    </ul>
+            	</li>
+            	<li><code>absUrl</code> (string)
+            	  <ul>
+            	    <li>The absolute version of the url. If url was relative, it is resolved against the url used to load the current active page.</li>
+          	    </ul>
+            	</li>
+            	<li><code>dataUrl</code> (string)
+            	  <ul>
+            	    <li>The filtered version of absUrl to be used when identifying the page and updating the browser location when the page is made active.</li>
+          	    </ul>
+            	</li>
+            	<li><code>deferred</code> (object)
+            	  <ul>
+            	    <li>Callbacks that call preventDefault() on the event, *MUST* call resolve() or reject() on this object so that changePage() requests resume processing. Deferred object observers expect the deferred object to be resolved like this:</p>
+                    <pre><code>
+$( document ).bind( &quot;pageloadfailed&quot;, function( event, data ){
+
+	// Let the framework know we're going to handle things.
+
+	event.preventDefault();
+
+	// ... attempt to load some other page ...
+	// at some point, either in this callback, or through
+	// some other async means, call resolve, passing in
+	// the following args, plus a jQuery collection object
+	// containing the DOM element for the page.
+
+	data.deferred.resolve( data.absUrl, data.options, page );
+
+});</code></pre>
+                    <p>or rejected like this:
+                    <pre><code>
+$( document ).bind( &quot;pageloadfailed&quot;, function( event, data ){
+
+	// Let the framework know we're going to handle things.
+
+	event.preventDefault();
+
+	// ... attempt to load some other page ...
+	// at some point, if the load fails, either in this
+	// callback, or through some other async means, call
+	// reject like this:
+
+	data.deferred.reject( data.absUrl, data.options );
+
+});</code></pre>
+                    </li>
+          	    </ul>
+            	</li>
+            	<li><code>options</code> (object)            
+            	  <ul>
+            	    <li>This object contains the options that were passed into $.mobile.loadPage().</li>
+          	    </ul>
+            	</li>
+           	  </ul>
+			</dd>
+		</dl>
+		<h2>Page change events</h2>
+		<p>Navigating between pages in the application is usually accomplished through a call to <code>$.mobile.changePage()</code>. This function is responsible for making sure that the page we are navigating to is loaded and inserted into the DOM, and then kicking off the transition animations between the current active page, and the page the caller wants to to make active. During this process, which is usually asynchronous, changePage() will fire off 2 events. The first is <code>pagebeforechange</code>. The second event depends on the success or failure of the change request. It will either be <code>pagechange</code> or <code>pagechangefailed</code>.</p>
+		<dl>
+			<dt><code>pagebeforechange</code></dt>
+			<dd>This event is triggered prior to any page loading or transition. Callbacks can prevent execution of the changePage() function by calling preventDefault on the event object passed into the callback. The callback also recieves a data object as its 2nd arg. The data object has the following properties:
+            <ul>
+				<li><code>toPage</code> (object or string)
+					<ul>
+						<li>This property represents the page the caller wishes to make active. It can be either a jQuery collection object containing the page DOM element, or an absolute/relative url to an internal or external page. The value exactly matches the 1st arg to the changePage() call that triggered the event.</li>
+					</ul>
+				</li>
+				<li><code>options</code> (object)
+					<ul>
+						<li>This object contains the configuration options to be used for the current changePage() call.</li>
+					</ul>
+				</li>
+			</ul>
+              <p>It should be noted that callbacks can modify both the toPage and options properties to alter the behavior of the current changePage() call. So for example, the toPage can be mapped to a different url from within a callback to do a sort of redirect.</p>
+            </dd>
+			<dt><code>pagechange</code></dt>
+			<dd>This event is triggered after the changePage() request has finished loading the page into the DOM and all page transition animations have completed. Note that any pageshow or pagehide events will have fired *BEFORE* this event is triggered. Callbacks for this particular event will be passed a data object as the 2nd arg. The properties for this object are as follows:
+            <ul>
+				<li><code>toPage</code> (object or string)
+					<ul>
+						<li>This property represents the page the caller wishes to make active. It can be either a jQuery collection object containing the page DOM element, or an absolute/relative url to an internal or external page. The value exactly matches the 1st arg to the changePage() call that triggered the event.</li>
+					</ul>
+				</li>
+				<li><code>options</code> (object)
+					<ul>
+						<li>This object contains the configuration options to be used for the current changePage() call.</li>
+					</ul>
+				</li>
+			</ul>
+            </dd>
+			<dt><code>pagechangefailed</code></dt>
+			<dd>This event is triggered when the changePage() request fails to load the page. Callbacks for this particular event will be passed a data object as the 2nd arg. The properties for this object are as follows:
+            <ul>
+				<li><code>toPage</code> (object or string)
+					<ul>
+						<li>This property represents the page the caller wishes to make active. It can be either a jQuery collection object containing the page DOM element, or an absolute/relative url to an internal or external page. The value exactly matches the 1st arg to the changePage() call that triggered the event.</li>
+					</ul>
+				</li>
+				<li><code>options</code> (object)
+					<ul>
+						<li>This object contains the configuration options to be used for the current changePage() call.</li>
+					</ul>
+				</li>
+			</ul>
+            </dd>
+            </dl>
+		<h2>Page transition events</h2>
+		<p>Page transitions are used to animate the change from the current active page (fromPage) to a new page (toPage). Events are triggered before and after these transitions so that observers can be notified whenever pages are shown or hidden. The events triggered are as follows:</p>
 		<dl>
 			<dt><code>pagebeforeshow</code></dt>
-			<dd>Triggered on the page being shown, before its transition begins.</dd>
+			<dd>Triggered on the "toPage" we are transitioning to, before the actual transition animation is kicked off. Callbacks for this event will recieve a data object as their 2nd arg. This data object has the following properties on it:
+			<ul>
+				<li><code>prevPage</code> (object)
+					<ul>
+						<li>A jQuery collection object that contains the page DOM element that we are transitioning away from. Note that this collection is empty when the first page is transitioned in during application startup.</li>
+					</ul>
+				</li>
+			</ul>
+            </dd>
 
 			<dt><code>pagebeforehide</code></dt>
-			<dd>Triggered on the page being hidden, before its transition begins.</dd>
+			<dd>Triggered on the "fromPage" we are transitioning away from, before the actual transition animation is kicked off. Callbacks for this event will recieve a data object as their 2nd arg. This data object has the following properties on it:
+			<ul>
+				<li><code>nextPage</code> (object)
+					<ul>
+						<li>A jQuery collection object that contains the page DOM element that we are transitioning to.</li>
+					</ul>
+				</li>
+			</ul>
+			<p>Note that this event will not be dispatched during the transition of the first page at application startup since there is no previously active page.</p>
+          </dd>
 
 			<dt><code>pageshow</code></dt>
-			<dd>Triggered on the page being shown, after its transition completes.</dd>
+			<dd>Triggered on the "toPage" after the transition animation has completed. Callbacks for this event will recieve a data object as their 2nd arg. This data object has the following properties on it:
+			<ul>
+				<li><code>prevPage</code> (object)
+					<ul>
+						<li>A jQuery collection object that contains the page DOM element that we just transitioned away from. Note that this collection is empty when the first page is transitioned in during application startup.</li>
+					</ul>
+				</li>
+			</ul>
+          </dd>
 
 			<dt><code>pagehide</code></dt>
-			<dd>Triggered on the page being hidden, after its transition completes.</dd>
+			<dd>Triggered on the "fromPage" after the transition animation has completed. Callbacks for this event will recieve a data object as their 2nd arg. This data object has the following properties on it:
+			<ul>
+				<li><code>nextPage</code> (object)
+					<ul>
+						<li>A jQuery collection object that contains the page DOM element that we just transitioned to.</li>
+					</ul>
+				</li>
+			</ul>
+			<p>Note that this event will not be dispatched during the transition of the first page at application startup since there is no previously active page.</p>
+          </dd>
 
 		</dl>
 
-		<p>Note that all four of these events expose a reference to either the next page (<code>nextPage</code>) or previous page (<code>prevPage</code>), depending on whether the page is being shown or hidden, and whether that next or previous page exists (the first ever page shown does not have a previous page to reference, but an empty jQuery object is provided just the same). You can access this reference via the second argument of a bound callback function. For example: </p>
+		<p>You can access the prevPage or nextPage properties via the second argument of a bound callback function. For example: </p>
 <pre><code>
 $( 'div' ).live( 'pageshow',function(event, ui){
   alert( 'This page was just hidden: '+ ui.prevPage);
@@ -152,29 +393,46 @@ $( '#aboutPage' ).live( 'pageinit',function(event){
 
 
 
+		<h2>Page remove events</h2>
+		<p>By default, the framework removes any non active dynamically loaded external pages from the DOM as soon as the user navigates away to a different page. The <code>pageremove</code> event is dispatched just before the framework attempts to remove the a page from the DOM.</p>
+		<dl>
+			<dt><code>pageremove</code></dt>
+			<dd>This event is triggered just before the framework attempts to remove an external page from the DOM. Event callbacks can call preventDefault on the event object to prevent the page from being removed.
+			</dd>
+		</dl>
+
 		<h2>Virtual mouse events</h2>
-		<p>We provide a set of "virtual" click events that normalize mouse and touch events. This allows the developer to register listeners for the basic mouse events, such as mousedown, mousemove, mouseup, and click, and the plugin will take care of registering the correct listeners behind the scenes to invoke the listener at the fastest possible time for that device. This still retains the order of event firing in the traditional mouse environment, should multiple handlers be registered on the same element for different events.</p>
+		<p>We provide a set of "virtual" mouse events that attempt to abstract away mouse and touch events. This allows the developer to register listeners for the basic mouse events, such as mousedown, mousemove, mouseup, and click, and the plugin will take care of registering the correct listeners behind the scenes to invoke the listener at the fastest possible time for that device. In touch environments, the plugin retains the order of event firing that is seen in traditional mouse environments, so for example, vmouseup is always dispatched before vmousedown, and vmousedown before vclick, etc. The virtual mouse events also normalize how coordinate information is extracted from the event, so in touch based environments, coordinates are available from the pageX, pageY, screenX, screenY, clientX, and clientY properties, directly on the event object.</p>
 		<dl>
 			<dt><code>vmouseover</code></dt>
-			<dd>Normalized event for handling touch or mouse <code>mouseover</code> events</dd>
+			<dd>Normalized event for handling touch or  <code>mouseover</code> events</dd>
 
 			<dt><code>vmousedown</code></dt>
-			<dd>Normalized event for handling touch or mouse <code>mousedown</code> events</dd>
+			<dd>Normalized event for handling touchstart or  <code>mousedown</code> events</dd>
 
 			<dt><code>vmousemove</code></dt>
-			<dd>Normalized event for handling touch or mouse <code>mousemove</code> events</dd>
+			<dd>Normalized event for handling touchmove or  <code>mousemove</code> events</dd>
 
 			<dt><code>vmouseup</code></dt>
-			<dd>Normalized event for handling touch or mouse <code>mouseup</code> events</dd>
+			<dd>Normalized event for handling touchend or  <code>mouseup</code> events</dd>
 
 			<dt><code>vclick</code></dt>
-			<dd>Normalized event for handling touch or mouse <code>click</code> events</dd>
+			<dd>Normalized event for handling touchend or mouse <code>click</code> events. On touch devices, this event is dispatched *AFTER* vmouseup. </dd>
 
 			<dt><code>vmousecancel</code></dt>
 			<dd>Normalized event for handling touch or mouse <code>mousecancel</code> events</dd>
 		</dl>
 
-
+		<div class="ui-body ui-body-e">
+			<h4 style="margin:.5em 0">Warning: Use vclick with caution</h4>
+			<p> Use vclick with caution on touch devices. Webkit based browsers synthesize mousedown, mouseup, and click events roughly 300ms after the touchend event is dispatched. The target of the synthesized mouse events are calculated at the time they are dispatched and are based on the location of the touch events and, in some cases, implementation specific heuristics which leads to different target calculations on different devices and even different OS versions for the same device. This means the target element within the original touch events could be different from the target element within the synthesized mouse events.</p>
+            <p>We recommend using click instead of vclick anytime the action being triggered has the possibility of changing the content underneath the point that was touched on screen. This includes page transitions and other behaviors such as collapse/expand that could result in the screen shifting or content being completely replaced.</p>
+		</div>
+		<p>&nbsp;</p>
+		<div class="ui-body ui-body-e">
+			<h4 style="margin:.5em 0">Canceling an elements default click behavior</h4>
+			<p>Applications can call preventDefault() on a vclick event to cancel an element's default click behavior. On mouse based devices, calling preventDefault() on a vclick event equates to calling preventDefault() on the real click event during the bubble event phase. On touch based devices, it's a bit more complicated since the actual click event is dispatched about 300ms after the vclick event is dispatched. For touch devices, calling preventDefault() on a vclick event triggers some code in the vmouse plugin that attempts to catch the next click event that gets dispatched by the browser, during the capture event phase, and call preventDefault() and stopPropagation() on it. As mentioned in the warning above, it is sometimes difficult match up a touch event with its corresponding mouse event because the targets can differ. For this reason, the vmouse plugin also falls back to attempting to identify a corresponding click event by coordinates. There are still cases where both target and coordinate identification fail, which results in the click event being dispatched and either triggering the default action of the element, or in the case where content has been shifted or replaced, triggering a click on a different element. If this happens on  a regular basis for a given element/control, we suggest you use click for triggering your action.</p>
+		</div>
 
 		<h2>Animation Events</h2>
 		<p>jQuery Mobile exposes the <code>animationComplete</code> plugin, which you can utilize after adding or removing a class that applies a CSS transition.</p>
