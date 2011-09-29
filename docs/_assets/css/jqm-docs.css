@@ -63,7 +63,7 @@ p.intro strong {
 	padding-bottom: 0;
 }
 .content-secondary .ui-collapsible {
-	padding: 10px 15px;
+	padding: 0 15px 10px;
 
 }
 .content-secondary .ui-collapsible-heading {
