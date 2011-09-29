@@ -737,7 +737,7 @@
 		// reference to an embedded page. If so, it may have been dynamically
 		// injected by a developer, in which case it would be lacking a data-url
 		// attribute and in need of enhancement.
-		if ( page.length === 0 && !path.isPath( dataUrl ) ) {
+		if ( page.length === 0 && dataUrl && !path.isPath( dataUrl ) ) {
 			page = settings.pageContainer.children( "#" + dataUrl )
 				.attr( "data-" + $.mobile.ns + "url", dataUrl )
 		}
