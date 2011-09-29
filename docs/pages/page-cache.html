@@ -39,7 +39,7 @@
 		  <p>Alternatively, you can prefetch a page programmatically using <code>$.mobile.loadPage()</code>:</p>
 
 <pre><code>
-$.mobile.loadPage( <var>pageUrl</var> );
+$.mobile.loadPage( <var>pageUrl</var>, { showLoadMsg: false } );
 </code></pre>
 			
 			<p>Another advantage of prefetching a page is that the user doesn't see the Ajax loading message when visiting the prefetched page. The Ajax loading message only appears if the framework hasn't finished prefetching the page by the time the link is followed.</p> 
