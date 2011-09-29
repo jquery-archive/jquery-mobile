@@ -62,7 +62,7 @@
 					<li><a href="forms-themes.html">Theming forms</a></li>
 					<li><a href="forms-all-native.html">Native form elements</a></li>
 					<li data-theme="a"><a href="forms-sample.html">Submitting forms</a></li>
-					<li><a href="plugin-eventsmethods.html">Plugin methods</a></li>
+					
 	
 				</ul>
 		</div>
