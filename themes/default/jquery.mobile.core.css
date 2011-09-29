@@ -16,12 +16,6 @@
 .ui-mobile [data-role=page], .ui-mobile [data-role=dialog], .ui-page { top: 0; left: 0; width: 100%; min-height: 100%; position: absolute; display: none; border: 0; } 
 .ui-mobile .ui-page-active { display: block; overflow: visible; }
 
-/*orientations from js are available */
-.portrait,
-.portrait .ui-page { min-height: 420px; }
-.landscape,
-.landscape .ui-page  { min-height: 300px; }
-
 /* on ios4, setting focus on the page element causes flashing during transitions when there is an outline, so we turn off outlines */
 .ui-page { outline: none; }
 
