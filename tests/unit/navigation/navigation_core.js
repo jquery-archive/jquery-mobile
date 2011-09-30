@@ -929,4 +929,33 @@
 			}
 		]);
 	});
+
+
+	asyncTest( "application url with dialogHashKey loads application's first page", function(){
+		$.testHelper.pageSequence([
+			// open our test page
+			function(){
+				// Navigate to any page except the first page of the application.
+				$.testHelper.openPage("#foo");
+			},
+
+			function(){
+				ok( $.mobile.activePage[ 0 ] === $( "#foo" )[ 0 ], "navigated successfully to #foo" );
+
+				// Now navigate to an hash that contains just a dialogHashKey.
+				$.mobile.changePage("#" + $.mobile.dialogHashKey);
+			},
+
+			function(){
+				// Make sure we actually navigated to the first page.
+				ok( $.mobile.activePage[ 0 ] === $.mobile.firstPage[ 0 ], "navigated successfully to first-page" );
+
+				// Now make sure opening the page didn't result in page duplication.
+				ok( $.mobile.firstPage.hasClass( "first-page" ), "first page has expected class" );
+				same( $( ".first-page" ).length, 1, "first page was not duplicated" );
+
+				start();
+			}
+		]);
+	});
 })(jQuery);
