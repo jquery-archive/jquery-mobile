@@ -744,7 +744,7 @@
 
 		// If we failed to find a page in the DOM, check the URL to see if it
 		// refers to the first page in the application.
-		if ( page.length === 0 && $.mobile.firstPage && path.isFirstPageUrl( absUrl ) ) {
+		if ( page.length === 0 && $.mobile.firstPage && path.isFirstPageUrl( fileUrl ) ) {
 			page = $( $.mobile.firstPage );
 		}
 
