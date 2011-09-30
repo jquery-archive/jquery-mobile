@@ -8,7 +8,7 @@
 (function( $, undefined ) {
 
 // Enable touch overflow scrolling when it's natively supported
-$.mobile.touchOverflowEnabled = false;
+$.mobile.touchOverflowEnabled = true;
 
 // Enabled zoom when touch overflow is enabled. Can cause usability issues, unfortunately
 $.mobile.touchOverflowZoomEnabled = false;
