@@ -91,6 +91,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 					.addClass( "ui-corner-tr" )
 				.end()
 				.find( ".ui-li-thumb" )
+					.not(".ui-li-icon")
 					.addClass( "ui-corner-tl" );
 
 			// Select the last visible li element
@@ -102,6 +103,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 					.addClass( "ui-corner-br" )
 				.end()
 				.find( ".ui-li-thumb" )
+					.not(".ui-li-icon")
 					.addClass( "ui-corner-bl" );
 		}
 	},
