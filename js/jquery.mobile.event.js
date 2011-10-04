@@ -190,7 +190,7 @@ $.event.special.swipe = {
 		setup: function() {
 			// If the event is supported natively, return false so that jQuery
 			// will bind to the event using DOM methods.
-			if ( $.support.orientation ) {
+			if ( $.support.orientation && $.mobile.orientationChangeEnabled ) {
 				return false;
 			}
 
@@ -204,7 +204,7 @@ $.event.special.swipe = {
 		teardown: function(){
 			// If the event is not supported natively, return false so that
 			// jQuery will unbind the event using DOM methods.
-			if ( $.support.orientation ) {
+			if ( $.support.orientation && $.mobile.orientationChangeEnabled ) {
 				return false;
 			}
 
@@ -215,6 +215,7 @@ $.event.special.swipe = {
 		add: function( handleObj ) {
 			// Save a reference to the bound event handler.
 			var old_handler = handleObj.handler;
+
 
 			handleObj.handler = function( event ) {
 				// Modify event object, adding the .orientation property.
