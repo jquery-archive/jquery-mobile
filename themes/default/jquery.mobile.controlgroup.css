@@ -12,12 +12,16 @@
 .ui-controlgroup-vertical .ui-checkbox, .ui-controlgroup-vertical .ui-radio { margin: 0; border-bottom-width: 0;  }
 .ui-controlgroup-vertical .ui-controlgroup-last { border-bottom-width: 1px; }
 .ui-controlgroup-horizontal { padding: 0; }
-.ui-controlgroup-horizontal .ui-btn { display: inline-block; margin: 0 -5px 0 0; }
+.ui-controlgroup-horizontal .ui-btn, .ui-controlgroup-horizontal .ui-select { display: inline-block; }
+.ui-controlgroup-horizontal .ui-btn { margin: 0 -5px 0 0; }
+.ui-controlgroup-horizontal .ui-btn, .ui-controlgroup-horizontal .ui-select { width: auto; }
 .ui-controlgroup-horizontal .ui-checkbox, .ui-controlgroup-horizontal .ui-radio { float: left; margin: 0 -1px 0 0; }
 .ui-controlgroup-horizontal .ui-checkbox .ui-btn, .ui-controlgroup-horizontal .ui-radio .ui-btn,
 .ui-controlgroup-horizontal .ui-checkbox:last-child, .ui-controlgroup-horizontal .ui-radio:last-child { margin-right: 0; }
 .ui-controlgroup-horizontal .ui-controlgroup-last { margin-right: 0; }
 .ui-controlgroup .ui-checkbox label, .ui-controlgroup .ui-radio label { font-size: 16px;  }
+.ui-controlgroup label.ui-select { position: absolute; left: -9999px; }
+
 /* conflicts with listview..
 .ui-controlgroup .ui-btn-icon-notext { width: 30px; height: 30px; text-indent: -9999px; }
 .ui-controlgroup .ui-btn-icon-notext .ui-btn-inner {  padding: 5px 6px 5px 5px; }
@@ -26,4 +30,4 @@
 @media all and (min-width: 450px){
 	.ui-controlgroup-label { vertical-align: top; display: inline-block;  width: 20%;  margin: 0 2% 0 0;  }
 	.ui-controlgroup-controls { width: 60%; display: inline-block; } 
-}	
+}
