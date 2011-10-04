@@ -54,7 +54,7 @@ $.fn.buttonMarkup = function( options ) {
 			buttonClass += " ui-btn-icon-" + o.iconpos;
 
 			if ( o.iconpos == "notext" && !el.attr( "title" ) ) {
-				el.attr( "title", el.text() );
+				el.attr( "title", el.getEncodedText() );
 			}
 		}
 

@@ -161,7 +161,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 						splittheme = listsplittheme || last.jqmData( "theme" ) || o.splitTheme;
 
 						last.appendTo(item)
-							.attr( "title", last.text() )
+							.attr( "title", last.getEncodedText() )
 							.addClass( "ui-li-link-alt" )
 							.empty()
 							.buttonMarkup({
@@ -242,7 +242,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				parent = list.parent(),
 				nodeEls = $( list.prevAll().toArray().reverse() ),
 				nodeEls = nodeEls.length ? nodeEls : $( "<span>" + $.trim(parent.contents()[ 0 ].nodeValue) + "</span>" ),
-				title = nodeEls.first().text(),//url limits to first 30 chars of text
+				title = nodeEls.first().getEncodedText(),//url limits to first 30 chars of text
 				id = ( parentUrl || "" ) + "&" + $.mobile.subPageUrlKey + "=" + listId,
 				theme = list.jqmData( "theme" ) || o.theme,
 				countTheme = list.jqmData( "counttheme" ) || parentList.jqmData( "counttheme" ) || o.countTheme,
