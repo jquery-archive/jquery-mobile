@@ -28,19 +28,19 @@
 		<p>By default, all the sections will be collapsed. To set a section to be open when the page loads, add the <code> data-collapsed="false"</code> attribute to the heading of the section you want expanded.</p>
 
 	<pre><code>		
-&lt;div data-role="collapsible-set"&gt;
+<strong>&lt;div data-role="collapsible-set"&gt;</strong>
 
-	&lt;div data-role=&quot;collapsible&quot; data-collapsed=&quot;false&quot;&gt;
-	&lt;h3&gt;Section A&lt;/h3&gt;
+	&lt;div data-role=&quot;collapsible&quot; <strong>data-collapsed=&quot;false&quot;</strong>&gt;
+	&lt;h3&gt;Section 1&lt;/h3&gt;
 	&lt;p&gt;I&#x27;m the collapsible set content for section B.&lt;/p&gt;
 	&lt;/div&gt;
 	
 	&lt;div data-role=&quot;collapsible&quot;&gt;
-	&lt;h3&gt;Section B&lt;/h3&gt;
+	&lt;h3&gt;Section 2&lt;/h3&gt;
 	&lt;p&gt;I&#x27;m the collapsible set content for section B.&lt;/p&gt;
 	&lt;/div&gt;
 	
-&lt;/div&gt;
+<strong>&lt;/div&gt;</strong>
 	</code></pre>	
 	
 
@@ -48,28 +48,73 @@
 		
 		<div data-role="collapsible-set">
 			<div data-role="collapsible" data-collapsed="false">
-				<h3>Section A</h3>
-				<p>I'm the collapsible content in a set so this feels like an accordion. I'm hidden by default because I have the "collapsed" state; you need to expand the header to see me.</p>
+				<h3>Section 1</h3>
+				<p>I'm the collapsible content in a set so this feels like an accordion. I'm open by default because I have the <code>data-collapsed="false"</code> attribute.</p>
 			</div>
 			<div data-role="collapsible">
-				<h3>Section B</h3>
+				<h3>Section 2</h3>
 				<p>I'm the collapsible content in a set so this feels like an accordion. I'm hidden by default because I have the "collapsed" state; you need to expand the header to see me.</p>
 
 			</div>
 			<div data-role="collapsible">
-				<h3>Section C</h3>
+				<h3>Section 3</h3>
 				<p>I'm the collapsible content in a set so this feels like an accordion. I'm hidden by default because I have the "collapsed" state; you need to expand the header to see me.</p>
 
 			</div>
 			<div data-role="collapsible">
-				<h3>Section D</h3>
+				<h3>Section 4</h3>
 				<p>I'm the collapsible content in a set so this feels like an accordion. I'm hidden by default because I have the "collapsed" state; you need to expand the header to see me.</p>
 
 			</div>
 			<div data-role="collapsible">
-				<h3>Section E</h3>
+				<h3>Section 5</h3>
 				<p>I'm the collapsible content in a set so this feels like an accordion. I'm hidden by default because I have the "collapsed" state; you need to expand the header to see me.</p>
 
+			</div>
+		</div>
+
+		<h2>Theming collapsible content</h2>
+		<p>The standard <code>data-theme</code> attribute can be used to set the color of each collapsible in a set. To provide a clearer visual grouping of the content with the headers, add the <code>data-content-theme</code> attribute with a swatch letter. This adds a themed background color and border to the content block. For consistent theming, add these attributes to the parent collapsible set.</p>
+
+
+<pre><code>		
+&lt;div data-role=&quot;collapsible-set&quot; <strong>data-theme=&quot;c&quot; data-content-theme=&quot;d&quot;</strong>&gt;
+</code></pre>	
+
+
+		<div data-role="collapsible-set" data-theme="c" data-content-theme="d">
+			<div data-role="collapsible">
+				<h3>Section 1</h3>
+				<p>Collapsible content</p>
+			</div>
+			<div data-role="collapsible">
+				<h3>Section 2</h3>
+				<p>Collapsible content</p>
+
+			</div>
+			<div data-role="collapsible">
+				<h3>Section 3</h3>
+				<p>Collapsible content</p>
+			</div>
+		</div>
+
+
+		<h2>Theming individual sections</h2>
+		<p>To have individual sections in a group styled differently, add <code>data-theme</code> and <code>data-content-theme</code> attributes to specific collapsibles.</p>
+
+		<div data-role="collapsible-set" data-content-theme="c">
+			<div data-role="collapsible" data-theme="b" data-content-theme="b">
+				<h3>Section header, swatch B</h3>
+				<p>Collapsible content, swatch B</p>
+
+			</div>
+			<div data-role="collapsible" data-theme="a" data-content-theme="a">
+				<h3>Section header, swatch A</h3>
+				<p>Collapsible content, swatch A</p>
+			</div>
+			<div data-role="collapsible" data-theme="e" data-content-theme="d">
+				<h3>Section header, swatch E</h3>
+				<p>Collapsible content, swatch D</p>
 			</div>
 		</div>
 		
@@ -77,7 +122,7 @@
 	
 	<div class="content-secondary">
 		
-		<div data-role="collapsible" data-collapsed="true" data-theme="b">
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
 			
 				<h3>More in this section</h3>
 				

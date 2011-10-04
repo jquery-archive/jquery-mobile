@@ -1,6 +1,6 @@
 <?php
-$type = "text/css";
-$elements = array(
+$type = 'text/css';
+$files = array(
 	'jquery.mobile.theme.css',
 	'../default/jquery.mobile.core.css',
 	'../default/jquery.mobile.transitions.css',
@@ -19,4 +19,4 @@ $elements = array(
 	'../default/jquery.mobile.forms.slider.css'
 );
 
-include('../../combine.php');
+require_once('../../combine.php');

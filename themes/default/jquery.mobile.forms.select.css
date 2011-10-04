@@ -6,7 +6,7 @@
 .ui-select { display: block; position: relative; }
 .ui-select select { position: absolute; left: -9999px; top: -9999px; }
 .ui-select .ui-btn { overflow: hidden; }
-.ui-select .ui-btn select { cursor: pointer; -webkit-appearance: button; left: 0; top:0; width: 100%; height: 100%; opacity: 0; -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; filter: alpha(opacity=0); }
+.ui-select .ui-btn select { cursor: pointer; -webkit-appearance: button; left: 0; top:0; width: 100%;  min-height: 1.5em; min-height: 100%; height: 3em; max-height: 100%; opacity: 0; -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; filter: alpha(opacity=0); z-index: 2; }
 @-moz-document url-prefix() {.ui-select .ui-btn select { opacity: 0.0001; }}
 .ui-select .ui-btn select.ui-select-nativeonly { opacity: 1; text-indent: 0; }
 
@@ -31,7 +31,7 @@ label.ui-select { font-size: 16px; line-height: 1.4;  font-weight: normal; margi
 .ui-selectmenu .ui-header .ui-title { margin: 0.6em 46px 0.8em; }
 
 @media all and (min-width: 450px){
-	label.ui-select { display: inline-block;  width: 20%;  margin: 0 2% 0 0; }
+	label.ui-select { vertical-align: top;  display: inline-block;  width: 20%;  margin: 0 2% 0 0; }
 	.ui-select { width: 60%; display: inline-block; }
 }	
 

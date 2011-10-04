@@ -24,7 +24,9 @@
 			
 			<div class="content-primary">
 			<h2>Media Query Helper Classes</h2>
-<p class="ui-bar-e ui-body"><strong>Note: This feature is deprecated in beta, and will be removed after that. We recommend using CSS3 Media Queries instead.</strong></p>
+<p class="ui-bar-e ui-body"><strong>Note: This feature was deprecated in beta, and removed in 1.0rc1. We recommend using CSS3 Media Queries instead.</strong> To support older versions of Internet Explorer, check out <a href="https://github.com/scottjehl/Respond">respond.js</a>, a fast &amp; lightweight polyfill for min/max-width CSS3 Media Queries.</p>
+			<p class="ui-bar-e ui-body">If you still need this feature, you can find the code here: <a href="https://raw.github.com/jquery/jquery-mobile/38d7ad8848f00b0921bf4ae723f3ad199eb851c1/js/jquery.mobile.media.classes.js">jquery.mobile.media.classes.js</a></p>
+			
 			<p>jQuery Mobile adds classes to the <code>HTML</code> element that mimic browser orientation and common min/max-width CSS media queries. These classes are updated on load, resize and orientationchange, allowing you to key off these classes in your CSS, to create <a href="http://www.alistapart.com/articles/responsive-web-design/">responsive layouts</a> - even in browsers that don't support media queries! </p>
 			
 			<h3>Orientation Classes </h3>
@@ -100,7 +102,7 @@ $.mobile.media("screen and (-webkit-min-device-pixel-ratio: 2)");
 	
 	<div class="content-secondary">
 		
-		<div data-role="collapsible" data-collapsed="true" data-theme="b">
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
 			
 				<h3>More in this section</h3>
 				

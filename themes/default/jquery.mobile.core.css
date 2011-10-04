@@ -16,11 +16,16 @@
 .ui-mobile [data-role=page], .ui-mobile [data-role=dialog], .ui-page { top: 0; left: 0; width: 100%; min-height: 100%; position: absolute; display: none; border: 0; } 
 .ui-mobile .ui-page-active { display: block; overflow: visible; }
 
+/* on ios4, setting focus on the page element causes flashing during transitions when there is an outline, so we turn off outlines */
+.ui-page { outline: none; }
+
 /*orientations from js are available */
-.portrait,
-.portrait .ui-page { min-height: 420px; }
-.landscape,
-.landscape .ui-page  { min-height: 300px; }
+@media screen and (orientation: portrait){
+.ui-mobile, .ui-mobile .ui-page { min-height: 420px; }
+}
+@media screen and (orientation: landscape){
+.ui-mobile, .ui-mobile .ui-page { min-height: 300px; }
+}
 
 /* native overflow scrolling */
 .ui-page.ui-mobile-touch-overflow,
@@ -32,6 +37,11 @@
 	-o-overflow-scrolling: touch;
 	-ms-overflow-scrolling: touch;
 	overflow-scrolling: touch;
+}
+.ui-page.ui-mobile-touch-overflow,
+.ui-page.ui-mobile-touch-overflow * {
+	/* some level of transform keeps elements from blinking out of visibility on iOS */
+	-webkit-transform: rotateY(0);
 }
 .ui-page.ui-mobile-pre-transition {
 	display: block;

@@ -44,4 +44,25 @@
 			}
 		], 300);
 	});
+
+	// issue https://github.com/jquery/jquery-mobile/issues/2410
+	test( "adding options and refreshing a native select defaults the text", function() {
+		var select = $( "#native-refresh" ),
+      button = select.siblings( '.ui-btn-inner' ),
+      text = "foo";
+
+    same(button.text(), "default");
+    select.find( "option" ).remove(); //remove the loading message
+    select.append('<option value="1">' + text + '</option>');
+    select.selectmenu('refresh');
+		same(button.text(), text);
+	});
+
+	// issue 2424
+	test( "native selects should provide open and close as a no-op", function() {
+		// exception will prevent test success if undef
+		$( "#native-refresh" ).selectmenu( 'open' );
+		$( "#native-refresh" ).selectmenu( 'close' );
+		ok( true );
+	});
 })(jQuery);

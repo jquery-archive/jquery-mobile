@@ -9,8 +9,8 @@
 .ui-btn-inline { display: inline-block; }
 .ui-btn-inner { padding: .6em 25px; display: block; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; position: relative; zoom: 1; }
 .ui-header .ui-btn-inner, .ui-footer .ui-btn-inner, .ui-bar .ui-btn-inner { padding: .4em 8px .5em; }
-.ui-btn-icon-notext { display: inline-block; width: 20px; height: 20px; padding: 2px 1px 2px 3px; text-indent: -9999px; }
-.ui-btn-icon-notext .ui-btn-inner { padding: 0; }
+.ui-btn-icon-notext { width: 24px; height: 24px; }
+.ui-btn-icon-notext .ui-btn-inner { padding: 2px 1px 2px 3px; }
 .ui-btn-icon-notext .ui-btn-text { position: absolute; left: -999px; }
 .ui-btn-icon-left .ui-btn-inner { padding-left: 33px; }
 .ui-header .ui-btn-icon-left .ui-btn-inner,
@@ -34,7 +34,9 @@
 .ui-btn-icon-left .ui-icon, .ui-btn-icon-right .ui-icon { position: absolute; top: 50%; margin-top: -9px; }
 .ui-btn-icon-top .ui-icon, .ui-btn-icon-bottom .ui-icon { position: absolute; left: 50%;  margin-left: -9px; }
 .ui-btn-icon-left .ui-icon { left: 10px; }
-.ui-btn-icon-right .ui-icon {right: 10px; }
+.ui-btn-icon-right .ui-icon { right: 10px; }
+.ui-btn-icon-top .ui-icon { top: 10px; }
+.ui-btn-icon-bottom .ui-icon { bottom: 10px; }
 .ui-header .ui-btn-icon-left .ui-icon,
 .ui-footer .ui-btn-icon-left .ui-icon,
 .ui-bar .ui-btn-icon-left .ui-icon { left: 4px; }
@@ -47,7 +49,6 @@
 .ui-header .ui-btn-icon-bottom .ui-icon,
 .ui-footer .ui-btn-icon-bottom .ui-icon,
 .ui-bar .ui-btn-icon-bottom .ui-icon { bottom: 4px; }
-.ui-btn-icon-top .ui-icon { top: 5px; }
-.ui-btn-icon-bottom .ui-icon { bottom: 5px; }
+
 /*hiding native button,inputs */
-.ui-btn-hidden {  position: absolute; top: 0; left: 0; width: 100%; height: 100%; -webkit-appearance: button; opacity: 0; cursor: pointer; -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; filter: alpha(opacity=0); background: transparent; }
+.ui-btn-hidden { position: absolute; top: 0; left: 0; width: 100%; height: 100%; -webkit-appearance: button; opacity: .1; cursor: pointer; background: transparent; font-size: 1px; border: none; line-height: 999px; }

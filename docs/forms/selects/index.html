@@ -33,32 +33,32 @@
 				<li><a href="methods.html" data-role="button" data-transition="fade">Methods</a></li>
 				<li><a href="events.html" data-role="button" data-transition="fade">Events</a></li>
 			</ul>
-
-			<p>The select menus are driven off native <code>select</code> elements, but the native selects are hidden from view and replaced with a custom-styled select button that matches the look and feel of the jQuery Mobile framework. The replacement selects are ARIA-enabled and are keyboard accessible on the desktop as well.</p>
 			
-			<p>When the select button is clicked, the native select menu picker for the OS will open. When a value is selected in the menu, the custom select button is updated to match the new selection. </p>
+			<p>The select menu is based on a native <code>select</code> element, which is hidden from view and replaced with a custom-styled select button that matches the look and feel of the jQuery Mobile framework. The select menu is ARIA-enabled and keyboard accessible on the desktop as well.</p>
+			
+			<p>By default, the framework leverages the native OS options menu to use with the custom button. When the button is clicked, the native OS menu will open. When a value is selected and the menu closes, the custom button's text is updated to match the selected value.</p>
 
-			<p>To add a select widget to your page, start with a standard <code>select</code> element populated with a set of <code>option</code> elements. Set the <code>for</code> attribute of the <code>label</code> to match the ID of the <code>select</code> so they are semantically associated. Wrap them in a <code>div</code> with the <code> data-role="fieldcontain"</code> attribute to help visually group it in a longer form. </p>
+			<p>To add a select menu to your page, start with a standard <code>select</code> element populated with a set of <code>option</code> elements. Set the <code>for</code> attribute of the <code>label</code> to match the ID of the <code>select</code> so they are semantically associated. Wrap them in a <code>div</code> with the <code> data-role="fieldcontain"</code> attribute to help visually group it in a longer form. </p>
 
-			<p>The framework will find all <code>select</code> elements and automatically enhance them into the custom select menus. Here is a typical select menu grouped in a fieldc container to style the label and select together:</p>
+			<p>The framework will find all <code>select</code> elements and automatically enhance them into select menus. The markup for a select grouped in a field container:</p>
 
 <pre><code>
 &lt;div data-role=&quot;fieldcontain&quot;&gt;
-	&lt;label for=&quot;select-choice-1&quot; class=&quot;select&quot;&gt;Choose shipping method:&lt;/label&gt;
-	&lt;select name=&quot;select-choice-1&quot; id=&quot;select-choice-1&quot;&gt;
-		&lt;option value=&quot;standard&quot;&gt;Standard: 7 day&lt;/option&gt;
-		&lt;option value=&quot;rush&quot;&gt;Rush: 3 days&lt;/option&gt;
-		&lt;option value=&quot;express&quot;&gt;Express: next day&lt;/option&gt;
-		&lt;option value=&quot;overnight&quot;&gt;Overnight&lt;/option&gt;
-	&lt;/select&gt;
+   &lt;label for=&quot;select-choice-1&quot; class=&quot;select&quot;&gt;Shipping method:&lt;/label&gt;
+   &lt;select name=&quot;select-choice-1&quot; id=&quot;select-choice-1&quot;&gt;
+      &lt;option value=&quot;standard&quot;&gt;Standard: 7 day&lt;/option&gt;
+      &lt;option value=&quot;rush&quot;&gt;Rush: 3 days&lt;/option&gt;
+      &lt;option value=&quot;express&quot;&gt;Express: next day&lt;/option&gt;
+      &lt;option value=&quot;overnight&quot;&gt;Overnight&lt;/option&gt;
+   &lt;/select&gt;
 &lt;/div&gt;
 </code></pre>
 
-<p>This produces this select:</p>
+<p>produces this select menu:</p>
 
 
 <div data-role="fieldcontain">
-	<label for="select-choice-1" class="select">Choose shipping method:</label>
+	<label for="select-choice-1" class="select">Shipping method:</label>
 	<select name="select-choice-1" id="select-choice-1">
 		<option value="standard">Standard: 7 day</option>
 		<option value="rush">Rush: 3 days</option>
@@ -67,7 +67,7 @@
 	</select>
 </div>
 
-<p>Here is an example of a select with a long list of options:</p>
+<p>An example of a select with a long list of options:</p>
 
 <div data-role="fieldcontain">
 	<label for="select-choice-3" class="select">Your state:</label>
@@ -125,7 +125,8 @@
 	</select>
 </div>
 
-<p>This example organizes the options with optgroup elements and has a disabled option.</p>
+<!--
+<p>The following example organizes the options into <code>optgroup</code> elements:</p>
 
 <div data-role="fieldcontain">
 	<label for="select-choice-nc" class="select">Preferred delivery:</label>
@@ -143,41 +144,37 @@
 		<optgroup label="US Mail">
 			<option value="standard">Standard: 7 day</option>
 			<option value="rush">Rush: 3 days</option>
-			<option value="express" disabled="disabled">Express: next day (disabled)</option>
+			<option value="express">Express: next day (disabled)</option>
 			<option value="overnight">Overnight</option>
 		</optgroup>
 	</select>
 </div>
+-->
 
-<p>Note that on some mobile platforms, the native select menus don't support multiple selection via the <code>multiple="multiple"</code> attribute. If this feature is required, we recommend using custom menus.
 
-<h2>Programmatically   calling the select menu plugin</h2>
 
-<p>The select menu plugin will auto initialize on any page that contains a select menu, no need for a <code>data-role</code> attribute in the markup. However, you can directly call the select menu plugin on any selector, just like any normal jQuery plugin:</p>
-<pre><code>
-$('select').selectmenu();			
-</code></pre>
+<h2>Using custom menus</h2>
+<p>the framework builds a custom menu based on the <code>select</code> element's list of options.  We recommend using a custom menu when multiple selections are required, as , or when the menu itself must be styled with CSS.</p>
 
-<h2>Option to use custom menus</h2>
-<p>You can optionally use custom-styled select menus instead of the native versions. This adds the ability to theme the menu to better match the look and feel of your site and provides visual consistency across platforms. In addition, it supports multiple selection, restores missing functionality on certain platforms such as <code>optgroup</code> support on Android,  and adds an elegant way to handle placeholder values (explained below). Lastly, the custom menus will look better on desktop browsers because native menus on the desktop tend to be fairly small compared their mobile counterparts and this can look a bit odd if desktop is a priority for your project.</p>
+<p>You can optionally use custom-styled select menus instead of the native OS menu. The custom menu supports disabled options and multiple selection (whereas native mobile OS support for both is inconsistent), adds an elegant way to handle placeholder values, and restores missing functionality on certain platforms such as <code>optgroup</code> support on Android (all explained below).  In addition, the framework applies the custom button's theme to the menu to better match the look and feel and provide visual consistency across platforms. Lastly, custom menus often look better on desktop browsers because native desktop menus are smaller than their mobile counterparts and tend to look disproportionate.</p>
 
-	<p>Keep in mind that there is overhead involved in parsing the native select to build a custom menu. If there are a lot of selects on a page, or a select has a long list of options, this can impact the performance of the page so we recommend using custom menus sparingly. </p>
+	<p>Keep in mind that there is overhead involved in parsing the native select to build a custom menu. If there are a lot of selects on a page, or a select has a long list of options, this can impact the performance of the page, so we recommend using custom menus sparingly. </p>
 	
 	<p>To use custom menus on a specific <code>select</code>, just add the <code>data-native-menu="false"</code> attribute. Alternately, this can also programmatically set the select menu's <code>nativeMenu</code> configuration option to <code>false</code> in a callback bound to the <code>mobileinit</code> event to achieve the same effect. This will globally make all selects use the custom menu by default. The following must be included in the page after jQuery is loaded but before jQuery Mobile is loaded.</p>
 	
 
-				<code>
-					<pre>
-	$(document).bind('mobileinit',function(){
-		$.mobile.selectmenu.prototype.options.nativeMenu = false;
-	});
-					</pre>
-				</code>
+<code>
+<pre>
+$(document).bind('mobileinit',function(){
+   $.mobile.selectmenu.prototype.options.nativeMenu = false;
+});
+</pre>
+</code>
 
-			<p> If there is a small number of options that will fit on the device's screen, it will appear as a small overlay with a pop transition.</p>
+			<p>When the <code>select</code> has a small number of options that will fit on the device's screen, the menu will appear as a small overlay with a pop transition:</p>
 
 			<div data-role="fieldcontain">
-				<label for="select-choice-custom" class="select">Choose shipping method:</label>
+				<label for="select-choice-custom" class="select">Shipping method:</label>
 				<select name="select-choice-1" id="select-choice-custom" data-native-menu="false">
 					<option value="standard">Standard: 7 day</option>
 					<option value="rush">Rush: 3 days</option>
@@ -186,10 +183,7 @@ $('select').selectmenu();
 				</select>
 			</div>
 
-			<p>If there is a select menu with too many options to show on the device's screen, the framework will automatically create a new &quot;page&quot; populated with a standard list view that contains all the options. This allows us to use the native scrolling included on the device for moving through a long list. The text inside the <code>label</code> is used as the title for this page.</p>
-
-
-
+			<p>When it has too many options to show on the device's screen, the framework will automatically create a new &quot;page&quot; populated with a standard <a href="../../lists/docs-lists.html">list view</a> for the options. This allows us to use the native scrolling included on the device for moving through a long list. The text inside the <code>label</code> is used as the title for this page.</p>
 
 
 					<div data-role="fieldcontain">
@@ -248,7 +242,20 @@ $('select').selectmenu();
 						</select>
 					</div>
 
-	<h2>Placeholder options</h2>
+	<h3>Disabled options</h3>
+	<p>jQuery Mobile will automatically disable and style option tags with the <code>disabled</code> attribute.  In the demo below, the second option &quot;Rush: 3 days&quot; has been set to disabled.</p>
+
+	<div data-role="fieldcontain">
+		<label for="select-choice-7" class="select">Shipping method:</label>
+		<select name="select-choice-7" id="select-choice-7">
+			<option value="standard">Standard: 7 day</option>
+			<option value="rush" disabled="disabled">Rush: 3 days</option>
+			<option value="express">Express: next day</option>
+			<option value="overnight">Overnight</option>
+		</select>
+	</div>
+	
+	<h3>Placeholder options</h3>
 	<p>It's common for developers to include a &quot;null&quot; option in their select element to force a user to choose an option. If a placeholder option is present in your markup, jQuery Mobile will hide them in the overlay menu, showing only valid choices to the user, and display the placeholder text inside the menu as a header.  A placeholder option is added when the framework finds:</p>
 	<ul>
 		<li>An option with no value attribute (or an empty value attribute)</li>
@@ -263,11 +270,11 @@ $.mobile.selectmenu.prototype.options.hidePlaceholderMenuItems = false;
 	</code>
 	</pre>
 
-	<p>Here's a demo of various placeholder options:</p>
+	<p>Examples of various placeholder options:</p>
 
 
 	<div data-role="fieldcontain">
-		<label for="select-choice-4" class="select">Choose shipping method:</label>
+		<label for="select-choice-4" class="select">Shipping method:</label>
 		<select name="select-choice-4" id="select-choice-4" data-native-menu="false">
 			<option></option>
 			<option value="standard">Standard: 7 day</option>
@@ -279,7 +286,7 @@ $.mobile.selectmenu.prototype.options.hidePlaceholderMenuItems = false;
 
 
 	<div data-role="fieldcontain">
-		<label for="select-choice-5" class="select">Choose shipping method:</label>
+		<label for="select-choice-5" class="select">Shipping method:</label>
 		<select name="select-choice-5" id="select-choice-5" data-native-menu="false">
 			<option>Choose one...</option>
 			<option value="standard">Standard: 7 day</option>
@@ -291,7 +298,7 @@ $.mobile.selectmenu.prototype.options.hidePlaceholderMenuItems = false;
 
 
 	<div data-role="fieldcontain">
-		<label for="select-choice-6" class="select">Choose shipping method:</label>
+		<label for="select-choice-6" class="select">Shipping method:</label>
 		<select name="select-choice-6" id="select-choice-6" data-native-menu="false">
 			<option value="choose-one" data-placeholder="true">Choose one...</option>
 			<option value="standard">Standard: 7 day</option>
@@ -301,41 +308,8 @@ $.mobile.selectmenu.prototype.options.hidePlaceholderMenuItems = false;
 		</select>
 	</div>
 
-	<h2>Disabled options</h2>
-	<p>jQuery Mobile will automatically disable and style option tags with the <code>disabled</code> attribute.  In the demo below, the second option &quot;Rush: 3 days&quot; has been set to disabled.</p>
 
-	<div data-role="fieldcontain">
-		<label for="select-choice-7" class="select">Choose shipping method:</label>
-		<select name="select-choice-7" id="select-choice-7" data-native-menu="false">
-			<option value="standard">Standard: 7 day</option>
-			<option value="rush" disabled="disabled">Rush: 3 days</option>
-			<option value="express">Express: next day</option>
-			<option value="overnight">Overnight</option>
-		</select>
-	</div>
-
-	<h2>Optgroup support</h2>
-	<p>If a select menu contains <code>optgroup</code> elements, jQuery Mobile will create a divider &amp; group items based on the <code>label</code> attribute's text:</p>
-
-	<div data-role="fieldcontain">
-		<label for="select-choice-8" class="select">Choose shipping method:</label>
-		<select name="select-choice-8" id="select-choice-8" data-native-menu="false">
-			<optgroup label="USPS">
-				<option value="standard">Standard: 7 day</option>
-				<option value="rush">Rush: 3 days</option>
-				<option value="express">Express: next day</option>
-				<option value="overnight">Overnight</option>
-			</optgroup>
-			<optgroup label="FedEx">
-				<option value="firstOvernight">First Overnight</option>
-				<option value="expressSaver">Express Saver</option>
-				<option value="ground">Ground</option>
-			</optgroup>
-		</select>
-	</div>
-
-
-	<h2>Multiple selects</h2>
+	<h3>Multiple selects</h3>	
 	<p>If the <code>multiple</code> attribute is present in your markup, jQuery Mobile will enhance the element with a few extra considerations:</p>
 
 	<ul>
@@ -349,7 +323,7 @@ $.mobile.selectmenu.prototype.options.hidePlaceholderMenuItems = false;
 	</ul>
 
 	<div data-role="fieldcontain">
-		<label for="select-choice-9" class="select">Choose shipping method(s):</label>
+		<label for="select-choice-9" class="select">Shipping method(s):</label>
 		<select name="select-choice-9" id="select-choice-9" multiple="multiple" data-native-menu="false">
 			<option>Choose options</option>
 			<option value="standard">Standard: 7 day</option>
@@ -420,9 +394,31 @@ $.mobile.selectmenu.prototype.options.hidePlaceholderMenuItems = false;
 
 
 
+	
+
+	<h3>Optgroup support</h3>
+	<p>If a select menu contains <code>optgroup</code> elements, jQuery Mobile will create a divider &amp; group items based on the <code>label</code> attribute's text:</p>
+
+	<div data-role="fieldcontain">
+		<label for="select-choice-8" class="select">Shipping method:</label>
+		<select name="select-choice-8" id="select-choice-8" data-native-menu="false">
+			<optgroup label="USPS">
+				<option value="standard">Standard: 7 day</option>
+				<option value="rush">Rush: 3 days</option>
+				<option value="express">Express: next day</option>
+				<option value="overnight">Overnight</option>
+			</optgroup>
+			<optgroup label="FedEx">
+				<option value="firstOvernight">First Overnight</option>
+				<option value="expressSaver">Express Saver</option>
+				<option value="ground">Ground</option>
+			</optgroup>
+		</select>
+	</div>
+
 
 	<h2>Styling with data attributes</h2>
-	<p>You can specify any jQuery Mobile button data- attribute on a select element too. In this example, we're setting the theme, icon and inline properties though data- attributes.</p>
+	<p>You can specify any jQuery Mobile button <code>data-</code> attribute on a select element, too. In this example, we're setting the theme, icon and inline properties:</p>
 
 	<div data-role="fieldcontain">
 		<label for="select-choice-11" class="select">Actions</label>
@@ -434,22 +430,18 @@ $.mobile.selectmenu.prototype.options.hidePlaceholderMenuItems = false;
     
             
         
-<h2>Refreshing a select</h2>
-        
-<p>If you manipulate a select via JavaScript, you must call the refresh  method on it to update the visual styling. Here is an example:</p>
-
-<code><pre>
-var myselect = $("select#foo");
-myselect[0].selectedIndex = 3;
-myselect.selectmenu("refresh");
-</pre></code>
+<h2>Calling the select menu plugin</h2>
+<p>The select menu plugin will auto initialize on any page that contains a select menu, no need for a <code>data-role</code> attribute in the markup. However, you can directly call the select menu plugin on any selector, just like any normal jQuery plugin:</p>
+<pre><code>
+$('select').selectmenu();			
+</code></pre>
     
 	</form>
 	</div><!--/content-primary -->		
 	
 	<div class="content-secondary">
 		
-		<div data-role="collapsible" data-collapsed="true" data-theme="b">
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
 			
 				<h3>More in this section</h3>
 				
@@ -458,17 +450,17 @@ myselect.selectmenu("refresh");
 					<li data-role="list-divider">Form elements</li>
 					<li><a href="../docs-forms.html">Form basics</a></li>
 					<li><a href="../forms-all.html">Form element gallery</a></li>
-					<li><a href="../texts/index.html">Text inputs</a></li>
-					<li><a href="../forms-search.html">Search inputs</a></li>
-					<li><a href="../forms-slider.html">Slider</a></li>
-					<li><a href="../forms-switch.html">Flip toggle switch</a></li>
-					<li><a href="../radiobuttons/index.html">Radio buttons</a></li>
-					<li><a href="../checkboxes/index.html">Checkboxes</a></li>
+					<li><a href="../textinputs/index.html">Text inputs</a></li>
+					<li><a href="../search/">Search input</a></li>
+					<li><a href="../slider/">Slider</a></li>
+					<li><a href="../switch/">Flip toggle switch</a></li>
+					<li><a href="../radiobuttons/">Radio buttons</a></li>
+					<li><a href="../checkboxes/">Checkboxes</a></li>
 					<li data-theme="a"><a href="index.html">Select menus</a></li>
 					<li><a href="../forms-themes.html">Theming forms</a></li>
 					<li><a href="../forms-all-native.html">Native form elements</a></li>
 					<li><a href="../forms-sample.html">Submitting forms</a></li>
-					<li><a href="../plugin-eventsmethods.html">Plugin methods</a></li>
+					
 	
 				</ul>
 		</div>

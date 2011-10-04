@@ -53,6 +53,9 @@
 
 		pushStateEnabled: true,
 
+		// turn of binding to the native orientationchange due to android orientation behavior
+		orientationChangeEnabled: true,
+
 		// Support conditions that must be met in order to proceed
 		// default enhanced qualifications are media query support OR IE 7+
 		gradeA: function(){
@@ -128,11 +131,19 @@
 	// Mobile version of data and removeData and hasData methods
 	// ensures all data is set and retrieved using jQuery Mobile's data namespace
 	$.fn.jqmData = function( prop, value ) {
-		return this.data( prop ? $.mobile.nsNormalize( prop ) : prop, value );
+		var result;
+		if ( typeof prop != "undefined" ) {
+			result = this.data( prop ? $.mobile.nsNormalize( prop ) : prop, value );
+		}
+		return result;
 	};
 
 	$.jqmData = function( elem, prop, value ) {
-		return $.data( elem, $.mobile.nsNormalize( prop ), value );
+		var result;
+		if ( typeof prop != "undefined" ) {
+			result = $.data( elem, prop ? $.mobile.nsNormalize( prop ) : prop, value );
+		}
+		return result;
 	};
 
 	$.fn.jqmRemoveData = function( prop ) {
@@ -143,8 +154,32 @@
 		return $.removeData( elem, $.mobile.nsNormalize( prop ) );
 	};
 
-	$.jqmHasData = function( elem, prop ) {
-		return $.hasData( elem, $.mobile.nsNormalize( prop ) );
+	$.fn.removeWithDependents = function() {
+		$.removeWithDependents( this );
+	};
+
+	$.removeWithDependents = function( elem ) {
+		var $elem = $( elem );
+
+		( $elem.jqmData('dependents') || $() ).remove();
+		$elem.remove();
+	};
+
+	$.fn.addDependents = function( newDependents ) {
+		$.addDependents( $(this), newDependents );
+	};
+
+	$.addDependents = function( elem, newDependents ) {
+		var dependents = $(elem).jqmData( 'dependents' ) || $();
+
+		$(elem).jqmData( 'dependents', $.merge(dependents, newDependents) );
+	};
+
+	// note that this helper doesn't attempt to handle the callback
+	// or setting of an html elements text, its only purpose is
+	// to return the html encoded version of the text in all cases. (thus the name)
+	$.fn.getEncodedText = function() {
+		return $( "<div/>" ).text( $(this).text() ).html();
 	};
 
 	// Monkey-patching Sizzle to filter the :jqmData selector

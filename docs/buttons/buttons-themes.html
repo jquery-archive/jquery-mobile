@@ -3,7 +3,7 @@
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<title>jQuery Mobile Docs - Button Theming</title> 
+	<title>jQuery Mobile Docs - Theming buttons</title> 
 	<link rel="stylesheet"  href="../../themes/default/" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 	<script src="../../js/jquery.js"></script>
@@ -23,9 +23,9 @@
 	<div data-role="content">
 		<div class="content-primary">
 			
-			<h2>Theming</h2>
+			<h2>Theming buttons</h2>
 			
-			<p>jQuery Mobile has a rich <a href="../api/themes.html">theming system</a> that gives you full control of how buttons are styled. When a link is added to a container, it is automatically assigned a theme swatch letter that matches it's parent bar or content box to visually integrate the button into the parent container, like a chameleon. So a button placed inside a content container with a theme of "a" (black in the default theme) will be automatically assigned the button theme of "a" (charcoal in the default theme). Here are examples of the button theme pairings in the default theme. All buttons have the same HTML markup: </p>
+			<p>jQuery Mobile has a rich <a href="../api/themes.html">theming system</a> that gives you full control of how buttons are styled. When a link is added to a container, it is automatically assigned a theme swatch letter that matches its parent bar or content box to visually integrate the button into the parent container, like a chameleon. So a button placed inside a content container with a theme of "a" (black in the default theme) will be automatically assigned the button theme of "a" (charcoal in the default theme). Here are examples of the button theme pairings in the default theme. All buttons have the same HTML markup: </p>
 			
 			<div class="ui-body ui-body-a"><h4>A swatch</h4><a href="index.html" data-role="button">Button</a></div>
 			<div class="ui-body ui-body-b"><h4>B swatch</h4><a href="index.html" data-role="button">Button</a></div>
@@ -34,13 +34,13 @@
 			<div class="ui-body ui-body-e"><h4>E swatch</h4><a href="index.html" data-role="button">Button</a></div>
 			
 			<h2>Assigning theme swatches</h2>
-			<p>Button can be manually assigned any of the button color swatches from the theme to add visual contrast with the container they sit inside by adding the <code> data-theme</code> attribute on the button markup and specifying a swatch letter. </p>
+			<p>Buttons can be manually assigned any of the button color swatches from the theme to add visual contrast with the container they sit inside by adding the <code> data-theme</code> attribute on the button markup and specifying a swatch letter. </p>
 
 <pre><code>			
 &lt;a href=&quot;index.html&quot; data-role=&quot;button&quot; data-theme=&quot;a&quot;&gt;Theme a&lt;/a&gt;			
 </code></pre>
 				
-		<p>Here are 4 buttons with icons that have a different swatch letter assigned via the <code> data-theme</code> attribute.</p>
+		<p>Here are 5 buttons with icons that have a different swatch letter assigned via the <code> data-theme</code> attribute.</p>
 	
 		<a href="index.html" data-role="button" data-theme="a" data-icon="arrow-l" data-inline="true">Theme a</a>
 		<a href="index.html" data-role="button" data-theme="b" data-icon="arrow-l" data-inline="true">Theme b</a>
@@ -99,14 +99,14 @@
 	
 	<div class="content-secondary">
 		
-		<div data-role="collapsible" data-collapsed="true" data-theme="b">
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
 			
 				<h3>More in this section</h3>
 				
 				<ul data-role="listview" data-theme="c" data-dividertheme="d">
 				
 					<li data-role="list-divider">Buttons</li>
-					<li><a href="buttons-types.html">Button markup options</a></li>
+					<li><a href="buttons-types.html">Button basics</a></li>
 					<li><a href="buttons-icons.html">Button icons</a></li>
 					<li><a href="buttons-inline.html">Inline buttons</a></li>
 					<li><a href="buttons-grouped.html">Grouped buttons</a></li>

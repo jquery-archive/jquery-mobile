@@ -118,11 +118,11 @@ $.event.special.tap = {
 // also handles swipeleft, swiperight
 $.event.special.swipe = {
 	scrollSupressionThreshold: 10, // More than this horizontal displacement, and we will suppress scrolling.
-	
+
 	durationThreshold: 1000, // More time than this, and it isn't a swipe.
-	
+
 	horizontalDistanceThreshold: 30,  // Swipe horizontal displacement must be more than this.
-	
+
 	verticalDistanceThreshold: 75,  // Swipe vertical displacement must be less than this.
 
 	setup: function() {
@@ -190,7 +190,7 @@ $.event.special.swipe = {
 		setup: function() {
 			// If the event is supported natively, return false so that jQuery
 			// will bind to the event using DOM methods.
-			if ( $.support.orientation ) {
+			if ( $.support.orientation && $.mobile.orientationChangeEnabled ) {
 				return false;
 			}
 
@@ -204,7 +204,7 @@ $.event.special.swipe = {
 		teardown: function(){
 			// If the event is not supported natively, return false so that
 			// jQuery will unbind the event using DOM methods.
-			if ( $.support.orientation ) {
+			if ( $.support.orientation && $.mobile.orientationChangeEnabled ) {
 				return false;
 			}
 
@@ -215,6 +215,7 @@ $.event.special.swipe = {
 		add: function( handleObj ) {
 			// Save a reference to the bound event handler.
 			var old_handler = handleObj.handler;
+
 
 			handleObj.handler = function( event ) {
 				// Modify event object, adding the .orientation property.
@@ -242,8 +243,22 @@ $.event.special.swipe = {
 	// Get the current page orientation. This method is exposed publicly, should it
 	// be needed, as jQuery.event.special.orientationchange.orientation()
 	$.event.special.orientationchange.orientation = get_orientation = function() {
-		var elem = document.documentElement;
-		return elem && elem.clientWidth / elem.clientHeight < 1.1 ? "portrait" : "landscape";
+		var isPortrait = true, elem = document.documentElement;
+
+		// prefer window orientation to the calculation based on screensize as
+		// the actual screen resize takes place before or after the orientation change event
+		// has been fired depending on implementation (eg android 2.3 is before, iphone after).
+		// More testing is required to determine if a more reliable method of determining the new screensize
+		// is possible when orientationchange is fired. (eg, use media queries + element + opacity)
+		if ( $.support.orientation ) {
+			// if the window orientation registers as 0 or 180 degrees report
+			// portrait, otherwise landscape
+			isPortrait = window.orientation % 180 == 0;
+		} else {
+			isPortrait = elem && elem.clientWidth / elem.clientHeight < 1.1;
+		}
+
+		return isPortrait ? "portrait" : "landscape";
 	};
 
 })( jQuery, window );

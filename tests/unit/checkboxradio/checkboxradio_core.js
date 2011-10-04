@@ -27,23 +27,23 @@
 		ok( !button.hasClass( "ui-checkbox-on" ), "no active styles after click" );
 	});
 
-    test( "clicking a checkbox within a controlgroup does not affect checkboxes with the same name in the same controlgroup", function(){
-        var input1 = $("#checkbox-31");
-        var button1 = input1.parent().find(".ui-btn");
-        var input2 = $("#checkbox-32");
-        var button2 = input2.parent().find(".ui-btn");
+	test( "clicking a checkbox within a controlgroup does not affect checkboxes with the same name in the same controlgroup", function(){
+		var input1 = $("#checkbox-31");
+		var button1 = input1.parent().find(".ui-btn");
+		var input2 = $("#checkbox-32");
+		var button2 = input2.parent().find(".ui-btn");
 
-        ok(!input1.attr("checked"), "input1 not checked before click");
-        ok(!input2.attr("checked"), "input2 not checked before click");
+		ok(!input1.attr("checked"), "input1 not checked before click");
+		ok(!input2.attr("checked"), "input2 not checked before click");
 
-        button1.trigger("click");
-        ok(input1.attr("checked"), "input1 checked after click on input1");
-        ok(!input2.attr("checked"), "input2 not checked after click on input1");
+		button1.trigger("click");
+		ok(input1.attr("checked"), "input1 checked after click on input1");
+		ok(!input2.attr("checked"), "input2 not checked after click on input1");
 
-        button2.trigger("click");
-        ok(input1.attr("checked"), "input1 not changed after click on input2");
-        ok(input2.attr("checked"), "input2 checked after click on input2");
-    });
+		button2.trigger("click");
+		ok(input1.attr("checked"), "input1 not changed after click on input2");
+		ok(input2.attr("checked"), "input2 checked after click on input2");
+	});
 
 	asyncTest( "change events fired on checkbox for both check and uncheck", function(){
 		var $checkbox = $( "#checkbox-2" ),
@@ -80,11 +80,11 @@
 			},
 
 			function(){
-				ok( $radioBtns.last().attr( 'checked' ) );
+				ok( $radioBtns.last().prop( 'checked' ) );
 				ok( $radioBtns.last().siblings( 'label' ).hasClass( 'ui-radio-on' ),
 					"last input label is an active button" );
 
-				ok( !$radioBtns.first().attr( 'checked' ) );
+				ok( !$radioBtns.first().prop( 'checked' ) );
 				ok( !$radioBtns.first().siblings( 'label' ).hasClass( 'ui-radio-on' ),
 					"first input label is not active" );
 
@@ -94,11 +94,11 @@
 			},
 
 			function(){
-				ok( $radioBtns.first().attr( 'checked' ));
+				ok( $radioBtns.first().prop( 'checked' ));
 				ok( $radioBtns.first().siblings( 'label' ).hasClass( 'ui-radio-on' ),
 					"first input label is an active button" );
 
-				ok( !$radioBtns.last().attr( 'checked' ));
+				ok( !$radioBtns.last().prop( 'checked' ));
 				ok( !$radioBtns.last().siblings( 'label' ).hasClass( 'ui-radio-on' ),
 					"last input label is not active" );
 
@@ -109,11 +109,11 @@
 		], 500);
 
 	});
-	
+
 	test( "checkboxradio controls will create when inside a container that receives a 'create' event", function(){
 		ok( !$("#enhancetest").appendTo(".ui-page-active").find(".ui-checkbox").length, "did not have enhancements applied" );
 		ok( $("#enhancetest").trigger("create").find(".ui-checkbox").length, "enhancements applied" );
 	});
-	
-	
+
+
 })(jQuery);

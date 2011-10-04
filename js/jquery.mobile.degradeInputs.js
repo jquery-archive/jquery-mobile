@@ -39,10 +39,13 @@ $( document ).bind( "pagecreate enhance", function( e ){
 			optType = o.degradeInputs[ type ] || "text";
 
 		if ( o.degradeInputs[ type ] ) {
-			$this.replaceWith(
-				$( "<div>" ).html( $this.clone() ).html()
-					.replace( /\s+type=["']?\w+['"]?/, " type=\"" + optType + "\" data-" + $.mobile.ns + "type=\"" + type + "\" " )
-			);
+			var html = $( "<div>" ).html( $this.clone() ).html(),
+				// In IE browsers, the type sometimes doesn't exist in the cloned markup, so we replace the closing tag instead
+				hasType = html.indexOf( " type=" ) > -1,
+				findstr = hasType ? /\s+type=["']?\w+['"]?/ : /\/?>/,
+				repstr = " type=\"" + optType + "\" data-" + $.mobile.ns + "type=\"" + type + "\"" + ( hasType ? "" : ">" );
+
+			$this.replaceWith( html.replace( findstr, repstr ) );
 		}
 	});
 	

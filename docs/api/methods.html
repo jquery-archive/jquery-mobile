@@ -45,22 +45,26 @@
 						<ul>
 							<li>Properties:
 								<ul>
-									<li><code>transition</code> (<em>string</em>,	default:	$.mobile.defaultPageTransition)	The transition to use when showing the page. </li>
-									<li><code>reverse</code> (<em>boolean</em>,	default:	false) Decides what direction the transition will run when showing the page. </li>
+									<li><code>allowSamePageTransition</code> (<em>boolean</em>,	default:	false) By default, changePage() ignores requests to change to the current active page. Setting this option to true, allows the request to execute. Developers should note that some of the page transitions assume that the fromPage and toPage of a changePage request are different, so they may not animate as expected. Developers are responsible for either providing a proper transition, or turning it off for this specific case.</li>
 									<li><code>changeHash</code> (<em>boolean</em>,	default:	true) Decides if the hash in the location bar should be updated. </li>
-									<li><code>role</code> (<em>string</em>,	default:	undefined) The data-role value to be used when displaying the page. By default this is undefined which means rely on the value of the @data-role attribute defined on the element.</li>
-									<li><code>pageContainer</code> (jQuery collection,	default:	$.mobile.pageContainer) Specifies the element that should contain the page. </li>
-									<li><code>type</code> (<em>string</em>, default: &quot;get&quot;) Specifies the method ("get" or "post") to use when making a page request. 
-										<ul>
-											<li>Used only when the 'to' argument of changePage() is a URL.</li>
-										</ul>
-									</li>
 									<li><code>data</code> (<em>object</em> or	string,	default: undefined) The data to send with an Ajax page request.
 										<ul>
 											<li>Used only when the 'to' argument of changePage() is a URL.</li>
 										</ul>
-									</li>
+								  </li>
+									<li><code>data-url</code> (string,	default: undefined) The URL to use when updating the browser location upon changePage completion.
+								  If not specified, the value of the data-url attribute of the page element is used.</li>
+									<li><code>pageContainer</code> (jQuery collection,	default:	$.mobile.pageContainer) Specifies the element that should contain the page. </li>
 									<li><code>reloadPage</code> (<em>boolean</em>, default: false) Forces a reload of a page, even if it is already in the DOM of the page container.
+										<ul>
+											<li>Used only when the 'to' argument of changePage() is a URL.</li>
+										</ul>
+									</li>
+								  <li><code>reverse</code> (<em>boolean</em>,	default:	false) Decides what direction the transition will run when showing the page. </li>
+									<li><code>showLoadMsg</code> (<em>boolean</em>,	default:	true) Decides whether or not to show the loading message when loading external pages.</li>
+									<li><code>role</code> (<em>string</em>,	default:	undefined) The data-role value to be used when displaying the page. By default this is undefined which means rely on the value of the @data-role attribute defined on the element.</li>
+									<li><code>transition</code> (<em>string</em>,	default:	$.mobile.defaultPageTransition)	The transition to use when showing the page. </li>
+									<li><code>type</code> (<em>string</em>, default: &quot;get&quot;) Specifies the method ("get" or "post") to use when making a page request. 
 										<ul>
 											<li>Used only when the 'to' argument of changePage() is a URL.</li>
 										</ul>
@@ -111,14 +115,13 @@ $.mobile.changePage( "../alerts/confirm.html", {
 						<ul>
 							<li>Properties:
 								<ul>
-									<li><code>role</code> (<em>string</em>,	default:	undefined) The data-role value to be used when displaying the page. By default this is undefined which means rely on the value of the @data-role attribute defined on the element.</li>
+									<li><code>data</code> (<em>object</em> or	string,	default: undefined) The data to send with an Ajax page request. </li>
+									<li><code>loadMsgDelay</code> (<em>number (in ms)</em>, default: 50) Forced delay before the loading message is shown. This is meant to allow time for a page that has already been visited to be fetched from cache without a loading message.</li>
 									<li><code>pageContainer</code> (jQuery collection,	default:	$.mobile.pageContainer) Specifies the element that should contain the page after it is loaded. </li>
+									<li><code>reloadPage</code> (<em>boolean</em>, default: false) Forces a reload of a page, even if it is already in the DOM of the page container. </li>
+									<li><code>role</code> (<em>string</em>,	default:	undefined) The data-role value to be used when displaying the page. By default this is undefined which means rely on the value of the @data-role attribute defined on the element.</li>
 									<li><code>type</code> (<em>string</em>, default: &quot;get&quot;) Specifies the method ("get" or "post") to use when making a page request. 
 									</li>
-									<li><code>data</code> (<em>object</em> or	string,	default: undefined) The data to send with an Ajax page request. </li>
-									<li><code>reloadPage</code> (<em>boolean</em>, default: false) Forces a reload of a page, even if it is already in the DOM of the page container. </li>
-
-									<li><code>loadMsgDelay</code> (<em>number (in ms)</em>, default: 50) Forced delay before the loading message is shown. This is meant to allow time for a page that has already been visited to be fetched from cache without a loading message.</li>
 								</ul>
 							</li>
 						</ul>
@@ -144,12 +147,13 @@ $.mobile.loadPage( "searchresults.php", {
 			</dd>
 			
 			
-			<dt><code>jqmData(), jqmRemoveData(), and jqmHasData()</code> (<em>method</em>)</dt>
+			<dt><code>jqmData(), jqmRemoveData()</code> (<em>method</em>)</dt>
 			<dd>When working with jQuery Mobile, <code>jqmData</code> and <code>jqmRemoveData</code> should be used in place of jQuery core's <code>data</code> and <code>removeData</code> methods (note that this includes $.fn.data, $.fn.removeData, and the $.data, $.removeData, and $.hasData utilities), as they automatically incorporate getting and setting of namespaced data attributes (even if no namespace is currently in use).</dd>
 			<dd>
 				<dl>
 					<dt><code>&#183;</code> Arguments:</dt>
 					<dd>See jQuery's <a href="http://api.jquery.com/jQuery.data/">data</a> and <a href="http://api.jquery.com/jQuery.removeData/">removeData</a> methods</dd>
+					<strong>Note: </strong>Calling jqmData() with no argument will return <code>undefined</code>. This behavior is subject to change in future versions.
 					<dt><code>&#183;</code> Also:</dt>
 					<dd>When finding elements by their jQuery Mobile data attribute, please use the custom selector <code>:jqmData()</code>, as it automatically incorporates namespaced data attributes into the lookup when they are in use. For example, instead of calling <code>$("div[data-role='page']")</code>, you should use <code>$("div:jqmData(role='page')")</code>, which internally maps to <code>$("div[data-"+ $.mobile.ns +"role='page']")</code> without forcing you to concatenate a namespace into your selectors manually.</dd>
 				</dl>
@@ -215,7 +219,7 @@ $.mobile.hidePageLoadingMsg();
 							<dd>The port specified within the URL. Most URLs rely on the default port for the protocol used, so this may be an empty string most of the time.</dd>
 							<dt><code>protocol</code></dt>
 							<dd>The protocol for the URL including the trailing ':' character.</dd>
-							<dt><code>search<</code>/dt>
+							<dt><code>search</code></dt>
 							<dd>The query component of the URL including the leading '?' character.</dd>
 						</dl>	
 						<p>But it also contains additional properties that provide access to additional components as well as some common forms of the URL developers access:</p>
@@ -478,27 +482,7 @@ $.mobile.silentScroll(100);
 			
 			</dd>
 			
-			
-			<dt><code>$.mobile.addResolutionBreakpoints</code> (<em>method</em>)</dt>
-			<dd>Add width breakpoints to the min/max width classes that are added to the HTML element.</dd>
-			<dd>
-				<dl>
-					<dt><code>&#183;</code> Arguments:</dt>
-					<dd><code>values</code> (<em>number or array</em>). Pass any number or array of numbers to add to the resolution classes. Read more about this feature here: <a href="mediahelpers.html">Orientation &amp; resolution targeting</a>.</dd>
-				</dl>
-			</dd>
-			
-			<dd>Examples:
-			<pre>
-			<code>
-<strong>//add a 400px breakpoint</strong> 			
-$.mobile.addResolutionBreakpoints(400);	
-<strong>//add 2 more breakpoints</strong> 			
-$.mobile.addResolutionBreakpoints([600,800]);	
-			</code>
-			</pre>
-			
-			</dd>
+
 			
 			
 			
@@ -513,7 +497,7 @@ $.mobile.addResolutionBreakpoints([600,800]);
 	
 	<div class="content-secondary">
 		
-		<div data-role="collapsible" data-collapsed="true" data-theme="b">
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
 			
 				<h3>More in this section</h3>
 				
@@ -523,7 +507,6 @@ $.mobile.addResolutionBreakpoints([600,800]);
 					<li><a href="../../docs/api/globalconfig.html">Configuring defaults</a></li>
 					<li><a href="../../docs/api/events.html">Events</a></li>
 					<li data-theme="a"><a href="../../docs/api/methods.html">Methods &amp; Utilities</a></li>
-					<li><a href="../../docs/api/mediahelpers.html">Responsive Layout</a></li> 
 					<li><a href="../../docs/api/themes.html">Theme framework</a></li>
 				</ul>
 		</div>

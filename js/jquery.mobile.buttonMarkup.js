@@ -9,7 +9,12 @@
 $.fn.buttonMarkup = function( options ) {
 	return this.each( function() {
 		var el = $( this ),
-			o = $.extend( {}, $.fn.buttonMarkup.defaults, el.jqmData(), options ),
+			o = $.extend( {}, $.fn.buttonMarkup.defaults, {
+				icon: el.jqmData( "icon" ),
+				iconpos: el.jqmData( "iconpos" ),
+				theme: el.jqmData( "theme" ),
+				inline: el.jqmData( "inline" )
+			}, options ),
 
 			// Classes Defined
 			innerClass = "ui-btn-inner",
@@ -65,7 +70,7 @@ $.fn.buttonMarkup = function( options ) {
 		el.attr( "data-" + $.mobile.ns + "theme", o.theme )
 			.addClass( buttonClass );
 
-		wrap = ( "<D class='" + innerClass + "'><D class='ui-btn-text'></D>" +
+		wrap = ( "<D class='" + innerClass + "' aria-hidden='true'><D class='ui-btn-text'></D>" +
 			( o.icon ? "<span class='" + iconClass + "'></span>" : "" ) +
 			"</D>" ).replace( /D/g, o.wrapperEls );
 
@@ -77,6 +82,7 @@ $.fn.buttonMarkup.defaults = {
 	corners: true,
 	shadow: true,
 	iconshadow: true,
+	inline: false,
 	wrapperEls: "span"
 };
 

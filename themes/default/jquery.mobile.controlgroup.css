@@ -12,9 +12,8 @@
 .ui-controlgroup-vertical .ui-checkbox, .ui-controlgroup-vertical .ui-radio { margin: 0; border-bottom-width: 0;  }
 .ui-controlgroup-vertical .ui-controlgroup-last { border-bottom-width: 1px; }
 .ui-controlgroup-horizontal { padding: 0; }
-.ui-controlgroup-horizontal .ui-btn,
-.ui-controlgroup-horizontal .ui-checkbox, .ui-controlgroup-horizontal .ui-radio { display: inline-block; margin: 0 -5px 0 0; }
-.ui-controlgroup-horizontal .ui-checkbox, .ui-controlgroup-horizontal .ui-radio { display: inline; }
+.ui-controlgroup-horizontal .ui-btn { display: inline-block; margin: 0 -5px 0 0; }
+.ui-controlgroup-horizontal .ui-checkbox, .ui-controlgroup-horizontal .ui-radio { float: left; margin: 0 -1px 0 0; }
 .ui-controlgroup-horizontal .ui-checkbox .ui-btn, .ui-controlgroup-horizontal .ui-radio .ui-btn,
 .ui-controlgroup-horizontal .ui-checkbox:last-child, .ui-controlgroup-horizontal .ui-radio:last-child { margin-right: 0; }
 .ui-controlgroup-horizontal .ui-controlgroup-last { margin-right: 0; }

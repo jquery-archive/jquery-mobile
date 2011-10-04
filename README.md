@@ -23,7 +23,9 @@ A full, complete version and a minified, complete version of the jQuery Mobile J
 Submitting bugs
 ===================================
 
-If you think you've found a bug, please visit the Issue tracker (https://github.com/jquery/jquery-mobile/issues) and create an issue explaining the problem and expected result. Be sure to include any relevant information for reproducing the issue, such as the browser/device (with version #), and the version of the jQuery Mobile code you're running. It also helps a lot to make sure that the bug still exists on jquerymobile.com/test/, as it's possible we may have fixed it already! It is also best to include code to reproduce the bug. 
+If you think you've found a bug, please visit the Issue tracker (https://github.com/jquery/jquery-mobile/issues) and create an issue explaining the problem and expected result. Be sure to include any relevant information for reproducing the issue, such as the browser/device (with version #), and the version of the jQuery Mobile code you're running. It also helps a lot to make sure that the bug still exists on http://jquerymobile.com/test/, as it's possible we may have fixed it already! 
+
+It is also best to include code to reproduce the bug. To do that please use [jsbin](http://jsbin.com) or [jsfiddle](http://jsfiddle.net) and include a link to it in the ticket.
 
 
 Submitting patches

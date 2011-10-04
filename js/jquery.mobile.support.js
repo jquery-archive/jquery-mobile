@@ -64,7 +64,7 @@ $.mobile.browser.ie = (function() {
 
 
 $.extend( $.support, {
-	orientation: "orientation" in window,
+	orientation: "orientation" in window && "onorientationchange" in window,
 	touch: "ontouchend" in document,
 	cssTransitions: "WebKitTransitionEvent" in window,
 	pushState: "pushState" in history && "replaceState" in history,
@@ -73,9 +73,7 @@ $.extend( $.support, {
 	touchOverflow: !!propExists( "overflowScrolling" ),
 	boxShadow: !!propExists( "boxShadow" ) && !bb,
 	scrollTop: ( "pageXOffset" in window || "scrollTop" in document.documentElement || "scrollTop" in fakeBody[ 0 ] ) && !webos,
-	dynamicBaseTag: baseTagTest(),
-	// TODO: This is a weak test. We may want to beef this up later.
-	eventCapture: "addEventListener" in document
+	dynamicBaseTag: baseTagTest()
 });
 
 fakeBody.remove();

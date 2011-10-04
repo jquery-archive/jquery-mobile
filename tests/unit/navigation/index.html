@@ -11,7 +11,7 @@
 	<script src="../../../tests/jquery.testHelper.js"></script>
 
 
-	<link rel="stylesheet" href="../../../themes/default/"/>
+	<link rel="stylesheet"  href="../../../themes/default/"/>
 	<link rel="stylesheet" href="../../../external/qunit.css"/>
 	<script src="../../../external/qunit.js"></script>
 
@@ -23,6 +23,8 @@
 			"navigation_paths.js"
 		]);
 	</script>
+
+	<script src="../swarminject.js"></script>
 </head>
 <body>
 
@@ -32,7 +34,7 @@
 <ol id="qunit-tests">
 </ol>
 
-<div id="harmless-default-page"	 data-nstest-role="page">
+<div id="harmless-default-page"	 data-nstest-role="page" class="first-page">
 </div>
 
 <div id="foo" data-nstest-role="page" class="foo-class">
@@ -262,6 +264,18 @@
 		<a href="#active-state-page1" data-nstest-role="button">href button</a>
 		<a href="#active-state-page1" data-nstest-rel="back" data-nstest-role="button">back button</a>
 	</div>
+</div>
+
+
+
+<div id="odd-clicks-page" data-nstest-role="page">
+  <a href="#odd-clicks-page-dest" id="right-or-middle-click">foo</a>
+</div>
+
+<div id="odd-clicks-page-dest" data-nstest-role="page"></div>
+
+<div id="inject-links-page" data-nstest-role="page">
+  <a href="#injected-test-page" id="static-injected-test-page-link">static link</a>
 </div>
 </body>
 </html>

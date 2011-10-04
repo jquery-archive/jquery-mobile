@@ -8,6 +8,7 @@
 .ui-content .ui-listview-inset { margin: 1em 0;  }
 .ui-listview, .ui-li { list-style:none; padding:0; }
 .ui-li, .ui-li.ui-field-contain { display: block; margin:0; position: relative; overflow: visible; text-align: left; border-width: 0; border-top-width: 1px; }
+.ui-li .ui-btn-text { position: relative; z-index: 1; }
 .ui-li .ui-btn-text a.ui-link-inherit { text-overflow: ellipsis; overflow: hidden; white-space: nowrap;  }
 .ui-li-divider, .ui-li-static { padding: .5em 15px; font-size: 14px; font-weight: bold;  }
 .ui-li-divider { counter-reset: listnumbering;  }
@@ -34,13 +35,15 @@ ol.ui-listview .ui-li-jsnumbering:before { content: "" !important; } /* to avoid
 }	 
 .ui-li-divider { cursor: default; }
 .ui-li-has-alt .ui-btn-inner a.ui-link-inherit, .ui-li-static.ui-li-has-alt { padding-right: 95px; }
-.ui-li-count { position: absolute; font-size: 11px; font-weight: bold; padding: .2em .5em; top: 50%; margin-top: -.9em; right: 38px; }
+.ui-li-has-count .ui-li-count { position: absolute; font-size: 11px; font-weight: bold; padding: .2em .5em; top: 50%; margin-top: -.9em; right: 38px; }
 .ui-li-divider .ui-li-count, .ui-li-static .ui-li-count { right: 10px; }
 .ui-li-has-alt .ui-li-count { right: 55px; }
-.ui-li-link-alt { position: absolute; width: 40px; height: 100%; border-width: 0; border-left-width: 1px; top: 0; right: 0; margin: 0; padding: 0; }
-.ui-li-link-alt .ui-btn { overflow: hidden; position: absolute; right: 8px; top: 50%; margin: -11px 0 0 0; border-bottom-width: 1px; }
-.ui-li-link-alt .ui-btn-inner { padding: 0; position: static; }
+.ui-li-link-alt { position: absolute; width: 40px; height: 100%; border-width: 0; border-left-width: 1px; top: 0; right: 0; margin: 0; padding: 0; z-index: 2; }
+.ui-li-link-alt .ui-btn { overflow: hidden; position: absolute; right: 8px; top: 50%; margin: -11px 0 0 0; border-bottom-width: 1px; z-index: -1;}
+.ui-li-link-alt .ui-btn-inner { padding: 0; height: 100%; position: absolute; width: 100%; top: 0; left: 0;}
 .ui-li-link-alt .ui-btn .ui-icon { right: 50%; margin-right: -9px;  }
+
+.ui-listview * .ui-btn-inner > .ui-btn > .ui-btn-inner { border-top: 0px; }
 
 .ui-listview-filter { border-width: 0; overflow: hidden; margin: -15px -15px 15px -15px }
 .ui-listview-filter .ui-input-search { margin: 5px; width: auto; display: block; }
