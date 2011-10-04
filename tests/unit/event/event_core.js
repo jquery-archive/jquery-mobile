@@ -55,7 +55,6 @@
 		});
 
 		$('#qunit-fixture').trigger(events[0]);
-		stop();
 	});
 
 	asyncTest( "defined event functions trigger the event with no arguments", function(){
@@ -67,7 +66,6 @@
 		});
 
 		$('#qunit-fixture').touchstart();
-		stop();
 	});
 
 	test( "defining event functions sets the attrFn to true", function(){
