@@ -15,7 +15,12 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 		theme: null,
 		contentTheme: null,
 		iconTheme: "d",
-		initSelector: ":jqmData(role='collapsible')"
+		initSelector: ":jqmData(role='collapsible')",
+	    animate: true,
+	    expandAnimation: "slideDown",
+	    collapseAnimation: "slideUp",
+	    expandDuration: "500",
+	    collapseDuration: "300"
 	},
 	_create: function() {
 
@@ -58,8 +63,8 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 				.buttonMarkup({
 					shadow: false,
 					corners: false,
-					iconPos: "left",
-					icon: "plus",
+					iconpos: $el.jqmData("iconpos") || "left",
+					icon: $el.jqmData("icon-collapsed") || "plus",
 					theme: o.theme
 				});
 
@@ -117,24 +122,33 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 						isCollapse = ( event.type === "collapse" ),
 					    contentTheme = o.contentTheme;
 
-					collapsibleHeading
-						.toggleClass( "ui-collapsible-heading-collapsed", isCollapse)
-						.find( ".ui-collapsible-heading-status" )
-							.text( isCollapse ? o.expandCueText : o.collapseCueText )
-						.end()
-						.find( ".ui-icon" )
-							.toggleClass( "ui-icon-minus", !isCollapse )
-							.toggleClass( "ui-icon-plus", isCollapse );
+				    if (!!o.animate) {
+				        collapsibleContent[isCollapse ? o.collapseAnimation : o.expandAnimation](isCollapse ? o.collapseDuration : o.expandDuration);
+				    }
 
-					$this.toggleClass( "ui-collapsible-collapsed", isCollapse );
-					collapsibleContent.toggleClass( "ui-collapsible-content-collapsed", isCollapse ).attr( "aria-hidden", isCollapse );
+				    collapsibleContent
+    				    .queue(function () {
+					        collapsibleHeading
+    					        .toggleClass("ui-collapsible-heading-collapsed", isCollapse)
+    					        .find(".ui-collapsible-heading-status")
+    					        .text(isCollapse ? o.expandCueText : o.collapseCueText)
+    					        .end()
+    					        .find(".ui-icon")
+    					        .toggleClass("ui-icon-" + (collapsible.jqmData("icon-expanded") || "minus"), !isCollapse)
+    					        .toggleClass("ui-icon-" + (collapsible.jqmData("icon-collapsed") || "plus"), isCollapse);
 
-					if ( contentTheme && ( !collapsibleSet.length || collapsible.jqmData( "collapsible-last" ) ) ) {
-						collapsibleHeading
-							.find( "a:eq(0), .ui-btn-inner" )
-							.toggleClass( "ui-corner-bottom", isCollapse );
-						collapsibleContent.toggleClass( "ui-corner-bottom", !isCollapse );
-					}
+					        $this.toggleClass("ui-collapsible-collapsed", isCollapse);
+					        collapsibleContent.toggleClass("ui-collapsible-content-collapsed", isCollapse).attr("aria-hidden", isCollapse);
+
+					        if (contentTheme && (!collapsibleSet.length || collapsible.jqmData("collapsible-last"))) {
+					            collapsibleHeading
+    					            .find("a:eq(0), .ui-btn-inner")
+    					            .toggleClass("ui-corner-bottom", isCollapse);
+					            collapsibleContent.toggleClass("ui-corner-bottom", !isCollapse);
+					        }
+					        collapsibleContent.css('display','');
+					        $(this).dequeue();
+					    });
 				}
 			})
 			.trigger( o.collapsed ? "collapse" : "expand" );
