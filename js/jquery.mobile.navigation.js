@@ -785,9 +785,6 @@
 							&& RegExp.$1 ) {
 						url = fileUrl = path.getFilePath( RegExp.$1 );
 					}
-					else{
-
-					}
 
 					if ( base ) {
 						base.set( fileUrl );

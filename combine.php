@@ -13,11 +13,6 @@ foreach ( $files as $file ) {
 	$contents .= file_get_contents($file). "\n\n";
 }
 
-// If gzip is supported, send the file gzipped
-if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) {
-	ob_start("ob_gzhandler");
-}
-
 // Set the content type, filesize and an expiration so its not cached
 header('Content-Type: ' . $type);
 header('Content-Length: ' . strlen($contents));
