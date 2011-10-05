@@ -136,7 +136,11 @@
 	};
 
 	$.jqmData = function( elem, prop, value ) {
-		return $.data( elem, $.mobile.nsNormalize( prop ), value );
+		var result;
+		if ( typeof prop != "undefined" ) {
+			result = $.data( elem, prop ? $.mobile.nsNormalize( prop ) : prop, value );
+		}
+		return result;
 	};
 
 	$.fn.jqmRemoveData = function( prop ) {
