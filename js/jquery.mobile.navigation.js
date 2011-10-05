@@ -180,7 +180,7 @@
 
 			//set location hash to path
 			set: function( path ) {
-				location.hash = path;
+				location.hash = jQuery.browser.mozilla ? escape(path) : path;
 			},
 
 			//test if a given url (string) is a path
