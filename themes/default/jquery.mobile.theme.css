@@ -739,7 +739,6 @@ a.ui-link-inherit {
 	background-image:     -ms-linear-gradient(top, #85bae4 /*{global-active-background-start}*/, #5393c5 /*{global-active-background-end}*/); /* IE10 */
 	background-image:      -o-linear-gradient(top, #85bae4 /*{global-active-background-start}*/, #5393c5 /*{global-active-background-end}*/); /* Opera 11.10+ */
 	background-image:         linear-gradient(top, #85bae4 /*{global-active-background-start}*/, #5393c5 /*{global-active-background-end}*/);
-  	outline: none;
 	font-family: Helvetica, Arial, sans-serif /*{global-active-font}*/;
 }
 .ui-btn-active a.ui-link-inherit {
