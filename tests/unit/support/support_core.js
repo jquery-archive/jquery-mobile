@@ -19,14 +19,15 @@ $.testHelper.excludeFileProtocol(function(){
 		// TODO expose properties for less brittle tests
 		$.extend(window, {
 			WebKitTransitionEvent: true,
-			orientation: true
+			orientation: true,
+			onorientationchange: true
 		});
 
 		document.ontouchend = true;
 
 		window.history.pushState = function(){};
 		window.history.replaceState = function(){};
-		
+
 		$.mobile.media = function(){ return true; };
 
 		$.testHelper.reloadLib(libName);
