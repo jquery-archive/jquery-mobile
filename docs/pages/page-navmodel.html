@@ -47,7 +47,12 @@
 
 			<p>For those browsers that support <code>history.pushState</code> and <code>history.replaceState</code> an additional optional plugin is provided that will convert the hash change urls mentioned in the previous section into the hashless equivelant. It's important to note that it does indeed convert the hash urls by using <code>history.replaceState</code> as the <code>history.pushState</code> does not produce the desired result in some mobile browsers.</p>
 
-			<p>Since the plugin initializes when the DOM is fully loaded you can enable and disable it manually by setting <code>$.mobile.pushStateEnabled</code> anytime before.</p>
+			<p>Since the plugin initializes when the DOM is fully loaded you can enable and disable it manually by setting <code>$.mobile.pushStateEnabled</code> anytime before document ready.</p>
+
+			<div class="ui-body ui-body-e">
+				<h4 style="margin:.5em 0">Important: rel="external" and $.mobile.ajaxEnabled=false</h4>
+        Many browsers have finicky implementations of the (push|replace)State api which can cause odd behvior in some cases (most often when returning to a document onto which state has been pushed or replaced). When building a jQuery Mobile application where the ajax navigation is being explicityly disabled regularly you may wish to disable pushstate support (see above) across the application and fall back to the hash based navigation for more consistent behaviour.
+			</div>
 
 			<h2>changePage</h2>
 
