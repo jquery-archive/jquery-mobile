@@ -8,7 +8,7 @@
 		siteDirectory = location.pathname.replace( /[^/]+$/, "" ),
 		home = $.mobile.path.parseUrl(location.pathname).directory,
 		navigateTestRoot = function(){
-			$.testHelper.openPage( "#" + location.pathname );
+			$.testHelper.openPage( "#" + location.pathname + location.search );
 		};
 
 	module('jquery.mobile.navigation.js', {
