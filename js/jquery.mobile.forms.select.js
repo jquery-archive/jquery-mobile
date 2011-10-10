@@ -217,8 +217,6 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ){
-	$( $.mobile.selectmenu.prototype.options.initSelector, e.target )
-		.not( ":jqmData(role='none'), :jqmData(role='nojs')" )
-		.selectmenu();
+	$.mobile.selectmenu.prototype.enhanceWithin( e.target );
 });
 })( jQuery );

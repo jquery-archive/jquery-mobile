@@ -36,6 +36,12 @@ $.widget( "mobile.widget", {
 		});
 
 		return options;
+	},
+
+	enhanceWithin: function( target ) {
+		var keepNative = $.mobile.page.prototype.keepNativeSelector();
+
+		$( this.options.initSelector, target ).not( keepNative )[this.widgetName]();
 	}
 });
 
