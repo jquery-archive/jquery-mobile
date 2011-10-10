@@ -119,6 +119,6 @@
 
 	// not testing the positive case here since's it's obviously tested elsewhere
 	test( "checkboxradio elements in the keepNative set shouldn't be enhanced", function() {
-		ok( !$("#input.should-be-native").parent().is("div.ui-checkbox") );
+		ok( !$("input.should-be-native").parent().is("div.ui-checkbox") );
 	});
 })(jQuery);
