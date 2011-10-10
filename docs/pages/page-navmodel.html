@@ -45,13 +45,13 @@
 
 			<h2>replaceState plugin</h2>
 
-			<p>For those browsers that support <code>history.pushState</code> and <code>history.replaceState</code> an additional optional plugin is provided that will convert the hash change urls mentioned in the previous section into the hashless equivelant. It's important to note that it does indeed convert the hash urls by using <code>history.replaceState</code> as the <code>history.pushState</code> does not produce the desired result in some mobile browsers.</p>
+			<p>For those browsers that support <code>history.replaceState</code>, an optional plugin is provided that will convert the hash change urls mentioned in the previous section into the full document path which is cleaner and makes the Ajax tracking transparent in the URL structure. This is built as an enhancement on top of the hash-based URL system for Ajax links. For browsers that do not support <code>history.replaceState</code>, or if this feature is disabled, hash-based URLs will be used instead. Note that this feature converts hash-based urls by using <code>history.replaceState</code> (not <code>history.pushState</code>) because this works more reliably across our target platforms. </p>
 
-			<p>Since the plugin initializes when the DOM is fully loaded you can enable and disable it manually by setting <code>$.mobile.pushStateEnabled</code> anytime before document ready.</p>
+			<p>Since the plugin initializes when the DOM is fully loaded you can enable and disable it manually by setting <code>$.mobile.pushStateEnabled</code> global <a href="../api/globalconfig.html">configuration option</a> to <code>false</code> anytime before document ready.</p>
 
 			<div class="ui-body ui-body-e">
 				<h4 style="margin:.5em 0">Important: rel="external" and $.mobile.ajaxEnabled=false</h4>
-        Many browsers have finicky implementations of the (push|replace)State api which can cause odd behvior in some cases (most often when returning to a document onto which state has been pushed or replaced). When building a jQuery Mobile application where the ajax navigation is being explicityly disabled regularly you may wish to disable pushstate support (see above) across the application and fall back to the hash based navigation for more consistent behaviour.
+        <p>Slightly different implementations of the replaceState API in various browsers can cause odd behavior in specific scenarios. For example, some browser implementations (including desktop browsers) implement the <code>popstate</code> event differently when linking externally and moving back to a page onto which state has already been pushed/replaced. When building a jQuery Mobile application where the ajax navigation is being explicitly disabled, either though the frequent use of <code>rel="external"</code> on links or by disabling Ajax navigation completely via the <code>$.mobile.ajaxEnabled=false</code>, we recommend disabling the pushState feature to fall back to the hash based navigation for more consistent behavior.</p>
 			</div>
 
 			<h2>changePage</h2>
