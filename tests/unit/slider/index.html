@@ -16,6 +16,7 @@
 	<script src="../../../external/qunit.js"></script>
 
 	<script src="slider_events.js"></script>
+	<script src="slider_core.js"></script>
 
 	<script src="../swarminject.js"></script>
 </head>
@@ -60,9 +61,10 @@
 		<input type="range" name="onchange" id="onchange" value="25" min="0" max="100" step="10" onchange="onChangeCounter()" data-nstest-theme="b" data-nstest-track-theme="a" />
 	</div>
 
-
-
-
+	<div data-role="fieldcontain">
+		<label for="slider">Input slider:</label>
+		<input type="range" name="slider" id="slider" value="25" min="0" max="100" class="should-be-native"/>
+	</div>
 </div>
 
 <div id="enhancetest">
