@@ -39,9 +39,12 @@ $.widget( "mobile.widget", {
 	},
 
 	enhanceWithin: function( target ) {
+		// TODO remove dependency on the page widget for the keepNative.
+		// Currently the keepNative value is defined on the page prototype so
+		// the method is as well
 		var keepNative = $.mobile.page.prototype.keepNativeSelector();
 
-		$( this.options.initSelector, target ).not( keepNative )[this.widgetName]();
+		$( this.options.initSelector, target ).not( keepNative )[ this.widgetName ]();
 	}
 });
 
