@@ -1017,6 +1017,14 @@
 			return;
 		}
 
+		// If we are going to the first-page of the application, we need to make
+		// sure settings.dataUrl is set to the application document url. This allows
+		// us to avoid generating a document url with an id hash in the case where the
+		// first-page of the document has an id attribute specified.
+		if ( toPage[ 0 ] === $.mobile.firstPage[ 0 ] && !settings.dataUrl ) {
+			settings.dataUrl = documentUrl.hrefNoHash;
+		}
+
 		// The caller passed us a real page DOM element. Update our
 		// internal state and then trigger a transition to the page.
 		var fromPage = settings.fromPage,
