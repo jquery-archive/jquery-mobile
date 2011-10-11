@@ -930,6 +930,25 @@
 		]);
 	});
 
+	asyncTest( "prefetched links with data rel dialog result in a dialog", function() {
+		$.testHelper.pageSequence([
+			// open our test page
+			function(){
+				// Navigate to any page except the first page of the application.
+				$.testHelper.openPage("#prefetched-dialog-page");
+			},
+
+			function() {
+				$("#prefetched-dialog-link").click();
+			},
+
+			function() {
+				ok( $.mobile.activePage.is(".ui-dialog"), "prefetched page is rendered as a dialog" );
+        start();
+			}
+		]);
+	});
+
 
 	asyncTest( "application url with dialogHashKey loads application's first page", function(){
 		$.testHelper.pageSequence([
