@@ -25,7 +25,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 
 	keepNativeSelector: function() {
 		var options = this.options,
-			keepNativeDefined = options.keepNative && options.keepNative.replace(/^\s+|\s+$/g, "");
+			keepNativeDefined = options.keepNative && $.trim(options.keepNative);
 
 		if( keepNativeDefined && options.keepNative !== options.keepNativeDefault ){
 			return [options.keepNative, options.keepNativeDefault].join(", ");
