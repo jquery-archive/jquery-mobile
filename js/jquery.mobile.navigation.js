@@ -1350,16 +1350,19 @@
 		});
 
 		//prefetch pages when anchors with data-prefetch are encountered
-		$( ".ui-page" ).live( "pageshow.prefetch", function(){
+		$( ".ui-page" ).live( "pageshow.prefetch", function() {
 			var urls = [];
 			$( this ).find( "a:jqmData(prefetch)" ).each(function(){
-				var url = $( this ).attr( "href" );
+				var $link = $(this),
+					url = $link.attr( "href" );
+
 				if ( url && $.inArray( url, urls ) === -1 ) {
 					urls.push( url );
-					$.mobile.loadPage( url );
+
+					$.mobile.loadPage( url, {role: $link.attr("data-" + $.mobile.ns + "rel")} );
 				}
 			});
-		} );
+		});
 
 		$.mobile._handleHashChange = function( hash ) {
 			//find first page via hash
