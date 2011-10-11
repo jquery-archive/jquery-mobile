@@ -100,6 +100,9 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 					var scrollHeight = input[ 0 ].scrollHeight,
 						clientHeight = input[ 0 ].clientHeight;
 
+					console.log( scrollHeight );
+					console.log( clientHeight );
+
 					if ( clientHeight < scrollHeight ) {
 						input.css({
 							height: (scrollHeight + extraLineHeight)
@@ -112,12 +115,11 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 				clearTimeout( keyupTimeout );
 				keyupTimeout = setTimeout( keyup, keyupTimeoutBuffer );
 			});
-			// Issue 509: the browser is not giving scrollHeight properly until after this function has run, adding in a setTimeout
-			// so we can properly access the scrollHeight
+			
+			// Issue 509: the browser is not giving scrollHeight properly until after the document
+			// is ready.
 			if ($.trim(input.text())) {
-				setTimeout( function() {
-					keyup();
-				}, 0 );
+				$(keyup);
 			}
 		}
 	},
