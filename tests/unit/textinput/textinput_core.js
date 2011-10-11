@@ -24,4 +24,19 @@
 			start();
 		}, 400);
 	});
+
+	asyncTest( "textarea should autogrow when text is added via the keyboard", function() {
+		var test = $( "#keyup-autogrow" ),
+			originalHeight = test[0].clientHeight;
+
+		test.keyup(function() {
+			setTimeout(function() {
+				ok( test[0].clientHeight > originalHeight, "the height is greater than original with no content" );
+				ok( test[0].clientHeight > 100, "autogrow text area's height is greater any style/padding");
+				start();
+			}, 400)
+		});
+
+		test.val("foo\n\n\n\n\n\n\n\n\n\n\n\n\n\n").trigger("keyup");
+	});
 })(jQuery);
