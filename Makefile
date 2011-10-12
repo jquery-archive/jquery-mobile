@@ -5,7 +5,7 @@ DATE = $(shell date "+%Y%m%d")
 VER = $(shell cat version.txt)
 
 # The command to replace the @VERSION in the files with the actual version
-SED_VER = sed "s/@VERSION/$(shell git log -1 --format=format:" Git Build\n * Git Info SHA1: %H Date: %cd")/"
+SED_VER = sed "s/@VERSION/$(shell git log -1 --format=format:" Git || Date: %cd Info SHA1: %H")/"
 deploy:  SED_VER = sed "s/@VERSION/${VER}/"
 
 # The version of jQuery core used
@@ -67,7 +67,7 @@ JSFILES = 	  js/jquery.ui.widget.js \
 			  js/jquery.mobile.controlGroup.js \
 			  js/jquery.mobile.links.js \
 			  js/jquery.mobile.fixHeaderFooter.js \
-			  js/jquery.mobile.media.classes.js \
+			  js/jquery.mobile.fixHeaderFooter.native.js \
 			  js/jquery.mobile.init.js
 
 # The files to include when compiling the CSS files
@@ -147,7 +147,7 @@ nightly: pull zip
 	@@mkdir -p ${VER}
 
 	# Copy in the base stuff for the demos
-	@@cp -r index.html themes experiments docs ${VER}/
+	@@cp -r index.html themes experiments docs tools ${VER}/
 
 	# First change all the paths from super deep to the same level for JS files
 	@@find ${VER} -type f -name '*.html' -exec sed -i 's|src="../../../js|src="js|g' {} \;
@@ -184,7 +184,7 @@ deploy: zip
 
 	# Deploy Demos to the jQueryMobile.com site
 	@@mkdir -p ${VER}
-	@@cp -r index.html themes experiments docs ${VER}/
+	@@cp -r index.html themes experiments docs tools ${VER}/
 
 	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|src="../../../js|src="js|g' {} \;
 	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|src="../../js|src="js|g' {} \;

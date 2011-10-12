@@ -16,7 +16,7 @@
 	<div data-role="page" class="type-interior">
 
 		<div data-role="header" data-theme="f">
-		<h2>Sliders</h2>
+		<h1>Flip Toggle Switch</h1>
 		<a href="../../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
@@ -25,7 +25,7 @@
 
 		<form action="#" method="get">
 
-			<h2>Sliders</h2>
+			<h2>Flip toggle switch</h2>
 			
 			<ul data-role="controlgroup" data-type="horizontal" class="localnav">
 				<li><a href="index.html" data-role="button" data-transition="fade">Basics</a></li>
@@ -37,29 +37,26 @@
 			<p>The slider plugin has the following methods:</p>
 
 		<dl>									
-			<dt><code>enable</code> enable a disabled select</dt>
+			<dt><code>enable</code> enable a disabled slider</dt>
 			<dd>
 				<pre><code>
-$('select').slider('enable');			
+$('.selector').slider('enable');			
 				</code></pre>
 			</dd>
 			
-			<dt><code>disable</code> disable a select.</dt>
+			<dt><code>disable</code> disable a slider</dt>
 			<dd>
 				<pre><code>
-$('select').slider('disable');			
+$('.selector').slider('disable');			
 				</code></pre>
 			</dd>
 						
 			<dt><code>refresh</code> update the slider</dt>
 			<dd>
-			 This is used to update the slider to reflect the native input element's value. Also, if you pass a true argument you can force the rebuild to happen.
-				<pre><code>
-//refresh value			
-$('select').slider('refresh');
-
-//refresh and force rebuild
-$('select').slider('refresh', true);
+			<p>If you manipulate a slider via JavaScript, you must call the refresh method on it to update the visual styling.</p> 				
+			
+			<pre><code>			
+$('.selector').slider('refresh');
 				</code></pre>
 			</dd>
 			
@@ -70,7 +67,7 @@ $('select').slider('refresh', true);
 	
 	<div class="content-secondary">
 		
-		<div data-role="collapsible" data-collapsed="true" data-theme="b">
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
 			
 				<h3>More in this section</h3>
 				
@@ -79,17 +76,17 @@ $('select').slider('refresh', true);
 					<li data-role="list-divider">Form elements</li>
 					<li><a href="../docs-forms.html">Form basics</a></li>
 					<li><a href="../forms-all.html">Form element gallery</a></li>
-					<li><a href="../texts/index.html">Text inputs</a></li>
-					<li><a href="../forms-search.html">Search inputs</a></li>
-					<li data-theme="a"><a href="index.html">Slider</a></li>
-					<li><a href="../forms-switch.html">Flip toggle switch</a></li>
-					<li><a href="../radiobuttons/index.html">Radio buttons</a></li>
-					<li><a href="../checkboxes/index.html">Checkboxes</a></li>
-					<li><a href="../selects/index.html">Select menus</a></li>
+					<li><a href="../textinputs/index.html">Text inputs</a></li>
+					<li><a href="../search/">Search input</a></li>
+					<li><a href="../slider/">Slider</a></li>
+					<li data-theme="a"><a href="index.html">Flip toggle switch</a></li>
+					<li><a href="../radiobuttons/">Radio buttons</a></li>
+					<li><a href="../checkboxes/">Checkboxes</a></li>
+					<li><a href="../selects/">Select menus</a></li>
 					<li><a href="../forms-themes.html">Theming forms</a></li>
 					<li><a href="../forms-all-native.html">Native form elements</a></li>
 					<li><a href="../forms-sample.html">Submitting forms</a></li>
-					<li><a href="../plugin-eventsmethods.html">Plugin methods</a></li>
+					
 	
 				</ul>
 		</div>

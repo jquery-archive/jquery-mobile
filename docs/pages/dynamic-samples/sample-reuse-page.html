@@ -4,14 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
 <title>changePage JSON Sample</title>
-<link rel="stylesheet" href="../../../themes/default/">
+<link rel="stylesheet"  href="../../../themes/default/">
 <script src="../../../js/jquery.js"></script>
 <script src="../../../js/"></script>
 <script>
-
-$( document ).bind("mobileinit", function() {
-	$.mobile.pushStateEnabled = false;
-});
 
 // Some sample categorized data. This data is in-memory
 // for demonstration purposes, but could be loaded dynamically
@@ -76,7 +72,7 @@ var categoryData = {
 	}
 };
 
-// Load a the data for a specific category, based on
+// Load the data for a specific category, based on
 // the URL passed in. Generate markup for the items in the
 // category, inject it into an embedded page, and then make
 // that page the current active page.
@@ -152,9 +148,9 @@ function showCategory( urlObj, options )
 }
 
  
-// Listen for any attempts to call changepage.
+// Listen for any attempts to call changePage().
 $(document).bind( "pagebeforechange", function( e, data ) {
-	// We only want to handle changepage calls where the caller is
+	// We only want to handle changePage() calls where the caller is
 	// asking us to load a page by URL.
 	if ( typeof data.toPage === "string" ) {
 		// We are being asked to load a page by URL, but we only
@@ -168,12 +164,13 @@ $(document).bind( "pagebeforechange", function( e, data ) {
 			// on the fly based on our in-memory category data structure.
 			showCategory( u, data.options );
 
-			// Make sure to tell changepage we've handled this call so it doesn't
+			// Make sure to tell changePage() we've handled this call so it doesn't
 			// have to do anything.
 			e.preventDefault();
 		}
 	}
 });
+
 
 </script>
 </head>
@@ -189,6 +186,7 @@ $(document).bind( "pagebeforechange", function( e, data ) {
     	<li><a href="#category-items?category=vehicles">Vehicles</a></li>
     </ul>
   </div>
+
 </div>
 <div id="category-items" data-role="page">
   <div data-role="header"><h1></h1></div>

@@ -34,7 +34,7 @@ var dataPropertyName = "virtualMouseBindings",
 	clickBlockList = [],
 	blockMouseTriggers = false,
 	blockTouchTriggers = false,
-	eventCaptureSupported = $.support.eventCapture,
+	eventCaptureSupported = "addEventListener" in document,
 	$document = $( document ),
 	nextTouchID = 1,
 	lastTouchID = 0;
@@ -72,6 +72,12 @@ function createVirtualEvent( event, eventType ) {
 			prop = props[ --i ];
 			event[ prop ] = oe[ prop ];
 		}
+	}
+
+	// make sure that if the mouse and click virtual events are generated
+	// without a .which one is defined
+	if ( t.search(/mouse(down|up)|click/) > -1 && !event.which ){
+		event.which = 1;
 	}
 
 	if ( t.search(/^touch/) !== -1 ) {

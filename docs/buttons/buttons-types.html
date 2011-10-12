@@ -16,18 +16,28 @@
 <div data-role="page" class="type-interior">
 
 	<div data-role="header" data-theme="f">
-		<h1>Button markup options</h1>
+		<h1>Button basics</h1>
 		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
 	<div data-role="content">
 		<div class="content-primary">
-	
-	<p>Buttons that are used for navigation should be coded as anchor links, and those that submit forms as <code>button</code> elements &mdash; each will be styled identically by the framework.</p>
+		
+		 <h2>Button basics</h2>		
+		
+         <ul data-role="controlgroup" data-type="horizontal" class="localnav">
+				<li><a href="buttons-types.html" data-role="button" data-transition="fade" class="ui-btn-active">Basics</a></li>
+				<li><a href="buttons-options.html" data-role="button" data-transition="fade">Options</a></li>
+				<li><a href="buttons-methods.html" data-role="button" data-transition="fade">Methods</a></li>
+				<li><a href="buttons-events.html" data-role="button" data-transition="fade">Events</a></li>
+			</ul>	
+			
+			
+   <p>Buttons are coded with standard HTML anchor and input elements, then enhanced by jQuery Mobile to make them more attractive and useable on a mobile device.  Use anchor links (<code>a</code> elements) to mark up navigation buttons, and <code>input</code> or <code>button</code> elements for form submission.</p>
 	
 		<h2>Styling links as buttons</h2>
 
-		<p>In the main content block of a page, you can style any anchor link as a button by adding the <code> data-role="button"</code> to the link. The framework will add all necessary classes to style the link as a button. For example, this markup: </p>
+		<p>In the main content block of a page, you can style any anchor link as a button by adding the <code>data-role="button"</code> attribute. The framework will enhance the link with markup and classes to style the link as a button. For example, this markup: </p>
 
 <code>
 &lt;a href=&quot;index.html&quot; data-role=&quot;button&quot;&gt;Link button&lt;/a&gt;
@@ -37,9 +47,8 @@
 		<a href="index.html" data-role="button">Link button</a>
 		
 		<h2>Form buttons</h2>
-		<p>For ease of styling, the framework automatically converts any <code>button</code> element or <code>input</code> with a <code>type</code> of <code>submit</code>, <code>reset</code>, <code>button</code>, or <code>image</code> into a custom styled link-based button &mdash; there is no need to add the <code> data-role="button"</code> attribute. </p>
-		<p>The original form-based button is hidden, but remains in the markup.  When a click event fires on a link button, it triggers a click on the original form button.</p>
-
+		<p>For ease of styling, the framework automatically converts any <code>button</code> or <code>input</code> element with a <code>type</code> of <code>submit</code>, <code>reset</code>, <code>button</code>, or <code>image</code> into a custom styled, link-based button &mdash; there is no need to add the <code> data-role="button"</code> attribute. </p>
+		<p>To preserve events bound to the original <code>button</code> or <code>input</code>, the framework hides the original element by making it transparent and positioning it over the new button markup.  When a user clicks on the the custom-styled button, they're actually clicking on the original element.</p>
 
 		<p><strong>Button</strong> based button:</p>
 		<button>Button element</button>
@@ -60,19 +69,17 @@
 	
 	<div class="content-secondary">
 		
-		<div data-role="collapsible" data-collapsed="true" data-theme="b">
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
 			
 				<h3>More in this section</h3>
 				
-				<ul data-role="listview" data-theme="c" data-dividertheme="d">
-				
+				<ul data-role="listview" data-theme="c" data-dividertheme="d">				
 					<li data-role="list-divider">Buttons</li>
-					<li data-theme="a"><a href="buttons-types.html">Button markup options</a></li>
+					<li data-theme="a"><a href="buttons-types.html">Button basics</a></li>
 					<li><a href="buttons-icons.html">Button icons</a></li>
 					<li><a href="buttons-inline.html">Inline buttons</a></li>
 					<li><a href="buttons-grouped.html">Grouped buttons</a></li>
-					<li><a href="buttons-themes.html">Theming buttons</a></li>
-	
+					<li><a href="buttons-themes.html">Theming buttons</a></li>	
 				</ul>
 		</div>
 	</div>		

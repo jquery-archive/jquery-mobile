@@ -155,10 +155,48 @@
 		$( "#onchange" ).slider( "refresh", 50 );
 		equals(onChangeCnt, 1, "onChange should have been called once");
 	});
-	
-	
+
 	test( "slider controls will create when inside a container that receives a 'create' event", function(){
 		ok( !$("#enhancetest").appendTo(".ui-page-active").find(".ui-slider").length, "did not have enhancements applied" );
 		ok( $("#enhancetest").trigger("create").find(".ui-slider").length, "enhancements applied" );
+	});
+	
+	test( "toggle switch should fire one change event when clicked", function(){
+		var control = $( "#slider-switch" ),
+			widget = control.data( "slider" ),
+			slider = widget.slider,
+			handle = widget.handle,
+			changeCount = 0,
+			changeFunc = function( e ) {
+				ok( control[0].selectedIndex !== currentValue, "change event should only be triggered if the value changes");
+				++changeCount;
+			},
+			event = null,
+			offset = handle.offset(),
+			currentValue = control[0].selectedIndex;
+
+		function createEvent( name, target, x, y )
+		{
+			var event = $.Event( name );
+			event.target = target;
+			event.pageX = x;
+			event.pageY = y;
+			return event;
+		}
+
+		control.bind( "change", changeFunc );
+
+		// The toggle switch actually updates on mousedown and mouseup events, so we go through
+		// the motions of generating all the events that happen during a click to make sure that
+		// during all of those events, the value only changes once.
+
+		slider.trigger( createEvent( "mousedown", handle[ 0 ], offset.left + 10, offset.top + 10 ) );
+		slider.trigger( createEvent( "mouseup", handle[ 0 ], offset.left + 10, offset.top + 10 ) );
+		slider.trigger( createEvent( "click", handle[ 0 ], offset.left + 10, offset.top + 10 ) );
+
+		control.unbind( "change", changeFunc );
+
+		ok( control[0].selectedIndex !== currentValue, "value did change");
+		same( changeCount, 1, "change event should be fired once during a click" );
 	});
 })(jQuery);

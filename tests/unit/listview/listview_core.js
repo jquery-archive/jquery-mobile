@@ -730,4 +730,25 @@
 			}
 		]);
 	});
+
+	asyncTest( "embedded listview page with nested pages is not removed from the dom", function() {
+		$.testHelper.pageSequence([
+			function() {
+				// open the nested list page
+				same( $("div#nested-list-test").length, 1 );
+				$( "a#nested-list-test-anchor" ).click();
+			},
+
+			function() {
+				// go back to the origin page
+				window.history.back();
+			},
+
+			function() {
+				// make sure the page is still in place
+				same( $("div#nested-list-test").length, 1 );
+				start();
+			}
+		]);
+	});
 })(jQuery);

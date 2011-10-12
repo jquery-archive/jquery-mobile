@@ -55,7 +55,6 @@
 		});
 
 		$('#qunit-fixture').trigger(events[0]);
-		stop();
 	});
 
 	asyncTest( "defined event functions trigger the event with no arguments", function(){
@@ -67,7 +66,6 @@
 		});
 
 		$('#qunit-fixture').touchstart();
-		stop();
 	});
 
 	test( "defining event functions sets the attrFn to true", function(){
@@ -527,5 +525,24 @@
 			.trigger( "resize" )
 			.trigger( "resize" )
 			.trigger( "resize" );
+	});
+
+	asyncTest( "mousedown mouseup and click events should add a which when its not defined", function() {
+		var whichDefined = function( event ){
+			same(event.which, 1);
+		};
+
+		$( document ).bind( "vclick", whichDefined);
+		$( document ).trigger( "click" );
+
+		$( document ).bind( "vmousedown", whichDefined);
+		$( document ).trigger( "mousedown" );
+
+		$( document ).bind( "vmouseup", function( event ){
+			same(event.which, 1);
+			start();
+		});
+
+		$( document ).trigger( "mouseup" );
 	});
 })(jQuery);

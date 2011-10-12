@@ -16,6 +16,8 @@
 
 	<script src="core.js"></script>
 	<script src="core_scroll.js"></script>
+
+	<script src="../swarminject.js"></script>
 </head>
 <body>
 
@@ -28,5 +30,11 @@
 <div  data-nstest-role="page">
 </div>
 
+<div id="qunit-fixtures">
+  <div id="parent"></div>
+  <div id="dependent"></div>
+  <div id="encoded">foo&gt;</div>
+  <div id="unencoded"><script>foo</script></div>
+</div>
 </body>
 </html>

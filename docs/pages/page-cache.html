@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<title>jQuery Mobile Docs - Prefetching &amp; caching pages</title> 
-	<link rel="stylesheet" media="only all" href="../../themes/default/" />  
+	<link rel="stylesheet"  href="../../themes/default/" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 	<script src="../../js/jquery.js"></script>
 	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
@@ -39,7 +39,7 @@
 		  <p>Alternatively, you can prefetch a page programmatically using <code>$.mobile.loadPage()</code>:</p>
 
 <pre><code>
-$.mobile.loadPage( <var>pageUrl</var> );
+$.mobile.loadPage( <var>pageUrl</var>, { showLoadMsg: false } );
 </code></pre>
 			
 			<p>Another advantage of prefetching a page is that the user doesn't see the Ajax loading message when visiting the prefetched page. The Ajax loading message only appears if the framework hasn't finished prefetching the page by the time the link is followed.</p> 
@@ -85,7 +85,7 @@ $.mobile.page.prototype.options.domCache = true;
 
 				<div class="content-secondary">
 
-					<div data-role="collapsible" data-collapsed="true" data-theme="b">
+					<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
 
 							<h3>More in this section</h3>
 
@@ -100,7 +100,8 @@ $.mobile.page.prototype.options.domCache = true;
 								<li><a href="page-transitions.html" data-ajax="false">Page transitions</a></li>
 								<li><a href="page-dialogs.html">Dialogs</a></li>
 								<li data-theme="a"><a href="page-cache.html">Prefetching &amp; caching pages</a></li>
-								<li><a href="page-navmodel.html">Ajax, hashes &amp; history</a></li></li>
+								<li><a href="page-navmodel.html">Ajax, hashes &amp; history</a></li>
+								<li><a href="page-dynamic.html">Dynamically Injecting Pages</a></li>
 								<li><a href="page-scripting.html">Scripting pages</a></li>
 								<li><a href="pages-themes.html">Theming pages</a></li>
 

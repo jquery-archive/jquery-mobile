@@ -22,161 +22,20 @@
 
 	<div data-role="content">
 		<div class="content-primary">
-		<h2>Form methods reference</h2>
-		<p>After jQuery Mobile auto-enhances form controls into custom controls, you can manipulate many of their properties via plugin methods. The currently available methods are listed below. Check Github for updates - we're working on complete coverage.</p>
 		
-		<h2>Selectmenu</h2>
-		<dl>
-			<dt><code>open</code> open a closed select menu</dt>
-			<dd>
-			<pre><code>
-$('select').selectmenu('open');			
-			</code></pre>
-			</dd>
-			
-			<dt><code>close</code> close an open select menu</dt>
-			<dd>
-			<pre><code>
-$('select').selectmenu('close');			
-			</code></pre>
-			</dd>
-			
-			<dt><code>refresh</code>: Update the custom menu to reflect the native select element's value. </dt>
-			<dd><p>If the number of options in the select are different than the number of items in the custom menu, it'll rebuild the custom menu. Also, if you pass a true argument you can force the rebuild to happen.</p>
-			<pre><code>
-//refresh value			
-$('select').selectmenu('refresh');
-
-//refresh and force rebuild
-$('select').selectmenu('refresh', true);
-			</code></pre>
-			</dd>
-			
-			<dt><code>enable</code>: enable a disabled select.</dt>
-			<dd>
-			<pre><code>
-$('select').selectmenu('enable');			
-			</code></pre>
-			</dd>
-			
-			<dt><code>disable</code>: disable a select.</dt>
-			<dd>
-			<pre><code>
-$('select').selectmenu('disable');			
-			</code></pre>
-			</dd>
-			
-		</dl>	
+		<div class="ui-body ui-body-e">
+		    <h4>We've retired this page.</h4>
+		    
+		    <p>Plugin events and methods are now documented separately for each component (see links on the left).</p>
+		</div>
 		
-		
-		
-		
-		
-		
-		<h2>Textinput</h2>
-
-		<dl>
-			<dt><code>enable</code>: enable a disabled textinput/textarea.</dt>
-			<dd>
-			<pre><code>
-$('input').textinput('enable');			
-			</code></pre>
-			</dd>
-			
-			<dt><code>disable</code>: disable a textinput/textarea.</dt>
-			<dd>
-			<pre><code>
-$('textarea').textinput('disable');			
-			</code></pre>
-			</dd>
-			
-		</dl>	
-		
-		
-		
-		
-				
-		<h2>checkboxradio</h2>
-
-		<dl>
-			<dt><code>enable</code>: enable a disabled checkboxradio.</dt>
-			<dd>
-			<pre><code>
-$('input').checkboxradio('enable');			
-			</code></pre>
-			</dd>
-			
-			<dt><code>disable</code>: disable a checkboxradio.</dt>
-			<dd>
-			<pre><code>
-$('input').checkboxradio('disable');			
-			</code></pre>
-			</dd>
-			
-			<dt><code>refresh</code>: refresh a checkboxradio's value.</dt>
-			<dd>
-			<pre><code>
-$('input').checkboxradio('refresh');			
-			</code></pre>
-			</dd>
-		</dl>	
-		
-		
-		<h2>Slider</h2>		
-
-		<dl>
-			<dt><code>enable</code>: enable a disabled slider.</dt>
-			<dd>
-			<pre><code>
-$('input').slider('enable');			
-			</code></pre>
-			</dd>
-			
-			<dt><code>disable</code>: disable a slider.</dt>
-			<dd>
-			<pre><code>
-$('input').slider('disable');			
-			</code></pre>
-			</dd>
-			
-			<dt><code>refresh</code>: refresh a slider's value.</dt>
-			<dd>
-			<pre><code>
-$('input').slider('refresh');			
-			</code></pre>
-			</dd>
-		</dl>
-		
-		
-		<h2>Form buttons</h2>	
-
-		<dl>
-			<dt><code>enable</code>: enable a disabled button.</dt>
-			<dd>
-			<pre><code>
-$('input').button('enable');			
-			</code></pre>
-			</dd>
-			
-			<dt><code>disable</code>: disable a slider.</dt>
-			<dd>
-			<pre><code>
-$('input').button('disable');			
-			</code></pre>
-			</dd>
-
-		</dl>	
-		
-		<h2>Degraded Form Input Types</h2>
-		<p>jQuery Mobile degrades several HTML5 input types back to type=text, or type=number after adding enhanced controls. For example, inputs with a type of range are enhanced with a custom slider control, and their type is set to number to offer a usable form input alongside that slider. Inputs with a type of search are degraded back to type=text after we add our own themable search input styling.</p>
-		<p>The page plugin contains a list of input types that are set to either true which means they'll degrade to type=text, false which means they'll be left alone, or a string such as "number", which means they'll be converted to that type (such as the case of type=range).</p>
-		
-		<p>You can configure which types are changed via the page plugin's <code>degradeInputs</code> option, which can be manipulated externally via <code>$.mobile.page.prototype.options.degradeInputs</code>, which has properties: color, date, datetime, "datetime-local", email, month, number, range, search, tel, time, url, and week. Be sure to configure this inside an event handler bound to the <code>mobileinit</code> event, so that it applies to the first page as well as subsequent pages that are loaded.</p>				
+		    
+						
 		</div><!--/content-primary -->		
 
 		<div class="content-secondary">
 
-			<div data-role="collapsible" data-collapsed="true" data-theme="b">
+			<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
 
 					<h3>More in this section</h3>
 
@@ -185,18 +44,16 @@ $('input').button('disable');
 						<li data-role="list-divider">Form elements</li>
 						<li><a href="docs-forms.html">Form basics</a></li>
 						<li><a href="forms-all.html">Form element gallery</a></li>
-            <li><a href="texts/index.html">Text inputs</a></li>
-						<li><a href="forms-search.html">Search inputs</a></li>
-						<li><a href="forms-slider.html">Slider</a></li>
-						<li><a href="forms-switch.html">Flip toggle switch</a></li>
-						<li><a href="radiobuttons/index.html">Radio buttons</a></li>
-						<li><a href="checkboxes/index.html">Checkboxes</a></li>
-						<li><a href="selects/index.html">Select menus</a></li>
+                  <li><a href="textinputs/">Text inputs</a></li>
+						<li><a href="search/">Search inputs</a></li>
+						<li><a href="slider/">Slider</a></li>
+						<li><a href="switch/">Flip toggle switch</a></li>
+						<li><a href="radiobuttons/">Radio buttons</a></li>
+						<li><a href="checkboxes/">Checkboxes</a></li>
+						<li><a href="selects/">Select menus</a></li>
 						<li><a href="forms-themes.html">Theming forms</a></li>
 						<li><a href="forms-all-native.html">Native form elements</a></li>
 						<li><a href="forms-sample.html">Submitting forms</a></li>
-						<li data-theme="a"><a href="plugin-eventsmethods.html">Plugin methods</a></li>
-
 					</ul>
 			</div>
 		</div>		

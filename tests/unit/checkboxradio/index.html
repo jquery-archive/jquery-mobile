@@ -10,11 +10,13 @@
 	<script src="../../../js/"></script>
 	<script src="../../../tests/jquery.testHelper.js"></script>
 
-	<link rel="stylesheet" href="../../../themes/default/"/>
+	<link rel="stylesheet"  href="../../../themes/default/"/>
 	<link rel="stylesheet" href="../../../external/qunit.css"/>
 	<script src="../../../external/qunit.js"></script>
 
 	<script src="checkboxradio_core.js"></script>
+
+	<script src="../swarminject.js"></script>
 </head>
 <body>
 
@@ -73,10 +75,13 @@
 	</fieldset>
 </div>
 
-
-
-
-
+<div data-role="fieldcontain">
+	<fieldset data-role="controlgroup">
+		<legend>Agree to the terms:</legend>
+		<input type="checkbox" name="checkbox-1" id="checkbox-1" class="should-be-native" />
+		<label for="checkbox-1">I agree</label>
+	</fieldset>
+</div>
 
 </div>
 

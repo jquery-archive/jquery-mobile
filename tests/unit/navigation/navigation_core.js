@@ -8,7 +8,7 @@
 		siteDirectory = location.pathname.replace( /[^/]+$/, "" ),
 		home = $.mobile.path.parseUrl(location.pathname).directory,
 		navigateTestRoot = function(){
-			$.testHelper.openPage( "#" + location.pathname );
+			$.testHelper.openPage( "#" + location.pathname + location.search );
 		};
 
 	module('jquery.mobile.navigation.js', {
@@ -21,7 +21,7 @@
 
 				stop();
 
-				$(document).one( "changepage", function() {
+				$(document).one( "pagechange", function() {
 					start();
 				});
 
@@ -40,7 +40,38 @@
 
 			$.mobile.urlHistory.stack = [];
 			$.mobile.urlHistory.activeIndex = 0;
+			$.Event.prototype.which = undefined;
 		}
+	});
+
+	asyncTest( "window.history.back() from external to internal page", function(){
+
+		$.testHelper.pageSequence([
+
+			// open our test page
+			function(){
+				$.testHelper.openPage("#active-state-page1");
+			},
+
+			function(){
+				ok( $.mobile.activePage[0] === $( "#active-state-page1" )[ 0 ], "successful navigation to internal page." );
+
+				//location.hash = siteDirectory + "external.html";
+				$.mobile.changePage("external.html");
+			},
+
+			function(){
+				ok( $.mobile.activePage[0] !== $( "#active-state-page1" )[ 0 ], "successful navigation to external page." );
+
+				window.history.back();
+			},
+
+			function(){
+				ok( $.mobile.activePage[0] === $( "#active-state-page1" )[ 0 ], "successful navigation back to internal page." );
+
+				start();
+			}
+		]);
 	});
 
 	asyncTest( "external page is removed from the DOM after pagehide", function(){
@@ -60,6 +91,56 @@
 			// external-test is *NOT* cached in the dom after transitioning away
 			function(){
 				same( $( "#external-test" ).length, 0 );
+				start();
+			}
+		]);
+	});
+
+	asyncTest( "preventDefault on pageremove event can prevent external page from being removed from the DOM", function(){
+		var preventRemoval = true,
+			removeCallback = function( e ) {
+				if ( preventRemoval ) {
+					e.preventDefault();
+				}
+			};
+
+		$( document ).bind( "pageremove", removeCallback );
+
+		$.testHelper.pageSequence([
+			navigateTestRoot,
+
+			function(){
+				$.mobile.changePage( "external.html" );
+			},
+
+			// page is pulled and displayed in the dom
+			function(){
+				same( $( "#external-test" ).length, 1 );
+				window.history.back();
+			},
+
+			// external-test *IS* cached in the dom after transitioning away
+			function(){
+				same( $( "#external-test" ).length, 1 );
+
+				// Switch back to the page again!
+				$.mobile.changePage( "external.html" );
+			},
+
+			// page is still present and displayed in the dom
+			function(){
+				same( $( "#external-test" ).length, 1 );
+
+				// Now turn off our removal prevention.
+				preventRemoval = false;
+
+				window.history.back();
+			},
+
+			// external-test is *NOT* cached in the dom after transitioning away
+			function(){
+				same( $( "#external-test" ).length, 0 );
+				$( document ).unbind( "pageremove", removeCallback );
 				start();
 			}
 		]);
@@ -110,37 +191,40 @@
 				start();
 			}]);
 	});
-	
+
 	asyncTest( "page last scroll distance is remembered while navigating to and from pages", function(){
 		$.testHelper.pageSequence([
-			navigateTestRoot,
-			
 			function(){
 				$( "body" ).height( $( window ).height() + 500 );
+				$.mobile.changePage( "external.html" );
 			},
 
 			function(){
-				$.mobile.changePage( "external.html" );
+				// wait for the initial scroll to 0
+				setTimeout( function() {
+					window.scrollTo( 0, 300 );
+					same( $(window).scrollTop(), 300, "scrollTop is 300 after setting it" );
+				}, 300);
+
+				// wait for the scrollstop to fire and for the scroll to be
+				// recorded 100 ms afterward (see changes made to handle hash
+				// scrolling in some browsers)
+				setTimeout( navigateTestRoot, 500 );
 			},
-			
+
 			function(){
-				window.scrollTo( 0, 300 );
+				history.back();
 			},
-			
-			navigateTestRoot,
-			
+
 			function(){
-				$.mobile.changePage( "external.html" );
-			},
-			
-			function(){
-				same( $(window).scrollTop(), 300 );
-				$( "body" ).height( "" );
-				start();
+				// Give the silentScroll function some time to kick in.
+				setTimeout(function() {
+					same( $(window).scrollTop(), 300, "scrollTop is 300 after returning to the page" );
+					$( "body" ).height( "" );
+					start();
+				}, 300 );
 			}
-			
-		]);	
-		
+		]);
 	});
 
 	asyncTest( "forms with data attribute ajax set to false will not call changePage", function(){
@@ -166,7 +250,7 @@
 			}], 1000);
 	});
 
-	asyncTest( "forms with data attribute ajax not set or set to anything but false will call changepage", function(){
+	asyncTest( "forms with data attribute ajax not set or set to anything but false will call changePage", function(){
 		var called = 0,
 				newChangePage = function(){
 					called++;
@@ -311,7 +395,7 @@
 			function(){ $("#dup-history-second a:first").click(); },
 			function(){ $("#dup-history-first a").click(); },
 			function(){ $("#dup-history-second a:last").click(); },
-			function(){ $("#dup-history-dialog :jqmData(rel=back)").click(); },
+			function(){ $("#dup-history-dialog a:contains('Close')").click(); },
 			function(){
 
 				// fourth page (third index) in the stack to account for first page being hash manipulation,
@@ -724,8 +808,72 @@
 		]);
 	});
 
-	asyncTest( "handling of button active state when navigating by clicking back button", 1, function(){
+	// issue 2444 https://github.com/jquery/jquery-mobile/issues/2444
+	// results from preventing spurious hash changes
+	asyncTest( "dialog should return to its parent page when open and closed multiple times", function() {
+		$.testHelper.pageSequence([
+			// open our test page
+			function(){
+				$.testHelper.openPage("#default-trans-dialog");
+			},
 
+			function(){
+				$.mobile.activePage.find( "a" ).click();
+			},
+
+			function(){
+				window.history.back();
+			},
+
+			function(){
+				same( $.mobile.activePage[0], $( "#default-trans-dialog" )[0] );
+				$.mobile.activePage.find( "a" ).click();
+			},
+
+			function(){
+				window.history.back();
+			},
+
+			function(){
+				same( $.mobile.activePage[0], $( "#default-trans-dialog" )[0] );
+				start();
+			}
+		]);
+	});
+
+	asyncTest( "clicks with middle mouse button are ignored", function() {
+		$.testHelper.pageSequence([
+			function() {
+				$.testHelper.openPage( "#odd-clicks-page" );
+			},
+
+			function() {
+				$( "#right-or-middle-click" ).click();
+			},
+
+			// make sure the page is opening first without the mocked button click value
+			// only necessary to prevent issues with test specific fixtures
+			function() {
+				same($.mobile.activePage[0], $("#odd-clicks-page-dest")[0]);
+				$.testHelper.openPage( "#odd-clicks-page" );
+
+				// mock the which value to simulate a middle click
+				$.Event.prototype.which = 2;
+			},
+
+			function() {
+				$( "#right-or-middle-click" ).click();
+			},
+
+			function( timeout ) {
+				ok( timeout, "page event handler timed out due to ignored click" );
+				ok($.mobile.activePage[0] !== $("#odd-clicks-page-dest")[0], "pages are not the same");
+				start();
+			}
+		]);
+	});
+
+	asyncTest( "handling of button active state when navigating by clicking back button", 1, function(){
 		$.testHelper.pageSequence([
 			// open our test page
 			function(){
@@ -746,6 +894,85 @@
 
 			function(){
 				ok(!$("#active-state-page2 a").hasClass( $.mobile.activeBtnClass ), "No button should not have class " + $.mobile.activeBtnClass );
+				start();
+			}
+		]);
+	});
+
+	asyncTest( "can navigate to dynamically injected page with dynamically injected link", function(){
+		$.testHelper.pageSequence([
+			// open our test page
+			function(){
+				$.testHelper.openPage("#inject-links-page");
+			},
+
+			function(){
+				var $ilpage = $( "#inject-links-page" ),
+					$link = $( "<a href='#injected-test-page'>injected-test-page link</a>" );
+
+				// Make sure we actually navigated to the expected page.
+				ok( $.mobile.activePage[ 0 ] == $ilpage[ 0 ], "navigated successfully to #inject-links-page" );
+
+				// Now dynamically insert a page.
+				$ilpage.parent().append( "<div data-role='page' id='injected-test-page'>testing...</div>" );
+
+				// Now inject a link to this page dynamically and attempt to navigate
+				// to the page we just inserted.
+				$link.appendTo( $ilpage ).click();
+			},
+
+			function(){
+				// Make sure we actually navigated to the expected page.
+				ok( $.mobile.activePage[ 0 ] == $( "#injected-test-page" )[ 0 ], "navigated successfully to #injected-test-page" );
+
+				start();
+			}
+		]);
+	});
+
+	asyncTest( "prefetched links with data rel dialog result in a dialog", function() {
+		$.testHelper.pageSequence([
+			// open our test page
+			function(){
+				// Navigate to any page except the first page of the application.
+				$.testHelper.openPage("#prefetched-dialog-page");
+			},
+
+			function() {
+				$("#prefetched-dialog-link").click();
+			},
+
+			function() {
+				ok( $.mobile.activePage.is(".ui-dialog"), "prefetched page is rendered as a dialog" );
+        start();
+			}
+		]);
+	});
+
+
+	asyncTest( "application url with dialogHashKey loads application's first page", function(){
+		$.testHelper.pageSequence([
+			// open our test page
+			function(){
+				// Navigate to any page except the first page of the application.
+				$.testHelper.openPage("#foo");
+			},
+
+			function(){
+				ok( $.mobile.activePage[ 0 ] === $( "#foo" )[ 0 ], "navigated successfully to #foo" );
+
+				// Now navigate to an hash that contains just a dialogHashKey.
+				$.mobile.changePage("#" + $.mobile.dialogHashKey);
+			},
+
+			function(){
+				// Make sure we actually navigated to the first page.
+				ok( $.mobile.activePage[ 0 ] === $.mobile.firstPage[ 0 ], "navigated successfully to first-page" );
+
+				// Now make sure opening the page didn't result in page duplication.
+				ok( $.mobile.firstPage.hasClass( "first-page" ), "first page has expected class" );
+				same( $( ".first-page" ).length, 1, "first page was not duplicated" );
+
 				start();
 			}
 		]);

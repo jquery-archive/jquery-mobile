@@ -10,12 +10,15 @@
 	<script src="../../../external/qunit.js"></script>
 	<script src="../../../tests/jquery.testHelper.js"></script>
 	<script src="../../../js"></script>
-  <script src="select_native.js"></script>
 	<script src="select_events.js"></script>
+	<script src="select_native.js"></script>
+	<script src="select_cached.js"></script>
 	<script src="select_core.js"></script>
 
-	<link rel="stylesheet" href="../../../themes/default/"/>
+	<link rel="stylesheet"  href="../../../themes/default/"/>
 	<link rel="stylesheet" href="../../../external/qunit.css"/>
+
+	<script src="../swarminject.js"></script>
 </head>
 <body>
 
@@ -25,7 +28,7 @@
 <ol id="qunit-tests">
 </ol>
 
-<div id="default"  data-nstest-role="page">
+<div id="default"  data-nstest-role="page" data-nstest-theme="c">
 	<div  data-nstest-role="fieldcontain" id="select-choice-few-container">
 		<select name="select-choice-few" id="select-choice-few" data-nstest-native-menu="false">
 			<option value="standard">Standard: 7 day</option>
@@ -321,8 +324,36 @@
 			<option value="long">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</option>
 	    </select>
 	</div>
-</div>
 
+  <select name="native-refresh" id="native-refresh">
+    <option value="-1">default</option>
+    <option value="-1">other</option>
+  </select>
+
+  <select name="custom-refresh" id="custom-refresh" data-nstest-native-menu="false">
+    <option value="-1">default</option>
+  </select>
+
+  <select name="custom-refresh-opts-list" id="custom-refresh-opts-list" data-nstest-native-menu="false">
+    <option value="-1">default</option>
+  </select>
+
+  <select name="non-parent-themed" id="non-parent-themed" data-nstest-native-menu="false" data-nstest-theme="a">
+    <option value="-1">default</option>
+  </select>
+
+  <select name="parent-themed" id="parent-themed" data-nstest-native-menu="false">
+    <option value="-1">default</option>
+  </select>
+
+  <select name="encoded-option" id="encoded-option" data-nstest-native-menu="false">
+    <option>&lt;script&gt;window.encodedValueIsDefined = true;&lt;/script&gt;</option>
+  </select>
+
+  <select name="keep-native" id="keep-native" class="should-be-native">
+    <option></option>
+  </select>
+</div>
 
 
 <div id="enhancetest">
@@ -333,5 +364,6 @@
 		<option value="overnight">Overnight</option>
 	</select>
 </div>
+
 </body>
 </html>

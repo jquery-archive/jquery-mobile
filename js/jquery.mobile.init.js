@@ -60,15 +60,6 @@
 			$html.removeClass( "ui-loading" );
 		},
 
-		// XXX: deprecate for 1.0
-		pageLoading: function ( done ) {
-			if ( done ) {
-				$.mobile.hidePageLoadingMsg();
-			} else {
-				$.mobile.showPageLoadingMsg();
-			}
-		},
-
 		// find and enhance the pages in the dom and transition to the first page.
 		initializePage: function() {
 			// find present pages
@@ -95,6 +86,10 @@
 			// define page container
 			$.mobile.pageContainer = $pages.first().parent().addClass( "ui-mobile-viewport" );
 
+			// alert listeners that the pagecontainer has been determined for binding
+			// to events triggered on it
+			$window.trigger( "pagecontainercreate" );
+
 			// cue page loading message
 			$.mobile.showPageLoadingMsg();
 
@@ -108,6 +103,24 @@
 			}
 		}
 	});
+	
+	// This function injects a meta viewport tag to prevent scaling. Off by default, on by default when touchOverflow scrolling is enabled
+	function disableZoom() {
+		var cont = "user-scalable=no",
+			meta = $( "meta[name='viewport']" );
+			
+		if( meta.length ){
+			meta.attr( "content", meta.attr( "content" ) + ", " + cont );
+		}
+		else{
+			$( "head" ).prepend( "<meta>", { "name": "viewport", "content": cont } );
+		}
+	}
+	
+	// if touch-overflow is enabled, disable user scaling, as it creates usability issues
+	if( $.support.touchOverflow && $.mobile.touchOverflowEnabled && !$.mobile.touchOverflowZoomEnabled ){
+		disableZoom();
+	}
 
 	// initialize events now, after mobileinit has occurred
 	$.mobile._registerInternalEvents();

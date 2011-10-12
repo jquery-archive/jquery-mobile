@@ -13,13 +13,13 @@
 			label = widget.label,
 			thisPage = widget.select.closest( ".ui-page" ),
 			screen = $( "<div>", {"class": "ui-selectmenu-screen ui-screen-hidden"} ).appendTo( thisPage ),
-			selectOptions = widget.select.find("option"),
+			selectOptions = widget._selectOptions(),
 			isMultiple = widget.isMultiple = widget.select[ 0 ].multiple,
 			buttonId = selectID + "-button",
 			menuId = selectID + "-menu",
 			menuPage = $( "<div data-" + $.mobile.ns + "role='dialog' data-" +$.mobile.ns + "theme='"+ widget.options.menuPageTheme +"'>" +
 				"<div data-" + $.mobile.ns + "role='header'>" +
-				"<div class='ui-title'>" + label.text() + "</div>"+
+				"<div class='ui-title'>" + label.getEncodedText() + "</div>"+
 				"</div>"+
 				"<div data-" + $.mobile.ns + "role='content'></div>"+
 				"</div>" ).appendTo( $.mobile.pageContainer ).page(),
@@ -108,7 +108,7 @@
 						// index of option tag to be selected
 						var oldIndex = self.select[ 0 ].selectedIndex,
 							newIndex = self.list.find( "li:not(.ui-li-divider)" ).index( this ),
-							option = self.selectOptions.eq( newIndex )[ 0 ];
+							option = self._selectOptions().eq( newIndex )[ 0 ];
 
 						// toggle selected status on the tag for multi selects
 						option.selected = self.isMultiple ? !option.selected : true;
@@ -186,6 +186,20 @@
 				self.menuPage.bind( "pagehide", function() {
 					self.list.appendTo( self.listbox );
 					self._focusButton();
+
+					// TODO centralize page removal binding / handling in the page plugin.
+					// Suggestion from @jblas to do refcounting
+					//
+					// TODO extremely confusing dependency on the open method where the pagehide.remove
+					// bindings are stripped to prevent the parent page from disappearing. The way
+					// we're keeping pages in the DOM right now sucks
+					//
+					// rebind the page remove that was unbound in the open function
+					// to allow for the parent page removal from actions other than the use
+					// of a dialog sized custom select
+					//
+					// doing this here provides for the back button on the custom select dialog
+					$.mobile._bindPageRemove.call( self.thisPage );
 				});
 
 				// Events on "screen" overlay
@@ -200,18 +214,32 @@
 						return false;
 					}
 				});
+
+				// track this dependency so that when the parent page
+				// is removed on pagehide it will also remove the menupage
+				self.thisPage.addDependents( this.menuPage );
 			},
 
-			refresh: function( forceRebuild ){
+			_isRebuildRequired: function() {
+				var list = this.list.find( "li" ),
+					options = this._selectOptions();
+
+				// TODO exceedingly naive method to determine difference
+				// ignores value changes etc in favor of a forcedRebuild
+				// from the user in the refresh method
+				return options.text() !== list.text();
+			},
+
+			refresh: function( forceRebuild , foo ){
 				var self = this,
 				select = this.element,
 				isMultiple = this.isMultiple,
-				options = this.selectOptions = select.find( "option" ),
+				options = this._selectOptions(),
 				selected = this.selected(),
 				// return an array of all selected index's
 				indicies = this.selectedIndices();
 
-				if (  forceRebuild || select[0].options.length != self.list.find( "li" ).length ) {
+				if (  forceRebuild || this._isRebuildRequired() ) {
 					self._buildList();
 				}
 
@@ -247,18 +275,6 @@
 				var self = this;
 
 				if ( self.menuType == "page" ) {
-					// TODO centralize page removal binding / handling in the page plugin.
-					// Suggestion from @jblas to do refcounting
-					//
-					// rebind the page remove that was unbound in the open function
-					// to allow for the parent page removal from actions other than the use
-					// of a dialog sized custom select
-					if( !self.thisPage.data("page").options.domCache ){
-						self.thisPage.bind( "pagehide.remove", function() {
-							$(self).remove();
-						});
-					}
-
 					// doesn't solve the possible issue with calling change page
 					// where the objects don't define data urls which prevents dialog key
 					// stripping - changePage has incoming refactor
@@ -282,7 +298,10 @@
 				var self = this,
 					menuHeight = self.list.parent().outerHeight(),
 					menuWidth = self.list.parent().outerWidth(),
-					scrollTop = $( window ).scrollTop(),
+					activePage = $( ".ui-page-active" ),
+					tOverflow = $.support.touchOverflow && $.mobile.touchOverflowEnabled,
+					tScrollElem = activePage.is( ".ui-native-fixed" ) ? activePage.find( ".ui-content" ) : activePage;
+					scrollTop = tOverflow ? tScrollElem.scrollTop() : $( window ).scrollTop(),
 					btnOffset = self.button.offset().top,
 					screenHeight = window.innerHeight,
 					screenWidth = window.innerWidth;
@@ -395,7 +414,7 @@
 				self.select.find( "option" ).each( function( i ) {
 					var $this = $( this ),
 						$parent = $this.parent(),
-						text = $this.text(),
+						text = $this.getEncodedText(),
 						anchor = "<a href='#'>"+ text +"</a>",
 						classes = [],
 						extraAttrs = [];

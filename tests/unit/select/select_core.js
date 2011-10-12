@@ -6,6 +6,7 @@
 	var libName = "jquery.mobile.forms.select.js",
 		originalDefaultDialogTrans = $.mobile.defaultDialogTransition,
 		originalDefTransitionHandler = $.mobile.defaultTransitionHandler,
+		originalGetEncodedText = $.fn.getEncodedText,
 		resetHash, closeDialog;
 
 	resetHash = function(timeout){
@@ -20,6 +21,9 @@
 		teardown: function(){
 			$.mobile.defaultDialogTransition = originalDefaultDialogTrans;
 			$.mobile.defaultTransitionHandler = originalDefTransitionHandler;
+
+			$.fn.getEncodedText = originalGetEncodedText;
+			window.encodedValueIsDefined = undefined;
 		}
 	});
 
@@ -253,4 +257,87 @@
 		same( select.selectmenu( 'option', 'disabled' ), false, "disbaled option set" );
 	});
 
+	test( "adding options and refreshing a custom select defaults the text", function() {
+		var select = $( "#custom-refresh" ),
+      button = select.siblings( "a" ).find( ".ui-btn-inner" ),
+      text = "foo";
+
+    same(button.text(), "default");
+    select.find( "option" ).remove(); //remove the loading message
+    select.append('<option value="1">' + text + '</option>');
+    select.selectmenu( 'refresh' );
+		same(button.text(), text);
+	});
+
+	asyncTest( "adding options and refreshing a custom select changes the options list", function(){
+		var select = $( "#custom-refresh-opts-list" ),
+      button = select.siblings( "a" ).find( ".ui-btn-inner" ),
+      text = "foo";
+
+		$.testHelper.sequence([
+			// bring up the dialog
+			function() {
+				button.click();
+			},
+
+			function() {
+				same( $( ".ui-selectmenu.in ul" ).text(), "default" );
+				$( ".ui-selectmenu-screen" ).click();
+			},
+
+			function() {
+				select.find( "option" ).remove(); //remove the loading message
+				select.append('<option value="1">' + text + '</option>');
+				select.selectmenu( 'refresh' );
+			},
+
+			function() {
+				button.click();
+			},
+
+			function() {
+				same( $( ".ui-selectmenu.in ul" ).text(), text );
+				$( ".ui-selectmenu-screen" ).click();
+			},
+
+			start
+		], 500);
+	});
+
+	test( "theme defined on select is used", function(){
+		var select = $("select#non-parent-themed");
+
+		ok( select.siblings( "a" ).hasClass("ui-btn-up-" + select.jqmData('theme')));
+	});
+
+	test( "select without theme defined inherits theme from parent", function() {
+		var select = $("select#parent-themed");
+
+		ok( select
+			.siblings( "a" )
+			.hasClass("ui-btn-up-" + select.parents(":jqmData(role='page')").jqmData('theme')));
+	});
+
+	// issue #2547
+	test( "custom select list item links have encoded option text values", function() {
+		$( "#encoded-option" ).data( 'selectmenu' )._buildList();
+		same(window.encodedValueIsDefined, undefined);
+	});
+
+	// issue #2547
+	test( "custom select list item links have unencoded option text values when using vanilla $.fn.text", function() {
+		// undo our changes, undone in teardown
+		$.fn.getEncodedText = $.fn.text;
+
+		$( "#encoded-option" ).data( 'selectmenu' )._buildList();
+
+		same(window.encodedValueIsDefined, true);
+	});
+
+	$.mobile.page.prototype.options.keepNative = "select.should-be-native";
+
+  // not testing the positive case here since's it's obviously tested elsewhere
+	test( "select elements in the keepNative set shouldn't be enhanced", function() {
+    ok( !$("#keep-native").parent().is("div.ui-btn") );
+	});
 })(jQuery);

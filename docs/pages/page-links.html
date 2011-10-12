@@ -39,7 +39,9 @@
 
 <h2>Linking without Ajax</h2>
 		
-		<p>Links that point to other domains or that have <code>rel="external"</code>, <code>data-ajax="false"</code> or <code>target</code> attributes will not be loaded with Ajax. Instead, these links and will cause a full page refresh with no animated transition. Both attributes have the same effect, but different semanic meaning. <code>rel="external"</code> should be used when linking to another site or domain, while <code>data-ajax="false"</code> is useful for simply opting a page within your domain from being loaded via Ajax. Because of security restrictions, the framework always opts links to external domains out of the Ajax behavior.</p>
+		<p>Links that point to other domains or that have <code>rel="external"</code>, <code>data-ajax="false"</code> or <code>target</code> attributes will not be loaded with Ajax. Instead, these links and will cause a full page refresh with no animated transition. Both attributes have the same effect, but different semantic meaning: <code>rel="external"</code> should be used when linking to another site or domain, while <code>data-ajax="false"</code> is useful for simply opting a page within your domain from being loaded via Ajax. Because of security restrictions, the framework always opts links to external domains out of the Ajax behavior.</p>
+		
+		<p>Note: When building a jQuery Mobile application where the Ajax navigation system is disabled globally or frequently disabled on individual links, we  recommend disabling the <code>$.mobile.pushStateEnabled</code> global <a href="../api/globalconfig.html">configuration option</a> to avoid inconsistent navigation behavior in some browsers.</p>
 		
 
 
@@ -100,7 +102,7 @@
 
 				<div class="content-secondary">
 
-					<div data-role="collapsible" data-collapsed="true" data-theme="b">
+					<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
 
 							<h3>More in this section</h3>
 
@@ -115,7 +117,8 @@
 								<li><a href="page-transitions.html" data-ajax="false">Page transitions</a></li>
 								<li><a href="page-dialogs.html">Dialogs</a></li>
 								<li><a href="page-cache.html">Prefetching &amp; caching pages</a></li>
-								<li><a href="page-navmodel.html">Ajax, hashes &amp; history</a></li></li>
+								<li><a href="page-navmodel.html">Ajax, hashes &amp; history</a></li>
+								<li><a href="page-dynamic.html">Dynamically Injecting Pages</a></li>
 								<li><a href="page-scripting.html">Scripting pages</a></li>
 								<li><a href="pages-themes.html">Theming pages</a></li>
 

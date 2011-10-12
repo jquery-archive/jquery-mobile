@@ -30,6 +30,10 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 	},
 
 	_theme: function(){
+		if ( this.options.theme ){
+			return this.options.theme;
+		}
+
 		var themedParent, theme;
 		// if no theme is defined, try to find closest theme container
 		// TODO move to core as something like findCurrentTheme
@@ -55,6 +59,10 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		}, 40);
 	},
 
+  _selectOptions: function() {
+    return this.select.find( "option" );
+  },
+
 	// setup items that are generally necessary for select menu extension
 	_preExtension: function(){
 		this.select = this.element.wrap( "<div class='ui-select'>" );
@@ -62,7 +70,6 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		this.label = $( "label[for='"+ this.selectID +"']" ).addClass( "ui-select" );
 		this.isMultiple = this.select[ 0 ].multiple;
 		this.options.theme = this._theme();
-		this.selectOptions = this.select.find( "option" );
 	},
 
 	_create: function() {
@@ -111,7 +118,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			this.buttonCount = $( "<span>" )
 				.addClass( "ui-li-count ui-btn-up-c ui-btn-corner-all" )
 				.hide()
-				.appendTo( button );
+				.appendTo( button.addClass('ui-li-has-count') );
 		}
 
 		// Disable if specified
@@ -153,14 +160,14 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 	},
 
 	selected: function() {
-		return this.selectOptions.filter( ":selected" );
+		return this._selectOptions().filter( ":selected" );
 	},
 
 	selectedIndices: function() {
 		var self = this;
 
 		return this.selected().map( function() {
-			return self.selectOptions.index( this );
+			return self._selectOptions().index( this );
 		}).get();
 	},
 
@@ -192,6 +199,11 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		this.setButtonCount();
 	},
 
+	// open and close preserved in native selects
+	// to simplify users code when looping over selects
+	open: $.noop,
+	close: $.noop,
+
 	disable: function() {
 		this._setDisabled( true );
 		this.button.addClass( "ui-disabled" );
@@ -205,8 +217,6 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ){
-	$( $.mobile.selectmenu.prototype.options.initSelector, e.target )
-		.not( ":jqmData(role='none'), :jqmData(role='nojs')" )
-		.selectmenu();
+	$.mobile.selectmenu.prototype.enhanceWithin( e.target );
 });
 })( jQuery );

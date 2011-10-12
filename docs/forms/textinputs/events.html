@@ -3,7 +3,7 @@
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>jQuery Mobile Docs - Text Input options</title>
+	<title>jQuery Mobile Docs - Text Input events</title>
 	<link rel="stylesheet"  href="../../../themes/default/" />
 	<link rel="stylesheet" href="../../_assets/css/jqm-docs.css"/>
 	<script src="../../../js/jquery.js"></script>
@@ -29,30 +29,40 @@
 			
 			<ul data-role="controlgroup" data-type="horizontal" class="localnav">
 				<li><a href="index.html" data-role="button" data-transition="fade">Basics</a></li>
-				<li><a href="options.html" data-role="button" data-transition="fade" class="ui-btn-active">Options</a></li>
+				<li><a href="options.html" data-role="button" data-transition="fade">Options</a></li>
 				<li><a href="methods.html" data-role="button" data-transition="fade">Methods</a></li>
-				<li><a href="events.html" data-role="button" data-transition="fade">Events</a></li>
+				<li><a href="events.html" data-role="button" data-transition="fade" class="ui-btn-active">Events</a></li>
 			</ul>
 			
-			<p>The text input plugin has the following options:</p>
-
-		<dl>
+			<p>Bind events directly to the <code>input</code> element.  Use jQuery Mobile's <a href="../../api/events.html">virtual events</a>, or bind standard JavaScript events, like change, focus, blur, etc.:</p>
+			<pre><code> 
+$( ".selector" ).bind( "change", function(event, ui) {
+  ...
+});
+</code></pre> 
 			
-			<dt><code>theme</code> <em>string</em></dt>
-			<dd>
-				<p class="default">default: null, inherited from parent</p>
-				<p>Sets the theme swatch color scheme for the text input element. This is a single letter from a-z that maps to the swatches included in your theme. By default, a text input will inherit the same swatch color as it's parent container if not explicitly set. This option is also exposed as a data attribute: <code>data-theme=&quot;a&quot;</code></p>		
-				<pre><code>$('.selector').textinput(<strong>{ theme: "a" }</strong>);</code></pre>
+			<p>The text input plugin has the following custom events:</p>
+
+	<dl>
+				
+		<dt><code>create</code> triggered when a text input is created</dt>
+		<dd>
+
+			<pre><code>
+$( ".selector" ).textinput({
+   create: function(event, ui) { ... }
+});		
+			</code></pre>
 			</dd>
 			
-		</dl>	
-    
+	</dl>
+	    
 	</form>
 	</div><!--/content-primary -->		
 	
 	<div class="content-secondary">
 		
-		<div data-role="collapsible" data-collapsed="true" data-theme="b">
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
 			
 				<h3>More in this section</h3>
 				
@@ -62,16 +72,16 @@
 					<li><a href="../docs-forms.html">Form basics</a></li>
 					<li><a href="../forms-all.html">Form element gallery</a></li>
 					<li data-theme="a"><a href="index.html">Text inputs</a></li>
-					<li><a href="../forms-search.html">Search inputs</a></li>
-					<li><a href="../forms-slider.html">Slider</a></li>
-					<li><a href="../forms-switch.html">Flip toggle switch</a></li>
-					<li><a href="../radiobuttons/index.html">Radio buttons</a></li>
-					<li><a href="../checkboxes/index.html">Checkboxes</a></li>
-					<li><a href="../selects/index.html">Select menus</a></li>
+					<li><a href="../search/">Search input</a></li>
+					<li><a href="../slider/">Slider</a></li>
+					<li><a href="../switch/">Flip toggle switch</a></li>
+					<li><a href="../radiobuttons/">Radio buttons</a></li>
+					<li><a href="../checkboxes/">Checkboxes</a></li>
+					<li><a href="../selects/">Select menus</a></li>
 					<li><a href="../forms-themes.html">Theming forms</a></li>
 					<li><a href="../forms-all-native.html">Native form elements</a></li>
 					<li><a href="../forms-sample.html">Submitting forms</a></li>
-					<li><a href="../plugin-eventsmethods.html">Plugin methods</a></li>
+					
 	
 				</ul>
 		</div>
