@@ -102,6 +102,7 @@ css: init
 	# Build the CSS file
 	@@head -8 js/jquery.mobile.core.js | ${SED_VER} > ${OUTPUT}/${CSS}
 	@@cat ${CSSFILES} >> ${OUTPUT}/${CSS}
+	@@head -8 js/jquery.mobile.core.js | ${SED_VER} > ${OUTPUT}/${CSSSTRUCTURE}
 	@@cat ${CSSSTRUCTUREFILES} >> ${OUTPUT}/${CSSSTRUCTURE}
 
 # Build the minified CSS file
