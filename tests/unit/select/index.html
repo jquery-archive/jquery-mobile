@@ -17,6 +17,8 @@
 
 	<link rel="stylesheet"  href="../../../themes/default/"/>
 	<link rel="stylesheet" href="../../../external/qunit.css"/>
+
+	<script src="../swarminject.js"></script>
 </head>
 <body>
 
@@ -346,6 +348,10 @@
 
   <select name="encoded-option" id="encoded-option" data-nstest-native-menu="false">
     <option>&lt;script&gt;window.encodedValueIsDefined = true;&lt;/script&gt;</option>
+  </select>
+
+  <select name="keep-native" id="keep-native" class="should-be-native">
+    <option></option>
   </select>
 </div>
 

@@ -53,6 +53,9 @@
 
 		pushStateEnabled: true,
 
+		// turn of binding to the native orientationchange due to android orientation behavior
+		orientationChangeEnabled: true,
+
 		// Support conditions that must be met in order to proceed
 		// default enhanced qualifications are media query support OR IE 7+
 		gradeA: function(){

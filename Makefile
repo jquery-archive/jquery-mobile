@@ -147,7 +147,7 @@ nightly: pull zip
 	@@mkdir -p ${VER}
 
 	# Copy in the base stuff for the demos
-	@@cp -r index.html themes experiments docs ${VER}/
+	@@cp -r index.html themes experiments docs tools ${VER}/
 
 	# First change all the paths from super deep to the same level for JS files
 	@@find ${VER} -type f -name '*.html' -exec sed -i 's|src="../../../js|src="js|g' {} \;
@@ -184,7 +184,7 @@ deploy: zip
 
 	# Deploy Demos to the jQueryMobile.com site
 	@@mkdir -p ${VER}
-	@@cp -r index.html themes experiments docs ${VER}/
+	@@cp -r index.html themes experiments docs tools ${VER}/
 
 	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|src="../../../js|src="js|g' {} \;
 	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|src="../../js|src="js|g' {} \;

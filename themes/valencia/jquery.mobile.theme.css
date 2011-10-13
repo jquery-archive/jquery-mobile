@@ -874,7 +874,7 @@ a.ui-link-inherit {
 .ui-btn-corner-br, .ui-btn-corner-top, .ui-btn-corner-bottom, 
 .ui-btn-corner-right, .ui-btn-corner-left, .ui-btn-corner-all {
   -webkit-background-clip: padding-box;
-     -moz-background-clip: padding-box;
+     -moz-background-clip: padding;
           background-clip: padding-box;
 }
 
@@ -917,7 +917,6 @@ a.ui-link-inherit {
 
 /* set focus state last */
 .ui-focus {
-  outline: none;
   -moz-box-shadow:    0px 0px 12px #FFBC19;
   -webkit-box-shadow: 0px 0px 12px #FFBC19;
   box-shadow:         0px 0px 12px #FFBC19;

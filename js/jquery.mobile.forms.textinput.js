@@ -112,6 +112,12 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 				clearTimeout( keyupTimeout );
 				keyupTimeout = setTimeout( keyup, keyupTimeoutBuffer );
 			});
+
+			// Issue 509: the browser is not giving scrollHeight properly until after the document
+			// is ready.
+			if ($.trim(input.text())) {
+				$(keyup);
+			}
 		}
 	},
 
@@ -128,11 +134,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ){
-
-	$( $.mobile.textinput.prototype.options.initSelector, e.target )
-		.not( ":jqmData(role='none'), :jqmData(role='nojs')" )
-		.textinput();
-
+	$.mobile.textinput.prototype.enhanceWithin( e.target );
 });
 
 })( jQuery );

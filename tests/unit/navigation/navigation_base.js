@@ -83,9 +83,10 @@
 
 			function(){
 				// Verify that we are on the expected page.
+				// the hash based nav result (hash:) is dictate by the fact that #internal-page-1
+				// is the original root page element
 				$.testHelper.assertUrlLocation({
-					push: location.pathname + "#internal-page-1",
-					hash: "internal-page-1",
+					hashOrPush: location.pathname + location.search,
 					report: "navigate from a page in a non-base directory to an internal page"
 				});
 

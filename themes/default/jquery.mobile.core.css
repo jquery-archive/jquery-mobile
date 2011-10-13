@@ -19,6 +19,14 @@
 /* on ios4, setting focus on the page element causes flashing during transitions when there is an outline, so we turn off outlines */
 .ui-page { outline: none; }
 
+/*orientations from js are available */
+@media screen and (orientation: portrait){
+.ui-mobile, .ui-mobile .ui-page { min-height: 420px; }
+}
+@media screen and (orientation: landscape){
+.ui-mobile, .ui-mobile .ui-page { min-height: 300px; }
+}
+
 /* native overflow scrolling */
 .ui-page.ui-mobile-touch-overflow,
 .ui-mobile-touch-overflow.ui-native-fixed .ui-content {

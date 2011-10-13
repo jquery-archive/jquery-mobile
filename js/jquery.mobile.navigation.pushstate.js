@@ -65,14 +65,15 @@
 			
 			var href, state,
 				hash = location.hash,
-				isPath = $.mobile.path.isPath( hash );
+				isPath = $.mobile.path.isPath( hash ),
+				resolutionUrl = isPath ? location.href : $.mobile.getDocumentUrl();
 			hash = isPath ? hash.replace( "#", "" ) : hash;
 
 			// propulate the hash when its not available
 			state = self.state();
 
 			// make the hash abolute with the current href
-			href = $.mobile.path.makeUrlAbsolute( hash, location.href );
+			href = $.mobile.path.makeUrlAbsolute( hash, resolutionUrl );
 
 			if ( isPath ) {
 				href = self.resetUIKeys( href );
