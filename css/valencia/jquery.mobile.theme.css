@@ -559,7 +559,7 @@ a.ui-link-inherit {
   text-decoration: none !important;
 }
 
-/* Active class used as the "on" state across all themes */
+/* Active class used as the "on" state across all css/ */
 .ui-btn-active {
   font-weight: bold;
   cursor: pointer;

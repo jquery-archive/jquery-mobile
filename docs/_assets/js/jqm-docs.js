@@ -11,7 +11,7 @@ $('div').live('pagecreate',function(event){
 			return;
 		}
 		
-		$('<a href="#themeswitcher" data-'+ $.mobile.ns +'rel="dialog" data-'+ $.mobile.ns +'transition="pop">Switch theme</a>')
+		$('<a href="#css/witcher" data-'+ $.mobile.ns +'rel="dialog" data-'+ $.mobile.ns +'transition="pop">Switch theme</a>')
 			.buttonMarkup({
 				'icon':'gear',
 				'inline': true,
@@ -19,9 +19,9 @@ $('div').live('pagecreate',function(event){
 				'theme': 'd'
 			})
 			.appendTo( appendEl )
-			.wrap('<div class="jqm-themeswitcher">')
+			.wrap('<div class="jqm-css/witcher">')
 			.bind( "vclick", function(){
-				$.themeswitcher();
+				$.css/witcher();
 			});
 	}	
 
