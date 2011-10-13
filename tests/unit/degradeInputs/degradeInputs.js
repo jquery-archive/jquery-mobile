@@ -3,10 +3,16 @@
  */
 
 (function($){
+    
+
 	module('jquery.mobile.slider.js', {
 	    setup: function() {
 	        $('#test-container').html("");
 	    }
+	});
+	
+	test('keepNative elements should not be degraded', function() {
+        same($('input#not-to-be-degraded').attr("type"), "range");
 	});
 	
 	test('input type color should not degrade when "create" event is triggered', function(){
