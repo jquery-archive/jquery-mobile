@@ -27,10 +27,9 @@ $.mobile.page.prototype.options.keepNative = ":jqmData(role='none'), :jqmData(ro
 
 
 //auto self-init widgets
-$( document ).bind( "pagecreate enhance", function( e ){
+$( document ).bind( "pagecreate create", function( e ){
 	
-	var page = $( e.target ).data( "page" ),
-		o = page.options;
+	var o = $.mobile.page.prototype.options;
 	
 	// degrade inputs to avoid poorly implemented native functionality
 	$( e.target ).find( "input" ).not( o.keepNative ).each(function() {
