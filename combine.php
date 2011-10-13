@@ -10,6 +10,7 @@ $contents = '';
 
 // Loop through the files adding them to a string
 foreach ( $files as $file ) {
+	$file = $file;
 	$contents .= file_get_contents($file). "\n\n";
 }
 
