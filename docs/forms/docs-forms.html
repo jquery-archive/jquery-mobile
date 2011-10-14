@@ -66,6 +66,68 @@
 
 	<p>While the label will no longer be visible, it will be available to assisitive technologies such as screen readers.</p>
 
+
+	<h2>Disabling form elements</h2>
+	<p>All jQuery Mobile widgets can be disabled in the markup by adding the standard <code>disabled</code> attribute to the element, just like you would with native controls. Each form widget also has standard <code>disable</code> and <code>enable</code> methods that are documented with each form widget. Here are a few examples of disabled widgets. Note that you can disable form buttons, but not links with a role of button because links don't have a parallel disabled feature in HTML. If you need to disable a link-based button, it's possible to apply the same disabled class <code>ui-disabled</code> with JavaScript to the enhanced button markup generated to achieve this effect. </p>
+	
+	<div data-role="fieldcontain">
+     <label for="foo">Text Input:</label>
+     <input type="text" name="name" id="foo" value="" disabled />
+	</div>
+	
+	<div data-role="fieldcontain">
+	<fieldset data-role="controlgroup">
+    	<legend>Gender:</legend>
+         	<input type="radio" name="gender" id="radio-female" value="f" disabled />
+         	<label for="radio-female">Female</label>
+
+         	<input type="radio" name="gender" id="radio-male" value="m" disabled  />
+         	<label for="radio-male">Male</label>
+    </fieldset>
+    </div>
+
+	<div data-role="fieldcontain">
+	<label for="flip-s">Server status:</label>
+	<select name="slider" id="flip-s" data-role="slider" disabled >
+		<option value="off">Off</option>
+		<option value="on">On</option>
+	</select>
+    </div>    
+
+	<div data-role="fieldcontain">
+		<label for="select-choice-x" class="select">Shipping:</label>
+		<select name="select-shipper" id="select-choice-x" disabled>
+			<option></option>
+			<option value="standard">Standard</option>
+			<option value="rush">Rush</option>
+			<option value="express">Express</option>
+			<option value="overnight">Overnight</option>
+		</select>
+	</div> 
+	
+	<p>Note that you can disable buttons created from <code>button</code> or <code>input</code>-based markup, but not links with a role of button. Links don't have a parallel disabled feature in HTML, but if you need to disable a link-based button (or any element), it's possible to apply the disabled class <code>ui-disabled</code> yourself with JavaScript to achieve the same effect. </p>
+	
+		<h2>Field containers</h2>
+		<p>To improve the styling to labels and form elements on wider screens, we recommend wrapping a <code>div</code> or <code>fieldset </code>with the <code> data-role="fieldcontain"</code> attribute around each label/form element. This framework aligns the input and associated label side-by-side, and breaks to stacked block-level elements below ~480px. The framework will also add a thin bottom border to act as a field separator.</p>
+
+		<p>For example:</p>
+<pre><code>
+&lt;div data-role=&quot;fieldcontain&quot;&gt;
+&lt;label for="name">Text Input:&lt;/label&gt;
+&lt;input type="text" name="name" id="name" value="" /&gt;
+&lt;/div&gt;
+</code></pre>
+
+		<p>Will render as:</p>
+
+		<div data-role="fieldcontain">
+ 			<label for="name">Text Input:</label>
+ 			<input type="text" name="name" id="name" value=""  />
+		</div>
+
+		<p>For additional examples, see the <a href="forms-all.html">form elements gallery</a></p>
+		
+		
 	<h2>Auto-initialization of form elements</h2>
 	<p>By default, jQuery Mobile will automatically enhance certain native form controls into rich touch-friendly components. This is handled internally by finding form elements by tag name and running a plugin method on them, so for instance, a <code>select</code> element will be found and initialized with the "selectmenu" plugin, while an <code>input</code> element with a <code>type="checkbox"</code> will be enhanced with the "checkboxradio" plugin. Once initialized, you can address these enhanced components programmatically through their jQuery UI widget API methods (see documentation on available methods here: <a href="plugin-eventsmethods.html">Form Plugin Methods</a>). </p>
 
@@ -78,33 +140,33 @@
 	$( ...new markup that contains widgets... ).appendTo( ".ui-page" ).trigger( "create" );
 	</code>
 
-	<h2>Initializing individual form elements</h2>
+	<h2>Refreshing form elements</h2>
 
-    <p>Every form control -- where applicable -- has a refresh method. Here are some examples:</p>
-	<p>Checkboxes:</p>
+    <p>In jQuery Mobile, some enhanced form controls are simply styled (inputs), but others are custom controls (selects, sliders) built from, and kept in sync with, the native control. To programmatically update a form control with JavaScript, first manipulate the native control, then use the <code>refresh</code> method to tell the enhanced control to update itself to match the new state. Here are some examples of how to update common form controls, then call the <code>refresh</code> method:</p>
+	<h4>Checkboxes:</h4>
 
 <code>
 $("input[type='checkbox']").attr("checked",true).checkboxradio("refresh");
 </code>
 
-<p>Radios:</p>
+<h4>Radios:</h4>
 <code>
 $("input[type='radio']").attr("checked",true).checkboxradio("refresh");
 </code>
 
-<p>Selects:</p>
+<h4>Selects:</h4>
 <code><pre>
 var myselect = $("select#foo");
 myselect[0].selectedIndex = 3;
 myselect.selectmenu("refresh");
 </pre></code>
 
-<p>Sliders:</p>
+<h4>Sliders:</h4>
 <code>
 $("input[type=range]").val(60).slider("refresh");
 </code>
 
-<p>Flip switches (they use slider):</p>
+<h4>Flip switches (they use slider):</h4>
 
 <code><pre>
 var myswitch = $("select#bar");
@@ -133,25 +195,7 @@ $(document).bind('mobileinit',function(){
 
 <p>One special case is that of selects. The above sample will prevent any and all augmentation from taking place on select elements in the page if <code>select</code> is included. If you wish to retain the native performance, look/feel of the menu itself and benefit from the visual augmentation of the select button by jQuery Mobile you can set $.mobile.nativeSelectMenu to true in a <code>mobileinit</code> callback as a global setting or use <code>data-native="true"</code> on a case by case basis.</p>
 
-			<h2>Field containers</h2>
-			<p>To improve the styling to labels and form elements on wider screens, we recommend wrapping a <code>div</code> or <code>fieldset </code>with the <code> data-role="fieldcontain"</code> attribute around each label/form element. This framework aligns the input and associated label side-by-side, and breaks to stacked block-level elements below ~480px. The framework will also add a thin bottom border to act as a field seperator.</p>
-
-			<p>For example:</p>
-<pre><code>
-&lt;div data-role=&quot;fieldcontain&quot;&gt;
-	&lt;label for="name">Text Input:&lt;/label&gt;
-	&lt;input type="text" name="name" id="name" value="" /&gt;
-&lt;/div&gt;
-</code></pre>
-
-			<p>Will render as:</p>
-
-			<div data-role="fieldcontain">
-	 			<label for="name">Text Input:</label>
-	 			<input type="text" name="name" id="name" value=""  />
-			</div>
-
-			<p>For additional examples, see the <a href="forms-all.html">form elements gallery</a></p>
+		
 
 	</div><!--/content-primary -->		
 	
