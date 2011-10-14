@@ -20,5 +20,8 @@ textarea.ui-input-text { height: 50px; -webkit-transition: height 200ms linear; 
 	.ui-field-contain textarea.ui-input-text, 
 	.ui-field-contain .ui-input-search { width: 60%; display: inline-block; } 
 	.ui-field-contain .ui-input-search { width: 50%; }
+	.ui-hide-label input.ui-input-text, 
+	.ui-hide-label textarea.ui-input-text, 
+	.ui-hide-label .ui-input-search { padding: .4em 1.5%; width: 97%; } 
 	.ui-input-search input.ui-input-text { width: 98%; /*echos rule from above*/ }
 }
