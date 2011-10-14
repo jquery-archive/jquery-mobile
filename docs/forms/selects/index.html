@@ -38,23 +38,45 @@
 			
 			<p>By default, the framework leverages the native OS options menu to use with the custom button. When the button is clicked, the native OS menu will open. When a value is selected and the menu closes, the custom button's text is updated to match the selected value.</p>
 
-			<p>To add a select menu to your page, start with a standard <code>select</code> element populated with a set of <code>option</code> elements. Set the <code>for</code> attribute of the <code>label</code> to match the ID of the <code>select</code> so they are semantically associated. Wrap them in a <code>div</code> with the <code> data-role="fieldcontain"</code> attribute to help visually group it in a longer form. </p>
+			<p>To add a select menu to your page, start with a standard <code>select</code> element populated with a set of <code>option</code> elements. Set the <code>for</code> attribute of the <code>label</code> to match the ID of the <code>select</code> so they are semantically associated. It's possible to <a href="../docs-forms.html">accessibly hide the label</a> if it's not desired in the page layout, but we require that it is present in the markup for semantic and accessibility reasons.  </p>
+			
+			<p>The framework will find all <code>select</code> elements and automatically enhance them into select menus, no need to apply a <code>data-role</code> attribute. To prevent the automatic enhancement of a select, add  <code>data-role="none"</code> attribute to the <code>select</code>.</p>
+			
+			<pre><code>
+&lt;label for=&quot;select-choice-0&quot; class=&quot;select&quot;&gt;Shipping method:&lt;/label&gt;
+&lt;select name=&quot;select-choice-0&quot; id=&quot;select-choice-1&quot;&gt;
+   &lt;option value=&quot;standard&quot;&gt;Standard: 7 day&lt;/option&gt;
+   &lt;option value=&quot;rush&quot;&gt;Rush: 3 days&lt;/option&gt;
+   &lt;option value=&quot;express&quot;&gt;Express: next day&lt;/option&gt;
+   &lt;option value=&quot;overnight&quot;&gt;Overnight&lt;/option&gt;
+&lt;/select&gt;
+			</code></pre>
 
-			<p>The framework will find all <code>select</code> elements and automatically enhance them into select menus. The markup for a select grouped in a field container:</p>
+			<p>This will produce a basic select menu. The default styles set the width of the input to 100% of the parent container and stacks the label on a separate line.</p>
 
+				<label for="select-choice-0" class="select">Shipping method:</label>
+				<select name="select-choice-0" id="select-choice-1">
+					<option value="standard">Standard: 7 day</option>
+					<option value="rush">Rush: 3 days</option>
+					<option value="express">Express: next day</option>
+					<option value="overnight">Overnight</option>
+				</select>
+
+			
+			<p>Optionally wrap the selects in a container with the <code>data-role="fieldcontain"</code> attribute to help visually group it in a longer form.</p>
 <pre><code>
-&lt;div data-role=&quot;fieldcontain&quot;&gt;
-   &lt;label for=&quot;select-choice-1&quot; class=&quot;select&quot;&gt;Shipping method:&lt;/label&gt;
+<strong>&lt;div data-role=&quot;fieldcontain&quot;&gt;
+</strong>   &lt;label for=&quot;select-choice-1&quot; class=&quot;select&quot;&gt;Shipping method:&lt;/label&gt;
    &lt;select name=&quot;select-choice-1&quot; id=&quot;select-choice-1&quot;&gt;
       &lt;option value=&quot;standard&quot;&gt;Standard: 7 day&lt;/option&gt;
       &lt;option value=&quot;rush&quot;&gt;Rush: 3 days&lt;/option&gt;
       &lt;option value=&quot;express&quot;&gt;Express: next day&lt;/option&gt;
       &lt;option value=&quot;overnight&quot;&gt;Overnight&lt;/option&gt;
    &lt;/select&gt;
-&lt;/div&gt;
-</code></pre>
+<strong>&lt;/div&gt;
+</strong></code></pre>
 
-<p>produces this select menu:</p>
+			<p>The select input is now displayed like this:</p>
 
 
 <div data-role="fieldcontain">

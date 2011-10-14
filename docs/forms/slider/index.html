@@ -36,19 +36,33 @@
 			<p>To add a slider widget to your page, use a standard <code>input</code> with the <code>type="range"</code> attribute.  The input's <code>value</code> is used to configure the starting position of the handle and the value populated in the text input. Specify <code>min</code> and <code>max</code> attribute values to set the slider's range. The framework will parse these attributes to configure the slider widget. </p>
 			
 			<p>As you drag the slider's handle, the framework will update the native input's value (and vice-versa) so they are always in sync; this ensures that the value is submitted with the form.</p>
-			<p>Set the <code>for</code> attribute of the <code>label</code> to match the ID of the <code>input</code> so they are semantically associated and wrap them in a <code>div</code> with the <code> data-role="fieldcontain"</code> attribute to group them.</p>
-
+			<p>Set the <code>for</code> attribute of the <code>label</code> to match the ID of the <code>input</code> so they are semantically associated. It's possible to <a href="../docs-forms.html">accessibly hide the label</a> if it's not desired in the page layout, but we require that it is present in the markup for semantic and accessibility reasons.</p>
+			
+			<p>The framework will find all <code>inputs</code> elements with a <code>type="range"</code> and automatically enhance them into a slider with an accompanying input, no need to apply a <code>data-role</code> attribute. To prevent the automatic enhancement of this input into a slider, add  <code>data-role="none"</code> attribute to the <code>input</code>.</p> and wrap them in a <code>div</code> with the <code> data-role="fieldcontain"</code> attribute to group them.</p>
+			
 <pre><code>
-&lt;div data-role=&quot;fieldcontain&quot;&gt;
-   &lt;label for=&quot;slider&quot;&gt;Input slider:&lt;/label&gt;
-   &lt;input type=&quot;range&quot; name=&quot;slider&quot; id=&quot;slider&quot; value=&quot;25&quot; min=&quot;0&quot; max=&quot;100&quot;  /&gt;
-&lt;/div&gt;
+   &lt;label for=&quot;slider-0&quot;&gt;Input slider:&lt;/label&gt;
+   &lt;input type=&quot;range&quot; name=&quot;slider&quot; id=&quot;slider-0&quot; value=&quot;25&quot; min=&quot;0&quot; max=&quot;100&quot;  /&gt;
 </code></pre>
 
-						<p>The default slider is displayed like this:</p>
+				<p>The default slider is displayed like this:</p>
+					<label for="slider-0">Input slider:</label>
+					<input type="range" name="slider-1" id="slider-0" value="25" min="0" max="100"  />
+			
+				<p>Optionally wrap the slider markup in a container with the <code>data-role="fieldcontain"</code> attribute to help visually group it in a longer form.</p>
+			
+
+<pre><code>
+<strong>&lt;div data-role=&quot;fieldcontain&quot;&gt;
+</strong>   &lt;label for=&quot;slider&quot;&gt;Input slider:&lt;/label&gt;
+   &lt;input type=&quot;range&quot; name=&quot;slider&quot; id=&quot;slider&quot; value=&quot;25&quot; min=&quot;0&quot; max=&quot;100&quot;  /&gt;
+<strong>&lt;/div&gt;
+</strong></code></pre>
+
+						<p>The slider is now be is displayed like this:</p>
 						<div data-role="fieldcontain">
 							<label for="slider-1">Input slider:</label>
-							<input type="range" name="slider-1" id="slider-1" value="25" min="0" max="100" data-theme="b" data-track-theme="a" />
+							<input type="range" name="slider-1" id="slider-1" value="25" min="0" max="100" />
 						</div>
 
 						<p>Sliders also respond to key commands. Right Arrow, Up Arrow, and Page Up keys increase the value; Left Arrow, Down Arrow, and Page Down keys decrease it. To move the slider to its minimum or maximum value, use the Home or End key, respectively.</p>
@@ -61,6 +75,22 @@
 $('input').slider();			
 </code></pre>
     
+
+		<h2>Theming the slider</h2>
+		<p>To set the theme swatch for the slider, add a <code>data-theme</code> attribute to the <code>input</code> which will apply the theme to both the input, handle and track. The track swatch can be set separately by adding the  <code>data-track-theme</code> attribute to apply the down state version of the selected button swatch.</p>
+		
+		<pre><code>
+&lt;div data-role=&quot;fieldcontain&quot;&gt;
+	&lt;label for=&quot;slider-2&quot;&gt;Input slider:&lt;/label&gt;
+	&lt;input type=&quot;range&quot; name=&quot;slider-2&quot; id=&quot;slider-1&quot; value=&quot;25&quot; min=&quot;0&quot; max=&quot;100&quot; <strong>data-theme=&quot;a&quot; data-track-theme=&quot;b&quot;</strong> /&gt;
+&lt;/div&gt;
+		</code></pre>
+		
+		<p>This will produce a themed slider:</p>
+		<div data-role="fieldcontain">
+			<label for="slider-2">Input slider:</label>
+			<input type="range" name="slider-2" id="slider-1" value="25" min="0" max="100" data-theme="a" data-track-theme="b" />
+		</div>
 		</form>
 	</div><!--/content-primary -->		
 	

@@ -215,7 +215,11 @@ $.widget( "mobile.slider", $.mobile.widget, {
 	},
 
 	refresh: function( val, isfromControl, preventInputUpdate ) {
-		if ( this.options.disabled ) { return; }
+
+		if ( this.options.disabled || this.element.attr('disabled')) { 
+			this.slider.addClass('ui-disabled');
+			return;
+		}
 
 		var control = this.element, percent,
 			cType = control[0].nodeName.toLowerCase(),

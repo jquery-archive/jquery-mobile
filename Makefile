@@ -108,8 +108,8 @@ css: init
 # Build the minified CSS file
 cssmin: init css
 	# Build the minified CSS file
-	@@java -jar build/yuicompressor-2.4.4.jar --type css ${OUTPUT}/${CSS} >> ${OUTPUT}/${CSSMIN}
-	@@java -jar build/yuicompressor-2.4.4.jar --type css ${OUTPUT}/${CSSSTRUCTURE} >> ${OUTPUT}/${CSSSTRUCTUREMIN}
+	@@java -jar build/yuicompressor-2.4.6.jar --type css ${OUTPUT}/${CSS} >> ${OUTPUT}/${CSSMIN}
+	@@java -jar build/yuicompressor-2.4.6.jar --type css ${OUTPUT}/${CSSSTRUCTURE} >> ${OUTPUT}/${CSSSTRUCTUREMIN}
 
 # Build the normal JS file
 js: init
@@ -127,7 +127,7 @@ init:
 min: init js
 	# Build the minified JavaScript file
 	@@head -8 js/jquery.mobile.core.js | ${SED_VER} > ${OUTPUT}/${MIN}
-	@@java -jar build/google-compiler-20110405.jar --js ${OUTPUT}/${JS} --warning_level QUIET --js_output_file ${MIN}.tmp
+	@@java -jar build/google-compiler-20111003.jar --js ${OUTPUT}/${JS} --warning_level QUIET --js_output_file ${MIN}.tmp
 	@@cat ${MIN}.tmp >> ${OUTPUT}/${MIN}
 	@@rm -f ${MIN}.tmp
 
