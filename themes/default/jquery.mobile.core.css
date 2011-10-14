@@ -120,3 +120,7 @@
 
 /* non-js content hiding */
 .ui-nojs { position: absolute; left: -9999px; }
+
+/* accessible content hiding */
+.ui-hide-label label,
+.ui-hidden-accessible { position: absolute !important; left: -9999px; clip: rect(1px 1px 1px 1px); clip: rect(1px,1px,1px,1px); }
