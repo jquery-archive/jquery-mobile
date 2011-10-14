@@ -1103,6 +1103,11 @@
 			pageTitle = newPageTitle;
 		}
 
+		// Make sure we have a transition defined.
+		settings.transition = settings.transition
+			|| ( ( historyDir && !activeIsInitialPage ) ? active.transition : undefined )
+			|| ( isDialog ? $.mobile.defaultDialogTransition : $.mobile.defaultPageTransition );
+
 		//add page to history stack if it's not back or forward
 		if( !historyDir ) {
 			urlHistory.addNew( url, settings.transition, pageTitle, pageUrl, settings.role );
@@ -1113,11 +1118,6 @@
 
 		//set "toPage" as activePage
 		$.mobile.activePage = toPage;
-
-		// Make sure we have a transition defined.
-		settings.transition = settings.transition
-			|| ( ( historyDir && !activeIsInitialPage ) ? active.transition : undefined )
-			|| ( isDialog ? $.mobile.defaultDialogTransition : $.mobile.defaultPageTransition );
 
 		// If we're navigating back in the URL history, set reverse accordingly.
 		settings.reverse = settings.reverse || historyDir < 0;
