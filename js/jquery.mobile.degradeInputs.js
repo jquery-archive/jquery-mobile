@@ -23,17 +23,15 @@ $.mobile.page.prototype.options.degradeInputs = {
 	week: false
 };
 
-$.mobile.page.prototype.options.keepNative = ":jqmData(role='none'), :jqmData(role='nojs')";
-
 
 //auto self-init widgets
-$( document ).bind( "pagecreate enhance", function( e ){
+$( document ).bind( "pagecreate create", function( e ){
 	
-	var page = $( e.target ).data( "page" ),
-		o = page.options;
+	var page = $(e.target).closest(':jqmData(role="page")').data("page"),
+	    o = page.options;
 	
 	// degrade inputs to avoid poorly implemented native functionality
-	$( e.target ).find( "input" ).not( o.keepNative ).each(function() {
+	$( e.target ).find( "input" ).not( page.keepNativeSelector() ).each(function() {
 		var $this = $( this ),
 			type = this.getAttribute( "type" ),
 			optType = o.degradeInputs[ type ] || "text";
