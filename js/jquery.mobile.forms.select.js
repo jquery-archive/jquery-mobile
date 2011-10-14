@@ -122,7 +122,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		}
 
 		// Disable if specified
-		if ( options.disabled ) {
+		if ( options.disabled || this.element.attr('disabled')) {
 			this.disable();
 		}
 
