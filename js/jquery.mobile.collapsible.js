@@ -135,6 +135,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 							.toggleClass( "ui-corner-bottom", isCollapse );
 						collapsibleContent.toggleClass( "ui-corner-bottom", !isCollapse );
 					}
+					collapsibleContent.trigger( "contentmodified" );
 				}
 			})
 			.trigger( o.collapsed ? "collapse" : "expand" );
