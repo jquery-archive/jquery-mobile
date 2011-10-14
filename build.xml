@@ -3,8 +3,8 @@
 
 	<property name="cssdir" location="themes/default"/>
 	<property name="jsdir" location="js"/>
-	<property name="css-sources" value="jquery.mobile.theme.css,
-	jquery.mobile.core.css,
+	<property name="css-theme-sources" value="jquery.mobile.theme.css"/>
+	<property name="css-structure-sources" value="jquery.mobile.core.css,
 	jquery.mobile.transitions.css,
 	jquery.mobile.grids.css,
 	jquery.mobile.headerfooter.css,
@@ -56,12 +56,20 @@
 
 	<target name="merge">
 		<antcall target="merge_css" />
+		<antcall target="merge_stucture_css" />
 		<antcall target="merge_js" />
 	</target>
 
 	<target name="merge_css">
 		<concat destfile="combine/jquery.mobile.css">
-			<filelist dir="${cssdir}" files="${css-sources}"/>
+			<filelist dir="${cssdir}" files="${css-theme-sources}"/>
+			<filelist dir="${cssdir}" files="${css-structure-sources}"/>
+		</concat>
+	</target>
+
+	<target name="merge_structure_css">
+		<concat destfile="combine/jquery.mobile.structure.css">
+			<filelist dir="${cssdir}" files="${css-structure-sources}"/>
 		</concat>
 	</target>
 
