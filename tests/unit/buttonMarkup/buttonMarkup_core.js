@@ -21,7 +21,7 @@
 
                 ok(!group.find('[data-shadow=false]').hasClass("ui-shadow"),
                     "buttons with data-shadow=false should not have the ui-shadow class");
-                ok(!group.find('[data-corners=false]').hasClass("ui-corners"),
-                    "buttons with data-corners=false should not have the ui-corner class");
+                ok(!group.find('[data-corners=false]').hasClass("ui-btn-corner-all"),
+                    "buttons with data-corners=false should not have the ui-btn-corner-all class");
         });
 })(jQuery);
