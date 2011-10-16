@@ -3,7 +3,7 @@
 * Copyright (c) jQuery Project
 * Dual licensed under the MIT (MIT-LICENSE.txt) or GPL (GPL-LICENSE.txt) licenses.
 */
-label.ui-slider { display: block; }
+label.ui-slider { font-size: 16px; line-height: 1.4;  font-weight: normal; margin: 0 0 .3em; display: block; }
 input.ui-slider-input,
 .ui-field-contain input.ui-slider-input { display: inline-block; width: 50px; }
 select.ui-slider-switch { display: none; }
@@ -13,7 +13,7 @@ a.ui-slider-handle { position: absolute; z-index: 10;  top: 50%; width: 28px; he
 a.ui-slider-handle .ui-btn-inner { padding-left: 0; padding-right: 0; }
 @media all and (min-width: 480px){
 	.ui-field-contain label.ui-slider { vertical-align: top;  display: inline-block;  width: 20%;  margin: 0 2% 0 0; }
-	.ui-field-contain div.ui-slider { width: 45%; }
+	.ui-field-contain div.ui-slider { width: 43%; }
 }	
 
 div.ui-slider-switch { height: 32px;  overflow: hidden; margin-left: 0; }
