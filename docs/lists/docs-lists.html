@@ -35,6 +35,7 @@
 
 			<a href="lists-ul.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Basic list example</a>
 
+			<p><strong>Style note</strong>: all standard, non-inset lists have a -15px margin to negate the 15px of padding on the content area to make lists fill to the edges of the screen. If you add other widgets above or below a list, the negative margin may make these elements overlap so you'll need to add additional spacing in your custom CSS.</p>
 			<h2>Nested lists</h2>
 			<p>By nesting child <code>ul</code> or <code>ol</code> inside list items, you can create nested lists. When a list item with a child list is clicked, the framework will generate a new ui-page populated with the title of the parent in the header and the list of child elements. These dynamic nested lists are styled with the "b" theme swatch (blue in the default theme) to indicate that you are in a secondary level of navigation. Lists can be nested multiple level deep and all pages and linking will be automatically handled by the framework.</p>
 			<p>To set the swatch color of the child list views, <code> data-theme</code> attribute on each list inside.</p>
