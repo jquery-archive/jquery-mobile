@@ -22,7 +22,7 @@ $.fn.buttonMarkup = function( options ) {
 			// Classes Defined
 			innerClass = "ui-btn-inner",
 			buttonClass, iconClass,
-			themedParent, wrap;
+			wrap;
 
 		if ( attachEvents ) {
 			attachEvents();
@@ -30,10 +30,7 @@ $.fn.buttonMarkup = function( options ) {
 
 		// if not, try to find closest theme container
 		if ( !o.theme ) {
-			themedParent = el.closest( "[class*='ui-bar-'],[class*='ui-body-']" );
-			o.theme = themedParent.length ?
-				/ui-(bar|body)-([a-z])/.exec( themedParent.attr( "class" ) )[2] :
-				"c";
+			o.theme = $.mobile.getInheritedTheme( el, "c" );
 		}
 
 		buttonClass = "ui-btn ui-btn-up-" + o.theme;

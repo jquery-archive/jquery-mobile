@@ -22,13 +22,11 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			control = this.element,
 
-			parentTheme = control.parents( "[class*='ui-bar-'],[class*='ui-body-']" ).eq( 0 ),
+			parentTheme = $.mobile.getInheritedTheme( control, "c" ),
 
-			parentTheme = parentTheme.length ? parentTheme.attr( "class" ).match( /ui-(bar|body)-([a-z])/ )[ 2 ] : "c",
+			theme = this.options.theme || parentTheme,
 
-			theme = this.options.theme ? this.options.theme : parentTheme,
-
-			trackTheme = this.options.trackTheme ? this.options.trackTheme : parentTheme,
+			trackTheme = this.options.trackTheme || parentTheme,
 
 			cType = control[ 0 ].nodeName.toLowerCase(),
 

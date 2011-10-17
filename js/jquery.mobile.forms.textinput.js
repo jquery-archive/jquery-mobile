@@ -18,19 +18,17 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		var input = this.element,
 			o = this.options,
 			theme = o.theme,
-			themedParent, themeclass, themeLetter, focusedEl, clearbtn;
+			themeclass, focusedEl, clearbtn;
 
 		if ( !theme ) {
-			themedParent = this.element.closest( "[class*='ui-bar-'],[class*='ui-body-']" );
-			themeLetter = themedParent.length && /ui-(bar|body)-([a-z])/.exec( themedParent.attr( "class" ) );
-			theme = themeLetter && themeLetter[2] || "c";
+			theme = $.mobile.getInheritedTheme( this.element, "c" );
 		}
 
 		themeclass = " ui-body-" + theme;
 
 		$( "label[for='" + input.attr( "id" ) + "']" ).addClass( "ui-input-text" );
 
-		input.addClass("ui-input-text ui-body-"+ o.theme );
+		input.addClass("ui-input-text ui-body-"+ theme );
 
 		focusedEl = input;
 

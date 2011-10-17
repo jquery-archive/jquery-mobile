@@ -29,22 +29,6 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		return $( "<div/>" );
 	},
 
-	_theme: function(){
-		if ( this.options.theme ){
-			return this.options.theme;
-		}
-
-		var themedParent, theme;
-		// if no theme is defined, try to find closest theme container
-		// TODO move to core as something like findCurrentTheme
-		themedParent = this.select.closest( "[class*='ui-bar-'], [class*='ui-body-']" );
-		theme = themedParent.length ?
-			/ui-(bar|body)-([a-z])/.exec( themedParent.attr( "class" ) )[2] :
-			"c";
-
-		return theme;
-	},
-
 	_setDisabled: function( value ) {
 		this.element.attr( "disabled", value );
 		this.button.attr( "aria-disabled", value );
@@ -69,7 +53,9 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		this.selectID  = this.select.attr( "id" );
 		this.label = $( "label[for='"+ this.selectID +"']" ).addClass( "ui-select" );
 		this.isMultiple = this.select[ 0 ].multiple;
-		this.options.theme = this._theme();
+		if ( !this.options.theme ) {
+			this.options.theme = $.mobile.getInheritedTheme( this.select, "c" );
+		}
 	},
 
 	_create: function() {

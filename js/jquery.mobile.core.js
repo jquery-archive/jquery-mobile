@@ -125,6 +125,20 @@
 			}
 
 			return $.camelCase( $.mobile.ns + prop );
+		},
+
+		getInheritedTheme: function( el, defaultTheme ) {
+			// Find the closest parent with a theme class on it.
+			var themedParent = el.closest( "[class*='ui-bar-'],[class*='ui-body-']" ),
+	
+				// If there's a themed parent, extract the theme letter
+				// from the theme class	.
+				ltr = ( themedParent.length && /ui-(bar|body)-([a-z])\b/.exec( themedParent.attr( "class" ) )[ 2 ] || "" ) || "";
+
+			// Return the theme letter we found, if none, return the
+			// specified default.
+
+			return ltr || defaultTheme || "a";
 		}
 	});
 
