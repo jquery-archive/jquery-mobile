@@ -336,6 +336,7 @@
 					});
 
 					self.menuType = "page";
+					self.menuPage.find("div .ui-title").text(widget.label.getEncodedText());
 					self.menuPageContent.append( self.list );
 					$.mobile.changePage( self.menuPage, {
 						transition: $.mobile.defaultDialogTransition
