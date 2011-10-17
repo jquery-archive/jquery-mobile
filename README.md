@@ -59,7 +59,7 @@ browser to http://localhost:8888 to preview the code.
 Another alternative is XAMPP (Mac, Windows). You need to actually modify Apache's httpd.conf to point to your checkout:
 [Instructions](http://www.apachefriends.org/en/xampp.html)
 
-You need the following Apache module loaded:
+You need the following Apache modules loaded:
 
 * Rewrite (mod\_rewrite.so)
 * Expire (mod\_expires.so)
