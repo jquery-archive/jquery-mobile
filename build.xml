@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <project name="jquery-mobile" basedir="." default="merge">
 
-	<property name="jsdir" location="js"/>
-	<property name="csstheme-dir" location="css/themes/default"/>
-	<property name="csstheme-sources" value="jquery.mobile.theme.css"/>
-	<property name="csscore-dir" location="css/core"/>
-	<property name="csscore-sources" value="jquery.mobile.core.css,
+	<property name="js-dir" location="js"/>
+	<property name="css-theme-dir" location="css/themes/default"/>
+	<property name="css-theme-sources" value="jquery.mobile.theme.css"/>
+	<property name="css-structure-dir" location="css/structure"/>
+	<property name="css-structure-sources" value="jquery.mobile.core.css,
 			jquery.mobile.transitions.css,
 			jquery.mobile.grids.css,
 			jquery.mobile.headerfooter.css,
@@ -62,14 +62,14 @@
 
 	<target name="merge_css">
 		<concat destfile="combine/jquery.mobile.css">
-			<filelist dir="${csstheme-dir}" files="${csstheme-sources}"/>
-			<filelist dir="${csscore-dir}" files="${csscore-sources}"/>
+			<filelist dir="${css-theme-dir}" files="${css-theme-sources}"/>
+			<filelist dir="${css-structure-dir}" files="${css-structure-sources}"/>
 		</concat>
 	</target>
 
 	<target name="merge_js">
 		<concat destfile="combine/jquery.mobile.js">
-			<filelist dir="${jsdir}" files="${js-sources}"/>
+			<filelist dir="${js-dir}" files="${js-sources}"/>
 		</concat>
 	</target>
 </project>

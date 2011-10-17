@@ -33,8 +33,8 @@ JS = ${DIR}.js
 MIN = ${DIR}.min.js
 CSS = ${DIR}.css
 CSSMIN = ${DIR}.min.css
-CSSCORE = ${DIR}.core.css
-CSSCOREMIN = ${DIR}.core.min.css
+CSSSTRUCTURE = ${DIR}.structure.css
+CSSSTRUCTUREMIN = ${DIR}.structure.min.css
 CSSTHEME = default
 
 # The files to include when compiling the JS files
@@ -74,25 +74,25 @@ JSFILES = 	  js/jquery.ui.widget.js \
 			  js/jquery.mobile.init.js
 
 CSSTHEMEFILES = css/themes/${CSSTHEME}/jquery.mobile.theme.css
-CSSCOREFILES = css/core/jquery.mobile.core.css \
-			  css/core/jquery.mobile.transitions.css \
-			  css/core/jquery.mobile.grids.css \
-			  css/core/jquery.mobile.headerfooter.css \
-			  css/core/jquery.mobile.navbar.css \
-			  css/core/jquery.mobile.button.css \
-			  css/core/jquery.mobile.collapsible.css \
-			  css/core/jquery.mobile.controlgroup.css \
-			  css/core/jquery.mobile.dialog.css \
-			  css/core/jquery.mobile.forms.checkboxradio.css \
-			  css/core/jquery.mobile.forms.fieldcontain.css \
-			  css/core/jquery.mobile.forms.select.css \
-			  css/core/jquery.mobile.forms.textinput.css \
-			  css/core/jquery.mobile.listview.css \
-			  css/core/jquery.mobile.forms.slider.css
+CSSSTRUCTUREFILES = css/structure/jquery.mobile.core.css \
+			  css/structure/jquery.mobile.transitions.css \
+			  css/structure/jquery.mobile.grids.css \
+			  css/structure/jquery.mobile.headerfooter.css \
+			  css/structure/jquery.mobile.navbar.css \
+			  css/structure/jquery.mobile.button.css \
+			  css/structure/jquery.mobile.collapsible.css \
+			  css/structure/jquery.mobile.controlgroup.css \
+			  css/structure/jquery.mobile.dialog.css \
+			  css/structure/jquery.mobile.forms.checkboxradio.css \
+			  css/structure/jquery.mobile.forms.fieldcontain.css \
+			  css/structure/jquery.mobile.forms.select.css \
+			  css/structure/jquery.mobile.forms.textinput.css \
+			  css/structure/jquery.mobile.listview.css \
+			  css/structure/jquery.mobile.forms.slider.css
 
 
 # The files to include when compiling the CSS files
-CSSFILES = ${CSSTHEMEFILES} ${CSSCOREFILES}
+CSSFILES = ${CSSTHEMEFILES} ${CSSSTRUCTUREFILES}
 
 # By default, this is what get runs when make is called without any arguments.
 # Min and un-min CSS and JS files are the only things built
@@ -103,14 +103,14 @@ css: init
 	# Build the CSS file
 	@@head -8 js/jquery.mobile.core.js | ${SED_VER} > ${OUTPUT}/${CSS}
 	@@cat ${CSSFILES} >> ${OUTPUT}/${CSS}
-	@@head -8 js/jquery.mobile.core.js | ${SED_VER} > ${OUTPUT}/${CSSCORE}
-	@@cat ${CSSCOREFILES} >> ${OUTPUT}/${CSSCORE}
+	@@head -8 js/jquery.mobile.core.js | ${SED_VER} > ${OUTPUT}/${CSSSTRUCTURE}
+	@@cat ${CSSSTRUCTUREFILES} >> ${OUTPUT}/${CSSSTRUCTURE}
 
 # Build the minified CSS file
 cssmin: init css
 	# Build the minified CSS file
 	@@java -jar build/yuicompressor-2.4.6.jar --type css ${OUTPUT}/${CSS} >> ${OUTPUT}/${CSSMIN}
-	@@java -jar build/yuicompressor-2.4.6.jar --type css ${OUTPUT}/${CSSCORE} >> ${OUTPUT}/${CSSCOREMIN}
+	@@java -jar build/yuicompressor-2.4.6.jar --type css ${OUTPUT}/${CSSSTRUCTURE} >> ${OUTPUT}/${CSSSTRUCTUREMIN}
 
 # Build the normal JS file
 js: init
