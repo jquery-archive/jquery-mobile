@@ -5,7 +5,7 @@ DATE = $(shell date "+%Y%m%d")
 VER = $(shell cat version.txt)
 
 # The command to replace the @VERSION in the files with the actual version
-SED_VER = sed "s/@VERSION/$(shell git log -1 --format=format:" Git || Date: %cd Info SHA1: %H")/"
+SED_VER = sed "s/@VERSION/$(shell git log -1 --format=format:" Git > Date: %cd Info SHA1: %H")/"
 deploy:  SED_VER = sed "s/@VERSION/${VER}/"
 
 # The version of jQuery core used
@@ -35,6 +35,7 @@ CSS = ${DIR}.css
 CSSMIN = ${DIR}.min.css
 CSSSTRUCTURE = ${DIR}.structure.css
 CSSSTRUCTUREMIN = ${DIR}.structure.min.css
+CSSTHEME = default
 
 # The files to include when compiling the JS files
 JSFILES = 	  js/jquery.ui.widget.js \
@@ -72,22 +73,22 @@ JSFILES = 	  js/jquery.ui.widget.js \
 			  js/jquery.mobile.fixHeaderFooter.native.js \
 			  js/jquery.mobile.init.js
 
-CSSTHEMEFILES = themes/default/jquery.mobile.theme.css
-CSSSTRUCTUREFILES = themes/default/jquery.mobile.core.css \
-			  themes/default/jquery.mobile.transitions.css \
-			  themes/default/jquery.mobile.grids.css \
-			  themes/default/jquery.mobile.headerfooter.css \
-			  themes/default/jquery.mobile.navbar.css \
-			  themes/default/jquery.mobile.button.css \
-			  themes/default/jquery.mobile.collapsible.css \
-			  themes/default/jquery.mobile.controlgroup.css \
-			  themes/default/jquery.mobile.dialog.css \
-			  themes/default/jquery.mobile.forms.checkboxradio.css \
-			  themes/default/jquery.mobile.forms.fieldcontain.css \
-			  themes/default/jquery.mobile.forms.select.css \
-			  themes/default/jquery.mobile.forms.textinput.css \
-			  themes/default/jquery.mobile.listview.css \
-			  themes/default/jquery.mobile.forms.slider.css
+CSSTHEMEFILES = css/themes/${CSSTHEME}/jquery.mobile.theme.css
+CSSSTRUCTUREFILES = css/structure/jquery.mobile.core.css \
+			  css/structure/jquery.mobile.transitions.css \
+			  css/structure/jquery.mobile.grids.css \
+			  css/structure/jquery.mobile.headerfooter.css \
+			  css/structure/jquery.mobile.navbar.css \
+			  css/structure/jquery.mobile.button.css \
+			  css/structure/jquery.mobile.collapsible.css \
+			  css/structure/jquery.mobile.controlgroup.css \
+			  css/structure/jquery.mobile.dialog.css \
+			  css/structure/jquery.mobile.forms.checkboxradio.css \
+			  css/structure/jquery.mobile.forms.fieldcontain.css \
+			  css/structure/jquery.mobile.forms.select.css \
+			  css/structure/jquery.mobile.forms.textinput.css \
+			  css/structure/jquery.mobile.listview.css \
+			  css/structure/jquery.mobile.forms.slider.css
 
 
 # The files to include when compiling the CSS files
@@ -144,7 +145,7 @@ zip: init js min css cssmin
 	@@mkdir -p ${DIR}
 	@@cp ${OUTPUT}/${DIR}*.js ${DIR}/
 	@@cp ${OUTPUT}/${DIR}*.css ${DIR}/
-	@@cp -R themes/default/images ${DIR}/
+	@@cp -R css/themes/${CSSTHEME}/images ${DIR}/
 	@@zip -rq ${OUTPUT}/${DIR}.zip ${DIR}
 	@@rm -fr ${DIR}
 
@@ -155,7 +156,7 @@ nightly: pull zip
 	@@mkdir -p ${VER}
 
 	# Copy in the base stuff for the demos
-	@@cp -r index.html themes experiments docs tools ${VER}/
+	@@cp -r index.html css experiments docs tools ${VER}/
 
 	# First change all the paths from super deep to the same level for JS files
 	@@find ${VER} -type f -name '*.html' -exec sed -i 's|src="../../../js|src="js|g' {} \;
@@ -169,7 +170,7 @@ nightly: pull zip
 	@@find ${VER} -type f -name '*.html' -exec sed -i 's|rel="stylesheet"  href="../|rel="stylesheet"  href="|g' {} \;
 
 	# Change the empty paths to the location of this nightly file
-	@@find ${VER} -type f -name '*.html' -exec sed -i 's|href="themes/default/"|href="${NIGHTLY_WEBPATH}/${DIR}.min.css"|g' {} \;
+	@@find ${VER} -type f -name '*.html' -exec sed -i 's|href="css/themes/${CSSTHME}/"|href="${NIGHTLY_WEBPATH}/${DIR}.min.css"|g' {} \;
 	@@find ${VER} -type f -name '*.html' -exec sed -i 's|src="js/jquery.js"|src="http://code.jquery.com/jquery-${JQUERY}.min.js"|' {} \;
 	@@find ${VER} -type f -name '*.html' -exec sed -i 's|src="js/"|src="${NIGHTLY_WEBPATH}/${DIR}.min.js"|g' {} \;
 
@@ -177,7 +178,7 @@ nightly: pull zip
 	@@mv ${VER} ${OUTPUT}/demos
 
 	# Copy the images as well
-	@@cp -R themes/default/images ${OUTPUT}
+	@@cp -R css/themes/${CSSTHME}/images ${OUTPUT}
 
 	@@${RMLATEST}
 	@@scp -r ${OUTPUT} jqadmin@code.origin.jquery.com:/var/www/html/code.jquery.com/mobile/${NIGHTLY_OUTPUT}
@@ -192,7 +193,7 @@ deploy: zip
 
 	# Deploy Demos to the jQueryMobile.com site
 	@@mkdir -p ${VER}
-	@@cp -r index.html themes experiments docs tools ${VER}/
+	@@cp -r index.html css experiments docs tools ${VER}/
 
 	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|src="../../../js|src="js|g' {} \;
 	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|src="../../js|src="js|g' {} \;
@@ -203,7 +204,7 @@ deploy: zip
 	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|rel="stylesheet"  href="../../|rel="stylesheet"  href="|g' {} \;
 	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|rel="stylesheet"  href="../|rel="stylesheet"  href="|g' {} \;
 
-	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|href="themes/default/"|href="http://code.jquery.com/mobile/${VER}/${DIR}.min.css"|g' {} \;
+	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|href="css/themes/${CSSTHEME}/"|href="http://code.jquery.com/mobile/${VER}/${DIR}.min.css"|g' {} \;
 	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|src="js/jquery.js"|src="http://code.jquery.com/jquery-${JQUERY}.min.js"|' {} \;
 	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|src="js/"|src="http://code.jquery.com/mobile/${VER}/${DIR}.min.js"|g' {} \;
 
