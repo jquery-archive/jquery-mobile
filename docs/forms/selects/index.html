@@ -174,6 +174,150 @@
 -->
 
 
+<h2>Vertically grouped select inputs</h2>
+
+<p>To create a grouped set of select inputs, first add <code>select</code> and a corresponding <code>label</code>. Set the <code>for</code> attribute of the <code>label</code> to match the ID of the <code>select</code> so they are semantically associated.</p>
+
+<p>Because the <code>label</code> element will be associated with each individual select input, we recommend wrapping the selects in a <code>fieldset</code> element that has a <code>legend</code> which acts as the combined label for the grouped inputs.</p>
+
+<p>Lastly, one needs to wrap the <code>fieldset</code> in a <code>div</code> with <code> data-role="controlgroup"</code> attribute, so it can be styled as a group.</p>
+			
+<pre><code>	
+&lt;div data-role=&quot;fieldcontain&quot;&gt;
+&lt;fieldset data-role=&quot;controlgroup&quot;&gt;
+	&lt;legend&gt;Date of Birth:&lt;/legend&gt;
+
+    &lt;label for="select-choice-month">Month&lt;/label&gt;
+&lt;select name="select-choice-month" id="select-choice-month"&gt;
+	&lt;option&gt;Month&lt;/option&gt;
+	&lt;option value="jan"&gt;January&lt;/option&gt;
+	&lt;!-- etc. --&gt;
+&lt;/select&gt;
+
+	&lt;label for="select-choice-day">Day&lt;/label&gt;
+&lt;select name="select-choice-day" id="select-choice-day"&gt;
+	&lt;option&gt;Day&lt;/option&gt;
+	&lt;option value="1"&gt;1&lt;/option&gt;
+	&lt;!-- etc. --&gt;
+&lt;/select&gt;
+
+&lt;label for="select-choice-year">Year&lt;/label&gt;
+&lt;select name="select-choice-year" id="select-choice-year"&gt;
+	&lt;option&gt;Year&lt;/option&gt;
+	&lt;option value="2011"&gt;2011&lt;/option&gt;
+	&lt;!-- etc. --&gt;
+&lt;/select&gt;
+&lt;/fieldset&gt;
+&lt;/div&gt;
+</code></pre>
+
+	<div data-role="fieldcontain">
+	<fieldset data-role="controlgroup">
+		<legend>Date of Birth:</legend>
+		
+		<label for="select-choice-month">Month</label>
+		<select name="select-choice-month" id="select-choice-month">
+			<option>Month</option>
+			<option value="jan">January</option>
+			<option value="dec">December</option>
+			<option value="feb">February</option>
+			<option value="mar">March</option>
+			<option value="apr">April</option>
+			<option value="may">May</option>
+			<option value="jun">June</option>
+			<option value="jul">July</option>
+			<option value="aug">August</option>
+			<option value="sep">September</option>
+			<option value="oct">October</option>
+			<option value="nov">November</option>
+			<option value="dec">December</option>
+		</select>
+
+		<label for="select-choice-day">Day</label>
+		<select name="select-choice-day" id="select-choice-day">
+			<option>Day</option>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+			<option value="6">6</option>
+			<option value="7">7</option>
+		</select>
+
+		<label for="select-choice-year">Year</label>
+		<select name="select-choice-year" id="select-choice-year">
+			<option>Year</option>
+			<option value="2011">2011</option>
+			<option value="2010">2010</option>
+			<option value="2009">2009</option>
+			<option value="2008">2008</option>
+			<option value="2007">2007</option>
+			<option value="2006">2006</option>
+			<option value="2005">2005</option>
+			<option value="2004">2004</option>
+		</select>
+	</fieldset>
+
+</div>
+
+<h2>Horizontally grouped select inputs</h2>
+<p>Select inputs can also be used for grouped sets with more than one related selections. To make a horizontal button set, add the <code>data-type="horizontal"</code> to the fieldset. Note that the buttons which trigger the select will resize depending on the currently selected option’s value. Note that browsers without support for <code>display: inline-block;</code> will group the selects vertically, as above.</p>
+
+<code>
+&lt;fieldset data-role="controlgroup" <strong>data-type="horizontal"</strong>&gt;
+</code>
+
+<div data-role="fieldcontain">
+	<fieldset data-role="controlgroup" data-type="horizontal">
+		<legend>Date of Birth:</legend>
+		
+		<label for="select-choice-month">Month</label>
+		<select name="select-choice-month" id="select-choice-month">
+			<option>Month</option>
+			<option value="jan">January</option>
+			<option value="dec">December</option>
+			<option value="feb">February</option>
+			<option value="mar">March</option>
+			<option value="apr">April</option>
+			<option value="may">May</option>
+			<option value="jun">June</option>
+			<option value="jul">July</option>
+			<option value="aug">August</option>
+			<option value="sep">September</option>
+			<option value="oct">October</option>
+			<option value="nov">November</option>
+			<option value="dec">December</option>
+		</select>
+
+		<label for="select-choice-day">Day</label>
+		<select name="select-choice-day" id="select-choice-day">
+			<option>Day</option>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+			<option value="6">6</option>
+			<option value="7">7</option>
+		</select>
+
+		<label for="select-choice-year">Year</label>
+		<select name="select-choice-year" id="select-choice-year">
+			<option>Year</option>
+			<option value="2011">2011</option>
+			<option value="2010">2010</option>
+			<option value="2009">2009</option>
+			<option value="2008">2008</option>
+			<option value="2007">2007</option>
+			<option value="2006">2006</option>
+			<option value="2005">2005</option>
+			<option value="2004">2004</option>
+		</select>
+	</fieldset>
+
+</div>
+
 
 <h2>Using custom menus</h2>
 <p>the framework builds a custom menu based on the <code>select</code> element's list of options.  We recommend using a custom menu when multiple selections are required, as , or when the menu itself must be styled with CSS.</p>

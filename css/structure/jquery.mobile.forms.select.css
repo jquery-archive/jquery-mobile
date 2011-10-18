@@ -30,7 +30,7 @@ label.ui-select { font-size: 16px; line-height: 1.4;  font-weight: normal; margi
 .ui-li.ui-selectmenu-placeholder { display: none; }
 .ui-selectmenu .ui-header .ui-title { margin: 0.6em 46px 0.8em; }
 
-@media all and (min-width: 450px){
+@media all and (min-width: 450px){	
 	.ui-field-contain label.ui-select { vertical-align: top;  display: inline-block;  width: 20%;  margin: 0 2% 0 0; }
 	.ui-field-contain .ui-select { width: 60%; display: inline-block; }
 }	
