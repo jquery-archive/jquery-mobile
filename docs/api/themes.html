@@ -100,6 +100,7 @@
 				</div><!-- /controlgroup -->
 			</div>
 
+
 		<p>Learn more about <a href="../content/content-themes.html">content theming</a>.</p>
 		
 
@@ -222,9 +223,27 @@
 		<h3>Icons</h3>
 		<p>There a core set of <a href="../buttons/buttons-icons.html">standard icons</a> included in the framework that can be assigned to any button. To minimize the download size of the core icons, jQuery Mobile only includes these icons in white and automatically adds a semi-transparent black circle behind the icon to make sure it has good contrast on all background colors.</p>
 
-		
+		<h3>Theme classes</h3>
+		<p>Assigning color swatches through the <code> data-theme</code> attribute is one way to leverage the theme system, but it's also possible to apply any of the theme swatches directly to your markup through classes to apply the colors, textures and font formatting of your theme to any markup. This is especially useful when creating your own custom layout elements or UI widgets. Here are a few common theme classes, but many more are available in the theme stylesheet:</p>
+		<dl>
+			<dt><code>ui-bar-(a-z)</code></dt>
+			<dd>Applies the toolbar theme styles for the selected swatch letter. Commonly used in conjunction with <code>ui-bar</code> structural class to add the standard bar padding styles.<>/dd>
+			<dt><code>ui-body-(a-z)</code></dt>
+			<dd>Applies the content body theme styles for the selected swatch letter. Commonly used in conjunction with <code>ui-body</code> structural class to add the standard content block padding styles. </dd>
+			<dt><code>ui-btn-up-(a-z)</code></dt>
+			<dd>Applies the button/clickable element theme styles for the selected swatch letter. Commonly used in with the <code>ui-btn-hover-(a-z)</code> and <code>ui-btn-down-(a-z)</code> interaction class states to provide visual feedback and <code>ui-btn-active</code> to indicate the selected or "on" state.</dd>
+			<dt><code>ui-corner-all</code></dt>
+			<dd>Applies the theme's global border-radius for rounded corners and is used for container or grouped items in the framework (inset lists, radiobutton sets). There are additional classes for all the possible combinations of rounded corners, for example: <code>ui-corner-tl</code> (top left only), <code>-top</code> (both top corners), <code>-left</code> (both left corners),  etc. A second full set of corner classes is provided for buttons so these can have a different corner radius. These use classes with a similar naming convention, but with "btn" instead of "corner", like this: <code>.ui-<strong>btn</strong>-corner-all</code>.</dd>
+			<dt><code>ui-shadow</code></dt>
+			<dd>Applies the theme's global drop shadow to any element using CSS <code>box-shadow</code> property. </dd>
+			<dt><code>ui-disabled</code></dt>
+			<dd>Applies the disabled look and feel which essentially reduces the opacity of any element with this class to 30%, hides the cursor, and sets <code>pointer-events: none;</code> which prevents any interaction in many modern browsers.</dd>
+		</dl>
 
-	
+			<h3>Overriding themes</h3>
+			<p>The themes are meant as a solid starting point, but are meant to be customized to add the custom design elements that make your site or app unique. Since everything is controlled by CSS, it's easy to use a web inspector tool to identify the style properties you want to modify. The set of of theme classes (global) and semantic structural classes (widget-specific) added to elements provide a rich set of possible selectors to target style overrides against. We recommend adding an external stylesheet to the <code>head</code>, placed <strong>after</strong> the structure and theme stylesheet references, that contain all your style overrides. This allows you to easily update to newer versions of the library because overrides are kept separate from the library code.</p>
+			
+			
 		<p><strong>Learn more</strong> about theming individual components:</p>
 		<ul data-role="listview" data-inset="true">
 			<li><a href="../pages/pages-themes.html">Page theming</a></li>
