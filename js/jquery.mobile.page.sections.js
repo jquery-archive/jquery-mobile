@@ -65,6 +65,8 @@ $( ":jqmData(role='page'), :jqmData(role='dialog')" ).live( "pagecreate", functi
 			}
 
 			// Page title
+			// folks may want to have a blank header as a toolbar - adding an empty h1 to avoid just a line as header
+			if ( $this.children( "h1, h2, h3, h4, h5, h6" ).length == 0 ) { $(this).append("<h1></h1>"); }
 			$this.children( "h1, h2, h3, h4, h5, h6" )
 				.addClass( "ui-title" )
 				// Regardless of h element number in src, it becomes h1 for the enhanced page
