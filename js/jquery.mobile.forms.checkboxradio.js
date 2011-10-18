@@ -58,9 +58,9 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			.wrapAll( "<div class='ui-" + inputtype + "'></div>" );
 
 		label.bind({
-			vmouseover: function() {
+			vmouseover: function( event ) {
 				if ( $( this ).parent().is( ".ui-disabled" ) ) {
-					return false;
+					event.stopPropagation();
 				}
 			},
 
