@@ -75,7 +75,8 @@ theme's name. For testing locally, make sure the index.php file is copied as wel
 2. Edit the `jquery.mobile.theme.css` file so it contains your custom fonts and colors.
 3. Once you are done editing your files and saving them, open a terminal.
 4. Navigate to the jQuery-Mobile folder's root.
-5. Run
+5. Run the following command to build jQuery-Mobile. The CSSTHEME specifies what theme to include. If you leave it off,
+it will build using the "default" theme.
 
     make CSSTHEME=YourThemeName
     
