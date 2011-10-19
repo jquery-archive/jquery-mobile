@@ -61,6 +61,9 @@
 	</target>
 
 	<target name="merge_css">
+		<concat destfile="combine/jquery.mobile.structure.css">
+			<filelist dir="${css-structure-dir}" files="${css-structure-sources}"/>
+		</concat>
 		<concat destfile="combine/jquery.mobile.css">
 			<filelist dir="${css-theme-dir}" files="${css-theme-sources}"/>
 			<filelist dir="${css-structure-dir}" files="${css-structure-sources}"/>
