@@ -406,6 +406,16 @@ $( '#aboutPage' ).live( 'pageinit',function(event){
 			</dd>
 		</dl>
 
+		<h2>Layout events</h2>
+		<p>Some components within the framework, such as collapsible and listview search, dynamically hide and show content based on user events. This hiding/showing of content affects the size of the page and may result in the browser adjusting/scrolling the viewport to accomodate the new page size. Since this has the potential to affect other components such as fixed headers and footers, components like collapsible and listview trigger a custom <code>updatelayout</code> event to notify other components that they may need to adjust their layouts in response to their content changes. Developers who are building dynamic applications that inject content into the current page can also manually trigger this <code>updatelayout</code> event to ensure components on the page update in response to the new content that was just added.</p>
+		<dl>
+			<dt><code>updatelayout</code></dt>
+			<dd>This event is triggered by components within the framework that dynamically show/hide content, and is meant as a generic mechanism to notify other components that they may need to update their size or position. Within the framework, this event is fired on the component element whose content was shown/hidden, and bubbles all the way up to the document element.
+<pre><code>
+$( '#foo' ).hide().trigger( 'updatelayout' );
+</code></pre>
+            </dd>
+        </dl>
 		<h2>Virtual mouse events</h2>
 		<p>We provide a set of "virtual" mouse events that attempt to abstract away mouse and touch events. This allows the developer to register listeners for the basic mouse events, such as mousedown, mousemove, mouseup, and click, and the plugin will take care of registering the correct listeners behind the scenes to invoke the listener at the fastest possible time for that device. In touch environments, the plugin retains the order of event firing that is seen in traditional mouse environments, so for example, vmouseup is always dispatched before vmousedown, and vmousedown before vclick, etc. The virtual mouse events also normalize how coordinate information is extracted from the event, so in touch based environments, coordinates are available from the pageX, pageY, screenX, screenY, clientX, and clientY properties, directly on the event object.</p>
 		<dl>
