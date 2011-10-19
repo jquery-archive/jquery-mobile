@@ -13,6 +13,7 @@ JQUERY = $(shell grep Library js/jquery.js | sed s'/ \* jQuery JavaScript Librar
 
 # The directory to create the zipped files in and also serves as the filenames
 DIR = jquery.mobile-${VER}
+STRUCTUREFILE = jquery.mobile.structure-${VER}
 nightly: DIR = jquery.mobile
 
 # The output folder for the finished files
@@ -33,8 +34,8 @@ JS = ${DIR}.js
 MIN = ${DIR}.min.js
 CSS = ${DIR}.css
 CSSMIN = ${DIR}.min.css
-CSSSTRUCTURE = ${DIR}.structure.css
-CSSSTRUCTUREMIN = ${DIR}.structure.min.css
+CSSSTRUCTURE = ${STRUCTUREFILE}.css
+CSSSTRUCTUREMIN = ${STRUCTUREFILE}.min.css
 CSSTHEME = default
 
 # The files to include when compiling the JS files

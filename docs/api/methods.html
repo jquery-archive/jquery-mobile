@@ -191,6 +191,47 @@ $.mobile.hidePageLoadingMsg();
 			
 			</dd>
 			
+			<dt><code>$.mobile.fixedToolbars.show</code> (<em>method</em>)</dt>
+			<dd>Utility method for displaying the fixed header and/or footer of the current active page within the viewport. Note that fixed headers/footers are never really hidden. Toggling the show/hide state of a toolbar is really toggling whether or not they are inline within the page content, or displayed within the viewport as if they were fixed.</dd>
+			<dd>
+				<dl>
+					<dt><code>&#183;</code> Arguments</dt>
+					<dd><code>immediately</code> (<em>boolean</em>, optional) If true, any fixed header or footer for the current active page is displayed immediately within the viewport. If false or unspecified, the fixed header/footer will fade-in after a 100 millisecond delay. Note that other events such as a document resize or scroll event can result in an additional delay before the start of the header/footer display animation.</dd>							
+				</dl>
+			</dd>
+			<dd>Example:
+			<pre>
+			<code>
+<strong>// Show fixed header/footer with a fade animation.</strong> 			
+$.mobile.fixedToolbars.show();	
+
+<strong>// Show fixed header/footer immediately.</strong>
+$.mobile.fixedToolbars.show(true);	
+			</code>
+			</pre>
+			
+			</dd>
+
+			<dt><code>$.mobile.fixedToolbars.hide</code> (<em>method</em>)</dt>
+			<dd>Utility method for hiding the fixed header and/or footer of the current active page.</dd>
+			<dd>
+				<dl>
+					<dt><code>&#183;</code> Arguments</dt>
+					<dd><code>immediately</code> (<em>boolean</em>, optional) If true, any fixed header or footer for the current active page is immediately placed inline (back in flow) with the page content, which means it will scroll along with the content and will only be visible when viewing the top or bottom of the page within the viewport. If false or unspecified, the fixed header/footer will fade-out after a 100 millisecond delay. Note that other events such as a document resize or scroll event can result in the header/footer being immediately hidden.</dd>							
+				</dl>
+			</dd>
+			<dd>Example:
+			<pre>
+			<code>
+<strong>// Hide fixed header/footer with a fade animation.</strong> 			
+$.mobile.fixedToolbars.hide();	
+
+<strong>// Hide fixed header/footer immediately.</strong>
+$.mobile.fixedToolbars.hide(true);	
+			</code>
+			</pre>
+			
+			</dd>
             
 			<dt><code>$.mobile.path.parseUrl</code> (<em>method</em>)</dt>
 			<dd>Utility method for parsing a URL and its relative variants into an object that makes accessing the components of the URL easy. When parsing relative variants, the resulting object will contain empty string values for missing components (like protocol, host, etc). Also, when parsing URLs that have no authority, such as tel: urls, the pathname property of the object will contain the data after the protocol/scheme colon.</dd>
