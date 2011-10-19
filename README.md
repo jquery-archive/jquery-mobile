@@ -1,11 +1,11 @@
 jQuery Mobile Framework
-=====
+=======================
 [Official Site: http://jquerymobile.com](http://jquerymobile.com)
 
 [Demos and Documentation](http://jquerymobile.com/test/)
 
 How to build your own jQuery Mobile CSS and JS files
-===================================
+====================================================
 Clone this repo and build the js and css files (you'll need Git and Make installed):
 
     git clone git://github.com/jquery/jquery-mobile.git
@@ -13,10 +13,10 @@ Clone this repo and build the js and css files (you'll need Git and Make install
     make
 
 A full version and a minified version of the jQuery Mobile JavaScript and CSS files will be created 
-in a folder named "compiled".
+in a folder named "compiled". There is also now a Structure only css file so you can add your own theme on top of it.
 
 Submitting bugs
-===================================
+===============
 If you think you've found a bug, please report it by following these instructions:  
 
 1. Visit the [Issue tracker: https://github.com/jquery/jquery-mobile/issues](https://github.com/jquery/jquery-mobile/issues)
@@ -36,14 +36,14 @@ If you think you've found a bug, please report it by following these instruction
 3. Submit the issue.
 
 Submitting patches
-===================================
+==================
 To contribute code and bug fixes to jQuery Mobile: fork this project on Github, make changes to the code in your fork, 
 and then send a "pull request" to notify the team of updates that are ready to be reviewed for inclusion.
 
 Detailed instructions can be found at [jQuery Mobile Patching](https://gist.github.com/1294035)
 
 Running the jQuery Mobile demos & docs locally
-===================================
+==============================================
 To preview locally, you'll need to clone a local copy of this repository and point your Apache & PHP webserver at its 
 root directory (a webserver is required, as PHP and .htaccess are used for combining development files).
 
@@ -64,3 +64,20 @@ You need the following Apache modules loaded:
 * Rewrite (mod\_rewrite.so)
 * Expire (mod\_expires.so)
 * Header (mod\_headers.so)
+
+Building With A Custom Theme
+============================
+To use a custom theme in your own build, you'll need Make installed. You can find the themes in the CSS/Themes folder.
+To create a new theme:
+
+1. Copy the `Default` folder from CSS/Themes to a new folder in the same location. The name of the folder will be the
+theme's name. For testing locally, make sure the index.php file is copied as well.
+2. Edit the `jquery.mobile.theme.css` file so it contains your custom fonts and colors.
+3. Once you are done editing your files and saving them, open a terminal.
+4. Navigate to the jQuery-Mobile folder's root.
+5. Run the following command to build jQuery-Mobile. The CSSTHEME specifies what theme to include. If you leave it off,
+it will build using the "default" theme.
+
+    make CSSTHEME=YourThemeName
+    
+6. The compiled files will be located in the "compiled" folder in the root of jQuery-Mobile.
