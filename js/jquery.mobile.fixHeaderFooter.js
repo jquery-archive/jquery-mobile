@@ -148,7 +148,7 @@ $.mobile.fixedToolbars = (function() {
 				stateBefore = null;
 			});
 
-			$window.bind( "resize contentmodified", showEventCallback );
+			$window.bind( "resize updatelayout", showEventCallback );
 	});
 
 	// 1. Before page is shown, check for duplicate footer
