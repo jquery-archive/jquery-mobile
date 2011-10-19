@@ -69,6 +69,7 @@ Building With A Custom Theme
 ============================
 To use a custom theme in your own build, you'll need Make installed. You can find the themes in the CSS/Themes folder.
 To create a new theme:
+
 1. Copy the `Default` folder from CSS/Themes to a new folder in the same location. The name of the folder will be the
 theme's name. For testing locally, make sure the index.php file is copied as well.
 2. Edit the `jquery.mobile.theme.css` file so it contains your custom fonts and colors.
