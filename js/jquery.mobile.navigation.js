@@ -1282,7 +1282,7 @@
 				href = path.makeUrlAbsolute( $link.attr( "href" ) || "#", baseUrl );
 
 			//if ajax is disabled, exit early
-			if( !$.mobile.ajaxEnabled && !path.isEmbeddedPage( href ) ){
+			if( !$.mobile.ajaxEnabled && ( !path.isEmbeddedPage( href ) || !$.mobile.hashListeningEnabled ) ) {
 				httpCleanup();
 				//use default click handling
 				return;
