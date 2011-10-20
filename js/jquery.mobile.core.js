@@ -159,12 +159,12 @@
 	};
 	
 	$.fn.inheritedTheme = function( defaultTheme ) {
-		// Find the closest parent with a theme class on it.
-		var p = this.parent(),
-			cl = p.attr( "class" ),
-			ltr = (cl && ( ltr = /ui-(bar|body)-([a-z])\b/.exec( cl ) ) && ltr[ 2 ]) || "";
-
-		return ltr || ( p.parent() && p.inheritedTheme( defaultTheme ) ) || defaultTheme || "a";
+		var ltr;
+		this.parents("[class*='ui-bar-'],[class*='ui-body-']").each(function() {
+			ltr = ( ( ltr = /ui-(bar|body)-([a-z])\b/.exec( $(this).attr("class") ) ) && ltr[ 2 ]) || "";
+			if (ltr) return false;
+		});
+		return ltr || "a";
 	};
 
 	$.fn.removeWithDependents = function() {
