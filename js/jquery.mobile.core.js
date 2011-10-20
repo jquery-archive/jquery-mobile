@@ -164,7 +164,7 @@
 			ltr = ( ( ltr = /ui-(bar|body)-([a-z])\b/.exec( $(this).attr("class") ) ) && ltr[ 2 ]) || "";
 			if (ltr) return false;
 		});
-		return ltr || "a";
+		return ltr || defaultTheme || "a";
 	};
 
 	$.fn.removeWithDependents = function() {
