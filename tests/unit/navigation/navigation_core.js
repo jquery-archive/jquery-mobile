@@ -5,6 +5,7 @@
 	// TODO move siteDirectory over to the nav path helper
 	var changePageFn = $.mobile.changePage,
 		originalTitle = document.title,
+		originalLinkBinding = $.mobile.linkBindingEnabled,
 		siteDirectory = location.pathname.replace( /[^/]+$/, "" ),
 		home = $.mobile.path.parseUrl(location.pathname).directory,
 		navigateTestRoot = function(){
@@ -41,6 +42,7 @@
 			$.mobile.urlHistory.stack = [];
 			$.mobile.urlHistory.activeIndex = 0;
 			$.Event.prototype.which = undefined;
+			$.mobile.linkBindingEnabled = originalLinkBinding;
 		}
 	});
 
@@ -868,6 +870,26 @@
 			function( timeout ) {
 				ok( timeout, "page event handler timed out due to ignored click" );
 				ok($.mobile.activePage[0] !== $("#odd-clicks-page-dest")[0], "pages are not the same");
+				start();
+			}
+		]);
+	});
+
+	asyncTest( "disabling link binding disables navigation via links and highlighting", function() {
+		$.mobile.linkBindingEnabled = false;
+
+		$.testHelper.pageSequence([
+			function() {
+				$.testHelper.openPage("#bar");
+			},
+
+			function() {
+				$.mobile.activePage.find( "a" ).click();
+			},
+
+			function( timeout ) {
+				ok( !$.mobile.activePage.find( "a" ).hasClass( $.mobile.activeBtnClass ), "vlick handler doesn't add the activebtn class" );
+				ok( timeout, "no page change was fired" );
 				start();
 			}
 		]);
