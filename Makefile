@@ -144,8 +144,8 @@ pull:
 # Zip the 4 files and the theme images into one convenient package
 zip: init js min css cssmin
 	@@mkdir -p ${DIR}
-	@@cp ${OUTPUT}/${DIR}*.js ${DIR}/
-	@@cp ${OUTPUT}/${DIR}*.css ${DIR}/
+	@@cp ${OUTPUT}/*.js ${DIR}/
+	@@cp ${OUTPUT}/*.css ${DIR}/
 	@@cp -R css/themes/${CSSTHEME}/images ${DIR}/
 	@@zip -rq ${OUTPUT}/${DIR}.zip ${DIR}
 	@@rm -fr ${DIR}
