@@ -128,17 +128,7 @@
 		},
 
 		getInheritedTheme: function( el, defaultTheme ) {
-			// Find the closest parent with a theme class on it.
-			var themedParent = el.closest( "[class*='ui-bar-'],[class*='ui-body-']" ),
-	
-				// If there's a themed parent, extract the theme letter
-				// from the theme class	.
-				ltr = ( themedParent.length && /ui-(bar|body)-([a-z])\b/.exec( themedParent.attr( "class" ) )[ 2 ] || "" ) || "";
-
-			// Return the theme letter we found, if none, return the
-			// specified default.
-
-			return ltr || defaultTheme || "a";
+			return $( el ).inheritedTheme( defaultTheme );
 		}
 	});
 
@@ -166,6 +156,15 @@
 
 	$.jqmRemoveData = function( elem, prop ) {
 		return $.removeData( elem, $.mobile.nsNormalize( prop ) );
+	};
+	
+	$.fn.inheritedTheme = function( defaultTheme ) {
+		// Find the closest parent with a theme class on it.
+		var p = this.parent(),
+			cl = p.attr( "class" ),
+			ltr = (cl && ( ltr = /ui-(bar|body)-([a-z])\b/.exec( cl ) ) && ltr[ 2 ]) || "";
+
+		return ltr || ( p.parent() && p.inheritedTheme( defaultTheme ) ) || defaultTheme || "a";
 	};
 
 	$.fn.removeWithDependents = function() {
