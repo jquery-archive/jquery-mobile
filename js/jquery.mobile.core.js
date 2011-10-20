@@ -133,7 +133,7 @@
 	
 				// If there's a themed parent, extract the theme letter
 				// from the theme class	.
-				ltr = ( themedParent.length && /ui-(bar|body)-([a-z])\b/.exec( themedParent.attr( "class" ) )[ 2 ] || "" ) || "";
+				ltr = ( themedParent.length && (ltr = /ui-(bar|body)-([a-z])\b/.exec( themedParent.attr( "class" ) )) && ltr[ 2 ] || "" ) || "";
 
 			// Return the theme letter we found, if none, return the
 			// specified default.
