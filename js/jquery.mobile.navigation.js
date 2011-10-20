@@ -1239,7 +1239,7 @@
 		$( document ).bind( "vclick", function( event ) {
 			// if this isn't a left click we don't care. Its important to note
 			// that when the virtual event is generated it will create
-			if ( event.which > 1 ){
+			if ( event.which > 1 || !$.mobile.linkBindingEnabled ){
 				return;
 			}
 
@@ -1256,6 +1256,10 @@
 
 		// click routing - direct to HTTP or Ajax, accordingly
 		$( document ).bind( "click", function( event ) {
+			if( !$.mobile.linkBindingEnabled ){
+				return;
+			}
+
 			var link = findClosestLink( event.target );
 
 			// If there is no link associated with the click or its not a left
