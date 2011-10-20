@@ -90,12 +90,6 @@
     color: #2489CE /*{a-body-link-visited}*/;
 }
 
-.ui-br {
-	border-bottom: rgb(130,130,130);
-	border-bottom: rgba(130,130,130,.3);
-	border-bottom-width: 1px;
-	border-bottom-style: solid;
-}
 .ui-btn-up-a {
 	border: 1px solid 		#222 /*{a-bup-border}*/;
 	background: 			#333333 /*{a-bup-background-color}*/;
@@ -819,6 +813,15 @@ a.ui-link-inherit {
 	-moz-border-radius: 				   0;
 	-webkit-border-radius: 				   0;
 	border-radius: 						   0;
+}
+
+/* Form field separator
+-----------------------------------------------------------------------------------------------------------*/
+.ui-br {
+	border-bottom: rgb(130,130,130);
+	border-bottom: rgba(130,130,130,.3);
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
 }
 
 /* Interaction cues
