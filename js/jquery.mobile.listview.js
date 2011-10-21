@@ -42,7 +42,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		}
 		$countli.addClass( "ui-btn-up-" + ( $list.jqmData( "counttheme" ) || this.options.countTheme ) + " ui-btn-corner-all" );
 
-		// TODO class has to be defined in markup
+		// TODO: class has to be defined in markup
 		item.find( "h1, h2, h3, h4, h5, h6" ).addClass( "ui-li-heading" ).end()
 			.find( "p, dl" ).addClass( "ui-li-desc" ).end()
 			.find( ">img:eq(0), .ui-link-inherit>img:eq(0)" ).addClass( "ui-li-thumb" ).each(function() {
@@ -299,7 +299,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		}
 	},
 
-	// TODO sort out a better way to track sub pages of the listview this is brittle
+	// TODO: sort out a better way to track sub pages of the listview this is brittle
 	childPages: function(){
 		var parentUrl = this.parentPage.jqmData( "url" );
 

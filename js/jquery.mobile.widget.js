@@ -11,7 +11,7 @@ $.widget( "mobile.widget", {
 	// decorate the parent _createWidget to trigger `widgetinit` for users
 	// who wish to do post post `widgetcreate` alterations/additions
 	//
-	// TODO create a pull request for jquery ui to trigger this event
+	// TODO: create a pull request for jquery ui to trigger this event
 	// in the original _createWidget
 	_createWidget: function() {
 		$.Widget.prototype._createWidget.apply( this, arguments );
@@ -39,7 +39,7 @@ $.widget( "mobile.widget", {
 	},
 
 	enhanceWithin: function( target ) {
-		// TODO remove dependency on the page widget for the keepNative.
+		// TODO: remove dependency on the page widget for the keepNative.
 		// Currently the keepNative value is defined on the page prototype so
 		// the method is as well
 		var page = $(target).data( "page" ),

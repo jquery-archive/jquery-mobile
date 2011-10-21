@@ -63,7 +63,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
  		// Allows for extension of the native select for custom selects and other plugins
 		// see select.custom for example extension
-		// TODO explore plugin registration
+		// TODO: explore plugin registration
 		this._trigger( "beforeCreate" );
 
 		this.button = this._button();
@@ -77,7 +77,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			// select first in this case
 			selectedIndex = this.select[ 0 ].selectedIndex == -1 ? 0 : this.select[ 0 ].selectedIndex,
 
-			// TODO values buttonId and menuId are undefined here
+			// TODO: values buttonId and menuId are undefined here
 			button = this.button
 				.text( $( this.select[ 0 ].options.item( selectedIndex ) ).text() )
 				.insertBefore( this.select )
