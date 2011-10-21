@@ -14,9 +14,9 @@ $.fn.buttonMarkup = function( options ) {
 				iconpos: el.jqmData( "iconpos" ),
 				theme: el.jqmData( "theme" ),
 				inline: el.jqmData( "inline" ),
-                                shadow: el.jqmData( "shadow" ),
-                                corners: el.jqmData( "corners" ),
-                                iconshadow: el.jqmData( "iconshadow" )
+				shadow: el.jqmData( "shadow" ),
+				corners: el.jqmData( "corners" ),
+				iconshadow: el.jqmData( "iconshadow" )
 			}, options ),
 
 			// Classes Defined
@@ -87,14 +87,17 @@ $.fn.buttonMarkup.defaults = {
 };
 
 function closestEnabledButton( element ) {
-	while ( element ) {
-		var $ele = $( element );
-		if ( $ele.hasClass( "ui-btn" ) && !$ele.hasClass( "ui-disabled" ) ) {
-			break;
-		}
-		element = element.parentNode;
-	}
-	return element;
+    var cname;
+    
+    while ( element ) {
+        cname = element.className && element.className.split(' ');
+        if ( cname && cname.indexOf( "ui-btn" ) > -1 && cname.indexOf( "ui-disabled" ) < 0 ) {
+            break;
+        }
+        element = element.parentNode;
+    }
+    
+    return element;
 }
 
 var attachEvents = function() {
