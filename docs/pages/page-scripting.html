@@ -40,7 +40,7 @@
 			
 			<p>The <code>pagecreate</code> event is triggered on a page when it is initialized, right after initialization occurs. Most of jQuery Mobile's official widgets auto-initialize themselves based on this event, and you can set up your code to do the same.</p>
 <pre><code>
-$( document ).delegate( "pagecreate", "#aboutPage", function() {
+$( document ).delegate("#aboutPage", "pagecreate", function() {
   alert('A page with an ID of "aboutPage" was just created by jQuery Mobile!');
 });
 </code></pre>
@@ -48,7 +48,7 @@ $( document ).delegate( "pagecreate", "#aboutPage", function() {
 	<p>If you'd like to manipulate a page's contents <em>before</em> the pagecreate event fires and widgets are auto-initialized, you can instead bind to the <code>pagebeforecreate</code> event:</p>
 	
 <pre><code>
-$( document ).delegate( "pagebeforecreate", "#aboutPage", function() {
+$( document ).delegate("#aboutPage", "pagebeforecreate", function() {
   alert('A page with an ID of "aboutPage" is about to be created by jQuery Mobile!');
 });
 </code></pre>
