@@ -87,13 +87,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				.addClass( "ui-corner-top" );
 
 			$topli.add( $topli.find( ".ui-btn-inner" ) )
-					// exclude the ui-btn-inner span in split lists
-					.not( ".ui-li-link-alt span:first-child" ) )
-				// give the glowing top-border a radius
-				.addClass( "ui-corner-top" )
-				.end()
-				// include the first span in split lists for border-right-radius setting
-				.find( ".ui-li-link-alt, .ui-li-link-alt span:first-child" )
+			.find( ".ui-li-link-alt" )
+				
 					.addClass( "ui-corner-tr" )
 				.end()
 				.find( ".ui-li-thumb" )
