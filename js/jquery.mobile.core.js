@@ -42,7 +42,7 @@
 		defaultDialogTransition: "pop",
 
 		// Show loading message during Ajax requests
-		// if false, message will not appear, but loading classes will still be toggled on html el
+		// If false, message will not appear, but loading classes will still be toggled on html el
 		loadingMessage: "loading",
 
 		// Error response message - appears when an Ajax page request fails

@@ -139,7 +139,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 					if ( cType === "select" ) {
 
 						if ( !self.userModified ) {
-							//tap occurred, but value didn't change. flip it!
+							// tap occurred, but value didn't change. flip it!
 							handle.addClass( "ui-slider-handle-snapping" );
 							self.refresh( !self.beforeStart ? 1 : 0 );
 						}
@@ -314,7 +314,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 });
 
-//auto self-init widgets
+// auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ){
 
 	$( $.mobile.slider.prototype.options.initSelector, e.target )

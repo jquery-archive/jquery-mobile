@@ -125,14 +125,14 @@
 							self.select.trigger( "change" );
 						}
 
-						//hide custom select for single selects only
+						// hide custom select for single selects only
 						if ( !self.isMultiple ) {
 							self.close();
 						}
 
 						event.preventDefault();
 					})
-					.keydown(function( event ) {  //keyboard events for menu items
+					.keydown(function( event ) {  // keyboard events for menu items
 						var target = $( event.target ),
 							li = target.closest( "li" ),
 							prev, next;
@@ -306,10 +306,10 @@
 					screenHeight = window.innerHeight,
 					screenWidth = window.innerWidth;
 
-				//add active class to button
+				// add active class to button
 				self.button.addClass( $.mobile.activeBtnClass );
 
-				//remove after delay
+				// remove after delay
 				setTimeout( function() {
 					self.button.removeClass( $.mobile.activeBtnClass );
 				}, 300);
@@ -324,7 +324,7 @@
 					// fall into a black hole
 					self.thisPage.unbind( "pagehide.remove" );
 
-					//for webos (set lastscroll using button offset)
+					// for webos (set lastscroll using button offset)
 					if ( scrollTop == 0 && btnOffset > screenHeight ) {
 						self.thisPage.one( "pagehide", function() {
 							$( this ).jqmData( "lastScroll", btnOffset );
@@ -374,7 +374,7 @@
 						newleft = ( screenWidth - menuWidth ) / 2;
 					} else {
 
-						//otherwise insure a >= 30px offset from the left
+						// otherwise insure a >= 30px offset from the left
 						newleft = self.button.offset().left + self.button.outerWidth() / 2 - menuWidth / 2;
 
 						// 30px tolerance off the edges
