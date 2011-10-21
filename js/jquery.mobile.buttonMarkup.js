@@ -90,7 +90,7 @@ function closestEnabledButton( element ) {
     var cname;
     
     while ( element ) {
-        cname = element.className.split(' ');
+    	cname = element.className && element.className.split(' ');
         if ( cname.indexOf( "ui-btn" ) > -1 && cname.indexOf( "ui-disabled" ) < 0 ) {
             break;
         }
