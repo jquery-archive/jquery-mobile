@@ -30,7 +30,7 @@ $.fn.controlgroup = function( options ) {
 		$el.addClass( "ui-corner-all ui-controlgroup ui-controlgroup-" + o.direction );
 
 		// TODO: This should be moved out to the closure
-		// otherwise it is redefined each time controlgroup() is called
+		// Otherwise it is redefined each time controlgroup() is called
 		function flipClasses( els ) {
 			els.removeClass( "ui-btn-corner-all ui-shadow" )
 				.eq( 0 ).addClass( flCorners[ 0 ] )
@@ -47,7 +47,7 @@ $.fn.controlgroup = function( options ) {
 	});
 };
 
-//auto self-init widgets
+// Auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ){
 	$( ":jqmData(role='controlgroup')", e.target ).controlgroup({ excludeInvisible: false });
 });

@@ -106,7 +106,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			}
 		}
 
-		//events
+		// Events
 		collapsible
 			.bind( "expand collapse", function( event ) {
 				if ( !event.isDefaultPrevented() ) {
@@ -153,7 +153,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 	}
 });
 
-//auto self-init widgets
+// Auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ){
 	$( $.mobile.collapsible.prototype.options.initSelector, e.target ).collapsible();
 });

@@ -36,9 +36,9 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 				.last()
 				.addClass( "ui-corner-bottom ui-overlay-shadow" );
 
-		// this must be an anonymous function so that select menu dialogs can replace
+		// This must be an anonymous function so that select menu dialogs can replace
 		// the close method. This is a change from previously just defining data-rel=back
-		// on the button and letting nav handle it
+		// tn the button and letting nav handle it
 		headerCloseButton.bind( "vclick", function() {
 			self.close();
 		});
@@ -71,7 +71,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 	}
 });
 
-//auto self-init widgets
+// Auto self-init widgets
 $( $.mobile.dialog.prototype.options.initSelector ).live( "pagecreate", function(){
 	$( this ).dialog();
 });

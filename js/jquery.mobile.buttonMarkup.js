@@ -28,7 +28,7 @@ $.fn.buttonMarkup = function( options ) {
 			attachEvents();
 		}
 
-		// if not, try to find closest theme container
+		// If not, try to find closest theme container
 		if ( !o.theme ) {
 			o.theme = $.mobile.getInheritedTheme( el, "c" );
 		}
@@ -144,8 +144,8 @@ var attachEvents = function() {
 	attachEvents = null;
 };
 
-//links in bars, or those with  data-role become buttons
-//auto self-init widgets
+// Links in bars, or those with "data-role" become buttons
+// Auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ){
 
 	$( ":jqmData(role='button'), .ui-bar > a, .ui-header > a, .ui-footer > a, .ui-bar > :jqmData(role='controlgroup') > a", e.target )
