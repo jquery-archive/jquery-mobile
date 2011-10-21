@@ -134,7 +134,7 @@
 				var relObj = path.parseUrl( relUrl ),
 					absObj = path.parseUrl( absUrl ),
 					protocol = relObj.protocol || absObj.protocol,
-					doubleSlash = relObj.protocol ? relObj.doubleSlash : ( relObj.doubleSlash || absObj.doubleSlash );
+					doubleSlash = relObj.protocol ? relObj.doubleSlash : ( relObj.doubleSlash || absObj.doubleSlash ),
 					authority = relObj.authority || absObj.authority,
 					hasPath = relObj.pathname !== "",
 					pathname = path.makePathAbsolute( relObj.pathname || absObj.filename, absObj.pathname ),
@@ -744,7 +744,7 @@
 
 		// If we failed to find a page in the DOM, check the URL to see if it
 		// refers to the first page in the application.
-		if ( page.length === 0 && $.mobile.firstPage && path.isFirstPageUrl( absUrl ) ) {
+		if ( page.length === 0 && $.mobile.firstPage && path.isFirstPageUrl( fileUrl ) ) {
 			page = $( $.mobile.firstPage );
 		}
 
@@ -1017,6 +1017,14 @@
 			return;
 		}
 
+		// If we are going to the first-page of the application, we need to make
+		// sure settings.dataUrl is set to the application document url. This allows
+		// us to avoid generating a document url with an id hash in the case where the
+		// first-page of the document has an id attribute specified.
+		if ( toPage[ 0 ] === $.mobile.firstPage[ 0 ] && !settings.dataUrl ) {
+			settings.dataUrl = documentUrl.hrefNoHash;
+		}
+
 		// The caller passed us a real page DOM element. Update our
 		// internal state and then trigger a transition to the page.
 		var fromPage = settings.fromPage,
@@ -1090,10 +1098,15 @@
 		}
 
 		//if title element wasn't found, try the page div data attr too
-		var newPageTitle = toPage.jqmData( "title" ) || toPage.children(":jqmData(role='header')").find(".ui-title" ).text();
+		var newPageTitle = toPage.jqmData( "title" ) || toPage.children(":jqmData(role='header')").find(".ui-title" ).getEncodedText();
 		if( !!newPageTitle && pageTitle == document.title ) {
 			pageTitle = newPageTitle;
 		}
+
+		// Make sure we have a transition defined.
+		settings.transition = settings.transition
+			|| ( ( historyDir && !activeIsInitialPage ) ? active.transition : undefined )
+			|| ( isDialog ? $.mobile.defaultDialogTransition : $.mobile.defaultPageTransition );
 
 		//add page to history stack if it's not back or forward
 		if( !historyDir ) {
@@ -1105,11 +1118,6 @@
 
 		//set "toPage" as activePage
 		$.mobile.activePage = toPage;
-
-		// Make sure we have a transition defined.
-		settings.transition = settings.transition
-			|| ( ( historyDir && !activeIsInitialPage ) ? active.transition : undefined )
-			|| ( isDialog ? $.mobile.defaultDialogTransition : $.mobile.defaultPageTransition );
 
 		// If we're navigating back in the URL history, set reverse accordingly.
 		settings.reverse = settings.reverse || historyDir < 0;
@@ -1231,7 +1239,7 @@
 		$( document ).bind( "vclick", function( event ) {
 			// if this isn't a left click we don't care. Its important to note
 			// that when the virtual event is generated it will create
-			if ( event.which > 1 ){
+			if ( event.which > 1 || !$.mobile.linkBindingEnabled ){
 				return;
 			}
 
@@ -1248,6 +1256,10 @@
 
 		// click routing - direct to HTTP or Ajax, accordingly
 		$( document ).bind( "click", function( event ) {
+			if( !$.mobile.linkBindingEnabled ){
+				return;
+			}
+
 			var link = findClosestLink( event.target );
 
 			// If there is no link associated with the click or its not a left
@@ -1342,16 +1354,19 @@
 		});
 
 		//prefetch pages when anchors with data-prefetch are encountered
-		$( ".ui-page" ).live( "pageshow.prefetch", function(){
+		$( ".ui-page" ).live( "pageshow.prefetch", function() {
 			var urls = [];
 			$( this ).find( "a:jqmData(prefetch)" ).each(function(){
-				var url = $( this ).attr( "href" );
+				var $link = $(this),
+					url = $link.attr( "href" );
+
 				if ( url && $.inArray( url, urls ) === -1 ) {
 					urls.push( url );
-					$.mobile.loadPage( url );
+
+					$.mobile.loadPage( url, {role: $link.attr("data-" + $.mobile.ns + "rel")} );
 				}
 			});
-		} );
+		});
 
 		$.mobile._handleHashChange = function( hash ) {
 			//find first page via hash

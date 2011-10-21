@@ -38,9 +38,9 @@ function baseTagTest() {
 		href = base.attr( "href" );
 	}
 
-	link = $( "<a href='testurl'></a>" ).prependTo( fakeBody );
+	link = $( "<a href='testurl' />" ).prependTo( fakeBody );
 	rebase = link[ 0 ].href;
-	base[ 0 ].href = href ? href : location.pathname;
+	base[ 0 ].href = href || location.pathname;
 
 	if ( fauxEle ) {
 		fauxEle.remove();
@@ -64,7 +64,7 @@ $.mobile.browser.ie = (function() {
 
 
 $.extend( $.support, {
-	orientation: "orientation" in window,
+	orientation: "orientation" in window && "onorientationchange" in window,
 	touch: "ontouchend" in document,
 	cssTransitions: "WebKitTransitionEvent" in window,
 	pushState: "pushState" in history && "replaceState" in history,
@@ -107,7 +107,7 @@ $.mobile.ajaxBlacklist =
 // This simply reappends the CSS in place, which for some reason makes it apply
 if ( nokiaLTE7_3 ) {
 	$(function() {
-		$( "head link[rel=stylesheet]" ).attr( "rel", "alternate stylesheet" ).attr( "rel", "stylesheet" );
+		$( "head link[rel='stylesheet']" ).attr( "rel", "alternate stylesheet" ).attr( "rel", "stylesheet" );
 	});
 }
 

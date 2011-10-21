@@ -5,10 +5,11 @@
 	// TODO move siteDirectory over to the nav path helper
 	var changePageFn = $.mobile.changePage,
 		originalTitle = document.title,
+		originalLinkBinding = $.mobile.linkBindingEnabled,
 		siteDirectory = location.pathname.replace( /[^/]+$/, "" ),
 		home = $.mobile.path.parseUrl(location.pathname).directory,
 		navigateTestRoot = function(){
-			$.testHelper.openPage( "#" + location.pathname );
+			$.testHelper.openPage( "#" + location.pathname + location.search );
 		};
 
 	module('jquery.mobile.navigation.js', {
@@ -41,6 +42,7 @@
 			$.mobile.urlHistory.stack = [];
 			$.mobile.urlHistory.activeIndex = 0;
 			$.Event.prototype.which = undefined;
+			$.mobile.linkBindingEnabled = originalLinkBinding;
 		}
 	});
 
@@ -873,6 +875,26 @@
 		]);
 	});
 
+	asyncTest( "disabling link binding disables navigation via links and highlighting", function() {
+		$.mobile.linkBindingEnabled = false;
+
+		$.testHelper.pageSequence([
+			function() {
+				$.testHelper.openPage("#bar");
+			},
+
+			function() {
+				$.mobile.activePage.find( "a" ).click();
+			},
+
+			function( timeout ) {
+				ok( !$.mobile.activePage.find( "a" ).hasClass( $.mobile.activeBtnClass ), "vlick handler doesn't add the activebtn class" );
+				ok( timeout, "no page change was fired" );
+				start();
+			}
+		]);
+	});
+
 	asyncTest( "handling of button active state when navigating by clicking back button", 1, function(){
 		$.testHelper.pageSequence([
 			// open our test page
@@ -926,6 +948,53 @@
 				ok( $.mobile.activePage[ 0 ] == $( "#injected-test-page" )[ 0 ], "navigated successfully to #injected-test-page" );
 
 				start();
+			}
+		]);
+	});
+
+	asyncTest( "application url with dialogHashKey loads application's first page", function(){
+		$.testHelper.pageSequence([
+			// open our test page
+			function(){
+				// Navigate to any page except the first page of the application.
+				$.testHelper.openPage("#foo");
+			},
+
+			function(){
+				ok( $.mobile.activePage[ 0 ] === $( "#foo" )[ 0 ], "navigated successfully to #foo" );
+
+				// Now navigate to an hash that contains just a dialogHashKey.
+				$.mobile.changePage("#" + $.mobile.dialogHashKey);
+			},
+
+			function(){
+				// Make sure we actually navigated to the first page.
+				ok( $.mobile.activePage[ 0 ] === $.mobile.firstPage[ 0 ], "navigated successfully to first-page" );
+
+				// Now make sure opening the page didn't result in page duplication.
+				ok( $.mobile.firstPage.hasClass( "first-page" ), "first page has expected class" );
+				same( $( ".first-page" ).length, 1, "first page was not duplicated" );
+
+				start();
+			}
+		]);
+	});
+
+	asyncTest( "prefetched links with data rel dialog result in a dialog", function() {
+		$.testHelper.pageSequence([
+			// open our test page
+			function(){
+				// Navigate to any page except the first page of the application.
+				$.testHelper.openPage("#prefetched-dialog-page");
+			},
+
+			function() {
+				$("#prefetched-dialog-link").click();
+			},
+
+			function() {
+				ok( $.mobile.activePage.is(".ui-dialog"), "prefetched page is rendered as a dialog" );
+        start();
 			}
 		]);
 	});

@@ -1,0 +1,13 @@
+/*
+* jQuery Mobile Framework
+* Copyright (c) jQuery Project
+* Dual licensed under the MIT (MIT-LICENSE.txt) or GPL (GPL-LICENSE.txt) licenses.
+*/
+/* fixed page header & footer configuration */
+.ui-header, .ui-footer, .ui-page-fullscreen .ui-header, .ui-page-fullscreen .ui-footer  { position: absolute;  overflow: hidden; width: 100%; border-left-width: 0; border-right-width: 0; }
+.ui-header-fixed, .ui-footer-fixed {
+	z-index: 1000;
+	-webkit-transform: translateZ(0); /* Force header/footer rendering to go through the same rendering pipeline as native page scrolling. */
+}
+.ui-footer-duplicate, .ui-page-fullscreen .ui-fixed-inline { display: none; }
+.ui-page-fullscreen .ui-header, .ui-page-fullscreen .ui-footer { opacity: .9; }

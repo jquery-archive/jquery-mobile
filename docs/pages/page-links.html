@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<title>jQuery Mobile Docs - Linking Pages</title> 
-	<link rel="stylesheet"  href="../../themes/default/" />  
+	<link rel="stylesheet"  href="../../css/themes/default/" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 	<script src="../../js/jquery.js"></script>
 	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
@@ -39,7 +39,9 @@
 
 <h2>Linking without Ajax</h2>
 		
-		<p>Links that point to other domains or that have <code>rel="external"</code>, <code>data-ajax="false"</code> or <code>target</code> attributes will not be loaded with Ajax. Instead, these links and will cause a full page refresh with no animated transition. Both attributes have the same effect, but different semanic meaning. <code>rel="external"</code> should be used when linking to another site or domain, while <code>data-ajax="false"</code> is useful for simply opting a page within your domain from being loaded via Ajax. Because of security restrictions, the framework always opts links to external domains out of the Ajax behavior.</p>
+		<p>Links that point to other domains or that have <code>rel="external"</code>, <code>data-ajax="false"</code> or <code>target</code> attributes will not be loaded with Ajax. Instead, these links and will cause a full page refresh with no animated transition. Both attributes have the same effect, but different semantic meaning: <code>rel="external"</code> should be used when linking to another site or domain, while <code>data-ajax="false"</code> is useful for simply opting a page within your domain from being loaded via Ajax. Because of security restrictions, the framework always opts links to external domains out of the Ajax behavior.</p>
+		
+		<p>Note: When building a jQuery Mobile application where the Ajax navigation system is disabled globally or frequently disabled on individual links, we  recommend disabling the <code>$.mobile.pushStateEnabled</code> global <a href="../api/globalconfig.html">configuration option</a> to avoid inconsistent navigation behavior in some browsers.</p>
 		
 
 

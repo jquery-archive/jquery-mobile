@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>jQuery Mobile Docs - Select</title>
-	<link rel="stylesheet"  href="../../../themes/default/" />
+	<link rel="stylesheet"  href="../../../css/themes/default/" />
 	<link rel="stylesheet" href="../../_assets/css/jqm-docs.css"/>
 	<script src="../../../js/jquery.js"></script>
 	<script src="../../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
@@ -38,23 +38,45 @@
 			
 			<p>By default, the framework leverages the native OS options menu to use with the custom button. When the button is clicked, the native OS menu will open. When a value is selected and the menu closes, the custom button's text is updated to match the selected value.</p>
 
-			<p>To add a select menu to your page, start with a standard <code>select</code> element populated with a set of <code>option</code> elements. Set the <code>for</code> attribute of the <code>label</code> to match the ID of the <code>select</code> so they are semantically associated. Wrap them in a <code>div</code> with the <code> data-role="fieldcontain"</code> attribute to help visually group it in a longer form. </p>
+			<p>To add a select menu to your page, start with a standard <code>select</code> element populated with a set of <code>option</code> elements. Set the <code>for</code> attribute of the <code>label</code> to match the ID of the <code>select</code> so they are semantically associated. It's possible to <a href="../docs-forms.html">accessibly hide the label</a> if it's not desired in the page layout, but we require that it is present in the markup for semantic and accessibility reasons.  </p>
+			
+			<p>The framework will find all <code>select</code> elements and automatically enhance them into select menus, no need to apply a <code>data-role</code> attribute. To prevent the automatic enhancement of a select, add  <code>data-role="none"</code> attribute to the <code>select</code>.</p>
+			
+			<pre><code>
+&lt;label for=&quot;select-choice-0&quot; class=&quot;select&quot;&gt;Shipping method:&lt;/label&gt;
+&lt;select name=&quot;select-choice-0&quot; id=&quot;select-choice-1&quot;&gt;
+   &lt;option value=&quot;standard&quot;&gt;Standard: 7 day&lt;/option&gt;
+   &lt;option value=&quot;rush&quot;&gt;Rush: 3 days&lt;/option&gt;
+   &lt;option value=&quot;express&quot;&gt;Express: next day&lt;/option&gt;
+   &lt;option value=&quot;overnight&quot;&gt;Overnight&lt;/option&gt;
+&lt;/select&gt;
+			</code></pre>
 
-			<p>The framework will find all <code>select</code> elements and automatically enhance them into select menus. The markup for a select grouped in a field container:</p>
+			<p>This will produce a basic select menu. The default styles set the width of the input to 100% of the parent container and stacks the label on a separate line.</p>
 
+				<label for="select-choice-0" class="select">Shipping method:</label>
+				<select name="select-choice-0" id="select-choice-1">
+					<option value="standard">Standard: 7 day</option>
+					<option value="rush">Rush: 3 days</option>
+					<option value="express">Express: next day</option>
+					<option value="overnight">Overnight</option>
+				</select>
+
+			
+			<p>Optionally wrap the selects in a container with the <code>data-role="fieldcontain"</code> attribute to help visually group it in a longer form.</p>
 <pre><code>
-&lt;div data-role=&quot;fieldcontain&quot;&gt;
-   &lt;label for=&quot;select-choice-1&quot; class=&quot;select&quot;&gt;Shipping method:&lt;/label&gt;
+<strong>&lt;div data-role=&quot;fieldcontain&quot;&gt;
+</strong>   &lt;label for=&quot;select-choice-1&quot; class=&quot;select&quot;&gt;Shipping method:&lt;/label&gt;
    &lt;select name=&quot;select-choice-1&quot; id=&quot;select-choice-1&quot;&gt;
       &lt;option value=&quot;standard&quot;&gt;Standard: 7 day&lt;/option&gt;
       &lt;option value=&quot;rush&quot;&gt;Rush: 3 days&lt;/option&gt;
       &lt;option value=&quot;express&quot;&gt;Express: next day&lt;/option&gt;
       &lt;option value=&quot;overnight&quot;&gt;Overnight&lt;/option&gt;
    &lt;/select&gt;
-&lt;/div&gt;
-</code></pre>
+<strong>&lt;/div&gt;
+</strong></code></pre>
 
-<p>produces this select menu:</p>
+			<p>The select input is now displayed like this:</p>
 
 
 <div data-role="fieldcontain">
@@ -70,8 +92,8 @@
 <p>An example of a select with a long list of options:</p>
 
 <div data-role="fieldcontain">
-	<label for="select-choice-3" class="select">Your state:</label>
-	<select name="select-choice-3" id="select-choice-3">
+	<label for="select-choice-2" class="select">Your state:</label>
+	<select name="select-choice-2" id="select-choice-2">
 		<option value="AL">Alabama</option>
 		<option value="AK">Alaska</option>
 		<option value="AZ">Arizona</option>
@@ -151,6 +173,150 @@
 </div>
 -->
 
+
+<h2>Vertically grouped select inputs</h2>
+
+<p>To create a grouped set of select inputs, first add <code>select</code> and a corresponding <code>label</code>. Set the <code>for</code> attribute of the <code>label</code> to match the ID of the <code>select</code> so they are semantically associated.</p>
+
+<p>Because the <code>label</code> element will be associated with each individual select input, we recommend wrapping the selects in a <code>fieldset</code> element that has a <code>legend</code> which acts as the combined label for the grouped inputs.</p>
+
+<p>Lastly, one needs to wrap the <code>fieldset</code> in a <code>div</code> with <code> data-role="controlgroup"</code> attribute, so it can be styled as a group.</p>
+			
+<pre><code>	
+&lt;div data-role=&quot;fieldcontain&quot;&gt;
+&lt;fieldset data-role=&quot;controlgroup&quot;&gt;
+	&lt;legend&gt;Date of Birth:&lt;/legend&gt;
+
+    &lt;label for="select-choice-month">Month&lt;/label&gt;
+&lt;select name="select-choice-month" id="select-choice-month"&gt;
+	&lt;option&gt;Month&lt;/option&gt;
+	&lt;option value="jan"&gt;January&lt;/option&gt;
+	&lt;!-- etc. --&gt;
+&lt;/select&gt;
+
+	&lt;label for="select-choice-day">Day&lt;/label&gt;
+&lt;select name="select-choice-day" id="select-choice-day"&gt;
+	&lt;option&gt;Day&lt;/option&gt;
+	&lt;option value="1"&gt;1&lt;/option&gt;
+	&lt;!-- etc. --&gt;
+&lt;/select&gt;
+
+&lt;label for="select-choice-year">Year&lt;/label&gt;
+&lt;select name="select-choice-year" id="select-choice-year"&gt;
+	&lt;option&gt;Year&lt;/option&gt;
+	&lt;option value="2011"&gt;2011&lt;/option&gt;
+	&lt;!-- etc. --&gt;
+&lt;/select&gt;
+&lt;/fieldset&gt;
+&lt;/div&gt;
+</code></pre>
+
+	<div data-role="fieldcontain">
+	<fieldset data-role="controlgroup">
+		<legend>Date of Birth:</legend>
+		
+		<label for="select-choice-month">Month</label>
+		<select name="select-choice-month" id="select-choice-month">
+			<option>Month</option>
+			<option value="jan">January</option>
+			<option value="dec">December</option>
+			<option value="feb">February</option>
+			<option value="mar">March</option>
+			<option value="apr">April</option>
+			<option value="may">May</option>
+			<option value="jun">June</option>
+			<option value="jul">July</option>
+			<option value="aug">August</option>
+			<option value="sep">September</option>
+			<option value="oct">October</option>
+			<option value="nov">November</option>
+			<option value="dec">December</option>
+		</select>
+
+		<label for="select-choice-day">Day</label>
+		<select name="select-choice-day" id="select-choice-day">
+			<option>Day</option>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+			<option value="6">6</option>
+			<option value="7">7</option>
+		</select>
+
+		<label for="select-choice-year">Year</label>
+		<select name="select-choice-year" id="select-choice-year">
+			<option>Year</option>
+			<option value="2011">2011</option>
+			<option value="2010">2010</option>
+			<option value="2009">2009</option>
+			<option value="2008">2008</option>
+			<option value="2007">2007</option>
+			<option value="2006">2006</option>
+			<option value="2005">2005</option>
+			<option value="2004">2004</option>
+		</select>
+	</fieldset>
+
+</div>
+
+<h2>Horizontally grouped select inputs</h2>
+<p>Select inputs can also be used for grouped sets with more than one related selections. To make a horizontal button set, add the <code>data-type="horizontal"</code> to the fieldset. Note that the buttons which trigger the select will resize depending on the currently selected option’s value. Note that browsers without support for <code>display: inline-block;</code> will group the selects vertically, as above.</p>
+
+<code>
+&lt;fieldset data-role="controlgroup" <strong>data-type="horizontal"</strong>&gt;
+</code>
+
+<div data-role="fieldcontain">
+	<fieldset data-role="controlgroup" data-type="horizontal">
+		<legend>Date of Birth:</legend>
+		
+		<label for="select-choice-month">Month</label>
+		<select name="select-choice-month" id="select-choice-month">
+			<option>Month</option>
+			<option value="jan">January</option>
+			<option value="dec">December</option>
+			<option value="feb">February</option>
+			<option value="mar">March</option>
+			<option value="apr">April</option>
+			<option value="may">May</option>
+			<option value="jun">June</option>
+			<option value="jul">July</option>
+			<option value="aug">August</option>
+			<option value="sep">September</option>
+			<option value="oct">October</option>
+			<option value="nov">November</option>
+			<option value="dec">December</option>
+		</select>
+
+		<label for="select-choice-day">Day</label>
+		<select name="select-choice-day" id="select-choice-day">
+			<option>Day</option>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+			<option value="6">6</option>
+			<option value="7">7</option>
+		</select>
+
+		<label for="select-choice-year">Year</label>
+		<select name="select-choice-year" id="select-choice-year">
+			<option>Year</option>
+			<option value="2011">2011</option>
+			<option value="2010">2010</option>
+			<option value="2009">2009</option>
+			<option value="2008">2008</option>
+			<option value="2007">2007</option>
+			<option value="2006">2006</option>
+			<option value="2005">2005</option>
+			<option value="2004">2004</option>
+		</select>
+	</fieldset>
+
+</div>
 
 
 <h2>Using custom menus</h2>

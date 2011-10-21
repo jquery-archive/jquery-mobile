@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<title>jQuery Mobile Docs - Content Grids</title> 
-	<link rel="stylesheet"  href="../../themes/default/" />  
+	<link rel="stylesheet"  href="../../css/themes/default/" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 	<script src="../../js/jquery.js"></script>
 	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
@@ -27,8 +27,17 @@
 		
 		<p>The jQuery Mobile framework provides a simple way to build CSS-based columns through a  block style class convention called <code>ui-grid</code>. </p>
 		
-		<p>There are two preset configurations layouts &mdash; two-column (using the <code>class</code> of <code>ui-grid-a</code>), and three-column (using the <code>class</code> of <code>ui-grid-b</code>) &mdash; that can be used in any situation that requires columns. Grids are 100% width, completely invisible (no borders or backgrounds) and don't have padding or margins, so they shouldn't interfere with the styles of elements placed inside them.</p>
-		
+		<p>There are four preset configurations layouts  that can be used in any situation that requires columns:</p>
+			<ul>
+				<li><strong>two</strong>-column (using the <code>ui-grid-a</code> class)</li>
+				<li><strong>three</strong>-column (using the <code>ui-grid-b</code> class)</li>
+				<li><strong>four</strong>-column (using the <code>ui-grid-c</code> class)</li>
+				<li><strong>five</strong>-column (using the <code>ui-grid-d</code> class)</li>
+			</ul>
+			
+			<p>Grids are 100% width, completely invisible (no borders or backgrounds) and don't have padding or margins, so they shouldn't interfere with the styles of elements placed inside them. </p>
+			<p>Within the grid container, child elements are assigned <code>ui-block-a/b/c/d</code> in a sequential manner which makes each "block" element float side-by-side, forming the grid. The <code>ui-block-a</code> class essentially clears the floats which will start a new line (see multiple row grids, below).</p>
+			
 		<h2>Two column grids</h2>
 		<p>To build a two-column (50/50%) layout, start with a container with a <code>class</code> of <code>ui-grid-a</code>, and add two child containers inside it classed with <code>ui-block-a</code> for the first column and <code>ui-block-b</code> for the second:</p>
 
@@ -137,6 +146,18 @@
 			<div class="ui-block-c"><div class="ui-bar ui-bar-e" style="height:120px">C</div></div>
 		</div><!-- /grid-c -->
 		
+		
+		<h2>Grids in toolbars</h2>
+		<p>Grids are helpful for creating layouts within a toolbar. Here's a footer with a 3 column grid.</p>
+		<!--  NOTE: Inline styles are for demo purposes only, please use external styles -->
+		<div data-role="footer" data-theme="a" class="ui-bar ui-grid-c">
+				<div class="ui-block-a"><h3 style="margin-top:10px;">Settings</h3></div>
+				<div class="ui-block-b"><label for="value" style="margin:8px 10px 0 0; text-align:right;">Price</label> </div>
+				<div class="ui-block-c"><input id="value" value="5,000"></div>	 
+				<div class="ui-block-d"><div style="margin:6px 0 0 10px;"><button type="submit" data-theme="b">Update</button></div></div>  
+	    </div><!-- /footer -->
+	
+	
 	</div><!--/content-primary -->		
 	
 	<div class="content-secondary">

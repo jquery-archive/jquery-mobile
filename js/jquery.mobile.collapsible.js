@@ -120,7 +120,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 					collapsibleHeading
 						.toggleClass( "ui-collapsible-heading-collapsed", isCollapse)
 						.find( ".ui-collapsible-heading-status" )
-							.text( o.expandCueText )
+							.text( isCollapse ? o.expandCueText : o.collapseCueText )
 						.end()
 						.find( ".ui-icon" )
 							.toggleClass( "ui-icon-minus", !isCollapse )
@@ -135,6 +135,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 							.toggleClass( "ui-corner-bottom", isCollapse );
 						collapsibleContent.toggleClass( "ui-corner-bottom", !isCollapse );
 					}
+					collapsibleContent.trigger( "updatelayout" );
 				}
 			})
 			.trigger( o.collapsed ? "collapse" : "expand" );

@@ -2,7 +2,7 @@
 (function($){
 	$.themeswitcher = function(){
 		if( $('[data-'+ $.mobile.ns +'-url=themeswitcher]').length ){ return; }
-		var themesDir = 'http://jquerymobile.com/test/themes/',
+		var themesDir = 'http://jquerymobile.com/test/css/themes/',
 			themes = ['default','valencia'],
 			currentPage = $.mobile.activePage,
 			menuPage = $( '<div data-'+ $.mobile.ns +'url="themeswitcher" data-'+ $.mobile.ns +'role=\'dialog\' data-'+ $.mobile.ns +'theme=\'a\'>' +

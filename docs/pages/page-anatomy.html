@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<title>jQuery Mobile Docs - Anatomy of a Page</title> 
-	<link rel="stylesheet"  href="../../themes/default/" />  
+	<link rel="stylesheet"  href="../../css/themes/default/" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 	<script src="../../js/jquery.js"></script>
 	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
@@ -38,9 +38,9 @@
 	
 	&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt; 
 
-	&lt;link rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/mobile/1.0b3/jquery.mobile-1.0b3.min.css&quot; /&gt;
-	&lt;script type=&quot;text/javascript&quot; src=&quot;http://code.jquery.com/jquery-1.6.3.min.js&quot;&gt;&lt;/script&gt;
-	&lt;script type=&quot;text/javascript&quot; src=&quot;http://code.jquery.com/mobile/1.0b3/jquery.mobile-1.0b3.min.js&quot;&gt;&lt;/script&gt;
+	&lt;link rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/mobile/1.0rc2/jquery.mobile-1.0rc2.min.css&quot; /&gt;
+	&lt;script type=&quot;text/javascript&quot; src=&quot;http://code.jquery.com/jquery-1.6.4.min.js&quot;&gt;&lt;/script&gt;
+	&lt;script type=&quot;text/javascript&quot; src=&quot;http://code.jquery.com/mobile/1.0rc2/jquery.mobile-1.0rc2.min.js&quot;&gt;&lt;/script&gt;
 &lt;/head&gt; 
 
 &lt;body&gt; 
@@ -50,11 +50,11 @@
 </code></pre>
 			
 			<h2>Viewport meta tag</h2>
-			<p>Note above that there is a meta <code>viewport</code> tag in the <code>head</code> to specify how the browser should display the page zoom level and dimensions. If this isn't set, many mobile browsers will use a "virtual" page width around 900 pixels to make it work well with exisitng desktop sites but the screens may look zoomed out and too wide. By setting the viewport attributes to <code>content=&quot;width=device-width, initial-scale=1</code>, the width will be set to the pixel width of the device screen. </p>
+			<p>Note above that there is a meta <code>viewport</code> tag in the <code>head</code> to specify how the browser should display the page zoom level and dimensions. If this isn't set, many mobile browsers will use a "virtual" page width around 900 pixels to make it work well with exisitng desktop sites but the screens may look zoomed out and too wide. By setting the viewport attributes to <code>content=&quot;width=device-width, initial-scale=1&quot;</code>, the width will be set to the pixel width of the device screen. </p>
 			
 			<pre><code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt; </code></pre>
 			
-			<p>These settings do not disable the user's ability to zoom the pages which is nice from an accessibility perspective. There is a minor issue in iOS that doesn't properly set the width when changing orientations with these viewport settings, but this will hopefully be fixed a a future release. You can set other viewport values to disable zooming if required since this is part of your page content, not the library. </p>
+			<p>These settings do not disable the user's ability to zoom the pages, which is nice from an accessibility perspective. There is a minor issue in iOS that doesn't properly set the width when changing orientations with these viewport settings, but this will hopefully be fixed a a future release. You can set other viewport values to disable zooming if required since this is part of your page content, not the library. </p>
 			
 			<h2>Inside the body: Pages</h2>
 			<p>Inside the <code>&lt;body&gt;</code> tag, each view or "page" on the mobile device is identified with an element (usually a <code>div</code>) with the <code> data-role="page"</code> attribute:</p> 
@@ -80,7 +80,7 @@
 
 <h2>Putting it together: Basic single page template</h2> 
 
-<p>Putting it all together, this is the standard boilerplate page template you should start with on a project. :</p>
+<p>Putting it all together, this is the standard boilerplate page template you should start with on a project: </p>
 
 <pre><code>
 &lt;!DOCTYPE html&gt; 
@@ -90,9 +90,9 @@
 	
 	&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt; 
 
-	&lt;link rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/mobile/1.0b3/jquery.mobile-1.0b3.min.css&quot; /&gt;
-	&lt;script type=&quot;text/javascript&quot; src=&quot;http://code.jquery.com/jquery-1.6.3.min.js&quot;&gt;&lt;/script&gt;
-	&lt;script type=&quot;text/javascript&quot; src=&quot;http://code.jquery.com/mobile/1.0b3/jquery.mobile-1.0b3.min.js&quot;&gt;&lt;/script&gt;
+	&lt;link rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/mobile/1.0rc2/jquery.mobile-1.0rc2.min.css&quot; /&gt;
+	&lt;script type=&quot;text/javascript&quot; src=&quot;http://code.jquery.com/jquery-1.6.4.min.js&quot;&gt;&lt;/script&gt;
+	&lt;script type=&quot;text/javascript&quot; src=&quot;http://code.jquery.com/mobile/1.0rc2/jquery.mobile-1.0rc2.min.js&quot;&gt;&lt;/script&gt;
 &lt;/head&gt; 
 &lt;body&gt; 
 
@@ -153,7 +153,7 @@
 	&lt;/div&gt;&lt;!-- /header --&gt;
 
 	&lt;div data-role=&quot;content&quot;&gt;	
-		&lt;p&gt;I&#x27;m first in the source order so I&#x27;m shown as the page.&lt;/p&gt;		
+		&lt;p&gt;I&#x27;m the second in the source order so I&#x27;m hidden when the page load. I&#x27;m just shown, if a link that reference my ID is beeing clicked.&lt;/p&gt;		
 		&lt;p&gt;&lt;a href=&quot;#foo&quot;&gt;Back to foo&lt;/a&gt;&lt;/p&gt;	
 	&lt;/div&gt;&lt;!-- /content --&gt;
 

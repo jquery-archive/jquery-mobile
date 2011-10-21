@@ -1,0 +1,90 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>jQuery Mobile Docs - Configuration</title> 
+	<link rel="stylesheet"  href="../../css/themes/default/" />  
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	<script src="../../js/jquery.js"></script>
+	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../_assets/js/jqm-docs.js"></script>
+	<script src="../../js/"></script>
+</head> 
+<body> 
+
+	<div data-role="page" class="type-index">
+
+		<div data-role="header" data-theme="f">
+		<h1>Pages</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+				<h2>Global config tests</h2>
+				<p>The following links will cause a full page refresh so that the global options configuration can take effect. Each link below will tweak a different option for quick testing.</p>
+
+			
+		<ul data-role="listview" data-inset="true">
+			<li>
+				<a href="pushState.html" data-ajax="false">
+				<h3>pushStateEnabled - False</h3>
+				<p>Enhancement to use history.replaceState in supported browsers, to convert the hash-based Ajax URL into the full document path. </p>
+				</a>
+			</li>
+			<li>
+				<a href="touchOverflow.html" data-ajax="false">
+				<h3>touchOverflowEnabled - True</h3>
+				<p>Enable smoother page transitions and true fixed toolbars in devices that support both the overflow: and overflow-scrolling: touch; CSS properties.</p>
+				</a>
+			</li>
+			<li>
+				<a href="pageTransition.html" data-ajax="false">
+				<h3>defaultPageTransition - Fade</h3>
+				<p>Set the default transition for page changes that use Ajax. Set to 'none' for no transitions by default.</p>
+				</a>
+			</li>
+			<li>
+				<a href="dialogTransition.html" data-ajax="false">
+				<h3>defaultDialogTransition - Flip</h3>
+				<p>Set the default transition for dialog changes that use Ajax. Set to 'none' for no transitions by default.</p>
+				</a>
+			</li>
+			<li>
+				<a href="minScrollBack.html" data-ajax="false">
+				<h3>minScrollBack - 999</h3>
+				<p>Minimum scroll distance that will be remembered when returning to a page.</p>
+				</a>
+			</li>
+			<li>
+				<a href="loadingMessage.html" data-ajax="false">
+				<h3>loadingMessage - false</h3>
+				<p>Set the text that appears when a page is loading. If set to false, the message will not appear at all.</p>
+				</a>
+			</li>
+			<li>
+				<a href="pageLoadErrorMessage.html" data-ajax="false">
+				<h3>pageLoadErrorMessage - "Yikes, we broke the internet!"</h3>
+				<p>Set the text that appears when a page fails to load through Ajax.</p>
+				</a>
+			</li>
+			<li>
+				<a href="iOSFullscreen.html" data-ajax="false">
+				<h3>apple-mobile-web-app-capable meta tag</h3>
+				<p>View the docs without browser chrome in iOS.</p>
+				</a>
+			</li>
+			<li>
+				<a href="jq17b1.html" data-ajax="false">
+				<h3>jQuery core version 1.7 Beta 1</h3>
+				<p>Test the docs with the latest jQuery core version</p>
+				</a>
+			</li>
+		</ul>
+		
+
+		</div><!-- /ui-body wrapper -->	
+</div><!-- /page -->
+
+</body>
+</html>

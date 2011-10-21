@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<title>jQuery Mobile Docs - Header Bars</title> 
-	<link rel="stylesheet"  href="../../themes/default/" />  
+	<link rel="stylesheet"  href="../../css/themes/default/" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 	<script src="../../js/jquery.js"></script>
 	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
@@ -29,7 +29,7 @@
 
 <div class="highlight"> 
 <pre>
-<span class="nt">&lt;div</span> <span class="na"> data-role=</span><span class="s">"header"</span><span class="nt">&gt;</span> 
+<span class="nt">&lt;div</span> <strong><span class="na">data-role=</span><span class="s">"header"</span></strong><span class="nt">&gt;</span> 
 	<span class="nt">&lt;h1&gt;</span>Page Title<span class="nt">&lt;/h1&gt;</span> 
 <span class="nt">&lt;/div&gt;</span> 
 </pre> 
@@ -132,8 +132,26 @@
 			<h2>Custom header configurations</h2>
 			<p>If you need to to create a header that doesn't follow the default configuration, simply wrap your custom styled markup in a container <code>div</code> inside the header container and the plugin won't apply the automatic button logic so you can write custom styles for laying out the content in your header.</p> 
 
+			<p>It's also possible to create custom bars without using the header data-role at all. For example, start with any container and add the <code>ui-bar</code> class to apply standard bar padding and  add the <code>ui-bar-b</code> class to assign the bar swatch styles from your theme (the "b" can be any swatch letter).</p>
+			
+			<pre><code>
+&lt;div <strong>class=&quot;ui-bar ui-bar-b&quot;</strong>&gt;
+	&lt;h3&gt;I&#x27;m just a div with bar classes and a &lt;a href=&quot;#&quot; data-role=&quot;button&quot;&gt;Button&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+			</code></pre>
 
-
+			<p>This will produce this bar:</p>
+				<div class="ui-bar ui-bar-b">
+					<h3>I'm just a div with bar classes and a <a href="#" data-role="button">Button</a></h3>
+				</div>
+				
+				<p>By writing some simple styles, it's easy to build little message bars like this:</p>
+					<!-- Yes, the inline styles aren't recommended in a real system but they are used to simply illustrate how to tweak CSS -->
+					<div class="ui-bar ui-bar-e">
+						<h3 style="float:left; margin-top:8px;">This is an alert message with dismiss button. </h3>
+						<div style="float:right; margin-top:4px;"><a href="#" data-role="button" data-icon="delete" data-iconpos="notext">Button</a></div>
+						<p style="clear:both; font-size:85%; margin-bottom:8px;">And here's some additional text in a paragraph.</p>
+					</div>
 				</div><!--/content-primary -->		
 
 				<div class="content-secondary">

@@ -334,4 +334,51 @@
 		same(window.encodedValueIsDefined, true);
 	});
 
+	$.mobile.page.prototype.options.keepNative = "select.should-be-native";
+
+	// not testing the positive case here since's it's obviously tested elsewhere
+	test( "select elements in the keepNative set shouldn't be enhanced", function() {
+		ok( !$("#keep-native").parent().is("div.ui-btn") );
+	});
+
+	asyncTest( "dialog size select title should match the label", function() {
+		var $select = $( "#select-choice-many-1" ),
+			$label = $select.parent().siblings( "label" ),
+			$button = $select.siblings( "a" );
+
+		$.testHelper.pageSequence([
+			function() {
+				$button.click();
+			},
+
+			function() {
+				same($.mobile.activePage.find( ".ui-title" ).text(), $label.text());
+				window.history.back();
+			},
+
+			start
+		]);
+	});
+
+	asyncTest( "dialog size select title should match the label when changed after the dialog markup is added to the DOM", function() {
+		var $select = $( "#select-choice-many-1" ),
+			$label = $select.parent().siblings( "label" ),
+			$button = $select.siblings( "a" );
+
+		$label.text( "foo" );
+
+		$.testHelper.pageSequence([
+			function() {
+				$label.text( "foo" );
+				$button.click();
+			},
+
+			function() {
+				same($.mobile.activePage.find( ".ui-title" ).text(), $label.text());
+				window.history.back();
+			},
+
+			start
+		]);
+	});
 })(jQuery);

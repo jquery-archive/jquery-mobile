@@ -28,6 +28,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 		// Add ARIA role
 		this.button = $( "<div></div>" )
 			.text( $el.text() || $el.val() )
+			.insertBefore( $el )
 			.buttonMarkup({
 				theme: o.theme,
 				icon: o.icon,
@@ -37,7 +38,6 @@ $.widget( "mobile.button", $.mobile.widget, {
 				shadow: o.shadow,
 				iconshadow: o.iconshadow
 			})
-			.insertBefore( $el )
 			.append( $el.addClass( "ui-btn-hidden" ) );
 
 		type = $el.attr( "type" );
@@ -89,9 +89,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 
 // Auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ){
-	$( $.mobile.button.prototype.options.initSelector, e.target )
-		.not( ":jqmData(role='none'), :jqmData(role='nojs')" )
-		.button();
+	$.mobile.button.prototype.enhanceWithin( e.target );
 });
 
 })( jQuery );

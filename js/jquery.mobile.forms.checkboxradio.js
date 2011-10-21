@@ -58,9 +58,9 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			.wrapAll( "<div class='ui-" + inputtype + "'></div>" );
 
 		label.bind({
-			vmouseover: function() {
+			vmouseover: function( event ) {
 				if ( $( this ).parent().is( ".ui-disabled" ) ) {
-					return false;
+					event.stopPropagation();
 				}
 			},
 
@@ -130,11 +130,12 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 
 	//returns either a set of radios with the same name attribute, or a single checkbox
 	_getInputSet: function(){
-        if(this.inputtype == "checkbox") {
-            return this.element;
-        }
-        return this.element.closest( "form,fieldset,:jqmData(role='page')" )
-				.find( "input[name='"+ this.element.attr( "name" ) +"'][type='"+ this.inputtype +"']" );
+		if(this.inputtype == "checkbox") {
+			return this.element;
+		}
+
+		return this.element.closest( "form,fieldset,:jqmData(role='page')" )
+			.find( "input[name='"+ this.element.attr( "name" ) +"'][type='"+ this.inputtype +"']" );
 	},
 
 	_updateAll: function() {
@@ -186,9 +187,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ){
-	$( $.mobile.checkboxradio.prototype.options.initSelector, e.target )
-		.not( ":jqmData(role='none'), :jqmData(role='nojs')" )
-		.checkboxradio();
+	$.mobile.checkboxradio.prototype.enhanceWithin( e.target );
 });
 
 })( jQuery );

@@ -30,9 +30,9 @@ $(function() {
 				self.frame.QUnit.testDone = self.onTestDone;
 			},
 
-			onTestDone: function( name, bad, assertCount ) {
-				QUnit.ok( !(bad > 0), name );
-				self.recordAssertions( assertCount - bad, name );
+			onTestDone: function( result ) {
+				QUnit.ok( !(result.failed > 0), result.name );
+				self.recordAssertions( result.total - result.failed, result.name );
 			},
 
 			onFrameDone: function( failed, passed, total, runtime ){

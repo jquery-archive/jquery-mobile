@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>jQuery Mobile Slider Events Test Suite</title>
+	<title>jQuery Mobile Slider Test Suite</title>
 
 	<script src="../../../js/jquery.js"></script>
 	<script src="../jquery.setNameSpace.js"></script>
@@ -11,15 +11,18 @@
 	<script src="../../../tests/jquery.testHelper.js"></script>
 
 
-	<link rel="stylesheet"  href="../../../themes/default/"/>
+	<link rel="stylesheet"  href="../../../css/themes/default/"/>
 	<link rel="stylesheet" href="../../../external/qunit.css"/>
 	<script src="../../../external/qunit.js"></script>
 
 	<script src="slider_events.js"></script>
+	<script src="slider_core.js"></script>
+
+	<script src="../swarminject.js"></script>
 </head>
 <body>
 
-<h1 id="qunit-header">jQuery Mobile Slider Event Test Suite</h1>
+<h1 id="qunit-header">jQuery Mobile Slider Test Suite</h1>
 <h2 id="qunit-banner"></h2>
 <h2 id="qunit-userAgent"></h2>
 <ol id="qunit-tests">
@@ -57,10 +60,11 @@
 	<div  data-nstest-role="fieldcontain">
 		<input type="range" name="onchange" id="onchange" value="25" min="0" max="100" step="10" onchange="onChangeCounter()" data-nstest-theme="b" data-nstest-track-theme="a" />
 	</div>
-	
-	
-	
-	
+
+	<div data-role="fieldcontain">
+		<label for="slider">Input slider:</label>
+		<input type="range" name="slider" id="slider" value="25" min="0" max="100" class="should-be-native"/>
+	</div>
 </div>
 
 <div id="enhancetest">

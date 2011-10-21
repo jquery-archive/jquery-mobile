@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<title>jQuery Mobile Docs - Radio Buttons</title> 
-	<link rel="stylesheet"  href="../../../themes/default/" /> 
+	<link rel="stylesheet"  href="../../../css/themes/default/" /> 
 	<link rel="stylesheet" href="../../_assets/css/jqm-docs.css"/> 
 	<script src="../../../js/jquery.js"></script> 
 	<script src="../../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script> 
@@ -44,11 +44,48 @@
 		
 		<p>Because radio buttons use the <code>label</code> element for the text displayed next to the checkbox form element, we recommend wrapping the radio buttons in a <code>fieldset</code> element that has a <code>legend</code> which acts as the title for the question.</p>
 		
-		<p>Lastly, need to wrap the <code>fieldset</code> in a <code>div</code> with <code> data-role="controlgroup"</code> attribute to the <code>fieldset</code> so it can be styled in a parallel way as text inputs, selects or other form elements.</p>
+		<p>To visually integrate multiple radio buttons into a vertically grouped button set, the framework will automatically remove all margins between buttons and round only the top and bottom corners of the set if there is a <code> data-role="controlgroup"</code> attribute on the container.</p>
 				
 <pre><code>	
-&lt;div data-role=&quot;fieldcontain&quot;&gt;
-    &lt;fieldset data-role=&quot;controlgroup&quot;&gt;
+<strong>&lt;fieldset data-role=&quot;controlgroup&quot;&gt;
+	&lt;legend&gt;Choose a pet:&lt;/legend&gt;</strong>
+     	&lt;input type=&quot;radio&quot; name=&quot;radio-choice-1&quot; id=&quot;radio-choice-1&quot; value=&quot;choice-1&quot; checked=&quot;checked&quot; /&gt;
+     	&lt;label for=&quot;radio-choice-1&quot;&gt;Cat&lt;/label&gt;
+
+     	&lt;input type=&quot;radio&quot; name=&quot;radio-choice-1&quot; id=&quot;radio-choice-2&quot; value=&quot;choice-2&quot;  /&gt;
+     	&lt;label for=&quot;radio-choice-2&quot;&gt;Dog&lt;/label&gt;
+
+     	&lt;input type=&quot;radio&quot; name=&quot;radio-choice-1&quot; id=&quot;radio-choice-3&quot; value=&quot;choice-3&quot;  /&gt;
+     	&lt;label for=&quot;radio-choice-3&quot;&gt;Hamster&lt;/label&gt;
+
+     	&lt;input type=&quot;radio&quot; name=&quot;radio-choice-1&quot; id=&quot;radio-choice-4&quot; value=&quot;choice-4&quot;  /&gt;
+     	&lt;label for=&quot;radio-choice-4&quot;&gt;Lizard&lt;/label&gt;
+<strong>&lt;/fieldset&gt;</strong>
+</code></pre>
+
+		
+		<p>This will produce a vertically grouped radio button set. The default styles set the width of the button group to 100% of the parent container and stacks the label on a separate line.</p>
+		
+		
+	    <fieldset data-role="controlgroup">
+	    	<legend>Choose a pet:</legend>
+	         	<input type="radio" name="radio-pet-1a" id="radio-pet-1a" value="choice-1" checked="checked"  />
+	         	<label for="radio-pet-1a">Cat</label>
+
+	         	<input type="radio" name="radio-pet-1a" id="radio-pet-2a" value="choice-2"  />
+	         	<label for="radio-pet-2a">Dog</label>
+
+	         	<input type="radio" name="radio-pet-1a" id="radio-pet-3a" value="choice-3"  />
+	         	<label for="radio-pet-3a">Hamster</label>
+
+	         	<input type="radio" name="radio-pet-1a" id="radio-pet-4a" value="choice-4"  />
+	         	<label for="radio-pet-4a">Lizard</label>
+	    </fieldset>
+
+
+	<pre><code>	
+<strong>&lt;div data-role=&quot;fieldcontain&quot;&gt;
+</strong>    &lt;fieldset data-role=&quot;controlgroup&quot;&gt;
     	&lt;legend&gt;Choose a pet:&lt;/legend&gt;
          	&lt;input type=&quot;radio&quot; name=&quot;radio-choice-1&quot; id=&quot;radio-choice-1&quot; value=&quot;choice-1&quot; checked=&quot;checked&quot; /&gt;
          	&lt;label for=&quot;radio-choice-1&quot;&gt;Cat&lt;/label&gt;
@@ -62,28 +99,28 @@
          	&lt;input type=&quot;radio&quot; name=&quot;radio-choice-1&quot; id=&quot;radio-choice-4&quot; value=&quot;choice-4&quot;  /&gt;
          	&lt;label for=&quot;radio-choice-4&quot;&gt;Lizard&lt;/label&gt;
     &lt;/fieldset&gt;
-&lt;/div&gt;
-</code></pre>
+<strong>&lt;/div&gt;
+</strong>	</code></pre>
 
-		<p>To visually integrate multiple radio buttons into a vertically grouped button set, the framework will automatically remove all margins between buttons and round only the top and bottom corners of the set if there is a <code> data-role="controlgroup"</code> attribute on the fie.</p>
-		
-	<div data-role="fieldcontain">
-	    <fieldset data-role="controlgroup">
-	    	<legend>Choose a pet:</legend>
-	         	<input type="radio" name="radio-pet-1" id="radio-pet-1" value="choice-1" checked="checked"  />
-	         	<label for="radio-pet-1">Cat</label>
 
-	         	<input type="radio" name="radio-pet-1" id="radio-pet-2" value="choice-2"  />
-	         	<label for="radio-pet-2">Dog</label>
+			<p>To visually integrate multiple radio buttons into a vertically grouped button set, the framework will automatically remove all margins between buttons and round only the top and bottom corners of the set if there is a <code> data-role="controlgroup"</code> attribute on the container.</p>
 
-	         	<input type="radio" name="radio-pet-1" id="radio-pet-3" value="choice-3"  />
-	         	<label for="radio-pet-3">Hamster</label>
+		<div data-role="fieldcontain">
+		    <fieldset data-role="controlgroup">
+		    	<legend>Choose a pet:</legend>
+		         	<input type="radio" name="radio-pet-1" id="radio-pet-1" value="choice-1" checked="checked"  />
+		         	<label for="radio-pet-1">Cat</label>
 
-	         	<input type="radio" name="radio-pet-1" id="radio-pet-4" value="choice-4"  />
-	         	<label for="radio-pet-4">Lizard</label>
-	    </fieldset>
-	</div>
+		         	<input type="radio" name="radio-pet-1" id="radio-pet-2" value="choice-2"  />
+		         	<label for="radio-pet-2">Dog</label>
 
+		         	<input type="radio" name="radio-pet-1" id="radio-pet-3" value="choice-3"  />
+		         	<label for="radio-pet-3">Hamster</label>
+
+		         	<input type="radio" name="radio-pet-1" id="radio-pet-4" value="choice-4"  />
+		         	<label for="radio-pet-4">Lizard</label>
+		    </fieldset>
+		</div>
 			<h2>Horizontal radio button sets</h2>
 
 			<p>Radio buttons can also be used for grouped button sets only a single button can be selected at once, such as a view switcher control. To make a horizontal radio button set, add the <code> data-type="horizontal"</code> to the <code>fieldset</code>.</p>
@@ -104,7 +141,7 @@
 	    </fieldset>
 	</div>
 
-				<p>The framework will float the labels so they sit side-by-side on a line, hide the radio button icons and only round the left and right edges of the group.</p>
+				<p>The framework will float the labels so they sit side-by-side on a line, hides the radio button icons and only round the left and right edges of the group.</p>
 				
 
 	

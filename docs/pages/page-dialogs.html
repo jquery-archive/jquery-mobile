@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<title>jQuery Mobile Docs - Dialogs</title> 
-	<link rel="stylesheet"  href="../../themes/default/" />  
+	<link rel="stylesheet"  href="../../css/themes/default/" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 	<script src="../../js/jquery.js"></script>
 	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
@@ -67,6 +67,16 @@
 			<p>And dialogs can be can used more like a control sheet to offer multiple buttons by removing the header:</p>
 						<a href="dialog-buttons.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="slidedown">Share photos...</a>
 			
+			<p>For the sake of readability, dialogs have a default <code>max-width</code> of 500 pixels (plus 15px padding on each side). To override this, use the following CSS in your theme:</p>
+
+<code>
+.ui-dialog .ui-header,
+.ui-dialog .ui-content,
+.ui-dialog .ui-footer { <strong>max-width: 100%;</strong> }
+</code>
+
+
+
 			
 	</div><!--/content-primary -->		
 

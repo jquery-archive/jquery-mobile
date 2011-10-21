@@ -1,9 +1,0 @@
-/*
-* jQuery Mobile Framework
-* Copyright (c) jQuery Project
-* Dual licensed under the MIT (MIT-LICENSE.txt) or GPL (GPL-LICENSE.txt) licenses.
-*/
-.ui-dialog { min-height: 480px; }
-.ui-dialog .ui-header, .ui-dialog .ui-content,  .ui-dialog .ui-footer { margin: 15px; position: relative; }
-.ui-dialog .ui-header, .ui-dialog .ui-footer { z-index: 10; width: auto; }
-.ui-dialog .ui-content, .ui-dialog .ui-footer { margin-top: -15px;  }

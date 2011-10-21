@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>jQuery Mobile Docs - Events</title>
-	<link rel="stylesheet"  href="../../themes/default/" />
+	<link rel="stylesheet"  href="../../css/themes/default/" />
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 	<script src="../../js/jquery.js"></script>
 	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
@@ -61,10 +61,49 @@
 			<dt><code>swiperight</code></dt>
 			<dd>Triggers when a swipe event occurred moving in the right direction.</dd>
 			</dl>
+			
+			<h2>Virtual mouse events</h2>
+			<p>We provide a set of "virtual" mouse events that attempt to abstract away mouse and touch events. This allows the developer to register listeners for the basic mouse events, such as mousedown, mousemove, mouseup, and click, and the plugin will take care of registering the correct listeners behind the scenes to invoke the listener at the fastest possible time for that device. In touch environments, the plugin retains the order of event firing that is seen in traditional mouse environments, so for example, vmouseup is always dispatched before vmousedown, and vmousedown before vclick, etc. The virtual mouse events also normalize how coordinate information is extracted from the event, so in touch based environments, coordinates are available from the pageX, pageY, screenX, screenY, clientX, and clientY properties, directly on the event object.</p>
+			<dl>
+				<dt><code>vmouseover</code></dt>
+				<dd>Normalized event for handling touch or  <code>mouseover</code> events</dd>
+
+				<dt><code>vmousedown</code></dt>
+				<dd>Normalized event for handling touchstart or  <code>mousedown</code> events</dd>
+
+				<dt><code>vmousemove</code></dt>
+				<dd>Normalized event for handling touchmove or  <code>mousemove</code> events</dd>
+
+				<dt><code>vmouseup</code></dt>
+				<dd>Normalized event for handling touchend or  <code>mouseup</code> events</dd>
+
+				<dt><code>vclick</code></dt>
+				<dd>Normalized event for handling touchend or mouse <code>click</code> events. On touch devices, this event is dispatched *AFTER* vmouseup. </dd>
+
+				<dt><code>vmousecancel</code></dt>
+				<dd>Normalized event for handling touch or mouse <code>mousecancel</code> events</dd>
+			</dl>
+
+			<div class="ui-body ui-body-e">
+				<h4 style="margin:.5em 0">Warning: Use vclick with caution</h4>
+				<p> Use vclick with caution on touch devices. Webkit based browsers synthesize mousedown, mouseup, and click events roughly 300ms after the touchend event is dispatched. The target of the synthesized mouse events are calculated at the time they are dispatched and are based on the location of the touch events and, in some cases, implementation specific heuristics which leads to different target calculations on different devices and even different OS versions for the same device. This means the target element within the original touch events could be different from the target element within the synthesized mouse events.</p>
+	            <p>We recommend using click instead of vclick anytime the action being triggered has the possibility of changing the content underneath the point that was touched on screen. This includes page transitions and other behaviors such as collapse/expand that could result in the screen shifting or content being completely replaced.</p>
+			</div>
+			<p>&nbsp;</p>
+			<div class="ui-body ui-body-e">
+				<h4 style="margin:.5em 0">Canceling an elements default click behavior</h4>
+				<p>Applications can call preventDefault() on a vclick event to cancel an element's default click behavior. On mouse based devices, calling preventDefault() on a vclick event equates to calling preventDefault() on the real click event during the bubble event phase. On touch based devices, it's a bit more complicated since the actual click event is dispatched about 300ms after the vclick event is dispatched. For touch devices, calling preventDefault() on a vclick event triggers some code in the vmouse plugin that attempts to catch the next click event that gets dispatched by the browser, during the capture event phase, and call preventDefault() and stopPropagation() on it. As mentioned in the warning above, it is sometimes difficult match up a touch event with its corresponding mouse event because the targets can differ. For this reason, the vmouse plugin also falls back to attempting to identify a corresponding click event by coordinates. There are still cases where both target and coordinate identification fail, which results in the click event being dispatched and either triggering the default action of the element, or in the case where content has been shifted or replaced, triggering a click on a different element. If this happens on  a regular basis for a given element/control, we suggest you use click for triggering your action.</p>
+			</div>
+		
 		<h2>Orientation change event</h2>
 		<dl>
 			<dt><code>orientationchange</code></dt>
-			<dd>Triggers when a device orientation changes (by turning it vertically or horizontally). When bound to this event, your callback function can leverage a second argument, which contains an <code>orientation</code> property equal to either "portrait" or "landscape". These values are also added as classes to the HTML element, allowing you to leverage them in your CSS selectors. Note that we currently bind to the resize event when orientationChange is not natively supported.</dd>
+			<dd>Triggers when a device orientation changes (by turning it vertically or horizontally). When bound to this event, your callback function can leverage a second argument, which contains an <code>orientation</code> property equal to either "portrait" or "landscape". These values are also added as classes to the HTML element, allowing you to leverage them in your CSS selectors. Note that we currently bind to the resize event when orientationChange is not natively supported, or when <code>$.mobile.orientationChangeEnabled</code> is set to false.</dd>
+			<div class="ui-body ui-body-e">
+				<h4>orientationchange timing</h4>
+
+				The timing of the <code>orientationchange</code> with relation to the change of the client height and width is different between browsers, though the current implementation will give you the correct value for <code>event.orientation</code> derived from <code>window.orientation</code>. This means that if your bindings are dependent on the height and width values you may want to disable orientationchange all together with <code>$.mobile.orientationChangeEnabled = false</code> to let the fallback resize code trigger your bindings.
+			</div>
 		</dl>
 
 		<h2>Scroll events</h2>
@@ -226,7 +265,7 @@ $( document ).bind( &quot;pageloadfailed&quot;, function( event, data ){
                     </li>
           	    </ul>
             	</li>
-            	<li><code>options</code> (object)            
+            	<li><code>options</code> (object)
             	  <ul>
             	    <li>This object contains the options that were passed into $.mobile.loadPage().</li>
           	    </ul>
@@ -401,39 +440,17 @@ $( '#aboutPage' ).live( 'pageinit',function(event){
 			</dd>
 		</dl>
 
-		<h2>Virtual mouse events</h2>
-		<p>We provide a set of "virtual" mouse events that attempt to abstract away mouse and touch events. This allows the developer to register listeners for the basic mouse events, such as mousedown, mousemove, mouseup, and click, and the plugin will take care of registering the correct listeners behind the scenes to invoke the listener at the fastest possible time for that device. In touch environments, the plugin retains the order of event firing that is seen in traditional mouse environments, so for example, vmouseup is always dispatched before vmousedown, and vmousedown before vclick, etc. The virtual mouse events also normalize how coordinate information is extracted from the event, so in touch based environments, coordinates are available from the pageX, pageY, screenX, screenY, clientX, and clientY properties, directly on the event object.</p>
+		<h2>Layout events</h2>
+		<p>Some components within the framework, such as collapsible and listview search, dynamically hide and show content based on user events. This hiding/showing of content affects the size of the page and may result in the browser adjusting/scrolling the viewport to accommodate the new page size. Since this has the potential to affect other components such as fixed headers and footers, components like collapsible and listview trigger a custom <code>updatelayout</code> event to notify other components that they may need to adjust their layouts in response to their content changes. Developers who are building dynamic applications that inject content into the current page can also manually trigger this <code>updatelayout</code> event to ensure components on the page update in response to the new content that was just added.</p>
 		<dl>
-			<dt><code>vmouseover</code></dt>
-			<dd>Normalized event for handling touch or  <code>mouseover</code> events</dd>
-
-			<dt><code>vmousedown</code></dt>
-			<dd>Normalized event for handling touchstart or  <code>mousedown</code> events</dd>
-
-			<dt><code>vmousemove</code></dt>
-			<dd>Normalized event for handling touchmove or  <code>mousemove</code> events</dd>
-
-			<dt><code>vmouseup</code></dt>
-			<dd>Normalized event for handling touchend or  <code>mouseup</code> events</dd>
-
-			<dt><code>vclick</code></dt>
-			<dd>Normalized event for handling touchend or mouse <code>click</code> events. On touch devices, this event is dispatched *AFTER* vmouseup. </dd>
-
-			<dt><code>vmousecancel</code></dt>
-			<dd>Normalized event for handling touch or mouse <code>mousecancel</code> events</dd>
-		</dl>
-
-		<div class="ui-body ui-body-e">
-			<h4 style="margin:.5em 0">Warning: Use vclick with caution</h4>
-			<p> Use vclick with caution on touch devices. Webkit based browsers synthesize mousedown, mouseup, and click events roughly 300ms after the touchend event is dispatched. The target of the synthesized mouse events are calculated at the time they are dispatched and are based on the location of the touch events and, in some cases, implementation specific heuristics which leads to different target calculations on different devices and even different OS versions for the same device. This means the target element within the original touch events could be different from the target element within the synthesized mouse events.</p>
-            <p>We recommend using click instead of vclick anytime the action being triggered has the possibility of changing the content underneath the point that was touched on screen. This includes page transitions and other behaviors such as collapse/expand that could result in the screen shifting or content being completely replaced.</p>
-		</div>
-		<p>&nbsp;</p>
-		<div class="ui-body ui-body-e">
-			<h4 style="margin:.5em 0">Canceling an elements default click behavior</h4>
-			<p>Applications can call preventDefault() on a vclick event to cancel an element's default click behavior. On mouse based devices, calling preventDefault() on a vclick event equates to calling preventDefault() on the real click event during the bubble event phase. On touch based devices, it's a bit more complicated since the actual click event is dispatched about 300ms after the vclick event is dispatched. For touch devices, calling preventDefault() on a vclick event triggers some code in the vmouse plugin that attempts to catch the next click event that gets dispatched by the browser, during the capture event phase, and call preventDefault() and stopPropagation() on it. As mentioned in the warning above, it is sometimes difficult match up a touch event with its corresponding mouse event because the targets can differ. For this reason, the vmouse plugin also falls back to attempting to identify a corresponding click event by coordinates. There are still cases where both target and coordinate identification fail, which results in the click event being dispatched and either triggering the default action of the element, or in the case where content has been shifted or replaced, triggering a click on a different element. If this happens on  a regular basis for a given element/control, we suggest you use click for triggering your action.</p>
-		</div>
-
+			<dt><code>updatelayout</code></dt>
+			<dd>This event is triggered by components within the framework that dynamically show/hide content, and is meant as a generic mechanism to notify other components that they may need to update their size or position. Within the framework, this event is fired on the component element whose content was shown/hidden, and bubbles all the way up to the document element.
+<pre><code>
+$( '#foo' ).hide().trigger( 'updatelayout' );
+</code></pre>
+            </dd>
+        </dl>
+		
 		<h2>Animation Events</h2>
 		<p>jQuery Mobile exposes the <code>animationComplete</code> plugin, which you can utilize after adding or removing a class that applies a CSS transition.</p>
 
