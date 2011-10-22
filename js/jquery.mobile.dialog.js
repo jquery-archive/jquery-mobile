@@ -9,7 +9,7 @@
 $.widget( "mobile.dialog", $.mobile.widget, {
 	options: {
 		closeBtnText 	: "Close",
-		dialogTheme	: "a",
+		theme	: "a",
 		initSelector	: ":jqmData(role='dialog')"
 	},
 	_create: function() {
@@ -22,7 +22,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 			$el.removeClass( pageTheme[ 0 ] );
 		}
 
-		$el.addClass( "ui-body-" + this.options.dialogTheme );
+		$el.addClass( "ui-body-" + this.options.theme );
 
 		// Class the markup for dialog styling
 		// Set aria role
