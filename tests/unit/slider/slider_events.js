@@ -199,4 +199,34 @@
 		ok( control[0].selectedIndex !== currentValue, "value did change");
 		same( changeCount, 1, "change event should be fired once during a click" );
 	});
+	
+	asyncTest( "toggle switch should refresh when disabled", function() {
+		var control = $( "#slider-switch" ),
+			handle = control.data( "slider" ).handle;
+			
+		$.testHelper.sequence([
+			function() {
+				// set the initial value
+				control.val('off').slider('refresh');
+			},
+			
+			function() {
+				equals(handle.css('left'), '0%', 'handle starts on the left side');
+				
+				// disable and change value
+				control.slider('disable');
+				control.val('on').slider('refresh');
+			},
+			
+			function() {
+				equals(handle.css('left'), '100%', 'handle ends on the right side');
+		
+				// reset slider state so it is ready for other tests
+				control.slider('enable');
+				
+				start();
+			}
+		], 500);
+	});
+	
 })(jQuery);
