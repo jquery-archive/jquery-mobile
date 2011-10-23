@@ -161,6 +161,14 @@
 		ok( $("#enhancetest").trigger("create").find(".ui-slider").length, "enhancements applied" );
 	});
 	
+	var createEvent = function( name, target, x, y ) {
+		var event = $.Event( name );
+		event.target = target;
+		event.pageX = x;
+		event.pageY = y;
+		return event;
+	}
+	
 	test( "toggle switch should fire one change event when clicked", function(){
 		var control = $( "#slider-switch" ),
 			widget = control.data( "slider" ),
@@ -174,15 +182,6 @@
 			event = null,
 			offset = handle.offset(),
 			currentValue = control[0].selectedIndex;
-
-		function createEvent( name, target, x, y )
-		{
-			var event = $.Event( name );
-			event.target = target;
-			event.pageX = x;
-			event.pageY = y;
-			return event;
-		}
 
 		control.bind( "change", changeFunc );
 
@@ -198,6 +197,91 @@
 
 		ok( control[0].selectedIndex !== currentValue, "value did change");
 		same( changeCount, 1, "change event should be fired once during a click" );
+	});
+	
+	asyncTest( "toggle switch handle should snap in the old position if dragged less than half of the slider width, in the new position if dragged more than half of the slider width", function() {
+		var control = $( "#slider-switch" ),
+			widget = control.data( "slider" ),
+			slider = widget.slider,
+			handle = widget.handle,
+			width = handle.width(),
+			offset = null;
+			
+		$.testHelper.sequence([
+			function() {
+				// initialize the switch
+				control.val('on').slider('refresh');
+			},
+			
+			function() {
+				equals(handle.css('left'), '100%', 'handle starts on the right side');
+				
+				// simulate dragging less than a half
+				offset = handle.offset();
+				slider.trigger( createEvent( "mousedown", handle[ 0 ], offset.left + width - 10, offset.top + 10 ) );
+				slider.trigger( createEvent( "mousemove", handle[ 0 ], offset.left + width - 20, offset.top + 10 ) );
+				slider.trigger( createEvent( "mouseup", handle[ 0 ], offset.left + width - 20, offset.top + 10 ) );
+			},
+			
+			function() {
+				equals(handle.css('left'), '100%', 'handle ends on the right side');
+				
+				// initialize the switch
+				control.val('on').slider('refresh');
+			},
+			
+			function() {
+				equals(handle.css('left'), '100%', 'handle starts on the right side');
+			
+				// simulate dragging more than a half
+				offset = handle.offset();
+				slider.trigger( createEvent( "mousedown", handle[ 0 ], offset.left + 10, offset.top + 10 ) );
+				slider.trigger( createEvent( "mousemove", handle[ 0 ], offset.left - ( width / 2 ), offset.top + 10 ) );
+				//slider.trigger( createEvent( "mousemove", handle[ 0 ], offset.left - width + 20, offset.top + 10 ) );
+				slider.trigger( createEvent( "mouseup", handle[ 0 ], offset.left - ( width / 2 ), offset.top + 10 ) );
+			},
+			
+			function() {
+				equals(handle.css('left'), '0%', 'handle ends on the left side');
+				
+				start();
+			}
+		], 500);
+	});
+	
+	asyncTest( "toggle switch handle should not move if user is dragging and value is changed", function() {
+		var control = $( "#slider-switch" ),
+			widget = control.data( "slider" ),
+			slider = widget.slider,
+			handle = widget.handle,
+			width = handle.width(),
+			offset = null;
+			
+		$.testHelper.sequence([
+			function() {
+				// initialize the switch
+				control.val('on').slider('refresh');
+			},
+			
+			function() {
+				equals(handle.css('left'), '100%', 'handle starts on the right side');
+			
+				// simulate dragging more than a half
+				offset = handle.offset();
+				slider.trigger( createEvent( "mousedown", handle[ 0 ], offset.left + 10, offset.top + 10 ) );
+				slider.trigger( createEvent( "mousemove", handle[ 0 ], offset.left - width + 20, offset.top + 10 ) );
+			},
+			
+			function() {
+				notEqual(handle.css('left'), '0%', 'handle is not on the left side');
+				notEqual(handle.css('left'), '100%', 'handle is not on the right side');
+				
+				// reset slider state so it is ready for other tests
+				slider.trigger( createEvent( "mouseup", handle[ 0 ], offset.left - width + 20, offset.top + 10 ) );
+				
+				start();
+			}
+		], 500);
 	});
 	
 	asyncTest( "toggle switch should refresh when disabled", function() {
