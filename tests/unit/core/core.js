@@ -2,9 +2,12 @@
  * mobile core unit tests
  */
 
-(function( $ ) {
+(function($){
 	var libName = "jquery.mobile.core.js",
-			setGradeA = function(value) { $.support.mediaquery = value; },
+			setGradeA = function(value, version) {
+				$.support.mediaquery = value;
+				$.mobile.browser.ie = version;
+			},
 			extendFn = $.extend;
 
 	module(libName, {
@@ -21,131 +24,103 @@
 	});
 
 	$.testHelper.excludeFileProtocol(function(){
-		test( "grade A browser support media queries", function(){
-			setGradeA(false);
+		test( "grade A browser either supports media queries or is IE 7+", function(){
+			setGradeA(false, 6);
 			$.testHelper.reloadLib(libName);
 			ok(!$.mobile.gradeA());
 
-			setGradeA(true);
+			setGradeA(true, 8);
 			$.testHelper.reloadLib(libName);
 			ok($.mobile.gradeA());
 		});
+	});
 
-		test( "loading the core library triggers mobilinit on the document", function(){
-			expect( 1 );
+	test( "$.mobile.nsNormalize works properly with namespace defined (test default)", function(){
+		equal($.mobile.nsNormalize("foo"), "nstestFoo", "appends ns and initcaps");
+		equal($.mobile.nsNormalize("fooBar"), "nstestFooBar", "leaves capped strings intact");
+		equal($.mobile.nsNormalize("foo-bar"), "nstestFooBar", "changes dashed strings");
+		equal($.mobile.nsNormalize("foo-bar-bak"), "nstestFooBarBak", "changes multiple dashed strings");
+	});
 
-			$(window.document).bind('mobileinit', function(event){
-				ok(true);
-			});
+	test( "$.mobile.nsNormalize works properly with an empty namespace", function(){
+		var realNs = $.mobile.ns;
 
-			$.testHelper.reloadLib(libName);
-		});
+		$.mobile.ns = "";
 
-		test( "enhancments are skipped when the browser is not grade A", function(){
-			setGradeA(false);
-			$.testHelper.reloadLib(libName);
+		equal($.mobile.nsNormalize("foo"), "foo", "leaves uncapped and undashed");
+		equal($.mobile.nsNormalize("fooBar"), "fooBar", "leaves capped strings intact");
+		equal($.mobile.nsNormalize("foo-bar"), "fooBar", "changes dashed strings");
+		equal($.mobile.nsNormalize("foo-bar-bak"), "fooBarBak", "changes multiple dashed strings");
 
-			//NOTE easiest way to check for enhancements, not the most obvious
-			ok(!$("html").hasClass("ui-mobile"));
-		});
+		$.mobile.ns = realNs;
+	});
 
-		test( "enhancments are added when the browser is grade A", function(){
-			setGradeA(true);
-			$.testHelper.reloadLib(libName);
+	//data tests
+	test( "$.fn.jqmData and $.fn.jqmRemoveData methods are working properly", function(){
+		var data;
 
-			ok($("html").hasClass("ui-mobile"));
-		});
+		same( $("body").jqmData("foo", true), $("body"), "setting data returns the element" );
+
+		same( $("body").jqmData("foo"), true, "getting data returns the right value" );
+
+		same( $("body").data($.mobile.nsNormalize("foo")), true, "data was set using namespace" );
+
+		same( $("body").jqmData("foo", undefined), true, "getting data still returns the value if there's an undefined second arg" );
+
+		data = $.extend( {}, $("body").data() );
+		delete data[ $.expando ]; //discard the expando for that test
+		same( data , { "nstestFoo": true }, "passing .data() no arguments returns a hash with all set properties" );
+
+		same( $("body").jqmData(), undefined, "passing no arguments returns undefined" );
+
+		same( $("body").jqmData(undefined), undefined, "passing a single undefined argument returns undefined" );
+
+		same( $("body").jqmData(undefined, undefined), undefined, "passing 2 undefined arguments returns undefined" );
+
+		same( $("body").jqmRemoveData("foo"), $("body"), "jqmRemoveData returns the element" );
+
+		same( $("body").jqmData("foo"), undefined, "jqmRemoveData properly removes namespaced data" );
+
+	});
 
 
-		//TODO lots of duplication
-		test( "pageLoading doesn't add the dialog to the page when loading message is false", function(){
-			$.testHelper.alterExtend({loadingMessage: false});
-			$.testHelper.reloadLib(libName);
-			$.mobile.pageLoading(false);
-			ok(!$(".ui-loader").length);
-		});
+	test( "$.jqmData and $.jqmRemoveData methods are working properly", function(){
+		same( $.jqmData(document.body, "foo", true), true, "setting data returns the value" );
 
-		test( "pageLoading doesn't add the dialog to the page when done is passed as true", function(){
-			$.testHelper.alterExtend({loadingMessage: true});
-			$.testHelper.reloadLib(libName);
+		same( $.jqmData(document.body, "foo"), true, "getting data returns the right value" );
 
-			// TODO add post reload callback
-			$('.ui-loader').remove();
+		same( $.data(document.body, $.mobile.nsNormalize("foo")), true, "data was set using namespace" );
 
-			$.mobile.pageLoading(true);
-			ok(!$(".ui-loader").length);
-		});
+		same( $.jqmData(document.body, "foo", undefined), true, "getting data still returns the value if there's an undefined second arg" );
 
-		test( "pageLoading adds the dialog to the page when done is true", function(){
-			$.testHelper.alterExtend({loadingMessage: true});
-			$.testHelper.reloadLib(libName);
-			$.mobile.pageLoading(false);
-			ok($(".ui-loader").length);
-		});
+		same( $.jqmData(document.body), undefined, "passing no arguments returns undefined" );
 
-		var metaViewportSelector = "head meta[name=viewport]",
-				setViewPortContent = function(value){
-					$(metaViewportSelector).remove();
-					$.testHelper.alterExtend({metaViewportContent: value});
-					$.testHelper.reloadLib(libName);
-				};
+		same( $.jqmData(document.body, undefined), undefined, "passing a single undefined argument returns undefined" );
 
-		test( "meta view port element is added to head when defined on mobile", function(){
-			setViewPortContent("width=device-width");
-			same($(metaViewportSelector).length, 1);
-		});
+		same( $.jqmData(document.body, undefined, undefined), undefined, "passing 2 undefined arguments returns undefined" );
 
-		test( "meta view port element not added to head when not defined on mobile", function(){
-			setViewPortContent(false);
-			same($(metaViewportSelector).length, 0);
-		});
+		same( $.jqmRemoveData(document.body, "foo"), undefined, "jqmRemoveData returns the undefined value" );
 
-		var findFirstPage = function() {
-			return $("[data-role='page']").first();
-		};
+		same( $("body").jqmData("foo"), undefined, "jqmRemoveData properly removes namespaced data" );
 
-		test( "active page and start page should be set to the fist page in the selected set", function(){
-			var firstPage = findFirstPage();
-			$.testHelper.reloadLib(libName);
+	});
 
-			same($.mobile.startPage, firstPage);
-			same($.mobile.activePage, firstPage);
-		});
+	test( "addDependents works properly", function() {
+		same( $("#parent").jqmData('dependents'), undefined );
+		$( "#parent" ).addDependents( $("#dependent") );
+		same( $("#parent").jqmData('dependents').length, 1 );
+	});
 
-		test( "mobile viewport class is defined on the first page's parent", function(){
-			var firstPage = findFirstPage();
-			$.testHelper.reloadLib(libName);
+	test( "removeWithDependents removes the parent element and ", function(){
+		$( "#parent" ).addDependents( $("#dependent") );
+		same($( "#parent, #dependent" ).length, 2);
+		$( "#parent" ).removeWithDependents();
+		same($( "#parent, #dependent" ).length, 0);
+	});
 
-			ok(firstPage.parent().hasClass('ui-mobile-viewport'));
-		});
-
-		test( "mobile page container is the first page's parent", function(){
-			var firstPage = findFirstPage();
-			$.testHelper.reloadLib(libName);
-
-			same($.mobile.pageContainer, firstPage.parent());
-		});
-
-		test( "page loading is called on document ready", function(){
-			expect( 2 );
-
-			$.testHelper.alterExtend({ pageLoading: function(){
-				ok("called");
-			}});
-
-			$.testHelper.reloadLib(libName);
-		});
-
-		test( "hashchange triggered on document ready with single argument: true", function(){
-			expect( 2 );
-
-			$(window).bind("hashchange", function(ev, arg){
-				same(arg, true);
-			});
-
-			$.testHelper.reloadLib(libName);
-		});
-
-		//TODO test that silentScroll is called on window load
+	test( "$.fn.getEncodedText should return the encoded value where $.fn.text doesn't", function() {
+		same( $("#encoded").text(), "foo>");
+		same( $("#encoded").getEncodedText(), "foo&gt;");
+		same( $("#unencoded").getEncodedText(), "foo");
 	});
 })(jQuery);

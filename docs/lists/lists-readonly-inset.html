@@ -1,0 +1,168 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>jQuery Mobile Docs - Readonly Inset Lists</title> 
+	<link rel="stylesheet"  href="../../css/themes/default/" />  
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	<script src="../../js/jquery.js"></script>
+	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../_assets/js/jqm-docs.js"></script>
+	<script src="../../js/"></script>
+</head> 
+<body> 
+
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="f">
+		<h1>Readonly Inset Lists</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="content-primary">
+			<h2>Simple list</h2>
+
+			<ul data-role="listview" data-inset="true">
+				<li>Acura</li>
+				<li>Audi</li>
+				<li>BMW</li>
+				<li>Cadillac</li>
+				<li>Ferrari</li>
+			</ul>
+
+		<h2>Count bubbles</h2>
+		<ul data-role="listview" data-inset="true">
+			<li>Inbox <span class="ui-li-count">12</span></li>
+				<li>Outbox <span class="ui-li-count">0</span></li>
+				<li>Drafts <span class="ui-li-count">4</span></li>
+				<li>Sent <span class="ui-li-count">328</span></li>
+				<li>Trash <span class="ui-li-count">62</span></li>
+		</ul>
+		
+		<h2>Numbered list</h2>
+			<ol data-role="listview" data-inset="true">
+				<li>The Godfather</li>
+				<li>Inception</li>
+				<li>The Good, the Bad and the Ugly </li>
+				<li>Pulp Fiction</li>
+				<li>Schindler's List</li>
+			</ol>
+			
+		<h2>Divided, formatted content</h2>
+		<ul data-role="listview" data-inset="true">
+			<li>
+				<h3>Stephen Weber</h3>
+				<p><strong>You've been invited to a meeting at Filament Group in Boston, MA</strong></p>
+				<p>Hey Stephen, if you're available at 10am tomorrow, we've got a meeting with the jQuery team.</p>
+				<p class="ui-li-aside"><strong>6:24</strong>PM</p>
+			</li>
+			<li>
+				<h3>jQuery Team</h3>
+				<p><strong>Boston Conference Planning</strong></p>
+				<p>In preparation for the upcoming conference in Boston, we need to start gathering a list of sponsors and speakers.</p>
+				<p class="ui-li-aside"><strong>9:18</strong>AM</p>
+			</li>
+		</ul>
+		
+			
+
+		
+		<h2>Icon list</h2>
+		<ul data-role="listview" data-inset="true">
+			<li><img src="images/gf.png" alt="France" class="ui-li-icon">France <span class="ui-li-count">4</span></li>
+			<li><img src="images/de.png" alt="Germany" class="ui-li-icon">Germany <span class="ui-li-count">4</span></li>
+			<li><img src="images/gb.png" alt="Great Britain" class="ui-li-icon">Great Britain <span class="ui-li-count">0</span></li>
+			<li><img src="images/fi.png" alt="Finland" class="ui-li-icon">Finland <span class="ui-li-count">12</span></li>
+			<li><img src="images/sj.png" alt="Norway" class="ui-li-icon">Norway <span class="ui-li-count">328</span></li>
+			<li><img src="images/us.png" alt="United States" class="ui-li-icon">United States <span class="ui-li-count">62</span></li>
+		</ul>
+		
+		<h2>Thumbnail list</h2>
+
+			<ul data-role="listview" data-inset="true">
+				<li>
+				<img src="images/album-bb.jpg" />
+				<h3>Broken Bells</h3>
+				<p>Broken Bells</p>
+			</li>
+			<li>
+				<img src="images/album-hc.jpg" />
+				<h3>Warning</h3>
+				<p>Hot Chip</p>
+			</li>
+			<li>
+				<img src="images/album-p.jpg" />
+				<h3>Wolfgang Amadeus Phoenix</h3>
+				<p>Phoenix</p>
+			</li>
+			</ul>
+			
+		<h2>Divided, filterable list</h2>
+			<ul data-role="listview" data-filter="true" data-inset="true">
+				<li data-role="list-divider">A</li>
+				<li>Adam Kinkaid</li>
+				<li>Alex Wickerham</li>
+				<li>Avery Johnson</li>
+				<li data-role="list-divider">B</li>
+				<li>Bob Cabot</li>
+				<li data-role="list-divider">C</li>
+				<li>Caleb Booth</li>
+				<li>Christopher Adams</li>
+			</ul>
+
+
+
+
+		
+		
+			</div><!--/content-primary -->		
+
+			<div class="content-secondary">
+
+				<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+
+						<h3>More in this section</h3>
+
+						<ul data-role="listview" data-theme="c" data-dividertheme="d">
+
+							<li data-role="list-divider">List views</li>
+							<li><a href="docs-lists.html">List markup conventions</a></li>
+							<li><a href="lists-ul.html">Basic linked list</a></li>
+							<li><a href="lists-nested.html">Nested list</a></li>
+							<li><a href="lists-ol.html">Numbered list</a></li>
+
+							<li><a href="lists-split.html">Split button list</a></li>	
+							<li><a href="lists-divider.html">List dividers</a></li>
+							<li><a href="lists-count.html">Count bubble</a></li>
+							<li><a href="lists-thumbnails.html">Thumbnails</a></li>
+							<li><a href="lists-icons.html">Icons</a></li>
+							<li><a href="lists-formatting.html">Content formatting</a></li>
+							<li><a href="lists-search.html">Search filter bar</a></li>
+							<li><a href="lists-search-inset.html">Inset search filter bar</a></li>
+							<li><a href="lists-search-with-dividers.html">Search filter bar with dividers</a></li>
+
+							<li><a href="lists-readonly.html">Read-only lists</a></li>
+							<li data-theme="a"><a href="lists-readonly-inset.html">Read-only inset lists</a></li>
+							<li><a href="lists-forms.html">Lists with forms</a></li>
+							<li><a href="lists-forms-inset.html">Inset lists with forms</a></li>
+
+							<li><a href="lists-inset.html">Inset styled lists</a></li>
+							<li><a href="lists-performance.html">List performance test</a></li>
+							<li><a href="lists-themes.html">Theming lists</a></li>
+
+						</ul>
+				</div>
+			</div>		
+
+		</div><!-- /content -->
+
+		<div data-role="footer" class="footer-docs" data-theme="c">
+				<p>&copy; 2011 The jQuery Project</p>
+		</div>
+
+		</div><!-- /page -->
+
+		</body>
+		</html>

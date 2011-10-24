@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8" />
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>jQuery Mobile Media Test Suite</title>
 
-	<script type="text/javascript" src="../../../js/jquery.js"></script>
-	<script type="text/javascript" src="../../../js/jquery.ui.widget.js"></script>
-	<script type="text/javascript" src="../../../js/jquery.mobile.widget.js"></script>
-	<script type="text/javascript" src="../../../js/jquery.mobile.media.js"></script>
+	<script src="../../../js/jquery.js"></script>
+	<script src="../../../js/jquery.ui.widget.js"></script>
+	<script src="../../../js/jquery.mobile.widget.js"></script>
+	<script src="../../../js/jquery.mobile.media.js"></script>
+	<script src="../../../js/jquery.mobile.media.classes.js"></script>
 
-	<link rel="stylesheet" href="../../../external/qunit.css" type="text/css"/>
-	<script type="text/javascript" src="../../../external/qunit.js"></script>
+	<link rel="stylesheet" href="../../../external/qunit.css"/>
+	<script src="../../../external/qunit.js"></script>
 
-	<script type="text/javascript" src="media_core.js"></script>
+	<script src="media_core.js"></script>
+
+	<script src="../swarminject.js"></script>
 </head>
 <body>
 
@@ -22,8 +26,7 @@
 <ol id="qunit-tests">
 </ol>
 
-<div id="main" style="position: absolute; top: -10000px; left: -10000px;">
-</div>
+<div id="qunit-fixture"></div>
 
 </body>
 </html>

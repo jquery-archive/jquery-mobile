@@ -29,8 +29,8 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		showScrollBars:    true,
 		
 		pagingEnabled:     false,
-		delayedClickSelector: "a,input,textarea,select,.ui-btn",
-		delayedClickEnabled: true
+		delayedClickSelector: "a,input,textarea,select,button,.ui-btn",
+		delayedClickEnabled: false
 	},
 
 	_makePositioned: function($ele)
@@ -157,7 +157,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		}
 
 		this._setScrollPosition(x, y);
-		this._$clip.trigger(this.options.updateEventName, { x: x, y: y });
+		this._$clip.trigger(this.options.updateEventName, [ { x: x, y: y } ]);
 
 		if (keepGoing)
 			this._timerID = setTimeout(this._timerCB, this._timerInterval);	
@@ -254,7 +254,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 	{
 		var svh = [];
 		this._$clip.parents(".ui-scrollview-clip").each(function(){
-			var d = $(this).data("scrollview");
+			var d = $(this).jqmData("scrollview");
 			if (d) svh.unshift(d);
 		});
 		return svh;
@@ -284,8 +284,9 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		var c = this._$clip;
 		var v = this._$view;
 
-		if (this.options.delayedClickEnabled)
+		if (this.options.delayedClickEnabled) {
 			this._$clickEle = $(e.target).closest(this.options.delayedClickSelector);
+		}
 		this._lastX = ex;
 		this._lastY = ey;
 		this._doSnapBackX = false;
@@ -330,7 +331,15 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		this._lastMove = 0;
 		this._enableTracking();
 
-		e.preventDefault();
+		// If we're using mouse events, we need to prevent the default
+		// behavior to suppress accidental selection of text, etc. We
+		// can't do this on touch devices because it will disable the
+		// generation of "click" events.
+		//
+		// XXX: We should test if this has an effect on links! - kin
+
+		if (this.options.eventType == "mouse" || this.options.delayedClickEnabled)
+			e.preventDefault();
 		e.stopPropagation();
 	},
 
@@ -504,8 +513,12 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 
 		this._disableTracking();
 
-		if (this.options.delayedClickEnabled && !this._didDrag) {
-			this._$clickEle.click();
+		if (!this._didDrag && this.options.delayedClickEnabled && this._$clickEle.length) {
+			this._$clickEle
+				.trigger("mousedown")
+				//.trigger("focus")
+				.trigger("mouseup")
+				.trigger("click");
 		}
 
 		// If a view scrolled, then we need to absorb
@@ -728,7 +741,7 @@ jQuery.widget( "mobile.scrolllistview", jQuery.mobile.scrollview, {
 		// XXX: Note that we need to update this cache if we ever support lists
 		//      that can dynamically update their content.
 	
-		this._$dividers = this._$view.find("[data-role=list-divider]");
+		this._$dividers = this._$view.find(":jqmData(role='list-divider')");
 		this._lastDivider = null;
 	},
 

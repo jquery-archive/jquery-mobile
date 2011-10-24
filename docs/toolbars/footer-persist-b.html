@@ -1,105 +1,138 @@
 <!DOCTYPE html> 
 <html> 
 	<head>
-	<meta charset="utf-8" /> 
-	<title>jQuery Mobile Framework - Persistent footer demo</title> 
-	<link rel="stylesheet"  href="../../themes/default" />  
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>jQuery Mobile Framework - Persistent footer B</title> 
+	<link rel="stylesheet"  href="../../css/themes/default/" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
-	<script type="text/javascript" src="../../js/"></script>
+	<script src="../../js/jquery.js"></script>
+	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../_assets/js/jqm-docs.js"></script>
+	<script src="../../js/"></script>
 </head> 
 <body> 
 
-<div data-role="page">
-	
-	<div data-role="header" data-position="fixed">
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="f" data-position="fixed">
 		<h1>Albums</h1>
-		<a href="../forms/forms-all.html" data-rel="dialog" data-transition="pop" data-icon="gear" class="ui-btn-right">Options</a>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div>
 	
 	<div data-role="content">
-			<ul data-role="listview" data-split-icon="gear" data-split-theme="b">
-				<li>
-					<img src="../lists/images/album-bb.jpg" />
-					<h3><a href="index.html">Broken Bells</a></h3>
-					<p>Broken Bells</p>
-					<a href="../lists/lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album</a>
-				</li>
-				<li>
-					<img src="../lists/images/album-hc.jpg" />
-					<h3><a href="index.html">Warning</a></h3>
-					<p>Hot Chip</p>
-				<a href="../lists/lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album</a>
-				</li>
-				<li>
-					<img src="../lists/images/album-p.jpg" />
-					<h3><a href="index.html">Wolfgang Amadeus Phoenix</a></h3>
-					<p>Phoenix</p>
-					<a href="../lists/lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album</a>
-				</li>
-				<li>
-					<img src="../lists/images/album-ok.jpg" />
-					<h3><a href="index.html">Of The Blue Colour Of The Sky</a></h3>
-					<p>Ok Go</p>
-					<a href="../lists/lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album</a>
-				</li>
-				<li>
-					<img src="../lists/images/album-ws.jpg" />
-					<h3><a href="index.html">Elephant</a></h3>
-					<p>The White Stripes</p>
-					<a href="../lists/lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album</a>
-				</li>
-				<li>
-					<img src="../lists/images/album-rh.jpg" />
-					<h3><a href="index.html">Kid A</a></h3>
-					<p>Radiohead</p>
-					<a href="../lists/lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album</a>
-				</li>
-				<li>
-					<img src="../lists/images/album-xx.jpg" />
-					<h3><a href="index.html">XX</a></h3>
-					<p>XX</p>
-					<a href="../lists/lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album</a>
-				</li>
-				<li>
-					<img src="../lists/images/album-mg.jpg" />
-					<h3><a href="index.html">Congratulations</a></h3>
-					<p>MGMT</p>
-					<a href="../lists/lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album</a>
-				</li>
-				<li>
-					<img src="../lists/images/album-ag.jpg" />
-					<h3><a href="index.html">Ashes Grammar</a></h3>
-					<p>A Sunny Day in Glasgow</p>
-					<a href="../lists/lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album</a>
-				</li>
-
-				<li>
-					<img src="../lists/images/album-k.jpg" />
-					<h3><a href="index.html">Hot Fuss</a></h3>
-					<p>Killers</p>
-					<a href="../lists/lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album</a>
-				</li>
-				<li>	
-					<img src="../lists/images/album-af.jpg" />
-					<h3><a href="index.html">The Suburbs</a></h3>
-					<p>Arcade Fire</p>
-					<a href="../lists/lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album</a>
-				</li>
-			</ul>
+		<div class="content-primary">
+					<ul data-role="listview" data-split-icon="gear" data-split-theme="d">
+			<li><a href="index.html">
+				<img src="../lists/images/album-bb.jpg" />
+				<h3>Broken Bells</h3>
+				<p>Broken Bells</p>
+				</a><a href="../lists/lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album
+			</a></li>
+			<li><a href="index.html">
+				
+				<img src="../lists/images/album-hc.jpg" />
+				<h3>Warning</h3>
+				<p>Hot Chip</p>
+				
+			</a><a href="../lists/lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album
+			</a></li>
+			<li><a href="index.html">
+				<img src="../lists/images/album-p.jpg" />
+				<h3>Wolfgang Amadeus Phoenix</h3>
+				<p>Phoenix</p>
+				</a><a href="../lists/lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album
+			</a></li>
+			<li><a href="index.html">
+				<img src="../lists/images/album-ok.jpg" />
+				<h3>Of The Blue Colour Of The Sky</h3>
+				<p>Ok Go</p>
+				</a><a href="../lists/lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album
+			</a></li>
+			<li><a href="index.html">
+				<img src="../lists/images/album-ws.jpg" />
+				<h3>Elephant</h3>
+				<p>The White Stripes</p>
+				</a><a href="../lists/lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album
+			</a></li>
+			<li><a href="index.html">
+				<img src="../lists/images/album-rh.jpg" />
+				<h3>Kid A</h3>
+				<p>Radiohead</p>
+				</a><a href="../lists/lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album
+			</a></li>
+			<li><a href="index.html">
+				<img src="../lists/images/album-xx.jpg" />
+				<h3>XX</h3>
+				<p>XX</p>
+				</a><a href="../lists/lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album
+			</a></li>
+			<li><a href="index.html">
+				<img src="../lists/images/album-mg.jpg" />
+				<h3>Congratulations</h3>
+				<p>MGMT</p>
+				</a><a href="../lists/lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album
+			</a></li>
+			<li><a href="index.html">
+				<img src="../lists/images/album-ag.jpg" />
+				<h3>Ashes Grammar</h3>
+				<p>A Sunny Day in Glasgow</p>
+				</a><a href="../lists/lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album
+			</a></li>
+			
+			<li><a href="index.html">
+				<img src="../lists/images/album-k.jpg" />
+				<h3>Hot Fuss</h3>
+				<p>Killers</p>
+				</a><a href="../lists/lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album
+			</a></li>
+			<li><a href="index.html">	
+				<img src="../lists/images/album-af.jpg" />
+				<h3>The Suburbs</h3>
+				<p>Arcade Fire</p>
+				</a><a href="../lists/lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album
+			</a></li>
+		</ul>
 		
 
-	</div>
-	
-	<div data-role="footer" data-id="foo1" data-position="fixed">
-		<div data-role="navbar">
-			<ul>
-				<li><a href="footer-persist-a.html">Friends</a></li>
-				<li><a href="footer-persist-b.html" class="ui-btn-active">Albums</a></li>
-				<li><a href="footer-persist-c.html">Emails</a></li>
-			</ul>
-		</div><!-- /navbar -->
-	</div><!-- /footer -->
-</div><!-- /page -->
 
-</body>
-</html>
+			</div><!--/content-primary -->		
+
+			<div class="content-secondary">
+
+				<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+
+						<h3>More in this section</h3>
+
+						<ul data-role="listview" data-theme="c" data-dividertheme="d">
+
+							<li data-role="list-divider">Toolbars</li>
+							<li><a href="docs-bars.html">Toolbar basics</a></li>
+							<li><a href="docs-headers.html">Header bars</a></li>
+							<li><a href="docs-footers.html">Footer bars</a></li>
+							<li><a href="docs-navbar.html">Navbars</a></li>
+							<li><a href="bars-fixed.html">Fixed positioning</a></li>
+							<li><a href="bars-fullscreen.html">Fullscreen positioning</a></li>
+							<li data-theme="a"><a href="footer-persist-a.html">Persistent footer nav bar</a></li>
+							<li><a href="bars-themes.html">Theming toolbars</a></li>
+
+						</ul>
+				</div>
+			</div>		
+
+		</div><!-- /content -->
+
+		<div data-role="footer" data-id="foo1" data-position="fixed">
+			<div data-role="navbar">
+				<ul>
+					<li><a href="footer-persist-a.html">Friends</a></li>
+					<li><a href="footer-persist-b.html" class="ui-btn-active ui-state-persist">Albums</a></li>
+					<li><a href="footer-persist-c.html">Emails</a></li>
+				</ul>
+			</div><!-- /navbar -->
+		</div><!-- /footer -->
+
+		</div><!-- /page -->
+
+		</body>
+		</html>

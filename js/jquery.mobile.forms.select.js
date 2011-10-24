@@ -3,324 +3,206 @@
 * Copyright (c) jQuery Project
 * Dual licensed under the MIT or GPL Version 2 licenses.
 * http://jquery.org/license
-*/  
-(function($, undefined ) {
+*/
+
+(function( $, undefined ) {
+
 $.widget( "mobile.selectmenu", $.mobile.widget, {
 	options: {
 		theme: null,
-		disabled: false, 
-		icon: 'arrow-d',
-		iconpos: 'right',
+		disabled: false,
+		icon: "arrow-d",
+		iconpos: "right",
 		inline: null,
 		corners: true,
 		shadow: true,
 		iconshadow: true,
-		menuPageTheme: 'b',
-		overlayTheme: 'a',
-		hidePlaceholderMenuItems: true
+		menuPageTheme: "b",
+		overlayTheme: "a",
+		hidePlaceholderMenuItems: true,
+		closeText: "Close",
+		nativeMenu: true,
+		initSelector: "select:not(:jqmData(role='slider'))"
 	},
-	_create: function(){
-	
-		var self = this,
-		
-			o = this.options,
-			
-			select = this.element
-						.attr( "tabindex", "-1" )
-						.wrap( "<div class='ui-select'>" ),		
-							
-			selectID = select.attr( "id" ),
-			
-			label = $( "label[for="+ selectID +"]" ).addClass( "ui-select" ),
-									
-			buttonId = selectID + "-button",
-			
-			menuId = selectID + "-menu",
-			
-			thisPage = select.closest( ".ui-page" ),
-				
-			button = $( "<a>", { 
-					"href": "#",
-					"role": "button",
-					"id": buttonId,
-					"aria-haspopup": "true",
-					"aria-owns": menuId 
-				})
-				.text( $( select[0].options.item(select[0].selectedIndex) ).text() )
-				.insertBefore( select )
-				.buttonMarkup({
-					theme: o.theme, 
-					icon: o.icon,
-					iconpos: o.iconpos,
-					inline: o.inline,
-					corners: o.corners,
-					shadow: o.shadow,
-					iconshadow: o.iconshadow
-				}),
-				
-			theme = /ui-btn-up-([a-z])/.exec( button.attr("class") )[1],
-				
-			menuPage = $( "<div data-role='dialog' data-theme='"+ o.menuPageTheme +"'>" +
-						"<div data-role='header'>" +
-							"<div class='ui-title'>" + label.text() + "</div>"+
-						"</div>"+
-						"<div data-role='content'></div>"+
-					"</div>" )
-					.appendTo( $.mobile.pageContainer )
-					.page(),	
-					
-			menuPageContent = menuPage.find( ".ui-content" ),	
-					
-			screen = $( "<div>", {"class": "ui-selectmenu-screen ui-screen-hidden"})
-						.appendTo( thisPage ),		
-								
-			listbox = $( "<div>", { "class": "ui-selectmenu ui-selectmenu-hidden ui-overlay-shadow ui-corner-all pop ui-body-" + o.overlayTheme } )
-					.insertAfter(screen),
-					
-			list = $( "<ul>", { 
-					"class": "ui-selectmenu-list", 
-					"id": menuId, 
-					"role": "listbox", 
-					"aria-labelledby": buttonId,
-					"data-theme": theme
-				})
-				.appendTo( listbox ),
-				
-			menuType;	
-			
-		//expose to other methods	
-		$.extend(self, {
-			select: select,
-			selectID: selectID,
-			label: label,
-			buttonId:buttonId,
-			menuId:menuId,
-			thisPage:thisPage,
-			button:button,
-			menuPage:menuPage,
-			menuPageContent:menuPageContent,
-			screen:screen,
-			listbox:listbox,
-			list:list,
-			menuType:menuType
-		});
-					
-		
-		//create list from select, update state
-		self.refresh();
-		
-		//disable if specified
-		if( this.options.disabled ){ this.disable(); }
 
-		//events on native select
-		select
-			.change(function(){ 
-				self.refresh();
-			})
-			.focus(function(){
-				$(this).blur();
-				button.focus();
-			});		
-		
-		//button events
-		button.bind( $.support.touch ? "touchstart" : "click", function(event){
-			self.open();
-			event.preventDefault();
-		});
-		
-		//events for list items
-		list.delegate("li:not(.ui-disabled, .ui-li-divider)", "click", function(event){
-				//update select	
-				var newIndex = list.find( "li:not(.ui-li-divider)" ).index( this ),
-					prevIndex = select[0].selectedIndex;
+	_button: function(){
+		return $( "<div/>" );
+	},
 
-				select[0].selectedIndex = newIndex;
-				
-				//trigger change event
-				if(newIndex !== prevIndex){ 
-					select.trigger( "change" ); 
-				}
-				
-				self.refresh();
-				
-				//hide custom select
-				self.close();
-				event.preventDefault();
-			});	
-	
-		//events on "screen" overlay
-		screen.click(function(event){
-			self.close();
-			event.preventDefault();
-		});
+	_setDisabled: function( value ) {
+		this.element.attr( "disabled", value );
+		this.button.attr( "aria-disabled", value );
+		return this._setOption( "disabled", value );
 	},
-	
-	_buildList: function(){
-		var self = this, 
-			optgroups = [],
-			o = this.options;
-		
-		self.list.empty().filter('.ui-listview').listview('destroy');
-		
-		//populate menu with options from select element
-		self.select.find( "option" ).each(function( i ){
-			var $this = $(this),
-				$parent = $this.parent();
-			
-			// are we inside an optgroup?
-			if( $parent.is("optgroup") ){
-				var optLabel = $parent.attr("label");
-				
-				// has this optgroup already been built yet?
-				if( $.inArray(optLabel, optgroups) === -1 ){
-					var optgroup = $('<li data-role="list-divider"></li>')
-						.text( optLabel )
-						.appendTo( self.list );
-					
-					optgroups.push( optLabel );
-				}
-			}
 
-			var anchor = $("<a>", { 
-				"role": "option", 
-				"href": "#",
-				"text": $(this).text()
-			}),
-		
-			item = $( "<li>", {"data-icon": "checkbox-on"});
-			
-			// support disabled option tags
-			if( this.disabled ){
-				item
-					.addClass("ui-disabled")
-					.attr("aria-disabled", true);
-			}
-			
-			if( o.hidePlaceholderMenuItems ){
-				if( !this.getAttribute('value') || $(this).text().length == 0 || $(this).data('placeholder')){
-					item.addClass('ui-selectmenu-placeholder');
-				}
-			}
-
-			item
-				.append( anchor )
-				.appendTo( self.list );
-		});
-		
-		//now populated, create listview
-		self.list.listview();		
-	},
-	
-	refresh: function( forceRebuild ){
-		var self = this,
-			select = this.element,
-			selected = select[0].selectedIndex;
-		
-		if( forceRebuild || select[0].options.length > self.list.find('li').length ){
-			self._buildList();
-		}	
-			
-		self.button.find( ".ui-btn-text" ).text( $(select[0].options.item(selected)).text() ); 
-		self.list
-			.find('li:not(.ui-li-divider)').removeClass( $.mobile.activeBtnClass ).attr('aria-selected', false)
-			.eq(selected).addClass( $.mobile.activeBtnClass ).find('a').attr('aria-selected', true);		
-	},
-	
-	open: function(){
-		if( this.options.disabled ){ return; }
-		
-		var self = this,
-			menuHeight = self.list.outerHeight(),
-			menuWidth = self.list.outerWidth(),
-			scrollTop = $(window).scrollTop(),
-			btnOffset = self.button.offset().top,
-			screenHeight = window.innerHeight,
-			screenWidth = window.innerWidth;
-			
-		//add active class to button
-		self.button.addClass( $.mobile.activeBtnClass );
-			
-		function focusMenuItem(){
-			self.list.find( ".ui-btn-active" ).focus();
-		}
-		
-		if( menuHeight > screenHeight - 80 || !$.support.scrollTop ){
-			
-			//for webos (set lastscroll using button offset)
-			if( scrollTop == 0 && btnOffset > screenHeight ){
-				self.thisPage.one('pagehide',function(){
-					$(this).data('lastScroll', btnOffset);
-				});	
-			}
-			
-			self.menuPage.one('pageshow',focusMenuItem);
-		
-			self.menuType = "page";		
-			self.menuPageContent.append( self.list );
-			$.mobile.changePage(self.menuPage, 'pop', false, false);
-		}
-		else {
-			self.menuType = "overlay";
-						
-			self.screen
-				.height( $(document).height() )
-				.removeClass('ui-screen-hidden');
-				
-			self.listbox
-				.append( self.list )
-				.removeClass( "ui-selectmenu-hidden" )
-				.position({
-					my: "center center",
-					at: "center center",
-					of: self.button,
-					collision: "fit"
-				})
-				.addClass("in");
-				
-			focusMenuItem();	
-		}
-	},
-	
-	close: function(){
-		if( this.options.disabled ){ return; }
+	_focusButton : function() {
 		var self = this;
-		
-		function focusButton(){
-			setTimeout(function(){
-				self.button.focus();
-				//remove active class from button
+
+		setTimeout( function() {
+			self.button.focus();
+		}, 40);
+	},
+
+  _selectOptions: function() {
+    return this.select.find( "option" );
+  },
+
+	// setup items that are generally necessary for select menu extension
+	_preExtension: function(){
+		this.select = this.element.wrap( "<div class='ui-select'>" );
+		this.selectID  = this.select.attr( "id" );
+		this.label = $( "label[for='"+ this.selectID +"']" ).addClass( "ui-select" );
+		this.isMultiple = this.select[ 0 ].multiple;
+		if ( !this.options.theme ) {
+			this.options.theme = $.mobile.getInheritedTheme( this.select, "c" );
+		}
+	},
+
+	_create: function() {
+		this._preExtension();
+
+ 		// Allows for extension of the native select for custom selects and other plugins
+		// see select.custom for example extension
+		// TODO explore plugin registration
+		this._trigger( "beforeCreate" );
+
+		this.button = this._button();
+
+		var self = this,
+
+			options = this.options,
+
+			// IE throws an exception at options.item() function when
+			// there is no selected item
+			// select first in this case
+			selectedIndex = this.select[ 0 ].selectedIndex == -1 ? 0 : this.select[ 0 ].selectedIndex,
+
+			// TODO values buttonId and menuId are undefined here
+			button = this.button
+				.text( $( this.select[ 0 ].options.item( selectedIndex ) ).text() )
+				.insertBefore( this.select )
+				.buttonMarkup( {
+					theme: options.theme,
+					icon: options.icon,
+					iconpos: options.iconpos,
+					inline: options.inline,
+					corners: options.corners,
+					shadow: options.shadow,
+					iconshadow: options.iconshadow
+				});
+
+		// Opera does not properly support opacity on select elements
+		// In Mini, it hides the element, but not its text
+		// On the desktop,it seems to do the opposite
+		// for these reasons, using the nativeMenu option results in a full native select in Opera
+		if ( options.nativeMenu && window.opera && window.opera.version ) {
+			this.select.addClass( "ui-select-nativeonly" );
+		}
+
+		// Add counter for multi selects
+		if ( this.isMultiple ) {
+			this.buttonCount = $( "<span>" )
+				.addClass( "ui-li-count ui-btn-up-c ui-btn-corner-all" )
+				.hide()
+				.appendTo( button.addClass('ui-li-has-count') );
+		}
+
+		// Disable if specified
+		if ( options.disabled || this.element.attr('disabled')) {
+			this.disable();
+		}
+
+		// Events on native select
+		this.select.change( function() {
+			self.refresh();
+		});
+
+		this.build();
+	},
+
+	build: function() {
+		var self = this;
+
+		this.select
+			.appendTo( self.button )
+			.bind( "vmousedown", function() {
+				// Add active class to button
+				self.button.addClass( $.mobile.activeBtnClass );
+			})
+			.bind( "focus vmouseover", function() {
+				self.button.trigger( "vmouseover" );
+			})
+			.bind( "vmousemove", function() {
+				// Remove active class on scroll/touchmove
 				self.button.removeClass( $.mobile.activeBtnClass );
-			}, 40);
-			
-			self.listbox.removeAttr('style').append( self.list );
-		}
-		
-		if(self.menuType == "page"){			
-			$.mobile.changePage([self.menuPage,self.thisPage], 'pop', true, false);
-			self.menuPage.one("pagehide",function(){
-				focusButton();
-				//return false;
+			})
+			.bind( "change blur vmouseout", function() {
+				self.button.trigger( "vmouseout" )
+					.removeClass( $.mobile.activeBtnClass );
+			})
+			.bind( "change blur", function() {
+				self.button.removeClass( "ui-btn-down-" + self.options.theme );
 			});
-		}
-		else{
-			self.screen.addClass( "ui-screen-hidden" );
-			self.listbox.addClass( "ui-selectmenu-hidden" ).removeAttr( "style" ).removeClass("in");
-			focusButton();
-		}
-		
 	},
-	
-	disable: function(){
-		this.element.attr("disabled",true);
-		this.button.addClass('ui-disabled').attr("aria-disabled", true);
-		return this._setOption( "disabled", true );
+
+	selected: function() {
+		return this._selectOptions().filter( ":selected" );
 	},
-	
-	enable: function(){
-		this.element.attr("disabled",false);
-		this.button.removeClass('ui-disabled').attr("aria-disabled", false);
-		return this._setOption( "disabled", false );
+
+	selectedIndices: function() {
+		var self = this;
+
+		return this.selected().map( function() {
+			return self._selectOptions().index( this );
+		}).get();
+	},
+
+	setButtonText: function() {
+		var self = this, selected = this.selected();
+
+		this.button.find( ".ui-btn-text" ).text( function() {
+			if ( !self.isMultiple ) {
+				return selected.text();
+			}
+
+			return selected.length ? selected.map( function() {
+				return $( this ).text();
+			}).get().join( ", " ) : self.placeholder;
+		});
+	},
+
+	setButtonCount: function() {
+		var selected = this.selected();
+
+		// multiple count inside button
+		if ( this.isMultiple ) {
+			this.buttonCount[ selected.length > 1 ? "show" : "hide" ]().text( selected.length );
+		}
+	},
+
+	refresh: function() {
+		this.setButtonText();
+		this.setButtonCount();
+	},
+
+	// open and close preserved in native selects
+	// to simplify users code when looping over selects
+	open: $.noop,
+	close: $.noop,
+
+	disable: function() {
+		this._setDisabled( true );
+		this.button.addClass( "ui-disabled" );
+	},
+
+	enable: function() {
+		this._setDisabled( false );
+		this.button.removeClass( "ui-disabled" );
 	}
 });
+
+//auto self-init widgets
+$( document ).bind( "pagecreate create", function( e ){
+	$.mobile.selectmenu.prototype.enhanceWithin( e.target );
+});
 })( jQuery );
-	

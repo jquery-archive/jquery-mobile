@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="apple-touch-icon" href="../_assets/images/ios_icon.png"/>
+	<link rel="apple-touch-startup-image" href="../_assets/images/ios_startup.png" />
+	<title>jQuery Mobile Docs - Configuration</title>
+	<link rel="stylesheet"  href="../../css/themes/default/" />
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	<script src="../../js/jquery.js"></script>
+	<script>
+	$(document).bind("mobileinit", function() {
+		if (!!window.navigator.standalone) {
+			$.mobile.page.prototype.options.addBackBtn = true;
+		}
+	});
+	</script>
+
+	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../_assets/js/jqm-docs.js"></script>
+	<script src="../../js/"></script>
+</head>
+<body>
+
+	<div data-role="page" class="type-index">
+
+		<div data-role="header" data-theme="f">
+		<h1>jQuery Mobile</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+	</div>
+
+	<div data-role="content">
+
+		<h2>Fullscreen docs in iOS</h2>
+		<p>First, hit Add to Home Screen to create a new shortcut icon on the home screen.  Next, open the new shortcut and hit the button below to browse the docs as a fullscreen web app.</p>
+		<a href="../../index.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Browse docs</a>
+
+	</div>
+</div><!-- /page -->
+
+</body>
+</html>

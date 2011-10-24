@@ -2,57 +2,78 @@
 * jQuery Mobile Framework : "dialog" plugin.
 * Copyright (c) jQuery Project
 * Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
-* Note: Code is in draft form and is subject to change 
 */
-(function($, undefined ) {
-$.widget( "mobile.dialog", $.mobile.widget, {
-	options: {},
-	_create: function(){	
-		var self = this,
-			$el = self.element,
-			$prevPage = $.mobile.activePage,
-			$closeBtn = $('<a href="#" data-icon="delete" data-iconpos="notext">Close</a>');
-	
-		$el.delegate("a, form", "click submit", function(e){
-			if( e.type == "click" && ( $(e.target).closest('[data-back]')[0] || this==$closeBtn[0] ) ){
-				self.close();
-				return false;
-			}
-			//otherwise, assume we're headed somewhere new. set activepage to dialog so the transition will work
-			$.mobile.activePage = self.element;
-		});
-	
-		this.element
-			.bind("pageshow",function(){
-				return false;
-			})
-			//add ARIA role
-			.attr("role","dialog")
-			.addClass('ui-page ui-dialog ui-body-a')
-			.find('[data-role=header]')
-			.addClass('ui-corner-top ui-overlay-shadow')
-				.prepend( $closeBtn )
-			.end()
-			.find('.ui-content:not([class*="ui-body-"])')
-				.addClass('ui-body-c')
-			.end()	
-			.find('.ui-content,[data-role=footer]')
-				.last()
-				.addClass('ui-corner-bottom ui-overlay-shadow');
-		
-		$(window).bind('hashchange',function(){
-			if( $el.is('.ui-page-active') ){
-				self.close();
-				$el.bind('pagehide',function(){
-					$.mobile.updateHash( $prevPage.attr('data-url'), true);
-				});
-			}
-		});		
 
+(function( $, window, undefined ) {
+
+$.widget( "mobile.dialog", $.mobile.widget, {
+	options: {
+		closeBtnText 	: "Close",
+		theme	: "a",
+		initSelector	: ":jqmData(role='dialog')"
 	},
-	
-	close: function(){
-		$.mobile.changePage([this.element, $.mobile.activePage], undefined, true, true );
+	_create: function() {
+		var self = this,
+			$el = this.element,
+			pageTheme = $el.attr( "class" ).match( /ui-body-[a-z]/ ),
+			headerCloseButton = $( "<a href='#' data-" + $.mobile.ns + "icon='delete' data-" + $.mobile.ns + "iconpos='notext'>"+ this.options.closeBtnText + "</a>" );
+
+		if( pageTheme.length ){
+			$el.removeClass( pageTheme[ 0 ] );
+		}
+
+		$el.addClass( "ui-body-" + this.options.theme );
+
+		// Class the markup for dialog styling
+		// Set aria role
+		$el.attr( "role", "dialog" )
+			.addClass( "ui-dialog" )
+			.find( ":jqmData(role='header')" )
+			.addClass( "ui-corner-top ui-overlay-shadow" )
+				.prepend( headerCloseButton )
+			.end()
+			.find( ":jqmData(role='content'),:jqmData(role='footer')" )
+				.last()
+				.addClass( "ui-corner-bottom ui-overlay-shadow" );
+
+		// this must be an anonymous function so that select menu dialogs can replace
+		// the close method. This is a change from previously just defining data-rel=back
+		// on the button and letting nav handle it
+		headerCloseButton.bind( "vclick", function() {
+			self.close();
+		});
+
+		/* bind events
+			- clicks and submits should use the closing transition that the dialog opened with
+			  unless a data-transition is specified on the link/form
+			- if the click was on the close button, or the link has a data-rel="back" it'll go back in history naturally
+		*/
+		$el.bind( "vclick submit", function( event ) {
+			var $target = $( event.target ).closest( event.type === "vclick" ? "a" : "form" ),
+				active;
+
+			if ( $target.length && !$target.jqmData( "transition" ) ) {
+
+				active = $.mobile.urlHistory.getActive() || {};
+
+				$target.attr( "data-" + $.mobile.ns + "transition", ( active.transition || $.mobile.defaultDialogTransition ) )
+					.attr( "data-" + $.mobile.ns + "direction", "reverse" );
+			}
+		})
+		.bind( "pagehide", function() {
+			$( this ).find( "." + $.mobile.activeBtnClass ).removeClass( $.mobile.activeBtnClass );
+		});
+	},
+
+	// Close method goes back in history
+	close: function() {
+		window.history.back();
 	}
 });
-})( jQuery );
+
+//auto self-init widgets
+$( $.mobile.dialog.prototype.options.initSelector ).live( "pagecreate", function(){
+	$( this ).dialog();
+});
+
+})( jQuery, this );

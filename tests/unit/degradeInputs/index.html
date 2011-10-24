@@ -1,0 +1,37 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Degrade Inputs Test Suite</title>
+
+	<script src="../../../js/jquery.js"></script>
+	<script src="../jquery.setNameSpace.js"></script>
+	<script src="../../../js/"></script>
+	<script src="../../../tests/jquery.testHelper.js"></script>
+
+
+	<link rel="stylesheet"  href="../../../css/themes/default/"/>
+	<link rel="stylesheet" href="../../../external/qunit.css"/>
+	<script src="../../../external/qunit.js"></script>
+
+	<script src="degradeInputs.js"></script>
+</head>
+<body>
+
+<h1 id="qunit-header">jQuery Mobile Degrade Inputs Test Suite</h1>
+<h2 id="qunit-banner"></h2>
+<h2 id="qunit-userAgent"></h2>
+<ol id="qunit-tests">
+</ol>
+
+<div id="foo"  data-nstest-role="page">
+	
+	<input id="not-to-be-degraded" type="range" data-nstest-role="nojs" />
+	
+	<div id="test-container">
+	</div>
+	
+</div>
+
+</html>
