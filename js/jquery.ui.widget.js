@@ -7,6 +7,7 @@
  *
  * http://docs.jquery.com/UI/Widget
  */
+
 (function( $, undefined ) {
 
 // jQuery 1.4+
