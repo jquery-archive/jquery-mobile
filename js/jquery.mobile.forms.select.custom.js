@@ -187,10 +187,10 @@
 					self.list.appendTo( self.listbox );
 					self._focusButton();
 
-					// TODO centralize page removal binding / handling in the page plugin.
+					// TODO: centralize page removal binding / handling in the page plugin.
 					// Suggestion from @jblas to do refcounting
 					//
-					// TODO extremely confusing dependency on the open method where the pagehide.remove
+					// TODO: extremely confusing dependency on the open method where the pagehide.remove
 					// bindings are stripped to prevent the parent page from disappearing. The way
 					// we're keeping pages in the DOM right now sucks
 					//
@@ -224,7 +224,7 @@
 				var list = this.list.find( "li" ),
 					options = this._selectOptions();
 
-				// TODO exceedingly naive method to determine difference
+				// TODO: exceedingly naive method to determine difference
 				// ignores value changes etc in favor of a forcedRebuild
 				// from the user in the refresh method
 				return options.text() !== list.text();
@@ -475,11 +475,11 @@
 				return $( "<a>", {
 					"href": "#",
 					"role": "button",
-					// TODO value is undefined at creation
+					// TODO: value is undefined at creation
 					"id": this.buttonId,
 					"aria-haspopup": "true",
 
-					// TODO value is undefined at creation
+					// TODO: value is undefined at creation
 					"aria-owns": this.menuId
 				});
 			}

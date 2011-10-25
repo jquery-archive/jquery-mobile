@@ -14,7 +14,7 @@
 		url = $.mobile.path.parseUrl( location.href );
 
 	$.extend( pushStateHandler, {
-		// TODO move to a path helper, this is rather common functionality
+		// TODO: move to a path helper, this is rather common functionality
 		initialFilePath: (function() {
 			return url.pathname + url.search;
 		})(),
@@ -48,7 +48,7 @@
 			return url;
 		},
 
-		// TODO sort out a single barrier to hashchange functionality
+		// TODO: sort out a single barrier to hashchange functionality
 		nextHashChangePrevented: function( value ) {
 			$.mobile.urlHistory.ignoreNextHashChange = value;
 			self.onHashChangeDisabled = value;

@@ -813,7 +813,7 @@
 						//page title regexp
 						newPageTitle = html.match( /<title[^>]*>([^<]*)/ ) && RegExp.$1,
 
-						// TODO handle dialogs again
+						// TODO: handle dialogs again
 						pageElemRegex = new RegExp( "(<[^>]+\\bdata-" + $.mobile.ns + "role=[\"']?page[\"']?[^>]*>)" ),
 						dataUrlRegex = new RegExp( "\\bdata-" + $.mobile.ns + "url=[\"']?([^\"'>]*)[\"']?" );
 
@@ -864,7 +864,7 @@
 					}
 
 					//append to page and enhance
-					// TODO taging a page with external to make sure that embedded pages aren't removed
+					// TODO: taging a page with external to make sure that embedded pages aren't removed
 					//      by the various page handling code is bad. Having page handling code in many
 					//      places is bad. Solutions post 1.0
 					page
@@ -1328,8 +1328,8 @@
 				// requests to go through our page loading logic.
 				isCrossDomainPageLoad = ( $.mobile.allowCrossDomainPages && documentUrl.protocol === "file:" && href.search( /^https?:/ ) != -1 ),
 
-				//check for protocol or rel and its not an embedded page
-				//TODO overlap in logic from isExternal, rel=external check should be
+				// check for protocol or rel and its not an embedded page
+				// TODO: overlap in logic from isExternal, rel=external check should be
 				//     moved into more comprehensive isExternalLink
 				isExternal = useDefaultUrlHandling || ( path.isExternal( href ) && !isCrossDomainPageLoad );
 

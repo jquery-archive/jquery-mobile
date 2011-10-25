@@ -65,7 +65,7 @@
 			return $.support.mediaquery || $.mobile.browser.ie && $.mobile.browser.ie >= 7;
 		},
 
-		// TODO might be useful upstream in jquery itself ?
+		// TODO: might be useful upstream in jquery itself ?
 		keyCode: {
 			ALT: 18,
 			BACKSPACE: 8,
