@@ -97,7 +97,7 @@ CSSFILES = ${CSSTHEMEFILES} ${CSSSTRUCTUREFILES}
 
 # By default, this is what get runs when make is called without any arguments.
 # Min and un-min CSS and JS files are the only things built
-all: init js min css cssmin notify
+all: init js min css cssmin notify images imagesmin
 
 # Build the normal CSS file.
 css: init
@@ -112,6 +112,14 @@ cssmin: init css
 	# Build the minified CSS file
 	@@java -jar build/yuicompressor-2.4.6.jar --type css ${OUTPUT}/${CSS} >> ${OUTPUT}/${CSSMIN}
 	@@java -jar build/yuicompressor-2.4.6.jar --type css ${OUTPUT}/${CSSSTRUCTURE} >> ${OUTPUT}/${CSSSTRUCTUREMIN}
+
+images: init
+	@@cp -R css/themes/${CSSTHEME}/images ${OUTPUT}/
+
+imagesmin: images
+	@@find ${OUTPUT} -name '*png' -exec optipng -o3 {} \;
+	@@find ${OUTPUT} -name '*png' -exec advpng -z -4 {} \;
+	@@find ${OUTPUT} -name '*png' -exec advdef -z -4 {} \;
 
 # Build the normal JS file
 js: init
@@ -142,11 +150,11 @@ pull:
 	@@git pull --quiet
 
 # Zip the 4 files and the theme images into one convenient package
-zip: init js min css cssmin
+zip: init js min css cssmin images imagesmin
 	@@mkdir -p ${DIR}
 	@@cp ${OUTPUT}/*.js ${DIR}/
 	@@cp ${OUTPUT}/*.css ${DIR}/
-	@@cp -R css/themes/${CSSTHEME}/images ${DIR}/
+	@@cp -R ${OUTPUT}/images ${DIR}/
 	@@zip -rq ${OUTPUT}/${DIR}.zip ${DIR}
 	@@rm -fr ${DIR}
 
