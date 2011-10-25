@@ -41,7 +41,7 @@ $.mobile.fixedToolbars = (function() {
 		return;
 	}
 
-	var stickyFooter, delayTimer,
+	var stickyFooter, _stickyFooterTimer, delayTimer,
 		currentstate = "inline",
 		autoHideMode = false,
 		showDelay = 100,
@@ -173,8 +173,12 @@ $.mobile.fixedToolbars = (function() {
 			var $this = $( this );
 
 			if ( stickyFooter && stickyFooter.length ) {
+				if (_stickyFooterTimer) {
+					clearTimeout(_stickyFooterTimer);
+				}
 
-				setTimeout(function() {
+				_stickyFooterTimer = setTimeout(function() {
+					_stickyFooterTimer = null;
 					setTop( stickyFooter.appendTo( $this ).addClass( "fade" ) );
 					stickyFooter = null;
 				}, 500);
