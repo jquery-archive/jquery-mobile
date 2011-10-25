@@ -74,6 +74,10 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 
 				input.prop( "checked", inputtype === "radio" && true || !input.prop( "checked" ) );
 
+				// trigger click handler's bound directly to the input as a substitute for
+				// how lable clicks behave normally in the browsers1
+				input.triggerHandler( 'click' );
+
 				// Input set for common radio buttons will contain all the radio
 				// buttons, but will not for checkboxes. clearing the checked status
 				// of other radios ensures the active button state is applied properly
@@ -92,7 +96,6 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 				},
 
 				vclick: function() {
-
 					var $this = $(this);
 
 					// Adds checked attribute to checked input when keyboard is used
