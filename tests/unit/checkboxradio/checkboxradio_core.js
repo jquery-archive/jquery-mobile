@@ -121,4 +121,25 @@
 	test( "checkboxradio elements in the keepNative set shouldn't be enhanced", function() {
 		ok( !$("input.should-be-native").parent().is("div.ui-checkbox") );
 	});
+
+	asyncTest( "clicking the label triggers a click on the element", function() {
+		var clicked = false;
+
+		expect( 1 );
+
+		$( "#checkbox-click-triggered" ).one('click', function() {
+			clicked = true;
+		});
+
+		$.testHelper.sequence([
+			function() {
+				$( "[for='checkbox-click-triggered']" ).click();
+			},
+
+			function() {
+				ok(clicked, "click was fired on input");
+				start();
+			}
+		], 2000);
+	});
 })(jQuery);
