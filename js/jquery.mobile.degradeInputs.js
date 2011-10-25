@@ -24,7 +24,7 @@ $.mobile.page.prototype.options.degradeInputs = {
 };
 
 
-//auto self-init widgets
+// Auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ){
 
 	var page = $(e.target).closest(':jqmData(role="page")').data("page"), options;
@@ -35,7 +35,7 @@ $( document ).bind( "pagecreate create", function( e ){
 
 	options = page.options;
 
-	// degrade inputs to avoid poorly implemented native functionality
+	// Degrade inputs to avoid poorly implemented native functionality
 	$( e.target ).find( "input" ).not( page.keepNativeSelector() ).each(function() {
 		var $this = $( this ),
 			type = this.getAttribute( "type" ),

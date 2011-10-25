@@ -6,7 +6,7 @@
 */
 (function( $, window, undefined ) {
 
-// add new event shortcuts
+// Add new event shortcuts
 $.each( ( "touchstart touchmove touchend orientationchange throttledresize " +
 					"tap taphold swipe swipeleft swiperight scrollstart scrollstop" ).split( " " ), function( i, name ) {
 
@@ -30,7 +30,7 @@ function triggerCustomEvent( obj, eventType, event ) {
 	event.type = originalType;
 }
 
-// also handles scrollstop
+// Also handles scrollstop
 $.event.special.scrollstart = {
 
 	enabled: true,
@@ -66,7 +66,7 @@ $.event.special.scrollstart = {
 	}
 };
 
-// also handles taphold
+// Also handles taphold
 $.event.special.tap = {
 	setup: function() {
 		var thisObject = this,
@@ -115,7 +115,7 @@ $.event.special.tap = {
 	}
 };
 
-// also handles swipeleft, swiperight
+// Also handles swipeleft, swiperight
 $.event.special.swipe = {
 	scrollSupressionThreshold: 10, // More than this horizontal displacement, and we will suppress scrolling.
 
@@ -153,7 +153,7 @@ $.event.special.swipe = {
 					coords: [ data.pageX, data.pageY ]
 				};
 
-				// prevent scrolling
+				// Prevent scrolling
 				if ( Math.abs( start.coords[ 0 ] - stop.coords[ 0 ] ) > $.event.special.swipe.scrollSupressionThreshold ) {
 					event.preventDefault();
 				}
@@ -245,13 +245,13 @@ $.event.special.swipe = {
 	$.event.special.orientationchange.orientation = get_orientation = function() {
 		var isPortrait = true, elem = document.documentElement;
 
-		// prefer window orientation to the calculation based on screensize as
+		// Prefer window orientation to the calculation based on screensize as
 		// the actual screen resize takes place before or after the orientation change event
-		// has been fired depending on implementation (eg android 2.3 is before, iphone after).
+		// has been fired depending on implementation (eg Android 2.3 is before, iPhone after).
 		// More testing is required to determine if a more reliable method of determining the new screensize
 		// is possible when orientationchange is fired. (eg, use media queries + element + opacity)
 		if ( $.support.orientation ) {
-			// if the window orientation registers as 0 or 180 degrees report
+			// If the window orientation registers as 0 or 180 degrees report
 			// portrait, otherwise landscape
 			isPortrait = window.orientation % 180 == 0;
 		} else {
@@ -264,7 +264,7 @@ $.event.special.swipe = {
 })( jQuery, window );
 
 
-// throttled resize event
+// Throttled resize event
 (function() {
 
 	$.event.special.throttledresize = {

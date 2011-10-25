@@ -17,7 +17,7 @@
 
 		// Define the url parameter used for referencing widget-generated sub-pages.
 		// Translates to to example.html&ui-page=subpageIdentifier
-		// hash segment before &ui-page= is used to make Ajax request
+		// Hash segment before &ui-page= is used to make Ajax request
 		subPageUrlKey: "ui-page",
 
 		// Class assigned to page currently in view, and during transitions
@@ -32,7 +32,7 @@
 		// Automatically load and show pages based on location.hash
 		hashListeningEnabled: true,
 
-		// disable to prevent jquery from bothering with links
+		// Disable to prevent jquery from bothering with links
 		linkBindingEnabled: true,
 
 		// Set default page transition - 'none' for no transitions
@@ -45,22 +45,22 @@
 		defaultDialogTransition: "pop",
 
 		// Show loading message during Ajax requests
-		// if false, message will not appear, but loading classes will still be toggled on html el
+		// If false, message will not appear, but loading classes will still be toggled on html el
 		loadingMessage: "loading",
 
 		// Error response message - appears when an Ajax page request fails
 		pageLoadErrorMessage: "Error Loading Page",
 
-		//automatically initialize the DOM when it's ready
+		// Automatically initialize the DOM when it's ready
 		autoInitializePage: true,
 
 		pushStateEnabled: true,
 
-		// turn of binding to the native orientationchange due to android orientation behavior
+		// Turn of binding to the native orientationchange due to android orientation behavior
 		orientationChangeEnabled: true,
 
 		// Support conditions that must be met in order to proceed
-		// default enhanced qualifications are media query support OR IE 7+
+		// Default enhanced qualifications are media query support OR IE 7+
 		gradeA: function(){
 			return $.support.mediaquery || $.mobile.browser.ie && $.mobile.browser.ie >= 7;
 		},
@@ -107,7 +107,7 @@
 				ypos = $.mobile.defaultHomeScroll;
 			}
 
-			// prevent scrollstart and scrollstop events
+			// Prevent scrollstart and scrollstop events
 			$.event.special.scrollstart.enabled = false;
 
 			setTimeout(function() {
@@ -135,7 +135,7 @@
 			var themedParent = el.closest( "[class*='ui-bar-'],[class*='ui-body-']" ),
 
 				// If there's a themed parent, extract the theme letter
-				// from the theme class	.
+				// from the theme class.
 				ltr = ( themedParent.length && /ui-(bar|body)-([a-z])\b/.exec( themedParent.attr( "class" ) )[ 2 ] || "" ) || "";
 
 			// Return the theme letter we found, if none, return the
@@ -146,7 +146,7 @@
 	});
 
 	// Mobile version of data and removeData and hasData methods
-	// ensures all data is set and retrieved using jQuery Mobile's data namespace
+	// Ensures all data is set and retrieved using jQuery Mobile's data namespace
 	$.fn.jqmData = function( prop, value ) {
 		var result;
 		if ( typeof prop != "undefined" ) {
@@ -192,7 +192,7 @@
 		$(elem).jqmData( 'dependents', $.merge(dependents, newDependents) );
 	};
 
-	// note that this helper doesn't attempt to handle the callback
+	// Note that this helper doesn't attempt to handle the callback
 	// or setting of an html elements text, its only purpose is
 	// to return the html encoded version of the text in all cases. (thus the name)
 	$.fn.getEncodedText = function() {
