@@ -4,6 +4,7 @@
 * Dual licensed under the MIT or GPL Version 2 licenses.
 * http://jquery.org/license
 */
+
 ( function( $, window ) {
 	// For now, let's Monkeypatch this onto the end of $.mobile._registerInternalEvents
 	// Scope self to pushStateHandler so we can reference it sanely within the
