@@ -743,9 +743,15 @@
 		}
 
 		// If we failed to find a page in the DOM, check the URL to see if it
-		// refers to the first page in the application.
-		if ( page.length === 0 && $.mobile.firstPage && path.isFirstPageUrl( fileUrl ) ) {
-			page = $( $.mobile.firstPage );
+		// refers to the first page in the application. If it isn't a reference
+		// to the first page and refers to non-existent embedded page, error out.
+		if ( page.length === 0 ) {
+			if ( $.mobile.firstPage && path.isFirstPageUrl( fileUrl ) ) {
+				page = $( $.mobile.firstPage );
+			} else if ( path.isEmbeddedPage( fileUrl )  ) {
+				deferred.reject( absUrl, options );
+				return deferred.promise();
+			}
 		}
 
 		// Reset base to the default document base.
