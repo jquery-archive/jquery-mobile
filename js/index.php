@@ -22,6 +22,7 @@ $files = array(
 	'jquery.mobile.navbar.js',
 	'jquery.mobile.listview.js',
 	'jquery.mobile.listview.filter.js',
+	'jquery.mobile.listview.autodividers.js',
 	'jquery.mobile.nojs.js',
 	'jquery.mobile.forms.checkboxradio.js',
 	'jquery.mobile.forms.button.js',
