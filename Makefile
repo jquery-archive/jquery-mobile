@@ -7,6 +7,7 @@ VER = $(shell cat version.txt)
 # The command to replace the @VERSION in the files with the actual version
 SED_VER = sed "s/@VERSION/$(shell git log -1 --format=format:" Git > Date: %cd Info SHA1: %H")/"
 deploy:  SED_VER = sed "s/@VERSION/${VER}/"
+MIN_VER = "/*! jQuery Mobile v@VERSION jquerymobile.com | jquery.org/license */"
 
 # The version of jQuery core used
 JQUERY = $(shell grep Library js/jquery.js | sed s'/ \* jQuery JavaScript Library v//')
@@ -110,6 +111,8 @@ css: init
 # Build the minified CSS file
 cssmin: init css
 	# Build the minified CSS file
+	@@echo ${MIN_VER} | ${SED_VER} > ${OUTPUT}/${CSSMIN}
+	@@echo ${MIN_VER} | ${SED_VER} > ${OUTPUT}/${CSSSTRUCTUREMIN}
 	@@java -jar build/yuicompressor-2.4.6.jar --type css ${OUTPUT}/${CSS} >> ${OUTPUT}/${CSSMIN}
 	@@java -jar build/yuicompressor-2.4.6.jar --type css ${OUTPUT}/${CSSSTRUCTURE} >> ${OUTPUT}/${CSSSTRUCTUREMIN}
 
@@ -128,14 +131,14 @@ init:
 # Build the minified JS file
 min: init js
 	# Build the minified JavaScript file
-	@@head -8 js/jquery.mobile.core.js | ${SED_VER} > ${OUTPUT}/${MIN}
+	@@echo ${MIN_VER} | ${SED_VER} > ${OUTPUT}/${MIN}
 	@@java -jar build/google-compiler-20111003.jar --js ${OUTPUT}/${JS} --warning_level QUIET --js_output_file ${MIN}.tmp
 	@@cat ${MIN}.tmp >> ${OUTPUT}/${MIN}
 	@@rm -f ${MIN}.tmp
 
 # Let the user know the files were built and where they are
 notify:
-	@@echo "The files have been built and are in " $$(pwd)/${OUTPUT}
+	@@echo "The files have been built and are in: " $$(pwd)/${OUTPUT}
 
 # Pull the latest commits. This is used for the nightly build but can be used to save some keystrokes
 pull:
