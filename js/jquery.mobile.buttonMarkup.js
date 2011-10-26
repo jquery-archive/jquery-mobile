@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework : plugin for making button-like links
+* jQuery Mobile Framework : "buttons" plugin - for making button-like links
 * Copyright (c) jQuery Project
 * Dual licensed under the MIT or GPL Version 2 licenses.
 * http://jquery.org/license
