@@ -980,6 +980,51 @@
 		]);
 	});
 
+	asyncTest( "navigate to non-existent internal page throws pagechangefailed", function(){
+		var pagechangefailed = false,
+			pageChangeFailedCB = function( e ) {
+			pagechangefailed = true;
+		}
+
+		$( document ).bind( "pagechangefailed", pageChangeFailedCB );
+
+		$.testHelper.pageSequence([
+			// open our test page
+			function(){
+				// Make sure there's only one copy of the first-page in the DOM to begin with.
+				ok( $.mobile.firstPage.hasClass( "first-page" ), "first page has expected class" );
+				same( $( ".first-page" ).length, 1, "first page was not duplicated" );
+
+				// Navigate to any page except the first page of the application.
+				$.testHelper.openPage("#foo");
+			},
+
+			function(){
+				var $foo = $( "#foo" );
+				ok( $.mobile.activePage[ 0 ] === $foo[ 0 ], "navigated successfully to #foo" );
+				same( pagechangefailed, false, "no page change failures" );
+
+				// Now navigate to a non-existent page.
+				$foo.find( "#bad-internal-page-link" ).click();
+			},
+
+			function(){
+				// Make sure a pagechangefailed event was triggered.
+				same( pagechangefailed, true, "pagechangefailed dispatched" );
+
+				// Make sure we didn't navigate away from #foo.
+				ok( $.mobile.activePage[ 0 ] === $( "#foo" )[ 0 ], "did not navigate away from #foo" );
+
+				// Now make sure opening the page didn't result in page duplication.
+				same( $( ".first-page" ).length, 1, "first page was not duplicated" );
+
+				$( document ).unbind( "pagechangefailed", pageChangeFailedCB );
+
+				start();
+			}
+		]);
+	});
+
 	asyncTest( "prefetched links with data rel dialog result in a dialog", function() {
 		$.testHelper.pageSequence([
 			// open our test page
