@@ -206,6 +206,16 @@ $( document ).bind( &quot;pagebeforeload&quot;, function( event, data ){
             	    <li>This object contains the options that were passed into $.mobile.loadPage().</li>
           	    </ul>
             	</li>
+            	<li><code>xhr</code> (object)
+            	  <ul>
+            	    <li>The jQuery XMLHttpRequest object used when attempting to load the page. This is what gets passed as the 3rd argument to the framework's $.ajax() success callback.</li>
+          	    </ul>
+            	</li>
+            	<li><code>textStatus</code> (null or string)
+            	  <ul>
+            	    <li>According to the jQuery Core <a href="http://api.jquery.com/jQuery.ajax/">documentation</a>, this will be a string describing the status. This is what gets passed as the 2nd argument to the framework's $.ajax() error callback.</li>
+          	    </ul>
+            	</li>
            	  </ul>
             </dd>
 			<dt><code>pageloadfailed</code></dt>
@@ -268,6 +278,21 @@ $( document ).bind( &quot;pageloadfailed&quot;, function( event, data ){
             	<li><code>options</code> (object)
             	  <ul>
             	    <li>This object contains the options that were passed into $.mobile.loadPage().</li>
+          	    </ul>
+            	</li>
+            	<li><code>xhr</code> (object)
+            	  <ul>
+            	    <li>The jQuery XMLHttpRequest object used when attempting to load the page. This is what gets passed as the first argument to the framework's $.ajax() error callback.</li>
+          	    </ul>
+            	</li>
+            	<li><code>textStatus</code> (null or string)
+            	  <ul>
+            	    <li>According to the jQuery Core <a href="http://api.jquery.com/jQuery.ajax/">documentation</a>, possible values for this property, aside from null, are &quot;timeout&quot;, &quot;error&quot;, &quot;abort&quot;, and &quot;parsererror&quot;. This is what gets passed as the 2nd argument to the framework's $.ajax() error callback.</li>
+          	    </ul>
+            	</li>
+            	<li><code>errorThrown</code> (null, string, object)
+            	  <ul>
+            	    <li>According to the jQuery Core <a href="http://api.jquery.com/jQuery.ajax/">documentation</a>, this property may be an exception object if one occured, or if an HTTP error occured this will be set to the textual portion of the HTTP status. This is what gets passed as the 3rd argument to the framework's $.ajax() error callback.</li>
           	    </ul>
             	</li>
            	  </ul>

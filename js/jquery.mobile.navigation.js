@@ -811,7 +811,7 @@
 				type: settings.type,
 				data: settings.data,
 				dataType: "html",
-				success: function( html ) {
+				success: function( html, textStatus, xhr ) {
 					//pre-parse html to check for a data-url,
 					//use it as the new fileUrl, base path, etc
 					var all = $( "<div></div>" ),
@@ -897,7 +897,9 @@
 						hideMsg();
 					}
 
-					// Add the page reference to our triggerData.
+					// Add the page reference and xhr to our triggerData.
+					triggerData.xhr = xhr;
+					triggerData.textStatus = textStatus;
 					triggerData.page = page;
 
 					// Let listeners know the page loaded successfully.
@@ -905,11 +907,16 @@
 
 					deferred.resolve( absUrl, options, page, dupCachedPage );
 				},
-				error: function() {
+				error: function( xhr, textStatus, errorThrown ) {
 					//set base back to current path
 					if( base ) {
 						base.set( path.get() );
 					}
+
+					// Add error info to our triggerData.
+					triggerData.xhr = xhr;
+					triggerData.textStatus = textStatus;
+					triggerData.errorThrown = errorThrown;
 
 					var plfEvent = new $.Event( "pageloadfailed" );
 
