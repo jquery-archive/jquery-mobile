@@ -103,7 +103,7 @@
 
 			<h2>Using the Application Cache</h2>
 
-			<p>When using the application cache with jQuery Mobile there is at least one important issue to consider. Some browsers, when making requests to the cache will report an http status of 0 on success. This causes jQuery Core's <code>$.ajax</code> to trigger error handlers. The suggested workaround for users leveraging the application cache is to use a jQuery ajax pre-filter. Something like the following (credit to <a href="https://github.com/jammus">jammus</a>):</p>
+			<p>When using the application cache with jQuery Mobile there is at least one important issue to consider. Some browsers, when making requests to the cache will report an http status of 0 on success. This causes jQuery Core's <code>$.ajax</code> to trigger error handlers. The suggested workaround for users leveraging the application cache is to use a jQuery ajax pre-filter. Something like the following (credit to <a href="https://github.com/jquery/jquery-mobile/issues/1579#issuecomment-1209338" rel="external">jammus</a> for the snippet):</p>
 
 			<pre><code>
 
