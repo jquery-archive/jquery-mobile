@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-	<link rel="stylesheet" href="../../external/qunit.css"></link>
+	<link rel="stylesheet" href="../../external/qunit.css" />
 	<script src="../../js/jquery.js"></script>
 	<script src="../../external/qunit.js"></script>
 	<script src="runner.js"></script>
