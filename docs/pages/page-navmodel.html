@@ -120,7 +120,7 @@ $.ajaxPrefilter( function(options, originalOptions, jqXHR) {
 
 			<p>Setting <code>isLocal</code> to true for your ajax requests will alert jQuery Core that it should handle the 0 return values differently. Local requests exhibit similar behavior (ie 0 statuses), and Core will then fall back to determining success based on the presence of content in the xhr <code>responseText</code> attribute.</p>
 
-			<p>One important issue to note with the above is that it will set <code>isLocal</code> to true for all requests made via ajax regardless of whether they are in the manifest or not so long as the cache is valid. This works for now because Core only consults the <code>isLocal</code> value when the status is in fact 0 which doesn't affect uncached results. There is no long term guarantee that <code>isLocal</code> will remain isolated in it's purpose for handling 0 status values. If that changes it may break your application.</p>
+			<p>One important issue to note with the above is that it will set <code>isLocal</code> to true for all requests made via ajax regardless of whether they are in the manifest or not so long as the cache is valid. This works for now because Core only consults the <code>isLocal</code> value when the status is in fact 0 which doesn't affect uncached results. There is no long term guarantee that <code>isLocal</code> will remain isolated in its purpose for handling 0 status values. If that changes it may break your application.</p>
 
 			<h2>Known limitations</h2>
 
