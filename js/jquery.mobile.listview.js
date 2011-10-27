@@ -86,9 +86,12 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			$topli = $visibleli.first()
 				.addClass( "ui-corner-top" );
 
-			$topli.add( $topli.find( ".ui-btn-inner" ) )
-			    .find( ".ui-li-link-alt" )
-				    .addClass( "ui-corner-tr" )
+			$topli.add( $topli.find( ".ui-btn-inner" )
+					.not( ".ui-li-link-alt span:first-child" ) )
+                                .addClass( "ui-corner-top" )
+                                .end()
+				.find( ".ui-li-link-alt, .ui-li-link-alt span:first-child" )
+					.addClass( "ui-corner-tr" )
 				.end()
 				.find( ".ui-li-thumb" )
 					.not(".ui-li-icon")
