@@ -67,17 +67,14 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 				});
 
 			function toggleClear() {
-				if ( !input.val() ) {
-					clearbtn.addClass( "ui-input-clear-hidden" );
-				} else {
-					clearbtn.removeClass( "ui-input-clear-hidden" );
-				}
+				setTimeout(function() {
+					clearbtn.toggleClass( "ui-input-clear-hidden", !input.val() );
+				}, 0);
 			}
 
 			toggleClear();
 
-			input.keyup( toggleClear )
-				.focus( toggleClear );
+			input.bind('paste cut keyup focus change blur', toggleClear);
 
 		} else {
 			input.addClass( "ui-corner-all ui-shadow-inset" + themeclass );
