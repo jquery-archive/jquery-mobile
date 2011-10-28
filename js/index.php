@@ -25,6 +25,7 @@ $files = array(
 	'jquery.mobile.colorwidget.js',
 	'jquery.mobile.hsvpicker.js',
 	'jquery.mobile.popupwindow.js',
+	'jquery.mobile.forms.colorpickerbutton.js',
 	'jquery.mobile.listview.filter.js',
 	'jquery.mobile.nojs.js',
 	'jquery.mobile.forms.checkboxradio.js',

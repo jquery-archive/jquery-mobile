@@ -16,6 +16,7 @@ $files = array_merge($files, array(
 	'../../structure/jquery.mobile.listview.css',
 	'../../structure/jquery.mobile.hsvpicker.css',
 	'../../structure/jquery.mobile.popupwindow.css',
+	'../../structure/jquery.mobile.forms.colorpickerbutton.css',
 	'../../structure/jquery.mobile.forms.slider.css'
 ));
 
