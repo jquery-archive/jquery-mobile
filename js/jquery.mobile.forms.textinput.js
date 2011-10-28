@@ -17,20 +17,13 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 
 		var input = this.element,
 			o = this.options,
-			theme = o.theme,
-			themeclass, focusedEl, clearbtn;
-
-		if ( !theme ) {
-			theme = $.mobile.getInheritedTheme( this.element, "c" );
-		}
-
-		themeclass = " ui-body-" + theme;
+			theme = o.theme || $.mobile.getInheritedTheme( this.element, "c" ),
+			themeclass  = " ui-body-" + theme,
+			focusedEl, clearbtn;
 
 		$( "label[for='" + input.attr( "id" ) + "']" ).addClass( "ui-input-text" );
 
-		input.addClass("ui-input-text ui-body-"+ theme );
-
-		focusedEl = input;
+		focusedEl = input.addClass("ui-input-text ui-body-"+ theme );
 
 		// XXX: Temporary workaround for issue 785 (Apple bug 8910589).
 		//      Turn off autocorrect and autocomplete on non-iOS 5 devices
