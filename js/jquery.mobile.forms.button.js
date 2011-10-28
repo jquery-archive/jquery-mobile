@@ -57,7 +57,8 @@ $.widget( "mobile.button", $.mobile.widget, {
 
 						// Bind to doc to remove after submit handling
 						$( document ).submit(function(){
-							 $buttonPlaceholder.remove();
+							$buttonPlaceholder.remove();
+							$buttonPlaceholder = undefined;
 						});
 					}
 				});
