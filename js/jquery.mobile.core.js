@@ -209,6 +209,34 @@
 			}
 
 			return ret;
+		},
+
+		/**
+		 * Merge data-<option> values from the widget's element with the widget's options and
+		 * call _setOption() once for each option. data-<option> takes precedence over
+		 * widget.options.<option>.
+		 */
+		parseOptions: function (widget, userData) {
+			for (var opt in widget.options) {
+				dataValue = widget.element.attr("data-" + ($.mobile.ns || "") + opt);
+				defaultValue = widget.options[opt];
+
+				if (dataValue !== undefined)
+					if (dataValue == "true" ||
+					    dataValue == "yes"  ||
+					    dataValue == "on")
+						dataValue = true;
+					else
+					if (dataValue == "false" ||
+					    dataValue == "no"    ||
+					    dataValue == "off")
+						dataValue = false;
+					else
+					if (!isNaN(parseInt(dataValue)))
+						dataValue = parseInt(dataValue);
+
+				widget._setOption(opt, dataValue === undefined ? defaultValue : dataValue, userData);
+			}
 		}
 	});
 
