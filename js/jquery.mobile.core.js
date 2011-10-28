@@ -141,6 +141,74 @@
 			// specified default.
 
 			return ltr || defaultTheme || "a";
+		},
+
+		/**
+		 * load prototype html from string
+		 *
+		 * @widget - name of the widget (used to cache loaded prototype)
+		 * @html - HTML for widget prototype
+		 * @ui - object containing selectors for the parts of the prototype
+		 *
+		 * Loads a bit of HTML and caches the resulting jQuery object if @widget is
+		 * provided. Returns a clone of the initial prototype if called multiple
+		 * times with the same @widget parameter.
+		 *
+		 * If @ui is provided, it is assumed to be an object whose values are either
+		 * strings which are jQuery selectors or objects which in turn contain
+		 * values that are jQuery selectors. Each selector string will be replaced
+		 * by the jQuery object resulting from performing the selection on the
+		 * prototype.
+		 *
+		 * In addition, if the selector is of the form "#something", i.e., if it
+		 * selects by id, then the id attribute is removed from the resulting jQuery
+		 * object. Presumably, the id is no longer needed since the object is now
+		 * stored in a key.
+		 *
+		 * Returns: If @ui is provided, @ui is returned with the values replaced as
+		 * described. Otherwise, the a jQuery object consisting of a <div> which
+		 * contains @html is returned.
+		 */
+		loadPrototypeFromString: function(widget, html, ui) {
+			var protos = $(document).data("_widgetPrototypes"),
+					ret = undefined;
+
+			if (protos === undefined)
+				protos = {};
+
+			if (widget !== undefined && protos[widget] !== undefined)
+				ret = protos[widget].clone();
+
+			if (ret === undefined && html !== undefined) {
+				ret = $("<div></div>").html(html);
+				if (widget !== undefined)
+					protos[widget] = ret.clone();
+			}
+
+			$(document).data("_widgetPrototypes", protos);
+
+			if (ret !== undefined && ui !== undefined) {
+				function fillObj(obj, uiProto) {
+					var removeId;
+
+					for (var key in obj) {
+						if (typeof obj[key] === "string") {
+							removeId = (obj[key].substring(0, 1) === "#");
+							obj[key] = uiProto.find(obj[key]);
+							if (removeId)
+								obj[key].removeAttr("id");
+						}
+						else
+						if (typeof obj[key] === "object")
+							obj[key] = fillObj(obj[key], uiProto);
+					}
+					return obj;
+				}
+
+				ret = fillObj(ui, ret);
+			}
+
+			return ret;
 		}
 	});
 
