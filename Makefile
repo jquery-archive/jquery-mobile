@@ -49,6 +49,7 @@ JSFILES = 	  js/jquery.ui.widget.js \
 			  js/jquery.mobile.hashchange.js \
 			  js/jquery.mobile.page.js \
 			  js/jquery.mobile.core.js \
+			  js/jquery.mobile.clrlib.js \
 			  js/jquery.mobile.navigation.js \
 			  js/jquery.mobile.navigation.pushstate.js \
 			  js/jquery.mobile.transition.js \

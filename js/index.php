@@ -10,6 +10,7 @@ $files = array(
 	'jquery.mobile.hashchange.js',
 	'jquery.mobile.page.js',
 	'jquery.mobile.core.js',
+	'jquery.mobile.clrlib.js',
 	'jquery.mobile.navigation.js',
 	'jquery.mobile.navigation.pushstate.js',
 	'jquery.mobile.transition.js',
