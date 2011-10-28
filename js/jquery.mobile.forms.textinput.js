@@ -10,27 +10,36 @@
 $.widget( "mobile.textinput", $.mobile.widget, {
 	options: {
 		theme: null,
-		initSelector: "input[type='text'], input[type='search'], :jqmData(type='search'), input[type='number'], :jqmData(type='number'), input[type='password'], input[type='email'], input[type='url'], input[type='tel'], textarea, input[type='time'], input[type='date'], input[type='month'], input[type='week'], input[type='datetime'], input[type='datetime-local'], input[type='color'], input:not([type])"
+		initSelector: 
+			"input[type='text'], 
+			input[type='search'], :jqmData(type='search'), 
+			input[type='number'], :jqmData(type='number'), 
+			input[type='password'], 
+			input[type='email'], 
+			input[type='url'], 
+			input[type='tel'], 
+			textarea, 
+			input[type='time'], 
+			input[type='date'], 
+			input[type='month'], 
+			input[type='week'], 
+			input[type='datetime'], 
+			input[type='datetime-local'], 
+			input[type='color'], 
+			input:not([type])"
 	},
 
 	_create: function() {
 
 		var input = this.element,
 			o = this.options,
-			theme = o.theme,
-			themeclass, focusedEl, clearbtn;
+			theme = o.theme || $.mobile.getInheritedTheme( this.element, "c" ),
+			themeclass = " ui-body-" + theme,
+			focusedEl, clearbtn;
 
-		if ( !theme ) {
-			theme = $.mobile.getInheritedTheme( this.element, "c" );
-		}
+		$( "label[for='" + input.id + "']" ).addClass( "ui-input-text" );
 
-		themeclass = " ui-body-" + theme;
-
-		$( "label[for='" + input.attr( "id" ) + "']" ).addClass( "ui-input-text" );
-
-		input.addClass("ui-input-text ui-body-"+ theme );
-
-		focusedEl = input;
+		focusedEl = input.addClass("ui-input-text ui-body-"+ theme );
 
 		// XXX: Temporary workaround for issue 785 (Apple bug 8910589).
 		//      Turn off autocorrect and autocomplete on non-iOS 5 devices
@@ -42,8 +51,8 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		if ( typeof input[0].autocorrect !== "undefined" && !$.support.touchOverflow ) {
 			// Set the attribute instead of the property just in case there
 			// is code that attempts to make modifications via HTML.
-			input[0].setAttribute( "autocorrect", "off" );
-			input[0].setAttribute( "autocomplete", "off" );
+			input[0].setAttribute( "autocorrect", "off" )
+					.setAttribute( "autocomplete", "off" );
 		}
 
 
@@ -67,17 +76,12 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 				});
 
 			function toggleClear() {
-				if ( !input.val() ) {
-					clearbtn.addClass( "ui-input-clear-hidden" );
-				} else {
-					clearbtn.removeClass( "ui-input-clear-hidden" );
-				}
+				clearbtn.toggleClass( "ui-input-clear-hidden", !input.val() );
 			}
 
 			toggleClear();
 
-			input.keyup( toggleClear )
-				.focus( toggleClear );
+			input.bind('paste cut keyup focus change blur', toggleClear);
 
 		} else {
 			input.addClass( "ui-corner-all ui-shadow-inset" + themeclass );
