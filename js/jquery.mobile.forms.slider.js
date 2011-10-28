@@ -70,12 +70,16 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			handle: handle,
 			dragging: false,
 			beforeStart: null,
-			userModified: false
+			userModified: false,
+			mouseMoved: false
 		});
 
 		if ( cType == "select" ) {
 
 			slider.wrapInner( "<div class='ui-slider-inneroffset'></div>" );
+			
+			// make the handle move with a smooth transition
+			handle.addClass( "ui-slider-handle-snapping" );
 
 			options = control.find( "option" );
 
@@ -99,7 +103,10 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		// monitor the input for updated values
 		control.addClass( cType === "input" ? "ui-slider-input" : "ui-slider-switch" )
 			.change( function() {
-				self.refresh( val(), true );
+				// if the user dragged the handle, the "change" event was triggered from inside refresh(); don't call refresh() again
+				if (!self.mouseMoved) {
+					self.refresh( val(), true );
+				}
 			})
 			.keyup( function() { // necessary?
 				self.refresh( val(), true, true );
@@ -111,8 +118,18 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		// prevent screen drag when slider activated
 		$( document ).bind( "vmousemove", function( event ) {
 			if ( self.dragging ) {
+				// self.mouseMoved must be updated before refresh() because it will be used in the control "change" event
+				self.mouseMoved = true;
+				
+				if ( cType === "select" ) {
+					// make the handle move in sync with the mouse
+					handle.removeClass( "ui-slider-handle-snapping" );
+				}
+				
 				self.refresh( event );
-				self.userModified = self.userModified || self.beforeStart !== control[0].selectedIndex;
+				
+				// only after refresh() you can calculate self.userModified
+				self.userModified = self.beforeStart !== control[0].selectedIndex;
 				return false;
 			}
 		});
@@ -120,10 +137,12 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		slider.bind( "vmousedown", function( event ) {
 			self.dragging = true;
 			self.userModified = false;
+			self.mouseMoved = false;
 
 			if ( cType === "select" ) {
 				self.beforeStart = control[0].selectedIndex;
 			}
+			
 			self.refresh( event );
 			return false;
 		});
@@ -134,14 +153,31 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 					self.dragging = false;
 
-					if ( cType === "select" ) {
-
-						if ( !self.userModified ) {
-							//tap occurred, but value didn't change. flip it!
-							handle.addClass( "ui-slider-handle-snapping" );
-							self.refresh( !self.beforeStart ? 1 : 0 );
+					if ( cType === "select") {
+					
+						// make the handle move with a smooth transition
+						handle.addClass( "ui-slider-handle-snapping" );
+					
+						if ( self.mouseMoved ) {
+						
+							// this is a drag, change the value only if user dragged enough
+							if ( self.userModified ) {
+								self.refresh( self.beforeStart == 0 ? 1 : 0 );
+							}
+							else {
+								self.refresh( self.beforeStart );
+							}
+							
 						}
+						else {
+							// this is just a click, change the value
+							self.refresh( self.beforeStart == 0 ? 1 : 0 );
+						}
+						
 					}
+					
+					self.mouseMoved = false;
+					
 					return false;
 				}
 			});
@@ -215,8 +251,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 	refresh: function( val, isfromControl, preventInputUpdate ) {
 
 		if ( this.options.disabled || this.element.attr('disabled')) { 
-			this.slider.addClass('ui-disabled');
-			return;
+			this.disable();
 		}
 
 		var control = this.element, percent,
