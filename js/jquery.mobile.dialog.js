@@ -33,8 +33,9 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 				.prepend( headerCloseButton )
 			.end()
 			.find( ":jqmData(role='content'),:jqmData(role='footer')" )
+				.addClass( "ui-overlay-shadow" )
 				.last()
-				.addClass( "ui-corner-bottom ui-overlay-shadow" );
+				.addClass( "ui-corner-bottom" );
 
 		// this must be an anonymous function so that select menu dialogs can replace
 		// the close method. This is a change from previously just defining data-rel=back
