@@ -2,7 +2,7 @@
 * "navbar" plugin
 */
 
-(function( $, undefined ) {
+define( [ "jquery", "jquery.mobile.widget" ], function( $, undefined ) {
 
 $.widget( "mobile.navbar", $.mobile.widget, {
 	options: {
@@ -47,4 +47,4 @@ $( document ).bind( "pagecreate create", function( e ){
 	$( $.mobile.navbar.prototype.options.initSelector, e.target ).navbar();
 });
 
-})( jQuery );
+});

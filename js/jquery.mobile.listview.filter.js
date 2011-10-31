@@ -2,7 +2,7 @@
 * "listview" filter extension
 */
 
-(function( $, undefined ) {
+define( [ "jquery", "jquery.mobile.listview" ], function( $, undefined ) {
 
 $.mobile.listview.prototype.options.filter = false;
 $.mobile.listview.prototype.options.filterPlaceholder = "Filter items...";
@@ -109,4 +109,4 @@ $( document ).delegate( ":jqmData(role='listview')", "listviewcreate", function(
 	.insertBefore( list );
 });
 
-})( jQuery );
+});

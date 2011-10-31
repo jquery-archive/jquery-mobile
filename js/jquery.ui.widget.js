@@ -8,7 +8,7 @@
  * http://docs.jquery.com/UI/Widget
  */
 
-(function( $, undefined ) {
+define( [ "jquery" ], function( $, undefined ) {
 
 // jQuery 1.4+
 if ( $.cleanData ) {
@@ -260,4 +260,4 @@ $.Widget.prototype = {
 	}
 };
 
-})( jQuery );
+});

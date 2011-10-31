@@ -17,7 +17,7 @@
 // The current version exposes the following virtual events to jQuery bind methods:
 // "vmouseover vmousedown vmousemove vmouseup vclick vmouseout vmousecancel"
 
-(function( $, window, document, undefined ) {
+define( [ "jquery" ], function( $, undefined ) {
 
 var dataPropertyName = "virtualMouseBindings",
 	touchTargetPropertyName = "virtualTouchID",
@@ -500,4 +500,4 @@ if ( eventCaptureSupported ) {
 		}
 	}, true);
 }
-})( jQuery, window, document );
+});

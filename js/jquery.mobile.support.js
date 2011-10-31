@@ -2,7 +2,7 @@
 * support tests
 */
 
-(function( $, undefined ) {
+define( [ "jquery" ], function( $, undefined ) {
 
 var fakeBody = $( "<body>" ).prependTo( "html" ),
 	fbCSS = fakeBody[ 0 ].style,
@@ -117,4 +117,4 @@ if ( !$.support.boxShadow ) {
 	$( "html" ).addClass( "ui-mobile-nosupport-boxshadow" );
 }
 
-})( jQuery );
+});

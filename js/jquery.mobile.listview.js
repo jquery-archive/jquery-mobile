@@ -2,7 +2,7 @@
 * "listview" plugin
 */
 
-(function( $, undefined ) {
+define( [ "jquery", "jquery.mobile.widget" ], function( $, undefined ) {
 
 //Keeps track of the number of lists per page UID
 //This allows support for multiple nested list in the same page
@@ -396,4 +396,4 @@ $( document ).bind( "pagecreate create", function( e ){
 	$( $.mobile.listview.prototype.options.initSelector, e.target ).listview();
 });
 
-})( jQuery );
+});

@@ -2,7 +2,7 @@
 * "transitions" plugin - Page change tranistions
 */
 
-(function( $, window, undefined ) {
+define( [ "jquery" ], function( $, undefined ) {
 
 function css3TransitionHandler( name, reverse, $to, $from ) {
 
@@ -42,4 +42,4 @@ if ( $.mobile.defaultTransitionHandler === $.mobile.noneTransitionHandler ) {
 	$.mobile.defaultTransitionHandler = css3TransitionHandler;
 }
 
-})( jQuery, this );
+});
