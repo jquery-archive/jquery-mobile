@@ -62,6 +62,7 @@ JSFILES = 	  js/jquery.ui.widget.js \
 			  js/jquery.mobile.navbar.js \
 			  js/jquery.mobile.listview.js \
 			  js/jquery.mobile.colorwidget.js \
+			  js/jquery.mobile.hsvpicker.js \
 			  js/jquery.mobile.listview.filter.js \
 			  js/jquery.mobile.nojs.js \
 			  js/jquery.mobile.forms.checkboxradio.js \
@@ -92,6 +93,7 @@ CSSSTRUCTUREFILES = css/structure/jquery.mobile.core.css \
 			  css/structure/jquery.mobile.forms.select.css \
 			  css/structure/jquery.mobile.forms.textinput.css \
 			  css/structure/jquery.mobile.listview.css \
+			  css/structure/jquery.mobile.hsvpicker.css \
 			  css/structure/jquery.mobile.forms.slider.css
 
 
