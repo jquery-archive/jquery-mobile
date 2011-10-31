@@ -56,7 +56,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 								.insertBefore( $el );
 
 						// Bind to doc to remove after submit handling
-						$( document ).submit(function(){
+						$( document ).one("submit", function(){
 							$buttonPlaceholder.remove();
 							$buttonPlaceholder = undefined;
 						});
