@@ -2,7 +2,7 @@
 * a workaround for window.matchMedia
 */
 
-(function( $, undefined ) {
+define( [ "jquery" ], function( $, undefined ) {
 
 var $window = $( window ),
 	$html = $( "html" );
@@ -42,4 +42,4 @@ $.mobile.media = (function() {
 	};
 })();
 
-})(jQuery);
+});

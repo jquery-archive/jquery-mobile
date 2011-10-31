@@ -2,7 +2,7 @@
 * core utilities for auto ajax navigation, base tag mgmt,
 */
 
-( function( $, undefined ) {
+define( [ "jquery" ], function( $, undefined ) {
 
 	//define vars for interal use
 	var $window = $( window ),
@@ -1494,4 +1494,4 @@
 
 	};//_registerInternalEvents callback
 
-})( jQuery );
+});

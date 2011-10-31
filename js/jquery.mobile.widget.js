@@ -2,7 +2,7 @@
 * widget factory extentions for mobile
 */
 
-(function( $, undefined ) {
+define( [ "jquery", "jquery.ui.widget" ], function( $, undefined ) {
 
 $.widget( "mobile.widget", {
 	// decorate the parent _createWidget to trigger `widgetinit` for users
@@ -46,4 +46,4 @@ $.widget( "mobile.widget", {
 	}
 });
 
-})( jQuery );
+});

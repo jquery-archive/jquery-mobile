@@ -2,7 +2,7 @@
 * "page" plugin
 */
 
-(function( $, undefined ) {
+define( [ "jquery", "jquery.mobile.widget" ], function( $, undefined ) {
 
 $.widget( "mobile.page", $.mobile.widget, {
 	options: {
@@ -31,4 +31,4 @@ $.widget( "mobile.page", $.mobile.widget, {
 		return options.keepNativeDefault;
 	}
 });
-})( jQuery );
+});
