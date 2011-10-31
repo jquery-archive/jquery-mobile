@@ -8,7 +8,7 @@
 			originalEventFn = $.Event.prototype.originalEvent,
 			preventDefaultFn = $.Event.prototype.preventDefault,
 			events = ("touchstart touchmove touchend orientationchange tap taphold " +
-								"swipe swipeleft swiperight scrollstart scrollstop").split( " " );
+								"swipe swipeleft swiperight swipeup swipedown scrollstart scrollstop").split( " " );
 
 	module(libName, {
 		setup: function(){

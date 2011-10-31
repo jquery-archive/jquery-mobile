@@ -9,7 +9,7 @@
 
 // add new event shortcuts
 $.each( ( "touchstart touchmove touchend orientationchange throttledresize " +
-					"tap taphold swipe swipeleft swiperight scrollstart scrollstop" ).split( " " ), function( i, name ) {
+					"tap taphold swipe swipeleft swiperight swipeup swipedown scrollstart scrollstop" ).split( " " ), function( i, name ) {
 
 	$.fn[ name ] = function( fn ) {
 		return fn ? this.bind( name, fn ) : this.trigger( name );
@@ -116,7 +116,7 @@ $.event.special.tap = {
 	}
 };
 
-// also handles swipeleft, swiperight
+// also handles swipeleft, swiperight, swipeup and swipedown
 $.event.special.swipe = {
 	scrollSupressionThreshold: 10, // More than this horizontal displacement, and we will suppress scrolling.
 
@@ -171,6 +171,14 @@ $.event.special.swipe = {
 
 							start.origin.trigger( "swipe" )
 								.trigger( start.coords[0] > stop.coords[ 0 ] ? "swipeleft" : "swiperight" );
+						}
+						else
+						if ( stop.time - start.time < $.event.special.swipe.durationThreshold &&
+								Math.abs( start.coords[ 1 ] - stop.coords[ 1 ] ) > $.event.special.swipe.horizontalDistanceThreshold &&
+								Math.abs( start.coords[ 0 ] - stop.coords[ 0 ] ) < $.event.special.swipe.verticalDistanceThreshold ) {
+
+							start.origin.trigger( "swipe" )
+								.trigger( start.coords[1] > stop.coords[ 1 ] ? "swipeup" : "swipedown" );
 						}
 					}
 					start = stop = undefined;
@@ -308,7 +316,9 @@ $.each({
 	scrollstop: "scrollstart",
 	taphold: "tap",
 	swipeleft: "swipe",
-	swiperight: "swipe"
+	swiperight: "swipe",
+	swipeup: "swipe",
+	swipedown: "swipe"
 }, function( event, sourceEvent ) {
 
 	$.event.special[ event ] = {
