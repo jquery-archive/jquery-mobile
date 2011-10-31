@@ -81,7 +81,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 	refresh: function() {
 		var $el = this.element;
 
-		if ( $el.attr( "disabled" ) ) {
+		if ( $el.prop("disabled") ) {
 			this.disable();
 		} else {
 			this.enable();
