@@ -3,8 +3,8 @@
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>jQuery Mobile Docs - Slider events</title>
-	<link rel="stylesheet"  href="../../../css/themes/default/" />
+	<title>jQuery Mobile Docs - Color picker options</title>
+	<link rel="stylesheet"  href="../../../themes/default/" />
 	<link rel="stylesheet" href="../../_assets/css/jqm-docs.css"/>
 	<script src="../../../js/jquery.js"></script>
 	<script src="../../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
@@ -16,7 +16,7 @@
 	<div data-role="page" class="type-interior">
 
 		<div data-role="header" data-theme="f">
-		<h1>Slider</h1>
+		<h1>Color picker</h1>
 		<a href="../../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
@@ -25,39 +25,44 @@
 
 		<form action="#" method="get">
 
-			<h2>Slider</h2>
+			<h2>Color picker</h2>
 			
 			<ul data-role="controlgroup" data-type="horizontal" class="localnav">
 				<li><a href="index.html" data-role="button" data-transition="fade">Basics</a></li>
-				<li><a href="options.html" data-role="button" data-transition="fade">Options</a></li>
+				<li><a href="options.html" data-role="button" data-transition="fade" class="ui-btn-active">Options</a></li>
 				<li><a href="methods.html" data-role="button" data-transition="fade">Methods</a></li>
-				<li><a href="events.html" data-role="button" data-transition="fade" class="ui-btn-active">Events</a></li>
+				<li><a href="events.html" data-role="button" data-transition="fade">Events</a></li>
 			</ul>
 			
-			<p>Bind events directly to the <code>input</code> element.  Use jQuery Mobile's <a href="../../api/events.html">virtual events</a>, or bind standard JavaScript events, like change, focus, blur, etc.:</p>
-			<pre><code> 
-$( ".selector" ).bind( "change", function(event, ui) {
-  ...
-});
-</code></pre> 
+			<p>The colorpickerbutton plugin has the following options:</p>
+
+		<dl>
+			<dt><code>disabled</code> <em>string</em></dt>
+			<dd>
+				<p class="default">default: false</p>
+				<p>Sets the default state of the slider to disabled when "true".</p>		
+				<pre><code>$('.selector').slider(<strong>{ disabled: "true" }</strong>);</code></pre>
+			</dd>
 			
-			<p>The slider plugin has the following custom event:</p>
-
-	<dl>
-				
-		<dt><code>create</code> triggered when a slider is created</dt>
-		<dd>
-
-			<pre><code>
-$( ".selector" ).slider({
-   create: function(event, ui) { ... }
-});		
-			</code></pre>
-		</dd>
-		
-
-	</dl>
-	    
+			<dt><code>initSelector</code> <em>CSS selector string</em></dt>
+			<dd>
+				<p class="default">default: "input[type='color'], :jqmData(type='color'), :jqmData(role='colorpickerbutton')"</p>
+				<p>This is used to define the selectors (element types, data roles, etc.) that will automatically be initialized as color pickers. To change which elements are initialized, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
+<pre><code>$( document ).bind( "mobileinit", function(){
+   <strong>$.mobile.colorpickerbutton.prototype.options.initSelector = ".mycolorpickerbutton";</strong>
+});
+</code></pre>
+			</dd>
+						
+			<dt><code>color</code> <em>HTML color string</em></dt>
+			<dd>
+				<p class="default">default: #ff0972</p>
+				<p>Sets the current color value returned by this widget. This option is also exposed as a data attribute: <code>data-color=&quot;#422442&quot;</code></p>			
+				<pre><code>$('.selector').slider(<strong>{ color: "#422442" }</strong>);</code></pre>
+			</dd>
+			
+		</dl>	
+    
 	</form>
 	</div><!--/content-primary -->		
 	
@@ -74,8 +79,8 @@ $( ".selector" ).slider({
 					<li><a href="../forms-all.html">Form element gallery</a></li>
 					<li><a href="../textinputs/index.html">Text inputs</a></li>
 					<li><a href="../search/">Search input</a></li>
-					<li data-theme="a"><a href="index.html">Slider</a></li>
-					<li><a href="../colorpickerbutton/">Color picker</a></li>
+					<li><a href="../slider">Slider</a></li>
+					<li data-theme="a"><a href="index.html">Color picker</a></li>
 					<li><a href="../switch/">Flip toggle switch</a></li>
 					<li><a href="../radiobuttons/">Radio buttons</a></li>
 					<li><a href="../checkboxes/">Checkboxes</a></li>

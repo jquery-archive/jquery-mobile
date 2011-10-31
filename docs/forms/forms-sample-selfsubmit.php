@@ -53,6 +53,7 @@
 					<li><a href="textinputs/">Text inputs</a></li>
 					<li><a href="search/">Search inputs</a></li>
 					<li><a href="slider/">Slider</a></li>
+					<li><a href="colorpickerbutton/">Color picker</a></li>
 					<li><a href="switch/">Flip toggle switch</a></li>
 					<li><a href="radiobuttons/">Radio buttons</a></li>
 					<li><a href="checkboxes/">Checkboxes</a></li>
