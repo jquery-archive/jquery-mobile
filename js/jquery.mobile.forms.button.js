@@ -79,11 +79,15 @@ $.widget( "mobile.button", $.mobile.widget, {
 	},
 
 	refresh: function() {
-		if ( this.element.attr( "disabled" ) ) {
+		var $el = this.element;
+
+		if ( $el.attr( "disabled" ) ) {
 			this.disable();
 		} else {
 			this.enable();
 		}
+
+		this.button.find( ".ui-btn-text" ).text( $el.text() || $el.val() );
 	}
 });
 
