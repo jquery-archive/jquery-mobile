@@ -3,7 +3,7 @@
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>jQuery Mobile Docs - Slider events</title>
+	<title>jQuery Mobile Docs - Color picker events</title>
 	<link rel="stylesheet"  href="../../../css/themes/default/" />
 	<link rel="stylesheet" href="../../_assets/css/jqm-docs.css"/>
 	<script src="../../../js/jquery.js"></script>
@@ -16,7 +16,7 @@
 	<div data-role="page" class="type-interior">
 
 		<div data-role="header" data-theme="f">
-		<h1>Slider</h1>
+		<h1>Color picker</h1>
 		<a href="../../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
 
@@ -25,7 +25,7 @@
 
 		<form action="#" method="get">
 
-			<h2>Slider</h2>
+			<h2>Color picker</h2>
 			
 			<ul data-role="controlgroup" data-type="horizontal" class="localnav">
 				<li><a href="index.html" data-role="button" data-transition="fade">Basics</a></li>
@@ -41,16 +41,16 @@ $( ".selector" ).bind( "change", function(event, ui) {
 });
 </code></pre> 
 			
-			<p>The slider plugin has the following custom event:</p>
+			<p>The colorpickerbutton plugin has the following custom event:</p>
 
 	<dl>
 				
-		<dt><code>create</code> triggered when a slider is created</dt>
+		<dt><code>colorchanged</code> triggered when the user chooses a new color by pressing "Close" in the color picker's popup color selector</dt>
 		<dd>
 
 			<pre><code>
-$( ".selector" ).slider({
-   create: function(event, ui) { ... }
+$( ".selector" ).colorpickerbutton({
+   colorchanged: function(event, ui) { ... }
 });		
 			</code></pre>
 		</dd>
@@ -74,8 +74,8 @@ $( ".selector" ).slider({
 					<li><a href="../forms-all.html">Form element gallery</a></li>
 					<li><a href="../textinputs/index.html">Text inputs</a></li>
 					<li><a href="../search/">Search input</a></li>
-					<li data-theme="a"><a href="index.html">Slider</a></li>
-					<li><a href="../colorpickerbutton/">Color picker</a></li>
+					<li><a href="../slider/">Slider</a></li>
+					<li data-theme="a"><a href="index.html">Color picker</a></li>
 					<li><a href="../switch/">Flip toggle switch</a></li>
 					<li><a href="../radiobuttons/">Radio buttons</a></li>
 					<li><a href="../checkboxes/">Checkboxes</a></li>
