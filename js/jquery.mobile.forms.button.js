@@ -87,7 +87,9 @@ $.widget( "mobile.button", $.mobile.widget, {
 			this.enable();
 		}
 
-		this.button.find( ".ui-btn-text" ).text( $el.text() || $el.val() );
+		// the textWrapper is stored as a data element on the button object
+		// to prevent referencing by it's implementation details (eg 'class')
+		this.button.data( 'textWrapper' ).text( $el.text() || $el.val() );
 	}
 });
 

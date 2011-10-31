@@ -21,6 +21,7 @@ $.fn.buttonMarkup = function( options ) {
 
 			// Classes Defined
 			innerClass = "ui-btn-inner",
+			textClass = "ui-btn-text",
 			buttonClass, iconClass,
 			wrap;
 
@@ -70,11 +71,16 @@ $.fn.buttonMarkup = function( options ) {
 		el.attr( "data-" + $.mobile.ns + "theme", o.theme )
 			.addClass( buttonClass );
 
-		wrap = ( "<D class='" + innerClass + "' aria-hidden='true'><D class='ui-btn-text'></D>" +
+		wrap = ( "<D class='" + innerClass + "' aria-hidden='true'><D class='" + textClass + "'></D>" +
 			( o.icon ? "<span class='" + iconClass + "'></span>" : "" ) +
 			"</D>" ).replace( /D/g, o.wrapperEls );
 
 		el.wrapInner( wrap );
+		
+		// TODO obviously it would be nice to pull this element out instead of
+		// retrieving it from the DOM again, but this change is much less obtrusive
+		// and 1.0 draws nigh
+		el.data( 'textWrapper', el.find( "." + textClass ) );
 	});
 };
 
@@ -88,7 +94,7 @@ $.fn.buttonMarkup.defaults = {
 
 function closestEnabledButton( element ) {
     var cname;
-    
+
     while ( element ) {
         cname = element.className && element.className.split(' ');
         if ( cname && $.inArray( "ui-btn", cname ) > -1 && $.inArray( "ui-disabled", cname ) < 0 ) {
@@ -96,7 +102,7 @@ function closestEnabledButton( element ) {
         }
         element = element.parentNode;
     }
-    
+
     return element;
 }
 
