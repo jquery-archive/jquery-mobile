@@ -2,7 +2,7 @@
 * "buttons" plugin - for making button-like links
 */
 
-( function( $, undefined ) {
+define( [ "jquery" ], function( $, undefined ) {
 
 $.fn.buttonMarkup = function( options ) {
 	options = options || {};
@@ -184,4 +184,4 @@ $( document ).bind( "pagecreate create", function( e ){
 		.buttonMarkup();
 });
 
-})( jQuery );
+});

@@ -2,7 +2,7 @@
 * "slider" plugin
 */
 
-( function( $, undefined ) {
+define( [ "jquery", "jquery.mobile.widget" ], function( $, undefined ) {
 
 $.widget( "mobile.slider", $.mobile.widget, {
 	options: {
@@ -365,4 +365,4 @@ $( document ).bind( "pagecreate create", function( e ){
 	$.mobile.slider.prototype.enhanceWithin( e.target );
 });
 
-})( jQuery );
+});

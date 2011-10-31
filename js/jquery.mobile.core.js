@@ -2,7 +2,8 @@
 * "core" - The base file for jQm
 */
 
-(function( $, window, undefined ) {
+
+define( [ "jquery" ], function( $, undefined ) {
 
 	var nsNormalizeDict = {};
 
@@ -233,5 +234,5 @@
 	$.find.matchesSelector = function( node, expr ) {
 		return $.find( expr, null, null, [ node ] ).length > 0;
 	};
-})( jQuery, this );
+});
 

@@ -2,7 +2,7 @@
 * "init" - Initialize the framework
 */
 
-(function( $, window, undefined ) {
+define( [ "jquery", "jquery.mobile.core" ], function( $, undefined ) {
 	var	$html = $( "html" ),
 			$head = $( "head" ),
 			$window = $( window );
@@ -140,4 +140,4 @@
 		// hide iOS browser chrome on load
 		$window.load( $.mobile.silentScroll );
 	});
-})( jQuery, this );
+});

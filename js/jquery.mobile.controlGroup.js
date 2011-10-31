@@ -1,8 +1,7 @@
 /* 
 * "controlgroup" plugin - corner-rounding for groups of buttons, checks, radios, etc
 */
-
-(function( $, undefined ) {
+define( [ "jquery" ], function( $, undefined ) {
 
 $.fn.controlgroup = function( options ) {
 
@@ -50,4 +49,4 @@ $( document ).bind( "pagecreate create", function( e ){
 	$( ":jqmData(role='controlgroup')", e.target ).controlgroup({ excludeInvisible: false });
 });
 
-})(jQuery);
+});

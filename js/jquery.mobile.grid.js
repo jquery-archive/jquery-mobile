@@ -2,7 +2,7 @@
 * plugin for creating CSS grids
 */
 
-(function( $, undefined ) {
+define( [ "jquery" ], function( $, undefined ) {
 
 $.fn.grid = function( options ) {
 	return this.each(function() {
@@ -47,4 +47,4 @@ $.fn.grid = function( options ) {
 		}
 	});
 };
-})( jQuery );
+});
