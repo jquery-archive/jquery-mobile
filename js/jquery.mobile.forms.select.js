@@ -2,7 +2,7 @@
 * "selectmenu" plugin
 */
 
-(function( $, undefined ) {
+define( [ "jquery", "jquery.mobile.widget" ], function( $, undefined ) {
 
 $.widget( "mobile.selectmenu", $.mobile.widget, {
 	options: {
@@ -202,4 +202,4 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 $( document ).bind( "pagecreate create", function( e ){
 	$.mobile.selectmenu.prototype.enhanceWithin( e.target );
 });
-})( jQuery );
+});

@@ -2,7 +2,7 @@
 * "dialog" plugin.
 */
 
-(function( $, window, undefined ) {
+define( [ "jquery", "jquery.mobile.widget" ], function( $, undefined ) {
 
 $.widget( "mobile.dialog", $.mobile.widget, {
 	options: {
@@ -70,4 +70,4 @@ $( document ).delegate( $.mobile.dialog.prototype.options.initSelector, "pagecre
 	$( this ).dialog();
 });
 
-})( jQuery, this );
+});

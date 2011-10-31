@@ -1,8 +1,7 @@
 /*
 * "collapsible" plugin
 */
-
-(function( $, undefined ) {
+define( [ "jquery", "jquery.mobile.widget" ], function( $, undefined ) {
 
 $.widget( "mobile.collapsible", $.mobile.widget, {
 	options: {
@@ -115,4 +114,4 @@ $( document ).bind( "pagecreate create", function( e ){
 	$( $.mobile.collapsible.prototype.options.initSelector, e.target ).collapsible();
 });
 
-})( jQuery );
+});

@@ -2,7 +2,7 @@
 * "events" plugin - Handles events
 */
 
-(function( $, window, undefined ) {
+define( [ "jquery" ], function( $, undefined ) {
 
 // add new event shortcuts
 $.each( ( "touchstart touchmove touchend orientationchange throttledresize " +
@@ -315,4 +315,4 @@ $.each({
 	};
 });
 
-})( jQuery, this );
+});

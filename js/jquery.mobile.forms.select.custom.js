@@ -2,7 +2,7 @@
 * custom "selectmenu" plugin
 */
 
-(function( $, undefined ) {
+define( [ "jquery", "jquery.mobile.forms.select" ], function( $, undefined ) {
 	var extendSelect = function( widget ){
 
 		var select = widget.select,
@@ -490,4 +490,4 @@
 			extendSelect( selectmenuWidget );
 		}
 	});
-})( jQuery );
+});

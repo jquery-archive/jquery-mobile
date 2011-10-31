@@ -2,7 +2,7 @@
 * "textinput" plugin for text inputs, textareas
 */
 
-(function( $, undefined ) {
+define( [ "jquery", "jquery.mobile.widget" ], function( $, undefined ) {
 
 $.widget( "mobile.textinput", $.mobile.widget, {
 	options: {
@@ -125,4 +125,4 @@ $( document ).bind( "pagecreate create", function( e ){
 	$.mobile.textinput.prototype.enhanceWithin( e.target );
 });
 
-})( jQuery );
+});
