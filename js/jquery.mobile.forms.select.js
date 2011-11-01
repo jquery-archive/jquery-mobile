@@ -39,7 +39,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		var self = this;
 
 		setTimeout( function() {
-			self.button.focus();
+			self.button.focus().trigger( 'vmouseout' );
 		}, 40);
 	},
 
