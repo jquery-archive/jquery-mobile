@@ -43,14 +43,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		}
 
 		// TODO class has to be defined in markup
-		item.find( "h1, h2, h3, h4, h5, h6" ).addClass( "ui-li-heading" ).end()
-			.find( "p, dl" ).addClass( "ui-li-desc" ).end()
-			.find( ">img:eq(0), .ui-link-inherit>img:eq(0)" ).addClass( "ui-li-thumb" ).each(function() {
+		item.find( ">img:eq(0), .ui-link-inherit>img:eq(0)" ).addClass( "ui-li-thumb" ).each(function() {
 				item.addClass( $(this).is( ".ui-li-icon" ) ? "ui-li-has-icon" : "ui-li-has-thumb" );
-			}).end()
-			.find( ".ui-li-aside" ).each(function() {
-				var $this = $(this);
-				$this.prependTo( $this.parent() ); //shift aside to front for css float
 			});
 	},
 
@@ -214,6 +208,14 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 			self._itemApply( $list, item );
 		}
+
+		$list.find( "h1, h2, h3, h4, h5, h6" ).addClass( "ui-li-heading" ).end()
+			.find( "p, dl" ).addClass( "ui-li-desc" ).end()
+			.find( ".ui-li-aside" ).each(function() {
+				var $this = $(this);
+				$this.prependTo( $this.parent() ); //shift aside to front for css float
+			});
+
 
 		this._refreshCorners( create );
 	},
