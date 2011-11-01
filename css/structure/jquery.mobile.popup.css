@@ -1,0 +1,10 @@
+.ui-popup-container {
+  display: inline-block;
+  position: absolute;
+  z-index: 100 !important;
+  padding: 6px;
+}
+
+.ui-popup-screen {
+  opacity: 0;
+}
