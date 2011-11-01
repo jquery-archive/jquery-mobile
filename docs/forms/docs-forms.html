@@ -42,7 +42,7 @@
 	<p>For the sake of accessibility, jQuery Mobile requires that all form elements be paired with a meaningful <code>label</code>. To hide labels in a way that leaves them visible to assistive technologies—for example, when letting an element’s <code>placeholder</code> attribute serve as a label—apply the helper class <code>ui-hidden-accessible</code> to the label itself:</p>
 <code>
 <pre>
-&lt;label for="username" <strong>class="ui-hidden-accessible"</strong>>Username:&lt;/label&gt;
+&lt;label for="username" <strong>class="ui-hidden-accessible"</strong>&gt;Username:&lt;/label&gt;
 &lt;input type="text" name="username" id="username" value="" placeholder="Username"/&gt;
 </pre>
 </code>
@@ -52,7 +52,7 @@
 <code>
 <pre>
 &lt;div data-role="fieldcontain" <strong>class="ui-hide-label"</strong>&gt;
-	&lt;label for="username">Username:&lt;/label&gt;
+	&lt;label for="username"&gt;Username:&lt;/label&gt;
 	&lt;input type="text" name="username" id="username" value="" placeholder="Username"/&gt;
 &lt;/div&gt;
 </pre>
@@ -113,7 +113,7 @@
 		<p>For example:</p>
 <pre><code>
 &lt;div data-role=&quot;fieldcontain&quot;&gt;
-&lt;label for="name">Text Input:&lt;/label&gt;
+&lt;label for="name"&gt;Text Input:&lt;/label&gt;
 &lt;input type="text" name="name" id="name" value="" /&gt;
 &lt;/div&gt;
 </code></pre>
@@ -146,30 +146,30 @@
 	<h4>Checkboxes:</h4>
 
 <code>
-$("input[type='checkbox']").attr("checked",true).checkboxradio("refresh");
+$("input[type='checkbox']").prop("checked",true).checkboxradio("refresh");
 </code>
 
 <h4>Radios:</h4>
 <code>
-$("input[type='radio']").attr("checked",true).checkboxradio("refresh");
+$("input[type='radio']").prop("checked",true).checkboxradio("refresh");
 </code>
 
 <h4>Selects:</h4>
 <code><pre>
-var myselect = $("select#foo");
+var myselect = $("#selectfoo");
 myselect[0].selectedIndex = 3;
 myselect.selectmenu("refresh");
 </pre></code>
 
 <h4>Sliders:</h4>
 <code>
-$("input[type=range]").val(60).slider("refresh");
+$("input[type='range']").val(60).slider("refresh");
 </code>
 
 <h4>Flip switches (they use slider):</h4>
 
 <code><pre>
-var myswitch = $("select#bar");
+var myswitch = $("#selectbar");
 myswitch[0].selectedIndex = 1;
 myswitch.slider("refresh");
 </pre></code>
