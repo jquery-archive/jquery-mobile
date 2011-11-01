@@ -95,7 +95,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 		input
 			.bind({
 				vmousedown: function() {
-					this._cacheVals();
+					self._cacheVals();
 				},
 
 				vclick: function() {
