@@ -94,6 +94,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			colllapsiblesInSet.last()
 				.jqmData( "collapsible-last", true )
 				.find( "a:eq(0)" )
+					.not( "a" ).parent( "ui-controlgroup" )
 					.addClass( "ui-corner-bottom" )
 						.find( ".ui-btn-inner" )
 							.addClass( "ui-corner-bottom" );
