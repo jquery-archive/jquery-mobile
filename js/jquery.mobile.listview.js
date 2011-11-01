@@ -39,8 +39,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		var $countli = item.find( ".ui-li-count" );
 		if ( $countli.length ) {
 			item.addClass( "ui-li-has-count" );
+			$countli.addClass( "ui-btn-up-" + ( $list.jqmData( "counttheme" ) || this.options.countTheme ) + " ui-btn-corner-all" );
 		}
-		$countli.addClass( "ui-btn-up-" + ( $list.jqmData( "counttheme" ) || this.options.countTheme ) + " ui-btn-corner-all" );
 
 		// TODO class has to be defined in markup
 		item.find( "h1, h2, h3, h4, h5, h6" ).addClass( "ui-li-heading" ).end()

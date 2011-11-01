@@ -13,13 +13,13 @@ $.fn.buttonMarkup = function( options ) {
 		var el = this.eq( i ),
 			e = el[ 0 ],
 			o = $.extend( {}, $.fn.buttonMarkup.defaults, {
-				icon:       options.icon       || el.jqmData( "icon" ),
-				iconpos:    options.iconpos    || el.jqmData( "iconpos" ),
-				theme:      options.theme      || el.jqmData( "theme" ),
-				inline:     options.inline     || el.jqmData( "inline" ),
-				shadow:     options.shadow     || el.jqmData( "shadow" ),
-				corners:    options.corners    || el.jqmData( "corners" ),
-				iconshadow: options.iconshadow || el.jqmData( "iconshadow" )
+				icon:       options.icon       !== undefined ? options.icon       : el.jqmData( "icon" ),
+				iconpos:    options.iconpos    !== undefined ? options.iconpos    : el.jqmData( "iconpos" ),
+				theme:      options.theme      !== undefined ? options.theme      : el.jqmData( "theme" ),
+				inline:     options.inline     !== undefined ? options.inline     : el.jqmData( "inline" ),
+				shadow:     options.shadow     !== undefined ? options.shadow     : el.jqmData( "shadow" ),
+				corners:    options.corners    !== undefined ? options.corners    : el.jqmData( "corners" ),
+				iconshadow: options.iconshadow !== undefined ? options.iconshadow : el.jqmData( "iconshadow" )
 			}, options ),
 
 			// Classes Defined
