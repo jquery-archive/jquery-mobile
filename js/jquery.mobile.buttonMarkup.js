@@ -7,23 +7,30 @@
 ( function( $, undefined ) {
 
 $.fn.buttonMarkup = function( options ) {
-	return this.each( function() {
-		var el = $( this ),
+	options = options || {};
+
+	for ( var i = 0; i < this.length; i++ ) {
+		var el = this.eq( i ),
+			e = el[ 0 ],
 			o = $.extend( {}, $.fn.buttonMarkup.defaults, {
-				icon: el.jqmData( "icon" ),
-				iconpos: el.jqmData( "iconpos" ),
-				theme: el.jqmData( "theme" ),
-				inline: el.jqmData( "inline" ),
-				shadow: el.jqmData( "shadow" ),
-				corners: el.jqmData( "corners" ),
-				iconshadow: el.jqmData( "iconshadow" )
+				icon:       options.icon       || el.jqmData( "icon" ),
+				iconpos:    options.iconpos    || el.jqmData( "iconpos" ),
+				theme:      options.theme      || el.jqmData( "theme" ),
+				inline:     options.inline     || el.jqmData( "inline" ),
+				shadow:     options.shadow     || el.jqmData( "shadow" ),
+				corners:    options.corners    || el.jqmData( "corners" ),
+				iconshadow: options.iconshadow || el.jqmData( "iconshadow" )
 			}, options ),
 
 			// Classes Defined
 			innerClass = "ui-btn-inner",
 			textClass = "ui-btn-text",
 			buttonClass, iconClass,
-			wrap;
+
+			// Button inner markup
+			buttonInner = document.createElement( o.wrapperEls ),
+			buttonText = document.createElement( o.wrapperEls ),
+			buttonIcon = o.icon ? document.createElement( "span" ) : null;
 
 		if ( attachEvents ) {
 			attachEvents();
@@ -71,17 +78,30 @@ $.fn.buttonMarkup = function( options ) {
 		el.attr( "data-" + $.mobile.ns + "theme", o.theme )
 			.addClass( buttonClass );
 
-		wrap = ( "<D class='" + innerClass + "' aria-hidden='true'><D class='" + textClass + "'></D>" +
-			( o.icon ? "<span class='" + iconClass + "'></span>" : "" ) +
-			"</D>" ).replace( /D/g, o.wrapperEls );
+		buttonInner.className = innerClass;
+		buttonInner.setAttribute("aria-hidden", "true");
 
-		el.wrapInner( wrap );
+		buttonText.className = textClass;
+		buttonInner.appendChild( buttonText );
+
+		if ( buttonIcon ) {
+			buttonIcon.className = iconClass;
+			buttonInner.appendChild( buttonIcon );
+		}
+
+		while ( e.firstChild ) {
+			buttonText.appendChild( e.firstChild );
+		}
+
+		e.appendChild( buttonInner );
 		
 		// TODO obviously it would be nice to pull this element out instead of
 		// retrieving it from the DOM again, but this change is much less obtrusive
 		// and 1.0 draws nigh
-		el.data( 'textWrapper', el.find( "." + textClass ) );
-	});
+		el.data( 'textWrapper', $( buttonText ) );
+	}
+
+	return this;
 };
 
 $.fn.buttonMarkup.defaults = {
