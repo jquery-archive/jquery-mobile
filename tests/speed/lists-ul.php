@@ -1,23 +1,24 @@
-<!DOCTYPE html> 
-<html> 
+<!DOCTYPE html>
+<html>
 	<head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<title>jQuery Mobile Docs - Lists</title> 
-	<link rel="stylesheet"  href="../../css/themes/default/" /> 
-	<script src="../../js/jquery.js"></script>	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Docs - Lists</title>
+	<link rel="stylesheet"  href="../../css/themes/default/" />
+	<script src="../../js/jquery.js"></script>
+  <script type="text/javascript" src="stats/perf.js"></script>
 	<script src="../../js/"></script>
-</head> 
-<body> 
+</head>
+<body>
 
-<div  data-role="page">
+<div data-role="page" id="list-page">
 
 	<div  data-role="header">
 		<h1>400 item list</h1>
 	</div><!-- /header -->
 
 	<div  data-role="content" data-filter="true">
-		
+
 			<ul  data-role="listview"  data-theme="d">
 				<li><a href="index.html">Acura</a></li>
 				<li><a href="index.html">Audi</a></li>
