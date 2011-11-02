@@ -36,7 +36,7 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 			iconpos:	iconpos
 		});
 
-		$navbar.delegate( "a", "vclick", function( event ) {
+		$navbar.delegate( "a:not(.ui-disabled)", "vclick", function( event ) {
 			$navbtns.not( ".ui-state-persist" ).removeClass( $.mobile.activeBtnClass );
 			$( this ).addClass( $.mobile.activeBtnClass );
 		});
