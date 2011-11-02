@@ -53,6 +53,7 @@ $(":jqmData(role='page')").live("pageshow", function(event) {
 	// also handle the case where pages are loaded dynamically.
 
 	ResizePageContentHeight(event.target);
+	$.mobile.fixedToolbars.show( true, this );
 });
 
 $(window).bind("orientationchange", function(event) {
