@@ -174,7 +174,7 @@ nightly: pull zip
 	@@find ${VER} -type f -name '*.html' -exec sed -i 's|rel="stylesheet"  href="../|rel="stylesheet"  href="|g' {} \;
 
 	# Change the empty paths to the location of this nightly file
-	@@find ${VER} -type f -name '*.html' -exec sed -i 's|href="css/themes/${CSSTHME}/"|href="${NIGHTLY_WEBPATH}/${DIR}.min.css"|g' {} \;
+	@@find ${VER} -type f -name '*.html' -exec sed -i 's|href="css/themes/${CSSTHEME}/"|href="${NIGHTLY_WEBPATH}/${DIR}.min.css"|g' {} \;
 	@@find ${VER} -type f -name '*.html' -exec sed -i 's|src="js/jquery.js"|src="http://code.jquery.com/jquery-${JQUERY}.min.js"|' {} \;
 	@@find ${VER} -type f -name '*.html' -exec sed -i 's|src="js/"|src="${NIGHTLY_WEBPATH}/${DIR}.min.js"|g' {} \;
 
@@ -182,7 +182,7 @@ nightly: pull zip
 	@@mv ${VER} ${OUTPUT}/demos
 
 	# Copy the images as well
-	@@cp -R css/themes/${CSSTHME}/images ${OUTPUT}
+	@@cp -R css/themes/${CSSTHEME}/images ${OUTPUT}
 
 	@@${RMLATEST}
 	@@scp -r ${OUTPUT} jqadmin@code.origin.jquery.com:/var/www/html/code.jquery.com/mobile/${NIGHTLY_OUTPUT}
