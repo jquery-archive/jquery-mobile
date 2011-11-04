@@ -848,6 +848,9 @@
 					}
 
 					if ( newPageTitle && !page.jqmData( "title" ) ) {
+						if ( newPageTitle.indexOf( "&" ) ) {
+							newPageTitle = $( "<div>" + newPageTitle + "</div>" ).text();
+						}
 						page.jqmData( "title", newPageTitle );
 					}
 
