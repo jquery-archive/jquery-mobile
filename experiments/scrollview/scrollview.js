@@ -28,7 +28,7 @@ $(":jqmData(role='page')").live("pageshow", function(event) {
 		if ( $this.hasClass( "ui-scrolllistview" ) ) {
 			$this.scrolllistview();
 		} else {
-			var st = $this.jqmData("scroll") + "";
+			var st = $this.jqmData("scroll") + "",
 				paging = st && st.search(/^[xy]p$/) != -1;
 				dir = st && st.search(/^[xy]/) != -1 ? st.charAt(0) : null,
 
