@@ -43,7 +43,10 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		}
 
 		// TODO class has to be defined in markup
-		if ( item.add( find( ".ul-link-inherit" ) ).children('img').first().addClass( "ui-li-thumb" ).legnth ) {
+		var img1 = item.find( ".ul-link-inherit" ).children('img').first(),
+			img2 = item.children('img').first();
+			
+		if ( img1.add( img2 ).addClass( "ui-li-thumb" ).legnth ) {
 			item.addClass( $(this).is( ".ui-li-icon" ) ? "ui-li-has-icon" : "ui-li-has-thumb" );
 		}
 	},
