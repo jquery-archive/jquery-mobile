@@ -43,9 +43,9 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		}
 
 		// TODO class has to be defined in markup
-		item.find( ">img:eq(0), .ui-link-inherit>img:eq(0)" ).addClass( "ui-li-thumb" ).each(function() {
-				item.addClass( $(this).is( ".ui-li-icon" ) ? "ui-li-has-icon" : "ui-li-has-thumb" );
-			});
+		if ( item.add( find( ".ul-link-inherit" ) ).children('img').first().addClass( "ui-li-thumb" ).legnth ) {
+			item.addClass( $(this).is( ".ui-li-icon" ) ? "ui-li-has-icon" : "ui-li-has-thumb" );
+		}
 	},
 
 	_removeCorners: function( li, which ) {
