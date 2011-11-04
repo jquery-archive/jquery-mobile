@@ -43,9 +43,12 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		}
 
 		// TODO class has to be defined in markup
-		item.find( ">img:eq(0), .ui-link-inherit>img:eq(0)" ).addClass( "ui-li-thumb" ).each(function() {
-				item.addClass( $(this).is( ".ui-li-icon" ) ? "ui-li-has-icon" : "ui-li-has-thumb" );
-			});
+		var img1 = item.find( ".ul-link-inherit" ).children('img').first(),
+			img2 = item.children('img').first();
+			
+		if ( img1.add( img2 ).addClass( "ui-li-thumb" ).length ) {
+			item.addClass( $(this).is( ".ui-li-icon" ) ? "ui-li-has-icon" : "ui-li-has-thumb" );
+		}
 	},
 
 	_removeCorners: function( li, which ) {
