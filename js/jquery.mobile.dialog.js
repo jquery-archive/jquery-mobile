@@ -9,20 +9,15 @@
 $.widget( "mobile.dialog", $.mobile.widget, {
 	options: {
 		closeBtnText 	: "Close",
-		theme	: "a",
+		overlayTheme	: "a",
 		initSelector	: ":jqmData(role='dialog')"
 	},
 	_create: function() {
 		var self = this,
 			$el = this.element,
-			pageTheme = $el.attr( "class" ).match( /ui-body-[a-z]/ ),
 			headerCloseButton = $( "<a href='#' data-" + $.mobile.ns + "icon='delete' data-" + $.mobile.ns + "iconpos='notext'>"+ this.options.closeBtnText + "</a>" );
 
-		if( pageTheme.length ){
-			$el.removeClass( pageTheme[ 0 ] );
-		}
-
-		$el.addClass( "ui-body-" + this.options.theme );
+		$el.addClass( "ui-overlay-" + this.options.overlayTheme );
 
 		// Class the markup for dialog styling
 		// Set aria role
