@@ -33,8 +33,11 @@
 <ol id="qunit-tests">
 </ol>
 
-<div id="bar" data-nstest-role="page" data-nstest-theme="a">
-	<a href="#foo-dialog" id="foo-dialog-link" data-nstest-role="button"  data-nstest-inline="true" data-nstest-rel="dialog"></a>
+<div id="mypage" data-nstest-role="page" data-nstest-theme="a">
+	<a href="#foo-dialog" id="foo-dialog-link" data-nstest-role="button" data-nstest-inline="true" data-nstest-rel="dialog"></a>
+	<a href="#dialog-a" id="link-a" data-nstest-role="button" data-nstest-inline="true" data-nstest-rel="dialog">no theme set</a>
+	<a href="#dialog-b" id="link-b" data-nstest-role="button" data-nstest-inline="true" data-nstest-rel="dialog">data-theme set</a>
+	<a href="#dialog-c" id="link-c" data-nstest-role="button" data-nstest-inline="true" data-nstest-rel="dialog">data-theme & data-nstest-overlay-theme set</a>
 </div>
 
 <div id="foo-dialog" data-nstest-role="dialog" data-nstest-theme="b">
@@ -43,6 +46,42 @@
 	</div>
 	<div data-nstest-role="content" >
 		<a href="#" id="internal-link">foo</a>
+	</div>
+	<div data-nstest-role="footer">
+		footer
+	</div>
+</div>
+
+<div data-nstest-role="page" id="dialog-a">
+	<div data-nstest-role="header" data-nstest-position="inline">
+		<h1> No theme set </h1>
+	</div>
+	<div data-nstest-role="content">
+		 Some text here....
+	</div>
+	<div data-nstest-role="footer">
+		footer
+	</div>
+</div>
+
+<div data-nstest-role="page" data-nstest-theme="e" id="dialog-b">
+	<div data-nstest-role="header">
+		<h1> data-nstest-theme set </h1>
+	</div>
+	<div data-nstest-role="content">
+		 Some text here....
+	</div>
+	<div data-nstest-role="footer">
+		footer
+	</div>
+</div>
+
+<div data-nstest-role="page" id="dialog-c" data-nstest-overlay-theme="b" data-nstest-theme="e">
+	<div data-nstest-role="header">
+		<h1> data-nstest-theme & data-nstest-overlay-theme set </h1>
+	</div>
+	<div data-nstest-role="content">
+		 Some text here....
 	</div>
 	<div data-nstest-role="footer">
 		footer
