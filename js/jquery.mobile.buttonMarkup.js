@@ -135,7 +135,7 @@ var attachEvents = function() {
 			if ( btn ) {
 				$btn = $( btn );
 				theme = $btn.attr( "data-" + $.mobile.ns + "theme" );
-				$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-down-" + theme );
+				$btn.removeClass( "ui-btn-up-" + theme + " ui-btn-hover-" + theme ).addClass( "ui-btn-down-" + theme );
 			}
 		},
 		"vmousecancel vmouseup": function( event ) {
