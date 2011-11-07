@@ -21,11 +21,14 @@ $.widget( "mobile.button", $.mobile.widget, {
 	_create: function() {
 		var $el = this.element,
 			o = this.options,
-			type;
+			type,
+			name,
+			$buttonPlaceholder;
 
 		// Add ARIA role
 		this.button = $( "<div></div>" )
 			.text( $el.text() || $el.val() )
+			.insertBefore( $el )
 			.buttonMarkup({
 				theme: o.theme,
 				icon: o.icon,
@@ -35,28 +38,29 @@ $.widget( "mobile.button", $.mobile.widget, {
 				shadow: o.shadow,
 				iconshadow: o.iconshadow
 			})
-			.insertBefore( $el )
 			.append( $el.addClass( "ui-btn-hidden" ) );
 
-		// Add hidden input during submit
 		type = $el.attr( "type" );
+		name = $el.attr( "name" );
 
-		if ( type !== "button" && type !== "reset" ) {
+		// Add hidden input during submit if input type="submit" has a name.
+		if ( type !== "button" && type !== "reset" && name ) {
+				$el.bind( "vclick", function() {
+					// Add hidden input if it doesn’t already exist.
+					if( $buttonPlaceholder === undefined ) {
+						$buttonPlaceholder = $( "<input>", {
+									type: "hidden",
+									name: $el.attr( "name" ),
+									value: $el.attr( "value" )
+								})
+								.insertBefore( $el );
 
-			$el.bind( "vclick", function() {
-
-				var $buttonPlaceholder = $( "<input>", {
-							type: "hidden",
-							name: $el.attr( "name" ),
-							value: $el.attr( "value" )
-						})
-						.insertBefore( $el );
-
-				// Bind to doc to remove after submit handling
-				$( document ).submit(function(){
-					 $buttonPlaceholder.remove();
+						// Bind to doc to remove after submit handling
+						$( document ).submit(function(){
+							 $buttonPlaceholder.remove();
+						});
+					}
 				});
-			});
 		}
 
 		this.refresh();
@@ -75,19 +79,23 @@ $.widget( "mobile.button", $.mobile.widget, {
 	},
 
 	refresh: function() {
-		if ( this.element.attr( "disabled" ) ) {
+		var $el = this.element;
+
+		if ( $el.prop("disabled") ) {
 			this.disable();
 		} else {
 			this.enable();
 		}
+
+		// the textWrapper is stored as a data element on the button object
+		// to prevent referencing by it's implementation details (eg 'class')
+		this.button.data( 'textWrapper' ).text( $el.text() || $el.val() );
 	}
 });
 
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ){
-	$( $.mobile.button.prototype.options.initSelector, e.target )
-		.not( ":jqmData(role='none'), :jqmData(role='nojs')" )
-		.button();
+	$.mobile.button.prototype.enhanceWithin( e.target );
 });
 
 })( jQuery );

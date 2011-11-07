@@ -29,7 +29,7 @@ $('div').live('pagecreate',function(event){
 
 //collapse page navs after use
 $(function(){
-	$('body').delegate('.content-secondary .ui-collapsible-content', 'vclick',  function(){
+	$('body').delegate('.content-secondary .ui-collapsible-content', 'click',  function(){
 		$(this).trigger("collapse")
 	});
 });
@@ -48,8 +48,8 @@ function setDefaultTransition(){
 	$.mobile.defaultPageTransition = trans;
 }
 
-//set default documentation 
-$( document ).bind( "mobileinit", setDefaultTransition );
+
 $(function(){
+	setDefaultTransition();
 	$( window ).bind( "throttledresize", setDefaultTransition );
 });

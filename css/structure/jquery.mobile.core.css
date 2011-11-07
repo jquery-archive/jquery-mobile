@@ -1,0 +1,128 @@
+/*
+* jQuery Mobile Framework
+* Copyright (c) jQuery Project
+* Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
+*/
+
+/* some unsets - more probably needed */
+.ui-mobile, .ui-mobile body { height: 100%; }
+.ui-mobile fieldset, .ui-page { padding: 0; margin: 0; }
+.ui-mobile a img, .ui-mobile fieldset { border: 0; }
+
+/* responsive page widths */
+.ui-mobile-viewport {  margin: 0; overflow-x: hidden; -webkit-text-size-adjust: none; -ms-text-size-adjust:none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+/* Issue #2066 */
+form.ui-mobile-viewport { overflow-x: visible; }
+
+/* "page" containers - full-screen views, one should always be in view post-pageload */
+.ui-mobile [data-role=page], .ui-mobile [data-role=dialog], .ui-page { top: 0; left: 0; width: 100%; min-height: 100%; position: absolute; display: none; border: 0; }
+.ui-mobile .ui-page-active { display: block; overflow: visible; }
+
+/* on ios4, setting focus on the page element causes flashing during transitions when there is an outline, so we turn off outlines */
+.ui-page { outline: none; }
+
+/*orientations from js are available */
+@media screen and (orientation: portrait){
+.ui-mobile, .ui-mobile .ui-page { min-height: 420px; }
+}
+@media screen and (orientation: landscape){
+.ui-mobile, .ui-mobile .ui-page { min-height: 300px; }
+}
+
+/* native overflow scrolling */
+.ui-page.ui-mobile-touch-overflow,
+.ui-mobile-touch-overflow.ui-native-fixed .ui-content {
+	overflow: auto;
+	height: 100%;
+	-webkit-overflow-scrolling: touch;
+	-moz-overflow-scrolling: touch;
+	-o-overflow-scrolling: touch;
+	-ms-overflow-scrolling: touch;
+	overflow-scrolling: touch;
+}
+.ui-page.ui-mobile-touch-overflow,
+.ui-page.ui-mobile-touch-overflow * {
+	/* some level of transform keeps elements from blinking out of visibility on iOS */
+	-webkit-transform: rotateY(0);
+}
+.ui-page.ui-mobile-pre-transition {
+	display: block;
+}
+
+/* loading screen */
+.ui-loading .ui-mobile-viewport { overflow: hidden !important; }
+.ui-loading .ui-loader { display: block; }
+.ui-loading .ui-page { overflow: hidden;  }
+.ui-loader { display: none; position: absolute; opacity: .85; z-index: 100; left: 50%; width: 200px; margin-left: -130px; margin-top: -35px; padding: 10px 30px; }
+.ui-loader h1 { font-size: 15px; text-align: center; }
+.ui-loader .ui-icon { position: static; display: block; opacity: .9; margin: 0 auto; width: 35px; height: 35px; background-color: transparent; }
+
+/*fouc*/
+.ui-mobile-rendering > * { visibility: hidden; }
+
+/*headers, content panels*/
+.ui-bar, .ui-body { position: relative; padding: .4em 15px;  overflow: hidden; display: block;  clear:both;  }
+.ui-bar { font-size: 16px; margin: 0; }
+.ui-bar h1, .ui-bar h2, .ui-bar h3, .ui-bar h4, .ui-bar h5, .ui-bar h6 { margin: 0; padding: 0; font-size: 16px; display: inline-block; }
+
+.ui-header, .ui-footer { display: block; }
+.ui-page .ui-header, .ui-page .ui-footer { position: relative; }
+.ui-header .ui-btn-left { position: absolute; left: 10px; top: .4em;  }
+.ui-header .ui-btn-right { position: absolute; right: 10px; top: .4em; }
+.ui-header .ui-title, .ui-footer .ui-title { min-height: 1.1em; text-align: center; font-size: 16px; display: block; margin: .6em 90px .8em;  padding: 0;  text-overflow: ellipsis; overflow: hidden; white-space: nowrap; outline: 0 !important; }
+.ui-footer .ui-title { margin: .6em 15px .8em;  }
+
+/*content area*/
+.ui-content { border-width: 0; overflow: visible; overflow-x: hidden; padding: 15px; }
+.ui-page-fullscreen .ui-content { padding:0; }
+
+/* native fixed headers and footers */
+.ui-mobile-touch-overflow.ui-page.ui-native-fixed,
+.ui-mobile-touch-overflow.ui-page.ui-native-fullscreen {
+	overflow: visible;
+}
+.ui-mobile-touch-overflow.ui-native-fixed .ui-header,
+.ui-mobile-touch-overflow.ui-native-fixed .ui-footer {
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	z-index: 200;
+}
+.ui-mobile-touch-overflow.ui-page.ui-native-fixed .ui-footer {
+	top: auto;
+	bottom: 0;
+}
+.ui-mobile-touch-overflow.ui-native-fixed .ui-content {
+	padding-top: 2.5em;
+	padding-bottom: 3em;
+	top: 0;
+	bottom: 0;
+	height: auto;
+	position: absolute;
+}
+.ui-mobile-touch-overflow.ui-native-fullscreen .ui-content {
+	padding-top: 0;
+	padding-bottom: 0;
+}
+.ui-mobile-touch-overflow.ui-native-fullscreen .ui-header,
+.ui-mobile-touch-overflow.ui-native-fullscreen .ui-footer {
+	opacity: .9;
+}
+.ui-native-bars-hidden {
+	display: none;
+}
+
+/* icons sizing */
+.ui-icon { width: 18px; height: 18px; }
+
+/* fullscreen class on ui-content div */
+.ui-fullscreen {  }
+.ui-fullscreen img { max-width: 100%; }
+
+/* non-js content hiding */
+.ui-nojs { position: absolute; left: -9999px; }
+
+/* accessible content hiding */
+.ui-hide-label label,
+.ui-hidden-accessible { position: absolute !important; left: -9999px; clip: rect(1px 1px 1px 1px); clip: rect(1px,1px,1px,1px); }

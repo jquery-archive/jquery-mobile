@@ -4,11 +4,13 @@
 
 // TODO split out into seperate test files
 (function($){
+  var home = $.mobile.path.parseUrl( location.href ).pathname;
 
 	$.mobile.defaultTransition = "none";
-	module('Basic Linked list', {
+
+	module( "Basic Linked list", {
 		setup: function(){
-			$.testHelper.openPage("#basic-linked-test");
+			$.testHelper.openPage( "#basic-linked-test" );
 		}
 	});
 
@@ -48,6 +50,31 @@
 
 			function(){
 				ok($('#basic-linked-test').hasClass('ui-page-active'));
+				start();
+			}
+		]);
+	});
+
+	asyncTest( "Presence of ui-li-has- classes", function(){
+		$.testHelper.pageSequence( [
+			function() {
+				$.testHelper.openPage( "#ui-li-has-test" );
+			},
+
+			function() {
+				var page = $( ".ui-page-active" ),
+					items = page.find( "li" );
+
+				ok(  items.eq( 0 ).hasClass( "ui-li-has-count"), "First LI should have ui-li-has-count class" );
+				ok(  items.eq( 0 ).hasClass( "ui-li-has-arrow"), "First LI should have ui-li-has-arrow class" );
+				ok( !items.eq( 1 ).hasClass( "ui-li-has-count"), "Second LI should NOT have ui-li-has-count class" );
+				ok(  items.eq( 1 ).hasClass( "ui-li-has-arrow"), "Second LI should have ui-li-has-arrow class" );
+				ok( !items.eq( 2 ).hasClass( "ui-li-has-count"), "Third LI should NOT have ui-li-has-count class" );
+				ok( !items.eq( 2 ).hasClass( "ui-li-has-arrow"), "Third LI should NOT have ui-li-has-arrow class" );
+				ok(  items.eq( 3 ).hasClass( "ui-li-has-count"), "Fourth LI should have ui-li-has-count class" );
+				ok( !items.eq( 3 ).hasClass( "ui-li-has-arrow"), "Fourth LI should NOT have ui-li-has-arrow class" );
+				ok( !items.eq( 4 ).hasClass( "ui-li-has-count"), "Fifth LI should NOT have ui-li-has-count class" );
+				ok( !items.eq( 4 ).hasClass( "ui-li-has-arrow"), "Fifth LI should NOT have ui-li-has-arrow class" );
 				start();
 			}
 		]);
@@ -188,7 +215,7 @@
 	asyncTest( "changes to the read only page when hash is changed", function() {
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage("#read-only-list-test")
+				$.testHelper.openPage("#read-only-list-test");
 			},
 
 			function(){
@@ -296,33 +323,54 @@
 
 	asyncTest( "Filter downs results when the user enters information", function() {
 		var $searchPage = $(searchFilterId);
-		$.testHelper.openPage(searchFilterId);
+		$.testHelper.pageSequence([
+			function() {
+				$.testHelper.openPage(searchFilterId);
+			},
 
-		setTimeout(function(){
-			$searchPage.find('input').val('at');
-			$searchPage.find('input').trigger('change');
-		}, 500);
+			function() {
+				$searchPage.find('input').val('at');
+				$searchPage.find('input').trigger('change');
 
-		setTimeout(function() {
-			same($searchPage.find('li.ui-screen-hidden').length, 2);
-			start();
-		}, 1000);
+				same($searchPage.find('li.ui-screen-hidden').length, 2);
+				start();
+			}
+		]);
 	});
 
 	asyncTest( "Redisplay results when user removes values", function() {
 		var $searchPage = $(searchFilterId);
-		$.testHelper.openPage(searchFilterId);
+		$.testHelper.pageSequence([
+			function() {
+				$.testHelper.openPage(searchFilterId);
+			},
 
-		setTimeout(function(){
-			$searchPage.find('input').val('a');
-			$searchPage.find('input').trigger('change');
-		}, 500);
+			function() {
+				$searchPage.find('input').val('a');
+				$searchPage.find('input').trigger('change');
 
-		setTimeout(function() {
-			same($searchPage.find("li[style^='display: none;']").length, 0);
-			start();
-		}, 1000);
+				same($searchPage.find("li[style^='display: none;']").length, 0);
+				start();
+			}
+		]);
 	});
+
+    asyncTest( "Filter works fine with \\W- or regexp-special-characters", function() {
+        var $searchPage = $(searchFilterId);
+        $.testHelper.pageSequence([
+            function() {
+                $.testHelper.openPage(searchFilterId);
+            },
+
+            function() {
+                $searchPage.find('input').val('*');
+                $searchPage.find('input').trigger('change');
+
+                same($searchPage.find('li.ui-screen-hidden').length, 4);
+                start();
+            }
+        ]);
+    });
 
 	test( "Refresh applies thumb styling", function(){
 		var ul = $('.ui-page-active ul');
@@ -335,59 +383,115 @@
 
 	asyncTest( "Filter downs results and dividers when the user enters information", function() {
 		var	$searchPage = $("#search-filter-with-dividers-test");
-		$.testHelper.openPage("#search-filter-with-dividers-test");
+		$.testHelper.pageSequence([
+			function() {
+				$.testHelper.openPage("#search-filter-with-dividers-test");
+			},
 
-		// wait for the page to become active/enhanced
-		setTimeout(function(){
-			$searchPage.find('input').val('at');
-			$searchPage.find('input').trigger('change');
-		}, 500);
+			// wait for the page to become active/enhanced
+			function(){
+				$searchPage.find('input').val('at');
+				$searchPage.find('input').trigger('change');
+				setTimeout(function() {
+					//there should be four hidden list entries
+					same($searchPage.find('li.ui-screen-hidden').length, 4);
 
-		setTimeout(function() {
-			//there should be four hidden list entries
-			same($searchPage.find('li.ui-screen-hidden').length, 4);
+					//there should be two list entries that are list dividers and hidden
+					same($searchPage.find('li.ui-screen-hidden:jqmData(role=list-divider)').length, 2);
 
-			//there should be two list entries that are list dividers and hidden
-			same($searchPage.find('li.ui-screen-hidden:jqmData(role=list-divider)').length, 2);
-
-			//there should be two list entries that are not list dividers and hidden
-			same($searchPage.find('li.ui-screen-hidden:not(:jqmData(role=list-divider))').length, 2);
-			start();
-		}, 1000);
+					//there should be two list entries that are not list dividers and hidden
+					same($searchPage.find('li.ui-screen-hidden:not(:jqmData(role=list-divider))').length, 2);
+					start();
+				}, 1000);
+			}
+		]);
 	});
 
 	asyncTest( "Redisplay results when user removes values", function() {
-		$.testHelper.openPage("#search-filter-with-dividers-test");
+		$.testHelper.pageSequence([
+			function() {
+				$.testHelper.openPage("#search-filter-with-dividers-test");
+			},
 
-		// wait for the page to become active/enhanced
-		setTimeout(function(){
-			$('.ui-page-active input').val('a');
-			$('.ui-page-active input').trigger('change');
-		}, 500);
+			function() {
+				$('.ui-page-active input').val('a');
+				$('.ui-page-active input').trigger('change');
 
-		setTimeout(function() {
-			same($('.ui-page-active input').val(), 'a');
-			same($('.ui-page-active li[style^="display: none;"]').length, 0);
-			start();
-		}, 1000);
+				setTimeout(function() {
+					same($('.ui-page-active input').val(), 'a');
+					same($('.ui-page-active li[style^="display: none;"]').length, 0);
+					start();
+				}, 1000);
+			}
+		]);
 	});
 
 	asyncTest( "Dividers are hidden when preceding hidden rows and shown when preceding shown rows", function () {
-		$.testHelper.openPage("#search-filter-with-dividers-test");
-		var $page = $('.ui-page-active');
+		$.testHelper.pageSequence([
+			function() {
+				$.testHelper.openPage("#search-filter-with-dividers-test");
+			},
 
-		// wait for the page to become active/enhanced
-		setTimeout(function(){
-			$page.find('input').val('at');
-			$page.find('input').trigger('change');
-		}, 500);
+			function() {
+				var $page = $('.ui-page-active');
 
-		setTimeout(function() {
-			same($page.find('li:jqmData(role=list-divider):hidden').length, 2);
-			same($page.find('li:jqmData(role=list-divider):hidden + li:not(:jqmData(role=list-divider)):hidden').length, 2);
-			same($page.find('li:jqmData(role=list-divider):not(:hidden) + li:not(:jqmData(role=list-divider)):not([:hidden)').length, 2);
-			start();
-		}, 1000);
+				$page.find('input').val('at');
+				$page.find('input').trigger('change');
+
+				setTimeout(function() {
+					same($page.find('li:jqmData(role=list-divider):hidden').length, 2);
+					same($page.find('li:jqmData(role=list-divider):hidden + li:not(:jqmData(role=list-divider)):hidden').length, 2);
+					same($page.find('li:jqmData(role=list-divider):not(:hidden) + li:not(:jqmData(role=list-divider)):not([:hidden)').length, 2);
+					start();
+				}, 1000);
+			}
+		]);
+	});
+
+	asyncTest( "Inset List View should refresh corner classes after filtering", 4 * 2, function () {
+		var checkClasses = function() {
+			var $page = $( ".ui-page-active" ),
+				$li = $page.find( "li:visible" );
+			ok($li.first().hasClass( "ui-corner-top" ), $li.length+" li elements: First visible element should have class ui-corner-top");
+			ok($li.last().hasClass( "ui-corner-bottom" ), $li.length+" li elements: Last visible element should have class ui-corner-bottom");
+		};
+
+		$.testHelper.pageSequence([
+			function() {
+				$.testHelper.openPage("#search-filter-inset-test");
+			},
+
+			function() {
+				var $page = $('.ui-page-active');
+				$.testHelper.sequence([
+					function() {
+						checkClasses();
+
+						$page.find('input').val('man');
+						$page.find('input').trigger('change');
+					},
+
+					function() {
+						checkClasses();
+
+						$page.find('input').val('at');
+						$page.find('input').trigger('change');
+					},
+
+					function() {
+						checkClasses();
+
+						$page.find('input').val('catwoman');
+						$page.find('input').trigger('change');
+					},
+
+					function() {
+						checkClasses();
+						start();
+					}
+				], 50);
+			}
+		]);
 	});
 
 	module( "Programmatically generated list items", {
@@ -463,7 +567,7 @@
 
 	module("Rounded corners");
 
-	asyncTest("Top and bottom corners rounded in inset list", 10, function() {
+	asyncTest("Top and bottom corners rounded in inset list", 14, function() {
 		$.testHelper.pageSequence([
 			function() {
 				$.testHelper.openPage("#corner-rounded-test");
@@ -472,12 +576,22 @@
 			function() {
 				var ul = $('#corner-rounded-test ul');
 
-				for( var t = 0; t<5; t++){
+				for( var t = 0; t<3; t++){
 					ul.append("<li>Item " + t + "</li>");
 					ul.listview('refresh');
-					ok(ul.find("li").first().hasClass("ui-corner-top"), "First list item should have class ui-corner-top in list with " + ul.find("li").length + " item(s)");
-					ok(ul.find("li").last().hasClass("ui-corner-bottom"), "Last list item should have class ui-corner-bottom in list with " + ul.find("li").length + " item(s)");
+					equals(ul.find(".ui-corner-top").length, 1, "There should be only one element with class ui-corner-top");
+					equals(ul.find("li:visible").first()[0], ul.find(".ui-corner-top")[0], "First list item should have class ui-corner-top in list with " + ul.find("li").length + " item(s)");
+					equals(ul.find(".ui-corner-bottom").length, 1, "There should be only one element with class ui-corner-bottom");
+					equals(ul.find("li:visible").last()[0], ul.find(".ui-corner-bottom")[0], "Last list item should have class ui-corner-bottom in list with " + ul.find("li").length + " item(s)");
 				}
+
+				ul.find( "li" ).first().hide();
+				ul.listview( "refresh" );
+				equals(ul.find("li:visible").first()[0], ul.find(".ui-corner-top")[0], "First visible list item should have class ui-corner-top");
+
+				ul.find( "li" ).last().hide();
+				ul.listview( "refresh" );
+				equals(ul.find("li:visible").last()[0], ul.find(".ui-corner-bottom")[0], "Last visible list item should have class ui-corner-bottom");
 
 				start();
 			}
@@ -489,6 +603,8 @@
 		ok( $("#enhancetest").trigger("create").find(".ui-listview").length, "enhancements applied" );
 	});
 
+	module( "Cached Linked List" );
+
 	var findNestedPages = function(selector){
 		return $( selector + " #topmost" ).listview( 'childPages' );
 	};
@@ -497,7 +613,7 @@
 		$.testHelper.pageSequence([
 			function(){
 				//reset for relative url refs
-				$.testHelper.openPage( "#" + location.pathname );
+				$.testHelper.openPage( "#" + home );
 			},
 
 			function(){
@@ -506,7 +622,11 @@
 
 			function(){
 				ok( findNestedPages( "#uncached-nested-list" ).length > 0, "verify that there are nested pages" );
-				$.testHelper.openPage( "#" + location.pathname + "cache-tests/clear.html" );
+				$.testHelper.openPage( "#" + home );
+			},
+
+			function() {
+				$.testHelper.openPage( "#cache-tests/clear.html" );
 			},
 
 			function(){
@@ -521,7 +641,7 @@
 		$.testHelper.pageSequence([
 			function(){
 				//reset for relative url refs
-				$.testHelper.openPage( "#" + location.pathname );
+				$.testHelper.openPage( "#" + home );
 			},
 
 			function(){
@@ -530,7 +650,11 @@
 
 			function(){
 				ok( findNestedPages( "#cached-nested-list" ).length > 0, "verify that there are nested pages" );
-				$.testHelper.openPage( "#" + location.pathname + "cache-tests/clear.html" );
+				$.testHelper.openPage( "#" + home );
+			},
+
+			function() {
+				$.testHelper.openPage( "#cache-tests/clear.html" );
 			},
 
 			function(){
@@ -544,7 +668,7 @@
 		$.testHelper.pageSequence([
 			function(){
 				//reset for relative url refs
-				$.testHelper.openPage( "#" + location.pathname );
+				$.testHelper.openPage( "#" + home );
 			},
 
 			function(){
@@ -553,11 +677,89 @@
 
 			function(){
 				same( $("#cached-nested-list").length, 1 );
-				$.testHelper.openPage("#" + location.pathname + "cache-tests/clear.html");
+				$.testHelper.openPage( "#" + home );
+			},
+
+			function() {
+				$.testHelper.openPage( "#cache-tests/clear.html" );
 			},
 
 			function(){
 				same( $("#cached-nested-list").length, 1 );
+				start();
+			}
+		]);
+	});
+
+	asyncTest( "filterCallback can be altered after widget creation", function(){
+		var listPage = $( "#search-filter-test" );
+		expect( listPage.find("li").length );
+
+		$.testHelper.pageSequence( [
+			function(){
+				//reset for relative url refs
+				$.testHelper.openPage( "#" + home );
+			},
+
+			function() {
+				$.testHelper.openPage( "#search-filter-test" );
+			},
+
+			function() {
+				// set the listview instance callback
+				listPage.find( "ul" ).listview( "option", "filterCallback", function() {
+					ok(true, "custom callback invoked");
+				});
+
+				// trigger a change in the search filter
+				listPage.find( "input" ).val( "foo" ).trigger( "change" );
+
+				//NOTE beware a poossible issue with timing here
+				start();
+			}
+		]);
+	});
+
+	asyncTest( "nested pages hash key is always in the hash (replaceState)", function(){
+		$.testHelper.pageSequence([
+			function(){
+				//reset for relative url refs
+				$.testHelper.openPage( "#" + home );
+			},
+
+			function(){
+				// https://github.com/jquery/jquery-mobile/issues/1617
+				$.testHelper.openPage("#nested-lists-test");
+			},
+
+			function(){
+				// Click on the link of the third li element
+				$('.ui-page-active li:eq(2) a:eq(0)').click();
+			},
+
+			function(){
+				ok( location.hash.search($.mobile.subPageUrlKey) >= 0 );
+				start();
+			}
+		]);
+	});
+
+	asyncTest( "embedded listview page with nested pages is not removed from the dom", function() {
+		$.testHelper.pageSequence([
+			function() {
+				// open the nested list page
+				same( $("div#nested-list-test").length, 1 );
+				$( "a#nested-list-test-anchor" ).click();
+			},
+
+			function() {
+				// go back to the origin page
+				window.history.back();
+			},
+
+			function() {
+				// make sure the page is still in place
+				same( $("div#nested-list-test").length, 1 );
 				start();
 			}
 		]);

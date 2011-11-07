@@ -57,6 +57,8 @@
 
 	//data tests
 	test( "$.fn.jqmData and $.fn.jqmRemoveData methods are working properly", function(){
+		var data;
+
 		same( $("body").jqmData("foo", true), $("body"), "setting data returns the element" );
 
 		same( $("body").jqmData("foo"), true, "getting data returns the right value" );
@@ -65,11 +67,15 @@
 
 		same( $("body").jqmData("foo", undefined), true, "getting data still returns the value if there's an undefined second arg" );
 
-		same( $("body").jqmData(), { "nstestFoo": true}, "passing no arguments returns a hash with all set properties" );
+		data = $.extend( {}, $("body").data() );
+		delete data[ $.expando ]; //discard the expando for that test
+		same( data , { "nstestFoo": true }, "passing .data() no arguments returns a hash with all set properties" );
 
-		same( $("body").jqmData(undefined), { "nstestFoo": true}, "passing a single undefined argument returns a hash with all set properties" );
+		same( $("body").jqmData(), undefined, "passing no arguments returns undefined" );
 
-		same( $("body").jqmData(undefined, undefined), {"nstestFoo": true}, "passing 2 undefined arguments returns a hash with all set properties" );
+		same( $("body").jqmData(undefined), undefined, "passing a single undefined argument returns undefined" );
+
+		same( $("body").jqmData(undefined, undefined), undefined, "passing 2 undefined arguments returns undefined" );
 
 		same( $("body").jqmRemoveData("foo"), $("body"), "jqmRemoveData returns the element" );
 
@@ -87,11 +93,11 @@
 
 		same( $.jqmData(document.body, "foo", undefined), true, "getting data still returns the value if there's an undefined second arg" );
 
-		same( $.jqmData(document.body), { "nstestFoo": true}, "passing no arguments returns a hash with all set properties" );
+		same( $.jqmData(document.body), undefined, "passing no arguments returns undefined" );
 
-		same( $.jqmData(document.body, undefined), { "nstestFoo": true}, "passing a single undefined argument returns a hash with all set properties" );
+		same( $.jqmData(document.body, undefined), undefined, "passing a single undefined argument returns undefined" );
 
-		same( $.jqmData(document.body, undefined, undefined), {"nstestFoo": true}, "passing 2 undefined arguments returns a hash with all set properties" );
+		same( $.jqmData(document.body, undefined, undefined), undefined, "passing 2 undefined arguments returns undefined" );
 
 		same( $.jqmRemoveData(document.body, "foo"), undefined, "jqmRemoveData returns the undefined value" );
 
@@ -99,10 +105,22 @@
 
 	});
 
-	test( "jqmHasData method is working properly", function(){
-		same( $.jqmHasData(document.body, "foo"), false, "body has no data defined under 'foo'" );
-		$.jqmData(document.body, "foo", true);
-		same( $.jqmHasData(document.body, "foo"), true, "after setting, body has data defined under 'foo' equal to true" );
-		$.jqmRemoveData(document.body, "foo");
+	test( "addDependents works properly", function() {
+		same( $("#parent").jqmData('dependents'), undefined );
+		$( "#parent" ).addDependents( $("#dependent") );
+		same( $("#parent").jqmData('dependents').length, 1 );
+	});
+
+	test( "removeWithDependents removes the parent element and ", function(){
+		$( "#parent" ).addDependents( $("#dependent") );
+		same($( "#parent, #dependent" ).length, 2);
+		$( "#parent" ).removeWithDependents();
+		same($( "#parent, #dependent" ).length, 0);
+	});
+
+	test( "$.fn.getEncodedText should return the encoded value where $.fn.text doesn't", function() {
+		same( $("#encoded").text(), "foo>");
+		same( $("#encoded").getEncodedText(), "foo&gt;");
+		same( $("#unencoded").getEncodedText(), "foo");
 	});
 })(jQuery);

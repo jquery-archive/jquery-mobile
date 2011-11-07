@@ -27,23 +27,23 @@
 		ok( !button.hasClass( "ui-checkbox-on" ), "no active styles after click" );
 	});
 
-    test( "clicking a checkbox within a controlgroup does not affect checkboxes with the same name in the same controlgroup", function(){
-        var input1 = $("#checkbox-31");
-        var button1 = input1.parent().find(".ui-btn");
-        var input2 = $("#checkbox-32");
-        var button2 = input2.parent().find(".ui-btn");
+	test( "clicking a checkbox within a controlgroup does not affect checkboxes with the same name in the same controlgroup", function(){
+		var input1 = $("#checkbox-31");
+		var button1 = input1.parent().find(".ui-btn");
+		var input2 = $("#checkbox-32");
+		var button2 = input2.parent().find(".ui-btn");
 
-        ok(!input1.attr("checked"), "input1 not checked before click");
-        ok(!input2.attr("checked"), "input2 not checked before click");
+		ok(!input1.attr("checked"), "input1 not checked before click");
+		ok(!input2.attr("checked"), "input2 not checked before click");
 
-        button1.trigger("click");
-        ok(input1.attr("checked"), "input1 checked after click on input1");
-        ok(!input2.attr("checked"), "input2 not checked after click on input1");
+		button1.trigger("click");
+		ok(input1.attr("checked"), "input1 checked after click on input1");
+		ok(!input2.attr("checked"), "input2 not checked after click on input1");
 
-        button2.trigger("click");
-        ok(input1.attr("checked"), "input1 not changed after click on input2");
-        ok(input2.attr("checked"), "input2 checked after click on input2");
-    });
+		button2.trigger("click");
+		ok(input1.attr("checked"), "input1 not changed after click on input2");
+		ok(input2.attr("checked"), "input2 checked after click on input2");
+	});
 
 	asyncTest( "change events fired on checkbox for both check and uncheck", function(){
 		var $checkbox = $( "#checkbox-2" ),
@@ -51,16 +51,16 @@
 
 		$checkbox.unbind( "change" );
 
-		expect( 2 );
+		expect( 1 );
 
-		$checkbox.change(function(){
+		$checkbox.one('change', function(){
 			ok( true, "change fired on click to check the box" );
 		});
 
 		$checkboxLabel.trigger( "click" );
 
 		//test above will be triggered twice, and the start here once
-		$checkbox.change( function(){
+		$checkbox.one('change', function(){
 			start();
 		});
 
@@ -80,11 +80,11 @@
 			},
 
 			function(){
-				ok( $radioBtns.last().attr( 'checked' ) );
+				ok( $radioBtns.last().prop( 'checked' ) );
 				ok( $radioBtns.last().siblings( 'label' ).hasClass( 'ui-radio-on' ),
 					"last input label is an active button" );
 
-				ok( !$radioBtns.first().attr( 'checked' ) );
+				ok( !$radioBtns.first().prop( 'checked' ) );
 				ok( !$radioBtns.first().siblings( 'label' ).hasClass( 'ui-radio-on' ),
 					"first input label is not active" );
 
@@ -94,11 +94,11 @@
 			},
 
 			function(){
-				ok( $radioBtns.first().attr( 'checked' ));
+				ok( $radioBtns.first().prop( 'checked' ));
 				ok( $radioBtns.first().siblings( 'label' ).hasClass( 'ui-radio-on' ),
 					"first input label is an active button" );
 
-				ok( !$radioBtns.last().attr( 'checked' ));
+				ok( !$radioBtns.last().prop( 'checked' ));
 				ok( !$radioBtns.last().siblings( 'label' ).hasClass( 'ui-radio-on' ),
 					"last input label is not active" );
 
@@ -109,11 +109,37 @@
 		], 500);
 
 	});
-	
+
 	test( "checkboxradio controls will create when inside a container that receives a 'create' event", function(){
 		ok( !$("#enhancetest").appendTo(".ui-page-active").find(".ui-checkbox").length, "did not have enhancements applied" );
 		ok( $("#enhancetest").trigger("create").find(".ui-checkbox").length, "enhancements applied" );
 	});
-	
-	
+
+	$.mobile.page.prototype.options.keepNative = "input.should-be-native";
+
+	// not testing the positive case here since's it's obviously tested elsewhere
+	test( "checkboxradio elements in the keepNative set shouldn't be enhanced", function() {
+		ok( !$("input.should-be-native").parent().is("div.ui-checkbox") );
+	});
+
+	asyncTest( "clicking the label triggers a click on the element", function() {
+		var clicked = false;
+
+		expect( 1 );
+
+		$( "#checkbox-click-triggered" ).one('click', function() {
+			clicked = true;
+		});
+
+		$.testHelper.sequence([
+			function() {
+				$( "[for='checkbox-click-triggered']" ).click();
+			},
+
+			function() {
+				ok(clicked, "click was fired on input");
+				start();
+			}
+		], 2000);
+	});
 })(jQuery);

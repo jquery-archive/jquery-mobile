@@ -13,6 +13,8 @@
     closedir($handle);
   }
 
-  sort($directories);
-  echo json_encode( array('directories' => $directories ));
+  $test_pages = array_merge($directories, glob("**/*-tests.html"));
+  sort($test_pages);
+
+  echo '{ "testPages":["' . implode( '","', $test_pages ) . '"]}';
 ?>

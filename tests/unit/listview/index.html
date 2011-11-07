@@ -9,11 +9,13 @@
 	<script src="../jquery.setNameSpace.js"></script>
 	<script src="../../../js/"></script>
 	<script src="../../jquery.testHelper.js"></script>
-	<link rel="stylesheet"  href="../../../themes/default" />
+	<link rel="stylesheet"  href="../../../css/themes/default" />
 	<link rel="stylesheet" href="../../../external/qunit.css"/>
 	<script src="../../../external/qunit.js"></script>
 
 	<script src="listview_core.js"></script>
+
+	<script src="../swarminject.js"></script>
 </head>
 <body>
 
@@ -33,6 +35,7 @@
 			<li><a href="#basic-link-results">Home</a></li>
 			<li><a href="#basic-link-results">Back</a></li>
 			<li><a href="#basic-link-results">Return</a></li>
+			<li><a href="#nested-list-test" id="nested-list-test-anchor">Nested List Test</a></li>
 		</ul>
 	</div>
   <a href="cache-tests/nested.html" id="cached-tests"></a>
@@ -242,6 +245,21 @@
 	</div>
 </div>
 
+<!-- Search bar filter inset -->
+<div data-nstest-role="page" id='search-filter-inset-test'>
+	<div data-nstest-role="header" data-nstest-position="inline">
+		<h1>Inset Filter List View</h1>
+	</div>
+	<div data-nstest-role="content">
+		<ul data-nstest-role="listview" data-nstest-filter="true" data-nstest-inset="true">
+			<li>a is for aquaman</li>
+			<li>b is for batman</li>
+			<li>c is for catwoman</li>
+			<li>d is for darkwing</li>
+		</ul>
+	</div>
+</div>
+
 <!-- Programmatically generated list items !-->
 <div data-nstest-role="page" id="programmatically-generated-list">
 	<ul data-nstest-role="listview" data-nstest-inset="true" id="programmatically-generated-list-items"></ul>
@@ -279,6 +297,21 @@
 		<li><a href="#basic-link-results">Back</a></li>
 		<li><a href="#basic-link-results">Return</a></li>
 	</ul>
+</div>
+
+<div data-nstest-role="page" id="ui-li-has-test">
+  <div data-nstest-role="content">
+	<p>Right padding on item 1 is OK (75px).</p>
+	<p>Right padding on items 2 &amp; 3 should probably be around 30 or 35 (not 25).</p>
+	<p>Right padding on item 4 should be 15px to match the left side.</p>
+	<ol data-nstest-role="listview" data-nstest-inset="true">
+	  <li><a href="#">Link LI with counter --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------<span class="ui-li-count">123</span></a></li>
+	  <li><a href="#">Link LI without counter -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</a></li>
+	  <li><a href="#page1">Page1 Link LI without counter -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</a><a href="#page2"></a></li>
+	  <li>Static LI with counter ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------<span class="ui-li-count">123</span></li>
+	  <li>Static LI without counter ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</li>
+	</ol>
+  </div>
 </div>
 
 </body>

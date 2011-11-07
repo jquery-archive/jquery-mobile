@@ -10,19 +10,28 @@
 $.widget( "mobile.page", $.mobile.widget, {
 	options: {
 		theme: "c",
-		domCache: false
+		domCache: false,
+		keepNativeDefault: ":jqmData(role='none'), :jqmData(role='nojs')"
 	},
 
 	_create: function() {
-		var $elem = this.element,
-			o = this.options;
 
-		if ( this._trigger( "beforeCreate" ) === false ) {
-			return;
+		this._trigger( "beforecreate" );
+
+		this.element
+			.attr( "tabindex", "0" )
+			.addClass( "ui-page ui-body-" + this.options.theme );
+	},
+
+	keepNativeSelector: function() {
+		var options = this.options,
+			keepNativeDefined = options.keepNative && $.trim(options.keepNative);
+
+		if( keepNativeDefined && options.keepNative !== options.keepNativeDefault ){
+			return [options.keepNative, options.keepNativeDefault].join(", ");
 		}
 
-		$elem.addClass( "ui-page ui-body-" + o.theme );
+		return options.keepNativeDefault;
 	}
 });
-
 })( jQuery );

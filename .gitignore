@@ -10,3 +10,6 @@ compiled/
 gitstatus.log
 refreshCDN
 .vagrant
+*.swp
+.gitignore
+tests/speed/stats/stats.db

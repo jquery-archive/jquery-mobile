@@ -1,6 +1,6 @@
 <?php
-$type = "text/javascript";
-$elements = array(
+$type = 'text/javascript';
+$files = array(
 	'jquery.ui.widget.js',
 	'jquery.mobile.widget.js',
 	'jquery.mobile.media.js',
@@ -11,8 +11,9 @@ $elements = array(
 	'jquery.mobile.page.js',
 	'jquery.mobile.core.js',
 	'jquery.mobile.navigation.js',
+	'jquery.mobile.navigation.pushstate.js',
 	'jquery.mobile.transition.js',
-	'jquery.mobile.degradeInputs.js',	
+	'jquery.mobile.degradeInputs.js',
 	'jquery.mobile.dialog.js',
 	'jquery.mobile.page.sections.js',
 	'jquery.mobile.collapsible.js',
@@ -26,13 +27,14 @@ $elements = array(
 	'jquery.mobile.forms.button.js',
 	'jquery.mobile.forms.slider.js',
 	'jquery.mobile.forms.textinput.js',
+	'jquery.mobile.forms.select.custom.js',
 	'jquery.mobile.forms.select.js',
 	'jquery.mobile.buttonMarkup.js',
 	'jquery.mobile.controlGroup.js',
 	'jquery.mobile.links.js',
 	'jquery.mobile.fixHeaderFooter.js',
-	'jquery.mobile.media.classes.js',
+	'jquery.mobile.fixHeaderFooter.native.js',
 	'jquery.mobile.init.js'
 );
 
-include('../combine.php');
+require_once('../combine.php');

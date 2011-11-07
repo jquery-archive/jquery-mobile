@@ -25,7 +25,7 @@
 		teardown: function(){
 			$.extend = extendFn;
 
-			// NOTE reset for pageLoading tests
+			// NOTE reset for showPageLoadingMsg/hidePageLoadingMsg tests
 			$('.ui-loader').remove();
 
 			// clear the classes added by reloading the init
@@ -147,10 +147,10 @@
 			same($("#bar").jqmData('url'), "bak");
 		});
 
-		asyncTest( "pageLoading doesn't add the dialog to the page when loading message is false", function(){
+		asyncTest( "showPageLoadingMsg doesn't add the dialog to the page when loading message is false", function(){
 			expect( 1 );
 			$.mobile.loadingMessage = false;
-			$.mobile.pageLoading(false);
+			$.mobile.showPageLoadingMsg();
 
 			setTimeout(function(){
 				ok(!$(".ui-loader").length, "no ui-loader element");
@@ -158,10 +158,10 @@
 			}, 500);
 		});
 
-		asyncTest( "pageLoading doesn't add the dialog to the page when done is passed as true", function(){
+		asyncTest( "hidePageLoadingMsg doesn't add the dialog to the page when loading message is false", function(){
 			expect( 1 );
 			$.mobile.loadingMessage = true;
-			$.mobile.pageLoading(true);
+			$.mobile.hidePageLoadingMsg();
 
 			setTimeout(function(){
 				same($(".ui-loading").length, 0, "page should not be in the loading state");
@@ -169,10 +169,10 @@
 			}, 500);
 		});
 
-		asyncTest( "pageLoading adds the dialog to the page when done is true", function(){
+		asyncTest( "showPageLoadingMsg adds the dialog to the page when loadingMessage is true", function(){
 			expect( 1 );
 			$.mobile.loadingMessage = true;
-			$.mobile.pageLoading(false);
+			$.mobile.showPageLoadingMsg();
 
 			setTimeout(function(){
 				same($(".ui-loading").length, 1, "page should be in the loading state");
@@ -183,7 +183,7 @@
 		asyncTest( "page loading should contain default loading message", function(){
 			expect( 1 );
 			reloadCoreNSandInit();
-			$.mobile.pageLoading(false);
+			$.mobile.showPageLoadingMsg();
 
 			setTimeout(function(){
 				same($(".ui-loader h1").text(), "loading");
@@ -194,7 +194,7 @@
 		asyncTest( "page loading should contain custom loading message", function(){
 			$.mobile.loadingMessage = "foo";
 			$.testHelper.reloadLib(libName);
-			$.mobile.pageLoading(false);
+			$.mobile.showPageLoadingMsg();
 
 			setTimeout(function(){
 				same($(".ui-loader h1").text(), "foo");
@@ -204,7 +204,7 @@
 		
 		asyncTest( "page loading should contain custom loading message when set during runtime", function(){
 			$.mobile.loadingMessage = "bar";
-			$.mobile.pageLoading(false);
+			$.mobile.showPageLoadingMsg();
 
 			setTimeout(function(){
 				same($(".ui-loader h1").text(), "bar");

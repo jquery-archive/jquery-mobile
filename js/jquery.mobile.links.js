@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework : "fieldcontain" plugin - simple class additions to make form row separators
+* jQuery Mobile Framework : "links" plugin - simple class additions for links
 * Copyright (c) jQuery Project
 * Dual licensed under the MIT or GPL Version 2 licenses.
 * http://jquery.org/license

@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<title>jQuery Mobile Docs - Sample form response</title> 
-	<link rel="stylesheet"  href="../../themes/default/" />  
+	<link rel="stylesheet"  href="../../css/themes/default/" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 	<script src="../../js/jquery.js"></script>
 	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
@@ -27,12 +27,15 @@
 			
 			<h2>You Chose:</h2>
 
-
+			<div class="ui-body ui-body-d ui-corner-all">
 
 			<?php
 				echo "<p> " . $_REQUEST['shipping'] . "</p>";
 			?>
-
+			
+			</div>
+			
+			<a href="forms-sample.html" data-role="button" data-theme="b" data-icon="arrow-l">Change shipping method</a>
 
 	</form>
 	
@@ -40,7 +43,7 @@
 	
 	<div class="content-secondary">
 		
-		<div data-role="collapsible" data-collapsed="true" data-theme="b">
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
 			
 				<h3>More in this section</h3>
 				
@@ -49,17 +52,17 @@
 					<li data-role="list-divider">Form elements</li>
 					<li><a href="docs-forms.html">Form basics</a></li>
 					<li><a href="forms-all.html">Form element gallery</a></li>
-					<li><a href="texts/index.html">Text inputs</a></li>
-					<li><a href="forms-search.html">Search inputs</a></li>
-					<li><a href="forms-slider.html">Slider</a></li>
-					<li><a href="forms-switch.html">Flip toggle switch</a></li>
-					<li><a href="forms-radiobuttons.html">Radio buttons</a></li>
-					<li><a href="forms-checkboxes.html">Checkboxes</a></li>
+					<li><a href="textinputs/">Text inputs</a></li>
+					<li><a href="search/">Search inputs</a></li>
+					<li><a href="slider/">Slider</a></li>
+					<li><a href="switch/">Flip toggle switch</a></li>
+					<li><a href="radiobuttons/">Radio buttons</a></li>
+					<li><a href="checkboxes/">Checkboxes</a></li>
 					<li><a href="forms-selects.html">Select menus</a></li>
 					<li><a href="forms-themes.html">Theming forms</a></li>
 					<li><a href="forms-all-native.html">Native form elements</a></li>
 					<li data-theme="a"><a href="forms-sample.html">Submitting forms</a></li>
-					<li><a href="plugin-eventsmethods.html">Plugin methods</a></li>
+					
 	
 				</ul>
 		</div>
