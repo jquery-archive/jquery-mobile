@@ -1,12 +1,24 @@
-function ResizePageContentHeight(page) {
-	var $page = $(page),
-		$content = $page.children( ".ui-content" ),
-		hh = $page.children( ".ui-header" ).outerHeight() : 0,
-		fh = $page.children( ".ui-footer" ).outerHeight() : 0,
-		pt = parseFloat($content.css( "padding-top" )),
-		pb = parseFloat($content.css( "padding-bottom" )),
-		wh = window.innerHeight;
-		
+function ResizePageContentHeight(page)
+{
+	var $page = $(page);
+	var $content = $page.children(".ui-content");
+  var header = $page.children(".ui-header");
+  if (!header.get(0))
+  {
+    header = $(".ui-mobile-viewport").children(".ui-header");
+  }
+	var hh = $page.children(".ui-header").outerHeight(); hh = hh ? hh : 0;
+
+  var footer = $page.children(".ui-footer");
+  if (!footer.get(0))
+  {
+    footer = $(".ui-mobile-viewport").children(".ui-footer");
+  }
+  var fh = footer.outerHeight(); fh = fh ? fh : 0;
+
+	var pt = parseFloat($content.css("padding-top"));
+	var pb = parseFloat($content.css("padding-bottom"));
+	var wh = window.innerHeight;
 	$content.height(wh - (hh + fh) - (pt + pb));
 }
 
