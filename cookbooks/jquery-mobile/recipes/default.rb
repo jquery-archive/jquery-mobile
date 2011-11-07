@@ -2,6 +2,9 @@ require_recipe "apt"
 require_recipe "apache2::mod_php5"
 require_recipe "apache2::mod_expires"
 
+# install the sqlite support module
+package "php5-sqlite"
+
 #--------------------------------------------------------------------------------
 # Apache
 #--------------------------------------------------------------------------------
