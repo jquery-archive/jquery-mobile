@@ -9,6 +9,8 @@ window.Perf = (function($, Perf) {
 		report: function( data, after ) {
 			var self = this;
 
+			data.pathname = location.pathname;
+
 			$.post( self.reportUrl, data, after );
 		},
 
