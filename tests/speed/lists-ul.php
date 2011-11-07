@@ -7,6 +7,7 @@
 	<link rel="stylesheet"  href="../../css/themes/default/" />
 	<script src="../../js/jquery.js"></script>
   <script type="text/javascript" src="stats/perf.js"></script>
+  <script type="text/javascript" src="stats/startup.js"></script>
 	<script src="../../js/"></script>
 </head>
 <body>
