@@ -40,7 +40,7 @@ $.widget("mobile.popup", $.mobile.widget, {
 
 		// Assign the relevant parts of the proto
 		for (var key in ui)
-			ui[key] = $(proto).find(ui[key]).removeAttr("id");
+			ui[key] = proto.find(ui[key]).removeAttr("id");
 
 		// Apply the proto
 		thisPage.append(ui.screen);
