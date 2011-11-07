@@ -748,7 +748,17 @@
 		// to the first page and refers to non-existent embedded page, error out.
 		if ( page.length === 0 ) {
 			if ( $.mobile.firstPage && path.isFirstPageUrl( fileUrl ) ) {
-				page = $( $.mobile.firstPage );
+				// Check to make sure our cached-first-page is actually
+				// in the DOM. Some user deployed apps are pruning the first
+				// page from the DOM for various reasons, we check for this
+				// case here because we don't want a first-page with an id
+				// falling through to the non-existent embedded page error
+				// case. If the first-page is not in the DOM, then we let
+				// things fall through to the ajax loading code below so
+				// that it gets reloaded.
+				if ( $.mobile.firstPage.parent().length ) {
+					page = $( $.mobile.firstPage );
+				}
 			} else if ( path.isEmbeddedPage( fileUrl )  ) {
 				deferred.reject( absUrl, options );
 				return deferred.promise();
@@ -848,6 +858,9 @@
 					}
 
 					if ( newPageTitle && !page.jqmData( "title" ) ) {
+						if ( ~newPageTitle.indexOf( "&" ) ) {
+							newPageTitle = $( "<div>" + newPageTitle + "</div>" ).text();
+						}
 						page.jqmData( "title", newPageTitle );
 					}
 

@@ -1043,4 +1043,77 @@
 			}
 		]);
 	});
+
+	asyncTest( "first page gets reloaded if pruned from the DOM", function(){
+		var hideCallbackTriggered = false;
+
+		function hideCallback( e, data )
+		{
+			var page = e.target;
+			ok( ( page === $.mobile.firstPage[ 0 ] ), "hide called with prevPage set to firstPage");
+	  		if ( page === $.mobile.firstPage[ 0 ] ) {
+				 $( page ).remove();
+			}
+			hideCallbackTriggered = true;
+		}
+
+		$(document).bind('pagehide', hideCallback);
+
+		$.testHelper.pageSequence([
+			function(){
+				// Make sure the first page is actually in the DOM.
+				ok( $.mobile.firstPage.parent().length !== 0, "first page is currently in the DOM" );
+
+				// Make sure the first page is the active page.
+				ok( $.mobile.activePage[ 0 ] === $.mobile.firstPage[ 0 ], "first page is the active page" );
+
+				// Now make sure the first page has an id that we can use to reload it.
+				ok( $.mobile.firstPage[ 0 ].id, "first page has an id" );
+
+				// Make sure there is only one first page in the DOM.
+				same( $( ".first-page" ).length, 1, "only one instance of the first page in the DOM" );
+
+				// Navigate to any page except the first page of the application.
+				$.testHelper.openPage("#foo");
+			},
+
+			function(){
+				// Make sure the active page is #foo.
+				ok( $.mobile.activePage[ 0 ] === $( "#foo" )[ 0 ], "navigated successfully to #foo" );
+
+				// Make sure our hide callback was triggered.
+				ok( hideCallbackTriggered, "hide callback was triggered" );
+
+				// Make sure the first page was actually pruned from the document.
+				ok( $.mobile.firstPage.parent().length === 0, "first page was pruned from the DOM" );
+				same( $( ".first-page" ).length, 0, "no instance of the first page in the DOM" );
+
+				// Remove our hideCallback.
+				$(document).unbind('pagehide', hideCallback);
+
+				// Navigate back to the first page!
+				$.testHelper.openPage( "#" + $.mobile.firstPage[0].id );
+			},
+
+			function(){
+				var firstPage = $( ".first-page" );
+
+				// We should only have one first page in the document at any time!
+				same( firstPage.length, 1, "single instance of first page recreated in the DOM" );
+
+				// Make sure the first page in the DOM is actually a different DOM element than the original
+				// one we started with.
+				ok( $.mobile.firstPage[ 0 ] !== firstPage[ 0 ], "first page is a new DOM element");
+
+				// Make sure we actually navigated to the new first page.
+				ok( $.mobile.activePage[ 0 ] === firstPage[ 0 ], "navigated successfully to new first-page");
+
+				// Reset the $.mobile.firstPage	for subsequent tests.
+				// XXX: Should we just get rid of the new one and restore the old?
+				$.mobile.firstPage = $.mobile.activePage;
+
+				start();
+			}
+		]);
+	});
 })(jQuery);

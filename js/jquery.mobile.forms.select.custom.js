@@ -17,14 +17,14 @@
 			isMultiple = widget.isMultiple = widget.select[ 0 ].multiple,
 			buttonId = selectID + "-button",
 			menuId = selectID + "-menu",
-			menuPage = $( "<div data-" + $.mobile.ns + "role='dialog' data-" +$.mobile.ns + "theme='"+ widget.options.overlayTheme +"'>" +
+			menuPage = $( "<div data-" + $.mobile.ns + "role='dialog' data-" +$.mobile.ns + "theme='"+ widget.options.theme +"' data-" +$.mobile.ns + "overlay-theme='"+ widget.options.overlayTheme +"'>" +
 				"<div data-" + $.mobile.ns + "role='header'>" +
 				"<div class='ui-title'>" + label.getEncodedText() + "</div>"+
 				"</div>"+
 				"<div data-" + $.mobile.ns + "role='content'></div>"+
 				"</div>" ).appendTo( $.mobile.pageContainer ).page(),
 
-			listbox =  $("<div>", { "class": "ui-selectmenu ui-selectmenu-hidden ui-overlay-shadow ui-corner-all ui-body-" + widget.options.overlayTheme + " " + $.mobile.defaultDialogTransition } ).insertAfter(screen),
+			listbox =  $("<div>", { "class": "ui-selectmenu ui-selectmenu-hidden ui-overlay-shadow ui-corner-all ui-overlay-" + widget.options.overlayTheme + " " + $.mobile.defaultDialogTransition } ).insertAfter(screen),
 
 			list = $( "<ul>", {
 				"class": "ui-selectmenu-list",
@@ -33,9 +33,7 @@
 				"aria-labelledby": buttonId
 			}).attr( "data-" + $.mobile.ns + "theme", widget.options.theme ).appendTo( listbox ),
 
-			header = $( "<div>", {
-				"class": "ui-header ui-bar-" + widget.options.theme
-			}).prependTo( listbox ),
+			header = $( "<div>" ).attr( "data-" + $.mobile.ns + "theme", widget.options.theme ).prependTo( listbox ),
 
 			headerTitle = $( "<h1>", {
 				"class": "ui-title"
