@@ -68,8 +68,33 @@ $('#myPopupDiv').popup();
     
 
 		<h2>Theming the popup</h2>
-<p>Normally, the popup's theme will be set to align with the theme of the link that launches it. However, you can override this by setting the theme yourself. You can apply a theme separately to the popup itself and to its contents. To apply a theme to the popup itself, set the <code>data-overlay-theme</code> attribute to one of the swatches. For example, <code>data-overlay-theme="a"</code>. To apply a theme to the contents of the popup, add one of the <code>ui-body-(a-z)</code> classes to the popup div.</p>
+<p>Normally, the popup's theme will be set to align with the theme of the link that launches it. However, you can override this by setting the theme yourself. You can apply a theme separately to the popup itself and to its contents. To apply a theme to the popup itself, set the <code>data-overlay-theme</code> attribute to one of the swatches. For example, <code>data-overlay-theme="a"</code>. To apply a theme to the contents of the popup, add one of the <code>ui-body-(a-z)</code> classes to the popup div. Here is an example of an explicitly themed popup:</p>
+
+<pre><code>
+&lt;div data-role=&quotpopup&quot; id=&quot;popupTesterThemed&quot; data-overlay-theme=&quot;e&quot; class=&quot;ui-body-a&quot;&gt;
+	&lt;table&gt;
+		&lt;tr&gt;&lt;td&gt;Eenie&lt;/td&gt;&lt;td&gt;meenie&lt;/td&gt;&lt;td&gt;miney&lt;/td&gt;&lt;td&gt;mo&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;Catch-a&lt;/td&gt;&lt;td&gt;tiger&lt;/td&gt;&lt;td&gt;by-the&lt;/td&gt;&lt;td&gt;toe&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;if-he&lt;/td&gt;&lt;td&gt;hollers&lt;/td&gt;&lt;td&gt;let-him&lt;/td&gt;&lt;td&gt;go&lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;Eenie&lt;/td&gt;&lt;td&gt;meenie&lt;/td&gt;&lt;td&gt;miney&lt;/td&gt;&lt;td&gt;mo&lt;/td&gt;&lt;/tr&gt;
+	&lt;/table&gt;
+&lt;/div&gt;
+&lt;a href=&quot;#popupTesterThemed&quot; data-rel=&quot;popup&quot; data-role=&quot;button&quot; data-inline=&quot;true&quot;&gt;Pop&lt;/a&gt;
+</code></pre>
 		
+<p> This is the result:</p>
+
+		<div data-role="popup" id="popupTesterThemed" data-overlay-theme="e" class="ui-body-a">
+			<table>
+				<tr><td>Eenie</td><td>meenie</td><td>miney</td><td>mo</td></tr>
+				<tr><td>Catch-a</td><td>tiger</td><td>by-the</td><td>toe</td></tr>
+				<tr><td>if-he</td><td>hollers</td><td>let-him</td><td>go</td></tr>
+				<tr><td>Eenie</td><td>meenie</td><td>miney</td><td>mo</td></tr>
+			</table>
+		</div>
+		<a href="#popupTesterThemed" data-rel="popup" data-role="button" data-inline="true">Pop</a>
+
+
 	</div><!--/content-primary -->		
 	
 				<div class="content-secondary">
