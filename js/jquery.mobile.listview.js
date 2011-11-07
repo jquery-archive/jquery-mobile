@@ -210,7 +210,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 					$( this ).closest( "li" ).addClass( "ui-li-has-count" );
 				}).addClass( "ui-btn-up-" + ( $list.jqmData( "counttheme" ) || this.options.countTheme) + " ui-btn-corner-all" );
 
-		li.find( ">img:eq(0), .ui-link-inherit>img:eq(0)" ).addClass( "ui-li-thumb" ).each(function() {
+		li.find( ".ui-link-inherit>img:eq(0)" ).add( li.children( "img:eq(0)" ) ).addClass( "ui-li-thumb" ).each(function() {
 					var $this = $( this );
 					$this.closest( "li" ).addClass( $this.is( ".ui-li-icon" ) ? "ui-li-has-icon" : "ui-li-has-thumb" );
 				});
