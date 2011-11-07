@@ -86,7 +86,8 @@
   color:                  #7cc4e7;
   font-weight: bold;
 }
-.ui-body-a {
+.ui-body-a,
+.ui-dialog.ui-overlay-a {
   font-weight: normal;
   border: 1px solid       #222;
   background:             #444;
@@ -199,7 +200,8 @@
   color:                  #7cc4e7; 
   font-weight: bold;
 }
-.ui-body-b { 
+.ui-body-b,
+.ui-dialog.ui-overlay-b {
   font-weight: normal;
   border: 1px solid       #999;
   background-color:             #e5e5e5;
@@ -298,7 +300,8 @@
 .ui-btn-down-c a.ui-link-inherit { 
   color:                  #111;
 }
-.ui-body-c {
+.ui-body-c,
+.ui-dialog.ui-overlay-c {
   border: 1px solid       #ddd;
   color:                  #333333;
   text-shadow: 0 1px 0px  #fff;
@@ -414,7 +417,8 @@
 .ui-body-d .ui-link-inherit { 
   color:                  #333333;
 }
-.ui-body-d { 
+.ui-body-d,
+.ui-dialog.ui-overlay-d {
   border: 1px solid       #aaa;
   color:                  #666;
   text-shadow: 0 1px 0px  #fff;
@@ -525,7 +529,8 @@
   text-decoration: none;
   text-shadow: 0 1px 0px  #fff;
 }
-.ui-body-e { 
+.ui-body-e,
+.ui-dialog.ui-overlay-e {
   font-weight: normal;
   border: 1px solid       #aaa;
   background:             #ccc;
