@@ -1120,6 +1120,9 @@
 		if( !!newPageTitle && pageTitle == document.title ) {
 			pageTitle = newPageTitle;
 		}
+		if ( !toPage.jqmData( "title" ) ) {
+			toPage.jqmData( "title", pageTitle );
+		}
 
 		// Make sure we have a transition defined.
 		settings.transition = settings.transition
