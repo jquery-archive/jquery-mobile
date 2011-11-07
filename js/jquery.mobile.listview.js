@@ -35,19 +35,6 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		t.refresh( true );
 	},
 
-	_itemApply: function( $list, item ) {
-		var $countli = item.find( ".ui-li-count" );
-		if ( $countli.length ) {
-			item.addClass( "ui-li-has-count" );
-			$countli.addClass( "ui-btn-up-" + ( $list.jqmData( "counttheme" ) || this.options.countTheme ) + " ui-btn-corner-all" );
-		}
-
-		// TODO class has to be defined in markup
-		item.find( ">img:eq(0), .ui-link-inherit>img:eq(0)" ).addClass( "ui-li-thumb" ).each(function() {
-				item.addClass( $(this).is( ".ui-li-icon" ) ? "ui-li-has-icon" : "ui-li-has-thumb" );
-			});
-	},
-
 	_removeCorners: function( li, which ) {
 		var top = "ui-corner-top ui-corner-tr ui-corner-tl",
 			bot = "ui-corner-bottom ui-corner-br ui-corner-bl";
@@ -205,17 +192,28 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			}
 
 			item.add( item.children( ".ui-btn-inner" ) ).addClass( itemClass );
-
-			self._itemApply( $list, item );
 		}
 
-		$list.find( "h1, h2, h3, h4, h5, h6" ).addClass( "ui-li-heading" ).end()
-			.find( "p, dl" ).addClass( "ui-li-desc" ).end()
-			.find( ".ui-li-aside" ).each(function() {
-				var $this = $(this);
-				$this.prependTo( $this.parent() ); //shift aside to front for css float
-			});
+		$list.find( "h1, h2, h3, h4, h5, h6" ).addClass( "ui-li-heading" )
+			.end()
 
+			.find( "p, dl" ).addClass( "ui-li-desc" )
+			.end()
+
+			.find( ".ui-li-aside" ).each(function() {
+					var $this = $(this);
+					$this.prependTo( $this.parent() ); //shift aside to front for css float
+				})
+			.end()
+
+			.find( ".ui-li-count" ).each( function() {
+					$( this ).closest( "li" ).addClass( "ui-li-has-count" );
+				}).addClass( "ui-btn-up-" + ( $list.jqmData( "counttheme" ) || this.options.countTheme) + " ui-btn-corner-all" );
+
+		li.find( ">img:eq(0), .ui-link-inherit>img:eq(0)" ).addClass( "ui-li-thumb" ).each(function() {
+					var $this = $( this );
+					$this.closest( "li" ).addClass( $this.is( ".ui-li-icon" ) ? "ui-li-has-icon" : "ui-li-has-thumb" );
+				});
 
 		this._refreshCorners( create );
 	},
