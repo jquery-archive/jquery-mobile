@@ -6,11 +6,13 @@
 	<title>jQuery Mobile Docs - Lists</title>
 	<link rel="stylesheet"  href="../../css/themes/default/" />
 	<script src="../../js/jquery.js"></script>
+  <script type="text/javascript" src="stats/perf.js"></script>
+  <script type="text/javascript" src="stats/startup.js"></script>
 	<script src="../../js/"></script>
 </head>
 <body>
 
-<div  data-role="page">
+<div data-role="page" id="list-page">
 
 	<div  data-role="header">
 		<h1>400 item list</h1>
@@ -425,4 +427,3 @@
 
 </body>
 </html>
-

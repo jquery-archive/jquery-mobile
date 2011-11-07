@@ -11,3 +11,4 @@ gitstatus.log
 refreshCDN
 *.swp
 .gitignore
+tests/speed/stats/stats.db
