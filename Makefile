@@ -42,6 +42,7 @@ CSSTHEME = default
 # The files to include when compiling the JS files
 JSFILES = 	  js/jquery.ui.widget.js \
 			  js/jquery.mobile.widget.js \
+			  js/jquery.mobile.forms.hsvpicker.js \
 			  js/jquery.mobile.media.js \
 			  js/jquery.mobile.support.js \
 			  js/jquery.mobile.vmouse.js \
@@ -90,6 +91,7 @@ CSSSTRUCTUREFILES = css/structure/jquery.mobile.core.css \
 			  css/structure/jquery.mobile.forms.select.css \
 			  css/structure/jquery.mobile.forms.textinput.css \
 			  css/structure/jquery.mobile.listview.css \
+			  css/structure/jquery.mobile.forms.hsvpicker.css \
 			  css/structure/jquery.mobile.forms.slider.css
 
 

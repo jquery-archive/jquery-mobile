@@ -3,6 +3,7 @@ $type = 'text/javascript';
 $files = array(
 	'jquery.ui.widget.js',
 	'jquery.mobile.widget.js',
+	'jquery.mobile.forms.hsvpicker.js',
 	'jquery.mobile.media.js',
 	'jquery.mobile.support.js',
 	'jquery.mobile.vmouse.js',
