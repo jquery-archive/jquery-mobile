@@ -266,3 +266,66 @@ Built by David Kaneda and maintained by Jonathan Stark.
         opacity: 0;
     }
 }
+
+.cube {
+    -webkit-animation-duration: .55s;
+}
+
+.cube.in {
+	-webkit-animation-name: cubeinfromright;
+    -webkit-transform-origin: 0% 50%;
+}
+.cube.out {
+	-webkit-animation-name: cubeouttoleft;
+    -webkit-transform-origin: 100% 50%;
+}
+.cube.in.reverse {
+	-webkit-animation-name: cubeinfromleft;	
+    -webkit-transform-origin: 100% 50%;
+}
+.cube.out.reverse {
+	-webkit-animation-name: cubeouttoright;
+    -webkit-transform-origin: 0% 50%;
+
+}
+
+@-webkit-keyframes cubeinfromleft {
+	from {
+        -webkit-transform: rotateY(-90deg) translateZ(320px);
+        opacity: .5;
+	}
+    to {
+        -webkit-transform: rotateY(0deg) translateZ(0);
+        opacity: 1;
+    }
+}
+@-webkit-keyframes cubeouttoright {
+    from {
+        -webkit-transform: rotateY(0deg) translateX(0);
+        opacity: 1;
+    }
+    to {
+        -webkit-transform: rotateY(90deg) translateZ(320px);
+        opacity: .5;
+    }
+}
+@-webkit-keyframes cubeinfromright {
+    from {
+        -webkit-transform: rotateY(90deg) translateZ(320px);
+        opacity: .5;
+    }
+    to {
+        -webkit-transform: rotateY(0deg) translateZ(0);
+        opacity: 1;
+    }
+}
+@-webkit-keyframes cubeouttoleft {
+    from {
+        -webkit-transform: rotateY(0deg) translateZ(0);
+        opacity: 1;
+    }
+    to {
+        -webkit-transform: rotateY(-90deg) translateZ(320px);
+        opacity: .5;
+    }
+}
