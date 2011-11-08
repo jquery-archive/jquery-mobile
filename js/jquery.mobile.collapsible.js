@@ -25,7 +25,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			collapsibleHeading = $el.find( o.heading ).eq( 0 ),
 			collapsibleContent = collapsible.wrapInner( "<div class='ui-collapsible-content'></div>" ).find( ".ui-collapsible-content" ),
 			collapsibleSet = $el.closest( ":jqmData(role='collapsible-set')" ).addClass( "ui-collapsible-set" ),
-			colllapsiblesInSet = collapsibleSet.children( ":jqmData(role='collapsible')" );
+			collapsiblesInSet = collapsibleSet.children( ":jqmData(role='collapsible')" );
 
 		// Replace collapsibleHeading if it's a legend
 		if ( collapsibleHeading.is( "legend" ) ) {
@@ -85,25 +85,18 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 					});
 			}
 
-			colllapsiblesInSet.first()
-				.find( "a:eq(0)" )
+			collapsiblesInSet.first()
+				.find( "a.ui-collapsible-heading-toggle" )
 					.addClass( "ui-corner-top" )
 						.find( ".ui-btn-inner" )
 							.addClass( "ui-corner-top" );
 
-			colllapsiblesInSet.last()
+			collapsiblesInSet.last()
 				.jqmData( "collapsible-last", true )
-				.find( "a:eq(0)" )
+				.find( "a.ui-collapsible-heading-toggle" )
 					.addClass( "ui-corner-bottom" )
 						.find( ".ui-btn-inner" )
 							.addClass( "ui-corner-bottom" );
-
-
-			if ( collapsible.jqmData( "collapsible-last" ) ) {
-				collapsibleHeading
-					.find( "a:eq(0), .ui-btn-inner" )
-						.addClass( "ui-corner-bottom" );
-			}
 		}
 
 		//events
