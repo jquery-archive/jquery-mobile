@@ -1,7 +1,5 @@
 /*
-* jQuery Mobile Framework : "dialog" plugin.
-* Copyright (c) jQuery Project
-* Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
+* "dialog" plugin.
 */
 
 (function( $, window, undefined ) {

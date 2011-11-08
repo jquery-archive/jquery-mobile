@@ -1,8 +1,5 @@
 /*
-* jQuery Mobile Framework : widget factory extentions for mobile
-* Copyright (c) jQuery Project
-* Dual licensed under the MIT or GPL Version 2 licenses.
-* http://jquery.org/license
+* widget factory extentions for mobile
 */
 
 (function( $, undefined ) {

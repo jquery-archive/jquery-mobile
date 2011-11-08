@@ -1,8 +1,3 @@
-/*
-* jQuery Mobile Framework
-* Copyright (c) jQuery Project
-* Dual licensed under the MIT (MIT-LICENSE.txt) or GPL (GPL-LICENSE.txt) licenses.
-*/
 .spin  {
 	-webkit-transform: rotate(360deg);
 	-webkit-animation-name: spin;

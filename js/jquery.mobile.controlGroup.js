@@ -1,9 +1,7 @@
-/*
-* jQuery Mobile Framework: "controlgroup" plugin - corner-rounding for groups of buttons, checks, radios, etc
-* Copyright (c) jQuery Project
-* Dual licensed under the MIT or GPL Version 2 licenses.
-* http://jquery.org/license
+/* 
+* "controlgroup" plugin - corner-rounding for groups of buttons, checks, radios, etc
 */
+
 (function( $, undefined ) {
 
 $.fn.controlgroup = function( options ) {

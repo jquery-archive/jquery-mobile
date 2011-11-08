@@ -1,8 +1,5 @@
 /*
-* jQuery Mobile Framework : "fixHeaderFooter" plugin - on-demand positioning for headers,footers
-* Copyright (c) jQuery Project
-* Dual licensed under the MIT or GPL Version 2 licenses.
-* http://jquery.org/license
+* "fixHeaderFooter" plugin - on-demand positioning for headers,footers
 */
 
 (function( $, undefined ) {

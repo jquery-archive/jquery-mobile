@@ -1,8 +1,5 @@
 /*
-* jQuery Mobile Framework : "fixHeaderFooter" native plugin - Behavior for "fixed" headers,footers, and scrolling inner content
-* Copyright (c) jQuery Project
-* Dual licensed under the MIT or GPL Version 2 licenses.
-* http://jquery.org/license
+* "fixHeaderFooter" native plugin - Behavior for "fixed" headers,footers, and scrolling inner content
 */
 
 (function( $, undefined ) {

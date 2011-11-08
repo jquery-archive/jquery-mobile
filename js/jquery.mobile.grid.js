@@ -1,8 +1,5 @@
 /*
-* jQuery Mobile Framework : plugin for creating CSS grids
-* Copyright (c) jQuery Project
-* Dual licensed under the MIT or GPL Version 2 licenses.
-* http://jquery.org/license
+* plugin for creating CSS grids
 */
 
 (function( $, undefined ) {

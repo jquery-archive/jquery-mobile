@@ -1,8 +1,5 @@
 /*
-* jQuery Mobile Framework : "navbar" plugin
-* Copyright (c) jQuery Project
-* Dual licensed under the MIT or GPL Version 2 licenses.
-* http://jquery.org/license
+* "navbar" plugin
 */
 
 (function( $, undefined ) {
