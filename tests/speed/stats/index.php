@@ -7,7 +7,7 @@
   // the right params will create a new entry
   if ( $_SERVER['REQUEST_METHOD'] == "GET" ) {
      $json = Array();
-     $st = $db->prepare( 'SELECT point, avg(value) as avg_value, pathname, strftime(\'%Y-%m-%d\', time) as day FROM stats GROUP BY pathname, point, strftime(\'%Y-%m-%d\', time);' );
+     $st = $db->prepare( 'SELECT point, avg(value) as avg_value, pathname, strftime(\'%Y-%m-%d\', time) as day FROM stats GROUP BY pathname, point, strftime(\'%Y-%m-%d\', time) ORDER BY time;' );
      $st->execute();
      $result = $st->fetchAll(PDO::FETCH_ASSOC);
      header("Content-Type: application/json");
