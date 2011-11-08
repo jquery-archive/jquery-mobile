@@ -60,21 +60,29 @@
 			<p>Since dialogs are typically used to support actions within a page, the framework does not include dialogs in the hash state history tracking. This means that dialogs will not appear in your browsing history chronology when the Back button is clicked. For example, if you are on a page, click a link to open a dialog, close the dialog, then navigate to another page, if you were to click the browser's Back button at that point you will navigate back to the first page, not the dialog.</p>
 			
 			<h2>Styling &amp; theming</h2>
-			<p>Dialogs can be styled with different themes, just like any page. Here is a different dialog design:</p>
+			<p>Dialogs can be styled with different theme swatches, just like any page by adding <code>data-theme</code> attributes to the header, content, or footer containers. Here is an example of a different dialog design:</p>
 				<a href="dialog-alt.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">An alternate color scheme</a>
+				
+			<p>Dialogs appear float above an overlay layer. This overlay adopts the swatch A content color by default, but the <code>data-overlay-theme</code> attribute can be added to the page wrapper to set the overlay to any swatch letter. Here is an example of a dialog with the overlay set to swatch e:</p>
+				<a href="dialog-overlay.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">Custom overlay swatch</a>
 		
 		
 			<p>And dialogs can be can used more like a control sheet to offer multiple buttons by removing the header:</p>
 						<a href="dialog-buttons.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="slidedown">Share photos...</a>
 			
-			<p>For the sake of readability, dialogs have a default <code>max-width</code> of 500 pixels (plus 15px padding on each side). To override this, use the following CSS in your theme:</p>
+			<h2>Dialog width and margins</h2>
+			<p>For the sake of readability, dialogs have a default <code>max-width</code> of 500 pixels (plus 15px padding on each side). There is also a 10% top <code>margin</code> to give dialogs larger top margin on larger screens, but collapse to a small margin on smartphones. To override these styles, add the following CSS override rule to your stylesheet and tweak as needed:</p>
 
-<code>
-.ui-dialog .ui-header,
-.ui-dialog .ui-content,
-.ui-dialog .ui-footer { <strong>max-width: 100%;</strong> }
-</code>
+<code><pre>
+.ui-dialog .ui-header, 
+.ui-dialog .ui-content, 
+.ui-dialog .ui-footer { 
+<strong>	max-width: 500px; 
+	margin: 10% auto 15px auto; </strong>
+}
+</pre></code>
 
+			
 
 
 			
