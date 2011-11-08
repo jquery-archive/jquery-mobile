@@ -1,0 +1,124 @@
+.ui-hsvpicker .hsvpicker-clrchannel-container {
+  display: table;
+  padding-left: 27px;
+  padding-right: 27px;
+}
+.ui-hsvpicker .hsvpicker-clrchannel-container .hsvpicker-arrow-btn-container {
+  display: table-cell;
+  vertical-align: middle;
+}
+.ui-hsvpicker .hsvpicker-clrchannel-container .hsvpicker-arrow-btn {
+  float: left;
+}
+.ui-hsvpicker .hsvpicker-clrchannel-container .hsvpicker-clrchannel-masks-container {
+  float: left;
+  position: relative;
+  width: 300px;
+  height: 38px;
+  margin-left: 2px;
+  margin-right: 2px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+.ui-hsvpicker .hsvpicker-clrchannel-container .hsvpicker-clrchannel-masks-container .hsvpicker-clrchannel-mask {
+  position: absolute;
+  width: 300px;
+  height: 38px;
+}
+.ui-hsvpicker .hsvpicker-clrchannel-container .hsvpicker-clrchannel-masks-container .hsvpicker-clrchannel-mask-white {
+	background: #ffffff;
+}
+.ui-hsvpicker .hsvpicker-clrchannel-container .hsvpicker-clrchannel-masks-container .hsvpicker-clrchannel-mask-black {
+	background: #000000;
+}
+.ui-hsvpicker .hsvpicker-clrchannel-container .hsvpicker-clrchannel-masks-container .hsvpicker-clrchannel-selector {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 10px;
+  height: 40px;
+  border: 5px solid black;
+}
+
+.ui-hsvpicker .hsvpicker-clrchannel-container .hsvpicker-clrchannel-masks-container .hue-gradient {
+    background: rgb(255,0,0); /* Old browsers */
+    background: -webkit-gradient(linear, left top, right top,
+        color-stop(  0%          ,rgba(255,  0,  0,1)),
+        color-stop( 16.666666667%,rgba(255,255,  0,1)),
+        color-stop( 33.333333333%,rgba(0  ,255,  0,1)),
+        color-stop( 50%          ,rgba(0  ,255,255,1)),
+        color-stop( 66.666666667%,rgba(0  ,  0,255,1)),
+        color-stop( 83.333333333%,rgba(255,  0,255,1)),
+        color-stop(100%          ,rgba(255,  0,  0,1))); /* Chrome,Safari4+ */
+    background: -moz-linear-gradient(left, 
+        rgba(255,  0,  0,1)   0%, 
+        rgba(255,255,  0,1)  16.666666667%,
+        rgba(  0,255,  0,1)  33.333333333%,
+        rgba(  0,255,255,1)  50%,
+        rgba(  0,  0,255,1)  66.666666667%,
+        rgba(255,  0,255,1)  83.333333333%,
+        rgba(255,  0,  0,1) 100%);
+    background: -webkit-linear-gradient(left,
+        rgba(255,  0,  0,1)   0%, 
+        rgba(255,255,  0,1)  16.666666667%,
+        rgba(  0,255,  0,1)  33.333333333%,
+        rgba(  0,255,255,1)  50%,
+        rgba(  0,  0,255,1)  66.666666667%,
+        rgba(255,  0,255,1)  83.333333333%,
+        rgba(255,  0,  0,1) 100%);
+    background: -o-linear-gradient(left,
+        rgba(255,  0,  0,1)   0%, 
+        rgba(255,255,  0,1)  16.666666667%,
+        rgba(  0,255,  0,1)  33.333333333%,
+        rgba(  0,255,255,1)  50%,
+        rgba(  0,  0,255,1)  66.666666667%,
+        rgba(255,  0,255,1)  83.333333333%,
+        rgba(255,  0,  0,1) 100%);
+    background: -ms-linear-gradient(left,
+        rgba(255,  0,  0,1)   0%, 
+        rgba(255,255,  0,1)  16.666666667%,
+        rgba(  0,255,  0,1)  33.333333333%,
+        rgba(  0,255,255,1)  50%,
+        rgba(  0,  0,255,1)  66.666666667%,
+        rgba(255,  0,255,1)  83.333333333%,
+        rgba(255,  0,  0,1) 100%);
+    background: linear-gradient(left,
+        rgba(255,  0,  0,1)   0%, 
+        rgba(255,255,  0,1)  16.666666667%,
+        rgba(  0,255,  0,1)  33.333333333%,
+        rgba(  0,255,255,1)  50%,
+        rgba(  0,  0,255,1)  66.666666667%,
+        rgba(255,  0,255,1)  83.333333333%,
+        rgba(255,  0,  0,1) 100%);
+}
+
+.ui-hsvpicker .hsvpicker-clrchannel-container .hsvpicker-clrchannel-masks-container .sat-gradient {
+  background: #ff0000;
+  /* Old browsers */
+
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%, #ffffff), color-stop(100%, rgba(255, 255, 255, 0)));
+  /* Chrome,Safari4+ */
+
+  background: -moz-linear-gradient(left, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+  background: -webkit-linear-gradient(left, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+  background: -o-linear-gradient(left, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+  background: -ms-linear-gradient(left, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(left, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+}
+.ui-hsvpicker .hsvpicker-clrchannel-container .hsvpicker-clrchannel-masks-container .val-gradient {
+  background: #ff0000;
+  /* Old browsers */
+
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%, #000000), color-stop(100%, rgba(0, 0, 0, 0)));
+  /* Chrome,Safari4+ */
+
+  background: -moz-linear-gradient(left, #000000 0%, rgba(0, 0, 0, 0) 100%);
+  background: -webkit-linear-gradient(left, #000000 0%, rgba(0, 0, 0, 0) 100%);
+  background: -o-linear-gradient(left, #000000 0%, rgba(0, 0, 0, 0) 100%);
+  background: -ms-linear-gradient(left, #000000 0%, rgba(0, 0, 0, 0) 100%);
+  background: linear-gradient(left, #000000 0%, rgba(0, 0, 0, 0) 100%);
+}
