@@ -45,7 +45,7 @@
 
 			<h2>pushState plugin</h2>
 
-			<p>There is an optional feature is converts the longer, hash-based URLs mentioned in the previous section into the full document path which is cleaner and makes the Ajax tracking transparent in the URL structure. This is built as an enhancement on top of the hash-based URL system for Ajax links. Note that despite the name, this feature technically converts hash-based urls by using <code>history.replaceState</code> (not <code>history.pushState</code>) in the current release because this works more reliably across our target platforms. For browsers that do not support <code>history.replaceState</code>, or if this feature is disabled, hash-based URLs will be used instead. </p>
+			<p>There is an optional feature that converts the longer, hash-based URLs mentioned in the previous section into the full document path which is cleaner and makes the Ajax tracking transparent in the URL structure. This is built as an enhancement on top of the hash-based URL system for Ajax links. Note that despite the name, this feature technically converts hash-based urls by using <code>history.replaceState</code> (not <code>history.pushState</code>) in the current release because this works more reliably across our target platforms. For browsers that do not support <code>history.replaceState</code>, or if this feature is disabled, hash-based URLs will be used instead. </p>
 
 			<p>Since the plugin initializes when the DOM is fully loaded you can enable and disable it manually by setting <code>$.mobile.pushStateEnabled</code> global <a href="../api/globalconfig.html">configuration option</a> to <code>false</code> anytime before document ready.</p>
 
