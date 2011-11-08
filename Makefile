@@ -73,6 +73,7 @@ JSFILES = 	  js/jquery.ui.widget.js \
 			  js/jquery.mobile.links.js \
 			  js/jquery.mobile.fixHeaderFooter.js \
 			  js/jquery.mobile.fixHeaderFooter.native.js \
+			  js/jquery.mobile.popup.js \
 			  js/jquery.mobile.init.js
 
 CSSTHEMEFILES = css/themes/${CSSTHEME}/jquery.mobile.theme.css
@@ -90,6 +91,7 @@ CSSSTRUCTUREFILES = css/structure/jquery.mobile.core.css \
 			  css/structure/jquery.mobile.forms.select.css \
 			  css/structure/jquery.mobile.forms.textinput.css \
 			  css/structure/jquery.mobile.listview.css \
+			  css/structure/jquery.mobile.popup.css \
 			  css/structure/jquery.mobile.forms.slider.css
 
 
