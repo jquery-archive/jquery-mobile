@@ -24,7 +24,7 @@
 				"<div data-" + $.mobile.ns + "role='content'></div>"+
 				"</div>" ).appendTo( $.mobile.pageContainer ).page(),
 
-			listbox =  $("<div>", { "class": "ui-selectmenu ui-selectmenu-hidden ui-overlay-shadow ui-corner-all ui-overlay-" + widget.options.overlayTheme + " " + $.mobile.defaultDialogTransition } ).insertAfter(screen),
+			listbox =  $("<div>", { "class": "ui-selectmenu ui-selectmenu-hidden ui-overlay-shadow ui-corner-all ui-body-" + widget.options.overlayTheme + " " + $.mobile.defaultDialogTransition } ).insertAfter(screen),
 
 			list = $( "<ul>", {
 				"class": "ui-selectmenu-list",

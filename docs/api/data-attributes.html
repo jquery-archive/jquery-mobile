@@ -109,12 +109,37 @@
 					<td>swatch letter (a-z) - Sets all collapsibles in set</td>
 				</tr>
 			</table>
-
+			
 			<h2><a href="../pages/page-dialogs.html">Dialog</a></h2>
+			<p>Container with <code>data-role="page"</code> or <code>"dialog"</code> linked to with <code>data-rel="dialog"</code> on the anchor.</p>
 			<table>
 				<tr>
+					<th>data-close-btn-text</th>
+					<td>string (text for the close button, dialog only)</td>
+				</tr>
+				<tr>
+					<th>data-dom-cache</th>
+					<td>true | <strong>false</strong></td>
+				</tr>
+				<tr>
+					<th>data-id</th>
+					<td>string (unique id for the page)</td>
+				</tr>
+				<tr>
+					<th>data-fullscreen</th>
+					<td>true | false (used in conjunction with fixed toolbars)</td>
+				</tr>
+				<tr>
 					<th>data-overlay-theme</th>
-					<td>swatch letter (a-z) - overlay theme</td>
+					<td>swatch letter (a-z) - overlay theme when the page is opened in a dialog</td>
+				</tr>
+				<tr>
+					<th>data-theme</th>
+					<td>swatch letter (a-z)</td>
+				</tr>
+				<tr>
+					<th>data-title</th>
+					<td>string (title used when page is shown)</td>
 				</tr>
 			</table>
 
@@ -280,7 +305,7 @@
 			</table>
 
 			<h2><a href="../pages/page-anatomy.html">Page</a></h2>
-			<p>Container with <code>data-role="page"</code> or <code>"dialog"</code></p>
+			<p>Container with <code>data-role="page"</code></p>
 			<table>
 				<tr>
 					<th>data-close-btn-text</th>
@@ -407,7 +432,6 @@
 					<li><a href="../../docs/api/globalconfig.html">Configuring defaults</a></li>
 					<li><a href="../../docs/api/events.html">Events</a></li>
 					<li><a href="../../docs/api/methods.html">Methods &amp; Utilities</a></li>
-					<li><a href="../../docs/api/mediahelpers.html">Responsive layout</a></li> 
 					<li data-theme="a"><a href="../../docs/api/data-attributes.html">Data attribute reference</a></li>
 					<li><a href="../../docs/api/themes.html">Theme framework</a></li>
 				</ul>
