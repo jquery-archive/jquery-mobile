@@ -9,7 +9,8 @@
 
 $.widget("mobile.popup", $.mobile.widget, {
 	options: {
-		overlayTheme: "",
+		theme: null,
+		overlayTheme: null,
 		shadow: true,
 		corners: true,
 		fade: true,
@@ -23,7 +24,8 @@ $.widget("mobile.popup", $.mobile.widget, {
 					"shadow"       : "data-" + ($.mobile.ns || "") + "shadow",
 					"corners"      : "data-" + ($.mobile.ns || "") + "corners",
 					"fade"         : "data-" + ($.mobile.ns || "") + "fade",
-					"transition"   : "data-" + ($.mobile.ns || "") + "transition"
+					"transition"   : "data-" + ($.mobile.ns || "") + "transition",
+					"theme"        : "data-" + ($.mobile.ns || "") + "theme"
 		    },
 				ui = {
 					screen    : "#ui-popup-screen",
@@ -65,32 +67,39 @@ $.widget("mobile.popup", $.mobile.widget, {
 		});
 	},
 
-	_set_overlayTheme: function(value, unconditional) {
+	_setTheme: function(dst, theme, unconditional) {
+		var currentTheme = (dst.attr("class") || "")
+	    		.split(" ")
+	    		.filter(function(el, idx, ar) {
+	    			return el.match(/^ui-body-[a-z]$/);
+	    		});
+
+		currentTheme = ((currentTheme.length > 0) ? currentTheme[0].match(/^ui-body-([a-z])/)[1] : null);
+
+		if (theme !== currentTheme || unconditional) {
+			dst.removeClass("ui-body-" + currentTheme);
+			if (theme !== null)
+				dst.addClass("ui-body-" + theme);
+		}
+	},
+
+	_set_theme: function(value, unconditional) {
+		if (value === null)
+			value = "";
 
 		if (value.match(/^[a-z]$/) || value === "") {
-			function setTheme(dst, theme) {
-				var currentTheme = dst.attr("class")
-			    		.split(" ")
-			    		.filter(function(el, idx, ar) {
-			    			return el.match(/^ui-body-[a-z]$/);
-			    		});
+			this._setTheme(this.element, value, unconditional);
+		}
+	},
 
-				currentTheme = ((currentTheme.length > 0) ? currentTheme[0].match(/^ui-body-([a-z])/)[1] : "");
-
-				if (value != currentTheme || unconditional) {
-					dst.removeClass("ui-body-" + currentTheme);
-					if (value !== "")
-						dst.addClass("ui-body-" + theme);
-				}
-			}
-	
-			setTheme(this._ui.container, value);
-			this._ui.screen.removeAttr("style");
-			// The screen must always have some kind of background for fade to work, so, if the theme is being unset, set the background to black.
-			if ("" === value)
-				this._ui.screen.css("background", "#000000");
-			else
-				setTheme(this._ui.screen, value);
+	_set_overlayTheme: function(value, unconditional) {
+		if (value === null)
+			value = "";
+		if (value.match(/^[a-z]$/) || value === "") {
+			this._setTheme(this._ui.container, value, unconditional);
+			// The screen must always have some kind of background for fade to work, so, if the theme is being unset,
+			// set the background to "a".
+			this._setTheme(this._ui.screen, (value === "" ? "a" : value), unconditional);
 		}
 		else
 			console.log("Warning: " + value + " is not a valid overlay theme! Please specify a single letter a-z or an empty string!");
@@ -247,7 +256,7 @@ $(document).bind("pagecreate create", function(e) {
 
 		if (popup[0]) {
 			// If the popup has a theme set, prevent it from being clobbered by the associated button
-			if (popup.popup("option", "overlayTheme").match(/[a-z]/))
+			if ((popup.popup("option", "overlayTheme") || "").match(/[a-z]/))
 				popup.jqmData("overlay-theme-set", true);
 			btn
 				.attr({
