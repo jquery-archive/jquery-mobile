@@ -80,10 +80,10 @@ $('#myPopupDiv').popup();
 		<a href="#popupTester" data-rel="popup" data-role="button" data-inline="true" data-theme="b">Pop</a>
 		<a href="#popupTester" data-rel="popup" data-role="button" data-inline="true" data-theme="e">Pop</a>
 </p>
-<p>However, you can override this by setting the theme yourself. You can apply a theme separately to the popup itself and to its contents. To apply a theme to the popup itself, set the <code>data-overlay-theme</code> attribute to one of the swatches. For example, <code>data-overlay-theme="a"</code>. To apply a theme to the contents of the popup, add one of the <code>ui-body-(a-z)</code> classes to the popup div. Here is an example of an explicitly themed popup:</p>
+<p>However, you can override this by setting the theme yourself. You can apply a theme separately to the popup itself and to its contents. To apply a theme to the popup itself, set the <code>data-overlay-theme</code> attribute to one of the swatches. For example, <code>data-overlay-theme="a"</code>. To apply a theme to the contents of the popup, add the swatch of your choice via the <code>data-theme</code> attribute to the popup div. For example, <code>data-theme="a"</code>. Here is an example of an explicitly themed popup:</p>
 
 <pre><code>
-&lt;div data-role=&quotpopup&quot; id=&quot;popupTesterThemed&quot; data-overlay-theme=&quot;e&quot; class=&quot;ui-body-a&quot;&gt;
+&lt;div data-role=&quotpopup&quot; id=&quot;popupTesterThemed&quot; data-overlay-theme=&quot;e&quot; data-theme=&quot;a&quot;&gt;
 	&lt;table&gt;
 		&lt;tr&gt;&lt;td&gt;Mary&lt;/td&gt;&lt;td&gt;had-a&lt;/td&gt;&lt;td&gt;little&lt;/td&gt;&lt;td&gt;lamb&lt;/td&gt;&lt;/tr&gt;
 		&lt;tr&gt;&lt;td&gt;And&lt;/td&gt;&lt;td&gt;it-was&lt;/td&gt;&lt;td&gt;white-as&lt;/td&gt;&lt;td&gt;snow&lt;/td&gt;&lt;/tr&gt;
@@ -96,7 +96,7 @@ $('#myPopupDiv').popup();
 		
 <p> This is the result:</p>
 
-		<div data-role="popup" id="popupTesterThemed" data-overlay-theme="e" class="ui-body-a">
+		<div data-role="popup" id="popupTesterThemed" data-overlay-theme="e" data-theme="a">
 			<table>
 				<tr><td>Mary</td><td>had-a</td><td>little</td><td>lamb</td></tr>
 				<tr><td>And</td><td>it-was</td><td>white-as</td><td>snow</td></tr>
