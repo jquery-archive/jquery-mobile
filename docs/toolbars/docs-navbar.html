@@ -24,7 +24,7 @@
 		<div class="content-primary">		
 	<h2>Simple navbar</h2>
 	
-	<p>jQuery Mobile has a very basic navbar widget that is useful for providing up to 5 buttons with optional icons in a bar, typically within a header or footer. There is also a <a href="footer-persist-a.html">persistent nav bar</a> variation that works more like a tab bar that stays fixed as you navigate across pages.</p>
+	<p>jQuery Mobile has a very basic navbar widget that is useful for providing up to 5 buttons with optional icons in a bar, typically within a header or footer. There is also a <a href="footer-persist-a.html">persistent navbar</a> variation that works more like a tab bar that stays fixed as you navigate across pages.</p>
 	<p>A navbar is coded as an unordered list of links wrapped in a container element that has the <code> data-role="navbar"</code> attribute. To set one of links to the active (selected) state, add <code>class="ui-btn-active"</code> to the anchor. In this example, we have a two-button navbar in the footer with the "One" item set to active:</p>
 	
 <pre><code>
@@ -154,7 +154,7 @@
 	
 	<h2>Icons in navbars</h2>
 	
-	<p>Icons can be added to navbar items by adding the <code> data-icon</code> attribute specifying a <a href="../buttons/buttons-icons.html">standard mobile icon</a> to each anchor. By default icons are added above the text (<code>data-iconpos="top"</code>). The following examples add icons to a navbar in a footer.</p>
+	<p>Icons can be added to navbar items by adding the <code> data-icon</code> attribute specifying a <a href="../buttons/buttons-icons.html">standard mobile icon</a> to each anchor. By default, icons are added above the text (<code>data-iconpos="top"</code>). The following examples add icons to a navbar in a footer.</p>
 
 	<div data-role="footer">
 		<div data-role="navbar">
@@ -166,7 +166,7 @@
 		</div><!-- /navbar -->
 	</div><!-- /footer -->
 	
-	<p>The icon position is set <em>on the navbar container</em> instead of for individual links within for visual consistency. For example, to place the icons below the labels, add the <code> data-iconpos="bottom"</code> attribute to navbar container.</p>
+	<p>The icon position is set <em>on the navbar container</em> instead of for individual links within for visual consistency. For example, to place the icons below the labels, add the <code> data-iconpos="bottom"</code> attribute to the navbar container.</p>
 <pre><code>
 &lt;div data-role=&quot;navbar&quot; <strong>data-iconpos=&quot;bottom&quot;</strong>&gt;
 </code></pre>
@@ -207,7 +207,7 @@
 	
 	<h2>Using 3rd party icon sets</h2>
 	
-	<p>You can add any of the popular icon libraries like <a href="http://glyphish.com/">Glyphish</a> to achieve the iOS style tab tab that has large icons stacked on top of text labels. All that is required is a bit of custom styles to link to the icons and position them in the navbar. Here is an example using Glyphish icons and custom styles (view page source for styles) in our navbar:</p>
+	<p>You can add any of the popular icon libraries like <a href="http://glyphish.com/">Glyphish</a> to achieve the iOS style tab that has large icons stacked on top of text labels. All that is required is a bit of custom styles to link to the icons and position them in the navbar. Here is an example using Glyphish icons and custom styles (view page source for styles) in our navbar:</p>
 	
 	
 	<style>	
@@ -238,8 +238,8 @@
 
 	<h2>Theming navbars</h2>
 	
-	<p>Navbars inherit the theme swatch from their parent container, just like buttons. If a navbar is placed in header or footer toolbar, it will inherit the default toolbar swatch (A) for bars unless you set this in the markup. </p>
-	<p>Here are a few examples of navbars in various container swatches automatically inheriting their parent's swatch letter. Note that in these examples, instead of using a <code>data-theme</code> attribute, we're manually adding the swatch classes to apply the body swatch (<code>ui-body-a</code>) and the class to add the standard body padding (ui-body), but the inheritance works the same way:</p>
+	<p>Navbars inherit the theme swatch from their parent container, just like buttons. If a navbar is placed in the header or footer toolbar, it will inherit the default toolbar swatch (A) for bars unless you set this in the markup. </p>
+	<p>Here are a few examples of navbars in various container swatches that automatically inheriting their parent's swatch letter. Note that in these examples, instead of using a <code>data-theme</code> attribute, we're manually adding the swatch classes to apply the body swatch (<code>ui-body-a</code>) and the class to add the standard body padding (ui-body), but the inheritance works the same way:</p>
 
 	<div class="ui-body-a ui-body">
 		<h3>Swatch A</h3>
@@ -267,7 +267,7 @@
 		</div><!-- /navbar -->
 	</div><!-- /container -->
 	
-<p>To set to the theme color for a navbar item, add the <code>data-theme</code> attribute to the individual links and specify a theme swatch. Note that applying a theme swatch at the navbar container is <em>not</em> supported.</p>
+<p>To set to the theme color for a navbar item, add the <code>data-theme</code> attribute to the individual links and specify a theme swatch. Note that applying a theme swatch to the navbar container is <em>not</em> supported.</p>
 	<div data-role="footer">
 		<div data-role="navbar">
 			<ul>
@@ -298,7 +298,7 @@
 						<li data-theme="a"><a href="docs-navbar.html">Navbars</a></li>
 						<li><a href="bars-fixed.html">Fixed positioning</a></li>
 						<li><a href="bars-fullscreen.html">Fullscreen positioning</a></li>
-						<li><a href="footer-persist-a.html">Persistent footer nav bar</a></li>
+						<li><a href="footer-persist-a.html">Persistent footer navbar</a></li>
 						<li><a href="bars-themes.html">Theming toolbars</a></li>
 
 					</ul>
