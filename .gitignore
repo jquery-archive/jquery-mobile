@@ -7,8 +7,6 @@ cache/
 combined/
 combine/
 compiled/
-gitstatus.log
-refreshCDN
 *.swp
 .gitignore
 tests/speed/stats/stats.db
