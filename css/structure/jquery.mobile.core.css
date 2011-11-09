@@ -1,9 +1,3 @@
-/*
-* jQuery Mobile Framework
-* Copyright (c) jQuery Project
-* Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
-*/
-
 /* some unsets - more probably needed */
 .ui-mobile, .ui-mobile body { height: 100%; }
 .ui-mobile fieldset, .ui-page { padding: 0; margin: 0; }

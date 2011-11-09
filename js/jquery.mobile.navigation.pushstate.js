@@ -1,8 +1,5 @@
 /*
-* jQuery Mobile Framework : history.pushState support, layered on top of hashchange
-* Copyright (c) jQuery Project
-* Dual licensed under the MIT or GPL Version 2 licenses.
-* http://jquery.org/license
+* history.pushState support, layered on top of hashchange
 */
 
 ( function( $, window ) {
