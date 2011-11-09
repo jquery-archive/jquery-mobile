@@ -1,8 +1,5 @@
 /*
-* jQuery Mobile Framework : "textinput" plugin for text inputs, textareas
-* Copyright (c) jQuery Project
-* Dual licensed under the MIT or GPL Version 2 licenses.
-* http://jquery.org/license
+* "textinput" plugin for text inputs, textareas
 */
 
 (function( $, undefined ) {

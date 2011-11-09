@@ -1,8 +1,3 @@
-/*
-* jQuery Mobile Framework
-* Copyright (c) jQuery Project
-* Dual licensed under the MIT (MIT-LICENSE.txt) or GPL (GPL-LICENSE.txt) licenses.
-*/
 .ui-listview { margin: 0; counter-reset: listnumbering; }
 .ui-content .ui-listview { margin: -15px; }
 .ui-content .ui-listview-inset { margin: 1em 0;  }

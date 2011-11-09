@@ -1,8 +1,5 @@
 /*
-* jQuery Mobile Framework : "mouse" plugin
-* Copyright (c) jQuery Project
-* Dual licensed under the MIT or GPL Version 2 licenses.
-* http://jquery.org/license
+* "mouse" plugin
 */
 
 // This plugin is an experiment for abstracting away the touch and mouse

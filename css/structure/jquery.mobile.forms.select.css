@@ -1,8 +1,3 @@
-/*
-* jQuery Mobile Framework
-* Copyright (c) jQuery Project
-* Dual licensed under the MIT (MIT-LICENSE.txt) or GPL (GPL-LICENSE.txt) licenses.
-*/
 .ui-select { display: block; position: relative; }
 .ui-select select { position: absolute; left: -9999px; top: -9999px; }
 .ui-select .ui-btn { overflow: hidden; }

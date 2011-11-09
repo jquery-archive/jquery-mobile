@@ -1,8 +1,5 @@
-/*
-* jQuery Mobile Framework : "events" plugin - Handles events
-* Copyright (c) jQuery Project
-* Dual licensed under the MIT or GPL Version 2 licenses.
-* http://jquery.org/license
+/* 
+* "events" plugin - Handles events
 */
 
 (function( $, window, undefined ) {

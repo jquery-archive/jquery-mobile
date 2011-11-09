@@ -1,8 +1,5 @@
 /*
-* jQuery Mobile Framework : "init" - Initialize the framework
-* Copyright (c) jQuery Project
-* Dual licensed under the MIT or GPL Version 2 licenses.
-* http://jquery.org/license
+* "init" - Initialize the framework
 */
 
 (function( $, window, undefined ) {
