@@ -99,12 +99,16 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 				keyupTimeout = setTimeout( keyup, keyupTimeoutBuffer );
 			});
 
-			// Issue 509: the browser is not giving scrollHeight properly until after the document
-			// is ready.
+			// Issue 509: the browser is not giving scrollHeight properly until the styles load
+			// for the input
 			if ( $.trim( input.val() ) ) {
-				$(function() {
-					input.keyup()
-				});
+				// bind to the window load to make sure the height is calculated
+				// the document as a whole on the initial page load
+				$(window).load(keyup);
+
+				// after a page is loaded into the document the height has to be
+				// initially triggered to make sure it accomodates loaded content
+				$(document).one("pagechange", keyup);
 			}
 		}
 	},
