@@ -89,9 +89,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 						clientHeight = input[ 0 ].clientHeight;
 
 					if ( clientHeight < scrollHeight ) {
-						input.css({
-							height: (scrollHeight + extraLineHeight)
-						});
+						input.height(scrollHeight + extraLineHeight);
 					}
 				},
 				keyupTimeout;
@@ -103,8 +101,10 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 
 			// Issue 509: the browser is not giving scrollHeight properly until after the document
 			// is ready.
-			if ($.trim(input.text())) {
-				$(keyup);
+			if ( $.trim( input.val() ) ) {
+				$(function() {
+					input.keyup()
+				});
 			}
 		}
 	},
