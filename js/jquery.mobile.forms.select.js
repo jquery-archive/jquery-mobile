@@ -1,8 +1,5 @@
 /*
-* jQuery Mobile Framework : "selectmenu" plugin
-* Copyright (c) jQuery Project
-* Dual licensed under the MIT or GPL Version 2 licenses.
-* http://jquery.org/license
+* "selectmenu" plugin
 */
 
 (function( $, undefined ) {

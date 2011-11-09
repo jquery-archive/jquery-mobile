@@ -1,8 +1,5 @@
 /*
-* jQuery Mobile Framework : a workaround for window.matchMedia
-* Copyright (c) jQuery Project
-* Dual licensed under the MIT or GPL Version 2 licenses.
-* http://jquery.org/license
+* a workaround for window.matchMedia
 */
 
 (function( $, undefined ) {

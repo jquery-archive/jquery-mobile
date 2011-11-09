@@ -1,10 +1,6 @@
-/*
-* jQuery Mobile Framework : "core" - The base file for jQm
-* Copyright (c) jQuery Project
-* Dual licensed under the MIT or GPL Version 2 licenses.
-* http://jquery.org/license
+/* 
+* "core" - The base file for jQm
 */
-
 
 (function( $, window, undefined ) {
 
