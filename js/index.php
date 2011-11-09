@@ -1,7 +1,7 @@
 <?php
 $type = 'text/javascript';
 $files = array(
-	'jquery.mobile.intro.js',
+	'INTRO.txt',
 	'jquery.ui.widget.js',
 	'jquery.mobile.widget.js',
 	'jquery.mobile.media.js',

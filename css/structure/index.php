@@ -1,6 +1,6 @@
 <?php
 $files = array_merge($files, array(
-	'../../../js/jquery.mobile.intro.js',
+	'../../../INTRO.txt',
 	'../../structure/jquery.mobile.core.css',
 	'../../structure/jquery.mobile.transitions.css',
 	'../../structure/jquery.mobile.grids.css',

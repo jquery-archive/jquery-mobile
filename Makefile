@@ -103,9 +103,9 @@ all: init js min css cssmin notify
 # Build the normal CSS file.
 css: init
 	# Build the CSS file
-	@@cat js/jquery.mobile.intro.js | ${SED_VER} > ${OUTPUT}/${CSS}
+	@@cat INTRO.txt | ${SED_VER} > ${OUTPUT}/${CSS}
 	@@cat ${CSSFILES} >> ${OUTPUT}/${CSS}
-	@@cat js/jquery.mobile.intro.js | ${SED_VER} > ${OUTPUT}/${CSSSTRUCTURE}
+	@@cat INTRO.txt | ${SED_VER} > ${OUTPUT}/${CSSSTRUCTURE}
 	@@cat ${CSSSTRUCTUREFILES} >> ${OUTPUT}/${CSSSTRUCTURE}
 
 # Build the minified CSS file
@@ -119,7 +119,7 @@ cssmin: init css
 # Build the normal JS file
 js: init
 	# Build the JavaScript file
-	@@cat js/jquery.mobile.intro.js | ${SED_VER} > ${OUTPUT}/${JS}
+	@@cat INTRO.txt | ${SED_VER} > ${OUTPUT}/${JS}
 	@@cat ${JSFILES} >> ${OUTPUT}/${JS}
 
 # Create the output directory. This is in a separate step so its not dependant on other targets
