@@ -103,11 +103,11 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			if ( $.trim( input.val() ) ) {
 				// bind to the window load to make sure the height is calculated based on BOTH
 				// the DOM and CSS
-				$(window).load(keyup);
+				$( window ).load( keyup );
 
 				// binding to pagechange here ensures that for pages loaded via
 				// ajax the height is recalculated without user input
-				$(document).one("pagechange", keyup);
+				$( document ).one( "pagechange", keyup );
 			}
 		}
 	},
