@@ -9,7 +9,6 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 		initSelector: ":jqmData(role='collapsible-set')"
 	},
 	_create: function() {
-		console.debug( "collapsibleset.create()" );
 		var $el = this.element.addClass( "ui-collapsible-set" ),
 			o = this.options,
 			collapsiblesInSet = $el.children( ":jqmData(role='collapsible')" );
