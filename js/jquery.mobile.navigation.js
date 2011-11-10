@@ -1,8 +1,5 @@
 /*
-* jQuery Mobile Framework : core utilities for auto ajax navigation, base tag mgmt,
-* Copyright (c) jQuery Project
-* Dual licensed under the MIT or GPL Version 2 licenses.
-* http://jquery.org/license
+* core utilities for auto ajax navigation, base tag mgmt,
 */
 
 ( function( $, undefined ) {
@@ -1129,6 +1126,9 @@
 		var newPageTitle = ( !active )? pageTitle : toPage.jqmData( "title" ) || toPage.children(":jqmData(role='header')").find(".ui-title" ).getEncodedText();
 		if( !!newPageTitle && pageTitle == document.title ) {
 			pageTitle = newPageTitle;
+		}
+		if ( !toPage.jqmData( "title" ) ) {
+			toPage.jqmData( "title", pageTitle );
 		}
 
 		// Make sure we have a transition defined.

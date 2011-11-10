@@ -1,8 +1,5 @@
 /*
-* jQuery Mobile Framework : "transitions" plugin - Page change tranistions
-* Copyright (c) jQuery Project
-* Dual licensed under the MIT or GPL Version 2 licenses.
-* http://jquery.org/license
+* "transitions" plugin - Page change tranistions
 */
 
 (function( $, window, undefined ) {

@@ -1,8 +1,5 @@
 /*
-* jQuery Mobile Framework : "listview" plugin
-* Copyright (c) jQuery Project
-* Dual licensed under the MIT or GPL Version 2 licenses.
-* http://jquery.org/license
+* "listview" plugin
 */
 
 (function( $, undefined ) {
@@ -108,7 +105,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			li = $list.children( "li" ),
 			counter = $.support.cssPseudoElement || !$.nodeName( $list[ 0 ], "ol" ) ? 0 : 1,
 			item, itemClass, itemTheme,
-			a, last, splittheme, countParent, icon;
+			a, last, splittheme, countParent, icon, imgParents, img;
 
 		if ( counter ) {
 			$list.find( ".ui-li-dec" ).remove();
@@ -210,10 +207,26 @@ $.widget( "mobile.listview", $.mobile.widget, {
 					$( this ).closest( "li" ).addClass( "ui-li-has-count" );
 				}).addClass( "ui-btn-up-" + ( $list.jqmData( "counttheme" ) || this.options.countTheme) + " ui-btn-corner-all" );
 
-		li.find( ".ui-link-inherit>img:eq(0)" ).add( li.children( "img:eq(0)" ) ).addClass( "ui-li-thumb" ).each(function() {
-					var $this = $( this );
-					$this.closest( "li" ).addClass( $this.is( ".ui-li-icon" ) ? "ui-li-has-icon" : "ui-li-has-thumb" );
-				});
+		// The idea here is to look at the first image in the list item
+		// itself, and any .ui-link-inherit element it may contain, so we
+		// can place the appropriate classes on the image and list item.
+		// Note that we used to use something like:
+		//
+		//    li.find(">img:eq(0), .ui-link-inherit>img:eq(0)").each( ... );
+		//
+		// But executing a find() like that on Windows Phone 7.5 took a
+		// really long time. Walking things manually with the code below
+		// allows the 400 listview item page to load in about 3 seconds as
+		// opposed to 30 seconds.
+
+		imgParents = li.add( $list.find( ".ui-link-inherit" ) );
+
+		for ( pos = 0; pos < imgParents.length; pos++ ) {
+			img = imgParents.eq( pos ).children( "img" ).first();
+			if ( img.length ) {
+				img.addClass( "ui-li-thumb" ).closest( "li" ).addClass( img.is( ".ui-li-icon" ) ? "ui-li-has-icon" : "ui-li-has-thumb" );
+			}
+		}
 
 		this._refreshCorners( create );
 	},

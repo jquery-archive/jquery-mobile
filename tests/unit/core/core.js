@@ -35,11 +35,26 @@
 		});
 	});
 
+	function clearNSNormalizeDictionary()
+	{
+		var dict = $.mobile.nsNormalizeDict;
+		for ( var prop in dict ) {
+			delete dict[ prop ];
+		}
+	}
+
 	test( "$.mobile.nsNormalize works properly with namespace defined (test default)", function(){
+		// Start with a fresh namespace property cache, just in case
+		// the previous test mucked with namespaces.
+		clearNSNormalizeDictionary();
+
 		equal($.mobile.nsNormalize("foo"), "nstestFoo", "appends ns and initcaps");
 		equal($.mobile.nsNormalize("fooBar"), "nstestFooBar", "leaves capped strings intact");
 		equal($.mobile.nsNormalize("foo-bar"), "nstestFooBar", "changes dashed strings");
 		equal($.mobile.nsNormalize("foo-bar-bak"), "nstestFooBarBak", "changes multiple dashed strings");
+
+		// Reset the namespace property cache for the next test.
+		clearNSNormalizeDictionary();
 	});
 
 	test( "$.mobile.nsNormalize works properly with an empty namespace", function(){
@@ -47,12 +62,19 @@
 
 		$.mobile.ns = "";
 
+		// Start with a fresh namespace property cache, just in case
+		// the previous test mucked with namespaces.
+		clearNSNormalizeDictionary();
+
 		equal($.mobile.nsNormalize("foo"), "foo", "leaves uncapped and undashed");
 		equal($.mobile.nsNormalize("fooBar"), "fooBar", "leaves capped strings intact");
 		equal($.mobile.nsNormalize("foo-bar"), "fooBar", "changes dashed strings");
 		equal($.mobile.nsNormalize("foo-bar-bak"), "fooBarBak", "changes multiple dashed strings");
 
 		$.mobile.ns = realNs;
+
+		// Reset the namespace property cache for the next test.
+		clearNSNormalizeDictionary();
 	});
 
 	//data tests
