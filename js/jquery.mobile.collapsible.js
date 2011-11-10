@@ -23,7 +23,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			collapsibleHeading = $el.children( o.heading ).first(),
 			collapsibleContent = collapsible.wrapInner( "<div class='ui-collapsible-content'></div>" ).find( ".ui-collapsible-content" ),
 			collapsibleSet = $el.closest( ":jqmData(role='collapsible-set')" ).addClass( "ui-collapsible-set" ),
-			colllapsiblesInSet = collapsibleSet.children( ":jqmData(role='collapsible')" );
+			collapsiblesInSet = collapsibleSet.children( ":jqmData(role='collapsible')" );
 
 		// Replace collapsibleHeading if it's a legend
 		if ( collapsibleHeading.is( "legend" ) ) {
@@ -84,14 +84,14 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 					});
 			}
 
-			colllapsiblesInSet.first()
+			collapsiblesInSet.first()
 				.find( "a" )
 					.first()
 					.addClass( "ui-corner-top" )
 						.find( ".ui-btn-inner" )
 							.addClass( "ui-corner-top" );
 
-			colllapsiblesInSet.last()
+			collapsiblesInSet.last()
 				.jqmData( "collapsible-last", true )
 				.find( "a" )
 					.first()

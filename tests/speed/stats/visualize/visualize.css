@@ -41,6 +41,5 @@ table {
 
 div.visualize {
   float: left;
-  margin-left: 100px;
-  margin-right: 50px;
+  margin: 0 50px 70px 100px;
 }
