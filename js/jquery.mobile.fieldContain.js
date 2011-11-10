@@ -1,8 +1,5 @@
 /*
-* jQuery Mobile Framework : "fieldcontain" plugin - simple class additions to make form row separators
-* Copyright (c) jQuery Project
-* Dual licensed under the MIT or GPL Version 2 licenses.
-* http://jquery.org/license
+* "fieldcontain" plugin - simple class additions to make form row separators
 */
 
 (function( $, undefined ) {

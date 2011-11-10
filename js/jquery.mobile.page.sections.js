@@ -1,8 +1,5 @@
 /*
-* jQuery Mobile Framework : This plugin handles theming and layout of headers, footers, and content areas
-* Copyright (c) jQuery Project
-* Dual licensed under the MIT or GPL Version 2 licenses.
-* http://jquery.org/license
+* This plugin handles theming and layout of headers, footers, and content areas
 */
 
 (function( $, undefined ) {

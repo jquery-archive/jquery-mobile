@@ -1,8 +1,5 @@
 /*
-* jQuery Mobile Framework : "textinput" plugin for text inputs, textareas
-* Copyright (c) jQuery Project
-* Dual licensed under the MIT or GPL Version 2 licenses.
-* http://jquery.org/license
+* "textinput" plugin for text inputs, textareas
 */
 
 (function( $, undefined ) {
@@ -89,9 +86,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 						clientHeight = input[ 0 ].clientHeight;
 
 					if ( clientHeight < scrollHeight ) {
-						input.css({
-							height: (scrollHeight + extraLineHeight)
-						});
+						input.height(scrollHeight + extraLineHeight);
 					}
 				},
 				keyupTimeout;
@@ -101,10 +96,15 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 				keyupTimeout = setTimeout( keyup, keyupTimeoutBuffer );
 			});
 
-			// Issue 509: the browser is not giving scrollHeight properly until after the document
-			// is ready.
-			if ($.trim(input.text())) {
-				$(keyup);
+			// Issue 509: the browser is not providing scrollHeight properly until the styles load
+			if ( $.trim( input.val() ) ) {
+				// bind to the window load to make sure the height is calculated based on BOTH
+				// the DOM and CSS
+				$( window ).load( keyup );
+
+				// binding to pagechange here ensures that for pages loaded via
+				// ajax the height is recalculated without user input
+				$( document ).one( "pagechange", keyup );
 			}
 		}
 	},
