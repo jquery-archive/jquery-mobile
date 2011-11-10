@@ -111,15 +111,13 @@ docs: init css js
 	# ... Update the JavaScript and CSS paths
 	@@find tmp/${NAME} -type f \
 		\( -name '*.html' -o -name '*.php' \) \
-		-exec sed -i '' 's|js/"|${NAME}.min.js"|g' {} \; \
-		-exec sed -i '' 's|css/themes/default/|${NAME}.min.css|g' {} \; \
-		-exec sed -i '' 's|js/jquery.js"|jquery.js"|g' {} \;	
-	# ... And then move it the finished directory
-	@@mv tmp/${NAME} ${OUTPUT}/demos
-	# Last, zip up the the whole folder
-	@@zip -rq tmp/${NAME}.zip ${OUTPUT}
-	@@mv tmp/${NAME}.zip ${OUTPUT}/${NAME}.docs.zip
-	# Remove the temporary files
+		-exec perl -pi -e \
+		's|js/"|${NAME}.min.js"|g;s|css/themes/default/|${NAME}.min.css|g;s|js/jquery.js"|jquery.js"|g' {} \;
+	# ... Move and zip up the the whole folder
+	@@mv tmp/${NAME} ${OUTPUT}/${NAME}
+	@@zip -rq ${OUTPUT}/${NAME}.docs.zip ${OUTPUT}/${NAME}
+	@@mv ${OUTPUT}/${NAME} ${OUTPUT}/demos
+	# Finish by removing the temporary files
 	@@rm -rf tmp
 	# -------------------------------------------------
 
@@ -182,7 +180,7 @@ nightlies: init js css zip docs
 	# Time to put these on the CDN
 	@@mkdir -p tmp/nightlies
 	@@mv ${OUTPUT} tmp/nightlies/$$(date "+%Y%m%d")
-	@@scp -r nightlies/* jqadmin@code.origin.jquery.com:/var/www/html/code.jquery.com/mobile/nightlies/
+	@@scp -r tmp/nightlies/* jqadmin@code.origin.jquery.com:/var/www/html/code.jquery.com/mobile/nightlies/
 	# Do some cleanup to wrap it up
 	@@rm -rf tmp
 	# -------------------------------------------------
