@@ -1,7 +1,7 @@
 <?php
 $type = 'text/css';
 $files = array(
-	'../../../js/jquery.mobile.intro.js',	
+	'../../../LICENSE-INFO.txt',
 	'jquery.mobile.theme.css'
 );
 $base = dirname(__FILE__);
