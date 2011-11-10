@@ -20,10 +20,10 @@
 		$.get("../", searchMap, function(data) {
 			$.each(data, function( i, avg ) {
 				var tablename = avg.point + " " + avg.agent + " " + avg.pathname,
-          $table = $( "table > caption:contains(" + tablename + ")");
+					$table = $( "table > caption:contains(" + tablename + ")");
 
 				if( !$table.length ) {
-					$table = $( "<table>", {
+					$table = $( "<table></table>", {
 						"data-pathname": avg.pathname,
 						"data-point": avg.point,
 						"data-agent": avg.agent
@@ -38,7 +38,7 @@
 				var $heading = $table.find("thead > tr > th:contains(" + avg.day + ")");
 
 				if( !$heading.length ) {
-					$heading = $("<th>", {
+					$heading = $("<th></th>", {
 						text: avg.day,
 						scope: "column"
 					});
@@ -50,7 +50,7 @@
 					$row = $table.find( "tbody > tr" );
 
 				if( !$rowHeading.length ) {
-					$rowHeading = $("<th>", {
+					$rowHeading = $("<th></th>", {
 						text: avg.point,
 						scope: "row"
 					});
@@ -60,7 +60,7 @@
 
 				$row.append( "<td>" + avg.avg_value + "</td>" );
 
-        $("#tables").append($table);
+				$("#tables").append($table);
 			});
 
 			$("#tables table").visualize({ type: "line", width: 400, height: 400 }).appendTo("#graphs");
