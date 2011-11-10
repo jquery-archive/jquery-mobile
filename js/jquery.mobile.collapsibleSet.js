@@ -35,8 +35,9 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 						widget = collapsible.data( "collapsible" ),
 					    contentTheme = widget.options.contentTheme;
 					if ( contentTheme && collapsible.jqmData( "collapsible-last" ) ) {
-						collapsible.find( widget.options.heading ).eq( 0 )
-							.find( "a:eq(0), .ui-btn-inner" )
+						collapsible.find( widget.options.heading ).first()
+							.find( "a" ).first()
+							.add( ".ui-btn-inner" )
 							.toggleClass( "ui-corner-bottom", isCollapse );
 						collapsible.find( ".ui-collapsible-content" ).toggleClass( "ui-corner-bottom", !isCollapse );
 					}
@@ -52,19 +53,22 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 			// clean up borders
 			collapsiblesInSet.each( function() {
 				$( this ).find( $.mobile.collapsible.prototype.options.heading )
-					.find( "a:eq(0), .ui-btn-inner" )
+					.find( "a" ).first()
+					.add( ".ui-btn-inner" )
 					.removeClass( "ui-corner-top ui-corner-bottom" );
 			});
 
 			collapsiblesInSet.first()
-				.find( "a:eq(0)" )
+				.find( "a" )
+					.first()
 					.addClass( "ui-corner-top" )
 						.find( ".ui-btn-inner" )
 							.addClass( "ui-corner-top" );
 
 			collapsiblesInSet.last()
 				.jqmData( "collapsible-last", true )
-				.find( "a:eq(0)" )
+				.find( "a" )
+					.first()
 					.addClass( "ui-corner-bottom" )
 						.find( ".ui-btn-inner" )
 							.addClass( "ui-corner-bottom" );

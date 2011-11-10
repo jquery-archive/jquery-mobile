@@ -63,10 +63,6 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			.add( ".ui-btn-inner" )
 				.addClass( "ui-corner-top ui-corner-bottom" );
 
-		collapsibleHeading
-			.find( "a:eq(0), .ui-btn-inner" )
-				.addClass( "ui-corner-top ui-corner-bottom" );
-
 		//events
 		collapsible
 			.bind( "expand collapse", function( event ) {
