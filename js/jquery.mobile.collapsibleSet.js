@@ -22,7 +22,6 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 			o.contentTheme = $el.jqmData( "content-theme" );
 		}
 
-		$el.find( ".ui-collapsible-content" ).addClass( ( o.contentTheme ) ? ( "ui-body-" + o.contentTheme ) : "");
 		// Initialize the collapsible set if it's not already initialized
 		if ( !$el.jqmData( "collapsiblebound" ) ) {
 
