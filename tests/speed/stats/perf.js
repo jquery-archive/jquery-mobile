@@ -6,13 +6,6 @@ window.Perf = (function($, Perf) {
 		// should be defined before report or poll are run
 		currentRev: undefined,
 
-		agents: {
-			ANDROID: "Android",
-			WP: "Windows Phone OS"
-		},
-
-		vRegexs: {},
-
 		report: function( data, after ) {
 			$.extend(data, {
 				pathname: location.pathname,
@@ -64,11 +57,22 @@ window.Perf = (function($, Perf) {
 			agent.search(this.vRegexs[this.agent()] || "");
 
 			return RegExp.$1 ? RegExp.$1 : "0.0";
-		}
+		},
+
+		agents: {
+			ANDROID: "Android",
+			WP: "Windows Phone OS",
+			IPHONE: "iPhone OS",
+			IPAD: "iPad; U; CPU OS"
+		},
+
+		vRegexs: {}
 	});
 
 	Perf.vRegexs[Perf.agents.ANDROID] = /([0-9].[0-9].[0-9]);/;
 	Perf.vRegexs[Perf.agents.WP] = /Windows Phone OS ([0-9].[0-9]);/;
+	Perf.vRegexs[Perf.agents.IPHONE] = /iPhone OS ([0-9]_[0-9])/;
+	Perf.vRegexs[Perf.agents.IPAD] = /iPad; U; CPU OS ([0-9]_[0-9])/;
 
 	return Perf;
 })(jQuery, window.Perf || {});
