@@ -19,14 +19,15 @@
 
 		$.get("../", searchMap, function(data) {
 			$.each(data, function( i, avg ) {
-				var tablename = avg.point + " " + avg.agent + " " + avg.pathname,
+				var tablename = avg.point + " " + avg.agent + " " + avg.pathname + " " + avg.agent_version,
 					$table = $( "table > caption:contains(" + tablename + ")");
 
 				if( !$table.length ) {
 					$table = $( "<table></table>", {
 						"data-pathname": avg.pathname,
 						"data-point": avg.point,
-						"data-agent": avg.agent
+						"data-agent": avg.agent,
+						"data-agent": avg.agent_version
 					});
 
 					$table.append( "<caption>" + tablename + "</caption>");
