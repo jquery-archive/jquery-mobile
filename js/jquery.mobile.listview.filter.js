@@ -11,7 +11,7 @@ $.mobile.listview.prototype.options.filterCallback = function( text, searchValue
 	return text.toLowerCase().indexOf( searchValue ) === -1;
 };
 
-$( ":jqmData(role='listview')" ).live( "listviewcreate", function() {
+$( document ).delegate( ":jqmData(role='listview')", "listviewcreate", function() {
 
 	var list = $( this ),
 		listview = list.data( "listview" );

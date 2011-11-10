@@ -481,7 +481,7 @@
 		});
 	};
 
-	$( "select" ).live( "selectmenubeforecreate", function(){
+	$( document ).delegate( "select", "selectmenubeforecreate", function(){
 		var selectmenuWidget = $( this ).data( "selectmenu" );
 
 		if( !selectmenuWidget.options.nativeMenu ){
