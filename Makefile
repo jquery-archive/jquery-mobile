@@ -114,9 +114,8 @@ docs: init css js
 		-exec perl -pi -e \
 		's|js/"|${NAME}.min.js"|g;s|css/themes/default/|${NAME}.min.css|g;s|js/jquery.js"|jquery.js"|g' {} \;
 	# ... Move and zip up the the whole folder
-	@@mv tmp/${NAME} ${OUTPUT}/${NAME}
-	@@zip -rq ${OUTPUT}/${NAME}.docs.zip ${OUTPUT}/${NAME}
-	@@mv ${OUTPUT}/${NAME} ${OUTPUT}/demos
+	@@zip -rq ${OUTPUT}/${NAME}.docs.zip tmp/${NAME}
+	@@mv tmp/${NAME} ${OUTPUT}/demos
 	# Finish by removing the temporary files
 	@@rm -rf tmp
 	# -------------------------------------------------
