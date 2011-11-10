@@ -65,7 +65,7 @@
 				$("#tables").append($table);
 			});
 
-			$("#tables table").visualize({ type: "line", width: 400, height: 400 }).appendTo("#graphs");
+			$("#tables table").visualize({ type: "bar", width: 400, height: 400 }).appendTo("#graphs");
 		});
 	});
 })(jQuery);
