@@ -6,9 +6,16 @@
   // stats with a GET returns - wait for it - the stats, and a post with the
   // the right params will create a new entry
   if ( $_SERVER['REQUEST_METHOD'] == "GET" ) {
-     $json = Array();
-     $st = $db->prepare( "SELECT agent, agent_version, point, avg(value) as avg_value, pathname, strftime('%Y-%m-%d', time) as day FROM stats WHERE agent_full like '%Mobile%' or agent_full like '%mobile%' GROUP BY agent, agent_version, pathname, point, strftime('%Y-%m-%d', time) ORDER BY time;");
-     $st->execute();
+     $agent = (empty($_GET['agent'])) ? '' : $_GET['agent'];
+     $data_point = (empty($_GET['data_point'])) ? '' : $_GET['data_point'];
+
+     $st = $db->prepare( "SELECT agent, agent_version, point, avg(value) as avg_value, pathname, strftime('%Y-%m-%d', time) as day FROM stats WHERE (agent_full like '%Mobile%' or agent_full like '%mobile%') and agent like :agent and point like :data_point GROUP BY agent, agent_version, pathname, point, strftime('%Y-%m-%d', time) ORDER BY time;");
+
+     $st->execute(array(
+        ':agent' => '%' . $agent . '%',
+        ':data_point' => '%' . $data_point . '%'
+     ));
+
      $result = $st->fetchAll(PDO::FETCH_ASSOC);
      header("Content-Type: application/json");
      echo json_encode($result);
