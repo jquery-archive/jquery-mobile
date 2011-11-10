@@ -63,7 +63,8 @@ window.Perf = (function($, Perf) {
 			ANDROID: "Android",
 			WP: "Windows Phone OS",
 			IPHONE: "iPhone OS",
-			IPAD: "iPad; U; CPU OS"
+			IPAD: "iPad; U; CPU OS",
+			BLACKBERRY: "BlackBerry"
 		},
 
 		vRegexs: {}
@@ -73,6 +74,7 @@ window.Perf = (function($, Perf) {
 	Perf.vRegexs[Perf.agents.WP] = /Windows Phone OS ([0-9].[0-9]);/;
 	Perf.vRegexs[Perf.agents.IPHONE] = /iPhone OS ([0-9]_[0-9])/;
 	Perf.vRegexs[Perf.agents.IPAD] = /iPad; U; CPU OS ([0-9]_[0-9])/;
+	Perf.vRegexs[Perf.agents.BLACKBERRY] = /BlackBerry ([0-9]{4})/;
 
 	return Perf;
 })(jQuery, window.Perf || {});
