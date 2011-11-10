@@ -1,9 +1,7 @@
 /*
-* jQuery Mobile Framework : "buttons" plugin - for making button-like links
-* Copyright (c) jQuery Project
-* Dual licensed under the MIT or GPL Version 2 licenses.
-* http://jquery.org/license
+* "buttons" plugin - for making button-like links
 */
+
 ( function( $, undefined ) {
 
 $.fn.buttonMarkup = function( options ) {
@@ -165,7 +163,7 @@ var attachEvents = function() {
 			if ( btn ) {
 				$btn = $( btn );
 				theme = $btn.attr( "data-" + $.mobile.ns + "theme" );
-				$btn.removeClass( "ui-btn-hover-" + theme ).addClass( "ui-btn-up-" + theme );
+				$btn.removeClass( "ui-btn-hover-" + theme  + " ui-btn-down-" + theme ).addClass( "ui-btn-up-" + theme );
 			}
 		}
 	});
