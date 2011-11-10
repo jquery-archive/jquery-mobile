@@ -1,4 +1,5 @@
 (function($) {
+	// TODO this is entire thing sucks
 	$(function() {
 		var searchMap = (function() {
 			var searchSplit, searchMap = {};
