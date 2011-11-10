@@ -24,8 +24,9 @@
 
 				if( !$table.length ) {
 					$table = $( "<table>", {
-						id: avg.point,
-						"data-pathname": avg.pathname
+						"data-pathname": avg.pathname,
+						"data-point": avg.point,
+						"data-agent": avg.agent
 					});
 
 					$table.append( "<caption>" + tablename + "</caption>");
