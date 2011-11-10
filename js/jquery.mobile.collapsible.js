@@ -59,10 +59,12 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 					iconPos: "left",
 					icon: "plus",
 					theme: o.theme
-				});
+				})
+			.add( ".ui-btn-inner" )
+				.addClass( "ui-corner-top ui-corner-bottom" );
 
 		collapsibleHeading
-			.find( "a" ).first().add( collapsibleHeading.find( ".ui-btn-inner" ) )
+			.find( "a:eq(0), .ui-btn-inner" )
 				.addClass( "ui-corner-top ui-corner-bottom" );
 
 		//events
