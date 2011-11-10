@@ -6,8 +6,8 @@
   // stats with a GET returns - wait for it - the stats, and a post with the
   // the right params will create a new entry
   if ( $_SERVER['REQUEST_METHOD'] == "GET" ) {
-     $agent = (empty($_GET['agent'])) ? '' : $_GET['agent'];
-     $data_point = (empty($_GET['data_point'])) ? '' : $_GET['data_point'];
+     $agent = (empty($_GET['agent'])) ? '' : urldecode($_GET['agent']);
+     $data_point = (empty($_GET['data_point'])) ? '' : urldecode($_GET['data_point']);
 
      $st = $db->prepare( '
      SELECT agent, agent_version, point, avg(value) as avg_value,
