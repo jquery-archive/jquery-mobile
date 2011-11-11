@@ -125,6 +125,7 @@
 						//hide custom select for single selects only
 						if ( !self.isMultiple ) {
 							self.close();
+							self._trigger( "close" );
 						}
 
 						event.preventDefault();
@@ -208,6 +209,7 @@
 				self.headerClose.click( function() {
 					if ( self.menuType == "overlay" ) {
 						self.close();
+						self._trigger( "close" );
 						return false;
 					}
 				});

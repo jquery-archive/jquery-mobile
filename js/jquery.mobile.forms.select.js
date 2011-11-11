@@ -19,6 +19,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		hidePlaceholderMenuItems: true,
 		closeText: "Close",
 		nativeMenu: true,
+		disableButtonCount: false,
+		disableButtonText: false,
 		initSelector: "select:not(:jqmData(role='slider'))"
 	},
 
@@ -158,6 +160,9 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		var self = this, selected = this.selected();
 
 		this.button.find( ".ui-btn-text" ).text( function() {
+			if ( self.options.disableButtonText )
+				return self.placeholder;
+
 			if ( !self.isMultiple ) {
 				return selected.text();
 			}
@@ -169,6 +174,9 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 	},
 
 	setButtonCount: function() {
+		if ( this.options.disableButtonCount )
+			return;
+
 		var selected = this.selected();
 
 		// multiple count inside button
