@@ -1099,7 +1099,13 @@
 		// Wrap this in a try/catch block since IE9 throw "Unspecified error" if document.activeElement
 		// is undefined when we are in an IFrame.
 		try {
-			$( document.activeElement || "" ).add( "input:focus, textarea:focus, select:focus" ).blur();
+			if(document.activeElement) {
+				if(document.activeElement.nodeName.toLowerCase() != 'body') {
+					document.activeElement.blur();
+				}
+			} else {
+				$( "input:focus, textarea:focus, select:focus" ).blur();
+			}
 		} catch(e) {}
 
 		// If we're displaying the page as a dialog, we don't want the url
