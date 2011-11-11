@@ -30,7 +30,7 @@
 
 			<p>First, your initial application document is loaded by the PhoneGap application by a file:// URL. This means that if you want to pull in pages from your company's remote server (phone home) you will have to refer to them with absolute URLs to your server. Because your document originates from a file:// URL, loading pages or assets from your remote server is considered a cross-domain request. </p>
 			
-			<p>Your ability to access cross-domain pages from within a Phone Gap jQuery Mobile application is controlled by 2 key things: <code>$.support.cors</code> and <code>$.mobile.allowCrossDomainPages</code>, and can also be influenced by the white list fueature in later builds of PhoneGap.</p>
+			<p>Your ability to access cross-domain pages from within a Phone Gap jQuery Mobile application is controlled by two key things: <code>$.support.cors</code> and <code>$.mobile.allowCrossDomainPages</code>, and can also be influenced by the white list feature in later builds of PhoneGap.</p>
 
 			<h2>$.support.cors</h2>
 
@@ -40,9 +40,9 @@
 
 			<h2>$.mobile.allowCrossDomainPages</h2>
 
-			<p>When jQuery Mobile attempts to load an external page, the request runs through <code>$.mobile.loadPage()</code>. This will only allow cross-domain requests if the <code>$.mobile.allowCrossDomainPages</code> configuration option is set to <code>true</code>. Because the jQuery Mobile framework tracks what page is being viewed within the browser's location hash, it is possible for an XSS attack to occur if the XSS code in question can manipulate the hash and set it to a cross-domain URL of it's choice. This is the main reason that the default setting for <code>$.mobile.allowCrossDomainPages</code> is set to <code>false</code>.</p>
+			<p>When jQuery Mobile attempts to load an external page, the request runs through <code>$.mobile.loadPage()</code>. This will only allow cross-domain requests if the <code>$.mobile.allowCrossDomainPages</code> configuration option is set to <code>true</code>. Because the jQuery Mobile framework tracks what page is being viewed within the browser's location hash, it is possible for a cross-site scripting (XSS) attack to occur if the XSS code in question can manipulate the hash and set it to a cross-domain URL of its choice. This is the main reason that the default setting for <code>$.mobile.allowCrossDomainPages</code> is set to <code>false</code>.</p>
 
-			<p>So PhoneGap apps that must "phone home" by loading assets off a remote server, both the <code>$.support.cors</code> AND <code>$.mobile.allowCrossDomainPages</code> must be set to <code>true</code>.  The  <code>$.mobile.allowCrossDomainPages</code> option must set before any cross-domain request is made so we recommend wrapping this in a <code>mobileinit</code> handler:</p>
+			<p>So in PhoneGap apps that must "phone home" by loading assets off a remote server, both the <code>$.support.cors</code> AND <code>$.mobile.allowCrossDomainPages</code> must be set to <code>true</code>.  The  <code>$.mobile.allowCrossDomainPages</code> option must be set before any cross-domain request is made so we recommend wrapping this in a <code>mobileinit</code> handler:</p>
 
 <pre><code>$( document ).bind( "mobileinit", function() {
     // Make your jQuery Mobile framework configuration changes here!
@@ -52,9 +52,9 @@
 
 			<h2>PhoneGap White Listing</h2>
 
-			<p>PhoneGap 1.0 introduced the idea of white-listing servers that it's internal WebView is allowed to make cross-domain requests to. You can find info about it here on the <a href="http://wiki.phonegap.com/w/page/40796976/Install%20the%20latest%20%28trunk%29%20source%20of%20iOS%20PhoneGap">PhoneGap wiki</a>:</p>
+			<p>PhoneGap 1.0 introduced the idea of white-listing servers that its internal WebView is allowed to make cross-domain requests to. You can find info about it here on the <a href="http://wiki.phonegap.com/w/page/40796976/Install%20the%20latest%20%28trunk%29%20source%20of%20iOS%20PhoneGap">PhoneGap wiki</a>:</p>
 
-			<p>However, not all platforms support this whitelisting feature so check the PhoneGap documentation for details. Older versions of PhoneGap prior to 1.0 defaulted to allowing cross-domain requests to any server.</p>
+			<p>However, not all platforms support this white-listing feature so check the PhoneGap documentation for details. Older versions of PhoneGap prior to 1.0 defaulted to allowing cross-domain requests to any server.</p>
 
 			<h2>Still having issues?</h2>
 
