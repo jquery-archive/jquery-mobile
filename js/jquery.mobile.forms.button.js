@@ -46,15 +46,17 @@ $.widget( "mobile.button", $.mobile.widget, {
 					// Add hidden input if it doesn’t already exist.
 					if( $buttonPlaceholder === undefined ) {
 						$buttonPlaceholder = $( "<input>", {
-									type: "hidden",
-									name: $el.attr( "name" ),
-									value: $el.attr( "value" )
-								})
-								.insertBefore( $el );
+							type: "hidden",
+							name: $el.attr( "name" ),
+							value: $el.attr( "value" )
+						}).insertBefore( $el );
 
 						// Bind to doc to remove after submit handling
 						$( document ).one("submit", function(){
 							$buttonPlaceholder.remove();
+
+							// reset the local var so that the hidden input
+							// will be re-added on subsequent clicks
 							$buttonPlaceholder = undefined;
 						});
 					}
