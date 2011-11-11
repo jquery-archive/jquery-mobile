@@ -73,8 +73,8 @@ $.fn.buttonMarkup = function( options ) {
 			buttonClass += " ui-shadow";
 		}
 
-		el.attr( "data-" + $.mobile.ns + "theme", o.theme )
-			.addClass( buttonClass );
+		e.setAttribute( "data-" + $.mobile.ns + "theme", o.theme );
+		el.addClass( buttonClass );
 
 		buttonInner.className = innerClass;
 		buttonInner.setAttribute("aria-hidden", "true");
@@ -96,7 +96,7 @@ $.fn.buttonMarkup = function( options ) {
 		// TODO obviously it would be nice to pull this element out instead of
 		// retrieving it from the DOM again, but this change is much less obtrusive
 		// and 1.0 draws nigh
-		el.data( 'textWrapper', $( buttonText ) );
+		$.data( e, 'textWrapper', $( buttonText ) );
 	}
 
 	return this;

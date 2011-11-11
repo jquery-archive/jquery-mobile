@@ -115,7 +115,21 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		}
 		return null;
 	},
-	
+	_getChildrenByTagName: function( ele, lcName, ucName )
+	{
+		var results = [],
+			dict = {};
+		dict[ lcName ] = dict[ ucName ] = true;
+		ele = ele.firstChild;
+		while ( ele ) {
+			if ( dict[ ele.nodeName ] ) {
+				results.push( ele );
+			}
+			ele = ele.nextSibling;
+		}
+		return $( results );
+	},
+
 	_addThumbClasses: function( containers )
 	{
 		var i, img, len = containers.length;
@@ -138,7 +152,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			dividertheme = $list.jqmData( "dividertheme" ) || o.dividerTheme,
 			listsplittheme = $list.jqmData( "splittheme" ),
 			listspliticon = $list.jqmData( "spliticon" ),
-			li = $list.children( "li" ),
+			li = this._getChildrenByTagName( $list[ 0 ], "li", "LI" ),
 			counter = $.support.cssPseudoElement || !$.nodeName( $list[ 0 ], "ol" ) ? 0 : 1,
 			item, itemClass, itemTheme,
 			a, last, splittheme, countParent, icon, imgParents, img;
@@ -154,7 +168,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			// If we're creating the element, we update it regardless
 			if ( create || !item.hasClass( "ui-li" ) ) {
 				itemTheme = item.jqmData("theme") || o.theme;
-				a = item.children( "a" );
+				a = this._getChildrenByTagName( item[ 0 ], "a", "A" );
 
 				if ( a.length ) {
 					icon = item.jqmData("icon");
