@@ -1,9 +1,7 @@
 /*
-* jQuery Mobile Framework : "collapsible" plugin
-* Copyright (c) jQuery Project
-* Dual licensed under the MIT or GPL Version 2 licenses.
-* http://jquery.org/license
+* "collapsible" plugin
 */
+
 (function( $, undefined ) {
 
 $.widget( "mobile.collapsible", $.mobile.widget, {
@@ -11,7 +9,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 		expandCueText: " click to expand contents",
 		collapseCueText: " click to collapse contents",
 		collapsed: true,
-		heading: ">:header,>legend",
+		heading: "h1,h2,h3,h4,h5,h6,legend",
 		theme: null,
 		contentTheme: null,
 		iconTheme: "d",
@@ -22,10 +20,10 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 		var $el = this.element,
 			o = this.options,
 			collapsible = $el.addClass( "ui-collapsible" ),
-			collapsibleHeading = $el.find( o.heading ).eq( 0 ),
+			collapsibleHeading = $el.children( o.heading ).first(),
 			collapsibleContent = collapsible.wrapInner( "<div class='ui-collapsible-content'></div>" ).find( ".ui-collapsible-content" ),
 			collapsibleSet = $el.closest( ":jqmData(role='collapsible-set')" ).addClass( "ui-collapsible-set" ),
-			colllapsiblesInSet = collapsibleSet.children( ":jqmData(role='collapsible')" );
+			collapsiblesInSet = collapsibleSet.children( ":jqmData(role='collapsible')" );
 
 		// Replace collapsibleHeading if it's a legend
 		if ( collapsibleHeading.is( "legend" ) ) {
@@ -54,7 +52,8 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			.addClass( "ui-collapsible-heading" )
 			.append( "<span class='ui-collapsible-heading-status'></span>" )
 			.wrapInner( "<a href='#' class='ui-collapsible-heading-toggle'></a>" )
-			.find( "a:eq(0)" )
+			.find( "a" )
+				.first()
 				.buttonMarkup({
 					shadow: false,
 					corners: false,
@@ -65,7 +64,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 
 		if ( !collapsibleSet.length ) {
 			collapsibleHeading
-				.find( "a:eq(0), .ui-btn-inner" )
+				.find( "a" ).first().add( collapsibleHeading.find( ".ui-btn-inner" ) )
 					.addClass( "ui-corner-top ui-corner-bottom" );
 		} else {
 			// If we are in a collapsible set
@@ -85,15 +84,17 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 					});
 			}
 
-			colllapsiblesInSet.first()
-				.find( "a:eq(0)" )
+			collapsiblesInSet.first()
+				.find( "a" )
+					.first()
 					.addClass( "ui-corner-top" )
 						.find( ".ui-btn-inner" )
 							.addClass( "ui-corner-top" );
 
-			colllapsiblesInSet.last()
+			collapsiblesInSet.last()
 				.jqmData( "collapsible-last", true )
-				.find( "a:eq(0)" )
+				.find( "a" )
+					.first()
 					.addClass( "ui-corner-bottom" )
 						.find( ".ui-btn-inner" )
 							.addClass( "ui-corner-bottom" );
@@ -101,7 +102,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 
 			if ( collapsible.jqmData( "collapsible-last" ) ) {
 				collapsibleHeading
-					.find( "a:eq(0), .ui-btn-inner" )
+					.find( "a" ).first().add ( collapsibleHeading.find( ".ui-btn-inner" ) )
 						.addClass( "ui-corner-bottom" );
 			}
 		}
@@ -131,7 +132,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 
 					if ( contentTheme && ( !collapsibleSet.length || collapsible.jqmData( "collapsible-last" ) ) ) {
 						collapsibleHeading
-							.find( "a:eq(0), .ui-btn-inner" )
+							.find( "a" ).first().add( collapsibleHeading.find( ".ui-btn-inner" ) )
 							.toggleClass( "ui-corner-bottom", isCollapse );
 						collapsibleContent.toggleClass( "ui-corner-bottom", !isCollapse );
 					}

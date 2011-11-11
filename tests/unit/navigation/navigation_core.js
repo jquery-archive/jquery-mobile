@@ -520,6 +520,30 @@
 		]);
 	});
 
+	asyncTest( "Page title updates properly when clicking a link back to first page", function(){
+		var title = document.title;
+
+		$.testHelper.pageSequence([
+			function(){
+				$.testHelper.openPage("#ajax-title-page");
+			},
+
+			function(){
+				$("#titletest1").click();
+			},
+
+			function(){
+				same(document.title, "Title Tag");
+				$.mobile.activePage.find("#title-check-link").click();
+			},
+
+			function(){
+				same(document.title, title);
+				start();
+			}
+		]);
+	});
+
 	asyncTest( "Page title updates properly from title tag when loading an external page", function(){
 		$.testHelper.pageSequence([
 			function(){

@@ -1,8 +1,5 @@
 /*
-* jQuery Mobile Framework : "links" plugin - simple class additions for links
-* Copyright (c) jQuery Project
-* Dual licensed under the MIT or GPL Version 2 licenses.
-* http://jquery.org/license
+* "links" plugin - simple class additions for links
 */
 
 (function( $, undefined ) {

@@ -60,7 +60,7 @@
 			<p>Inside the <code>&lt;body&gt;</code> tag, each view or "page" on the mobile device is identified with an element (usually a <code>div</code>) with the <code> data-role="page"</code> attribute:</p> 
 
 <div class="highlight"> 
-<pre><span class="nt">&lt;div</span> <span class="na"> data-role=</span><span class="s">"page"</span><span class="nt">&gt;</span> 
+<pre><span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"page"</span><span class="nt">&gt;</span> 
 	...
 <span class="nt">&lt;/div&gt;</span> 
 </pre> 
@@ -153,7 +153,7 @@
 	&lt;/div&gt;&lt;!-- /header --&gt;
 
 	&lt;div data-role=&quot;content&quot;&gt;	
-		&lt;p&gt;I&#x27;m the second in the source order so I&#x27;m hidden when the page load. I&#x27;m just shown, if a link that reference my ID is beeing clicked.&lt;/p&gt;		
+		&lt;p&gt;I&#x27;m the second in the source order so I&#x27;m hidden when the page loads. I&#x27;m just shown if a link that references my ID is beeing clicked.&lt;/p&gt;		
 		&lt;p&gt;&lt;a href=&quot;#foo&quot;&gt;Back to foo&lt;/a&gt;&lt;/p&gt;	
 	&lt;/div&gt;&lt;!-- /content --&gt;
 
@@ -173,7 +173,7 @@
 		
 <h2>Conventions, not requirements</h2>
 
-<p>Although the page structure outlined above is a recommended approach for a standard web app built with jQuery Mobile, the framework is very flexible with document structure. The page, header, content, and footer data-role elements are optional and are mostly helpful for providing some basic formatting and structure. The page wrapper used to be required for auto-initialization to work but this too is now optional for single page documents so there isn't any required markup at all. For a web page with a custom layout, all of these structural elements can be omitted but the Ajax navigation and all widgets will work just like they do in the boilerplate structure. Behind the scenes, the framework will inject the page wrapper if it's not included in the markup because it’s needed for managing pages, but the starting markup can now be extremely simple. </p>
+<p>Although the page structure outlined above is a recommended approach for a standard web app built with jQuery Mobile, the framework is very flexible with document structure. The page, header, content, and footer data-role elements are optional and are mostly helpful for providing some basic formatting and structure. The page wrapper that used to be required for auto-initialization to work is now optional for single page documents, so there isn't any required markup at all. For a web page with a custom layout, all of these structural elements can be omitted and the Ajax navigation and all widgets will work just like they do in the boilerplate structure. Behind the scenes, the framework will inject the page wrapper if it's not included in the markup because it’s needed for managing pages, but the starting markup can now be extremely simple. </p>
 
 <p>Note that in a multi-page setup, you are required to have page wrappers in your markup in order to group the content into multiple pages.</p>
 
@@ -200,8 +200,10 @@
 								<li><a href="page-dialogs.html">Dialogs</a></li>
 								<li><a href="page-cache.html">Prefetching &amp; caching pages</a></li>
 								<li><a href="page-navmodel.html">Ajax, hashes &amp; history</a></li>
-								<li><a href="page-dynamic.html">Dynamically Injecting Pages</a></li>
+								<li><a href="page-dynamic.html">Dynamically injecting pages</a></li>
 								<li><a href="page-scripting.html">Scripting pages</a></li>
+								<li><a href="phonegap.html">PhoneGap apps</a></li>
+								<li><a href="touchoverflow.html">touchOverflow feature</a></li>
 								<li><a href="pages-themes.html">Theming pages</a></li>
 
 							</ul>

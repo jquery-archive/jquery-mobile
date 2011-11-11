@@ -45,7 +45,7 @@
 
 			<h2>pushState plugin</h2>
 
-			<p>There is an optional feature is converts the longer, hash-based URLs mentioned in the previous section into the full document path which is cleaner and makes the Ajax tracking transparent in the URL structure. This is built as an enhancement on top of the hash-based URL system for Ajax links. Note that despite the name, this feature technically converts hash-based urls by using <code>history.replaceState</code> (not <code>history.pushState</code>) in the current release because this works more reliably across our target platforms. For browsers that do not support <code>history.replaceState</code>, or if this feature is disabled, hash-based URLs will be used instead. </p>
+			<p>There is an optional feature that converts the longer, hash-based URLs mentioned in the previous section into the full document path which is cleaner and makes the Ajax tracking transparent in the URL structure. This is built as an enhancement on top of the hash-based URL system for Ajax links. Note that despite the name, this feature technically converts hash-based urls by using <code>history.replaceState</code> (not <code>history.pushState</code>) in the current release because this works more reliably across our target platforms. For browsers that do not support <code>history.replaceState</code>, or if this feature is disabled, hash-based URLs will be used instead. </p>
 
 			<p>Since the plugin initializes when the DOM is fully loaded you can enable and disable it manually by setting <code>$.mobile.pushStateEnabled</code> global <a href="../api/globalconfig.html">configuration option</a> to <code>false</code> anytime before document ready.</p>
 
@@ -99,7 +99,7 @@
 
 			</ul><h2>Form submissions</h2>
 
-			<p>Form submissions are handled automatically through the navigation model as well. Visit the forms section for more information.</p>
+			<p>Form submissions are handled automatically through the navigation model as well. Visit the <a href="../forms/forms-sample.html">forms section</a> for more information.</p>
 
 			<h2>Using the Application Cache</h2>
 
@@ -158,10 +158,11 @@ $.ajaxPrefilter( function(options, originalOptions, jqXHR) {
 								<li><a href="page-dialogs.html">Dialogs</a></li>
 								<li><a href="page-cache.html">Prefetching &amp; caching pages</a></li>
 								<li data-theme="a"><a href="page-navmodel.html">Ajax, hashes &amp; history</a></li>
-								<li><a href="page-dynamic.html">Dynamically Injecting Pages</a></li>
+								<li><a href="page-dynamic.html">Dynamically injecting pages</a></li>
 								<li><a href="page-scripting.html">Scripting pages</a></li>
+								<li><a href="phonegap.html">PhoneGap apps</a></li>
+								<li><a href="touchoverflow.html">touchOverflow feature</a></li>
 								<li><a href="pages-themes.html">Theming pages</a></li>
-
 							</ul>
 					</div>
 				</div>

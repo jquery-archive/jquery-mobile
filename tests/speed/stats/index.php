@@ -1,33 +1,52 @@
 <?php
-  $db = new SQLiteDatabase('stats.db');
-
-  // hand to God I tried CREATE TABLE IF NOT EXISTS and it persisted with
-  // a syntax error. The IDENTICAL query sans IF NOT EXISTS works perfectly
-  // http://www.sqlite.org/lang_createtable.html
-  @$db->query('CREATE TABLE stats (id INTEGER, agent TEXT, point TEXT, value REAL, time TIMESTAMP, PRIMARY KEY (id))');
+  $db = new PDO('sqlite:./stats.db');
+  $db->query('CREATE TABLE IF NOT EXISTS stats (id INTEGER, agent TEXT, agent_version Text, agent_full TEXT, point TEXT, value REAL, time TIMESTAMP, pathname TEXT, PRIMARY KEY (id))');
 
   // making a sad attempt here to provide a clean REST-respecting url scheme.
   // stats with a GET returns - wait for it - the stats, and a post with the
   // the right params will create a new entry
   if ( $_SERVER['REQUEST_METHOD'] == "GET" ) {
-     $json = Array();
-     $results = $db->query( 'SELECT agent, point, value, time FROM stats' );
+     $agent = (empty($_GET['agent'])) ? '' : urldecode($_GET['agent']);
+     $data_point = (empty($_GET['data_point'])) ? '' : urldecode($_GET['data_point']);
 
-     // TODO not sure if there's a better way to convert db results into
-     // a json encodable data structure
-     while($row = $results->fetch(SQLITE3_ASSOC)){
-          array_push($json, $row);
-     }
+     $st = $db->prepare( '
+     SELECT agent, agent_version, point, avg(value) as avg_value,
+            pathname, strftime(\'%Y-%m-%d\', time) as day
+     FROM stats
+     WHERE (agent_full like \'%Mobile%\' or agent_full like \'%mobile%\')
+           and agent like :agent and point like :data_point
+     GROUP BY agent, agent_version, pathname, point, strftime(\'%Y-%m-%d\', time)
+     ORDER BY time;
+     ');
 
+     $st->execute(array(
+        ':agent' => '%' . $agent . '%',
+        ':data_point' => '%' . $data_point . '%'
+     ));
+
+     $result = $st->fetchAll(PDO::FETCH_ASSOC);
      header("Content-Type: application/json");
-     echo json_encode($json);
-  }  elseif ( $_POST['datapoint'] && $_POST['value'] && $_POST['agent'] ){
-     // TODO it is not clear from the docs if there's an easier way to do the
-     // escaped query interpolation here. Suggestions welcome :(
-     $data_point = sqlite_escape_string( $_POST['datapoint'] );
-     $value = sqlite_escape_string( $_POST['value'] );
-     $agent = sqlite_escape_string( $_POST['agent'] );
-     $db->query('INSERT INTO stats (agent, point, value, time) VALUES ("' . $agent . '", "' . $data_point . '",' . $value . ', DATETIME(\'now\'))');
+     echo json_encode($result);
+
+  }  elseif ( $_POST['datapoint'] &&
+              $_POST['value'] &&
+              $_POST['agent'] &&
+              $_POST['pathname'] &&
+              $_POST['agentVersion'] ) {
+
+     $st = $db->prepare('
+     INSERT INTO stats (agent, agent_full, agent_version, point, value, pathname, time)
+     VALUES (:agent, :agent_full, :agent_version, :data_point, :value, :pathname, DATETIME(\'now\'))
+     ');
+
+     $st->execute(array(
+            ':agent' => $_POST['agent'],
+						':agent_full' => $_POST['agentFull'],
+            ':agent_version' => $_POST['agentVersion'],
+            ':data_point' => $_POST['datapoint'],
+            ':value' => $_POST['value'],
+            ':pathname' => $_POST['pathname']
+        ));
 
      echo "success";
   }
