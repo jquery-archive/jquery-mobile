@@ -22,11 +22,11 @@
 
 	<div data-role="content">
 		<div class="content-primary">		
-			<p>Since jQuery Mobile uses an Ajax-powered navigation system, there are a few helpful things to know when writing scripts that manipulate your content. You can explore the mobile API in more detail by reading up on <a href="../api/globalConfig.html">global configuration options</a>, <a href="../api/events.html">events</a>, and <a href="../api/methods.html">methods</a> or dig into the technical details of the <a href="page-navmodel.html">Ajax navigation model</a>.</p> 
+			<p>Since jQuery Mobile uses an Ajax-powered navigation system, there are a few helpful things to know when writing scripts that manipulate your content. You can explore the mobile API in more detail by reading up on <a href="../api/globalconfig.html">global configuration options</a>, <a href="../api/events.html">events</a>, and <a href="../api/methods.html">methods</a> or dig into the technical details of the <a href="page-navmodel.html">Ajax navigation model</a>.</p> 
 			
 			<h2>Scripts &amp; styles in the head</h2> 
 			
-			<p>When the user clicks a link in a jQuery Mobile-driven site, the default behavior of the navigation system is to use that link's href to formulate an Ajax request (instead of allowing the browser's default link behavior of requesting that href with full page load). When that Ajax request goes out, the framework will receive its entire text content, but it will only inject the <em>contents of the response's <code>body</code> element (or more specifically the <code>data-role="page"</code> element, if it's provided)</em>, meaning nothing in the <code>head</code> of the page will be used (with the exception of the page title, which is fetched specifically).</p>
+			<p>When the user clicks a link in a jQuery Mobile-driven site, the default behavior of the navigation system is to use that link's <code>href</code> to formulate an Ajax request (instead of allowing the browser's default link behavior of requesting that <code>href</code> with full page load). When that Ajax request goes out, the framework will receive its entire text content, but it will only inject the <em>contents of the response's <code>body</code> element (or more specifically the <code>data-role="page"</code> element, if it's provided)</em>, meaning nothing in the <code>head</code> of the page will be used (with the exception of the page title, which is fetched specifically).</p>
 			
 			<p> This means that any scripts and styles referenced the <code>head</code> of a page won't have any effect <em>when a page is loaded via Ajax</em>, but they <strong>will execute if the page is requested normally via HTTP</strong>. When scripting jQuery Mobile sites, both scenarios need to be considered. The reason that the <code>head</code> of a page is ignored when requested via Ajax is that the potential of re-executing the same JavaScript is very high (it's common to reference the same scripts in every page of a site). Due to the complexity of attempting to work around that issue, we leave the task of executing page-specific scripts to the developer, and assume <code>head</code> scripts are only expected to execute once per browsing session.</p>
 			
@@ -36,7 +36,7 @@
 			
 			<h2>pagecreate = DOM ready</h2> 
 
-			<p>One of the first things people learn in jQuery is to use the $(document).ready() function for executing DOM-specific code as soon as the DOM is ready (which often occurs long before the <code>onload</code> event). However, in jQuery Mobile site and apps, pages are requested and injected into the same DOM as the user navigates, so the DOM ready event is not as useful, as it only executes for the first page. To execute code whenever a new page is loaded and created in jQuery Mobile, you can bind to the <a href="../api/events.html"><code>pagecreate</code></a> event. </p>
+			<p>One of the first things people learn in jQuery is to use the <code>$(document).ready()</code> function for executing DOM-specific code as soon as the DOM is ready (which often occurs long before the <code>onload</code> event). However, in jQuery Mobile site and apps, pages are requested and injected into the same DOM as the user navigates, so the DOM ready event is not as useful, as it only executes for the first page. To execute code whenever a new page is loaded and created in jQuery Mobile, you can bind to the <a href="../api/events.html"><code>pagecreate</code></a> event. </p>
 			
 			<p>The <code>pagecreate</code> event is triggered on a page when it is initialized, right after initialization occurs. Most of jQuery Mobile's official widgets auto-initialize themselves based on this event, and you can set up your code to do the same.</p>
 <pre><code>
@@ -74,8 +74,8 @@ $.mobile.loadPage( "about/us.html" );
 </code></pre>
 
 			<h2>Enhancing new markup</h2> 
-			<p>The page plugin dispatches a &#8220;pagecreate&#8221; event, which most widgets use to auto-initialize themselves. As long as a widget plugin script is referenced, it will automatically enhance any instances of the widgets it finds on the page.</p>		
-			<p>However, if you generate new markup client-side or load in content via Ajax and inject it into a page, you can trigger the <code>create</code> event to handle the auto-initialization for all the plugins contained within the new markup. This can be triggered on any element (even the page div itself), saving you the task of manually initializing each plugin (listview button, select, etc.).</p> 
+			<p>The page plugin dispatches a <code>pagecreate</code> event, which most widgets use to auto-initialize themselves. As long as a widget plugin script is referenced, it will automatically enhance any instances of the widgets it finds on the page.</p>		
+			<p>However, if you generate new markup client-side or load in content via Ajax and inject it into a page, you can trigger the <code>create</code> event to handle the auto-initialization for all the plugins contained within the new markup. This can be triggered on any element (even the page <code>div</code> itself), saving you the task of manually initializing each plugin (listview button, select, etc.).</p> 
 			<p>For example, if a block of HTML markup (say a login form) was loaded in through Ajax, trigger the <code>create</code> event to automatically transform all the widgets it contains (<a href="http://jquerymobile.com/test/docs/forms/textinputs/index.html">inputs</a> and <a href="http://jquerymobile.com/test/docs/buttons/index.html">buttons</a> in this case) into the enhanced versions. The code for this scenario would be:</p> 
 <pre style="margin: 25px 0;"><code style="font-size: 12px;">$( ...new markup that contains widgets... ).appendTo( ".ui-page" ).trigger( "create" );
 </code></pre> 
@@ -125,10 +125,11 @@ $.mobile.silentScroll(300);
 								<li><a href="page-dialogs.html">Dialogs</a></li>
 								<li><a href="page-cache.html">Prefetching &amp; caching pages</a></li>
 								<li><a href="page-navmodel.html">Ajax, hashes &amp; history</a></li>
-								<li><a href="page-dynamic.html">Dynamically Injecting Pages</a></li>
+								<li><a href="page-dynamic.html">Dynamically injecting pages</a></li>
 								<li data-theme="a"><a href="page-scripting.html">Scripting pages</a></li>
+								<li><a href="phonegap.html">PhoneGap apps</a></li>
+								<li><a href="touchoverflow.html">touchOverflow feature</a></li>
 								<li><a href="pages-themes.html">Theming pages</a></li>
-
 							</ul>
 					</div>
 				</div>		

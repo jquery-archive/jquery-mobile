@@ -7,11 +7,14 @@ window.Perf = (function($, Perf) {
 		currentRev: undefined,
 
 		report: function( data, after ) {
-			var self = this;
+			$.extend(data, {
+				pathname: location.pathname,
+				agent: this.agent(),
+				agentFull: window.navigator.userAgent,
+				agentVersion: this.agentVersion()
+			});
 
-			data.pathname = location.pathname;
-
-			$.post( self.reportUrl, data, after );
+			$.post( this.reportUrl, data, after );
 		},
 
 		poll: function() {
@@ -34,8 +37,44 @@ window.Perf = (function($, Perf) {
 			$.get( self.revUrl, function( data ) {
 				self.currentRev = data;
 			});
-		}
+		},
+
+		agent: function() {
+			var agent = window.navigator.userAgent;
+
+			for( name in this.agents ) {
+				if( agent.indexOf( this.agents[name] ) > -1 ) {
+					return this.agents[name];
+				}
+			}
+
+			return agent;
+		},
+
+		agentVersion: function() {
+			var agent = window.navigator.userAgent;
+
+			agent.search(this.vRegexs[this.agent()] || "");
+
+			return RegExp.$1 ? RegExp.$1 : "0.0";
+		},
+
+		agents: {
+			ANDROID: "Android",
+			WP: "Windows Phone OS",
+			IPHONE: "iPhone OS",
+			IPAD: "iPad; U; CPU OS",
+			BLACKBERRY: "BlackBerry"
+		},
+
+		vRegexs: {}
 	});
+
+	Perf.vRegexs[Perf.agents.ANDROID] = /([0-9].[0-9].[0-9]);/;
+	Perf.vRegexs[Perf.agents.WP] = /Windows Phone OS ([0-9].[0-9]);/;
+	Perf.vRegexs[Perf.agents.IPHONE] = /iPhone OS ([0-9]_[0-9])/;
+	Perf.vRegexs[Perf.agents.IPAD] = /iPad; U; CPU OS ([0-9]_[0-9])/;
+	Perf.vRegexs[Perf.agents.BLACKBERRY] = /BlackBerry ([0-9]{4})/;
 
 	return Perf;
 })(jQuery, window.Perf || {});

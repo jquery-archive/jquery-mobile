@@ -15,6 +15,16 @@ Clone this repo and build the js and css files (you'll need Git and Make install
 A full version and a minified version of the jQuery Mobile JavaScript and CSS files will be created 
 in a folder named "compiled". There is also now a Structure only css file so you can add your own theme on top of it.
 
+How to build a self-contained version of the Docs/Demos
+=======================================================
+Once you have your own cloned repo on your computer:
+
+    make docs
+
+The docs will be built and available in the compiled/demos folder. You can move this folder to your web server or 
+other location. It has no dependencies on anything other than a basic HTML web server.
+
+
 Submitting bugs
 ===============
 If you think you've found a bug, please report it by following these instructions:  
@@ -77,9 +87,8 @@ theme's name. For testing locally, make sure the index.php file is copied as wel
 2. Edit the `jquery.mobile.theme.css` file so it contains your custom fonts and colors.
 3. Once you are done editing your files and saving them, open a terminal.
 4. Navigate to the jQuery-Mobile folder's root.
-5. Run the following command to build jQuery-Mobile. The CSSTHEME specifies what theme to include. If you leave it off,
-it will build using the "default" theme.
+5. Run the following command to build jQuery-Mobile (THEME is the name of the folder for your theme from step 1.):
 
-    make CSSTHEME=YourThemeName
+    make THEME=YourThemeName
     
 6. The compiled files will be located in the "compiled" folder in the root of jQuery-Mobile.

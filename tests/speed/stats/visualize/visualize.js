@@ -1,16 +1,37 @@
 (function($) {
+	// TODO this is entire thing sucks
 	$(function() {
-		$.get("../", function(data) {
+		var searchMap = (function() {
+			var searchSplit, searchMap = {};
+
+			if ( !location.search ){
+				return searchMap;
+			}
+
+			searchSplit = location.search.replace(/^\?/, "").split( /&|;/ );
+
+			for( var i = 0; i < searchSplit.length; i++ ) {
+				var kv = searchSplit[i].split(/=/);
+				searchMap[ kv[0] ] = kv[1];
+			}
+
+			return searchMap;
+		})();
+
+		$.get("../", searchMap, function(data) {
 			$.each(data, function( i, avg ) {
-				var $table = $( "#" + avg.point + "[data-pathname='" + avg.pathname + "']");
+				var tablename = avg.point + " " + avg.agent + " " + avg.pathname + " " + avg.agent_version,
+					$table = $( "table > caption:contains(" + tablename + ")");
 
 				if( !$table.length ) {
-					$table = $( "<table>", {
-						id: avg.point,
-						"data-pathname": avg.pathname
+					$table = $( "<table></table>", {
+						"data-pathname": avg.pathname,
+						"data-point": avg.point,
+						"data-agent": avg.agent,
+						"data-agent": avg.agent_version
 					});
 
-					$table.append( "<caption>" + avg.point + " " + avg.pathname + "</caption>");
+					$table.append( "<caption>" + tablename + "</caption>");
 					$table.append( "<thead><tr></tr></thead>" );
 					$table.append( "<tbody><tr></tr></tbody>" );
 				}
@@ -19,7 +40,7 @@
 				var $heading = $table.find("thead > tr > th:contains(" + avg.day + ")");
 
 				if( !$heading.length ) {
-					$heading = $("<th>", {
+					$heading = $("<th></th>", {
 						text: avg.day,
 						scope: "column"
 					});
@@ -31,7 +52,7 @@
 					$row = $table.find( "tbody > tr" );
 
 				if( !$rowHeading.length ) {
-					$rowHeading = $("<th>", {
+					$rowHeading = $("<th></th>", {
 						text: avg.point,
 						scope: "row"
 					});
@@ -41,10 +62,10 @@
 
 				$row.append( "<td>" + avg.avg_value + "</td>" );
 
-        $("#tables").append($table);
+				$("#tables").append($table);
 			});
 
-			$("#tables table").visualize({ type: "line", width: 400, height: 400 }).appendTo("#graphs");
+			$("#tables table").visualize({ type: "bar", width: 400, height: 400 }).appendTo("#graphs");
 		});
 	});
 })(jQuery);

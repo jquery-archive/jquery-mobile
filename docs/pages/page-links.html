@@ -60,7 +60,7 @@
 				
 
 		<h2>"Back" button links</h2>
-		<p>If you use the attribute <code>data-rel="back"</code> on an anchor, any clicks on that anchor will mimic the back button, going back one history entry and ignoring the anchor's default href. This is particularly useful when linking back to a named page, such as a link that says "home", or when generating "back" buttons with JavaScript, such as a button to close a dialog. When using this feature in your source markup, <strong>be sure to provide a meaningful href that actually points to the URL of the referring page (this will allow the feature to work for users in C-Grade browsers</strong>. Also, please keep in mind that if you just want a reverse transition without actually going back in history, you should use the <code>data-direction="reverse"</code> attribute instead.</p>
+		<p>If you use the attribute <code>data-rel="back"</code> on an anchor, any clicks on that anchor will mimic the back button, going back one history entry and ignoring the anchor's default href. This is particularly useful when generating "back" buttons with JavaScript, such as a button to close a dialog. When using this feature in your source markup, although browsers that support this feature will not use the specified <code>href</code> attribute, <strong>be sure to still provide a meaningful value that actually points to the URL of the referring page to allow the feature to work for users in C-Grade browsers</strong>. If users can reach this page from more than one referring pages, specify a sensible <code>href</code> so that the navigation remains logical for all users. Also, please keep in mind that if you just want a reverse transition without actually going back in history, you should use the <code>data-direction="reverse"</code> attribute instead.</p>
 		
 				
 		<h2>Redirects and linking to directories</h2>
@@ -118,10 +118,11 @@
 								<li><a href="page-dialogs.html">Dialogs</a></li>
 								<li><a href="page-cache.html">Prefetching &amp; caching pages</a></li>
 								<li><a href="page-navmodel.html">Ajax, hashes &amp; history</a></li>
-								<li><a href="page-dynamic.html">Dynamically Injecting Pages</a></li>
+								<li><a href="page-dynamic.html">Dynamically injecting pages</a></li>
 								<li><a href="page-scripting.html">Scripting pages</a></li>
+								<li><a href="phonegap.html">PhoneGap apps</a></li>
+								<li><a href="touchoverflow.html">touchOverflow feature</a></li>
 								<li><a href="pages-themes.html">Theming pages</a></li>
-
 							</ul>
 					</div>
 				</div>		

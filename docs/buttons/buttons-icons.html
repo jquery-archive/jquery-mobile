@@ -107,8 +107,24 @@
 			<a href="index.html" data-role="button" data-icon="delete" data-iconpos="notext">Delete</a>
 
 		<h2>Custom Icons</h2>
-		<p>To use custom icons, specify a <code> data-icon</code> value that has a unique name like <code>myapp-email</code> and the button plugin will generate a class by prefixing <code>ui-icon-</code> to the <code> data-icon</code> value and apply it to the button. You can then write a CSS rule that targets the <code>ui-icon-myapp-email</code> class to specify the icon background source. To maintain visual consistency, create a white icon 18x18 pixels saved as a PNG-8 with alpha transparency.</p>
-			
+		<p>To use custom icons, specify a <code>data-icon</code> value that has a unique name like <code>myapp-email</code> and the button plugin will generate a class by prefixing <code>ui-icon-</code> to the <code> data-icon</code> value and apply it to the button: <code>ui-icon-myapp-email</code>. </p>
+		<p>You can then write a CSS rule in your stylesheet that targets the <code>ui-icon-myapp-email</code> class to specify the icon background source. To maintain visual consistency with the rest of the icons, create a white icon 18x18 pixels saved as a PNG-8 with alpha transparency.</p>
+		<p> In this example, we're just pointing to a standalone icon image, but you could just as easily use an icon sprite and specify the positioning instead, just like the icon sprite we use in the framework.</p>
+		
+<pre><code>.ui-icon-myapp-email {
+	background-image: url("app-icon-email.png");
+}</code></pre>
+
+		<p>This will create the standard resolution icon, but many devices now have very high resolution displays, like the retina display on the iPhone 4. To add a HD icon, create an icon that is 36x36 pixels (exactly double the 18 pixel size), and add second rule that uses the <code>-webkit-min-device-pixel-ratio: 2</code> media query to target a rule only to high resolution displays. Specify the background image for the HD icon file and set the background size to 18x18 pixels which will fit the 36 pixel icon into the same 18 pixel space. The media query block can wrap multiple icon rules:</p>
+<pre><code>
+@media only screen and (-webkit-min-device-pixel-ratio: 2) {
+	.ui-icon-myapp-email {
+		background-image: url("app-icon-email-highres.png");
+		background-size: 18px 18px;
+	}
+	...more HD icon rules go here...
+}
+</code></pre>			
 		 	
 		<h2>Icons and themes</h2>
 		<p>The semi-transparent black circle behind the white icon ensures good contrast on any background color so it works well with the jQuery Mobile theming system. Here are examples of the same icons sitting on top of a range of different color swatches in out theme.</p>
