@@ -1099,10 +1099,8 @@
 		// Wrap this in a try/catch block since IE9 throw "Unspecified error" if document.activeElement
 		// is undefined when we are in an IFrame.
 		try {
-			if(document.activeElement) {
-				if(document.activeElement.nodeName.toLowerCase() != 'body') {
-					document.activeElement.blur();
-				}
+			if(document.activeElement && document.activeElement.nodeName.toLowerCase() != 'body') {
+				$(document.activeElement).blur();
 			} else {
 				$( "input:focus, textarea:focus, select:focus" ).blur();
 			}
