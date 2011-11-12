@@ -270,6 +270,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			if ( val == null ) {
 				val = cType === "input" ? parseFloat( control.val() ) : control[0].selectedIndex;
 			}
+			if ( isNaN( val ) ) { 
+				val = 0;
+			}
 			percent = ( parseFloat( val ) - min ) / ( max - min ) * 100;
 		}
 
