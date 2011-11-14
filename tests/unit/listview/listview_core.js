@@ -764,4 +764,21 @@
 			}
 		]);
 	});
+
+
+	asyncTest( "list inherits theme from parent", function() {
+		$.testHelper.pageSequence([
+			function() {
+				$.testHelper.openPage("#list-theme-inherit");
+			},
+
+			function() {
+				var theme = $.mobile.activePage.jqmData('theme');
+				ok( $.mobile.activePage.find("ul > li").hasClass("ui-body-b"), "theme matches the parent");
+				window.history.back();
+			},
+
+			start
+		]);
+	});
 })(jQuery);
