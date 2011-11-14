@@ -19,7 +19,7 @@
           FROM stats
           WHERE agent LIKE \'Android\'
      )
-     WHERE (agent_full like \'%Mobile%\' or agent_full like \'%mobile%\' or agent_full like '%Android%')
+     WHERE (agent_full like \'%Mobile%\' or agent_full like \'%mobile%\' or agent_full like \'%Android%\')
            and agent like :agent and point like :data_point
      GROUP BY agent, agent_version, pathname, point, time
      ORDER BY agent, agent_version, time;
