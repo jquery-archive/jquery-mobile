@@ -21,7 +21,7 @@
 		$.get("../", searchMap, function(data) {
 			$.each(data, function( i, avg ) {
 				var tablename = avg.point + " " + avg.agent + " " + avg.pathname + " " + avg.agent_version,
-					$table = $( "table > caption:contains(" + tablename + ")");
+					$table = $( "table > caption:contains(" + tablename + ")").parent();
 
 				if( !$table.length ) {
 					$table = $( "<table></table>", {
