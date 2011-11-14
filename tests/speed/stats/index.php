@@ -15,8 +15,8 @@
      FROM stats
      WHERE (agent_full like \'%Mobile%\' or agent_full like \'%mobile%\')
            and agent like :agent and point like :data_point
-     GROUP BY agent, agent_version, pathname, point, strftime(\'%Y-%m-%d\', time)
-     ORDER BY time;
+     GROUP BY agent, agent_version, pathname, point, time
+     ORDER BY agent, agent_version, time;
      ');
 
      $st->execute(array(
