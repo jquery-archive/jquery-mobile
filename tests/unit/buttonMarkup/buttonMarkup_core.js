@@ -26,4 +26,22 @@
 		ok(!group.find('[data-iconshadow=false] .ui-icon').hasClass("ui-icon-shadow"),
 			 "buttons with data-iconshadow=false should not have the ui-icon-shadow class on their icons");
 	});
+
+	// Test for issue #3046 and #3054:
+	test( "mousedown on SVG elements should not throw an exception", function(){
+		var svg = $("#embedded-svg"),
+			success = true,
+			rect;
+		ok(svg.length > 0, "found embedded svg document" );
+		if ( svg.length > 0 ) {
+			rect = $( "rect", svg );
+			ok(rect.length > 0, "found rect" );
+			try {
+				rect.trigger("mousedown");
+			} catch ( ex ) {
+				success = false;
+			}
+			ok( success, "mousedown executed without exception");
+		}
+	});
 })(jQuery);
