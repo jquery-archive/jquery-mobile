@@ -95,7 +95,7 @@ css: init
 	@@cat js/jquery.mobile.intro.js | ${VER} > ${OUTPUT}/${STRUCTURE}.css
 	@@cat ${CSSFILES} >> ${OUTPUT}/${STRUCTURE}.css
 	# ..... and then minify it
-	@@echo ${VER_MIN} > ${OUTPUT}/${NAME}.structure.min.css
+	@@echo ${VER_MIN} > ${OUTPUT}/${STRUCTURE}.min.css
 	@@java -jar build/yuicompressor-2.4.6.jar --type css ${OUTPUT}/${STRUCTURE}.css >> ${OUTPUT}/${STRUCTURE}.min.css
 	# ..... and then copy in the images
 	@@cp -R css/themes/${THEME}/images ${OUTPUT}/
@@ -151,8 +151,10 @@ notify: init
 # Zip up the jQm files without docs
 zip: init css js
 	# Packaging up the files into a zip archive
-	@@zip -rq ${NAME}.tmp.zip ${OUTPUT}
-	@@mv ${NAME}.tmp.zip ${OUTPUT}/${NAME}.zip
+	@@mkdir tmp
+	@@cp -r ${OUTPUT} tmp/${NAME} 
+	@@zip -rq ${OUTPUT}/${NAME}.zip tmp/${NAME}/
+	@@rm -rf tmp
 	# -------------------------------------------------
 	
 
@@ -200,4 +202,5 @@ deploy: init js css docs zip
 	@@rm -rf tmp
 	@@rm -rf ${OUTPUT}
 	# -------------------------------------------------
+
 
