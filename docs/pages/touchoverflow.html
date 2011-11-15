@@ -47,11 +47,15 @@ $(document).bind(&quot;mobileinit&quot;, function(){
 
 			<h2>A few downsides</h2>
 			
-			<p>Nothing is perfect, especially a new feature, so there are a few downsides to keep in mind. </p>
+			<p>Nothing is perfect, especially a new feature, so there are a few downsides to keep in mind.  When activating this feature:</p>
 				
 			<ul>
-				<li>Sometimes child elements like lists and forms wouldn't render when embedded in a page with <code>overflow:</code> in iOS5. This was a pretty random phenomenon but is not acceptable so we've added a translate-z CSS property which forces iOS to render the contents. The downside with this fix is that when a transform is applied, all elements are set to position:relative which can cause issues in your layout.</li>
+				<li>Sometimes child elements like lists and forms wouldn't render when embedded in a page with <code>overflow:</code> in iOS5. This was a pretty random phenomenon but is not acceptable so we've added a <code>translate-z</code> CSS property which forces iOS to render the contents. The downside with this fix is that when a transform is applied, all elements are set to position:relative which can cause issues in your layout.</li>
 				<li>The <code>-webkit-overflow-scrolling:touch</code> property seems to disable the events to scroll you to the top of the page when the time is tapped in the status bar. We hope Apple fixes this because it's a very useful feature.</li>
+				<li>When <code>overflow:</code> and <code>-webkit-overflow-scrolling:touch</code> properties are set, iOS appears to ignore any overflow:hidden properties on the parent, which is the page in our case. So if you have an image or code block that is wider than the viewport, horizontal scrolling will be seen. </li>
+				<li>When this feature is active, we are disabling user zoom by manipulating the meta viewport tag because both the toolbars and page content can easily be zoomed to an odd size and it's very difficult to zoom back out. Even though we believe in allowing users to zoom the page, alleviating the usability concerns we have with fixed toolbars and overflow containers is more important.</li>
+				<li>Scroll position can be lost when going back to a page that has been re-loaded. If DOM caching is on, this shouldn't be as much of an issue.</li>
+				<li>This is still an experimental feature, so not all the kinks have been worked out yet. Use with caution and test thoroughly.</li>
 			</ul>	
 			
 			

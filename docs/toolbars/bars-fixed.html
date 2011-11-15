@@ -25,20 +25,23 @@
 		<div class="content-primary">
 				<h2>Fixed toolbars</h2>
 		<p>This is a demo of the "fixed" headers and footers used in the jQuery Mobile framework. The page content flows naturally, allowing us to take advantage of native scrolling instead of a scripting a faux-scrolling workaround. The header and footer divs are right in the flow of the document, but whenever they are out of view the framework will dynamically re-position them into view if the browser supports this feature, otherwise they will simply stay inline.</p>
-		<p>To enable this behavior on a header or footer, add the <code> data-position="fixed"</code> attribute to the toolbar container.</p>
-		<pre><code>
-&lt;div data-role=&quot;header&quot; <strong>data-position=&quot;fixed&quot;</strong>&gt;
-   Header content goes here
-&lt;/div&gt;&lt;!-- end header --&gt;
-		</code></pre>
-	
+		<p>To enable this behavior on a header or footer, add the <code>data-position="fixed"</code> attribute to the toolbar container.</p>
+
 		
 		<h2>Tap to toggle visibility</h2>
 		<p>To toggle the visibility of fixed toolbars, tap the screen. For example, if the fixed toolbars are visible, tap the screen to hide the toolbars and take full advantage of the screen real estate for content. Tapping again will bring the toolbars back into view. </p>
-		<p>It's possible to turn off the the tap to toggle visibility behavior like this: <code>$.mobile.fixedToolbars.setTouchToggleEnabled(false)</code>.</a>
+		<p>It's possible to turn off the the tap to toggle visibility behavior like this:</p>
+<pre><code>
+$.mobile.fixedToolbars
+   .setTouchToggleEnabled(false);
+</code></pre>
 	
 		<h2>Updating toolbar positioning</h2>
-		<p>If the height of the page changes, either through dynamic injection of markup, or by widgets that hide or collapse content, it can throw off the dynamic positioning of the toolbars. To manually tell the toolbars to re-position themselves then fade in, use <code>$.mobile.fixedToolbars.show();</code>. To have them appear immediately without the fade, use <code>$.mobile.fixedToolbars.show(true);</code>.</p>
+		<p>If the height of the page changes, either through dynamic injection of markup, or by widgets that hide or collapse content, it can throw off the dynamic positioning of the toolbars. To manually tell the toolbars to re-position themselves then fade in, use <code>$.mobile.fixedToolbars.show();</code>. To have them appear immediately without the fade:</p>
+<pre><code>
+$.mobile.fixedToolbars
+   .show(true);
+</code></pre>
 			 
 		<p>There is also an <code>updatelayout</code> event that can be used to trigger the toolbars to re-position. Developers who are building dynamic applications that inject content into the current page can also manually trigger this <code><a href="../api/events.html">updatelayout</a></code> event to ensure components on the page update in response to the new content that was just added. This event is used internally in the collapsible and listview filter plugins and is powerful because it's not toolbar-specific -- any widget can be built to listen for the <code>updatelayout</code> event to update the widget in response.</p>
 		
