@@ -88,12 +88,17 @@
 
 	<div data-role="fieldcontain">
 	<label for="flip-s">Server status:</label>
-	<select name="slider" id="flip-s" data-role="slider" disabled >
+	<select name="flip-s" id="flip-s" data-role="slider" disabled >
 		<option value="off">Off</option>
 		<option value="on">On</option>
 	</select>
     </div>    
 
+    <div data-role="fieldcontain">
+	<label for="slider">Max bandwidth:</label>
+	<input type="range" name="slider" id="slider" value="0" min="0" max="100" disabled />
+    </div>
+    
 	<div data-role="fieldcontain">
 		<label for="select-choice-x" class="select">Shipping:</label>
 		<select name="select-shipper" id="select-choice-x" disabled>
