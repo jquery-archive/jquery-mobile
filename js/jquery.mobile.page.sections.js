@@ -74,7 +74,7 @@ $( ":jqmData(role='page'), :jqmData(role='dialog')" ).live( "pagecreate", functi
 				});
 
 		} else if ( role === "content" ) {
-			if ( contentTheme && pageRole === "dialog" ) {
+			if ( contentTheme ) {
 			    $this.addClass( "ui-body-" + ( contentTheme ) );
 			}
 
