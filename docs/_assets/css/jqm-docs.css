@@ -127,11 +127,11 @@ dd h4 { margin:15px 0 0 0; }
 	font-weight: bold;
 	text-shadow: 0 -1px 1px #234403;	
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#74b042), to(#56A00E)); /* Saf4+, Chrome */
-	background-image: -webkit-linear-gradient(top, #74b042, #56A00E); /* Chrome 10+, Saf5.1+ */
-	background-image:    -moz-linear-gradient(top, #74b042, #56A00E); /* FF3.6 */
-	background-image:     -ms-linear-gradient(top, #74b042, #56A00E); /* IE10 */
-	background-image:      -o-linear-gradient(top, #74b042, #56A00E); /* Opera 11.10+ */
-	background-image:         linear-gradient(top, #74b042, #56A00E);		
+	background-image: -webkit-linear-gradient(#74b042, #56A00E); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient(#74b042, #56A00E); /* FF3.6 */
+	background-image:     -ms-linear-gradient(#74b042, #56A00E); /* IE10 */
+	background-image:      -o-linear-gradient(#74b042, #56A00E); /* Opera 11.10+ */
+	background-image:         linear-gradient(#74b042, #56A00E);		
 }
 .ui-bar-f,
 .ui-bar-f .ui-link-inherit {
@@ -148,11 +148,11 @@ dd h4 { margin:15px 0 0 0; }
 	color: 					#fff;
 	text-shadow: 0 -1px 1px #234403;
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#74b042), to(#56A00E)); /* Saf4+, Chrome */
-	background-image: -webkit-linear-gradient(top, #74b042, #56A00E); /* Chrome 10+, Saf5.1+ */
-	background-image:    -moz-linear-gradient(top, #74b042, #56A00E); /* FF3.6 */
-	background-image:     -ms-linear-gradient(top, #74b042, #56A00E); /* IE10 */
-	background-image:      -o-linear-gradient(top, #74b042, #56A00E); /* Opera 11.10+ */
-	background-image:         linear-gradient(top, #74b042, #56A00E);
+	background-image: -webkit-linear-gradient(#74b042, #56A00E); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient(#74b042, #56A00E); /* FF3.6 */
+	background-image:     -ms-linear-gradient(#74b042, #56A00E); /* IE10 */
+	background-image:      -o-linear-gradient(#74b042, #56A00E); /* Opera 11.10+ */
+	background-image:         linear-gradient(#74b042, #56A00E);
 }
 .ui-btn-up-f a.ui-link-inherit {
 	color: 					#fff;
@@ -164,11 +164,11 @@ dd h4 { margin:15px 0 0 0; }
 	color: 					#fff;
 	text-shadow: 0 -1px 1px #234403;
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#8FC963), to(#6EBC1F)); /* Saf4+, Chrome */
-	background-image: -webkit-linear-gradient(top, #8FC963, #6EBC1F); /* Chrome 10+, Saf5.1+ */
-	background-image:    -moz-linear-gradient(top, #8FC963, #6EBC1F); /* FF3.6 */
-	background-image:     -ms-linear-gradient(top, #8FC963, #6EBC1F); /* IE10 */
-	background-image:      -o-linear-gradient(top, #8FC963, #6EBC1F); /* Opera 11.10+ */
-	background-image:         linear-gradient(top, #8FC963, #6EBC1F);
+	background-image: -webkit-linear-gradient(#8FC963, #6EBC1F); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient(#8FC963, #6EBC1F); /* FF3.6 */
+	background-image:     -ms-linear-gradient(#8FC963, #6EBC1F); /* IE10 */
+	background-image:      -o-linear-gradient(#8FC963, #6EBC1F); /* Opera 11.10+ */
+	background-image:         linear-gradient(#8FC963, #6EBC1F);
 }
 .ui-btn-hover-f a.ui-link-inherit {
 	color: 					#fff;
@@ -180,11 +180,11 @@ dd h4 { margin:15px 0 0 0; }
 	color: 					#fff;
 	text-shadow: 0 -1px 1px #234403;
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#56A00E), to(#64A234)); /* Saf4+, Chrome */
-	background-image: -webkit-linear-gradient(top, #56A00E, #64A234); /* Chrome 10+, Saf5.1+ */
-	background-image:    -moz-linear-gradient(top, #56A00E, #64A234); /* FF3.6 */
-	background-image:     -ms-linear-gradient(top, #56A00E, #64A234); /* IE10 */
-	background-image:      -o-linear-gradient(top, #56A00E, #64A234); /* Opera 11.10+ */
-	background-image:         linear-gradient(top, #56A00E, #64A234);
+	background-image: -webkit-linear-gradient(#56A00E, #64A234); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient(#56A00E, #64A234); /* FF3.6 */
+	background-image:     -ms-linear-gradient(#56A00E, #64A234); /* IE10 */
+	background-image:      -o-linear-gradient(#56A00E, #64A234); /* Opera 11.10+ */
+	background-image:         linear-gradient(#56A00E, #64A234);
 }
 .ui-btn-down-f a.ui-link-inherit {
 	color: 					#fff;
