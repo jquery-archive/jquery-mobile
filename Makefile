@@ -67,8 +67,6 @@ OUTPUT = compiled
 # The name of the files
 NAME = jquery.mobile
 STRUCTURE = jquery.mobile.structure
-deploy: NAME = jquery.mobile-${VER_OFFICIAL}
-deploy: STRUCTURE = jquery.mobile.structure-${VER_OFFICIAL}
 
 # The CSS theme being used
 THEME = default
