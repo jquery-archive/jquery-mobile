@@ -39,6 +39,11 @@ $( ":jqmData(role='page')" ).live( "pageshow", function(event) {
 					scrollMethod: $this.jqmData("scroll-method") || undefined
 				};
 
+			// Two more options (optional) for linked scrollviews (data-linked-x='id_of_horizontal_scroller' data-linked-y='id_of_vertical_scroller')
+			// When the scroller is moved horizontal or vertical also scroll the x/y linked scrollers 
+			opts.linked_x = $this.jqmData("linked-x") + "";
+			opts.linked_y = $this.jqmData("linked-y") + "";
+			
 			$this.scrollview( opts );
 		}
 	});
