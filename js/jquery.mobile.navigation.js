@@ -1230,8 +1230,10 @@ define( [
 
 			url = path.makeUrlAbsolute(  url, getClosestBaseUrl($this) );
 
-			//external submits use regular HTTP
-			if( path.isExternal( url ) || target ) {
+			// More info about what's going on here is up in useDefaultUrlHandling in the Click routing.
+			// Basically if we loaded via file:// and we've got "allowCrossDomainPages" true, we should use changePage.
+			isCrossDomainPageLoad = ( $.mobile.allowCrossDomainPages && documentUrl.protocol === "file:");
+			if(( path.isExternal( url ) && !isCrossDomainPageLoad) || target ) {
 				return;
 			}
 
