@@ -60,6 +60,7 @@ CSSTHEMEFILES = css/themes/${THEME}/jquery.mobile.theme.css
 VER = sed "s/v@VERSION/$$(git log -1 --format=format:"Git Build: SHA1: %H <> Date: %cd")/"
 VER_MIN = "/*! jQuery Mobile v${VER_OFFICIAL} jquerymobile.com | jquery.org/license */"
 VER_OFFICIAL = $(shell cat version.txt)
+deploy: VER = sed "s/v@VERSION/${VER_OFFICIAL}/"
 
 # The output folder for the finished files
 OUTPUT = compiled
@@ -86,13 +87,13 @@ all: init css js zip notify
 # Build and minify the CSS files
 css: init
 	# Build the CSS file with the theme included
-	@@cat js/jquery.mobile.intro.js | ${VER} > ${OUTPUT}/${NAME}.css
+	@@cat LICENSE-INFO.txt | ${VER} > ${OUTPUT}/${NAME}.css
 	@@cat ${CSSTHEMEFILES} ${CSSFILES} >> ${OUTPUT}/${NAME}.css
 	# ..... and then minify it
 	@@echo ${VER_MIN} > ${OUTPUT}/${NAME}.min.css
 	@@java -jar build/yuicompressor-2.4.6.jar --type css ${OUTPUT}/${NAME}.css >> ${OUTPUT}/${NAME}.min.css
 	# Build the CSS Structure-only file
-	@@cat js/jquery.mobile.intro.js | ${VER} > ${OUTPUT}/${STRUCTURE}.css
+	@@cat LICENSE-INFO.txt | ${VER} > ${OUTPUT}/${STRUCTURE}.css
 	@@cat ${CSSFILES} >> ${OUTPUT}/${STRUCTURE}.css
 	# ..... and then minify it
 	@@echo ${VER_MIN} > ${OUTPUT}/${STRUCTURE}.min.css
@@ -114,7 +115,7 @@ docs: init css js
 		-exec perl -pi -e \
 		's|js/"|${NAME}.min.js"|g;s|css/themes/default/|${NAME}.min.css|g;s|js/jquery.js"|jquery.js"|g' {} \;
 	# ... Move and zip up the the whole folder
-	@@zip -rq ${OUTPUT}/${NAME}.docs.zip tmp/${NAME}
+	@@cd tmp; zip -rq ../${OUTPUT}/${NAME}.docs.zip ${NAME}
 	@@mv tmp/${NAME} ${OUTPUT}/demos
 	# Finish by removing the temporary files
 	@@rm -rf tmp
@@ -134,7 +135,7 @@ init:
 # Build and minify the JS files
 js: init
 	# Build the JavaScript file
-	@@cat js/jquery.mobile.intro.js | ${VER} > ${OUTPUT}/${NAME}.js
+	@@cat LICENSE-INFO.txt | ${VER} > ${OUTPUT}/${NAME}.js
 	@@cat ${JSFILES} >> ${OUTPUT}/${NAME}.js
 	# ..... and then minify it
 	@@echo ${VER_MIN} > ${OUTPUT}/${NAME}.min.js
@@ -153,7 +154,7 @@ zip: init css js
 	# Packaging up the files into a zip archive
 	@@mkdir tmp
 	@@cp -r ${OUTPUT} tmp/${NAME} 
-	@@zip -rq ${OUTPUT}/${NAME}.zip tmp/${NAME}/
+	@@cd tmp; zip -rq ../${OUTPUT}/${NAME}.zip ${NAME}
 	@@rm -rf tmp
 	# -------------------------------------------------
 	
