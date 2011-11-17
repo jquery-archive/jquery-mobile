@@ -1094,7 +1094,7 @@
 
 		// Kill the keyboard.
 		// XXX_jblas: We need to stop crawling the entire document to kill focus. Instead,
-		//            we should be tracking focus with a live() handler so we already have
+		//            we should be tracking focus with a delegate() handler so we already have
 		//            the element in hand at this point.
 		// Wrap this in a try/catch block since IE9 throw "Unspecified error" if document.activeElement
 		// is undefined when we are in an IFrame.
@@ -1226,7 +1226,7 @@
 	$.mobile._registerInternalEvents = function(){
 
 		//bind to form submit events, handle with Ajax
-		$( "form" ).live('submit', function( event ) {
+		$( document ).delegate( "form", "submit", function( event ) {
 			var $this = $( this );
 			if( !$.mobile.ajaxEnabled ||
 				$this.is( ":jqmData(ajax='false')" ) ) {
@@ -1393,7 +1393,7 @@
 		});
 
 		//prefetch pages when anchors with data-prefetch are encountered
-		$( ".ui-page" ).live( "pageshow.prefetch", function() {
+		$( document ).delegate( ".ui-page", "pageshow.prefetch", function() {
 			var urls = [];
 			$( this ).find( "a:jqmData(prefetch)" ).each(function(){
 				var $link = $(this),
