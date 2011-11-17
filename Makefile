@@ -58,9 +58,10 @@ CSSTHEMEFILES = css/themes/${THEME}/jquery.mobile.theme.css
 # Helper Variables
 # The command to replace the @VERSION in the files with the actual version
 VER = sed "s/v@VERSION/$$(git log -1 --format=format:"Git Build: SHA1: %H <> Date: %cd")/"
-VER_MIN = "/*! jQuery Mobile v${VER_OFFICIAL} jquerymobile.com | jquery.org/license */"
+VER_MIN = "/*! jQuery Mobile v$$(git log -1 --format=format:"Git Build: SHA1: %H <> Date: %cd") jquerymobile.com | jquery.org/license */"
 VER_OFFICIAL = $(shell cat version.txt)
 deploy: VER = sed "s/v@VERSION/${VER_OFFICIAL}/"
+deploy: VER_MIN = "/*! jQuery Mobile v${VER_OFFICIAL} jquerymobile.com | jquery.org/license */"
 
 # The output folder for the finished files
 OUTPUT = compiled
