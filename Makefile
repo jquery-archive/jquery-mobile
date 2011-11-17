@@ -86,13 +86,13 @@ all: init css js zip notify
 # Build and minify the CSS files
 css: init
 	# Build the CSS file with the theme included
-	@@cat js/jquery.mobile.intro.js | ${VER} > ${OUTPUT}/${NAME}.css
+	@@cat LICENSE-INFO.txt | ${VER} > ${OUTPUT}/${NAME}.css
 	@@cat ${CSSTHEMEFILES} ${CSSFILES} >> ${OUTPUT}/${NAME}.css
 	# ..... and then minify it
 	@@echo ${VER_MIN} > ${OUTPUT}/${NAME}.min.css
 	@@java -jar build/yuicompressor-2.4.6.jar --type css ${OUTPUT}/${NAME}.css >> ${OUTPUT}/${NAME}.min.css
 	# Build the CSS Structure-only file
-	@@cat js/jquery.mobile.intro.js | ${VER} > ${OUTPUT}/${STRUCTURE}.css
+	@@cat LICENSE-INFO.txt | ${VER} > ${OUTPUT}/${STRUCTURE}.css
 	@@cat ${CSSFILES} >> ${OUTPUT}/${STRUCTURE}.css
 	# ..... and then minify it
 	@@echo ${VER_MIN} > ${OUTPUT}/${STRUCTURE}.min.css
@@ -134,7 +134,7 @@ init:
 # Build and minify the JS files
 js: init
 	# Build the JavaScript file
-	@@cat js/jquery.mobile.intro.js | ${VER} > ${OUTPUT}/${NAME}.js
+	@@cat LICENSE-INFO.txt | ${VER} > ${OUTPUT}/${NAME}.js
 	@@cat ${JSFILES} >> ${OUTPUT}/${NAME}.js
 	# ..... and then minify it
 	@@echo ${VER_MIN} > ${OUTPUT}/${NAME}.min.js
