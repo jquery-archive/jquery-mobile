@@ -171,7 +171,7 @@ zip: init css js
 # Push the latest git version to the CDN. This is done on a post commit hook
 latest: init js css zip
 	# Time to put these on the CDN
-	@@scp -r ${OUTPUT}/* jqadmin@code.origin.jquery.com:/var/www/html/code.jquery.com/mobile/latest/
+	@@scp -qr ${OUTPUT}/* jqadmin@code.origin.jquery.com:/var/www/html/code.jquery.com/mobile/latest/
 	# Do some cleanup to wrap it up
 	@@rm -rf ${OUTPUT}
 	# -------------------------------------------------
@@ -181,7 +181,7 @@ nightlies: init js css zip docs
 	# Time to put these on the CDN
 	@@mkdir -p tmp/nightlies
 	@@mv ${OUTPUT} tmp/nightlies/$$(date "+%Y%m%d")
-	@@scp -r tmp/nightlies/* jqadmin@code.origin.jquery.com:/var/www/html/code.jquery.com/mobile/nightlies/
+	@@scp -qr tmp/nightlies/* jqadmin@code.origin.jquery.com:/var/www/html/code.jquery.com/mobile/nightlies/
 	# Do some cleanup to wrap it up
 	@@rm -rf tmp
 	# -------------------------------------------------
@@ -192,12 +192,17 @@ deploy: init js css docs zip
 	# Deploying all the files to the CDN
 	@@mkdir tmp
 	@@cp -r ${OUTPUT} tmp/${VER_OFFICIAL}
-	@@scp -r tmp/* jqadmin@code.origin.jquery.com:/var/www/html/code.jquery.com/mobile/
+	@@scp -qr tmp/* jqadmin@code.origin.jquery.com:/var/www/html/code.jquery.com/mobile/
 	@@rm -rf tmp/${VER_OFFICIAL}
-	# Create the Demos/Docs/Tests/Tools for jQueryMobile.com
 	@@mv ${OUTPUT}/demos tmp/${VER_OFFICIAL}
-	# ... And copied to the CDN and the jquerymobile.com server
-	@@scp -r tmp/* jqadmin@jquerymobile.com:/srv/jquerymobile.com/htdocs/demos/	
+	# Create the Demos/Docs/Tests/Tools for jQueryMobile.com
+	# ... By first replacing the paths
+	@@find tmp/${VER_OFFICIAL} -type f \
+		\( -name '*.html' -o -name '*.php' \) \
+		-exec perl -pi -e \
+		's|src="(.*)${NAME}.min.js"|src="//code.jquery.com/mobile/${VER_OFFICIAL}/${NAME}.min.js"|g;s|href="(.*)${NAME}.min.css"|href="//code.jquery.com/mobile/${VER_OFFICIAL}/${NAME}.min.css"|g;s|src="(.*)jquery.js"|src="//code.jquery.com/jquery-1.6.4.js"|g' {} \;
+	# ... So they can be copied to jquerymobile.com
+	@@scp -qr tmp/* jqadmin@jquerymobile.com:/srv/jquerymobile.com/htdocs/demos/	
 	# Do some cleanup to wrap it up
 	@@rm -rf tmp
 	@@rm -rf ${OUTPUT}
