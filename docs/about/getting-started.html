@@ -30,7 +30,7 @@
 
 		<p>jQuery Mobile provides a set of touch-friendly UI widgets and AJAX-powered navigation system to support animated page transitions. Building your first jQuery Mobile page is easy, here's how:</p>
 		
-		<h3>Create a basic page template</h3>	
+		<h2>Create a basic page template</h2>	
 		<p>Pop open your favorite text editor and paste in the <a href="../pages/page-anatomy.html" id="" title="page-anatomy">page template</a> below. In the <code>head</code>, a meta <code>viewport</code> tag and references to jQuery, jQuery Mobile and the mobile theme stylesheet from the CDN are all you need to get started. In the <code>body</code>, add a div with a <code>data-role</code> of <code>page</code> to hold your page contents.</p> 
 
 <pre><code>
@@ -54,10 +54,10 @@
 </code></pre>
 
 		
-		<h3>Add your HTML content</h3>
+		<h2>Add your HTML content</h2>
 		<p>All the normal <a href="../content/content-html.html">HTML elements</a> and styles work as you'd expect - headings, lists, paragraphs. Write your own custom styles to create custom layouts or designs by adding a custom stylesheet to the head and just go to town. There is no required markup in your page. In fact, even the page wrapper is optional.</p> 
 		
-		<h3>Make a button</h3>
+		<h2>Make a button</h2>
 		<p>There are a few ways to make a <a href="../buttons/buttons-types.html" title="buttons-types">buttons</a>, but lets turn a link into a button so it's easy to click. Just start with a link and add a <code>data-role="button"</code> attribute to the link. These are special HTML5 <code>data-</code> attributes used throughout jQuery Mobile to transform basic markup into a widget. Add an <a href="../buttons/buttons-icons.html">icon</a> with the <code>data-icon</code> attribute.</p>
 		
 <pre><code>
@@ -67,7 +67,7 @@
 		<a href="#" data-role="button" data-icon="star">Star button</a>
 
 		
-		<h3>Make a listview</h3>
+		<h2>Make a listview</h2>
 		<p>jQuery Mobile includes a diverse set of common <a href="../lists/docs-lists.html" id="" title="docs-lists">listviews</a> that are basically built from lists with a <code>data-role="listview"</code>. Here is a simple linked list that has a role of <code>listview</code>. We're going to make this look like an inset module by adding a <code>data-inset="true"</code> and add a dynamic search filer with, you guessed it, <code>data-filter="true"</code>.</p>
 
 <pre><code>
@@ -89,7 +89,7 @@
 			<li><a href="#">Ferrari</a></li>
 		</ul>
 
-		<h3>Make a collapsible block</h3>
+		<h2>Make a collapsible block</h2>
 		<p>It's easy to make a collapsible block that toggles open and closed <a href="../content/content-collapsible.html" id="" title="content-collapsible">content-collapsible</a>jQuery Mobile includes a diverse set of common <a href="../lists/docs-lists.html" id="" title="docs-lists">listviews</a> that are basically built from lists with a <code>data-role="listview"</code>. Here is a simple linked list that has a role of <code>listview</code>. We're going to make this look like an inset module by adding a <code>data-inset="true"</code> and add a dynamic search filer with, you guessed it, <code>data-filter="true"</code>.</p>
 
 <pre><code>		
@@ -106,7 +106,7 @@
 
 
 		
-		<h3>Add a slider</h3>
+		<h2>Add a slider</h2>
 		<p>The framework contains a full set of <a href="../forms/forms-all.html">form elements</a> that automatically are enhanced into touch-friendly styled widgets. Here's a slider made with the new HTML5 input type of range, no <code>data-role</code> needed. Be sure to wrap these in a <code>form</code> element and always properly associate a <code>label</code> to every form element.</p> 
 		
 <pre><code>
@@ -121,7 +121,7 @@
 			<input type="range" name="slider-1" id="slider-0" value="25" min="0" max="100"  />
 		</form>
 		
-		<h3>Add a toolbar</h3>
+		<h2>Add a toolbar</h2>
 		<p>Add a header <a href="../toolbars/docs-bars.html" id="" title="docs-bars">toolbar</a> by adding a div. Set the <code>data-role</code> to <code>header</code> and add a heading tag inside (any heading from H1-H6 can be used).</p> 
 	
 <pre><code>&lt;div <strong>data-role=&quot;header&quot;</strong>&gt;
@@ -132,7 +132,7 @@
 			<h1>My Page</h1>
 		</div>
 		
-		<h3>Tweak the theme</h3>
+		<h2>Tweak the theme</h2>
 		<p>Don't like black? Fine. jQuery Mobile has robust a <a href="../api/themes.html" id="">theme framework</a> that supports up to 26 sets of toolbar, content and button colors, called a "swatch". Just add a <code>data-theme="e"</code> attribute to the header div to turn it yellow. Try different swatch letters in default theme from a-e.</p>
 		
 		<div data-role="header" data-theme="e">
@@ -143,7 +143,7 @@
 	
 	<p>When you're ready to build a custom theme, use <a href="http://www.jquerymobile.com/themeroller" rel="external">ThemeRoller</a> to drag and drop, then download a custom theme.</p>
 	
-	<h3>Go forth and build stuff</h3>
+	<h2>Go forth and build stuff</h2>
 	<p>This is just scratching the surface of all the cool things you can build with jQuery Mobile with little effort. Be sure to explore <a href="../pages/page-links.html" id="" title="page-links">linking pages</a>, <a href="../pages/page-transitions.html" id="" title="page-transitions">adding animated page transitions</a>, and <a href="../pages/page-dialogs.html" id="" title="page-dialogs">creating dialogs</a>. Use the <a href="../api/data-attributes.html" id="" title="data-attributes">data-attribute reference</a> to try out some of the other <code>data-</code> attributes you can play with. </p>
 	
 	<p><strong>More of a developer?</strong> Great, forget everything we just covered (kidding). If you don't want to use the <code>data-</code> attribute configuration system, you can take full control of everything and call plugins directly because these are all just standard jQuery plugins built with the UI widget factory. Be sure to dig into <a href="../api/globalconfig.html" id="" title="globalconfig">global configuration</a>, <a href="../api/events.html" id="" title="events">events</a>, and <a href="../api/methods.html" id="" title="methods">methods</a>. Then read up on <a href="../pages/page-scripting.html" id="" title="page-scripting">scripting pages</a>, <a href="../pages/page-dynamic.html" id="" title="page-dynamic">generating dynamic pages</a>, and <a href="../pages/phonegap.html" id="" title="phonegap">building PhoneGap apps</a>.</p>
