@@ -11,7 +11,7 @@ $.mobile.page.prototype.options.headerTheme  = "a";
 $.mobile.page.prototype.options.footerTheme  = "a";
 $.mobile.page.prototype.options.contentTheme = null;
 
-$( ":jqmData(role='page'), :jqmData(role='dialog')" ).live( "pagecreate", function( e ) {
+$( document ).delegate( ":jqmData(role='page'), :jqmData(role='dialog')", "pagecreate", function( e ) {
 	
 	var $page = $( this ),
 		o = $page.data( "page" ).options,
