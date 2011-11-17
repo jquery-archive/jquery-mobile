@@ -28,7 +28,7 @@
 		
 		<h2>Getting Started with jQuery Mobile</h2>
 
-		<p>jQuery Mobile provides a set of touch-friendly UI widgets and AJAX-powered navigation system to support animated page transitions. Building your first jQuery Mobile page is easy, here's how:</p>
+		<p>jQuery Mobile provides a set of touch-friendly UI widgets and an AJAX-powered navigation system to support animated page transitions. Building your first jQuery Mobile page is easy, here's how:</p>
 		
 		<h2>Create a basic page template</h2>	
 		<p>Pop open your favorite text editor and paste in the <a href="../pages/page-anatomy.html" id="" title="page-anatomy">page template</a> below. In the <code>head</code>, a meta <code>viewport</code> tag and references to jQuery, jQuery Mobile and the mobile theme stylesheet from the CDN are all you need to get started. In the <code>body</code>, add a div with a <code>data-role</code> of <code>page</code> to hold your page contents.</p> 
@@ -58,7 +58,7 @@
 		<p>All the normal <a href="../content/content-html.html">HTML elements</a> and styles work as you'd expect - headings, lists, paragraphs. Write your own custom styles to create custom layouts or designs by adding a custom stylesheet to the head and just go to town. There is no required markup in your page. In fact, even the page wrapper is optional.</p> 
 		
 		<h2>Make a button</h2>
-		<p>There are a few ways to make a <a href="../buttons/buttons-types.html" title="buttons-types">buttons</a>, but lets turn a link into a button so it's easy to click. Just start with a link and add a <code>data-role="button"</code> attribute to the link. These are special HTML5 <code>data-</code> attributes used throughout jQuery Mobile to transform basic markup into a widget. Add an <a href="../buttons/buttons-icons.html">icon</a> with the <code>data-icon</code> attribute.</p>
+		<p>There are a few ways to make <a href="../buttons/buttons-types.html" title="buttons-types">buttons</a>, but lets turn a link into a button so it's easy to click. Just start with a link and add a <code>data-role="button"</code> attribute to it. These special HTML5 <code>data-</code> attributes are used throughout jQuery Mobile to transform basic markup into a widget. You can add an <a href="../buttons/buttons-icons.html">icon</a> with the <code>data-icon</code> attribute and optionally set its position with the <code>data-iconpos</code> attribute.</p>
 		
 <pre><code>
 &lt;a href=&quot;#&quot; <strong>data-role=&quot;button&quot; data-icon=&quot;star&quot;</strong>&gt;Star button&lt;/a&gt;
@@ -68,10 +68,10 @@
 
 		
 		<h2>Make a listview</h2>
-		<p>jQuery Mobile includes a diverse set of common <a href="../lists/docs-lists.html" id="" title="docs-lists">listviews</a> that are basically built from lists with a <code>data-role="listview"</code>. Here is a simple linked list that has a role of <code>listview</code>. We're going to make this look like an inset module by adding a <code>data-inset="true"</code> and add a dynamic search filer with, you guessed it, <code>data-filter="true"</code>.</p>
+		<p>jQuery Mobile includes a diverse set of common <a href="../lists/docs-lists.html" id="" title="docs-lists">listviews</a> that are basically built from lists with a <code>data-role="listview"</code>. Here is a simple linked list that has a role of <code>listview</code>. We're going to make this look like an inset module by adding a <code>data-inset="true"</code> and add a dynamic search filter with, you guessed it, <code>data-filter="true"</code>.</p>
 
 <pre><code>
-&lt;ul <strong>data-role=&quot;listview&quot; data-inset=&quot;true&quot; data-filter=&quot;true&quot</strong>;&gt;
+&lt;ul <strong>data-role=&quot;listview&quot; data-inset=&quot;true&quot; data-filter=&quot;true&quot</strong>&gt;
 	&lt;li&gt;&lt;a href=&quot;#&quot;&gt;Acura&lt;/a&gt;&lt;/li&gt;
 	&lt;li&gt;&lt;a href=&quot;#&quot;&gt;Audi&lt;/a&gt;&lt;/li&gt;
 	&lt;li&gt;&lt;a href=&quot;#&quot;&gt;BMW&lt;/a&gt;&lt;/li&gt;
@@ -90,7 +90,7 @@
 		</ul>
 
 		<h2>Make a collapsible block</h2>
-		<p>It's easy to make a collapsible block that toggles open and closed <a href="../content/content-collapsible.html" id="" title="content-collapsible">content-collapsible</a>jQuery Mobile includes a diverse set of common <a href="../lists/docs-lists.html" id="" title="docs-lists">listviews</a> that are basically built from lists with a <code>data-role="listview"</code>. Here is a simple linked list that has a role of <code>listview</code>. We're going to make this look like an inset module by adding a <code>data-inset="true"</code> and add a dynamic search filer with, you guessed it, <code>data-filter="true"</code>.</p>
+		<p>It's easy to make a <a href="../content/content-collapsible.html" id="" title="content-collapsible">collapsible block</a> that can be toggled open and close to show or hide its content. Simply add the <code>data-role="collapsible"</code> attribute to a div container followed by a header element (H1-H6) and any HTML-Markup. jQuery Mobile will wrap your markup into a container, that is collapsed by default and hidden/shown when its header is clicked. Optionally you can set the content-background and border with the <code>data-content-theme</code> attribute like shown below.</p>
 
 <pre><code>		
 &lt;div <strong>data-role=&quot;collapsible&quot; data-content-theme=&quot;c&quot;</strong>&gt;
@@ -133,7 +133,7 @@
 		</div>
 		
 		<h2>Tweak the theme</h2>
-		<p>Don't like black? Fine. jQuery Mobile has robust a <a href="../api/themes.html" id="">theme framework</a> that supports up to 26 sets of toolbar, content and button colors, called a "swatch". Just add a <code>data-theme="e"</code> attribute to the header div to turn it yellow. Try different swatch letters in default theme from a-e.</p>
+		<p>Don't like black? Fine. jQuery Mobile has a robust <a href="../api/themes.html" id="">theme framework</a> that supports up to 26 sets of toolbar, content and button colors, called a "swatch". Just add a <code>data-theme="e"</code> attribute to the header div to turn it yellow. Try different swatch letters in default theme from a-e.</p>
 		
 		<div data-role="header" data-theme="e">
 			<h1>My Page</h1>
