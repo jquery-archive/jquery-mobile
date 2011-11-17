@@ -194,7 +194,12 @@ deploy: init js css docs zip
 	@@rm -rf tmp/${VER_OFFICIAL}
 	# Create the Demos/Docs/Tests/Tools for jQueryMobile.com
 	@@mv ${OUTPUT}/demos tmp/${VER_OFFICIAL}
-	# ... And copied to the CDN and the jquerymobile.com server
+	# ... By first replacing the paths
+	@@find tmp/${VER_OFFICIAL} -type f \
+		\( -name '*.html' -o -name '*.php' \) \
+		-exec perl -pi -e \
+		's|src="(.*)/${NAME}.min.js"|src="//code.jquery.com/mobile/${VER_OFFICIAL}/${NAME}.min.js"|g;s|href="(.*)/${NAME}.min.css"|href="//code.jquery.com/mobile/${VER_OFFICIAL}/${NAME}.min.css"|g;s|src="(.*)/jquery.js"|src="//code.jquery.com/jquery-1.6.4.js"|g' {} \;
+	# ... So they can be copied to jquerymobile.com
 	@@scp -r tmp/* jqadmin@jquerymobile.com:/srv/jquerymobile.com/htdocs/demos/	
 	# Do some cleanup to wrap it up
 	@@rm -rf tmp
