@@ -15,6 +15,7 @@ JSFILES = 	  js/jquery.ui.widget.js \
 			  js/jquery.mobile.dialog.js \
 			  js/jquery.mobile.page.sections.js \
 			  js/jquery.mobile.collapsible.js \
+			  js/jquery.mobile.collapsibleSet.js \
 			  js/jquery.mobile.fieldContain.js \
 			  js/jquery.mobile.grid.js \
 			  js/jquery.mobile.navbar.js \
