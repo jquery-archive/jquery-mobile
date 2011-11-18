@@ -2,7 +2,7 @@
 * "collapsibleset" plugin
 */
 
-(function( $, undefined ) {
+define( [ "jquery", "jquery.mobile.widget", "jquery.mobile.collapsible" ], function( $ ) {
 
 $.widget( "mobile.collapsibleset", $.mobile.widget, {
 	options: {
@@ -79,4 +79,4 @@ $( document ).bind( "pagecreate create", function( e ){
 	$( $.mobile.collapsibleset.prototype.options.initSelector, e.target ).collapsibleset();
 });
 
-})( jQuery );
+});
