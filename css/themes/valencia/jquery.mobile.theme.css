@@ -1,3 +1,19 @@
+@import url( "../../structure/jquery.mobile.core.css" );
+@import url( "../../structure/jquery.mobile.transitions.css" );
+@import url( "../../structure/jquery.mobile.grids.css" );
+@import url( "../../structure/jquery.mobile.headerfooter.css" );
+@import url( "../../structure/jquery.mobile.navbar.css" );
+@import url( "../../structure/jquery.mobile.button.css" );
+@import url( "../../structure/jquery.mobile.collapsible.css" );
+@import url( "../../structure/jquery.mobile.controlgroup.css" );
+@import url( "../../structure/jquery.mobile.dialog.css" );
+@import url( "../../structure/jquery.mobile.forms.checkboxradio.css" );
+@import url( "../../structure/jquery.mobile.forms.fieldcontain.css" );
+@import url( "../../structure/jquery.mobile.forms.select.css" );
+@import url( "../../structure/jquery.mobile.forms.textinput.css" );
+@import url( "../../structure/jquery.mobile.listview.css" );
+@import url( "../../structure/jquery.mobile.forms.slider.css" );
+
 /*####################################################################################################################################
 
   A
