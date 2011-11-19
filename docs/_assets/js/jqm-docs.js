@@ -30,7 +30,7 @@ $('div').live('pagecreate',function(event){
 //collapse page navs after use
 $(function(){
 	$('body').delegate('.content-secondary .ui-collapsible-content', 'click',  function(){
-		$(this).trigger("collapse")
+		$(this).trigger("collapse");
 	});
 });
 
@@ -52,4 +52,15 @@ function setDefaultTransition(){
 $(function(){
 	setDefaultTransition();
 	$( window ).bind( "throttledresize", setDefaultTransition );
+});
+
+
+$(function() {
+  if ( location.protocol.substr(0,5) === 'file:' ) {
+    $('a, input[type="submit"], form').attr('data-ajax', false)
+      .filter('a')
+      .filter('[href="../"]').attr('href', '../index.html').end()
+      .filter('[href="../../"]').attr('href', '../../index.html').end()
+      .filter('[href="../../../"]').attr('href', '../../../index.html').end();
+  }
 });
