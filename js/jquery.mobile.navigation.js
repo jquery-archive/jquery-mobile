@@ -1231,7 +1231,6 @@
 			//Don't use ajax if ajax is turned off or if its a form with a file upload
 			if( !$.mobile.ajaxEnabled ||
 				$this.is( ":jqmData(ajax='false')" ) ||
-				$this.attr( "enctype" ) === "multipart/form-data" ||
 				$this.find( "input[type='file']" ).length > 0 ) {
 					return;
 				}
