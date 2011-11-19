@@ -55,12 +55,16 @@ $(function(){
 });
 
 
-$(function() {
-  if ( location.protocol.substr(0,5) === 'file:' ) {
-    $('a, input[type="submit"], form').attr('data-ajax', false)
-      .filter('a')
-      .filter('[href="../"]').attr('href', '../index.html').end()
-      .filter('[href="../../"]').attr('href', '../../index.html').end()
-      .filter('[href="../../../"]').attr('href', '../../../index.html').end();
-  }
-});
+// Turn off AJAX for local file browsing
+if ( location.protocol.substr(0,5) === 'file:' ) {
+  $( function() {
+    $( "a" )
+      .filter( "[href='../']" ).attr( "href", "../index.html" ).end()
+      .filter( "[href='../../']" ).attr( "href", "../../index.html" ).end()
+      .filter( "[href='../../../']" ).attr( "href", "../../../index.html" );
+  });
+  $( document ).bind( "mobileinit", function() {
+    $.mobile.ajaxEnabled = false;
+  });
+}
+
