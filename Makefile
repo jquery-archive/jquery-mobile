@@ -115,7 +115,7 @@ docs: init css js
 	@@find tmp/${NAME} -type f \
 		\( -name '*.html' -o -name '*.php' \) \
 		-exec perl -pi -e \
-		's|js/"|${NAME}.min.js"|g;s|css/themes/default/|${NAME}.min.css|g;s|js/jquery.js"|jquery.js"|g' {} \;
+		's|js/"|${NAME}.min.js"|g;s|css/themes/default/|${NAME}.min.css|g;s|js/jquery.js"|jquery.js"|g;s|"../../"|"../../index.html"|g' {} \;
 	# ... Move and zip up the the whole folder
 	@@cd tmp; zip -rq ../${OUTPUT}/${NAME}.docs.zip ${NAME}
 	@@mv tmp/${NAME} ${OUTPUT}/demos
