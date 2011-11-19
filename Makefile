@@ -109,7 +109,7 @@ css: init
 docs: init css js
 	# Create the Demos/Docs/Tests/Tools
 	@@mkdir -p tmp/${NAME}
-	@@cp -r index.html docs experiments external js/jquery.js tests tmp/${NAME}/
+	@@cp -R index.html docs experiments external js/jquery.js tests css/themes/${THEME}/images tmp/${NAME}/
 	@@cp ${OUTPUT}/${NAME}.min.css ${OUTPUT}/${NAME}.min.js tmp/${NAME}/
 	# ... Update the JavaScript and CSS paths
 	@@find tmp/${NAME} -type f \
@@ -152,10 +152,12 @@ notify: init
 
 
 # Zip up the jQm files without docs
-zip: init css js
+zip: init css js 
 	# Packaging up the files into a zip archive
 	@@mkdir tmp
-	@@cp -r ${OUTPUT} tmp/${NAME} 
+	@@cp -R ${OUTPUT} tmp/${NAME} 
+	# ... And remove the Zipped docs so they aren't included twice (for deploy scripts)
+	@@rm -rf tmp/${NAME}/${NAME}.docs.zip 
 	@@cd tmp; zip -rq ../${OUTPUT}/${NAME}.zip ${NAME}
 	@@rm -rf tmp
 	# -------------------------------------------------
@@ -172,7 +174,7 @@ zip: init css js
 # -------------------------------------------------
 
 # Push the latest git version to the CDN. This is done on a post commit hook
-latest: init js css zip
+latest: init css js zip
 	# Time to put these on the CDN
 	@@scp -qr ${OUTPUT}/* jqadmin@code.origin.jquery.com:/var/www/html/code.jquery.com/mobile/latest/
 	# Do some cleanup to wrap it up
@@ -180,7 +182,7 @@ latest: init js css zip
 	# -------------------------------------------------
 
 # Build the nightly backups. This is done on a server cronjob
-nightlies: init js css zip docs 
+nightlies: init css js docs zip 
 	# Time to put these on the CDN
 	@@mkdir -p tmp/nightlies
 	@@mv ${OUTPUT} tmp/nightlies/$$(date "+%Y%m%d")
@@ -191,10 +193,10 @@ nightlies: init js css zip docs
 
 
 # Deploy a finished release. This is manually done.
-deploy: init js css docs zip
+deploy: init css js docs zip
 	# Deploying all the files to the CDN
 	@@mkdir tmp
-	@@cp -r ${OUTPUT} tmp/${VER_OFFICIAL}
+	@@cp -R ${OUTPUT} tmp/${VER_OFFICIAL}
 	@@scp -qr tmp/* jqadmin@code.origin.jquery.com:/var/www/html/code.jquery.com/mobile/
 	@@rm -rf tmp/${VER_OFFICIAL}
 	@@mv ${OUTPUT}/demos tmp/${VER_OFFICIAL}
