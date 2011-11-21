@@ -56,15 +56,26 @@ $(function(){
 
 
 // Turn off AJAX for local file browsing
-if ( location.protocol.substr(0,5) === 'file:' ) {
+if ( location.protocol.substr(0,4)  === 'file' ||
+     location.protocol.substr(0,11) === '*-extension' ||
+     location.protocol.substr(0,6)  === 'widget' ) {
   $( function() {
     $( "a" )
       .filter( "[href='../']" ).attr( "href", "../index.html" ).end()
       .filter( "[href='../../']" ).attr( "href", "../../index.html" ).end()
       .filter( "[href='../../../']" ).attr( "href", "../../../index.html" );
   });
-  $( document ).bind( "mobileinit", function() {
-    $.mobile.ajaxEnabled = false;
+
+  // Check to see if ajax can be used. This does a quick ajax request and blocks the page until its done
+  $.ajax({
+    url: '.',
+    async: false,
+    isLocal: true
+  }).error(function() {
+    // Ajax doesn't work so turn it off
+    $( document ).bind( "mobileinit", function() {
+      $.mobile.ajaxEnabled = false;
+    });
   });
 }
 
