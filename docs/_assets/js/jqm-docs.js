@@ -60,10 +60,13 @@ if ( location.protocol.substr(0,4)  === 'file' ||
      location.protocol.substr(0,11) === '*-extension' ||
      location.protocol.substr(0,6)  === 'widget' ) {
   $( function() {
+    // Check to see if ajax can be used. This does a quick ajax request and blocks the page until its done
+    // Start with links with only the trailing slash, and then move on to the ones that start with ..
     $( "a" )
-      .filter( "[href='../']" ).attr( "href", "../index.html" ).end()
-      .filter( "[href='../../']" ).attr( "href", "../../index.html" ).end()
-      .filter( "[href='../../../']" ).attr( "href", "../../../index.html" );
+      .filter( "[href='/']" ).attr( "href", "/index.html" ).end()
+      .filter( "[href^='..']" ).filter( "[href$='/']" ).each(function() {
+        this.href = $(this).attr("href")+"index.html";
+      });
   });
 
   // Check to see if ajax can be used. This does a quick ajax request and blocks the page until its done
