@@ -6,7 +6,6 @@
 
 $.fn.buttonMarkup = function( options ) {
 	options = options || {};
-
 	for ( var i = 0; i < this.length; i++ ) {
 		var el = this.eq( i ),
 			e = el[ 0 ],
@@ -92,7 +91,7 @@ $.fn.buttonMarkup = function( options ) {
 		}
 
 		e.appendChild( buttonInner );
-		
+
 		// TODO obviously it would be nice to pull this element out instead of
 		// retrieving it from the DOM again, but this change is much less obtrusive
 		// and 1.0 draws nigh
@@ -118,12 +117,11 @@ function closestEnabledButton( element ) {
 		// handed could be in an SVG DOM where className on SVG elements is defined to
 		// be of a different type (SVGAnimatedString). We only operate on HTML DOM
 		// elements, so we look for plain "string".
-
-        cname = ( typeof element.className === 'string' ) && element.className.split(' ');
-
-        if ( cname && $.inArray( "ui-btn", cname ) > -1 && $.inArray( "ui-disabled", cname ) < 0 ) {
+        cname = ( typeof element.className === 'string' ) && (element.className + ' ');
+        if ( cname && cname.indexOf("ui-btn ") > -1 && cname.indexOf("ui-disabled ") < 0 ) {
             break;
         }
+
         element = element.parentNode;
     }
 
