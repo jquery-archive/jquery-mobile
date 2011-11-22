@@ -1,16 +1,16 @@
 //set up the theme switcher on the homepage
 $('div').live('pagecreate',function(event){
-	if( !$(this).is('.ui-dialog')){ 
+	if( !$(this).is('.ui-dialog')){
 		var appendEl = $(this).find('.ui-footer:last');
-		
+
 		if( !appendEl.length ){
 			appendEl = $(this).find('.ui-content');
 		}
-		
+
 		if( appendEl.is("[data-position]") ){
 			return;
 		}
-		
+
 		$('<a href="#themeswitcher" data-'+ $.mobile.ns +'rel="dialog" data-'+ $.mobile.ns +'transition="pop">Switch theme</a>')
 			.buttonMarkup({
 				'icon':'gear',
@@ -23,7 +23,7 @@ $('div').live('pagecreate',function(event){
 			.bind( "vclick", function(){
 				$.themeswitcher();
 			});
-	}	
+	}
 
 });
 
@@ -37,7 +37,7 @@ $(function(){
 function setDefaultTransition(){
 	var winwidth = $( window ).width(),
 		trans ="slide";
-		
+
 	if( winwidth >= 1000 ){
 		trans = "none";
 	}
@@ -91,7 +91,7 @@ if ( location.protocol.substr(0,4)  === 'file' ||
 
       message
         .append( "<h3>Note: Navigation may not work if viewed locally</h3>" )
-        .append( "<p>The AJAX-based navigation used throughout the jQuery Mobile docs may need to be viewed on a web server to work in certain browsers such as Chrome. If you see an error message when you click a link, try a different browser or <a href='https://github.com/jquery/jquery-mobile/wiki/Downloadable-Docs-Help'>view help</a>.</p>" );
+        .append( "<p>The AJAX-based navigation used throughout the jQuery Mobile docs may need to be viewed on a web server to work in certain browsers. If you see an error message when you click a link, try a different browser or <a href='https://github.com/jquery/jquery-mobile/wiki/Downloadable-Docs-Help'>view help</a>.</p>" );
 
       $( document ).bind( "pagecreate", function( event ) {
         $( event.target ).append( message );
