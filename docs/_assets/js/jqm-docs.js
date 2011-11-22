@@ -64,8 +64,24 @@ if ( location.protocol.substr(0,4)  === 'file' ||
     // Start with links with only the trailing slash, and then move on to the ones that start with ..
     $( "a" )
       .filter( "[href='/']" ).attr( "href", "/index.html" ).end()
-      .filter( "[href^='..']" ).filter( "[href$='/']" ).each(function() {
-        this.href = $(this).attr("href")+"index.html";
+      .filter( "[href^='..']" ).each(function() {
+        var href = $( this ).attr( "href" ),
+            append = "";
+
+        if ( href.substr(-2, 2) === '..' ) {
+          append = "/index.html";
+        }
+        else if ( href.substr(-1, 1) === '/' ) {
+          append = "index.html";
+        }
+        else if ( href.substr(-4, 4) !== 'html' ) {
+          append = "/index.html";
+        }
+        else if ( href.substr(-2, 2) === '..' ) {
+          append = "/index.html";
+        }
+
+        this.href = href + append;
       });
   });
 
@@ -78,6 +94,19 @@ if ( location.protocol.substr(0,4)  === 'file' ||
     // Ajax doesn't work so turn it off
     $( document ).bind( "mobileinit", function() {
       $.mobile.ajaxEnabled = false;
+
+      var message = $( '<div>' , {
+            "class": "ui-footer ui-bar-e",
+            "style": "overflow: auto"
+          });
+
+      message
+        .append( "<h3>Note: Navigation may not work if viewed locally</h3>" )
+        .append( "<p>The AJAX-based navigation used throughout the jQuery Mobile docs may need to be viewed on a web server to work in certain browsers such as Chrome. If you see an error message when you click a link, try a different browser or <a href='https://github.com/jquery/jquery-mobile/wiki/Downloadable-Docs-Help'>view help</a>.</p>" );
+
+      $( document ).bind( "pagecreate", function() {
+        $( "div.ui-page" ).append( message );
+      });
     });
   });
 }
