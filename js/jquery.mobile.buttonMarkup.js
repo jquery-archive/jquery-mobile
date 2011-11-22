@@ -90,7 +90,11 @@ $.fn.buttonMarkup = function( options ) {
 			buttonText.appendChild( e.firstChild );
 		}
 
-		e.appendChild( buttonInner );
+    // XXX It seems like IE8 doesn't allow placing DOM elements within
+    // inputs; which may not be a bad thing.
+    if (!( el.length == 1 && el[0].tagName == 'INPUT' )) {
+  		e.appendChild( buttonInner );
+    }
 
 		// TODO obviously it would be nice to pull this element out instead of
 		// retrieving it from the DOM again, but this change is much less obtrusive
