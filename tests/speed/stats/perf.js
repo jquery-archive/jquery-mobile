@@ -70,7 +70,7 @@ window.Perf = (function($, Perf) {
 		vRegexs: {}
 	});
 
-	Perf.vRegexs[Perf.agents.ANDROID] = /([0-9].[0-9])(.[0-9])?/;
+	Perf.vRegexs[Perf.agents.ANDROID] = /Android ([0-9].[0-9])(.[0-9])?/;
 	Perf.vRegexs[Perf.agents.WP] = /Windows Phone OS ([0-9].[0-9]);/;
 	Perf.vRegexs[Perf.agents.IPHONE] = /iPhone OS ([0-9]_[0-9])/;
 	Perf.vRegexs[Perf.agents.IPAD] = /iPad; U; CPU OS ([0-9]_[0-9])/;
