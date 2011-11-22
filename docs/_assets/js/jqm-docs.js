@@ -59,31 +59,19 @@ $(function(){
 if ( location.protocol.substr(0,4)  === 'file' ||
      location.protocol.substr(0,11) === '*-extension' ||
      location.protocol.substr(0,6)  === 'widget' ) {
-  $( function() {
-    // Check to see if ajax can be used. This does a quick ajax request and blocks the page until its done
-    // Start with links with only the trailing slash, and then move on to the ones that start with ..
-    $( "a" )
-      .filter( "[href='/']" ).attr( "href", "/index.html" ).end()
-      .filter( "[href^='..']" ).each(function() {
-        var href = $( this ).attr( "href" ),
-            append = "";
 
-        if ( href.substr(-2, 2) === '..' ) {
-          append = "/index.html";
-        }
-        else if ( href.substr(-1, 1) === '/' ) {
-          append = "index.html";
-        }
-        else if ( href.substr(-4, 4) !== 'html' ) {
-          append = "/index.html";
-        }
-        else if ( href.substr(-2, 2) === '..' ) {
-          append = "/index.html";
-        }
+  // Start with links with only the trailing slash and that aren't external links
+  var fixLinks = function() {
+    $( "a[href$='/'], a[href='.'], a[href='..']" ).not( "[rel='external']" ).each( function() {
+      this.href = $( this ).attr( "href" ).replace( /\/$/, "" ) + "/index.html";
+    });
+  };
 
-        this.href = href + append;
-      });
-  });
+  // fix the links for the initial page
+  $(fixLinks);
+
+  // fix the links for subsequent ajax page loads
+  $(document).bind( 'pagecreate', fixLinks );
 
   // Check to see if ajax can be used. This does a quick ajax request and blocks the page until its done
   $.ajax({
@@ -96,16 +84,17 @@ if ( location.protocol.substr(0,4)  === 'file' ||
       $.mobile.ajaxEnabled = false;
 
       var message = $( '<div>' , {
-            "class": "ui-footer ui-bar-e",
-            "style": "overflow: auto"
-          });
+        'class': "ui-footer ui-bar-e",
+        style: "overflow: auto; padding:10px 15px;",
+        'data-ajax-warning': true
+      });
 
       message
         .append( "<h3>Note: Navigation may not work if viewed locally</h3>" )
         .append( "<p>The AJAX-based navigation used throughout the jQuery Mobile docs may need to be viewed on a web server to work in certain browsers such as Chrome. If you see an error message when you click a link, try a different browser or <a href='https://github.com/jquery/jquery-mobile/wiki/Downloadable-Docs-Help'>view help</a>.</p>" );
 
-      $( document ).bind( "pagecreate", function() {
-        $( "div.ui-page" ).append( message );
+      $( document ).bind( "pagecreate", function( event ) {
+        $( event.target ).append( message );
       });
     });
   });
