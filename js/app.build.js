@@ -1,15 +1,15 @@
 ({
 	appDir: "..",
 	baseUrl: "js/",
-	dir: "../build",
+	dir: "../dist",
 
-	optimize: "uglify",
+	optimize: "none",
 
 	modules: [
 	     {
 	         name: "jquery.mobile",
-		     include: [ "../almond/almond.js", "jquery.mobile" ],
-		     exclude: [ "jquery" ]
+		     include: [ "almond" ],
+		     exclude: [ "jquery", "order" ]
 	     },
 	]
 })
