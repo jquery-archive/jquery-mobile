@@ -74,7 +74,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		if ( cType == "select" ) {
 
 			slider.wrapInner( "<div class='ui-slider-inneroffset'></div>" );
-			
+
 			// make the handle move with a smooth transition
 			handle.addClass( "ui-slider-handle-snapping" );
 
@@ -117,14 +117,14 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			if ( self.dragging ) {
 				// self.mouseMoved must be updated before refresh() because it will be used in the control "change" event
 				self.mouseMoved = true;
-				
+
 				if ( cType === "select" ) {
 					// make the handle move in sync with the mouse
 					handle.removeClass( "ui-slider-handle-snapping" );
 				}
-				
+
 				self.refresh( event );
-				
+
 				// only after refresh() you can calculate self.userModified
 				self.userModified = self.beforeStart !== control[0].selectedIndex;
 				return false;
@@ -139,7 +139,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			if ( cType === "select" ) {
 				self.beforeStart = control[0].selectedIndex;
 			}
-			
+
 			self.refresh( event );
 			return false;
 		});
@@ -151,12 +151,12 @@ $.widget( "mobile.slider", $.mobile.widget, {
 					self.dragging = false;
 
 					if ( cType === "select") {
-					
+
 						// make the handle move with a smooth transition
 						handle.addClass( "ui-slider-handle-snapping" );
-					
+
 						if ( self.mouseMoved ) {
-						
+
 							// this is a drag, change the value only if user dragged enough
 							if ( self.userModified ) {
 								self.refresh( self.beforeStart == 0 ? 1 : 0 );
@@ -164,17 +164,17 @@ $.widget( "mobile.slider", $.mobile.widget, {
 							else {
 								self.refresh( self.beforeStart );
 							}
-							
+
 						}
 						else {
 							// this is just a click, change the value
 							self.refresh( self.beforeStart == 0 ? 1 : 0 );
 						}
-						
+
 					}
-					
+
 					self.mouseMoved = false;
-					
+
 					return false;
 				}
 			});
@@ -247,7 +247,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 	refresh: function( val, isfromControl, preventInputUpdate ) {
 
-		if ( this.options.disabled || this.element.attr('disabled')) { 
+		if ( this.options.disabled || this.element.attr('disabled')) {
 			this.disable();
 		}
 
@@ -255,8 +255,8 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			cType = control[0].nodeName.toLowerCase(),
 			min = cType === "input" ? parseFloat( control.attr( "min" ) ) : 0,
 			max = cType === "input" ? parseFloat( control.attr( "max" ) ) : control.find( "option" ).length - 1,
-			step = (cType === "input" && parseFloat( control.attr( "step" ) ) > 0) ? parseFloat(control.attr("step")) : 1; 
-			
+			step = (cType === "input" && parseFloat( control.attr( "step" ) ) > 0) ? parseFloat(control.attr("step")) : 1;
+
 		if ( typeof val === "object" ) {
 			var data = val,
 				// a slight tolerance helped get to the ends of the slider
@@ -288,9 +288,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 		var newval = ( percent / 100 ) * ( max - min ) + min;
 
-		//from jQuery UI slider, the following source will round to the neraest step
-		var valModStep = ( newval - min ) % step;	
-		var alignValue = newval - valModStep;	
+		//from jQuery UI slider, the following source will round to the nearest step
+		var valModStep = ( newval - min ) % step;
+		var alignValue = newval - valModStep;
 
 		if ( Math.abs( valModStep ) * 2 >= step ) {
 			alignValue += ( valModStep > 0 ) ? step : ( -step );
