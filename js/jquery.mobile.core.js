@@ -48,6 +48,9 @@
 		// Error response message - appears when an Ajax page request fails
 		pageLoadErrorMessage: "Error Loading Page",
 
+		// Placeholder for listview filter
+		filterPlaceholder: "Filter items...",
+
 		//automatically initialize the DOM when it's ready
 		autoInitializePage: true,
 
