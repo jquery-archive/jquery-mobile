@@ -10,8 +10,7 @@
 
 	module('jquery.mobile.slider.js', {
 		setup: function() {
-			// force the value to be an increment of 10 when we aren't
-			// testing the rounding
+			// force the value to be an increment of 10 when we aren't testing the rounding
 			$("#stepped").val( 20 );
 		}
 	});
