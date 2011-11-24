@@ -156,7 +156,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			counter = $.support.cssPseudoElement || !$.nodeName( $list[ 0 ], "ol" ) ? 0 : 1,
 			itemClassDict = {},
 			item, itemClass, itemTheme,
-			a, last, splittheme, countParent, icon, imgParents, img;
+			a, last, splittheme, countParent, icon, imgParents, img, itemIconpos;
 
 		if ( counter ) {
 			$list.find( ".ui-li-dec" ).remove();
@@ -173,6 +173,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			// If we're creating the element, we update it regardless
 			if ( create || !item.hasClass( "ui-li" ) ) {
 				itemTheme = item.jqmData("theme") || o.theme;
+				itemIconpos = item.jqmData("iconpos") || "right";
 				a = this._getChildrenByTagName( item[ 0 ], "a", "A" );
 
 				if ( a.length ) {
@@ -182,7 +183,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 						wrapperEls: "div",
 						shadow: false,
 						corners: false,
-						iconpos: "right",
+						iconpos: itemIconpos,
 						icon: a.length > 1 || icon === false ? false : icon || "arrow-r",
 						theme: itemTheme
 					});
