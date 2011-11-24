@@ -73,13 +73,11 @@
       <p>If you want to change the way in which list items are filtered, ie fuzzy search or matching from the beginning of the string, you can configure the callback used internally by defining <code>$.mobile.listview.prototype.options.filterCallback</code> during <code>mobileinit</code> or after the widget has been created with <code>$("#mylist").listview('option', 'filterCallback', yourFilterFunction)</code>. Any function defined for the callback will be provided two arguments. First, the text of the current list item and second, the value being searched for. A truthy value will result in a hidden list item. The default callback which filters entries without the <code>searchValue</code> as a substring is described below:
       </p>
 
-      <pre>
-        <code>
-function( text, searchValue ){
+<pre><code>function( text, searchValue ){
   return text.toLowerCase().indexOf( searchValue ) === -1;
-};
-        </code>
-      </pre>
+};</code></pre>
+
+			<p>To filter list items by values other than the text, add a <code>data-filtertext</code> attribute to the list item.  The value of this attribute will be passed as the first argument to the <code>filterCallback</code> function instead of the text.</p>
 
 			<h2>Text formatting &amp; counts</h2>
 			<p>The framework includes text formatting conventions for common list patterns like header/descriptions, secondary information and counts through semantic HTML markup.</p>
