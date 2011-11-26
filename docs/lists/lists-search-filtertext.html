@@ -23,18 +23,16 @@
 	<div data-role="content">
 		<div class="content-primary">
 			<p>By default, the listview filter simply searches against the content in each list item. If you want the filter to search against different content, add the <code>data-filtertext</code>	attribute to the item and populate it with one or many keywords and phrases that should be used to match against. Note that if this attribute is added, the contents of the list item are ignored.</p>
-			<p>Here is an example of a few different variations of United States loaded into the <code>filtertext</code> attribute to cover  common spellings and abbreviations.</p>
+			<p>This attribute is useful for dealing with allowing for ticker symbols and full company names to be searched, or for covering common spellings and abbreviations for countries.</p>
 			
-<pre><code>			
-&lt;li <strong>data-filtertext=&quot;USA U.S.A. United States of America&quot;</strong>&gt;&lt;a href=&quot;#&quot;&gt;United States&lt;/a&gt;&lt;/li&gt;
-</code>	</pre>	
-
-			<p>This attribute is also useful for dealing with allowing for ticker symbols and full company names to be searched:</p>
-
-<pre><code>			
+<pre><code>		
 &lt;li data-filtertext=&quot;<strong>NASDAQ:AAPL Apple Inc.</strong>&quot;&gt;&lt;a href=&quot;#&quot;&gt;Apple&lt;/a&gt;&lt;/li&gt;
+&lt;li <strong>data-filtertext=&quot;USA U.S.A. United States of America&quot;</strong>&gt;&lt;a href=&quot;#&quot;&gt;United States&lt;/a&gt;&lt;/li&gt;
+
 
 </code></pre>	
+
+			
 
 			<ul data-role="listview" data-filter="true" data-filter-placeholder="Search ticker or firm name..." data-inset="true">
 				<li data-filtertext="NASDAQ:ADBE Adobe Systems Incorporated"><a href="#">Adobe</a></li>
