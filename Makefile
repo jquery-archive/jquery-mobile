@@ -144,7 +144,6 @@ js: init
 	@@java -XX:ReservedCodeCacheSize=64m \
 				-jar build/google-compiler-20111003.jar \
 				--js ${OUTPUT}/${NAME}.js \
-				--warning_level QUIET \
 				--js_output_file ${OUTPUT}/${NAME}.tmp.js
 	@@cat ${OUTPUT}/${NAME}.tmp.js >> ${OUTPUT}/${NAME}.min.js
 	@@rm ${OUTPUT}/${NAME}.tmp.js
