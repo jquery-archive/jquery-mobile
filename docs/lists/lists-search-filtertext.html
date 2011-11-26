@@ -22,29 +22,29 @@
 
 	<div data-role="content">
 		<div class="content-primary">
-			<ul data-role="listview" data-filter="true" data-filter-placeholder="Search country of headquarters...">
-				<li data-filtertext="Japan"><a href="index.html">Acura</a></li>
-				<li data-filtertext="Germany"><a href="index.html">Audi</a></li>
-				<li data-filtertext="Germany"><a href="index.html">BMW</a></li>
-				<li data-filtertext="USA U.S.A. United States of America"><a href="index.html">Cadillac</a></li>
-				<li data-filtertext="USA U.S.A. United States of America"><a href="index.html">Chrysler</a></li>
-				<li data-filtertext="USA U.S.A. United States of America"><a href="index.html">Dodge</a></li>
-				<li data-filtertext="Italy"><a href="index.html">Ferrari</a></li>
-				<li data-filtertext="USA U.S.A. United States of America"><a href="index.html">Ford</a></li>
-				<li data-filtertext="USA U.S.A. United States of America"><a href="index.html">GMC</a></li>
-				<li data-filtertext="Japan"><a href="index.html">Honda</a></li>
-				<li data-filtertext="South Korea"><a href="index.html">Hyundai</a></li>
-				<li data-filtertext="Japan"><a href="index.html">Infiniti</a></li>
-				<li data-filtertext="USA U.S.A. United States of America"><a href="index.html">Jeep</a></li>
-				<li data-filtertext="South Korea"><a href="index.html">Kia</a></li>
-				<li data-filtertext="Japan"><a href="index.html">Lexus</a></li>
-				<li data-filtertext="UK U.K. United Kingdom Great Britian"><a href="index.html">Mini</a></li>
-				<li data-filtertext="Japan"><a href="index.html">Nissan</a></li>
-				<li data-filtertext="Germany"><a href="index.html">Porsche</a></li>
-				<li data-filtertext="Japan"><a href="index.html">Subaru</a></li>
-				<li data-filtertext="Japan"><a href="index.html">Toyota</a></li>
-				<li data-filtertext="Germany"><a href="index.html">Volkswagon</a></li>
-				<li data-filtertext="Sweden"><a href="index.html">Volvo</a></li>
+			<p>By default, the listview filter simply searches against the content in each list item. If you want the filter to search against different content, add the <code>data-filtertext</code>	attribute to the item and populate it with one or many keywords and phrases that should be used to match against. Note that if this attribute is added, the contents of the list item are ignored.</p>
+			<p>Here is an example of a few different variations of United States loaded into the <code>filtertext</code> attribute to cover  common spellings and abbreviations.</p>
+			
+<pre><code>			
+&lt;li <strong>data-filtertext=&quot;USA U.S.A. United States of America&quot;</strong>&gt;&lt;a href=&quot;#&quot;&gt;United States&lt;/a&gt;&lt;/li&gt;
+</code>	</pre>	
+
+			<p>This attribute is also useful for dealing with allowing for ticker symbols and full company names to be searched:</p>
+
+<pre><code>			
+&lt;li data-filtertext=&quot;<strong>NASDAQ:AAPL Apple Inc.</strong>&quot;&gt;&lt;a href=&quot;#&quot;&gt;Apple&lt;/a&gt;&lt;/li&gt;
+
+</code></pre>	
+
+			<ul data-role="listview" data-filter="true" data-filter-placeholder="Search ticker or firm name..." data-inset="true">
+				<li data-filtertext="NASDAQ:ADBE Adobe Systems Incorporated"><a href="#">Adobe</a></li>
+				<li data-filtertext="NASDAQ:AMZNL Amazon.com, Inc."><a href="#">Amazon</a></li>
+				<li data-filtertext="NASDAQ:AAPL Apple Inc."><a href="#">Apple</a></li>
+				<li data-filtertext="NASDAQ:GOOG Google Inc."><a href="#">Google</a></li>
+				<li data-filtertext="NYSE:IBM Intl. International Business Machines Corp."><a href="index.html">IBM</a></li>
+				<li data-filtertext="NASDAQ:MSFT Microsoft Corporation"><a href="#">Microsoft</a></li>
+				<li data-filtertext="NASDAQ:YHOO Yahoo! Inc."><a href="#">Yahoo</a></li>
+				<li data-filtertext="USA U.S.A. United States of America"><a href="#">United States</a></li>
 			</ul>
 			</div><!--/content-primary -->		
 
