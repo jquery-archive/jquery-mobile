@@ -49,7 +49,7 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 	margin-top: 0;
 }
 .ui-mobile-touch-overflow.ui-native-fixed .ui-content .ui-listview-inset {
-	margin-top: 2em;
+	margin-top: 1em;
 }
 
 /* loading screen */
