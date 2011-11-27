@@ -26,16 +26,16 @@
 		<p>jQuery Mobile offers several custom events that build upon native events to create useful hooks for development. Note that these events employ various touch, mouse, and window events, depending on event existence, so you can bind to them for use in both handheld and desktop environments. You can bind to these events like you would with other jQuery events, using <code>live()</code> or <code>bind()</code>.</p>
 
 			<div class="ui-body ui-body-e">
-		<h4 style="margin:.5em 0">Important: Use pageInit(), not $(document).ready()</h4>
-		The first thing you learn in jQuery is to call code inside the $(document).ready() function so everything will execute as soon as the DOM is loaded. However, in jQuery Mobile, Ajax is used to load the contents of each page into the DOM as you navigate, and the DOM ready handler only executes for the first page. To execute code whenever a new page is loaded and created, you can bind to the <code><strong>pageinit</strong></code> event. This event is explained in detail at the bottom of this page.</div>
+		<h4 style="margin:.5em 0">Important: Use <code>pageInit()</code>, not <code>$(document).ready()</code></h4>
+		<p>The first thing you learn in jQuery is to call code inside the <code>$(document).ready()</code> function so everything will execute as soon as the DOM is loaded. However, in jQuery Mobile, Ajax is used to load the contents of each page into the DOM as you navigate, and the DOM ready handler only executes for the first page. To execute code whenever a new page is loaded and created, you can bind to the <code>pageinit</code> event. This event is explained in detail at the bottom of this page.</p></div>
 
-      <p>
+      <p> &nbsp;</p>
 		<div class="ui-body ui-body-e">
-		<h4 style="margin:.5em 0">Important: pageCreate() vs pageInit()</h4>
-    Prior to Beta 2 the recommendation to users wishing to manipulate jQuery Mobile enhanced page and child widget markup was to bind to the <code><strong>pagecreate</strong></code> event. In Beta 2 an internal change was made to decouple each of the widgets by binding to the <code><strong>pagecreate</strong></code> event in place of direct calls to the widget methods. As a result, users binding to the <code><strong>pagecreate</strong></code> in <code><strong>mobileinit</strong></code> would find their binding executing before the markup had been enhanced by each of the plugins. In keeping with the lifecycle of the jQuery UI Widget Factory, the initialization method is invoked <strong>after</strong> the create method, so the <code><strong>pageinit</strong></code> event provides the correct timing for post enhancement manipulation of the DOM and/or Javascript objects.
+		<h4 style="margin:.5em 0">Important: <code>pageCreate()</code> vs <code>pageInit()</code></h4>
+   <p> Prior to Beta 2 the recommendation to users wishing to manipulate jQuery Mobile enhanced page and child widget markup was to bind to the <code>pagecreate</code> event. In Beta 2 an internal change was made to decouple each of the widgets by binding to the <code>pagecreate</code> event in place of direct calls to the widget methods. As a result, users binding to the <code>pagecreate</code> in <code>mobileinit</code> would find their binding executing before the markup had been enhanced by each of the plugins. In keeping with the lifecycle of the jQuery UI Widget Factory, the initialization method is invoked <strong>after</strong> the create method, so the <code>pageinit</code> event provides the correct timing for post enhancement manipulation of the DOM and/or Javascript objects.
 
-		In short, if you were previously using <code><strong>pagecreate</strong></code> to manipulate the enhanced markup before the page was shown its very likely you'll want to migrate to 'pageinit'.
-		</div></p>
+		In short, if you were previously using <code>pagecreate</code> to manipulate the enhanced markup before the page was shown, it's very likely you'll want to migrate to 'pageinit'.
+		</p></div>
 
 		<h2>Touch events</h2>
 		<dl>
@@ -86,23 +86,23 @@
 
 			<div class="ui-body ui-body-e">
 				<h4 style="margin:.5em 0">Warning: Use vclick with caution</h4>
-				<p> Use vclick with caution on touch devices. Webkit based browsers synthesize mousedown, mouseup, and click events roughly 300ms after the touchend event is dispatched. The target of the synthesized mouse events are calculated at the time they are dispatched and are based on the location of the touch events and, in some cases, implementation specific heuristics which leads to different target calculations on different devices and even different OS versions for the same device. This means the target element within the original touch events could be different from the target element within the synthesized mouse events.</p>
-	            <p>We recommend using click instead of vclick anytime the action being triggered has the possibility of changing the content underneath the point that was touched on screen. This includes page transitions and other behaviors such as collapse/expand that could result in the screen shifting or content being completely replaced.</p>
+				<p> Use vclick with caution on touch devices. Webkit based browsers synthesize <code>mousedown</code>, <code>mouseup</code>, and <code>click</code> events roughly 300ms after the <code>touchend</code> event is dispatched. The target of the synthesized mouse events are calculated at the time they are dispatched and are based on the location of the touch events and, in some cases, the implementation specific heuristics which leads to different target calculations on different devices and even different OS versions for the same device. This means the target element within the original touch events could be different from the target element within the synthesized mouse events.</p>
+	            <p>We recommend using <code>click</code> instead of <code>vclick</code> anytime the action being triggered has the possibility of changing the content underneath the point that was touched on screen. This includes page transitions and other behaviors such as collapse/expand that could result in the screen shifting or content being completely replaced.</p>
 			</div>
 			<p>&nbsp;</p>
 			<div class="ui-body ui-body-e">
 				<h4 style="margin:.5em 0">Canceling an elements default click behavior</h4>
-				<p>Applications can call preventDefault() on a vclick event to cancel an element's default click behavior. On mouse based devices, calling preventDefault() on a vclick event equates to calling preventDefault() on the real click event during the bubble event phase. On touch based devices, it's a bit more complicated since the actual click event is dispatched about 300ms after the vclick event is dispatched. For touch devices, calling preventDefault() on a vclick event triggers some code in the vmouse plugin that attempts to catch the next click event that gets dispatched by the browser, during the capture event phase, and call preventDefault() and stopPropagation() on it. As mentioned in the warning above, it is sometimes difficult match up a touch event with its corresponding mouse event because the targets can differ. For this reason, the vmouse plugin also falls back to attempting to identify a corresponding click event by coordinates. There are still cases where both target and coordinate identification fail, which results in the click event being dispatched and either triggering the default action of the element, or in the case where content has been shifted or replaced, triggering a click on a different element. If this happens on  a regular basis for a given element/control, we suggest you use click for triggering your action.</p>
+				<p>Applications can call <code>preventDefault()</code> on a <code>vclick</code> event to cancel an element's default click behavior. On mouse based devices, calling <code>preventDefault()</code> on a <code>vclick</code> event equates to calling <code>preventDefault()</code> on the real <code>click</code> event during the bubble event phase. On touch based devices, it's a bit more complicated since the actual <code>click</code> event is dispatched about 300ms after the <code>vclick</code> event is dispatched. For touch devices, calling <code>preventDefault()</code> on a <code>vclick</code> event triggers some code in the vmouse plugin that attempts to catch the next <code>click</code> event that gets dispatched by the browser, during the capture event phase, and calls <code>preventDefault()</code> and <code>stopPropagation()</code> on it. As mentioned in the warning above, it is sometimes difficult to match up a touch event with its corresponding mouse event because the targets can differ. For this reason, the vmouse plugin also falls back to attempting to identify a corresponding <code>click</code> event by coordinates. There are still cases where both target and coordinate identification fail, which results in the <code>click</code> event being dispatched and either triggering the default action of the element, or in the case where content has been shifted or replaced, triggering a click on a different element. If this happens on a regular basis for a given element/control, we suggest you use <code>click</code> for triggering your action.</p>
 			</div>
 		
 		<h2>Orientation change event</h2>
 		<dl>
 			<dt><code>orientationchange</code></dt>
-			<dd>Triggers when a device orientation changes (by turning it vertically or horizontally). When bound to this event, your callback function can leverage a second argument, which contains an <code>orientation</code> property equal to either "portrait" or "landscape". These values are also added as classes to the HTML element, allowing you to leverage them in your CSS selectors. Note that we currently bind to the resize event when orientationChange is not natively supported, or when <code>$.mobile.orientationChangeEnabled</code> is set to false.</dd>
+			<dd>Triggers when a device orientation changes (by turning it vertically or horizontally). When bound to this event, your callback function can leverage a second argument, which contains an <code>orientation</code> property equal to either "portrait" or "landscape". These values are also added as classes to the HTML element, allowing you to leverage them in your CSS selectors. Note that we currently bind to the resize event when <code>orientationchange</code> is not natively supported, or when <code>$.mobile.orientationChangeEnabled</code> is set to false.</dd>
 			<div class="ui-body ui-body-e">
 				<h4>orientationchange timing</h4>
 
-				The timing of the <code>orientationchange</code> with relation to the change of the client height and width is different between browsers, though the current implementation will give you the correct value for <code>event.orientation</code> derived from <code>window.orientation</code>. This means that if your bindings are dependent on the height and width values you may want to disable orientationchange all together with <code>$.mobile.orientationChangeEnabled = false</code> to let the fallback resize code trigger your bindings.
+			<p>	The timing of the <code>orientationchange</code> with relation to the change of the client height and width is different between browsers, though the current implementation will give you the correct value for <code>event.orientation</code> derived from <code>window.orientation</code>. This means that if your bindings are dependent on the height and width values you may want to disable <code>orientationChange</code> all together with <code>$.mobile.orientationChangeEnabled = false</code> to let the fallback resize code trigger your bindings.</p>
 			</div>
 		</dl>
 
@@ -117,10 +117,10 @@
 		</dl>
 
 		<h2>Page load events</h2>
-        <p>Whenever an external page is loaded into the application DOM, 2 events are fired. The first is pagebeforeload. The 2nd event will be either pageload or pageloadfailed.</p>
+        <p>Whenever an external page is loaded into the application DOM, 2 events are fired. The first is <code>pagebeforeload</code>. The 2nd event will be either <code>pageload</code> or <code>pageloadfailed</code>.</p>
 		<dl>
 			<dt><code>pagebeforeload</code></dt>
-			<dd><p>Triggered before any load request is made. Callbacks bound to this event can call preventDefault() on the event to indicate that they are handling the load request. Callbacks that do this *MUST* make sure they call resolve() or reject() on the deferred object reference contained in the data object passed to the callback.</p>
+			<dd><p>Triggered before any load request is made. Callbacks bound to this event can call <code>preventDefault()</code> on the event to indicate that they are handling the load request. Callbacks that do this *MUST* make sure they call <code>resolve()</code> or <code>reject()</code> on the deferred object reference contained in the data object passed to the callback.</p>
 			<p>The data object, passed as the 2nd arg to the callback function contains the following properties:</p>
             <ul>
             	<li><code>url</code> (string)
@@ -315,10 +315,10 @@ $( document ).bind( &quot;pageloadfailed&quot;, function( event, data ){
 					</ul>
 				</li>
 			</ul>
-              <p>It should be noted that callbacks can modify both the toPage and options properties to alter the behavior of the current changePage() call. So for example, the toPage can be mapped to a different url from within a callback to do a sort of redirect.</p>
+              <p>It should be noted that callbacks can modify both the <code>toPage</code> and <code>options</code> properties to alter the behavior of the current <code>changePage()</code> call. So for example, the <code>toPage</code> can be mapped to a different url from within a callback to do a sort of redirect.</p>
             </dd>
 			<dt><code>pagechange</code></dt>
-			<dd>This event is triggered after the changePage() request has finished loading the page into the DOM and all page transition animations have completed. Note that any pageshow or pagehide events will have fired *BEFORE* this event is triggered. Callbacks for this particular event will be passed a data object as the 2nd arg. The properties for this object are as follows:
+			<dd>This event is triggered after the <code>changePage()</code> request has finished loading the page into the DOM and all page transition animations have completed. Note that any pageshow or pagehide events will have fired *BEFORE* this event is triggered. Callbacks for this particular event will be passed a data object as the 2nd arg. The properties for this object are as follows:
             <ul>
 				<li><code>toPage</code> (object or string)
 					<ul>
@@ -333,7 +333,7 @@ $( document ).bind( &quot;pageloadfailed&quot;, function( event, data ){
 			</ul>
             </dd>
 			<dt><code>pagechangefailed</code></dt>
-			<dd>This event is triggered when the changePage() request fails to load the page. Callbacks for this particular event will be passed a data object as the 2nd arg. The properties for this object are as follows:
+			<dd>This event is triggered when the <code>changePage()</code> request fails to load the page. Callbacks for this particular event will be passed a data object as the 2nd arg. The properties for this object are as follows:
             <ul>
 				<li><code>toPage</code> (object or string)
 					<ul>
@@ -399,7 +399,7 @@ $( document ).bind( &quot;pageloadfailed&quot;, function( event, data ){
 
 		</dl>
 
-		<p>You can access the prevPage or nextPage properties via the second argument of a bound callback function. For example: </p>
+		<p>You can access the <code>prevPage</code> or <code>nextPage</code> properties via the second argument of a bound callback function. For example: </p>
 <pre><code>
 $( 'div' ).live( 'pageshow',function(event, ui){
   alert( 'This page was just hidden: '+ ui.prevPage);
