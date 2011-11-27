@@ -65,6 +65,17 @@ $(document).bind(&quot;mobileinit&quot;, function(){
 			<p>More importantly, targeting overflow correctly is a major issue. If we simply placed an <code>overflow: auto</code> CSS rule on the pages, other popular mobile platforms like older versions of Android and iOS would essentially just clip off the content and make it effectively inaccessible (yes, you can do a two-finger scroll gesture in iOS but nobody knows that). The smart thing about Apple&#8217;s implementation for iOS5 is that they added an additional CSS property <code>-webkit-overflow-scrolling:touch</code> that allows us to test for this touch scrolling property and, if supported, add in the <code>overflow</code> rules for just those browsers. This is the only safe way to target overflow without resorting to complex and unmaintainable user agent detection.</p>
 			<p>We will be working with device and browser makers to encourage support for <em>both</em> these CSS-based properties because we strongly believe that this a critical piece needed to build rich mobile web apps. The project will add any vendor-prefixed additions to touch scrolling property if, for example, Opera, Firefox or Microsoft added this support. Once people see how much better page transitions and fixed toolbars are on iOS5, we&#8217;re hoping this will be supported quickly by other browsers. JS-based scroller scripts may still have a place in this new world as a polyfill for browsers that don&#8217;t yet support these new CSS capabilities but we see this as a brief, interim tool in the evolution of the mobile web.</p>
 			
+			
+			
+			<h2>Debugging touchOverflow</h2>
+			<p>Usually the touchOverflow is only enabled on devices, that support touch-scrolling of overflow areas. This does apparently not apply to desktop browsers, which makes it hard to debug problems with the touchOverflow-feature that only seem to occur on supported devices. But it's easy to enforce the touchOverflow-feature, even on the desktop:
+
+<pre><code>&lt;script&gt;
+$(document).bind(&quot;mobileinit&quot;, function(){
+<strong>  $.support.touchOverflow = true;
+</strong>  $.mobile.touchOverflowEnabled = true;
+});
+&lt;/script&gt;</code></pre>
 
 
 		</div><!--/content-primary -->		
