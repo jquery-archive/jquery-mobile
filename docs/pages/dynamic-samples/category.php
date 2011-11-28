@@ -113,7 +113,7 @@ if( $_SERVER[ "HTTP_X_REQUESTED_WITH" ] && $_SERVER[ "HTTP_X_REQUESTED_WITH" ] =
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Vehicles</title>
 <link rel="stylesheet"  href="../../../css/themes/default/">
 <script src="../../../js/jquery.js"></script>
