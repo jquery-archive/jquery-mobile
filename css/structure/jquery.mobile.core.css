@@ -45,6 +45,12 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 .ui-page.ui-mobile-pre-transition {
 	display: block;
 }
+.ui-mobile-touch-overflow.ui-native-fixed .ui-content .ui-listview {
+	margin-top: 0;
+}
+.ui-mobile-touch-overflow.ui-native-fixed .ui-content .ui-listview-inset {
+	margin-top: 1em;
+}
 
 /* loading screen */
 .ui-loading .ui-mobile-viewport { overflow: hidden !important; }
