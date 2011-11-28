@@ -68,12 +68,12 @@ $(document).bind(&quot;mobileinit&quot;, function(){
 			
 			
 			<h2>Debugging touchOverflow</h2>
-			<p>Usually the touchOverflow is only enabled on devices, that support touch-scrolling of overflow areas. This does apparently not apply to desktop browsers, which makes it hard to debug problems with the touchOverflow-feature that only seem to occur on supported devices. But it's easy to enforce the touchOverflow-feature, even on the desktop:
+			<p>Generally touchOverflow is only enabled on devices that support touch-scrolling of overflow areas, not desktop browsers.  This can make it difficult to debug problems with the touchOverflow feature.  To enable touchOverflow on all browsers, use the following code:
 
 <pre><code>&lt;script&gt;
-$(document).bind(&quot;mobileinit&quot;, function(){
-<strong>  $.support.touchOverflow = true;
-</strong>  $.mobile.touchOverflowEnabled = true;
+$(document).bind(&quot;mobileinit&quot;, function() {
+  <strong>$.support.touchOverflow = true;</strong>
+  $.mobile.touchOverflowEnabled = true;
 });
 &lt;/script&gt;</code></pre>
 
