@@ -36,6 +36,7 @@ $files = array(
 	'jquery.mobile.links.js',
 	'jquery.mobile.fixHeaderFooter.js',
 	'jquery.mobile.fixHeaderFooter.native.js',
+	'jquery.mobile.ajaxinclude.js',
 	'jquery.mobile.init.js'
 );
 
