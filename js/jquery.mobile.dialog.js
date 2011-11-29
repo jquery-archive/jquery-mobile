@@ -13,21 +13,25 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 	_create: function() {
 		var self = this,
 			$el = this.element,
-			headerCloseButton = $( "<a href='#' data-" + $.mobile.ns + "icon='delete' data-" + $.mobile.ns + "iconpos='notext'>"+ this.options.closeBtnText + "</a>" );
+			headerCloseButton = $( "<a href='#' data-" + $.mobile.ns + "icon='delete' data-" + $.mobile.ns + "iconpos='notext'>"+ this.options.closeBtnText + "</a>" ),
+			dialogWrap = $("<div/>", {
+					"role" : "dialog",
+					"class" : "ui-dialog ui-corner-all ui-overlay-shadow"
+				});
 
 		$el.addClass( "ui-overlay-" + this.options.overlayTheme );
-
+		
 		// Class the markup for dialog styling
 		// Set aria role
-		$el.attr( "role", "dialog" )
-			.addClass( "ui-dialog" )
+		$el
+			.wrapInner( dialogWrap )
 			.find( ":jqmData(role='header')" )
-			.addClass( "ui-corner-top ui-overlay-shadow" )
 				.prepend( headerCloseButton )
 			.end()
-			.find( ":jqmData(role='content'),:jqmData(role='footer')" )
-				.addClass( "ui-overlay-shadow" )
-				.last()
+			.find(':first-child')
+				.addClass( "ui-corner-top" )
+			.end()
+			.find( ":last-child" )
 				.addClass( "ui-corner-bottom" );
 
 		// this must be an anonymous function so that select menu dialogs can replace
