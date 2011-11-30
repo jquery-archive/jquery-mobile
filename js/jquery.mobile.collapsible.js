@@ -1,6 +1,7 @@
 /*
 * "collapsible" plugin
 */
+
 define( [ "jquery", "jquery.mobile.widget" ], function( $, undefined ) {
 
 $.widget( "mobile.collapsible", $.mobile.widget, {
