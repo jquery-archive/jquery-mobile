@@ -15,7 +15,8 @@ $files = array_merge($files, array(
 	'../../structure/jquery.mobile.forms.select.css',
 	'../../structure/jquery.mobile.forms.textinput.css',
 	'../../structure/jquery.mobile.listview.css',
-	'../../structure/jquery.mobile.forms.slider.css'
+	'../../structure/jquery.mobile.forms.slider.css',
+	'../../structure/jquery.mobile.popup.css'
 ));
 
 require_once($base.'/../../../combine.php');
