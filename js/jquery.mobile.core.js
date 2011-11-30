@@ -2,7 +2,6 @@
 * "core" - The base file for jQm
 */
 
-
 define( [ "jquery" ], function( $, undefined ) {
 
 	var nsNormalizeDict = {};
