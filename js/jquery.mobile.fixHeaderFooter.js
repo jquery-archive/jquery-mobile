@@ -158,6 +158,11 @@ $.mobile.fixedToolbars = (function() {
 				prevFooter = prevPage && prevPage.find( ":jqmData(role='footer')" ),
 				prevFooterMatches = prevFooter.length && prevFooter.jqmData( "id" ) === id;
 
+			if($(page).jqmData('use-parent-footer')) {
+				footer = prevFooter;
+				id = prevFooter.jqmData( "id" );
+				prevFooterMatches = true;
+			}
 			if ( id && prevFooterMatches ) {
 				stickyFooter = footer;
 				setTop( stickyFooter.removeClass( "fade in out" ).appendTo( $.mobile.pageContainer ) );
@@ -174,6 +179,14 @@ $.mobile.fixedToolbars = (function() {
 			}
 
 			$.mobile.fixedToolbars.show( true, this );
+		})
+		.delegate( ".ui-page", "pagehide", function( event, ui ) {
+			var page = $( event.target ),
+			footer = page.find( ":jqmData(role='footer')" );
+			if(footer && $(page).jqmData('use-parent-footer')) {
+				var nextPage = ui.nextPage;
+				setTop(footer.appendTo(nextPage));
+ 			}
 		});
 
 	// When a collapsiable is hidden or shown we need to trigger the fixed toolbar to reposition itself (#1635)
