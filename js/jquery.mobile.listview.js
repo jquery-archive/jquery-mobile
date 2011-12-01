@@ -2,7 +2,7 @@
 * "listview" plugin
 */
 
-define( [ "jquery", "jquery.mobile.widget" ], function( $, undefined ) {
+define( [ "jquery", "jquery.mobile.widget", "jquery.mobile.buttonMarkup"  ], function( $, undefined ) {
 
 //Keeps track of the number of lists per page UID
 //This allows support for multiple nested list in the same page
