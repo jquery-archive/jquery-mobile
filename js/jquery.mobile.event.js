@@ -2,7 +2,7 @@
 * "events" plugin - Handles events
 */
 
-define( [ "jquery" ], function( $, undefined ) {
+define( [ "jquery", "jquery.mobile.vmouse" ], function( $, undefined ) {
 
 // add new event shortcuts
 $.each( ( "touchstart touchmove touchend orientationchange throttledresize " +

@@ -2,7 +2,7 @@
 * "checkboxradio" plugin
 */
 
-define( [ "jquery", "jquery.mobile.widget", "jquery.mobile.buttonMarkup"  ], function( $, undefined ) {
+define( [ "jquery", "jquery.mobile.widget", "jquery.mobile.buttonMarkup", "jquery.mobile.vmouse" ], function( $, undefined ) {
 
 $.widget( "mobile.checkboxradio", $.mobile.widget, {
 	options: {
