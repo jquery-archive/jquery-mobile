@@ -2,7 +2,7 @@
 * "buttons" plugin - for making button-like links
 */
 
-define( [ "jquery" ], function( $, undefined ) {
+define( [ "jquery", "jquery.mobile.vmouse" ], function( $, undefined ) {
 
 $.fn.buttonMarkup = function( options ) {
 	options = options || {};
