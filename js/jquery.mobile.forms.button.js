@@ -2,7 +2,7 @@
 * "button" plugin - links that proxy to native input/buttons
 */
 
-define( [ "jquery", "jquery.mobile.widget" ], function( $, undefined ) {
+define( [ "jquery", "jquery.mobile.widget", "jquery.mobile.buttonMarkup"  ], function( $, undefined ) {
 
 $.widget( "mobile.button", $.mobile.widget, {
 	options: {
