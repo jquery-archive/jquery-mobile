@@ -6,18 +6,9 @@
 	<title>jQuery Mobile: Demos and Documentation</title>
 	<link rel="stylesheet"  href="css/themes/default/jquery.mobile.theme.css" />
 	<link rel="stylesheet" href="docs/_assets/css/jqm-docs.css" />
-	<script src="requirejs/require.js"></script>
 	<script src="js/jquery.js"></script>
 	<script src="experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
-	<script type="text/javascript">
-		require.config({
-			baseUrl: "js"
-		});
-		require( [ "main" ], function() {
-			require( [ "../docs/_assets/js/jqm-docs" ] );
-		});
-	</script>
-	
+	<script data-main="js/jquery.mobile.docs" src="js/require.js"></script>
 </head> 
 <body> 
 <div data-role="page" class="type-home">
