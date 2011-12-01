@@ -2,7 +2,7 @@
 * support tests
 */
 
-define( [ "jquery" ], function( $, undefined ) {
+define( [ "jquery", "jquery.mobile.core" ], function( $, undefined ) {
 
 var fakeBody = $( "<body>" ).prependTo( "html" ),
 	fbCSS = fakeBody[ 0 ].style,
@@ -67,7 +67,6 @@ $.extend( $.support, {
 	touch: "ontouchend" in document,
 	cssTransitions: "WebKitTransitionEvent" in window,
 	pushState: "pushState" in history && "replaceState" in history,
-	mediaquery: $.mobile.media( "only all" ),
 	cssPseudoElement: !!propExists( "content" ),
 	touchOverflow: !!propExists( "overflowScrolling" ),
 	boxShadow: !!propExists( "boxShadow" ) && !bb,
