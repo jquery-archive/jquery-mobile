@@ -1,4 +1,4 @@
-define( [
+require([
 	'jquery.ui.widget',
 	'jquery.mobile.widget',
 	'jquery.mobile.media',
@@ -15,6 +15,7 @@ define( [
 	'jquery.mobile.dialog',
 	'jquery.mobile.page.sections',
 	'jquery.mobile.collapsible',
+	'jquery.mobile.collapsibleSet',
 	'jquery.mobile.fieldContain',
 	'jquery.mobile.grid',
 	'jquery.mobile.navbar',
@@ -33,4 +34,4 @@ define( [
 	'jquery.mobile.fixHeaderFooter',
 	'jquery.mobile.fixHeaderFooter.native',
 	'jquery.mobile.init'
-] );
+]);
