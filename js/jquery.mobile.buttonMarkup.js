@@ -2,7 +2,7 @@
 * "buttons" plugin - for making button-like links
 */
 
-define( [ "jquery", "jquery.mobile.core", "jquery.mobile.vmouse" ], function( $, undefined ) {
+define( [ "jquery", "jquery.mobile.vmouse" ], function( $, undefined ) {
 
 $.fn.buttonMarkup = function( options ) {
 	options = options || {};
@@ -73,7 +73,7 @@ $.fn.buttonMarkup = function( options ) {
 		}
 
 		e.setAttribute( "data-" + $.mobile.ns + "theme", o.theme );
-		el.addClass( buttonClass );
+		el.removeClass( "ui-link" ).addClass( buttonClass );
 
 		buttonInner.className = innerClass;
 
