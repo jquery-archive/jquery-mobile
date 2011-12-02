@@ -8,7 +8,7 @@
 	modules: [
 	     {
 	         name: "jquery.mobile",
-		     exclude: [ "jquery" ]
+		     exclude: [ "jquery", "order" ]
 	     },
 	],
 
