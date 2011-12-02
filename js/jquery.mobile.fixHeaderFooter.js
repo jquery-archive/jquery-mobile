@@ -4,7 +4,9 @@
 
 (function( $, undefined ) {
 
-var slideDownClass = "ui-header-fixed ui-fixed-inline fade",
+var testFixed = true,
+
+	slideDownClass = "ui-header-fixed ui-fixed-inline fade",
 	slideUpClass = "ui-footer-fixed ui-fixed-inline fade",
 
 	slideDownSelector = ".ui-header:jqmData(position='fixed')",
@@ -34,7 +36,7 @@ $.fn.fixHeaderFooter = function( options ) {
 // single controller for all showing,hiding,toggling
 $.mobile.fixedToolbars = (function() {
 
-	if ( !$.support.scrollTop || ( $.support.touchOverflow && $.mobile.touchOverflowEnabled ) ) {
+	if ( !$.support.scrollTop || ( $.support.touchOverflow && $.mobile.touchOverflowEnabled ) || testFixed ) {
 		return;
 	}
 
