@@ -31,20 +31,26 @@ $.widget( "mobile.fetchlink", $.mobile.widget, {
 					method += "With";
 				}
 
-				if ( url && method ){
+				if ( url && method ) {
+					
+					targetEl.ajaxStart(function(){
+						$(this).trigger('inlineLoader');
+					 });
+					
 					$.get( url, function( data ) {
 						/* Swiped from the jQuery core; $.get() should really be replaced by .load() */
 						var rscript = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,
 							responseEl = $( load ? $("<div/>").append( data.replace( rscript, "" ) ).find( load ) : data );
 
-						/* Do we want to do this? */
-						$( load ).remove();
-						targetEl[ method ]( responseEl )
-												
-						responseEl
-							.trigger( "create" )
-							.trigger( "fetchlink", { target : targetEl, data: responseEl } );
+						setTimeout(function() {
+							targetEl[ method ]( responseEl );
+							responseEl
+								.trigger( "create" )
+								.trigger( "fetchlink", { target : targetEl, data: responseEl } );
+						}, 1500);
+						
 					});
+					
 				}
 			}
 			return false;
@@ -52,6 +58,11 @@ $.widget( "mobile.fetchlink", $.mobile.widget, {
 
 	}
 });
+
+$( document ).bind( "inlineLoader", function( e ){
+	$( e.target ).html( "<div class='ui-loader' style='display: block; position: static; float: none; width: 100%; padding: 1em 0 .5em 0; margin: 0;'><span class='ui-icon ui-icon-loading spin' style='top: 0; border: 1px solid red;'></span><h1></h1></div>" );
+});
+
 
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ){
