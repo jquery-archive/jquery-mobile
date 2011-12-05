@@ -21,4 +21,10 @@
 		ok( slider.val() > 0, "the value has been altered" );
 		same( slider.val() % step, 0, "value has 'snapped' to a step" );
 	});
+
+	test( "empty string value results defaults to slider min value", function() {
+		var slider = $( "#empty-string-val-slider" );
+		same( slider.attr('min'), "10", "slider min is greater than 0" );
+		same( slider.val( '' ).slider( 'refresh' ).val(), slider.attr('min'), "val is equal to min attr");
+	});
 })( jQuery );
