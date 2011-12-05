@@ -396,6 +396,13 @@
 		}
 	}
 
+	function hasReverseDirection( $element ) {
+		var direction = $element.jqmData( "direction" ),
+			reverse = ( direction && direction === "reverse" );
+
+		return reverse;
+	}
+
 	// Save the last scroll distance per page, before it is hidden
 	var setLastScrollEnabled = true,
 		firstScrollElem, getScrollElem, setLastScroll, delayedSetLastScroll;
@@ -1267,7 +1274,7 @@
 					type:		type && type.length && type.toLowerCase() || "get",
 					data:		$this.serialize(),
 					transition:	$this.jqmData( "transition" ),
-					direction:	$this.jqmData( "direction" ),
+					reverse:	hasReverseDirection( $this ),
 					reloadPage:	true
 				}
 			);
@@ -1380,8 +1387,7 @@
 
 			//use ajax
 			var transition = $link.jqmData( "transition" ),
-				direction = $link.jqmData( "direction" ),
-				reverse = ( direction && direction === "reverse" ) ||
+				reverse = hasReverseDirection( $link ) ||
 							// deprecated - remove by 1.0
 							$link.jqmData( "back" ),
 
