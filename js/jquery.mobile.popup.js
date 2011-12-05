@@ -188,6 +188,17 @@ $.widget("mobile.popup", $.mobile.widget, {
 
 		return { x : newleft, y : newtop };
 	},
+	
+	_bindHashChange: function(){
+		var self = this;
+		$( window ).one( "hashchange.popup", function(){
+			self.close( true );
+		});
+	},
+	
+	_unbindHashChange: function(){
+		$( window ).unbind( "hashchange.popup" );
+	},
 
 	open: function(x, y) {
 		if (!this._isOpen) {
@@ -213,12 +224,20 @@ $.widget("mobile.popup", $.mobile.widget, {
 				.animationComplete(function() {
 					self._ui.screen.height($(document).height());
 				});
+			
+			// listen for hashchange that will occur when we set it to null dialog hash
+			$( window ).one( "hashchange", function(){
+				self._bindHashChange();
+			});
+			
+			// set hash to non-linkable dialog url	
+			$.mobile.path.set( "&ui-state=dialog" );
 
 			this._isOpen = true;
 		}
 	},
 
-	close: function() {
+	close: function( fromHash ) {
 		if (this._isOpen) {
 			var self = this,
 		    	hideScreen = function() {
@@ -241,6 +260,14 @@ $.widget("mobile.popup", $.mobile.widget, {
 					this._ui.screen.animate({opacity: 0.0}, "fast", hideScreen);
 				else
 					hideScreen();
+			
+			// unbind listener that comes with opening popup
+			this._unbindHashChange();
+			
+			// if the close event did not come from an internal hash listener, reset URL back
+			if( !fromHash ){	
+				window.history.back();	
+			}		
 		}
 	}
 });
