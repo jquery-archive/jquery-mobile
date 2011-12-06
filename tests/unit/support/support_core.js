@@ -77,14 +77,14 @@ $.testHelper.excludeFileProtocol(function(){
 		$.testHelper.reloadLib(libName);
 
 		//here we're just comparing our version to what the conditional compilation finds
-		 var ie 			= !!$.browser.msie, //get a boolean
+		 var ie 			= $.browser.msie,
 		 	 version 		= parseInt( $.browser.version, 10),
 		 	 jqmdetectedver = $.mobile.browser.ie;
 
-		 	if( ie ){
+		 	if ( ie ) {
 		 		same(version, jqmdetectedver, "It's IE and the version is correct");
 		 	}
-		 	else{
+		 	else {
 		 		same(ie, jqmdetectedver, "It's not IE");
 		 	}
 	});
