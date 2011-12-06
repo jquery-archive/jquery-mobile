@@ -9,12 +9,15 @@ $.widget( "mobile.fetchlink", $.mobile.widget, {
 		// Prototyping.
 	//	$( this.element.data( 'fragment' ) ).hide();
 		
+		console.log( $(":jqmData(role='page')") );
+		
+		
 		$( this.element ).click(function() {
 			var el			= $( this ),
 				url		    = el.attr( 'href' ),
 				target		= el.data( "target" ),
 				targetEl	= target && $( target ) || el,
-				load		= el.data( "fragment" ) /* Needs a proper default (page, most likely). */,
+				load		= el.data( "fragment" ) ||  $(":jqmData(role='page')")  /* Needs a proper default (page, most likely). */,
 				threshold	= screen.width > parseInt( el.data( "breakpoint" ) || 0 ),
 				methods		= [ "append", "prepend", "replace", "before", "after" ],
 				method      = "html",
@@ -60,7 +63,7 @@ $.widget( "mobile.fetchlink", $.mobile.widget, {
 });
 
 $( document ).bind( "inlineLoader", function( e ){
-	$( e.target ).html( "<div class='ui-loader' style='display: block; position: static; float: none; width: 100%; padding: 1em 0 .5em 0; margin: 0;'><span class='ui-icon ui-icon-loading spin' style='top: 0; border: 1px solid red;'></span><h1></h1></div>" );
+	$( e.target ).html( "<div class='ui-loader-inline'><span class='ui-icon ui-icon-loading spin'></span></div>" );
 });
 
 
