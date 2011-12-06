@@ -22,27 +22,31 @@
 <pre><code>&lt;a href=&quot;dialog.html&quot;&gt;Link&lt;/a&gt;
 </code></pre>
 	
-				<p>A <a href="dialog.html" data-rel="dialog">dialog</a> is made by adding <code>data-rel="dialog"</code> to a link to display the page with an inset appearance and the default dialog transition.</p>		
+				<p>A <a href="dialog.html" data-rel="dialog">dialog</a> is made by adding <code>data-rel="dialog"</code> to a link to display the page with an inset appearance and the default dialog transition.</p>
+						
 <pre><code>&lt;a href=&quot;dialog.html&quot; <strong>data-rel=&quot;dialog&quot;</strong>&gt;Link&lt;/a&gt;
 </code></pre>
 
 				<p>Note: The below example temporary contains a <code>data-fragment</code> attribute.</p>
-				<p>A <a data-role="fetchlink" data-target=".quote" href="dialog.html" data-fragment=".test">fetch link</a> is created by adding the <code>data-target</code> attribute to a link. This tells the framework to <strong>not</strong> change pages and instead load the <code>href</code> into the target DOM element on the current page when the link is clicked. The target can be any jQuery selector (or restrict to ID only?). </p>
+				<p>A <a data-role="fetchlink" data-target=".quote" href="dialog.html" data-fragment=".test">fetch link</a> is created by adding the <code>data-target</code> attribute to a link. This tells the framework to <strong>not</strong> change pages and instead load the <code>href</code> into the <code>target</code> DOM element on the current page when the link is clicked. The target can be any jQuery selector.</p>
 		
 <pre><code>&lt;a href=&quot;dialog.html&quot; <strong>data-target=&quot;.quote&quot;</strong>&gt;
 </code></pre>
 
-				<p>The <a data-role="fetchlink" href="dialog.html" data-target=".quote" data-method="before">target method</a> for a link can be specified by adding the <code>data-method</code> attribute to a link. This specifies whether to <code>replace</code>, <code>append</code>, <code>prepend</code>, or insert the content <code>before</code> or <code>after</code> the target element. By default, an external href will replace the target.</p>
+
+				<p>The <a href="dialog.html" data-role="fetchlink" data-target=".quote" data-fragment="[data-role='content']">content fragment</a> from the loaded page can be specified. By default, the framework will load in the <strong>contents</strong> of the <code>data-role=&quot;page&quot;</code> container (not the page wrapper itself), but it's possible to specify what content from the page to pull into the target by adding a <code>data-fragment</code> attribute to the link with any jQuery selector.</p>
 	
-<pre><code>&lt;a href=&quot;dialog.html&quot; data-target=&quot;.quote&quot; <strong>data-method=&quot;append&quot;</strong>&gt;
+<pre><code>&lt;a href=&quot;dialog.html&quot; data-target=&quot;.quote&quot; <strong>data-fragment=&quot;[data-role='content']&quot;</strong>&gt;
 </code></pre>
 
-				<p>The <a href="dialog.html" data-role="fetchlink" data-target=".quote" data-fragment="[data-role='content']">content fragment</a> from the loaded page can be specified. By default, the framework will load in the contents of the <code>data-role=&quot;page&quot;</code> container, but it's possible to specify content from the page to pull into the target by adding a <code>data-fragment</code> attribute to the link with any jQuery selector.</p>
-	
-<pre><code>&lt;a href=&quot;dialog.html&quot; data-target=&quot;.quote&quot; <strong>data-fragment=&quot;#content&quot;</strong>&gt;
-</code></pre>
+								<p>The <a data-role="fetchlink" href="dialog.html" data-target=".quote" data-method="before">target method</a> for a link can be specified by adding the <code>data-method</code> attribute to a link. This specifies whether to <code>replace</code>, <code>append</code>, <code>prepend</code>, or insert the content <code>before</code> or <code>after</code> the target element. By default, an external href will replace the target.</p>
 
-				<p>A <a href="dialog.html" data-role="fetchlink" data-target=".quote" data-breakpoint="500" data-breakpoint="400">breakpoint option</a> will automatically load the fetch link if the screen width is larger than the specified value instead of waiting for the link to be clicked. The <code>data-breakpoint</code> attribute on the link specifies the min-width pixel value to load the link.</p>
+<pre><code>&lt;a href=&quot;dialog.html&quot; data-target=&quot;.quote&quot; <strong>data-method=&quot;after&quot;</strong>&gt;
+</code></pre>
+								
+
+
+				<p>A <a href="dialog.html" data-role="fetchlink" data-target=".quote" data-breakpoint="500">breakpoint option</a> will automatically load the fetch link if the screen width is larger than the specified value instead of waiting for the link to be clicked. The <code>data-breakpoint</code> attribute on the link specifies the min-width pixel value to load the link.</p>
 
 <pre><code>&lt;a href=&quot;dialog.html&quot; data-target=&quot;.quote&quot; <strong>data-breakpoint=&quot;500&quot;</strong>&gt;
 </code></pre>
