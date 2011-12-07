@@ -2,7 +2,7 @@
 * "core" - The base file for jQm
 */
 
-define( [ "jquery", "jquery.mobile.support" ], function( $, undefined ) {
+define( [ "jquery" ], function( $, undefined ) {
 
 	var nsNormalizeDict = {};
 

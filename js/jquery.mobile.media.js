@@ -2,7 +2,7 @@
 * a workaround for window.matchMedia
 */
 
-define( [ "jquery", "jquery.mobile.core", "jquery.mobile.support" ], function( $, undefined ) {
+define( [ "jquery", "jquery.mobile.core" ], function( $, undefined ) {
 
 var $window = $( window ),
 	$html = $( "html" );
@@ -41,9 +41,5 @@ $.mobile.media = (function() {
 		return cache[ query ];
 	};
 })();
-
-$.extend( $.support, {
-	mediaquery: $.mobile.media( "only all" )
-})
 
 });
