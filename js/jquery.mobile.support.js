@@ -56,7 +56,9 @@ $.mobile.browser.ie = (function() {
 	div = document.createElement( "div" ),
 	a = div.all || [];
 
-	while ( div.innerHTML = "<!--[if gt IE " + ( ++v ) + "]><br><![endif]-->", a[ 0 ] );
+	// added {} to silence closure compiler warnings. registering my dislike of all things
+	// overly clever here for future reference
+	while ( div.innerHTML = "<!--[if gt IE " + ( ++v ) + "]><br><![endif]-->", a[ 0 ] ){};
 
 	return v > 4 ? v : !v;
 })();

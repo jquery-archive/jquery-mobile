@@ -37,13 +37,11 @@ $( document ).delegate( ":jqmData(role='listview')", "listviewcreate", function(
 				lastval = $this.jqmData( "lastval" ) + "",
 				childItems = false,
 				itemtext = "",
-				item, change;
+				item;
 
 			// Change val as lastval for next execution
 			$this.jqmData( "lastval" , val );
-			change = val.substr( 0 , lastval.length - 1 ).replace( lastval , "" );
-
-			if ( val.length < lastval.length || change.length != ( val.length - lastval.length ) ) {
+			if ( val.length < lastval.length || val.indexOf(lastval) !== 0 ) {
 
 				// Removed chars or pasted something totally different, check all items
 				listItems = list.children();
