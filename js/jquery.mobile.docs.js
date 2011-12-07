@@ -1,3 +1,1 @@
-require( [ "jquery.mobile" ], function() {
-	require( [ "../docs/_assets/js/jqm-docs" ] );
-});
+define( [ "../docs/_assets/js/jqm-docs" ] );
