@@ -27,4 +27,12 @@
 		same( slider.attr('min'), "10", "slider min is greater than 0" );
 		same( slider.val( '' ).slider( 'refresh' ).val(), slider.attr('min'), "val is equal to min attr");
 	});
+
+	test( "flip toggle switch title should be current selected value attr", function() {
+		var slider = $( "#slider-switch" );
+
+		same(slider.siblings(".ui-slider").find("a").attr('title'),
+				 $(slider.find("option")[slider[0].selectedIndex]).text(),
+				 "verify that the link title is set to the selected option text");
+	});
 })( jQuery );

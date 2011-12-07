@@ -315,7 +315,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		this.handle.attr( {
 				"aria-valuenow": cType === "input" ? newval : control.find( "option" ).eq( newval ).attr( "value" ),
 				"aria-valuetext": cType === "input" ? newval : control.find( "option" ).eq( newval ).getEncodedText(),
-				title: newval
+				title: cType === "input" ? newval : control.find( "option" ).eq( newval ).getEncodedText()
 			});
 
 		// add/remove classes for flip toggle switch
