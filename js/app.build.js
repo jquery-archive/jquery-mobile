@@ -6,10 +6,11 @@
 	//optimize: "none",
 
 	modules: [
-	     {
-	         name: "jquery.mobile",
-		     exclude: [ "jquery", "order" ]
-	     },
+		{
+		 name: "jquery.mobile",
+		 //include: [ "almond" ],
+		 exclude: [ "jquery", "order" ]
+		}
 	],
 
 	wrap: {
