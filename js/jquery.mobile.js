@@ -1,4 +1,4 @@
-require([
+define([
 	'jquery.ui.widget',
 	'jquery.mobile.widget',
 	'jquery.mobile.media',
@@ -33,5 +33,7 @@ require([
 	'jquery.mobile.links',
 	'jquery.mobile.fixHeaderFooter',
 	'jquery.mobile.fixHeaderFooter.native',
-	'jquery.mobile.init'
-]);
+	'order!jquery.mobile.init'
+], function() {
+
+});
