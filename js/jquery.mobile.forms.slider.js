@@ -307,10 +307,6 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			newval = max;
 		}
 
-		// Flip the stack of the bg colors
-		if ( percent > 60 && cType === "select" ) {
-			// TODO: Dead path?
-		}
 		this.handle.css( "left", percent + "%" );
 		this.handle.attr( {
 				"aria-valuenow": cType === "input" ? newval : control.find( "option" ).eq( newval ).attr( "value" ),
