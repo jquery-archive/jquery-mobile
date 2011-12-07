@@ -2,7 +2,7 @@
 * support tests
 */
 
-define( [ "jquery", "jquery.mobile.core" ], function( $, undefined ) {
+define( [ "jquery", "jquery.mobile.media" ], function( $, undefined ) {
 
 var fakeBody = $( "<body>" ).prependTo( "html" ),
 	fbCSS = fakeBody[ 0 ].style,
@@ -50,7 +50,7 @@ function baseTagTest() {
 
 // non-UA-based IE version check by James Padolsey, modified by jdalton - from http://gist.github.com/527683
 // allows for inclusion of IE 6+, including Windows Mobile 7
-$.mobile.browser = {};
+$.extend( $.mobile, { browser: {} } );
 $.mobile.browser.ie = (function() {
 	var v = 3,
 	div = document.createElement( "div" ),
@@ -69,6 +69,7 @@ $.extend( $.support, {
 	touch: "ontouchend" in document,
 	cssTransitions: "WebKitTransitionEvent" in window,
 	pushState: "pushState" in history && "replaceState" in history,
+	mediaquery: $.mobile.media( "only all" ),
 	cssPseudoElement: !!propExists( "content" ),
 	touchOverflow: !!propExists( "overflowScrolling" ),
 	boxShadow: !!propExists( "boxShadow" ) && !bb,
