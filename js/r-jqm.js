@@ -8022,7 +8022,7 @@ function (lang,   logger,   file,          parse,    optimize,   pragma,
      * those cases.
      */
     function addSemiColon(text) {
-        if (endsWithSemiColonRegExp.test(text)) {
+        if (!text || endsWithSemiColonRegExp.test(text)) {
             return text;
         } else {
             return text + ";";
@@ -8809,31 +8809,20 @@ function (lang,   logger,   file,          parse,    optimize,   pragma,
 
                 currContents = build.toTransport(anonDefRegExp, namespace, moduleName, path, currContents, layer);
 
+	            //Added for jQuery Mobile build as we are only interested in the dependency resolution
+	            currContents = currContents
+	            	    //.replace(/\brequire\(\s*[^\]]*].*function\(\s*\)\s*\{[^}]*\}\)\W*/, "") // Get rid of the require block
+			            .replace(/^\[[^\]]+\]\s*,?[);]*\s*function.*\{/m, "(function( $, undefined ) {")
+			            .replace(/\);?\s*$/, "( jQuery ));");
+
+	            currContents = currContents.replace(/\s*\(function\(.*\)\s*\{\s*\}\([^)]*\)\);/, "") // Get rid of empty functions
+
                 //Semicolon is for files that are not well formed when
                 //concatenated with other content.
                 fileContents += "\n" + addSemiColon(currContents);
             }
 
             buildFileContents += path.replace(config.dir, "") + "\n";
-            //Some files may not have declared a require module, and if so,
-            //put in a placeholder call so the require does not try to load them
-            //after the module is processed.
-            //If we have a name, but no defined module, then add in the placeholder.
-            if (moduleName && !layer.modulesWithNames[moduleName] && !config.skipModuleInsertion) {
-                //If including jquery, register the module correctly, otherwise
-                //register an empty function. For jquery, make sure jQuery is
-                //a real object, and perhaps not some other file mapping, like
-                //to zepto.
-                if (moduleName === 'jquery') {
-                    fileContents += '\n(function () {\n' +
-                                   'var jq = typeof jQuery !== "undefined" && jQuery;\n' +
-                                   namespace +
-                                   'define("jquery", [], function () { return jq; });\n' +
-                                   '}());\n';
-                } else {
-                    fileContents += '\n' + namespace + 'define("' + moduleName + '", function(){});\n';
-                }
-            }
         }
 
         return {
@@ -8895,9 +8884,7 @@ function (lang,   logger,   file,          parse,    optimize,   pragma,
                 }
             }
 
-            return start + namespace + "define('" + moduleName + "'," +
-                   (deps ? ('[' + deps.toString() + '],') : '') +
-                   (namedModule ? namedFuncStart.replace(build.leadingCommaRegExp, '') : suffix);
+            return suffix;
         });
 
     };
