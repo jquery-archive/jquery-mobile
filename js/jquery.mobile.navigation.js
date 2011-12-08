@@ -2,7 +2,7 @@
 * core utilities for auto ajax navigation, base tag mgmt,
 */
 
-define( [ "jquery", "jquery.mobile.core", "jquery.mobile.hashchange", "jquery.mobile.event" ], function( $, undefined ) {
+define( [ "jquery.mobile.core", "jquery.mobile.hashchange", "jquery.mobile.event" ], function() {
 
 	//define vars for interal use
 	var $window = $( window ),

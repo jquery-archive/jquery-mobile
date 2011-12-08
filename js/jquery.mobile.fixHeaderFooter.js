@@ -2,7 +2,7 @@
 * "fixHeaderFooter" plugin - on-demand positioning for headers,footers
 */
 
-define( [ "jquery", "jquery.mobile.vmouse" ], function( $, undefined ) {
+define( [ "jquery.mobile.vmouse" ], function() {
 
 var slideDownClass = "ui-header-fixed ui-fixed-inline fade",
 	slideUpClass = "ui-footer-fixed ui-fixed-inline fade",

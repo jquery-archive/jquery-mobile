@@ -2,7 +2,7 @@
 * "dialog" plugin.
 */
 
-define( [ "jquery", "jquery.mobile.widget" ], function( $, undefined ) {
+define( [ "jquery.mobile.widget" ], function() {
 
 $.widget( "mobile.dialog", $.mobile.widget, {
 	options: {

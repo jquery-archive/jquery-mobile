@@ -2,7 +2,7 @@
 * history.pushState support, layered on top of hashchange
 */
 
-define( [ "jquery", "jquery.mobile.navigation" ], function( $ ) {
+define( [ "jquery.mobile.navigation" ], function() {
 	// For now, let's Monkeypatch this onto the end of $.mobile._registerInternalEvents
 	// Scope self to pushStateHandler so we can reference it sanely within the
 	// methods handed off as event handlers

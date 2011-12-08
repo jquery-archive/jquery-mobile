@@ -2,7 +2,7 @@
 * "transitions" plugin - Page change tranistions
 */
 
-define( [ "jquery", "jquery.mobile.core" ], function( $, undefined ) {
+define( [ "jquery.mobile.core" ], function() {
 
 function css3TransitionHandler( name, reverse, $to, $from ) {
 

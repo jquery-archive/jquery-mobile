@@ -2,7 +2,7 @@
 * "init" - Initialize the framework
 */
 
-define( [ "jquery", "jquery.mobile.core", "jquery.mobile.navigation" ], function( $, undefined ) {
+define( [ "jquery.mobile.core", "jquery.mobile.navigation" ], function() {
 	var	$html = $( "html" ),
 			$head = $( "head" ),
 			$window = $( window );

@@ -32,8 +32,7 @@ define([
 	'order!jquery.mobile.controlGroup',
 	'jquery.mobile.links',
 	'jquery.mobile.fixHeaderFooter',
-	'jquery.mobile.fixHeaderFooter.native',
-	'order!jquery.mobile.init'
+	'jquery.mobile.fixHeaderFooter.native'
 ], function() {
-
+	require( [ 'jquery.mobile.init' ] );
 });

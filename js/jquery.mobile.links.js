@@ -2,7 +2,7 @@
 * "links" plugin - simple class additions for links
 */
 
-define( [ "jquery" ], function( $, undefined ) {
+define(function() {
 
 $( document ).bind( "pagecreate create", function( e ){
 	

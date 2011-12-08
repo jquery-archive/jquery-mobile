@@ -2,7 +2,7 @@
 * "selectmenu" plugin
 */
 
-define( [ "jquery", "jquery.mobile.widget", "jquery.mobile.buttonMarkup", "jquery.mobile.vmouse" ], function( $, undefined ) {
+define( [ "jquery.mobile.widget", "jquery.mobile.buttonMarkup", "jquery.mobile.vmouse" ], function() {
 
 $.widget( "mobile.selectmenu", $.mobile.widget, {
 	options: {

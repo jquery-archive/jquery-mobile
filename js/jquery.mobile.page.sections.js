@@ -2,7 +2,7 @@
 * This plugin handles theming and layout of headers, footers, and content areas
 */
 
-define( [ "jquery", "jquery.mobile.page" ], function( $, undefined ) {
+define( [ "jquery.mobile.page" ], function() {
 
 $.mobile.page.prototype.options.backBtnText  = "Back";
 $.mobile.page.prototype.options.addBackBtn   = false;

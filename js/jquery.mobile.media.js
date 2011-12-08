@@ -2,7 +2,7 @@
 * a workaround for window.matchMedia
 */
 
-define( [ "jquery", "jquery.mobile.core" ], function( $, undefined ) {
+define( [ "jquery.mobile.core" ], function() {
 
 var $window = $( window ),
 	$html = $( "html" );

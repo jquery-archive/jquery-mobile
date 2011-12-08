@@ -2,7 +2,7 @@
 * support tests
 */
 
-define( [ "jquery", "jquery.mobile.media" ], function( $, undefined ) {
+define( [ "jquery.mobile.media" ], function() {
 
 var fakeBody = $( "<body>" ).prependTo( "html" ),
 	fbCSS = fakeBody[ 0 ].style,

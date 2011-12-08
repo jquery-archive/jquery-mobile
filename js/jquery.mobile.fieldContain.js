@@ -2,7 +2,7 @@
 * "fieldcontain" plugin - simple class additions to make form row separators
 */
 
-define( [ "jquery" ], function( $, undefined ) {
+define(function() {
 
 $.fn.fieldcontain = function( options ) {
 	return this.addClass( "ui-field-contain ui-body ui-br" );

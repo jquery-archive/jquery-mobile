@@ -2,7 +2,7 @@
 * plugin for creating CSS grids
 */
 
-define( [ "jquery" ], function( $, undefined ) {
+define(function() {
 
 $.fn.grid = function( options ) {
 	return this.each(function() {

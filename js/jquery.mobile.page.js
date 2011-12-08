@@ -2,7 +2,7 @@
 * "page" plugin
 */
 
-define( [ "jquery", "jquery.mobile.widget" ], function( $, undefined ) {
+define( [ "jquery.mobile.widget" ], function() {
 
 $.widget( "mobile.page", $.mobile.widget, {
 	options: {

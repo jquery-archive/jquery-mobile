@@ -2,7 +2,7 @@
 * "collapsibleset" plugin
 */
 
-define( [ "jquery", "jquery.mobile.widget", "jquery.mobile.collapsible" ], function( $ ) {
+define( [ "jquery.mobile.widget", "jquery.mobile.collapsible" ], function() {
 
 $.widget( "mobile.collapsibleset", $.mobile.widget, {
 	options: {

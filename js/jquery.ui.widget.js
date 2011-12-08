@@ -8,7 +8,7 @@
  * http://docs.jquery.com/UI/Widget
  */
 
-define( [ "jquery" ], function( $, undefined ) {
+define(function() {
 
 // jQuery 1.4+
 if ( $.cleanData ) {

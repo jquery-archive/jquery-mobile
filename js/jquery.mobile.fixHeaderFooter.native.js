@@ -2,7 +2,7 @@
 * "fixHeaderFooter" native plugin - Behavior for "fixed" headers,footers, and scrolling inner content
 */
 
-define( [ "jquery", "jquery.mobile.core" ], function( $, undefined ) {
+define( [ "jquery.mobile.core" ], function() {
 
 // Enable touch overflow scrolling when it's natively supported
 $.mobile.touchOverflowEnabled = false;

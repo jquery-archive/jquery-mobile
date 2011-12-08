@@ -2,7 +2,7 @@
 * "listview" filter extension
 */
 
-define( [ "jquery", "jquery.mobile.listview" ], function( $, undefined ) {
+define( [ "jquery.mobile.listview" ], function() {
 
 $.mobile.listview.prototype.options.filter = false;
 $.mobile.listview.prototype.options.filterPlaceholder = "Filter items...";
