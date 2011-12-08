@@ -8812,10 +8812,11 @@ function (lang,   logger,   file,          parse,    optimize,   pragma,
 	            //Added for jQuery Mobile build as we are only interested in the dependency resolution
 	            currContents = currContents
 	            	    //.replace(/\brequire\(\s*[^\]]*].*function\(\s*\)\s*\{[^}]*\}\)\W*/, "") // Get rid of the require block
-			            .replace(/^\[[^\]]+\]\s*,?[);]*\s*function.*\{/m, "(function( $, undefined ) {")
-			            .replace(/\);?\s*$/, "( jQuery ));");
+			            .replace(/^(:?\[[^\]]*\]\s*,\s*)?[);]*\s*function.*\{/m, "(function() {")
+			            .replace(/\);?\s*$/, "());");
 
-	            currContents = currContents.replace(/\s*\(function\(.*\)\s*\{\s*\}\([^)]*\)\);/, "") // Get rid of empty functions
+	            currContents = currContents.replace(/\s*\(function\(.*\)\s*\{\s*\}\([^)]*\)\);/, ""); // Get rid of empty functions
+	            currContents = currContents.replace(/\s*\(function\(.*\)\s*\{\s*require\([^\)]*\);?\s*\}\([^)]*\)\);?/, ""); // Get rid of require( [init] ) function
 
                 //Semicolon is for files that are not well formed when
                 //concatenated with other content.
