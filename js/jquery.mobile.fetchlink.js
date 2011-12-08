@@ -5,19 +5,14 @@ $.widget( "mobile.fetchlink", $.mobile.widget, {
 		initSelector: ":jqmData(role='fetchlink')"
 	},
 	_create: function() {
-		
-		// Prototyping.
-	//	$( this.element.data( 'fragment' ) ).hide();
-		
-		console.log( $(":jqmData(role='page')") );
-		
-		
+
 		$( this.element ).click(function() {
 			var el			= $( this ),
-				url		    = el.attr( 'href' ),
+				url		    = el.attr( "href" ),
 				target		= el.data( "target" ),
 				targetEl	= target && $( target ) || el,
-				load		= el.data( "fragment" ) ||  $(":jqmData(role='page')")  /* Needs a proper default (page, most likely). */,
+				fragment    = el.data( "fragment" ),
+				load		= fragment || ":jqmData(role='page')",
 				threshold	= screen.width > parseInt( el.data( "breakpoint" ) || 0 ),
 				methods		= [ "append", "prepend", "replace", "before", "after" ],
 				method      = "html",
@@ -41,17 +36,21 @@ $.widget( "mobile.fetchlink", $.mobile.widget, {
 					 });
 					
 					$.get( url, function( data ) {
+					
 						/* Swiped from the jQuery core; $.get() should really be replaced by .load() */
 						var rscript = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,
-							responseEl = $( load ? $("<div/>").append( data.replace( rscript, "" ) ).find( load ) : data );
-
+							data = $( $("<div/>").append( data.replace( rscript, "" ) ).find( load ) )
+							responseEl = !fragment ? $( data.html() ) : data;
+						
 						setTimeout(function() {
 							targetEl[ method ]( responseEl );
 							responseEl
 								.trigger( "create" )
 								.trigger( "fetchlink", { target : targetEl, data: responseEl } );
-						}, 1500);
-						
+							responseEl
+								.find('[data-role="header"]')
+								.trigger( "create" )
+						}, 2000 );
 					});
 					
 				}
@@ -65,7 +64,6 @@ $.widget( "mobile.fetchlink", $.mobile.widget, {
 $( document ).bind( "inlineLoader", function( e ){
 	$( e.target ).html( "<div class='ui-loader-inline'><span class='ui-icon ui-icon-loading spin'></span></div>" );
 });
-
 
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ){
