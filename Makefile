@@ -92,14 +92,18 @@ all: init css js zip notify
 # Build and minify the CSS files
 css: init
 	# Build the CSS file with the theme included
-	@@node js/r.js  -o cssIn=css/themes/default/jquery.mobile.theme.css out=${OUTPUT}/${NAME}.tmp.css
+	@@node js/r.js -o cssIn=css/themes/default/jquery.mobile.theme.css out=${OUTPUT}/${NAME}.compiled.css
 	@@cat LICENSE-INFO.txt | ${VER} > ${OUTPUT}/${NAME}.css
-	@@cat ${OUTPUT}/${NAME}.tmp.css >> ${OUTPUT}/${NAME}.css
-	@@rm ${OUTPUT}/${NAME}.tmp.css
-	@@node js/r.js  -o cssIn=css/themes/default/jquery.mobile.theme.css optimizeCss=standard out=${OUTPUT}/${NAME}.tmp.min.css
+	@@cat ${OUTPUT}/${NAME}.compiled.css >> ${OUTPUT}/${NAME}.css
 	@@echo ${VER_MIN} > ${OUTPUT}/${NAME}.min.css
-	@@cat ${OUTPUT}/${NAME}.tmp.min.css >> ${OUTPUT}/${NAME}.min.css
-	@@rm ${OUTPUT}/${NAME}.tmp.min.css
+	@@java -jar build/yuicompressor-2.4.6.jar --type css ${OUTPUT}/${NAME}.compiled.css >> ${OUTPUT}/${NAME}.min.css
+	@@rm ${OUTPUT}/${NAME}.compiled.css
+	# Build the CSS Structure-only file
+	@@cat LICENSE-INFO.txt | ${VER} > ${OUTPUT}/${STRUCTURE}.css
+	@@cat ${CSSFILES} >> ${OUTPUT}/${STRUCTURE}.css
+	# ..... and then minify it
+	@@echo ${VER_MIN} > ${OUTPUT}/${STRUCTURE}.min.css
+	@@java -jar build/yuicompressor-2.4.6.jar --type css ${OUTPUT}/${STRUCTURE}.css >> ${OUTPUT}/${STRUCTURE}.min.css
 	# ..... and then copy in the images
 	@@cp -R css/themes/${THEME}/images ${OUTPUT}/
 	# Css portion is complete.
