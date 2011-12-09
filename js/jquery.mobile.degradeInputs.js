@@ -24,7 +24,7 @@ $.mobile.page.prototype.options.degradeInputs = {
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ){
 
-	var page = $(e.target).closestPageData();
+	var page = $.mobile.closestPageData( $(e.target) );
 
 	if( !page ) {
 		return;

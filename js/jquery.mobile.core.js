@@ -157,21 +157,21 @@
 			// specified default.
 
 			return ltr || defaultTheme || "a";
+		},
+
+		// TODO the following $ and $.fn extensions can/probably should be moved into jquery.mobile.core.helpers
+		//
+		// Find the closest javascript page element to gather settings data jsperf test
+		// http://jsperf.com/single-complex-selector-vs-many-complex-selectors/edit
+		// possibly naive, but it shows that the parsing overhead for *just* the page selector vs
+		// the page and dialog selector is negligable. This could probably be speed up by
+		// doing a similar parent node traversal to the one found in the inherited theme code above
+		closestPageData: function( $target ) {
+			return $target
+				.closest(':jqmData(role="page"), :jqmData(role="dialog")')
+				.data("page");
 		}
 	});
-
-	// TODO the following $ and $.fn extensions can/probably should be moved into jquery.mobile.core.helpers
-	//
-	// Find the closest javascript page element to gather settings data jsperf test
-	// http://jsperf.com/single-complex-selector-vs-many-complex-selectors/edit
-	// possibly naive, but it shows that the parsing overhead for *just* the page selector vs
-	// the page and dialog selector is negligable. This could probably be speed up by
-	// doing a similar parent node traversal to the one found in the inherited theme code above
-	$.fn.closestPageData = function() {
-		return $(this)
-			.closest(':jqmData(role="page"), :jqmData(role="dialog")')
-			.data("page");
-	};
 
 	// Mobile version of data and removeData and hasData methods
 	// ensures all data is set and retrieved using jQuery Mobile's data namespace
