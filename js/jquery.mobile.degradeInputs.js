@@ -24,7 +24,7 @@ $.mobile.page.prototype.options.degradeInputs = {
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ){
 
-	var page = $(e.target).closest(':jqmData(role="page"),:jqmData(role="dialog")').data("page"), options;
+	var page = $(e.target).closestPageData();
 
 	if( !page ) {
 		return;

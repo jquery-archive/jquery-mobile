@@ -160,6 +160,17 @@
 		}
 	});
 
+	// TODO the following $ and $.fn extensions can/probably should be moved into
+	// jquery.mobile.core.helpers
+
+	// Find the closest javascript page element to gather settings data
+	// TODO complex selector parsing will slow down page load times
+	$.fn.closestPageData = function() {
+		return $(this)
+			.closest(':jqmData(role="page"), :jqmData(role="dialog")')
+			.data("page");
+	};
+
 	// Mobile version of data and removeData and hasData methods
 	// ensures all data is set and retrieved using jQuery Mobile's data namespace
 	$.fn.jqmData = function( prop, value ) {
