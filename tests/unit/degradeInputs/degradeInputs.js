@@ -14,15 +14,23 @@
         var degradeInputs = $.mobile.page.prototype.options.degradeInputs;
     
         expect( degradeInputs.length );
-    
+ 
+        // Initialize dialog page
+        $.mobile.changePage($('#dialog'));
+        $.mobile.changePage($('#page'));
+
         $.each(degradeInputs, function( oldType, newType ) {
             if (newType === false) {
                 newType = oldType;
             }
             
-            $('#test-container').html('<input type="' + oldType + '" />').trigger("create");
+            $('#page-test-container').html('<input type="' + oldType + '" />').trigger("create");
             
-            same($('#test-container input').attr("type"), newType);
+            same($('#page-test-container input').attr("type"), newType);
+
+            $('#dialog-test-container').html('<input type="' + oldType + '" />').trigger("create");
+
+            same($('#dialog-test-container input').attr("type"), newType);
         });
     });
 	
