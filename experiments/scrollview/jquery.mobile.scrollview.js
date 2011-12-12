@@ -30,7 +30,9 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		
 		pagingEnabled:     false,
 		delayedClickSelector: "a,input,textarea,select,button,.ui-btn",
-		delayedClickEnabled: false
+		delayedClickEnabled: false,
+		linked_x:					 null,	// horizontal linked scroller id (if present)
+		linked_y:					 null		// vertical linked scroller id (if present)
 	},
 
 	_makePositioned: function($ele)
@@ -79,6 +81,9 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		this._timerCB = function(){ self._handleMomentumScroll(); };
 	
 		this._addBehaviors();
+		
+		this.linked_x = $("#"+this.options.linked_x);
+		this.linked_y = $("#"+this.options.linked_y);
 	},
 
 	_startMScroll: function(speedX, speedY)
@@ -164,8 +169,13 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		else
 			this._stopMScroll();
 	},
+	
+	_scrollLinked: function(x,y) {	//Scroll linked scrollers if exists
+		if (this.linked_x.length > 0) this.linked_x.scrollview("linkedScrollTo",x,null);
+		if (this.linked_y.length > 0) this.linked_y.scrollview("linkedScrollTo",null,y);
+	},
 
-	_setScrollPosition: function(x, y)
+	_setScrollPosition: function(x, y, is_linked)	//Optional is_linked == true parametter when called by linked scroller
 	{
 		this._sx = x;
 		this._sy = y;
@@ -189,26 +199,39 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 				break;
 		}
 
-		var $vsb = this._$vScrollBar;
-		var $hsb = this._$hScrollBar;
-
-		if ($vsb)
-		{
-			var $sbt = $vsb.find(".ui-scrollbar-thumb");
-			if (sm === "translate")
-				setElementTransform($sbt, "0px", -y/$v.height() * $sbt.parent().height() + "px");
-			else
-				$sbt.css("top", -y/$v.height()*100 + "%");
+		if (!is_linked) {	// only if call is not made by lenked master
+			
+			this._scrollLinked(x,y);	// scroll linked scrollviews
+					
+			var $vsb = this._$vScrollBar;
+			var $hsb = this._$hScrollBar;
+	
+			if ($vsb)
+			{
+				var $sbt = $vsb.find(".ui-scrollbar-thumb");
+				if (sm === "translate")
+					setElementTransform($sbt, "0px", -y/$v.height() * $sbt.parent().height() + "px");
+				else
+					$sbt.css("top", -y/$v.height()*100 + "%");
+			}
+	
+			if ($hsb)
+			{
+				var $sbt = $hsb.find(".ui-scrollbar-thumb");
+				if (sm === "translate")
+					setElementTransform($sbt,  -x/$v.width() * $sbt.parent().width() + "px", "0px");
+				else
+					$sbt.css("left", -x/$v.width()*100 + "%");
+			}
 		}
+	},
 
-		if ($hsb)
-		{
-			var $sbt = $hsb.find(".ui-scrollbar-thumb");
-			if (sm === "translate")
-				setElementTransform($sbt,  -x/$v.width() * $sbt.parent().width() + "px", "0px");
-			else
-				$sbt.css("left", -x/$v.width()*100 + "%");
-		}
+	linkedScrollTo: function(x,y) // Called by linked master when this is slave scroller
+	{															// Value null means take it internally
+		this._stopMScroll();		// prevent flickering when in elastic mode
+		if (!x) x = this._sx;
+		if (!y) y = this._sy;
+		this._setScrollPosition(x,y,true);
 	},
 
 	scrollTo: function(x, y, duration)
