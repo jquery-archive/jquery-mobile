@@ -39,7 +39,6 @@ $.widget( "mobile.sections", $.mobile.widget, {
 
 				//apply theming and markup modifications to page,header,content,footer
 				if ( role === "header" || role === "footer" ) {
-
 					var thisTheme = theme || ( role === "header" ? o.headerTheme : o.footerTheme ) || pageTheme;
 
 					$this

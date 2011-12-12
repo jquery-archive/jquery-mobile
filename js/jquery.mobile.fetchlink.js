@@ -6,7 +6,8 @@ $.widget( "mobile.fetchlink", $.mobile.widget, {
 	},
 	_create: function() {
 
-		$( this.element ).click(function() {
+		$( this.element )
+		 .click(function() {
 			var el			= $( this ),
 				url		    = el.attr( "href" ),
 				target		= el.data( "target" ),
@@ -36,23 +37,19 @@ $.widget( "mobile.fetchlink", $.mobile.widget, {
 					 });
 					
 					$.get( url, function( data ) {
-					
-						/* Swiped from the jQuery core; $.get() should really be replaced by .load() */
 						var rscript = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,
 							data = $( $("<div/>").append( data.replace( rscript, "" ) ).find( load ) )
 							responseEl = !fragment ? $( data.html() ) : data;
+									
+						setTimeout(function() {				
+							targetEl[ method ]( responseEl.addClass('fade in') );
 						
-						setTimeout(function() {
-							targetEl[ method ]( responseEl );
 							responseEl
 								.trigger( "create" )
-								.trigger( "fetchlink", { target : targetEl, data: responseEl } );
-							responseEl
-								.find('[data-role="header"]')
-								.trigger( "create" )
-						}, 2000 );
-					});
-					
+								.trigger( "fetchlink", { target : targetEl, data: responseEl });
+						}, 300);
+						
+					});					
 				}
 			}
 			return false;
@@ -61,8 +58,12 @@ $.widget( "mobile.fetchlink", $.mobile.widget, {
 	}
 });
 
-$( document ).bind( "inlineLoader", function( e ){
-	$( e.target ).html( "<div class='ui-loader-inline'><span class='ui-icon ui-icon-loading spin'></span></div>" );
+$( document ).bind( "inlineLoader", function( e ){	
+	$( e.target ).children().removeClass('fade in').addClass('fade out');
+	
+	setTimeout(function() {
+		$( e.target ).html( "<div class='ui-loader-inline'><span class='ui-icon ui-icon-loading spin'></span></div>" );
+	}, 300);
 });
 
 //auto self-init widgets

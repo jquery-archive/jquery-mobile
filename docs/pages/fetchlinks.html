@@ -26,13 +26,16 @@
 						
 <pre><code>&lt;a href=&quot;dialog.html&quot; <strong>data-rel=&quot;dialog&quot;</strong>&gt;Link&lt;/a&gt;
 </code></pre>
-				<p>Note: The below example temporary contains a <code>data-fragment</code> attribute.</p>
-
-				<p>A <a data-role="fetchlink" data-target=".quote" href="dialog.html">fetch link</a> is created by adding the <code>data-target</code> attribute to a link. This tells the framework to <strong>not</strong> change pages and instead load the <code>href</code> into the target DOM element on the current page when the link is clicked. The target can be any jQuery selector (or restrict to ID only?). </p>
->>>>>>> Refactored sections JS to use widget factory scheme; continued work on fetchlinks/inline loader.
+				<p>A <a data-role="fetchlink" data-target=".quote" href="dialog.html" data-transition="fade">fetch link</a> is created by adding the <code>data-target</code> attribute to a link. This tells the framework to <strong>not</strong> change pages and instead load the <code>href</code> into the target DOM element on the current page when the link is clicked. The target can be any jQuery selector (or restrict to ID only?). </p>
 		
 <pre><code>&lt;a href=&quot;dialog.html&quot; <strong>data-target=&quot;.quote&quot;</strong>&gt;
 </code></pre>
+
+
+<div class="quote">
+	<p>To be replaced.</p>
+</div>
+
 
 
 				<p>The <a href="dialog.html" data-role="fetchlink" data-target=".quote" data-fragment="[data-role='content']">content fragment</a> from the loaded page can be specified. By default, the framework will load in the <strong>contents</strong> of the <code>data-role=&quot;page&quot;</code> container (not the page wrapper itself), but it's possible to specify what content from the page to pull into the target by adding a <code>data-fragment</code> attribute to the link with any jQuery selector.</p>
@@ -65,10 +68,6 @@
 					
 					</div>
 
-					<div class="quote">
-						<p>To be replaced.</p>
-					</div>
-		
 	</div>
 
 
