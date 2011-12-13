@@ -15,6 +15,7 @@ JSFILES = 	  js/jquery.ui.widget.js \
 			  js/jquery.mobile.dialog.js \
 			  js/jquery.mobile.page.sections.js \
 			  js/jquery.mobile.collapsible.js \
+			  js/jquery.mobile.collapsibleSet.js \
 			  js/jquery.mobile.fieldContain.js \
 			  js/jquery.mobile.grid.js \
 			  js/jquery.mobile.navbar.js \
@@ -58,8 +59,10 @@ CSSTHEMEFILES = css/themes/${THEME}/jquery.mobile.theme.css
 # Helper Variables
 # The command to replace the @VERSION in the files with the actual version
 VER = sed "s/v@VERSION/$$(git log -1 --format=format:"Git Build: SHA1: %H <> Date: %cd")/"
-VER_MIN = "/*! jQuery Mobile v${VER_OFFICIAL} jquerymobile.com | jquery.org/license */"
+VER_MIN = "/*! jQuery Mobile v$$(git log -1 --format=format:"Git Build: SHA1: %H <> Date: %cd") jquerymobile.com | jquery.org/license */"
 VER_OFFICIAL = $(shell cat version.txt)
+deploy: VER = sed "s/v@VERSION/${VER_OFFICIAL}/"
+deploy: VER_MIN = "/*! jQuery Mobile v${VER_OFFICIAL} jquerymobile.com | jquery.org/license */"
 
 # The output folder for the finished files
 OUTPUT = compiled
@@ -86,13 +89,13 @@ all: init css js zip notify
 # Build and minify the CSS files
 css: init
 	# Build the CSS file with the theme included
-	@@cat js/jquery.mobile.intro.js | ${VER} > ${OUTPUT}/${NAME}.css
+	@@cat LICENSE-INFO.txt | ${VER} > ${OUTPUT}/${NAME}.css
 	@@cat ${CSSTHEMEFILES} ${CSSFILES} >> ${OUTPUT}/${NAME}.css
 	# ..... and then minify it
 	@@echo ${VER_MIN} > ${OUTPUT}/${NAME}.min.css
 	@@java -jar build/yuicompressor-2.4.6.jar --type css ${OUTPUT}/${NAME}.css >> ${OUTPUT}/${NAME}.min.css
 	# Build the CSS Structure-only file
-	@@cat js/jquery.mobile.intro.js | ${VER} > ${OUTPUT}/${STRUCTURE}.css
+	@@cat LICENSE-INFO.txt | ${VER} > ${OUTPUT}/${STRUCTURE}.css
 	@@cat ${CSSFILES} >> ${OUTPUT}/${STRUCTURE}.css
 	# ..... and then minify it
 	@@echo ${VER_MIN} > ${OUTPUT}/${STRUCTURE}.min.css
@@ -106,7 +109,7 @@ css: init
 docs: init css js
 	# Create the Demos/Docs/Tests/Tools
 	@@mkdir -p tmp/${NAME}
-	@@cp -r index.html docs experiments external js/jquery.js tests tmp/${NAME}/
+	@@cp -R index.html docs experiments external js/jquery.js tests css/themes/${THEME}/images tmp/${NAME}/
 	@@cp ${OUTPUT}/${NAME}.min.css ${OUTPUT}/${NAME}.min.js tmp/${NAME}/
 	# ... Update the JavaScript and CSS paths
 	@@find tmp/${NAME} -type f \
@@ -114,7 +117,7 @@ docs: init css js
 		-exec perl -pi -e \
 		's|js/"|${NAME}.min.js"|g;s|css/themes/default/|${NAME}.min.css|g;s|js/jquery.js"|jquery.js"|g' {} \;
 	# ... Move and zip up the the whole folder
-	@@zip -rq ${OUTPUT}/${NAME}.docs.zip tmp/${NAME}
+	@@cd tmp; zip -rq ../${OUTPUT}/${NAME}.docs.zip ${NAME}
 	@@mv tmp/${NAME} ${OUTPUT}/demos
 	# Finish by removing the temporary files
 	@@rm -rf tmp
@@ -134,11 +137,16 @@ init:
 # Build and minify the JS files
 js: init
 	# Build the JavaScript file
-	@@cat js/jquery.mobile.intro.js | ${VER} > ${OUTPUT}/${NAME}.js
+	@@cat LICENSE-INFO.txt | ${VER} > ${OUTPUT}/${NAME}.js
 	@@cat ${JSFILES} >> ${OUTPUT}/${NAME}.js
 	# ..... and then minify it
 	@@echo ${VER_MIN} > ${OUTPUT}/${NAME}.min.js
-	@@java -jar build/google-compiler-20111003.jar --js ${OUTPUT}/${NAME}.js --warning_level QUIET >> ${OUTPUT}/${NAME}.min.js
+	@@java -XX:ReservedCodeCacheSize=64m \
+				-jar build/google-compiler-20111003.jar \
+				--js ${OUTPUT}/${NAME}.js \
+				--js_output_file ${OUTPUT}/${NAME}.tmp.js
+	@@cat ${OUTPUT}/${NAME}.tmp.js >> ${OUTPUT}/${NAME}.min.js
+	@@rm ${OUTPUT}/${NAME}.tmp.js
 	# -------------------------------------------------
 
 
@@ -149,11 +157,13 @@ notify: init
 
 
 # Zip up the jQm files without docs
-zip: init css js
+zip: init css js 
 	# Packaging up the files into a zip archive
 	@@mkdir tmp
-	@@cp -r ${OUTPUT} tmp/${NAME} 
-	@@zip -rq ${OUTPUT}/${NAME}.zip tmp/${NAME}/
+	@@cp -R ${OUTPUT} tmp/${NAME} 
+	# ... And remove the Zipped docs so they aren't included twice (for deploy scripts)
+	@@rm -rf tmp/${NAME}/${NAME}.docs.zip 
+	@@cd tmp; zip -rq ../${OUTPUT}/${NAME}.zip ${NAME}
 	@@rm -rf tmp
 	# -------------------------------------------------
 	
@@ -169,7 +179,7 @@ zip: init css js
 # -------------------------------------------------
 
 # Push the latest git version to the CDN. This is done on a post commit hook
-latest: init js css zip
+latest: init css js zip
 	# Time to put these on the CDN
 	@@scp -qr ${OUTPUT}/* jqadmin@code.origin.jquery.com:/var/www/html/code.jquery.com/mobile/latest/
 	# Do some cleanup to wrap it up
@@ -177,7 +187,7 @@ latest: init js css zip
 	# -------------------------------------------------
 
 # Build the nightly backups. This is done on a server cronjob
-nightlies: init js css zip docs 
+nightlies: init css js docs zip 
 	# Time to put these on the CDN
 	@@mkdir -p tmp/nightlies
 	@@mv ${OUTPUT} tmp/nightlies/$$(date "+%Y%m%d")
@@ -188,10 +198,10 @@ nightlies: init js css zip docs
 
 
 # Deploy a finished release. This is manually done.
-deploy: init js css docs zip
+deploy: init css js docs zip
 	# Deploying all the files to the CDN
 	@@mkdir tmp
-	@@cp -r ${OUTPUT} tmp/${VER_OFFICIAL}
+	@@cp -R ${OUTPUT} tmp/${VER_OFFICIAL}
 	@@scp -qr tmp/* jqadmin@code.origin.jquery.com:/var/www/html/code.jquery.com/mobile/
 	@@rm -rf tmp/${VER_OFFICIAL}
 	@@mv ${OUTPUT}/demos tmp/${VER_OFFICIAL}

@@ -18,6 +18,7 @@ $files = array(
 	'jquery.mobile.dialog.js',
 	'jquery.mobile.page.sections.js',
 	'jquery.mobile.collapsible.js',
+	'jquery.mobile.collapsibleSet.js',
 	'jquery.mobile.fieldContain.js',
 	'jquery.mobile.grid.js',
 	'jquery.mobile.navbar.js',

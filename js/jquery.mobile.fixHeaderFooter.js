@@ -150,9 +150,7 @@ $.mobile.fixedToolbars = (function() {
 
 	// 1. Before page is shown, check for duplicate footer
 	// 2. After page is shown, append footer to new page
-	$( ".ui-page" )
-		.live( "pagebeforeshow", function( event, ui ) {
-
+	$( document ).delegate( ".ui-page", "pagebeforeshow", function( event, ui ) {
 			var page = $( event.target ),
 				footer = page.find( ":jqmData(role='footer')" ),
 				id = footer.data( "id" ),
@@ -165,12 +163,10 @@ $.mobile.fixedToolbars = (function() {
 				setTop( stickyFooter.removeClass( "fade in out" ).appendTo( $.mobile.pageContainer ) );
 			}
 		})
-		.live( "pageshow", function( event, ui ) {
-
+		.delegate( ".ui-page", "pageshow", function( event, ui ) {
 			var $this = $( this );
 
 			if ( stickyFooter && stickyFooter.length ) {
-
 				setTimeout(function() {
 					setTop( stickyFooter.appendTo( $this ).addClass( "fade" ) );
 					stickyFooter = null;
@@ -180,8 +176,8 @@ $.mobile.fixedToolbars = (function() {
 			$.mobile.fixedToolbars.show( true, this );
 		});
 
-	// When a collapsiable is hidden or shown we need to trigger the fixed toolbar to reposition itself (#1635)
-	$( ".ui-collapsible-contain" ).live( "collapse expand", showEventCallback );
+	// When a collapsible is hidden or shown we need to trigger the fixed toolbar to reposition itself (#1635)
+	$( document ).delegate( ".ui-collapsible-contain", "collapse expand", showEventCallback );
 
 	// element.getBoundingClientRect() is broken in iOS 3.2.1 on the iPad. The
 	// coordinates inside of the rect it returns don't have the page scroll position

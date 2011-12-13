@@ -6,8 +6,14 @@
 	var onChangeCnt = 0;
 	window.onChangeCounter = function() {
 		onChangeCnt++;
-	}
-	module('jquery.mobile.slider.js');
+	};
+
+	module('jquery.mobile.slider.js', {
+		setup: function() {
+			// force the value to be an increment of 10 when we aren't testing the rounding
+			$("#stepped").val( 20 );
+		}
+	});
 
 	var keypressTest = function(opts){
 		var slider = $(opts.selector),

@@ -34,8 +34,10 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 		});
 
 		$navbar.delegate( "a", "vclick", function( event ) {
-			$navbtns.not( ".ui-state-persist" ).removeClass( $.mobile.activeBtnClass );
-			$( this ).addClass( $.mobile.activeBtnClass );
+			if( !$(event.target).hasClass("ui-disabled") ) {
+				$navbtns.not( ".ui-state-persist" ).removeClass( $.mobile.activeBtnClass );
+				$( this ).addClass( $.mobile.activeBtnClass );
+			}
 		});
 	}
 });
