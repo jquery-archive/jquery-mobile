@@ -215,4 +215,19 @@
 		same( $.mobile.path.cleanHash( "#anything/atall?akjfdjjf" ), "anything/atall", "removes query param");
 		same( $.mobile.path.cleanHash( "#nothing/atall" ), "nothing/atall", "removes query param");
 	});
+
+	test( "path.isPermittedCrossDomainRequest", function() {
+		var fileDocUrl = $.mobile.path.parseUrl( "file://foo" );
+
+		$.mobile.allowCrossDomainPages = false;
+		same( $.mobile.path.isPermittedCrossDomainRequest( "foo",  "bar"), false, "always false from the setting");
+
+
+		$.mobile.allowCrossDomainPages = true;
+		// test the two states of the file protocol logic
+		same( $.mobile.path.isPermittedCrossDomainRequest( fileDocUrl,  "http://bar.com/foo"), true, "external url from file protocol succeeds");
+
+		same( $.mobile.path.isPermittedCrossDomainRequest( fileDocUrl,  "file://foo"), false, "two file protocol urls fail");
+
+	});
 })(jQuery);
