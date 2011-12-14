@@ -1,0 +1,151 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>jQuery Mobile Docs - Collapsible Content</title> 
+	<link rel="stylesheet"  href="../../css/themes/default/" />  
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	<script src="../../js/jquery.js"></script>
+	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../_assets/js/jqm-docs.js"></script>
+	<script src="../../js/"></script>
+</head> 
+<body> 
+
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="f">
+		<h1>Collapsible sets (Accordions)</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="content-primary">
+		
+		<h2>Collapsible set markup</h2>
+		<p>Collapsible sets start with the exact same markup as <a href="content-collapsible.html">individual collapsibles</a>. By adding a parent wrapper with a <code> data-role="collapsible-set"</code> attribute around a number of collapsibles, the framework will style these to looks like a visually grouped widget and make it behave like an accordion so only one section can be open at a time. View the <a href="../api/data-attributes.html">data- attribute reference</a> to see all the possible attributes you can add to collapsible sets.</p>
+		<p>By default, all the sections will be collapsed. To set a section to be open when the page loads, add the <code> data-collapsed="false"</code> attribute to the heading of the section you want expanded.</p>
+
+	<pre><code>		
+<strong>&lt;div data-role="collapsible-set"&gt;</strong>
+
+	&lt;div data-role=&quot;collapsible&quot; <strong>data-collapsed=&quot;false&quot;</strong>&gt;
+	&lt;h3&gt;Section 1&lt;/h3&gt;
+	&lt;p&gt;I&#x27;m the collapsible set content for section B.&lt;/p&gt;
+	&lt;/div&gt;
+	
+	&lt;div data-role=&quot;collapsible&quot;&gt;
+	&lt;h3&gt;Section 2&lt;/h3&gt;
+	&lt;p&gt;I&#x27;m the collapsible set content for section B.&lt;/p&gt;
+	&lt;/div&gt;
+	
+<strong>&lt;/div&gt;</strong>
+	</code></pre>	
+	
+
+		<p>Here is an example of a collapsible set with 5 sections.</p>
+		
+		<div data-role="collapsible-set">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Section 1</h3>
+				<p>I'm the collapsible content in a set so this feels like an accordion. I'm open by default because I have the <code>data-collapsed="false"</code> attribute.</p>
+			</div>
+			<div data-role="collapsible">
+				<h3>Section 2</h3>
+				<p>I'm the collapsible content in a set so this feels like an accordion. I'm hidden by default because I have the "collapsed" state; you need to expand the header to see me.</p>
+
+			</div>
+			<div data-role="collapsible">
+				<h3>Section 3</h3>
+				<p>I'm the collapsible content in a set so this feels like an accordion. I'm hidden by default because I have the "collapsed" state; you need to expand the header to see me.</p>
+
+			</div>
+			<div data-role="collapsible">
+				<h3>Section 4</h3>
+				<p>I'm the collapsible content in a set so this feels like an accordion. I'm hidden by default because I have the "collapsed" state; you need to expand the header to see me.</p>
+
+			</div>
+			<div data-role="collapsible">
+				<h3>Section 5</h3>
+				<p>I'm the collapsible content in a set so this feels like an accordion. I'm hidden by default because I have the "collapsed" state; you need to expand the header to see me.</p>
+
+			</div>
+		</div>
+
+		<h2>Theming collapsible content</h2>
+		<p>The standard <code>data-theme</code> attribute can be used to set the color of each collapsible in a set. To provide a clearer visual grouping of the content with the headers, add the <code>data-content-theme</code> attribute with a swatch letter. This adds a themed background color and border to the content block. For consistent theming, add these attributes to the parent collapsible set.</p>
+
+
+<pre><code>		
+&lt;div data-role=&quot;collapsible-set&quot; <strong>data-theme=&quot;c&quot; data-content-theme=&quot;d&quot;</strong>&gt;
+</code></pre>	
+
+
+		<div data-role="collapsible-set" data-theme="c" data-content-theme="d">
+			<div data-role="collapsible">
+				<h3>Section 1</h3>
+				<p>Collapsible content</p>
+			</div>
+			<div data-role="collapsible">
+				<h3>Section 2</h3>
+				<p>Collapsible content</p>
+
+			</div>
+			<div data-role="collapsible">
+				<h3>Section 3</h3>
+				<p>Collapsible content</p>
+			</div>
+		</div>
+
+
+		<h2>Theming individual sections</h2>
+		<p>To have individual sections in a group styled differently, add <code>data-theme</code> and <code>data-content-theme</code> attributes to specific collapsibles.</p>
+
+		<div data-role="collapsible-set" data-content-theme="c">
+			<div data-role="collapsible" data-theme="b" data-content-theme="b">
+				<h3>Section header, swatch B</h3>
+				<p>Collapsible content, swatch B</p>
+
+			</div>
+			<div data-role="collapsible" data-theme="a" data-content-theme="a">
+				<h3>Section header, swatch A</h3>
+				<p>Collapsible content, swatch A</p>
+			</div>
+			<div data-role="collapsible" data-theme="e" data-content-theme="d">
+				<h3>Section header, swatch E</h3>
+				<p>Collapsible content, swatch D</p>
+			</div>
+		</div>
+		
+	</div><!--/content-primary -->		
+	
+	<div class="content-secondary">
+		
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+			
+				<h3>More in this section</h3>
+				
+				<ul data-role="listview" data-theme="c" data-dividertheme="d">
+				
+					<li data-role="list-divider">Content Formatting</li>
+					<li><a href="content-html.html">Basic HTML styles</a></li>
+					<li><a href="content-grids.html">Layout grids (columns)</a></li>
+					<li><a href="content-collapsible.html">Collapsible content blocks</a></li>
+					<li data-theme="a"><a href="content-collapsible-set.html">Collapsible sets (accordions)</a></li>
+					<li><a href="content-themes.html">Theming content</a></li>
+	
+				</ul>
+		</div>
+	</div>		
+
+</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p>&copy; 2011 The jQuery Project</p>
+</div>
+	
+</div><!-- /page -->
+
+</body>
+</html>

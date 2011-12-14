@@ -1,0 +1,80 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>jQuery Mobile Docs - Page titles</title> 
+	<link rel="stylesheet"  href="../../css/themes/default/" />  
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	<script src="../../js/jquery.js"></script>
+	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../_assets/js/jqm-docs.js"></script>
+	<script src="../../js/"></script>
+</head> 
+<body> 
+
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="f">
+		<h1>Page titles</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+			<div class="content-primary">	
+					
+		<h2>Titles in Ajax navigation</h2>
+		
+		<p>When you load the first page of a jQuery Mobile based site, then click a link or submit a form, Ajax is used to pull in the content of the requested page. Having both pages in the DOM is essential to enable the animated page transitions, but one downside of this approach is that the page title is always that of the first page, not the subsequent page you’re viewing.</p>
+		<p>To remedy this, jQuery Mobile automatically parses the <code>title</code> of the page pulled via Ajax and changes the <code>title</code> attribute of the parent document to match.</p>		
+		
+		<h2>Titles in multi-page templates</h2>
+		
+		<p>On multi-page documents, we follow a similiar convention, but since all the pages share a common <code>title</code>, we have a <code>data-title</code> attribute that can be added to each page container within a multi-page template to manually define a title. The title of the HTML document will be automatically updated to match the <code>data-title</code> of the page currently in view.</p>
+		
+<pre><code>
+&lt;div data-role=&quot;page&quot; id=&quot;foo&quot; <strong>data-title=&quot;Page Foo&quot;</strong>&gt;
+
+&lt;/div&gt;&lt;!-- /page --&gt;
+</code></pre>
+
+
+				</div><!--/content-primary -->		
+
+				<div class="content-secondary">
+
+					<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+
+							<h3>More in this section</h3>
+
+							<ul data-role="listview" data-theme="c" data-dividertheme="d">
+
+								<li data-role="list-divider">Pages &amp; Dialogs</li>
+								<li><a href="page-anatomy.html">Anatomy of a page</a></li>
+								<li><a href="page-template.html" data-ajax="false">Single page template</a></li>
+								<li><a href="multipage-template.html" data-ajax="false">Multi-page template</a></li>
+								<li data-theme="a"><a href="page-titles.html">Page titles</a></li>
+								<li><a href="page-links.html">Linking pages</a></li>
+								<li><a href="page-transitions.html" data-ajax="false">Page transitions</a></li>
+								<li><a href="page-dialogs.html">Dialogs</a></li>
+								<li><a href="page-cache.html">Prefetching &amp; caching pages</a></li>
+								<li><a href="page-navmodel.html">Ajax, hashes &amp; history</a></li>
+								<li><a href="page-dynamic.html">Dynamically injecting pages</a></li>
+								<li><a href="page-scripting.html">Scripting pages</a></li>
+								<li><a href="phonegap.html">PhoneGap apps</a></li>
+								<li><a href="touchoverflow.html">touchOverflow feature</a></li>
+								<li><a href="pages-themes.html">Theming pages</a></li>
+							</ul>
+					</div>
+				</div>		
+
+			</div><!-- /content -->
+
+			<div data-role="footer" class="footer-docs" data-theme="c">
+					<p>&copy; 2011 The jQuery Project</p>
+			</div>
+
+			</div><!-- /page -->
+
+			</body>
+			</html>

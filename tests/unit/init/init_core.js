@@ -3,9 +3,7 @@
  */
 (function($){
 	var mobilePage = undefined,
-			mobileSelect = undefined,
-			metaViewportContentDefault = $.mobile.metaViewportContent,
-	    libName = 'jquery.mobile.init.js',
+			libName = 'jquery.mobile.init.js',
 			coreLib = 'jquery.mobile.core.js',
 			extendFn = $.extend,
 			setGradeA = function(value) { $.mobile.gradeA = function(){ return value; }; },
@@ -27,11 +25,11 @@
 		teardown: function(){
 			$.extend = extendFn;
 
-			// NOTE reset for pageLoading tests
+			// NOTE reset for showPageLoadingMsg/hidePageLoadingMsg tests
 			$('.ui-loader').remove();
 
-			// reset meta view port content
-			$.mobile.metaViewportContent = metaViewportContentDefault;
+			// clear the classes added by reloading the init
+			$("html").attr('class', '');
 		}
 	});
 
@@ -39,16 +37,11 @@
 	//      the event before the test check below
 	$(document).one("mobileinit", function(){
 		mobilePage = $.mobile.page;
-		mobileSelect = $.mobile.selectmenu;
 	});
 
 	// NOTE for the following two tests see index html for the binding
 	test( "mobile.page is available when mobile init is fired", function(){
-		ok(mobilePage !== undefined, "$.mobile.page is defined");
-	});
-
-	test( "mobile.selectmenu is available when mobile init is fired", function(){
-		ok(mobileSelect !== undefined, "$.mobile.selectmenu is defined");
+		ok( mobilePage !== undefined, "$.mobile.page is defined" );
 	});
 
 	$.testHelper.excludeFileProtocol(function(){
@@ -56,7 +49,7 @@
 			var initFired = false;
 			expect( 1 );
 
-			$(window.document).bind('mobileinit', function(event){
+			$(window.document).one('mobileinit', function(event){
 				initFired = true;
 			});
 
@@ -73,42 +66,29 @@
 			$.testHelper.reloadLib(libName);
 
 			//NOTE easiest way to check for enhancements, not the most obvious
-			ok(!$("html").hasClass("ui-mobile"));
+			ok(!$("html").hasClass("ui-mobile"), "html elem doesn't have class ui-mobile");
 		});
 
 		test( "enhancments are added when the browser is grade A", function(){
 			setGradeA(true);
 			$.testHelper.reloadLib(libName);
 
-			ok($("html").hasClass("ui-mobile"));
+			ok($("html").hasClass("ui-mobile"), "html elem has class mobile");
 		});
 
-		var findMeta = function(){
-				return $("head meta[name='viewport']");
-			},
-			setViewPortContent = function(){
-				$.testHelper.reloadLib( libName );
-			};
+		asyncTest( "useFastClick is configurable via mobileinit", function(){
+			$(document).one( "mobileinit", function(){
+				$.mobile.useFastClick = false;
+				start();
+			});
 
-		test( "meta viewport element not added to head when not defined on mobile", function(){
-			$.mobile.metaViewportContent = null;
-			findMeta().remove();
-			setViewPortContent();
-			same( findMeta().length, 0);
+			$.testHelper.reloadLib(libName);
+
+			same( $.mobile.useFastClick, false , "fast click is set to false after init" );
+			$.mobile.useFastClick = true;
 		});
 
-		test( "meta viewport element is added to head when defined on mobile and no meta already exists", function(){
-			findMeta().remove();
-			setViewPortContent();
-			same( findMeta().length, 1);
-		});
 
-		test( "meta viewport element is not added to head when defined on mobile and a meta already exists", function(){
-			findMeta().remove();
-			$( '<meta name="viewport" content="width=device-width">').prependTo("head");
-			setViewPortContent();
-			same( findMeta().length, 1);
-		});
 
 		var findFirstPage = function() {
 			return $(":jqmData(role='page')").first();
@@ -128,7 +108,7 @@
 			$.testHelper.reloadLib(libName);
 			var firstPage = findFirstPage();
 
-			ok(firstPage.parent().hasClass('ui-mobile-viewport'));
+			ok(firstPage.parent().hasClass("ui-mobile-viewport"), "first page has viewport");
 		});
 
 		test( "mobile page container is the first page's parent", function(){
@@ -139,24 +119,24 @@
 			same($.mobile.pageContainer[0], firstPage.parent()[0]);
 		});
 
-		test( "page loading is called on document ready", function(){
-			$.testHelper.alterExtend({ pageLoading: function(){
-				start();
-				ok("called");
-			}});
+		asyncTest( "hashchange triggered on document ready with single argument: true", function(){
+			$.testHelper.sequence([
+				function(){
+					location.hash = "#foo";
+				},
 
-			stop();
-			$.testHelper.reloadLib(libName);
-		});
+				// delay the bind until the first hashchange
+				function(){
+					$(window).one("hashchange", function(ev, arg){
+						same(arg, true);
+						start();
+					});
+				},
 
-		test( "hashchange triggered on document ready with single argument: true", function(){
-			$(window).bind("hashchange", function(ev, arg){
-				same(arg, true);
-				start();
-			});
-
-			stop();
-			$.testHelper.reloadLib(libName);
+				function(){
+					$.testHelper.reloadLib(libName);
+				}
+			], 1000);
 		});
 
 		test( "pages without a data-url attribute have it set to their id", function(){
@@ -167,19 +147,21 @@
 			same($("#bar").jqmData('url'), "bak");
 		});
 
-		asyncTest( "pageLoading doesn't add the dialog to the page when loading message is false", function(){
+		asyncTest( "showPageLoadingMsg doesn't add the dialog to the page when loading message is false", function(){
+			expect( 1 );
 			$.mobile.loadingMessage = false;
-			$.mobile.pageLoading(false);
+			$.mobile.showPageLoadingMsg();
 
 			setTimeout(function(){
-				ok(!$(".ui-loader").length);
+				ok(!$(".ui-loader").length, "no ui-loader element");
 				start();
 			}, 500);
 		});
 
-		asyncTest( "pageLoading doesn't add the dialog to the page when done is passed as true", function(){
+		asyncTest( "hidePageLoadingMsg doesn't add the dialog to the page when loading message is false", function(){
+			expect( 1 );
 			$.mobile.loadingMessage = true;
-			$.mobile.pageLoading(true);
+			$.mobile.hidePageLoadingMsg();
 
 			setTimeout(function(){
 				same($(".ui-loading").length, 0, "page should not be in the loading state");
@@ -187,9 +169,10 @@
 			}, 500);
 		});
 
-		asyncTest( "pageLoading adds the dialog to the page when done is true", function(){
+		asyncTest( "showPageLoadingMsg adds the dialog to the page when loadingMessage is true", function(){
+			expect( 1 );
 			$.mobile.loadingMessage = true;
-			$.mobile.pageLoading(false);
+			$.mobile.showPageLoadingMsg();
 
 			setTimeout(function(){
 				same($(".ui-loading").length, 1, "page should be in the loading state");
@@ -198,8 +181,9 @@
 		});
 
 		asyncTest( "page loading should contain default loading message", function(){
+			expect( 1 );
 			reloadCoreNSandInit();
-			$.mobile.pageLoading(false);
+			$.mobile.showPageLoadingMsg();
 
 			setTimeout(function(){
 				same($(".ui-loader h1").text(), "loading");
@@ -210,12 +194,75 @@
 		asyncTest( "page loading should contain custom loading message", function(){
 			$.mobile.loadingMessage = "foo";
 			$.testHelper.reloadLib(libName);
-			$.mobile.pageLoading(false);
+			$.mobile.showPageLoadingMsg();
 
 			setTimeout(function(){
 				same($(".ui-loader h1").text(), "foo");
 				start();
 			}, 500);
 		});
+		
+		asyncTest( "page loading should contain custom loading message when set during runtime", function(){
+			$.mobile.loadingMessage = "bar";
+			$.mobile.showPageLoadingMsg();
+
+			setTimeout(function(){
+				same($(".ui-loader h1").text(), "bar");
+				start();
+			}, 500);
+		});
+
+		
+
+		// NOTE: the next two tests work on timeouts that assume a page will be created within 2 seconds
+		// it'd be great to get these using a more reliable callback or event
+		
+		asyncTest( "page does auto-initialize at domready when autoinitialize option is true (default) ", function(){
+			
+			$( "<div />", { "data-nstest-role": "page", "id": "autoinit-on" } ).prependTo( "body" )
+			
+			$(document).one("mobileinit", function(){
+				$.mobile.autoInitializePage = true;
+			});
+			
+			location.hash = "";
+			
+			reloadCoreNSandInit();
+			
+			setTimeout(function(){
+				same( $( "#autoinit-on.ui-page" ).length, 1 );
+				
+				start();
+			}, 2000);
+		});
+		
+		
+		asyncTest( "page does not initialize at domready when autoinitialize option is false ", function(){
+			$(document).one("mobileinit", function(){
+				$.mobile.autoInitializePage = false;
+			});
+			
+			$( "<div />", { "data-nstest-role": "page", "id": "autoinit-off" } ).prependTo( "body" )
+			
+			location.hash = "";
+			
+			
+			reloadCoreNSandInit();
+			
+			setTimeout(function(){
+				same( $( "#autoinit-off.ui-page" ).length, 0 );
+				
+				$(document).bind("mobileinit", function(){
+					$.mobile.autoInitializePage = true;
+				});
+
+				reloadCoreNSandInit();
+				
+				start();
+			}, 2000);
+		});
+		
+		
+		
 	});
 })(jQuery);

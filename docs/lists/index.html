@@ -2,18 +2,20 @@
 <html> 
 	<head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<title>jQuery Mobile Docs - Lists</title> 
-	<link rel="stylesheet"  href="../../themes/default/" />  
+	<link rel="stylesheet"  href="../../css/themes/default/" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 	<script src="../../js/jquery.js"></script>
+	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../_assets/js/jqm-docs.js"></script>
 	<script src="../../js/"></script>
 </head> 
 <body> 
 
-<div data-role="page">
+	<div data-role="page" class="type-index">
 
-	<div data-role="header" data-theme="b">
+		<div data-role="header" data-theme="f">
 		<h1>Lists</h1>
 		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
 	</div><!-- /header -->
@@ -39,7 +41,8 @@
 			<li><a href="lists-search.html">Search filter bar</a></li>
 			<li><a href="lists-search-inset.html">Inset search filter bar</a></li>
 			<li><a href="lists-search-with-dividers.html">Search filter bar with dividers</a></li>
-			
+			<li><a href="lists-search-filtertext.html">Search filter hidden data</a></li>
+
 			<li><a href="lists-readonly.html">Read-only lists</a></li>
 			<li><a href="lists-readonly-inset.html">Read-only inset lists</a></li>
 			<li><a href="lists-forms.html">Lists with forms</a></li>
@@ -53,9 +56,15 @@
 			<!--<li><a href="api-lists.html">API documentation</a></li>-->
 		</ul>
 		
+	
 
 	</div><!-- /content -->
-</div><!-- /page -->
 
-</body>
-</html>
+	<div data-role="footer" class="footer-docs" data-theme="c">
+			<p>&copy; 2011 The jQuery Project</p>
+	</div>
+
+	</div><!-- /page -->
+
+	</body>
+	</html>

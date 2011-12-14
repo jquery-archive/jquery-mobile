@@ -3,26 +3,26 @@
 <head>
 	<meta charset="utf-8" />
 	<title>jQuery Mobile: Grid Layout</title>
-	<link rel="stylesheet"  href="../../themes/default/" />
+	<link rel="stylesheet"  href="../../css/themes/default/" />
 	<link rel="stylesheet" href="../../docs/_assets/css/jqm-docs.css" />
 	<script src="../../js/jquery.js"></script>
 	<script src="../../js/"></script>
 	
 	<script>
 	$(function(){
-		$(".ui-grid-d a").bind("tap", function(e){
+		$(".ui-grid-d a").bind("tap click", function(e){
 			$(this).hide();
 			$("#log")
 				.prepend("<li>"+ e.type +" event; target: "+ e.target.nodeName +"; message: grid '"+$(this).text()+"' hidden</li>")
 				.listview("refresh");
 			return false;
-		}).bind("click", false);
-		$("#showbtn").bind("tap", function(e){
+		}).bind("tap click", false);
+		$("#showbtn").bind("tap click", function(e){
 			$(".ui-grid-d a").show();
 			$("#log")
 				.prepend("<li>"+ e.type +" event; target: "+ e.target.nodeName +"; message: show all buttons</li>")
 				.listview("refresh");
-		}).bind("click", false);
+		}).bind("tap click", false);
 	});	
 	</script>
 </head> 

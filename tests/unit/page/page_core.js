@@ -2,47 +2,105 @@
  * mobile page unit tests
  */
 (function($){
-	var libName = 'jquery.mobile.page.js',
-			typeAttributeRegex = $.mobile.page.prototype._typeAttributeRegex;
+	var libName = 'jquery.mobile.page.sections.js',
+		themedefault = $.mobile.page.prototype.options.theme,
+		keepNative = $.mobile.page.prototype.options.keepNative;
 
-	module(libName);
-
-	test( "nested header anchors aren't altered", function(){
-		ok(!$('.ui-header > div > a').hasClass('ui-btn'));
+	module(libName, {
+		setup: function() {
+			$.mobile.page.prototype.options.keepNative = keepNative;
+		}
 	});
 
-	test( "nested footer anchors aren't altered", function(){
-		ok(!$('.ui-footer > div > a').hasClass('ui-btn'));
+
+	var eventStack = [],
+		etargets = [],
+		cEvents=[],
+		cTargets=[];
+
+
+	$( document ).bind( "pagebeforecreate pagecreate", function( e ){
+		eventStack.push( e.type );
+		etargets.push( e.target );
 	});
 
-	test( "nested bar anchors aren't styled", function(){
-		ok(!$('.ui-bar > div > a').hasClass('ui-btn'));
+	$("#c").live( "pagebeforecreate", function( e ){
+
+		cEvents.push( e.type );
+		cTargets.push( e.target );
+		return false;
 	});
 
-	test( "unnested footer anchors are styled", function(){
-		ok($('.ui-footer > a').hasClass('ui-btn'));
+	test( "pagecreate event fires when page is created", function(){
+			ok( eventStack[0] === "pagecreate" || eventStack[1] === "pagecreate" );
 	});
 
-	test( "unnested footer anchors are styled", function(){
-		ok($('.ui-footer > a').hasClass('ui-btn'));
+	test( "pagebeforecreate event fires when page is created", function(){
+			ok( eventStack[0] === "pagebeforecreate" || eventStack[1] === "pagebeforecreate" );
 	});
 
-	test( "unnested bar anchors are styled", function(){
-		ok($('.ui-bar > a').hasClass('ui-btn'));
+	test( "pagebeforecreate fires before pagecreate", function(){
+			ok( eventStack[0] === "pagebeforecreate" );
 	});
 
-	test( "no auto-generated back button exists on first page", function(){
-		ok( !$(".ui-header > :jqmData(rel='back')").length );
+	test( "target of pagebeforecreate event was div #a", function(){
+			ok( $( etargets[0] ).is("#a") );
 	});
 
-	test( "input type replacement regex works properly", function(){
-		ok(typeAttributeRegex.test( "<input type=range" ), "test no quotes" );
-		ok(typeAttributeRegex.test( "<input type='range'" ), "test single quotes" );
-		ok(typeAttributeRegex.test( "<input type=\"range\"" ), "test double quotes" );
-		ok(typeAttributeRegex.test( "<input type=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_"), "test \w" );
-		ok(typeAttributeRegex.test( "<input        type=\"range\"" ), "test many preceding spaces" );
-		ok(typeAttributeRegex.test( "<input type='range'>" ), "test final attribute (FF)" );
+	test( "target of pagecreate event was div #a" , function(){
+			ok( $( etargets[0] ).is("#a") );
+	});
 
-		ok(!typeAttributeRegex.test( "<inputtype=\"range\"" ), "requires preceding space" );
+	test( "page element has ui-page class" , function(){
+			ok( $( "#a" ).hasClass( "ui-page" ) );
+	});
+
+	test( "page element has default body theme when not overidden" , function(){
+			ok( $( "#a" ).hasClass( "ui-body-" + themedefault ) );
+	});
+
+	test( "B page has non-default theme matching its data-theme attr" , function(){
+		$( "#b" ).page();
+		var btheme = $( "#b" ).jqmData( "theme" );
+		ok( $( "#b" ).hasClass( "ui-body-" + btheme ) );
+	});
+
+	test( "Binding to pagebeforecreate and returning false prevents pagecreate event from firing" , function(){
+		$("#c").page();
+
+		ok( cEvents[0] === "pagebeforecreate" );
+		ok( !cTargets[1] );
+	});
+
+	test( "Binding to pagebeforecreate and returning false prevents classes from being applied to page" , function(){
+		ok( !$( "#b" ).hasClass( "ui-body-" + themedefault ) );
+		ok( !$( "#b" ).hasClass( "ui-page" ) );
+	});
+
+	test( "keepNativeSelector returns the default where keepNative is not different", function() {
+		var pageProto = $.mobile.page.prototype;
+		pageProto.options.keepNative = pageProto.options.keepNativeDefault;
+
+		same(pageProto.keepNativeSelector(), pageProto.options.keepNativeDefault);
+	});
+
+	test( "keepNativeSelector returns the default where keepNative is empty, undefined, whitespace", function() {
+		var pageProto = $.mobile.page.prototype;
+
+		pageProto.options.keepNative = "";
+		same(pageProto.keepNativeSelector(), pageProto.options.keepNativeDefault);
+
+		pageProto.options.keepNative = undefined;
+		same(pageProto.keepNativeSelector(), pageProto.options.keepNativeDefault);
+
+		pageProto.options.keepNative = "  ";
+		same(pageProto.keepNativeSelector(), pageProto.options.keepNativeDefault);
+	});
+
+	test( "keepNativeSelector returns a selector joined with the default", function() {
+		var pageProto = $.mobile.page.prototype;
+
+		pageProto.options.keepNative = "foo, bar";
+		same(pageProto.keepNativeSelector(), "foo, bar, " + pageProto.options.keepNativeDefault);
 	});
 })(jQuery);

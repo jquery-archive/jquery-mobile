@@ -1,0 +1,191 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>jQuery Mobile Docs - Radio Buttons</title> 
+	<link rel="stylesheet"  href="../../../css/themes/default/" /> 
+	<link rel="stylesheet" href="../../_assets/css/jqm-docs.css"/> 
+	<script src="../../../js/jquery.js"></script> 
+	<script src="../../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script> 
+	<script src="../../_assets/js/jqm-docs.js"></script> 
+	<script src="../../../js/"></script> 
+</head> 
+<body> 
+
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="f">
+		<h1>Radio buttons</h1>
+		<a href="../../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="content-primary">
+		
+		<form action="#" method="get">
+
+		<h2>Radio buttons</h2>
+
+    <ul data-role="controlgroup" data-type="horizontal" class="localnav">
+      <li><a href="index.html" data-role="button" data-transition="fade" class="ui-btn-active">Basics</a></li>
+      <li><a href="options.html" data-role="button" data-transition="fade">Options</a></li>
+      <li><a href="methods.html" data-role="button" data-transition="fade">Methods</a></li>
+      <li><a href="events.html" data-role="button" data-transition="fade">Events</a></li>
+    </ul>
+
+		<p>Radio buttons are used to provide a list of options where only a single items can be selected. Traditional desktop radio buttons are not optimized for touch input so in jQuery Mobile, we style the <code>label</code> for the radio buttons so they are larger and look clickable. A custom set of icons are added to the label to provide additional visual feedback.</p>
+		
+		<p>Both the radio and checkbox controls below use standard input/label markup, but are styled to be more touch-friendly. The styled control you see is actually the label element, which sits over the real input, so if images fail to load, you'll still have a functional control. In most browsers, clicking the label automatically triggers a click on the input, but we've had to trigger the update manually for a few mobile browsers that don't do this natively. On the desktop, these controls are keyboard and screen-reader accessible. View the <a href="../../api/data-attributes.html">data- attribute reference</a> to see all the possible attributes you can add to radio buttons.</p>
+		
+		<h2>Vertically grouped radio buttons</h2>
+		
+		<p>To create a set of radio buttons, add an <code>input</code> with a <code>type="radio"</code> attribute and a corresponding <code>label</code>. Set the <code>for</code> attribute of the <code>label</code> to match the ID of the <code>input</code> so they are semantically associated.</p>
+		
+		<p>Because radio buttons use the <code>label</code> element for the text displayed next to the checkbox form element, we recommend wrapping the radio buttons in a <code>fieldset</code> element that has a <code>legend</code> which acts as the title for the question.</p>
+		
+		<p>To visually integrate multiple radio buttons into a vertically grouped button set, the framework will automatically remove all margins between buttons and round only the top and bottom corners of the set if there is a <code> data-role="controlgroup"</code> attribute on the container.</p>
+				
+<pre><code>	
+<strong>&lt;fieldset data-role=&quot;controlgroup&quot;&gt;
+	&lt;legend&gt;Choose a pet:&lt;/legend&gt;</strong>
+     	&lt;input type=&quot;radio&quot; name=&quot;radio-choice-1&quot; id=&quot;radio-choice-1&quot; value=&quot;choice-1&quot; checked=&quot;checked&quot; /&gt;
+     	&lt;label for=&quot;radio-choice-1&quot;&gt;Cat&lt;/label&gt;
+
+     	&lt;input type=&quot;radio&quot; name=&quot;radio-choice-1&quot; id=&quot;radio-choice-2&quot; value=&quot;choice-2&quot;  /&gt;
+     	&lt;label for=&quot;radio-choice-2&quot;&gt;Dog&lt;/label&gt;
+
+     	&lt;input type=&quot;radio&quot; name=&quot;radio-choice-1&quot; id=&quot;radio-choice-3&quot; value=&quot;choice-3&quot;  /&gt;
+     	&lt;label for=&quot;radio-choice-3&quot;&gt;Hamster&lt;/label&gt;
+
+     	&lt;input type=&quot;radio&quot; name=&quot;radio-choice-1&quot; id=&quot;radio-choice-4&quot; value=&quot;choice-4&quot;  /&gt;
+     	&lt;label for=&quot;radio-choice-4&quot;&gt;Lizard&lt;/label&gt;
+<strong>&lt;/fieldset&gt;</strong>
+</code></pre>
+
+		
+		<p>This will produce a vertically grouped radio button set. The default styles set the width of the button group to 100% of the parent container and stacks the label on a separate line.</p>
+		
+		
+	    <fieldset data-role="controlgroup">
+	    	<legend>Choose a pet:</legend>
+	         	<input type="radio" name="radio-pet-1a" id="radio-pet-1a" value="choice-1" checked="checked"  />
+	         	<label for="radio-pet-1a">Cat</label>
+
+	         	<input type="radio" name="radio-pet-1a" id="radio-pet-2a" value="choice-2"  />
+	         	<label for="radio-pet-2a">Dog</label>
+
+	         	<input type="radio" name="radio-pet-1a" id="radio-pet-3a" value="choice-3"  />
+	         	<label for="radio-pet-3a">Hamster</label>
+
+	         	<input type="radio" name="radio-pet-1a" id="radio-pet-4a" value="choice-4"  />
+	         	<label for="radio-pet-4a">Lizard</label>
+	    </fieldset>
+
+
+	<pre><code>	
+<strong>&lt;div data-role=&quot;fieldcontain&quot;&gt;
+</strong>    &lt;fieldset data-role=&quot;controlgroup&quot;&gt;
+    	&lt;legend&gt;Choose a pet:&lt;/legend&gt;
+         	&lt;input type=&quot;radio&quot; name=&quot;radio-choice-1&quot; id=&quot;radio-choice-1&quot; value=&quot;choice-1&quot; checked=&quot;checked&quot; /&gt;
+         	&lt;label for=&quot;radio-choice-1&quot;&gt;Cat&lt;/label&gt;
+
+         	&lt;input type=&quot;radio&quot; name=&quot;radio-choice-1&quot; id=&quot;radio-choice-2&quot; value=&quot;choice-2&quot;  /&gt;
+         	&lt;label for=&quot;radio-choice-2&quot;&gt;Dog&lt;/label&gt;
+
+         	&lt;input type=&quot;radio&quot; name=&quot;radio-choice-1&quot; id=&quot;radio-choice-3&quot; value=&quot;choice-3&quot;  /&gt;
+         	&lt;label for=&quot;radio-choice-3&quot;&gt;Hamster&lt;/label&gt;
+
+         	&lt;input type=&quot;radio&quot; name=&quot;radio-choice-1&quot; id=&quot;radio-choice-4&quot; value=&quot;choice-4&quot;  /&gt;
+         	&lt;label for=&quot;radio-choice-4&quot;&gt;Lizard&lt;/label&gt;
+    &lt;/fieldset&gt;
+<strong>&lt;/div&gt;
+</strong>	</code></pre>
+
+
+			<p>To visually integrate multiple radio buttons into a vertically grouped button set, the framework will automatically remove all margins between buttons and round only the top and bottom corners of the set if there is a <code> data-role="controlgroup"</code> attribute on the container.</p>
+
+		<div data-role="fieldcontain">
+		    <fieldset data-role="controlgroup">
+		    	<legend>Choose a pet:</legend>
+		         	<input type="radio" name="radio-pet-1" id="radio-pet-1" value="choice-1" checked="checked"  />
+		         	<label for="radio-pet-1">Cat</label>
+
+		         	<input type="radio" name="radio-pet-1" id="radio-pet-2" value="choice-2"  />
+		         	<label for="radio-pet-2">Dog</label>
+
+		         	<input type="radio" name="radio-pet-1" id="radio-pet-3" value="choice-3"  />
+		         	<label for="radio-pet-3">Hamster</label>
+
+		         	<input type="radio" name="radio-pet-1" id="radio-pet-4" value="choice-4"  />
+		         	<label for="radio-pet-4">Lizard</label>
+		    </fieldset>
+		</div>
+			<h2>Horizontal radio button sets</h2>
+
+			<p>Radio buttons can also be used for grouped button sets only a single button can be selected at once, such as a view switcher control. To make a horizontal radio button set, add the <code> data-type="horizontal"</code> to the <code>fieldset</code>.</p>
+
+	<code>
+	&lt;fieldset data-role=&quot;controlgroup&quot; <strong>data-type=&quot;horizontal&quot;</strong> &gt;
+	</code>
+
+	<div data-role="fieldcontain">
+	    <fieldset data-role="controlgroup" data-type="horizontal">
+	     	<legend>Layout view:</legend>
+	         	<input type="radio" name="radio-view" id="radio-view-a" value="list"  />
+	         	<label for="radio-view-a">List</label>
+	         	<input type="radio" name="radio-view" id="radio-view-b" value="grid"  />
+	         	<label for="radio-view-b">Grid</label>
+	         	<input type="radio" name="radio-view" id="radio-view-c" value="gallery"  />
+	         	<label for="radio-view-c">Gallery</label>
+	    </fieldset>
+	</div>
+
+				<p>The framework will float the labels so they sit side-by-side on a line, hides the radio button icons and only round the left and right edges of the group.</p>
+				
+
+	
+
+
+
+	</form>
+	
+	</div><!--/content-primary -->		
+	
+	<div class="content-secondary">
+		
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+			
+				<h3>More in this section</h3>
+				
+				<ul data-role="listview" data-theme="c" data-dividertheme="d">
+				
+					<li data-role="list-divider">Form elements</li>
+					<li><a href="../docs-forms.html">Form basics</a></li>
+					<li><a href="../forms-all.html">Form element gallery</a></li>
+					<li><a href="../textinputs/index.html">Text inputs</a></li>
+					<li><a href="../search/">Search input</a></li>
+					<li><a href="../slider/">Slider</a></li>
+					<li><a href="../switch/">Flip toggle switch</a></li>
+					<li data-theme="a"><a href="index.html">Radio buttons</a></li>
+					<li><a href="../checkboxes/">Checkboxes</a></li>
+					<li><a href="../selects/">Select menus</a></li>
+					<li><a href="../forms-themes.html">Theming forms</a></li>
+					<li><a href="../forms-all-native.html">Native form elements</a></li>
+					<li><a href="../forms-sample.html">Submitting forms</a></li>
+					
+	
+				</ul>
+		</div>
+	</div>		
+
+</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p>&copy; 2011 The jQuery Project</p>
+</div>
+	
+</div><!-- /page -->
+
+</body>
+</html>

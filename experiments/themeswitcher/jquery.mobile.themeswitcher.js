@@ -2,7 +2,7 @@
 (function($){
 	$.themeswitcher = function(){
 		if( $('[data-'+ $.mobile.ns +'-url=themeswitcher]').length ){ return; }
-		var themesDir = 'http://jquerymobile.com/test/themes/',
+		var themesDir = 'http://jquerymobile.com/test/css/themes/',
 			themes = ['default','valencia'],
 			currentPage = $.mobile.activePage,
 			menuPage = $( '<div data-'+ $.mobile.ns +'url="themeswitcher" data-'+ $.mobile.ns +'role=\'dialog\' data-'+ $.mobile.ns +'theme=\'a\'>' +
@@ -17,8 +17,9 @@
 		//menu items	
 		$.each(themes, function( i ){
 			$('<li><a href="#" data-'+ $.mobile.ns +'rel="back">' + themes[ i ].charAt(0).toUpperCase() + themes[ i ].substr(1) + '</a></li>')
-				.click(function(){
+				.bind("vclick", function(){
 					addTheme( themes[i] );
+					menuPage.dialog( "close" );
 					return false;
 				})
 				.appendTo(menu);

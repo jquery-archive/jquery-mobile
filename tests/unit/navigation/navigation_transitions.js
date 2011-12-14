@@ -2,7 +2,7 @@
  * mobile navigation unit tests
  */
 (function($){
-	var perspective = "ui-mobile-viewport-perspective",
+	var perspective = "viewport-flip",
 			transitioning = "ui-mobile-viewport-transitioning",
 			animationCompleteFn = $.fn.animationComplete,
 

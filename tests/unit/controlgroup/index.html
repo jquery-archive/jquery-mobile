@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>jQuery Mobile Checkboxradio Test Suite</title>
+
+	<script src="../../../js/jquery.js"></script>
+	<script src="../jquery.setNameSpace.js"></script>
+	<script src="../../../js/"></script>
+	<script src="../../../tests/jquery.testHelper.js"></script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/"/>
+	<link rel="stylesheet" href="../../../external/qunit.css"/>
+	<script src="../../../external/qunit.js"></script>
+
+	<script src="controlgroup_core.js"></script>
+
+	<script src="../swarminject.js"></script>
+</head>
+<body>
+
+<h1 id="qunit-header">jQuery Mobile Controlgroup Test Suite</h1>
+<h2 id="qunit-banner"></h2>
+<h2 id="qunit-userAgent"></h2>
+<ol id="qunit-tests">
+</ol>
+
+<div data-nstest-role="page">
+	<div data-nstest-role="content">
+
+		<div data-nstest-role="fieldcontain" id="radio-active-btn-test">
+			<fieldset data-nstest-role="controlgroup" id="vertical-controlgroup">
+			  <legend>Choose a pet:</legend>
+			  <input type="radio" name="radio-pet-active-btn" id="radio-pet-1" value="choice-1" checked="checked"  />
+			  <label for="radio-pet-1">Cat</label>
+
+			  <input type="radio" name="radio-pet-active-btn" id="radio-pet-2" value="choice-2"  />
+			  <label for="radio-pet-2">Dog</label>
+
+			  <input type="radio" name="radio-pet-active-btn" id="radio-pet-3" value="choice-3"  />
+			  <label for="radio-pet-3">Hamster</label>
+
+			  <input type="radio" name="radio-pet-active-btn" id="radio-pet-4" value="choice-4"  />
+			  <label for="radio-pet-4">Lizard</label>
+			</fieldset>
+		</div>
+
+		<div data-nstest-role="fieldcontain">
+			<fieldset data-nstest-role="controlgroup" data-nstest-type="horizontal" id="horizontal-controlgroup">
+				<legend>Font styling:</legend>
+				<input type="checkbox" name="checkbox-6" id="checkbox-6" class="custom" />
+				<label for="checkbox-6">b</label>
+
+				<input type="checkbox" name="checkbox-7" id="checkbox-7" class="custom" />
+				<label for="checkbox-7"><em>i</em></label>
+
+				<input type="checkbox" name="checkbox-8" id="checkbox-8" class="custom" />
+				<label for="checkbox-8"><em>s</em></label>
+
+				<input type="checkbox" name="checkbox-9" id="checkbox-9" class="custom" />
+				<label for="checkbox-9">u</label>
+			</fieldset>
+		</div>
+	</div>
+
+</div>
+
+
+
+
+
+
+<div data-nstest-role="fieldcontain" id="enhancetest">
+	<fieldset data-nstest-role="controlgroup">
+
+
+	</fieldset>
+</div>
+
+</body>
+</html>

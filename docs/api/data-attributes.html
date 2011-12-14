@@ -1,0 +1,454 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>jQuery Mobile Docs - Data Attribute Reference</title> 
+	<link rel="stylesheet"  href="../../css/themes/default/" /> 
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	<script src="../../js/jquery.js"></script>
+	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../_assets/js/jqm-docs.js"></script>
+	<script src="../../js/"></script>
+</head> 
+<body> 
+
+<div data-role="page" class="type-interior">
+
+	<div data-role="header" data-theme="f">
+		<h1>Data Attributes</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+	</div><!-- /header -->
+
+	<div data-role="content" data-theme="c">
+
+		<div class="content-primary">
+			<h2>Data- attribute reference</h2>
+			<p>The jQuery Mobile framework uses HTML5 <code>data-</code> attributes to allow for markup-based initialization and configuration of widgets. These attributes are completely optional; calling plugins manually and passing options directly is also supported. To avoid naming conflicts with other plugins or frameworks that also use <code>data-</code> attributes, set a custom namespace by modifying the <a href="globalconfig.html"><code>ns</code> global option</a>.<p>
+
+				<style>
+					table { width:100%; border-bottom:1px solid #ccc; }
+					th { text-align:left; width: 170px; }
+					th, td { vertical-align:top; border-top:1px solid #ccc; padding: 6px 10px 4px 0; }
+				</style>
+
+			<h2><a href="../buttons/buttons-types.html">Button</a></h2>
+			<p>Links with <code>data-role="button"</code>. Input-based buttons and button elements are auto-enhanced, no <code>data-role</code> required</p>
+			<table>
+				<tr>
+					<th>data-corners</th>
+					<td><strong>true</strong> | false</td>
+				</tr>
+				<tr>
+					<th>data-icon</th>
+					<td>home | delete | plus | arrow-u | arrow-d | check | gear | grid | star | custom | arrow-r | arrow-l | minus | refresh | forward | back | alert | info | search</td>
+				</tr>
+				<tr>
+					<th>data-iconpos</th>
+					<td><strong>left</strong> | right | top | bottom |  notext</td>
+				</tr>
+				<tr>
+					<th>data-iconshadow</th>
+					<td><strong>true</strong> | false</td>
+				</tr>
+				<tr>
+					<th>data-inline</th>
+					<td>true | <strong>false</strong></td>
+				</tr>
+				<tr>
+					<th>data-shadow</th>
+					<td><strong>true</strong> | false</td>
+				</tr>
+				<tr>
+					<th>data-theme</th>
+					<td>swatch letter (a-z)</td>
+				</tr>
+			</table>
+			<p>Multiple buttons can be wrapped in a container with a <code>data-role="controlgroup"</code> attribute for a vertically grouped set. Add the <code>data-type="horizontal"</code> attribute for the buttons to sit side-by-side.</p>
+
+
+			<h2><a href="../forms/checkboxes/">Checkbox</a></h2>
+			<p>Pairs of labels and inputs with <code>type="checkbox"</code> are auto-enhanced, no <code>data-role</code> required</p>
+			<table>
+				<tr>
+					<th>data-role</th>
+					<td>none (prevents auto-enhancement to use native control)</td>
+				</tr>
+				<tr>
+					<th>data-theme</th>
+					<td>swatch letter (a-z) - Added to the form element</td>
+				</tr>
+			</table>
+
+			<h2><a href="../content/content-collapsible.html">Collapsible</a></h2>
+			<p>A heading and content wrapped in a container with the <code>data-role="collapsible"</code></p>
+			<table>
+				<tr>
+					<th>data-collapsed</th>
+					<td><strong>true</strong> | false</td>
+				</tr>
+				<tr>
+					<th>data-content-theme</th>
+					<td>swatch letter (a-z)</td>
+				</tr>
+				<tr>
+					<th>data-theme</th>
+					<td>swatch letter (a-z)</td>
+				</tr>
+			</table>
+
+			<h2><a href="../content/content-collapsible-set.html">Collapsible set</a></h2>
+			<p>A number of collapsibles wrapped in a container with the <code>data-role="collapsible-set"</code></p>
+			<table>
+				<tr>
+					<th>data-content-theme</th>
+					<td>swatch letter (a-z) - Sets all collapsibles in set</td>
+				</tr>
+				<tr>
+					<th>data-theme</th>
+					<td>swatch letter (a-z) - Sets all collapsibles in set</td>
+				</tr>
+			</table>
+			
+			<h2><a href="../pages/page-dialogs.html">Dialog</a></h2>
+			<p>Container with <code>data-role="page"</code> or <code>"dialog"</code> linked to with <code>data-rel="dialog"</code> on the anchor.</p>
+			<table>
+				<tr>
+					<th>data-close-btn-text</th>
+					<td>string (text for the close button, dialog only)</td>
+				</tr>
+				<tr>
+					<th>data-dom-cache</th>
+					<td>true | <strong>false</strong></td>
+				</tr>
+				<tr>
+					<th>data-id</th>
+					<td>string (unique id for the page)</td>
+				</tr>
+				<tr>
+					<th>data-fullscreen</th>
+					<td>true | false (used in conjunction with fixed toolbars)</td>
+				</tr>
+				<tr>
+					<th>data-overlay-theme</th>
+					<td>swatch letter (a-z) - overlay theme when the page is opened in a dialog</td>
+				</tr>
+				<tr>
+					<th>data-theme</th>
+					<td>swatch letter (a-z)</td>
+				</tr>
+				<tr>
+					<th>data-title</th>
+					<td>string (title used when page is shown)</td>
+				</tr>
+			</table>
+
+			<h2><a href="../pages/page-anatomy.html">Content</a></h2>
+			<p>Container with <code>data-role="content"</code></p>
+			<table>
+				<tr>
+					<th>data-theme</th>
+					<td>swatch letter (a-z)</td>
+				</tr>
+			</table>
+
+
+			<h2><a href="../forms/docs-forms.html">Field container</a></h2>
+			<p>Container with <code>data-role="fieldcontain"</code> wrapped around label/form element pair</p>
+
+			<h2><a href="../forms/switch/">Flip toggle switch</a></h2>
+			<p>Select with <code>data-role="slider"</code>, two options only</p>
+			<table>
+				<tr>
+					<th>data-role</th>
+					<td>none (prevents auto-enhancement to use native control)</td>
+				</tr>
+				<tr>
+					<th>data-theme</th>
+					<td>swatch letter (a-z) - Added to the form element</td>
+				</tr>
+				<tr>
+					<th>data-track-theme</th>
+					<td>swatch letter (a-z) - Added to the form element</td>
+				</tr>
+			</table>
+
+			<h2><a href="../toolbars/docs-footers.html">Footer</a></h2>
+			<p>Container with <code>data-role="footer"</code></p>
+			<table>
+				<tr>
+					<th>data-id</th>
+					<td>string (unique id, useful in persistent footers)</td>
+				</tr>
+				<tr>
+					<th>data-position</th>
+					<td>fixed</td>
+				</tr>
+				<tr>
+					<th>data-theme</th>
+					<td>swatch letter (a-z)</td>
+				</tr>
+			</table>
+
+			<h2><a href="../toolbars/docs-headers.html">Header</a></h2>
+			<p>Container with <code>data-role="header"</code></p>
+			<table>
+				<tr>
+					<th>data-add-back-btn</th>
+					<td>true | <strong>false</strong> (auto add back button, header only)</td>
+				</tr>
+				<tr>
+					<th>data-back-btn-text</th>
+					<td>string</td>
+				</tr>
+				<tr>
+					<th>data-back-btn-theme</th>
+					<td>swatch letter (a-z)</td>
+				</tr>
+				<tr>
+					<th>data-position</th>
+					<td>fixed</td>
+				</tr>
+				<tr>
+					<th>data-theme</th>
+					<td>swatch letter (a-z)</td>
+				</tr>
+				<tr>
+					<th>data-title</th>
+					<td>string (title used when page is shown)</td>
+				</tr>
+			</table>
+
+			<h2><a href="../pages/page-links.html">Link</a></h2>
+			<p>Links, including those with a <code>data-role="button"</code>, and form submit buttons share these attributes</p>
+			<table>
+				<tr>
+					<th>data-ajax</th>
+					<td><strong>true</strong> | false</td>
+				</tr>
+				<tr>
+					<th>data-direction</th>
+					<td>reverse (reverse page transition animation)</td>
+				</tr>
+				<tr>
+					<th>data-dom-cache</th>
+					<td>true | <strong>false</strong></td>
+				</tr>
+				<tr>
+					<th>data-prefetch</th>
+					<td>true | <strong>false</strong></td>
+				</tr>
+				<tr>
+					<th>data-rel</th>
+					<td>back (to move one step back in history)<br />
+						dialog (to open link styled as dialog, not tracked in history)<br />
+						external (for linking to another domain)</td>
+				</tr>
+				<tr>
+					<th>data-transition</th>
+					<td><strong>slide</strong> | slideup | slidedown | pop | fade | flip</td>
+				</tr>
+			</table>
+
+			<h2><a href="../lists/docs-lists.html">Listview</a></h2>
+			<p>OL or UL with <code>data-role="listview"</code></p>
+			<table>
+				<tr>
+					<th>data-count-theme</th>
+					<td>swatch letter (a-z)</td>
+				</tr>
+				<tr>
+					<th>data-dividertheme</th>
+					<td>swatch letter (a-z)</td>
+				</tr>
+				<tr>
+					<th>data-filter</th>
+					<td>true | <strong>false</strong></td>
+				</tr>
+				<tr>
+					<th>data-filter-placeholder</th>
+					<td>string</td>
+				</tr>
+				<tr>
+					<th>data-filter-theme</th>
+					<td>swatch letter (a-z)</td>
+				</tr>
+				<tr>
+					<th>data-inset</th>
+					<td>true | <strong>false</strong></td>
+				</tr>
+				<tr>
+					<th>data-split-icon</th>
+					<td>home | delete | plus | arrow-u | arrow-d | check | gear | grid | star | custom | arrow-r | arrow-l | minus | refresh | forward | back | alert | info | search</td>
+				</tr>
+				<tr>
+					<th>data-theme</th>
+					<td>swatch letter (a-z)</td>
+				</tr>
+			</table>
+
+			<h2><a href="../lists/docs-lists.html">Listview item</a></h2>
+			<p>LI within a listview</p>
+			<table>
+				<tr>
+					<th>data-filtertext</th>
+					<td>string (filter by this value instead of inner text)</td>
+				</tr>
+				<tr>
+					<th>data-icon</th>
+					<td>home | delete | plus | arrow-u | arrow-d | check | gear | grid | star | custom | arrow-r | arrow-l | minus | refresh | forward | back | alert | info | search</td>
+				</tr>
+				<tr>
+					<th>data-role</th>
+					<td>list-divider</td>
+				</tr>
+				<tr>
+					<th>data-theme</th>
+					<td>swatch letter (a-z) - can also be set on individual LIs</td>
+				</tr>
+			</table>
+
+			<h2><a href="../pages/page-anatomy.html">Page</a></h2>
+			<p>Container with <code>data-role="page"</code></p>
+			<table>
+				<tr>
+					<th>data-close-btn-text</th>
+					<td>string (text for the close button, dialog only)</td>
+				</tr>
+				<tr>
+					<th>data-dom-cache</th>
+					<td>true | <strong>false</strong></td>
+				</tr>
+				<tr>
+					<th>data-id</th>
+					<td>string (unique id for the page)</td>
+				</tr>
+				<tr>
+					<th>data-fullscreen</th>
+					<td>true | false (used in conjunction with fixed toolbars)</td>
+				</tr>
+				<tr>
+					<th>data-overlay-theme</th>
+					<td>swatch letter (a-z) - overlay theme when the page is opened in a dialog</td>
+				</tr>
+				<tr>
+					<th>data-theme</th>
+					<td>swatch letter (a-z)</td>
+				</tr>
+				<tr>
+					<th>data-title</th>
+					<td>string (title used when page is shown)</td>
+				</tr>
+			</table>
+
+			<h2><a href="../forms/radiobuttons/">Radio button</a></h2>
+			<p>Pairs of labels and inputs with <code>type="radio"</code> are auto-enhanced, no <code>data-role</code> required</p>
+			<table>
+				<tr>
+					<th>data-role</th>
+					<td>none (prevents auto-enhancement to use native control)</td>
+				</tr>
+				<tr>
+					<th>data-theme</th>
+					<td>swatch letter (a-z) - Added to the form element</td>
+				</tr>
+			</table>
+
+			<h2><a href="../forms/selects/">Select</a></h2>
+			<p>All <code>select</code> form elements are auto-enhanced, no <code>data-role</code> required</p>
+			<table>
+				<tr>
+					<th>data-icon</th>
+					<td>home | delete | plus | arrow-u | arrow-d | check | gear | grid | star | custom | arrow-r | arrow-l | minus | refresh | forward | back | alert | info | search</td>
+				</tr>
+				<tr>
+					<th>data-iconpos</th>
+					<td><strong>left</strong> | right | top | bottom |  notext</td>
+				</tr>
+				<tr>
+					<th>data-inline</th>
+					<td>true | <strong>false</strong></td>
+				</tr>
+				<tr>
+					<th>data-native-menu</th>
+					<td><strong>true</strong> | false</td>
+				</tr>
+				<tr>
+					<th>data-overlay-theme</th>
+					<td>swatch letter (a-z) - overlay theme for non-native selects</td>
+				</tr>
+				<tr>
+					<th>data-placeholder</th>
+					<td>true | false - Add to the Option</td>
+				</tr>
+				<tr>
+					<th>data-role</th>
+					<td>none (prevents auto-enhancement to use native control)</td>
+				</tr>
+				<tr>
+					<th>data-theme</th>
+					<td>swatch letter (a-z) - Added to the form element</td>
+				</tr>	
+			</table>
+			<p>Multiple selects can be wrapped in a fieldset with a <code>data-role="controlgroup"</code> attribute for a vertically grouped set. Add the <code>data-type="horizontal"</code> attribute for the selects to sit side-by-side.</p>
+
+			<h2><a href="../forms/slider/">Slider</a></h2>
+			<p>Inputs with <code>type="range"</code> are auto-enhanced, no <code>data-role</code> required</p>
+			<table>
+				<tr>
+					<th>data-role</th>
+					<td>none (prevents auto-enhancement to use native control)</td>
+				</tr>
+				<tr>
+					<th>data-theme</th>
+					<td>swatch letter (a-z) - Added to the form element</td>
+				</tr>
+				<tr>
+					<th>data-track-theme</th>
+					<td>swatch letter (a-z) - Added to the form element</td>
+				</tr>
+			</table>
+
+			<h2><a href="../forms/textinputs/">Text input &amp; Textarea</a></h2>
+			<p>Input <code>type="text|number|search|etc."</code> or <code>textarea</code> elements are auto-enhanced, no <code>data-role</code> required</p>
+			<table>
+				<tr>
+					<th>data-role</th>
+					<td>none (prevents auto-enhancement to use native control)</td>
+				</tr>
+				<tr>
+					<th>data-theme</th>
+					<td>swatch letter (a-z) - Added to the form element</td>
+				</tr>
+			</table>
+
+		</div><!--/content -->		
+
+	<div class="content-secondary">
+
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+
+				<h3>More in this section</h3>
+
+				<ul data-role="listview"  data-theme="c" data-dividertheme="d">
+
+					<li data-role="list-divider">API</li>
+					<li><a href="../../docs/api/globalconfig.html">Configuring defaults</a></li>
+					<li><a href="../../docs/api/events.html">Events</a></li>
+					<li><a href="../../docs/api/methods.html">Methods &amp; Utilities</a></li>
+					<li data-theme="a"><a href="../../docs/api/data-attributes.html">Data attribute reference</a></li>
+					<li><a href="../../docs/api/themes.html">Theme framework</a></li>
+				</ul>
+		</div>
+	</div>		
+
+</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p>&copy; 2011 The jQuery Project</p>
+</div>
+
+</div><!-- /page -->
+
+</body>
+</html>

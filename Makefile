@@ -1,41 +1,3 @@
-# The system generated date in YYYYMMDD format
-DATE = $(shell date "+%Y%m%d")
-
-# The version according to the source file. If this is the nightly build, use a different version
-VER = $(shell cat version.txt)
-nightly: VER = nightly
-
-# The command to replace the @VERSION in the files with the actual version
-SED_VER = sed "s/@VERSION/${VER}/"
-nightly: SED_VER = sed "s/@VERSION/Nightly-${DATE}/"
-
-# The version of jQuery core used
-JQUERY = $(shell grep Library js/jquery.js | sed s'/ \* jQuery JavaScript Library v//')
-
-# The directory to create the zipped files in and also serves as the filenames
-DIR = jquery.mobile-${VER}
-
-# The output folder for the finished files
-OUTPUT = compiled
-
-# Command to remove the latest directory from the CDN before uploading, only if using latest target
-RMLATEST = echo ""
-
-# The output folder for the nightly files.
-NIGHTLY_OUTPUT = nightlies/${DATE}
-ifeq (${NIGHTLY_OUTPUT}, latest)
-	RMLATEST = ssh jqadmin@code.origin.jquery.com 'rm -rf /var/www/html/code.jquery.com/mobile/latest'
-	DIR = jquery.mobile
-	SED_VER = sed "s/@VERSION/ LatestBuild/"
-endif
-NIGHTLY_WEBPATH = http://code.jquery.com/mobile/${NIGHTLY_OUTPUT}
-
-# The filenames
-JS = ${DIR}.js
-MIN = ${DIR}.min.js
-CSS = ${DIR}.css
-CSSMIN = ${DIR}.min.css
-
 # The files to include when compiling the JS files
 JSFILES = 	  js/jquery.ui.widget.js \
 			  js/jquery.mobile.widget.js \
@@ -47,154 +9,213 @@ JSFILES = 	  js/jquery.ui.widget.js \
 			  js/jquery.mobile.page.js \
 			  js/jquery.mobile.core.js \
 			  js/jquery.mobile.navigation.js \
-			  js/jquery.mobile.fixHeaderFooter.js \
-			  js/jquery.mobile.forms.checkboxradio.js \
-			  js/jquery.mobile.forms.textinput.js \
-			  js/jquery.mobile.forms.select.js \
-			  js/jquery.mobile.buttonMarkup.js \
-			  js/jquery.mobile.forms.button.js \
-			  js/jquery.mobile.forms.slider.js \
+			  js/jquery.mobile.navigation.pushstate.js \
+			  js/jquery.mobile.transition.js \
+			  js/jquery.mobile.degradeInputs.js \
+			  js/jquery.mobile.dialog.js \
+			  js/jquery.mobile.page.sections.js \
 			  js/jquery.mobile.collapsible.js \
-			  js/jquery.mobile.controlGroup.js \
+			  js/jquery.mobile.collapsibleSet.js \
 			  js/jquery.mobile.fieldContain.js \
+			  js/jquery.mobile.grid.js \
+			  js/jquery.mobile.navbar.js \
 			  js/jquery.mobile.listview.js \
 			  js/jquery.mobile.listview.filter.js \
-			  js/jquery.mobile.dialog.js \
-			  js/jquery.mobile.navbar.js \
-			  js/jquery.mobile.grid.js \
+			  js/jquery.mobile.nojs.js \
+			  js/jquery.mobile.forms.checkboxradio.js \
+			  js/jquery.mobile.forms.button.js \
+			  js/jquery.mobile.forms.slider.js \
+			  js/jquery.mobile.forms.textinput.js \
+			  js/jquery.mobile.forms.select.custom.js \
+			  js/jquery.mobile.forms.select.js \
+			  js/jquery.mobile.buttonMarkup.js \
+			  js/jquery.mobile.controlGroup.js \
+			  js/jquery.mobile.links.js \
+			  js/jquery.mobile.fixHeaderFooter.js \
+			  js/jquery.mobile.fixHeaderFooter.native.js \
 			  js/jquery.mobile.init.js
 
 # The files to include when compiling the CSS files
-CSSFILES =    themes/default/jquery.mobile.theme.css \
-			  themes/default/jquery.mobile.core.css \
-			  themes/default/jquery.mobile.transitions.css \
-			  themes/default/jquery.mobile.grids.css \
-			  themes/default/jquery.mobile.headerfooter.css \
-			  themes/default/jquery.mobile.navbar.css \
-			  themes/default/jquery.mobile.button.css \
-			  themes/default/jquery.mobile.collapsible.css \
-			  themes/default/jquery.mobile.controlgroup.css \
-			  themes/default/jquery.mobile.dialog.css \
-			  themes/default/jquery.mobile.forms.checkboxradio.css \
-			  themes/default/jquery.mobile.forms.fieldcontain.css \
-			  themes/default/jquery.mobile.forms.select.css \
-			  themes/default/jquery.mobile.forms.textinput.css \
-			  themes/default/jquery.mobile.listview.css \
-			  themes/default/jquery.mobile.forms.slider.css
+CSSFILES = css/structure/jquery.mobile.core.css \
+			  css/structure/jquery.mobile.transitions.css \
+			  css/structure/jquery.mobile.grids.css \
+			  css/structure/jquery.mobile.headerfooter.css \
+			  css/structure/jquery.mobile.navbar.css \
+			  css/structure/jquery.mobile.button.css \
+			  css/structure/jquery.mobile.collapsible.css \
+			  css/structure/jquery.mobile.controlgroup.css \
+			  css/structure/jquery.mobile.dialog.css \
+			  css/structure/jquery.mobile.forms.checkboxradio.css \
+			  css/structure/jquery.mobile.forms.fieldcontain.css \
+			  css/structure/jquery.mobile.forms.select.css \
+			  css/structure/jquery.mobile.forms.textinput.css \
+			  css/structure/jquery.mobile.listview.css \
+			  css/structure/jquery.mobile.forms.slider.css
+CSSTHEMEFILES = css/themes/${THEME}/jquery.mobile.theme.css
 
-# By default, this is what get runs when make is called without any arguments.
-# Min and un-min CSS and JS files are the only things built
-all: init js min css cssmin notify
 
-# Build the normal CSS file.
+
+
+# Helper Variables
+# The command to replace the @VERSION in the files with the actual version
+VER = sed "s/v@VERSION/$$(git log -1 --format=format:"Git Build: SHA1: %H <> Date: %cd")/"
+VER_MIN = "/*! jQuery Mobile v$$(git log -1 --format=format:"Git Build: SHA1: %H <> Date: %cd") jquerymobile.com | jquery.org/license */"
+VER_OFFICIAL = $(shell cat version.txt)
+deploy: VER = sed "s/v@VERSION/${VER_OFFICIAL}/"
+deploy: VER_MIN = "/*! jQuery Mobile v${VER_OFFICIAL} jquerymobile.com | jquery.org/license */"
+
+# The output folder for the finished files
+OUTPUT = compiled
+
+# The name of the files
+NAME = jquery.mobile
+STRUCTURE = jquery.mobile.structure
+deploy: NAME = jquery.mobile-${VER_OFFICIAL}
+deploy: STRUCTURE = jquery.mobile.structure-${VER_OFFICIAL}
+
+# The CSS theme being used
+THEME = default
+
+
+
+
+
+# Build Targets
+
+# When no build target is specified, all gets ran
+all: init css js zip notify
+
+
+# Build and minify the CSS files
 css: init
-	@@head -8 js/jquery.mobile.core.js | ${SED_VER} > ${OUTPUT}/${CSS}
-	@@cat ${CSSFILES} >> ${OUTPUT}/${CSS}
+	# Build the CSS file with the theme included
+	@@cat LICENSE-INFO.txt | ${VER} > ${OUTPUT}/${NAME}.css
+	@@cat ${CSSTHEMEFILES} ${CSSFILES} >> ${OUTPUT}/${NAME}.css
+	# ..... and then minify it
+	@@echo ${VER_MIN} > ${OUTPUT}/${NAME}.min.css
+	@@java -jar build/yuicompressor-2.4.6.jar --type css ${OUTPUT}/${NAME}.css >> ${OUTPUT}/${NAME}.min.css
+	# Build the CSS Structure-only file
+	@@cat LICENSE-INFO.txt | ${VER} > ${OUTPUT}/${STRUCTURE}.css
+	@@cat ${CSSFILES} >> ${OUTPUT}/${STRUCTURE}.css
+	# ..... and then minify it
+	@@echo ${VER_MIN} > ${OUTPUT}/${STRUCTURE}.min.css
+	@@java -jar build/yuicompressor-2.4.6.jar --type css ${OUTPUT}/${STRUCTURE}.css >> ${OUTPUT}/${STRUCTURE}.min.css
+	# ..... and then copy in the images
+	@@cp -R css/themes/${THEME}/images ${OUTPUT}/
+	# Css portion is complete.
+	# -------------------------------------------------
 
-# Build the minified CSS file
-cssmin: init css
-	@@head -8 js/jquery.mobile.core.js | ${SED_VER} > ${OUTPUT}/${CSSMIN}
-	@@java -jar build/yuicompressor-2.4.4.jar --type css ${OUTPUT}/${CSS} >> ${OUTPUT}/${CSSMIN}
 
-# Build the normal JS file
-js: init
-	@@head -8 js/jquery.mobile.core.js | ${SED_VER} > ${OUTPUT}/${JS}
-	@@cat ${JSFILES} >> ${OUTPUT}/${JS}
+docs: init css js
+	# Create the Demos/Docs/Tests/Tools
+	@@mkdir -p tmp/${NAME}
+	@@cp -R index.html docs experiments external js/jquery.js tests css/themes/${THEME}/images tmp/${NAME}/
+	@@cp ${OUTPUT}/${NAME}.min.css ${OUTPUT}/${NAME}.min.js tmp/${NAME}/
+	# ... Update the JavaScript and CSS paths
+	@@find tmp/${NAME} -type f \
+		\( -name '*.html' -o -name '*.php' \) \
+		-exec perl -pi -e \
+		's|js/"|${NAME}.min.js"|g;s|css/themes/default/|${NAME}.min.css|g;s|js/jquery.js"|jquery.js"|g' {} \;
+	# ... Move and zip up the the whole folder
+	@@cd tmp; zip -rq ../${OUTPUT}/${NAME}.docs.zip ${NAME}
+	@@mv tmp/${NAME} ${OUTPUT}/demos
+	# Finish by removing the temporary files
+	@@rm -rf tmp
+	# -------------------------------------------------
 
-# Build the minified JS file
-min: init js
-	@@head -8 js/jquery.mobile.core.js | ${SED_VER} > ${OUTPUT}/${MIN}
-	@@java -jar build/google-compiler-20110405.jar --js ${OUTPUT}/${JS} --warning_level QUIET --js_output_file ${MIN}.tmp
-	@@cat ${MIN}.tmp >> ${OUTPUT}/${MIN}
-	@@rm -f ${MIN}.tmp
-
-# Let the user know the files were built and where they are
-notify:
-	@@echo "The files have been built and are in " $$(pwd)/${OUTPUT}
 
 # Create the output directory. This is in a separate step so its not dependant on other targets
 init:
+	# -------------------------------------------------
+	# Building jQuery Mobile in the "${OUTPUT}" folder
 	@@rm -rf ${OUTPUT}
-	@@mkdir ${OUTPUT}
-
-# Pull the latest commits. This is used for the nightly build but can be used to save some keystrokes
-pull: 
-	@@git pull --quiet
-
-# Zip the 4 files and the theme images into one convenient package
-zip: init js min css cssmin
-	@@rm -rf ${DIR}
-	@@mkdir -p ${DIR}
-	@@cp ${OUTPUT}/${DIR}*.js ${DIR}/
-	@@cp ${OUTPUT}/${DIR}*.css ${DIR}/
-	@@cp -R themes/default/images ${DIR}/
-	@@zip -rq ${OUTPUT}/${DIR}.zip ${DIR}
-	@@rm -fr ${DIR}
+	@@rm -rf tmp
+	@@mkdir -p ${OUTPUT}
+	# -------------------------------------------------
 
 
-# Used by the jQuery team to make the nightly builds
-nightly: pull zip
-	# Create a log that lists the current version according to the code and the git information for the last commit
-	@@echo $$"\nGit Release Version: " >> ${OUTPUT}/log.txt
-	@@cat version.txt >> ${OUTPUT}/log.txt
-	@@echo $$"\nGit Information for this build:" >> ${OUTPUT}/log.txt
-	@@git log -1 --format=format:"SHA1: %H %nDate: %cd %nTitle: %s" >> ${OUTPUT}/log.txt
+# Build and minify the JS files
+js: init
+	# Build the JavaScript file
+	@@cat LICENSE-INFO.txt | ${VER} > ${OUTPUT}/${NAME}.js
+	@@cat ${JSFILES} >> ${OUTPUT}/${NAME}.js
+	# ..... and then minify it
+	@@echo ${VER_MIN} > ${OUTPUT}/${NAME}.min.js
+	@@java -XX:ReservedCodeCacheSize=64m \
+				-jar build/google-compiler-20111003.jar \
+				--js ${OUTPUT}/${NAME}.js \
+				--js_output_file ${OUTPUT}/${NAME}.tmp.js
+	@@cat ${OUTPUT}/${NAME}.tmp.js >> ${OUTPUT}/${NAME}.min.js
+	@@rm ${OUTPUT}/${NAME}.tmp.js
+	# -------------------------------------------------
+
+
+# Output a message saying the process is complete
+notify: init
+	@@echo "The files have been built and are in: " $$(pwd)/${OUTPUT}
+	# -------------------------------------------------
+
+
+# Zip up the jQm files without docs
+zip: init css js 
+	# Packaging up the files into a zip archive
+	@@mkdir tmp
+	@@cp -R ${OUTPUT} tmp/${NAME} 
+	# ... And remove the Zipped docs so they aren't included twice (for deploy scripts)
+	@@rm -rf tmp/${NAME}/${NAME}.docs.zip 
+	@@cd tmp; zip -rq ../${OUTPUT}/${NAME}.zip ${NAME}
+	@@rm -rf tmp
+	# -------------------------------------------------
 	
-	# Create the folder to hold the files for the demos
-	@@mkdir -p ${VER}
 
-	# Copy in the base stuff for the demos
-	@@cp -r index.html themes experiments docs ${VER}/
 
-	# First change all the paths from super deep to the same level for JS files
-	@@find ${VER} -type f -name '*.html' -exec sed -i 's|src="../../../js|src="js|g' {} \;
-	@@find ${VER} -type f -name '*.html' -exec sed -i 's|src="../../js|src="js|g' {} \;
-	@@find ${VER} -type f -name '*.html' -exec sed -i 's|src="../js|src="js|g' {} \;
 
-	# Then change all the paths from super deep to the same level for CSS files
-	@@find ${VER} -type f -name '*.html' -exec sed -i 's|media="only all"||g' {} \;
-	@@find ${VER} -type f -name '*.html' -exec sed -i 's|rel="stylesheet"  href="../../../|rel="stylesheet"  href="|g' {} \;
-	@@find ${VER} -type f -name '*.html' -exec sed -i 's|rel="stylesheet"  href="../../|rel="stylesheet"  href="|g' {} \;
-	@@find ${VER} -type f -name '*.html' -exec sed -i 's|rel="stylesheet"  href="../|rel="stylesheet"  href="|g' {} \;
+# -------------------------------------------------
+# -------------------------------------------------
+# -------------------------------------------------
+#
+# For jQuery Team Use Only
+#
+# -------------------------------------------------
 
-	# Change the empty paths to the location of this nightly file
-	@@find ${VER} -type f -name '*.html' -exec sed -i 's|href="themes/default/"|href="${NIGHTLY_WEBPATH}/${DIR}.min.css"|g' {} \;
-	@@find ${VER} -type f -name '*.html' -exec sed -i 's|src="js/jquery.js"|src="http://code.jquery.com/jquery-${JQUERY}.min.js"|' {} \;
-	@@find ${VER} -type f -name '*.html' -exec sed -i 's|src="js/"|src="${NIGHTLY_WEBPATH}/${DIR}.min.js"|g' {} \;	
-
-	# Move the demos into the output folder
-	@@mv ${VER} ${OUTPUT}/demos
-
-	# Copy the images as well
-	@@cp -R themes/default/images ${OUTPUT}
-
-	@@${RMLATEST}
-	@@scp -r ${OUTPUT} jqadmin@code.origin.jquery.com:/var/www/html/code.jquery.com/mobile/${NIGHTLY_OUTPUT}
+# Push the latest git version to the CDN. This is done on a post commit hook
+latest: init css js zip
+	# Time to put these on the CDN
+	@@scp -qr ${OUTPUT}/* jqadmin@code.origin.jquery.com:/var/www/html/code.jquery.com/mobile/latest/
+	# Do some cleanup to wrap it up
 	@@rm -rf ${OUTPUT}
+	# -------------------------------------------------
 
-# Used by the jQuery team to deploy a build to the CDN
-deploy: zip
-	# Deploy to CDN
-	@@mv ${DIR} ${VER}
-	@@cp ${DIR}.zip ${VER}/
-	@@scp -r ${VER} jqadmin@code.origin.jquery.com:/var/www/html/code.jquery.com/mobile/
-	@@mv ${VER} ${DIR}
+# Build the nightly backups. This is done on a server cronjob
+nightlies: init css js docs zip 
+	# Time to put these on the CDN
+	@@mkdir -p tmp/nightlies
+	@@mv ${OUTPUT} tmp/nightlies/$$(date "+%Y%m%d")
+	@@scp -qr tmp/nightlies/* jqadmin@code.origin.jquery.com:/var/www/html/code.jquery.com/mobile/nightlies/
+	# Do some cleanup to wrap it up
+	@@rm -rf tmp
+	# -------------------------------------------------
 
-	# Deploy Demos
-	@@mkdir -p ${VER}
-	@@cp -r index.html themes experiments docs ${VER}/
 
-	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|src="../../../js|src="js|g' {} \;
-	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|src="../../js|src="js|g' {} \;
-	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|src="../js|src="js|g' {} \;
+# Deploy a finished release. This is manually done.
+deploy: init css js docs zip
+	# Deploying all the files to the CDN
+	@@mkdir tmp
+	@@cp -R ${OUTPUT} tmp/${VER_OFFICIAL}
+	@@scp -qr tmp/* jqadmin@code.origin.jquery.com:/var/www/html/code.jquery.com/mobile/
+	@@rm -rf tmp/${VER_OFFICIAL}
+	@@mv ${OUTPUT}/demos tmp/${VER_OFFICIAL}
+	# Create the Demos/Docs/Tests/Tools for jQueryMobile.com
+	# ... By first replacing the paths
+	@@find tmp/${VER_OFFICIAL} -type f \
+		\( -name '*.html' -o -name '*.php' \) \
+		-exec perl -pi -e \
+		's|src="(.*)${NAME}.min.js"|src="//code.jquery.com/mobile/${VER_OFFICIAL}/${NAME}.min.js"|g;s|href="(.*)${NAME}.min.css"|href="//code.jquery.com/mobile/${VER_OFFICIAL}/${NAME}.min.css"|g;s|src="(.*)jquery.js"|src="//code.jquery.com/jquery-1.6.4.js"|g' {} \;
+	# ... So they can be copied to jquerymobile.com
+	@@scp -qr tmp/* jqadmin@jquerymobile.com:/srv/jquerymobile.com/htdocs/demos/	
+	# Do some cleanup to wrap it up
+	@@rm -rf tmp
+	@@rm -rf ${OUTPUT}
+	# -------------------------------------------------
 
-	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|media="only all"||g' {} \;
-	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|rel="stylesheet"  href="../../../|rel="stylesheet"  href="|g' {} \;
-	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|rel="stylesheet"  href="../../|rel="stylesheet"  href="|g' {} \;
-	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|rel="stylesheet"  href="../|rel="stylesheet"  href="|g' {} \;
 
-	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|href="themes/default/"|href="http://code.jquery.com/mobile/${VER}/${DIR}.min.css"|g' {} \;
-	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|src="js/jquery.js"|src="http://code.jquery.com/jquery-${JQUERY}.min.js"|' {} \;
-	@@find ${VER} -type f -name '*.html' -exec sed -i "" -e 's|src="js/"|src="http://code.jquery.com/mobile/${VER}/${DIR}.min.js"|g' {} \;
-
-	@@scp -r ${VER} jqadmin@jquerymobile.com:/srv/jquerymobile.com/htdocs/demos/

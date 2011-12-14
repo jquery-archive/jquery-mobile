@@ -34,57 +34,129 @@
 			ok($.mobile.gradeA());
 		});
 	});
-	
+
+	function clearNSNormalizeDictionary()
+	{
+		var dict = $.mobile.nsNormalizeDict;
+		for ( var prop in dict ) {
+			delete dict[ prop ];
+		}
+	}
+
+	test( "$.mobile.nsNormalize works properly with namespace defined (test default)", function(){
+		// Start with a fresh namespace property cache, just in case
+		// the previous test mucked with namespaces.
+		clearNSNormalizeDictionary();
+
+		equal($.mobile.nsNormalize("foo"), "nstestFoo", "appends ns and initcaps");
+		equal($.mobile.nsNormalize("fooBar"), "nstestFooBar", "leaves capped strings intact");
+		equal($.mobile.nsNormalize("foo-bar"), "nstestFooBar", "changes dashed strings");
+		equal($.mobile.nsNormalize("foo-bar-bak"), "nstestFooBarBak", "changes multiple dashed strings");
+
+		// Reset the namespace property cache for the next test.
+		clearNSNormalizeDictionary();
+	});
+
+	test( "$.mobile.nsNormalize works properly with an empty namespace", function(){
+		var realNs = $.mobile.ns;
+
+		$.mobile.ns = "";
+
+		// Start with a fresh namespace property cache, just in case
+		// the previous test mucked with namespaces.
+		clearNSNormalizeDictionary();
+
+		equal($.mobile.nsNormalize("foo"), "foo", "leaves uncapped and undashed");
+		equal($.mobile.nsNormalize("fooBar"), "fooBar", "leaves capped strings intact");
+		equal($.mobile.nsNormalize("foo-bar"), "fooBar", "changes dashed strings");
+		equal($.mobile.nsNormalize("foo-bar-bak"), "fooBarBak", "changes multiple dashed strings");
+
+		$.mobile.ns = realNs;
+
+		// Reset the namespace property cache for the next test.
+		clearNSNormalizeDictionary();
+	});
+
 	//data tests
 	test( "$.fn.jqmData and $.fn.jqmRemoveData methods are working properly", function(){
+		var data;
+
 		same( $("body").jqmData("foo", true), $("body"), "setting data returns the element" );
-		
+
 		same( $("body").jqmData("foo"), true, "getting data returns the right value" );
-		
-		same( $("body").data($.mobile.ns + "foo"), true, "data was set using namespace" );
-		
+
+		same( $("body").data($.mobile.nsNormalize("foo")), true, "data was set using namespace" );
+
 		same( $("body").jqmData("foo", undefined), true, "getting data still returns the value if there's an undefined second arg" );
-		
-		same( $("body").jqmData(), { "nstest-foo": true}, "passing no arguments returns a hash with all set properties" );
-		
-		same( $("body").jqmData(undefined), { "nstest-foo": true}, "passing a single undefined argument returns a hash with all set properties" );
-		
-		same( $("body").jqmData(undefined, undefined), {"nstest-foo": true}, "passing 2 undefined arguments returns a hash with all set properties" );
-		
+
+		data = $.extend( {}, $("body").data() );
+		delete data[ $.expando ]; //discard the expando for that test
+		same( data , { "nstestFoo": true }, "passing .data() no arguments returns a hash with all set properties" );
+
+		same( $("body").jqmData(), undefined, "passing no arguments returns undefined" );
+
+		same( $("body").jqmData(undefined), undefined, "passing a single undefined argument returns undefined" );
+
+		same( $("body").jqmData(undefined, undefined), undefined, "passing 2 undefined arguments returns undefined" );
+
 		same( $("body").jqmRemoveData("foo"), $("body"), "jqmRemoveData returns the element" );
-		
+
 		same( $("body").jqmData("foo"), undefined, "jqmRemoveData properly removes namespaced data" );
-		
+
 	});
-	
-	
+
+
 	test( "$.jqmData and $.jqmRemoveData methods are working properly", function(){
 		same( $.jqmData(document.body, "foo", true), true, "setting data returns the value" );
-		
+
 		same( $.jqmData(document.body, "foo"), true, "getting data returns the right value" );
-		
-		same( $.data(document.body, $.mobile.ns + "foo"), true, "data was set using namespace" );
-		
+
+		same( $.data(document.body, $.mobile.nsNormalize("foo")), true, "data was set using namespace" );
+
 		same( $.jqmData(document.body, "foo", undefined), true, "getting data still returns the value if there's an undefined second arg" );
-		
-		same( $.jqmData(document.body), { "nstest-foo": true}, "passing no arguments returns a hash with all set properties" );
-		
-		same( $.jqmData(document.body, undefined), { "nstest-foo": true}, "passing a single undefined argument returns a hash with all set properties" );
-		
-		same( $.jqmData(document.body, undefined, undefined), {"nstest-foo": true}, "passing 2 undefined arguments returns a hash with all set properties" );
-		
+
+		same( $.jqmData(document.body), undefined, "passing no arguments returns undefined" );
+
+		same( $.jqmData(document.body, undefined), undefined, "passing a single undefined argument returns undefined" );
+
+		same( $.jqmData(document.body, undefined, undefined), undefined, "passing 2 undefined arguments returns undefined" );
+
 		same( $.jqmRemoveData(document.body, "foo"), undefined, "jqmRemoveData returns the undefined value" );
-		
+
 		same( $("body").jqmData("foo"), undefined, "jqmRemoveData properly removes namespaced data" );
-		
+
 	});
-	
-	test( "jqmHasData method is working properly", function(){
-		same( $.jqmHasData(document.body, "foo"), false, "body has no data defined under 'foo'" );
-		$.jqmData(document.body, "foo", true);
-		same( $.jqmHasData(document.body, "foo"), true, "after setting, body has data defined under 'foo' equal to true" );
-		$.jqmRemoveData(document.body, "foo");
+
+	test( "addDependents works properly", function() {
+		same( $("#parent").jqmData('dependents'), undefined );
+		$( "#parent" ).addDependents( $("#dependent") );
+		same( $("#parent").jqmData('dependents').length, 1 );
 	});
-	
-	
+
+	test( "removeWithDependents removes the parent element and ", function(){
+		$( "#parent" ).addDependents( $("#dependent") );
+		same($( "#parent, #dependent" ).length, 2);
+		$( "#parent" ).removeWithDependents();
+		same($( "#parent, #dependent" ).length, 0);
+	});
+
+	test( "$.fn.getEncodedText should return the encoded value where $.fn.text doesn't", function() {
+		same( $("#encoded").text(), "foo>");
+		same( $("#encoded").getEncodedText(), "foo&gt;");
+		same( $("#unencoded").getEncodedText(), "foo");
+	});
+
+	test( "closestPageData returns the parent's page data", function() {
+		var pageChild = $( "#page-child" );
+
+		$( "#parent-page" ).data( "page", { foo: "bar" } );
+		same( $.mobile.closestPageData( pageChild ).foo, "bar" );
+	});
+
+	test( "closestPageData returns the parent dialog's page data", function() {
+		var dialogChild = $( "#dialog-child" );
+
+		$( "#parent-dialog" ).data( "page", { foo: "bar" } );
+		same( $.mobile.closestPageData(dialogChild).foo, "bar" );
+	});
 })(jQuery);

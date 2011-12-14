@@ -2,16 +2,19 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>jQuery Mobile Widget Test Suite</title>
 
+	<script src="../../../external/qunit.js"></script>
 	<script src="../../../js/jquery.js"></script>
+	<script src="widget_init.js"></script>
 	<script src="../../../js/"></script>
 
 	<link rel="stylesheet" href="../../../external/qunit.css"/>
-	<script src="../../../external/qunit.js"></script>
 
 	<script src="widget_core.js"></script>
+
+	<script src="../swarminject.js"></script>
 </head>
 <body>
 
@@ -30,6 +33,16 @@
 </div>
 
 </div>
+
+<div id="foo" data-role="page">
+  <input type="range" id="foo-slider" name="foo-slider" value="" />
+	<div id="enhance-prevented">
+	</div>
+	<div id="enhance-allowed">
+	</div>
+</div>
+
+
 
 </body>
 </html>

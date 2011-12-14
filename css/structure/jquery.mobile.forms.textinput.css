@@ -1,0 +1,22 @@
+label.ui-input-text { font-size: 16px; line-height: 1.4; display: block; font-weight: normal; margin: 0 0 .3em; }
+input.ui-input-text, textarea.ui-input-text { background-image: none; padding: .4em; line-height: 1.4; font-size: 16px; display: block; width: 97%; }
+input.ui-input-text { -webkit-appearance: none; }
+textarea.ui-input-text { height: 50px; -webkit-transition: height 200ms linear; -moz-transition: height 200ms linear; -o-transition: height 200ms linear; transition: height 200ms linear; }
+.ui-input-search { padding: 0 30px; background-image: none; position: relative; }
+.ui-icon-searchfield:after { position: absolute; left: 7px; top: 50%; margin-top: -9px; content: ""; width: 18px; height: 18px; opacity: .5; }
+.ui-input-search input.ui-input-text { border: none; width: 98%; padding: .4em 0; margin: 0; display: block; background: transparent none; outline: 0 !important; }
+.ui-input-search .ui-input-clear { position: absolute; right: 0; top: 50%; margin-top: -13px; }
+.ui-input-search .ui-input-clear-hidden { display: none; }
+
+/* orientation adjustments - incomplete!*/
+@media all and (min-width: 450px){
+	.ui-field-contain label.ui-input-text  { vertical-align: top; display: inline-block;  width: 20%;  margin: 0 2% 0 0 }
+	.ui-field-contain input.ui-input-text, 
+	.ui-field-contain textarea.ui-input-text, 
+	.ui-field-contain .ui-input-search { width: 60%; display: inline-block; } 
+	.ui-field-contain .ui-input-search { width: 50%; }
+	.ui-hide-label input.ui-input-text, 
+	.ui-hide-label textarea.ui-input-text, 
+	.ui-hide-label .ui-input-search { padding: .4em; width: 97%; } 
+	.ui-input-search input.ui-input-text { width: 98%; /*echos rule from above*/ }
+}

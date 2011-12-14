@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Docs - Select</title>
+	<link rel="stylesheet"  href="../../../css/themes/default/" />
+	<link rel="stylesheet" href="../../_assets/css/jqm-docs.css"/>
+	<script src="../../../js/jquery.js"></script>
+	<script src="../../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../../_assets/js/jqm-docs.js"></script>
+	<script src="../../../js/"></script>
+</head>
+<body>
+
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="f">
+		<h1>Select Menus</h1>
+		<a href="../../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="content-primary">
+
+<h2>Select menus</h2>
+
+<ul data-role="controlgroup" data-type="horizontal" class="localnav">
+	<li><a href="index.html" data-role="button" data-transition="fade">Basics</a></li>
+	<li><a href="options.html" data-role="button" data-transition="fade">Options</a></li>
+	<li><a href="methods.html" data-role="button" data-transition="fade">Methods</a></li>
+	<li><a href="events.html" data-role="button" data-transition="fade">Events</a></li>
+</ul>
+
+<h2>Custom select menus</h2>
+<p>The framework is capable of building a custom menu based on the <code>select</code> element's list of options.  We recommend using a custom menu when multiple selections are required, or when the menu itself must be styled with CSS.</p>
+
+<p>You can optionally use custom-styled select menus instead of the native OS menu. The custom menu supports disabled options and multiple selection (whereas native mobile OS support for both is inconsistent), adds an elegant way to handle placeholder values, and restores missing functionality on certain platforms such as <code>optgroup</code> support on Android (all explained below).  In addition, the framework applies the custom button's theme to the menu to better match the look and feel and provide visual consistency across platforms. Lastly, custom menus often look better on desktop browsers because native desktop menus are smaller than their mobile counterparts and tend to look disproportionate.</p>
+
+	<p>Keep in mind that there is overhead involved in parsing the native select to build a custom menu. If there are a lot of selects on a page, or a select has a long list of options, this can impact the performance of the page, so we recommend using custom menus sparingly. </p>
+	
+	<p>To use custom menus on a specific <code>select</code>, just add the <code>data-native-menu="false"</code> attribute. Alternately, this can also programmatically set the select menu's <code>nativeMenu</code> configuration option to <code>false</code> in a callback bound to the <code>mobileinit</code> event to achieve the same effect. This will globally make all selects use the custom menu by default. The following must be included in the page after jQuery is loaded but before jQuery Mobile is loaded.</p>
+	
+
+<code>
+<pre>
+$(document).bind('mobileinit',function(){
+   $.mobile.selectmenu.prototype.options.nativeMenu = false;
+});
+</pre>
+</code>
+
+			<p>When the <code>select</code> has a small number of options that will fit on the device's screen, the menu will appear as a small overlay with a pop transition:</p>
+
+			<div data-role="fieldcontain">
+				<label for="select-choice-custom" class="select">Shipping method:</label>
+				<select name="select-choice-1" id="select-choice-custom" data-native-menu="false">
+					<option value="standard">Standard: 7 day</option>
+					<option value="rush">Rush: 3 days</option>
+					<option value="express">Express: next day</option>
+					<option value="overnight">Overnight</option>
+				</select>
+			</div>
+
+			<p>When it has too many options to show on the device's screen, the framework will automatically create a new &quot;page&quot; populated with a standard <a href="../../lists/docs-lists.html">list view</a> for the options. This allows us to use the native scrolling included on the device for moving through a long list. The text inside the <code>label</code> is used as the title for this page.</p>
+
+
+					<div data-role="fieldcontain">
+						<label for="select-choice-3" class="select">Your state:</label>
+						<select name="select-choice-3" id="select-choice-3" data-native-menu="false">
+							<option value="AL">Alabama</option>
+							<option value="AK">Alaska</option>
+							<option value="AZ">Arizona</option>
+							<option value="AR">Arkansas</option>
+							<option value="CA">California</option>
+							<option value="CO">Colorado</option>
+							<option value="CT">Connecticut</option>
+							<option value="DE">Delaware</option>
+							<option value="FL">Florida</option>
+							<option value="GA">Georgia</option>
+							<option value="HI">Hawaii</option>
+							<option value="ID">Idaho</option>
+							<option value="IL">Illinois</option>
+							<option value="IN">Indiana</option>
+							<option value="IA">Iowa</option>
+							<option value="KS">Kansas</option>
+							<option value="KY">Kentucky</option>
+							<option value="LA">Louisiana</option>
+							<option value="ME">Maine</option>
+							<option value="MD">Maryland</option>
+							<option value="MA">Massachusetts</option>
+							<option value="MI">Michigan</option>
+							<option value="MN">Minnesota</option>
+							<option value="MS">Mississippi</option>
+							<option value="MO">Missouri</option>
+							<option value="MT">Montana</option>
+							<option value="NE">Nebraska</option>
+							<option value="NV">Nevada</option>
+							<option value="NH">New Hampshire</option>
+							<option value="NJ">New Jersey</option>
+							<option value="NM">New Mexico</option>
+							<option value="NY">New York</option>
+							<option value="NC">North Carolina</option>
+							<option value="ND">North Dakota</option>
+							<option value="OH">Ohio</option>
+							<option value="OK">Oklahoma</option>
+							<option value="OR">Oregon</option>
+							<option value="PA">Pennsylvania</option>
+							<option value="RI">Rhode Island</option>
+							<option value="SC">South Carolina</option>
+							<option value="SD">South Dakota</option>
+							<option value="TN">Tennessee</option>
+							<option value="TX">Texas</option>
+							<option value="UT">Utah</option>
+							<option value="VT">Vermont</option>
+							<option value="VA">Virginia</option>
+							<option value="WA">Washington</option>
+							<option value="WV">West Virginia</option>
+							<option value="WI">Wisconsin</option>
+							<option value="WY">Wyoming</option>
+						</select>
+					</div>
+
+	<h3>Disabled options</h3>
+	<p>jQuery Mobile will automatically disable and style option tags with the <code>disabled</code> attribute.  In the demo below, the second option &quot;Rush: 3 days&quot; has been set to disabled.</p>
+
+	<div data-role="fieldcontain">
+		<label for="select-choice-7" class="select">Shipping method:</label>
+		<select name="select-choice-7" id="select-choice-7">
+			<option value="standard">Standard: 7 day</option>
+			<option value="rush" disabled="disabled">Rush: 3 days</option>
+			<option value="express">Express: next day</option>
+			<option value="overnight">Overnight</option>
+		</select>
+	</div>
+	
+	<h3>Placeholder options</h3>
+	<p>It's common for developers to include a &quot;null&quot; option in their select element to force a user to choose an option. If a placeholder option is present in your markup, jQuery Mobile will hide them in the overlay menu, showing only valid choices to the user, and display the placeholder text inside the menu as a header.  A placeholder option is added when the framework finds:</p>
+	<ul>
+		<li>An option with no value attribute (or an empty value attribute)</li>
+		<li>An option with no text node</li>
+		<li>An option with a <code>data-placeholder="true"</code> attribute. (This allows you to use an option that has a value and a textnode as a placeholder option).</li>
+	</ul>
+
+	<p>You can disable this feature through the selectmenu plugin's <code>hidePlaceholderMenuItems</code> option, like this:</p>
+	<pre>
+	<code>
+$.mobile.selectmenu.prototype.options.hidePlaceholderMenuItems = false;
+	</code>
+	</pre>
+
+	<p>Examples of various placeholder options:</p>
+
+
+	<div data-role="fieldcontain">
+		<label for="select-choice-4" class="select">Shipping method:</label>
+		<select name="select-choice-4" id="select-choice-4" data-native-menu="false">
+			<option></option>
+			<option value="standard">Standard: 7 day</option>
+			<option value="rush">Rush: 3 days</option>
+			<option value="express">Express: next day</option>
+			<option value="overnight">Overnight</option>
+		</select>
+	</div>
+
+
+	<div data-role="fieldcontain">
+		<label for="select-choice-5" class="select">Shipping method:</label>
+		<select name="select-choice-5" id="select-choice-5" data-native-menu="false">
+			<option>Choose one...</option>
+			<option value="standard">Standard: 7 day</option>
+			<option value="rush">Rush: 3 days</option>
+			<option value="express">Express: next day</option>
+			<option value="overnight">Overnight</option>
+		</select>
+	</div>
+
+
+	<div data-role="fieldcontain">
+		<label for="select-choice-6" class="select">Shipping method:</label>
+		<select name="select-choice-6" id="select-choice-6" data-native-menu="false">
+			<option value="choose-one" data-placeholder="true">Choose one...</option>
+			<option value="standard">Standard: 7 day</option>
+			<option value="rush">Rush: 3 days</option>
+			<option value="express">Express: next day</option>
+			<option value="overnight">Overnight</option>
+		</select>
+	</div>
+
+
+	<h3>Multiple selects</h3>	
+	<p>If the <code>multiple</code> attribute is present in your markup, jQuery Mobile will enhance the element with a few extra considerations:</p>
+
+	<ul>
+	<li>A header element will be created inside the menu and display the placeholder text and a close button.</li>
+	<li>Clicking on an item inside the overlay menu will not close the widget.</li>
+	<li>A ghosted, unchecked icon will appear adjacent to each unselected item.  When the item is selected the icon will change to a checkbox.  Neither icon will appear inside a single select box.</li>
+	<li>Once 2+ items are selected, a counter element with the total number of selected items will appear inside the button.</li>
+	<li>The text of each selected item will appear inside the button as a list.  If the button is not wide enough to display the entire list, it is truncated with an ellipses.</li>
+	<li>If no items are selected, the button's text will default to the placeholder text.</li>
+	<li>If no placeholder element exists, the default button text will be blank and the header will appear with just a close button. Because this isn't a friendly user experience, we recommended that you always specify a placeholder element when using multiple select boxes.</li>
+	</ul>
+
+	<div data-role="fieldcontain">
+		<label for="select-choice-9" class="select">Shipping method(s):</label>
+		<select name="select-choice-9" id="select-choice-9" multiple="multiple" data-native-menu="false">
+			<option>Choose options</option>
+			<option value="standard">Standard: 7 day</option>
+			<option value="rush">Rush: 3 days</option>
+			<option value="express">Express: next day</option>
+			<option value="overnight">Overnight</option>
+		</select>
+	</div>
+
+	<p>When a select is large enough to where the menu will open in a new page, the placeholder text is displayed in the button when no items are selected, and the <code>label</code> text is displayed in the menu's header.  This differs from smaller overlay menus where the placeholder text is displayed in both the button and the header, and from full-page single selects where the placeholder text is not used at all.</p>
+
+	<div data-role="fieldcontain">
+		<label for="select-choice-10" class="select">Choose state(s):</label>
+		<select name="select-choice-10" id="select-choice-10" multiple="multiple" data-native-menu="false">
+			<option>Choose options</option>
+			<option value="AL">Alabama</option>
+			<option value="AK">Alaska</option>
+			<option value="AZ">Arizona</option>
+			<option value="AR">Arkansas</option>
+			<option value="CA">California</option>
+			<option value="CO">Colorado</option>
+			<option value="CT">Connecticut</option>
+			<option value="DE">Delaware</option>
+			<option value="FL">Florida</option>
+			<option value="GA">Georgia</option>
+			<option value="HI">Hawaii</option>
+			<option value="ID">Idaho</option>
+			<option value="IL">Illinois</option>
+			<option value="IN">Indiana</option>
+			<option value="IA">Iowa</option>
+			<option value="KS">Kansas</option>
+			<option value="KY">Kentucky</option>
+			<option value="LA">Louisiana</option>
+			<option value="ME">Maine</option>
+			<option value="MD">Maryland</option>
+			<option value="MA">Massachusetts</option>
+			<option value="MI">Michigan</option>
+			<option value="MN">Minnesota</option>
+			<option value="MS">Mississippi</option>
+			<option value="MO">Missouri</option>
+			<option value="MT">Montana</option>
+			<option value="NE">Nebraska</option>
+			<option value="NV">Nevada</option>
+			<option value="NH">New Hampshire</option>
+			<option value="NJ">New Jersey</option>
+			<option value="NM">New Mexico</option>
+			<option value="NY">New York</option>
+			<option value="NC">North Carolina</option>
+			<option value="ND">North Dakota</option>
+			<option value="OH">Ohio</option>
+			<option value="OK">Oklahoma</option>
+			<option value="OR">Oregon</option>
+			<option value="PA">Pennsylvania</option>
+			<option value="RI">Rhode Island</option>
+			<option value="SC">South Carolina</option>
+			<option value="SD">South Dakota</option>
+			<option value="TN">Tennessee</option>
+			<option value="TX">Texas</option>
+			<option value="UT">Utah</option>
+			<option value="VT">Vermont</option>
+			<option value="VA">Virginia</option>
+			<option value="WA">Washington</option>
+			<option value="WV">West Virginia</option>
+			<option value="WI">Wisconsin</option>
+			<option value="WY">Wyoming</option>
+		</select>
+	</div>
+
+
+
+	
+
+	<h3>Optgroup support</h3>
+	<p>If a select menu contains <code>optgroup</code> elements, jQuery Mobile will create a divider &amp; group items based on the <code>label</code> attribute's text:</p>
+
+	<div data-role="fieldcontain">
+		<label for="select-choice-8" class="select">Shipping method:</label>
+		<select name="select-choice-8" id="select-choice-8" data-native-menu="false">
+			<optgroup label="USPS">
+				<option value="standard">Standard: 7 day</option>
+				<option value="rush">Rush: 3 days</option>
+				<option value="express">Express: next day</option>
+				<option value="overnight">Overnight</option>
+			</optgroup>
+			<optgroup label="FedEx">
+				<option value="firstOvernight">First Overnight</option>
+				<option value="expressSaver">Express Saver</option>
+				<option value="ground">Ground</option>
+			</optgroup>
+		</select>
+	</div>
+
+
+	
+	
+	
+	</div><!--/content-primary -->		
+	
+	<div class="content-secondary">
+		
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+			
+				<h3>More in this section</h3>
+				
+				<ul data-role="listview" data-theme="c" data-dividertheme="d">
+				
+					<li data-role="list-divider">Form elements</li>
+					<li><a href="../docs-forms.html">Form basics</a></li>
+					<li><a href="../forms-all.html">Form element gallery</a></li>
+					<li><a href="../textinputs/index.html">Text inputs</a></li>
+					<li><a href="../search/">Search input</a></li>
+					<li><a href="../slider/">Slider</a></li>
+					<li><a href="../switch/">Flip toggle switch</a></li>
+					<li><a href="../radiobuttons/">Radio buttons</a></li>
+					<li><a href="../checkboxes/">Checkboxes</a></li>
+					<li data-theme="a"><a href="index.html">Select menus</a></li>
+					<li><a href="../forms-themes.html">Theming forms</a></li>
+					<li><a href="../forms-all-native.html">Native form elements</a></li>
+					<li><a href="../forms-sample.html">Submitting forms</a></li>
+					
+	
+				</ul>
+		</div>
+	</div>		
+
+</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p>&copy; 2011 The jQuery Project</p>
+</div>
+	
+</div><!-- /page -->
+
+</body>
+</html>
+

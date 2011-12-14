@@ -1,0 +1,42 @@
+.ui-select { display: block; position: relative; }
+.ui-select select { position: absolute; left: -9999px; top: -9999px; }
+.ui-select .ui-btn { overflow: hidden; }
+
+
+.ui-select .ui-btn { opacity: 1; }
+
+/* Fixes #2588 — When Windows Phone 7.5 (Mango) tries to calculate a numeric opacity for a select—including “inherit”—without explicitly specifying an opacity on the parent to give it context, a bug appears where clicking elsewhere on the page after opening the select will open the select again. */
+.ui-select .ui-btn select { cursor: pointer; -webkit-appearance: button; left: 0; top:0; width: 100%;  min-height: 1.5em; min-height: 100%; height: 3em; max-height: 100%; opacity: 0; -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; filter: alpha(opacity=0); z-index: 2; }
+
+.ui-select .ui-disabled { opacity: .3; }
+
+@-moz-document url-prefix() {.ui-select .ui-btn select { opacity: 0.0001; }}
+.ui-select .ui-btn select.ui-select-nativeonly { opacity: 1; text-indent: 0; }
+
+.ui-select .ui-btn-icon-right .ui-btn-inner { padding-right: 45px; } 
+.ui-select .ui-btn-icon-right .ui-icon { right: 15px;  }
+
+/* labels */
+label.ui-select { font-size: 16px; line-height: 1.4;  font-weight: normal; margin: 0 0 .3em; display: block; }
+
+/*listbox*/
+.ui-select .ui-btn-text, .ui-selectmenu .ui-btn-text { display: block; min-height: 1em; overflow: hidden; }
+.ui-select .ui-btn-text { text-overflow: ellipsis; }
+
+.ui-selectmenu { position: absolute; padding: 0; z-index: 1100 !important; width: 80%; max-width: 350px; padding: 6px; }
+.ui-selectmenu .ui-listview { margin: 0; }
+.ui-selectmenu .ui-btn.ui-li-divider { cursor: default; }
+.ui-selectmenu-hidden { top: -9999px; left: -9999px; }
+.ui-selectmenu-screen { position: absolute; top: 0; left: 0; width: 100%; height: 100%;  z-index: 99; }
+.ui-screen-hidden, .ui-selectmenu-list .ui-li .ui-icon { display: none; }
+.ui-selectmenu-list .ui-li .ui-icon { display: block; }
+.ui-li.ui-selectmenu-placeholder { display: none; }
+.ui-selectmenu .ui-header .ui-title { margin: 0.6em 46px 0.8em; }
+
+@media all and (min-width: 450px){	
+	.ui-field-contain label.ui-select { vertical-align: top;  display: inline-block;  width: 20%;  margin: 0 2% 0 0; }
+	.ui-field-contain .ui-select { width: 60%; display: inline-block; }
+}	
+
+/* when no placeholder is defined in a multiple select, the header height doesn't even extend past the close button.  this shim's content in there */
+.ui-selectmenu .ui-header h1:after { content: '.'; visibility: hidden; }

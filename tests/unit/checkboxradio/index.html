@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 	<meta charset="UTF-8" />
@@ -9,11 +10,13 @@
 	<script src="../../../js/"></script>
 	<script src="../../../tests/jquery.testHelper.js"></script>
 
-	<link rel="stylesheet" href="../../../themes/default/"/>
+	<link rel="stylesheet"  href="../../../css/themes/default/"/>
 	<link rel="stylesheet" href="../../../external/qunit.css"/>
 	<script src="../../../external/qunit.js"></script>
 
 	<script src="checkboxradio_core.js"></script>
+
+	<script src="../swarminject.js"></script>
 </head>
 <body>
 
@@ -40,7 +43,58 @@
 				<label for="checkbox-2">I agree</label>
 			</fieldset>
 		</div>
+
+        <div data-nstest-role="fieldcontain" data-nstest-role="controlgroup">
+            <div>
+                <legend>Agree to the terms 3.1:</legend>
+                <input type="checkbox" name="checkbox-3" id="checkbox-31" class="custom"/>
+                <label for="checkbox-31">I agree 3.1</label>
+            </div>
+            <div>
+                <legend>Agree to the terms 3.2:</legend>
+                <input type="checkbox" name="checkbox-3" id="checkbox-32" class="custom"/>
+                <label for="checkbox-32">I agree 3.2</label>
+            </div>
+        </div>
 	</div>
+
+<div data-role="fieldcontain" id="radio-active-btn-test">
+	<fieldset data-role="controlgroup">
+	  <legend>Choose a pet:</legend>
+	  <input type="radio" name="radio-pet-active-btn" id="radio-pet-1" value="choice-1" checked="checked"  />
+	  <label for="radio-pet-1">Cat</label>
+
+	  <input type="radio" name="radio-pet-active-btn" id="radio-pet-2" value="choice-2"  />
+	  <label for="radio-pet-2">Dog</label>
+
+	  <input type="radio" name="radio-pet-active-btn" id="radio-pet-3" value="choice-3"  />
+	  <label for="radio-pet-3">Hamster</label>
+
+	  <input type="radio" name="radio-pet-active-btn" id="radio-pet-4" value="choice-4"  />
+	  <label for="radio-pet-4">Lizard</label>
+	</fieldset>
+</div>
+
+<div data-role="fieldcontain">
+	<fieldset data-role="controlgroup">
+		<legend>Agree to the terms:</legend>
+		<input type="checkbox" name="checkbox-1" id="checkbox-1" class="should-be-native" />
+		<label for="checkbox-1">I agree</label>
+	</fieldset>
+</div>
+
+<div data-role="fieldcontain">
+	<fieldset data-role="controlgroup">
+		<legend>Agree to the terms:</legend>
+		<input type="checkbox" name="checkbox-click-triggered" id="checkbox-click-triggered"/>
+		<label for="checkbox-click-triggered">click triggered</label>
+	</fieldset>
+</div>
+</div>
+
+<div id="enhancetest">
+    <input type="checkbox" name="checkbox-332" id="checkbox-332" class="custom"/>
+    <label for="checkbox-332">I agree 3.2</label>
 </div>
 
 </body>

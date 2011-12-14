@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>jQuery Mobile Button Markup Test Suite</title>
+	<!-- meta viewport left out on purpose for test append -->
+	<script src="../../../js/jquery.js"></script>
+	<script src="../../../js/"></script>
+	<script src="../../../external/qunit.js"></script>
+	<script src="../../jquery.testHelper.js"></script>
+	<script src="buttonMarkup_core.js"></script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/" />
+	<link rel="stylesheet" href="../../../external/qunit.css"/>
+
+	<script src="../swarminject.js"></script>
+</head>
+<body>
+
+<h1 id="qunit-header">jQuery Mobile Button Markup Test Suite</h1>
+<h2 id="qunit-banner"></h2>
+<h2 id="qunit-userAgent"></h2>
+<ol id="qunit-tests">
+</ol>
+
+<div data-nstest-role="page" id="default">
+        <div data-role="content" id="control-group-content">
+          <a href="index.html" data-role="button" data-shadow="false">No shadow</a>
+          <a href="index.html" data-role="button" data-corners="false">No corners</a>
+          <a href="index.html" data-role="button" data-shadow="false" data-corners="false">No shadow or corners</a>
+          <a href="index.html" data-role="button" data-icon="delete" data-iconshadow="false">No iconshadow</a>
+          <button data-shadow="false" data-corners="false" data-icon="delete" data-iconshadow="false">None of the above</button>
+          <svg id="embedded-svg" width="120" height="120" viewPort="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg">
+              <rect x="10" y="10" width="100" height="100"/>
+          </svg>
+        </div>
+	<div data-role="footer" id="control-group-footer" class="ui-bar" data-position="inline">
+		<div data-role="controlgroup" data-type="horizontal">
+			<a href="index.html" data-icon="delete">Remove</a>
+			<a href="index.html" data-icon="plus">Add</a>
+			<a href="index.html" data-icon="arrow-u">Up</a>
+			<a href="index.html" data-icon="arrow-d">Down</a>
+		</div>
+	</div>
+</div>
+</body>
+</html>

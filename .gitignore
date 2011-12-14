@@ -7,4 +7,7 @@ cache/
 combined/
 combine/
 compiled/
-gitstatus.log
+tmp/
+*.swp
+.gitignore
+tests/speed/stats/stats.db

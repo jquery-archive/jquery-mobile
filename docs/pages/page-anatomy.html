@@ -1,0 +1,222 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>jQuery Mobile Docs - Anatomy of a Page</title> 
+	<link rel="stylesheet"  href="../../css/themes/default/" />  
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	<script src="../../js/jquery.js"></script>
+	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../_assets/js/jqm-docs.js"></script>
+	<script src="../../js/"></script>
+</head> 
+<body> 
+
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="f">
+		<h1>Anatomy of a Page</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="content-primary">		
+			<p>The jQuery Mobile "page" structure is optimized to support either single pages, or local internal linked "pages" within a page.</p> 
+			
+			<p>The goal of this model is to allow developers to create websites using best practices &mdash; where ordinary links will "just work" without any special configuration &mdash; while creating a rich, native-like experience that can't be achieved with standard HTTP requests.</p> 
+
+			<h2>Mobile page structure</h2> 
+
+			<p>A jQuery Mobile site must start with an HTML5 'doctype' to take full advantage of all of the framework's features. (Older devices with browsers that don't understand HTML5 will safely ignore the 'doctype' and various custom attributes.) In the 'head', references to jQuery, jQuery Mobile and the mobile theme CSS are all required to start things off. We recommend linking to the files hosted on the jQuery CDN for best performance:</p> 
+
+<pre><code>
+&lt;!DOCTYPE html&gt; 
+&lt;html&gt; 
+	&lt;head&gt; 
+	&lt;title&gt;Page Title&lt;/title&gt; 
+	
+	&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt; 
+
+	&lt;link rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css&quot; /&gt;
+	&lt;script type=&quot;text/javascript&quot; src=&quot;http://code.jquery.com/jquery-1.6.4.min.js&quot;&gt;&lt;/script&gt;
+	&lt;script type=&quot;text/javascript&quot; src=&quot;http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt; 
+
+&lt;body&gt; 
+...content goes here...
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+			
+			<h2>Viewport meta tag</h2>
+			<p>Note above that there is a meta <code>viewport</code> tag in the <code>head</code> to specify how the browser should display the page zoom level and dimensions. If this isn't set, many mobile browsers will use a "virtual" page width around 900 pixels to make it work well with exisitng desktop sites but the screens may look zoomed out and too wide. By setting the viewport attributes to <code>content=&quot;width=device-width, initial-scale=1&quot;</code>, the width will be set to the pixel width of the device screen. </p>
+			
+			<pre><code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt; </code></pre>
+			
+			<p>These settings do not disable the user's ability to zoom the pages, which is nice from an accessibility perspective. There is a minor issue in iOS that doesn't properly set the width when changing orientations with these viewport settings, but this will hopefully be fixed a a future release. You can set other viewport values to disable zooming if required since this is part of your page content, not the library. </p>
+			
+			<h2>Inside the body: Pages</h2>
+			<p>Inside the <code>&lt;body&gt;</code> tag, each view or "page" on the mobile device is identified with an element (usually a <code>div</code>) with the <code> data-role="page"</code> attribute. View the <a href="../api/data-attributes.html">data- attribute reference</a> to see all the possible attributes you can add to pages.</p> 
+
+<div class="highlight"> 
+<pre><span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"page"</span><span class="nt">&gt;</span> 
+	...
+<span class="nt">&lt;/div&gt;</span> 
+</pre> 
+</div> 
+
+			<p>Within the "page" container, any valid HTML markup can be used, but for typical pages in jQuery Mobile, the immediate children of a "page" are divs with data-roles of <code>"header"</code>, <code>"content"</code>, and <code>"footer"</code>.</p> 
+
+<div class="highlight"> 
+<pre><span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"page"</span><span class="nt">&gt;</span> 
+	<span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"header"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/div&gt;</span> 
+	<span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"content"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/div&gt;</span> 
+	<span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"footer"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/div&gt;</span> 
+<span class="nt">&lt;/div&gt;</span> 
+</pre> 
+</div> 
+
+
+<h2>Putting it together: Basic single page template</h2> 
+
+<p>Putting it all together, this is the standard boilerplate page template you should start with on a project: </p>
+
+<pre><code>
+&lt;!DOCTYPE html&gt; 
+&lt;html&gt; 
+	&lt;head&gt; 
+	&lt;title&gt;Page Title&lt;/title&gt; 
+	
+	&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt; 
+
+	&lt;link rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css&quot; /&gt;
+	&lt;script type=&quot;text/javascript&quot; src=&quot;http://code.jquery.com/jquery-1.6.4.min.js&quot;&gt;&lt;/script&gt;
+	&lt;script type=&quot;text/javascript&quot; src=&quot;http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt; 
+&lt;body&gt; 
+
+&lt;div data-role=&quot;page&quot;&gt;
+
+	&lt;div data-role=&quot;header&quot;&gt;
+		&lt;h1&gt;Page Title&lt;/h1&gt;
+	&lt;/div&gt;&lt;!-- /header --&gt;
+
+	&lt;div data-role=&quot;content&quot;&gt;	
+		&lt;p&gt;Page content goes here.&lt;/p&gt;		
+	&lt;/div&gt;&lt;!-- /content --&gt;
+
+	&lt;div data-role=&quot;footer&quot;&gt;
+		&lt;h4&gt;Page Footer&lt;/h4&gt;
+	&lt;/div&gt;&lt;!-- /footer --&gt;
+&lt;/div&gt;&lt;!-- /page --&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+			<a href="page-template.html" data-inline="true" data-theme="b" data-role="button">View boilerplate template</a>
+
+
+		<h2>Multi-page template structure</h2> 
+		
+			<p>A single HTML document can contain multiple 'pages' that are loaded together by stacking multiple divs with a <code> data-role</code> of <code>"page"</code>. Each 'page' block needs a unique ID (<code>id="foo"</code>) that will be used to link internally between 'pages' (<code>href="#foo"</code>). When a link is clicked, the framework will look for an internal 'page' with the ID and transition it into view.</p> 
+						
+			<p>Here is an example of a 2 "page" site built with two jQuery Mobile divs navigated by linking to an ID placed on each page wrapper. Note that the IDs on the page wrappers are only needed to support the internal page linking, and are optional if each page is a separate HTML document. Here is what two pages look inside the <code>body</code> element.</p> 
+
+<pre><code>
+&lt;body&gt; 
+
+&lt;!-- Start of first page --&gt;
+&lt;div data-role=&quot;page&quot; id=&quot;foo&quot;&gt;
+
+	&lt;div data-role=&quot;header&quot;&gt;
+		&lt;h1&gt;Foo&lt;/h1&gt;
+	&lt;/div&gt;&lt;!-- /header --&gt;
+
+	&lt;div data-role=&quot;content&quot;&gt;	
+		&lt;p&gt;I&#x27;m first in the source order so I&#x27;m shown as the page.&lt;/p&gt;		
+		&lt;p&gt;View internal page called &lt;a href=&quot;#bar&quot;&gt;bar&lt;/a&gt;&lt;/p&gt;	
+	&lt;/div&gt;&lt;!-- /content --&gt;
+
+	&lt;div data-role=&quot;footer&quot;&gt;
+		&lt;h4&gt;Page Footer&lt;/h4&gt;
+	&lt;/div&gt;&lt;!-- /footer --&gt;
+&lt;/div&gt;&lt;!-- /page --&gt;
+
+
+&lt;!-- Start of second page --&gt;
+&lt;div data-role=&quot;page&quot; id=&quot;bar&quot;&gt;
+
+	&lt;div data-role=&quot;header&quot;&gt;
+		&lt;h1&gt;Bar&lt;/h1&gt;
+	&lt;/div&gt;&lt;!-- /header --&gt;
+
+	&lt;div data-role=&quot;content&quot;&gt;	
+		&lt;p&gt;I&#x27;m the second in the source order so I&#x27;m hidden when the page loads. I&#x27;m just shown if a link that references my ID is beeing clicked.&lt;/p&gt;		
+		&lt;p&gt;&lt;a href=&quot;#foo&quot;&gt;Back to foo&lt;/a&gt;&lt;/p&gt;	
+	&lt;/div&gt;&lt;!-- /content --&gt;
+
+	&lt;div data-role=&quot;footer&quot;&gt;
+		&lt;h4&gt;Page Footer&lt;/h4&gt;
+	&lt;/div&gt;&lt;!-- /footer --&gt;
+&lt;/div&gt;&lt;!-- /page --&gt;
+&lt;/body&gt;
+</code></pre>	
+
+		<a href="../../docs/pages/multipage-template.html" data-inline="true" data-theme="b" data-role="button" rel="external">View multi-page template</a>
+
+		<p> </p>
+		
+		<p>PLEASE NOTE: Since we are using the hash to track navigation history for all the Ajax 'pages', it's not currently possible to deep link to an anchor (<code>index.html#foo</code>) on a page in jQuery Mobile, because the framework will look for a 'page' with an <code>ID</code> of <code>#foo</code> instead of the native behavior of scrolling to the content with that <code>ID</code>.</p>
+		
+		
+<h2>Conventions, not requirements</h2>
+
+<p>Although the page structure outlined above is a recommended approach for a standard web app built with jQuery Mobile, the framework is very flexible with document structure. The page, header, content, and footer data-role elements are optional and are mostly helpful for providing some basic formatting and structure. The page wrapper that used to be required for auto-initialization to work is now optional for single page documents, so there isn't any required markup at all. For a web page with a custom layout, all of these structural elements can be omitted and the Ajax navigation and all widgets will work just like they do in the boilerplate structure. Behind the scenes, the framework will inject the page wrapper if it's not included in the markup because it’s needed for managing pages, but the starting markup can now be extremely simple. </p>
+
+<p>Note that in a multi-page setup, you are required to have page wrappers in your markup in order to group the content into multiple pages.</p>
+
+		
+
+
+				</div><!--/content-primary -->		
+
+				<div class="content-secondary">
+
+					<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+
+							<h3>More in this section</h3>
+
+							<ul data-role="listview" data-theme="c" data-dividertheme="d">
+
+								<li data-role="list-divider">Pages &amp; Dialogs</li>
+								<li data-theme="a"><a href="page-anatomy.html">Anatomy of a page</a></li>
+								<li><a href="page-template.html" data-ajax="false">Single page template</a></li>
+								<li><a href="multipage-template.html" data-ajax="false">Multi-page template</a></li>
+								<li><a href="page-titles.html">Page titles</a></li>
+								<li><a href="page-links.html">Linking pages</a></li>
+								<li><a href="page-transitions.html" data-ajax="false">Page transitions</a></li>
+								<li><a href="page-dialogs.html">Dialogs</a></li>
+								<li><a href="page-cache.html">Prefetching &amp; caching pages</a></li>
+								<li><a href="page-navmodel.html">Ajax, hashes &amp; history</a></li>
+								<li><a href="page-dynamic.html">Dynamically injecting pages</a></li>
+								<li><a href="page-scripting.html">Scripting pages</a></li>
+								<li><a href="phonegap.html">PhoneGap apps</a></li>
+								<li><a href="touchoverflow.html">touchOverflow feature</a></li>
+								<li><a href="pages-themes.html">Theming pages</a></li>
+
+							</ul>
+					</div>
+				</div>		
+
+			</div><!-- /content -->
+
+			<div data-role="footer" class="footer-docs" data-theme="c">
+					<p>&copy; 2011 The jQuery Project</p>
+			</div>
+
+			</div><!-- /page -->
+
+			</body>
+			</html>

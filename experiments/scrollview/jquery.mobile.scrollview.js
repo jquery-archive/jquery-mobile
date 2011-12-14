@@ -30,7 +30,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		
 		pagingEnabled:     false,
 		delayedClickSelector: "a,input,textarea,select,button,.ui-btn",
-		delayedClickEnabled: true
+		delayedClickEnabled: false
 	},
 
 	_makePositioned: function($ele)

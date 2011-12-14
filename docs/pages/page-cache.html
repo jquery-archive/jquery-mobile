@@ -1,0 +1,123 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>jQuery Mobile Docs - Prefetching &amp; caching pages</title> 
+	<link rel="stylesheet"  href="../../css/themes/default/" />  
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	<script src="../../js/jquery.js"></script>
+	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../_assets/js/jqm-docs.js"></script>
+	<script src="../../js/"></script>
+</head> 
+<body> 
+
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="f">
+		<h1>Prefetching &amp; caching pages</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="content-primary">		
+			
+			
+			<h2>Prefetching pages</h2>
+	
+      <p>Usually, it's a good idea to store your app's pages in several single-page templates instead of one large multi-page template. This minimizes the size of the page's DOM.</p>
+
+			<p>When using single-page templates, you can prefetch pages into the DOM so that they're available instantly when the user visits them. To prefetch a page, add the <code>data-prefetch</code> attribute to a link that points to the page. jQuery Mobile then loads the target page in the background after the primary page has loaded and the <code>pagecreate</code> event has triggered. For example:</p>
+			
+<pre><code>
+&lt;a href="prefetchThisPage.html" data-prefetch&gt; ... &lt;/a&gt;
+</code></pre>
+
+      <p>You can prefetch as many linked pages as you like. Just add <code>data-prefetch</code> to all the links you want to prefetch.</p>
+
+		  <p>Alternatively, you can prefetch a page programmatically using <code>$.mobile.loadPage()</code>:</p>
+
+<pre><code>
+$.mobile.loadPage( <var>pageUrl</var>, { showLoadMsg: false } );
+</code></pre>
+			
+			<p>Another advantage of prefetching a page is that the user doesn't see the Ajax loading message when visiting the prefetched page. The Ajax loading message only appears if the framework hasn't finished prefetching the page by the time the link is followed.</p> 
+
+			<p>Prefetching pages naturally creates additional HTTP requests and uses bandwidth, so it's wise to use this feature only in situations where it's highly likely that the prefetched page will be visited. A common scenario is a photo gallery, where you can prefetch the "previous" and "next" photo pages so that the user can move quickly between photos.</p>
+
+
+		<h2>DOM size management</h2>
+
+		<p>For animated page transitions to work, the pages you're transitioning from and to both need to be in the DOM. However, keeping old pages in the DOM quickly fills the browser's memory, and can cause some mobile browsers to slow down or even crash.</p>
+
+		<p>jQuery Mobile therefore has a simple mechanism to keep the DOM tidy. Whenever it loads a page via Ajax, jQuery Mobile flags the page to be removed from the DOM when you navigate away from it later (technically, on the <code>pagehide</code> event). If you revisit a removed page, the browser may be able to retrieve the page's HTML file from its cache. If not, it refetches the file from the server. (In the case of nested list views, jQuery Mobile removes all the pages that make up the nested list once you navigate to a page that's not part of the list.)</p>
+    
+    <p>Pages inside a multi-page template aren't affected by this feature at all - jQuery Mobile only removes pages loaded via Ajax.</p>
+
+
+    <h2>Caching pages in the DOM</h2>
+
+    <p>If you prefer, you can tell jQuery Mobile to keep previously-visited pages in the DOM instead of removing them. This lets you cache pages so that they're available instantly if the user returns to them.</p>
+
+		<p>To keep all previously-visited pages in the DOM, set the <code>domCache</code> option on the page plugin to <code>true</code>, like this:</p>
+
+<pre><code>
+$.mobile.page.prototype.options.domCache = true;
+</code></pre>
+
+		<p>Alternatively, to cache just a particular page, you can add the <code>data-dom-cache="true"</code> attribute to the page's container:</p>
+
+<pre><code>
+&lt;div data-role="page" id="cacheMe" data-dom-cache="true"&gt;
+</code></pre>
+
+		<p>You can also cache a page programmatically like this:</p>
+
+<pre><code>
+<var>pageContainerElement</var>.page({ domCache: true });
+</code></pre>
+
+    <p>The drawback of DOM caching is that the DOM can get very large, resulting in slowdowns and memory issues on some devices. If you enable DOM caching, take care to manage the DOM yourself and test thoroughly on a range of devices.</p>
+
+
+				</div><!--/content-primary -->		
+
+				<div class="content-secondary">
+
+					<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+
+							<h3>More in this section</h3>
+
+							<ul data-role="listview" data-theme="c" data-dividertheme="d">
+
+								<li data-role="list-divider">Pages &amp; Dialogs</li>
+								<li><a href="page-anatomy.html">Anatomy of a page</a></li>
+								<li><a href="page-template.html" data-ajax="false">Single page template</a></li>
+								<li><a href="multipage-template.html" data-ajax="false">Multi-page template</a></li>
+								<li><a href="page-titles.html">Page titles</a></li>
+								<li><a href="page-links.html">Linking pages</a></li>
+								<li><a href="page-transitions.html" data-ajax="false">Page transitions</a></li>
+								<li><a href="page-dialogs.html">Dialogs</a></li>
+								<li data-theme="a"><a href="page-cache.html">Prefetching &amp; caching pages</a></li>
+								<li><a href="page-navmodel.html">Ajax, hashes &amp; history</a></li>
+								<li><a href="page-dynamic.html">Dynamically injecting pages</a></li>
+								<li><a href="page-scripting.html">Scripting pages</a></li>
+								<li><a href="phonegap.html">PhoneGap apps</a></li>
+								<li><a href="touchoverflow.html">touchOverflow feature</a></li>
+								<li><a href="pages-themes.html">Theming pages</a></li>
+
+							</ul>
+					</div>
+				</div>		
+
+			</div><!-- /content -->
+
+			<div data-role="footer" class="footer-docs" data-theme="c">
+					<p>&copy; 2011 The jQuery Project</p>
+			</div>
+
+			</div><!-- /page -->
+
+			</body>
+			</html>
