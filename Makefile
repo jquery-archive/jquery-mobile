@@ -92,7 +92,7 @@ all: init css js zip notify
 # Build and minify the CSS files
 css: init
 	# Build the CSS file with the theme included
-	@@node js/r.js -o cssIn=css/themes/default/jquery.mobile.theme.css out=${OUTPUT}/${NAME}.compiled.css
+	@@node external/r.js -o cssIn=css/themes/default/jquery.mobile.theme.css out=${OUTPUT}/${NAME}.compiled.css
 	@@cat LICENSE-INFO.txt | ${VER} > ${OUTPUT}/${NAME}.css
 	@@cat ${OUTPUT}/${NAME}.compiled.css >> ${OUTPUT}/${NAME}.css
 	@@echo ${VER_MIN} > ${OUTPUT}/${NAME}.min.css
@@ -141,7 +141,7 @@ init:
 # Build and minify the JS files
 js: init
 	# Build the JavaScript file
-	@@node js/r.js -o baseUrl="js" include=jquery.mobile exclude=jquery,order out=${OUTPUT}/${NAME}.tmp.js wrap.start=${WRAP_START} wrap.end=${WRAP_END} optimize=none
+	@@node external/r.js -o baseUrl="js" include=jquery.mobile exclude=jquery,order out=${OUTPUT}/${NAME}.tmp.js wrap.start=${WRAP_START} wrap.end=${WRAP_END} optimize=none
 	@@cat LICENSE-INFO.txt | ${VER} > ${OUTPUT}/${NAME}.js
 	@@node js/amd-stripper.js ${OUTPUT}/${NAME}.tmp.js ${OUTPUT}/${NAME}.js
 	@@rm ${OUTPUT}/${NAME}.tmp.js
