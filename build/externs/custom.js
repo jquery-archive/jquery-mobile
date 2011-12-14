@@ -1,5 +1,5 @@
 /*
- * Google Closure compiler externs specifc to jQuery Mobile interal code.
+ * Google Closure compiler externs specific to jQuery Mobile interal code.
  */
 
 /**
