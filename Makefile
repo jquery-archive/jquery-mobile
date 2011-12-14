@@ -141,15 +141,18 @@ init:
 # Build and minify the JS files
 js: init
 	# Build the JavaScript file
-	@@node js/r-jqm.js -o  baseUrl="js" include=jquery.mobile exclude=jquery,order out=${OUTPUT}/${NAME}.tmp.js wrap.start=${WRAP_START} wrap.end=${WRAP_END} optimize=none
+	@@node js/r.js -o baseUrl="js" include=jquery.mobile exclude=jquery,order out=${OUTPUT}/${NAME}.tmp.js wrap.start=${WRAP_START} wrap.end=${WRAP_END} optimize=none
 	@@cat LICENSE-INFO.txt | ${VER} > ${OUTPUT}/${NAME}.js
-	@@cat ${OUTPUT}/${NAME}.tmp.js | sed "s/'order!/'/g"  >> ${OUTPUT}/${NAME}.js
+	@@node js/amd-stripper.js ${OUTPUT}/${NAME}.tmp.js ${OUTPUT}/${NAME}.js
 	@@rm ${OUTPUT}/${NAME}.tmp.js
-	# Build the minified JavaScript file
-	@@node js/r-jqm.js -o  baseUrl="js" include=jquery.mobile exclude=jquery,order out=${OUTPUT}/${NAME}.tmp.min.js wrap.start=${WRAP_START} wrap.end=${WRAP_END} optimize=uglify
+	# ..... and then minify it
 	@@echo ${VER_MIN} > ${OUTPUT}/${NAME}.min.js
-	@@cat ${OUTPUT}/${NAME}.tmp.min.js | sed "s/'order!/'/g" >> ${OUTPUT}/${NAME}.min.js
-	@@rm ${OUTPUT}/${NAME}.tmp.min.js
+	@@java -XX:ReservedCodeCacheSize=64m \
+				-jar build/google-compiler-20111003.jar \
+				--js ${OUTPUT}/${NAME}.js \
+				--js_output_file ${OUTPUT}/${NAME}.tmp.js
+	@@cat ${OUTPUT}/${NAME}.tmp.js >> ${OUTPUT}/${NAME}.min.js
+	@@rm ${OUTPUT}/${NAME}.tmp.js
 	# -------------------------------------------------
 
 
