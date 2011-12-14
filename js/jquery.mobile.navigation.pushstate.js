@@ -87,7 +87,7 @@
 			// Ensuring each history entry has a state object means that onPopState()
 			// will always trigger our hashchange callback even when a hashchange event
 			// is not fired.
-			history.replaceState( state, document.title, href );
+			window.history.replaceState( state, document.title, href );
 		},
 
 		// on popstate (ie back or forward) we need to replace the hash that was there previously
@@ -121,7 +121,7 @@
 
 			// if there's no hash, we need to replacestate for returning to home
 			if ( location.hash === "" ) {
-				history.replaceState( self.state(), document.title, location.href );
+				window.history.replaceState( self.state(), document.title, location.href );
 			}
 		}
 	});

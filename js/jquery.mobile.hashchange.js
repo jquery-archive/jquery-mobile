@@ -322,7 +322,7 @@
           // prettify the back/next history menu entries. Since IE sometimes
           // errors with "Unspecified error" the very first time this is set
           // (yes, very useful) wrap this with a try/catch block.
-          doc.onpropertychange = function(){
+          doc.onpropertychange = function(event){
             try {
               if ( event.propertyName === 'title' ) {
                 iframe.document.title = doc.title;

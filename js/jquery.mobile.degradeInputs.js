@@ -30,7 +30,7 @@ $( document ).bind( "pagecreate create", function( e ){
 		return;
 	}
 
-	options = page.options;
+	var options = page.options;
 
 	// degrade inputs to avoid poorly implemented native functionality
 	$( e.target ).find( "input" ).not( page.keepNativeSelector() ).each(function() {

@@ -161,7 +161,7 @@ $.Widget.prototype = {
 	_getCreateOptions: function() {
 		var options = {};
 		if ( $.metadata ) {
-			options = $.metadata.get( element )[ this.widgetName ];
+			options = $.metadata.get( this.element )[ this.widgetName ];
 		}
 		return options;
 	},

@@ -143,6 +143,9 @@ js: init
 	@@echo ${VER_MIN} > ${OUTPUT}/${NAME}.min.js
 	@@java -XX:ReservedCodeCacheSize=64m \
 				-jar build/google-compiler-20111003.jar \
+				--warning_level VERBOSE \
+				--externs build/externs/jquery-1.6.js \
+				--externs build/externs/custom.js \
 				--js ${OUTPUT}/${NAME}.js \
 				--js_output_file ${OUTPUT}/${NAME}.tmp.js
 	@@cat ${OUTPUT}/${NAME}.tmp.js >> ${OUTPUT}/${NAME}.min.js
