@@ -245,6 +245,19 @@
 					return ( u.hash && ( u.hrefNoHash === documentUrl.hrefNoHash || ( documentBaseDiffers && u.hrefNoHash === documentBase.hrefNoHash ) ) );
 				}
 				return (/^#/).test( u.href );
+			},
+
+
+			// Some embedded browsers, like the web view in Phone Gap, allow cross-domain XHR
+			// requests if the document doing the request was loaded via the file:// protocol.
+			// This is usually to allow the application to "phone home" and fetch app specific
+			// data. We normally let the browser handle external/cross-domain urls, but if the
+			// allowCrossDomainPages option is true, we will allow cross-domain http/https
+			// requests to go through our page loading logic.
+			isPermittedCrossDomainRequest: function( docUrl, reqUrl ) {
+				return $.mobile.allowCrossDomainPages
+					&& docUrl.protocol === "file:"
+					&& reqUrl.search( /^https?:/ ) != -1;
 			}
 		},
 
@@ -1220,7 +1233,6 @@
 		return path.makeUrlAbsolute( url, base);
 	}
 
-
 	//The following event bindings should be bound after mobileinit has been triggered
 	//the following function is called in the init file
 	$.mobile._registerInternalEvents = function(){
@@ -1256,10 +1268,7 @@
 
 			url = path.makeUrlAbsolute(  url, getClosestBaseUrl($this) );
 
-			// More info about what's going on here is up in useDefaultUrlHandling in the Click routing.
-			// Basically if we loaded via file:// and we've got "allowCrossDomainPages" true, we should use changePage.
-			isCrossDomainPageLoad = ( $.mobile.allowCrossDomainPages && documentUrl.protocol === "file:");
-			if(( path.isExternal( url ) && !isCrossDomainPageLoad) || target ) {
+			if(( path.isExternal( url ) && !path.isPermittedCrossDomainRequest(documentUrl, url)) || target ) {
 				return;
 			}
 
@@ -1367,12 +1376,11 @@
 				// data. We normally let the browser handle external/cross-domain urls, but if the
 				// allowCrossDomainPages option is true, we will allow cross-domain http/https
 				// requests to go through our page loading logic.
-				isCrossDomainPageLoad = ( $.mobile.allowCrossDomainPages && documentUrl.protocol === "file:" && href.search( /^https?:/ ) != -1 ),
 
 				//check for protocol or rel and its not an embedded page
 				//TODO overlap in logic from isExternal, rel=external check should be
 				//     moved into more comprehensive isExternalLink
-				isExternal = useDefaultUrlHandling || ( path.isExternal( href ) && !isCrossDomainPageLoad );
+				isExternal = useDefaultUrlHandling || ( path.isExternal( href ) && !path.isPermittedCrossDomainRequest(documentUrl, href) );
 
 			if( isExternal ) {
 				httpCleanup();
