@@ -1213,7 +1213,7 @@
 		var url = $( ele ).closest( ".ui-page" ).jqmData( "url" ),
 			base = documentBase.hrefNoHash;
 
-		if ( !url || !path.isPath( url ) ) {
+		if ( !url || !path.isPath( url ) || $.support.dynamicBaseTag ) {
 			url = base;
 		}
 
