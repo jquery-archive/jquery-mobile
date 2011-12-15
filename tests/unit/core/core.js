@@ -145,4 +145,18 @@
 		same( $("#encoded").getEncodedText(), "foo&gt;");
 		same( $("#unencoded").getEncodedText(), "foo");
 	});
+
+	test( "closestPageData returns the parent's page data", function() {
+		var pageChild = $( "#page-child" );
+
+		$( "#parent-page" ).data( "page", { foo: "bar" } );
+		same( $.mobile.closestPageData( pageChild ).foo, "bar" );
+	});
+
+	test( "closestPageData returns the parent dialog's page data", function() {
+		var dialogChild = $( "#dialog-child" );
+
+		$( "#parent-dialog" ).data( "page", { foo: "bar" } );
+		same( $.mobile.closestPageData(dialogChild).foo, "bar" );
+	});
 })(jQuery);
