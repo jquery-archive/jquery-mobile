@@ -7,7 +7,7 @@ define( [ "jquery" ], function( $, undefined ) {
 	var nsNormalizeDict = {};
 
 	// jQuery.mobile configurable options
-	$.extend( $.mobile, {
+	$.extend( { mobile: {
 
 		// Namespace used framework-wide for data-attrs. Default is no namespace
 		ns: "",
@@ -174,7 +174,7 @@ define( [ "jquery" ], function( $, undefined ) {
 				.closest(':jqmData(role="page"), :jqmData(role="dialog")')
 				.data("page");
 		}
-	});
+	}});
 
 	// Mobile version of data and removeData and hasData methods
 	// ensures all data is set and retrieved using jQuery Mobile's data namespace

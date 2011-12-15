@@ -2,7 +2,7 @@
 * "textinput" plugin for text inputs, textareas
 */
 
-define( [ "jquery", "jquery.mobile.widget", "jquery.mobile.buttonMarkup"  ], function( $, undefined ) {
+define( [ "jquery.mobile.core", "jquery.mobile.widget", "jquery.mobile.degradeInputs"  ], function() {
 
 $.widget( "mobile.textinput", $.mobile.widget, {
 	options: {

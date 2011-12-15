@@ -2,7 +2,7 @@
 * "buttons" plugin - for making button-like links
 */
 
-define( [ "jquery", "jquery.mobile.vmouse" ], function( $, undefined ) {
+define( [ "jquery.mobile.core", "jquery.mobile.vmouse" ], function() {
 
 $.fn.buttonMarkup = function( options ) {
 	options = options || {};
@@ -76,6 +76,7 @@ $.fn.buttonMarkup = function( options ) {
 		el.removeClass( "ui-link" ).addClass( buttonClass );
 
 		buttonInner.className = innerClass;
+		buttonInner.setAttribute("aria-hidden", "true");
 
 		buttonText.className = textClass;
 		buttonInner.appendChild( buttonText );

@@ -2,7 +2,7 @@
 * core utilities for auto ajax navigation, base tag mgmt,
 */
 
-define( [ "jquery", "jquery.mobile.core", "jquery.mobile.hashchange", "jquery.mobile.event" ], function( $, undefined ) {
+define( [ "jquery.mobile.core", "jquery.mobile.hashchange", "jquery.mobile.event", "jquery.mobile.page" ], function() {
 
 	//define vars for interal use
 	var $window = $( window ),
@@ -536,6 +536,8 @@ define( [ "jquery", "jquery.mobile.core", "jquery.mobile.hashchange", "jquery.mo
 			//reset toPage height back
 			if( !touchOverflow ){
 				toPage.height( "" );
+				// Send focus to the newly shown page
+				reFocus( toPage );
 			}
 
 			// Jump to top or prev scroll, sometimes on iOS the page has not rendered yet.
@@ -1163,12 +1165,6 @@ define( [ "jquery", "jquery.mobile.core", "jquery.mobile.hashchange", "jquery.mo
 
 				//remove initial build class (only present on first pageshow)
 				$html.removeClass( "ui-mobile-rendering" );
-
-				// Send focus to the newly shown page. Moved from promise .done binding in transitionPages
-				// itself to avoid ie bug that reports offsetWidth as > 0 (core check for visibility)
-				// despite visibility: hidden addresses issue #2965
-				// https://github.com/jquery/jquery-mobile/issues/2965
-				reFocus( toPage );
 
 				releasePageTransitionLock();
 

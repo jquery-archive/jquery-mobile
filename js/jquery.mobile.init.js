@@ -2,7 +2,7 @@
 * "init" - Initialize the framework
 */
 
-define( [ "jquery", "jquery.mobile.core", "jquery.mobile.navigation" ], function( $, undefined ) {
+define( [ "jquery.mobile.core", "jquery.mobile.navigation", "jquery.mobile.navigation.pushState" ], function() {
 	var	$html = $( "html" ),
 			$head = $( "head" ),
 			$window = $( window );
@@ -98,6 +98,24 @@ define( [ "jquery", "jquery.mobile.core", "jquery.mobile.navigation" ], function
 			}
 		}
 	});
+	
+	// This function injects a meta viewport tag to prevent scaling. Off by default, on by default when touchOverflow scrolling is enabled
+	function disableZoom() {
+		var cont = "user-scalable=no",
+			meta = $( "meta[name='viewport']" );
+			
+		if( meta.length ){
+			meta.attr( "content", meta.attr( "content" ) + ", " + cont );
+		}
+		else{
+			$( "head" ).prepend( "<meta>", { "name": "viewport", "content": cont } );
+		}
+	}
+	
+	// if touch-overflow is enabled, disable user scaling, as it creates usability issues
+	if( $.support.touchOverflow && $.mobile.touchOverflowEnabled && !$.mobile.touchOverflowZoomEnabled ){
+		disableZoom();
+	}
 
 	// initialize events now, after mobileinit has occurred
 	$.mobile._registerInternalEvents();
