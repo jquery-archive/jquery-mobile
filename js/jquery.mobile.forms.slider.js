@@ -2,7 +2,7 @@
 * "slider" plugin
 */
 
-define( [ "jquery.mobile.widget", "jquery.mobile.buttonMarkup", "jquery.mobile.vmouse" ], function() {
+define( [ "jquery.mobile.core", "jquery.mobile.widget", "jquery.mobile.forms.textInput" ], function() {
 
 $.widget( "mobile.slider", $.mobile.widget, {
 	options: {

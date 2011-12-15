@@ -2,7 +2,7 @@
 * custom "selectmenu" plugin
 */
 
-define( [ "jquery.mobile.forms.select", "jquery.mobile.buttonMarkup"  ], function() {
+define( [ "jquery.mobile.core", "jquery.mobile.forms.select" ], function() {
 	var extendSelect = function( widget ){
 
 		var select = widget.select,

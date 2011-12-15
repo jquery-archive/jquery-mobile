@@ -2,7 +2,7 @@
 * "navbar" plugin
 */
 
-define( [ "jquery.mobile.widget", "jquery.mobile.buttonMarkup"  ], function() {
+define( [ "jquery.mobile.widget" ], function() {
 
 $.widget( "mobile.navbar", $.mobile.widget, {
 	options: {
