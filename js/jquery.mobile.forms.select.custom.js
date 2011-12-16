@@ -349,6 +349,7 @@
 					self.menuType = "page";
 					self.menuPageContent.append( self.list );
 					self.menuPage.find("div .ui-title").text(self.label.text());
+					self.menuPage.find('.ui-corner-bottom').removeClass('ui-corner-bottom');
 					$.mobile.changePage( self.menuPage, {
 						transition: $.mobile.defaultDialogTransition
 					});

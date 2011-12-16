@@ -13,22 +13,25 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 	_create: function() {
 		var self = this,
 			$el = this.element,
-			headerCloseButton = $( "<a href='#' data-" + $.mobile.ns + "icon='delete' data-" + $.mobile.ns + "iconpos='notext'>"+ this.options.closeBtnText + "</a>" );
+			headerCloseButton = $( "<a href='#' data-" + $.mobile.ns + "icon='delete' data-" + $.mobile.ns + "iconpos='notext'>"+ this.options.closeBtnText + "</a>" ),
+			hasList = ($el.find('ul[data-role="listview"]').length>0)?true:false;
 
 		$el.addClass( "ui-overlay-" + this.options.overlayTheme );
 
 		// Class the markup for dialog styling
 		// Set aria role
-		$el.attr( "role", "dialog" )
+		var footer = $el.attr( "role", "dialog" )
 			.addClass( "ui-dialog" )
 			.find( ":jqmData(role='header')" )
 			.addClass( "ui-corner-top ui-overlay-shadow" )
 				.prepend( headerCloseButton )
 			.end()
 			.find( ":jqmData(role='content'),:jqmData(role='footer')" )
-				.addClass( "ui-overlay-shadow" )
-				.last()
-				.addClass( "ui-corner-bottom" );
+				.addClass( "ui-overlay-shadow" );
+		
+		if(!hasList){	
+			footer.last().addClass( "ui-corner-bottom" );
+		}
 
 		// this must be an anonymous function so that select menu dialogs can replace
 		// the close method. This is a change from previously just defining data-rel=back
