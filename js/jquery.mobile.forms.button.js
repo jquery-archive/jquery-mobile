@@ -17,6 +17,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 	},
 	_create: function() {
 		var $el = this.element,
+            $button,
 			o = this.options,
 			type,
 			name,
@@ -37,6 +38,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 			})
 			.append( $el.addClass( "ui-btn-hidden" ) );
 
+        $button = this.button;
 		type = $el.attr( "type" );
 		name = $el.attr( "name" );
 
@@ -62,6 +64,16 @@ $.widget( "mobile.button", $.mobile.widget, {
 					}
 				});
 		}
+
+        $el.bind({
+            focus: function() {
+                $button.addClass( $.mobile.focusClass );
+            },
+
+            blur: function() {
+                $button.removeClass( $.mobile.focusClass );
+            }
+        });
 
 		this.refresh();
 	},

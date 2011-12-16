@@ -71,10 +71,10 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		}
 
 		input.focus(function() {
-				focusedEl.addClass( "ui-focus" );
+				focusedEl.addClass( $.mobile.focusClass );
 			})
 			.blur(function(){
-				focusedEl.removeClass( "ui-focus" );
+				focusedEl.removeClass( $.mobile.focusClass );
 			});
 
 		// Autogrow
