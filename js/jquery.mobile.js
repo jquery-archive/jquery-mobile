@@ -1,3 +1,4 @@
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 define([
 	'jquery.ui.widget',
 	'jquery.mobile.widget',
@@ -36,3 +37,4 @@ define([
 ], function() {
 	require( [ 'jquery.mobile.init' ] );
 });
+//>>excludeEnd("jqmBuildExclude");

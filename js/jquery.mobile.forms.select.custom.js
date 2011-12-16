@@ -2,7 +2,10 @@
 * custom "selectmenu" plugin
 */
 
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 define( [ "jquery.mobile.core", "jquery.mobile.forms.select" ], function() {
+//>>excludeEnd("jqmBuildExclude");
+(function( $, undefined ) {
 	var extendSelect = function( widget ){
 
 		var select = widget.select,
@@ -490,4 +493,7 @@ define( [ "jquery.mobile.core", "jquery.mobile.forms.select" ], function() {
 			extendSelect( selectmenuWidget );
 		}
 	});
+})( jQuery );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
+//>>excludeEnd("jqmBuildExclude");

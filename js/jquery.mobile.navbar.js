@@ -2,7 +2,10 @@
 * "navbar" plugin
 */
 
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 define( [ "jquery.mobile.widget" ], function() {
+//>>excludeEnd("jqmBuildExclude");
+(function( $, undefined ) {
 
 $.widget( "mobile.navbar", $.mobile.widget, {
 	options: {
@@ -47,4 +50,7 @@ $( document ).bind( "pagecreate create", function( e ){
 	$( $.mobile.navbar.prototype.options.initSelector, e.target ).navbar();
 });
 
+})( jQuery );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
+//>>excludeEnd("jqmBuildExclude");

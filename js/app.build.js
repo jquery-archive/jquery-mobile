@@ -1,21 +1,17 @@
 ({
 	appDir: "..",
-	baseUrl: "js/",
-	dir: "../dist",
+	baseUrl: "js",
+	dir: "../compiled",
 
 	//optimize: "none",
 
-	modules: [
-		{
-		 name: "jquery.mobile",
-		 //include: [ "almond" ],
-		 exclude: [ "jquery", "order" ]
-		}
-	],
-
 	wrap: {
-	    start: "(function() {",
-	    end: '\nif ( typeof define === "function" && define.amd ) {\ndefine( "jquery.mobile", [], function () { return jQuery.mobile; } );\n}\n}());'
+	    start: "(function( \$, undefined ) {",
+	    end: '}( jQuery ));'
+	},
+
+	pragmas: {
+		jqmExclude: true
 	},
 
 	dirExclusionRegExp: /^build|^compiled|^external|^tests/

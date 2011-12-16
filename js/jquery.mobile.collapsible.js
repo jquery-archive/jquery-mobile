@@ -2,7 +2,10 @@
 * "collapsible" plugin
 */
 
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 define( [ "jquery.mobile.widget" ], function() {
+//>>excludeEnd("jqmBuildExclude");
+(function( $, undefined ) {
 
 $.widget( "mobile.collapsible", $.mobile.widget, {
 	options: {
@@ -115,4 +118,7 @@ $( document ).bind( "pagecreate create", function( e ){
 	$( $.mobile.collapsible.prototype.options.initSelector, e.target ).collapsible();
 });
 
+})( jQuery );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
+//>>excludeEnd("jqmBuildExclude");

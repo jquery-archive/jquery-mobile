@@ -2,12 +2,15 @@
 * "core" - The base file for jQm
 */
 
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 define(function() {
+//>>excludeEnd("jqmBuildExclude");
+(function( $, window, undefined ) {
 
 	var nsNormalizeDict = {};
 
 	// jQuery.mobile configurable options
-	$.extend( { mobile: {
+	$.extend( $.mobile, {
 
 		// Namespace used framework-wide for data-attrs. Default is no namespace
 		ns: "",
@@ -158,7 +161,7 @@ define(function() {
 
 			return ltr || defaultTheme || "a";
 		}
-	}});
+	});
 
 	// Mobile version of data and removeData and hasData methods
 	// ensures all data is set and retrieved using jQuery Mobile's data namespace
@@ -233,5 +236,8 @@ define(function() {
 	$.find.matchesSelector = function( node, expr ) {
 		return $.find( expr, null, null, [ node ] ).length > 0;
 	};
+})( jQuery, this );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
+//>>excludeEnd("jqmBuildExclude");
 

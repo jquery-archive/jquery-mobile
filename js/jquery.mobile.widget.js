@@ -2,7 +2,10 @@
 * widget factory extentions for mobile
 */
 
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 define( [ "jquery.ui.widget" ], function() {
+//>>excludeEnd("jqmBuildExclude");
+(function( $, undefined ) {
 
 $.widget( "mobile.widget", {
 	// decorate the parent _createWidget to trigger `widgetinit` for users
@@ -46,4 +49,7 @@ $.widget( "mobile.widget", {
 	}
 });
 
+})( jQuery );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
+//>>excludeEnd("jqmBuildExclude");

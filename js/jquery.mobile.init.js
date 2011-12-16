@@ -2,7 +2,10 @@
 * "init" - Initialize the framework
 */
 
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 define( [ "jquery.mobile.core", "jquery.mobile.navigation", "jquery.mobile.navigation.pushState" ], function() {
+//>>excludeEnd("jqmBuildExclude");
+( function( $, window, undefined ) {
 	var	$html = $( "html" ),
 			$head = $( "head" ),
 			$window = $( window );
@@ -140,4 +143,7 @@ define( [ "jquery.mobile.core", "jquery.mobile.navigation", "jquery.mobile.navig
 		// hide iOS browser chrome on load
 		$window.load( $.mobile.silentScroll );
 	});
+}( jQuery, this ));
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
+//>>excludeEnd("jqmBuildExclude");

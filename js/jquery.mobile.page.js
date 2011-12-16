@@ -2,7 +2,10 @@
 * "page" plugin
 */
 
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 define( [ "jquery.mobile.widget" ], function() {
+//>>excludeEnd("jqmBuildExclude");
+(function( $, undefined ) {
 
 $.widget( "mobile.page", $.mobile.widget, {
 	options: {
@@ -31,4 +34,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 		return options.keepNativeDefault;
 	}
 });
+})( jQuery );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
+//>>excludeEnd("jqmBuildExclude");
