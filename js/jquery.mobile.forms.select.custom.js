@@ -19,7 +19,7 @@
 				"<div class='ui-title'>" + label.getEncodedText() + "</div>"+
 				"</div>"+
 				"<div data-" + $.mobile.ns + "role='content'></div>"+
-				"</div>" ).appendTo( $.mobile.pageContainer ).page(),
+				"</div>" ),
 
 			listbox =  $("<div>", { "class": "ui-selectmenu ui-selectmenu-hidden ui-overlay-shadow ui-corner-all ui-body-" + widget.options.overlayTheme + " " + $.mobile.defaultDialogTransition } ).insertAfter(screen),
 
@@ -44,9 +44,9 @@
 				"class": "ui-btn-left"
 			}).attr( "data-" + $.mobile.ns + "iconpos", "notext" ).attr( "data-" + $.mobile.ns + "icon", "delete" ).appendTo( header ).buttonMarkup(),
 
-			menuPageContent = menuPage.find( ".ui-content" ),
-
-			menuPageClose = menuPage.find( ".ui-header a" );
+			menuPageContent,
+			
+			menuPageClose;
 
 
 		$.extend( widget, {
@@ -316,6 +316,11 @@
 				}
 
 				if ( menuHeight > screenHeight - 80 || !$.support.scrollTop ) {
+					
+					self.menuPage.appendTo( $.mobile.pageContainer ).page();					
+					self.menuPageContent = menuPage.find( ".ui-content" );
+					self.menuPageClose = menuPage.find( ".ui-header a" );
+					
 					// prevent the parent page from being removed from the DOM,
 					// otherwise the results of selecting a list item in the dialog
 					// fall into a black hole
