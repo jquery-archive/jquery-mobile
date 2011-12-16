@@ -112,11 +112,11 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 				},
 
 				focus: function() {
-					label.addClass( "ui-focus" );
+					label.addClass( $.mobile.focusClass );
 				},
 
 				blur: function() {
-					label.removeClass( "ui-focus" );
+					label.removeClass( $.mobile.focusClass );
 				}
 			});
 
