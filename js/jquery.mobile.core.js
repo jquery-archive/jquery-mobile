@@ -1,4 +1,4 @@
-/* 
+/*
 * "core" - The base file for jQm
 */
 
@@ -23,8 +23,8 @@
 		// Class used for "active" button state, from CSS framework
 		activeBtnClass: "ui-btn-active",
 
-        // Class used for "focus" form element state, from CSS framework
-        focusClass: "ui-focus",
+		// Class used for "focus" form element state, from CSS framework
+		focusClass: "ui-focus",
 
 		// Automatically handle clicks and form submissions through Ajax, when same-domain
 		ajaxEnabled: true,
@@ -155,7 +155,7 @@
 				}
 				e = e.parentNode;
 			}
-			
+
 			// Return the theme letter we found, if none, return the
 			// specified default.
 
