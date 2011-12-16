@@ -8448,7 +8448,7 @@ function (lang,   logger,   file,          parse,    optimize,   pragma,
                 value = value.split(",");
             }
 
-            if (prop.indexOf("paths.") === 0 || prop.indexOf("wrap.") === 0 || prop.indexOf("pragmas.") === 0 ) {
+            if (prop.indexOf("paths.") === 0 || prop.indexOf("wrap.") === 0 || prop.indexOf("pragmas.") === 0 || prop.indexOf("pragmasOnSave.") === 0) {
                 stringDotToObj(result, prop.split('.')[0], prop, value);
             } else {
                 result[prop] = value;
