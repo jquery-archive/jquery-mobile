@@ -77,8 +77,6 @@
 //         part of jQuery BBQ, but also be available separately.
 
 (function($,window,undefined){
-  '$:nomunge'; // Used by YUI compressor.
-
   // Reused string.
   var str_hashchange = 'hashchange',
     
