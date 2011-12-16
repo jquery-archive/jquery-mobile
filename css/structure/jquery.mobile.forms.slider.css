@@ -5,7 +5,7 @@ select.ui-slider-switch { display: none; }
 div.ui-slider { position: relative; display: inline-block; overflow: visible; height: 15px; padding: 0; margin: 0 2% 0 20px; top: 4px; width: 65%; }
 div.ui-slider-switch { width: 99.8%; }
 .ui-field-contain div.ui-slider-switch { width: 50%; }
-a.ui-slider-handle { position: absolute; z-index: 10;  top: 50%; width: 28px; height: 28px; margin-top: -15px; margin-left: -15px; }
+a.ui-slider-handle { position: absolute; z-index: 10;  top: 50%; width: 28px; height: 28px; margin-top: -15px; margin-left: -15px; outline: 0; }
 a.ui-slider-handle .ui-btn-inner { padding-left: 0; padding-right: 0; }
 @media all and (min-width: 480px){
 	.ui-field-contain label.ui-slider { vertical-align: top;  display: inline-block;  width: 20%;  margin: 0 2% 0 0; }
