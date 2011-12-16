@@ -2,7 +2,10 @@
 * "checkboxradio" plugin
 */
 
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 define( [ "jquery.mobile.core", "jquery.mobile.widget" ], function() {
+//>>excludeEnd("jqmBuildExclude");
+(function( $, undefined ) {
 
 $.widget( "mobile.checkboxradio", $.mobile.widget, {
 	options: {
@@ -193,4 +196,7 @@ $( document ).bind( "pagecreate create", function( e ){
 	$.mobile.checkboxradio.prototype.enhanceWithin( e.target );
 });
 
+})( jQuery );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
+//>>excludeEnd("jqmBuildExclude");

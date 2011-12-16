@@ -76,9 +76,9 @@
 //         extra awesomeness that BBQ provides. This plugin will be included as
 //         part of jQuery BBQ, but also be available separately.
 
-define( [ "jquery" ], function( $, undefined ){
+(function($,window,undefined){
   '$:nomunge'; // Used by YUI compressor.
-  
+
   // Reused string.
   var str_hashchange = 'hashchange',
     
@@ -378,4 +378,4 @@ define( [ "jquery" ], function( $, undefined ){
     return self;
   })();
   
-});
+})(jQuery,this);

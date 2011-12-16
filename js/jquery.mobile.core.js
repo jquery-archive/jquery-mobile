@@ -1,13 +1,16 @@
-/*
+/* 
 * "core" - The base file for jQm
 */
 
-define( [ "jquery" ], function( $, undefined ) {
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+define(function() {
+//>>excludeEnd("jqmBuildExclude");
+(function( $, window, undefined ) {
 
 	var nsNormalizeDict = {};
 
 	// jQuery.mobile configurable options
-	$.extend( { mobile: {
+	$.extend( $.mobile, {
 
 		// Namespace used framework-wide for data-attrs. Default is no namespace
 		ns: "",
@@ -37,9 +40,6 @@ define( [ "jquery" ], function( $, undefined ) {
 
 		// Minimum scroll distance that will be remembered when returning to a page
 		minScrollBack: 250,
-		
-		// Enable touch-overflow scrolling for better transitions, in supporting browsers
-		touchOverflowEnabled: false,
 
 		// Set default dialog transition - 'none' for no transitions
 		defaultDialogTransition: "pop",
@@ -155,26 +155,13 @@ define( [ "jquery" ], function( $, undefined ) {
 				}
 				e = e.parentNode;
 			}
-
+			
 			// Return the theme letter we found, if none, return the
 			// specified default.
 
 			return ltr || defaultTheme || "a";
-		},
-
-		// TODO the following $ and $.fn extensions can/probably should be moved into jquery.mobile.core.helpers
-		//
-		// Find the closest javascript page element to gather settings data jsperf test
-		// http://jsperf.com/single-complex-selector-vs-many-complex-selectors/edit
-		// possibly naive, but it shows that the parsing overhead for *just* the page selector vs
-		// the page and dialog selector is negligable. This could probably be speed up by
-		// doing a similar parent node traversal to the one found in the inherited theme code above
-		closestPageData: function( $target ) {
-			return $target
-				.closest(':jqmData(role="page"), :jqmData(role="dialog")')
-				.data("page");
 		}
-	}});
+	});
 
 	// Mobile version of data and removeData and hasData methods
 	// ensures all data is set and retrieved using jQuery Mobile's data namespace
@@ -249,5 +236,8 @@ define( [ "jquery" ], function( $, undefined ) {
 	$.find.matchesSelector = function( node, expr ) {
 		return $.find( expr, null, null, [ node ] ).length > 0;
 	};
+})( jQuery, this );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
+//>>excludeEnd("jqmBuildExclude");
 

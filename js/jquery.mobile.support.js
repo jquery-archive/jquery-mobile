@@ -2,7 +2,10 @@
 * support tests
 */
 
-define( [ "jquery", "jquery.mobile.media" ], function( $, undefined ) {
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+define( [ "jquery.mobile.media" ], function() {
+//>>excludeEnd("jqmBuildExclude");
+(function( $, undefined ) {
 
 var fakeBody = $( "<body>" ).prependTo( "html" ),
 	fbCSS = fakeBody[ 0 ].style,
@@ -117,4 +120,7 @@ if ( !$.support.boxShadow ) {
 	$( "html" ).addClass( "ui-mobile-nosupport-boxshadow" );
 }
 
+})( jQuery );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
+//>>excludeEnd("jqmBuildExclude");

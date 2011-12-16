@@ -2,7 +2,10 @@
 * "degradeInputs" plugin - degrades inputs to another type after custom enhancements are made.
 */
 
-define( [ "jquery", "jquery.mobile.page" ], function( $, undefined ) {
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+define( [ "jquery.mobile.page" ], function() {
+//>>excludeEnd("jqmBuildExclude");
+(function( $, undefined ) {
 
 $.mobile.page.prototype.options.degradeInputs = {
 	color: false,
@@ -24,7 +27,7 @@ $.mobile.page.prototype.options.degradeInputs = {
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ){
 
-	var page = $.mobile.closestPageData( $(e.target) );
+	var page = $(e.target).closest(':jqmData(role="page")').data("page"), options;
 
 	if( !page ) {
 		return;
@@ -51,4 +54,7 @@ $( document ).bind( "pagecreate create", function( e ){
 
 });
 
+})( jQuery );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
+//>>excludeEnd("jqmBuildExclude");

@@ -2,7 +2,10 @@
 * "page" plugin
 */
 
-define( [ "jquery", "jquery.mobile.widget" ], function( $, undefined ) {
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+define( [ "jquery.mobile.widget" ], function() {
+//>>excludeEnd("jqmBuildExclude");
+(function( $, undefined ) {
 
 $.widget( "mobile.page", $.mobile.widget, {
 	options: {
@@ -18,11 +21,6 @@ $.widget( "mobile.page", $.mobile.widget, {
 		this.element
 			.attr( "tabindex", "0" )
 			.addClass( "ui-page ui-body-" + this.options.theme );
-			
-		// if touchOverflow scrolling is enabled, add class
-		if( $.support.touchOverflow && $.mobile.touchOverflowEnabled ){
-			this.element.addClass( "ui-mobile-touch-overflow" );
-		}	
 	},
 
 	keepNativeSelector: function() {
@@ -36,4 +34,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 		return options.keepNativeDefault;
 	}
 });
+})( jQuery );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
+//>>excludeEnd("jqmBuildExclude");

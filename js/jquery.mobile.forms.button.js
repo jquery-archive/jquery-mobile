@@ -2,7 +2,10 @@
 * "button" plugin - links that proxy to native input/buttons
 */
 
-define( [ "jquery", "jquery.mobile.widget", "jquery.mobile.buttonMarkup"  ], function( $, undefined ) {
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+define( [ "jquery.mobile.widget", "jquery.mobile.buttonMarkup"  ], function() {
+//>>excludeEnd("jqmBuildExclude");
+(function( $, undefined ) {
 
 $.widget( "mobile.button", $.mobile.widget, {
 	options: {
@@ -98,4 +101,7 @@ $( document ).bind( "pagecreate create", function( e ){
 	$.mobile.button.prototype.enhanceWithin( e.target );
 });
 
+})( jQuery );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
+//>>excludeEnd("jqmBuildExclude");

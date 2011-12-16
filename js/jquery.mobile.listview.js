@@ -2,7 +2,10 @@
 * "listview" plugin
 */
 
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 define( [ "jquery.mobile.widget" ], function() {
+//>>excludeEnd("jqmBuildExclude");
+(function( $, undefined ) {
 
 //Keeps track of the number of lists per page UID
 //This allows support for multiple nested list in the same page
@@ -396,4 +399,7 @@ $( document ).bind( "pagecreate create", function( e ){
 	$( $.mobile.listview.prototype.options.initSelector, e.target ).listview();
 });
 
+})( jQuery );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
+//>>excludeEnd("jqmBuildExclude");

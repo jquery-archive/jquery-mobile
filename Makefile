@@ -1,39 +1,3 @@
-# The files to include when compiling the JS files
-JSFILES = 	  js/jquery.ui.widget.js \
-			  js/jquery.mobile.widget.js \
-			  js/jquery.mobile.media.js \
-			  js/jquery.mobile.support.js \
-			  js/jquery.mobile.vmouse.js \
-			  js/jquery.mobile.event.js \
-			  js/jquery.mobile.hashchange.js \
-			  js/jquery.mobile.page.js \
-			  js/jquery.mobile.core.js \
-			  js/jquery.mobile.navigation.js \
-			  js/jquery.mobile.navigation.pushstate.js \
-			  js/jquery.mobile.transition.js \
-			  js/jquery.mobile.degradeInputs.js \
-			  js/jquery.mobile.dialog.js \
-			  js/jquery.mobile.page.sections.js \
-			  js/jquery.mobile.collapsible.js \
-			  js/jquery.mobile.collapsibleSet.js \
-			  js/jquery.mobile.fieldContain.js \
-			  js/jquery.mobile.grid.js \
-			  js/jquery.mobile.navbar.js \
-			  js/jquery.mobile.listview.js \
-			  js/jquery.mobile.listview.filter.js \
-			  js/jquery.mobile.nojs.js \
-			  js/jquery.mobile.forms.checkboxradio.js \
-			  js/jquery.mobile.forms.button.js \
-			  js/jquery.mobile.forms.slider.js \
-			  js/jquery.mobile.forms.textinput.js \
-			  js/jquery.mobile.forms.select.custom.js \
-			  js/jquery.mobile.forms.select.js \
-			  js/jquery.mobile.buttonMarkup.js \
-			  js/jquery.mobile.controlGroup.js \
-			  js/jquery.mobile.links.js \
-			  js/jquery.mobile.fixedtoolbar.js \
-			  js/jquery.mobile.init.js
-
 # The files to include when compiling the CSS files
 CSSFILES = css/structure/jquery.mobile.core.css \
 			  css/structure/jquery.mobile.transitions.css \
@@ -71,10 +35,6 @@ NAME = jquery.mobile
 STRUCTURE = jquery.mobile.structure
 deploy: NAME = jquery.mobile-${VER_OFFICIAL}
 deploy: STRUCTURE = jquery.mobile.structure-${VER_OFFICIAL}
-
-#Wrapper
-WRAP_START = "(function( $$, undefined ) {"
-WRAP_END = "}( jQuery ));"
 
 # The CSS theme being used
 THEME = default
@@ -141,9 +101,14 @@ init:
 # Build and minify the JS files
 js: init
 	# Build the JavaScript file
-	@@node external/r.js -o baseUrl="js" include=jquery.mobile exclude=jquery,order out=${OUTPUT}/${NAME}.tmp.js wrap.start=${WRAP_START} wrap.end=${WRAP_END} optimize=none
+	@@node external/r.js -o baseUrl="js" \
+			include=jquery.mobile exclude=jquery,order \
+			out=${OUTPUT}/${NAME}.tmp.js \
+			pragmasOnSave.jqmBuildExclude=true \
+			skipModuleInsertion=true \
+			optimize=none
 	@@cat LICENSE-INFO.txt | ${VER} > ${OUTPUT}/${NAME}.js
-	@@node js/amd-stripper.js ${OUTPUT}/${NAME}.tmp.js ${OUTPUT}/${NAME}.js
+	@@cat ${OUTPUT}/${NAME}.tmp.js >> ${OUTPUT}/${NAME}.js
 	@@rm ${OUTPUT}/${NAME}.tmp.js
 	# ..... and then minify it
 	@@echo ${VER_MIN} > ${OUTPUT}/${NAME}.min.js

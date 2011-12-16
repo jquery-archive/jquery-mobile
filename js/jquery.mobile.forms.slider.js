@@ -1,8 +1,10 @@
 /*
 * "slider" plugin
 */
-
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 define( [ "jquery.mobile.core", "jquery.mobile.widget", "jquery.mobile.forms.textInput" ], function() {
+//>>excludeEnd("jqmBuildExclude");
+( function( $, undefined ) {
 
 $.widget( "mobile.slider", $.mobile.widget, {
 	options: {
@@ -361,4 +363,7 @@ $( document ).bind( "pagecreate create", function( e ){
 	$.mobile.slider.prototype.enhanceWithin( e.target );
 });
 
+})( jQuery );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
+//>>excludeEnd("jqmBuildExclude");
