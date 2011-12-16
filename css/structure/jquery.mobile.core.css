@@ -71,8 +71,7 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 .ui-bar { font-size: 16px; margin: 0; }
 .ui-bar h1, .ui-bar h2, .ui-bar h3, .ui-bar h4, .ui-bar h5, .ui-bar h6 { margin: 0; padding: 0; font-size: 16px; display: inline-block; }
 
-.ui-header, .ui-footer { display: block; }
-.ui-page .ui-header, .ui-page .ui-footer { position: relative; }
+.ui-header, .ui-footer { position: relative; border-left-width: 0; border-right-width: 0; }
 .ui-header .ui-btn-left { position: absolute; left: 10px; top: .4em;  }
 .ui-header .ui-btn-right { position: absolute; right: 10px; top: .4em; }
 .ui-header .ui-title, .ui-footer .ui-title { min-height: 1.1em; text-align: center; font-size: 16px; display: block; margin: .6em 90px .8em;  padding: 0;  text-overflow: ellipsis; overflow: hidden; white-space: nowrap; outline: 0 !important; }
@@ -80,44 +79,6 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 
 /*content area*/
 .ui-content { border-width: 0; overflow: visible; overflow-x: hidden; padding: 15px; }
-.ui-page-fullscreen .ui-content { padding:0; }
-
-/* native fixed headers and footers */
-.ui-mobile-touch-overflow.ui-page.ui-native-fixed,
-.ui-mobile-touch-overflow.ui-page.ui-native-fullscreen {
-	overflow: visible;
-}
-.ui-mobile-touch-overflow.ui-native-fixed .ui-header,
-.ui-mobile-touch-overflow.ui-native-fixed .ui-footer {
-	position: fixed;
-	left: 0;
-	right: 0;
-	top: 0;
-	z-index: 200;
-}
-.ui-mobile-touch-overflow.ui-page.ui-native-fixed .ui-footer {
-	top: auto;
-	bottom: 0;
-}
-.ui-mobile-touch-overflow.ui-native-fixed .ui-content {
-	padding-top: 2.5em;
-	padding-bottom: 3em;
-	top: 0;
-	bottom: 0;
-	height: auto;
-	position: absolute;
-}
-.ui-mobile-touch-overflow.ui-native-fullscreen .ui-content {
-	padding-top: 0;
-	padding-bottom: 0;
-}
-.ui-mobile-touch-overflow.ui-native-fullscreen .ui-header,
-.ui-mobile-touch-overflow.ui-native-fullscreen .ui-footer {
-	opacity: .9;
-}
-.ui-native-bars-hidden {
-	display: none;
-}
 
 /* icons sizing */
 .ui-icon { width: 18px; height: 18px; }

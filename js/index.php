@@ -34,8 +34,7 @@ $files = array(
 	'jquery.mobile.buttonMarkup.js',
 	'jquery.mobile.controlGroup.js',
 	'jquery.mobile.links.js',
-	'jquery.mobile.fixHeaderFooter.js',
-	'jquery.mobile.fixHeaderFooter.native.js',
+	'jquery.mobile.fixedToolbar.js',
 	'jquery.mobile.init.js'
 );
 

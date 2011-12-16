@@ -31,8 +31,7 @@ JSFILES = 	  js/jquery.ui.widget.js \
 			  js/jquery.mobile.buttonMarkup.js \
 			  js/jquery.mobile.controlGroup.js \
 			  js/jquery.mobile.links.js \
-			  js/jquery.mobile.fixHeaderFooter.js \
-			  js/jquery.mobile.fixHeaderFooter.native.js \
+			  js/jquery.mobile.fixedtoolbar.js \
 			  js/jquery.mobile.init.js
 
 # The files to include when compiling the CSS files
