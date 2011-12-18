@@ -292,7 +292,8 @@ $.mobile.fixedToolbars = (function() {
 				// Add state class
 				el.addClass( "ui-fixed-inline" ).removeClass( "ui-fixed-overlay" );
 
-				if ( thisCSStop < 0 || ( el.is( ".ui-header-fixed" ) && thisCSStop !== 0 ) ) {
+				if ( thisCSStop < 0 || ( el.is( ".ui-header-fixed" ) || 
+    					( el.is( ".ui-footer-fixed" ) && immediately != true )  ) && thisCSStop !== 0 ) ) {
 
 					if ( immediately ) {
 						el.css( "top", 0);
@@ -303,7 +304,8 @@ $.mobile.fixedToolbars = (function() {
 							classes = "out reverse";
 
 							el.animationComplete(function() {
-								el.removeClass( classes ).css( "top", 0 );
+								el.removeClass( classes ).css( "top", 
+									( el.is(".ui-footer-fixed") && thisCSStop > 0 ) ? -thisCSStop : 0 );
 							}).addClass( classes );
 						}
 					}

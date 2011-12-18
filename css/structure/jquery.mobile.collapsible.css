@@ -18,3 +18,6 @@
 
 .ui-collapsible-set { margin: .5em 0; }
 .ui-collapsible-set .ui-collapsible { margin: -1px 0 0; }
+.ui-collapsible-set-horizontal { position: relative; overflow: visible; min-height: 200px; }			
+.ui-collapsible-set-horizontal .ui-collapsible-heading { width: 100%; margin: 0;}
+.ui-collapsible-set-horizontal .ui-collapsible-content { position: absolute; left: 0; right: 0; margin: 0;}
