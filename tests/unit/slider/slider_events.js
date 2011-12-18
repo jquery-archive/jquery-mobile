@@ -110,6 +110,15 @@
 		same($("#range-slider-up").attr( "type" ), "number");
 	});
 
+    test( "slider with range-background theme should have a inner range-div with corresponding theme and width", function(){
+        var slider = $("#range-background");
+        slider.focus();
+        same(slider.val(), "15");
+        var backgroundDiv = slider.next().find('.ui-slider-range-background');
+        same((Math.round(100 * parseFloat(backgroundDiv.css('width')) / parseFloat(backgroundDiv.parent().css('width')) ) + '%'), '15%');
+        ok(backgroundDiv.hasClass('ui-btn-down-c'));
+    });
+
 	// generic switch test function
 	var sliderSwitchTest = function(opts){
 		var slider = $("#slider-switch"),
