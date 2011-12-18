@@ -12,17 +12,23 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 		heading: "h1,h2,h3,h4,h5,h6,legend",
 		theme: null,
 		contentTheme: null,
+		// tabview - add navbar-grid functionality
+		grid: null,
 		iconTheme: "d",
 		initSelector: ":jqmData(role='collapsible')"
 	},
 	_create: function() {
 
 		var $el = this.element,
-			o = this.options,
+			// tabview - re-order, extend and add corners
+			collapsibleSet = $el.closest( ":jqmData(role='collapsible-set')" ).addClass( "ui-collapsible-set" ),
+			o = $.extend({
+				direction: collapsibleSet.length ? collapsibleSet.jqmData("type") : ""
+				}, this.options ),
+			flCorners = o.direction == "horizontal" ? [ "ui-corner-left", "ui-corner-right" ] : [ "ui-corner-top", "ui-corner-bottom" ],
 			collapsible = $el.addClass( "ui-collapsible" ),
 			collapsibleHeading = $el.children( o.heading ).first(),
-			collapsibleContent = collapsible.wrapInner( "<div class='ui-collapsible-content'></div>" ).find( ".ui-collapsible-content" ),
-			collapsibleSet = $el.closest( ":jqmData(role='collapsible-set')" ).addClass( "ui-collapsible-set" ),
+			collapsibleContent = collapsible.wrapInner( "<div class='ui-collapsible-content'></div>" ).find( ".ui-collapsible-content" ),			
 			collapsiblesInSet = collapsibleSet.children( ":jqmData(role='collapsible')" );
 
 		// Replace collapsibleHeading if it's a legend
@@ -41,9 +47,16 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			if ( !o.contentTheme ) {
 				o.contentTheme = collapsibleSet.jqmData( "content-theme" );
 			}
+			// tabview - add class and grid
+			if ( o.direction == "horizontal" ) {
+				$el.closest( ":jqmData(role='collapsible-set')" ).addClass("ui-collapsible-set-horizontal")
+					.grid({ grid: this.options.grid });
+			}
 		}
 
 		collapsibleContent.addClass( ( o.contentTheme ) ? ( "ui-body-" + o.contentTheme ) : "");
+			// tabview - add bottom corners to content
+			.addClass ( ( o.direction ) ? "ui-corner-bottom" : "" );
 
 		collapsibleHeading
 			//drop heading in before content
@@ -87,23 +100,26 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			collapsiblesInSet.first()
 				.find( "a" )
 					.first()
-					.addClass( "ui-corner-top" )
+					// tabview - add flex corners					
+					.addClass( flCorners[0] )
 						.find( ".ui-btn-inner" )
-							.addClass( "ui-corner-top" );
+							.addClass( flCorners[0] );
 
 			collapsiblesInSet.last()
 				.jqmData( "collapsible-last", true )
 				.find( "a" )
 					.first()
-					.addClass( "ui-corner-bottom" )
+					// tabview - add flex corners
+					.addClass( flCorners[1] )
 						.find( ".ui-btn-inner" )
-							.addClass( "ui-corner-bottom" );
+							.addClass( flCorners[1] );
 
 
 			if ( collapsible.jqmData( "collapsible-last" ) ) {
 				collapsibleHeading
 					.find( "a" ).first().add ( collapsibleHeading.find( ".ui-btn-inner" ) )
-						.addClass( "ui-corner-bottom" );
+						// tabview - add flex corners
+						.addClass( flCorners[1] );
 			}
 		}
 
@@ -129,13 +145,44 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 
 					$this.toggleClass( "ui-collapsible-collapsed", isCollapse );
 					collapsibleContent.toggleClass( "ui-collapsible-content-collapsed", isCollapse ).attr( "aria-hidden", isCollapse );
-
-					if ( contentTheme && ( !collapsibleSet.length || collapsible.jqmData( "collapsible-last" ) ) ) {
+					
+					// tabview - exclude horizontal
+					if ( contentTheme && ( !collapsibleSet.length || collapsible.jqmData( "collapsible-last" ) && o.direction != "horizontal" ) ) {
 						collapsibleHeading
 							.find( "a" ).first().add( collapsibleHeading.find( ".ui-btn-inner" ) )
 							.toggleClass( "ui-corner-bottom", isCollapse );
 						collapsibleContent.toggleClass( "ui-corner-bottom", !isCollapse );
 					}
+					
+					// tabview - switch bottom corners - too long
+					if ( collapsibleSet.length && o.direction == "horizontal"  ) {
+						
+						var set = $el.closest('.ui-collapsible-set')
+								.find( ".ui-collapsible .ui-collapsible-heading a")
+								.find( ".ui-btn-inner" ).andSelf();
+							
+						if (!isCollapse) {
+							// straighten corners on open
+							set.each(function() {							
+								$(this).is( ".ui-corner-left") ? 
+									$(this).addClass("ui-corner-tl").removeClass("ui-corner-left") : 
+										$(this).is( ".ui-corner-right") ? 
+											$(this).addClass("ui-corner-tr").removeClass("ui-corner-right") :
+												$(this).return;
+				
+								})
+							
+						} else if ( $el.closest('.ui-collapsible-set').find( ".ui-collapsible" ).length == $el.closest('.ui-collapsible-set').find( ".ui-collapsible-collapsed" ).length ) {
+							// curve corners when all closed
+							set.each(function() {																					
+								$(this).hasClass("ui-corner-tl") ? 
+									$(this).removeClass("ui-corner-tl").addClass("ui-corner-left") : 
+										$(this).hasClass("ui-corner-tr") ? 
+											$(this).removeClass("ui-corner-tr").addClass("ui-corner-right") :
+												$(this).return;
+												});														
+							}						
+						}
 					collapsibleContent.trigger( "updatelayout" );
 				}
 			})
