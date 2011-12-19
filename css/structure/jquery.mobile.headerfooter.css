@@ -28,10 +28,17 @@
 .ui-page-footer-fixed {
 	padding-bottom: 3em;
 }
-.ui-page-fullscreen .ui-content {
+.ui-page-header-fullscreen .ui-content,
+.ui-page-footer-fullscreen .ui-content {
 	padding: 0;
 }
-.ui-fixed-hidden,
+.ui-fixed-hidden {
+	position: absolute;
+}
+.ui-page-header-fullscreen .ui-fixed-hidden,
+.ui-page-footer-fullscreen .ui-fixed-hidden {
+	left: -99999em;
+}
 .ui-footer-duplicate {
 	display: none;
 }
