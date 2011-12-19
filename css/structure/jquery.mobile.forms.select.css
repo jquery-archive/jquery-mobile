@@ -40,3 +40,6 @@ label.ui-select { font-size: 16px; line-height: 1.4;  font-weight: normal; margi
 
 /* when no placeholder is defined in a multiple select, the header height doesn't even extend past the close button.  this shim's content in there */
 .ui-selectmenu .ui-header h1:after { content: '.'; visibility: hidden; }
+
+/* TODO when the custom select css us moved out to it's own file this should be included */
+.ui-li-static .ui-select .ui-li-count { right: 38px; }
