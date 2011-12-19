@@ -73,7 +73,8 @@
 			// "fullscreen" overlay positioning
 			// NOTE - this used to be only "data-fullscreen" on page element. Support both or deprecate page?
 			if( $el.jqmData( "fullscreen" ) || $page.jqmData( "fullscreen" ) ){
-				$el.addClass( "ui-" + tbtype + "-fullscreen" );
+				$el.addClass( "ui-"+ tbtype +"-fullscreen" );
+				$page.addClass( "ui-page-" + tbtype + "-fullscreen" );
 			}
 			// If not fullscreen, add class to page to set top or bottom padding
 			else{
@@ -144,9 +145,18 @@
 		
 		show: function(){
 			var hideClass = "ui-fixed-hidden",
-				$el = this.element;
-				
-			if(  this.options.transition && this.options.transition !== "none" ){
+				$el = this.element,
+				scroll = $( window ).scrollTop(),
+				elHeight = $el.height(),
+				pHeight = $el.closest( ".ui-page" ).height(),
+				viewportHeight = Math.min( screen.height, $( window ).height() ),
+				tbtype = $el.is( ".ui-header" ) ? "header" : "footer";
+
+				if( this.options.transition && this.options.transition !== "none" &&
+					(
+					( tbtype === "header" && !this.options.fullscreen && scroll > elHeight ) ||
+					( tbtype === "footer" && !this.options.fullscreen && scroll + viewportHeight < pHeight - elHeight )
+					) || this.options.fullscreen ){
 				$el
 					.removeClass( "out " + hideClass )
 					.addClass( "in" );
@@ -159,9 +169,18 @@
 		
 		hide: function(){
 			var hideClass = "ui-fixed-hidden",
-				$el = this.element;
-				
-			if(  this.options.transition && this.options.transition !== "none" && $( window ).scrollTop() > this.element.height() ){
+				$el = this.element,
+				scroll = $( window ).scrollTop(),
+				elHeight = $el.height(),
+				pHeight = $el.closest( ".ui-page" ).height(),
+				viewportHeight = Math.min( screen.height, $( window ).height() ),
+				tbtype = $el.is( ".ui-header" ) ? "header" : "footer";
+
+				if( this.options.transition && this.options.transition !== "none" &&
+					(
+					( tbtype === "header" && !this.options.fullscreen && scroll > elHeight ) ||
+					( tbtype === "footer" && !this.options.fullscreen && scroll + viewportHeight < pHeight - elHeight )
+					) || this.options.fullscreen ){
 				$el
 					.removeClass( "in" )
 					.addClass( "out" )
