@@ -11,7 +11,7 @@
 			transition: "fade", //can be none, fade, slide (slide maps to slideup or slidedown)
 			fullscreen: false,
 			tapToggle: true,
-			scrollToggle: false,
+			hideOnScrollStop: true,
 			
 			// Browser detection! Weeee, here we go...
 			// Unfortunately, position:fixed is costly, not to mention probably impossible, to feature-detect accurately.
@@ -175,9 +175,7 @@
 		toggle: function(){
 			this[ this._visible ? "hide" : "show" ]();
 		},
-		
-		_visibleBeforeScroll: null,
-		
+				
 		_bindToggleHandlers: function(){
 			var self = this,
 				o = self.options,
@@ -193,16 +191,12 @@
 			
 			// scroll toggle
 			$( window )
-				.bind( "scrollstart", function(){
-					if( o.scrollToggle && self.visible ){
-						self.hide();
-					}
-				})
 				.bind( "scrollstop", function(){
-					if( o.scrollToggle && self._visibleBeforeScroll ){
+					if( o.tapToggle && o.hideOnScrollStop ){
 						self.hide();
 					}
 				});
+			
 		},
 		
 		destroy: function(){
