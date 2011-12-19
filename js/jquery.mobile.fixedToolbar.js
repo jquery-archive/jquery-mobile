@@ -11,7 +11,6 @@
 			transition: "fade", //can be none, fade, slide (slide maps to slideup or slidedown)
 			fullscreen: false,
 			tapToggle: true,
-			hideOnScrollStop: true,
 			
 			// Browser detection! Weeee, here we go...
 			// Unfortunately, position:fixed is costly, not to mention probably impossible, to feature-detect accurately.
@@ -144,26 +143,30 @@
 		_visible: false, 
 		
 		show: function(){
-			var hideClass = "ui-fixed-hidden";
+			var hideClass = "ui-fixed-hidden",
+				$el = this.element;
+				
 			if(  this.options.transition && this.options.transition !== "none" ){
-				this.element
+				$el
 					.removeClass( "out " + hideClass )
 					.addClass( "in" );
 			}
 			else {
-				this.element.removeClass( hideClass );
+				$el.removeClass( hideClass );
 			}
 			this._visible = true;
 		},
 		
 		hide: function(){
-			var hideClass = "ui-fixed-hidden";
-			if(  this.options.transition && this.options.transition !== "none" ){
-				this.element
+			var hideClass = "ui-fixed-hidden",
+				$el = this.element;
+				
+			if(  this.options.transition && this.options.transition !== "none" && $( window ).scrollTop() > this.element.height() ){
+				$el
 					.removeClass( "in" )
 					.addClass( "out" )
-					.animationComplete(function(){
-						$(this).addClass( hideClass );
+					.animationComplete( function(){
+						$el.addClass( hideClass );
 					});
 			}
 			else {
@@ -188,15 +191,6 @@
 						self.toggle();
 					}
 				});
-			
-			// scroll toggle
-			$( window )
-				.bind( "scrollstop", function(){
-					if( o.tapToggle && o.hideOnScrollStop ){
-						self.hide();
-					}
-				});
-			
 		},
 		
 		destroy: function(){
