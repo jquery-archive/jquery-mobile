@@ -8,7 +8,7 @@
 		options: {
 			visibleOnPageShow: true,
 			togglePageZoom: true,
-			transition: "fade", //can be false, fade, slide (slide maps to vertical slides)
+			transition: "fade", //can be none, fade, slide (slide maps to slideup or slidedown)
 			fullscreen: false,
 			tapToggle: true,
 			scrollToggle: false,
@@ -89,7 +89,7 @@
 		_addTransitionClass: function(){
 			var tclass = this.options.transition;
 				
-			if( tclass ){
+			if( tclass && tclass !== "none" ){
 				// use appropriate slide for header or footer
 				if( tclass === "slide" ){
 					tclass = this.element.is( ".ui-header" ) ? "slidedown" : "slideup";
@@ -145,7 +145,7 @@
 		
 		show: function(){
 			var hideClass = "ui-fixed-hidden";
-			if(  this.options.transition ){
+			if(  this.options.transition && this.options.transition !== "none" ){
 				this.element
 					.removeClass( "out " + hideClass )
 					.addClass( "in" );
@@ -158,7 +158,7 @@
 		
 		hide: function(){
 			var hideClass = "ui-fixed-hidden";
-			if(  this.options.transition ){
+			if(  this.options.transition && this.options.transition !== "none" ){
 				this.element
 					.removeClass( "in" )
 					.addClass( "out" )
