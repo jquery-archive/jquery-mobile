@@ -300,7 +300,7 @@ define( [ "jquery.mobile.core", "jquery.mobile.forms.select" ], function() {
 					menuWidth = self.list.parent().outerWidth(),
 					activePage = $( ".ui-page-active" ),
 					tOverflow = $.support.touchOverflow && $.mobile.touchOverflowEnabled,
-					tScrollElem = activePage.is( ".ui-native-fixed" ) ? activePage.find( ".ui-content" ) : activePage;
+					tScrollElem = activePage.is( ".ui-native-fixed" ) ? activePage.find( ".ui-content" ) : activePage,
 					scrollTop = tOverflow ? tScrollElem.scrollTop() : $( window ).scrollTop(),
 					btnOffset = self.button.offset().top,
 					screenHeight = window.innerHeight,
