@@ -4,26 +4,13 @@
 
 // TODO split out into seperate test files
 (function($){
-	var home = $.mobile.path.parseUrl( location.href ).pathname + location.search,
-		insetVal = $.mobile.listview.prototype.options.inset;
+	var home = $.mobile.path.parseUrl( location.href ).pathname;
 
 	$.mobile.defaultTransition = "none";
 
 	module( "Basic Linked list", {
 		setup: function(){
-			if( location.hash != "#basic-linked-test" ){
-				stop();
-
-				$(document).one("pagechange", function() {
-					start();
-				});
-
-				$.mobile.changePage( home );
-			}
-		},
-
-		teardown: function() {
-			$.mobile.listview.prototype.options.inset = insetVal;
+			$.testHelper.openPage( "#basic-linked-test" );
 		}
 	});
 
@@ -37,7 +24,7 @@
 	asyncTest( "Slides to the listview page when the li a is clicked", function() {
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage("#basic-linked-test");
+				$.testHelper.openPage("#basic-linked-test");
 			},
 
 			function(){
@@ -54,7 +41,7 @@
 	asyncTest( "Slides back to main page when back button is clicked", function() {
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage("#basic-link-results");
+				$.testHelper.openPage("#basic-link-results");
 			},
 
 			function(){
@@ -71,20 +58,20 @@
 	asyncTest( "Presence of ui-li-has- classes", function(){
 		$.testHelper.pageSequence( [
 			function() {
-				$.mobile.changePage( "#ui-li-has-test" );
+				$.testHelper.openPage( "#ui-li-has-test" );
 			},
 
 			function() {
 				var page = $( ".ui-page-active" ),
 					items = page.find( "li" );
 
-				ok(  items.eq( 0 ).hasClass( "ui-li-has-count"), "First LI should have ui-li-has-count class" );
-				ok(  items.eq( 0 ).hasClass( "ui-li-has-arrow"), "First LI should have ui-li-has-arrow class" );
+				ok(	items.eq( 0 ).hasClass( "ui-li-has-count"), "First LI should have ui-li-has-count class" );
+				ok(	items.eq( 0 ).hasClass( "ui-li-has-arrow"), "First LI should have ui-li-has-arrow class" );
 				ok( !items.eq( 1 ).hasClass( "ui-li-has-count"), "Second LI should NOT have ui-li-has-count class" );
-				ok(  items.eq( 1 ).hasClass( "ui-li-has-arrow"), "Second LI should have ui-li-has-arrow class" );
+				ok(	items.eq( 1 ).hasClass( "ui-li-has-arrow"), "Second LI should have ui-li-has-arrow class" );
 				ok( !items.eq( 2 ).hasClass( "ui-li-has-count"), "Third LI should NOT have ui-li-has-count class" );
 				ok( !items.eq( 2 ).hasClass( "ui-li-has-arrow"), "Third LI should NOT have ui-li-has-arrow class" );
-				ok(  items.eq( 3 ).hasClass( "ui-li-has-count"), "Fourth LI should have ui-li-has-count class" );
+				ok(	items.eq( 3 ).hasClass( "ui-li-has-count"), "Fourth LI should have ui-li-has-count class" );
 				ok( !items.eq( 3 ).hasClass( "ui-li-has-arrow"), "Fourth LI should NOT have ui-li-has-arrow class" );
 				ok( !items.eq( 4 ).hasClass( "ui-li-has-count"), "Fifth LI should NOT have ui-li-has-count class" );
 				ok( !items.eq( 4 ).hasClass( "ui-li-has-arrow"), "Fifth LI should NOT have ui-li-has-arrow class" );
@@ -98,7 +85,7 @@
 	asyncTest( "Changes page to nested list test and enhances", function() {
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage("#nested-list-test");
+				$.testHelper.openPage("#nested-list-test");
 			},
 
 			function(){
@@ -114,7 +101,7 @@
 
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage("#nested-list-test");
+				$.testHelper.openPage("#nested-list-test");
 			},
 
 			function(){
@@ -135,7 +122,7 @@
 	asyncTest( "should go back to top level when the back button is clicked", function() {
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage("#nested-list-test&ui-page=0-0");
+				$.testHelper.openPage("#nested-list-test&ui-page=0-0");
 			},
 
 			function(){
@@ -150,15 +137,14 @@
 	});
 
 	test( "nested list title should use first text node, regardless of line breaks", function(){
-		// NOTE this is a super fragile reference to the nested page, any change to the list will break it
-		ok($(":jqmData(url='nested-list-test&ui-page=0-0') .ui-title").text() === "More animals", 'Text should be "More animals"');
+		ok($('#nested-list-test .linebreaknode').text() === "More animals", 'Text should be "More animals"');
 	});
 
 	asyncTest( "Multiple nested lists on a page with same labels", function() {
 		$.testHelper.pageSequence([
 			function(){
 				// https://github.com/jquery/jquery-mobile/issues/1617
-				$.mobile.changePage("#nested-lists-test");
+				$.testHelper.openPage("#nested-lists-test");
 			},
 
 			function(){
@@ -178,7 +164,7 @@
 	asyncTest( "changes to the numbered list page and enhances it", function() {
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage("#numbered-list-test");
+				$.testHelper.openPage("#numbered-list-test");
 			},
 
 			function(){
@@ -206,11 +192,11 @@
 	asyncTest( "takes us back to the numbered list when the back button is clicked", function() {
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage('#numbered-list-test');
+				$.testHelper.openPage('#numbered-list-test');
 			},
 
 			function(){
-				$.mobile.changePage('#numbered-list-results');
+				$.testHelper.openPage('#numbered-list-results');
 			},
 
 			function(){
@@ -229,7 +215,7 @@
 	asyncTest( "changes to the read only page when hash is changed", function() {
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage("#read-only-list-test");
+				$.testHelper.openPage("#read-only-list-test");
 			},
 
 			function(){
@@ -246,7 +232,7 @@
 	asyncTest( "changes the page to the split view list and enhances it correctly.", function() {
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage("#split-list-test");
+				$.testHelper.openPage("#split-list-test");
 			},
 
 			function(){
@@ -261,7 +247,7 @@
 	asyncTest( "change the page to the split view page 1 when the first link is clicked", function() {
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage("#split-list-test");
+				$.testHelper.openPage("#split-list-test");
 			},
 
 			function(){
@@ -278,7 +264,7 @@
 	asyncTest( "Slide back to the parent list view when the back button is clicked", function() {
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage("#split-list-test");
+				$.testHelper.openPage("#split-list-test");
 			},
 
 			function(){
@@ -299,7 +285,7 @@
 	asyncTest( "Clicking on the icon (the second link) should take the user to other a href of this LI", function() {
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage("#split-list-test");
+				$.testHelper.openPage("#split-list-test");
 			},
 
 			function(){
@@ -318,13 +304,179 @@
 	asyncTest( "Makes the list divider page the active page and enhances it correctly.", function() {
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage("#list-divider-test");
+				$.testHelper.openPage("#list-divider-test");
 			},
 
 			function(){
 				var $new_page = $('#list-divider-test');
 				ok($new_page.find('.ui-li-divider').length == 2);
 				ok($new_page.hasClass('ui-page-active'));
+				start();
+			}
+		]);
+	});
+
+	module( "Autodividers" );
+
+	asyncTest( "Adds dividers based on first letters of list items.", function() {
+		$.testHelper.pageSequence([
+			function() {
+				$.testHelper.openPage( '#autodividers-test' );
+			},
+
+			function() {
+				var $new_page = $( '#autodividers-test' );
+				ok( $new_page.hasClass( 'ui-page-active' ) );
+				ok( $new_page.find( '.ui-li-divider' ).length === 4 );
+				start();
+			}
+		]);
+	});
+
+	asyncTest( "Responds to addition/removal of list elements after refresh.", function() {
+		$.testHelper.pageSequence([
+			function() {
+				$.testHelper.openPage( '#autodividers-test' );
+			},
+
+			function() {
+				var $new_page = $( '#autodividers-test' );
+				ok( $new_page.hasClass( 'ui-page-active' ));
+
+				var $list = $new_page.find( 'ul' );
+
+				// should remove all existing dividers
+				ok( $new_page.find( 'li:contains("SHOULD REMOVE")' ).length === 0 );
+
+				// add li; should add an "X" divider
+				$list.append( '<li>x is for xanthe</li>' );
+				$list.listview('refresh');
+				ok( $new_page.find( '.ui-li-divider' ).length === 5 );
+				ok( $new_page.find( '.ui-li-divider' ).is( ':contains("X")' ) );
+
+				// adding the same element again should create a valid list
+				// item but no new divider
+				ok( $new_page.find( '.ui-li-static' ).length === 5 );
+				$list.append( '<li>x is for xanthe</li>' );
+				$list.listview('refresh');
+				ok( $new_page.find( '.ui-li-divider' ).length === 5 );
+				ok( $new_page.find( '.ui-li-divider:contains("X")' ).length === 1 );
+				ok( $new_page.find( '.ui-li-static' ).length === 6 );
+
+				// should ignore addition of non-li elements to the list
+				$list.find( 'li:eq(0)' ).append( '<span>ignore me</span>' );
+				$list.listview('refresh');
+				ok( $new_page.find( '.ui-li-divider' ).length === 5 );
+				ok( $new_page.find( '.ui-li-static' ).length === 6 );
+
+				// add li with the same initial letter as another li
+				// but after the X li item; should add a second "B" divider to the
+				// end of the list
+				$list.append( '<li>b is for barry</li>' );
+				$list.listview('refresh');
+				ok( $new_page.find( '.ui-li-divider' ).length === 6 );
+				ok( $new_page.find( '.ui-li-divider:contains("B")' ).length === 2 );
+
+				// remove the item with a repeated "b"; should remove the second
+				// "B" divider
+				$list.find( 'li:contains("barry")' ).remove();
+				$list.listview('refresh');
+				ok( $new_page.find( '.ui-li-divider' ).length === 5 );
+				ok( $new_page.find( '.ui-li-divider:contains("B")' ).length === 1 );
+
+				// remove li; should remove the "A" divider
+				$list.find( 'li:contains("aquaman")' ).remove();
+				$list.listview('refresh');
+				ok( $new_page.find( '.ui-li-divider' ).length === 4 );
+				ok( !$new_page.find( '.ui-li-divider' ).is( ':contains("A")' ) );
+
+				// adding another "B" item after "C" should create two separate
+				// "B" dividers
+				$list.find( 'li:contains("catwoman")' ).after( '<li>b is for barry</li>' );
+				$list.listview('refresh');
+				ok( $new_page.find( '.ui-li-divider' ).length === 5 );
+				ok( $new_page.find( '.ui-li-divider:contains("B")' ).length === 2 );
+
+				// if two dividers with the same letter have only non-dividers
+				// between them, they get merged
+
+				// removing catwoman should cause the two "B" dividers to merge
+				$list.find( 'li:contains("catwoman")' ).remove();
+				$list.listview('refresh');
+				ok( $new_page.find( '.ui-li-divider:contains("B")' ).length === 1 );
+
+				// adding another "D" item before the "D" divider should only
+				// result in a single "D" divider after merging
+				$list.find( 'li:contains("barry")' ).after( '<li>d is for dan</li>' );
+				$list.listview('refresh');
+				ok( $new_page.find( '.ui-li-divider:contains("D")' ).length === 1 );
+
+				start();
+			}
+		]);
+	});
+
+	module( "Autodividers Selector" );
+
+	asyncTest( "Adds divider text from links.", function() {
+		$.testHelper.pageSequence([
+			function() {
+				$.testHelper.openPage( '#autodividers-selector-test' );
+			},
+
+			function() {
+				var $new_page = $( '#autodividers-selector-test' );
+				ok($new_page.hasClass( 'ui-page-active' ));
+
+				// check we have the right dividers based on link text
+				var $list = $( '#autodividers-selector-test-list1' );
+				ok( $list.find( '.ui-li-divider' ).length === 4 );
+				ok( $list.find( '.ui-li-divider:eq(0):contains(A)' ).length === 1 );
+				ok( $list.find( '.ui-li-divider:eq(1):contains(B)' ).length === 1 );
+				ok( $list.find( '.ui-li-divider:eq(2):contains(C)' ).length === 1 );
+				ok( $list.find( '.ui-li-divider:eq(3):contains(D)' ).length === 1 );
+
+				// check that adding a new item with link creates the right divider
+				$list.append( '<li><a href="">e is for ethel</a></li>' );
+				$list.listview('refresh');
+				ok( $list.find( '.ui-li-divider:eq(4):contains(E)' ).length === 1 );
+
+				start();
+			}
+		]);
+	});
+
+	asyncTest( "Adds divider text based on custom selector.", function() {
+		$.testHelper.pageSequence([
+			function() {
+				$.testHelper.openPage( '#autodividers-selector-test' );
+			},
+
+			function() {
+				var $new_page = $( '#autodividers-selector-test' );
+				ok($new_page.hasClass( 'ui-page-active' ));
+
+				// check we have the right dividers based on custom selector
+				var $list = $( '#autodividers-selector-test-list2' );
+				$list.listview( 'option', 'autodividersSelector', function( elt ) {
+          var text = elt.find( 'div > span.autodividers-selector-test-selectme' ).text();
+          text = text.slice( 0, 1 ).toUpperCase();
+          return text;
+				});
+				$list.listview( 'refresh' );
+				ok( $list.find( '.ui-li-divider' ).length === 4 );
+				ok( $list.find( '.ui-li-divider:eq(0):contains(E)' ).length === 1 );
+				ok( $list.find( '.ui-li-divider:eq(1):contains(F)' ).length === 1 );
+				ok( $list.find( '.ui-li-divider:eq(2):contains(G)' ).length === 1 );
+				ok( $list.find( '.ui-li-divider:eq(3):contains(H)' ).length === 1 );
+
+				// check that adding a new item creates the right divider
+				$list.append( '<li><div><span class="autodividers-selector-test-selectme">' +
+				'i is for impy</span></div></li>' );
+				$list.listview( 'refresh' );
+
+				ok( $list.find( '.ui-li-divider:eq(4):contains(I)' ).length === 1 );
+
 				start();
 			}
 		]);
@@ -339,7 +491,7 @@
 		var $searchPage = $(searchFilterId);
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage(searchFilterId);
+				$.testHelper.openPage(searchFilterId);
 			},
 
 			function() {
@@ -356,7 +508,7 @@
 		var $searchPage = $(searchFilterId);
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage(searchFilterId);
+				$.testHelper.openPage(searchFilterId);
 			},
 
 			function() {
@@ -369,22 +521,22 @@
 		]);
 	});
 
-    asyncTest( "Filter works fine with \\W- or regexp-special-characters", function() {
-        var $searchPage = $(searchFilterId);
-        $.testHelper.pageSequence([
-            function() {
-                $.mobile.changePage(searchFilterId);
-            },
+		asyncTest( "Filter works fine with \\W- or regexp-special-characters", function() {
+				var $searchPage = $(searchFilterId);
+				$.testHelper.pageSequence([
+						function() {
+								$.testHelper.openPage(searchFilterId);
+						},
 
-            function() {
-                $searchPage.find('input').val('*');
-                $searchPage.find('input').trigger('change');
+						function() {
+								$searchPage.find('input').val('*');
+								$searchPage.find('input').trigger('change');
 
-                same($searchPage.find('li.ui-screen-hidden').length, 4);
-                start();
-            }
-        ]);
-    });
+								same($searchPage.find('li.ui-screen-hidden').length, 4);
+								start();
+						}
+				]);
+		});
 
 	test( "Refresh applies thumb styling", function(){
 		var ul = $('.ui-page-active ul');
@@ -399,7 +551,7 @@
 		var	$searchPage = $("#search-filter-with-dividers-test");
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage("#search-filter-with-dividers-test");
+				$.testHelper.openPage("#search-filter-with-dividers-test");
 			},
 
 			// wait for the page to become active/enhanced
@@ -424,7 +576,7 @@
 	asyncTest( "Redisplay results when user removes values", function() {
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage("#search-filter-with-dividers-test");
+				$.testHelper.openPage("#search-filter-with-dividers-test");
 			},
 
 			function() {
@@ -443,7 +595,7 @@
 	asyncTest( "Dividers are hidden when preceding hidden rows and shown when preceding shown rows", function () {
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage("#search-filter-with-dividers-test");
+				$.testHelper.openPage("#search-filter-with-dividers-test");
 			},
 
 			function() {
@@ -472,7 +624,7 @@
 
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage("#search-filter-inset-test");
+				$.testHelper.openPage("#search-filter-inset-test");
 			},
 
 			function() {
@@ -544,7 +696,7 @@
 		// https://github.com/jquery/jquery-mobile/issues/1470
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage( "#programmatically-generated-list" );
+				$.testHelper.openPage( "#programmatically-generated-list" );
 			},
 			function() {
 				ok(!$( "#programmatically-generated-list-items li:first-child" ).hasClass( "ui-corner-bottom" ), "First list item should not have class ui-corner-bottom" );
@@ -558,7 +710,7 @@
 	asyncTest("Removing list items", 4, function() {
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage("#removing-items-from-list-test");
+				$.testHelper.openPage("#removing-items-from-list-test");
 			},
 
 			function() {
@@ -584,7 +736,7 @@
 	asyncTest("Top and bottom corners rounded in inset list", 14, function() {
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage("#corner-rounded-test");
+				$.testHelper.openPage("#corner-rounded-test");
 			},
 
 			function() {
@@ -627,20 +779,20 @@
 		$.testHelper.pageSequence([
 			function(){
 				//reset for relative url refs
-				$.mobile.changePage( home );
+				$.testHelper.openPage( "#" + home );
 			},
 
 			function(){
-				$.mobile.changePage( "cache-tests/uncached-nested.html" );
+				$.testHelper.openPage( "#cache-tests/uncached-nested.html" );
 			},
 
 			function(){
 				ok( findNestedPages( "#uncached-nested-list" ).length > 0, "verify that there are nested pages" );
-				$.mobile.changePage( home );
+				$.testHelper.openPage( "#" + home );
 			},
 
 			function() {
-				$.mobile.changePage( "cache-tests/clear.html" );
+				$.testHelper.openPage( "#cache-tests/clear.html" );
 			},
 
 			function(){
@@ -655,20 +807,20 @@
 		$.testHelper.pageSequence([
 			function(){
 				//reset for relative url refs
-				$.mobile.changePage( home );
+				$.testHelper.openPage( "#" + home );
 			},
 
 			function(){
-				$.mobile.changePage( "cache-tests/cached-nested.html" );
+				$.testHelper.openPage( "#cache-tests/cached-nested.html" );
 			},
 
 			function(){
 				ok( findNestedPages( "#cached-nested-list" ).length > 0, "verify that there are nested pages" );
-				$.mobile.changePage( home );
+				$.testHelper.openPage( "#" + home );
 			},
 
 			function() {
-				$.mobile.changePage( "cache-tests/clear.html" );
+				$.testHelper.openPage( "#cache-tests/clear.html" );
 			},
 
 			function(){
@@ -682,20 +834,20 @@
 		$.testHelper.pageSequence([
 			function(){
 				//reset for relative url refs
-				$.mobile.changePage( home );
+				$.testHelper.openPage( "#" + home );
 			},
 
 			function(){
-				$.mobile.changePage( "cache-tests/cached-nested.html" );
+				$.testHelper.openPage( "#cache-tests/cached-nested.html" );
 			},
 
 			function(){
 				same( $("#cached-nested-list").length, 1 );
-				$.mobile.changePage( home );
+				$.testHelper.openPage( "#" + home );
 			},
 
 			function() {
-				$.mobile.changePage( "cache-tests/clear.html" );
+				$.testHelper.openPage( "#cache-tests/clear.html" );
 			},
 
 			function(){
@@ -712,11 +864,11 @@
 		$.testHelper.pageSequence( [
 			function(){
 				//reset for relative url refs
-				$.mobile.changePage( home );
+				$.testHelper.openPage( "#" + home );
 			},
 
 			function() {
-				$.mobile.changePage( "#search-filter-test" );
+				$.testHelper.openPage( "#search-filter-test" );
 			},
 
 			function() {
@@ -738,12 +890,12 @@
 		$.testHelper.pageSequence([
 			function(){
 				//reset for relative url refs
-				$.mobile.changePage( home );
+				$.testHelper.openPage( "#" + home );
 			},
 
 			function(){
 				// https://github.com/jquery/jquery-mobile/issues/1617
-				$.mobile.changePage("#nested-lists-test");
+				$.testHelper.openPage("#nested-lists-test");
 			},
 
 			function(){
@@ -783,71 +935,12 @@
 	asyncTest( "list inherits theme from parent", function() {
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage("#list-theme-inherit");
+				$.testHelper.openPage("#list-theme-inherit");
 			},
 
 			function() {
 				var theme = $.mobile.activePage.jqmData('theme');
 				ok( $.mobile.activePage.find("ul > li").hasClass("ui-body-b"), "theme matches the parent");
-				window.history.back();
-			},
-
-			start
-		]);
-	});
-
-	asyncTest( "list filter is inset from prototype options value", function() {
-		$.mobile.listview.prototype.options.inset = true;
-		$("#list-inset-filter-prototype").page();
-
-		$.testHelper.pageSequence([
-			function() {
-				$.mobile.changePage("#list-inset-filter-prototype");
-			},
-
-			function( timedOut) {
-				ok( !timedOut );
-				same( $.mobile.activePage.find("form.ui-listview-filter-inset").length, 1, "form is inset");
-				window.history.back();
-			},
-
-			start
-		]);
-	});
-
-	asyncTest( "list filter is inset from data attr value", function() {
-		$.mobile.listview.prototype.options.inset = false;
-		$("#list-inset-filter-data-attr").page();
-
-		$.testHelper.pageSequence([
-			function() {
-				$.mobile.changePage("#list-inset-filter-data-attr");
-			},
-
-			function( timedOut) {
-				ok( !timedOut );
-				same( $.mobile.activePage.find("form.ui-listview-filter-inset").length, 1, "form is inset");
-				window.history.back();
-			},
-
-			start
-		]);
-	});
-
-	asyncTest( "split list items respect the icon", function() {
-		$.testHelper.pageSequence([
-			function() {
-				$.mobile.changePage("#split-list-icon");
-			},
-
-			function() {
-				$.mobile.activePage.find("li").each(function(i, elem){
-					var $elem = $(elem),
-						order = [ "star", "plug", "delete", "plug" ];
-
-					same( $elem.find("span.ui-icon-" + order[i]).length, 1, "there should be one " + order[i] + " icon" );
-				});
-
 				window.history.back();
 			},
 
