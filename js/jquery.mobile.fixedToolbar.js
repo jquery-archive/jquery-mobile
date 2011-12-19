@@ -99,26 +99,6 @@
 			}
 		},
 		
-		/* Note: this is all that's needed to make iOS 4.3 and Android 2.1 fix their positioning mistakes after scrolling
-		 it won't fully patch a "fixed effect", but rather just repositions after scrollstop
-		
-		_fixFixedSupport: function(){
-			var $el = this.element,
-				tbtype = $el.is( ".ui-header" ) ? "header" : "footer";
-
-			$( window )
-				.bind( "scrollstop", function(){
-					// TODO: check if toolbars are not positioned correctly on screen, then proceed
-					if( tbtype === "header" ){
-						$el.css( "top", $( window ).scrollTop() );
-					}
-					else {
-						$el.css( "bottom", -$( window ).scrollTop() );
-					}
-				})
-		},
-		*/
-		
 		_bindPageEvents: function(){
 			var self = this,
 				o = self.options,
