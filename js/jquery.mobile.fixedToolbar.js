@@ -252,6 +252,11 @@
 			if( !this.options.togglePageZoom ){
 				return;
 			}
+			var cont = "user-scalable=no";
+			if( this._metaViewport.attr( "content" ).indexOf( cont ) < 0 ){
+				return;
+			}
+			
 			if( this._metaViewportPreexists ){
 				this._metaViewport.attr( "content", this._metaViewportContent );
 			}
