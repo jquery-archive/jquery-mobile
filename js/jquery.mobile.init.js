@@ -3,7 +3,7 @@
 */
 
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-define( [ "jquery.mobile.core", "jquery.mobile.navigation", "jquery.mobile.navigation.pushState" ], function() {
+define( [ "jquery.mobile.core", "jquery.mobile.navigation", "jquery.mobile.navigation.pushstate" ], function() {
 //>>excludeEnd("jqmBuildExclude");
 ( function( $, window, undefined ) {
 	var	$html = $( "html" ),
@@ -101,12 +101,12 @@ define( [ "jquery.mobile.core", "jquery.mobile.navigation", "jquery.mobile.navig
 			}
 		}
 	});
-	
+
 	// This function injects a meta viewport tag to prevent scaling. Off by default, on by default when touchOverflow scrolling is enabled
 	function disableZoom() {
 		var cont = "user-scalable=no",
 			meta = $( "meta[name='viewport']" );
-			
+
 		if( meta.length ){
 			meta.attr( "content", meta.attr( "content" ) + ", " + cont );
 		}
@@ -114,7 +114,7 @@ define( [ "jquery.mobile.core", "jquery.mobile.navigation", "jquery.mobile.navig
 			$( "head" ).prepend( "<meta>", { "name": "viewport", "content": cont } );
 		}
 	}
-	
+
 	// if touch-overflow is enabled, disable user scaling, as it creates usability issues
 	if( $.support.touchOverflow && $.mobile.touchOverflowEnabled && !$.mobile.touchOverflowZoomEnabled ){
 		disableZoom();

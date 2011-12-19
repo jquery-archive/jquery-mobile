@@ -2,7 +2,7 @@
 * "slider" plugin
 */
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-define( [ "jquery.mobile.core", "jquery.mobile.widget", "jquery.mobile.forms.textInput" ], function() {
+define( [ "jquery.mobile.core", "jquery.mobile.widget", "jquery.mobile.forms.textinput" ], function() {
 //>>excludeEnd("jqmBuildExclude");
 ( function( $, undefined ) {
 
