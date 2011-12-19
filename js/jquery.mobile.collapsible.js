@@ -162,28 +162,28 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 								.find( ".ui-btn-inner" ).andSelf();
 							
 						if (!isCollapse) {
-							// straighten corners on open
-							set.each(function() {							
-								$(this).is( ".ui-corner-left") ? 
-									$(this).addClass("ui-corner-tl").removeClass("ui-corner-left") : 
-										$(this).is( ".ui-corner-right") ? 
-											$(this).addClass("ui-corner-tr").removeClass("ui-corner-right") :
-												$(this).return;
-				
+							// tabview - straighten corners on open
+							set.each(function() {		
+								if ( $(this).is( ".ui-corner-left") ) {
+									$(this).addClass("ui-corner-tl").removeClass("ui-corner-left")
+									} else if ( $(this).is( ".ui-corner-right") ) {
+										$(this).addClass("ui-corner-tr").removeClass("ui-corner-right")
+										}
+
 								})
 							
 						} else if ( $el.closest('.ui-collapsible-set').find( ".ui-collapsible" ).length == $el.closest('.ui-collapsible-set').find( ".ui-collapsible-collapsed" ).length ) {
-							// curve corners when all closed
+							// tabview - curve corners if all closed
 							set.each(function() {																					
-								$(this).hasClass("ui-corner-tl") ? 
-									$(this).removeClass("ui-corner-tl").addClass("ui-corner-left") : 
-										$(this).hasClass("ui-corner-tr") ? 
-											$(this).removeClass("ui-corner-tr").addClass("ui-corner-right") :
-												$(this).return;
-												});														
+								if ( $(this).hasClass("ui-corner-tl") ) {
+									$(this).removeClass("ui-corner-tl").addClass("ui-corner-left")
+									} else if ( $(this).hasClass("ui-corner-tr") ) {
+										$(this).removeClass("ui-corner-tr").addClass("ui-corner-right")									
+										} 
+			
+								});														
 							}						
 						}
-					collapsibleContent.trigger( "updatelayout" );
 				}
 			})
 			.trigger( o.collapsed ? "collapse" : "expand" );
