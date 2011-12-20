@@ -22,7 +22,7 @@
 		window.scrollTo(0,0);
 	}
 	
-	
+
 	// add meta viewport tag
 	injectMeta();
 
@@ -47,19 +47,37 @@
 		
 	});
 	
-	test( "Fixed header and footer transition classes are applied correctly", function(){	
+	asyncTest( "Fixed header and footer transition classes are applied correctly", function(){	
 		
+		expect( 6 );		
+
+		$.testHelper.sequence([
+			function(){
+				scrollDown();
+			},
+			
+			function(){
+				//show first
+				$( '#classes-test-b, #classes-test-g, #classes-test-e,#classes-test-h,#classes-test-i,#classes-test-j' ).fixedtoolbar( "show" );
+			},
+			
+			function() {
 		
+				ok( $( '#classes-test-g' ).hasClass('fade'), 'The fade class should be applied by default');
+				ok( $( '#classes-test-b' ).hasClass('in'), 'The "in" class should be applied by default');
+				ok( !$( '#classes-test-h' ).hasClass('fade'), 'The fade class should not be applied when the header has a data-transition of "none"');
 		
-		ok( $( '#classes-test-g' ).hasClass('fade'), 'The fade class should be applied by default');
-		ok( $( '#classes-test-g' ).hasClass('in'), 'The "in" class should be applied by default');
-		ok( !$( '#classes-test-h' ).hasClass('fade'), 'The fade class should not be applied when the header has a data-transition of "none"');
+				ok( !$( '#classes-test-h' ).hasClass('in'), 'The "in" class should not be applied when the header has a data-transition of "none"');
+				ok( $( '#classes-test-i' ).hasClass('slidedown'), 'The "slidedown" class should  be applied when the header has a data-transition of "slide"');
+				ok( $( '#classes-test-j' ).hasClass('slideup'), 'The "slideup" class should  be applied when the footer has a data-transition of "slide"');
 		
-		ok( !$( '#classes-test-h' ).hasClass('in'), 'The "in" class should not be applied when the header has a data-transition of "none"');
-		ok( $( '#classes-test-i' ).hasClass('slidedown'), 'The "slidedown" class should  be applied when the header has a data-transition of "slide"');
-		ok( $( '#classes-test-j' ).hasClass('slideup'), 'The "slideup" class should  be applied when the footer has a data-transition of "slide"');
+			},
 		
-		
+			function(){
+				scrollUp();
+				start();
+				}
+		], 500);
 		
 	});	
 	
