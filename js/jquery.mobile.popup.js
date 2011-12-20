@@ -57,13 +57,21 @@ $.widget("mobile.popup", $.mobile.widget, {
 	},
 
 	_setTheme: function(dst, theme, unconditional) {
-		var currentTheme = (dst.attr("class") || "")
-	    		.split(" ")
-	    		.filter(function(el, idx, ar) {
-	    			return el.match(/^ui-body-[a-z]$/);
-	    		});
+		var classes = (dst.attr("class") || "").split(" "),
+		    alreadyAdded = true,
+		    currentTheme = null,
+			matches;
 
-		currentTheme = ((currentTheme.length > 0) ? currentTheme[0].match(/^ui-body-([a-z])/)[1] : null);
+		while (classes.length > 0) {
+			currentTheme = classes.pop();
+			matches = currentTheme.match(/^ui-body-([a-z])$/);
+			if (matches && matches.length > 1) {
+				currentTheme = matches[1];
+				break;
+			}
+			else
+				currentTheme = null;
+		}
 
 		if (theme !== currentTheme || unconditional) {
 			dst.removeClass("ui-body-" + currentTheme);
