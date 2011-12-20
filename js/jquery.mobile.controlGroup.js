@@ -38,6 +38,8 @@ $.fn.controlgroup = function( options ) {
 
 		flipClasses( $el.find( ".ui-btn" + ( o.excludeInvisible ? ":visible" : "" ) ) );
 		flipClasses( $el.find( ".ui-btn-inner" ) );
+		flipClasses( $el.find( "a" ) );
+		flipClasses( $el.find( "input" ) );
 
 		if ( o.shadow ) {
 			$el.addClass( "ui-shadow" );
