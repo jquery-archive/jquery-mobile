@@ -19,15 +19,7 @@ $.widget("mobile.popup", $.mobile.widget, {
 	},
 
 	_create: function() {
-		var widgetOptionNames = {
-		    	"overlayTheme" : "data-" + ($.mobile.ns || "") + "overlay-theme",
-					"shadow"       : "data-" + ($.mobile.ns || "") + "shadow",
-					"corners"      : "data-" + ($.mobile.ns || "") + "corners",
-					"fade"         : "data-" + ($.mobile.ns || "") + "fade",
-					"transition"   : "data-" + ($.mobile.ns || "") + "transition",
-					"theme"        : "data-" + ($.mobile.ns || "") + "theme"
-		    },
-				ui = {
+		var ui = {
 					screen    : "#ui-popup-screen",
 					container : "#ui-popup-container"
 				},
@@ -55,12 +47,9 @@ $.widget("mobile.popup", $.mobile.widget, {
 			_isOpen : false
 		});
 
-		// Apply options - data-* options, if present, take precedence over this.options.*
-		for (var key in this.options)
-			this._setOption(key,
-				(widgetOptionNames[key] === undefined || this.element.attr(widgetOptionNames[key]) === undefined)
-					? this.options[key]
-					: this.element.attr(widgetOptionNames[key]), true);
+		$.each (this.options, function(key) {
+			self._setOption(key, self.options[key], true);
+		});
 
 		ui.screen.bind("vclick", function(e) {
 			self.close();
@@ -68,13 +57,21 @@ $.widget("mobile.popup", $.mobile.widget, {
 	},
 
 	_setTheme: function(dst, theme, unconditional) {
-		var currentTheme = (dst.attr("class") || "")
-	    		.split(" ")
-	    		.filter(function(el, idx, ar) {
-	    			return el.match(/^ui-body-[a-z]$/);
-	    		});
+		var classes = (dst.attr("class") || "").split(" "),
+		    alreadyAdded = true,
+		    currentTheme = null,
+			matches;
 
-		currentTheme = ((currentTheme.length > 0) ? currentTheme[0].match(/^ui-body-([a-z])/)[1] : null);
+		while (classes.length > 0) {
+			currentTheme = classes.pop();
+			matches = currentTheme.match(/^ui-body-([a-z])$/);
+			if (matches && matches.length > 1) {
+				currentTheme = matches[1];
+				break;
+			}
+			else
+				currentTheme = null;
+		}
 
 		if (theme !== currentTheme || unconditional) {
 			dst.removeClass("ui-body-" + currentTheme);
@@ -204,8 +201,22 @@ $.widget("mobile.popup", $.mobile.widget, {
 		if (!this._isOpen) {
 			var self = this,
 			    coords = this._placementCoords(
-			    	(undefined === x ? window.innerWidth / 2 : x),
-			    	(undefined === y ? window.innerWidth / 2 : y));
+			    	(undefined === x ? window.innerWidth  / 2 : x),
+			    	(undefined === y ? window.innerHeight / 2 : y)),
+				zIndexMax = 0;
+
+            $(document)
+                .find("*")
+                .each(function() {
+                    var el = $(this),
+                        zIndex = parseInt(el.css("z-index"));
+
+                    if (!(el.is(self._ui.container) || el.is(self._ui.screen) || isNaN(zIndex)))
+                        zIndexMax = Math.max(zIndexMax, zIndex);
+                });
+
+            this._ui.screen.css("z-index", (zIndexMax + 1));
+            this._ui.container.css("z-index", (zIndexMax + 2));
 
 			this._ui.screen
 				.height($(document).height())
@@ -244,6 +255,7 @@ $.widget("mobile.popup", $.mobile.widget, {
 		    		self._ui.screen.addClass("ui-screen-hidden");
 		    		self._isOpen = false;
 		    		self.element.trigger("closed");
+		    		self._ui.screen.removeAttr("style");
 		    	};
 
 			this._ui.container
