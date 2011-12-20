@@ -5,8 +5,8 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 define( [
 	"jquery.mobile.core",
-	"jquery.mobile.hashchange",
 	"jquery.mobile.event",
+	"jquery.mobile.hashchange",
 	"jquery.mobile.page",
 	"jquery.mobile.transition" ], function() {
 //>>excludeEnd("jqmBuildExclude");
