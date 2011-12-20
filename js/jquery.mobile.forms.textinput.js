@@ -2,7 +2,7 @@
 * "textinput" plugin for text inputs, textareas
 */
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-define( [ "jquery.mobile.core", "jquery.mobile.widget", "jquery.mobile.degradeInputs"  ], function() {
+define( [ "jquery.mobile.core", "jquery.mobile.widget", "jquery.mobile.degradeInputs", "jquery.mobile.buttonMarkup"  ], function() {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
