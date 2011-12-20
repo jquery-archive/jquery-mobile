@@ -4,8 +4,9 @@
 
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 define( [
-	"jquery.mobile.core",
 	"jquery.mobile.buttonMarkup",
+	"jquery.mobile.core",
+	"jquery.mobile.dialog",
 	"jquery.mobile.forms.select",
 	"jquery.mobile.listview",
 	"jquery.mobile.page" ], function() {
