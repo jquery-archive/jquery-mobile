@@ -5,10 +5,10 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 define( [
 	"jquery.mobile.core",
-	"jquery.mobile.forms.select",
 	"jquery.mobile.buttonMarkup",
-	"jquery.mobile.page",
-	"jquery.mobile.listview" ], function() {
+	"jquery.mobile.forms.select",
+	"jquery.mobile.listview",
+	"jquery.mobile.page" ], function() {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 	var extendSelect = function( widget ){
