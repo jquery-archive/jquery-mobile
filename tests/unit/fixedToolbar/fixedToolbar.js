@@ -12,10 +12,22 @@
 		$( "<meta name='viewport' content='"+ content +"'>" ).prependTo( "head" );
 	}
 	
+	$( "html" ).height( screen.height * 3 );
+	
+	function scrollDown(){
+		window.scrollTo(0,screen.height );
+	}
+	
+	function scrollUp(){
+		window.scrollTo(0,0);
+	}
+	
+	
 	// add meta viewport tag
 	injectMeta();
 
 	test( "Fixed Header Structural Classes are applied correctly", function(){	
+		
 		//footer
 		ok( !$('#classes-test-a').hasClass('ui-header-fixed'), 'An ordinary header should not have fixed classes');
 		ok( $('#classes-test-b').hasClass('ui-header-fixed'), 'An header with data-position=fixed should have ui-header-fixed class');
@@ -36,6 +48,8 @@
 	});
 	
 	test( "Fixed header and footer transition classes are applied correctly", function(){	
+		
+		
 		
 		ok( $( '#classes-test-g' ).hasClass('fade'), 'The fade class should be applied by default');
 		ok( $( '#classes-test-g' ).hasClass('in'), 'The "in" class should be applied by default');
@@ -79,9 +93,13 @@
 	
 	asyncTest( "The hide method is working properly", function() {
 
-		expect( 3 );		
+		expect( 2 );		
 
 		$.testHelper.sequence([
+			function(){
+				scrollDown();
+			},
+			
 			function() {
 				$( '#classes-test-g' ).fixedtoolbar( "hide" );
 
@@ -90,10 +108,15 @@
 			
 			function() {
 				ok( $( '#classes-test-g' ).hasClass('ui-fixed-hidden'), 'The toolbar has the ui-fixed-hidden class applied after hide');
-				ok( $( '#classes-test-g' ).is(':hidden'), 'The toolbar is hidden');
 				$( '#classes-test-g' ).fixedtoolbar( "show" );
+				
+			},
+			
+			function(){
+				scrollUp();
 				start();
 			}
+			
 		], 500);
 	});
 	
@@ -101,9 +124,13 @@
 	
 	asyncTest( "The show method is working properly", function() {
 
-		expect( 3 );		
+		expect( 2 );		
 
 		$.testHelper.sequence([
+			function(){
+				scrollDown();
+			},
+			
 			function() {
 				$( '#classes-test-g' ).fixedtoolbar( "hide" );
 			},
@@ -111,12 +138,16 @@
 			function() {
 				$( '#classes-test-g' ).fixedtoolbar( "show" );
 
-				ok( $( '#classes-test-g' ).hasClass('in'), 'The in class should be applied when hide is called');
+				ok( $( '#classes-test-g' ).hasClass('in'), 'The in class should be applied when show is called');
 			},
 			
 			function() {
 				ok( !$( '#classes-test-g' ).hasClass('ui-fixed-hidden'), 'The toolbar does not have the ui-fixed-hidden class applied after show');
-				ok( $( '#classes-test-g' ).is(':visible'), 'The toolbar is visible');
+				
+			},
+			
+			function(){
+				scrollUp();
 				start();
 			}
 		], 500);
@@ -128,20 +159,34 @@
 		expect( 3 );		
 
 		$.testHelper.sequence([
+			function(){
+				scrollDown();
+			},
+			
+			function(){
+				$( '#classes-test-g' ).fixedtoolbar( "show" );
+			},
+			
 			function() {
-				ok( $( '#classes-test-g' ).is(':visible'), 'The toolbar is visible at first');
+				ok( !$( '#classes-test-g' ).hasClass('ui-fixed-hidden'), 'The toolbar does not have the ui-fixed-hidden class');
 				$( '#classes-test-g' ).fixedtoolbar( "toggle" );
 			},
 			
 			function() {
-				ok( $( '#classes-test-g' ).is(':hidden'), 'The toolbar is hidden after calling toggle when visible');
+				ok( $( '#classes-test-g' ).hasClass('ui-fixed-hidden'), 'The toolbar does have the ui-fixed-hidden class');
 				$( '#classes-test-g' ).fixedtoolbar( "toggle" );
 			},
 			
 			function() {
-				ok( $( '#classes-test-g' ).is(':visible'), 'The toolbar is visible after calling toggle when hidden');
+				ok( !$( '#classes-test-g' ).hasClass('ui-fixed-hidden'), 'The toolbar does not have the ui-fixed-hidden class');
+				
+			},
+			
+			function(){
+				scrollUp();
 				start();
 			}
+			
 		], 500);
 	});
 	
