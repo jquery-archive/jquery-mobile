@@ -19,15 +19,7 @@ $.widget("mobile.popup", $.mobile.widget, {
 	},
 
 	_create: function() {
-		var widgetOptionNames = {
-		    	"overlayTheme" : "data-" + ($.mobile.ns || "") + "overlay-theme",
-					"shadow"       : "data-" + ($.mobile.ns || "") + "shadow",
-					"corners"      : "data-" + ($.mobile.ns || "") + "corners",
-					"fade"         : "data-" + ($.mobile.ns || "") + "fade",
-					"transition"   : "data-" + ($.mobile.ns || "") + "transition",
-					"theme"        : "data-" + ($.mobile.ns || "") + "theme"
-		    },
-				ui = {
+		var ui = {
 					screen    : "#ui-popup-screen",
 					container : "#ui-popup-container"
 				},
@@ -55,12 +47,9 @@ $.widget("mobile.popup", $.mobile.widget, {
 			_isOpen : false
 		});
 
-		// Apply options - data-* options, if present, take precedence over this.options.*
-		for (var key in this.options)
-			this._setOption(key,
-				(widgetOptionNames[key] === undefined || this.element.attr(widgetOptionNames[key]) === undefined)
-					? this.options[key]
-					: this.element.attr(widgetOptionNames[key]), true);
+		$.each (this.options, function(key) {
+			self._setOption(key, self.options[key], true);
+		});
 
 		ui.screen.bind("vclick", function(e) {
 			self.close();
