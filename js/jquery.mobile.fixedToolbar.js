@@ -185,8 +185,8 @@
 			
 			// tap toggle
 			$el.closest( ".ui-page" )
-				.bind( "vclick", function(){
-					if( o.tapToggle ){
+				.bind( "vclick", function( e ){
+					if( o.tapToggle && $el.find( e.target ).length === 0 ){
 						self.toggle();
 					}
 				});
