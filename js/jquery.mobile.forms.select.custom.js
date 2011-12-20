@@ -9,7 +9,9 @@ define( [
 	"jquery.mobile.dialog",
 	"jquery.mobile.forms.select",
 	"jquery.mobile.listview",
-	"jquery.mobile.page" ], function() {
+	"jquery.mobile.page",
+	// NOTE expects ui content in the defined page, see selector for menuPageContent definition
+	"jquery.mobile.page.sections" ], function() {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 	var extendSelect = function( widget ){
