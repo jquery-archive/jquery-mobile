@@ -143,7 +143,7 @@
 	test( "$.fn.getEncodedText should return the encoded value where $.fn.text doesn't", function() {
 		same( $("#encoded").text(), "foo>");
 		same( $("#encoded").getEncodedText(), "foo&gt;");
-		same( $("#unencoded").getEncodedText(), "foo");
+		same( $("#unencoded").getEncodedText(), "var foo;");
 	});
 
 	test( "closestPageData returns the parent's page data", function() {
