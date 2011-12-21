@@ -3,7 +3,7 @@
 */
 
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-define( [ "jquery.mobile.widget", "jquery.mobile.buttonMarkup" ], function() {
+define( [ "jquery.mobile.widget", "jquery.mobile.buttonMarkup", "jquery.mobile.page", "jquery.mobile.page.sections" ], function() {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
