@@ -3,7 +3,7 @@
 */
 
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-define( [ "jquery.mobile.listview" ], function() {
+define( [ "jquery.mobile.listview", "jquery.mobile.forms.textinput" ], function() {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
