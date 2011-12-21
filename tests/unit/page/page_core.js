@@ -22,7 +22,7 @@
 		etargets.push( e.target );
 	});
 
-	$("#c").live( "pagebeforecreate", function( e ){
+	$( "#c" ).live( "pagebeforecreate", function( e ){
 		cEvents.push( e.type );
 		cTargets.push( e.target );
 		return false;
@@ -63,15 +63,17 @@
 	});
 
 	test( "Binding to pagebeforecreate and returning false prevents pagecreate event from firing" , function(){
-		$("#c").page();
+		$( "#c" ).page();
 
 		ok( cEvents[0] === "pagebeforecreate" );
 		ok( !cTargets[1] );
 	});
 
 	test( "Binding to pagebeforecreate and returning false prevents classes from being applied to page" , function(){
-		ok( !$( "#b" ).hasClass( "ui-body-" + themedefault ) );
-		ok( !$( "#b" ).hasClass( "ui-page" ) );
+		$( "#c" ).page();
+
+		ok( !$( "#c" ).hasClass( "ui-body-" + themedefault ) );
+		ok( !$( "#c" ).hasClass( "ui-page" ) );
 	});
 
 	test( "keepNativeSelector returns the default where keepNative is not different", function() {
