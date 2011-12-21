@@ -12,6 +12,10 @@
 					return;
 				}
 
+        // if the file has a dot in the name its most likely a lib file
+        // so we should grab it from the js directory. This could be regarded
+        // as overeager convention ... don't care its a test helper and the
+        // failure will be obvious if it happens (eg "can't load this file")
 				require({
 					baseUrl: (seq[i][0].indexOf(".") > -1) ? "../../../js" : location.pathname
 				});
