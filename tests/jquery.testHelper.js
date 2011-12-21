@@ -4,21 +4,19 @@
 
 (function( $ ) {
 	$.testHelper = {
-		// synchronously loads sets of asynchronous dependencies
+		// This function takes sets of files to load asynchronously. Each set will be loaded after
+		// the previous set has completed loading. That is, each require and it's dependencies in a
+		// set will be loaded asynchronously, but each set will be run in serial.
 		asyncLoad: function( seq ) {
+			require({
+				baseUrl: "../../../js"
+			});
+
 			function loadSeq( seq, i ){
 				if( !seq[i] ){
 					QUnit.start();
 					return;
 				}
-
-        // if the file has a dot in the name its most likely a lib file
-        // so we should grab it from the js directory. This could be regarded
-        // as overeager convention ... don't care its a test helper and the
-        // failure will be obvious if it happens (eg "can't load this file")
-				require({
-					baseUrl: (seq[i][0].indexOf(".") > -1) ? "../../../js" : location.pathname
-				});
 
 				require( seq[i], function() {
 					loadSeq(seq, i + 1);
