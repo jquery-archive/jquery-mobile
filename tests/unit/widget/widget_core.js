@@ -8,7 +8,7 @@
 		var expected = "bizzle";
 
 		$.mobile.widget.prototype.options = { "fooBar" : true };
-		$.mobile.widget.prototype.element = $("<div data-foo-bar=" + expected + ">");
+		$.mobile.widget.prototype.element = $("<div data-"+$.mobile.ns+"foo-bar=" + expected + ">");
 		same($.mobile.widget.prototype._getCreateOptions()["fooBar"],
 				 expected);
 	});
@@ -17,7 +17,7 @@
 				var expected = {};
 
 		$.mobile.widget.prototype.options = {};
-		$.mobile.widget.prototype.element = $("<div data-foo-bar=" + expected + ">");
+		$.mobile.widget.prototype.element = $("<div data-"+$.mobile.ns+"foo-bar=" + expected + ">");
 		same($.mobile.widget.prototype._getCreateOptions(),
 				 expected);
 	});
@@ -34,7 +34,7 @@
 	test( "elements embedded in sub page elements are excluded on create when they match the keep native selector", function() {
 		// uses default keep native of data-role=none
 		$("#enhance-prevented")
-				.append('<label for="unenhanced">Text Input:</label><input type="text" name="name" id="unenhanced" value="" data-role="none" />')
+				.append('<label for="unenhanced">Text Input:</label><input type="text" name="name" id="unenhanced" value="" data-'+$.mobile.ns+'role="none" />')
 				.trigger("create");
 
 		ok( !$("#unenhanced").hasClass( "ui-input-text" ), "doesn't have the ui input text class (unenhanced)");
