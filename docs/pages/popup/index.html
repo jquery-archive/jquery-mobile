@@ -46,12 +46,12 @@
 
 		<p>This will result in the following <a href="#popupBasic" data-rel="popup">popup</a>. Note that we shouldn't set any padding on the popup so widgets will fit cleanly inside.</p>
 		<div data-role="popup" id="popupBasic">
-			This is a completely basic popup, no options set.
+			<p>This is a completely basic popup, no options set.</p>
 		</div>
 		
 		<p>There seems to be some inheritance going on with buttons: <a href="#popupBasicBtn" data-rel="popup" data-role="button" data-inline="true">popup</a></p>
 		<div data-role="popup" id="popupBasicBtn">
-			This is a completely basic popup, no options set.
+			<p>This is a completely basic popup, no options set.</p>
 		</div>
 		
 		<p>Now on to some cool examples</p>
@@ -80,7 +80,7 @@
 		</div>
 		
 
-		<div data-role="popup" id="popupLogin" data-overlay-theme="b" data-theme="a">
+		<div data-role="popup" id="popupLogin" data-overlay-theme="b" data-theme="a" class="ui-corner-all">
 			<form>
 				<div style="padding:10px 20px;">
 				  <h3>Please sign in</h3>
@@ -96,17 +96,16 @@
 		</div>
 		
 		
-		<div data-role="popup" id="popupPhoto" data-overlay-theme="a" data-theme="a">
-			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-popup-btn-close">Close</a>
-			<img src="../../toolbars/images/photo-run.jpeg"  alt="Photo Run">
+		<div data-role="popup" id="popupPhoto" data-overlay-theme="a">
+			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-popup-btn-close">Close</a><img src="../../toolbars/images/photo-run.jpeg"  alt="Photo Run">
 		</div>
 
 		
-		<div data-role="popup" id="popupDialog" data-overlay-theme="d" data-theme="c" style="max-width:500px;">
-					<div data-role="header" data-theme="d">
+		<div data-role="popup" id="popupDialog" data-overlay-theme="d" data-theme="c" style="max-width:500px;" class="ui-corner-all">
+					<div data-role="header" data-theme="d" class="ui-corner-top">
 						<h1>Dialog</h1>
 					</div>
-					<div data-role="content" data-theme="c" style="padding:15px;">
+					<div data-role="content" data-theme="d" style="padding:15px;" class="ui-corner-bottom">
 						<h1>Delete page?</h1>
 						<p>This is a regular page, styled as a dialog. To create a dialog, just link to a normal page and include a transition and <code>data-rel="dialog"</code> attribute.</p>
 						<a href="docs-dialogs.html" data-role="button" data-rel="back" data-theme="b">Sounds good</a>       
