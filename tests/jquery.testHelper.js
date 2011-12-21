@@ -4,32 +4,27 @@
 
 (function( $ ) {
 	$.testHelper = {
-		asyncLoad: function( opts ) {
-			var baseUrl = opts.baseUrl || "../../../js";
+		// synchronously loads sets of asynchronous dependencies
+		asyncLoad: function( seq ) {
+			function loadSeq( seq, i ){
+				if( !seq[i] ){
+					QUnit.start();
+					return;
+				}
+
+				require({
+					baseUrl: (seq[i][0].indexOf(".") > -1) ? "../../../js" : location.pathname
+				});
+
+				require( seq[i], function() {
+					loadSeq(seq, i + 1);
+				});
+			}
 
 			// stop qunit from running the tests until everything is in the page
 			QUnit.config.autostart = false;
 
-			// set the baseUrl to the js dir or the default
-			require({
-				baseUrl: baseUrl
-			});
-
-			// require the libs required to pass the test suite
-			require( opts.libs, function() {
-
-				// init the mobile library
-				require( ["jquery.mobile.init"], function() {
-
-					// reset the base dir to the current directory for including the test libs
-					require({
-						baseUrl: location.pathname
-					});
-
-					// after everything is inplace start the test suite
-					require( opts.testLibs, QUnit.start);
-				});
-			});
+			loadSeq( seq, 0 );
 		},
 
 		excludeFileProtocol: function(callback){
