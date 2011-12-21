@@ -16,7 +16,10 @@ $.widget( "mobile.page", $.mobile.widget, {
 
 	_create: function() {
 
-		this._trigger( "beforecreate" );
+		// if false is returned by the callbacks do not create the page
+		if( !this._trigger( "beforecreate" ) ){
+			return false;
+		}
 
 		this.element
 			.attr( "tabindex", "0" )
