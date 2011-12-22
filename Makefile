@@ -102,7 +102,7 @@ init:
 js: init
 	# Build the JavaScript file
 	@@node external/r.js -o baseUrl="js" \
-			include=jquery.mobile exclude=jquery,order \
+			include=jquery.mobile,jquery.mobile.exports exclude=jquery,order \
 			out=${OUTPUT}/${NAME}.tmp.js \
 			pragmasOnSave.jqmBuildExclude=true \
 			skipModuleInsertion=true \
