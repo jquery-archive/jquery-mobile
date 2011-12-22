@@ -1,7 +1,7 @@
 /* some unsets - more probably needed */
 .ui-mobile, .ui-mobile body { height: 100%; }
 .ui-mobile fieldset, .ui-page { padding: 0; margin: 0; }
-.ui-mobile a img, .ui-mobile fieldset { border: 0; }
+.ui-mobile a img, .ui-mobile fieldset { border-width: 0; }
 
 /* responsive page widths */
 .ui-mobile-viewport {  margin: 0; overflow-x: visible; -webkit-text-size-adjust: none; -ms-text-size-adjust:none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
