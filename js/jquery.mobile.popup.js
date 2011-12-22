@@ -1,5 +1,5 @@
 /*
-=* jQuery Mobile Framework : "popup" plugin
+* jQuery Mobile Framework : "popup" plugin
 * Copyright (c) jQuery Project
 * Dual licensed under the MIT or GPL Version 2 licenses.
 * http://jquery.org/license
