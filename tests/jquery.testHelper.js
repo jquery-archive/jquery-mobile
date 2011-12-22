@@ -56,19 +56,24 @@
 		reloads: {},
 
 		reloadLib: function(libName){
+			var deferred = $.Deferred();
 			if(this.reloads[libName] === undefined) {
 				this.reloads[libName] = {
-					lib: $("script[src$='" + libName + "']"),
 					count: 0
 				};
 			}
 
-			var lib = this.reloads[libName].lib.clone(),
-				src = lib.attr('src');
+			require(
+				{
+					baseUrl: "../../../js",
+					context: libName+"_"+this.reloads[libName].count++
+				}, [libName],
+				function() {
+					deferred.resolve();
+				}
+			);
 
-			//NOTE append "cache breaker" to force reload
-			lib.attr('src', src + "?" + this.reloads[libName].count++);
-			$("body").append(lib);
+			return deferred;
 		},
 
 		rerunQunit: function(){
