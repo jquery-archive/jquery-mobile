@@ -1217,7 +1217,7 @@
 		var url = $( ele ).closest( ".ui-page" ).jqmData( "url" ),
 			base = documentBase.hrefNoHash;
 
-		if ( !url || !path.isPath( url ) || $.support.dynamicBaseTag ) {
+		if ( !url || !path.isPath( url ) || $base.length ) {
 			url = base;
 		}
 
