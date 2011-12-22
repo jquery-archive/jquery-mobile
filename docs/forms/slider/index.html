@@ -91,6 +91,21 @@ $('input').slider();
 			<label for="slider-2">Input slider:</label>
 			<input type="range" name="slider-2" id="slider-2" value="25" min="0" max="100" data-theme="a" data-track-theme="b" />
 		</div>
+		
+        <p>By adding a <code>data-range-theme</code> attribute to the <code>input</code>, a separate swatch is set for the track between the start- and the handles position.</p>
+
+        <pre><code>
+&lt;div data-role=&quot;fieldcontain&quot;&gt;
+    &lt;label for=&quot;slider-3&quot;&gt;Input slider:&lt;/label&gt;
+    &lt;input type=&quot;range&quot; name=&quot;slider-3&quot; id=&quot;slider-3&quot; value=&quot;25&quot; min=&quot;0&quot; max=&quot;100&quot; <strong>data-theme=&quot;a&quot; data-range-theme=&quot;b&quot;</strong> /&gt;
+&lt;/div&gt;
+        </code></pre>
+
+        <p>This will produce a themed slider:</p>
+        <div data-role="fieldcontain">
+            <label for="slider-3">Input slider:</label>
+            <input type="range" name="slider-3" id="slider-3" value="25" min="0" max="100" data-theme="a" data-range-theme="b" />
+        </div>
 		</form>
 	</div><!--/content-primary -->
 
