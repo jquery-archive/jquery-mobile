@@ -1,4 +1,4 @@
-.ui-field-contain, fieldset.ui-field-contain { padding: 1.5em 0; margin: 0; border-width: 0 0 1px 0; overflow: visible; }
+.ui-field-contain, fieldset.ui-field-contain { padding: .8em 0; margin: 0; border-width: 0 0 1px 0; overflow: visible; }
 .ui-field-contain:first-child { border-top-width: 0; }
 @media all and (min-width: 450px){
 	.ui-field-contain, .ui-mobile fieldset.ui-field-contain { border-width: 0; padding: 0; margin: 1em 0; }
