@@ -126,6 +126,12 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				// Add active class to button
 				self.button.addClass( $.mobile.activeBtnClass );
 			})
+            .bind( "focus", function() {
+                self.button.addClass( $.mobile.focusClass );
+            })
+            .bind( "blur", function() {
+                self.button.removeClass( $.mobile.focusClass );
+            })
 			.bind( "focus vmouseover", function() {
 				self.button.trigger( "vmouseover" );
 			})

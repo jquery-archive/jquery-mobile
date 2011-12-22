@@ -182,14 +182,22 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		slider.insertAfter( control );
 
 		// NOTE force focus on handle
-		this.handle
-			.bind( "vmousedown", function() {
-				$( this ).focus();
-			})
-			.bind( "vclick", false );
+		this.handle.bind({
+			focus: function() {
+				slider.addClass( $.mobile.focusClass );
+			},
 
-		this.handle
-			.bind( "keydown", function( event ) {
+			blur: function() {
+				slider.removeClass( $.mobile.focusClass );
+			},
+
+			vmousedown: function() {
+				$( this ).focus();
+			},
+
+			vclick: false,
+
+			keydown: function( event ) {
 				var index = val();
 
 				if ( self.options.disabled ) {
@@ -198,48 +206,50 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 				// In all cases prevent the default and mark the handle as active
 				switch ( event.keyCode ) {
-				 case $.mobile.keyCode.HOME:
-				 case $.mobile.keyCode.END:
-				 case $.mobile.keyCode.PAGE_UP:
-				 case $.mobile.keyCode.PAGE_DOWN:
-				 case $.mobile.keyCode.UP:
-				 case $.mobile.keyCode.RIGHT:
-				 case $.mobile.keyCode.DOWN:
-				 case $.mobile.keyCode.LEFT:
-					event.preventDefault();
+					case $.mobile.keyCode.HOME:
+					case $.mobile.keyCode.END:
+					case $.mobile.keyCode.PAGE_UP:
+					case $.mobile.keyCode.PAGE_DOWN:
+					case $.mobile.keyCode.UP:
+					case $.mobile.keyCode.RIGHT:
+					case $.mobile.keyCode.DOWN:
+					case $.mobile.keyCode.LEFT:
+						event.preventDefault();
 
-					if ( !self._keySliding ) {
-						self._keySliding = true;
-						$( this ).addClass( "ui-state-active" );
-					}
-					break;
+						if ( !self._keySliding ) {
+							self._keySliding = true;
+							$( this ).addClass( "ui-state-active" );
+						}
+						break;
 				}
 
 				// move the slider according to the keypress
 				switch ( event.keyCode ) {
-				 case $.mobile.keyCode.HOME:
-					self.refresh( min );
-					break;
-				 case $.mobile.keyCode.END:
-					self.refresh( max );
-					break;
-				 case $.mobile.keyCode.PAGE_UP:
-				 case $.mobile.keyCode.UP:
-				 case $.mobile.keyCode.RIGHT:
-					self.refresh( index + step );
-					break;
-				 case $.mobile.keyCode.PAGE_DOWN:
-				 case $.mobile.keyCode.DOWN:
-				 case $.mobile.keyCode.LEFT:
-					self.refresh( index - step );
-					break;
+					case $.mobile.keyCode.HOME:
+						self.refresh( min );
+						break;
+					case $.mobile.keyCode.END:
+						self.refresh( max );
+						break;
+					case $.mobile.keyCode.PAGE_UP:
+					case $.mobile.keyCode.UP:
+					case $.mobile.keyCode.RIGHT:
+						self.refresh( index + step );
+						break;
+					case $.mobile.keyCode.PAGE_DOWN:
+					case $.mobile.keyCode.DOWN:
+					case $.mobile.keyCode.LEFT:
+						self.refresh( index - step );
+						break;
 				}
-			}) // remove active mark
-			.keyup( function( event ) {
+			}, // remove active mark
+
+			keyup: function( event ) {
 				if ( self._keySliding ) {
 					self._keySliding = false;
 					$( this ).removeClass( "ui-state-active" );
 				}
+			}
 			});
 
 		this.refresh(undefined, undefined, true);
