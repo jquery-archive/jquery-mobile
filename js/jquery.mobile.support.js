@@ -3,7 +3,9 @@
 */
 
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-define( [ "jquery.mobile.media" ], function() {
+// For test purposes we can't use anonymous module here otherwise
+// the tests will throw http://requirejs.org/docs/errors.html#mismatch
+define( "jquery.mobile.support", [ "jquery.mobile.media" ], function() {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
