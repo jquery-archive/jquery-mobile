@@ -3,7 +3,7 @@
  */
 
 (function($){
-	var libName = "jquery.mobile.forms.select.js",
+	var libName = "jquery.mobile.forms.select",
 		originalDefaultDialogTrans = $.mobile.defaultDialogTransition,
 		originalDefTransitionHandler = $.mobile.defaultTransitionHandler,
 		originalGetEncodedText = $.fn.getEncodedText,
