@@ -3,8 +3,8 @@
  */
 (function($){
 	var mobilePage = undefined,
-			libName = 'jquery.mobile.init.js',
-			coreLib = 'jquery.mobile.core.js',
+			libName = 'jquery.mobile.init',
+			coreLib = 'jquery.mobile.core',
 			extendFn = $.extend,
 			setGradeA = function(value) { $.mobile.gradeA = function(){ return value; }; },
 			reloadCoreNSandInit = function(){

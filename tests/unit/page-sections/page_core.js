@@ -2,7 +2,7 @@
  * mobile page unit tests
  */
 (function($){
-	var libName = 'jquery.mobile.page.sections.js';
+	var libName = 'jquery.mobile.page.sections';
 
 	module(libName);
 

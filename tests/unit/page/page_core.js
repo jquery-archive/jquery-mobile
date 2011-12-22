@@ -2,7 +2,7 @@
  * mobile page unit tests
  */
 (function($){
-	var libName = 'jquery.mobile.page.js',
+	var libName = 'jquery.mobile.page',
 		themedefault = $.mobile.page.prototype.options.theme,
 		keepNative = $.mobile.page.prototype.options.keepNative;
 
