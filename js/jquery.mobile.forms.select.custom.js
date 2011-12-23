@@ -311,8 +311,8 @@ define( [
 					tScrollElem = activePage.is( ".ui-native-fixed" ) ? activePage.find( ".ui-content" ) : activePage,
 					scrollTop = tOverflow ? tScrollElem.scrollTop() : $( window ).scrollTop(),
 					btnOffset = self.button.offset().top,
-					screenHeight = window.innerHeight,
-					screenWidth = window.innerWidth;
+					screenHeight = $(window).height(),
+					screenWidth = $(window).width();
 
 				//add active class to button
 				self.button.addClass( $.mobile.activeBtnClass );
