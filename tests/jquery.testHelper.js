@@ -55,7 +55,7 @@
 
 		reloads: {},
 
-		reloadLib: function(libName){
+		reloadModule: function(libName){
 			var deferred = $.Deferred();
 			if(this.reloads[libName] === undefined) {
 				this.reloads[libName] = {
@@ -74,6 +74,22 @@
 			);
 
 			return deferred;
+		},
+
+		reloadLib: function(libName){
+			if(this.reloads[libName] === undefined) {
+				this.reloads[libName] = {
+					lib: $("script[src$='" + libName + "']"),
+					count: 0
+				};
+			}
+
+			var lib = this.reloads[libName].lib.clone(),
+				src = lib.attr('src');
+
+			//NOTE append "cache breaker" to force reload
+			lib.attr('src', src + "?" + this.reloads[libName].count++);
+			$("body").append(lib);
 		},
 
 		rerunQunit: function(){
@@ -145,6 +161,37 @@
 			// invoke the function which should, in some fashion,
 			// trigger the defined event
 			fn(timedOut);
+		},
+
+		deferredSequence: function(fns) {
+			var fn = fns.shift(),
+				deferred = $.Deferred(),
+				self = this;
+
+			if (fn) {
+				res = fn();
+				if ( res && $.type( res.done ) === "function" ) {
+					res.done(
+						function() {
+							self.deferredSequence( fns ).done(
+								function() {
+									deferred.resolve();
+								}
+							);
+						}
+					)
+				} else {
+					self.deferredSequence( fns ).done(
+						function() {
+							deferred.resolve();
+						}
+					);
+
+				}
+			} else {
+				deferred.resolve();
+			}
+			return deferred;
 		},
 
 		decorate: function(opts){
