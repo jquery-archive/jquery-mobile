@@ -10,7 +10,7 @@ define( [ "jquery.mobile.widget" ], function() {
 	var nsNormalizeDict = {};
 
 	// jQuery.mobile configurable options
-	$.extend( $.mobile, {
+	$.mobile = $.extend( {}, {
 
 		// Namespace used framework-wide for data-attrs. Default is no namespace
 		ns: "",
@@ -174,7 +174,7 @@ define( [ "jquery.mobile.widget" ], function() {
 				.closest(':jqmData(role="page"), :jqmData(role="dialog")')
 				.data("page");
 		}
-	});
+	}, $.mobile );
 
 	// Mobile version of data and removeData and hasData methods
 	// ensures all data is set and retrieved using jQuery Mobile's data namespace
