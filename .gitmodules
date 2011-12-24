@@ -1,0 +1,3 @@
+[submodule "external/r.js"]
+	path = external/r.js
+	url = git://github.com/jrburke/r.js.git
