@@ -108,21 +108,21 @@ js: init
 			external/r.js/dist/r.js \
 		 	-o baseUrl="js" \
 			include=jquery.mobile,jquery.mobile.exports exclude=jquery,order \
-			out=${OUTPUT}/${NAME}.tmp.js \
+			out=${OUTPUT}/${NAME}.compiled.js \
 			pragmasOnSave.jqmBuildExclude=true \
 			skipModuleInsertion=true \
 			optimize=none
 	@@cat LICENSE-INFO.txt | ${VER} > ${OUTPUT}/${NAME}.js
-	@@cat ${OUTPUT}/${NAME}.tmp.js >> ${OUTPUT}/${NAME}.js
-	@@rm ${OUTPUT}/${NAME}.tmp.js
+	@@cat ${OUTPUT}/${NAME}.compiled.js >> ${OUTPUT}/${NAME}.js
+	@@rm ${OUTPUT}/${NAME}.compiled.js
 	# ..... and then minify it
 	@@echo ${VER_MIN} > ${OUTPUT}/${NAME}.min.js
 	@@java -XX:ReservedCodeCacheSize=64m \
 				-jar build/google-compiler-20111003.jar \
 				--js ${OUTPUT}/${NAME}.js \
-				--js_output_file ${OUTPUT}/${NAME}.tmp.js
-	@@cat ${OUTPUT}/${NAME}.tmp.js >> ${OUTPUT}/${NAME}.min.js
-	@@rm ${OUTPUT}/${NAME}.tmp.js
+				--js_output_file ${OUTPUT}/${NAME}.compiled.js
+	@@cat ${OUTPUT}/${NAME}.compiled.js >> ${OUTPUT}/${NAME}.min.js
+	@@rm ${OUTPUT}/${NAME}.compiled.js
 	# -------------------------------------------------
 
 
