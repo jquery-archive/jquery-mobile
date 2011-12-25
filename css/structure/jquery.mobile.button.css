@@ -1,5 +1,5 @@
 .ui-btn { display: block; text-align: center; cursor:pointer;  position: relative; margin: .5em 5px; padding: 0; }
-.ui-header .ui-btn, .ui-footer .ui-btn, .ui-bar .ui-btn { display: inline-block; font-size: 13px; margin: 0; }
+.ui-header .ui-btn, .ui-footer .ui-btn, .ui-bar .ui-btn { display: inline-block; font-size: 13px; margin: 0; max-width: 30%; }
 .ui-btn-inline { display: inline-block; }
 .ui-btn-inner { padding: .6em 25px; display: block; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; position: relative; zoom: 1; }
 .ui-btn input, .ui-btn button { z-index: 2; }
