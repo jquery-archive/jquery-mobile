@@ -51,7 +51,7 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 .ui-mobile-touch-overflow.ui-native-fixed .ui-content .ui-listview-inset {
 	margin-top: 1em;
 }
-.ui-mobile-touch-overflow.ui-native-fixed .ui-header .ui-btn { 
+.ui-header-fixed .ui-btn { 
 	z-index: 10;
 }
 
