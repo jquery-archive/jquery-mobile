@@ -45,12 +45,6 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 .ui-page.ui-mobile-pre-transition {
 	display: block;
 }
-.ui-mobile-touch-overflow .ui-content .ui-listview {
-	margin-top: 0;
-}
-.ui-mobile-touch-overflow .ui-content .ui-listview-inset {
-	margin-top: 1em;
-}
 .ui-header-fixed .ui-btn { 
 	z-index: 10;
 }
