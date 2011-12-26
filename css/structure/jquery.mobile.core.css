@@ -26,7 +26,8 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 
 /* native overflow scrolling */
 .ui-page.ui-mobile-touch-overflow,
-.ui-mobile-touch-overflow.ui-native-fixed .ui-content {
+.ui-page.ui-mobile-touch-overflow.ui-page-header-fixed .ui-content,
+.ui-page.ui-mobile-touch-overflow.ui-page-footer-fixed .ui-content {
 	overflow: auto;
 	height: 100%;
 	left: 0;
@@ -37,6 +38,9 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 	-ms-overflow-scrolling: touch;
 	overflow-scrolling: touch;
 }
+.ui-page.ui-mobile-touch-overflow.ui-page-header-fixed {
+	overflow: visible;
+}
 .ui-page.ui-mobile-touch-overflow,
 .ui-page.ui-mobile-touch-overflow * {
 	/* some level of transform keeps elements from blinking out of visibility on iOS */
@@ -44,9 +48,6 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 }
 .ui-page.ui-mobile-pre-transition {
 	display: block;
-}
-.ui-header-fixed .ui-btn { 
-	z-index: 10;
 }
 
 /* loading screen */
@@ -70,6 +71,9 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 .ui-header .ui-btn-right { position: absolute; right: 10px; top: .4em; }
 .ui-header .ui-title, .ui-footer .ui-title { min-height: 1.1em; text-align: center; font-size: 16px; display: block; margin: .6em 90px .8em;  padding: 0;  text-overflow: ellipsis; overflow: hidden; white-space: nowrap; outline: 0 !important; }
 .ui-footer .ui-title { margin: .6em 15px .8em;  }
+.ui-header-fixed .ui-btn { 
+	z-index: 10;
+}
 
 /*content area*/
 .ui-content { border-width: 0; overflow: visible; overflow-x: hidden; padding: 15px; }
