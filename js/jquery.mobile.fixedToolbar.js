@@ -14,42 +14,40 @@
 			
 			// Browser detection! Weeee, here we go...
 			// Unfortunately, position:fixed is costly, not to mention probably impossible, to feature-detect accurately.
-			// Some tests exist, but they currently return false results in critical devices and browsers, 
-			// which could lead to a broken experience.
-			// Testing is also pretty obtrusive to page load here, requiring injected elements and scrolling the window
-			// For that reason, the following function serves to rule out some browsers with known issues
+			// Some tests exist, but they currently return false results in critical devices and browsers, which could lead to a broken experience.
+			// Testing fixed positioning is also pretty obtrusive to page load, requiring injected elements and scrolling the window
+			// The following function serves to rule out some popular browsers with known fixed-positioning issues
 			// This is a plugin option like any other, so feel free to improve or overwrite it
 			supportBlacklist: function(){
-				var blacklisted = false,
-					ua = navigator.userAgent,
+				var ua = navigator.userAgent,
 					platform = navigator.platform,
 					// Rendering engine is Webkit, and capture major version
-					wkmatch = ua.match( /(AppleWebKit)\/([0-9\.]+) / ),
-					wk = !!wkmatch[ 1 ],
-					wkversion = wkmatch[ 2 ] && wkmatch[ 2 ].split( "." )[0],
+					wkmatch = ua.match( /AppleWebKit\/([0-9]+)/ ),
+					wkversion = !!wkmatch && wkmatch[ 1 ],
+					ffmatch = ua.match( /Fennec\/([0-9]+)/ ),
+					ffversion = !!ffmatch && ffmatch[ 1 ],
 					w = window;
 
-				// iOS 4.3 and older 
 				if(
-					// Platform is iPhone/Pad/Touch
-					( platform.indexOf( "iPhone" ) > -1 || platform.indexOf( "iPad" ) > -1  || platform.indexOf( "iPod" ) > -1 ) &&
-					// Webkit version is less than 534 (ios5)
-					wk && wkversion && wkversion < 534
+					// iOS 4.3 and older : Platform is iPhone/Pad/Touch and Webkit version is less than 534 (ios5)
+					( ( platform.indexOf( "iPhone" ) > -1 || platform.indexOf( "iPad" ) > -1  || platform.indexOf( "iPod" ) > -1 ) && wkversion && wkversion < 534 )
+					||
+					// Opera Mini
+					( operamini = w.operamini && ({}).toString.call( w.operamini ) === "[object OperaMini]" )
+					||
+					//Android lte 2.1: Platform is Android and Webkit version is less than 533 (Android 2.2)
+					( ua.indexOf( "Android" ) > -1 && wkversion && wkversion < 533 )
+					||
+					// Firefox Mobile before 6.0 - 
+					( ffversion && ffversion < 6 )
+					||
+					// WebOS less than 3
+					( "palmGetResource" in window && wkversion && wkversion < 534 )
 				){
-						blacklisted = true;
+					return true;
 				}
 				
-				// Opera Mini
-				if( operamini = w.operamini && ({}).toString.call( w.operamini ) === "[object OperaMini]" ){
-					blacklisted = true;
-				}
-
-				//Android lte 2.1: Platform is Android and Webkit version is less than 533 (Android 2.2)
-				if( ua.indexOf( "Android" ) > -1 && wk && wkversion && wkversion < 533 ){
-					blacklisted = true;
-				}
-				
-				return blacklisted;
+				return false;
 			},
 			initSelector: ":jqmData(position='fixed')"
 		},
