@@ -83,9 +83,10 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 /* icons sizing */
 .ui-icon { width: 18px; height: 18px; }
 
-/* fullscreen class on ui-content div */
-.ui-fullscreen {  }
-.ui-fullscreen img { max-width: 100%; }
+/* fluid images */
+.ui-mobile img {
+	max-width: 100%;
+}
 
 /* non-js content hiding */
 .ui-nojs { position: absolute; left: -9999px; }
