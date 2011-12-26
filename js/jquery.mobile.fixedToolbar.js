@@ -23,16 +23,18 @@
 				var blacklisted = false,
 					ua = navigator.userAgent,
 					platform = navigator.platform,
+					// Rendering engine is Webkit, and capture major version
+					wkmatch = ua.match( /(AppleWebKit)\/([0-9\.]+) / ),
+					wk = !!wkmatch[ 1 ],
+					wkversion = wkmatch[ 2 ] && wkmatch[ 2 ].split( "." )[0],
 					w = window;
-				
+
 				// iOS 4.3 and older 
 				if(
 					// Platform is iPhone/Pad/Touch
 					( platform.indexOf( "iPhone" ) > -1 || platform.indexOf( "iPad" ) > -1  || platform.indexOf( "iPod" ) > -1 ) &&
-					// Rendering engine is Webkit
-					ua.match( /(AppleWebKit)\/([0-9\.]+) / ) && 
 					// Webkit version is less than 534 (ios5)
-					RegExp.$1 && ( RegExp.$2 && RegExp.$2.split( "." )[0] < 534 )
+					wk && wkversion && wkversion < 534
 				){
 						blacklisted = true;
 				}
@@ -41,13 +43,11 @@
 				if( operamini = w.operamini && ({}).toString.call( w.operamini ) === "[object OperaMini]" ){
 					blacklisted = true;
 				}
-				
-				//Android lte 2.1
-				/*
-				if( ... ){
+
+				//Android lte 2.1: Platform is Android and Webkit version is less than 533 (Android 2.2)
+				if( ua.indexOf( "Android" ) > -1 && wk && wkversion && wkversion < 533 ){
 					blacklisted = true;
 				}
-				*/
 				
 				return blacklisted;
 			},
