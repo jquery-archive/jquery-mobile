@@ -37,6 +37,9 @@
 
 		// Minimum scroll distance that will be remembered when returning to a page
 		minScrollBack: 250,
+		
+		// Enable touch-overflow scrolling for better transitions, in supporting browsers
+		touchOverflowEnabled: false,
 
 		// Set default dialog transition - 'none' for no transitions
 		defaultDialogTransition: "pop",

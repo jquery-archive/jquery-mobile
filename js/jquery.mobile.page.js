@@ -18,6 +18,11 @@ $.widget( "mobile.page", $.mobile.widget, {
 		this.element
 			.attr( "tabindex", "0" )
 			.addClass( "ui-page ui-body-" + this.options.theme );
+			
+		// if touchOverflow scrolling is enabled, add class
+		if( $.support.touchOverflow && $.mobile.touchOverflowEnabled ){
+			this.element.addClass( "ui-mobile-touch-overflow" );
+		}	
 	},
 
 	keepNativeSelector: function() {
