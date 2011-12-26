@@ -1062,7 +1062,7 @@
 			},
 
 			function() {
-				ok( $.mobile.activePage.is(".ui-dialog"), "prefetched page is rendered as a dialog" );
+				ok( $.mobile.activePage.is(".ui-dialog-page"), "prefetched page is rendered as a dialog" );
         start();
 			}
 		]);

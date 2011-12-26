@@ -19,7 +19,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 					"class" : "ui-dialog ui-corner-all ui-overlay-shadow"
 				});
 
-		$el.addClass( "ui-overlay-" + this.options.overlayTheme );
+		$el.addClass( "ui-dialog-page ui-overlay-" + this.options.overlayTheme );
 		
 		// Class the markup for dialog styling
 		// Set aria role
