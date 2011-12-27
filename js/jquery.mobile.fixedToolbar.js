@@ -52,8 +52,6 @@
 					return true;
 				}
 				
-				alert(ua)
-				
 				return false;
 			},
 			initSelector: ":jqmData(position='fixed')"
