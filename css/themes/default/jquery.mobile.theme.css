@@ -1109,7 +1109,7 @@ a.ui-link-inherit {
 	box-shadow: 0px 1px 0 					rgba(255,255,255,.4);
 }
 
-/* Focus state - set here for specificity
+/* Focus state - set here for specificity (note: these classes are added by JavaScript)
 -----------------------------------------------------------------------------------------------------------*/
 
 .ui-btn:focus {
@@ -1135,5 +1135,6 @@ a.ui-link-inherit {
 /* ...and bring back focus */
 .ui-mobile-nosupport-boxshadow .ui-focus,
 .ui-mobile-nosupport-boxshadow .ui-btn:focus {
-	outline-width: 2px;
+	outline-width: 1px;
+	outline-style: dotted;
 }
