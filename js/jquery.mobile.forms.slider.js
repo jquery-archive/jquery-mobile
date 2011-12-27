@@ -183,16 +183,21 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 		slider.insertAfter( control );
 
-		// NOTE force focus on handle
+		// Only add focus class to toggle switch, sliders get it automatically from ui-btn
+		if( cType == 'select' ) {
+			this.handle.bind({
+				focus: function() {
+					( $.support.boxShadow ? slider : $( this ) ).addClass( $.mobile.focusClass );
+				},
+
+				blur: function() {
+					( $.support.boxShadow ? slider : $( this ) ).removeClass( $.mobile.focusClass );
+				}
+			});
+		}
+
 		this.handle.bind({
-			focus: function() {
-				( cType == 'select' ? slider : $( this ) ).addClass( $.mobile.focusClass );
-			},
-
-			blur: function() {
-				( cType == 'select' ? slider : $( this ) ).removeClass( $.mobile.focusClass );
-			},
-
+			// NOTE force focus on handle
 			vmousedown: function() {
 				$( this ).focus();
 			},
