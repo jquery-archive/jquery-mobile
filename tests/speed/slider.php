@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<div data-role="page" id="list-page">
+<div data-role="page" id="perf-test-page">
 
 	<div  data-role="header">
 		<h1>Slider</h1>

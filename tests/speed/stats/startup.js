@@ -1,5 +1,5 @@
 (function(Perf) {
-	var $listPage = $( "#list-page" ), firstCounter = 0;
+	var $listPage = $( "#perf-test-page" ), firstCounter = 0;
 
 	Perf.setCurrentRev();
 	Perf.pageLoadStart = Date.now();
@@ -16,7 +16,7 @@
 	});
 
 	$listPage.live( "pagecreate", function( event ) {
-		if( event.target !== $("#list-page")[0] ){
+		if( event.target !== $("#perf-test-page")[0] ){
 			return;
 		}
 
@@ -26,7 +26,7 @@
 	$listPage.live( "pageinit", function( event ) {
 		// if a child page init is fired ignore it, we only
 		// want the top level page init event
-		if( event.target !== $("#list-page")[0] ){
+		if( event.target !== $("#perf-test-page")[0] ){
 			return;
 		}
 
