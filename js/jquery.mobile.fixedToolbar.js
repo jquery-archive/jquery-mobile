@@ -26,6 +26,9 @@
 					wkversion = !!wkmatch && wkmatch[ 1 ],
 					ffmatch = ua.match( /Fennec\/([0-9]+)/ ),
 					ffversion = !!ffmatch && ffmatch[ 1 ],
+					operammobilematch = ua.match( /Opera Mobile\/([0-9]+)/ ),
+					omversion = !!operammobilematch && operammobilematch[ 1 ],
+					
 					w = window;
 
 				if(
@@ -33,7 +36,9 @@
 					( ( platform.indexOf( "iPhone" ) > -1 || platform.indexOf( "iPad" ) > -1  || platform.indexOf( "iPod" ) > -1 ) && wkversion && wkversion < 534 )
 					||
 					// Opera Mini
-					( operamini = w.operamini && ({}).toString.call( w.operamini ) === "[object OperaMini]" )
+					( w.operamini && ({}).toString.call( w.operamini ) === "[object OperaMini]" )
+					||
+					( operammobilematch && omverson < 7458 )
 					||
 					//Android lte 2.1: Platform is Android and Webkit version is less than 533 (Android 2.2)
 					( ua.indexOf( "Android" ) > -1 && wkversion && wkversion < 533 )
@@ -46,6 +51,8 @@
 				){
 					return true;
 				}
+				
+				alert(ua)
 				
 				return false;
 			},
