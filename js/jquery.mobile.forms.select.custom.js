@@ -448,13 +448,11 @@
 						}
 					}															
 										
-					if (!placeholder){				
-						if ( !option.getAttribute( "value" ) || text.length == 0 || $option.jqmData( "placeholder" ) ) {
-							if ( o.hidePlaceholderMenuItems ) {
-								classes.push( "ui-selectmenu-placeholder" );
-							}						
-							placeholder = self.placeholder = text;
-						}				
+					if (!placeholder && (!option.getAttribute( "value" ) || text.length == 0 || $option.jqmData( "placeholder" )) ) {
+						if ( o.hidePlaceholderMenuItems ) {
+							classes.push( "ui-selectmenu-placeholder" );
+						}						
+						placeholder = self.placeholder = text;									
 					}
 															
 					var item = document.createElement('li');															
