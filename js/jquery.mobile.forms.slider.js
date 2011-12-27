@@ -185,11 +185,11 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		if( cType == 'select' ) {
 			this.handle.bind({
 				focus: function() {
-					( $.support.boxShadow ? slider : $( this ) ).addClass( $.mobile.focusClass );
+					slider.addClass( $.mobile.focusClass );
 				},
 
 				blur: function() {
-					( $.support.boxShadow ? slider : $( this ) ).removeClass( $.mobile.focusClass );
+					slider.removeClass( $.mobile.focusClass );
 				}
 			});
 		}
