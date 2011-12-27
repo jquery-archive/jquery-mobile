@@ -1128,7 +1128,12 @@ a.ui-link-inherit {
 /* Focus state - set here for specificity
 -----------------------------------------------------------------------------------------------------------*/
 
-.ui-focus {
+.ui-btn:focus {
+	outline: 0;
+}
+
+.ui-focus,
+.ui-btn:focus {
 	-moz-box-shadow: 0px 0px 12px 		#387bbe /*{global-active-background-color}*/;
 	-webkit-box-shadow: 0px 0px 12px 	#387bbe /*{global-active-background-color}*/;
 	box-shadow: 0px 0px 12px 			#387bbe /*{global-active-background-color}*/;
@@ -1144,6 +1149,7 @@ a.ui-link-inherit {
 }
 
 /* ...and bring back focus */
-.ui-mobile-nosupport-boxshadow .ui-focus {
+.ui-mobile-nosupport-boxshadow .ui-focus,
+.ui-mobile-nosupport-boxshadow .ui-btn:focus {
 	outline-width: 2px;
 }

@@ -186,11 +186,11 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		// NOTE force focus on handle
 		this.handle.bind({
 			focus: function() {
-				slider.addClass( $.mobile.focusClass );
+				( cType == 'select' ? slider : $( this ) ).addClass( $.mobile.focusClass );
 			},
 
 			blur: function() {
-				slider.removeClass( $.mobile.focusClass );
+				( cType == 'select' ? slider : $( this ) ).removeClass( $.mobile.focusClass );
 			},
 
 			vmousedown: function() {
