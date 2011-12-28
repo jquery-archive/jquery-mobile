@@ -975,13 +975,8 @@ a.ui-link-inherit {
 
 /* loading icon */
 .ui-icon-loading {
-	background-image: url(images/ajax-loader.png);
-	width: 40px;
-	height: 40px;
-	-moz-border-radius: 20px;
-	-webkit-border-radius: 20px;
-	border-radius: 20px;
-	background-size: 35px 35px;
+	background: url(images/ajax-loader.gif);
+	background-size: 36px 36px;
 }
 
 
