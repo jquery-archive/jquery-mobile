@@ -376,7 +376,7 @@ define( [
 
 
 	//direct focus to the page title, or otherwise first focusable element
-	function reFocus( page ) {
+	$.mobile.focusPage = function ( page ) {
 		var pageTitle = page.find( ".ui-title:eq(0)" );
 
 		if( pageTitle.length ) {
@@ -494,43 +494,12 @@ define( [
 	//function for transitioning between two existing pages
 	function transitionPages( toPage, fromPage, transition, reverse ) {
 
-		//get current scroll distance
-		var active	= $.mobile.urlHistory.getActive(),
-			touchOverflow = $.support.touchOverflow && $.mobile.touchOverflowEnabled,
-			toScroll = active.lastScroll || ( touchOverflow ? 0 : $.mobile.defaultHomeScroll ),
-			screenHeight = getScreenHeight();
-
-		// Scroll to top, hide addr bar
-		window.scrollTo( 0, $.mobile.defaultHomeScroll );
-
 		if( fromPage ) {
 			//trigger before show/hide events
 			fromPage.data( "page" )._trigger( "beforehide", null, { nextPage: toPage } );
 		}
 
-		if( !touchOverflow){
-			toPage.height( screenHeight + toScroll );
-		}
-
 		toPage.data( "page" )._trigger( "beforeshow", null, { prevPage: fromPage || $( "" ) } );
-
-		//clear page loader
-		$.mobile.hidePageLoadingMsg();
-
-		if( touchOverflow && toScroll ){
-
-			toPage.addClass( "ui-mobile-pre-transition" );
-			// Send focus to page as it is now display: block
-			reFocus( toPage );
-
-			//set page's scrollTop to remembered distance
-			if( toPage.is( ".ui-native-fixed" ) ){
-				toPage.find( ".ui-content" ).scrollTop( toScroll );
-			}
-			else{
-				toPage.scrollTop( toScroll );
-			}
-		}
 
 		//find the transition handler for the specified transition. If there
 		//isn't one in our transitionHandlers dictionary, use the default one.
@@ -539,22 +508,9 @@ define( [
 			promise = th( transition, reverse, toPage, fromPage );
 
 		promise.done(function() {
-			//reset toPage height back
-			if( !touchOverflow ){
-				toPage.height( "" );
-			}
-
-			// Jump to top or prev scroll, sometimes on iOS the page has not rendered yet.
-			if( !touchOverflow ){
-				$.mobile.silentScroll( toScroll );
-			}
 
 			//trigger show/hide events
 			if( fromPage ) {
-				if( !touchOverflow ){
-					fromPage.height( "" );
-				}
-
 				fromPage.data( "page" )._trigger( "hide", null, { nextPage: toPage } );
 			}
 
@@ -626,13 +582,48 @@ define( [
 	$.mobile.dialogHashKey = dialogHashKey;
 
 	//default non-animation transition handler
-	$.mobile.noneTransitionHandler = function( name, reverse, $toPage, $fromPage ) {
-		if ( $fromPage ) {
-			$fromPage.removeClass( $.mobile.activePageClass );
+	$.mobile.noneTransitionHandler = function( name, reverse, $to, $from ) {
+		var active	= $.mobile.urlHistory.getActive(),
+			touchOverflow = $.support.touchOverflow && $.mobile.touchOverflowEnabled,
+			toScroll = active.lastScroll || ( touchOverflow ? 0 : $.mobile.defaultHomeScroll ),
+			viewportClass = "ui-mobile-viewport-transitioning viewport-" + name,
+			screenHeight = $.mobile.getScreenHeight();
+		
+		if( !touchOverflow){
+			$to.height( screenHeight + toScroll );
 		}
-		$toPage.addClass( $.mobile.activePageClass );
 
-		return $.Deferred().resolve( name, reverse, $toPage, $fromPage ).promise();
+		if( touchOverflow && toScroll ){
+			
+			$to.addClass( "ui-mobile-pre-transition" );
+		
+			// Send focus to page as it is now display: block
+			$.mobile.focusPage( $to );
+
+			//set page's scrollTop to remembered distance
+			if( $to.is( ".ui-native-fixed" ) ){
+				$to.find( ".ui-content" ).scrollTop( toScroll );
+			}
+			else{
+				$to.scrollTop( toScroll );
+			}
+		}
+
+		//clear page loader
+		$.mobile.hidePageLoadingMsg();
+
+		if ( $from ) {
+			$from.removeClass( $.mobile.activePageClass );
+		}
+		
+		$to.addClass( $.mobile.activePageClass );
+
+		// Jump to top or prev scroll, sometimes on iOS the page has not rendered yet.
+		if( !touchOverflow ){
+			$.mobile.silentScroll( toScroll );
+		}
+
+		return $.Deferred().resolve( name, reverse, $to, $from ).promise();
 	};
 
 	//default handler for unknown transitions
@@ -1174,7 +1165,7 @@ define( [
 				// itself to avoid ie bug that reports offsetWidth as > 0 (core check for visibility)
 				// despite visibility: hidden addresses issue #2965
 				// https://github.com/jquery/jquery-mobile/issues/2965
-				reFocus( toPage );
+				$.mobile.focusPage( toPage );
 
 				releasePageTransitionLock();
 
