@@ -11,6 +11,7 @@ JSFILES = 	  js/jquery.ui.widget.js \
 			  js/jquery.mobile.navigation.js \
 			  js/jquery.mobile.navigation.pushstate.js \
 			  js/jquery.mobile.transition.js \
+			  jquery.mobile.transition.fadeoutin.js \
 			  js/jquery.mobile.degradeInputs.js \
 			  js/jquery.mobile.dialog.js \
 			  js/jquery.mobile.page.sections.js \
