@@ -134,6 +134,7 @@ Built by David Kaneda and maintained by Jonathan Stark.
 
 .fade.out {
 	z-index: 0;
+	opacity: 0;
 	-webkit-animation-name: fadeout;
 }
 
