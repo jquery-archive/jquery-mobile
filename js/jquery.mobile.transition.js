@@ -85,9 +85,4 @@ function css3TransitionHandler( name, reverse, $to, $from ) {
 // Make our transition handler public.
 $.mobile.css3TransitionHandler = css3TransitionHandler;
 
-// If the default transition handler is the 'none' handler, replace it with our handler.
-if ( $.mobile.defaultTransitionHandler === $.mobile.noneTransitionHandler ) {
-	$.mobile.defaultTransitionHandler = css3TransitionHandler;
-}
-
 })( jQuery, this );
