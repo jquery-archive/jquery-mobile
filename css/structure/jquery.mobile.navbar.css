@@ -3,7 +3,7 @@
 .ui-navbar-collapsed ul { float: left; width: 75%; margin-right: -2px; }
 .ui-navbar-collapsed .ui-navbar-toggle { float: left; width: 25%; }
 .ui-navbar li.ui-navbar-truncate { position: absolute; left: -9999px; top: -9999px; }
-.ui-navbar li .ui-btn, .ui-navbar .ui-navbar-toggle .ui-btn { display: block; font-size: 12px; text-align: center; margin: 0; border-right-width: 0; }
+.ui-navbar li .ui-btn, .ui-navbar .ui-navbar-toggle .ui-btn { display: block; font-size: 12px; text-align: center; margin: 0; border-right-width: 0; max-width: 100%; }
 .ui-navbar li .ui-btn {  margin-right: -1px; }
 .ui-navbar li .ui-btn:last-child { margin-right: 0; }
 .ui-header .ui-navbar li .ui-btn, .ui-header .ui-navbar .ui-navbar-toggle .ui-btn,
