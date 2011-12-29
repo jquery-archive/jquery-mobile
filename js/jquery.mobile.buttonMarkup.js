@@ -162,7 +162,7 @@ var attachEvents = function() {
 				$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-hover-" + theme );
 			}
 		},
-		"vmouseout blur": function( event ) {
+		"vmouseout blur scrollstart": function( event ) {
 			var btn = closestEnabledButton( event.target ),
 				$btn, theme;
 
