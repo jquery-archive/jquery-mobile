@@ -64,9 +64,9 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 
 /* loading screen */
 .ui-loading .ui-loader { display: block; }
-.ui-loader { background: #000; opacity: .16; display: none; z-index: 9999999; position: fixed; width: 32px; height: 32px; top: 50%; box-shadow: 0 1px 1px -1px #fff; margin-left: -18px; margin-top: -18px; left: 50%; padding: 7px; border:0; -webkit-border-radius: 36px; -moz-border-radius: 36px; border-radius: 36px; }
+.ui-loader { background-color: #000; opacity: .18; display: none; z-index: 9999999; position: fixed; width: 46px; height: 46px; top: 50%; box-shadow: 0 1px 1px -1px #fff; margin-left: -18px; margin-top: -18px; left: 50%; padding: 1px; border:0; -webkit-border-radius: 36px; -moz-border-radius: 36px; border-radius: 36px; }
 .ui-loader h1 { font-size: 0px; width: 0; height: 0; overflow: hidden; }
-.ui-loader .ui-icon {  display: block; margin: 0; width: 32px; height: 32px;  background-color: #000; }
+.ui-loader .ui-icon {  display: block; margin: 0; width: 46px; height: 46px;  background-color: transparent; }
 
 /*fouc*/
 .ui-mobile-rendering > * { visibility: hidden; }
