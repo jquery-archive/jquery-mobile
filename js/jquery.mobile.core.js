@@ -38,7 +38,7 @@ define( [ "jquery.mobile.widget" ], function() {
 		linkBindingEnabled: true,
 
 		// Set default page transition - 'none' for no transitions
-		defaultPageTransition: "slide",
+		defaultPageTransition: "fade",
 
 		// Minimum scroll distance that will be remembered when returning to a page
 		minScrollBack: 250,
