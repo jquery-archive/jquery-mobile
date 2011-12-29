@@ -12,25 +12,18 @@ function fadeOutInTransitionHandler( name, reverse, $to, $from ) {
 		touchOverflow = $.support.touchOverflow && $.mobile.touchOverflowEnabled,
 		toScroll = active.lastScroll || ( touchOverflow ? 0 : $.mobile.defaultHomeScroll ),
 		viewportClass = "ui-mobile-viewport-transitioning viewport-" + name,
-		screenHeight = $.mobile.getScreenHeight(),
+		preTransClass = "ui-mobile-pre-transition",
 		doneOut = function() {
 
-			if ( $from && $from[ 0 ] !== $to[ 0 ] ) {
-				$from.removeClass( $.mobile.activePageClass + " out in reverse " + name );
-				if( !touchOverflow ){
-					$from.height( "" );
-				}
+			if ( $from ) {
+				$from.removeClass( $.mobile.activePageClass + " " + preTransClass + " out in reverse " + name );
 			}
 			
-			$to.animationComplete( doneIn );
-			
-			if( !touchOverflow){
-				$to.height( screenHeight + toScroll );
-			}
+			$to
+				.animationComplete( doneIn )
+				.addClass( preTransClass );
 
 			if( touchOverflow && toScroll ){
-		
-				$to.addClass( "ui-mobile-pre-transition" );
 		
 				// Send focus to page as it is now display: block
 				$.mobile.focusPage( $to );
@@ -44,22 +37,22 @@ function fadeOutInTransitionHandler( name, reverse, $to, $from ) {
 				}
 			}
 			
-			
 			// Jump to top or prev scroll, sometimes on iOS the page has not rendered yet.
 			if( !touchOverflow ){
 				$.mobile.silentScroll( toScroll );
-				$to.height( "" );
 			}
-			
+	
 			$to.addClass( $.mobile.activePageClass + " " + name + " in" + reverseClass );
 			
 		},
 		
 		doneIn = function() {
 
-			$to.removeClass( "out in reverse " + name );
-
-			$to.parent().removeClass( viewportClass );
+			$to
+				.removeClass( "out in reverse " + name + " " + preTransClass )
+				.parent().removeClass( viewportClass );
+			
+			$.mobile.silentScroll( toScroll );	
 
 			deferred.resolve( name, reverse, $to, $from );
 		};
@@ -70,8 +63,9 @@ function fadeOutInTransitionHandler( name, reverse, $to, $from ) {
 	$.mobile.hidePageLoadingMsg();
 	
 	if ( $from ) {
-		$from.animationComplete( doneOut );
-		$from.addClass( name + " out" + reverseClass );
+		$from
+			.animationComplete( doneOut )
+			.addClass( name + " out" + reverseClass );
 	}
 	else {	
 		doneOut();
