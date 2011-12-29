@@ -50,8 +50,8 @@ function setDefaultTransition(){
 
 
 $(function(){
-	setDefaultTransition();
-	$( window ).bind( "throttledresize", setDefaultTransition );
+	//setDefaultTransition();
+	//$( window ).bind( "throttledresize", setDefaultTransition );
 });
 
 
