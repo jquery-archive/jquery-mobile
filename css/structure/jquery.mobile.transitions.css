@@ -2,7 +2,7 @@
 	-webkit-transform: rotate(360deg);
 	-webkit-animation-name: spin;
 	-webkit-animation-duration: 1s;
-	-webkit-animation-iteration-count:  infinite;
+	-webkit-animation-iteration-count: infinite;
 	-webkit-animation-timing-function: linear;
 }
 @-webkit-keyframes spin {
@@ -135,12 +135,14 @@ Built by David Kaneda and maintained by Jonathan Stark.
 .fade.out {
 	z-index: 0;
 	opacity: 0;
+	-webkit-animation-duration: 150ms;
 	-webkit-animation-name: fadeout;
 }
 
 .fade.in {
 	opacity: 1;
 	z-index: 10;
+	-webkit-animation-duration: 300ms;
 	-webkit-animation-name: fadein;
 }
 
