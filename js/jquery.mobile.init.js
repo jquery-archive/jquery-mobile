@@ -31,10 +31,33 @@ define( [ "jquery.mobile.core", "jquery.mobile.navigation", "jquery.mobile.navig
 	// loading div which appears during Ajax requests
 	// will not appear if $.mobile.loadingMessage is false
 	var $loader = $( "<div class='ui-loader '><span class='ui-icon ui-icon-loading'></span><h1></h1></div>" );
+	
+	// For non-fixed supportin browsers. Position at y center (if scrollTop supported), above the activeBtn (if defined), or just 100px from top
+	function fakeFixLoader(){
+		$loader
+			.css({
+				top: $.support.scrollTop && $window.scrollTop() + $window.height() / 2 ||
+				activeBtn.length && activeBtn.offset().top || 100
+			});		
+	}
+	
+	// check position of loader to see if it appears to be "fixed" to center
+	// if not, use abs positioning
+	function checkLoaderPosition(){
+		if( $loader.offset().top < $window.scrollTop() ){
+			$loader.addClass( "ui-loader-fakefix" );
+			fakeFixLoader();
+			$window
+				.unbind( "scroll", checkLoaderPosition )
+				.bind( "scroll", fakeFixLoader );
+		}
+	}
+	
 
 	$.extend($.mobile, {
 		// turn on/off page loading message.
 		showPageLoadingMsg: function() {
+			$html.addClass( "ui-loading" );
 			if ( $.mobile.loadingMessage ) {
 				var activeBtn = $( "." + $.mobile.activeBtnClass ).first();
 
@@ -42,19 +65,21 @@ define( [ "jquery.mobile.core", "jquery.mobile.navigation", "jquery.mobile.navig
 					.find( "h1" )
 						.text( $.mobile.loadingMessage )
 						.end()
-					.appendTo( $.mobile.pageContainer )
-					// position at y center (if scrollTop supported), above the activeBtn (if defined), or just 100px from top
-					.css({
-						top: $.support.scrollTop && $window.scrollTop() + $window.height() / 2 ||
-						activeBtn.length && activeBtn.offset().top || 100
-					});
+					.appendTo( $.mobile.pageContainer );
+					
+				checkLoaderPosition();
+				$window.bind( "scroll", checkLoaderPosition );
 			}
-
-			$html.addClass( "ui-loading" );
 		},
 
 		hidePageLoadingMsg: function() {
 			$html.removeClass( "ui-loading" );
+			
+			if( $.mobile.loadingMessage ){
+				$loader.removeClass( "ui-loader-fakefix" );
+			}	
+			
+			$( window ).unbind( "scroll", fakeFixLoader );
 		},
 
 		// find and enhance the pages in the dom and transition to the first page.
