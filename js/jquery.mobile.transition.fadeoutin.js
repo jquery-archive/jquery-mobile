@@ -5,13 +5,12 @@
 (function( $, window, undefined ) {
 
 function fadeOutInTransitionHandler( name, reverse, $to, $from ) {
-
+	
 	var deferred = new $.Deferred(),
 		reverseClass = reverse ? " reverse" : "",
 		active	= $.mobile.urlHistory.getActive(),
 		touchOverflow = $.support.touchOverflow && $.mobile.touchOverflowEnabled,
 		toScroll = active.lastScroll || ( touchOverflow ? 0 : $.mobile.defaultHomeScroll ),
-		viewportClass = "ui-mobile-viewport-transitioning viewport-" + name,
 		preTransClass = "ui-mobile-pre-transition",
 		doneOut = function() {
 
@@ -48,16 +47,10 @@ function fadeOutInTransitionHandler( name, reverse, $to, $from ) {
 		
 		doneIn = function() {
 
-			$to
-				.removeClass( "out in reverse " + name + " " + preTransClass )
-				.parent().removeClass( viewportClass );
+			$to.removeClass( "out in reverse " + name + " " + preTransClass );
 			
-			$.mobile.silentScroll( toScroll );	
-
 			deferred.resolve( name, reverse, $to, $from );
 		};
-
-	$to.parent().addClass( viewportClass );
 
 	//clear page loader
 	$.mobile.hidePageLoadingMsg();
