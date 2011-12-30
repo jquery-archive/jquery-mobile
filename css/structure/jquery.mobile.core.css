@@ -42,9 +42,6 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 	/* some level of transform keeps elements from blinking out of visibility on iOS */
 	-webkit-transform: rotateY(0);
 }
-.ui-page.ui-mobile-pre-transition {
-	display: block;
-}
 .ui-mobile-touch-overflow.ui-native-fixed .ui-content .ui-listview {
 	margin-top: 0;
 }
