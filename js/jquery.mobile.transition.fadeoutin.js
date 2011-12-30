@@ -11,11 +11,14 @@ function fadeOutInTransitionHandler( name, reverse, $to, $from ) {
 		active	= $.mobile.urlHistory.getActive(),
 		touchOverflow = $.support.touchOverflow && $.mobile.touchOverflowEnabled,
 		toScroll = active.lastScroll || ( touchOverflow ? 0 : $.mobile.defaultHomeScroll ),
-		viewportClass = "viewport-" + name,
+		screenHeight = $.mobile.getScreenHeight(),
+		viewportClass = "ui-mobile-viewport-transitioning viewport-" + name,
 		doneOut = function() {
 
 			if ( $from ) {
-				$from.removeClass( $.mobile.activePageClass + " out in reverse " + name );
+				$from
+					.removeClass( $.mobile.activePageClass + " out in reverse " + name )
+					.height( "" );
 			}
 			
 			$to
@@ -38,6 +41,8 @@ function fadeOutInTransitionHandler( name, reverse, $to, $from ) {
 			
 			// Jump to top or prev scroll, sometimes on iOS the page has not rendered yet.
 			if( !touchOverflow ){
+				$to.height( screenHeight + toScroll );
+				
 				$.mobile.silentScroll( toScroll );
 			}
 	
@@ -49,16 +54,21 @@ function fadeOutInTransitionHandler( name, reverse, $to, $from ) {
 
 			$to
 				.removeClass( "out in reverse " + name )
-				.parent().removeClass( viewportClass );
+				.parent().removeClass( viewportClass )
+				.height( "" );
 			
 			deferred.resolve( name, reverse, $to, $from, true );
 		};
+		
+	$to
+		.parent().addClass( viewportClass );	
 
 	//clear page loader
 	$.mobile.hidePageLoadingMsg();
 	
 	if ( $from ) {
 		$from
+			.height( screenHeight + $(window ).scrollTop() )
 			.animationComplete( doneOut )
 			.addClass( name + " out" + reverseClass );
 	}
