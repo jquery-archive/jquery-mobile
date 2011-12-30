@@ -141,9 +141,14 @@ var attachEvents = function() {
 			if ( btn ) {
 				$btn = $( btn );
 				theme = $btn.attr( "data-" + $.mobile.ns + "theme" );
-				hov = setTimeout(function() {
+				
+				if( $.support.touch ) {
+					hov = setTimeout(function() {
+						$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-down-" + theme );
+					}, hoverDelay );
+				} else {
 					$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-down-" + theme );
-				}, hoverDelay );
+				}
 			}
 		},
 		"vmousecancel vmouseup": function( event ) {
@@ -159,18 +164,24 @@ var attachEvents = function() {
 		"vmouseover focus": function( event ) {
 			var btn = closestEnabledButton( event.target ),
 				$btn, theme;
-
+				
 			if ( btn ) {
 				$btn = $( btn );
 				theme = $btn.attr( "data-" + $.mobile.ns + "theme" );
-				foc = setTimeout(function() {
+				
+				if( $.support.touch ) {
+					foc = setTimeout(function() {
+						$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-hover-" + theme );
+					}, hoverDelay );
+				} else {
 					$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-hover-" + theme );
-				}, hoverDelay );
+				}
 			}
 		},
 		"vmouseout blur scrollstart": function( event ) {
 			var btn = closestEnabledButton( event.target ),
 				$btn, theme;
+				
 			if ( btn ) {
 				$btn = $( btn );
 				theme = $btn.attr( "data-" + $.mobile.ns + "theme" );
