@@ -11,22 +11,21 @@ function fadeOutInTransitionHandler( name, reverse, $to, $from ) {
 		active	= $.mobile.urlHistory.getActive(),
 		touchOverflow = $.support.touchOverflow && $.mobile.touchOverflowEnabled,
 		toScroll = active.lastScroll || ( touchOverflow ? 0 : $.mobile.defaultHomeScroll ),
-		viewportClass = "ui-mobile-viewport-transitioning viewport-" + name,
-		preTransClass = "ui-mobile-pre-transition",
+		viewportClass = "viewport-" + name,
 		doneOut = function() {
 
 			if ( $from ) {
-				$from.removeClass( $.mobile.activePageClass + " " + preTransClass + " out in reverse " + name );
+				$from.removeClass( $.mobile.activePageClass + " out in reverse " + name );
 			}
 			
 			$to
 				.animationComplete( doneIn )
-				.addClass( preTransClass );
+				.addClass( $.mobile.activePageClass );
 
+			// Send focus to page as it is now display: block
+			$.mobile.focusPage( $to );
+			
 			if( touchOverflow && toScroll ){
-		
-				// Send focus to page as it is now display: block
-				$.mobile.focusPage( $to );
 
 				//set page's scrollTop to remembered distance
 				if( $to.is( ".ui-native-fixed" ) ){
@@ -42,20 +41,18 @@ function fadeOutInTransitionHandler( name, reverse, $to, $from ) {
 				$.mobile.silentScroll( toScroll );
 			}
 	
-			$to.addClass( $.mobile.activePageClass + " " + name + " in" + reverseClass );
+			$to.addClass( name + " in" + reverseClass );
 			
 		},
 		
 		doneIn = function() {
 
 			$to
-				.removeClass( "out in reverse " + name + " " + preTransClass )
+				.removeClass( "out in reverse " + name )
 				.parent().removeClass( viewportClass );
 			
-			deferred.resolve( name, reverse, $to, $from );
+			deferred.resolve( name, reverse, $to, $from, true );
 		};
-
-	$to.parent().addClass( viewportClass );
 
 	//clear page loader
 	$.mobile.hidePageLoadingMsg();
