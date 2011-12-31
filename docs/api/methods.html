@@ -52,7 +52,7 @@
 											<li>Used only when the 'to' argument of changePage() is a URL.</li>
 										</ul>
 								  </li>
-									<li><code>dataUrl</code> (string,	default: undefined) The URL to use when updating the browser location upon changePage completion.
+									<li><code>data-url</code> (string,	default: undefined) The URL to use when updating the browser location upon changePage completion.
 								  If not specified, the value of the data-url attribute of the page element is used.</li>
 									<li><code>pageContainer</code> (jQuery collection,	default:	$.mobile.pageContainer) Specifies the element that should contain the page. </li>
 									<li><code>reloadPage</code> (<em>boolean</em>, default: false) Forces a reload of a page, even if it is already in the DOM of the page container.
@@ -162,14 +162,22 @@ $.mobile.loadPage( "searchresults.php", {
 			
 			
 			
-			<dt><code>$.mobile.showPageLoadingMsg</code> (<em></em>)</dt>
-			<dd>Show the page loading message, which is configurable via $.mobile.loadingMessage.</dd>
-			
-			<dd>Example:
+			<dt><code>$.mobile.showPageLoadingMsg</code> (<em>method</em>)</dt>
+			<dd>Show the page loading message, which is configurable via $.mobile.loadingMessage, or a custom message.  The default or configured message is always used unless an argument is specified.</dd>
+			<dd>
+				<dl>
+					<dt><code>&#183;</code> Arguments</dt>
+					<dd><code>msg</code> (<em>string</em>, optional) Text to appear in the message box for this showing only.  If unspecified, the value of $.mobile.loadingMessage will be used.</dd>
+				</dl>
+			</dd>
+			<dd>Examples:
 			<pre>
 			<code>
-<strong>//cue the page loader</strong> 			
-$.mobile.showPageLoadingMsg();	
+<strong>//cue the page loader</strong>
+$.mobile.showPageLoadingMsg();
+
+<strong>//cue the page loader with custom text</strong> 			
+$.mobile.showPageLoadingMsg( "testing" );
 			</code>
 			</pre>
 			
@@ -178,8 +186,8 @@ $.mobile.showPageLoadingMsg();
 			
 			
 			
-			<dt><code>$.mobile.hidePageLoadingMsg</code> (<em></em>)</dt>
-			<dd>Hide the page loading message, which is configurable via $.mobile.loadingMessage.</dd>
+			<dt><code>$.mobile.hidePageLoadingMsg</code> (<em>method</em>)</dt>
+			<dd>Hide the page loading message.</dd>
 			
 			<dd>Example:
 			<pre>
