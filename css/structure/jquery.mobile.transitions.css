@@ -1,24 +1,3 @@
-.spin  {
-	-webkit-transform: rotate(360deg);
-	-webkit-animation-name: spin;
-	-webkit-animation-duration: 1s;
-	-webkit-animation-iteration-count: infinite;
-	-webkit-animation-timing-function: linear;
-	-moz-transform: rotate(360deg);
-	-moz-animation-name: spin;
-	-moz-animation-duration: 1s;
-	-moz-animation-iteration-count: infinite;
-	-moz-animation-timing-function: linear;
-}
-@-webkit-keyframes spin {
-	from {-webkit-transform: rotate(0deg);}
-  	to {-webkit-transform: rotate(360deg);}
-}
-@-moz-keyframes spin {
-	from {-webkit-transform: rotate(0deg);}
-  	to {-webkit-transform: rotate(360deg);}
-}
-
 /* Transitions from jQtouch (with small modifications): http://www.jqtouch.com/
 Built by David Kaneda and maintained by Jonathan Stark.
 */
