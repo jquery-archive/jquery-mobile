@@ -4,7 +4,7 @@
 
 (function( $, window, undefined ) {
 
-function fadeOutInTransitionHandler( name, reverse, $to, $from ) {
+function outInTransitionHandler( name, reverse, $to, $from ) {
 	
 	var deferred = new $.Deferred(),
 		reverseClass = reverse ? " reverse" : "",
@@ -80,11 +80,11 @@ function fadeOutInTransitionHandler( name, reverse, $to, $from ) {
 }
 
 // Make our transition handler public.
-$.mobile.fadeOutInTransitionHandler = fadeOutInTransitionHandler;
+$.mobile.outInTransitionHandler = outInTransitionHandler;
 
 // If the default transition handler is the 'none' handler, replace it with our handler.
 if ( $.mobile.defaultTransitionHandler === $.mobile.noneTransitionHandler ) {
-	$.mobile.defaultTransitionHandler = fadeOutInTransitionHandler;
+	$.mobile.defaultTransitionHandler = outInTransitionHandler;
 }
 
 })( jQuery, this );
