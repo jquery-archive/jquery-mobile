@@ -18,9 +18,12 @@ Built by David Kaneda and maintained by Jonathan Stark.
 
 .slide.in {
 	-webkit-transform: translateX(0);
-	-webkit-animation-name: fadein;
 	-moz-transform: translateX(0);
+	-webkit-animation-duration: 100ms;
+	-webkit-animation-name: fadein;
+	-moz-animation-duration: 100ms;
 	-moz-animation-name: fadein;
+	
 }
 
 .slide.out.reverse {
@@ -40,6 +43,9 @@ Built by David Kaneda and maintained by Jonathan Stark.
 .slideup.out {
 	-webkit-animation-name: fadeout;
 	-moz-animation-name: fadeout;
+	-webkit-animation-duration: 100ms;
+	-moz-animation-duration: 100ms;
+	
 	z-index: 0;
 }
 
@@ -55,6 +61,9 @@ Built by David Kaneda and maintained by Jonathan Stark.
 	z-index: 0;
 	-webkit-animation-name: fadein;
 	-moz-animation-name: fadein;
+	-webkit-animation-duration: 100ms;
+	-moz-animation-duration: 100ms;
+	
 }
 
 .slideup.out.reverse {
@@ -68,6 +77,9 @@ Built by David Kaneda and maintained by Jonathan Stark.
 .slidedown.out {
 	-webkit-animation-name: fadeout;
 	-moz-animation-name: fadeout;
+	-webkit-animation-duration: 100ms;
+	-moz-animation-duration: 100ms;
+	
 	z-index: 0;
 }
 
@@ -83,6 +95,9 @@ Built by David Kaneda and maintained by Jonathan Stark.
 	z-index: 0;
 	-webkit-animation-name: fadein;
 	-moz-animation-name: fadein;
+	-webkit-animation-duration: 100ms;
+	-moz-animation-duration: 100ms;
+	
 }
 
 .slidedown.out.reverse {
@@ -239,9 +254,9 @@ Built by David Kaneda and maintained by Jonathan Stark.
 .flip.in {
 	opacity: 1;
 	z-index: 10;
-	-webkit-animation-duration: 300ms;
+	-webkit-animation-duration: 100ms;
 	-webkit-animation-name: fadein;
-	-moz-animation-duration: 300ms;
+	-moz-animation-duration: 100ms;
 	-moz-animation-name: fadein;
 	
 }
@@ -258,9 +273,9 @@ Built by David Kaneda and maintained by Jonathan Stark.
 .flip.in.reverse {
 	opacity: 1;
 	z-index: 10;
-	-webkit-animation-duration: 300ms;
+	-webkit-animation-duration: 100ms;
 	-webkit-animation-name: fadein;
-	-moz-animation-duration: 300ms;
+	-moz-animation-duration: 100ms;
 	-moz-animation-name: fadein;
 	
 }
@@ -333,6 +348,9 @@ Built by David Kaneda and maintained by Jonathan Stark.
 	z-index: 0;
 	-webkit-animation-name: fadeout;
 	-moz-animation-name: fadeout;
+	-webkit-animation-duration: 100ms;
+	-moz-animation-duration: 100ms;
+	
 	
 }
 
@@ -341,6 +359,9 @@ Built by David Kaneda and maintained by Jonathan Stark.
 	z-index: 0;
 	-webkit-animation-name: fadein;
 	-moz-animation-name: fadein;
+	-webkit-animation-duration: 100ms;
+	-moz-animation-duration: 100ms;
+	
 }
 
 .pop.out.reverse {
