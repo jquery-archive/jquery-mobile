@@ -1,11 +1,17 @@
 /* Transitions from jQtouch (with small modifications): http://www.jqtouch.com/
 Built by David Kaneda and maintained by Jonathan Stark.
 */
-.in, .out {
-	-webkit-animation-timing-function: ease-in-out;
-	-webkit-animation-duration: 350ms;
-	-moz-animation-timing-function: ease-in-out;
-	-moz-animation-duration: 350ms;
+.in {
+	-webkit-animation-timing-function: ease-out;
+	-webkit-animation-duration: 325ms;
+	-moz-animation-timing-function: ease-out;
+	-moz-animation-duration: 325ms;
+}
+.out {
+	-webkit-animation-timing-function: ease-in;
+	-webkit-animation-duration: 250ms;
+	-moz-animation-timing-function: ease-in;
+	-moz-animation-duration: 225ms;
 }
 
 
@@ -344,8 +350,8 @@ Built by David Kaneda and maintained by Jonathan Stark.
 }
 
 .pop.out.reverse {
-	-webkit-transform: scale(.2);
-	-moz-transform: scale(.2);
+	-webkit-transform: scale(0);
+	-moz-transform: scale(0);
 	opacity: 0;
 	-webkit-animation-name: popout;
 	-moz-animation-name: popout;
@@ -354,7 +360,7 @@ Built by David Kaneda and maintained by Jonathan Stark.
 
 @-webkit-keyframes popin {
     from {
-        -webkit-transform: scale(.2);
+        -webkit-transform: scale(0);
         opacity: 0;
     }
     to {
@@ -364,7 +370,7 @@ Built by David Kaneda and maintained by Jonathan Stark.
 }
 @-moz-keyframes popin {
     from {
-        -moz-transform: scale(.2);
+        -moz-transform: scale(0);
         opacity: 0;
     }
     to {
@@ -379,7 +385,7 @@ Built by David Kaneda and maintained by Jonathan Stark.
         opacity: 1;
     }
     to {
-        -webkit-transform: scale(.2);
+        -webkit-transform: scale(0);
         opacity: 0;
     }
 }
@@ -389,7 +395,7 @@ Built by David Kaneda and maintained by Jonathan Stark.
         opacity: 1;
     }
     to {
-        -moz-transform: scale(.2);
+        -moz-transform: scale(0);
         opacity: 0;
     }
 }
