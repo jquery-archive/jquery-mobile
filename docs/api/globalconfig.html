@@ -92,12 +92,14 @@ $(document).bind("mobileinit", function(){
 	<dt><code>activePageClass</code> <em>string</em>, default: "ui-page-active"</dt>
 	<dd>The class assigned to page currently in view, and during transitions</dd>
 
-
 	<dt><code>activeBtnClass</code> <em>string</em>, default: "ui-btn-active"</dt>
 	<dd>The class used for "active" button state, from CSS framework.</dd>
 
 	<dt><code>ajaxEnabled</code> <em>boolean</em>, default: true</dt>
 	<dd>jQuery Mobile will automatically handle link clicks and form submissions through Ajax, when possible. If false, url hash listening will be disabled as well, and urls will load as regular http requests.</dd>
+
+	<dt><code>allowCrossDomainPages</code> <em>boolean</em>, default: false</dt>
+	<dd>When jQuery Mobile attempts to load an external page, the request runs through <code>$.mobile.loadPage()</code>. This will only allow cross-domain requests if <code>$.mobile.allowCrossDomainPages</code> is set to true. Because the jQuery Mobile framework tracks what page is being viewed within the browser's location hash, it is possible for a cross-site scripting (XSS) attack to occur if the XSS code in question can manipulate the hash and set it to a cross-domain URL of its choice. This is the main reason that the default setting for $.mobile.allowCrossDomainPages is set to false. In PhoneGap apps that must "phone home" by loading assets off a remote server, both the <code>$.support.cors</code> AND <code>$.mobile.allowCrossDomainPages</code> must be set to true.</dd>
 
 	<dt><code>linkBindingEnabled</code> <em>boolean</em>, default: true</dt>
 	<dd>jQuery Mobile will automatically bind the clicks on anchor tags in your document. Setting this options to false will prevent all anchor click handling <em>including</em> the addition of active button state and alternate link bluring. This should only be used when attempting to delegate the click management to another library or custom code.</dd>
