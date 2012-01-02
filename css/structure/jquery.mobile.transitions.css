@@ -344,10 +344,18 @@ Built by David Kaneda and maintained by Jonathan Stark.
 	z-index: 10;
 }
 
+.pop.out {
+	z-index: 0;
+	-webkit-animation-name: fadeout;
+	-moz-animation-name: fadeout;
+	
+}
+
+
 .pop.in.reverse {
 	z-index: 0;
-	-webkit-animation-name: dontmove;
-	-moz-animation-name: dontmove;
+	-webkit-animation-name: fadein;
+	-moz-animation-name: fadein;
 }
 
 .pop.out.reverse {
