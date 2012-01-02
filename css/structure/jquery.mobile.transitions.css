@@ -39,9 +39,9 @@ Built by David Kaneda and maintained by Jonathan Stark.
 
 .slide.in {
 	-webkit-transform: translateX(0);
-	-webkit-animation-name: slideinfromright;
+	-webkit-animation-name: fadein;
 	-moz-transform: translateX(0);
-	-moz-animation-name: slideinfromright;
+	-moz-animation-name: fadein;
 }
 
 .slide.out.reverse {
@@ -53,14 +53,14 @@ Built by David Kaneda and maintained by Jonathan Stark.
 
 .slide.in.reverse {
 	-webkit-transform: translateX(0);
-	-webkit-animation-name: slideinfromleft;
+	-webkit-animation-name: fadein;
 	-moz-transform: translateX(0);
-	-moz-animation-name: slideinfromleft;
+	-moz-animation-name: fadein;
 }
 
 .slideup.out {
-	-webkit-animation-name: dontmove;
-	-moz-animation-name: dontmove;
+	-webkit-animation-name: fadeout;
+	-moz-animation-name: fadeout;
 	z-index: 0;
 }
 
@@ -74,8 +74,8 @@ Built by David Kaneda and maintained by Jonathan Stark.
 
 .slideup.in.reverse {
 	z-index: 0;
-	-webkit-animation-name: dontmove;
-	-moz-animation-name: dontmove;
+	-webkit-animation-name: fadein;
+	-moz-animation-name: fadein;
 }
 
 .slideup.out.reverse {
@@ -87,8 +87,8 @@ Built by David Kaneda and maintained by Jonathan Stark.
 }
 
 .slidedown.out {
-	-webkit-animation-name: dontmove;
-	-moz-animation-name: dontmove;
+	-webkit-animation-name: fadeout;
+	-moz-animation-name: fadeout;
 	z-index: 0;
 }
 
@@ -102,8 +102,8 @@ Built by David Kaneda and maintained by Jonathan Stark.
 
 .slidedown.in.reverse {
 	z-index: 0;
-	-webkit-animation-name: dontmove;
-	-moz-animation-name: dontmove;
+	-webkit-animation-name: fadein;
+	-moz-animation-name: fadein;
 }
 
 .slidedown.out.reverse {
@@ -258,10 +258,13 @@ Built by David Kaneda and maintained by Jonathan Stark.
 }
 
 .flip.in {
-	-webkit-transform: rotateY(0) scale(1);
-	-webkit-animation-name: flipinfromleft;
-	-moz-transform: rotateY(0) scale(1);
-	-moz-animation-name: flipinfromleft;
+	opacity: 1;
+	z-index: 10;
+	-webkit-animation-duration: 300ms;
+	-webkit-animation-name: fadein;
+	-moz-animation-duration: 300ms;
+	-moz-animation-name: fadein;
+	
 }
 
 /* Shake it all about */
@@ -274,10 +277,13 @@ Built by David Kaneda and maintained by Jonathan Stark.
 }
 
 .flip.in.reverse {
-	-webkit-transform: rotateY(0) scale(1);
-	-webkit-animation-name: flipinfromright;
-	-moz-transform: rotateY(0) scale(1);
-	-moz-animation-name: flipinfromright;
+	opacity: 1;
+	z-index: 10;
+	-webkit-animation-duration: 300ms;
+	-webkit-animation-name: fadein;
+	-moz-animation-duration: 300ms;
+	-moz-animation-name: fadein;
+	
 }
 
 @-webkit-keyframes flipinfromright {
