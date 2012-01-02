@@ -359,18 +359,25 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		}
 	},
 
-	enable: function() {
-		this.element.attr( "disabled", false );
-		this.slider.removeClass( "ui-disabled" ).attr( "aria-disabled", false );
-		return this._setOption( "disabled", false );
+	_setOption: function(key, value) {
+		switch(key) {
+			case "disabled":
+				this._setDisabled(value);
+				break;
+		}
 	},
 
-	disable: function() {
-		this.element.attr( "disabled", true );
-		this.slider.addClass( "ui-disabled" ).attr( "aria-disabled", true );
-		return this._setOption( "disabled", true );
+	_setDisabled: function(value) {
+		if (value) {
+			this.element.attr( "disabled", true );
+			this.slider.addClass( "ui-disabled" ).attr( "aria-disabled", true );
+		}
+		else {
+			this.element.attr( "disabled", false );
+			this.slider.removeClass( "ui-disabled" ).attr( "aria-disabled", false );
+		}
+		return $.mobile.widget.prototype._setOption.call(this, "disabled", value);
 	}
-
 });
 
 //auto self-init widgets
