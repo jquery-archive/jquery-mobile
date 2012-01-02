@@ -18,7 +18,7 @@ $files = array(
 	'jquery.mobile.navigation.js',
 	'jquery.mobile.navigation.pushstate.js',
 	'jquery.mobile.transition.js',
-	'jquery.mobile.transition.fadeoutin.js',
+	'jquery.mobile.transition.outin.js',
 	'jquery.mobile.degradeInputs.js',
 	'jquery.mobile.dialog.js',
 	'jquery.mobile.page.sections.js',
