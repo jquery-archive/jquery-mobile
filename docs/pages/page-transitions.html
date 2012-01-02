@@ -248,6 +248,20 @@ $.mobile.defaultTransitionHandler = myTransitionHandler;
 
 		<p>Once you do this, your handler will be invoked any time a transition name is used but not found within the <code>$.mobile.transitionHandlers</code> dictionary.</p>
 			
+		<h2>Transitions and scroll position</h2>
+		<p>One of the key things jQuery Mobile does is store your scroll position before starting a transition so it can restore you to the same place once you return to the page when hitting the Back button or closing a dialog. Here are the same buttons from the top to test the scrolling logic.</p>
+		<div class="ui-grid-a">
+			<div class="ui-block-a">
+				<a href="#dialog" data-role="button" data-rel="dialog" data-transition="slide">slide</a>
+				<a href="#dialog" data-role="button" data-rel="dialog" data-transition="slideup">slideup</a>
+				<a href="#dialog" data-role="button" data-rel="dialog" data-transition="slidedown">slidedown</a>
+			</div>
+			<div class="ui-block-b">
+			    <a href="#dialog" data-role="button" data-rel="dialog" data-transition="pop">pop</a>
+				<a href="#dialog" data-role="button" data-rel="dialog" data-transition="fade">fade</a>
+				<a href="#dialog" data-role="button" data-rel="dialog" data-transition="flip">flip*</a>
+			</div>
+		</div><!-- /grid-a -->
 
 				</div><!--/content-primary -->		
 
