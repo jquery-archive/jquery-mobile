@@ -9,11 +9,13 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		closeBtnText 	: "Close",
 		overlayTheme	: "a",
 		initSelector	: ":jqmData(role='dialog')"
+		iconpos		: "notext",
+		includeCloseBtn	: true
 	},
 	_create: function() {
 		var self = this,
 			$el = this.element,
-			headerCloseButton = $( "<a href='#' data-" + $.mobile.ns + "icon='delete' data-" + $.mobile.ns + "iconpos='notext'>"+ this.options.closeBtnText + "</a>" );
+			headerCloseButton = $( "<a href='#' data-" + $.mobile.ns + "icon='delete' data-" + $.mobile.ns + "iconpos=" + this.options.iconpos + ">"+ this.options.closeBtnText + "</a>" );
 
 		$el.addClass( "ui-overlay-" + this.options.overlayTheme );
 
@@ -23,7 +25,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 			.addClass( "ui-dialog" )
 			.find( ":jqmData(role='header')" )
 			.addClass( "ui-corner-top ui-overlay-shadow" )
-				.prepend( headerCloseButton )
+				.prepend( this.options.includeCloseBtn ? headerCloseButton : "" )
 			.end()
 			.find( ":jqmData(role='content'),:jqmData(role='footer')" )
 				.addClass( "ui-overlay-shadow" )
