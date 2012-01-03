@@ -51,8 +51,11 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 		});
 
 		// Wrap the input + label in a div
-		input.add( label )
-			.wrapAll( "<div class='ui-" + inputtype + "'></div>" );
+		var wrapper = document.createElement('div');
+		wrapper.setAttribute('class','ui-'+inputtype);		
+		input[0].parentNode.insertBefore(wrapper,input[0]);
+		wrapper.appendChild(input[0]);				
+		wrapper.appendChild(label[0]);
 
 		label.bind({
 			vmouseover: function( event ) {
