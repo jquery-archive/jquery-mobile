@@ -43,14 +43,16 @@
 
 		// TODO prevent test suite loads when the browser doesn't support push state
 		// and push-state false is defined.
-		setPushStateFor: function( libs ) {
+		setPushState: function() {
 			if( $.support.pushState && location.search.indexOf( "push-state" ) >= 0 ) {
 				$.support.pushState = false;
 			}
+		},
 
-			$.each(libs, function(i, l) {
-				$( "<script>", { src: l }).appendTo("head");
-			});
+		stubDefine: function() {
+			window.define = function(){
+				Array.prototype.slice.call(arguments).pop()();
+			};
 		},
 
 		reloads: {},
