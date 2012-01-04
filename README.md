@@ -86,7 +86,9 @@ And in your browser visit [localhost:8000](http://localhost:8000).
 AMD Support in Development
 ==========================
 
-Please bear in mind that async loading is not supported for production and is primarily used for the project's build process. If you find dependency bugs when using the async loading support for development please log them in the github issue tracker.
+Please bear in mind that async loading is not supported for production and is primarily used for the project's build process. As a result developers should expect an initial flash of unstyled content, which will not occur when the library is compiled.
+
+If you find dependency bugs when using the async loading support for development please log them in the github issue tracker.
 
 Building With A Custom Theme
 ============================
