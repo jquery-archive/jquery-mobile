@@ -6,10 +6,8 @@
 .slideup.out.reverse,
 .slidedown.in,
 .slidedown.in.reverse {
-	-webkit-animation-duration: 300ms;
-	-moz-animation-duration: 300ms;
-	-webkit-animation-timing-function: ease-in;
-	-moz-animation-timing-function: ease-in;
+	-webkit-animation-duration: 350ms;
+	-moz-animation-duration: 350ms;
 }
 
 /* in non-3D browsers, get rid of the fade in animation */
@@ -19,9 +17,11 @@
 .ui-unsupported-csstransform3d .slidedown.in.reverse {
 	z-index:10;
 	-webkit-animation-name: nofade;
-	-webkit-animation-duration: 300ms;
+	-webkit-animation-duration: 350ms;
+	-webkit-animation-name: nofade;
 	-moz-animation-name: nofade;
-	-moz-animation-duration: 300ms;
+	-moz-animation-duration: 350ms;
+	-moz-animation-timing-function: ease-in-out;
 }
 
 /* in non-3D browsers, get rid of the fade out animation */
@@ -30,7 +30,11 @@
  {
 	z-index:0;
 	-webkit-animation-name: nofade;
-	-webkit-animation-duration: 300ms;
+	-webkit-animation-duration: 350ms;
+	-webkit-animation-timing-function: ease-in-out;
+	-moz-animation-name: nofade;
+	-moz-animation-duration: 350ms;
+	-moz-animation-timing-function: ease-in-out;
 }
 
 /* slide */
