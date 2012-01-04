@@ -39,6 +39,10 @@ JSFILES = 	  js/jquery.ui.widget.js \
 # The files to include when compiling the CSS files
 CSSFILES = css/structure/jquery.mobile.core.css \
 			  css/structure/jquery.mobile.transitions.css \
+			  css/structure/jquery.mobile.transitions.fade.css \
+			  css/structure/jquery.mobile.transitions.pop.css \
+			  css/structure/jquery.mobile.transitions.slide.css \
+			  css/structure/jquery.mobile.transitions.flip.css \
 			  css/structure/jquery.mobile.grids.css \
 			  css/structure/jquery.mobile.headerfooter.css \
 			  css/structure/jquery.mobile.navbar.css \
