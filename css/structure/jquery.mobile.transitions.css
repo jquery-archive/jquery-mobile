@@ -8,14 +8,25 @@
 
 .in {
 	-webkit-animation-timing-function: ease-out;
-	-webkit-animation-duration: 300ms;
+	-webkit-animation-duration: 350ms;
 	-moz-animation-timing-function: ease-out;
-	-moz-animation-duration: 300ms;
+	-moz-animation-duration: 350ms;
 }
 
 .out {
 	-webkit-animation-timing-function: ease-in;
-	-webkit-animation-duration: 150ms;
+	-webkit-animation-duration: 225ms;
 	-moz-animation-timing-function: ease-in;
-	-moz-animation-duration: 150ms;
+	-moz-animation-duration: 225;
+}
+
+
+
+@-webkit-keyframes nofade {
+    from { opacity:1; }
+    to { opacity:1; }
+}
+@-moz-keyframes nofade {
+    from { opacity:1; }
+    to { opacity:1; }
 }
