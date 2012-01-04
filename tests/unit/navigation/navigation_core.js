@@ -37,8 +37,9 @@
 
 			// force the page reset for all pushstate tests
 			if ( $.support.pushState ) {
-				pageReset( home );
+				pageReset( homeWithSearch );
 			}
+
 
 			$.mobile.urlHistory.stack = [];
 			$.mobile.urlHistory.activeIndex = 0;
