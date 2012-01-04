@@ -271,6 +271,28 @@ Built by David Kaneda and maintained by Jonathan Stark.
 	
 }
 
+/* for non-3d supporting browsers, use fade */
+.ui-unsupported-csstransform3d .flip.out,
+.ui-unsupported-csstransform3d .flip.out.reverse {
+	z-index: 0;
+	opacity: 0;
+	-webkit-animation-duration: 150ms;
+	-webkit-animation-name: fadeout;
+	-moz-animation-duration: 150ms;
+	-moz-animation-name: fadeout;
+}
+
+.ui-unsupported-csstransform3d .flip.in,
+.ui-unsupported-csstransform3d .flip.in.reverse {
+	opacity: 1;
+	z-index: 10;
+	-webkit-animation-duration: 300ms;
+	-webkit-animation-name: fadein;
+	-moz-animation-duration: 300ms;
+	-moz-animation-name: fadein;
+}
+
+
 @-webkit-keyframes flipinfromright {
     from { -webkit-transform: rotateY(-180deg) scale(.8); }
     to { -webkit-transform: rotateY(0) scale(1); }
