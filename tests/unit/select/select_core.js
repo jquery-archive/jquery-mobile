@@ -334,8 +334,6 @@
 		same(window.encodedValueIsDefined, true);
 	});
 
-	$.mobile.page.prototype.options.keepNative = "select.should-be-native";
-
 	// not testing the positive case here since's it's obviously tested elsewhere
 	test( "select elements in the keepNative set shouldn't be enhanced", function() {
 		ok( !$("#keep-native").parent().is("div.ui-btn") );
