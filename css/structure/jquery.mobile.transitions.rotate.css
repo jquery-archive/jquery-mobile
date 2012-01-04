@@ -1,0 +1,72 @@
+@-webkit-keyframes rotateinfromleft {
+    from { -webkit-transform: rotate(-90deg); }
+    to { -webkit-transform: rotate(0deg); }
+}
+@-moz-keyframes rotateinfromleft {
+    from { -moz-transform: rotate(-90deg); }
+    to { -moz-transform: rotate(0deg); }
+}
+
+@-webkit-keyframes rotateinfromright {
+    from { -webkit-transform: rotate(90deg); }
+    to { -webkit-transform: rotate(0deg); }
+}
+
+@-moz-keyframes rotateinfromright {
+    from { -moz-transform: rotate(90deg); }
+    to { -moz-transform: rotate(0deg); }
+}
+
+@-webkit-keyframes rotateouttoright {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(90deg); }
+}
+
+@-moz-keyframes rotateouttoright {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(90deg); }
+}
+
+@-webkit-keyframes rotateouttoleft {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(-90deg); }
+}
+
+@-moz-keyframes rotateouttoleft {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(-90deg); }
+}
+
+.rotate {
+	-webkit-transform-origin: 50% 80%;
+	-webkit-transform-origin: 50% 80%;
+}
+
+.rotate.out {
+	-webkit-transform: rotate(-90deg);
+	-webkit-animation-name: rotateouttoleft;
+	-moz-transform: rotate(-90deg);
+	-moz-animation-name: rotateouttoleft;
+}
+
+.rotate.in {
+	-webkit-transform: rotate(0deg);
+	-webkit-animation-name: rotateinfromright;
+	-moz-transform: rotate(0deg);
+	-moz-animation-name: rotateinfromright;
+}
+
+.rotate.out.reverse {
+	-webkit-transform: rotate(90deg);
+	-webkit-animation-name: rotateouttoright;
+	-moz-transform: rotate(90deg);
+	-moz-animation-name: rotateouttoright;
+}
+
+.rotate.in.reverse {
+	-webkit-transform: rotate(0deg);
+	-webkit-animation-name: rotateinfromleft;
+	-moz-transform: rotate(0deg);
+	-moz-animation-name: rotateinfromleft;
+}
+
