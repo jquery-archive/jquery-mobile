@@ -17,7 +17,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 	_create: function() {
 
 		// if false is returned by the callbacks do not create the page
-		if( !this._trigger( "beforecreate" ) ){
+		if( this._trigger( "beforecreate" ) === false ){
 			return false;
 		}
 
