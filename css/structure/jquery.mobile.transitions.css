@@ -8,14 +8,14 @@
 
 .in {
 	-webkit-animation-timing-function: ease-out;
-	-webkit-animation-duration: 150ms;
+	-webkit-animation-duration: 300ms;
 	-moz-animation-timing-function: ease-out;
-	-moz-animation-duration: 150ms;
+	-moz-animation-duration: 300ms;
 }
 
 .out {
 	-webkit-animation-timing-function: ease-in;
-	-webkit-animation-duration: 300ms;
+	-webkit-animation-duration: 150ms;
 	-moz-animation-timing-function: ease-in;
-	-moz-animation-duration: 300ms;
+	-moz-animation-duration: 150ms;
 }
