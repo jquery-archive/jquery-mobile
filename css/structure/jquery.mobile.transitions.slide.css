@@ -1,3 +1,40 @@
+/* give the transition more time if sliding to prevent hiccups, different from the global defaults */
+.slide.in,
+.slide.out,
+.slide.out.reverse,
+.slideup.in,
+.slideup.out.reverse,
+.slidedown.in,
+.slidedown.in.reverse {
+	-webkit-animation-duration: 300ms;
+	-moz-animation-duration: 300ms;
+	-webkit-animation-timing-function: ease-in;
+	-moz-animation-timing-function: ease-in;
+}
+
+/* in non-3D browsers, get rid of the fade in animation */
+.ui-unsupported-csstransform3d .slide.in,
+.ui-unsupported-csstransform3d .slide.in.reverse,
+.ui-unsupported-csstransform3d .slideup.in.reverse,
+.ui-unsupported-csstransform3d .slidedown.in.reverse {
+	z-index:10;
+	-webkit-animation-name: nofade;
+	-webkit-animation-duration: 300ms;
+	-moz-animation-name: nofade;
+	-moz-animation-duration: 300ms;
+}
+
+/* in non-3D browsers, get rid of the fade out animation */
+.ui-unsupported-csstransform3d .slideup.out,
+.ui-unsupported-csstransform3d .slidedown.out
+ {
+	z-index:0;
+	-webkit-animation-name: nofade;
+	-webkit-animation-duration: 300ms;
+}
+
+/* slide */
+
 .slide.out {
 	-webkit-transform: translateX(-100%);
 	-webkit-animation-name: slideouttoleft;
@@ -26,6 +63,9 @@
 	-moz-animation-name: fadein;
 }
 
+
+/* slide up */
+
 .slideup.out {
 	-webkit-animation-name: fadeout;
 	-moz-animation-name: fadeout;
@@ -53,6 +93,8 @@
 	-webkit-animation-name: slideouttobottom;
 	-moz-animation-name: slideouttobottom;
 }
+
+/* slide down */
 
 .slidedown.out {
 	-webkit-animation-name: fadeout;
