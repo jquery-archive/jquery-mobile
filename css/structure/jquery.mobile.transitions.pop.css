@@ -16,7 +16,6 @@
 	z-index: 0;
 	-webkit-animation-name: fadeout;
 	-moz-animation-name: fadeout;
-	
 }
 
 .pop.in.reverse {
@@ -77,3 +76,47 @@
         opacity: 0;
     }
 }
+
+/* for non-3d supporting browsers, remove the fade and just animate size */
+
+.ui-unsupported-csstransform3d .pop.out,
+.ui-unsupported-csstransform3d .pop.in.reverse {
+	z-index: 0;
+	opacity: 0;
+	-webkit-animation-duration: 200ms;
+	-webkit-animation-name: nofade;
+}
+
+.ui-unsupported-csstransform3d .pop.in {
+	-webkit-transform: scale(1);
+    opacity: 1;
+	-webkit-animation-name: popin-basic;
+	-webkit-animation-duration: 325ms;
+	z-index: 10;
+}
+.ui-unsupported-csstransform3d .pop.out.reverse {
+	-webkit-transform: scale(0);
+	opacity: 1;
+	-webkit-animation-name: popout-basic;
+	-webkit-animation-duration: 325ms;
+	z-index: 10;
+}
+
+@-webkit-keyframes popin-basic {
+    from {
+        -webkit-transform: scale(0);
+    }
+    to {
+        -webkit-transform: scale(1);
+    }
+}
+
+@-webkit-keyframes popout-basic {
+    from {
+        -webkit-transform: scale(1);
+    }
+    to {
+        -webkit-transform: scale(0);
+    }
+}
+
