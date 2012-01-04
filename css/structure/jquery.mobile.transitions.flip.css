@@ -35,8 +35,6 @@
 	-moz-animation-name: fadein;
 }
 
-/* Shake it all about */
-
 .flip.out.reverse {
 	-webkit-transform: rotateY(180deg) scale(.8);
 	-webkit-animation-name: flipouttoright;
