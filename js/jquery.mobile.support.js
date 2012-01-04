@@ -23,6 +23,12 @@ function propExists( prop ) {
 	}
 }
 
+// Thanks to Modernizr src for this test idea
+function transform3dTest() {
+	var prop = "transform-3d";
+	return $.mobile.media( "(-" + vendors.join( "-" + prop + "),(-" ) + prop + "),(" + prop + ")" );
+}
+
 // Test for dynamic-updating base tag support ( allows us to avoid href,src attr rewriting )
 function baseTagTest() {
 	var fauxBase = location.protocol + "//" + location.host + location.pathname + "ui-dir/",
@@ -72,6 +78,7 @@ $.extend( $.support, {
 	mediaquery: $.mobile.media( "only all" ),
 	cssPseudoElement: !!propExists( "content" ),
 	touchOverflow: !!propExists( "overflowScrolling" ),
+	cssTransform3d: transform3dTest(),
 	boxShadow: !!propExists( "boxShadow" ) && !bb,
 	scrollTop: ( "pageXOffset" in window || "scrollTop" in document.documentElement || "scrollTop" in fakeBody[ 0 ] ) && !webos && !operamini,
 	dynamicBaseTag: baseTagTest()
