@@ -1,45 +1,3 @@
-/* in non-3D browsers, get rid of the fade in animation and give them more duration to prevent jumping */
-.ui-unsupported-csstransform3d .slide.in,
-.ui-unsupported-csstransform3d .slide.in.reverse,
-.ui-unsupported-csstransform3d .slideup.in.reverse,
-.ui-unsupported-csstransform3d .slidedown.in.reverse {
-	z-index:10;
-	-webkit-animation-name: nofade;
-	-webkit-animation-duration: 500ms;
-	-webkit-animation-timing-function: ease-out;
-	-moz-animation-name: nofade;
-	-moz-animation-duration: 500ms;
-	-moz-animation-timing-function: ease-in;
-}
-
-/* in non-3D browsers, get rid of the fade out animation and use the same timing */
-.ui-unsupported-csstransform3d .slideup.out,
-.ui-unsupported-csstransform3d .slidedown.out
- {
-	z-index:0;
-	-webkit-animation-name: nofade;
-	-webkit-animation-duration: 500ms;
-	-webkit-animation-timing-function: ease-in;
-	-moz-animation-name: nofade;
-	-moz-animation-duration: 500ms;
-	-moz-animation-timing-function: ease-in;
-}
-
-/* in non-3D browsers, use similiar timing for slides that we don't need to exclude fades from */
-.ui-unsupported-csstransform3d .slide.out,
-.ui-unsupported-csstransform3d .slide.out.reverse,
-.ui-unsupported-csstransform3d .slideup.in,
-.ui-unsupported-csstransform3d .slideup.out.reverse,
-.ui-unsupported-csstransform3d .slidedown.out.reverse,
-.ui-unsupported-csstransform3d .slidedown.in {
-	-webkit-animation-duration: 500ms;
-	-webkit-animation-timing-function: ease-out;
-	-moz-animation-duration: 500ms;
-	-moz-animation-timing-function: ease-out;
-}
-
-/* slide */
-
 .slide.out {
 	-webkit-transform: translateX(-100%);
 	-webkit-animation-name: slideouttoleft;
@@ -199,4 +157,45 @@
 @-moz-keyframes slideouttotop {
     from { -moz-transform: translateY(0); }
     to { -moz-transform: translateY(-100%); }
+}
+
+
+/* in non-3D browsers, get rid of the fade in animation and give them more duration to prevent jumping */
+.ui-unsupported-csstransform3d .slide.in,
+.ui-unsupported-csstransform3d .slide.in.reverse,
+.ui-unsupported-csstransform3d .slideup.in.reverse,
+.ui-unsupported-csstransform3d .slidedown.in.reverse {
+	z-index:10;
+	-webkit-animation-name: nofade;
+	-webkit-animation-duration: 500ms;
+	-webkit-animation-timing-function: ease-out;
+	-moz-animation-name: nofade;
+	-moz-animation-duration: 500ms;
+	-moz-animation-timing-function: ease-in;
+}
+
+/* Also get rid of the fade out animation and use the same timing */
+.ui-unsupported-csstransform3d .slideup.out,
+.ui-unsupported-csstransform3d .slidedown.out
+ {
+	z-index:0;
+	-webkit-animation-name: nofade;
+	-webkit-animation-duration: 500ms;
+	-webkit-animation-timing-function: ease-in;
+	-moz-animation-name: nofade;
+	-moz-animation-duration: 500ms;
+	-moz-animation-timing-function: ease-in;
+}
+
+/* use similiar timing for slides that we don't need to exclude fades from */
+.ui-unsupported-csstransform3d .slide.out,
+.ui-unsupported-csstransform3d .slide.out.reverse,
+.ui-unsupported-csstransform3d .slideup.in,
+.ui-unsupported-csstransform3d .slideup.out.reverse,
+.ui-unsupported-csstransform3d .slidedown.out.reverse,
+.ui-unsupported-csstransform3d .slidedown.in {
+	-webkit-animation-duration: 500ms;
+	-webkit-animation-timing-function: ease-out;
+	-moz-animation-duration: 500ms;
+	-moz-animation-timing-function: ease-out;
 }
