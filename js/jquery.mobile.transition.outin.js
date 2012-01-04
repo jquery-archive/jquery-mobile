@@ -88,8 +88,6 @@ if ( $.mobile.defaultTransitionHandler === $.mobile.noneTransitionHandler ) {
 }
 
 // add class for where 3d transforms are supported, or not
-if( $.support.cssTransform3d ){
-	$( "html" ).addClass( $.support.cssTransform3d ? "ui-supported-cssTransform3d" : "ui-unsupported-cssTransform3d" );
-}
+$( "html" ).addClass( $.support.cssTransform3d ? "ui-supported-cssTransform3d" : "ui-unsupported-cssTransform3d" );
 
 })( jQuery, this );
