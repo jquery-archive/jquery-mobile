@@ -268,7 +268,6 @@ Built by David Kaneda and maintained by Jonathan Stark.
 	-webkit-animation-name: fadein;
 	-moz-animation-duration: 300ms;
 	-moz-animation-name: fadein;
-	
 }
 
 /* for non-3d supporting browsers, use fade */
@@ -320,18 +319,6 @@ Built by David Kaneda and maintained by Jonathan Stark.
 }
 
 
-/* Hackish, but reliable. */
-
-@-webkit-keyframes dontmove
- {
-    from { opacity: 1; }
-    to { opacity: 1; }
-}
-@-moz-keyframes dontmove
- {
-    from { opacity: 1; }
-    to { opacity: 1; }
-}
 
 .pop {
 	-webkit-transform-origin: 50% 50%;
