@@ -64,24 +64,6 @@
 	-moz-animation-name: fadeout;
 }
 
-@-webkit-keyframes flipinfromright {
-    from { -webkit-transform: rotateY(-180deg); }
-    to { -webkit-transform: rotateY(0); }
-}
-@-moz-keyframes flipinfromright {
-    from { -moz-transform: rotateY(-180deg); }
-    to { -moz-transform: rotateY(0); }
-}
-
-@-webkit-keyframes flipinfromleft {
-    from { -webkit-transform: rotateY(180deg); }
-    to { -webkit-transform: rotateY(0); }
-}
-@-moz-keyframes flipinfromleft {
-    from { -moz-transform: rotateY(180deg); }
-    to { -moz-transform: rotateY(0); }
-}
-
 @-webkit-keyframes flipouttoleft {
     from { -webkit-transform: rotateY(0); }
     to { -webkit-transform: rotateY(-180deg); }
@@ -90,7 +72,6 @@
     from { -moz-transform: rotateY(0); }
     to { -moz-transform: rotateY(-180deg); }
 }
-
 @-webkit-keyframes flipouttoright {
     from { -webkit-transform: rotateY(0) ; }
     to { -webkit-transform: rotateY(180deg); }
