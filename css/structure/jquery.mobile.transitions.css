@@ -21,12 +21,13 @@
 }
 
 
+/* a dummy transition to override animations in non-3D browsers */
 
 @-webkit-keyframes nofade {
-    from { opacity:1; }
-    to { opacity:1; }
+    from { outline:0; }
+    to { outline:0; }
 }
 @-moz-keyframes nofade {
-    from { opacity:1; }
-    to { opacity:1; }
+    from { outline:0; }
+    to { outline:0; }
 }

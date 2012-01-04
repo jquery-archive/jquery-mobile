@@ -1,40 +1,41 @@
-/* give the transition more time if sliding to prevent hiccups, different from the global defaults */
-.slide.in,
-.slide.out,
-.slide.out.reverse,
-.slideup.in,
-.slideup.out.reverse,
-.slidedown.in,
-.slidedown.in.reverse {
-	-webkit-animation-duration: 350ms;
-	-moz-animation-duration: 350ms;
-}
-
-/* in non-3D browsers, get rid of the fade in animation */
+/* in non-3D browsers, get rid of the fade in animation and give them more duration to prevent jumping */
 .ui-unsupported-csstransform3d .slide.in,
 .ui-unsupported-csstransform3d .slide.in.reverse,
 .ui-unsupported-csstransform3d .slideup.in.reverse,
 .ui-unsupported-csstransform3d .slidedown.in.reverse {
 	z-index:10;
 	-webkit-animation-name: nofade;
-	-webkit-animation-duration: 350ms;
-	-webkit-animation-name: nofade;
+	-webkit-animation-duration: 500ms;
+	-webkit-animation-timing-function: ease-out;
 	-moz-animation-name: nofade;
-	-moz-animation-duration: 350ms;
-	-moz-animation-timing-function: ease-in-out;
+	-moz-animation-duration: 500ms;
+	-moz-animation-timing-function: ease-in;
 }
 
-/* in non-3D browsers, get rid of the fade out animation */
+/* in non-3D browsers, get rid of the fade out animation and use the same timing */
 .ui-unsupported-csstransform3d .slideup.out,
 .ui-unsupported-csstransform3d .slidedown.out
  {
 	z-index:0;
 	-webkit-animation-name: nofade;
-	-webkit-animation-duration: 350ms;
-	-webkit-animation-timing-function: ease-in-out;
+	-webkit-animation-duration: 500ms;
+	-webkit-animation-timing-function: ease-in;
 	-moz-animation-name: nofade;
-	-moz-animation-duration: 350ms;
-	-moz-animation-timing-function: ease-in-out;
+	-moz-animation-duration: 500ms;
+	-moz-animation-timing-function: ease-in;
+}
+
+/* in non-3D browsers, use similiar timing for slides that we don't need to exclude fades from */
+.ui-unsupported-csstransform3d .slide.out,
+.ui-unsupported-csstransform3d .slide.out.reverse,
+.ui-unsupported-csstransform3d .slideup.in,
+.ui-unsupported-csstransform3d .slideup.out.reverse,
+.ui-unsupported-csstransform3d .slidedown.out.reverse,
+.ui-unsupported-csstransform3d .slidedown.in {
+	-webkit-animation-duration: 500ms;
+	-webkit-animation-timing-function: ease-out;
+	-moz-animation-duration: 500ms;
+	-moz-animation-timing-function: ease-out;
 }
 
 /* slide */
