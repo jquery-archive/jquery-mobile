@@ -2,6 +2,9 @@
 * widget factory extentions for mobile
 */
 
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+define( [ "jquery.ui.widget" ], function() {
+//>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 $.widget( "mobile.widget", {
@@ -47,3 +50,6 @@ $.widget( "mobile.widget", {
 });
 
 })( jQuery );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");

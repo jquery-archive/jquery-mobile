@@ -1,7 +1,9 @@
 /*
 * "textinput" plugin for text inputs, textareas
 */
-
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+define( [ "jquery.mobile.core", "jquery.mobile.widget", "jquery.mobile.degradeInputs", "jquery.mobile.buttonMarkup"  ], function() {
+//>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 $.widget( "mobile.textinput", $.mobile.widget, {
@@ -126,3 +128,6 @@ $( document ).bind( "pagecreate create", function( e ){
 });
 
 })( jQuery );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");

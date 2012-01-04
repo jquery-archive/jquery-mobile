@@ -2,6 +2,9 @@
 * history.pushState support, layered on top of hashchange
 */
 
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+define( [ "jquery.mobile.navigation" ], function() {
+//>>excludeEnd("jqmBuildExclude");
 ( function( $, window ) {
 	// For now, let's Monkeypatch this onto the end of $.mobile._registerInternalEvents
 	// Scope self to pushStateHandler so we can reference it sanely within the
@@ -132,3 +135,6 @@
 		}
 	});
 })( jQuery, this );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");

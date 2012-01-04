@@ -2,12 +2,15 @@
 * "core" - The base file for jQm
 */
 
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+define( [ "jquery.mobile.widget" ], function() {
+//>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
 	var nsNormalizeDict = {};
 
 	// jQuery.mobile configurable options
-	$.extend( $.mobile, {
+	$.mobile = $.extend( {}, {
 
 		// Namespace used framework-wide for data-attrs. Default is no namespace
 		ns: "",
@@ -174,7 +177,7 @@
 				.closest(':jqmData(role="page"), :jqmData(role="dialog")')
 				.data("page");
 		}
-	});
+	}, $.mobile );
 
 	// Mobile version of data and removeData and hasData methods
 	// ensures all data is set and retrieved using jQuery Mobile's data namespace
@@ -250,4 +253,7 @@
 		return $.find( expr, null, null, [ node ] ).length > 0;
 	};
 })( jQuery, this );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");
 

@@ -2,6 +2,11 @@
 * support tests
 */
 
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+// For test purposes we can't use anonymous module here otherwise
+// the tests will throw http://requirejs.org/docs/errors.html#mismatch
+define( "jquery.mobile.support", [ "jquery.mobile.media" ], function() {
+//>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 var fakeBody = $( "<body>" ).prependTo( "html" ),
@@ -50,7 +55,7 @@ function baseTagTest() {
 
 // non-UA-based IE version check by James Padolsey, modified by jdalton - from http://gist.github.com/527683
 // allows for inclusion of IE 6+, including Windows Mobile 7
-$.mobile.browser = {};
+$.extend( $.mobile, { browser: {} } );
 $.mobile.browser.ie = (function() {
 	var v = 3,
 	div = document.createElement( "div" ),
@@ -118,3 +123,6 @@ if ( !$.support.boxShadow ) {
 }
 
 })( jQuery );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");

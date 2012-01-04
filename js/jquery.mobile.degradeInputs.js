@@ -2,6 +2,9 @@
 * "degradeInputs" plugin - degrades inputs to another type after custom enhancements are made.
 */
 
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+define( [ "jquery.mobile.page" ], function() {
+//>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 $.mobile.page.prototype.options.degradeInputs = {
@@ -52,3 +55,6 @@ $( document ).bind( "pagecreate create", function( e ){
 });
 
 })( jQuery );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");

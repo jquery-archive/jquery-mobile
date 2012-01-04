@@ -2,6 +2,9 @@
 * "listview" plugin
 */
 
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+define( [ "jquery.mobile.widget", "jquery.mobile.buttonMarkup", "jquery.mobile.page", "jquery.mobile.page.sections" ], function() {
+//>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 //Keeps track of the number of lists per page UID
@@ -191,7 +194,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 						item.addClass( "ui-li-has-arrow" );
 					}
 
-					a.first().addClass( "ui-link-inherit" );
+					a.first().removeClass( "ui-link" ).addClass( "ui-link-inherit" );
 
 					if ( a.length > 1 ) {
 						itemClass += " ui-li-has-alt";
@@ -397,3 +400,6 @@ $( document ).bind( "pagecreate create", function( e ){
 });
 
 })( jQuery );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");

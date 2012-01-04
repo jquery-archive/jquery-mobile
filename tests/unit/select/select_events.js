@@ -3,7 +3,7 @@
  */
 
 (function($){
-	var libName = "jquery.mobile.forms.select.js";
+	var libName = "jquery.mobile.forms.select";
 
 	$(document).bind('mobileinit', function(){
 		$.mobile.selectmenu.prototype.options.nativeMenu = false;

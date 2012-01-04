@@ -1,7 +1,9 @@
 /*
 * "slider" plugin
 */
-
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+define( [ "jquery.mobile.core", "jquery.mobile.widget", "jquery.mobile.forms.textinput", "jquery.mobile.buttonMarkup" ], function() {
+//>>excludeEnd("jqmBuildExclude");
 ( function( $, undefined ) {
 
 $.widget( "mobile.slider", $.mobile.widget, {
@@ -377,3 +379,6 @@ $( document ).bind( "pagecreate create", function( e ){
 });
 
 })( jQuery );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");

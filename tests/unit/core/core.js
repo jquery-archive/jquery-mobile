@@ -3,7 +3,7 @@
  */
 
 (function($){
-	var libName = "jquery.mobile.core.js",
+	var libName = "jquery.mobile.core",
 			setGradeA = function(value, version) {
 				$.support.mediaquery = value;
 				$.mobile.browser.ie = version;
@@ -24,14 +24,27 @@
 	});
 
 	$.testHelper.excludeFileProtocol(function(){
-		test( "grade A browser either supports media queries or is IE 7+", function(){
+		asyncTest( "grade A browser either supports media queries or is IE 7+", function(){
 			setGradeA(false, 6);
-			$.testHelper.reloadLib(libName);
-			ok(!$.mobile.gradeA());
+			$.testHelper.deferredSequence([
+				function() {
+					return $.testHelper.reloadModule(libName);
+				},
 
-			setGradeA(true, 8);
-			$.testHelper.reloadLib(libName);
-			ok($.mobile.gradeA());
+				function() {
+					ok(!$.mobile.gradeA());
+				},
+
+				function() {
+					setGradeA(true, 8);
+					return $.testHelper.reloadModule(libName);
+				},
+
+				function() {
+					ok($.mobile.gradeA());
+					start();
+				}
+			]);
 		});
 	});
 
@@ -143,7 +156,7 @@
 	test( "$.fn.getEncodedText should return the encoded value where $.fn.text doesn't", function() {
 		same( $("#encoded").text(), "foo>");
 		same( $("#encoded").getEncodedText(), "foo&gt;");
-		same( $("#unencoded").getEncodedText(), "foo");
+		same( $("#unencoded").getEncodedText(), "var foo;");
 	});
 
 	test( "closestPageData returns the parent's page data", function() {

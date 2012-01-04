@@ -2,6 +2,9 @@
 * plugin for creating CSS grids
 */
 
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+define(function() {
+//>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 $.fn.grid = function( options ) {
@@ -48,3 +51,6 @@ $.fn.grid = function( options ) {
 	});
 };
 })( jQuery );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");

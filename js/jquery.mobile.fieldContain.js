@@ -2,6 +2,9 @@
 * "fieldcontain" plugin - simple class additions to make form row separators
 */
 
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+define(function() {
+//>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 $.fn.fieldcontain = function( options ) {
@@ -14,3 +17,6 @@ $( document ).bind( "pagecreate create", function( e ){
 });
 
 })( jQuery );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");

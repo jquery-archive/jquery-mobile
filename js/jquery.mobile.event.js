@@ -2,6 +2,9 @@
 * "events" plugin - Handles events
 */
 
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+define( [ "jquery.mobile.core", "jquery.mobile.support", "jquery.mobile.vmouse" ], function() {
+//>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
 // add new event shortcuts
@@ -316,3 +319,6 @@ $.each({
 });
 
 })( jQuery, this );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");

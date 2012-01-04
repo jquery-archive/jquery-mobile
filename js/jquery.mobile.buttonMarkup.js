@@ -2,6 +2,9 @@
 * "buttons" plugin - for making button-like links
 */
 
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+define( [ "jquery.mobile.core", "jquery.mobile.vmouse" ], function() {
+//>>excludeEnd("jqmBuildExclude");
 ( function( $, undefined ) {
 
 $.fn.buttonMarkup = function( options ) {
@@ -23,7 +26,6 @@ $.fn.buttonMarkup = function( options ) {
 			innerClass = "ui-btn-inner",
 			textClass = "ui-btn-text",
 			buttonClass, iconClass,
-
 			// Button inner markup
 			buttonInner = document.createElement( o.wrapperEls ),
 			buttonText = document.createElement( o.wrapperEls ),
@@ -73,7 +75,7 @@ $.fn.buttonMarkup = function( options ) {
 		}
 
 		e.setAttribute( "data-" + $.mobile.ns + "theme", o.theme );
-		el.addClass( buttonClass );
+		el.removeClass( "ui-link" ).addClass( buttonClass );
 
 		buttonInner.className = innerClass;
 
@@ -203,3 +205,7 @@ $( document ).bind( "pagecreate create", function( e ){
 });
 
 })( jQuery );
+
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");

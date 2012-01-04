@@ -2,6 +2,9 @@
 * "fixHeaderFooter" native plugin - Behavior for "fixed" headers,footers, and scrolling inner content
 */
 
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+define( [ "jquery.mobile.core" ], function() {
+//>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 // Enable touch overflow scrolling when it's natively supported
@@ -58,3 +61,6 @@ $( document ).bind( "pagecreate", function( event ) {
 });
 
 })( jQuery );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");

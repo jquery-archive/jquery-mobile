@@ -2,7 +2,10 @@
 * "init" - Initialize the framework
 */
 
-(function( $, window, undefined ) {
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+define( [ "jquery.mobile.core", "jquery.mobile.navigation", "jquery.mobile.navigation.pushstate" ], function() {
+//>>excludeEnd("jqmBuildExclude");
+( function( $, window, undefined ) {
 	var	$html = $( "html" ),
 			$head = $( "head" ),
 			$window = $( window );
@@ -98,12 +101,12 @@
 			}
 		}
 	});
-	
+
 	// This function injects a meta viewport tag to prevent scaling. Off by default, on by default when touchOverflow scrolling is enabled
 	function disableZoom() {
 		var cont = "user-scalable=no",
 			meta = $( "meta[name='viewport']" );
-			
+
 		if( meta.length ){
 			meta.attr( "content", meta.attr( "content" ) + ", " + cont );
 		}
@@ -111,7 +114,7 @@
 			$( "head" ).prepend( "<meta>", { "name": "viewport", "content": cont } );
 		}
 	}
-	
+
 	// if touch-overflow is enabled, disable user scaling, as it creates usability issues
 	if( $.support.touchOverflow && $.mobile.touchOverflowEnabled && !$.mobile.touchOverflowZoomEnabled ){
 		disableZoom();
@@ -140,4 +143,7 @@
 		// hide iOS browser chrome on load
 		$window.load( $.mobile.silentScroll );
 	});
-})( jQuery, this );
+}( jQuery, this ));
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");

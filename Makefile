@@ -1,40 +1,3 @@
-# The files to include when compiling the JS files
-JSFILES = 	  js/jquery.ui.widget.js \
-			  js/jquery.mobile.widget.js \
-			  js/jquery.mobile.media.js \
-			  js/jquery.mobile.support.js \
-			  js/jquery.mobile.vmouse.js \
-			  js/jquery.mobile.event.js \
-			  js/jquery.mobile.hashchange.js \
-			  js/jquery.mobile.page.js \
-			  js/jquery.mobile.core.js \
-			  js/jquery.mobile.navigation.js \
-			  js/jquery.mobile.navigation.pushstate.js \
-			  js/jquery.mobile.transition.js \
-			  js/jquery.mobile.degradeInputs.js \
-			  js/jquery.mobile.dialog.js \
-			  js/jquery.mobile.page.sections.js \
-			  js/jquery.mobile.collapsible.js \
-			  js/jquery.mobile.collapsibleSet.js \
-			  js/jquery.mobile.fieldContain.js \
-			  js/jquery.mobile.grid.js \
-			  js/jquery.mobile.navbar.js \
-			  js/jquery.mobile.listview.js \
-			  js/jquery.mobile.listview.filter.js \
-			  js/jquery.mobile.nojs.js \
-			  js/jquery.mobile.forms.checkboxradio.js \
-			  js/jquery.mobile.forms.button.js \
-			  js/jquery.mobile.forms.slider.js \
-			  js/jquery.mobile.forms.textinput.js \
-			  js/jquery.mobile.forms.select.custom.js \
-			  js/jquery.mobile.forms.select.js \
-			  js/jquery.mobile.buttonMarkup.js \
-			  js/jquery.mobile.controlGroup.js \
-			  js/jquery.mobile.links.js \
-			  js/jquery.mobile.fixHeaderFooter.js \
-			  js/jquery.mobile.fixHeaderFooter.native.js \
-			  js/jquery.mobile.init.js
-
 # The files to include when compiling the CSS files
 CSSFILES = css/structure/jquery.mobile.core.css \
 			  css/structure/jquery.mobile.transitions.css \
@@ -89,11 +52,15 @@ all: init css js zip notify
 # Build and minify the CSS files
 css: init
 	# Build the CSS file with the theme included
+	@@java -classpath build/js.jar:build/google-compiler-20111003.jar org.mozilla.javascript.tools.shell.Main \
+			external/r.js/dist/r.js \
+			-o cssIn=css/themes/default/jquery.mobile.theme.css \
+			out=${OUTPUT}/${NAME}.compiled.css
 	@@cat LICENSE-INFO.txt | ${VER} > ${OUTPUT}/${NAME}.css
-	@@cat ${CSSTHEMEFILES} ${CSSFILES} >> ${OUTPUT}/${NAME}.css
-	# ..... and then minify it
+	@@cat ${OUTPUT}/${NAME}.compiled.css >> ${OUTPUT}/${NAME}.css
 	@@echo ${VER_MIN} > ${OUTPUT}/${NAME}.min.css
-	@@java -jar build/yuicompressor-2.4.6.jar --type css ${OUTPUT}/${NAME}.css >> ${OUTPUT}/${NAME}.min.css
+	@@java -jar build/yuicompressor-2.4.6.jar --type css ${OUTPUT}/${NAME}.compiled.css >> ${OUTPUT}/${NAME}.min.css
+	@@rm ${OUTPUT}/${NAME}.compiled.css
 	# Build the CSS Structure-only file
 	@@cat LICENSE-INFO.txt | ${VER} > ${OUTPUT}/${STRUCTURE}.css
 	@@cat ${CSSFILES} >> ${OUTPUT}/${STRUCTURE}.css
@@ -137,16 +104,25 @@ init:
 # Build and minify the JS files
 js: init
 	# Build the JavaScript file
+	@@java -classpath build/js.jar:build/google-compiler-20111003.jar org.mozilla.javascript.tools.shell.Main \
+			external/r.js/dist/r.js \
+		 	-o baseUrl="js" \
+			include=jquery.mobile,jquery.mobile.exports exclude=jquery,order \
+			out=${OUTPUT}/${NAME}.compiled.js \
+			pragmasOnSave.jqmBuildExclude=true \
+			skipModuleInsertion=true \
+			optimize=none
 	@@cat LICENSE-INFO.txt | ${VER} > ${OUTPUT}/${NAME}.js
-	@@cat ${JSFILES} >> ${OUTPUT}/${NAME}.js
+	@@cat ${OUTPUT}/${NAME}.compiled.js >> ${OUTPUT}/${NAME}.js
+	@@rm ${OUTPUT}/${NAME}.compiled.js
 	# ..... and then minify it
 	@@echo ${VER_MIN} > ${OUTPUT}/${NAME}.min.js
 	@@java -XX:ReservedCodeCacheSize=64m \
 				-jar build/google-compiler-20111003.jar \
 				--js ${OUTPUT}/${NAME}.js \
-				--js_output_file ${OUTPUT}/${NAME}.tmp.js
-	@@cat ${OUTPUT}/${NAME}.tmp.js >> ${OUTPUT}/${NAME}.min.js
-	@@rm ${OUTPUT}/${NAME}.tmp.js
+				--js_output_file ${OUTPUT}/${NAME}.compiled.js
+	@@cat ${OUTPUT}/${NAME}.compiled.js >> ${OUTPUT}/${NAME}.min.js
+	@@rm ${OUTPUT}/${NAME}.compiled.js
 	# -------------------------------------------------
 
 
