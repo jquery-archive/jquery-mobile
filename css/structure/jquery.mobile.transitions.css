@@ -245,11 +245,10 @@ Built by David Kaneda and maintained by Jonathan Stark.
 .flip.in {
 	opacity: 1;
 	z-index: 10;
-	-webkit-animation-duration: 300ms;
+	-webkit-animation-duration: 150ms;
 	-webkit-animation-name: fadein;
-	-moz-animation-duration: 300ms;
+	-moz-animation-duration: 150ms;
 	-moz-animation-name: fadein;
-	
 }
 
 /* Shake it all about */
@@ -283,39 +282,39 @@ Built by David Kaneda and maintained by Jonathan Stark.
 
 
 @-webkit-keyframes flipinfromright {
-    from { -webkit-transform: rotateY(-180deg) scale(.8); }
-    to { -webkit-transform: rotateY(0) scale(1); }
+    from { -webkit-transform: rotateY(-180deg); }
+    to { -webkit-transform: rotateY(0); }
 }
 @-moz-keyframes flipinfromright {
-    from { -moz-transform: rotateY(-180deg) scale(.8); }
-    to { -moz-transform: rotateY(0) scale(1); }
+    from { -moz-transform: rotateY(-180deg); }
+    to { -moz-transform: rotateY(0); }
 }
 
 @-webkit-keyframes flipinfromleft {
-    from { -webkit-transform: rotateY(180deg) scale(.8); }
-    to { -webkit-transform: rotateY(0) scale(1); }
+    from { -webkit-transform: rotateY(180deg); }
+    to { -webkit-transform: rotateY(0); }
 }
 @-moz-keyframes flipinfromleft {
-    from { -moz-transform: rotateY(180deg) scale(.8); }
-    to { -moz-transform: rotateY(0) scale(1); }
+    from { -moz-transform: rotateY(180deg); }
+    to { -moz-transform: rotateY(0); }
 }
 
 @-webkit-keyframes flipouttoleft {
-    from { -webkit-transform: rotateY(0) scale(1); }
-    to { -webkit-transform: rotateY(-180deg) scale(.8); }
+    from { -webkit-transform: rotateY(0); }
+    to { -webkit-transform: rotateY(-180deg); }
 }
 @-moz-keyframes flipouttoleft {
-    from { -moz-transform: rotateY(0) scale(1); }
-    to { -moz-transform: rotateY(-180deg) scale(.8); }
+    from { -moz-transform: rotateY(0); }
+    to { -moz-transform: rotateY(-180deg); }
 }
 
 @-webkit-keyframes flipouttoright {
-    from { -webkit-transform: rotateY(0) scale(1); }
-    to { -webkit-transform: rotateY(180deg) scale(.8); }
+    from { -webkit-transform: rotateY(0) ; }
+    to { -webkit-transform: rotateY(180deg); }
 }
 @-moz-keyframes flipouttoright {
-    from { -moz-transform: rotateY(0) scale(1); }
-    to { -moz-transform: rotateY(180deg) scale(.8); }
+    from { -moz-transform: rotateY(0) ; }
+    to { -moz-transform: rotateY(180deg) ; }
 }
 
 
@@ -349,8 +348,8 @@ Built by David Kaneda and maintained by Jonathan Stark.
 }
 
 .pop.out.reverse {
-	-webkit-transform: scale(0);
-	-moz-transform: scale(0);
+	-webkit-transform: scale(.8);
+	-moz-transform: scale(.8);
 	opacity: 0;
 	-webkit-animation-name: popout;
 	-moz-animation-name: popout;
@@ -359,7 +358,7 @@ Built by David Kaneda and maintained by Jonathan Stark.
 
 @-webkit-keyframes popin {
     from {
-        -webkit-transform: scale(0);
+        -webkit-transform: scale(.8);
         opacity: 0;
     }
     to {
@@ -369,7 +368,7 @@ Built by David Kaneda and maintained by Jonathan Stark.
 }
 @-moz-keyframes popin {
     from {
-        -moz-transform: scale(0);
+        -moz-transform: scale(.8);
         opacity: 0;
     }
     to {
@@ -384,7 +383,7 @@ Built by David Kaneda and maintained by Jonathan Stark.
         opacity: 1;
     }
     to {
-        -webkit-transform: scale(0);
+        -webkit-transform: scale(.8);
         opacity: 0;
     }
 }
@@ -394,7 +393,7 @@ Built by David Kaneda and maintained by Jonathan Stark.
         opacity: 1;
     }
     to {
-        -moz-transform: scale(0);
+        -moz-transform: scale(.8);
         opacity: 0;
     }
 }
