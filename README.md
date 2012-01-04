@@ -77,6 +77,17 @@ You need the following Apache modules loaded:
 * Expire (mod\_expires.so)
 * Header (mod\_headers.so)
 
+Alternatively, with the addition of async loading, you can use the python simple http server from the project root:
+
+    $ python -m SimpleHTTPServer 8000
+
+And in your browser visit [localhost:8000](http://localhost:8000).
+
+AMD Support in Development
+==========================
+
+Please bear in mind that async loading is not supported for production and is primarily used for the project's build process. If you find dependency bugs when using the async loading support for development please log them in the github issue tracker.
+
 Building With A Custom Theme
 ============================
 To use a custom theme in your own build, you'll need Make installed. You can find the themes in the CSS/Themes folder.
