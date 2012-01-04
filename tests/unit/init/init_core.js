@@ -6,11 +6,12 @@
 			libName = 'jquery.mobile.init',
 			coreLib = 'jquery.mobile.core',
 			extendFn = $.extend,
+			originalLoadingMessage = $.mobile.loadingMessage;
 			setGradeA = function(value) { $.mobile.gradeA = function(){ return value; }; },
 			reloadCoreNSandInit = function(){
 				return $.testHelper.deferredSequence([
 					function() {
-						$.testHelper.reloadModule("../jquery.setNamespace.js");
+						$.testHelper.reloadModule("../jquery.setNameSpace.js");
 					},
 					function () {
 						$.testHelper.reloadModule(libName);
@@ -35,6 +36,8 @@
 
 			// clear the classes added by reloading the init
 			$("html").attr('class', '');
+
+			$.mobile.loadingMessage = originalLoadingMessage;
 		}
 	});
 
@@ -152,9 +155,9 @@
 		});
 
 		asyncTest( "hashchange triggered on document ready with single argument: true", function(){
-			$.testHelper.deferredSequence([
+			$.testHelper.sequence([
 				function(){
-					location.hash = "#foo";
+					$.testHelper.openPage( "#foo" );
 				},
 
 				// delay the bind until the first hashchange
@@ -168,7 +171,7 @@
 				function(){
 					return $.testHelper.reloadModule(libName);
 				}
-			]);
+			], 1000);
 		});
 
 		test( "pages without a data-url attribute have it set to their id", function(){
@@ -214,15 +217,20 @@
 
 		asyncTest( "page loading should contain default loading message", function(){
 			expect( 1 );
-			//$.mobile.showPageLoadingMsg();
-			reloadCoreNSandInit().done(
+
+			$.testHelper.deferredSequence([
 				function() {
+					return $.testHelper.reloadModule(libName);
+				},
+				function() {
+					$.mobile.showPageLoadingMsg();
+
 					setTimeout(function(){
 						same($(".ui-loader h1").text(), "loading");
 						start();
 					}, 500);
 				}
-			);
+			]);
 		});
 
 		asyncTest( "page loading should contain custom loading message", function(){
@@ -242,7 +250,7 @@
 				}
 			]);
 		});
-		
+
 		asyncTest( "page loading should contain custom loading message when set during runtime", function(){
 			$.mobile.loadingMessage = "bar";
 			$.mobile.showPageLoadingMsg();
@@ -253,57 +261,55 @@
 			}, 500);
 		});
 
-		
 
 		// NOTE: the next two tests work on timeouts that assume a page will be created within 2 seconds
 		// it'd be great to get these using a more reliable callback or event
-		
 		asyncTest( "page does auto-initialize at domready when autoinitialize option is true (default) ", function(){
-			
+
 			$( "<div />", { "data-nstest-role": "page", "id": "autoinit-on" } ).prependTo( "body" )
-			
+
 			$(document).one("mobileinit", function(){
 				$.mobile.autoInitializePage = true;
 			});
-			
+
 			location.hash = "";
-			
+
 			reloadCoreNSandInit();
-			
+
 			setTimeout(function(){
 				same( $( "#autoinit-on.ui-page" ).length, 1 );
-				
+
 				start();
 			}, 2000);
 		});
-		
-		
+
+
 		asyncTest( "page does not initialize at domready when autoinitialize option is false ", function(){
 			$(document).one("mobileinit", function(){
 				$.mobile.autoInitializePage = false;
 			});
-			
+
 			$( "<div />", { "data-nstest-role": "page", "id": "autoinit-off" } ).prependTo( "body" )
-			
+
 			location.hash = "";
-			
-			
+
+
 			reloadCoreNSandInit();
-			
+
 			setTimeout(function(){
 				same( $( "#autoinit-off.ui-page" ).length, 0 );
-				
+
 				$(document).bind("mobileinit", function(){
 					$.mobile.autoInitializePage = true;
 				});
 
 				reloadCoreNSandInit();
-				
+
 				start();
 			}, 2000);
 		});
-		
-		
-		
+
+
+
 	});
 })(jQuery);
