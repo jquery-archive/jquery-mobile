@@ -282,16 +282,6 @@ Built by David Kaneda and maintained by Jonathan Stark.
 	-moz-animation-name: fadeout;
 }
 
-.ui-unsupported-csstransform3d .flip.in,
-.ui-unsupported-csstransform3d .flip.in.reverse {
-	opacity: 1;
-	z-index: 10;
-	-webkit-animation-duration: 300ms;
-	-webkit-animation-name: fadein;
-	-moz-animation-duration: 300ms;
-	-moz-animation-name: fadein;
-}
-
 
 @-webkit-keyframes flipinfromright {
     from { -webkit-transform: rotateY(-180deg) scale(.8); }
