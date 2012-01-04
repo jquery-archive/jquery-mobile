@@ -30,7 +30,7 @@ $.testHelper.excludeFileProtocol(function(){
 
 		$.mobile.media = function(){ return true; };
 
-		$.testHelper.reloadLib(libName).done(
+		$.testHelper.reloadModule(libName).done(
 			function() {
 				ok($.support.orientation);
 				ok($.support.touch);
@@ -46,7 +46,7 @@ $.testHelper.excludeFileProtocol(function(){
 		delete window["orientation"];
 		delete document["ontouchend"];
 
-		$.testHelper.reloadLib(libName).done(
+		$.testHelper.reloadModule(libName).done(
 			function() {
 				ok(!$.support.orientation);
 				ok(!$.support.touch);
@@ -69,7 +69,7 @@ $.testHelper.excludeFileProtocol(function(){
 
 	asyncTest( "detects dynamic base tag when new base element added and base href updates", 1, function(){
 		mockBaseCheck(location.protocol + '//' + location.host + location.pathname + "ui-dir/");
-		$.testHelper.reloadLib(libName).done(
+		$.testHelper.reloadModule(libName).done(
 			function() {
 				ok($.support.dynamicBaseTag);
 				start();
@@ -80,7 +80,7 @@ $.testHelper.excludeFileProtocol(function(){
 	asyncTest( "detects no dynamic base tag when new base element added and base href unchanged", 1, function(){
 		mockBaseCheck('testurl');
 
-		$.testHelper.reloadLib(libName).done(
+		$.testHelper.reloadModule(libName).done(
 			function() {
 				ok(!$.support.dynamicBaseTag);
 				start();
@@ -94,7 +94,7 @@ $.testHelper.excludeFileProtocol(function(){
 			version 	   = parseInt( $.browser.version, 10),
 			jqmdetectedver = $.mobile.browser.ie;
 
-		$.testHelper.reloadLib(libName).done(
+		$.testHelper.reloadModule(libName).done(
 			function() {
 				if( ie ){
 					same(version, jqmdetectedver, "It's IE and the version is correct");
