@@ -49,12 +49,6 @@
 			}
 		},
 
-		stubDefine: function() {
-			window.define = function(){
-				Array.prototype.slice.call(arguments).pop()();
-			};
-		},
-
 		reloads: {},
 
 		reloadModule: function(libName){
