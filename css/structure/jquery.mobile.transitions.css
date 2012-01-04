@@ -12,6 +12,7 @@
 	-moz-animation-timing-function: ease-out;
 	-moz-animation-duration: 150ms;
 }
+
 .out {
 	-webkit-animation-timing-function: ease-in;
 	-webkit-animation-duration: 300ms;
