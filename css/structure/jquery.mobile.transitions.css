@@ -1,3 +1,4 @@
+/* Transitions originally inspired by those from jQtouch, nice work, folks */
 .in {
 	-webkit-animation-timing-function: ease-out;
 	-webkit-animation-duration: 325ms;
