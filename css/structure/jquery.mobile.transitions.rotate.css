@@ -1,51 +1,51 @@
 @-webkit-keyframes rotateinfromleft {
-    from { -webkit-transform: rotate(-90deg); }
+    from { -webkit-transform: rotate(-180deg); }
     to { -webkit-transform: rotate(0deg); }
 }
 @-moz-keyframes rotateinfromleft {
-    from { -moz-transform: rotate(-90deg); }
+    from { -moz-transform: rotate(-180deg); }
     to { -moz-transform: rotate(0deg); }
 }
 
 @-webkit-keyframes rotateinfromright {
-    from { -webkit-transform: rotate(90deg); }
+    from { -webkit-transform: rotate(180deg); }
     to { -webkit-transform: rotate(0deg); }
 }
 
 @-moz-keyframes rotateinfromright {
-    from { -moz-transform: rotate(90deg); }
+    from { -moz-transform: rotate(180deg); }
     to { -moz-transform: rotate(0deg); }
 }
 
 @-webkit-keyframes rotateouttoright {
     from { -webkit-transform: rotate(0deg); }
-    to { -webkit-transform: rotate(90deg); }
+    to { -webkit-transform: rotate(180deg); }
 }
 
 @-moz-keyframes rotateouttoright {
     from { -moz-transform: rotate(0deg); }
-    to { -moz-transform: rotate(90deg); }
+    to { -moz-transform: rotate(180deg); }
 }
 
 @-webkit-keyframes rotateouttoleft {
     from { -webkit-transform: rotate(0deg); }
-    to { -webkit-transform: rotate(-90deg); }
+    to { -webkit-transform: rotate(-180deg); }
 }
 
 @-moz-keyframes rotateouttoleft {
     from { -moz-transform: rotate(0deg); }
-    to { -moz-transform: rotate(-90deg); }
+    to { -moz-transform: rotate(-180deg); }
 }
 
 .rotate {
-	-webkit-transform-origin: 50% 80%;
-	-webkit-transform-origin: 50% 80%;
+	-webkit-transform-origin: 50% 100%;
+	-webkit-transform-origin: 50% 100%;
 }
 
 .rotate.out {
-	-webkit-transform: rotate(-90deg);
+	-webkit-transform: rotate(-180deg);
 	-webkit-animation-name: rotateouttoleft;
-	-moz-transform: rotate(-90deg);
+	-moz-transform: rotate(-180deg);
 	-moz-animation-name: rotateouttoleft;
 }
 
@@ -57,9 +57,9 @@
 }
 
 .rotate.out.reverse {
-	-webkit-transform: rotate(90deg);
+	-webkit-transform: rotate(180deg);
 	-webkit-animation-name: rotateouttoright;
-	-moz-transform: rotate(90deg);
+	-moz-transform: rotate(180deg);
 	-moz-animation-name: rotateouttoright;
 }
 
