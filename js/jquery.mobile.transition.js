@@ -13,7 +13,8 @@ function outInTransitionHandler( name, reverse, $to, $from ) {
 		toScroll = active.lastScroll || ( touchOverflow ? 0 : $.mobile.defaultHomeScroll ),
 		screenHeight = $.mobile.getScreenHeight(),
 		viewportClass = "ui-mobile-viewport-transitioning viewport-" + name,
-		none = !$.support.cssTransitions || !name || name === "none",
+		maxTransitionOverride = $.mobile.maxTransitionWidth !== false && $( window ).width() > $.mobile.maxTransitionWidth,
+		none = !$.support.cssTransitions || maxTransitionOverride || !name || name === "none",
 		doneOut = function() {
 
 			if ( $from ) {
