@@ -32,7 +32,6 @@
 .slideup.out {
 	-webkit-animation-name: fadeout;
 	-moz-animation-name: fadeout;
-	z-index: 0;
 }
 
 .slideup.in {
@@ -40,17 +39,14 @@
 	-webkit-animation-name: slideinfrombottom;
 	-moz-transform: translateY(0);
 	-moz-animation-name: slideinfrombottom;
-	z-index: 10;
 }
 
 .slideup.in.reverse {
-	z-index: 0;
 	-webkit-animation-name: fadein;
 	-moz-animation-name: fadein;
 }
 
 .slideup.out.reverse {
-	z-index: 10;
 	-webkit-transform: translateY(100%);
 	-moz-transform: translateY(100%);
 	-webkit-animation-name: slideouttobottom;
@@ -62,7 +58,6 @@
 .slidedown.out {
 	-webkit-animation-name: fadeout;
 	-moz-animation-name: fadeout;
-	z-index: 0;
 }
 
 .slidedown.in {
@@ -70,11 +65,9 @@
 	-webkit-animation-name: slideinfromtop;
 	-moz-transform: translateY(0);
 	-moz-animation-name: slideinfromtop;
-	z-index: 10;
 }
 
 .slidedown.in.reverse {
-	z-index: 0;
 	-webkit-animation-name: fadein;
 	-moz-animation-name: fadein;
 }
@@ -82,7 +75,6 @@
 .slidedown.out.reverse {
 	-webkit-transform: translateY(-100%);
 	-moz-transform: translateY(-100%);
-	z-index: 10;
 	-webkit-animation-name: slideouttotop;
 	-moz-animation-name: slideouttotop;
 }
@@ -165,7 +157,6 @@
 .ui-unsupported-csstransform3d .slide.in.reverse,
 .ui-unsupported-csstransform3d .slideup.in.reverse,
 .ui-unsupported-csstransform3d .slidedown.in.reverse {
-	z-index:10;
 	-webkit-animation-name: nofade;
 	-webkit-animation-duration: 500ms;
 	-webkit-animation-timing-function: ease-out;
@@ -178,7 +169,6 @@
 .ui-unsupported-csstransform3d .slideup.out,
 .ui-unsupported-csstransform3d .slidedown.out
  {
-	z-index:0;
 	-webkit-animation-name: nofade;
 	-webkit-animation-duration: 500ms;
 	-webkit-animation-timing-function: ease-in;
