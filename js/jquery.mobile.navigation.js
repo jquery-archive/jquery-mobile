@@ -504,7 +504,7 @@ define( [
 		//find the transition handler for the specified transition. If there
 		//isn't one in our transitionHandlers dictionary, use the default one.
 		//call the handler immediately to kick-off the transition.
-		var th = $.mobile.transitionHandlers[transition || "none"] || $.mobile.defaultTransitionHandler,
+		var th = $.mobile.transitionHandlers[ transition || "default" ] || $.mobile.defaultTransitionHandler,
 			promise = th( transition, reverse, toPage, fromPage );
 
 		promise.done(function() {
@@ -581,58 +581,7 @@ define( [
 
 	$.mobile.dialogHashKey = dialogHashKey;
 
-	//default non-animation transition handler
-	$.mobile.noneTransitionHandler = function( name, reverse, $to, $from ) {
-		var active	= $.mobile.urlHistory.getActive(),
-			touchOverflow = $.support.touchOverflow && $.mobile.touchOverflowEnabled,
-			toScroll = active.lastScroll || ( touchOverflow ? 0 : $.mobile.defaultHomeScroll ),
-			viewportClass = "ui-mobile-viewport-transitioning viewport-" + name,
-			screenHeight = $.mobile.getScreenHeight();
-		
-		if( !touchOverflow){
-			$to.height( screenHeight + toScroll );
-		}
-
-		if( touchOverflow && toScroll ){
-			
-			$to.addClass( "ui-mobile-pre-transition" );
-		
-			// Send focus to page as it is now display: block
-			$.mobile.focusPage( $to );
-
-			//set page's scrollTop to remembered distance
-			if( $to.is( ".ui-native-fixed" ) ){
-				$to.find( ".ui-content" ).scrollTop( toScroll );
-			}
-			else{
-				$to.scrollTop( toScroll );
-			}
-		}
-
-		//clear page loader
-		$.mobile.hidePageLoadingMsg();
-
-		if ( $from ) {
-			$from.removeClass( $.mobile.activePageClass );
-		}
-		
-		$to.addClass( $.mobile.activePageClass );
-
-		// Jump to top or prev scroll, sometimes on iOS the page has not rendered yet.
-		if( !touchOverflow ){
-			$.mobile.silentScroll( toScroll );
-		}
-
-		return $.Deferred().resolve( name, reverse, $to, $from ).promise();
-	};
-
-	//default handler for unknown transitions
-	$.mobile.defaultTransitionHandler = $.mobile.noneTransitionHandler;
-
-	//transition handler dictionary for 3rd party transitions
-	$.mobile.transitionHandlers = {
-		none: $.mobile.defaultTransitionHandler
-	};
+	
 
 	//enable cross-domain page support
 	$.mobile.allowCrossDomainPages = false;
