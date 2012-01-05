@@ -21,6 +21,7 @@
 			},
 
 			function(){
+				ok( $.mobile.activePage.is("#dialog-select-parent-cache-test"), "cached page appears" );
 				selectButton = $( "#cached-page-select" ).siblings( 'a' );
 				selectButton.click();
 			},
