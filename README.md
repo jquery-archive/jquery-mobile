@@ -10,7 +10,6 @@ Clone this repo and build the js and css files (you'll need Git and Make install
 
     git clone git://github.com/jquery/jquery-mobile.git
     cd jquery-mobile
-    git submodule update --init
     make
 
 A full version and a minified version of the jQuery Mobile JavaScript and CSS files will be created
