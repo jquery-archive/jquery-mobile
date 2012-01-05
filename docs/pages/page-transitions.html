@@ -28,35 +28,33 @@
 
 <div class="ui-grid-a">
 	<div class="ui-block-a">
-		<a href="#dialog" data-role="button" data-rel="dialog" data-transition="slide">slide</a>
-		<a href="#dialog" data-role="button" data-rel="dialog" data-transition="slideup">slideup</a>
-		<a href="#dialog" data-role="button" data-rel="dialog" data-transition="slidedown">slidedown</a>
-	</div>
-	<div class="ui-block-b">
-	    <a href="#dialog" data-role="button" data-rel="dialog" data-transition="pop">pop</a>
+		<a href="#dialog" data-role="button" data-rel="dialog" data-transition="none">none</a>
 		<a href="#dialog" data-role="button" data-rel="dialog" data-transition="fade">fade</a>
+		<a href="#dialog" data-role="button" data-rel="dialog" data-transition="pop">pop</a>
 		<a href="#dialog" data-role="button" data-rel="dialog" data-transition="flip">flip*</a>
 	</div>
-	
+	<div class="ui-block-b">
+			<a href="#dialog" data-role="button" data-rel="dialog" data-transition="slide">slide</a>
+			<a href="#dialog" data-role="button" data-rel="dialog" data-transition="slideup">slideup</a>
+			<a href="#dialog" data-role="button" data-rel="dialog" data-transition="slidedown">slidedown</a>
+			<a href="#dialog" data-role="button" data-rel="dialog" data-transition="rotate">rotate</a>
+	</div>
 </div><!-- /grid-a -->
-<p><a href="#dialog" data-role="button" data-rel="dialog" data-transition="rotate">rotate</a></p>
 
-<p><strong>Transitions from <a href="http://www.jqtouch.com/">jQtouch</a></strong> (<em>with small modifications</em>): Built by David Kaneda and maintained by Jonathan Stark.</p>
+<p><strong>Transitions were originally inspired by <a href="http://www.jqtouch.com/">jQtouch</a></strong> They've since been rebuilt, but props to David Kaneda and Jonathan Stark for the initial guidance.</p>
 
 <p>NOTE: The flip transition will only work on platforms with 3D Transform support. Devices that lack 3D support,  will get a fade transition.</p>
 
 
 	<h2>Setting a transition on a link or form submit</h2>
-	<p>By default, the framework applies the right to left <strong>slide</strong> transition. To set a custom transition effect, add the <code>data-transition</code> attribute to the link. </p>
+	<p>By default, the framework applies a <strong>fade</strong> transition. To set a custom transition effect, add the <code>data-transition</code> attribute to the link. </p>
 
 <code><code>
 &lt;a href=&quot;index.html&quot; <strong>data-transition=&quot;pop&quot;</strong>&gt;I'll pop&lt;/a&gt;
 </code></code>
 		
 		<p>When the Back button is pressed, the framework will automatically apply the reverse version of the transition that was used to show the page. To specify that the reverse version of a transition should be used, add the <code>data-direction="reverse"</code> attribute to a link. Note: (this was formerly <code>data-back="true"</code>, which will remain supported until 1.0)</p>
-		
-		<p>For smoother page transitions, consider enabling the <a href="touchoverflow.html">touchOverflow</a> feature.</p>
-		
+				
 		<h2>Global configuration of transitions</h2>
 		
 		<p>Set the <code>defaultPageTransition</code> <a href="../api/globalconfig.html">global option</a> if you'd prefer a different default transition. Dialogs have a different option called <code>defaultDialogTransition</code> that can also set configured.</p>
@@ -89,7 +87,7 @@
 	}
 		</code></pre>
 
-		<p>During a CSS-based page transition, jQuery Mobile will place the class name of the transition on both the "from" and "to" pages involved in the transition. It then places an "out" class on the "from" page, and "in" class on the "to" page. The presence of these classes on the "from" and "to" page elements then triggers the animation CSS rules defined above.</p>
+		<p>During a CSS-based page transition, jQuery Mobile will place the class name of the transition on both the "from" and "to" pages involved in the transition. It then places an "out" class on the "from" page, and "in" class on the "to" page. The presence of these classes on the "from" and "to" page elements then triggers the animation CSS rules defined above. As of jQuery Mobile version 1.1, animation class additions are queued, rather than simultaneous, producing an out-then-in sequence, which is friendlier for mobile rendering than our previous simultaneous transition sequence.</p>
 
 		<p>If your transition supports a reverse direction, you need to create CSS rules that use the <code>reverse</code> class in addition to the transition class name and the "in" and "out" classes:</p>
 
@@ -124,9 +122,18 @@
 		<p>In case you were wondering why none of the CSS rules above specified any easing or duration, it's because the CSS for jQuery Mobile defines the default easing and duration in the following rules:</p>
 
 		<pre><code>
-.in, .out {
-    -webkit-animation-timing-function: ease-in-out;
-    -webkit-animation-duration: 350ms;
+.in {
+	-webkit-animation-timing-function: ease-out;
+	-webkit-animation-duration: 350ms;
+	-moz-animation-timing-function: ease-out;
+	-moz-animation-duration: 350ms;
+}
+
+.out {
+	-webkit-animation-timing-function: ease-in;
+	-webkit-animation-duration: 225ms;
+	-moz-animation-timing-function: ease-in;
+	-moz-animation-duration: 225;
 }
 		</code></pre>
 
@@ -138,15 +145,14 @@
 
 		<p>After the new page is loaded, the <code>$.mobile.transitionHandlers</code> dictionary is used to see if any transition handler function is registered for the given transition name. If a handler is found, that handler is invoked to start and manage the transition. If no handler is found the handler specified by the configuration option <code>$.mobile.defaultTransitionHandler</code> is invoked.</p>
 
-		<p>By default, the <code>$.mobile.transitionHandlers</code> dictionary is only populated with a single handler entry called "none". This handler simply removes the <code>"ui-page-active"</code> class from the page we are transitioning "from", and places it on the page we are transitioning "to". The transition is instantaneous; no animation, no fanfare.</p>
+		<p>By default, the <code>$.mobile.transitionHandlers</code> dictionary is only populated with a single handler entry called "default". This handler plays a dual purpose of either executing a "none" transition, which removes the <code>"ui-page-active"</code> class from the page we are transitioning "from", and places it on the page we are transitioning "to", or a Queued CSS3 Animated Transition, such as the one explained above. If the transition is "none", it will be instantaneous; no animation, no fanfare.</p>
 
-		<p>The <code>$.defaultTransitionHandler</code> points to a handler function that assumes the name is a CSS class name, and implements the "Pure CSS3 Based Transitions" section above.</p>
+		<p>The <code>$.mobile.defaultTransitionHandler</code> points to a handler function that assumes the name is a CSS class name, and implements the "Pure CSS3 Based Transitions" section above.</p>
 
-		<p>Both the "none" and "css3" transition handlers are available off of the $.mobile namespace:</p>
+		<p>The default transition handler is available on the $.mobile namespace:</p>
 
 		<pre><code>
-$.mobile.noneTransitionHandler
-$.mobile.css3TransitionHandler
+$.mobile.transitionHandlers[ "default" ];
 		</code></pre>
 
 		<h3>Transition Handlers</h3>
@@ -249,21 +255,27 @@ $.mobile.defaultTransitionHandler = myTransitionHandler;
 		</code></pre>
 
 		<p>Once you do this, your handler will be invoked any time a transition name is used but not found within the <code>$.mobile.transitionHandlers</code> dictionary.</p>
+		
+		<h2>A model for Custom transition handler development</h2>
+		<p>Transition handlers involve a number of critical operations, such as hiding any existing page, showing the new page, scrolling either to the top or a remembered scroll position on that new page, setting focus on the new page, and any animation and timing sequences you'd like to add. During development, we would recommend using <code>jquery.mobile.transitions.js</code> as a coding reference.</p>
 			
 		<h2>Transitions and scroll position</h2>
 		<p>One of the key things jQuery Mobile does is store your scroll position before starting a transition so it can restore you to the same place once you return to the page when hitting the Back button or closing a dialog. Here are the same buttons from the top to test the scrolling logic.</p>
 		<div class="ui-grid-a">
 			<div class="ui-block-a">
-				<a href="#dialog" data-role="button" data-rel="dialog" data-transition="slide">slide</a>
-				<a href="#dialog" data-role="button" data-rel="dialog" data-transition="slideup">slideup</a>
-				<a href="#dialog" data-role="button" data-rel="dialog" data-transition="slidedown">slidedown</a>
-			</div>
-			<div class="ui-block-b">
-			    <a href="#dialog" data-role="button" data-rel="dialog" data-transition="pop">pop</a>
+				<a href="#dialog" data-role="button" data-rel="dialog" data-transition="none">none</a>
 				<a href="#dialog" data-role="button" data-rel="dialog" data-transition="fade">fade</a>
+				<a href="#dialog" data-role="button" data-rel="dialog" data-transition="pop">pop</a>
 				<a href="#dialog" data-role="button" data-rel="dialog" data-transition="flip">flip*</a>
 			</div>
+			<div class="ui-block-b">
+					<a href="#dialog" data-role="button" data-rel="dialog" data-transition="slide">slide</a>
+					<a href="#dialog" data-role="button" data-rel="dialog" data-transition="slideup">slideup</a>
+					<a href="#dialog" data-role="button" data-rel="dialog" data-transition="slidedown">slidedown</a>
+					<a href="#dialog" data-role="button" data-rel="dialog" data-transition="rotate">rotate</a>
+			</div>
 		</div><!-- /grid-a -->
+		
 		<p><a href="#dialog" data-role="button" data-rel="dialog" data-transition="rotate">rotate</a></p>
 
 				</div><!--/content-primary -->		
