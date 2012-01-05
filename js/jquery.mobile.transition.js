@@ -13,6 +13,7 @@ function outInTransitionHandler( name, reverse, $to, $from ) {
 		toScroll = active.lastScroll || ( touchOverflow ? 0 : $.mobile.defaultHomeScroll ),
 		screenHeight = $.mobile.getScreenHeight(),
 		viewportClass = "ui-mobile-viewport-transitioning viewport-" + name,
+		none = !$.support.cssTransitions || !name || name === "none",
 		doneOut = function() {
 
 			if ( $from ) {
@@ -21,9 +22,11 @@ function outInTransitionHandler( name, reverse, $to, $from ) {
 					.height( "" );
 			}
 			
-			$to
-				.animationComplete( doneIn )
-				.addClass( $.mobile.activePageClass );
+			$to.addClass( $.mobile.activePageClass );
+			
+			if( !none ){
+				$to.animationComplete( doneIn );
+			}
 
 			// Send focus to page as it is now display: block
 			$.mobile.focusPage( $to );
@@ -45,13 +48,16 @@ function outInTransitionHandler( name, reverse, $to, $from ) {
 				
 				$.mobile.silentScroll( toScroll );
 			}
-	
+			
 			$to.addClass( name + " in" + reverseClass );
+			
+			if( none ){
+				doneIn();
+			}
 			
 		},
 		
 		doneIn = function() {
-
 			$to
 				.removeClass( "out in reverse " + name )
 				.parent().removeClass( viewportClass )
@@ -66,10 +72,10 @@ function outInTransitionHandler( name, reverse, $to, $from ) {
 	//clear page loader
 	$.mobile.hidePageLoadingMsg();
 	
-	if ( $from ) {
+	if ( $from && !none ) {
 		$from
-			.height( screenHeight + $(window ).scrollTop() )
 			.animationComplete( doneOut )
+			.height( screenHeight + $(window ).scrollTop() )
 			.addClass( name + " out" + reverseClass );
 	}
 	else {	
@@ -79,15 +85,15 @@ function outInTransitionHandler( name, reverse, $to, $from ) {
 	return deferred.promise();
 }
 
-// Make our transition handler public.
-$.mobile.outInTransitionHandler = outInTransitionHandler;
-
-// If the default transition handler is the 'none' handler, replace it with our handler.
-if ( $.mobile.defaultTransitionHandler === $.mobile.noneTransitionHandler ) {
-	$.mobile.defaultTransitionHandler = outInTransitionHandler;
-}
-
 // add class for where 3d transforms are supported, or not
 $( "html" ).addClass( $.support.cssTransform3d ? "ui-supported-csstransform3d" : "ui-unsupported-csstransform3d" );
+
+// Make our transition handler the public default.
+$.mobile.defaultTransitionHandler = outInTransitionHandler;
+
+//transition handler dictionary for 3rd party transitions
+$.mobile.transitionHandlers = {
+	"default": $.mobile.defaultTransitionHandler
+};
 
 })( jQuery, this );
