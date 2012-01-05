@@ -73,7 +73,11 @@ $.mobile.browser.ie = (function() {
 $.extend( $.support, {
 	orientation: "orientation" in window && "onorientationchange" in window,
 	touch: "ontouchend" in document,
-	cssTransitions: "WebKitTransitionEvent" in window,
+	cssTransitions: "WebKitTransitionEvent" in window || (function() {
+		var div = document.createElement( "div" );
+		div.setAttribute('style', '-moz-transition: height 100ms linear');	
+		return !!div.style.MozTransition;
+	})(),
 	pushState: "pushState" in history && "replaceState" in history,
 	mediaquery: $.mobile.media( "only all" ),
 	cssPseudoElement: !!propExists( "content" ),
