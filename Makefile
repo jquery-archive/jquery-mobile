@@ -1,19 +1,19 @@
 # The files to include when compiling the CSS files
 CSSFILES = css/structure/jquery.mobile.core.css \
-			  css/structure/jquery.mobile.transitions.css \
-			  css/structure/jquery.mobile.grids.css \
-			  css/structure/jquery.mobile.headerfooter.css \
-			  css/structure/jquery.mobile.navbar.css \
-			  css/structure/jquery.mobile.button.css \
-			  css/structure/jquery.mobile.collapsible.css \
-			  css/structure/jquery.mobile.controlgroup.css \
-			  css/structure/jquery.mobile.dialog.css \
-			  css/structure/jquery.mobile.forms.checkboxradio.css \
-			  css/structure/jquery.mobile.forms.fieldcontain.css \
-			  css/structure/jquery.mobile.forms.select.css \
-			  css/structure/jquery.mobile.forms.textinput.css \
-			  css/structure/jquery.mobile.listview.css \
-			  css/structure/jquery.mobile.forms.slider.css
+	css/structure/jquery.mobile.transitions.css \
+	css/structure/jquery.mobile.grids.css \
+	css/structure/jquery.mobile.headerfooter.css \
+	css/structure/jquery.mobile.navbar.css \
+	css/structure/jquery.mobile.button.css \
+	css/structure/jquery.mobile.collapsible.css \
+	css/structure/jquery.mobile.controlgroup.css \
+	css/structure/jquery.mobile.dialog.css \
+	css/structure/jquery.mobile.forms.checkboxradio.css \
+	css/structure/jquery.mobile.forms.fieldcontain.css \
+	css/structure/jquery.mobile.forms.select.css \
+	css/structure/jquery.mobile.forms.textinput.css \
+	css/structure/jquery.mobile.listview.css \
+	css/structure/jquery.mobile.forms.slider.css
 CSSTHEMEFILES = css/themes/${THEME}/jquery.mobile.theme.css
 
 
@@ -52,21 +52,26 @@ all: init css js zip notify
 # Build and minify the CSS files
 css: init
 	# Build the CSS file with the theme included
-	@@java -classpath build/js.jar:build/google-compiler-20111003.jar org.mozilla.javascript.tools.shell.Main \
-			external/r.js/dist/r.js \
-			-o cssIn=css/themes/default/jquery.mobile.theme.css \
-			out=${OUTPUT}/${NAME}.compiled.css
+	@@java -XX:ReservedCodeCacheSize=64m \
+		-classpath build/js.jar:build/google-compiler-20111003.jar org.mozilla.javascript.tools.shell.Main \
+		external/r.js/dist/r.js \
+		-o cssIn=css/themes/default/jquery.mobile.theme.css \
+		out=${OUTPUT}/${NAME}.compiled.css
 	@@cat LICENSE-INFO.txt | ${VER} > ${OUTPUT}/${NAME}.css
 	@@cat ${OUTPUT}/${NAME}.compiled.css >> ${OUTPUT}/${NAME}.css
 	@@echo ${VER_MIN} > ${OUTPUT}/${NAME}.min.css
-	@@java -jar build/yuicompressor-2.4.6.jar --type css ${OUTPUT}/${NAME}.compiled.css >> ${OUTPUT}/${NAME}.min.css
+	@@java -XX:ReservedCodeCacheSize=64m \
+		-jar build/yuicompressor-2.4.6.jar \
+		--type css ${OUTPUT}/${NAME}.compiled.css >> ${OUTPUT}/${NAME}.min.css
 	@@rm ${OUTPUT}/${NAME}.compiled.css
 	# Build the CSS Structure-only file
 	@@cat LICENSE-INFO.txt | ${VER} > ${OUTPUT}/${STRUCTURE}.css
 	@@cat ${CSSFILES} >> ${OUTPUT}/${STRUCTURE}.css
 	# ..... and then minify it
 	@@echo ${VER_MIN} > ${OUTPUT}/${STRUCTURE}.min.css
-	@@java -jar build/yuicompressor-2.4.6.jar --type css ${OUTPUT}/${STRUCTURE}.css >> ${OUTPUT}/${STRUCTURE}.min.css
+	@@java -XX:ReservedCodeCacheSize=64m \
+		-jar build/yuicompressor-2.4.6.jar \
+		--type css ${OUTPUT}/${STRUCTURE}.css >> ${OUTPUT}/${STRUCTURE}.min.css
 	# ..... and then copy in the images
 	@@cp -R css/themes/${THEME}/images ${OUTPUT}/
 	# Css portion is complete.
@@ -104,23 +109,24 @@ init:
 # Build and minify the JS files
 js: init
 	# Build the JavaScript file
-	@@java -classpath build/js.jar:build/google-compiler-20111003.jar org.mozilla.javascript.tools.shell.Main \
-			external/r.js/dist/r.js \
-		 	-o baseUrl="js" \
-			include=jquery.mobile,jquery.mobile.exports exclude=jquery,order \
-			out=${OUTPUT}/${NAME}.compiled.js \
-			pragmasOnSave.jqmBuildExclude=true \
-			skipModuleInsertion=true \
-			optimize=none
+	@@java -XX:ReservedCodeCacheSize=64m \
+		-classpath build/js.jar:build/google-compiler-20111003.jar org.mozilla.javascript.tools.shell.Main \
+		external/r.js/dist/r.js \
+	 	-o baseUrl="js" \
+		include=jquery.mobile,jquery.mobile.exports exclude=jquery,order \
+		out=${OUTPUT}/${NAME}.compiled.js \
+		pragmasOnSave.jqmBuildExclude=true \
+		skipModuleInsertion=true \
+		optimize=none
 	@@cat LICENSE-INFO.txt | ${VER} > ${OUTPUT}/${NAME}.js
 	@@cat ${OUTPUT}/${NAME}.compiled.js >> ${OUTPUT}/${NAME}.js
 	@@rm ${OUTPUT}/${NAME}.compiled.js
 	# ..... and then minify it
 	@@echo ${VER_MIN} > ${OUTPUT}/${NAME}.min.js
 	@@java -XX:ReservedCodeCacheSize=64m \
-				-jar build/google-compiler-20111003.jar \
-				--js ${OUTPUT}/${NAME}.js \
-				--js_output_file ${OUTPUT}/${NAME}.compiled.js
+		-jar build/google-compiler-20111003.jar \
+		--js ${OUTPUT}/${NAME}.js \
+		--js_output_file ${OUTPUT}/${NAME}.compiled.js
 	@@cat ${OUTPUT}/${NAME}.compiled.js >> ${OUTPUT}/${NAME}.min.js
 	@@rm ${OUTPUT}/${NAME}.compiled.js
 	# -------------------------------------------------
