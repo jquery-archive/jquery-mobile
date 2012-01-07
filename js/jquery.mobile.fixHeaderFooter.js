@@ -7,6 +7,8 @@ define( [ "jquery.mobile.core", "jquery.mobile.vmouse" ], function() {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
+$.mobile.touchToggleEnabled = true;
+
 var slideDownClass = "ui-header-fixed ui-fixed-inline fade",
 	slideUpClass = "ui-footer-fixed ui-fixed-inline fade",
 
@@ -52,8 +54,7 @@ $.mobile.fixedToolbars = (function() {
 		touchStartEvent = supportTouch ? "touchstart" : "mousedown",
 		touchStopEvent = supportTouch ? "touchend" : "mouseup",
 		stateBefore = null,
-		scrollTriggered = false,
-		touchToggleEnabled = true;
+		scrollTriggered = false;
 
 	function showEventCallback( event ) {
 		// An event that affects the dimensions of the visual viewport has
@@ -80,12 +81,12 @@ $.mobile.fixedToolbars = (function() {
 
 		$document
 			.bind( "vmousedown", function( event ) {
-				if ( touchToggleEnabled ) {
+				if ( $.mobile.touchToggleEnabled ) {
 					stateBefore = currentstate;
 				}
 			})
 			.bind( "vclick", function( event ) {
-				if ( touchToggleEnabled ) {
+				if ( $.mobile.touchToggleEnabled ) {
 
 					if ( $(event.target).closest( ignoreTargets ).length ) {
 						return;
@@ -339,10 +340,6 @@ $.mobile.fixedToolbars = (function() {
 			}
 			return ( currentstate === "overlay" ) ? $.mobile.fixedToolbars.hide() :
 								$.mobile.fixedToolbars.show();
-		},
-
-		setTouchToggleEnabled: function( enabled ) {
-			touchToggleEnabled = enabled;
 		}
 	};
 })();
