@@ -1,8 +1,7 @@
-/*
-* This plugin handles theming and layout of headers, footers, and content areas
-*/
-
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Theming and layout of headers, footers, and content areas
+//>>label: Page Sections
+
 define( [ "jquery.mobile.page", "jquery.mobile.core", "jquery.mobile.buttonMarkup" ], function() {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {

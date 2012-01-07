@@ -3,6 +3,9 @@
 */
 
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Fully-custom select menus.
+//>>label: Custom Selects
+
 define( [
 	"jquery.mobile.buttonMarkup",
 	"jquery.mobile.core",

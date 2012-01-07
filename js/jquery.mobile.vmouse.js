@@ -1,6 +1,3 @@
-/*
-* "mouse" plugin
-*/
 
 // This plugin is an experiment for abstracting away the touch and mouse
 // events so that developers don't have to worry about which method of input
@@ -18,6 +15,9 @@
 // "vmouseover vmousedown vmousemove vmouseup vclick vmouseout vmousecancel"
 
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Normalizes touch/mouse events.
+//>>label: Virtual Mouse Bindings
+
 define(function() {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, document, undefined ) {

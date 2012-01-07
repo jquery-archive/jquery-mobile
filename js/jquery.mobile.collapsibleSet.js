@@ -1,8 +1,7 @@
-/*
-* "collapsibleset" plugin
-*/
-
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: For creating grouped collapsible content areas.
+//>>label: Collapsible Sets
+
 define( [ "jquery.mobile.widget", "jquery.mobile.collapsible" ], function() {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {

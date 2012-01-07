@@ -1,8 +1,7 @@
-/*
-* widget factory extentions for mobile
-*/
-
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Widget factory extentions for mobile.
+//>>label: Widget Factory Extensions
+
 define( [ "jquery.ui.widget" ], function() {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {

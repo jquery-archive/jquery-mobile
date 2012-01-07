@@ -1,8 +1,7 @@
-/*
-* "selectmenu" plugin
-*/
-
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Consistent styling for native select menus.
+//>>label: Enhanced Native Selects
+
 define( [ "jquery.mobile.core", "jquery.mobile.widget", "jquery.mobile.buttonMarkup" ], function() {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {

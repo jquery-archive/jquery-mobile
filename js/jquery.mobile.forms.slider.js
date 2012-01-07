@@ -1,7 +1,7 @@
-/*
-* "slider" plugin
-*/
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Slider form widget
+//>>label: Slider
+
 define( [ "jquery.mobile.core", "jquery.mobile.widget", "jquery.mobile.forms.textinput", "jquery.mobile.buttonMarkup" ], function() {
 //>>excludeEnd("jqmBuildExclude");
 ( function( $, undefined ) {

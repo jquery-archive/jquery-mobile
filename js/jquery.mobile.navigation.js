@@ -1,8 +1,7 @@
-/*
-* core utilities for auto ajax navigation, base tag mgmt,
-*/
-
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Formats groups of links as nav bars.
+//>>label: Navigation Bars
+
 define( [
 	"jquery.mobile.core",
 	"jquery.mobile.event",

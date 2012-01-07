@@ -1,8 +1,7 @@
-/*
-* "links" plugin - simple class additions for links
-*/
-
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Simple class additions for links.
+//>>label: Link Classes
+
 define( function() {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {

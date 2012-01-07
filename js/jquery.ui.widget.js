@@ -9,6 +9,9 @@
  */
 
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: jQuery UI Widget Factory.
+//>>label: Widget Factory
+
 define(function() {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {

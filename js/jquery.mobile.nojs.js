@@ -1,8 +1,7 @@
-/*
-* "nojs" plugin - class to make elements hidden to A grade browsers
-*/
-
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Adds class to make elements hidden to A grade browsers
+//>>label: “nojs” Classes
+
 define(function() {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
