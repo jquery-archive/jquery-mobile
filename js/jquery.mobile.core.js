@@ -1,8 +1,7 @@
-/*
-* "core" - The base file for jQm
-*/
-
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: The base file for jQM
+//>>label: Core
+
 define( [ "jquery.mobile.widget" ], function() {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {

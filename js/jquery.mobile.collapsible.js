@@ -1,8 +1,6 @@
-/*
-* "collapsible" plugin
-*/
-
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Creates collapsible content areas.
+//>>label: Collapsibles
 define( [ "jquery.mobile.widget", "jquery.mobile.buttonMarkup" ], function() {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {

@@ -1,8 +1,7 @@
-/*
-* plugin for creating CSS grids
-*/
-
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Applies classes for grid styling.
+//>>label: CSS Grid Tool
+
 define(function() {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {

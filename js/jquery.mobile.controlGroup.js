@@ -1,8 +1,7 @@
-/* 
-* "controlgroup" plugin - corner-rounding for groups of buttons, checks, radios, etc
-*/
-
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Corner-rounding for groups of buttons, checks, radios, etc
+//>>label: Controlgroups
+
 define( [ "jquery.mobile.buttonMarkup" ], function() {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {

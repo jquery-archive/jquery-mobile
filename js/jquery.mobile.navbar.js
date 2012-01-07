@@ -1,8 +1,7 @@
-/*
-* "navbar" plugin
-*/
-
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Formats groups of links as navigation bars.
+//>>label: Navigation Bars
+
 define( [ "jquery.mobile.widget", "jquery.mobile.buttonMarkup", "jquery.mobile.grid" ], function() {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {

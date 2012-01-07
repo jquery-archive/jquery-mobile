@@ -1,8 +1,7 @@
-/*
-* "fieldcontain" plugin - simple class additions to make form row separators
-*/
-
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Simple class additions to make form row separators
+//>>label: Fieldcontains
+
 define(function() {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {

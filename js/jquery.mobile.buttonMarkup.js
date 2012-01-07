@@ -1,8 +1,7 @@
-/*
-* "buttons" plugin - for making button-like links
-*/
-
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: For making button-like links.
+//>>label: Buttons
+
 define( [ "jquery.mobile.core", "jquery.mobile.vmouse" ], function() {
 //>>excludeEnd("jqmBuildExclude");
 ( function( $, undefined ) {

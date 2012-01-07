@@ -1,8 +1,7 @@
-/*
-* "fixHeaderFooter" native plugin - Behavior for "fixed" headers,footers, and scrolling inner content
-*/
-
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Behavior for "fixed" headers,footers, and scrolling inner content
+//>>label: Fixed Toolbars
+
 define( [ "jquery.mobile.core" ], function() {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {

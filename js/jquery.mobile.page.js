@@ -1,8 +1,7 @@
-/*
-* "page" plugin
-*/
-
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Basic page formatting.
+//>>label: Pages
+
 define( [ "jquery.mobile.widget" ], function() {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {

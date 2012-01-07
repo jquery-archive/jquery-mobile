@@ -1,8 +1,7 @@
-/*
-* "degradeInputs" plugin - degrades inputs to another type after custom enhancements are made.
-*/
-
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Degrades inputs to another type after custom enhancements are made.
+//>>label: Degrade Inputs
+
 define( [ "jquery.mobile.page" ], function() {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {

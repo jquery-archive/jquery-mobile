@@ -1,8 +1,7 @@
-/*
-* "init" - Initialize the framework
-*/
-
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Applies classes for grid styling.
+//>>label: CSS Grid Tool
+
 define( [ "jquery.mobile.core", "jquery.mobile.navigation", "jquery.mobile.navigation.pushstate" ], function() {
 //>>excludeEnd("jqmBuildExclude");
 ( function( $, window, undefined ) {
