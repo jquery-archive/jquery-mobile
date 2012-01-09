@@ -72,39 +72,3 @@
         opacity: 0;
     }
 }
-
-/* for non-3d supporting browsers, remove the fade and just animate size */
-
-.ui-unsupported-csstransform3d .pop.out,
-.ui-unsupported-csstransform3d .pop.in.reverse {
-	-webkit-animation-duration: 200ms;
-	-webkit-animation-name: nofade;
-}
-
-.ui-unsupported-csstransform3d .pop.in {
-	-webkit-animation-name: popin-basic;
-	-webkit-animation-duration: 325ms;
-}
-.ui-unsupported-csstransform3d .pop.out.reverse {
-	-webkit-transform: scale(0);
-	-webkit-animation-name: popout-basic;
-	-webkit-animation-duration: 325ms;
-}
-
-@-webkit-keyframes popin-basic {
-    from {
-        -webkit-transform: scale(0);
-    }
-    to {
-        -webkit-transform: scale(1);
-    }
-}
-
-@-webkit-keyframes popout-basic {
-    from {
-        -webkit-transform: scale(1);
-    }
-    to {
-        -webkit-transform: scale(0);
-    }
-}
