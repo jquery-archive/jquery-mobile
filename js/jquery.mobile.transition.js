@@ -7,8 +7,8 @@
 function outInTransitionHandler( name, reverse, $to, $from ) {
 	
 	// override name if there's no 3D transform support and a fallback is defined, or if not, to "none"
-	if( name && !$.support.cssTransform3d ){
-		name = $.mobile.transitionFallbacks[ name ] || "none";
+	if( name && !$.support.cssTransform3d && $.mobile.transitionFallbacks[ name ] ){
+		name = $.mobile.transitionFallbacks[ name ];
 	}
 	
 	var deferred = new $.Deferred(),
