@@ -9,7 +9,6 @@ $files = array_merge($files, array(
 	'../../structure/jquery.mobile.transitions.slidedown.css',
 	'../../structure/jquery.mobile.transitions.slideup.css',
 	'../../structure/jquery.mobile.transitions.flip.css',
-	'../../structure/jquery.mobile.transitions.rotate.css',
 	'../../structure/jquery.mobile.grids.css',
 	'../../structure/jquery.mobile.headerfooter.css',
 	'../../structure/jquery.mobile.navbar.css',
