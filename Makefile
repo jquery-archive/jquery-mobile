@@ -116,6 +116,7 @@ js: init
 		include=jquery.mobile,jquery.mobile.exports exclude=jquery,order \
 		out=${OUTPUT}/${NAME}.compiled.js \
 		pragmasOnSave.jqmBuildExclude=true \
+		findNestedDependencies=true \
 		skipModuleInsertion=true \
 		optimize=none
 	@@cat LICENSE-INFO.txt | ${VER} > ${OUTPUT}/${NAME}.js
