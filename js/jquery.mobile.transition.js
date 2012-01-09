@@ -6,7 +6,7 @@
 
 function outInTransitionHandler( name, reverse, $to, $from ) {
 	
-	// first, override name if there's no 3D transform support and a fallback is defined 
+	// override name if there's no 3D transform support and a fallback is defined, or if not, to "none"
 	if( name && !$.support.cssTransform3d ){
 		name = $.mobile.transitionFallbacks[ name ] || "none";
 	}
