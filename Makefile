@@ -49,6 +49,7 @@ CSSFILES = css/structure/jquery.mobile.core.css \
 			  css/structure/jquery.mobile.transitions.slidedown.css \
 			  css/structure/jquery.mobile.transitions.slideup.css \
 			  css/structure/jquery.mobile.transitions.flip.css \
+			  css/structure/jquery.mobile.transitions.flow.css \
 			  css/structure/jquery.mobile.grids.css \
 			  css/structure/jquery.mobile.headerfooter.css \
 			  css/structure/jquery.mobile.navbar.css \
