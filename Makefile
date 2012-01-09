@@ -41,6 +41,8 @@ CSSFILES = css/structure/jquery.mobile.core.css \
 			  css/structure/jquery.mobile.transitions.fade.css \
 			  css/structure/jquery.mobile.transitions.pop.css \
 			  css/structure/jquery.mobile.transitions.slide.css \
+			  css/structure/jquery.mobile.transitions.slidedown.css \
+			  css/structure/jquery.mobile.transitions.slideup.css \
 			  css/structure/jquery.mobile.transitions.flip.css \
 			  css/structure/jquery.mobile.transitions.rotate.css \
 			  css/structure/jquery.mobile.grids.css \
