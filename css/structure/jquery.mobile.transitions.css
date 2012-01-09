@@ -19,15 +19,3 @@
 	-moz-animation-timing-function: ease-in;
 	-moz-animation-duration: 225;
 }
-
-
-/* a dummy transition to override animations in non-3D browsers */
-
-@-webkit-keyframes nofade {
-    from { outline:0; }
-    to { outline:0; }
-}
-@-moz-keyframes nofade {
-    from { outline:0; }
-    to { outline:0; }
-}
