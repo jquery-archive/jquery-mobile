@@ -5,43 +5,41 @@
  * value.
  */
 
-.ui-supported-csstransform3d .viewport-flip {
+.viewport-flip {
 	-webkit-perspective: 1000;
 	-moz-perspective: 1000;
 	position: absolute;
 }
-.ui-supported-csstransform3d .flip {
+.flip {
 	-webkit-backface-visibility:hidden;
 	-webkit-transform:translateX(0); /* Needed to work around an iOS 3.1 bug that causes listview thumbs to disappear when -webkit-visibility:hidden is used. */
 	-moz-backface-visibility:hidden;
 	-moz-transform:translateX(0); /* Needed to work around an iOS 3.1 bug that causes listview thumbs to disappear when -webkit-visibility:hidden is used. */
 }
 
-.ui-supported-csstransform3d .flip.out {
+.flip.out {
 	-webkit-transform: rotateY(-90deg) scale(.9);
 	-webkit-animation-name: flipouttoleft;
 	-moz-transform: rotateY(-90deg) scale(.9);
 	-moz-animation-name: flipouttoleft;
 }
 
-.ui-supported-csstransform3d .flip.in {
+.flip.in {
 	-webkit-animation-name: flipintoright;
 	-moz-animation-name: flipintoright;
 }
 
-.ui-supported-csstransform3d .flip.out.reverse {
+.flip.out.reverse {
 	-webkit-transform: rotateY(90deg) scale(.9);
 	-webkit-animation-name: flipouttoright;
 	-moz-transform: rotateY(90deg) scale(.9);
 	-moz-animation-name: flipouttoright;
 }
 
-.ui-supported-csstransform3d .flip.in.reverse {
+.flip.in.reverse {
 	-webkit-animation-name: flipintoleft;
 	-moz-animation-name: flipintoleft;
 }
-
-
 
 @-webkit-keyframes flipouttoleft {
     from { -webkit-transform: rotateY(0); }
@@ -74,25 +72,4 @@
 @-moz-keyframes flipintoright {
     from { -moz-transform: rotateY(90deg) scale(.9); }
     to { -moz-transform: rotateY(0); }
-}
-
-
-
-/* for non-3d supporting browsers, fallback to fade */
-.ui-unsupported-csstransform3d .flip.out,
-.ui-unsupported-csstransform3d .flip.out.reverse {
-	opacity: 0;
-	-webkit-animation-duration: 150ms;
-	-webkit-animation-name: fadeout;
-	-moz-animation-duration: 150ms;
-	-moz-animation-name: fadeout;
-}
-
-.ui-unsupported-csstransform3d .flip.in,
-.ui-unsupported-csstransform3d .flip.in.reverse {
-	opacity: 1;
-	-webkit-animation-duration: 300ms;
-	-webkit-animation-name: fadein;
-	-moz-animation-duration: 300ms;
-	-moz-animation-name: fadein;
 }
