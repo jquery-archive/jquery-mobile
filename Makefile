@@ -11,6 +11,11 @@ JSFILES = 	  js/jquery.ui.widget.js \
 			  js/jquery.mobile.navigation.js \
 			  js/jquery.mobile.navigation.pushstate.js \
 			  js/jquery.mobile.transition.js \
+			  js/jjquery.mobile.transition.pop.js \
+			  js/jjquery.mobile.transition.slide.js \
+			  js/jjquery.mobile.transition.slidedown.js \
+			  js/jjquery.mobile.transition.slideup.js \
+			  js/jjquery.mobile.transition.flip.js \
 			  js/jquery.mobile.degradeInputs.js \
 			  js/jquery.mobile.dialog.js \
 			  js/jquery.mobile.page.sections.js \

@@ -6,6 +6,11 @@
 
 function outInTransitionHandler( name, reverse, $to, $from ) {
 	
+	// first, override name if there's no 3D transform support and a fallback is defined 
+	if( name && !$.support.cssTransform3d ){
+		name = $.mobile.transitionFallbacks[ name ] || "none";
+	}
+	
 	var deferred = new $.Deferred(),
 		reverseClass = reverse ? " reverse" : "",
 		active	= $.mobile.urlHistory.getActive(),
@@ -96,5 +101,7 @@ $.mobile.defaultTransitionHandler = outInTransitionHandler;
 $.mobile.transitionHandlers = {
 	"default": $.mobile.defaultTransitionHandler
 };
+
+$.mobile.transitionFallbacks = {};
 
 })( jQuery, this );
