@@ -2,27 +2,30 @@
 .flow {
 	-webkit-transform-origin: 50% 30%;
 	-moz-transform-origin: 50% 30%;	
+	-webkit-box-shadow: 0 0 20px rgba(0,0,0,.4);
+	-moz-box-shadow: 0 0 20px rgba(0,0,0,.4);
+	
 }
 .flow.out {
 	-webkit-transform: translateX(-100%) scale(.7);
 	-webkit-animation-name: flowouttoleft;
 	-webkit-animation-timing-function: ease;
-	-webkit-animation-duration: 400ms;
-	-moz-transform:  translateX(-100%) scale(.7);
+	-webkit-animation-duration: 500ms;
+	-moz-transform: translateX(-100%) scale(.7);
 	-moz-animation-name: flowouttoleft;
 	-moz-animation-timing-function: ease;
-	-moz-animation-duration: 400ms;
+	-moz-animation-duration: 500ms;
 }
 
 .flow.in {
 	-webkit-transform: translateX(0) scale(1);
 	-webkit-animation-name: flowinfromright;
 	-webkit-animation-timing-function: ease;
-	-webkit-animation-duration: 300ms;
+	-webkit-animation-duration: 400ms;
 	-moz-transform: translateX(0) scale(1);
 	-moz-animation-name: flowinfromright;
 	-moz-animation-timing-function: ease;
-	-moz-animation-duration: 300ms;
+	-moz-animation-duration: 400ms;
 }
 
 .flow.out.reverse {
