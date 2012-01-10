@@ -2,6 +2,6 @@
 $type = 'text/css';
 $files = array(
 	'../../../LICENSE-INFO.txt',
-	'jquery.mobile.theme.css'
+	'jquery.mobile.css'
 );
 $base = dirname(__FILE__);
