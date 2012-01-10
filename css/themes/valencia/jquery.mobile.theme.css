@@ -900,6 +900,9 @@ a.ui-link-inherit {
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
 }
+@media all and (min-width: 450px) {
+	.ui-br { border-bottom-width: 0; }
+}
 
 /* Overlays */
 .ui-overlay { 
