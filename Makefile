@@ -55,7 +55,7 @@ css: init
 	@@java -XX:ReservedCodeCacheSize=64m \
 		-classpath build/js.jar:build/google-compiler-20111003.jar org.mozilla.javascript.tools.shell.Main \
 		external/r.js/dist/r.js \
-		-o cssIn=css/themes/default/jquery.mobile.theme.css \
+		-o cssIn=css/themes/default/jquery.mobile.css \
 		out=${OUTPUT}/${NAME}.compiled.css
 	@@cat LICENSE-INFO.txt | ${VER} > ${OUTPUT}/${NAME}.css
 	@@cat ${OUTPUT}/${NAME}.compiled.css >> ${OUTPUT}/${NAME}.css
