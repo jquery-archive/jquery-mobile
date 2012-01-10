@@ -73,10 +73,7 @@ function outInTransitionHandler( name, reverse, $to, $from ) {
 		};
 		
 	$to
-		.parent().addClass( viewportClass );	
-
-	//clear page loader
-	$.mobile.hidePageLoadingMsg();
+		.parent().addClass( viewportClass );
 	
 	if ( $from && !none ) {
 		$from
