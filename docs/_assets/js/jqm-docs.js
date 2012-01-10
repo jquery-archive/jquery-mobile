@@ -36,26 +36,6 @@ $(function(){
 	});
 });
 
-function setDefaultTransition(){
-	var winwidth = $( window ).width(),
-		trans ="slide";
-
-	if( winwidth >= 1000 ){
-		trans = "none";
-	}
-	else if( winwidth >= 650 ){
-		trans = "fade";
-	}
-
-	$.mobile.defaultPageTransition = trans;
-}
-
-
-$(function(){
-	//setDefaultTransition();
-	//$( window ).bind( "throttledresize", setDefaultTransition );
-});
-
 
 // Turn off AJAX for local file browsing
 if ( location.protocol.substr(0,4)  === 'file' ||
