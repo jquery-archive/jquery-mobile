@@ -18,7 +18,6 @@ $files = array(
 	'jquery.mobile.navigation.js',
 	'jquery.mobile.navigation.pushstate.js',
 	'jquery.mobile.transition.js',
-	'jquery.mobile.transition.js',
 	'jquery.mobile.transition.pop.js',
 	'jquery.mobile.transition.slide.js',
 	'jquery.mobile.transition.slidedown.js',
