@@ -19,11 +19,17 @@ $.widget( "mobile.button", $.mobile.widget, {
 	},
 	_create: function() {
 		var $el = this.element,
-            $button,
+			$button,
 			o = this.options,
 			type,
 			name,
 			$buttonPlaceholder;
+
+		// if this is a link, check if it's been enhanced and, if not, use the right function
+		if( $el[ 0 ].tagName === "A" ) {
+	 	 	if ( !$el.hasClass( "ui-btn" ) ) $el.buttonMarkup();
+	 	 	return;
+ 	 	}
 
 		// Add ARIA role
 		this.button = $( "<div></div>" )
