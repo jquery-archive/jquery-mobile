@@ -478,19 +478,6 @@ define( [
 	// bind to scrollstop for the first page as "pagechange" won't be fired in that case
 	getScrollElem().bind( "scrollstop", delayedSetLastScroll );
 
-	// Make the iOS clock quick-scroll work again if we're using native overflow scrolling
-	/*
-	if( $.support.touchOverflow ){
-		if( $.mobile.touchOverflowEnabled ){
-			$( window ).bind( "scrollstop", function(){
-				if( $( this ).scrollTop() === 0 ){
-					$.mobile.activePage.scrollTop( 0 );
-				}
-			});
-		}
-	}
-	*/
-
 	//function for transitioning between two existing pages
 	function transitionPages( toPage, fromPage, transition, reverse ) {
 
