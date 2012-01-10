@@ -54,6 +54,7 @@
 			//stub to prevent class removal
 			$.fn.animationComplete = function(callback){
 				callbackQueue.unshift(callback);
+				return this;
 			};
 
 			clearPageTransitionStack();
