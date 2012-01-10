@@ -500,6 +500,9 @@ define( [
 		}
 
 		toPage.data( "page" )._trigger( "beforeshow", null, { prevPage: fromPage || $( "" ) } );
+		
+		//clear page loader
+		$.mobile.hidePageLoadingMsg();
 
 		//find the transition handler for the specified transition. If there
 		//isn't one in our transitionHandlers dictionary, use the default one.
