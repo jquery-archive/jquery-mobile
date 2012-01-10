@@ -31,7 +31,7 @@
 		<a href="#dialog" data-role="button" data-rel="dialog" data-transition="none">none</a>
 		<a href="#dialog" data-role="button" data-rel="dialog" data-transition="fade">fade</a>
 		<a href="#dialog" data-role="button" data-rel="dialog" data-transition="pop">pop</a>
-		<a href="#dialog" data-role="button" data-rel="dialog" data-transition="flip">flip*</a>
+		<a href="#dialog" data-role="button" data-rel="dialog" data-transition="flip">flip</a>
 	</div>
 	<div class="ui-block-b">
 			<a href="#dialog" data-role="button" data-rel="dialog" data-transition="slide">slide</a>
@@ -41,10 +41,10 @@
 	</div>
 </div><!-- /grid-a -->
 
+
+<p><strong>NOTE</strong>: To view all transition types, you must be on a browser that supports 3D transforms and be viewing on a screen width of 1,000 pixels or less. By default, devices that lack 3D support will fallback to "fade" for all transition types. Above 1,00 pixels, all transitions are set to "none". These behaviors are all configurable (see below).</p>
+
 <p><strong>Transitions were originally inspired by <a href="http://www.jqtouch.com/">jQtouch</a></strong> They've since been rebuilt, but props to David Kaneda and Jonathan Stark for the initial guidance.</p>
-
-<p>NOTE: The flip transition will only work on platforms with 3D Transform support. Devices that lack 3D support,  will get a fade transition.</p>
-
 
 	<h2>Setting a transition on a link or form submit</h2>
 	<p>By default, the framework applies a <strong>fade</strong> transition. To set a custom transition effect, add the <code>data-transition</code> attribute to the link. </p>
@@ -58,9 +58,21 @@
 		<h2>Global configuration of transitions</h2>
 		
 		<p>Set the <code>defaultPageTransition</code> <a href="../api/globalconfig.html">global option</a> if you'd prefer a different default transition. Dialogs have a different option called <code>defaultDialogTransition</code> that can also set configured.</p>
-		
-		<p>By default, transitions are disabled when the window width is greater than 1000px. This value is configurable via the global option <code>$.mobile.maxTransitionWidth</code>, which defaults to <code>1000</code>. The option accepts any number or <code>false</code> value. If it's not <code>false</code>, the handler will use a "none" transition when the window width is wider than the specified value. This is useful because transitions get very wonky on wider screens.</p>
+	
 
+		<h2>Browser support and performance</h2>
+		<p>All transitions are built with CSS keyframe animations and include both <code>-webkit</code> vendor prefixed rules for iOS, Blackberry, Android, Safari and Chrome browsers and <code>-moz</code> rules for Firefox browsers. Support for keyframe animations and transition smoothness is determined by the browser version and hardware and will safely fall back to no transition if animations aren't supported. To proactively exclude transition in situations with poor performance, we exclude browsers that lack 3D transforms and provide a fallback transition and apply a max width for when transitions are applied.</p>
+		
+		<h2>Defining fallback transitions for non-3D support</h2>
+		<p>By default, all transitions except fade require 3D transform support. Devices that lack 3D support will fall back to a fade transition, regardless of the transition specified. We do this to proactively exclude poorly-performing platforms like Android 2.x from advanced transitions and ensure they still have a smooth experience. Note that there are platforms such as Android 3.0 that technically support 3D transforms, but still have poor animation performance so this won't guarantee that every browser will be 100% flicker-free but we try to target this responsibly.</p>
+		
+		<p>The fallback transition for browsers that don't support 3D transforms can be configured for each transition type, but by default we specify "fade" as the fallback. For example, this will set the fallback transition for the slideout transition to "none":</p>
+		<code>$.mobile.fallbackTransition.slideout = "none"</code>
+		
+		<h2>Setting a max width for transitions</h2>
+		<p>By default, transitions are disabled (set to "none") when the window width is greater than 1000px. We do this because many transitions can be distracting and perform poorly on larger screens. This value is configurable via the global option <code>$.mobile.maxTransitionWidth</code>, which defaults to <code>1000</code>. The option accepts any number or <code>false</code> value. If it's not <code>false</code>, the handler will use a "none" transition when the window width is wider than the specified value. This is useful because transitions get very wonky on wider screens.</p>
+
+		
 
 		<h2>Creating custom CSS-based transitions</h2>
 
@@ -266,7 +278,7 @@ $.mobile.defaultTransitionHandler = myTransitionHandler;
 				<a href="#dialog" data-role="button" data-rel="dialog" data-transition="none">none</a>
 				<a href="#dialog" data-role="button" data-rel="dialog" data-transition="fade">fade</a>
 				<a href="#dialog" data-role="button" data-rel="dialog" data-transition="pop">pop</a>
-				<a href="#dialog" data-role="button" data-rel="dialog" data-transition="flip">flip*</a>
+				<a href="#dialog" data-role="button" data-rel="dialog" data-transition="flip">flip</a>
 			</div>
 			<div class="ui-block-b">
 					<a href="#dialog" data-role="button" data-rel="dialog" data-transition="slide">slide</a>
