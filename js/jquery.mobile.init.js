@@ -34,13 +34,13 @@ define( [ "jquery.mobile.core", "jquery.mobile.navigation", "jquery.mobile.navig
 
 	$.extend($.mobile, {
 		// turn on/off page loading message.
-		showPageLoadingMsg: function() {
-			if ( $.mobile.loadingMessage ) {
+		showPageLoadingMsg: function( msg ) {
+			if ( msg || $.mobile.loadingMessage ) {
 				var activeBtn = $( "." + $.mobile.activeBtnClass ).first();
 
 				$loader
 					.find( "h1" )
-						.text( $.mobile.loadingMessage )
+						.text( msg || $.mobile.loadingMessage )
 						.end()
 					.appendTo( $.mobile.pageContainer )
 					// position at y center (if scrollTop supported), above the activeBtn (if defined), or just 100px from top
