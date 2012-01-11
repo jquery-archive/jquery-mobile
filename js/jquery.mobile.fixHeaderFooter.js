@@ -200,7 +200,7 @@ $.mobile.fixedToolbars = (function() {
 			top = ele.offsetTop;
 
 			while ( ele && ele != body ) {
-				top += ele.scrollTop || 0;
+				top -= ele.scrollTop || 0;
 
 				if ( ele == op ) {
 					top += op.offsetTop;
