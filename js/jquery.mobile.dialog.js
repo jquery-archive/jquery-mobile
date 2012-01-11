@@ -60,8 +60,21 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 					.attr( "data-" + $.mobile.ns + "direction", "reverse" );
 			}
 		})
-		.bind( "pagehide", function() {
+		.bind( "pagehide", function( e, ui ) {
 			$( this ).find( "." + $.mobile.activeBtnClass ).removeClass( $.mobile.activeBtnClass );
+			
+			// if there's an overlay theme, we're going to remove it from the page container.
+			// First though, check that the incoming page isn't a dialog with the same theme. If so, don't remove.
+			if( self.options.overlayTheme ){
+				if( !ui.nextPage || !ui.nextPage.is( ".ui-dialog-page.ui-overlay-" + self.options.overlayTheme ) ){
+					$.mobile.pageContainer.removeClass( "ui-overlay-" + self.options.overlayTheme );
+				}	
+			}
+		})
+		.bind( "pagebeforeshow", function(){
+			if( self.options.overlayTheme ){
+				$.mobile.pageContainer.addClass( "ui-body-" + self.options.overlayTheme );
+			}
 		});
 	},
 
