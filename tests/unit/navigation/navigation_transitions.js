@@ -5,6 +5,7 @@
 	var perspective = "viewport-flip",
 			transitioning = "ui-mobile-viewport-transitioning",
 			animationCompleteFn = $.fn.animationComplete,
+			defaultMaxTrans = $.mobile.maxTransitionWidth,
 
 			//TODO centralize class names?
 			transitionTypes = "in out fade slide flip reverse pop",
@@ -17,6 +18,14 @@
 
 			isTransitioningIn = function(page){
 				return page.hasClass("in") && isTransitioning(page);
+			},
+			
+			disableMaxTransWidth = function(){
+				$.mobile.maxTransitionWidth = false;
+			},
+			
+			enableMaxTransWidth = function(){
+				$.mobile.maxTransitionWidth = defaultMaxTrans;
 			},
 
 			//animationComplete callback queue
@@ -46,6 +55,9 @@
 
 	module('jquery.mobile.navigation.js', {
 		setup: function(){
+			// disable this option so we can test transitions regardless of window width
+			disableMaxTransWidth();
+			
 			//stub to allow callback before function is returned to transition handler
 			$.fn.animationComplete = function( callback ){
 				animationCompleteFn.call( this, function(){
@@ -65,6 +77,7 @@
 		teardown: function(){
 			// unmock animation complete
 			$.fn.animationComplete = animationCompleteFn;
+			enableMaxTransWidth();
 		}
 	});
 	
