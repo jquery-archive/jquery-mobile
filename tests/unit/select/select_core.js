@@ -325,15 +325,16 @@
 	});
 
 	// issue #2547
-	test( "custom select list item links have unencoded option text values when using vanilla $.fn.text", function() {
+	// getEncodedText() is no longer used in _buildList() so we don't need this extra check  
+	/*test( "custom select list item links have unencoded option text values when using vanilla $.fn.text", function() {
 		// undo our changes, undone in teardown
 		$.fn.getEncodedText = $.fn.text;
 
 		$( "#encoded-option" ).data( 'selectmenu' )._buildList();
 
 		same(window.encodedValueIsDefined, true);
-	});
-
+	});*/
+	
 	$.mobile.page.prototype.options.keepNative = "select.should-be-native";
 
 	// not testing the positive case here since's it's obviously tested elsewhere
