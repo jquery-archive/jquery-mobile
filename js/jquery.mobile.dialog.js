@@ -62,6 +62,14 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		})
 		.bind( "pagehide", function() {
 			$( this ).find( "." + $.mobile.activeBtnClass ).removeClass( $.mobile.activeBtnClass );
+			if( self.options.overlayTheme ){
+				$.mobile.pageContainer.removeClass( "ui-body-" + self.options.overlayTheme );
+			}
+		})
+		.bind( "pagebeforeshow", function(){
+			if( self.options.overlayTheme ){
+				$.mobile.pageContainer.addClass( "ui-body-" + self.options.overlayTheme );
+			}
 		});
 	},
 
