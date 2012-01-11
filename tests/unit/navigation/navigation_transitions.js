@@ -183,5 +183,39 @@
 		$.fn.animationComplete = animationCompleteFn;
 		equals($("#foo").animationComplete(function(){})[0], $("#foo")[0]);
 	});
+	
+	
+	// reusable function for a few tests below
+	function testTransitionMaxWidth( val, expected ){
+		expect( 1 );
+		
+		$.mobile.maxTransitionWidth = val;
+		
+		var transitionOccurred = false;
+		
+		onToComplete(function(){
+			transitionOccurred = true;
+		});
+		
+		
+		return setTimeout(function(){
+			ok( transitionOccurred === expected, (expected ? "" : "no ") + "transition occurred" );
+			start();
+		}, 5000);
+		
+		$.mobile.changePage( $(".ui-page:not(.ui-page-active)").first() );
+		
+	}
+	
+	asyncTest( "maxTransitionWidth property disables transitions when value is less than browser width", function(){
+		testTransitionMaxWidth( $( window ).width() - 1, false );
+	});
+	
+	asyncTest( "maxTransitionWidth property disables transitions when value is false", function(){
+		testTransitionMaxWidth( false, false );
+	});
+	
+
+	
 
 })(jQuery);
