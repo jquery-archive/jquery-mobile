@@ -5,6 +5,11 @@
 	-webkit-box-shadow: 0 0 20px rgba(0,0,0,.4);
 	-moz-box-shadow: 0 0 20px rgba(0,0,0,.4);
 }
+.ui-dialog-page.flow {
+	-moz-transform-origin: none;	
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+}
 .flow.out {
 	-webkit-transform: translateX(-100%) scale(.7);
 	-webkit-animation-name: flowouttoleft;
