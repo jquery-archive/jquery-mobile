@@ -2,7 +2,7 @@
 
 define( [ "jquery.mobile" ], function() {
 $('div').live('pagecreate',function(event){
-	if( !$(this).is('.ui-dialog')){
+	if( !$(this).is('.ui-dialog-page')){
 		var appendEl = $(this).find('.ui-footer:last');
 
 		if( !appendEl.length ){
