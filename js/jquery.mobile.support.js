@@ -30,7 +30,7 @@ function propExists( prop ) {
 // Thanks to Modernizr src for this test idea
 function transform3dTest() {
 	var prop = "transform-3d";
-	return propExists( 'perspective' ) || $.mobile.media( "(-" + vendors.join( "-" + prop + "),(-" ) + "-" + prop + "),(" + prop + ")" );
+	return propExists( "perspective" ) || $.mobile.media( "(-" + vendors.join( "-" + prop + "),(-" ) + "-" + prop + "),(" + prop + ")" );
 }
 
 // Test for dynamic-updating base tag support ( allows us to avoid href,src attr rewriting )
