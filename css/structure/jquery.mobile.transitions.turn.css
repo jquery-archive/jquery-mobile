@@ -25,11 +25,16 @@
 	-webkit-animation-name: flipouttoleft;
 	-moz-transform: rotateY(-90deg) scale(.9);
 	-moz-animation-name: flipouttoleft;
+	-webkit-animation-duration: 225ms;
+	-moz-animation-duration: 225ms;
 }
 
 .turn.in {
 	-webkit-animation-name: flipintoright;
 	-moz-animation-name: flipintoright;
+	-webkit-animation-duration: 350ms;
+	-moz-animation-duration: 350ms;
+	
 }
 
 .turn.out.reverse {

@@ -9,12 +9,16 @@
     opacity: 1;
 	-webkit-animation-name: popin;
 	-moz-animation-name: popin;
+	-webkit-animation-duration: 350ms;
+	-moz-animation-duration: 350ms;
 }
 
 .pop.out {
 	-webkit-animation-name: fadeout;
 	-moz-animation-name: fadeout;
 	opacity: 0;
+	-webkit-animation-duration: 225ms;
+	-moz-animation-duration: 225ms;
 }
 
 .pop.in.reverse {

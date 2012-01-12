@@ -2,6 +2,8 @@
 .slideup.out {
 	-webkit-animation-name: fadeout;
 	-moz-animation-name: fadeout;
+	-webkit-animation-duration: 225ms;
+	-moz-animation-duration: 225ms;
 }
 
 .slideup.in {
@@ -9,6 +11,8 @@
 	-webkit-animation-name: slideinfrombottom;
 	-moz-transform: translateY(0);
 	-moz-animation-name: slideinfrombottom;
+	-webkit-animation-duration: 350ms;
+	-moz-animation-duration: 350ms;
 }
 
 .slideup.in.reverse {

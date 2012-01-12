@@ -4,6 +4,8 @@
 	-webkit-animation-name: slideouttoleft;
 	-moz-transform: translateX(-100%);
 	-moz-animation-name: slideouttoleft;
+	-webkit-animation-duration: 225ms;
+	-moz-animation-duration: 225ms;
 }
 
 .slide.in {
@@ -11,6 +13,8 @@
 	-webkit-animation-name: fadein;
 	-moz-transform: translateX(0);
 	-moz-animation-name: fadein;
+	-webkit-animation-duration: 350ms;
+	-moz-animation-duration: 350ms;
 }
 
 .slide.out.reverse {
