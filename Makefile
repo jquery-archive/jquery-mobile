@@ -78,16 +78,14 @@ css: init
 	# -------------------------------------------------
 
 
-docs: init css js
+docs: init
 	# Create the Demos/Docs/Tests/Tools
-	@@mkdir -p tmp/${NAME}
-	@@cp -R index.html docs experiments external js/jquery.js tests css/themes/${THEME}/images tmp/${NAME}/
-	@@cp ${OUTPUT}/${NAME}.min.css ${OUTPUT}/${NAME}.min.js tmp/${NAME}/
-	# ... Update the JavaScript and CSS paths
-	@@find tmp/${NAME} -type f \
-		\( -name '*.html' -o -name '*.php' \) \
-		-exec perl -pi -e \
-		's|js/"|${NAME}.min.js"|g;s|css/themes/default/|${NAME}.min.css|g;s|js/jquery.js"|jquery.js"|g' {} \;
+	# ... Build the docs bundle
+	@@java -XX:ReservedCodeCacheSize=64m \
+		-classpath build/js.jar:build/google-compiler-20111003.jar org.mozilla.javascript.tools.shell.Main \
+		external/r.js/dist/r.js \
+	 	-o build/docs.build.js \
+		dir=../tmp/${NAME}
 	# ... Move and zip up the the whole folder
 	@@cd tmp; zip -rq ../${OUTPUT}/${NAME}.docs.zip ${NAME}
 	@@mv tmp/${NAME} ${OUTPUT}/demos
