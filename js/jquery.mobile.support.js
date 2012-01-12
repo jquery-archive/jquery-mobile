@@ -33,8 +33,8 @@ function transform3dTest() {
 		div = document.createElement('div');
 	
 	div.setAttribute('style', '-moz-perspective: 100px');
-	/* Android 2.3 (at least) returns a positive for 3D-specific properties—`perspective`, `perspective-origin`, `backface-visibility—necessitating` the preceeding approach to pass FF10+. */
-		
+/* Android 2.3 (at least) returns a positive for 3D-specific properties—`perspective`, `perspective-origin`, `backface-visibility`—necessitating the preceeding approach to pass FF10+. 
+TODO: This method of creating an element, setting a style attribute, then grabbing the result is used in a few places now. We should probably look into globalizing it, a la Modernizr.  */
 	return div.style.MozPerspective !== undefined || $.mobile.media( "(-" + vendors.join( "-" + prop + "),(-" ) + "-" + prop + "),(" + prop + ")" );
 }
 
