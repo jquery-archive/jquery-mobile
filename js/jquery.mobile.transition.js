@@ -88,9 +88,6 @@ function outInTransitionHandler( name, reverse, $to, $from ) {
 	return deferred.promise();
 }
 
-// add class for where 3d transforms are supported, or not
-$( "html" ).addClass( $.support.cssTransform3d ? "ui-supported-csstransform3d" : "ui-unsupported-csstransform3d" );
-
 // Make our transition handler the public default.
 $.mobile.defaultTransitionHandler = outInTransitionHandler;
 
