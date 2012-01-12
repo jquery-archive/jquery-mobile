@@ -51,10 +51,10 @@
     100% { -webkit-transform: translateX(-100%) scale(.7); }
 }
 @-moz-keyframes flowouttoleft {
-    0% { -webkit-transform: translateX(0) scale(1); }
-	60% { -webkit-transform: translateX(0) scale(.7); }
-	70% { -webkit-transform: translateX(0) scale(.7); }
-    100% { -webkit-transform:  translateX(-100%) scale(.7); }
+    0% { -moz-transform: translateX(0) scale(1); }
+	60% { -moz-transform: translateX(0) scale(.7); }
+	70% { -moz-transform: translateX(0) scale(.7); }
+    100% { -moz-transform:  translateX(-100%) scale(.7); }
 }
 
 @-webkit-keyframes flowouttoright {
@@ -64,10 +64,10 @@
     100% { -webkit-transform:  translateX(100%) scale(.7); }
 }
 @-moz-keyframes flowouttoright {
-    0% { -webkit-transform: translateX(0) scale(1); }
-	60% { -webkit-transform: translateX(0) scale(.7); }
-	70% { -webkit-transform: translateX(0) scale(.7); }
-    100% { -webkit-transform:  translateX(100%) scale(.7); }
+    0% { -moz-transform: translateX(0) scale(1); }
+	60% { -moz-transform: translateX(0) scale(.7); }
+	70% { -moz-transform: translateX(0) scale(.7); }
+    100% { -moz-transform:  translateX(100%) scale(.7); }
 }
 
 @-webkit-keyframes flowinfromleft {
@@ -78,9 +78,9 @@
 }
 @-moz-keyframes flowinfromleft {
     0% { -moz-transform: translateX(-100%) scale(.7); }
-	30% { -webkit-transform: translateX(0) scale(.7); }
-	40% { -webkit-transform: translateX(0) scale(.7); }
-    100% { -webkit-transform: translateX(0) scale(1); }
+	30% { -moz-transform: translateX(0) scale(.7); }
+	40% { -moz-transform: translateX(0) scale(.7); }
+    100% { -moz-transform: translateX(0) scale(1); }
 }
 @-webkit-keyframes flowinfromright {
     0% { -webkit-transform: translateX(100%) scale(.7); }
@@ -90,7 +90,7 @@
 }
 @-moz-keyframes flowinfromright {
     0% { -moz-transform: translateX(100%) scale(.7); }
-	30% { -webkit-transform: translateX(0) scale(.7); }
-	40% { -webkit-transform: translateX(0) scale(.7); }
-    100% { -webkit-transform: translateX(0) scale(1); }
+	30% { -moz-transform: translateX(0) scale(.7); }
+	40% { -moz-transform: translateX(0) scale(.7); }
+    100% { -moz-transform: translateX(0) scale(1); }
 }
