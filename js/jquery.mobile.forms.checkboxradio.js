@@ -74,8 +74,8 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 				}
 
 				self._cacheVals();
-
-				input.prop( "checked", inputtype === "radio" && true || !input.prop( "checked" ) );
+				input.attr( "checked", inputtype === "radio" && true || !input.attr( "checked" ) );
+				//input.prop( "checked", inputtype === "radio" && true || !input.attr( "checked" ) );
 
 				// trigger click handler's bound directly to the input as a substitute for
 				// how label clicks behave normally in the browsers
@@ -87,7 +87,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 				// Input set for common radio buttons will contain all the radio
 				// buttons, but will not for checkboxes. clearing the checked status
 				// of other radios ensures the active button state is applied properly
-				self._getInputSet().not( input ).prop( "checked", false );
+				self._getInputSet().not( input ).removeAttr( "checked" );
 
 				self._updateAll();
 				return false;
@@ -107,11 +107,11 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 					// Adds checked attribute to checked input when keyboard is used
 					if ( $this.is( ":checked" ) ) {
 
-						$this.prop( "checked", true);
-						self._getInputSet().not($this).prop( "checked", false );
+						$this.attr( "checked", "checked" );
+						self._getInputSet().not($this).removeAttr( "checked" );
 					} else {
 
-						$this.prop( "checked", false );
+						$this.removeAttr( "checked" );
 					}
 
 					self._updateAll();
@@ -167,13 +167,11 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 
 		// input[0].checked expando doesn't always report the proper value
 		// for checked='checked'
-		if ( $( input[ 0 ] ).prop( "checked" ) ) {
-
+		
+		if ( input[ 0 ].getAttribute( "checked" ) ) {
 			label.addClass( this.checkedClass ).removeClass( this.uncheckedClass );
 			icon.addClass( this.checkedicon ).removeClass( this.uncheckedicon );
-
 		} else {
-
 			label.removeClass( this.checkedClass ).addClass( this.uncheckedClass );
 			icon.removeClass( this.checkedicon ).addClass( this.uncheckedicon );
 		}
@@ -186,7 +184,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 	},
 
 	disable: function() {
-		this.element.prop( "disabled", true ).parent().addClass( "ui-disabled" );
+		this.element.attr( "disabled", true ).parent().addClass( "ui-disabled" );
 	},
 
 	enable: function() {
