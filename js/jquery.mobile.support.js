@@ -29,8 +29,13 @@ function propExists( prop ) {
 
 // Thanks to Modernizr src for this test idea
 function transform3dTest() {
-	var prop = "transform-3d";
-	return propExists( "perspective" ) || $.mobile.media( "(-" + vendors.join( "-" + prop + "),(-" ) + "-" + prop + "),(" + prop + ")" );
+	var prop = "transform-3d",
+		div = document.createElement('div');
+	
+	div.setAttribute('style', '-moz-perspective: 100px');
+	/* Android 2.3 (at least) returns a positive for 3D-specific properties—`perspective`, `perspective-origin`, `backface-visibility—necessitating` the preceeding approach to pass FF10+. */
+		
+	return div.style.MozPerspective !== undefined || $.mobile.media( "(-" + vendors.join( "-" + prop + "),(-" ) + "-" + prop + "),(" + prop + ")" );
 }
 
 // Test for dynamic-updating base tag support ( allows us to avoid href,src attr rewriting )
