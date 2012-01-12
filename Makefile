@@ -160,7 +160,7 @@ zip: init css js
 # -------------------------------------------------
 
 # Push the latest git version to the CDN. This is done on a post commit hook
-latest: init css js zip
+latest: init css docs js zip
 	# Time to put these on the CDN
 	@@scp -qr ${OUTPUT}/* jqadmin@code.origin.jquery.com:/var/www/html/code.jquery.com/mobile/latest/
 	# Do some cleanup to wrap it up
