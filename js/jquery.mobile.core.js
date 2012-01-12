@@ -40,8 +40,8 @@ define( [ "jquery.mobile.widget" ], function() {
 		// Set default page transition - 'none' for no transitions
 		defaultPageTransition: "fade",
 		
-		// Set maximum window width for transitions to apply
-		maxTransitionWidth: 1000,
+		// Set maximum window width for transitions to apply - 'false' for no limit
+		maxTransitionWidth: false,
 
 		// Minimum scroll distance that will be remembered when returning to a page
 		minScrollBack: 250,
