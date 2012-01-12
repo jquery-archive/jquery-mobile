@@ -23,23 +23,61 @@
 		<div class="content-primary">		
 		<h2>Page transitions</h2> 
 
-		<p>The jQuery Mobile framework includes a set of six CSS-based transition effects that can be applied to any page link or form submission with Ajax navigation: </p>
+		<p>The jQuery Mobile framework includes a set of CSS-based transition effects that can be applied to any page link or form submission with Ajax navigation: </p>
 
-<div class="ui-grid-a">
-	<div class="ui-block-a">
-		<a href="#dialog" data-role="button" data-rel="dialog" data-transition="none">none</a>
-		<a href="#dialog" data-role="button" data-rel="dialog" data-transition="fade">fade</a>
-		<a href="#dialog" data-role="button" data-rel="dialog" data-transition="pop">pop</a>
-		<a href="#dialog" data-role="button" data-rel="dialog" data-transition="flip">flip</a>
-		<a href="#dialog" data-role="button" data-rel="dialog" data-transition="turn">turn</a>
-	</div>
-	<div class="ui-block-b">
-		<a href="#dialog" data-role="button" data-rel="dialog" data-transition="slide">slide</a>
-		<a href="#dialog" data-role="button" data-rel="dialog" data-transition="slideup">slideup</a>
-		<a href="#dialog" data-role="button" data-rel="dialog" data-transition="slidedown">slidedown</a>
-		<a href="#dialog" data-role="button" data-rel="dialog" data-transition="flow">flow</a>
-	</div>
-</div><!-- /grid-a -->
+			<style>
+				table { width:100%; border-bottom:1px solid #ccc; }
+				th { text-align:left; }
+				th, td { vertical-align:top; border-top:1px solid #ccc; padding: 2px 0 2px 0; }
+			</style>
+
+		<table>
+			<tr>
+				<th><h3>fade</h3></th>
+				<td><a href="#dialog-success" data-role="button" data-rel="dialog" data-transition="fade" data-inline="true">dialog</a></td>
+				<td><a href="#page-success" data-role="button" data-transition="fade" data-inline="true">page</a></td>
+			</tr>
+			<tr>
+				<th><h3>pop</h3></th>
+				<td><a href="#dialog-success" data-role="button" data-rel="dialog" data-transition="pop" data-inline="true">dialog</a></td>
+				<td><a href="#page-success" data-role="button" data-transition="pop" data-inline="true">page</a></td>
+			</tr>
+			<tr>
+				<th><h3>flip</h3></th>
+				<td><a href="#dialog-success" data-role="button" data-rel="dialog" data-transition="flip" data-inline="true">dialog</a></td>
+				<td><a href="#page-success" data-role="button" data-transition="flip" data-inline="true">page</a></td>
+			</tr>
+			<tr>
+				<th><h3>turn</h3></th>
+				<td><a href="#dialog-success" data-role="button" data-rel="dialog" data-transition="turn" data-inline="true">dialog</a></td>
+				<td><a href="#page-success" data-role="button" data-transition="turn" data-inline="true">page</a></td>
+			</tr>
+			<tr>
+				<th><h3>flow</h3></th>
+				<td><a href="#dialog-success" data-role="button" data-rel="dialog" data-transition="flow" data-inline="true">dialog</a></td>
+				<td><a href="#page-success" data-role="button" data-transition="flow" data-inline="true">page</a></td>
+			</tr>
+			<tr>
+				<th><h3>slide</h3></th>
+				<td><a href="#dialog-success" data-role="button" data-rel="dialog" data-transition="slide" data-inline="true">dialog</a></td>
+				<td><a href="#page-success" data-role="button" data-transition="slide" data-inline="true">page</a></td>
+			</tr>
+			<tr>
+				<th><h3>slideup</h3></th>
+				<td><a href="#dialog-success" data-role="button" data-rel="dialog" data-transition="slideup" data-inline="true">dialog</a></td>
+				<td><a href="#page-success" data-role="button" data-transition="slideup" data-inline="true">page</a></td>
+			</tr>
+			<tr>
+				<th><h3>slidedown</h3></th>
+				<td><a href="#dialog-success" data-role="button" data-rel="dialog" data-transition="slidedown" data-inline="true">dialog</a></td>
+				<td><a href="#page-success" data-role="button" data-transition="slidedown" data-inline="true">page</a></td>
+			</tr>
+			<tr>
+				<th><h3>none</h3></th>
+				<td><a href="#dialog-success" data-role="button" data-rel="dialog" data-transition="none" data-inline="true">dialog</a></td>
+				<td><a href="#page-success" data-role="button" data-rel="dialog" data-transition="none" data-inline="true">page</a></td>
+			</tr>
+		</table>
 
 
 <p><strong>NOTE</strong>: To view all transition types, you must be on a browser that supports 3D transforms and be viewing on a screen width of 1,000 pixels or less. By default, devices that lack 3D support will fallback to "fade" for all transition types. Above 1,000 pixels, all transitions are set to "none". These behaviors are all configurable (see below).</p>
@@ -273,20 +311,57 @@ $.mobile.defaultTransitionHandler = myTransitionHandler;
 			
 		<h2>Transitions and scroll position</h2>
 		<p>One of the key things jQuery Mobile does is store your scroll position before starting a transition so it can restore you to the same place once you return to the page when hitting the Back button or closing a dialog. Here are the same buttons from the top to test the scrolling logic.</p>
-		<div class="ui-grid-a">
-			<div class="ui-block-a">
-				<a href="#dialog" data-role="button" data-rel="dialog" data-transition="none">none</a>
-				<a href="#dialog" data-role="button" data-rel="dialog" data-transition="fade">fade</a>
-				<a href="#dialog" data-role="button" data-rel="dialog" data-transition="pop">pop</a>
-				<a href="#dialog" data-role="button" data-rel="dialog" data-transition="flip">flip</a>
-			</div>
-			<div class="ui-block-b">
-					<a href="#dialog" data-role="button" data-rel="dialog" data-transition="slide">slide</a>
-					<a href="#dialog" data-role="button" data-rel="dialog" data-transition="slideup">slideup</a>
-					<a href="#dialog" data-role="button" data-rel="dialog" data-transition="slidedown">slidedown</a>
-					<a href="#dialog" data-role="button" data-rel="dialog" data-transition="flow">flow</a>
-			</div>
-		</div><!-- /grid-a -->
+
+
+		<table>
+			<tr>
+				<th><h3>fade</h3></th>
+				<td><a href="#dialog-success" data-role="button" data-rel="dialog" data-transition="fade" data-inline="true">dialog</a></td>
+				<td><a href="#page-success" data-role="button" data-transition="fade" data-inline="true">page</a></td>
+			</tr>
+			<tr>
+				<th><h3>pop</h3></th>
+				<td><a href="#dialog-success" data-role="button" data-rel="dialog" data-transition="pop" data-inline="true">dialog</a></td>
+				<td><a href="#page-success" data-role="button" data-transition="pop" data-inline="true">page</a></td>
+			</tr>
+			<tr>
+				<th><h3>flip</h3></th>
+				<td><a href="#dialog-success" data-role="button" data-rel="dialog" data-transition="flip" data-inline="true">dialog</a></td>
+				<td><a href="#page-success" data-role="button" data-transition="flip" data-inline="true">page</a></td>
+			</tr>
+			<tr>
+				<th><h3>turn</h3></th>
+				<td><a href="#dialog-success" data-role="button" data-rel="dialog" data-transition="turn" data-inline="true">dialog</a></td>
+				<td><a href="#page-success" data-role="button" data-transition="turn" data-inline="true">page</a></td>
+			</tr>
+			<tr>
+				<th><h3>flow</h3></th>
+				<td><a href="#dialog-success" data-role="button" data-rel="dialog" data-transition="flow" data-inline="true">dialog</a></td>
+				<td><a href="#page-success" data-role="button" data-transition="flow" data-inline="true">page</a></td>
+			</tr>
+			<tr>
+				<th><h3>slide</h3></th>
+				<td><a href="#dialog-success" data-role="button" data-rel="dialog" data-transition="slide" data-inline="true">dialog</a></td>
+				<td><a href="#page-success" data-role="button" data-transition="slide" data-inline="true">page</a></td>
+			</tr>
+			<tr>
+				<th><h3>slideup</h3></th>
+				<td><a href="#dialog-success" data-role="button" data-rel="dialog" data-transition="slideup" data-inline="true">dialog</a></td>
+				<td><a href="#page-success" data-role="button" data-transition="slideup" data-inline="true">page</a></td>
+			</tr>
+			<tr>
+				<th><h3>slidedown</h3></th>
+				<td><a href="#dialog-success" data-role="button" data-rel="dialog" data-transition="slidedown" data-inline="true">dialog</a></td>
+				<td><a href="#page-success" data-role="button" data-transition="slidedown" data-inline="true">page</a></td>
+			</tr>
+			<tr>
+				<th><h3>none</h3></th>
+				<td><a href="#dialog-success" data-role="button" data-rel="dialog" data-transition="none" data-inline="true">dialog</a></td>
+				<td><a href="#page-success" data-role="button" data-rel="dialog" data-transition="none" data-inline="true">page</a></td>
+			</tr>
+		</table>
+		
+
 		
 		<p><a href="#dialog" data-role="button" data-rel="dialog" data-transition="rotate">rotate</a></p>
 
@@ -330,18 +405,69 @@ $.mobile.defaultTransitionHandler = myTransitionHandler;
 			
 			
 			
-			<div data-role="page" id="dialog"><!-- dialog-->
+			<div data-role="page" id="dialog-success"><!-- dialog-->
 
 				<div data-role="header" data-theme="e">
-					<h1>Ta-da!</h1>
+					<h1>Dialog</h1>
 				</div><!-- /header -->
 
 				<div data-role="content" data-theme="e">
-					<p>That was an animated page transition effect that we added with a <code>data-transition</code> attribute on the link.</p>
-					<p>Since it uses CSS transforms, this should be hardware accelerated on many mobile devices.</p>
-					<p>What do you think?</p>
-					<a href="docs-transitions.html" data-role="button" data-theme="b" data-rel="back">I like it</a>   
+					<p>That was an animated page transition effect to a dialog that we added with a <code>data-transition</code> attribute on the link.</p>
+					<p>Since it uses CSS animations, this should be hardware accelerated on many devices. To see transitions, 3D transform support is required so if you only saw a fade transition that's the reason.</p>
+					
+					<a href="docs-transitions.html" data-role="button" data-theme="b" data-rel="back">Take me back</a>   
 				</div>
+			</div>
+			
+			<div data-role="page" id="page-success"><!-- dialog-->
+
+				<div data-role="header" data-theme="a" data-position="fixed">
+					<h1>Page</h1>
+				</div><!-- /header -->
+
+				<div data-role="content" data-theme="d">
+					<p>That was an animated page transition effect to a page that we added with a <code>data-transition</code> attribute on the link. This uses a different background theme swatch to see how that looks with the transitions.</p>
+						<p>Since it uses CSS animations, this should be hardware accelerated on many devices. To see transitions, 3D transform support is required so if you only saw a fade transition that's the reason.</p>
+						
+							<form action="#" method="get">
+
+								<h2>Here's a few form elements</h2>
+
+								<p>These are here to see if this slows down rendering.</p>
+
+								<div data-role="fieldcontain">
+						         <label for="name">Text Input:</label>
+						         <input type="text" name="name" id="name" value=""  />
+								</div>
+
+								<div data-role="fieldcontain">
+								<label for="textarea">Textarea:</label>
+								<textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
+								</div>
+
+								<div data-role="fieldcontain">
+									<label for="slider2">Flip switch:</label>
+									<select name="slider2" id="slider2" data-role="slider">
+										<option value="off">Off</option>
+										<option value="on">On</option>
+									</select>
+								</div>
+
+								<div data-role="fieldcontain">
+									<label for="slider">Slider:</label>
+								 	<input type="range" name="slider" id="slider" value="0" min="0" max="100"  />
+								</div>
+								
+								</form>
+					<a href="docs-transitions.html" data-role="button" data-theme="b" data-rel="back" data-inline="true">Take me back</a>   
+				</div>
+				
+				<div data-role="header" data-theme="d" data-position="fixed">
+					<div style="margin:5px 10px;"><!-- To add a bit of spacing -->
+					<label for="search" class="ui-hidden-accessible">Search:</label>
+			        <input type="search" name="password" id="search" placeholder="Search..." value="" />
+					</div>
+				</div><!-- /header -->
 			</div>
 
 			</body>
