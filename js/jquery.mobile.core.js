@@ -38,10 +38,13 @@ define( [ "jquery.mobile.widget" ], function() {
 		linkBindingEnabled: true,
 
 		// Set default page transition - 'none' for no transitions
-		defaultPageTransition: "slide",
+		defaultPageTransition: "fade",
+		
+		// Set maximum window width for transitions to apply - 'false' for no limit
+		maxTransitionWidth: false,
 
 		// Minimum scroll distance that will be remembered when returning to a page
-		minScrollBack: 250,
+		minScrollBack: 10,
 
 		// Set default dialog transition - 'none' for no transitions
 		defaultDialogTransition: "pop",

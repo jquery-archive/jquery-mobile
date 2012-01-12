@@ -44,7 +44,7 @@
     color: #2489CE /*{a-bar-link-visited}*/;
 }
 .ui-body-a,
-.ui-dialog-page.ui-overlay-a {
+.ui-overlay-a {
 	border: 1px solid 		#2A2A2A /*{a-body-border}*/;
 	background: 			#222222 /*{a-body-background-color}*/;
 	color: 					#fff /*{a-body-color}*/;
@@ -56,6 +56,9 @@
 	background-image:     -ms-linear-gradient( #666 /*{a-body-background-start}*/, #222 /*{a-body-background-end}*/); /* IE10 */
 	background-image:      -o-linear-gradient( #666 /*{a-body-background-start}*/, #222 /*{a-body-background-end}*/); /* Opera 11.10+ */
 	background-image:         linear-gradient( #666 /*{a-body-background-start}*/, #222 /*{a-body-background-end}*/);	
+}
+.ui-overlay-a {
+	background-image: none;
 }
 .ui-body-a,
 .ui-body-a input,
@@ -184,7 +187,7 @@
     color: #ddf0f8 /*{b-bar-link-visited}*/;
 }
 .ui-body-b,
-.ui-dialog-page.ui-overlay-b {
+.ui-overlay-b {
 	border: 1px solid 		#C6C6C6 /*{b-body-border}*/;
 	background: 			#cccccc /*{b-body-background-color}*/;
 	color: 					#333333 /*{b-body-color}*/;
@@ -196,6 +199,9 @@
 	background-image:     -ms-linear-gradient( #e6e6e6 /*{b-body-background-start}*/, #ccc /*{b-body-background-end}*/); /* IE10 */
 	background-image:      -o-linear-gradient( #e6e6e6 /*{b-body-background-start}*/, #ccc /*{b-body-background-end}*/); /* Opera 11.10+ */
 	background-image:         linear-gradient( #e6e6e6 /*{b-body-background-start}*/, #ccc /*{b-body-background-end}*/);
+}
+.ui-overlay-b {
+	background-image: none;
 }
 .ui-body-b,
 .ui-body-b input,
@@ -326,7 +332,7 @@
 	font-family: Helvetica, Arial, sans-serif /*{global-font-family}*/;
 }
 .ui-body-c,
-.ui-dialog-page.ui-overlay-c {
+.ui-overlay-c {
 	border: 1px solid 		#B3B3B3 /*{c-body-border}*/;
 	color: 					#333333 /*{c-body-color}*/;
 	text-shadow: 0 /*{c-body-shadow-x}*/ 1px /*{c-body-shadow-y}*/ 0 /*{c-body-shadow-radius}*/ #fff /*{c-body-shadow-color}*/;
@@ -337,6 +343,9 @@
 	background-image:     -ms-linear-gradient( #eee /*{c-body-background-start}*/, #ddd /*{c-body-background-end}*/); /* IE10 */
 	background-image:      -o-linear-gradient( #eee /*{c-body-background-start}*/, #ddd /*{c-body-background-end}*/); /* Opera 11.10+ */
 	background-image:         linear-gradient( #eee /*{c-body-background-start}*/, #ddd /*{c-body-background-end}*/);
+}
+.ui-overlay-c {
+	background-image: none;
 }
 .ui-body-c,
 .ui-body-c input,
@@ -468,7 +477,7 @@
 }
 
 .ui-body-d,
-.ui-dialog-page.ui-overlay-d {
+.ui-overlay-d {
 	border: 1px solid 		#ccc /*{d-body-border}*/;
 	color: 					#333333 /*{d-body-color}*/;
 	text-shadow: 0 /*{d-body-shadow-x}*/ 1px /*{d-body-shadow-y}*/ 0 /*{d-body-shadow-radius}*/ 	#fff /*{d-body-shadow-color}*/;
@@ -479,6 +488,9 @@
 	background-image:     -ms-linear-gradient( #fff /*{d-body-background-start}*/, #fff /*{d-body-background-end}*/); /* IE10 */
 	background-image:      -o-linear-gradient( #fff /*{d-body-background-start}*/, #fff /*{d-body-background-end}*/); /* Opera 11.10+ */
 	background-image:         linear-gradient( #fff /*{d-body-background-start}*/, #fff /*{d-body-background-end}*/);
+}
+.ui-overlay-d {
+	background-image: none;
 }
 .ui-body-d,
 .ui-body-d input,
@@ -609,7 +621,7 @@
 }
 
 .ui-body-e,
-.ui-dialog-page.ui-overlay-e {
+.ui-overlay-e {
 	border: 1px solid 		#F7C942 /*{e-body-border}*/;
 	color: 					#333333 /*{e-body-color}*/;
 	text-shadow: 0 /*{e-body-shadow-x}*/ 1px /*{e-body-shadow-y}*/ 0 /*{e-body-shadow-radius}*/ 	#fff /*{e-body-shadow-color}*/;
@@ -620,6 +632,9 @@
 	background-image:     -ms-linear-gradient( #fff /*{e-body-background-start}*/, #faeb9e /*{e-body-background-end}*/); /* IE10 */
 	background-image:      -o-linear-gradient( #fff /*{e-body-background-start}*/, #faeb9e /*{e-body-background-end}*/); /* Opera 11.10+ */
 	background-image:         linear-gradient( #fff /*{e-body-background-start}*/, #faeb9e /*{e-body-background-end}*/);
+}
+.ui-overlay-e {
+	background-image: none;
 }
 .ui-body-e,
 .ui-body-e input,
@@ -975,13 +990,8 @@ a.ui-link-inherit {
 
 /* loading icon */
 .ui-icon-loading {
-	background-image: url(images/ajax-loader.png);
-	width: 40px;
-	height: 40px;
-	-moz-border-radius: 20px;
-	-webkit-border-radius: 20px;
-	border-radius: 20px;
-	background-size: 35px 35px;
+	background: url(images/ajax-loader.gif);
+	background-size: 46px 46px;
 }
 
 

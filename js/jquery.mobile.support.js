@@ -27,6 +27,12 @@ function propExists( prop ) {
 	}
 }
 
+// Thanks to Modernizr src for this test idea
+function transform3dTest() {
+	var prop = "transform-3d";
+	return propExists( "perspective" ) || $.mobile.media( "(-" + vendors.join( "-" + prop + "),(-" ) + "-" + prop + "),(" + prop + ")" );
+}
+
 // Test for dynamic-updating base tag support ( allows us to avoid href,src attr rewriting )
 function baseTagTest() {
 	var fauxBase = location.protocol + "//" + location.host + location.pathname + "ui-dir/",
@@ -71,11 +77,16 @@ $.mobile.browser.ie = (function() {
 $.extend( $.support, {
 	orientation: "orientation" in window && "onorientationchange" in window,
 	touch: "ontouchend" in document,
-	cssTransitions: "WebKitTransitionEvent" in window,
+	cssTransitions: "WebKitTransitionEvent" in window || (function() {
+		var div = document.createElement( "div" );
+		div.setAttribute('style', '-moz-transition: height 100ms linear');	
+		return !!div.style.MozTransition;
+	})(),
 	pushState: "pushState" in history && "replaceState" in history,
 	mediaquery: $.mobile.media( "only all" ),
 	cssPseudoElement: !!propExists( "content" ),
 	touchOverflow: !!propExists( "overflowScrolling" ),
+	cssTransform3d: transform3dTest(),
 	boxShadow: !!propExists( "boxShadow" ) && !bb,
 	scrollTop: ( "pageXOffset" in window || "scrollTop" in document.documentElement || "scrollTop" in fakeBody[ 0 ] ) && !webos && !operamini,
 	dynamicBaseTag: baseTagTest()
