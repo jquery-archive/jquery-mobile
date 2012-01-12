@@ -73,7 +73,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		})
 		.bind( "pagebeforeshow", function(){
 			if( self.options.overlayTheme ){
-				$.mobile.pageContainer.addClass( "ui-body-" + self.options.overlayTheme );
+				$.mobile.pageContainer.addClass( "ui-overlay-" + self.options.overlayTheme );
 			}
 		});
 	},
