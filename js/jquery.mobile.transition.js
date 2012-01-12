@@ -2,6 +2,9 @@
 * "transitions" plugin - Page change tranistions
 */
 
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+define( [ "jquery.mobile.core" ], function() {
+//>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
 function outInTransitionHandler( name, reverse, $to, $from ) {
@@ -99,3 +102,6 @@ $.mobile.transitionHandlers = {
 $.mobile.transitionFallbacks = {};
 
 })( jQuery, this );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");
