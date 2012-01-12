@@ -44,7 +44,7 @@ define( [ "jquery.mobile.widget" ], function() {
 		maxTransitionWidth: false,
 
 		// Minimum scroll distance that will be remembered when returning to a page
-		minScrollBack: 250,
+		minScrollBack: 10,
 
 		// Set default dialog transition - 'none' for no transitions
 		defaultDialogTransition: "pop",
