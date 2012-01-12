@@ -111,7 +111,7 @@
 		<code>$.mobile.fallbackTransition.slideout = "none"</code>
 		
 		<h2>Setting a max width for transitions</h2>
-		<p>By default, transitions are disabled (set to "none") when the window width is greater than 1000px. We do this because many transitions can be distracting and perform poorly on larger screens. This value is configurable via the global option <code>$.mobile.maxTransitionWidth</code>, which defaults to <code>1000</code>. The option accepts any number or <code>false</code> value. If it's not <code>false</code>, the handler will use a "none" transition when the window width is wider than the specified value. This is useful because transitions get very wonky on wider screens.</p>
+		<p>By default, transitions can be disabled (set to "none") when the window width is greater than a certain pixel width. This feature is useful because transitions can be distracting or perform poorly on larger screens. This value is configurable via the global option <code>$.mobile.maxTransitionWidth</code>, which defaults to <code>false</code>. The option accepts any number representing a pixel width or <code>false</code> value. If it's not <code>false</code>, the handler will use a "none" transition when the window width is wider than the specified value.</p>
 
 		
 
