@@ -3,6 +3,9 @@
 */
 
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Fixed positioning polyfull (deprecated)
+//>>label: Fixed header/footer
+
 define( [ "jquery", "jquery.mobile.core", "jquery.mobile.vmouse" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {

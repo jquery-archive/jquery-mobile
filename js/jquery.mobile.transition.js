@@ -1,8 +1,8 @@
-/*
-* "transitions" plugin - Page change tranistions
-*/
 
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Page change transition core
+//>>label: Transition Core
+
 define( [ "jquery", "jquery.mobile.core" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
