@@ -1,9 +1,4 @@
 /* fixed page header & footer configuration */
-.ui-header,
-.ui-footer {
-	overflow: hidden;
-	width: 100%;
-}
 .ui-header-fixed,
 .ui-footer-fixed {
 	left: 0;
