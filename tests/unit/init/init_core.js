@@ -3,20 +3,15 @@
  */
 (function($){
 	var mobilePage = undefined,
-			libName = 'jquery.mobile.init',
-			coreLib = 'jquery.mobile.core',
+			libName = 'jquery.mobile.init.js',
+			coreLib = 'jquery.mobile.core.js',
 			extendFn = $.extend,
 			originalLoadingMessage = $.mobile.loadingMessage;
 			setGradeA = function(value) { $.mobile.gradeA = function(){ return value; }; },
 			reloadCoreNSandInit = function(){
-				return $.testHelper.deferredSequence([
-					function() {
-						$.testHelper.reloadModule("../jquery.setNameSpace.js");
-					},
-					function () {
-						$.testHelper.reloadModule(libName);
-					}
-				]);
+				$.testHelper.reloadLib(coreLib);
+				$.testHelper.reloadLib("jquery.setNamespace.js");
+				$.testHelper.reloadLib(libName);
 			};
 
 
@@ -61,40 +56,27 @@
 				initFired = true;
 			});
 
+			$.testHelper.reloadLib(libName);
 
-			$.testHelper.deferredSequence([
-				function() {
-					return $.testHelper.reloadModule(libName);
-				},
-
-				function() {
-					setTimeout(function(){
-						ok(initFired, "init fired");
-						start();
-					}, 1000);
-				}
-			]);
+			setTimeout(function(){
+				ok(initFired, "init fired");
+				start();
+			}, 1000);
 		});
 
-		asyncTest( "enhancments are skipped when the browser is not grade A", function(){
+		test( "enhancments are skipped when the browser is not grade A", function(){
 			setGradeA(false);
-			$.testHelper.reloadModule(libName).done(
-				function() {
-					//NOTE easiest way to check for enhancements, not the most obvious
-					ok(!$("html").hasClass("ui-mobile"), "html elem doesn't have class ui-mobile");
-					start();
-				}
-			);
+			$.testHelper.reloadLib(libName);
+
+			//NOTE easiest way to check for enhancements, not the most obvious
+			ok(!$("html").hasClass("ui-mobile"), "html elem doesn't have class ui-mobile");
 		});
 
-		asyncTest( "enhancments are added when the browser is grade A", function(){
+		test( "enhancments are added when the browser is grade A", function(){
 			setGradeA(true);
-			$.testHelper.reloadModule(libName).done(
-				function() {
-					ok($("html").hasClass("ui-mobile"), "html elem has class mobile");
-					start();
-				}
-			);
+			$.testHelper.reloadLib(libName);
+
+			ok($("html").hasClass("ui-mobile"), "html elem has class mobile");
 		});
 
 		asyncTest( "useFastClick is configurable via mobileinit", function(){
@@ -103,12 +85,10 @@
 				start();
 			});
 
-			$.testHelper.reloadModule(libName).done(
-				function() {
-					same( $.mobile.useFastClick, false , "fast click is set to false after init" );
-					$.mobile.useFastClick = true;
-				}
-			);
+			$.testHelper.reloadLib(libName);
+
+			same( $.mobile.useFastClick, false , "fast click is set to false after init" );
+			$.mobile.useFastClick = true;
 		});
 
 
@@ -117,47 +97,35 @@
 			return $(":jqmData(role='page')").first();
 		};
 
-		asyncTest( "active page and start page should be set to the fist page in the selected set", function(){
+		test( "active page and start page should be set to the fist page in the selected set", function(){
 			expect( 2 );
-			$.testHelper.reloadModule(libName).done(
-				function() {
-					var firstPage = findFirstPage();
+			$.testHelper.reloadLib(libName);
+			var firstPage = findFirstPage();
 
-					same($.mobile.firstPage[0], firstPage[0]);
-					same($.mobile.activePage[0], firstPage[0]);
-					start();
-				}
-			);
+			same($.mobile.firstPage[0], firstPage[0]);
+			same($.mobile.activePage[0], firstPage[0]);
 		});
 
-		asyncTest( "mobile viewport class is defined on the first page's parent", function(){
+		test( "mobile viewport class is defined on the first page's parent", function(){
 			expect( 1 );
-			$.testHelper.reloadModule(libName).done(
-				function() {
-					var firstPage = findFirstPage();
+			$.testHelper.reloadLib(libName);
+			var firstPage = findFirstPage();
 
-					ok(firstPage.parent().hasClass("ui-mobile-viewport"), "first page has viewport");
-					start();
-				}
-			);
+			ok(firstPage.parent().hasClass("ui-mobile-viewport"), "first page has viewport");
 		});
 
-		asyncTest( "mobile page container is the first page's parent", function(){
+		test( "mobile page container is the first page's parent", function(){
 			expect( 1 );
-			$.testHelper.reloadModule(libName).done(
-				function() {
-					var firstPage = findFirstPage();
+			$.testHelper.reloadLib(libName);
+			var firstPage = findFirstPage();
 
-					same($.mobile.pageContainer[0], firstPage.parent()[0]);
-					start();
-				}
-			);
+			same($.mobile.pageContainer[0], firstPage.parent()[0]);
 		});
 
 		asyncTest( "hashchange triggered on document ready with single argument: true", function(){
 			$.testHelper.sequence([
 				function(){
-					$.testHelper.openPage( "#foo" );
+					location.hash = "#foo";
 				},
 
 				// delay the bind until the first hashchange
@@ -169,7 +137,7 @@
 				},
 
 				function(){
-					return $.testHelper.reloadModule(libName);
+					$.testHelper.reloadLib(libName);
 				}
 			], 1000);
 		});
@@ -217,38 +185,24 @@
 
 		asyncTest( "page loading should contain default loading message", function(){
 			expect( 1 );
+			reloadCoreNSandInit();
+			$.mobile.showPageLoadingMsg();
 
-			$.testHelper.deferredSequence([
-				function() {
-					return $.testHelper.reloadModule(libName);
-				},
-				function() {
-					$.mobile.showPageLoadingMsg();
-
-					setTimeout(function(){
-						same($(".ui-loader h1").text(), "loading");
-						start();
-					}, 500);
-				}
-			]);
+			setTimeout(function(){
+				same($(".ui-loader h1").text(), "loading");
+				start();
+			}, 500);
 		});
 
 		asyncTest( "page loading should contain custom loading message", function(){
 			$.mobile.loadingMessage = "foo";
+			$.testHelper.reloadLib(libName);
+			$.mobile.showPageLoadingMsg();
 
-			$.testHelper.deferredSequence([
-				function() {
-					return $.testHelper.reloadModule(libName);
-				},
-				function() {
-					$.mobile.showPageLoadingMsg();
-
-					setTimeout(function(){
-						same($(".ui-loader h1").text(), "foo");
-						start();
-					}, 500);
-				}
-			]);
+			setTimeout(function(){
+				same($(".ui-loader h1").text(), "foo");
+				start();
+			}, 500);
 		});
 
 		asyncTest( "page loading should contain custom loading message when set during runtime", function(){
@@ -262,8 +216,10 @@
 		});
 
 
+
 		// NOTE: the next two tests work on timeouts that assume a page will be created within 2 seconds
 		// it'd be great to get these using a more reliable callback or event
+
 		asyncTest( "page does auto-initialize at domready when autoinitialize option is true (default) ", function(){
 
 			$( "<div />", { "data-nstest-role": "page", "id": "autoinit-on" } ).prependTo( "body" )
