@@ -4,7 +4,7 @@
 
 $.testHelper.excludeFileProtocol(function(){
 	var	prependToFn = $.fn.prependTo,
-		libName = "jquery.mobile.support";
+			libName = "jquery.mobile.support.js";
 
 	module(libName, {
 		teardown: function(){
@@ -15,7 +15,7 @@ $.testHelper.excludeFileProtocol(function(){
 
 	// NOTE following two tests have debatable value as they only
 	//      prevent property name changes and improper attribute checks
-	asyncTest( "detects functionality from basic affirmative properties and attributes", 5, function(){
+	test( "detects functionality from basic affirmative properties and attributes", function(){
 		// TODO expose properties for less brittle tests
 		$.extend(window, {
 			WebKitTransitionEvent: true,
@@ -30,29 +30,23 @@ $.testHelper.excludeFileProtocol(function(){
 
 		$.mobile.media = function(){ return true; };
 
-		$.testHelper.reloadModule(libName).done(
-			function() {
-				ok($.support.orientation);
-				ok($.support.touch);
-				ok($.support.cssTransitions);
-				ok($.support.pushState);
-				ok($.support.mediaquery);
-				start();
-			}
-		);
+		$.testHelper.reloadLib(libName);
+
+		ok($.support.orientation);
+		ok($.support.touch);
+		ok($.support.cssTransitions);
+		ok($.support.pushState);
+		ok($.support.mediaquery);
 	});
 
-	asyncTest( "detects functionality from basic negative properties and attributes (where possible)", 2, function(){
+	test( "detects functionality from basic negative properties and attributes (where possible)", function(){
 		delete window["orientation"];
 		delete document["ontouchend"];
 
-		$.testHelper.reloadModule(libName).done(
-			function() {
-				ok(!$.support.orientation);
-				ok(!$.support.touch);
-				start();
-			}
-		);
+		$.testHelper.reloadLib(libName);
+
+		ok(!$.support.orientation);
+		ok(!$.support.touch);
 	});
 
 	// NOTE mocks prependTo to simulate base href updates or lack thereof
@@ -67,44 +61,32 @@ $.testHelper.excludeFileProtocol(function(){
 		};
 	};
 
-	asyncTest( "detects dynamic base tag when new base element added and base href updates", 1, function(){
+	test( "detects dynamic base tag when new base element added and base href updates", function(){
 		mockBaseCheck(location.protocol + '//' + location.host + location.pathname + "ui-dir/");
-		$.testHelper.reloadModule(libName).done(
-			function() {
-				ok($.support.dynamicBaseTag);
-				start();
-			}
-		);
+		$.testHelper.reloadLib(libName);
+		ok($.support.dynamicBaseTag);
 	});
 
-	asyncTest( "detects no dynamic base tag when new base element added and base href unchanged", 1, function(){
+	test( "detects no dynamic base tag when new base element added and base href unchanged", function(){
 		mockBaseCheck('testurl');
-
-		$.testHelper.reloadModule(libName).done(
-			function() {
-				ok(!$.support.dynamicBaseTag);
-				start();
-			}
-		);
+		$.testHelper.reloadLib(libName);
+		ok(!$.support.dynamicBaseTag);
 	});
 
-	asyncTest( "jQM's IE browser check properly detects IE versions", 1, function(){
-		//here we're just comparing our version to what the conditional compilation finds
-		var ie 			   = !!$.browser.msie, //get a boolean
-			version 	   = parseInt( $.browser.version, 10),
-			jqmdetectedver = $.mobile.browser.ie;
+	test( "jQM's IE browser check properly detects IE versions", function(){
+		$.testHelper.reloadLib(libName);
 
-		$.testHelper.reloadModule(libName).done(
-			function() {
-				if( ie ){
-					same(version, jqmdetectedver, "It's IE and the version is correct");
-				}
-				else{
-					same(ie, jqmdetectedver, "It's not IE");
-				}
-				start();
-			}
-		);
+		//here we're just comparing our version to what the conditional compilation finds
+		 var ie 			= !!$.browser.msie, //get a boolean
+		 	 version 		= parseInt( $.browser.version, 10),
+		 	 jqmdetectedver = $.mobile.browser.ie;
+
+		 	if( ie ){
+		 		same(version, jqmdetectedver, "It's IE and the version is correct");
+		 	}
+		 	else{
+		 		same(ie, jqmdetectedver, "It's not IE");
+		 	}
 	});
 
 
