@@ -1,8 +1,11 @@
-/*
-* "fixedtoolbar"  plugin - behavior for "fixed" headers and footers
-*/
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Behavior for "fixed" headers and footers
+//>>label: Fixedtoolbar
 
+define( [ "jquery", "jquery.mobile.widget", "jquery.mobile.navigation", "jquery.mobile.page", "jquery.mobile.page.sections" ], function( $ ) {
+//>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
+
 
 	$.widget( "mobile.fixedtoolbar", $.mobile.widget, {
 		options: {
@@ -263,3 +266,6 @@
 	});	
 
 })( jQuery );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");
