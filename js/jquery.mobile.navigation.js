@@ -3,10 +3,11 @@
 //>>label: Navigation Bars
 
 define( [
+	"jquery",
 	"jquery.mobile.core",
 	"jquery.mobile.event",
 	"jquery.mobile.hashchange",
-	"jquery.mobile.page" ], function() {
+	"jquery.mobile.page" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 ( function( $, undefined ) {
 

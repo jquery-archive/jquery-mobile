@@ -2,7 +2,7 @@
 //>>description: Consistent styling for native select menus.
 //>>label: Enhanced Native Selects
 
-define( [ "jquery.mobile.core", "jquery.mobile.widget", "jquery.mobile.buttonMarkup" ], function() {
+define( [ "jquery", "jquery.mobile.core", "jquery.mobile.widget", "jquery.mobile.buttonMarkup" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

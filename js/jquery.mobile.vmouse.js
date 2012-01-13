@@ -18,7 +18,7 @@
 //>>description: Normalizes touch/mouse events.
 //>>label: Virtual Mouse Bindings
 
-define(function() {
+define( [ "jquery" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, document, undefined ) {
 

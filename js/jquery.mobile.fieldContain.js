@@ -2,7 +2,7 @@
 //>>description: Simple class additions to make form row separators
 //>>label: Fieldcontains
 
-define(function() {
+define( [ "jquery" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
