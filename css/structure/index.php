@@ -12,7 +12,7 @@ $files = array_merge($files, array(
 	'../../structure/jquery.mobile.transitions.turn.css',
 	'../../structure/jquery.mobile.transitions.flow.css',
 	'../../structure/jquery.mobile.grids.css',
-	'../../structure/jquery.mobile.headerfooter.css',
+	'../../structure/jquery.mobile.fixedToolbar.css',
 	'../../structure/jquery.mobile.navbar.css',
 	'../../structure/jquery.mobile.button.css',
 	'../../structure/jquery.mobile.collapsible.css',
