@@ -120,8 +120,8 @@ js: init
 		include=jquery.mobile exclude=jquery,order \
 		out=${OUTPUT}/${NAME}.compiled.js \
 		pragmasOnSave.jqmBuildExclude=true \
-		wrap.start=build/wrap.start \
-		wrap.end=build/wrap.end \
+		wrap.startFile=build/wrap.start \
+		wrap.endFile=build/wrap.end \
 		findNestedDependencies=true \
 		skipModuleInsertion=true \
 		optimize=none
