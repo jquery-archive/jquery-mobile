@@ -4,13 +4,21 @@
 
 // TODO split out into seperate test files
 (function($){
-  var home = $.mobile.path.parseUrl( location.href ).pathname;
+	var home = $.mobile.path.parseUrl( location.href ).pathname + location.search;
 
 	$.mobile.defaultTransition = "none";
 
 	module( "Basic Linked list", {
 		setup: function(){
-			$.mobile.changePage( "#basic-linked-test" );
+			if( location.hash != "#basic-linked-test" ){
+				stop();
+
+				$(document).one("pagechange", function() {
+					start();
+				});
+
+				$.mobile.changePage( home );
+			}
 		}
 	});
 
