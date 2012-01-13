@@ -86,6 +86,12 @@ docs: init
 		external/r.js/dist/r.js \
 	 	-o build/docs.build.js \
 		dir=../tmp/${NAME}
+	# ... Prepend versioned license
+	@@cat LICENSE-INFO.txt | ${VER} > tmp/${NAME}/LICENSE-INFO.txt
+	@@cat tmp/${NAME}/LICENSE-INFO.txt | cat - tmp/${NAME}/js/jquery.mobile.docs.js > tmp/${NAME}/js/jquery.mobile.docs.js.tmp
+	@@mv tmp/${NAME}/js/jquery.mobile.docs.js.tmp tmp/${NAME}/js/jquery.mobile.docs.js
+	@@cat tmp/${NAME}/LICENSE-INFO.txt | cat - tmp/${NAME}/css/themes/default/${NAME}.css > tmp/${NAME}/css/themes/default/${NAME}.css.tmp
+	@@mv tmp/${NAME}/css/themes/default/${NAME}.css.tmp tmp/${NAME}/css/themes/default/${NAME}.css
 	# ... Move and zip up the the whole folder
 	@@cd tmp; zip -rq ../${OUTPUT}/${NAME}.docs.zip ${NAME}
 	@@mv tmp/${NAME} ${OUTPUT}/demos
