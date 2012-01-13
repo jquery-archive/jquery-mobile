@@ -117,9 +117,11 @@ js: init
 		-classpath build/js.jar:build/google-compiler-20111003.jar org.mozilla.javascript.tools.shell.Main \
 		external/r.js/dist/r.js \
 	 	-o baseUrl="js" \
-		include=jquery.mobile,jquery.mobile.exports exclude=jquery,order \
+		include=jquery.mobile exclude=jquery,order \
 		out=${OUTPUT}/${NAME}.compiled.js \
 		pragmasOnSave.jqmBuildExclude=true \
+		wrap.start=build/wrap.start \
+		wrap.end=build/wrap.end \
 		findNestedDependencies=true \
 		skipModuleInsertion=true \
 		optimize=none
