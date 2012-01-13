@@ -2,7 +2,7 @@
 //>>description: Widget factory extentions for mobile.
 //>>label: Widget Factory Extensions
 
-define( [ "jquery.ui.widget" ], function() {
+define( [ "jquery", "jquery.ui.widget" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

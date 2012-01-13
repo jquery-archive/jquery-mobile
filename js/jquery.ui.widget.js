@@ -12,7 +12,7 @@
 //>>description: jQuery UI Widget Factory.
 //>>label: Widget Factory
 
-define(function() {
+define( [ "jquery" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

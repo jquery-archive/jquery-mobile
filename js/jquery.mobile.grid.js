@@ -2,7 +2,7 @@
 //>>description: Applies classes for grid styling.
 //>>label: CSS Grid Tool
 
-define(function() {
+define( [ "jquery" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

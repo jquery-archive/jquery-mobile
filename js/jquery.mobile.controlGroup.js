@@ -2,7 +2,7 @@
 //>>description: Corner-rounding for groups of buttons, checks, radios, etc
 //>>label: Controlgroups
 
-define( [ "jquery.mobile.buttonMarkup" ], function() {
+define( [ "jquery", "jquery.mobile.buttonMarkup" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

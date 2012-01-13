@@ -2,7 +2,7 @@
 //>>description: Adds class to make elements hidden to A grade browsers
 //>>label: “nojs” Classes
 
-define(function() {
+define( [ "jquery" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

@@ -2,7 +2,7 @@
 //>>description: Simple class additions for links.
 //>>label: Link Classes
 
-define( function() {
+define( [ "jquery" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

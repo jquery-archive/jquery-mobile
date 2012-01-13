@@ -2,7 +2,7 @@
 //>>description: Form Buttons
 //>>label: links that proxy to native input/buttons
 
-define( [ "jquery.mobile.widget", "jquery.mobile.buttonMarkup"  ], function() {
+define( [ "jquery", "jquery.mobile.widget", "jquery.mobile.buttonMarkup"  ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

@@ -2,7 +2,7 @@
 //>>description: Formats groups of links as navigation bars.
 //>>label: Navigation Bars
 
-define( [ "jquery.mobile.widget", "jquery.mobile.buttonMarkup", "jquery.mobile.grid" ], function() {
+define( [ "jquery", "jquery.mobile.widget", "jquery.mobile.buttonMarkup", "jquery.mobile.grid" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
