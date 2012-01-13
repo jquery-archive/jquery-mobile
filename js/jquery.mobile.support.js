@@ -29,13 +29,12 @@ function propExists( prop ) {
 
 // Thanks to Modernizr src for this test idea
 function transform3dTest() {
-	var prop = "transform-3d",
-		div = document.createElement('div');
+	var prop = "transform-3d";
 	
-	div.setAttribute('style', '-moz-perspective: 100px');
-/* Android 2.3 (at least) returns a positive for 3D-specific properties—`perspective`, `perspective-origin`, `backface-visibility`—necessitating the preceeding approach to pass FF10+. 
-TODO: This method of creating an element, setting a style attribute, then grabbing the result is used in a few places now. We should probably look into globalizing it, a la Modernizr.  */
-	return div.style.MozPerspective !== undefined || $.mobile.media( "(-" + vendors.join( "-" + prop + "),(-" ) + "-" + prop + "),(" + prop + ")" );
+	fakeBody[ 0 ].setAttribute('style', '-moz-perspective: 100px');
+	// Android 2.3 (at least) returns a positive for 3D-specific properties—`perspective`, `perspective-origin`, `backface-visibility`—necessitating the preceeding approach to pass FF10+.
+	// We should continue to look at ways to include other platforms as 3D support improves. IE10, for example.
+	return fakeBody[ 0 ].style.MozPerspective !== undefined || $.mobile.media( "(-" + vendors.join( "-" + prop + "),(-" ) + "-" + prop + "),(" + prop + ")" );
 }
 
 // Test for dynamic-updating base tag support ( allows us to avoid href,src attr rewriting )
