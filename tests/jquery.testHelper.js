@@ -52,17 +52,24 @@
 		reloads: {},
 
 		reloadModule: function(libName){
-			var deferred = $.Deferred();
+			var deferred = $.Deferred(),
+				context;
 			if(this.reloads[libName] === undefined) {
 				this.reloads[libName] = {
 					count: 0
 				};
 			}
 
+			//Clear internal cache of module inside of require
+			context = require.s.contexts._;
+			delete context.defined[libName];
+			delete context.specified[libName];
+			delete context.loaded[libName];
+			delete context.urlFetched[require.toUrl(libName + '.js')];
+
 			require(
 				{
-					baseUrl: "../../../js",
-					context: libName+"_"+this.reloads[libName].count++
+					baseUrl: "../../../js"
 				}, [libName],
 				function() {
 					deferred.resolve();
