@@ -85,12 +85,26 @@ define( [ "jquery", "jquery.mobile.core", "jquery.mobile.navigation", "jquery.mo
 		// find and enhance the pages in the dom and transition to the first page.
 		initializePage: function() {
 			// find present pages
-			var $pages = $( ":jqmData(role='page')" );
+			var $dialogs, $pages = $( ":jqmData(role='page')" );
 
-			// if no pages are found, create one with body's inner html
+			// if no pages are found, check for dialogs or create one with body's inner html
 			if ( !$pages.length ) {
-				$pages = $( "body" ).wrapInner( "<div data-" + $.mobile.ns + "role='page'></div>" ).children( 0 );
+				$dialogs = $( ":jqmData(role='dialog')" );
+
+				// if there are no pages but a dialog is present, load it as a page
+				if( $dialogs.length ) {
+					// alter the attribute so it will be treated as a page unpon enhancement
+					// TODO allow for the loading of a dialog as the first page (many considerations)
+					$dialogs.first().attr( "data-" + $.mobile.ns + "role", "page" );
+
+					// remove the first dialog from the set of dialogs since it's now a page
+					// add it to the empty set of pages to be loaded by the initial changepage
+					$pages = $pages.add( $dialogs.get().shift() );
+				} else {
+					$pages = $( "body" ).wrapInner( "<div data-" + $.mobile.ns + "role='page'></div>" ).children( 0 );
+				}
 			}
+
 
 			// add dialogs, set data-url attrs
 			$pages.add( ":jqmData(role='dialog')" ).each(function() {
