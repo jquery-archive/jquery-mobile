@@ -406,21 +406,9 @@ define( [
 
 	// Save the last scroll distance per page, before it is hidden
 	var setLastScrollEnabled = true,
-		firstScrollElem, getScrollElem, setLastScroll, delayedSetLastScroll;
+		setLastScroll, delayedSetLastScroll;
 
-	getScrollElem = function() {
-		var scrollElem = $window, activePage,
-			touchOverflow = $.support.touchOverflow && $.mobile.touchOverflowEnabled;
-
-		if( touchOverflow ){
-			activePage = $( ".ui-page-active" );
-			scrollElem = activePage.is( ".ui-native-fixed" ) ? activePage.find( ".ui-content" ) : activePage;
-		}
-
-		return scrollElem;
-	};
-
-	setLastScroll = function( scrollElem ) {
+	setLastScroll = function() {
 		// this barrier prevents setting the scroll value based on the browser
 		// scrolling the window based on a hashchange
 		if( !setLastScrollEnabled ) {
@@ -430,7 +418,7 @@ define( [
 		var active = $.mobile.urlHistory.getActive();
 
 		if( active ) {
-			var lastScroll = scrollElem && scrollElem.scrollTop();
+			var lastScroll = $window.scrollTop();
 
 			// Set active page's lastScroll prop.
 			// If the location we're scrolling to is less than minScrollBack, let it go.
@@ -443,7 +431,7 @@ define( [
 	// to the hash targets location (sometimes the top of the page). once pagechange fires
 	// getLastScroll is again permitted to operate
 	delayedSetLastScroll = function() {
-		setTimeout( setLastScroll, 100, $(this) );
+		setTimeout( setLastScroll, 100 );
 	};
 
 	// disable an scroll setting when a hashchange has been fired, this only works
@@ -462,23 +450,22 @@ define( [
 	$window.one( "pagecontainercreate", function(){
 		// once the page has changed, re-enable the scroll recording
 		$.mobile.pageContainer.bind( "pagechange", function() {
-			var scrollElem = getScrollElem();
 
 	 		setLastScrollEnabled = true;
 
 			// remove any binding that previously existed on the get scroll
 			// which may or may not be different than the scroll element determined for
 			// this page previously
-			scrollElem.unbind( "scrollstop", delayedSetLastScroll );
+			$window.unbind( "scrollstop", delayedSetLastScroll );
 
 			// determine and bind to the current scoll element which may be the window
 			// or in the case of touch overflow the element with touch overflow
-			scrollElem.bind( "scrollstop", delayedSetLastScroll );
+			$window.bind( "scrollstop", delayedSetLastScroll );
 		});
 	});
 
 	// bind to scrollstop for the first page as "pagechange" won't be fired in that case
-	getScrollElem().bind( "scrollstop", delayedSetLastScroll );
+	$window.bind( "scrollstop", delayedSetLastScroll );
 
 	//function for transitioning between two existing pages
 	function transitionPages( toPage, fromPage, transition, reverse ) {
@@ -529,10 +516,6 @@ define( [
 
 	//simply set the active page's minimum height to screen height, depending on orientation
 	function resetActivePageHeight(){
-		// Don't apply this height in touch overflow enabled mode
-		if( $.support.touchOverflow && $.mobile.touchOverflowEnabled ){
-			return;
-		}
 		$( "." + $.mobile.activePageClass ).css( "min-height", getScreenHeight() );
 	}
 

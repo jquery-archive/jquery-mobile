@@ -17,8 +17,7 @@ function outInTransitionHandler( name, reverse, $to, $from ) {
 	var deferred = new $.Deferred(),
 		reverseClass = reverse ? " reverse" : "",
 		active	= $.mobile.urlHistory.getActive(),
-		touchOverflow = $.support.touchOverflow && $.mobile.touchOverflowEnabled,
-		toScroll = active.lastScroll || ( touchOverflow ? 0 : $.mobile.defaultHomeScroll ),
+		toScroll = active.lastScroll || $.mobile.defaultHomeScroll,
 		screenHeight = $.mobile.getScreenHeight(),
 		viewportClass = "ui-mobile-viewport-transitioning viewport-" + name,
 		maxTransitionOverride = $.mobile.maxTransitionWidth !== false && $( window ).width() > $.mobile.maxTransitionWidth,
@@ -40,23 +39,10 @@ function outInTransitionHandler( name, reverse, $to, $from ) {
 			// Send focus to page as it is now display: block
 			$.mobile.focusPage( $to );
 			
-			if( touchOverflow && toScroll ){
-
-				//set page's scrollTop to remembered distance
-				if( $to.is( ".ui-native-fixed" ) ){
-					$to.find( ".ui-content" ).scrollTop( toScroll );
-				}
-				else{
-					$to.scrollTop( toScroll );
-				}
-			}
-			
 			// Jump to top or prev scroll, sometimes on iOS the page has not rendered yet.
-			if( !touchOverflow ){
-				$to.height( screenHeight + toScroll );
+			$to.height( screenHeight + toScroll );
 				
-				$.mobile.silentScroll( toScroll );
-			}
+			$.mobile.silentScroll( toScroll );
 			
 			$to.addClass( name + " in" + reverseClass );
 			

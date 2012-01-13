@@ -24,32 +24,6 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 .ui-mobile, .ui-mobile .ui-page { min-height: 300px; }
 }
 
-/* native overflow scrolling */
-.ui-page.ui-mobile-touch-overflow,
-.ui-page.ui-mobile-touch-overflow.ui-page-header-fixed .ui-content,
-.ui-page.ui-mobile-touch-overflow.ui-page-footer-fixed .ui-content {
-	overflow: auto;
-	height: 100%;
-	left: 0;
-	right: 0;
-	-webkit-overflow-scrolling: touch;
-	-moz-overflow-scrolling: touch;
-	-o-overflow-scrolling: touch;
-	-ms-overflow-scrolling: touch;
-	overflow-scrolling: touch;
-}
-.ui-page.ui-mobile-touch-overflow.ui-page-header-fixed {
-	overflow: visible;
-}
-.ui-page.ui-mobile-touch-overflow,
-.ui-page.ui-mobile-touch-overflow * {
-	/* some level of transform keeps elements from blinking out of visibility on iOS */
-	-webkit-transform: rotateY(0);
-}
-.ui-page.ui-mobile-pre-transition {
-	display: block;
-}
-
 /* loading screen */
 .ui-loading .ui-loader { display: block; }
 .ui-loader { background-color: #000; opacity: .18; display: none; z-index: 9999999; position: fixed; width: 46px; height: 46px; top: 50%; box-shadow: 0 1px 1px -1px #fff; margin-left: -18px; margin-top: -18px; left: 50%; padding: 1px; border:0; -webkit-border-radius: 36px; -moz-border-radius: 36px; border-radius: 36px; }
