@@ -21,17 +21,17 @@
 .fade.out {
 	z-index: 0;
 	opacity: 0;
-	-webkit-animation-duration: 150ms;
+	-webkit-animation-duration: 100ms;
 	-webkit-animation-name: fadeout;
-	-moz-animation-duration: 150ms;
+	-moz-animation-duration: 100ms;
 	-moz-animation-name: fadeout;
 }
 
 .fade.in {
 	opacity: 1;
 	z-index: 10;
-	-webkit-animation-duration: 300ms;
+	-webkit-animation-duration: 225ms;
 	-webkit-animation-name: fadein;
-	-moz-animation-duration: 300ms;
+	-moz-animation-duration: 225ms;
 	-moz-animation-name: fadein;
 }
