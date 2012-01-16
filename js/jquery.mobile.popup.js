@@ -56,7 +56,7 @@ $.widget("mobile.popup", $.mobile.widget, {
 		});
 	},
 
-	_setTheme: function(dst, theme, unconditional) {
+	_realSetTheme: function(dst, theme, unconditional) {
 		var classes = (dst.attr("class") || "").split(" "),
 		    alreadyAdded = true,
 		    currentTheme = null,
@@ -80,35 +80,33 @@ $.widget("mobile.popup", $.mobile.widget, {
 		}
 	},
 
-	_set_theme: function(value, unconditional) {
+	_setTheme: function(value, unconditional) {
 		if (value === null)
 			value = "";
 
 		if (value.match(/^[a-z]$/) || value === "") {
-			this._setTheme(this.element, value, unconditional);
+			this._realSetTheme(this.element, value, unconditional);
 		}
 	},
 
-	_set_overlayTheme: function(value, unconditional) {
+	_setOverlayTheme: function(value, unconditional) {
 		if (value === null)
 			value = "";
 		if (value.match(/^[a-z]$/) || value === "") {
-			this._setTheme(this._ui.container, value, unconditional);
+			this._realSetTheme(this._ui.container, value, unconditional);
 			// The screen must always have some kind of background for fade to work, so, if the theme is being unset,
 			// set the background to "a".
-			this._setTheme(this._ui.screen, (value === "" ? "a" : value), unconditional);
+			this._realSetTheme(this._ui.screen, (value === "" ? "a" : value), unconditional);
 		}
-		else
-			console.log("Warning: " + value + " is not a valid overlay theme! Please specify a single letter a-z or an empty string!");
 	},
 
-	_set_shadow: function(value, unconditional) {
+	_setShadow: function(value, unconditional) {
 		value = this._parseBoolean(value);
 		if (this._ui.container.hasClass("ui-overlay-shadow") != value || unconditional)
 			this._ui.container[value ? "addClass" : "removeClass"]("ui-overlay-shadow");
 	},
 
-	_set_corners: function(value, unconditional) {
+	_setCorners: function(value, unconditional) {
 		value = this._parseBoolean(value);
 		if (this._ui.container.hasClass("ui-corner-all") != value || unconditional)
 			this._ui.container[value ? "addClass" : "removeClass"]("ui-corner-all");
@@ -123,11 +121,11 @@ $.widget("mobile.popup", $.mobile.widget, {
 		}
 	},
 
-	_set_fade: function(value, unconditional) {
+	_setFade: function(value, unconditional) {
 		this.options.fade = this._parseBoolean(value);
 	},
 
-	_set_transition: function(value, unconditional) {
+	_setTransition: function(value, unconditional) {
 		if (this.options.transition != value || unconditional) {
 			this._ui.container
 				.removeClass(this.options.transition)
@@ -137,10 +135,15 @@ $.widget("mobile.popup", $.mobile.widget, {
 	},
 
 	_setOption: function(key, value, unconditional) {
+		var setter = "_set" + key.replace(/^[a-z]/, function(c) {return c.toUpperCase();});
+
 		if (unconditional === undefined)
 			unconditional = false;
-		if (this["_set_" + key] !== undefined)
-			this["_set_" + key](value, unconditional);
+
+		if (this[setter] !== undefined)
+			this[setter](value, unconditional);
+		else
+			$.mobile.widget.prototype._setOption.apply(this, arguments);
 	},
 
 	_placementCoords: function(x, y) {
