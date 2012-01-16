@@ -30,6 +30,9 @@ $.fn.buttonMarkup = function( options ) {
 			buttonText = document.createElement( o.wrapperEls ),
 			buttonIcon = o.icon ? document.createElement( "span" ) : null;
 
+		// if so, prevent double enhancement, and continue with rest of the elements.
+		if( e.tagName === "INPUT" && e.getAttribute( "data-role" ) === "button" ) continue;
+		
 		if ( attachEvents ) {
 			attachEvents();
 		}
