@@ -22,6 +22,84 @@
 	<div data-role="content">
 		<div class="content-primary">		
 
+				<h2>Creating custom CSS-based transitions</h2>
+
+
+				<p>To create a custom CSS transition, select a class name that corresponds to the name of your transition, for example "slide", and then define your "in" and "out" CSS rules to take advantage of transitions or animation keyframes:</p>
+
+				<pre><code>.slide.in {
+			    -webkit-transform: translateX(0);
+			    -webkit-animation-name: slideinfromright;
+			}
+
+			.slide.out {
+			    -webkit-transform: translateX(-100%);
+			    -webkit-animation-name: slideouttoleft;
+			}
+
+			@-webkit-keyframes slideinfromright {
+			    from { -webkit-transform: translateX(100%); }
+			    to { -webkit-transform: translateX(0); }
+			}
+			@-webkit-keyframes slideouttoleft {
+			    from { -webkit-transform: translateX(0); }
+			    to { -webkit-transform: translateX(-100%); }
+			}
+				</code></pre>
+
+				<p>During a CSS-based page transition, jQuery Mobile will place the class name of the transition on both the "from" and "to" pages involved in the transition. It then places an "out" class on the "from" page, and "in" class on the "to" page. The presence of these classes on the "from" and "to" page elements then triggers the animation CSS rules defined above. As of jQuery Mobile version 1.1, animation class additions are queued, rather than simultaneous, producing an out-then-in sequence, which is friendlier for mobile rendering than our previous simultaneous transition sequence.</p>
+
+				<p>If your transition supports a reverse direction, you need to create CSS rules that use the <code>reverse</code> class in addition to the transition class name and the "in" and "out" classes:</p>
+
+				<pre><code>.slide.in.reverse {
+				    -webkit-transform: translateX(0);
+				    -webkit-animation-name: slideinfromleft;
+				}
+
+				.slide.out.reverse {
+				    -webkit-transform: translateX(100%);
+				    -webkit-animation-name: slideouttoright;
+				}
+
+				@-webkit-keyframes slideinfromleft {
+				    from { -webkit-transform: translateX(-100%); }
+				    to { -webkit-transform: translateX(0); }
+				}
+
+				@-webkit-keyframes slideouttoright {
+				    from { -webkit-transform: translateX(0); }
+				    to { -webkit-transform: translateX(100%); }
+				}
+				</code></pre>
+
+				<p>After the CSS rules are in place, you simply specify the name of your transition within the @data-transition attribute of a navigation link:</p>
+
+				<pre><code>&lt;a href="#page2" data-transition="slide"&gt;Page 2&lt;/a&gt;
+				</code></pre>
+
+				<p>When the user clicks on the navigation link, jQuery Mobile will invoke your transition when it navigates to the page mentioned within the link.</p>
+
+				<p>In case you were wondering why none of the CSS rules above specified any easing or duration, it's because the CSS for jQuery Mobile defines the default easing and duration in the following rules:</p>
+
+				<pre><code>
+		.in {
+			-webkit-animation-timing-function: ease-out;
+			-webkit-animation-duration: 350ms;
+			-moz-animation-timing-function: ease-out;
+			-moz-animation-duration: 350ms;
+		}
+
+		.out {
+			-webkit-animation-timing-function: ease-in;
+			-webkit-animation-duration: 225ms;
+			-moz-animation-timing-function: ease-in;
+			-moz-animation-duration: 225;
+		}
+				</code></pre>
+
+				<p>If you need to specify a different easing or duration, simply add the appropriate CSS3 property to your custom page transition rules.</p>
+				
+				
 		<h2>Creating custom JavaScript-based transitions</h2>
 
 		<p>When a user clicks on a link within a page, jQuery Mobile checks if the link specifies a <code>@data-transition</code> attribute. The value of this attribute is the name of the transition to use when displaying the page referred to by the link. If there is no <code>@data-transition</code> attribute, the transition name specified by the configuration option <code>$.mobile.defaultPageTransition</code> is used for pages, and <code>$.mobile.defaultDialogTransition</code> is used for dialogs.</p>
