@@ -1,4 +1,5 @@
 .ui-popup-container {
+  z-index: 1100 !important;
   display: inline-block;
   position: absolute;
   padding: 0px;

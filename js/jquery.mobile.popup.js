@@ -202,21 +202,7 @@ $.widget("mobile.popup", $.mobile.widget, {
 			var self = this,
 			    coords = this._placementCoords(
 			    	(undefined === x ? window.innerWidth  / 2 : x),
-			    	(undefined === y ? window.innerHeight / 2 : y)),
-				zIndexMax = 0;
-
-            $(document)
-                .find("*")
-                .each(function() {
-                    var el = $(this),
-                        zIndex = parseInt(el.css("z-index"));
-
-                    if (!(el.is(self._ui.container) || el.is(self._ui.screen) || isNaN(zIndex)))
-                        zIndexMax = Math.max(zIndexMax, zIndex);
-                });
-
-            this._ui.screen.css("z-index", (zIndexMax + 1));
-            this._ui.container.css("z-index", (zIndexMax + 2));
+			    	(undefined === y ? window.innerHeight / 2 : y));
 
 			this._ui.screen
 				.height($(document).height())
