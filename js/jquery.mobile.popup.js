@@ -303,13 +303,17 @@ $(document).bind("pagecreate create", function(e) {
 					"aria-owns": btn.attr("href")
 				})
 				.removeAttr("href")
-				.bind("vclick", function() {
+				.bind("vclick", function(e) {
 					// When /this/ button causes a popup, align the popup's theme with that of the button, unless the popup has a theme pre-set
 					if (!popup.jqmData("overlay-theme-set"))
 						popup.popup("option", "overlayTheme", btn.jqmData("theme"))
 					popup.popup("open",
 						btn.offset().left + btn.outerWidth()  / 2,
 						btn.offset().top  + btn.outerHeight() / 2);
+					if (e.stopPropagation)
+						e.stopPropagation();
+					if (e.preventDefault)
+						e.preventDefault();
 				});
 		}
 		else
