@@ -262,40 +262,46 @@ $.widget("mobile.popup", $.mobile.widget, {
 	}
 });
 
+$.mobile.popup.bindPopupToButton = function(btn, popup) {
+	if (btn.length === 0 || popup.length === 0) return;
+
+	var btnVClickHandler = function(e) {
+	    	// When /this/ button causes a popup, align the popup's theme with that of the button, unless the popup has a theme pre-set
+	    	if (!popup.jqmData("overlay-theme-set"))
+			popup.popup("option", "overlayTheme", btn.jqmData("theme"))
+	    	popup.popup("open",
+	    		btn.offset().left + btn.outerWidth()  / 2,
+	    		btn.offset().top  + btn.outerHeight() / 2);
+
+            // Swallow event, because it might end up getting picked up by the popup window's screen handler, which
+            // will in turn cause the popup window to close - Thanks Sasha!
+	    	if (e.stopPropagation)
+	    		e.stopPropagation();
+	    	if (e.preventDefault)
+	    		e.preventDefault();
+	    };
+
+	// If the popup has a theme set, prevent it from being clobbered by the associated button
+	if ((popup.popup("option", "overlayTheme") || "").match(/[a-z]/))
+		popup.jqmData("overlay-theme-set", true);
+
+	btn
+		.attr({
+			"aria-haspopup": true,
+			"aria-owns": btn.attr("href")
+		})
+		.removeAttr("href")
+		.bind("vclick", btnVClickHandler);
+}
+
 $(document).bind("pagecreate create", function(e) {
 	$($.mobile.popup.prototype.options.initSelector, e.target)
 		.not(":jqmData(role='none'), :jqmData(role='nojs')")
 		.popup();
 
 	$("a[href^='#']:jqmData(rel='popup')").each(function() {
-		var btn = $(this),
-				popup = $(btn.attr("href"));
+		$.mobile.popup.bindPopupToButton($(this), $($(this).attr("href")));
 
-		if (popup[0]) {
-			// If the popup has a theme set, prevent it from being clobbered by the associated button
-			if ((popup.popup("option", "overlayTheme") || "").match(/[a-z]/))
-				popup.jqmData("overlay-theme-set", true);
-			btn
-				.attr({
-					"aria-haspopup": true,
-					"aria-owns": btn.attr("href")
-				})
-				.removeAttr("href")
-				.bind("vclick", function(e) {
-					// When /this/ button causes a popup, align the popup's theme with that of the button, unless the popup has a theme pre-set
-					if (!popup.jqmData("overlay-theme-set"))
-						popup.popup("option", "overlayTheme", btn.jqmData("theme"))
-					popup.popup("open",
-						btn.offset().left + btn.outerWidth()  / 2,
-						btn.offset().top  + btn.outerHeight() / 2);
-					if (e.stopPropagation)
-						e.stopPropagation();
-					if (e.preventDefault)
-						e.preventDefault();
-				});
-		}
-		else
-			console.log("popup menu " + btn.attr("href") + " not found.");
 	});
 });
 
