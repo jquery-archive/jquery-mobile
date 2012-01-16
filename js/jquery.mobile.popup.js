@@ -101,28 +101,17 @@ $.widget("mobile.popup", $.mobile.widget, {
 	},
 
 	_setShadow: function(value, unconditional) {
-		value = this._parseBoolean(value);
 		if (this._ui.container.hasClass("ui-overlay-shadow") != value || unconditional)
 			this._ui.container[value ? "addClass" : "removeClass"]("ui-overlay-shadow");
 	},
 
 	_setCorners: function(value, unconditional) {
-		value = this._parseBoolean(value);
 		if (this._ui.container.hasClass("ui-corner-all") != value || unconditional)
 			this._ui.container[value ? "addClass" : "removeClass"]("ui-corner-all");
 	},
 
-	_parseBoolean: function(value) {
-		if (typeof value === "boolean")
-			return value;
-		else {
-			value = value.toLowerCase();
-			return (value === "true" || value === "yes" || value === "1");
-		}
-	},
-
 	_setFade: function(value, unconditional) {
-		this.options.fade = this._parseBoolean(value);
+		this.options.fade = value;
 	},
 
 	_setTransition: function(value, unconditional) {
