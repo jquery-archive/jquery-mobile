@@ -1,5 +1,5 @@
 /* some unsets - more probably needed */
-.ui-mobile, .ui-mobile body { height: 100%; }
+.ui-mobile, .ui-mobile body { height: 99.9%; }
 .ui-mobile fieldset, .ui-page { padding: 0; margin: 0; }
 .ui-mobile a img, .ui-mobile fieldset { border-width: 0; }
 
