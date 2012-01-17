@@ -312,7 +312,7 @@ define( [
 					menuWidth = self.list.parent().outerWidth(),
 					activePage = $( ".ui-page-active" ),
 					tScrollElem = activePage,
-					scrollTop = ( window ).scrollTop(),
+					scrollTop = $( window ).scrollTop(),
 					btnOffset = self.button.offset().top,
 					screenHeight = $(window).height(),
 					screenWidth = $(window).width();
