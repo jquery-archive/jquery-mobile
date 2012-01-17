@@ -13,8 +13,8 @@
 	-webkit-animation-name: fadein;
 	-moz-transform: translateX(0);
 	-moz-animation-name: fadein;
-	-webkit-animation-duration: 350ms;
-	-moz-animation-duration: 350ms;
+	-webkit-animation-duration: 200ms;
+	-moz-animation-duration: 200ms;
 }
 
 .slide.out.reverse {
@@ -22,6 +22,8 @@
 	-webkit-animation-name: slideouttoright;
 	-moz-transform: translateX(100%);
 	-moz-animation-name: slideouttoright;
+	-webkit-animation-duration: 200ms;
+	-moz-animation-duration: 200ms;
 }
 
 .slide.in.reverse {
@@ -29,6 +31,8 @@
 	-webkit-animation-name: fadein;
 	-moz-transform: translateX(0);
 	-moz-animation-name: fadein;
+	-webkit-animation-duration: 200ms;
+	-moz-animation-duration: 200ms;
 }
 
 @-webkit-keyframes slideouttoleft {

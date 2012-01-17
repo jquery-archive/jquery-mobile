@@ -17,8 +17,8 @@
 	-webkit-animation-name: fadeout;
 	-moz-animation-name: fadeout;
 	opacity: 0;
-	-webkit-animation-duration: 225ms;
-	-moz-animation-duration: 225ms;
+	-webkit-animation-duration: 100ms;
+	-moz-animation-duration: 100ms;
 }
 
 .pop.in.reverse {

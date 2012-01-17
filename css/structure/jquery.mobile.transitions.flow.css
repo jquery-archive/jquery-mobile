@@ -6,6 +6,7 @@
 	-moz-box-shadow: 0 0 20px rgba(0,0,0,.4);
 }
 .ui-dialog-page.flow {
+	-webkit-transform-origin: none;
 	-moz-transform-origin: none;	
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;
@@ -14,22 +15,22 @@
 	-webkit-transform: translateX(-100%) scale(.7);
 	-webkit-animation-name: flowouttoleft;
 	-webkit-animation-timing-function: ease;
-	-webkit-animation-duration: 500ms;
+	-webkit-animation-duration: 350ms;
 	-moz-transform: translateX(-100%) scale(.7);
 	-moz-animation-name: flowouttoleft;
 	-moz-animation-timing-function: ease;
-	-moz-animation-duration: 500ms;
+	-moz-animation-duration: 350ms;
 }
 
 .flow.in {
 	-webkit-transform: translateX(0) scale(1);
 	-webkit-animation-name: flowinfromright;
 	-webkit-animation-timing-function: ease;
-	-webkit-animation-duration: 400ms;
+	-webkit-animation-duration: 350ms;
 	-moz-transform: translateX(0) scale(1);
 	-moz-animation-name: flowinfromright;
 	-moz-animation-timing-function: ease;
-	-moz-animation-duration: 400ms;
+	-moz-animation-duration: 350ms;
 }
 
 .flow.out.reverse {

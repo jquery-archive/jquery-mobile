@@ -20,17 +20,17 @@
 .flip.out {
 	-webkit-transform: rotateY(-90deg) scale(.9);
 	-webkit-animation-name: flipouttoleft;
-	-webkit-animation-duration: 225ms;
+	-webkit-animation-duration: 175ms;
 	-moz-transform: rotateY(-90deg) scale(.9);
 	-moz-animation-name: flipouttoleft;
-	-moz-animation-duration: 225ms;
+	-moz-animation-duration: 175ms;
 }
 
 .flip.in {
 	-webkit-animation-name: flipintoright;
-	-webkit-animation-duration: 350ms;
+	-webkit-animation-duration: 225ms;
 	-moz-animation-name: flipintoright;
-	-moz-animation-duration: 350ms;
+	-moz-animation-duration: 225ms;
 }
 
 .flip.out.reverse {

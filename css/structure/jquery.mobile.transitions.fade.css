@@ -21,9 +21,9 @@
 .fade.out {
 	z-index: 0;
 	opacity: 0;
-	-webkit-animation-duration: 100ms;
+	-webkit-animation-duration: 125ms;
 	-webkit-animation-name: fadeout;
-	-moz-animation-duration: 100ms;
+	-moz-animation-duration: 125ms;
 	-moz-animation-name: fadeout;
 }
 
