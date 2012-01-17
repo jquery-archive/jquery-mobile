@@ -2,7 +2,7 @@
 //>>description: Behavior for "fixed" headers and footers
 //>>label: Fixedtoolbar
 
-define( [ "jquery", "jquery.mobile.widget", "jquery.mobile.navigation", "jquery.mobile.page", "jquery.mobile.page.sections" ], function( $ ) {
+define( [ "jquery", "jquery.mobile.widget", "jquery.mobile.core", "jquery.mobile.navigation", "jquery.mobile.page", "jquery.mobile.page.sections" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
