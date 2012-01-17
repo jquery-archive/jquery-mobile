@@ -1223,7 +1223,7 @@ define( [
 		});
 
 		// click routing - direct to HTTP or Ajax, accordingly
-		$( document ).bind( "click", function( event ) {
+		$( document ).bind( $.mobile.formComponentClickEvent, function( event ) {
 			if( !$.mobile.linkBindingEnabled ){
 				return;
 			}

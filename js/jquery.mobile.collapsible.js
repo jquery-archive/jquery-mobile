@@ -99,7 +99,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			.trigger( o.collapsed ? "collapse" : "expand" );
 
 		collapsibleHeading
-			.bind( "click", function( event ) {
+			.bind( $.mobile.formComponentClickEvent, function( event ) {
 
 				var type = collapsibleHeading.is( ".ui-collapsible-heading-collapsed" ) ?
 										"expand" : "collapse";
