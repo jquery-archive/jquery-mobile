@@ -2,7 +2,7 @@
 CSSFILES = css/structure/jquery.mobile.core.css \
 	css/structure/jquery.mobile.transitions.css \
 	css/structure/jquery.mobile.grids.css \
-	css/structure/jquery.mobile.headerfooter.css \
+	css/structure/jquery.mobile.fixedToolbar.css \
 	css/structure/jquery.mobile.navbar.css \
 	css/structure/jquery.mobile.button.css \
 	css/structure/jquery.mobile.collapsible.css \
