@@ -20,17 +20,17 @@ $.widget("mobile.popup", $.mobile.widget, {
 
 	_create: function() {
 		var ui = {
-					screen    : "#ui-popup-screen",
-					container : "#ui-popup-container"
-				},
-				proto = $(
+		    	screen    : "#ui-popup-screen",
+		    	container : "#ui-popup-container"
+		    },
+		    proto = $(
 "<div>" +
 "    <div id='ui-popup-screen' class='ui-selectmenu-screen ui-screen-hidden ui-popup-screen'></div>" +
 "    <div id='ui-popup-container' class='ui-popup-container ui-selectmenu-hidden'></div>" +
 "</div>"
 ),
-				thisPage = (this.element.closest(".ui-page") || $("body")),
-				self = this;
+		    thisPage = (this.element.closest(".ui-page") || $("body")),
+		    self = this;
 
 		// Assign the relevant parts of the proto
 		for (var key in ui)
