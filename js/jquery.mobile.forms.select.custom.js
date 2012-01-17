@@ -115,7 +115,7 @@ define( [
 					.delegate( ".ui-li>a", "focusout", function() {
 						$( this ).attr( "tabindex", "-1" );
 					})
-					.delegate( "li:not(.ui-disabled, .ui-li-divider)", "click", function( event ) {
+					.delegate( "li:not(.ui-disabled, .ui-li-divider)", $.mobile.formComponentClickEvent, function( event ) {
 
 						// index of option tag to be selected
 						var oldIndex = self.select[ 0 ].selectedIndex,
