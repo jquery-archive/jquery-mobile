@@ -2,7 +2,7 @@
  * mobile navigation unit tests
  */
 (function($){
-	var perspective = "viewport-flip",
+	var perspective,
 			transitioning = "ui-mobile-viewport-transitioning",
 			animationCompleteFn = $.fn.animationComplete,
 			defaultMaxTrans = $.mobile.maxTransitionWidth,
@@ -53,6 +53,12 @@
 			};
 
 
+	if( !$.support.cssTransform3d  ) {
+		perspective = "viewport-fade";
+  } else {
+    perspective = "viewport-flip";
+  }
+
 	module('jquery.mobile.navigation.js', {
 		setup: function(){
 
@@ -69,6 +75,7 @@
 					}
 					callback();
 				});
+
 				return this;
 			};
 
@@ -84,7 +91,6 @@
 
 				location.hash = "#harmless-default-page";
 			}
-
 		},
 
 		teardown: function(){
@@ -99,40 +105,42 @@
 	Our default transition handler now has either one or two animationComplete calls - two if there are two pages in play (from and to)
 	To is required, so each async function must call start() onToComplete, not onFromComplete.
 	*/
-
-
 	asyncTest( "changePage applies perspective class to mobile viewport for flip", function(){
 		expect(1);
 
-		onToComplete( function( el ){
-			ok($("body").hasClass(perspective), "has perspective class");
-			start();
-		} );
+		$.testHelper.pageSequence([
+			function() {
+				$.mobile.changePage("#foo");
+			},
 
-		$("#foo > a").click();
-	});
+			function() {
+				onToComplete( function( el ) {
+					console.log( $("body").attr("class") );
+					ok($("body").hasClass(perspective), "has viewport-flip or viewport-fade based on 3d transform");
+					start();
+				});
 
-	asyncTest( "changePage does not apply perspective class to mobile viewport for transitions other than flip", function(){
-		expect(1);
-
-		onToComplete( function( el ){
-			ok(!$("body").hasClass(perspective), "doesn't have perspective class");
-			start();
-		} );
-
-		$("#bar > a").click();
+				$("#foo > a").first().click();
+			}
+		]);
 	});
 
 	asyncTest( "changePage applies transition class to mobile viewport for default transition", function(){
 		expect(1);
+		$.testHelper.pageSequence([
+			function() {
+				$.mobile.changePage("#baz");
+			},
 
-		onToComplete( function( el ){
-			ok($("body").hasClass(transitioning), "has transitioning class");
-			start();
-		} );
+			function() {
+				onToComplete( function( el ){
+					ok($("body").hasClass(transitioning), "has transitioning class");
+					start();
+				});
 
-		$("#baz > a").click();
-
+				$("#baz > a").click();
+			}
+		]);
 	});
 
 	asyncTest( "explicit transition preferred for page navigation reversal (ie back)", function(){
@@ -182,9 +190,15 @@
 	});
 
 	asyncTest( "default transition is pop for a dialog", function(){
+		var defaultTransition = "pop";
+
+		if( !$.support.cssTransform3d ){
+			defaultTransition = "fade";
+		}
+
 		expect( 1 );
 		onToComplete(function(){
-			ok($("#no-trans-dialog").hasClass("pop"), "has pop class" );
+			ok( $("#no-trans-dialog").hasClass(defaultTransition), "has pop class" );
 			start();
 		});
 
