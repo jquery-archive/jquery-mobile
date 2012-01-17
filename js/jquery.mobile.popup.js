@@ -1,10 +1,9 @@
-/*
-* jQuery Mobile Framework : "popup" plugin
-* Copyright (c) jQuery Project
-* Dual licensed under the MIT or GPL Version 2 licenses.
-* http://jquery.org/license
-*/
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Popup windows.
+//>>label: Popups
 
+define( [ "jquery", "jquery.mobile.widget" ], function( $ ) {
+//>>excludeEnd("jqmBuildExclude");
 (function($, undefined) {
 
 $.widget("mobile.popup", $.mobile.widget, {
@@ -306,3 +305,6 @@ $(document).bind("pagecreate create", function(e) {
 });
 
 })(jQuery);
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");
