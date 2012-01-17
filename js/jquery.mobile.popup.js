@@ -48,7 +48,12 @@ $.widget("mobile.popup", $.mobile.widget, {
 		});
 
 		$.each (this.options, function(key) {
-			self._setOption(key, self.options[key], true);
+			// Cause initial options to be applied by their handler by temporarily setting the option to undefined
+			// - the handler then sets it to the initial value
+			var value = self.options[key];
+
+			self.options[key] = undefined;
+			self._setOption(key, value, true);
 		});
 
 		ui.screen.bind("vclick", function(e) {
@@ -56,12 +61,13 @@ $.widget("mobile.popup", $.mobile.widget, {
 		});
 	},
 
-	_realSetTheme: function(dst, theme, unconditional) {
+	_realSetTheme: function(dst, theme) {
 		var classes = (dst.attr("class") || "").split(" "),
 		    alreadyAdded = true,
 		    currentTheme = null,
-			matches;
+		    matches;
 
+		theme = String(theme);
 		while (classes.length > 0) {
 			currentTheme = classes.pop();
 			matches = currentTheme.match(/^ui-body-([a-z])$/);
@@ -73,64 +79,58 @@ $.widget("mobile.popup", $.mobile.widget, {
 				currentTheme = null;
 		}
 
-		if (theme !== currentTheme || unconditional) {
+		if (theme !== currentTheme) {
 			dst.removeClass("ui-body-" + currentTheme);
 			if (theme !== null)
 				dst.addClass("ui-body-" + theme);
 		}
 	},
 
-	_setTheme: function(value, unconditional) {
-		if (value === null)
-			value = "";
-
-		if (value.match(/^[a-z]$/) || value === "") {
-			this._realSetTheme(this.element, value, unconditional);
-		}
+	_setTheme: function(value) {
+		this._realSetTheme(this.element, value);
+		this.options.theme = value;
+		this.element.attr("data-" + ($.mobile.ns || "") + "theme", value);
 	},
 
-	_setOverlayTheme: function(value, unconditional) {
-		if (value === null)
-			value = "";
-		if (value.match(/^[a-z]$/) || value === "") {
-			this._realSetTheme(this._ui.container, value, unconditional);
-			// The screen must always have some kind of background for fade to work, so, if the theme is being unset,
-			// set the background to "a".
-			this._realSetTheme(this._ui.screen, (value === "" ? "a" : value), unconditional);
-		}
+	_setOverlayTheme: function(value) {
+		this._realSetTheme(this._ui.container, value);
+		// The screen must always have some kind of background for fade to work, so, if the theme is being unset,
+		// set the background to "a".
+		this._realSetTheme(this._ui.screen, (value === "" ? "a" : value));
+		this.options.overlayTheme = value;
+		this.element.attr("data-" + ($.mobile.ns || "") + "overlay-theme", value);
 	},
 
-	_setShadow: function(value, unconditional) {
-		if (this._ui.container.hasClass("ui-overlay-shadow") != value || unconditional)
-			this._ui.container[value ? "addClass" : "removeClass"]("ui-overlay-shadow");
+	_setShadow: function(value) {
+		this._ui.container[value ? "addClass" : "removeClass"]("ui-overlay-shadow");
+		this.options.shadow = value;
+		this.element.attr("data-" + ($.mobile.ns || "") + "shadow", value);
 	},
 
-	_setCorners: function(value, unconditional) {
-		if (this._ui.container.hasClass("ui-corner-all") != value || unconditional)
-			this._ui.container[value ? "addClass" : "removeClass"]("ui-corner-all");
+	_setCorners: function(value) {
+		this._ui.container[value ? "addClass" : "removeClass"]("ui-corner-all");
+		this.options.corners = value;
+		this.element.attr("data-" + ($.mobile.ns || "") + "corners", value);
 	},
 
-	_setFade: function(value, unconditional) {
+	_setFade: function(value) {
 		this.options.fade = value;
+		this.element.attr("data-" + ($.mobile.ns || "") + "fade", value);
 	},
 
-	_setTransition: function(value, unconditional) {
-		if (this.options.transition != value || unconditional) {
-			this._ui.container
-				.removeClass(this.options.transition)
-				.addClass(value);
-			this.options.transition = value;
-		}
+	_setTransition: function(value) {
+		this._ui.container
+			.removeClass((this.options.transition || ""))
+			.addClass(value);
+		this.options.transition = value;
+		this.element.attr("data-" + ($.mobile.ns || "") + "transition", value);
 	},
 
-	_setOption: function(key, value, unconditional) {
+	_setOption: function(key, value) {
 		var setter = "_set" + key.replace(/^[a-z]/, function(c) {return c.toUpperCase();});
 
-		if (unconditional === undefined)
-			unconditional = false;
-
 		if (this[setter] !== undefined)
-			this[setter](value, unconditional);
+			this[setter](value);
 		else
 			$.mobile.widget.prototype._setOption.apply(this, arguments);
 	},
