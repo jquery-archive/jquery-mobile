@@ -1,6 +1,8 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: The base file for jQM
 //>>label: Core
+//>>group: core
+//>>required: true
 
 define( [ "jquery", "jquery.mobile.widget" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");

@@ -1,6 +1,8 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Assorted support tests.
 //>>label: Support Tests
+//>>group: core
+//>>required: true
 
 // For test purposes we can't use anonymous module here otherwise
 // the tests will throw http://requirejs.org/docs/errors.html#mismatch
