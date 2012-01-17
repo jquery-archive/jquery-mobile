@@ -37,3 +37,7 @@
 .ui-footer-duplicate {
 	display: none;
 }
+.ui-header-fixed .ui-btn,
+.ui-footer-fixed .ui-btn { 
+	z-index: 10;
+}

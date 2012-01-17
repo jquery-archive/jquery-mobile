@@ -43,9 +43,6 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 .ui-header .ui-btn-right { position: absolute; right: 10px; top: .4em; }
 .ui-header .ui-title, .ui-footer .ui-title { min-height: 1.1em; text-align: center; font-size: 16px; display: block; margin: .6em 30% .8em;  padding: 0;  text-overflow: ellipsis; overflow: hidden; white-space: nowrap; outline: 0 !important; }
 .ui-footer .ui-title { margin: .6em 15px .8em;  }
-.ui-header-fixed .ui-btn { 
-	z-index: 10;
-}
 
 /*content area*/
 .ui-content { border-width: 0; overflow: visible; overflow-x: hidden; padding: 15px; }
