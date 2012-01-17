@@ -4,7 +4,7 @@
 
 $.testHelper.excludeFileProtocol(function(){
 	var	prependToFn = $.fn.prependTo,
-		libName = "jquery.mobile.support";
+		libName = "jquery.mobile.support.js";
 
 	module(libName, {
 		teardown: function(){
