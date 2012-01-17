@@ -29,6 +29,9 @@ $.fn.buttonMarkup = function( options ) {
 			buttonText = document.createElement( o.wrapperEls ),
 			buttonIcon = o.icon ? document.createElement( "span" ) : null;
 
+		// if so, prevent double enhancement, and continue with rest of the elements.
+		if( e.tagName === "INPUT" && e.getAttribute( "data-role" ) === "button" ) continue;
+
 		// if this is a button, check if it's been enhanced and, if not, use the right function
 		if( e.tagName === "BUTTON" ) {
 	 	 	if ( !$( e.parentNode ).hasClass( "ui-btn" ) ) $( e ).button();
