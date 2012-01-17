@@ -2,8 +2,8 @@
 .slideup.out {
 	-webkit-animation-name: fadeout;
 	-moz-animation-name: fadeout;
-	-webkit-animation-duration: 225ms;
-	-moz-animation-duration: 225ms;
+	-webkit-animation-duration: 100ms;
+	-moz-animation-duration: 100ms;
 }
 
 .slideup.in {
@@ -11,13 +11,15 @@
 	-webkit-animation-name: slideinfrombottom;
 	-moz-transform: translateY(0);
 	-moz-animation-name: slideinfrombottom;
-	-webkit-animation-duration: 350ms;
-	-moz-animation-duration: 350ms;
+	-webkit-animation-duration: 250ms;
+	-moz-animation-duration: 250ms;
 }
 
 .slideup.in.reverse {
 	-webkit-animation-name: fadein;
 	-moz-animation-name: fadein;
+	-webkit-animation-duration: 150ms;
+	-moz-animation-duration: 150ms;
 }
 
 .slideup.out.reverse {
@@ -25,6 +27,8 @@
 	-moz-transform: translateY(100%);
 	-webkit-animation-name: slideouttobottom;
 	-moz-animation-name: slideouttobottom;
+	-webkit-animation-duration: 200ms;
+	-moz-animation-duration: 200ms;
 }
 
 @-webkit-keyframes slideinfrombottom {
