@@ -2,25 +2,34 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8" />
-	<title>jQuery Mobile Fixed Toolbars Integration Test</title>
+	<title>jQuery Mobile Fixed Toolbar Integration Test</title>
 
+
+	<script src="../../../external/requirejs/require.js"></script>
 	<script src="../../../js/jquery.js"></script>
 	<script src="../jquery.setNameSpace.js"></script>
-	<script src="../../../js/"></script>
 	<script src="../../../tests/jquery.testHelper.js"></script>
-
-
-	<link rel="stylesheet"  href="../../../css/themes/default/"/>
-	<link rel="stylesheet" href="../../../external/qunit.css"/>
 	<script src="../../../external/qunit.js"></script>
+	<script>
+		$.testHelper.asyncLoad([
+			[
+				"jquery.mobile.fixedToolbar"
+			],
+			[ "jquery.mobile.init" ],
+			[
+				"./fixedToolbar.js"
+			]
+		]);
+	</script>
 
-	<script src="fixedToolbar.js"></script>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit.css"/>
 
 	<script src="../swarminject.js"></script>
 </head>
 <body>
 
-<h1 id="qunit-header">jQuery Mobile Fixed Toolbars Test Suite</h1>
+<h1 id="qunit-header">jQuery Mobile FieldContainer Test Suite</h1>
 <h2 id="qunit-banner"></h2>
 <h2 id="qunit-userAgent"></h2>
 <ol id="qunit-tests">
@@ -43,9 +52,6 @@
 	
 
 </div>
-
-
-
 
 
 
