@@ -17,7 +17,6 @@ $.widget( "mobile.button", $.mobile.widget, {
 	},
 	_create: function() {
 		var $el = this.element,
-			$button,
 			o = this.options,
 			type,
 			name,
