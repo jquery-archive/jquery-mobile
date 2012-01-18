@@ -1,0 +1,16 @@
+.ui-popup-container {
+  z-index: 1100 !important;
+  display: inline-block;
+  position: absolute;
+  padding: 0px;
+}
+
+.ui-popup-screen {
+  opacity: 0;
+}
+
+.ui-popup-btn-close {
+   position:absolute; 
+   top:-15px; 
+   right:-15px;	
+}

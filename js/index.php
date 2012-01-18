@@ -46,6 +46,7 @@ $files = array(
 	'jquery.mobile.controlGroup.js',
 	'jquery.mobile.links.js',
 	'jquery.mobile.fixedToolbar.js',
+	'jquery.mobile.popup.js',
 	'jquery.mobile.init.js'
 );
 

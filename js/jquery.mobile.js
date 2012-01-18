@@ -9,6 +9,7 @@ define([
 	'jquery.mobile.hashchange',
 	'jquery.mobile.page',
 	'jquery.mobile.core',
+	'jquery.mobile.popup',
 	'order!jquery.mobile.navigation',
 	'order!jquery.mobile.navigation.pushstate',
 	'jquery.mobile.transition',
