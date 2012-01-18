@@ -83,7 +83,6 @@ $.fn.buttonMarkup = function( options ) {
 		el.removeClass( "ui-link" ).addClass( buttonClass );
 
 		buttonInner.className = innerClass;
-		buttonInner.setAttribute("aria-hidden", "true");
 
 		buttonText.className = textClass;
 		buttonInner.appendChild( buttonText );

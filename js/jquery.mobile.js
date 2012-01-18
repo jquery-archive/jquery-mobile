@@ -39,7 +39,8 @@ define([
 	'order!jquery.mobile.buttonMarkup',
 	'order!jquery.mobile.controlGroup',
 	'jquery.mobile.links',
-	'jquery.mobile.fixedToolbar'
+	'jquery.mobile.fixHeaderFooter',
+	'jquery.mobile.fixHeaderFooter.native'
 ], function() {
 	require( [ 'jquery.mobile.init' ] );
 });
