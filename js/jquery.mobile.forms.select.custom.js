@@ -308,14 +308,16 @@ define( [
 				}
 
 				var self = this,
-					menuHeight = self.list.parent().outerHeight(),
-					menuWidth = self.list.parent().outerWidth(),
+          $window = $( window ),
+          selfListParent = self.list.parent(),
+					menuHeight = selfListParent.outerHeight(),
+					menuWidth = selfListParent.outerWidth(),
 					activePage = $( ".ui-page-active" ),
 					tScrollElem = activePage,
-					scrollTop = $( window ).scrollTop(),
+					scrollTop = $window.scrollTop(),
 					btnOffset = self.button.offset().top,
-					screenHeight = $(window).height(),
-					screenWidth = $(window).width();
+					screenHeight = $window.height(),
+					screenWidth = $window.width();
 
 				//add active class to button
 				self.button.addClass( $.mobile.activeBtnClass );
