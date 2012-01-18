@@ -159,7 +159,7 @@ $.mobile.fixedToolbars = (function() {
 	$( document ).delegate( ".ui-page", "pagebeforeshow", function( event, ui ) {
 			var page = $( event.target ),
 				footer = page.find( ":jqmData(role='footer')" ),
-				id = footer.data( "id" ),
+				id = footer.jqmData( "id" ),
 				prevPage = ui.prevPage,
 				prevFooter = prevPage && prevPage.find( ":jqmData(role='footer')" ),
 				prevFooterMatches = prevFooter.length && prevFooter.jqmData( "id" ) === id;
