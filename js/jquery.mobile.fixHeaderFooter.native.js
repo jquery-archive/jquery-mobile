@@ -45,12 +45,14 @@ $( document ).bind( "pagecreate", function( event ) {
 						$fixies.addClass( "fade in" );
 
 						$( document ).bind( "vclick", function(){
-							$fixies
-								.removeClass( "ui-native-bars-hidden" )
-								.toggleClass( "in out" )
-								.animationComplete(function(){
-									$(this).not( ".in" ).addClass( "ui-native-bars-hidden" );
-								});
+							if( $.mobile.touchToggleEnabled ){
+								$fixies
+									.removeClass( "ui-native-bars-hidden" )
+									.toggleClass( "in out" )
+									.animationComplete(function(){
+										$(this).not( ".in" ).addClass( "ui-native-bars-hidden" );
+									});
+                            }
 						});
 					}
 				}
