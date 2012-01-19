@@ -65,4 +65,64 @@
 		$( "#native-refresh" ).selectmenu( 'close' );
 		ok( true );
 	});
+	
+
+	asyncTest( "The preventFocusZoom option is working as expected", function() {
+
+		var zoomoptiondefault = $.mobile.selectmenu.prototype.options.preventFocusZoom;
+		$.mobile.selectmenu.prototype.options.preventFocusZoom = true;
+		
+		$(document)
+			.one("vmousedown.test", function(){
+				ok( $.mobile.zoom.enabled === false, "zoom is disabled on vmousedown" );
+			})
+			.one("mouseup.test", function(){
+				ok( $.mobile.zoom.enabled === true, "zoom is enabled on mouseup" );
+				$.mobile.selectmenu.prototype.options.preventFocusZoom = zoomoptiondefault;
+				$(document).unbind(".test");
+				$( "#select-choice-native" ).selectmenu( "option", "preventFocusZoom", zoomoptiondefault )
+				start();
+		});
+		
+		$( "#select-choice-native" )
+			.selectmenu( "option", "preventFocusZoom", true )
+			.parent()
+			.trigger( "vmousedown" )
+			.trigger( "mouseup" );
+			
+			
+		
+			
+	});
+	
+	asyncTest( "The preventFocusZoom option does not manipulate zoom when it is false", function() {
+
+		var zoomstate = $.mobile.zoom.enabled,
+			zoomoptiondefault = $.mobile.selectmenu.prototype.options.preventFocusZoom;
+
+		
+		$(document)
+			.one("vmousedown.test", function(){
+				ok( $.mobile.zoom.enabled === zoomstate, "zoom is unaffected on vmousedown" );
+			})
+			.one("mouseup.test", function(){
+				ok( $.mobile.zoom.enabled === zoomstate, "zoom is unaffected on mouseup" );
+				$(document).unbind(".test");
+				$( "#select-choice-native" ).selectmenu( "option", "preventFocusZoom", zoomoptiondefault )
+				start();
+				
+		});
+		
+		$( "#select-choice-native" )
+			.selectmenu( "option", "preventFocusZoom", false )
+			.parent()
+			.trigger( "vmousedown" )
+			.trigger( "mouseup" );
+		
+	});
+	
+	
+
+	
+	
 })(jQuery);
