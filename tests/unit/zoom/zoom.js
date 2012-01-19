@@ -28,7 +28,15 @@
 		
 	});
 	
-
+	test( "Meta viewport content restore method restores it back to original value", function(){
+		$.mobile.zoom.disable();
+		ok( $( "meta[name=viewport]" ).attr( "content" ).match( /,maximum\-scale=1$/ ), "The meta viewport tag's content contains maximum-scale=1 after enable is called" );
+		
+		$.mobile.zoom.restore();
+		ok( $( "meta[name=viewport]" ).attr( "content" ) === defaultMeta, "The meta viewport tag's content matches its default state" );
+		
+	});
+	
 	
 	
 })(jQuery);

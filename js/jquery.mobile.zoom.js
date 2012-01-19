@@ -19,6 +19,10 @@ define( [ "jquery", "jquery.mobile.core" ], function( $ ) {
 		enable: function() {
 	        meta.attr( "content", enabledZoom );
 	        $.mobile.zoom.enabled = true;
+		},
+		restore: function() {
+	        meta.attr( "content", initialContent );
+	        $.mobile.zoom.enabled = true;
 		}
 	});
 
