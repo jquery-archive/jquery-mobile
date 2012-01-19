@@ -41,7 +41,6 @@ define([
 	'jquery.mobile.links',
 	'jquery.mobile.fixedToolbar',
 	'jquery.mobile.zoom',
-	'jquery.mobile.zoom.iosfocusfix',
 	'jquery.mobile.zoom.iosorientationfix'
 ], function() {
 	require( [ 'jquery.mobile.init' ] );

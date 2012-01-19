@@ -2,7 +2,7 @@
 //>>description: Consistent styling for native select menus.
 //>>label: Enhanced Native Selects
 
-define( [ "jquery", "jquery.mobile.core", "jquery.mobile.widget", "jquery.mobile.buttonMarkup" ], function( $ ) {
+define( [ "jquery", "jquery.mobile.core", "jquery.mobile.widget", "jquery.mobile.buttonMarkup", "jquery.mobile.zoom" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -21,6 +21,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		hidePlaceholderMenuItems: true,
 		closeText: "Close",
 		nativeMenu: true,
+		preventFocusZoom: true,
 		initSelector: "select:not(:jqmData(role='slider'))"
 	},
 
@@ -148,6 +149,16 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			.bind( "change blur", function() {
 				self.button.removeClass( "ui-btn-down-" + self.options.theme );
 			});
+		
+		// In many situations, iOS will zoom into the select upon tap, this prevents that from happening
+		if( self.options.preventFocusZoom ){
+			self.button.bind( "vmousedown", function() {
+				$.mobile.zoom.disable();
+			})
+			.bind( "mouseup", function() {
+				$.mobile.zoom.enable();
+			});
+		}
 	},
 
 	selected: function() {
