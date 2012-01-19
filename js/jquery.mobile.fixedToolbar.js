@@ -2,7 +2,7 @@
 //>>description: Behavior for "fixed" headers and footers
 //>>label: Fixedtoolbar
 
-define( [ "jquery", "jquery.mobile.widget", "jquery.mobile.core", "jquery.mobile.navigation", "jquery.mobile.page", "jquery.mobile.page.sections" ], function( $ ) {
+define( [ "jquery", "jquery.mobile.widget", "jquery.mobile.core", "jquery.mobile.navigation", "jquery.mobile.page", "jquery.mobile.page.sections", "jquery.mobile.zoom" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -111,18 +111,20 @@ define( [ "jquery", "jquery.mobile.widget", "jquery.mobile.core", "jquery.mobile
 				$el = self.element;
 			
 			//page event bindings
+			// Fixed toolbars require page zoom to be disabled, otherwise usability issues crop up
+			// This method is meant to disable zoom while a fixed-positioned toolbar page is visible
 			$el.closest( ".ui-page" )
 				.bind( "pagebeforeshow", function(){
-					if( o.togglePageZoom ){
-						self.disablePageZoom();
+					if( o.togglePageZoom && $.mobile.zoom ){
+						$.mobile.zoom.disable();
 					}
 					if( o.visibleOnPageShow ){
 						self.show();
 					}
 				} )
 				.bind( "pagehide", function(){
-					if( o.togglePageZoom ){
-						self.restorePageZoom();
+					if( o.togglePageZoom && $.mobile.zoom ){
+						$.mobile.zoom.enable();
 					}
 				});
 		},
@@ -201,61 +203,6 @@ define( [ "jquery", "jquery.mobile.widget", "jquery.mobile.core", "jquery.mobile
 		destroy: function(){
 			this.element.removeClass( "ui-header-fixed ui-footer-fixed ui-header-fullscreen ui-footer-fullscreen in out fade slidedown slideup ui-fixed-hidden" )
 			this.element.closest( ".ui-page" ).removeClass( "ui-page-header-fixed ui-page-footer-fixed ui-page-header-fullscreen ui-page-footer-fullscreen" );
-		},
-		
-		// for caching reference to meta viewport elem
-		_metaViewport: null,
-		
-		// on pageshow, does a meta viewport element exist in the head?
-		_metaViewportPreexists: false,
-		
-		// used for storing value of meta viewport content at page show, for restoration on hide
-		_metaViewportContent: "",
-		
-		// Fixed toolbars require page zoom to be disabled, otherwise usability issues crop up
-		// This method is meant to disable zoom while a fixed-positioned toolbar page is visible
-		disablePageZoom: function(){
-			if( !this.options.togglePageZoom ){
-				return;
-			}
-			var cont = "user-scalable=no";
-			this._metaViewport = $( "meta[name='viewport']" );
-			this._metaViewportPreexists = this._metaViewport.length;
-			
-			var currentContent = this._metaViewport.attr( "content" );
-			
-			// If scaling's already disabled, or another plugin is handling it on this page already
-			if( currentContent.indexOf( cont ) > -1 ){
-				return;
-			}
-			else {
-				this._metaViewportContent = currentContent;
-			}
-			
-			if( !this._metaViewportPreexists ){
-				this._metaViewport = $( "<meta>", { "name": "viewport", "content": cont } ).prependTo( "head" );
-			}
-			else{
-				this._metaViewport.attr( "content", this._metaViewportContent + ", " + cont );
-			}
-		},
-		
-		// restore the meta viewport tag to its original state, or remove it
-		restorePageZoom: function(){
-			if( !this.options.togglePageZoom ){
-				return;
-			}
-			var cont = "user-scalable=no";
-			if( this._metaViewport.attr( "content" ).indexOf( cont ) < 0 ){
-				return;
-			}
-			
-			if( this._metaViewportPreexists ){
-				this._metaViewport.attr( "content", this._metaViewportContent );
-			}
-			else {
-				this._metaViewport.remove();
-			}
 		}
 		
 	});
