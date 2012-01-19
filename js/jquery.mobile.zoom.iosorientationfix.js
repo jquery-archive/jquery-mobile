@@ -5,29 +5,35 @@
 define( [ "jquery", "jquery.mobile.core", "jquery.mobile.zoom" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 ( function( $, window ) {
-    var orientation = window.orientation,
-        rotation = 0;
-
+    var zoom = $.mobile.zoom,
+        rotation = 0,
+		x = y = z = 0,
+		orientation, aig;
+	
     function checkTilt( e ){
-		e = e.originalEvent;
-        orientation = Math.abs( window.orientation );
-        rotation = Math.abs( e.gamma );
+		evt = e.originalEvent;
+        orientation = window.orientation;
+		aig = evt.accelerationIncludingGravity;
+		
+		if( aig ){
+        	x = Math.abs( aig.x );
+			y = Math.abs( aig.y );
+			z = Math.abs( aig.z );
+		}
 
-        if( rotation > 8 && orientation === 0 ){
-            if( $.mobile.zoom.enabled ){
-                $.mobile.zoom.disable();
-            }   
+        if( orientation === 0 && ( e.type === "deviceorientation" || x > 7 || ( z > 4 && ( x > 6 || y > 6 ) ) ) ){
+			if( zoom.enabled ){
+				zoom.disable();
+			}        	
         }
-        else {
-            if( !$.mobile.zoom.enabled ){
-                $.mobile.zoom.enable();
-            }
+		else if( !zoom.enabled ){
+			zoom.enable();
         }
     }
 
     $( window )
-		.bind( "orientationchange", $.mobile.zoom.enable )
-		.bind( "deviceorientation", checkTilt );
+		.bind( "orientationchange", zoom.enable )
+		.bind( "deviceorientation devicemotion", checkTilt );
 
 }( jQuery, this ));
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
