@@ -31,7 +31,7 @@ $.fn.buttonMarkup = function( options ) {
 			buttonIcon = o.icon ? document.createElement( "span" ) : null;
 			
 		// if so, prevent double enhancement, and continue with rest of the elements.
-		if( e.tagName === "INPUT" && e.getAttribute( "data-role" ) === "button" ) continue;
+		if( e.tagName === "INPUT" && el.jqmData('role') === "button" ) continue;
 		
 		// if this is a button, check if it's been enhanced and, if not, use the right function
 		if( e.tagName === "BUTTON" ) {
