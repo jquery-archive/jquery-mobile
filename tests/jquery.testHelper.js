@@ -14,7 +14,13 @@
 
 			function loadSeq( seq, i ){
 				if( !seq[i] ){
-					QUnit.start();
+					$( document ).ready( function() {
+						var $fixture = $( '#qunit-fixture' );
+						if ( $fixture.length ) {
+							QUnit.config.fixture = $fixture.html();
+						}
+						QUnit.start();
+					});
 					return;
 				}
 
