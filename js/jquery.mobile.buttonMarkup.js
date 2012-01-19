@@ -29,7 +29,7 @@ $.fn.buttonMarkup = function( options ) {
 			buttonInner = document.createElement( o.wrapperEls ),
 			buttonText = document.createElement( o.wrapperEls ),
 			buttonIcon = o.icon ? document.createElement( "span" ) : null;
-
+			
 		// if so, prevent double enhancement, and continue with rest of the elements.
 		if( e.tagName === "INPUT" && el.jqmData('role') === "button" ) continue;
 		
