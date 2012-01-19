@@ -4,14 +4,6 @@
 (function($){
 	module('jquery.mobile.fixedToolbar.js');
 	
-	var defaultMeta = "width=device-width, initial-scale=1";
-	
-	function injectMeta( content ){
-		content = content || defaultMeta;
-		$( "meta[name=viewport]" ).remove();
-		$( "<meta name='viewport' content='"+ content +"'>" ).prependTo( "head" );
-	}
-	
 	$( "html" ).height( screen.height * 3 );
 	
 	function scrollDown(){
@@ -23,8 +15,7 @@
 	}
 	
 
-	// add meta viewport tag
-	injectMeta();
+
 
 	test( "Fixed Header Structural Classes are applied correctly", function(){	
 		
@@ -80,35 +71,22 @@
 		], 500);
 		
 	});	
-	
+
 	test( "User zooming is disabled when the header is visible", function(){
-		injectMeta();
-		ok( $( "meta[name=viewport]" ).attr( "content" ).indexOf( ", user-scalable=no" ) < 0, "The meta viewport tag's content does not contain , user-scalable=no by default" );
+		$.mobile.zoom.enable();
 		$( ".ui-page-active" ).trigger( "pagebeforeshow" );
-		ok( $( "meta[name=viewport]" ).attr( "content" ).indexOf( ", user-scalable=no" ) > -1, "After pagebeforeshow, the meta viewport tag's content contains , user-scalable=no" );
-		
+		ok( !$.mobile.zoom.enabled, "Viewport scaling is disabled before page show." );
 	});
 	
 	test( "Meta viewport content is restored to previous state, and zooming renabled, after pagehide", function(){
-		injectMeta();
-		ok( $( "meta[name=viewport]" ).attr( "content" ).indexOf( ", user-scalable=no" ) < 0, "The meta viewport tag's content does not contain , user-scalable=no by default" );
+		$.mobile.zoom.enable();
 		$( ".ui-page-active" ).trigger( "pagebeforeshow" );
-		ok( $( "meta[name=viewport]" ).attr( "content" ).indexOf( ", user-scalable=no" ) > -1, "After pagebeforeshow, the meta viewport tag's content contains , user-scalable=no" );
+		ok( !$.mobile.zoom.enabled, "Viewport scaling is disabled before page show." );
 		$( ".ui-page-active" ).trigger( "pagehide" );
-		ok( $( "meta[name=viewport]" ).attr( "content" ).indexOf( ", user-scalable=no" ) < 0, "After pagehide, the meta viewport tag's content does not contain , user-scalable=no by default" );
-		ok( $( "meta[name=viewport]" ).attr( "content" ) == defaultMeta, "After pagehide, meta viewport content is restored to previous state" );
-		$( ".ui-page-active" ).trigger( "pageshow" );
+		ok( $.mobile.zoom.enabled, "Viewport scaling is enabled." ); 		
+
 	});
-	
-	test( "disablePageZoom and restorePageZoom methods properly toggle user-scalable=no on the meta viewport tag", function(){
-		injectMeta();
-		$( '#classes-test-b' ).fixedtoolbar( "disablePageZoom" );
-		ok( $( "meta[name=viewport]" ).attr( "content" ).indexOf( ", user-scalable=no" ) > -1, "After pagebeforeshow, the meta viewport tag's content contains , user-scalable=no" );
-		$( '#classes-test-b' ).fixedtoolbar( "restorePageZoom" );
-		ok( $( "meta[name=viewport]" ).attr( "content" ) == defaultMeta, "After calling restorePageZoom, meta viewport content is restored to previous state" );
-	});
-	
-	
+
 	asyncTest( "The hide method is working properly", function() {
 
 		expect( 2 );		
