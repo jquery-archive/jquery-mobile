@@ -44,4 +44,20 @@
 			ok( success, "mousedown executed without exception");
 		}
 	});
+	
+	// Test for issue #3141:
+	test( "elements of input[type='submit'] with data-role='button' should not be doubly enhanced", function(){
+		var button = $("#double-enhanced"),
+			count = 0;
+		
+		button.bind('vclick', function() {
+			count++;
+		});
+		
+		button.trigger('vclick');
+		
+		ok( count === 1, "events don't trigger twice");
+		
+		ok( !button.hasClass('ui-btn') && !button.children().length, "input not styled like button and contains no children");
+	});
 })(jQuery);
