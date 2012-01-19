@@ -7,8 +7,8 @@ define( [ "jquery", "jquery.mobile.core" ], function( $ ) {
 ( function( $ ) {
 	var	meta = $( "meta[name=viewport]" ),
         initialContent = meta.attr( "content" ),
-        disabledZoom = initialContent + ",user-scalable=no",
-        enabledZoom = initialContent + ",user-scalable=yes";
+        disabledZoom = initialContent + ",maximum-scale=1",
+        enabledZoom = initialContent + ",maximum-scale=10";
 	
 	$.mobile.zoom = $.extend( {}, {
 		enabled: true,
