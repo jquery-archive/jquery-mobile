@@ -36,8 +36,8 @@ define([
 	'jquery.mobile.forms.textinput',
 	'jquery.mobile.forms.select.custom',
 	'jquery.mobile.forms.select',
-	'order!jquery.mobile.buttonMarkup',
-	'order!jquery.mobile.controlGroup',
+	'jquery.mobile.buttonMarkup',
+	'jquery.mobile.controlGroup',
 	'jquery.mobile.links',
 	'jquery.mobile.fixedToolbar'
 ], function() {
