@@ -5,16 +5,23 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>jQuery Mobile Page Test Suite</title>
 
+	<script src="../../../external/requirejs/require.js"></script>
 	<script src="../../../js/jquery.js"></script>
 	<script src="../jquery.setNameSpace.js"></script>
-	<script src="../../../js/"></script>
 	<script src="../../../tests/jquery.testHelper.js"></script>
-
-
-	<link rel="stylesheet" href="../../../external/qunit.css"/>
 	<script src="../../../external/qunit.js"></script>
+	<script>
+		$.testHelper.asyncLoad([
+			[
+				"jquery.mobile.page"
+			],
+			[ "page_core.js" ],
+			[ "jquery.mobile.init" ]
+		]);
+	</script>
 
-	<script src="page_core.js"></script>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../../../external/qunit.css"/>
 
 	<script src="../swarminject.js"></script>
 </head>
@@ -26,13 +33,8 @@
 <ol id="qunit-tests">
 </ol>
 
-<div id="qunit-fixture">
-	<div id="a" data-nstest-role="page"></div>
-
-
-	<div id="b" data-nstest-role="page" data-nstest-theme="e"></div>
-
-	<div id="c" data-nstest-role="page"></div>
-</div>
+<div id="a" data-nstest-role="page"></div>
+<div id="b" data-nstest-role="page" data-nstest-theme="e"></div>
+<div id="c" data-nstest-role="page"></div>
 </body>
 </html>

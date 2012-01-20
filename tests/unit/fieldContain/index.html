@@ -5,17 +5,25 @@
 	<title>jQuery Mobile FieldContain Integration Test</title>
 
 
+	<script src="../../../external/requirejs/require.js"></script>
 	<script src="../../../js/jquery.js"></script>
 	<script src="../jquery.setNameSpace.js"></script>
-	<script src="../../../js/"></script>
 	<script src="../../../tests/jquery.testHelper.js"></script>
-
-
-	<link rel="stylesheet"  href="../../../css/themes/default/"/>
-	<link rel="stylesheet" href="../../../external/qunit.css"/>
 	<script src="../../../external/qunit.js"></script>
+	<script>
+		$.testHelper.asyncLoad([
+			[
+				"jquery.mobile.fieldContain"
+			],
+			[ "jquery.mobile.init" ],
+			[
+				"./fieldContain_events.js"
+			]
+		]);
+	</script>
 
-	<script src="fieldContain_events.js"></script>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit.css"/>
 
 	<script src="../swarminject.js"></script>
 </head>

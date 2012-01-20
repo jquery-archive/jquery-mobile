@@ -4,13 +4,21 @@
 
 // TODO split out into seperate test files
 (function($){
-  var home = $.mobile.path.parseUrl( location.href ).pathname;
+	var home = $.mobile.path.parseUrl( location.href ).pathname + location.search;
 
 	$.mobile.defaultTransition = "none";
 
 	module( "Basic Linked list", {
 		setup: function(){
-			$.testHelper.openPage( "#basic-linked-test" );
+			if( location.hash != "#basic-linked-test" ){
+				stop();
+
+				$(document).one("pagechange", function() {
+					start();
+				});
+
+				$.mobile.changePage( home );
+			}
 		}
 	});
 
@@ -24,7 +32,7 @@
 	asyncTest( "Slides to the listview page when the li a is clicked", function() {
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage("#basic-linked-test");
+				$.mobile.changePage("#basic-linked-test");
 			},
 
 			function(){
@@ -41,7 +49,7 @@
 	asyncTest( "Slides back to main page when back button is clicked", function() {
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage("#basic-link-results");
+				$.mobile.changePage("#basic-link-results");
 			},
 
 			function(){
@@ -58,7 +66,7 @@
 	asyncTest( "Presence of ui-li-has- classes", function(){
 		$.testHelper.pageSequence( [
 			function() {
-				$.testHelper.openPage( "#ui-li-has-test" );
+				$.mobile.changePage( "#ui-li-has-test" );
 			},
 
 			function() {
@@ -85,7 +93,7 @@
 	asyncTest( "Changes page to nested list test and enhances", function() {
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage("#nested-list-test");
+				$.mobile.changePage("#nested-list-test");
 			},
 
 			function(){
@@ -101,7 +109,7 @@
 
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage("#nested-list-test");
+				$.mobile.changePage("#nested-list-test");
 			},
 
 			function(){
@@ -122,7 +130,7 @@
 	asyncTest( "should go back to top level when the back button is clicked", function() {
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage("#nested-list-test&ui-page=0-0");
+				$.mobile.changePage("#nested-list-test&ui-page=0-0");
 			},
 
 			function(){
@@ -144,7 +152,7 @@
 		$.testHelper.pageSequence([
 			function(){
 				// https://github.com/jquery/jquery-mobile/issues/1617
-				$.testHelper.openPage("#nested-lists-test");
+				$.mobile.changePage("#nested-lists-test");
 			},
 
 			function(){
@@ -164,7 +172,7 @@
 	asyncTest( "changes to the numbered list page and enhances it", function() {
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage("#numbered-list-test");
+				$.mobile.changePage("#numbered-list-test");
 			},
 
 			function(){
@@ -192,11 +200,11 @@
 	asyncTest( "takes us back to the numbered list when the back button is clicked", function() {
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage('#numbered-list-test');
+				$.mobile.changePage('#numbered-list-test');
 			},
 
 			function(){
-				$.testHelper.openPage('#numbered-list-results');
+				$.mobile.changePage('#numbered-list-results');
 			},
 
 			function(){
@@ -215,7 +223,7 @@
 	asyncTest( "changes to the read only page when hash is changed", function() {
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage("#read-only-list-test");
+				$.mobile.changePage("#read-only-list-test");
 			},
 
 			function(){
@@ -232,7 +240,7 @@
 	asyncTest( "changes the page to the split view list and enhances it correctly.", function() {
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage("#split-list-test");
+				$.mobile.changePage("#split-list-test");
 			},
 
 			function(){
@@ -247,7 +255,7 @@
 	asyncTest( "change the page to the split view page 1 when the first link is clicked", function() {
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage("#split-list-test");
+				$.mobile.changePage("#split-list-test");
 			},
 
 			function(){
@@ -264,7 +272,7 @@
 	asyncTest( "Slide back to the parent list view when the back button is clicked", function() {
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage("#split-list-test");
+				$.mobile.changePage("#split-list-test");
 			},
 
 			function(){
@@ -285,7 +293,7 @@
 	asyncTest( "Clicking on the icon (the second link) should take the user to other a href of this LI", function() {
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage("#split-list-test");
+				$.mobile.changePage("#split-list-test");
 			},
 
 			function(){
@@ -304,7 +312,7 @@
 	asyncTest( "Makes the list divider page the active page and enhances it correctly.", function() {
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage("#list-divider-test");
+				$.mobile.changePage("#list-divider-test");
 			},
 
 			function(){
@@ -325,7 +333,7 @@
 		var $searchPage = $(searchFilterId);
 		$.testHelper.pageSequence([
 			function() {
-				$.testHelper.openPage(searchFilterId);
+				$.mobile.changePage(searchFilterId);
 			},
 
 			function() {
@@ -342,7 +350,7 @@
 		var $searchPage = $(searchFilterId);
 		$.testHelper.pageSequence([
 			function() {
-				$.testHelper.openPage(searchFilterId);
+				$.mobile.changePage(searchFilterId);
 			},
 
 			function() {
@@ -359,7 +367,7 @@
         var $searchPage = $(searchFilterId);
         $.testHelper.pageSequence([
             function() {
-                $.testHelper.openPage(searchFilterId);
+                $.mobile.changePage(searchFilterId);
             },
 
             function() {
@@ -385,7 +393,7 @@
 		var	$searchPage = $("#search-filter-with-dividers-test");
 		$.testHelper.pageSequence([
 			function() {
-				$.testHelper.openPage("#search-filter-with-dividers-test");
+				$.mobile.changePage("#search-filter-with-dividers-test");
 			},
 
 			// wait for the page to become active/enhanced
@@ -410,7 +418,7 @@
 	asyncTest( "Redisplay results when user removes values", function() {
 		$.testHelper.pageSequence([
 			function() {
-				$.testHelper.openPage("#search-filter-with-dividers-test");
+				$.mobile.changePage("#search-filter-with-dividers-test");
 			},
 
 			function() {
@@ -429,7 +437,7 @@
 	asyncTest( "Dividers are hidden when preceding hidden rows and shown when preceding shown rows", function () {
 		$.testHelper.pageSequence([
 			function() {
-				$.testHelper.openPage("#search-filter-with-dividers-test");
+				$.mobile.changePage("#search-filter-with-dividers-test");
 			},
 
 			function() {
@@ -458,7 +466,7 @@
 
 		$.testHelper.pageSequence([
 			function() {
-				$.testHelper.openPage("#search-filter-inset-test");
+				$.mobile.changePage("#search-filter-inset-test");
 			},
 
 			function() {
@@ -530,7 +538,7 @@
 		// https://github.com/jquery/jquery-mobile/issues/1470
 		$.testHelper.pageSequence([
 			function() {
-				$.testHelper.openPage( "#programmatically-generated-list" );
+				$.mobile.changePage( "#programmatically-generated-list" );
 			},
 			function() {
 				ok(!$( "#programmatically-generated-list-items li:first-child" ).hasClass( "ui-corner-bottom" ), "First list item should not have class ui-corner-bottom" );
@@ -544,7 +552,7 @@
 	asyncTest("Removing list items", 4, function() {
 		$.testHelper.pageSequence([
 			function() {
-				$.testHelper.openPage("#removing-items-from-list-test");
+				$.mobile.changePage("#removing-items-from-list-test");
 			},
 
 			function() {
@@ -570,7 +578,7 @@
 	asyncTest("Top and bottom corners rounded in inset list", 14, function() {
 		$.testHelper.pageSequence([
 			function() {
-				$.testHelper.openPage("#corner-rounded-test");
+				$.mobile.changePage("#corner-rounded-test");
 			},
 
 			function() {
@@ -613,20 +621,20 @@
 		$.testHelper.pageSequence([
 			function(){
 				//reset for relative url refs
-				$.testHelper.openPage( "#" + home );
+				$.mobile.changePage( home );
 			},
 
 			function(){
-				$.testHelper.openPage( "#cache-tests/uncached-nested.html" );
+				$.mobile.changePage( "cache-tests/uncached-nested.html" );
 			},
 
 			function(){
 				ok( findNestedPages( "#uncached-nested-list" ).length > 0, "verify that there are nested pages" );
-				$.testHelper.openPage( "#" + home );
+				$.mobile.changePage( home );
 			},
 
 			function() {
-				$.testHelper.openPage( "#cache-tests/clear.html" );
+				$.mobile.changePage( "cache-tests/clear.html" );
 			},
 
 			function(){
@@ -641,20 +649,20 @@
 		$.testHelper.pageSequence([
 			function(){
 				//reset for relative url refs
-				$.testHelper.openPage( "#" + home );
+				$.mobile.changePage( home );
 			},
 
 			function(){
-				$.testHelper.openPage( "#cache-tests/cached-nested.html" );
+				$.mobile.changePage( "cache-tests/cached-nested.html" );
 			},
 
 			function(){
 				ok( findNestedPages( "#cached-nested-list" ).length > 0, "verify that there are nested pages" );
-				$.testHelper.openPage( "#" + home );
+				$.mobile.changePage( home );
 			},
 
 			function() {
-				$.testHelper.openPage( "#cache-tests/clear.html" );
+				$.mobile.changePage( "cache-tests/clear.html" );
 			},
 
 			function(){
@@ -668,20 +676,20 @@
 		$.testHelper.pageSequence([
 			function(){
 				//reset for relative url refs
-				$.testHelper.openPage( "#" + home );
+				$.mobile.changePage( home );
 			},
 
 			function(){
-				$.testHelper.openPage( "#cache-tests/cached-nested.html" );
+				$.mobile.changePage( "cache-tests/cached-nested.html" );
 			},
 
 			function(){
 				same( $("#cached-nested-list").length, 1 );
-				$.testHelper.openPage( "#" + home );
+				$.mobile.changePage( home );
 			},
 
 			function() {
-				$.testHelper.openPage( "#cache-tests/clear.html" );
+				$.mobile.changePage( "cache-tests/clear.html" );
 			},
 
 			function(){
@@ -698,11 +706,11 @@
 		$.testHelper.pageSequence( [
 			function(){
 				//reset for relative url refs
-				$.testHelper.openPage( "#" + home );
+				$.mobile.changePage( home );
 			},
 
 			function() {
-				$.testHelper.openPage( "#search-filter-test" );
+				$.mobile.changePage( "#search-filter-test" );
 			},
 
 			function() {
@@ -724,12 +732,12 @@
 		$.testHelper.pageSequence([
 			function(){
 				//reset for relative url refs
-				$.testHelper.openPage( "#" + home );
+				$.mobile.changePage( home );
 			},
 
 			function(){
 				// https://github.com/jquery/jquery-mobile/issues/1617
-				$.testHelper.openPage("#nested-lists-test");
+				$.mobile.changePage("#nested-lists-test");
 			},
 
 			function(){
@@ -769,7 +777,7 @@
 	asyncTest( "list inherits theme from parent", function() {
 		$.testHelper.pageSequence([
 			function() {
-				$.testHelper.openPage("#list-theme-inherit");
+				$.mobile.changePage("#list-theme-inherit");
 			},
 
 			function() {

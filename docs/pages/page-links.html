@@ -1,15 +1,14 @@
 <!DOCTYPE html> 
-<html> 
+<html class="ui-mobile-rendering"> 
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<title>jQuery Mobile Docs - Linking Pages</title> 
-	<link rel="stylesheet"  href="../../css/themes/default/" />  
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+
+	<script data-main="../../js/jquery.mobile.docs" src="../../external/requirejs/require.js"></script>
 	<script src="../../js/jquery.js"></script>
-	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
-	<script src="../_assets/js/jqm-docs.js"></script>
-	<script src="../../js/"></script>
 </head> 
 <body> 
 
@@ -62,7 +61,11 @@
 				
 
 		<h2>"Back" button links</h2>
-		<p>If you use the attribute <code>data-rel="back"</code> on an anchor, any clicks on that anchor will mimic the back button, going back one history entry and ignoring the anchor's default href. This is particularly useful when generating "back" buttons with JavaScript, such as a button to close a dialog. When using this feature in your source markup, although browsers that support this feature will not use the specified <code>href</code> attribute, <strong>be sure to still provide a meaningful value that actually points to the URL of the referring page to allow the feature to work for users in C-Grade browsers</strong>. If users can reach this page from more than one referring pages, specify a sensible <code>href</code> so that the navigation remains logical for all users. Also, please keep in mind that if you just want a reverse transition without actually going back in history, you should use the <code>data-direction="reverse"</code> attribute instead.</p>
+		<p>If you use the attribute <code>data-rel="back"</code> on an anchor, any clicks on that anchor will mimic the back button, going back one history entry and ignoring the anchor's default <code>href</code>. This is particularly useful when generating "back" buttons with JavaScript, such as a button to close a dialog. 
+		When using this feature in your source markup, although browsers that support this feature will not use the specified <code>href</code> attribute, <strong>be sure to still provide a meaningful value that actually points to the URL of the referring page to allow the feature to work for users in C-Grade browsers</strong>. If users can reach this page from more than one referring pages, specify a sensible <code>href</code> so that the navigation remains logical for all users. 
+		Also, please keep in mind that if you just want a reverse transition without actually going back in history, you should use the <code>data-direction="reverse"</code> attribute instead.
+		Note: <code>data-direction="reverse"</code> is meant to simply run the backwards version of the transition that will run on that page change, while <code>data-rel="back"</code> makes the link functionally equivalent to the browser's back button and all the standard back button logic applies. Adding <code>data-direction="reverse"</code> to a link with <code>data-rel="back"</code> <b>will not</b> reverse the reversed page transition and produce the "normal" version of the transition. 
+		</p>
 		
 				
 		<h2>Redirects and linking to directories</h2>

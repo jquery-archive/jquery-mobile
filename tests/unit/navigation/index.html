@@ -7,23 +7,19 @@
 
 	<script src="../../../js/jquery.js"></script>
 	<script src="../jquery.setNameSpace.js"></script>
-	<script src="../../../js/"></script>
 	<script src="../../../tests/jquery.testHelper.js"></script>
+	<script type="text/javascript">
+		$.testHelper.setPushState();
+	</script>
 
-
-	<link rel="stylesheet"  href="../../../css/themes/default/"/>
+	<script src="../../../js/"></script>
+	<link rel="stylesheet"	href="../../../css/themes/default/jquery.mobile.css"/>
 	<link rel="stylesheet" href="../../../external/qunit.css"/>
 	<script src="../../../external/qunit.js"></script>
 
-	<script type="text/javascript">
-		$.testHelper.setPushStateFor([
-			"navigation_transitions.js",
-			"navigation_helpers.js",
-			"navigation_core.js",
-			"navigation_paths.js"
-		]);
-	</script>
-
+	<script type="text/javascript" src="navigation_helpers.js"></script>
+	<script type="text/javascript" src="navigation_core.js"></script>
+	<script type="text/javascript" src="navigation_paths.js"></script>
 	<script src="../swarminject.js"></script>
 </head>
 <body>

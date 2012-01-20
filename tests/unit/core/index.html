@@ -5,17 +5,25 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>jQuery Mobile Core Test Suite</title>
 
+	<script src="../../../external/requirejs/require.js"></script>
 	<script src="../../../js/jquery.js"></script>
 	<script src="../jquery.setNameSpace.js"></script>
-	<script src="../../../external/qunit.js"></script>
-	<script src="../../../js/"></script>
-	<!-- added explicitly for library reloading (see testHelper )  -->
 	<script src="../../jquery.testHelper.js"></script>
-	<link rel="stylesheet"  href="../../../css/themes/default/" />
+	<script src="../../../external/qunit.js"></script>
+	<script>
+		$.testHelper.asyncLoad([
+			[
+				"jquery.mobile.core"
+			],
+			[ "jquery.mobile.init" ],
+			[
+				"core.js",
+				"core_scroll.js"
+			]
+		]);
+	</script>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
 	<link rel="stylesheet" href="../../../external/qunit.css"/>
-
-	<script src="core.js"></script>
-	<script src="core_scroll.js"></script>
 
 	<script src="../swarminject.js"></script>
 </head>
@@ -34,7 +42,7 @@
   <div id="parent"></div>
   <div id="dependent"></div>
   <div id="encoded">foo&gt;</div>
-  <div id="unencoded"><script>foo</script></div>
+  <div id="unencoded"><script>var foo;</script></div>
 
   <div id="parent-page" data-nstest-role="page">
     <div id="page-child"></div>

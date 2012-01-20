@@ -1,7 +1,9 @@
-/*
-* "page" plugin
-*/
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Basic page formatting.
+//>>label: Pages
 
+define( [ "jquery", "jquery.mobile.widget" ], function( $ ) {
+//>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 $.widget( "mobile.page", $.mobile.widget, {
@@ -13,7 +15,10 @@ $.widget( "mobile.page", $.mobile.widget, {
 
 	_create: function() {
 
-		this._trigger( "beforecreate" );
+		// if false is returned by the callbacks do not create the page
+		if( this._trigger( "beforecreate" ) === false ){
+			return false;
+		}
 
 		this.element
 			.attr( "tabindex", "0" )
@@ -32,3 +37,6 @@ $.widget( "mobile.page", $.mobile.widget, {
 	}
 });
 })( jQuery );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");

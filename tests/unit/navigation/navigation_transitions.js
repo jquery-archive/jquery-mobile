@@ -2,9 +2,10 @@
  * mobile navigation unit tests
  */
 (function($){
-	var perspective = "viewport-flip",
+	var perspective,
 			transitioning = "ui-mobile-viewport-transitioning",
 			animationCompleteFn = $.fn.animationComplete,
+			defaultMaxTrans = $.mobile.maxTransitionWidth,
 
 			//TODO centralize class names?
 			transitionTypes = "in out fade slide flip reverse pop",
@@ -19,28 +20,31 @@
 				return page.hasClass("in") && isTransitioning(page);
 			},
 
+			disableMaxTransWidth = function(){
+				$.mobile.maxTransitionWidth = false;
+			},
+
+			enableMaxTransWidth = function(){
+				$.mobile.maxTransitionWidth = defaultMaxTrans;
+			},
+
 			//animationComplete callback queue
-			callbackQueue = [],
+			fromQueue = [],
+			toQueue = [],
 
-			finishPageTransition = function(){
-				callbackQueue.pop()();
+			resetQueues = function(){
+				fromQueue = [];
+				toQueue = [];
 			},
 
-			clearPageTransitionStack = function(){
-				stop();
-				var checkTransitionStack = function(){
-					if(callbackQueue.length>0) {
-						setTimeout(function(){
-							finishPageTransition();
-							checkTransitionStack();
-						},0);
-					}
-					else {
-						start();
-					}
-				};
-				checkTransitionStack();
+			onFromComplete = function( f ){
+				fromQueue.push( f );
 			},
+
+			onToComplete = function( f ){
+				toQueue.push( f );
+			},
+
 
 			//wipe all urls
 			clearUrlHistory = function(){
@@ -49,103 +53,191 @@
 			};
 
 
+	if( !$.support.cssTransform3d  ) {
+		perspective = "viewport-fade";
+  } else {
+    perspective = "viewport-flip";
+  }
+
 	module('jquery.mobile.navigation.js', {
 		setup: function(){
-			//stub to prevent class removal
-			$.fn.animationComplete = function(callback){
-				callbackQueue.unshift(callback);
+
+
+			// disable this option so we can test transitions regardless of window width
+			disableMaxTransWidth();
+
+			//stub to allow callback before function is returned to transition handler
+			$.fn.animationComplete = function( callback ){
+				animationCompleteFn.call( this, function(){
+					var queue = $(this).is(".out") ? fromQueue : toQueue;
+					for( var i = 0, il = queue.length; i < il; i++ ){
+						queue.pop()( this );
+					}
+					callback();
+				});
+
+				return this;
 			};
 
-			clearPageTransitionStack();
+			resetQueues();
 			clearUrlHistory();
+
+      if ( location.hash !== "#harmless-default-page" ) {
+				stop();
+
+				$(document).one("pagechange", function() {
+					start();
+				} );
+
+				location.hash = "#harmless-default-page";
+			}
 		},
 
 		teardown: function(){
 			// unmock animation complete
 			$.fn.animationComplete = animationCompleteFn;
+			enableMaxTransWidth();
 		}
 	});
 
-	test( "changePage applys perspective class to mobile viewport for flip", function(){
-		$("#foo > a").click();
+	/*
+	NOTES:
+	Our default transition handler now has either one or two animationComplete calls - two if there are two pages in play (from and to)
+	To is required, so each async function must call start() onToComplete, not onFromComplete.
+	*/
+	asyncTest( "changePage applies perspective class to mobile viewport for flip", function(){
+		expect(1);
 
-		ok($("body").hasClass(perspective), "has perspective class");
+		$.testHelper.pageSequence([
+			function() {
+				$.mobile.changePage("#foo");
+			},
+
+			function() {
+				onToComplete( function( el ) {
+					console.log( $("body").attr("class") );
+					ok($("body").hasClass(perspective), "has viewport-flip or viewport-fade based on 3d transform");
+					start();
+				});
+
+				$("#foo > a").first().click();
+			}
+		]);
 	});
 
-	test( "changePage does not apply perspective class to mobile viewport for transitions other than flip", function(){
-		$("#bar > a").click();
+	asyncTest( "changePage applies transition class to mobile viewport for default transition", function(){
+		expect(1);
+		$.testHelper.pageSequence([
+			function() {
+				$.mobile.changePage("#baz");
+			},
 
-		ok(!$("body").hasClass(perspective), "doesn't have perspective class");
+			function() {
+				onToComplete( function( el ){
+					ok($("body").hasClass(transitioning), "has transitioning class");
+					start();
+				});
+
+				$("#baz > a").click();
+			}
+		]);
 	});
 
-	test( "changePage applys transition class to mobile viewport for default transition", function(){
-		$("#baz > a").click();
+	asyncTest( "explicit transition preferred for page navigation reversal (ie back)", function(){
+		expect( 1 );
 
-		ok($("body").hasClass(transitioning), "has transitioning class");
-	});
-
-	test( "explicit transition preferred for page navigation reversal (ie back)", function(){
-		$("#fade-trans > a").click();
-		stop();
-		setTimeout(function(){
-			finishPageTransition();
+		onToComplete(function(){
 			$("#flip-trans > a").click();
-			setTimeout(function(){
-				finishPageTransition();
+			onToComplete(function(){
 				$("#fade-trans > a").click();
-				setTimeout(function(){
+				onToComplete(function(){
 					ok($("#flip-trans").hasClass("fade"), "has fade class");
 					start();
-				},0);
-			},0);
-		},0);
+				});
+			});
+		});
+
+		$("#fade-trans > a").click();
 	});
 
-	test( "default transition is slide", function(){
-		$("#default-trans > a").click();
-		stop();
-		setTimeout(function(){
-			ok($("#no-trans").hasClass("slide"), "has slide class");
+	asyncTest( "default transition is fade", function(){
+		onToComplete(function(){
+			ok($("#no-trans").hasClass("fade"), "has fade class");
 			start();
-		},0);
+		})
+
+		$("#default-trans > a").click();
 	});
 
-	test( "changePage queues requests", function(){
+	asyncTest( "changePage queues requests", function(){
+		expect(4)
 		var firstPage = $("#foo"),
 			secondPage = $("#bar");
 
 		$.mobile.changePage(firstPage);
 		$.mobile.changePage(secondPage);
 
-		stop();
-		setTimeout(function(){
+		onToComplete(function(){
 			ok(isTransitioningIn(firstPage), "first page begins transition");
 			ok(!isTransitioningIn(secondPage), "second page doesn't transition yet");
-
-			finishPageTransition();
-
-			setTimeout(function(){
+			onToComplete(function(){
 				ok(!isTransitioningIn(firstPage), "first page transition should be complete");
 				ok(isTransitioningIn(secondPage), "second page should begin transitioning");
 				start();
-			},0);
-		},0);
+
+			});
+		});
 	});
 
-	test( "default transition is pop for a dialog", function(){
+	asyncTest( "default transition is pop for a dialog", function(){
+		var defaultTransition = "pop";
+
+		if( !$.support.cssTransform3d ){
+			defaultTransition = "fade";
+		}
+
 		expect( 1 );
-		stop();
-		setTimeout(function(){
-			$("#default-trans-dialog > a").click();
-
-			ok($("#no-trans-dialog").hasClass("pop"), "expected the pop class to be present but instead was " + $("#no-trans-dialog").attr('class'));
-
+		onToComplete(function(){
+			ok( $("#no-trans-dialog").hasClass(defaultTransition), "has pop class" );
 			start();
-		}, 900);
+		});
+
+		$("#default-trans-dialog > a").click();
 	});
 
 	test( "animationComplete return value", function(){
 		$.fn.animationComplete = animationCompleteFn;
 		equals($("#foo").animationComplete(function(){})[0], $("#foo")[0]);
+	});
+
+
+	// reusable function for a few tests below
+	function testTransitionMaxWidth( val, expected ){
+		expect( 1 );
+
+		$.mobile.maxTransitionWidth = val;
+
+		var transitionOccurred = false;
+
+		onToComplete(function(){
+			transitionOccurred = true;
+		});
+
+
+		return setTimeout(function(){
+			ok( transitionOccurred === expected, (expected ? "" : "no ") + "transition occurred" );
+			start();
+		}, 5000);
+
+		$.mobile.changePage( $(".ui-page:not(.ui-page-active)").first() );
+
+	}
+
+	asyncTest( "maxTransitionWidth property disables transitions when value is less than browser width", function(){
+		testTransitionMaxWidth( $( window ).width() - 1, false );
+	});
+
+	asyncTest( "maxTransitionWidth property disables transitions when value is false", function(){
+		testTransitionMaxWidth( false, false );
 	});
 })(jQuery);

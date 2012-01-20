@@ -4,11 +4,11 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>jQuery Mobile: Event Logger</title>
-	<link rel="stylesheet"  href="../../css/themes/default/" />
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
 	<link rel="stylesheet" href="../../docs/_assets/css/jqm-docs.css" />
 	<script src="../../js/jquery.js"></script>
-	<script src="../../js/"></script>
-	
+	<script data-main="../../js/jquery.mobile" src="../../external/requirejs/require.js"></script>
+
 	<script>
 	$(function(){
 	$( "a" ).bind("tap click",function( e ){
@@ -18,28 +18,28 @@
 			return false;
 		})
 		.bind("tap click", false);
-	});	
+	});
 	</script>
-	
+
 	<style>
 		#jqm-home {
 			height: 500px;
 		}
 	</style>
-</head> 
-<body> 
+</head>
+<body>
 <div  data-role="page"  data-theme="b" id="jqm-home">
 	<div  data-role="header">
 		<h1>Event Logger</h1>
 	</div>
-	
+
 	<div  data-role="content">
 		<p>Touch events on this page will log out below, prepending to the top as they arrive.</p>
-		
+
 		<a href="foo.html"  data-role="button">Click me</a>
-		
+
 		<ul  data-role="listview" id="log">
-			
+
 		</ul>
 
 	</div>

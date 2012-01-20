@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html class="ui-mobile-rendering">
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>jQuery Mobile Docs - Select</title>
-	<link rel="stylesheet"  href="../../../css/themes/default/" />
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
 	<link rel="stylesheet" href="../../_assets/css/jqm-docs.css"/>
-	<script src="../../../js/jquery.js"></script>
 	<script src="../../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
-	<script src="../../_assets/js/jqm-docs.js"></script>
-	<script src="../../../js/"></script>
+	<script data-main="../../../js/jquery.mobile.docs" src="../../../external/requirejs/require.js"></script>
+	<script src="../../../js/jquery.js"></script>
 </head>
 <body>
 
@@ -335,7 +334,7 @@ $('select').selectmenu();
 		</select>
 	</div>
     
-	<p>The <code>data-overlay-theme</code> attribute can be added a select element to set the color of the overlay layer that the dialog-based custom select menus and the outer border of the smaller custom menus. By default, the content block colors for swatch A will be used for the overlays.</p>
+	<p>The <code>data-overlay-theme</code> attribute can be added to a select element to set the color of the overlay layer for the dialog-based custom select menus and the outer border of the smaller custom menus. By default, the content block colors for swatch A will be used for the overlays.</p>
       
 	<div data-role="fieldcontain">
 		<label for="select-choice-15" class="select">Size</label>

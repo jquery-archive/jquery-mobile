@@ -1,7 +1,11 @@
-/* 
-* "events" plugin - Handles events
-*/
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Custom events and shortcuts.
+//>>label: Events
+//>>group: core
+//>>required: true
 
+define( [ "jquery", "jquery.mobile.core", "jquery.mobile.media", "jquery.mobile.support", "jquery.mobile.vmouse" ], function( $ ) {
+//>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
 // add new event shortcuts
@@ -182,7 +186,37 @@ $.event.special.swipe = {
 	var win = $( window ),
 		special_event,
 		get_orientation,
-		last_orientation;
+		last_orientation,
+		initial_orientation_is_landscape,
+		initial_orientation_is_default,
+		portrait_map = { "0": true, "180": true };
+
+	// It seems that some device/browser vendors use window.orientation values 0 and 180 to
+	// denote the "default" orientation. For iOS devices, and most other smart-phones tested,
+	// the default orientation is always "portrait", but in some Android and RIM based tablets,
+	// the default orientation is "landscape". The following code injects a landscape orientation
+	// media query into the document to figure out what the current orientation is, and then
+	// makes adjustments to the portrait_map if necessary, so that we can properly
+	// decode the window.orientation value whenever get_orientation() is called.
+	if ( $.support.orientation ) {
+
+		// Use a media query to figure out the true orientation of the device at this moment.
+		// Note that we've initialized the portrait map values to 0 and 180, *AND* we purposely
+		// use a landscape media query so that if the device/browser does not support this particular
+		// media query, we default to the assumption that portrait is the default orientation.
+		initial_orientation_is_landscape = $.mobile.media("all and (orientation: landscape)");
+
+		// Now check to see if the current window.orientation is 0 or 180.
+		initial_orientation_is_default = portrait_map[ window.orientation ];
+
+		// If the initial orientation is landscape, but window.orientation reports 0 or 180, *OR*
+		// if the initial orientation is portrait, but window.orientation reports 90 or -90, we
+		// need to flip our portrait_map values because landscape is the default orientation for
+		// this device/browser.
+		if ( ( initial_orientation_is_landscape && initial_orientation_is_default ) || ( !initial_orientation_is_landscape && !initial_orientation_is_default ) ) {
+			portrait_map = { "-90": true, "90": true };
+		}
+	}
 
 	$.event.special.orientationchange = special_event = {
 		setup: function() {
@@ -251,7 +285,7 @@ $.event.special.swipe = {
 		if ( $.support.orientation ) {
 			// if the window orientation registers as 0 or 180 degrees report
 			// portrait, otherwise landscape
-			isPortrait = window.orientation % 180 == 0;
+			isPortrait = portrait_map[ window.orientation ];
 		} else {
 			isPortrait = elem && elem.clientWidth / elem.clientHeight < 1.1;
 		}
@@ -316,3 +350,6 @@ $.each({
 });
 
 })( jQuery, this );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");

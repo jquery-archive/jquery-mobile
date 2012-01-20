@@ -1,7 +1,9 @@
-/*
-* "textinput" plugin for text inputs, textareas
-*/
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Enhances and consistently styles text inputs.
+//>>label: Text Inputs
 
+define( [ "jquery", "jquery.mobile.core", "jquery.mobile.widget", "jquery.mobile.degradeInputs", "jquery.mobile.buttonMarkup"  ], function( $ ) {
+//>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 $.widget( "mobile.textinput", $.mobile.widget, {
@@ -71,10 +73,10 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		}
 
 		input.focus(function() {
-				focusedEl.addClass( "ui-focus" );
+				focusedEl.addClass( $.mobile.focusClass );
 			})
 			.blur(function(){
-				focusedEl.removeClass( "ui-focus" );
+				focusedEl.removeClass( $.mobile.focusClass );
 			});
 
 		// Autogrow
@@ -126,3 +128,6 @@ $( document ).bind( "pagecreate create", function( e ){
 });
 
 })( jQuery );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");

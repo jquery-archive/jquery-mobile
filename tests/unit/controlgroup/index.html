@@ -5,16 +5,26 @@
 	<meta charset="UTF-8" />
 	<title>jQuery Mobile Checkboxradio Test Suite</title>
 
+	<script src="../../../external/requirejs/require.js"></script>
 	<script src="../../../js/jquery.js"></script>
 	<script src="../jquery.setNameSpace.js"></script>
-	<script src="../../../js/"></script>
 	<script src="../../../tests/jquery.testHelper.js"></script>
-
-	<link rel="stylesheet"  href="../../../css/themes/default/"/>
-	<link rel="stylesheet" href="../../../external/qunit.css"/>
 	<script src="../../../external/qunit.js"></script>
+	<script>
+		$.testHelper.asyncLoad([
+			[
+				"order!jquery.mobile.forms.checkboxradio",
+				"order!jquery.mobile.controlGroup"
+			],
+			[ "jquery.mobile.init" ],
+			[
+				"controlgroup_core.js"
+			]
+		]);
+	</script>
 
-	<script src="controlgroup_core.js"></script>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit.css"/>
 
 	<script src="../swarminject.js"></script>
 </head>

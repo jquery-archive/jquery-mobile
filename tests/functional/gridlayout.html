@@ -3,11 +3,11 @@
 <head>
 	<meta charset="utf-8" />
 	<title>jQuery Mobile: Grid Layout</title>
-	<link rel="stylesheet"  href="../../css/themes/default/" />
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
 	<link rel="stylesheet" href="../../docs/_assets/css/jqm-docs.css" />
 	<script src="../../js/jquery.js"></script>
-	<script src="../../js/"></script>
-	
+	<script data-main="../../js/jquery.mobile" src="../../external/requirejs/require.js"></script>
+
 	<script>
 	$(function(){
 		$(".ui-grid-d a").bind("tap click", function(e){
@@ -23,18 +23,18 @@
 				.prepend("<li>"+ e.type +" event; target: "+ e.target.nodeName +"; message: show all buttons</li>")
 				.listview("refresh");
 		}).bind("tap click", false);
-	});	
+	});
 	</script>
-</head> 
-<body> 
+</head>
+<body>
 <div data-role="page" data-theme="b" id="jqm-home">
 	<div data-role="header">
 		<h1>Grid Layout</h1>
 	</div>
-	
+
 	<div data-role="content">
 		<p>Touch events on this page will log out below, prepending to the top as they arrive.</p>
-		
+
 		<div class="ui-grid-d">
 			<div class="ui-block-a">
 				<a data-role="button" id="btn1" data-theme="b">Button 1</a>
@@ -52,11 +52,11 @@
 				<a data-role="button" id="btn5" data-theme="b">Button 5</a>
 			</div>
 		</div>
-		
+
 		<a data-role="button" id="showbtn">Show all button</a>
-		
+
 		<ul data-role="listview" id="log">
-			
+
 		</ul>
 
 	</div>

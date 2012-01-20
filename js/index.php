@@ -2,6 +2,10 @@
 $type = 'text/javascript';
 $files = array(
 	'../LICENSE-INFO.txt',
+	// note that define is only included here as a means
+	// to revert to the pre async include, and should not be
+	// used in other build methods
+	'jquery.mobile.define.js',
 	'jquery.ui.widget.js',
 	'jquery.mobile.widget.js',
 	'jquery.mobile.media.js',
@@ -14,6 +18,13 @@ $files = array(
 	'jquery.mobile.navigation.js',
 	'jquery.mobile.navigation.pushstate.js',
 	'jquery.mobile.transition.js',
+	'jquery.mobile.transition.pop.js',
+	'jquery.mobile.transition.slide.js',
+	'jquery.mobile.transition.slidedown.js',
+	'jquery.mobile.transition.slideup.js',
+	'jquery.mobile.transition.flip.js',
+	'jquery.mobile.transition.flow.js',
+	'jquery.mobile.transition.turn.js',
 	'jquery.mobile.degradeInputs.js',
 	'jquery.mobile.dialog.js',
 	'jquery.mobile.page.sections.js',
@@ -34,8 +45,7 @@ $files = array(
 	'jquery.mobile.buttonMarkup.js',
 	'jquery.mobile.controlGroup.js',
 	'jquery.mobile.links.js',
-	'jquery.mobile.fixHeaderFooter.js',
-	'jquery.mobile.fixHeaderFooter.native.js',
+	'jquery.mobile.fixedToolbar.js',
 	'jquery.mobile.init.js'
 );
 

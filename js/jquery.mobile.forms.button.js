@@ -1,7 +1,9 @@
-/*
-* "button" plugin - links that proxy to native input/buttons
-*/
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Form Buttons
+//>>label: links that proxy to native input/buttons
 
+define( [ "jquery", "jquery.mobile.widget", "jquery.mobile.buttonMarkup"  ], function( $ ) {
+//>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 $.widget( "mobile.button", $.mobile.widget, {
@@ -17,10 +19,17 @@ $.widget( "mobile.button", $.mobile.widget, {
 	},
 	_create: function() {
 		var $el = this.element,
+			$button,
 			o = this.options,
 			type,
 			name,
 			$buttonPlaceholder;
+
+		// if this is a link, check if it's been enhanced and, if not, use the right function
+		if( $el[ 0 ].tagName === "A" ) {
+	 	 	if ( !$el.hasClass( "ui-btn" ) ) $el.buttonMarkup();
+	 	 	return;
+ 	 	}
 
 		// Add ARIA role
 		this.button = $( "<div></div>" )
@@ -37,6 +46,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 			})
 			.append( $el.addClass( "ui-btn-hidden" ) );
 
+        $button = this.button;
 		type = $el.attr( "type" );
 		name = $el.attr( "name" );
 
@@ -62,6 +72,16 @@ $.widget( "mobile.button", $.mobile.widget, {
 					}
 				});
 		}
+
+        $el.bind({
+            focus: function() {
+                $button.addClass( $.mobile.focusClass );
+            },
+
+            blur: function() {
+                $button.removeClass( $.mobile.focusClass );
+            }
+        });
 
 		this.refresh();
 	},
@@ -99,3 +119,6 @@ $( document ).bind( "pagecreate create", function( e ){
 });
 
 })( jQuery );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");

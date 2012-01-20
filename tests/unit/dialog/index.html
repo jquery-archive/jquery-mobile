@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>jQuery Mobile Dialog Test Suite</title>
-
+	<script src="../../../external/requirejs/require.js"></script>
 	<script src="../../../js/jquery.js"></script>
 	<script>
 		$(document).bind('mobileinit',function(){
@@ -13,15 +13,25 @@
 		});
 	</script>
 	<script src="../jquery.setNameSpace.js"></script>
-	<script src="../../../js/"></script>
-	<script src="../../../tests/jquery.testHelper.js"></script>
-
-
-	<link rel="stylesheet"  href="../../../css/themes/default/"/>
-	<link rel="stylesheet" href="../../../external/qunit.css"/>
+	<script src="../../jquery.testHelper.js"></script>
 	<script src="../../../external/qunit.js"></script>
+	<script>
+		$.testHelper.asyncLoad([
+			[
+				"jquery.mobile.dialog",
+				"jquery.mobile.page",
+				"jquery.mobile.page.sections"
+			],
+			[ "jquery.mobile.init" ],
+			[
+				"dialog_events.js"
+			]
+		]);
+	</script>
 
-	<script src="dialog_events.js"></script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit.css"/>
 
 	<script src="../swarminject.js"></script>
 </head>

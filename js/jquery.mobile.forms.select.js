@@ -1,7 +1,9 @@
-/*
-* "selectmenu" plugin
-*/
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Consistent styling for native select menus.
+//>>label: Enhanced Native Selects
 
+define( [ "jquery", "jquery.mobile.core", "jquery.mobile.widget", "jquery.mobile.buttonMarkup" ], function( $ ) {
+//>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 $.widget( "mobile.selectmenu", $.mobile.widget, {
@@ -126,6 +128,12 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				// Add active class to button
 				self.button.addClass( $.mobile.activeBtnClass );
 			})
+            .bind( "focus", function() {
+                self.button.addClass( $.mobile.focusClass );
+            })
+            .bind( "blur", function() {
+                self.button.removeClass( $.mobile.focusClass );
+            })
 			.bind( "focus vmouseover", function() {
 				self.button.trigger( "vmouseover" );
 			})
@@ -203,3 +211,6 @@ $( document ).bind( "pagecreate create", function( e ){
 	$.mobile.selectmenu.prototype.enhanceWithin( e.target );
 });
 })( jQuery );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");

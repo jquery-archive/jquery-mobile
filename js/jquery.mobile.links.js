@@ -1,7 +1,9 @@
-/*
-* "links" plugin - simple class additions for links
-*/
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Simple class additions for links.
+//>>label: Link Classes
 
+define( [ "jquery" ], function( $ ) {
+//>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 $( document ).bind( "pagecreate create", function( e ){
@@ -15,3 +17,7 @@ $( document ).bind( "pagecreate create", function( e ){
 });
 
 })( jQuery );
+
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");

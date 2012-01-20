@@ -3,7 +3,7 @@
  */
 
 (function($){
-	var libName = "jquery.mobile.forms.select.js",
+	var libName = "jquery.mobile.forms.select",
 		originalDefaultDialogTrans = $.mobile.defaultDialogTransition,
 		originalDefTransitionHandler = $.mobile.defaultTransitionHandler,
 		originalGetEncodedText = $.fn.getEncodedText,
@@ -333,8 +333,6 @@
 
 		same(window.encodedValueIsDefined, true);
 	});
-
-	$.mobile.page.prototype.options.keepNative = "select.should-be-native";
 
 	// not testing the positive case here since's it's obviously tested elsewhere
 	test( "select elements in the keepNative set shouldn't be enhanced", function() {

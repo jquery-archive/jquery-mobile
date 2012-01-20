@@ -12,7 +12,7 @@ Clone this repo and build the js and css files (you'll need Git and Make install
     cd jquery-mobile
     make
 
-A full version and a minified version of the jQuery Mobile JavaScript and CSS files will be created 
+A full version and a minified version of the jQuery Mobile JavaScript and CSS files will be created
 in a folder named "compiled". There is also now a Structure only css file so you can add your own theme on top of it.
 
 How to build a self-contained version of the Docs/Demos
@@ -21,13 +21,13 @@ Once you have your own cloned repo on your computer:
 
     make docs
 
-The docs will be built and available in the compiled/demos folder. You can move this folder to your web server or 
+The docs will be built and available in the compiled/demos folder. You can move this folder to your web server or
 other location. It has no dependencies on anything other than a basic HTML web server.
 
 
 Submitting bugs
 ===============
-If you think you've found a bug, please report it by following these instructions:  
+If you think you've found a bug, please report it by following these instructions:
 
 1. Visit the [Issue tracker: https://github.com/jquery/jquery-mobile/issues](https://github.com/jquery/jquery-mobile/issues)
 2. Create an issue explaining the problem and expected result
@@ -45,27 +45,27 @@ If you think you've found a bug, please report it by following these instruction
         * [jsfiddle](http://jsfiddle.net)
 3. Submit the issue.
 
-Recommended: [JS Bin issue template with instructions](http://jsbin.com/obowiw/edit) 
+Recommended: [JS Bin issue template with instructions](http://jsbin.com/obowiw/edit)
 
 Submitting patches
 ==================
-To contribute code and bug fixes to jQuery Mobile: fork this project on Github, make changes to the code in your fork, 
+To contribute code and bug fixes to jQuery Mobile: fork this project on Github, make changes to the code in your fork,
 and then send a "pull request" to notify the team of updates that are ready to be reviewed for inclusion.
 
 Detailed instructions can be found at [jQuery Mobile Patching](https://gist.github.com/1294035)
 
 Running the jQuery Mobile demos & docs locally
 ==============================================
-To preview locally, you'll need to clone a local copy of this repository and point your Apache & PHP webserver at its 
+To preview locally, you'll need to clone a local copy of this repository and point your Apache & PHP webserver at its
 root directory (a webserver is required, as PHP and .htaccess are used for combining development files).
 
-If you don't currently have a webserver running locally, there are a few options. 
+If you don't currently have a webserver running locally, there are a few options.
 
-If you're on a Mac, you can try dropping jQuery Mobile into your sites folder and turning on Web Sharing via System 
+If you're on a Mac, you can try dropping jQuery Mobile into your sites folder and turning on Web Sharing via System
 Prefs. From there, you'll find a URL where you can browse folders in your sites directory from a browser.
 
-Another quick way to get up and running is to download and install MAMP for Mac OSX. Once installed, just open MAMP, 
-click preferences, go to the Apache tab, and select your local jQuery Mobile folder as the root. Then you can open a 
+Another quick way to get up and running is to download and install MAMP for Mac OSX. Once installed, just open MAMP,
+click preferences, go to the Apache tab, and select your local jQuery Mobile folder as the root. Then you can open a
 browser to http://localhost:8888 to preview the code.
 
 Another alternative is XAMPP (Mac, Windows). You need to actually modify Apache's httpd.conf to point to your checkout:
@@ -76,6 +76,19 @@ You need the following Apache modules loaded:
 * Rewrite (mod\_rewrite.so)
 * Expire (mod\_expires.so)
 * Header (mod\_headers.so)
+
+Alternatively, with the addition of async loading, you can use the python simple http server from the project root:
+
+    $ python -m SimpleHTTPServer 8000
+
+And in your browser visit [localhost:8000](http://localhost:8000).
+
+AMD Support in Development
+==========================
+
+Please bear in mind that async loading is not supported for production and is primarily used for the project's build process. As a result developers should expect an initial flash of unstyled content, which will not occur when the library is compiled.
+
+If you find dependency bugs when using the async loading support for development please log them in the github issue tracker.
 
 Building With A Custom Theme
 ============================
@@ -90,5 +103,5 @@ theme's name. For testing locally, make sure the index.php file is copied as wel
 5. Run the following command to build jQuery-Mobile (THEME is the name of the folder for your theme from step 1.):
 
     make THEME=YourThemeName
-    
+
 6. The compiled files will be located in the "compiled" folder in the root of jQuery-Mobile.

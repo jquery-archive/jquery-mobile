@@ -8,6 +8,7 @@
 		originalLinkBinding = $.mobile.linkBindingEnabled,
 		siteDirectory = location.pathname.replace( /[^/]+$/, "" ),
 		home = $.mobile.path.parseUrl(location.pathname).directory,
+		homeWithSearch = home + location.search,
 		navigateTestRoot = function(){
 			$.testHelper.openPage( "#" + location.pathname + location.search );
 		};
@@ -36,8 +37,9 @@
 
 			// force the page reset for all pushstate tests
 			if ( $.support.pushState ) {
-				pageReset( home );
+				pageReset( homeWithSearch );
 			}
+
 
 			$.mobile.urlHistory.stack = [];
 			$.mobile.urlHistory.activeIndex = 0;
@@ -426,7 +428,7 @@
 			function(){
 				$.testHelper.assertUrlLocation({
 					hash: "skip-dialog-first",
-					push: home + "#skip-dialog-first",
+					push: homeWithSearch + "#skip-dialog-first",
 					report: "should be the first page in the sequence"
 				});
 
@@ -455,7 +457,7 @@
 			function(){
 				$.testHelper.assertUrlLocation({
 					hash: "skip-dialog-second",
-					push: home + "#skip-dialog-second",
+					push: homeWithSearch + "#skip-dialog-second",
 					report: "should be the second page after the dialog"
 				});
 
@@ -753,7 +755,7 @@
 			function(){
 				$.testHelper.assertUrlLocation({
 					hash: "foo&ui-state=dialog",
-					push: home + "#foo&ui-state=dialog",
+					push: homeWithSearch + "#foo&ui-state=dialog",
 					report: "hash should match what was loaded"
 				});
 
@@ -1062,7 +1064,7 @@
 			},
 
 			function() {
-				ok( $.mobile.activePage.is(".ui-dialog"), "prefetched page is rendered as a dialog" );
+				ok( $.mobile.activePage.is(".ui-dialog-page"), "prefetched page is rendered as a dialog" );
         start();
 			}
 		]);

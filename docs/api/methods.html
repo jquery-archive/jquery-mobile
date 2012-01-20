@@ -1,15 +1,14 @@
 <!DOCTYPE html> 
-<html> 
+<html class="ui-mobile-rendering"> 
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<title>jQuery Mobile Docs - Methods</title> 
-	<link rel="stylesheet"  href="../../css/themes/default/" /> 
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" /> 
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+
+	<script data-main="../../js/jquery.mobile.docs" src="../../external/requirejs/require.js"></script>
 	<script src="../../js/jquery.js"></script>
-	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
-	<script src="../_assets/js/jqm-docs.js"></script>
-	<script src="../../js/"></script>
 </head> 
 <body> 
 
@@ -52,7 +51,7 @@
 											<li>Used only when the 'to' argument of changePage() is a URL.</li>
 										</ul>
 								  </li>
-									<li><code>data-url</code> (string,	default: undefined) The URL to use when updating the browser location upon changePage completion.
+									<li><code>dataUrl</code> (string,	default: undefined) The URL to use when updating the browser location upon changePage completion.
 								  If not specified, the value of the data-url attribute of the page element is used.</li>
 									<li><code>pageContainer</code> (jQuery collection,	default:	$.mobile.pageContainer) Specifies the element that should contain the page. </li>
 									<li><code>reloadPage</code> (<em>boolean</em>, default: false) Forces a reload of a page, even if it is already in the DOM of the page container.
@@ -467,7 +466,7 @@ var isRel = $.mobile.path.isRelativeUrl("#foo");
 					<dd><code>url</code> (<em>string</em>, required) A relative or absolute URL.</dd>	
 						
 					<dt><code>&#183;</code> Return Value</dt>
-					<dd>This function returns a boolean true if the URL is absolute, false if it is absolute.</dd>	
+					<dd>This function returns a boolean true if the URL is absolute, false if not.</dd>	
 						
 				</dl>
 			</dd>

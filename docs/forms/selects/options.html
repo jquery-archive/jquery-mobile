@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html class="ui-mobile-rendering">
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>jQuery Mobile Docs - Select options</title>
-	<link rel="stylesheet"  href="../../../css/themes/default/" />
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
 	<link rel="stylesheet" href="../../_assets/css/jqm-docs.css"/>
-	<script src="../../../js/jquery.js"></script>
 	<script src="../../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
-	<script src="../../_assets/js/jqm-docs.js"></script>
-	<script src="../../../js/"></script>
+	<script data-main="../../../js/jquery.mobile.docs" src="../../../external/requirejs/require.js"></script>
+	<script src="../../../js/jquery.js"></script>
 </head>
 <body>
 
@@ -88,6 +87,13 @@
 				<p class="default">default: true</p>
 				<p>When set to true, clicking the custom-styled select menu will open the native select menu which is best for performance. If set to false, the custom select menu style will be used instead of the native menu. This option is also exposed as a data attribute: <code>data-native-menu=&quot;false&quot;</code></p>
 				<pre><code>$('select').selectmenu(<strong>{ nativeMenu: "false" }</strong>);</code></pre>
+			</dd>
+			
+			<dt><code>overlayTheme</code> <em>string</em></dt>
+			<dd>
+				<p class="default">default: a</p>
+				<p>Sets the color of the overlay layer for the dialog-based custom select menus and the outer border of the smaller custom menus. It accepts a single letter from a-z that maps to the swatches included in your theme. By default, the content block colors for swatch A will be used for the overlays. This option is also exposed as a data attribute: <code>ui-body-d</code></p>
+				<pre><code>$('select').selectmenu(<strong>{ overlayTheme: "d" }</strong>);</code></pre>
 			</dd>
 			
 			<dt><code>shadow</code> <em>boolean</em></dt>

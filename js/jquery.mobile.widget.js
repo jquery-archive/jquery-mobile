@@ -1,7 +1,9 @@
-/*
-* widget factory extentions for mobile
-*/
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Widget factory extentions for mobile.
+//>>label: Widget Factory Extensions
 
+define( [ "jquery", "jquery.ui.widget" ], function( $ ) {
+//>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 $.widget( "mobile.widget", {
@@ -47,3 +49,6 @@ $.widget( "mobile.widget", {
 });
 
 })( jQuery );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");

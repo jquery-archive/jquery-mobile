@@ -6,6 +6,7 @@
 			libName = 'jquery.mobile.init.js',
 			coreLib = 'jquery.mobile.core.js',
 			extendFn = $.extend,
+			originalLoadingMessage = $.mobile.loadingMessage;
 			setGradeA = function(value) { $.mobile.gradeA = function(){ return value; }; },
 			reloadCoreNSandInit = function(){
 				$.testHelper.reloadLib(coreLib);
@@ -30,6 +31,8 @@
 
 			// clear the classes added by reloading the init
 			$("html").attr('class', '');
+
+			$.mobile.loadingMessage = originalLoadingMessage;
 		}
 	});
 
@@ -201,7 +204,7 @@
 				start();
 			}, 500);
 		});
-		
+
 		asyncTest( "page loading should contain custom loading message when set during runtime", function(){
 			$.mobile.loadingMessage = "bar";
 			$.mobile.showPageLoadingMsg();
@@ -212,57 +215,57 @@
 			}, 500);
 		});
 
-		
+
 
 		// NOTE: the next two tests work on timeouts that assume a page will be created within 2 seconds
 		// it'd be great to get these using a more reliable callback or event
-		
+
 		asyncTest( "page does auto-initialize at domready when autoinitialize option is true (default) ", function(){
-			
+
 			$( "<div />", { "data-nstest-role": "page", "id": "autoinit-on" } ).prependTo( "body" )
-			
+
 			$(document).one("mobileinit", function(){
 				$.mobile.autoInitializePage = true;
 			});
-			
+
 			location.hash = "";
-			
+
 			reloadCoreNSandInit();
-			
+
 			setTimeout(function(){
 				same( $( "#autoinit-on.ui-page" ).length, 1 );
-				
+
 				start();
 			}, 2000);
 		});
-		
-		
+
+
 		asyncTest( "page does not initialize at domready when autoinitialize option is false ", function(){
 			$(document).one("mobileinit", function(){
 				$.mobile.autoInitializePage = false;
 			});
-			
+
 			$( "<div />", { "data-nstest-role": "page", "id": "autoinit-off" } ).prependTo( "body" )
-			
+
 			location.hash = "";
-			
-			
+
+
 			reloadCoreNSandInit();
-			
+
 			setTimeout(function(){
 				same( $( "#autoinit-off.ui-page" ).length, 0 );
-				
+
 				$(document).bind("mobileinit", function(){
 					$.mobile.autoInitializePage = true;
 				});
 
 				reloadCoreNSandInit();
-				
+
 				start();
 			}, 2000);
 		});
-		
-		
-		
+
+
+
 	});
 })(jQuery);
