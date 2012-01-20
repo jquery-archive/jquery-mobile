@@ -154,6 +154,15 @@ define( [ "jquery", "jquery.mobile.core", "jquery.mobile.navigation", "jquery.mo
 		// so if it's 1, use 0 from now on
 		$.mobile.defaultHomeScroll = ( !$.support.scrollTop || $(window).scrollTop() === 1 ) ? 0 : 1;
 
+
+		// TODO: Implement a proper registration mechanism with dependency handling in order to not have exceptions like the one below
+		//auto self-init widgets for those widgets that have a soft dependency on others
+		if ( $.fn.controlgroup ) {
+			$( document ).bind( "pagecreate create", function( e ){
+				$( ":jqmData(role='controlgroup')", e.target ).controlgroup({ excludeInvisible: false });
+			});
+		}
+
 		//dom-ready inits
 		if( $.mobile.autoInitializePage ){
 			$.mobile.initializePage();
