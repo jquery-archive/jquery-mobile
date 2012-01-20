@@ -69,7 +69,7 @@ $(function() {
 					QUnit.asyncTest( dir, function() {
 						self.dir = dir;
 						self.$frameElem.one( "load", self.onFrameLoad );
-						self.$frameElem.attr( "src", template.replace("{{testdir}}", dir) );
+						self.$frameElem.attr( "src", template.replace("{{testdir}}", dir).replace( "{{jquery.version}}", $.fn.jquery ) );
 					});
 				});
 
