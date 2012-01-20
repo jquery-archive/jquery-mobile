@@ -1332,7 +1332,7 @@ define( [
 		//prefetch pages when anchors with data-prefetch are encountered
 		$( document ).delegate( ".ui-page", "pageshow.prefetch", function() {
 			var urls = [];
-			$( this ).find( "a:jqmData(prefetch)" ).each(function(){
+			$( this ).find( "a:jqmData(prefetch), link:jqmData(prefetch)" ).each(function(){
 				var $link = $(this),
 					url = $link.attr( "href" );
 
