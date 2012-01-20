@@ -1140,7 +1140,7 @@ define( [
 		var url = $( ele ).closest( ".ui-page" ).jqmData( "url" ),
 			base = documentBase.hrefNoHash;
 
-		if ( !url || !path.isPath( url ) || $base.length ) {
+		if ( !url || !path.isPath( url ) || || $.support.dynamicBaseTag ) {
 			url = base;
 		}
 
