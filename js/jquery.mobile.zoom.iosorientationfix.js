@@ -6,22 +6,17 @@ define( [ "jquery", "jquery.mobile.core", "jquery.mobile.zoom" ], function( $ ) 
 //>>excludeEnd("jqmBuildExclude");
 ( function( $, window ) {
     var zoom = $.mobile.zoom,
-        rotation = 0,
-		x = y = z = 0,
-		orientation, aig;
+		x, y, z, aig;
 	
     function checkTilt( e ){
 		evt = e.originalEvent;
-        orientation = window.orientation;
 		aig = evt.accelerationIncludingGravity;
-		
-		if( aig ){
-        	x = Math.abs( aig.x );
-			y = Math.abs( aig.y );
-			z = Math.abs( aig.z );
-		}
 
-        if( orientation === 0 && ( e.type === "deviceorientation" || x > 7 || ( z > 4 && ( x > 6 || y > 6 ) ) ) ){
+    	x = Math.abs( aig.x );
+		y = Math.abs( aig.y );
+		z = Math.abs( aig.z );
+
+        if( !window.orientation &&  ( x > 8.1 || ( ( z > 6.5 || y > 6.5 ) && x > 5.5 ) ) ){
 			if( zoom.enabled ){
 				zoom.disable();
 			}        	
@@ -33,7 +28,7 @@ define( [ "jquery", "jquery.mobile.core", "jquery.mobile.zoom" ], function( $ ) 
 
     $( window )
 		.bind( "orientationchange", zoom.enable )
-		.bind( "deviceorientation devicemotion", checkTilt );
+		.bind( "devicemotion", checkTilt );
 
 }( jQuery, this ));
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
