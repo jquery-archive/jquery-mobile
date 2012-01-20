@@ -761,7 +761,7 @@ define( [
 					}
 
 					if ( base ) {
-						base.set( fileUrl );
+						//base.set( fileUrl );
 					}
 
 					//workaround to allow scripts to execute when included in page divs
