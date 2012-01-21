@@ -1,24 +1,3 @@
-# The files to include when compiling the CSS files
-CSSFILES = css/structure/jquery.mobile.core.css \
-	css/structure/jquery.mobile.transitions.css \
-	css/structure/jquery.mobile.grids.css \
-	css/structure/jquery.mobile.fixedToolbar.css \
-	css/structure/jquery.mobile.navbar.css \
-	css/structure/jquery.mobile.button.css \
-	css/structure/jquery.mobile.collapsible.css \
-	css/structure/jquery.mobile.controlgroup.css \
-	css/structure/jquery.mobile.dialog.css \
-	css/structure/jquery.mobile.forms.checkboxradio.css \
-	css/structure/jquery.mobile.forms.fieldcontain.css \
-	css/structure/jquery.mobile.forms.select.css \
-	css/structure/jquery.mobile.forms.textinput.css \
-	css/structure/jquery.mobile.listview.css \
-	css/structure/jquery.mobile.forms.slider.css
-CSSTHEMEFILES = css/themes/${THEME}/jquery.mobile.theme.css
-
-
-
-
 # Helper Variables
 # The command to replace the @VERSION in the files with the actual version
 VER = sed "s/v@VERSION/$$(git log -1 --format=format:"Git Build: SHA1: %H <> Date: %cd")/"
@@ -65,13 +44,18 @@ css: init
 		--type css ${OUTPUT}/${NAME}.compiled.css >> ${OUTPUT}/${NAME}.min.css
 	@@rm ${OUTPUT}/${NAME}.compiled.css
 	# Build the CSS Structure-only file
+	${RUN_JS} \
+		external/r.js/dist/r.js \
+		-o cssIn=css/structure/${STRUCTURE}.css \
+		out=${OUTPUT}/${STRUCTURE}.compiled.css
 	@@cat LICENSE-INFO.txt | ${VER} > ${OUTPUT}/${STRUCTURE}.css
-	@@cat ${CSSFILES} >> ${OUTPUT}/${STRUCTURE}.css
+	@@cat ${OUTPUT}/${STRUCTURE}.compiled.css >> ${OUTPUT}/${STRUCTURE}.css
 	# ..... and then minify it
 	@@echo ${VER_MIN} > ${OUTPUT}/${STRUCTURE}.min.css
 	@@java -XX:ReservedCodeCacheSize=64m \
 		-jar build/yuicompressor-2.4.6.jar \
-		--type css ${OUTPUT}/${STRUCTURE}.css >> ${OUTPUT}/${STRUCTURE}.min.css
+		--type css ${OUTPUT}/${STRUCTURE}.compiled.css >> ${OUTPUT}/${STRUCTURE}.min.css
+	@@rm ${OUTPUT}/${STRUCTURE}.compiled.css
 	# ..... and then copy in the images
 	@@cp -R css/themes/${THEME}/images ${OUTPUT}/
 	# Css portion is complete.
