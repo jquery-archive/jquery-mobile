@@ -39,6 +39,7 @@ deploy: STRUCTURE = jquery.mobile.structure-${VER_OFFICIAL}
 # The CSS theme being used
 THEME = default
 
+RUN_JS = @@java -XX:ReservedCodeCacheSize=64m -classpath build/js.jar:build/google-compiler-20111003.jar org.mozilla.javascript.tools.shell.Main
 
 
 
@@ -52,8 +53,7 @@ all: init css js zip notify
 # Build and minify the CSS files
 css: init
 	# Build the CSS file with the theme included
-	@@java -XX:ReservedCodeCacheSize=64m \
-		-classpath build/js.jar:build/google-compiler-20111003.jar org.mozilla.javascript.tools.shell.Main \
+	${RUN_JS} \
 		external/r.js/dist/r.js \
 		-o cssIn=css/themes/default/jquery.mobile.css \
 		out=${OUTPUT}/${NAME}.compiled.css
@@ -81,8 +81,7 @@ css: init
 docs: init
 	# Create the Demos/Docs/Tests/Tools
 	# ... Build the docs bundle
-	@@java -XX:ReservedCodeCacheSize=64m \
-		-classpath build/js.jar:build/google-compiler-20111003.jar org.mozilla.javascript.tools.shell.Main \
+	${RUN_JS} \
 		external/r.js/dist/r.js \
 	 	-o build/docs.build.js \
 		dir=../tmp/${NAME}
@@ -113,8 +112,7 @@ init:
 # Build and minify the JS files
 js: init
 	# Build the JavaScript file
-	@@java -XX:ReservedCodeCacheSize=64m \
-		-classpath build/js.jar:build/google-compiler-20111003.jar org.mozilla.javascript.tools.shell.Main \
+	${RUN_JS} \
 		external/r.js/dist/r.js \
 	 	-o baseUrl="js" \
 		include=jquery.mobile exclude=jquery,order \
