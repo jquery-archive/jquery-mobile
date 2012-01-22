@@ -7,9 +7,14 @@ define( [ "jquery", "jquery.mobile.buttonMarkup" ], function( $ ) {
 (function( $, undefined ) {
 
 $.fn.controlgroup = function( options ) {
+	function flipClasses( els, flCorners  ) {
+		els.removeClass( "ui-btn-corner-all ui-shadow" )
+			.eq( 0 ).addClass( flCorners[ 0 ] )
+			.end()
+			.last().addClass( flCorners[ 1 ] ).addClass( "ui-controlgroup-last" );
+	}
 
 	return this.each(function() {
-
 		var $el = $( this ),
 			o = $.extend({
 						direction: $el.jqmData( "type" ) || "vertical",
@@ -29,17 +34,8 @@ $.fn.controlgroup = function( options ) {
 
 		$el.addClass( "ui-corner-all ui-controlgroup ui-controlgroup-" + o.direction );
 
-		// TODO: This should be moved out to the closure
-		// otherwise it is redefined each time controlgroup() is called
-		function flipClasses( els ) {
-			els.removeClass( "ui-btn-corner-all ui-shadow" )
-				.eq( 0 ).addClass( flCorners[ 0 ] )
-				.end()
-				.last().addClass( flCorners[ 1 ] ).addClass( "ui-controlgroup-last" );
-		}
-
-		flipClasses( $el.find( ".ui-btn" + ( o.excludeInvisible ? ":visible" : "" ) ) );
-		flipClasses( $el.find( ".ui-btn-inner" ) );
+		flipClasses( $el.find( ".ui-btn" + ( o.excludeInvisible ? ":visible" : "" ) ), flCorners );
+		flipClasses( $el.find( ".ui-btn-inner" ), flCorners );
 
 		if ( o.shadow ) {
 			$el.addClass( "ui-shadow" );
