@@ -55,8 +55,8 @@ function outInTransitionHandler( name, reverse, $to, $from ) {
 		doneIn = function() {
 			$to
 				.removeClass( "out in reverse " + name )
-				.parent().removeClass( viewportClass )
-				.height( "" );
+				.height( "" )
+				.parent().removeClass( viewportClass );
 			
 			deferred.resolve( name, reverse, $to, $from, true );
 		};
