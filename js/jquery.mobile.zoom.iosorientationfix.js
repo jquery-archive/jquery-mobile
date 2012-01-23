@@ -11,12 +11,13 @@ define( [ "jquery", "jquery.mobile.core", "jquery.mobile.zoom" ], function( $ ) 
     function checkTilt( e ){
 		evt = e.originalEvent;
 		aig = evt.accelerationIncludingGravity;
-
-    	x = Math.abs( aig.x );
+		
+		x = Math.abs( aig.x );
 		y = Math.abs( aig.y );
 		z = Math.abs( aig.z );
-
-        if( !window.orientation &&  ( x > 8.1 || ( ( z > 6.5 || y > 6.5 ) && x > 5.5 ) ) ){
+				
+		// If portrait orientation and in one of the danger zones
+        if( !w.orientation && ( x > 7 || ( ( z > 6 && y < 8 || z < 8 && y > 6 ) && x > 5 ) ) ){
 			if( zoom.enabled ){
 				zoom.disable();
 			}        	
