@@ -46,7 +46,7 @@ css: init
 	# Build the CSS Structure-only file
 	${RUN_JS} \
 		external/r.js/dist/r.js \
-		-o cssIn=css/structure/${STRUCTURE}.css \
+		-o cssIn=css/structure/jquery.mobile.structure.css \
 		out=${OUTPUT}/${STRUCTURE}.compiled.css
 	@@cat LICENSE-INFO.txt | ${VER} > ${OUTPUT}/${STRUCTURE}.css
 	@@cat ${OUTPUT}/${STRUCTURE}.compiled.css >> ${OUTPUT}/${STRUCTURE}.css
