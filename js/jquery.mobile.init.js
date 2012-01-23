@@ -31,16 +31,16 @@ define( [ "jquery", "jquery.mobile.core", "jquery.mobile.navigation", "jquery.mo
 	// loading div which appears during Ajax requests
 	// will not appear if $.mobile.loadingMessage is false
 	var $loader = $( "<div class='ui-loader '><span class='ui-icon ui-icon-loading'></span><h1></h1></div>" );
-	
+
 	// For non-fixed supportin browsers. Position at y center (if scrollTop supported), above the activeBtn (if defined), or just 100px from top
 	function fakeFixLoader(){
 		$loader
 			.css({
 				top: $.support.scrollTop && $window.scrollTop() + $window.height() / 2 ||
 				activeBtn.length && activeBtn.offset().top || 100
-			});		
+			});
 	}
-	
+
 	// check position of loader to see if it appears to be "fixed" to center
 	// if not, use abs positioning
 	function checkLoaderPosition(){
@@ -52,7 +52,7 @@ define( [ "jquery", "jquery.mobile.core", "jquery.mobile.navigation", "jquery.mo
 				.bind( "scroll", fakeFixLoader );
 		}
 	}
-	
+
 
 	$.extend($.mobile, {
 		// turn on/off page loading message.
@@ -66,7 +66,7 @@ define( [ "jquery", "jquery.mobile.core", "jquery.mobile.navigation", "jquery.mo
 						.text( $.mobile.loadingMessage )
 						.end()
 					.appendTo( $.mobile.pageContainer );
-					
+
 				checkLoaderPosition();
 				$window.bind( "scroll", checkLoaderPosition );
 			}
@@ -74,11 +74,11 @@ define( [ "jquery", "jquery.mobile.core", "jquery.mobile.navigation", "jquery.mo
 
 		hidePageLoadingMsg: function() {
 			$html.removeClass( "ui-loading" );
-			
+
 			if( $.mobile.loadingMessage ){
 				$loader.removeClass( "ui-loader-fakefix" );
-			}	
-			
+			}
+
 			$( window ).unbind( "scroll", fakeFixLoader );
 		},
 
@@ -147,8 +147,6 @@ define( [ "jquery", "jquery.mobile.core", "jquery.mobile.navigation", "jquery.mo
 	// then check what the scroll top is. Android will report 0... others 1
 	// note that this initial scroll won't hide the address bar. It's just for the check.
 	$(function() {
-		window.scrollTo( 0, 1 );
-
 		// if defaultHomeScroll hasn't been set yet, see if scrollTop is 1
 		// it should be 1 in most browsers, but android treats 1 as 0 (for hiding addr bar)
 		// so if it's 1, use 0 from now on
@@ -171,6 +169,8 @@ define( [ "jquery", "jquery.mobile.core", "jquery.mobile.navigation", "jquery.mo
 		// window load event
 		// hide iOS browser chrome on load
 		$window.load( $.mobile.silentScroll );
+
+		window.scrollTo( 0, 1 );
 	});
 }( jQuery, this ));
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
