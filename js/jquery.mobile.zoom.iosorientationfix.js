@@ -6,7 +6,7 @@ define( [ "jquery", "jquery.mobile.core", "jquery.mobile.zoom" ], function( $ ) 
 //>>excludeEnd("jqmBuildExclude");
 ( function( $, window ) {
     var zoom = $.mobile.zoom,
-		x, y, z, aig;
+		evt, x, y, z, aig;
 	
     function checkTilt( e ){
 		evt = e.originalEvent;
@@ -17,7 +17,7 @@ define( [ "jquery", "jquery.mobile.core", "jquery.mobile.zoom" ], function( $ ) 
 		z = Math.abs( aig.z );
 				
 		// If portrait orientation and in one of the danger zones
-        if( !w.orientation && ( x > 7 || ( ( z > 6 && y < 8 || z < 8 && y > 6 ) && x > 5 ) ) ){
+        if( !window.orientation && ( x > 7 || ( ( z > 6 && y < 8 || z < 8 && y > 6 ) && x > 5 ) ) ){
 			if( zoom.enabled ){
 				zoom.disable();
 			}        	
