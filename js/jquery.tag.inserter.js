@@ -23,6 +23,6 @@
 	document.write( "<script src='" + url + "'></script>" );
 
 	if ( parseInt( version.replace( /\./g, "" ), 10 ) < 170 && window.define && window.define.amd ) {
-		define( "jquery", [], function () { return jQuery; } );
+		document.write( '<script>define( "jquery", [], function () { return jQuery; } );</script>' );
 	}
 }());
