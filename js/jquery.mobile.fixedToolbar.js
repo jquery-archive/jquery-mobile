@@ -134,10 +134,11 @@ define( [ "jquery", "jquery.mobile.widget", "jquery.mobile.core", "jquery.mobile
 		show: function(){
 			var hideClass = "ui-fixed-hidden",
 				$el = this.element,
-				scroll = $( window ).scrollTop(),
+				$win = $( window ),
+				scroll = $win.scrollTop(),
 				elHeight = $el.height(),
 				pHeight = $el.closest( ".ui-page" ).height(),
-				viewportHeight = Math.min( screen.height, $( window ).height() ),
+				viewportHeight = Math.min( screen.height, $win.height() ),
 				tbtype = $el.is( ".ui-header" ) ? "header" : "footer";
 
 				if( this.options.transition && this.options.transition !== "none" &&
@@ -158,10 +159,11 @@ define( [ "jquery", "jquery.mobile.widget", "jquery.mobile.core", "jquery.mobile
 		hide: function(){
 			var hideClass = "ui-fixed-hidden",
 				$el = this.element,
-				scroll = $( window ).scrollTop(),
+				$win = $( window ),
+				scroll = $win.scrollTop(),
 				elHeight = $el.height(),
 				pHeight = $el.closest( ".ui-page" ).height(),
-				viewportHeight = Math.min( screen.height, $( window ).height() ),
+				viewportHeight = Math.min( screen.height, $win.height() ),
 				tbtype = $el.is( ".ui-header" ) ? "header" : "footer";
 
 				if( this.options.transition && this.options.transition !== "none" &&
