@@ -4,9 +4,7 @@
 //>>group: core
 //>>required: true
 
-// For test purposes we can't use anonymous module here otherwise
-// the tests will throw http://requirejs.org/docs/errors.html#mismatch
-define( "jquery.mobile.support", [  "jquery", "jquery.mobile.media" ], function( $ ) {
+define( [  "jquery", "./jquery.mobile.media" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

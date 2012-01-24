@@ -2,7 +2,7 @@
 //>>description: Enhances and consistently styles text inputs.
 //>>label: Text Inputs
 
-define( [ "jquery", "jquery.mobile.core", "jquery.mobile.widget", "jquery.mobile.degradeInputs", "jquery.mobile.buttonMarkup"  ], function( $ ) {
+define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.widget", "./jquery.mobile.degradeInputs", "./jquery.mobile.buttonMarkup"  ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

@@ -7,7 +7,7 @@
 //>>label: Page turn fallback transition
 
 
-define( [ "jquery", "jquery.mobile.transition" ], function( $ ) {
+define( [ "jquery", "./jquery.mobile.transition" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 

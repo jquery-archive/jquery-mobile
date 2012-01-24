@@ -6,7 +6,7 @@
 //>>description: Fallback transition for flip in non-3D supporting browsers
 //>>label: Flip fallback transition
 
-define( [ "jquery", "jquery.mobile.transition" ], function( $ ) {
+define( [ "jquery", "./jquery.mobile.transition" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
