@@ -2,7 +2,7 @@
 //>>description: Degrades inputs to another type after custom enhancements are made.
 //>>label: Degrade Inputs
 
-define( [ "jquery", "jquery.mobile.page" ], function( $ ) {
+define( [ "jquery", "./jquery.mobile.page" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

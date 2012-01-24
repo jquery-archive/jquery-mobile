@@ -2,7 +2,7 @@
 //>>description: A workaround for browsers without window.matchMedia
 //>>label: matchMedia Polyfill
 
-define( [ "jquery", "jquery.mobile.core" ], function( $ ) {
+define( [ "jquery", "./jquery.mobile.core" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

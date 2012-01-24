@@ -2,7 +2,7 @@
 //>>description: Adds a filtering textfield to listviews
 //>>label: Listview Filter
 
-define( [ "jquery", "jquery.mobile.widget", "jquery.mobile.buttonMarkup", "jquery.mobile.page", "jquery.mobile.page.sections" ], function( $ ) {
+define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.buttonMarkup", "./jquery.mobile.page", "./jquery.mobile.page.sections" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

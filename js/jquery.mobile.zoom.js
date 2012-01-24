@@ -2,7 +2,7 @@
 //>>description: Utility methods for enabling and disabling user scaling (pinch zoom)
 //>>label: zoomhandling
 
-define( [ "jquery", "jquery.mobile.core" ], function( $ ) {
+define( [ "jquery", "./jquery.mobile.core" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 ( function( $ ) {
 	var	meta = $( "meta[name=viewport]" ),
