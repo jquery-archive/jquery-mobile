@@ -2,12 +2,6 @@
 * "events" plugin - Handles events
 */
 
-<<<<<<< HEAD
-=======
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-define( [ "jquery.mobile.core", "jquery.mobile.media", "jquery.mobile.support", "jquery.mobile.vmouse" ], function() {
-//>>excludeEnd("jqmBuildExclude");
->>>>>>> 1a52240... Fix for issue #2933 - get_orientation() and hence getScreenHeight() doesn't work on some devices
 (function( $, window, undefined ) {
 
 // add new event shortcuts
