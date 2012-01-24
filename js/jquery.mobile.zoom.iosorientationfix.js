@@ -28,8 +28,8 @@ define( [ "jquery", "jquery.mobile.core", "jquery.mobile.zoom" ], function( $ ) 
     }
 
     $( window )
-		.bind( "orientationchange", zoom.enable )
-		.bind( "devicemotion", checkTilt );
+		.bind( "orientationchange.iosorientationfix", zoom.enable )
+		.bind( "devicemotion.iosorientationfix", checkTilt );
 
 }( jQuery, this ));
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
