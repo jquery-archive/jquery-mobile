@@ -12,13 +12,20 @@ define( [ "jquery", "jquery.mobile.core" ], function( $ ) {
 	
 	$.mobile.zoom = $.extend( {}, {
 		enabled: true,
-		disable: function() {
-	        meta.attr( "content", disabledZoom );
-	        $.mobile.zoom.enabled = false;
+		locked: false,
+		disable: function( lock ) {
+			if( !$.mobile.zoom.locked ){
+	        	meta.attr( "content", disabledZoom );
+	        	$.mobile.zoom.enabled = false;
+				$.mobile.zoom.locked = lock || false;
+			}
 		},
-		enable: function() {
-	        meta.attr( "content", enabledZoom );
-	        $.mobile.zoom.enabled = true;
+		enable: function( unlock ) {
+			if( !$.mobile.zoom.locked || unlock ){
+		        meta.attr( "content", enabledZoom );
+		        $.mobile.zoom.enabled = true;
+				$.mobile.zoom.locked = false;
+			}
 		},
 		restore: function() {
 	        meta.attr( "content", initialContent );
