@@ -4,7 +4,7 @@
 //>>group: core
 //>>required: true
 
-define( [ "jquery", "jquery.mobile.widget" ], function( $ ) {
+define( [ "jquery", "./jquery.mobile.widget" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 

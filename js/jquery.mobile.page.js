@@ -2,7 +2,7 @@
 //>>description: Basic page formatting.
 //>>label: Pages
 
-define( [ "jquery", "jquery.mobile.widget" ], function( $ ) {
+define( [ "jquery", "./jquery.mobile.widget" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

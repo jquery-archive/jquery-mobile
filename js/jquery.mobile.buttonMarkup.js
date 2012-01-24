@@ -2,7 +2,7 @@
 //>>description: For making button-like links.
 //>>label: Buttons
 
-define( [ "jquery", "jquery.mobile.core", "jquery.mobile.vmouse" ], function( $ ) {
+define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.vmouse" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 ( function( $, undefined ) {
 
