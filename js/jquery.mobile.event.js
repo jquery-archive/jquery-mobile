@@ -93,7 +93,7 @@ $.event.special.tap = {
 
 				$this.unbind( "vclick", clickHandler )
 					.unbind( "vmouseup", clearTapTimer );
-				$(document).unbind("vmousecancel", clearTapHandlers);
+				$( document ).unbind( "vmousecancel", clearTapHandlers );
 			}
 
 			function clickHandler(event) {
@@ -108,7 +108,7 @@ $.event.special.tap = {
 
 			$this.bind( "vmouseup", clearTapTimer )
 				.bind( "vclick", clickHandler );
-			$(document).bind("vmousecancel", clearTapHandlers);
+			$( document ).bind( "vmousecancel", clearTapHandlers );
 
 			timer = setTimeout(function() {
 					triggerCustomEvent( thisObject, "taphold", $.Event( "taphold" ) );
