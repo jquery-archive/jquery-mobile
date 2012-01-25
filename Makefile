@@ -18,7 +18,7 @@ deploy: STRUCTURE = jquery.mobile.structure-${VER_OFFICIAL}
 # The CSS theme being used
 THEME = default
 
-RUN_JS = @@java -XX:ReservedCodeCacheSize=64m -classpath build/js.jar:build/google-compiler-20111003.jar org.mozilla.javascript.tools.shell.Main
+RUN_JS = @@/usr/local/bin/node
 
 
 
@@ -99,7 +99,8 @@ js: init
 	${RUN_JS} \
 		external/r.js/dist/r.js \
 	 	-o baseUrl="js" \
-		include=jquery.mobile exclude=jquery,order \
+		include=jquery.mobile \
+		exclude=jquery,order,text,text!../version.txt \
 		out=${OUTPUT}/${NAME}.compiled.js \
 		pragmasOnSave.jqmBuildExclude=true \
 		wrap.startFile=build/wrap.start \
@@ -108,7 +109,7 @@ js: init
 		skipModuleInsertion=true \
 		optimize=none
 	@@cat LICENSE-INFO.txt | ${VER} > ${OUTPUT}/${NAME}.js
-	@@cat ${OUTPUT}/${NAME}.compiled.js >> ${OUTPUT}/${NAME}.js
+	@@cat ${OUTPUT}/${NAME}.compiled.js | sed 's/__version__/"${VER_OFFICIAL}"/g' >> ${OUTPUT}/${NAME}.js
 	@@rm ${OUTPUT}/${NAME}.compiled.js
 	# ..... and then minify it
 	@@echo ${VER_MIN} > ${OUTPUT}/${NAME}.min.js
