@@ -116,15 +116,15 @@ define( [ "jquery", "jquery.mobile.widget", "jquery.mobile.core", "jquery.mobile
 			$el.closest( ".ui-page" )
 				.bind( "pagebeforeshow", function(){
 					if( o.togglePageZoom ){
-						$.mobile.zoom.disable();
+						$.mobile.zoom.disable( true );
 					}
 					if( o.visibleOnPageShow ){
 						self.show();
 					}
 				} )
-				.bind( "pagehide", function(){
+				.bind( "pagebeforehide", function(){
 					if( o.togglePageZoom ){
-						$.mobile.zoom.enable();
+						$.mobile.zoom.enable( true );
 					}
 				});
 		},
