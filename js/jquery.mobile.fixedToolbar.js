@@ -129,7 +129,18 @@ define( [ "jquery", "jquery.mobile.widget", "jquery.mobile.core", "jquery.mobile
 				});
 		},
 		
-		_visible: false, 
+		_visible: false,
+		
+		// This will set the content element's top or bottom padding equal to the toolbar's height
+		updatePagePadding: function() {
+			var $el = this.element,
+				header = $el.is( ".ui-header" );
+			
+			// This behavior only applies to "fixed", not "fullscreen"
+			if( this.options.fullscreen ){ return; }
+
+			$el.closest( ".ui-page" ).css( "padding-" + ( header ? "top" : "bottom" ), $el.height() );
+		},
 		
 		show: function(){
 			var hideClass = "ui-fixed-hidden",
