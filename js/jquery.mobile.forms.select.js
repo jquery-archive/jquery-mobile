@@ -21,7 +21,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		hidePlaceholderMenuItems: true,
 		closeText: "Close",
 		nativeMenu: true,
-		preventFocusZoom: true,
+		// This option defaults to true on iOS devices.
+		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
 		initSelector: "select:not(:jqmData(role='slider'))"
 	},
 
