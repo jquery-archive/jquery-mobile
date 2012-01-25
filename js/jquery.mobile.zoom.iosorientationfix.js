@@ -5,6 +5,12 @@
 define( [ "jquery", "jquery.mobile.core", "jquery.mobile.zoom" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 ( function( $, window ) {
+	
+	// This fix addresses an iOS bug, so return early if the UA claims it's something else.
+	if( !(/iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1 ) ){
+		return;
+	}
+	
     var zoom = $.mobile.zoom,
 		evt, x, y, z, aig;
 	
