@@ -14,6 +14,7 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 			transition: "fade", //can be none, fade, slide (slide maps to slideup or slidedown)
 			fullscreen: false,
 			tapToggle: true,
+			updatePagePadding: true,
 			
 			// Browser detection! Weeee, here we go...
 			// Unfortunately, position:fixed is costly, not to mention probably impossible, to feature-detect accurately.
@@ -122,10 +123,26 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 						self.show();
 					}
 				} )
+				.bind( "webkitAnimationStart animationstart", function(){
+					if( o.updatePagePadding ){
+						self.updatePagePadding();
+					}	
+				})
+				.bind( "pageshow", function(){
+					self.updatePagePadding();
+					if( o.updatePagePadding ){
+						$( window ).bind( "throttledresize." + self.widgetName, function(){
+						 	self.updatePagePadding();
+						});
+					}
+				})
 				.bind( "pagebeforehide", function(){
 					if( o.togglePageZoom ){
 						$.mobile.zoom.enable( true );
 					}
+					if( o.updatePagePadding ){
+						$( window ).unbind( "throttledresize." + self.widgetName );
+					}	
 				});
 		},
 		
