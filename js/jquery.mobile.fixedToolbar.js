@@ -115,7 +115,7 @@ define( [ "jquery", "jquery.mobile.widget", "jquery.mobile.core", "jquery.mobile
 			// This method is meant to disable zoom while a fixed-positioned toolbar page is visible
 			$el.closest( ".ui-page" )
 				.bind( "pagebeforeshow", function(){
-					if( o.togglePageZoom && $.mobile.zoom ){
+					if( o.togglePageZoom ){
 						$.mobile.zoom.disable();
 					}
 					if( o.visibleOnPageShow ){
@@ -123,7 +123,7 @@ define( [ "jquery", "jquery.mobile.widget", "jquery.mobile.core", "jquery.mobile
 					}
 				} )
 				.bind( "pagehide", function(){
-					if( o.togglePageZoom && $.mobile.zoom ){
+					if( o.togglePageZoom ){
 						$.mobile.zoom.enable();
 					}
 				});
