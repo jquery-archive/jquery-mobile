@@ -1,15 +1,14 @@
 <!DOCTYPE html> 
-<html> 
+<html class="ui-mobile-rendering"> 
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<title>jQuery Mobile Framework - Static Containers, States</title> 
-	<link rel="stylesheet"  href="../../css/themes/default/" /> 
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" /> 
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+
+	<script data-main="../../js/jquery.mobile.docs" src="../../external/requirejs/require.js"></script>
 	<script src="../../js/jquery.js"></script>
-	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
-	<script src="../_assets/js/jqm-docs.js"></script>
-	<script src="../../js/"></script>
 </head> 
 <body> 
 
@@ -47,7 +46,7 @@
 		
 		<p>jQuery Mobile's default Theme includes 5 swatches that are given letters (a, b, c, d, e) for quick reference. To make mapping of color swatches consistent across our widgets, we have followed the convention that swatch "a" is the highest level of visual priority (black in our default theme), "b" is secondary level (blue) and "c" is the baseline level (gray) that we use by default in many situations, "d" for an alternate secondary level and "e" as an accent swatch.  Themes may have additional swatches for accent colors or specific situations. For example, you could add a new theme swatch "f" that has a red bar and button for use in error situations. </p>
 		
-		<p>A new ThemeRoller tool will launched with the jQuery Mobile 1.0 release in 2011. In the meantime, it's simple to manually edit the base swatches in the default theme and/or add additional swatches by editing the theme css file: copy a block of swatch styles, rename the classes with the new swatch letter name, and tweak colors.</p>
+		<p>A new ThemeRoller tool will launched with the jQuery Mobile 1.0 release in 2012. In the meantime, it's simple to manually edit the base swatches in the default theme and/or add additional swatches by editing the theme css file: copy a block of swatch styles, rename the classes with the new swatch letter name, and tweak colors.</p>
 		
 		
 		<h3>Bars</h3>
@@ -79,7 +78,7 @@
 
 		<p>If a theme isn't specified on a content block, the framework will default to "c" to maximize contrast against the default header "a", as shown here:</p>
 					
-			<div data-role="header" data-position="inline">
+			<div data-role="header">
 				<a href="#" data-icon="arrow-l">Back</a>
 				<h1>Default Header</h1>
 			</div>
@@ -280,7 +279,7 @@
 </div><!-- /content -->
 
 <div data-role="footer" class="footer-docs" data-theme="c">
-		<p>&copy; 2011 The jQuery Project</p>
+		<p>&copy; 2012 The jQuery Project</p>
 </div>
 	
 </div><!-- /page -->
