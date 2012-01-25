@@ -142,7 +142,7 @@ js: init
 	# ..... and then minify it
 	@@echo ${VER_MIN} > ${OUTPUT}/${NAME}.min.js
 	@@java -XX:ReservedCodeCacheSize=64m \
-				-jar build/google-compiler-20111003.jar \
+				-jar build/google-compiler-2011-20121003.jar \
 				--js ${OUTPUT}/${NAME}.js \
 				--js_output_file ${OUTPUT}/${NAME}.tmp.js
 	@@cat ${OUTPUT}/${NAME}.tmp.js >> ${OUTPUT}/${NAME}.min.js

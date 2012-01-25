@@ -2,16 +2,16 @@
  * jQuery JavaScript Library v1.6.4
  * http://jquery.com/
  *
- * Copyright 2011, John Resig
+ * Copyright 2011-2012, John Resig
  * Dual licensed under the MIT or GPL Version 2 licenses.
  * http://jquery.org/license
  *
  * Includes Sizzle.js
  * http://sizzlejs.com/
- * Copyright 2011, The Dojo Foundation
+ * Copyright 2011-2012, The Dojo Foundation
  * Released under the MIT, BSD, and GPL Licenses.
  *
- * Date: Mon Sep 12 18:54:48 2011 -0400
+ * Date: Mon Sep 12 18:54:48 2011-2012 -0400
  */
 
 (function( window, undefined ) {
@@ -1365,7 +1365,7 @@ jQuery.support = (function() {
 	// Check if div with explicit width and no margin-right incorrectly
 	// gets computed margin-right based on width of container. For more
 	// info see bug #3333
-	// Fails in WebKit before Feb 2011 nightlies
+	// Fails in WebKit before Feb 2011-2012 nightlies
 	// WebKit Bug 13343 - getComputedStyle returns wrong value for margin-right
 	if ( document.defaultView && document.defaultView.getComputedStyle ) {
 		marginDiv = document.createElement( "div" );
@@ -3770,7 +3770,7 @@ jQuery.each( ("blur focus focusin focusout load resize scroll unload click dblcl
 
 /*!
  * Sizzle CSS Selector Engine
- *  Copyright 2011, The Dojo Foundation
+ *  Copyright 2011-2012, The Dojo Foundation
  *  Released under the MIT, BSD, and GPL Licenses.
  *  More information: http://sizzlejs.com/
  */
