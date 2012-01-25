@@ -49,9 +49,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			
 			handle = document.createElement('a');
 			
-		domSlider.setAttribute('role','application');
-		domSlider.setAttribute('class',['ui-slider ',selectClass," ui-btn-down-",trackTheme,' ui-btn-corner-all'].join(""));						
-		handle.setAttribute('class','ui-slider-handle');
+		domSlider.setAttribute('role','application');		
+		domSlider.className = ['ui-slider ',selectClass," ui-btn-down-",trackTheme,' ui-btn-corner-all'].join("");		
+		handle.className = 'ui-slider-handle';
 		domSlider.appendChild(handle);
 		
 		var slider = $(domSlider),
@@ -79,8 +79,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 		if ( cType == "select" ) {
 			var wrapper = document.createElement('div');
-			wrapper.setAttribute('class','ui-slider-inneroffset');
-				
+			wrapper.className = 'ui-slider-inneroffset';	
 			for(var j = 0,length = domSlider.childNodes.length;j < length;j++){
 				wrapper.appendChild(domSlider.childNodes[j]);
 			}
@@ -97,9 +96,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 					theme = !i ? " ui-btn-down-" + trackTheme :( " " + $.mobile.activeBtnClass ),			
 					sliderLabel = document.createElement('div'),
 					sliderImg = document.createElement('span');				
-				sliderLabel.setAttribute('class',['ui-slider-labelbg ui-slider-labelbg-',side,theme," ui-btn-corner-",corners].join(""));
+				sliderLabel.className = ['ui-slider-labelbg ui-slider-labelbg-',side,theme," ui-btn-corner-",corners].join("");
 				$(sliderLabel).prependTo( slider );
-				sliderImg.setAttribute('class',['ui-slider-label ui-slider-label-',side,theme," ui-btn-corner-",corners].join(""));
+				sliderImg.className = ['ui-slider-label ui-slider-label-',side,theme," ui-btn-corner-",corners].join("");
 				sliderImg.setAttribute('role','img');
 				sliderImg.appendChild(document.createTextNode(options[i].innerHTML));
 				$(sliderImg).prependTo( handle );

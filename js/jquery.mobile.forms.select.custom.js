@@ -461,8 +461,8 @@
 						item.setAttribute('aria-disabled',true);
 					}
 					item.setAttribute(dataIndexAttr,i);
-					item.setAttribute(dataIconAttr,dataIcon);
-					item.setAttribute('class',classes.join(" "));										
+					item.setAttribute(dataIconAttr,dataIcon);					
+					item.className = classes.join(" ");
 					item.setAttribute('role','option');
 					item.setAttribute('tabindex','-1');
 					item.appendChild(anchor);					
