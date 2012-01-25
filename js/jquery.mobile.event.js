@@ -4,7 +4,7 @@
 //>>group: core
 //>>required: true
 
-define( [ "jquery", "jquery.mobile.core", "jquery.mobile.media", "jquery.mobile.support", "jquery.mobile.vmouse" ], function( $ ) {
+define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.media", "./jquery.mobile.support", "./jquery.mobile.vmouse" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 

@@ -6,7 +6,7 @@
 //>>description: Consistent styling for checkboxes/radio buttons.
 //>>label: Checkboxes/Radio Buttons
 
-define( [ "jquery", "jquery.mobile.core", "jquery.mobile.widget", "jquery.mobile.buttonMarkup" ], function( $ ) {
+define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.widget", "./jquery.mobile.buttonMarkup" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

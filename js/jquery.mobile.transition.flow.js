@@ -6,7 +6,7 @@
 //>>description: Fallback transition for flow in non-3D supporting browsers
 //>>label: Flow fallback transition
 
-define( [ "jquery", "jquery.mobile.transition" ], function( $ ) {
+define( [ "jquery", "./jquery.mobile.transition" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
