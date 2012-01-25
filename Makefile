@@ -153,8 +153,6 @@ zip: init css js
 latest: init css docs js zip
 	# Time to put these on the CDN
 	@@scp -qr ${OUTPUT}/* jqadmin@code.origin.jquery.com:/var/www/html/code.jquery.com/mobile/latest/
-	# Do some cleanup to wrap it up
-	@@rm -rf ${OUTPUT}
 	# -------------------------------------------------
 
 # Build the nightly backups. This is done on a server cronjob
