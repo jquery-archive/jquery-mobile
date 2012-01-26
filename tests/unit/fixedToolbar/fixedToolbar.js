@@ -72,20 +72,44 @@
 		
 	});	
 
-	test( "User zooming is disabled when the header is visible", function(){
+	test( "User zooming is disabled when the header is visible and disablePageZoom is true", function(){
 		$.mobile.zoom.enable();
+		var defaultZoom = $.mobile.fixedtoolbar.prototype.options.disablePageZoom;
+		$( ".ui-page-active .ui-header-fixed" ).fixedtoolbar("option", "disablePageZoom", true );
+		
 		$( ".ui-page-active" ).trigger( "pagebeforeshow" );
 		ok( !$.mobile.zoom.enabled, "Viewport scaling is disabled before page show." );
+		$( ".ui-page-active .ui-header-fixed" ).fixedtoolbar("option", "disablePageZoom", defaultZoom );
+		$.mobile.zoom.enable();
 	});
 	
-	test( "Meta viewport content is restored to previous state, and zooming renabled, after pagehide", function(){
+	test( "Meta viewport content is restored to previous state, and zooming renabled, after pagebeforehide", function(){
 		$.mobile.zoom.enable();
+		var defaultZoom = $.mobile.fixedtoolbar.prototype.options.disablePageZoom;
+		$( ".ui-page-active .ui-header-fixed" ).fixedtoolbar("option", "disablePageZoom", true );
+		
 		$( ".ui-page-active" ).trigger( "pagebeforeshow" );
 		ok( !$.mobile.zoom.enabled, "Viewport scaling is disabled before page show." );
-		$( ".ui-page-active" ).trigger( "pagehide" );
+		$( ".ui-page-active" ).trigger( "pagebeforehide" );
 		ok( $.mobile.zoom.enabled, "Viewport scaling is enabled." ); 		
-
+		$( ".ui-page-active .ui-header-fixed" ).fixedtoolbar("option", "disablePageZoom", defaultZoom );
+		$.mobile.zoom.enable();
 	});
+	
+	test( "User zooming is not disabled when the header is visible and disablePageZoom is false", function(){
+		$.mobile.zoom.enable();
+		var defaultZoom = $.mobile.fixedtoolbar.prototype.options.disablePageZoom;
+		$( ":jqmData(position='fixed')" ).fixedtoolbar( "option", "disablePageZoom", false );
+
+		$( ".ui-page-active" ).trigger( "pagebeforeshow" );
+		
+		ok( $.mobile.zoom.enabled, "Viewport scaling is not disabled before page show." );
+
+		$( ":jqmData(position='fixed')" ).fixedtoolbar( "option", "disablePageZoom", defaultZoom );
+		
+		$.mobile.zoom.enable();
+	});
+	
 
 	asyncTest( "The hide method is working properly", function() {
 
