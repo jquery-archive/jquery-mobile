@@ -19,7 +19,8 @@
 
 	modules: [
 		{
-			name: "jquery.mobile.docs"
+			name: "jquery.mobile.docs",
+			exclude: [ "jquery", "order" , "text", "text!../version.txt" ]
 		}
 	],
 

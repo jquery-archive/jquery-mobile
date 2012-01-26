@@ -3,6 +3,7 @@
 VER = sed "s/v@VERSION/$$(git log -1 --format=format:"Git Build: SHA1: %H <> Date: %cd")/"
 VER_MIN = "/*! jQuery Mobile v$$(git log -1 --format=format:"Git Build: SHA1: %H <> Date: %cd") jquerymobile.com | jquery.org/license */"
 VER_OFFICIAL = $(shell cat version.txt)
+SED_VER_API = sed 's/__version__/"${VER_OFFICIAL}"/g'
 deploy: VER = sed "s/v@VERSION/${VER_OFFICIAL}/"
 deploy: VER_MIN = "/*! jQuery Mobile v${VER_OFFICIAL} jquerymobile.com | jquery.org/license */"
 
@@ -72,7 +73,7 @@ docs: init
 	# ... Prepend versioned license
 	@@cat LICENSE-INFO.txt | ${VER} > tmp/${NAME}/LICENSE-INFO.txt
 	@@cat tmp/${NAME}/LICENSE-INFO.txt | cat - tmp/${NAME}/js/jquery.mobile.docs.js > tmp/${NAME}/js/jquery.mobile.docs.js.tmp
-	@@mv tmp/${NAME}/js/jquery.mobile.docs.js.tmp tmp/${NAME}/js/jquery.mobile.docs.js
+	@@cat tmp/${NAME}/js/jquery.mobile.docs.js.tmp | ${SED_VER_API} > tmp/${NAME}/js/jquery.mobile.docs.js
 	@@cat tmp/${NAME}/LICENSE-INFO.txt | cat - tmp/${NAME}/css/themes/default/${NAME}.css > tmp/${NAME}/css/themes/default/${NAME}.css.tmp
 	@@mv tmp/${NAME}/css/themes/default/${NAME}.css.tmp tmp/${NAME}/css/themes/default/${NAME}.css
 	# ... Move and zip up the the whole folder
@@ -99,7 +100,8 @@ js: init
 	${RUN_JS} \
 		external/r.js/dist/r.js \
 	 	-o baseUrl="js" \
-		include=jquery.mobile exclude=jquery,order \
+		include=jquery.mobile \
+		exclude=jquery,order,text,text!../version.txt \
 		out=${OUTPUT}/${NAME}.compiled.js \
 		pragmasOnSave.jqmBuildExclude=true \
 		wrap.startFile=build/wrap.start \
@@ -108,7 +110,7 @@ js: init
 		skipModuleInsertion=true \
 		optimize=none
 	@@cat LICENSE-INFO.txt | ${VER} > ${OUTPUT}/${NAME}.js
-	@@cat ${OUTPUT}/${NAME}.compiled.js >> ${OUTPUT}/${NAME}.js
+	@@cat ${OUTPUT}/${NAME}.compiled.js | ${SED_VER_API} >> ${OUTPUT}/${NAME}.js
 	@@rm ${OUTPUT}/${NAME}.compiled.js
 	# ..... and then minify it
 	@@echo ${VER_MIN} > ${OUTPUT}/${NAME}.min.js
@@ -153,8 +155,6 @@ zip: init css js
 latest: init css docs js zip
 	# Time to put these on the CDN
 	@@scp -qr ${OUTPUT}/* jqadmin@code.origin.jquery.com:/var/www/html/code.jquery.com/mobile/latest/
-	# Do some cleanup to wrap it up
-	@@rm -rf ${OUTPUT}
 	# -------------------------------------------------
 
 # Build the nightly backups. This is done on a server cronjob
