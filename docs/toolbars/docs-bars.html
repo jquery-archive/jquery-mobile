@@ -39,11 +39,11 @@
 			
 			<p>Header and footers can be positioned on the page in a few different ways. By default, the toolbars use the <strong>"inline" positioning</strong> mode. In this mode, the headers and footer sit in the natural document flow (the default HTML behavior), which ensures that they are visible on all devices, regardless of JavaScript and CSS positioning support.</p>
 			
-			<p>A <a href="bars-fixed.html"><strong>"fixed" positioning mode</strong></a> provides the convenience of static toolbars without the drawbacks of implementing faux-scrolling in JavaScript. The toolbars start in their natural positions on the page, like the "inline" mode, but when a bar scrolls out of the viewport, the framework animates the bar back into view by dynamically re-positioning the bar to the top or bottom of the viewport.</p>
-			<p> At any time, tapping the screen will toggle the visibility of the fixed toolbars: tapping the page when the toolbars aren't visible brings them into view, tapping again hides them until you tap again. This gives users the option to hide the toolbars until needed to maximize screen real estate. </p>
-			<p>To set this behavior on a header or footer, add the <code> data-position="fixed"</code> attribute to the toolbar container.</p>
+			<p>A <a href="bars-fixed.html"><strong>"fixed" positioning mode</strong></a> fixes the toolbars to either the top or bottom of the viewport on browsers that support CSS fixed positioning (generally, most desktop browsers, iOS5+, Android 2.2+, BlackBerry 6, and more). In browsers that don't support fixed positioning, the toolbars will fall back to static, inline positiong in the page.</p>
+			<p> When tap-toggling is enabled, tapping the screen will toggle the visibility of the fixed toolbars: tapping the page when the toolbars aren't visible brings them into view, tapping again hides them until you tap again. This gives users the option to hide the toolbars until needed to maximize screen real estate. One caveat is that fixed toolbars never truly hide, but toggle between fixed and static positioning. This means that if you're at the top of a page, you can't tap-toggle a header toolbar out of view, as it instead toggles into its spot in the document flow at the top of the page. The same goes for fixed footers when scrolled to the very bottom of a document.</p>
+			<p>To set this behavior on a header or footer, add the <code> data-position="fixed"</code> attribute to the header or footer element.</p>
 									
-			<p>A <a href="bars-fullscreen.html"><strong>"fullscreen" position mode</strong></a> works just like the fixed mode except that the toolbars aren't shown at the top and bottom of the page and only appear when the page is clicked. This is useful for immersive apps like photo or video viewers where you want the content to fill the whole screen and toolbars can be summoned to appear by tapping the screen. Keep in mind that the toolbars in this mode will sit <strong>over</strong> page content so this is best used for specific situations.</p>
+			<p>A <a href="bars-fullscreen.html"><strong>"fullscreen" position mode</strong></a> works just like the fixed mode except that the toolbars overlay the page content, rather than reserving a place in the document when not in fixed mode. This is useful for immersive apps like photo or video viewers where you want the content to fill the whole screen and toolbars can be hidden or summoned to appear by tapping the screen. Keep in mind that the toolbars in this mode will sit <strong>over</strong> page content so this is best used for specific situations.</p>
 
 				
 
@@ -63,7 +63,6 @@
 								<li><a href="docs-footers.html">Footer bars</a></li>
 								<li><a href="docs-navbar.html">Navbars</a></li>
 								<li><a href="bars-fixed.html">Fixed positioning</a></li>
-								<li><a href="bars-fullscreen.html">Fullscreen positioning</a></li>
 								<li><a href="footer-persist-a.html">Persistent footer navbar</a></li>
 								<li><a href="bars-themes.html">Theming toolbars</a></li>
 
