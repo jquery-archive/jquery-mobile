@@ -191,22 +191,24 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 				elHeight = $el.height(),
 				pHeight = $el.closest( ".ui-page" ).height(),
 				viewportHeight = Math.min( screen.height, $win.height() ),
-				tbtype = $el.is( ".ui-header" ) ? "header" : "footer";
+				tbtype = $el.is( ".ui-header" ) ? "header" : "footer",
+				// if it's a slide transition, our new transitions need the reverse class as well to slide outward
+				outclass = "out" + ( this.options.transition === "slide" ? " reverse" : "" );
 
-				if( this.options.transition && this.options.transition !== "none" &&
+			if( this.options.transition && this.options.transition !== "none" &&
 					(
 					( tbtype === "header" && !this.options.fullscreen && scroll > elHeight ) ||
 					( tbtype === "footer" && !this.options.fullscreen && scroll + viewportHeight < pHeight - elHeight )
 					) || this.options.fullscreen ){
 				$el
+					.addClass( outclass )
 					.removeClass( "in" )
-					.addClass( "out" )
 					.animationComplete( function(){
-						$el.addClass( hideClass );
+						$el.addClass( hideClass ).removeClass( outclass );
 					});
 			}
 			else {
-				this.element.addClass( hideClass );
+				$el.addClass( hideClass ).removeClass( outclass );
 			}
 			this._visible = false;
 		},
