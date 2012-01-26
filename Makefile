@@ -178,6 +178,7 @@ deploy: init css js docs zip
 	@@mv ${OUTPUT}/demos tmp/${VER_OFFICIAL}
 	# Create the Demos/Docs/Tests/Tools for jQueryMobile.com
 	# ... By first replacing the paths
+	# TODO update jQuery Version replacement on deploy
 	@@find tmp/${VER_OFFICIAL} -type f \
 		\( -name '*.html' -o -name '*.php' \) \
 		-exec perl -pi -e \
