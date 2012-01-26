@@ -157,18 +157,15 @@ notify: init
 
 
 # Zip up the jQm files without docs
-zip: init css js 
+zip: init css js
 	# Packaging up the files into a zip archive
 	@@mkdir tmp
-	@@cp -R ${OUTPUT} tmp/${NAME} 
+	@@cp -R ${OUTPUT} tmp/${NAME}
 	# ... And remove the Zipped docs so they aren't included twice (for deploy scripts)
-	@@rm -rf tmp/${NAME}/${NAME}.docs.zip 
+	@@rm -rf tmp/${NAME}/${NAME}.docs.zip
 	@@cd tmp; zip -rq ../${OUTPUT}/${NAME}.zip ${NAME}
 	@@rm -rf tmp
 	# -------------------------------------------------
-	
-
-
 
 # -------------------------------------------------
 # -------------------------------------------------
@@ -187,7 +184,7 @@ latest: init css js zip
 	# -------------------------------------------------
 
 # Build the nightly backups. This is done on a server cronjob
-nightlies: init css js docs zip 
+nightlies: init css js docs zip
 	# Time to put these on the CDN
 	@@mkdir -p tmp/nightlies
 	@@mv ${OUTPUT} tmp/nightlies/$$(date "+%Y%m%d")
@@ -212,7 +209,7 @@ deploy: init css js docs zip
 		-exec perl -pi -e \
 		's|src="(.*)${NAME}.min.js"|src="//code.jquery.com/mobile/${VER_OFFICIAL}/${NAME}.min.js"|g;s|href="(.*)${NAME}.min.css"|href="//code.jquery.com/mobile/${VER_OFFICIAL}/${NAME}.min.css"|g;s|src="(.*)jquery.js"|src="//code.jquery.com/jquery-1.6.4.js"|g' {} \;
 	# ... So they can be copied to jquerymobile.com
-	@@scp -qr tmp/* jqadmin@jquerymobile.com:/srv/jquerymobile.com/htdocs/demos/	
+	@@scp -qr tmp/* jqadmin@jquerymobile.com:/srv/jquerymobile.com/htdocs/demos/
 	# Do some cleanup to wrap it up
 	@@rm -rf tmp
 	@@rm -rf ${OUTPUT}
