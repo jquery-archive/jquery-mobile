@@ -168,11 +168,11 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 				viewportHeight = Math.min( screen.height, $win.height() ),
 				tbtype = $el.is( ".ui-header" ) ? "header" : "footer";
 
-				if( !notransition && this.options.transition && this.options.transition !== "none" &&
+				if( !notransition && ( this.options.transition && this.options.transition !== "none" &&
 					(
 					( tbtype === "header" && !this.options.fullscreen && scroll > elHeight ) ||
 					( tbtype === "footer" && !this.options.fullscreen && scroll + viewportHeight < pHeight - elHeight )
-					) || this.options.fullscreen ){
+					) || this.options.fullscreen ) ){
 				$el
 					.removeClass( "out " + hideClass )
 					.addClass( "in" );
@@ -195,11 +195,11 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 				// if it's a slide transition, our new transitions need the reverse class as well to slide outward
 				outclass = "out" + ( this.options.transition === "slide" ? " reverse" : "" );
 
-			if( !notransition && this.options.transition && this.options.transition !== "none" &&
+			if( !notransition && ( this.options.transition && this.options.transition !== "none" &&
 					(
 					( tbtype === "header" && !this.options.fullscreen && scroll > elHeight ) ||
 					( tbtype === "footer" && !this.options.fullscreen && scroll + viewportHeight < pHeight - elHeight )
-					) || this.options.fullscreen ){
+					) || this.options.fullscreen ) ){
 				$el
 					.addClass( outclass )
 					.removeClass( "in" )
