@@ -119,7 +119,7 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 						$.mobile.zoom.disable( true );
 					}
 					if( o.visibleOnPageShow ){
-						self.show();
+						self.show( true );
 					}
 				} )
 				.bind( "webkitAnimationStart animationstart", function(){
@@ -158,7 +158,7 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 			$el.closest( ".ui-page" ).css( "padding-" + ( header ? "top" : "bottom" ), $el.height() );
 		},
 		
-		show: function(){
+		show: function( notransition ){
 			var hideClass = "ui-fixed-hidden",
 				$el = this.element,
 				$win = $( window ),
@@ -168,7 +168,7 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 				viewportHeight = Math.min( screen.height, $win.height() ),
 				tbtype = $el.is( ".ui-header" ) ? "header" : "footer";
 
-				if( this.options.transition && this.options.transition !== "none" &&
+				if( !notransition && this.options.transition && this.options.transition !== "none" &&
 					(
 					( tbtype === "header" && !this.options.fullscreen && scroll > elHeight ) ||
 					( tbtype === "footer" && !this.options.fullscreen && scroll + viewportHeight < pHeight - elHeight )
@@ -183,7 +183,7 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 			this._visible = true;
 		},
 		
-		hide: function(){
+		hide: function( notransition ){
 			var hideClass = "ui-fixed-hidden",
 				$el = this.element,
 				$win = $( window ),
@@ -195,7 +195,7 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 				// if it's a slide transition, our new transitions need the reverse class as well to slide outward
 				outclass = "out" + ( this.options.transition === "slide" ? " reverse" : "" );
 
-			if( this.options.transition && this.options.transition !== "none" &&
+			if( !notransition && this.options.transition && this.options.transition !== "none" &&
 					(
 					( tbtype === "header" && !this.options.fullscreen && scroll > elHeight ) ||
 					( tbtype === "footer" && !this.options.fullscreen && scroll + viewportHeight < pHeight - elHeight )
