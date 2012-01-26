@@ -11,7 +11,7 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 		options: {
 			visibleOnPageShow: true,
 			disablePageZoom: true,
-			transition: "fade", //can be none, fade, slide (slide maps to slideup or slidedown)
+			transition: "slide", //can be none, fade, slide (slide maps to slideup or slidedown)
 			fullscreen: false,
 			tapToggle: true,
 			updatePagePadding: true,
