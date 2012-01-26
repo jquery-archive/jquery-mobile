@@ -10,7 +10,7 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 	$.widget( "mobile.fixedtoolbar", $.mobile.widget, {
 		options: {
 			visibleOnPageShow: true,
-			togglePageZoom: true,
+			disablePageZoom: true,
 			transition: "fade", //can be none, fade, slide (slide maps to slideup or slidedown)
 			fullscreen: false,
 			tapToggle: true,
@@ -115,7 +115,7 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 			// This method is meant to disable zoom while a fixed-positioned toolbar page is visible
 			$el.closest( ".ui-page" )
 				.bind( "pagebeforeshow", function(){
-					if( o.togglePageZoom ){
+					if( o.disablePageZoom ){
 						$.mobile.zoom.disable( true );
 					}
 					if( o.visibleOnPageShow ){
@@ -136,7 +136,7 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 					}
 				})
 				.bind( "pagebeforehide", function(){
-					if( o.togglePageZoom ){
+					if( o.disablePageZoom ){
 						$.mobile.zoom.enable( true );
 					}
 					if( o.updatePagePadding ){
