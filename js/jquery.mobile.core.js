@@ -13,6 +13,7 @@ define( [ "jquery", "text!../version.txt", "./jquery.mobile.widget" ], function(
 	// jQuery.mobile configurable options
 	$.mobile = $.extend( {}, {
 
+		// Version of the jQuery Mobile Framework
 		version: __version__,
 
 		// Namespace used framework-wide for data-attrs. Default is no namespace
