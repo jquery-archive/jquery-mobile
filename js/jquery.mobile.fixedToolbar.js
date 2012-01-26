@@ -122,7 +122,7 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 						self.show( true );
 					}
 				} )
-				.bind( "webkitAnimationStart animationstart", function(){
+				.bind( "webkitAnimationStart animationstart updatelayout", function(){
 					if( o.updatePagePadding ){
 						self.updatePagePadding();
 					}	
