@@ -78,8 +78,7 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 			$el.addClass( "ui-"+ tbtype +"-fixed" );
 			
 			// "fullscreen" overlay positioning
-			// NOTE - this used to be only "data-fullscreen" on page element. Support both or deprecate page?
-			if( $el.jqmData( "fullscreen" ) || $page.jqmData( "fullscreen" ) ){
+			if( $el.jqmData( "fullscreen" ) ){
 				$el.addClass( "ui-"+ tbtype +"-fullscreen" );
 				$page.addClass( "ui-page-" + tbtype + "-fullscreen" );
 			}
