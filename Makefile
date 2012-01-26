@@ -18,7 +18,7 @@ deploy: STRUCTURE = jquery.mobile.structure-${VER_OFFICIAL}
 # The CSS theme being used
 THEME = default
 
-RUN_JS = @@/usr/local/bin/node
+RUN_JS = @@java -XX:ReservedCodeCacheSize=64m -classpath build/js.jar:build/google-compiler-20111003.jar org.mozilla.javascript.tools.shell.Main
 
 
 
