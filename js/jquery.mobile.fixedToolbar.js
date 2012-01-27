@@ -14,6 +14,7 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 			transition: "slide", //can be none, fade, slide (slide maps to slideup or slidedown)
 			fullscreen: false,
 			tapToggle: true,
+			tapToggleBlacklist: "a, input, select, textarea, .ui-header-fixed, .ui-footer-fixed",
 			updatePagePadding: true,
 			
 			// Browser detection! Weeee, here we go...
@@ -225,7 +226,7 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 			// tap toggle
 			$el.closest( ".ui-page" )
 				.bind( "vclick", function( e ){
-					if( o.tapToggle && $el.find( e.target ).length === 0 ){
+					if( o.tapToggle && !$( e.target ).closest( o.tapToggleBlacklist ).length ){
 						self.toggle();
 					}
 				});
