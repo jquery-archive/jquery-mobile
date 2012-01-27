@@ -40,7 +40,7 @@ function outInTransitionHandler( name, reverse, $to, $from ) {
 			$.mobile.focusPage( $to );
 			
 			// Jump to top or prev scroll, sometimes on iOS the page has not rendered yet.
-			$to.height( $to.height() );
+			$to.height( screenHeight + toScroll );
 				
 			$.mobile.silentScroll( toScroll );
 			
@@ -67,7 +67,7 @@ function outInTransitionHandler( name, reverse, $to, $from ) {
 	if ( $from && !none ) {
 		$from
 			.animationComplete( doneOut )
-			.height( $from.height() )
+			.height( screenHeight + $(window ).scrollTop() )
 			.addClass( name + " out" + reverseClass );
 	}
 	else {	
