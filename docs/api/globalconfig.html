@@ -121,9 +121,20 @@ $(document).bind("mobileinit", function(){
 
 	<dt><code>loadingMessage</code> <em>string</em>, default: "loading"</dt>
 	<dd>Set the text that appears when a page is loading. If set to false, the message will not appear at all.</dd>
+	
+	<dt><code>loadingMessageTheme</code> <em>string</em>, default: "a"</dt>
+	<dd>Set the theme that the loading message box uses, when text is visible.</dd>
 
 	<dt><code>pageLoadErrorMessage</code> <em>string</em>, default: "Error Loading Page"</dt>
 	<dd>Set the text that appears when a page fails to load through Ajax.</dd>
+	
+	<dt><code>pageLoadErrorMessageTheme</code> <em>string</em>, default: "e"</dt>
+	<dd>Set the theme that the error message box uses.</dd>
+	
+	<dt><code>loadingMessageTextVisible</code> <em>string</em>, default: false</dt>
+	<dd>Should the text be visible when loading message is shown. (note: currently, the text is always visible for loading errors)</dd>
+	
+	
 
 	<dt><code>gradeA</code> <em>function that returns a boolean</em>, default: a function returning the value of $.support.mediaquery</dt>
 	<dd>Any support conditions that must be met in order to proceed.</dd>

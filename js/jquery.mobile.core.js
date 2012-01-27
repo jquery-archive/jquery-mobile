@@ -63,6 +63,15 @@ define( [ "jquery", "text!../version.txt", "./jquery.mobile.widget" ], function(
 
 		// Error response message - appears when an Ajax page request fails
 		pageLoadErrorMessage: "Error Loading Page",
+		
+		// Should the text be visble in the loading message?
+		loadingMessageTextVisible: false,
+		
+		// When the text is visible, what theme does the loading box use?
+		loadingMessageTheme: "a",
+		
+		// For error messages, which theme does the box uses?
+		pageLoadErrorMessageTheme: "e",
 
 		//automatically initialize the DOM when it's ready
 		autoInitializePage: true,

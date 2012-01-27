@@ -863,18 +863,15 @@ define( [
 
 					// Remove loading message.
 					if ( settings.showLoadMsg ) {
-
+						
 						// Remove loading message.
 						hideMsg();
 
-						//show error message
-						$( "<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h1>"+ $.mobile.pageLoadErrorMessage +"</h1></div>" )
-							.css({ "display": "block", "opacity": 0.96, "top": $window.scrollTop() + 100 })
-							.appendTo( settings.pageContainer )
-							.delay( 800 )
-							.fadeOut( 400, function() {
-								$( this ).remove();
-							});
+						// show error message
+						$.mobile.showPageLoadingMsg( $.mobile.pageLoadErrorMessageTheme, $.mobile.pageLoadErrorMessage, true );
+						
+						// hide after delay
+						setTimeout( $.mobile.hidePageLoadingMsg, 1500 );
 					}
 
 					deferred.reject( absUrl, options );

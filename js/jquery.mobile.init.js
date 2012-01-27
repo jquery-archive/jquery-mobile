@@ -30,7 +30,8 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.navigation", "./jqu
 
 	// loading div which appears during Ajax requests
 	// will not appear if $.mobile.loadingMessage is false
-	var $loader = $( "<div class='ui-loader '><span class='ui-icon ui-icon-loading'></span><h1></h1></div>" );
+	var loaderClass = "ui-loader",
+		$loader = $( "<div class='" + loaderClass + "'><span class='ui-icon ui-icon-loading'></span><h1></h1></div>" );
 	
 	// For non-fixed supportin browsers. Position at y center (if scrollTop supported), above the activeBtn (if defined), or just 100px from top
 	function fakeFixLoader(){
@@ -56,14 +57,20 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.navigation", "./jqu
 
 	$.extend($.mobile, {
 		// turn on/off page loading message.
-		showPageLoadingMsg: function() {
+		showPageLoadingMsg: function( theme, msgText, textonly ) {
 			$html.addClass( "ui-loading" );
+			
 			if ( $.mobile.loadingMessage ) {
-				var activeBtn = $( "." + $.mobile.activeBtnClass ).first();
+				var activeBtn = $( "." + $.mobile.activeBtnClass ).first(),
+					theme = theme || $.mobile.loadingMessageTheme,
+					// text visibility from argument takes priority
+					textVisible = textonly || $.mobile.loadingMessageTextVisible;
+					
 
 				$loader
+					.attr( "class", loaderClass + " ui-body-" + ( theme || "a" ) + " ui-loader-" + ( textVisible ? "verbose" : "default" ) + ( textonly ? " ui-loader-textonly" : "" ) )
 					.find( "h1" )
-						.text( $.mobile.loadingMessage )
+						.text( msgText || $.mobile.loadingMessage )
 						.end()
 					.appendTo( $.mobile.pageContainer );
 					
@@ -77,7 +84,7 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.navigation", "./jqu
 			
 			if( $.mobile.loadingMessage ){
 				$loader.removeClass( "ui-loader-fakefix" );
-			}	
+			}
 			
 			$( window ).unbind( "scroll", fakeFixLoader );
 		},
