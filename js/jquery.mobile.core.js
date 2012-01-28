@@ -4,7 +4,7 @@
 //>>group: core
 //>>required: true
 
-define( [ "jquery", "text!../version.txt", "./jquery.mobile.widget" ], function( $, __version__ ) {
+define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobile.widget" ], function( $, __version__ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 

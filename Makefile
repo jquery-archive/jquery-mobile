@@ -23,7 +23,6 @@ RUN_JS = @@java -XX:ReservedCodeCacheSize=64m -classpath build/js.jar:build/goog
 
 
 
-
 # Build Targets
 
 # When no build target is specified, all gets ran
@@ -101,7 +100,7 @@ js: init
 		external/r.js/dist/r.js \
 	 	-o baseUrl="js" \
 		include=jquery.mobile \
-		exclude=jquery,order,text,text!../version.txt \
+		exclude=jquery,../external/requirejs/order,../external/requirejs/text,../external/requirejs/text!../version.txt \
 		out=${OUTPUT}/${NAME}.compiled.js \
 		pragmasOnSave.jqmBuildExclude=true \
 		wrap.startFile=build/wrap.start \

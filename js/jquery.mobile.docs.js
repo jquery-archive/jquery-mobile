@@ -2,5 +2,5 @@
 //>>description: jQuery Mobile documentation JS
 //>>label: Docs
 
-define( [ "./order!./jquery.mobile", "./order!../docs/_assets/js/jqm-docs" ] );
+define( [ "../external/requirejs/order!./jquery.mobile", "../external/requirejs/order!../docs/_assets/js/jqm-docs" ] );
 //>>excludeEnd("jqmBuildExclude");
