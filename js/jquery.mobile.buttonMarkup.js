@@ -18,7 +18,8 @@ $.fn.buttonMarkup = function( options ) {
 				inline:     options.inline     !== undefined ? options.inline     : el.jqmData( "inline" ),
 				shadow:     options.shadow     !== undefined ? options.shadow     : el.jqmData( "shadow" ),
 				corners:    options.corners    !== undefined ? options.corners    : el.jqmData( "corners" ),
-				iconshadow: options.iconshadow !== undefined ? options.iconshadow : el.jqmData( "iconshadow" )
+				iconshadow: options.iconshadow !== undefined ? options.iconshadow : el.jqmData( "iconshadow" ),
+				mini:       options.mini       !== undefined ? options.mini       : el.jqmData( "mini" ),
 			}, options ),
 
 			// Classes Defined
@@ -30,9 +31,6 @@ $.fn.buttonMarkup = function( options ) {
 			buttonText = document.createElement( o.wrapperEls ),
 			buttonIcon = o.icon ? document.createElement( "span" ) : null;
 
-		// if so, prevent double enhancement, and continue with rest of the elements.
-		if( e.tagName === "INPUT" && el.jqmData('role') === "button" ) continue;
-		
 		// if this is a button, check if it's been enhanced and, if not, use the right function
 		if( e.tagName === "BUTTON" ) {
 	 	 	if ( !$( e.parentNode ).hasClass( "ui-btn" ) ) $( e ).button();
@@ -51,7 +49,12 @@ $.fn.buttonMarkup = function( options ) {
 		buttonClass = "ui-btn ui-btn-up-" + o.theme;
 
 		if ( o.inline ) {
+			console.log( 'inline' );
 			buttonClass += " ui-btn-inline";
+		}
+
+		if ( o.mini ) {
+			buttonClass += " ui-btn-mini";
 		}
 
 		if ( o.icon ) {

@@ -22,7 +22,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		closeText: "Close",
 		nativeMenu: true,
 		preventFocusZoom: true,
-		initSelector: "select:not(:jqmData(role='slider'))"
+		initSelector: "select:not(:jqmData(role='slider'))",
+		mini: false
 	},
 
 	_button: function(){
@@ -88,7 +89,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					inline: options.inline,
 					corners: options.corners,
 					shadow: options.shadow,
-					iconshadow: options.iconshadow
+					iconshadow: options.iconshadow,
+					mini: options.mini
 				});
 
 		// Opera does not properly support opacity on select elements

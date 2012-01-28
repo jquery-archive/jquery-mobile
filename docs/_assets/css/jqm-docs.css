@@ -23,7 +23,7 @@ pre { white-space: pre; white-space: pre-wrap; word-wrap: break-word; }
 #jqm-homeheader img { width: 235px; }
 img { max-width: 100%; }
 
-.ui-header .jqm-home { top:0.65em; }
+.ui-header .jqm-home { top: 0; }
 nav { margin: 0; }
 
 p.intro {
