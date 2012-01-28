@@ -1,6 +1,7 @@
 //set up the theme switcher on the homepage
-
-define( [ "jquery.mobile" ], function() {
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+define( function() {
+//>>excludeEnd("jqmBuildExclude");
 
 //collapse page navs after use
 $(function(){
@@ -54,4 +55,6 @@ if ( location.protocol.substr(0,4)  === 'file' ||
     });
   });
 }
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
+//>>excludeEnd("jqmBuildExclude");
