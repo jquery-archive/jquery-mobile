@@ -6,15 +6,20 @@
 	<title>jQuery Mobile Docs - Configuration</title> 
 	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	
+	
+	<script src="../../external/requirejs/require.js"></script>
+	<script src="../../js/jquery.js"></script>
 	<script>
 	$(document).bind("mobileinit", function(){
 	  $.mobile.loadingMessage = false;
 	});
 	</script>
-	
-	
-	<script data-main="../../js/jquery.mobile.docs" src="../../external/requirejs/require.js"></script>
-	<script src="../../js/jquery.js"></script>
+	<script>
+		require( {
+			baseUrl: "../../js"
+		}) ( [ "jquery.mobile.docs" ] )
+	</script>
 </head> 
 <body> 
 
