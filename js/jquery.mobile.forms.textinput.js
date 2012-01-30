@@ -111,14 +111,14 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		}
 	},
 
-	disable: function(){
-		( this.element.attr( "disabled", true ).is( "[type='search'],:jqmData(type='search')" ) ?
-			this.element.parent() : this.element ).addClass( "ui-disabled" );
+	_setOption: function(key, value) {
+		if (key === "disabled")
+			this._setDisabled(value);
 	},
 
-	enable: function(){
-		( this.element.attr( "disabled", false).is( "[type='search'],:jqmData(type='search')" ) ?
-			this.element.parent() : this.element ).removeClass( "ui-disabled" );
+	_setDisabled: function(value) {
+		( this.element.attr( "disabled", value ).is( "[type='search'],:jqmData(type='search')" ) ?
+			this.element.parent() : this.element )[value ? "addClass" : "removeClass"]( "ui-disabled" );
 	}
 });
 
