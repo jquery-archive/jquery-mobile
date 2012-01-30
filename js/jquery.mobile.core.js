@@ -83,7 +83,7 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 
 		// use event for click the component.
                 // With Android, click event has delay and fell it's slow. set vclick improve response.
-                $.mobile.formComponentClickEvent: "click",
+                formComponentClickEvent: "click",
 
 		// Support conditions that must be met in order to proceed
 		// default enhanced qualifications are media query support OR IE 7+
