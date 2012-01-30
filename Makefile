@@ -146,7 +146,8 @@ zip: init css js
 # For jQuery Team Use Only
 #
 # -------------------------------------------------
-build_latest: init css docs js zip
+# NOTE the init (which removes previous build output) has been removed to prevent a gap in service
+build_latest: css docs js zip
 
 deploy_latest:
 	# Time to put these on the CDN
