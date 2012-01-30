@@ -146,12 +146,16 @@ zip: init css js
 # For jQuery Team Use Only
 #
 # -------------------------------------------------
+build_latest: init css docs js zip
 
-# Push the latest git version to the CDN. This is done on a post commit hook
-latest: init css docs js zip
+deploy_latest:
 	# Time to put these on the CDN
 	@@scp -qr ${OUTPUT}/* jqadmin@code.origin.jquery.com:/var/www/html/code.jquery.com/mobile/latest/
 	# -------------------------------------------------
+
+# Push the latest git version to the CDN. This is done on a post commit hook
+# TODO target name preserved to avoid issues during refactor, latest -> deploy_latest
+latest: build_latest deploy_latest
 
 # Build the nightly backups. This is done on a server cronjob
 nightlies: init css js docs zip
