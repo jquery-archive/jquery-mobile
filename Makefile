@@ -159,13 +159,11 @@ deploy_latest:
 latest: build_latest deploy_latest
 
 # Build the nightly backups. This is done on a server cronjob
-nightlies: init css js docs zip
+nightlies: css js docs zip
 	# Time to put these on the CDN
 	@@mkdir -p tmp/nightlies
 	@@mv ${OUTPUT} tmp/nightlies/$$(date "+%Y%m%d")
 	@@scp -qr tmp/nightlies/* jqadmin@code.origin.jquery.com:/var/www/html/code.jquery.com/mobile/nightlies/
-	# Do some cleanup to wrap it up
-	@@rm -rf tmp
 	# -------------------------------------------------
 
 
