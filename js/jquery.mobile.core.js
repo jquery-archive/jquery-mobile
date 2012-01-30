@@ -50,7 +50,11 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 
 		// Minimum scroll distance that will be remembered when returning to a page
 		minScrollBack: 10,
-		
+
+		// Enabled hover animation for button when mouseover or tap.
+                // Disable this value to improve old Android response.
+		buttonHoverEnabled: true,
+
 		// DEPRECATED: the following property is no longer in use, but defined until 2.0 to prevent conflicts
 		touchOverflowEnabled: false,
 

@@ -39,7 +39,7 @@ $.fn.buttonMarkup = function( options ) {
 	 	 	continue;
  	 	}
 
-		if ( attachEvents ) {
+		if ( $.mobile.buttonHoverEnabled && attachEvents ) {
 			attachEvents();
 		}
 
