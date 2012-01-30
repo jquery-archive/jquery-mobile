@@ -28,6 +28,8 @@ RUN_JS = @@java -XX:ReservedCodeCacheSize=64m -classpath build/js.jar:build/goog
 # When no build target is specified, all gets ran
 all: init css js zip notify
 
+# alias for init to follow normal build conventions
+clean: init
 
 # Build and minify the CSS files
 css: init
@@ -86,12 +88,10 @@ docs: init
 # Create the output directory. This is in a separate step so its not dependant on other targets
 init:
 	# -------------------------------------------------
-	# Building jQuery Mobile in the "${OUTPUT}" folder
+	# Cleaning build output
 	@@rm -rf ${OUTPUT}
 	@@rm -rf tmp
 	@@mkdir -p ${OUTPUT}
-	# -------------------------------------------------
-
 
 # Build and minify the JS files
 js: init
