@@ -88,9 +88,16 @@ $.mobile.fixedToolbars
 			
 			<dt><code>tapToggleBlacklist</code> <em>string</em></dt>
 			<dd>
-				<p class="default">default: "a, input, select, textarea, .ui-header-fixed, .ui-footer-fixed"</p>
+				<p class="default">default: "a, .ui-header-fixed, .ui-footer-fixed"</p>
 				<p>A list of jQuery selectors that should be ignored for tap-toggling the toolbars.</p>			
 				<pre><code>$("[data-role=header]").fixedtoolbar(<strong>{ tapToggleBlacklist: "a, input, select, textarea, .ui-header-fixed, .ui-footer-fixed" }</strong>);</code></pre>
+			</dd>
+			
+			<dt><code>hideDuringFocus</code> <em>string</em></dt>
+			<dd>
+				<p class="default">default: "input, select, textarea"</p>
+				<p>A list of jQuery selectors that should cause the toolbars to hide while focused, except if they are in a fixed toolbar.</p>			
+				<pre><code>$("[data-role=header]").fixedtoolbar(<strong>{ hideDuringFocus: "input, select, textarea" }</strong>);</code></pre>
 			</dd>
 			
 			
