@@ -183,12 +183,13 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 		}
 	},
 
-	disable: function() {
-		this.element.attr( "disabled", true ).parent().addClass( "ui-disabled" );
+	_setOption: function(key, value) {
+		if (key === "disabled")
+			this._setDisabled(value);
 	},
 
-	enable: function() {
-		this.element.prop( "disabled", false ).parent().removeClass( "ui-disabled" );
+	_setDisabled: function(value) {
+		this.element.attr("disabled", value).parent()[value ? "addClass" : "removeClass"]("ui-disabled");
 	}
 });
 
