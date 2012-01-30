@@ -86,16 +86,15 @@ $.widget( "mobile.button", $.mobile.widget, {
 		this.refresh();
 	},
 
-	enable: function() {
-		this.element.attr( "disabled", false );
-		this.button.removeClass( "ui-disabled" ).attr( "aria-disabled", false );
-		return this._setOption( "disabled", false );
+	_setOption: function(key, value) {
+		if (key === "disabled")
+			this._setDisabled(value);
 	},
 
-	disable: function() {
-		this.element.attr( "disabled", true );
-		this.button.addClass( "ui-disabled" ).attr( "aria-disabled", true );
-		return this._setOption( "disabled", true );
+	_setDisabled: function(value) {
+		this.element.attr( "disabled", value );
+		this.button[value ? "addClass" : "removeClass"]( "ui-disabled" ).attr( "aria-disabled", value );
+		return $.Widget.prototype._setOption.call(this, "disabled", value );
 	},
 
 	refresh: function() {
