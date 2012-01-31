@@ -63,7 +63,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 				})
 			.add( ".ui-btn-inner" )
 				.addClass( "ui-corner-top ui-corner-bottom" );
-
+	
 		//events
 		collapsible
 			.bind( "expand collapse", function( event ) {
@@ -93,10 +93,35 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 							.toggleClass( "ui-corner-bottom", isCollapse );
 						collapsibleContent.toggleClass( "ui-corner-bottom", !isCollapse );
 					}
+					
 					collapsibleContent.trigger( "updatelayout" );
 				}
 			})
 			.trigger( o.collapsed ? "collapse" : "expand" );
+			
+		var lastExpanded;
+		// auto scroll to top of expanded section
+		collapsible.bind( "expand", function() {
+			var $expandable = $(this);
+			// wait until the lastExpanded has been collapsed, check each 200ms
+			var intervalId = setInterval(function() {
+				if (lastExpanded && lastExpanded.has( ".ui-collapsible-heading-collapsed" )) {
+					var expandableTop = $expandable.offset().top,
+					$window = $(window),
+					targetPos = expandableTop - $window.scrollTop() + $expandable.height();
+					// a) if collapsable does not fit within displayable area or 
+					// b) if the window scrolled below the top of the collapsable section
+					if (targetPos > $window.height() || expandableTop < $window.scrollTop()) {
+	 					$.mobile.silentScroll(expandableTop);
+					}
+					// once last section collapsed and processed clear check interval
+					clearInterval(intervalId);
+					lastExpanded = $expandable;
+				} else {
+					lastExpanded = $expandable;
+				}
+			}, 200);
+		}); 
 
 		collapsibleHeading
 			.bind( "click", function( event ) {
