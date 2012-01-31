@@ -118,11 +118,13 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 				},
 
 				focus: function() {
-					label.addClass( $.mobile.focusClass );
+                                        if ( $.mobile.buttonHoverEnabled )
+						label.addClass( $.mobile.focusClass );
 				},
 
 				blur: function() {
-					label.removeClass( $.mobile.focusClass );
+                                        if ( $.mobile.buttonHoverEnabled )
+						label.removeClass( $.mobile.focusClass );
 				}
 			});
 
