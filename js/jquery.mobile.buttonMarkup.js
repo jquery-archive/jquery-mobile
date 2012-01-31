@@ -206,8 +206,8 @@ var attachEvents = function() {
 //links in bars, or those with  data-role become buttons
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ){
-
-	$( ":jqmData(role='button'), .ui-bar > a, .ui-header > a, .ui-footer > a, .ui-bar > :jqmData(role='controlgroup') > a", e.target )
+	// removed parent > child limitation from .ui-header > a to allow header content to be wrapped in a non-div tag
+	$( ":jqmData(role='button'), .ui-bar > a, .ui-header  a, .ui-footer > a, .ui-bar > :jqmData(role='controlgroup') > a", e.target )
 		.not( ".ui-btn, :jqmData(role='none'), :jqmData(role='nojs')" )
 		.buttonMarkup();
 });

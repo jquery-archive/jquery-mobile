@@ -44,7 +44,10 @@ $( document ).delegate( ":jqmData(role='page'), :jqmData(role='dialog')", "pagec
 				.attr( "role", role === "header" ? "banner" : "contentinfo" );
 
 			// Right,left buttons
-			$headeranchors	= $this.children( "a" );
+			// $headeranchors	= $this.children( "a" );
+			// probably a better way to do this, but to go along with the docs
+			// non-div "a" descendants
+			$headeranchors	= $this.find( "a" ).not( "div > a" );
 			leftbtn	= $headeranchors.hasClass( "ui-btn-left" );
 			rightbtn = $headeranchors.hasClass( "ui-btn-right" );
 
@@ -66,7 +69,11 @@ $( document ).delegate( ":jqmData(role='page'), :jqmData(role='dialog')", "pagec
 			}
 
 			// Page title
-			$this.children( "h1, h2, h3, h4, h5, h6" )
+			// $this.children( "h1, h2, h3, h4, h5, h6" )
+			// probably a better way to do this, but to go along with the docs
+			// non-div "h1, h2, h3, h4, h5, h6" descendants
+			$this.find( "h1, h2, h3, h4, h5, h6" )
+				.not( "div > h1, div > h2, div > h3, div > h4, div > h5, div > h6" )
 				.addClass( "ui-title" )
 				// Regardless of h element number in src, it becomes h1 for the enhanced page
 				.attr({
