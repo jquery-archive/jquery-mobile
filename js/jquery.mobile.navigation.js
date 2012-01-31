@@ -379,14 +379,21 @@ define( [
 
 	//direct focus to the page title, or otherwise first focusable element
 	$.mobile.focusPage = function ( page ) {
-		var pageTitle = page.find( ".ui-title:eq(0)" );
+		// Since IE sometimes throws exception when we focus to hidden elements
+		// wrap this with a try/catch block, see #3505
 
-		if( pageTitle.length ) {
-			pageTitle.focus();
-		}
-		else{
-			page.focus();
-		}
+		try {						
+			var pageTitle = page.find( ".ui-title:eq(0)" );
+	
+			if( pageTitle.length ) {
+				pageTitle.focus();
+			}
+			else{
+				page.focus();
+			}
+		
+		} catch(e) {}
+
 	}
 
 	//remove active classes after page transition or error

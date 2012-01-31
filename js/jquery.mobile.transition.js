@@ -37,7 +37,8 @@ function outInTransitionHandler( name, reverse, $to, $from ) {
 			}
 
 			// Send focus to page as it is now display: block
-			$.mobile.focusPage( $to );
+			// commented to prevent #3505 "Calling focus on hidden elements breaks page on ie8"
+			// $.mobile.focusPage( $to );
 			
 			// Jump to top or prev scroll, sometimes on iOS the page has not rendered yet.
 			$to.height( screenHeight + toScroll );
@@ -58,7 +59,7 @@ function outInTransitionHandler( name, reverse, $to, $from ) {
 				.height( "" )
 				.parent().removeClass( viewportClass );
 			
-			deferred.resolve( name, reverse, $to, $from, true );
+			deferred.resolve( name, reverse, $to, $from, false );
 		};
 		
 	$to
