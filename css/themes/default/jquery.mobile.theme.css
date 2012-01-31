@@ -1104,9 +1104,9 @@ a.ui-link-inherit {
 	box-shadow: inset 0px 1px 4px 			rgba(0,0,0,.2);
 }
 .ui-icon-shadow {
-	-moz-box-shadow: 0px 1px 0 				rgba(255,255,255,.4);
-	-webkit-box-shadow: 0px 1px 0 			rgba(255,255,255,.4);
-	box-shadow: 0px 1px 0 					rgba(255,255,255,.4);
+	-moz-box-shadow: 0px 1px 0 				rgba(255,255,255,.4) /*{global-icon-shadow}*/;
+	-webkit-box-shadow: 0px 1px 0 			rgba(255,255,255,.4) /*{global-icon-shadow}*/;
+	box-shadow: 0px 1px 0 					rgba(255,255,255,.4) /*{global-icon-shadow}*/;
 }
 
 /* Focus state - set here for specificity
