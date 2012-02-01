@@ -53,7 +53,7 @@
 			},
 
 			function() {
-				ok( $( '#classes-test-g' ).hasClass('fade'), 'The fade class should be applied by default');
+				ok( $( '#classes-test-g' ).hasClass('slidedown'), 'The slidedown class should be applied by default');
 				ok( $( '#classes-test-b' ).hasClass('in'), 'The "in" class should be applied by default');
 				ok( !$( '#classes-test-h' ).hasClass('fade'), 'The fade class should not be applied when the header has a data-transition of "none"');
 
