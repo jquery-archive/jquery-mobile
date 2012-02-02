@@ -17,6 +17,7 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 			tapToggleBlacklist: "a, input, select, textarea, .ui-header-fixed, .ui-footer-fixed",
 			hideDuringFocus: "input, textarea, select",
 			updatePagePadding: true,
+			trackPersistentToolbars: true,
 			
 			// Browser detection! Weeee, here we go...
 			// Unfortunately, position:fixed is costly, not to mention probably impossible, to feature-detect accurately.
@@ -137,13 +138,30 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 						});
 					}
 				})
-				.bind( "pagebeforehide", function(){
+				.bind( "pagebeforehide", function( e, ui ){
 					if( o.disablePageZoom ){
 						$.mobile.zoom.enable( true );
 					}
 					if( o.updatePagePadding ){
 						$( window ).unbind( "throttledresize." + self.widgetName );
-					}	
+					}
+					
+					if( o.trackPersistentToolbars ){
+						var thisFooter = $( ".ui-footer-fixed:jqmData(id)", this ),
+							thisHeader = $( ".ui-header-fixed:jqmData(id)", this ),
+							nextFooter = thisFooter.length && ui.nextPage && $( ".ui-footer-fixed:jqmData(id='" + thisFooter.jqmData( "id" ) + "')", ui.nextPage ),
+							nextHeader = thisHeader.length && ui.nextPage && $( ".ui-header-fixed:jqmData(id='" + thisHeader.jqmData( "id" ) + "')", ui.nextPage );
+		
+							if( nextFooter.length || nextHeader.length ){
+					
+								nextFooter.add( nextHeader ).appendTo( $.mobile.pageContainer );
+				
+								ui.nextPage.one( "pageshow", function(){
+									nextFooter.add( nextHeader ).appendTo( this );
+								} );
+							}
+					}
+					
 				});
 		},
 		

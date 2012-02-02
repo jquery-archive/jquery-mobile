@@ -41,7 +41,6 @@ define([
 	'./jquery.mobile.controlGroup',
 	'./jquery.mobile.links',
 	'./jquery.mobile.fixedToolbar',
-	'./jquery.mobile.fixedToolbar.persist',
 	'./jquery.mobile.zoom',
 	'./jquery.mobile.zoom.iosorientationfix'
 ], function( require ) {
