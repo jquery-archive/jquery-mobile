@@ -35,7 +35,7 @@
 <ol id="qunit-tests">
 </ol>
 
-<div data-nstest-role="page">
+<div data-nstest-role="page" id="default">
 	<!-- structural classes -->	
 	<div data-nstest-role="header" id="classes-test-a"></div>
 	<div data-nstest-role="header" data-nstest-position="fixed" id="classes-test-b"></div>
@@ -53,6 +53,17 @@
 
 </div>
 
+
+
+<div data-nstest-role="page" id="persist-test-a">
+	<div data-nstest-role="header" data-nstest-position="fixed" data-nstest-id="a"></div>
+	<div data-nstest-role="footer" data-nstest-position="fixed" data-nstest-id="b"></div>
+</div>
+
+<div data-nstest-role="page" id="persist-test-b">
+	<div data-nstest-role="header" data-nstest-position="fixed" data-nstest-id="a"></div>
+	<div data-nstest-role="footer" data-nstest-position="fixed" data-nstest-id="b"></div>
+</div>
 
 
 </body>
