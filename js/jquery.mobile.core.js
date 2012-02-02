@@ -81,12 +81,6 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 		// turn of binding to the native orientationchange due to android orientation behavior
 		orientationChangeEnabled: true,
 
-		// Support conditions that must be met in order to proceed
-		// default enhanced qualifications are media query support OR IE 7+
-		gradeA: function(){
-			return $.support.mediaquery || $.mobile.browser.ie && $.mobile.browser.ie >= 7;
-		},
-
 		// TODO might be useful upstream in jquery itself ?
 		keyCode: {
 			ALT: 18,
