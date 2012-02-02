@@ -20,7 +20,13 @@
 	modules: [
 		{
 			name: "jquery.mobile.docs",
-			exclude: [ "jquery", "../external/requirejs/order" , "../external/requirejs/text", "../external/requirejs/text!../version.txt" ]
+			exclude: [
+				"jquery",
+				"../external/requirejs/depend",
+				"../external/requirejs/order",
+				"../external/requirejs/text",
+				"../external/requirejs/text!../version.txt"
+			]
 		}
 	],
 
