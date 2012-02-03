@@ -94,15 +94,6 @@ docs: init
 	@@rm -rf tmp
 	# -------------------------------------------------
 
-
-# Create the output directory. This is in a separate step so its not dependant on other targets
-init:
-	# -------------------------------------------------
-	# Cleaning build output
-	@@rm -rf ${OUTPUT}
-	@@rm -rf tmp
-	@@mkdir -p ${OUTPUT}
-
 # Build and minify the JS files
 js: init
 	# Build the JavaScript file
