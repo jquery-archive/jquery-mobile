@@ -26,7 +26,7 @@ RUN_JS = @@java -XX:ReservedCodeCacheSize=64m -classpath build/js.jar:build/goog
 # Build Targets
 
 # When no build target is specified, all gets ran
-all: init css js zip notify
+all: css js zip notify
 
 clean: 
 	# -------------------------------------------------
@@ -35,7 +35,7 @@ clean:
 	@@rm -rf tmp
 
 # Create the output directory. 
-init: clean
+init:
 	@@mkdir -p ${OUTPUT}
 
 # Build and minify the CSS files
@@ -77,19 +77,22 @@ docs: init
 	${RUN_JS} \
 		external/r.js/dist/r.js \
 	 	-o build/docs.build.js \
-		dir=../tmp/${NAME}
+		dir=../tmp/demos
 	# ... Prepend versioned license to jquery.mobile.js
-	@@cat tmp/${NAME}/LICENSE-INFO.txt | cat - tmp/${NAME}/js/jquery.mobile.js > tmp/${NAME}/js/jquery.mobile.js.tmp
-	@@cat tmp/${NAME}/js/jquery.mobile.js.tmp | ${SED_VER_API} > tmp/${NAME}/js/jquery.mobile.js
+	@@cat LICENSE-INFO.txt  | ${VER} > tmp/demos/LICENSE-INFO.txt
+	@@cat tmp/demos/LICENSE-INFO.txt | cat - tmp/demos/js/jquery.mobile.js > tmp/demos/js/jquery.mobile.js.tmp
+	@@cat tmp/demos/js/jquery.mobile.js.tmp | ${SED_VER_API} > tmp/demos/js/jquery.mobile.js
 	# ... Prepend versioned license to jquery.mobile.docs.js
-	@@cat tmp/${NAME}/LICENSE-INFO.txt | cat - tmp/${NAME}/js/jquery.mobile.docs.js > tmp/${NAME}/js/jquery.mobile.docs.js.tmp
-	@@cat tmp/${NAME}/js/jquery.mobile.docs.js.tmp | ${SED_VER_API} > tmp/${NAME}/js/jquery.mobile.docs.js
+	@@cat tmp/demos/LICENSE-INFO.txt | cat - tmp/demos/js/jquery.mobile.docs.js > tmp/demos/js/jquery.mobile.docs.js.tmp
+	@@cat tmp/demos/js/jquery.mobile.docs.js.tmp | ${SED_VER_API} > tmp/demos/js/jquery.mobile.docs.js
 	# ... Prepend versioned license to jquery.mobile.css
-	@@cat tmp/${NAME}/LICENSE-INFO.txt | cat - tmp/${NAME}/css/themes/default/${NAME}.css > tmp/${NAME}/css/themes/default/${NAME}.css.tmp
-	@@mv tmp/${NAME}/css/themes/default/${NAME}.css.tmp tmp/${NAME}/css/themes/default/${NAME}.css
+	@@cat tmp/demos/LICENSE-INFO.txt | cat - tmp/demos/css/themes/default/${NAME}.css > tmp/demos/css/themes/default/${NAME}.css.tmp
+	@@mv tmp/demos/css/themes/default/${NAME}.css.tmp tmp/demos/css/themes/default/${NAME}.css
 	# ... Move and zip up the the whole folder
-	@@cd tmp; zip -rq ../${OUTPUT}/${NAME}.docs.zip ${NAME}
-	@@mv tmp/${NAME} ${OUTPUT}/demos
+	@@rm -f ${OUTPUT}/${NAME}.docs.zip
+	@@cd tmp/demos && rm -f *.php && rm -f Makefile
+	@@cd tmp/demos && zip -rq ../../${OUTPUT}/${NAME}.docs.zip *
+	@@rm -rf ${OUTPUT}/demos && mv -f tmp/demos ${OUTPUT}
 	# Finish by removing the temporary files
 	@@rm -rf tmp
 	# -------------------------------------------------
@@ -147,7 +150,7 @@ zip: init css js
 # For jQuery Team Use Only
 #
 # -------------------------------------------------
-# NOTE the init (which removes previous build output) has been removed to prevent a gap in service
+# NOTE the clean (which removes previous build output) has been removed to prevent a gap in service
 build_latest: css docs js zip
 
 deploy_latest:
