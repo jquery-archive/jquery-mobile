@@ -35,6 +35,9 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 
 		// Automatically handle clicks and form submissions through Ajax, when same-domain
 		ajaxEnabled: true,
+		
+		//Automatically rewrite the base element, or if not supported, rewrite the urls
+		rewriteBase: true,
 
 		// Automatically load and show pages based on location.hash
 		hashListeningEnabled: true,
