@@ -177,7 +177,7 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 			// This behavior only applies to "fixed", not "fullscreen"
 			if( this.options.fullscreen ){ return; }
 
-			$el.closest( ".ui-page" ).css( "padding-" + ( header ? "top" : "bottom" ), $el.height() );
+			$el.closest( ".ui-page" ).css( "padding-" + ( header ? "top" : "bottom" ), $el.outerHeight() );
 		},
 		
 		show: function( notransition ){
