@@ -25,7 +25,7 @@ NODE = /usr/local/bin/node
 HAS_NODE = $(shell if test -x ${NODE} ;then echo true; fi)
 
 ifeq ($(HAS_NODE), true)
-	RUN_JS = @@node
+	RUN_JS = @@${NODE}
 else
 	RUN_JS = @@java -XX:ReservedCodeCacheSize=64m -classpath build/js.jar:build/google-compiler-20111003.jar org.mozilla.javascript.tools.shell.Main
 endif
