@@ -72,7 +72,7 @@ function baseTagTest() {
 	if ( !base.length ) {
 		base = fauxEle = $( "<base>", { "href": fauxBase }).appendTo( "head" );
 	} else {
-		href = base.attr( "href" );
+		href = fauxEle = base.attr( "href" );
 	}
 
 	link = $( "<a href='testurl' />" ).prependTo( fakeBody );

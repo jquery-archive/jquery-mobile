@@ -761,7 +761,7 @@ define( [
 					}
 
 					if ( base ) {
-						base.set( fileUrl );
+						//base.set( fileUrl );
 					}
 
 					//workaround to allow scripts to execute when included in page divs
@@ -1137,7 +1137,7 @@ define( [
 		var url = $( ele ).closest( ".ui-page" ).jqmData( "url" ),
 			base = documentBase.hrefNoHash;
 
-		if ( !url || !path.isPath( url ) ) {
+		if ( !url || !path.isPath( url ) || || $.support.dynamicBaseTag ) {
 			url = base;
 		}
 
@@ -1291,7 +1291,7 @@ define( [
 			}
 
 				// Should we handle this link, or let the browser deal with it?
-			var useDefaultUrlHandling = $link.is( "[rel='external']" ) || $link.is( ":jqmData(ajax='false')" ) || $link.is( "[target]" ),
+			    var useDefaultUrlHandling = $link.is( "[rel='external']" ) || $link.is( ":jqmData(ajax='false')" ) || ( $link.is( "[target]" ) && !$link.is( "[target='_top']" ) ),
 
 				// Some embedded browsers, like the web view in Phone Gap, allow cross-domain XHR
 				// requests if the document doing the request was loaded via the file:// protocol.
@@ -1329,7 +1329,7 @@ define( [
 		//prefetch pages when anchors with data-prefetch are encountered
 		$( document ).delegate( ".ui-page", "pageshow.prefetch", function() {
 			var urls = [];
-			$( this ).find( "a:jqmData(prefetch)" ).each(function(){
+			$( this ).find( "a:jqmData(prefetch), link:jqmData(prefetch)" ).each(function(){
 				var $link = $(this),
 					url = $link.attr( "href" );
 
