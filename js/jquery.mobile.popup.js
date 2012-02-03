@@ -298,7 +298,7 @@ $(document).bind("pagecreate create", function(e) {
 		.not(":jqmData(role='none'), :jqmData(role='nojs')")
 		.popup();
 
-	$("a[href^='#']:jqmData(rel='popup')").each(function() {
+	$("a[href^='#']:jqmData(rel='popup')", e.target).each(function() {
 		$.mobile.popup.bindPopupToButton($(this), $($(this).attr("href")));
 
 	});
