@@ -38,7 +38,7 @@ $.widget( "mobile.widget", {
 	},
 
 	enhanceWithin: function( target, useKeepNative ) {
-		var page, keepNative, selected;
+		var page, keepNative, widgetElements;
 
 		widgetElements = $( this.options.initSelector, target );
 
