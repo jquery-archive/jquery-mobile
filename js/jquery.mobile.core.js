@@ -73,6 +73,9 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 		// For error messages, which theme does the box uses?
 		pageLoadErrorMessageTheme: "e",
 
+		// Placeholder for listview filter
+		filterPlaceholder: "Filter items...",
+
 		//automatically initialize the DOM when it's ready
 		autoInitializePage: true,
 

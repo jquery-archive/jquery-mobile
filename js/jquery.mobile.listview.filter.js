@@ -7,7 +7,6 @@ define( [ "jquery", "./jquery.mobile.listview", "./jquery.mobile.forms.textinput
 (function( $, undefined ) {
 
 $.mobile.listview.prototype.options.filter = false;
-$.mobile.listview.prototype.options.filterPlaceholder = "Filter items...";
 $.mobile.listview.prototype.options.filterTheme = "c";
 $.mobile.listview.prototype.options.filterCallback = function( text, searchValue ){
 	return text.toLowerCase().indexOf( searchValue ) === -1;
@@ -27,7 +26,7 @@ $( document ).delegate( ":jqmData(role='listview')", "listviewcreate", function(
 			"role": "search"
 		}),
 		search = $( "<input>", {
-			placeholder: listview.options.filterPlaceholder
+			placeholder: $.mobile.filterPlaceholder
 		})
 		.attr( "data-" + $.mobile.ns + "type", "search" )
 		.jqmData( "lastval", "" )
