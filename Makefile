@@ -21,7 +21,7 @@ THEME = default
 
 # If node is available then use node to run r.js
 # otherwise use good old rhino/java
-NODE = /usr/local/bin/node
+NODE = $(shell which node)
 HAS_NODE = $(shell if test -x ${NODE} ;then echo true; fi)
 
 ifeq ($(HAS_NODE), true)
