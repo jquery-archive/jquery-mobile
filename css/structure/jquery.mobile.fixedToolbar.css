@@ -5,7 +5,6 @@
 	right: 0;
 	position: fixed;
 	z-index: 1000;
-	-webkit-transform: translateZ(0); /* Force header/footer rendering to go through the same rendering pipeline as native page scrolling. */
 }
 .ui-header-fixed {
 	top: 0;
@@ -33,9 +32,6 @@
 .ui-page-header-fullscreen .ui-fixed-hidden,
 .ui-page-footer-fullscreen .ui-fixed-hidden {
 	left: -99999em;
-	height: 0;
-	width: 0;
-	overflow: hidden;
 }
 .ui-header-fixed .ui-btn,
 .ui-footer-fixed .ui-btn { 
