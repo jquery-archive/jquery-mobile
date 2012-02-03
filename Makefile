@@ -71,10 +71,13 @@ docs: init
 		external/r.js/dist/r.js \
 	 	-o build/docs.build.js \
 		dir=../tmp/${NAME}
-	# ... Prepend versioned license
-	@@cat LICENSE-INFO.txt | ${VER} > tmp/${NAME}/LICENSE-INFO.txt
+	# ... Prepend versioned license to jquery.mobile.js
+	@@cat tmp/${NAME}/LICENSE-INFO.txt | cat - tmp/${NAME}/js/jquery.mobile.js > tmp/${NAME}/js/jquery.mobile.js.tmp
+	@@cat tmp/${NAME}/js/jquery.mobile.js.tmp | ${SED_VER_API} > tmp/${NAME}/js/jquery.mobile.js
+	# ... Prepend versioned license to jquery.mobile.docs.js
 	@@cat tmp/${NAME}/LICENSE-INFO.txt | cat - tmp/${NAME}/js/jquery.mobile.docs.js > tmp/${NAME}/js/jquery.mobile.docs.js.tmp
 	@@cat tmp/${NAME}/js/jquery.mobile.docs.js.tmp | ${SED_VER_API} > tmp/${NAME}/js/jquery.mobile.docs.js
+	# ... Prepend versioned license to jquery.mobile.css
 	@@cat tmp/${NAME}/LICENSE-INFO.txt | cat - tmp/${NAME}/css/themes/default/${NAME}.css > tmp/${NAME}/css/themes/default/${NAME}.css.tmp
 	@@mv tmp/${NAME}/css/themes/default/${NAME}.css.tmp tmp/${NAME}/css/themes/default/${NAME}.css
 	# ... Move and zip up the the whole folder
