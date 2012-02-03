@@ -33,6 +33,9 @@
 .ui-page-header-fullscreen .ui-fixed-hidden,
 .ui-page-footer-fullscreen .ui-fixed-hidden {
 	left: -99999em;
+	height: 0;
+	width: 0;
+	overflow: hidden;
 }
 .ui-header-fixed .ui-btn,
 .ui-footer-fixed .ui-btn { 
