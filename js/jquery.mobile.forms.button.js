@@ -15,7 +15,8 @@ $.widget( "mobile.button", $.mobile.widget, {
 		corners: true,
 		shadow: true,
 		iconshadow: true,
-		initSelector: "button, [type='button'], [type='submit'], [type='reset'], [type='image']"
+		initSelector: "button, [type='button'], [type='submit'], [type='reset'], [type='image']",
+		keepNativeEnabled: true
 	},
 	_create: function() {
 		var $el = this.element,

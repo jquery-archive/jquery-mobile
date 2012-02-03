@@ -78,6 +78,10 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 
 		pushStateEnabled: true,
 
+		// allows users to opt in to ignoring content by marking a parent element as
+		// data-ignored
+		ignoreContentEnabled: false,
+
 		// turn of binding to the native orientationchange due to android orientation behavior
 		orientationChangeEnabled: true,
 

@@ -13,7 +13,8 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.widget", "./jquery.
 $.widget( "mobile.checkboxradio", $.mobile.widget, {
 	options: {
 		theme: null,
-		initSelector: "input[type='checkbox'],input[type='radio']"
+		initSelector: "input[type='checkbox'],input[type='radio']",
+		keepNativeEnabled: true
 	},
 	_create: function() {
 		var self = this,
@@ -167,7 +168,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 
 		// input[0].checked expando doesn't always report the proper value
 		// for checked='checked'
-		
+
 		if ( input[ 0 ].getAttribute( "checked" ) ) {
 			label.addClass( this.checkedClass ).removeClass( this.uncheckedClass );
 			icon.addClass( this.checkedicon ).removeClass( this.uncheckedicon );

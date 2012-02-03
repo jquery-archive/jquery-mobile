@@ -23,7 +23,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		nativeMenu: true,
 		// This option defaults to true on iOS devices.
 		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
-		initSelector: "select:not(:jqmData(role='slider'))"
+		initSelector: "select:not(:jqmData(role='slider'))",
+		keepNativeEnabled: true
 	},
 
 	_button: function(){
@@ -150,7 +151,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			.bind( "change blur", function() {
 				self.button.removeClass( "ui-btn-down-" + self.options.theme );
 			});
-		
+
 		// In many situations, iOS will zoom into the select upon tap, this prevents that from happening
 		self.button.bind( "vmousedown", function() {
 			if( self.options.preventFocusZoom ){
@@ -160,7 +161,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		.bind( "mouseup", function() {
 			if( self.options.preventFocusZoom ){
 				$.mobile.zoom.enable( true );
-			}	
+			}
 		});
 	},
 

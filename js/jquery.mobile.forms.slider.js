@@ -11,7 +11,8 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		theme: null,
 		trackTheme: null,
 		disabled: false,
-		initSelector: "input[type='range'], :jqmData(type='range'), :jqmData(role='slider')"
+		initSelector: "input[type='range'], :jqmData(type='range'), :jqmData(role='slider')",
+		keepNativeEnabled: true
 	},
 
 	_create: function() {
