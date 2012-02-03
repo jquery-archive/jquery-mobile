@@ -37,7 +37,7 @@ $.widget( "mobile.widget", {
 		return options;
 	},
 
-	enhanceWithin: function( target ) {
+	enhanceWithin: function( target, useKeepNative ) {
 		var page, keepNative, selected;
 
 		widgetElements = $( this.options.initSelector, target );
@@ -49,7 +49,7 @@ $.widget( "mobile.widget", {
 			if ( !widgetElements.closest( ":jqmData(ignore)").length ) {
 				widgetElements[ this.widgetName ]();
 			}
-		} else if( this.options.keepNativeEnabled ) {
+		} else if( useKeepNative ) {
 			// TODO remove dependency on the page widget for the keepNative.
 			// Currently the keepNative value is defined on the page prototype so
 			// the method is as well

@@ -15,8 +15,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 		corners: true,
 		shadow: true,
 		iconshadow: true,
-		initSelector: "button, [type='button'], [type='submit'], [type='reset'], [type='image']",
-		keepNativeEnabled: true
+		initSelector: "button, [type='button'], [type='submit'], [type='reset'], [type='image']"
 	},
 	_create: function() {
 		var $el = this.element,
@@ -116,7 +115,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ){
-	$.mobile.button.prototype.enhanceWithin( e.target );
+	$.mobile.button.prototype.enhanceWithin( e.target, true );
 });
 
 })( jQuery );

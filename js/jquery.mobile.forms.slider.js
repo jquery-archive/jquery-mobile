@@ -11,8 +11,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		theme: null,
 		trackTheme: null,
 		disabled: false,
-		initSelector: "input[type='range'], :jqmData(type='range'), :jqmData(role='slider')",
-		keepNativeEnabled: true
+		initSelector: "input[type='range'], :jqmData(type='range'), :jqmData(role='slider')"
 	},
 
 	_create: function() {
@@ -376,7 +375,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ){
-	$.mobile.slider.prototype.enhanceWithin( e.target );
+	$.mobile.slider.prototype.enhanceWithin( e.target, true );
 });
 
 })( jQuery );

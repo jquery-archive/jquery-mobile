@@ -23,8 +23,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		nativeMenu: true,
 		// This option defaults to true on iOS devices.
 		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
-		initSelector: "select:not(:jqmData(role='slider'))",
-		keepNativeEnabled: true
+		initSelector: "select:not(:jqmData(role='slider'))"
 	},
 
 	_button: function(){
@@ -223,7 +222,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ){
-	$.mobile.selectmenu.prototype.enhanceWithin( e.target );
+	$.mobile.selectmenu.prototype.enhanceWithin( e.target, true );
 });
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
