@@ -28,8 +28,15 @@ RUN_JS = @@java -XX:ReservedCodeCacheSize=64m -classpath build/js.jar:build/goog
 # When no build target is specified, all gets ran
 all: init css js zip notify
 
-# alias for init to follow normal build conventions
-clean: init
+clean: 
+	# -------------------------------------------------
+	# Cleaning build output
+	@@rm -rf ${OUTPUT}
+	@@rm -rf tmp
+
+# Create the output directory. 
+init: clean
+	@@mkdir -p ${OUTPUT}
 
 # Build and minify the CSS files
 css: init
