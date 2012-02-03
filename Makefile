@@ -19,17 +19,31 @@ deploy: STRUCTURE = jquery.mobile.structure-${VER_OFFICIAL}
 # The CSS theme being used
 THEME = default
 
-RUN_JS = @@java -XX:ReservedCodeCacheSize=64m -classpath build/js.jar:build/google-compiler-20111003.jar org.mozilla.javascript.tools.shell.Main
+# If node is available then use node to run r.js
+# otherwise use good old rhino/java
+NODE = /usr/local/bin/node
+HAS_NODE = $(shell if test -x ${NODE} ;then echo true; fi)
 
-
+ifeq ($(HAS_NODE), true)
+	RUN_JS = @@${NODE}
+else
+	RUN_JS = @@java -XX:ReservedCodeCacheSize=64m -classpath build/js.jar:build/google-compiler-20111003.jar org.mozilla.javascript.tools.shell.Main
+endif
 
 # Build Targets
 
 # When no build target is specified, all gets ran
-all: init css js zip notify
+all: css js zip notify
 
-# alias for init to follow normal build conventions
-clean: init
+clean: 
+	# -------------------------------------------------
+	# Cleaning build output
+	@@rm -rf ${OUTPUT}
+	@@rm -rf tmp
+
+# Create the output directory. 
+init:
+	@@mkdir -p ${OUTPUT}
 
 # Build and minify the CSS files
 css: init
@@ -70,28 +84,25 @@ docs: init
 	${RUN_JS} \
 		external/r.js/dist/r.js \
 	 	-o build/docs.build.js \
-		dir=../tmp/${NAME}
-	# ... Prepend versioned license
-	@@cat LICENSE-INFO.txt | ${VER} > tmp/${NAME}/LICENSE-INFO.txt
-	@@cat tmp/${NAME}/LICENSE-INFO.txt | cat - tmp/${NAME}/js/jquery.mobile.docs.js > tmp/${NAME}/js/jquery.mobile.docs.js.tmp
-	@@cat tmp/${NAME}/js/jquery.mobile.docs.js.tmp | ${SED_VER_API} > tmp/${NAME}/js/jquery.mobile.docs.js
-	@@cat tmp/${NAME}/LICENSE-INFO.txt | cat - tmp/${NAME}/css/themes/default/${NAME}.css > tmp/${NAME}/css/themes/default/${NAME}.css.tmp
-	@@mv tmp/${NAME}/css/themes/default/${NAME}.css.tmp tmp/${NAME}/css/themes/default/${NAME}.css
+		dir=../tmp/demos
+	# ... Prepend versioned license to jquery.mobile.js
+	@@cat LICENSE-INFO.txt  | ${VER} > tmp/demos/LICENSE-INFO.txt
+	@@cat tmp/demos/LICENSE-INFO.txt | cat - tmp/demos/js/jquery.mobile.js > tmp/demos/js/jquery.mobile.js.tmp
+	@@cat tmp/demos/js/jquery.mobile.js.tmp | ${SED_VER_API} > tmp/demos/js/jquery.mobile.js
+	# ... Prepend versioned license to jquery.mobile.docs.js
+	@@cat tmp/demos/LICENSE-INFO.txt | cat - tmp/demos/js/jquery.mobile.docs.js > tmp/demos/js/jquery.mobile.docs.js.tmp
+	@@cat tmp/demos/js/jquery.mobile.docs.js.tmp | ${SED_VER_API} > tmp/demos/js/jquery.mobile.docs.js
+	# ... Prepend versioned license to jquery.mobile.css
+	@@cat tmp/demos/LICENSE-INFO.txt | cat - tmp/demos/css/themes/default/${NAME}.css > tmp/demos/css/themes/default/${NAME}.css.tmp
+	@@mv tmp/demos/css/themes/default/${NAME}.css.tmp tmp/demos/css/themes/default/${NAME}.css
 	# ... Move and zip up the the whole folder
-	@@cd tmp; zip -rq ../${OUTPUT}/${NAME}.docs.zip ${NAME}
-	@@mv tmp/${NAME} ${OUTPUT}/demos
+	@@rm -f ${OUTPUT}/${NAME}.docs.zip
+	@@cd tmp/demos && rm -f *.php && rm -f Makefile
+	@@cd tmp/demos && zip -rq ../../${OUTPUT}/${NAME}.docs.zip *
+	@@rm -rf ${OUTPUT}/demos && mv -f tmp/demos ${OUTPUT}
 	# Finish by removing the temporary files
 	@@rm -rf tmp
 	# -------------------------------------------------
-
-
-# Create the output directory. This is in a separate step so its not dependant on other targets
-init:
-	# -------------------------------------------------
-	# Cleaning build output
-	@@rm -rf ${OUTPUT}
-	@@rm -rf tmp
-	@@mkdir -p ${OUTPUT}
 
 # Build and minify the JS files
 js: init
@@ -100,7 +111,7 @@ js: init
 		external/r.js/dist/r.js \
 	 	-o baseUrl="js" \
 		include=jquery.mobile \
-		exclude=jquery,../external/requirejs/order,../external/requirejs/text,../external/requirejs/text!../version.txt \
+		exclude=jquery,../external/requirejs/order,../external/requirejs/depend,../external/requirejs/text,../external/requirejs/text!../version.txt \
 		out=${OUTPUT}/${NAME}.compiled.js \
 		pragmasOnSave.jqmBuildExclude=true \
 		wrap.startFile=build/wrap.start \
@@ -146,7 +157,7 @@ zip: init css js
 # For jQuery Team Use Only
 #
 # -------------------------------------------------
-# NOTE the init (which removes previous build output) has been removed to prevent a gap in service
+# NOTE the clean (which removes previous build output) has been removed to prevent a gap in service
 build_latest: css docs js zip
 
 deploy_latest:
