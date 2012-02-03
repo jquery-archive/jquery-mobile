@@ -51,5 +51,5 @@
 		endFile:   "wrap.end"
 	},
 
-	dirExclusionRegExp: /^\.|^build|^compiled/
+	dirExclusionRegExp: /^\.|^build|^compiled|^tmp/
 })
