@@ -28,9 +28,11 @@ $.widget("mobile.popup", $.mobile.widget, {
 "    <div id='ui-popup-container' class='ui-popup-container ui-selectmenu-hidden'></div>" +
 "</div>"
 ),
-		    thisPage = (this.element.closest(".ui-page") || $("body")),
+		    thisPage = this.element.closest(".ui-page");
 		    self = this;
 
+                if (thisPage.length === 0)
+                    thisPage = $("body");
 		// Assign the relevant parts of the proto
 		for (var key in ui)
 			ui[key] = proto.find(ui[key]).removeAttr("id");
