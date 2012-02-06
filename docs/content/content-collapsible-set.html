@@ -72,6 +72,32 @@
 			</div>
 		</div>
 
+		<h2>Header's icon positioning</h2>
+		<p>The usual <code>data-iconpos</code> attribute (See <b>Icon positioning</b> section in <a href="../buttons/buttons-icons.html">Button Icons</a> page to see other possible options) can be used to set the default icon positioning through out the set. A specific collapsible item still can override the positioning by specifiying <code>data-iconpos</code> inside it.</p>
+
+
+<pre><code>		
+&lt;div data-role=&quot;collapsible-set&quot; <strong>data-iconpos=&quot;right&quot;</strong>&gt;
+</code></pre>	
+
+		<div data-role="collapsible-set" data-iconpos="right">
+			<div data-role="collapsible">
+				<h3>Section 1</h3>
+				<p>Collapsible content with default icon positioning set by the set.</p>
+			</div>
+			<div data-role="collapsible" data-iconpos="left">
+				<h3>Section 2</h3>
+                <p>The heading has <code>data-iconpos</code> attribute set to <code>left</code> so the icon is displayed on the left.</p>
+
+			</div>
+			<div data-role="collapsible">
+				<h3>Section 3</h3>
+				<p>Collapsible content with default icon positioning set by the set.</p>
+			</div>
+		</div>
+
+
+
 		<h2>Theming collapsible content</h2>
 		<p>The standard <code>data-theme</code> attribute can be used to set the color of each collapsible in a set. To provide a clearer visual grouping of the content with the headers, add the <code>data-content-theme</code> attribute with a swatch letter. This adds a themed background color and border to the content block. For consistent theming, add these attributes to the parent collapsible set.</p>
 
