@@ -167,7 +167,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 
 		// input[0].checked expando doesn't always report the proper value
 		// for checked='checked'
-		
+
 		if ( input[ 0 ].getAttribute( "checked" ) ) {
 			label.addClass( this.checkedClass ).removeClass( this.uncheckedClass );
 			icon.addClass( this.checkedicon ).removeClass( this.uncheckedicon );
@@ -194,7 +194,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ){
-	$.mobile.checkboxradio.prototype.enhanceWithin( e.target );
+	$.mobile.checkboxradio.prototype.enhanceWithin( e.target, true );
 });
 
 })( jQuery );

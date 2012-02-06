@@ -375,7 +375,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ){
-	$.mobile.slider.prototype.enhanceWithin( e.target );
+	$.mobile.slider.prototype.enhanceWithin( e.target, true );
 });
 
 })( jQuery );

@@ -44,13 +44,13 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 
 		// Set default page transition - 'none' for no transitions
 		defaultPageTransition: "fade",
-		
+
 		// Set maximum window width for transitions to apply - 'false' for no limit
 		maxTransitionWidth: false,
 
 		// Minimum scroll distance that will be remembered when returning to a page
 		minScrollBack: 10,
-		
+
 		// DEPRECATED: the following property is no longer in use, but defined until 2.0 to prevent conflicts
 		touchOverflowEnabled: false,
 
@@ -63,13 +63,13 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 
 		// Error response message - appears when an Ajax page request fails
 		pageLoadErrorMessage: "Error Loading Page",
-		
+
 		// Should the text be visble in the loading message?
 		loadingMessageTextVisible: false,
-		
+
 		// When the text is visible, what theme does the loading box use?
 		loadingMessageTheme: "a",
-		
+
 		// For error messages, which theme does the box uses?
 		pageLoadErrorMessageTheme: "e",
 
@@ -77,6 +77,10 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 		autoInitializePage: true,
 
 		pushStateEnabled: true,
+
+		// allows users to opt in to ignoring content by marking a parent element as
+		// data-ignored
+		ignoreContentEnabled: false,
 
 		// turn of binding to the native orientationchange due to android orientation behavior
 		orientationChangeEnabled: true,

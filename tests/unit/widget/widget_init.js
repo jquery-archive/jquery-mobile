@@ -17,4 +17,19 @@
 	test( "page is enhanced before init is fired", function() {
 		ok( widgetInitialized );
 	});
+
+	test( "elements within an ignore container are not enhanced when ignoreContentEnabled is true ", function() {
+		$.mobile.ignoreContentEnabled = true;
+
+		$.mobile.collapsible.prototype.enhanceWithin( $("#ignored") );
+
+		ok( !$( "#ignored-collapsible" ).hasClass( "ui-collapsible" ), "ignored element doesn't have ui-collapsible" );
+
+		$.mobile.collapsible.prototype.enhanceWithin( $("#not-ignored") );
+
+		console.log( $("#collapsible") );
+		ok( $( "#collapsible" ).hasClass( "ui-collapsible" ), "identical unignored elements are enahanced" );
+
+		$.mobile.ignoreContentEnabled = false;
+	});
 })( jQuery );
