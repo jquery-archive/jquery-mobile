@@ -19,7 +19,8 @@ $.fn.controlgroup = function( options ) {
 			o = $.extend({
 						direction: $el.jqmData( "type" ) || "vertical",
 						shadow: false,
-						excludeInvisible: true
+						excludeInvisible: true,
+						mini: $el.jqmData( "mini" )
 					}, options ),
 			groupheading = $el.children( "legend" ),
 			flCorners = o.direction == "horizontal" ? [ "ui-corner-left", "ui-corner-right" ] : [ "ui-corner-top", "ui-corner-bottom" ],
@@ -40,6 +41,11 @@ $.fn.controlgroup = function( options ) {
 		if ( o.shadow ) {
 			$el.addClass( "ui-shadow" );
 		}
+		
+		if ( o.mini ) {
+			$el.addClass( "ui-mini" );
+		}
+		
 	});
 };
 
