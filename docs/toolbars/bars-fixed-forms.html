@@ -32,7 +32,7 @@
 				<div style="display:inline-block;">
 				<a href="docs-bars.html" data-role="button" data-mini="true" data-inline="true">Mini Inline</a>
 				</div>
-				
+
 				<div style="display:inline-block;">
 				
 					<select name="select-mini" id="select-mini" data-mini="true" data-inline="true">
@@ -58,8 +58,11 @@
 			
 			<div >
 				<div style="display:inline-block;">
-				<a href="docs-bars.html" data-role="button">Mini Inline</a>
+				<a href="docs-bars.html" data-role="button">Button</a>
+				
 				</div>
+				
+				
 				
 				<div style="display:inline-block;">
 				
@@ -84,15 +87,12 @@
 				
 			</div>
 			
-			
-			
 			<div data-role="fieldcontain">
 				<a href="docs-bars.html" data-role="button">Normal</a>
 				<a href="docs-bars.html" data-role="button" data-mini="true">Mini</a>
 				
 				<a href="docs-bars.html" data-role="button" data-inline="true">Normal Inline</a>
 				<a href="docs-bars.html" data-role="button" data-mini="true" data-inline="true">Mini Inline</a>
-		
 			</div>
 
 			<label for="select-full" class="select">Select:</label>
@@ -118,20 +118,6 @@
 				<option value="express">Express: next day</option>
 				<option value="overnight">Overnight</option>
 			</select>
-				
-			
-			
-				<label for="slider-full">Flip switch:</label>
-				<select name="slider-full" id="slider-full" data-role="slider">
-					<option value="off">Off</option>
-					<option value="on">On</option>
-				</select>
-				
-				<label for="slider-mini">Flip switch:</label>
-				<select name="slider-mini" id="slider-mini" data-role="slider" data-inline="true" data-mini="true">
-					<option value="off">Off</option>
-					<option value="on">On</option>
-				</select>
 				
 				<label for="slider">Slider:</label>
 				<input type="range" name="slider" id="slider" value="0" min="0" max="100" data-highlight="true" />
@@ -221,7 +207,39 @@
 				
 				</div>
 				
+				<div data-role="collapsible" data-mini="true">
+					<h3>Section 1</h3>
+					<p>I'm the collapsible content in a set so this feels like an accordion. I'm open by default because I have the <code>data-collapsed="false"</code> attribute.</p>
+				</div>
+
+				<div data-role="collapsible" data-mini="false">
+					<h3>Section 1</h3>
+					<p>I'm the collapsible content in a set so this feels like an accordion. I'm open by default because I have the <code>data-collapsed="false"</code> attribute.</p>
+				</div>
 				
+				<div data-role="collapsible-set" data-mini="true">
+					<div data-role="collapsible">
+						<h3>Section 1</h3>
+						<p>I'm the collapsible content in a set so this feels like an accordion. I'm open by default because I have the <code>data-collapsed="false"</code> attribute.</p>
+					</div>
+					<div data-role="collapsible">
+						<h3>Section 2</h3>
+						<p>I'm the collapsible content in a set so this feels like an accordion. I'm hidden by default because I have the "collapsed" state; you need to expand the header to see me.</p>
+
+					</div>
+				</div>
+				
+				<div data-role="collapsible-set">
+					<div data-role="collapsible">
+						<h3>Section 1</h3>
+						<p>I'm the collapsible content in a set so this feels like an accordion. I'm open by default because I have the <code>data-collapsed="false"</code> attribute.</p>
+					</div>
+					<div data-role="collapsible">
+						<h3>Section 2</h3>
+						<p>I'm the collapsible content in a set so this feels like an accordion. I'm hidden by default because I have the "collapsed" state; you need to expand the header to see me.</p>
+
+					</div>
+				</div>
 
 				<h2>Fixed toolbars</h2>
 		<p>This is a demo of the "fixed" headers and footers used in the jQuery Mobile framework. The page content flows naturally, allowing us to take advantage of native scrolling instead of a scripting a faux-scrolling workaround. The header and footer divs are right in the flow of the document, but whenever they are out of view the framework will dynamically re-position them into view if the browser supports this feature, otherwise they will simply stay inline.</p>
