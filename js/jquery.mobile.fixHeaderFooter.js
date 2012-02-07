@@ -158,6 +158,13 @@ $.mobile.fixedToolbars = (function() {
 				prevFooter = prevPage && prevPage.find( ":jqmData(role='footer')" ),
 				prevFooterMatches = prevFooter.length && prevFooter.jqmData( "id" ) === id;
 
+			if($(page).jqmData('use-parent-footer') && footer.length==0) {
+				footer = prevFooter.clone();
+				id = prevFooter.jqmData( "id" );
+				prevFooterMatches = true;
+				stickyFooter = footer;
+			}
+
 			if ( id && prevFooterMatches ) {
 				stickyFooter = footer;
 				setTop( stickyFooter.removeClass( "fade in out" ).appendTo( $.mobile.pageContainer ) );
