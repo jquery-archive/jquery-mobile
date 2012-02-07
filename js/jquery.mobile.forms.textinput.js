@@ -68,7 +68,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 					shadow: true
 				});
 
-			function toggleClear() {
+			var toggleClear = function() {
 				if ( !input.val() ) {
 					clearbtn.addClass( "ui-input-clear-hidden" );
 				} else {
