@@ -54,7 +54,7 @@ $.fn.buttonMarkup = function( options ) {
 		}
 
 		if ( o.mini ) {
-			buttonClass += " ui-btn-mini";
+			buttonClass += " ui-mini";
 		}
 
 		if ( o.icon ) {

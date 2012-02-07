@@ -19,7 +19,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			theme = o.theme || $.mobile.getInheritedTheme( this.element, "c" ),
 			themeclass  = " ui-body-" + theme,
 			mini = input.jqmData("mini") == true,
-			miniclass = mini ? " ui-input-mini" : "",
+			miniclass = mini ? " ui-mini" : "",
 			focusedEl, clearbtn;
 
 		$( "label[for='" + input.attr( "id" ) + "']" ).addClass( "ui-input-text" );

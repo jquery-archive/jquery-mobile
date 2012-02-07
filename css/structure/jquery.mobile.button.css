@@ -1,11 +1,11 @@
 .ui-btn { display: block; text-align: center; cursor:pointer;  position: relative; margin: .5em 5px; padding: 0; }
-.ui-btn-mini { margin: .25em 5px; }
+.ui-mini { margin: .25em 5px; }
 .ui-btn-inline { display: inline-block; }
 .ui-btn-inner { padding: .6em 25px; display: block; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; position: relative; zoom: 1; }
 .ui-btn input, .ui-btn button { z-index: 2; }
 .ui-btn-left, .ui-btn-right, .ui-btn-inline { display: inline-block; }
 .ui-btn-left .ui-btn-inner, .ui-btn-right .ui-btn-inner { padding: .55em 1.5em .5em;  }
-.ui-btn-mini .ui-btn-inner { font-size: 13px; padding: .55em 1.5em .5em; }
+.ui-mini .ui-btn-inner { font-size: 13px; padding: .55em 1.5em .5em; }
 .ui-btn-icon-notext { width: 24px; height: 24px; }
 .ui-btn-icon-notext .ui-btn-inner { padding: 2px 1px 2px 3px; }
 .ui-btn-text { position: relative; z-index: 1; }
@@ -16,8 +16,8 @@
 .ui-bar .ui-btn-icon-left .ui-btn-inner { padding-left: 27px; }
 .ui-btn-icon-right .ui-btn-inner { padding-right: 33px; }
 
-.ui-btn-mini .ui-btn-icon-left .ui-btn-inner { padding-left: 27px; }
-.ui-btn-mini .ui-btn-icon-right .ui-btn-inner { padding-right: 27px; }
+.ui-mini .ui-btn-icon-left .ui-btn-inner { padding-left: 27px; }
+.ui-mini .ui-btn-icon-right .ui-btn-inner { padding-right: 27px; }
 .ui-btn-icon-top .ui-btn-inner { padding-top: 33px; }
 .ui-header .ui-btn-icon-top .ui-btn-inner,
 .ui-footer .ui-btn-icon-top .ui-btn-inner,
@@ -36,10 +36,10 @@
 .ui-btn-icon-top .ui-icon { top: 10px; }
 .ui-btn-icon-bottom .ui-icon { bottom: 10px; }
 
-.ui-btn-mini.ui-btn-icon-left .ui-icon { left: 8px; }
-.ui-btn-mini.ui-btn-icon-right .ui-icon { right: 8px; }
-.ui-btn-mini.ui-btn-icon-top .ui-icon { top: 8px; }
-.ui-btn-mini.ui-btn-icon-bottom .ui-icon { bottom: 8px; }
+.ui-mini.ui-btn-icon-left .ui-icon { left: 8px; }
+.ui-mini.ui-btn-icon-right .ui-icon { right: 8px; }
+.ui-mini.ui-btn-icon-top .ui-icon { top: 8px; }
+.ui-mini.ui-btn-icon-bottom .ui-icon { bottom: 8px; }
 
 /*hiding native button,inputs */
 .ui-btn-hidden { position: absolute; top: 0; left: 0; width: 100%; height: 100%; -webkit-appearance: button; opacity: .1; cursor: pointer; background: #fff; background: rgba(255,255,255,0); filter: Alpha(Opacity=.0001); font-size: 1px; border: none; text-indent: -9999px; }
