@@ -38,9 +38,11 @@ $.widget( "mobile.widget", {
 	},
 
 	enhanceWithin: function( target, useKeepNative ) {
-		var page, keepNative, $widgetElements, count;
+		this.enhance( $(this.options.initSelector, $(target)), useKeepNative );
+	},
 
-		$widgetElements = $( this.options.initSelector, target );
+	enhance: function( targets, useKeepNative ) {
+		var page, keepNative, count, $widgetElements = $( targets );
 
 		// if ignoreContentEnabled is set to true the framework should
 		// only enhance the selected elements when they do NOT have a
