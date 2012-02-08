@@ -18,7 +18,7 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 			hideDuringFocus: "input, textarea, select",
 			updatePagePadding: true,
 			trackPersistentToolbars: true,
-			
+
 			// Browser detection! Weeee, here we go...
 			// Unfortunately, position:fixed is costly, not to mention probably impossible, to feature-detect accurately.
 			// Some tests exist, but they currently return false results in critical devices and browsers, which could lead to a broken experience.
@@ -49,7 +49,7 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 					//Android lte 2.1: Platform is Android and Webkit version is less than 533 (Android 2.2)
 					( ua.indexOf( "Android" ) > -1 && wkversion && wkversion < 533 )
 					||
-					// Firefox Mobile before 6.0 - 
+					// Firefox Mobile before 6.0 -
 					( ffversion && ffversion < 6 )
 					||
 					// WebOS less than 3
@@ -60,28 +60,28 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 				){
 					return true;
 				}
-				
+
 				return false;
 			},
 			initSelector: ":jqmData(position='fixed')"
 		},
-		
+
 		_create: function() {
-			
+
 			var self = this,
 				o = self.options,
 				$el = self.element,
 				tbtype = $el.is( ".ui-header" ) ? "header" : "footer",
 				$page = $el.closest(".ui-page");
-			
-			// Feature detecting support for 
+
+			// Feature detecting support for
 			if( o.supportBlacklist() ){
 				self.destroy();
 				return;
 			}
-			
+
 			$el.addClass( "ui-"+ tbtype +"-fixed" );
-			
+
 			// "fullscreen" overlay positioning
 			if( $el.jqmData( "fullscreen" ) ){
 				$el.addClass( "ui-"+ tbtype +"-fullscreen" );
@@ -91,30 +91,30 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 			else{
 				$page.addClass( "ui-page-" + tbtype + "-fixed" );
 			}
-			
+
 			self._addTransitionClass();
 			self._bindPageEvents();
 			self._bindToggleHandlers();
 		},
-		
+
 		_addTransitionClass: function(){
 			var tclass = this.options.transition;
-				
+
 			if( tclass && tclass !== "none" ){
 				// use appropriate slide for header or footer
 				if( tclass === "slide" ){
 					tclass = this.element.is( ".ui-header" ) ? "slidedown" : "slideup";
 				}
-				
+
 				this.element.addClass( tclass );
 			}
 		},
-		
+
 		_bindPageEvents: function(){
 			var self = this,
 				o = self.options,
 				$el = self.element;
-			
+
 			//page event bindings
 			// Fixed toolbars require page zoom to be disabled, otherwise usability issues crop up
 			// This method is meant to disable zoom while a fixed-positioned toolbar page is visible
@@ -130,7 +130,7 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 				.bind( "webkitAnimationStart animationstart updatelayout", function(){
 					if( o.updatePagePadding ){
 						self.updatePagePadding();
-					}	
+					}
 				})
 				.bind( "pageshow", function(){
 					self.updatePagePadding();
@@ -147,39 +147,39 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 					if( o.updatePagePadding ){
 						$( window ).unbind( "throttledresize." + self.widgetName );
 					}
-					
+
 					if( o.trackPersistentToolbars ){
 						var thisFooter = $( ".ui-footer-fixed:jqmData(id)", this ),
 							thisHeader = $( ".ui-header-fixed:jqmData(id)", this ),
 							nextFooter = thisFooter.length && ui.nextPage && $( ".ui-footer-fixed:jqmData(id='" + thisFooter.jqmData( "id" ) + "')", ui.nextPage ),
 							nextHeader = thisHeader.length && ui.nextPage && $( ".ui-header-fixed:jqmData(id='" + thisHeader.jqmData( "id" ) + "')", ui.nextPage );
-		
+
 							if( nextFooter.length || nextHeader.length ){
-					
+
 								nextFooter.add( nextHeader ).appendTo( $.mobile.pageContainer );
-				
+
 								ui.nextPage.one( "pageshow", function(){
 									nextFooter.add( nextHeader ).appendTo( this );
 								} );
 							}
 					}
-					
+
 				});
 		},
-		
+
 		_visible: false,
-		
+
 		// This will set the content element's top or bottom padding equal to the toolbar's height
 		updatePagePadding: function() {
 			var $el = this.element,
 				header = $el.is( ".ui-header" );
-			
+
 			// This behavior only applies to "fixed", not "fullscreen"
 			if( this.options.fullscreen ){ return; }
 
 			$el.closest( ".ui-page" ).css( "padding-" + ( header ? "top" : "bottom" ), $el.outerHeight() );
 		},
-		
+
 		show: function( notransition ){
 			var hideClass = "ui-fixed-hidden",
 				$el = this.element,
@@ -204,7 +204,7 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 			}
 			this._visible = true;
 		},
-		
+
 		hide: function( notransition ){
 			var hideClass = "ui-fixed-hidden",
 				$el = this.element,
@@ -234,16 +234,16 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 			}
 			this._visible = false;
 		},
-		
+
 		toggle: function(){
 			this[ this._visible ? "hide" : "show" ]();
 		},
-				
+
 		_bindToggleHandlers: function(){
 			var self = this,
 				o = self.options,
 				$el = self.element;
-			
+
 			// tap toggle
 			$el.closest( ".ui-page" )
 				.bind( "vclick", function( e ){
@@ -257,14 +257,14 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 					}
 				});
 		},
-		
+
 		destroy: function(){
-			this.element.removeClass( "ui-header-fixed ui-footer-fixed ui-header-fullscreen ui-footer-fullscreen in out fade slidedown slideup ui-fixed-hidden" )
+			this.element.removeClass( "ui-header-fixed ui-footer-fixed ui-header-fullscreen ui-footer-fullscreen in out fade slidedown slideup ui-fixed-hidden" );
 			this.element.closest( ".ui-page" ).removeClass( "ui-page-header-fixed ui-page-footer-fixed ui-page-header-fullscreen ui-page-footer-fullscreen" );
 		}
-		
+
 	});
-	
+
 	//auto self-init widgets
 	$( document ).bind( "pagecreate create", function( e ){
 		$( $.mobile.fixedtoolbar.prototype.options.initSelector, e.target ).fixedtoolbar();
