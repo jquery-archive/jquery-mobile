@@ -54,7 +54,7 @@ $.widget( "mobile.widget", {
 			for( var i = 0; i < count; i++ ) {
 				var $element = $( $widgetElements[i] );
 
-				if ( !$element.closest( ":jqmData(ignore)").length ) {
+				if ( !$element.closest( ":jqmData(enhance='false')").length ) {
 					$element[ this.widgetName ]();
 				}
 			}
