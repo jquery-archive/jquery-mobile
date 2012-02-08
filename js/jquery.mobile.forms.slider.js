@@ -368,7 +368,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			this.element.attr( "disabled", false );
 			this.slider.removeClass( "ui-disabled" ).attr( "aria-disabled", false );
 		}
-		return $.mobile.widget.prototype._setOption.call(this, "disabled", value);
+		return $.Widget.prototype._setOption.call(this, "disabled", value);
 	}
 });
 
