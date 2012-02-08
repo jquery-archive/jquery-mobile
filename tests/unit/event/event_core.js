@@ -136,18 +136,21 @@
 	};
 
 	asyncTest( "long press fires tap hold after 750 ms", function(){
-		var taphold = false;
+		var taphold = false,
+			target;
 
 		forceTouchSupport();
 
-		$( "#qunit-fixture" ).bind("taphold", function(){
+		$( "#qunit-fixture" ).bind("taphold", function( e ){
 			taphold = true;
+			target = e.target;
 		});
 
 		$( "#qunit-fixture" ).trigger("vmousedown");
 
 		setTimeout(function(){
-			ok(taphold);
+			ok( taphold );
+			equal( target, $( "#qunit-fixture" ).get( 0 ), "taphold target should be #qunit-fixture" );
 			start();
 		}, 751);
 	});
