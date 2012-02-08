@@ -14,6 +14,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 		theme: null,
 		contentTheme: null,
 		iconTheme: "d",
+		mini: false,
 		initSelector: ":jqmData(role='collapsible')"
 	},
 	_create: function() {
@@ -41,8 +42,11 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			if ( !o.contentTheme ) {
 				o.contentTheme = collapsibleSet.jqmData( "content-theme" );
 			}
+			
+			if( !o.mini ) {
+				o.mini = collapsibleSet.jqmData( "mini" );
+			}
 		}
-
 		collapsibleContent.addClass( ( o.contentTheme ) ? ( "ui-body-" + o.contentTheme ) : "");
 
 		collapsibleHeading
@@ -59,6 +63,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 					corners: false,
 					iconPos: "left",
 					icon: "plus",
+					mini: o.mini,
 					theme: o.theme
 				})
 			.add( ".ui-btn-inner" )

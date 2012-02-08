@@ -11,7 +11,8 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		theme: null,
 		trackTheme: null,
 		disabled: false,
-		initSelector: "input[type='range'], :jqmData(type='range'), :jqmData(role='slider')"
+		initSelector: "input[type='range'], :jqmData(type='range'), :jqmData(role='slider')",
+		mini: false
 	},
 
 	_create: function() {
@@ -47,8 +48,14 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			step = window.parseFloat( control.attr( "step" ) || 1 ),
 
+			inlineClass = ( this.options.inline || control.jqmData("inline") == true ) ? " ui-slider-inline" : "",
+			
+			miniClass = ( this.options.mini || control.jqmData("mini") ) ? " ui-slider-mini" : "",
+
 			slider = $( "<div class='ui-slider " + selectClass + " ui-btn-down-" + trackTheme +
-									" ui-btn-corner-all' role='application'></div>" ),
+									" ui-btn-corner-all" + inlineClass + miniClass + "' role='application'></div>" ),
+									
+			valuebg = control.jqmData("highlight") && cType != "select" ? $( "<div class='ui-slider-bg ui-btn-active ui-btn-corner-all'></div>" ).prependTo( slider ) : false,
 
 			handle = $( "<a href='#' class='ui-slider-handle'></a>" )
 				.appendTo( slider )
@@ -67,6 +74,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		$.extend( this, {
 			slider: slider,
 			handle: handle,
+			valuebg: valuebg,
 			dragging: false,
 			beforeStart: null,
 			userModified: false,
@@ -328,6 +336,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				"aria-valuetext": cType === "input" ? newval : control.find( "option" ).eq( newval ).getEncodedText(),
 				title: cType === "input" ? newval : control.find( "option" ).eq( newval ).getEncodedText()
 			});
+		this.valuebg && this.valuebg.css( "width", percent + "%" );
 
 		// drag the label widths
 		if ( this._labels ) {

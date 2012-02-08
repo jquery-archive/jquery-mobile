@@ -22,6 +22,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			// filter works though.
 			label = input.closest( "form,fieldset,:jqmData(role='page')" ).find( "label" ).filter( "[for='" + input[ 0 ].id + "']" ),
 			inputtype = input.attr( "type" ),
+			mini = input.closest( "form,fieldset" ).jqmData('mini'),
 			checkedState = inputtype + "-on",
 			uncheckedState = inputtype + "-off",
 			icon = input.parents( ":jqmData(type='horizontal')" ).length ? undefined : uncheckedState,
@@ -53,7 +54,8 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 		label.buttonMarkup({
 			theme: this.options.theme,
 			icon: icon,
-			shadow: false
+			shadow: false,
+			mini: mini
 		});
 
 		// Wrap the input + label in a div
