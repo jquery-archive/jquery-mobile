@@ -41,12 +41,12 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 				$( this ).addClass( $.mobile.activeBtnClass );
 			}
 		});
-		
+
 		// Buttons in the navbar with ui-state-persist class should regain their active state before page show
 		$navbar.closest( ".ui-page" ).bind( "pagebeforeshow", function() {
 			$navbtns.filter( ".ui-state-persist" ).addClass( $.mobile.activeBtnClass );
 		});
-		
+
 	}
 });
 
