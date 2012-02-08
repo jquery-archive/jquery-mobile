@@ -38,17 +38,23 @@ $.widget( "mobile.widget", {
 	},
 
 	enhanceWithin: function( target, useKeepNative ) {
-		var page, keepNative, widgetElements;
+		var page, keepNative, $widgetElements, count;
 
-		widgetElements = $( this.options.initSelector, target );
+		$widgetElements = $( this.options.initSelector, target );
 
 		// if ignoreContentEnabled is set to true the framework should
 		// only enhance the selected elements when they do NOT have a
 		// parent with the data-namespace-ignore attribute
 		// TODO use parentNode traversal to speed things up
 		if ( $.mobile.ignoreContentEnabled ) {
-			if ( !widgetElements.closest( ":jqmData(ignore)").length ) {
-				widgetElements[ this.widgetName ]();
+			count = $widgetElements.length;
+
+			for( var i = 0; i < count; i++ ) {
+				var $element = $( $widgetElements[i] );
+
+				if ( !$element.closest( ":jqmData(ignore)").length ) {
+					$element[ this.widgetName ]();
+				}
 			}
 		} else if ( useKeepNative ) {
 			// TODO remove dependency on the page widget for the keepNative.
@@ -57,9 +63,9 @@ $.widget( "mobile.widget", {
 			page = $.mobile.closestPageData( $(target) );
 			keepNative = (page && page.keepNativeSelector()) || "";
 
-			widgetElements.not( keepNative )[ this.widgetName ]();
+			$widgetElements.not( keepNative )[ this.widgetName ]();
 		} else {
-			widgetElements[ this.widgetName ]();
+			$widgetElements[ this.widgetName ]();
 		}
 	}
 });
