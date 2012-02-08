@@ -41,6 +41,10 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			if ( !o.contentTheme ) {
 				o.contentTheme = collapsibleSet.jqmData( "content-theme" );
 			}
+            // Gets the preference icon position in the set
+            if ( !o.iconPos ) {
+                o.iconPos = collapsibleSet.jqmData( "iconpos" );
+            }
 		}
 
 		collapsibleContent.addClass( ( o.contentTheme ) ? ( "ui-body-" + o.contentTheme ) : "");
@@ -57,7 +61,9 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 				.buttonMarkup({
 					shadow: false,
 					corners: false,
-					iconPos: "left",
+                    //specific collapsible icon position takes priority over the set's position, 
+                    //otherwise, use 'left' position as default
+					iconpos: $el.jqmData( "iconpos" ) || o.iconPos || "left",
 					icon: "plus",
 					theme: o.theme
 				})
