@@ -62,7 +62,7 @@ $.widget( "mobile.widget", {
 			// TODO remove dependency on the page widget for the keepNative.
 			// Currently the keepNative value is defined on the page prototype so
 			// the method is as well
-			page = $.mobile.closestPageData( $(target) );
+			page = $.mobile.closestPageData( $widgetElements );
 			keepNative = (page && page.keepNativeSelector()) || "";
 
 			$widgetElements.not( keepNative )[ this.widgetName ]();
