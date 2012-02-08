@@ -50,6 +50,7 @@
 					<li data-role="list-divider">Form elements</li>
 					<li><a href="docs-forms.html">Form basics</a></li>
 					<li><a href="forms-all.html">Form element gallery</a></li>
+					<li><a href="forms-all-mini.html">Mini form element gallery</a></li>
 					<li><a href="textinputs/">Text inputs</a></li>
 					<li><a href="search/">Search inputs</a></li>
 					<li><a href="slider/">Slider</a></li>
