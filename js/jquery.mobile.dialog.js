@@ -89,7 +89,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 
 //auto self-init widgets
 $( document ).delegate( $.mobile.dialog.prototype.options.initSelector, "pagecreate", function(){
-	$( this ).dialog();
+	$.mobile.dialog.prototype.enhanceWithin( this );
 });
 
 })( jQuery, this );
