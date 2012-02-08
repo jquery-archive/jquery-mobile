@@ -37,6 +37,15 @@ $.widget( "mobile.widget", {
 		return options;
 	},
 
+	_setOption: function(key, value) {
+		var setter = "_set" + key.replace(/^[a-z]/, function(c) {return c.toUpperCase();});
+
+		if (this[setter] !== undefined)
+			this[setter](value);
+		else
+			$.Widget.prototype._setOption.apply(this, arguments);
+	},
+
 	enhanceWithin: function( target ) {
 		// TODO remove dependency on the page widget for the keepNative.
 		// Currently the keepNative value is defined on the page prototype so
