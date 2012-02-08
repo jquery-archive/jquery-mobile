@@ -45,6 +45,7 @@ $.widget( "mobile.widget", {
 		// if ignoreContentEnabled is set to true the framework should
 		// only enhance the selected elements when they do NOT have a
 		// parent with the data-namespace-ignore attribute
+		// TODO use parentNode traversal to speed things up
 		if ( $.mobile.ignoreContentEnabled ) {
 			if ( !widgetElements.closest( ":jqmData(ignore)").length ) {
 				widgetElements[ this.widgetName ]();
