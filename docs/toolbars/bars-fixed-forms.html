@@ -29,12 +29,30 @@
 		<div class="content-primary">
 			
 			<div>
+				
+				<div>
+					<a href="index.html" data-role="button" data-icon="delete" data-inline="true" data-mini="true" data-iconpos="left">Delete</a>
+					<a href="index.html" data-role="button" data-icon="delete" data-inline="true" data-mini="true" data-iconpos="right">Delete</a>
+					<a href="index.html" data-role="button" data-icon="delete" data-inline="true" data-mini="true" data-iconpos="top">Delete</a>
+					<a href="index.html" data-role="button" data-icon="delete" data-inline="true" data-mini="true" data-iconpos="bottom">Delete</a>
+				</div>
+
+				<div>
+					<a href="index.html" data-role="button" data-icon="delete" data-mini="true" data-iconpos="left">Delete</a>
+					<a href="index.html" data-role="button" data-icon="delete" data-mini="true" data-iconpos="right">Delete</a>
+					<a href="index.html" data-role="button" data-icon="delete" data-mini="true" data-iconpos="top">Delete</a>
+					<a href="index.html" data-role="button" data-icon="delete" data-mini="true" data-iconpos="bottom">Delete</a>
+				</div>
+	
+				<style type="text/css" media="screen">
+					div[style~="display:inline-block;"] { float: left; max-width: 280px; }
+				</style>
+				
 				<div style="display:inline-block;">
 				<a href="docs-bars.html" data-role="button" data-mini="true" data-inline="true">Mini Inline</a>
 				</div>
 
 				<div style="display:inline-block;">
-				
 					<select name="select-mini" id="select-mini" data-mini="true" data-inline="true">
 						<option value="standard">Standard: 7 day</option>
 						<option value="rush">Rush: 3 days</option>
@@ -42,51 +60,28 @@
 						<option value="overnight">Overnight</option>
 					</select>
 				</div>
-				<div style="display:inline-block;width:260px;">
+
+				<div style="display:inline-block; width:260px;">
 				 	<input type="range" name="slider" id="slider" value="0" min="0" max="100" data-highlight="true" data-mini="true" />
 				</div>
-
-				<div style="display:inline-block;width:200px; padding-right: 15px;">
-					<input type="text" name="password" id="search" value="" data-mini="true" />
+				
+				<div style="display:inline-block;">
+					<select name="slider" id="flip-b" data-mini="true" data-role="slider">
+						<option value="off">Off</option>
+						<option value="on">On</option>
+					</select>
 				</div>
 
-				<div style="display:inline-block;width:200px;">
+				<div style="display:inline-block; width:200px; padding-right: 15px;">
+					<input type="text" name="password" id="search" value="" data-mini="true" />
+				</div>	
+			
+				<div style="display:inline-block; width:200px;">
 					<input type="search" name="password" id="search" value="" data-mini="true" />
 				</div>
 				
 			</div>
-			
-			<div >
-				<div style="display:inline-block;">
-				<a href="docs-bars.html" data-role="button">Button</a>
-				
-				</div>
-				
-				
-				
-				<div style="display:inline-block;">
-				
-					<select name="select-mini" id="select-mini">
-						<option value="standard">Standard: 7 day</option>
-						<option value="rush">Rush: 3 days</option>
-						<option value="express">Express: next day</option>
-						<option value="overnight">Overnight</option>
-					</select>
-				</div>
-				<div style="display:inline-block;width:300px;">
-				 	<input type="range" name="slider" id="slider" value="0" min="0" max="100" data-highlight="true" />
-				</div>
 
-				<div style="display:inline-block;width:200px; padding-right: 20px;">
-					<input type="text" name="password" id="search" value="" />
-				</div>
-
-				<div style="display:inline-block;width:200px;">
-					<input type="search" name="password" id="search" value="" />
-				</div>
-				
-			</div>
-			
 			<div data-role="fieldcontain">
 				<a href="docs-bars.html" data-role="button">Normal</a>
 				<a href="docs-bars.html" data-role="button" data-mini="true">Mini</a>
@@ -132,9 +127,10 @@
 				<option value="overnight">Overnight</option>
 			</select>
 				
-				<label for="slider">Slider:</label>
-				<input type="range" name="slider" id="slider" value="0" min="0" max="100" data-highlight="true" />
-
+				<fieldset data-role="controlgroup">
+					<label for="slider">Slider:</label>
+					<input type="range" name="slider" id="slider" value="0" min="0" max="100" data-highlight="true" />
+				</fieldset>
 				<label for="slider">Slider:</label>
 			 	<input type="range" name="slider" id="slider" value="0" min="0" max="100" data-highlight="true" data-mini="true" />
 				
@@ -187,6 +183,22 @@
 						<input type="checkbox" name="checkbox-8" id="checkbox-8" class="custom" />
 						<label for="checkbox-8">u</label>
 				    </fieldset>
+					
+					<div data-role="controlgroup">
+						<label for="flip-a">Flip switch:</label>
+						<select name="slider" id="flip-a" data-role="slider">
+							<option value="off">Off</option>
+							<option value="on">On</option>
+						</select> 
+					</div>
+					
+					<fieldset data-role="controlgroup">
+						<label for="flip-b">Flip switch:</label>
+						<select name="slider" id="flip-b" data-mini="true" data-role="slider">
+							<option value="off">Off</option>
+							<option value="on">On</option>
+						</select> 
+					</fieldset>
 
 					<div data-role="fieldcontain">
 						<label for="name">Text Input:</label>

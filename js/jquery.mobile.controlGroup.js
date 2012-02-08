@@ -35,7 +35,7 @@ $.fn.controlgroup = function( options ) {
 
 		$el.addClass( "ui-corner-all ui-controlgroup ui-controlgroup-" + o.direction );
 
-		flipClasses( $el.find( ".ui-btn" + ( o.excludeInvisible ? ":visible" : "" ) ), flCorners );
+		flipClasses( $el.find( ".ui-btn" + ( o.excludeInvisible ? ":visible" : "" ) ).not('.ui-slider-handle'), flCorners );
 		flipClasses( $el.find( ".ui-btn-inner" ), flCorners );
 
 		if ( o.shadow ) {

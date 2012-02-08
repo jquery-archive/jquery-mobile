@@ -49,7 +49,6 @@ $.fn.buttonMarkup = function( options ) {
 		buttonClass = "ui-btn ui-btn-up-" + o.theme;
 
 		if ( o.inline ) {
-			console.log( 'inline' );
 			buttonClass += " ui-btn-inline";
 		}
 
