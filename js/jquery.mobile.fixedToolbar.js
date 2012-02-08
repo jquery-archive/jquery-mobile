@@ -267,8 +267,8 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 
 	//auto self-init widgets
 	$( document ).bind( "pagecreate create", function( e ){
-		$( $.mobile.fixedtoolbar.prototype.options.initSelector, e.target ).fixedtoolbar();
-	});	
+		$.mobile.fixedtoolbar.prototype.enhanceWithin( e.target );
+	});
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
