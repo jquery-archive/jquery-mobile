@@ -70,6 +70,8 @@ $.event.special.scrollstart = {
 
 // also handles taphold
 $.event.special.tap = {
+	tapholdDurationThreshold: 750, // Time to detect taphold
+  
 	setup: function() {
 		var thisObject = this,
 			$this = $( thisObject );
@@ -112,7 +114,7 @@ $.event.special.tap = {
 
 			timer = setTimeout(function() {
 					triggerCustomEvent( thisObject, "taphold", $.Event( "taphold" ) );
-			}, 750 );
+			}, $.event.special.tap.tapholdDurationThreshold );
 		});
 	}
 };
