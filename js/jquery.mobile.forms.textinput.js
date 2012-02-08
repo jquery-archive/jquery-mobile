@@ -111,11 +111,6 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		}
 	},
 
-	_setOption: function(key, value) {
-		if (key === "disabled")
-			this._setDisabled(value);
-	},
-
 	_setDisabled: function(value) {
 		( this.element.attr( "disabled", value ).is( "[type='search'],:jqmData(type='search')" ) ?
 			this.element.parent() : this.element )[value ? "addClass" : "removeClass"]( "ui-disabled" );

@@ -359,14 +359,6 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		}
 	},
 
-	_setOption: function(key, value) {
-		switch(key) {
-			case "disabled":
-				this._setDisabled(value);
-				break;
-		}
-	},
-
 	_setDisabled: function(value) {
 		if (value) {
 			this.element.attr( "disabled", true );

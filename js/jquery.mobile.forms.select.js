@@ -30,11 +30,6 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		return $( "<div/>" );
 	},
 
-	_setOption: function(key, value) {
-		if (key === "disabled")
-			this._setDisabled(value);
-	},
-
 	_setDisabled: function( value ) {
 		this.element.attr( "disabled", value );
 		this.button.attr( "aria-disabled", value );
