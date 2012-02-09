@@ -37,15 +37,29 @@
 			
 			<p>Set the <code>for</code> attribute of the <code>label</code> to match the ID of the <code>input</code> so they are semantically associated. It's possible to <a href="../docs-forms.html">accessibly hide the label</a> if it's not desired in the page layout, but we require that it is present in the markup for semantic and accessibility reasons.</p>
 				
-				<pre><code>	
+<pre><code>	
 &lt;label for=&quot;search-basic&quot;&gt;Search Input:&lt;/label&gt;
 &lt;input type=&quot;search&quot; name=&quot;search&quot; id=&quot;searc-basic&quot; value=&quot;&quot; /&gt;
-				</code></pre>	
+</code></pre>	
 
 				<p>This will produce a basic search input. The default styles set the width of the input to 100% of the parent container and stacks the label on a separate line.</p>
 		         <label for="search-basic">Search Input:</label>
 				 <input type="search" name="search" id="search-basic" value="" />
 		        
+				<h2>Mini version</h2>
+
+				<p>For a more compact version that is useful in toolbars and tight spaces, add the <code>data-mini="true"</code> attribute to the element to create a <a href="../forms-all-mini.html">mini version</a>. </p>
+
+<pre><code>	
+&lt;label for=&quot;search-basic&quot;&gt;Search Input:&lt;/label&gt;
+&lt;input type=&quot;search&quot; name=&quot;search&quot; id=&quot;searc-basic&quot; value=&quot;&quot; <strong>data-mini=&quot;true&quot;</strong> /&gt;
+</code></pre>
+
+				<p>This will produce a search input that a not as tall as the standard version and has a smaller text size.</p>
+		         <label for="search-mini">Search Input:</label>
+				 <input type="search" name="search" id="search-mini" value="" />
+
+				<h2>Field containers</h2>
 				
 				 <p>Optionally wrap the search input in a container with the <code>data-role="fieldcontain"</code> attribute to help visually group it in a longer form.</p>
 
@@ -62,7 +76,8 @@
 	         <input type="search" name="search2" id="search" value="" />
 			</div>
 
-			<p>Themed variation:</p>
+			<h2>Theming</h2>
+			<p>The <code>data-theme</code> attribute can be added to the search input to set the theme to any swatch letter.</p>
 			<div data-role="fieldcontain">
 	         <label for="searchA">Search Input:</label>
 	         <input type="search" name="search3" id="searchA" value="" data-theme="a" />

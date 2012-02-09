@@ -47,6 +47,21 @@
 			
 	         <label for="basic">Text Input:</label>
 	         <input type="text" name="name" id="basic" value="" />
+	
+			<h2>Mini version</h2>
+
+			<p>For a more compact version that is useful in toolbars and tight spaces, add the <code>data-mini="true"</code> attribute to the element to create a <a href="../forms-all-mini.html">mini version</a>. </p>
+
+<pre><code>	
+&lt;label for=&quot;basic&quot;&gt;Text Input:&lt;/label&gt;
+&lt;input type=&quot;text&quot; name=&quot;name&quot; id=&quot;basic&quot; value=&quot;&quot; <strong>data-mini=&quot;true&quot;</strong> /&gt;
+</code></pre>
+			
+			<p>This will produce an input that a not as tall as the standard version and has a smaller text size.</p>
+	         <label for="mini">Text Input:</label>
+	         <input type="text" name="name" id="mini" value="" data-mini="true" />
+
+			<h2>Field containers</h2>
 
 			<p>Optionally wrap the text input in a container with the <code> data-role="fieldcontain"</code> attribute to help visually group it in a longer form.</p>
 
@@ -64,7 +79,7 @@
 			</div>
 						
 			
-			<h3>More text input types</h3>
+			<h2>More text input types</h2>
 			<p>In jQuery Mobile, you can use existing and new HTML5 input types such as <code>password</code>, <code>email</code>, <code>tel</code>, <code>number</code>, and more.  Some type values are rendered differently across browsers &#8212; for example, Chrome displays the <code>range</code> input renders as a slider &#8212; so we standardize their appearance by dynamically changing their type to <code>text</code> (currently, this applies to <code>range</code> and <code>search</code>). You can configure which input types are degraded to <code>text</code> with the <code>page</code> plugin's options.</p>
 			
 			<p>One major advantage of using these more specific input types if that on mobile devices, specialized keyboards that speed data entry are offered in place of the standard text keyboard. Try the following inputs on a mobile device to see which display custom keyboards on various platforms.</p>

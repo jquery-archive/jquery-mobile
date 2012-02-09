@@ -43,6 +43,13 @@
 				<pre><code>$('.selector').slider(<strong>{ disabled: "true" }</strong>);</code></pre>
 			</dd>
 			
+			<dt><code>highlight</code> <em>boolean</em></dt>
+			<dd>
+				<p class="default">default: false</p>
+				<p>Sets an active state fill on the track from the left edge to the slider handle when set to "true".</p>		
+				<pre><code>$('.selector').slider(<strong>{ highlight: "true" }</strong>);</code></pre>
+			</dd>
+					
 			<dt><code>initSelector</code> <em>CSS selector string</em></dt>
 			<dd>
 				<p class="default">default: "input[type='range'], :jqmData(type='range'), :jqmData(role='slider')"</p>
@@ -52,7 +59,13 @@
 });
 </code></pre>
 			</dd>
-						
+			
+			<dt><code>mini</code> <em>boolean</em></dt>
+			<dd>
+				<p class="default">default: false</p>
+				<p>Sets the size of the element to a more compact, <a href="../forms-all-mini.html">mini version</a>. This option is also exposed as a data attribute: <code>data-mini=&quot;true&quot;</code></p>		
+				<pre><code>$('.selector').slider(<strong>{ mini: "true" }</strong>);</code></pre>
+							
 			<dt><code>theme</code> <em>string</em></dt>
 			<dd>
 				<p class="default">default: null, inherited from parent</p>

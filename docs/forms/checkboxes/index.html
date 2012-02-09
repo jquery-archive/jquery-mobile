@@ -49,8 +49,21 @@
 		<input type="checkbox" name="checkbox-0" id="checkbox-0" class="custom" />
 		<label for="checkbox-0">I agree</label>
 					
+		<h2>Mini version</h2>
 
-			
+		<p>For a more compact version that is useful in toolbars and tight spaces, add the <code>data-mini="true"</code> attribute to the element to create a <a href="../forms-all-mini.html">mini version</a>. </p>
+
+<pre><code>	
+&lt;input type=&quot;checkbox&quot; name=&quot;checkbox-0&quot; id=&quot;checkbox-mini-0&quot; class=&quot;custom&quot; <strong>data-mini=&quot;true&quot;</strong> /&gt;
+&lt;label for=&quot;checkbox-mini-0&quot;&gt;I agree&lt;/label&gt;
+</code></pre>
+		
+		<p>This will produce a select that a not as tall as the standard version and has a smaller text size.</p>
+		<input type="checkbox" name="checkbox-0" id="checkbox-mini-0" class="custom" data-mini="true" />
+		<label for="checkbox-mini-0">I agree</label>
+
+
+		<h2>Field containers &amp; Legends</h2>
 		<p>Because checkboxes use the <code>label</code> element for the text displayed next to the checkbox form element, we recommend wrapping the checkbox in a <code>fieldset</code> element that has a <code>legend</code> which acts as the title for the question. Add the  <code> data-role="controlgroup"</code> attribute to the <code>fieldset</code> so it can be styled in a parallel way as text inputs, selects or other form elements.</p>
 		
 		<p>Lastly, need to wrap the <code>fieldset</code> in a <code>div</code> with <code> data-role="controlgroup"</code> attribute to the <code>fieldset</code> so it can be styled in a parallel way as text inputs, selects or other form elements.</p>
@@ -73,6 +86,8 @@
 			<label for="checkbox-1">I agree</label>
 	    </fieldset>
 	</div>
+	
+			
 		
 		<h2>Vertically grouped checkboxes</h2>
 		

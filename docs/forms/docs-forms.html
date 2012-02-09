@@ -37,6 +37,19 @@
 <h2>Markup conventions</h2>
 <p>When constructing forms to be used in jQuery Mobile, most of the standard guidelines used to create forms that submit via normal HTTP post or get still apply. However, one thing to keep in mind is that the <code>id</code> attributes of form controls need to be not only unique on a given page, but also unique across the pages in a site. This is because jQuery Mobile's single-page navigation model allows many different "pages" to be present in the DOM at the same time, so you must be careful to use unique <code>id</code> attributes so there will be only one of each in the DOM (and of course, be sure to pair them properly with <code>label</code> elements via the <code>for</code> attribute).</p>
 
+	<h2>Mini sized elements</h2>
+
+	<p>For a more compact version of all form elements and buttons, add the <code>data-mini="true"</code> attribute to the element to create a <a href="forms-all-mini.html">mini version</a>. This is useful in toolbars and tight spaces but is still finger-friendly. It's possible to add this attribute to a fieldcontainer to set this on a number of elements at once.</p>
+
+<pre><code>	
+&lt;label for=&quot;basic&quot;&gt;Text Input:&lt;/label&gt;
+&lt;input type=&quot;text&quot; name=&quot;name&quot; id=&quot;basic&quot; <strong>data-mini=&quot;true&quot;</strong> /&gt;
+	</code></pre>
+
+	<p>This will produce an input that a not as tall as the standard version and has a smaller text size.</p>
+	 <label for="mini">Text Input:</label>
+	 <input type="text" name="name" id="mini" value="" data-mini="true" />
+
 	<h2>Hiding labels accessibly</h2>
 	<p>For the sake of accessibility, jQuery Mobile requires that all form elements be paired with a meaningful <code>label</code>. To hide labels in a way that leaves them visible to assistive technologies—for example, when letting an element’s <code>placeholder</code> attribute serve as a label—apply the helper class <code>ui-hidden-accessible</code> to the label itself:</p>
 <code>
