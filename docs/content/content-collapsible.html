@@ -45,11 +45,11 @@
 
 	<h2>Expanding collapsibles on load</h2>
 			
-		<p>To expand the content when the page loads, add the <code>data-collapsed="false"</code> attribute to the wrapper.</p>
+	<p>To expand the content when the page loads, add the <code>data-collapsed="false"</code> attribute to the wrapper.</p>
 
-	<code>		
-	&lt;div data-role=&quot;collapsible&quot; <strong>data-collapsed=&quot;false&quot;&gt;</strong>
-	</code>
+<code>		
+&lt;div data-role=&quot;collapsible&quot; <strong>data-collapsed=&quot;false&quot;&gt;</strong>
+</code>
 
 		<p>This code will create a collapsible widget like this:</p>
 	
@@ -59,6 +59,21 @@
 				<p>I'm the collapsible content. I'm expanded by default because I have the "collapsed" state set to false.</p>
 			</div>
 	
+			<h2>Mini collapsibles</h2>
+
+			<p>For a more compact version that is useful in toolbars and tight spaces, add the <code>data-mini="true"</code> attribute to the element to create a <a href="../forms-all-mini.html">mini version</a>. </p>
+
+		<code>		
+		&lt;div data-role=&quot;collapsible&quot; <strong>data-mini=&quot;true&quot;&gt;</strong>
+		</code>
+
+		<p>This code will create a mini collapsible widget:</p>
+
+		<div data-role="collapsible" data-mini="true">
+			<h3>I'm a mini header</h3>
+			<p>I'm the collapsible content. I'm expanded by default because I have the "collapsed" state set to false.</p>
+		</div>
+					
 	<h2>Theming collapsible content</h2>
 	
 		
