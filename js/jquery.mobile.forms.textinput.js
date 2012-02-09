@@ -1,6 +1,7 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Enhances and consistently styles text inputs.
 //>>label: Text Inputs
+//>>group: forms
 
 define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.widget", "./jquery.mobile.degradeInputs", "./jquery.mobile.buttonMarkup"  ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
