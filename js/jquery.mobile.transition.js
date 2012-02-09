@@ -22,6 +22,7 @@ function outInTransitionHandler( name, reverse, $to, $from ) {
 		viewportClass = "ui-mobile-viewport-transitioning viewport-" + name,
 		maxTransitionOverride = $.mobile.maxTransitionWidth !== false && $( window ).width() > $.mobile.maxTransitionWidth,
 		none = !$.support.cssTransitions || maxTransitionOverride || !name || name === "none",
+		alreadyFocused = false,
 		doneOut = function() {
 
 			if ( $from ) {
@@ -34,11 +35,12 @@ function outInTransitionHandler( name, reverse, $to, $from ) {
 			
 			if( !none ){
 				$to.animationComplete( doneIn );
+				// Send focus to page as it is now display: block
+				// For browsers not supported transitions or if transition is not set we will set focus later (#3505)
+				$.mobile.focusPage( $to );
+				alreadyFocused = true;
 			}
 
-			// Send focus to page as it is now display: block
-			$.mobile.focusPage( $to );
-			
 			// Jump to top or prev scroll, sometimes on iOS the page has not rendered yet.
 			$to.height( screenHeight + toScroll );
 				
@@ -58,7 +60,7 @@ function outInTransitionHandler( name, reverse, $to, $from ) {
 				.height( "" )
 				.parent().removeClass( viewportClass );
 			
-			deferred.resolve( name, reverse, $to, $from, true );
+			deferred.resolve( name, reverse, $to, $from, alreadyFocused);
 		};
 		
 	$to
