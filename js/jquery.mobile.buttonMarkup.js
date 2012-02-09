@@ -19,7 +19,7 @@ $.fn.buttonMarkup = function( options ) {
 				shadow:     options.shadow     !== undefined ? options.shadow     : el.jqmData( "shadow" ),
 				corners:    options.corners    !== undefined ? options.corners    : el.jqmData( "corners" ),
 				iconshadow: options.iconshadow !== undefined ? options.iconshadow : el.jqmData( "iconshadow" ),
-				mini:       options.mini       !== undefined ? options.mini       : el.jqmData( "mini" ),
+				mini:       options.mini       !== undefined ? options.mini       : el.jqmData( "mini" )
 			}, options ),
 
 			// Classes Defined
