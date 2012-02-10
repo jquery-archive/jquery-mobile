@@ -10,7 +10,8 @@
 	top: 0;
 }
 .ui-footer-fixed {
-	bottom: 0;
+	bottom: -1px;
+	padding-bottom: 1px;
 }
 .ui-header-fullscreen,
 .ui-footer-fullscreen {
