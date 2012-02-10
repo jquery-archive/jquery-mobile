@@ -11,13 +11,7 @@ $.fn.controlgroup = function( options ) {
 
 	// trim the working set when ignoring content is switched on
 	if( $.mobile.ignoreContentEnabled ){
-		var $newWorkingSet = $();
-
-		$.mobile.eachEnhanceable($workingSet, function( $element ) {
-			$newWorkingSet = $newWorkingSet.add( $element );
-		});
-
-		$workingSet = $newWorkingSet;
+		$workingSet = $.mobile.enhanceable( $workingSet );
 	}
 
 	function flipClasses( els, flCorners  ) {

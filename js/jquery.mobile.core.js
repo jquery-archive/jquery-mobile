@@ -196,17 +196,19 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 		},
 
 		// TODO not excited about the name here :/
-		eachEnhanceable: function( $set, callback ) {
-			var count = $set.length;
+		// TODO use parentNode traversal to speed things up
+		enhanceable: function( $set ) {
+			var count = $set.length, $newSet = $();
 
 			for( var i = 0; i < count; i++ ) {
 				var $element = $( $set[i] );
 
 				if ( !$element.closest( ":jqmData(enhance='false')").length ) {
-					callback( $element );
+					$newSet = $newSet.add( $element );
 				}
 			}
 
+			return $newSet;
 		}
 	}, $.mobile );
 

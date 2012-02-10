@@ -47,22 +47,21 @@ $.widget( "mobile.widget", {
 		// if ignoreContentEnabled is set to true the framework should
 		// only enhance the selected elements when they do NOT have a
 		// parent with the data-namespace-ignore attribute
-		// TODO use parentNode traversal to speed things up
 		if ( $.mobile.ignoreContentEnabled ) {
-			$.mobile.eachEnhanceable( $widgetElements, function( $element ) {
-				$element[ self.widgetName ]();
-			});
-		} else if ( useKeepNative ) {
+			$widgetElements = $.mobile.enhanceable( $widgetElements );
+		}
+
+		if ( useKeepNative && $widgetElements.length ) {
 			// TODO remove dependency on the page widget for the keepNative.
 			// Currently the keepNative value is defined on the page prototype so
 			// the method is as well
 			page = $.mobile.closestPageData( $widgetElements );
 			keepNative = (page && page.keepNativeSelector()) || "";
 
-			$widgetElements.not( keepNative )[ this.widgetName ]();
-		} else {
-			$widgetElements[ this.widgetName ]();
+			$widgetElements = $widgetElements.not( keepNative );
 		}
+
+		$widgetElements[ this.widgetName ]();
 	}
 });
 
