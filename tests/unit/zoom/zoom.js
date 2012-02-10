@@ -18,16 +18,16 @@
 	
 	test( "Meta viewport content is manipulated with maximum-scale", function(){
 		$.mobile.zoom.disable();
-		ok( $( "meta[name=viewport]" ).attr( "content" ).match( /,maximum\-scale=1$/ ), "The meta viewport tag's content contains maximum-scale=1 after enable is called" );
+		ok( $( "meta[name=viewport]" ).attr( "content" ).match( /,maximum-scale=1, user-scalable=no/ ), "The meta viewport tag's content contains maximum-scale=1, user-scalable=yes after enable is called" );
 		
 		$.mobile.zoom.enable();
-		ok( $( "meta[name=viewport]" ).attr( "content" ).indexOf( ",maximum-scale=10" ) > 0, "The meta viewport tag's content contains maximum-scale=10 after enable is called" );
+		ok( $( "meta[name=viewport]" ).attr( "content" ).match( /,maximum-scale=10, user-scalable=yes/ ), "The meta viewport tag's content contains maximum-scale=1, user-scalable=yes0, user-scalable=no after enable is called" );
 		
 	});
 	
 	test( "Meta viewport content restore method restores it back to original value", function(){
 		$.mobile.zoom.disable();
-		ok( $( "meta[name=viewport]" ).attr( "content" ).match( /,maximum\-scale=1$/ ), "The meta viewport tag's content contains maximum-scale=1 after enable is called" );
+		ok( $( "meta[name=viewport]" ).attr( "content" ).match( /,maximum-scale=1, user-scalable=no/ ), "The meta viewport tag's content contains maximum-scale=1, user-scalable=yes after enable is called" );
 		
 		$.mobile.zoom.restore();
 		ok( $( "meta[name=viewport]" ).attr( "content" ) === defaultMeta, "The meta viewport tag's content matches its default state" );
@@ -43,7 +43,7 @@
 		$.mobile.zoom.locked = true;
 		$.mobile.zoom.enable();
 		
-		ok( $( "meta[name=viewport]" ).attr( "content" ).match( /,maximum\-scale=1$/ ), "The meta viewport tag's content contains maximum-scale=1 after enable is called" );
+		ok( $( "meta[name=viewport]" ).attr( "content" ).match( /,maximum-scale=1, user-scalable=no/ ), "The meta viewport tag's content contains maximum-scale=1, user-scalable=yes after enable is called" );
 		$.mobile.zoom.locked = false;
 		$.mobile.zoom.enable();
 		
@@ -56,7 +56,7 @@
 		$.mobile.zoom.locked = true;
 		$.mobile.zoom.disable();
 		
-		ok( $( "meta[name=viewport]" ).attr( "content" ).indexOf( ",maximum-scale=10" ) > 0, "The meta viewport tag's content contains maximum-scale=10 after disable is called" );
+		ok( $( "meta[name=viewport]" ).attr( "content" ).match( /,maximum-scale=10, user-scalable=yes/ ), "The meta viewport tag's content contains maximum-scale=1, user-scalable=yes0, user-scalable=no after disable is called" );
 		
 		$.mobile.zoom.locked = false;
 		$.mobile.zoom.enable();
@@ -70,7 +70,7 @@
 		$.mobile.zoom.locked = true;
 		$.mobile.zoom.enable( true );
 		
-		ok( $( "meta[name=viewport]" ).attr( "content" ).match( /,maximum\-scale=10$/ ), "The meta viewport tag's content contains maximum-scale=10 after enable is called" );
+		ok( $( "meta[name=viewport]" ).attr( "content" ).match( /,maximum-scale=10, user-scalable=yes/ ), "The meta viewport tag's content contains maximum-scale=1, user-scalable=yes0, user-scalable=no after enable is called" );
 		ok( $.mobile.zoom.locked === false, "The locked property is false again" );
 		
 		$.mobile.zoom.locked = false;
@@ -86,7 +86,7 @@
 
 		$.mobile.zoom.disable( true );
 		
-		ok( $( "meta[name=viewport]" ).attr( "content" ).match( /,maximum\-scale=1$/ ), "The meta viewport tag's content contains maximum-scale=1 after disable is called" );
+		ok( $( "meta[name=viewport]" ).attr( "content" ).match( /,maximum-scale=1, user-scalable=no/ ), "The meta viewport tag's content contains maximum-scale=1, user-scalable=yes after disable is called" );
 		ok( $.mobile.zoom.locked === true, "The locked property is true" );
 		
 		$.mobile.zoom.locked = false;

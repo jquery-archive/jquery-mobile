@@ -81,7 +81,39 @@
 	         	<label for="radio-pet-4a">Lizard</label>
 	    </fieldset>
 
+		<h2>Mini version</h2>
 
+		<p>For a more compact version that is useful in toolbars and tight spaces, add the <code>data-mini="true"</code> attribute to the element to create a <a href="../forms-all-mini.html">mini version</a>. </p>
+
+<pre><code>			
+&lt;fieldset data-role=&quot;controlgroup&quot; <strong>data-mini=&quot;true&quot;</strong>&gt;
+
+    	&lt;input type=&quot;radio&quot; name=&quot;radio-choice-1&quot; id=&quot;radio-mini-1&quot; value=&quot;choice-1&quot; checked=&quot;checked&quot; /&gt;
+
+    	&lt;label for=&quot;radio-mini-1&quot;&gt;Credit&lt;/label&gt;
+    	&lt;input type=&quot;radio&quot; name=&quot;radio-choice-1&quot; id=&quot;radio-mini-2&quot; value=&quot;choice-2&quot;  /&gt;
+
+    	&lt;label for=&quot;radio-mini-2&quot;&gt;Debit&lt;/label&gt;
+    	&lt;input type=&quot;radio&quot; name=&quot;radio-choice-1&quot; id=&quot;radio-mini-3&quot; value=&quot;choice-3&quot;  /&gt;
+
+    	&lt;label for=&quot;radio-mini-3&quot;&gt;Cash&lt;/label&gt;
+&lt;/fieldset&gt;
+</code></pre>
+
+		<p>This will produce a radio button that a not as tall as the standard version and has a smaller text size.</p>
+		
+		<fieldset data-role="controlgroup" data-mini="true">
+	         	<input type="radio" name="radio-choice-1" id="radio-mini-1" value="choice-1" checked="checked" />
+	         	<label for="radio-mini-1">Credit</label>
+	         	<input type="radio" name="radio-choice-1" id="radio-mini-2" value="choice-2"  />
+	         	<label for="radio-mini-2">Debit</label>
+	         	<input type="radio" name="radio-choice-1" id="radio-mini-3" value="choice-3"  />
+	         	<label for="radio-mini-3">Cash</label>
+	    </fieldset>
+		
+		<h2>Field containers</h2>
+		
+		<p>Optionally wrap the radiobuttons in a container with the <code>data-role="fieldcontain"</code> attribute to help visually group it in a longer form.</p>
 	<pre><code>	
 <strong>&lt;div data-role=&quot;fieldcontain&quot;&gt;
 </strong>    &lt;fieldset data-role=&quot;controlgroup&quot;&gt;

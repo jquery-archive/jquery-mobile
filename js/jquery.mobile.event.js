@@ -111,7 +111,7 @@ $.event.special.tap = {
 			$( document ).bind( "vmousecancel", clearTapHandlers );
 
 			timer = setTimeout(function() {
-					triggerCustomEvent( thisObject, "taphold", $.Event( "taphold" ) );
+					triggerCustomEvent( thisObject, "taphold", $.Event( "taphold", { target: origTarget } ) );
 			}, 750 );
 		});
 	}

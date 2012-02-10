@@ -5,6 +5,7 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Fully-custom select menus.
 //>>label: Custom Selects
+//>>group: forms
 
 define( [
 	"jquery",

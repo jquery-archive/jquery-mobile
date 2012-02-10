@@ -395,7 +395,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ){
-	$( $.mobile.listview.prototype.options.initSelector, e.target ).listview();
+	$.mobile.listview.prototype.enhanceWithin( e.target );
 });
 
 })( jQuery );

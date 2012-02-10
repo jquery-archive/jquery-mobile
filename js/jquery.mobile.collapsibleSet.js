@@ -78,7 +78,7 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ){
-	$( $.mobile.collapsibleset.prototype.options.initSelector, e.target ).collapsibleset();
+	$.mobile.collapsibleset.prototype.enhanceWithin( e.target );
 });
 
 })( jQuery );

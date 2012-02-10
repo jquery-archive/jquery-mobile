@@ -88,9 +88,16 @@ $.mobile.fixedToolbars
 			
 			<dt><code>tapToggleBlacklist</code> <em>string</em></dt>
 			<dd>
-				<p class="default">default: "a, input, select, textarea, .ui-header-fixed, .ui-footer-fixed"</p>
+				<p class="default">default: "a, .ui-header-fixed, .ui-footer-fixed"</p>
 				<p>A list of jQuery selectors that should be ignored for tap-toggling the toolbars.</p>			
 				<pre><code>$("[data-role=header]").fixedtoolbar(<strong>{ tapToggleBlacklist: "a, input, select, textarea, .ui-header-fixed, .ui-footer-fixed" }</strong>);</code></pre>
+			</dd>
+			
+			<dt><code>hideDuringFocus</code> <em>string</em></dt>
+			<dd>
+				<p class="default">default: "input, select, textarea"</p>
+				<p>A list of jQuery selectors that should cause the toolbars to hide while focused, except if they are in a fixed toolbar.</p>			
+				<pre><code>$("[data-role=header]").fixedtoolbar(<strong>{ hideDuringFocus: "input, select, textarea" }</strong>);</code></pre>
 			</dd>
 			
 			
@@ -120,7 +127,7 @@ $( document ).bind("mobileinit", function(){
 			<dt><code>initSelector</code> <em>CSS selector string</em></dt>
 			<dd>
 				<p class="default">default: ":jqmData(position='fixed')"</p>
-				<p>This is used to define the selectors (element types, data roles, etc.) that will automatically be initialized as fixed toolbars. To change which elements are initialized, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
+				<p>This is used to define the selectors (element types, data roles, etc.) that will automatically be initialized as fixed toolbars. To change which elements are initialized, bind this option to the <a href="../api/globalconfig.html">mobileinit event</a>:</p>
 				<pre><code>$( document ).bind( "mobileinit", function(){
 	<strong>$.mobile.fixedtoolbar.prototype.options.initSelector = ".myselector";</strong>
 });
@@ -148,7 +155,7 @@ $( document ).bind("mobileinit", function(){
 								<li><a href="docs-footers.html">Footer bars</a></li>
 								<li><a href="docs-navbar.html">Navbars</a></li>
 								<li data-theme="a"><a href="bars-fixed.html">Fixed positioning</a></li>
-								<li><a href="footer-persist-a.html">Persistent footer navbar</a></li>
+								<li><a href="footer-persist-a.html">Persistent toolbars</a></li>
 								<li><a href="bars-themes.html">Theming toolbars</a></li>
 
 							</ul>

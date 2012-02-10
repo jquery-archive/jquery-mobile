@@ -1,6 +1,7 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Form Buttons
 //>>label: links that proxy to native input/buttons
+//>>group: forms
 
 define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.buttonMarkup"  ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
@@ -15,7 +16,8 @@ $.widget( "mobile.button", $.mobile.widget, {
 		corners: true,
 		shadow: true,
 		iconshadow: true,
-		initSelector: "button, [type='button'], [type='submit'], [type='reset'], [type='image']"
+		initSelector: "button, [type='button'], [type='submit'], [type='reset'], [type='image']",
+		mini: false
 	},
 	_create: function() {
 		var $el = this.element,
@@ -27,7 +29,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 
 		// if this is a link, check if it's been enhanced and, if not, use the right function
 		if( $el[ 0 ].tagName === "A" ) {
-	 	 	if ( !$el.hasClass( "ui-btn" ) ) $el.buttonMarkup();
+	 	 	!$el.hasClass( "ui-btn" ) && $el.buttonMarkup();
 	 	 	return;
  	 	}
 
@@ -42,7 +44,8 @@ $.widget( "mobile.button", $.mobile.widget, {
 				inline: o.inline,
 				corners: o.corners,
 				shadow: o.shadow,
-				iconshadow: o.iconshadow
+				iconshadow: o.iconshadow,
+				mini: o.mini
 			})
 			.append( $el.addClass( "ui-btn-hidden" ) );
 
@@ -115,7 +118,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ){
-	$.mobile.button.prototype.enhanceWithin( e.target );
+	$.mobile.button.prototype.enhanceWithin( e.target, true );
 });
 
 })( jQuery );

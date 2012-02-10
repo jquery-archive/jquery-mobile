@@ -23,7 +23,7 @@ pre { white-space: pre; white-space: pre-wrap; word-wrap: break-word; }
 #jqm-homeheader img { width: 235px; }
 img { max-width: 100%; }
 
-.ui-header .jqm-home { top:0.65em; }
+.ui-header .jqm-home { top: 0; }
 nav { margin: 0; }
 
 p.intro {
@@ -134,6 +134,14 @@ dd h4 { margin:15px 0 0 0; }
 	background-image:      -o-linear-gradient(#74b042, #56A00E); /* Opera 11.10+ */
 	background-image:         linear-gradient(#74b042, #56A00E);		
 }
+.ui-bar-f, 
+.ui-bar-f input, 
+.ui-bar-f select, 
+.ui-bar-f textarea, 
+.ui-bar-f button {
+	font-family: Helvetica, Arial, sans-serif /*{global-font-family}*/;
+}
+
 .ui-bar-f,
 .ui-bar-f .ui-link-inherit {
 	color: 					#fff;

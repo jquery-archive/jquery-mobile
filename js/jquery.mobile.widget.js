@@ -2,7 +2,7 @@
 //>>description: Widget factory extentions for mobile.
 //>>label: Widget Factory Extensions
 
-define( [ "jquery", "./jquery.ui.widget" ], function( $ ) {
+define( [ "jquery", "../external/requirejs/depend!./jquery.ui.widget[jquery]" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -37,14 +37,32 @@ $.widget( "mobile.widget", {
 		return options;
 	},
 
-	enhanceWithin: function( target ) {
-		// TODO remove dependency on the page widget for the keepNative.
-		// Currently the keepNative value is defined on the page prototype so
-		// the method is as well
-		var page = $.mobile.closestPageData( $(target) ),
+	enhanceWithin: function( target, useKeepNative ) {
+		this.enhance( $(this.options.initSelector, $(target)), useKeepNative );
+	},
+
+	enhance: function( targets, useKeepNative ) {
+		var page, keepNative, $widgetElements = $( targets ), self = this;
+
+		// if ignoreContentEnabled is set to true the framework should
+		// only enhance the selected elements when they do NOT have a
+		// parent with the data-namespace-ignore attribute
+		// TODO use parentNode traversal to speed things up
+		if ( $.mobile.ignoreContentEnabled ) {
+			$.mobile.eachEnhanceable( $widgetElements, function( $element ) {
+				$element[ self.widgetName ]();
+			});
+		} else if ( useKeepNative ) {
+			// TODO remove dependency on the page widget for the keepNative.
+			// Currently the keepNative value is defined on the page prototype so
+			// the method is as well
+			page = $.mobile.closestPageData( $widgetElements );
 			keepNative = (page && page.keepNativeSelector()) || "";
 
-		$( this.options.initSelector, target ).not( keepNative )[ this.widgetName ]();
+			$widgetElements.not( keepNative )[ this.widgetName ]();
+		} else {
+			$widgetElements[ this.widgetName ]();
+		}
 	}
 });
 

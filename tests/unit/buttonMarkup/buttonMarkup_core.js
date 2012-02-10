@@ -46,18 +46,17 @@
 	});
 	
 	// Test for issue #3141:
-	test( "elements of input[type='submit'] with data-role='button' should not be doubly enhanced", function(){
-		var button = $("#double-enhanced"),
-			count = 0;
+	test( "Elements with “data-mini='true'” should have “ui-mini” class attached to enhanced element.", function(){
+		var $mini = $("#mini"),
+			$full = $("full"),
+			$minicontrol = $('#mini-control');
+			
+			console.log($minicontrol.find('.ui-btn'))
+		ok( $full.not('ui-mini'), "Original element does not have data attribute, enhanced version does not recieve .ui-mini.");
+		ok( $mini.is('.ui-mini'), "Original element has data attribute, enhanced version recieves .ui-mini." );
+		ok( $minicontrol.is('.ui-mini'), "Controlgroup has data attribute and recieves .ui-mini.");
 		
-		button.bind('vclick', function() {
-			count++;
-		});
-		
-		button.trigger('vclick');
-		
-		ok( count === 1, "events don't trigger twice");
-		
-		ok( !button.hasClass('ui-btn') && !button.children().length, "input not styled like button and contains no children");
 	});
+
+	
 })(jQuery);

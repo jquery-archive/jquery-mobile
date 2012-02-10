@@ -20,7 +20,23 @@
 	modules: [
 		{
 			name: "jquery.mobile.docs",
-			exclude: [ "jquery", "../external/requirejs/order" , "../external/requirejs/text", "../external/requirejs/text!../version.txt" ]
+			exclude: [
+				"jquery",
+				"../external/requirejs/depend",
+				"../external/requirejs/order",
+				"../external/requirejs/text",
+				"../external/requirejs/text!../version.txt"
+			]
+		},
+		{
+			name: "jquery.mobile",
+			exclude: [
+				"jquery",
+				"../external/requirejs/depend",
+				"../external/requirejs/order",
+				"../external/requirejs/text",
+				"../external/requirejs/text!../version.txt"
+			]
 		}
 	],
 
@@ -35,5 +51,5 @@
 		endFile:   "wrap.end"
 	},
 
-	dirExclusionRegExp: /^\.|^build|^compiled/
+	dirExclusionRegExp: /^\.|^build|^compiled|^tmp/
 })

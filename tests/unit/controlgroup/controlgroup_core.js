@@ -124,6 +124,22 @@
 		ok( $("#enhancetest").trigger("create").find(".ui-controlgroup").length, "enhancements applied" );
 	});
 
+	test( "controlgroups in ignored containers aren't enhanced", function() {
+		var $unenhancedFieldSet = $( "#unenhanced-fieldset" ),
+			$enhancedFieldSet = $( "#enhanced-fieldset" );
 
+		$.mobile.ignoreContentEnabled = true;
 
+		$unenhancedFieldSet.controlgroup();
+
+		same( $unenhancedFieldSet.length, 1, "the fieldset test fixtures exist" );
+		ok( !$unenhancedFieldSet.is(".ui-controlgroup"), "there is no control group" );
+
+		$enhancedFieldSet.controlgroup();
+
+		same( $enhancedFieldSet.length, 1, "the fieldset test fixtures exist" );
+		ok( $enhancedFieldSet.is(".ui-controlgroup"), "there is a control group" );
+
+		$.mobile.ignoreContentEnabled = false;
+	});
 })(jQuery);

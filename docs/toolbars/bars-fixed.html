@@ -22,56 +22,38 @@
 	
 	<div data-role="content">
 		<div class="content-primary">
-				<h2>Fixed toolbars</h2>
-				
-			    <ul data-role="controlgroup" data-type="horizontal" class="localnav">
-			      <li><a href="bars-fixed.html" data-role="button" data-transition="fade" class="ui-btn-active">Basics</a></li>
-			      <li><a href="bars-fixed-options.html" data-role="button" data-transition="fade">Options</a></li>
-			      <li><a href="bars-fixed-methods.html" data-role="button" data-transition="fade">Methods</a></li>
-			      <li><a href="bars-fixed-events.html" data-role="button" data-transition="fade">Events</a></li>
-			    </ul>
-				
-				
-		<p>In browsers that support CSS <code>position: fixed</code>, (<em>generally, most desktop browsers, iOS5+, Android 2.2+, BlackBerry 6, and more</em>), toolbars that use the "fixedtoolbar" plugin will be fixed to the top or bottom of the viewport, while the page content scrolls freely in between. In browsers that don't support fixed positioning, the toolbars will fall back to static, inline positiong in the page. </p>
-		
-		<p>To enable this behavior on a header or footer, add the <code>data-position="fixed"</code> attribute to a jQuery Mobile header or footer element.</p>
-		
-		<h3>A fixed header toolbar</h3>
-		<pre><code>	
-&lt;div data-role=&quot;header&quot; data-position=&quot;fixed&quot;&gt;
-	&lt;h1&gt;Fixed Header!&lt;/h1&gt;
-&lt;/div&gt;
-		</code></pre>
-		
-		<h3>A fixed footer toolbar</h3>
-		<pre><code>	
-&lt;div data-role=&quot;footer&quot; data-position=&quot;fixed&quot;&gt;
-	&lt;h1&gt;Fixed Footer!&lt;/h1&gt;
-&lt;/div&gt;
-		</code></pre>
+		<h2>Fixed toolbars</h2>
+		<p>This is a demo of the "fixed" headers and footers used in the jQuery Mobile framework. The page content flows naturally, allowing us to take advantage of native scrolling instead of a scripting a faux-scrolling workaround. The header and footer divs are right in the flow of the document, but whenever they are out of view the framework will dynamically re-position them into view if the browser supports this feature, otherwise they will simply stay inline.</p>
+		<p>To enable this behavior on a header or footer, add the <code>data-position="fixed"</code> attribute to the toolbar container.</p>
 
-		<h2>Fullscreen Toolbars</h2>
-		<p>Fullscreen fixed toolbars sit on top of the content at all times when they are visible, and unlike regular fixed toolbars, fullscreen toolbars do not fall back to static positioning when toggled, instead they disappear from the screen entirely. Fullscreen toolbars are ideal for more immersive interfaces, like a photo viewer that is meant to fill the entire screen with the photo itself and no distractions. <a href="bars-fullscreen.html">This page</a> demonstrates toolbars that use the fullscreen option.</p>
+		<a href="bars-fixed-forms-a.html" data-role="button">Demo of forms in  fixed toolbars</a>
 		
-				<p>To enable this option on a fixed header or footer, add the <code>data-fullscreen</code> attribute to the element.</p>
-		
-				<pre><code>	
-&lt;div data-role=&quot;header&quot; data-position=&quot;fixed&quot; data-fullscreen=&quot;true&quot;&gt;
-	&lt;h1&gt;Fixed Header!&lt;/h1&gt;
-&lt;/div&gt;
-				</code></pre>
-		
-		
+		<h2>Tap to toggle visibility</h2>
+		<p>To toggle the visibility of fixed toolbars, tap the screen. For example, if the fixed toolbars are visible, tap the screen to hide the toolbars and take full advantage of the screen real estate for content. Tapping again will bring the toolbars back into view. </p>
+		<p>It's possible to turn off the the tap to toggle visibility behavior like this:</p>
+<pre><code>
+$.mobile.fixedToolbars
+   .setTouchToggleEnabled(false);
+</code></pre>
 	
-		<h2>Changes in jQuery Mobile 1.1</h2>
+		<h2>Updating toolbar positioning</h2>
+		<p>If the height of the page changes, either through dynamic injection of markup, or by widgets that hide or collapse content, it can throw off the dynamic positioning of the toolbars. To manually tell the toolbars to re-position themselves then fade in, use <code>$.mobile.fixedToolbars.show();</code>. To have them appear immediately without the fade:</p>
+<pre><code>
+$.mobile.fixedToolbars
+   .show(true);
+</code></pre>
+			 
+		<p>There is also an <code>updatelayout</code> event that can be used to trigger the toolbars to re-position. Developers who are building dynamic applications that inject content into the current page can also manually trigger this <code><a href="../api/events.html">updatelayout</a></code> event to ensure components on the page update in response to the new content that was just added. This event is used internally in the collapsible and listview filter plugins and is powerful because it's not toolbar-specific -- any widget can be built to listen for the <code>updatelayout</code> event to update the widget in response.</p>
 		
-		<p>Prior to version 1.1, jQuery Mobile used dynamically re-positioned toolbars for the fixed header effect because very few mobile browsers supported the <code>position:fixed</code> CSS property, and simulating fixed support through the use of "fake" JavaScript overflow-scrolling behavior would have reduced our browser support reach, in addition to feeling unnatural on certain platforms. This behavior was not ideal, and jQuery Mobile 1.1 took a new approach to fixed toolbars that allows much broader support, and now the framework offers true fixed toolbars on many popular platforms, while gracefully degrading non-supporting platforms to static positioning.</p>
 		
-<div class="ui-body ui-body-e">		
-		<h2>No longer supported: touchOverflowEnabled</h2>
+		<h2>Known limitations</h2>
 		
-		<p>Prior to jQuery Mobile 1.1, true fixed toolbar support was contingent on native browser support for the CSS property <code>overflow-scrolling: touch</code>, which is currently only supported in iOS5. As of version 1.1, jQuery Mobile no longer uses this CSS property at all. We've removed all internal usage of this property in the framework, but we've left it defined globally on the $.mobile object to reduce the risk that its removal will cause trouble with existing applications. This property is flagged for removal, so please update your code to no longer use it. The support test for this property, however, remains defined under <code>$.support</code> and we have no plans to remove that test at this time. </p>
-</div>
+		<p>jQuery Mobile uses dynamically re-positioned toolbars for the fixed header effect because very few mobile browsers support the <code>position:fixed</code> CSS property. Although our fixed toolbar feature works fairly well, there are a number of technical limitations that can cause the toolbars to appear to scroll with the page. Most of these rendering issues are due to the fact many mobile platforms (iOS, Android, etc.) essentially take a static screenshot of the page and display this image during scrolling instead of the actual rendered HTML. This improves scrolling performance, but when scrolling happens quickly, the toolbars will be "burned" into the page screenshot before our script can hide them so they appear to scroll with the page. We have optimized this as much as we possibly can, but there are going to be situations where fixed toolbars won't work perfectly due to browser limitations, so this is important to note when considering whether to use this feature.</p>
+		
+		<h2>True fixed toolbars: touchOverflowEnabled</h2>
+		
+		<p>In order to achieve true fixed toolbars, a browser needs to either support <code>position:fixed</code> or <code>overflow:auto</code>. Fortunately, this support is coming to mobile platforms so we can achieve this with web standards. In jQuery Mobile, we have added a global feature called <code>touchOverflowEnabled</code> that leverages the <code>overflow:auto</code> CSS property on supported platforms like iOS5. When enabled, the framework wraps each page in a container with it's own internal scrolling. This allows us to position the toolbars outside the scrolling body so they truly stay fixed in place at all times. Learn more about this feature on the <a href="../api/globalconfig.html">global options</a> page or <a href="../config/touchOverflow.html">demo</a> this feature (currently iOS5 only, other browsers will fall back to dynamically re-positioned fixed toolbars).</p>
+
 		<hr>
 	
 		
@@ -168,6 +150,7 @@
 								<li><a href="docs-footers.html">Footer bars</a></li>
 								<li><a href="docs-navbar.html">Navbars</a></li>
 								<li data-theme="a"><a href="bars-fixed.html">Fixed positioning</a></li>
+								<li><a href="bars-fullscreen.html">Fullscreen positioning</a></li>
 								<li><a href="footer-persist-a.html">Persistent footer navbar</a></li>
 								<li><a href="bars-themes.html">Theming toolbars</a></li>
 
