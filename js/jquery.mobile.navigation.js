@@ -1071,7 +1071,7 @@ define( [
 		settings.reverse = settings.reverse || historyDir < 0;
 
 		transitionPages( toPage, fromPage, settings.transition, settings.reverse )
-			.done(function( name, reverse, $to, $from, alreadyFocused ) {
+			.done(function( name, reverse, $to, $from ) {
 				removeActiveLinkClass();
 
 				//if there's a duplicateCachedPage, remove it from the DOM now that it's hidden
@@ -1086,9 +1086,7 @@ define( [
 				// itself to avoid ie bug that reports offsetWidth as > 0 (core check for visibility)
 				// despite visibility: hidden addresses issue #2965
 				// https://github.com/jquery/jquery-mobile/issues/2965
-				if( !alreadyFocused ){
-					$.mobile.focusPage( toPage );
-				}
+				$.mobile.focusPage( toPage );
 
 				releasePageTransitionLock();
 
