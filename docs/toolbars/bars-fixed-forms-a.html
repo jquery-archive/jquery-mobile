@@ -16,45 +16,37 @@
 
 	<div data-role="header" data-position="fixed" data-theme="f">
 
-		<div class="ui-grid-b">
-			<div class="ui-block-a">
-				<h1 style="font-size:17px; margin-left:12px;">2,146 Songs</h1>
+		<div class="ui-grid-a">
+			<div class="ui-block-a" style="width:60%">
+				<h1 style="font-size:19px; margin-left:12px;">2,146 Songs</h1>
 			</div>
-			<div class="ui-block-b">
+			<div class="ui-block-b" style="width:40%">
 					<select name="select-mini" id="select-mini" data-mini="true">
 						<option value="">Sort...</option>
-						<option value="date">Date</option>
+						<option value="date" selected>Newest</option>
 						<option value="name">Name</option>
-						<option value="rating">Rating</option>
-						<option value="track">Track</option>
-					</select>
-			</div>
-			<div class="ui-block-c">
-					<select name="select-mini" id="select-mini" data-mini="true">
-						<option value="">View...</option>
-						<option value="list">List</option>
-						<option value="grid">Grid</option>
-						<option value="flow">Flow</option>
+						<option value="rating">Top Rated</option>
+						<option value="track">Track #</option>
 					</select>
 			</div>
 		</div><!-- /grid-b -->
 
 		<div class="ui-bar-d">
 				<div class="ui-grid-a">
-					<div class="ui-block-a" style="width:82%">
+					<div class="ui-block-a" style="width:78%">
 						<label for="text-mini" class="ui-hidden-accessible">Search Input:</label>
 				        <input type="search" name="name" id="search-mini" value="" data-mini="true" placeholder="Search songs..."  />
 					</div>
-					<div class="ui-block-b" style="width:18%">
+					<div class="ui-block-b" style="width:22%">
 						<button type="submit" data-mini="true" style="float:right" data-theme="d">Go</button>
 					</div>
 				</div><!-- /grid-a -->
-		</div>
+		</div><!-- /search bar -->
 	</div>
 	
 	<div data-role="content">
 		<div class="content-primary">
-			<ul data-role="listview" data-split-icon="gear" data-split-theme="d" style="padding-top:44px;">
+			<ul data-role="listview" data-split-icon="gear" data-split-theme="d">
 			<li><a href="index.html">
 				<img src="../lists/images/album-bb.jpg" />
 				<h3>Broken Bells</h3>
