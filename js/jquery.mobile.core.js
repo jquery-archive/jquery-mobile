@@ -193,6 +193,20 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 			return $target
 				.closest(':jqmData(role="page"), :jqmData(role="dialog")')
 				.data("page");
+		},
+
+		// TODO not excited about the name here :/
+		eachEnhanceable: function( $set, callback ) {
+			var count = $set.length;
+
+			for( var i = 0; i < count; i++ ) {
+				var $element = $( $set[i] );
+
+				if ( !$element.closest( ":jqmData(enhance='false')").length ) {
+					callback( $element );
+				}
+			}
+
 		}
 	}, $.mobile );
 

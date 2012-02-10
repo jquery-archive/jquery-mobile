@@ -7,6 +7,19 @@ define( [ "jquery", "./jquery.mobile.buttonMarkup" ], function( $ ) {
 (function( $, undefined ) {
 
 $.fn.controlgroup = function( options ) {
+	var $workingSet = this;
+
+	// trim the working set when ignoring content is switched on
+	if( $.mobile.ignoreContentEnabled ){
+		var $newWorkingSet = $();
+
+		$.mobile.eachEnhanceable($workingSet, function( $element ) {
+			$newWorkingSet = $newWorkingSet.add( $element );
+		});
+
+		$workingSet = $newWorkingSet;
+	}
+
 	function flipClasses( els, flCorners  ) {
 		els.removeClass( "ui-btn-corner-all ui-shadow" )
 			.eq( 0 ).addClass( flCorners[ 0 ] )
@@ -14,7 +27,7 @@ $.fn.controlgroup = function( options ) {
 			.last().addClass( flCorners[ 1 ] ).addClass( "ui-controlgroup-last" );
 	}
 
-	return this.each(function() {
+	return $workingSet.each(function() {
 		var $el = $( this ),
 			o = $.extend({
 						direction: $el.jqmData( "type" ) || "vertical",
@@ -41,11 +54,11 @@ $.fn.controlgroup = function( options ) {
 		if ( o.shadow ) {
 			$el.addClass( "ui-shadow" );
 		}
-		
+
 		if ( o.mini ) {
 			$el.addClass( "ui-mini" );
 		}
-		
+
 	});
 };
 
