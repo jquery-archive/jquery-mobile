@@ -10,7 +10,6 @@ $.widget( "mobile.slider", $.mobile.widget, {
 	options: {
 		theme: null,
 		trackTheme: null,
-		disabled: false,
 		initSelector: "input[type='range'], :jqmData(type='range'), :jqmData(role='slider')"
 	},
 
@@ -21,11 +20,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			control = this.element,
 
-			parentTheme = $.mobile.getInheritedTheme( control, "c" ),
+			theme = this._validTheme(this.options.theme),
 
-			theme = this.options.theme || parentTheme,
-
-			trackTheme = this.options.trackTheme || parentTheme,
+			trackTheme = this._validTheme(this.options.trackTheme),
 
 			cType = control[ 0 ].nodeName.toLowerCase(),
 
@@ -61,8 +58,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 					"aria-valuetext": val(),
 					"title": val(),
 					"aria-labelledby": labelID
-				}),
-			options;
+				});
 
 		$.extend( this, {
 			slider: slider,
@@ -80,19 +76,21 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			// make the handle move with a smooth transition
 			handle.addClass( "ui-slider-handle-snapping" );
 
-			options = control.find( "option" );
-
 			control.find( "option" ).each(function( i ) {
 
 				var side = !i ? "b":"a",
 					corners = !i ? "right" :"left",
-					theme = !i ? " ui-btn-down-" + trackTheme :( " " + $.mobile.activeBtnClass );
+					theme = !i ? " ui-btn-down-" + trackTheme :( " " + $.mobile.activeBtnClass ),
+                                        div, span;
 
-				$( "<div class='ui-slider-labelbg ui-slider-labelbg-" + side + theme + " ui-btn-corner-" + corners + "'></div>" )
+				div = $( "<div class='ui-slider-labelbg ui-slider-labelbg-" + side + theme + " ui-btn-corner-" + corners + "'></div>" )
 					.prependTo( slider );
 
-				$( "<span class='ui-slider-label ui-slider-label-" + side + theme + " ui-btn-corner-" + corners + "' role='img'>" + $( this ).getEncodedText() + "</span>" )
+				span = $( "<span class='ui-slider-label ui-slider-label-" + side + theme + " ui-btn-corner-" + corners + "' role='img'>" + $( this ).getEncodedText() + "</span>" )
 					.prependTo( handle );
+
+                                if (!i)
+                                    self.handleSpans = div.add(span);
 			});
 
 		}
@@ -262,6 +260,12 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		this.refresh(undefined, undefined, true);
 	},
 
+        _validTheme: function(theme) {
+            return ((null === theme || "" === theme || undefined === theme)
+                ? $.mobile.getInheritedTheme(this.element, "c")
+                : theme);
+        },
+
 	refresh: function( val, isfromControl, preventInputUpdate ) {
 
 		if ( this.options.disabled || this.element.attr('disabled')) {
@@ -358,6 +362,32 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			}
 		}
 	},
+
+        _setTheme: function(value) {
+            value = this._validTheme(value);
+            this.handle
+                .removeClass("ui-btn-up-" + this._validTheme(this.options.theme))
+                .addClass("ui-btn-up-" + value);
+            this.options.theme = value;
+            this.handle.attr("data-" + ($.mobile.ns || "") + "theme", value);
+        },
+
+        _setTrackTheme: function(value) {
+            var currentTheme = this._validTheme(this.options.trackTheme);
+
+            value = this._validTheme(value);
+
+            this.slider
+                .removeClass("ui-btn-down-" + currentTheme)
+                .addClass("ui-btn-down-" + value);
+
+            if (this.handleSpans)
+                this.handleSpans
+                    .removeClass("ui-btn-down-" + currentTheme)
+                    .addClass("ui-btn-down-" + value);
+
+            this.options.trackTheme = value;
+        },
 
 	_setDisabled: function(value) {
 		if (value) {
