@@ -51,9 +51,11 @@ $.fn.buttonMarkup = function( options ) {
 		if ( o.inline ) {
 			buttonClass += " ui-btn-inline";
 		}
-
+		
 		if ( o.mini ) {
 			buttonClass += " ui-mini";
+		} else if ( o.mini === false ) {
+			buttonClass += " ui-fullsize"; // Used to control styling in headers/footers, where buttons default to `mini` style.
 		}
 
 		if ( o.icon ) {
