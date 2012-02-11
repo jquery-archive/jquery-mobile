@@ -201,7 +201,7 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 			var count = $set.length, $newSet = $();
 
 			for( var i = 0; i < count; i++ ) {
-				var $element = $( $set[i] );
+				var $element = $set.eq(i);
 
 				if ( !$element.closest( ":jqmData(enhance='false')").length ) {
 					$newSet = $newSet.add( $element );
