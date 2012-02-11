@@ -7,9 +7,16 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.vmouse" ], function
 ( function( $, undefined ) {
 
 $.fn.buttonMarkup = function( options ) {
+	var $workingSet = this;
+
+	// trim the working set when ignoring content is switched on
+	if( $.mobile.ignoreContentEnabled ){
+		$workingSet = $.mobile.enhanceable( $workingSet );
+	}
+
 	options = options || {};
-	for ( var i = 0; i < this.length; i++ ) {
-		var el = this.eq( i ),
+	for ( var i = 0; i < $workingSet.length; i++ ) {
+		var el = $workingSet.eq( i ),
 			e = el[ 0 ],
 			o = $.extend( {}, $.fn.buttonMarkup.defaults, {
 				icon:       options.icon       !== undefined ? options.icon       : el.jqmData( "icon" ),
