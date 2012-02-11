@@ -58,7 +58,7 @@ $.fn.buttonMarkup = function( options ) {
 		if ( o.inline ) {
 			buttonClass += " ui-btn-inline";
 		}
-		
+
 		if ( o.mini ) {
 			buttonClass += " ui-mini";
 		} else if ( o.mini === false ) {
@@ -159,7 +159,7 @@ var attachEvents = function() {
 			if ( btn ) {
 				$btn = $( btn );
 				theme = $btn.attr( "data-" + $.mobile.ns + "theme" );
-				
+
 				if( $.support.touch ) {
 					hov = setTimeout(function() {
 						$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-down-" + theme );
@@ -182,11 +182,11 @@ var attachEvents = function() {
 		"vmouseover focus": function( event ) {
 			var btn = closestEnabledButton( event.target ),
 				$btn, theme;
-				
+
 			if ( btn ) {
 				$btn = $( btn );
 				theme = $btn.attr( "data-" + $.mobile.ns + "theme" );
-				
+
 				if( $.support.touch ) {
 					foc = setTimeout(function() {
 						$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-hover-" + theme );
@@ -199,12 +199,12 @@ var attachEvents = function() {
 		"vmouseout blur scrollstart": function( event ) {
 			var btn = closestEnabledButton( event.target ),
 				$btn, theme;
-				
+
 			if ( btn ) {
 				$btn = $( btn );
 				theme = $btn.attr( "data-" + $.mobile.ns + "theme" );
 				$btn.removeClass( "ui-btn-hover-" + theme  + " ui-btn-down-" + theme ).addClass( "ui-btn-up-" + theme );
-				
+
 				hov && clearTimeout( hov );
 				foc && clearTimeout( foc );
 			}

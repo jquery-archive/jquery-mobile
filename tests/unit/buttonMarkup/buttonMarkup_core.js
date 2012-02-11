@@ -44,7 +44,7 @@
 			ok( success, "mousedown executed without exception");
 		}
 	});
-	
+
 	// Test for issue #3141:
 	test( "Elements with “data-mini='true'” should have “ui-mini” class attached to enhanced element.", function(){
 		var $mini = $("#mini"),
@@ -54,7 +54,7 @@
 		ok( $full.not('ui-mini'), "Original element does not have data attribute, enhanced version does not recieve .ui-mini.");
 		ok( $mini.is('.ui-mini'), "Original element has data attribute, enhanced version recieves .ui-mini." );
 		ok( $minicontrol.is('.ui-mini'), "Controlgroup has data attribute and recieves .ui-mini.");
-		
+
 	});
 
 	test( "buttonMarkup should discard elements in ignored containers", function() {
