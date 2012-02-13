@@ -43,6 +43,11 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 				o.contentTheme = collapsibleSet.jqmData( "content-theme" );
 			}
 			
+            // Gets the preference icon position in the set
+            if ( !o.iconPos ) {
+                o.iconPos = collapsibleSet.jqmData( "iconpos" );
+            }
+			
 			if( !o.mini ) {
 				o.mini = collapsibleSet.jqmData( "mini" );
 			}
@@ -61,7 +66,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 				.buttonMarkup({
 					shadow: false,
 					corners: false,
-					iconPos: "left",
+					iconpos: $el.jqmData( "iconpos" ) || o.iconPos || "left",
 					icon: "plus",
 					mini: o.mini,
 					theme: o.theme
