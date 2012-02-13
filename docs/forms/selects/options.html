@@ -103,6 +103,14 @@
 				<pre><code>$('select').selectmenu(<strong>{ overlayTheme: "d" }</strong>);</code></pre>
 			</dd>
 			
+			<dt><code>preventFocusZoom</code> <em>boolean</em></dt>
+			<dd>
+				<p class="default">default: true on iOS platforms</p>
+				<p>This option disables page zoom temporarily when a custom select is focused, which prevents iOS devices from zooming the page into the select. By default, iOS often zooms into form controls, and the behavior is often unnecessary and intrusive in mobile-optimized layouts. This option is also exposed as a data attribute: <code>data-theme=&quot;a&quot;</code></p>				
+				<pre><code>$('select').selectmenu(<strong>{ preventFocusZoom: true }</strong>);</code></pre>
+			</dd>
+			
+			
 			<dt><code>shadow</code> <em>boolean</em></dt>
 			<dd>
 				<p class="default">default: true</p>
