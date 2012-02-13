@@ -379,8 +379,14 @@ define( [
 
 	//direct focus to the page title, or otherwise first focusable element
 	$.mobile.focusPage = function ( page ) {
-		var pageTitle = page.find( ".ui-title:eq(0)" );
+		var autofocus = page.find("[autofocus]"),
+			pageTitle = page.find( ".ui-title:eq(0)" );
 
+		if( autofocus.length ) {
+			autofocus.focus();
+			return;
+		}
+		
 		if( pageTitle.length ) {
 			pageTitle.focus();
 		}
