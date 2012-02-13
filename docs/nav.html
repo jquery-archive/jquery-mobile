@@ -8,30 +8,36 @@
 	<link rel="stylesheet" href="_assets/css/jqm-docs.css"/>
 
 	<script data-main="../js/jquery.mobile.docs" src="../external/requirejs/require.js"></script>
+	
 </head> 
 <body> 
 	<div data-role="page" data-theme="a" class="nav-search">
-
+		
 	<div data-role="content">   
+
+	<style>
+
+		.nav-search .ui-content {
+			margin-top:16px;
+		}
+		.nav-search .ui-corner-top {
+			-moz-border-radius: 0;
+			-webkit-border-radius: 0;
+			border-radius: 0;
+		}
+		.nav-search .ui-bar-a {
+			background-color:#444;
+		}
+		.nav-search .ui-btn-up-a {
+			background-color:#333;
+		}
+	</style>
 	
-		<style>
-
-			.nav-search .ui-content {
-				margin-top:16px;
-			}
-			.nav-search .ui-corner-top {
-				-moz-border-radius: 0;
-				-webkit-border-radius: 0;
-				border-radius: 0;
-			}
-			.nav-search .ui-bar-a {
-				background-color:#444;
-			}
-			.nav-search .ui-btn-up-a {
-				background-color:#333;
-			}
-		</style>
-
+	<script>
+		$('body').delegate('.nav-search', 'pageshow', function( e ) {
+			$('.ui-input-text').attr("autofocus", true)
+		});			
+	</script>
 	
 	<ul data-role="listview" data-theme="a" data-divider-theme="a" data-filter="true" data-filter-theme="a" data-filter-placeholder="Search documentation...">
 			<li data-filtertext="wai-aria voiceover accessibility screen reader">
