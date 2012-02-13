@@ -110,9 +110,8 @@ $.widget( "mobile.button", $.mobile.widget, {
 			this.enable();
 		}
 
-		// the textWrapper is stored as a data element on the button object
-		// to prevent referencing by it's implementation details (eg 'class')
-		this.button.data( 'textWrapper' ).text( $el.text() || $el.val() );
+                // Grab the button's text element from its implementation-independent data item
+		$(this.button.data( 'buttonElements' ).text).text( $el.text() || $el.val() );
 	}
 });
 
