@@ -34,17 +34,34 @@ $.fn.buttonMarkup = function( options ) {
 			textClass = "ui-btn-text",
 			buttonClass, iconClass,
 			// Button inner markup
-			buttonInner = document.createElement( o.wrapperEls ),
-			buttonText = document.createElement( o.wrapperEls ),
-			buttonIcon = o.icon ? document.createElement( "span" ) : null;
+			buttonInner,
+			buttonText,
+			buttonIcon,
+			buttonElements;
 
-		// if this is a button, check if it's been enhanced and, if not, use the right function
-		if( e.tagName === "BUTTON" ) {
-	 	 	if ( !$( e.parentNode ).hasClass( "ui-btn" ) ) $( e ).button();
-	 	 	continue;
- 	 	}
+		$.each(o, function(key, value) {
+			e.setAttribute( "data-" + $.mobile.ns + key, value );
+		});
 
-		if ( attachEvents ) {
+		// Check if this element is already enhanced
+		buttonElements = $.data(((e.tagName === "INPUT" || e.tagName === "BUTTON") ? e.parentNode : e), "buttonElements")
+
+		if (buttonElements) {
+			e = buttonElements.outer;
+			el = $(e);
+			buttonInner = buttonElements.inner;
+			buttonText = buttonElements.text;
+			// We will recreate this icon below
+			$(buttonElements.icon).remove();
+			buttonElements.icon = null;
+		}
+		else {
+			buttonInner = document.createElement( o.wrapperEls );
+			buttonText = document.createElement( o.wrapperEls );
+		}
+		buttonIcon = o.icon ? document.createElement( "span" ) : null;
+
+		if ( attachEvents && !buttonElements) {
 			attachEvents();
 		}
 
@@ -93,29 +110,48 @@ $.fn.buttonMarkup = function( options ) {
 			buttonClass += " ui-shadow";
 		}
 
-		e.setAttribute( "data-" + $.mobile.ns + "theme", o.theme );
-		el.removeClass( "ui-link" ).addClass( buttonClass );
+		// Remove all button-related classes and re-add the ones calculated this time
+		el.removeClass( function(idx, klass) {
+			var newClass = "";
+			$.each((klass || "").split(" "), function(key, value) {
+				if (value.substring(0, 6) === "ui-btn" || value === "ui-shadow" || value === "ui-link")
+					newClass += value + " ";
+			});
+			return newClass;
+		}).addClass( buttonClass );
 
 		buttonInner.className = innerClass;
 
 		buttonText.className = textClass;
-		buttonInner.appendChild( buttonText );
-
+		if (!buttonElements)
+			buttonInner.appendChild( buttonText );
 		if ( buttonIcon ) {
 			buttonIcon.className = iconClass;
-			buttonInner.appendChild( buttonIcon );
+			if (!(buttonElements && buttonElements.icon))
+				buttonInner.appendChild( buttonIcon );
 		}
 
-		while ( e.firstChild ) {
+		while ( e.firstChild && !buttonElements) {
 			buttonText.appendChild( e.firstChild );
 		}
 
-		e.appendChild( buttonInner );
+		if (!buttonElements)
+			e.appendChild( buttonInner );
 
-		// TODO obviously it would be nice to pull this element out instead of
-		// retrieving it from the DOM again, but this change is much less obtrusive
-		// and 1.0 draws nigh
-		$.data( e, 'textWrapper', $( buttonText ) );
+		// Assign a structure containing the elements of this button to the elements of this button. This
+		// will allow us to recognize this as an already-enhanced button in future calls to buttonMarkup().
+		buttonElements = {
+			outer : e,
+			inner : buttonInner,
+			text  : buttonText,
+			icon  : buttonIcon
+		};
+
+		$.data(e,           'buttonElements', buttonElements);
+		$.data(buttonInner, 'buttonElements', buttonElements);
+		$.data(buttonText,  'buttonElements', buttonElements);
+		if (buttonIcon)
+			$.data(buttonIcon, 'buttonElements', buttonElements);
 	}
 
 	return this;
