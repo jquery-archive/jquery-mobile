@@ -10,36 +10,27 @@
 	<script data-main="../js/jquery.mobile.docs" src="../external/requirejs/require.js"></script>
 </head> 
 <body> 
-	<div data-role="page" data-theme="a">
+	<div data-role="page" data-theme="a" class="nav-search">
 
 	<div data-role="content">   
 	
 		<style>
 
-			.ui-content {
-				margin-top:15px;
+			.nav-search .ui-content {
+				margin-top:16px;
 			}
-			.ui-corner-top {
+			.nav-search .ui-corner-top {
 				-moz-border-radius: 0;
 				-webkit-border-radius: 0;
 				border-radius: 0;
 			}
-
-			.nav-api li {
-				border-left:1px solid #555;
-			}
-			.nav-api li ui-corner-bottom {
-				-moz-border-radius: 0;
-				-webkit-border-radius: 0;
-				border-radius: 0;
-			}
-			.ui-btn-up-a, .ui-bar-a {
+			.nav-search .ui-btn-up-a, .ui-bar-a {
 				background-image:none;
 			}
-			.ui-bar-a {
+			.nav-search .ui-bar-a {
 				background-color:#444;
 			}
-			.ui-btn-up-a {
+			.nav-search .ui-btn-up-a {
 				background-color:#333;
 			}
 		</style>
@@ -70,7 +61,7 @@
 			<li data-filtertext="data-prefetch loadpage domCache data-dom-cache size clear cleanup pagehide">
 				<a href="pages/page-cache.html">Caching pages</a>
 			</li>
-			<li data-filtertext="input form multi select checkbox grouped horizontal toggle legend">
+			<li data-filtertext="input forms multi select checkbox grouped horizontal toggle legend">
 				<a href="forms/checkboxes/">Checkbox</a>
 			</li>
 			<li data-filtertext="collapsible expandable content block spindown disclosure triangle tree nested">
@@ -83,7 +74,7 @@
 				<a href="pages/page-dialogs.html">Dialogs</a>
 			</li>
 			<li data-filtertext="forms constrain css disable disabling enable ui-disabled class style">
-				<a href="forms/docs-forms.html" data-filtertext="accessibility accessibly forms labels">Disabling form elements</a>
+				<a href="forms/docs-forms.html" data-filtertext="accessibility accessibly forms labels">Disabling forms elements</a>
 			</li>
 			<li data-filtertext="dynamically injecting pages changePage pagebeforechange preventDefault json query params scripting generate markup manual backbone api hash templating mvc">
 				<a href="pages/page-dynamic.html">Dynamically injecting pages</a>
@@ -91,7 +82,7 @@
 			<li data-filtertext="events api document.ready pageinit touch virtual mouse orientationchange scroll pageload change load transition initialization remove layout animationcomplete transitions">
 				<a href="api/events.html">Events API</a>
 			</li>
-			<li data-filtertext="input form flip toggle switch on off select">
+			<li data-filtertext="input forms flip toggle switch on off select">
 				<a href="forms/switch/">Flip switch</a>
 			</li>
 			<li data-filtertext="introduction help features overview">
@@ -100,11 +91,11 @@
 			<li data-filtertext="toolbars fixed headers footers scroll tap to hide show toggle">
 				<a href="toolbars/docs-bars.html">Fixed toolbars</a>
 			</li>
-			<li data-filtertext="form makrup conventions introduction action label hide accessibly mini disabling fieldcontainer fieldset legend Auto-initialization">
-				<a href="forms/docs-forms.html">Form intro</a>
+			<li data-filtertext="forms makrup conventions introduction action label hide accessibly mini disabling fieldcontainer fieldset legend Auto-initialization">
+				<a href="forms/docs-forms.html">forms intro</a>
 			</li>
-			<li data-filtertext="all form elements gallery preview sample">
-				<a href="forms/forms-all.html">Form element gallery</a>
+			<li data-filtertext="all forms elements gallery preview sample">
+				<a href="forms/forms-all.html">forms element gallery</a>
 			</li>
 			<li data-filtertext="toolbars fixed headers footers scroll tap to hide show toggle">
 				<a href="toolbars/bars-fullscreen.html">Fullscreen toolbars</a>
@@ -167,10 +158,10 @@
 				<a href="lists/lists-thumbnails.html">Listview thumbnails</a>
 			</li>
 			<li data-filtertext="forms smaller compact mini toolbars">
-				<a href="forms/forms-all-mini.html">Mini form elements</a>
+				<a href="forms/forms-all-mini.html">Mini forms elements</a>
 			</li>
 			<li data-filtertext="forms native not styled">
-				<a href="forms/forms-all-native.html">Native form elements</a>
+				<a href="forms/forms-all-native.html">Native forms elements</a>
 			</li>
 			<li data-filtertext="link navbar navigation tabs">
 				<a href="toolbars/docs-navbar.html">Navbars</a>
@@ -226,14 +217,14 @@
 			<li data-filtertext="introduction help quick start guide ">
 				<a href="about/getting-started.html">Quick start guide</a>
 			</li>
-			<li data-filtertext="input form single select radio button grouped horizontal toggle legend">
+			<li data-filtertext="input forms single select radio button grouped horizontal toggle legend">
 				<a href="forms/radiobuttons/">Radio buttons</a>
 			</li>
 			<li data-filtertext="read only display not linked listviews">
 				<a href="lists/lists-readonly.html">Read only listviews</a>
 			</li>
-			<li data-filtertext="refresh form elements property change update programatically checked selectedindex value update widget input text slider switch select button checkbox radiobutton">
-				<a href="forms/docs-forms.html">Refreshing form elements</a>
+			<li data-filtertext="refresh forms elements property change update programatically checked selectedindex value update widget input text slider switch select button checkbox radiobutton">
+				<a href="forms/docs-forms.html">Refreshing forms elements</a>
 			</li>
 			<li data-filtertext="scripting pages loading scripts executing scripts document.ready() api developer firing fire pagecreate pageinit changing pages loading enhancing create refresh scolling silentscroll binding to mouse touch events passing url parameters backbone router">
 				<a href="pages/page-scripting.html">Scripting pages</a>
@@ -247,22 +238,22 @@
 			<li data-filtertext="listview search filter hidden data">
 				<a href="lists/lists-search-filtertext.html">Search filter hidden data</a>
 			</li>
-			<li data-filtertext="input form single select option selected index placeholder fullscreen optgroup grouped horizontal custom menu">
+			<li data-filtertext="input forms single select option selected index placeholder fullscreen optgroup grouped horizontal custom menu">
 				<a href="forms/selects/">Select menu</a>
 			</li>
-			<li data-filtertext="input form range slider highlight step min max value">
+			<li data-filtertext="input forms range slider highlight step min max value">
 				<a href="forms/slider/">Slider</a>
 			</li>
 			<li data-filtertext="link listview multiple button splitbutton">
 				<a href="lists/lists-split.html">Split button list</a>
 			</li>
-			<li data-filtertext="form submit method action post get ajax navigation">
+			<li data-filtertext="forms submit method action post get ajax navigation">
 				<a href="forms/forms-sample.html">Submitting forms</a>
 			</li>
 			<li data-filtertext="supported platforms device matrix compatibility ios android blackberry playbook wp7 bada webod palm symbian meego firefox chrome internet explorer ie chrome safari graded support">
 				<a href="about/platforms.html">Supported Platforms</a>
 			</li>
-			<li data-filtertext="input form text textarea password number email url tel time date month week datetime color">
+			<li data-filtertext="input forms text textarea password number email url tel time date month week datetime color">
 				<a href="forms/textinputs/">Text inputs &amp; Textareas</a>
 			</li>
 			<li data-filtertext="theme themeroller swatch css styles bars blocks buttons forms">
