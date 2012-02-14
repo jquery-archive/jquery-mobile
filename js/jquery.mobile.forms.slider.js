@@ -20,9 +20,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			control = this.element,
 
-			theme = this._validTheme(this.options.theme),
+			theme = $.mobile.validTheme(control, this.options.theme, "c"),
 
-			trackTheme = this._validTheme(this.options.trackTheme),
+			trackTheme = $.mobile.validTheme(control, this.options.trackTheme, "c"),
 
 			cType = control[ 0 ].nodeName.toLowerCase(),
 
@@ -364,18 +364,18 @@ $.widget( "mobile.slider", $.mobile.widget, {
 	},
 
         _setTheme: function(value) {
-            value = this._validTheme(value);
+            value = $.mobile.validTheme(this.element, value, "c");
             this.handle
-                .removeClass("ui-btn-up-" + this._validTheme(this.options.theme))
+                .removeClass("ui-btn-up-" + $.mobile.validTheme(this.element, this.options.theme, "c"))
                 .addClass("ui-btn-up-" + value);
             this.options.theme = value;
             this.handle.attr("data-" + ($.mobile.ns || "") + "theme", value);
         },
 
         _setTrackTheme: function(value) {
-            var currentTheme = this._validTheme(this.options.trackTheme);
+            var currentTheme = $.mobile.validTheme(this.element, this.options.trackTheme, "c");
 
-            value = this._validTheme(value);
+            value = $.mobile.validTheme(this.element, value, "c");
 
             this.slider
                 .removeClass("ui-btn-down-" + currentTheme)

@@ -16,9 +16,10 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 
 		var input = this.element,
 			o = this.options,
-			theme = o.theme || $.mobile.getInheritedTheme( this.element, "c" ),
+			theme = $.mobile.validTheme( this.element, o.theme, "c" ),
 			themeclass  = " ui-body-" + theme,
-			focusedEl, clearbtn;
+			focusedEl, clearbtn,
+                        self = this;
 
 		$( "label[for='" + input.attr( "id" ) + "']" ).addClass( "ui-input-text" );
 
@@ -43,6 +44,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		if ( input.is( "[type='search'],:jqmData(type='search')" ) ) {
 
 			focusedEl = input.wrap( "<div class='ui-input-search ui-shadow-inset ui-btn-corner-all ui-btn-shadow ui-icon-searchfield" + themeclass + "'></div>" ).parent();
+                        this._themedElement = focusedEl;
 			clearbtn = $( "<a href='#' class='ui-input-clear' title='clear text'>clear text</a>" )
 				.tap(function( event ) {
 					input.val( "" ).focus();
@@ -69,6 +71,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			input.bind('paste cut keyup focus change blur', toggleClear);
 
 		} else {
+                        this._themedElement = input;
 			input.addClass( "ui-corner-all ui-shadow-inset" + themeclass );
 		}
 
@@ -110,6 +113,15 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			}
 		}
 	},
+
+        _setTheme: function(value) {
+            value = $.mobile.validTheme(this._themedElement, value, "c");
+
+            this._themedElement
+                .removeClass("ui-body-" + $.mobile.validTheme(this._themedElement, this.options.theme, "c"))
+                .addClass("ui-body-" + value);
+            this.options.theme = value;
+        },
 
 	_setDisabled: function(value) {
 		( this.element.attr( "disabled", value ).is( "[type='search'],:jqmData(type='search')" ) ?
