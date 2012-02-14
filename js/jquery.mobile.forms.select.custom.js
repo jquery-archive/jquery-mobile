@@ -430,6 +430,7 @@ define( [
 					var $this = $( this ),
 						$parent = $this.parent(),
 						text = $this.getEncodedText(),
+						value = $this.val(),
 						anchor = "<a href='#'>"+ text +"</a>",
 						classes = [],
 						extraAttrs = [];
@@ -446,8 +447,8 @@ define( [
 					}
 
 					// Find placeholder text
-					// TODO: Are you sure you want to use getAttribute? ^RW
-					if ( !this.getAttribute( "value" ) || text.length == 0 || $this.jqmData( "placeholder" ) ) {
+					// First confirm that data-placeholder wasn't explicitly set to false, then check if the value or text is blank
+					if ( $this.jqmData( "placeholder" ) !== false && ( value.length == 0 || text.length == 0 || $this.jqmData( "placeholder" ) ) ) {
 						if ( o.hidePlaceholderMenuItems ) {
 							classes.push( "ui-selectmenu-placeholder" );
 						}
