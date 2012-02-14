@@ -95,6 +95,8 @@ docs: init
 	# ... Prepend versioned license to jquery.mobile.css
 	@@cat tmp/demos/LICENSE-INFO.txt | cat - tmp/demos/css/themes/default/${NAME}.css > tmp/demos/css/themes/default/${NAME}.css.tmp
 	@@mv tmp/demos/css/themes/default/${NAME}.css.tmp tmp/demos/css/themes/default/${NAME}.css
+	# ... replace "js/" with "js/jquery.mobile.docs.js"
+	@@find tmp/demos -name "*.html" -exec sed -i 's@js/"@js/jquery.mobile.docs.js"@' {} \;
 	# ... Move and zip up the the whole folder
 	@@rm -f ${OUTPUT}/${NAME}.docs.zip
 	@@cd tmp/demos && rm -f *.php && rm -f Makefile
