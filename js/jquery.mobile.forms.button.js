@@ -95,6 +95,16 @@ $.widget( "mobile.button", $.mobile.widget, {
 		return $.Widget.prototype._setOption.call(this, "disabled", value );
 	},
 
+        _setOption: function(key, value) {
+            if (key === "disabled")
+                this._setDisabled(value);
+            else {
+                var options = {};
+                options[key] = value;
+                this.button.buttonMarkup(options);
+            }
+        },
+
 	refresh: function() {
 		var $el = this.element;
 
