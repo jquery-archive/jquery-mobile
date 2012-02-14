@@ -110,8 +110,16 @@ $.fn.buttonMarkup = function( options ) {
 			buttonClass += " ui-shadow";
 		}
 
-		el.removeClass( "ui-link" ).addClass( buttonClass );
-		
+		// Remove all button-related classes and re-add the ones calculated this time
+		el.removeClass( function(idx, klass) {
+			var newClass = "";
+			$.each((klass || "").split(" "), function(key, value) {
+				if (value.substring(0, 6) === "ui-btn" || value === "ui-shadow" || value === "ui-link")
+					newClass += value + " ";
+			});
+			return newClass;
+		}).addClass( buttonClass );
+				
 		buttonInner.className = innerClass;
 
 		buttonText.className = textClass;
