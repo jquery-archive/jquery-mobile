@@ -36,9 +36,6 @@ function outInTransitionHandler( name, reverse, $to, $from ) {
 				$to.animationComplete( doneIn );
 			}
 
-			// Send focus to page as it is now display: block
-			$.mobile.focusPage( $to );
-			
 			// Jump to top or prev scroll, sometimes on iOS the page has not rendered yet.
 			$to.height( screenHeight + toScroll );
 				
@@ -57,8 +54,8 @@ function outInTransitionHandler( name, reverse, $to, $from ) {
 				.removeClass( "out in reverse " + name )
 				.height( "" )
 				.parent().removeClass( viewportClass );
-			
-			deferred.resolve( name, reverse, $to, $from, true );
+
+			deferred.resolve( name, reverse, $to, $from );
 		};
 		
 	$to

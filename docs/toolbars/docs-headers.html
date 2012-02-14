@@ -16,7 +16,8 @@
 
 		<div data-role="header" data-theme="f">
 		<h1>Header bars</h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
 	</div><!-- /header -->
 
 	<div data-role="content">
@@ -129,7 +130,7 @@
 		If you're doing this programmatically, set this option inside the mobileinit event handler.</p>
 
 			<h2>Custom header configurations</h2>
-			<p>If you need to to create a header that doesn't follow the default configuration, simply wrap your custom styled markup in a container <code>div</code> inside the header container and the plugin won't apply the automatic button logic so you can write custom styles for laying out the content in your header.</p> 
+			<p>If you need to to create a header that doesn't follow the default configuration, simply wrap your custom styled markup in any container, such as <code>div</code>. The plugin won't apply the automatic button logic to the wrapped content inside the header container so you can write custom styles for laying out the content in your header.</p> 
 
 			<p>It's also possible to create custom bars without using the header data-role at all. For example, start with any container and add the <code>ui-bar</code> class to apply standard bar padding and  add the <code>ui-bar-b</code> class to assign the bar swatch styles from your theme (the "b" can be any swatch letter).</p>
 			
@@ -167,7 +168,7 @@
 								<li><a href="docs-footers.html">Footer bars</a></li>
 								<li><a href="docs-navbar.html">Navbars</a></li>
 								<li><a href="bars-fixed.html">Fixed positioning</a></li>
-								<li><a href="footer-persist-a.html">Persistent footer navbar</a></li>
+								<li><a href="footer-persist-a.html">Persistent toolbars</a></li>
 								<li><a href="bars-themes.html">Theming toolbars</a></li>
 
 							</ul>

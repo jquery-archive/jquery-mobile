@@ -1,18 +1,8 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 define([
 	'require',
-	'./jquery.ui.widget',
-	'./jquery.mobile.widget',
-	'./jquery.mobile.media',
-	'./jquery.mobile.support',
-	'./jquery.mobile.vmouse',
-	'./jquery.mobile.event',
-	'./jquery.mobile.hashchange',
-	'./jquery.mobile.page',
-	'./jquery.mobile.core',
 	'./jquery.mobile.navigation',
 	'./jquery.mobile.navigation.pushstate',
-	'./jquery.mobile.transition',
 	'./jquery.mobile.transition.pop',
 	'./jquery.mobile.transition.slide',
 	'./jquery.mobile.transition.slidedown',

@@ -7,9 +7,16 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.vmouse" ], function
 ( function( $, undefined ) {
 
 $.fn.buttonMarkup = function( options ) {
+	var $workingSet = this;
+
+	// trim the working set when ignoring content is switched on
+	if( $.mobile.ignoreContentEnabled ){
+		$workingSet = $.mobile.enhanceable( $workingSet );
+	}
+
 	options = options || {};
-	for ( var i = 0; i < this.length; i++ ) {
-		var el = this.eq( i ),
+	for ( var i = 0; i < $workingSet.length; i++ ) {
+		var el = $workingSet.eq( i ),
 			e = el[ 0 ],
 			o = $.extend( {}, $.fn.buttonMarkup.defaults, {
 				icon:       options.icon       !== undefined ? options.icon       : el.jqmData( "icon" ),
@@ -18,7 +25,8 @@ $.fn.buttonMarkup = function( options ) {
 				inline:     options.inline     !== undefined ? options.inline     : el.jqmData( "inline" ),
 				shadow:     options.shadow     !== undefined ? options.shadow     : el.jqmData( "shadow" ),
 				corners:    options.corners    !== undefined ? options.corners    : el.jqmData( "corners" ),
-				iconshadow: options.iconshadow !== undefined ? options.iconshadow : el.jqmData( "iconshadow" )
+				iconshadow: options.iconshadow !== undefined ? options.iconshadow : el.jqmData( "iconshadow" ),
+				mini:       options.mini       !== undefined ? options.mini       : el.jqmData( "mini" )
 			}, options ),
 
 			// Classes Defined
@@ -26,20 +34,34 @@ $.fn.buttonMarkup = function( options ) {
 			textClass = "ui-btn-text",
 			buttonClass, iconClass,
 			// Button inner markup
-			buttonInner = document.createElement( o.wrapperEls ),
-			buttonText = document.createElement( o.wrapperEls ),
-			buttonIcon = o.icon ? document.createElement( "span" ) : null;
+			buttonInner,
+			buttonText,
+			buttonIcon,
+			buttonElements;
 
-		// if so, prevent double enhancement, and continue with rest of the elements.
-		if( e.tagName === "INPUT" && el.jqmData('role') === "button" ) continue;
-		
-		// if this is a button, check if it's been enhanced and, if not, use the right function
-		if( e.tagName === "BUTTON" ) {
-	 	 	if ( !$( e.parentNode ).hasClass( "ui-btn" ) ) $( e ).button();
-	 	 	continue;
- 	 	}
+		$.each(o, function(key, value) {
+			e.setAttribute( "data-" + $.mobile.ns + key, value );
+		});
 
-		if ( attachEvents ) {
+		// Check if this element is already enhanced
+		buttonElements = $.data(((e.tagName === "INPUT" || e.tagName === "BUTTON") ? e.parentNode : e), "buttonElements")
+
+		if (buttonElements) {
+			e = buttonElements.outer;
+			el = $(e);
+			buttonInner = buttonElements.inner;
+			buttonText = buttonElements.text;
+			// We will recreate this icon below
+			$(buttonElements.icon).remove();
+			buttonElements.icon = null;
+		}
+		else {
+			buttonInner = document.createElement( o.wrapperEls );
+			buttonText = document.createElement( o.wrapperEls );
+		}
+		buttonIcon = o.icon ? document.createElement( "span" ) : null;
+
+		if ( attachEvents && !buttonElements) {
 			attachEvents();
 		}
 
@@ -52,6 +74,12 @@ $.fn.buttonMarkup = function( options ) {
 
 		if ( o.inline ) {
 			buttonClass += " ui-btn-inline";
+		}
+
+		if ( o.mini ) {
+			buttonClass += " ui-mini";
+		} else if ( o.mini === false ) {
+			buttonClass += " ui-fullsize"; // Used to control styling in headers/footers, where buttons default to `mini` style.
 		}
 
 		if ( o.icon ) {
@@ -82,29 +110,40 @@ $.fn.buttonMarkup = function( options ) {
 			buttonClass += " ui-shadow";
 		}
 
-		e.setAttribute( "data-" + $.mobile.ns + "theme", o.theme );
 		el.removeClass( "ui-link" ).addClass( buttonClass );
-
+		
 		buttonInner.className = innerClass;
 
 		buttonText.className = textClass;
-		buttonInner.appendChild( buttonText );
-
+		if (!buttonElements)
+			buttonInner.appendChild( buttonText );
 		if ( buttonIcon ) {
 			buttonIcon.className = iconClass;
-			buttonInner.appendChild( buttonIcon );
+			if (!(buttonElements && buttonElements.icon))
+				buttonInner.appendChild( buttonIcon );
 		}
 
-		while ( e.firstChild ) {
+		while ( e.firstChild && !buttonElements) {
 			buttonText.appendChild( e.firstChild );
 		}
 
-		e.appendChild( buttonInner );
+		if (!buttonElements)
+			e.appendChild( buttonInner );
 
-		// TODO obviously it would be nice to pull this element out instead of
-		// retrieving it from the DOM again, but this change is much less obtrusive
-		// and 1.0 draws nigh
-		$.data( e, 'textWrapper', $( buttonText ) );
+		// Assign a structure containing the elements of this button to the elements of this button. This
+		// will allow us to recognize this as an already-enhanced button in future calls to buttonMarkup().
+		buttonElements = {
+			outer : e,
+			inner : buttonInner,
+			text  : buttonText,
+			icon  : buttonIcon
+		};
+
+		$.data(e,           'buttonElements', buttonElements);
+		$.data(buttonInner, 'buttonElements', buttonElements);
+		$.data(buttonText,  'buttonElements', buttonElements);
+		if (buttonIcon)
+			$.data(buttonIcon, 'buttonElements', buttonElements);
 	}
 
 	return this;
@@ -148,7 +187,7 @@ var attachEvents = function() {
 			if ( btn ) {
 				$btn = $( btn );
 				theme = $btn.attr( "data-" + $.mobile.ns + "theme" );
-				
+
 				if( $.support.touch ) {
 					hov = setTimeout(function() {
 						$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-down-" + theme );
@@ -171,11 +210,11 @@ var attachEvents = function() {
 		"vmouseover focus": function( event ) {
 			var btn = closestEnabledButton( event.target ),
 				$btn, theme;
-				
+
 			if ( btn ) {
 				$btn = $( btn );
 				theme = $btn.attr( "data-" + $.mobile.ns + "theme" );
-				
+
 				if( $.support.touch ) {
 					foc = setTimeout(function() {
 						$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-hover-" + theme );
@@ -188,12 +227,12 @@ var attachEvents = function() {
 		"vmouseout blur scrollstart": function( event ) {
 			var btn = closestEnabledButton( event.target ),
 				$btn, theme;
-				
+
 			if ( btn ) {
 				$btn = $( btn );
 				theme = $btn.attr( "data-" + $.mobile.ns + "theme" );
 				$btn.removeClass( "ui-btn-hover-" + theme  + " ui-btn-down-" + theme ).addClass( "ui-btn-up-" + theme );
-				
+
 				hov && clearTimeout( hov );
 				foc && clearTimeout( foc );
 			}

@@ -6,7 +6,7 @@ define( [
 	"jquery",
 	"./jquery.mobile.core",
 	"./jquery.mobile.event",
-	"./jquery.mobile.hashchange",
+	"../external/requirejs/depend!./jquery.mobile.hashchange[jquery]",
 	"./jquery.mobile.page",
 	"./jquery.mobile.transition" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
@@ -379,8 +379,14 @@ define( [
 
 	//direct focus to the page title, or otherwise first focusable element
 	$.mobile.focusPage = function ( page ) {
-		var pageTitle = page.find( ".ui-title:eq(0)" );
+		var autofocus = page.find("[autofocus]"),
+			pageTitle = page.find( ".ui-title:eq(0)" );
 
+		if( autofocus.length ) {
+			autofocus.focus();
+			return;
+		}
+		
 		if( pageTitle.length ) {
 			pageTitle.focus();
 		}
@@ -476,7 +482,7 @@ define( [
 		}
 
 		toPage.data( "page" )._trigger( "beforeshow", null, { prevPage: fromPage || $( "" ) } );
-		
+
 		//clear page loader
 		$.mobile.hidePageLoadingMsg();
 
@@ -556,7 +562,7 @@ define( [
 
 	$.mobile.dialogHashKey = dialogHashKey;
 
-	
+
 
 	//enable cross-domain page support
 	$.mobile.allowCrossDomainPages = false;
@@ -863,13 +869,13 @@ define( [
 
 					// Remove loading message.
 					if ( settings.showLoadMsg ) {
-						
+
 						// Remove loading message.
 						hideMsg();
 
 						// show error message
 						$.mobile.showPageLoadingMsg( $.mobile.pageLoadErrorMessageTheme, $.mobile.pageLoadErrorMessage, true );
-						
+
 						// hide after delay
 						setTimeout( $.mobile.hidePageLoadingMsg, 1500 );
 					}
@@ -1071,7 +1077,7 @@ define( [
 		settings.reverse = settings.reverse || historyDir < 0;
 
 		transitionPages( toPage, fromPage, settings.transition, settings.reverse )
-			.done(function( name, reverse, $to, $from, alreadyFocused ) {
+			.done(function( name, reverse, $to, $from ) {
 				removeActiveLinkClass();
 
 				//if there's a duplicateCachedPage, remove it from the DOM now that it's hidden
@@ -1086,9 +1092,7 @@ define( [
 				// itself to avoid ie bug that reports offsetWidth as > 0 (core check for visibility)
 				// despite visibility: hidden addresses issue #2965
 				// https://github.com/jquery/jquery-mobile/issues/2965
-				if( !alreadyFocused ){
-					$.mobile.focusPage( toPage );
-				}
+				$.mobile.focusPage( toPage );
 
 				releasePageTransitionLock();
 
@@ -1213,7 +1217,7 @@ define( [
 					$activeClickedLink = $( link ).closest( ".ui-btn" ).not( ".ui-disabled" );
 					$activeClickedLink.addClass( $.mobile.activeBtnClass );
 					$( "." + $.mobile.activePageClass + " .ui-btn" ).not( link ).blur();
-					
+
 					// By caching the href value to data and switching the href to a #, we can avoid address bar showing in iOS. The click handler resets the href during its initial steps if this data is present
 					$( link )
 						.jqmData( "href", $( link  ).attr( "href" )  )
@@ -1241,8 +1245,8 @@ define( [
 				httpCleanup = function(){
 					window.setTimeout( function() { removeActiveLinkClass( true ); }, 200 );
 				};
-			
-			// If there's data cached for the real href value, set the link's href back to it again. This pairs with an address bar workaround from the vclick handler	
+
+			// If there's data cached for the real href value, set the link's href back to it again. This pairs with an address bar workaround from the vclick handler
 			if( $link.jqmData( "href" ) ){
 				$link.attr( "href", $link.jqmData( "href" ) );
 			}
@@ -1321,7 +1325,7 @@ define( [
 
 				//this may need to be more specific as we use data-rel more
 				role = $link.attr( "data-" + $.mobile.ns + "rel" ) || undefined;
-				
+
 			$.mobile.changePage( href, { transition: transition, reverse: reverse, role: role } );
 			event.preventDefault();
 		});

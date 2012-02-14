@@ -1,14 +1,17 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Enhances and consistently styles text inputs.
 //>>label: Text Inputs
+//>>group: forms
 
-define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.widget", "./jquery.mobile.degradeInputs", "./jquery.mobile.buttonMarkup"  ], function( $ ) {
+define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.widget", "./jquery.mobile.degradeInputs", "./jquery.mobile.buttonMarkup", "./jquery.mobile.zoom"  ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 $.widget( "mobile.textinput", $.mobile.widget, {
 	options: {
 		theme: null,
+		// This option defaults to true on iOS devices.
+		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
 		initSelector: "input[type='text'], input[type='search'], :jqmData(type='search'), input[type='number'], :jqmData(type='number'), input[type='password'], input[type='email'], input[type='url'], input[type='tel'], textarea, input[type='time'], input[type='date'], input[type='month'], input[type='week'], input[type='datetime'], input[type='datetime-local'], input[type='color'], input:not([type])"
 	},
 
@@ -18,8 +21,10 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			o = this.options,
 			theme = $.mobile.validTheme( this.element, o.theme, "c" ),
 			themeclass  = " ui-body-" + theme,
-			focusedEl, clearbtn,
-                        self = this;
+                        self = this,
+			mini = input.jqmData("mini") == true,
+			miniclass = mini ? " ui-mini" : "",
+			focusedEl, clearbtn;
 
 		$( "label[for='" + input.attr( "id" ) + "']" ).addClass( "ui-input-text" );
 
@@ -43,7 +48,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		//"search" input widget
 		if ( input.is( "[type='search'],:jqmData(type='search')" ) ) {
 
-			focusedEl = input.wrap( "<div class='ui-input-search ui-shadow-inset ui-btn-corner-all ui-btn-shadow ui-icon-searchfield" + themeclass + "'></div>" ).parent();
+			focusedEl = input.wrap( "<div class='ui-input-search ui-shadow-inset ui-btn-corner-all ui-btn-shadow ui-icon-searchfield" + themeclass + miniclass + "'></div>" ).parent();
                         this._themedElement = focusedEl;
 			clearbtn = $( "<a href='#' class='ui-input-clear' title='clear text'>clear text</a>" )
 				.tap(function( event ) {
@@ -57,7 +62,8 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 					icon: "delete",
 					iconpos: "notext",
 					corners: true,
-					shadow: true
+					shadow: true,
+					mini: mini
 				});
 
 			function toggleClear() {
@@ -72,7 +78,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 
 		} else {
                         this._themedElement = input;
-			input.addClass( "ui-corner-all ui-shadow-inset" + themeclass );
+			input.addClass( "ui-corner-all ui-shadow-inset" + themeclass + miniclass );
 		}
 
 		input.focus(function() {
@@ -80,6 +86,17 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			})
 			.blur(function(){
 				focusedEl.removeClass( $.mobile.focusClass );
+			})
+			// In many situations, iOS will zoom into the select upon tap, this prevents that from happening
+			.bind( "focus", function() {
+				if( o.preventFocusZoom ){
+					$.mobile.zoom.disable( true );
+				}
+			})
+			.bind( "blur", function() {
+				if( o.preventFocusZoom ){
+					$.mobile.zoom.enable( true );
+				}
 			});
 
 		// Autogrow
@@ -131,7 +148,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ){
-	$.mobile.textinput.prototype.enhanceWithin( e.target );
+	$.mobile.textinput.prototype.enhanceWithin( e.target, true );
 });
 
 })( jQuery );

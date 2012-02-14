@@ -1,6 +1,7 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Consistent styling for native select menus.
 //>>label: Enhanced Native Selects
+//>>group: forms
 
 define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.widget", "./jquery.mobile.buttonMarkup", "./jquery.mobile.zoom" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
@@ -23,7 +24,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		nativeMenu: true,
 		// This option defaults to true on iOS devices.
 		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
-		initSelector: "select:not(:jqmData(role='slider'))"
+		initSelector: "select:not(:jqmData(role='slider'))",
+		mini: false
 	},
 
 	_button: function(){
@@ -90,7 +92,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					inline: options.inline,
 					corners: options.corners,
 					shadow: options.shadow,
-					iconshadow: options.iconshadow
+					iconshadow: options.iconshadow,
+					mini: options.mini
 				});
 
 		// Opera does not properly support opacity on select elements
@@ -151,7 +154,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			.bind( "change blur", function() {
 				self.button.removeClass( "ui-btn-down-" + self.options.theme );
 			});
-		
+
 		// In many situations, iOS will zoom into the select upon tap, this prevents that from happening
 		self.button.bind( "vmousedown", function() {
 			if( self.options.preventFocusZoom ){
@@ -161,7 +164,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		.bind( "mouseup", function() {
 			if( self.options.preventFocusZoom ){
 				$.mobile.zoom.enable( true );
-			}	
+			}
 		});
 	},
 
@@ -213,7 +216,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ){
-	$.mobile.selectmenu.prototype.enhanceWithin( e.target );
+	$.mobile.selectmenu.prototype.enhanceWithin( e.target, true );
 });
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
