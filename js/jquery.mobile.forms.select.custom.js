@@ -30,21 +30,28 @@ define( [
 			isMultiple = widget.isMultiple = widget.select[ 0 ].multiple,
 			buttonId = selectID + "-button",
 			menuId = selectID + "-menu",
-			menuPage = $( "<div data-" + $.mobile.ns + "role='dialog' data-" +$.mobile.ns + "theme='"+ widget.options.theme +"' data-" +$.mobile.ns + "overlay-theme='"+ widget.options.overlayTheme +"'>" +
-				"<div data-" + $.mobile.ns + "role='header'>" +
-				"<div class='ui-title'>" + label.getEncodedText() + "</div>"+
-				"</div>"+
-				"<div data-" + $.mobile.ns + "role='content'></div>"+
-				"</div>" ).appendTo( $.mobile.pageContainer ).page(),
+			data = "data-" + $.mobile.ns,
+			menuPage = $( ["<div ", data, "role='dialog' ", data + "theme='", widget.options.theme, "' ", data, "overlay-theme='", widget.options.overlayTheme, "'>",
+				"<div ", data, "role='header'>",
+				"<div class='ui-title'>", label.getEncodedText(), "</div>",
+				"</div>",
+				"<div ", data, "role='content'></div>",
+				"</div>"].join("") ).appendTo( $.mobile.pageContainer ).page(),
 
 			listbox =  $("<div>", { "class": "ui-selectmenu ui-selectmenu-hidden ui-overlay-shadow ui-corner-all ui-body-" + widget.options.overlayTheme + " " + $.mobile.defaultDialogTransition } ).insertAfter(screen),
+			listContainer = $("<div class='ui-select-list-container'></div>")
+			.appendTo( listbox ),
 
 			list = $( "<ul>", {
 				"class": "ui-selectmenu-list",
 				"id": menuId,
-				"role": "listbox",
+				"class": "ui-selectmenu-list " + select.attr("class"),
 				"aria-labelledby": buttonId
-			}).attr( "data-" + $.mobile.ns + "theme", widget.options.theme ).appendTo( listbox ),
+			}).attr( data + "theme", widget.options.theme )
+			.attr( data + "role", "listview" )
+			.attr( data + "filter", select.attr( data + "filter" ) || false)
+			.attr( data + "filter-placeholder", select.attr( data + "filter-placeholder" ) || null)
+			.appendTo( listContainer ),
 
 			header = $( "<div>", {
 				"class": "ui-header ui-bar-" + widget.options.theme
@@ -78,6 +85,7 @@ define( [
 			isMultiple: isMultiple,
 			theme: widget.options.theme,
 			listbox: listbox,
+			listContainer: listContainer,
 			list: list,
 			header: header,
 			headerTitle: headerTitle,
@@ -109,7 +117,8 @@ define( [
 				});
 
 				// Events for list items
-				self.list.attr( "role", "listbox" )
+				self.list
+					.data("role", "listview")				
 					.delegate( ".ui-li>a", "focusin", function() {
 						$( this ).attr( "tabindex", "0" );
 					})
@@ -135,6 +144,7 @@ define( [
 
 						// trigger change if value changed
 						if ( self.isMultiple || oldIndex !== newIndex ) {
+							self.select[0].selectedIndex = newIndex;
 							self.select.trigger( "change" );
 						}
 
@@ -197,7 +207,7 @@ define( [
 				// button refocus ensures proper height calculation
 				// by removing the inline style and ensuring page inclusion
 				self.menuPage.bind( "pagehide", function() {
-					self.list.appendTo( self.listbox );
+					self.listContainer.appendTo( self.listbox );
 					self._focusButton();
 
 					// TODO centralize page removal binding / handling in the page plugin.
@@ -234,13 +244,19 @@ define( [
 			},
 
 			_isRebuildRequired: function() {
-				var list = this.list.find( "li" ),
-					options = this._selectOptions();
+				//var list = this.list.find( "li" ),
+				//	options = this._selectOptions();
 
 				// TODO exceedingly naive method to determine difference
 				// ignores value changes etc in favor of a forcedRebuild
 				// from the user in the refresh method
-				return options.text() !== list.text();
+				//return options.text() !== list.text();
+				
+				//the above is completly rubbish if you use optgroup as their label attribute won't be serialized, but instead they will appear on li as text
+				//we don't really care about our text/html, but about select's html
+				var rebuildRequired = this.select.html() != this.selectHTML; // for better memory performance in detriment of CPU we should store the MD5 version of the html
+				return rebuildRequired; 
+
 			},
 
 			refresh: function( forceRebuild , foo ){
@@ -295,7 +311,7 @@ define( [
 				} else {
 					self.screen.addClass( "ui-screen-hidden" );
 					self.listbox.addClass( "ui-selectmenu-hidden" ).removeAttr( "style" ).removeClass( "in" );
-					self.list.appendTo( self.listbox );
+					self.listContainer.appendTo( self.listbox );
 					self._focusButton();
 				}
 
@@ -332,7 +348,7 @@ define( [
 					self.list.find( $.mobile.activeBtnClass ).focus();
 				}
 
-				if ( menuHeight > screenHeight - 80 || !$.support.scrollTop ) {
+				if (self.list.data($.mobile.ns + "filter") || menuHeight > screenHeight - 80 || !$.support.scrollTop ) {
 					// prevent the parent page from being removed from the DOM,
 					// otherwise the results of selecting a list item in the dialog
 					// fall into a black hole
@@ -359,7 +375,8 @@ define( [
 					});
 
 					self.menuType = "page";
-					self.menuPageContent.append( self.list );
+					self.refresh();//refresh select's active item to be 'up to date' and maybe select's items if they have changed since last time
+					self.listContainer.appendTo(self.menuPageContent);
 					self.menuPage.find("div .ui-title").text(self.label.text());
 					$.mobile.changePage( self.menuPage, {
 						transition: $.mobile.defaultDialogTransition
@@ -400,7 +417,7 @@ define( [
 						}
 					}
 
-					self.listbox.append( self.list )
+					self.listbox.append( self.listContainer )
 						.removeClass( "ui-selectmenu-hidden" )
 						.css({
 							top: newtop,
@@ -424,13 +441,16 @@ define( [
 					dataIcon = self.isMultiple ? "checkbox-off" : "false";
 
 				self.list.empty().filter( ".ui-listview" ).listview( "destroy" );
+				self.selectHTML = self.select.html();// for better memory performance in detriment of CPU we should store the MD5 version of the html
 
 				// Populate menu with options from select element
 				self.select.find( "option" ).each( function( i ) {
 					var $this = $( this ),
 						$parent = $this.parent(),
 						text = $this.getEncodedText(),
-						anchor = "<a href='#'>"+ text +"</a>",
+						anchorStart = "<a href='#'",// > added in the concatenation
+						anchorEnd = "</a>",
+						optClass = $this.attr("class"),//forward any css class the option might have
 						classes = [],
 						extraAttrs = [];
 
@@ -440,7 +460,7 @@ define( [
 
 						// has this optgroup already been built yet?
 						if ( $.inArray( optLabel, optgroups ) === -1 ) {
-							lis.push( "<li data-" + $.mobile.ns + "role='list-divider'>"+ optLabel +"</li>" );
+							lis.push( "<li data-", $.mobile.ns, "role='list-divider'>", optLabel, "</li>" );
 							optgroups.push( optLabel );
 						}
 					}
@@ -460,7 +480,8 @@ define( [
 						extraAttrs.push( "aria-disabled='true'" );
 					}
 
-					lis.push( "<li data-" + $.mobile.ns + "option-index='" + i + "' data-" + $.mobile.ns + "icon='"+ dataIcon +"' class='"+ classes.join(" ") + "' " + extraAttrs.join(" ") +">"+ anchor +"</li>" );
+					//optimized concatenation rather than string building!
+					lis.push( "<li data-", $.mobile.ns, "option-index='", i, "' data-", $.mobile.ns, "icon='", dataIcon, "' class='", classes.join(" "), "' ", extraAttrs.join(" "),">", anchorStart, optClass && "class='", optClass, optClass && "'", ">", text, anchorEnd, "</li>" );
 				});
 
 				self.list.html( lis.join(" ") );
@@ -483,6 +504,8 @@ define( [
 
 				// Now populated, create listview
 				self.list.listview();
+				self.list.attr("data-role", null);//remove the attribute, so on next refresh the filter won't be recreated
+				self.listContainer.find("input").change();//triger the filering to preserve the items
 			},
 
 			_button: function(){
