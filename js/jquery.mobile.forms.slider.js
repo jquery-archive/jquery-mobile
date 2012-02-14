@@ -122,6 +122,8 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				sliderImg.setAttribute('role','img');
 				sliderImg.appendChild(document.createTextNode(options[i].innerHTML));
 				$(sliderImg).prependTo( handle );
+                                if (!i)
+                                    self.handleSpans = $(sliderLabel).add(sliderImg);
 			}
 
 	    self._labels = $( ".ui-slider-label", slider );
@@ -292,12 +294,6 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		this.refresh(undefined, undefined, true);
 	},
 
-        _validTheme: function(theme) {
-            return ((null === theme || "" === theme || undefined === theme)
-                ? $.mobile.getInheritedTheme(this.element, "c")
-                : theme);
-        },
-
 	refresh: function( val, isfromControl, preventInputUpdate ) {
 
 		if ( this.options.disabled || this.element.attr('disabled')) {
@@ -399,9 +395,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
         _setTheme: function(value) {
             value = $.mobile.validTheme(this.element, value, "c");
-            this.handle
-                .removeClass("ui-btn-up-" + $.mobile.validTheme(this.element, this.options.theme, "c"))
-                .addClass("ui-btn-up-" + value);
+            this.handle.buttonMarkup({theme: value});
             this.options.theme = value;
             this.handle.attr("data-" + ($.mobile.ns || "") + "theme", value);
         },
