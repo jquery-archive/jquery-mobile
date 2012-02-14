@@ -52,9 +52,14 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			valuebg = control.jqmData("highlight") && cType != "select" ? $( "<div class='ui-slider-bg ui-btn-active ui-btn-corner-all'></div>" ).prependTo( slider ) : false,
 
-			handle = $( document.createElement('a') ) //"<a href='#' class='ui-slider-handle'></a>" )
-				.appendTo( slider )
-				.buttonMarkup({ corners: true, theme: theme, shadow: true })
+			domHandle = document.createElement('a'),
+			handle = $( domHandle ),
+			domSlider = document.createElement('div'),
+			slider = $( domSlider ),
+			options;
+
+
+		handle.buttonMarkup({ corners: true, theme: theme, shadow: true })
 				.attr({
 					"role": "slider",
 					"aria-valuemin": min,
@@ -65,14 +70,10 @@ $.widget( "mobile.slider", $.mobile.widget, {
 					"aria-labelledby": labelID
 				}),
 
-			domSlider = document.createElement('div'),
-			slider = $(domSlider),
-			options;
-
 		domSlider.setAttribute('role','application');
 		domSlider.className = ['ui-slider ',selectClass," ui-btn-down-",trackTheme,' ui-btn-corner-all'].join("");
-		handle.className = 'ui-slider-handle';
-		domSlider.appendChild(handle);
+		domHandle.className = 'ui-slider-handle';
+		domSlider.appendChild(domHandle);
 
 		handle
 			.buttonMarkup({ corners: true, theme: theme, shadow: true })
