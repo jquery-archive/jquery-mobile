@@ -1,6 +1,5 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: jQuery Mobile documentation JS
 //>>label: Docs
-
-define( [ "../external/requirejs/order!./jquery.mobile", "../external/requirejs/order!../docs/_assets/js/jqm-docs" ] );
+define( [ "../external/requirejs/depend!../docs/_assets/js/jqm-docs[jquery]", "../external/requirejs/order!./jquery.mobile" ] );
 //>>excludeEnd("jqmBuildExclude");
