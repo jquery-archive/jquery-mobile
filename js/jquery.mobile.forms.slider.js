@@ -101,22 +101,33 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		});
 
 		if ( cType == "select" ) {
+			var wrapper = document.createElement('div');
+			wrapper.className = 'ui-slider-inneroffset';
 
-			slider.wrapInner( "<div class='ui-slider-inneroffset'></div>" );
+			for(var j = 0,length = domSlider.childNodes.length;j < length;j++){
+				wrapper.appendChild(domSlider.childNodes[j]);
+			}
+
+			domSlider.appendChild(wrapper);
+
+			// slider.wrapInner( "<div class='ui-slider-inneroffset'></div>" );
 
 			// make the handle move with a smooth transition
 			handle.addClass( "ui-slider-handle-snapping" );
 
 			options = control.find( "option" );
 
-			control.find( "option" ).each(function( i ) {
-
+			for(var i = 0, optionsCount = options.length; i < optionsCount; i++){
 				var side = !i ? "b":"a",
-					theme = !i ? " ui-btn-down-" + trackTheme :( " " + $.mobile.activeBtnClass );
+					sliderTheme = !i ? " ui-btn-down-" + trackTheme :( " " + $.mobile.activeBtnClass ),
+					sliderLabel = document.createElement('div'),
+					sliderImg = document.createElement('span');
 
-				$( "<span class='ui-slider-label ui-slider-label-" + side + theme + " ui-btn-corner-all' role='img'>" + $( this ).getEncodedText() + "</span>" )
-					.prependTo( slider );
-			});
+				sliderImg.className = ['ui-slider-label ui-slider-label-',side,sliderTheme," ui-btn-corner-all"].join("");
+				sliderImg.setAttribute('role','img');
+				sliderImg.appendChild(document.createTextNode(options[i].innerHTML));
+				$(sliderImg).prependTo( slider );
+			}
 
 			self._labels = $( ".ui-slider-label", slider );
 
