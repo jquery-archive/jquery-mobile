@@ -134,8 +134,7 @@
 			<h2>Custom header configurations</h2>
 			<p>If you need to to create a header that doesn't follow the default configuration, simply wrap your custom styled markup in any container, such as <code>div</code>. The plugin won't apply the automatic button logic to the wrapped content inside the header container so you can write custom styles for laying out the content in your header.</p> 
 
-			<p>It's also possible to create custom bars without using the header data-role at all. For example, start with any container and add the <code>ui-bar</code> class to apply standard bar padding and add the <code>ui-bar-b</code> class to assign the bar swatch styles from your theme (the "b" can be any swatch letter). Note that <code>.ui-bar</code> should not be added to header or footer bars that span the full width of the page, as the additional padding will cause a full-width element to break out of its parent container. To add padding inside of a full-width toolbar we recommend wrapping the toolbar's contents in an element, and applying the padding to that element instead.</p>
-			
+			<p>It's also possible to create custom bars without using the header data-role at all. For example, start with any container and add the <code>ui-bar</code> class to apply standard bar padding and add the <code>ui-bar-b</code> class to assign the bar swatch styles from your theme (the "b" can be any swatch letter).</p>
 			
 			<pre><code>
 &lt;div <strong>class=&quot;ui-bar ui-bar-b&quot;</strong>&gt;
@@ -147,6 +146,8 @@
 				<div class="ui-bar ui-bar-b">
 					<h3>I'm just a div with bar classes and a <a href="#" data-role="button">Button</a></h3>
 				</div>
+				
+				<p>Note that <code>.ui-bar</code> should not be added to header or footer bars that span the full width of the page, as the additional padding will cause a full-width element to break out of its parent container. To add padding inside of a full-width toolbar we recommend wrapping the toolbar's contents in an element, and applying the padding to that element instead.</p>
 				
 				<p>By writing some simple styles, it's easy to build little message bars like this:</p>
 					<!-- Yes, the inline styles aren't recommended in a real system but they are used to simply illustrate how to tweak CSS -->
