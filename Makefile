@@ -35,13 +35,13 @@ endif
 # When no build target is specified, all gets ran
 all: css js zip notify
 
-clean: 
+clean:
 	# -------------------------------------------------
 	# Cleaning build output
 	@@rm -rf ${OUTPUT}
 	@@rm -rf tmp
 
-# Create the output directory. 
+# Create the output directory.
 init:
 	@@mkdir -p ${OUTPUT}
 
@@ -96,7 +96,11 @@ docs: init
 	@@cat tmp/demos/LICENSE-INFO.txt | cat - tmp/demos/css/themes/default/${NAME}.css > tmp/demos/css/themes/default/${NAME}.css.tmp
 	@@mv tmp/demos/css/themes/default/${NAME}.css.tmp tmp/demos/css/themes/default/${NAME}.css
 	# ... replace "js/" with "js/jquery.mobile.docs.js"
-	@@find tmp/demos -name "*.html" -exec sed -i 's@js/"@js/jquery.mobile.docs.js"@' {} \;
+	# NOTE the deletion here is required by the outdated version of sed
+	#      on osx since it parses the inplace backup extension differently
+	#      than the linux version
+	@@find tmp/demos -name "*.html" -exec sed -iwhyunowork -e 's@js/"@js/jquery.mobile.docs.js"@' {} \;
+	@@find tmp/demos -name "*whyunowork" -exec rm {} \;
 	# ... Move and zip up the the whole folder
 	@@rm -f ${OUTPUT}/${NAME}.docs.zip
 	@@cd tmp/demos && rm -f *.php && rm -f Makefile
