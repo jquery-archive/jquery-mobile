@@ -25,6 +25,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 			o = this.options,
 			type,
 			name,
+			classes = "",
 			$buttonPlaceholder;
 
 		// if this is a link, check if it's been enhanced and, if not, use the right function
@@ -32,6 +33,19 @@ $.widget( "mobile.button", $.mobile.widget, {
 	 	 	!$el.hasClass( "ui-btn" ) && $el.buttonMarkup();
 	 	 	return;
  	 	}
+		
+		
+		// TODO: Post 1.1--once we have time to test thoroughly--any classes manually applied to the original element should be carried over to the enhanced element, with an `-enhanced` suffix. See https://github.com/jquery/jquery-mobile/issues/3577
+		/* if( $el[0].className.length ) {
+			classes = $el[0].className;
+		} */
+		if( !!~$el[0].className.indexOf( "ui-btn-left" ) ) {
+			classes = "ui-btn-left";
+		}
+		
+		if(  !!~$el[0].className.indexOf( "ui-btn-right" ) ) {
+			classes = "ui-btn-right";
+		}
 
 		// Add ARIA role
 		this.button = $( "<div></div>" )
@@ -47,6 +61,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 				iconshadow: o.iconshadow,
 				mini: o.mini
 			})
+			.addClass( classes )
 			.append( $el.addClass( "ui-btn-hidden" ) );
 
         $button = this.button;

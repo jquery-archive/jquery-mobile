@@ -78,7 +78,7 @@ $.fn.buttonMarkup = function( options ) {
 
 		if ( o.mini ) {
 			buttonClass += " ui-mini";
-		} else if ( o.mini === false ) {
+		} else if ( o.mini && o.mini === false ) {
 			buttonClass += " ui-fullsize"; // Used to control styling in headers/footers, where buttons default to `mini` style.
 		}
 
@@ -111,7 +111,7 @@ $.fn.buttonMarkup = function( options ) {
 		}
 
 		el.removeClass( "ui-link" ).addClass( buttonClass );
-		
+				
 		buttonInner.className = innerClass;
 
 		buttonText.className = textClass;

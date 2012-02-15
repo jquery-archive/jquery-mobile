@@ -53,7 +53,20 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 	// setup items that are generally necessary for select menu extension
 	_preExtension: function(){
-		this.select = this.element.wrap( "<div class='ui-select'>" );
+		var classes = "";
+		// TODO: Post 1.1--once we have time to test thoroughly--any classes manually applied to the original element should be carried over to the enhanced element, with an `-enhanced` suffix. See https://github.com/jquery/jquery-mobile/issues/3577
+		/* if( $el[0].className.length ) {
+			classes = $el[0].className;
+		} */
+		if( !!~this.element[0].className.indexOf( "ui-btn-left" ) ) {
+			classes =  " ui-btn-left";
+		}
+		
+		if(  !!~this.element[0].className.indexOf( "ui-btn-right" ) ) {
+			classes = " ui-btn-right";
+		}
+		
+		this.select = this.element.wrap( "<div class='ui-select" + classes + "'>" );
 		this.selectID  = this.select.attr( "id" );
 		this.label = $( "label[for='"+ this.selectID +"']" ).addClass( "ui-select" );
 		this.isMultiple = this.select[ 0 ].multiple;
