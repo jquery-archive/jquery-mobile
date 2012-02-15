@@ -84,7 +84,7 @@ docs: init
 	${RUN_JS} \
 		external/r.js/dist/r.js \
 	 	-o build/docs.build.js \
-		dir=../tmp/demos
+		dir=tmp/demos
 	# ... Prepend versioned license to jquery.mobile.js
 	@@cat LICENSE-INFO.txt  | ${VER} > tmp/demos/LICENSE-INFO.txt
 	@@cat tmp/demos/LICENSE-INFO.txt | cat - tmp/demos/js/jquery.mobile.js > tmp/demos/js/jquery.mobile.js.tmp
@@ -116,7 +116,7 @@ js: init
 	${RUN_JS} \
 		external/r.js/dist/r.js \
 	 	-o baseUrl="js" \
-		include=jquery.mobile \
+		name=jquery.mobile \
 		exclude=jquery,../external/requirejs/order,../external/requirejs/depend,../external/requirejs/text,../external/requirejs/text!../version.txt \
 		out=${OUTPUT}/${NAME}.compiled.js \
 		pragmasOnSave.jqmBuildExclude=true \
