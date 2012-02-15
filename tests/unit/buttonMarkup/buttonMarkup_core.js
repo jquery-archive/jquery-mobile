@@ -4,13 +4,13 @@
 (function($){
 	module("jquery.mobile.buttonMarkup.js");
 
-        test( "header buttons should have the header class", function() {
-            var headerButton1 = $("#header-button-1"),
-                headerButton2 = $("#header-button-2");
+	test( "header buttons should have the header class", function() {
+		var headerButton1 = $("#header-button-1"),
+		    headerButton2 = $("#header-button-2");
 
-            ok((headerButton1.hasClass("ui-btn-left") &&
-                headerButton2.hasClass("ui-btn-right")), "first header button should have class 'ui-btn-left' and the second one should have 'ui-btn-right'");
-        });
+		ok((headerButton1.hasClass("ui-btn-left") &&
+		    headerButton2.hasClass("ui-btn-right")), "first header button should have class 'ui-btn-left' and the second one should have 'ui-btn-right'");
+	});
 
 	test( "control group buttons should be enhanced inside a footer", function(){
 		var group, linkCount;
