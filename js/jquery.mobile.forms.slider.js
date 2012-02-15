@@ -74,7 +74,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				}),
 
 		domSlider.setAttribute('role','application');
-		domSlider.className = ['ui-slider ',selectClass," ui-btn-down-",trackTheme,' ui-btn-corner-all'].join("");
+		domSlider.className = ['ui-slider ',selectClass," ui-btn-down-",trackTheme,' ui-btn-corner-all', inlineClass, miniClass].join("");
 		domHandle.className = 'ui-slider-handle';
 		domSlider.appendChild(domHandle);
 
