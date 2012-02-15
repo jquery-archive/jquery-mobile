@@ -4,6 +4,16 @@
 (function($){
 	module("jquery.mobile.buttonMarkup.js");
 
+        test( "header buttons should have the header class", function() {
+            var isOk = true;
+
+            $.each($("#page-header").find("a"), function(key, value) {
+                if (!($(value).hasClass("ui-btn-left") || $(value).hasClass("ui-btn-right")))
+                    isOk = false;
+            });
+            ok(isOk, "links in the header should have either 'ui-btn-left' or 'ui-btn-right' among their classes");
+        });
+
 	test( "control group buttons should be enhanced inside a footer", function(){
 		var group, linkCount;
 
