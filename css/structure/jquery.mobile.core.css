@@ -44,7 +44,7 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 .ui-bar { font-size: 16px; margin: 0; }
 .ui-bar h1, .ui-bar h2, .ui-bar h3, .ui-bar h4, .ui-bar h5, .ui-bar h6 { margin: 0; padding: 0; font-size: 16px; display: inline-block; }
 
-.ui-header, .ui-footer { position: relative; overflow: hidden; width: 100%; border-left-width: 0; border-right-width: 0; }
+.ui-header, .ui-footer { position: relative; overflow: hidden; border-left-width: 0; border-right-width: 0; }
 .ui-header .ui-btn-left,
 .ui-header .ui-btn-right { position: absolute; top: -5px; }
 .ui-header .ui-btn-left,
