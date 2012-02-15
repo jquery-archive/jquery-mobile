@@ -51,7 +51,7 @@
 
 			<p>Any link or valid <a href="../buttons/buttons-types.html">button markup</a> added to the footer will automatically be turned into a button. To save space, buttons in toolbars are automatically set to <a href="../buttons/buttons-inline.html">inline styling</a> so the button is only as wide as the text and icons it contains.  </p>
 			
-			<p>By default, toolbars don't have any padding to accommodate nav bars and other widgets. To include padding on the bar, add a <code>class="ui-bar"</code> to the footer.</p>
+			<p>By default, toolbars don't have any padding to accommodate nav bars and other widgets. To include padding on the bar, add a <code>class="ui-bar"</code> to the footer. Note that <code>.ui-bar</code> should not be added to header or footer bars that span the full width of the page, as the additional padding will cause a full-width element to break out of its parent container. To add padding inside of a full-width toolbar we recommend wrapping the toolbar's contents in an element, and applying the padding to that element instead.</p>
 			
 
 <pre><code>
