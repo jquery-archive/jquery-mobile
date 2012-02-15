@@ -3,7 +3,7 @@
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<title>jQuery Mobile Docs - Transitions</title> 
+	<title>jQuery Mobile Framework - Fixed Toolbars</title> 
 	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 
@@ -12,169 +12,145 @@
 </head> 
 <body> 
 
-	<div data-role="page" class="type-interior">
+<div data-role="page" class="type-interior">
 
-		<div data-role="header" data-theme="f">
-		<h1>Transitions</h1>
+	<div data-role="header" data-position="fixed" data-theme="f">
+
+		<h1>Fixed toolbars</h1>
 		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
-	</div><!-- /header -->
-
+	</div>
+	
 	<div data-role="content">
-		<div class="content-primary">		
-		<h2>Page transitions</h2> 
-
-		<p>The jQuery Mobile framework includes a set of CSS-based transition effects that can be applied to any page link or form submission with Ajax navigation: </p>
-
-			<style>
-				table { width:100%; border-bottom:1px solid #ccc; border-collapse: collapse; }
-				th { text-align:left; }
-				th h3 { margin:.6em 0; }
-				th, td { vertical-align:top; border-top:1px solid #ccc; padding: 1px 3px; }
-				td .ui-btn { margin:.4em 0 .5em 0; }
-				td .ui-btn-inner { padding: .4em 15px; }
-			</style>
-
-		<table margin="0">
-			<tr>
-				<th><h3>fade</h3></th>
-				<td><a href="#dialog-success" data-role="button" data-rel="dialog" data-transition="fade" data-inline="true">dialog</a></td>
-				<td><a href="#page-success" data-role="button" data-transition="fade" data-inline="true">page</a></td>
-			</tr>
-			<tr>
-				<th><h3>pop</h3></th>
-				<td><a href="#dialog-success" data-role="button" data-rel="dialog" data-transition="pop" data-inline="true">dialog</a></td>
-				<td><a href="#page-success" data-role="button" data-transition="pop" data-inline="true">page</a></td>
-			</tr>
-			<tr>
-				<th><h3>flip</h3></th>
-				<td><a href="#dialog-success" data-role="button" data-rel="dialog" data-transition="flip" data-inline="true">dialog</a></td>
-				<td><a href="#page-success" data-role="button" data-transition="flip" data-inline="true">page</a></td>
-			</tr>
-			<tr>
-				<th><h3>turn</h3></th>
-				<td><a href="#dialog-success" data-role="button" data-rel="dialog" data-transition="turn" data-inline="true">dialog</a></td>
-				<td><a href="#page-success" data-role="button" data-transition="turn" data-inline="true">page</a></td>
-			</tr>
-			<tr>
-				<th><h3>flow</h3></th>
-				<td><a href="#dialog-success" data-role="button" data-rel="dialog" data-transition="flow" data-inline="true">dialog</a></td>
-				<td><a href="#page-success" data-role="button" data-transition="flow" data-inline="true">page</a></td>
-			</tr>
-			<tr>
-				<th><h3>slide</h3></th>
-				<td><a href="#dialog-success" data-role="button" data-rel="dialog" data-transition="slide" data-inline="true">dialog</a></td>
-				<td><a href="#page-success" data-role="button" data-transition="slide" data-inline="true">page</a></td>
-			</tr>
-			<tr>
-				<th><h3>slideup</h3></th>
-				<td><a href="#dialog-success" data-role="button" data-rel="dialog" data-transition="slideup" data-inline="true">dialog</a></td>
-				<td><a href="#page-success" data-role="button" data-transition="slideup" data-inline="true">page</a></td>
-			</tr>
-			<tr>
-				<th><h3>slidedown</h3></th>
-				<td><a href="#dialog-success" data-role="button" data-rel="dialog" data-transition="slidedown" data-inline="true">dialog</a></td>
-				<td><a href="#page-success" data-role="button" data-transition="slidedown" data-inline="true">page</a></td>
-			</tr>
-			<tr>
-				<th><h3>none</h3></th>
-				<td><a href="#dialog-success" data-role="button" data-rel="dialog" data-transition="none" data-inline="true">dialog</a></td>
-				<td><a href="#page-success" data-role="button" data-rel="dialog" data-transition="none" data-inline="true">page</a></td>
-			</tr>
-		</table>
-
-
-<p><strong>NOTE</strong>: To view all transition types, you must be on a browser that supports 3D transforms. By default, devices that lack 3D support will fallback to "fade" for all transition types. This behavior is configurable (see below).</p>
-
-<p><strong>Transitions were originally inspired by <a href="http://www.jqtouch.com/">jQtouch</a></strong> They've since been rebuilt, but props to David Kaneda and Jonathan Stark for the initial guidance.</p>
-
-	<h2>Setting a transition on a link or form submit</h2>
-	<p>By default, the framework applies a <strong>fade</strong> transition. To set a custom transition effect, add the <code>data-transition</code> attribute to the link. </p>
-
-<code><code>
-&lt;a href=&quot;index.html&quot; <strong>data-transition=&quot;pop&quot;</strong>&gt;I'll pop&lt;/a&gt;
-</code></code>
-		
-		<p>When the Back button is pressed, the framework will automatically apply the reverse version of the transition that was used to show the page. To specify that the reverse version of a transition should be used, add the <code>data-direction="reverse"</code> attribute to a link. Note: (this was formerly <code>data-back="true"</code>, which will remain supported until 1.0)</p>
+		<div class="content-primary">
+				<h2>Fixed toolbars</h2>
 				
-		<h2>Global configuration of transitions</h2>
+			    <ul data-role="controlgroup" data-type="horizontal" class="localnav">
+			      <li><a href="bars-fixed.html" data-role="button" data-transition="fade" class="ui-btn-active">Basics</a></li>
+			      <li><a href="bars-fixed-options.html" data-role="button" data-transition="fade">Options</a></li>
+			      <li><a href="bars-fixed-methods.html" data-role="button" data-transition="fade">Methods</a></li>
+			      <li><a href="bars-fixed-events.html" data-role="button" data-transition="fade">Events</a></li>
+			    </ul>
+				
+				
+		<p>In browsers that support CSS <code>position: fixed</code>, (<em>generally, most desktop browsers, iOS5+, Android 2.2+, BlackBerry 6, and more</em>), toolbars that use the "fixedtoolbar" plugin will be fixed to the top or bottom of the viewport, while the page content scrolls freely in between. In browsers that don't support fixed positioning, the toolbars will fall back to static, inline positiong in the page. </p>
 		
-		<p>Set the <code>defaultPageTransition</code> <a href="../api/globalconfig.html">global option</a> if you'd prefer a different default transition. Dialogs have a different option called <code>defaultDialogTransition</code> that can also set configured.</p>
+		<p>To enable this behavior on a header or footer, add the <code>data-position="fixed"</code> attribute to a jQuery Mobile header or footer element.</p>
+		
+		<h3>A fixed header toolbar</h3>
+		<pre><code>	
+&lt;div data-role=&quot;header&quot; data-position=&quot;fixed&quot;&gt;
+	&lt;h1&gt;Fixed Header!&lt;/h1&gt;
+&lt;/div&gt;
+		</code></pre>
+		
+		<h3>A fixed footer toolbar</h3>
+		<pre><code>	
+&lt;div data-role=&quot;footer&quot; data-position=&quot;fixed&quot;&gt;
+	&lt;h1&gt;Fixed Footer!&lt;/h1&gt;
+&lt;/div&gt;
+		</code></pre>
+
+		<h2>Fullscreen Toolbars</h2>
+		<p>Fullscreen fixed toolbars sit on top of the content at all times when they are visible, and unlike regular fixed toolbars, fullscreen toolbars do not fall back to static positioning when toggled, instead they disappear from the screen entirely. Fullscreen toolbars are ideal for more immersive interfaces, like a photo viewer that is meant to fill the entire screen with the photo itself and no distractions. <a href="bars-fullscreen.html">This page</a> demonstrates toolbars that use the fullscreen option.</p>
+		
+				<p>To enable this option on a fixed header or footer, add the <code>data-fullscreen</code> attribute to the element.</p>
+		
+				<pre><code>	
+&lt;div data-role=&quot;header&quot; data-position=&quot;fixed&quot; data-fullscreen=&quot;true&quot;&gt;
+	&lt;h1&gt;Fixed Header!&lt;/h1&gt;
+&lt;/div&gt;
+				</code></pre>
+		
+		
 	
-
-		<h2>Browser support and performance</h2>
-		<p>All transitions are built with CSS keyframe animations and include both <code>-webkit</code> vendor prefixed rules for iOS, Blackberry, Android, Safari and Chrome browsers and <code>-moz</code> rules for Firefox browsers. Support for keyframe animations and transition smoothness is determined by the browser version and hardware and will safely fall back to no transition if animations aren't supported. To proactively exclude transition in situations with poor performance, we exclude browsers that lack 3D transforms and provide a fallback transition and apply a max width for when transitions are applied.</p>
+		<h2>Changes in jQuery Mobile 1.1</h2>
 		
-		<h2>Defining fallback transitions for non-3D support</h2>
-		<p>By default, all transitions except fade require 3D transform support. Devices that lack 3D support will fall back to a fade transition, regardless of the transition specified. We do this to proactively exclude poorly-performing platforms like Android 2.x from advanced transitions and ensure they still have a smooth experience. Note that there are platforms such as Android 3.0 that technically support 3D transforms, but still have poor animation performance so this won't guarantee that every browser will be 100% flicker-free but we try to target this responsibly.</p>
+		<p>Prior to version 1.1, jQuery Mobile used dynamically re-positioned toolbars for the fixed header effect because very few mobile browsers supported the <code>position:fixed</code> CSS property, and simulating fixed support through the use of "fake" JavaScript overflow-scrolling behavior would have reduced our browser support reach, in addition to feeling unnatural on certain platforms. This behavior was not ideal, and jQuery Mobile 1.1 took a new approach to fixed toolbars that allows much broader support, and now the framework offers true fixed toolbars on many popular platforms, while gracefully degrading non-supporting platforms to static positioning.</p>
 		
-		<p>The fallback transition for browsers that don't support 3D transforms can be configured for each transition type, but by default we specify "fade" as the fallback. For example, this will set the fallback transition for the slideout transition to "none":</p>
-		<code>$.mobile.fallbackTransition.slideout = "none"</code>
+<div class="ui-body ui-body-e">		
+		<h2>No longer supported: touchOverflowEnabled</h2>
 		
-		<h2>Setting a max width for transitions</h2>
-		<p>By default, transitions can be disabled (set to "none") when the window width is greater than a certain pixel width. This feature is useful because transitions can be distracting or perform poorly on larger screens. This value is configurable via the global option <code>$.mobile.maxTransitionWidth</code>, which defaults to <code>false</code>. The option accepts any number representing a pixel width or <code>false</code> value. If it's not <code>false</code>, the handler will use a "none" transition when the window width is wider than the specified value.</p>
-
-		
-
+		<p>Prior to jQuery Mobile 1.1, true fixed toolbar support was contingent on native browser support for the CSS property <code>overflow-scrolling: touch</code>, which is currently only supported in iOS5. As of version 1.1, jQuery Mobile no longer uses this CSS property at all. We've removed all internal usage of this property in the framework, but we've left it defined globally on the $.mobile object to reduce the risk that its removal will cause trouble with existing applications. This property is flagged for removal, so please update your code to no longer use it. The support test for this property, however, remains defined under <code>$.support</code> and we have no plans to remove that test at this time. </p>
+</div>
+		<hr>
 	
+		
+		<h2>The rest of the page is just sample content to make the page very long</h2>
+		
+			<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui.Donec non enim in turpis pulvinar facilisis. Ut felis.</p>
+			
+			<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui.Donec non enim in turpis pulvinar facilisis. Ut felis.</p>
+			
+			
+			<h3>And an inset list</h3>
+			
+					<ul data-role="listview" data-inset="true">
+						<li><a href="index.html">Inbox <span class="ui-li-count">12</span></a></li>
+						<li><a href="index.html">Outbox <span class="ui-li-count">0</span></a></li>
+						<li><a href="index.html">Drafts <span class="ui-li-count">4</span></a></li>
+						<li><a href="index.html">Sent <span class="ui-li-count">328</span></a></li>
+						<li><a href="index.html">Trash <span class="ui-li-count">62</span></a></li>
+					</ul>
+			
+			<br />
+			<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui.Donec non enim in turpis pulvinar facilisis. Ut felis.</p>
+			
+			<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui.Donec non enim in turpis pulvinar facilisis. Ut felis.</p>
+			
+			
+			<h3>Embedded form</h3>
+			
+			<form action="#" method="get">
 
-		<h2>Creating custom transitions</h2>
+				<div data-role="fieldcontain">
+		         <label for="name">Text Input:</label>
+		         <input type="text" name="name" id="name" value=""  />
+				</div>
 
-		<p>jQuery Mobile allows for the addition of <a href="page-customtransitions.html">custom transitions</a> to the <code>$.mobile.transitionHandlers</code> dictionary so you can expand the selection of transitions on your site or app. 
+				<div data-role="fieldcontain">
+				<label for="textarea">Textarea:</label>
+				<textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
+				</div>
 
-		<h2>Transitions and scroll position</h2>
-		<p>One of the key things jQuery Mobile does is store your scroll position before starting a transition so it can restore you to the same place once you return to the page when hitting the Back button or closing a dialog. Here are the same buttons from the top to test the scrolling logic.</p>
+				<div data-role="fieldcontain">
+					<label for="slider2">Flip switch:</label>
+					<select name="slider2" id="slider2" data-role="slider">
+						<option value="off">Off</option>
+						<option value="on">On</option>
+					</select>
+				</div>
+
+				<div data-role="fieldcontain">
+					<label for="slider">Slider:</label>
+				 	<input type="range" name="slider" id="slider" value="0" min="0" max="100"  />
+				</div>
 
 
-		<table>
-			<tr>
-				<th><h3>fade</h3></th>
-				<td><a href="#dialog-success" data-role="button" data-rel="dialog" data-transition="fade" data-inline="true">dialog</a></td>
-				<td><a href="#page-success" data-role="button" data-transition="fade" data-inline="true">page</a></td>
-			</tr>
-			<tr>
-				<th><h3>pop</h3></th>
-				<td><a href="#dialog-success" data-role="button" data-rel="dialog" data-transition="pop" data-inline="true">dialog</a></td>
-				<td><a href="#page-success" data-role="button" data-transition="pop" data-inline="true">page</a></td>
-			</tr>
-			<tr>
-				<th><h3>flip</h3></th>
-				<td><a href="#dialog-success" data-role="button" data-rel="dialog" data-transition="flip" data-inline="true">dialog</a></td>
-				<td><a href="#page-success" data-role="button" data-transition="flip" data-inline="true">page</a></td>
-			</tr>
-			<tr>
-				<th><h3>turn</h3></th>
-				<td><a href="#dialog-success" data-role="button" data-rel="dialog" data-transition="turn" data-inline="true">dialog</a></td>
-				<td><a href="#page-success" data-role="button" data-transition="turn" data-inline="true">page</a></td>
-			</tr>
-			<tr>
-				<th><h3>flow</h3></th>
-				<td><a href="#dialog-success" data-role="button" data-rel="dialog" data-transition="flow" data-inline="true">dialog</a></td>
-				<td><a href="#page-success" data-role="button" data-transition="flow" data-inline="true">page</a></td>
-			</tr>
-			<tr>
-				<th><h3>slide</h3></th>
-				<td><a href="#dialog-success" data-role="button" data-rel="dialog" data-transition="slide" data-inline="true">dialog</a></td>
-				<td><a href="#page-success" data-role="button" data-transition="slide" data-inline="true">page</a></td>
-			</tr>
-			<tr>
-				<th><h3>slideup</h3></th>
-				<td><a href="#dialog-success" data-role="button" data-rel="dialog" data-transition="slideup" data-inline="true">dialog</a></td>
-				<td><a href="#page-success" data-role="button" data-transition="slideup" data-inline="true">page</a></td>
-			</tr>
-			<tr>
-				<th><h3>slidedown</h3></th>
-				<td><a href="#dialog-success" data-role="button" data-rel="dialog" data-transition="slidedown" data-inline="true">dialog</a></td>
-				<td><a href="#page-success" data-role="button" data-transition="slidedown" data-inline="true">page</a></td>
-			</tr>
-			<tr>
-				<th><h3>none</h3></th>
-				<td><a href="#dialog-success" data-role="button" data-rel="dialog" data-transition="none" data-inline="true">dialog</a></td>
-				<td><a href="#page-success" data-role="button" data-rel="dialog" data-transition="none" data-inline="true">page</a></td>
-			</tr>
-		</table>
+				<div data-role="fieldcontain">
+					<label for="select-choice-1" class="select">Choose shipping method:</label>
+					<select name="select-choice-1" id="select-choice-1">
+						<option value="standard">Standard: 7 day</option>
+						<option value="rush">Rush: 3 days</option>
+						<option value="express">Express: next day</option>
+						<option value="overnight">Overnight</option>
+					</select>
+				</div>
+
+
+			<div class="ui-body ui-body-b">
+			<fieldset class="ui-grid-a">
+					<div class="ui-block-a"><button type="submit" data-theme="d">Cancel</button></div>
+					<div class="ui-block-b"><button type="submit" data-theme="b">Submit</button></div>
+		    </fieldset>
+			</div>
+		</form>
+		
+		<h3>A bit more text</h3>
+		
+		<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui.Donec non enim in turpis pulvinar facilisis. Ut felis.</p>
 		
 
-		
+
 
 				</div><!--/content-primary -->		
 
@@ -185,101 +161,27 @@
 							<h3>More in this section</h3>
 
 							<ul data-role="listview" data-theme="c" data-dividertheme="d">
-								<li data-role="list-divider">Pages &amp; Dialogs</li>
-								<li><a href="page-anatomy.html">Anatomy of a page</a></li>
-								<li><a href="page-template.html" data-ajax="false">Single page template</a></li>
-								<li><a href="multipage-template.html" data-ajax="false">Multi-page template</a></li>
-								<li><a href="page-titles.html">Page titles</a></li>
-								<li><a href="page-links.html">Linking pages</a></li>
-								<li data-theme="a"><a href="page-transitions.html" data-ajax="false">Page transitions</a></li>
-								<li><a href="page-dialogs.html">Dialogs</a></li>
-								<li><a href="page-cache.html">Prefetching &amp; caching pages</a></li>
-								<li><a href="page-navmodel.html">Ajax, hashes &amp; history</a></li>
-								<li><a href="page-dynamic.html">Dynamically injecting pages</a></li>
-								<li><a href="page-scripting.html">Scripting pages</a></li>
-								<li><a href="phonegap.html">PhoneGap apps</a></li>
-								<li><a href="touchoverflow.html">touchOverflow feature</a></li>
-								<li><a href="pages-themes.html">Theming pages</a></li>
+
+								<li data-role="list-divider">Toolbars</li>
+								<li><a href="docs-bars.html">Toolbar basics</a></li>
+								<li><a href="docs-headers.html">Header bars</a></li>
+								<li><a href="docs-footers.html">Footer bars</a></li>
+								<li><a href="docs-navbar.html">Navbars</a></li>
+								<li data-theme="a"><a href="bars-fixed.html">Fixed positioning</a></li>
+								<li><a href="footer-persist-a.html">Persistent toolbars</a></li>
+								<li><a href="bars-themes.html">Theming toolbars</a></li>
+
 							</ul>
 					</div>
 				</div>		
 
 			</div><!-- /content -->
 
-			<div data-role="footer" class="footer-docs" data-theme="c">
-					<p>&copy; 2011 The jQuery Project</p>
+			<div data-role="footer" class="footer-docs" data-theme="a" data-position="fixed">
+					<h1>Fixed Footer</h1>
 			</div>
 
 			</div><!-- /page -->
-			
-			
-			
-			
-			
-			<div data-role="page" id="dialog-success"><!-- dialog-->
-
-				<div data-role="header" data-theme="e">
-					<h1>Dialog</h1>
-				</div><!-- /header -->
-
-				<div data-role="content" data-theme="e">
-					<p>That was an animated page transition effect to a dialog that we added with a <code>data-transition</code> attribute on the link.</p>
-					<p>Since it uses CSS animations, this should be hardware accelerated on many devices. To see transitions, 3D transform support is required so if you only saw a fade transition that's the reason.</p>
-					
-					<a href="docs-transitions.html" data-role="button" data-theme="b" data-rel="back">Take me back</a>   
-				</div>
-			</div>
-			
-			<div data-role="page" id="page-success"><!-- dialog-->
-
-				<div data-role="header" data-theme="a">
-					<h1>Page</h1>
-				</div><!-- /header -->
-
-				<div data-role="content" data-theme="d">
-					<p>That was an animated page transition effect to a page that we added with a <code>data-transition</code> attribute on the link. This uses a different background theme swatch to see how that looks with the transitions.</p>
-					<p>Since it uses CSS animations, this should be hardware accelerated on many devices. To see transitions, 3D transform support is required so if you only saw a fade transition that's the reason.</p>
-						
-					<form action="#" method="get">
-						<h2>Here's a few form elements</h2>
-
-						<p>These are here to see if this slows down rendering.</p>
-
-						<div data-role="fieldcontain">
-				         <label for="name">Text Input:</label>
-				         <input type="text" name="name" id="name" value=""  />
-						</div>
-
-						<div data-role="fieldcontain">
-						<label for="textarea">Textarea:</label>
-						<textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
-						</div>
-
-						<div data-role="fieldcontain">
-							<label for="slider2">Flip switch:</label>
-							<select name="slider2" id="slider2" data-role="slider">
-								<option value="off">Off</option>
-								<option value="on">On</option>
-							</select>
-						</div>
-
-						<div data-role="fieldcontain">
-							<label for="slider">Slider:</label>
-						 	<input type="range" name="slider" id="slider" value="0" min="0" max="100"  />
-						</div>
-								
-					</form>
-					
-					<a href="docs-transitions.html" data-role="button" data-theme="b" data-rel="back" data-inline="true">Take me back</a>   
-				</div>
-				
-				<div data-role="header" data-theme="d">
-					<div style="margin:5px 10px;"><!-- To add a bit of spacing -->
-					<label for="search" class="ui-hidden-accessible">Search:</label>
-			        <input type="search" name="password" id="search" placeholder="Search..." value="" />
-					</div>
-				</div><!-- /header -->
-			</div>
 
 			</body>
 			</html>
