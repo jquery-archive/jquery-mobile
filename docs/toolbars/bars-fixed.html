@@ -36,20 +36,33 @@
 		
 		<p>To enable this behavior on a header or footer, add the <code>data-position="fixed"</code> attribute to a jQuery Mobile header or footer element.</p>
 		
-		<h3>A fixed header toolbar</h3>
+		<p>Fixed header markup example:</p>
 		<pre><code>	
-&lt;div data-role=&quot;header&quot; data-position=&quot;fixed&quot;&gt;
+&lt;div data-role=&quot;header&quot; <strong>data-position=&quot;fixed&quot;</strong>&gt;
 	&lt;h1&gt;Fixed Header!&lt;/h1&gt;
 &lt;/div&gt;
 		</code></pre>
 		
-		<h3>A fixed footer toolbar</h3>
+		<p>Fixed footer markup example:</p>
 		<pre><code>	
-&lt;div data-role=&quot;footer&quot; data-position=&quot;fixed&quot;&gt;
+&lt;div data-role=&quot;footer&quot; <strong>data-position=&quot;fixed&quot;</strong>&gt;
 	&lt;h1&gt;Fixed Footer!&lt;/h1&gt;
 &lt;/div&gt;
 		</code></pre>
 
+		<h2>Forms in toolbars</h2>
+		<p>In jQuery Mobile 1.1, all form element are now tested to work correctly in toolbars and a more compact <a href="../forms/forms-all-mini.html">mini sized</a> version is recommended for use in toolbars. The following pages are designed to test fixed toolbars and form elements: 
+			<a href="bars-fixed-forms-a.html">demo app</a>,
+			<a href="bars-fixed-forms-b.html">text inputs</a>, 
+			<a href="bars-fixed-forms-c.html">search inputs</a>, 
+			<a href="bars-fixed-forms-d.html">radio toggles</a>, 
+			<a href="bars-fixed-forms-e.html">checkbox toggles</a>,
+			<a href="bars-fixed-forms-f.html">slider</a>, 
+			<a href="bars-fixed-forms-g.html">select</a>, and  
+			<a href="bars-fixed-forms-h.html">buttons</a>.
+		</p>
+		<p>Note that the interaction of fixed toolbars and the on-screen keyboard used on many mobile platforms can cause issues when these interact so we recommend avoiding the use of text inputs or other elements that open the keyboard in footers.</p>
+		
 		<h2>Fullscreen Toolbars</h2>
 		<p>Fullscreen fixed toolbars sit on top of the content at all times when they are visible, and unlike regular fixed toolbars, fullscreen toolbars do not fall back to static positioning when toggled, instead they disappear from the screen entirely. Fullscreen toolbars are ideal for more immersive interfaces, like a photo viewer that is meant to fill the entire screen with the photo itself and no distractions. <a href="bars-fullscreen.html">This page</a> demonstrates toolbars that use the fullscreen option.</p>
 		

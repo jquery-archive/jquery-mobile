@@ -19,6 +19,7 @@
 	<div data-role="header" data-position="fixed" data-theme="f">
 
 		<div class="ui-grid-a">
+			<form>
 			<div class="ui-block-a" style="width:60%">
 				<h1 style="font-size:19px; margin-left:12px;">2,146 Songs</h1>
 			</div>
@@ -44,6 +45,7 @@
 					</div>
 				</div><!-- /grid-a -->
 		</div><!-- /search bar -->
+		</form>
 	</div>
 	
 	<div data-role="content">
@@ -282,10 +284,13 @@
 			</div><!-- /content -->
 
 			<div data-role="footer" class="footer-docs" data-theme="a" data-position="fixed">
-				<div data-role="fieldcontain">
-					<label for="slider-mini" style="margin-left:15px;">Volume</label>
-					<input type="range" name="slider-1" id="slider-mini" value="25" min="0" max="100" data-highlight="true" data-mini="true" data-theme="c" data-track-theme="a" class="ui-hidden-accessible" />
-				</div>
+				<form action="#" method="get">
+					<div data-role="fieldcontain">
+						<label for="slider-2" style="margin-left:15px;">Volume:</label>
+					 	<input type="range" name="slider" id="slider-2" value="50" min="0" max="100" data-highlight="true" data-mini="true"  class="ui-hidden-accessible" />
+					</div>
+				</form>
+				
 			</div>
 
 			</div><!-- /page -->
