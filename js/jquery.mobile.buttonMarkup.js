@@ -45,6 +45,7 @@ $.fn.buttonMarkup = function( options ) {
 
 		$.each(o, function(key, value) {
 			e.setAttribute( "data-" + $.mobile.ns + key, value );
+			el.jqmData(key, value);
 		});
 
 		// Check if this element is already enhanced
@@ -114,6 +115,8 @@ $.fn.buttonMarkup = function( options ) {
 			buttonClass += " ui-shadow";
 		}
 
+		if (buttonElements)
+			el.removeClass((buttonElements.bcls || ""));
 		el.removeClass( "ui-link" ).addClass( buttonClass );
 				
 		buttonInner.className = innerClass;
@@ -137,6 +140,7 @@ $.fn.buttonMarkup = function( options ) {
 		// Assign a structure containing the elements of this button to the elements of this button. This
 		// will allow us to recognize this as an already-enhanced button in future calls to buttonMarkup().
 		buttonElements = {
+			bcls  : buttonClass,
 			outer : e,
 			inner : buttonInner,
 			text  : buttonText,
