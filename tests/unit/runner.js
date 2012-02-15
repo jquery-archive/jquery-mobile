@@ -35,7 +35,7 @@ $(function() {
 				self.recordAssertions( result.total - result.failed, result.name );
 			},
 
-			onFrameDone: function( failed, passed, total, runtime ){
+			onFrameDone: function( results ) {
 				// make sure we don't time out the tests
 				clearTimeout( self.testTimer );
 
