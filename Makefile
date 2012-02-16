@@ -3,7 +3,9 @@
 VER = sed "s/v@VERSION/$$(git log -1 --format=format:"Git Build: SHA1: %H <> Date: %cd")/"
 VER_MIN = "/*! jQuery Mobile v$$(git log -1 --format=format:"Git Build: SHA1: %H <> Date: %cd") jquerymobile.com | jquery.org/license */"
 VER_OFFICIAL = $(shell cat version.txt)
-SED_VER_API = sed 's/__version__/"${VER_OFFICIAL}"/g'
+SED_VER_REPLACE = 's/__version__/"${VER_OFFICIAL}"/g'
+SED_VER_API = sed ${SED_VER_REPLACE}
+SED_INPLACE_EXT = "whyunowork"
 deploy: VER = sed "s/v@VERSION/${VER_OFFICIAL}/"
 deploy: VER_MIN = "/*! jQuery Mobile v${VER_OFFICIAL} jquerymobile.com | jquery.org/license */"
 
@@ -92,15 +94,16 @@ docs: init
 	# ... Prepend versioned license to jquery.mobile.docs.js
 	@@cat tmp/demos/LICENSE-INFO.txt | cat - tmp/demos/js/jquery.mobile.docs.js > tmp/demos/js/jquery.mobile.docs.js.tmp
 	@@cat tmp/demos/js/jquery.mobile.docs.js.tmp | ${SED_VER_API} > tmp/demos/js/jquery.mobile.docs.js
+	# ... Fix __version__ in core for tests/unit/
+	@@sed -i${SED_INPLACE_EXT} -e ${SED_VER_REPLACE} tmp/demos/js/jquery.mobile.core.js
+	@@rm tmp/demos/js/jquery.mobile.core.js${SED_INPLACE_EXT}
 	# ... Prepend versioned license to jquery.mobile.css
 	@@cat tmp/demos/LICENSE-INFO.txt | cat - tmp/demos/css/themes/default/${NAME}.css > tmp/demos/css/themes/default/${NAME}.css.tmp
 	@@mv tmp/demos/css/themes/default/${NAME}.css.tmp tmp/demos/css/themes/default/${NAME}.css
 	# ... replace "js/" with "js/jquery.mobile.docs.js"
-	# NOTE the deletion here is required by the outdated version of sed
-	#      on osx since it parses the inplace backup extension differently
-	#      than the linux version
-	@@find tmp/demos -name "*.html" -exec sed -iwhyunowork -e 's@js/"@js/jquery.mobile.docs.js"@' {} \;
-	@@find tmp/demos -name "*whyunowork" -exec rm {} \;
+	@@# NOTE the deletion here is required by gnu/bsd sed differences
+	@@find tmp/demos -name "*.html" -exec sed -i${SED_INPLACE_EXT} -e 's@js/"@js/jquery.mobile.docs.js"@' {} \;
+	@@find tmp/demos -name "*${SED_INPLACE_EXT}" -exec rm {} \;
 	# ... Move and zip up the the whole folder
 	@@rm -f ${OUTPUT}/${NAME}.docs.zip
 	@@cd tmp/demos && rm -f *.php && rm -f Makefile
