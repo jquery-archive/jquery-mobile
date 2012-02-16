@@ -53,12 +53,12 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			miniClass = ( this.options.mini || control.jqmData("mini") ) ? " ui-slider-mini" : "",
 
-			valuebg = control.jqmData("highlight") && cType != "select" ? $( "<div class='ui-slider-bg ui-btn-active ui-btn-corner-all'></div>" ).prependTo( slider ) : false,
 
 			domHandle = document.createElement('a'),
 			handle = $( domHandle ),
 			domSlider = document.createElement('div'),
 			slider = $( domSlider ),
+			valuebg = control.jqmData("highlight") && cType != "select" ? $( "<div class='ui-slider-bg ui-btn-active ui-btn-corner-all'></div>" ).prependTo( slider ) : false,
 			options;
 
 
