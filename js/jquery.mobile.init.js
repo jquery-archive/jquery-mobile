@@ -2,7 +2,8 @@
 //>>description: Applies classes for grid styling.
 //>>label: CSS Grid Tool
 
-define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.navigation", "./jquery.mobile.navigation.pushstate", "../external/requirejs/depend!./jquery.mobile.hashchange[jquery]" ], function( $ ) {
+define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery.mobile.navigation",
+	"./jquery.mobile.navigation.pushstate", "../external/requirejs/depend!./jquery.mobile.hashchange[jquery]" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 ( function( $, window, undefined ) {
 	var	$html = $( "html" ),
