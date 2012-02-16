@@ -35,4 +35,13 @@
 				 $(slider.find("option")[slider[0].selectedIndex]).text(),
 				 "verify that the link title is set to the selected option text");
 	});
+
+	test( "data-highlight works properly", function() {
+		var $highlighted = $("#background-slider"), $unhighlighted = $("#no-background-slider");
+
+		same( $highlighted.siblings( ".ui-slider" ).find( ".ui-slider-bg" ).length, 1,
+					"highlighted slider should have a div for the track bg" );
+		same( $unhighlighted.siblings( ".ui-slider" ).find( ".ui-slider-bg" ).length, 0,
+					"unhighlighted slider _not_ should have a div for the track bg" );
+	});
 })( jQuery );
