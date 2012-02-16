@@ -68,6 +68,11 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			options;
 
 
+		domSlider.setAttribute('role','application');
+		domSlider.className = ['ui-slider ',selectClass," ui-btn-down-",trackTheme,' ui-btn-corner-all', inlineClass, miniClass].join("");
+		domHandle.className = 'ui-slider-handle';
+		domSlider.appendChild(domHandle);
+
 		handle.buttonMarkup({ corners: true, theme: theme, shadow: true })
 				.attr({
 					"role": "slider",
@@ -78,11 +83,6 @@ $.widget( "mobile.slider", $.mobile.widget, {
 					"title": val(),
 					"aria-labelledby": labelID
 				});
-
-		domSlider.setAttribute('role','application');
-		domSlider.className = ['ui-slider ',selectClass," ui-btn-down-",trackTheme,' ui-btn-corner-all', inlineClass, miniClass].join("");
-		domHandle.className = 'ui-slider-handle';
-		domSlider.appendChild(domHandle);
 
 		$.extend( this, {
 			slider: slider,
