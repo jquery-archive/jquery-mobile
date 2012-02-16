@@ -71,24 +71,12 @@ $.widget( "mobile.slider", $.mobile.widget, {
 					"aria-valuetext": val(),
 					"title": val(),
 					"aria-labelledby": labelID
-				}),
+				});
 
 		domSlider.setAttribute('role','application');
 		domSlider.className = ['ui-slider ',selectClass," ui-btn-down-",trackTheme,' ui-btn-corner-all', inlineClass, miniClass].join("");
 		domHandle.className = 'ui-slider-handle';
 		domSlider.appendChild(domHandle);
-
-		handle
-			.buttonMarkup({ corners: true, theme: theme, shadow: true })
-			.attr({
-				"role": "slider",
-				"aria-valuemin": min,
-				"aria-valuemax": max,
-				"aria-valuenow": val(),
-				"aria-valuetext": val(),
-				"title": val(),
-				"aria-labelledby": labelID
-			}),
 
 		$.extend( this, {
 			slider: slider,
