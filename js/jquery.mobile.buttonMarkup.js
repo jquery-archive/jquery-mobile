@@ -7,14 +7,18 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.vmouse" ], function
 ( function( $, undefined ) {
 
 $.fn.buttonMarkup = function( options ) {
-	var $workingSet = this;
+	var self = this,
+	    $workingSet = this.filter( function( i, el ) {
+	        return !self.eq( i ).hasClass( "ui-btn" );
+	    });
 
 	// trim the working set when ignoring content is switched on
 	if( $.mobile.ignoreContentEnabled ){
 		$workingSet = $.mobile.enhanceable( $workingSet );
 	}
 
-	options = options || {};
+	// Enforce options to be of type string
+	options = ( options && ( $.type( options ) == "object" ) )? options : {};
 	for ( var i = 0; i < $workingSet.length; i++ ) {
 		var el = $workingSet.eq( i ),
 			e = el[ 0 ],
