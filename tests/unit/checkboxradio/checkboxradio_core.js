@@ -130,6 +130,17 @@
 	test( "checkboxradio elements in the keepNative set shouldn't be enhanced", function() {
 		ok( !$("input.should-be-native").parent().is("div.ui-checkbox") );
 	});
+	
+	test( "Elements with “data-mini='true'” should have “ui-mini” class attached to enhanced element.", function(){
+		var full = document.getElementById("radio-full"),
+			$fulllbl = $('[for="radio-full"]'),
+			mini = document.getElementById("radio-mini"),
+			$minilbl = $('[for="radio-mini"]'),
+			minictrl = $("#mini-control");
+
+		ok( !full.getAttribute('data-nstest-mini') && !$fulllbl.hasClass('ui-mini'), "Original element does not have data attribute, enhanced version does not recieve .ui-mini.");
+		ok( mini.getAttribute('data-nstest-mini'), "Original element has data attribute, enhanced version recieves .ui-mini." );
+	});
 
 	asyncTest( "clicking the label triggers a click on the element", function() {
 		var clicked = false;

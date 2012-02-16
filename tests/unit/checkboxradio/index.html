@@ -86,6 +86,22 @@
 </div>
 
 <div data-role="fieldcontain">
+	<input type="radio" name="radio-full" value="choice-3" id="radio-full" />
+	<label for="radio-full">Hamster</label>
+
+	<input type="radio" name="radio-mini" value="choice-3" id="radio-mini" data-nstest-mini="true" />
+	<label for="radio-mini">Hamster</label>
+
+	<div data-nstest-role="controlgroup" data-nstest-mini="true" id="mini-control">
+		<input type="radio" name="radio-mini" value="choice-3" id="mini-ctrl" />
+		<label for="mini-ctrl">Hamster</label>
+		<input type="radio" name="full-ctrl" value="choice-3" id="full-ctrl" />
+		<label for="full-ctrl">Hamster</label>
+	</div>
+</div>
+
+
+<div data-role="fieldcontain">
 	<fieldset data-role="controlgroup">
 		<legend>Agree to the terms:</legend>
 		<input type="checkbox" name="checkbox-1" id="checkbox-1" class="should-be-native" />
