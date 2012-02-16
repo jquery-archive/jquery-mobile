@@ -165,6 +165,9 @@ zip: init css js
 # -------------------------------------------------
 # NOTE the clean (which removes previous build output) has been removed to prevent a gap in service
 build_latest: css docs js zip
+	# ... Copy over the lib js, avoid the compiled stuff, to get the defines for tests/unit/*
+	@@ # TODO centralize list of built files
+	@@find js -name "*.js" -not -name "*.docs.js" -not -name "*.mobile.js"  | xargs -L1 -I FILENAME cp FILENAME ${OUTPUT}/demos/js/
 
 # Push the latest git version to the CDN. This is done on a post commit hook
 deploy_latest:
@@ -174,9 +177,6 @@ deploy_latest:
 
 # TODO target name preserved to avoid issues during refactor, latest -> deploy_latest
 latest: build_latest deploy_latest
-	# ... Copy over the lib js, avoid the compiled stuff, to get the defines for tests/unit/*
-	@@ # TODO centralize list of built files
-	@@find js -name "*.js" -not \( -name "*.docs.js"  -name "*.mobile.js" \)  | xargs -L1 -I FILENAME cp FILENAME ${OUTPUT}/demos/js/
 
 # Build the nightly backups. This is done on a server cronjob
 nightlies: css js docs zip
