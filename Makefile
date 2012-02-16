@@ -94,14 +94,11 @@ docs: init
 	# ... Prepend versioned license to jquery.mobile.docs.js
 	@@cat tmp/demos/LICENSE-INFO.txt | cat - tmp/demos/js/jquery.mobile.docs.js > tmp/demos/js/jquery.mobile.docs.js.tmp
 	@@cat tmp/demos/js/jquery.mobile.docs.js.tmp | ${SED_VER_API} > tmp/demos/js/jquery.mobile.docs.js
-	# ... Fix __version__ in core for tests/unit/
-	@@sed -i${SED_INPLACE_EXT} -e ${SED_VER_REPLACE} tmp/demos/js/jquery.mobile.core.js
-	@@rm tmp/demos/js/jquery.mobile.core.js${SED_INPLACE_EXT}
 	# ... Prepend versioned license to jquery.mobile.css
 	@@cat tmp/demos/LICENSE-INFO.txt | cat - tmp/demos/css/themes/default/${NAME}.css > tmp/demos/css/themes/default/${NAME}.css.tmp
 	@@mv tmp/demos/css/themes/default/${NAME}.css.tmp tmp/demos/css/themes/default/${NAME}.css
 	# ... replace "js/" with "js/jquery.mobile.docs.js"
-	@@# NOTE the deletion here is required by gnu/bsd sed differences
+	@@ # NOTE the deletion here is required by gnu/bsd sed differences
 	@@find tmp/demos -name "*.html" -exec sed -i${SED_INPLACE_EXT} -e 's@js/"@js/jquery.mobile.docs.js"@' {} \;
 	@@find tmp/demos -name "*${SED_INPLACE_EXT}" -exec rm {} \;
 	# ... Move and zip up the the whole folder
@@ -169,14 +166,17 @@ zip: init css js
 # NOTE the clean (which removes previous build output) has been removed to prevent a gap in service
 build_latest: css docs js zip
 
+# Push the latest git version to the CDN. This is done on a post commit hook
 deploy_latest:
 	# Time to put these on the CDN
 	@@scp -qr ${OUTPUT}/* jqadmin@code.origin.jquery.com:/var/www/html/code.jquery.com/mobile/latest/
 	# -------------------------------------------------
 
-# Push the latest git version to the CDN. This is done on a post commit hook
 # TODO target name preserved to avoid issues during refactor, latest -> deploy_latest
 latest: build_latest deploy_latest
+	# ... Copy over the lib js, avoid the compiled stuff, to get the defines for tests/unit/*
+	@@ # TODO centralize list of built files
+	@@find js -name "*.js" -not \( -name "*.docs.js"  -name "*.mobile.js" \)  | xargs -L1 -I FILENAME cp FILENAME ${OUTPUT}/demos/js/
 
 # Build the nightly backups. This is done on a server cronjob
 nightlies: css js docs zip
@@ -197,7 +197,7 @@ deploy: init css js docs zip
 	@@mv ${OUTPUT}/demos tmp/${VER_OFFICIAL}
 	# Create the Demos/Docs/Tests/Tools for jQueryMobile.com
 	# ... By first replacing the paths
-	# TODO update jQuery Version replacement on deploy
+	@@ # TODO update jQuery Version replacement on deploy
 	@@find tmp/${VER_OFFICIAL} -type f \
 		\( -name '*.html' -o -name '*.php' \) \
 		-exec perl -pi -e \
