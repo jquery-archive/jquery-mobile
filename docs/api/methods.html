@@ -164,14 +164,24 @@ $.mobile.loadPage( "searchresults.php", {
 			
 			
 			
-			<dt><code>$.mobile.showPageLoadingMsg</code> (<em></em>)</dt>
+			<dt><code>$.mobile.showPageLoadingMsg</code> (<em>method</em>)</dt>
 			<dd>Show the page loading message, which is configurable via $.mobile.loadingMessage.</dd>
-			
-			<dd>Example:
+			<dd>
+				<dl>
+					<dt><code>&#183;</code> Arguments</dt>
+					<dd><code>theme</code> (<em>string</em>, default: "a") The theme swatch for the message.</dd>
+					<dd><code>msgText</code> (<em>string</em>, default: "loading") The text of the message.</dd>
+					<dd><code>textonly</code> (<em>boolean</em>, default: false) If true, the "spinner" image will be hidden when the message is shown.</dd>
+				</dl>
+			</dd>
+			<dd>Examples:
 			<pre>
 			<code>
 <strong>//cue the page loader</strong> 			
-$.mobile.showPageLoadingMsg();	
+$.mobile.showPageLoadingMsg();
+
+<strong>//use theme swatch "b", a custom message, and no spinner</strong> 			
+$.mobile.showPageLoadingMsg("b", "This is only a test", true);
 			</code>
 			</pre>
 			
@@ -180,13 +190,13 @@ $.mobile.showPageLoadingMsg();
 			
 			
 			
-			<dt><code>$.mobile.hidePageLoadingMsg</code> (<em></em>)</dt>
+			<dt><code>$.mobile.hidePageLoadingMsg</code> (<em>method</em>)</dt>
 			<dd>Hide the page loading message, which is configurable via $.mobile.loadingMessage.</dd>
 			
 			<dd>Example:
 			<pre>
 			<code>
-<strong>//cue the page loader</strong> 			
+<strong>//hide the page loader</strong> 			
 $.mobile.hidePageLoadingMsg();	
 			</code>
 			</pre>
