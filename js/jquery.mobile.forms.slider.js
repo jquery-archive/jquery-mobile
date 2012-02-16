@@ -58,7 +58,13 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			handle = $( domHandle ),
 			domSlider = document.createElement('div'),
 			slider = $( domSlider ),
-			valuebg = control.jqmData("highlight") && cType != "select" ? $( "<div class='ui-slider-bg ui-btn-active ui-btn-corner-all'></div>" ).prependTo( slider ) : false,
+
+			valuebg = control.jqmData("highlight") && cType != "select" ? (function() {
+				var bg = document.createElement('div');
+				bg.className = 'ui-slider-bg ui-btn-active ui-btn-corner-all';
+				$( bg ).prependTo( slider );
+			})() : false,
+
 			options;
 
 
