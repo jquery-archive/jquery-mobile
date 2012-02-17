@@ -270,6 +270,11 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 		return $( "<div/>" ).text( $(this).text() ).html();
 	};
 
+	// fluent helper function for the mobile namespaced equivalent
+	$.fn.jqmEnhanceable = function() {
+		return $.mobile.enhanceable( this );
+	};
+
 	// Monkey-patching Sizzle to filter the :jqmData selector
 	var oldFind = $.find,
 		jqmDataRE = /:jqmData\(([^)]*)\)/g;

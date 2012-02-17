@@ -167,7 +167,9 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 		//auto self-init widgets for those widgets that have a soft dependency on others
 		if ( $.fn.controlgroup ) {
 			$( document ).bind( "pagecreate create", function( e ){
-				$( ":jqmData(role='controlgroup')", e.target ).controlgroup({ excludeInvisible: false });
+				$( ":jqmData(role='controlgroup')", e.target )
+					.jqmEnhanceable()
+					.controlgroup({ excludeInvisible: false });
 			});
 		}
 

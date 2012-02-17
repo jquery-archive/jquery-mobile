@@ -130,12 +130,14 @@
 
 		$.mobile.ignoreContentEnabled = true;
 
-		$unenhancedFieldSet.controlgroup();
+		// attempt to enhance the controlgroup
+		$unenhancedFieldSet.parent().trigger("create");
 
 		same( $unenhancedFieldSet.length, 1, "the fieldset test fixtures exist" );
 		ok( !$unenhancedFieldSet.is(".ui-controlgroup"), "there is no control group" );
 
-		$enhancedFieldSet.controlgroup();
+		// attempt to enhance the controlgroup
+		$enhancedFieldSet.parent().trigger("create");
 
 		same( $enhancedFieldSet.length, 1, "the fieldset test fixtures exist" );
 		ok( $enhancedFieldSet.is(".ui-controlgroup"), "there is a control group" );
