@@ -62,18 +62,4 @@
 		ok( $mini.is('.ui-mini'), "Original element has data attribute, enhanced version recieves .ui-mini." );
 		ok( $minicontrol.is('.ui-mini'), "Controlgroup has data attribute and recieves .ui-mini.");
 	});
-
-	test( "buttonMarkup should discard elements in ignored containers", function() {
-		var $enhanced = $("#enhanced-button"), $ignored = $("#ignored");
-
-		$.mobile.ignoreContentEnabled = true;
-
-		$enhanced.buttonMarkup();
-		ok( $enhanced.is( ".ui-btn" ), "normal link is enhanced" );
-
-		$ignored.buttonMarkup();
-		ok( !$ignored.is( ".ui-btn" ), "ignored is left" );
-
-		$.mobile.ignoreContentEnabled = false;
-	});
 })(jQuery);

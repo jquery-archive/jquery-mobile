@@ -12,8 +12,6 @@ $.fn.buttonMarkup = function( options ) {
 	        return !self.eq( i ).hasClass( "ui-btn" );
 	    });
 
-	$workingSet = $.mobile.enhanceable( $workingSet );
-
 	// Enforce options to be of type string
 	options = ( options && ( $.type( options ) == "object" ) )? options : {};
 	for ( var i = 0; i < $workingSet.length; i++ ) {
