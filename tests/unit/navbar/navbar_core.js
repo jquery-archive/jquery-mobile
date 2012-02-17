@@ -15,4 +15,17 @@
 		link.click();
 		ok( !link.hasClass($.mobile.activeBtnClass), "link doesn't have active button class" );
 	});
+
+	test( "grids inside an ignored container do not enhance", function() {
+		var $ignored = $( "#ignored-grid" ), $enhanced = $( "#enhanced-grid" );
+
+		$.mobile.ignoreContentEnabled = true;
+
+		$("#foo").trigger( "create" );
+
+		same( $ignored.attr( "class" ), undefined, "ignored list doesn't have the grid theme" );
+		same( $enhanced.attr( "class" ).indexOf("ui-grid"), 0, "enhanced list has the grid theme" );
+
+		$.mobile.ignoreContentEnabled = false;
+	});
 })(jQuery);
