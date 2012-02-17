@@ -19,8 +19,11 @@ $( document ).delegate( ":jqmData(role='page'), :jqmData(role='dialog')", "pagec
 		o = $page.data( "page" ).options,
 		pageRole = $page.jqmData( "role" ),
 		pageTheme = o.theme;
-	
-	$( ":jqmData(role='header'), :jqmData(role='footer'), :jqmData(role='content')", this ).each(function() {
+
+	$( ":jqmData(role='header'), :jqmData(role='footer'), :jqmData(role='content')", this )
+		.jqmEnhanceable()
+		.each(function() {
+
 		var $this = $( this ),
 			role = $this.jqmData( "role" ),
 			theme = $this.jqmData( "theme" ),
