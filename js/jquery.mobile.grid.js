@@ -2,12 +2,14 @@
 //>>description: Applies classes for grid styling.
 //>>label: CSS Grid Tool
 
-define( [ "jquery" ], function( $ ) {
+define( [ "jquery", "./jquery.mobile.core" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 $.fn.grid = function( options ) {
-	return this.each(function() {
+	var $workingSet = $.mobile.enhanceable( this );
+
+	return $workingSet.each(function() {
 
 		var $this = $( this ),
 			o = $.extend({
