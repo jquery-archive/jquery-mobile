@@ -23,7 +23,8 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 		$navbar.addClass( "ui-navbar" )
 			.attr( "role","navigation" )
 			.find( "ul" )
-				.grid({ grid: this.options.grid });
+			.jqmEnhanceable()
+			.grid({ grid: this.options.grid });
 
 		if ( !iconpos ) {
 			$navbar.addClass( "ui-navbar-noicons" );
@@ -46,7 +47,6 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 		$navbar.closest( ".ui-page" ).bind( "pagebeforeshow", function() {
 			$navbtns.filter( ".ui-state-persist" ).addClass( $.mobile.activeBtnClass );
 		});
-
 	}
 });
 
