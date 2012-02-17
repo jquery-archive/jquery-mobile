@@ -47,9 +47,7 @@ $.widget( "mobile.widget", {
 		// if ignoreContentEnabled is set to true the framework should
 		// only enhance the selected elements when they do NOT have a
 		// parent with the data-namespace-ignore attribute
-		if ( $.mobile.ignoreContentEnabled ) {
-			$widgetElements = $.mobile.enhanceable( $widgetElements );
-		}
+		$widgetElements = $.mobile.enhanceable( $widgetElements );
 
 		if ( useKeepNative && $widgetElements.length ) {
 			// TODO remove dependency on the page widget for the keepNative.

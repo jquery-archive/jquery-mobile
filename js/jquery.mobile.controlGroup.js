@@ -10,9 +10,7 @@ $.fn.controlgroup = function( options ) {
 	var $workingSet = this;
 
 	// trim the working set when ignoring content is switched on
-	if( $.mobile.ignoreContentEnabled ){
-		$workingSet = $.mobile.enhanceable( $workingSet );
-	}
+	$workingSet = $.mobile.enhanceable( $workingSet );
 
 	function flipClasses( els, flCorners  ) {
 		els.removeClass( "ui-btn-corner-all ui-shadow" )

@@ -12,10 +12,7 @@ $.fn.buttonMarkup = function( options ) {
 	        return !self.eq( i ).hasClass( "ui-btn" );
 	    });
 
-	// trim the working set when ignoring content is switched on
-	if( $.mobile.ignoreContentEnabled ){
-		$workingSet = $.mobile.enhanceable( $workingSet );
-	}
+	$workingSet = $.mobile.enhanceable( $workingSet );
 
 	// Enforce options to be of type string
 	options = ( options && ( $.type( options ) == "object" ) )? options : {};
@@ -118,7 +115,7 @@ $.fn.buttonMarkup = function( options ) {
 		if (buttonElements)
 			el.removeClass((buttonElements.bcls || ""));
 		el.removeClass( "ui-link" ).addClass( buttonClass );
-				
+
 		buttonInner.className = innerClass;
 
 		buttonText.className = textClass;
