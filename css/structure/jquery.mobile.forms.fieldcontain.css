@@ -1,15 +1,11 @@
 .ui-field-contain, fieldset.ui-field-contain { padding: .8em 0; margin: 0; border-width: 0 0 1px 0; overflow: visible; }
 .ui-field-contain:first-child { border-top-width: 0; }
-.ui-header .ui-field-contain,
-.ui-footer .ui-field-contain {
-	width: 25%;
-}
 .ui-header .ui-field-contain-left,
 .ui-header .ui-field-contain-right {
 	position: absolute;
 	top: 0;
+	width: 25%;
 }
-
 .ui-header .ui-field-contain-left {
 	left: 1em;
 }
