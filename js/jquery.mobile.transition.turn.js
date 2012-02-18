@@ -13,7 +13,7 @@ define( [ "jquery", "./jquery.mobile.transition" ], function( $ ) {
 
 $.mobile.transitionFallbacks.turn = "fade";
 
-})( jQuery, this );
+})( jQuery, window );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
 //>>excludeEnd("jqmBuildExclude");
