@@ -1,4 +1,3 @@
-
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Page change transition core
 //>>label: Transition Core
@@ -84,7 +83,7 @@ $.mobile.transitionHandlers = {
 
 $.mobile.transitionFallbacks = {};
 
-})( jQuery, this );
+})( jQuery, window );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
 //>>excludeEnd("jqmBuildExclude");
