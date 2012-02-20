@@ -382,4 +382,4 @@
     return self;
   })();
   
-})(jQuery,window);
+})( jQuery, window );
