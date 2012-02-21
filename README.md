@@ -85,7 +85,7 @@ And in your browser visit [localhost:8000](http://localhost:8000/tests/unit/core
 
     <script data-main="js/jquery.mobile.docs" src="external/requirejs/require.js"></script>
 
-will allow you to load modules asynchornously without php.
+will allow you to load modules asynchornously without php. Please not that the example above assumes it's inclusion in a page at the root of the directory in which the simple http server was run.
 
 AMD Support in Development
 ==========================
