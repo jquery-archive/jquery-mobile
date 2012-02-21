@@ -81,7 +81,11 @@ Alternatively, with the addition of async loading, you can use the python simple
 
     $ python -m SimpleHTTPServer 8000
 
-And in your browser visit [localhost:8000](http://localhost:8000).
+And in your browser visit [localhost:8000](http://localhost:8000/tests/unit/core/). NOTE: The docs will not load as they are dependent on the "/js/" includes which require php. For other development work such as unit tests and custom test pages using
+
+    <script data-main="js/jquery.mobile.docs" src="external/requirejs/require.js"></script>
+
+will allow you to load modules asynchornously without php.
 
 AMD Support in Development
 ==========================
