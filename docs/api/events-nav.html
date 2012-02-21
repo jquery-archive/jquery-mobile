@@ -25,8 +25,75 @@
 	<div data-role="content">
 		<div class="content-primary">
 		
-		<h2>AJAX Navigation Events</h2>
-		<p>The AJAX navigation system has a full set of events at each stage of the process that can be tapped into to take full ctrol of the page loading, enhancement and transition process. Here is an overview of the even chronology:</p>
+		<h2>Framework, Page, and Navigation Events</h2>
+		<p>jQuery Mobile's widget and navigation system has a full set of events at each stage of the page load and page change process that can be tapped into to take full control. This page will highlight the most commonly used events and what they do, and also provide chronologies of when these events are triggered during load and transitions.</p>
+		
+		
+		<h3>Framework events</h3>
+		
+		<p>When jQuery Mobile initializes, it triggers an event on the <code>document</code> that is specifically designed for overriding framework and plugin defaults. That event is called <code>mobileinit</code>, and by binding to it, you can ensure that any global or plugin configuration options are overridden to any value you'd like before they are used by the framework's initial execution. </p>
+		
+
+			<pre>
+				<code>
+$(document).bind("mobileinit", function(){
+  //apply overrides here
+});
+				</code>
+			</pre>
+		
+		<p>The tricky aspect of mobileinit is that you need to bind to it before jQuery Mobile executes, so a typical mobileinit workflow would occur in a script that is referenced after jQuery itself, but before jQuery Mobile.</p>
+		
+		<p>It should be noted that while you can bind to other events from within a <code>mobileinit</code> callback, it is likely that you'll get undesirable results in doing so. This is because many events, such as the page events below, are intended for external developers to use <em>after</em> jQuery Mobile's plugins have loaded.</p>
+		
+		<h3>Page creation events</h3>
+		
+		<p>In a jQuery Mobile application, each  view is known as a page. Pages generally begin as a regular HTML element with a <code>data-role="page"</code> attribute, and the framework's page widget enhances that element into a jQuery Mobile page control. In the process of enhancing that page, the widget dispatches several events that allow you to access that page and its child elements at different stages of creation.</p>
+		
+			<p>These events are:</p>
+		
+		<dl>
+				<dt>pagecreate</dt>
+				
+				<dd>This event is triggered on a page when it is first initialized by the page plugin. Pagecreate is the most useful event for progressively enhancing a page's markup when it first loads, and because of this, many of jQuery Mobile's standard widgets bind to pagecreate to enhance markup within pages as well! If you bind to pagecreate in any script that is referenced after the jQuery Mobile framework, any native jQuery Mobile widgets in that page will be enhanced before your event callback executes. In other words, you'll be dealing with enhanced jQuery Mobile components.</dd>
+				
+				<dt>pagebeforecreate</dt>
+				
+				<dd>This event is triggered on a page element just before it is created by the page plugin. While the pagecreate event generally allows you to work with a page <strong>after</strong> its markup has been enhanced by jQuery Mobile, pagebeforecreate gives you access when the markup has not yet been enhanced. Pagebeforecreate is useful for modifying markup before jQuery Mobile's widgets </dd>
+				
+				<dt>pageinit</dt>
+				
+				<dd>Pageinit is very similar to pagecreate, except that none of jQuery Mobile's standard widgets bind to it, and it is guaranteed to execute after all bound pagecreate callbacks have finished. If you need to bind to a page creation-time event via a script that is referenced before jQuery Mobile, binding to pageinit will ensure that you deal with enhanced page controls (whereas pagecreate will not, in that specific case.)</dd>
+				
+				
+		</dl>
+		
+		
+		<h3>Page navigation events</h3>
+		<p>After pages are created, they are often shown and hidden one or many times throughout the use of a jQuery Mobile app. For A-grade browsers with Ajax navigation support, the jQM navigation model manages these page behaviors and dispatches useful events at different steps in the process of showing, hiding, and changing.</p>
+		
+		<dl> 
+			
+			<dt>pagebeforeshow</dt>
+			<dd>description here</dd>
+			
+		
+			<dt>pageshow</dt>
+			<dd>description here</dd>
+			
+			<dt>pagebeforehide</dt>
+			<dd>description here</dd>
+			
+			
+			<dt>pagehide</dt>
+			<dd>description here</dd>
+			
+		<dl>
+		
+		<h3>Chronology</h3>
+		<p>Here is an overview of the event chronology for a page change</p>
+		
+		
 		<style>
 		.nav-flow ul,  .nav-flow li { margin:0; list-style-type: none; text-align:center; line-height:150%; }
 		.nav-flow h3 { margin:0; }
