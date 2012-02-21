@@ -127,7 +127,16 @@
 					<td>swatch letter (a-z) - Sets all collapsibles in set</td>
 				</tr>
 			</table>
-			
+
+			<h2><a href="../pages/page-anatomy.html">Content</a></h2>
+			<p>Container with <code>data-role="content"</code></p>
+			<table>
+				<tr>
+					<th>data-theme</th>
+					<td>swatch letter (a-z)</td>
+				</tr>
+			</table>
+
 			<h2><a href="../pages/page-dialogs.html">Dialog</a></h2>
 			<p>Page with <code>data-role="page"</code> linked to with <code>data-rel="dialog"</code> on the anchor.</p>
 			<table>
@@ -157,15 +166,15 @@
 				</tr>
 			</table>
 
-			<h2><a href="../pages/page-anatomy.html">Content</a></h2>
-			<p>Container with <code>data-role="content"</code></p>
+			<h2><a href="globalconfig.html">Enhancement</a></h2>
+			<p>Container with <code>data-enhance="false"</code></p>
 			<table>
 				<tr>
-					<th>data-theme</th>
-					<td>swatch letter (a-z)</td>
+					<th>data-enhance</th>
+					<td>true | false</td>
 				</tr>
 			</table>
-
+			<p>Any DOM elements inside a <code>data-enhance="false"</code> container, save for <code>data-role="page|dialog"</code> elements, will be ignored during initial enhancement and subseqent <code>create</code> events provided that the <code>$.mobile.ignoreContentEnabled</code> flag is set prior to the enhancement (eg in a <code>mobileinit</code> binding).</p>
 
 			<h2><a href="../forms/docs-forms.html">Field container</a></h2>
 			<p>Container with <code>data-role="fieldcontain"</code> wrapped around label/form element pair</p>
