@@ -7,8 +7,7 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.vmouse" ], function
 ( function( $, undefined ) {
 
 $.fn.buttonMarkup = function( options ) {
-	var self = this,
-	    $workingSet = $.mobile.enhanceable( this );
+	var $workingSet = this;
 
 	// Enforce options to be of type string
 	options = ( options && ( $.type( options ) == "object" ) )? options : {};
