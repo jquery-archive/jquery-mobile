@@ -67,13 +67,24 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 					// text visibility from argument takes priority
 					textVisible = textonly || $.mobile.loadingMessageTextVisible;
 					
-
-				$loader
-					.attr( "class", loaderClass + " ui-corner-all ui-body-" + ( theme || "a" ) + " ui-loader-" + ( textVisible ? "verbose" : "default" ) + ( textonly ? " ui-loader-textonly" : "" ) )
-					.find( "h1" )
-						.text( msgText || $.mobile.loadingMessage )
-						.end()
-					.appendTo( $.mobile.pageContainer );
+				// tcaddy fork customization -- optionally show HTML instead of text
+				if ( (typeof($.mobile.loadingMessageHTML)!=='undefined') && $.mobile.loadingMessageHTML ) {
+					$loader
+						.attr( "class", loaderClass + " ui-corner-all ui-body-" + ( theme || "a" ) + " ui-loader-" + ( textVisible ? "verbose" : "default" ) + ( textonly ? " ui-loader-textonly" : "" ) )
+						.find( "h1" )
+							.html( msgText || $.mobile.loadingMessage )
+							.end()
+						.appendTo( $.mobile.pageContainer );
+				} else {
+					// this is the default jQuery Mobile way of doing it
+					$loader
+						.attr( "class", loaderClass + " ui-corner-all ui-body-" + ( theme || "a" ) + " ui-loader-" + ( textVisible ? "verbose" : "default" ) + ( textonly ? " ui-loader-textonly" : "" ) )
+						.find( "h1" )
+							.text( msgText || $.mobile.loadingMessage )
+							.end()
+						.appendTo( $.mobile.pageContainer );
+				}
+				
 					
 				checkLoaderPosition();
 				$window.bind( "scroll", checkLoaderPosition );
