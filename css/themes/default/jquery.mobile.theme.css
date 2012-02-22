@@ -845,8 +845,13 @@ a.ui-link-inherit {
 }
 .ui-disabled,
 .ui-disabled a {
+	cursor: default !important;
 	pointer-events: none;
-	cursor: default;
+}
+.ui-disabled .ui-btn-text {
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(opacity=30)";
+	filter: alpha(opacity=30);
+	zoom: 1;
 }
 
 /* Icons
