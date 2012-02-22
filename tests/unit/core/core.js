@@ -172,4 +172,22 @@
 		$( "#parent-dialog" ).data( "page", { foo: "bar" } );
 		same( $.mobile.closestPageData(dialogChild).foo, "bar" );
 	});
+
+	test( "test that $.fn.jqmHijackable works", function() {
+		var $disabledByParent = $( "#unhijaced-link-by-parent" ),
+			$disabledAttr = $( "#unhijaced-link-by-attr" );
+
+		$.mobile.ignoreContentEnabled = true;
+
+		same( $( "#hijacked-link" ).jqmHijackable().length, 1,
+					"a link without any association to data-ajax=false should be included");
+
+		same( $( "#unhijacked-link-by-parent" ).jqmHijackable().length, 0,
+					"a link with a data-ajax=false parent should be excluded");
+
+		same( $( "#unhijacked-link-by-attr" ).jqmHijackable().length, 0,
+					"a link with data-ajax=false should be excluded");
+
+		$.mobile.ignoreContentEnabled = false;
+	});
 })(jQuery);
