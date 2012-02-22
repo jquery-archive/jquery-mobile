@@ -159,7 +159,9 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 		this._getInputSet().each(function() {
 			var $this = $(this);
 
-			if ( $this.is( ":checked" ) || self.inputtype === "checkbox" ) {
+			// NOTE getAttribute is used here to deal with an issue with the :checked
+			//      selector. see #3597
+			if ( this.getAttribute( "checked" ) || self.inputtype === "checkbox" ) {
 				$this.trigger( "change" );
 			}
 		})

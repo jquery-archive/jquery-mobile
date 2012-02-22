@@ -113,7 +113,6 @@
 				singleActiveAndChecked();
 
 				start();
-				console.log( "ignore" );
 			}
 		], 500);
 
@@ -130,7 +129,7 @@
 	test( "checkboxradio elements in the keepNative set shouldn't be enhanced", function() {
 		ok( !$("input.should-be-native").parent().is("div.ui-checkbox") );
 	});
-	
+
 	test( "Elements with “data-mini='true'” should have “ui-mini” class attached to enhanced element.", function(){
 		var full = document.getElementById("radio-full"),
 			$fulllbl = $('[for="radio-full"]'),
@@ -158,6 +157,27 @@
 
 			function() {
 				ok(clicked, "click was fired on input");
+				start();
+			}
+		], 2000);
+	});
+
+	asyncTest( "clicking the label triggers a change on the element", function() {
+		var changed = false;
+
+		expect( 1 );
+
+		$( "#checkbox-change-triggered" ).one('change', function() {
+			changed = true;
+		});
+
+		$.testHelper.sequence([
+			function() {
+				$( "[for='checkbox-change-triggered']" ).click();
+			},
+
+			function() {
+				ok(changed, "change was fired on input");
 				start();
 			}
 		], 2000);
