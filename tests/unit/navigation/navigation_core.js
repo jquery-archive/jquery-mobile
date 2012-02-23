@@ -1142,4 +1142,75 @@
 			}
 		]);
 	});
+
+	asyncTest( "test that clicks are ignored where data-ajax='false' parents exist", function() {
+		var $disabledByParent = $( "#unhijacked-link-by-parent" ),
+			$disabledByAttr = $( "#unhijacked-link-by-attr" );
+
+		$.mobile.ignoreContentEnabled = true;
+
+		$.testHelper.pageSequence([
+			function() {
+				$.mobile.changePage( "#link-hijacking-test" );
+			},
+
+			function() {
+				$( "#hijacked-link" ).trigger( 'click' );
+			},
+
+			function() {
+				ok( $.mobile.activePage.is("#link-hijacking-destination"), "nav works for links to hijacking destination" );
+				window.history.back();
+			},
+
+			function() {
+				$disabledByParent.trigger( 'click' );
+			},
+
+			function() {
+				ok( $.mobile.activePage.is("#link-hijacking-test"), "click should be ignored keeping the active mobile page the same as before" );
+			},
+
+			function() {
+				$disabledByAttr.trigger( 'click' );
+			},
+
+			function() {
+				ok( $.mobile.activePage.is("#link-hijacking-test"), "click should be ignored keeping the active mobile page the same as before" );
+
+				$.mobile.ignoreContentEnabled = false;
+				start();
+			}
+		]);
+	});
+
+	asyncTest( "test that *vclicks* are ignored where data-ajax='false' parents exist", function() {
+		var $disabledByParent = $( "#unhijacked-link-by-parent" ),
+			$disabledByAttr = $( "#unhijacked-link-by-attr" ),
+			$hijacked = $( "#hijacked-link" );
+
+		$.mobile.ignoreContentEnabled = true;
+
+		$.testHelper.pageSequence([
+			function() {
+				$.mobile.changePage( "#link-hijacking-test" );
+			},
+
+			function() {
+				// force the active button class
+				$hijacked.addClass( $.mobile.activeBtnClass );
+				$hijacked.trigger( 'vclick' );
+				ok( $hijacked.hasClass( $.mobile.activeBtnClass ), "active btn class is added to the link per normal" );
+
+				$disabledByParent.trigger( 'vclick' );
+				ok( !$disabledByParent.hasClass( $.mobile.activeBtnClass ), "active button class is never added to the link" );
+
+				$disabledByAttr.trigger( 'vclick' );
+				ok( !$disabledByAttr.hasClass( $.mobile.activeBtnClass ), "active button class is never added to the link" );
+
+				$.mobile.ignoreContentEnabled = false;
+				start();
+			}
+		]);
+	});
 })(jQuery);

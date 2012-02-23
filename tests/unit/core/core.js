@@ -174,9 +174,6 @@
 	});
 
 	test( "test that $.fn.jqmHijackable works", function() {
-		var $disabledByParent = $( "#unhijaced-link-by-parent" ),
-			$disabledAttr = $( "#unhijaced-link-by-attr" );
-
 		$.mobile.ignoreContentEnabled = true;
 
 		same( $( "#hijacked-link" ).jqmHijackable().length, 1,

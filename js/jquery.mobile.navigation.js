@@ -386,7 +386,7 @@ define( [
 			autofocus.focus();
 			return;
 		}
-		
+
 		if( pageTitle.length ) {
 			pageTitle.focus();
 		}
@@ -1156,10 +1156,15 @@ define( [
 		//bind to form submit events, handle with Ajax
 		$( document ).delegate( "form", "submit", function( event ) {
 			var $this = $( this );
+
 			if( !$.mobile.ajaxEnabled ||
-				$this.is( ":jqmData(ajax='false')" ) ) {
-					return;
-				}
+					// test that the form is, itself, ajax false
+					$this.is(":jqmData(ajax='false')") ||
+					// test that $.mobile.ignoreContentEnabled is set and
+					// the form or one of it's parents is ajax=false
+					!$this.jqmHijackable().length ) {
+				return;
+			}
 
 			var type = $this.attr( "method" ),
 				target = $this.attr( "target" ),
@@ -1205,12 +1210,20 @@ define( [
 		//add active state on vclick
 		$( document ).bind( "vclick", function( event ) {
 			// if this isn't a left click we don't care. Its important to note
-			// that when the virtual event is generated it will create
-			if ( event.which > 1 || !$.mobile.linkBindingEnabled ){
+			// that when the virtual event is generated it will create the which attr
+			if ( event.which > 1 || !$.mobile.linkBindingEnabled ) {
 				return;
 			}
 
 			var link = findClosestLink( event.target );
+
+			// split from the previous return logic to avoid find closest where possible
+			// TODO teach $.mobile.hijackable to operate on raw dom elements so the link wrapping
+			// can be avoided
+			if ( !$(link).jqmHijackable().length ) {
+				return;
+			}
+
 			if ( link ) {
 				if ( path.parseUrl( link.getAttribute( "href" ) || "#" ).hash !== "#" ) {
 					removeActiveLinkClass( true );
@@ -1232,19 +1245,20 @@ define( [
 				return;
 			}
 
-			var link = findClosestLink( event.target );
+			var link = findClosestLink( event.target ), $link = $( link ), httpCleanup;
 
 			// If there is no link associated with the click or its not a left
 			// click we want to ignore the click
-			if ( !link || event.which > 1) {
+			// TODO teach $.mobile.hijackable to operate on raw dom elements so the link wrapping
+			// can be avoided
+			if ( !link || event.which > 1 || !$link.jqmHijackable().length ) {
 				return;
 			}
 
-			var $link = $( link ),
-				//remove active link class if external (then it won't be there if you come back)
-				httpCleanup = function(){
-					window.setTimeout( function() { removeActiveLinkClass( true ); }, 200 );
-				};
+			//remove active link class if external (then it won't be there if you come back)
+			httpCleanup = function(){
+				window.setTimeout( function() { removeActiveLinkClass( true ); }, 200 );
+			};
 
 			// If there's data cached for the real href value, set the link's href back to it again. This pairs with an address bar workaround from the vclick handler
 			if( $link.jqmData( "href" ) ){

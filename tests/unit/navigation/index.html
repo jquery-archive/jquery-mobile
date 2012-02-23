@@ -17,9 +17,7 @@
 	<link rel="stylesheet" href="../../../external/qunit.css"/>
 	<script src="../../../external/qunit.js"></script>
 
-	<script type="text/javascript" src="navigation_helpers.js"></script>
 	<script type="text/javascript" src="navigation_core.js"></script>
-	<script type="text/javascript" src="navigation_paths.js"></script>
 	<script src="../swarminject.js"></script>
 </head>
 <body>
@@ -282,6 +280,21 @@
      data-nstest-rel="dialog">
     static link
   </a>
+</div>
+
+<div id="link-hijacking-test" data-nstest-role="page">
+	<div id="hijackable">
+		<a href="#link-hijacking-destination" id="hijacked-link"></a>
+		<a href="#link-hijacking-destination" id="unhijacked-link-by-attr" data-nstest-ajax="false"></a>
+	</div>
+
+	<div id="not-hijackable" data-nstest-ajax="false">
+		<a href="#link-hijacking-destination" id="unhijacked-link-by-parent"></a>
+	</div>
+</div>
+
+<div id="link-hijacking-destination" data-nstest-role="page">
+	hello!
 </div>
 </body>
 </html>
