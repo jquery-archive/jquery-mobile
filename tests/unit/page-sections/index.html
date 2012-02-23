@@ -6,7 +6,7 @@
 	<title>jQuery Mobile Page Test Suite</title>
 
 	<script src="../../../external/requirejs/require.js"></script>
-	<script src="../../../js/jquery.js"></script>
+	<script src="../../../js/jquery.tag.inserter.js"></script>
 	<script src="../jquery.setNameSpace.js"></script>
 	<script src="../../../tests/jquery.testHelper.js"></script>
 	<script src="../../../external/qunit.js"></script>
@@ -35,8 +35,8 @@
 </ol>
 
 <div id="qunit-fixture">
-	<div  data-nstest-role="page">
-		<div  data-nstest-role="header">
+	<div data-nstest-role="page">
+		<div data-nstest-role="header">
 			<div>
 				<a href="foo">foo</a>
 			</div>
@@ -59,5 +59,24 @@
 			<a href="foo">foo</a>
 		</div>
 	</div>
+</div>
+
+<div data-nstest-enhance="false">
+	<div data-nstest-role="header" id="ignored-header">
+		<div>
+			<a href="foo">foo</a>
+		</div>
+		<a href="foo">foo</a>
+	</div><!-- /header -->
+</div>
+
+<div>
+	<div data-nstest-role="header" id="enhanced-header">
+		<div>
+			<a href="foo">foo</a>
+		</div>
+		<a href="foo">foo</a>
+	</div><!-- /header -->
+</div>
 </body>
 </html>

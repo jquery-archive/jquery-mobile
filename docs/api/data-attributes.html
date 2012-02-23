@@ -1,22 +1,25 @@
-<!DOCTYPE html> 
-<html class="ui-mobile-rendering"> 
+<!DOCTYPE html>
+<html class="ui-mobile-rendering">
 	<head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<title>jQuery Mobile Docs - Data Attribute Reference</title> 
-	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" /> 
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Docs - Data Attribute Reference</title>
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 
-	<script data-main="../../js/jquery.mobile.docs" src="../../external/requirejs/require.js"></script>
 	<script src="../../js/jquery.js"></script>
-</head> 
-<body> 
+	<script src="../../docs/_assets/js/jqm-docs.js"></script>
+	<script src="../../js/"></script>
+
+</head>
+<body>
 
 <div data-role="page" class="type-interior">
 
 	<div data-role="header" data-theme="f">
 		<h1>Data Attributes</h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
 	</div><!-- /header -->
 
 	<div data-role="content" data-theme="c">
@@ -55,6 +58,10 @@
 					<td>true | <strong>false</strong></td>
 				</tr>
 				<tr>
+					<th>data-mini</th>
+					<td>true | <strong>false</strong> - Compact sized version</td>
+				</tr>
+				<tr>
 					<th>data-shadow</th>
 					<td><strong>true</strong> | false</td>
 				</tr>
@@ -69,6 +76,10 @@
 			<h2><a href="../forms/checkboxes/">Checkbox</a></h2>
 			<p>Pairs of labels and inputs with <code>type="checkbox"</code> are auto-enhanced, no <code>data-role</code> required</p>
 			<table>
+				<tr>
+					<th>data-mini</th>
+					<td>true | <strong>false</strong> - Compact sized version</td>
+				</tr>
 				<tr>
 					<th>data-role</th>
 					<td>none (prevents auto-enhancement to use native control)</td>
@@ -91,6 +102,10 @@
 					<td>swatch letter (a-z)</td>
 				</tr>
 				<tr>
+					<th>data-mini</th>
+					<td>true | <strong>false</strong> - Compact sized version</td>
+				</tr>
+				<tr>
 					<th>data-theme</th>
 					<td>swatch letter (a-z)</td>
 				</tr>
@@ -104,11 +119,24 @@
 					<td>swatch letter (a-z) - Sets all collapsibles in set</td>
 				</tr>
 				<tr>
+					<th>data-mini</th>
+					<td>true | <strong>false</strong> - Compact sized version</td>
+				</tr>
+				<tr>
 					<th>data-theme</th>
 					<td>swatch letter (a-z) - Sets all collapsibles in set</td>
 				</tr>
 			</table>
-			
+
+			<h2><a href="../pages/page-anatomy.html">Content</a></h2>
+			<p>Container with <code>data-role="content"</code></p>
+			<table>
+				<tr>
+					<th>data-theme</th>
+					<td>swatch letter (a-z)</td>
+				</tr>
+			</table>
+
 			<h2><a href="../pages/page-dialogs.html">Dialog</a></h2>
 			<p>Page with <code>data-role="page"</code> linked to with <code>data-rel="dialog"</code> on the anchor.</p>
 			<table>
@@ -138,15 +166,21 @@
 				</tr>
 			</table>
 
-			<h2><a href="../pages/page-anatomy.html">Content</a></h2>
-			<p>Container with <code>data-role="content"</code></p>
+			<h2><a href="globalconfig.html">Enhancement</a></h2>
+			<p>Container with <code>data-enhance="false"</code> or <code>data-ajax="false"</code></p>
 			<table>
 				<tr>
-					<th>data-theme</th>
-					<td>swatch letter (a-z)</td>
+					<th>data-enhance</th>
+					<td><strong>true</strong> | false</td>
+				</tr>
+				<tr>
+					<th>data-ajax</th>
+					<td><strong>true</strong> | false</td>
 				</tr>
 			</table>
+			<p>Any DOM elements inside a <code>data-enhance="false"</code> container, save for <code>data-role="page|dialog"</code> elements, will be ignored during initial enhancement and subsequent <code>create</code> events provided that the <code>$.mobile.ignoreContentEnabled</code> flag is set prior to the enhancement (eg in a <code>mobileinit</code> binding).</p>
 
+			<p>Any link or form elements inside <code>data-enhance="false"</code> containers will be ignored by the framework's navigation functionality when <code>$.mobile.ignoreContentEnabled</code> is set to true.</p>
 
 			<h2><a href="../forms/docs-forms.html">Field container</a></h2>
 			<p>Container with <code>data-role="fieldcontain"</code> wrapped around label/form element pair</p>
@@ -154,6 +188,10 @@
 			<h2><a href="../forms/switch/">Flip toggle switch</a></h2>
 			<p>Select with <code>data-role="slider"</code>, two options only</p>
 			<table>
+				<tr>
+					<th>data-mini</th>
+					<td>true | <strong>false</strong> - Compact sized version</td>
+				</tr>
 				<tr>
 					<th>data-role</th>
 					<td>none (prevents auto-enhancement to use native control)</td>
@@ -351,6 +389,10 @@
 			<p>Pairs of labels and inputs with <code>type="radio"</code> are auto-enhanced, no <code>data-role</code> required</p>
 			<table>
 				<tr>
+					<th>data-mini</th>
+					<td>true | <strong>false</strong> - Compact sized version</td>
+				</tr>
+				<tr>
 					<th>data-role</th>
 					<td>none (prevents auto-enhancement to use native control)</td>
 				</tr>
@@ -376,6 +418,10 @@
 					<td>true | <strong>false</strong></td>
 				</tr>
 				<tr>
+					<th>data-mini</th>
+					<td>true | <strong>false</strong> - Compact sized version</td>
+				</tr>
+				<tr>
 					<th>data-native-menu</th>
 					<td><strong>true</strong> | false</td>
 				</tr>
@@ -394,13 +440,21 @@
 				<tr>
 					<th>data-theme</th>
 					<td>swatch letter (a-z) - Added to the form element</td>
-				</tr>	
+				</tr>
 			</table>
 			<p>Multiple selects can be wrapped in a fieldset with a <code>data-role="controlgroup"</code> attribute for a vertically grouped set. Add the <code>data-type="horizontal"</code> attribute for the selects to sit side-by-side.</p>
 
 			<h2><a href="../forms/slider/">Slider</a></h2>
 			<p>Inputs with <code>type="range"</code> are auto-enhanced, no <code>data-role</code> required</p>
 			<table>
+				<tr>
+					<th>data-highlight</th>
+					<td>true | <strong>false</strong> - Adds an active state fill on track to handle</td>
+				</tr>
+				<tr>
+					<th>data-mini</th>
+					<td>true | <strong>false</strong> - Compact sized version</td>
+				</tr>
 				<tr>
 					<th>data-role</th>
 					<td>none (prevents auto-enhancement to use native control)</td>
@@ -419,6 +473,10 @@
 			<p>Input <code>type="text|number|search|etc."</code> or <code>textarea</code> elements are auto-enhanced, no <code>data-role</code> required</p>
 			<table>
 				<tr>
+					<th>data-mini</th>
+					<td>true | <strong>false</strong> - Compact sized version</td>
+				</tr>
+				<tr>
 					<th>data-role</th>
 					<td>none (prevents auto-enhancement to use native control)</td>
 				</tr>
@@ -428,7 +486,7 @@
 				</tr>
 			</table>
 
-		</div><!--/content -->		
+		</div><!--/content -->
 
 	<div class="content-secondary">
 
@@ -446,7 +504,7 @@
 					<li><a href="../../docs/api/themes.html">Theme framework</a></li>
 				</ul>
 		</div>
-	</div>		
+	</div>
 
 </div><!-- /content -->
 

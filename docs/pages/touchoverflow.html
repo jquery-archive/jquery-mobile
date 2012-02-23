@@ -7,8 +7,10 @@
 	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 
-	<script data-main="../../js/jquery.mobile.docs" src="../../external/requirejs/require.js"></script>
 	<script src="../../js/jquery.js"></script>
+	<script src="../../docs/_assets/js/jqm-docs.js"></script>
+	<script src="../../js/"></script>
+
 </head> 
 <body> 
 
@@ -16,13 +18,20 @@
 
 		<div data-role="header" data-theme="f">
 		<h1>touchOverflow</h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
 	</div><!-- /header -->
 
 	<div data-role="content">
 		<div class="content-primary">		
 			
-			<h2 id="ios5">touchOverflow: Dramatically improved page transitions and true fixed toolbars</h2>
+			<div class="ui-body ui-body-e">		
+					<h2>touchOverflowEnabled: Deprecated in 1.1.0</h2>
+
+					<p>Prior to jQuery Mobile 1.1, true fixed toolbar support was contingent on native browser support for the CSS property <code>overflow-scrolling: touch</code>, which is currently only supported in iOS5. As of version 1.1, jQuery Mobile no longer uses this CSS property at all. We've removed all internal usage of this property in the framework, but we've left it defined globally on the $.mobile object to reduce the risk that its removal will cause trouble with existing applications. This property is flagged for removal, so please update your code to no longer use it. The support test for this property, however, remains defined under <code>$.support</code> and we have no plans to remove that test at this time. </p>
+			</div>
+			
+			<h2 id="ios5">touchOverflow: Improved page transitions and true fixed toolbars</h2>
 			
 			<p>Currently, both the page you're viewing and the one you're navigating to are sitting next to each other in the viewport, which lets us leverage native scrolling for the broadest possible device support. The downside to this approach is that since both pages share the same viewport, when a page transition starts, we must first scroll to the top of the document, then start animating to ensure that the pages are lined up vertically. If you hit the Back button, we need to scroll up, transition, then restore the previous scroll position. Since mobile browsers are pretty slow, these scroll movements can detract from the flow of the experience.</p>
 			

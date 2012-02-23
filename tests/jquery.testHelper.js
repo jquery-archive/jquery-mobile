@@ -14,7 +14,13 @@
 
 			function loadSeq( seq, i ){
 				if( !seq[i] ){
-					QUnit.start();
+					$( document ).ready( function() {
+						var $fixture = $( '#qunit-fixture' );
+						if ( $fixture.length ) {
+							QUnit.config.fixture = $fixture.html();
+						}
+						QUnit.start();
+					});
 					return;
 				}
 
@@ -54,6 +60,14 @@
 		reloadModule: function(libName){
 			var deferred = $.Deferred(),
 				context;
+
+			// where a module loader isn't defined use the old way
+			if( !window.require ) {
+				this.reloadLib( libName );
+				deferred.resolve();
+				return deferred;
+			}
+
 			if(this.reloads[libName] === undefined) {
 				this.reloads[libName] = {
 					count: 0

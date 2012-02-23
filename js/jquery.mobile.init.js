@@ -2,7 +2,8 @@
 //>>description: Applies classes for grid styling.
 //>>label: CSS Grid Tool
 
-define( [ "jquery", "jquery.mobile.core", "jquery.mobile.navigation", "jquery.mobile.navigation.pushstate" ], function( $ ) {
+define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery.mobile.navigation",
+	"./jquery.mobile.navigation.pushstate", "../external/requirejs/depend!./jquery.mobile.hashchange[jquery]" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 ( function( $, window, undefined ) {
 	var	$html = $( "html" ),
@@ -30,7 +31,8 @@ define( [ "jquery", "jquery.mobile.core", "jquery.mobile.navigation", "jquery.mo
 
 	// loading div which appears during Ajax requests
 	// will not appear if $.mobile.loadingMessage is false
-	var $loader = $( "<div class='ui-loader '><span class='ui-icon ui-icon-loading'></span><h1></h1></div>" );
+	var loaderClass = "ui-loader",
+		$loader = $( "<div class='" + loaderClass + "'><span class='ui-icon ui-icon-loading'></span><h1></h1></div>" );
 	
 	// For non-fixed supportin browsers. Position at y center (if scrollTop supported), above the activeBtn (if defined), or just 100px from top
 	function fakeFixLoader(){
@@ -56,14 +58,20 @@ define( [ "jquery", "jquery.mobile.core", "jquery.mobile.navigation", "jquery.mo
 
 	$.extend($.mobile, {
 		// turn on/off page loading message.
-		showPageLoadingMsg: function() {
+		showPageLoadingMsg: function( theme, msgText, textonly ) {
 			$html.addClass( "ui-loading" );
+			
 			if ( $.mobile.loadingMessage ) {
-				var activeBtn = $( "." + $.mobile.activeBtnClass ).first();
+				var activeBtn = $( "." + $.mobile.activeBtnClass ).first(),
+					theme = theme || $.mobile.loadingMessageTheme,
+					// text visibility from argument takes priority
+					textVisible = textonly || $.mobile.loadingMessageTextVisible;
+					
 
 				$loader
+					.attr( "class", loaderClass + " ui-corner-all ui-body-" + ( theme || "a" ) + " ui-loader-" + ( textVisible ? "verbose" : "default" ) + ( textonly ? " ui-loader-textonly" : "" ) )
 					.find( "h1" )
-						.text( $.mobile.loadingMessage )
+						.text( msgText || $.mobile.loadingMessage )
 						.end()
 					.appendTo( $.mobile.pageContainer );
 					
@@ -77,7 +85,7 @@ define( [ "jquery", "jquery.mobile.core", "jquery.mobile.navigation", "jquery.mo
 			
 			if( $.mobile.loadingMessage ){
 				$loader.removeClass( "ui-loader-fakefix" );
-			}	
+			}
 			
 			$( window ).unbind( "scroll", fakeFixLoader );
 		},
@@ -85,15 +93,10 @@ define( [ "jquery", "jquery.mobile.core", "jquery.mobile.navigation", "jquery.mo
 		// find and enhance the pages in the dom and transition to the first page.
 		initializePage: function() {
 			// find present pages
-			var $pages = $( ":jqmData(role='page')" );
-
-			// if no pages are found, create one with body's inner html
-			if ( !$pages.length ) {
-				$pages = $( "body" ).wrapInner( "<div data-" + $.mobile.ns + "role='page'></div>" ).children( 0 );
-			}
+			var $pages = $( ":jqmData(role='page'), :jqmData(role='dialog')" );
 
 			// add dialogs, set data-url attrs
-			$pages.add( ":jqmData(role='dialog')" ).each(function() {
+			$pages.each(function() {
 				var $this = $(this);
 
 				// unless the data url is already set set it to the pathname
@@ -139,6 +142,17 @@ define( [ "jquery", "jquery.mobile.core", "jquery.mobile.navigation", "jquery.mo
 		// it should be 1 in most browsers, but android treats 1 as 0 (for hiding addr bar)
 		// so if it's 1, use 0 from now on
 		$.mobile.defaultHomeScroll = ( !$.support.scrollTop || $(window).scrollTop() === 1 ) ? 0 : 1;
+
+
+		// TODO: Implement a proper registration mechanism with dependency handling in order to not have exceptions like the one below
+		//auto self-init widgets for those widgets that have a soft dependency on others
+		if ( $.fn.controlgroup ) {
+			$( document ).bind( "pagecreate create", function( e ){
+				$( ":jqmData(role='controlgroup')", e.target )
+					.jqmEnhanceable()
+					.controlgroup({ excludeInvisible: false });
+			});
+		}
 
 		//dom-ready inits
 		if( $.mobile.autoInitializePage ){

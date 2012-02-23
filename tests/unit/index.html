@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
 	<link rel="stylesheet" href="../../external/qunit.css" />
-	<script src="../../js/jquery.js"></script>
+	<script src="../../js/jquery.tag.inserter.js"></script>
 	<script src="../../external/qunit.js"></script>
 	<script src="runner.js"></script>
   <style type="text/css">
@@ -34,7 +34,7 @@
     <ol id="qunit-tests">
     </ol>
   </div>
-	<iframe data-src="../../tests/unit/{{testdir}}" name="testFrame" id="testFrame" scrolling="no">
+	<iframe data-src="../../tests/unit/{{testdir}}?jquery={{jquery.version}}" name="testFrame" id="testFrame" scrolling="no">
 	</iframe>
 </body>
 </html>

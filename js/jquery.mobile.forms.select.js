@@ -1,8 +1,9 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Consistent styling for native select menus.
 //>>label: Enhanced Native Selects
+//>>group: forms
 
-define( [ "jquery", "jquery.mobile.core", "jquery.mobile.widget", "jquery.mobile.buttonMarkup" ], function( $ ) {
+define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.widget", "./jquery.mobile.buttonMarkup", "./jquery.mobile.zoom" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -21,7 +22,10 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		hidePlaceholderMenuItems: true,
 		closeText: "Close",
 		nativeMenu: true,
-		initSelector: "select:not(:jqmData(role='slider'))"
+		// This option defaults to true on iOS devices.
+		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
+		initSelector: "select:not(:jqmData(role='slider'))",
+		mini: false
 	},
 
 	_button: function(){
@@ -48,7 +52,20 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 	// setup items that are generally necessary for select menu extension
 	_preExtension: function(){
-		this.select = this.element.wrap( "<div class='ui-select'>" );
+		var classes = "";
+		// TODO: Post 1.1--once we have time to test thoroughly--any classes manually applied to the original element should be carried over to the enhanced element, with an `-enhanced` suffix. See https://github.com/jquery/jquery-mobile/issues/3577
+		/* if( $el[0].className.length ) {
+			classes = $el[0].className;
+		} */
+		if( !!~this.element[0].className.indexOf( "ui-btn-left" ) ) {
+			classes =  " ui-btn-left";
+		}
+		
+		if(  !!~this.element[0].className.indexOf( "ui-btn-right" ) ) {
+			classes = " ui-btn-right";
+		}
+		
+		this.select = this.element.wrap( "<div class='ui-select" + classes + "'>" );
 		this.selectID  = this.select.attr( "id" );
 		this.label = $( "label[for='"+ this.selectID +"']" ).addClass( "ui-select" );
 		this.isMultiple = this.select[ 0 ].multiple;
@@ -87,7 +104,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					inline: options.inline,
 					corners: options.corners,
 					shadow: options.shadow,
-					iconshadow: options.iconshadow
+					iconshadow: options.iconshadow,
+					mini: options.mini
 				});
 
 		// Opera does not properly support opacity on select elements
@@ -148,6 +166,18 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			.bind( "change blur", function() {
 				self.button.removeClass( "ui-btn-down-" + self.options.theme );
 			});
+
+		// In many situations, iOS will zoom into the select upon tap, this prevents that from happening
+		self.button.bind( "vmousedown", function() {
+			if( self.options.preventFocusZoom ){
+				$.mobile.zoom.disable( true );
+			}
+		})
+		.bind( "mouseup", function() {
+			if( self.options.preventFocusZoom ){
+				$.mobile.zoom.enable( true );
+			}
+		});
 	},
 
 	selected: function() {
@@ -208,7 +238,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ){
-	$.mobile.selectmenu.prototype.enhanceWithin( e.target );
+	$.mobile.selectmenu.prototype.enhanceWithin( e.target, true );
 });
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

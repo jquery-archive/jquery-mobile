@@ -17,7 +17,8 @@
 
 		<div data-role="header" data-theme="f">
 		<h1>Sample form submit to self</h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
 	</div><!-- /header -->
 
 	<div data-role="content" data-theme="c">
@@ -50,6 +51,7 @@
 					<li data-role="list-divider">Form elements</li>
 					<li><a href="docs-forms.html">Form basics</a></li>
 					<li><a href="forms-all.html">Form element gallery</a></li>
+					<li><a href="forms-all-mini.html">Mini form element gallery</a></li>
 					<li><a href="textinputs/">Text inputs</a></li>
 					<li><a href="search/">Search inputs</a></li>
 					<li><a href="slider/">Slider</a></li>

@@ -6,7 +6,7 @@
 	<title>jQuery Mobile Checkboxradio Test Suite</title>
 
 	<script src="../../../external/requirejs/require.js"></script>
-	<script src="../../../js/jquery.js"></script>
+	<script src="../../../js/jquery.tag.inserter.js"></script>
 	<script src="../jquery.setNameSpace.js"></script>
 	<script src="../../../tests/jquery.testHelper.js"></script>
 	<script src="../../../external/qunit.js"></script>
@@ -86,6 +86,22 @@
 </div>
 
 <div data-role="fieldcontain">
+	<input type="radio" name="radio-full" value="choice-3" id="radio-full" />
+	<label for="radio-full">Hamster</label>
+
+	<input type="radio" name="radio-mini" value="choice-3" id="radio-mini" data-nstest-mini="true" />
+	<label for="radio-mini">Hamster</label>
+
+	<div data-nstest-role="controlgroup" data-nstest-mini="true" id="mini-control">
+		<input type="radio" name="radio-mini" value="choice-3" id="mini-ctrl" />
+		<label for="mini-ctrl">Hamster</label>
+		<input type="radio" name="full-ctrl" value="choice-3" id="full-ctrl" />
+		<label for="full-ctrl">Hamster</label>
+	</div>
+</div>
+
+
+<div data-role="fieldcontain">
 	<fieldset data-role="controlgroup">
 		<legend>Agree to the terms:</legend>
 		<input type="checkbox" name="checkbox-1" id="checkbox-1" class="should-be-native" />
@@ -98,6 +114,13 @@
 		<legend>Agree to the terms:</legend>
 		<input type="checkbox" name="checkbox-click-triggered" id="checkbox-click-triggered"/>
 		<label for="checkbox-click-triggered">click triggered</label>
+		<input type="checkbox" name="checkbox-click-triggered" id="checkbox-click-triggered-2"/>
+		<label for="checkbox-click-triggered-2">click triggered</label>
+
+		<input type="radio" name="checkbox-change-triggered" id="checkbox-change-triggered"/>
+		<label for="checkbox-change-triggered">click triggered</label>
+		<input type="radio" name="checkbox-change-triggered" id="checkbox-change-triggered-2"/>
+		<label for="checkbox-change-triggered-2">click triggered</label>
 	</fieldset>
 </div>
 </div>

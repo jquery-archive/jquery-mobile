@@ -7,8 +7,10 @@
 	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 
-	<script data-main="../../js/jquery.mobile.docs" src="../../external/requirejs/require.js"></script>
 	<script src="../../js/jquery.js"></script>
+	<script src="../../docs/_assets/js/jqm-docs.js"></script>
+	<script src="../../js/"></script>
+
 </head> 
 <body> 
 
@@ -16,7 +18,8 @@
 
 		<div data-role="header" data-theme="f">
 		<h1>Collapsible sets (Accordions)</h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
 	</div><!-- /header -->
 
 	<div data-role="content">
@@ -53,25 +56,65 @@
 			<div data-role="collapsible">
 				<h3>Section 2</h3>
 				<p>I'm the collapsible content in a set so this feels like an accordion. I'm hidden by default because I have the "collapsed" state; you need to expand the header to see me.</p>
-
 			</div>
 			<div data-role="collapsible">
 				<h3>Section 3</h3>
 				<p>I'm the collapsible content in a set so this feels like an accordion. I'm hidden by default because I have the "collapsed" state; you need to expand the header to see me.</p>
-
 			</div>
 			<div data-role="collapsible">
 				<h3>Section 4</h3>
 				<p>I'm the collapsible content in a set so this feels like an accordion. I'm hidden by default because I have the "collapsed" state; you need to expand the header to see me.</p>
-
 			</div>
 			<div data-role="collapsible">
 				<h3>Section 5</h3>
 				<p>I'm the collapsible content in a set so this feels like an accordion. I'm hidden by default because I have the "collapsed" state; you need to expand the header to see me.</p>
-
 			</div>
 		</div>
 
+		<h2>Mini collapsible sets</h2>
+
+		<p>For a more compact version that is useful in tight spaces, add the <code>data-mini="true"</code> attribute to the element to create a <a href="../forms-all-mini.html">mini version</a>. </p>
+		
+		<div data-role="collapsible-set" data-theme="c" data-content-theme="d" data-mini="true">
+			<div data-role="collapsible">
+				<h3>Section 1</h3>
+				<p>Collapsible content</p>
+			</div>
+			<div data-role="collapsible">
+				<h3>Section 2</h3>
+				<p>Collapsible content</p>
+
+			</div>
+			<div data-role="collapsible">
+				<h3>Section 3</h3>
+				<p>Collapsible content</p>
+			</div>
+		</div>
+		
+		<h2>Icon positioning</h2>
+		<p>Collapsible headings’ default icon positioing can be overridden by using the <code>data-iconpos</code> attribute, either at the <code>collapsible-set</code> level or on an individual collapsible basis.</p>
+		
+		<div data-role="collapsible-set" data-theme="c" data-iconpos="right">
+			<div data-role="collapsible">
+				<h3>Section 1</h3>
+				<p>Inherits icon positioning from <code>data-iconpos="right"</code> attribute on parent.</p>
+			</div>
+			<div data-role="collapsible" data-iconpos="left">
+				<h3>Section 2</h3>
+				<p>data-iconpos="left"</p>
+			</div>
+			<div data-role="collapsible" data-iconpos="bottom">
+				<h3>Section 3</h3>
+				<p>data-iconpos="bottom"</p>
+			</div>
+			<div data-role="collapsible" data-iconpos="top">
+				<h3>Section 4</h3>
+				<p>data-iconpos="top"</p>
+			</div>
+		</div>
+		
+		
+		
 		<h2>Theming collapsible content</h2>
 		<p>The standard <code>data-theme</code> attribute can be used to set the color of each collapsible in a set. To provide a clearer visual grouping of the content with the headers, add the <code>data-content-theme</code> attribute with a swatch letter. This adds a themed background color and border to the content block. For consistent theming, add these attributes to the parent collapsible set.</p>
 
@@ -97,7 +140,6 @@
 			</div>
 		</div>
 
-
 		<h2>Theming individual sections</h2>
 		<p>To have individual sections in a group styled differently, add <code>data-theme</code> and <code>data-content-theme</code> attributes to specific collapsibles.</p>
 
@@ -105,7 +147,6 @@
 			<div data-role="collapsible" data-theme="b" data-content-theme="b">
 				<h3>Section header, swatch B</h3>
 				<p>Collapsible content, swatch B</p>
-
 			</div>
 			<div data-role="collapsible" data-theme="a" data-content-theme="a">
 				<h3>Section header, swatch A</h3>

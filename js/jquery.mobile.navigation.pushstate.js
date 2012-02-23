@@ -2,7 +2,7 @@
 //>>description: history.pushState support, layered on top of hashchange.
 //>>label: Pushstate Support
 
-define( [ "jquery", "jquery.mobile.navigation" ], function( $ ) {
+define( [ "jquery", "./jquery.mobile.navigation", "../external/requirejs/depend!./jquery.mobile.hashchange[jquery]" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 ( function( $, window ) {
 	// For now, let's Monkeypatch this onto the end of $.mobile._registerInternalEvents

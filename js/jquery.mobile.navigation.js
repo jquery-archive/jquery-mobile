@@ -4,11 +4,11 @@
 
 define( [
 	"jquery",
-	"jquery.mobile.core",
-	"jquery.mobile.event",
-	"jquery.mobile.hashchange",
-	"jquery.mobile.page",
-	"jquery.mobile.transition" ], function( $ ) {
+	"./jquery.mobile.core",
+	"./jquery.mobile.event",
+	"../external/requirejs/depend!./jquery.mobile.hashchange[jquery]",
+	"./jquery.mobile.page",
+	"./jquery.mobile.transition" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 ( function( $, undefined ) {
 
@@ -379,7 +379,13 @@ define( [
 
 	//direct focus to the page title, or otherwise first focusable element
 	$.mobile.focusPage = function ( page ) {
-		var pageTitle = page.find( ".ui-title:eq(0)" );
+		var autofocus = page.find("[autofocus]"),
+			pageTitle = page.find( ".ui-title:eq(0)" );
+
+		if( autofocus.length ) {
+			autofocus.focus();
+			return;
+		}
 
 		if( pageTitle.length ) {
 			pageTitle.focus();
@@ -476,7 +482,7 @@ define( [
 		}
 
 		toPage.data( "page" )._trigger( "beforeshow", null, { prevPage: fromPage || $( "" ) } );
-		
+
 		//clear page loader
 		$.mobile.hidePageLoadingMsg();
 
@@ -556,7 +562,7 @@ define( [
 
 	$.mobile.dialogHashKey = dialogHashKey;
 
-	
+
 
 	//enable cross-domain page support
 	$.mobile.allowCrossDomainPages = false;
@@ -867,14 +873,11 @@ define( [
 						// Remove loading message.
 						hideMsg();
 
-						//show error message
-						$( "<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h1>"+ $.mobile.pageLoadErrorMessage +"</h1></div>" )
-							.css({ "display": "block", "opacity": 0.96, "top": $window.scrollTop() + 100 })
-							.appendTo( settings.pageContainer )
-							.delay( 800 )
-							.fadeOut( 400, function() {
-								$( this ).remove();
-							});
+						// show error message
+						$.mobile.showPageLoadingMsg( $.mobile.pageLoadErrorMessageTheme, $.mobile.pageLoadErrorMessage, true );
+
+						// hide after delay
+						setTimeout( $.mobile.hidePageLoadingMsg, 1500 );
 					}
 
 					deferred.reject( absUrl, options );
@@ -1074,7 +1077,7 @@ define( [
 		settings.reverse = settings.reverse || historyDir < 0;
 
 		transitionPages( toPage, fromPage, settings.transition, settings.reverse )
-			.done(function( name, reverse, $to, $from, alreadyFocused ) {
+			.done(function( name, reverse, $to, $from ) {
 				removeActiveLinkClass();
 
 				//if there's a duplicateCachedPage, remove it from the DOM now that it's hidden
@@ -1089,9 +1092,7 @@ define( [
 				// itself to avoid ie bug that reports offsetWidth as > 0 (core check for visibility)
 				// despite visibility: hidden addresses issue #2965
 				// https://github.com/jquery/jquery-mobile/issues/2965
-				if( !alreadyFocused ){
-					$.mobile.focusPage( toPage );
-				}
+				$.mobile.focusPage( toPage );
 
 				releasePageTransitionLock();
 
@@ -1155,10 +1156,15 @@ define( [
 		//bind to form submit events, handle with Ajax
 		$( document ).delegate( "form", "submit", function( event ) {
 			var $this = $( this );
+
 			if( !$.mobile.ajaxEnabled ||
-				$this.is( ":jqmData(ajax='false')" ) ) {
-					return;
-				}
+					// test that the form is, itself, ajax false
+					$this.is(":jqmData(ajax='false')") ||
+					// test that $.mobile.ignoreContentEnabled is set and
+					// the form or one of it's parents is ajax=false
+					!$this.jqmHijackable().length ) {
+				return;
+			}
 
 			var type = $this.attr( "method" ),
 				target = $this.attr( "target" ),
@@ -1204,19 +1210,27 @@ define( [
 		//add active state on vclick
 		$( document ).bind( "vclick", function( event ) {
 			// if this isn't a left click we don't care. Its important to note
-			// that when the virtual event is generated it will create
-			if ( event.which > 1 || !$.mobile.linkBindingEnabled ){
+			// that when the virtual event is generated it will create the which attr
+			if ( event.which > 1 || !$.mobile.linkBindingEnabled ) {
 				return;
 			}
 
 			var link = findClosestLink( event.target );
+
+			// split from the previous return logic to avoid find closest where possible
+			// TODO teach $.mobile.hijackable to operate on raw dom elements so the link wrapping
+			// can be avoided
+			if ( !$(link).jqmHijackable().length ) {
+				return;
+			}
+
 			if ( link ) {
 				if ( path.parseUrl( link.getAttribute( "href" ) || "#" ).hash !== "#" ) {
 					removeActiveLinkClass( true );
 					$activeClickedLink = $( link ).closest( ".ui-btn" ).not( ".ui-disabled" );
 					$activeClickedLink.addClass( $.mobile.activeBtnClass );
 					$( "." + $.mobile.activePageClass + " .ui-btn" ).not( link ).blur();
-					
+
 					// By caching the href value to data and switching the href to a #, we can avoid address bar showing in iOS. The click handler resets the href during its initial steps if this data is present
 					$( link )
 						.jqmData( "href", $( link  ).attr( "href" )  )
@@ -1231,21 +1245,22 @@ define( [
 				return;
 			}
 
-			var link = findClosestLink( event.target );
+			var link = findClosestLink( event.target ), $link = $( link ), httpCleanup;
 
 			// If there is no link associated with the click or its not a left
 			// click we want to ignore the click
-			if ( !link || event.which > 1) {
+			// TODO teach $.mobile.hijackable to operate on raw dom elements so the link wrapping
+			// can be avoided
+			if ( !link || event.which > 1 || !$link.jqmHijackable().length ) {
 				return;
 			}
 
-			var $link = $( link ),
-				//remove active link class if external (then it won't be there if you come back)
-				httpCleanup = function(){
-					window.setTimeout( function() { removeActiveLinkClass( true ); }, 200 );
-				};
-			
-			// If there's data cached for the real href value, set the link's href back to it again. This pairs with an address bar workaround from the vclick handler	
+			//remove active link class if external (then it won't be there if you come back)
+			httpCleanup = function(){
+				window.setTimeout( function() { removeActiveLinkClass( true ); }, 200 );
+			};
+
+			// If there's data cached for the real href value, set the link's href back to it again. This pairs with an address bar workaround from the vclick handler
 			if( $link.jqmData( "href" ) ){
 				$link.attr( "href", $link.jqmData( "href" ) );
 			}
@@ -1324,7 +1339,7 @@ define( [
 
 				//this may need to be more specific as we use data-rel more
 				role = $link.attr( "data-" + $.mobile.ns + "rel" ) || undefined;
-				
+
 			$.mobile.changePage( href, { transition: transition, reverse: reverse, role: role } );
 			event.preventDefault();
 		});

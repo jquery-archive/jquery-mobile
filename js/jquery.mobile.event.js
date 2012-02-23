@@ -4,7 +4,7 @@
 //>>group: core
 //>>required: true
 
-define( [ "jquery", "jquery.mobile.core", "jquery.mobile.media", "jquery.mobile.support", "jquery.mobile.vmouse" ], function( $ ) {
+define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.media", "./jquery.mobile.support", "./jquery.mobile.vmouse" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
@@ -92,8 +92,8 @@ $.event.special.tap = {
 				clearTapTimer();
 
 				$this.unbind( "vclick", clickHandler )
-					.unbind( "vmouseup", clearTapTimer )
-					.unbind( "vmousecancel", clearTapHandlers );
+					.unbind( "vmouseup", clearTapTimer );
+				$( document ).unbind( "vmousecancel", clearTapHandlers );
 			}
 
 			function clickHandler(event) {
@@ -106,12 +106,12 @@ $.event.special.tap = {
 				}
 			}
 
-			$this.bind( "vmousecancel", clearTapHandlers )
-				.bind( "vmouseup", clearTapTimer )
+			$this.bind( "vmouseup", clearTapTimer )
 				.bind( "vclick", clickHandler );
+			$( document ).bind( "vmousecancel", clearTapHandlers );
 
 			timer = setTimeout(function() {
-					triggerCustomEvent( thisObject, "taphold", $.Event( "taphold" ) );
+					triggerCustomEvent( thisObject, "taphold", $.Event( "taphold", { target: origTarget } ) );
 			}, 750 );
 		});
 	}

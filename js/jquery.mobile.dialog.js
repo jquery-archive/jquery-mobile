@@ -2,7 +2,7 @@
 //>>description: Degrades inputs to another type after custom enhancements are made.
 //>>label: Dialog-style Pages
 
-define( [ "jquery", "jquery.mobile.widget" ], function( $ ) {
+define( [ "jquery", "./jquery.mobile.widget" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
@@ -39,7 +39,10 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		// this must be an anonymous function so that select menu dialogs can replace
 		// the close method. This is a change from previously just defining data-rel=back
 		// on the button and letting nav handle it
-		headerCloseButton.bind( "vclick", function() {
+		//
+		// Use click rather than vclick in order to prevent the possibility of unintentionally
+		// reopening the dialog if the dialog opening item was directly under the close button.
+		headerCloseButton.bind( "click", function() {
 			self.close();
 		});
 
@@ -86,7 +89,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 
 //auto self-init widgets
 $( document ).delegate( $.mobile.dialog.prototype.options.initSelector, "pagecreate", function(){
-	$( this ).dialog();
+	$.mobile.dialog.prototype.enhance( this );
 });
 
 })( jQuery, this );

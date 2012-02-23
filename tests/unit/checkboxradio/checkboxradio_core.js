@@ -113,7 +113,6 @@
 				singleActiveAndChecked();
 
 				start();
-				console.log( "ignore" );
 			}
 		], 500);
 
@@ -129,6 +128,17 @@
 	// not testing the positive case here since's it's obviously tested elsewhere
 	test( "checkboxradio elements in the keepNative set shouldn't be enhanced", function() {
 		ok( !$("input.should-be-native").parent().is("div.ui-checkbox") );
+	});
+
+	test( "Elements with “data-mini='true'” should have “ui-mini” class attached to enhanced element.", function(){
+		var full = document.getElementById("radio-full"),
+			$fulllbl = $('[for="radio-full"]'),
+			mini = document.getElementById("radio-mini"),
+			$minilbl = $('[for="radio-mini"]'),
+			minictrl = $("#mini-control");
+
+		ok( !full.getAttribute('data-nstest-mini') && !$fulllbl.hasClass('ui-mini'), "Original element does not have data attribute, enhanced version does not recieve .ui-mini.");
+		ok( mini.getAttribute('data-nstest-mini'), "Original element has data attribute, enhanced version recieves .ui-mini." );
 	});
 
 	asyncTest( "clicking the label triggers a click on the element", function() {
@@ -147,6 +157,27 @@
 
 			function() {
 				ok(clicked, "click was fired on input");
+				start();
+			}
+		], 2000);
+	});
+
+	asyncTest( "clicking the label triggers a change on the element", function() {
+		var changed = false;
+
+		expect( 1 );
+
+		$( "#checkbox-change-triggered" ).one('change', function() {
+			changed = true;
+		});
+
+		$.testHelper.sequence([
+			function() {
+				$( "[for='checkbox-change-triggered']" ).click();
+			},
+
+			function() {
+				ok(changed, "change was fired on input");
 				start();
 			}
 		], 2000);

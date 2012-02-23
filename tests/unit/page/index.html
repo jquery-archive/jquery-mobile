@@ -6,14 +6,15 @@
 	<title>jQuery Mobile Page Test Suite</title>
 
 	<script src="../../../external/requirejs/require.js"></script>
-	<script src="../../../js/jquery.js"></script>
+	<script src="../../../js/jquery.tag.inserter.js"></script>
 	<script src="../jquery.setNameSpace.js"></script>
 	<script src="../../../tests/jquery.testHelper.js"></script>
 	<script src="../../../external/qunit.js"></script>
 	<script>
 		$.testHelper.asyncLoad([
 			[
-				"jquery.mobile.page"
+				"jquery.mobile.page",
+				"jquery.mobile.links",
 			],
 			[ "page_core.js" ],
 			[ "jquery.mobile.init" ]
@@ -36,5 +37,13 @@
 <div id="a" data-nstest-role="page"></div>
 <div id="b" data-nstest-role="page" data-nstest-theme="e"></div>
 <div id="c" data-nstest-role="page"></div>
+
+<div>
+  <a href="#" id="enhanced-link"></a>
+</div>
+
+<div data-nstest-enhance="false">
+  <a href="#" id="ignored-link"></a>
+</div>
 </body>
 </html>

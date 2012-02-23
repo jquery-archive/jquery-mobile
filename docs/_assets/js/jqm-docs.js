@@ -1,7 +1,3 @@
-//set up the theme switcher on the homepage
-
-define( [ "jquery.mobile" ], function() {
-
 //collapse page navs after use
 $(function(){
 	$('body').delegate('.content-secondary .ui-collapsible-content', 'click',  function(){
@@ -54,4 +50,3 @@ if ( location.protocol.substr(0,4)  === 'file' ||
     });
   });
 }
-});

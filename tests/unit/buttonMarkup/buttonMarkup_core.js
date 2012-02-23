@@ -4,6 +4,14 @@
 (function($){
 	module("jquery.mobile.buttonMarkup.js");
 
+	test( "header buttons should have the header class", function() {
+		var headerButton1 = $("#header-button-1"),
+		    headerButton2 = $("#header-button-2");
+
+		ok((headerButton1.hasClass("ui-btn-left") &&
+		    headerButton2.hasClass("ui-btn-right")), "first header button should have class 'ui-btn-left' and the second one should have 'ui-btn-right'");
+	});
+
 	test( "control group buttons should be enhanced inside a footer", function(){
 		var group, linkCount;
 
@@ -43,5 +51,15 @@
 			}
 			ok( success, "mousedown executed without exception");
 		}
+	});
+
+	test( "Elements with “data-mini='true'” should have “ui-mini” class attached to enhanced element.", function(){
+		var $mini = $("#mini"),
+			$full = $("#full"),
+			$minicontrol = $('#mini-control');
+
+		ok( $full.not('.ui-mini'), "Original element does not have data attribute, enhanced version does not recieve .ui-mini.");
+		ok( $mini.is('.ui-mini'), "Original element has data attribute, enhanced version recieves .ui-mini." );
+		ok( $minicontrol.is('.ui-mini'), "Controlgroup has data attribute and recieves .ui-mini.");
 	});
 })(jQuery);

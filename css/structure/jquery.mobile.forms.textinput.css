@@ -1,12 +1,18 @@
 label.ui-input-text { font-size: 16px; line-height: 1.4; display: block; font-weight: normal; margin: 0 0 .3em; }
 input.ui-input-text, textarea.ui-input-text { background-image: none; padding: .4em; line-height: 1.4; font-size: 16px; display: block; width: 97%; outline: 0; }
-input.ui-input-text { -webkit-appearance: none; }
+.ui-header input.ui-input-text,
+.ui-footer input.ui-input-text { margin-left: 1.25%; padding: .4em 1%; width: 95.5% } /* Note that padding left/right on text inputs is factored into how the element is displayed in Firefox, but does not actually pad the text inside it. */
+ input.ui-input-text { -webkit-appearance: none; }
 textarea.ui-input-text { height: 50px; -webkit-transition: height 200ms linear; -moz-transition: height 200ms linear; -o-transition: height 200ms linear; transition: height 200ms linear; }
 .ui-input-search { padding: 0 30px; background-image: none; position: relative; }
 .ui-icon-searchfield:after { position: absolute; left: 7px; top: 50%; margin-top: -9px; content: ""; width: 18px; height: 18px; opacity: .5; }
 .ui-input-search input.ui-input-text { border: none; width: 98%; padding: .4em 0; margin: 0; display: block; background: transparent none; outline: 0 !important; }
 .ui-input-search .ui-input-clear { position: absolute; right: 0; top: 50%; margin-top: -13px; }
+.ui-mini .ui-input-clear { right: -3px; }
+
 .ui-input-search .ui-input-clear-hidden { display: none; }
+input.ui-mini, .ui-mini input { font-size: 14px !important; }
+textarea.ui-mini { height: 45px; }
 
 /* orientation adjustments - incomplete!*/
 @media all and (min-width: 450px){

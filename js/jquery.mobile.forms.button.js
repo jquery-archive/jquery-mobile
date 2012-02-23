@@ -1,8 +1,9 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Form Buttons
 //>>label: links that proxy to native input/buttons
+//>>group: forms
 
-define( [ "jquery", "jquery.mobile.widget", "jquery.mobile.buttonMarkup"  ], function( $ ) {
+define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.buttonMarkup"  ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -15,7 +16,8 @@ $.widget( "mobile.button", $.mobile.widget, {
 		corners: true,
 		shadow: true,
 		iconshadow: true,
-		initSelector: "button, [type='button'], [type='submit'], [type='reset'], [type='image']"
+		initSelector: "button, [type='button'], [type='submit'], [type='reset'], [type='image']",
+		mini: false
 	},
 	_create: function() {
 		var $el = this.element,
@@ -23,13 +25,27 @@ $.widget( "mobile.button", $.mobile.widget, {
 			o = this.options,
 			type,
 			name,
+			classes = "",
 			$buttonPlaceholder;
 
 		// if this is a link, check if it's been enhanced and, if not, use the right function
 		if( $el[ 0 ].tagName === "A" ) {
-	 	 	if ( !$el.hasClass( "ui-btn" ) ) $el.buttonMarkup();
+	 	 	!$el.hasClass( "ui-btn" ) && $el.buttonMarkup();
 	 	 	return;
  	 	}
+		
+		
+		// TODO: Post 1.1--once we have time to test thoroughly--any classes manually applied to the original element should be carried over to the enhanced element, with an `-enhanced` suffix. See https://github.com/jquery/jquery-mobile/issues/3577
+		/* if( $el[0].className.length ) {
+			classes = $el[0].className;
+		} */
+		if( !!~$el[0].className.indexOf( "ui-btn-left" ) ) {
+			classes = "ui-btn-left";
+		}
+		
+		if(  !!~$el[0].className.indexOf( "ui-btn-right" ) ) {
+			classes = "ui-btn-right";
+		}
 
 		// Add ARIA role
 		this.button = $( "<div></div>" )
@@ -42,8 +58,10 @@ $.widget( "mobile.button", $.mobile.widget, {
 				inline: o.inline,
 				corners: o.corners,
 				shadow: o.shadow,
-				iconshadow: o.iconshadow
+				iconshadow: o.iconshadow,
+				mini: o.mini
 			})
+			.addClass( classes )
 			.append( $el.addClass( "ui-btn-hidden" ) );
 
         $button = this.button;
@@ -107,15 +125,14 @@ $.widget( "mobile.button", $.mobile.widget, {
 			this.enable();
 		}
 
-		// the textWrapper is stored as a data element on the button object
-		// to prevent referencing by it's implementation details (eg 'class')
-		this.button.data( 'textWrapper' ).text( $el.text() || $el.val() );
+                // Grab the button's text element from its implementation-independent data item
+		$(this.button.data( 'buttonElements' ).text).text( $el.text() || $el.val() );
 	}
 });
 
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ){
-	$.mobile.button.prototype.enhanceWithin( e.target );
+	$.mobile.button.prototype.enhanceWithin( e.target, true );
 });
 
 })( jQuery );

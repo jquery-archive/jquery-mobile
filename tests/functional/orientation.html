@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html class="ui-mobile-rendering">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,20 +15,22 @@
 		}
 
 	</style>
-	<script src="../../js/jquery.js"></script>
-	<script data-main="../../js/jquery.mobile" src="../../external/requirejs/require.js"></script>
+	<script src="../../external/requirejs/require.js"></script>
+	<script src="../../js/jquery.tag.inserter.js"></script>
 	<script>
+		require( {
+			baseUrl: "../../js"
+		} )( [ "jquery", "jquery.mobile" ], function( $ ) {
+			$( document ).one( "pageinit", function() {
+				function updateOrientation()
+				{
+					$( "#orientationText" ).text( $.event.special.orientationchange.orientation() );
+				}
 
-		$( document ).one( "pageinit", function() {
-			function updateOrientation()
-			{
-				$( "#orientationText" ).text( $.event.special.orientationchange.orientation() );
-			}
-	
-			updateOrientation();
-			$( window ).bind( $.support.orientation ? "orientationchange" : "resize", updateOrientation);
+				updateOrientation();
+				$( window ).bind( $.support.orientation ? "orientationchange" : "resize", updateOrientation);
+			});
 		});
-
     </script>
 </head>
 

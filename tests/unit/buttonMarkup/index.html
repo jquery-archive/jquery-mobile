@@ -5,7 +5,7 @@
 	<title>jQuery Mobile Button Markup Test Suite</title>
 	<!-- meta viewport left out on purpose for test append -->
 	<script src="../../../external/requirejs/require.js"></script>
-	<script src="../../../js/jquery.js"></script>
+	<script src="../../../js/jquery.tag.inserter.js"></script>
 	<script src="../jquery.setNameSpace.js"></script>
 	<script src="../../../external/qunit.js"></script>
 	<script src="../../jquery.testHelper.js"></script>
@@ -14,7 +14,7 @@
 			[
 				"jquery.mobile.buttonMarkup",
 				"jquery.mobile.controlGroup",
-				"jquery.mobile.fixHeaderFooter",
+				"jquery.mobile.fixedToolbar",
 				"jquery.mobile.forms.button",
 			],
 			[ "jquery.mobile.init" ],
@@ -38,7 +38,12 @@
 </ol>
 
 <div data-nstest-role="page" id="default">
+  <div data-nstest-role="header" id="page-header">
+    <a id="header-button-1" data-role="button" href="index.html">Header button 1</a>
+    <a id="header-button-2" data-role="button" href="index.html">Header button 2</a>
+  </div>
   <div data-nstest-role="content" id="control-group-content">
+    <input type="submit" data-nstest-role="button" value="Double Enhanced?" id="double-enhanced" />
     <a href="index.html" data-nstest-role="button" data-nstest-shadow="false">No shadow</a>
     <a href="index.html" data-nstest-role="button" data-nstest-corners="false">No corners</a>
     <a href="index.html" data-nstest-role="button" data-nstest-shadow="false" data-nstest-corners="false">No shadow or corners</a>
@@ -47,6 +52,14 @@
     <svg id="embedded-svg" width="120" height="120" viewPort="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg">
       <rect x="10" y="10" width="100" height="100"/>
     </svg>
+
+	<a href="docs-bars.html" data-nstest-role="button" id="full">Fullsize</a>
+	<a href="docs-bars.html" data-nstest-role="button" data-nstest-mini="true" id="mini">Mini</a>
+
+	<div data-nstest-role="controlgroup" data-nstest-mini="true" id="mini-control">
+		<a href="index.html" data-nstest-role="button">Yes</a>
+	</div>
+
   </div>
 	<div data-nstest-role="footer" id="control-group-footer" class="ui-bar" data-nstest-position="inline">
 		<div data-nstest-role="controlgroup" data-nstest-type="horizontal">

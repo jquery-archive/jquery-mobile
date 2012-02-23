@@ -4,9 +4,7 @@
 //>>group: core
 //>>required: true
 
-// For test purposes we can't use anonymous module here otherwise
-// the tests will throw http://requirejs.org/docs/errors.html#mismatch
-define( "jquery.mobile.support", [  "jquery", "jquery.mobile.media" ], function( $ ) {
+define( [  "jquery", "./jquery.mobile.media", "./jquery.mobile.core" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -135,6 +133,12 @@ var nokiaLTE7_3 = (function(){
 			ua.indexOf( "AppleWebKit" ) > -1 &&
 			ua.match( /(BrowserNG|NokiaBrowser)\/7\.[0-3]/ );
 })();
+
+// Support conditions that must be met in order to proceed
+// default enhanced qualifications are media query support OR IE 7+
+$.mobile.gradeA = function(){
+	return $.support.mediaquery || $.mobile.browser.ie && $.mobile.browser.ie >= 7;
+};
 
 $.mobile.ajaxBlacklist =
 			// BlackBerry browsers, pre-webkit

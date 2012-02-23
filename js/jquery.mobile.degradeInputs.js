@@ -2,7 +2,7 @@
 //>>description: Degrades inputs to another type after custom enhancements are made.
 //>>label: Degrade Inputs
 
-define( [ "jquery", "jquery.mobile.page" ], function( $ ) {
+define( [ "jquery", "./jquery.mobile.page" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -26,7 +26,7 @@ $.mobile.page.prototype.options.degradeInputs = {
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ){
 
-	var page = $(e.target).closest(':jqmData(role="page")').data("page"), options;
+	var page = $.mobile.closestPageData($(e.target)), options;
 
 	if( !page ) {
 		return;
