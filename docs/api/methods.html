@@ -145,18 +145,7 @@ $.mobile.loadPage( "searchresults.php", {
 });
 			</code>
 			</pre>
-			
-			</dd>
 
-			<dt><code>$.fn.jqmEnhanceable()</code> (<em>method</em>)</dt>
-			<dd>For users wishing to respect <code>data-enhance=false</code> parent elements during manual enhancement or custom plugin authoring jQuery Mobile provdes the <code>$.fn.jqmEnhanceable</code> filter method.</dd>
-			<dd>
-				<dl>
-					<dt><code>&#183;</code> Settings:</dt>
-					<dd>When <code>$.mobile.ignoreContentEnabled</code> is set to true, this method will traverse the parent nodes for each DOM element in the jQuery object and where it finds a <code>data-enhance=false</code> parent the child will be removed from the set.</dd>
-					<dt><code>&#183;</code> Warning:</dt>
-					<dd>The operation of traversing all parent elements can be expensive for even small jQuery object sets.</dd>
-				</dl>
 			</dd>
 
 			<dt><code>$.fn.jqmData(), $.fn.jqmRemoveData()</code> (<em>method</em>)</dt>
@@ -171,9 +160,29 @@ $.mobile.loadPage( "searchresults.php", {
 				</dl>
 			</dd>
 
-			
-			
-			
+
+			<dt><code>$.fn.jqmEnhanceable()</code> (<em>method</em>)</dt>
+			<dd>For users wishing to respect <code>data-enhance=false</code> parent elements during manual enhancement or custom plugin authoring jQuery Mobile provdes the <code>$.fn.jqmEnhanceable</code> filter method.</dd>
+			<dd>
+				<dl>
+					<dt><code>&#183;</code> Settings:</dt>
+					<dd>When <code>$.mobile.ignoreContentEnabled</code> is set to true, this method will traverse the parent nodes for each DOM element in the jQuery object and where it finds a <code>data-enhance=false</code> parent the child will be removed from the set.</dd>
+					<dt><code>&#183;</code> Warning:</dt>
+					<dd>The operation of traversing all parent elements can be expensive for even small jQuery object sets.</dd>
+				</dl>
+			</dd>
+
+			<dt><code>$.fn.jqmHijackable()</code> (<em>method</em>)</dt>
+			<dd>For users wishing to respect <code>data-ajax=false</code> parent elements during custom form and link binding jQuery Mobile provdes the <code>$.fn.jqmHijackable</code> filter method.</dd>
+			<dd>
+				<dl>
+					<dt><code>&#183;</code> Settings:</dt>
+					<dd>When <code>$.mobile.ignoreContentEnabled</code> is set to true, this method will traverse the parent nodes for each DOM element in the jQuery object and where it finds a <code>data-ajax=false</code> parent the child form or link will be removed from the set.</dd>
+					<dt><code>&#183;</code> Warning:</dt>
+					<dd>The operation of traversing all parent elements can be expensive for even small jQuery object sets.</dd>
+				</dl>
+			</dd>
+
 			<dt><code>$.mobile.showPageLoadingMsg</code> (<em>method</em>)</dt>
 			<dd>Show the page loading message, which is configurable via $.mobile.loadingMessage.</dd>
 			<dd>
