@@ -1,18 +1,18 @@
-<!DOCTYPE html> 
-<html class="ui-mobile-rendering"> 
+<!DOCTYPE html>
+<html class="ui-mobile-rendering">
 	<head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<title>jQuery Mobile Docs - Methods</title> 
-	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" /> 
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Docs - Methods</title>
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 
 	<script src="../../js/jquery.js"></script>
 	<script src="../../docs/_assets/js/jqm-docs.js"></script>
 	<script src="../../js/"></script>
 
-</head> 
-<body> 
+</head>
+<body>
 
 <div data-role="page" class="type-interior">
 
@@ -26,14 +26,14 @@
 	<div class="content-primary">
 
 	  <p>jQuery Mobile exposes several methods and properties on the $.mobile object for use in your applications.</p>
-		
+
 
 		<dl>
 			<dt><code>$.mobile.changePage</code> (<em>method</em>)</dt>
 			<dd>Programmatically change from one page to another. This method is used internally for the page loading and transitioning that occurs as a result of clicking a link or submitting a form, when those features are enabled.</dd>
-			
+
 			<dd>
-				
+
 				<dl>
 					<dt><code>&#183;</code> Arguments</dt>
 					<dd><code>to</code> (<em>string or object</em>, required)
@@ -41,8 +41,8 @@
 				<li>String: Absolute or relative URL. (&quot;about/us.html&quot;)</li>
 							<li>Object: jQuery collection object. (<code>$("#about")</code>)</li>
 						</ul>
-					</dd>	
-						
+					</dd>
+
 					<dd><code>options</code> (<em>object</em>, optional)
 						<ul>
 							<li>Properties:
@@ -66,7 +66,7 @@
 									<li><code>showLoadMsg</code> (<em>boolean</em>,	default:	true) Decides whether or not to show the loading message when loading external pages.</li>
 									<li><code>role</code> (<em>string</em>,	default:	undefined) The data-role value to be used when displaying the page. By default this is undefined which means rely on the value of the @data-role attribute defined on the element.</li>
 									<li><code>transition</code> (<em>string</em>,	default:	$.mobile.defaultPageTransition)	The transition to use when showing the page. </li>
-									<li><code>type</code> (<em>string</em>, default: &quot;get&quot;) Specifies the method ("get" or "post") to use when making a page request. 
+									<li><code>type</code> (<em>string</em>, default: &quot;get&quot;) Specifies the method ("get" or "post") to use when making a page request.
 										<ul>
 											<li>Used only when the 'to' argument of changePage() is a URL.</li>
 										</ul>
@@ -74,45 +74,45 @@
 								</ul>
 							</li>
 						</ul>
-					</dd>	
+					</dd>
 
 				</dl>
 			</dd>
-			
+
 			<dd>Examples:
 			<pre>
 			<code>
-<strong>//transition to the "about us" page with a slideup transition</strong> 			
-$.mobile.changePage( "about/us.html", { transition: "slideup"} );	
+<strong>//transition to the "about us" page with a slideup transition</strong>
+$.mobile.changePage( "about/us.html", { transition: "slideup"} );
 
-<strong>//transition to the "search results" page, using data from a form with an ID of "search"" 	</strong>	
+<strong>//transition to the "search results" page, using data from a form with an ID of "search"" 	</strong>
 $.mobile.changePage( "searchresults.php", {
-	type: "post", 
+	type: "post",
 	data: $("form#search").serialize()
-});		
+});
 
-<strong>//transition to the "confirm" page with a "pop" transition without tracking it in history	</strong>		
+<strong>//transition to the "confirm" page with a "pop" transition without tracking it in history	</strong>
 $.mobile.changePage( "../alerts/confirm.html", {
 	transition: "pop",
 	reverse: false,
 	changeHash: false
-});	
-		
+});
+
 			</code>
 			</pre>
-			
+
 			</dd>
-			
-			
+
+
 			<dt><code>$.mobile.loadPage</code> (<em>method</em>)</dt>
 			<dd>Load an external page, enhance its content, and insert it into the DOM. This method is called internally by the changePage() function when its first argument is a URL. This function does not affect the current active page so it can be used to load pages in the background. The function returns a deferred promise object that gets resolved after the page has been enhanced and inserted into the document.</dd>
-			
+
 			<dd>
-				
+
 				<dl>
 					<dt><code>&#183;</code> Arguments</dt>
-					<dd><code>url</code> (<em>string or object</em>, required) A relative or absolute URL.</dd>	
-						
+					<dd><code>url</code> (<em>string or object</em>, required) A relative or absolute URL.</dd>
+
 					<dd><code>options</code> (<em>object</em>, optional)
 						<ul>
 							<li>Properties:
@@ -122,27 +122,27 @@ $.mobile.changePage( "../alerts/confirm.html", {
 									<li><code>pageContainer</code> (jQuery collection,	default:	$.mobile.pageContainer) Specifies the element that should contain the page after it is loaded. </li>
 									<li><code>reloadPage</code> (<em>boolean</em>, default: false) Forces a reload of a page, even if it is already in the DOM of the page container. </li>
 									<li><code>role</code> (<em>string</em>,	default:	undefined) The data-role value to be used when displaying the page. By default this is undefined which means rely on the value of the @data-role attribute defined on the element.</li>
-									<li><code>type</code> (<em>string</em>, default: &quot;get&quot;) Specifies the method ("get" or "post") to use when making a page request. 
+									<li><code>type</code> (<em>string</em>, default: &quot;get&quot;) Specifies the method ("get" or "post") to use when making a page request.
 									</li>
 								</ul>
 							</li>
 						</ul>
-					</dd>	
+					</dd>
 
 				</dl>
 			</dd>
-			
+
 			<dd>Examples:
 			<pre>
 			<code>
-<strong>//load the "about us" page into the DOM</strong>			
-$.mobile.loadPage( "about/us.html" );	
+<strong>//load the "about us" page into the DOM</strong>
+$.mobile.loadPage( "about/us.html" );
 
-<strong>//load a "search results" page, using data from a form with an ID of "search"" 	</strong>	
+<strong>//load a "search results" page, using data from a form with an ID of "search"" 	</strong>
 $.mobile.loadPage( "searchresults.php", {
-	type: "post", 
+	type: "post",
 	data: $("form#search").serialize()
-});				
+});
 			</code>
 			</pre>
 			
@@ -187,51 +187,51 @@ $.mobile.loadPage( "searchresults.php", {
 			<dd>Examples:
 			<pre>
 			<code>
-<strong>//cue the page loader</strong> 			
+<strong>//cue the page loader</strong>
 $.mobile.showPageLoadingMsg();
 
-<strong>//use theme swatch "b", a custom message, and no spinner</strong> 			
+<strong>//use theme swatch "b", a custom message, and no spinner</strong>
 $.mobile.showPageLoadingMsg("b", "This is only a test", true);
 			</code>
 			</pre>
-			
+
 			</dd>
 
-			
-			
-			
+
+
+
 			<dt><code>$.mobile.hidePageLoadingMsg</code> (<em>method</em>)</dt>
 			<dd>Hide the page loading message, which is configurable via $.mobile.loadingMessage.</dd>
-			
+
 			<dd>Example:
 			<pre>
 			<code>
-<strong>//hide the page loader</strong> 			
-$.mobile.hidePageLoadingMsg();	
+<strong>//hide the page loader</strong>
+$.mobile.hidePageLoadingMsg();
 			</code>
 			</pre>
-			
+
 			</dd>
-			
+
 			<dt><code>$.mobile.fixedToolbars.show</code> (<em>method</em>)</dt>
 			<dd>Utility method for displaying the fixed header and/or footer of the current active page within the viewport. Note that fixed headers/footers are never really hidden. Toggling the show/hide state of a toolbar is really toggling whether or not they are inline within the page content, or displayed within the viewport as if they were fixed.</dd>
 			<dd>
 				<dl>
 					<dt><code>&#183;</code> Arguments</dt>
-					<dd><code>immediately</code> (<em>boolean</em>, optional) If true, any fixed header or footer for the current active page is displayed immediately within the viewport. If false or unspecified, the fixed header/footer will fade-in after a 100 millisecond delay. Note that other events such as a document resize or scroll event can result in an additional delay before the start of the header/footer display animation.</dd>							
+					<dd><code>immediately</code> (<em>boolean</em>, optional) If true, any fixed header or footer for the current active page is displayed immediately within the viewport. If false or unspecified, the fixed header/footer will fade-in after a 100 millisecond delay. Note that other events such as a document resize or scroll event can result in an additional delay before the start of the header/footer display animation.</dd>
 				</dl>
 			</dd>
 			<dd>Example:
 			<pre>
 			<code>
-<strong>// Show fixed header/footer with a fade animation.</strong> 			
-$.mobile.fixedToolbars.show();	
+<strong>// Show fixed header/footer with a fade animation.</strong>
+$.mobile.fixedToolbars.show();
 
 <strong>// Show fixed header/footer immediately.</strong>
-$.mobile.fixedToolbars.show(true);	
+$.mobile.fixedToolbars.show(true);
 			</code>
 			</pre>
-			
+
 			</dd>
 
 			<dt><code>$.mobile.fixedToolbars.hide</code> (<em>method</em>)</dt>
@@ -239,35 +239,35 @@ $.mobile.fixedToolbars.show(true);
 			<dd>
 				<dl>
 					<dt><code>&#183;</code> Arguments</dt>
-					<dd><code>immediately</code> (<em>boolean</em>, optional) If true, any fixed header or footer for the current active page is immediately placed inline (back in flow) with the page content, which means it will scroll along with the content and will only be visible when viewing the top or bottom of the page within the viewport. If false or unspecified, the fixed header/footer will fade-out after a 100 millisecond delay. Note that other events such as a document resize or scroll event can result in the header/footer being immediately hidden.</dd>							
+					<dd><code>immediately</code> (<em>boolean</em>, optional) If true, any fixed header or footer for the current active page is immediately placed inline (back in flow) with the page content, which means it will scroll along with the content and will only be visible when viewing the top or bottom of the page within the viewport. If false or unspecified, the fixed header/footer will fade-out after a 100 millisecond delay. Note that other events such as a document resize or scroll event can result in the header/footer being immediately hidden.</dd>
 				</dl>
 			</dd>
 			<dd>Example:
 			<pre>
 			<code>
-<strong>// Hide fixed header/footer with a fade animation.</strong> 			
-$.mobile.fixedToolbars.hide();	
+<strong>// Hide fixed header/footer with a fade animation.</strong>
+$.mobile.fixedToolbars.hide();
 
 <strong>// Hide fixed header/footer immediately.</strong>
-$.mobile.fixedToolbars.hide(true);	
+$.mobile.fixedToolbars.hide(true);
 			</code>
 			</pre>
-			
+
 			</dd>
-            
+
 			<dt><code>$.mobile.path.parseUrl</code> (<em>method</em>)</dt>
 			<dd>Utility method for parsing a URL and its relative variants into an object that makes accessing the components of the URL easy. When parsing relative variants, the resulting object will contain empty string values for missing components (like protocol, host, etc). Also, when parsing URLs that have no authority, such as tel: urls, the pathname property of the object will contain the data after the protocol/scheme colon.</dd>
-			
+
 			<dd>
-				
+
 				<dl>
 					<dt><code>&#183;</code> Arguments</dt>
-					<dd><code>url</code> (<em>string</em>, required) A relative or absolute URL.</dd>	
-						
+					<dd><code>url</code> (<em>string</em>, required) A relative or absolute URL.</dd>
+
 					<dt><code>&#183;</code> Return Value</dt>
 					<dd>
 						<p>This function returns an object that contains the various components of the URL as strings. The properties on the object mimic the browser's location object:</p>
-						<dl>	
+						<dl>
 							<dt><code>hash</code></dt>
 							<dd>The fragment conponent of the URL, including the leading '#' character.</dd>
 							<dt><code>host</code></dt>
@@ -284,31 +284,31 @@ $.mobile.fixedToolbars.hide(true);
 							<dd>The protocol for the URL including the trailing ':' character.</dd>
 							<dt><code>search</code></dt>
 							<dd>The query component of the URL including the leading '?' character.</dd>
-						</dl>	
+						</dl>
 						<p>But it also contains additional properties that provide access to additional components as well as some common forms of the URL developers access:</p>
-						<dl>	
-							<dt><code>authority</code></dt>	
-							<dd>The username, password, and host components of the URL</dd>	
+						<dl>
+							<dt><code>authority</code></dt>
+							<dd>The username, password, and host components of the URL</dd>
 							<dt><code>directory</code></dt>
-							<dd>The directory component of the pathname, minus any filename.</dd>	
-							<dt><code>domain</code></dt>	
-							<dd>The protocol and authority components of the URL.</dd>	
-							<dt><code>filename</code></dt>	
-							<dd>The filename within the pathname component, minus the directory.</dd>	
-							<dt><code>hrefNoHash</code></dt>	
-							<dd>The original URL minus the fragment (hash) components.</dd>	
-							<dt><code>hrefNoSearch</code></dt>	
-							<dd>The original URL minus the query (search) and fragment (hash) components.</dd>	
-							<dt><code>password</code></dt>	
-							<dd>The password contained within the authority component.</dd>	
-							<dt><code>username</code></dt>	
-							<dd>The username contained within the authority component.</dd>	
-						</dl>	
-					</dd>	
-						
+							<dd>The directory component of the pathname, minus any filename.</dd>
+							<dt><code>domain</code></dt>
+							<dd>The protocol and authority components of the URL.</dd>
+							<dt><code>filename</code></dt>
+							<dd>The filename within the pathname component, minus the directory.</dd>
+							<dt><code>hrefNoHash</code></dt>
+							<dd>The original URL minus the fragment (hash) components.</dd>
+							<dt><code>hrefNoSearch</code></dt>
+							<dd>The original URL minus the query (search) and fragment (hash) components.</dd>
+							<dt><code>password</code></dt>
+							<dd>The password contained within the authority component.</dd>
+							<dt><code>username</code></dt>
+							<dd>The username contained within the authority component.</dd>
+						</dl>
+					</dd>
+
 				</dl>
 			</dd>
-			
+
 			<dd>Examples:
 			<pre>
 			<code>
@@ -335,21 +335,21 @@ $.mobile.fixedToolbars.hide(true);
 var obj = $.mobile.path.parseUrl("http://jblas:password@mycompany.com:8080/mail/inbox?msg=1234");
 			</code>
 			</pre>
-			
+
 			</dd>
-			
-            
+
+
 			<dt><code>$.mobile.path.makePathAbsolute</code> (<em>method</em>)</dt>
 			<dd>Utility method for converting a relative file or directory path into an absolute path.</dd>
 			<dd>
 				<dl>
 					<dt><code>&#183;</code> Arguments</dt>
-					<dd><code>relPath</code> (<em>string</em>, required) A relative file or directory path.</dd>	
-					<dd><code>absPath</code> (<em>string</em>, required) An absolute file or relative path to resolve against.</dd>	
-						
+					<dd><code>relPath</code> (<em>string</em>, required) A relative file or directory path.</dd>
+					<dd><code>absPath</code> (<em>string</em>, required) An absolute file or relative path to resolve against.</dd>
+
 					<dt><code>&#183;</code> Return Value</dt>
-					<dd>This function returns a string that is an absolute version of the relative path passed in.</dd>	
-						
+					<dd>This function returns a string that is an absolute version of the relative path passed in.</dd>
+
 				</dl>
 			</dd>
 			<dd>Examples:
@@ -364,20 +364,20 @@ var absPath = $.mobile.path.makePathAbsolute("../../foo/file.html", "/a/b/c/bar.
 			</code>
 			</pre>
 			</dd>
-			
-            
+
+
 			<dt><code>$.mobile.path.makeUrlAbsolute</code> (<em>method</em>)</dt>
 			<dd>Utility method for converting a relative URL to an absolute URL.</dd>
 			<dd>
-				
+
 				<dl>
 					<dt>Arguments</dt>
-					<dd><code>relUrl</code> (<em>string</em>, required) A relative URL.</dd>	
-					<dd><code>absUrl</code> (<em>string</em>, required) An absolute URL to resolve against.</dd>	
-						
+					<dd><code>relUrl</code> (<em>string</em>, required) A relative URL.</dd>
+					<dd><code>absUrl</code> (<em>string</em>, required) An absolute URL to resolve against.</dd>
+
 					<dt>Return Value</dt>
-					<dd>This function returns a string that is an absolute version of the relative URL passed in.</dd>	
-						
+					<dd>This function returns a string that is an absolute version of the relative URL passed in.</dd>
+
 				</dl>
 			</dd>
 			<dd>Examples:
@@ -400,22 +400,22 @@ var absUrl = $.mobile.path.makeUrlAbsolute("#bar", "http://foo.com/a/b/c/test.ht
 
 			</code>
 			</pre>
-			
+
 			</dd>
-			
-            
+
+
 			<dt><code>$.mobile.path.isSameDomain</code> (<em>method</em>)</dt>
 			<dd>Utility method for comparing the domain of 2 URLs.</dd>
 			<dd>
-				
+
 				<dl>
 					<dt><code>&#183;</code> Arguments</dt>
-					<dd><code>url1</code> (<em>string</em>, required) A relative URL.</dd>	
-					<dd><code>url2</code> (<em>string</em>, required) An absolute URL to resolve against.</dd>	
-						
+					<dd><code>url1</code> (<em>string</em>, required) A relative URL.</dd>
+					<dd><code>url2</code> (<em>string</em>, required) An absolute URL to resolve against.</dd>
+
 					<dt>Return Value</dt>
-					<dd>This function returns a boolean true if the domains match, false if they don't.</dd>	
-						
+					<dd>This function returns a boolean true if the domains match, false if they don't.</dd>
+
 				</dl>
 			</dd>
 			<dd>Examples:
@@ -435,21 +435,21 @@ var same = $.mobile.path.isSameDomain("http://foo.com/a/file.html", "http://bar.
 
 			</code>
 			</pre>
-			
+
 			</dd>
-			
-            
+
+
 			<dt><code>$.mobile.path.isRelativeUrl</code> (<em>method</em>)</dt>
 			<dd>Utility method for determining if a URL is a relative variant.</dd>
 			<dd>
-				
+
 				<dl>
 					<dt><code>&#183;</code> Arguments</dt>
-					<dd><code>url</code> (<em>string</em>, required) A relative or absolute URL.</dd>	
-						
+					<dd><code>url</code> (<em>string</em>, required) A relative or absolute URL.</dd>
+
 					<dt><code>&#183;</code> Return Value</dt>
-					<dd>This function returns a boolean true if the URL is relative, false if it is absolute.</dd>	
-						
+					<dd>This function returns a boolean true if the URL is relative, false if it is absolute.</dd>
+
 				</dl>
 			</dd>
 			<dd>Examples:
@@ -476,21 +476,21 @@ var isRel = $.mobile.path.isRelativeUrl("#foo");
 
 			</code>
 			</pre>
-			
+
 			</dd>
-			
-            
+
+
 			<dt><code>$.mobile.path.isAbsoluteUrl</code> (<em>method</em>)</dt>
 			<dd>Utility method for determining if a URL is absolute.</dd>
 			<dd>
-				
+
 				<dl>
 					<dt><code>&#183;</code> Arguments</dt>
-					<dd><code>url</code> (<em>string</em>, required) A relative or absolute URL.</dd>	
-						
+					<dd><code>url</code> (<em>string</em>, required) A relative or absolute URL.</dd>
+
 					<dt><code>&#183;</code> Return Value</dt>
-					<dd>This function returns a boolean true if the URL is absolute, false if not.</dd>	
-						
+					<dd>This function returns a boolean true if the URL is absolute, false if not.</dd>
+
 				</dl>
 			</dd>
 			<dd>Examples:
@@ -517,15 +517,15 @@ var isAbs = $.mobile.path.isAbsoluteUrl("#foo");
 
 			</code>
 			</pre>
-			
+
 			</dd>
-			
-            
+
+
 			<dt><code>$.mobile.base</code> (<em>methods, properties</em>)</dt>
 			<dd>Utilities for working with generated base element. TODO: document as public API is finalized.</dd>
-			
-			
-			
+
+
+
 			<dt><code>$.mobile.silentScroll</code> (<em>method</em>)</dt>
 			<dd>Scroll to a particular Y position without triggering scroll event listeners.</dd>
 			<dd>
@@ -534,38 +534,38 @@ var isAbs = $.mobile.path.isAbsoluteUrl("#foo");
 					<dd><code>yPos</code> (<em>number</em>, defaults to 0). Pass any number to scroll to that Y location.</dd>
 				</dl>
 			</dd>
-			
+
 			<dd>Examples:
 			<pre>
 			<code>
-<strong>//scroll to Y 100px</strong> 			
-$.mobile.silentScroll(100);	
+<strong>//scroll to Y 100px</strong>
+$.mobile.silentScroll(100);
 			</code>
 			</pre>
-			
-			</dd>
-			
 
-			
-			
-			
+			</dd>
+
+
+
+
+
 			<dt><code>$.mobile.activePage</code> (<em>property</em>)</dt>
 			<dd>Reference to the page currently in view.</dd>
-			
-			
-			
-			
-		</dl>			
-	</div><!--/content-secondary -->		
-	
+
+
+
+
+		</dl>
+	</div><!--/content-secondary -->
+
 	<div class="content-secondary">
-		
+
 		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
-			
+
 				<h3>More in this section</h3>
-				
+
 				<ul data-role="listview"  data-theme="c" data-dividertheme="d">
-				
+
 					<li data-role="list-divider">API</li>
 					<li><a href="../../docs/api/globalconfig.html">Configuring defaults</a></li>
 					<li><a href="../../docs/api/events.html">Events</a></li>
@@ -574,14 +574,14 @@ $.mobile.silentScroll(100);
 					<li><a href="../../docs/api/themes.html">Theme framework</a></li>
 				</ul>
 		</div>
-	</div>		
+	</div>
 
 </div><!-- /content -->
 
 <div data-role="footer" class="footer-docs" data-theme="c">
 		<p>&copy; 2011 The jQuery Project</p>
 </div>
-	
+
 </div><!-- /page -->
 
 </body>
