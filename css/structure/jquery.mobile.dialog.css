@@ -4,6 +4,7 @@
 }
 .ui-dialog .ui-header {
 	margin-top: 15%;
+	border: 0;
 }
 .ui-dialog .ui-header, 
 .ui-dialog .ui-content, 
