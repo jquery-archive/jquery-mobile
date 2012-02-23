@@ -196,25 +196,39 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 		},
 
 		enhanceable: function( $set ) {
-			return this.haveParents( $set, ":jqmData(enhance='false')" );
+			return this.haveParents( $set, "enhance" );
 		},
 
 		hijackable: function( $set ) {
-			return this.haveParents( $set, ":jqmData(ajax='false')" );
+			return this.haveParents( $set, "ajax" );
 		},
 
-		// TODO use parentNode traversal to speed things up
-		haveParents: function( $set, selector ) {
+		haveParents: function( $set, attr ) {
 			if( !$.mobile.ignoreContentEnabled ){
 				return $set;
 			}
 
-			var count = $set.length, $newSet = $();
+			var count = $set.length,
+				$newSet = $(),
+				e, $element, excluded;
 
-			for( var i = 0; i < count; i++ ) {
-				var $element = $set.eq(i);
+			for ( var i = 0; i < count; i++ ) {
+				$element = $set.eq( i );
+				excluded = false;
+				e = $set[ i ];
 
-				if ( !$element.closest(selector).length ) {
+				while ( e ) {
+					var c = e.getAttribute ? e.getAttribute( "data-" + $.mobile.ns + attr ) : "";
+
+					if ( c === "false" ) {
+						excluded = true;
+						break;
+					}
+
+					e = e.parentNode;
+				}
+
+				if ( !excluded ) {
 					$newSet = $newSet.add( $element );
 				}
 			}
