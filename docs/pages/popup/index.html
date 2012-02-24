@@ -71,13 +71,30 @@
 
 		<div data-role="popup" id="popupMenu" data-overlay-theme="b">
 				<ul data-role="listview" data-inset="true" style="width:180px;" data-theme="b">
-					<li><a href="index.html">Add</a></li>
-					<li><a href="index.html">Edit</a></li>
-					<li><a href="index.html">Manage</a></li>
-					<li><a href="index.html">Delete</a></li>
+					<li><a data-rel="popup" href="#popupMenuLevel1">Add</a></li>
+					<li><a data-rel="popup" href="#popupMenuLevel1">Edit</a></li>
+					<li><a data-rel="popup" href="#popupMenuLevel1">Manage</a></li>
+					<li><a data-rel="popup" href="#popupMenuLevel1">Delete</a></li>
 				</ul>
 		</div>
-		
+
+		<div data-role="popup" id="popupMenuLevel1" data-overlay-theme="b">
+				<ul data-role="listview" data-inset="true" style="width:180px;" data-theme="b">
+					<li><a data-rel="popup" href="#popupMenuLevel2">Remove</a></li>
+					<li><a data-rel="popup" href="#popupMenuLevel2">Undo</a></li>
+					<li><a data-rel="popup" href="#popupMenuLevel2">Splice</a></li>
+					<li><a data-rel="popup" href="#popupMenuLevel2">Reticulate</a></li>
+				</ul>
+		</div>		
+
+		<div data-role="popup" id="popupMenuLevel2" data-overlay-theme="b">
+				<ul data-role="listview" data-inset="true" style="width:180px;" data-theme="b">
+					<li><a href="index.html">Basics</a></li>
+					<li><a href="options.html">Options</a></li>
+					<li><a href="methods.html">Methods</a></li>
+					<li><a href="events.html">Events</a></li>
+				</ul>
+		</div>		
 
 		<div data-role="popup" id="popupLogin" data-overlay-theme="b" data-theme="a" class="ui-corner-all">
 			<form>
