@@ -57,7 +57,7 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 		var $el = this.element,
 			collapsiblesInSet = $el.children( ":jqmData(role='collapsible')" );
 
-		$.mobile.collapsible.prototype.enhance( collapsiblesInSet );
+		$.mobile.collapsible.prototype.enhance( collapsiblesInSet.not( ".ui-collapsible" ) );
 
 		// clean up borders
 		collapsiblesInSet.each( function() {
