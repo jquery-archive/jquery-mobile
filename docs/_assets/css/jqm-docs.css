@@ -23,8 +23,15 @@ pre { white-space: pre; white-space: pre-wrap; word-wrap: break-word; }
 #jqm-homeheader img { width: 235px; }
 img { max-width: 100%; }
 
+/* fluid images moved from jquery.mobile.core.css*/
+.ui-mobile img {
+	max-width: 100%;
+}
+
 .ui-header .jqm-home { top: 0; }
 nav { margin: 0; }
+
+
 
 p.intro {
 	font-size: .96em;
