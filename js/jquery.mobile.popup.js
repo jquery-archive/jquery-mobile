@@ -62,6 +62,7 @@ define( [ "jquery", "jquery.mobile.widget" ], function( $ ) {
 
 			ui.screen.bind( "vclick", function( e ) {
 				self.close();
+				e.preventDefault();
 			} );
 		},
 
