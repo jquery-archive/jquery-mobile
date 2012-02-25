@@ -93,7 +93,13 @@
 	background: 			#444 /*{a-bup-background-color}*/;
 	font-weight: bold;
 	color: 					#fff /*{a-bup-color}*/;
-
+	text-shadow: 0 /*{a-bup-shadow-x}*/ 1px /*{a-bup-shadow-y}*/ 1px /*{a-bup-shadow-radius}*/ #000 /*{a-bup-shadow-color}*/;
+	background-image: -webkit-gradient(linear, left top, left bottom, from( #484848 /*{a-bup-background-start}*/), to( #333 /*{a-bup-background-end}*/)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient( #484848 /*{a-bup-background-start}*/, #333 /*{a-bup-background-end}*/); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient( #484848 /*{a-bup-background-start}*/, #333 /*{a-bup-background-end}*/); /* FF3.6 */
+	background-image:     -ms-linear-gradient( #484848 /*{a-bup-background-start}*/, #333 /*{a-bup-background-end}*/); /* IE10 */
+	background-image:      -o-linear-gradient( #484848 /*{a-bup-background-start}*/, #333 /*{a-bup-background-end}*/); /* Opera 11.10+ */
+	background-image:         linear-gradient( #484848 /*{a-bup-background-start}*/, #333 /*{a-bup-background-end}*/);
 }
 .ui-btn-up-a a.ui-link-inherit {
 	color: 					#fff /*{a-bup-color}*/;
