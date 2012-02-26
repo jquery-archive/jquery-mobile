@@ -6,6 +6,108 @@ define( [ "jquery", "jquery.mobile.widget" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
+	// Configure whether popups set only one history entry for all popups on the page, or whether each popup advances the
+	// history by setting
+	//   $.mobile.popupsHaveOneHistoryEntry = true;
+	// By default, each popup advances the history
+
+	var popupStackManyEntries = {
+				stack: [],
+
+				_bindHashChange: function() {
+					var self = this;
+					$( window ).one( "hashchange.popup", function() {
+						if (popupStack.stack.length >= 1) {
+							popupStack.stack.pop()._realClose();
+						}
+						if (popupStack.stack.length > 0) {
+							popupStack._bindHashChange();
+						}
+					} );
+				},
+
+				push: function(popup) {
+					if (popupStack.stack.length > 0) {
+						$(window).unbind("hashchange.popup");
+					}
+					$(window).one("hashchange", function() {
+						popupStack._bindHashChange();
+					});
+
+					popupStack.stack.push(popup);
+
+					// set hash to non-linkable dialog url
+					$.mobile.path.set( "jqmNPopups=" + popupStack.stack.length );
+				},
+
+				pop: function(popup) {
+					var idx = popupStack.stack.indexOf(popup);
+
+					if (idx < 0) {
+						popup._realClose();
+					}
+					else
+					if (idx === popupStack.stack.length - 1) {
+						window.history.back();
+					}
+					else {
+						popupStack.stack.splice(idx, 1);
+						popup._realClose();
+						$(window).unbind("hashchange.popup");
+						$(window).one("hashchange", function() {
+							popupStack._bindHashChange();
+						});
+						window.history.back();
+					}
+				}
+			},
+
+			popupStackOneEntry = {
+				stack: [],
+
+				_bindHashChange: function() {
+					var self = this;
+					$( window ).one( "hashchange.popup", function() {
+						$.each(popupStack.stack, function(key, value) {
+							value._realClose();
+						});
+						popupStack.stack = [];
+					} );
+				},
+
+				push: function(popup) {
+					if (popupStack.stack.length === 0) {
+						// listen for hashchange that will occur when we set it to null dialog hash
+						$( window ).one( "hashchange", function() {
+							popupStack._bindHashChange();
+						} );
+
+						// set hash to non-linkable dialog url
+						$.mobile.path.set( "&ui-state=dialog" );
+					}
+
+					popupStack.stack.push(popup);
+				},
+
+				pop: function(popup) {
+					var idx = popupStack.stack.indexOf(popup);
+
+					if (idx < 0) {
+						popup._realClose();
+					}
+					else
+					if (popupStack.stack.length === 1) {
+						window.history.back();
+					}
+					else {
+						popupStack.stack.splice(idx, 1);
+						popup._realClose();
+					}
+				}
+			},
+
+			popupStack = $.mobile.popupsHaveOneHistoryEntry ? popupStackOneEntry : popupStackManyEntries;
+
 	$.widget( "mobile.popup", $.mobile.widget, {
 		options: {
 			theme: null,
@@ -79,7 +181,8 @@ define( [ "jquery", "jquery.mobile.widget" ], function( $ ) {
 				if ( matches && matches.length > 1 ) {
 					currentTheme = matches[ 1 ];
 					break;
-				} else {
+				}
+				else {
 					currentTheme = null;
 				}
 			}
@@ -139,7 +242,8 @@ define( [ "jquery", "jquery.mobile.widget" ], function( $ ) {
 
 			if ( this[setter] !== undefined ) {
 				this[setter]( value );
-			} else {
+			}
+			else {
 				$.mobile.widget.prototype._setOption.apply( this, arguments );
 			}
 		},
@@ -160,7 +264,8 @@ define( [ "jquery", "jquery.mobile.widget" ], function( $ ) {
 
 			if ( roomtop > menuHeight / 2 && roombot > menuHeight / 2 ) {
 				newtop = y - halfheight;
-			} else {
+			}
+			else {
 				// 30px tolerance off the edges
 				newtop = roomtop > roombot ? scrollTop + screenHeight - menuHeight - 30 : scrollTop + 30;
 			}
@@ -168,30 +273,22 @@ define( [ "jquery", "jquery.mobile.widget" ], function( $ ) {
 			// If the menuwidth is smaller than the screen center is
 			if ( menuWidth < maxwidth ) {
 				newleft = ( screenWidth - menuWidth ) / 2;
-			} else {
+			}
+			else {
 				//otherwise insure a >= 30px offset from the left
 				newleft = x - menuWidth / 2;
 
 				// 10px tolerance off the edges
 				if ( newleft < 10 ) {
 					newleft = 10;
-				} else if ( ( newleft + menuWidth ) > screenWidth ) {
+				}
+				else
+				if ( ( newleft + menuWidth ) > screenWidth ) {
 					newleft = screenWidth - menuWidth - 10;
 				}
 			}
 
 			return { x: newleft, y: newtop };
-		},
-
-		_bindHashChange: function() {
-			var self = this;
-			$( window ).one( "hashchange.popup", function() {
-				self.close( true );
-			} );
-		},
-
-		_unbindHashChange: function() {
-			$( window ).unbind( "hashchange.popup" );
 		},
 
 		open: function( x, y ) {
@@ -220,19 +317,16 @@ define( [ "jquery", "jquery.mobile.widget" ], function( $ ) {
 							self._ui.screen.height( $( document ).height() );
 						} );
 
-				// listen for hashchange that will occur when we set it to null dialog hash
-				$( window ).one( "hashchange", function() {
-					self._bindHashChange();
-				} );
-
-				// set hash to non-linkable dialog url
-				$.mobile.path.set( "&ui-state=dialog" );
-
+				popupStack.push(this);
 				this._isOpen = true;
 			}
 		},
 
-		close: function(fromHash) {
+		close: function() {
+			popupStack.pop(this);
+		},
+
+		_realClose: function() {
 			if ( this._isOpen ) {
 				var self = this,
 					hideScreen = function() {
@@ -254,16 +348,9 @@ define( [ "jquery", "jquery.mobile.widget" ], function( $ ) {
 
 				if ( this.options.fade ) {
 					this._ui.screen.animate( {opacity: 0.0}, "fast", hideScreen );
-				} else {
-					hideScreen();
 				}
-
-				// unbind listener that comes with opening popup
-				this._unbindHashChange();
-
-				// if the close event did not come from an internal hash listener, reset URL back
-				if ( !fromHash ) {
-					window.history.back();
+				else {
+					hideScreen();
 				}
 			}
 		}
