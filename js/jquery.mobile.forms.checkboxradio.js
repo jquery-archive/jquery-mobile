@@ -80,6 +80,12 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 				}
 
 				self._cacheVals();
+				
+				// Input set for common radio buttons will contain all the radio
+				// buttons, but will not for checkboxes. clearing the checked status
+				// of other radios ensures the active button state is applied properly
+				self._getInputSet().not( input ).removeAttr( "checked" );
+				
 				input.attr( "checked", inputtype === "radio" && true || !input.attr( "checked" ) );
 				//input.prop( "checked", inputtype === "radio" && true || !input.attr( "checked" ) );
 
@@ -89,11 +95,6 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 				//       through to the associate input. we can swallow that click at the parent
 				//       wrapper element level
 				input.triggerHandler( 'click' );
-
-				// Input set for common radio buttons will contain all the radio
-				// buttons, but will not for checkboxes. clearing the checked status
-				// of other radios ensures the active button state is applied properly
-				self._getInputSet().not( input ).removeAttr( "checked" );
 
 				self._updateAll();
 				return false;
