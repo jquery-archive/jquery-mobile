@@ -91,7 +91,7 @@
 
 .ui-btn-up-a {
 	border: 1px solid 		#111 /*{a-bup-border}*/;
-	background: 			#444 /*{a-bup-background-color}*/;
+	background: 			#333 /*{a-bup-background-color}*/;
 	font-weight: bold;
 	color: 					#fff /*{a-bup-color}*/;
 	text-shadow: 0 /*{a-bup-shadow-x}*/ 1px /*{a-bup-shadow-y}*/ 1px /*{a-bup-shadow-radius}*/ #000 /*{a-bup-shadow-color}*/;
