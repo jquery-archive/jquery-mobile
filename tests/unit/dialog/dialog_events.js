@@ -28,7 +28,7 @@
 				ok( /&ui-state=dialog/.test(location.hash), "ui-state=dialog =~ location.hash", "dialog open" );
 
 				// close the dialog
-				$( ".ui-dialog-page" ).dialog( "close" );
+				$( ".ui-dialog" ).dialog( "close" );
 			},
 
 			function() {

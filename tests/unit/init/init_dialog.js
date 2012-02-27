@@ -9,7 +9,7 @@
 		ok( $("#foo").hasClass( "ui-page" ), "the div has the page class" );
 
 		// NOTE this will fail when/if we decide to render it as a dialog
-		ok( !$("#foo").hasClass( "ui-dialog-page" ), "the div does NOT have the dialog page class" );
+		ok( !$("#foo").hasClass( "ui-dialog" ), "the div does NOT have the dialog page class" );
 	});
 
 	//NOTE the opposite case is tested everyewhere else in the suite :D

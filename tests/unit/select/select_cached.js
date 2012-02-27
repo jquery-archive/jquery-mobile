@@ -27,7 +27,7 @@
 			},
 
 			function(){
-				ok( $.mobile.activePage.hasClass('ui-dialog-page'), "the dialog came up" );
+				ok( $.mobile.activePage.hasClass('ui-dialog'), "the dialog came up" );
 				var option = $.mobile.activePage.find( "li a" ).not(":contains('" + selectButton.text() + "')").last();
 				value = option.text();
 				option.click();
@@ -84,7 +84,7 @@
 			},
 
 			function(){
-				ok( $.mobile.activePage.hasClass('ui-dialog-page'), "the dialog came up" );
+				ok( $.mobile.activePage.hasClass('ui-dialog'), "the dialog came up" );
 				$.mobile.activePage.find( "li a" ).last().click();
 			},
 
