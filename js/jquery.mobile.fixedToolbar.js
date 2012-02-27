@@ -26,7 +26,8 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 			// The following function serves to rule out some popular browsers with known fixed-positioning issues
 			// This is a plugin option like any other, so feel free to improve or overwrite it
 			supportBlacklist: function(){
-				var ua = navigator.userAgent,
+				var w = window,
+					ua = navigator.userAgent,
 					platform = navigator.platform,
 					// Rendering engine is Webkit, and capture major version
 					wkmatch = ua.match( /AppleWebKit\/([0-9]+)/ ),
@@ -34,9 +35,10 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 					ffmatch = ua.match( /Fennec\/([0-9]+)/ ),
 					ffversion = !!ffmatch && ffmatch[ 1 ],
 					operammobilematch = ua.match( /Opera Mobile\/([0-9]+)/ ),
-					omversion = !!operammobilematch && operammobilematch[ 1 ],
-					w = window;
-
+					bbmatch = w.blackberry && w.navigator.appVersion.match( /Version\/([0-9]+)/ ),
+					bbversion = !!bbmatch && parseInt( bbmatch[ 1 ], 10 ),
+					omversion = !!operammobilematch && operammobilematch[ 1 ];
+					
 				if(
 					// iOS 4.3 and older : Platform is iPhone/Pad/Touch and Webkit version is less than 534 (ios5)
 					( ( platform.indexOf( "iPhone" ) > -1 || platform.indexOf( "iPad" ) > -1  || platform.indexOf( "iPod" ) > -1 ) && wkversion && wkversion < 534 )
@@ -56,7 +58,7 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 					( "palmGetResource" in window && wkversion && wkversion < 534 )
 					||
 					// BlackBerry six and below.
-					( w.blackberry && ( w.navigator.appVersion.match( /Version\/([0-9])/ ) && parseInt( RegExp.$1, 10 ) < 7 ) )
+					( w.blackberry && bbversion < 7 )
 					||
 					// MeeGo
 					( ua.indexOf( "MeeGo" ) > -1 && ua.indexOf( "NokiaBrowser/8.5.0" ) > -1 )
