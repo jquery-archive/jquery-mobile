@@ -14,6 +14,7 @@ OUTPUT = compiled
 
 # The name of the files
 NAME = jquery.mobile
+BASE_NAME = jquery.mobile
 STRUCTURE = jquery.mobile.structure
 deploy: NAME = jquery.mobile-${VER_OFFICIAL}
 deploy: STRUCTURE = jquery.mobile.structure-${VER_OFFICIAL}
@@ -95,7 +96,7 @@ docs: init
 	@@cat tmp/demos/LICENSE-INFO.txt | cat - tmp/demos/js/jquery.mobile.docs.js > tmp/demos/js/jquery.mobile.docs.js.tmp
 	@@cat tmp/demos/js/jquery.mobile.docs.js.tmp | ${SED_VER_API} > tmp/demos/js/jquery.mobile.docs.js
 	# ... Prepend versioned license to jquery.mobile.css
-	@@cat tmp/demos/LICENSE-INFO.txt | cat - tmp/demos/css/themes/default/${NAME}.css > tmp/demos/css/themes/default/${NAME}.css.tmp
+	@@cat tmp/demos/LICENSE-INFO.txt | cat - tmp/demos/css/themes/default/${BASE_NAME}.css > tmp/demos/css/themes/default/${NAME}.css.tmp
 	@@mv tmp/demos/css/themes/default/${NAME}.css.tmp tmp/demos/css/themes/default/${NAME}.css
 	# ... replace "js/" with "js/jquery.mobile.docs.js"
 	@@ # NOTE the deletion here is required by gnu/bsd sed differences
