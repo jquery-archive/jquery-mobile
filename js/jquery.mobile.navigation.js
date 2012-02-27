@@ -1384,7 +1384,7 @@ define( [
 
 				// If current active page is not a dialog skip the dialog and continue
 				// in the same direction
-				if(!$.mobile.activePage.is( ".ui-dialog-page" )) {
+				if(!$.mobile.activePage.is( ".ui-dialog" )) {
 					//determine if we're heading forward or backward and continue accordingly past
 					//the current dialog
 					urlHistory.directHashChange({

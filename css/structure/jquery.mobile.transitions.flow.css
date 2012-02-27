@@ -5,7 +5,7 @@
 	-webkit-box-shadow: 0 0 20px rgba(0,0,0,.4);
 	-moz-box-shadow: 0 0 20px rgba(0,0,0,.4);
 }
-.ui-dialog-page.flow {
+.ui-dialog.flow {
 	-webkit-transform-origin: none;
 	-moz-transform-origin: none;	
 	-webkit-box-shadow: none;

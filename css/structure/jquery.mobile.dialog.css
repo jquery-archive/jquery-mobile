@@ -1,7 +1,7 @@
-.ui-dialog { width: 92.5%; max-width: 500px; margin: 10% auto 15px auto; padding: 0; }
-.ui-dialog-page {
+.ui-dialog {
 	 background: none !important; /* this is to ensure that dialog theming does not apply (by default at least) on the page div */
 }
+.ui-dialog-contain { width: 92.5%; max-width: 500px; margin: 10% auto 15px auto; padding: 0; }
 .ui-dialog .ui-header {
 	margin-top: 15%;
 }
