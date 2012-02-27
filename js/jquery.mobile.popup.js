@@ -2,7 +2,10 @@
 //>>description: Popup windows.
 //>>label: Popups
 
-define( [ "jquery", "jquery.mobile.widget" ], function( $ ) {
+define( [ "jquery",
+	"jquery.mobile.widget",
+	"jquery.mobile.navigation",
+	"../external/requirejs/depend!./jquery.mobile.hashchange[jquery]" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
