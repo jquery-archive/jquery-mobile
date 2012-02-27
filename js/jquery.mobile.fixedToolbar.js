@@ -55,6 +55,9 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 					// WebOS less than 3
 					( "palmGetResource" in window && wkversion && wkversion < 534 )
 					||
+					// BlackBerry six and below.
+					( w.blackberry && ( w.navigator.appVersion.match( /Version\/([0-9])/ ) && parseInt( RegExp.$1, 10 ) < 7 ) )
+					||
 					// MeeGo
 					( ua.indexOf( "MeeGo" ) > -1 && ua.indexOf( "NokiaBrowser/8.5.0" ) > -1 )
 				){
