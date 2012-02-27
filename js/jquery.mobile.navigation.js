@@ -1085,9 +1085,6 @@ define( [
 					settings.duplicateCachedPage.remove();
 				}
 
-				//remove initial build class (only present on first pageshow)
-				$html.removeClass( "ui-mobile-rendering" );
-
 				// Send focus to the newly shown page. Moved from promise .done binding in transitionPages
 				// itself to avoid ie bug that reports offsetWidth as > 0 (core check for visibility)
 				// despite visibility: hidden addresses issue #2965

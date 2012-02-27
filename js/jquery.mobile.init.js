@@ -122,6 +122,9 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 
 			// cue page loading message
 			$.mobile.showPageLoadingMsg();
+			
+			//remove initial build class (only present on first pageshow)
+			$html.removeClass( "ui-mobile-rendering" );
 
 			// if hashchange listening is disabled or there's no hash deeplink, change to the first page in the DOM
 			if ( !$.mobile.hashListeningEnabled || !$.mobile.path.stripHash( location.hash ) ) {
