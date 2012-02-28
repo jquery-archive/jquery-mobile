@@ -36,7 +36,7 @@
 <ol id="qunit-tests">
 </ol>
 
-<div data-nstest-role="page">
+<div data-nstest-role="page" data-nstest-theme="a">
 	<div data-nstest-role="content">
 		<div data-nstest-role="fieldcontain">
 			<fieldset data-nstest-role="controlgroup">
@@ -121,6 +121,20 @@
 		<label for="checkbox-change-triggered">click triggered</label>
 		<input type="radio" name="checkbox-change-triggered" id="checkbox-change-triggered-2"/>
 		<label for="checkbox-change-triggered-2">click triggered</label>
+	</fieldset>
+</div>
+
+<div data-role="fieldcontain">
+	<fieldset data-role="controlgroup">
+		<legend>Agree to the terms:</legend>
+		<input type="checkbox" name="checkbox-inherit-theme" id="checkbox-inherit-theme"/>
+		<label for="checkbox-inherit-theme">foo</label>
+	</fieldset>
+
+	<fieldset data-role="controlgroup">
+		<legend>Agree to the terms:</legend>
+		<input type="checkbox" name="checkbox-explicit-theme" id="checkbox-explicit-theme" data-nstest-theme="b"/>
+		<label for="checkbox-explicit-theme">foo</label>
 	</fieldset>
 </div>
 </div>

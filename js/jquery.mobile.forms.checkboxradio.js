@@ -47,9 +47,9 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			uncheckedicon: uncheckedicon
 		});
 
-		// If there's no selected theme...
+		// If there's no selected theme check the data attr
 		if( !this.options.theme ) {
-			this.options.theme = this.element.jqmData( "theme" );
+			this.options.theme = $.mobile.getInheritedTheme( this.element, "c" );
 		}
 
 		label.buttonMarkup({

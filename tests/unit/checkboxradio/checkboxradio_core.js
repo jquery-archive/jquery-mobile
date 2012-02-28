@@ -182,4 +182,13 @@
 			}
 		], 2000);
 	});
+
+
+	test( "theme should be inherited", function() {
+		var $inherited = $( "#checkbox-inherit-theme" ),
+		    $explicit = $( "#checkbox-explicit-theme" );
+
+		ok( $inherited.siblings("label").hasClass( "ui-btn-up-a" ), "should inherit from page" );
+		ok( $explicit.siblings("label").hasClass( "ui-btn-up-b" ), "should not inherit" );
+	});
 })(jQuery);
