@@ -209,7 +209,8 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 					return false;
 				}
-			});
+			})
+			.bind( "vclick", false );
 
 		slider.insertAfter( control );
 
