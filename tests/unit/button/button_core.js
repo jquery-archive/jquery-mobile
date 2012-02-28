@@ -47,4 +47,12 @@
 			same( $form.find( "[type='hidden']" ).length, 0, "hidden form input is removed" );
 		}
 	});
+
+	test( "theme should be inherited", function() {
+		var $inherited = $( "#theme-check" ),
+		    $explicit = $( "#theme-check-explicit" );
+
+		ok( $inherited.closest("div").hasClass( "ui-btn-up-a" ), "should inherit from page" );
+		ok( $explicit.closest("div").hasClass( "ui-btn-up-b" ), "should not inherit" );
+	});
 })( jQuery );
