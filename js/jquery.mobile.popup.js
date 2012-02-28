@@ -64,6 +64,8 @@ define( [ "jquery",
 			} );
 
 			ui.screen.bind( "vclick", function( e ) {
+				e.preventDefault();
+				e.stopImmediatePropagation();
 				self.close();
 			} );
 		},
