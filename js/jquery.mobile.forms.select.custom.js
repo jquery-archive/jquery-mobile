@@ -53,17 +53,18 @@ define( [
 			headerTitle = $( "<h1>", {
 				"class": "ui-title"
 			}).appendTo( header ),
+			
+			menuPageContent,
+			menuPageClose,
+			headerClose;
 
+		if( widget.isMultiple ) {
 			headerClose = $( "<a>", {
 				"text": widget.options.closeText,
 				"href": "#",
 				"class": "ui-btn-left"
-			}).attr( "data-" + $.mobile.ns + "iconpos", "notext" ).attr( "data-" + $.mobile.ns + "icon", "delete" ).appendTo( header ).buttonMarkup(),
-
-			menuPageContent,
-			
-			menuPageClose;
-
+			}).attr( "data-" + $.mobile.ns + "iconpos", "notext" ).attr( "data-" + $.mobile.ns + "icon", "delete" ).appendTo( header ).buttonMarkup();
+		}
 
 		$.extend( widget, {
 			select: widget.select,
@@ -159,7 +160,11 @@ define( [
 						switch ( event.keyCode ) {
 							// up or left arrow keys
 						 case 38:
-							prev = li.prev();
+							prev = li.prev().not( ".ui-selectmenu-placeholder" );
+							
+							if( prev.is( ".ui-li-divider" ) ) {
+								prev = prev.prev();
+							}
 
 							// if there's a previous option, focus it
 							if ( prev.length ) {
@@ -167,7 +172,7 @@ define( [
 									.blur()
 									.attr( "tabindex", "-1" );
 
-								prev.find( "a" ).first().focus();
+								prev.addClass( "ui-btn-down-" + widget.options.theme ).find( "a" ).first().focus();
 							}
 
 							return false;
@@ -176,6 +181,10 @@ define( [
 							// down or right arrow keys
 						 case 40:
 							next = li.next();
+							
+							if( next.is( ".ui-li-divider" ) ) {
+								next = next.next();
+							}
 
 							// if there's a next option, focus it
 							if ( next.length ) {
@@ -183,7 +192,7 @@ define( [
 									.blur()
 									.attr( "tabindex", "-1" );
 
-								next.find( "a" ).first().focus();
+								next.addClass( "ui-btn-down-" + widget.options.theme ).find( "a" ).first().focus();
 							}
 
 							return false;
@@ -226,12 +235,14 @@ define( [
 				});
 
 				// Close button on small overlays
-				self.headerClose.click( function() {
-					if ( self.menuType == "overlay" ) {
-						self.close();
-						return false;
-					}
-				});
+				if( self.isMultiple ){ 
+					self.headerClose.click( function() {
+						if ( self.menuType == "overlay" ) {
+							self.close();
+							return false;
+						}
+					});
+				}
 
 				// track this dependency so that when the parent page
 				// is removed on pagehide it will also remove the menupage
@@ -279,7 +290,11 @@ define( [
 							if ( self.isMultiple ) {
 								item.find( ".ui-icon" ).removeClass( "ui-icon-checkbox-off" ).addClass( "ui-icon-checkbox-on" );
 							} else {
-								item.addClass( $.mobile.activeBtnClass );
+								if( item.is( ".ui-selectmenu-placeholder" ) ) {
+									item.next().addClass( $.mobile.activeBtnClass );
+								} else {
+									item.addClass( $.mobile.activeBtnClass );
+								}
 							}
 						}
 					});
@@ -492,11 +507,6 @@ define( [
 				}	
 
 				self.list[0].appendChild(fragment);
-
-				// Hide header close link for single selects
-				if ( !this.isMultiple ) {
-					this.headerClose.hide();
-				}
 
 				// Hide header if it's not a multiselect and there's no placeholder
 				if ( !this.isMultiple && !placeholder.length ) {
