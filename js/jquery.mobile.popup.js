@@ -127,9 +127,10 @@ define( [ "jquery",
 		},
 
 		_setTransition: function( value ) {
-			this._ui.container
-					.removeClass( this.options.transition || "" )
-					.addClass( value );
+			this._ui.container.removeClass( this.options.transition || "" );
+			if ( value && value !== "none" ) {
+				this._ui.container.addClass( value );
+			}
 			this.options.transition = value;
 			this.element.attr( "data-" + ( $.mobile.ns || "" ) + "transition", value );
 		},
@@ -199,6 +200,9 @@ define( [ "jquery",
 		open: function( x, y ) {
 			if ( !this._isOpen ) {
 				var self = this,
+					onAnimationComplete = function() {
+						self._ui.screen.height( $( document ).height() );
+					},
 					coords = this._placementCoords(
 							(undefined === x ? window.innerWidth / 2 : x),
 							(undefined === y ? window.innerHeight / 2 : y) );
@@ -212,15 +216,19 @@ define( [ "jquery",
 				}
 
 				this._ui.container
-						.removeClass( "ui-selectmenu-hidden" )
-						.css( {
-							left: coords.x,
-							top: coords.y
-						} )
+					.removeClass( "ui-selectmenu-hidden" )
+					.css( {
+						left: coords.x,
+						top: coords.y
+					} );
+
+				if ( this.options.transition && this.options.transition !== "none" ) {
+					this._ui.container
 						.addClass( "in" )
-						.animationComplete( function() {
-							self._ui.screen.height( $( document ).height() );
-						} );
+						.animationComplete( onAnimationComplete );
+				} else {
+					onAnimationComplete();
+				}
 
 				// listen for hashchange that will occur when we set it to null dialog hash
 				$( window ).one( "hashchange", function() {
@@ -234,9 +242,15 @@ define( [ "jquery",
 			}
 		},
 
-		close: function(fromHash) {
+		close: function( fromHash ) {
 			if ( this._isOpen ) {
 				var self = this,
+					onAnimationComplete = function() {
+						self._ui.container
+							.removeClass( "reverse out" )
+							.addClass( "ui-selectmenu-hidden" )
+							.removeAttr( "style" );
+					},
 					hideScreen = function() {
 						self._ui.screen.addClass( "ui-screen-hidden" );
 						self._isOpen = false;
@@ -244,15 +258,14 @@ define( [ "jquery",
 						self._ui.screen.removeAttr( "style" );
 					};
 
-				this._ui.container
+				if ( this.options.transition && this.options.transition !== "none" ) {
+					this._ui.container
 						.removeClass( "in" )
 						.addClass( "reverse out" )
-						.animationComplete( function() {
-							self._ui.container
-									.removeClass( "reverse out" )
-									.addClass( "ui-selectmenu-hidden" )
-									.removeAttr( "style" );
-						} );
+						.animationComplete( onAnimationComplete );
+				} else {
+					onAnimationComplete();
+				}
 
 				if ( this.options.fade ) {
 					this._ui.screen.animate( {opacity: 0.0}, "fast", hideScreen );
