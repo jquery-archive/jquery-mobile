@@ -236,7 +236,7 @@ define( [ "jquery",
 				} );
 
 				// set hash to non-linkable dialog url
-				$.mobile.path.set( "&ui-state=dialog" );
+				$.mobile.path.set( ( ( $.mobile.activePage != $.mobile.firstPage) ? $.mobile.urlHistory.getActive().url : "" ) + "&ui-state=dialog" );
 
 				this._isOpen = true;
 			}
