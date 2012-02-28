@@ -110,11 +110,16 @@ define( [
 
 				// Events for list items
 				self.list.attr( "role", "listbox" )
-					.delegate( ".ui-li>a", "focusin", function() {
-						$( this ).attr( "tabindex", "0" );
+					.bind( "focusin", function( e ){
+						$( e.target )
+							.attr( "tabindex", "0" )
+							.trigger( "vmouseover" );
+						
 					})
-					.delegate( ".ui-li>a", "focusout", function() {
-						$( this ).attr( "tabindex", "-1" );
+					.bind( "focusout", function( e ){
+						$( e.target )
+							.attr( "tabindex", "-1" )
+							.trigger( "vmouseout" );
 					})
 					.delegate( "li:not(.ui-disabled, .ui-li-divider)", "click", function( event ) {
 
@@ -329,7 +334,7 @@ define( [
 				}, 300);
 
 				function focusMenuItem() {
-					self.list.find( "." + $.mobile.activeBtnClass ).focus();
+					self.list.find( "." + $.mobile.activeBtnClass + " a" ).focus();
 				}
 
 				if ( menuHeight > screenHeight - 80 || !$.support.scrollTop ) {
@@ -481,11 +486,11 @@ define( [
 					item.setAttribute(dataIconAttr,dataIcon);					
 					item.className = classes.join(" ");
 					item.setAttribute('role','option');
-					item.setAttribute('tabindex','-1');
+					anchor.setAttribute('tabindex','-1');
 					item.appendChild(anchor);					
 					fragment.appendChild(item);
 				}	
-				fragment.firstChild.setAttribute('tabindex',0);
+
 				self.list[0].appendChild(fragment);
 
 				// Hide header close link for single selects
