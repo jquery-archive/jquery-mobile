@@ -67,6 +67,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			options;
 
+        domHandle.setAttribute( 'href', "#" );
 		domSlider.setAttribute('role','application');
 		domSlider.className = ['ui-slider ',selectClass," ui-btn-down-",trackTheme,' ui-btn-corner-all', inlineClass, miniClass].join("");
 		domHandle.className = 'ui-slider-handle';
