@@ -329,7 +329,7 @@ define( [
 				}, 300);
 
 				function focusMenuItem() {
-					self.list.find( $.mobile.activeBtnClass ).focus();
+					self.list.find( "." + $.mobile.activeBtnClass ).focus();
 				}
 
 				if ( menuHeight > screenHeight - 80 || !$.support.scrollTop ) {
