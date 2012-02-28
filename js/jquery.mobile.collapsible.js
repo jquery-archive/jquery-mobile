@@ -71,7 +71,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 					mini: o.mini,
 					theme: o.theme
 				})
-			.add( ".ui-btn-inner" )
+			.add( ".ui-btn-inner", $el )
 				.addClass( "ui-corner-top ui-corner-bottom" );
 
 		//events
