@@ -174,7 +174,8 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			self.refresh( event );
 			return false;
-		});
+		})
+		.bind( "vclick", false );
 
 		slider.add( document )
 			.bind( "vmouseup", function() {
@@ -209,8 +210,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 					return false;
 				}
-			})
-			.bind( "vclick", false );
+			});
 
 		slider.insertAfter( control );
 
