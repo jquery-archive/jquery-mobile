@@ -73,7 +73,6 @@ $( document ).delegate( ":jqmData(role='page'), :jqmData(role='dialog')", "pagec
 				.addClass( "ui-title" )
 				// Regardless of h element number in src, it becomes h1 for the enhanced page
 				.attr({
-					"tabindex": "0",
 					"role": "heading",
 					"aria-level": "1"
 				});
