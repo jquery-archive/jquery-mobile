@@ -36,7 +36,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		//
 		// Use click rather than vclick in order to prevent the possibility of unintentionally
 		// reopening the dialog if the dialog opening item was directly under the close button.
-		headerCloseButton.bind( "click", function() {
+		headerCloseButton.bind( "vclick", function() {
 			self.close();
 		});
 
