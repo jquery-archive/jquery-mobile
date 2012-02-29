@@ -8011,15 +8011,17 @@ function (lang,   logger,   envOptimize,        file,           parse,
 
             //Do comment removal.
             try {
-                startIndex = -1;
-                //Get rid of comments.
-                while ((startIndex = fileContents.indexOf("/*")) !== -1) {
-                    endIndex = fileContents.indexOf("*/", startIndex + 2);
-                    if (endIndex === -1) {
-                        throw "Improper comment in CSS file: " + fileName;
-                    }
-                    fileContents = fileContents.substring(0, startIndex) + fileContents.substring(endIndex + 2, fileContents.length);
-                }
+				if (config.optimizeCss.indexOf(".keepComments") === -1) {
+					startIndex = -1;
+					//Get rid of comments.
+					while ((startIndex = fileContents.indexOf("/*")) !== -1) {
+						endIndex = fileContents.indexOf("*/", startIndex + 2);
+						if (endIndex === -1) {
+							throw "Improper comment in CSS file: " + fileName;
+						}
+						fileContents = fileContents.substring(0, startIndex) + fileContents.substring(endIndex + 2, fileContents.length);
+					}
+				}
                 //Get rid of newlines.
                 if (config.optimizeCss.indexOf(".keepLines") === -1) {
                     fileContents = fileContents.replace(/[\r\n]/g, "");
