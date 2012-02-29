@@ -522,7 +522,11 @@ define( [
 
 	//simply set the active page's minimum height to screen height, depending on orientation
 	function resetActivePageHeight(){
-		$( "." + $.mobile.activePageClass ).css( "min-height", getScreenHeight() );
+		var aPage = $( "." + $.mobile.activePageClass ),
+			aPagePadT = parseFloat( aPage.css( "padding-top" ) ),
+			aPagePadB = parseFloat( aPage.css( "padding-bottom" ) );
+				
+		aPage.css( "min-height", getScreenHeight() - aPagePadT - aPagePadB );
 	}
 
 	//shared page enhancements
