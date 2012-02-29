@@ -125,6 +125,12 @@ dd h4 { margin:15px 0 0 0; }
 	font-size:80%; 
 }
 
+/* custom dialog for the photos sharing */
+.ui-dialog.dialog-actionsheet .ui-dialog-contain {
+	margin-top: 0;
+}
+
+
 
 /* F bar theme - just for the docs overview headers */
 .ui-bar-f {
