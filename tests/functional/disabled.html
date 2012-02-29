@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>jQuery Mobile: Disabling widgets</title>
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../../docs/_assets/css/jqm-docs.css" />
+	<script src="../../js/jquery.tag.inserter.js"></script>
+	<script data-main="../../js/jquery.mobile" src="../../external/requirejs/require.js"></script>
+
+	<script>
+	$(function(){
+		$("[data-target]").bind("tap click", function(e) {
+			var btn = $(this),
+				ar = (btn.attr("data-target") || "").split("@");
+
+			if (ar.length === 4) {
+				var tgt = ar[0],
+					widget = ar[1],
+					means = ar[2],
+					disabled = (ar[3] === "true" ? true : false);
+
+				str = '$("' + tgt + '").' + widget + '("' + 
+					(means === "method" 
+						? (disabled ? "disable" : "enable")
+						: "option") + '"' +
+						((means === "method")
+							? ''
+							: (', "disabled", ' + ar[3]))
+						+ ");";
+				$("#log")
+					.prepend($("<li></li>").text(str))
+					.listview("refresh");
+
+				eval(str);
+			}
+		});
+	});
+	</script>
+</head>
+<body>
+<div data-role="page" data-theme="b" id="jqm-home">
+	<div data-role="header">
+		<h1>Disabling widgets</h1>
+	</div>
+
+	<div data-role="content">
+		<div class="ui-grid-d">
+			<div class="ui-block-a">
+			<form action="#" method="get">
+				<label for="sample-slider">Slider</label>
+				<input id="sample-slider" type="range" min="3" max="17" value="7"></input>
+			</form>
+			</div>
+			<div class="ui-block-b">
+				<a data-target="#sample-slider@slider@option@true" data-role="button">Disable via option</a>
+			</div>
+			<div class="ui-block-c">
+				<a data-target="#sample-slider@slider@option@false" data-role="button">Enable via option</a>
+			</div>
+			<div class="ui-block-d">
+				<a data-target="#sample-slider@slider@method@true" data-role="button">Disable via method</a>
+			</div>
+			<div class="ui-block-e">
+				<a data-target="#sample-slider@slider@method@false" data-role="button">Enable via method</a>
+			</div>
+		</div>
+
+		<div class="ui-grid-d">
+			<div class="ui-block-a">
+			<form action="#" method="get">
+				<label for="sample-button">Button</label>
+				<input id="sample-button" type="button" value="Button"></input>
+			</form>
+			</div>
+			<div class="ui-block-b">
+				<a data-target="#sample-button@button@option@true" data-role="button">Disable via option</a>
+			</div>
+			<div class="ui-block-c">
+				<a data-target="#sample-button@button@option@false" data-role="button">Enable via option</a>
+			</div>
+			<div class="ui-block-d">
+				<a data-target="#sample-button@button@method@true" data-role="button">Disable via method</a>
+			</div>
+			<div class="ui-block-e">
+				<a data-target="#sample-button@button@method@false" data-role="button">Enable via method</a>
+			</div>
+		</div>
+
+		<div class="ui-grid-d">
+			<div class="ui-block-a">
+			<form action="#" method="get">
+				<label for="sample-checkbox">Checkbox</label>
+				<input id="sample-checkbox" type="checkbox"></input>
+			</form>
+			</div>
+			<div class="ui-block-b">
+				<a data-target="#sample-checkbox@checkboxradio@option@true" data-role="button">Disable via option</a>
+			</div>
+			<div class="ui-block-c">
+				<a data-target="#sample-checkbox@checkboxradio@option@false" data-role="button">Enable via option</a>
+			</div>
+			<div class="ui-block-d">
+				<a data-target="#sample-checkbox@checkboxradio@method@true" data-role="button">Disable via method</a>
+			</div>
+			<div class="ui-block-e">
+				<a data-target="#sample-checkbox@checkboxradio@method@false" data-role="button">Enable via method</a>
+			</div>
+		</div>
+
+		<div class="ui-grid-d">
+			<div class="ui-block-a">
+			<form action="#" method="get">
+				<label for="sample-select">Select</label>
+				<select id="sample-select">
+                                    <option value="option1">Option 1</option>
+                                    <option value="option2">Option 2</option>
+                                </select>
+			</form>
+			</div>
+			<div class="ui-block-b">
+				<a data-target="#sample-select@selectmenu@option@true" data-role="button">Disable via option</a>
+			</div>
+			<div class="ui-block-c">
+				<a data-target="#sample-select@selectmenu@option@false" data-role="button">Enable via option</a>
+			</div>
+			<div class="ui-block-d">
+				<a data-target="#sample-select@selectmenu@method@true" data-role="button">Disable via method</a>
+			</div>
+			<div class="ui-block-e">
+				<a data-target="#sample-select@selectmenu@method@false" data-role="button">Enable via method</a>
+			</div>
+		</div>
+
+		<div class="ui-grid-d">
+			<div class="ui-block-a">
+			<form action="#" method="get">
+				<label for="sample-textinput">Text</label>
+				<input id="sample-textinput" type="text"></input>
+			</form>
+			</div>
+			<div class="ui-block-b">
+				<a data-target="#sample-textinput@textinput@option@true" data-role="button">Disable via option</a>
+			</div>
+			<div class="ui-block-c">
+				<a data-target="#sample-textinput@textinput@option@false" data-role="button">Enable via option</a>
+			</div>
+			<div class="ui-block-d">
+				<a data-target="#sample-textinput@textinput@method@true" data-role="button">Disable via method</a>
+			</div>
+			<div class="ui-block-e">
+				<a data-target="#sample-textinput@textinput@method@false" data-role="button">Enable via method</a>
+			</div>
+		</div>
+
+		<div class="ui-grid-d">
+			<div class="ui-block-a">
+			<form action="#" method="get">
+				<label for="sample-search">Text</label>
+				<input id="sample-search" type="search"></input>
+			</form>
+			</div>
+			<div class="ui-block-b">
+				<a data-target="#sample-search@textinput@option@true" data-role="button">Disable via option</a>
+			</div>
+			<div class="ui-block-c">
+				<a data-target="#sample-search@textinput@option@false" data-role="button">Enable via option</a>
+			</div>
+			<div class="ui-block-d">
+				<a data-target="#sample-search@textinput@method@true" data-role="button">Disable via method</a>
+			</div>
+			<div class="ui-block-e">
+				<a data-target="#sample-search@textinput@method@false" data-role="button">Enable via method</a>
+			</div>
+		</div>
+
+		<ul data-role="listview" id="log">
+
+		</ul>
+
+	</div>
+</div>
+</body>
+</html>

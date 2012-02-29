@@ -154,6 +154,14 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 			return nsNormalizeDict[ prop ] || ( nsNormalizeDict[ prop ] = $.camelCase( $.mobile.ns + prop ) );
 		},
 
+                // Always returns a valid theme (assuming defaultTheme is given correctly)
+                validTheme: function(el, theme, defaultTheme) {
+                    if (theme === "" || theme === undefined || theme === null)
+                        return $.mobile.getInheritedTheme(el, defaultTheme);
+                    else
+                        return theme;
+                },
+
 		getInheritedTheme: function( el, defaultTheme ) {
 
 			// Find the closest parent with a theme class on it. Note that

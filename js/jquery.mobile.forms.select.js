@@ -35,7 +35,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 	_setDisabled: function( value ) {
 		this.element.attr( "disabled", value );
 		this.button.attr( "aria-disabled", value );
-		return this._setOption( "disabled", value );
+		this.button[value ? "addClass" : "removeClass"]("ui-disabled");
+		return $.Widget.prototype._setOption( "disabled", value );
 	},
 
 	_focusButton : function() {
@@ -223,17 +224,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 	// open and close preserved in native selects
 	// to simplify users code when looping over selects
 	open: $.noop,
-	close: $.noop,
-
-	disable: function() {
-		this._setDisabled( true );
-		this.button.addClass( "ui-disabled" );
-	},
-
-	enable: function() {
-		this._setDisabled( false );
-		this.button.removeClass( "ui-disabled" );
-	}
+	close: $.noop
 });
 
 //auto self-init widgets
