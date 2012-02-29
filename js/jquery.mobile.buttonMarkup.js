@@ -236,6 +236,12 @@ var attachEvents = function() {
 				hov && clearTimeout( hov );
 				foc && clearTimeout( foc );
 			}
+		},
+		"focusin focus": function( event ){
+			$( closestEnabledButton( event.target ) ).addClass( $.mobile.focusClass );
+		},
+		"focusout blur": function( event ){
+			$( closestEnabledButton( event.target ) ).removeClass( $.mobile.focusClass );
 		}
 	});
 
