@@ -249,4 +249,16 @@
 			ok( e.toString().indexOf( "[checkboxradio]" ) >= 0, "checkboxradio exception raised" );
 		}
 	});
+
+	test( "nested label checkbox still renders", function() {
+		var $checkbox = $( "#checkbox-nested-label" );
+
+		try {
+			$checkbox.checkboxradio();
+		} catch (e) {
+			ok( false, "checkboxradio exception raised: " + e.toString());
+		}
+
+		ok( $checkbox.parent().hasClass("ui-checkbox"), "enhancement has occured");
+	});
 })(jQuery);
