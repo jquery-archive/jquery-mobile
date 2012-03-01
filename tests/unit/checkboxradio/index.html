@@ -137,18 +137,28 @@
 	</fieldset>
 </div>
 
-<form id="form" data-ajax="false" method="get" action="form-result.html">
+<form id="radio-form" method="get" action="form-result.html">
 	<fieldset data-role="controlgroup" data-type="horizontal">
 		<legend>Check one:</legend>
 		<input type="radio" id="radio1" name="radio1" value="1" />
 		<label for="radio1">Radio1</label>
-		<input type="radio" id="radio2" name="radio1" value="2" />
-		<label for="radio2">Radio2</label>
-		<input type="radio" id="radio3" name="radio1" value="3" />
-		<label for="radio3">Radio3</label>
 	</fieldset>
-	<input type="submit" value="Submit" data-inline="true" />
 </form>
+
+
+<form id="check-form" method="get" action="form-result.html">
+	<div data-role="fieldcontain">
+		<fieldset data-role="controlgroup" data-type="horizontal">
+			<legend>Font styling:</legend>
+			<input type="checkbox" name="checkbox-form" id="checkbox-form" class="custom" />
+			<label for="checkbox-form">b</label>
+
+			<input type="checkbox" name="checkbox-form-2" id="checkbox-form-2" class="custom" />
+			<label for="checkbox-form-2"><em>i</em></label>
+		</fieldset>
+	</div>
+</form>
+
 </div>
 
 <div id="enhancetest">

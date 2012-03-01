@@ -193,7 +193,7 @@
 	});
 
 	asyncTest( "form submission should include radio button values", function() {
-		var $form = $( "form" ), $input = $form.find("input").first();
+		var $form = $( "#radio-form" ), $input = $form.find("input").first();
 
 		$.testHelper.pageSequence([
 			function() {
@@ -201,8 +201,40 @@
 				$form.submit();
 			},
 
-			function(){
+			function( timeout ){
 				ok( location.search.indexOf("radio1=1") >= 0, "the radio was checked" );
+
+				// if the changepage in the previous function failed don't go back
+				if( !timeout ){
+					window.history.back();
+				}
+			},
+
+			function(){
+				start();
+			}
+		]);
+	});
+
+	asyncTest( "form submission should include checkbox button values", function() {
+		var $form = $( "#check-form" ), $inputs = $form.find("input");
+
+		$.testHelper.pageSequence([
+			function() {
+				$inputs.click();
+				$form.submit();
+			},
+
+			function( timeout ){
+				ok( location.search.indexOf("checkbox-form=on") >= 0, "the first checkbox was checked" );
+				ok( location.search.indexOf("checkbox-form-2=on") >= 0, "the second checkbox was checked" );
+				// if the changepage in the previous function failed don't go back
+				if( !timeout ){
+					window.history.back();
+				}
+			},
+
+			function(){
 				start();
 			}
 		]);
