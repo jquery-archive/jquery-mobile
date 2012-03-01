@@ -16,8 +16,10 @@ OUTPUT = compiled
 # The name of the files
 NAME = jquery.mobile
 BASE_NAME = jquery.mobile
+THEME_FILENAME = jquery.mobile.theme
 STRUCTURE = jquery.mobile.structure
 deploy: NAME = jquery.mobile-${VER_OFFICIAL}
+deploy: THEME_FILENAME = jquery.mobile.theme-${VER_OFFICIAL}
 deploy: STRUCTURE = jquery.mobile.structure-${VER_OFFICIAL}
 
 # The CSS theme being used
@@ -77,7 +79,15 @@ css: init
 		-jar build/yuicompressor-2.4.6.jar \
 		--type css ${OUTPUT}/${STRUCTURE}.compiled.css >> ${OUTPUT}/${STRUCTURE}.min.css
 	@@rm ${OUTPUT}/${STRUCTURE}.compiled.css
-	# ..... and then copy in the images
+	# Build the theme only file
+	@@cat LICENSE-INFO.txt | ${VER} > ${OUTPUT}/${THEME_FILENAME}.css
+	@@cat css/themes/default/jquery.mobile.theme.css >> ${OUTPUT}/${THEME_FILENAME}.css
+	# ..... and then minify it
+	@@echo ${VER_MIN} > ${OUTPUT}/${THEME_FILENAME}.min.css
+	@@java -XX:ReservedCodeCacheSize=64m \
+		-jar build/yuicompressor-2.4.6.jar \
+		--type css ${OUTPUT}/${THEME_FILENAME}.css >> ${OUTPUT}/${THEME_FILENAME}.min.css
+	# Copy in the images
 	@@cp -R css/themes/${THEME}/images ${OUTPUT}/
 	# Css portion is complete.
 	# -------------------------------------------------
