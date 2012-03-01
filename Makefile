@@ -55,6 +55,7 @@ css: init
 	${RUN_JS} \
 		external/r.js/dist/r.js \
 		-o cssIn=css/themes/default/jquery.mobile.css \
+		optimizeCss=standard.keepComments.keepLines \
 		out=${OUTPUT}/${NAME}.compiled.css
 	@@cat LICENSE-INFO.txt | ${VER} > ${OUTPUT}/${NAME}.css
 	@@cat ${OUTPUT}/${NAME}.compiled.css >> ${OUTPUT}/${NAME}.css
