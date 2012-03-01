@@ -37,6 +37,10 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			return;
 		}
 
+		if( !label.length ){
+			this.raise( inputtype + " inputs require a label for enhancement" );
+		}
+
 		// Expose for other methods
 		$.extend( this, {
 			label: label,
@@ -98,7 +102,6 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 				self._updateAll();
 				return false;
 			}
-
 		});
 
 		input

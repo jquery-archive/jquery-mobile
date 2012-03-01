@@ -239,4 +239,14 @@
 			}
 		]);
 	});
+
+	test( "no label raises an exception", function() {
+		expect( 1 );
+
+		try {
+			$( "#checkbox-exception" ).checkboxradio();
+		} catch (e) {
+			ok( e.toString().indexOf( "[checkboxradio]" ) >= 0, "checkboxradio exception raised" );
+		}
+	});
 })(jQuery);
