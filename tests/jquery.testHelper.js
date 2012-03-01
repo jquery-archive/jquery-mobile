@@ -165,9 +165,8 @@
 		},
 
 		eventCascade: function( sequence, timedOut ) {
-			var args = sequence,
-				fn = args.shift(),
-				event = args.shift(),
+			var fn = sequence.shift(),
+				event = sequence.shift(),
 				self = this;
 
 			if( fn === undefined ) {
@@ -178,7 +177,7 @@
 				// if a pagechange or defined event is never triggered
 				// continue in the sequence to alert possible failures
 				var warnTimer = setTimeout(function() {
-					self.eventCascade( args, true );
+					self.eventCascade( sequence, true );
 				}, 2000);
 
 				// bind the recursive call to the event
@@ -186,8 +185,8 @@
 					clearTimeout( warnTimer );
 
 					// Let the current stack unwind before we fire off the next item in the sequence.
-					// TODO setTimeout(self.pageSequence, 0, args);
-					setTimeout(function(){ self.eventCascade(args); }, 0);
+					// TODO setTimeout(self.pageSequence, 0, sequence);
+					setTimeout(function(){ self.eventCascade(sequence); }, 0);
 				});
 			}
 
