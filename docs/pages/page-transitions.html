@@ -111,7 +111,7 @@
 		<p>By default, all transitions except fade require 3D transform support. Devices that lack 3D support will fall back to a fade transition, regardless of the transition specified. We do this to proactively exclude poorly-performing platforms like Android 2.x from advanced transitions and ensure they still have a smooth experience. Note that there are platforms such as Android 3.0 that technically support 3D transforms, but still have poor animation performance so this won't guarantee that every browser will be 100% flicker-free but we try to target this responsibly.</p>
 		
 		<p>The fallback transition for browsers that don't support 3D transforms can be configured for each transition type, but by default we specify "fade" as the fallback. For example, this will set the fallback transition for the slideout transition to "none":</p>
-		<code>$.mobile.fallbackTransition.slideout = "none"</code>
+		<code>$.mobile.transitionFallbacks.slideout = "none"</code>
 		
 		<h2>Setting a max width for transitions</h2>
 		<p>By default, transitions can be disabled (set to "none") when the window width is greater than a certain pixel width. This feature is useful because transitions can be distracting or perform poorly on larger screens. This value is configurable via the global option <code>$.mobile.maxTransitionWidth</code>, which defaults to <code>false</code>. The option accepts any number representing a pixel width or <code>false</code> value. If it's not <code>false</code>, the handler will use a "none" transition when the window width is wider than the specified value.</p>
