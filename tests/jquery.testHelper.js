@@ -150,18 +150,18 @@
 			});
 		},
 
-		pageSequence: function(fns){
-			this.eventSequence("pagechange", fns);
+		pageSequence: function( fns ){
+			this.eventSequence( "pagechange", fns );
 		},
 
-		eventSequence: function(event, fns, timedOut){
+		eventSequence: function( event, fns, timedOut ){
 			var seq = [];
-			$.each(fns, function(i, fn) {
-				seq.push(fn);
-				if( i !== fns.length - 1) seq.push(event);
+			$.each(fns, function( i, fn ) {
+				seq.push( fn );
+				if( i !== fns.length - 1) seq.push( event );
 			});
 
-			this.eventCascade(seq);
+			this.eventCascade( seq );
 		},
 
 		eventCascade: function( sequence, timedOut ) {
@@ -177,13 +177,13 @@
 			if( event ){
 				// if a pagechange or defined event is never triggered
 				// continue in the sequence to alert possible failures
-				var warnTimer = setTimeout(function(){
-					self.eventCascade(args, true);
+				var warnTimer = setTimeout(function() {
+					self.eventCascade( args, true );
 				}, 2000);
 
 				// bind the recursive call to the event
-				$.mobile.pageContainer.one(event, function(){
-					clearTimeout(warnTimer);
+				$.mobile.pageContainer.one(event, function() {
+					clearTimeout( warnTimer );
 
 					// Let the current stack unwind before we fire off the next item in the sequence.
 					// TODO setTimeout(self.pageSequence, 0, args);
@@ -193,32 +193,26 @@
 
 			// invoke the function which should, in some fashion,
 			// trigger the next event
-			fn(timedOut);
+			fn( timedOut );
 		},
 
 		deferredSequence: function(fns) {
 			var fn = fns.shift(),
 				deferred = $.Deferred(),
-				self = this;
+				self = this, res;
 
 			if (fn) {
 				res = fn();
 				if ( res && $.type( res.done ) === "function" ) {
-					res.done(
-						function() {
-							self.deferredSequence( fns ).done(
-								function() {
-									deferred.resolve();
-								}
-							);
-						}
-					)
-				} else {
-					self.deferredSequence( fns ).done(
-						function() {
+					res.done(function() {
+						self.deferredSequence( fns ).done(function() {
 							deferred.resolve();
-						}
-					);
+						});
+					});
+				} else {
+					self.deferredSequence( fns ).done(function() {
+						deferred.resolve();
+					});
 				}
 			} else {
 				deferred.resolve();
