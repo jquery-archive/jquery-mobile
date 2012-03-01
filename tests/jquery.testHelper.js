@@ -155,28 +155,44 @@
 		},
 
 		eventSequence: function(event, fns, timedOut){
-			var fn = fns.shift(),
-					self = this;
-
-			if( fn === undefined ) return;
-
-			// if a pagechange or defined event is never triggered
-			// continue in the sequence to alert possible failures
-			var warnTimer = setTimeout(function(){
-				self.eventSequence(event, fns, true);
-			}, 2000);
-
-			// bind the recursive call to the event
-			$.mobile.pageContainer.one(event, function(){
-				clearTimeout(warnTimer);
-
-				// Let the current stack unwind before we fire off the next item in the sequence.
-				// TODO setTimeout(self.pageSequence, 0, [fns, event]);
-				setTimeout(function(){ self.eventSequence(event, fns); }, 0);
+			var seq = [];
+			$.each(fns, function(i, fn) {
+				seq.push(fn);
+				if( i !== fns.length - 1) seq.push(event);
 			});
 
+			this.eventCascade(seq);
+		},
+
+		eventCascade: function( sequence, timedOut ) {
+			var args = sequence,
+				fn = args.shift(),
+				event = args.shift(),
+				self = this;
+
+			if( fn === undefined ) {
+				return;
+			}
+
+			if( event ){
+				// if a pagechange or defined event is never triggered
+				// continue in the sequence to alert possible failures
+				var warnTimer = setTimeout(function(){
+					self.eventCascade(args, true);
+				}, 2000);
+
+				// bind the recursive call to the event
+				$.mobile.pageContainer.one(event, function(){
+					clearTimeout(warnTimer);
+
+					// Let the current stack unwind before we fire off the next item in the sequence.
+					// TODO setTimeout(self.pageSequence, 0, args);
+					setTimeout(function(){ self.eventCascade(args); }, 0);
+				});
+			}
+
 			// invoke the function which should, in some fashion,
-			// trigger the defined event
+			// trigger the next event
 			fn(timedOut);
 		},
 
@@ -203,7 +219,6 @@
 							deferred.resolve();
 						}
 					);
-
 				}
 			} else {
 				deferred.resolve();
