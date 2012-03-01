@@ -191,4 +191,20 @@
 		ok( $inherited.siblings("label").hasClass( "ui-btn-up-a" ), "should inherit from page" );
 		ok( $explicit.siblings("label").hasClass( "ui-btn-up-b" ), "should not inherit" );
 	});
+
+	asyncTest( "form submission should include radio button values", function() {
+		var $form = $( "form" ), $input = $form.find("input").first();
+
+		$.testHelper.pageSequence([
+			function() {
+				$input.click();
+				$form.submit();
+			},
+
+			function(){
+				ok( location.search.indexOf("radio1=1") >= 0, "the radio was checked" );
+				start();
+			}
+		]);
+	});
 })(jQuery);
