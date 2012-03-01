@@ -187,14 +187,11 @@ deploy_latest:
 # TODO target name preserved to avoid issues during refactor, latest -> deploy_latest
 latest: build_latest deploy_latest
 
-# Build the nightly backups. This is done on a server cronjob
-nightlies: css js docs zip
+# Push the nightly backups. This is done on a server cronjob
+deploy_nightlies:
 	# Time to put these on the CDN
-	@@mkdir -p tmp/nightlies
-	@@mv ${OUTPUT} tmp/nightlies/$$(date "+%Y%m%d")
-	@@scp -qr tmp/nightlies/* jqadmin@code.origin.jquery.com:/var/www/html/code.jquery.com/mobile/nightlies/
+	@@scp -qr ${OUTPUT} jqadmin@code.origin.jquery.com:/var/www/html/code.jquery.com/mobile/nightlies/$$(date "+%Y%m%d")
 	# -------------------------------------------------
-
 
 # Deploy a finished release. This is manually done.
 deploy: init css js docs zip
