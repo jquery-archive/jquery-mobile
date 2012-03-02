@@ -45,7 +45,7 @@ If you think you've found a bug, please report it by following these instruction
         * [jsfiddle](http://jsfiddle.net)
 3. Submit the issue.
 
-Recommended: [JS Bin issue template with instructions](http://jsbin.com/obowiw/edit)
+Recommended: [JS Bin issue template with instructions](http://jsbin.com/omacox/edit)
 
 Submitting patches
 ==================
