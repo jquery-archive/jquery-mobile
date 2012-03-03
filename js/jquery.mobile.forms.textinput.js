@@ -49,9 +49,11 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 
 			focusedEl = input.wrap( "<div class='ui-input-search ui-shadow-inset ui-btn-corner-all ui-btn-shadow ui-icon-searchfield" + themeclass + miniclass + "'></div>" ).parent();
 			clearbtn = $( "<a href='#' class='ui-input-clear' title='clear text'>clear text</a>" )
-				.tap(function( event ) {
-					input.val( "" ).focus();
-					input.trigger( "change" );
+				.bind('click', function( event ) {
+					input
+						.val( "" )
+						.focus()
+						.trigger( "change" );
 					clearbtn.addClass( "ui-input-clear-hidden" );
 					event.preventDefault();
 				})
