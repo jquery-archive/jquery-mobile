@@ -123,4 +123,24 @@
 			}
 		]);
 	});
+	
+	
+	asyncTest( "page container is updated to dialog overlayTheme at pagebeforeshow", function(){
+		
+		expect( 1 );
+		
+		var pageTheme = "ui-overlay-" + $.mobile.activePage.dialog( "option", "overlayTheme" );
+
+		$.mobile.pageContainer.removeClass( pageTheme );
+		
+		$.mobile.activePage
+			.bind( "pagebeforeshow", function(){
+				ok( $.mobile.pageContainer.hasClass( pageTheme ), "Page container has the same theme as the dialog overlayTheme on pagebeforeshow" );
+				start();
+			})
+			.trigger( "pagebeforeshow" );
+
+	} );
+	
+	
 })( jQuery );
