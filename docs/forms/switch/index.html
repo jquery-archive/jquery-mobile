@@ -56,7 +56,20 @@
 				<option value="off">Off</option>
 				<option value="on">On</option>
 			</select> 
-
+			
+			<p>The control is proportionally scaled, so if you're using longer words with it, you can just add a line of CSS to set it to the width you desire. For example, <code>div.ui-slider-switch { width: 9em }</code> will produce:</p>
+		
+			<style type="text/css" media="screen">
+			.switch-longdesc div.ui-slider-switch { width: 9em; }
+			</style>
+			<div class="switch-longdesc">
+				<label for="flip-min">Flip switch:</label>
+				<select name="slider" id="flip-min" data-role="slider">
+					<option value="off">Switch Off</option>
+					<option value="on">Switch On</option>
+				</select> 
+			</div>
+			
 			<h2>Mini version</h2>
 
 			<p>For a more compact version that is useful in toolbars and tight spaces, add the <code>data-mini="true"</code> attribute to the element to create a <a href="../forms-all-mini.html">mini version</a>. </p>
@@ -74,7 +87,8 @@
 			<select name="slider" id="flip-min" data-role="slider" data-mini="true">
 				<option value="off">Off</option>
 				<option value="on">On</option>
-			</select> 
+			</select>
+			
 
 			<h2>Field containers</h2>
 			 <p>Optionally wrap the switch markup in a container with the <code>data-role="fieldcontain"</code> attribute to help visually group it in a longer form.</p>
