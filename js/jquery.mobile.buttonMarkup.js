@@ -62,11 +62,6 @@ $.fn.buttonMarkup = function( options ) {
 			attachEvents();
 		}
 
-		// if not, try to find closest theme container
-		if ( !o.theme ) {
-			o.theme = $.mobile.getInheritedTheme( el, "c" );
-		}
-
 		buttonClass = "ui-btn ui-btn-up-" + o.theme;
 
 		if ( o.inline ) {
