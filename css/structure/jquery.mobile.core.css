@@ -46,7 +46,9 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 
 .ui-header, .ui-footer { position: relative; overflow: hidden; border-left-width: 0; border-right-width: 0; }
 .ui-header .ui-btn-left,
-.ui-header .ui-btn-right { position: absolute; top: -5px; }
+.ui-header .ui-btn-right,
+.ui-footer .ui-btn-left,
+.ui-footer .ui-btn-right { position: absolute; top: -5px; }
 .ui-header .ui-btn-left,
 .ui-footer .ui-btn-left { left: 5px; }
 .ui-header .ui-btn-right,
