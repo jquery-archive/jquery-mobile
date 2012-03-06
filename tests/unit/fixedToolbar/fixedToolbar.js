@@ -40,10 +40,10 @@
 		ok( $('#classes-test-f').hasClass('ui-footer-fullscreen'), 'A footer with data-position=fixed and data-fullscreen should have ui-footer-fullscreen class');
 
 		//parent
-		ok( $('#classes-test-b').closest( ".ui-page" ).hasClass( "ui-page-header-fixed" ), "Parent page of a fixed header has class ui-page-header-fixed" )
-		ok( $('#classes-test-e').closest( ".ui-page" ).hasClass( "ui-page-footer-fixed" ), "Parent page of a fixed footer has class ui-page-header-fixed" )
-		ok( $('#classes-test-c').closest( ".ui-page" ).hasClass( "ui-page-header-fullscreen" ), "Parent page of a fullscreen header has class ui-page-header-fullscreen" )
-		ok( $('#classes-test-f').closest( ".ui-page" ).hasClass( "ui-page-footer-fullscreen" ), "Parent page of a fullscreen footer has class ui-page-header-fullscreen" )
+		ok( $('#classes-test-b').closest( ".ui-page" ).hasClass( "ui-page-header-fixed" ), "Parent page of a fixed header has class ui-page-header-fixed" );
+		ok( $('#classes-test-e').closest( ".ui-page" ).hasClass( "ui-page-footer-fixed" ), "Parent page of a fixed footer has class ui-page-header-fixed" );
+		ok( $('#classes-test-c').closest( ".ui-page" ).hasClass( "ui-page-header-fullscreen" ), "Parent page of a fullscreen header has class ui-page-header-fullscreen" );
+		ok( $('#classes-test-f').closest( ".ui-page" ).hasClass( "ui-page-footer-fullscreen" ), "Parent page of a fullscreen footer has class ui-page-header-fullscreen" );
 
 
 	});
@@ -250,6 +250,70 @@
 
 			function() {
 				ok( nextpageheader.parent( ".ui-page" ).length, "fixed header and footer are now a child of page again" );
+				$.mobile.changePage( "#default" );
+			},
+
+			start
+		]);
+	});
+
+	asyncTest( "The persistent headers should work without a footer", function() {
+
+		expect( 3 );
+
+		$( "#persist-test-c, #persist-test-d" ).page();
+
+		var nextpageheader =  $( "#persist-test-d .ui-header-fixed" );
+
+		$.testHelper.pageSequence([
+			function(){
+				ok( nextpageheader.length, "next page has fixed header and fixed footer" );
+				$.mobile.changePage( "#persist-test-c" );
+			},
+
+			function(){
+				$( "#persist-test-d" )
+					.one( "pagebeforeshow", function(){
+						same( nextpageheader.parent()[0], $.mobile.pageContainer[0], "fixed header is now a child of page container" );
+					});
+
+				$.mobile.changePage( "#persist-test-d" );
+			},
+
+			function() {
+				same( nextpageheader.parent()[0], $.mobile.activePage[0], "fixed header is now a child of page again" );
+				$.mobile.changePage( "#default" );
+			},
+
+			start
+		]);
+	});
+
+	asyncTest( "The persistent footers should work without a header", function() {
+
+		expect( 3 );
+
+		$( "#persist-test-e, #persist-test-f" ).page();
+
+		var nextpagefooter =  $( "#persist-test-f .ui-footer-fixed" );
+
+		$.testHelper.pageSequence([
+			function(){
+				ok( nextpagefooter.length, "next page has fixed footer and fixed footer" );
+				$.mobile.changePage( "#persist-test-e" );
+			},
+
+			function(){
+				$( "#persist-test-f" )
+					.one( "pagebeforeshow", function(){
+						same( nextpagefooter.parent()[0], $.mobile.pageContainer[0], "fixed footer is now a child of page container" );
+					});
+
+				$.mobile.changePage( "#persist-test-f" );
+			},
+
+			function() {
+				same( nextpagefooter.parent()[0], $.mobile.activePage[0], "fixed footer is now a child of page again" );
 				$.mobile.changePage( "#default" );
 			},
 

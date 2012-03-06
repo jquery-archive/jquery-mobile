@@ -12,13 +12,9 @@
 	<script src="../../../external/qunit.js"></script>
 	<script>
 		$.testHelper.asyncLoad([
-			[
-				"jquery.mobile.fixedToolbar"
-			],
+			[ "jquery.mobile.fixedToolbar" ],
 			[ "jquery.mobile.init" ],
-			[
-				"./fixedToolbar.js"
-			]
+			[	"./fixedToolbar.js"	]
 		]);
 	</script>
 
@@ -64,6 +60,20 @@
 	<div data-nstest-role="footer" data-nstest-position="fixed" data-nstest-id="b"></div>
 </div>
 
+<div data-nstest-role="page" id="persist-test-c">
+	<div data-nstest-role="header" data-nstest-position="fixed" data-nstest-id="c"></div>
+</div>
 
+<div data-nstest-role="page" id="persist-test-d">
+	<div data-nstest-role="header" data-nstest-position="fixed" data-nstest-id="c"></div>
+</div>
+
+<div data-nstest-role="page" id="persist-test-e">
+	<div data-nstest-role="footer" data-nstest-position="fixed" data-nstest-id="d"></div>
+</div>
+
+<div data-nstest-role="page" id="persist-test-f">
+	<div data-nstest-role="footer" data-nstest-position="fixed" data-nstest-id="d"></div>
+</div>
 </body>
 </html>
