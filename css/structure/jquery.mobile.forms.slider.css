@@ -26,7 +26,7 @@ div.ui-slider-switch.ui-slider-mini .ui-slider-inneroffset { margin: 0 15px 0 14
 div.ui-slider-switch.ui-slider-mini .ui-slider-handle { width: 25px; height: 25px; margin: 1px 0 0 -13px; }
 div.ui-slider-switch.ui-slider-mini a.ui-slider-handle .ui-btn-inner { height: 30px; width: 30px; padding: 0; margin: 0; }
 
-span.ui-slider-label { position: absolute; text-align: center; width: 100%; overflow: hidden; font-size: 16px; top: 0; line-height: 2; min-height: 100%; border-width: 0; }
+span.ui-slider-label { position: absolute; text-align: center; width: 100%; overflow: hidden; font-size: 16px; top: 0; line-height: 2; min-height: 100%; border-width: 0; white-space: nowrap; }
 .ui-slider-mini span.ui-slider-label { font-size: 14px; }
 
 span.ui-slider-label-a { z-index: 1; left: 0; text-indent: -1.5em; }
