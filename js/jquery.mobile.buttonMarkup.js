@@ -17,7 +17,7 @@ $.fn.buttonMarkup = function( options ) {
 			o = $.extend( {}, $.fn.buttonMarkup.defaults, {
 				icon:       options.icon       !== undefined ? options.icon       : el.jqmData( "icon" ),
 				iconpos:    options.iconpos    !== undefined ? options.iconpos    : el.jqmData( "iconpos" ),
-				theme:      options.theme      !== undefined ? options.theme      : $.mobile.getInheritedTheme( el, "c" ),
+				theme:      options.theme      !== undefined ? options.theme      : el.jqmData( "theme" ) || $.mobile.getInheritedTheme( el, "c" ),
 				inline:     options.inline     !== undefined ? options.inline     : el.jqmData( "inline" ),
 				shadow:     options.shadow     !== undefined ? options.shadow     : el.jqmData( "shadow" ),
 				corners:    options.corners    !== undefined ? options.corners    : el.jqmData( "corners" ),
