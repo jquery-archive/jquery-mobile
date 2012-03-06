@@ -40,6 +40,7 @@ for branch in $branches; do
   git checkout-index -a -f --prefix="$output/$branch/"
 
   # Manipulate the commit message
+  # TODO add commit and description
   echo "<li>Branch: <a href='$branch/index.html'>$branch</a></li>" >> "$index_page"
 done
 
