@@ -16,8 +16,8 @@ function log {
 # Make the output directory if it doesnt exist
 mkdir -p "$output"
 
-branches=`git ls-remote --heads origin | cut -f2 -s | sed 's@refs/heads/@@'`
-existing_branch_dirs=`ls -l --full-time $output | grep "^d" | awk '{ print $9 }' | xargs`
+branches=$(git ls-remote --heads origin | cut -f2 -s | sed 's@refs/heads/@@')
+existing_branch_dirs=$(ls -l --full-time "$output" | grep "^d" | awk '{ print $9 }' | xargs)
 
 echo "<html><head><title>jQm Branches Preview</title></head><body>" > "$index_page"
 echo "<h1>jQuery Mobile Branches Live Previews</h1><hr />" >> "$index_page"
