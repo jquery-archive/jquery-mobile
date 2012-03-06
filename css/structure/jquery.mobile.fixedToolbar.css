@@ -9,6 +9,9 @@
 .ui-header-fixed {
 	top: 0;
 }
+.ui-footer-fixed {
+	bottom: 0;
+}
 .ui-header-fullscreen,
 .ui-footer-fullscreen {
 	opacity: .9;
