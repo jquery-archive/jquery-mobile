@@ -9,10 +9,6 @@
 .ui-header-fixed {
 	top: 0;
 }
-.ui-footer-fixed {
-	bottom: -1px;
-	padding-bottom: 1px;
-}
 .ui-header-fullscreen,
 .ui-footer-fullscreen {
 	opacity: .9;
