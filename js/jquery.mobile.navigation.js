@@ -771,7 +771,7 @@ define( [
 							&& RegExp.$1
 							&& dataUrlRegex.test( RegExp.$1 )
 							&& RegExp.$1 ) {
-						url = fileUrl = path.getFilePath( RegExp.$1 );
+						url = fileUrl = path.getFilePath( $( "<div>" + RegExp.$1 + "</div>" ).text() );
 					}
 
 					if ( base ) {
