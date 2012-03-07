@@ -101,7 +101,7 @@ $( document ).delegate( ":jqmData(role='listview')", "listviewcreate", function(
 		.appendTo( wrapper )
 		.textinput();
 
-	if ( $( this ).jqmData( "inset" ) ) {
+	if ( listview.options.inset ) {
 		wrapper.addClass( "ui-listview-filter-inset" );
 	}
 

@@ -4,7 +4,8 @@
 
 // TODO split out into seperate test files
 (function($){
-	var home = $.mobile.path.parseUrl( location.href ).pathname + location.search;
+	var home = $.mobile.path.parseUrl( location.href ).pathname + location.search,
+		insetVal = $.mobile.listview.prototype.options.inset;
 
 	$.mobile.defaultTransition = "none";
 
@@ -19,6 +20,10 @@
 
 				$.mobile.changePage( home );
 			}
+		},
+
+		teardown: function() {
+			$.mobile.listview.prototype.options.inset = insetVal;
 		}
 	});
 
@@ -783,6 +788,44 @@
 			function() {
 				var theme = $.mobile.activePage.jqmData('theme');
 				ok( $.mobile.activePage.find("ul > li").hasClass("ui-body-b"), "theme matches the parent");
+				window.history.back();
+			},
+
+			start
+		]);
+	});
+
+	asyncTest( "list filter is inset from prototype options value", function() {
+		$.mobile.listview.prototype.options.inset = true;
+		$("#list-inset-filter-prototype").page();
+
+		$.testHelper.pageSequence([
+			function() {
+				$.mobile.changePage("#list-inset-filter-prototype");
+			},
+
+			function( timedOut) {
+				ok( !timedOut );
+				same( $.mobile.activePage.find("form.ui-listview-filter-inset").length, 1, "form is inset");
+				window.history.back();
+			},
+
+			start
+		]);
+	});
+
+	asyncTest( "list filter is inset from data attr value", function() {
+		$.mobile.listview.prototype.options.inset = false;
+		$("#list-inset-filter-data-attr").page();
+
+		$.testHelper.pageSequence([
+			function() {
+				$.mobile.changePage("#list-inset-filter-data-attr");
+			},
+
+			function( timedOut) {
+				ok( !timedOut );
+				same( $.mobile.activePage.find("form.ui-listview-filter-inset").length, 1, "form is inset");
 				window.history.back();
 			},
 
