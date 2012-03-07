@@ -767,7 +767,7 @@ define( [
 							&& RegExp.$1
 							&& dataUrlRegex.test( RegExp.$1 )
 							&& RegExp.$1 ) {
-						url = fileUrl = path.getFilePath( RegExp.$1 );
+						url = fileUrl = path.getFilePath( $( "<div>" + RegExp.$1 + "</div>" ).text() );
 					}
 
 					if ( base ) {
@@ -775,12 +775,14 @@ define( [
 					}
 
 					//workaround to allow scripts to execute when included in page divs
-					all.get( 0 ).innerHTML = html;
+					//IE6-8 requires a non-empty element before <script>, otherwise ignores the script
+					all.get( 0 ).innerHTML = "<div style=\"display:none;\">&nbsp;</div>" + html.split( /<\/?body[^>]*>/gmi )[1];
 					page = all.find( ":jqmData(role='page'), :jqmData(role='dialog')" ).first();
 
 					//if page elem couldn't be found, create one and insert the body element's contents
 					if( !page.length ){
-						page = $( "<div data-" + $.mobile.ns + "role='page'>" + html.split( /<\/?body[^>]*>/gmi )[1] + "</div>" );
+						all.children().first().remove();
+						page = all.attr( "data-" + $.mobile.ns + "role", "page" );
 					}
 
 					if ( newPageTitle && !page.jqmData( "title" ) ) {
