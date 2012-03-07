@@ -1,12 +1,6 @@
 #!/bin/bash
 # determine the project root
-rel_project_root=`dirname ${0%/*}/..`
-cd "$rel_project_root/.."
-project_root=`pwd`
-
-echo $project_root
-
-output="$project_root/branches"
+output="branches"
 index_page="$output/index.html"
 
 function log {
