@@ -12,6 +12,9 @@ mkdir -p "$output"
 
 branches=$(git ls-remote --heads origin | cut -f2 -s | sed 's@refs/heads/@@')
 
+log "fetching to get new branches"
+git fetch origin
+
 echo "<html><head><title>jQm Branches Preview</title></head><body>" > "$index_page"
 echo "<h1>jQuery Mobile Branches Live Previews</h1><hr />" >> "$index_page"
 echo "<span class='date'>Updated: $(date)</span>" >> "$index_page"
@@ -23,19 +26,18 @@ for branch in $branches; do
     continue
   fi
 
-  # TODO Make it safe for executing
-  # $branch = escapeshellarg($branch);
-  git checkout -q "$branch"
+  # TODO shell escape the $branch value it safe for executing
+  log "archiving ref $branch"
+  git archive -o "$output/$branch.tar" "origin/$branch"
+  mkdir -p "$output/$branch"
 
-  log "checking out $branch into $output/$branch/"
-  git checkout-index -a -f --prefix="$output/$branch/"
+  log "untarring $branch.tar into $output/$branch/"
+  tar -C "$output/$branch" -xf "$output/$branch.tar"
 
   # Manipulate the commit message
   # TODO add commit and description
   echo "<li>Branch: <a href='$branch/index.html'>$branch</a></li>" >> "$index_page"
 done
-
-git checkout master
 
 # close out the list
 echo "</ul>" >> "$index_page"
