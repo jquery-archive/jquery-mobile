@@ -40,6 +40,8 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 
 	// For non-fixed supportin browsers. Position at y center (if scrollTop supported), above the activeBtn (if defined), or just 100px from top
 	function fakeFixLoader(){
+		var activeBtn = $( "." + $.mobile.activeBtnClass ).first();
+
 		$loader
 			.css({
 				top: $.support.scrollTop && $window.scrollTop() + $window.height() / 2 ||
@@ -64,18 +66,16 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 		$html.removeClass( "ui-mobile-rendering" );
 	}
 
-
 	$.extend($.mobile, {
 		// turn on/off page loading message.
 		showPageLoadingMsg: function( theme, msgText, textonly ) {
 			$html.addClass( "ui-loading" );
 
 			if ( $.mobile.loadingMessage ) {
-				var activeBtn = $( "." + $.mobile.activeBtnClass ).first(),
-					theme = theme || $.mobile.loadingMessageTheme,
-					// text visibility from argument takes priority
-					textVisible = textonly || $.mobile.loadingMessageTextVisible;
+				// text visibility from argument takes priority
+				var textVisible = textonly || $.mobile.loadingMessageTextVisible;
 
+				theme = theme || $.mobile.loadingMessageTheme,
 
 				$loader
 					.attr( "class", loaderClass + " ui-corner-all ui-body-" + ( theme || "a" ) + " ui-loader-" + ( textVisible ? "verbose" : "default" ) + ( textonly ? " ui-loader-textonly" : "" ) )
