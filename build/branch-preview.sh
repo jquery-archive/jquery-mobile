@@ -25,7 +25,6 @@ echo "<span class='date'>Updated: $(date)</span>" >> "$index_page"
 echo "<ul>" >> "$index_page"
 # Loop through the array to export each branch
 for branch in $branches; do
-
   existing_branch_dirs=`echo "$existing_branch_dirs" | sed "s/$branch\s*//"`
 
   # skip master
@@ -35,6 +34,7 @@ for branch in $branches; do
 
   # TODO Make it safe for executing
   # $branch = escapeshellarg($branch);
+  git checkout -q "$branch"
 
   log "checking out $branch into $output/$branch/"
   git checkout-index -a -f --prefix="$output/$branch/"
@@ -43,6 +43,8 @@ for branch in $branches; do
   # TODO add commit and description
   echo "<li>Branch: <a href='$branch/index.html'>$branch</a></li>" >> "$index_page"
 done
+
+git checkout master
 
 # close out the list
 echo "</ul>" >> "$index_page"
