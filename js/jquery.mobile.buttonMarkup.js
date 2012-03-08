@@ -28,7 +28,8 @@ $.fn.buttonMarkup = function( options ) {
 			// Classes Defined
 			innerClass = "ui-btn-inner",
 			textClass = "ui-btn-text",
-			buttonClass, iconClass,
+      iconClass = "",
+			buttonClass,
 			// Button inner markup
 			buttonInner,
 			buttonText,
@@ -63,15 +64,14 @@ $.fn.buttonMarkup = function( options ) {
 		}
 
 		buttonClass = "ui-btn ui-btn-up-" + o.theme;
+		buttonClass += o.inline ? " ui-btn-inline" : "";
+  	buttonClass += o.shadow ? " ui-shadow" : "";
+		buttonClass += o.iconpos? " ui-btn-icon-" + o.iconpos : "";
+		buttonClass += o.corners ? " ui-btn-corner-all" : "";
 
-		if ( o.inline ) {
-			buttonClass += " ui-btn-inline";
-		}
-
-		if ( o.mini ) {
-			buttonClass += " ui-mini";
-		} else if ( o.mini && o.mini === false ) {
-			buttonClass += " ui-fullsize"; // Used to control styling in headers/footers, where buttons default to `mini` style.
+		if ( o.mini !== undefined ) {
+      // Used to control styling in headers/footers, where buttons default to `mini` style.
+			buttonClass += o.mini ? " ui-mini" : " ui-fullsize";
 		}
 
 		if ( o.icon ) {
@@ -79,27 +79,13 @@ $.fn.buttonMarkup = function( options ) {
 			o.iconpos = o.iconpos || "left";
 
 			iconClass = "ui-icon " + o.icon;
-
-			if ( o.iconshadow ) {
-				iconClass += " ui-icon-shadow";
-			}
+			iconClass += o.iconshadow ? " ui-icon-shadow" : "";
 		}
+    
+		innerClass += o.corners ? " ui-btn-corner-all" : "";
 
-		if ( o.iconpos ) {
-			buttonClass += " ui-btn-icon-" + o.iconpos;
-
-			if ( o.iconpos == "notext" && !el.attr( "title" ) ) {
-				el.attr( "title", el.getEncodedText() );
-			}
-		}
-
-		if ( o.corners ) {
-			buttonClass += " ui-btn-corner-all";
-			innerClass += " ui-btn-corner-all";
-		}
-
-		if ( o.shadow ) {
-			buttonClass += " ui-shadow";
+		if ( o.iconpos && o.iconpos === "notext" && !el.attr( "title" ) ) {
+			el.attr( "title", el.getEncodedText() );
 		}
 
 		if (buttonElements)
@@ -109,11 +95,11 @@ $.fn.buttonMarkup = function( options ) {
 		buttonInner.className = innerClass;
 
 		buttonText.className = textClass;
-		if (!buttonElements)
+		if ( !buttonElements )
 			buttonInner.appendChild( buttonText );
 		if ( buttonIcon ) {
 			buttonIcon.className = iconClass;
-			if (!(buttonElements && buttonElements.icon))
+			if ( !(buttonElements && buttonElements.icon) )
 				buttonInner.appendChild( buttonIcon );
 		}
 
@@ -121,7 +107,7 @@ $.fn.buttonMarkup = function( options ) {
 			buttonText.appendChild( e.firstChild );
 		}
 
-		if (!buttonElements)
+		if ( !buttonElements )
 			e.appendChild( buttonInner );
 
 		// Assign a structure containing the elements of this button to the elements of this button. This
