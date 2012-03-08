@@ -7,15 +7,17 @@
 	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 
-	<script src="../js/jquery.js"></script>
-	<script src="../docs/_assets/js/jqm-docs.js"></script>
-	<script src="../js/"></script>
+	<script src="../../js/jquery.js"></script>
+	<script src="../../docs/_assets/js/jqm-docs.js"></script>
 
 	<script>
 		$(document).bind("mobileinit", function(){
-			$.mobile.defaultPageTransition = 'fade';
+			$.mobile.defaultPageTransition = 'flow';
 		});
 	</script>
+	
+	<script src="../../js/"></script>
+	
 
 </head> 
 <body> 
@@ -30,7 +32,7 @@
 
 	<div data-role="content">
 		
-		<h2>defaultPageTransition is now "fade"</h2>
+		<h2>defaultPageTransition is now "flow"</h2>
 		<p>To test, hit the button below and browse the docs. Note that if a link causes a refresh, this setting will be lost and the default settings will be seen.</p>
 		<a href="../../index.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Browse docs</a>
 
