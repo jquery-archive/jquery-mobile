@@ -41,7 +41,7 @@ $.fn.buttonMarkup = function( options ) {
 		});
 
 		// Check if this element is already enhanced
-		buttonElements = $.data(((e.tagName === "INPUT" || e.tagName === "BUTTON") ? e.parentNode : e), "buttonElements")
+		buttonElements = $.data(((e.tagName === "INPUT" || e.tagName === "BUTTON") ? e.parentNode : e), "buttonElements");
 
 		if (buttonElements) {
 			e = buttonElements.outer;
