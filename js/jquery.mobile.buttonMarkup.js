@@ -175,61 +175,41 @@ var attachEvents = function() {
 	var hoverDelay = 200,
 		hov, foc;
 	$( document ).bind( {
-		"vmousedown": function( event ) {
-			var btn = closestEnabledButton( event.target ),
-				$btn, theme;
-
-			if ( btn ) {
-				$btn = $( btn );
+		"vmousedown vmousecancel vmouseup vmouseover vmouseout focus blur scrollstart": function( event ) {
+			var $btn = $( closestEnabledButton( event.target ) ),
+				theme;
+		
+			if ( $btn.length ) {
 				theme = $btn.attr( "data-" + $.mobile.ns + "theme" );
-
-				if( $.support.touch ) {
-					hov = setTimeout(function() {
+		
+				if ( event.type === "vmousedown" ) {
+					if ( $.support.touch ) {
+						hov = setTimeout(function() {
+							$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-down-" + theme );
+						}, hoverDelay );
+					} 
+					else {
 						$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-down-" + theme );
-					}, hoverDelay );
-				} else {
-					$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-down-" + theme );
+					}
 				}
-			}
-		},
-		"vmousecancel vmouseup": function( event ) {
-			var btn = closestEnabledButton( event.target ),
-				$btn, theme;
-
-			if ( btn ) {
-				$btn = $( btn );
-				theme = $btn.attr( "data-" + $.mobile.ns + "theme" );
-				$btn.removeClass( "ui-btn-down-" + theme ).addClass( "ui-btn-up-" + theme );
-			}
-		},
-		"vmouseover focus": function( event ) {
-			var btn = closestEnabledButton( event.target ),
-				$btn, theme;
-
-			if ( btn ) {
-				$btn = $( btn );
-				theme = $btn.attr( "data-" + $.mobile.ns + "theme" );
-
-				if( $.support.touch ) {
-					foc = setTimeout(function() {
+				else if ( event.type === "vmousecancel" || event.type === "vmouseup" ) {
+					$btn.removeClass( "ui-btn-down-" + theme ).addClass( "ui-btn-up-" + theme );
+				}
+				else if ( event.type === "vmouseover" || event.type === "focus" ) {
+					if ( $.support.touch ) {
+						foc = setTimeout(function() {
+							$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-hover-" + theme );
+						}, hoverDelay );
+					} 
+					else {
 						$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-hover-" + theme );
-					}, hoverDelay );
-				} else {
-					$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-hover-" + theme );
+					}
 				}
-			}
-		},
-		"vmouseout blur scrollstart": function( event ) {
-			var btn = closestEnabledButton( event.target ),
-				$btn, theme;
-
-			if ( btn ) {
-				$btn = $( btn );
-				theme = $btn.attr( "data-" + $.mobile.ns + "theme" );
-				$btn.removeClass( "ui-btn-hover-" + theme  + " ui-btn-down-" + theme ).addClass( "ui-btn-up-" + theme );
-
-				hov && clearTimeout( hov );
-				foc && clearTimeout( foc );
+				else if ( event.type === "vmouseout" || event.type === "blur" || event.type === "scrollstart" ) {
+					$btn.removeClass( "ui-btn-hover-" + theme  + " ui-btn-down-" + theme ).addClass( "ui-btn-up-" + theme );
+					hov && clearTimeout( hov );
+					foc && clearTimeout( foc );
+				}
 			}
 		},
 		"focusin focus": function( event ){
