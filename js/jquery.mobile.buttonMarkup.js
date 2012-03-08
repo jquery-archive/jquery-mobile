@@ -176,13 +176,14 @@ var attachEvents = function() {
 		hov, foc;
 	$( document ).bind( {
 		"vmousedown vmousecancel vmouseup vmouseover vmouseout focus blur scrollstart": function( event ) {
-			var $btn = $( closestEnabledButton( event.target ) ),
-				theme;
+			var theme,
+				$btn = $( closestEnabledButton( event.target ) ),
+				evt = event.type;
 		
 			if ( $btn.length ) {
 				theme = $btn.attr( "data-" + $.mobile.ns + "theme" );
 		
-				if ( event.type === "vmousedown" ) {
+				if ( evt === "vmousedown" ) {
 					if ( $.support.touch ) {
 						hov = setTimeout(function() {
 							$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-down-" + theme );
@@ -190,9 +191,9 @@ var attachEvents = function() {
 					} else {
 						$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-down-" + theme );
 					}
-				} else if ( event.type === "vmousecancel" || event.type === "vmouseup" ) {
+				} else if ( evt === "vmousecancel" || evt === "vmouseup" ) {
 					$btn.removeClass( "ui-btn-down-" + theme ).addClass( "ui-btn-up-" + theme );
-				} else if ( event.type === "vmouseover" || event.type === "focus" ) {
+				} else if ( evt === "vmouseover" || evt === "focus" ) {
 					if ( $.support.touch ) {
 						foc = setTimeout(function() {
 							$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-hover-" + theme );
@@ -200,10 +201,14 @@ var attachEvents = function() {
 					} else {
 						$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-hover-" + theme );
 					}
-				} else if ( event.type === "vmouseout" || event.type === "blur" || event.type === "scrollstart" ) {
+				} else if ( evt === "vmouseout" || evt === "blur" || evt === "scrollstart" ) {
 					$btn.removeClass( "ui-btn-hover-" + theme  + " ui-btn-down-" + theme ).addClass( "ui-btn-up-" + theme );
-					hov && clearTimeout( hov );
-					foc && clearTimeout( foc );
+					if ( hov ) {
+						clearTimeout( hov );
+					}
+					if ( foc ) {
+						clearTimeout( foc );
+					}
 				}
 			}
 		},
