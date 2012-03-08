@@ -1211,7 +1211,7 @@ define( [
 		});
 
 		//add active state on vclick
-		$( document ).bind( "vclick", function( event ) {
+		document.addEventListener( $.support.touch?"touchstart":"click", function( event ) {
 			// if this isn't a left click we don't care. Its important to note
 			// that when the virtual event is generated it will create the which attr
 			if ( event.which > 1 || !$.mobile.linkBindingEnabled ) {
@@ -1243,7 +1243,7 @@ define( [
 		});
 
 		// click routing - direct to HTTP or Ajax, accordingly
-		$( document ).bind( "click", function( event ) {
+		document.addEventListener( "click", function( event ) {
 			if( !$.mobile.linkBindingEnabled ){
 				return;
 			}
