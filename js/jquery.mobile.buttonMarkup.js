@@ -28,8 +28,7 @@ $.fn.buttonMarkup = function( options ) {
 			// Classes Defined
 			innerClass = "ui-btn-inner",
 			textClass = "ui-btn-text",
-      iconClass = "",
-			buttonClass,
+			buttonClass, iconClass,
 			// Button inner markup
 			buttonInner,
 			buttonText,
@@ -65,12 +64,12 @@ $.fn.buttonMarkup = function( options ) {
 
 		buttonClass = "ui-btn ui-btn-up-" + o.theme;
 		buttonClass += o.inline ? " ui-btn-inline" : "";
-  	buttonClass += o.shadow ? " ui-shadow" : "";
+		buttonClass += o.shadow ? " ui-shadow" : "";
 		buttonClass += o.iconpos? " ui-btn-icon-" + o.iconpos : "";
 		buttonClass += o.corners ? " ui-btn-corner-all" : "";
 
 		if ( o.mini !== undefined ) {
-      // Used to control styling in headers/footers, where buttons default to `mini` style.
+			// Used to control styling in headers/footers, where buttons default to `mini` style.
 			buttonClass += o.mini ? " ui-mini" : " ui-fullsize";
 		}
 
@@ -88,27 +87,31 @@ $.fn.buttonMarkup = function( options ) {
 			el.attr( "title", el.getEncodedText() );
 		}
 
-		if (buttonElements)
-			el.removeClass((buttonElements.bcls || ""));
+		if ( buttonElements ) {
+			el.removeClass( buttonElements.bcls || "" );
+		}
 		el.removeClass( "ui-link" ).addClass( buttonClass );
 
 		buttonInner.className = innerClass;
 
 		buttonText.className = textClass;
-		if ( !buttonElements )
+		if ( !buttonElements ) {
 			buttonInner.appendChild( buttonText );
+		}
 		if ( buttonIcon ) {
 			buttonIcon.className = iconClass;
-			if ( !(buttonElements && buttonElements.icon) )
+			if ( !(buttonElements && buttonElements.icon) ) {
 				buttonInner.appendChild( buttonIcon );
+			}
 		}
 
 		while ( e.firstChild && !buttonElements) {
 			buttonText.appendChild( e.firstChild );
 		}
 
-		if ( !buttonElements )
+		if ( !buttonElements ) {
 			e.appendChild( buttonInner );
+		}
 
 		// Assign a structure containing the elements of this button to the elements of this button. This
 		// will allow us to recognize this as an already-enhanced button in future calls to buttonMarkup().
@@ -123,8 +126,9 @@ $.fn.buttonMarkup = function( options ) {
 		$.data(e,           'buttonElements', buttonElements);
 		$.data(buttonInner, 'buttonElements', buttonElements);
 		$.data(buttonText,  'buttonElements', buttonElements);
-		if (buttonIcon)
+		if (buttonIcon) {
 			$.data(buttonIcon, 'buttonElements', buttonElements);
+		}
 	}
 
 	return this;
