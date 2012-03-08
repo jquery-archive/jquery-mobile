@@ -59,7 +59,7 @@ $( document ).delegate( ":jqmData(role='page'), :jqmData(role='dialog')", "pagec
 			if ( o.addBackBtn &&
 				role === "header" &&
 				$( ".ui-page" ).length > 1 &&
-				$this.jqmData( "url" ) !== $.mobile.path.stripHash( location.hash ) &&
+				$page.jqmData( "url" ) !== $.mobile.path.stripHash( location.hash ) &&
 				!leftbtn ) {
 
 				backBtn = $( "<a href='#' class='ui-btn-left' data-"+ $.mobile.ns +"rel='back' data-"+ $.mobile.ns +"icon='arrow-l'>"+ o.backBtnText +"</a>" )
