@@ -186,7 +186,7 @@ var attachEvents = function() {
 				if( $.support.touch ) {
 					hov = setTimeout(function() {
 						$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-down-" + theme );
-					}, hoverDelay );
+					}, 0 );
 				} else {
 					$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-down-" + theme );
 				}
