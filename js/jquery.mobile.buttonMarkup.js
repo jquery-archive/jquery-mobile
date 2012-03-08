@@ -187,25 +187,20 @@ var attachEvents = function() {
 						hov = setTimeout(function() {
 							$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-down-" + theme );
 						}, hoverDelay );
-					} 
-					else {
+					} else {
 						$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-down-" + theme );
 					}
-				}
-				else if ( event.type === "vmousecancel" || event.type === "vmouseup" ) {
+				} else if ( event.type === "vmousecancel" || event.type === "vmouseup" ) {
 					$btn.removeClass( "ui-btn-down-" + theme ).addClass( "ui-btn-up-" + theme );
-				}
-				else if ( event.type === "vmouseover" || event.type === "focus" ) {
+				} else if ( event.type === "vmouseover" || event.type === "focus" ) {
 					if ( $.support.touch ) {
 						foc = setTimeout(function() {
 							$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-hover-" + theme );
 						}, hoverDelay );
-					} 
-					else {
+					} else {
 						$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-hover-" + theme );
 					}
-				}
-				else if ( event.type === "vmouseout" || event.type === "blur" || event.type === "scrollstart" ) {
+				} else if ( event.type === "vmouseout" || event.type === "blur" || event.type === "scrollstart" ) {
 					$btn.removeClass( "ui-btn-hover-" + theme  + " ui-btn-down-" + theme ).addClass( "ui-btn-up-" + theme );
 					hov && clearTimeout( hov );
 					foc && clearTimeout( foc );
