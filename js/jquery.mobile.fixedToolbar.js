@@ -38,7 +38,7 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 					bbmatch = w.blackberry && w.navigator.appVersion.match( /Version\/([0-9]+)/ ),
 					bbversion = !!bbmatch && parseInt( bbmatch[ 1 ], 10 ),
 					omversion = !!operammobilematch && operammobilematch[ 1 ];
-					
+
 				if(
 					// iOS 4.3 and older : Platform is iPhone/Pad/Touch and Webkit version is less than 534 (ios5)
 					( ( platform.indexOf( "iPhone" ) > -1 || platform.indexOf( "iPad" ) > -1  || platform.indexOf( "iPod" ) > -1 ) && wkversion && wkversion < 534 )
@@ -76,8 +76,8 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 			var self = this,
 				o = self.options,
 				$el = self.element,
-				tbtype = $el.is( ".ui-header" ) ? "header" : "footer",
-				$page = $el.closest(".ui-page");
+				tbtype = $el.is( ":jqmData(role='header')" ) ? "header" : "footer",
+				$page = $el.closest(":jqmData(role='page')");
 
 			// Feature detecting support for
 			if( o.supportBlacklist() ){
@@ -123,7 +123,7 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 			//page event bindings
 			// Fixed toolbars require page zoom to be disabled, otherwise usability issues crop up
 			// This method is meant to disable zoom while a fixed-positioned toolbar page is visible
-			$el.closest( ".ui-page" )
+			$el.closest( ":jqmData(role='page')" )
 				.bind( "pagebeforeshow", function(){
 					if( o.disablePageZoom ){
 						$.mobile.zoom.disable( true );
@@ -178,12 +178,12 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 		// This will set the content element's top or bottom padding equal to the toolbar's height
 		updatePagePadding: function() {
 			var $el = this.element,
-				header = $el.is( ".ui-header" );
+				header = $el.is( ":jqmData(role='header')" );
 
 			// This behavior only applies to "fixed", not "fullscreen"
 			if( this.options.fullscreen ){ return; }
 
-			$el.closest( ".ui-page" ).css( "padding-" + ( header ? "top" : "bottom" ), $el.outerHeight() );
+			$el.closest( ":jqmData(role='page')" ).css( "padding-" + ( header ? "top" : "bottom" ), $el.outerHeight() );
 		},
 
 		show: function( notransition ){
@@ -192,9 +192,9 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 				$win = $( window ),
 				scroll = $win.scrollTop(),
 				elHeight = $el.height(),
-				pHeight = $el.closest( ".ui-page" ).height(),
+				pHeight = $el.closest( ":jqmData(role='page')" ).height(),
 				viewportHeight = Math.min( screen.height, $win.height() ),
-				tbtype = $el.is( ".ui-header" ) ? "header" : "footer";
+				tbtype = $el.is( ":jqmData(role='header')" ) ? "header" : "footer";
 
 				if( !notransition && ( this.options.transition && this.options.transition !== "none" &&
 					(
@@ -217,9 +217,9 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 				$win = $( window ),
 				scroll = $win.scrollTop(),
 				elHeight = $el.height(),
-				pHeight = $el.closest( ".ui-page" ).height(),
+				pHeight = $el.closest( ":jqmData(role='page')" ).height(),
 				viewportHeight = Math.min( screen.height, $win.height() ),
-				tbtype = $el.is( ".ui-header" ) ? "header" : "footer",
+				tbtype = $el.is( ":jqmData(role='header')" ) ? "header" : "footer",
 				// if it's a slide transition, our new transitions need the reverse class as well to slide outward
 				outclass = "out" + ( this.options.transition === "slide" ? " reverse" : "" );
 
@@ -251,7 +251,7 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 				$el = self.element;
 
 			// tap toggle
-			$el.closest( ".ui-page" )
+			$el.closest( ":jqmData(role='page')" )
 				.bind( "vclick", function( e ){
 					if( o.tapToggle && !$( e.target ).closest( o.tapToggleBlacklist ).length ){
 						self.toggle();
