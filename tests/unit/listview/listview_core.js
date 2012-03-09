@@ -842,10 +842,9 @@
 			function() {
 				$.mobile.activePage.find("li").each(function(i, elem){
 					var $elem = $(elem),
-						icon = $elem.jqmData( "icon" ),
-						order = [ "star", "plug", "arrow-r" ];
+						order = [ "star", "plug", "delete", "plug" ];
 
-					same( $elem.find("span.ui-icon-" + order[i]).length, 1, "there should be one " + icon + " icon" );
+					same( $elem.find("span.ui-icon-" + order[i]).length, 1, "there should be one " + order[i] + " icon" );
 				});
 
 				window.history.back();
@@ -854,5 +853,4 @@
 			start
 		]);
 	});
-
 })(jQuery);

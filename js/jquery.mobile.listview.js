@@ -158,7 +158,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			counter = $.support.cssPseudoElement || !$.nodeName( $list[ 0 ], "ol" ) ? 0 : 1,
 			itemClassDict = {},
 			item, itemClass, itemTheme,
-			a, last, splittheme, countParent, icon, imgParents, img;
+			a, last, splittheme, countParent, icon, imgParents, img, linkIcon;
 
 		if ( counter ) {
 			$list.find( ".ui-li-dec" ).remove();
@@ -200,6 +200,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 						last = a.last();
 						splittheme = listsplittheme || last.jqmData( "theme" ) || o.splitTheme;
+						linkIcon = last.jqmData("icon");
 
 						last.appendTo(item)
 							.attr( "title", last.getEncodedText() )
@@ -219,7 +220,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
 										corners: true,
 										theme: splittheme,
 										iconpos: "notext",
-										icon: icon || listspliticon || o.splitIcon
+										// link icon overrides list item icon overrides ul element overrides options
+										icon: linkIcon || icon || listspliticon || o.splitIcon
 									})
 								);
 					}
