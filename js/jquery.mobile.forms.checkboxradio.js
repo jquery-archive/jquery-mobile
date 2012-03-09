@@ -23,7 +23,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			// filter works though.
 			label = $( input ).closest( "form,fieldset,:jqmData(role='page'),:jqmData(role='dialog')" ).find( "label" ).filter( "[for='" + input[0].id + "']" ),
 			inputtype = input[0].type,
-			mini = input.closest( "form,fieldset" ).jqmData('mini'),
+			mini = input.jqmData('mini') || input.closest( "form,fieldset" ).jqmData('mini'),
 			checkedState = inputtype + "-on",
 			uncheckedState = inputtype + "-off",
 			icon = input.parents( ":jqmData(type='horizontal')" ).length ? undefined : uncheckedState,
