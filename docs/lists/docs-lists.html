@@ -17,13 +17,22 @@
 	<div data-role="page" class="type-interior">
 
 		<div data-role="header" data-theme="f">
-		<h1>Lists</h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
-		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
-	</div><!-- /header -->
+			<h1>Lists</h1>
+			<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+			<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
+		</div><!-- /header -->
 
-	<div data-role="content">
+		<div data-role="content">
 			<div class="content-primary">
+			<h2>List views</h2>
+
+			<ul data-role="controlgroup" data-type="horizontal" class="localnav">
+				<li><a href="docs-lists.html" data-role="button" data-transition="fade" class="ui-btn-active">Basics</a></li>
+				<li><a href="lists-options.html" data-role="button" data-transition="fade">Options</a></li>
+				<li><a href="lists-methods.html" data-role="button" data-transition="fade">Methods</a></li>
+				<li><a href="lists-events.html" data-role="button" data-transition="fade">Events</a></li>
+			</ul>
+
 			<h2>Basic linked lists</h2>
 			<p>A list view is coded as a simple unordered list containing linked list items with a <code> data-role="listview"</code> attribute. jQuery Mobile will apply all the necessary styles to transform the list into a mobile-friendly list view with right arrow indicator that fills the full width of the browser window. When you tap on the list item, the framework will trigger a click on the first link inside the list item, issue an AJAX request for the URL in the link, create the new page in the DOM, then kick off a page transition. View the <a href="../api/data-attributes.html">data- attribute reference</a> to see all the possible attributes you can add to listviews.</p> 
 			<p>Here is the HTML markup for a basic linked list.</p>
@@ -45,7 +54,7 @@
 			<a href="lists-nested.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Nested list example</a>
 
 			<h2>Numbered lists</h2>
-			<p>Lists can also be created from ordered lists <code>(ol)</code> which is useful when presenting items that are in a sequence such as search results or a movie queue. When the enhanced markup is applied to the list view, jQuery Mobile will try to first use CSS to add numbers to the list and, if not supported, will fall back to injecting numbers with JavaScript.</p>
+			<p>Lists can also be created from ordered lists (<code>ol</code>) which is useful when presenting items that are in a sequence such as search results or a movie queue. When the enhanced markup is applied to the list view, jQuery Mobile will try to first use CSS to add numbers to the list and, if not supported, will fall back to injecting numbers with JavaScript.</p>
 
 			<a href="lists-ol.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Numbered list example</a>
 
@@ -126,7 +135,7 @@
 						<ul data-role="listview" data-theme="c" data-dividertheme="d">
 
 							<li data-role="list-divider">List views</li>
-							<li data-theme="a"><a href="docs-lists.html">List markup conventions</a></li>
+							<li data-theme="a"><a href="docs-lists.html">List basics &amp; API</a></li>
 							<li><a href="lists-ul.html">Basic linked list</a></li>
 							<li><a href="lists-nested.html">Nested list</a></li>
 							<li><a href="lists-ol.html">Numbered list</a></li>

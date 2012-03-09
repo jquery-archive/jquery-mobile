@@ -163,7 +163,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		if ( counter ) {
 			$list.find( ".ui-li-dec" ).remove();
 		}
-		
+
 		if ( !o.theme ) {
 			o.theme = $.mobile.getInheritedTheme( this.element, "c" );
 		}
@@ -219,7 +219,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 										corners: true,
 										theme: splittheme,
 										iconpos: "notext",
-										icon: listspliticon || last.jqmData( "icon" ) || o.splitIcon
+										icon: icon || listspliticon || o.splitIcon
 									})
 								);
 					}
