@@ -242,7 +242,10 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 	$.fn.jqmData = function( prop, value ) {
 		var result;
 		if ( typeof prop != "undefined" ) {
-			result = this.data( prop ? $.mobile.nsNormalize( prop ) : prop, value );
+			if ( prop ) {
+				prop = $.mobile.nsNormalize( prop );
+			}
+			result = this.data.apply( this, arguments.length < 2 ? [ prop ] : [ prop, value ] );
 		}
 		return result;
 	};
