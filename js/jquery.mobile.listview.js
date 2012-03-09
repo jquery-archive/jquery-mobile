@@ -12,6 +12,7 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.buttonMarkup", ".
 var listCountPerPage = {};
 
 $.widget( "mobile.listview", $.mobile.widget, {
+
 	options: {
 		theme: null,
 		countTheme: "c",
@@ -19,16 +20,21 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		dividerTheme: "b",
 		splitIcon: "arrow-r",
 		splitTheme: "b",
+		mini: false,
 		inset: false,
 		initSelector: ":jqmData(role='listview')"
 	},
 
 	_create: function() {
-		var t = this;
-
+		var t = this,
+			listviewClasses = "";
+			
+		listviewClasses += t.options.inset ? " ui-listview-inset ui-corner-all ui-shadow " : "";
+		listviewClasses += t.element.jqmData( "mini" ) || t.options.mini === true ? " ui-mini" : "";
+		
 		// create listview markup
 		t.element.addClass(function( i, orig ) {
-			return orig + " ui-listview " + ( t.options.inset ? " ui-listview-inset ui-corner-all ui-shadow " : "" );
+			return orig + " ui-listview " + listviewClasses;
 		});
 
 		t.refresh( true );
