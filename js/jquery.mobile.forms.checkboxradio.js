@@ -21,8 +21,8 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			input = this.element,
 			// NOTE: Windows Phone could not find the label through a selector
 			// filter works though.
-			label = $( input ).closest( "form,fieldset,:jqmData(role='page'),:jqmData(role='dialog')" ).find( "label" ).filter( "[for='" + input[ 0 ].id + "']" ),
-			inputtype = input.attr( "type" ),
+			label = $( input ).closest( "form,fieldset,:jqmData(role='page'),:jqmData(role='dialog')" ).find( "label" ).filter( "[for='" + input[0].id + "']" ),
+			inputtype = input[0].type,
 			mini = input.closest( "form,fieldset" ).jqmData('mini'),
 			checkedState = inputtype + "-on",
 			uncheckedState = inputtype + "-off",
@@ -139,20 +139,18 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 
 	_cacheVals: function() {
 		this._getInputSet().each(function() {
-			var $this = $(this);
-
-			$this.jqmData( "cacheVal", $this.is( ":checked" ) );
+			$(this).jqmData( "cacheVal", this.checked );
 		});
 	},
 
 	//returns either a set of radios with the same name attribute, or a single checkbox
 	_getInputSet: function(){
-		if(this.inputtype == "checkbox") {
+		if(this.inputtype === "checkbox") {
 			return this.element;
 		}
 
 		return this.element.closest( "form,fieldset,:jqmData(role='page')" )
-			.find( "input[name='"+ this.element.attr( "name" ) +"'][type='"+ this.inputtype +"']" );
+			.find( "input[name='"+ this.element[0].name +"'][type='"+ this.inputtype +"']" );
 	},
 
 	_updateAll: function() {
@@ -161,9 +159,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 		this._getInputSet().each(function() {
 			var $this = $(this);
 
-			// NOTE getAttribute is used here to deal with an issue with the :checked
-			//      selector. see #3597
-			if ( $this.prop( "checked" ) || self.inputtype === "checkbox" ) {
+			if ( this.checked || self.inputtype === "checkbox" ) {
 				$this.trigger( "change" );
 			}
 		})
@@ -171,13 +167,11 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 	},
 
 	refresh: function() {
-		var input = this.element,
+		var input = this.element[0],
 			label = this.label,
 			icon = label.find( ".ui-icon" );
 
-		// input[0].checked expando doesn't always report the proper value
-		// for checked='checked'
-		if ( $( input[ 0 ] ).prop( "checked" ) ) {
+		if ( input.checked ) {
 			label.addClass( this.checkedClass ).removeClass( this.uncheckedClass );
 			icon.addClass( this.checkedicon ).removeClass( this.uncheckedicon );
 		} else {
@@ -185,7 +179,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			icon.removeClass( this.checkedicon ).addClass( this.uncheckedicon );
 		}
 
-		if ( input.is( ":disabled" ) ) {
+		if ( input.disabled ) {
 			this.disable();
 		} else {
 			this.enable();
