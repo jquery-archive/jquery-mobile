@@ -68,15 +68,14 @@ $.fn.buttonMarkup = function( options ) {
 		}		
 
 		buttonClass = "ui-btn ui-btn-up-" + o.theme;
+		buttonClass += o.inline ? " ui-btn-inline" : "";
+		buttonClass += o.shadow ? " ui-shadow" : "";
+		buttonClass += o.iconpos? " ui-btn-icon-" + o.iconpos : "";
+		buttonClass += o.corners ? " ui-btn-corner-all" : "";
 
-		if ( o.inline ) {
-			buttonClass += " ui-btn-inline";
-		}
-
-		if ( o.mini ) {
-			buttonClass += " ui-mini";
-		} else if ( o.mini && o.mini === false ) {
-			buttonClass += " ui-fullsize"; // Used to control styling in headers/footers, where buttons default to `mini` style.
+		if ( o.mini !== undefined ) {
+			// Used to control styling in headers/footers, where buttons default to `mini` style.
+			buttonClass += o.mini ? " ui-mini" : " ui-fullsize";
 		}
 
 		if ( o.icon ) {
@@ -84,50 +83,40 @@ $.fn.buttonMarkup = function( options ) {
 			o.iconpos = o.iconpos || "left";
 
 			iconClass = "ui-icon " + o.icon;
+			iconClass += o.iconshadow ? " ui-icon-shadow" : "";
+		}
+    
+		innerClass += o.corners ? " ui-btn-corner-all" : "";
 
-			if ( o.iconshadow ) {
-				iconClass += " ui-icon-shadow";
-			}
+		if ( o.iconpos && o.iconpos === "notext" && !el.attr( "title" ) ) {
+			el.attr( "title", el.getEncodedText() );
 		}
 
-		if ( o.iconpos ) {
-			buttonClass += " ui-btn-icon-" + o.iconpos;
-
-			if ( o.iconpos == "notext" && !el.attr( "title" ) ) {
-				el.attr( "title", el.getEncodedText() );
-			}
+		if ( buttonElements ) {
+			el.removeClass( buttonElements.bcls || "" );
 		}
-
-		if ( o.corners ) {
-			buttonClass += " ui-btn-corner-all";
-			innerClass += " ui-btn-corner-all";
-		}
-
-		if ( o.shadow ) {
-			buttonClass += " ui-shadow";
-		}
-
-		if (buttonElements)
-			el.removeClass((buttonElements.bcls || ""));
 		el.removeClass( "ui-link" ).addClass( buttonClass );
 
 		buttonInner.className = innerClass;
 
 		buttonText.className = textClass;
-		if (!buttonElements)
+		if ( !buttonElements ) {
 			buttonInner.appendChild( buttonText );
+		}
 		if ( buttonIcon ) {
 			buttonIcon.className = iconClass;
-			if (!(buttonElements && buttonElements.icon))
+			if ( !(buttonElements && buttonElements.icon) ) {
 				buttonInner.appendChild( buttonIcon );
+			}
 		}
 
 		while ( e.firstChild && !buttonElements) {
 			buttonText.appendChild( e.firstChild );
 		}
 
-		if (!buttonElements)
+		if ( !buttonElements ) {
 			e.appendChild( buttonInner );
+		}
 
 		// Assign a structure containing the elements of this button to the elements of this button. This
 		// will allow us to recognize this as an already-enhanced button in future calls to buttonMarkup().
@@ -142,8 +131,9 @@ $.fn.buttonMarkup = function( options ) {
 		$.data(e,           'buttonElements', buttonElements);
 		$.data(buttonInner, 'buttonElements', buttonElements);
 		$.data(buttonText,  'buttonElements', buttonElements);
-		if (buttonIcon)
+		if (buttonIcon) {
 			$.data(buttonIcon, 'buttonElements', buttonElements);
+		}
 	}
 
 	return this;
