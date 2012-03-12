@@ -21,7 +21,6 @@
 .ui-btn-icon-top .ui-btn-inner { padding-top: 33px; }
 .ui-btn-icon-bottom .ui-btn-inner { padding-bottom: 33px; }
 
-
 /*btn icon positioning*/
 .ui-btn-icon-notext .ui-icon { display: block; z-index: 0;}
 .ui-btn-icon-left .ui-btn-inner .ui-icon, .ui-btn-icon-right .ui-btn-inner .ui-icon { position: absolute; top: 50%; margin-top: -9px; }
@@ -29,7 +28,7 @@
 .ui-btn-icon-left .ui-icon { left: 10px; }
 .ui-btn-icon-right .ui-icon { right: 10px; }
 .ui-btn-icon-top .ui-icon { top: 10px; }
-.ui-btn-icon-bottom .ui-icon { bottom: 10px; }
+.ui-btn-icon-bottom .ui-icon { top: auto; bottom: 10px; }
 
 .ui-mini.ui-btn-icon-left .ui-icon { left: 8px; }
 .ui-mini.ui-btn-icon-right .ui-icon { right: 8px; }

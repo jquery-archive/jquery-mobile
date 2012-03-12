@@ -19,14 +19,18 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 	_create: function() {
 		var self = this,
 			input = this.element,
+			inheritAttr = function( input, dataAttr ) {
+				return input.jqmData( dataAttr ) || input.closest( "form,fieldset" ).jqmData( dataAttr )
+			},
 			// NOTE: Windows Phone could not find the label through a selector
 			// filter works though.
 			label = $( input ).closest( "form,fieldset,:jqmData(role='page'),:jqmData(role='dialog')" ).find( "label" ).filter( "[for='" + input[0].id + "']" ),
 			inputtype = input[0].type,
-			mini = input.jqmData('mini') || input.closest( "form,fieldset" ).jqmData('mini'),
+			mini = inheritAttr( input, "mini" ),
 			checkedState = inputtype + "-on",
 			uncheckedState = inputtype + "-off",
 			icon = input.parents( ":jqmData(type='horizontal')" ).length ? undefined : uncheckedState,
+			iconpos = inheritAttr( input, "iconpos" ),
 			activeBtn = icon ? "" : " " + $.mobile.activeBtnClass,
 			checkedClass = "ui-" + checkedState + activeBtn,
 			uncheckedClass = "ui-" + uncheckedState,
@@ -60,7 +64,8 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			theme: this.options.theme,
 			icon: icon,
 			shadow: false,
-			mini: mini
+			mini: mini,
+			iconpos: iconpos
 		});
 
 		// Wrap the input + label in a div
