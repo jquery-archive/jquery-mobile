@@ -70,20 +70,30 @@ $.fn.buttonMarkup = function( options ) {
 		buttonClass = "ui-btn ui-btn-up-" + o.theme;
 		buttonClass += o.inline ? " ui-btn-inline" : "";
 		buttonClass += o.shadow ? " ui-shadow" : "";
-		buttonClass += o.iconpos? " ui-btn-icon-" + o.iconpos : "";
 		buttonClass += o.corners ? " ui-btn-corner-all" : "";
 
 		if ( o.mini !== undefined ) {
 			// Used to control styling in headers/footers, where buttons default to `mini` style.
 			buttonClass += o.mini ? " ui-mini" : " ui-fullsize";
 		}
-
+		
 		if ( o.icon ) {
 			o.icon = "ui-icon-" + o.icon;
 			o.iconpos = o.iconpos || "left";
 
 			iconClass = "ui-icon " + o.icon;
-			iconClass += o.iconshadow ? " ui-icon-shadow" : "";
+
+			if ( o.iconshadow ) {
+				iconClass += " ui-icon-shadow";
+			}
+		}
+
+		if ( o.iconpos ) {
+			buttonClass += " ui-btn-icon-" + o.iconpos;
+
+			if ( o.iconpos == "notext" && !el.attr( "title" ) ) {
+				el.attr( "title", el.getEncodedText() );
+			}
 		}
     
 		innerClass += o.corners ? " ui-btn-corner-all" : "";
