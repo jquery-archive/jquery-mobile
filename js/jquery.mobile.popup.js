@@ -52,7 +52,7 @@ define( [ "jquery",
 			$.extend( this, {
 				_ui: ui,
 				_isOpen: false
-			} );
+			});
 
 			$.each( this.options, function( key ) {
 				// Cause initial options to be applied by their handler by temporarily setting the option to undefined
@@ -61,13 +61,13 @@ define( [ "jquery",
 
 				self.options[ key ] = undefined;
 				self._setOption( key, value, true );
-			} );
+			});
 
 			ui.screen.bind( "vclick", function( e ) {
 				e.preventDefault();
 				e.stopImmediatePropagation();
 				self.close();
-			} );
+			});
 		},
 
 		_realSetTheme: function( dst, theme ) {
@@ -140,7 +140,7 @@ define( [ "jquery",
 		_setOption: function( key, value ) {
 			var setter = "_set" + key.replace( /^[a-z]/, function(c) {
 				return c.toUpperCase();
-			} );
+			});
 
 			if ( this[setter] !== undefined ) {
 				this[setter]( value );
@@ -192,7 +192,7 @@ define( [ "jquery",
 			var self = this;
 			$( window ).one( "hashchange.popup", function() {
 				self.close( true );
-			} );
+			});
 		},
 
 		_unbindHashChange: function() {
@@ -222,7 +222,7 @@ define( [ "jquery",
 					.css( {
 						left: coords.x,
 						top: coords.y
-					} );
+					});
 
 				if ( this.options.transition && this.options.transition !== "none" ) {
 					this._ui.container
@@ -235,7 +235,7 @@ define( [ "jquery",
 				// listen for hashchange that will occur when we set it to null dialog hash
 				$( window ).one( "hashchange", function() {
 					self._bindHashChange();
-				} );
+				});
 
 				// set hash to non-linkable dialog url
 				$.mobile.path.set( ( ( $.mobile.activePage != $.mobile.firstPage) ? $.mobile.urlHistory.getActive().url : "" ) + "&ui-state=dialog" );
@@ -284,7 +284,7 @@ define( [ "jquery",
 				}
 			}
 		}
-	} );
+	});
 
 	$.mobile.popup.bindPopupToButton = function( btn, popup ) {
 		if ( btn.length === 0 || popup.length === 0 ) return;
@@ -316,7 +316,7 @@ define( [ "jquery",
 		btn.attr( {
 			"aria-haspopup": true,
 			"aria-owns": btn.attr( "href" )
-		} )
+		})
 			.removeAttr( "href" )
 			.bind( "vclick", btnVClickHandler );
 	};
@@ -328,10 +328,10 @@ define( [ "jquery",
 
 		$( "a[href^='#']:jqmData(rel='popup')", e.target ).each( function() {
 			$.mobile.popup.bindPopupToButton( $( this ), $( $( this ).attr( "href" ) ) );
-		} );
-	} );
+		});
+	});
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-} );
+});
 //>>excludeEnd("jqmBuildExclude");
