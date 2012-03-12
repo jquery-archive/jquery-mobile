@@ -260,4 +260,12 @@
 
 		ok( $checkbox.parent().hasClass("ui-checkbox"), "enhancement has occured");
 	});
+	
+	test( "Icon positioning", function() {
+		var bottomicon = $("[for='bottomicon']")
+			topicon = $("[for='topicon']");
+
+		ok( bottomicon.hasClass("ui-btn-icon-bottom"), "Icon position set on label adds the appropriate class." );
+		ok( topicon.hasClass("ui-btn-icon-top"), "Icon position set on input adds the appropriate class to the label." );
+	});
 })(jQuery);

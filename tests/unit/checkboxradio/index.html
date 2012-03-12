@@ -37,6 +37,7 @@
 
 <div data-nstest-role="page" data-nstest-theme="a">
 	<div data-nstest-role="content">
+
 		<div data-nstest-role="fieldcontain">
 			<fieldset data-nstest-role="controlgroup">
 				<legend>Agree to the terms:</legend>
@@ -134,6 +135,16 @@
 		<legend>Agree to the terms:</legend>
 		<input type="checkbox" name="checkbox-explicit-theme" id="checkbox-explicit-theme" data-nstest-theme="b"/>
 		<label for="checkbox-explicit-theme">foo</label>
+	</fieldset>
+</div>
+		
+<div data-nstest-role="fieldcontain">
+	<fieldset data-nstest-role="controlgroup">
+		<input type="checkbox" name="topicon" id="topicon" class="custom" data-nstest-iconpos="top" />
+		<label for="topicon">I agree</label>
+
+		<input type="checkbox" name="bottomicon" id="bottomicon" class="custom" />
+		<label for="bottomicon" data-nstest-iconpos="bottom">I agree</label>
 	</fieldset>
 </div>
 
