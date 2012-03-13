@@ -57,18 +57,34 @@
 				<option value="on">On</option>
 			</select> 
 			
-			<p>The control is proportionally scaled, so if you're using longer words with it, you can just add a line of CSS to set it to the width you desire. For example, <code>div.ui-slider-switch { width: 9em }</code> will produce:</p>
+			
+			<h2>Longer Labels</h2>
+			<p>The control is proportionally scaled, so if you're using longer words with it, you can just add a line of CSS to set it to the width you desire. For example, given the following markup:</p>
+<pre><code>
+&lt;div class="containing-element"&gt;
+	&lt;label for="flip-min">Flip switch:&lt;/label&gt;
+	&lt;select name="slider" id="flip-min" data-role="slider"&gt;
+		&lt;option value="off">Switch Off&lt;/option&gt;
+		&lt;option value="on">Switch On&lt;/option&gt;
+	&lt;/select&gt;
+&lt;/div&gt;
+</code></pre>
+	
+			<p><code>.containing-element .ui-slider-switch { width: 9em }</code> will produce:</p>
 		
 			<style type="text/css" media="screen">
-			.switch-longdesc div.ui-slider-switch { width: 9em; }
+			.containing-element .ui-slider-switch { width: 9em; }
 			</style>
-			<div class="switch-longdesc">
+			
+			<div class="containing-element">
 				<label for="flip-min">Flip switch:</label>
 				<select name="slider" id="flip-min" data-role="slider">
 					<option value="off">Switch Off</option>
 					<option value="on">Switch On</option>
 				</select> 
 			</div>
+			
+			<p>As some default styles hinge on fieldcontains, note that you may have to ensure that custom styles apply to switches within fieldcontains by using <code>.ui-field-contain div.ui-slider-switch { width: […]; }</code>.</p>
 			
 			<h2>Mini version</h2>
 
@@ -114,7 +130,7 @@
 				
 		<h2>Theming the flip switch</h2>	
 		
-		<p>Like all form elements, this widget will automatically inherit the theme from it's parent container. TO choose a specific theme color swatch, specify the <code>data-theme</code> attribute on the select and specify a swatch letter.</p>	
+		<p>Like all form elements, this widget will automatically inherit the theme from its parent container. To choose a specific theme color swatch, specify the <code>data-theme</code> attribute on the select and specify a swatch letter.</p>	
 		
 <pre><code>	
 &lt;div data-role=&quot;fieldcontain&quot;&gt;
