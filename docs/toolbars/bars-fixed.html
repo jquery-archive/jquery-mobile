@@ -83,16 +83,16 @@
 		<p>Prior to version 1.1, jQuery Mobile used dynamically re-positioned toolbars for the fixed header effect because very few mobile browsers supported the <code>position:fixed</code> CSS property, and simulating fixed support through the use of "fake" JavaScript overflow-scrolling behavior would have reduced our browser support reach, in addition to feeling unnatural on certain platforms. This behavior was not ideal, and jQuery Mobile 1.1 took a new approach to fixed toolbars that allows much broader support, and now the framework offers true fixed toolbars on many popular platforms, while gracefully degrading non-supporting platforms to static positioning.</p>
 		
 		<h3>Polyfilling older platforms</h3>
-		<p>The fixed toolbar plugin degrades gracefully in platforms that do not support CSS <code>position:fixed</code> properly, such as iOS4.3. If you still need to support fixed toolbars on that platform (with the show/hide behavior) included in previous releases, we've developed a polyfill that you can use.</p>
+		<p>The fixed toolbar plugin degrades gracefully in platforms that do not support CSS <code>position:fixed</code> properly, such as iOS4.3. If you still need to support fixed toolbars on that platform (with the show/hide behavior) included in previous releases, Filament Group has developed a polyfill that you can use.</p>
 		
 		<ul>
-				<li><a href="https://gist.github.com/2020916">Github Gist with CSS, and JavaScript required for the fixed toolbars polyfill</a></li>
-				<li><a href="http://bl.ocks.org/d/2020916/">Preview URL using the code in the Gist above</a></li>
+				<li><a href="https://github.com/filamentgroup/jQuery-Mobile-FixedToolbar-Legacy-Polyfill">Github code repository with CSS, and JavaScript required for the fixed toolbars polyfill</a></li>
+				<li><a href="http://filamentgroup.github.com/jQuery-Mobile-FixedToolbar-Legacy-Polyfill/">Preview URL using the code in the repo above</a></li>
 		</ul>
 		
 		<p>Just include the CSS and JS files after your references to jQuery Mobile and Fixed toolbars will work similar to jQuery Mobile 1.0 in iOS4.3, with the inclusion of the new API for the 1.1 fixedtoolbar plugin.</p>
 		
-		<p>If you have any improvements to suggest, fork the <a href="https://gist.github.com/2020916">gist</a> on github and let us know!</p>
+		<p>If you have any improvements to suggest, fork the <a href="https://github.com/filamentgroup/jQuery-Mobile-FixedToolbar-Legacy-Polyfill">gist</a> on github and let us know!</p>
 		
 <div class="ui-body ui-body-e">		
 		<h2>No longer supported: touchOverflowEnabled</h2>
