@@ -189,12 +189,12 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 		}
 	},
 
-	disable: function() {
-		this.element.prop( "disabled", true ).parent().addClass( "ui-disabled" );
+	_setTheme: function( value ) {
+		this.label.buttonMarkup( { theme: ( value || $.mobile.getInheritedTheme( this.element, "c" ) ) } );
 	},
 
-	enable: function() {
-		this.element.prop( "disabled", false ).parent().removeClass( "ui-disabled" );
+	_setDisabled: function( value ) {
+		this.element.prop( "disabled", value ).parent()[ value ? "addClass" : "removeClass" ]( "ui-disabled" );
 	}
 });
 
