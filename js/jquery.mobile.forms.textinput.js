@@ -23,6 +23,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			o = this.options,
 			theme = o.theme || $.mobile.getInheritedTheme( this.element, "c" ),
 			themeclass  = " ui-body-" + theme,
+			self = this,
 			mini = input.jqmData("mini") == true,
 			miniclass = mini ? " ui-mini" : "",
 			focusedEl, clearbtn;
@@ -50,8 +51,12 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		if ( input.is( "[type='search'],:jqmData(type='search')" ) ) {
 
 			focusedEl = input.wrap( "<div class='ui-input-search ui-shadow-inset ui-btn-corner-all ui-btn-shadow ui-icon-searchfield" + themeclass + miniclass + "'></div>" ).parent();
-			clearbtn = $( "<a href='#' class='ui-input-clear' title='" + o.clearSearchButtonText + "'>" + o.clearSearchButtonText + "</a>" )
-				.bind('click', function( event ) {
+			this._themedElement = focusedEl.add( input );
+			this._clearSpan = $( "<span>" ).text( o.clearSearchButtonText );
+			this._clearBtn =
+			clearbtn = $( "<a href='#' class='ui-input-clear' title='" + o.clearSearchButtonText + "'></a>" )
+				.append( this._clearSpan )
+				.bind( 'click', function( event ) {
 					input
 						.val( "" )
 						.focus()
@@ -79,6 +84,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			input.bind('paste cut keyup focus change blur', toggleClear);
 
 		} else {
+			this._themedElement = input;
 			input.addClass( "ui-corner-all ui-shadow-inset" + themeclass + miniclass );
 		}
 
@@ -132,14 +138,27 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		}
 	},
 
-	disable: function(){
-		( this.element.attr( "disabled", true ).is( "[type='search'],:jqmData(type='search')" ) ?
-			this.element.parent() : this.element ).addClass( "ui-disabled" );
+	_setClearSearchButtonText: function( value ) {
+		if ( this._clearSpan ) {
+			this._clearSpan.text( value );
+		}
+		if ( this._clearBtn ) {
+			this._clearBtn.prop( "title", value );
+		}
 	},
 
-	enable: function(){
-		( this.element.attr( "disabled", false).is( "[type='search'],:jqmData(type='search')" ) ?
-			this.element.parent() : this.element ).removeClass( "ui-disabled" );
+	_setTheme: function( value ) {
+		this._themedElement
+			.removeClass( "ui-body-" + ( this.options.theme || $.mobile.getInheritedTheme( this._themedElement, "c" ) ) )
+			.addClass( "ui-body-" + ( value || $.mobile.getInheritedTheme( this._themedElement, "c" ) ) );
+		if ( this._clearBtn ) {
+			this._clearBtn.buttonMarkup( { theme: value } );
+		}
+	},
+
+	_setDisabled: function( value ) {
+		( this.element.prop( "disabled", value ).is( "[type='search'],:jqmData(type='search')" ) ?
+			this.element.parent() : this.element )[ value ? "addClass" : "removeClass" ]( "ui-disabled" );
 	}
 });
 
