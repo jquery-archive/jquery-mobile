@@ -18,7 +18,6 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		corners: true,
 		shadow: true,
 		iconshadow: true,
-		menuPageTheme: "b",
 		overlayTheme: "a",
 		hidePlaceholderMenuItems: true,
 		closeText: "Close",
