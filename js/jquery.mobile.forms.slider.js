@@ -12,7 +12,6 @@ $.widget( "mobile.slider", $.mobile.widget, {
 	options: {
 		theme: null,
 		trackTheme: null,
-		disabled: false,
 		initSelector: "input[type='range'], :jqmData(type='range'), :jqmData(role='slider')",
 		mini: false
 	},
@@ -122,6 +121,8 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				sliderImg.setAttribute('role','img');
 				sliderImg.appendChild(document.createTextNode(options[i].innerHTML));
 				$(sliderImg).prependTo( slider );
+                                if (!i)
+                                    self.handleSpans = $(sliderLabel).add(sliderImg);
 			}
 
 			self._labels = $( ".ui-slider-label", slider );
@@ -393,18 +394,34 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		}
 	},
 
-	enable: function() {
-		this.element.attr( "disabled", false );
-		this.slider.removeClass( "ui-disabled" ).attr( "aria-disabled", false );
-		return this._setOption( "disabled", false );
+	_setMini: function( value ) {
+		this.slider[ value ? "addClass" : "removeClass" ]( "ui-slider-mini" );
 	},
 
-	disable: function() {
-		this.element.attr( "disabled", true );
-		this.slider.addClass( "ui-disabled" ).attr( "aria-disabled", true );
-		return this._setOption( "disabled", true );
-	}
+	_setTheme: function( value ) {
+		this.handle.buttonMarkup( { theme: ( value || $.mobile.getInheritedTheme( this.element, "c" ) ) } );
+	},
 
+	_setTrackTheme: function( value ) {
+		var currentTheme = ( this.options.trackTheme || $.mobile.getInheritedTheme( this.element, "c" ) );
+
+		value = ( value || $.mobile.getInheritedTheme( this.element, "c" ) );
+
+		this.slider
+			.removeClass( "ui-btn-down-" + currentTheme )
+			.addClass( "ui-btn-down-" + value );
+
+		if ( this.handleSpans ) {
+			this.handleSpans
+				.removeClass( "ui-btn-down-" + currentTheme )
+				.addClass( "ui-btn-down-" + value );
+		}
+	},
+
+	_setDisabled: function( value ) {
+		this.element.prop( "disabled", value );
+		this.slider[ value ? "addClass" : "removeClass" ]( "ui-disabled" ).attr( "aria-disabled", value );
+	}
 });
 
 //auto self-init widgets
