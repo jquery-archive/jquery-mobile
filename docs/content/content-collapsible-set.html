@@ -17,15 +17,22 @@
 	<div data-role="page" class="type-interior">
 
 		<div data-role="header" data-theme="f">
-		<h1>Collapsible sets (Accordions)</h1>
+		<h1>Collapsible sets (accordions)</h1>
 		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
 		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
 	</div><!-- /header -->
 
 	<div data-role="content">
 		<div class="content-primary">
-		
 		<h2>Collapsible set markup</h2>
+
+		<ul data-role="controlgroup" data-type="horizontal" class="localnav">
+			<li><a href="content-collapsible-set.html" data-role="button" data-transition="fade" class="ui-btn-active">Basics</a></li>
+			<li><a href="content-collapsible-set-options.html" data-role="button" data-transition="fade">Options</a></li>
+			<li><a href="content-collapsible-set-methods.html" data-role="button" data-transition="fade">Methods</a></li>
+			<li><a href="content-collapsible-set-events.html" data-role="button" data-transition="fade">Events</a></li>
+		</ul>
+
 		<p>Collapsible sets start with the exact same markup as <a href="content-collapsible.html">individual collapsibles</a>. By adding a parent wrapper with a <code> data-role="collapsible-set"</code> attribute around a number of collapsibles, the framework will style these to looks like a visually grouped widget and make it behave like an accordion so only one section can be open at a time. View the <a href="../api/data-attributes.html">data- attribute reference</a> to see all the possible attributes you can add to collapsible sets.</p>
 		<p>By default, all the sections will be collapsed. To set a section to be open when the page loads, add the <code> data-collapsed="false"</code> attribute to the heading of the section you want expanded.</p>
 
