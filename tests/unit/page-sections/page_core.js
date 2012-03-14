@@ -22,10 +22,6 @@
 		ok($('.ui-footer > a').hasClass('ui-btn'));
 	});
 
-	test( "unnested footer anchors are styled", function(){
-		ok($('.ui-footer > a').hasClass('ui-btn'));
-	});
-
 	test( "unnested bar anchors are styled", function(){
 		ok($('.ui-bar > a').hasClass('ui-btn'));
 	});
