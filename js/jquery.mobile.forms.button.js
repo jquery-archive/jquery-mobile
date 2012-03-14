@@ -131,8 +131,8 @@ $.widget( "mobile.button", $.mobile.widget, {
 			this.enable();
 		}
 
-                // Grab the button's text element from its implementation-independent data item
-		$(this.button.data( 'buttonElements' ).text).text( $el.text() || $el.val() );
+		// Grab the button's text element from its implementation-independent data item
+		$( this.button.data( 'buttonElements' ).text ).text( $el.text() || $el.val() );
 	}
 });
 
