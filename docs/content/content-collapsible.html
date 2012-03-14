@@ -17,22 +17,29 @@
 	<div data-role="page" class="type-interior">
 
 		<div data-role="header" data-theme="f">
-		<h1>Collapsible content</h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
-		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
-	</div><!-- /header -->
+			<h1>Collapsible content</h1>
+			<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+			<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
+		</div><!-- /header -->
 
-	<div data-role="content">
-		<div class="content-primary">
-		
-		<h2>Collapsible content markup</h2>
-		<p>To create a collapsible block of content, create a container and add the <code> data-role="collapsible"</code> attribute. Using <code>data-content-theme</code> attribute allows you to set a theme for the content of the collapsible. View the <a href="../api/data-attributes.html">data- attribute reference</a> to see all the possible attributes you can add to collapsibles.</p>
+		<div data-role="content">
+			<div class="content-primary">
+			<h2>Collapsible content</h2>
+			
+			<ul data-role="controlgroup" data-type="horizontal" class="localnav">
+				<li><a href="content-collapsible.html" data-role="button" data-transition="fade" class="ui-btn-active">Basics</a></li>
+				<li><a href="content-collapsible-options.html" data-role="button" data-transition="fade">Options</a></li>
+				<li><a href="content-collapsible-methods.html" data-role="button" data-transition="fade">Methods</a></li>
+				<li><a href="content-collapsible-events.html" data-role="button" data-transition="fade">Events</a></li>
+			</ul>
 
-		<p>Directly inside this container, add any header element (H1-H6). The framework will style the header to look like a clickable button and add a "+" icon to the left to indicate it's expandable.</p>
-	
-		<p>After the header, add any HTML markup you want to be collapsible. The framework will wrap this markup in a container that will be hidden/shown when the heading is clicked.</p>
+			<p>To create a collapsible block of content, create a container and add the <code> data-role="collapsible"</code> attribute. Using <code>data-content-theme</code> attribute allows you to set a theme for the content of the collapsible. View the <a href="../api/data-attributes.html">data- attribute reference</a> to see all the possible attributes you can add to collapsibles.</p>
+
+			<p>Directly inside this container, add any header element (H1-H6). The framework will style the header to look like a clickable button and add a "+" icon to the left to indicate it's expandable.</p>
 		
-		<p>By default, the content will be collapsed.</p>
+			<p>After the header, add any HTML markup you want to be collapsible. The framework will wrap this markup in a container that will be hidden/shown when the heading is clicked.</p>
+			
+			<p>By default, the content will be collapsed.</p>
 <pre><code>		
 &lt;div <strong>data-role=&quot;collapsible&quot;</strong>&gt;
    &lt;h3&gt;I&#x27;m a header&lt;/h3&gt;
