@@ -38,13 +38,13 @@
 		<dl>
 			<dt><code>collapsed</code> <em>boolean</em></dt>
 			<dd>
-				<p class="default">default: false</p>
-				<p>When true, the container is initially collapsed with a plus icon. To set the value for all instances of this widget, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
+				<p class="default">default: true</p>
+				<p>When false, the container is initially expanded with a minus icon in the header. To set the value for all instances of this widget, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
 <pre><code>$( document ).bind( "mobileinit", function(){
-    <strong>$.mobile.collapsible.prototype.options.collapsed = true;</strong>
+    <strong>$.mobile.collapsible.prototype.options.collapsed = false;</strong>
 });
 </code></pre>
-				<p>This option is also exposed as a data attribute: <code>data-collapsed=&quot;true&quot;</code>.</p>
+				<p>This option is also exposed as a data attribute: <code>data-collapsed=&quot;false&quot;</code>.</p>
 			</dd>
 
 			<dt><code>collapseCueText</code> <em>string</em></dt>
@@ -88,6 +88,17 @@
 </code></pre>
 			</dd>
 
+			<dt><code>iconpos</code> <em>string</em></dt>
+			<dd>
+				<p class="default">default: "left"</p>
+				<p>Positions the icon in the collapsible header. Possible values: left, right, top, bottom, none, notext.</p>
+<pre><code>$( document ).bind( "mobileinit", function(){
+    <strong>$.mobile.collapsible.prototype.options.iconpos = "right";</strong>
+});
+</code></pre>
+				<p>This option is also exposed as a data attribute: <code>data-iconpos=&quot;right&quot;</code>.</p>
+			</dd>
+
 <!--
 			<dt><code>iconTheme</code> <em>string</em></dt>
 			<dd>
@@ -114,7 +125,7 @@
 			<dt><code>mini</code> <em>boolean</em></dt>
 			<dd>
 				<p class="default">default: false</p>
-				<p>Sets the size of the element to a more compact, <a href="../forms/forms-all-mini.html">mini version</a>. To set the value for all instances of this widget, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
+				<p>Sets the size of the element to a more compact, <a href="../forms/forms-all-mini.html">mini version</a>. If the value is false for an individual collapsible container, but that container is part of a collapsible set, then the value is inherited from the parent collapsible set. To set the value for all instances of this widget, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
 <pre><code>$( document ).bind( "mobileinit", function(){
     <strong>$.mobile.collapsible.prototype.options.mini = true;</strong>
 });
