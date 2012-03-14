@@ -5,6 +5,7 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Fallback transition for pop in non-3D supporting browsers
 //>>label: Pop fallback transition
+//>>css: ../css/structure/jquery.mobile.transition.pop.css
 
 define( [ "jquery", "./jquery.mobile.transition" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");

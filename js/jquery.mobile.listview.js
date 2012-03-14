@@ -1,6 +1,7 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Adds a filtering textfield to listviews
 //>>label: Listview Filter
+//>>css: ../css/themes/default/jquery.mobile.theme.css, ../css/structure/jquery.mobile.listview.css
 
 define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.buttonMarkup", "./jquery.mobile.page", "./jquery.mobile.page.sections" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");

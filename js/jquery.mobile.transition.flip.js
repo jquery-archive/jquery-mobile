@@ -5,6 +5,7 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Fallback transition for flip in non-3D supporting browsers
 //>>label: Flip fallback transition
+//>>css: ../css/structure/jquery.mobile.transitions.flip.css
 
 define( [ "jquery", "./jquery.mobile.transition" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");

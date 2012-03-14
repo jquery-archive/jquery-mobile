@@ -2,6 +2,7 @@
 //>>description: Form Buttons
 //>>label: links that proxy to native input/buttons
 //>>group: forms
+//>>css: ../css/themes/default/jquery.mobile.theme.css,../css/structure/jquery.mobile.button.css
 
 define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.buttonMarkup"  ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");

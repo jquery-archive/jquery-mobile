@@ -5,6 +5,7 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Fallback transition for slidedown in non-3D supporting browsers
 //>>label: Slidedown fallback transition
+//>>css: ../css/structure/jquery.mobile.transition.slidedown.css
 
 define( [ "jquery", "./jquery.mobile.transition" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");

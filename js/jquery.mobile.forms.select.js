@@ -2,6 +2,7 @@
 //>>description: Consistent styling for native select menus.
 //>>label: Enhanced Native Selects
 //>>group: forms
+//>>css: ../css/themes/default/jquery.mobile.theme.css, ../css/structure/jquery.mobile.forms.select.css
 
 define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.widget", "./jquery.mobile.buttonMarkup", "./jquery.mobile.zoom" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");

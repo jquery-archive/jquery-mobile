@@ -1,6 +1,7 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Degrades inputs to another type after custom enhancements are made.
 //>>label: Dialog-style Pages
+//>>css: ../css/themes/default/jquery.mobile.theme.css,../css/structure/jquery.mobile.dialog.css
 
 define( [ "jquery", "./jquery.mobile.widget" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");

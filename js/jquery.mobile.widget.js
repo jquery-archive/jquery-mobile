@@ -1,6 +1,7 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Widget factory extentions for mobile.
 //>>label: Widget Factory Extensions
+//>>css: ../css/themes/default/jquery.mobile.theme.css
 
 define( [ "jquery", "../external/requirejs/depend!./jquery.ui.widget[jquery]" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");

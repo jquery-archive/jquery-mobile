@@ -6,6 +6,7 @@
 //>>description: Fully-custom select menus.
 //>>label: Custom Selects
 //>>group: forms
+//>>css: ../css/themes/default/jquery.mobile.theme.css, ../css/structure/jquery.mobile.forms.select.css
 
 define( [
 	"jquery",
