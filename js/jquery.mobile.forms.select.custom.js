@@ -61,10 +61,11 @@ define( [
 
 		if( widget.isMultiple ) {
 			headerClose = $( "<a>", {
-				"text": widget.options.closeText,
 				"href": "#",
 				"class": "ui-btn-left"
-			}).attr( "data-" + $.mobile.ns + "iconpos", "notext" ).attr( "data-" + $.mobile.ns + "icon", "delete" ).appendTo( header ).buttonMarkup();
+			})
+				.append( widget.headerCloseText = $( "<span>" ).text( widget.options.closeText ) )
+				.attr( "data-" + $.mobile.ns + "iconpos", "notext" ).attr( "data-" + $.mobile.ns + "icon", "delete" ).appendTo( header ).buttonMarkup();
 		}
 
 		$.extend( widget, {
@@ -514,6 +515,19 @@ define( [
 
 				// Now populated, create listview
 				self.list.listview();
+			},
+
+			_setCloseText: function( value ) {
+				if ( this.headerCloseText ) {
+					this.headerClose.attr( "title", value );
+					this.headerCloseText.text( value );
+				}
+			},
+
+			_setOverlayTheme: function( value ) {
+				this.listbox
+					.removeClass( "ui-body-" + ( this.options.overlayTheme || $.mobile.getInheritedTheme( this.listbox, "a" ) ) )
+					.addClass( "ui-body-" + ( value || $.mobile.getInheritedTheme( this._button(), "a" ) ) );
 			},
 
 			_button: function(){
