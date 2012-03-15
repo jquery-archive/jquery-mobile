@@ -1,5 +1,5 @@
 /*
- * mobile listview unit tests
+ * mobile collapsible unit tests
  */
 
 // TODO split out into seperate test files
@@ -140,9 +140,9 @@
 		]);
 	});
 
-  asyncTest( "Collapsible Set with static and dynamic content", function(){
-  		$.testHelper.pageSequence([
-  			function(){
+	asyncTest( "Collapsible Set with static and dynamic content", function(){
+		$.testHelper.pageSequence([
+			function(){
   				$.testHelper.openPage( "#collapsible-set-with-static-and-dynamic-content" );
   			},
 
@@ -163,6 +163,40 @@
   			}
   		]);
   	});
+
+	module( "Icons", {});
+
+	asyncTest( "Collapsible with custom icons", function(){
+		$.testHelper.pageSequence([
+			function(){
+				$.testHelper.openPage( "#collapsible-with-custom-icons" );
+			},
+
+			function() {
+				var collapsibles = $.mobile.activePage.find( ".ui-collapsible" );
+				ok( collapsibles.eq(0).find( ".ui-icon" ).hasClass( "ui-icon-arrow-r" ), "Heading of collapsed collapsible should have class ui-icon-arrow-r");
+				ok( collapsibles.eq(1).find( ".ui-icon" ).hasClass( "ui-icon-arrow-d" ), "Heading of expanded collapsible should have class ui-icon-arrow-d");
+				start();
+			}
+		]);
+	});
+
+	asyncTest( "Collapsible sets with custom icons", function(){
+		$.testHelper.pageSequence([
+			function(){
+				$.testHelper.openPage( "#collapsible-set-with-custom-icons" );
+			},
+
+			function() {
+				var collapsibles = $.mobile.activePage.find( ".ui-collapsible" );
+				ok( collapsibles.eq(0).find( ".ui-icon" ).hasClass( "ui-icon-arrow-r" ), "Heading of first collapsed collapsible should have class ui-icon-arrow-r");
+				ok( collapsibles.eq(1).find( ".ui-icon" ).hasClass( "ui-icon-arrow-d" ), "Heading of first expanded collapsible should have class ui-icon-arrow-d");
+				ok( collapsibles.eq(2).find( ".ui-icon" ).hasClass( "ui-icon-arrow-l" ), "Heading of second collapsed collapsible should have class ui-icon-arrow-l");
+				ok( collapsibles.eq(3).find( ".ui-icon" ).hasClass( "ui-icon-arrow-u" ), "Heading of second expanded collapsible should have class ui-icon-arrow-u");
+				start();
+			}
+		]);
+	});
 
 	module( "Theming", {});
 
