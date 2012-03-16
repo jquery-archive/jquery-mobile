@@ -437,6 +437,7 @@ define( [
 				var self = this,
 					o = this.options,
 					placeholder = this.placeholder,
+					needPlaceholder = true,
 					optgroups = [],
 					lis = [],
 					dataIcon = self.isMultiple ? "checkbox-off" : "false";
@@ -476,15 +477,18 @@ define( [
 							fragment.appendChild(divider);
 							optGroup = optLabel;
 						}
-					}															
-										
-					if (!placeholder && (!option.getAttribute( "value" ) || text.length == 0 || $option.jqmData( "placeholder" )) ) {
+					}
+
+					if (needPlaceholder && (!option.getAttribute( "value" ) || text.length == 0 || $option.jqmData( "placeholder" ))) {
+						needPlaceholder = false;
 						if ( o.hidePlaceholderMenuItems ) {
 							classes.push( "ui-selectmenu-placeholder" );
-						}						
-						placeholder = self.placeholder = text;									
+						}
+						if (!placeholder) {
+							placeholder = self.placeholder = text;
+						}
 					}
-															
+
 					var item = document.createElement('li');															
 					if ( option.disabled ) {
 						classes.push( "ui-disabled" );
