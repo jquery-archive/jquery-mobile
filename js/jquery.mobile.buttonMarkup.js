@@ -126,7 +126,10 @@ $.fn.buttonMarkup = function( options ) {
 		}
 
 		if ( !buttonElements ) {
-			e.appendChild( buttonInner );
+			// In case 'e' is an input element appendChild throws an 'Unexpected call to method or property access' exception in IE7/8
+			try{
+				e.appendChild( buttonInner );
+			}catch(err){}
 		}
 
 		// Assign a structure containing the elements of this button to the elements of this button. This

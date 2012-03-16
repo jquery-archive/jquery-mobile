@@ -976,7 +976,10 @@ function extend(a, b) {
 		if ( b[prop] === undefined ) {
 			delete a[prop];
 		} else {
-			a[prop] = b[prop];
+			// In case prop='constructor' a[prop] returns [Object Window] in IE8. The other browsers return 'function F(){}'. So 'Member not found' exception throws
+			try{
+				a[prop] = b[prop];
+			}catch(err){};
 		}
 	}
 
