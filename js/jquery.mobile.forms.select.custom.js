@@ -436,7 +436,7 @@ define( [
 			_buildList: function() {
 				var self = this,
 					o = this.options,
-					placeholder = this.placeholder,
+					placeholder = "",
 					optgroups = [],
 					lis = [],
 					dataIcon = self.isMultiple ? "checkbox-off" : "false";
@@ -476,8 +476,8 @@ define( [
 							fragment.appendChild(divider);
 							optGroup = optLabel;
 						}
-					}															
-										
+					}
+
 					if (!placeholder && (!option.getAttribute( "value" ) || text.length == 0 || $option.jqmData( "placeholder" )) ) {
 						if ( o.hidePlaceholderMenuItems ) {
 							classes.push( "ui-selectmenu-placeholder" );
