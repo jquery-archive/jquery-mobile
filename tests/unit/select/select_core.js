@@ -27,6 +27,26 @@
 		}
 	});
 
+	asyncTest( "placeholder correctly gets ui-selectmenu-placeholder class after rebuilding", function(){
+		$.testHelper.sequence([
+			function(){
+				// bring up the optgroup menu
+				ok($("#optgroup-and-placeholder-container a").length > 0, "there is in fact a button in the page");
+				$("#optgroup-and-placeholder-container a").trigger("click");
+			},
+
+			function(){
+				//select the first menu item
+				$("#optgroup-and-placeholder-menu a:first").click();
+			},
+
+			function(){
+				ok($("#optgroup-and-placeholder-menu li:first").hasClass("ui-selectmenu-placeholder"), "the placeholder item has the ui-selectmenu-placeholder class");
+				start();
+			}
+		], 1000);
+	});
+
 	asyncTest( "firing a click at least 400 ms later on the select screen overlay does close it", function(){
 		$.testHelper.sequence([
 			function(){
