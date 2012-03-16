@@ -29,12 +29,12 @@
 			function(){
 				ok( $.mobile.activePage.hasClass('ui-dialog'), "the dialog came up" );
 				var option = $.mobile.activePage.find( "li a" ).not(":contains('" + selectButton.text() + "')").last();
-				value = option.text();
+				value = $.trim(option.text());
 				option.click();
 			},
 
 			function(){
-				same( value, selectButton.text(), "the selected value is propogated back to the button text" );
+				same( value, $.trim(selectButton.text()), "the selected value is propogated back to the button text" );
 				start();
 			}
 		]);
@@ -112,25 +112,25 @@
 			function(){
 				// for performance reason we don't initially create the menu dialog now
 				same( $(":jqmData(role='dialog')").length, dialogCount);
-				
+
 				// manually trigger dialog opening
-				$( "#domcache-uncached-page-select" ).data( 'selectmenu' ).open();																											
+				$( "#domcache-uncached-page-select" ).data( 'selectmenu' ).open();
 			},
-					
+
 			function(){
 				// check if dialog was successfully  created
-				same( $(":jqmData(role='dialog')").length, dialogCount + 1 );		
-				$( "#domcache-uncached-page-select" ).data( 'selectmenu' ).close();													
+				same( $(":jqmData(role='dialog')").length, dialogCount + 1 );
+				$( "#domcache-uncached-page-select" ).data( 'selectmenu' ).close();
 			},
-			
+
 			function(){
 				// navigate to parent(initial) page
 				window.history.back();
 			},
-			
+
 			function() {
 				same( $(":jqmData(role='dialog')").length, dialogCount );
-				start();	
+				start();
 			}
 		]);
 	});
