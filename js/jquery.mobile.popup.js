@@ -199,21 +199,6 @@ define( [ "jquery",
 			$( window ).unbind( "hashchange.popup" );
 		},
 
-		_onPageBeforeChange: function( e, data ) {
-			if ( typeof( data.toPage ) === "object" && data.toPage.jqmData( "url" ) !== $.mobile.activePage.jqmData( "url" ) ) {
-				// Prevent the changePage from happening
-				e.preventDefault();
-				e.stopImmediatePropagation();
-
-				setTimeout( function() {
-					// Resume the changePage
-					$.mobile.changePage( data.toPage, data.options );
-				}, 250);
-
-				this.close();
-			}
-		},
-
 		open: function( x, y ) {
 			if ( !this._isOpen ) {
 				var self = this,
@@ -251,8 +236,6 @@ define( [ "jquery",
 				$( window ).one( "hashchange", function() {
 					self._bindHashChange();
 				});
-
-				$( window ).bind( "pagebeforechange.popup", $.proxy( this, "_onPageBeforeChange" ) );
 
 				// set hash to non-linkable dialog url
 				$.mobile.path.set( ( ( $.mobile.activePage != $.mobile.firstPage) ? $.mobile.urlHistory.getActive().url : "" ) + "&ui-state=dialog" );
@@ -294,7 +277,6 @@ define( [ "jquery",
 
 				// unbind listener that comes with opening popup
 				this._unbindHashChange();
-				$( window ).unbind( "pagebeforechange.popup" );
 
 				// if the close event did not come from an internal hash listener, reset URL back
 				if ( !fromHash ) {
