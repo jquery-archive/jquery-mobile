@@ -77,6 +77,9 @@
 				<h1>Edit Contact</h1>
 				<a href="index.html" data-icon="check">Save</a>
 			</div>
+			
+			<h3>Make buttons visually stand out</h3>
+			
 			<p>Buttons automatically adopt the swatch color of the bar they sit in, so a link in a header bar with the "a" color will also be styled as "a" colored buttons. It's simple to make a button visually stand out &mdash; here, we add the <code> data-theme</code> attribute and set the color swatch for the button to "b" to make the "Save" button pop.</p>
 			
 			<pre><code>			
@@ -114,6 +117,27 @@
 				<h1>Page Title</h1>
 				<a href="index.html" data-icon="gear" class="ui-btn-right">Options</a>
 			</div>
+			
+			
+				<h3>Adding buttons to toolbars without heading</h3>
+	
+			<p>The heading in the tool bar has some margin that will give the bar its height. If you choose not to use a heading, you will need to add an element with <code>class="ui-title"</code> so that the bar can get the correct height and display correctly.</p> 
+
+		
+<div class="highlight"> 
+<pre><code>
+&lt;div data-role=&quot;header&quot; data-position=&quot;inline&quot;&gt; 
+	&lt;a href=&quot;index.html&quot; data-icon=&quot;gear&quot; class=&quot;ui-btn-right&quot;&gt;Options&lt;/a&gt;
+&lt;/div&gt;
+	&lt;span class=&quot;ui-title&quot; /&gt;
+</code></pre> 
+</div> 
+
+			<div data-role="header" >
+				<a href="index.html" data-icon="gear" class="ui-btn-right">Options</a>
+				<span class="ui-title" />
+			</div>
+			
 			
 			
 		<h2>Adding Back buttons</h2>
