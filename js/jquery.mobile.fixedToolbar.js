@@ -35,11 +35,11 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 					wkversion = !!wkmatch && wkmatch[ 1 ],
 					ffmatch = ua.match( /Fennec\/([0-9]+)/ ),
 					ffversion = !!ffmatch && ffmatch[ 1 ],
-					operammobilematch = ua.match( /Opera Mobile\/([0-9]+)/ ),
+					operammobilematch = ua.match( /Opera Mobi\/([0-9]+)/ ),
 					bbmatch = w.blackberry && w.navigator.appVersion.match( /Version\/([0-9]+)/ ),
 					bbversion = !!bbmatch && parseInt( bbmatch[ 1 ], 10 ),
 					omversion = !!operammobilematch && operammobilematch[ 1 ];
-					
+
 				if(
 					// iOS 4.3 and older : Platform is iPhone/Pad/Touch and Webkit version is less than 534 (ios5)
 					( ( platform.indexOf( "iPhone" ) > -1 || platform.indexOf( "iPad" ) > -1  || platform.indexOf( "iPod" ) > -1 ) && wkversion && wkversion < 534 )
@@ -47,7 +47,7 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 					// Opera Mini
 					( w.operamini && ({}).toString.call( w.operamini ) === "[object OperaMini]" )
 					||
-					( operammobilematch && omverson < 7458 )
+					( operammobilematch && omversion < 7458 )
 					||
 					//Android lte 2.1: Platform is Android and Webkit version is less than 533 (Android 2.2)
 					( ua.indexOf( "Android" ) > -1 && wkversion && wkversion < 533 )
