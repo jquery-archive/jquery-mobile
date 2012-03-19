@@ -508,14 +508,9 @@ define( [
 
 	//simply set the active page's minimum height to screen height, depending on orientation
 	function getScreenHeight(){
-		var orientation 	= $.event.special.orientationchange.orientation(),
-			port			= orientation === "portrait",
-			winMin			= port ? 480 : 320,
-			screenHeight	= port ? screen.availHeight : screen.availWidth,
-			winHeight		= Math.max( winMin, $( window ).height() ),
-			pageMin			= Math.min( screenHeight, winHeight );
-
-		return pageMin;
+		// Native innerHeight returns more accurate value for this across platforms, 
+		// jQuery version is here as a normalized fallback for platforms like Symbian
+		return window.innerHeight || $( window ).height();
 	}
 
 	$.mobile.getScreenHeight = getScreenHeight;
