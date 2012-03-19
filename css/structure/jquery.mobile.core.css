@@ -69,4 +69,4 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 
 /* accessible content hiding */
 .ui-hide-label label,
-.ui-hidden-accessible { position: absolute !important; left: -9999px; clip: rect(1px 1px 1px 1px); clip: rect(1px,1px,1px,1px); }
+.ui-hidden-accessible { text-indent: 100%; white-space: nowrap; overflow: hidden; }
