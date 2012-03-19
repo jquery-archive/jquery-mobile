@@ -3,7 +3,7 @@
  */
 
 (function($){
-	module('jquery.mobile.slider.js');
+	module('jquery.mobile.degradeInputs.js');
 
 	test('keepNative elements should not be degraded', function() {
 		same($('input#not-to-be-degraded').attr("type"), "range");
