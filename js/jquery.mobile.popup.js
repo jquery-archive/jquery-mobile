@@ -188,17 +188,6 @@ define( [ "jquery",
 			return { x: newleft, y: newtop };
 		},
 
-		_bindHashChange: function() {
-			var self = this;
-			$( window ).one( "hashchange.popup", function() {
-				self.close( true );
-			});
-		},
-
-		_unbindHashChange: function() {
-			$( window ).unbind( "hashchange.popup" );
-		},
-
 		open: function( x, y ) {
 			if ( !this._isOpen ) {
 				var self = this,
@@ -232,19 +221,11 @@ define( [ "jquery",
 					onAnimationComplete();
 				}
 
-				// listen for hashchange that will occur when we set it to null dialog hash
-				$( window ).one( "hashchange", function() {
-					self._bindHashChange();
-				});
-
-				// set hash to non-linkable dialog url
-				$.mobile.path.set( ( ( $.mobile.activePage != $.mobile.firstPage) ? $.mobile.urlHistory.getActive().url : "" ) + "&ui-state=dialog" );
-
 				this._isOpen = true;
 			}
 		},
 
-		close: function( fromHash ) {
+		close: function( ) {
 			if ( this._isOpen ) {
 				var self = this,
 					onAnimationComplete = function() {
@@ -273,14 +254,6 @@ define( [ "jquery",
 					this._ui.screen.animate( {opacity: 0.0}, "fast", hideScreen );
 				} else {
 					hideScreen();
-				}
-
-				// unbind listener that comes with opening popup
-				this._unbindHashChange();
-
-				// if the close event did not come from an internal hash listener, reset URL back
-				if ( !fromHash ) {
-					window.history.back();
 				}
 			}
 		}
