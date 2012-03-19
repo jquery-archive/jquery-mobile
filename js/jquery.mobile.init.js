@@ -54,9 +54,9 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 	function checkLoaderPosition(){
 		var offset = $loader.offset(),
 			scrollTop = $window.scrollTop(),
-			htmlHeight = $html.height();
+			screenHeight = $.mobile.getScreenHeight();
 
-		if( offset.top < scrollTop || (offset.top - scrollTop) > htmlHeight ) {
+		if( offset.top < scrollTop || (offset.top - scrollTop) > screenHeight ) {
 			$loader.addClass( "ui-loader-fakefix" );
 			fakeFixLoader();
 			$window
