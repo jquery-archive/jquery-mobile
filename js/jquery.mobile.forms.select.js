@@ -65,6 +65,10 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		if(  !!~this.element[0].className.indexOf( "ui-btn-right" ) ) {
 			classes = " ui-btn-right";
 		}
+
+		if( this.options.inline ) {
+			classes += " ui-btn-inline";
+		}
 		
 		this.select = this.element.wrap( "<div class='ui-select" + classes + "'>" );
 		this.selectID  = this.select.attr( "id" );
