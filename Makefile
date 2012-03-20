@@ -25,19 +25,7 @@ deploy: STRUCTURE = jquery.mobile.structure-${VER_OFFICIAL}
 # The CSS theme being used
 THEME = default
 
-# If node is available then use node to run r.js
-# otherwise use good old rhino/java
-NODE = /usr/local/bin/node
-HAS_NODE = $(shell if test -x ${NODE} ;then echo true; fi)
-
-ifeq ($(HAS_NODE), true)
-	RUN_JS = @@${NODE}
-else
-	RUN_JS = @@java -XX:ReservedCodeCacheSize=64m -classpath build/js.jar:build/google-compiler-20111003.jar org.mozilla.javascript.tools.shell.Main
-endif
-
 # Build Targets
-
 # When no build target is specified, all gets ran
 all: css js zip notify
 
@@ -53,45 +41,11 @@ init:
 
 # Build and minify the CSS files
 css: init
-	# Build the CSS file with the theme included
-	${RUN_JS} \
-		external/r.js/dist/r.js \
-		-o cssIn=css/themes/default/jquery.mobile.css \
-		optimizeCss=standard.keepComments.keepLines \
-		out=${OUTPUT}/${NAME}.compiled.css
-	@@cat LICENSE-INFO.txt | ${VER} > ${OUTPUT}/${NAME}.css
-	@@cat ${OUTPUT}/${NAME}.compiled.css >> ${OUTPUT}/${NAME}.css
-	@@echo ${VER_MIN} > ${OUTPUT}/${NAME}.min.css
-	@@java -XX:ReservedCodeCacheSize=64m \
-		-jar build/yuicompressor-2.4.6.jar \
-		--type css ${OUTPUT}/${NAME}.compiled.css >> ${OUTPUT}/${NAME}.min.css
-	@@rm ${OUTPUT}/${NAME}.compiled.css
-	# Build the CSS Structure-only file
-	${RUN_JS} \
-		external/r.js/dist/r.js \
-		-o cssIn=css/structure/jquery.mobile.structure.css \
-		out=${OUTPUT}/${STRUCTURE}.compiled.css
-	@@cat LICENSE-INFO.txt | ${VER} > ${OUTPUT}/${STRUCTURE}.css
-	@@cat ${OUTPUT}/${STRUCTURE}.compiled.css >> ${OUTPUT}/${STRUCTURE}.css
-	# ..... and then minify it
-	@@echo ${VER_MIN} > ${OUTPUT}/${STRUCTURE}.min.css
-	@@java -XX:ReservedCodeCacheSize=64m \
-		-jar build/yuicompressor-2.4.6.jar \
-		--type css ${OUTPUT}/${STRUCTURE}.compiled.css >> ${OUTPUT}/${STRUCTURE}.min.css
-	@@rm ${OUTPUT}/${STRUCTURE}.compiled.css
-	# Build the theme only file
-	@@cat LICENSE-INFO.txt | ${VER} > ${OUTPUT}/${THEME_FILENAME}.css
-	@@cat css/themes/default/jquery.mobile.theme.css >> ${OUTPUT}/${THEME_FILENAME}.css
-	# ..... and then minify it
-	@@echo ${VER_MIN} > ${OUTPUT}/${THEME_FILENAME}.min.css
-	@@java -XX:ReservedCodeCacheSize=64m \
-		-jar build/yuicompressor-2.4.6.jar \
-		--type css ${OUTPUT}/${THEME_FILENAME}.css >> ${OUTPUT}/${THEME_FILENAME}.min.css
-	# Copy in the images
-	@@cp -R css/themes/${THEME}/images ${OUTPUT}/
-	# Css portion is complete.
-	# -------------------------------------------------
+	@@bash build/bin/css.sh
 
+# Build and minify the JS files
+js: init
+	@@bash build/bin/js.sh
 
 docs: init js css
 	# Create the Demos/Docs/Tests/Tools
@@ -118,35 +72,6 @@ docs: init js css
 	# Finish by removing the temporary files
 	@@rm -rf tmp
 	# -------------------------------------------------
-
-# Build and minify the JS files
-js: init
-	# Build the JavaScript file
-	${RUN_JS} \
-		external/r.js/dist/r.js \
-	 	-o baseUrl="js" \
-		name=jquery.mobile \
-		exclude=jquery,../external/requirejs/order,../external/requirejs/depend,../external/requirejs/text,../external/requirejs/text!../version.txt \
-		out=${OUTPUT}/${NAME}.compiled.js \
-		pragmasOnSave.jqmBuildExclude=true \
-		wrap.startFile=build/wrap.start \
-		wrap.endFile=build/wrap.end \
-		findNestedDependencies=true \
-		skipModuleInsertion=true \
-		optimize=none
-	@@cat LICENSE-INFO.txt | ${VER} > ${OUTPUT}/${NAME}.js
-	@@cat ${OUTPUT}/${NAME}.compiled.js | ${SED_VER_API} >> ${OUTPUT}/${NAME}.js
-	@@rm ${OUTPUT}/${NAME}.compiled.js
-	# ..... and then minify it
-	@@echo ${VER_MIN} > ${OUTPUT}/${NAME}.min.js
-	@@java -XX:ReservedCodeCacheSize=64m \
-		-jar build/google-compiler-20111003.jar \
-		--js ${OUTPUT}/${NAME}.js \
-		--js_output_file ${OUTPUT}/${NAME}.compiled.js
-	@@cat ${OUTPUT}/${NAME}.compiled.js >> ${OUTPUT}/${NAME}.min.js
-	@@rm ${OUTPUT}/${NAME}.compiled.js
-	# -------------------------------------------------
-
 
 # Output a message saying the process is complete
 notify: init
