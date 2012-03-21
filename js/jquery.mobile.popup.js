@@ -193,6 +193,7 @@ define( [ "jquery",
 				var self = this,
 					onAnimationComplete = function() {
 						self._ui.screen.height( $( document ).height() );
+						$.mobile.popup.popupStack.push( self );
 					},
 					coords = this._placementCoords(
 							(undefined === x ? window.innerWidth / 2 : x),
@@ -233,6 +234,7 @@ define( [ "jquery",
 							.removeClass( "reverse out" )
 							.addClass( "ui-selectmenu-hidden" )
 							.removeAttr( "style" );
+						$.mobile.popup.popupStack.pop( self );
 					},
 					hideScreen = function() {
 						self._ui.screen.addClass( "ui-screen-hidden" );
@@ -258,6 +260,84 @@ define( [ "jquery",
 			}
 		}
 	});
+
+	$.mobile.popup.popupStack = {
+		_stack: [],
+
+		push: function( popup ) {
+			if ( 0 === this._stack.length ) {
+				this._baseUrl = $.mobile.urlHistory.getActive().url;
+			}
+			this._stack.push( popup );
+
+			if ( 1 === this._stack.length ) {
+				var activeEntry = $.mobile.urlHistory.getActive();
+
+				this._installListener();
+				$.mobile.path.set( this._getPathPrefix() + $.mobile.dialogHashKey );
+				$.mobile.urlHistory.addNew( activeEntry.url + $.mobile.dialogHashKey, activeEntry.transition, activeEntry.title, activeEntry.pageUrl, activeEntry.role );
+			}
+		},
+
+		pop: function( popup ) {
+			if ( this._stack.indexOf( popup ) >= 0 ) {
+				if ( 1 === this._stack.length ) {
+					this._currentPopup = popup;
+					window.history.back();
+				}
+				else {
+					this._afterPop( popup );
+				}
+			}
+		},
+
+		_afterPop: function( popup ) {
+				this._stack.pop( popup );
+				if ( 0 === this._stack.length ) {
+					this._baseUrl = undefined;
+				}
+		},
+
+		_removeListener: function() {
+			$( window ).unbind( "hashchange.popupStackBinder hashchange.popupStack pagebeforechange.popupStack" );
+		},
+
+		_installListener: function() {
+			var self = this;
+
+			$( window ).one( "hashchange.popupStackBinder", function() {
+				$( window ).one( "hashchange.popupStack", function() {
+					self._handleHashChange();
+				});
+			});
+
+			$( window ).bind( "pagebeforechange.popupStack", function( e, data ) {
+				self._handlePBC( e, data );
+			});
+		},
+
+		_getPathPrefix: function() {
+			return ( ( $.mobile.activePage != $.mobile.firstPage ) ? $.mobile.urlHistory.getActive().url : "" );
+		},
+
+		_handleHashChange: function() {
+			$.each( this._stack, function( key, value ) {
+				value.close();
+			});
+			this._stack = [];
+			this._removeListener();
+			if ( this._currentPopup ) {
+				this._afterPop( this._currentPopup );
+				this._currentPopup = undefined;
+			}
+		},
+
+		_handlePBC: function( e, data ) {
+			if ( typeof data.toPage === "object" && data.toPage.jqmData( "url" ) === this._baseUrl ) {
+				$.mobile.urlHistory.activeIndex = Math.max( 0, $.mobile.urlHistory.activeIndex - 1 );
+			}
+		}
+	};
 
 	$.mobile.popup.bindPopupToButton = function( btn, popup ) {
 		if ( btn.length === 0 || popup.length === 0 ) return;
