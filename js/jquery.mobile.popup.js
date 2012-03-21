@@ -310,7 +310,7 @@ define( [ "jquery",
 		var btnVClickHandler = function( e ) {
 			// When /this/ button causes a popup, align the popup's theme with that of the button, unless the popup has a theme pre-set
 			if ( !popup.jqmData( "overlay-theme-set" ) ) {
-				popup.popup( "option", "overlayTheme", btn.jqmData( "theme" ) );
+				popup.popup( "option", "overlayTheme", btn.jqmData( "theme" ) || $.mobile.getInheritedTheme( btn, "c") );
 			}
 			popup.popup( "open",
 					btn.offset().left + btn.outerWidth() / 2,
