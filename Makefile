@@ -48,30 +48,7 @@ js: init
 	@@bash build/bin/js.sh
 
 docs: init js css
-	# Create the Demos/Docs/Tests/Tools
-	# ... Create staging directories
-	@@mkdir -p tmp/demos/js
-	@@mkdir -p tmp/demos/css/themes/${THEME}
-	# ... Copy script files
-	@@cp compiled/*.js tmp/demos/js
-	@@cp js/jquery.js tmp/demos/js
-	# ... Copy html files
-	@@cp index.html tmp/demos
-	@@cp -r docs tmp/demos
-	# ... Copy css and images
-	@@cp compiled/*.css tmp/demos/css/themes/${THEME}
-	@@cp -r compiled/images tmp/demos/css/themes/${THEME}
-	# ... replace "js/" with "js/jquery.mobile.js"
-	@@ # NOTE the deletion here is required by gnu/bsd sed differences
-	@@find tmp/demos -name "*.html" -exec sed -i${SED_INPLACE_EXT} -e 's@js/"@js/jquery.mobile.js"@' {} \;
-	@@find tmp/demos -name "*${SED_INPLACE_EXT}" -exec rm {} \;
-	# ... Move and zip up the the whole folder
-	@@rm -f ${OUTPUT}/${BASE_NAME}.docs.zip
-	@@cd tmp/demos && zip -rq ../../${OUTPUT}/${NAME}.docs.zip *
-	@@rm -rf ${OUTPUT}/demos && mv -f tmp/demos ${OUTPUT}
-	# Finish by removing the temporary files
-	@@rm -rf tmp
-	# -------------------------------------------------
+	@@bash build/bin/docs.sh
 
 # Output a message saying the process is complete
 notify: init
@@ -81,14 +58,7 @@ notify: init
 
 # Zip up the jQm files without docs
 zip: init css js
-	# Packaging up the files into a zip archive
-	@@mkdir tmp
-	@@cp -R ${OUTPUT} tmp/${NAME}
-	# ... And remove the Zipped docs so they aren't included twice (for deploy scripts)
-	@@rm -rf tmp/${NAME}/*.zip
-	@@cd tmp; zip -rq ../${OUTPUT}/${NAME}.zip ${NAME}
-	@@rm -rf tmp
-	# -------------------------------------------------
+	@@bash build/bin/zip.sh
 
 # -------------------------------------------------
 # -------------------------------------------------
@@ -139,5 +109,3 @@ deploy: clean init css js docs zip
 	@@rm -rf tmp
 	@@rm -rf ${OUTPUT}
 	# -------------------------------------------------
-
-
