@@ -36,8 +36,6 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 					ffmatch = ua.match( /Fennec\/([0-9]+)/ ),
 					ffversion = !!ffmatch && ffmatch[ 1 ],
 					operammobilematch = ua.match( /Opera Mobi\/([0-9]+)/ ),
-					bbmatch = w.blackberry && w.navigator.appVersion.match( /Version\/([0-9]+)/ ),
-					bbversion = !!bbmatch && parseInt( bbmatch[ 1 ], 10 ),
 					omversion = !!operammobilematch && operammobilematch[ 1 ];
 
 				if(
@@ -57,9 +55,6 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 					||
 					// WebOS less than 3
 					( "palmGetResource" in window && wkversion && wkversion < 534 )
-					||
-					// BlackBerry six and below.
-					( w.blackberry && bbversion < 7 )
 					||
 					// MeeGo
 					( ua.indexOf( "MeeGo" ) > -1 && ua.indexOf( "NokiaBrowser/8.5.0" ) > -1 )
