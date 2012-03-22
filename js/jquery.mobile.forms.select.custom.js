@@ -450,6 +450,7 @@ define( [
 					dataIndexAttr = dataPrefix + 'option-index', 
 					dataIconAttr = dataPrefix + 'icon',
 					dataRoleAttr = dataPrefix + 'role',
+					dataThemeAttr = dataPrefix + 'theme',
 					fragment = document.createDocumentFragment(),
 					optGroup;
 									
@@ -457,7 +458,8 @@ define( [
 					var option = $options[i],
 						$option = $(option),
 						parent = option.parentNode,
-						text = $option.text(),			
+						text = $option.text(),
+						theme = $option.theme(),
 						anchor  = document.createElement('a');
 						classes = [];				
 					
@@ -484,12 +486,17 @@ define( [
 						}						
 						placeholder = self.placeholder = text;									
 					}
-															
+										
 					var item = document.createElement('li');															
 					if ( option.disabled ) {
 						classes.push( "ui-disabled" );
 						item.setAttribute('aria-disabled',true);
+					}					
+					
+					if ($option.theme){
+						item.setAttribute(dataThemeAttr, theme);
 					}
+					
 					item.setAttribute(dataIndexAttr,i);
 					item.setAttribute(dataIconAttr,dataIcon);					
 					item.className = classes.join(" ");
