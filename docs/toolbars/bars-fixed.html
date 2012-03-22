@@ -51,19 +51,6 @@
 	&lt;h1&gt;Fixed Footer!&lt;/h1&gt;
 &lt;/div&gt;
 		</code></pre>
-
-		<h2>Forms in toolbars</h2>
-		<p>In jQuery Mobile 1.1, all form element are now tested to work correctly in toolbars and a more compact <a href="../forms/forms-all-mini.html">mini sized</a> version is recommended for use in toolbars. The following pages are designed to test fixed toolbars and form elements: 
-			<a href="bars-fixed-forms-a.html">demo app</a>,
-			<a href="bars-fixed-forms-b.html">text inputs</a>, 
-			<a href="bars-fixed-forms-c.html">search inputs</a>, 
-			<a href="bars-fixed-forms-d.html">radio toggles</a>, 
-			<a href="bars-fixed-forms-e.html">checkbox toggles</a>,
-			<a href="bars-fixed-forms-f.html">slider</a>, 
-			<a href="bars-fixed-forms-g.html">select</a>, and  
-			<a href="bars-fixed-forms-h.html">buttons</a>.
-		</p>
-		<p>Note that the interaction of fixed toolbars and the on-screen keyboard used on many mobile platforms can cause issues when these interact so we recommend avoiding the use of text inputs or other elements that open the keyboard in footers.</p>
 		
 		<h2>Fullscreen Toolbars</h2>
 		<p>Fullscreen fixed toolbars sit on top of the content at all times when they are visible, and unlike regular fixed toolbars, fullscreen toolbars do not fall back to static positioning when toggled, instead they disappear from the screen entirely. Fullscreen toolbars are ideal for more immersive interfaces, like a photo viewer that is meant to fill the entire screen with the photo itself and no distractions. <a href="bars-fullscreen.html">This page</a> demonstrates toolbars that use the fullscreen option.</p>
@@ -75,9 +62,12 @@
 	&lt;h1&gt;Fixed Header!&lt;/h1&gt;
 &lt;/div&gt;
 				</code></pre>
+
+
+		<h2>Forms in toolbars</h2>
 		
+		<p>While all form elements are now tested to work correctly within <em>static</em> toolbars as of jQuery Mobile 1.1, we recommend extensive testing when using form elements within <em>fixed</em> toolbars—or within any <code>position: fixed</code> elements. This can potentially trigger a number of unpredictable issues in various mobile browsers, Android 2.2/2.3 in particular (detailed in <b>Known issues in Android 2.2/2.3</b>, below).</p>
 		
-	
 		<h2>Changes in jQuery Mobile 1.1</h2>
 		
 		<p>Prior to version 1.1, jQuery Mobile used dynamically re-positioned toolbars for the fixed header effect because very few mobile browsers supported the <code>position:fixed</code> CSS property, and simulating fixed support through the use of "fake" JavaScript overflow-scrolling behavior would have reduced our browser support reach, in addition to feeling unnatural on certain platforms. This behavior was not ideal, and jQuery Mobile 1.1 took a new approach to fixed toolbars that allows much broader support, and now the framework offers true fixed toolbars on many popular platforms, while gracefully degrading non-supporting platforms to static positioning.</p>
@@ -93,6 +83,29 @@
 		<p>Just include the CSS and JS files after your references to jQuery Mobile and Fixed toolbars will work similar to jQuery Mobile 1.0 in iOS4.3, with the inclusion of the new API for the 1.1 fixedtoolbar plugin.</p>
 		
 		<p>If you have any improvements to suggest, fork the <a href="https://github.com/filamentgroup/jQuery-Mobile-FixedToolbar-Legacy-Polyfill">gist</a> on github and let us know!</p>
+		
+		<h2>Known issues in Android 2.2/2.3</h2>	
+		<p>Android 2.2/2.3’s implementation of <code>position: fixed;</code> can, in conjunction with seemingly unrelated styles and markup patterns, cause a number of strange issues—particularly in the case of <code>position: absolute</code> elements inside of <code>position: fixed</code> elements. While we’ve done our best to work around a number of these unique bugs within the scope of the library, note that custom styles may cause a number of issues including but not limited to:</p>
+		<ul>
+			<li>Form elements elsewhere on the page—select menus in particular—can fail to respond to user interaction when an <em>empty</em> absolute positioned element is placed within a fixed position element. In rare cases—and specific to Android 2.2—this can cause <em>entire pages</em> to fail to respond to user interaction. This can seemingly be solved by adding any character to the absolute positioned element, including a non-breaking space, and in some cases even whitespace.</li>
+			<li>The above-described issue can also be triggered by an absolute positioned image inside of a fixed position element, but <em>only</em> when that image is using something <em>other than its inherent dimensions</em>. If a height or width is specified on the image using CSS, or the image src is invalid (thus having no inherent height and width), this issue can occur. If an image that is inherently, say, 50x50 pixels is placed in a fixed element and left at its inherent dimensions, this issue does not seem to occur.</li>
+			<li>When a <code>position: fixed</code> element appears anywhere on a page, most 2D CSS transforms will fail. Oddly, only <code>translate</code> transforms seem uneffected by this. Even more oddly, this issue is solved by setting a CSS <code>opacity</code> of .9 or below on the parent of the fixed element.</li>
+			<li>Combinations <code>position: fixed</code> and overflow properties are best avoided, as both have been known to cause unpredictable issues in older versions of Android OS.</li>
+			<li>Any element that triggers the on-screen keyboard, when placed inside a <code>position: fixed</code> element, will fail to respond to user input when using anything other than the default keyboard. This includes Swype, XT9 or, it seems, any input method apart from the standard non-predictive keyboard.</li>
+		</ul>
+			
+		<p>While we will continue to try to find ways to mitigate these bugs as best we can, we currently advise against implementing fixed toolbars containing complicated user styles and form elements without extensive testing in all versions of Android’s native browser.</p>
+		
+		<p>The following pages are designed to test fixed toolbars and form elements: 
+					<a href="bars-fixed-forms-a.html">demo app</a>,
+					<a href="bars-fixed-forms-b.html">text inputs</a>, 
+					<a href="bars-fixed-forms-c.html">search inputs</a>, 
+					<a href="bars-fixed-forms-d.html">radio toggles</a>, 
+					<a href="bars-fixed-forms-e.html">checkbox toggles</a>,
+					<a href="bars-fixed-forms-f.html">slider</a>, 
+					<a href="bars-fixed-forms-g.html">select</a>, and  
+					<a href="bars-fixed-forms-h.html">buttons</a>.</p>
+		
 		
 <div class="ui-body ui-body-e">		
 		<h2>No longer supported: touchOverflowEnabled</h2>
