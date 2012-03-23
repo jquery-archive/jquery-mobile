@@ -519,9 +519,17 @@ define( [
 	function resetActivePageHeight(){
 		var aPage = $( "." + $.mobile.activePageClass ),
 			aPagePadT = parseFloat( aPage.css( "padding-top" ) ),
-			aPagePadB = parseFloat( aPage.css( "padding-bottom" ) );
-				
-		aPage.css( "min-height", getScreenHeight() - aPagePadT - aPagePadB );
+			aPagePadB = parseFloat( aPage.css( "padding-bottom" ) ),
+			headHeight = aPage.find('[data-role="header"]').height(),
+			footHeight = aPage.find('[data-role="footer"]').height(),
+			contentHeight = aPage.find('[data-role="content"]').height();
+		//check to see if content is shorter then avalible area
+		//if it is set height to avoid unneeded scrolling
+		if(contentHeight + headHeight + footHeight <= $.mobile.getScreenHeight()){
+			aPage.css({'min-height':'0',height:contentHeight});
+		} else {
+			aPage.css( "min-height", getScreenHeight() - aPagePadT - aPagePadB );
+		}
 	}
 
 	//shared page enhancements
