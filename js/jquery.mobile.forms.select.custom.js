@@ -531,8 +531,9 @@ define( [
 		});
 	};
 
-	$( document ).delegate( "select", "selectmenubeforecreate", function(){
-		var selectmenuWidget = $( this ).data( "selectmenu" );
+	// issue #3894 - core doesn't trigger events to disabled delegates
+	$( document ).bind( "selectmenubeforecreate", function( event ){
+		var selectmenuWidget = $( event.target ).data( "selectmenu" );
 
 		if( !selectmenuWidget.options.nativeMenu ){
 			extendSelect( selectmenuWidget );
