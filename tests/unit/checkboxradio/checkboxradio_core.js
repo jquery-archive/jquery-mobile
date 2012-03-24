@@ -129,7 +129,7 @@
 		ok( !$("input.should-be-native").parent().is("div.ui-checkbox") );
 	});
 
-	test( "Elements with â€œdata-mini='true'â€� should have â€œui-miniâ€� class attached to enhanced element.", function(){
+	test( "Elements with \u201cdata-mini='true'\u201d should have \u201cui-mini\u201d class attached to enhanced element.", function(){
 		var full = document.getElementById("radio-full"),
 			$fulllbl = $('[for="radio-full"]'),
 			mini = document.getElementById("radio-mini"),
