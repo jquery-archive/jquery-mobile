@@ -31,24 +31,25 @@
 				<p>To create a custom CSS transition, select a class name that corresponds to the name of your transition, for example "slide", and then define your "in" and "out" CSS rules to take advantage of transitions or animation keyframes:</p>
 
 				<pre><code>
-			.slide.in {
-			    -webkit-transform: translateX(0);
-			    -webkit-animation-name: slideinfromright;
-			}
+		.slide.in {
+		 	-webkit-transform: translateX(0);
+			-webkit-animation-name: slideinfromright;
+		}
+			
+		.slide.out {
+			-webkit-transform: translateX(-100%);
+			-webkit-animation-name: slideouttoleft;
+		}
 
-			.slide.out {
-			    -webkit-transform: translateX(-100%);
-			    -webkit-animation-name: slideouttoleft;
-			}
-
-			@-webkit-keyframes slideinfromright {
-			    from { -webkit-transform: translateX(100%); }
-			    to { -webkit-transform: translateX(0); }
-			}
-			@-webkit-keyframes slideouttoleft {
-			    from { -webkit-transform: translateX(0); }
-			    to { -webkit-transform: translateX(-100%); }
-			}
+		@-webkit-keyframes slideinfromright {
+			from { -webkit-transform: translateX(100%); }
+			to { -webkit-transform: translateX(0); }
+		}
+		
+		@-webkit-keyframes slideouttoleft {
+			from { -webkit-transform: translateX(0); }
+			to { -webkit-transform: translateX(-100%); }
+		}
 				</code></pre>
 
 				<p>During a CSS-based page transition, jQuery Mobile will place the class name of the transition on both the "from" and "to" pages involved in the transition. It then places an "out" class on the "from" page, and "in" class on the "to" page. The presence of these classes on the "from" and "to" page elements then triggers the animation CSS rules defined above. As of jQuery Mobile version 1.1, animation class additions are queued, rather than simultaneous, producing an out-then-in sequence, which is friendlier for mobile rendering than our previous simultaneous transition sequence.</p>
