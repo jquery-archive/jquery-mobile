@@ -30,7 +30,8 @@
 
 				<p>To create a custom CSS transition, select a class name that corresponds to the name of your transition, for example "slide", and then define your "in" and "out" CSS rules to take advantage of transitions or animation keyframes:</p>
 
-				<pre><code>.slide.in {
+				<pre><code>
+			.slide.in {
 			    -webkit-transform: translateX(0);
 			    -webkit-animation-name: slideinfromright;
 			}
@@ -54,25 +55,26 @@
 
 				<p>If your transition supports a reverse direction, you need to create CSS rules that use the <code>reverse</code> class in addition to the transition class name and the "in" and "out" classes:</p>
 
-				<pre><code>.slide.in.reverse {
-				    -webkit-transform: translateX(0);
-				    -webkit-animation-name: slideinfromleft;
-				}
+				<pre><code>
+		.slide.in.reverse {
+			-webkit-transform: translateX(0);
+			-webkit-animation-name: slideinfromleft;
+		}
 
-				.slide.out.reverse {
-				    -webkit-transform: translateX(100%);
-				    -webkit-animation-name: slideouttoright;
-				}
+		.slide.out.reverse {
+			-webkit-transform: translateX(100%);
+			-webkit-animation-name: slideouttoright;
+		}
 
-				@-webkit-keyframes slideinfromleft {
-				    from { -webkit-transform: translateX(-100%); }
-				    to { -webkit-transform: translateX(0); }
-				}
+		@-webkit-keyframes slideinfromleft {
+			from { -webkit-transform: translateX(-100%); }
+			to { -webkit-transform: translateX(0); }
+		}
 
-				@-webkit-keyframes slideouttoright {
-				    from { -webkit-transform: translateX(0); }
-				    to { -webkit-transform: translateX(100%); }
-				}
+		@-webkit-keyframes slideouttoright {
+			from { -webkit-transform: translateX(0); }
+			to { -webkit-transform: translateX(100%); }
+		}
 				</code></pre>
 
 				<p>After the CSS rules are in place, you simply specify the name of your transition within the @data-transition attribute of a navigation link:</p>
@@ -123,7 +125,8 @@ $.mobile.transitionHandlers[ "default" ];
 
 		<p>A transition handler is a function with the following call signature:</p>
 
-		<pre><code>function myTransitionHandler(name, reverse, $to, $from)
+		<pre><code>
+function myTransitionHandler(name, reverse, $to, $from)
 {
     var deferred = new $.Deferred();
 
@@ -143,7 +146,8 @@ $.mobile.transitionHandlers[ "default" ];
 
 		<p>Once you have created a transition handler function, you need to tell jQuery Mobile about it. To do this, simply add your handler to the <code>$.mobile.transitionHandlers</code> dictionary. Remember, the key used should be the name of your transition. This name is also the same name that will be used within the <code>@data-transition</code> attribute of any navigation links.</p>
 
-		<pre><code>// Define your transition handler:
+		<pre><code>
+// Define your transition handler:
 
 function myTransitionHandler(name, reverse, $to, $from)
 {
