@@ -42,6 +42,15 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			return;
 		}
 
+		// check for <label><input /></label> structure
+		if (!label.length) {
+		  label = $(input).closest('label');
+		  // <label> is only implicitly for its first label-able descendant
+		  if (!label.find('button, input[type!="hidden"], keygen, meter, output, progress, select, textarea').first().is(input)) {
+		    label = $('');
+		  }
+		}
+		
 		if( !label.length ){
 			this.raise( inputtype + " inputs require a label for enhancement" );
 		}
