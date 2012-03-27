@@ -28,9 +28,11 @@ var createHandler = function( sequential ){
 			active	= $.mobile.urlHistory.getActive(),
 			toScroll = active.lastScroll || $.mobile.defaultHomeScroll,
 			screenHeight = $.mobile.getScreenHeight(),
-			viewportClass = "ui-mobile-viewport-transitioning viewport-" + name,
 			maxTransitionOverride = $.mobile.maxTransitionWidth !== false && $( window ).width() > $.mobile.maxTransitionWidth,
 			none = !$.support.cssTransitions || maxTransitionOverride || !name || name === "none",
+			toggleViewportClass = function(){
+				$.mobile.pageContainer.toggleClass( "ui-mobile-viewport-transitioning viewport-" + name );
+			},
 			cleanFrom = function(){
 				$from
 					.removeClass( $.mobile.activePageClass + " out in reverse " + name )
@@ -77,14 +79,14 @@ var createHandler = function( sequential ){
 			
 				$to
 					.removeClass( "out in reverse " + name )
-					.height( "" )
-					.parent().removeClass( viewportClass );
+					.height( "" );
+				
+				toggleViewportClass();	
 
 				deferred.resolve( name, reverse, $to, $from, true );
 			};
 
-		$to
-			.parent().addClass( viewportClass );
+		toggleViewportClass();
 	
 		if ( $from && !none ) {
 		
