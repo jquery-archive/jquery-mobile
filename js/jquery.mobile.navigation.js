@@ -485,7 +485,12 @@ define( [
 
 		//clear page loader
 		$.mobile.hidePageLoadingMsg();
-
+		
+		// If transition is defined, check if css 3D transforms are supported, and if not, if a fallback is specified
+		if( transition && !$.support.cssTransform3d && $.mobile.transitionFallbacks[ transition ] ){
+			transition = $.mobile.transitionFallbacks[ transition ];
+		}
+		
 		//find the transition handler for the specified transition. If there
 		//isn't one in our transitionHandlers dictionary, use the default one.
 		//call the handler immediately to kick-off the transition.
