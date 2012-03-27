@@ -1,4 +1,4 @@
-/* slide transition */
+/* slide transition - depends on slidein.keyframes and slideout.keyframes */
 .slide.out, .slide.in {
 	-webkit-animation-timing-function: ease-out;
 	-webkit-animation-duration: 350ms;
@@ -31,40 +31,4 @@
 	-webkit-animation-name: slideinfromleft;
 	-moz-transform: translateX(0);
 	-moz-animation-name: slideinfromleft;
-}
-
-@-webkit-keyframes slideinfromright {
-    from { -webkit-transform: translateX(100%); }
-    to { -webkit-transform: translateX(0); }
-}
-@-moz-keyframes slideinfromright {
-    from { -webkit-transform: translateX(100%); }
-    to { -webkit-transform: translateX(0); }
-}
-
-@-webkit-keyframes slideinfromleft {
-    from { -webkit-transform: translateX(-100%); }
-    to { -webkit-transform: translateX(0); }
-}
-@-moz-keyframes slideinfromleft {
-    from { -webkit-transform: translateX(-100%); }
-    to { -webkit-transform: translateX(0); }
-}
-
-@-webkit-keyframes slideouttoleft {
-    from { -webkit-transform: translateX(0); }
-    to { -webkit-transform: translateX(-100%); }
-}
-@-moz-keyframes slideouttoleft {
-    from { -moz-transform: translateX(0); }
-    to { -moz-transform: translateX(-100%); }
-}
-
-@-webkit-keyframes slideouttoright {
-    from { -webkit-transform: translateX(0); }
-    to { -webkit-transform: translateX(100%); }
-}
-@-moz-keyframes slideouttoright {
-    from { -moz-transform: translateX(0); }
-    to { -moz-transform: translateX(100%); }
 }
