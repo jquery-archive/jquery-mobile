@@ -78,6 +78,12 @@ $.fn.buttonMarkup = function( options ) {
 			buttonClass += o.mini ? " ui-mini" : " ui-fullsize";
 		}
 		
+		if ( o.inline !== undefined ) {			
+			// Used to control styling in headers/footers, where buttons default to `mini` style.
+			buttonClass += o.inline === false ? " ui-btn-block" : " ui-btn-inline";
+		}
+		
+		
 		if ( o.icon ) {
 			o.icon = "ui-icon-" + o.icon;
 			o.iconpos = o.iconpos || "left";
@@ -155,7 +161,6 @@ $.fn.buttonMarkup.defaults = {
 	corners: true,
 	shadow: true,
 	iconshadow: true,
-	inline: false,
 	wrapperEls: "span"
 };
 

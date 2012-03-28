@@ -34,6 +34,7 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 		$navbtns.buttonMarkup({
 			corners:	false,
 			shadow:		false,
+			inline:     true,
 			iconpos:	iconpos
 		});
 
