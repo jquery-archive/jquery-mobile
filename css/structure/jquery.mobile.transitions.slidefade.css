@@ -1,4 +1,7 @@
-/* slidefade transition - depends on fadein and slidein.keyframes */
+/* import url( "jquery.mobile.transitions.fade.css" );              */
+/* import url( "jquery.mobile.transitions.slideout.keyframes.css" );*/
+
+/* slidefade transition - depends on fadein and slideout.keyframes */
 .slidefade.out {
 	-webkit-transform: translateX(-100%);
 	-webkit-animation-name: slideouttoleft;

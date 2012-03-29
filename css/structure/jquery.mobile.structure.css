@@ -2,8 +2,8 @@
 @import url( "jquery.mobile.transitions.css" );
 @import url( "jquery.mobile.transitions.fade.css" );
 @import url( "jquery.mobile.transitions.pop.css" );
-@import url( "jquery.mobile.transitions.slidein.keyframes.css" );
-@import url( "jquery.mobile.transitions.slideout.keyframes.css" );
+@import url( "jquery.mobile.transitions.slidein.keyframes.css" );  /* move to jquery.mobile.transitions.slide.css once we move to r.js 1.0.8 */
+@import url( "jquery.mobile.transitions.slideout.keyframes.css" ); /* move to jquery.mobile.transitions.slide.css once we move to r.js 1.0.8 */
 @import url( "jquery.mobile.transitions.slide.css" );
 @import url( "jquery.mobile.transitions.slidefade.css" );
 @import url( "jquery.mobile.transitions.slidedown.css" );
