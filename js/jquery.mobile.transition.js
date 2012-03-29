@@ -76,7 +76,13 @@ var createHandler = function( sequential ){
 					.removeClass( "out in reverse " + name )
 					.height( "" );
 				
-				toggleViewportClass();	
+				toggleViewportClass();
+				
+				// In some browsers (iOS5), 3D transitions block the ability to scroll to the desired location during transition
+				// This ensures we jump to that spot after the fact, if we aren't there already.
+				if( $( window ).scrollTop() !== toScroll ){
+					$.mobile.silentScroll( toScroll );
+				}
 
 				deferred.resolve( name, reverse, $to, $from, true );
 			};
