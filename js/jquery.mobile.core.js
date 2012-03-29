@@ -50,7 +50,7 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 		maxTransitionWidth: false,
 
 		// Minimum scroll distance that will be remembered when returning to a page
-		minScrollBack: 10,
+		minScrollBack: 250,
 
 		// DEPRECATED: the following property is no longer in use, but defined until 2.0 to prevent conflicts
 		touchOverflowEnabled: false,
