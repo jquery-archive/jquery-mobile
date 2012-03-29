@@ -33,39 +33,59 @@ var createHandler = function( sequential ){
 					.removeClass( $.mobile.activePageClass + " out in reverse " + name )
 					.height( "" );
 			},
+			startOut = function(){
+				// if it's not sequential, call the doneOut transition to start the TO page animating in simultaneously
+				if( !sequential ){
+					doneOut();
+				}
+				else {
+					$from.animationComplete( doneOut );	
+				}
+				
+				// Set the from page's height and start it transitioning out
+				// Note: setting an explicit height helps eliminate tiling in the transitions
+				$from
+					.height( screenHeight + $(window ).scrollTop() )
+					.addClass( name + " out" + reverseClass );
+			},
+			
 			doneOut = function() {
 
 				if ( $from && sequential ) {
 					cleanFrom();
 				}
+				
+				startIn();
+			},
 			
-				$to.addClass( $.mobile.activePageClass );
+			startIn = function(){	
 			
-				if( !none ){
-					$to.animationComplete( doneIn );
-				}
+				$to.addClass( $.mobile.activePageClass );				
 			
 				// Send focus to page as it is now display: block
 				$.mobile.focusPage( $to );
 
-				// Jump to top or prev scroll, sometimes on iOS the page has not rendered yet.
+				// Set to page height
 				$to.height( screenHeight + toScroll );
 				
-				$.mobile.silentScroll( toScroll );
-			
+				// By using scrollTo instead of silentScroll, we can keep things better in order
+				window.scrollTo( 0, toScroll );
+				
+				if( !none ){
+					$to.animationComplete( doneIn );
+				}
+				
 				$to.addClass( name + " in" + reverseClass );
-			
+				
 				if( none ){
 					doneIn();
 				}
-			
+				
 			},
 		
 			doneIn = function() {
 			
 				if ( !sequential ) {
-					
-					$.mobile.silentScroll( toScroll );
 					
 					if( $from ){
 						cleanFrom();
@@ -81,7 +101,7 @@ var createHandler = function( sequential ){
 				// In some browsers (iOS5), 3D transitions block the ability to scroll to the desired location during transition
 				// This ensures we jump to that spot after the fact, if we aren't there already.
 				if( $( window ).scrollTop() !== toScroll ){
-					$.mobile.silentScroll( toScroll );
+					window.scrollTo( 0, toScroll );
 				}
 
 				deferred.resolve( name, reverse, $to, $from, true );
@@ -90,20 +110,9 @@ var createHandler = function( sequential ){
 		toggleViewportClass();
 	
 		if ( $from && !none ) {
-		
-			// if it's not sequential, call the doneOut transition to start the TO page animating in simultaneously
-			if( !sequential ){
-				doneOut();
-			}
-			else {
-				$from.animationComplete( doneOut );	
-			}
-		
-			$from
-				.height( screenHeight + $(window ).scrollTop() )
-				.addClass( name + " out" + reverseClass );
+			startOut();
 		}
-		else {	
+		else {
 			doneOut();
 		}
 
