@@ -6,7 +6,7 @@
 //>>description: Handler and fallback transition for slide in non-3D supporting browsers
 //>>label: Slide handler and fallback transition
 //>>group: Transitions
-//>>css: ../css/structure/jquery.mobile.transition.slide.css
+//>>css: ../css/structure/jquery.mobile.transition.fade.css, ../css/structure/jquery.mobile.transition.slideout.keyframes.css, ../css/structure/jquery.mobile.transition.slidefade.css
 
 define( [ "jquery", "./jquery.mobile.transition" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
