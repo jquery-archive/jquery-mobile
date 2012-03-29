@@ -14,7 +14,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		disabled: false,
 		icon: "arrow-d",
 		iconpos: "right",
-		inline: null,
+		inline: false,
 		corners: true,
 		shadow: true,
 		iconshadow: true,
