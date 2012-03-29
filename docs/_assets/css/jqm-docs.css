@@ -134,8 +134,7 @@ dd h4 { margin:15px 0 0 0; }
 
 /* F bar theme - just for the docs overview headers */
 .ui-bar-f {
-	border-top: 1px solid 	#56A00E;
-	border-bottom: 1px solid #56A00E;
+	border: 1px solid 	#56A00E;
 	background: 			#74b042;
 	color: 					#fff;
 	font-weight: bold;
