@@ -28,6 +28,18 @@ var createHandler = function( sequential ){
 			toggleViewportClass = function(){
 				$.mobile.pageContainer.toggleClass( "ui-mobile-viewport-transitioning viewport-" + name );
 			},
+			scrollPage = function(){
+				// By using scrollTo instead of silentScroll, we can keep things better in order
+				// Just to be precautios, disable scrollstart listening like silentScroll would
+				$.event.special.scrollstart.enabled = false;
+				
+				window.scrollTo( 0, toScroll );
+				
+				// reenable scrollstart listening like silentScroll would
+				setTimeout(function() {
+					$.event.special.scrollstart.enabled = true;
+				}, 150 );
+			},
 			cleanFrom = function(){
 				$from
 					.removeClass( $.mobile.activePageClass + " out in reverse " + name )
@@ -68,8 +80,7 @@ var createHandler = function( sequential ){
 				// Set to page height
 				$to.height( screenHeight + toScroll );
 				
-				// By using scrollTo instead of silentScroll, we can keep things better in order
-				window.scrollTo( 0, toScroll );
+				scrollPage();
 				
 				if( !none ){
 					$to.animationComplete( doneIn );
@@ -101,7 +112,7 @@ var createHandler = function( sequential ){
 				// In some browsers (iOS5), 3D transitions block the ability to scroll to the desired location during transition
 				// This ensures we jump to that spot after the fact, if we aren't there already.
 				if( $( window ).scrollTop() !== toScroll ){
-					window.scrollTo( 0, toScroll );
+					scrollPage();
 				}
 
 				deferred.resolve( name, reverse, $to, $from, true );
