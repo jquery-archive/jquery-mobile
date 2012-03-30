@@ -17,7 +17,7 @@
 
 .ui-btn-icon-notext { width: 24px; height: 24px; }
 .ui-btn-icon-notext .ui-btn-inner { padding: 0; height: 100%; }
-.ui-btn-icon-notext .ui-btn-inner .ui-icon{ margin: 2px 1px 2px 3px; }
+.ui-btn-icon-notext .ui-btn-inner .ui-icon { margin: 2px 1px 2px 3px; }
 
 .ui-btn-text { position: relative; z-index: 1; width: 100%; }
 .ui-btn-icon-notext .ui-btn-text { position: absolute; left: -9999px; }
@@ -34,10 +34,10 @@
 .ui-mini .ui-btn-icon-right .ui-btn-inner { padding-right: 28px; }
 .ui-header .ui-btn-icon-top .ui-btn-inner,
 .ui-footer .ui-btn-icon-top .ui-btn-inner,
-.ui-mini .ui-btn-icon-top .ui-btn-inner { padding: 28px 5px .5em 5px; }
+.ui-mini .ui-btn-icon-top .ui-btn-inner { padding: 28px 3px .5em 3px; }
 .ui-header .ui-btn-icon-bottom .ui-btn-inner,
 .ui-footer .ui-btn-icon-bottom .ui-btn-inner,
-.ui-mini .ui-btn-icon-bottom .ui-btn-inner { padding: .55em 5px 33px 5px; }
+.ui-mini .ui-btn-icon-bottom .ui-btn-inner { padding: .55em 3px 33px 3px; }
 
 /*btn icon positioning*/
 .ui-btn-icon-notext .ui-icon { display: block; z-index: 0;}
