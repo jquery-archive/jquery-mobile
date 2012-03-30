@@ -1,6 +1,6 @@
-/* import url( "jquery.mobile.transitions.slidein.keyframes.css" );  */
-/* import url( "jquery.mobile.transitions.slideout.keyframes.css" ); */
-/* slide transition - depends on slidein.keyframes and slideout.keyframes */
+@import url( "jquery.mobile.transitions.slidein.keyframes.css" );
+@import url( "jquery.mobile.transitions.slideout.keyframes.css" );
+
 .slide.out, .slide.in {
 	-webkit-animation-timing-function: ease-out;
 	-webkit-animation-duration: 350ms;
