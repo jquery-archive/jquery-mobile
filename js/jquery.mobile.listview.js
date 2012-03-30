@@ -234,7 +234,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 					}
 				} else if ( item.jqmData( "role" ) === "list-divider" ) {
 
-					itemClass += " ui-li-divider ui-btn ui-bar-" + dividertheme;
+					itemClass += " ui-li-divider ui-li-static ui-bar-" + dividertheme;
 					item.attr( "role", "heading" );
 
 					//reset counter when a divider heading is encountered

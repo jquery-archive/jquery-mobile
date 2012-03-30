@@ -323,8 +323,25 @@
 
 			function(){
 				var $new_page = $('#list-divider-test');
-				ok($new_page.find('.ui-li-divider').length == 2);
+				ok($new_page.find('.ui-li-divider').filter('.ui-li-static').length == 2);
 				ok($new_page.hasClass('ui-page-active'));
+				start();
+			}
+		]);
+	});
+
+	asyncTest( "Inherits the theme from data-dividertheme to the list-dividers ", function() {
+		$.testHelper.pageSequence([
+			function(){
+				$.mobile.changePage("#list-divider-test");
+			},
+
+			function() {
+				var $new_page = $('#list-divider-test');
+				ok($new_page.hasClass('ui-page-active'));
+				var $list_view = $new_page.find(':jqmData(role=listview)');
+				var dividertheme = $list_view.jqmData('dividertheme');
+				same($list_view.find('.ui-bar-' + dividertheme).length, 2);
 				start();
 			}
 		]);
