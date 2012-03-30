@@ -234,7 +234,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 					}
 				} else if ( item.jqmData( "role" ) === "list-divider" ) {
 
-					itemClass += " ui-li-divider ui-btn ui-bar-" + dividertheme;
+					itemClass += " ui-li-divider ui-bar-" + dividertheme;
 					item.attr( "role", "heading" );
 
 					//reset counter when a divider heading is encountered
@@ -286,11 +286,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 					var $this = $(this);
 					$this.prependTo( $this.parent() ); //shift aside to front for css float
 				})
-			.end()
-
-			.find( ".ui-li-count" ).each( function() {
-					$( this ).closest( "li" ).addClass( "ui-li-has-count" );
-				}).addClass( "ui-btn-up-" + ( $list.jqmData( "counttheme" ) || this.options.countTheme) + " ui-btn-corner-all" );
+			.end();
 
 		// The idea here is to look at the first image in the list item
 		// itself, and any .ui-link-inherit element it may contain, so we
