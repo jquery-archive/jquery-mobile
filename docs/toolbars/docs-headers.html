@@ -17,7 +17,7 @@
 	<div data-role="page" class="type-interior">
 
 		<div data-role="header" data-theme="f">
-		<h1>Header bars</h1>
+		<h1>Headers</h1>
 		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
 		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
 	</div><!-- /header -->
@@ -25,7 +25,7 @@
 	<div data-role="content">
 		<div class="content-primary">	
 			<h2>Header structure</h2>
-			<p>The <code>header</code> is a toolbar at the top of the page that usually contains the page title text and optional buttons positioned to the the left and/or right of the title for navigation or actions.</p> 
+			<p>The <code>header</code> is a toolbar at the top of the page that usually contains the page title text and optional buttons positioned to the the left and/or right of the title for navigation or actions. Headers can optionally be positioned as <a href="bars-fixed.html">fixed</a> so they remain at the top of the screen at all times instead of scrolling with the page.</p> 
 			
 			<p>The title text is normally an H1 heading element but it's possible to use any heading level (H1-H6) to allow for semantic flexibility. For example, a page containing multiple mobile 'pages' may use a H1 element on the home 'page' and a H2 element on the secondary pages. All heading levels are styled identically by default to maintain visual consistency.</p> 
 
@@ -170,7 +170,7 @@
 
 			<p>This will produce this bar:</p>
 				<div class="ui-bar ui-bar-b">
-					<h3>I'm just a div with bar classes and a <a href="#" data-role="button">Button</a></h3>
+					<h3>I'm just a div with bar classes and a mini inline <a href="#" data-role="button" data-inline="true" data-mini="true">Button</a></h3>
 				</div>
 				
 				<p>Note that <code>.ui-bar</code> should not be added to header or footer bars that span the full width of the page, as the additional padding will cause a full-width element to break out of its parent container. To add padding inside of a full-width toolbar, wrap the toolbar's contents in an element and apply the padding to that element instead.</p>
@@ -178,9 +178,8 @@
 				<p>By writing some simple styles, it's easy to build message bars like this:</p>
 					<!-- Yes, the inline styles aren't recommended in a real system but they are used to simply illustrate how to tweak CSS -->
 					<div class="ui-bar ui-bar-e">
-						<h3 style="float:left; margin-top:8px;">This is an alert message with dismiss button. </h3>
-						<div style="float:right; margin-top:4px;"><a href="#" data-role="button" data-icon="delete" data-iconpos="notext">Button</a></div>
-						<p style="clear:both; font-size:85%; margin-bottom:8px;">And here's some additional text in a paragraph.</p>
+						
+						<h3 style="display:inline-block; width:92%; margin-top:5px;">This is an alert message. </h3><div style="display:inline-block; width:8%; margin-top:0px;"><a href="#" data-role="button" data-icon="delete" data-iconpos="notext">Dismiss</a></div><p style="font-size:85%; margin:-.3em 0 1em;">And here's some additional text in a paragraph.</p>
 					</div>
 				</div><!--/content-primary -->		
 

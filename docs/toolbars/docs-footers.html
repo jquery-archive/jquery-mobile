@@ -17,7 +17,7 @@
 	<div data-role="page" class="type-interior">
 
 		<div data-role="header" data-theme="f">
-		<h1>Footer configuration</h1>
+		<h1>Footers</h1>
 		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
 		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
 	</div><!-- /header -->
@@ -26,7 +26,7 @@
 		<div class="content-primary">		
 			<h2>Footer bar structure</h2>
 
-			<p>The <code>footer</code> bar has the same basic structure as the header except it uses the <code> data-role</code> attribute value of <code>footer</code>. </p> 
+			<p>The <code>footer</code> bar has the same basic structure as the <a href="docs-headers.html">header</a> except it uses the <code> data-role</code> attribute value of <code>footer</code>. </p> 
 
 <div class="highlight"> 
 <pre>
@@ -43,7 +43,8 @@
 				<h4>Footer content</h4>
 			</div>
 			
-			<p>The page footer is very similar to the header in terms of options and configuration. The primary differences are that the footer is designed to be less structured than the header to allow for more flexibility, so the framework doesn't automatically place buttons to the left or right based on source order as it does in the header. Since footers do not have the same prescriptive markup conventions as headers, use layout <a href="../content/content-grids.html">grids</a> or custom styles to achieve the design you want in a footer.</p> 
+			<p>The page footer is very similar to the header in terms of options and configuration. The primary difference is that the footer is designed to be less structured than the header to allow for more flexibility, so the framework doesn't automatically place buttons to the left or right based on source order as it does in the header. </p>
+			<p>Since footers do not have the same prescriptive markup conventions as headers, we recommend using layout <a href="../content/content-grids.html">grids</a> or writing custom styles to achieve the design you want.</p> 
 
 
 
@@ -56,7 +57,6 @@
 
 <pre><code>
 &lt;div data-role=&quot;footer&quot; class=&quot;ui-bar&quot;&gt;
-	&lt;a href=&quot;index.html&quot; data-role=&quot;button&quot; data-icon=&quot;delete&quot;&gt;Remove&lt;/a&gt;
 	&lt;a href=&quot;index.html&quot; data-role=&quot;button&quot; data-icon=&quot;plus&quot;&gt;Add&lt;/a&gt;
 	&lt;a href=&quot;index.html&quot; data-role=&quot;button&quot; data-icon=&quot;arrow-u&quot;&gt;Up&lt;/a&gt;
 	&lt;a href=&quot;index.html&quot; data-role=&quot;button&quot; data-icon=&quot;arrow-d&quot;&gt;Down&lt;/a&gt;
@@ -66,7 +66,6 @@
 			<p>This creates this toolbar with buttons sitting in a row</p>
 
 			<div data-role="footer" class="ui-bar">
-				<a href="index.html" data-icon="delete">Remove</a>
 				<a href="index.html" data-icon="plus">Add</a>
 				<a href="index.html" data-icon="arrow-u">Up</a>
 				<a href="index.html" data-icon="arrow-d">Down</a>
@@ -82,7 +81,6 @@
 
 			<div data-role="footer" class="ui-bar">
 				<div data-role="controlgroup" data-type="horizontal">
-					<a href="index.html" data-icon="delete">Remove</a>
 					<a href="index.html" data-icon="plus">Add</a>
 					<a href="index.html" data-icon="arrow-u">Up</a>
 					<a href="index.html" data-icon="arrow-d">Down</a>
@@ -93,12 +91,12 @@
 	
 			<h2>Adding form elements</h2>
 
-			<p>Form elements and other content can also be added to toolbars. Here is an example of a select menu inside a footer bar:</p>
+			<p><a href="../forms/forms-all.html">Forms</a> elements and other content can also be added to toolbars. Here is an example of a <a href="../forms/selects/index.html">select</a> menu inside a footer bar. We recommend using <a href="../forms/forms-all-mini.html" >mini-sized</a> form elements in toolbars by adding the <code>data-mini="true"</code> attribute:</p>
 		
 
 			<div data-role="footer" class="ui-bar">
 				<label for="select-choice-1">Shipping:</label>
-				<select name="select-choice-1" id="select-choice-1" data-theme="a">
+				<select name="select-choice-1" id="select-choice-1" data-theme="a" data-mini="true">
 					<option value="standard">Standard: 7 day</option>
 					<option value="rush">Rush: 3 days</option>
 					<option value="express">Express: next day</option>
@@ -111,10 +109,10 @@
 
 
 					
-					<h2>Persistent footers</h2>
-					<p>In situations where the footer is a global navigation element, you may want it to appear fixed in place between page transitions. This can be accomplished by using the persistent footer feature included in jQuery Mobile.</p> 
+					<h2>Fixed &amp; Persistent footers</h2>
+					<p>In situations where the footer is a global navigation element, you may want it to appear <a href="bars-fixed.html">fixed</a> so it doesn't scroll out of view. It's also possible to make a fixed toolbar <a href="footer-persist-d.html">persistent</a> so it appears to not move between <a href="../pages/page-transitions.html">page transitions</a>. This can be accomplished by using the persistent footer feature included in jQuery Mobile.</p> 
 					
-					<p>To make a footer stay in place between transitions, add the <code>data-id</code> attribute to the footer of all relevant pages and use the same <code>id</code> value for each. For example, by adding <code>data-id="myfooter"</code> to the current page and the target page, the framework will keep the footer anchors in the same spot during the page animation. <strong>This effect will only work correctly if the header and footer toolbars are set to <code>data-position="fixed"</code> so they are in view during the transition.</strong></p>
+					<p>To make a footer persistent between transitions, add the <code>data-id</code> attribute to the footer of all relevant pages and use the same <code>id</code> value for each. For example, by adding <code>data-id="myfooter"</code> to the current page and the target page, the framework will keep the footer anchors in the same spot during the page animation. <strong>This effect will only work correctly if the header and footer toolbars are set to <code>data-position="fixed"</code> so they are in view during the transition.</strong></p>
 					
 					
 
