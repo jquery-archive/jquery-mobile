@@ -10,6 +10,7 @@
 
 .ui-controlgroup-vertical .ui-controlgroup-last { border-bottom-width: 1px; }
 .ui-controlgroup-horizontal { padding: 0; }
+.ui-controlgroup-horizontal .ui-btn-inner { text-align:center; }
 .ui-controlgroup-horizontal .ui-btn, .ui-controlgroup-horizontal .ui-select { display: inline-block; margin: 0 -5px 0 0; }
 .ui-controlgroup-horizontal .ui-checkbox, .ui-controlgroup-horizontal .ui-radio { float: left; clear: none; margin: 0 -1px 0 0; }
 .ui-controlgroup-horizontal .ui-checkbox .ui-btn, .ui-controlgroup-horizontal .ui-radio .ui-btn,
