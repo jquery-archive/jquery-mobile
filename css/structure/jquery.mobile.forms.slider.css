@@ -10,18 +10,18 @@ a.ui-slider-handle .ui-btn-inner { padding: 0; height: 100%; }
 div.ui-slider-mini a.ui-slider-handle { height: 14px; width: 14px; margin: -8px 0 0 -7px; }
 div.ui-slider-mini a.ui-slider-handle .ui-btn-inner { height: 30px; width: 30px; padding: 0; margin: -9px 0 0 -9px; }
 
-@media all and (min-width: 320px){
+@media all and (min-width: 450px){
 	.ui-field-contain label.ui-slider { vertical-align: top; display: inline-block; width: 20%; margin: 0 2% 0 0; }
 	.ui-field-contain div.ui-slider { width: 43%; }
 	.ui-field-contain div.ui-slider-switch { width: 5.5em; }
 }	
 
-div.ui-slider-switch { height: 32px; margin-left: 0; width: 5em; }
+div.ui-slider-switch { height: 32px; margin-left: 0; width: 5.8em; }
 a.ui-slider-handle-snapping { -webkit-transition: left 70ms linear; -moz-transition: left 70ms linear; }
 div.ui-slider-switch .ui-slider-handle {  margin-top: 1px;  }
 .ui-slider-inneroffset { margin: 0 16px; position: relative; z-index: 1; }
 
-div.ui-slider-switch.ui-slider-mini { width: 4.5em; height: 29px; }
+div.ui-slider-switch.ui-slider-mini { width: 5em; height: 29px; }
 div.ui-slider-switch.ui-slider-mini .ui-slider-inneroffset { margin: 0 15px 0 14px; }
 div.ui-slider-switch.ui-slider-mini .ui-slider-handle { width: 25px; height: 25px; margin: 1px 0 0 -13px; }
 div.ui-slider-switch.ui-slider-mini a.ui-slider-handle .ui-btn-inner { height: 30px; width: 30px; padding: 0; margin: 0; }
