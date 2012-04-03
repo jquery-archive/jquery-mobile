@@ -72,7 +72,7 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 			var self = this,
 				o = self.options,
 				$el = self.element,
-				tbtype = $el.is( ".ui-header" ) ? "header" : "footer",
+				tbtype = $el.is( ":jqmData(role='header')" ) ? "header" : "footer",
 				$page = $el.closest(".ui-page");
 
 			// Feature detecting support for
@@ -189,7 +189,7 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 				elHeight = $el.height(),
 				pHeight = $el.closest( ".ui-page" ).height(),
 				viewportHeight = $.mobile.getScreenHeight(),
-				tbtype = $el.is( ".ui-header" ) ? "header" : "footer";
+				tbtype = $el.is( ":jqmData(role='header')" ) ? "header" : "footer";
 				
 			return !notransition &&
 				( this.options.transition && this.options.transition !== "none" &&
