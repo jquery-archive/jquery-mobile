@@ -216,11 +216,17 @@ $(document).bind('mobileinit',function(){
 });
 		</code></pre>
 
+  	<p>Alternately you can use the <code>data-enhance="false"</code> data attribute on a parent element with <code>$.mobile.ignoreContentEnabled</code> set to true. Beware though, this will incur a performance penalty for each and every element in the page that would otherwise be enhanced as jQuery Mobile must traverse the set of parents to look for those elements.</p>
+
 <p>One special case is that of selects. The above sample will prevent any and all augmentation from taking place on select elements in the page if <code>select</code> is included. If you wish to retain the native performance and appearance of the menu itself and benefit from the visual augmentation of the select button by jQuery Mobile, you can set <code>$.mobile.selectmenu.prototype.options.nativeMenu</code> to true in a <code>mobileinit</code> callback as a global setting or use <code>data-native-menu="true"</code> on a case by case basis.</p>
 
 
-	</div><!--/content-primary -->		
-	
+	<h2>File Inputs</h2>
+	<p>Using a multipart form with a file input is not supported by ajax. In this case you should decorate the parent form with <code>data-ajax="false"</code> to ensure the form is submitted properly to the server.</p>
+
+
+	</div><!--/content-primary -->
+
 	<div class="content-secondary">
 
 		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
