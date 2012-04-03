@@ -181,22 +181,30 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 
 			$el.closest( ".ui-page" ).css( "padding-" + ( header ? "top" : "bottom" ), $el.outerHeight() );
 		},
-
-		show: function( notransition ){
-			var hideClass = "ui-fixed-hidden",
+		
+		_useTransition: function( notransition ){
+			var $win = $( window ),
 				$el = this.element,
-				$win = $( window ),
 				scroll = $win.scrollTop(),
 				elHeight = $el.height(),
 				pHeight = $el.closest( ".ui-page" ).height(),
-				viewportHeight = Math.min( screen.height, $win.height() ),
+				viewportHeight = $.mobile.getScreenHeight(),
 				tbtype = $el.is( ".ui-header" ) ? "header" : "footer";
-
-				if( !notransition && ( this.options.transition && this.options.transition !== "none" &&
-					(
+				
+			return !notransition &&
+				( this.options.transition && this.options.transition !== "none" &&
+				(
 					( tbtype === "header" && !this.options.fullscreen && scroll > elHeight ) ||
 					( tbtype === "footer" && !this.options.fullscreen && scroll + viewportHeight < pHeight - elHeight )
-					) || this.options.fullscreen ) ){
+				) || this.options.fullscreen
+				);
+		},
+
+		show: function( notransition ){
+			var hideClass = "ui-fixed-hidden",
+				$el = this.element;
+
+				if( this._useTransition( notransition ) ){
 				$el
 					.removeClass( "out " + hideClass )
 					.addClass( "in" );
@@ -210,20 +218,10 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 		hide: function( notransition ){
 			var hideClass = "ui-fixed-hidden",
 				$el = this.element,
-				$win = $( window ),
-				scroll = $win.scrollTop(),
-				elHeight = $el.height(),
-				pHeight = $el.closest( ".ui-page" ).height(),
-				viewportHeight = Math.min( screen.height, $win.height() ),
-				tbtype = $el.is( ".ui-header" ) ? "header" : "footer",
 				// if it's a slide transition, our new transitions need the reverse class as well to slide outward
 				outclass = "out" + ( this.options.transition === "slide" ? " reverse" : "" );
 
-			if( !notransition && ( this.options.transition && this.options.transition !== "none" &&
-					(
-					( tbtype === "header" && !this.options.fullscreen && scroll > elHeight ) ||
-					( tbtype === "footer" && !this.options.fullscreen && scroll + viewportHeight < pHeight - elHeight )
-					) || this.options.fullscreen ) ){
+			if( this._useTransition( notransition ) ){
 				$el
 					.addClass( outclass )
 					.removeClass( "in" )
