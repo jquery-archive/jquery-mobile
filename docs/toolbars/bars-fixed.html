@@ -34,7 +34,7 @@
 			    </ul>
 				
 				
-		<p>In browsers that support CSS <code>position: fixed</code> (most desktop browsers, iOS5+, Android 2.2+, BlackBerry 6, and others), toolbars that use the "fixedtoolbar" plugin will be fixed to the top or bottom of the viewport, while the page content scrolls freely in between. In browsers that don't support fixed positioning, the toolbars will fall back to static, inline positioning in the page. </p>
+		<p>In browsers that support CSS <code>position: fixed</code> (most desktop browsers, iOS5+, Android 2.2+, BlackBerry 6, and others), toolbars that use the "fixedtoolbar" plugin will be fixed to the top or bottom of the viewport, while the page content scrolls freely in between. In browsers that don't support fixed positioning, the toolbars will remain positioned in flow, at the top or bottom of the page. </p>
 		
 		<p>To enable this behavior on a header or footer, add the <code>data-position="fixed"</code> attribute to a jQuery Mobile header or footer element.</p>
 		
@@ -83,6 +83,10 @@
 		<p>Just include the CSS and JS files after your references to jQuery Mobile and Fixed toolbars will work similar to jQuery Mobile 1.0 in iOS4.3, with the inclusion of the new API for the 1.1 fixedtoolbar plugin.</p>
 		
 		<p>If you have any improvements to suggest, fork the <a href="https://github.com/filamentgroup/jQuery-Mobile-FixedToolbar-Legacy-Polyfill">gist</a> on github and let us know!</p>
+		
+		<h2>Known issue with form controls inside fixed toolbars, and programatic scroll</h2>	
+		<p>An obscure issue exists in iOS5 and some Android platforms where form controls placed inside fixed-positioned containers can lose their hit area when the window is programatically scrolled (using <code>window.scrollTo</code> for example). This is not an issue specific to jQuery Mobile, but because of it, we recommend not programatically scrolling a document when using form controls inside jQuery Mobile fixed toolbars. <a href="https://github.com/scottjehl/Device-Bugs/issues/1">This ticket</a> from the <a href="https://github.com/scottjehl/Device-Bugs/">Device Bugs project</a> tracker explains this problem in more detail.</p>
+		
 		
 		<h2>Known issues in Android 2.2/2.3</h2>	
 		<p>Android 2.2/2.3’s implementation of <code>position: fixed;</code> can, in conjunction with seemingly unrelated styles and markup patterns, cause a number of strange issues, particularly in the case of <code>position: absolute</code> elements inside of <code>position: fixed</code> elements. While we’ve done our best to work around a number of these unique bugs within the scope of the library, custom styles may cause a number of issues.</p>
