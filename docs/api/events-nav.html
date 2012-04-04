@@ -10,7 +10,7 @@
 	<script src="../../js/jquery.js"></script>
 	<script src="../../docs/_assets/js/jqm-docs.js"></script>
 	<script src="../../js/"></script>
-
+	
 </head>
 <body>
 
@@ -55,15 +55,15 @@ $(document).bind("mobileinit", function(){
 		<dl>
 				<dt>pagecreate</dt>
 				
-				<dd>This event is triggered on a page when it is first initialized by the page plugin. Pagecreate is the most useful event for progressively enhancing a page's markup when it first loads, and because of this, many of jQuery Mobile's standard widgets bind to pagecreate to enhance markup within pages as well! If you bind to pagecreate in any script that is referenced after the jQuery Mobile framework, any native jQuery Mobile widgets in that page will be enhanced before your event callback executes. In other words, you'll be dealing with enhanced jQuery Mobile components.</dd>
+				<dd>This event is triggered on a page when it is first initialized by the page plugin. <code>pagecreate</code> is the most useful event for progressively enhancing a page's markup when it first loads, and because of this, many of jQuery Mobile's standard widgets bind to <code>pagecreate</code> to enhance markup within pages as well! If you bind to <code>pagecreate</code> in any script that is referenced after the jQuery Mobile framework, any native jQuery Mobile widgets in that page will be enhanced before your event callback executes. In other words, you'll be dealing with enhanced jQuery Mobile components.</dd>
 				
 				<dt>pagebeforecreate</dt>
 				
-				<dd>This event is triggered on a page element just before it is created by the page plugin. While the pagecreate event generally allows you to work with a page <strong>after</strong> its markup has been enhanced by jQuery Mobile, pagebeforecreate gives you access when the markup has not yet been enhanced. Pagebeforecreate is useful for modifying markup before jQuery Mobile's widgets </dd>
+				<dd>This event is triggered on a page element just before it is created by the page plugin. While the <code>pagecreate</code> event generally allows you to work with a page <strong>after</strong> its markup has been enhanced by jQuery Mobile, <code>pagebeforecreate</code> gives you access when the markup has not yet been enhanced. <code>pagebeforecreate</code> is useful for modifying markup before jQuery Mobile's widgets </dd>
 				
 				<dt>pageinit</dt>
 				
-				<dd>Pageinit is very similar to pagecreate, except that none of jQuery Mobile's standard widgets bind to it, and it is guaranteed to execute after all bound pagecreate callbacks have finished. If you need to bind to a page creation-time event via a script that is referenced before jQuery Mobile, binding to pageinit will ensure that you deal with enhanced page controls (whereas pagecreate will not, in that specific case.)</dd>
+				<dd><code>pageinit</code> is very similar to <code>pagecreate</code>, except that none of jQuery Mobile's standard widgets bind to it, and it is guaranteed to execute after all bound <code>pagecreate</code> callbacks have finished. If you need to bind to a page creation-time event via a script that is referenced before jQuery Mobile, binding to <code>pageinit</code> will ensure that you deal with enhanced page controls (whereas <code>pagecreate</code> will not, in that specific case.)</dd>
 				
 				
 		</dl>
@@ -72,35 +72,66 @@ $(document).bind("mobileinit", function(){
 		<h3>Page navigation events</h3>
 		<p>After pages are created, they are often shown and hidden one or many times throughout the use of a jQuery Mobile app. For A-grade browsers with Ajax navigation support, the jQM navigation model manages these page behaviors and dispatches useful events at different steps in the process of showing, hiding, and changing.</p>
 		
+		<h4>Page showing events</h4>
+		<p>The page showing events (<code>pagebeforeshow</code> and <code>pageshow</code>) are guaranteed to fire every time a page is shown, whether you're opening a single page, or transitioning between two pages. The target of the event is the page that is being shown.</p>
+		
 		<dl> 
 			
 			<dt>pagebeforeshow</dt>
-			<dd>description here</dd>
+			<dd>An event triggered on a page before it is shown.</dd>
 			
 		
 			<dt>pageshow</dt>
-			<dd>description here</dd>
-			
+			<dd>An event triggered on the page after it is shown.</dd>
+		</dl>	
+		
+		<h4>Page hiding events</h4>
+		<p>The page hiding events (<code>pagebeforehide</code> and <code>pagehide</code>) only fire when transitioning between two pages, when an outgoing page is being hidden in favor of a new one. The target of the event is the page that is being shown.</p>
+		<dl>	
 			<dt>pagebeforehide</dt>
-			<dd>description here</dd>
+			<dd>An event triggered on a page before it is hidden.</dd>
 			
 			
 			<dt>pagehide</dt>
-			<dd>description here</dd>
+			<dd>An event triggered on a page after it is hidden.</dd>
 			
 		<dl>
+			
+			
+		<p>When a single page is being shown, and no page is hidden, only the	<code>pagebeforeshow</code> and <code>pageshow</code> events will fire, and in that order.</p>
 		
-		<h3>Chronology</h3>
-		<p>Here is an overview of the event chronology for a page change</p>
-		
-		
+		<p>During a transition between two pages, all 4 of the events above will fire, in this order:</p>
 		<style>
-		.nav-flow ul,  .nav-flow li { margin:0; list-style-type: none; text-align:center; line-height:150%; }
+		.nav-flow ol,  .nav-flow li { margin:0; list-style-type: none; text-align:center; line-height:150%; }
 		.nav-flow h3 { margin:0; }
 		.nav-flow em { color:#999; }
 		</style>	
 		
-		<ul class="nav-flow">
+		<ol class="nav-flow">
+			<li><h3>pagebeforehide</h3></li>
+			<li>&darr;</li>
+			<li><h3>pagebeforeshow</h3></li>
+			<li>&darr;</li>
+			<li><h3>pagehide</h3></li>
+			<li>&darr;</li>
+			<li><h3>pageshow</h3></li>
+		</ol>
+		
+		
+		
+			
+		
+		<h3>Chronology</h3>
+		
+		
+		
+		
+		<p>Here is an overview of the event chronology for a page change</p>
+		
+		
+		
+		
+		<ol class="nav-flow">
 			<li><h3>mobileinit</h3> <em>Set global options here</em></li>
 			<li>&darr;</li>
 			<li><h3>pagebeforechange</h3></li>
@@ -127,7 +158,7 @@ $(document).bind("mobileinit", function(){
 			<li><h3>pagechange</h3></li>
 			<li>&darr;</li>
 			<li><em>Complete</em></li>
-		</ul>
+		</ol>
 
 		<p>You can bind to these events like you would with other jQuery events, using <code>live()</code> or <code>bind()</code>.</p>
 
@@ -138,10 +169,8 @@ $(document).bind("mobileinit", function(){
       <p> &nbsp;</p>
 		<div class="ui-body ui-body-e">
 		<h4 style="margin:.5em 0">Important: <code>pageCreate()</code> vs <code>pageInit()</code></h4>
-   <p> Prior to Beta 2 the recommendation to users wishing to manipulate jQuery Mobile enhanced page and child widget markup was to bind to the <code>pagecreate</code> event. In Beta 2 an internal change was made to decouple each of the widgets by binding to the <code>pagecreate</code> event in place of direct calls to the widget methods. As a result, users binding to the <code>pagecreate</code> in <code>mobileinit</code> would find their binding executing before the markup had been enhanced by each of the plugins. In keeping with the lifecycle of the jQuery UI Widget Factory, the initialization method is invoked <strong>after</strong> the create method, so the <code>pageinit</code> event provides the correct timing for post enhancement manipulation of the DOM and/or Javascript objects.
-
-		In short, if you were previously using <code>pagecreate</code> to manipulate the enhanced markup before the page was shown, it's very likely you'll want to migrate to 'pageinit'.
-		</p></div>
+   <p> Prior to Beta 2 the recommendation to users wishing to manipulate jQuery Mobile enhanced page and child widget markup was to bind to the <code>pagecreate</code> event. In Beta 2 an internal change was made to decouple each of the widgets by binding to the <code>pagecreate</code> event in place of direct calls to the widget methods. As a result, users binding to the <code>pagecreate</code> from within <code>mobileinit</code> would find their binding executing before the markup had been enhanced by each of the plugins. In keeping with the lifecycle of the jQuery UI Widget Factory, the initialization method is invoked <strong>after</strong> the create method, so the <code>pageinit</code> event provides the correct timing for post enhancement manipulation of the DOM and/or Javascript objects.</p>
+</div>
 
 		
 
