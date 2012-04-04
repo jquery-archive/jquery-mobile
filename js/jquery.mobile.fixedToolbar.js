@@ -84,7 +84,7 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 			$el.addClass( "ui-"+ tbtype +"-fixed" );
 
 			// "fullscreen" overlay positioning
-			if( $el.jqmData( "fullscreen" ) ){
+			if( o.fullscreen ){
 				$el.addClass( "ui-"+ tbtype +"-fullscreen" );
 				$page.addClass( "ui-page-" + tbtype + "-fullscreen" );
 			}
