@@ -4,8 +4,8 @@
     to { -webkit-transform: translateX(0); }
 }
 @-moz-keyframes slideinfromright {
-    from { -webkit-transform: translateX(100%); }
-    to { -webkit-transform: translateX(0); }
+    from { -moz-transform: translateX(100%); }
+    to { -moz-transform: translateX(0); }
 }
 
 @-webkit-keyframes slideinfromleft {
@@ -13,6 +13,6 @@
     to { -webkit-transform: translateX(0); }
 }
 @-moz-keyframes slideinfromleft {
-    from { -webkit-transform: translateX(-100%); }
-    to { -webkit-transform: translateX(0); }
+    from { -moz-transform: translateX(-100%); }
+    to { -moz-transform: translateX(0); }
 }
