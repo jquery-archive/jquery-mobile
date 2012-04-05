@@ -91,6 +91,9 @@ $(document).bind("mobileinit", function(){
 	<dt><code>autoInitializePage</code> <em>boolean</em>, default: true</dt>
 	<dd>When the DOM is ready, the framework should automatically call <code>$.mobile.initializePage</code>. If false, the page will not initialize and will be visually hidden until <code>$.mobile.initializePage</code> is manually called.</dd>
 
+	<dt><code>buttonMarkup.hoverDelay</code> <em>integer</em>, default: 200</dt>
+	<dd>Set the delay for touch devices to add the hover and down classes on touch interactions for buttons throughout the framework. Reducing the delay here results in a more responsive feeling ui, but will often result in the downstate being applied during page scrolling.</dd>
+
 	<dt><code>defaultDialogTransition</code> <em>string</em>, default: 'pop'</dt>
 	<dd>Set the default transition for dialog changes that use Ajax. Set to 'none' for no transitions.</dd>
 
@@ -132,10 +135,10 @@ $(document).bind("mobileinit", function(){
 
 	<dt><code>pageLoadErrorMessage</code> <em>string</em>, default: "Error Loading Page"</dt>
 	<dd>Set the text that appears when a page fails to load through Ajax.</dd>
-	
+
 	<dt><code>pageLoadErrorMessageTheme</code> <em>string</em>, default: "e"</dt>
 	<dd>Set the theme that the error message box uses.</dd>
-	
+
 	<dt><code>pushStateEnabled</code> <em>boolean</em>, default: true</dt>
 	<dd>Enhancement to use <code>history.replaceState</code> in supported browsers, to convert the hash-based Ajax URL into the full document path. Note that we <a href="../pages/page-navmodel.html">recommend</a> disabling this feature if Ajax is disabled or if extensive use of external links are used.</dd>
 
