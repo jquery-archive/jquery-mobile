@@ -86,6 +86,10 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 		// turn of binding to the native orientationchange due to android orientation behavior
 		orientationChangeEnabled: true,
 
+		buttonMarkup: {
+			hoverDelay: 200
+		},
+
 		// TODO might be useful upstream in jquery itself ?
 		keyCode: {
 			ALT: 18,

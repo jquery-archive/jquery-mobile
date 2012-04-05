@@ -184,8 +184,8 @@ function closestEnabledButton( element ) {
 }
 
 var attachEvents = function() {
-	var hoverDelay = 200,
-		hov, foc;
+	var hoverDelay = $.mobile.buttonMarkup.hoverDelay, hov, foc;
+
 	$( document ).bind( {
 		"vmousedown vmousecancel vmouseup vmouseover vmouseout focus blur scrollstart": function( event ) {
 			var theme,
