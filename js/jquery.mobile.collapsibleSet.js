@@ -25,6 +25,10 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 			o.contentTheme = $el.jqmData( "content-theme" );
 		}
 
+		if ( !o.corners ) {
+			o.corners = $el.jqmData( "corners" ) === undefined ? true : false;
+		}
+
 		// Initialize the collapsible set if it's not already initialized
 		if ( !$el.jqmData( "collapsiblebound" ) ) {
 			$el
@@ -57,6 +61,7 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 
 	refresh: function() {
 		var $el = this.element,
+			o = this.options,
 			collapsiblesInSet = $el.children( ":jqmData(role='collapsible')" );
 
 		$.mobile.collapsible.prototype.enhance( collapsiblesInSet.not( ".ui-collapsible" ) );
@@ -72,7 +77,7 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 		collapsiblesInSet.first()
 			.find( "a" )
 				.first()
-				.addClass( "ui-corner-top" )
+				.addClass( o.corners ? "ui-corner-top" : "" )
 				.find( ".ui-btn-inner" )
 					.addClass( "ui-corner-top" );
 
@@ -80,7 +85,7 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 			.jqmData( "collapsible-last", true )
 			.find( "a" )
 				.first()
-				.addClass( "ui-corner-bottom" )
+				.addClass( o.corners ? "ui-corner-bottom" : "" )
 				.find( ".ui-btn-inner" )
 					.addClass( "ui-corner-bottom" );
 	}
