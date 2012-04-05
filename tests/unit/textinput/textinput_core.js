@@ -58,10 +58,9 @@
 			}
 		]);
 	});
-	
-	$.mobile.textinput.prototype.options.clearSearchButtonText = "custom value";
-	
-	test( "\"clear text\" button for search inputs should use configured text", function(){
+
+	// NOTE init binding to alter the setting is in settings.js
+	test( "'clear text' button for search inputs should use configured text", function(){
 		strictEqual( $( "#search-input" ).closest( ".ui-input-search" ).find( ".ui-input-clear" ).attr( "title" ), "custom value" );
 	});
 })(jQuery);
