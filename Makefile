@@ -112,7 +112,7 @@ docs: init js css
 	@@find tmp/demos -name "*.html" -exec sed -i${SED_INPLACE_EXT} -e 's@js/"@js/jquery.mobile.js"@' {} \;
 	@@find tmp/demos -name "*${SED_INPLACE_EXT}" -exec rm {} \;
 	# ... Move and zip up the the whole folder
-	@@rm -f ${OUTPUT}/${NAME}.docs.zip
+	@@rm -f ${OUTPUT}/${BASE_NAME}.docs.zip
 	@@cd tmp/demos && zip -rq ../../${OUTPUT}/${NAME}.docs.zip *
 	@@rm -rf ${OUTPUT}/demos && mv -f tmp/demos ${OUTPUT}
 	# Finish by removing the temporary files
