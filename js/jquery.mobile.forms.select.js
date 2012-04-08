@@ -60,11 +60,11 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		if( !!~this.element[0].className.indexOf( "ui-btn-left" ) ) {
 			classes =  " ui-btn-left";
 		}
-		
+
 		if(  !!~this.element[0].className.indexOf( "ui-btn-right" ) ) {
 			classes = " ui-btn-right";
 		}
-		
+
 		this.select = this.element.wrap( "<div class='ui-select" + classes + "'>" );
 		this.selectID  = this.select.attr( "id" );
 		this.label = $( "label[for='"+ this.selectID +"']" ).addClass( "ui-select" );
@@ -193,13 +193,15 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 	},
 
 	setButtonText: function() {
-		var self = this, selected = this.selected(), cls = [self.select.attr("class")];;
+		var self = this, selected = this.selected();
 
 		this.button.find( ".ui-btn-text" ).html( function() {
-			
+
 			if ( !self.isMultiple ) {
-				cls.push(selected.attr("class"));
-				return $("<span/>", {"class": cls.join(' ')}).text(selected.text());
+				return $( document.createElement("span") )
+					.addClass( self.select.attr("class") )
+					.addClass( selected.attr("class") )
+					.text( selected.text() );
 			}
 
 			//TODO: apply the span as above to preserve the css-class of the original select
