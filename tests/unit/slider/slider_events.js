@@ -158,7 +158,7 @@
 
 	test( "onchange should be called onchange", function(){
 		onChangeCnt = 0;
-		$( "#onchange" ).slider( "refresh", 50 );
+		$( "#slider-onchange" ).slider( "refresh", 50 );
 		equals(onChangeCnt, 1, "onChange should have been called once");
 	});
 

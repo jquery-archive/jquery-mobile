@@ -185,7 +185,6 @@
 
 		asyncTest( "page loading should contain default loading message", function(){
 			expect( 1 );
-			reloadCoreNSandInit();
 			$.mobile.showPageLoadingMsg();
 
 			setTimeout(function(){
@@ -196,7 +195,6 @@
 
 		asyncTest( "page loading should contain custom loading message", function(){
 			$.mobile.loadingMessage = "foo";
-			$.testHelper.reloadLib(libName);
 			$.mobile.showPageLoadingMsg();
 
 			setTimeout(function(){
