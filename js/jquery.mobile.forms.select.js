@@ -193,13 +193,16 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 	},
 
 	setButtonText: function() {
-		var self = this, selected = this.selected();
+		var self = this, selected = this.selected(), cls = [self.select.attr("class")];;
 
-		this.button.find( ".ui-btn-text" ).text( function() {
+		this.button.find( ".ui-btn-text" ).html( function() {
+			
 			if ( !self.isMultiple ) {
-				return selected.text();
+				cls.push(selected.attr("class"));
+				return $("<span/>", {"class": cls.join(' ')}).text(selected.text());
 			}
 
+			//TODO: apply the span as above to preserve the css-class of the original select
 			return selected.length ? selected.map( function() {
 				return $( this ).text();
 			}).get().join( ", " ) : self.placeholder;
