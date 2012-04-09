@@ -95,7 +95,6 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 			// TODO values buttonId and menuId are undefined here
 			button = this.button
-				.text( $( this.select[ 0 ].options.item( selectedIndex ) ).text() )
 				.insertBefore( this.select )
 				.buttonMarkup( {
 					theme: options.theme,
@@ -107,6 +106,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					iconshadow: options.iconshadow,
 					mini: options.mini
 				});
+
+		this.setButtonText();
 
 		// Opera does not properly support opacity on select elements
 		// In Mini, it hides the element, but not its text
@@ -193,21 +194,24 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 	},
 
 	setButtonText: function() {
-		var self = this, selected = this.selected();
+		var self = this,
+			selected = this.selected(),
+			text = this.placeholder,
+			span = $( document.createElement("span") );
 
-		this.button.find( ".ui-btn-text" ).html( function() {
-
-			if ( !self.isMultiple ) {
-				return $( document.createElement("span") )
-					.addClass( self.select.attr("class") )
-					.addClass( selected.attr("class") )
-					.text( selected.text() );
+		this.button.find( ".ui-btn-text" ).html(function() {
+			if ( selected.length ) {
+				text = selected.map(function() {
+					return $( this ).text();
+				}).get().join( ", " );
+			} else {
+				text = self.placeholder;
 			}
 
-			//TODO: apply the span as above to preserve the css-class of the original select
-			return selected.length ? selected.map( function() {
-				return $( this ).text();
-			}).get().join( ", " ) : self.placeholder;
+			// TODO possibly aggregate multiple select option classes
+			return span.text( text )
+				.addClass( self.select.attr("class") )
+				.addClass( selected.attr("class") );
 		});
 	},
 
