@@ -384,4 +384,24 @@
 		var menu = $(".ui-selectmenu").not( ".ui-selectmenu-hidden" );
 		ok( menu.text().indexOf("disabled enhance test") > -1, "the right select is showing" );
 	});
+
+	test( "selected option 1classes are persisted to the button text", function() {
+		var $select = $( "#select-preserve-option-class" ),
+			selectedOptionClasses = $select.find( "option:selected" ).attr( "class" );
+
+		deepEqual( $select.parent().find( ".ui-btn-text > span" ).attr( "class" ), selectedOptionClasses );
+	});
+
+	test( "multiple select option classes are persisted from the first selected option to the button text", function() {
+		var $select = $( "#select-preserve-option-class-multiple" ),
+			selectedOptionClasses = $select.find( "option:selected" ).first().attr( "class" );
+
+		deepEqual( $select.parent().find( ".ui-btn-text > span" ).attr( "class" ), selectedOptionClasses );
+	});
+
+	test( "multple select text values are aggregated in the button text", function() {
+		var $select = $( "#select-aggregate-option-text" );
+
+		deepEqual( "Standard: 7 day, Rush: 3 days", $select.parent().find( ".ui-btn-text" ).text() );
+	});
 })(jQuery);
