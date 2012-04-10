@@ -1,6 +1,7 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Fixes the iOS orientation change bug using a jQM version of this technique https://github.com/scottjehl/iOS-Orientationchange-Fix
 //>>label: iOS orientation change bugfix
+//>>group: Utilities
 
 define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.zoom" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");

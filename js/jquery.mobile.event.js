@@ -1,7 +1,7 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Custom events and shortcuts.
 //>>label: Events
-//>>group: core
+//>>group: Core
 //>>required: true
 
 define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery.mobile.vmouse" ], function( $ ) {

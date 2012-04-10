@@ -4,8 +4,8 @@
 
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Consistent styling for checkboxes/radio buttons.
-//>>label: Checkboxes/Radio Buttons
-//>>group: forms
+//>>label: Checkboxes & Radio Buttons
+//>>group: Forms
 //>>css: ../css/themes/default/jquery.mobile.theme.css,../css/structure/jquery.mobile.forms.checkboxradio.css
 
 define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.widget", "./jquery.mobile.buttonMarkup" ], function( $ ) {

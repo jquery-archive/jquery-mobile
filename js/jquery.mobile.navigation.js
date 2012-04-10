@@ -1,6 +1,7 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Formats groups of links as nav bars.
-//>>label: Navigation Bars
+//>>description: Applies the AJAX navigation system to links and forms to enable page transitions
+//>>label: AJAX navigation System
+//>>group: Navigation
 
 define( [
 	"jquery",

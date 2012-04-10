@@ -1,7 +1,7 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Slider form widget
 //>>label: Slider
-//>>group: forms
+//>>group: Forms
 //>>css: ../css/themes/default/jquery.mobile.theme.css, ../css/structure/jquery.mobile.forms.slider.css
 
 define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.widget", "./jquery.mobile.forms.textinput", "./jquery.mobile.buttonMarkup" ], function( $ ) {

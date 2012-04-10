@@ -16,7 +16,8 @@
 
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Normalizes touch/mouse events.
-//>>label: Virtual Mouse Bindings
+//>>label: Virtual Mouse (vmouse) Bindings
+//>>group: Core
 
 define( [ "jquery" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");

@@ -1,6 +1,7 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Simple class additions to make form row separators
-//>>label: Fieldcontains
+//>>description: Styling to responsively position forms and labels based on screen width and add visual separation
+//>>label: Fieldcontainers
+//>>group: Forms
 //>>css: ../css/themes/default/jquery.mobile.theme.css,../css/structure/jquery.mobile.forms.fieldcontain.css
 
 define( [ "jquery" ], function( $ ) {

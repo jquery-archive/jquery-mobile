@@ -1,7 +1,9 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Formats groups of links as navigation bars.
-//>>label: Navigation Bars
+//>>description: Formats groups of links as horizontal navigation bars.
+//>>label: Navbars
+//>>group: Widgets
 //>>css: ../css/themes/default/jquery.mobile.theme.css, ../css/structure/jquery.mobile.navbar.css
+
 
 define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.buttonMarkup", "./jquery.mobile.grid" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");

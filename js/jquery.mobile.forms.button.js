@@ -1,7 +1,7 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Form Buttons
-//>>label: links that proxy to native input/buttons
-//>>group: forms
+//>>description: Buttons: Input or button-based
+//>>label: Custom-styled native input/buttons
+//>>group: Forms
 //>>css: ../css/themes/default/jquery.mobile.theme.css,../css/structure/jquery.mobile.button.css
 
 define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.buttonMarkup"  ], function( $ ) {

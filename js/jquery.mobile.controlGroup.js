@@ -1,6 +1,7 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Corner-rounding for groups of buttons, checks, radios, etc
+//>>description: Visually groups sets of buttons, checks, radios, etc. 
 //>>label: Controlgroups
+//>>group: Forms
 //>>css: ../css/themes/default/jquery.mobile.theme.css,../css/structure/jquery.mobile.controlgroup.css
 
 define( [ "jquery", "./jquery.mobile.buttonMarkup" ], function( $ ) {

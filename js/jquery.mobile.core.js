@@ -1,7 +1,7 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: The base file for jQM
+//>>description: Base file for jQuery Mobile
 //>>label: Core
-//>>group: core
+//>>group: Core
 //>>required: true
 //>>css: ../css/themes/default/jquery.mobile.core.css
 
