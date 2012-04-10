@@ -3,8 +3,8 @@
 */
 
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Fallback transition for slideup in non-3D supporting browsers
-//>>label: Slideup fallback transition
+//>>description: Animation styles and fallback transition definition for non-3D supporting browsers
+//>>label: Slideup Transition
 //>>group: Transitions
 //>>css: ../css/structure/jquery.mobile.transition.slideup.css
 

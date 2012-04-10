@@ -3,8 +3,8 @@
 */
 
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Fallback transition for turn in non-3D supporting browsers
-//>>label: Page turn fallback transition
+//>>description: Animation styles and fallback transition definition for non-3D supporting browsers
+//>>label: Turn Transition
 //>>group: Transitions
 //>>css: ../css/structure/jquery.mobile.transition.turn.css
 

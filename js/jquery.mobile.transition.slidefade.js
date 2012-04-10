@@ -3,8 +3,8 @@
 */
 
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Handler and fallback transition for slide in non-3D supporting browsers
-//>>label: Slide handler and fallback transition
+//>>description: Animation styles and fallback transition definition for non-3D supporting browsers
+//>>label: Slidefade Transition
 //>>group: Transitions
 //>>css: ../css/structure/jquery.mobile.transition.slidefade.css
 
