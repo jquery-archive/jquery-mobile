@@ -1,6 +1,6 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Applies the AJAX navigation system to links and forms to enable page transitions
-//>>label: AJAX navigation System
+//>>label: AJAX Navigation System
 //>>group: Navigation
 
 define( [

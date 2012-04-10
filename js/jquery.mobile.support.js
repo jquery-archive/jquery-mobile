@@ -1,5 +1,5 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Assorted support tests.
+//>>description: Assorted tests to qualify browsers by detecting features
 //>>label: Support Tests
 //>>group: Core
 //>>required: true
