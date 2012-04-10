@@ -160,7 +160,7 @@ zip: init css js
 	@@mkdir tmp
 	@@cp -R ${OUTPUT} tmp/${NAME}
 	# ... And remove the Zipped docs so they aren't included twice (for deploy scripts)
-	@@rm -rf tmp/${NAME}/${NAME}.docs.zip
+	@@rm -rf tmp/${NAME}/*.zip
 	@@cd tmp; zip -rq ../${OUTPUT}/${NAME}.zip ${NAME}
 	@@rm -rf tmp
 	# -------------------------------------------------
