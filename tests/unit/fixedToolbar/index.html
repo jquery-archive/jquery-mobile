@@ -75,5 +75,24 @@
 <div data-nstest-role="page" id="persist-test-f">
 	<div data-nstest-role="footer" data-nstest-position="fixed" data-nstest-id="d"></div>
 </div>
+
+<div data-nstest-role="page" id="page-show-visible-false">
+	<div data-nstest-role="header" data-nstest-position="fixed" data-nstest-fullscreen="true" data-nstest-visible-on-page-show="false">
+		<h1>foo</h1>
+	</div>
+	<div data-nstest-role="footer" data-nstest-position="fixed" data-nstest-fullscreen="true" data-nstest-visible-on-page-show="false">
+		<h1>foo</h1>
+	</div>
+</div>
+
+<div data-nstest-role="page" id="page-show-visible-true">
+	<div data-nstest-role="header" data-nstest-position="fixed" data-nstest-fullscreen="true" data-nstest-visible-on-page-show="true"></div>
+	<div data-nstest-role="footer" data-nstest-position="fixed" data-nstest-fullscreen="true" data-nstest-visible-on-page-show="true"></div>
+</div>
+
+<div data-nstest-role="page" id="page-show-visible-undefined">
+	<div data-nstest-role="header" data-nstest-fullscreen="true" data-nstest-position="fixed"></div>
+	<div data-nstest-role="footer" data-nstest-fullscreen="true" data-nstest-position="fixed"></div>
+</div>
 </body>
 </html>

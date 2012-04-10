@@ -320,4 +320,41 @@
 			start
 		]);
 	});
+
+
+	var asyncTestFooterAndHeader = function( pageSelector, areHidden ) {
+		$.testHelper.pageSequence([
+			function() {
+				$.mobile.changePage( pageSelector );
+			},
+
+			function() {
+				var $footer = $.mobile.activePage.find( ".ui-footer" ),
+					$header = $.mobile.activePage.find( ".ui-header" ),
+					hidden = areHidden ? "hidden" : "visible";
+
+				equal( $footer.length, 1, "there should be one footer" );
+				equal( $header.length, 1, "there should be one header" );
+
+				equal( $footer.hasClass( "ui-fixed-hidden" ), areHidden, "the footer should be " + hiddenStr );
+				equal( $header.hasClass( "ui-fixed-hidden" ), areHidden, "the header should be " + hiddenStr );
+
+				$.mobile.changePage( "#default" );
+			},
+
+			start
+		]);
+	};
+
+	asyncTest( "data-visible-on-page-show hides toolbars when false", function() {
+		asyncTestFooterAndHeader( "#page-show-visible-false", false );
+	});
+
+	asyncTest( "data-visible-on-page-show shows toolbars when explicitly true", function() {
+		asyncTestFooterAndHeader( "#page-show-visible-true", true );
+	});
+
+	asyncTest( "data-visible-on-page-show shows toolbars when undefined", function() {
+		asyncTestFooterAndHeader( "#page-show-visible-undefined", true );
+	});
 })(jQuery);
