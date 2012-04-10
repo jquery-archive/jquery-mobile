@@ -1,6 +1,6 @@
 
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Page change transition core
+//>>description: Animated page change core logic and sequence handlers
 //>>label: Transition Core
 //>>group: Transitions
 //>>css: ../css/themes/default/jquery.mobile.theme.css, ../css/structure/jquery.mobile.transitions.css
