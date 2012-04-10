@@ -1,7 +1,7 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Assorted support tests.
 //>>label: Support Tests
-//>>group: core
+//>>group: Core
 //>>required: true
 
 define( [  "jquery", "./jquery.mobile.media", "./jquery.mobile.core" ], function( $ ) {

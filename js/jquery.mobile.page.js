@@ -1,6 +1,6 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Basic page definition and formatting.
-//>>label: Page creation
+//>>label: Page Creation
 //>>group: Core
 
 define( [ "jquery", "./jquery.mobile.widget" ], function( $ ) {

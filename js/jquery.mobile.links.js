@@ -1,7 +1,7 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Adds classes to links.
 //>>label: Link Classes
-//>>group: Core
+//>>group: Utility
 
 
 define( [ "jquery" ], function( $ ) {
