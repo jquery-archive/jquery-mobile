@@ -954,7 +954,7 @@ define( [
 				.done(function( url, options, newPage, dupCachedPage ) {
 					isPageTransitioning = false;
 					options.duplicateCachedPage = dupCachedPage;
-					$.mobile.changePage( newPage, options );
+					$.mobile._changePage( newPage, options );
 				})
 				.fail(function( url, options ) {
 					isPageTransitioning = false;
@@ -969,6 +969,11 @@ define( [
 			return;
 		}
 
+		$.mobile._changePage( toPage, settings );
+	};
+
+	$.mobile._changePage = function( toPage, settings ) {
+
 		// If we are going to the first-page of the application, we need to make
 		// sure settings.dataUrl is set to the application document url. This allows
 		// us to avoid generating a document url with an id hash in the case where the
@@ -979,7 +984,9 @@ define( [
 
 		// The caller passed us a real page DOM element. Update our
 		// internal state and then trigger a transition to the page.
-		var fromPage = settings.fromPage,
+		var mpc = settings.pageContainer,
+			triggerData = { toPage: toPage, options: settings },
+			fromPage = settings.fromPage,
 			url = ( settings.dataUrl && path.convertUrlToDataUrl( settings.dataUrl ) ) || toPage.jqmData( "url" ),
 			// The pageUrl var is usually the same as url, except when url is obscured as a dialog url. pageUrl always contains the file path
 			pageUrl = url,
