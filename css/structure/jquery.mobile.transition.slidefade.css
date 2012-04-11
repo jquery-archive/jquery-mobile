@@ -1,5 +1,5 @@
-@import url( "jquery.mobile.transitions.fade.css" );
-@import url( "jquery.mobile.transitions.slideout.keyframes.css" );
+@import url("jquery.mobile.transition.fade.css");
+@import url("jquery.mobile.transition.slideout.keyframes.css");
 
 .slidefade.out {
 	-webkit-transform: translateX(-100%);

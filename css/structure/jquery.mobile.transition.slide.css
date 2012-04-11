@@ -1,5 +1,5 @@
-@import url( "jquery.mobile.transitions.slidein.keyframes.css" );
-@import url( "jquery.mobile.transitions.slideout.keyframes.css" );
+@import url("jquery.mobile.transition.slidein.keyframes.css");
+@import url("jquery.mobile.transition.slideout.keyframes.css");
 
 .slide.out, .slide.in {
 	-webkit-animation-timing-function: ease-out;
