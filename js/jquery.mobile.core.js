@@ -3,7 +3,7 @@
 //>>label: Core
 //>>group: Core
 //>>required: true
-//>>css: ../css/themes/default/jquery.mobile.core.css
+//>>css: ../css/structure/jquery.mobile.core.css
 
 define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobile.widget" ], function( $, __version__ ) {
 //>>excludeEnd("jqmBuildExclude");
