@@ -1,6 +1,7 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: history.pushState support, layered on top of hashchange.
 //>>label: Pushstate Support
+//>>group: Navigation
 
 define( [ "jquery", "./jquery.mobile.navigation", "../external/requirejs/depend!./jquery.mobile.hashchange[jquery]" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");

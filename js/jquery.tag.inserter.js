@@ -18,6 +18,9 @@
 		case "1.6.4":
 			url = baseUrl + "jquery-1.6.4.js";
 			break;
+		case "git":
+			url = "http://code.jquery.com/jquery-git.js";
+			break;
 	}
 
 	document.write( "<script src='" + url + "'></script>" );

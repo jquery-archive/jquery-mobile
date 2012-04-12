@@ -1,6 +1,8 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: A workaround for browsers without window.matchMedia
 //>>label: matchMedia Polyfill
+//>>group: Utilities
+
 
 define( [ "jquery", "./jquery.mobile.core" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");

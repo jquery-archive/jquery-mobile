@@ -1,5 +1,5 @@
 <!DOCTYPE html> 
-<html class="ui-mobile-rendering"> 
+<html>
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
@@ -46,7 +46,7 @@
     &lt;input type=&quot;text&quot; name=&quot;name&quot; id=&quot;basic&quot; value=&quot;&quot;  /&gt;
 </code></pre>		
 
-			<p>This will produce a basic text input. The default styles set the width of the input to 100% of the parent container and stacks the label on a separate line.</p>
+			<p>This will produce a basic text input. The default styles set the width of the input to 100% of the parent container and stack the label on a separate line.</p>
 			
 	         <label for="basic">Text Input:</label>
 	         <input type="text" name="name" id="basic" value="" />
@@ -60,7 +60,7 @@
 &lt;input type=&quot;text&quot; name=&quot;name&quot; id=&quot;basic&quot; value=&quot;&quot; <strong>data-mini=&quot;true&quot;</strong> /&gt;
 </code></pre>
 			
-			<p>This will produce an input that a not as tall as the standard version and has a smaller text size.</p>
+			<p>This will produce an input that is not as tall as the standard version and has a smaller text size.</p>
 	         <label for="mini">Text Input:</label>
 	         <input type="text" name="name" id="mini" value="" data-mini="true" />
 
@@ -83,7 +83,7 @@
 						
 			
 			<h2>More text input types</h2>
-			<p>In jQuery Mobile, you can use existing and new HTML5 input types such as <code>password</code>, <code>email</code>, <code>tel</code>, <code>number</code>, and more.  Some type values are rendered differently across browsers &#8212; for example, Chrome displays the <code>range</code> input renders as a slider &#8212; so we standardize their appearance by dynamically changing their type to <code>text</code> (currently, this applies to <code>range</code> and <code>search</code>). You can configure which input types are degraded to <code>text</code> with the <code>page</code> plugin's options.</p>
+			<p>In jQuery Mobile, you can use existing and new HTML5 input types such as <code>password</code>, <code>email</code>, <code>tel</code>, <code>number</code>, and more.  Some type values are rendered differently across browsers. For example, Chrome renders the <code>range</code> input as a slider. jQuery Mobile standardizes the appearance of <code>range</code> and <code>search</code> by dynamically changing their type to <code>text</code>. You can configure which input types are degraded to <code>text</code> with the <code>page</code> plugin's options.</p>
 			
 			<p>One major advantage of using these more specific input types if that on mobile devices, specialized keyboards that speed data entry are offered in place of the standard text keyboard. Try the following inputs on a mobile device to see which display custom keyboards on various platforms.</p>
 			
@@ -165,7 +165,7 @@ I&#x27;m a basic textarea. If this is pre-populated with content, the height wil
 <strong>&lt;/textarea&gt;</strong>
 </code></pre>	
 
-			<p>This will produce a basic textarea with the width set to 100% of the parent container and the label stacked on a separate line.The textarea will grow to fit new lines as you type:</p>
+			<p>This will produce a basic textarea with the width set to 100% of the parent container and the label stacked on a separate line. The textarea will grow to fit new lines as you type:</p>
 			<label for="textarea-a">Textarea:</label>
 			<textarea name="textarea" id="textarea-a">
 I'm a basic textarea. If this is pre-populated with content, the height will be automatically adjusted to fit without needing to scroll. That is a pretty handy usability feature.
@@ -187,14 +187,14 @@ I'm a basic textarea. If this is pre-populated with content, the height will be 
 			
 			<h2>Calling the textinput plugin</h2>
 
-			<p>This plugin will auto initialize on any page that contains a textarea or any of the text input types listed above, no need for a <code>data-role</code> attribute in the markup. However, if needed you can directly call the <code>textinput</code> plugin on any selector, just like any jQuery plugin:</p>
+			<p>This plugin will auto initialize on any page that contains a textarea or any of the text input types listed above without any need for a <code>data-role</code> attribute in the markup. However, if needed, you can directly call the <code>textinput</code> plugin on any selector, just like any jQuery plugin:</p>
 			<pre><code>
 $('input').textinput();			
 			</code></pre>
 			
 			
 			<h2>Degraded input types</h2>
-			<p>jQuery Mobile degrades several HTML5 input types back to type=text, or type=number after adding enhanced controls. For example, inputs with a type of range are enhanced with a custom slider control, and their type is set to number to offer a usable form input alongside that slider. Inputs with a type of search are degraded back to type=text after we add our own themable search input styling.</p>
+			<p>jQuery Mobile degrades several HTML5 input types back to type=text or type=number after adding enhanced controls. For example, inputs with a type of range are enhanced with a custom slider control, and their type is set to number to offer a usable form input alongside that slider. Inputs with a type of search are degraded back to type=text after we add our own themable search input styling.</p>
 			<p>The page plugin contains a list of input types that are set to either true which means they'll degrade to type=text, false which means they'll be left alone, or a string such as "number", which means they'll be converted to that type (such as the case of type=range).</p>
 		
 			<p>You can configure which types are changed via the page plugin's <code>degradeInputs</code> option, which can be manipulated externally via <code>$.mobile.page.prototype.options.degradeInputs</code>, which has properties: color, date, datetime, "datetime-local", email, month, number, range, search, tel, time, url, and week. Be sure to configure this inside an event handler bound to the <code>mobileinit</code> event, so that it applies to the first page as well as subsequent pages that are loaded.</p>	
@@ -235,7 +235,7 @@ $('input').textinput();
 </div><!-- /content -->
 
 <div data-role="footer" class="footer-docs" data-theme="c">
-		<p>&copy; 2011 The jQuery Project</p>
+		<p>&copy; 2011-12 The jQuery Foundation</p>
 </div>
 	
 </div><!-- /page -->

@@ -1,6 +1,8 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Adds a filtering textfield to listviews
-//>>label: Listview Filter
+//>>description: Extends the listview to add a search box to filter lists
+//>>label: Listview: Filter
+//>>group: Widgets
+
 
 define( [ "jquery", "./jquery.mobile.listview", "./jquery.mobile.forms.textinput" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
@@ -101,7 +103,7 @@ $( document ).delegate( ":jqmData(role='listview')", "listviewcreate", function(
 		.appendTo( wrapper )
 		.textinput();
 
-	if ( $( this ).jqmData( "inset" ) ) {
+	if ( listview.options.inset ) {
 		wrapper.addClass( "ui-listview-filter-inset" );
 	}
 

@@ -1,4 +1,6 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>group: exclude
+
 define([
 	'require',
 	'./jquery.mobile.navigation',

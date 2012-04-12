@@ -128,7 +128,7 @@
 					$( '<div data-'+ $.mobile.ns +'role="collapsible"><h3>Collapsible Item ' + i + '</h3></div>' ).appendTo( set );
 				}
 				set.collapsibleset( "refresh" );
-				equal( set.find( ".ui-collapsible" ).length, 3, "The 3 collapsible should be enhanced" );
+				equal( set.find( ".ui-collapsible" ).length, 3, "The 3 collapsibles should be enhanced" );
 				ok( set.find( ".ui-collapsible" ).eq( 0 ).find( "a" ).hasClass( "ui-corner-top" ), "The 1st collapsible should have top corners" );
 				ok( !set.find( ".ui-collapsible" ).eq( 0 ).find( "a" ).hasClass( "ui-corner-bottom" ), "The 1st collapsible should NOT have bottom corners" );
 				ok( !set.find( ".ui-collapsible" ).eq( 1 ).find( "a" ).hasClass( "ui-corner-top" ), "The 2nd collapsible should NOT have top corners" );
@@ -139,6 +139,30 @@
 			}
 		]);
 	});
+
+  asyncTest( "Collapsible Set with static and dynamic content", function(){
+  		$.testHelper.pageSequence([
+  			function(){
+  				$.testHelper.openPage( "#collapsible-set-with-static-and-dynamic-content" );
+  			},
+
+  			function() {
+  				var set = $( ".ui-page-active" ).find( ".ui-collapsible-set" );
+  				for ( var i = 0; i < 2; i++ ) {
+  					$( '<div data-'+ $.mobile.ns +'role="collapsible"><h3>Collapsible Item ' + i + '</h3></div>' ).appendTo( set );
+  				}
+  				set.collapsibleset( "refresh" );
+  				equal( set.find( ".ui-collapsible" ).length, 3, "The 3 collapsibles should be enhanced" );
+  				ok( set.find( ".ui-collapsible" ).eq( 0 ).find( "a" ).hasClass( "ui-corner-top" ), "The 1st collapsible should have top corners" );
+  				ok( !set.find( ".ui-collapsible" ).eq( 0 ).find( "a" ).hasClass( "ui-corner-bottom" ), "The 1st collapsible should NOT have bottom corners" );
+  				ok( !set.find( ".ui-collapsible" ).eq( 1 ).find( "a" ).hasClass( "ui-corner-top" ), "The 2nd collapsible should NOT have top corners" );
+  				ok( !set.find( ".ui-collapsible" ).eq( 1 ).find( "a" ).hasClass( "ui-corner-bottom" ), "The 2nd collapsible should NOT have bottom corners" );
+  				ok( set.find( ".ui-collapsible" ).eq( 2 ).find( "a" ).hasClass( "ui-corner-bottom" ), "The 3rd collapsible should have bottom corners" );
+  				ok( !set.find( ".ui-collapsible" ).eq( 2 ).find( "a" ).hasClass( "ui-corner-top" ), "The 3rd collapsible should NOT have top corners" );
+  				start();
+  			}
+  		]);
+  	});
 
 	module( "Theming", {});
 

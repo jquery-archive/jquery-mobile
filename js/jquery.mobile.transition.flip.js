@@ -3,8 +3,10 @@
 */
 
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Fallback transition for flip in non-3D supporting browsers
-//>>label: Flip fallback transition
+//>>description: Animation styles and fallback transition definition for non-3D supporting browsers
+//>>label: Flip Transition
+//>>group: Transitions
+//>>css: ../css/structure/jquery.mobile.transition.flip.css
 
 define( [ "jquery", "./jquery.mobile.transition" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");

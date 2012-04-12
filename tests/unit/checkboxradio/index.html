@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 	<meta charset="UTF-8" />
@@ -36,8 +35,9 @@
 <ol id="qunit-tests">
 </ol>
 
-<div data-nstest-role="page">
+<div data-nstest-role="page" data-nstest-theme="a">
 	<div data-nstest-role="content">
+
 		<div data-nstest-role="fieldcontain">
 			<fieldset data-nstest-role="controlgroup">
 				<legend>Agree to the terms:</legend>
@@ -123,12 +123,80 @@
 		<label for="checkbox-change-triggered-2">click triggered</label>
 	</fieldset>
 </div>
+
+<div data-role="fieldcontain">
+	<fieldset data-role="controlgroup">
+		<legend>Agree to the terms:</legend>
+		<input type="checkbox" name="checkbox-inherit-theme" id="checkbox-inherit-theme"/>
+		<label for="checkbox-inherit-theme">foo</label>
+	</fieldset>
+
+	<fieldset data-role="controlgroup">
+		<legend>Agree to the terms:</legend>
+		<input type="checkbox" name="checkbox-explicit-theme" id="checkbox-explicit-theme" data-nstest-theme="b"/>
+		<label for="checkbox-explicit-theme">foo</label>
+	</fieldset>
+</div>
+		
+<div data-nstest-role="fieldcontain">
+	<fieldset data-nstest-role="controlgroup">
+		<input type="checkbox" name="topicon" id="topicon" class="custom" data-nstest-iconpos="top" />
+		<label for="topicon">I agree</label>
+
+		<input type="checkbox" name="bottomicon" id="bottomicon" class="custom" />
+		<label for="bottomicon" data-nstest-iconpos="bottom">I agree</label>
+	</fieldset>
+</div>
+
+<form id="radio-form" method="get" action="form-result.html">
+	<fieldset data-role="controlgroup" data-type="horizontal">
+		<legend>Check one:</legend>
+		<input type="radio" id="radio1" name="radio1" value="1" />
+		<label for="radio1">Radio1</label>
+	</fieldset>
+</form>
+
+
+<form id="check-form" method="get" action="form-result.html">
+	<div data-role="fieldcontain">
+		<fieldset data-role="controlgroup" data-type="horizontal">
+			<legend>Font styling:</legend>
+			<input type="checkbox" name="checkbox-form" id="checkbox-form" class="custom" />
+			<label for="checkbox-form">b</label>
+
+			<input type="checkbox" name="checkbox-form-2" id="checkbox-form-2" class="custom" />
+			<label for="checkbox-form-2"><em>i</em></label>
+		</fieldset>
+	</div>
+</form>
+
 </div>
 
 <div id="enhancetest">
-    <input type="checkbox" name="checkbox-332" id="checkbox-332" class="custom"/>
-    <label for="checkbox-332">I agree 3.2</label>
+	<input type="checkbox" name="checkbox-332" id="checkbox-332" class="custom"/>
+	<label for="checkbox-332">I agree 3.2</label>
 </div>
 
+<div id="exception-test">
+	<form>
+		<input type="checkbox" name="checkbox-exception" id="checkbox-exception" class="custom"/>
+	</form>
+</div>
+
+<div id="nested-label-test">
+	<form>
+		<label for="checkbox-nested-label">
+			<input type="checkbox" name="checkbox-nested-label" id="checkbox-nested-label" class="custom"/>
+		</label>
+	</form>
+</div>
+
+<div id="nested-label-no-for-test">
+  <form>
+    <label>
+      <input type="checkbox" name="checkbox-nested-label-no-for" id="checkbox-nested-label-no-for" class="custom"/>
+    </label>
+  </form>
+</div>
 </body>
 </html>

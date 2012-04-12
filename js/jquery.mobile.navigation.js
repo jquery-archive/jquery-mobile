@@ -1,6 +1,7 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Formats groups of links as nav bars.
-//>>label: Navigation Bars
+//>>description: Applies the AJAX navigation system to links and forms to enable page transitions
+//>>label: AJAX Navigation System
+//>>group: Navigation
 
 define( [
 	"jquery",
@@ -485,7 +486,12 @@ define( [
 
 		//clear page loader
 		$.mobile.hidePageLoadingMsg();
-
+		
+		// If transition is defined, check if css 3D transforms are supported, and if not, if a fallback is specified
+		if( transition && !$.support.cssTransform3d && $.mobile.transitionFallbacks[ transition ] ){
+			transition = $.mobile.transitionFallbacks[ transition ];
+		}
+		
 		//find the transition handler for the specified transition. If there
 		//isn't one in our transitionHandlers dictionary, use the default one.
 		//call the handler immediately to kick-off the transition.
@@ -508,21 +514,20 @@ define( [
 
 	//simply set the active page's minimum height to screen height, depending on orientation
 	function getScreenHeight(){
-		var orientation 	= $.event.special.orientationchange.orientation(),
-			port			= orientation === "portrait",
-			winMin			= port ? 480 : 320,
-			screenHeight	= port ? screen.availHeight : screen.availWidth,
-			winHeight		= Math.max( winMin, $( window ).height() ),
-			pageMin			= Math.min( screenHeight, winHeight );
-
-		return pageMin;
+		// Native innerHeight returns more accurate value for this across platforms, 
+		// jQuery version is here as a normalized fallback for platforms like Symbian
+		return window.innerHeight || $( window ).height();
 	}
 
 	$.mobile.getScreenHeight = getScreenHeight;
 
 	//simply set the active page's minimum height to screen height, depending on orientation
 	function resetActivePageHeight(){
-		$( "." + $.mobile.activePageClass ).css( "min-height", getScreenHeight() );
+		var aPage = $( "." + $.mobile.activePageClass ),
+			aPagePadT = parseFloat( aPage.css( "padding-top" ) ),
+			aPagePadB = parseFloat( aPage.css( "padding-bottom" ) );
+				
+		aPage.css( "min-height", getScreenHeight() - aPagePadT - aPagePadB );
 	}
 
 	//shared page enhancements
@@ -1077,7 +1082,7 @@ define( [
 		settings.reverse = settings.reverse || historyDir < 0;
 
 		transitionPages( toPage, fromPage, settings.transition, settings.reverse )
-			.done(function( name, reverse, $to, $from ) {
+			.done(function( name, reverse, $to, $from, alreadyFocused ) {
 				removeActiveLinkClass();
 
 				//if there's a duplicateCachedPage, remove it from the DOM now that it's hidden
@@ -1085,14 +1090,13 @@ define( [
 					settings.duplicateCachedPage.remove();
 				}
 
-				//remove initial build class (only present on first pageshow)
-				$html.removeClass( "ui-mobile-rendering" );
-
 				// Send focus to the newly shown page. Moved from promise .done binding in transitionPages
 				// itself to avoid ie bug that reports offsetWidth as > 0 (core check for visibility)
 				// despite visibility: hidden addresses issue #2965
 				// https://github.com/jquery/jquery-mobile/issues/2965
-				$.mobile.focusPage( toPage );
+				if( !alreadyFocused ){
+					$.mobile.focusPage( toPage );
+				}
 
 				releasePageTransitionLock();
 
@@ -1384,7 +1388,7 @@ define( [
 
 				// If current active page is not a dialog skip the dialog and continue
 				// in the same direction
-				if(!$.mobile.activePage.is( ".ui-dialog-page" )) {
+				if(!$.mobile.activePage.is( ".ui-dialog" )) {
 					//determine if we're heading forward or backward and continue accordingly past
 					//the current dialog
 					urlHistory.directHashChange({

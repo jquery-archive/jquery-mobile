@@ -1,6 +1,8 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Degrades inputs to another type after custom enhancements are made.
+//>>description: Changes input type to another after custom enhancements are made (ex. range > numberic).
 //>>label: Degrade Inputs
+//>>group: Utilities
+
 
 define( [ "jquery", "./jquery.mobile.page" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");

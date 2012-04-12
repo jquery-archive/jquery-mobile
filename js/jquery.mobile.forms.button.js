@@ -1,7 +1,8 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Form Buttons
-//>>label: links that proxy to native input/buttons
-//>>group: forms
+//>>description: Custom-styled native input/buttons
+//>>label: Buttons: Input or button-based 
+//>>group: Forms
+//>>css: ../css/themes/default/jquery.mobile.theme.css,../css/structure/jquery.mobile.button.css
 
 define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.buttonMarkup"  ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
@@ -12,7 +13,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 		theme: null,
 		icon: null,
 		iconpos: null,
-		inline: null,
+		inline: false,
 		corners: true,
 		shadow: true,
 		iconshadow: true,
@@ -33,8 +34,13 @@ $.widget( "mobile.button", $.mobile.widget, {
 	 	 	!$el.hasClass( "ui-btn" ) && $el.buttonMarkup();
 	 	 	return;
  	 	}
-		
-		
+
+		// get the inherited theme
+		// TODO centralize for all widgets
+		if ( !this.options.theme ) {
+			this.options.theme = $.mobile.getInheritedTheme( this.element, "c" );
+		}
+
 		// TODO: Post 1.1--once we have time to test thoroughly--any classes manually applied to the original element should be carried over to the enhanced element, with an `-enhanced` suffix. See https://github.com/jquery/jquery-mobile/issues/3577
 		/* if( $el[0].className.length ) {
 			classes = $el[0].className;
@@ -42,7 +48,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 		if( !!~$el[0].className.indexOf( "ui-btn-left" ) ) {
 			classes = "ui-btn-left";
 		}
-		
+
 		if(  !!~$el[0].className.indexOf( "ui-btn-right" ) ) {
 			classes = "ui-btn-right";
 		}
@@ -125,8 +131,8 @@ $.widget( "mobile.button", $.mobile.widget, {
 			this.enable();
 		}
 
-                // Grab the button's text element from its implementation-independent data item
-		$(this.button.data( 'buttonElements' ).text).text( $el.text() || $el.val() );
+		// Grab the button's text element from its implementation-independent data item
+		$( this.button.data( 'buttonElements' ).text ).text( $el.text() || $el.val() );
 	}
 });
 

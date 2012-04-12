@@ -11,7 +11,7 @@ textarea.ui-input-text { height: 50px; -webkit-transition: height 200ms linear; 
 .ui-mini .ui-input-clear { right: -3px; }
 
 .ui-input-search .ui-input-clear-hidden { display: none; }
-input.ui-mini, .ui-mini input { font-size: 14px !important; }
+input.ui-mini, .ui-mini input, textarea.ui-mini { font-size: 14px; }
 textarea.ui-mini { height: 45px; }
 
 /* orientation adjustments - incomplete!*/

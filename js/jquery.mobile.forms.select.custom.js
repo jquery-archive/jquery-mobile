@@ -3,9 +3,10 @@
 */
 
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Fully-custom select menus.
-//>>label: Custom Selects
-//>>group: forms
+//>>description: Extension to select menus to support menu styling, placeholder options, and multi-select features. 
+//>>label: Selects: Custom menus
+//>>group: Forms
+//>>css: ../css/themes/default/jquery.mobile.theme.css, ../css/structure/jquery.mobile.forms.select.css
 
 define( [
 	"jquery",
@@ -54,16 +55,17 @@ define( [
 				"class": "ui-title"
 			}).appendTo( header ),
 
+			menuPageContent,
+			menuPageClose,
+			headerClose;
+
+		if( widget.isMultiple ) {
 			headerClose = $( "<a>", {
 				"text": widget.options.closeText,
 				"href": "#",
 				"class": "ui-btn-left"
-			}).attr( "data-" + $.mobile.ns + "iconpos", "notext" ).attr( "data-" + $.mobile.ns + "icon", "delete" ).appendTo( header ).buttonMarkup(),
-
-			menuPageContent,
-			
-			menuPageClose;
-
+			}).attr( "data-" + $.mobile.ns + "iconpos", "notext" ).attr( "data-" + $.mobile.ns + "icon", "delete" ).appendTo( header ).buttonMarkup();
+		}
 
 		$.extend( widget, {
 			select: widget.select,
@@ -110,11 +112,16 @@ define( [
 
 				// Events for list items
 				self.list.attr( "role", "listbox" )
-					.delegate( ".ui-li>a", "focusin", function() {
-						$( this ).attr( "tabindex", "0" );
+					.bind( "focusin", function( e ){
+						$( e.target )
+							.attr( "tabindex", "0" )
+							.trigger( "vmouseover" );
+
 					})
-					.delegate( ".ui-li>a", "focusout", function() {
-						$( this ).attr( "tabindex", "-1" );
+					.bind( "focusout", function( e ){
+						$( e.target )
+							.attr( "tabindex", "-1" )
+							.trigger( "vmouseout" );
 					})
 					.delegate( "li:not(.ui-disabled, .ui-li-divider)", "click", function( event ) {
 
@@ -154,7 +161,11 @@ define( [
 						switch ( event.keyCode ) {
 							// up or left arrow keys
 						 case 38:
-							prev = li.prev();
+							prev = li.prev().not( ".ui-selectmenu-placeholder" );
+
+							if( prev.is( ".ui-li-divider" ) ) {
+								prev = prev.prev();
+							}
 
 							// if there's a previous option, focus it
 							if ( prev.length ) {
@@ -162,7 +173,7 @@ define( [
 									.blur()
 									.attr( "tabindex", "-1" );
 
-								prev.find( "a" ).first().focus();
+								prev.addClass( "ui-btn-down-" + widget.options.theme ).find( "a" ).first().focus();
 							}
 
 							return false;
@@ -172,13 +183,17 @@ define( [
 						 case 40:
 							next = li.next();
 
+							if( next.is( ".ui-li-divider" ) ) {
+								next = next.next();
+							}
+
 							// if there's a next option, focus it
 							if ( next.length ) {
 								target
 									.blur()
 									.attr( "tabindex", "-1" );
 
-								next.find( "a" ).first().focus();
+								next.addClass( "ui-btn-down-" + widget.options.theme ).find( "a" ).first().focus();
 							}
 
 							return false;
@@ -221,12 +236,14 @@ define( [
 				});
 
 				// Close button on small overlays
-				self.headerClose.click( function() {
-					if ( self.menuType == "overlay" ) {
-						self.close();
-						return false;
-					}
-				});
+				if( self.isMultiple ){
+					self.headerClose.click( function() {
+						if ( self.menuType == "overlay" ) {
+							self.close();
+							return false;
+						}
+					});
+				}
 
 				// track this dependency so that when the parent page
 				// is removed on pagehide it will also remove the menupage
@@ -274,7 +291,11 @@ define( [
 							if ( self.isMultiple ) {
 								item.find( ".ui-icon" ).removeClass( "ui-icon-checkbox-off" ).addClass( "ui-icon-checkbox-on" );
 							} else {
-								item.addClass( $.mobile.activeBtnClass );
+								if( item.is( ".ui-selectmenu-placeholder" ) ) {
+									item.next().addClass( $.mobile.activeBtnClass );
+								} else {
+									item.addClass( $.mobile.activeBtnClass );
+								}
 							}
 						}
 					});
@@ -329,15 +350,15 @@ define( [
 				}, 300);
 
 				function focusMenuItem() {
-					self.list.find( $.mobile.activeBtnClass ).focus();
+					self.list.find( "." + $.mobile.activeBtnClass + " a" ).focus();
 				}
 
 				if ( menuHeight > screenHeight - 80 || !$.support.scrollTop ) {
-					
-					self.menuPage.appendTo( $.mobile.pageContainer ).page();					
+
+					self.menuPage.appendTo( $.mobile.pageContainer ).page();
 					self.menuPageContent = menuPage.find( ".ui-content" );
 					self.menuPageClose = menuPage.find( ".ui-header a" );
-					
+
 					// prevent the parent page from being removed from the DOM,
 					// otherwise the results of selecting a list item in the dialog
 					// fall into a black hole
@@ -351,15 +372,7 @@ define( [
 					}
 
 					self.menuPage.one( "pageshow", function() {
-						// silentScroll() is called whenever a page is shown to restore
-						// any previous scroll position the page may have had. We need to
-						// wait for the "silentscroll" event before setting focus to avoid
-						// the browser"s "feature" which offsets rendering to make sure
-						// whatever has focus is in view.
-						$( window ).one( "silentscroll", function() {
-							focusMenuItem();
-						});
-
+						focusMenuItem();
 						self.isOpen = true;
 					});
 
@@ -424,6 +437,7 @@ define( [
 				var self = this,
 					o = this.options,
 					placeholder = this.placeholder,
+					needPlaceholder = true,
 					optgroups = [],
 					lis = [],
 					dataIcon = self.isMultiple ? "checkbox-off" : "false";
@@ -431,30 +445,30 @@ define( [
 				self.list.empty().filter( ".ui-listview" ).listview( "destroy" );
 
 				var $options = self.select.find("option"),
-					numOptions = $options.length,                      
-					select = this.select[ 0 ],                         
-					dataPrefix = 'data-' + $.mobile.ns,                 
-					dataIndexAttr = dataPrefix + 'option-index', 
+					numOptions = $options.length,
+					select = this.select[ 0 ],
+					dataPrefix = 'data-' + $.mobile.ns,
+					dataIndexAttr = dataPrefix + 'option-index',
 					dataIconAttr = dataPrefix + 'icon',
 					dataRoleAttr = dataPrefix + 'role',
 					fragment = document.createDocumentFragment(),
 					optGroup;
-									
-				for (var i = 0; i < numOptions;i++){				
+
+				for (var i = 0; i < numOptions;i++){
 					var option = $options[i],
 						$option = $(option),
 						parent = option.parentNode,
-						text = $option.text(),			
-						anchor  = document.createElement('a');
-						classes = [];				
-					
-					anchor.setAttribute('href','#');							
-					anchor.appendChild(document.createTextNode(text));	
-					
-					// Are we inside an optgroup?									
+						text = $option.text(),
+						anchor  = document.createElement('a'),
+						classes = [];
+
+					anchor.setAttribute('href','#');
+					anchor.appendChild(document.createTextNode(text));
+
+					// Are we inside an optgroup?
 					if (parent !== select && parent.nodeName.toLowerCase() === "optgroup"){
 						var optLabel = parent.getAttribute('label');
-						if ( optLabel != optGroup) {						
+						if ( optLabel != optGroup) {
 							var divider = document.createElement('li');
 							divider.setAttribute(dataRoleAttr,'list-divider');
 							divider.setAttribute('role','option');
@@ -463,35 +477,33 @@ define( [
 							fragment.appendChild(divider);
 							optGroup = optLabel;
 						}
-					}															
-										
-					if (!placeholder && (!option.getAttribute( "value" ) || text.length == 0 || $option.jqmData( "placeholder" )) ) {
+					}
+
+					if (needPlaceholder && (!option.getAttribute( "value" ) || text.length == 0 || $option.jqmData( "placeholder" ))) {
+						needPlaceholder = false;
 						if ( o.hidePlaceholderMenuItems ) {
 							classes.push( "ui-selectmenu-placeholder" );
-						}						
-						placeholder = self.placeholder = text;									
+						}
+						if (!placeholder) {
+							placeholder = self.placeholder = text;
+						}
 					}
-															
-					var item = document.createElement('li');															
+
+					var item = document.createElement('li');
 					if ( option.disabled ) {
 						classes.push( "ui-disabled" );
 						item.setAttribute('aria-disabled',true);
 					}
 					item.setAttribute(dataIndexAttr,i);
-					item.setAttribute(dataIconAttr,dataIcon);					
+					item.setAttribute(dataIconAttr,dataIcon);
 					item.className = classes.join(" ");
 					item.setAttribute('role','option');
-					item.setAttribute('tabindex','-1');
-					item.appendChild(anchor);					
+					anchor.setAttribute('tabindex','-1');
+					item.appendChild(anchor);
 					fragment.appendChild(item);
-				}	
-				fragment.firstChild.setAttribute('tabindex',0);
-				self.list[0].appendChild(fragment);
-
-				// Hide header close link for single selects
-				if ( !this.isMultiple ) {
-					this.headerClose.hide();
 				}
+
+				self.list[0].appendChild(fragment);
 
 				// Hide header if it's not a multiselect and there's no placeholder
 				if ( !this.isMultiple && !placeholder.length ) {
@@ -519,8 +531,9 @@ define( [
 		});
 	};
 
-	$( document ).delegate( "select", "selectmenubeforecreate", function(){
-		var selectmenuWidget = $( this ).data( "selectmenu" );
+	// issue #3894 - core doesn't triggered events on disabled delegates
+	$( document ).bind( "selectmenubeforecreate", function( event ){
+		var selectmenuWidget = $( event.target ).data( "selectmenu" );
 
 		if( !selectmenuWidget.options.nativeMenu ){
 			extendSelect( selectmenuWidget );

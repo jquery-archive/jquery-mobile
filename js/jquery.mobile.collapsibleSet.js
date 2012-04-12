@@ -1,6 +1,8 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: For creating grouped collapsible content areas.
-//>>label: Collapsible Sets
+//>>label: Collapsible Sets (Accordions)
+//>>group: Widgets
+//>>css: ../css/themes/default/jquery.mobile.theme.css,../css/structure/jquery.mobile.collapsible.css
 
 define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.collapsible" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
@@ -16,11 +18,15 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 
 		// Inherit the theme from collapsible-set
 		if ( !o.theme ) {
-			o.theme = $el.jqmData( "theme" );
+			o.theme = $.mobile.getInheritedTheme( $el, "c" );
 		}
 		// Inherit the content-theme from collapsible-set
 		if ( !o.contentTheme ) {
 			o.contentTheme = $el.jqmData( "content-theme" );
+		}
+
+		if ( !o.corners ) {
+			o.corners = $el.jqmData( "corners" ) === undefined ? true : false;
 		}
 
 		// Initialize the collapsible set if it's not already initialized
@@ -55,9 +61,10 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 
 	refresh: function() {
 		var $el = this.element,
+			o = this.options,
 			collapsiblesInSet = $el.children( ":jqmData(role='collapsible')" );
 
-		$.mobile.collapsible.prototype.enhance( collapsiblesInSet );
+		$.mobile.collapsible.prototype.enhance( collapsiblesInSet.not( ".ui-collapsible" ) );
 
 		// clean up borders
 		collapsiblesInSet.each( function() {
@@ -70,7 +77,7 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 		collapsiblesInSet.first()
 			.find( "a" )
 				.first()
-				.addClass( "ui-corner-top" )
+				.addClass( o.corners ? "ui-corner-top" : "" )
 				.find( ".ui-btn-inner" )
 					.addClass( "ui-corner-top" );
 
@@ -78,7 +85,7 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 			.jqmData( "collapsible-last", true )
 			.find( "a" )
 				.first()
-				.addClass( "ui-corner-bottom" )
+				.addClass( o.corners ? "ui-corner-bottom" : "" )
 				.find( ".ui-btn-inner" )
 					.addClass( "ui-corner-bottom" );
 	}

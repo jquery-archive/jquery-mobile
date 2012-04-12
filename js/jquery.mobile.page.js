@@ -1,6 +1,7 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Basic page formatting.
-//>>label: Pages
+//>>description: Basic page definition and formatting.
+//>>label: Page Creation
+//>>group: Core
 
 define( [ "jquery", "./jquery.mobile.widget" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
@@ -14,15 +15,35 @@ $.widget( "mobile.page", $.mobile.widget, {
 	},
 
 	_create: function() {
-
+		
+		var self = this;
+		
 		// if false is returned by the callbacks do not create the page
-		if( this._trigger( "beforecreate" ) === false ){
+		if( self._trigger( "beforecreate" ) === false ){
 			return false;
 		}
 
-		this.element
+		self.element
 			.attr( "tabindex", "0" )
-			.addClass( "ui-page ui-body-" + this.options.theme );
+			.addClass( "ui-page ui-body-" + self.options.theme )
+			.bind( "pagebeforehide", function(){
+				self.removeContainerBackground();
+			} )
+			.bind( "pagebeforeshow", function(){
+				self.setContainerBackground();
+			} );
+
+	},
+	
+	removeContainerBackground: function(){
+		$.mobile.pageContainer.removeClass( "ui-overlay-" + $.mobile.getInheritedTheme( this.element.parent() ) );
+	},
+	
+	// set the page container background to the page theme
+	setContainerBackground: function( theme ){
+		if( this.options.theme ){
+			$.mobile.pageContainer.addClass( "ui-overlay-" + ( theme || this.options.theme ) );
+		}
 	},
 
 	keepNativeSelector: function() {

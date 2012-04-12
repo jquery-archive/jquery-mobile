@@ -1,5 +1,5 @@
 <!DOCTYPE html> 
-<html class="ui-mobile-rendering"> 
+<html>
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
@@ -45,7 +45,7 @@
 &lt;input type=&quot;search&quot; name=&quot;search&quot; id=&quot;searc-basic&quot; value=&quot;&quot; /&gt;
 </code></pre>	
 
-				<p>This will produce a basic search input. The default styles set the width of the input to 100% of the parent container and stacks the label on a separate line.</p>
+				<p>This will produce a basic search input. The default styles set the width of the input to 100% of the parent container and stack the label on a separate line.</p>
 		         <label for="search-basic">Search Input:</label>
 				 <input type="search" name="search" id="search-basic" value="" />
 		        
@@ -58,7 +58,7 @@
 &lt;input type=&quot;search&quot; name=&quot;search&quot; id=&quot;searc-basic&quot; value=&quot;&quot; <strong>data-mini=&quot;true&quot;</strong> /&gt;
 </code></pre>
 
-				<p>This will produce a search input that a not as tall as the standard version and has a smaller text size.</p>
+				<p>This will produce a search input that is not as tall as the standard version and has a smaller text size.</p>
 		         <label for="search-mini">Search Input:</label>
 				 <input type="search" name="search" id="search-mini" value="" />
 
@@ -86,11 +86,12 @@
 	         <input type="search" name="search3" id="searchA" value="" data-theme="a" />
 			</div>
 
-		
+			<h2>Setting the clear button text</h2>
+			<p>The text for the button used to clear the search input of text can be configured for all search inputs by binding to the <code>mobileinit</code> event and setting the <code>$.mobile.textinput.prototype.options.clearSearchButtonText</code> property to a string of your choosing.</p>
 			
 			<h2>Calling the textinput plugin</h2>
 
-<p>This plugin will auto initialize on any page that contains a text input with the <code>type="search"</code> attribute, no need for a <code>data-role</code> attribute in the markup. However, if needed you can directly call the <code>textinput</code> plugin on a selector, just like any jQuery plugin:</p>
+<p>This plugin will auto-initialize on any page that contains a text input with the <code>type="search"</code> attribute without any need for a <code>data-role</code> attribute in the markup. However, if needed, you can directly call the <code>textinput</code> plugin on a selector, just like any jQuery plugin:</p>
 <pre><code>
 $('.mySearchInput').textinput();			
 </code></pre>
@@ -131,7 +132,7 @@ $('.mySearchInput').textinput();
 </div><!-- /content -->
 
 <div data-role="footer" class="footer-docs" data-theme="c">
-		<p>&copy; 2011 The jQuery Project</p>
+		<p>&copy; 2011-12 The jQuery Foundation</p>
 </div>
 	
 </div><!-- /page -->

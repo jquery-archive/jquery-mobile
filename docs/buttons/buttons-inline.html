@@ -1,5 +1,5 @@
 <!DOCTYPE html> 
-<html class="ui-mobile-rendering"> 
+<html>
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
@@ -24,7 +24,7 @@
 
 	<div data-role="content">
 		<div class="content-primary">
-		
+		<h2>Inline buttons</h2>
 		<p>By default, all buttons in the body content are styled as block-level element so they fill the width of the screen:</p>
 		
 		<a href="index.html" data-role="button">Button</a>
@@ -54,7 +54,18 @@
 
 		
 		<p>If you want buttons to sit side-by-side but stretch to fill the width of the screen, you can use the <a href="../content/content-grids.html">content column grids</a> to put normal full-width buttons into 2- or 3-columns.</p>	
+		
+		<h2>Icon example</h2>
+		<p>When an <a href="buttons-icons.html">icon</a> is added to an inline icon, the button will grow wider to accommodate the icon:<p>
 			
+			<a href="index.html" data-role="button" data-icon="delete" data-inline="true">Cancel</a>
+			<a href="index.html" data-role="button" data-icon="check" data-theme="b" data-inline="true">Save</a>
+			
+			<p>A mini version of the same:<p>
+				
+			<a href="index.html" data-role="button" data-icon="delete" data-inline="true" data-mini="true">Cancel</a>
+			<a href="index.html" data-role="button" data-icon="check" data-theme="b" data-inline="true" data-mini="true">Save</a>
+		
 		</div><!--/content-primary -->		
 
 		<div class="content-secondary">
@@ -79,7 +90,7 @@
 	</div><!-- /content -->
 
 	<div data-role="footer" class="footer-docs" data-theme="c">
-			<p>&copy; 2011 The jQuery Project</p>
+			<p>&copy; 2011-12 The jQuery Foundation</p>
 	</div>
 
 	</div><!-- /page -->

@@ -273,8 +273,8 @@
 				// simulate dragging more than a half
 				offset = handle.offset();
 				slider.trigger( createEvent( "mousedown", handle[ 0 ], offset.left + 10, offset.top + 10 ) );
-				slider.trigger( createEvent( "mousemove", handle[ 0 ], offset.left - ( width / 2 ), offset.top + 10 ) );
-				slider.trigger( createEvent( "mouseup", handle[ 0 ], offset.left - ( width / 2 ), offset.top + 10 ) );
+				slider.trigger( createEvent( "mousemove", handle[ 0 ], offset.left - ( width / 2 + 10 ), offset.top + 10 ) );
+				slider.trigger( createEvent( "mouseup", handle[ 0 ], offset.left - ( width / 2 + 10 ), offset.top + 10 ) );
 			},
 
 			function() {

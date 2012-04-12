@@ -23,8 +23,15 @@ pre { white-space: pre; white-space: pre-wrap; word-wrap: break-word; }
 #jqm-homeheader img { width: 235px; }
 img { max-width: 100%; }
 
+/* fluid images moved from jquery.mobile.core.css*/
+.ui-mobile img {
+	max-width: 100%;
+}
+
 .ui-header .jqm-home { top: 0; }
 nav { margin: 0; }
+
+
 
 p.intro {
 	font-size: .96em;
@@ -43,7 +50,6 @@ p.intro strong {
 	padding: 5px 0;
 }
 .footer-docs p {
-	float: left;
 	margin-left:15px;
 	font-weight: normal;
 	font-size: .9em;
@@ -118,15 +124,20 @@ dd h4 { margin:15px 0 0 0; }
 	font-size:80%; 
 }
 
+/* custom dialog for the photos sharing */
+.ui-dialog.dialog-actionsheet .ui-dialog-contain {
+	margin-top: 0;
+}
+
+
 
 /* F bar theme - just for the docs overview headers */
 .ui-bar-f {
-	border-top: 1px solid 	#56A00E;
-	border-bottom: 1px solid #56A00E;
+	border: 1px solid #56A00E;
 	background: 			#74b042;
 	color: 					#fff;
 	font-weight: bold;
-	text-shadow: 0 -1px 1px #234403;	
+	text-shadow: 0 1px 1px #335413;	
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#74b042), to(#56A00E)); /* Saf4+, Chrome */
 	background-image: -webkit-linear-gradient(#74b042, #56A00E); /* Chrome 10+, Saf5.1+ */
 	background-image:    -moz-linear-gradient(#74b042, #56A00E); /* FF3.6 */
@@ -155,7 +166,7 @@ dd h4 { margin:15px 0 0 0; }
 	background: 			#56A00E;
 	font-weight: bold;
 	color: 					#fff;
-	text-shadow: 0 -1px 1px #234403;
+	text-shadow: 0 1px 1px #234403;
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#74b042), to(#56A00E)); /* Saf4+, Chrome */
 	background-image: -webkit-linear-gradient(#74b042, #56A00E); /* Chrome 10+, Saf5.1+ */
 	background-image:    -moz-linear-gradient(#74b042, #56A00E); /* FF3.6 */
@@ -171,7 +182,7 @@ dd h4 { margin:15px 0 0 0; }
 	background: 			#6EBC1F;
 	font-weight: bold;
 	color: 					#fff;
-	text-shadow: 0 -1px 1px #234403;
+	text-shadow: 0 1px 1px #234403;
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#8FC963), to(#6EBC1F)); /* Saf4+, Chrome */
 	background-image: -webkit-linear-gradient(#8FC963, #6EBC1F); /* Chrome 10+, Saf5.1+ */
 	background-image:    -moz-linear-gradient(#8FC963, #6EBC1F); /* FF3.6 */
@@ -187,7 +198,7 @@ dd h4 { margin:15px 0 0 0; }
 	background: 			#3d3d3d;
 	font-weight: bold;
 	color: 					#fff;
-	text-shadow: 0 -1px 1px #234403;
+	text-shadow: 0 1px 1px #234403;
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#56A00E), to(#64A234)); /* Saf4+, Chrome */
 	background-image: -webkit-linear-gradient(#56A00E, #64A234); /* Chrome 10+, Saf5.1+ */
 	background-image:    -moz-linear-gradient(#56A00E, #64A234); /* FF3.6 */

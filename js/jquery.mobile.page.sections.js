@@ -1,6 +1,7 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Theming and layout of headers, footers, and content areas
 //>>label: Page Sections
+//>>group: Core
 
 define( [ "jquery", "./jquery.mobile.page", "./jquery.mobile.core", "./jquery.mobile.buttonMarkup" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
@@ -46,20 +47,22 @@ $( document ).delegate( ":jqmData(role='page'), :jqmData(role='dialog')", "pagec
 				// Add ARIA role
 				.attr( "role", role === "header" ? "banner" : "contentinfo" );
 
-			// Right,left buttons
-			$headeranchors	= $this.children( "a" );
-			leftbtn	= $headeranchors.hasClass( "ui-btn-left" );
-			rightbtn = $headeranchors.hasClass( "ui-btn-right" );
+			if( role === "header") {
+				// Right,left buttons
+				$headeranchors	= $this.children( "a" );
+				leftbtn	= $headeranchors.hasClass( "ui-btn-left" );
+				rightbtn = $headeranchors.hasClass( "ui-btn-right" );
 
-			leftbtn = leftbtn || $headeranchors.eq( 0 ).not( ".ui-btn-right" ).addClass( "ui-btn-left" ).length;
+				leftbtn = leftbtn || $headeranchors.eq( 0 ).not( ".ui-btn-right" ).addClass( "ui-btn-left" ).length;
 
-			rightbtn = rightbtn || $headeranchors.eq( 1 ).addClass( "ui-btn-right" ).length;
+				rightbtn = rightbtn || $headeranchors.eq( 1 ).addClass( "ui-btn-right" ).length;
+			}
 
 			// Auto-add back btn on pages beyond first view
 			if ( o.addBackBtn &&
 				role === "header" &&
 				$( ".ui-page" ).length > 1 &&
-				$this.jqmData( "url" ) !== $.mobile.path.stripHash( location.hash ) &&
+				$page.jqmData( "url" ) !== $.mobile.path.stripHash( location.hash ) &&
 				!leftbtn ) {
 
 				backBtn = $( "<a href='#' class='ui-btn-left' data-"+ $.mobile.ns +"rel='back' data-"+ $.mobile.ns +"icon='arrow-l'>"+ o.backBtnText +"</a>" )
@@ -73,7 +76,6 @@ $( document ).delegate( ":jqmData(role='page'), :jqmData(role='dialog')", "pagec
 				.addClass( "ui-title" )
 				// Regardless of h element number in src, it becomes h1 for the enhanced page
 				.attr({
-					"tabindex": "0",
 					"role": "heading",
 					"aria-level": "1"
 				});

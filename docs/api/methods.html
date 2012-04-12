@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="ui-mobile-rendering">
+<html>
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -162,22 +162,22 @@ $.mobile.loadPage( "searchresults.php", {
 
 
 			<dt><code>$.fn.jqmEnhanceable()</code> (<em>method</em>)</dt>
-			<dd>For users wishing to respect <code>data-enhance=false</code> parent elements during manual enhancement or custom plugin authoring jQuery Mobile provdes the <code>$.fn.jqmEnhanceable</code> filter method.</dd>
+			<dd>For users that wish to respect <code>data-enhance=false</code> parent elements during manual enhancement or custom plugin authoring jQuery Mobile provides the <code>$.fn.jqmEnhanceable</code> filter method.</dd>
 			<dd>
 				<dl>
 					<dt><code>&#183;</code> Settings:</dt>
-					<dd>When <code>$.mobile.ignoreContentEnabled</code> is set to true, this method will traverse the parent nodes for each DOM element in the jQuery object and where it finds a <code>data-enhance=false</code> parent the child will be removed from the set.</dd>
+					<dd>If, and only if, <code>$.mobile.ignoreContentEnabled</code> is set to true, this method will traverse the parent nodes for each DOM element in the jQuery object and where it finds a <code>data-enhance=false</code> parent the child will be removed from the set.</dd>
 					<dt><code>&#183;</code> Warning:</dt>
 					<dd>The operation of traversing all parent elements can be expensive for even small jQuery object sets.</dd>
 				</dl>
 			</dd>
 
 			<dt><code>$.fn.jqmHijackable()</code> (<em>method</em>)</dt>
-			<dd>For users wishing to respect <code>data-ajax=false</code> parent elements during custom form and link binding jQuery Mobile provdes the <code>$.fn.jqmHijackable</code> filter method.</dd>
+			<dd>For users that wish to respect <code>data-ajax=false</code> parent elements during custom form and link binding jQuery Mobile provides the <code>$.fn.jqmHijackable</code> filter method.</dd>
 			<dd>
 				<dl>
 					<dt><code>&#183;</code> Settings:</dt>
-					<dd>When <code>$.mobile.ignoreContentEnabled</code> is set to true, this method will traverse the parent nodes for each DOM element in the jQuery object and where it finds a <code>data-ajax=false</code> parent the child form or link will be removed from the set.</dd>
+					<dd>If, and only if, <code>$.mobile.ignoreContentEnabled</code> is set to true, this method will traverse the parent nodes for each DOM element in the jQuery object and where it finds a <code>data-ajax=false</code> parent the child form or link will be removed from the set.</dd>
 					<dt><code>&#183;</code> Warning:</dt>
 					<dd>The operation of traversing all parent elements can be expensive for even small jQuery object sets.</dd>
 				</dl>
@@ -588,7 +588,7 @@ $.mobile.silentScroll(100);
 </div><!-- /content -->
 
 <div data-role="footer" class="footer-docs" data-theme="c">
-		<p>&copy; 2011 The jQuery Project</p>
+		<p>&copy; 2011-12 The jQuery Foundation</p>
 </div>
 
 </div><!-- /page -->

@@ -9,15 +9,15 @@
 		var select = $( "#native-select-choice-few" ), setAndCheck;
 
 		setAndCheck = function(key){
-      var text;
+			var text;
 
-		  select.val( key ).selectmenu( 'refresh' );
-		  text = select.find( "option[value='" + key + "']" ).text();
-		  same( select.parent().find(".ui-btn-text").text(), text );
+			select.val( key ).selectmenu( 'refresh' );
+			text = select.find( "option[value='" + key + "']" ).text();
+			same( select.parent().find(".ui-btn-text").text(), text );
 		};
 
-    setAndCheck( 'rush' );
-    setAndCheck( 'standard' );
+		setAndCheck( 'rush' );
+		setAndCheck( 'standard' );
 	});
 
 	asyncTest( "selecting a value removes the related buttons down state", function(){
@@ -46,16 +46,16 @@
 	});
 
 	// issue https://github.com/jquery/jquery-mobile/issues/2410
-	test( "adding options and refreshing a native select defaults the text", function() {
-		var select = $( "#native-refresh" ),
-      button = select.siblings( '.ui-btn-inner' ),
-      text = "foo";
+	test( "adding options and refreshing a custom select defaults the text", function() {
+		var select = $( "#custom-refresh" ),
+			button = select.siblings( "a" ).find( ".ui-btn-inner" ),
+			text = "foo";
 
-    same(button.text(), "default");
-    select.find( "option" ).remove(); //remove the loading message
-    select.append('<option value="1">' + text + '</option>');
-    select.selectmenu('refresh');
-		same(button.text(), text);
+		same($.trim(button.text()), "default");
+		select.find( "option" ).remove(); //remove the loading message
+		select.append('<option value="1">' + text + '</option>');
+		select.selectmenu( 'refresh' );
+		same($.trim(button.text()), text);
 	});
 
 	// issue 2424
@@ -65,13 +65,12 @@
 		$( "#native-refresh" ).selectmenu( 'close' );
 		ok( true );
 	});
-	
 
 	asyncTest( "The preventFocusZoom option is working as expected", function() {
 
 		var zoomoptiondefault = $.mobile.selectmenu.prototype.options.preventFocusZoom;
 		$.mobile.selectmenu.prototype.options.preventFocusZoom = true;
-		
+
 		$(document)
 			.one("vmousedown.test", function(){
 				ok( $.mobile.zoom.enabled === false, "zoom is disabled on vmousedown" );
@@ -83,24 +82,24 @@
 				$( "#select-choice-native" ).selectmenu( "option", "preventFocusZoom", zoomoptiondefault )
 				start();
 		});
-		
+
 		$( "#select-choice-native" )
 			.selectmenu( "option", "preventFocusZoom", true )
 			.parent()
 			.trigger( "vmousedown" )
 			.trigger( "mouseup" );
-			
-			
-		
-			
+
+
+
+
 	});
-	
+
 	asyncTest( "The preventFocusZoom option does not manipulate zoom when it is false", function() {
 
 		var zoomstate = $.mobile.zoom.enabled,
 			zoomoptiondefault = $.mobile.selectmenu.prototype.options.preventFocusZoom;
 
-		
+
 		$(document)
 			.one("vmousedown.test", function(){
 				ok( $.mobile.zoom.enabled === zoomstate, "zoom is unaffected on vmousedown" );
@@ -108,21 +107,16 @@
 			.one("mouseup.test", function(){
 				ok( $.mobile.zoom.enabled === zoomstate, "zoom is unaffected on mouseup" );
 				$(document).unbind(".test");
-				$( "#select-choice-native" ).selectmenu( "option", "preventFocusZoom", zoomoptiondefault )
+				$( "#select-choice-native" ).selectmenu( "option", "preventFocusZoom", zoomoptiondefault );
 				start();
-				
+
 		});
-		
+
 		$( "#select-choice-native" )
 			.selectmenu( "option", "preventFocusZoom", false )
 			.parent()
 			.trigger( "vmousedown" )
 			.trigger( "mouseup" );
-		
-	});
-	
-	
 
-	
-	
+	});
 })(jQuery);

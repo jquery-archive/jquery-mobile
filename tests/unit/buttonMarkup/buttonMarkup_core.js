@@ -62,4 +62,39 @@
 		ok( $mini.is('.ui-mini'), "Original element has data attribute, enhanced version recieves .ui-mini." );
 		ok( $minicontrol.is('.ui-mini'), "Controlgroup has data attribute and recieves .ui-mini.");
 	});
+	
+	test( "Ensure icon positioning defaults to left, and can be overridden with “data-iconpos”", function() {
+		var posdefault = $("#iconpos1"),
+		    posleft = $("#iconpos2"),
+			posright = $("#iconpos3");
+
+		ok( posdefault.hasClass("ui-btn-icon-left"), "Button with unspecified icon position gets .ui-btn-icon-left" );
+		ok( posleft.hasClass("ui-btn-icon-left"), "Button with left icon positioning specified .ui-btn-icon-left" );
+		ok( posright.hasClass("ui-btn-icon-right"), "Button with right icon positioning specified .ui-btn-icon-right" );
+
+	});
+
+	asyncTest( "ui-btn-* should be applied based on a setting", function() {
+		// force touch support so the timeout is set
+		$.support.touch = true;
+
+		var $btn = $( "#hover-delay" );
+
+		$.testHelper.sequence([
+			function() {
+				$btn.trigger( "vmousedown" );
+			},
+
+			function() {
+				ok( $btn.attr("class").indexOf( "ui-btn-down" ) == -1, "button doesn't have the down class yet" );
+			},
+
+			function() {
+				ok( $btn.attr("class").indexOf( "ui-btn-down" ) >= 0, "button has the down class yet" );
+				start();
+			}
+			// the value is split and some padding is added to make sure that the last check fires
+			// after the hoverDelay has expired
+		], $.mobile.buttonMarkup.hoverDelay / 2 + 50 );
+	});
 })(jQuery);

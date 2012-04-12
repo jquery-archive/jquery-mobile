@@ -1,6 +1,7 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Hashchange event
+//>>description: Hashchange event management for AJAX navigation system
 //>>label: Hashchange
+//>>group: Navigation
 //>>excludeEnd("jqmBuildExclude");
 
 

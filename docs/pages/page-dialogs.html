@@ -1,5 +1,5 @@
 <!DOCTYPE html> 
-<html class="ui-mobile-rendering"> 
+<html>
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
@@ -69,7 +69,7 @@
 				<a href="dialog-overlay.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">Custom overlay swatch</a>
 		
 		
-			<p>Dialogs can also be used more like a control sheet to offer multiple buttons by removing the header:</p>
+			<p>Dialogs can also be used more like a control sheet to offer multiple buttons if you simply remove the top margin from the dialog's inner container element. For example, if your dialog page had a class of <code>my-dialog</code>, you could add this CSS to pin that dialog to the top: <code>.ui-dialog.my-dialog .ui-dialog-contain { margin-top: 0 }</code>, or you could just apply that style to all dialogs with <code>.ui-dialog .ui-dialog-contain { margin-top: 0 }</code>.</p>
 						<a href="dialog-buttons.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="slidedown">Share photos...</a>
 			
 			<h2>Dialog width and margins</h2>
@@ -104,7 +104,7 @@
 								<li><a href="multipage-template.html" data-ajax="false">Multi-page template</a></li>
 								<li><a href="page-titles.html">Page titles</a></li>
 								<li><a href="page-links.html">Linking pages</a></li>
-								<li><a href="page-transitions.html" data-ajax="false">Page transitions</a></li>
+								<li><a href="page-transitions.html">Page transitions</a></li>
 								<li data-theme="a"><a href="page-dialogs.html">Dialogs</a></li>
 								<li><a href="popup/index.html">Popups</a></li>
 								<li><a href="page-cache.html">Prefetching &amp; caching pages</a></li>
@@ -121,7 +121,7 @@
 </div><!-- /content -->
 
 <div data-role="footer" class="footer-docs" data-theme="c">
-		<p>&copy; 2011 The jQuery Project</p>
+		<p>&copy; 2011-12 The jQuery Foundation</p>
 </div>
 
 </div><!-- /page -->

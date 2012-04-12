@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="ui-mobile-rendering">
+<html>
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -49,14 +49,43 @@
 &lt;/select&gt; 
 </code></pre>	
 
-			<p>This will produce a basic flip toggle switch input. The default styles set the width of the switch to 100% of the parent container and stacks the label on a separate line.</p>
+			<p>This will produce a basic flip toggle switch input. The default styles set the width of the switch to 100% of the parent container and stack the label on a separate line.</p>
 
 			<label for="flip-a">Flip switch:</label>
 			<select name="slider" id="flip-a" data-role="slider">
 				<option value="off">Off</option>
 				<option value="on">On</option>
 			</select> 
-
+			
+			
+			<h2>Longer Labels</h2>
+			<p>The control is proportionally scaled, so to use longer labels one can just add a line of CSS setting the switch to the desired width. For example, given the following markup:</p>
+<pre><code>
+&lt;div class="containing-element"&gt;
+	&lt;label for="flip-min">Flip switch:&lt;/label&gt;
+	&lt;select name="slider" id="flip-min" data-role="slider"&gt;
+		&lt;option value="off">Switch Off&lt;/option&gt;
+		&lt;option value="on">Switch On&lt;/option&gt;
+	&lt;/select&gt;
+&lt;/div&gt;
+</code></pre>
+	
+			<p><code>.containing-element .ui-slider-switch { width: 9em }</code> will produce:</p>
+		
+			<style type="text/css" media="screen">
+			.containing-element .ui-slider-switch { width: 9em; }
+			</style>
+			
+			<div class="containing-element">
+				<label for="flip-min">Flip switch:</label>
+				<select name="slider" id="flip-min" data-role="slider">
+					<option value="off">Switch Off</option>
+					<option value="on">Switch On</option>
+				</select> 
+			</div>
+			
+			<p>As some default styles hinge on fieldcontains, note that you may have to ensure that custom styles apply to switches within fieldcontains by using <code>.ui-field-contain div.ui-slider-switch { width: […]; }</code>.</p>
+			
 			<h2>Mini version</h2>
 
 			<p>For a more compact version that is useful in toolbars and tight spaces, add the <code>data-mini="true"</code> attribute to the element to create a <a href="../forms-all-mini.html">mini version</a>. </p>
@@ -69,12 +98,13 @@
 &lt;/select&gt;
 </code></pre>
 			
-			<p>This will produce a flip switch that a not as tall as the standard version and has a smaller text size.</p>
+			<p>This will produce a flip switch that is not as tall as the standard version and has a smaller text size.</p>
 			<label for="flip-min">Flip switch:</label>
 			<select name="slider" id="flip-min" data-role="slider" data-mini="true">
 				<option value="off">Off</option>
 				<option value="on">On</option>
-			</select> 
+			</select>
+			
 
 			<h2>Field containers</h2>
 			 <p>Optionally wrap the switch markup in a container with the <code>data-role="fieldcontain"</code> attribute to help visually group it in a longer form.</p>
@@ -100,7 +130,7 @@
 				
 		<h2>Theming the flip switch</h2>	
 		
-		<p>Like all form elements, this widget will automatically inherit the theme from it's parent container. TO choose a specific theme color swatch, specify the <code>data-theme</code> attribute on the select and specify a swatch letter.</p>	
+		<p>Like all form elements, this widget will automatically inherit the theme from its parent container. To choose a specific theme color swatch, specify the <code>data-theme</code> attribute on the select and specify a swatch letter.</p>	
 		
 <pre><code>	
 &lt;div data-role=&quot;fieldcontain&quot;&gt;
@@ -131,7 +161,7 @@
 		
 		<h2>Calling the switch plugin</h2>
 
-<p>This plugin will auto initialize on any page that contains a <code>select</code> with the <code>data-role="slider"</code> attribute. However, if needed you can directly call the <code>slider</code> plugin on any selector, just like any jQuery plugin:</p>
+<p>This plugin will auto-initialize on any page that contains a <code>select</code> with the <code>data-role="slider"</code> attribute. However, if needed you can directly call the <code>slider</code> plugin on any selector, just like any jQuery plugin:</p>
 <pre><code>
 $('select').slider();			
 </code></pre>
@@ -170,7 +200,7 @@ $('select').slider();
 </div><!-- /content -->
 
 <div data-role="footer" class="footer-docs" data-theme="c">
-		<p>&copy; 2011 The jQuery Project</p>
+		<p>&copy; 2011-12 The jQuery Foundation</p>
 </div>
 	
 </div><!-- /page -->

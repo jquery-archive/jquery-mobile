@@ -332,5 +332,32 @@
   </div>
 </div>
 
+
+<div id="list-inset-filter-prototype" data-nstest-theme="b">
+	<ul data-nstest-role="listview" data-nstest-filter="true">
+		<li>foo</li>
+		<li>bar</li>
+	</ul>
+</div>
+
+<div id="list-inset-filter-data-attr" data-nstest-theme="b">
+	<ul data-nstest-role="listview" data-nstest-filter="true" data-nstest-inset="true">
+		<li>foo</li>
+		<li>bar</li>
+	</ul>
+</div>
+
+
+<div data-nstest-role="page" id="split-list-icon">
+	<div data-nstest-role="content">
+		<ul data-nstest-role="listview" data-nstest-split-icon="delete">
+			<li data-nstest-icon="star"><a href="#">Star</a><a href="#">Star</a></li>
+			<li data-nstest-icon="plug"><a href="#">Plus</a><a href="#">Plus</a></li>
+			<li><a href="#">Default</a><a href="#">Default</a></li>
+      <!-- respect the child element icon -->
+			<li data-nstest-icon="star"><a href="#">Default</a><a data-nstest-icon="plug" href="#">Default</a></li>
+		</ul>
+	</div>
+</div>
 </body>
 </html>

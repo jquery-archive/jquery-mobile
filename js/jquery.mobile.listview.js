@@ -1,6 +1,8 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Adds a filtering textfield to listviews
-//>>label: Listview Filter
+//>>description: Applies listview styling of various types (standard, numbered, split button, etc.)
+//>>label: Listview
+//>>group: Widgets
+//>>css: ../css/themes/default/jquery.mobile.theme.css, ../css/structure/jquery.mobile.listview.css
 
 define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.buttonMarkup", "./jquery.mobile.page", "./jquery.mobile.page.sections" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
@@ -12,6 +14,7 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.buttonMarkup", ".
 var listCountPerPage = {};
 
 $.widget( "mobile.listview", $.mobile.widget, {
+
 	options: {
 		theme: null,
 		countTheme: "c",
@@ -19,16 +22,21 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		dividerTheme: "b",
 		splitIcon: "arrow-r",
 		splitTheme: "b",
+		mini: false,
 		inset: false,
 		initSelector: ":jqmData(role='listview')"
 	},
 
 	_create: function() {
-		var t = this;
-
+		var t = this,
+			listviewClasses = "";
+			
+		listviewClasses += t.options.inset ? " ui-listview-inset ui-corner-all ui-shadow " : "";
+		listviewClasses += t.element.jqmData( "mini" ) || t.options.mini === true ? " ui-mini" : "";
+		
 		// create listview markup
 		t.element.addClass(function( i, orig ) {
-			return orig + " ui-listview " + ( t.options.inset ? " ui-listview-inset ui-corner-all ui-shadow " : "" );
+			return orig + " ui-listview " + listviewClasses;
 		});
 
 		t.refresh( true );
@@ -158,12 +166,12 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			counter = $.support.cssPseudoElement || !$.nodeName( $list[ 0 ], "ol" ) ? 0 : 1,
 			itemClassDict = {},
 			item, itemClass, itemTheme,
-			a, last, splittheme, countParent, icon, imgParents, img;
+			a, last, splittheme, countParent, icon, imgParents, img, linkIcon;
 
 		if ( counter ) {
 			$list.find( ".ui-li-dec" ).remove();
 		}
-		
+
 		if ( !o.theme ) {
 			o.theme = $.mobile.getInheritedTheme( this.element, "c" );
 		}
@@ -200,6 +208,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 						last = a.last();
 						splittheme = listsplittheme || last.jqmData( "theme" ) || o.splitTheme;
+						linkIcon = last.jqmData("icon");
 
 						last.appendTo(item)
 							.attr( "title", last.getEncodedText() )
@@ -219,13 +228,14 @@ $.widget( "mobile.listview", $.mobile.widget, {
 										corners: true,
 										theme: splittheme,
 										iconpos: "notext",
-										icon: listspliticon || last.jqmData( "icon" ) || o.splitIcon
+										// link icon overrides list item icon overrides ul element overrides options
+										icon: linkIcon || icon || listspliticon || o.splitIcon
 									})
 								);
 					}
 				} else if ( item.jqmData( "role" ) === "list-divider" ) {
 
-					itemClass += " ui-li-divider ui-btn ui-bar-" + dividertheme;
+					itemClass += " ui-li-divider ui-bar-" + dividertheme;
 					item.attr( "role", "heading" );
 
 					//reset counter when a divider heading is encountered

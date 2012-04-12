@@ -1,5 +1,5 @@
 <!DOCTYPE html> 
-<html class="ui-mobile-rendering"> 
+<html>
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
@@ -38,13 +38,13 @@
 			
 			<p>If the Ajax request fails, the framework will display a small error message overlay (styled in the "e" swatch) that disappears after a brief time so this doesn't break the navigation flow. View an <a href="notapage.html">example of the error message</a>.</p>
 			
-			<p><strong>Note:</strong> that you cannot link <strong>to</strong> multipage document with Ajax navigation active because the framework will only load the first page it finds, not the full set of internal pages. In these cases, you must link without Ajax (see next section) for a full page refresh to prevent potential hash collisions. There is currently a <a href="https://github.com/ToddThomson/jQuery-Mobile-Subpage-Widget" rel="external">subpage plugin</a> that makes it possible to load in multi-page documents.</p>
+			<p><strong>Note:</strong> You cannot link <strong>to</strong> a multipage document with Ajax navigation active because the framework will only load the first page it finds, not the full set of internal pages. In these cases, you must link without Ajax (see next section) for a full page refresh to prevent potential hash collisions. There is currently a <a href="https://github.com/ToddThomson/jQuery-Mobile-Subpage-Widget" rel="external">subpage plugin</a> that makes it possible to load in multi-page documents.</p>
 
 
 <h2>Linking without Ajax</h2>
 		
 		<p>Links that point to other domains or that have <code>rel="external"</code>, <code>data-ajax="false"</code> or <code>target</code> attributes will not be loaded with Ajax. Instead, these links will cause a full page refresh with no animated transition. Both attributes (<code>rel="external"</code> and <code>data-ajax="false"</code>) have the same effect, but a different semantic meaning: <code>rel="external"</code> should be used when linking to another site or domain, while <code>data-ajax="false"</code> is useful for simply opting a page within your domain from being loaded via Ajax. Because of security restrictions, the framework always opts links to external domains out of the Ajax behavior.</p>
-		
+		<p>In version 1.1, we've added support for using <code>data-ajax="false"</code> on a parent container which allows you to excluded a large number of links from the Ajax navigation system. This avoids the need to add this attribute to every link in a container.</p>
 		<p>Note: When building a jQuery Mobile application where the Ajax navigation system is disabled globally or frequently disabled on individual links, we  recommend disabling the <code>$.mobile.pushStateEnabled</code> global <a href="../api/globalconfig.html">configuration option</a> to avoid inconsistent navigation behavior in some browsers.</p>
 		
 
@@ -122,7 +122,7 @@
 								<li><a href="multipage-template.html" data-ajax="false">Multi-page template</a></li>
 								<li><a href="page-titles.html">Page titles</a></li>
 								<li data-theme="a"><a href="page-links.html">Linking pages</a></li>
-								<li><a href="page-transitions.html" data-ajax="false">Page transitions</a></li>
+								<li><a href="page-transitions.html">Page transitions</a></li>
 								<li><a href="page-dialogs.html">Dialogs</a></li>
 								<li><a href="popup/index.html">Popups</a></li>
 								<li><a href="page-cache.html">Prefetching &amp; caching pages</a></li>
@@ -139,7 +139,7 @@
 			</div><!-- /content -->
 
 			<div data-role="footer" class="footer-docs" data-theme="c">
-					<p>&copy; 2011 The jQuery Project</p>
+					<p>&copy; 2011-12 The jQuery Foundation</p>
 			</div>
 
 			</div><!-- /page -->

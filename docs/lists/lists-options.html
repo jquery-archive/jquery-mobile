@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Docs - Lists Overview</title>
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+
+	<script src="../../js/jquery.js"></script>
+	<script src="../../docs/_assets/js/jqm-docs.js"></script>
+	<script src="../../js/"></script>
+
+</head>
+<body>
+
+	<div data-role="page" class="type-interior">
+
+	<div data-role="header" data-theme="f">
+		<h1>Lists</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+	<div class="content-primary">
+		<h2>List views</h2>
+
+		<ul data-role="controlgroup" data-type="horizontal" class="localnav">
+			<li><a href="docs-lists.html" data-role="button" data-transition="fade">Basics</a></li>
+			<li><a href="lists-options.html" data-role="button" data-transition="fade" class="ui-btn-active">Options</a></li>
+			<li><a href="lists-methods.html" data-role="button" data-transition="fade">Methods</a></li>
+			<li><a href="lists-events.html" data-role="button" data-transition="fade">Events</a></li>
+		</ul>
+
+		<p>The listview plugin has the following options:</p>
+
+		<dl>
+			<dt><code>countTheme</code> <em>string</em></dt>
+			<dd>
+				<p class="default">default: "c"</p>
+				<p>Sets the color scheme (swatch) for list item <a href="lists-count.html">count bubbles</a>. It accepts a single letter from a-z that maps to the swatches included in your theme. To set the value for all instances of this widget, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
+<pre><code>$( document ).bind( "mobileinit", function(){
+    <strong>$.mobile.listview.prototype.options.countTheme = "a";</strong>
+});
+</code></pre>
+				<p>This option is also exposed as a data attribute: <code>data-count-theme=&quot;a&quot;</code>.</p>
+			</dd>
+
+			<dt><code>dividerTheme</code> <em>string</em></dt>
+			<dd>
+				<p class="default">default: "b"</p>
+				<p>Sets the color scheme (swatch) for list <a href="lists-divider.html">dividers</a>. It accepts a single letter from a-z that maps to the swatches included in your theme. To set the value for all instances of this widget, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
+<pre><code>$( document ).bind( "mobileinit", function(){
+    <strong>$.mobile.listview.prototype.options.dividerTheme = "a";</strong>
+});
+</code></pre>
+				<p>This option is also exposed as a data attribute: <code>data-dividertheme=&quot;a&quot;</code>.</p>
+			</dd>
+
+			<dt><code>filter</code> <em>boolean</em></dt>
+			<dd>
+				<p class="default">default: false</p>
+				<p>Adds a <a href="lists-search.html">search filter bar</a> to listviews. To set the value for all instances of this widget, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
+<pre><code>$( document ).bind( "mobileinit", function(){
+    <strong>$.mobile.listview.prototype.options.filter = true;</strong>
+});
+</code></pre>
+				<p>This option is also exposed as a data attribute: <code>data-filter=&quot;true&quot;</code>.</p>
+			</dd>
+
+			<dt><code>filterCallback</code> <em>function</em></dt>
+			<dd>
+				<p>The function to determine which rows to hide when the <a href="lists-search.html">search filter</a> textbox changes. The function accepts two arguments -- the text of the list item (or <code>data-filtertext</code> value if present), and the search string. Return <code>true</code> to hide the item, <code>false</code> to leave it visible. To set the value for all instances of this widget, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
+<pre><code>$( document ).bind( "mobileinit", function(){
+    <strong>$.mobile.listview.prototype.options.filterCallback = function( text, searchValue ) {
+        // only show items that *begin* with the search string
+        return text.toLowerCase().substring( 0, searchValue.length ) !== searchValue;
+    };</strong>
+});
+</code></pre>
+			</dd>
+
+			<dt><code>filterPlaceholder</code> <em>string</em></dt>
+			<dd>
+				<p class="default">default: "Filter items..."</p>
+				<p>The placeholder text used in <a href="lists-search.html">search filter bars</a>. To set the value for all instances of this widget, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
+<pre><code>$( document ).bind( "mobileinit", function(){
+    <strong>$.mobile.listview.prototype.options.filterPlaceholder = "Search...";</strong>
+});
+</code></pre>
+				<p>This option is also exposed as a data attribute: <code>data-filter-placeholder=&quot;Search...&quot;</code>.</p>
+			</dd>
+
+			<dt><code>filterTheme</code> <em>string</em></dt>
+			<dd>
+				<p class="default">default: "c"</p>
+				<p>Sets the color scheme (swatch) for the <a href="lists-search.html">search filter bar</a>. It accepts a single letter from a-z that maps to the swatches included in your theme. To set the value for all instances of this widget, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
+<pre><code>$( document ).bind( "mobileinit", function(){
+    <strong>$.mobile.listview.prototype.options.filterTheme = "a";</strong>
+});
+</code></pre>
+				<p>This option is also exposed as a data attribute: <code>data-filter-theme=&quot;a&quot;</code>.</p>
+			</dd>
+
+			<dt><code>headerTheme</code> <em>string</em></dt>
+			<dd>
+				<p class="default">default: "b"</p>
+				<p>Sets the color scheme (swatch) for headers of <a href="lists-nested.html">nested list</a> sub pages. It accepts a single letter from a-z that maps to the swatches included in your theme. To set the value for all instances of this widget, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
+<pre><code>$( document ).bind( "mobileinit", function(){
+    <strong>$.mobile.listview.prototype.options.headerTheme = "a";</strong>
+});
+</code></pre>
+				<p>This option is also exposed as a data attribute: <code>data-header-theme=&quot;a&quot;</code>.</p>
+			</dd>
+
+			<dt><code>initSelector</code> <em>CSS selector string</em></dt>
+			<dd>
+				<p class="default">default: ":jqmData(role='listview')"</p>
+				<p>This is used to define the selectors (element types, data roles, etc.) that will automatically be initialized as list views. To change which elements are initialized, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
+<pre><code>$( document ).bind( "mobileinit", function(){
+    <strong>$.mobile.listview.prototype.options.initSelector = ".mylistview";</strong>
+});
+</code></pre>
+			</dd>
+
+			<dt><code>inset</code> <em>boolean</em></dt>
+			<dd>
+				<p class="default">default: false</p>
+				<p>Adds <a href="lists-inset.html">inset list</a> styles. To set the value for all instances of this widget, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
+<pre><code>$( document ).bind( "mobileinit", function(){
+    <strong>$.mobile.listview.prototype.options.inset = true;</strong>
+});
+</code></pre>
+				<p>This option is also exposed as a data attribute: <code>data-inset=&quot;true&quot;</code>.</p>
+			</dd>
+
+			<dt><code>splitIcon</code> <em>string</em></dt>
+			<dd>
+				<p class="default">default: "arrow-r"</p>
+				<p>Applies an icon from the <a href="../buttons/buttons-icons.html">icon set</a> to all <a href="lists-split.html">split list buttons</a>. To set the value for all instances of this widget, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
+<pre><code>$( document ).bind( "mobileinit", function(){
+    <strong>$.mobile.listview.prototype.options.splitIcon = "a";</strong>
+});
+</code></pre>
+				<p>This option is also exposed as a data attribute: <code>data-split-icon=&quot;a&quot;</code>.</p>
+			</dd>
+
+			<dt><code>splitTheme</code> <em>string</em></dt>
+			<dd>
+				<p class="default">default: "b"</p>
+				<p>Sets the color scheme (swatch) for <a href="lists-split.html">split list buttons</a>. It accepts a single letter from a-z that maps to the swatches included in your theme. To set the value for all instances of this widget, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
+<pre><code>$( document ).bind( "mobileinit", function(){
+    <strong>$.mobile.listview.prototype.options.splitTheme = "a";</strong>
+});
+</code></pre>
+				<p>This option is also exposed as a data attribute: <code>data-split-theme=&quot;a&quot;</code>.</p>
+			</dd>
+
+			<dt><code>theme</code> <em>string</em></dt>
+			<dd>
+				<p class="default">default: null, inherited from parent</p>
+				<p>Sets the color scheme (swatch) for this widget. It accepts a single letter from a-z that maps to the swatches included in your theme. By default, it will inherit the same swatch color as its parent container if not explicitly set. To set the value for all instances of this widget, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
+<pre><code>$( document ).bind( "mobileinit", function(){
+    <strong>$.mobile.listview.prototype.options.theme = "a";</strong>
+});
+</code></pre>
+				<p>This option is also exposed as a data attribute: <code>data-theme=&quot;a&quot;</code>.</p>
+			</dd>
+
+		</dl>	
+
+	</div><!--/content-primary -->
+
+	<div class="content-secondary">
+
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+
+				<h3>More in this section</h3>
+
+				<ul data-role="listview" data-theme="c" data-dividertheme="d">
+
+					<li data-role="list-divider">List views</li>
+					<li data-theme="a"><a href="docs-lists.html">List basics &amp; API</a></li>
+					<li><a href="lists-ul.html">Basic linked list</a></li>
+					<li><a href="lists-nested.html">Nested list</a></li>
+					<li><a href="lists-ol.html">Numbered list</a></li>
+
+					<li><a href="lists-split.html">Split button list</a></li>
+					<li><a href="lists-divider.html">List dividers</a></li>
+					<li><a href="lists-count.html">Count bubble</a></li>
+					<li><a href="lists-thumbnails.html">Thumbnails</a></li>
+					<li><a href="lists-icons.html">Icons</a></li>
+					<li><a href="lists-formatting.html">Content formatting</a></li>
+					<li><a href="lists-search.html">Search filter bar</a></li>
+					<li><a href="lists-search-inset.html">Inset search filter bar</a></li>
+					<li><a href="lists-search-with-dividers.html">Search filter bar with dividers</a></li>
+					<li><a href="lists-search-filtertext.html">Search filter hidden data</a></li>
+
+					<li><a href="lists-readonly.html">Read-only lists</a></li>
+					<li><a href="lists-readonly-inset.html">Read-only inset lists</a></li>
+					<li><a href="lists-forms.html">Lists with forms</a></li>
+					<li><a href="lists-forms-inset.html">Inset lists with forms</a></li>
+
+					<li><a href="lists-inset.html">Inset styled lists</a></li>
+					<li><a href="lists-performance.html">List performance test</a></li>
+					<li><a href="lists-themes.html">Theming lists</a></li>
+
+				</ul>
+		</div>
+	</div>
+
+	</div><!-- /content -->
+
+	<div data-role="footer" class="footer-docs" data-theme="c">
+			<p>&copy; 2011-12 The jQuery Foundation</p>
+	</div>
+
+	</div><!-- /page -->
+
+</body>
+</html>

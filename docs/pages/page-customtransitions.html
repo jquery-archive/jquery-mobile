@@ -1,5 +1,5 @@
 <!DOCTYPE html> 
-<html class="ui-mobile-rendering"> 
+<html>
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
@@ -30,49 +30,82 @@
 
 				<p>To create a custom CSS transition, select a class name that corresponds to the name of your transition, for example "slide", and then define your "in" and "out" CSS rules to take advantage of transitions or animation keyframes:</p>
 
-				<pre><code>.slide.in {
-			    -webkit-transform: translateX(0);
-			    -webkit-animation-name: slideinfromright;
-			}
+				<pre><code>
+		.slide.in {
+		 	-webkit-transform: translateX(0);
+			-moz-transform: translateX(0);
+			-webkit-animation-name: slideinfromright;
+			-moz-animation-name: slideinfromright;
+		}
+			
+		.slide.out {
+			-webkit-transform: translateX(-100%);
+			-moz-transform: translateX(-100%);
+			-webkit-animation-name: slideouttoleft;
+			-moz-animation-name: slideouttoleft;
+		}
 
-			.slide.out {
-			    -webkit-transform: translateX(-100%);
-			    -webkit-animation-name: slideouttoleft;
-			}
-
-			@-webkit-keyframes slideinfromright {
-			    from { -webkit-transform: translateX(100%); }
-			    to { -webkit-transform: translateX(0); }
-			}
-			@-webkit-keyframes slideouttoleft {
-			    from { -webkit-transform: translateX(0); }
-			    to { -webkit-transform: translateX(-100%); }
-			}
+		@-webkit-keyframes slideinfromright {
+			from { -webkit-transform: translateX(100%); }
+			to { -webkit-transform: translateX(0); }
+		}
+		
+		@-webkit-keyframes slideouttoleft {
+			from { -webkit-transform: translateX(0); }
+			to { -webkit-transform: translateX(-100%); }
+		}
+	
+		@-moz-keyframes slideinfromright {
+			from { -moz-transform: translateX(100%); }
+			to { -moz-transform: translateX(0); }
+		}
+		
+		@-moz-keyframes slideouttoleft {
+			from { -moz-transform: translateX(0); }
+			to { -moz-transform: translateX(-100%); }
+		}
+		
 				</code></pre>
 
 				<p>During a CSS-based page transition, jQuery Mobile will place the class name of the transition on both the "from" and "to" pages involved in the transition. It then places an "out" class on the "from" page, and "in" class on the "to" page. The presence of these classes on the "from" and "to" page elements then triggers the animation CSS rules defined above. As of jQuery Mobile version 1.1, animation class additions are queued, rather than simultaneous, producing an out-then-in sequence, which is friendlier for mobile rendering than our previous simultaneous transition sequence.</p>
 
 				<p>If your transition supports a reverse direction, you need to create CSS rules that use the <code>reverse</code> class in addition to the transition class name and the "in" and "out" classes:</p>
 
-				<pre><code>.slide.in.reverse {
-				    -webkit-transform: translateX(0);
-				    -webkit-animation-name: slideinfromleft;
-				}
+				<pre><code>
+		.slide.in.reverse {
+			-webkit-transform: translateX(0);
+			-moz-transform: translateX(0);
+			-webkit-animation-name: slideinfromleft;
+			-moz-animation-name: slideinfromleft;
+		}
 
-				.slide.out.reverse {
-				    -webkit-transform: translateX(100%);
-				    -webkit-animation-name: slideouttoright;
-				}
+		.slide.out.reverse {
+			-webkit-transform: translateX(100%);
+			-moz-transform: translateX(100%);
+			-webkit-animation-name: slideouttoright;
+			-moz-animation-name: slideouttoright;
+		}
 
-				@-webkit-keyframes slideinfromleft {
-				    from { -webkit-transform: translateX(-100%); }
-				    to { -webkit-transform: translateX(0); }
-				}
+		@-webkit-keyframes slideinfromleft {
+			from { -webkit-transform: translateX(-100%); }
+			to { -webkit-transform: translateX(0); }
+		}
 
-				@-webkit-keyframes slideouttoright {
-				    from { -webkit-transform: translateX(0); }
-				    to { -webkit-transform: translateX(100%); }
-				}
+		@-webkit-keyframes slideouttoright {
+			from { -webkit-transform: translateX(0); }
+			to { -webkit-transform: translateX(100%); }
+		}
+		
+		@-moz-keyframes slideinfromleft {
+			from { -moz-transform: translateX(-100%); }
+			to { -moz-transform: translateX(0); }
+		}
+
+		@-moz-keyframes slideouttoright {
+			from { -moz-transform: translateX(0); }
+			to { -moz-transform: translateX(100%); }
+		}
+		
 				</code></pre>
 
 				<p>After the CSS rules are in place, you simply specify the name of your transition within the @data-transition attribute of a navigation link:</p>
@@ -123,7 +156,8 @@ $.mobile.transitionHandlers[ "default" ];
 
 		<p>A transition handler is a function with the following call signature:</p>
 
-		<pre><code>function myTransitionHandler(name, reverse, $to, $from)
+		<pre><code>
+function myTransitionHandler(name, reverse, $to, $from)
 {
     var deferred = new $.Deferred();
 
@@ -143,7 +177,8 @@ $.mobile.transitionHandlers[ "default" ];
 
 		<p>Once you have created a transition handler function, you need to tell jQuery Mobile about it. To do this, simply add your handler to the <code>$.mobile.transitionHandlers</code> dictionary. Remember, the key used should be the name of your transition. This name is also the same name that will be used within the <code>@data-transition</code> attribute of any navigation links.</p>
 
-		<pre><code>// Define your transition handler:
+		<pre><code>
+// Define your transition handler:
 
 function myTransitionHandler(name, reverse, $to, $from)
 {

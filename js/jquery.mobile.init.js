@@ -1,6 +1,8 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Applies classes for grid styling.
-//>>label: CSS Grid Tool
+//>>description: Global initialization of the library.
+//>>label: Init
+//>>group: Core
+
 
 define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery.mobile.navigation",
 	"./jquery.mobile.navigation.pushstate", "../external/requirejs/depend!./jquery.mobile.hashchange[jquery]" ], function( $ ) {
@@ -26,27 +28,37 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 		$.mobile.ajaxEnabled = false;
 	}
 
-	// add mobile, initial load "rendering" classes to docEl
+	// Add mobile, initial load "rendering" classes to docEl
 	$html.addClass( "ui-mobile ui-mobile-rendering" );
+
+	// This is a fallback. If anything goes wrong (JS errors, etc), or events don't fire,
+	// this ensures the rendering class is removed after 5 seconds, so content is visible and accessible
+	setTimeout( hideRenderingClass, 5000 );
 
 	// loading div which appears during Ajax requests
 	// will not appear if $.mobile.loadingMessage is false
 	var loaderClass = "ui-loader",
 		$loader = $( "<div class='" + loaderClass + "'><span class='ui-icon ui-icon-loading'></span><h1></h1></div>" );
-	
+
 	// For non-fixed supportin browsers. Position at y center (if scrollTop supported), above the activeBtn (if defined), or just 100px from top
 	function fakeFixLoader(){
+		var activeBtn = $( "." + $.mobile.activeBtnClass ).first();
+
 		$loader
 			.css({
 				top: $.support.scrollTop && $window.scrollTop() + $window.height() / 2 ||
 				activeBtn.length && activeBtn.offset().top || 100
-			});		
+			});
 	}
-	
+
 	// check position of loader to see if it appears to be "fixed" to center
 	// if not, use abs positioning
 	function checkLoaderPosition(){
-		if( $loader.offset().top < $window.scrollTop() ){
+		var offset = $loader.offset(),
+			scrollTop = $window.scrollTop(),
+			screenHeight = $.mobile.getScreenHeight();
+
+		if( offset.top < scrollTop || (offset.top - scrollTop) > screenHeight ) {
 			$loader.addClass( "ui-loader-fakefix" );
 			fakeFixLoader();
 			$window
@@ -54,19 +66,22 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 				.bind( "scroll", fakeFixLoader );
 		}
 	}
-	
+
+	//remove initial build class (only present on first pageshow)
+	function hideRenderingClass(){
+		$html.removeClass( "ui-mobile-rendering" );
+	}
 
 	$.extend($.mobile, {
 		// turn on/off page loading message.
 		showPageLoadingMsg: function( theme, msgText, textonly ) {
 			$html.addClass( "ui-loading" );
-			
+
 			if ( $.mobile.loadingMessage ) {
-				var activeBtn = $( "." + $.mobile.activeBtnClass ).first(),
-					theme = theme || $.mobile.loadingMessageTheme,
-					// text visibility from argument takes priority
-					textVisible = textonly || $.mobile.loadingMessageTextVisible;
-					
+				// text visibility from argument takes priority
+				var textVisible = textonly || $.mobile.loadingMessageTextVisible;
+
+				theme = theme || $.mobile.loadingMessageTheme,
 
 				$loader
 					.attr( "class", loaderClass + " ui-corner-all ui-body-" + ( theme || "a" ) + " ui-loader-" + ( textVisible ? "verbose" : "default" ) + ( textonly ? " ui-loader-textonly" : "" ) )
@@ -74,7 +89,7 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 						.text( msgText || $.mobile.loadingMessage )
 						.end()
 					.appendTo( $.mobile.pageContainer );
-					
+
 				checkLoaderPosition();
 				$window.bind( "scroll", checkLoaderPosition );
 			}
@@ -82,18 +97,24 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 
 		hidePageLoadingMsg: function() {
 			$html.removeClass( "ui-loading" );
-			
+
 			if( $.mobile.loadingMessage ){
 				$loader.removeClass( "ui-loader-fakefix" );
 			}
-			
+
 			$( window ).unbind( "scroll", fakeFixLoader );
+			$( window ).unbind( "scroll", checkLoaderPosition );
 		},
 
 		// find and enhance the pages in the dom and transition to the first page.
 		initializePage: function() {
 			// find present pages
 			var $pages = $( ":jqmData(role='page'), :jqmData(role='dialog')" );
+
+			// if no pages are found, create one with body's inner html
+			if ( !$pages.length ) {
+				$pages = $( "body" ).wrapInner( "<div data-" + $.mobile.ns + "role='page'></div>" ).children( 0 );
+			}
 
 			// add dialogs, set data-url attrs
 			$pages.each(function() {
@@ -117,6 +138,9 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 
 			// cue page loading message
 			$.mobile.showPageLoadingMsg();
+
+			//remove initial build class (only present on first pageshow)
+			hideRenderingClass();
 
 			// if hashchange listening is disabled or there's no hash deeplink, change to the first page in the DOM
 			if ( !$.mobile.hashListeningEnabled || !$.mobile.path.stripHash( location.hash ) ) {

@@ -1,5 +1,5 @@
 <!DOCTYPE html> 
-<html class="ui-mobile-rendering"> 
+<html>
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
@@ -27,7 +27,7 @@
 	<h2>Simple navbar</h2>
 	
 	<p>jQuery Mobile has a very basic navbar widget that is useful for providing up to 5 buttons with optional icons in a bar, typically within a header or footer. There is also a <a href="footer-persist-a.html">persistent navbar</a> variation that works more like a tab bar that stays fixed as you navigate across pages.</p>
-	<p>A navbar is coded as an unordered list of links wrapped in a container element that has the <code> data-role="navbar"</code> attribute. To set one of links to the active (selected) state, add <code>class="ui-btn-active"</code> to the anchor. In this example, we have a two-button navbar in the footer with the "One" item set to active:</p>
+	<p>A navbar is coded as an unordered list of links wrapped in a container element that has the <code> data-role="navbar"</code> attribute. To set one of the links to the active (selected) state, add <code>class="ui-btn-active"</code> to the anchor. In this example, we have a two-button navbar in the footer with the "One" item set to active:</p>
 	
 <pre><code>
 <strong>&lt;div data-role=&quot;navbar&quot;&gt;</strong>
@@ -105,7 +105,7 @@
 			</ul>
 		</div><!-- /navbar -->
 	
-	<p>As a fallback, navbars with 1 item will simply render as 100%.</p>
+	<p>Navbars with 1 item will simply render as 100%.</p>
 	
 		<div data-role="navbar">
 			<ul>
@@ -241,7 +241,7 @@
 	<h2>Theming navbars</h2>
 	
 	<p>Navbars inherit the theme swatch from their parent container, just like buttons. If a navbar is placed in the header or footer toolbar, it will inherit the default toolbar swatch (A) for bars unless you set this in the markup. </p>
-	<p>Here are a few examples of navbars in various container swatches that automatically inheriting their parent's swatch letter. Note that in these examples, instead of using a <code>data-theme</code> attribute, we're manually adding the swatch classes to apply the body swatch (<code>ui-body-a</code>) and the class to add the standard body padding (ui-body), but the inheritance works the same way:</p>
+	<p>Here are a few examples of navbars in various container swatches that automatically inherit their parent's swatch letter. Note that in these examples, instead of using a <code>data-theme</code> attribute, we're manually adding the swatch classes to apply the body swatch (<code>ui-body-a</code>) and the class to add the standard body padding (ui-body), but the inheritance works the same way:</p>
 
 	<div class="ui-body-a ui-body">
 		<h3>Swatch A</h3>
@@ -269,7 +269,7 @@
 		</div><!-- /navbar -->
 	</div><!-- /container -->
 	
-<p>To set to the theme color for a navbar item, add the <code>data-theme</code> attribute to the individual links and specify a theme swatch. Note that applying a theme swatch to the navbar container is <em>not</em> supported.</p>
+<p>To set the theme color for a navbar item, add the <code>data-theme</code> attribute to the individual links and specify a theme swatch. Note that applying a theme swatch to the navbar container is <em>not</em> supported.</p>
 	<div data-role="footer">
 		<div data-role="navbar">
 			<ul>
@@ -309,7 +309,7 @@
 	</div><!-- /content -->
 
 	<div data-role="footer" class="footer-docs" data-theme="c">
-			<p>&copy; 2011 The jQuery Project</p>
+			<p>&copy; 2011-12 The jQuery Foundation</p>
 	</div>
 
 	</div><!-- /page -->

@@ -4,7 +4,8 @@
 
 // TODO split out into seperate test files
 (function($){
-	var home = $.mobile.path.parseUrl( location.href ).pathname + location.search;
+	var home = $.mobile.path.parseUrl( location.href ).pathname + location.search,
+		insetVal = $.mobile.listview.prototype.options.inset;
 
 	$.mobile.defaultTransition = "none";
 
@@ -19,6 +20,10 @@
 
 				$.mobile.changePage( home );
 			}
+		},
+
+		teardown: function() {
+			$.mobile.listview.prototype.options.inset = insetVal;
 		}
 	});
 
@@ -145,7 +150,8 @@
 	});
 
 	test( "nested list title should use first text node, regardless of line breaks", function(){
-		ok($('#nested-list-test .linebreaknode').text() === "More animals", 'Text should be "More animals"');
+		// NOTE this is a super fragile reference to the nested page, any change to the list will break it
+		ok($(":jqmData(url='nested-list-test&ui-page=0-0') .ui-title").text() === "More animals", 'Text should be "More animals"');
 	});
 
 	asyncTest( "Multiple nested lists on a page with same labels", function() {
@@ -783,6 +789,65 @@
 			function() {
 				var theme = $.mobile.activePage.jqmData('theme');
 				ok( $.mobile.activePage.find("ul > li").hasClass("ui-body-b"), "theme matches the parent");
+				window.history.back();
+			},
+
+			start
+		]);
+	});
+
+	asyncTest( "list filter is inset from prototype options value", function() {
+		$.mobile.listview.prototype.options.inset = true;
+		$("#list-inset-filter-prototype").page();
+
+		$.testHelper.pageSequence([
+			function() {
+				$.mobile.changePage("#list-inset-filter-prototype");
+			},
+
+			function( timedOut) {
+				ok( !timedOut );
+				same( $.mobile.activePage.find("form.ui-listview-filter-inset").length, 1, "form is inset");
+				window.history.back();
+			},
+
+			start
+		]);
+	});
+
+	asyncTest( "list filter is inset from data attr value", function() {
+		$.mobile.listview.prototype.options.inset = false;
+		$("#list-inset-filter-data-attr").page();
+
+		$.testHelper.pageSequence([
+			function() {
+				$.mobile.changePage("#list-inset-filter-data-attr");
+			},
+
+			function( timedOut) {
+				ok( !timedOut );
+				same( $.mobile.activePage.find("form.ui-listview-filter-inset").length, 1, "form is inset");
+				window.history.back();
+			},
+
+			start
+		]);
+	});
+
+	asyncTest( "split list items respect the icon", function() {
+		$.testHelper.pageSequence([
+			function() {
+				$.mobile.changePage("#split-list-icon");
+			},
+
+			function() {
+				$.mobile.activePage.find("li").each(function(i, elem){
+					var $elem = $(elem),
+						order = [ "star", "plug", "delete", "plug" ];
+
+					same( $elem.find("span.ui-icon-" + order[i]).length, 1, "there should be one " + order[i] + " icon" );
+				});
+
 				window.history.back();
 			},
 

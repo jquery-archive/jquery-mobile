@@ -1,5 +1,5 @@
 <!DOCTYPE html> 
-<html class="ui-mobile-rendering"> 
+<html>
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
@@ -30,19 +30,20 @@
 
 			<h2>Mobile page structure</h2> 
 
-			<p>A jQuery Mobile site must start with an HTML5 'doctype' to take full advantage of all of the framework's features. (Older devices with browsers that don't understand HTML5 will safely ignore the 'doctype' and various custom attributes.) In the 'head', references to jQuery, jQuery Mobile and the mobile theme CSS are all required to start things off. We recommend linking to the files hosted on the jQuery CDN for best performance:</p> 
+			<p>A jQuery Mobile site must start with an HTML5 'doctype' to take full advantage of all of the framework's features. (Older devices with browsers that don't understand HTML5 will safely ignore the 'doctype' and various custom attributes.) </p>
+			<p>In the 'head', references to jQuery, jQuery Mobile and the mobile theme CSS are all required to start things off. jQuery Mobile 1.1 works with both 1.6.4 and 1.7.1 versions of jQuery core. We recommend linking to the files hosted on the jQuery CDN for best performance: </p>
 
 <pre><code>
-&lt;!DOCTYPE html&gt; 
+<strong>&lt;!DOCTYPE html&gt; </strong>
 &lt;html&gt; 
 	&lt;head&gt; 
 	&lt;title&gt;Page Title&lt;/title&gt; 
 	
 	&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt; 
 
-	&lt;link rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css&quot; /&gt;
-	&lt;script src=&quot;http://code.jquery.com/jquery-1.6.4.min.js&quot;&gt;&lt;/script&gt;
-	&lt;script src=&quot;http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js&quot;&gt;&lt;/script&gt;
+	&lt;link rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/mobile/1.1.0-rc.2/jquery.mobile-1.1.0-rc.2.min.css&quot; /&gt;
+	&lt;script src=&quot;http://code.jquery.com/jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+	&lt;script src=&quot;http://code.jquery.com/mobile/1.1.0-rc.2/jquery.mobile-1.1.0-rc.2.min.js&quot;&gt;&lt;/script&gt;
 &lt;/head&gt; 
 
 &lt;body&gt; 
@@ -56,7 +57,7 @@
 			
 			<pre><code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt; </code></pre>
 			
-			<p>These settings do not disable the user's ability to zoom the pages, which is nice from an accessibility perspective. There is a minor issue in iOS that doesn't properly set the width when changing orientations with these viewport settings, but this will hopefully be fixed a a future release. You can set other viewport values to disable zooming if required since this is part of your page content, not the library. </p>
+			<p>These settings do not disable the user's ability to zoom the pages, which is nice from an accessibility perspective. There is a minor issue in iOS that doesn't properly set the width when changing orientations with these viewport settings, but this will hopefully be fixed in a future release. You can set other viewport values to disable zooming if required since this is part of your page content, not the library. </p>
 			
 			<h2>Inside the body: Pages</h2>
 			<p>Inside the <code>&lt;body&gt;</code> tag, each view or "page" on the mobile device is identified with an element (usually a <code>div</code>) with the <code> data-role="page"</code> attribute. View the <a href="../api/data-attributes.html">data- attribute reference</a> to see all the possible attributes you can add to pages.</p> 
@@ -92,9 +93,9 @@
 	
 	&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt; 
 
-	&lt;link rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css&quot; /&gt;
-	&lt;script src=&quot;http://code.jquery.com/jquery-1.6.4.min.js&quot;&gt;&lt;/script&gt;
-	&lt;script src=&quot;http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js&quot;&gt;&lt;/script&gt;
+	&lt;link rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/mobile/1.1.0-rc.2/jquery.mobile-1.1.0-rc.2.min.css&quot; /&gt;
+	&lt;script src=&quot;http://code.jquery.com/jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+	&lt;script src=&quot;http://code.jquery.com/mobile/1.1.0-rc.2/jquery.mobile-1.1.0-rc.2.min.js&quot;&gt;&lt;/script&gt;
 &lt;/head&gt; 
 &lt;body&gt; 
 
@@ -198,7 +199,7 @@
 								<li><a href="multipage-template.html" data-ajax="false">Multi-page template</a></li>
 								<li><a href="page-titles.html">Page titles</a></li>
 								<li><a href="page-links.html">Linking pages</a></li>
-								<li><a href="page-transitions.html" data-ajax="false">Page transitions</a></li>
+								<li><a href="page-transitions.html">Page transitions</a></li>
 								<li><a href="page-dialogs.html">Dialogs</a></li>
 								<li><a href="popup/index.html">Popups</a></li>
 								<li><a href="page-cache.html">Prefetching &amp; caching pages</a></li>
@@ -216,7 +217,7 @@
 			</div><!-- /content -->
 
 			<div data-role="footer" class="footer-docs" data-theme="c">
-					<p>&copy; 2011 The jQuery Project</p>
+					<p>&copy; 2011-12 The jQuery Foundation</p>
 			</div>
 
 			</div><!-- /page -->

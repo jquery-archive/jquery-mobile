@@ -1,6 +1,7 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Fixes the iOS orientation change bug using a jQM version of this technique https://github.com/scottjehl/iOS-Orientationchange-Fix
-//>>label: iOS orientation change bugfix
+//>>description: Fixes the orientation change bug in iOS when switching between landspace and portrait
+//>>label: iOS Orientation Change Fix
+//>>group: Utilities
 
 define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.zoom" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");

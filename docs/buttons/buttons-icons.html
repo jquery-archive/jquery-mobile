@@ -1,5 +1,5 @@
 <!DOCTYPE html> 
-<html class="ui-mobile-rendering"> 
+<html>
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
@@ -37,6 +37,9 @@
 			
 			<p>Creates this button with an icon:</p>
 			<a href="index.html" data-role="button" data-icon="delete">Delete</a>
+			
+			<p>A more compact button with the <code> data-inline="true"</code> attribute added to the button:</p>
+			<a href="index.html" data-role="button" data-icon="delete" data-mini="true">Delete</a>
 			
 			<h2>Icon set</h2>
 			
@@ -108,6 +111,17 @@
 		<p>Creates this icon-only button:</p>
 			<a href="index.html" data-role="button" data-icon="delete" data-iconpos="notext">Delete</a>
 
+
+
+			<h2>Mini &amp; Inline</h2>
+			<p>The <a href="../forms/forms-all-mini.html">mini</a> and <a href="buttons-inline.html">inline</a> attributes can be added to produce more compact buttons:<p>
+			<a href="index.html" data-role="button" data-icon="delete" data-iconpos="left" data-mini="true" data-inline="true">Delete</a>
+			<a href="index.html" data-role="button" data-icon="delete" data-iconpos="right" data-mini="true" data-inline="true">Delete</a>
+			<a href="index.html" data-role="button" data-icon="delete" data-iconpos="top" data-mini="true" data-inline="true">Delete</a>
+			<a href="index.html" data-role="button" data-icon="delete" data-iconpos="bottom" data-mini="true" data-inline="true">Delete</a>
+			<a href="index.html" data-role="button" data-icon="delete" data-iconpos="notext" data-mini="true" data-inline="true">Delete</a>
+			
+			
 		<h2>Custom Icons</h2>
 		<p>To use custom icons, specify a <code>data-icon</code> value that has a unique name like <code>myapp-email</code> and the button plugin will generate a class by prefixing <code>ui-icon-</code> to the <code> data-icon</code> value and apply it to the button: <code>ui-icon-myapp-email</code>. </p>
 		<p>You can then write a CSS rule in your stylesheet that targets the <code>ui-icon-myapp-email</code> class to specify the icon background source. To maintain visual consistency with the rest of the icons, create a white icon 18x18 pixels saved as a PNG-8 with alpha transparency.</p>
@@ -129,7 +143,7 @@
 </code></pre>			
 		 	
 		<h2>Icons and themes</h2>
-		<p>The semi-transparent black circle behind the white icon ensures good contrast on any background color so it works well with the jQuery Mobile theming system. Here are examples of the same icons sitting on top of a range of different color swatches in out theme.</p>
+		<p>The semi-transparent black circle behind the white icon ensures good contrast on any background color so it works well with the jQuery Mobile theming system. Here are examples of the same icons sitting on top of a range of different color swatches with <a href="buttons-themes.html">themed buttons</a>.</p>
 		
 		<!-- A themed -->
 		<p><strong>Swatch "A"</strong> themed buttons</p>
@@ -224,7 +238,7 @@
 </div><!-- /content -->
 
 <div data-role="footer" class="footer-docs" data-theme="c">
-		<p>&copy; 2011 The jQuery Project</p>
+		<p>&copy; 2011-12 The jQuery Foundation</p>
 </div>
 	
 </div><!-- /page -->

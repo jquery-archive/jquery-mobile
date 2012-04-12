@@ -1,5 +1,7 @@
-/* slide transition */
-.slide.out {
+@import url("jquery.mobile.transition.fade.css");
+@import url("jquery.mobile.transition.slideout.keyframes.css");
+
+.slidefade.out {
 	-webkit-transform: translateX(-100%);
 	-webkit-animation-name: slideouttoleft;
 	-moz-transform: translateX(-100%);
@@ -8,7 +10,7 @@
 	-moz-animation-duration: 225ms;
 }
 
-.slide.in {
+.slidefade.in {
 	-webkit-transform: translateX(0);
 	-webkit-animation-name: fadein;
 	-moz-transform: translateX(0);
@@ -17,7 +19,7 @@
 	-moz-animation-duration: 200ms;
 }
 
-.slide.out.reverse {
+.slidefade.out.reverse {
 	-webkit-transform: translateX(100%);
 	-webkit-animation-name: slideouttoright;
 	-moz-transform: translateX(100%);
@@ -26,29 +28,11 @@
 	-moz-animation-duration: 200ms;
 }
 
-.slide.in.reverse {
+.slidefade.in.reverse {
 	-webkit-transform: translateX(0);
 	-webkit-animation-name: fadein;
 	-moz-transform: translateX(0);
 	-moz-animation-name: fadein;
 	-webkit-animation-duration: 200ms;
 	-moz-animation-duration: 200ms;
-}
-
-@-webkit-keyframes slideouttoleft {
-    from { -webkit-transform: translateX(0); }
-    to { -webkit-transform: translateX(-100%); }
-}
-@-moz-keyframes slideouttoleft {
-    from { -moz-transform: translateX(0); }
-    to { -moz-transform: translateX(-100%); }
-}
-
-@-webkit-keyframes slideouttoright {
-    from { -webkit-transform: translateX(0); }
-    to { -webkit-transform: translateX(100%); }
-}
-@-moz-keyframes slideouttoright {
-    from { -moz-transform: translateX(0); }
-    to { -moz-transform: translateX(100%); }
 }

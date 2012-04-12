@@ -1,8 +1,9 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: The base file for jQM
+//>>description: Base file for jQuery Mobile
 //>>label: Core
-//>>group: core
+//>>group: Core
 //>>required: true
+//>>css: ../css/structure/jquery.mobile.core.css
 
 define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobile.widget" ], function( $, __version__ ) {
 //>>excludeEnd("jqmBuildExclude");
@@ -49,7 +50,7 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 		maxTransitionWidth: false,
 
 		// Minimum scroll distance that will be remembered when returning to a page
-		minScrollBack: 10,
+		minScrollBack: 250,
 
 		// DEPRECATED: the following property is no longer in use, but defined until 2.0 to prevent conflicts
 		touchOverflowEnabled: false,
@@ -84,6 +85,10 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 
 		// turn of binding to the native orientationchange due to android orientation behavior
 		orientationChangeEnabled: true,
+
+		buttonMarkup: {
+			hoverDelay: 200
+		},
 
 		// TODO might be useful upstream in jquery itself ?
 		keyCode: {
@@ -163,7 +168,7 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 
 			var e = el[ 0 ],
 				ltr = "",
-				re = /ui-(bar|body)-([a-z])\b/,
+				re = /ui-(bar|body|overlay)-([a-z])\b/,
 				c, m;
 
 			while ( e ) {
@@ -196,25 +201,39 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 		},
 
 		enhanceable: function( $set ) {
-			return this.haveParents( $set, ":jqmData(enhance='false')" );
+			return this.haveParents( $set, "enhance" );
 		},
 
 		hijackable: function( $set ) {
-			return this.haveParents( $set, ":jqmData(ajax='false')" );
+			return this.haveParents( $set, "ajax" );
 		},
 
-		// TODO use parentNode traversal to speed things up
-		haveParents: function( $set, selector ) {
+		haveParents: function( $set, attr ) {
 			if( !$.mobile.ignoreContentEnabled ){
 				return $set;
 			}
 
-			var count = $set.length, $newSet = $();
+			var count = $set.length,
+				$newSet = $(),
+				e, $element, excluded;
 
-			for( var i = 0; i < count; i++ ) {
-				var $element = $set.eq(i);
+			for ( var i = 0; i < count; i++ ) {
+				$element = $set.eq( i );
+				excluded = false;
+				e = $set[ i ];
 
-				if ( !$element.closest(selector).length ) {
+				while ( e ) {
+					var c = e.getAttribute ? e.getAttribute( "data-" + $.mobile.ns + attr ) : "";
+
+					if ( c === "false" ) {
+						excluded = true;
+						break;
+					}
+
+					e = e.parentNode;
+				}
+
+				if ( !excluded ) {
 					$newSet = $newSet.add( $element );
 				}
 			}
@@ -228,7 +247,10 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 	$.fn.jqmData = function( prop, value ) {
 		var result;
 		if ( typeof prop != "undefined" ) {
-			result = this.data( prop ? $.mobile.nsNormalize( prop ) : prop, value );
+			if ( prop ) {
+				prop = $.mobile.nsNormalize( prop );
+			}
+			result = this.data.apply( this, arguments.length < 2 ? [ prop ] : [ prop, value ] );
 		}
 		return result;
 	};

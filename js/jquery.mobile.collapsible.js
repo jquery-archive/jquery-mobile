@@ -1,6 +1,9 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Creates collapsible content areas.
-//>>label: Collapsibles
+//>>description: Creates collapsible content blocks.
+//>>label: Collapsible
+//>>group: Widgets
+//>>css: ../css/themes/default/jquery.mobile.theme.css,../css/structure/jquery.mobile.collapsible.css
+
 define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.buttonMarkup" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
@@ -36,18 +39,18 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 		if ( collapsibleSet.length ) {
 			// Inherit the theme from collapsible-set
 			if ( !o.theme ) {
-				o.theme = collapsibleSet.jqmData( "theme" );
+				o.theme = collapsibleSet.jqmData("theme") || $.mobile.getInheritedTheme( collapsibleSet, "c" );
 			}
 			// Inherit the content-theme from collapsible-set
 			if ( !o.contentTheme ) {
 				o.contentTheme = collapsibleSet.jqmData( "content-theme" );
 			}
-			
-            // Gets the preference icon position in the set
-            if ( !o.iconPos ) {
-                o.iconPos = collapsibleSet.jqmData( "iconpos" );
-            }
-			
+
+			// Gets the preference icon position in the set
+			if ( !o.iconPos ) {
+				o.iconPos = collapsibleSet.jqmData( "iconpos" );
+			}
+
 			if( !o.mini ) {
 				o.mini = collapsibleSet.jqmData( "mini" );
 			}
@@ -71,7 +74,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 					mini: o.mini,
 					theme: o.theme
 				})
-			.add( ".ui-btn-inner" )
+			.add( ".ui-btn-inner", $el )
 				.addClass( "ui-corner-top ui-corner-bottom" );
 
 		//events

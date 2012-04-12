@@ -6,7 +6,7 @@
 			libName = 'jquery.mobile.init.js',
 			coreLib = 'jquery.mobile.core.js',
 			extendFn = $.extend,
-			originalLoadingMessage = $.mobile.loadingMessage;
+			originalLoadingMessage = $.mobile.loadingMessage,
 			setGradeA = function(value) { $.mobile.gradeA = function(){ return value; }; },
 			reloadCoreNSandInit = function(){
 				$.testHelper.reloadLib(coreLib);

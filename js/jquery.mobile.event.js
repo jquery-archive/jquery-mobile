@@ -1,10 +1,10 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Custom events and shortcuts.
 //>>label: Events
-//>>group: core
+//>>group: Core
 //>>required: true
 
-define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.media", "./jquery.mobile.support", "./jquery.mobile.vmouse" ], function( $ ) {
+define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery.mobile.vmouse" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
@@ -194,17 +194,37 @@ $.event.special.swipe = {
 	// It seems that some device/browser vendors use window.orientation values 0 and 180 to
 	// denote the "default" orientation. For iOS devices, and most other smart-phones tested,
 	// the default orientation is always "portrait", but in some Android and RIM based tablets,
-	// the default orientation is "landscape". The following code injects a landscape orientation
-	// media query into the document to figure out what the current orientation is, and then
-	// makes adjustments to the portrait_map if necessary, so that we can properly
-	// decode the window.orientation value whenever get_orientation() is called.
+	// the default orientation is "landscape". The following code attempts to use the window
+	// dimensions to figure out what the current orientation is, and then makes adjustments
+	// to the to the portrait_map if necessary, so that we can properly decode the
+	// window.orientation value whenever get_orientation() is called.
+	//
+	// Note that we used to use a media query to figure out what the orientation the browser
+	// thinks it is in:
+	//
+	//     initial_orientation_is_landscape = $.mobile.media("all and (orientation: landscape)");
+	//
+	// but there was an iPhone/iPod Touch bug beginning with iOS 4.2, up through iOS 5.1,
+	// where the browser *ALWAYS* applied the landscape media query. This bug does not
+	// happen on iPad.
+
 	if ( $.support.orientation ) {
 
-		// Use a media query to figure out the true orientation of the device at this moment.
-		// Note that we've initialized the portrait map values to 0 and 180, *AND* we purposely
-		// use a landscape media query so that if the device/browser does not support this particular
-		// media query, we default to the assumption that portrait is the default orientation.
-		initial_orientation_is_landscape = $.mobile.media("all and (orientation: landscape)");
+		// Check the window width and height to figure out what the current orientation
+		// of the device is at this moment. Note that we've initialized the portrait map
+		// values to 0 and 180, *AND* we purposely check for landscape so that if we guess
+		// wrong, , we default to the assumption that portrait is the default orientation.
+		// We use a threshold check below because on some platforms like iOS, the iPhone
+		// form-factor can report a larger width than height if the user turns on the
+		// developer console. The actual threshold value is somewhat arbitrary, we just
+		// need to make sure it is large enough to exclude the developer console case.
+
+		var ww = window.innerWidth || $( window ).width(),
+			wh = window.innerHeight || $( window ).height(),
+			landscape_threshold = 50;
+
+		initial_orientation_is_landscape = ww > wh && ( ww - wh ) > landscape_threshold;
+
 
 		// Now check to see if the current window.orientation is 0 or 180.
 		initial_orientation_is_default = portrait_map[ window.orientation ];

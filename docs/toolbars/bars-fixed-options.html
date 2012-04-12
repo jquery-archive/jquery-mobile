@@ -1,5 +1,5 @@
 <!DOCTYPE html> 
-<html class="ui-mobile-rendering"> 
+<html>
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
@@ -56,14 +56,14 @@
 			<dt><code>transition</code> <em>string</em></dt>
 			<dd>
 				<p class="default">default: "slide" (which ends up using slideup and slidedown)</p>
-				<p>The transition that should be used for showing and hiding a fixed toolbar. Possible values are "none", "fade", and "slide" (or you can write a CSS transition of your own and use that too). This option is also exposed as a data attribute: <code>data-transition=&quot;"fade"&quot;</code></p>			
+				<p>The transition that should be used for showing and hiding a fixed toolbar. Possible values are "none", "fade", and "slide" (or you can write a CSS transition of your own and use that too). This option is also exposed as a data attribute: <code>data-transition=&quot;fade&quot;</code></p>			
 				<pre><code>$("[data-role=header]").fixedtoolbar(<strong>{ transition: "fade" }</strong>);</code></pre>
 			</dd>
 			
 			<dt><code>fullscreen</code> <em>boolean</em></dt>
 			<dd>
 				<p class="default">default: false</p>
-				<p>Fullscreen fixed toolbars sit on top of the content at all times when they are visible, and unlike regular fixed toolbars, fullscreen toolbars do not fall back to static positioning when toggled, instead they disappear from the screen entirely. Fullscreen toolbars are ideal for more immersive interfaces, like a photo viewer that is meant to fill the entire screen with the photo itself and no distractions. <a href="bars-fullscreen.html">This page</a> demonstrates toolbars that use the fullscreen option. This option is also exposed as a data attribute: <code>data-fullscreen=&quot;"true"&quot;</code></p>			
+				<p>Fullscreen fixed toolbars sit on top of the content at all times when they are visible, and unlike regular fixed toolbars, fullscreen toolbars do not fall back to static positioning when toggled, instead they disappear from the screen entirely. Fullscreen toolbars are ideal for more immersive interfaces, like a photo viewer that is meant to fill the entire screen with the photo itself and no distractions. <a href="bars-fullscreen.html">This page</a> demonstrates toolbars that use the fullscreen option. This option is also exposed as a data attribute: <code>data-fullscreen=&quot;true&quot;</code></p>			
 				<pre><code>$("[data-role=header]").fixedtoolbar(<strong>{ fullscreen: true }</strong>);</code></pre>
 				
 				<p class="ui-body ui-body-e"><strong>Note:</strong>While the data-attribute syntax for this option has not changed, it is now only supported on the toolbar element itself, and not the page element. </p>
@@ -73,7 +73,7 @@
 			<dt><code>tapToggle</code> <em>boolean</em></dt>
 			<dd>
 				<p class="default">default: true</p>
-				<p>Enable or disable the user's ability to toggle toolbar visibility with a tap on the screen (or a click, for mouse users). This option is also exposed as a data attribute: <code>data-tap-toggle=&quot;"true"&quot;</code></p>			
+				<p>Enable or disable the user's ability to toggle toolbar visibility with a tap on the screen (or a click, for mouse users). This option is also exposed as a data attribute: <code>data-tap-toggle=&quot;true&quot;</code></p>			
 				<pre><code>$("[data-role=header]").fixedtoolbar(<strong>{ tapToggle: true }</strong>);</code></pre>
 				
 				<div class="ui-body ui-body-e">
@@ -92,7 +92,7 @@ $.mobile.fixedToolbars
 			<dt><code>tapToggleBlacklist</code> <em>string</em></dt>
 			<dd>
 				<p class="default">default: "a, .ui-header-fixed, .ui-footer-fixed"</p>
-				<p>A list of jQuery selectors that should be ignored for tap-toggling the toolbars.</p>			
+				<p>A list of jQuery selectors that, when tapped, will not cause the toolbars to be toggled.</p>			
 				<pre><code>$("[data-role=header]").fixedtoolbar(<strong>{ tapToggleBlacklist: "a, input, select, textarea, .ui-header-fixed, .ui-footer-fixed" }</strong>);</code></pre>
 			</dd>
 			
@@ -107,7 +107,7 @@ $.mobile.fixedToolbars
 			<dt><code>updatePagePadding</code> <em>boolean</em></dt>
 			<dd>
 				<p class="default">default: true</p>
-				<p>Since toolbars can vary in height depending on the content they contain, this option automatically updates the padding on the page element to ensure that fixed toolbars have adequate space in the document when they are statically positioned, and when scrolled to the top or bottom of the page. When enabled, the padding updates during many operations, such as pageshow, during page transitions, and on resize and orientationchange. As an optimization, we would recommend that you consider disabling this option and adding a rule to your CSS to set the padding of the page div to match the EM height of your toolbars, such as <code>.ui-page-header-fixed { padding-top: 4.5em; }</code>. This option is also exposed as a data attribute: <code>data-update-page-paddinge=&quot;"false"&quot;</code></p>			
+				<p>Since toolbars can vary in height depending on the content they contain, this option automatically updates the padding on the page element to ensure that fixed toolbars have adequate space in the document when they are statically positioned, and when scrolled to the top or bottom of the page. When enabled, the padding updates during many operations, such as pageshow, during page transitions, and on resize and orientationchange. As an optimization, we would recommend that you consider disabling this option and adding a rule to your CSS to set the padding of the page div to match the EM height of your toolbars, such as <code>.ui-page-header-fixed { padding-top: 4.5em; }</code>. This option is also exposed as a data attribute: <code>data-update-page-paddinge=&quot;false&quot;</code></p>			
 				<pre><code>$("[data-role=header]").fixedtoolbar(<strong>{ updatePagePadding: false }</strong>);</code></pre>
 			</dd>
 			

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="ui-mobile-rendering">
+<html>
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -102,6 +102,10 @@
 					<td>swatch letter (a-z)</td>
 				</tr>
 				<tr>
+					<th>data-iconpos</th>
+					<td><strong>left</strong> | right | top | bottom |  notext</td>
+				</tr>
+				<tr>
 					<th>data-mini</th>
 					<td>true | <strong>false</strong> - Compact sized version</td>
 				</tr>
@@ -117,6 +121,10 @@
 				<tr>
 					<th>data-content-theme</th>
 					<td>swatch letter (a-z) - Sets all collapsibles in set</td>
+				</tr>
+				<tr>
+					<th>data-iconpos</th>
+					<td><strong>left</strong> | right | top | bottom |  notext</td>
 				</tr>
 				<tr>
 					<th>data-mini</th>
@@ -147,10 +155,6 @@
 				<tr>
 					<th>data-dom-cache</th>
 					<td>true | <strong>false</strong></td>
-				</tr>
-				<tr>
-					<th>data-fullscreen</th>
-					<td>true | false (used in conjunction with fixed toolbars)</td>
 				</tr>
 				<tr>
 					<th>data-overlay-theme</th>
@@ -218,6 +222,10 @@
 					<td>fixed</td>
 				</tr>
 				<tr>
+					<th>data-fullscreen</th>
+					<td>true (used in conjunction with fixed toolbars)</td>
+				</tr>
+				<tr>
 					<th>data-theme</th>
 					<td>swatch letter (a-z)</td>
 				</tr>
@@ -229,6 +237,10 @@
 				<tr>
 					<th>data-position</th>
 					<td>fixed</td>
+				</tr>
+				<tr>
+					<th>data-fullscreen</th>
+					<td>true (used in conjunction with fixed toolbars)</td>
 				</tr>
 				<tr>
 					<th>data-theme</th>
@@ -275,7 +287,7 @@
 					<td>swatch letter (a-z)</td>
 				</tr>
 				<tr>
-					<th>data-dividertheme</th>
+					<th>data-divider-theme</th>
 					<td>swatch letter (a-z)</td>
 				</tr>
 				<tr>
@@ -369,7 +381,7 @@
 				</tr>
 				<tr>
 					<th>data-fullscreen</th>
-					<td>true | false (used in conjunction with fixed toolbars)</td>
+					<td>true (used in conjunction with fixed toolbars) <p class="ui-bar-e">Deprecated in 1.1 - use on header and footer instead.</p></td>
 				</tr>
 				<tr>
 					<th>data-overlay-theme</th>
@@ -509,7 +521,7 @@
 </div><!-- /content -->
 
 <div data-role="footer" class="footer-docs" data-theme="c">
-		<p>&copy; 2011 The jQuery Project</p>
+		<p>&copy; 2011-12 The jQuery Foundation</p>
 </div>
 
 </div><!-- /page -->

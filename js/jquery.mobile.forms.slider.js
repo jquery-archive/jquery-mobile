@@ -1,7 +1,8 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Slider form widget
 //>>label: Slider
-//>>group: forms
+//>>group: Forms
+//>>css: ../css/themes/default/jquery.mobile.theme.css, ../css/structure/jquery.mobile.forms.slider.css
 
 define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.widget", "./jquery.mobile.forms.textinput", "./jquery.mobile.buttonMarkup" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
@@ -67,6 +68,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			options;
 
+        domHandle.setAttribute( 'href', "#" );
 		domSlider.setAttribute('role','application');
 		domSlider.className = ['ui-slider ',selectClass," ui-btn-down-",trackTheme,' ui-btn-corner-all', inlineClass, miniClass].join("");
 		domHandle.className = 'ui-slider-handle';
@@ -173,7 +175,8 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			self.refresh( event );
 			return false;
-		});
+		})
+		.bind( "vclick", false );
 
 		slider.add( document )
 			.bind( "vmouseup", function() {

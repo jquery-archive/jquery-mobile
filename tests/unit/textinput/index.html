@@ -11,13 +11,10 @@
 	<script src="../../../tests/jquery.testHelper.js"></script>
 	<script>
 		$.testHelper.asyncLoad([
-			[
-				"jquery.mobile.forms.textinput"
-			],
+			[ "jquery.mobile.forms.textinput" ],
+			[ "settings.js" ],
 			[ "jquery.mobile.init" ],
-			[
-				"textinput_core.js"
-			]
+			[ "textinput_core.js" ]
 		]);
 	</script>
 
@@ -56,6 +53,8 @@
   <textarea id="keyup-autogrow">
   </textarea>
   <a href="external.html" id="external">external</a>
+
+  <input type="search" id="search-input">
 </div>
 </body>
 </html>

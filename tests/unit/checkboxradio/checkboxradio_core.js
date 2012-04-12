@@ -71,11 +71,10 @@
 		var $radioBtns = $( '#radio-active-btn-test input' ),
 			singleActiveAndChecked = function(){
 				same( $( "#radio-active-btn-test .ui-radio-on" ).length, 1, "there should be only one active button" );
-				// TODO core appears to be reporting the wrong value in our test browsers
-				// revisit when we hear back
+				// Use the .checked property, not the checked attribute which is not dynamic
 				var numChecked = 0;
 				$( "#radio-active-btn-test input" ).each(function(i, e) {
-					if( e.getAttribute( "checked" )) {
+					if( e.checked ) {
 						numChecked++;
 					}
 				});
@@ -88,11 +87,11 @@
 			},
 
 			function(){
-				ok( $radioBtns.last()[0].getAttribute( 'checked' ) == "checked" );
+				ok( $radioBtns.last().prop( 'checked' ), "last input is checked" );
 				ok( $radioBtns.last().siblings( 'label' ).hasClass( 'ui-radio-on' ),
 					"last input label is an active button" );
 
-				ok( $radioBtns.first()[0].getAttribute( 'checked' ) !== "checked" );
+				ok( !$radioBtns.first().prop( 'checked' ), "first input label is not active" );
 				ok( !$radioBtns.first().siblings( 'label' ).hasClass( 'ui-radio-on' ),
 					"first input label is not active" );
 
@@ -102,11 +101,11 @@
 			},
 
 			function(){
-				ok( $radioBtns.first()[0].getAttribute( 'checked' ) == "checked");
+				ok( $radioBtns.first().prop( 'checked' ));
 				ok( $radioBtns.first().siblings( 'label' ).hasClass( 'ui-radio-on' ),
 					"first input label is an active button" );
 
-				ok( $radioBtns.last()[0].getAttribute( 'checked' ) !== "checked");
+				ok( !$radioBtns.last().prop( 'checked' ));
 				ok( !$radioBtns.last().siblings( 'label' ).hasClass( 'ui-radio-on' ),
 					"last input label is not active" );
 
@@ -130,7 +129,7 @@
 		ok( !$("input.should-be-native").parent().is("div.ui-checkbox") );
 	});
 
-	test( "Elements with “data-mini='true'” should have “ui-mini” class attached to enhanced element.", function(){
+	test( "Elements with \u201cdata-mini='true'\u201d should have \u201cui-mini\u201d class attached to enhanced element.", function(){
 		var full = document.getElementById("radio-full"),
 			$fulllbl = $('[for="radio-full"]'),
 			mini = document.getElementById("radio-mini"),
@@ -181,5 +180,94 @@
 				start();
 			}
 		], 2000);
+	});
+
+
+	test( "theme should be inherited", function() {
+		var $inherited = $( "#checkbox-inherit-theme" ),
+		    $explicit = $( "#checkbox-explicit-theme" );
+
+		ok( $inherited.siblings("label").hasClass( "ui-btn-up-a" ), "should inherit from page" );
+		ok( $explicit.siblings("label").hasClass( "ui-btn-up-b" ), "should not inherit" );
+	});
+
+	asyncTest( "form submission should include radio button values", function() {
+		var $form = $( "#radio-form" ), $input = $form.find("input").first();
+
+		$.testHelper.pageSequence([
+			function() {
+				$input.click();
+				$form.submit();
+			},
+
+			function( timeout ){
+				ok( location.search.indexOf("radio1=1") >= 0, "the radio was checked" );
+
+				// if the changepage in the previous function failed don't go back
+				if( !timeout ){
+					window.history.back();
+				}
+			},
+
+			function(){
+				start();
+			}
+		]);
+	});
+
+	asyncTest( "form submission should include checkbox button values", function() {
+		var $form = $( "#check-form" ), $inputs = $form.find("input");
+
+		$.testHelper.pageSequence([
+			function() {
+				$inputs.click();
+				$form.submit();
+			},
+
+			function( timeout ){
+				ok( location.search.indexOf("checkbox-form=on") >= 0, "the first checkbox was checked" );
+				ok( location.search.indexOf("checkbox-form-2=on") >= 0, "the second checkbox was checked" );
+				// if the changepage in the previous function failed don't go back
+				if( !timeout ){
+					window.history.back();
+				}
+			},
+
+			function(){
+				start();
+			}
+		]);
+	});
+
+  test( "nested label checkbox still renders", function() {
+    var $checkbox = $( "#checkbox-nested-label" );
+
+    try {
+      $checkbox.checkboxradio();
+    } catch (e) {
+      ok( false, "checkboxradio exception raised: " + e.toString());
+    }
+
+    ok( $checkbox.parent().hasClass("ui-checkbox"), "enhancement has occured");
+  });
+  
+  test( "nested label (no [for]) checkbox still renders", function() {
+    var $checkbox = $( "#checkbox-nested-label-no-for" );
+
+    try {
+      $checkbox.checkboxradio();
+    } catch (e) {
+      ok( false, "checkboxradio exception raised: " + e.toString());
+    }
+
+    ok( $checkbox.parent().hasClass("ui-checkbox"), "enhancement has occured");
+  });
+  
+	test( "Icon positioning", function() {
+		var bottomicon = $("[for='bottomicon']")
+			topicon = $("[for='topicon']");
+
+		ok( bottomicon.hasClass("ui-btn-icon-bottom"), "Icon position set on label adds the appropriate class." );
+		ok( topicon.hasClass("ui-btn-icon-top"), "Icon position set on input adds the appropriate class to the label." );
 	});
 })(jQuery);

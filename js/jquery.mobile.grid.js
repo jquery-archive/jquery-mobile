@@ -1,6 +1,8 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Applies classes for grid styling.
-//>>label: CSS Grid Tool
+//>>description: Applies classes for creating grid or column styling.
+//>>label: Grid Layouts (Columns)
+//>>group: Widgets
+//>>css: ../css/themes/default/jquery.mobile.theme.css, ../css/structure/jquery.mobile.grid.css
 
 define( [ "jquery" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");

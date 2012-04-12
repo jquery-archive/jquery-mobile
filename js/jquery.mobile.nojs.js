@@ -1,6 +1,7 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Adds class to make elements hidden to A grade browsers
 //>>label: “nojs” Classes
+//>>group: Utilities
 
 define( [ "jquery" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");

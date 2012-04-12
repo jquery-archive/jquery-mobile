@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="ui-mobile-rendering">
+<html>
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,12 +28,12 @@
 		<p>jQuery Mobile offers several custom events that build upon native events to create useful hooks for development. Note that these events employ various touch, mouse, and window events, depending on event existence, so you can bind to them for use in both handheld and desktop environments. You can bind to these events like you would with other jQuery events, using <code>live()</code> or <code>bind()</code>.</p>
 
 			<div class="ui-body ui-body-e">
-		<h4 style="margin:.5em 0">Important: Use <code>pageInit()</code>, not <code>$(document).ready()</code></h4>
+		<h4 style="margin:.5em 0">Important: Use <code>$(document).bind('pageinit')</code>, not <code>$(document).ready()</code></h4>
 		<p>The first thing you learn in jQuery is to call code inside the <code>$(document).ready()</code> function so everything will execute as soon as the DOM is loaded. However, in jQuery Mobile, Ajax is used to load the contents of each page into the DOM as you navigate, and the DOM ready handler only executes for the first page. To execute code whenever a new page is loaded and created, you can bind to the <code>pageinit</code> event. This event is explained in detail at the bottom of this page.</p></div>
 
       <p> &nbsp;</p>
 		<div class="ui-body ui-body-e">
-		<h4 style="margin:.5em 0">Important: <code>pageCreate()</code> vs <code>pageInit()</code></h4>
+		<h4 style="margin:.5em 0">Important: <code>$(document).bind('pagecreate')</code> vs <code>$(document).bind('pageinit')</code></h4>
    <p> Prior to Beta 2 the recommendation to users wishing to manipulate jQuery Mobile enhanced page and child widget markup was to bind to the <code>pagecreate</code> event. In Beta 2 an internal change was made to decouple each of the widgets by binding to the <code>pagecreate</code> event in place of direct calls to the widget methods. As a result, users binding to the <code>pagecreate</code> in <code>mobileinit</code> would find their binding executing before the markup had been enhanced by each of the plugins. In keeping with the lifecycle of the jQuery UI Widget Factory, the initialization method is invoked <strong>after</strong> the create method, so the <code>pageinit</code> event provides the correct timing for post enhancement manipulation of the DOM and/or Javascript objects.
 
 		In short, if you were previously using <code>pagecreate</code> to manipulate the enhanced markup before the page was shown, it's very likely you'll want to migrate to 'pageinit'.
@@ -63,7 +63,7 @@
 			<dt><code>swiperight</code></dt>
 			<dd>Triggers when a swipe event occurred moving in the right direction.</dd>
 			</dl>
-			
+
 			<h2>Virtual mouse events</h2>
 			<p>We provide a set of "virtual" mouse events that attempt to abstract away mouse and touch events. This allows the developer to register listeners for the basic mouse events, such as mousedown, mousemove, mouseup, and click, and the plugin will take care of registering the correct listeners behind the scenes to invoke the listener at the fastest possible time for that device. In touch environments, the plugin retains the order of event firing that is seen in traditional mouse environments, so for example, vmouseup is always dispatched before vmousedown, and vmousedown before vclick, etc. The virtual mouse events also normalize how coordinate information is extracted from the event, so in touch based environments, coordinates are available from the pageX, pageY, screenX, screenY, clientX, and clientY properties, directly on the event object.</p>
 			<dl>
@@ -96,7 +96,7 @@
 				<h4 style="margin:.5em 0">Canceling an elements default click behavior</h4>
 				<p>Applications can call <code>preventDefault()</code> on a <code>vclick</code> event to cancel an element's default click behavior. On mouse based devices, calling <code>preventDefault()</code> on a <code>vclick</code> event equates to calling <code>preventDefault()</code> on the real <code>click</code> event during the bubble event phase. On touch based devices, it's a bit more complicated since the actual <code>click</code> event is dispatched about 300ms after the <code>vclick</code> event is dispatched. For touch devices, calling <code>preventDefault()</code> on a <code>vclick</code> event triggers some code in the vmouse plugin that attempts to catch the next <code>click</code> event that gets dispatched by the browser, during the capture event phase, and calls <code>preventDefault()</code> and <code>stopPropagation()</code> on it. As mentioned in the warning above, it is sometimes difficult to match up a touch event with its corresponding mouse event because the targets can differ. For this reason, the vmouse plugin also falls back to attempting to identify a corresponding <code>click</code> event by coordinates. There are still cases where both target and coordinate identification fail, which results in the <code>click</code> event being dispatched and either triggering the default action of the element, or in the case where content has been shifted or replaced, triggering a click on a different element. If this happens on a regular basis for a given element/control, we suggest you use <code>click</code> for triggering your action.</p>
 			</div>
-		
+
 		<h2>Orientation change event</h2>
 		<dl>
 			<dt><code>orientationchange</code></dt>
@@ -477,7 +477,7 @@ $( '#foo' ).hide().trigger( 'updatelayout' );
 </code></pre>
             </dd>
         </dl>
-		
+
 		<h2>Animation Events</h2>
 		<p>jQuery Mobile exposes the <code>animationComplete</code> plugin, which you can utilize after adding or removing a class that applies a CSS transition.</p>
 
@@ -505,7 +505,7 @@ $( '#foo' ).hide().trigger( 'updatelayout' );
 </div><!-- /content -->
 
 <div data-role="footer" class="footer-docs" data-theme="c">
-		<p>&copy; 2011 The jQuery Project</p>
+		<p>&copy; 2011-12 The jQuery Foundation</p>
 </div>
 
 </div><!-- /page -->
