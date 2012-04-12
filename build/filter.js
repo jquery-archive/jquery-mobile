@@ -5,9 +5,39 @@
 var fs = require( 'fs' ),
 	path = require( 'path' ),
 	buildDir = __dirname,
-	versionRegExp = /__version__/g,
-	version = fs.readFileSync( path.join( buildDir, "../version.txt" ), "utf8" ).trim();
+	copyrightVersionRegExp = /@VERSION/g,
+	apiVersionRegExp = /__version__/g,
+	copyrightBaseName = "../LICENSE-INFO",
+	copyrightRegFile = copyrightBaseName + ".txt",
+	copyrightMinFile = copyrightBaseName + ".min.txt";
 
-module.exports = function ( contents ) {
-	return contents.replace( versionRegExp, '"' + version + '"' );
+module.exports = function ( contents, ext, callback ) {
+	fs.readFile( path.join( buildDir, "../version.txt" ), "utf8",
+		function( err, version ) {
+			var copyrightFile;
+			if ( err ) {
+				callback( err );
+			} else {
+				version = version.trim();
+
+				if ( /^\.min/.test( ext ) ) {
+					copyrightFile = copyrightMinFile;
+				} else {
+					copyrightFile = copyrightRegFile;
+				}
+				fs.readFile( path.join( buildDir, copyrightFile ), "utf8",
+					function( err, copyright ) {
+						if ( err ) {
+							callback( err );
+						} else {
+							contents = copyright.replace( copyrightVersionRegExp, version ) + "\n" + contents;
+							contents = contents.replace( apiVersionRegExp, '"' + version + '"' );
+
+							callback( null, contents );
+						}
+					}
+				)
+			}
+		}
+	)
 };
