@@ -327,7 +327,7 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 	$.find.matchesSelector = function( node, expr ) {
 		return $.find( expr, null, null, [ node ] ).length > 0;
 	};
-})( jQuery, this );
+})( jQuery, window );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
 //>>excludeEnd("jqmBuildExclude");

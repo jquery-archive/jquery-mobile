@@ -1,4 +1,3 @@
-
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Animated page change core logic and sequence handlers
 //>>label: Transition Core
@@ -147,7 +146,7 @@ $.mobile.transitionHandlers = {
 
 $.mobile.transitionFallbacks = {};
 
-})( jQuery, this );
+})( jQuery, window );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
 //>>excludeEnd("jqmBuildExclude");

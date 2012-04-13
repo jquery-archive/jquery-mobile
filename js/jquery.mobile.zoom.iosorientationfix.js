@@ -38,7 +38,7 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.zoom" ], function( 
 		.bind( "orientationchange.iosorientationfix", zoom.enable )
 		.bind( "devicemotion.iosorientationfix", checkTilt );
 
-}( jQuery, this ));
+}( jQuery, window ));
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
 //>>excludeEnd("jqmBuildExclude");

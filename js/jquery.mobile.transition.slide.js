@@ -18,7 +18,7 @@ $.mobile.transitionHandlers.slide = $.mobile.transitionHandlers.simultaneous;
 // Set the slide transition's fallback to "fade"
 $.mobile.transitionFallbacks.slide = "fade";
 
-})( jQuery, this );
+})( jQuery, window );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
 //>>excludeEnd("jqmBuildExclude");
