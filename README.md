@@ -47,6 +47,8 @@ If you think you've found a bug, please report it by following these instruction
 
 Recommended: [JS Bin issue template with instructions](http://jsbin.com/omacox/edit)
 
+Issues concerning the jQuery Mobile Theme Roller can be submitted at the [Theme Roller repo: https://github.com/jquery/web-jquery-mobile-theme-roller](https://github.com/jquery/web-jquery-mobile-theme-roller)
+
 Submitting patches
 ==================
 To contribute code and bug fixes to jQuery Mobile: fork this project on Github, make changes to the code in your fork,
