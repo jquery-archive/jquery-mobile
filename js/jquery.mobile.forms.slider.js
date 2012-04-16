@@ -36,7 +36,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			controlID = control.attr( "id" ),
 
-			labelID = controlID + "-label",
+			labelID = $( "[for='"+ controlID +"']" ).attr( "id" ) || controlID + "-label",
 
 			label = $( "[for='"+ controlID +"']" ).attr( "id", labelID ),
 
