@@ -1,8 +1,8 @@
 function ResizePageContentHeight(page) {
 	var $page = $(page),
 		$content = $page.children( ".ui-content" ),
-		hh = $page.children( ".ui-header" ).outerHeight() : 0,
-		fh = $page.children( ".ui-footer" ).outerHeight() : 0,
+		hh = $page.children( ".ui-header" ).outerHeight() || 0,
+		fh = $page.children( ".ui-footer" ).outerHeight() || 0,
 		pt = parseFloat($content.css( "padding-top" )),
 		pb = parseFloat($content.css( "padding-bottom" )),
 		wh = window.innerHeight;

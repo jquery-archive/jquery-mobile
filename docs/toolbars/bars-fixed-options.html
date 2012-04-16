@@ -1,0 +1,177 @@
+<!DOCTYPE html> 
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>jQuery Mobile Framework - Fixed Toolbars</title> 
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />  
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+
+	<script src="../../js/jquery.js"></script>
+	<script src="../../docs/_assets/js/jqm-docs.js"></script>
+	<script src="../../js/"></script>
+
+</head> 
+<body> 
+
+<div data-role="page" class="type-interior">
+
+	<div data-role="header" data-position="fixed" data-theme="f">
+
+		<h1>Fixed toolbars</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
+	</div>
+	
+	<div data-role="content">
+		<div class="content-primary">
+				<h2>Fixed toolbars</h2>
+				
+			    <ul data-role="controlgroup" data-type="horizontal" class="localnav">
+			      <li><a href="bars-fixed.html" data-role="button" data-transition="fade">Basics</a></li>
+			      <li><a href="bars-fixed-options.html" data-role="button" data-transition="fade" class="ui-btn-active">Options</a></li>
+			      <li><a href="bars-fixed-methods.html" data-role="button" data-transition="fade">Methods</a></li>
+			      <li><a href="bars-fixed-events.html" data-role="button" data-transition="fade">Events</a></li>
+			    </ul>
+				
+			<p>The fixedtoolbar plugin has the following options:</p>
+			
+
+		<dl>
+			
+			<dt><code>visibleOnPageShow</code> <em>boolean</em></dt>
+			<dd>
+				<p class="default">default: true</p>
+				<p>This determines whether the toolbar is visible or not when its parent page is shown. This option is also exposed as a data attribute: <code>data-visible-on-page-show=&quot;false&quot;</code></p>			
+				<pre><code>$("[data-role=header]").fixedtoolbar(<strong>{ visibleOnPageShow: false }</strong>);</code></pre>
+			</dd>
+			
+			<dt><code>disablePageZoom</code> <em>boolean</em></dt>
+			<dd>
+				<p class="default">default: true</p>
+				<p>This determines whether user-scaling should be disabled on pages that contain fixed toolbars. This option is also exposed as a data attribute: <code>data-disable-page-zoom=&quot;false&quot;</code></p>			
+				<pre><code>$("[data-role=header]").fixedtoolbar(<strong>{ disablePageZoom: false }</strong>);</code></pre>
+			</dd>
+			
+			<dt><code>transition</code> <em>string</em></dt>
+			<dd>
+				<p class="default">default: "slide" (which ends up using slideup and slidedown)</p>
+				<p>The transition that should be used for showing and hiding a fixed toolbar. Possible values are "none", "fade", and "slide" (or you can write a CSS transition of your own and use that too). This option is also exposed as a data attribute: <code>data-transition=&quot;fade&quot;</code></p>			
+				<pre><code>$("[data-role=header]").fixedtoolbar(<strong>{ transition: "fade" }</strong>);</code></pre>
+			</dd>
+			
+			<dt><code>fullscreen</code> <em>boolean</em></dt>
+			<dd>
+				<p class="default">default: false</p>
+				<p>Fullscreen fixed toolbars sit on top of the content at all times when they are visible, and unlike regular fixed toolbars, fullscreen toolbars do not fall back to static positioning when toggled, instead they disappear from the screen entirely. Fullscreen toolbars are ideal for more immersive interfaces, like a photo viewer that is meant to fill the entire screen with the photo itself and no distractions. <a href="bars-fullscreen.html">This page</a> demonstrates toolbars that use the fullscreen option. This option is also exposed as a data attribute: <code>data-fullscreen=&quot;true&quot;</code></p>			
+				<pre><code>$("[data-role=header]").fixedtoolbar(<strong>{ fullscreen: true }</strong>);</code></pre>
+				
+				<p class="ui-body ui-body-e"><strong>Note:</strong>While the data-attribute syntax for this option has not changed, it is now only supported on the toolbar element itself, and not the page element. </p>
+				
+			</dd>
+			
+			<dt><code>tapToggle</code> <em>boolean</em></dt>
+			<dd>
+				<p class="default">default: true</p>
+				<p>Enable or disable the user's ability to toggle toolbar visibility with a tap on the screen (or a click, for mouse users). This option is also exposed as a data attribute: <code>data-tap-toggle=&quot;true&quot;</code></p>			
+				<pre><code>$("[data-role=header]").fixedtoolbar(<strong>{ tapToggle: true }</strong>);</code></pre>
+				
+				<div class="ui-body ui-body-e">
+				<p><strong>Note:</strong> This behavior was formerly configurable as follows, but as of version 1.1 this syntax is no longer supported:
+<pre><code>	
+$.mobile.fixedToolbars
+   .setTouchToggleEnabled(false);
+</code></pre>
+						
+				</div>
+				
+			</dd>
+			
+			
+			
+			<dt><code>tapToggleBlacklist</code> <em>string</em></dt>
+			<dd>
+				<p class="default">default: "a, .ui-header-fixed, .ui-footer-fixed"</p>
+				<p>A list of jQuery selectors that, when tapped, will not cause the toolbars to be toggled.</p>			
+				<pre><code>$("[data-role=header]").fixedtoolbar(<strong>{ tapToggleBlacklist: "a, input, select, textarea, .ui-header-fixed, .ui-footer-fixed" }</strong>);</code></pre>
+			</dd>
+			
+			<dt><code>hideDuringFocus</code> <em>string</em></dt>
+			<dd>
+				<p class="default">default: "input, select, textarea"</p>
+				<p>A list of jQuery selectors that should cause the toolbars to hide while focused, except if they are in a fixed toolbar.</p>			
+				<pre><code>$("[data-role=header]").fixedtoolbar(<strong>{ hideDuringFocus: "input, select, textarea" }</strong>);</code></pre>
+			</dd>
+			
+			
+			<dt><code>updatePagePadding</code> <em>boolean</em></dt>
+			<dd>
+				<p class="default">default: true</p>
+				<p>Since toolbars can vary in height depending on the content they contain, this option automatically updates the padding on the page element to ensure that fixed toolbars have adequate space in the document when they are statically positioned, and when scrolled to the top or bottom of the page. When enabled, the padding updates during many operations, such as pageshow, during page transitions, and on resize and orientationchange. As an optimization, we would recommend that you consider disabling this option and adding a rule to your CSS to set the padding of the page div to match the EM height of your toolbars, such as <code>.ui-page-header-fixed { padding-top: 4.5em; }</code>. This option is also exposed as a data attribute: <code>data-update-page-paddinge=&quot;false&quot;</code></p>			
+				<pre><code>$("[data-role=header]").fixedtoolbar(<strong>{ updatePagePadding: false }</strong>);</code></pre>
+			</dd>
+			
+			
+			<dt><code>supportBlacklist</code> <em>function</em></dt>
+			<dd>
+				<p class="default">default: function that returns a boolean value</p>
+				<p>CSS <code>position: fixed</code> support is very difficult to test; in fact, at the time of version 1.1 release, there was no known way to reasonably test for fixed support without turning up false positives or negatives in certain popular browsers. This option is a function that attempts to opt-out some popular platforms that are known to be troublesome with <code>position: fixed</code> . Often, these platforms support <code>position: fixed</code>  partially, which can be worse than not supporting it at all. If overriding this option with your own blacklist logic, you simply need to provide a function that returns a true or false result when called upon initialization. You must set it on mobileinit, so that it applies when the plugin is initially created.</p>			
+				<pre><code>
+$( document ).bind("mobileinit", function(){
+  $.mobile.fixedtoolbar.prototype.options.supportBlacklist = function(){
+    var result;
+    // logic to determine whether result should be true or false
+    return result;
+  };
+})</code></pre>
+			</dd>
+			
+			
+			<dt><code>initSelector</code> <em>CSS selector string</em></dt>
+			<dd>
+				<p class="default">default: ":jqmData(position='fixed')"</p>
+				<p>This is used to define the selectors (element types, data roles, etc.) that will automatically be initialized as fixed toolbars. To change which elements are initialized, bind this option to the <a href="../api/globalconfig.html">mobileinit event</a>:</p>
+				<pre><code>$( document ).bind( "mobileinit", function(){
+	<strong>$.mobile.fixedtoolbar.prototype.options.initSelector = ".myselector";</strong>
+});
+</code></pre>
+			</dd>
+			
+			
+			
+		</dl>
+
+
+				</div><!--/content-primary -->		
+
+				<div class="content-secondary">
+
+					<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+
+							<h3>More in this section</h3>
+
+							<ul data-role="listview" data-theme="c" data-dividertheme="d">
+
+								<li data-role="list-divider">Toolbars</li>
+								<li><a href="docs-bars.html">Toolbar basics</a></li>
+								<li><a href="docs-headers.html">Header bars</a></li>
+								<li><a href="docs-footers.html">Footer bars</a></li>
+								<li><a href="docs-navbar.html">Navbars</a></li>
+								<li data-theme="a"><a href="bars-fixed.html">Fixed positioning</a></li>
+								<li><a href="footer-persist-a.html">Persistent toolbars</a></li>
+								<li><a href="bars-themes.html">Theming toolbars</a></li>
+
+							</ul>
+					</div>
+				</div>		
+
+			</div><!-- /content -->
+
+			<div data-role="footer" class="footer-docs" data-theme="a" data-position="fixed">
+					<h1>Fixed Footer</h1>
+			</div>
+
+			</div><!-- /page -->
+
+			</body>
+			</html>

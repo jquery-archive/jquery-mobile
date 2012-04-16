@@ -1,15 +1,16 @@
 <!DOCTYPE html> 
-<html> 
+<html>
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<title>jQuery Mobile Framework - Theming Toolbars</title> 
-	<link rel="stylesheet"  href="../../css/themes/default/" />  
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+
 	<script src="../../js/jquery.js"></script>
-	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
-	<script src="../_assets/js/jqm-docs.js"></script>
+	<script src="../../docs/_assets/js/jqm-docs.js"></script>
 	<script src="../../js/"></script>
+
 </head> 
 <body> 
 
@@ -17,7 +18,8 @@
 
 		<div data-role="header" data-theme="f">
 		<h1>Bar theming </h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
 	</div>
 	
 
@@ -55,52 +57,52 @@
 		<h3>Headers</h3>
 
 		
-		<div data-role="header" data-position="inline">
+		<div data-role="header">
 			<h1>Bar theme "a"</h1>
 			<a href="index.html" data-icon="plus" data-theme="c">New</a>
 		</div>
 		
-		<div data-role="header" data-position="inline">
+		<div data-role="header">
 			<a href="index.html" data-icon="delete" iconpos="notext">Cancel</a>
 			<h1>Bar theme "a"</h1>
 			<a href="index.html" data-icon="arrow-r" data-iconpos="right" data-theme="b">Save</a>
 		</div>
 
-		<div data-role="header" data-position="inline" data-theme="b">
+		<div data-role="header" data-theme="b">
 			<h1>Bar theme "b"</h1>
 			<a href="index.html" data-icon="plus" data-theme="a">New</a>
 		</div>
 
-		<div data-role="header" data-position="inline" data-theme="b">
+		<div data-role="header" data-theme="b">
 			<a href="index.html" data-icon="delete" iconpos="notext">Cancel</a>
 			<h1>Bar theme "b"</h1>
 			<a href="index.html" data-icon="arrow-r" data-iconpos="right" data-theme="d">Save</a>
 		</div>
 
-		<div data-role="header" data-position="inline" data-theme="c">
+		<div data-role="header" data-theme="c">
 			<h1>Bar theme "c"</h1>
 			<a href="index.html" data-icon="plus" data-theme="a">New</a>
 		</div>
 
-		<div data-role="header" data-position="inline" data-theme="c">
+		<div data-role="header" data-theme="c">
 			<a href="index.html" data-icon="delete" iconpos="notext">Cancel</a>
 			<h1>Bar theme "c"</h1>
 			<a href="index.html" data-icon="arrow-r" data-iconpos="right" data-theme="b">Save</a>
 		</div>
 
-		<div data-role="header" data-position="inline" data-theme="d">
+		<div data-role="header" data-theme="d">
 			<h1>Bar theme "d"</h1>
 			<a href="index.html" data-icon="plus" data-theme="a">New</a>
 		</div>
 
-		<div data-role="header" data-position="inline" data-theme="d">
+		<div data-role="header" data-theme="d">
 			<a href="index.html" data-icon="delete" iconpos="notext">Cancel</a>
 			<h1>Bar theme "d"</h1>
 			<a href="index.html" data-icon="arrow-r" data-iconpos="right" data-theme="b">Save</a>
 		</div>
 
     <h3>Footers</h3>
-	<p>These are examples of a footer with link buttons inside. Note that footers do not have the same prescriptive markup contentions as headers with button slots so use layout <a href="../content/content-grids.html">grids</a> or custom styles to achieve the design you want.</p>
+	<p>These are examples of a footer with link buttons inside. Note that footers do not have the same prescriptive markup conventions as headers with button slots so use <a href="../content/content-grids.html">layout grids</a> or custom styles to achieve the design you want.</p>
 	
 
 	
@@ -156,8 +158,7 @@
 								<li><a href="docs-footers.html">Footer bars</a></li>
 								<li><a href="docs-navbar.html">Navbars</a></li>
 								<li><a href="bars-fixed.html">Fixed positioning</a></li>
-								<li><a href="bars-fullscreen.html">Fullscreen positioning</a></li>
-								<li><a href="footer-persist-a.html">Persistent footer nav bar</a></li>
+								<li><a href="footer-persist-a.html">Persistent toolbars</a></li>
 								<li data-theme="a"><a href="bars-themes.html">Theming toolbars</a></li>
 
 							</ul>
@@ -167,7 +168,7 @@
 			</div><!-- /content -->
 
 			<div data-role="footer" class="footer-docs" data-theme="c">
-					<p>&copy; 2011 The jQuery Project</p>
+					<p>&copy; 2011-12 The jQuery Foundation</p>
 			</div>
 
 			</div><!-- /page -->

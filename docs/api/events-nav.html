@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Docs - Events</title>
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+
+	<script src="../../js/jquery.js"></script>
+	<script src="../../docs/_assets/js/jqm-docs.js"></script>
+	<script src="../../js/"></script>
+	
+</head>
+<body>
+
+<div data-role="page" class="type-interior">
+
+	<div data-role="header" data-theme="f">
+		<h1>Events</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="content-primary">
+		
+		<h2>Framework, Page, and Navigation Events</h2>
+		<p>jQuery Mobile's widget and navigation system has a full set of events at each stage of the page load and page change process that can be tapped into to take full control. This page will highlight the most commonly used events and what they do, and also provide chronologies of when these events are triggered during load and transitions.</p>
+		
+		
+		<h3>Framework events</h3>
+		
+		<p>When jQuery Mobile initializes, it triggers an event on the <code>document</code> that is specifically designed for overriding framework and plugin defaults. That event is called <code>mobileinit</code>, and by binding to it, you can ensure that any global or plugin configuration options are overridden to any value you'd like before they are used by the framework's initial execution. </p>
+		
+
+			<pre>
+				<code>
+$(document).bind("mobileinit", function(){
+  //apply overrides here
+});
+				</code>
+			</pre>
+		
+		<p>The tricky aspect of mobileinit is that you need to bind to it before jQuery Mobile executes, so a typical mobileinit workflow would occur in a script that is referenced after jQuery itself, but before jQuery Mobile.</p>
+		
+		<p>It should be noted that while you can bind to other events from within a <code>mobileinit</code> callback, it is likely that you'll get undesirable results in doing so. This is because many events, such as the page events below, are intended for external developers to use <em>after</em> jQuery Mobile's plugins have loaded.</p>
+		
+		<h3>Page creation events</h3>
+		
+		<p>In a jQuery Mobile application, each  view is known as a page. Pages generally begin as a regular HTML element with a <code>data-role="page"</code> attribute, and the framework's page widget enhances that element into a jQuery Mobile page control. In the process of enhancing that page, the widget dispatches several events that allow you to access that page and its child elements at different stages of creation.</p>
+		
+			<p>These events are:</p>
+		
+		<dl>
+				<dt>pagecreate</dt>
+				
+				<dd>This event is triggered on a page when it is first initialized by the page plugin. <code>pagecreate</code> is the most useful event for progressively enhancing a page's markup when it first loads, and because of this, many of jQuery Mobile's standard widgets bind to <code>pagecreate</code> to enhance markup within pages as well! If you bind to <code>pagecreate</code> in any script that is referenced after the jQuery Mobile framework, any native jQuery Mobile widgets in that page will be enhanced before your event callback executes. In other words, you'll be dealing with enhanced jQuery Mobile components.</dd>
+				
+				<dt>pagebeforecreate</dt>
+				
+				<dd>This event is triggered on a page element just before it is created by the page plugin. While the <code>pagecreate</code> event generally allows you to work with a page <strong>after</strong> its markup has been enhanced by jQuery Mobile, <code>pagebeforecreate</code> gives you access when the markup has not yet been enhanced. <code>pagebeforecreate</code> is useful for modifying markup before jQuery Mobile's widgets </dd>
+				
+				<dt>pageinit</dt>
+				
+				<dd><code>pageinit</code> is very similar to <code>pagecreate</code>, except that none of jQuery Mobile's standard widgets bind to it, and it is guaranteed to execute after all bound <code>pagecreate</code> callbacks have finished. If you need to bind to a page creation-time event via a script that is referenced before jQuery Mobile, binding to <code>pageinit</code> will ensure that you deal with enhanced page controls (whereas <code>pagecreate</code> will not, in that specific case.)</dd>
+				
+				
+		</dl>
+		
+		
+		<h3>Page navigation events</h3>
+		<p>After pages are created, they are often shown and hidden one or many times throughout the use of a jQuery Mobile app. For A-grade browsers with Ajax navigation support, the jQM navigation model manages these page behaviors and dispatches useful events at different steps in the process of showing, hiding, and changing.</p>
+		
+		<h4>Page showing events</h4>
+		<p>The page showing events (<code>pagebeforeshow</code> and <code>pageshow</code>) are guaranteed to fire every time a page is shown, whether you're opening a single page, or transitioning between two pages. The target of the event is the page that is being shown.</p>
+		
+		<dl> 
+			
+			<dt>pagebeforeshow</dt>
+			<dd>An event triggered on a page before it is shown.</dd>
+			
+		
+			<dt>pageshow</dt>
+			<dd>An event triggered on the page after it is shown.</dd>
+		</dl>	
+		
+		<h4>Page hiding events</h4>
+		<p>The page hiding events (<code>pagebeforehide</code> and <code>pagehide</code>) only fire when transitioning between two pages, when an outgoing page is being hidden in favor of a new one. The target of the event is the page that is being shown.</p>
+		<dl>	
+			<dt>pagebeforehide</dt>
+			<dd>An event triggered on a page before it is hidden.</dd>
+			
+			
+			<dt>pagehide</dt>
+			<dd>An event triggered on a page after it is hidden.</dd>
+			
+		<dl>
+			
+			
+		<p>When a single page is being shown, and no page is hidden, only the	<code>pagebeforeshow</code> and <code>pageshow</code> events will fire, and in that order.</p>
+		
+		<p>During a transition between two pages, all 4 of the events above will fire, in this order:</p>
+		<style>
+		.nav-flow ol,  .nav-flow li { margin:0; list-style-type: none; text-align:center; line-height:150%; }
+		.nav-flow h3 { margin:0; }
+		.nav-flow em { color:#999; }
+		</style>	
+		
+		<ol class="nav-flow">
+			<li><h3>pagebeforehide</h3></li>
+			<li>&darr;</li>
+			<li><h3>pagebeforeshow</h3></li>
+			<li>&darr;</li>
+			<li><h3>pagehide</h3></li>
+			<li>&darr;</li>
+			<li><h3>pageshow</h3></li>
+		</ol>
+		
+		
+		
+			
+		
+		<h3>Chronology</h3>
+		
+		
+		
+		
+		<p>Here is an overview of the event chronology for a page change</p>
+		
+		
+		
+		
+		<ol class="nav-flow">
+			<li><h3>mobileinit</h3> <em>Set global options here</em></li>
+			<li>&darr;</li>
+			<li><h3>pagebeforechange</h3></li>
+			<li><h3>pagebeforeload</h3></li>
+			<li>&darr;</li>
+			<li><em>Page loads via AJAX</em></li>
+			<li>&darr;</li>
+			<li><h3>pagebeforecreate</h3></li>
+			<li><h3>pagecreate</h3></li>
+			<li>&darr;</li>
+			<li><em>Page enhancements run</em></li>
+			<li>&darr;</li>
+			<li><h3>pageinit</h3><em> Our document.ready</em></li>
+			<li>&darr;</li>
+			<li><h3>pageload</h3></li>
+			<li><h3>pagebeforechange</h3></li>
+			<li><h3>pagebeforehide</h3></li>
+			<li><h3>pagebeforeshow</h3></li>
+			<li>&darr;</li>
+			<li><em>Page transition</em></li>
+			<li>&darr;</li>
+			<li><h3>pagehide</h3></li>
+			<li><h3>pageshow</h3></li>
+			<li><h3>pagechange</h3></li>
+			<li>&darr;</li>
+			<li><em>Complete</em></li>
+		</ol>
+
+		<p>You can bind to these events like you would with other jQuery events, using <code>live()</code> or <code>bind()</code>.</p>
+
+			<div class="ui-body ui-body-e">
+		<h4 style="margin:.5em 0">Important: Use <code>pageInit()</code>, not <code>$(document).ready()</code></h4>
+		<p>The first thing you learn in jQuery is to call code inside the <code>$(document).ready()</code> function so everything will execute as soon as the DOM is loaded. However, in jQuery Mobile, Ajax is used to load the contents of each page into the DOM as you navigate, and the DOM ready handler only executes for the first page. To execute code whenever a new page is loaded and created, you can bind to the <code>pageinit</code> event. This event is explained in detail at the bottom of this page.</p></div>
+
+      <p> &nbsp;</p>
+		<div class="ui-body ui-body-e">
+		<h4 style="margin:.5em 0">Important: <code>pageCreate()</code> vs <code>pageInit()</code></h4>
+   <p> Prior to Beta 2 the recommendation to users wishing to manipulate jQuery Mobile enhanced page and child widget markup was to bind to the <code>pagecreate</code> event. In Beta 2 an internal change was made to decouple each of the widgets by binding to the <code>pagecreate</code> event in place of direct calls to the widget methods. As a result, users binding to the <code>pagecreate</code> from within <code>mobileinit</code> would find their binding executing before the markup had been enhanced by each of the plugins. In keeping with the lifecycle of the jQuery UI Widget Factory, the initialization method is invoked <strong>after</strong> the create method, so the <code>pageinit</code> event provides the correct timing for post enhancement manipulation of the DOM and/or Javascript objects.</p>
+</div>
+
+		
+
+		<h2>Page load events</h2>
+        <p>Whenever an external page is loaded into the application DOM, 2 events are fired. The first is <code>pagebeforeload</code>. The 2nd event will be either <code>pageload</code> or <code>pageloadfailed</code>.</p>
+		<dl>
+			<dt><code>pagebeforeload</code></dt>
+			<dd><p>Triggered before any load request is made. Callbacks bound to this event can call <code>preventDefault()</code> on the event to indicate that they are handling the load request. Callbacks that do this *MUST* make sure they call <code>resolve()</code> or <code>reject()</code> on the deferred object reference contained in the data object passed to the callback.</p>
+			<p>The data object, passed as the 2nd arg to the callback function contains the following properties:</p>
+            <ul>
+            	<li><code>url</code> (string)
+<ul>
+           	    <li>The absolute or relative URL that was passed into $.mobile.loadPage() by the caller.</li>
+          	    </ul>
+            	</li>
+            	<li><code>absUrl</code> (string)
+            	  <ul>
+            	    <li>The absolute version of the url. If url was relative, it is resolved against the url used to load the current active page.</li>
+          	    </ul>
+            	</li>
+            	<li><code>dataUrl</code> (string)
+            	  <ul>
+            	    <li>The filtered version of absUrl to be used when identifying the page and updating the browser location when the page is made active.</li>
+          	    </ul>
+            	</li>
+            	<li><code>deferred</code> (object)
+            	  <ul>
+            	    <li>Callbacks that call preventDefault() on the event, *MUST* call resolve() or reject() on this object so that changePage() requests resume processing. Deferred object observers expect the deferred object to be resolved like this:</p>
+                    <pre><code>
+$( document ).bind( &quot;pagebeforeload&quot;, function( event, data ){
+
+	// Let the framework know we're going to handle the load.
+
+	event.preventDefault();
+
+	// ... load the document then insert it into the DOM ...
+	// at some point, either in this callback, or through
+	// some other async means, call resolve, passing in
+	// the following args, plus a jQuery collection object
+	// containing the DOM element for the page.
+
+	data.deferred.resolve( data.absUrl, data.options, page );
+
+});</code></pre>
+                    <p>or rejected like this:
+                    <pre><code>
+$( document ).bind( &quot;pagebeforeload&quot;, function( event, data ){
+
+	// Let the framework know we're going to handle the load.
+
+	event.preventDefault();
+
+	// ... load the document then insert it into the DOM ...
+	// at some point, if the load fails, either in this
+	// callback, or through some other async means, call
+	// reject like this:
+
+	data.deferred.reject( data.absUrl, data.options );
+
+});</code></pre>
+                    </li>
+          	    </ul>
+            	</li>
+            	<li><code>options</code> (object)
+            	  <ul>
+            	    <li>This object contains the options that were passed into $.mobile.loadPage().</li>
+          	    </ul>
+            	</li>
+           	  </ul>
+            </dd>
+			<dt><code>pageload</code></dt>
+			<dd>Triggered after the page is successfully loaded and inserted into the DOM. Callbacks bound to this event will be passed a data object as its 2nd arg. This object contains the following information:
+            <ul>
+            	<li><code>url</code> (string)
+<ul>
+           	    <li>The absolute or relative URL that was passed into $.mobile.loadPage() by the caller.</li>
+          	    </ul>
+            	</li>
+            	<li><code>absUrl</code> (string)
+            	  <ul>
+            	    <li>The absolute version of the url. If url was relative, it is resolved against the url used to load the current active page.</li>
+          	    </ul>
+            	</li>
+            	<li><code>dataUrl</code> (string)
+            	  <ul>
+            	    <li>The filtered version of absUrl to be used when identifying the page and updating the browser location when the page is made active.</li>
+          	    </ul>
+            	</li>
+            	<li><code>options</code> (object)
+            	  <ul>
+            	    <li>This object contains the options that were passed into $.mobile.loadPage().</li>
+          	    </ul>
+            	</li>
+            	<li><code>xhr</code> (object)
+            	  <ul>
+            	    <li>The jQuery XMLHttpRequest object used when attempting to load the page. This is what gets passed as the 3rd argument to the framework's $.ajax() success callback.</li>
+          	    </ul>
+            	</li>
+            	<li><code>textStatus</code> (null or string)
+            	  <ul>
+            	    <li>According to the jQuery Core <a href="http://api.jquery.com/jQuery.ajax/">documentation</a>, this will be a string describing the status. This is what gets passed as the 2nd argument to the framework's $.ajax() error callback.</li>
+          	    </ul>
+            	</li>
+           	  </ul>
+            </dd>
+			<dt><code>pageloadfailed</code></dt>
+			<dd>Triggered if the page load request failed. By default, after dispatching this event, the framework will display a page failed message and call reject() on the deferred object contained within the event's data object. Callbacks can prevent this default behavior from executing by calling preventDefault() on the event.
+			  <p>The data object, passed as the 2nd arg to the callback function contains the following properties:</p>
+              <ul>
+            	<li><code>url</code> (string)
+<ul>
+           	    <li>The absolute or relative URL that was passed into $.mobile.loadPage() by the caller.</li>
+          	    </ul>
+            	</li>
+            	<li><code>absUrl</code> (string)
+            	  <ul>
+            	    <li>The absolute version of the url. If url was relative, it is resolved against the url used to load the current active page.</li>
+          	    </ul>
+            	</li>
+            	<li><code>dataUrl</code> (string)
+            	  <ul>
+            	    <li>The filtered version of absUrl to be used when identifying the page and updating the browser location when the page is made active.</li>
+          	    </ul>
+            	</li>
+            	<li><code>deferred</code> (object)
+            	  <ul>
+            	    <li>Callbacks that call preventDefault() on the event, *MUST* call resolve() or reject() on this object so that changePage() requests resume processing. Deferred object observers expect the deferred object to be resolved like this:</p>
+                    <pre><code>
+$( document ).bind( &quot;pageloadfailed&quot;, function( event, data ){
+
+	// Let the framework know we're going to handle things.
+
+	event.preventDefault();
+
+	// ... attempt to load some other page ...
+	// at some point, either in this callback, or through
+	// some other async means, call resolve, passing in
+	// the following args, plus a jQuery collection object
+	// containing the DOM element for the page.
+
+	data.deferred.resolve( data.absUrl, data.options, page );
+
+});</code></pre>
+                    <p>or rejected like this:
+                    <pre><code>
+$( document ).bind( &quot;pageloadfailed&quot;, function( event, data ){
+
+	// Let the framework know we're going to handle things.
+
+	event.preventDefault();
+
+	// ... attempt to load some other page ...
+	// at some point, if the load fails, either in this
+	// callback, or through some other async means, call
+	// reject like this:
+
+	data.deferred.reject( data.absUrl, data.options );
+
+});</code></pre>
+                    </li>
+          	    </ul>
+            	</li>
+            	<li><code>options</code> (object)
+            	  <ul>
+            	    <li>This object contains the options that were passed into $.mobile.loadPage().</li>
+          	    </ul>
+            	</li>
+            	<li><code>xhr</code> (object)
+            	  <ul>
+            	    <li>The jQuery XMLHttpRequest object used when attempting to load the page. This is what gets passed as the first argument to the framework's $.ajax() error callback.</li>
+          	    </ul>
+            	</li>
+            	<li><code>textStatus</code> (null or string)
+            	  <ul>
+            	    <li>According to the jQuery Core <a href="http://api.jquery.com/jQuery.ajax/">documentation</a>, possible values for this property, aside from null, are &quot;timeout&quot;, &quot;error&quot;, &quot;abort&quot;, and &quot;parsererror&quot;. This is what gets passed as the 2nd argument to the framework's $.ajax() error callback.</li>
+          	    </ul>
+            	</li>
+            	<li><code>errorThrown</code> (null, string, object)
+            	  <ul>
+            	    <li>According to the jQuery Core <a href="http://api.jquery.com/jQuery.ajax/">documentation</a>, this property may be an exception object if one occured, or if an HTTP error occured this will be set to the textual portion of the HTTP status. This is what gets passed as the 3rd argument to the framework's $.ajax() error callback.</li>
+          	    </ul>
+            	</li>
+           	  </ul>
+			</dd>
+		</dl>
+		<h2>Page change events</h2>
+		<p>Navigating between pages in the application is usually accomplished through a call to <code>$.mobile.changePage()</code>. This function is responsible for making sure that the page we are navigating to is loaded and inserted into the DOM, and then kicking off the transition animations between the current active page, and the page the caller wants to to make active. During this process, which is usually asynchronous, changePage() will fire off 2 events. The first is <code>pagebeforechange</code>. The second event depends on the success or failure of the change request. It will either be <code>pagechange</code> or <code>pagechangefailed</code>.</p>
+		<dl>
+			<dt><code>pagebeforechange</code></dt>
+			<dd>This event is triggered prior to any page loading or transition. Callbacks can prevent execution of the changePage() function by calling preventDefault on the event object passed into the callback. The callback also recieves a data object as its 2nd arg. The data object has the following properties:
+            <ul>
+				<li><code>toPage</code> (object or string)
+					<ul>
+						<li>This property represents the page the caller wishes to make active. It can be either a jQuery collection object containing the page DOM element, or an absolute/relative url to an internal or external page. The value exactly matches the 1st arg to the changePage() call that triggered the event.</li>
+					</ul>
+				</li>
+				<li><code>options</code> (object)
+					<ul>
+						<li>This object contains the configuration options to be used for the current changePage() call.</li>
+					</ul>
+				</li>
+			</ul>
+              <p>It should be noted that callbacks can modify both the <code>toPage</code> and <code>options</code> properties to alter the behavior of the current <code>changePage()</code> call. So for example, the <code>toPage</code> can be mapped to a different url from within a callback to do a sort of redirect.</p>
+            </dd>
+			<dt><code>pagechange</code></dt>
+			<dd>This event is triggered after the <code>changePage()</code> request has finished loading the page into the DOM and all page transition animations have completed. Note that any pageshow or pagehide events will have fired *BEFORE* this event is triggered. Callbacks for this particular event will be passed a data object as the 2nd arg. The properties for this object are as follows:
+            <ul>
+				<li><code>toPage</code> (object or string)
+					<ul>
+						<li>This property represents the page the caller wishes to make active. It can be either a jQuery collection object containing the page DOM element, or an absolute/relative url to an internal or external page. The value exactly matches the 1st arg to the changePage() call that triggered the event.</li>
+					</ul>
+				</li>
+				<li><code>options</code> (object)
+					<ul>
+						<li>This object contains the configuration options to be used for the current changePage() call.</li>
+					</ul>
+				</li>
+			</ul>
+            </dd>
+			<dt><code>pagechangefailed</code></dt>
+			<dd>This event is triggered when the <code>changePage()</code> request fails to load the page. Callbacks for this particular event will be passed a data object as the 2nd arg. The properties for this object are as follows:
+            <ul>
+				<li><code>toPage</code> (object or string)
+					<ul>
+						<li>This property represents the page the caller wishes to make active. It can be either a jQuery collection object containing the page DOM element, or an absolute/relative url to an internal or external page. The value exactly matches the 1st arg to the changePage() call that triggered the event.</li>
+					</ul>
+				</li>
+				<li><code>options</code> (object)
+					<ul>
+						<li>This object contains the configuration options to be used for the current changePage() call.</li>
+					</ul>
+				</li>
+			</ul>
+            </dd>
+            </dl>
+		<h2>Page transition events</h2>
+		<p>Page transitions are used to animate the change from the current active page (fromPage) to a new page (toPage). Events are triggered before and after these transitions so that observers can be notified whenever pages are shown or hidden. The events triggered are as follows:</p>
+		<dl>
+			<dt><code>pagebeforeshow</code></dt>
+			<dd>Triggered on the "toPage" we are transitioning to, before the actual transition animation is kicked off. Callbacks for this event will recieve a data object as their 2nd arg. This data object has the following properties on it:
+			<ul>
+				<li><code>prevPage</code> (object)
+					<ul>
+						<li>A jQuery collection object that contains the page DOM element that we are transitioning away from. Note that this collection is empty when the first page is transitioned in during application startup.</li>
+					</ul>
+				</li>
+			</ul>
+            </dd>
+
+			<dt><code>pagebeforehide</code></dt>
+			<dd>Triggered on the "fromPage" we are transitioning away from, before the actual transition animation is kicked off. Callbacks for this event will recieve a data object as their 2nd arg. This data object has the following properties on it:
+			<ul>
+				<li><code>nextPage</code> (object)
+					<ul>
+						<li>A jQuery collection object that contains the page DOM element that we are transitioning to.</li>
+					</ul>
+				</li>
+			</ul>
+			<p>Note that this event will not be dispatched during the transition of the first page at application startup since there is no previously active page.</p>
+          </dd>
+
+			<dt><code>pageshow</code></dt>
+			<dd>Triggered on the "toPage" after the transition animation has completed. Callbacks for this event will recieve a data object as their 2nd arg. This data object has the following properties on it:
+			<ul>
+				<li><code>prevPage</code> (object)
+					<ul>
+						<li>A jQuery collection object that contains the page DOM element that we just transitioned away from. Note that this collection is empty when the first page is transitioned in during application startup.</li>
+					</ul>
+				</li>
+			</ul>
+          </dd>
+
+			<dt><code>pagehide</code></dt>
+			<dd>Triggered on the "fromPage" after the transition animation has completed. Callbacks for this event will recieve a data object as their 2nd arg. This data object has the following properties on it:
+			<ul>
+				<li><code>nextPage</code> (object)
+					<ul>
+						<li>A jQuery collection object that contains the page DOM element that we just transitioned to.</li>
+					</ul>
+				</li>
+			</ul>
+			<p>Note that this event will not be dispatched during the transition of the first page at application startup since there is no previously active page.</p>
+          </dd>
+
+		</dl>
+
+		<p>You can access the <code>prevPage</code> or <code>nextPage</code> properties via the second argument of a bound callback function. For example: </p>
+<pre><code>
+$( 'div' ).live( 'pageshow',function(event, ui){
+  alert( 'This page was just hidden: '+ ui.prevPage);
+});
+
+$( 'div' ).live( 'pagehide',function(event, ui){
+  alert( 'This page was just shown: '+ ui.nextPage);
+});
+</code></pre>
+		<p>Also, for these handlers to be invoked during the initial page load, you must bind them before jQuery Mobile executes.  This can be done in the <code>mobileinit</code> handler, as described on the <a href="globalconfig.html">global config</a> page.
+		<h2>Page initialization events</h2>
+
+		<p>Internally, jQuery Mobile auto-initializes plugins based on the markup conventions found in a given "page". For example, an <code>input</code> element with a <code>type</code> of <code>range</code> will automatically generate a custom slider control.</p>
+
+		<p>This auto-initialization is controlled by the "page" plugin, which dispatches events before and after it executes, allowing you to manipulate a page either pre-or-post initialization, or even provide your own intialization behavior and prevent the auto-initializations from occuring. Note that these events will only fire once per "page", as opposed to the show/hide events, which fire every time a page is shown and hidden.</p>
+
+		<dl>
+			<dt><code>pagebeforecreate</code></dt>
+			<dd>
+				<p>Triggered on the page being initialized, before most plugin auto-initialization occurs.</p>
+<pre><code>
+$( '#aboutPage' ).live( 'pagebeforecreate',function(event){
+  alert( 'This page was just inserted into the dom!' );
+});
+</code></pre>
+				<p>Note that by binding to <code>pagebeforecreate</code>, you can manipulate markup before jQuery Mobile's default widgets are auto-initialized. For example, say you want to add data-attributes via JavaScript instead of in the HTML source, this is the event you'd use.</p>
+
+<pre><code>
+$( '#aboutPage' ).live( 'pagebeforecreate',function(event){
+  // manipulate this page before its widgets are auto-initialized
+});
+</code></pre>
+			</dd>
+
+			<dt><code>pagecreate</code></dt>
+			<dd>
+				<p>Triggered when the page has been created in the DOM (via ajax or other) but before all widgets have had an opportunity to enhance the contained markup. This event is most useful for user's wishing to create their own custom widgets for child markup enhancement as the jquery mobile widgets do.</p>
+<pre><code>
+$( '#aboutPage' ).live( 'pagecreate',function(event){
+  ( ":jqmData(role='sweet-plugin')" ).sweetPlugin();
+});
+</code></pre>
+			</dd>
+
+			<dt><code>pageinit</code></dt>
+			<dd>
+				<p>Triggered on the page being initialized, after initialization occurs. We recommend binding to this event instead of DOM ready() because this will work regardless of whether the page is loaded directly or if the content is pulled into another page as part of the Ajax navigation system.</p>
+<pre><code>
+$( '#aboutPage' ).live( 'pageinit',function(event){
+  alert( 'This page was just enhanced by jQuery Mobile!' );
+});
+</code></pre>
+			</dd>
+		</dl>
+
+
+
+		<h2>Page remove events</h2>
+		<p>By default, the framework removes any non active dynamically loaded external pages from the DOM as soon as the user navigates away to a different page. The <code>pageremove</code> event is dispatched just before the framework attempts to remove the a page from the DOM.</p>
+		<dl>
+			<dt><code>pageremove</code></dt>
+			<dd>This event is triggered just before the framework attempts to remove an external page from the DOM. Event callbacks can call preventDefault on the event object to prevent the page from being removed.
+			</dd>
+		</dl>
+
+
+    </div><!--/content-secondary -->
+
+	<div class="content-secondary">
+
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+
+				<h3>More in this section</h3>
+
+				<ul data-role="listview" data-theme="c" data-dividertheme="d">
+
+					<li data-role="list-divider">API</li>
+					<li><a href="../../docs/api/globalconfig.html">Configuring defaults</a></li>
+					<li data-theme="a"><a href="../../docs/api/events.html">Events</a></li>
+					<li><a href="../../docs/api/methods.html">Methods &amp; Utilities</a></li>
+					<li><a href="../../docs/api/data-attributes.html">Data attribute reference</a></li>
+					<li><a href="../../docs/api/themes.html">Theme framework</a></li>
+
+				</ul>
+		</div>
+	</div>
+
+</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p>&copy; 2011-12 The jQuery Foundation</p>
+</div>
+
+</div><!-- /page -->
+
+</body>
+</html>

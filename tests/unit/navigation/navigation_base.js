@@ -3,7 +3,8 @@
  */
 (function($){
 	var baseDir = $.mobile.path.parseUrl($("base").attr("href")).directory,
-		contentDir = $.mobile.path.makePathAbsolute("../content/", baseDir);
+		contentDir = $.mobile.path.makePathAbsolute("../content/", baseDir),
+		home = location.pathname + location.search;
 
 	module('jquery.mobile.navigation.js - base tag', {
 		setup: function(){
@@ -27,7 +28,7 @@
 			function(){
 				// Verify that we are on the 2nd internal page.
 				$.testHelper.assertUrlLocation({
-					push: location.pathname + "#internal-page-2",
+					push: home + "#internal-page-2",
 					hash: "internal-page-2",
 					report: "navigate to internal page"
 				});
@@ -86,7 +87,7 @@
 				// the hash based nav result (hash:) is dictate by the fact that #internal-page-1
 				// is the original root page element
 				$.testHelper.assertUrlLocation({
-					hashOrPush: location.pathname + location.search,
+					hashOrPush: home,
 					report: "navigate from a page in a non-base directory to an internal page"
 				});
 
@@ -131,7 +132,7 @@
 				// Verify that we are on the expected page.
 				$.testHelper.assertUrlLocation({
 					hash:  "internal-page-2",
-					push: location.pathname + "#internal-page-2",
+					push: home + "#internal-page-2",
 					report: "call changePage() with a page id"
 				});
 
@@ -143,7 +144,7 @@
 				// Verify that we are on the expected page.
 				$.testHelper.assertUrlLocation({
 					hash:  "internal-page-2",
-					push: location.pathname + "#internal-page-2",
+					push: home + "#internal-page-2",
 					report: "calling changePage() with a page id that is not prefixed with '#' should not change page"
 				});
 

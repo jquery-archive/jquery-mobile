@@ -4,12 +4,13 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>jQuery Mobile Docs - Button options</title>
-	<link rel="stylesheet"  href="../../css/themes/default/" />
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+
 	<script src="../../js/jquery.js"></script>
-	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
-	<script src="../_assets/js/jqm-docs.js"></script>
+	<script src="../../docs/_assets/js/jqm-docs.js"></script>
 	<script src="../../js/"></script>
+
 </head>
 <body>
 
@@ -17,7 +18,8 @@
 
 		<div data-role="header" data-theme="f">
 		<h1>Button basics</h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
 	</div><!-- /header -->
 
 	<div data-role="content">
@@ -55,7 +57,7 @@
 			<dt><code>iconpos</code> <em>string</em></dt>
 			<dd>
 				<p class="default">default: "left"</p>
-				<p>Positions the icon in the button. Possible values: left, right, none, notext. The notext value will display an icon-only button with no text feedback. This option is also exposed as a data attribute: <code>data-iconpos=&quot;left&quot;</code></p>
+				<p>Positions the icon in the button. Possible values: left, right, top, bottom, none, notext. The notext value will display an icon-only button with no text feedback. This option is also exposed as a data attribute: <code>data-iconpos=&quot;left&quot;</code></p>
 				<pre><code>$('a').buttonMarkup(<strong>{ iconpos: "right" }</strong>);</code></pre>
 				<a href="#" data-role="button" data-icon="star" data-iconpos="right">Star icon</a>
 			</dd>
@@ -74,6 +76,14 @@
 				<p>If set to true, this will make the button act like an inline button so the width is determined by the button's text. By default, this is null (false) so the button is full width, regardless of the feedback content. Possible values: true, false. This option is also exposed as a data attribute: <code>data-inline=&quot;true&quot;</code></p>
 				<pre><code>$('a').buttonMarkup(<strong>{ inline: "true" }</strong>);</code></pre>
 				<a href="#" data-role="button" data-inline="true">Inline</a>
+			</dd>
+			
+			<dt><code>mini</code> <em>boolean</em></dt>
+			<dd>
+				<p class="default">default: null (false)</p>
+				<p>If set to true, this will display a more compact version of the button that uses less vertical height. Possible values: true, false. This option is also exposed as a data attribute: <code>data-mini=&quot;true&quot;</code></p>
+				<pre><code>$('a').buttonMarkup(<strong>{ mini: "true" }</strong>);</code></pre>
+				<a href="#" data-role="button" data-mini="true">Inline</a>
 			</dd>
 			
 			<dt><code>shadow</code> <em>boolean</em></dt>
@@ -133,7 +143,7 @@
 </div><!-- /content -->
 
 <div data-role="footer" class="footer-docs" data-theme="c">
-		<p>&copy; 2011 The jQuery Project</p>
+		<p>&copy; 2011-12 The jQuery Foundation</p>
 </div>
 	
 </div><!-- /page -->

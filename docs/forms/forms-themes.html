@@ -1,15 +1,16 @@
 <!DOCTYPE html> 
-<html> 
+<html>
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<title>jQuery Mobile Docs - Theming Forms</title> 
-	<link rel="stylesheet"  href="../../css/themes/default/" />  
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+
 	<script src="../../js/jquery.js"></script>
-	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
-	<script src="../_assets/js/jqm-docs.js"></script>
+	<script src="../../docs/_assets/js/jqm-docs.js"></script>
 	<script src="../../js/"></script>
+
 </head> 
 <body> 
 
@@ -17,14 +18,15 @@
 
 		<div data-role="header" data-theme="f">
 		<h1>Theming forms</h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
 	</div><!-- /header -->
 
 	<div data-role="content">
     	<div class="content-primary">
 	
     <h2>Form themes</h2>
-    <p>jQuery Mobile has a rich <a href="../api/themes.html">theming system</a> that gives you full control of how pages and forms are styled. By default all form elements inside a container will automatically adopt the same theme color swatch as their parent. This allows form elements to blend into their layouts with minimal work. The <code> data-theme</code> attribute can be applied any individual form element to apply any of the lettered theme color swatches to create contrast and emphasis in your designs.</p> 
+    <p>jQuery Mobile has a rich <a href="../api/themes.html">theming system</a> that gives you full control of how pages and forms are styled. By default all form elements inside a container will automatically adopt the same theme color swatch as their parent. This allows form elements to blend into their layouts with minimal work. The <code> data-theme</code> attribute can be applied to any individual form element to apply any of the lettered theme color swatches to create contrast and emphasis in your designs.</p> 
     
     <p>All the form elements in the examples below use the same HTML code with no theme swatch specified on the individual form elements. The only difference between each example block code is a <code> data-theme</code> swatch color assigned to each parent container. This illustrates the way form elements automatically adopt the theme swatch of their parent.</p>
 			
@@ -377,7 +379,8 @@
 						<li data-role="list-divider">Form elements</li>
 						<li><a href="docs-forms.html">Form basics</a></li>
 						<li><a href="forms-all.html">Form element gallery</a></li>
-            <li><a href="textinputs/">Text inputs</a></li>
+						<li><a href="forms-all-mini.html">Mini form element gallery</a></li>
+            			<li><a href="textinputs/">Text inputs</a></li>
 						<li><a href="search/">Search inputs</a></li>
 						<li><a href="slider/">Slider</a></li>
 						<li><a href="switch/">Flip toggle switch</a></li>
@@ -396,7 +399,7 @@
 	</div><!-- /content -->
 
 	<div data-role="footer" class="footer-docs" data-theme="c">
-			<p>&copy; 2011 The jQuery Project</p>
+			<p>&copy; 2011-12 The jQuery Foundation</p>
 	</div>
 
 	</div><!-- /page -->

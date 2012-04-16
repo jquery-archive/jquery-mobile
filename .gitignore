@@ -7,9 +7,9 @@ cache/
 combined/
 combine/
 compiled/
-gitstatus.log
-refreshCDN
-.vagrant
+tmp/
 *.swp
 .gitignore
-tests/speed/stats/stats.db
+
+# branch preview
+branches

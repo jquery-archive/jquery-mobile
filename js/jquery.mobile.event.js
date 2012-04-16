@@ -1,10 +1,11 @@
-/*
-* jQuery Mobile Framework : "events" plugin - Handles events
-* Copyright (c) jQuery Project
-* Dual licensed under the MIT or GPL Version 2 licenses.
-* http://jquery.org/license
-*/
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Custom events and shortcuts.
+//>>label: Events
+//>>group: Core
+//>>required: true
 
+define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery.mobile.vmouse" ], function( $ ) {
+//>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
 // add new event shortcuts
@@ -91,8 +92,8 @@ $.event.special.tap = {
 				clearTapTimer();
 
 				$this.unbind( "vclick", clickHandler )
-					.unbind( "vmouseup", clearTapTimer )
-					.unbind( "vmousecancel", clearTapHandlers );
+					.unbind( "vmouseup", clearTapTimer );
+				$( document ).unbind( "vmousecancel", clearTapHandlers );
 			}
 
 			function clickHandler(event) {
@@ -105,12 +106,12 @@ $.event.special.tap = {
 				}
 			}
 
-			$this.bind( "vmousecancel", clearTapHandlers )
-				.bind( "vmouseup", clearTapTimer )
+			$this.bind( "vmouseup", clearTapTimer )
 				.bind( "vclick", clickHandler );
+			$( document ).bind( "vmousecancel", clearTapHandlers );
 
 			timer = setTimeout(function() {
-					triggerCustomEvent( thisObject, "taphold", $.Event( "taphold" ) );
+					triggerCustomEvent( thisObject, "taphold", $.Event( "taphold", { target: origTarget } ) );
 			}, 750 );
 		});
 	}
@@ -185,7 +186,57 @@ $.event.special.swipe = {
 	var win = $( window ),
 		special_event,
 		get_orientation,
-		last_orientation;
+		last_orientation,
+		initial_orientation_is_landscape,
+		initial_orientation_is_default,
+		portrait_map = { "0": true, "180": true };
+
+	// It seems that some device/browser vendors use window.orientation values 0 and 180 to
+	// denote the "default" orientation. For iOS devices, and most other smart-phones tested,
+	// the default orientation is always "portrait", but in some Android and RIM based tablets,
+	// the default orientation is "landscape". The following code attempts to use the window
+	// dimensions to figure out what the current orientation is, and then makes adjustments
+	// to the to the portrait_map if necessary, so that we can properly decode the
+	// window.orientation value whenever get_orientation() is called.
+	//
+	// Note that we used to use a media query to figure out what the orientation the browser
+	// thinks it is in:
+	//
+	//     initial_orientation_is_landscape = $.mobile.media("all and (orientation: landscape)");
+	//
+	// but there was an iPhone/iPod Touch bug beginning with iOS 4.2, up through iOS 5.1,
+	// where the browser *ALWAYS* applied the landscape media query. This bug does not
+	// happen on iPad.
+
+	if ( $.support.orientation ) {
+
+		// Check the window width and height to figure out what the current orientation
+		// of the device is at this moment. Note that we've initialized the portrait map
+		// values to 0 and 180, *AND* we purposely check for landscape so that if we guess
+		// wrong, , we default to the assumption that portrait is the default orientation.
+		// We use a threshold check below because on some platforms like iOS, the iPhone
+		// form-factor can report a larger width than height if the user turns on the
+		// developer console. The actual threshold value is somewhat arbitrary, we just
+		// need to make sure it is large enough to exclude the developer console case.
+
+		var ww = window.innerWidth || $( window ).width(),
+			wh = window.innerHeight || $( window ).height(),
+			landscape_threshold = 50;
+
+		initial_orientation_is_landscape = ww > wh && ( ww - wh ) > landscape_threshold;
+
+
+		// Now check to see if the current window.orientation is 0 or 180.
+		initial_orientation_is_default = portrait_map[ window.orientation ];
+
+		// If the initial orientation is landscape, but window.orientation reports 0 or 180, *OR*
+		// if the initial orientation is portrait, but window.orientation reports 90 or -90, we
+		// need to flip our portrait_map values because landscape is the default orientation for
+		// this device/browser.
+		if ( ( initial_orientation_is_landscape && initial_orientation_is_default ) || ( !initial_orientation_is_landscape && !initial_orientation_is_default ) ) {
+			portrait_map = { "-90": true, "90": true };
+		}
+	}
 
 	$.event.special.orientationchange = special_event = {
 		setup: function() {
@@ -254,7 +305,7 @@ $.event.special.swipe = {
 		if ( $.support.orientation ) {
 			// if the window orientation registers as 0 or 180 degrees report
 			// portrait, otherwise landscape
-			isPortrait = window.orientation % 180 == 0;
+			isPortrait = portrait_map[ window.orientation ];
 		} else {
 			isPortrait = elem && elem.clientWidth / elem.clientHeight < 1.1;
 		}
@@ -319,3 +370,6 @@ $.each({
 });
 
 })( jQuery, this );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");

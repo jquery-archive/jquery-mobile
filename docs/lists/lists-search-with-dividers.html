@@ -1,14 +1,15 @@
 <!DOCTYPE html> 
-<html> 
+<html>
 	<head>
 	<meta charset="utf-8" /> 
 	<title>jQuery Mobile Docs - Filtered Lists with Dividers</title> 
-	<link rel="stylesheet"  href="../../css/themes/default/" />  
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+
 	<script src="../../js/jquery.js"></script>
-	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
-	<script src="../_assets/js/jqm-docs.js"></script>
+	<script src="../../docs/_assets/js/jqm-docs.js"></script>
 	<script src="../../js/"></script>
+
 </head> 
 <body> 
 
@@ -16,12 +17,13 @@
 
 		<div data-role="header" data-theme="f">
 		<h1>List dividers</h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
 	</div><!-- /header -->
 
 	<div data-role="content">
 		<div class="content-primary">	
-			<ul data-role="listview" data-filter="true" data-filter-placeholder="Search people..." data-filter-theme="b">
+			<ul data-role="listview" data-filter="true" data-filter-placeholder="Search people..." data-filter-theme="d"data-theme="d" data-divider-theme="d">
 				<li data-role="list-divider">A</li>
 				<li><a href="index.html">Adam Kinkaid</a></li>
 				<li><a href="index.html">Alex Wickerham</a></li>
@@ -70,7 +72,7 @@
 						<ul data-role="listview" data-theme="c" data-dividertheme="d">
 
 							<li data-role="list-divider">List views</li>
-							<li><a href="docs-lists.html">List markup conventions</a></li>
+							<li><a href="docs-lists.html">List basics &amp; API</a></li>
 							<li><a href="lists-ul.html">Basic linked list</a></li>
 							<li><a href="lists-nested.html">Nested list</a></li>
 							<li><a href="lists-ol.html">Numbered list</a></li>
@@ -84,6 +86,7 @@
 							<li><a href="lists-search.html">Search filter bar</a></li>
 							<li><a href="lists-search-inset.html">Inset search filter bar</a></li>
 							<li data-theme="a"><a href="lists-search-with-dividers.html">Search filter bar with dividers</a></li>
+							<li><a href="lists-search-filtertext.html">Search filter hidden data</a></li>
 
 							<li><a href="lists-readonly.html">Read-only lists</a></li>
 							<li><a href="lists-readonly-inset.html">Read-only inset lists</a></li>
@@ -101,7 +104,7 @@
 		</div><!-- /content -->
 
 		<div data-role="footer" class="footer-docs" data-theme="c">
-				<p>&copy; 2011 The jQuery Project</p>
+				<p>&copy; 2011-12 The jQuery Foundation</p>
 		</div>
 
 		</div><!-- /page -->

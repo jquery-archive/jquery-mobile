@@ -1,11 +1,13 @@
-/*
-* jQuery Mobile Framework : "init" - Initialize the framework
-* Copyright (c) jQuery Project
-* Dual licensed under the MIT or GPL Version 2 licenses.
-* http://jquery.org/license
-*/
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Global initialization of the library.
+//>>label: Init
+//>>group: Core
 
-(function( $, window, undefined ) {
+
+define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery.mobile.navigation",
+	"./jquery.mobile.navigation.pushstate", "../external/requirejs/depend!./jquery.mobile.hashchange[jquery]" ], function( $ ) {
+//>>excludeEnd("jqmBuildExclude");
+( function( $, window, undefined ) {
 	var	$html = $( "html" ),
 			$head = $( "head" ),
 			$window = $( window );
@@ -26,42 +28,88 @@
 		$.mobile.ajaxEnabled = false;
 	}
 
-	// add mobile, initial load "rendering" classes to docEl
+	// Add mobile, initial load "rendering" classes to docEl
 	$html.addClass( "ui-mobile ui-mobile-rendering" );
+
+	// This is a fallback. If anything goes wrong (JS errors, etc), or events don't fire,
+	// this ensures the rendering class is removed after 5 seconds, so content is visible and accessible
+	setTimeout( hideRenderingClass, 5000 );
 
 	// loading div which appears during Ajax requests
 	// will not appear if $.mobile.loadingMessage is false
-	var $loader = $( "<div class='ui-loader ui-body-a ui-corner-all'><span class='ui-icon ui-icon-loading spin'></span><h1></h1></div>" );
+	var loaderClass = "ui-loader",
+		$loader = $( "<div class='" + loaderClass + "'><span class='ui-icon ui-icon-loading'></span><h1></h1></div>" );
+
+	// For non-fixed supportin browsers. Position at y center (if scrollTop supported), above the activeBtn (if defined), or just 100px from top
+	function fakeFixLoader(){
+		var activeBtn = $( "." + $.mobile.activeBtnClass ).first();
+
+		$loader
+			.css({
+				top: $.support.scrollTop && $window.scrollTop() + $window.height() / 2 ||
+				activeBtn.length && activeBtn.offset().top || 100
+			});
+	}
+
+	// check position of loader to see if it appears to be "fixed" to center
+	// if not, use abs positioning
+	function checkLoaderPosition(){
+		var offset = $loader.offset(),
+			scrollTop = $window.scrollTop(),
+			screenHeight = $.mobile.getScreenHeight();
+
+		if( offset.top < scrollTop || (offset.top - scrollTop) > screenHeight ) {
+			$loader.addClass( "ui-loader-fakefix" );
+			fakeFixLoader();
+			$window
+				.unbind( "scroll", checkLoaderPosition )
+				.bind( "scroll", fakeFixLoader );
+		}
+	}
+
+	//remove initial build class (only present on first pageshow)
+	function hideRenderingClass(){
+		$html.removeClass( "ui-mobile-rendering" );
+	}
 
 	$.extend($.mobile, {
 		// turn on/off page loading message.
-		showPageLoadingMsg: function() {
+		showPageLoadingMsg: function( theme, msgText, textonly ) {
+			$html.addClass( "ui-loading" );
+
 			if ( $.mobile.loadingMessage ) {
-				var activeBtn = $( "." + $.mobile.activeBtnClass ).first();
+				// text visibility from argument takes priority
+				var textVisible = textonly || $.mobile.loadingMessageTextVisible;
+
+				theme = theme || $.mobile.loadingMessageTheme,
 
 				$loader
+					.attr( "class", loaderClass + " ui-corner-all ui-body-" + ( theme || "a" ) + " ui-loader-" + ( textVisible ? "verbose" : "default" ) + ( textonly ? " ui-loader-textonly" : "" ) )
 					.find( "h1" )
-						.text( $.mobile.loadingMessage )
+						.text( msgText || $.mobile.loadingMessage )
 						.end()
-					.appendTo( $.mobile.pageContainer )
-					// position at y center (if scrollTop supported), above the activeBtn (if defined), or just 100px from top
-					.css({
-						top: $.support.scrollTop && $window.scrollTop() + $window.height() / 2 ||
-						activeBtn.length && activeBtn.offset().top || 100
-					});
-			}
+					.appendTo( $.mobile.pageContainer );
 
-			$html.addClass( "ui-loading" );
+				checkLoaderPosition();
+				$window.bind( "scroll", checkLoaderPosition );
+			}
 		},
 
 		hidePageLoadingMsg: function() {
 			$html.removeClass( "ui-loading" );
+
+			if( $.mobile.loadingMessage ){
+				$loader.removeClass( "ui-loader-fakefix" );
+			}
+
+			$( window ).unbind( "scroll", fakeFixLoader );
+			$( window ).unbind( "scroll", checkLoaderPosition );
 		},
 
 		// find and enhance the pages in the dom and transition to the first page.
 		initializePage: function() {
 			// find present pages
-			var $pages = $( ":jqmData(role='page')" );
+			var $pages = $( ":jqmData(role='page'), :jqmData(role='dialog')" );
 
 			// if no pages are found, create one with body's inner html
 			if ( !$pages.length ) {
@@ -69,7 +117,7 @@
 			}
 
 			// add dialogs, set data-url attrs
-			$pages.add( ":jqmData(role='dialog')" ).each(function() {
+			$pages.each(function() {
 				var $this = $(this);
 
 				// unless the data url is already set set it to the pathname
@@ -91,6 +139,9 @@
 			// cue page loading message
 			$.mobile.showPageLoadingMsg();
 
+			//remove initial build class (only present on first pageshow)
+			hideRenderingClass();
+
 			// if hashchange listening is disabled or there's no hash deeplink, change to the first page in the DOM
 			if ( !$.mobile.hashListeningEnabled || !$.mobile.path.stripHash( location.hash ) ) {
 				$.mobile.changePage( $.mobile.firstPage, { transition: "none", reverse: true, changeHash: false, fromHashChange: true } );
@@ -101,24 +152,6 @@
 			}
 		}
 	});
-	
-	// This function injects a meta viewport tag to prevent scaling. Off by default, on by default when touchOverflow scrolling is enabled
-	function disableZoom() {
-		var cont = "user-scalable=no",
-			meta = $( "meta[name='viewport']" );
-			
-		if( meta.length ){
-			meta.attr( "content", meta.attr( "content" ) + ", " + cont );
-		}
-		else{
-			$( "head" ).prepend( "<meta>", { "name": "viewport", "content": cont } );
-		}
-	}
-	
-	// if touch-overflow is enabled, disable user scaling, as it creates usability issues
-	if( $.support.touchOverflow && $.mobile.touchOverflowEnabled && !$.mobile.touchOverflowZoomEnabled ){
-		disableZoom();
-	}
 
 	// initialize events now, after mobileinit has occurred
 	$.mobile._registerInternalEvents();
@@ -134,6 +167,17 @@
 		// so if it's 1, use 0 from now on
 		$.mobile.defaultHomeScroll = ( !$.support.scrollTop || $(window).scrollTop() === 1 ) ? 0 : 1;
 
+
+		// TODO: Implement a proper registration mechanism with dependency handling in order to not have exceptions like the one below
+		//auto self-init widgets for those widgets that have a soft dependency on others
+		if ( $.fn.controlgroup ) {
+			$( document ).bind( "pagecreate create", function( e ){
+				$( ":jqmData(role='controlgroup')", e.target )
+					.jqmEnhanceable()
+					.controlgroup({ excludeInvisible: false });
+			});
+		}
+
 		//dom-ready inits
 		if( $.mobile.autoInitializePage ){
 			$.mobile.initializePage();
@@ -143,4 +187,7 @@
 		// hide iOS browser chrome on load
 		$window.load( $.mobile.silentScroll );
 	});
-})( jQuery, this );
+}( jQuery, this ));
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");

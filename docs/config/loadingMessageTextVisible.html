@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Docs - Configuration</title>
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />  
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+
+	<script src="../../js/jquery.js"></script>
+	<script src="../../docs/_assets/js/jqm-docs.js"></script>
+	<script>
+	$(document).bind("mobileinit", function(){
+		$.mobile.loadingMessageTextVisible = true;
+	});
+	</script>
+	
+	<script src="../../js/"></script>
+
+</head>
+<body>
+
+	<div data-role="page">
+	<script>
+		$(document).on("click", ".show-page-loading-msg", function() {
+			var $this = $( this ),
+				theme = $this.jqmData("theme") || $.mobile.loadingMessageTheme,
+				msgText = $this.jqmData("msgtext") || $.mobile.loadingMessage,
+				textonly = !!$this.jqmData("textonly");
+			$.mobile.showPageLoadingMsg(theme, msgText, textonly);
+		})
+		.on("click", ".hide-page-loading-msg", function() {
+			$.mobile.hidePageLoadingMsg();
+		});
+	</script>
+
+	<div data-role="header" data-theme="f">
+		<h1>Config applied</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+
+		<h2>loadingMessage text is now visible</h2>
+		<p>To test, hit the button below and browse the docs. Note that if a link causes a refresh, this setting will be lost and the default settings will be seen.</p>
+		<a href="../../index.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Browse docs</a>
+
+		<p>To display the loading message on demand:</p>
+		<pre><code>$.mobile.showPageLoadingMsg();</code></pre>
+		<p>Click the buttons below to show and hide the loading message with the default options.</p>
+		<div data-role="controlgroup">
+			<button class="show-page-loading-msg" data-inline="false" data-icon="arrow-r" data-iconpos="right">Show</button>
+			<button class="hide-page-loading-msg" data-inline="false" data-icon="delete" data-iconpos="right">Hide</button>
+		</div>
+
+		<h2>Theming the loading message</h2>
+		<p>To display the loading message with a different theme and message:</p>
+		<pre><code>$.mobile.showPageLoadingMsg(<strong>"a", "Loading theme a..."</strong>);</code></pre>
+		<p>The theme and message can be changed on the fly by calling the method again.  Click the buttons below to see the loading message with the indicated theme.</p>
+		<div data-role="controlgroup">
+			<button class="show-page-loading-msg" data-theme="a" data-icon="arrow-r" data-iconpos="right" data-msgtext="Loading theme a...">Theme a</button>
+			<button class="show-page-loading-msg" data-theme="b" data-icon="arrow-r" data-iconpos="right" data-msgtext="Loading theme b...">Theme b</button>
+			<button class="show-page-loading-msg" data-theme="c" data-icon="arrow-r" data-iconpos="right" data-msgtext="Loading theme c...">Theme c</button>
+			<button class="show-page-loading-msg" data-theme="d" data-icon="arrow-r" data-iconpos="right" data-msgtext="Loading theme d...">Theme d</button>
+			<button class="show-page-loading-msg" data-theme="e" data-icon="arrow-r" data-iconpos="right" data-msgtext="Loading theme e...">Theme e</button>
+			<button class="hide-page-loading-msg" data-icon="delete" data-iconpos="right">Hide</button>
+		</div>
+
+		<h2>Text only messages</h2>
+		<p>To display the loading message with no spinner:</p>
+		<pre><code>$.mobile.showPageLoadingMsg("a", "No spinner", <strong>true</strong>);</code></pre>
+		<p>Click the button below to see the loading message with no spinner.</p>
+		<div data-role="controlgroup">
+			<button class="show-page-loading-msg" data-textonly="true" data-msgtext="Look Ma, no spinner!" data-icon="arrow-r" data-iconpos="right">Show</button>
+			<button class="hide-page-loading-msg" data-inline="false" data-icon="delete" data-iconpos="right">Hide</button>
+		</div>
+
+
+		</div><!-- /ui-body wrapper -->
+</div><!-- /page -->
+
+</body>
+</html>

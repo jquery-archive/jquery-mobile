@@ -1,29 +1,31 @@
 <!DOCTYPE html> 
-<html> 
+<html>
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<title>jQuery Mobile Docs - Header Bars</title> 
-	<link rel="stylesheet"  href="../../css/themes/default/" />  
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+
 	<script src="../../js/jquery.js"></script>
-	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
-	<script src="../_assets/js/jqm-docs.js"></script>
+	<script src="../../docs/_assets/js/jqm-docs.js"></script>
 	<script src="../../js/"></script>
+
 </head> 
 <body> 
 
 	<div data-role="page" class="type-interior">
 
 		<div data-role="header" data-theme="f">
-		<h1>Header bars</h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+		<h1>Headers</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
 	</div><!-- /header -->
 
 	<div data-role="content">
 		<div class="content-primary">	
 			<h2>Header structure</h2>
-			<p>The <code>header</code> is a toolbar at the top of the page that usually contains the page title text and optional buttons positioned to the the left and/or right of the title for navigation or actions.</p> 
+			<p>The <code>header</code> is a toolbar at the top of the page that usually contains the page title text and optional buttons positioned to the the left and/or right of the title for navigation or actions. Headers can optionally be positioned as <a href="bars-fixed.html">fixed</a> so they remain at the top of the screen at all times instead of scrolling with the page.</p> 
 			
 			<p>The title text is normally an H1 heading element but it's possible to use any heading level (H1-H6) to allow for semantic flexibility. For example, a page containing multiple mobile 'pages' may use a H1 element on the home 'page' and a H2 element on the secondary pages. All heading levels are styled identically by default to maintain visual consistency.</p> 
 
@@ -40,7 +42,7 @@
 
 
 			
-			<div data-role="header" data-position="inline">
+			<div data-role="header">
 				<h1>Page title</h1>
 			</div>
 
@@ -70,12 +72,15 @@
 </code></pre>
 	
 	
-			<div data-role="header" data-position="inline">
+			<div data-role="header">
 				<a href="index.html" data-icon="delete">Cancel</a>
 				<h1>Edit Contact</h1>
 				<a href="index.html" data-icon="check">Save</a>
 			</div>
-			<p>Buttons automatically adopt the swatch color of the bar they sit in, so a link in a header bar with the "a" color will also be styled as "a" colored buttons. It's simple to make a button visually stand out &mdash; here, we add the <code> data-theme</code> attribute and set the color swatch for the button to "b" to make the "Save" button pop.</p>
+			
+			<h3>Making buttons visually stand out</h3>
+			
+			<p>Buttons automatically adopt the swatch color of the bar they sit in, so a link in a header bar with the "a" color will also be styled as "a" colored buttons. It's simple to make a button visually stand out. Here, we add the <code> data-theme</code> attribute and set the color swatch for the button to "b" to make the "Save" button pop.</p>
 			
 			<pre><code>			
 &lt;div data-role=&quot;header&quot; data-position=&quot;inline&quot;&gt;
@@ -86,7 +91,7 @@
 </code></pre>
 			
 						
-			<div data-role="header" data-position="inline">
+			<div data-role="header">
 				<a href="index.html" data-icon="delete">Cancel</a>
 				<h1>Edit Contact</h1>
 				<a href="index.html" data-icon="check" data-theme="b">Save</a>
@@ -101,25 +106,48 @@
 
 <div class="highlight"> 
 <pre><code>
-&lt;div data-role=&quot;header&quot; data-position=&quot;inline&quot; 
+&lt;div data-role=&quot;header&quot; data-position=&quot;inline&quot;&gt; 
 	&lt;h1&gt;Page Title&lt;/h1&gt;
 	&lt;a href=&quot;index.html&quot; data-icon=&quot;gear&quot; class=&quot;ui-btn-right&quot;&gt;Options&lt;/a&gt;
 &lt;/div&gt;
 </code></pre> 
 </div> 
 
-			<div data-role="header" data-position="inline" >
+			<div data-role="header" >
 				<h1>Page Title</h1>
 				<a href="index.html" data-icon="gear" class="ui-btn-right">Options</a>
 			</div>
 			
 			
+				<h3>Adding buttons to toolbars without heading</h3>
+	
+			<p>The heading in the header bar has some margin that will give the bar its height. If you choose not to use a heading, you will need to add an element with <code>class="ui-title"</code> so that the bar can get the height and display correctly.</p> 
+
+		
+<div class="highlight"> 
+<pre><code>
+&lt;div data-role=&quot;header&quot; data-position=&quot;inline&quot;&gt; 
+	&lt;a href=&quot;index.html&quot; data-icon=&quot;gear&quot; class=&quot;ui-btn-right&quot;&gt;Options&lt;/a&gt;
+	&lt;span class=&quot;ui-title&quot; /&gt;
+&lt;/div&gt;
+	
+</code></pre> 
+</div> 
+
+			<div data-role="header" >
+				<a href="index.html" data-icon="gear" class="ui-btn-right">Options</a>
+				<span class="ui-title" />
+			</div>
+			
+			
+			
 		<h2>Adding Back buttons</h2>
 		
-		<p>jQuery Mobile has a feature to automatically create and append "back" buttons to any header, though it is disabled by default. This is primarily useful in chromeless installed applications, such as those running in a native app web view. The framework automatically generates a "back" button on a header when the page plugin's <code>addBackBtn</code> option is true. This can also be set via markup if the page div has a <code>data-add-back-btn="true"</code> attribute. </p> 
+		<p>jQuery Mobile has a feature to automatically create and append "back" buttons to any header, though it is disabled by default. This is primarily useful in chromeless installed applications, such as those running in a native app webview. The framework automatically generates a "back" button on a header when the page plugin's <code>addBackBtn</code> option is true. This can also be set via markup if the page div has a <code>data-add-back-btn="true"</code> attribute. </p> 
 		
 		
-		<p>If you use the attribute <code>data-rel="back"</code> on an anchor, any clicks on that anchor will mimic the back button, going back one history entry and ignoring the anchor's default href. This is particularly useful when linking back to a named page, such as a link that says "home", or when generating "back" buttons with JavaScript, such as a button to close a dialog. When using this feature in your source markup, <strong>be sure to provide a meaningful href that actually points to the URL of the referring page (this will allow the feature to work for users in C-Grade browsers</strong>. Also, please keep in mind that if you just want a reverse transition without actually going back in history, you should use the <code>data-direction="reverse"</code> attribute instead.</p>	
+		<p>If you use the attribute <code>data-rel="back"</code> on an anchor, any clicks on that anchor will mimic the back button, going back one history entry and ignoring the anchor's default href. This is particularly useful when linking back to a named page, such as a link that says "home", or when generating "back" buttons with JavaScript, such as a button to close a dialog. When using this feature in your source markup, <strong>be sure to provide a meaningful href that actually points to the URL of the referring page. This will allow the feature to work for users in C-Grade browsers.</strong></p>
+                <p>If you just want a reverse transition without actually going back in history, you should use the <code>data-direction="reverse"</code> attribute.</p>	
 			
 		<h2>Customizing the back button text</h2>	
 		
@@ -130,9 +158,9 @@
 		If you're doing this programmatically, set this option inside the mobileinit event handler.</p>
 
 			<h2>Custom header configurations</h2>
-			<p>If you need to to create a header that doesn't follow the default configuration, simply wrap your custom styled markup in a container <code>div</code> inside the header container and the plugin won't apply the automatic button logic so you can write custom styles for laying out the content in your header.</p> 
+			<p>If you need to to create a header that doesn't follow the default configuration, simply wrap your custom styled markup in any container, such as <code>div</code>. The plugin won't apply the automatic button logic to the wrapped content inside the header container so you can write custom styles for laying out the content in your header.</p> 
 
-			<p>It's also possible to create custom bars without using the header data-role at all. For example, start with any container and add the <code>ui-bar</code> class to apply standard bar padding and  add the <code>ui-bar-b</code> class to assign the bar swatch styles from your theme (the "b" can be any swatch letter).</p>
+			<p>It's also possible to create custom bars without using the header data-role at all. For example, start with any container and add the <code>ui-bar</code> class to apply standard bar padding and add the <code>ui-bar-b</code> class to assign the bar swatch styles from your theme. (The "b" can be any swatch letter.)</p>
 			
 			<pre><code>
 &lt;div <strong>class=&quot;ui-bar ui-bar-b&quot;</strong>&gt;
@@ -142,15 +170,16 @@
 
 			<p>This will produce this bar:</p>
 				<div class="ui-bar ui-bar-b">
-					<h3>I'm just a div with bar classes and a <a href="#" data-role="button">Button</a></h3>
+					<h3>I'm just a div with bar classes and a mini inline <a href="#" data-role="button" data-inline="true" data-mini="true">Button</a></h3>
 				</div>
 				
-				<p>By writing some simple styles, it's easy to build little message bars like this:</p>
+				<p>Note that <code>.ui-bar</code> should not be added to header or footer bars that span the full width of the page, as the additional padding will cause a full-width element to break out of its parent container. To add padding inside of a full-width toolbar, wrap the toolbar's contents in an element and apply the padding to that element instead.</p>
+				
+				<p>By writing some simple styles, it's easy to build message bars like this:</p>
 					<!-- Yes, the inline styles aren't recommended in a real system but they are used to simply illustrate how to tweak CSS -->
 					<div class="ui-bar ui-bar-e">
-						<h3 style="float:left; margin-top:8px;">This is an alert message with dismiss button. </h3>
-						<div style="float:right; margin-top:4px;"><a href="#" data-role="button" data-icon="delete" data-iconpos="notext">Button</a></div>
-						<p style="clear:both; font-size:85%; margin-bottom:8px;">And here's some additional text in a paragraph.</p>
+						
+						<h3 style="display:inline-block; width:92%; margin-top:5px;">This is an alert message. </h3><div style="display:inline-block; width:8%; margin-top:0px;"><a href="#" data-role="button" data-icon="delete" data-iconpos="notext">Dismiss</a></div><p style="font-size:85%; margin:-.3em 0 1em;">And here's some additional text in a paragraph.</p>
 					</div>
 				</div><!--/content-primary -->		
 
@@ -168,8 +197,7 @@
 								<li><a href="docs-footers.html">Footer bars</a></li>
 								<li><a href="docs-navbar.html">Navbars</a></li>
 								<li><a href="bars-fixed.html">Fixed positioning</a></li>
-								<li><a href="bars-fullscreen.html">Fullscreen positioning</a></li>
-								<li><a href="footer-persist-a.html">Persistent footer nav bar</a></li>
+								<li><a href="footer-persist-a.html">Persistent toolbars</a></li>
 								<li><a href="bars-themes.html">Theming toolbars</a></li>
 
 							</ul>
@@ -179,7 +207,7 @@
 			</div><!-- /content -->
 
 			<div data-role="footer" class="footer-docs" data-theme="c">
-					<p>&copy; 2011 The jQuery Project</p>
+					<p>&copy; 2011-12 The jQuery Foundation</p>
 			</div>
 
 			</div><!-- /page -->

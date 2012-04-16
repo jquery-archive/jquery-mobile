@@ -3,7 +3,7 @@
  */
 
 (function($){
-	var libName = "jquery.mobile.forms.select.js",
+	var libName = "jquery.mobile.forms.select",
 		originalDefaultDialogTrans = $.mobile.defaultDialogTransition,
 		originalDefTransitionHandler = $.mobile.defaultTransitionHandler,
 		originalGetEncodedText = $.fn.getEncodedText,
@@ -25,6 +25,26 @@
 			$.fn.getEncodedText = originalGetEncodedText;
 			window.encodedValueIsDefined = undefined;
 		}
+	});
+
+	asyncTest( "placeholder correctly gets ui-selectmenu-placeholder class after rebuilding", function(){
+		$.testHelper.sequence([
+			function(){
+				// bring up the optgroup menu
+				ok($("#optgroup-and-placeholder-container a").length > 0, "there is in fact a button in the page");
+				$("#optgroup-and-placeholder-container a").trigger("click");
+			},
+
+			function(){
+				//select the first menu item
+				$("#optgroup-and-placeholder-menu a:first").click();
+			},
+
+			function(){
+				ok($("#optgroup-and-placeholder-menu li:first").hasClass("ui-selectmenu-placeholder"), "the placeholder item has the ui-selectmenu-placeholder class");
+				start();
+			}
+		], 1000);
 	});
 
 	asyncTest( "firing a click at least 400 ms later on the select screen overlay does close it", function(){
@@ -257,18 +277,6 @@
 		same( select.selectmenu( 'option', 'disabled' ), false, "disbaled option set" );
 	});
 
-	test( "adding options and refreshing a custom select defaults the text", function() {
-		var select = $( "#custom-refresh" ),
-      button = select.siblings( "a" ).find( ".ui-btn-inner" ),
-      text = "foo";
-
-    same(button.text(), "default");
-    select.find( "option" ).remove(); //remove the loading message
-    select.append('<option value="1">' + text + '</option>');
-    select.selectmenu( 'refresh' );
-		same(button.text(), text);
-	});
-
 	asyncTest( "adding options and refreshing a custom select changes the options list", function(){
 		var select = $( "#custom-refresh-opts-list" ),
       button = select.siblings( "a" ).find( ".ui-btn-inner" ),
@@ -324,18 +332,6 @@
 		same(window.encodedValueIsDefined, undefined);
 	});
 
-	// issue #2547
-	test( "custom select list item links have unencoded option text values when using vanilla $.fn.text", function() {
-		// undo our changes, undone in teardown
-		$.fn.getEncodedText = $.fn.text;
-
-		$( "#encoded-option" ).data( 'selectmenu' )._buildList();
-
-		same(window.encodedValueIsDefined, true);
-	});
-
-	$.mobile.page.prototype.options.keepNative = "select.should-be-native";
-
 	// not testing the positive case here since's it's obviously tested elsewhere
 	test( "select elements in the keepNative set shouldn't be enhanced", function() {
 		ok( !$("#keep-native").parent().is("div.ui-btn") );
@@ -380,5 +376,32 @@
 
 			start
 		]);
+	});
+
+	test( "a disabled custom select should still be enhanced as custom", function() {
+		$("#select-disabled-enhancetest").selectmenu("enable").siblings("a").click();
+
+		var menu = $(".ui-selectmenu").not( ".ui-selectmenu-hidden" );
+		ok( menu.text().indexOf("disabled enhance test") > -1, "the right select is showing" );
+	});
+
+	test( "selected option 1classes are persisted to the button text", function() {
+		var $select = $( "#select-preserve-option-class" ),
+			selectedOptionClasses = $select.find( "option:selected" ).attr( "class" );
+
+		deepEqual( $select.parent().find( ".ui-btn-text > span" ).attr( "class" ), selectedOptionClasses );
+	});
+
+	test( "multiple select option classes are persisted from the first selected option to the button text", function() {
+		var $select = $( "#select-preserve-option-class-multiple" ),
+			selectedOptionClasses = $select.find( "option:selected" ).first().attr( "class" );
+
+		deepEqual( $select.parent().find( ".ui-btn-text > span" ).attr( "class" ), selectedOptionClasses );
+	});
+
+	test( "multple select text values are aggregated in the button text", function() {
+		var $select = $( "#select-aggregate-option-text" );
+
+		deepEqual( "Standard: 7 day, Rush: 3 days", $select.parent().find( ".ui-btn-text" ).text() );
 	});
 })(jQuery);

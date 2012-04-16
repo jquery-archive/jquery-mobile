@@ -1,10 +1,10 @@
-/*
-* jQuery Mobile Framework : This plugin handles theming and layout of headers, footers, and content areas
-* Copyright (c) jQuery Project
-* Dual licensed under the MIT or GPL Version 2 licenses.
-* http://jquery.org/license
-*/
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Theming and layout of headers, footers, and content areas
+//>>label: Page Sections
+//>>group: Core
 
+define( [ "jquery", "./jquery.mobile.page", "./jquery.mobile.core", "./jquery.mobile.buttonMarkup" ], function( $ ) {
+//>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 $.mobile.page.prototype.options.backBtnText  = "Back";
@@ -14,27 +14,31 @@ $.mobile.page.prototype.options.headerTheme  = "a";
 $.mobile.page.prototype.options.footerTheme  = "a";
 $.mobile.page.prototype.options.contentTheme = null;
 
-$( ":jqmData(role='page'), :jqmData(role='dialog')" ).live( "pagecreate", function( e ) {
-	
+$( document ).delegate( ":jqmData(role='page'), :jqmData(role='dialog')", "pagecreate", function( e ) {
+
 	var $page = $( this ),
 		o = $page.data( "page" ).options,
+		pageRole = $page.jqmData( "role" ),
 		pageTheme = o.theme;
-	
-	$( ":jqmData(role='header'), :jqmData(role='footer'), :jqmData(role='content')", this ).each(function() {
+
+	$( ":jqmData(role='header'), :jqmData(role='footer'), :jqmData(role='content')", this )
+		.jqmEnhanceable()
+		.each(function() {
+
 		var $this = $( this ),
 			role = $this.jqmData( "role" ),
 			theme = $this.jqmData( "theme" ),
-			contentTheme = theme || o.contentTheme || pageTheme,
+			contentTheme = theme || o.contentTheme || ( pageRole === "dialog" && pageTheme ),
 			$headeranchors,
 			leftbtn,
 			rightbtn,
 			backBtn;
-			
-		$this.addClass( "ui-" + role );	
+
+		$this.addClass( "ui-" + role );
 
 		//apply theming and markup modifications to page,header,content,footer
 		if ( role === "header" || role === "footer" ) {
-			
+
 			var thisTheme = theme || ( role === "header" ? o.headerTheme : o.footerTheme ) || pageTheme;
 
 			$this
@@ -43,26 +47,28 @@ $( ":jqmData(role='page'), :jqmData(role='dialog')" ).live( "pagecreate", functi
 				// Add ARIA role
 				.attr( "role", role === "header" ? "banner" : "contentinfo" );
 
-			// Right,left buttons
-			$headeranchors	= $this.children( "a" );
-			leftbtn	= $headeranchors.hasClass( "ui-btn-left" );
-			rightbtn = $headeranchors.hasClass( "ui-btn-right" );
+			if( role === "header") {
+				// Right,left buttons
+				$headeranchors	= $this.children( "a" );
+				leftbtn	= $headeranchors.hasClass( "ui-btn-left" );
+				rightbtn = $headeranchors.hasClass( "ui-btn-right" );
 
-			leftbtn = leftbtn || $headeranchors.eq( 0 ).not( ".ui-btn-right" ).addClass( "ui-btn-left" ).length;
-			
-			rightbtn = rightbtn || $headeranchors.eq( 1 ).addClass( "ui-btn-right" ).length;
-			
+				leftbtn = leftbtn || $headeranchors.eq( 0 ).not( ".ui-btn-right" ).addClass( "ui-btn-left" ).length;
+
+				rightbtn = rightbtn || $headeranchors.eq( 1 ).addClass( "ui-btn-right" ).length;
+			}
+
 			// Auto-add back btn on pages beyond first view
-			if ( o.addBackBtn && 
+			if ( o.addBackBtn &&
 				role === "header" &&
 				$( ".ui-page" ).length > 1 &&
-				$this.jqmData( "url" ) !== $.mobile.path.stripHash( location.hash ) &&
+				$page.jqmData( "url" ) !== $.mobile.path.stripHash( location.hash ) &&
 				!leftbtn ) {
 
 				backBtn = $( "<a href='#' class='ui-btn-left' data-"+ $.mobile.ns +"rel='back' data-"+ $.mobile.ns +"icon='arrow-l'>"+ o.backBtnText +"</a>" )
 					// If theme is provided, override default inheritance
 					.attr( "data-"+ $.mobile.ns +"theme", o.backBtnTheme || thisTheme )
-					.prependTo( $this );				
+					.prependTo( $this );
 			}
 
 			// Page title
@@ -70,7 +76,6 @@ $( ":jqmData(role='page'), :jqmData(role='dialog')" ).live( "pagecreate", functi
 				.addClass( "ui-title" )
 				// Regardless of h element number in src, it becomes h1 for the enhanced page
 				.attr({
-					"tabindex": "0",
 					"role": "heading",
 					"aria-level": "1"
 				});
@@ -87,3 +92,6 @@ $( ":jqmData(role='page'), :jqmData(role='dialog')" ).live( "pagecreate", functi
 });
 
 })( jQuery );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");

@@ -116,6 +116,54 @@
 		]);
 	});
 
+	asyncTest( "Collapsible Set with dynamic content", function(){
+		$.testHelper.pageSequence([
+			function(){
+				$.testHelper.openPage( "#collapsible-set-with-dynamic-content" );
+			},
+
+			function() {
+				var set = $( ".ui-page-active" ).find( ".ui-collapsible-set" );
+				for ( var i = 0; i < 3; i++ ) {
+					$( '<div data-'+ $.mobile.ns +'role="collapsible"><h3>Collapsible Item ' + i + '</h3></div>' ).appendTo( set );
+				}
+				set.collapsibleset( "refresh" );
+				equal( set.find( ".ui-collapsible" ).length, 3, "The 3 collapsibles should be enhanced" );
+				ok( set.find( ".ui-collapsible" ).eq( 0 ).find( "a" ).hasClass( "ui-corner-top" ), "The 1st collapsible should have top corners" );
+				ok( !set.find( ".ui-collapsible" ).eq( 0 ).find( "a" ).hasClass( "ui-corner-bottom" ), "The 1st collapsible should NOT have bottom corners" );
+				ok( !set.find( ".ui-collapsible" ).eq( 1 ).find( "a" ).hasClass( "ui-corner-top" ), "The 2nd collapsible should NOT have top corners" );
+				ok( !set.find( ".ui-collapsible" ).eq( 1 ).find( "a" ).hasClass( "ui-corner-bottom" ), "The 2nd collapsible should NOT have bottom corners" );
+				ok( set.find( ".ui-collapsible" ).eq( 2 ).find( "a" ).hasClass( "ui-corner-bottom" ), "The 3rd collapsible should have bottom corners" );
+				ok( !set.find( ".ui-collapsible" ).eq( 2 ).find( "a" ).hasClass( "ui-corner-top" ), "The 3rd collapsible should NOT have top corners" );
+				start();
+			}
+		]);
+	});
+
+  asyncTest( "Collapsible Set with static and dynamic content", function(){
+  		$.testHelper.pageSequence([
+  			function(){
+  				$.testHelper.openPage( "#collapsible-set-with-static-and-dynamic-content" );
+  			},
+
+  			function() {
+  				var set = $( ".ui-page-active" ).find( ".ui-collapsible-set" );
+  				for ( var i = 0; i < 2; i++ ) {
+  					$( '<div data-'+ $.mobile.ns +'role="collapsible"><h3>Collapsible Item ' + i + '</h3></div>' ).appendTo( set );
+  				}
+  				set.collapsibleset( "refresh" );
+  				equal( set.find( ".ui-collapsible" ).length, 3, "The 3 collapsibles should be enhanced" );
+  				ok( set.find( ".ui-collapsible" ).eq( 0 ).find( "a" ).hasClass( "ui-corner-top" ), "The 1st collapsible should have top corners" );
+  				ok( !set.find( ".ui-collapsible" ).eq( 0 ).find( "a" ).hasClass( "ui-corner-bottom" ), "The 1st collapsible should NOT have bottom corners" );
+  				ok( !set.find( ".ui-collapsible" ).eq( 1 ).find( "a" ).hasClass( "ui-corner-top" ), "The 2nd collapsible should NOT have top corners" );
+  				ok( !set.find( ".ui-collapsible" ).eq( 1 ).find( "a" ).hasClass( "ui-corner-bottom" ), "The 2nd collapsible should NOT have bottom corners" );
+  				ok( set.find( ".ui-collapsible" ).eq( 2 ).find( "a" ).hasClass( "ui-corner-bottom" ), "The 3rd collapsible should have bottom corners" );
+  				ok( !set.find( ".ui-collapsible" ).eq( 2 ).find( "a" ).hasClass( "ui-corner-top" ), "The 3rd collapsible should NOT have top corners" );
+  				start();
+  			}
+  		]);
+  	});
+
 	module( "Theming", {});
 
 	asyncTest( "Collapsible", 6, function(){
@@ -147,14 +195,17 @@
 			function() {
 				var collapsibles = $.mobile.activePage.find( ".ui-collapsible" );
 				ok( collapsibles.eq(0).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-up-a" ), "Heading of first collapsible should have class ui-btn-up-a");
-				ok( !collapsibles.eq(0).find( ".ui-collapsible-content" ).hasClass( "ui-body-a" ), "Content of first collapsible should NOT have class ui-btn-up-a");
+				ok( !collapsibles.eq(0).find( ".ui-collapsible-content" ).is( ".ui-body-a,.ui-body-b,.ui-body-c" ), "Content of first collapsible should NOT have class ui-btn-up-[a,b,c]");
 				ok( collapsibles.eq(0).find( ".ui-collapsible-content" ).hasClass( "ui-body-d" ), "Content of first collapsible should NOT have class ui-btn-up-d");
 				ok( collapsibles.eq(1).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-up-b" ), "Heading of second collapsible should have class ui-btn-up-b");
+				ok( !collapsibles.eq(1).find( ".ui-collapsible-content" ).is( ".ui-body-a,.ui-body-c,.ui-body-d" ), "Content of second collapsible should NOT have class ui-btn-up-[a,c,d]");
 				ok( collapsibles.eq(1).find( ".ui-collapsible-content" ).hasClass( "ui-body-b" ), "Content of second collapsible should have class ui-btn-up-b");
 				ok( collapsibles.eq(2).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-up-d" ), "Heading of third collapsible should have class ui-btn-up-d");
+				ok( !collapsibles.eq(2).find( ".ui-collapsible-content" ).is( ".ui-body-a,.ui-body-b,.ui-body-c" ), "Content of third collapsible should NOT have class ui-btn-up-[a,b,c]");
 				ok( collapsibles.eq(2).find( ".ui-collapsible-content" ).hasClass( "ui-body-d" ), "Content of third collapsible should have class ui-btn-up-d");
 				ok( !collapsibles.eq(2).find( ".ui-collapsible-content" ).hasClass( "ui-collapsible-content-collapsed" ), "Content of third collapsible should NOT have class ui-collapsible-content-collapsed");
 				ok( collapsibles.eq(3).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-up-d" ), "Heading of fourth collapsible should have class ui-btn-up-d");
+				ok( !collapsibles.eq(3).find( ".ui-collapsible-content" ).is( ".ui-body-a,.ui-body-b,.ui-body-c" ), "Content of fourth collapsible should NOT have class ui-btn-up-[a,b,c]");
 				ok( collapsibles.eq(3).find( ".ui-collapsible-content" ).hasClass( "ui-body-d" ), "Content of fourth collapsible should have class ui-btn-up-d");
 				start();
 			}

@@ -1,15 +1,16 @@
 <!DOCTYPE html> 
-<html> 
+<html>
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<title>jQuery Mobile Docs - Accessibility</title> 
-	<link rel="stylesheet"  href="../../css/themes/default/" /> 
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" /> 
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+
 	<script src="../../js/jquery.js"></script>
-	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
-	<script src="../_assets/js/jqm-docs.js"></script>
+	<script src="../../docs/_assets/js/jqm-docs.js"></script>
 	<script src="../../js/"></script>
+
 </head> 
 <body> 
 
@@ -17,7 +18,8 @@
 
 	<div data-role="header" data-theme="f">
 		<h1>Accessibility</h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
 	</div><!-- /header -->
 
 	<div data-role="content">
@@ -29,9 +31,7 @@
 			<p>jQuery Mobile is built upon standard, semantic HTML, allowing pages to be accessible to the broadest range of devices possible. For A-Grade browsers, many of the components in jQuery Mobile leverage techniques such as focus management, keyboard navigation, and HTML attributes specified in the W3C's <a href="http://www.w3.org/TR/wai-aria/">WAI-ARIA</a> specification.</p> 
 			
 			<p>By utilizing these techniques, we do our best to ensure an accessible experience to users with disabilities such as blindness, who may use screen readers (like <em>VoiceOver</em>, on Apple's iPhone device) or other assistive technology to access the web.</p>
-			
-			<p>While our accessibility implementation is currently a work in progress, we aim to provide a fully accessible suite of components for version 1.0.</p>
-			
+						
 		</div>		
 		
 		<div class="content-secondary">
@@ -43,6 +43,7 @@
 					<ul data-role="listview" data-theme="c" data-dividertheme="d">
 						<li data-role="list-divider">Overview</li>
 						<li><a href="../../docs/about/intro.html">Intro to jQuery Mobile</a></li>
+						<li><a href="../../docs/about/getting-started.html">Quick start guide</a></li>				
 						<li><a href="../../docs/about/features.html">Features</a></li>
 						<li data-theme="a"><a href="../../docs/about/accessibility.html">Accessibility</a></li>
 						<li><a href="../../docs/about/platforms.html">Supported platforms</a></li>
@@ -56,7 +57,7 @@
 		</div><!-- /content -->
 
 		<div data-role="footer" class="footer-docs" data-theme="c">
-				<p>&copy; 2011 The jQuery Project</p>
+				<p>&copy; 2011-12 The jQuery Foundation</p>
 		</div>
 
 						

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Docs - Phonegap</title>
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+
+	<script src="../../js/jquery.js"></script>
+	<script src="../../docs/_assets/js/jqm-docs.js"></script>
+	<script src="../../js/"></script>
+
+</head>
+<body>
+
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="f">
+		<h1>PhoneGap apps</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="content-primary">
+
+
+			<h2>Building PhoneGap apps with jQuery Mobile</h2>
+
+			<p><a href="http://phonegap.com/" rel="external">PhoneGap</a> is an HTML5 app platform that allows developers to author native applications with web technologies and get access to APIs and app stores. Applications are built as normal HTML pages and packaged up to run as a native application within a UIWebView or WebView (a chromeless browser, referred to hereafter as a webview). Since PhoneGap is frequently used in conjunction with jQuery Mobile, we wanted to offer a few tips and recommendations to help you get staretd. </p>
+
+			<p>The initial application document is loaded by the PhoneGap application by a local file:// URL. This means that if you want to pull in pages from your company's remote server (phone home) you will have to refer to them with absolute URLs to your server. Because your document originates from a file:// URL, loading pages or assets from your remote server is considered a cross-domain request that can be blocked in certain scenarios. </p>
+
+			<p>Your ability to access cross-domain pages from within a Phone Gap jQuery Mobile application is controlled by two key things: <code>$.support.cors</code> and <code>$.mobile.allowCrossDomainPages</code>, and can also be influenced by the white list feature in later builds of PhoneGap.</p>
+
+			<h2>$.support.cors</h2>
+
+			<p>In jQuery core, there is a <a href="http://api.jquery.com/jQuery.support/" rel="external">$.support.cors</a> boolean that indicates whether or not jQuery thinks the browser supports the W3C "<a hre="http://www.w3.org/TR/cors/" rel="external">Cross-Origin Resource Sharing</a>" feature to support cross-domain requests.</p>
+
+			<p>Since jQuery Mobile relies on jQuery core's $.ajax() functionality, <code>$.support.cors</code> must be set to <code>true</code> to tell <code>$.ajax</code> to load cross-domain pages. We've heard reports that webviews on some platforms, like BlackBerry, support cross-domain loading, but that jQuery core incorrectly sets <code>$.support.cors</code> value to <code>false</code> which disables cross-domain $.ajax() requests and will cause the page or assets to fail to load. </p>
+
+			<h2>$.mobile.buttonMarkup.hoverDelay</h2>
+
+			<p>If you find that the button down/hover state (lists, buttons, links etc) feels sluggish the <code>$.mobile.buttonMarkup.hoverDelay</code> setting might be of use. It will decrease the time between the touch event and the application of the relevant class but will also result in a higher chance that the same class will be applied even when the user is scrolling (eg, over a long list of links).</p>
+
+			<h2>$.mobile.allowCrossDomainPages</h2>
+
+			<p>When jQuery Mobile attempts to load an external page, the request runs through <code>$.mobile.loadPage()</code>. This will only allow cross-domain requests if the <code>$.mobile.allowCrossDomainPages</code> configuration option is set to <code>true</code>. Because the jQuery Mobile framework tracks what page is being viewed within the browser's location hash, it is possible for a cross-site scripting (XSS) attack to occur if the XSS code in question can manipulate the hash and set it to a cross-domain URL of its choice. This is the main reason that the default setting for <code>$.mobile.allowCrossDomainPages</code> is set to <code>false</code>.</p>
+
+			<p>So in PhoneGap apps that must "phone home" by loading assets off a remote server, both the <code>$.support.cors</code> AND <code>$.mobile.allowCrossDomainPages</code> must be set to <code>true</code>.  The  <code>$.mobile.allowCrossDomainPages</code> option must be set before any cross-domain request is made so we recommend wrapping this in a <code>mobileinit</code> handler:</p>
+
+<pre><code>$( document ).bind( "mobileinit", function() {
+    // Make your jQuery Mobile framework configuration changes here!
+
+    $.mobile.allowCrossDomainPages = true;
+});</code></pre>
+
+			<h2>PhoneGap White Listing</h2>
+
+			<p>PhoneGap 1.0 introduced the idea of white-listing servers that its internal webview is allowed to make cross-domain requests to. You can find info about it here on the <a href="http://wiki.phonegap.com/w/page/40796976/Install%20the%20latest%20%28trunk%29%20source%20of%20iOS%20PhoneGap">PhoneGap wiki</a>:</p>
+
+			<p>However, not all platforms support this white-listing feature so check the PhoneGap documentation for details. Older versions of PhoneGap prior to 1.0 defaulted to allowing cross-domain requests to any server.</p>
+
+			<h2>Still having issues?</h2>
+
+			<p>Here are a few more tips that aren't specifically related to PhoneGap but are good to know:</p>
+
+			<p><strong>We recommend disabling the <a href="../api/globalconfig.html">pushState feature</a> for installed apps </strong>because there are edge cases where this feature can cause unexpected navigation behavior and since URLs aren't visible in a webview, it's not worth keeping this active in these situations. </p>
+
+			<p><strong>Android enforces a timeout when loading URLs in a webview</strong> which may be too short for your needs. You can change this timeout by editing a Java class generated by the Eclipse plugin for Android:</p>
+
+			<code>super.setIntegerProperty("loadUrlTimeoutValue", 60000);</code>
+
+
+
+      </div>
+		<!--/content-primary -->
+
+				<div class="content-secondary">
+
+					<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+
+							<h3>More in this section</h3>
+
+							<ul data-role="listview" data-theme="c" data-dividertheme="d">
+								<li data-role="list-divider">Pages &amp; Dialogs</li>
+								<li><a href="page-anatomy.html">Anatomy of a page</a></li>
+								<li><a href="page-template.html" data-ajax="false">Single page template</a></li>
+								<li><a href="multipage-template.html" data-ajax="false">Multi-page template</a></li>
+								<li><a href="page-titles.html">Page titles</a></li>
+								<li><a href="page-links.html">Linking pages</a></li>
+								<li><a href="page-transitions.html">Page transitions</a></li>
+								<li><a href="page-dialogs.html">Dialogs</a></li>
+								<li><a href="page-cache.html">Prefetching &amp; caching pages</a></li>
+								<li><a href="page-navmodel.html">Ajax, hashes &amp; history</a></li>
+								<li><a href="page-dynamic.html">Dynamically injecting pages</a></li>
+								<li><a href="page-scripting.html">Scripting pages</a></li>
+								<li data-theme="a"><a href="phonegap.html">PhoneGap apps</a></li>
+								<li><a href="touchoverflow.html">touchOverflow feature</a></li>
+								<li><a href="pages-themes.html">Theming pages</a></li>
+							</ul>
+					</div>
+				</div>
+
+			</div><!-- /content -->
+
+			<div data-role="footer" class="footer-docs" data-theme="c">
+					<p>&copy; 2011-12 The jQuery Foundation</p>
+			</div>
+
+			</div><!-- /page -->
+
+			</body>
+			</html>

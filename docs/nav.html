@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery UI Mobile Framework - Documentation</title>
+	<link rel="stylesheet"  href="../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="_assets/css/jqm-docs.css"/>
+
+	<script src="../js/jquery.js"></script>
+	<script src="../docs/_assets/js/jqm-docs.js"></script>
+	<script src="../js/"></script>
+	
+</head> 
+<body> 
+	<div data-role="page" data-theme="a" class="nav-search">
+		
+	<div data-role="content">   
+
+	<style>
+
+		.nav-search .ui-content {
+			margin-top:16px;
+		}
+		.nav-search .ui-corner-top {
+			-moz-border-radius: 0;
+			-webkit-border-radius: 0;
+			border-radius: 0;
+		}
+		.nav-search .ui-bar-a {
+			background-image:none;
+			background-color:#555;
+		}
+		.nav-search .ui-btn-up-a {
+			background-image:none;
+			background-color:#333333;
+		}
+		.nav-search .ui-btn-inner {
+			border-top: 1px solid #888;
+			border-color: rgba(255, 255, 255, .1);
+		}
+	</style>
+	
+	<script>
+		$('body').delegate('.nav-search', 'pageshow', function( e ) {
+			$('.ui-input-text').attr("autofocus", true)
+		});			
+	</script>
+	
+	<ul data-role="listview" data-theme="a" data-divider-theme="a" data-filter="true" data-filter-theme="a" data-filter-placeholder="Search documentation...">
+			<li data-filtertext="wai-aria voiceover accessibility screen reader">
+				<a href="about/accessibility.html">Accessibility</a>
+			</li>
+			<li data-filtertext="accordions collapsible set collapsible-set collapsed">
+				<a href="content/content-collapsible-set.html">Accordions</a>
+			</li>
+			<li data-filtertext="ajax navigation model hashchange changePage pushstate replacestate history popstate rel=external ajaxEnabled changepage basetag data-url sub-hash subpageidentifier target Application Cache ajaxPrefilter responseText isLocal subPageUrlKey silentscroll page parameters router backbone">
+				<a href="pages/page-navmodel.html">Ajax navigation model</a>
+			</li>
+			<li data-filtertext="anatomy of page viewport meta tag disable enable zoom width=device-width, initial-scale=1 header content footer single multipage template boilerplate">
+				<a href="pages/page-anatomy.html">Anatomy of a page</a>
+			</li>
+			<li data-filtertext="events api animationComplete transition css">
+				<a href="api/events.html">Animation events</a>
+			</li>
+			<li data-filtertext="button link submit cancel image reset mini buttonmarkup enable disable">
+				<a href="buttons/buttons-types.html">Buttons</a>
+			</li>
+			<li data-filtertext="button icon sprite png arrow delete plus minus check gear refresh forward back grid star alert info home search positioning iconpos top bottom left right notext custom disc white black">
+				<a href="buttons/buttons-icons.html">Button icons</a>
+			</li>
+			<li data-filtertext="data-prefetch loadpage domCache data-dom-cache size clear cleanup pagehide lazyload spinner loader">
+				<a href="pages/page-cache.html">Caching pages</a>
+			</li>
+			<li data-filtertext="input forms multi select checkbox checks grouped horizontal toggle legend">
+				<a href="forms/checkboxes/">Checkbox</a>
+			</li>
+			<li data-filtertext="collapsible expandable content block spindown disclosure triangle tree nested">
+				<a href="content/content-collapsible.html">Collapsible content</a>
+			</li>		
+			<li data-filtertext="data attribute guide api list help reference">
+				<a href="api/data-attributes.html">Data attribute reference</a>
+			</li>
+			<li data-filtertext="page dialog modal overlay theme data-rel=dialog transition rel=back closeBtnText button history">
+				<a href="pages/page-dialogs.html">Dialogs</a>
+			</li>
+			<li data-filtertext="forms constrain css disable disabling enable ui-disabled class style">
+				<a href="forms/docs-forms.html">Disabling form elements</a>
+			</li>
+			<li data-filtertext="dynamically injecting pages changePage pagebeforechange preventDefault json query params scripting generate markup manual backbone api hash templating mvc">
+				<a href="pages/page-dynamic.html">Dynamically injecting pages</a>
+			</li>
+			<li data-filtertext="events api document.ready pageinit touch tap taphold swipe swipeleft swiperight virtual mouse vmouseover vmousedown vmousemove vmouseup vclick vmousecancel orientationchange scrollstart scrollstop pageload pagebeforeload pageloadfailed pagebeforechange pagechange pagechangefailed pagebeforeshow change load transition pagebeforehide pageshow pagehide initialization pagebeforecreate pagecreate pageinit pageremove updatelayout animationcomplete transitions">
+				<a href="api/events.html">Events API</a>
+			</li>
+			<li data-filtertext="input forms flip toggle switch on off select slider">
+				<a href="forms/switch/">Flip switch</a>
+			</li>
+			<li data-filtertext="introduction help features overview">
+				<a href="about/features.html">Features overview</a>
+			</li>
+			<li data-filtertext="toolbars fixed headers footers scroll tap to hide show toggle">
+				<a href="toolbars/bars-fixed.html">Fixed toolbars</a>
+			</li>
+			<li data-filtertext="forms markup conventions introduction action label hide accessibly mini disabling fieldcontainer fieldset legend auto-initialization">
+				<a href="forms/docs-forms.html">Forms intro</a>
+			</li>
+			<li data-filtertext="all forms elements gallery preview sample preview">
+				<a href="forms/forms-all.html">Form element gallery</a>
+			</li>
+			<li data-filtertext="toolbars fixed headers footers scroll tap to hide show toggle">
+				<a href="toolbars/bars-fullscreen.html">Fullscreen toolbars</a>
+			</li>
+			<li data-filtertext="toolbars fixed footers scroll tap to hide show toggle">
+				<a href="toolbars/docs-footers.html">Footer toolbars</a>
+			</li>
+			<li data-filtertext="global optionss settings document.ready mobileinit ns namespace autoInitializePage subPageUrlKey activePageClass activeBtnClass ajaxEnabled linkBindingEnabled hashListeningEnabled pushStateEnabled defaultPageTransition touchOverflowEnabled defaultDialogTransition minScrollBack loadingMessage loadingMessageTheme pageLoadErrorMessage pageLoadErrorMessageTheme loadingMessageTextVisible gradeA ignoreContentEnabled">
+				<a href="api/globalconfig.html">Global options (mobileinit)</a>
+			</li>
+			<li data-filtertext="grouped buttons toggle side">
+				<a href="buttons/buttons-grouped.html">Grouped buttons</a>
+			</li>
+			<li data-filtertext="toolbars fixed headers scroll tap to hide show toggle heading">
+				<a href="toolbars/docs-headers.html">Header toolbars</a>
+			</li>
+			<li data-filtertext="accessibility accessibly forms labels hide hiding">
+				<a href="forms/docs-forms.html">Hiding elements accessibly</a>
+			</li>
+			<li data-filtertext="html default styles formatting semantics markup">
+				<a href="content/content-html.html">HTML formatting</a>
+			</li>
+			<li data-filtertext="button inline smaller less wide narrow">
+				<a href="buttons/buttons-inline.html">Inline buttons</a>
+			</li>
+			<li data-filtertext="listview link inset styled padding rounded">
+				<a href="lists/lists-inset.html">Inset styled listviews</a>
+			</li>
+			<li data-filtertext="introduction jquery mobile help getting started">
+				<a href="about/intro.html">Intro to jQuery Mobile</a>
+			</li>
+			<li data-filtertext="events api updatelayout hide show height scroll remove inject">
+				<a href="api/events.html">Layout events</a>
+			</li>
+			<li data-filtertext="layout grid columns side-by-side flow positioning block float left right center">
+				<a href="content/content-grids.html">Layout grids (columns)</a>
+			</li>
+			<li data-filtertext="link tel mailto target external rel ajax">
+				<a href="pages/page-links.html">Links</a>
+			</li>
+			<li data-filtertext="listview link">
+				<a href="lists/lists-ul.html">Linked list</a>
+			</li>
+			<li data-filtertext="listview link count bubble">
+				<a href="lists/lists-count.html">Listview count bubble</a>
+			</li>
+			<li data-filtertext="listview link divider grouping read only header">
+				<a href="lists/lists-divider.html">Listview dividers</a>
+			</li>
+			<li data-filtertext="listview link icon 16 pixel">
+				<a href="lists/lists-icons.html">Listview icons</a>
+			</li>
+			<li data-filtertext="listview link markup overview conventions types">
+				<a href="lists/index.html">Listview overview</a>
+			</li>
+			<li data-filtertext="methods api mobile changePage loadPage jqmData jqmRemoveData showPageLoadingMsg hidePageLoadingMsg fixedToolbars.show fixedToolbars.hide path.parseUrl path.makePathAbsolute path.makeUrlAbsolute path.isSameDomain path.isRelativeUrl path.isAbsoluteUrl base silentScroll activePage jqmEnhanceable">
+				<a href="api/methods.html">Methods API</a>
+			</li>
+			<li data-filtertext="listview link thumbnail images large square">
+				<a href="lists/lists-thumbnails.html">Listview thumbnails</a>
+			</li>
+			<li data-filtertext="forms smaller compact mini toolbars">
+				<a href="forms/forms-all-mini.html">Mini form elements</a>
+			</li>
+			<li data-filtertext="forms native not styled role none">
+				<a href="forms/forms-all-native.html">Native form elements</a>
+			</li>
+			<li data-filtertext="link navbar navigation tabs">
+				<a href="toolbars/docs-navbar.html">Navbars</a>
+			</li>
+			<li data-filtertext="listview link nested ul ol drilldown">
+				<a href="lists/lists-nested.html">Nested lists</a>
+			</li>
+			<li data-filtertext="numbered list link ol ordered numbered">
+				<a href="lists/lists-ol.html">Numbered lists</a>
+			</li>
+			<li data-filtertext="events api orientationchange orientationChangeEnabled portrait landscape window.orientation">
+				<a href="api/events.html">Orientation events</a>
+			</li>
+			<li data-filtertext="events api pagebeforechange pagechange pagechangefailed ajax nav">
+				<a href="api/events.html">Page change events</a>
+			</li>
+			<li data-filtertext="events api pagebeforecreate pagecreate pageinit $(document).ready() ajax nav">
+				<a href="api/events.html">Page initialization events</a>
+			</li>
+			<li data-filtertext="events api pagebeforeload pageload pageloadfailed ajax nav">
+				<a href="api/events.html">Page load events</a>
+			</li>
+			<li data-filtertext="pages overview boilerplate getting started setup">
+				<a href="pages/index.html">Pages overview</a>
+			</li>
+			<li data-filtertext="events api pageremove ajax nav">
+				<a href="api/events.html">Page remove events</a>
+			</li>
+			<li data-filtertext="pages multipage template boilerplate anchor link">
+				<a href="pages/multipage-template.html">Page template, multipage</a>
+			</li>
+			<li data-filtertext="pages single ajax nav template boilerplate anchor link">
+				<a href="pages/page-template.html">Page template, single page</a>
+			</li>
+			<li data-filtertext="page title head">
+				<a href="pages/page-titles.html">Page titles</a>
+			</li>
+			<li data-filtertext="events api pagebeforeshow pagebeforehide pageshow pagehide ajax nav">
+				<a href="api/events.html">Page transition events</a>
+			</li>
+			<li data-filtertext="toolbars fixed persistent tab bar footer header">
+				<a href="toolbars/footer-persist-a.html">Persistent toolbars</a>
+			</li>
+			<li data-filtertext="phonegap compile appstore export device api XSS mobileinit pushstate loadUrlTimeoutValue allowCrossDomainPages local file:// URL support.cors UIWebView">
+				<a href="pages/phonegap.html">PhoneGap</a>
+			</li>
+			<li data-filtertext="navigation model ajax prefetch preload lazyload loader loadPage">
+				<a href="pages/page-cache.html">Prefetching pages</a>
+			</li>
+			<li data-filtertext="pushstate ajax navigation model hashchange popstate">
+				<a href="pages/page-navmodel.html">PushState</a>
+			</li>
+			<li data-filtertext="introduction help quick start guide ">
+				<a href="about/getting-started.html">Quick start guide</a>
+			</li>
+			<li data-filtertext="input forms single select radio button grouped horizontal toggle legend">
+				<a href="forms/radiobuttons/">Radio buttons</a>
+			</li>
+			<li data-filtertext="read only display not linked listviews">
+				<a href="lists/lists-readonly.html">Read only listviews</a>
+			</li>
+			<li data-filtertext="refresh forms elements property change update programatically checked selectedindex value update widget input text slider switch select button checkbox radiobutton">
+				<a href="forms/docs-forms.html">Refreshing form elements</a>
+			</li>
+			<li data-filtertext="scripting pages loading scripts executing scripts document.ready() api developer firing fire pagecreate pageinit changing pages loading enhancing create refresh scolling silentscroll binding to mouse touch events passing url parameters backbone router">
+				<a href="pages/page-scripting.html">Scripting pages</a>
+			</li>
+			<li data-filtertext="events api scrollstart scrollstop flick">
+				<a href="api/events.html">Scroll events</a>
+			</li>
+			<li data-filtertext="listview search filter autocomplete refine">
+				<a href="lists/lists-search.html">Search filter</a>
+			</li>
+			<li data-filtertext="listview search filter hidden extra meta data">
+				<a href="lists/lists-search-filtertext.html">Search filter hidden data</a>
+			</li>
+			<li data-filtertext="input forms single select option selected index placeholder fullscreen optgroup grouped horizontal custom menu">
+				<a href="forms/selects/">Select menu</a>
+			</li>
+			<li data-filtertext="input forms range slider highlight step min max value">
+				<a href="forms/slider/">Slider</a>
+			</li>
+			<li data-filtertext="link listview multiple button splitbutton secondary action">
+				<a href="lists/lists-split.html">Split button list</a>
+			</li>
+			<li data-filtertext="forms submit method action post get ajax navigation">
+				<a href="forms/forms-sample.html">Submitting forms</a>
+			</li>
+			<li data-filtertext="supported platforms device matrix compatibility ios android blackberry playbook wp7 bada webod palm symbian meego firefox chrome internet explorer ie chrome safari graded support">
+				<a href="about/platforms.html">Supported Platforms</a>
+			</li>
+			<li data-filtertext="input forms text textarea password number email url tel time date month week datetime color">
+				<a href="forms/textinputs/">Text inputs &amp; Textareas</a>
+			</li>
+			<li data-filtertext="theme themeroller swatch css styles bars blocks buttons forms">
+				<a href="api/themes.html">Theming system overview</a>
+			</li>
+			<li data-filtertext="theme themeroller import export download css styles">
+				<a href="api/themes.html">ThemeRoller</a>
+			</li>
+			<li data-filtertext="toolbars header footer bar fixed">
+				<a href="toolbars/index.html">Toolbars</a>
+			</li>
+			<li data-filtertext="events api touch mouse vmouseover vmousedown vmousemove vmouseup vclick vmousecancel touchend target">
+				<a href="api/events.html">Touch events</a>
+			</li>
+			<li data-filtertext="">
+				<a href="pages/touchoverflow.html">TouchOverflow (deprecated)</a>
+			</li>
+			<li data-filtertext="animations page css keyframe transitions flip fade pop turn flow slide slideup slidedown none data-transition data-direction reverse defaultDialogTransition webkit moz o fallback 3d fallbackTransition max width custom transitionHandlers scroll position">
+				<a href="pages/page-transitions.html">Transitions</a>
+			</li>
+			<li data-filtertext="events api touch tap taphold swipe swipeleft swipe left swiperight swipe right">
+				<a href="api/events.html">Virtual mouse event API</a>
+			</li>
+		</ul>
+	</div><!-- /content -->
+
+</div><!-- /page -->
+</body>
+</html>

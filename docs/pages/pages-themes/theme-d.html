@@ -1,0 +1,163 @@
+<!DOCTYPE html> 
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>jQuery Mobile Docs - Theming Pages</title> 
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />  
+	<link rel="stylesheet" href="../../_assets/css/jqm-docs.css"/>
+	<script src="../../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../../../js/jquery.js"></script>
+	<script src="../../../docs/_assets/js/jqm-docs.js"></script>
+	<script src="../../../js/"></script>
+
+</head> 
+<body> 
+
+	<div data-role="page" class="type-interior" data-theme="d">
+
+		<div data-role="header" data-theme="d">
+		<h1>Theming pages</h1>
+		<a href="../../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+		<a href="../../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="content-primary">
+			
+			<ul data-role="controlgroup" data-type="horizontal" class="localnav">
+				<li><a href="../pages-themes.html" data-role="button" data-transition="fade">Theme Overview</a></li>				
+				
+				<li><a href="theme-a.html" data-role="button" data-transition="fade">A&nbsp;</a></li>
+				<li><a href="theme-b.html" data-role="button" data-transition="fade">B&nbsp;</a></li>
+				<li><a href="theme-c.html" data-role="button" data-transition="fade">C&nbsp;</a></li>
+				<li><a href="theme-d.html" data-role="button" data-transition="fade" class="ui-btn-active">D&nbsp;</a></li>
+				<li><a href="theme-e.html" data-role="button" data-transition="fade">E&nbsp;</a></li>
+			</ul>
+			
+			<h2>Theme D Sample Page</h2>
+
+			<p>This is an example of <code>data-theme="d"</code> applied to the same element as <code>data-role="page"</code>, showing how the theme is inherited by widgets throughout the page.</p>
+			
+					<div data-role="fieldcontain">
+			         <label for="name-a">Text Input:</label>
+			         <input type="text" name="name" id="name-a" value=""  />
+					</div>
+
+					<div data-role="fieldcontain">
+						<label for="switch-a">Flip switch:</label>
+						<select name="switch-a" id="switch-a" data-role="slider">
+							<option value="off">Off</option>
+							<option value="on">On</option>
+						</select> 
+					</div>
+
+					<div data-role="fieldcontain">
+						<label for="slider-a">Slider:</label>
+					 	<input type="range" name="slider" id="slider-a" value="0" min="0" max="100"  />
+					</div>
+
+					<div data-role="fieldcontain">
+					<fieldset data-role="controlgroup" data-type="horizontal">
+				    	<legend>Font styling:</legend>
+				    	<input type="checkbox" name="checkbox-6a" id="checkbox-6a" class="custom" />
+						<label for="checkbox-6a">b</label>
+
+						<input type="checkbox" name="checkbox-7a" id="checkbox-7a" class="custom" />
+						<label for="checkbox-7a"><em>i</em></label>
+
+						<input type="checkbox" name="checkbox-8a" id="checkbox-8a" class="custom" />
+						<label for="checkbox-8a">u</label>    
+				    </fieldset>
+					</div>
+
+					<div data-role="fieldcontain">
+					    <fieldset data-role="controlgroup">
+					    	<legend>Choose a pet:</legend>
+					         	<input type="radio" name="radio-choice-1" id="radio-choice-1a" value="choice-1" />
+					         	<label for="radio-choice-1a">Cat</label>
+
+					         	<input type="radio" name="radio-choice-1" id="radio-choice-2a" value="choice-2"  />
+					         	<label for="radio-choice-2a">Dog</label>
+
+					         	<input type="radio" name="radio-choice-1" id="radio-choice-3a" value="choice-3"  />
+					         	<label for="radio-choice-3a">Hamster</label>
+
+					         	<input type="radio" name="radio-choice-1" id="radio-choice-4a" value="choice-4"  />
+					         	<label for="radio-choice-4a">Lizard</label>
+					    </fieldset>
+					</div>
+
+					<div data-role="fieldcontain">
+						<label for="select-choice-a" class="select">Choose shipping method:</label>
+						<select name="select-choice-a" id="select-choice-a">
+							<option value="standard">Standard: 7 day</option>
+							<option value="rush">Rush: 3 days</option>
+							<option value="express">Express: next day</option>
+							<option value="overnight">Overnight</option>
+						</select>
+					</div>
+
+					<h2>Collapsible Sets</h2>		
+					<div data-role="collapsible-set">
+						<div data-role="collapsible" data-collapsed="false">
+							<h3>Section 1</h3>
+							<p>I'm the collapsible content in a set so this feels like an accordion. I'm visible by default because I have the <code>data-collapsed="false"</code> attribute; to collapse me, either click my header or expand another header in my set.</p>
+						</div>
+						<div data-role="collapsible">
+							<h3>Section 2</h3>
+							<p>I'm the collapsible content in a set so this feels like an accordion. I'm hidden by default because I have the "collapsed" state; you need to expand the header to see me.</p>
+
+						</div>
+						<div data-role="collapsible">
+							<h3>Section 3</h3>
+							<p>I'm the collapsible content in a set so this feels like an accordion. I'm hidden by default because I have the "collapsed" state; you need to expand the header to see me.</p>
+
+						</div>
+					</div>
+
+					<h2>Inset List</h2>
+					<ul data-role="listview" data-inset="true">
+						<li><a href="index.html">Inbox <span class="ui-li-count" >12</span></a></li>
+						<li><a href="index.html">Outbox <span class="ui-li-count">0</span></a></li>
+						<li><a href="index.html">Drafts <span class="ui-li-count">4</span></a></li>
+						<li><a href="index.html">Sent <span class="ui-li-count">328</span></a></li>
+						<li><a href="index.html">Trash <span class="ui-li-count">62</span></a></li>
+					</ul>
+			
+				</div><!--/content-primary -->		
+
+				<div class="content-secondary">
+
+					<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+
+						<h3>More in this section</h3>
+
+						<ul data-role="listview" data-theme="c" data-dividertheme="d">
+							<li data-role="list-divider">Pages &amp; Dialogs</li>
+							<li><a href="../page-anatomy.html">Anatomy of a page</a></li>
+							<li><a href="../page-template.html" data-ajax="false">Single page template</a></li>
+							<li><a href="../multipage-template.html" data-ajax="false">Multi-page template</a></li>
+							<li><a href="../page-titles.html">Page titles</a></li>
+							<li><a href="../page-links.html">Linking pages</a></li>
+							<li><a href="../page-transitions.html" data-ajax="false">Page transitions</a></li>
+							<li><a href="../page-dialogs.html">Dialogs</a></li>
+							<li><a href="../page-cache.html">Prefetching &amp; caching pages</a></li>
+							<li><a href="../page-navmodel.html">Ajax, hashes &amp; history</a></li>
+							<li><a href="../page-dynamic.html">Dynamically Injecting Pages</a></li>
+							<li><a href="../page-scripting.html">Scripting pages</a></li>
+							<li data-theme="a"><a href="../pages-themes.html">Theming pages</a></li>
+						</ul>
+					</div>
+				</div>		
+
+			</div><!-- /content -->
+
+			<div data-role="footer" class="footer-docs" data-theme="d">
+					<p>&copy; 2011-12 The jQuery Foundation</p>
+			</div>
+
+			</div><!-- /page -->
+
+			</body>
+			</html>

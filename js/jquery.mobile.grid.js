@@ -1,10 +1,11 @@
-/*
-* jQuery Mobile Framework : plugin for creating CSS grids
-* Copyright (c) jQuery Project
-* Dual licensed under the MIT or GPL Version 2 licenses.
-* http://jquery.org/license
-*/
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Applies classes for creating grid or column styling.
+//>>label: Grid Layouts (Columns)
+//>>group: Widgets
+//>>css: ../css/themes/default/jquery.mobile.theme.css, ../css/structure/jquery.mobile.grid.css
 
+define( [ "jquery" ], function( $ ) {
+//>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 $.fn.grid = function( options ) {
@@ -51,3 +52,6 @@ $.fn.grid = function( options ) {
 	});
 };
 })( jQuery );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");

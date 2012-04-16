@@ -6,8 +6,14 @@
 	var onChangeCnt = 0;
 	window.onChangeCounter = function() {
 		onChangeCnt++;
-	}
-	module('jquery.mobile.slider.js');
+	};
+
+	module('jquery.mobile.slider.js', {
+		setup: function() {
+			// force the value to be an increment of 10 when we aren't testing the rounding
+			$("#stepped").val( 20 );
+		}
+	});
 
 	var keypressTest = function(opts){
 		var slider = $(opts.selector),
@@ -203,16 +209,16 @@
 		var integerLeft, compare, css, threshold;
 
 		css = obj.css('left');
-		threshold = opts.pxThreshold || 10;
+		threshold = opts.pxThreshold || 0;
 
 		if( css.indexOf( "px" ) > -1 ) {
 			// parse the actual pixel value returned by the left css value
 			// and the pixels passed in for comparison
-			integerLeft = parseInt(css.replace("px", ""), 10 ),
+			integerLeft = Math.round( parseFloat( css.replace("px", "") ) ),
 			compare = parseInt( opts.pixels.replace( "px", "" ), 10 );
 
-			// check that the pixel value provided is within a given threshold default is 10px
-			ok( compare > integerLeft - threshold && compare < integerLeft + threshold, opts.message );
+			// check that the pixel value provided is within a given threshold; default is 0px
+			ok( compare >= integerLeft - threshold && compare <= integerLeft + threshold, opts.message );
 		} else {
 			equal( css, opts.percent, opts.message );
 		}
@@ -235,7 +241,7 @@
 			function() {
 				assertLeftCSS(handle, {
 					percent: '100%',
-					pixels: handle.css('width'),
+					pixels: handle.parent().css('width'),
 					message: 'handle starts on the right side'
 				});
 
@@ -249,10 +255,9 @@
 			function() {
 				assertLeftCSS(handle, {
 					percent: '100%',
-					pixels: handle.css('width'),
+					pixels: handle.parent().css('width'),
 					message: 'handle ends on the right side'
 				});
-				// equals(handle.css('left'), '100%', 'handle ends on the right side');
 
 				// initialize the switch
 				control.val('on').slider('refresh');
@@ -261,23 +266,22 @@
 			function() {
 				assertLeftCSS(handle, {
 					percent: '100%',
-					pixels: handle.css('width'),
+					pixels: handle.parent().css('width'),
 					message: 'handle starts on the right side'
 				});
 
 				// simulate dragging more than a half
 				offset = handle.offset();
 				slider.trigger( createEvent( "mousedown", handle[ 0 ], offset.left + 10, offset.top + 10 ) );
-				slider.trigger( createEvent( "mousemove", handle[ 0 ], offset.left - ( width / 2 ), offset.top + 10 ) );
-				//slider.trigger( createEvent( "mousemove", handle[ 0 ], offset.left - width + 20, offset.top + 10 ) );
-				slider.trigger( createEvent( "mouseup", handle[ 0 ], offset.left - ( width / 2 ), offset.top + 10 ) );
+				slider.trigger( createEvent( "mousemove", handle[ 0 ], offset.left - ( width / 2 + 10 ), offset.top + 10 ) );
+				slider.trigger( createEvent( "mouseup", handle[ 0 ], offset.left - ( width / 2 + 10 ), offset.top + 10 ) );
 			},
 
 			function() {
 				assertLeftCSS(handle, {
 					percent: '0%',
 					pixels: '0px',
-					message: 'handle starts on the right side'
+					message: 'handle ends on the left side'
 				});
 
 				start();
@@ -302,14 +306,14 @@
 			function() {
 				assertLeftCSS(handle, {
 					percent: '100%',
-					pixels: handle.css('width'),
+					pixels: handle.parent().css('width'),
 					message: 'handle starts on the right side'
 				});
 
 				// simulate dragging more than a half
 				offset = handle.offset();
 				slider.trigger( createEvent( "mousedown", handle[ 0 ], offset.left + 10, offset.top + 10 ) );
-				slider.trigger( createEvent( "mousemove", handle[ 0 ], offset.left - width + 70, offset.top + 10 ) );
+				slider.trigger( createEvent( "mousemove", handle[ 0 ], offset.left - ( width / 2 ), offset.top + 10 ) );
 			},
 
 			function() {
@@ -319,14 +323,14 @@
 					max = "100%";
 				} else {
 					min = "0px";
-					max = handle.css( 'width' );
+					max = handle.parent().css( 'width' );
 				}
 
 				notEqual(handle.css('left'), min, 'handle is not on the left side');
 				notEqual(handle.css('left'), max, 'handle is not on the right side');
 
 				// reset slider state so it is ready for other tests
-				slider.trigger( createEvent( "mouseup", handle[ 0 ], offset.left - width + 20, offset.top + 10 ) );
+				slider.trigger( createEvent( "mouseup", handle[ 0 ], offset.left - ( width / 2 ), offset.top + 10 ) );
 
 				start();
 			}
@@ -358,8 +362,8 @@
 			function() {
 				assertLeftCSS(handle, {
 					percent: '100%',
-					pixels: handle.css( 'width' ),
-					message: 'handle ends on the left side'
+					pixels: handle.parent().css( 'width' ),
+					message: 'handle ends on the right side'
 				});
 
 				// reset slider state so it is ready for other tests

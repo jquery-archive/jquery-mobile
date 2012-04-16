@@ -1,0 +1,40 @@
+/* fixed page header & footer configuration */
+.ui-header-fixed,
+.ui-footer-fixed {
+	left: 0;
+	right: 0;
+	width: 100%;
+	position: fixed;
+	z-index: 1000;
+}
+.ui-header-fixed {
+	top: 0;
+}
+.ui-footer-fixed {
+	bottom: 0;
+}
+.ui-header-fullscreen,
+.ui-footer-fullscreen {
+	opacity: .9;
+}
+.ui-page-header-fixed {
+	padding-top: 2.5em;
+}
+.ui-page-footer-fixed {
+	padding-bottom: 3em;
+}
+.ui-page-header-fullscreen .ui-content,
+.ui-page-footer-fullscreen .ui-content {
+	padding: 0;
+}
+.ui-fixed-hidden {
+	position: absolute;
+}
+.ui-page-header-fullscreen .ui-fixed-hidden,
+.ui-page-footer-fullscreen .ui-fixed-hidden {
+	left: -99999em;
+}
+.ui-header-fixed .ui-btn,
+.ui-footer-fixed .ui-btn { 
+	z-index: 10;
+}

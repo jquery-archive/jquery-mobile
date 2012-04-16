@@ -1,14 +1,12 @@
-/*!
- * jQuery hashchange event - v1.3 - 7/21/2010
- * http://benalman.com/projects/jquery-hashchange-plugin/
- * 
- * Copyright (c) 2010 "Cowboy" Ben Alman
- * Dual licensed under the MIT and GPL licenses.
- * http://benalman.com/about/license/
- */
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Hashchange event management for AJAX navigation system
+//>>label: Hashchange
+//>>group: Navigation
+//>>excludeEnd("jqmBuildExclude");
+
 
 // Script: jQuery hashchange event
-//
+// 
 // *Version: 1.3, Last updated: 7/21/2010*
 // 
 // Project Home - http://benalman.com/projects/jquery-hashchange-plugin/
@@ -86,8 +84,6 @@
 //         part of jQuery BBQ, but also be available separately.
 
 (function($,window,undefined){
-  '$:nomunge'; // Used by YUI compressor.
-  
   // Reused string.
   var str_hashchange = 'hashchange',
     

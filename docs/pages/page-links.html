@@ -1,15 +1,16 @@
 <!DOCTYPE html> 
-<html> 
+<html>
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<title>jQuery Mobile Docs - Linking Pages</title> 
-	<link rel="stylesheet"  href="../../css/themes/default/" />  
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+
 	<script src="../../js/jquery.js"></script>
-	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
-	<script src="../_assets/js/jqm-docs.js"></script>
+	<script src="../../docs/_assets/js/jqm-docs.js"></script>
 	<script src="../../js/"></script>
+
 </head> 
 <body> 
 
@@ -17,7 +18,8 @@
 
 		<div data-role="header" data-theme="f">
 		<h1>Linking pages</h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
 	</div><!-- /header -->
 
 	<div data-role="content">
@@ -35,23 +37,25 @@
 			<p>If the Ajax request is successful, the new page content is added to the DOM, all mobile widgets are auto-initialized, then the new page is animated into view with a page transition.</p>
 			
 			<p>If the Ajax request fails, the framework will display a small error message overlay (styled in the "e" swatch) that disappears after a brief time so this doesn't break the navigation flow. View an <a href="notapage.html">example of the error message</a>.</p>
+			
+			<p><strong>Note:</strong> You cannot link <strong>to</strong> a multipage document with Ajax navigation active because the framework will only load the first page it finds, not the full set of internal pages. In these cases, you must link without Ajax (see next section) for a full page refresh to prevent potential hash collisions. There is currently a <a href="https://github.com/ToddThomson/jQuery-Mobile-Subpage-Widget" rel="external">subpage plugin</a> that makes it possible to load in multi-page documents.</p>
 
 
 <h2>Linking without Ajax</h2>
 		
-		<p>Links that point to other domains or that have <code>rel="external"</code>, <code>data-ajax="false"</code> or <code>target</code> attributes will not be loaded with Ajax. Instead, these links and will cause a full page refresh with no animated transition. Both attributes have the same effect, but different semantic meaning: <code>rel="external"</code> should be used when linking to another site or domain, while <code>data-ajax="false"</code> is useful for simply opting a page within your domain from being loaded via Ajax. Because of security restrictions, the framework always opts links to external domains out of the Ajax behavior.</p>
-		
+		<p>Links that point to other domains or that have <code>rel="external"</code>, <code>data-ajax="false"</code> or <code>target</code> attributes will not be loaded with Ajax. Instead, these links will cause a full page refresh with no animated transition. Both attributes (<code>rel="external"</code> and <code>data-ajax="false"</code>) have the same effect, but a different semantic meaning: <code>rel="external"</code> should be used when linking to another site or domain, while <code>data-ajax="false"</code> is useful for simply opting a page within your domain from being loaded via Ajax. Because of security restrictions, the framework always opts links to external domains out of the Ajax behavior.</p>
+		<p>In version 1.1, we've added support for using <code>data-ajax="false"</code> on a parent container which allows you to excluded a large number of links from the Ajax navigation system. This avoids the need to add this attribute to every link in a container.</p>
 		<p>Note: When building a jQuery Mobile application where the Ajax navigation system is disabled globally or frequently disabled on individual links, we  recommend disabling the <code>$.mobile.pushStateEnabled</code> global <a href="../api/globalconfig.html">configuration option</a> to avoid inconsistent navigation behavior in some browsers.</p>
 		
 
 
 		<h2>Linking within a multi-page document</h2> 
 		
-			<p>A single HTML document can contain or multiple 'page' containers simply be  stacking multiple divs with a <code> data-role</code> of <code>"page"</code>. This allows you to build a small site or application within a single HTML document; jQuery Mobile will simply display the first 'page' it finds in the source order when the page loads.</p> 
+			<p>A single HTML document can contain one or many 'page' containers simply by stacking multiple divs with a <code> data-role</code> of <code>"page"</code>. This allows you to build a small site or application within a single HTML document; jQuery Mobile will simply display the first 'page' it finds in the source order when the page loads.</p> 
 			
-			<p>If a link in a multi-page document points to an anchor (<code>#foo</code>), the framework will looks for a page wrapper with that ID (id="foo"). If it finds a page in the HTML document, it will transition the new page into view. You can seamlessly navigate between local, internal "pages" and external pages in jQuery Mobile. Both will look the same to the end user except that external pages will display the Ajax spinner while loading. In either situation, jQuery Mobile updates the page's URL hash to enable Back button support, deep-linking and bookmarking. </p>
+			<p>If a link in a multi-page document points to an anchor (<code>#foo</code>), the framework will look for a page wrapper with that ID (<code>id="foo"</code>). If it finds a page in the HTML document, it will transition the new page into view. You can seamlessly navigate between local, internal "pages" and external pages in jQuery Mobile. Both will look the same to the end user except that external pages will display the Ajax spinner while loading. In either situation, jQuery Mobile updates the page's URL hash to enable Back button support, deep-linking and bookmarking. </p>
 		
-		<p>It's important to note if you  are linking from a mobile page that was loaded via Ajax to a page that contains multiple internal pages, you need to add a <code>rel="external"</code> or <code>data-ajax="false"</code> to the link. This tells the framework to do a full page reload to clear out the Ajax hash in the URL. This is critical because Ajax pages use the hash (#) to track the Ajax history, while multiple internal pages use the hash to indicate internal pages so there will be conflicts in the hash between these two modes.</p>
+		<p>It's important to note that if you are linking from a mobile page that was loaded via Ajax to a page that contains multiple internal pages, you need to add a <code>rel="external"</code> or <code>data-ajax="false"</code> to the link. This tells the framework to do a full page reload to clear out the Ajax hash in the URL. This is critical because Ajax pages use the hash (<code>#</code>) to track the Ajax history, while multiple internal pages use the hash to indicate internal pages so there will be conflicts in the hash between these two modes.</p>
 		
 		<p>For example, a link to a page containing multiple internal pages would look like this:</p>
 			
@@ -60,7 +64,11 @@
 				
 
 		<h2>"Back" button links</h2>
-		<p>If you use the attribute <code>data-rel="back"</code> on an anchor, any clicks on that anchor will mimic the back button, going back one history entry and ignoring the anchor's default href. This is particularly useful when linking back to a named page, such as a link that says "home", or when generating "back" buttons with JavaScript, such as a button to close a dialog. When using this feature in your source markup, <strong>be sure to provide a meaningful href that actually points to the URL of the referring page (this will allow the feature to work for users in C-Grade browsers</strong>. Also, please keep in mind that if you just want a reverse transition without actually going back in history, you should use the <code>data-direction="reverse"</code> attribute instead.</p>
+		<p>If you use the attribute <code>data-rel="back"</code> on an anchor, any clicks on that anchor will mimic the back button, going back one history entry and ignoring the anchor's default <code>href</code>. This is particularly useful when generating "back" buttons with JavaScript, such as a button to close a dialog. 
+		When using this feature in your source markup, although browsers that support this feature will not use the specified <code>href</code> attribute, <strong>be sure to still provide a meaningful value that actually points to the URL of the referring page to allow the feature to work for users in C-Grade browsers</strong>. If users can reach this page from more than one referring pages, specify a sensible <code>href</code> so that the navigation remains logical for all users. 
+		Also, please keep in mind that if you just want a reverse transition without actually going back in history, you should use the <code>data-direction="reverse"</code> attribute instead.
+		Note: <code>data-direction="reverse"</code> is meant to simply run the backwards version of the transition that will run on that page change, while <code>data-rel="back"</code> makes the link functionally equivalent to the browser's back button and all the standard back button logic applies. Adding <code>data-direction="reverse"</code> to a link with <code>data-rel="back"</code> <b>will not</b> reverse the reversed page transition and produce the "normal" version of the transition. 
+		</p>
 		
 				
 		<h2>Redirects and linking to directories</h2>
@@ -114,14 +122,15 @@
 								<li><a href="multipage-template.html" data-ajax="false">Multi-page template</a></li>
 								<li><a href="page-titles.html">Page titles</a></li>
 								<li data-theme="a"><a href="page-links.html">Linking pages</a></li>
-								<li><a href="page-transitions.html" data-ajax="false">Page transitions</a></li>
+								<li><a href="page-transitions.html">Page transitions</a></li>
 								<li><a href="page-dialogs.html">Dialogs</a></li>
 								<li><a href="page-cache.html">Prefetching &amp; caching pages</a></li>
 								<li><a href="page-navmodel.html">Ajax, hashes &amp; history</a></li>
-								<li><a href="page-dynamic.html">Dynamically Injecting Pages</a></li>
+								<li><a href="page-dynamic.html">Dynamically injecting pages</a></li>
 								<li><a href="page-scripting.html">Scripting pages</a></li>
+								<li><a href="phonegap.html">PhoneGap apps</a></li>
+								<li><a href="touchoverflow.html">touchOverflow feature</a></li>
 								<li><a href="pages-themes.html">Theming pages</a></li>
-
 							</ul>
 					</div>
 				</div>		
@@ -129,7 +138,7 @@
 			</div><!-- /content -->
 
 			<div data-role="footer" class="footer-docs" data-theme="c">
-					<p>&copy; 2011 The jQuery Project</p>
+					<p>&copy; 2011-12 The jQuery Foundation</p>
 			</div>
 
 			</div><!-- /page -->

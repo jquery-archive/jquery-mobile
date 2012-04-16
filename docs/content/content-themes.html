@@ -1,15 +1,16 @@
 <!DOCTYPE html> 
-<html> 
+<html>
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<title>jQuery Mobile Docs - Content Themes</title> 
-	<link rel="stylesheet"  href="../../css/themes/default/" />  
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+
 	<script src="../../js/jquery.js"></script>
-	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
-	<script src="../_assets/js/jqm-docs.js"></script>
+	<script src="../../docs/_assets/js/jqm-docs.js"></script>
 	<script src="../../js/"></script>
+
 </head> 
 <body> 
 
@@ -17,14 +18,15 @@
 
 		<div data-role="header" data-theme="f">
 		<h1>Theming content</h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
 	</div><!-- /header -->
 
 	<div data-role="content">
 			<div class="content-primary">
 		<h2>Theming the content area</h2>
-		<p>The main content area of a page (container with the <code> data-role="content"</code> attribute) should be themed by adding the <code> data-theme</code> attribute to the <code> data-role="page"</code> container to ensure that the background colors are applied to the full page, regardless of the content length. (If you add to the <code> data-theme</code> to the content container, the background color will stop after the content so there may be a gap in color between the content and fixed footer.)</p>
-		<p>Additionally, the content area can be themed to match the theme of the collapsible header using the <code>data-content-theme</code> attribute.</p>
+		<p>The main content area of a page (container with the <code> data-role="content"</code> attribute) should be themed by adding the <code> data-theme</code> attribute to the <code> data-role="page"</code> container to ensure that the background colors are applied to the full page, regardless of the content length. (If you add the <code> data-theme</code> attribute to the content container, the background color will stop after the content. So there may be a gap in color between the content and fixed footer.)</p>
+		<p>Additionally, the content area of a collapsible can be themed to match the theme of the collapsible header using the <code>data-content-theme</code> attribute.</p>
 
 <code>
 &lt;div data-role=&quot;page&quot; <strong> data-theme=&quot;a&quot;</strong> <strong>data-content-theme=&quot;a&quot;</strong>&gt;
@@ -133,7 +135,7 @@
 </div><!-- /content -->
 
 <div data-role="footer" class="footer-docs" data-theme="c">
-		<p>&copy; 2011 The jQuery Project</p>
+		<p>&copy; 2011-12 The jQuery Foundation</p>
 </div>
 	
 </div><!-- /page -->

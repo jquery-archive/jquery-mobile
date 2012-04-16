@@ -15,6 +15,16 @@ Clone this repo and build the js and css files (you'll need Git and Make install
 A full version and a minified version of the jQuery Mobile JavaScript and CSS files will be created
 in a folder named "compiled". There is also now a Structure only css file so you can add your own theme on top of it.
 
+How to build a self-contained version of the Docs/Demos
+=======================================================
+Once you have your own cloned repo on your computer:
+
+    make docs
+
+The docs will be built and available in the compiled/demos folder. You can move this folder to your web server or
+other location. It has no dependencies on anything other than a basic HTML web server.
+
+
 Submitting bugs
 ===============
 If you think you've found a bug, please report it by following these instructions:
@@ -35,7 +45,7 @@ If you think you've found a bug, please report it by following these instruction
         * [jsfiddle](http://jsfiddle.net)
 3. Submit the issue.
 
-Recommended: [JS Bin issue template with instructions](http://jsbin.com/obowiw/edit)
+Recommended: [JS Bin issue template with instructions](http://jsbin.com/omacox/edit)
 
 Submitting patches
 ==================
@@ -67,6 +77,23 @@ You need the following Apache modules loaded:
 * Expire (mod\_expires.so)
 * Header (mod\_headers.so)
 
+Alternatively, with the addition of async loading, you can use the python simple http server from the project root:
+
+    $ python -m SimpleHTTPServer 8000
+
+And in your browser visit [localhost:8000](http://localhost:8000/tests/unit/core/). NOTE: The docs will not load as they are dependent on the "/js/" includes which require php. For other development work such as unit tests and custom test pages using
+
+    <script data-main="js/jquery.mobile.docs" src="external/requirejs/require.js"></script>
+
+will allow you to load modules asynchronously without php. Please note that the example above assumes it's inclusion in a page at the root of the directory in which the simple http server was run.
+
+AMD Support in Development
+==========================
+
+Please bear in mind that async loading is not supported for production and is primarily used for the project's build process. As a result developers should expect an initial flash of unstyled content, which will not occur when the library is compiled.
+
+If you find dependency bugs when using the async loading support for development please log them in the github issue tracker.
+
 Building With A Custom Theme
 ============================
 To use a custom theme in your own build, you'll need Make installed. You can find the themes in the CSS/Themes folder.
@@ -77,9 +104,8 @@ theme's name. For testing locally, make sure the index.php file is copied as wel
 2. Edit the `jquery.mobile.theme.css` file so it contains your custom fonts and colors.
 3. Once you are done editing your files and saving them, open a terminal.
 4. Navigate to the jQuery-Mobile folder's root.
-5. Run the following command to build jQuery-Mobile. The CSSTHEME specifies what theme to include. If you leave it off,
-it will build using the "default" theme.
+5. Run the following command to build jQuery-Mobile (THEME is the name of the folder for your theme from step 1.):
 
-    make CSSTHEME=YourThemeName
+    make THEME=YourThemeName
 
 6. The compiled files will be located in the "compiled" folder in the root of jQuery-Mobile.

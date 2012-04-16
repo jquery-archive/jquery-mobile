@@ -39,4 +39,28 @@
 
 		test.val("foo\n\n\n\n\n\n\n\n\n\n\n\n\n\n").trigger("keyup");
 	});
+
+	asyncTest( "text area should auto grow when the parent page is loaded via ajax", function() {
+		$.testHelper.pageSequence([
+			function() {
+				$("#external").click();
+			},
+
+			function() {
+				setTimeout(function() {
+					ok($.mobile.activePage.find( "textarea" )[0].clientHeight > 100, "text area's height has grown");
+					window.history.back();
+				}, 1000);
+			},
+
+			function() {
+				start();
+			}
+		]);
+	});
+
+	// NOTE init binding to alter the setting is in settings.js
+	test( "'clear text' button for search inputs should use configured text", function(){
+		strictEqual( $( "#search-input" ).closest( ".ui-input-search" ).find( ".ui-input-clear" ).attr( "title" ), "custom value" );
+	});
 })(jQuery);

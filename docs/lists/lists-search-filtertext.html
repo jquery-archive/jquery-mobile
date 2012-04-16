@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Docs - Filtered Lists Using Hidden Data</title>
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+
+	<script src="../../js/jquery.js"></script>
+	<script src="../../docs/_assets/js/jqm-docs.js"></script>
+	<script src="../../js/"></script>
+
+</head> 
+<body> 
+
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="f">
+		<h1>Search hidden data</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="content-primary">
+			<p>By default, the listview filter simply searches against the content in each list item. If you want the filter to search against different content, add the <code>data-filtertext</code>	attribute to the item and populate it with one or many keywords and phrases that should be used to match against. Note that if this attribute is added, the contents of the list item are ignored.</p>
+			<p>This attribute is useful for dealing with allowing for ticker symbols and full company names to be searched, or for covering common spellings and abbreviations for countries.</p>
+			
+<pre><code>		
+&lt;li <strong>data-filtertext=&quot;NASDAQ:AAPL Apple Inc.</strong>&quot;&gt;&lt;a href=&quot;#&quot;&gt;Apple&lt;/a&gt;&lt;/li&gt;
+&lt;li <strong>data-filtertext=&quot;USA U.S.A. United States of America&quot;</strong>&gt;&lt;a href=&quot;#&quot;&gt;United States&lt;/a&gt;&lt;/li&gt;
+</code></pre>	
+
+			<ul data-role="listview" data-filter="true" data-filter-placeholder="Search ticker or firm name..." data-inset="true">
+				<li data-filtertext="NASDAQ:ADBE Adobe Systems Incorporated"><a href="#">Adobe</a></li>
+				<li data-filtertext="NASDAQ:AMZNL Amazon.com, Inc."><a href="#">Amazon</a></li>
+				<li data-filtertext="NASDAQ:AAPL Apple Inc."><a href="#">Apple</a></li>
+				<li data-filtertext="NASDAQ:GOOG Google Inc."><a href="#">Google</a></li>
+				<li data-filtertext="NYSE:IBM Intl. International Business Machines Corp."><a href="index.html">IBM</a></li>
+				<li data-filtertext="NASDAQ:MSFT Microsoft Corporation"><a href="#">Microsoft</a></li>
+				<li data-filtertext="NASDAQ:YHOO Yahoo! Inc."><a href="#">Yahoo</a></li>
+				<li data-filtertext="USA U.S.A. United States of America"><a href="#">United States</a></li>
+			</ul>
+			</div><!--/content-primary -->		
+
+			<div class="content-secondary">
+
+				<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+
+						<h3>More in this section</h3>
+
+						<ul data-role="listview" data-theme="c" data-dividertheme="d">
+
+							<li data-role="list-divider">List views</li>
+							<li><a href="docs-lists.html">List basics &amp; API</a></li>
+							<li><a href="lists-ul.html">Basic linked list</a></li>
+							<li><a href="lists-nested.html">Nested list</a></li>
+							<li><a href="lists-ol.html">Numbered list</a></li>
+
+							<li><a href="lists-split.html">Split button list</a></li>	
+							<li><a href="lists-divider.html">List dividers</a></li>
+							<li><a href="lists-count.html">Count bubble</a></li>
+							<li><a href="lists-thumbnails.html">Thumbnails</a></li>
+							<li><a href="lists-icons.html">Icons</a></li>
+							<li><a href="lists-formatting.html">Content formatting</a></li>
+							<li><a href="lists-search.html">Search filter bar</a></li>
+							<li><a href="lists-search-inset.html">Inset search filter bar</a></li>
+							<li><a href="lists-search-with-dividers.html">Search filter bar with dividers</a></li>
+							<li data-theme="a"><a href="lists-search-filtertext.html">Search filter hidden data</a></li>
+
+							<li><a href="lists-readonly.html">Read-only lists</a></li>
+							<li><a href="lists-readonly-inset.html">Read-only inset lists</a></li>
+							<li><a href="lists-forms.html">Lists with forms</a></li>
+							<li><a href="lists-forms-inset.html">Inset lists with forms</a></li>
+
+							<li><a href="lists-inset.html">Inset styled lists</a></li>
+							<li><a href="lists-performance.html">List performance test</a></li>
+							<li><a href="lists-themes.html">Theming lists</a></li>
+
+						</ul>
+				</div>
+			</div>		
+
+		</div><!-- /content -->
+
+		<div data-role="footer" class="footer-docs" data-theme="c">
+				<p>&copy; 2011-12 The jQuery Foundation</p>
+		</div>
+
+		</div><!-- /page -->
+
+		</body>
+		</html>
