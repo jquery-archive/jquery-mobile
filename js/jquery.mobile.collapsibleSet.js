@@ -70,7 +70,8 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 		collapsiblesInSet.each( function() {
 			$( this ).find( $.mobile.collapsible.prototype.options.heading )
 				.find( "a" ).first()
-				.add( ".ui-btn-inner" )
+				.removeClass( "ui-corner-top ui-corner-bottom" )
+				.find( ".ui-btn-inner" )
 				.removeClass( "ui-corner-top ui-corner-bottom" );
 		});
 
