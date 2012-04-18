@@ -49,7 +49,7 @@ function validStyle( prop, value, check_vend ) {
 		check_vends = check_vend ? [ check_vend ] : vendors,
 		ret;
 
-	for( i = 0; i < check_vends.length; i++ ) {
+	for( var i = 0; i < check_vends.length; i++ ) {
 		check_style( check_vends[i] );
 	}
 	return !!ret;

@@ -667,7 +667,8 @@ define( [
 		// attribute and in need of enhancement.
 		if ( page.length === 0 && dataUrl && !path.isPath( dataUrl ) ) {
 			page = settings.pageContainer.children( "#" + dataUrl )
-				.attr( "data-" + $.mobile.ns + "url", dataUrl );
+				.attr( "data-" + $.mobile.ns + "url", dataUrl )
+				.jqmData( "url", dataUrl );
 		}
 
 		// If we failed to find a page in the DOM, check the URL to see if it
@@ -1211,7 +1212,7 @@ define( [
 					type:		type && type.length && type.toLowerCase() || "get",
 					data:		$this.serialize(),
 					transition:	$this.jqmData( "transition" ),
-					direction:	$this.jqmData( "direction" ),
+					reverse:	$this.jqmData( "direction" ) === "reverse",
 					reloadPage:	true
 				}
 			);
@@ -1343,8 +1344,7 @@ define( [
 
 			//use ajax
 			var transition = $link.jqmData( "transition" ),
-				direction = $link.jqmData( "direction" ),
-				reverse = ( direction && direction === "reverse" ) ||
+				reverse = $link.jqmData( "direction" ) === "reverse" ||
 							// deprecated - remove by 1.0
 							$link.jqmData( "back" ),
 
