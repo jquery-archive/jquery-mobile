@@ -18,6 +18,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		var self = this,
 			$el = this.element,
 			headerCloseButton = $( "<a href='#' data-" + $.mobile.ns + "icon='delete' data-" + $.mobile.ns + "iconpos='notext'>"+ this.options.closeBtnText + "</a>" ),
+			closeButtonNotYetClicked = true,
 			dialogWrap = $("<div/>", {
 					"role" : "dialog",
 					"class" : "ui-dialog-contain ui-corner-all ui-overlay-shadow"
@@ -46,7 +47,10 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		// Use click rather than vclick in order to prevent the possibility of unintentionally
 		// reopening the dialog if the dialog opening item was directly under the close button.
 		headerCloseButton.bind( "click", function() {
-			self.close();
+			if ( closeButtonNotYetClicked ) {
+				closeButtonNotYetClicked = false;
+				self.close();
+			}
 		});
 
 		/* bind events
@@ -68,6 +72,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		})
 		.bind( "pagehide", function( e, ui ) {
 			$( this ).find( "." + $.mobile.activeBtnClass ).removeClass( $.mobile.activeBtnClass );
+			closeButtonNotYetClicked = true;
 		})
 		// Override the theme set by the page plugin on pageshow
 		.bind( "pagebeforeshow", function(){
