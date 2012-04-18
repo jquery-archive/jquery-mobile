@@ -12,7 +12,7 @@ $files = array(
 	'jquery.mobile.support.js',
 	'jquery.mobile.vmouse.js',
 	'jquery.mobile.event.js',
-	'jquery.mobile.hashchange.js',
+	'jquery.hashchange.js',
 	'jquery.mobile.page.js',
 	'jquery.mobile.core.js',
 	'jquery.mobile.navigation.js',

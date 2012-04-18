@@ -7,7 +7,7 @@ define( [
 	"jquery",
 	"./jquery.mobile.core",
 	"./jquery.mobile.event",
-	"../external/requirejs/depend!./jquery.mobile.hashchange[jquery]",
+	"../external/requirejs/depend!./jquery.hashchange[jquery]",
 	"./jquery.mobile.page",
 	"./jquery.mobile.transition" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
