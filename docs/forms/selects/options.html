@@ -52,6 +52,9 @@
 				<p class="default">default: "arrow-down"</p>
 				<p>Replaces the default icon "arrow-down" with an icon from the <a href="../../buttons/buttons-icons.html">icon set</a>. This option is also exposed as a data attribute: <code>data-icon=&quot;star&quot;</code>. Setting this attribute to "false" suppresses the icon.</p>
 				<pre><code>$('select').selectmenu(<strong>{ icon: "star" }</strong>);</code></pre>
+				
+				<p>To suppress the icon, a boolean expression must be used:</p>
+				<pre><code>$('select').selectmenu(<strong>{ icon: false }</strong>);</code></pre>
 			</dd>
 			
 			<dt><code>iconpos</code> <em>string</em></dt>
