@@ -46,11 +46,6 @@ define( [ "jquery", "./jquery.mobile.navigation", "../external/requirejs/depend!
 			return url;
 		},
 
-		hashValueAfterReset: function( url ) {
-			var resetUrl = self.resetUIKeys( url );
-			return $.mobile.path.parseUrl( resetUrl ).hash;
-		},
-
 		// TODO sort out a single barrier to hashchange functionality
 		nextHashChangePrevented: function( value ) {
 			$.mobile.urlHistory.ignoreNextHashChange = value;
@@ -100,42 +95,23 @@ define( [ "jquery", "./jquery.mobile.navigation", "../external/requirejs/depend!
 		// on popstate (ie back or forward) we need to replace the hash that was there previously
 		// cleaned up by the additional hash handling
 		onPopState: function( e ) {
-			var poppedState = e.originalEvent.state,
-				timeout, fromHash, toHash, hashChanged;
+			var poppedState = e.originalEvent.state;
 
 			// if there's no state its not a popstate we care about, eg chrome's initial popstate
 			if( poppedState ) {
-				// the active url in the history stack will still be from the previous state
-				// so we can use it to verify if a hashchange will be fired from the popstate
-				fromHash = self.hashValueAfterReset( $.mobile.urlHistory.getActive().url );
+				// Disable hashchange events
+				self.nextHashChangePrevented( true );
 
-				// the hash stored in the state popped off the stack will be our currenturl or
-				// the url to which we wish to navigate
-				toHash = self.hashValueAfterReset( poppedState.hash.replace("#", "") );
-
-				// if the hashes of the urls are different we must assume that the browser
-				// will fire a hashchange
-				hashChanged = fromHash !== toHash;
-
-				// unlock hash handling once the hashchange caused be the popstate has fired
-				if( hashChanged ) {
-					$win.one( "hashchange.pushstate", function() {
-						self.nextHashChangePrevented( false );
-					});
-				}
-
-				// enable hash handling for the the _handleHashChange call
-				self.nextHashChangePrevented( false );
-
-				// change the page based on the hash
-				$.mobile._handleHashChange( poppedState.hash );
-
-				// only prevent another hash change handling if a hash change will be fired
-				// by the browser
-				if( hashChanged ) {
-					// disable hash handling until one of the above timers fires
-					self.nextHashChangePrevented( true );
-				}
+				// Android 2.3.3 and below do not wait for the popstate event
+				// to finish before firing and queueing the hashchange event.
+				// Give the browser a chance to handle these events.
+				setTimeout(function() {
+					// Renable hashchange events
+					self.nextHashChangePrevented( false );
+					
+					// change the page based on the hash
+					$.mobile._handleHashChange( poppedState.hash );
+				}, 0);
 			}
 		},
 
