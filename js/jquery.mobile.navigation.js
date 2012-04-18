@@ -1006,6 +1006,16 @@ define( [
 		if( fromPage && fromPage[0] === toPage[0] && !settings.allowSamePageTransition ) {
 			isPageTransitioning = false;
 			mpc.trigger( "pagechange", triggerData );
+
+			// Even if there is no page change to be done, we should keep the urlHistory in sync with the hash changes
+			if( settings.fromHashChange ) {
+				urlHistory.directHashChange({
+					currentUrl:	url,
+					isBack:		function() {},
+					isForward:	function() {}
+				});
+			}
+
 			return;
 		}
 
