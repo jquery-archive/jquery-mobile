@@ -1042,7 +1042,7 @@ define( [
 			// be an empty string. Moving the undefined -> empty string back into
 			// urlHistory.addNew seemed imprudent given undefined better represents
 			// the url state
-			url = ( active.url || "" ) + dialogHashKey;
+			url = ( active.url || "" ).replace(dialogHashKey, "") + dialogHashKey;
 		}
 
 		// Set the location hash.
