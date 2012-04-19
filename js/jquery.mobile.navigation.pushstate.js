@@ -50,11 +50,6 @@ define( [ "jquery", "./jquery.mobile.navigation", "../external/requirejs/depend!
 			return url;
 		},
 
-		hashValueAfterReset: function( url ) {
-			var resetUrl = self.resetUIKeys( url );
-			return $.mobile.path.parseUrl( resetUrl ).hash;
-		},
-
 		// TODO sort out a single barrier to hashchange functionality
 		nextHashChangePrevented: function( value ) {
 			$.mobile.urlHistory.ignoreNextHashChange = value;
@@ -122,6 +117,8 @@ define( [ "jquery", "./jquery.mobile.navigation", "../external/requirejs/depend!
 				// prevent any hashchange in the next self.hashChangeTimeout
 				self.nextHashChangePrevented( true );
 
+				// re-enable hash change handling after swallowing a possible hash
+				// change event that comes on all popstates courtesy of browsers like Android
 				self.hashChangeEnableTimer = setTimeout( function() {
 					self.nextHashChangePrevented( false );
 				}, self.hashChangeTimeout);
