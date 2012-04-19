@@ -188,37 +188,12 @@ define( [ "jquery",
 			return { x: newleft, y: newtop };
 		},
 
-		_bindHashChange: function() {
-			var self = this;
-			$( window ).one( "hashchange.popup", function() {
-				self.close( true );
-			});
-		},
-
-		_unbindHashChange: function() {
-			$( window ).unbind( "hashchange.popup" );
-		},
-
-		_onPageBeforeChange: function( e, data ) {
-			if ( typeof( data.toPage ) === "object" && data.toPage.jqmData( "url" ) !== $.mobile.activePage.jqmData( "url" ) ) {
-				// Prevent the changePage from happening
-				e.preventDefault();
-				e.stopImmediatePropagation();
-
-				setTimeout( function() {
-					// Resume the changePage
-					$.mobile.changePage( data.toPage, data.options );
-				}, 250);
-
-				this.close();
-			}
-		},
-
 		open: function( x, y ) {
 			if ( !this._isOpen ) {
 				var self = this,
 					onAnimationComplete = function() {
 						self._ui.screen.height( $( document ).height() );
+						$.mobile.popup.popupStack.push( self );
 					},
 					coords = this._placementCoords(
 							(undefined === x ? window.innerWidth / 2 : x),
@@ -247,21 +222,11 @@ define( [ "jquery",
 					onAnimationComplete();
 				}
 
-				// listen for hashchange that will occur when we set it to null dialog hash
-				$( window ).one( "hashchange", function() {
-					self._bindHashChange();
-				});
-
-				$( window ).bind( "pagebeforechange.popup", $.proxy( this, "_onPageBeforeChange" ) );
-
-				// set hash to non-linkable dialog url
-				$.mobile.path.set( ( ( $.mobile.activePage != $.mobile.firstPage) ? $.mobile.urlHistory.getActive().url : "" ) + "&ui-state=dialog" );
-
 				this._isOpen = true;
 			}
 		},
 
-		close: function( fromHash ) {
+		close: function( ) {
 			if ( this._isOpen ) {
 				var self = this,
 					onAnimationComplete = function() {
@@ -269,6 +234,7 @@ define( [ "jquery",
 							.removeClass( "reverse out" )
 							.addClass( "ui-selectmenu-hidden" )
 							.removeAttr( "style" );
+						$.mobile.popup.popupStack.pop( self );
 					},
 					hideScreen = function() {
 						self._ui.screen.addClass( "ui-screen-hidden" );
@@ -291,18 +257,86 @@ define( [ "jquery",
 				} else {
 					hideScreen();
 				}
-
-				// unbind listener that comes with opening popup
-				this._unbindHashChange();
-				$( window ).unbind( "pagebeforechange.popup" );
-
-				// if the close event did not come from an internal hash listener, reset URL back
-				if ( !fromHash ) {
-					window.history.back();
-				}
 			}
 		}
 	});
+
+	$.mobile.popup.popupStack = {
+		_stack: [],
+
+		push: function( popup ) {
+			if ( 0 === this._stack.length ) {
+				this._baseUrl = $.mobile.urlHistory.getActive().url;
+			}
+			this._stack.push( popup );
+
+			if ( 1 === this._stack.length ) {
+				var activeEntry = $.mobile.urlHistory.getActive(),
+				    hasHash = ( activeEntry.url.indexOf( $.mobile.dialogHashKey ) > -1 );
+
+				this._installListener(hasHash);
+
+				if ( !hasHash ) {
+					$.mobile.path.set( $.mobile.urlHistory.getActive().url + $.mobile.dialogHashKey );
+					$.mobile.urlHistory.addNew( activeEntry.url + $.mobile.dialogHashKey, activeEntry.transition, activeEntry.title, activeEntry.pageUrl, activeEntry.role );
+				}
+			}
+		},
+
+		pop: function( popup ) {
+			if ( this._stack.indexOf( popup ) >= 0 ) {
+				if ( 1 === this._stack.length ) {
+					this._currentPopup = popup;
+					window.history.back();
+				}
+				else {
+					this._afterPop( popup );
+				}
+			}
+		},
+
+		_afterPop: function( popup ) {
+				this._stack.pop( popup );
+				if ( 0 === this._stack.length ) {
+					this._baseUrl = undefined;
+				}
+		},
+
+		_removeListener: function() {
+			$( window ).unbind( "hashchange.popupStackBinder hashchange.popupStack" );
+		},
+
+		_installListener: function(direct) {
+			var self = this;
+
+			function realInstallListener() {
+				$( window ).one( "hashchange.popupStack", function() {
+					self._handleHashChange();
+				});
+			}
+
+			if ( direct ) {
+				realInstallListener();
+			}
+			else {
+				$( window ).one( "hashchange.popupStackBinder", function() {
+					realInstallListener();
+				});
+			}
+		},
+
+		_handleHashChange: function() {
+			$.each( this._stack, function( key, value ) {
+				value.close();
+			});
+			this._stack = [];
+			this._removeListener();
+			if ( this._currentPopup ) {
+				this._afterPop( this._currentPopup );
+				this._currentPopup = undefined;
+			}
+		}
+	};
 
 	$.mobile.popup.bindPopupToButton = function( btn, popup ) {
 		if ( btn.length === 0 || popup.length === 0 ) return;
