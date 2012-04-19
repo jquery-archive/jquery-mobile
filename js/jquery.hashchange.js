@@ -1,10 +1,3 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Hashchange event management for AJAX navigation system
-//>>label: Hashchange
-//>>group: Navigation
-//>>excludeEnd("jqmBuildExclude");
-
-
 // Script: jQuery hashchange event
 // 
 // *Version: 1.3, Last updated: 7/21/2010*

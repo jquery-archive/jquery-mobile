@@ -23,19 +23,18 @@ body { background: #dddddd; }
 	padding: .25em 3em;
 	right: -2.5em;
 	text-align: center;
-	text-shadow: 0 1px 0 #fff;
+	text-shadow: 0 1px 1px #fff;
 	top: .75em;
-	width: auto;
+	width: 78px;
 	z-index: 9;
 	-webkit-transform: rotate(45deg);
 	-moz-transform: rotate(45deg);
 	-o-transform: rotate(45deg);
 	transform: rotate(45deg);
-
-	-webkit-box-shadow: 0 0 6px rgba(0,0,0,.50);
-	-moz-box-shadow: 0 0 6px rgba(0,0,0,.50);
-	-o-box-shadow: 0 0 6px rgba(0,0,0,.50);
-	box-shadow: 0 0 6px rgba(0,0,0,.50);
+	-webkit-box-shadow: 0 0 6px rgba(0,0,0,.40);
+	-moz-box-shadow: 0 0 6px rgba(0,0,0,.40);
+	-o-box-shadow: 0 0 6px rgba(0,0,0,.40);
+	box-shadow: 0 0 6px rgba(0,0,0,.40);
 }
 .jqm-version b {
 	color: #a21412;

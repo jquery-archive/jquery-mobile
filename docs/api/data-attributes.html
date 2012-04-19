@@ -189,6 +189,35 @@
 			<h2><a href="../forms/docs-forms.html">Field container</a></h2>
 			<p>Container with <code>data-role="fieldcontain"</code> wrapped around label/form element pair</p>
 
+			<h2><a href="../toolbars/bars-fixed.html">Fixed Toolbar</a></h2>
+			<p>Container with <code>data-role="header"</code> or <code>data-role="footer"</code> plus the attribute <code>data-position="fixed"</code></p>
+			<table>
+				<tr>
+					<th>data-disable-page-zoom</th>
+					<td><strong>true</strong> | false - User-scaling-ability for pages with fixed toolbars</td>
+				</tr>
+				<tr>
+					<th>data-fullscreen</th>
+					<td>true | <strong>false</strong> - Setting toolbars <strong>over</strong> the page-content</td>
+				</tr>
+				<tr>
+					<th>data-tap-toggle</th>
+					<td><strong>true</strong> | false - Ability to toggle toolbar-visibility on user tap/click</td>
+				</tr>
+				<tr>
+					<th>data-transition</th>
+					<td><strong>slide</strong> | fade | none - Show/hide-transition when a tap/click occurs</td>
+				</tr>
+				<tr>
+					<th>data-update-page-padding</th>
+					<td><strong>true</strong> | false - Automatic/User-CSS based toolbar space-management</td>
+				</tr>
+				<tr>
+					<th>data-visible-on-page-show</th>
+					<td><strong>true</strong> | false - toolbar-visibility when parent page is shown</td>
+				</tr>
+			</table>
+
 			<h2><a href="../forms/switch/">Flip toggle switch</a></h2>
 			<p>Select with <code>data-role="slider"</code>, two options only</p>
 			<table>
@@ -349,7 +378,7 @@
 				</tr>
 				<tr>
 					<th>data-iconpos</th>
-					<td><strong>left</strong> | right | top | bottom |  notext</td>
+					<td>left | right | <strong>top</strong> | bottom |  notext</td>
 				</tr>
 				<tr>
 					<th>data-theme</th>
@@ -419,11 +448,11 @@
 			<table>
 				<tr>
 					<th>data-icon</th>
-					<td>home | delete | plus | arrow-u | arrow-d | check | gear | grid | star | custom | arrow-r | arrow-l | minus | refresh | forward | back | alert | info | search</td>
+					<td>home | delete | plus | arrow-u | <strong>arrow-d</strong> | check | gear | grid | star | custom | arrow-r | arrow-l | minus | refresh | forward | back | alert | info | search | false </td>
 				</tr>
 				<tr>
 					<th>data-iconpos</th>
-					<td><strong>left</strong> | right | top | bottom |  notext</td>
+					<td>left | <strong>right</strong> | top | bottom |  notext</td>
 				</tr>
 				<tr>
 					<th>data-inline</th>

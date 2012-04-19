@@ -3,7 +3,7 @@
 //>>label: Pushstate Support
 //>>group: Navigation
 
-define( [ "jquery", "./jquery.mobile.navigation", "../external/requirejs/depend!./jquery.mobile.hashchange[jquery]" ], function( $ ) {
+define( [ "jquery", "./jquery.mobile.navigation", "../external/requirejs/depend!./jquery.hashchange[jquery]" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 ( function( $, window ) {
 	// For now, let's Monkeypatch this onto the end of $.mobile._registerInternalEvents

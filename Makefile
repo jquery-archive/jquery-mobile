@@ -194,7 +194,7 @@ deploy_nightlies:
 	# -------------------------------------------------
 
 # Deploy a finished release. This is manually done.
-deploy: init css js docs zip
+deploy: clean init css js docs zip
 	# Deploying all the files to the CDN
 	@@mkdir tmp
 	@@cp -R ${OUTPUT} tmp/${VER_OFFICIAL}
