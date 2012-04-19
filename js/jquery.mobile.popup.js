@@ -271,11 +271,15 @@ define( [ "jquery",
 			this._stack.push( popup );
 
 			if ( 1 === this._stack.length ) {
-				var activeEntry = $.mobile.urlHistory.getActive();
+				var activeEntry = $.mobile.urlHistory.getActive(),
+				    hasHash = ( activeEntry.url.indexOf( $.mobile.dialogHashKey ) > -1 );
 
-				this._installListener();
-				$.mobile.path.set( this._getPathPrefix() + $.mobile.dialogHashKey );
-				$.mobile.urlHistory.addNew( activeEntry.url + $.mobile.dialogHashKey, activeEntry.transition, activeEntry.title, activeEntry.pageUrl, activeEntry.role );
+				this._installListener(hasHash);
+
+				if ( !hasHash ) {
+					$.mobile.path.set( $.mobile.urlHistory.getActive().url + $.mobile.dialogHashKey );
+					$.mobile.urlHistory.addNew( activeEntry.url + $.mobile.dialogHashKey, activeEntry.transition, activeEntry.title, activeEntry.pageUrl, activeEntry.role );
+				}
 			}
 		},
 
@@ -302,22 +306,27 @@ define( [ "jquery",
 			$( window ).unbind( "hashchange.popupStackBinder hashchange.popupStack pagebeforechange.popupStack" );
 		},
 
-		_installListener: function() {
+		_installListener: function(direct) {
 			var self = this;
 
-			$( window ).one( "hashchange.popupStackBinder", function() {
+			function realInstallListener() {
 				$( window ).one( "hashchange.popupStack", function() {
 					self._handleHashChange();
 				});
-			});
+			}
+
+			if ( direct ) {
+				realInstallListener();
+			}
+			else {
+				$( window ).one( "hashchange.popupStackBinder", function() {
+					realInstallListener();
+				});
+			}
 
 			$( window ).bind( "pagebeforechange.popupStack", function( e, data ) {
 				self._handlePBC( e, data );
 			});
-		},
-
-		_getPathPrefix: function() {
-			return ( ( $.mobile.activePage != $.mobile.firstPage ) ? $.mobile.urlHistory.getActive().url : "" );
 		},
 
 		_handleHashChange: function() {
