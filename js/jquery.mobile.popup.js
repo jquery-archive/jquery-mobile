@@ -303,7 +303,7 @@ define( [ "jquery",
 		},
 
 		_removeListener: function() {
-			$( window ).unbind( "hashchange.popupStackBinder hashchange.popupStack pagebeforechange.popupStack" );
+			$( window ).unbind( "hashchange.popupStackBinder hashchange.popupStack" );
 		},
 
 		_installListener: function(direct) {
@@ -323,10 +323,6 @@ define( [ "jquery",
 					realInstallListener();
 				});
 			}
-
-			$( window ).bind( "pagebeforechange.popupStack", function( e, data ) {
-				self._handlePBC( e, data );
-			});
 		},
 
 		_handleHashChange: function() {
@@ -338,12 +334,6 @@ define( [ "jquery",
 			if ( this._currentPopup ) {
 				this._afterPop( this._currentPopup );
 				this._currentPopup = undefined;
-			}
-		},
-
-		_handlePBC: function( e, data ) {
-			if ( typeof data.toPage === "object" && data.toPage.jqmData( "url" ) === this._baseUrl ) {
-				$.mobile.urlHistory.activeIndex = Math.max( 0, $.mobile.urlHistory.activeIndex - 1 );
 			}
 		}
 	};
