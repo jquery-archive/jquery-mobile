@@ -56,7 +56,14 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 	},
 
 	_init: function() {
+		var $el = this.element,
+			collapsiblesInSet = $el.children( ":jqmData(role='collapsible')" ),
+			expanded = collapsiblesInSet.filter( ":jqmData(collapsed='false')" );
 		this.refresh();
+
+		// Because the corners are handled by the collapsible itself and the default state is collapsed
+		// That was causing https://github.com/jquery/jquery-mobile/issues/4116
+		expanded.trigger( "expand" );
 	},
 
 	refresh: function() {
