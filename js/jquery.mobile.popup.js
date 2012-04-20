@@ -269,17 +269,29 @@ define( [ "jquery",
 		close: function( fromHash ) {
 			if ( this._isOpen ) {
 				var self = this,
+					// Count down to triggering "closed" - we have two prerequisits:
+					// 1. The popup window reverse animation completes (onAnimationComplete())
+					// 2. The screen opacity animation completes (hideScreen())
+					triggerPrereqs = 2,
+					maybeTriggerClosed = function() {
+						triggerPrereqs--;
+
+						if ( 0 === triggerPrereqs ) {
+							self.element.trigger( "closed" );
+						}
+					},
 					onAnimationComplete = function() {
 						self._ui.container
 							.removeClass( "reverse out" )
 							.addClass( "ui-selectmenu-hidden" )
 							.removeAttr( "style" );
+						maybeTriggerClosed();
 					},
 					hideScreen = function() {
 						self._ui.screen.addClass( "ui-screen-hidden" );
 						self._isOpen = false;
-						self.element.trigger( "closed" );
 						self._ui.screen.removeAttr( "style" );
+						maybeTriggerClosed();
 					};
 
 				if ( this.options.transition && this.options.transition !== "none" ) {
