@@ -235,27 +235,27 @@ define( [ "jquery",
 					showScreen = function() {
 						maybeTriggerOpened();
 					},
-					coords = this._placementCoords(
+					coords = self._placementCoords(
 							(undefined === x ? window.innerWidth / 2 : x),
 							(undefined === y ? window.innerHeight / 2 : y) );
 
-				this._ui.screen
+				self._ui.screen
 						.height( $( document ).height() )
 						.removeClass( "ui-screen-hidden" );
 
-				if ( this.options.fade ) {
-					this._ui.screen.animate( {opacity: 0.5}, "fast", showScreen );
+				if ( self.options.fade ) {
+					self._ui.screen.animate( {opacity: 0.5}, "fast", showScreen );
 				}
 
-				this._ui.container
+				self._ui.container
 					.removeClass( "ui-selectmenu-hidden" )
 					.css( {
 						left: coords.x,
 						top: coords.y
 					});
 
-				if ( this.options.transition && this.options.transition !== "none" ) {
-					this._ui.container
+				if ( self.options.transition && self.options.transition !== "none" ) {
+					self._ui.container
 						.addClass( "in" )
 						.animationComplete( onAnimationComplete );
 				} else {
