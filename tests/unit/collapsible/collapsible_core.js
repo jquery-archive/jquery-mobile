@@ -164,6 +164,20 @@
   		]);
   	});
 
+	asyncTest( "Collapsible set with last collapsible expanded", function(){
+		$.testHelper.pageSequence([
+			function(){
+				$.testHelper.openPage( "#collapsible-set-with-last-collapsible-expanded" );
+			},
+
+			function() {
+				var collapsibles = $.mobile.activePage.find( ".ui-collapsible" );
+				ok( collapsibles.last().find( ".ui-collapsible-content" ).hasClass( "ui-corner-bottom" ), "Content of last collapsible should have class ui-corner-bottom");
+				start();
+			}
+		]);
+	});
+
 	module( "Icons", {});
 
 	asyncTest( "Collapsible with custom icons", function(){
