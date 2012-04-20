@@ -12,6 +12,7 @@
 	-webkit-animation-name: slideouttoleft;
 	-moz-transform: translateX(-100%);
 	-moz-animation-name: slideouttoleft;
+	overflow: hidden;
 }
 
 .slide.in {
