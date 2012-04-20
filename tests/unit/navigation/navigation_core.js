@@ -465,7 +465,7 @@
 			}]);
 	});
 
-	asyncTest( "opening a dialog, closing it, moving forward, and opening it again, does not result in a dialog that needs to be closed twice ", function() {
+	asyncTest( "opening a dialog, closing it, moving forward, and opening it again, does not result in a dialog that needs to be closed twice", function() {
 		$.testHelper.pageSequence([
 			// setup
 			function(){ $.testHelper.openPage("#dialog-double-hash-test"); },
@@ -491,9 +491,10 @@
 			function() {
 				setTimeout( function() {
 					same($("#dialog-double-hash-test")[0], $.mobile.activePage[0], "should be back to the test page");
+					start();
 				}, 300);
-				start();
-			}]);
+			}
+		]);
 	});
 
 	asyncTest( "going back from a dialog triggered from a dialog should result in the first dialog ", function(){
