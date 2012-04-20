@@ -529,6 +529,54 @@ var isAbs = $.mobile.path.isAbsoluteUrl("#foo");
 
 			</dd>
 
+			<dt><code>$.mobile.path.get</code> (<em>method</em>)</dt>
+			<dd>Utility method for determining the directory portion of an URL. If the URL has no trailing slash, the last component of the URL is considered to be a file.</dd>
+			<dd>
+
+				<dl>
+					<dt><code>&#183;</code> Arguments</dt>
+					<dd><code>url</code> (<em>string</em>, required) A relative or absolute URL.</dd>
+
+					<dt><code>&#183;</code> Return Value</dt>
+					<dd>This function returns the directory portion of a given URL.</dd>
+
+				</dl>
+			</dd>
+			<dd>Examples:
+			<pre>
+			<code>
+<strong>// Returns: http://foo.com/a/</strong>
+var dirName = $.mobile.path.get("http://foo.com/a/file.html");
+
+<strong>// Returns: http://foo.com/a/</strong>
+var dirName = $.mobile.path.get("http://foo.com/a/");
+
+<strong>// Returns: http://foo.com/a</strong>
+var dirName = $.mobile.path.get("http://foo.com/a");
+
+<strong>// Returns: //foo.com/a/</strong>
+var dirName = $.mobile.path.get("//foo.com/a/file.html");
+
+<strong>// Returns: /a/</strong>
+var dirName = $.mobile.path.get("/a/file.html");
+
+<strong>// Returns: /</strong>
+var dirName = $.mobile.path.get("file.html");
+
+<strong>// Returns: ""</strong>
+var dirName = $.mobile.path.get("/file.html");
+
+<strong>// Returns: ?a=1&amp;b=2</strong>
+var dirName = $.mobile.path.get("?a=1&amp;b=2");
+
+<strong>// Returns: foo</strong>
+var dirName = $.mobile.path.isAbsoluteUrl("#foo");
+
+
+			</code>
+			</pre>
+
+			</dd>
 
 			<dt><code>$.mobile.base</code> (<em>methods, properties</em>)</dt>
 			<dd>Utilities for working with generated base element. TODO: document as public API is finalized.</dd>
