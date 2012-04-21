@@ -99,7 +99,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				.buttonMarkup( {
 					theme: options.theme,
 					icon: options.icon,
-					iconpos: options.iconpos,
+					iconpos: options.icon ? options.iconpos : false,
 					inline: options.inline,
 					corners: options.corners,
 					shadow: options.shadow,
