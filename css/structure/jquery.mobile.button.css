@@ -29,16 +29,20 @@
 
 .ui-header .ui-btn-icon-left .ui-btn-inner,
 .ui-footer .ui-btn-icon-left .ui-btn-inner,
+.ui-mini.ui-btn-icon-left .ui-btn-inner,
 .ui-mini .ui-btn-icon-left .ui-btn-inner { padding-left: 30px; }
 .ui-header .ui-btn-icon-right .ui-btn-inner,
 .ui-footer .ui-btn-icon-right .ui-btn-inner,
+.ui-mini.ui-btn-icon-right .ui-btn-inner,
 .ui-mini .ui-btn-icon-right .ui-btn-inner { padding-right: 30px; }
 .ui-header .ui-btn-icon-top .ui-btn-inner,
-.ui-footer .ui-btn-icon-top .ui-btn-inner,
-.ui-mini .ui-btn-icon-top .ui-btn-inner { padding: 30px 3px .5em 3px; }
+.ui-footer .ui-btn-icon-top .ui-btn-inner { padding: 30px 3px .5em 3px; }
+.ui-mini.ui-btn-icon-top .ui-btn-inner,
+.ui-mini .ui-btn-icon-top .ui-btn-inner { padding-top: 30px; }
 .ui-header .ui-btn-icon-bottom .ui-btn-inner,
-.ui-footer .ui-btn-icon-bottom .ui-btn-inner,
-.ui-mini .ui-btn-icon-bottom .ui-btn-inner { padding: .55em 3px 30px 3px; }
+.ui-footer .ui-btn-icon-bottom .ui-btn-inner { padding: .55em 3px 30px 3px; }
+.ui-mini.ui-btn-icon-bottom .ui-btn-inner,
+.ui-mini .ui-btn-icon-bottom .ui-btn-inner { padding-bottom: 30px; }
 
 /*btn icon positioning*/
 .ui-btn-icon-notext .ui-icon { display: block; z-index: 0;}
