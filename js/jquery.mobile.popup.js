@@ -217,8 +217,23 @@ define( [ "jquery",
 		open: function( x, y ) {
 			if ( !this._isOpen ) {
 				var self = this,
+					// Count down to triggering "opened" - we have two prerequisits:
+					// 1. The popup window animation completes (onAnimationComplete())
+					// 2. The screen opacity animation completes (showScreen())
+					triggerPrereqs = 2,
+					maybeTriggerOpened = function() {
+						triggerPrereqs--;
+
+						if ( 0 === triggerPrereqs ) {
+							self.element.trigger( "opened" );
+						}
+					},
 					onAnimationComplete = function() {
 						self._ui.screen.height( $( document ).height() );
+						maybeTriggerOpened();
+					},
+					showScreen = function() {
+						maybeTriggerOpened();
 					},
 					coords = this._placementCoords(
 							(undefined === x ? window.innerWidth / 2 : x),
@@ -229,7 +244,7 @@ define( [ "jquery",
 						.removeClass( "ui-screen-hidden" );
 
 				if ( this.options.fade ) {
-					this._ui.screen.animate( {opacity: 0.5}, "fast" );
+					this._ui.screen.animate( {opacity: 0.5}, "fast", showScreen );
 				}
 
 				this._ui.container
