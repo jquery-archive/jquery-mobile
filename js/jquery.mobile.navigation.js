@@ -954,6 +954,9 @@ define( [
 				var index = urlHistory.indexOf( url );
 
 				if( index > -1 && index != urlHistory.activeIndex) {
+					// Prevent the next hashchange
+					urlHistory.ignoreNextHashChange = true;
+					// Change the current index in history.
 					window.history.go(urlHistory.activeIndex - index);
 				}
 			}
