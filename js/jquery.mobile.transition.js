@@ -25,6 +25,7 @@ var createHandler = function( sequential ){
 			screenHeight = $.mobile.getScreenHeight(),
 			maxTransitionOverride = $.mobile.maxTransitionWidth !== false && $( window ).width() > $.mobile.maxTransitionWidth,
 			none = !$.support.cssTransitions || maxTransitionOverride || !name || name === "none",
+			toPreClass = " ui-page-pre-in",
 			toggleViewportClass = function(){
 				$.mobile.pageContainer.toggleClass( "ui-mobile-viewport-transitioning viewport-" + name );
 			},
@@ -72,7 +73,7 @@ var createHandler = function( sequential ){
 			
 			startIn = function(){	
 			
-				$to.addClass( $.mobile.activePageClass );				
+				$to.addClass( $.mobile.activePageClass + toPreClass );				
 			
 				// Send focus to page as it is now display: block
 				$.mobile.focusPage( $to );
@@ -86,7 +87,9 @@ var createHandler = function( sequential ){
 					$to.animationComplete( doneIn );
 				}
 				
-				$to.addClass( name + " in" + reverseClass );
+				$to
+					.removeClass( toPreClass )
+					.addClass( name + " in" + reverseClass );
 				
 				if( none ){
 					doneIn();
