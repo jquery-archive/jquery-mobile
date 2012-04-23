@@ -5,7 +5,7 @@
 define( [ "jquery",
 	"jquery.mobile.widget",
 	"jquery.mobile.navigation",
-	"../external/requirejs/depend!./jquery.mobile.hashchange[jquery]" ], function( $ ) {
+	"../external/requirejs/depend!./jquery.hashchange[jquery]" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -149,6 +149,33 @@ define( [ "jquery",
 			}
 		},
 
+		_doNavHook: function() {
+			var self = this,
+					activeEntry = $.mobile.urlHistory.getActive(),
+					hasHash = ( activeEntry.url.indexOf( $.mobile.dialogHashKey ) > -1 );
+
+			function realInstallListener() {
+				$( window ).one( "hashchange.popup", function() {
+					self._onHashChange();
+				});
+			}
+
+			if ( hasHash ) {
+				realInstallListener();
+			}
+			else {
+				$( window ).one( "hashchange.popupBinder", function() {
+					realInstallListener();
+				});
+				$.mobile.path.set( activeEntry.url + $.mobile.dialogHashKey );
+				$.mobile.urlHistory.addNew( activeEntry.url + $.mobile.dialogHashKey, activeEntry.transition, activeEntry.title, activeEntry.pageUrl, activeEntry.role );
+			}
+		},
+
+		_undoNavHook: function() {
+			$( window ).unbind( "hashchange.popupBinder hashchange.popup" );
+		},
+
 		_placementCoords: function( x, y ) {
 			// Try and center the overlay over the given coordinates
 			var ret,
@@ -188,121 +215,133 @@ define( [ "jquery",
 			return { x: newleft, y: newtop };
 		},
 
-		_bindHashChange: function() {
-			var self = this;
-			$( window ).one( "hashchange.popup", function() {
-				self.close( true );
-			});
+		_realOpen: function( x, y ) {
+			var self = this,
+				// Count down to triggering "opened" - we have two prerequisits:
+				// 1. The popup window animation completes (onAnimationComplete())
+				// 2. The screen opacity animation completes (showScreen())
+				triggerPrereqs = 2,
+				maybeTriggerOpened = function() {
+					triggerPrereqs--;
+
+					if ( 0 === triggerPrereqs ) {
+						self.element.trigger( "opened" );
+					}
+				},
+				onAnimationComplete = function() {
+					self._ui.screen.height( $( document ).height() );
+					maybeTriggerOpened();
+				},
+				showScreen = function() {
+					maybeTriggerOpened();
+				},
+				coords = self._placementCoords(
+						(undefined === x ? window.innerWidth / 2 : x),
+						(undefined === y ? window.innerHeight / 2 : y) );
+
+			self._ui.screen
+					.height( $( document ).height() )
+					.removeClass( "ui-screen-hidden" );
+
+			if ( self.options.fade ) {
+				self._ui.screen.animate( {opacity: 0.5}, "fast", showScreen );
+			}
+
+			self._ui.container
+				.removeClass( "ui-selectmenu-hidden" )
+				.css( {
+					left: coords.x,
+					top: coords.y
+				});
+
+			if ( self.options.transition && self.options.transition !== "none" ) {
+				self._ui.container
+					.addClass( "in" )
+					.animationComplete( onAnimationComplete );
+			}
+			else {
+				onAnimationComplete();
+			}
+
+			self._isOpen = true;
 		},
 
-		_unbindHashChange: function() {
-			$( window ).unbind( "hashchange.popup" );
-		},
+		_realClose: function( ) {
+			var self = this,
+				// Count down to triggering "closed" - we have two prerequisits:
+				// 1. The popup window reverse animation completes (onAnimationComplete())
+				// 2. The screen opacity animation completes (hideScreen())
+				triggerPrereqs = 2,
+				maybeTriggerClosed = function() {
+					triggerPrereqs--;
 
-		_onPageBeforeChange: function( e, data ) {
-			if ( typeof( data.toPage ) === "object" && data.toPage.jqmData( "url" ) !== $.mobile.activePage.jqmData( "url" ) ) {
-				// Prevent the changePage from happening
-				e.preventDefault();
-				e.stopImmediatePropagation();
+					if ( 0 === triggerPrereqs ) {
+						self.element.trigger( "closed" );
+					}
+				},
+				onAnimationComplete = function() {
+					self._ui.container
+						.removeClass( "reverse out" )
+						.addClass( "ui-selectmenu-hidden" )
+						.removeAttr( "style" );
+					maybeTriggerClosed();
+				},
+				hideScreen = function() {
+					self._ui.screen.addClass( "ui-screen-hidden" );
+					self._isOpen = false;
+					self._ui.screen.removeAttr( "style" );
+					maybeTriggerClosed();
+				};
 
-				setTimeout( function() {
-					// Resume the changePage
-					$.mobile.changePage( data.toPage, data.options );
-				}, 250);
+			if ( this.options.transition && this.options.transition !== "none" ) {
+				this._ui.container
+					.removeClass( "in" )
+					.addClass( "reverse out" )
+					.animationComplete( onAnimationComplete );
+			} else {
+				onAnimationComplete();
+			}
 
-				this.close();
+			if ( this.options.fade ) {
+				this._ui.screen.animate( {opacity: 0.0}, "fast", hideScreen );
+			} else {
+				hideScreen();
 			}
 		},
 
 		open: function( x, y ) {
 			if ( !this._isOpen ) {
-				var self = this,
-					onAnimationComplete = function() {
-						self._ui.screen.height( $( document ).height() );
-					},
-					coords = this._placementCoords(
-							(undefined === x ? window.innerWidth / 2 : x),
-							(undefined === y ? window.innerHeight / 2 : y) );
+				var self = this;
 
-				this._ui.screen
-						.height( $( document ).height() )
-						.removeClass( "ui-screen-hidden" );
-
-				if ( this.options.fade ) {
-					this._ui.screen.animate( {opacity: 0.5}, "fast" );
-				}
-
-				this._ui.container
-					.removeClass( "ui-selectmenu-hidden" )
-					.css( {
-						left: coords.x,
-						top: coords.y
-					});
-
-				if ( this.options.transition && this.options.transition !== "none" ) {
-					this._ui.container
-						.addClass( "in" )
-						.animationComplete( onAnimationComplete );
-				} else {
-					onAnimationComplete();
-				}
-
-				// listen for hashchange that will occur when we set it to null dialog hash
-				$( window ).one( "hashchange", function() {
-					self._bindHashChange();
+				self.element.one( "opened", function() {
+					self._doNavHook();
+					$.mobile.popup.currentPopup = self;
 				});
 
-				$( window ).bind( "pagebeforechange.popup", $.proxy( this, "_onPageBeforeChange" ) );
-
-				// set hash to non-linkable dialog url
-				$.mobile.path.set( ( ( $.mobile.activePage != $.mobile.firstPage) ? $.mobile.urlHistory.getActive().url : "" ) + "&ui-state=dialog" );
-
-				this._isOpen = true;
+				if ( $.mobile.popup.currentPopup ) {
+					$.mobile.popup.currentPopup.element.one( "closed", function() {
+						self._realOpen( x, y );
+					});
+					$.mobile.popup.currentPopup.close();
+				}
+				else {
+					self._realOpen( x, y );
+				}
 			}
 		},
 
-		close: function( fromHash ) {
+		close: function() {
 			if ( this._isOpen ) {
-				var self = this,
-					onAnimationComplete = function() {
-						self._ui.container
-							.removeClass( "reverse out" )
-							.addClass( "ui-selectmenu-hidden" )
-							.removeAttr( "style" );
-					},
-					hideScreen = function() {
-						self._ui.screen.addClass( "ui-screen-hidden" );
-						self._isOpen = false;
-						self.element.trigger( "closed" );
-						self._ui.screen.removeAttr( "style" );
-					};
-
-				if ( this.options.transition && this.options.transition !== "none" ) {
-					this._ui.container
-						.removeClass( "in" )
-						.addClass( "reverse out" )
-						.animationComplete( onAnimationComplete );
-				} else {
-					onAnimationComplete();
-				}
-
-				if ( this.options.fade ) {
-					this._ui.screen.animate( {opacity: 0.0}, "fast", hideScreen );
-				} else {
-					hideScreen();
-				}
-
-				// unbind listener that comes with opening popup
-				this._unbindHashChange();
-				$( window ).unbind( "pagebeforechange.popup" );
-
-				// if the close event did not come from an internal hash listener, reset URL back
-				if ( !fromHash ) {
-					window.history.back();
-				}
+				window.history.back();
 			}
+		},
+
+		_onHashChange: function() {
+			this._realClose();
 		}
 	});
+
+	$.mobile.popup.currentPopup = null;
 
 	$.mobile.popup.bindPopupToButton = function( btn, popup ) {
 		if ( btn.length === 0 || popup.length === 0 ) return;
