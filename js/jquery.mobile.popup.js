@@ -50,6 +50,7 @@ define( [ "jquery",
 
 			// Define instance variables
 			$.extend( this, {
+				_page: thisPage,
 				_ui: ui,
 				_isOpen: false
 			});
@@ -223,6 +224,10 @@ define( [ "jquery",
 					coords = this._placementCoords(
 							(undefined === x ? window.innerWidth / 2 : x),
 							(undefined === y ? window.innerHeight / 2 : y) );
+
+				if ( !self.options.overlayTheme ) {
+					self._setOverlayTheme( self._page.jqmData( "theme" ) || $.mobile.getInheritedTheme( self._page, "a" ) );
+				}
 
 				this._ui.screen
 						.height( $( document ).height() )
