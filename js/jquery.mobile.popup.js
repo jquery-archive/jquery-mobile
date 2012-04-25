@@ -319,53 +319,30 @@ define( [ "jquery",
 				var self = this;
 
 				self.element.one( "opened", function() {
-					if ( $.mobile.popup.currentPopup ) {
-						self._prev = $.mobile.popup.currentPopup;
-						$.mobile.popup.currentPopup._next = self;
-					}
-					else {
-						self._doNavHook();
-					}
+					self._doNavHook();
 					$.mobile.popup.currentPopup = self;
 				});
 
-				this.element.one( "closed", function() {
-					if ( self._prev ) {
-						self._prev._next = self._next;
-					}
-
-					if ( self._next ) {
-						self._next._prev = self._prev;
-					}
-
-					if ( self === $.mobile.popup.currentPopup ) {
-						$.mobile.popup.currentPopup = self._prev;
-					}
-
-					if ( !$.mobile.popup.currentPopup ) {
-						self._undoNavHook();
-					}
-				});
-
-				this._realOpen(x, y);
+				if ( $.mobile.popup.currentPopup ) {
+					$.mobile.popup.currentPopup.element.one( "closed", function() {
+						self._realOpen( x, y );
+					});
+					$.mobile.popup.currentPopup.close();
+				}
+				else {
+					self._realOpen( x, y );
+				}
 			}
 		},
 
 		close: function() {
 			if ( this._isOpen ) {
-				if ( $.mobile.popup.currentPopup === this && !this._prev ) {
-					window.history.back();
-				}
-				else {
-					this._realClose();
-				}
+				window.history.back();
 			}
 		},
 
 		_onHashChange: function() {
-			for ( var popup = $.mobile.popup.currentPopup ; popup ; popup = popup._prev ) {
-				popup._realClose();
-			}
+			this._realClose();
 		}
 	});
 
