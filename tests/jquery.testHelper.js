@@ -164,7 +164,7 @@
 			this.eventCascade( seq );
 		},
 
-		eventCascade: function( sequence, timedOut ) {
+		eventCascade: function( sequence, timedOut, eventSource ) {
 			var fn = sequence.shift(),
 				event = sequence.shift(),
 				self = this;
@@ -173,20 +173,24 @@
 				return;
 			}
 
+			if ( eventSource === undefined ) {
+				eventSource = $.mobile.pageContainer;
+			}
+
 			if( event ){
 				// if a pagechange or defined event is never triggered
 				// continue in the sequence to alert possible failures
 				var warnTimer = setTimeout(function() {
-					self.eventCascade( sequence, true );
+					self.eventCascade( sequence, true, eventSource );
 				}, 2000);
 
 				// bind the recursive call to the event
-				$.mobile.pageContainer.one(event, function() {
+				eventSource.one(event, function() {
 					clearTimeout( warnTimer );
 
 					// Let the current stack unwind before we fire off the next item in the sequence.
 					// TODO setTimeout(self.pageSequence, 0, sequence);
-					setTimeout(function(){ self.eventCascade(sequence); }, 0);
+					setTimeout(function(){ self.eventCascade(sequence, undefined, eventSource); }, 0);
 				});
 			}
 
