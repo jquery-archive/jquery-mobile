@@ -41,6 +41,8 @@
 	asyncTest( "clicking dialog 'Close' button twice in quick succession does not cause the browser history to retreat by two", function() {
 		var correctLocation;
 
+		expect(3);
+
 		$.testHelper.pageSequence([
 			function() {
 				$.mobile.changePage( $( "#mypage" ) );
