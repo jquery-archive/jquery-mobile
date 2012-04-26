@@ -267,8 +267,6 @@ define( [ "jquery",
 			else {
 				onAnimationComplete();
 			}
-
-			self._isOpen = true;
 		},
 
 		_realClose: function( ) {
@@ -293,7 +291,6 @@ define( [ "jquery",
 				},
 				hideScreen = function() {
 					self._ui.screen.addClass( "ui-screen-hidden" );
-					self._isOpen = false;
 					self._ui.screen.removeAttr( "style" );
 					maybeTriggerClosed();
 				};
@@ -318,6 +315,7 @@ define( [ "jquery",
 			if ( !this._isOpen ) {
 				var self = this;
 
+				self._isOpen = true;
 				self.element.one( "opened", function() {
 					self._doNavHook();
 					$.mobile.popup.currentPopup = self;
@@ -337,6 +335,7 @@ define( [ "jquery",
 
 		close: function() {
 			if ( this._isOpen ) {
+				this._isOpen = false;
 				window.history.back();
 			}
 		},
