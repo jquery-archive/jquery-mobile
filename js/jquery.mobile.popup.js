@@ -343,6 +343,7 @@ define( [ "jquery",
 
 		_onHashChange: function() {
 			this._realClose();
+			$.mobile.popup.currentPopup = null;
 		}
 	});
 
