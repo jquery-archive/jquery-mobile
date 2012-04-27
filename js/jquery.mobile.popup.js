@@ -15,7 +15,7 @@ define( [ "jquery",
 			overlayTheme: null,
 			shadow: true,
 			corners: true,
-			fade: true,
+			fade: false,
 			transition: $.mobile.defaultDialogTransition,
 			initSelector: ":jqmData(role='popup')"
 		},
