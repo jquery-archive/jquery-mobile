@@ -4,7 +4,7 @@ HEAD_SHA=$(git log -1 --format=format:"%H")
 BUILD_SHA=$(git log -1 --format=format:"Git Build: SHA1: %H <> Date: %cd")
 VER_MIN="/*! jQuery Mobile v$BUILD_SHA jquerymobile.com | jquery.org/license !*/"
 VER_OFFICIAL=$(cat version.txt)
-SED_VER_REPLACE='s/__version__/"$VER_OFFICIAL"/g'
+SED_VER_REPLACE="s/__version__/\"$VER_OFFICIAL\"/g"
 SED_INPLACE_EXT="whyunowork"
 
 function sed_ver_api {
