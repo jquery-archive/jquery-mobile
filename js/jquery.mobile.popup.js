@@ -52,7 +52,6 @@ define( [ "jquery",
 			$.extend( this, {
 				_page: thisPage,
 				_ui: ui,
-				_isOpen: false
 			});
 
 			$.each( this.options, function( key ) {
@@ -150,7 +149,10 @@ define( [ "jquery",
 			}
 		},
 
-		_doNavHook: function() {
+		// Call _onHashChange if the hash changes /after/ the popup is on the screen
+		// Note that placing the popup on the screen can itself cause a hashchange,
+		// because the dialogHashKey may need to be added to the URL.
+		_doNavHook: function(listenerInstalledCb) {
 			var self = this,
 					activeEntry = $.mobile.urlHistory.getActive(),
 					hasHash = ( activeEntry.url.indexOf( $.mobile.dialogHashKey ) > -1 );
@@ -159,6 +161,7 @@ define( [ "jquery",
 				$( window ).one( "hashchange.popup", function() {
 					self._onHashChange();
 				});
+				listenerInstalledCb();
 			}
 
 			if ( hasHash ) {
@@ -226,7 +229,7 @@ define( [ "jquery",
 					triggerPrereqs--;
 
 					if ( 0 === triggerPrereqs ) {
-						self.element.trigger( "opened" );
+						self._nowOnScreen();
 					}
 				},
 				onAnimationComplete = function() {
@@ -250,6 +253,9 @@ define( [ "jquery",
 
 			if ( self.options.fade ) {
 				self._ui.screen.animate( {opacity: 0.5}, "fast", showScreen );
+			}
+			else {
+				showScreen();
 			}
 
 			self._ui.container
@@ -279,7 +285,7 @@ define( [ "jquery",
 					triggerPrereqs--;
 
 					if ( 0 === triggerPrereqs ) {
-						self.element.trigger( "closed" );
+						self._nowOffScreen();
 					}
 				},
 				onAnimationComplete = function() {
@@ -311,39 +317,105 @@ define( [ "jquery",
 			}
 		},
 
-		open: function( x, y ) {
-			if ( !this._isOpen ) {
-				var self = this;
+		// Before emitting "opened", two things must be true:
+		// 1. The animations must be complete
+		// 2. The hash change resulting from adding the dialogHashKey must have passed
+		_maybeEmitOpened: function() {
+			this._openPrereqs = ( ( this._openPrereqs === undefined ) ? 2 : this._openPrereqs ) - 1;
 
-				self._isOpen = true;
-				self.element.one( "opened", function() {
-					self._doNavHook();
-					$.mobile.popup.currentPopup = self;
+			if ( 0 === this._openPrereqs ) {
+				this._pending = null;
+				this._openPrereqs = 2;
+				this._calledOpen = false;
+				this.element.trigger( "opened" );
+			}
+		},
+
+		_nowOnScreen: function() {
+			this._maybeEmitOpened();
+		},
+
+		_nowOffScreen: function() {
+			$.mobile.popup.currentPopup = null;
+			this._pending = null;
+			this._calledClose = false;
+			this.element.trigger( "closed" );
+		},
+
+		open: function( x, y ) {
+			var self = this;
+
+			function thereIsNoOtherPopup() {
+				$.mobile.popup.currentPopup = self;
+				self._doNavHook( function() {
+					self._maybeEmitOpened();
 				});
+				self._realOpen( x, y );
+			}
+
+			function continueWithOpen() {
+				self._pending = "opened";
 
 				if ( $.mobile.popup.currentPopup ) {
 					$.mobile.popup.currentPopup.element.one( "closed", function() {
-						self._realOpen( x, y );
+						if ( $.mobile.popup.currentPopup ) {
+							continueWithOpen();
+						}
+						else {
+							thereIsNoOtherPopup();
+						}
 					});
 					$.mobile.popup.currentPopup.close();
 				}
 				else {
-					self._realOpen( x, y );
+					thereIsNoOtherPopup();
+				}
+			}
+
+			if ( !self._calledOpen ) {
+				self._calledOpen = true;
+
+				if (self._pending === "closed" ) {
+					self.element.one( "closed", function() { continueWithOpen(); } );
+				}
+				else {
+					continueWithOpen();
 				}
 			}
 		},
 
+		_doClose: function(cb) {
+			var self = this;
+
+			function continueWithClose() {
+				self._pending = "closed";
+				cb();
+			}
+
+			if ( self._pending === "opened" ) {
+				self.element.one( "opened", function() { continueWithClose(); } );
+			}
+			else {
+				continueWithClose();
+			}
+		},
+
 		close: function() {
-			if ( this._isOpen ) {
-				this._isOpen = false;
-				window.history.back();
+			var self = this;
+
+			if ( !self._calledClose ) {
+				self._calledClose = true;
+
+				if ( self._pending !== "closed" ) {
+					self._doClose(function() { window.history.back(); } );
+				}
 			}
 		},
 
 		_onHashChange: function() {
-			this._realClose();
-			$.mobile.popup.currentPopup = null;
-		}
+			var self = this;
+			self._doClose( function() { self._realClose(); } );
+		},
 	});
 
 	$.mobile.popup.currentPopup = null;
