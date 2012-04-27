@@ -1,8 +1,8 @@
 # Helper Variables
 # The command to replace the @VERSION in the files with the actual version
 HEAD_SHA=$(git log -1 --format=format:"%H")
-VER='sed "s/v@VERSION/$$(git log -1 --format=format:"Git Build: SHA1: %H <> Date: %cd")/")'
-VER_MIN="/*! jQuery Mobile v$$(git log -1 --format=format:"Git Build: SHA1: %H <> Date: %cd") jquerymobile.com | jquery.org/license */"
+BUILD_SHA=$(git log -1 --format=format:"Git Build: SHA1: %H <> Date: %cd")
+VER_MIN="/*! jQuery Mobile v$BUILD_SHA jquerymobile.com | jquery.org/license !*/"
 VER_OFFICIAL=$(cat version.txt)
 SED_VER_REPLACE='s/__version__/"$VER_OFFICIAL"/g'
 SED_INPLACE_EXT="whyunowork"
@@ -12,10 +12,8 @@ function sed_ver_api {
 }
 
 function ver {
-  sed "s/v@VERSION/$VER_OFFICIAL $HEAD_SHA/"
+  sed "s/v@VERSION/$BUILD_SHA/"
 }
-
-VER_MIN="/*! jQuery Mobile v$VER_OFFICIAL $HEAD_SHA jquerymobile.com | jquery.org/license */"
 
 # The output folder for the finished files
 OUTPUT="compiled"
