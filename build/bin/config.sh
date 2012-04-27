@@ -1,3 +1,6 @@
+# fail on any subcommand failure
+set -e
+
 # Helper Variables
 # The command to replace the @VERSION in the files with the actual version
 HEAD_SHA=$(git log -1 --format=format:"%H")
