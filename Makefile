@@ -30,8 +30,6 @@ THEME = default
 all: css js zip notify
 
 clean:
-	# -------------------------------------------------
-	# Cleaning build output
 	@@rm -rf ${OUTPUT}
 	@@rm -rf tmp
 
@@ -57,7 +55,7 @@ notify: init
 
 
 # Zip up the jQm files without docs
-zip: init css js
+zip: clean init css js
 	@@bash build/bin/zip.sh
 
 # -------------------------------------------------
