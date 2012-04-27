@@ -18,6 +18,10 @@ function ver {
   sed "s/v@VERSION/$BUILD_SHA/"
 }
 
+function clear_zip_files {
+  find $1 -name "*.zip" | xargs -L1 -I FILENAME rm FILENAME
+}
+
 # The output folder for the finished files
 OUTPUT="compiled"
 

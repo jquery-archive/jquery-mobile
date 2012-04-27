@@ -16,8 +16,10 @@ cp -r compiled/images tmp/demos/css/themes/$THEME
 find tmp/demos -name "*.html" -exec sed -i$SED_INPLACE_EXT -e 's@js/"@js/jquery.mobile.js"@' {} \;
 find tmp/demos -name "*$SED_INPLACE_EXT" -exec rm {} \;
 
+# clear out old zip files
+clear_zip_files $OUTPUT
+
 # ... Move and zip up the the whole folder
-rm -f $OUTPUT/$NAME.docs.zip
 cd tmp/demos && mkdir -p $OUTPUT && zip -qr $OUTPUT/$BASE_NAME.docs.zip ./* && cd -
 rm -rf $OUTPUT/demos && mv -f tmp/demos $OUTPUT
 # Finish by removing the temporary files

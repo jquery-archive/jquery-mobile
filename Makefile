@@ -51,15 +51,12 @@ docs: init js css
 # Output a message saying the process is complete
 notify: init
 	@@echo "The files have been built and are in: " $$(pwd)/${OUTPUT}
-	# -------------------------------------------------
 
 
 # Zip up the jQm files without docs
-zip: clean init css js
+zip: init css js
 	@@bash build/bin/zip.sh
 
-# -------------------------------------------------
-# -------------------------------------------------
 # -------------------------------------------------
 #
 # For jQuery Team Use Only
@@ -67,15 +64,11 @@ zip: clean init css js
 # -------------------------------------------------
 # NOTE the clean (which removes previous build output) has been removed to prevent a gap in service
 build_latest: css docs js zip
-	# ... Copy over the lib js, avoid the compiled stuff, to get the defines for tests/unit/*
-	@@ # TODO centralize list of built files
-	@@find js -name "*.js" -not -name "*.docs.js" -not -name "*.mobile.js"  | xargs -L1 -I FILENAME cp FILENAME ${OUTPUT}/demos/js/
+	@@bash build/bin/build_latest.sh
 
 # Push the latest git version to the CDN. This is done on a post commit hook
 deploy_latest:
-	# Time to put these on the CDN
-	@@scp -qr ${OUTPUT}/* jqadmin@code.origin.jquery.com:/var/www/html/code.jquery.com/mobile/latest/
-	# -------------------------------------------------
+	@@bash build/bin/deploy_latest.sh
 
 # TODO target name preserved to avoid issues during refactor, latest -> deploy_latest
 latest: build_latest deploy_latest
@@ -84,7 +77,6 @@ latest: build_latest deploy_latest
 deploy_nightlies:
 	# Time to put these on the CDN
 	@@scp -qr ${OUTPUT} jqadmin@code.origin.jquery.com:/var/www/html/code.jquery.com/mobile/nightlies/$$(date "+%Y%m%d")
-	# -------------------------------------------------
 
 # Deploy a finished release. This is manually done.
 deploy: clean init css js docs zip
@@ -106,4 +98,3 @@ deploy: clean init css js docs zip
 	# Do some cleanup to wrap it up
 	@@rm -rf tmp
 	@@rm -rf ${OUTPUT}
-	# -------------------------------------------------
