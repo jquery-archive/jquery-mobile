@@ -352,10 +352,6 @@ define( [ "jquery",
 		if ( btn.length === 0 || popup.length === 0 ) return;
 
 		var btnVClickHandler = function( e ) {
-			// When /this/ button causes a popup, align the popup's theme with that of the button, unless the popup has a theme pre-set
-			if ( !popup.jqmData( "overlay-theme-set" ) ) {
-				popup.popup( "option", "overlayTheme", btn.jqmData( "theme" ) || $.mobile.getInheritedTheme( btn, "c") );
-			}
 			popup.popup( "open",
 					btn.offset().left + btn.outerWidth() / 2,
 					btn.offset().top + btn.outerHeight() / 2 );
@@ -369,11 +365,6 @@ define( [ "jquery",
 				e.preventDefault();
 			}
 		};
-
-		// If the popup has a theme set, prevent it from being clobbered by the associated button
-		if ( (popup.popup( "option", "overlayTheme" ) || "").match( /[a-z]/ ) ) {
-			popup.jqmData( "overlay-theme-set", true );
-		}
 
 		btn.attr( {
 			"aria-haspopup": true,
