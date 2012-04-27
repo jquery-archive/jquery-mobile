@@ -25,7 +25,7 @@
 	<div data-role="content" class="ui-body">
 		<div class="content-primary">	
 
-		<p>All the standard button swatches can be applied to lists. The framework assigns a default list theme swatch of &quot;c&quot; (silver in the default theme) and swatch &quot;b&quot; (blue in default theme) for dividers. Below is a default themed list.</p>
+		<p>All the standard button swatches can be applied to lists. A list inherits its theme swatch from its parent page/content container. So the theme swatch defaults to &quot;c&quot; (silver in the default theme), if nothing else is set to the surrounding page/content containers. The default swatch for list dividers is &quot;b&quot; (blue in the default theme). Below is a list which inherits the default &quot;c&quot; content swatch.</p>
 		
 <code>
 &lt;ul data-role=&quot;listview&quot; data-inset=&quot;true&quot;&gt;
@@ -41,10 +41,10 @@
 		<p>The list item color scheme can be changed to any button color theme swatch by adding the <code> data-theme</code> attribute to the list, and setting the letter theme swatch. Here is the same list above with the &quot;a&quot; swatch applied. </p>
 		
 <code>
-&lt;ul data-role=&quot;listview&quot; data-inset=&quot;true&quot; data-theme=&quot;d&quot;&gt;
+&lt;ul data-role=&quot;listview&quot; data-inset=&quot;true&quot; data-theme=&quot;a&quot;&gt;
 </code>
 		
-		<ul data-role="listview" data-inset="true" data-theme="d">
+		<ul data-role="listview" data-inset="true" data-theme="a">
 			<li data-role="list-divider">Divider</li>
 			<li><a href="index.html">Inbox <span class="ui-li-count">12</span></a></li>
 			<li><a href="index.html">Outbox <span class="ui-li-count">0</span></a></li>
@@ -63,7 +63,7 @@
 		
 		<h2>Theming dividers</h2>
 		
-		<p>The theme for <strong>list dividers</strong> can be set by adding the <code>data-divider-theme</code> to the list and specifying a swatch letter. Here is an example of the same list above with swatch &quot;d&quot; set on the dividers.</p>
+		<p>The theme for <strong>list dividers</strong> can be set by adding the <code>data-divider-theme</code> to the list and specifying a swatch letter. Here is an example of the same list above with swatch &quot;e&quot; set on the dividers.</p>
 		
 <code>
 &lt;ul data-role=&quot;listview&quot; data-inset=&quot;true&quot; data-theme=&quot;d&quot; data-divider-theme=&quot;e&quot;&gt;
@@ -78,7 +78,7 @@
 		
 		<h2>Theming count bubbles</h2>
 		
-		<p>The theme for <strong>count bubbles</strong> can be set by adding the <code>data-count-theme</code> to the list and specifying a swatch letter. Here is an example with swatch &quot;e&quot; set on the dividers.</p>
+		<p>The theme for <strong>count bubbles</strong> can be set by adding the <code>data-count-theme</code> to the list and specifying a swatch letter. Here is an example with swatch &quot;b&quot; set on the count bubbles.</p>
 		
 <code>
 &lt;ul data-role=&quot;listview&quot; data-inset=&quot;true&quot; data-theme=&quot;d&quot; data-divider-theme=&quot;e&quot; data-count-theme=&quot;b&quot;&gt;
@@ -111,7 +111,7 @@
 		
 		<h2>Theming split buttons</h2>
 		
-		<p>For split lists which a second button, the framework default to &quot;b&quot; for the theme swatch (blue in the default theme)  Here is a default split list:</p>
+		<p>For split lists with a second link button, the framework default to &quot;b&quot; for the theme swatch (blue in the default theme). Here is a default split list:</p>
 		
 		<ul data-role="listview" data-inset="true">
 			<li><a href="index.html">

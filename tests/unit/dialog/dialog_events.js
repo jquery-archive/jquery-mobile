@@ -38,6 +38,42 @@
 		]);
 	});
 
+	asyncTest( "clicking dialog 'Close' button twice in quick succession does not cause the browser history to retreat by two", function() {
+		var correctLocation;
+
+		expect(3);
+
+		$.testHelper.pageSequence([
+			function() {
+				$.mobile.changePage( $( "#mypage" ) );
+			},
+
+			function() {
+				$.mobile.changePage( $( "#doubleCloseTestPage" ) );
+			},
+
+			function() {
+				correctLocation = location.href;
+				$( "#doubleCloseTestPage a" ).click();
+			},
+
+			function() {
+				$( "#foo-dialog a" ).click();
+				setTimeout( function() { $( "#foo-dialog a" ).click(); }, 0 );
+			},
+
+			function( timedOut ) {
+				ok( !timedOut, "Clicking dialog 'Close' has resulted in a pagechange event" );
+			},
+
+			function( timedOut ) {
+				ok( timedOut, "Clicking dialog 'Close' has not resulted in two pagechange events" );
+				ok( location.href === correctLocation, "Location is correct afterwards" );
+				start();
+			}
+		]);
+	});
+
 	asyncTest( "dialog element with no theming", function() {
 		expect(4);
 		
