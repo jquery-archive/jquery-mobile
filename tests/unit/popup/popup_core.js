@@ -91,24 +91,31 @@
 	};
 
 	test( "Popup div is associated with a popup widget", function() {
+		expect( 1 );
 		ok( $("#test-popup" ).data( "popup" ) );
 	});
 
 	test( "Popup div parent has class ui-popup-container", function() {
+		expect( 1 );
 		ok( $("#test-popup" ).parent().hasClass( "ui-popup-container" ) );
 	});
 
 	test( "Popup div grandparent is the page", function() {
+		expect( 1 );
 		ok( $("#test-popup" ).parent().parent().hasClass( "ui-page" ) );
 	});
 
 	test( "Popup div is preceded by its screen", function() {
+		expect( 1 );
 		ok(
 			$( "#test-popup" ).parent().prev().hasClass( "ui-selectmenu-screen" ) &&
 			$( "#test-popup" ).parent().prev().hasClass( "ui-popup-screen" ) );
 	});
 
 	asyncTest( "Popup opens and closes", function() {
+
+		expect( 5 );
+
 		$( "#test-popup" ).popup( "open" );
 		setTimeout(function() {
 			ok( $( "#test-popup" ).parent().hasClass( "in" ), "Open popup container has class 'in'" );
@@ -125,6 +132,9 @@
 
 	asyncTest( "Popup interacts correctly with hashchange", function() {
 		var baseUrl, activeIndex;
+
+		expect( 6 );
+
 		myTestHelper.detailedEventCascade([
 			function() {
 				baseUrl = location.href;
@@ -160,6 +170,8 @@
 
 	asyncTest( "When opening a popup from a dialogHashKey location the location is reused", function() {
 		var origUrl, origIndex, baseUrl, baseIndex;
+
+		expect( 4 );
 
 		myTestHelper.detailedEventCascade([
 			function() {
@@ -224,6 +236,8 @@
 		var initialActive = $.extend( {}, {}, $.mobile.urlHistory.getActive()),
 		    initialHRef = $.mobile.path.parseUrl( location.href ),
 		    initialBase = initialHRef.protocol + initialHRef.doubleSlash + initialHRef.authority + initialHRef.directory;
+
+		expect( 6 );
 
 		myTestHelper.detailedEventCascade([
 			function() {
