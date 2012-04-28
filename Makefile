@@ -1,15 +1,3 @@
-# Helper Variables
-# The command to replace the @VERSION in the files with the actual version
-HEAD_SHA = $(shell git log -1 --format=format:"%H")
-VER = sed "s/v@VERSION/$$(git log -1 --format=format:"Git Build: SHA1: %H <> Date: %cd")/"
-VER_MIN = "/*! jQuery Mobile v$$(git log -1 --format=format:"Git Build: SHA1: %H <> Date: %cd") jquerymobile.com | jquery.org/license */"
-VER_OFFICIAL = $(shell cat version.txt)
-SED_VER_REPLACE = 's/__version__/"${VER_OFFICIAL}"/g'
-SED_VER_API = sed ${SED_VER_REPLACE}
-SED_INPLACE_EXT = "whyunowork"
-deploy: VER = sed "s/v@VERSION/${VER_OFFICIAL} ${HEAD_SHA}/"
-deploy: VER_MIN = "/*! jQuery Mobile v${VER_OFFICIAL} ${HEAD_SHA} jquerymobile.com | jquery.org/license */"
-
 # in build/bin/config.sh this setting will alter the variable definitions to match
 # the changes for the deploy target in the makefile. temp solution
 ARGS = IS_DEPLOY_TARGET=false
@@ -17,18 +5,6 @@ deploy: ARGS = IS_DEPLOY_TARGET=true
 
 # The output folder for the finished files
 OUTPUT = compiled
-
-# The name of the files
-NAME = jquery.mobile
-BASE_NAME = jquery.mobile
-THEME_FILENAME = jquery.mobile.theme
-STRUCTURE = jquery.mobile.structure
-deploy: NAME = jquery.mobile-${VER_OFFICIAL}
-deploy: THEME_FILENAME = jquery.mobile.theme-${VER_OFFICIAL}
-deploy: STRUCTURE = jquery.mobile.structure-${VER_OFFICIAL}
-
-# The CSS theme being used
-THEME = default
 
 # Build Targets
 # When no build target is specified, all gets ran
