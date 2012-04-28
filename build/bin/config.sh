@@ -43,3 +43,14 @@ RUN_JS='java -XX:ReservedCodeCacheSize=64m -classpath build/js.jar:build/google-
 if [ -x $NODE ]; then
 	RUN_JS=${NODE}
 fi
+
+if [ $IS_DEPLOY_TARGET = "true" ]; then
+  function ver {
+    sed "s/v@VERSION/${VER_OFFICIAL} ${HEAD_SHA}/"
+  }
+
+  VER_MIN="/*! jQuery Mobile v${VER_OFFICIAL} ${HEAD_SHA} jquerymobile.com | jquery.org/license !*/"
+  NAME="jquery.mobile-${VER_OFFICIAL}"
+  THEME_FILENAME="jquery.mobile.theme-${VER_OFFICIAL}"
+  STRUCTURE="jquery.mobile.structure-${VER_OFFICIAL}"
+fi
