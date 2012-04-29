@@ -17,7 +17,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		mini: false
 	},
 
-	_getRangeAttrs: function (ctype, control) {
+	_getRangeAttrs: function (cType, control) {
 		return {
 			min: cType === "input" ? parseFloat( control.attr( "min" ) ) : 0,
 			max: cType === "input" ? parseFloat( control.attr( "max" ) ) : control.find( "option" ).length - 1,
@@ -52,7 +52,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				return	cType === "input"  ? parseFloat( control.val() ) : control[0].selectedIndex;
 			},
 
-			rangeAttrs = this._getRangeAttrs(ctype, control),
+			rangeAttrs = this._getRangeAttrs(cType, control),
 
 			inlineClass = ( this.options.inline || control.jqmData("inline") === true ) ? " ui-slider-inline" : "",
 
