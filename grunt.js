@@ -1,3 +1,6 @@
+var util = require('util'),
+	child_process = require('child_process');
+
 /*global module:false*/
 module.exports = function(grunt) {
 
@@ -13,7 +16,8 @@ module.exports = function(grunt) {
 			options: {
 				curly: true,
 				eqeqeq: true,
-				immed: false, /* (function(){})() seems acceptable */
+				// (function(){})() seems acceptable
+				immed: false,
 				latedef: true,
 				newcap: true,
 				noarg: true,
@@ -26,7 +30,8 @@ module.exports = function(grunt) {
 			globals: {
 				jQuery: true,
 
-				/* qunit globals */
+				// qunit globals
+				// TODO would be nice to confine these to test files
 				module: true,
 				ok: true,
 				test: true,
@@ -36,15 +41,28 @@ module.exports = function(grunt) {
 				stop: true,
 				expect: true,
 
-				/* require js global */
+				// require js global
 				define: true
 			}
 		},
-		legacy: {
-			css: true,
-			js: true,
-			docs: true,
-			zip: true
+		legacy_tasks: {
+			init: {},
+			css: {
+				deps: [ 'init' ]
+			},
+			js: {
+				deps: [ 'init' ]
+			},
+			docs: {
+				deps: [ 'init', 'js', 'css' ]
+			},
+			zip: {
+				deps: [ 'init', 'js', 'css' ]
+			},
+			deploy: {
+				deps: [ 'clean', 'init', 'js', 'css', 'docs', 'zip' ],
+				env: "IS_DEPLOY_TARGET=true"
+			}
 		},
 		lint: {
 			files: ['grunt.js', 'js/*.js', 'tests/**/*.js']
@@ -73,18 +91,33 @@ module.exports = function(grunt) {
 	grunt.registerTask('default', 'lint qunit');
 
 	// Legacy multtask
-	grunt.registerMultiTask('legacy', 'support for old build targets', function() {
-		var util = require('util'),
-			exec = require('child_process').exec,
-			done = this.async();
+	grunt.registerMultiTask('legacy_tasks', 'support for old build targets', function() {
+		var done = this.async(), name = this.name, self = this;
 
-		exec("make " + this.target, function (error, stdout, stderr) {
-			if( stderr || error ){
-				grunt.log.error( stderr || error );
+		(this.data.deps || [] ).forEach(function( dep) {
+			self.requires( 'legacy_tasks:' + dep );
+		});
+
+		child_process.exec( (this.data.env || "") + " bash build/bin/" + this.target + ".sh", function (error, stdout, stderr) {
+			if( error !== null ){
+				grunt.log.error( stderr );
+			} else {
+				grunt.log.write(stdout);
 			}
 
-			grunt.log.write(stdout);
 			done();
 		});
 	});
+
+	// register the task alias's to enforce task dependencies
+	var tasks = grunt.config.get('legacy_tasks');
+	for( task in  tasks ){
+		var deps = [];
+
+		(tasks[task].deps || []).forEach(function( dep ) {
+			deps.push("legacy_tasks:" + dep);
+		});
+
+		grunt.registerTask( 'legacy:' + task, deps.join(" ") + " legacy_tasks:" + task );
+	}
 };
