@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 	<script src="../../js/jquery.js"></script>
 	
-	<script src="../_assets/js/jqm-docs.js"></script>
+	<script src="../../docs/_assets/js/jqm-docs.js"></script>
 	<script src="../../js/"></script>
 </head> 
 <body> 
