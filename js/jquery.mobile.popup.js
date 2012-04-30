@@ -68,6 +68,15 @@ define( [ "jquery",
 				e.stopImmediatePropagation();
 				self.close();
 			});
+			$( window ).bind( "keyup", function( e ) {
+				if ( self._isOpen ) {
+					if ( e.keyCode === $.mobile.keyCode.ESCAPE ) {
+						e.preventDefault();
+						e.stopImmediatePropagation();
+						self.close();
+					}
+				}
+			});
 		},
 
 		_realSetTheme: function( dst, theme ) {
@@ -327,6 +336,7 @@ define( [ "jquery",
 				this._pending = null;
 				this._openPrereqs = 2;
 				this._calledOpen = false;
+				this._isOpen = true;
 				this.element.trigger( "opened" );
 			}
 		},
@@ -386,6 +396,8 @@ define( [ "jquery",
 
 		_doClose: function(cb) {
 			var self = this;
+
+			self._isOpen = false;
 
 			function continueWithClose() {
 				self._pending = "closed";
