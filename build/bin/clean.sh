@@ -1,3 +1,4 @@
 source build/bin/config.sh
 
-mkdir -p $OUTPUT
+rm -rf $OUTPUT
+rm -rf tmp

@@ -46,22 +46,23 @@ module.exports = function(grunt) {
 			}
 		},
 		legacy_tasks: {
-			init: {},
+			clean: {},
 			css: {
 				deps: [ 'init' ]
-			},
-			js: {
-				deps: [ 'init' ]
-			},
-			docs: {
-				deps: [ 'init', 'js', 'css' ]
-			},
-			zip: {
-				deps: [ 'init', 'js', 'css' ]
 			},
 			deploy: {
 				deps: [ 'clean', 'init', 'js', 'css', 'docs', 'zip' ],
 				env: "IS_DEPLOY_TARGET=true"
+			},
+			docs: {
+				deps: [ 'init', 'js', 'css' ]
+			},
+			init: {},
+			js: {
+				deps: [ 'init' ]
+			},
+			zip: {
+				deps: [ 'init', 'js', 'css' ]
 			}
 		},
 		lint: {
@@ -109,7 +110,7 @@ module.exports = function(grunt) {
 		});
 	});
 
-	// register the task alias's to enforce task dependencies
+	// register the task alias's to enforce task dependencies for the custom task
 	var tasks = grunt.config.get('legacy_tasks');
 	for( task in  tasks ){
 		var deps = [];
@@ -118,6 +119,8 @@ module.exports = function(grunt) {
 			deps.push("legacy_tasks:" + dep);
 		});
 
-		grunt.registerTask( 'legacy:' + task, deps.join(" ") + " legacy_tasks:" + task );
+		deps.push("legacy_tasks:" + task);
+
+		grunt.registerTask( 'legacy:' + task, deps.join(" "));
 	}
 };
