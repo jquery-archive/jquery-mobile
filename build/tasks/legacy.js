@@ -26,15 +26,15 @@ module.exports = function( grunt ) {
 	grunt.registerMultiTask('legacy_tasks', 'support for old build targets', function() {
 		var done = this.async(), name = this.name, self = this;
 
-		(this.data.deps || [] ).forEach(function( dep) {
+		( this.data.deps || [] ).forEach(function(dep) {
 			self.requires( 'legacy_tasks:' + dep );
 		});
 
 		child_process.exec( (this.data.env || '') + ' bash build/bin/' + this.target + '.sh', function (error, stdout, stderr) {
-			if( error !== null ){
+			if( error !== null ) {
 				grunt.log.error( stderr );
-			} else {
-				grunt.log.write(stdout);
+			} else if ( process.env.VERBOSE ) {
+				grunt.log.write( stdout );
 			}
 
 			done();
@@ -42,16 +42,16 @@ module.exports = function( grunt ) {
 	});
 
 	// register the task alias's to enforce task dependencies for the custom task
-	var deps, tasks = grunt.config.get('legacy_tasks');
-	for( task in tasks ){
+	var deps, tasks = grunt.config.get( 'legacy_tasks' );
+	for( task in tasks ) {
 		deps = [];
 
-		(tasks[task].deps || []).forEach(function( dep ) {
+		( tasks[task].deps || [] ).forEach(function( dep ) {
 			deps.push('legacy_tasks:' + dep);
 		});
 
-		deps.push('legacy_tasks:' + task);
+		deps.push( 'legacy_tasks:' + task );
 
-		grunt.registerTask( 'legacy:' + task, deps.join(' '));
+		grunt.registerTask( 'legacy:' + task, deps.join(' ') );
 	}
 };
