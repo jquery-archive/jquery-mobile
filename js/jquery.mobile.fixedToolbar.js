@@ -130,15 +130,21 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 					}
 				} )
 				.bind( "webkitAnimationStart animationstart updatelayout", function(){
+					var thisPage = this;
 					if( o.updatePagePadding ){
-						self.updatePagePadding();
+						self.updatePagePadding( thisPage );
 					}
 				})
-				.bind( "pageshow", function(){
-					self.updatePagePadding();
+				.bind( "pageshow", function(e, ui){
+					var thisPage = this;
 					if( o.updatePagePadding ){
+						// padding on pageshow is just needed on first toolbar-page
+						if ( !ui.nextPage ) {
+							self.updatePagePadding( thisPage );
+						}
+
 						$( window ).bind( "throttledresize." + self.widgetName, function(){
-						 	self.updatePagePadding();
+						 	self.updatePagePadding( thisPage );
 						});
 					}
 				})
@@ -173,14 +179,14 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 		_visible: true,
 
 		// This will set the content element's top or bottom padding equal to the toolbar's height
-		updatePagePadding: function() {
+		updatePagePadding: function( tbPage ) {
 			var $el = this.element,
 				header = $el.is( ".ui-header" );
 
 			// This behavior only applies to "fixed", not "fullscreen"
 			if( this.options.fullscreen ){ return; }
 
-			$el.closest( ".ui-page" ).css( "padding-" + ( header ? "top" : "bottom" ), $el.outerHeight() );
+			$(tbPage).css( "padding-" + ( header ? "top" : "bottom" ), $el.outerHeight() );
 		},
 		
 		_useTransition: function( notransition ){
