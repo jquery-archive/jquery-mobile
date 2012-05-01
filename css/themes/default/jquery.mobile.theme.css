@@ -1158,3 +1158,6 @@ a.ui-link-inherit {
 	outline-width: 1px;
 	outline-style: dotted;
 }
+
+::-moz-selection { text-shadow: none; }
+::selection { text-shadow: none; }
