@@ -93,7 +93,23 @@
 		]);
 	});
 
-	module('Nested List Test');
+	module('Nested List Test', {
+		setup: function() {
+			// ensure that the nested pages are generated
+			stop();
+			$.testHelper.pageSequence([
+				function(){
+					$.mobile.changePage("#nested-list-test");
+				},
+
+				function() {
+					window.history.back();
+				},
+
+				start
+			]);
+		}
+	});
 
 	asyncTest( "Changes page to nested list test and enhances", function() {
 		$.testHelper.pageSequence([
@@ -150,8 +166,7 @@
 	});
 
 	test( "nested list title should use first text node, regardless of line breaks", function(){
-		// NOTE this is a super fragile reference to the nested page, any change to the list will break it
-		ok($(":jqmData(url='nested-list-test&ui-page=0-0') .ui-title").text() === "More animals", 'Text should be "More animals"');
+		same($(":jqmData(url='nested-list-test&ui-page=0-0') .ui-title").text(), "More animals", 'Text should be "More animals"');
 	});
 
 	asyncTest( "Multiple nested lists on a page with same labels", function() {
