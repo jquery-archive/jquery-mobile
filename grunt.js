@@ -1,4 +1,5 @@
-/*global module:false*/
+var path = require( 'path' );
+
 module.exports = function(grunt) {
 
 	// Project configuration.
@@ -13,6 +14,7 @@ module.exports = function(grunt) {
 			options: {
 				curly: true,
 				eqeqeq: true,
+
 				// (function(){})() seems acceptable
 				immed: false,
 				latedef: true,
@@ -65,8 +67,9 @@ module.exports = function(grunt) {
 		uglify: {}
 	});
 
-	// Default task.
+	// set the default task.
 	grunt.registerTask('default', 'lint');
 
-	grunt.loadTasks( 'build/tasks/' );
+	// load the project's default tasks
+	grunt.loadTasks( path.join('build', 'tasks') );
 };
