@@ -1,11 +1,8 @@
-var util = require('util'),
-	child_process = require('child_process');
-
 /*global module:false*/
 module.exports = function(grunt) {
 
 	// Project configuration.
-	grunt.initConfig({
+	grunt.config.init({
 		concat: {
 			dist: {
 				src: ['<banner:meta.banner>', '<file_strip_banner:lib/<%= pkg.name %>.js>'],
@@ -45,26 +42,6 @@ module.exports = function(grunt) {
 				define: true
 			}
 		},
-		legacy_tasks: {
-			clean: {},
-			css: {
-				deps: [ 'init' ]
-			},
-			deploy: {
-				deps: [ 'clean', 'init', 'js', 'css', 'docs', 'zip' ],
-				env: 'IS_DEPLOY_TARGET=true'
-			},
-			docs: {
-				deps: [ 'init', 'js', 'css' ]
-			},
-			init: {},
-			js: {
-				deps: [ 'init' ]
-			},
-			zip: {
-				deps: [ 'init', 'js', 'css' ]
-			}
-		},
 		lint: {
 			files: ['grunt.js', 'js/*.js', 'tests/**/*.js']
 		},
@@ -91,35 +68,5 @@ module.exports = function(grunt) {
 	// Default task.
 	grunt.registerTask('default', 'lint');
 
-	grunt.registerMultiTask('legacy_tasks', 'support for old build targets', function() {
-		var done = this.async(), name = this.name, self = this;
-
-		(this.data.deps || [] ).forEach(function( dep) {
-			self.requires( 'legacy_tasks:' + dep );
-		});
-
-		child_process.exec( (this.data.env || '') + ' bash build/bin/' + this.target + '.sh', function (error, stdout, stderr) {
-			if( error !== null ){
-				grunt.log.error( stderr );
-			} else {
-				grunt.log.write(stdout);
-			}
-
-			done();
-		});
-	});
-
-	// register the task alias's to enforce task dependencies for the custom task
-	var deps, tasks = grunt.config.get('legacy_tasks');
-	for( task in tasks ){
-		deps = [];
-
-		(tasks[task].deps || []).forEach(function( dep ) {
-			deps.push('legacy_tasks:' + dep);
-		});
-
-		deps.push('legacy_tasks:' + task);
-
-		grunt.registerTask( 'legacy:' + task, deps.join(' '));
-	}
+	grunt.loadTasks( 'build/tasks/' );
 };
