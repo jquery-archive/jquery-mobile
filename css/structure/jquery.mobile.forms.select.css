@@ -25,7 +25,7 @@ label.ui-select { font-size: 16px; line-height: 1.4;  font-weight: normal; margi
 .ui-selectmenu { position: absolute; padding: 0; z-index: 1100 !important; width: 80%; max-width: 350px; padding: 6px; }
 .ui-selectmenu .ui-listview { margin: 0; }
 .ui-selectmenu .ui-btn.ui-li-divider { cursor: default; }
-.ui-selectmenu-hidden { top: -9999px; left: -9999px; }
+.ui-selectmenu-hidden { top: -99999px; left: -9999px; }
 .ui-selectmenu-screen { position: absolute; top: 0; left: 0; width: 100%; height: 100%;  z-index: 99; }
 .ui-screen-hidden, .ui-selectmenu-list .ui-li .ui-icon { display: none; }
 .ui-selectmenu-list .ui-li .ui-icon { display: block; }
