@@ -17,6 +17,14 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		mini: false
 	},
 
+	_getRangeAttrs: function (cType, control) {
+		return {
+			min: cType === "input" ? parseFloat( control.attr( "min" ) ) : 0,
+			max: cType === "input" ? parseFloat( control.attr( "max" ) ) : control.find( "option" ).length - 1,
+			step: (cType === "input" && parseFloat( control.attr( "step" ) ) > 0) ? parseFloat(control.attr("step")) : 1
+		};
+	},
+
 	_create: function() {
 
 		// TODO: Each of these should have comments explain what they're for
@@ -32,7 +40,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			cType = control[ 0 ].nodeName.toLowerCase(),
 
-			selectClass = ( cType == "select" ) ? "ui-slider-switch" : "",
+			selectClass = ( cType === "select" ) ? "ui-slider-switch" : "",
 
 			controlID = control.attr( "id" ),
 
@@ -41,26 +49,21 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			label = $( "[for='"+ controlID +"']" ).attr( "id", labelID ),
 
 			val = function() {
-				return  cType == "input"  ? parseFloat( control.val() ) : control[0].selectedIndex;
+				return	cType === "input"  ? parseFloat( control.val() ) : control[0].selectedIndex;
 			},
 
-			min =  cType == "input" ? parseFloat( control.attr( "min" ) ) : 0,
+			rangeAttrs = this._getRangeAttrs(cType, control),
 
-			max =  cType == "input" ? parseFloat( control.attr( "max" ) ) : control.find( "option" ).length-1,
-
-			step = window.parseFloat( control.attr( "step" ) || 1 ),
-
-			inlineClass = ( this.options.inline || control.jqmData("inline") == true ) ? " ui-slider-inline" : "",
+			inlineClass = ( this.options.inline || control.jqmData("inline") === true ) ? " ui-slider-inline" : "",
 
 			miniClass = ( this.options.mini || control.jqmData("mini") ) ? " ui-slider-mini" : "",
-
 
 			domHandle = document.createElement('a'),
 			handle = $( domHandle ),
 			domSlider = document.createElement('div'),
 			slider = $( domSlider ),
 
-			valuebg = control.jqmData("highlight") && cType != "select" ? (function() {
+			valuebg = control.jqmData("highlight") && cType !== "select" ? (function() {
 				var bg = document.createElement('div');
 				bg.className = 'ui-slider-bg ui-btn-active ui-btn-corner-all';
 				return $( bg ).prependTo( slider );
@@ -77,8 +80,8 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		handle.buttonMarkup({ corners: true, theme: theme, shadow: true })
 				.attr({
 					"role": "slider",
-					"aria-valuemin": min,
-					"aria-valuemax": max,
+					"aria-valuemin": rangeAttrs.min,
+					"aria-valuemax": rangeAttrs.max,
 					"aria-valuenow": val(),
 					"aria-valuetext": val(),
 					"title": val(),
@@ -95,7 +98,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			mouseMoved: false
 		});
 
-		if ( cType == "select" ) {
+		if ( cType === "select" ) {
 			var wrapper = document.createElement('div');
 			wrapper.className = 'ui-slider-inneroffset';
 
@@ -193,7 +196,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 							// this is a drag, change the value only if user dragged enough
 							if ( self.userModified ) {
-								self.refresh( self.beforeStart == 0 ? 1 : 0 );
+								self.refresh( self.beforeStart === 0 ? 1 : 0 );
 							}
 							else {
 								self.refresh( self.beforeStart );
@@ -202,7 +205,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 						}
 						else {
 							// this is just a click, change the value
-							self.refresh( self.beforeStart == 0 ? 1 : 0 );
+							self.refresh( self.beforeStart === 0 ? 1 : 0 );
 						}
 
 					}
@@ -216,7 +219,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		slider.insertAfter( control );
 
 		// Only add focus class to toggle switch, sliders get it automatically from ui-btn
-		if( cType == 'select' ) {
+		if( cType === 'select' ) {
 			this.handle.bind({
 				focus: function() {
 					slider.addClass( $.mobile.focusClass );
@@ -265,20 +268,20 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				// move the slider according to the keypress
 				switch ( event.keyCode ) {
 					case $.mobile.keyCode.HOME:
-						self.refresh( min );
+						self.refresh( rangeAttrs.min );
 						break;
 					case $.mobile.keyCode.END:
-						self.refresh( max );
+						self.refresh( rangeAttrs.max );
 						break;
 					case $.mobile.keyCode.PAGE_UP:
 					case $.mobile.keyCode.UP:
 					case $.mobile.keyCode.RIGHT:
-						self.refresh( index + step );
+						self.refresh( index + rangeAttrs.step );
 						break;
 					case $.mobile.keyCode.PAGE_DOWN:
 					case $.mobile.keyCode.DOWN:
 					case $.mobile.keyCode.LEFT:
-						self.refresh( index - step );
+						self.refresh( index - rangeAttrs.step );
 						break;
 				}
 			}, // remove active mark
@@ -302,9 +305,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 		var control = this.element, percent,
 			cType = control[0].nodeName.toLowerCase(),
-			min = cType === "input" ? parseFloat( control.attr( "min" ) ) : 0,
-			max = cType === "input" ? parseFloat( control.attr( "max" ) ) : control.find( "option" ).length - 1,
-			step = (cType === "input" && parseFloat( control.attr( "step" ) ) > 0) ? parseFloat(control.attr("step")) : 1;
+			rangeAttrs = this._getRangeAttrs(cType, control);
 
 		if ( typeof val === "object" ) {
 			var data = val,
@@ -317,10 +318,10 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			}
 			percent = Math.round( ( ( data.pageX - this.slider.offset().left ) / this.slider.width() ) * 100 );
 		} else {
-			if ( val == null ) {
+			if ( val === null ) {
 				val = cType === "input" ? parseFloat( control.val() || 0 ) : control[0].selectedIndex;
 			}
-			percent = ( parseFloat( val ) - min ) / ( max - min ) * 100;
+			percent = ( parseFloat( val ) - rangeAttrs.min ) / ( rangeAttrs.max - rangeAttrs.min ) * 100;
 		}
 
 		if ( isNaN( percent ) ) {
@@ -335,25 +336,25 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			percent = 100;
 		}
 
-		var newval = ( percent / 100 ) * ( max - min ) + min;
+		var newval = ( percent / 100 ) * ( rangeAttrs.max - rangeAttrs.min ) + rangeAttrs.min;
 
 		//from jQuery UI slider, the following source will round to the nearest step
-		var valModStep = ( newval - min ) % step;
+		var valModStep = ( newval - rangeAttrs.min ) % rangeAttrs.step;
 		var alignValue = newval - valModStep;
 
-		if ( Math.abs( valModStep ) * 2 >= step ) {
-			alignValue += ( valModStep > 0 ) ? step : ( -step );
+		if ( Math.abs( valModStep ) * 2 >= rangeAttrs.step ) {
+			alignValue += ( valModStep > 0 ) ? rangeAttrs.step : ( -rangeAttrs.step );
 		}
 		// Since JavaScript has problems with large floats, round
 		// the final value to 5 digits after the decimal point (see jQueryUI: #4124)
 		newval = parseFloat( alignValue.toFixed(5) );
 
-		if ( newval < min ) {
-			newval = min;
+		if ( newval < rangeAttrs.min ) {
+			newval = rangeAttrs.min;
 		}
 
-		if ( newval > max ) {
-			newval = max;
+		if ( newval > rangeAttrs.max ) {
+			newval = rangeAttrs.max;
 		}
 
 		this.handle.css( "left", percent + "%" );
