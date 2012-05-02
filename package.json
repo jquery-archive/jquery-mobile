@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "grunt":  "0.3.x",
-		"requirejs": "1.0.6"
+		"requirejs": "1.0.8"
   },
   "engine": {
     "node": ">=6.0"
