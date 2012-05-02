@@ -1,6 +1,6 @@
 var fs = require( 'fs' ),
 	path = require( 'path' ),
-  child_process = require( 'child_process' );
+	child_process = require( 'child_process' );
 
 module.exports = function( grunt ) {
 	var global = {
