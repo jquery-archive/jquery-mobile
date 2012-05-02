@@ -68,6 +68,8 @@ module.exports = function( grunt ) {
 			// remove the requirejs compile output
 			fs.unlink( require.all.out );
 			fs.unlink( require.structure.out );
+
+			// TODO cp the theme images
 			done();
 		});
 	});

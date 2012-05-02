@@ -20,7 +20,6 @@ Alternatively if you have node.js installed you can run
     npm install
     node node_modules/.bin/grunt <js|css|docs|zip|clean|init>
 
-
 How to build a self-contained version of the Docs/Demos
 =======================================================
 Once you have your own cloned repo on your computer:
