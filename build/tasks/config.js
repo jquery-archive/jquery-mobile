@@ -14,7 +14,7 @@ module.exports = function( grunt ) {
 		},
 
 		names: {
-			default: 'jquery.mobile',
+		  base: 'jquery.mobile',
 			// this will change for the deploy target to include version information
 			root: 'jquery.mobile',
 			structure: 'jquery.mobile.structure',
