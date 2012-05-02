@@ -41,7 +41,8 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 					if ( contentTheme && collapsible.jqmData( "collapsible-last" ) ) {
 						collapsible.find( widget.options.heading ).first()
 							.find( "a" ).first()
-							.add( ".ui-btn-inner" )
+							.toggleClass( "ui-corner-bottom", isCollapse )
+							.find( ".ui-btn-inner" )
 							.toggleClass( "ui-corner-bottom", isCollapse );
 						collapsible.find( ".ui-collapsible-content" ).toggleClass( "ui-corner-bottom", !isCollapse );
 					}
