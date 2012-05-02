@@ -5,8 +5,8 @@ var requirejs = require( 'requirejs' ),
 module.exports = function( grunt ) {
 	var config = grunt.config.get( 'global' ),
 		outputFile = path.join( config.dirs.output, config.names.root ),
-	  structureFile = path.join( config.dirs.output, config.names.structure ),
-	  themeFile = path.join( config.dirs.output, config.names.theme ),
+		structureFile = path.join( config.dirs.output, config.names.structure ),
+		themeFile = path.join( config.dirs.output, config.names.theme ),
 		helpers = config.helpers;
 
 	grunt.config.set( 'css', {
