@@ -475,7 +475,7 @@ define( [
 	$window.bind( "scrollstop", delayedSetLastScroll );
 
 	//function for transitioning between two existing pages
-	function transitionPages( toPage, fromPage, transition, reverse ) {
+	function transitionPages( toPage, fromPage, transition, settings ) {
 
 		if( fromPage ) {
 			//trigger before show/hide events
@@ -485,8 +485,10 @@ define( [
 		toPage.data( "page" )._trigger( "beforeshow", null, { prevPage: fromPage || $( "" ) } );
 
 		//clear page loader
-		$.mobile.hidePageLoadingMsg();
-		
+		if (settings.showLoadMsg) {
+			$.mobile.hidePageLoadingMsg();
+		}
+
 		// If transition is defined, check if css 3D transforms are supported, and if not, if a fallback is specified
 		if( transition && !$.support.cssTransform3d && $.mobile.transitionFallbacks[ transition ] ){
 			transition = $.mobile.transitionFallbacks[ transition ];
@@ -496,7 +498,7 @@ define( [
 		//isn't one in our transitionHandlers dictionary, use the default one.
 		//call the handler immediately to kick-off the transition.
 		var th = $.mobile.transitionHandlers[ transition || "default" ] || $.mobile.defaultTransitionHandler,
-			promise = th( transition, reverse, toPage, fromPage );
+			promise = th( transition, settings.reverse, toPage, fromPage );
 
 		promise.done(function() {
 
@@ -1106,7 +1108,7 @@ define( [
 		// If we're navigating back in the URL history, set reverse accordingly.
 		settings.reverse = settings.reverse || historyDir < 0;
 
-		transitionPages( toPage, fromPage, settings.transition, settings.reverse )
+		transitionPages( toPage, fromPage, settings.transition, settings )
 			.done(function( name, reverse, $to, $from, alreadyFocused ) {
 				removeActiveLinkClass();
 
