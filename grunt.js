@@ -1,6 +1,6 @@
 var path = require( 'path' );
 
-module.exports = function(grunt) {
+module.exports = function( grunt ) {
 
 	// Project configuration.
 	grunt.config.init({
@@ -9,6 +9,10 @@ module.exports = function(grunt) {
 				src: ['<banner:meta.banner>', '<file_strip_banner:lib/<%= pkg.name %>.js>'],
 				dest: 'dist/<%= pkg.name %>.js'
 			}
+		},
+		global: {
+			output: 'compiled',
+			name: 'jquery.mobile'
 		},
 		jshint: {
 			options: {

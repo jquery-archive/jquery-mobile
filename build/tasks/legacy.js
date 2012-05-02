@@ -42,6 +42,8 @@ module.exports = function( grunt ) {
 	});
 
 	// register the task alias's to enforce task dependencies for the custom task
+	// TODO this appears to prevent using args eg `grunt legacy:css:verbose` but
+	//      more futzing is required
 	var deps, tasks = grunt.config.get( 'legacy_tasks' );
 	for( task in tasks ) {
 		deps = [];
