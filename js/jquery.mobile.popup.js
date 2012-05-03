@@ -143,9 +143,10 @@ define( [ "jquery",
 		},
 
 		_setTransition: function( value ) {
-			this._ui.container.removeClass( this.options.transition || "" );
+			this._ui.container.removeClass( this._fallbackTransition || "" );
 			if ( value && value !== "none" ) {
-				this._ui.container.addClass( value );
+				this._fallbackTransition = $.mobile._maybeDegradeTransition( value );
+				this._ui.container.addClass( this._fallbackTransition );
 			}
 			this.options.transition = value;
 			this.element.attr( "data-" + ( $.mobile.ns || "" ) + "transition", value );
