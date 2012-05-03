@@ -3,7 +3,7 @@
  */
 (function($){
 
-	var myTestHelper = { 
+	$.extend($.testHelper, { 
 
 // detailedEventCascade: call a function and expect a series of events to be triggered (or not to be triggered), and guard
 // with a timeout against getting stood up. Record the result (timed out / was triggered) for each event, and the order
@@ -88,7 +88,7 @@
 			// Call the function with the result of the events
 			fn( result );
 		}
-	};
+	});
 
 	test( "Popup div is associated with a popup widget", function() {
 		expect( 1 );
@@ -135,7 +135,7 @@
 
 		expect( 6 );
 
-		myTestHelper.detailedEventCascade([
+		$.testHelper.detailedEventCascade([
 			function() {
 				baseUrl = location.href;
 				activeIndex = $.mobile.urlHistory.activeIndex;
@@ -173,7 +173,7 @@
 
 		expect( 4 );
 
-		myTestHelper.detailedEventCascade([
+		$.testHelper.detailedEventCascade([
 			function() {
 				origUrl = location.href;
 				origIndex = $.mobile.urlHistory.activeIndex;
@@ -239,7 +239,7 @@
 
 		expect( 6 );
 
-		myTestHelper.detailedEventCascade([
+		$.testHelper.detailedEventCascade([
 			function() {
 				$( "#test-popup" ).popup( "open" );
 			},
@@ -306,7 +306,7 @@
 
 		expect( 5 );
 
-		myTestHelper.detailedEventCascade([
+		$.testHelper.detailedEventCascade([
 			function() {
 				$( "#test-popup" ).popup( "open" ); $( "#test-popup" ).popup( "close" );
 			},
@@ -334,7 +334,7 @@
 
 		expect( 8 );
 
-		myTestHelper.detailedEventCascade([
+		$.testHelper.detailedEventCascade([
 			function() {
 				$( "#test-popup" ).popup( "open" );
 			},
