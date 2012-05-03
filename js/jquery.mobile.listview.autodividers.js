@@ -20,7 +20,7 @@ $.mobile.listview.prototype.options.autodividersSelector = function( elt ) {
 	return text;
 };
 
-$( document ).on( "listviewcreate", "ul,ol", function() {
+$( document ).delegate( "ul,ol", "listviewcreate", function() {
 
 	var list = $( this ),
 			listview = list.data( "listview" );
@@ -51,14 +51,13 @@ $( document ).on( "listviewcreate", "ul,ol", function() {
 	};
 
 	var afterListviewRefresh = function () {
-		list.off( 'listviewafterrefresh', afterListviewRefresh );
+		list.unbind( 'listviewafterrefresh', afterListviewRefresh );
 		replaceDividers();
 		listview.refresh();
-		list.on( 'listviewafterrefresh', afterListviewRefresh );
+		list.bind( 'listviewafterrefresh', afterListviewRefresh );
 	};
 
 	afterListviewRefresh();
-
 });
 
 })( jQuery );
