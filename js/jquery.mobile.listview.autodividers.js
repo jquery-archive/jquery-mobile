@@ -32,14 +32,10 @@ $( document ).on( "listviewcreate", "ul,ol", function() {
 	var replaceDividers = function () {
 		list.find( 'li:jqmData(role=list-divider)' ).remove();
 
-		var lis = list.find( 'li' );
+		var lis = list.find( 'li' ),
+			lastDividerText = null, li, dividerText;
 
-		var lastDividerText = null;
-		var li;
-		var dividerText;
-		var i = 0;
-
-		for ( i ; i < lis.length ; i++ ) {
+		for ( var i = 0; i < lis.length ; i++ ) {
 			li = lis[i];
 			dividerText = listview.options.autodividersSelector( $( li ) );
 
