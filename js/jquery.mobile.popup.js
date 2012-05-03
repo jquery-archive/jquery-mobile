@@ -27,7 +27,7 @@ define( [ "jquery",
 				},
 				proto = $(
 					"<div>" +
-					"    <div id='ui-popup-screen' class='ui-selectmenu-screen ui-screen-hidden ui-popup-screen fade'></div>" +
+					"    <div id='ui-popup-screen' class='ui-screen-hidden ui-popup-screen fade'></div>" +
 					"    <div id='ui-popup-container' class='ui-popup-container ui-selectmenu-hidden'></div>" +
 					"</div>"
 				),

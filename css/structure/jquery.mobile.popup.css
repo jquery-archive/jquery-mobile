@@ -1,14 +1,19 @@
 .ui-popup-container {
-	z-index: 1100 !important;
+	z-index: 1100;
 	display: inline-block;
 	position: absolute;
 	padding: 0px;
 }
 
 .ui-popup-screen {
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	position: absolute;
 	opacity: 0;
 	border: 0px;
-	z-index: 1099 !important;
+	z-index: 1099;
 }
 
 @-webkit-keyframes popup-fadein {
