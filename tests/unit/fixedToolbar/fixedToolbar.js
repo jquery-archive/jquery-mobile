@@ -331,7 +331,7 @@
 			function() {
 				var $footer = $.mobile.activePage.find( ".ui-footer" ),
 					$header = $.mobile.activePage.find( ".ui-header" ),
-					hidden = areHidden ? "hidden" : "visible";
+					hiddenStr = areHidden ? "hidden" : "visible";
 
 				equal( $footer.length, 1, "there should be one footer" );
 				equal( $header.length, 1, "there should be one header" );
