@@ -41,7 +41,8 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 					if ( contentTheme && collapsible.jqmData( "collapsible-last" ) ) {
 						collapsible.find( widget.options.heading ).first()
 							.find( "a" ).first()
-							.add( ".ui-btn-inner" )
+							.toggleClass( "ui-corner-bottom", isCollapse )
+							.find( ".ui-btn-inner" )
 							.toggleClass( "ui-corner-bottom", isCollapse );
 						collapsible.find( ".ui-collapsible-content" ).toggleClass( "ui-corner-bottom", !isCollapse );
 					}
@@ -56,7 +57,14 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 	},
 
 	_init: function() {
+		var $el = this.element,
+			collapsiblesInSet = $el.children( ":jqmData(role='collapsible')" ),
+			expanded = collapsiblesInSet.filter( ":jqmData(collapsed='false')" );
 		this.refresh();
+
+		// Because the corners are handled by the collapsible itself and the default state is collapsed
+		// That was causing https://github.com/jquery/jquery-mobile/issues/4116
+		expanded.trigger( "expand" );
 	},
 
 	refresh: function() {

@@ -281,5 +281,28 @@
 	</div>
 </div>
 
+<div data-nstest-role="page" id="collapsible-set-with-last-collapsible-expanded">
+    <div data-nstest-role="header">
+        <h1>uncollapsed collapsible</h1>
+    </div>
+    <div data-nstest-role="content">
+        <div data-nstest-role="collapsible-set"">
+        <div data-nstest-role="collapsible">
+            <h1>Collapsible collapsed</h1>
+            <ul data-nstest-role="listview" data-inset="true">
+                <li data-nstest-theme="b">Swatch b</li>
+                <li data-nstest-theme="d">Swatch d</li>
+            </ul>
+        </div>
+        <div data-nstest-role="collapsible" data-nstest-collapsed="false" data-nstest-content-theme="e">
+            <h1>Collapsible initial uncollapsed</h1>
+            <ul data-nstest-role="listview" data-nstest-inset="true">
+                <li data-nstest-theme="a">Swatch a</li>
+                <li data-nstest-theme="b">Swatch b</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

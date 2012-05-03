@@ -55,7 +55,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 
 		// Add ARIA role
 		this.button = $( "<div></div>" )
-			.text( $el.text() || $el.val() )
+			[ $el.html() ? "html" : "text" ]( $el.html() || $el.val() )
 			.insertBefore( $el )
 			.buttonMarkup({
 				theme: o.theme,
@@ -132,7 +132,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 		}
 
 		// Grab the button's text element from its implementation-independent data item
-		$( this.button.data( 'buttonElements' ).text ).text( $el.text() || $el.val() );
+		$( this.button.data( 'buttonElements' ).text )[ $el.html() ? "html" : "text" ]( $el.html() || $el.val() );
 	}
 });
 

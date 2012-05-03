@@ -474,6 +474,15 @@ define( [
 	// bind to scrollstop for the first page as "pagechange" won't be fired in that case
 	$window.bind( "scrollstop", delayedSetLastScroll );
 
+	// If transition is defined, check if css 3D transforms are supported, and if not, if a fallback is specified
+	$.mobile._maybeDegradeTransition = function( transition ) {
+		if( transition && !$.support.cssTransform3d && $.mobile.transitionFallbacks[ transition ] ){
+			transition = $.mobile.transitionFallbacks[ transition ];
+		}
+
+		return transition;
+	};
+
 	//function for transitioning between two existing pages
 	function transitionPages( toPage, fromPage, transition, reverse ) {
 
@@ -486,11 +495,8 @@ define( [
 
 		//clear page loader
 		$.mobile.hidePageLoadingMsg();
-		
-		// If transition is defined, check if css 3D transforms are supported, and if not, if a fallback is specified
-		if( transition && !$.support.cssTransform3d && $.mobile.transitionFallbacks[ transition ] ){
-			transition = $.mobile.transitionFallbacks[ transition ];
-		}
+
+		transition = $.mobile._maybeDegradeTransition( transition );
 		
 		//find the transition handler for the specified transition. If there
 		//isn't one in our transitionHandlers dictionary, use the default one.

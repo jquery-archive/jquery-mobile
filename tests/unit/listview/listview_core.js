@@ -93,7 +93,23 @@
 		]);
 	});
 
-	module('Nested List Test');
+	module('Nested List Test', {
+		setup: function() {
+			// ensure that the nested pages are generated
+			stop();
+			$.testHelper.pageSequence([
+				function(){
+					$.mobile.changePage("#nested-list-test");
+				},
+
+				function() {
+					window.history.back();
+				},
+
+				start
+			]);
+		}
+	});
 
 	asyncTest( "Changes page to nested list test and enhances", function() {
 		$.testHelper.pageSequence([
@@ -150,8 +166,7 @@
 	});
 
 	test( "nested list title should use first text node, regardless of line breaks", function(){
-		// NOTE this is a super fragile reference to the nested page, any change to the list will break it
-		ok($(":jqmData(url='nested-list-test&ui-page=0-0') .ui-title").text() === "More animals", 'Text should be "More animals"');
+		same($(":jqmData(url='nested-list-test&ui-page=0-0') .ui-title").text(), "More animals", 'Text should be "More animals"');
 	});
 
 	asyncTest( "Multiple nested lists on a page with same labels", function() {
@@ -325,6 +340,172 @@
 				var $new_page = $('#list-divider-test');
 				ok($new_page.find('.ui-li-divider').length == 2);
 				ok($new_page.hasClass('ui-page-active'));
+				start();
+			}
+		]);
+	});
+
+	module( "Autodividers" );
+
+	asyncTest( "Adds dividers based on first letters of list items.", function() {
+		$.testHelper.pageSequence([
+			function() {
+				$.testHelper.openPage( '#autodividers-test' );
+			},
+
+			function() {
+				var $new_page = $( '#autodividers-test' );
+				ok( $new_page.hasClass( 'ui-page-active' ) );
+				ok( $new_page.find( '.ui-li-divider' ).length === 4 );
+				start();
+			}
+		]);
+	});
+
+	asyncTest( "Responds to addition/removal of list elements after refresh.", function() {
+		$.testHelper.pageSequence([
+			function() {
+				$.testHelper.openPage( '#autodividers-test' );
+			},
+
+			function() {
+				var $new_page = $( '#autodividers-test' );
+				ok( $new_page.hasClass( 'ui-page-active' ));
+
+				var $list = $new_page.find( 'ul' );
+
+				// should remove all existing dividers
+				ok( $new_page.find( 'li:contains("SHOULD REMOVE")' ).length === 0 );
+
+				// add li; should add an "X" divider
+				$list.append( '<li>x is for xanthe</li>' );
+				$list.listview('refresh');
+				ok( $new_page.find( '.ui-li-divider' ).length === 5 );
+				ok( $new_page.find( '.ui-li-divider' ).is( ':contains("X")' ) );
+
+				// adding the same element again should create a valid list
+				// item but no new divider
+				ok( $new_page.find( '.ui-li-static' ).length === 5 );
+				$list.append( '<li>x is for xanthe</li>' );
+				$list.listview('refresh');
+				ok( $new_page.find( '.ui-li-divider' ).length === 5 );
+				ok( $new_page.find( '.ui-li-divider:contains("X")' ).length === 1 );
+				ok( $new_page.find( '.ui-li-static' ).length === 6 );
+
+				// should ignore addition of non-li elements to the list
+				$list.find( 'li:eq(0)' ).append( '<span>ignore me</span>' );
+				$list.listview('refresh');
+				ok( $new_page.find( '.ui-li-divider' ).length === 5 );
+				ok( $new_page.find( '.ui-li-static' ).length === 6 );
+
+				// add li with the same initial letter as another li
+				// but after the X li item; should add a second "B" divider to the
+				// end of the list
+				$list.append( '<li>b is for barry</li>' );
+				$list.listview('refresh');
+				ok( $new_page.find( '.ui-li-divider' ).length === 6 );
+				ok( $new_page.find( '.ui-li-divider:contains("B")' ).length === 2 );
+
+				// remove the item with a repeated "b"; should remove the second
+				// "B" divider
+				$list.find( 'li:contains("barry")' ).remove();
+				$list.listview('refresh');
+				ok( $new_page.find( '.ui-li-divider' ).length === 5 );
+				ok( $new_page.find( '.ui-li-divider:contains("B")' ).length === 1 );
+
+				// remove li; should remove the "A" divider
+				$list.find( 'li:contains("aquaman")' ).remove();
+				$list.listview('refresh');
+				ok( $new_page.find( '.ui-li-divider' ).length === 4 );
+				ok( !$new_page.find( '.ui-li-divider' ).is( ':contains("A")' ) );
+
+				// adding another "B" item after "C" should create two separate
+				// "B" dividers
+				$list.find( 'li:contains("catwoman")' ).after( '<li>b is for barry</li>' );
+				$list.listview('refresh');
+				ok( $new_page.find( '.ui-li-divider' ).length === 5 );
+				ok( $new_page.find( '.ui-li-divider:contains("B")' ).length === 2 );
+
+				// if two dividers with the same letter have only non-dividers
+				// between them, they get merged
+
+				// removing catwoman should cause the two "B" dividers to merge
+				$list.find( 'li:contains("catwoman")' ).remove();
+				$list.listview('refresh');
+				ok( $new_page.find( '.ui-li-divider:contains("B")' ).length === 1 );
+
+				// adding another "D" item before the "D" divider should only
+				// result in a single "D" divider after merging
+				$list.find( 'li:contains("barry")' ).after( '<li>d is for dan</li>' );
+				$list.listview('refresh');
+				ok( $new_page.find( '.ui-li-divider:contains("D")' ).length === 1 );
+
+				start();
+			}
+		]);
+	});
+
+	module( "Autodividers Selector" );
+
+	asyncTest( "Adds divider text from links.", function() {
+		$.testHelper.pageSequence([
+			function() {
+				$.testHelper.openPage( '#autodividers-selector-test' );
+			},
+
+			function() {
+				var $new_page = $( '#autodividers-selector-test' );
+				ok($new_page.hasClass( 'ui-page-active' ));
+
+				// check we have the right dividers based on link text
+				var $list = $( '#autodividers-selector-test-list1' );
+				ok( $list.find( '.ui-li-divider' ).length === 4 );
+				ok( $list.find( '.ui-li-divider:eq(0):contains(A)' ).length === 1 );
+				ok( $list.find( '.ui-li-divider:eq(1):contains(B)' ).length === 1 );
+				ok( $list.find( '.ui-li-divider:eq(2):contains(C)' ).length === 1 );
+				ok( $list.find( '.ui-li-divider:eq(3):contains(D)' ).length === 1 );
+
+				// check that adding a new item with link creates the right divider
+				$list.append( '<li><a href="">e is for ethel</a></li>' );
+				$list.listview('refresh');
+				ok( $list.find( '.ui-li-divider:eq(4):contains(E)' ).length === 1 );
+
+				start();
+			}
+		]);
+	});
+
+	asyncTest( "Adds divider text based on custom selector.", function() {
+		$.testHelper.pageSequence([
+			function() {
+				$.testHelper.openPage( '#autodividers-selector-test' );
+			},
+
+			function() {
+				var $new_page = $( '#autodividers-selector-test' );
+				ok($new_page.hasClass( 'ui-page-active' ));
+
+				// check we have the right dividers based on custom selector
+				var $list = $( '#autodividers-selector-test-list2' );
+				$list.listview( 'option', 'autodividersSelector', function( elt ) {
+          var text = elt.find( 'div > span.autodividers-selector-test-selectme' ).text();
+          text = text.slice( 0, 1 ).toUpperCase();
+          return text;
+				});
+				$list.listview( 'refresh' );
+				ok( $list.find( '.ui-li-divider' ).length === 4 );
+				ok( $list.find( '.ui-li-divider:eq(0):contains(E)' ).length === 1 );
+				ok( $list.find( '.ui-li-divider:eq(1):contains(F)' ).length === 1 );
+				ok( $list.find( '.ui-li-divider:eq(2):contains(G)' ).length === 1 );
+				ok( $list.find( '.ui-li-divider:eq(3):contains(H)' ).length === 1 );
+
+				// check that adding a new item creates the right divider
+				$list.append( '<li><div><span class="autodividers-selector-test-selectme">' +
+				'i is for impy</span></div></li>' );
+				$list.listview( 'refresh' );
+
+				ok( $list.find( '.ui-li-divider:eq(4):contains(I)' ).length === 1 );
+
 				start();
 			}
 		]);
