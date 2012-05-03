@@ -520,7 +520,7 @@ define( [
 
 	//simply set the active page's minimum height to screen height, depending on orientation
 	function getScreenHeight(){
-		// Native innerHeight returns more accurate value for this across platforms, 
+		// Native innerHeight returns more accurate value for this across platforms,
 		// jQuery version is here as a normalized fallback for platforms like Symbian
 		return window.innerHeight || $( window ).height();
 	}
@@ -532,7 +532,7 @@ define( [
 		var aPage = $( "." + $.mobile.activePageClass ),
 			aPagePadT = parseFloat( aPage.css( "padding-top" ) ),
 			aPagePadB = parseFloat( aPage.css( "padding-bottom" ) );
-				
+
 		aPage.css( "min-height", getScreenHeight() - aPagePadT - aPagePadB );
 	}
 
