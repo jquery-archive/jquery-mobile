@@ -27,7 +27,7 @@ define( [ "jquery",
 				},
 				proto = $(
 					"<div>" +
-					"    <div id='ui-popup-screen' class='ui-selectmenu-screen ui-screen-hidden ui-popup-screen'></div>" +
+					"    <div id='ui-popup-screen' class='ui-selectmenu-screen ui-screen-hidden ui-popup-screen fade'></div>" +
 					"    <div id='ui-popup-container' class='ui-popup-container ui-selectmenu-hidden'></div>" +
 					"</div>"
 				),
@@ -268,7 +268,9 @@ define( [ "jquery",
 					.removeClass( "ui-screen-hidden" );
 
 			if ( self.options.fade ) {
-				self._ui.screen.animate( {opacity: 0.5}, "fast", showScreen );
+				self._ui.screen
+					.addClass("in")
+					.animationComplete( showScreen );
 			}
 			else {
 				showScreen();
@@ -316,7 +318,7 @@ define( [ "jquery",
 				},
 				hideScreen = function() {
 					self._ui.screen.addClass( "ui-screen-hidden" );
-					self._ui.screen.removeAttr( "style" );
+					self._ui.screen.removeClass( "out" );
 					maybeTriggerClosed();
 				};
 
@@ -330,7 +332,10 @@ define( [ "jquery",
 			}
 
 			if ( this.options.fade ) {
-				this._ui.screen.animate( {opacity: 0.0}, "fast", hideScreen );
+				this._ui.screen
+					.removeClass( "in" )
+					.addClass( "out" )
+					.animationComplete( hideScreen );
 			} else {
 				hideScreen();
 			}
