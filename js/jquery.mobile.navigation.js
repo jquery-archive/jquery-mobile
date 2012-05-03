@@ -486,12 +486,12 @@ define( [
 
 		//clear page loader
 		$.mobile.hidePageLoadingMsg();
-		
+
 		// If transition is defined, check if css 3D transforms are supported, and if not, if a fallback is specified
 		if( transition && !$.support.cssTransform3d && $.mobile.transitionFallbacks[ transition ] ){
 			transition = $.mobile.transitionFallbacks[ transition ];
 		}
-		
+
 		//find the transition handler for the specified transition. If there
 		//isn't one in our transitionHandlers dictionary, use the default one.
 		//call the handler immediately to kick-off the transition.
@@ -514,7 +514,7 @@ define( [
 
 	//simply set the active page's minimum height to screen height, depending on orientation
 	function getScreenHeight(){
-		// Native innerHeight returns more accurate value for this across platforms, 
+		// Native innerHeight returns more accurate value for this across platforms,
 		// jQuery version is here as a normalized fallback for platforms like Symbian
 		return window.innerHeight || $( window ).height();
 	}
@@ -526,7 +526,7 @@ define( [
 		var aPage = $( "." + $.mobile.activePageClass ),
 			aPagePadT = parseFloat( aPage.css( "padding-top" ) ),
 			aPagePadB = parseFloat( aPage.css( "padding-bottom" ) );
-				
+
 		aPage.css( "min-height", getScreenHeight() - aPagePadT - aPagePadB );
 	}
 
