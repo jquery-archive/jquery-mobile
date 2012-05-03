@@ -107,9 +107,7 @@
 
 	test( "Popup div is preceded by its screen", function() {
 		expect( 1 );
-		ok(
-			$( "#test-popup" ).parent().prev().hasClass( "ui-selectmenu-screen" ) &&
-			$( "#test-popup" ).parent().prev().hasClass( "ui-popup-screen" ) );
+		ok( $( "#test-popup" ).parent().prev().hasClass( "ui-popup-screen" ) );
 	});
 
 	asyncTest( "Popup opens and closes", function() {
