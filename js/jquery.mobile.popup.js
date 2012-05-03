@@ -331,7 +331,7 @@ define( [ "jquery",
 				onAnimationComplete();
 			}
 
-			if ( this.options.fade ) {
+			if ( this.options.fade && this._ui.screen.hasClass( "in" ) ) {
 				this._ui.screen
 					.removeClass( "in" )
 					.addClass( "out" )
