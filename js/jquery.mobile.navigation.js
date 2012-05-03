@@ -496,7 +496,7 @@ define( [
 		//clear page loader
 		$.mobile.hidePageLoadingMsg();
 
-		transition = $.mobile.maybeDegradeTransition( transition );
+		transition = $.mobile._maybeDegradeTransition( transition );
 		
 		//find the transition handler for the specified transition. If there
 		//isn't one in our transitionHandlers dictionary, use the default one.
