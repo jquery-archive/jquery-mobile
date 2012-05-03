@@ -380,13 +380,17 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			parentPage.data("page").options.domCache === false ) {
 
 			var newRemove = function( e, ui ){
-				var nextPage = ui.nextPage, npURL;
+				var nextPage = ui.nextPage, npURL,
+					prEvent = new $.Event( "pageremove" );
 
 				if( ui.nextPage ){
 					npURL = nextPage.jqmData( "url" );
 					if( npURL.indexOf( parentUrl + "&" + $.mobile.subPageUrlKey ) !== 0 ){
 						self.childPages().remove();
-						parentPage.remove();
+						parentPage.trigger( prEvent );
+						if( !prEvent.isDefaultPrevented() ){
+							parentPage.removeWithDependents();
+						}
 					}
 				}
 			};
