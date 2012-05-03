@@ -46,9 +46,9 @@ define( [ "jquery", "./jquery.mobile.navigation", "../external/requirejs/depend!
 			return url;
 		},
 
-		hashValueAfterReset: function( url ) {
-			var resetUrl = self.resetUIKeys( url );
-			return $.mobile.path.parseUrl( resetUrl ).hash;
+		hashValueAfterReset: function( url, isHash ) {
+            var resetUrl = self.resetUIKeys( url );
+            return $.mobile.path.parseUrl( (isHash === true) ? resetUrl : "#" + resetUrl ).hash;
 		},
 
 		// TODO sort out a single barrier to hashchange functionality
@@ -62,7 +62,7 @@ define( [ "jquery", "./jquery.mobile.navigation", "../external/requirejs/depend!
 		// handling has taken place and set the state of the DOM
 		onHashChange: function( e ) {
 			// disable this hash change
-			if( self.onHashChangeDisabled ){
+			if( self.onHashChangeDisabled && $.mobile.urlHistory.ignoreNextHashChange){
 				return;
 			}
 
@@ -109,13 +109,16 @@ define( [ "jquery", "./jquery.mobile.navigation", "../external/requirejs/depend!
 				// so we can use it to verify if a hashchange will be fired from the popstate
 				fromHash = self.hashValueAfterReset( $.mobile.urlHistory.getActive().url );
 
-				// the hash stored in the state popped off the stack will be our currenturl or
-				// the url to which we wish to navigate
-				toHash = self.hashValueAfterReset( poppedState.hash.replace("#", "") );
+                // check if the hash is not a path, we need it for correct fetch of hash value in hashValueAfterReset
+                var isReallyHash = ($.mobile.path.isPath(poppedState.hash) === true) ? false : true;
 
-				// if the hashes of the urls are different we must assume that the browser
-				// will fire a hashchange
-				hashChanged = fromHash !== toHash;
+                // the hash stored in the state popped off the stack will be our currenturl or
+                // the url to which we wish to navigate
+                toHash = self.hashValueAfterReset( poppedState.hash.replace("#", ""), isReallyHash );
+
+                // if the hashes of the urls are different we must assume that the browser
+                // will fire a hashchange
+                hashChanged = fromHash !== toHash;
 
 				// unlock hash handling once the hashchange caused be the popstate has fired
 				if( hashChanged ) {
