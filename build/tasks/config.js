@@ -24,7 +24,8 @@ module.exports = function( grunt ) {
 		// other version information is added via the asyncConfig helper that
 		// depends on git commands (eg ver.min, ver.header)
 		ver: {
-			official: grunt.file.read( 'version.txt' ).replace(/\n/, '')
+			official: grunt.file.read( 'version.txt' ).replace(/\n/, ''),
+			min: "/*! jQuery Mobile v<%= build_sha %> jquerymobile.com | jquery.org/license !*/"
 		},
 
 		shas: {},
@@ -75,13 +76,14 @@ module.exports = function( grunt ) {
 			asyncConfig: function( callback ) {
 				child_process.exec( 'git log -1 --format=format:"Git Build: SHA1: %H <> Date: %cd"', function( err, stdout, stderr ){
 					global.shas.build_sha = stdout;
-					global.ver.min = "/*! jQuery Mobile v" + global.shas.build_sha + " jquerymobile.com | jquery.org/license !*/";
+					global.ver.min = grunt.template.process( global.ver.min, global.shas );
+
 					child_process.exec( 'git log -1 --format=format:"%H"', function( err, stdout, stderr ) {
 						global.shas.head_sha = stdout;
-						global.ver.header = fs.readFileSync( global.files.license )
-							.toString()
-							.replace(/v@VERSION/, global.shas.build_sha );
 
+						// NOTE not using a template here because the Makefile depends on the v@VERSION
+						global.ver.header = grunt.file.read( global.files.license )
+							.replace(/v@VERSION/, global.shas.build_sha );
 						callback( global );
 					});
 				});
