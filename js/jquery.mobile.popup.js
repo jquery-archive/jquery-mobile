@@ -1,6 +1,7 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Popup windows.
 //>>label: Popups
+//>>css: ../css/themes/default/jquery.mobile.theme.css,../css/structure/jquery.mobile.popup.css,../css/structure/jquery.mobile.transition.css,../css/structure/jquery.mobile.transition.fade.css
 
 define( [ "jquery",
 	"jquery.mobile.widget",
