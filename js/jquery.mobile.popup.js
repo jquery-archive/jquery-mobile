@@ -15,7 +15,6 @@ define( [ "jquery",
 			overlayTheme: null,
 			shadow: true,
 			corners: true,
-			fade: false,
 			transition: $.mobile.defaultDialogTransition,
 			initSelector: ":jqmData(role='popup')"
 		},
@@ -88,9 +87,9 @@ define( [ "jquery",
 			var classes = ( dst.attr( "class" ) || "").split( " " ),
 				alreadyAdded = true,
 				currentTheme = null,
-				matches;
+				matches,
+				themeStr = String( theme );
 
-			theme = String( theme );
 			while ( classes.length > 0 ) {
 				currentTheme = classes.pop();
 				matches = currentTheme.match( /^ui-body-([a-z])$/ );
@@ -104,23 +103,20 @@ define( [ "jquery",
 
 			if ( theme !== currentTheme ) {
 				dst.removeClass( "ui-body-" + currentTheme );
-				if ( theme !== null ) {
-					dst.addClass( "ui-body-" + theme );
+				if ( ! ( theme === null || theme === "none" ) ) {
+					dst.addClass( "ui-body-" + themeStr );
 				}
 			}
 		},
 
 		_setTheme: function( value ) {
-			this._realSetTheme( this.element, value );
+			this._realSetTheme( this._ui.container, value );
 			this.options.theme = value;
 			this.element.attr( "data-" + ( $.mobile.ns || "" ) + "theme", value );
 		},
 
 		_setOverlayTheme: function( value ) {
-			this._realSetTheme( this._ui.container, value );
-			// The screen must always have some kind of background for fade to work, so, if the theme is being unset,
-			// set the background to "a".
-			this._realSetTheme( this._ui.screen, (value === "" ? "a" : value) );
+			this._realSetTheme( this._ui.screen, value );
 			this.options.overlayTheme = value;
 			this.element.attr( "data-" + ( $.mobile.ns || "" ) + "overlay-theme", value );
 		},
@@ -135,11 +131,6 @@ define( [ "jquery",
 			this._ui.container[value ? "addClass" : "removeClass"]( "ui-corner-all" );
 			this.options.corners = value;
 			this.element.attr( "data-" + ( $.mobile.ns || "" ) + "corners", value );
-		},
-
-		_setFade: function( value ) {
-			this.options.fade = value;
-			this.element.attr( "data-" + ( $.mobile.ns || "" ) + "fade", value );
 		},
 
 		_setTransition: function( value ) {
@@ -260,15 +251,15 @@ define( [ "jquery",
 						(undefined === x ? window.innerWidth / 2 : x),
 						(undefined === y ? window.innerHeight / 2 : y) );
 
-			if ( !self.options.overlayTheme ) {
-				self._setOverlayTheme( self._page.jqmData( "theme" ) || $.mobile.getInheritedTheme( self._page, "a" ) );
+			if ( !self.options.theme ) {
+				self._setTheme( self._page.jqmData( "theme" ) || $.mobile.getInheritedTheme( self._page, "c" ) );
 			}
 
 			self._ui.screen
 					.height( $( document ).height() )
 					.removeClass( "ui-screen-hidden" );
 
-			if ( self.options.fade ) {
+			if ( self.options.overlayTheme ) {
 				self._ui.screen
 					.addClass("in")
 					.animationComplete( showScreen );
@@ -332,7 +323,7 @@ define( [ "jquery",
 				onAnimationComplete();
 			}
 
-			if ( this.options.fade && this._ui.screen.hasClass( "in" ) ) {
+			if ( this.options.overlayTheme && this._ui.screen.hasClass( "in" ) ) {
 				this._ui.screen
 					.removeClass( "in" )
 					.addClass( "out" )
