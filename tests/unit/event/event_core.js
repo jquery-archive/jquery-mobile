@@ -135,7 +135,7 @@
 		};
 	};
 
-	asyncTest( "long press fires tap hold after 750 ms", function(){
+	asyncTest( "long press fires tap hold after taphold duration", function(){
 		var taphold = false,
 			target;
 
@@ -152,7 +152,7 @@
 			ok( taphold );
 			equal( target, $( "#qunit-fixture" ).get( 0 ), "taphold target should be #qunit-fixture" );
 			start();
-		}, 751);
+		}, $.event.special.tap.tapholdThreshold + 10);
 	});
 
 	//NOTE used to simulate movement when checked

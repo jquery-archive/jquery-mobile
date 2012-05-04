@@ -70,6 +70,8 @@ $.event.special.scrollstart = {
 
 // also handles taphold
 $.event.special.tap = {
+	tapholdThreshold: 750,
+
 	setup: function() {
 		var thisObject = this,
 			$this = $( thisObject );
@@ -112,7 +114,7 @@ $.event.special.tap = {
 
 			timer = setTimeout(function() {
 					triggerCustomEvent( thisObject, "taphold", $.Event( "taphold", { target: origTarget } ) );
-			}, 750 );
+			}, $.event.special.tap.tapholdThreshold );
 		});
 	}
 };
