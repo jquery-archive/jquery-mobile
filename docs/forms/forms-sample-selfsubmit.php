@@ -69,13 +69,13 @@
 			    </fieldset>
 			</div>
 			
-			<button type="submit" name="submit" value="submit" data-theme="b">Submit</submit>
+			<button type="submit" name="submit" value="submit" data-theme="b">Submit</button>
 		</form>
 
 		<h2><?php echo $submit == "" ? "Please enter the form and submit" : "You choose:" ?></h2>
 		<div class="ui-body ui-body-d ui-corner-all">
 			<p>Title: <strong><?php echo $submit == "" ? "-" : $title ?></strong></p>
-			<p>Layout: <strong><?php echo $submit == "" ? "-" : $layout ?></strong></p>
+			<p>Preview: <strong><?php echo $submit == "" ? "-" : $layout ?></strong></p>
 			<p>Timeout: <strong><?php echo $submit == "" ? "-" : $timeout ?></strong></p>
 			<p>Transition: <strong><?php echo $submit == "" ? "-" : $transition ?></strong></p>
 		</div>
