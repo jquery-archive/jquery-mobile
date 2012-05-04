@@ -42,7 +42,7 @@
 
 /*btn icon positioning*/
 .ui-btn-icon-notext .ui-icon { display: block; z-index: 0;}
-.ui-btn-icon-left .ui-btn-inner .ui-icon, .ui-btn-icon-right .ui-btn-inner .ui-icon { position: absolute; top: 50%; margin-top: -9px; }
+.ui-btn-icon-left > .ui-btn-inner > .ui-icon, .ui-btn-icon-right > .ui-btn-inner > .ui-icon { position: absolute; top: 50%; margin-top: -9px; }
 .ui-btn-icon-top .ui-btn-inner .ui-icon, .ui-btn-icon-bottom .ui-btn-inner .ui-icon { position: absolute; left: 50%;  margin-left: -9px; }
 .ui-btn-icon-left .ui-icon { left: 10px; }
 .ui-btn-icon-right .ui-icon { right: 10px; }
