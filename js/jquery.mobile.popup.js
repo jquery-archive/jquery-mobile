@@ -299,6 +299,7 @@ define( [ "jquery",
 						self._pending = null;
 						self._calledClose = false;
 						whenReady && whenReady();
+						self._isOpen = false;
 						self.element.trigger( "closed" );
 					}
 				},
@@ -352,7 +353,7 @@ define( [ "jquery",
 		open: function( x, y ) {
 			var self = this;
 
-			if ( !self._calledOpen ) {
+			if ( !( ( self._isOpen && !self._pending ) || self._calledOpen ) ) {
 				self._calledOpen = true;
 
 				if (self._pending === "closed" ) {
@@ -372,8 +373,6 @@ define( [ "jquery",
 		_doClose: function(cb) {
 			var self = this;
 
-			self._isOpen = false;
-
 			function continueWithClose() {
 				self._pending = "closed";
 				cb();
@@ -390,7 +389,7 @@ define( [ "jquery",
 		close: function() {
 			var self = this;
 
-			if ( !self._calledClose ) {
+			if ( ( self._isOpen || self._pending ) && !self._calledClose ) {
 				self._calledClose = true;
 
 				if ( self._pending !== "closed" ) {
