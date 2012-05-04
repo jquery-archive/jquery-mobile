@@ -137,7 +137,7 @@
 
 	asyncTest( "long press fires tap hold after taphold duration", function(){
 		var taphold = false,
-			target;
+			target = undefined;
 
 		forceTouchSupport();
 
@@ -149,7 +149,13 @@
 		$( "#qunit-fixture" ).trigger("vmousedown");
 
 		setTimeout(function(){
-			ok( taphold );
+			ok( !taphold, "taphold not fired" );
+			same( target, undefined, "taphold target should be #qunit-fixture" );
+		}, $.event.special.tap.tapholdThreshold - 10);
+
+
+		setTimeout(function(){
+			ok( taphold, "taphold fired" );
 			equal( target, $( "#qunit-fixture" ).get( 0 ), "taphold target should be #qunit-fixture" );
 			start();
 		}, $.event.special.tap.tapholdThreshold + 10);
