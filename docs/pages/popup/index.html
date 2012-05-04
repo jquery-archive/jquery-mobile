@@ -49,12 +49,7 @@
 			<p>This is a completely basic popup, no options set.</p>
 		</div>
 		
-		<p>There seems to be some inheritance going on with buttons: <a href="#popupBasicBtn" data-rel="popup" data-role="button" data-inline="true">popup</a></p>
-		<div data-role="popup" id="popupBasicBtn">
-			<p>This is a completely basic popup, no options set.</p>
-		</div>
-		
-		<p>Now on to some cool examples</p>
+		<p>Now on to some cool examples:</p>
 		<a href="#popupInfo" data-rel="popup" data-role="button" data-inline="true">Tooltip</a>
 		<a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true" data-transition="fade">Menu</a>
 		<a href="#popupLogin" data-rel="popup" data-role="button" data-inline="true">Form</a> 	
@@ -167,30 +162,15 @@
 		
 		<h2>Calling the popup plugin</h2>
 
-<p>This plugin will auto initialize on any page that contains a div with the attribute <code>data-role="popup"</code>. However, if needed you can directly call the <code>popup</code> plugin on any selector, just like any jQuery plugin:</p>
+<p>This plugin will autoinitialize on any page that contains a div with the attribute <code>data-role="popup"</code>. However, if needed you can directly call the <code>popup</code> plugin on any selector, just like any jQuery plugin:</p>
 <pre><code>
 $('#myPopupDiv').popup();			
 </code></pre>
     
-<div data-role="popup" id="popupTester">
-    <p>This popup assumes the theme of the button that launches it.</p>
-    <p>Thus, it supports the idea that it is connected to the button.</p>
-</div>    
-
 		<h2>Theming the popup</h2>
-<p>Normally, the popup's theme will be set to align with the theme of the link that launches it. The above popup can be shown in multiple places. Each time, upon appearing, the popup's theme is set to match that of the link that launches it:</p>
-<pre><code>
-&lt;a href=&quot;#popupTester&quot; data-rel=&quot;popup&quot; data-role=&quot;button&quot; data-inline=&quot;true&quot; data-theme=&quot;a&quot;&gt;Pop&lt;/a&gt;
-&lt;a href=&quot;#popupTester&quot; data-rel=&quot;popup&quot; data-role=&quot;button&quot; data-inline=&quot;true&quot; data-theme=&quot;b&quot;&gt;Pop&lt;/a&gt;
-&lt;a href=&quot;#popupTester&quot; data-rel=&quot;popup&quot; data-role=&quot;button&quot; data-inline=&quot;true&quot; data-theme=&quot;e&quot;&gt;Pop&lt;/a&gt;
-</code></pre>
-<p>
-	The result:
-		<a href="#popupTester" data-rel="popup" data-role="button" data-inline="true" data-theme="a">Pop</a>
-		<a href="#popupTester" data-rel="popup" data-role="button" data-inline="true" data-theme="b">Pop</a>
-		<a href="#popupTester" data-rel="popup" data-role="button" data-inline="true" data-theme="e">Pop</a>
-</p>
-<p>However, you can override this by setting the theme yourself. You can apply a theme separately to the popup itself and to its contents. To apply a theme to the popup itself, set the <code>data-overlay-theme</code> attribute to one of the swatches. For example, <code>data-overlay-theme="a"</code>. To apply a theme to the contents of the popup, add the swatch of your choice via the <code>data-theme</code> attribute to the popup div. For example, <code>data-theme="a"</code>. Here is an example of an explicitly themed popup:</p>
+<p>The <code>popup</code> plugin provides two theme-related options: <code>data-theme</code> and <code>data-overlay-theme</code>. The <code>data-theme</code> option refers to the theme of the popup itself, whereas <code>data-overlay-theme</code> refers to the theme of the popup's background, which covers the entire window behind the popup.</p>
+<p><code>data-theme</code> will be inherited from the page, and will always have a valid value when the popup opens, unless you explicitly specify <code>data-theme='none'</code>, in which case the popup will have no theme at all.</p>
+<p>The <code>data-overlay-theme</code> will never be set, and the popup's background, although it will always be present when the popup is shown, will be completely transparent, unless you explicitly set, for example, <code>data-overlay-theme='a'</code>. In this case, the background will fade in, partially obscuring the rest of the window, to further direct attention to the popup. Here is an example of an explicitly themed popup:</p>
 
 <pre><code>
 &lt;div data-role=&quotpopup&quot; id=&quot;popupTesterThemed&quot; data-overlay-theme=&quot;e&quot; data-theme=&quot;a&quot;&gt;

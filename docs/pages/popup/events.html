@@ -36,10 +36,21 @@
 				<li><a href="events.html" data-role="button" data-transition="fade" class="ui-btn-active">Events</a></li>
 			</ul>
 			
-			<p>The popup plugin has the following custom event:</p>
+			<p>The popup plugin has the following custom events:</p>
 
 	<dl>
 				
+		<dt><code>opened</code> triggered when a popup is opened</dt>
+		<dd>
+
+			<pre><code>
+$( ".selector" ).popup({
+   closed: function(event, ui) { ... }
+});		
+			</code></pre>
+			<p>This event is triggered when the popup has completely appeared on the screen, meaning that all associated animations have completed.</p>
+		</dd>
+		
 		<dt><code>closed</code> triggered when a popup is closed (by clicking outside of it)</dt>
 		<dd>
 
@@ -48,8 +59,9 @@ $( ".selector" ).popup({
    closed: function(event, ui) { ... }
 });		
 			</code></pre>
+			<p>This event is triggered when the popup has completely disappeared from the screen, meaning that all associated animations have completed.</p>
 		</dd>
-		
+
 
 	</dl>
 	    

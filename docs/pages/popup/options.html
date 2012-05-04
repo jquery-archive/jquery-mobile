@@ -42,9 +42,7 @@
 			<dt><code>overlayTheme</code> <em>string</em></dt>
 			<dd>
 				<p class="default">default: null</p>
-				<p>Sets the color scheme (swatch) for the popup border and background. If initially unset, and the popup is used
-				in association with a link that has <code>data-rel="popup"</code> set, this attribute will be set when the popup
-				is invoked from the link.</p>
+				<p>Sets the color scheme (swatch) for the popup background, which covers the entire window. If not explicitly set, the background will be transparent.</p>
 				<pre><code>$('.selector').popup(<strong>{ overlayTheme: "a" }</strong>);</code></pre>
 				 <p>This option is also exposed as a data attribute: <code>data-overlay-theme=&quot;a&quot;</code></p>
 			</dd>
@@ -52,9 +50,8 @@
 			<dt><code>theme</code> <em>string</em></dt>
 			<dd>
 				<p class="default">default: null</p>
-				<p>Sets the color scheme (swatch) for the popup contents. If initially unset, and the popup is used
-				in association with a link that has <code>data-rel="popup"</code> set, this attribute will be set when the popup
-				is invoked from the link.</p>
+				<p>Sets the color scheme (swatch) for the popup contents. Unless explicitly set to <code>'none'</code>, the
+				theme for the popup will be assigned the first time the popup is shown by inheriting the page theme or, failing that, by the hard-coded value <code>'c'</code>. If you set it to 'none', the popup will not have any theme at all, and will be transparent.</p>
 				<pre><code>$('.selector').popup(<strong>{ theme: "a" }</strong>);</code></pre>
 				 <p>This option is also exposed as a data attribute: <code>data-theme=&quot;a&quot;</code></p>
 			</dd>
@@ -81,21 +78,6 @@
 				<p class="default">default: true</p>
 				<p>Sets whether to draw the popup with rounded corners. This option is also exposed as a data attribute: <code>data-corners=&quot;true&quot;</code></p>
 				<pre><code>$('.selector').popup(<strong>{ corners: true }</strong>);</code></pre>
-			</dd>
-
-			<dt><code>fade</code> <em>boolean</em></dt>
-			<dd>
-				<p class="default">default: true</p>
-				<p>Sets whether the popup's background fades as the popup appears. This option is also exposed as a data attribute: <code>data-fade=&quot;true&quot;</code></p>
-				<pre><code>$('.selector').popup(<strong>{ fade: true }</strong>);</code></pre>
-			</dd>
-
-			<dt><code>transition</code> <em>string</em></dt>
-			<dd>
-				<p class="default">default: $.mobile.defaultDialogTransition</p>
-				<p>Sets the <a href="../page-transitions.html">transition</a> to use as the popup appears. This option is also exposed as a data attribute: <code>data-transition=&quot;pop&quot;</code></p>
-
-				<pre><code>$('.selector').popup(<strong>{ transition: "pop" }</strong>);</code></pre>
 			</dd>
 
 		</dl>	
