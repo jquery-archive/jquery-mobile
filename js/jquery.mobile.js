@@ -22,6 +22,7 @@ define([
 	'./jquery.mobile.navbar',
 	'./jquery.mobile.listview',
 	'./jquery.mobile.listview.filter',
+	'./jquery.mobile.listview.autodividers',
 	'./jquery.mobile.nojs',
 	'./jquery.mobile.forms.checkboxradio',
 	'./jquery.mobile.forms.button',
