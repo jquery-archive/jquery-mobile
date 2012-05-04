@@ -7,6 +7,10 @@
 
 .ui-header .ui-btn,
 .ui-footer .ui-btn { display: inline-block; margin: 0; }
+.ui-header .ui-btn-block,
+.ui-footer .ui-btn-block { display: block; margin: .25em 5px; }
+.ui-header .ui-btn-block.ui-fullsize,
+.ui-footer .ui-btn-block.ui-fullsize { margin: .5em 5px; }
 
 .ui-header .ui-btn-inner,
 .ui-footer .ui-btn-inner,
