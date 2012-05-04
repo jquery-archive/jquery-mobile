@@ -20,6 +20,8 @@
 .ui-btn-icon-notext .ui-btn-inner .ui-icon { margin: 2px 1px 2px 3px; }
 
 .ui-btn-text { position: relative; z-index: 1; width: 100%; }
+/* Fixes #4254 to prevent inherit font-size from .ui-li-divider, .ui-li-static */
+.ui-li-divider .ui-btn-text, .ui-li-static .ui-btn-text { font-size: 16px; }
 .ui-btn-icon-notext .ui-btn-text { position: absolute; left: -9999px; }
 
 .ui-btn-icon-left .ui-btn-inner { padding-left: 40px; }
