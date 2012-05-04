@@ -32,6 +32,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 			.children()
 				.find( ":jqmData(role='header')" )
 					.prepend( headerCloseButton )
+				.end()
 				.children( ":jqmData(role='header'), :jqmData(role='content'), :jqmData(role='footer')" )
 				.first()
 					.addClass( "ui-corner-top" )
