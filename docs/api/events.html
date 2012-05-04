@@ -42,7 +42,11 @@
 		<h2>Touch events</h2>
 		<dl>
 			<dt><code>tap</code></dt>
-			<dd>Triggers after a quick, complete touch event.</dd>
+			<dd><p>Triggers after a quick, complete touch event.</p>
+			  <ul>
+			  	<li><code>tapholdThreshold</code> (default: 750ms) – This value dictates how long the user must hold their tap before the taphold event is fired on the target element.</li>
+			  </ul>
+      </dd>
 
 			<dt><code>taphold</code></dt>
 			<dd>Triggers after a held complete touch event (close to one second).</dd>
