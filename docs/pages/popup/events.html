@@ -28,46 +28,45 @@
 		<form action="#" method="get">
 
 			<h2>Popup</h2>
-			
+
 			<ul data-role="controlgroup" data-type="horizontal" class="localnav">
 				<li><a href="index.html" data-role="button" data-transition="fade">Basics</a></li>
 				<li><a href="options.html" data-role="button" data-transition="fade">Options</a></li>
 				<li><a href="methods.html" data-role="button" data-transition="fade">Methods</a></li>
 				<li><a href="events.html" data-role="button" data-transition="fade" class="ui-btn-active">Events</a></li>
 			</ul>
-			
+
 			<p>The popup plugin has the following custom events:</p>
 
 	<dl>
-				
+
 		<dt><code>opened</code> triggered when a popup is opened</dt>
 		<dd>
 
 			<pre><code>
 $( ".selector" ).popup({
    closed: function(event, ui) { ... }
-});		
+});
 			</code></pre>
 			<p>This event is triggered when the popup has completely appeared on the screen, meaning that all associated animations have completed.</p>
 		</dd>
-		
+
 		<dt><code>closed</code> triggered when a popup is closed (by clicking outside of it)</dt>
 		<dd>
 
 			<pre><code>
 $( ".selector" ).popup({
    closed: function(event, ui) { ... }
-});		
+});
 			</code></pre>
 			<p>This event is triggered when the popup has completely disappeared from the screen, meaning that all associated animations have completed.</p>
 		</dd>
 
-
 	</dl>
 	    
 	</form>
-	</div><!--/content-primary -->		
-	
+	</div><!--/content-primary -->
+
 				<div class="content-secondary">
 
 					<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
@@ -95,16 +94,15 @@ $( ".selector" ).popup({
 
 							</ul>
 					</div>
-				</div>		
+				</div>
 
 </div><!-- /content -->
 
 <div data-role="footer" class="footer-docs" data-theme="c">
 		<p>&copy; 2011 The jQuery Project</p>
 </div>
-	
+
 </div><!-- /page -->
 
 </body>
 </html>
-
