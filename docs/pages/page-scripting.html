@@ -101,7 +101,7 @@ $.mobile.loadPage( "about/us.html" );
 			This is also available via <code>$.fn.jqmEnhanceable</code>. It’s important to note that because of the performance impact incurred by finding a parent element with the <code>data-enhance="false"</code> attribute this feature must be turned on explicitly with <code>$.mobile.ignoreContentEnabled=true</code>. </p>
 			
 			<h2>data-ajax="false" now works on containers</h2>
-			<p>On a related topic, we’ve always offered the ability to disable the AJAX navigation system from hijacking a link or form submit via the <code>data-ajax="false"</code> attribute, but people have asked for a way to apply this exclusion more efficiently to a grouping of links. In 1.1, this is now possible by simply adding, and setting <code>$.mobile.ignoreContentEnabled=true</code>, the <code>data-ajax</code> attribute to a parent container and it will exclude all the parent links or forms from the AJAX navigation system behavior.</p>
+			<p>On a related topic, we’ve always offered the ability to disable the AJAX navigation system from hijacking a link or form submit via the <code>data-ajax="false"</code> attribute, but people have asked for a way to apply this exclusion more efficiently to a grouping of links. In 1.1, this is now possible by simply adding, and setting <code>$.mobile.ignoreContentEnabled=true</code>, the <code>data-ajax</code> attribute to a parent container and it will exclude all the child links or forms from the AJAX navigation system behavior.</p>
 
 
 			<h2>Scrolling to a position within a page</h2>
