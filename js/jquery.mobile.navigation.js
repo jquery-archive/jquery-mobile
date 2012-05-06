@@ -474,12 +474,8 @@ define( [
 	// bind to scrollstop for the first page as "pagechange" won't be fired in that case
 	$window.bind( "scrollstop", delayedSetLastScroll );
 
-	// If transition is defined, check if css 3D transforms are supported, and if not, if a fallback is specified
+	// No-op implementation of transition degradation
 	$.mobile._maybeDegradeTransition = function( transition ) {
-		if( transition && !$.support.cssTransform3d && $.mobile.transitionFallbacks[ transition ] ){
-			transition = $.mobile.transitionFallbacks[ transition ];
-		}
-
 		return transition;
 	};
 

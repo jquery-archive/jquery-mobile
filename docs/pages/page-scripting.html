@@ -96,6 +96,14 @@ $.mobile.loadPage( "about/us.html" );
 			<p>For example, if you had a page where you dynamically appended a new unordered list with <code>data-role=listview</code> attribute after page creation, triggering <code>create</code> on a parent element of that list would transform it into a <a href="http://jquerymobile.com/test/docs/lists/index.html">listview</a> styled widget. If more list items were then programmatically added, calling the listview&#8217;s <code>refresh</code> method would update just those new list items to the enhanced state and leave the existing list items untouched.</p>
 
 
+			<h2>data-enhance="false" data attribute</h2>
+			<p>As of jQuery Mobile 1.0, all the markup within a page is scanned for elements to be enhanced. This is problematic for 3rd party widgets/libraries that don’t want anybody enhancing their markup or attaching behavior. We heard requests for a data-* attribute that can be placed on an element container to tell the framework not to enhance anything inside it for these situations. In 1.1, we’ve added a new <code>data-enhance="false"</code> attribute that can be added to a container to prevent both auto-initialization and link/form hijacking. 
+			This is also available via <code>$.fn.jqmEnhanceable</code>. It’s important to note that because of the performance impact incurred by finding a parent element with the <code>data-enhance="false"</code> attribute this feature must be turned on explicitly with <code>$.mobile.ignoreContentEnabled=true</code>. </p>
+			
+			<h2>data-ajax="false" now works on containers</h2>
+			<p>On a related topic, we’ve always offered the ability to disable the AJAX navigation system from hijacking a link or form submit via the <code>data-ajax="false"</code> attribute, but people have asked for a way to apply this exclusion more efficiently to a grouping of links. In 1.1, this is now possible by simply adding, and setting <code>$.mobile.ignoreContentEnabled=true</code>, the <code>data-ajax</code> attribute to a parent container and it will exclude all the child links or forms from the AJAX navigation system behavior.</p>
+
+
 			<h2>Scrolling to a position within a page</h2>
 			<p>Since we use the URL hash to preserve Back button behavior, using page anchors to jump down to a position on the page isn't supported by using the traditional anchor link (#foo). Use the <a href="../api/methods.html"><code>silentScroll</code></a> method to scroll to a particular Y position without triggering scroll event listeners. You can pass in a <code>yPos</code> arguments to scroll to that Y location. For example:</p>
 <pre><code>
