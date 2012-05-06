@@ -240,7 +240,7 @@ var attachEvents = function() {
 $( document ).bind( "pagecreate create", function( e ){
 
 	$( ":jqmData(role='button'), .ui-bar > a, .ui-header > a, .ui-footer > a, .ui-bar > :jqmData(role='controlgroup') > a", e.target )
-		.not( "button, .ui-btn, :jqmData(role='none'), :jqmData(role='nojs')" )
+		.not( "button, input, .ui-btn, :jqmData(role='none'), :jqmData(role='nojs')" )
 		.buttonMarkup();
 });
 
