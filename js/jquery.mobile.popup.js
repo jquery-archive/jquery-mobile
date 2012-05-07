@@ -53,10 +53,6 @@ define( [ "jquery",
 				_page: thisPage,
 				_ui: ui,
 				_isOpen: false,
-				_pending: null,
-				_calledOpen: false,
-				_calledClose: false,
-				_openPrereqs: 1
 			});
 
 			$.each( this.options, function( key ) {
@@ -156,39 +152,6 @@ define( [ "jquery",
 			}
 		},
 
-		// Call _onHashChange if the hash changes /after/ the popup is on the screen
-		// Note that placing the popup on the screen can itself cause a hashchange,
-		// because the dialogHashKey may need to be added to the URL.
-		_doNavHook: function() {
-			var self = this,
-					activeEntry = $.mobile.urlHistory.getActive(),
-					hasHash = ( activeEntry.url.indexOf( $.mobile.dialogHashKey ) > -1 );
-
-			self._openPrereqs++;
-
-			function realInstallListener() {
-				$( window ).one( "hashchange.popup", function() {
-					self._onHashChange();
-				});
-				self._maybeEmitOpened();
-			}
-
-			if ( hasHash ) {
-				realInstallListener();
-			}
-			else {
-				$( window ).one( "hashchange.popupBinder", function() {
-					realInstallListener();
-				});
-				$.mobile.path.set( activeEntry.url + $.mobile.dialogHashKey );
-				$.mobile.urlHistory.addNew( activeEntry.url + $.mobile.dialogHashKey, activeEntry.transition, activeEntry.title, activeEntry.pageUrl, activeEntry.role );
-			}
-		},
-
-		_undoNavHook: function() {
-			$( window ).unbind( "hashchange.popupBinder hashchange.popup" );
-		},
-
 		_placementCoords: function( x, y ) {
 			// Try and center the overlay over the given coordinates
 			var ret,
@@ -238,7 +201,8 @@ define( [ "jquery",
 					triggerPrereqs--;
 
 					if ( 0 === triggerPrereqs ) {
-						self._maybeEmitOpened();
+						self._isOpen = true;
+						self.element.trigger( "opened" );
 					}
 				},
 				onAnimationComplete = function() {
@@ -286,7 +250,7 @@ define( [ "jquery",
 			}
 		},
 
-		_realClose: function( whenReady ) {
+		_realClose: function() {
 			var self = this,
 				// Count down to triggering "closed" - we have two prerequisits:
 				// 1. The popup window reverse animation completes (onAnimationComplete())
@@ -296,9 +260,6 @@ define( [ "jquery",
 					triggerPrereqs--;
 
 					if ( 0 === triggerPrereqs ) {
-						self._pending = null;
-						self._calledClose = false;
-						whenReady && whenReady();
 						self._isOpen = false;
 						self.element.trigger( "closed" );
 					}
@@ -335,119 +296,229 @@ define( [ "jquery",
 			}
 		},
 
-		// Before emitting "opened", two things must be true:
-		// 1. The animations must be complete
-		// 2. The hash change resulting from adding the dialogHashKey must have passed
-		_maybeEmitOpened: function() {
-			this._openPrereqs = this._openPrereqs - 1;
-
-			if ( 0 === this._openPrereqs ) {
-				this._pending = null;
-				this._openPrereqs = 1;
-				this._calledOpen = false;
-				this._isOpen = true;
-				this.element.trigger( "opened" );
-			}
-		},
-
 		open: function( x, y ) {
-			var self = this;
-
-			if ( !( ( self._isOpen && !self._pending ) || self._calledOpen ) ) {
-				self._calledOpen = true;
-
-				if (self._pending === "closed" ) {
-					self.element.one( "closed", function() { self._continueWithOpen( x, y ); } );
-				}
-				else {
-					self._continueWithOpen( x, y );
-				}
-			}
-		},
-
-		_continueWithOpen: function( x, y ) {
-			this._pending = "opened";
-			this._doOpen( x, y );
-		},
-
-		_doClose: function(cb) {
-			var self = this;
-
-			function continueWithClose() {
-				self._pending = "closed";
-				cb();
-			}
-
-			if ( self._pending === "opened" ) {
-				self.element.one( "opened", function() { continueWithClose(); } );
-			}
-			else {
-				continueWithClose();
-			}
+			$.mobile.popup.popupManager.push( this, arguments );
 		},
 
 		close: function() {
+			$.mobile.popup.popupManager.pop( this );
+		}
+	});
+
+	$.mobile.popup.popupManager = {
+		// array of: {
+		//   open: true/false
+		//   popup: popup
+		//   args: args for _realOpen
+		// }
+		_actionQueue: [],
+		_inProgress: false,
+		_haveNavHook: false,
+		_currentlyOpenPopup: null,
+		_myOwnHashChange: false,
+
+		// Call _onHashChange if the hash changes /after/ the popup is on the screen
+		// Note that placing the popup on the screen can itself cause a hashchange,
+		// because the dialogHashKey may need to be added to the URL.
+		_doNavHook: function( whenHooked ) {
+			var self = this,
+					activeEntry = $.mobile.urlHistory.getActive(),
+					hasHash = ( activeEntry.url.indexOf( $.mobile.dialogHashKey ) > -1 );
+
+			function realInstallListener() {
+				$( window ).one( "hashchange.popup", function() {
+					self._onHashChange();
+				});
+				whenHooked();
+			}
+
+			if ( hasHash ) {
+				realInstallListener();
+			}
+			else {
+				$( window ).one( "hashchange.popupBinder", function() {
+					realInstallListener();
+				});
+				$.mobile.path.set( activeEntry.url + $.mobile.dialogHashKey );
+				$.mobile.urlHistory.addNew( activeEntry.url + $.mobile.dialogHashKey, activeEntry.transition, activeEntry.title, activeEntry.pageUrl, activeEntry.role );
+			}
+		},
+
+		_inArray: function( action ) {
+			var self = this,
+			    idx = -1;
+
+			$.each( self._actionQueue, function( arIdx, value ) {
+				if ( value.open === action.open && value.popup === action.popup ) {
+					idx = arIdx;
+					return false;
+				}
+				return true;
+			});
+
+			return idx;
+		},
+
+		_completeAction: function() {
+			var self = this,
+			    current = self._actionQueue.shift();
+
+			self._currentlyOpenPopup = ( current.open ? current.popup : null );
+
+			if ( self._actionQueue.length === 0 ) {
+				if ( current.open ) {
+					self._inProgress = false;
+				}
+				else
+				if ( self._haveNavHook ) {
+					self._haveNavHook = false;
+					self._myOwnHashChange = true;
+					window.history.back();
+				}
+				else {
+					self._inProgress = false;
+				}
+			}
+			else {
+				self._inProgress = false;
+				self._runSingleAction();
+			}
+		},
+
+		_continueWithAction: function() {
+			var self = this,
+					signal, fn, args;
+
+			if ( self._actionQueue[0].open ) {
+				if ( self._currentlyOpenPopup ) {
+					self._actionQueue.unshift( { open: false, popup: self._currentlyOpenPopup } );
+					self._inProgress = false;
+					self._runSingleAction();
+					return;
+				}
+				signal = "opened";
+				fn = "_realOpen";
+				args = self._actionQueue[0].args;
+			}
+			else {
+				signal = "closed";
+				fn = "_realClose";
+				args = [];
+			}
+
+			self._actionQueue[0].popup.element.one( signal, function() {
+				self._completeAction();
+			});
+			self._actionQueue[0].popup[fn].apply( self._actionQueue[0].popup, args );
+		},
+
+		_runSingleAction: function() {
 			var self = this;
-
-			if ( ( self._isOpen || self._pending ) && !self._calledClose ) {
-				self._calledClose = true;
-
-				if ( self._pending !== "closed" ) {
-					self._doClose(function() { self._closeMe(); } );
+			if ( !self._inProgress ) {
+				self._inProgress = true;
+				if ( self._haveNavHook || !self._actionQueue[0].open ) {
+					self._continueWithAction();
+				}
+				else {
+					self._doNavHook( function() {
+						self._haveNavHook = true;
+						self._continueWithAction();
+					});
 				}
 			}
 		},
 
-////////////////////////////////////////////////////////////////////////////////
-// Code above this line should not need to change depending on popup policy,
-// whereas code below this line should reflect the popup policy. It needs to
-// implement the following functions, because they are called from above:
-//
-// _doOpen( x, y ) - decide when to call _realOpen( x, y ) and/or _doNavHook()
-// _onHashChange() - what to do when the hash changes
-// _closeMe() - what to do when the user calls close()
-////////////////////////////////////////////////////////////////////////////////
+		push: function( popup, args ) {
+			var self = this,
+			    newAction = { open: true, popup: popup, args: args },
+			    idx = self._inArray( newAction );
 
-		_doOpen: function( x, y ) {
-			var self = this;
+			if ( -1 === idx ) {
+				if ( self._currentlyOpenPopup === popup ) {
+					var closeAction = { open: false, popup: popup },
+					    cIdx = self._inArray( closeAction );
 
-			function thereIsNoOtherPopup() {
-				$.mobile.popup.currentPopup = self;
-				self._doNavHook();
-				self._realOpen( x, y );
-			}
-
-			if ( $.mobile.popup.currentPopup ) {
-				$.mobile.popup.currentPopup.element.one( "closed", function() {
-					if ( $.mobile.popup.currentPopup ) {
-						self._continueWithOpen( x, y );
+					if ( cIdx !== -1 ) {
+						if ( 0 === cIdx && self._inProgress ) {
+							self._actionQueue.push( newAction );
+						}
+						else {
+							self._actionQueue.splice( cIdx, 1 );
+						}
+						self._runSingleAction();
 					}
-					else {
-						thereIsNoOtherPopup();
-					}
-				});
-				$.mobile.popup.currentPopup.close();
-			}
-			else {
-				thereIsNoOtherPopup();
+				}
+				else {
+					self._actionQueue.push( newAction );
+					self._runSingleAction();
+				}
 			}
 		},
 
-		_closeMe: function() {
-			window.history.back();
+		pop: function( popup ) {
+			var self = this,
+			    newAction = { open: false, popup: popup },
+					idx = self._inArray( newAction );
+
+			if ( -1 === idx ) {
+				var openAction = { open: true, popup: popup },
+				    oIdx = self._inArray( openAction );
+
+				if ( oIdx !== -1 ) {
+					if ( 0 === oIdx ) {
+						self._actionQueue.splice( 1, 0, newAction );
+						self._runSingleAction();
+					}
+					else {
+						self._actionQueue.splice( oIdx, 1 );
+					}
+				}
+				else
+				if ( self._currentlyOpenPopup === popup ) {
+					if ( self._actionQueue.length === 0 ) {
+						self._actionQueue.push( newAction );
+						self._runSingleAction();
+					}
+					else {
+						self._actionQueue.splice( ( self._inProgress ? 1 : 0 ), 0, newAction );
+						self._runSingleAction();
+					}
+				}
+			}
 		},
 
 		_onHashChange: function() {
 			var self = this;
-			self._doClose( function() {
-				self._realClose( function() {
-					$.mobile.popup.currentPopup = null;
-				});
-			});
-		}
-	});
 
-	$.mobile.popup.currentPopup = null;
+			self._haveNavHook = false;
+			if ( self._myOwnHashChange ) {
+				self._myOwnHashChange = false;
+				self._inProgress = false;
+				if ( self._actionQueue.length > 0 ) {
+					self._runSingleAction() ;
+				}
+			}
+			else {
+				var popupToClose = null;
+				if ( self._inProgress ) {
+					self._actionQueue = [ self._actionQueue[0] ];
+					if ( self._actionQueue[0].open ) {
+						popupToClose = self._actionQueue[0].popup;
+					}
+				}
+				else {
+					self._actionQueue = [];
+					if ( self._currentlyOpenPopup ) {
+						popupToClose = self._currentlyOpenPopup;
+					}
+				}
+				if ( popupToClose ) {
+					self._actionQueue.push( { open: false, popup: popupToClose } );
+					self._runSingleAction();
+				}
+			}
+		}
+	}
 
 	$.mobile.popup.bindPopupToButton = function( btn, popup ) {
 		if ( btn.length === 0 || popup.length === 0 ) return;
