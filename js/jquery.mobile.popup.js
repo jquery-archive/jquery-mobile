@@ -317,6 +317,17 @@ define( [ "jquery",
 		_currentlyOpenPopup: null,
 		_myOwnHashChange: false,
 
+//		_dumpQueue: function( prefix ) {
+//			var self = this,
+//			    str = "[ ";
+//
+//			$.each( self._actionQueue, function( idx, value ) {
+//				str += "{ " + idx + ": " + ( value.open ? "open" : "close" ) + " " + value.popup.element.attr( "id" ) + " }";
+//			});
+//			str += " ]";
+//			console.log( prefix + str );
+//		},
+
 		// Call _onHashChange if the hash changes /after/ the popup is on the screen
 		// Note that placing the popup on the screen can itself cause a hashchange,
 		// because the dialogHashKey may need to be added to the URL.
@@ -365,22 +376,29 @@ define( [ "jquery",
 
 			self._currentlyOpenPopup = ( current.open ? current.popup : null );
 
+//			console.log( "_completeAction: removed from queue: [ " + ( current.open ? "open" : "close" ) + " " + current.popup.element.attr( "id" ) + " ]" );
+//			self._dumpQueue( "_completeAction: queue now looks like: " );
 			if ( self._actionQueue.length === 0 ) {
+//				console.log( "_completeAction: queue has become empty." );
 				if ( current.open ) {
 					self._inProgress = false;
+//					console.log( "_completeAction: setting _inProgress: " + self._inProgress + " and going quiescent" );
 				}
 				else
 				if ( self._haveNavHook ) {
+//					console.log( "_completeAction: releasing nav hook" );
 					self._haveNavHook = false;
 					self._myOwnHashChange = true;
 					window.history.back();
 				}
 				else {
+//					console.log( "_completeAction: neither open nor navhook: setting _inProgress: " + self._inProgress + " and going quiescent" );
 					self._inProgress = false;
 				}
 			}
 			else {
 				self._inProgress = false;
+//				console.log( "_completeAction: queue not empty. Setting _inProgress: " + self._inProgress + " and proceeding to next action" );
 				self._runSingleAction();
 			}
 		},
@@ -391,7 +409,9 @@ define( [ "jquery",
 
 			if ( self._actionQueue[0].open ) {
 				if ( self._currentlyOpenPopup ) {
+//					console.log( "_continueWithAction: " + self._currentlyOpenPopup.element.attr( "id" ) + " is open, so prepending close action" );
 					self._actionQueue.unshift( { open: false, popup: self._currentlyOpenPopup } );
+//					self._dumpQueue( "_completeAction: queue now looks like: " );
 					self._inProgress = false;
 					self._runSingleAction();
 					return;
@@ -406,21 +426,29 @@ define( [ "jquery",
 				args = [];
 			}
 
+//			console.log( "_continueWithAction: signal: " + signal + ", fn: " + fn );
 			self._actionQueue[0].popup.element.one( signal, function() {
+//				console.log( "_continueWithAction: received signal " + signal + " from " + self._actionQueue[0].popup.element.attr( "id" ) );
 				self._completeAction();
 			});
+//			console.log( "_continueWithAction: calling: " + fn + " on " + self._actionQueue[0].popup.element.attr( "id" ) );
 			self._actionQueue[0].popup[fn].apply( self._actionQueue[0].popup, args );
 		},
 
 		_runSingleAction: function() {
 			var self = this;
+//			console.log( "_runSingleAction: _inProgress: " + self._inProgress );
 			if ( !self._inProgress ) {
 				self._inProgress = true;
+//				console.log( "_runSingleAction: setting _inProgress: " + self._inProgress );
 				if ( self._haveNavHook || !self._actionQueue[0].open ) {
+//					console.log( "_runSingleAction: _haveNavHook (" + self._haveNavHook + ") or I'm doing a close (" + (!self._actionQueue[0].open) + "), so continuing" );
 					self._continueWithAction();
 				}
 				else {
+//					console.log( "_runSingleAction: don't _haveNavHook, so acquiring nav hook" );
 					self._doNavHook( function() {
+//						console.log( "_runSingleAction: nav hook acquired, continuing" );
 						self._haveNavHook = true;
 						self._continueWithAction();
 					});
@@ -433,26 +461,41 @@ define( [ "jquery",
 			    newAction = { open: true, popup: popup, args: args },
 			    idx = self._inArray( newAction );
 
+//			console.log( "push: [ open " + popup.element.attr( "id" ) + " ] ... " );
 			if ( -1 === idx ) {
+//				console.log( "push: ... not in array ... " );
 				if ( self._currentlyOpenPopup === popup ) {
 					var closeAction = { open: false, popup: popup },
 					    cIdx = self._inArray( closeAction );
 
+//					console.log( "push: ... but it is the current popup - it will be closed at index " + cIdx );
+
 					if ( cIdx !== -1 ) {
 						if ( 0 === cIdx && self._inProgress ) {
+//							console.log( "push: close is already in progress, so pushing action" );
 							self._actionQueue.push( newAction );
 						}
 						else {
+//							console.log( "push: close not yet in progress, so removing from queue" );
 							self._actionQueue.splice( cIdx, 1 );
 						}
+//						self._dumpQueue( "push: queue now looks like: " );
 						self._runSingleAction();
 					}
+//					else {
+//						console.log( "push: since it will not be closed, doing nothing" );
+//					}
 				}
 				else {
+//					console.log( "push: ... so pushing and running action" );
 					self._actionQueue.push( newAction );
+//					self._dumpQueue( "push: queue now looks like: " );
 					self._runSingleAction();
 				}
 			}
+//			else {
+//				console.log( "push: ... already in array - doing nothing" );
+//			}
 		},
 
 		pop: function( popup ) {
@@ -460,60 +503,84 @@ define( [ "jquery",
 			    newAction = { open: false, popup: popup },
 					idx = self._inArray( newAction );
 
+//			console.log( "pop: [ close " + popup.element.attr( "id" ) + " ] ... " );
 			if ( -1 === idx ) {
+//				console.log( "pop: ... not in array - checking open" );
+
 				var openAction = { open: true, popup: popup },
 				    oIdx = self._inArray( openAction );
 
+//				console.log( "pop: [ open " + popup.element.attr( "id" ) + " ] ... " );
+
 				if ( oIdx !== -1 ) {
+//					console.log( "pop: ... in array ... " );
 					if ( 0 === oIdx ) {
+//						console.log( "pop: ... at the front - inserting close right after and running action" );
 						self._actionQueue.splice( 1, 0, newAction );
+//						self._dumpQueue( "pop: queue now looks like: " );
 						self._runSingleAction();
 					}
 					else {
+//						console.log( "pop: ... at " + oIdx + " - removing from array" );
 						self._actionQueue.splice( oIdx, 1 );
 					}
 				}
 				else
 				if ( self._currentlyOpenPopup === popup ) {
+//					console.log( "pop: ... not in array, but current ... " );
 					if ( self._actionQueue.length === 0 ) {
+//						console.log( " ... and the array is empty, so pushing close" );
 						self._actionQueue.push( newAction );
+//						self._dumpQueue( "push: queue now looks like: " );
 						self._runSingleAction();
 					}
 					else {
+//						console.log( " ... and the array is not empty, so pushing to index " + ( self._inProgress ? 1 : 0 ) );
 						self._actionQueue.splice( ( self._inProgress ? 1 : 0 ), 0, newAction );
 						self._runSingleAction();
 					}
 				}
 			}
+//			else {
+//				console.log( "pop: ... in array - doing nothing" );
+//			}
 		},
 
 		_onHashChange: function() {
 			var self = this;
 
+//			console.log( "_onHashChange: I no longer have a nav hook" );
 			self._haveNavHook = false;
 			if ( self._myOwnHashChange ) {
+//				console.log( "_onHashChange: my own hash change" );
 				self._myOwnHashChange = false;
 				self._inProgress = false;
 				if ( self._actionQueue.length > 0 ) {
+//					console.log( "_onHashChange: array not empty - running single action" );
 					self._runSingleAction() ;
 				}
 			}
 			else {
+//				console.log( "_onHashChange: some other hash change" );
 				var popupToClose = null;
 				if ( self._inProgress ) {
+//					console.log( "_onHashChange: there's a " + ( self._actionQueue[0].open ? "open" : "close" ) + " in progress" );
 					self._actionQueue = [ self._actionQueue[0] ];
 					if ( self._actionQueue[0].open ) {
 						popupToClose = self._actionQueue[0].popup;
 					}
 				}
 				else {
+//					console.log( "_onHashChange: there's nothing in progress" );
 					self._actionQueue = [];
 					if ( self._currentlyOpenPopup ) {
 						popupToClose = self._currentlyOpenPopup;
 					}
 				}
 				if ( popupToClose ) {
+//					console.log( "_onHashChange: need to close " + popupToClose.element.attr( "id" ) );
 					self._actionQueue.push( { open: false, popup: popupToClose } );
+//					self._dumpQueue( "_onHashChange: queue now looks like: " );
 					self._runSingleAction();
 				}
 			}
