@@ -45,7 +45,8 @@ define( [
 				"id": menuId,
 				"role": "listbox",
 				"aria-labelledby": buttonId
-			}).attr( "data-" + $.mobile.ns + "theme", widget.options.theme ).appendTo( listbox ),
+			}).attr( "data-" + $.mobile.ns + "theme", widget.options.theme )
+				.attr ( "data-" + $.mobile.ns + "autodividers", widget.options.autodividers ).appendTo( listbox ),
 
 			header = $( "<div>", {
 				"class": "ui-header ui-bar-" + widget.options.theme
