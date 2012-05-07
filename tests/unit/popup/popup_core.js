@@ -50,38 +50,51 @@
 			if ( events ) {
 				var newResult = {},
 				    nEventsDone = 0,
-				    nEvents = 0;
+				    nEvents = 0,
+				    // set a failsafe timer in case one of the events never happens
+				    warnTimer = setTimeout( function() {
+				    	$.each( events, function( key, event ) {
+				    		if ( newResult[ key ] === undefined ) {
+				   				// clean up the unused handler
+				    			event.src.unbind( event.event );
+				    			newResult[ key ] = $.extend( {}, event, { timedOut: true } );
+				    		}
+				    	});
 
-				// set a failsafe timer in case one of the events never happens
-				var warnTimer = setTimeout( function() {
-					$.each( events, function( key, event ) {
-						if ( newResult[ key ] === undefined ) {
-							// clean up the unused handler
-							event.src.unbind( event.event );
-							newResult[ key ] = $.extend( {}, event, { timedOut: true } );
-						}
-					});
-					// Move on to the next step
-					self.detailedEventCascade( seq, newResult );
-				}, 2000);
+				    	// Move on to the next step
+				    	self.detailedEventCascade( seq, newResult );
+				    }, 2000);
+
+				function recordResult( key, event, result ) {
+					// Record the result
+					newResult[ key ] = $.extend( {}, event, result );
+					// Increment the number of received responses
+					nEventsDone++;
+					if ( nEventsDone === nEvents ) {
+						// clear the timeout and move on to the next step when all events have been received
+						clearTimeout( warnTimer );
+						setTimeout( function() {
+							self.detailedEventCascade( seq, newResult );
+						}, 0);
+					}
+				}
 
 				$.each( events, function( key, event ) {
 					// Count the events so that we may know how many responses to expect
 					nEvents++;
-					// Hook up to the event
-					event.src.one( event.event, function() {
-						// Record the result
-						newResult[ key ] = $.extend( {}, event, { timedOut: false, idx: nEventsDone } );
-						// Increment the number of received responses
-						nEventsDone++;
-						if ( nEventsDone === nEvents ) {
-							// clear the timeout and move on to the next step when all events have been received
-							clearTimeout( warnTimer );
-							setTimeout( function() {
-								self.detailedEventCascade( seq, newResult );
-							}, 0);
-						}
-					});
+					// If it's an event
+					if ( event.src ) {
+						// Hook up to the event
+						event.src.one( event.event, function() {
+							recordResult( key, event, { timedOut: false, idx: nEventsDone } );
+						});
+					}
+					// If it's a timeout
+					else {
+						setTimeout( function() {
+							recordResult( key, event, { timedOut: true, idx: -1 } );
+						}, event.length );
+					}
 				});
 			}
 
@@ -123,7 +136,7 @@
 			setTimeout(function() {
 				ok( !$( "#test-popup" ).parent().hasClass( "in" ), "Closed popup container does not have class 'in'" );
 				ok( $( "#test-popup" ).parent().prev().hasClass( "ui-screen-hidden" ), "Closed popup screen is hidden" );
-				start();
+				setTimeout( function() { start(); }, 300 );
 			}, 1000);
 		}, 1000);
 	});
@@ -161,7 +174,7 @@
 				ok( !result.hashchange.timedOut, "Closing a popup from a non-dialogHashKey location causes a hashchange event" );
 				ok( location.href === baseUrl, "location.href has been restored after the popup" );
 				ok( $.mobile.urlHistory.activeIndex === activeIndex, "$.mobile.urlHistory has been restored correctly" );
-				start();
+				setTimeout( function() { start(); }, 300 );
 			}
 		]);
 	});
@@ -189,7 +202,8 @@
 
 			{
 				closed: { src: $( "#test-popup" ), event: "closed.reuseStep2" },
-				hashchange: { src: $( window ), event: "hashchange.reuseStep2" }
+				hashchange: { src: $( window ), event: "hashchange.reuseStep2" },
+				timeout: { src: null, length: 300 }
 			},
 
 			function( result ) {
@@ -223,7 +237,7 @@
 
 			function( result ) {
 				ok( !result.hashchange.timedOut, "Closing a popup from a dialogHashKey location causes a hashchange" );
-				start();
+				setTimeout( function() { start(); }, 300 );
 			}
 		]);
 	});
@@ -293,7 +307,7 @@
 				ok( identical, "Going back returns $.mobile.urlHistory to its initial value" );
 				ok( $.mobile.urlHistory.activeIndex === $.mobile.urlHistory.stack.length - 3, "Going back leaves exactly two entries ahead in $.mobile.urlHistory" );
 
-				start();
+				setTimeout( function() { start(); }, 300 );
 			},
 
 		]);
@@ -322,7 +336,7 @@
 				ok( !( result.hashchange1.timedOut || result.hashchange1.timedOut ), "Two 'hashchange' signals arrived" );
 				ok( location.href === initialHRef, "Location did not change" );
 				ok( result.opened.idx < result.closed.idx, "'opened' signal arrived before 'closed' signal" );
-				start();
+				setTimeout( function() { start(); }, 300 );
 			}
 		]);
 	});
