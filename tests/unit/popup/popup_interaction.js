@@ -20,15 +20,14 @@
 			},
 
 			{
-				hashchange1: { src: $( window ), event: "hashchange.openAnotherStep2a" },
+				hashchange: { src: $( window ), event: "hashchange.openAnotherStep2" },
 				closed: { src: $( "#test-popup" ), event: "closed.openAnotherStep2" },
-				hashchange2: { src: $( window ), event: "hashchange.openAnotherStep2b" },
 				opened: { src: $( "#test-popup-2" ), event: "opened.openAnotherStep2" }
 			},
 
 			function( result ) {
 				ok( result.closed.idx < result.opened.idx && result.closed.idx !== -1, "'closed' signal arrived before 'opened' signal" );
-				ok( !( result.hashchange1.timedOut || result.hashchange2.timedOut ), "there were two hashchange events" );
+				ok( result.hashchange.timedOut, "There were no hashchange events" );
 				$( "#test-popup-2" ).popup( "close" );
 			},
 

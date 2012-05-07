@@ -328,6 +328,7 @@
 				closed: { src: $( "#test-popup" ), event: "closed.openCloseQuickStep1" },
 				hashchange1: { src: $( window ), event: "hashchange.openCloseQuickStep1a" },
 				hashchange2: { src: $( window ), event: "hashchange.openCloseQuickStep1b" },
+				timeout: { src: null, length: 600 }
 			},
 
 			function( result ) {
@@ -364,14 +365,13 @@
 			{
 				opened: { src: $( "#test-popup" ), event: "opened.closeOpenQuickStep2" },
 				closed: { src: $( "#test-popup" ), event: "closed.closeOpenQuickStep2" },
-				hashchange1: { src: $( window ), event: "hashchange.closeOpenQuickStep2a" },
-				hashchange2: { src: $( window ), event: "hashchange.closeOpenQuickStep2b" },
+				hashchange: { src: $( window ), event: "hashchange.closeOpenQuickStep2" }
 			},
 
 			function( result ) {
 				ok( !result.opened.timedOut, "'opened' signal arrived" );
 				ok( !result.closed.timedOut, "'closed' signal arrived" );
-				ok( !( result.hashchange1.timedOut || result.hashchange1.timedOut ), "Two 'hashchange' signals arrived" );
+				ok( result.hashchange.timedOut, "No 'hashchange' signals arrived" );
 				ok( location.href === initialHRef, "Location did not change" );
 				ok( result.closed.idx < result.opened.idx, "'closed' signal arrived before 'opened' signal" );
 				$( "#test-popup" ).popup( "close" );
