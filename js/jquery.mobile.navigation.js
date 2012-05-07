@@ -1259,7 +1259,8 @@ define( [
 				if ( path.parseUrl( link.getAttribute( "href" ) || "#" ).hash !== "#" ) {
 					removeActiveLinkClass( true );
 					$activeClickedLink = $( link ).closest( ".ui-btn" ).not( ".ui-disabled" );
-					$activeClickedLink.addClass( $.mobile.activeBtnClass );
+					var theme = ( $( link ).jqmData( "theme" ) || $.mobile.getInheritedTheme( link, "c" ) );
+					$activeClickedLink.addClass( $.mobile.activeBtnClass + "-" +  theme );
 					$( "." + $.mobile.activePageClass + " .ui-btn" ).not( link ).blur();
 
 					// By caching the href value to data and switching the href to a #, we can avoid address bar showing in iOS. The click handler resets the href during its initial steps if this data is present
