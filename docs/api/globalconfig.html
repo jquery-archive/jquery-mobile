@@ -112,14 +112,38 @@ $(document).bind("mobileinit", function(){
 	<dt><code>linkBindingEnabled</code> <em>boolean</em>, default: true</dt>
 	<dd>jQuery Mobile will automatically bind the clicks on anchor tags in your document. Setting this options to false will prevent all anchor click handling <em>including</em> the addition of active button state and alternate link bluring. This should only be used when attempting to delegate the click management to another library or custom code.</dd>
 
+	<dt><code>loading.text</code> <em>string</em>, default: "loading"</dt>
+	<dd>
+    Set the text that appears when a page is loading. If set to false, the message will not appear at all. <b>Note</b> the actual default is <code>undefined</code> but for the operation of the <code>$.mobile.showPageLoadingMsg()</code> the default is the value of <code>$.mobile.loadingMessage</code> while it's deprecated.
+  </dd>
+
+	<dt><code>loading.textVisible</code> <em>boolean</em>, default: false</dt>
+	<dd>
+    Whether the text should be visible when a loading message is shown. The text is always visible for loading errors. <b>Note</b> the actual default is <code>undefined</code> but for the operation of the <code>$.mobile.showPageLoadingMsg()</code> the default is the value of <code>$.mobile.loadingMessageTextVisible</code> while it's deprecated.
+  </dd>
+
+	<dt><code>loading.theme</code> <em>string</em>, default: "a"</dt>
+	<dd>
+    The theme that the loading message box uses when text is visible. <b>Note</b> the actual default is <code>undefined</code> but for the operation of the <code>$.mobile.showPageLoadingMsg()</code> the default is the value of <code>$.mobile.loadingMessageTheme</code> while it's deprecated.
+  </dd>
+
 	<dt><code>loadingMessage</code> <em>string</em>, default: "loading"</dt>
-	<dd>Set the text that appears when a page is loading. If set to false, the message will not appear at all.</dd>
+	<dd>
+    Set the text that appears when a page is loading. If set to false, the message will not appear at all.
+    <p class="ui-bar-e">Deprecated in 1.2 - use <code>$.mobile.loading.text</code> instead</p>
+  </dd>
 
 	<dt><code>loadingMessageTextVisible</code> <em>boolean</em>, default: false</dt>
-	<dd>Whether the text should be visible when a loading message is shown. The text is always visible for loading errors.</dd>
+	<dd>
+    Whether the text should be visible when a loading message is shown. The text is always visible for loading errors.
+    <p class="ui-bar-e">Deprecated in 1.2 - use <code>$.mobile.loading.textVisible</code> instead</p>
+  </dd>
 
 	<dt><code>loadingMessageTheme</code> <em>string</em>, default: "a"</dt>
-	<dd>The theme that the loading message box uses when text is visible.</dd>
+	<dd>
+    The theme that the loading message box uses when text is visible.
+    <p class="ui-bar-e">Deprecated in 1.2 - use <code>$.mobile.loading.theme</code> instead</p>
+  </dd>
 
 	<dt><code>minScrollBack</code> <em>string</em>, default: 250</dt>
 	<dd>Minimum scroll distance that will be remembered when returning to a page.</dd>
