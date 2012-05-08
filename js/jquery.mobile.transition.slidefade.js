@@ -15,7 +15,7 @@ define( [ "jquery", "./jquery.mobile.transition" ], function( $ ) {
 // Set the slide transition's fallback to "fade"
 $.mobile.transitionFallbacks.slidefade = "fade";
 
-})( jQuery, this );
+})( jQuery, window );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
 //>>excludeEnd("jqmBuildExclude");

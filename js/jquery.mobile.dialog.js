@@ -94,7 +94,7 @@ $( document ).delegate( $.mobile.dialog.prototype.options.initSelector, "pagecre
 	$.mobile.dialog.prototype.enhance( this );
 });
 
-})( jQuery, this );
+})( jQuery, window );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
 //>>excludeEnd("jqmBuildExclude");
