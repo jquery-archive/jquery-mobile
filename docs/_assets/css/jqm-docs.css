@@ -270,6 +270,10 @@ dd h4 { margin:15px 0 0 0; }
 		padding: 0;
 		background: url(../images/px-ccc.gif) 50% 0 repeat-y;
 	}
+	.ui-popup-container .ui-content {
+		padding: 15px;
+		background-image: none;
+	}
 	.type-interior .ui-content {
 		background-position: 45%;
 		overflow: hidden;
