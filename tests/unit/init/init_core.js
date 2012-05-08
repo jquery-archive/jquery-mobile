@@ -159,6 +159,7 @@
 
 		test( "hidePageLoadingMsg doesn't add the dialog to the page when loading message is false", function(){
 			$.mobile.loadingMessage = true;
+			$.mobile.showPageLoadingMsg();
 			$.mobile.hidePageLoadingMsg();
 
 			same($(".ui-loading").length, 0, "page should not be in the loading state");
@@ -196,7 +197,17 @@
 
 		test( "page loading should contain custom loading message when used in param object", function() {
 			$.mobile.showPageLoadingMsg({ text: "bak" });
-			same($(".ui-loader h1").text(), "bak");
+			same($(".ui-loader h1").text(), "bak", "loader has custom message 'bak'");
+		});
+
+		test( "page loading should contain different theme when used in param object", function() {
+			$.mobile.showPageLoadingMsg({ theme: "l" });
+			ok($(".ui-loader").hasClass( "ui-body-l"), "loader has theme l");
+		});
+
+		test( "page loading should contain new html when provided", function() {
+			$.mobile.showPageLoadingMsg({ html: "<div class='foo'>foo</div>" });
+			same($(".ui-loader > div.foo").length, 1, "loader has a custom html");
 		});
 
 		// NOTE the next two tests work on timeouts that assume a page will be
