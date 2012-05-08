@@ -48,6 +48,13 @@
 		<div data-role="popup" id="popupBasic">
 			<p>This is a completely basic popup, no options set.</p>
 		</div>
+		
+			<a href="#basic" data-rel="popup" data-role="button">Default popup</a>
+		    <div id="basic" data-role="popup" class="ui-content">
+		      <p>I am a default popup</p>
+		    </div>
+
+
 
 		<p>Now on to some cool examples:</p>
 		<a href="#popupInfo" data-rel="popup" data-role="button" data-inline="true">Tooltip</a>
@@ -168,28 +175,26 @@ $('#myPopupDiv').popup();
 <p>The <code>data-overlay-theme</code> will never be set, and the popup's background, although it will always be present when the popup is shown, will be completely transparent, unless you explicitly set, for example, <code>data-overlay-theme='a'</code>. In this case, the background will fade in, partially obscuring the rest of the window, to further direct attention to the popup. Here is an example of an explicitly themed popup:</p>
 
 <pre><code>
-&lt;div data-role=&quotpopup&quot; id=&quot;popupTesterThemed&quot; data-overlay-theme=&quot;e&quot; data-theme=&quot;a&quot;&gt;
-	&lt;table&gt;
-		&lt;tr&gt;&lt;td&gt;Mary&lt;/td&gt;&lt;td&gt;had-a&lt;/td&gt;&lt;td&gt;little&lt;/td&gt;&lt;td&gt;lamb&lt;/td&gt;&lt;/tr&gt;
-		&lt;tr&gt;&lt;td&gt;And&lt;/td&gt;&lt;td&gt;it-was&lt;/td&gt;&lt;td&gt;white-as&lt;/td&gt;&lt;td&gt;snow&lt;/td&gt;&lt;/tr&gt;
-		&lt;tr&gt;&lt;td&gt;Everywhere&lt;/td&gt;&lt;td&gt;that&lt;/td&gt;&lt;td&gt;Mary&lt;/td&gt;&lt;td&gt;went&lt;/td&gt;&lt;/tr&gt;
-		&lt;tr&gt;&lt;td&gt;It&lt;/td&gt;&lt;td&gt;was&lt;/td&gt;&lt;td&gt;sure&lt;/td&gt;&lt;td&gt;to-go&lt;/td&gt;&lt;/tr&gt;
-	&lt;/table&gt;
+&lt;a href=&quot;#both&quot; data-rel=&quot;popup&quot; data-role=&quot;button&quot;&gt;Theme + overlay set&lt;/a&gt;
+&lt;div id=&quot;both&quot; data-role=&quot;popup&quot; <strong>data-overlay-theme=&quot;a&quot; data-theme=&quot;e&quot;</strong> class=&quot;ui-content&quot;&gt;
+  &lt;p&gt;I have &lt;code&gt;data-theme=&quot;a&quot;&lt;/code&gt; set on me&lt;/p&gt;
 &lt;/div&gt;
-&lt;a href=&quot;#popupTesterThemed&quot; data-rel=&quot;popup&quot; data-role=&quot;button&quot; data-inline=&quot;true&quot;&gt;Pop&lt;/a&gt;
 </code></pre>
 
-<p> This is the result:</p>
+<a href="#theme" data-rel="popup" data-role="button">Theme set to A</a>
+<div id="theme" data-role="popup" data-theme="a" class="ui-content">
+  <p>I have <code>data-theme="a"</code> set on me</p>
+</div>
 
-		<div data-role="popup" id="popupTesterThemed" data-overlay-theme="e" data-theme="a">
-			<table>
-				<tr><td>Mary</td><td>had-a</td><td>little</td><td>lamb</td></tr>
-				<tr><td>And</td><td>it-was</td><td>white-as</td><td>snow</td></tr>
-				<tr><td>Everywhere</td><td>that</td><td>Mary</td><td>went</td></tr>
-				<tr><td>It</td><td>was</td><td>sure</td><td>to-go</td></tr>
-			</table>
-		</div>
-		<a href="#popupTesterThemed" data-rel="popup" data-role="button" data-inline="true">Pop</a>
+<a href="#overlay" data-rel="popup" data-role="button">Overlay set to A</a>
+<div id="overlay" data-role="popup" data-overlay-theme="a" class="ui-content">
+  <p>I have a <code>data-overlay-theme="a"</code> set on me</p>
+</div>
+
+<a href="#both" data-rel="popup" data-role="button">Theme + overlay set</a>
+<div id="both" data-role="popup" data-overlay-theme="a" data-theme="e" class="ui-content">
+  <p>I have <code>data-theme="a"</code> set on me</p>
+</div>
 
 	</div><!--/content-primary -->
 
