@@ -150,79 +150,61 @@
 			same($("#bar").jqmData('url'), "bak");
 		});
 
-		asyncTest( "showPageLoadingMsg doesn't add the dialog to the page when loading message is false", function(){
-			expect( 1 );
+		test( "showPageLoadingMsg doesn't add the dialog to the page when loading message is false", function(){
 			$.mobile.loadingMessage = false;
 			$.mobile.showPageLoadingMsg();
 
-			setTimeout(function(){
-				ok(!$(".ui-loader").length, "no ui-loader element");
-				start();
-			}, 500);
+			ok(!$(".ui-loader").length, "no ui-loader element");
 		});
 
-		asyncTest( "hidePageLoadingMsg doesn't add the dialog to the page when loading message is false", function(){
-			expect( 1 );
+		test( "hidePageLoadingMsg doesn't add the dialog to the page when loading message is false", function(){
 			$.mobile.loadingMessage = true;
 			$.mobile.hidePageLoadingMsg();
 
-			setTimeout(function(){
-				same($(".ui-loading").length, 0, "page should not be in the loading state");
-				start();
-			}, 500);
+			same($(".ui-loading").length, 0, "page should not be in the loading state");
 		});
 
-		asyncTest( "showPageLoadingMsg adds the dialog to the page when loadingMessage is true", function(){
-			expect( 1 );
+		test( "showPageLoadingMsg adds the dialog to the page when loadingMessage is true", function(){
 			$.mobile.loadingMessage = true;
 			$.mobile.showPageLoadingMsg();
 
-			setTimeout(function(){
-				same($(".ui-loading").length, 1, "page should be in the loading state");
-				start();
-			}, 500);
+			same($(".ui-loading").length, 1, "page should be in the loading state");
 		});
 
-		asyncTest( "page loading should contain default loading message", function(){
-			expect( 1 );
+		test( "page loading should contain default loading message", function(){
 			reloadCoreNSandInit();
 			$.mobile.showPageLoadingMsg();
 
-			setTimeout(function(){
-				same($(".ui-loader h1").text(), "loading");
-				start();
-			}, 500);
+			same($(".ui-loader h1").text(), "loading");
 		});
 
-		asyncTest( "page loading should contain custom loading message", function(){
+		test( "page loading should contain custom loading message", function(){
 			$.mobile.loadingMessage = "foo";
 			$.testHelper.reloadLib(libName);
 			$.mobile.showPageLoadingMsg();
 
-			setTimeout(function(){
-				same($(".ui-loader h1").text(), "foo");
-				start();
-			}, 500);
+			same($(".ui-loader h1").text(), "foo");
 		});
 
-		asyncTest( "page loading should contain custom loading message when set during runtime", function(){
+		test( "page loading should contain custom loading message when set at runtime", function(){
 			$.mobile.loadingMessage = "bar";
 			$.mobile.showPageLoadingMsg();
 
-			setTimeout(function(){
-				same($(".ui-loader h1").text(), "bar");
-				start();
-			}, 500);
+			same($(".ui-loader h1").text(), "bar");
 		});
 
 
+		test( "page loading should contain custom loading message when used in param object", function() {
+			$.mobile.showPageLoadingMsg({ text: "bak" });
+			same($(".ui-loader h1").text(), "bak");
+		});
 
-		// NOTE: the next two tests work on timeouts that assume a page will be created within 2 seconds
-		// it'd be great to get these using a more reliable callback or event
-
+		// NOTE the next two tests work on timeouts that assume a page will be
+		// created within 2 seconds it'd be great to get these using a more
+		// reliable callback or event
 		asyncTest( "page does auto-initialize at domready when autoinitialize option is true (default) ", function(){
 
-			$( "<div />", { "data-nstest-role": "page", "id": "autoinit-on" } ).prependTo( "body" )
+			$( "<div />", { "data-nstest-role": "page", "id": "autoinit-on" } ).prependTo( "body" );
 
 			$(document).one("mobileinit", function(){
 				$.mobile.autoInitializePage = true;
@@ -245,7 +227,7 @@
 				$.mobile.autoInitializePage = false;
 			});
 
-			$( "<div />", { "data-nstest-role": "page", "id": "autoinit-off" } ).prependTo( "body" )
+			$( "<div />", { "data-nstest-role": "page", "id": "autoinit-off" } ).prependTo( "body" );
 
 			location.hash = "";
 
@@ -264,8 +246,5 @@
 				start();
 			}, 2000);
 		});
-
-
-
 	});
 })(jQuery);
