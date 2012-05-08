@@ -475,7 +475,7 @@ define( [
 	$window.bind( "scrollstop", delayedSetLastScroll );
 
 	// No-op implementation of transition degradation
-	$.mobile._maybeDegradeTransition = function( transition ) {
+	$.mobile._maybeDegradeTransition = $.mobile._maybeDegradeTransition || function( transition ) {
 		return transition;
 	};
 
