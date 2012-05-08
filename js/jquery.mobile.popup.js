@@ -52,7 +52,7 @@ define( [ "jquery",
 			$.extend( this, {
 				_page: thisPage,
 				_ui: ui,
-				_isOpen: false,
+				_isOpen: false
 			});
 
 			$.each( this.options, function( key ) {
