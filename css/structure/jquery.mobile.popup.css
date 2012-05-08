@@ -3,7 +3,7 @@ c.ui-popup-container {
 	display: inline-block;
 	position: absolute;
 	padding: 0px;
-	max-width: 100%;
+	max-width: 90%;
 }
 
 .ui-popup-screen {
