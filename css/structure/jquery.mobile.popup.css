@@ -1,8 +1,9 @@
-.ui-popup-container {
+c.ui-popup-container {
 	z-index: 1100;
 	display: inline-block;
 	position: absolute;
 	padding: 0px;
+	max-width: 100%;
 }
 
 .ui-popup-screen {
