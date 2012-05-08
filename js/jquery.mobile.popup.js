@@ -492,6 +492,11 @@ define( [ "jquery",
 			var self = this;
 
 			self._haveNavHook = false;
+
+			if ( !$.mobile.hashListeningEnabled ) {
+				$.mobile.urlHistory.activeIndex--;
+			}
+
 			if ( self._myOwnHashChange ) {
 				self._myOwnHashChange = false;
 				self._inProgress = false;
