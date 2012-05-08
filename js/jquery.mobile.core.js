@@ -58,18 +58,36 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 		// Set default dialog transition - 'none' for no transitions
 		defaultDialogTransition: "pop",
 
-		// Show loading message during Ajax requests
-		// if false, message will not appear, but loading classes will still be toggled on html el
+
+		// default message setting, deprecated
 		loadingMessage: "loading",
 
-		// Error response message - appears when an Ajax page request fails
-		pageLoadErrorMessage: "Error Loading Page",
+		// Show loading message during Ajax requests
+		// if false, message will not appear, but loading classes will still be toggled on html el
+		loading: {
+			// When the text is visible, what theme does the loading box use?
+			theme: undefined,
+
+			// Should the text be visble in the loading message?
+			textVisible: undefined,
+
+			// by default the loading message is just text and an optional spinner
+			// here we provide for the replacement of the popup with markup
+			html: undefined,
+
+			// users updating this setting to custom values will override
+			// $.mobile.loadingMessage value otherwise it will default to it
+			text: undefined
+		},
 
 		// Should the text be visble in the loading message?
 		loadingMessageTextVisible: false,
 
 		// When the text is visible, what theme does the loading box use?
 		loadingMessageTheme: "a",
+
+		// Error response message - appears when an Ajax page request fails
+		pageLoadErrorMessage: "Error Loading Page",
 
 		// For error messages, which theme does the box uses?
 		pageLoadErrorMessageTheme: "e",
