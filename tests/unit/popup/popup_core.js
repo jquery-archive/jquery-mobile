@@ -386,7 +386,7 @@
 				ok( !result.closed.timedOut, "'closed' signal arrived" );
 				ok( !result.hashchange.timedOut, "'hashchnage' signal arrived" );
 				ok( location.href === origHRef, "Location is unchanged" );
-				start();
+				setTimeout( function() { start(); }, 300 );
 			},
 		]);
 	});
