@@ -58,10 +58,6 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 		// Set default dialog transition - 'none' for no transitions
 		defaultDialogTransition: "pop",
 
-
-		// default message setting, deprecated
-		loadingMessage: "loading",
-
 		// Show loading message during Ajax requests
 		// if false, message will not appear, but loading classes will still be toggled on html el
 		loading: {
@@ -80,11 +76,14 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 			text: undefined
 		},
 
-		// Should the text be visble in the loading message?
+		// DEPRECATED Should the text be visble in the loading message?
 		loadingMessageTextVisible: false,
 
-		// When the text is visible, what theme does the loading box use?
+		// DEPRECATED When the text is visible, what theme does the loading box use?
 		loadingMessageTheme: "a",
+
+		// DEPRECATED default message setting
+		loadingMessage: "loading",
 
 		// Error response message - appears when an Ajax page request fails
 		pageLoadErrorMessage: "Error Loading Page",

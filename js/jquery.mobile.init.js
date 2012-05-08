@@ -86,6 +86,8 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 				// prefer object property from the param or the $.mobile.loading object
 				// then the old theme setting
 				theme = loadSettings.theme || $.mobile.loadingMessageTheme;
+			} else {
+				theme = theme || loadSettings.theme || $.mobile.loadingMessageTheme;
 			}
 
 			$html.addClass( "ui-loading" );
