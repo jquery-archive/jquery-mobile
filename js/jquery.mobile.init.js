@@ -35,38 +35,6 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 	// this ensures the rendering class is removed after 5 seconds, so content is visible and accessible
 	setTimeout( hideRenderingClass, 5000 );
 
-	// loading div which appears during Ajax requests
-	// will not appear if $.mobile.loadingMessage is false
-	var loaderClass = "ui-loader",
-		$loader = $( "<div class='" + loaderClass + "'><span class='ui-icon ui-icon-loading'></span><h1></h1></div>" );
-
-	// For non-fixed supportin browsers. Position at y center (if scrollTop supported), above the activeBtn (if defined), or just 100px from top
-	function fakeFixLoader(){
-		var activeBtn = $( "." + $.mobile.activeBtnClass ).first();
-
-		$loader
-			.css({
-				top: $.support.scrollTop && $window.scrollTop() + $window.height() / 2 ||
-				activeBtn.length && activeBtn.offset().top || 100
-			});
-	}
-
-	// check position of loader to see if it appears to be "fixed" to center
-	// if not, use abs positioning
-	function checkLoaderPosition(){
-		var offset = $loader.offset(),
-			scrollTop = $window.scrollTop(),
-			screenHeight = $.mobile.getScreenHeight();
-
-		if( offset.top < scrollTop || (offset.top - scrollTop) > screenHeight ) {
-			$loader.addClass( "ui-loader-fakefix" );
-			fakeFixLoader();
-			$window
-				.unbind( "scroll", checkLoaderPosition )
-				.bind( "scroll", fakeFixLoader );
-		}
-	}
-
 	//remove initial build class (only present on first pageshow)
 	function hideRenderingClass(){
 		$html.removeClass( "ui-mobile-rendering" );
@@ -77,65 +45,11 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 		// with the following shape: { theme: '', text: '', html: '', textVisible: '' }
 		// NOTE that the $.mobile.loading* settings and params past the first are deprecated
 		showPageLoadingMsg: function( theme, msgText, textonly ) {
-			var loadSettings = $.mobile.loading;
-
-			// support for object literal params
-			if( $.type(theme) == "object" ){
-				loadSettings = theme;
-
-				// prefer object property from the param or the $.mobile.loading object
-				// then the old theme setting
-				theme = loadSettings.theme || $.mobile.loadingMessageTheme;
-			} else {
-				theme = theme || loadSettings.theme || $.mobile.loadingMessageTheme;
-			}
-
-			$html.addClass( "ui-loading" );
-
-			// if any of these things are provided make the necessary alterations
-			if ( $.mobile.loadingMessage || msgText || loadSettings.text || loadSettings.html ) {
-				// text visibility from argument takes priority
-				var textVisible = textonly, message, $header;
-
-				// boolean values require a bit more work :P
-				// support object properties and old settings
-				if( loadSettings.textVisible != undefined ) {
-					textVisible = loadSettings.textVisible;
-				} else {
-					textVisible = $.mobile.loadingMessageTextVisible;
-				}
-
-				$loader.attr( "class", loaderClass + " ui-corner-all ui-body-" + theme + " ui-loader-" + ( textVisible ? "verbose" : "default" ) + ( textonly ? " ui-loader-textonly" : "" ) );
-
-				// TODO verify that jquery.fn.html is ok to use in both cases here
-				//      this might be overly defensive in preventing unknowing xss
-				// if the html attribute is defined on the loading settings, use that
-				// otherwise use the fallbacks from above
-				if( loadSettings.html ) {
-					$loader.html( loadSettings.html );
-				} else {
-					// prefer the param, then the settings object then loading message
-					message = msgText || loadSettings.text || $.mobile.loadingMessage;
-					$loader.find( "h1" )
-						.text( message );
-				}
-
-				$loader.appendTo( $.mobile.pageContainer );
-
-				checkLoaderPosition();
-				$window.bind( "scroll", checkLoaderPosition );
-			}
+			this.loading.show.apply(this.loading, arguments);
 		},
 
 		hidePageLoadingMsg: function() {
-			$html.removeClass( "ui-loading" );
-
-			if( $.mobile.loadingMessage ){
-				$loader.removeClass( "ui-loader-fakefix" );
-			}
-
-			$( window ).unbind( "scroll", fakeFixLoader );
-			$( window ).unbind( "scroll", checkLoaderPosition );
+			this.loading.hide.apply(this.loading, arguments);
 		},
 
 		// find and enhance the pages in the dom and transition to the first page.

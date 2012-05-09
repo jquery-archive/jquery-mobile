@@ -61,6 +61,7 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 		// Show loading message during Ajax requests
 		// if false, message will not appear, but loading classes will still be toggled on html el
 		loading: {
+			config: {
 			// When the text is visible, what theme does the loading box use?
 			theme: undefined,
 
@@ -74,6 +75,7 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 			// users updating this setting to custom values will override
 			// $.mobile.loadingMessage value otherwise it will default to it
 			text: undefined
+			}
 		},
 
 		// DEPRECATED Should the text be visble in the loading message?

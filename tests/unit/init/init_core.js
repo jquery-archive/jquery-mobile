@@ -7,7 +7,6 @@
 			coreLib = 'jquery.mobile.core.js',
 			extendFn = $.extend,
 			originalLoadingMessage = $.mobile.loadingMessage,
-			originalConfigObject = $.mobile.loading,
 			setGradeA = function(value) { $.mobile.gradeA = function(){ return value; }; },
 			reloadCoreNSandInit = function(){
 				$.testHelper.reloadLib(coreLib);
@@ -21,25 +20,23 @@
 			// NOTE reset for gradeA tests
 			$('html').removeClass('ui-mobile');
 
-			$.mobile.showPageLoadingMsg();
-			loader = $('.ui-loader').html();
-
-			// NOTE reset for showPageLoadingMsg/hidePageLoadingMsg tests
 			$('.ui-loader').remove();
 		},
 
 		teardown: function(){
 			$.extend = extendFn;
 
-			// NOTE reset for showPageLoadingMsg/hidePageLoadingMsg tests
-			$.mobile.showPageLoadingMsg({ html: loader });
 			$('.ui-loader').remove();
 
 			// clear the classes added by reloading the init
 			$("html").attr('class', '');
 
 			$.mobile.loadingMessage = originalLoadingMessage;
-			$.mobile.loading = originalConfigObject;
+
+			// reset config
+			for( key in $.mobile.loading.config) {
+				$.mobile.loading.config[key] = undefined;
+			}
 		}
 	});
 
@@ -211,9 +208,7 @@
 		});
 
 		test( "page loading should contain new html when provided, prefers passed param", function() {
-			$.mobile.loading = {
-				html: "<div class='baz'>foo</div>"
-			};
+			$.mobile.loading.config.html = "<div class='baz'>foo</div>";
 
 			$.mobile.showPageLoadingMsg({
 				html: "<div class=\"foo\"></div>"
@@ -226,10 +221,8 @@
 			$.mobile.loadingMessage = "fozzle";
 			$.mobile.loadingMessageTheme = "x";
 
-			$.mobile.loading = {
-				text: "fizzle",
-				theme: "z"
-			};
+			$.mobile.loading.config.text = "fizzle";
+			$.mobile.loading.config.theme = "z";
 
 			$.mobile.showPageLoadingMsg();
 			ok($(".ui-loader").hasClass( "ui-body-z" ), "has theme z");
