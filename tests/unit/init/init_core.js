@@ -19,14 +19,10 @@
 		setup: function(){
 			// NOTE reset for gradeA tests
 			$('html').removeClass('ui-mobile');
-
-			$('.ui-loader').remove();
 		},
 
 		teardown: function(){
 			$.extend = extendFn;
-
-			$('.ui-loader').remove();
 
 			// clear the classes added by reloading the init
 			$("html").attr('class', '');
@@ -156,7 +152,7 @@
 			$.mobile.loadingMessage = false;
 			$.mobile.showPageLoadingMsg();
 
-			ok(!$(".ui-loader").length, "no ui-loader element");
+			ok($(".ui-loader").hasClass( "ui-loader-default" ), "not displaying text");
 		});
 
 		test( "hidePageLoadingMsg doesn't add the dialog to the page when loading message is false", function(){

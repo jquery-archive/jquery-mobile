@@ -42,7 +42,7 @@ define( [
 		}
 	}
 
-	$.extend($.mobile.loading, {
+	$.widget( "mobile.loader", {
 		defaultHtml: "<div class='" + loaderClass + "'>" +
 								 "<span class='ui-icon ui-icon-loading'></span>" +
 								 "<h1></h1>" +
@@ -50,7 +50,7 @@ define( [
 
 		// Show loading message during Ajax requests
 		// if false, message will not appear, but loading classes will still be toggled on html el
-		config: {
+		options: {
 			// When the text is visible, what theme does the loading box use?
 			theme: undefined,
 
@@ -66,9 +66,10 @@ define( [
 			text: undefined
 		},
 
+		_create: function() {},
+
 		resetHtml: function() {
-			$loader.remove();
-			$loader= $( this.defaultHtml );
+			this.element.html( $(this.defaultHtml).html() );
 		},
 
 		// Turn on/off page loading message. Theme doubles as an object argument
@@ -105,22 +106,22 @@ define( [
 					textVisible = $.mobile.loadingMessageTextVisible;
 				}
 
-				$loader.attr( "class", loaderClass + " ui-corner-all ui-body-" + theme + " ui-loader-" + ( textVisible ? "verbose" : "default" ) + ( textonly ? " ui-loader-textonly" : "" ) );
+				this.element.attr( "class", loaderClass + " ui-corner-all ui-body-" + theme + " ui-loader-" + ( textVisible ? "verbose" : "default" ) + ( textonly ? " ui-loader-textonly" : "" ) );
 
 				// TODO verify that jquery.fn.html is ok to use in both cases here
 				//      this might be overly defensive in preventing unknowing xss
 				// if the html attribute is defined on the loading settings, use that
 				// otherwise use the fallbacks from above
 				if( loadSettings.html ) {
-					$loader.html( loadSettings.html );
+					this.element.html( loadSettings.html );
 				} else {
 					// prefer the param, then the settings object then loading message
 					message = msgText || loadSettings.text || $.mobile.loadingMessage;
-					$loader.find( "h1" )
+					this.element.find( "h1" )
 						.text( message );
 				}
 
-				$loader.appendTo( $.mobile.pageContainer );
+				this.element.appendTo( $.mobile.pageContainer );
 
 				checkLoaderPosition();
 				$window.bind( "scroll", checkLoaderPosition );
@@ -131,7 +132,7 @@ define( [
 			$html.removeClass( "ui-loading" );
 
 			if( $.mobile.loadingMessage ){
-				$loader.removeClass( "ui-loader-fakefix" );
+				this.element.removeClass( "ui-loader-fakefix" );
 			}
 
 			$( window ).unbind( "scroll", fakeFixLoader );
@@ -139,7 +140,7 @@ define( [
 		}
 	});
 
-	$loader = $( $.mobile.loading.defaultHtml );
+	$loader = $.mobile.loaderWidget = $( $.mobile.loader.prototype.defaultHtml ).loader();
 })(jQuery, this);
 
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

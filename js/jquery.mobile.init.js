@@ -45,11 +45,11 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 		// with the following shape: { theme: '', text: '', html: '', textVisible: '' }
 		// NOTE that the $.mobile.loading* settings and params past the first are deprecated
 		showPageLoadingMsg: function( theme, msgText, textonly ) {
-			this.loading.show.apply(this.loading, arguments);
+			this.loaderWidget.loader( 'show', theme, msgText, textonly );
 		},
 
 		hidePageLoadingMsg: function() {
-			this.loading.hide.apply(this.loading, arguments);
+			this.loaderWidget.loader( 'hide' );
 		},
 
 		// find and enhance the pages in the dom and transition to the first page.
