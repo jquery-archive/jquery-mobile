@@ -327,6 +327,9 @@ define( [ "jquery",
 
 			function realInstallListener() {
 				$( window ).one( "hashchange.popup", function() {
+					if ( !$.mobile.hashListeningEnabled ) {
+						$.mobile.urlHistory.activeIndex--;
+					}
 					self._onHashChange();
 				});
 				whenHooked();
@@ -492,10 +495,6 @@ define( [ "jquery",
 			var self = this;
 
 			self._haveNavHook = false;
-
-			if ( !$.mobile.hashListeningEnabled ) {
-				$.mobile.urlHistory.activeIndex--;
-			}
 
 			if ( self._myOwnHashChange ) {
 				self._myOwnHashChange = false;
