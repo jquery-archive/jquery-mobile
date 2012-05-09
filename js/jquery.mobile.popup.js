@@ -304,7 +304,7 @@ define( [ "jquery",
 			}
 		},
 
-		destroy: function() {
+		_destroy: function() {
 			this._ui.screen.remove();
 			this._ui.container.remove();
 			// Put the element back to where the placeholder was
