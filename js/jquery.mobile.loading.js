@@ -10,33 +10,62 @@ define( [
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, window ) {
+
+	// DEPRECATED
+	// NOTE global mobile object settings
+	$.extend($.mobile, {
+		// DEPRECATED Should the text be visble in the loading message?
+		loadingMessageTextVisible: undefined,
+
+		// DEPRECATED When the text is visible, what theme does the loading box use?
+		loadingMessageTheme: undefined,
+
+		// DEPRECATED default message setting
+		loadingMessage: undefined,
+
+		// DEPRECATED
+		// Turn on/off page loading message. Theme doubles as an object argument
+		// with the following shape: { theme: '', text: '', html: '', textVisible: '' }
+		// NOTE that the $.mobile.loading* settings and params past the first are deprecated
+		showPageLoadingMsg: function( theme, msgText, textonly ) {
+			this.loaderWidget.loader( 'show', theme, msgText, textonly );
+		},
+
+		// DEPRECATED
+		hidePageLoadingMsg: function() {
+			this.loaderWidget.loader( 'hide' );
+		}
+	});
+
 	// loading div which appears during Ajax requests
 	// will not appear if $.mobile.loadingMessage is false
 	var loaderClass = "ui-loader", $html = $( "html" ), $window = $( window );
 
 	$.widget( "mobile.loader", {
+		// NOTE we cannot use the options object because the widget
+		//      won't force the undefined value on the options prototype
+		//      and we need them to be undefined to use the global config
+		//      defaults until we can remove those
+		options: {
+			// When the text is visible, what theme does the loading box use?
+			theme: "a",
+
+			// Should the text be visble in the loading message?
+			textVisible: false,
+
+			// by default the loading message is just text and an optional spinner
+			// here we provide for the replacement of the popup with markup
+			html: "",
+
+			// users updating this setting to custom values will override
+			// $.mobile.loadingMessage value otherwise it will default to it
+			text: "loading"
+		},
+
 		defaultHtml: "<div class='" + loaderClass + "'>" +
 								 "<span class='ui-icon ui-icon-loading'></span>" +
 								 "<h1></h1>" +
 								 "</div>",
-
-		// Show loading message during Ajax requests
-		// if false, message will not appear, but loading classes will still be toggled on html el
-		options: {
-			// When the text is visible, what theme does the loading box use?
-			theme: undefined,
-
-			// Should the text be visble in the loading message?
-			textVisible: undefined,
-
-			// by default the loading message is just text and an optional spinner
-			// here we provide for the replacement of the popup with markup
-			html: undefined,
-
-			// users updating this setting to custom values will override
-			// $.mobile.loadingMessage value otherwise it will default to it
-			text: undefined
-		},
 
 		// For non-fixed supportin browsers. Position at y center (if scrollTop supported), above the activeBtn (if defined), or just 100px from top
 		fakeFixLoader: function(){
@@ -65,8 +94,6 @@ define( [
 			}
 		},
 
-		_create: function() {},
-
 		resetHtml: function() {
 			this.element.html( $(this.defaultHtml).html() );
 		},
@@ -77,32 +104,32 @@ define( [
 		show: function( theme, msgText, textonly ) {
 			this.resetHtml();
 
-			var loadSettings = $.mobile.loading.config;
+			var loadSettings;
 
 			// support for object literal params
 			if( $.type(theme) == "object" ){
-				loadSettings = theme;
+				loadSettings = $.extend({}, this.options, theme);
 
 				// prefer object property from the param or the $.mobile.loading object
 				// then the old theme setting
 				theme = loadSettings.theme || $.mobile.loadingMessageTheme;
 			} else {
-				theme = theme || loadSettings.theme || $.mobile.loadingMessageTheme;
+				loadSettings = this.options;
+				theme = theme || $.mobile.loadingMessageTheme || loadSettings.theme;
 			}
 
 			$html.addClass( "ui-loading" );
 
-			// if any of these things are provided make the necessary alterations
-			if ( $.mobile.loadingMessage || msgText || loadSettings.text || loadSettings.html ) {
+			if ( $.mobile.loadingMessage != false || loadSettings.html ) {
 				// text visibility from argument takes priority
 				var textVisible = textonly, message, $header;
 
 				// boolean values require a bit more work :P
 				// support object properties and old settings
-				if( loadSettings.textVisible != undefined ) {
-					textVisible = loadSettings.textVisible;
-				} else {
+				if( $.mobile.loadingMessageTextVisible != undefined ) {
 					textVisible = $.mobile.loadingMessageTextVisible;
+				} else {
+					textVisible = loadSettings.textVisible;
 				}
 
 				this.element.attr( "class", loaderClass + " ui-corner-all ui-body-" + theme + " ui-loader-" + ( textVisible ? "verbose" : "default" ) + ( textonly ? " ui-loader-textonly" : "" ) );
@@ -115,7 +142,7 @@ define( [
 					this.element.html( loadSettings.html );
 				} else {
 					// prefer the param, then the settings object then loading message
-					message = msgText || loadSettings.text || $.mobile.loadingMessage;
+					message = msgText || $.mobile.loadingMessage || loadSettings.text;
 					this.element.find( "h1" )
 						.text( message );
 				}

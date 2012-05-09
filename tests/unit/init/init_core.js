@@ -6,7 +6,6 @@
 			libName = 'jquery.mobile.init.js',
 			coreLib = 'jquery.mobile.core.js',
 			extendFn = $.extend,
-			originalLoadingMessage = $.mobile.loadingMessage,
 			setGradeA = function(value) { $.mobile.gradeA = function(){ return value; }; },
 			reloadCoreNSandInit = function(){
 				$.testHelper.reloadLib(coreLib);
@@ -19,6 +18,8 @@
 		setup: function(){
 			// NOTE reset for gradeA tests
 			$('html').removeClass('ui-mobile');
+
+			$.mobile.loaderWidget.loader( 'hide' );
 		},
 
 		teardown: function(){
@@ -27,12 +28,9 @@
 			// clear the classes added by reloading the init
 			$("html").attr('class', '');
 
-			$.mobile.loadingMessage = originalLoadingMessage;
-
-			// reset config
-			for( key in $.mobile.loading.config) {
-				$.mobile.loading.config[key] = undefined;
-			}
+			$.mobile.loadingMessage =
+				$.mobile.loadingMessageTheme =
+				$.mobile.loadingMessageTextVisible = undefined;
 		}
 	});
 
@@ -40,6 +38,8 @@
 	//      the event before the test check below
 	$(document).one("mobileinit", function(){
 		mobilePage = $.mobile.page;
+
+		$.mobile.loadingMessage = false;
 	});
 
 	// NOTE for the following two tests see index html for the binding
@@ -148,11 +148,18 @@
 			same($("#bar").jqmData('url'), "bak");
 		});
 
-		test( "showPageLoadingMsg doesn't add the dialog to the page when loading message is false", function(){
+		test( "showPageLoadingMsg does not show the text when the loading message is false", function(){
 			$.mobile.loadingMessage = false;
 			$.mobile.showPageLoadingMsg();
 
-			ok($(".ui-loader").hasClass( "ui-loader-default" ), "not displaying text");
+			same($(".ui-loader h1").text(), "", "no loading message present");
+		});
+
+		test( "showPageLoadingMsg doesn't hide the text loading message is true", function(){
+			$.mobile.loadingMessageTextVisible = true;
+			$.mobile.showPageLoadingMsg();
+
+			ok($(".ui-loader").hasClass( "ui-loader-verbose" ), "displaying text");
 		});
 
 		test( "hidePageLoadingMsg doesn't add the dialog to the page when loading message is false", function(){
@@ -204,8 +211,6 @@
 		});
 
 		test( "page loading should contain new html when provided, prefers passed param", function() {
-			$.mobile.loading.config.html = "<div class='baz'>foo</div>";
-
 			$.mobile.showPageLoadingMsg({
 				html: "<div class=\"foo\"></div>"
 			});
@@ -217,12 +222,9 @@
 			$.mobile.loadingMessage = "fozzle";
 			$.mobile.loadingMessageTheme = "x";
 
-			$.mobile.loading.config.text = "fizzle";
-			$.mobile.loading.config.theme = "z";
-
 			$.mobile.showPageLoadingMsg();
-			ok($(".ui-loader").hasClass( "ui-body-z" ), "has theme z");
-			same($(".ui-loader h1").text(), "fizzle", "has text fizzle in loading config object");
+			ok($(".ui-loader").hasClass( "ui-body-x" ), "has theme x");
+			same($(".ui-loader h1").text(), "fozzle", "has text fozzle in loading config object");
 		});
 
 		// NOTE the next two tests work on timeouts that assume a page will be

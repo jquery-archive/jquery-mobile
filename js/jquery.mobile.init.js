@@ -41,17 +41,6 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 	}
 
 	$.extend($.mobile, {
-		// Turn on/off page loading message. Theme doubles as an object argument
-		// with the following shape: { theme: '', text: '', html: '', textVisible: '' }
-		// NOTE that the $.mobile.loading* settings and params past the first are deprecated
-		showPageLoadingMsg: function( theme, msgText, textonly ) {
-			this.loaderWidget.loader( 'show', theme, msgText, textonly );
-		},
-
-		hidePageLoadingMsg: function() {
-			this.loaderWidget.loader( 'hide' );
-		},
-
 		// find and enhance the pages in the dom and transition to the first page.
 		initializePage: function() {
 			// find present pages
