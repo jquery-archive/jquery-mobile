@@ -37,8 +37,7 @@ define( [
 		}
 	});
 
-	// loading div which appears during Ajax requests
-	// will not appear if $.mobile.loadingMessage is false
+	// TODO move loader class down into the widget settings
 	var loaderClass = "ui-loader", $html = $( "html" ), $window = $( window );
 
 	$.widget( "mobile.loader", {
@@ -101,6 +100,7 @@ define( [
 		// Turn on/off page loading message. Theme doubles as an object argument
 		// with the following shape: { theme: '', text: '', html: '', textVisible: '' }
 		// NOTE that the $.mobile.loading* settings and params past the first are deprecated
+		// TODO sweet jesus we need to break some of this out
 		show: function( theme, msgText, textonly ) {
 			this.resetHtml();
 
