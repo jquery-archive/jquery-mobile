@@ -1234,11 +1234,6 @@ define( [
 					$activeClickedLink = $( link ).closest( ".ui-btn" ).not( ".ui-disabled" );
 					$activeClickedLink.addClass( $.mobile.activeBtnClass );
 					$( "." + $.mobile.activePageClass + " .ui-btn" ).not( link ).blur();
-
-					// By caching the href value to data and switching the href to a #, we can avoid address bar showing in iOS. The click handler resets the href during its initial steps if this data is present
-					$( link )
-						.jqmData( "href", $( link  ).attr( "href" )  )
-						.attr( "href", "#" );
 				}
 			}
 		});
@@ -1263,11 +1258,6 @@ define( [
 			httpCleanup = function(){
 				window.setTimeout( function() { removeActiveLinkClass( true ); }, 200 );
 			};
-
-			// If there's data cached for the real href value, set the link's href back to it again. This pairs with an address bar workaround from the vclick handler
-			if( $link.jqmData( "href" ) ){
-				$link.attr( "href", $link.jqmData( "href" ) );
-			}
 
 			//if there's a data-rel=back attr, go back in history
 			if( $link.is( ":jqmData(rel='back')" ) ) {
