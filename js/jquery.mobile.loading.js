@@ -12,35 +12,7 @@ define( [
 (function( $, window ) {
 	// loading div which appears during Ajax requests
 	// will not appear if $.mobile.loadingMessage is false
-	var loaderClass = "ui-loader", $html = $( "html" ), $window = $( window ),
-		$loader;
-
-	// For non-fixed supportin browsers. Position at y center (if scrollTop supported), above the activeBtn (if defined), or just 100px from top
-	function fakeFixLoader(){
-		var activeBtn = $( "." + $.mobile.activeBtnClass ).first();
-
-		$loader
-			.css({
-				top: $.support.scrollTop && $window.scrollTop() + $window.height() / 2 ||
-				activeBtn.length && activeBtn.offset().top || 100
-			});
-	}
-
-	// check position of loader to see if it appears to be "fixed" to center
-	// if not, use abs positioning
-	function checkLoaderPosition(){
-		var offset = $loader.offset(),
-			scrollTop = $window.scrollTop(),
-			screenHeight = $.mobile.getScreenHeight();
-
-		if( offset.top < scrollTop || (offset.top - scrollTop) > screenHeight ) {
-			$loader.addClass( "ui-loader-fakefix" );
-			fakeFixLoader();
-			$window
-				.unbind( "scroll", checkLoaderPosition )
-				.bind( "scroll", fakeFixLoader );
-		}
-	}
+	var loaderClass = "ui-loader", $html = $( "html" ), $window = $( window );
 
 	$.widget( "mobile.loader", {
 		defaultHtml: "<div class='" + loaderClass + "'>" +
@@ -64,6 +36,33 @@ define( [
 			// users updating this setting to custom values will override
 			// $.mobile.loadingMessage value otherwise it will default to it
 			text: undefined
+		},
+
+		// For non-fixed supportin browsers. Position at y center (if scrollTop supported), above the activeBtn (if defined), or just 100px from top
+		fakeFixLoader: function(){
+			var activeBtn = $( "." + $.mobile.activeBtnClass ).first();
+
+			this.element
+				.css({
+					top: $.support.scrollTop && $window.scrollTop() + $window.height() / 2 ||
+						activeBtn.length && activeBtn.offset().top || 100
+				});
+		},
+
+		// check position of loader to see if it appears to be "fixed" to center
+		// if not, use abs positioning
+		checkLoaderPosition: function(){
+			var offset = this.element.offset(),
+				scrollTop = $window.scrollTop(),
+				screenHeight = $.mobile.getScreenHeight();
+
+			if( offset.top < scrollTop || (offset.top - scrollTop) > screenHeight ) {
+				this.element.addClass( "ui-loader-fakefix" );
+				this.fakeFixLoader();
+				$window
+					.unbind( "scroll", this.checkLoaderPosition )
+					.bind( "scroll", this.fakeFixLoader );
+			}
 		},
 
 		_create: function() {},
@@ -123,8 +122,8 @@ define( [
 
 				this.element.appendTo( $.mobile.pageContainer );
 
-				checkLoaderPosition();
-				$window.bind( "scroll", checkLoaderPosition );
+				this.checkLoaderPosition();
+				$window.bind( "scroll", $.proxy(this.checkLoaderPosition, this));
 			}
 		},
 
@@ -135,12 +134,12 @@ define( [
 				this.element.removeClass( "ui-loader-fakefix" );
 			}
 
-			$( window ).unbind( "scroll", fakeFixLoader );
-			$( window ).unbind( "scroll", checkLoaderPosition );
+			$( window ).unbind( "scroll", $.proxy(this.fakeFixLoader, this) );
+			$( window ).unbind( "scroll", $.proxy(this.checkLoaderPosition, this) );
 		}
 	});
 
-	$loader = $.mobile.loaderWidget = $( $.mobile.loader.prototype.defaultHtml ).loader();
+	$.mobile.loaderWidget = $( $.mobile.loader.prototype.defaultHtml ).loader();
 })(jQuery, this);
 
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
