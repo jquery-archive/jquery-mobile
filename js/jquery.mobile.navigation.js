@@ -390,11 +390,10 @@ define( [
 
 		if( pageTitle.length ) {
 			pageTitle.focus();
-		}
-		else{
+		} else{
 			page.focus();
 		}
-	}
+	};
 
 	//remove active classes after page transition or error
 	function removeActiveLinkClass( forceRemoval ) {
