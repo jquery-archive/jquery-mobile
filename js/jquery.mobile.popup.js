@@ -23,15 +23,18 @@ define( [ "jquery",
 		_create: function() {
 			var ui = {
 			    	screen: "#ui-popup-screen",
-			    	container: "#ui-popup-container"
+			    	placeholder: "#placeholder",
+			    	container: "#ui-popup-container"	
 			    },
 			    proto = $(
 			    	"<div>" +
 			    	"    <div id='ui-popup-screen' class='ui-screen-hidden ui-popup-screen fade'></div>" +
 			    	"    <div id='ui-popup-container' class='ui-popup-container ui-selectmenu-hidden'></div>" +
+			    	"    <div id='placeholder' style='display: none;'><!-- placeholder --></div>" +
 			    	"</div>"
 			    ),
 			    thisPage = this.element.closest( ":jqmData(role='page')" ),
+			    myId = this.element.attr( "id" ),
 			    self = this;
 
 			if ( thisPage.length === 0 ) {
@@ -46,6 +49,11 @@ define( [ "jquery",
 			// Apply the proto
 			thisPage.append( ui.screen );
 			ui.container.insertAfter( ui.screen );
+			// Leave a placeholder where the element used to be
+			ui.placeholder.insertAfter( this.element );
+			if ( myId ) {
+				ui.placeholder.html( "<!-- placeholder for " + myId + " -->" );
+			}
 			ui.container.append( this.element );
 
 			// Define instance variables
@@ -294,6 +302,14 @@ define( [ "jquery",
 			} else {
 				hideScreen();
 			}
+		},
+
+		destroy: function() {
+			this._ui.screen.remove();
+			this._ui.container.remove();
+			// Put the element back to where the placeholder was
+			this.element.insertAfter( this._ui.placeholder );
+			this._ui.placeholder.remove();
 		},
 
 		open: function( x, y ) {
