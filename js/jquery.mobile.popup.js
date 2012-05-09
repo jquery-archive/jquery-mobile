@@ -22,17 +22,17 @@ define( [ "jquery",
 
 		_create: function() {
 			var ui = {
-					screen: "#ui-popup-screen",
-					container: "#ui-popup-container"
-				},
-				proto = $(
-					"<div>" +
-					"    <div id='ui-popup-screen' class='ui-screen-hidden ui-popup-screen fade'></div>" +
-					"    <div id='ui-popup-container' class='ui-popup-container ui-selectmenu-hidden'></div>" +
-					"</div>"
-				),
-				thisPage = this.element.closest( ":jqmData(role='page')" ),
-				self = this;
+			    	screen: "#ui-popup-screen",
+			    	container: "#ui-popup-container"
+			    },
+			    proto = $(
+			    	"<div>" +
+			    	"    <div id='ui-popup-screen' class='ui-screen-hidden ui-popup-screen fade'></div>" +
+			    	"    <div id='ui-popup-container' class='ui-popup-container ui-selectmenu-hidden'></div>" +
+			    	"</div>"
+			    ),
+			    thisPage = this.element.closest( ":jqmData(role='page')" ),
+			    self = this;
 
 			if ( thisPage.length === 0 ) {
 				thisPage = $( "body" );
@@ -82,10 +82,10 @@ define( [ "jquery",
 
 		_realSetTheme: function( dst, theme ) {
 			var classes = ( dst.attr( "class" ) || "").split( " " ),
-				alreadyAdded = true,
-				currentTheme = null,
-				matches,
-				themeStr = String( theme );
+			    alreadyAdded = true,
+			    currentTheme = null,
+			    matches,
+			    themeStr = String( theme );
 
 			while ( classes.length > 0 ) {
 				currentTheme = classes.pop();
@@ -155,16 +155,16 @@ define( [ "jquery",
 		_placementCoords: function( x, y ) {
 			// Try and center the overlay over the given coordinates
 			var ret,
-				menuHeight = this._ui.container.outerHeight( true ),
-				menuWidth = this._ui.container.outerWidth( true ),
-				scrollTop = $( window ).scrollTop(),
-				screenHeight = $( window ).height(),
-				screenWidth = $( window ).width(),
-				halfheight = menuHeight / 2,
-				maxwidth = parseFloat( this._ui.container.css( "max-width" ) ),
-				roomtop = y - scrollTop,
-				roombot = scrollTop + screenHeight - y,
-				newtop, newleft;
+			    menuHeight = this._ui.container.outerHeight( true ),
+			    menuWidth = this._ui.container.outerWidth( true ),
+			    scrollTop = $( window ).scrollTop(),
+			    screenHeight = $( window ).height(),
+			    screenWidth = $( window ).width(),
+			    halfheight = menuHeight / 2,
+			    maxwidth = parseFloat( this._ui.container.css( "max-width" ) ),
+			    roomtop = y - scrollTop,
+			    roombot = scrollTop + screenHeight - y,
+			    newtop, newleft;
 
 			if ( roomtop > menuHeight / 2 && roombot > menuHeight / 2 ) {
 				newtop = y - halfheight;
@@ -321,29 +321,41 @@ define( [ "jquery",
 		// Note that placing the popup on the screen can itself cause a hashchange,
 		// because the dialogHashKey may need to be added to the URL.
 		_doNavHook: function( whenHooked ) {
-			var self = this,
-					activeEntry = $.mobile.urlHistory.getActive(),
-					hasHash = ( activeEntry.url.indexOf( $.mobile.dialogHashKey ) > -1 );
+			var self = this;
 
-			function realInstallListener() {
-				$( window ).one( "hashchange.popup", function() {
-					if ( !$.mobile.hashListeningEnabled ) {
-						$.mobile.urlHistory.activeIndex--;
-					}
-					self._onHashChange();
-				});
-				whenHooked();
-			}
+			if ( $.mobile.hashListeningEnabled ) {
+				var activeEntry = $.mobile.urlHistory.getActive(),
+				    hasHash = ( activeEntry.url.indexOf( $.mobile.dialogHashKey ) > -1 );
 
-			if ( hasHash ) {
-				realInstallListener();
+				function realInstallListener() {
+					$( window ).one( "hashchange.popup", function() {
+						self._onHashChange();
+					});
+					whenHooked();
+				}
+
+				if ( hasHash ) {
+					realInstallListener();
+				}
+				else {
+					$( window ).one( "hashchange.popupBinder", function() {
+						realInstallListener();
+					});
+					$.mobile.path.set( activeEntry.url + $.mobile.dialogHashKey );
+					$.mobile.urlHistory.addNew( activeEntry.url + $.mobile.dialogHashKey, activeEntry.transition, activeEntry.title, activeEntry.pageUrl, activeEntry.role );
+				}
 			}
 			else {
-				$( window ).one( "hashchange.popupBinder", function() {
-					realInstallListener();
-				});
-				$.mobile.path.set( activeEntry.url + $.mobile.dialogHashKey );
-				$.mobile.urlHistory.addNew( activeEntry.url + $.mobile.dialogHashKey, activeEntry.transition, activeEntry.title, activeEntry.pageUrl, activeEntry.role );
+				whenHooked();
+			}
+		},
+
+		_undoNavHook: function() {
+			if ( $.mobile.hashListeningEnabled ) {
+				window.history.back();
+			}
+			else {
+				this._onHashChange();
 			}
 		},
 
@@ -376,7 +388,7 @@ define( [ "jquery",
 				if ( self._haveNavHook ) {
 					self._haveNavHook = false;
 					self._myOwnHashChange = true;
-					window.history.back();
+					self._undoNavHook();
 				}
 				else {
 					self._inProgress = false;
@@ -390,7 +402,7 @@ define( [ "jquery",
 
 		_continueWithAction: function() {
 			var self = this,
-					signal, fn, args;
+			    signal, fn, args;
 
 			if ( self._actionQueue[0].open ) {
 				if ( self._currentlyOpenPopup ) {
@@ -417,6 +429,7 @@ define( [ "jquery",
 
 		_runSingleAction: function() {
 			var self = this;
+
 			if ( !self._inProgress ) {
 				self._inProgress = true;
 				if ( self._haveNavHook || !self._actionQueue[0].open ) {
@@ -461,10 +474,9 @@ define( [ "jquery",
 		pop: function( popup ) {
 			var self = this,
 			    newAction = { open: false, popup: popup },
-					idx = self._inArray( newAction );
+			    idx = self._inArray( newAction );
 
 			if ( -1 === idx ) {
-
 				var openAction = { open: true, popup: popup },
 				    oIdx = self._inArray( openAction );
 
