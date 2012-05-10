@@ -3,14 +3,10 @@
 //>>label: loading message
 //>>group: Navigation
 
-define( [
-	"jquery",
-	"./jquery.mobile.core",
-	"./jquery.mobile.init" ], function( $ ) {
+define( [	"jquery",	"./jquery.mobile.core",	"./jquery.mobile.init" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, window ) {
-
 	// DEPRECATED
 	// NOTE global mobile object settings
 	$.extend($.mobile, {
@@ -41,23 +37,19 @@ define( [
 	var loaderClass = "ui-loader", $html = $( "html" ), $window = $( window );
 
 	$.widget( "mobile.loader", {
-		// NOTE we cannot use the options object because the widget
-		//      won't force the undefined value on the options prototype
-		//      and we need them to be undefined to use the global config
-		//      defaults until we can remove those
+		// NOTE if the global config settings are defined they will override these
+		//      options
 		options: {
-			// When the text is visible, what theme does the loading box use?
+			// the theme for the loading message
 			theme: "a",
 
-			// Should the text be visble in the loading message?
+			// whether the text in the loading message is shown
 			textVisible: false,
 
-			// by default the loading message is just text and an optional spinner
-			// here we provide for the replacement of the popup with markup
+			// custom html for the inner content of the loading message
 			html: "",
 
-			// users updating this setting to custom values will override
-			// $.mobile.loadingMessage value otherwise it will default to it
+			// the text to be displayed when the popup is shown
 			text: "loading"
 		},
 
