@@ -103,24 +103,26 @@
 		}
 	});
 
-	test( "Popup div is associated with a popup widget", function() {
-		expect( 1 );
-		ok( $("#test-popup" ).data( "popup" ) );
-	});
+	function popupEnhancementTests( prefix ) {
+		ok( $( "#test-popup" ).data( "popup" ),  prefix + ", popup div is associated with a popup widget" );
+		ok( $( "#test-popup" ).parent().hasClass( "ui-popup-container" ), prefix + ", popup div parent has class ui-popup-container" );
+		ok( $( "#test-popup" ).parent().parent().hasClass( "ui-page" ), prefix + ", popup div grandparent is the page" );
+		ok( $( "#test-popup" ).parent().prev().hasClass( "ui-popup-screen" ), prefix + ", popup div is preceded by its screen" );
+		ok( $( "#page-content" ).children().first().html() === "<!-- placeholder for test-popup -->", prefix + ", there is a placeholder in the popup div's original location" );
+	}
 
-	test( "Popup div parent has class ui-popup-container", function() {
-		expect( 1 );
-		ok( $("#test-popup" ).parent().hasClass( "ui-popup-container" ) );
-	});
+	test( "Popup is enhanced correctly", function() { popupEnhancementTests( "When autoenhanced" ); } );
 
-	test( "Popup div grandparent is the page", function() {
-		expect( 1 );
-		ok( $("#test-popup" ).parent().parent().hasClass( "ui-page" ) );
-	});
+	test( "Popup rearranges DOM elements correctly when it is destroyed and again when it is re-created", function() {
+		$( "#test-popup" ).popup( "destroy" );
 
-	test( "Popup div is preceded by its screen", function() {
-		expect( 1 );
-		ok( $( "#test-popup" ).parent().prev().hasClass( "ui-popup-screen" ) );
+		ok( $( "#page-content" ).children().first().attr( "id" ) === "test-popup", "After destroying a popup, its payload is returned to its original location" );
+		ok( $( "#page-content" ).children().first().prev().html() !== "<!-- placeholder for test-popup -->", "No placeholder precedes the restored popup" );
+		ok( $( "#page-content" ).children().first().next().html() !== "<!-- placeholder for test-popup -->", "No placeholder succeedes the restored popup" );
+
+		$( "#test-popup" ).popup();
+
+		popupEnhancementTests( "When re-created" );
 	});
 
 	asyncTest( "Popup opens and closes", function() {
