@@ -169,10 +169,12 @@ define( [ "jquery",
 			    screenHeight = $( window ).height(),
 			    screenWidth = $( window ).width(),
 			    halfheight = menuHeight / 2,
-			    maxwidth = parseFloat( this._ui.container.css( "max-width" ) ),
+			    maxwidth = screenWidth - 20,
 			    roomtop = y - scrollTop,
 			    roombot = scrollTop + screenHeight - y,
 			    newtop, newleft;
+
+			this._ui.container.css( "max-width", maxwidth );
 
 			if ( roomtop > menuHeight / 2 && roombot > menuHeight / 2 ) {
 				newtop = y - halfheight;
@@ -181,8 +183,8 @@ define( [ "jquery",
 				newtop = roomtop > roombot ? scrollTop + screenHeight - menuHeight - 30 : scrollTop + 30;
 			}
 
-			// If the menuwidth is smaller than the screen center is
-			if ( menuWidth < maxwidth ) {
+			// If the menuwidth is greater or equal to the max-width, center it on screen
+			if ( menuWidth >= maxwidth ) {
 				newleft = ( screenWidth - menuWidth ) / 2;
 			} else {
 				//otherwise insure a >= 30px offset from the left
@@ -221,8 +223,8 @@ define( [ "jquery",
 					maybeTriggerOpened();
 				},
 				coords = self._placementCoords(
-						(undefined === x ? window.innerWidth / 2 : x),
-						(undefined === y ? window.innerHeight / 2 : y) );
+						( undefined === x ? window.innerWidth / 2 : x ),
+						( undefined === y ? window.innerHeight / 2 : y ) );
 
 			if ( !self.options.theme ) {
 				self._setTheme( self._page.jqmData( "theme" ) || $.mobile.getInheritedTheme( self._page, "c" ) );
