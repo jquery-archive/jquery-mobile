@@ -183,8 +183,35 @@ $.mobile.loadPage( "searchresults.php", {
 				</dl>
 			</dd>
 
+			<dt><code>$.mobile.loading</code> (<em>method</em>)</dt>
+			<dd>Show or hide the page loading message, which is configurable via <code>$.mobile.loader</code> prototype options as described in the <a href="../docs/pages/loader.html">widget docs</a> or can be controlled via a params object.</dd>
+			<dd>
+				<dl>
+					<dt><code>&#183;</code> Object Param Arguments</dt>
+					<dd><code>theme</code> (<em>string</em>, default: "a") The theme swatch for the message.</dd>
+					<dd><code>text</code> (<em>string</em>, default: "loading") The text of the message.</dd>
+					<dd><code>textonly</code> (<em>boolean</em>, default: false) If true, the "spinner" image will be hidden when the message is shown.</dd>
+					<dd><code>textVisible</code> (<em>boolean</em>, default: false) If true, the text value will be used under the spinner.</dd>
+					<dd><code>html</code> (<em>boolean</em>, default: "") If this is set to a non empty string value it will be used to replace the entirety of the loader's inner html</dd>
+				</dl>
+			</dd>
+			<dd>Examples:
+			<pre>
+			<code>
+<strong>//cue the page loader</strong>
+$.mobile.loading( 'show' );
+
+<strong>//use theme swatch "b", a custom message, and no spinner</strong>
+$.mobile.loading( 'show', { theme: "b", text: "foo", textonly: true });
+			</code>
+			</pre>
+
+			</dd>
+
 			<dt><code>$.mobile.showPageLoadingMsg</code> (<em>method</em>)</dt>
-			<dd>Show the page loading message, which is configurable via $.mobile.loadingMessage.</dd>
+			<dd>
+        <p class="ui-bar-e">Deprecated in 1.2 - use <code>$.mobile.loading( 'show' )</code> instead, see examples above</p>
+        Show the page loading message, which is configurable via $.mobile.loadingMessage.</dd>
 			<dd>
 				<dl>
 					<dt><code>&#183;</code> Arguments</dt>
@@ -209,9 +236,13 @@ $.mobile.showPageLoadingMsg("b", "This is only a test", true);
 
 
 
-			<dt><code>$.mobile.hidePageLoadingMsg</code> (<em>method</em>)</dt>
-			<dd>Hide the page loading message, which is configurable via $.mobile.loadingMessage.</dd>
 
+			<dt><code>$.mobile.hidePageLoadingMsg</code> (<em>method</em>)</dt>
+			<dd>
+        <p class="ui-bar-e">Deprecated in 1.2 - use <code>$.mobile.loading( 'hide' )</code> instead, see examples above</p>
+        Hide the page loading message, which is configurable via $.mobile.loadingMessage.
+
+      </dd>
 			<dd>Example:
 			<pre>
 			<code>

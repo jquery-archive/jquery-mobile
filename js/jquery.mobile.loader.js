@@ -117,7 +117,7 @@ define( [	"jquery",	"./jquery.mobile.core",	"./jquery.mobile.init" ], function( 
 
 			if ( $.mobile.loadingMessage != false || loadSettings.html ) {
 				// text visibility from argument takes priority
-				var textVisible = textonly, message, $header;
+				var textVisible, message, $header;
 
 				// boolean values require a bit more work :P
 				// support object properties and old settings
@@ -127,7 +127,10 @@ define( [	"jquery",	"./jquery.mobile.core",	"./jquery.mobile.init" ], function( 
 					textVisible = loadSettings.textVisible;
 				}
 
-				this.element.attr( "class", loaderClass + " ui-corner-all ui-body-" + theme + " ui-loader-" + ( textVisible ? "verbose" : "default" ) + ( textonly ? " ui-loader-textonly" : "" ) );
+				this.element.attr( "class", loaderClass +
+													 " ui-corner-all ui-body-" + theme +
+													 " ui-loader-" + ( textVisible ? "verbose" : "default" )
+													 + ( loadSettings.textonly || textonly ? " ui-loader-textonly" : "" ) );
 
 				// TODO verify that jquery.fn.html is ok to use in both cases here
 				//      this might be overly defensive in preventing unknowing xss
