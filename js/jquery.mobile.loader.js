@@ -162,7 +162,9 @@ define( [	"jquery",	"./jquery.mobile.core",	"./jquery.mobile.init" ], function( 
 		}
 	});
 
-	$.mobile.loaderWidget = $( $.mobile.loader.prototype.defaultHtml ).loader();
+	$window.on( 'pagecontainercreate', function() {
+		$.mobile.loaderWidget = $( $.mobile.loader.prototype.defaultHtml ).loader();
+	});
 })(jQuery, this);
 
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
