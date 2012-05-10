@@ -163,7 +163,7 @@ define( [	"jquery",	"./jquery.mobile.core",	"./jquery.mobile.init" ], function( 
 	});
 
 	$window.on( 'pagecontainercreate', function() {
-		$.mobile.loaderWidget = $( $.mobile.loader.prototype.defaultHtml ).loader();
+		$.mobile.loaderWidget = $.mobile.loaderWidget || $( $.mobile.loader.prototype.defaultHtml ).loader();
 	});
 })(jQuery, this);
 
