@@ -305,10 +305,10 @@ define( [ "jquery",
 		},
 
 		_destroy: function() {
+			// Put the element back to where the placeholder was
 			this.element.insertAfter( this._ui.placeholder );
 			this._ui.screen.remove();
 			this._ui.container.remove();
-			// Put the element back to where the placeholder was
 			this._ui.placeholder.remove();
 		},
 
