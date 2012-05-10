@@ -106,8 +106,7 @@ define( [	"jquery",	"./jquery.mobile.core",	"./jquery.mobile.init" ], function( 
 			if( $.type(theme) == "object" ){
 				loadSettings = $.extend({}, this.options, theme);
 
-				// prefer object property from the param or the $.mobile.loading object
-				// then the old theme setting
+				// prefer object property from the param then the old theme setting
 				theme = loadSettings.theme || $.mobile.loadingMessageTheme;
 			} else {
 				loadSettings = this.options;

@@ -19,7 +19,7 @@
 			// NOTE reset for gradeA tests
 			$('html').removeClass('ui-mobile');
 
-			$.mobile.loaderWidget.loader( 'hide' );
+			$.mobile.loading( 'hide' );
 		},
 
 		teardown: function(){
@@ -36,10 +36,11 @@
 
 	// NOTE important to use $.fn.one here to make sure library reloads don't fire
 	//      the event before the test check below
-	$(document).one("mobileinit", function(){
+	$(document).one( "mobileinit", function(){
 		mobilePage = $.mobile.page;
 
-		$.mobile.loadingMessage = false;
+		$.mobile.loader.prototype.options.text = "mobileinit";
+		$.mobile.loader.prototype.options.textVisible = true;
 	});
 
 	// NOTE for the following two tests see index html for the binding
@@ -148,6 +149,12 @@
 			same($("#bar").jqmData('url'), "bak");
 		});
 
+		test( "prototype options are used for mobile loader", function() {
+			$.mobile.loading( 'show' );
+
+			same( $('.ui-loader').text(), "mobileinit", "prototype options work" );
+		});
+
 		test( "showPageLoadingMsg does not show the text when the loading message is false", function(){
 			$.mobile.loadingMessage = false;
 			$.mobile.showPageLoadingMsg();
@@ -177,13 +184,6 @@
 			same($(".ui-loading").length, 1, "page should be in the loading state");
 		});
 
-		test( "page loading should contain default loading message", function(){
-			reloadCoreNSandInit();
-			$.mobile.showPageLoadingMsg();
-
-			same($(".ui-loader h1").text(), "loading");
-		});
-
 		test( "page loading should contain custom loading message", function(){
 			$.mobile.loadingMessage = "foo";
 			$.testHelper.reloadLib(libName);
@@ -198,7 +198,6 @@
 
 			same($(".ui-loader h1").text(), "bar");
 		});
-
 
 		test( "page loading should contain custom loading message when used in param object", function() {
 			$.mobile.showPageLoadingMsg({ text: "bak" });
