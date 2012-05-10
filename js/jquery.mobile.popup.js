@@ -176,6 +176,9 @@ define( [ "jquery",
 
 			this._ui.container.css( "max-width", maxwidth );
 
+			menuWidth = this._ui.container.outerWidth( true );
+			menuHeight = this._ui.container.outerHeight( true );
+
 			if ( roomtop > menuHeight / 2 && roombot > menuHeight / 2 ) {
 				newtop = y - halfheight;
 			} else {
