@@ -184,9 +184,9 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			if ( create || !item.hasClass( "ui-li" ) ) {
 				itemTheme = item.jqmData("theme") || o.theme;
 				a = this._getChildrenByTagName( item[ 0 ], "a", "A" );
-				divider = ( item.jqmData( "role" ) === "list-divider" ) ? true : false;
+				var isDivider = ( item.jqmData( "role" ) === "list-divider" );
 
-				if ( a.length && !divider ) {
+				if ( a.length && !isDivider ) {
 					icon = item.jqmData("icon");
 
 					item.buttonMarkup({
@@ -234,7 +234,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 									})
 								);
 					}
-				} else if ( divider ) {
+				} else if ( isDivider ) {
 
 					itemClass += " ui-li-divider ui-bar-" + dividertheme;
 					item.attr( "role", "heading" );
