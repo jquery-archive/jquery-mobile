@@ -1,6 +1,7 @@
 var requirejs = require( 'requirejs' ),
 	path = require( 'path' ),
-	fs = require( 'fs' );
+	fs = require( 'fs' ),
+  sqwish = require ( 'sqwish' );
 
 module.exports = function( grunt ) {
 	var config = grunt.config.get( 'global' ),
@@ -38,10 +39,14 @@ module.exports = function( grunt ) {
 			// add the compiled css to the normal css file
 			helpers.appendFrom( regularFile + '.css', require.all.out );
 
-			// add the min header into the minified file
-			grunt.file.write(regularFile + ".min.css", config.ver.min );
-
-			// TODO add minification for all css file
+			helpers.minify({
+				output: regularFile + ".min.css",
+				input: regularFile + ".css",
+				header: config.ver.min,
+				minCallback: function( unminified ) {
+					return sqwish.minify( unminified, false );
+				}
+			});
 
 			// pull the includes together using require js
 			requirejs.optimize( require.structure );
@@ -55,7 +60,15 @@ module.exports = function( grunt ) {
 			// add the min header into the minified file
 			grunt.file.write( structureFile + ".min.css", config.ver.min );
 
-			// TODO add minification for structure css file
+			// minify the structure css
+			helpers.minify({
+				output: structureFile + ".min.css",
+				input: structureFile + ".css",
+				header: config.ver.min,
+				minCallback: function( unminified ) {
+					return sqwish.minify( unminified, false );
+				}
+			});
 
 			// dump the versioned header into the theme css file
 			grunt.file.write( themeFile + '.css',  config.ver.header );
@@ -63,7 +76,15 @@ module.exports = function( grunt ) {
 			// dump the theme css into the theme css file
 			helpers.appendFrom( themeFile + '.css', 'css/themes/default/jquery.mobile.theme.css' );
 
-			// TODO add minification for theme
+			// minify the theme css
+			helpers.minify({
+				output: themeFile + ".min.css",
+				input: themeFile + ".css",
+				header: config.ver.min,
+				minCallback: function( unminified ) {
+					return sqwish.minify( unminified, false );
+				}
+			});
 
 			// remove the requirejs compile output
 			fs.unlink( require.all.out );

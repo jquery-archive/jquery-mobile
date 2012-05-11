@@ -43,18 +43,14 @@ module.exports = function( grunt ) {
 				return fileContents.replace( /__version__/, '"' + config.ver.official + '"' );
 			});
 
-			var max, min;
-			max = grunt.file.read( outputFile + ".js" );
-			min = grunt.helper( 'uglify', max, {});
-
-			grunt.file.write( outputFile + ".min.js" , config.ver.min );
-
-			// add the min header into the minified file
-			helpers.append( outputFile + ".min.js", min );
-
-			// display some file size info
-			grunt.log.writeln();
-			grunt.helper( 'min_max_info', min, max);
+			helpers.minify({
+				output: outputFile + ".min.js",
+				input: outputFile + ".js",
+				header: config.ver.min,
+				minCallback: function( unminified ) {
+					return grunt.helper( 'uglify', unminified, {});
+				}
+			});
 
 			// remove the requirejs compile output
 			fs.unlink( require.out );

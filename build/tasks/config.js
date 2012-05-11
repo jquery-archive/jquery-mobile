@@ -46,6 +46,17 @@ module.exports = function( grunt ) {
 				fs.closeSync( id );
 			},
 
+			minify: function( opts ) {
+				var max = grunt.file.read( opts.input ),
+					min = opts.minCallback(max);
+
+				// add the min header into the minified file, and then the min css
+				grunt.file.write( opts.output, opts.header );
+				this.append( opts.output, min );
+
+				grunt.helper( "min_max_info", min, max );
+			},
+
 			// NOTE cargo culting my way to the top :(
 			rmdirRecursive: function(dir) {
 				if( !path.existsSync(dir) ) {
