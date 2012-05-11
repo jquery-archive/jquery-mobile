@@ -35,25 +35,26 @@ module.exports = function( grunt ) {
 			requirejs.optimize( require );
 
 			// dump the versioned header into the normal js file
-			helpers.write( config.ver.header, outputFile + '.js' );
+			grunt.file.write( outputFile + '.js',  config.ver.header );
 
 			// add the compiled js to the normal js file, replace the version tag
 			// with the contents from version.txt
-			helpers.appendFrom( require.out, outputFile + '.js', function( fileContents ) {
+			helpers.appendFrom( outputFile + '.js', require.out, function( fileContents ) {
 				return fileContents.replace( /__version__/, '"' + config.ver.official + '"' );
 			});
 
-			// add the min header into the minified file
 			var max, min;
 			max = grunt.file.read( outputFile + ".js" );
 			min = grunt.helper( 'uglify', max, {});
 
 			grunt.file.write( outputFile + ".min.js" , config.ver.min );
-			helpers.append( min, outputFile + ".min.js" );
 
+			// add the min header into the minified file
+			helpers.append( outputFile + ".min.js", min );
+
+			// display some file size info
 			grunt.log.writeln();
 			grunt.helper( 'min_max_info', min, max);
-			// TODO add minification of js file
 
 			// remove the requirejs compile output
 			fs.unlink( require.out );

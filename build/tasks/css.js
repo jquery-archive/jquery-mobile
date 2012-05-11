@@ -33,13 +33,13 @@ module.exports = function( grunt ) {
 			requirejs.optimize( require.all );
 
 			// dump the versioned header into the normal css file
-			helpers.write( config.ver.header, regularFile + '.css' );
+			grunt.file.write( regularFile + '.css', config.ver.header );
 
 			// add the compiled css to the normal css file
-			helpers.appendFrom( require.all.out, regularFile + '.css' );
+			helpers.appendFrom( regularFile + '.css', require.all.out );
 
 			// add the min header into the minified file
-			helpers.write( config.ver.min, regularFile + ".min.css" );
+			grunt.file.write(regularFile + ".min.css", config.ver.min );
 
 			// TODO add minification for all css file
 
@@ -47,21 +47,21 @@ module.exports = function( grunt ) {
 			requirejs.optimize( require.structure );
 
 			// dump the versioned header into the structure css file
-			helpers.write( config.ver.header, structureFile + '.css' );
+			grunt.file.write( structureFile + '.css', config.ver.header );
 
 			// add the compiled css to the normal css file
-			helpers.appendFrom( require.all.out, structureFile + '.css' );
+			helpers.appendFrom( structureFile + '.css', require.all.out );
 
 			// add the min header into the minified file
-			helpers.write( config.ver.min, structureFile + ".min.css" );
+			grunt.file.write( structureFile + ".min.css", config.ver.min );
 
 			// TODO add minification for structure css file
 
 			// dump the versioned header into the theme css file
-			helpers.write( config.ver.header, themeFile + '.css' );
+			grunt.file.write( themeFile + '.css',  config.ver.header );
 
 			// dump the theme css into the theme css file
-			helpers.appendFrom( 'css/themes/default/jquery.mobile.theme.css', themeFile + '.css' );
+			helpers.appendFrom( themeFile + '.css', 'css/themes/default/jquery.mobile.theme.css' );
 
 			// TODO add minification for theme
 

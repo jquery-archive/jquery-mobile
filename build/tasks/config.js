@@ -31,21 +31,13 @@ module.exports = function( grunt ) {
 		shas: {},
 
 		helpers: {
-			write: function( text, output ) {
-				fs.writeFileSync(output, text);
-			},
-
-			writeFrom: function( input, output ) {
-				this.write(fs.readFileSync(input).toString(), output);
-			},
-
-			appendFrom: function( input, output, filter ) {
+			appendFrom: function( output, input, filter ) {
 				var inputString = fs.readFileSync(input).toString();
 
-				this.append( inputString, output, filter);
+				this.append( output, inputString, filter );
 			},
 
-			append: function( input, output, filter ) {
+			append: function( output, input, filter ) {
 				var id = fs.openSync(output, 'a+');
 
 				input = filter ? filter(input) : input;
