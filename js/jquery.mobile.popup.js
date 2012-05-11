@@ -60,6 +60,8 @@ define( [ "jquery",
 			$.extend( this, {
 				_page: thisPage,
 				_ui: ui,
+				_fallbackTransition: "",
+				_currentTransition: false,
 				_isOpen: false
 			});
 
@@ -138,11 +140,17 @@ define( [ "jquery",
 			this.element.attr( "data-" + ( $.mobile.ns || "" ) + "corners", value );
 		},
 
-		_setTransition: function( value ) {
-			this._ui.container.removeClass( this._fallbackTransition || "" );
+		_applyTransition: function( value ) {
+			this._ui.container.removeClass( this._fallbackTransition );
 			if ( value && value !== "none" ) {
 				this._fallbackTransition = $.mobile._maybeDegradeTransition( value );
 				this._ui.container.addClass( this._fallbackTransition );
+			}
+		},
+
+		_setTransition: function( value ) {
+			if ( !this._currentTransition ) {
+				this._applyTransition( value );
 			}
 			this.options.transition = value;
 			this.element.attr( "data-" + ( $.mobile.ns || "" ) + "transition", value );
@@ -204,7 +212,7 @@ define( [ "jquery",
 			return { x: newleft, y: newtop };
 		},
 
-		_realOpen: function( x, y ) {
+		_realOpen: function( x, y, transition ) {
 			var self = this,
 			    // Count down to triggering "opened" - we have two prerequisits:
 			    // 1. The popup window animation completes (onAnimationComplete())
@@ -228,6 +236,14 @@ define( [ "jquery",
 			    coords = self._placementCoords(
 			    	( undefined === x ? window.innerWidth / 2 : x ),
 			    	( undefined === y ? window.innerHeight / 2 : y ) );
+
+			if ( transition ) {
+				self._currentTransition = transition;
+				self._applyTransition( transition );
+			}
+			else {
+				transition = self.options.transition;
+			}
 
 			if ( !self.options.theme ) {
 				self._setTheme( self._page.jqmData( "theme" ) || $.mobile.getInheritedTheme( self._page, "c" ) );
@@ -253,7 +269,7 @@ define( [ "jquery",
 					top: coords.y
 				});
 
-			if ( self.options.transition && self.options.transition !== "none" ) {
+			if ( transition && transition !== "none" ) {
 				self._ui.container
 					.addClass( "in" )
 					.animationComplete( onAnimationComplete );
@@ -265,6 +281,7 @@ define( [ "jquery",
 
 		_realClose: function() {
 			var self = this,
+			    transition = ( self._currentTransition ? self._currentTransition : self.options.transition ),
 			    // Count down to triggering "closed" - we have two prerequisits:
 			    // 1. The popup window reverse animation completes (onAnimationComplete())
 			    // 2. The screen opacity animation completes (hideScreen())
@@ -274,6 +291,10 @@ define( [ "jquery",
 
 			    	if ( 0 === triggerPrereqs ) {
 			    		self._isOpen = false;
+			    		if ( self._currentTransition ) {
+			    			self._applyTransition( self.options.transition );
+			    			self._currentTransition = false;
+			    		}
 			    		self.element.trigger( "closed" );
 			    	}
 			    },
@@ -290,7 +311,7 @@ define( [ "jquery",
 			    	maybeTriggerClosed();
 			    };
 
-			if ( this.options.transition && this.options.transition !== "none" ) {
+			if ( transition && transition !== "none" ) {
 				this._ui.container
 					.removeClass( "in" )
 					.addClass( "reverse out" )
@@ -317,7 +338,7 @@ define( [ "jquery",
 			this._ui.placeholder.remove();
 		},
 
-		open: function( x, y ) {
+		open: function( x, y, transition ) {
 			$.mobile.popup.popupManager.push( this, arguments );
 		},
 
@@ -564,7 +585,8 @@ define( [ "jquery",
 		var btnVClickHandler = function( e ) {
 			popup.popup( "open",
 					btn.offset().left + btn.outerWidth() / 2,
-					btn.offset().top + btn.outerHeight() / 2 );
+					btn.offset().top + btn.outerHeight() / 2,
+					btn.jqmData( "transition" ) );
 
 			// Swallow event, because it might end up getting picked up by the popup window's screen handler, which
 			// will in turn cause the popup window to close - Thanks Sasha!
