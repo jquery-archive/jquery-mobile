@@ -46,14 +46,7 @@ module.exports = function( grunt ) {
 
 		lint: {
 			files: ['grunt.js', 'js/*.js', 'tests/**/*.js']
-		},
-
-		watch: {
-			files: '<config:lint.files>',
-			tasks: 'lint qunit'
-		},
-
-		uglify: {}
+		}
 	});
 
 	// set the default task.
