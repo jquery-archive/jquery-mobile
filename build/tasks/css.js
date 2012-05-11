@@ -4,7 +4,7 @@ var requirejs = require( 'requirejs' ),
 
 module.exports = function( grunt ) {
 	var config = grunt.config.get( 'global' ),
-		outputFile = path.join( config.dirs.output, config.names.root ),
+		regularFile = path.join( config.dirs.output, config.names.root ),
 		structureFile = path.join( config.dirs.output, config.names.structure ),
 		themeFile = path.join( config.dirs.output, config.names.theme ),
 		helpers = config.helpers;
@@ -15,7 +15,7 @@ module.exports = function( grunt ) {
 				cssIn: 'css/themes/default/jquery.mobile.css',
 				optimizeCss: 'standard.keepComments.keepLines',
 				baseUrl: '.',
-				out: outputFile + '.compiled.css'
+				out: regularFile + '.compiled.css'
 			},
 
 			structure: {
@@ -33,13 +33,13 @@ module.exports = function( grunt ) {
 			requirejs.optimize( require.all );
 
 			// dump the versioned header into the normal css file
-			helpers.write( config.ver.header, outputFile + '.css' );
+			helpers.write( config.ver.header, regularFile + '.css' );
 
 			// add the compiled css to the normal css file
-			helpers.append( require.all.out, outputFile + '.css' );
+			helpers.appendFrom( require.all.out, regularFile + '.css' );
 
 			// add the min header into the minified file
-			helpers.write( config.ver.min, outputFile + ".min.css" );
+			helpers.write( config.ver.min, regularFile + ".min.css" );
 
 			// TODO add minification for all css file
 
@@ -50,7 +50,7 @@ module.exports = function( grunt ) {
 			helpers.write( config.ver.header, structureFile + '.css' );
 
 			// add the compiled css to the normal css file
-			helpers.append( require.all.out, structureFile + '.css' );
+			helpers.appendFrom( require.all.out, structureFile + '.css' );
 
 			// add the min header into the minified file
 			helpers.write( config.ver.min, structureFile + ".min.css" );
@@ -61,7 +61,7 @@ module.exports = function( grunt ) {
 			helpers.write( config.ver.header, themeFile + '.css' );
 
 			// dump the theme css into the theme css file
-			helpers.append( 'css/themes/default/jquery.mobile.theme.css', themeFile + '.css' );
+			helpers.appendFrom( 'css/themes/default/jquery.mobile.theme.css', themeFile + '.css' );
 
 			// TODO add minification for theme
 

@@ -4,16 +4,11 @@ module.exports = function( grunt ) {
 
 	// Project configuration.
 	grunt.config.init({
-		concat: {
-			dist: {
-				src: ['<banner:meta.banner>', '<file_strip_banner:lib/<%= pkg.name %>.js>'],
-				dest: 'dist/<%= pkg.name %>.js'
-			}
-		},
 		global: {
 			output: 'compiled',
 			name: 'jquery.mobile'
 		},
+
 		jshint: {
 			options: {
 				curly: true,
@@ -48,26 +43,16 @@ module.exports = function( grunt ) {
 				define: true
 			}
 		},
+
 		lint: {
 			files: ['grunt.js', 'js/*.js', 'tests/**/*.js']
 		},
-		meta: {
-			banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
-				'<%= grunt.template.today("yyyy-mm-dd") %>\n' +
-				'<%= pkg.homepage ? "* " + pkg.homepage + "\n" : "" %>' +
-				'* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
-				' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */'
-		},
-		min: {
-			dist: {
-				src: ['<banner:meta.banner>', '<config:concat.dist.dest>'],
-				dest: 'dist/<%= pkg.name %>.min.js'
-			}
-		},
+
 		watch: {
 			files: '<config:lint.files>',
 			tasks: 'lint qunit'
 		},
+
 		uglify: {}
 	});
 

@@ -39,13 +39,18 @@ module.exports = function( grunt ) {
 				this.write(fs.readFileSync(input).toString(), output);
 			},
 
+			appendFrom: function( input, output, filter ) {
+				var inputString = fs.readFileSync(input).toString();
+
+				this.append( inputString, output, filter);
+			},
+
 			append: function( input, output, filter ) {
-				var id = fs.openSync(output, 'a+'), inputString;
+				var id = fs.openSync(output, 'a+');
 
-				inputString = fs.readFileSync(input).toString();
-				inputString = filter ? filter(inputString) : inputString;
+				input = filter ? filter(input) : input;
 
-				fs.writeSync( id, inputString );
+				fs.writeSync( id, input );
 				fs.closeSync( id );
 			},
 
@@ -64,7 +69,7 @@ module.exports = function( grunt ) {
 						// pass these files
 					} else if(stat.isDirectory()) {
 						// rmdir recursively
-						rmdir(filename);
+						this.rmdirRecursive(filename);
 					} else {
 						// rm fiilename
 						fs.unlinkSync(filename);

@@ -35,17 +35,24 @@ module.exports = function( grunt ) {
 			requirejs.optimize( require );
 
 			// dump the versioned header into the normal js file
-			helpers.write( config.ver.header, outputFile + '.js' );
+			grunt.file.write( config.ver.header, outputFile + '.js' );
 
 			// add the compiled js to the normal js file, replace the version tag
 			// with the contents from version.txt
-			helpers.append( require.out, outputFile + '.js', function( fileContents ) {
+			helpers.appendFrom( require.out, outputFile + '.js', function( fileContents ) {
 				return fileContents.replace( /__version__/, '"' + config.ver.official + '"' );
 			});
 
 			// add the min header into the minified file
-			helpers.write( config.ver.min, outputFile + ".min.js" );
+			var max, min;
+			max = grunt.file.read( outputFile + ".js" );
+			min = grunt.helper( 'uglify', max, {});
 
+			grunt.file.write( outputFile + ".min.js" , config.ver.min );
+			helpers.append( min, outputFile + ".min.js" );
+
+			grunt.log.writeln();
+			grunt.helper( 'min_max_info', min, max);
 			// TODO add minification of js file
 
 			// remove the requirejs compile output
@@ -54,5 +61,6 @@ module.exports = function( grunt ) {
 		});
 	});
 
+	// NOTE custom dasks don't accept dependencies so we alias
 	grunt.registerTask( 'js', 'init js_without_deps' );
 };
