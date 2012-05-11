@@ -390,15 +390,14 @@ define( [
 
 		if( pageTitle.length ) {
 			pageTitle.focus();
-		}
-		else{
+		} else{
 			page.focus();
 		}
-	}
+	};
 
 	//remove active classes after page transition or error
 	function removeActiveLinkClass( forceRemoval ) {
-		if( !!$activeClickedLink && ( !$activeClickedLink.closest( '.ui-page-active' ).length || forceRemoval ) ) {
+		if( !!$activeClickedLink && ( !$activeClickedLink.closest( "." + $.mobile.activePageClass ).length || forceRemoval ) ) {
 			$activeClickedLink.removeClass( $.mobile.activeBtnClass );
 		}
 		$activeClickedLink = null;
@@ -474,6 +473,11 @@ define( [
 	// bind to scrollstop for the first page as "pagechange" won't be fired in that case
 	$window.bind( "scrollstop", delayedSetLastScroll );
 
+	// No-op implementation of transition degradation
+	$.mobile._maybeDegradeTransition = $.mobile._maybeDegradeTransition || function( transition ) {
+		return transition;
+	};
+
 	//function for transitioning between two existing pages
 	function transitionPages( toPage, fromPage, transition, reverse ) {
 
@@ -486,11 +490,8 @@ define( [
 
 		//clear page loader
 		$.mobile.hidePageLoadingMsg();
-		
-		// If transition is defined, check if css 3D transforms are supported, and if not, if a fallback is specified
-		if( transition && !$.support.cssTransform3d && $.mobile.transitionFallbacks[ transition ] ){
-			transition = $.mobile.transitionFallbacks[ transition ];
-		}
+
+		transition = $.mobile._maybeDegradeTransition( transition );
 		
 		//find the transition handler for the specified transition. If there
 		//isn't one in our transitionHandlers dictionary, use the default one.
@@ -514,7 +515,7 @@ define( [
 
 	//simply set the active page's minimum height to screen height, depending on orientation
 	function getScreenHeight(){
-		// Native innerHeight returns more accurate value for this across platforms, 
+		// Native innerHeight returns more accurate value for this across platforms,
 		// jQuery version is here as a normalized fallback for platforms like Symbian
 		return window.innerHeight || $( window ).height();
 	}
@@ -526,7 +527,7 @@ define( [
 		var aPage = $( "." + $.mobile.activePageClass ),
 			aPagePadT = parseFloat( aPage.css( "padding-top" ) ),
 			aPagePadB = parseFloat( aPage.css( "padding-bottom" ) );
-				
+
 		aPage.css( "min-height", getScreenHeight() - aPagePadT - aPagePadB );
 	}
 
@@ -1259,11 +1260,6 @@ define( [
 					$activeClickedLink = $( link ).closest( ".ui-btn" ).not( ".ui-disabled" );
 					$activeClickedLink.addClass( $.mobile.activeBtnClass );
 					$( "." + $.mobile.activePageClass + " .ui-btn" ).not( link ).blur();
-
-					// By caching the href value to data and switching the href to a #, we can avoid address bar showing in iOS. The click handler resets the href during its initial steps if this data is present
-					$( link )
-						.jqmData( "href", $( link  ).attr( "href" )  )
-						.attr( "href", "#" );
 				}
 			}
 		});
@@ -1288,11 +1284,6 @@ define( [
 			httpCleanup = function(){
 				window.setTimeout( function() { removeActiveLinkClass( true ); }, 200 );
 			};
-
-			// If there's data cached for the real href value, set the link's href back to it again. This pairs with an address bar workaround from the vclick handler
-			if( $link.jqmData( "href" ) ){
-				$link.attr( "href", $link.jqmData( "href" ) );
-			}
 
 			//if there's a data-rel=back attr, go back in history
 			if( $link.is( ":jqmData(rel='back')" ) ) {

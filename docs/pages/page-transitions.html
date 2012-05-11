@@ -1,18 +1,18 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
 	<head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<title>jQuery Mobile Docs - Transitions</title> 
-	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />  
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Docs - Transitions</title>
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 
 	<script src="../../js/jquery.js"></script>
 	<script src="../../docs/_assets/js/jqm-docs.js"></script>
 	<script src="../../js/"></script>
 
-</head> 
-<body> 
+</head>
+<body>
 
 	<div data-role="page" class="type-interior">
 
@@ -23,8 +23,8 @@
 	</div><!-- /header -->
 
 	<div data-role="content">
-		<div class="content-primary">		
-		<h2>Page transitions</h2> 
+		<div class="content-primary">
+		<h2>Page transitions</h2>
 
 		<p>The jQuery Mobile framework includes a set of CSS-based transition effects that can be applied to any page link or form submission with Ajax navigation: </p>
 
@@ -101,39 +101,39 @@
 <code><code>
 &lt;a href=&quot;index.html&quot; <strong>data-transition=&quot;pop&quot;</strong>&gt;I'll pop&lt;/a&gt;
 </code></code>
-		
+
 		<p>When the Back button is pressed, the framework will automatically apply the reverse version of the transition that was used to show the page. To specify that the reverse version of a transition should be used, add the <code>data-direction="reverse"</code> attribute to a link.</p>
-				
+
 		<h2>Global configuration of transitions</h2>
-		
+
 		<p>Set the <code>defaultPageTransition</code> <a href="../api/globalconfig.html">global option</a> if you'd prefer a different default transition. Dialogs have a different option called <code>defaultDialogTransition</code> that can also be configured.</p>
-	
+
 
 		<h2>Browser support and performance</h2>
 		<p>All transitions are built with CSS keyframe animations and include both <code>-webkit</code> vendor prefixed rules for iOS, Blackberry, Android, Safari and Chrome browsers and <code>-moz</code> rules for Firefox browsers. Support for keyframe animations and transition smoothness is determined by the browser version and hardware and will safely fall back to no transition if animations aren't supported. To proactively exclude transition in situations with poor performance, we exclude browsers that lack 3D transforms and provide a fallback transition and apply a max width for when transitions are applied.</p>
-		
+
 		<h2>Defining fallback transitions for non-3D support</h2>
 		<p>By default, all transitions except fade require 3D transform support. Devices that lack 3D support will fall back to a fade transition, regardless of the transition specified. We do this to proactively exclude poorly-performing platforms like Android 2.x from advanced transitions and ensure they still have a smooth experience. Note that there are platforms such as Android 3.0 that technically support 3D transforms, but still have poor animation performance so this won't guarantee that every browser will be 100% flicker-free but we try to target this responsibly.</p>
-		
+
 		<p>The fallback transition for browsers that don't support 3D transforms can be configured for each transition type, but by default we specify "fade" as the fallback. For example, this will set the fallback transition for the slideout transition to "none":</p>
 		<code>$.mobile.transitionFallbacks.slideout = "none"</code>
-		
+
 		<h2>Setting a max width for transitions</h2>
 		<p>By default, transitions can be disabled (set to "none") when the window width is greater than a certain pixel width. This feature is useful because transitions can be distracting or perform poorly on larger screens. This value is configurable via the global option <code>$.mobile.maxTransitionWidth</code>, which defaults to <code>false</code>. The option accepts any number representing a pixel width or <code>false</code> value. If it's not <code>false</code>, the handler will use a "none" transition when the window width is wider than the specified value.</p>
 
-		
 
-	
+
+
 
 		<h2>Creating custom transitions</h2>
 
-		<p>jQuery Mobile allows for the addition of <a href="page-customtransitions.html">custom transitions</a> to the <code>$.mobile.transitionHandlers</code> dictionary so you can expand the selection of transitions on your site or app. 
+		<p>jQuery Mobile allows for the addition of <a href="page-customtransitions.html">custom transitions</a> to the <code>$.mobile.transitionHandlers</code> dictionary so you can expand the selection of transitions on your site or app.
 
-			
 
-		
 
-				</div><!--/content-primary -->		
+
+
+				</div><!--/content-primary -->
 
 				<div class="content-secondary">
 
@@ -149,6 +149,7 @@
 								<li><a href="page-titles.html">Page titles</a></li>
 								<li><a href="page-links.html">Linking pages</a></li>
 								<li data-theme="a"><a href="page-transitions.html">Page transitions</a></li>
+								<li><a href="loader.html">Page loading widget</a></li>
 								<li><a href="page-dialogs.html">Dialogs</a></li>
 								<li><a href="page-cache.html">Prefetching &amp; caching pages</a></li>
 								<li><a href="page-navmodel.html">Ajax, hashes &amp; history</a></li>
@@ -159,7 +160,7 @@
 								<li><a href="pages-themes.html">Theming pages</a></li>
 							</ul>
 					</div>
-				</div>		
+				</div>
 
 			</div><!-- /content -->
 

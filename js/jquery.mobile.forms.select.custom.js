@@ -334,7 +334,7 @@ define( [
           selfListParent = self.list.parent(),
 					menuHeight = selfListParent.outerHeight(),
 					menuWidth = selfListParent.outerWidth(),
-					activePage = $( ".ui-page-active" ),
+					activePage = $( "." + $.mobile.activePageClass ),
 					tScrollElem = activePage,
 					scrollTop = $window.scrollTop(),
 					btnOffset = self.button.offset().top,
