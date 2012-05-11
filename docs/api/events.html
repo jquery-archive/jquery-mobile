@@ -42,7 +42,11 @@
 		<h2>Touch events</h2>
 		<dl>
 			<dt><code>tap</code></dt>
-			<dd>Triggers after a quick, complete touch event.</dd>
+			<dd><p>Triggers after a quick, complete touch event.</p>
+			  <ul>
+			  	<li><code>tapholdThreshold</code> (default: 750ms) – This value dictates how long the user must hold their tap before the taphold event is fired on the target element.</li>
+			  </ul>
+      </dd>
 
 			<dt><code>taphold</code></dt>
 			<dd>Triggers after a held complete touch event (close to one second).</dd>
@@ -100,7 +104,7 @@
 		<h2>Orientation change event</h2>
 		<dl>
 			<dt><code>orientationchange</code></dt>
-			<dd>Triggers when a device orientation changes (by turning it vertically or horizontally). When bound to this event, your callback function can leverage a second argument, which contains an <code>orientation</code> property equal to either "portrait" or "landscape". These values are also added as classes to the HTML element, allowing you to leverage them in your CSS selectors. Note that we currently bind to the resize event when <code>orientationchange</code> is not natively supported, or when <code>$.mobile.orientationChangeEnabled</code> is set to false.</dd>
+			<dd>Triggers when a device orientation changes (by turning it vertically or horizontally). When bound to this event, your callback function can leverage a second argument, which contains an <code>orientation</code> property equal to either "portrait" or "landscape". Note that we currently bind to the resize event when <code>orientationchange</code> is not natively supported, or when <code>$.mobile.orientationChangeEnabled</code> is set to false.</dd>
 			<div class="ui-body ui-body-e">
 				<h4>orientationchange timing</h4>
 

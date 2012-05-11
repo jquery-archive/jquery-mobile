@@ -48,10 +48,13 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 					}
 				})
 				.bind( "expand", function( event ) {
-					$( event.target )
-						.closest( ".ui-collapsible" )
-						.siblings( ".ui-collapsible" )
-						.trigger( "collapse" );
+					var closestCollapsible = $( event.target )
+						.closest( ".ui-collapsible" );
+					if( closestCollapsible.parent().is( ":jqmData(role='collapsible-set')" ) ) {
+						closestCollapsible
+							.siblings( ".ui-collapsible" )
+							.trigger( "collapse" );
+					}
 				});
 		}
 	},

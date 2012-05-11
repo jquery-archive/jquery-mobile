@@ -55,13 +55,10 @@ $( document ).delegate("#aboutPage", "pagebeforecreate", function() {
   alert('A page with an ID of "aboutPage" is about to be created by jQuery Mobile!');
 });
 </code></pre>
-
+		<div class="ui-body ui-body-e">
 			<h4 style="margin:.5em 0">Important note: <code>pageCreate()</code> vs <code>pageInit()</code></h4>
-			<p>Prior to Beta 2 the recommendation to users wishing to manipulate jQuery Mobile enhanced page and child widget markup was to bind to the <code>pagecreate</code> event. In Beta 2 an internal change was made to decouple each of the widgets by binding to the <code>pagecreate</code> event in place of direct calls to the widget methods. As a result, users binding to the <code>pagecreate</code> in <code>mobileinit</code> would find their binding executing before the markup had been enhanced by each of the plugins. In keeping with the lifecycle of the jQuery UI Widget Factory, the initialization method is invoked <strong>after</strong> the create method, so the <code>pageinit</code> event provides the correct timing for post enhancement manipulation of the DOM and/or Javascript objects.
-
-			In short, if you were previously using <code>pagecreate</code> to manipulate the enhanced markup before the page was shown, it's very likely you'll want to migrate to 'pageinit'.
-			</p>
-
+			<p>Prior to Beta 2 the recommendation to users wishing to manipulate jQuery Mobile enhanced page and child widget markup was to bind to the <code>pagecreate</code> event. In Beta 2 an internal change was made to decouple each of the widgets by binding to the <code>pagecreate</code> event in place of direct calls to the widget methods. As a result, users binding to the <code>pagecreate</code> in <code>mobileinit</code> would find their binding executing before the markup had been enhanced by each of the plugins. In keeping with the lifecycle of the jQuery UI Widget Factory, the initialization method is invoked <strong>after</strong> the create method, so the <code>pageinit</code> event provides the correct timing for post enhancement manipulation of the DOM and/or Javascript objects. In short, if you were previously using <code>pagecreate</code> to manipulate the enhanced markup before the page was shown, it's very likely you'll want to migrate to 'pageinit'.</p>
+		</div>
 
 			<h2>Changing pages</h2>
 			<p>If you want to change the current active page with JavaScript, you can use the <a href="../api/methods.html"><code>changePage</code></a> method. There are a lot of methods and properties that you can set when changing pages, but here are two simple examples:</p>
@@ -69,7 +66,7 @@ $( document ).delegate("#aboutPage", "pagebeforecreate", function() {
 <strong>//transition to the "about us" page with a slideup transition</strong>
 $.mobile.changePage( "about/us.html", { transition: "slideup"} );
 
-<strong>//transition to the "search results" page, using data from a form with an ID of "search"" 	</strong>
+<strong>//transition to the "search results" page, using data from a form with an ID of "search"</strong>
 $.mobile.changePage( "searchresults.php", {
 	type: "post",
 	data: $("form#search").serialize()
@@ -87,13 +84,20 @@ $.mobile.loadPage( "about/us.html" );
 			<p>The page plugin dispatches a <code>pageInit</code> event, which most widgets use to auto-initialize themselves. As long as a widget plugin script is referenced, it will automatically enhance any instances of the widgets it finds on the page.</p>
 			<p>However, if you generate new markup client-side or load in content via Ajax and inject it into a page, you can trigger the <code>create</code> event to handle the auto-initialization for all the plugins contained within the new markup. This can be triggered on any element (even the page <code>div</code> itself), saving you the task of manually initializing each plugin (listview button, select, etc.).</p>
 			<p>For example, if a block of HTML markup (say a login form) was loaded in through Ajax, trigger the <code>create</code> event to automatically transform all the widgets it contains (<a href="http://jquerymobile.com/test/docs/forms/textinputs/index.html">inputs</a> and <a href="http://jquerymobile.com/test/docs/buttons/index.html">buttons</a> in this case) into the enhanced versions. The code for this scenario would be:</p>
-<pre style="margin: 25px 0;"><code style="font-size: 12px;">$( ...new markup that contains widgets... ).appendTo( ".ui-page" ).trigger( "create" );
-</code></pre>
+<pre><code>$( ...new markup that contains widgets... ).appendTo( ".ui-page" ).trigger( "create" );</code></pre>
 
 			<h2>Create vs. refresh: An important distinction</h2>
 			<p>Note that there is an important difference between the <code>create</code> event and <code>refresh</code> method that some widgets have. The <code>create</code> event is suited for enhancing <em>raw markup</em> that contains one or more widgets. The <code>refresh</code> method should be used on existing (already enhanced) widgets that have been manipulated programmatically and need the UI be updated to match.</p>
 
 			<p>For example, if you had a page where you dynamically appended a new unordered list with <code>data-role=listview</code> attribute after page creation, triggering <code>create</code> on a parent element of that list would transform it into a <a href="http://jquerymobile.com/test/docs/lists/index.html">listview</a> styled widget. If more list items were then programmatically added, calling the listview&#8217;s <code>refresh</code> method would update just those new list items to the enhanced state and leave the existing list items untouched.</p>
+
+
+			<h2>data-enhance="false" data attribute</h2>
+			<p>As of jQuery Mobile 1.0, all the markup within a page is scanned for elements to be enhanced. This is problematic for 3rd party widgets/libraries that don’t want anybody enhancing their markup or attaching behavior. We heard requests for a data-* attribute that can be placed on an element container to tell the framework not to enhance anything inside it for these situations. In 1.1, we’ve added a new <code>data-enhance="false"</code> attribute that can be added to a container to prevent both auto-initialization and link/form hijacking. 
+			This is also available via <code>$.fn.jqmEnhanceable</code>. It’s important to note that because of the performance impact incurred by finding a parent element with the <code>data-enhance="false"</code> attribute this feature must be turned on explicitly with <code>$.mobile.ignoreContentEnabled=true</code>. </p>
+			
+			<h2>data-ajax="false" now works on containers</h2>
+			<p>On a related topic, we’ve always offered the ability to disable the AJAX navigation system from hijacking a link or form submit via the <code>data-ajax="false"</code> attribute, but people have asked for a way to apply this exclusion more efficiently to a grouping of links. In 1.1, this is now possible by simply adding, and setting <code>$.mobile.ignoreContentEnabled=true</code>, the <code>data-ajax</code> attribute to a parent container and it will exclude all the child links or forms from the AJAX navigation system behavior.</p>
 
 
 			<h2>Scrolling to a position within a page</h2>
@@ -132,6 +136,7 @@ $.mobile.silentScroll(300);
 								<li><a href="page-titles.html">Page titles</a></li>
 								<li><a href="page-links.html">Linking pages</a></li>
 								<li><a href="page-transitions.html">Page transitions</a></li>
+								<li><a href="loader.html">Page loading widget</a></li>
 								<li><a href="page-dialogs.html">Dialogs</a></li>
 								<li><a href="popup/index.html">Popups</a></li>
 								<li><a href="page-cache.html">Prefetching &amp; caching pages</a></li>

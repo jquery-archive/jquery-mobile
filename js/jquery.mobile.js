@@ -3,6 +3,7 @@
 
 define([
 	'require',
+	'./jquery.mobile.loader',
 	'./jquery.mobile.navigation',
 	'./jquery.mobile.navigation.pushstate',
 	'./jquery.mobile.transition.pop',
