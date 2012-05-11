@@ -206,28 +206,28 @@ define( [ "jquery",
 
 		_realOpen: function( x, y ) {
 			var self = this,
-				// Count down to triggering "opened" - we have two prerequisits:
-				// 1. The popup window animation completes (onAnimationComplete())
-				// 2. The screen opacity animation completes (showScreen())
-				triggerPrereqs = 2,
-				maybeTriggerOpened = function() {
-					triggerPrereqs--;
+			    // Count down to triggering "opened" - we have two prerequisits:
+			    // 1. The popup window animation completes (onAnimationComplete())
+			    // 2. The screen opacity animation completes (showScreen())
+			    triggerPrereqs = 2,
+			    maybeTriggerOpened = function() {
+			    	triggerPrereqs--;
 
-					if ( 0 === triggerPrereqs ) {
-						self._isOpen = true;
-						self.element.trigger( "opened" );
-					}
-				},
-				onAnimationComplete = function() {
-					self._ui.screen.height( $( document ).height() );
-					maybeTriggerOpened();
-				},
-				showScreen = function() {
-					maybeTriggerOpened();
-				},
-				coords = self._placementCoords(
-						( undefined === x ? window.innerWidth / 2 : x ),
-						( undefined === y ? window.innerHeight / 2 : y ) );
+			    	if ( 0 === triggerPrereqs ) {
+			    		self._isOpen = true;
+			    		self.element.trigger( "opened" );
+			    	}
+			    },
+			    onAnimationComplete = function() {
+			    	self._ui.screen.height( $( document ).height() );
+			    	maybeTriggerOpened();
+			    },
+			    showScreen = function() {
+			    	maybeTriggerOpened();
+			    },
+			    coords = self._placementCoords(
+			    	( undefined === x ? window.innerWidth / 2 : x ),
+			    	( undefined === y ? window.innerHeight / 2 : y ) );
 
 			if ( !self.options.theme ) {
 				self._setTheme( self._page.jqmData( "theme" ) || $.mobile.getInheritedTheme( self._page, "c" ) );
@@ -265,30 +265,30 @@ define( [ "jquery",
 
 		_realClose: function() {
 			var self = this,
-				// Count down to triggering "closed" - we have two prerequisits:
-				// 1. The popup window reverse animation completes (onAnimationComplete())
-				// 2. The screen opacity animation completes (hideScreen())
-				triggerPrereqs = 2,
-				maybeTriggerClosed = function() {
-					triggerPrereqs--;
+			    // Count down to triggering "closed" - we have two prerequisits:
+			    // 1. The popup window reverse animation completes (onAnimationComplete())
+			    // 2. The screen opacity animation completes (hideScreen())
+			    triggerPrereqs = 2,
+			    maybeTriggerClosed = function() {
+			    	triggerPrereqs--;
 
-					if ( 0 === triggerPrereqs ) {
-						self._isOpen = false;
-						self.element.trigger( "closed" );
-					}
-				},
-				onAnimationComplete = function() {
-					self._ui.container
-						.removeClass( "reverse out" )
-						.addClass( "ui-selectmenu-hidden" )
-						.removeAttr( "style" );
-					maybeTriggerClosed();
-				},
-				hideScreen = function() {
-					self._ui.screen.addClass( "ui-screen-hidden" );
-					self._ui.screen.removeClass( "out" );
-					maybeTriggerClosed();
-				};
+			    	if ( 0 === triggerPrereqs ) {
+			    		self._isOpen = false;
+			    		self.element.trigger( "closed" );
+			    	}
+			    },
+			    onAnimationComplete = function() {
+			    	self._ui.container
+			    		.removeClass( "reverse out" )
+			    		.addClass( "ui-selectmenu-hidden" )
+			    		.removeAttr( "style" );
+			    	maybeTriggerClosed();
+			    },
+			    hideScreen = function() {
+			    	self._ui.screen.addClass( "ui-screen-hidden" );
+			    	self._ui.screen.removeClass( "out" );
+			    	maybeTriggerClosed();
+			    };
 
 			if ( this.options.transition && this.options.transition !== "none" ) {
 				this._ui.container
