@@ -146,15 +146,29 @@
 			</div>
 		</div>
 
-              <p>Popup windows can have various transitions:
+              <p>Popup windows can have various transitions:</p>
               <a href="#transitionExample" data-transition="none" data-role="button" data-inline="true" data-rel="popup">No transition</a>
               <a href="#transitionExample" data-transition="pop" data-role="button" data-inline="true" data-rel="popup">Pop</a>
               <a href="#transitionExample" data-transition="slideup" data-role="button" data-inline="true" data-rel="popup">Slide up</a>
               <a href="#transitionExample" data-transition="slidedown" data-role="button" data-inline="true" data-rel="popup">Slide down</a>
-              </p>
-              <div id="transitionExample" data-role="popup" data-transition="none">
+              <div id="transitionExample" data-role="popup" data-transition="flip">
                 <p>This is some text for the transition example</p>
               </div>
+							<p>
+							You can add a <code>data-transition</code> attribute to the popup itself to assign it a default transition other than the system-wide <code>$.mobile.defaultDialogTransition</code>. This assignment can then be overriden by a <code>data-transition</code> attribute specified on a link that opens the popup. The transition examples have the following code:
+							</p>
+							<pre><code>
+&lt;a href=&quot;#transitionExample&quot; <strong>data-transition=&quot;none&quot;</strong> data-role=&quot;button&quot; data-inline=&quot;true&quot; data-rel=&quot;popup&quot;&gt;No transition&lt;/a&gt;
+&lt;a href=&quot;#transitionExample&quot; <strong>data-transition=&quot;pop&quot;</strong> data-role=&quot;button&quot; data-inline=&quot;true&quot; data-rel=&quot;popup&quot;&gt;Pop&lt;/a&gt;
+&lt;a href=&quot;#transitionExample&quot; <strong>data-transition=&quot;slideup&quot;</strong> data-role=&quot;button&quot; data-inline=&quot;true&quot; data-rel=&quot;popup&quot;&gt;Slide up&lt;/a&gt;
+&lt;a href=&quot;#transitionExample&quot; <strong>data-transition=&quot;slidedown&quot;</strong> data-role=&quot;button&quot; data-inline=&quot;true&quot; data-rel=&quot;popup&quot;&gt;Slide down&lt;/a&gt;
+&lt;div id=&quot;transitionExample&quot; data-role=&quot;popup&quot; <strong>data-transition=&quot;flip&quot;</strong>&gt;
+  &lt;p&gt;This is some text for the transition example&lt;/p&gt;
+&lt;/div&gt;
+							</code></pre>
+							<p>
+								When you launch the popup from any of the buttons, the <code>data-transition</code> given for that button will be used. However, if you launch the popup by other means, such as, for example, via <code>$("#transitionExample").popup("open")</code>, the <code>data-transition</code> given for the popup will be used (the flip transition).
+							</p>
 
 		<h2>Calling the popup plugin</h2>
 
