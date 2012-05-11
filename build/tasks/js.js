@@ -35,7 +35,7 @@ module.exports = function( grunt ) {
 			requirejs.optimize( require );
 
 			// dump the versioned header into the normal js file
-			grunt.file.write( config.ver.header, outputFile + '.js' );
+			helpers.write( config.ver.header, outputFile + '.js' );
 
 			// add the compiled js to the normal js file, replace the version tag
 			// with the contents from version.txt
