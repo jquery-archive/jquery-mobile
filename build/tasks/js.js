@@ -18,7 +18,7 @@ module.exports = function( grunt ) {
 				'../external/requirejs/text',
 				'../external/requirejs/text!../version.txt'
 			],
-			out: 'outputFile.compiled.js',
+			out: outputFile + '.compiled.js',
 			pragmasOnSave: { jqmBuildExclude: true },
 			wrap: { startFile: 'build/wrap.start', endFile: 'build/wrap.end' },
 			findNestedDependencies: true,
@@ -44,8 +44,8 @@ module.exports = function( grunt ) {
 			});
 
 			helpers.minify({
-				output: outputFile + ".min.js",
-				input: outputFile + ".js",
+				output: outputFile + '.min.js',
+				input: outputFile + '.js',
 				header: config.ver.min,
 				minCallback: function( unminified ) {
 					return grunt.helper( 'uglify', unminified, {});

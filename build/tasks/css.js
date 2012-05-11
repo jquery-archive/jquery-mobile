@@ -11,6 +11,8 @@ module.exports = function( grunt ) {
 		helpers = config.helpers;
 
 	grunt.config.set( 'css', {
+		theme: process.env.THEME || 'default',
+
 		require: {
 			all: {
 				cssIn: 'css/themes/default/jquery.mobile.css',
@@ -27,7 +29,9 @@ module.exports = function( grunt ) {
 	});
 
 	grunt.registerTask( 'css_without_deps', 'compile and minify the css', function() {
-		var done = this.async(), require = grunt.config.get( 'css' ).require;
+		var done = this.async(),
+			theme = grunt.config.get( 'css' ).theme,
+			require = grunt.config.get( 'css' ).require;
 
 		helpers.asyncConfig(function( config ) {
 			// pull the includes together using require js
@@ -40,8 +44,8 @@ module.exports = function( grunt ) {
 			helpers.appendFrom( regularFile + '.css', require.all.out );
 
 			helpers.minify({
-				output: regularFile + ".min.css",
-				input: regularFile + ".css",
+				output: regularFile + '.min.css',
+				input: regularFile + '.css',
 				header: config.ver.min,
 				minCallback: function( unminified ) {
 					return sqwish.minify( unminified, false );
@@ -58,12 +62,12 @@ module.exports = function( grunt ) {
 			helpers.appendFrom( structureFile + '.css', require.all.out );
 
 			// add the min header into the minified file
-			grunt.file.write( structureFile + ".min.css", config.ver.min );
+			grunt.file.write( structureFile + '.min.css', config.ver.min );
 
 			// minify the structure css
 			helpers.minify({
-				output: structureFile + ".min.css",
-				input: structureFile + ".css",
+				output: structureFile + '.min.css',
+				input: structureFile + '.css',
 				header: config.ver.min,
 				minCallback: function( unminified ) {
 					return sqwish.minify( unminified, false );
@@ -78,8 +82,8 @@ module.exports = function( grunt ) {
 
 			// minify the theme css
 			helpers.minify({
-				output: themeFile + ".min.css",
-				input: themeFile + ".css",
+				output: themeFile + '.min.css',
+				input: themeFile + '.css',
 				header: config.ver.min,
 				minCallback: function( unminified ) {
 					return sqwish.minify( unminified, false );
@@ -90,7 +94,13 @@ module.exports = function( grunt ) {
 			fs.unlink( require.all.out );
 			fs.unlink( require.structure.out );
 
-			// TODO cp the theme images
+			// copy images directory
+			var imagesPath = path.join( config.dirs.output, 'images' );
+			grunt.file.mkdir( imagesPath );
+			grunt.file.recurse( path.join('css', 'themes', theme, 'images'), function( full, root, sub, filename ) {
+				grunt.file.write(path.join(imagesPath, filename), grunt.file.read( full ));
+			});
+
 			done();
 		});
 	});
