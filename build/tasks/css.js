@@ -1,7 +1,8 @@
 var requirejs = require( 'requirejs' ),
 	path = require( 'path' ),
 	fs = require( 'fs' ),
-  sqwish = require ( 'sqwish' );
+  sqwish = require ( 'sqwish' ),
+  util = require( 'util' );
 
 module.exports = function( grunt ) {
 	var config = grunt.config.get( 'global' ),
@@ -95,13 +96,19 @@ module.exports = function( grunt ) {
 			fs.unlink( require.structure.out );
 
 			// copy images directory
-			var imagesPath = path.join( config.dirs.output, 'images' );
+			var imagesPath = path.join( config.dirs.output, 'images' ), fileCount = 0;
+
 			grunt.file.mkdir( imagesPath );
 			grunt.file.recurse( path.join('css', 'themes', theme, 'images'), function( full, root, sub, filename ) {
-				grunt.file.write(path.join(imagesPath, filename), grunt.file.read( full ));
-			});
 
-			done();
+				fileCount++;
+				var is = fs.createReadStream( full );
+				var os = fs.createWriteStream( path.join(imagesPath, filename) );
+				util.pump(is, os, function() {
+					fileCount--;
+					if( fileCount == 0 ) { done(); }
+				});
+			});
 		});
 	});
 

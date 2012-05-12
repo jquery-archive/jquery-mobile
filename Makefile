@@ -16,16 +16,22 @@ clean:
 
 # Create the output directory.
 init:
+	@@npm install
 	@@mkdir -p ${OUTPUT}
 
 # Build and minify the CSS files
 css: init
-	@@${ARGS} bash build/bin/css.sh
+	@@node node_modules/.bin/grunt css
 
 # Build and minify the JS files
 js: init
-	@@${ARGS} bash build/bin/js.sh
+	@@node node_modules/.bin/grunt js
 
+# -------------------------------------------------
+#
+# For jQuery Team Use Only
+#
+# -------------------------------------------------
 docs: init js css
 	@@${ARGS} bash build/bin/docs.sh
 
@@ -38,12 +44,6 @@ notify: init
 zip: init css js
 	@@${ARGS} bash build/bin/zip.sh
 
-# -------------------------------------------------
-#
-# For jQuery Team Use Only
-#
-# -------------------------------------------------
-# NOTE the clean (which removes previous build output) has been removed to prevent a gap in service
 build_latest: css docs js zip
 	@@${ARGS} bash build/bin/build_latest.sh
 
