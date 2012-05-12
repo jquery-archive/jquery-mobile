@@ -31,7 +31,6 @@ body { background: #dddddd; }
 	-moz-transform: rotate(45deg);
 	-o-transform: rotate(45deg);
 	transform: rotate(45deg);
-
 	-webkit-box-shadow: 0 0 6px rgba(0,0,0,.40);
 	-moz-box-shadow: 0 0 6px rgba(0,0,0,.40);
 	-o-box-shadow: 0 0 6px rgba(0,0,0,.40);
@@ -270,6 +269,10 @@ dd h4 { margin:15px 0 0 0; }
 	.type-interior .ui-content {
 		padding: 0;
 		background: url(../images/px-ccc.gif) 50% 0 repeat-y;
+	}
+	.ui-popup-container .ui-content {
+		padding: 15px;
+		background-image: none;
 	}
 	.type-interior .ui-content {
 		background-position: 45%;
