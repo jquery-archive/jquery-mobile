@@ -14,7 +14,7 @@
 </head> 
 <body> 
 
-<div data-role="page" id="pagea" class="type-interior">
+<div data-role="page" class="type-interior">
 
 	<div data-role="header" data-theme="f">
 		<h1>Theming buttons</h1>
@@ -97,47 +97,6 @@
 			<a href="index.html" data-role="button" data-theme="e" data-icon="arrow-l" data-inline="true">Theme e</a>
 		</div>
 		
-		<h2>Changing button theme dynamically</h2>
-		
-		<p>Post enhancement, it is still possible to change the assigned button theme programmatically. 
-		In the example below, the theme of the main 'target' button, initially set to theme e,
-		will be changed when the user clicks one of the buttons set to change that theme. 
-		The new 'target' button theme will be set according to which button is clicked. 
-		<strong>Note:</strong> here <code>pagea</code> is the id of the page containing the buttons.
-		</p>
-		
-		<p>JavaScript</p>	
-<pre><code>			
-&lt;script type="text/javascript"&gt;
-$('#pagea').bind('pageinit', function() {
-  $('.btn').click(function() {
-    var thm = $(this).attr('id');
-    $('.target').val('Button themed ' + thm ).buttonMarkup({ theme: thm }).button('refresh');
-  });
-});
-&lt;/script&gt;</code></pre>
-
-		<p>HTML</p>
-<pre><code>&lt;input type="button" class="target" data-theme="e" value="Button themed e" /&gt;
-&lt;hr /&gt;
-&lt;div data-role="controlgroup" data-type="horizontal"&gt;
-  &lt;input type="button" class="btn" id="a" data-theme="a" value="theme a" /&gt;
-  &lt;input type="button" class="btn" id="b" data-theme="b" value="theme b" /&gt;
-  &lt;input type="button" class="btn" id="c" data-theme="c" value="theme c" /&gt;
-  &lt;input type="button" class="btn" id="d" data-theme="d" value="theme d" /&gt;
-&lt;/div&gt;
-</code></pre>
-
-<input type="button" class="target" data-theme="e" value="Button themed e" />
-
-    <hr>
-     <div data-role="controlgroup" data-type="horizontal">
-      <input type="button" class="btn" id="a" data-theme="a" value="theme a" />
-      <input type="button" class="btn" id="b" data-theme="b" value="theme b" />
-      <input type="button" class="btn" id="c" data-theme="c" value="theme c" />
-      <input type="button" class="btn" id="d" data-theme="d" value="theme d" />
-  
-    </div>
 	</div><!--/content-primary -->		
 	
 	<div class="content-secondary">
@@ -166,13 +125,6 @@ $('#pagea').bind('pageinit', function() {
 </div>
 	
 </div><!-- /page -->
-<script type="text/javascript">
-$('#pagea').bind('pageinit', function() {
-  $('.btn').click(function() {
-    var thm = $(this).attr('id');
-    $('.target').val('Button themed ' + thm ).buttonMarkup({ theme: thm }).button('refresh');
-  });
-});
-</script>
+
 </body>
 </html>
