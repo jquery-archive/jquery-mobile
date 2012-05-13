@@ -36,6 +36,15 @@ else
 	RUN_JS = @@java -XX:ReservedCodeCacheSize=64m -classpath build/js.jar:build/google-compiler-20111003.jar org.mozilla.javascript.tools.shell.Main
 endif
 
+# Check if the current version has been tagged
+# If not show a warning when we invoke the deploy build target
+GIT_TAG = $(shell git tag -l ${VER_OFFICIAL})
+HAS_GIT_TAG = $(shell if [ -n "${GIT_TAG}" ];then echo true; fi)
+
+ifneq (${HAS_GIT_TAG}, true)
+	MISSING_GIT_TAG_WARNING =  Warning: This version has not been tagged in git.
+endif
+
 # Build Targets
 
 # When no build target is specified, all gets ran
@@ -216,6 +225,7 @@ deploy: clean init css js docs zip
 	# Do some cleanup to wrap it up
 	@@rm -rf tmp
 	@@rm -rf ${OUTPUT}
+	@echo ${MISSING_GIT_TAG_WARNING}
 	# -------------------------------------------------
 
 
