@@ -63,7 +63,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			valuebg = control.jqmData("highlight") && cType != "select" ? (function() {
 				var bg = document.createElement('div');
-				bg.className = 'ui-slider-bg ui-btn-active ui-btn-corner-all';
+				bg.className = 'ui-slider-bg ' + $.mobile.activeBtnClass + ' ui-btn-corner-all';
 				return $( bg ).prependTo( slider );
 			})() : false,
 
