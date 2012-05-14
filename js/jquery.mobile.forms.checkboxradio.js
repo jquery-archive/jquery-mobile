@@ -21,7 +21,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 		var self = this,
 			input = this.element,
 			inheritAttr = function( input, dataAttr ) {
-				return input.jqmData( dataAttr ) || input.closest( "form,fieldset" ).jqmData( dataAttr )
+				return input.jqmData( dataAttr ) || input.closest( "form,fieldset" ).jqmData( dataAttr );
 			},
 			// NOTE: Windows Phone could not find the label through a selector
 			// filter works though.
