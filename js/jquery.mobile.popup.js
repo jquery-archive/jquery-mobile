@@ -80,12 +80,10 @@ define( [ "jquery",
 				self.close();
 			});
 			$( window ).bind( "keyup", function( e ) {
-				if ( self._isOpen ) {
-					if ( e.keyCode === $.mobile.keyCode.ESCAPE ) {
-						e.preventDefault();
-						e.stopImmediatePropagation();
-						self.close();
-					}
+				if ( self._isOpen && e.keyCode === $.mobile.keyCode.ESCAPE ) {
+					e.preventDefault();
+					e.stopImmediatePropagation();
+					self.close();
 				}
 			});
 		},
@@ -103,7 +101,8 @@ define( [ "jquery",
 				if ( matches && matches.length > 1 ) {
 					currentTheme = matches[ 1 ];
 					break;
-				} else {
+				}
+				else {
 					currentTheme = null;
 				}
 			}
@@ -189,7 +188,8 @@ define( [ "jquery",
 
 			if ( roomtop > menuHeight / 2 && roombot > menuHeight / 2 ) {
 				newtop = y - halfheight;
-			} else {
+			}
+			else {
 				// 30px tolerance off the edges
 				newtop = roomtop > roombot ? scrollTop + screenHeight - menuHeight - 30 : scrollTop + 30;
 			}
@@ -197,14 +197,17 @@ define( [ "jquery",
 			// If the menuwidth is greater or equal to the max-width, center it on screen
 			if ( menuWidth >= maxwidth ) {
 				newleft = ( screenWidth - menuWidth ) / 2;
-			} else {
+			}
+			else {
 				//otherwise insure a >= 30px offset from the left
 				newleft = x - menuWidth / 2;
 
 				// 10px tolerance off the edges
 				if ( newleft < 10 ) {
 					newleft = 10;
-				} else if ( ( newleft + menuWidth ) > screenWidth ) {
+				}
+				else
+				if ( ( newleft + menuWidth ) > screenWidth ) {
 					newleft = screenWidth - menuWidth - 10;
 				}
 			}
@@ -316,7 +319,8 @@ define( [ "jquery",
 					.removeClass( "in" )
 					.addClass( "reverse out" )
 					.animationComplete( onAnimationComplete );
-			} else {
+			}
+			else {
 				onAnimationComplete();
 			}
 
@@ -325,7 +329,8 @@ define( [ "jquery",
 					.removeClass( "in" )
 					.addClass( "out" )
 					.animationComplete( hideScreen );
-			} else {
+			}
+			else {
 				hideScreen();
 			}
 		},
