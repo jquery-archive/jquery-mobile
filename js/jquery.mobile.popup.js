@@ -538,35 +538,28 @@ define( [ "jquery",
 		},
 
 		_onHashChange: function() {
-			var self = this;
+			this._haveNavHook = false;
 
-			self._haveNavHook = false;
-
-			if ( self._myOwnHashChange ) {
-				self._myOwnHashChange = false;
-				self._inProgress = false;
-				if ( self._actionQueue.length > 0 ) {
-					self._runSingleAction() ;
-				}
+			if ( this._myOwnHashChange ) {
+				this._myOwnHashChange = false;
+				this._inProgress = false;
 			}
 			else {
-				var popupToClose = null;
-				if ( self._inProgress ) {
-					self._actionQueue = [ self._actionQueue[0] ];
-					if ( self._actionQueue[0].open ) {
-						popupToClose = self._actionQueue[0].popup;
-					}
+				var offset, ac;
+
+				if ( this._inProgress ) {
+					offset = 1;
+					ac = ( this._actionQueue[0].open ? { open: false, popup: this._actionQueue[0].popup } : undefined );
 				}
 				else {
-					self._actionQueue = [];
-					if ( self._currentlyOpenPopup ) {
-						popupToClose = self._currentlyOpenPopup;
-					}
+					offset = 0,
+					ac = ( this._currentlyOpenPopup ? { open: false, popup: this._currentlyOpenPopup } : undefined );
 				}
-				if ( popupToClose ) {
-					self._actionQueue.push( { open: false, popup: popupToClose } );
-					self._runSingleAction();
-				}
+				this._actionQueue.splice( offset, this._actionQueue.length - offset, ac );
+			}
+
+			if ( this._actionQueue.length > 0 ) {
+				this._runSingleAction() ;
 			}
 		}
 	}
