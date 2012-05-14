@@ -660,7 +660,7 @@ define( [
 		settings.pageContainer = settings.pageContainer || $.mobile.pageContainer;
 
 		// Check to see if the page already exists in the DOM.
-		page = settings.pageContainer.children( ":jqmData(url='" + dataUrl + "')" );
+		page = settings.pageContainer.children( ":jqmData(url='" + decodeURIComponent(dataUrl) + "')" );
 
 		// If we failed to find the page, check to see if the url is a
 		// reference to an embedded page. If so, it may have been dynamically
