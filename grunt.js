@@ -4,11 +4,6 @@ module.exports = function( grunt ) {
 
 	// Project configuration.
 	grunt.config.init({
-		global: {
-			output: 'compiled',
-			name: 'jquery.mobile'
-		},
-
 		jshint: {
 			options: {
 				curly: true,
@@ -51,6 +46,9 @@ module.exports = function( grunt ) {
 
 	// set the default task.
 	grunt.registerTask('default', 'lint');
+
+	// load the project config
+	grunt.loadTasks( path.join('build', 'tasks', 'config') );
 
 	// load the project's default tasks
 	grunt.loadTasks( path.join('build', 'tasks') );
