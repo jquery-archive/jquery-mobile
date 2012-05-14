@@ -597,9 +597,7 @@ define( [ "jquery",
 	};
 
 	$( document ).bind( "pagecreate create", function( e )  {
-		$( $.mobile.popup.prototype.options.initSelector, e.target )
-				.not( ":jqmData(role='none'), :jqmData(role='nojs')" )
-				.popup();
+		$.mobile.popup.prototype.enhanceWithin( e.target, true );
 
 		$( "a[href^='#']:jqmData(rel='popup')", e.target ).each( function() {
 			$.mobile.popup.bindPopupToButton( $( this ), $( $( this ).attr( "href" ) ) );
