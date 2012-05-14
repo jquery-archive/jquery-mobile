@@ -13,3 +13,6 @@ tmp/
 
 # branch preview
 branches
+
+# node build dependencies
+node_modules

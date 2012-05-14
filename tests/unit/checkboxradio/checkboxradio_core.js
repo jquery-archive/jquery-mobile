@@ -185,7 +185,7 @@
 
 	test( "theme should be inherited", function() {
 		var $inherited = $( "#checkbox-inherit-theme" ),
-		    $explicit = $( "#checkbox-explicit-theme" );
+			$explicit = $( "#checkbox-explicit-theme" );
 
 		ok( $inherited.siblings("label").hasClass( "ui-btn-up-a" ), "should inherit from page" );
 		ok( $explicit.siblings("label").hasClass( "ui-btn-up-b" ), "should not inherit" );
@@ -250,7 +250,7 @@
 
     ok( $checkbox.parent().hasClass("ui-checkbox"), "enhancement has occured");
   });
-  
+
   test( "nested label (no [for]) checkbox still renders", function() {
     var $checkbox = $( "#checkbox-nested-label-no-for" );
 
@@ -262,9 +262,9 @@
 
     ok( $checkbox.parent().hasClass("ui-checkbox"), "enhancement has occured");
   });
-  
+
 	test( "Icon positioning", function() {
-		var bottomicon = $("[for='bottomicon']")
+		var bottomicon = $("[for='bottomicon']"),
 			topicon = $("[for='topicon']");
 
 		ok( bottomicon.hasClass("ui-btn-icon-bottom"), "Icon position set on label adds the appropriate class." );
