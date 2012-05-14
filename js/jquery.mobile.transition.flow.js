@@ -14,7 +14,7 @@ define( [ "jquery", "./jquery.mobile.transition" ], function( $ ) {
 
 $.mobile.transitionFallbacks.flow = "fade";
 
-})( jQuery, this );
+})( jQuery, window );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
 //>>excludeEnd("jqmBuildExclude");

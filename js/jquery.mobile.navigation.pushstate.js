@@ -143,7 +143,7 @@ define( [ "jquery", "./jquery.mobile.navigation", "../external/requirejs/depend!
 			pushStateHandler.init();
 		}
 	});
-})( jQuery, this );
+})( jQuery, window );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
 //>>excludeEnd("jqmBuildExclude");
