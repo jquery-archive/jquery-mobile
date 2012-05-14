@@ -47,8 +47,8 @@ module.exports = function( grunt ) {
 	// set the default task.
 	grunt.registerTask('default', 'lint');
 
-	// load the project config
-	grunt.loadTasks( path.join('build', 'tasks', 'config') );
+	// load the project wide config before loading the tasks
+	require( path.resolve(path.join('build', 'config')) )( grunt );
 
 	// load the project's default tasks
 	grunt.loadTasks( path.join('build', 'tasks') );
