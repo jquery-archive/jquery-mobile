@@ -164,7 +164,7 @@ define( [	"jquery",	"./jquery.mobile.core",	"./jquery.mobile.init" ], function( 
 		}
 	});
 
-	$window.on( 'pagecontainercreate', function() {
+	$window.bind( 'pagecontainercreate', function() {
 		$.mobile.loaderWidget = $.mobile.loaderWidget || $( $.mobile.loader.prototype.defaultHtml ).loader();
 	});
 })(jQuery, this);
