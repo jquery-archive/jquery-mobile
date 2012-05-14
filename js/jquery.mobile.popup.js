@@ -22,28 +22,21 @@ define( [ "jquery",
 
 		_create: function() {
 			var ui = {
-			    	screen: "#ui-popup-screen",
-			    	placeholder: "#placeholder",
-			    	container: "#ui-popup-container"
+			    	screen: $("<div class='ui-screen-hidden ui-popup-screen fade'></div>"),
+			    	placeholder: $("<div id='placeholder' style='display: none;'><!-- placeholder --></div>"),
+			    	container: $("<div id='ui-popup-container' class='ui-popup-container ui-selectmenu-hidden'></div>")
 			    },
-			    proto = $(
-			    	"<div>" +
-			    	"    <div id='ui-popup-screen' class='ui-screen-hidden ui-popup-screen fade'></div>" +
-			    	"    <div id='ui-popup-container' class='ui-popup-container ui-selectmenu-hidden'></div>" +
-			    	"    <div id='placeholder' style='display: none;'><!-- placeholder --></div>" +
-			    	"</div>"
-			    ),
+			    eatEventAndClose = function( e ) {
+			    	e.preventDefault();
+			    	e.stopImmediatePropagation();
+			    	self.close();
+			    },
 			    thisPage = this.element.closest( ":jqmData(role='page')" ),
 			    myId = this.element.attr( "id" ),
 			    self = this;
 
 			if ( thisPage.length === 0 ) {
 				thisPage = $( "body" );
-			}
-
-			// Assign the relevant parts of the proto
-			for ( var key in ui ) {
-				ui[ key ] = proto.find( ui[ key ] ).removeAttr( "id" );
 			}
 
 			// Apply the proto
@@ -65,25 +58,17 @@ define( [ "jquery",
 				_isOpen: false
 			});
 
-			$.each( this.options, function( key ) {
+			$.each( this.options, function( key, value ) {
 				// Cause initial options to be applied by their handler by temporarily setting the option to undefined
 				// - the handler then sets it to the initial value
-				var value = self.options[ key ];
-
 				self.options[ key ] = undefined;
 				self._setOption( key, value, true );
 			});
 
-			ui.screen.bind( "vclick", function( e ) {
-				e.preventDefault();
-				e.stopImmediatePropagation();
-				self.close();
-			});
+			ui.screen.bind( "vclick", function( e ) { eatEventAndClose( e ); });
 			$( window ).bind( "keyup", function( e ) {
 				if ( self._isOpen && e.keyCode === $.mobile.keyCode.ESCAPE ) {
-					e.preventDefault();
-					e.stopImmediatePropagation();
-					self.close();
+					eatEventAndClose( e );
 				}
 			});
 		},
@@ -117,26 +102,18 @@ define( [ "jquery",
 
 		_setTheme: function( value ) {
 			this._realSetTheme( this._ui.container, value );
-			this.options.theme = value;
-			this.element.attr( "data-" + ( $.mobile.ns || "" ) + "theme", value );
 		},
 
 		_setOverlayTheme: function( value ) {
 			this._realSetTheme( this._ui.screen, value );
-			this.options.overlayTheme = value;
-			this.element.attr( "data-" + ( $.mobile.ns || "" ) + "overlay-theme", value );
 		},
 
 		_setShadow: function( value ) {
-			this._ui.container[value ? "addClass" : "removeClass"]( "ui-overlay-shadow" );
-			this.options.shadow = value;
-			this.element.attr( "data-" + ( $.mobile.ns || "" ) + "shadow", value );
+			this._ui.container.toggleClass( "ui-overlay-shadow", value );
 		},
 
 		_setCorners: function( value ) {
-			this._ui.container[value ? "addClass" : "removeClass"]( "ui-corner-all" );
-			this.options.corners = value;
-			this.element.attr( "data-" + ( $.mobile.ns || "" ) + "corners", value );
+			this._ui.container.toggleClass( "ui-corner-all", value );
 		},
 
 		_applyTransition: function( value ) {
@@ -151,18 +128,18 @@ define( [ "jquery",
 			if ( !this._currentTransition ) {
 				this._applyTransition( value );
 			}
-			this.options.transition = value;
-			this.element.attr( "data-" + ( $.mobile.ns || "" ) + "transition", value );
 		},
 
 		_setOption: function( key, value ) {
-			var setter = "_set" + key.replace( /^[a-z]/, function(c) {
-				return c.toUpperCase();
-			});
+			var setter = "_set" + key.replace( /^[a-z]/, function( c ) { return c.toUpperCase(); } );
 
-			if ( this[setter] !== undefined ) {
-				this[setter]( value );
-			} else {
+			if ( this[ setter ] !== undefined ) {
+				this[ setter ]( value );
+				// Record the option change in the options and in the DOM data-* attributes
+				this.options[ key ] = value;
+				this.element.attr( "data-" + ( $.mobile.ns || "" ) + ( key.replace( /([A-Z])/, "-$1" ).toLowerCase() ), value );
+			}
+			else {
 				$.mobile.widget.prototype._setOption.apply( this, arguments );
 			}
 		},
@@ -233,9 +210,6 @@ define( [ "jquery",
 			    	self._ui.screen.height( $( document ).height() );
 			    	maybeTriggerOpened();
 			    },
-			    showScreen = function() {
-			    	maybeTriggerOpened();
-			    },
 			    coords = self._placementCoords(
 			    	( undefined === x ? window.innerWidth / 2 : x ),
 			    	( undefined === y ? window.innerHeight / 2 : y ) );
@@ -259,10 +233,10 @@ define( [ "jquery",
 			if ( self.options.overlayTheme ) {
 				self._ui.screen
 					.addClass("in")
-					.animationComplete( showScreen );
+					.animationComplete( maybeTriggerOpened );
 			}
 			else {
-				showScreen();
+				maybeTriggerOpened();
 			}
 
 			self._ui.container
@@ -309,8 +283,9 @@ define( [ "jquery",
 			    	maybeTriggerClosed();
 			    },
 			    hideScreen = function() {
-			    	self._ui.screen.addClass( "ui-screen-hidden" );
-			    	self._ui.screen.removeClass( "out" );
+			    	self._ui.screen
+			    		.removeClass( "out" )
+			    		.addClass( "ui-screen-hidden" );
 			    	maybeTriggerClosed();
 			    };
 
