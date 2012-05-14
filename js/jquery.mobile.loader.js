@@ -24,12 +24,12 @@ define( [	"jquery",	"./jquery.mobile.core",	"./jquery.mobile.init" ], function( 
 		// with the following shape: { theme: '', text: '', html: '', textVisible: '' }
 		// NOTE that the $.mobile.loading* settings and params past the first are deprecated
 		showPageLoadingMsg: function( theme, msgText, textonly ) {
-			this.loading( 'show', theme, msgText, textonly );
+			$.mobile.loading( 'show', theme, msgText, textonly );
 		},
 
 		// DEPRECATED
 		hidePageLoadingMsg: function() {
-			this.loading( 'hide' );
+			$.mobile.loading( 'hide' );
 		},
 
 		loading: function() {
