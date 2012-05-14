@@ -16,6 +16,7 @@ clean: init
 # Create the output directory.
 # NOTE it doesn't appear as though you can override init from a task file
 init:
+	@@if ! (node -v | grep v0.6 > /dev/null); then echo "!!! node.js ~> 0.6.x required" && exit 1; fi
 	@@npm install
 	@@node node_modules/.bin/grunt custom_init
 
