@@ -3,7 +3,7 @@
 */
 
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Extension to select menus to support menu styling, placeholder options, and multi-select features. 
+//>>description: Extension to select menus to support menu styling, placeholder options, and multi-select features.
 //>>label: Selects: Custom menus
 //>>group: Forms
 //>>css: ../css/themes/default/jquery.mobile.theme.css, ../css/structure/jquery.mobile.forms.select.css
@@ -101,9 +101,9 @@ define( [
 
 				// Button events
 				self.button.bind( "vclick keydown" , function( event ) {
-					if ( event.type == "vclick" ||
-							 event.keyCode && ( event.keyCode === $.mobile.keyCode.ENTER ||
-																	event.keyCode === $.mobile.keyCode.SPACE ) ) {
+					if (event.type === "vclick" ||
+							event.keyCode && (event.keyCode === $.mobile.keyCode.ENTER ||
+																event.keyCode === $.mobile.keyCode.SPACE)) {
 
 						self.open();
 						event.preventDefault();
@@ -160,7 +160,7 @@ define( [
 						// switch logic based on which key was pressed
 						switch ( event.keyCode ) {
 							// up or left arrow keys
-						 case 38:
+						case 38:
 							prev = li.prev().not( ".ui-selectmenu-placeholder" );
 
 							if( prev.is( ".ui-li-divider" ) ) {
@@ -177,10 +177,8 @@ define( [
 							}
 
 							return false;
-							break;
-
 							// down or right arrow keys
-						 case 40:
+						case 40:
 							next = li.next();
 
 							if( next.is( ".ui-li-divider" ) ) {
@@ -197,15 +195,12 @@ define( [
 							}
 
 							return false;
-							break;
-
 							// If enter or space is pressed, trigger click
-						 case 13:
-						 case 32:
+						case 13:
+						case 32:
 							target.trigger( "click" );
 
 							return false;
-							break;
 						}
 					});
 
@@ -238,7 +233,7 @@ define( [
 				// Close button on small overlays
 				if( self.isMultiple ){
 					self.headerClose.click( function() {
-						if ( self.menuType == "overlay" ) {
+						if ( self.menuType === "overlay" ) {
 							self.close();
 							return false;
 						}
@@ -308,7 +303,7 @@ define( [
 
 				var self = this;
 
-				if ( self.menuType == "page" ) {
+				if ( self.menuType === "page" ) {
 					// doesn't solve the possible issue with calling change page
 					// where the objects don't define data urls which prevents dialog key
 					// stripping - changePage has incoming refactor
@@ -365,7 +360,7 @@ define( [
 					self.thisPage.unbind( "pagehide.remove" );
 
 					//for WebOS/Opera Mini (set lastscroll using button offset)
-					if ( scrollTop == 0 && btnOffset > screenHeight ) {
+					if ( scrollTop === 0 && btnOffset > screenHeight ) {
 						self.thisPage.one( "pagehide", function() {
 							$( this ).jqmData( "lastScroll", btnOffset );
 						});
@@ -468,7 +463,7 @@ define( [
 					// Are we inside an optgroup?
 					if (parent !== select && parent.nodeName.toLowerCase() === "optgroup"){
 						var optLabel = parent.getAttribute('label');
-						if ( optLabel != optGroup) {
+						if ( optLabel !== optGroup) {
 							var divider = document.createElement('li');
 							divider.setAttribute(dataRoleAttr,'list-divider');
 							divider.setAttribute('role','option');
@@ -479,7 +474,7 @@ define( [
 						}
 					}
 
-					if (needPlaceholder && (!option.getAttribute( "value" ) || text.length == 0 || $option.jqmData( "placeholder" ))) {
+					if (needPlaceholder && (!option.getAttribute( "value" ) || text.length === 0 || $option.jqmData( "placeholder" ))) {
 						needPlaceholder = false;
 						if ( o.hidePlaceholderMenuItems ) {
 							classes.push( "ui-selectmenu-placeholder" );
