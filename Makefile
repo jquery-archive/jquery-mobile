@@ -10,14 +10,14 @@ OUTPUT = compiled
 # When no build target is specified, all gets ran
 all: css js zip notify
 
-clean:
-	@@rm -rf ${OUTPUT}
-	@@rm -rf tmp
+clean: init
+	@@node node_modules/.bin/grunt clean
 
 # Create the output directory.
+# NOTE it doesn't appear as though you can override init from a task file
 init:
 	@@npm install
-	@@mkdir -p ${OUTPUT}
+	@@node node_modules/.bin/grunt custom_init
 
 # Build and minify the CSS files
 css: init

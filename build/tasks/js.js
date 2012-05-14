@@ -59,5 +59,5 @@ module.exports = function( grunt ) {
 	});
 
 	// NOTE custom dasks don't accept dependencies so we alias
-	grunt.registerTask( 'js', 'init js_without_deps' );
+	grunt.registerTask( 'js', 'custom_init js_without_deps' );
 };

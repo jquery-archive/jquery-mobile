@@ -112,5 +112,5 @@ module.exports = function( grunt ) {
 		});
 	});
 
-	grunt.registerTask( 'css', 'init css_without_deps' );
+	grunt.registerTask( 'css', 'custom_init css_without_deps' );
 };
