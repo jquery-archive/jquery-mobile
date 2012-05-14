@@ -168,7 +168,8 @@ define( [
 				} else if ( path.isSameDomain( u, documentBase ) ) {
 					return u.hrefNoHash.replace( documentBase.domain, "" );
 				}
-				return absUrl;
+
+				return window.decodeURIComponent(absUrl);
 			},
 
 			//get path from current hash, or from a file path
@@ -492,7 +493,7 @@ define( [
 		$.mobile.hidePageLoadingMsg();
 
 		transition = $.mobile._maybeDegradeTransition( transition );
-		
+
 		//find the transition handler for the specified transition. If there
 		//isn't one in our transitionHandlers dictionary, use the default one.
 		//call the handler immediately to kick-off the transition.
@@ -660,7 +661,7 @@ define( [
 		settings.pageContainer = settings.pageContainer || $.mobile.pageContainer;
 
 		// Check to see if the page already exists in the DOM.
-		page = settings.pageContainer.children( ":jqmData(url='" + decodeURIComponent(dataUrl) + "')" );
+		page = settings.pageContainer.children( ":jqmData(url='" + dataUrl + "')" );
 
 		// If we failed to find the page, check to see if the url is a
 		// reference to an embedded page. If so, it may have been dynamically
