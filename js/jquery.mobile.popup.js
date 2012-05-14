@@ -457,9 +457,7 @@ define( [ "jquery",
 				args = [];
 			}
 
-			self._actionQueue[0].popup.element.one( signal, function() {
-				self._completeAction();
-			});
+			self._actionQueue[0].popup.element.one( signal, function() { self._completeAction(); });
 			self._actionQueue[0].popup[fn].apply( self._actionQueue[0].popup, args );
 		},
 
