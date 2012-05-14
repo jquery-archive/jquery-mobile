@@ -24,7 +24,7 @@ define( [ "jquery",
 			var ui = {
 			    	screen: "#ui-popup-screen",
 			    	placeholder: "#placeholder",
-			    	container: "#ui-popup-container"	
+			    	container: "#ui-popup-container"
 			    },
 			    proto = $(
 			    	"<div>" +
@@ -422,22 +422,16 @@ define( [ "jquery",
 
 			self._currentlyOpenPopup = ( current.open ? current.popup : null );
 
-			if ( self._actionQueue.length === 0 ) {
-				if ( current.open ) {
-					self._inProgress = false;
-				}
-				else
-				if ( self._haveNavHook ) {
+			if ( self._actionQueue.length === 0 && !current.open && self._haveNavHook ) {
 					self._haveNavHook = false;
 					self._myOwnHashChange = true;
 					self._undoNavHook();
-				}
-				else {
-					self._inProgress = false;
-				}
 			}
 			else {
 				self._inProgress = false;
+			}
+
+			if ( self._actionQueue.length > 0 ) {
 				self._runSingleAction();
 			}
 		},
