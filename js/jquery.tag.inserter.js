@@ -14,12 +14,17 @@
 		version = decodeURIComponent(results[results.length - 1].replace(/\+/g, " "));
 	}
 
+
+
 	switch( version ) {
 		case "1.6.4":
 			url = baseUrl + "jquery-1.6.4.js";
 			break;
-		case "git":
-			url = "http://code.jquery.com/jquery-git.js";
+		case "1.7.2":
+			url = baseUrl + "jquery-1.7.2.js";
+			break;
+		default:
+			url = "http://code.jquery.com/jquery-"+version+".js";
 			break;
 	}
 
