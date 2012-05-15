@@ -44,7 +44,7 @@
 			<p>The <code>pageinit</code> event is triggered on a page when it is initialized, right after initialization occurs. Most of jQuery Mobile's official widgets auto-initialize themselves based on this event, and you can set up your code to do the same.</p>
 <pre><code>
 $( document ).delegate("#aboutPage", "pageinit", function() {
-  alert('A page with an ID of "aboutPage" was just created by jQuery Mobile!');
+  alert('A page with an id of "aboutPage" was just created by jQuery Mobile!');
 });
 </code></pre>
 
@@ -52,7 +52,7 @@ $( document ).delegate("#aboutPage", "pageinit", function() {
 
 <pre><code>
 $( document ).delegate("#aboutPage", "pagebeforecreate", function() {
-  alert('A page with an ID of "aboutPage" is about to be created by jQuery Mobile!');
+  alert('A page with an id of "aboutPage" is about to be created by jQuery Mobile!');
 });
 </code></pre>
 		<div class="ui-body ui-body-e">
@@ -66,7 +66,7 @@ $( document ).delegate("#aboutPage", "pagebeforecreate", function() {
 <strong>//transition to the "about us" page with a slideup transition</strong>
 $.mobile.changePage( "about/us.html", { transition: "slideup"} );
 
-<strong>//transition to the "search results" page, using data from a form with an ID of "search"</strong>
+<strong>//transition to the "search results" page, using data from a form with an id of "search"</strong>
 $.mobile.changePage( "searchresults.php", {
 	type: "post",
 	data: $("form#search").serialize()
@@ -113,7 +113,7 @@ $.mobile.silentScroll(300);
 
 
 			<h2>Passing parameters between pages</h2>
-			<p>jQuery Mobile does not support query parameter passing to internal/embedded pages. For example, if the framework sees a link to "#somePage?someId=1" it  interpret that as "#somePage" and navigate to the internal page div with an ID of <code>somePage</code> and apply a data-url of <code>#somePage?someId=1</code> to that page container. Subsequent calls to other params such as "#somePage?someId=2" will find the same div because jQuery Mobile refers to the data-url on the div which is only set once and will remain at <code>#somePage?someId=1</code>.</p>
+			<p>jQuery Mobile does not support query parameter passing to internal/embedded pages. For example, if the framework sees a link to "#somePage?someId=1" it interpret that as "#somePage" and navigate to the internal page div with an <code>id</code> of "somePage" and apply a data-url of "#somePage?someId=1" to that page container. Subsequent calls to other params such as "#somePage?someId=2" will find the same div because jQuery Mobile refers to the data-url on the div which is only set once and will remain at "#somePage?someId=1".</p>
 
 			<p>There are two plugins that you can add to your project if query parameters are needed between pages. There is a lightweight <a href="https://github.com/jblas/jquery-mobile-plugins/tree/master/page-params" rel="external">page params plugin</a> and a more fully featured <a href="https://github.com/azicchetti/jquerymobile-router" rel="external">jQuery Mobile router plugin</a> for use with backbone.js or spine.js.</p>
 

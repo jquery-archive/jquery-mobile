@@ -31,7 +31,7 @@
 		<h4 style="margin:.5em 0">Important: Use <code>$(document).bind('pageinit')</code>, not <code>$(document).ready()</code></h4>
 		<p>The first thing you learn in jQuery is to call code inside the <code>$(document).ready()</code> function so everything will execute as soon as the DOM is loaded. However, in jQuery Mobile, Ajax is used to load the contents of each page into the DOM as you navigate, and the DOM ready handler only executes for the first page. To execute code whenever a new page is loaded and created, you can bind to the <code>pageinit</code> event. This event is explained in detail at the bottom of this page.</p></div>
 
-      <p> &nbsp;</p>
+      <p>&nbsp; </p>
 		<div class="ui-body ui-body-e">
 		<h4 style="margin:.5em 0">Important: <code>$(document).bind('pagecreate')</code> vs <code>$(document).bind('pageinit')</code></h4>
    <p> Prior to Beta 2 the recommendation to users wishing to manipulate jQuery Mobile enhanced page and child widget markup was to bind to the <code>pagecreate</code> event. In Beta 2 an internal change was made to decouple each of the widgets by binding to the <code>pagecreate</code> event in place of direct calls to the widget methods. As a result, users binding to the <code>pagecreate</code> in <code>mobileinit</code> would find their binding executing before the markup had been enhanced by each of the plugins. In keeping with the lifecycle of the jQuery UI Widget Factory, the initialization method is invoked <strong>after</strong> the create method, so the <code>pageinit</code> event provides the correct timing for post enhancement manipulation of the DOM and/or Javascript objects.
@@ -421,7 +421,7 @@ $( 'div' ).live( 'pagehide',function(event, ui){
 
 		<p>Internally, jQuery Mobile auto-initializes plugins based on the markup conventions found in a given "page". For example, an <code>input</code> element with a <code>type</code> of <code>range</code> will automatically generate a custom slider control.</p>
 
-		<p>This auto-initialization is controlled by the "page" plugin, which dispatches events before and after it executes, allowing you to manipulate a page either pre-or-post initialization, or even provide your own intialization behavior and prevent the auto-initializations from occuring. Note that these events will only fire once per "page", as opposed to the show/hide events, which fire every time a page is shown and hidden.</p>
+		<p>This auto-initialization is controlled by the 'page' plugin, which dispatches events before and after it executes, allowing you to manipulate a page either pre-or-post initialization, or even provide your own intialization behavior and prevent the auto-initializations from occuring. Note that these events will only fire once per "page", as opposed to the show/hide events, which fire every time a page is shown and hidden.</p>
 
 		<dl>
 			<dt><code>pagebeforecreate</code></dt>
