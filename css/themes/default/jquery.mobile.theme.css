@@ -1132,7 +1132,7 @@ a.ui-link-inherit {
 /* Focus state - set here for specificity (note: these classes are added by JavaScript)
 -----------------------------------------------------------------------------------------------------------*/
 
-.ui-btn:focus {
+.ui-btn:focus, .ui-link-inherit:focus {
 	outline: 0;
 }
 
