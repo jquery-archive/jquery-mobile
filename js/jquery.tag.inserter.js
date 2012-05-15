@@ -12,9 +12,9 @@
 
 	if( results ) {
 		version = decodeURIComponent(results[results.length - 1].replace(/\+/g, " "));
+	} else {
+		version = "1.6.4";
 	}
-
-
 
 	switch( version ) {
 		case "1.6.4":
