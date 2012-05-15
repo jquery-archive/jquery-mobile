@@ -385,7 +385,6 @@
 	</ul>
 </div>
 
-
 <div data-nstest-role="page" id="split-list-icon">
 	<div data-nstest-role="content">
 		<ul data-nstest-role="listview" data-nstest-split-icon="delete">
@@ -396,6 +395,22 @@
 			<li data-nstest-icon="star"><a href="#">Default</a><a data-nstest-icon="plug" href="#">Default</a></li>
 		</ul>
 	</div>
+</div>
+
+<div data-nstest-role="page" id="list-divider-ignore-link">
+  <div data-nstest-role="content">
+    <ul data-nstest-role="listview">
+      <li data-nstest-role="list-divider">A</li>
+      <li><a href="index.html">Adam Kinkaid</a></li>
+      <li><a href="index.html">Alex Wickerham</a></li>
+      <li><a href="index.html">Avery Johnson</a></li>
+      <li data-nstest-role="list-divider" id="ignored-link">B has a <a href="#">link</a></li>
+      <li><a href="index.html">Bob Cabot</a></li>
+      <li data-nstest-role="list-divider">C</li>
+      <li><a href="index.html">Caleb Booth</a></li>
+      <li><a href="index.html">Christopher Adams</a></li>
+    </ul>
+  </div><!-- /content -->
 </div>
 </body>
 </html>

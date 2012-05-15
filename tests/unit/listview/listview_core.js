@@ -1035,4 +1035,20 @@
 			start
 		]);
 	});
+
+	asyncTest( "links in list dividers are ignored", function() {
+		$.testHelper.pageSequence([
+			function() {
+				$.mobile.changePage("#list-divider-ignore-link");
+			},
+
+			function() {
+				same($.mobile.activePage.find("#ignored-link .ui-btn-inner").length, 0, "no buttons in list dividers");
+
+				window.history.back();
+			},
+
+			start
+		]);
+	});
 })(jQuery);
