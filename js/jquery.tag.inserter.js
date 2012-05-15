@@ -4,25 +4,23 @@
 	// Get the version from the url
 	var jqueryRE = /[\\?&]jquery=([^&#]*)/,
 		results = jqueryRE.exec( location.search ),
-		version = "",
-		jq,
+		version = "1.7.1",
 		myScriptTag = document.getElementsByTagName( "script" )[document.getElementsByTagName( "script" ).length - 1],
 		baseUrl = myScriptTag.src.replace( /(.*)\/.*$/, "$1/" ),
-		url = baseUrl + "jquery-1.7.1.js";
+		url;
 
 	if( results ) {
 		version = decodeURIComponent(results[results.length - 1].replace(/\+/g, " "));
-	} else {
-		version = "1.6.4";
-	}
+	} 
 
 	switch( version ) {
+		// Local versions
 		case "1.6.4":
-			url = baseUrl + "jquery-1.6.4.js";
-			break;
+		case "1.7.1":
 		case "1.7.2":
-			url = baseUrl + "jquery-1.7.2.js";
+			url = baseUrl + "jquery-" + version + ".js";
 			break;
+		// CDN versions
 		default:
 			url = "http://code.jquery.com/jquery-"+version+".js";
 			break;
