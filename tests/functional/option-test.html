@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>jQuery Mobile Widget Option Tester</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../../docs/_assets/css/jqm-docs.css" />
+	<script src="../../js/jquery.tag.inserter.js"></script>
+	<script src="../../js/jquery.js"></script>
+	<script src="../../docs/_assets/js/jqm-docs.js"></script>
+	<script src="../../js/"></script>
+		<script src="option-list.js"></script>
+		<script src="inspect-page.js"></script>
+	</head>
+
+	<body>
+		<div data-role="page">
+			<div data-role="header">
+				<h1>jQuery Mobile Widget Option Tester</h1>
+			</div>
+			<div data-role="contents">
+				<form id="sample" name="sample" action="#" method="get" style="width: 50%; float: left;">
+					<div data-role="fieldcontain">
+						<label for="sample-checkbox" id="sample-checkbox-label">Checkbox</label>
+						<input type="checkbox" name="sample-checkbox" id="sample-checkbox"></input>
+					</div>
+					<div data-role="fieldcontain">
+						<label for="sample-slider" id="sample-slider-label">Slider</label>
+						<input type="range" min="3" max="17" value="5" id="sample-slider"></input>
+					</div>
+					<div data-role="fieldcontain">
+						<label for="sample-select-slider" id="sample-select-slider-label">Select slider</label>
+						<select data-role="slider" id="sample-select-slider">
+							<option value="sss-1">Yes</option>
+							<option value="sss-2">Never</option>
+						</select>
+					</div>
+					<div data-role="fieldcontain">
+						<label for="select-choice-0" class="select">Shipping method:</label>
+						<select name="select-choice-0" id="select-choice-1" data-native-menu="false" multiple>
+							<option>Choose shipping method(s)</option>
+							<optgroup label="USPS">
+								<option value="standard">Standard: 7 day</option>
+								<option value="rush">Rush: 3 days</option>
+								<option value="express">Express: next day</option>
+								<option value="overnight">Overnight</option>
+							</optgroup>
+							<optgroup label="FedEx">
+								<option value="firstOvernight">First Overnight</option>
+								<option value="expressSaver">Express Saver</option>
+								<option value="ground">Ground</option>
+							</optgroup>
+						</select>
+					</div>
+					<input type="submit" value="Submit"></input>
+					<input type="button" value="Hello"></input>
+					<input type="text" id="sample-text"></input>
+					<input type="search" id="sample-search"></input>
+					<ul id="sample-list-view" data-role="listview">
+						<li>List Item 1</li>
+						<li>List Item 2</li>
+					</ul>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>

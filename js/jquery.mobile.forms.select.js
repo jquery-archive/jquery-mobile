@@ -33,9 +33,19 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 	},
 
 	_setDisabled: function( value ) {
-		this.element.attr( "disabled", value );
+		this.element.prop( "disabled", value );
 		this.button.attr( "aria-disabled", value );
-		return this._setOption( "disabled", value );
+		this.button[ value ? "addClass" : "removeClass" ]( "ui-disabled" );
+	},
+
+	_setOption: function( key, value ) {
+		// This will take care of those options that buttonMarkup knows how to handle
+		this.button.buttonMarkup( ( function() { var ret = {}; ret[ key ] = value; return ret; } )() );
+		// Handle the rest the usual way - it doesn't matter if we end up with the
+		// buttonMarkup-related options in this call, because those are not handled anyway
+		$.mobile.widget.prototype._setOption.apply( this, arguments );
+
+		this._recordOption( key, value );
 	},
 
 	_focusButton : function() {
@@ -232,17 +242,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 	// open and close preserved in native selects
 	// to simplify users code when looping over selects
 	open: $.noop,
-	close: $.noop,
-
-	disable: function() {
-		this._setDisabled( true );
-		this.button.addClass( "ui-disabled" );
-	},
-
-	enable: function() {
-		this._setDisabled( false );
-		this.button.removeClass( "ui-disabled" );
-	}
+	close: $.noop
 });
 
 //auto self-init widgets
