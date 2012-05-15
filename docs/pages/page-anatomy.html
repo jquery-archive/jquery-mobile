@@ -173,6 +173,8 @@
 		
 		<p>PLEASE NOTE: Since we are using the hash to track navigation history for all the Ajax 'pages', it's not currently possible to deep link to an anchor (<code>index.html#foo</code>) on a page in jQuery Mobile, because the framework will look for a 'page' with an <code>ID</code> of <code>#foo</code> instead of the native behavior of scrolling to the content with that <code>ID</code>.</p>
 		
+		<p>The <code>id</code> attribute of all your elements must be not only unique on a given page, but also unique across the pages in a site. This is because jQuery Mobile's single-page navigation model allows many different &quot;pages&quot; to be present in the DOM at the same time. This also applies when using a multi-page template, since all &quot;pages&quot; on the template are loaded at once.</p>
+		
 		
 <h2>Conventions, not requirements</h2>
 
