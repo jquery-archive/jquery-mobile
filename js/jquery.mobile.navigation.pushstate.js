@@ -12,7 +12,17 @@ define( [ "jquery", "./jquery.mobile.navigation", "../external/requirejs/depend!
 	var	pushStateHandler = {},
 		self = pushStateHandler,
 		$win = $( window ),
-		url = $.mobile.path.parseUrl( location.href );
+		url = $.mobile.path.parseUrl( location.href ),
+		mobileinitDeferred = $.Deferred(),
+		domreadyDeferred = $.Deferred();
+
+	$( document ).ready( function() {
+		domreadyDeferred.resolve();
+	});
+
+	$( document ).one( "mobileinit", function() {
+		mobileinitDeferred.resolve();
+	});
 
 	$.extend( pushStateHandler, {
 		// TODO move to a path helper, this is rather common functionality
@@ -138,7 +148,8 @@ define( [ "jquery", "./jquery.mobile.navigation", "../external/requirejs/depend!
 		}
 	});
 
-	$( function() {
+	// We need to init when both "mobileinit" and "domready" have happened
+	$.when( domreadyDeferred, mobileinitDeferred ).done( function() {
 		if( $.mobile.pushStateEnabled && $.support.pushState ){
 			pushStateHandler.init();
 		}
