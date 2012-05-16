@@ -21,6 +21,9 @@
 		case "git":
 			url = "http://code.jquery.com/jquery-git.js";
 			break;
+		default:
+			url = baseUrl + "jquery.js";
+			break;
 	}
 
 	document.write( "<script src='" + url + "'></script>" );
