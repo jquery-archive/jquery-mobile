@@ -22,6 +22,7 @@ module.exports = function( grunt ) {
 			},
 			globals: {
 				jQuery: true,
+				"$": true,
 
 				// qunit globals
 				// TODO would be nice to confine these to test files
