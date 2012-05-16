@@ -84,7 +84,12 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 	close: function() {
 		if ( !this._isClosed ) {
 			this._isClosed = true;
-			window.history.back();
+			if ( $.mobile.hashListeningEnabled ) {
+				window.history.back();
+			}
+			else {
+				$.mobile.changePage( $.mobile.urlHistory.getPrev().url );
+			}
 		}
 	}
 });
