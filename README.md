@@ -18,7 +18,9 @@ in a folder named "compiled". There is also now a Structure only css file so you
 Alternatively if you have node.js installed you can run
 
     npm install
-    node node_modules/.bin/grunt <js|css|docs|zip|clean|init>
+    node node_modules/.bin/grunt <js|css>
+
+to build either the js or css. This is usefull especially if you're on Windows without support for the make tool and bash.
 
 How to build a self-contained version of the Docs/Demos
 =======================================================
