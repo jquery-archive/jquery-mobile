@@ -16,7 +16,6 @@
 			// Local versions
 			case "1.6.4":
 			case "1.7.1":
-			case "1.7.2":
 				url = baseUrl + "jquery-" + version + ".js";
 				break;
 			// CDN versions
