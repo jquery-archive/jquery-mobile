@@ -3,7 +3,7 @@
 //>>label: Page Sections
 //>>group: Core
 
-define( [ "jquery", "./jquery.mobile.page", "./jquery.mobile.core", "./jquery.mobile.buttonMarkup" ], function( $ ) {
+define( [ "jquery", "./jquery.mobile.page", "./jquery.mobile.core" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -14,14 +14,17 @@ $.mobile.page.prototype.options.headerTheme  = "a";
 $.mobile.page.prototype.options.footerTheme  = "a";
 $.mobile.page.prototype.options.contentTheme = null;
 
-$( document ).delegate( ":jqmData(role='page'), :jqmData(role='dialog')", "pagecreate", function( e ) {
-
-	var $page = $( this ),
+// NOTE bind used to force this binding to run before the buttonMarkup binding
+//      which expects .ui-footer top be applied in its gigantic selector 
+// TODO remove the buttonMarkup giant selector and move it to the various modules
+//      on which it depends
+$( document ).bind( "pagecreate", function( e ) {
+	var $page = $( e.target ),
 		o = $page.data( "page" ).options,
 		pageRole = $page.jqmData( "role" ),
 		pageTheme = o.theme;
 
-	$( ":jqmData(role='header'), :jqmData(role='footer'), :jqmData(role='content')", this )
+	$( ":jqmData(role='header'), :jqmData(role='footer'), :jqmData(role='content')", $page )
 		.jqmEnhanceable()
 		.each(function() {
 
