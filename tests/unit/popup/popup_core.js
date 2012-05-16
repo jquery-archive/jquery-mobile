@@ -3,6 +3,8 @@
  */
 (function($){
 
+	module( "jquery.mobile.popup.js" );
+
 	$.extend($.testHelper, { 
 
 // detailedEventCascade: call a function and expect a series of events to be triggered (or not to be triggered), and guard
