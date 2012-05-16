@@ -857,6 +857,9 @@ a.ui-link-inherit {
 	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(opacity=30)";
 	filter: alpha(opacity=30);
 	zoom: 1;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
 }
 
 /* Icons
