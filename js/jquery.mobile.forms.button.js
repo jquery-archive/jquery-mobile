@@ -24,8 +24,8 @@ $.widget( "mobile.button", $.mobile.widget, {
 			o = this.options,
 			type,
 			name,
-			inline = $el.jqmData( "inline" ),
-			mini = $el.jqmData( "mini" ),
+			inline = o.inline || $el.jqmData( "inline" ),
+			mini = o.mini || $el.jqmData( "mini" ),
 			classes = "",
 			$buttonPlaceholder;
 
