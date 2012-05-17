@@ -70,18 +70,17 @@ $.fn.buttonMarkup = function( options ) {
 		}		
 
 		buttonClass = "ui-btn ui-btn-up-" + o.theme;
-		buttonClass += o.inline ? " ui-btn-inline" : "";
 		buttonClass += o.shadow ? " ui-shadow" : "";
 		buttonClass += o.corners ? " ui-btn-corner-all" : "";
 
 		if ( o.mini !== undefined ) {
 			// Used to control styling in headers/footers, where buttons default to `mini` style.
-			buttonClass += o.mini ? " ui-mini" : " ui-fullsize";
+			buttonClass += o.mini === true ? " ui-mini" : " ui-fullsize";
 		}
 		
 		if ( o.inline !== undefined ) {			
 			// Used to control styling in headers/footers, where buttons default to `inline` style.
-			buttonClass += o.inline ? " ui-btn-inline" : " ui-btn-block";
+			buttonClass += o.inline === true ? " ui-btn-inline" : " ui-btn-block";
 		}
 		
 		if ( o.icon ) {
