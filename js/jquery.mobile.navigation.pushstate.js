@@ -16,13 +16,9 @@ define( [ "jquery", "./jquery.mobile.navigation", "../external/requirejs/depend!
 		mobileinitDeferred = $.Deferred(),
 		domreadyDeferred = $.Deferred();
 
-	$( document ).ready( function() {
-		domreadyDeferred.resolve();
-	});
+	$( document ).ready( $.proxy( domreadyDeferred, "resolve" ) );
 
-	$( document ).one( "mobileinit", function() {
-		mobileinitDeferred.resolve();
-	});
+	$( document ).one( "mobileinit", $.proxy( mobileinitDeferred, "resolve" ) );
 
 	$.extend( pushStateHandler, {
 		// TODO move to a path helper, this is rather common functionality
