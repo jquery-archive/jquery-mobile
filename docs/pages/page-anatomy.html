@@ -24,14 +24,14 @@
 
 	<div data-role="content">
 		<div class="content-primary">		
-			<p>The jQuery Mobile 'page' structure is optimized to support either single pages, or local internal linked 'pages' within a page.</p> 
+			<p>The jQuery Mobile "page" structure is optimized to support either single pages, or local internal linked "pages" within a page.</p> 
 			
 			<p>The goal of this model is to allow developers to create websites using best practices &mdash; where ordinary links will "just work" without any special configuration &mdash; while creating a rich, native-like experience that can't be achieved with standard HTTP requests.</p> 
 
 			<h2>Mobile page structure</h2> 
 
 			<p>A jQuery Mobile site must start with an HTML5 'doctype' to take full advantage of all of the framework's features. (Older devices with browsers that don't understand HTML5 will safely ignore the 'doctype' and various custom attributes.) </p>
-			<p>In the 'head', references to jQuery, jQuery Mobile and the mobile theme CSS are all required to start things off. jQuery Mobile 1.1 works with both 1.6.4 and 1.7.1 versions of jQuery core. We recommend linking to the files hosted on the jQuery CDN for best performance: </p>
+			<p>In the "head", references to jQuery, jQuery Mobile and the mobile theme CSS are all required to start things off. jQuery Mobile 1.1 works with both 1.6.4 and 1.7.1 versions of jQuery core. We recommend linking to the files hosted on the jQuery CDN for best performance: </p>
 
 <pre><code>
 <strong>&lt;!DOCTYPE html&gt; </strong>
@@ -60,7 +60,7 @@
 			<p>These settings do not disable the user's ability to zoom the pages, which is nice from an accessibility perspective. There is a minor issue in iOS that doesn't properly set the width when changing orientations with these viewport settings, but this will hopefully be fixed in a future release. You can set other viewport values to disable zooming if required since this is part of your page content, not the library. </p>
 			
 			<h2>Inside the body: Pages</h2>
-			<p>Inside the <code>&lt;body&gt;</code> tag, each view or 'page' on the mobile device is identified with an element (usually a <code>div</code>) with the <code> data-role="page"</code> attribute. View the <a href="../api/data-attributes.html">data- attribute reference</a> to see all the possible attributes you can add to pages.</p> 
+			<p>Inside the <code>&lt;body&gt;</code> tag, each view or "page" on the mobile device is identified with an element (usually a <code>div</code>) with the <code> data-role="page"</code> attribute. View the <a href="../api/data-attributes.html">data- attribute reference</a> to see all the possible attributes you can add to pages.</p> 
 
 <div class="highlight"> 
 <pre><span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"page"</span><span class="nt">&gt;</span> 
@@ -69,7 +69,7 @@
 </pre> 
 </div> 
 
-			<p>Within the 'page' container, any valid HTML markup can be used, but for typical pages in jQuery Mobile, the immediate children of a 'page' are divs with data-roles of <code>"header"</code>, <code>"content"</code>, and <code>"footer"</code>.</p> 
+			<p>Within the "page" container, any valid HTML markup can be used, but for typical pages in jQuery Mobile, the immediate children of a "page" are divs with data-roles of <code>"header"</code>, <code>"content"</code>, and <code>"footer"</code>.</p> 
 
 <div class="highlight"> 
 <pre><span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"page"</span><span class="nt">&gt;</span> 
@@ -123,9 +123,9 @@
 
 		<h2>Multi-page template structure</h2> 
 		
-			<p>A single HTML document can contain multiple 'pages' that are loaded together by stacking multiple divs with a <code> data-role</code> of <code>"page"</code>. Each 'page' block needs an unique id (<code>id="foo"</code>) that will be used to link internally between 'pages' (<code>href="#foo"</code>). When a link is clicked, the framework will look for an internal 'page' with the id and transition it into view.</p> 
+			<p>A single HTML document can contain multiple "pages" that are loaded together by stacking multiple divs with a <code> data-role</code> of <code>"page"</code>. Each "page" block needs a unique id (<code>id="foo"</code>) that will be used to link internally between "pages" (<code>href="#foo"</code>). When a link is clicked, the framework will look for an internal "page" with the id and transition it into view.</p> 
 						
-			<p>Here is an example of a two 'pages' site built with two jQuery Mobile divs navigated by linking to an id placed on each page wrapper. Note that the id's on the page wrappers are only needed to support the internal page linking, and are optional if each page is a separate HTML document. Here is what two pages look inside the <code>body</code> element.</p> 
+			<p>Here is an example of a two "pages" site built with two jQuery Mobile divs navigated by linking to an id placed on each page wrapper. Note that the id's on the page wrappers are only needed to support the internal page linking, and are optional if each page is a separate HTML document. Here is what two pages look inside the <code>body</code> element.</p> 
 
 <pre><code>
 &lt;body&gt; 
@@ -171,9 +171,9 @@
 
 		<p> </p>
 		
-		<p>PLEASE NOTE: Since we are using the hash to track navigation history for all the Ajax 'pages', it's not currently possible to deep link to an anchor (<code>index.html#foo</code>) on a page in jQuery Mobile, because the framework will look for a 'page' with an <code>id</code> of <code>#foo</code> instead of the native behavior of scrolling to the content with that <code>id</code>.</p>
+		<p>PLEASE NOTE: Since we are using the hash to track navigation history for all the Ajax "pages", it's not currently possible to deep link to an anchor (<code>index.html#foo</code>) on a page in jQuery Mobile, because the framework will look for a "page" with an <code>id</code> of <code>#foo</code> instead of the native behavior of scrolling to the content with that <code>id</code>.</p>
 		
-		<p>The <code>id</code> attribute of all your elements must be not only unique on a given page, but also unique across the pages in a site. This is because jQuery Mobile's single-page navigation model allows many different 'pages' to be present in the DOM at the same time. This also applies when using a multi-page template, since all &quot;pages&quot; on the template are loaded at once.</p>
+		<p>The <code>id</code> attribute of all your elements must be not only unique on a given page, but also unique across the pages in a site. This is because jQuery Mobile's single-page navigation model allows many different "pages" to be present in the DOM at the same time. This also applies when using a multi-page template, since all &quot;pages&quot; on the template are loaded at once.</p>
 		
 		
 <h2>Conventions, not requirements</h2>
