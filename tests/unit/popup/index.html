@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Popup Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+	<script src="../../../js/jquery.tag.inserter.js"></script>
+	<script src="../jquery.setNameSpace.js"></script>
+	<script src="../../../tests/jquery.testHelper.js"></script>
+
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit.css"/>
+	<script src="../../../external/qunit.js"></script>
+	<script>
+		$.testHelper.asyncLoad([
+			[
+				"jquery.mobile.popup",
+			],
+			[ "jquery.mobile.init" ],
+			[
+				"popup_core.js"
+			],
+			[
+				"popup_interaction.js"
+			]
+		]);
+	</script>
+
+	<script src="../swarminject.js"></script>
+</head>
+<body>
+  <h1 id="qunit-header">jQuery Mobile Popup Test Suite</h1>
+  <h2 id="qunit-banner"></h2>
+  <h2 id="qunit-userAgent"></h2>
+  <ol id="qunit-tests">
+  </ol>
+
+  <div data-nstest-role="page">
+    <div data-nstest-role="content" id="page-content">
+      <div data-nstest-role="popup" id="test-popup">
+        <p>This is the test popup</p>
+        <a href="other.html">other.html</a>
+      </div>
+      <div data-nstest-role="popup" id="test-popup-2">
+        <p>This is another test popup</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
