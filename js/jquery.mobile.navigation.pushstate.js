@@ -68,6 +68,7 @@ define( [ "jquery", "./jquery.mobile.navigation", "../external/requirejs/depend!
 		onHashChange: function( e ) {
 			// disable this hash change
 			if( self.onHashChangeDisabled ){
+				self.onHashChangeDisabled = false;
 				return;
 			}
 
