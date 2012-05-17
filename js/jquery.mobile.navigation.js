@@ -168,7 +168,8 @@ define( [
 				} else if ( path.isSameDomain( u, documentBase ) ) {
 					return u.hrefNoHash.replace( documentBase.domain, "" );
 				}
-				return absUrl;
+
+				return window.decodeURIComponent(absUrl);
 			},
 
 			//get path from current hash, or from a file path
@@ -492,7 +493,7 @@ define( [
 		$.mobile.hidePageLoadingMsg();
 
 		transition = $.mobile._maybeDegradeTransition( transition );
-		
+
 		//find the transition handler for the specified transition. If there
 		//isn't one in our transitionHandlers dictionary, use the default one.
 		//call the handler immediately to kick-off the transition.
@@ -770,7 +771,7 @@ define( [
 							&& RegExp.$1
 							&& dataUrlRegex.test( RegExp.$1 )
 							&& RegExp.$1 ) {
-						url = fileUrl = path.getFilePath( RegExp.$1 );
+						url = fileUrl = path.getFilePath( $( "<div>" + RegExp.$1 + "</div>" ).text() );
 					}
 
 					if ( base ) {

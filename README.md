@@ -15,6 +15,13 @@ Clone this repo and build the js and css files (you'll need Git and Make install
 A full version and a minified version of the jQuery Mobile JavaScript and CSS files will be created
 in a folder named "compiled". There is also now a Structure only css file so you can add your own theme on top of it.
 
+Alternatively if you have node.js installed you can run
+
+    npm install
+    node node_modules/.bin/grunt <js|css>
+
+to build either the js or css. This is usefull especially if you're on Windows without support for the make tool and bash.
+
 How to build a self-contained version of the Docs/Demos
 =======================================================
 Once you have your own cloned repo on your computer:
@@ -23,6 +30,7 @@ Once you have your own cloned repo on your computer:
 
 The docs will be built and available in the compiled/demos folder. You can move this folder to your web server or
 other location. It has no dependencies on anything other than a basic HTML web server.
+
 
 
 Submitting bugs

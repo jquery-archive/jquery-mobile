@@ -71,7 +71,7 @@
 
 
 			<h2>List dividers</h2>
-			<p>List items can be turned into dividers to organize and group the list items. This is done by adding the <code> data-role="list-divider"</code> to any list item. These items are styled with the bar swatch "b" by default (blue in the default theme) but you can specify a theme for dividers by adding the <code>data-dividertheme</code> attribute to the list element (<code>ul</code> or <code>ol</code>) and specifying a theme swatch letter.</p>
+			<p>List items can be turned into dividers to organize and group the list items. This is done by adding the <code> data-role="list-divider"</code> to any list item. These items are styled with the bar swatch "b" by default (blue in the default theme) but you can specify a theme for dividers by adding the <code>data-divider-theme</code> attribute to the list element (<code>ul</code> or <code>ol</code>) and specifying a theme swatch letter.</p>
 
 			<a href="lists-divider.html" data-role="button" data-icon="arrow-r" data-iconpos="right">List divider example</a>
 
@@ -80,7 +80,7 @@
 
 			<p>A listview can be configured to automatically generate dividers for its items. This is done by adding a <code>data-autodividers="true"</code> attribute to any listview.</p>
 
-			<p>By default, the text used to create dividers is the uppercased first letter of either the item's link text (for link lists) or the item's text (for read-only lists). Alternatively, if you are using formatted list items, you can specify divider text by setting the <code>autodividersSelector</code> option on the listview programmatically. For example, to add a custom selector to the element with <code>id="mylistview"</code>:</p>
+			<p>By default, the text used to create dividers is the uppercased first letter of either the item's link text (for linked lists) or the item's text (for read-only lists). Alternatively, if you are using formatted list items, you can specify divider text by setting the <code>autodividersSelector</code> option on the listview programmatically. For example, to add a custom selector to the element with <code>id="mylistview"</code>:</p>
 
 <pre><code>
 $("#mylistview").listview({
@@ -157,7 +157,7 @@ $("#mylistview").listview({
 
 						<h3>More in this section</h3>
 
-						<ul data-role="listview" data-theme="c" data-dividertheme="d">
+						<ul data-role="listview" data-theme="c" data-divider-theme="d">
 
 							<li data-role="list-divider">List views</li>
 							<li data-theme="a"><a href="docs-lists.html">List basics &amp; API</a></li>

@@ -1,6 +1,6 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Custom-styled native input/buttons
-//>>label: Buttons: Input or button-based 
+//>>label: Buttons: Input or button-based
 //>>group: Forms
 //>>css: ../css/themes/default/jquery.mobile.theme.css,../css/structure/jquery.mobile.button.css
 
@@ -31,9 +31,12 @@ $.widget( "mobile.button", $.mobile.widget, {
 
 		// if this is a link, check if it's been enhanced and, if not, use the right function
 		if( $el[ 0 ].tagName === "A" ) {
-	 	 	!$el.hasClass( "ui-btn" ) && $el.buttonMarkup();
-	 	 	return;
- 	 	}
+			if( !$el.hasClass( "ui-btn" ) ) {
+				$el.buttonMarkup();
+			}
+
+			return;
+		}
 
 		// get the inherited theme
 		// TODO centralize for all widgets

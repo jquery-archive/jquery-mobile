@@ -24,12 +24,12 @@ define( [	"jquery",	"./jquery.mobile.core",	"./jquery.mobile.init" ], function( 
 		// with the following shape: { theme: '', text: '', html: '', textVisible: '' }
 		// NOTE that the $.mobile.loading* settings and params past the first are deprecated
 		showPageLoadingMsg: function( theme, msgText, textonly ) {
-			this.loading( 'show', theme, msgText, textonly );
+			$.mobile.loading( 'show', theme, msgText, textonly );
 		},
 
 		// DEPRECATED
 		hidePageLoadingMsg: function() {
-			this.loading( 'hide' );
+			$.mobile.loading( 'hide' );
 		},
 
 		loading: function() {
@@ -58,9 +58,9 @@ define( [	"jquery",	"./jquery.mobile.core",	"./jquery.mobile.init" ], function( 
 		},
 
 		defaultHtml: "<div class='" + loaderClass + "'>" +
-								 "<span class='ui-icon ui-icon-loading'></span>" +
-								 "<h1></h1>" +
-								 "</div>",
+			"<span class='ui-icon ui-icon-loading'></span>" +
+			"<h1></h1>" +
+			"</div>",
 
 		// For non-fixed supportin browsers. Position at y center (if scrollTop supported), above the activeBtn (if defined), or just 100px from top
 		fakeFixLoader: function(){
@@ -103,7 +103,7 @@ define( [	"jquery",	"./jquery.mobile.core",	"./jquery.mobile.init" ], function( 
 			var loadSettings;
 
 			// support for object literal params
-			if( $.type(theme) == "object" ){
+			if( $.type(theme) === "object" ){
 				loadSettings = $.extend({}, this.options, theme);
 
 				// prefer object property from the param then the old theme setting
@@ -115,22 +115,22 @@ define( [	"jquery",	"./jquery.mobile.core",	"./jquery.mobile.init" ], function( 
 
 			$html.addClass( "ui-loading" );
 
-			if ( $.mobile.loadingMessage != false || loadSettings.html ) {
+			if ( $.mobile.loadingMessage !== false || loadSettings.html ) {
 				// text visibility from argument takes priority
 				var textVisible, message, $header;
 
 				// boolean values require a bit more work :P
 				// support object properties and old settings
-				if( $.mobile.loadingMessageTextVisible != undefined ) {
+				if( $.mobile.loadingMessageTextVisible !== undefined ) {
 					textVisible = $.mobile.loadingMessageTextVisible;
 				} else {
 					textVisible = loadSettings.textVisible;
 				}
 
-				this.element.attr( "class", loaderClass +
-													 " ui-corner-all ui-body-" + theme +
-													 " ui-loader-" + ( textVisible ? "verbose" : "default" )
-													 + ( loadSettings.textonly || textonly ? " ui-loader-textonly" : "" ) );
+				this.element.attr("class", loaderClass +
+													" ui-corner-all ui-body-" + theme +
+													" ui-loader-" + ( textVisible ? "verbose" : "default" ) +
+													( loadSettings.textonly || textonly ? " ui-loader-textonly" : "" ) );
 
 				// TODO verify that jquery.fn.html is ok to use in both cases here
 				//      this might be overly defensive in preventing unknowing xss
@@ -164,7 +164,7 @@ define( [	"jquery",	"./jquery.mobile.core",	"./jquery.mobile.init" ], function( 
 		}
 	});
 
-	$window.on( 'pagecontainercreate', function() {
+	$window.bind( 'pagecontainercreate', function() {
 		$.mobile.loaderWidget = $.mobile.loaderWidget || $( $.mobile.loader.prototype.defaultHtml ).loader();
 	});
 })(jQuery, this);
