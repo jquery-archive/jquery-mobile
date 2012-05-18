@@ -10,7 +10,6 @@
 	<script src="../../js/jquery.js"></script>
 	<script src="../../docs/_assets/js/jqm-docs.js"></script>
 	<script src="../../js/"></script>
-
 </head> 
 <body> 
 
@@ -95,21 +94,77 @@
 		
 		<h2>Theming icons</h2>
 		
-		<p>The default icon for each list item is <code>arrow-r</code>. To override this, set the <code> data-icon</code> attribute on the desired list item to the <a href="../buttons/buttons-icons.html">name of a standard icon</a>.  To prevent icons from appearing altogether, set the <code> data-icon</code> attribute to &quot;false&quot;.</p>
+		<p>The default icon for each list item containing a link is <code>arrow-r</code>. To override this, set the <code>data-icon</code> attribute on the desired list item to the <a href="../buttons/buttons-icons.html">name of a standard icon</a>. To prevent icons from appearing altogether, set the <code> data-icon</code> attribute to &quot;false&quot;. With a bit of custom styles it's also possible to use third party icons.</p>
+		<p>Markup for the listview:</p>
 <pre>
 <code>
-&lt;li data-icon=&quot;info&quot;&gt;&lt;a href="#"&gt;Notices&lt;/a&gt;&lt;/li&gt;
-&lt;li data-icon=&quot;alert&quot;&gt;&lt;a href="#"&gt;Alerts&lt;/a&gt;&lt;/li&gt;
-&lt;li data-icon=&quot;false&quot;&gt;&lt;a href="#"&gt;No icon&lt;/a&gt;&lt;/li&gt;
+&lt;ul data-role=&quot;listview&quot; data-inset=&quot;true&quot; data-theme=&quot;b&quot;&gt;
+	&lt;li data-role=&quot;list-divider&quot;&gt;Divider&lt;/li&gt;
+	&lt;li data-icon=&quot;home&quot;&gt;&lt;a href=&quot;#&quot;&gt;data-icon=&quot;home&quot;&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon=&quot;delete&quot;&gt;&lt;a href=&quot;#&quot;&gt;data-icon=&quot;delete&quot;&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon=&quot;plus&quot;&gt;&lt;a href=&quot;#&quot;&gt;data-icon=&quot;plus&quot;&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon=&quot;arrow-u&quot;&gt;&lt;a href=&quot;#&quot;&gt;data-icon=&quot;arrow-u&quot;&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon=&quot;arrow-d&quot;&gt;&lt;a href=&quot;#&quot;&gt;data-icon=&quot;arrow-d&quot;&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon=&quot;check&quot;&gt;&lt;a href=&quot;#&quot;&gt;data-icon=&quot;check&quot;&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon=&quot;gear&quot;&gt;&lt;a href=&quot;#&quot;&gt;data-icon=&quot;gear&quot;&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon=&quot;grid&quot;&gt;&lt;a href=&quot;#&quot;&gt;data-icon=&quot;grid&quot;&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon=&quot;star&quot;&gt;&lt;a href=&quot;#&quot;&gt;data-icon=&quot;star&quot;&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon=&quot;custom&quot; id=&quot;coffeeicon&quot;&gt;&lt;a href=&quot;#&quot;&gt;custom-icon&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon=&quot;arrow-r&quot;&gt;&lt;a href=&quot;#&quot;&gt;data-icon=&quot;arrow-r&quot;&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon=&quot;arrow-l&quot;&gt;&lt;a href=&quot;#&quot;&gt;data-icon=&quot;arrow-l&quot;&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon=&quot;minus&quot;&gt;&lt;a href=&quot;#&quot;&gt;data-icon=&quot;minus&quot;&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon=&quot;refresh&quot;&gt;&lt;a href=&quot;#&quot;&gt;data-icon=&quot;refresh&quot;&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon=&quot;forward&quot;&gt;&lt;a href=&quot;#&quot;&gt;data-icon=&quot;forward&quot;&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon=&quot;back&quot;&gt;&lt;a href=&quot;#&quot;&gt;data-icon=&quot;back&quot;&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon=&quot;alert&quot;&gt;&lt;a href=&quot;#&quot;&gt;data-icon=&quot;alert&quot;&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon=&quot;info&quot;&gt;&lt;a href=&quot;#&quot;&gt;data-icon=&quot;info&quot;&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon=&quot;search&quot;&gt;&lt;a href=&quot;#&quot;&gt;data-icon=&quot;search&quot;&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon=&quot;false&quot;&gt;&lt;a href=&quot;#&quot;&gt;data-icon=&quot;false&quot;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </code>
 </pre>
-		<ul data-role="listview" data-inset="true">
+		<p>Styles for the custom icon:</p>
+<pre>
+<code>
+&lt;style&gt;
+	#coffeeicon .ui-icon-custom {
+	background-image: url(&quot;../toolbars/glyphish-icons/34-coffee.png&quot;);
+	background-position: 2px 2px;
+	background-size: 90%; }
+&lt;/style&gt;
+</code>
+</pre>
+		<style>
+			#coffeeicon .ui-icon-custom {
+			background-image: url("../toolbars/glyphish-icons/34-coffee.png");
+			background-position: 2px 1px;
+			background-size: 90%; }
+		</style>
+
+		<ul data-role="listview" data-inset="true" data-theme="b">
 			<li data-role="list-divider">Divider</li>
-			<li data-icon="info"><a href="#">Notices</a></li>
-			<li data-icon="alert"><a href="#">Alerts</a></li>
-			<li data-icon="false"><a href="#">No icon</a></li>
+			<li data-icon="home"><a href="#">data-icon="home"</a></li>
+			<li data-icon="delete"><a href="#">data-icon="delete"</a></li>
+			<li data-icon="plus"><a href="#">data-icon="plus"</a></li>
+			<li data-icon="arrow-u"><a href="#">data-icon="arrow-u"</a></li>
+			<li data-icon="arrow-d"><a href="#">data-icon="arrow-d"</a></li>
+			<li data-icon="check"><a href="#">data-icon="check"</a></li>
+			<li data-icon="gear"><a href="#">data-icon="gear"</a></li>
+			<li data-icon="grid"><a href="#">data-icon="grid"</a></li>
+			<li data-icon="star"><a href="#">data-icon="star"</a></li>
+			<li data-icon="custom" id="coffeeicon"><a href="#">custom-icon</a></li>
+			<li data-icon="arrow-r"><a href="#">data-icon="arrow-r"</a></li>
+			<li data-icon="arrow-l"><a href="#">data-icon="arrow-l"</a></li>
+			<li data-icon="minus"><a href="#">data-icon="minus"</a></li>
+			<li data-icon="refresh"><a href="#">data-icon="refresh"</a></li>
+			<li data-icon="forward"><a href="#">data-icon="forward"</a></li>
+			<li data-icon="back"><a href="#">data-icon="back"</a></li>
+			<li data-icon="alert"><a href="#">data-icon="alert"</a></li>
+			<li data-icon="info"><a href="#">data-icon="info"</a></li>
+			<li data-icon="search"><a href="#">data-icon="search"</a></li>
+			<li data-icon="false"><a href="#">data-icon="false"</a></li>
 		</ul>
-	
+		<p>Custom icon by Joseph Wain / <a href="http://glyphish.com/">glyphish.com</a>. Licensed under the <a href="http://creativecommons.org/licenses/by/3.0/us/">Creative Commons Attribution 3.0 United States License</a>.</p>
 		
 		<h2>Theming split buttons</h2>
 		
