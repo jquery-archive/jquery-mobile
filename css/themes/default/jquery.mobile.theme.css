@@ -27,20 +27,20 @@
 	color: #fff /*{a-bar-color}*/;
 }
 
-.ui-bar-a .ui-link {
+.ui-bar-a a.ui-link {
 	color: #7cc4e7 /*{a-bar-link-color}*/;
 	font-weight: bold;
 }
 
-.ui-bar-a .ui-link:hover {
+.ui-bar-a a.ui-link:hover {
 	color: #2489CE /*{a-bar-link-hover}*/;
 }
 
-.ui-bar-a .ui-link:active {
+.ui-bar-a a.ui-link:active {
 	color: #2489CE /*{a-bar-link-active}*/;
 }
 
-.ui-bar-a .ui-link:visited {
+.ui-bar-a a.ui-link:visited {
     color: #2489CE /*{a-bar-link-visited}*/;
 }
 .ui-body-a,
@@ -170,20 +170,20 @@
 .ui-bar-b .ui-link-inherit {
 	color: 	#fff /*{b-bar-color}*/;
 }
-.ui-bar-b .ui-link {
+.ui-bar-b a.ui-link {
 	color: #ddf0f8 /*{b-bar-link-color}*/;
 	font-weight: bold;
 }
 
-.ui-bar-b .ui-link:hover {
+.ui-bar-b a.ui-link:hover {
 	color: #ddf0f8 /*{b-bar-link-hover}*/;
 }
 
-.ui-bar-b .ui-link:active {
+.ui-bar-b a.ui-link:active {
 	color: #ddf0f8 /*{b-bar-link-active}*/;
 }
 
-.ui-bar-b .ui-link:visited {
+.ui-bar-b a.ui-link:visited {
     color: #ddf0f8 /*{b-bar-link-visited}*/;
 }
 .ui-body-b,
@@ -308,20 +308,20 @@
 .ui-bar-c .ui-link-inherit {
 	color: 	#3E3E3E /*{c-bar-color}*/;
 }
-.ui-bar-c .ui-link {
+.ui-bar-c a.ui-link {
 	color: #7cc4e7 /*{c-bar-link-color}*/;
 	font-weight: bold;
 }
 
-.ui-bar-c .ui-link:hover {
+.ui-bar-c a.ui-link:hover {
 	color: #2489CE /*{c-bar-link-hover}*/;
 }
 
-.ui-bar-c .ui-link:active {
+.ui-bar-c a.ui-link:active {
 	color: #2489CE /*{c-bar-link-active}*/;
 }
 
-.ui-bar-c .ui-link:visited {
+.ui-bar-c a.ui-link:visited {
     color: #2489CE /*{c-bar-link-visited}*/;
 }
 
@@ -462,20 +462,20 @@
 .ui-bar-d .ui-link-inherit {
 	color: 	#333333 /*{d-bar-color}*/;
 }
-.ui-bar-d .ui-link {
+.ui-bar-d a.ui-link {
 	color: #2489CE /*{d-bar-link-color}*/;
 	font-weight: bold;
 }
 
-.ui-bar-d .ui-link:hover {
+.ui-bar-d a.ui-link:hover {
 	color: #2489CE /*{d-bar-link-hover}*/;
 }
 
-.ui-bar-d .ui-link:active {
+.ui-bar-d a.ui-link:active {
 	color: #2489CE /*{d-bar-link-active}*/;
 }
 
-.ui-bar-d .ui-link:visited {
+.ui-bar-d a.ui-link:visited {
     color: #2489CE /*{d-bar-link-visited}*/;
 }
 
@@ -608,20 +608,20 @@
 .ui-bar-e .ui-link-inherit {
 	color: 	#333333 /*{e-bar-color}*/;
 }
-.ui-bar-e .ui-link {
+.ui-bar-e a.ui-link {
 	color: #2489CE /*{e-bar-link-color}*/;
 	font-weight: bold;
 }
 
-.ui-bar-e .ui-link:hover {
+.ui-bar-e a.ui-link:hover {
 	color: #2489CE /*{e-bar-link-hover}*/;
 }
 
-.ui-bar-e .ui-link:active {
+.ui-bar-e a.ui-link:active {
 	color: #2489CE /*{e-bar-link-active}*/;
 }
 
-.ui-bar-e .ui-link:visited {
+.ui-bar-e a.ui-link:visited {
     color: #2489CE /*{e-bar-link-visited}*/;
 }
 
