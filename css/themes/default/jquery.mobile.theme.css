@@ -103,6 +103,7 @@
 	background-image:      -o-linear-gradient( #444444 /*{a-bup-background-start}*/, #2d2d2d /*{a-bup-background-end}*/); /* Opera 11.10+ */
 	background-image:         linear-gradient( #444444 /*{a-bup-background-start}*/, #2d2d2d /*{a-bup-background-end}*/);
 }
+.ui-btn-up-a:visited,
 .ui-btn-up-a a.ui-link-inherit {
 	color: 					#fff /*{a-bup-color}*/;
 }
@@ -119,6 +120,8 @@
 	background-image:      -o-linear-gradient( #555555 /*{a-bhover-background-start}*/, #383838 /*{a-bhover-background-end}*/); /* Opera 11.10+ */
 	background-image:         linear-gradient( #555555 /*{a-bhover-background-start}*/, #383838 /*{a-bhover-background-end}*/);
 }
+.ui-btn-hover-a:visited,
+.ui-btn-hover-a:hover,
 .ui-btn-hover-a a.ui-link-inherit {
 	color: 					#fff /*{a-bhover-color}*/;
 }
@@ -135,6 +138,8 @@
 	background-image:      -o-linear-gradient( #202020 /*{a-bdown-background-start}*/, #2c2c2c /*{a-bdown-background-end}*/); /* Opera 11.10+ */
 	background-image:         linear-gradient( #202020 /*{a-bdown-background-start}*/, #2c2c2c /*{a-bdown-background-end}*/);
 }
+.ui-btn-down-a:visited,
+.ui-btn-down-a:hover,
 .ui-btn-down-a a.ui-link-inherit {
 	color: 					#fff /*{a-bdown-color}*/;
 }
@@ -248,6 +253,7 @@
 	background-image:      -o-linear-gradient( #5f9cc5 /*{b-bup-background-start}*/, #396b9e /*{b-bup-background-end}*/); /* Opera 11.10+ */
 	background-image:         linear-gradient( #5f9cc5 /*{b-bup-background-start}*/, #396b9e /*{b-bup-background-end}*/);
 }
+.ui-btn-up-b:visited,
 .ui-btn-up-b a.ui-link-inherit {
 	color: 					#fff /*{b-bup-color}*/;
 }
@@ -264,6 +270,8 @@
 	background-image:      -o-linear-gradient( #6facd5 /*{b-bhover-background-start}*/, #4272a4 /*{b-bhover-background-end}*/); /* Opera 11.10+ */
 	background-image:         linear-gradient( #6facd5 /*{b-bhover-background-start}*/, #4272a4 /*{b-bhover-background-end}*/);
 }
+.ui-btn-hover-b:visited,
+.ui-btn-hover-a:hover,
 .ui-btn-hover-b a.ui-link-inherit {
 	color: 					#fff /*{b-bhover-color}*/;
 }
@@ -280,6 +288,8 @@
 	background-image:      -o-linear-gradient( #295b8e /*{b-bdown-background-start}*/, #3e79b5 /*{b-bdown-background-end}*/); /* Opera 11.10+ */
 	background-image:         linear-gradient( #295b8e /*{b-bdown-background-start}*/, #3e79b5 /*{b-bdown-background-end}*/);
 }
+.ui-btn-down-b:visited,
+.ui-btn-down-b:hover,
 .ui-btn-down-b a.ui-link-inherit {
 	color: 					#fff /*{b-bdown-color}*/;
 }
@@ -393,6 +403,7 @@
 	background-image:      -o-linear-gradient( #ffffff /*{c-bup-background-start}*/, #f1f1f1 /*{c-bup-background-end}*/); /* Opera 11.10+ */
 	background-image:         linear-gradient( #ffffff /*{c-bup-background-start}*/, #f1f1f1 /*{c-bup-background-end}*/);
 }
+.ui-btn-up-c:visited,
 .ui-btn-up-c a.ui-link-inherit {
 	color: 					#2F3E46 /*{c-bup-color}*/;
 }
@@ -409,6 +420,8 @@
 	background-image:      -o-linear-gradient( #f6f6f6 /*{c-bhover-background-start}*/, #e0e0e0 /*{c-bhover-background-end}*/); /* Opera 11.10+ */
 	background-image:         linear-gradient( #f6f6f6 /*{c-bhover-background-start}*/, #e0e0e0 /*{c-bhover-background-end}*/);
 }
+.ui-btn-hover-c:visited,
+.ui-btn-hover-c:hover,
 .ui-btn-hover-c a.ui-link-inherit {
 	color: 					#2F3E46 /*{c-bhover-color}*/;
 }
@@ -425,6 +438,8 @@
 	background-image:      -o-linear-gradient( #d0d0d0 /*{c-bdown-background-start}*/, #dfdfdf /*{c-bdown-background-end}*/); /* Opera 11.10+ */
 	background-image:         linear-gradient( #d0d0d0 /*{c-bdown-background-start}*/, #dfdfdf /*{c-bdown-background-end}*/);
 }
+.ui-btn-down-c:visited,
+.ui-btn-down-c:hover,
 .ui-btn-down-c a.ui-link-inherit {
 	color: 					#2F3E46 /*{c-bdown-color}*/;
 }
@@ -538,6 +553,7 @@
 	background-image:      -o-linear-gradient( #fafafa /*{d-bup-background-start}*/, #f6f6f6 /*{d-bup-background-end}*/); /* Opera 11.10+ */
 	background-image:         linear-gradient( #fafafa /*{d-bup-background-start}*/, #f6f6f6 /*{d-bup-background-end}*/);
 }
+.ui-btn-up-d:visited,
 .ui-btn-up-d a.ui-link-inherit {
 	color: 					#333 /*{d-bup-color}*/;
 }
@@ -555,6 +571,8 @@
 	background-image:      -o-linear-gradient( #eee /*{d-bhover-background-start}*/, #fff /*{d-bhover-background-end}*/); /* Opera 11.10+ */
 	background-image:         linear-gradient( #eee /*{d-bhover-background-start}*/, #fff /*{d-bhover-background-end}*/);
 }
+.ui-btn-hover-d:visited,
+.ui-btn-hover-d:hover,
 .ui-btn-hover-d a.ui-link-inherit {
 	color: 					#333 /*{d-bhover-color}*/;
 }
@@ -571,6 +589,8 @@
 	background-image:      -o-linear-gradient( #e5e5e5 /*{d-bdown-background-start}*/, #f2f2f2 /*{d-bdown-background-end}*/); /* Opera 11.10+ */
 	background-image:         linear-gradient( #e5e5e5 /*{d-bdown-background-start}*/, #f2f2f2 /*{d-bdown-background-end}*/);
 }
+.ui-btn-down-d:visited,
+.ui-btn-down-d:hover,
 .ui-btn-down-d a.ui-link-inherit {
 	color: 					#333 /*{d-bdown-color}*/;
 }
@@ -684,6 +704,7 @@
 	background-image:      -o-linear-gradient( #ffefaa /*{e-bup-background-start}*/, #ffe155 /*{e-bup-background-end}*/); /* Opera 11.10+ */
 	background-image:         linear-gradient( #ffefaa /*{e-bup-background-start}*/, #ffe155 /*{e-bup-background-end}*/);
 }
+.ui-btn-up-e:visited,
 .ui-btn-up-e a.ui-link-inherit {
 	color: 					#222 /*{e-bup-color}*/;
 }
@@ -700,6 +721,8 @@
 	background-image:      -o-linear-gradient( #fff5ba /*{e-bhover-background-start}*/, #fbdd52 /*{e-bhover-background-end}*/); /* Opera 11.10+ */
 	background-image:         linear-gradient( #fff5ba /*{e-bhover-background-start}*/, #fbdd52 /*{e-bhover-background-end}*/);
 }
+.ui-btn-hover-e:visited,
+.ui-btn-hover-e:hover,
 .ui-btn-hover-e a.ui-link-inherit {
 	color: 					#333 /*{e-bhover-color}*/;
 }
@@ -716,6 +739,8 @@
 	background-image:      -o-linear-gradient( #f8d94c /*{e-bdown-background-start}*/, #fadb4e /*{e-bdown-background-end}*/); /* Opera 11.10+ */
 	background-image:         linear-gradient( #f8d94c /*{e-bdown-background-start}*/, #fadb4e /*{e-bdown-background-end}*/);
 }
+.ui-btn-down-e:visited,
+.ui-btn-down-e:hover,
 .ui-btn-down-e a.ui-link-inherit {
 	color: 					#333 /*{e-bdown-color}*/;
 }
@@ -754,6 +779,8 @@ a.ui-link-inherit {
 	background-image:         linear-gradient( #5393c5 /*{global-active-background-start}*/, #6facd5 /*{global-active-background-end}*/);
 	font-family: Helvetica, Arial, sans-serif /*{global-font-family}*/;
 }
+.ui-btn-active:visited,
+.ui-btn-active:hover,
 .ui-btn-active a.ui-link-inherit {
 	color: 					#fff /*{global-active-color}*/;
 }
