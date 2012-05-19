@@ -166,7 +166,7 @@ $(document).bind("mobileinit", function(){
 		<h4 style="margin:.5em 0">Important: Use <code>pageInit()</code>, not <code>$(document).ready()</code></h4>
 		<p>The first thing you learn in jQuery is to call code inside the <code>$(document).ready()</code> function so everything will execute as soon as the DOM is loaded. However, in jQuery Mobile, Ajax is used to load the contents of each page into the DOM as you navigate, and the DOM ready handler only executes for the first page. To execute code whenever a new page is loaded and created, you can bind to the <code>pageinit</code> event. This event is explained in detail at the bottom of this page.</p></div>
 
-      <p> &nbsp;</p>
+      <p>&nbsp; </p>
 		<div class="ui-body ui-body-e">
 		<h4 style="margin:.5em 0">Important: <code>pageCreate()</code> vs <code>pageInit()</code></h4>
    <p> Prior to Beta 2 the recommendation to users wishing to manipulate jQuery Mobile enhanced page and child widget markup was to bind to the <code>pagecreate</code> event. In Beta 2 an internal change was made to decouple each of the widgets by binding to the <code>pagecreate</code> event in place of direct calls to the widget methods. As a result, users binding to the <code>pagecreate</code> from within <code>mobileinit</code> would find their binding executing before the markup had been enhanced by each of the plugins. In keeping with the lifecycle of the jQuery UI Widget Factory, the initialization method is invoked <strong>after</strong> the create method, so the <code>pageinit</code> event provides the correct timing for post enhancement manipulation of the DOM and/or Javascript objects.</p>
