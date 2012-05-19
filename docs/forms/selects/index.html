@@ -40,7 +40,7 @@
 			
 			<p>By default, the framework leverages the native OS options menu to use with the custom button. When the button is clicked, the native OS menu will open. When a value is selected and the menu closes, the custom button's text is updated to match the selected value. Please note that the framework also offers the possibility of having custom (non-native) select menus; see details at the bottom of this page and on the <a href="custom.html"> custom select menu</a> page.</p>
 
-			<p>To add a select menu to your page, start with a standard <code>select</code> element populated with a set of <code>option</code> elements. Set the <code>for</code> attribute of the <code>label</code> to match the ID of the <code>select</code> so they are semantically associated. It's possible to <a href="../docs-forms.html">accessibly hide the label</a> if it's not desired in the page layout, but we require that it is present in the markup for semantic and accessibility reasons.  </p>
+			<p>To add a select menu to your page, start with a standard <code>select</code> element populated with a set of <code>option</code> elements. Set the <code>for</code> attribute of the <code>label</code> to match the <code>id</code> of the <code>select</code> so they are semantically associated. It's possible to <a href="../docs-forms.html">accessibly hide the label</a> if it's not desired in the page layout, but we require that it is present in the markup for semantic and accessibility reasons.</p>
 			
 			<p>The framework will find all <code>select</code> elements and automatically enhance them into select menus, no need to apply a <code>data-role</code> attribute. To prevent the automatic enhancement of a select, add  <code>data-role="none"</code> attribute to the <code>select</code>.</p>
 			
@@ -201,7 +201,7 @@
 
 <h2>Vertically grouped select inputs</h2>
 
-<p>To create a grouped set of select inputs, first add <code>select</code> and a corresponding <code>label</code>. Set the <code>for</code> attribute of the <code>label</code> to match the ID of the <code>select</code> so they are semantically associated.</p>
+<p>To create a grouped set of select inputs, first add <code>select</code> and a corresponding <code>label</code>. Set the <code>for</code> attribute of the <code>label</code> to match the <code>id</code> of the <code>select</code> so they are semantically associated.</p>
 
 <p>Because the <code>label</code> element will be associated with each individual select input, we recommend wrapping the selects in a <code>fieldset</code> element that has a <code>legend</code> which acts as the combined label for the grouped inputs.</p>
 
