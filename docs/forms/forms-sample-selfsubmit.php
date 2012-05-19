@@ -26,17 +26,59 @@
 		
 		<form action="forms-sample-selfsubmit.php" method="post">
 			
-			<fieldset data-role="controlgroup" data-type="horizontal" data-role="fieldcontain">
-			    <legend>Testing</legend>
-			    <div>
-			    	<?php $g = $_REQUEST['gender']; ?>
-			        <input type="radio" name="gender" value="m" id="gender-1" <?=$g=="m"? "checked": ""; ?> /><label for="gender-1">Male</label>
-			        <input type="radio" name="gender" value="f" id="gender-2" <?=$g=="f"? "checked": ""; ?> /><label for="gender-2">Female</label>
-			    </div>
-			</fieldset>
+		    	<?php if ( isset ( $_REQUEST['submit'] ) ) { $submit = $_REQUEST['submit']; } else { $submit = ""; }
+				if ( isset ( $_REQUEST['layout'] ) ) { $layout = $_REQUEST['layout']; } else { $layout = ""; }
+				if ( isset ( $_REQUEST['title'] ) ) { $title = $_REQUEST['title']; } else { $title = ""; }
+				if ( isset ( $_REQUEST['timeout'] ) ) { $timeout = $_REQUEST['timeout']; } else { $timeout = "0"; }
+				if ( isset ( $_REQUEST['transition'] ) ) { $transition = $_REQUEST['transition']; } else { $transition = ""; }
+			?>
+
+			<div data-role="fieldcontain">
+				<label for="title">Title:</label>
+				<input type="text" name="title" id="title" placeholder="diashow title"value="<?php echo $title ?>" />
+			</div>
+
+			<div data-role="fieldcontain">
+			    <fieldset data-role="controlgroup" data-type="horizontal">
+			     	<legend>Preview:</legend>
+			         	<input type="radio" name="layout" id="layout-radio-a" value="List" <?php echo $layout=="List" ? "checked" : "" ?> />
+			         	<label for="layout-radio-a">List</label>
+			         	<input type="radio" name="layout" id="layout-radio-b" value="Grid" <?php echo $layout=="Grid" ? "checked" : "" ?> />
+			         	<label for="layout-radio-b">Grid</label>
+			         	<input type="radio" name="layout" id="layout-radio-c" value="Gallery" <?php echo $layout=="Gallery" ? "checked" : "" ?> />
+			         	<label for="layout-radio-c">Gallery</label>
+			    </fieldset>
+			</div>
+
+			<div data-role="fieldcontain">
+				<label for="timeout">Timeout:</label>
+			 	<input type="range" name="timeout" id="timeout" value="<?php echo $timeout ?>" min="0" max="150" step="10" data-highlight="true"  />
+			</div>
+
+			<div data-role="fieldcontain">
+			    <fieldset data-role="controlgroup">
+			    	<legend>Transition:</legend>
+			         	<input type="radio" name="transition" id="transition-1" value="Pop" <?php echo $transition=="Pop" ? "checked" : "" ?>/>
+			         	<label for="transition-1">Pop</label>
+
+			         	<input type="radio" name="transition" id="transition-2" value="Fade" <?php echo $transition=="Fade" ? "checked" : "" ?> />
+			         	<label for="transition-2">Fade</label>
+
+			         	<input type="radio" name="transition" id="transition-3" value="Slide" <?php echo $transition=="Slide" ? "checked" : "" ?> />
+			         	<label for="transition-3">Slide</label>
+			    </fieldset>
+			</div>
 			
-			<button type="submit">Submit</submit>
-	</form>
+			<button type="submit" name="submit" value="submit" data-theme="b">Submit</button>
+		</form>
+
+		<h2><?php echo $submit == "" ? "Please enter the form and submit" : "You choose:" ?></h2>
+		<div class="ui-body ui-body-d ui-corner-all">
+			<p>Title: <strong><?php echo $submit == "" ? "-" : $title ?></strong></p>
+			<p>Preview: <strong><?php echo $submit == "" ? "-" : $layout ?></strong></p>
+			<p>Timeout: <strong><?php echo $submit == "" ? "-" : $timeout ?></strong></p>
+			<p>Transition: <strong><?php echo $submit == "" ? "-" : $transition ?></strong></p>
+		</div>
 	
 	</div><!--/content-primary -->		
 	
