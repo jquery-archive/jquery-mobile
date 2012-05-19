@@ -525,17 +525,19 @@ define( [ "jquery",
 				this._inProgress = false;
 			}
 			else {
-				var offset, ac;
+				var dst = this._currentlyOpenPopup;
 
 				if ( this._inProgress ) {
-					offset = 1;
-					ac = ( this._actionQueue[0].open ? { open: false, popup: this._actionQueue[0].popup } : undefined );
+					this._actionQueue = [ this._actionQueue[ 0 ] ];
+					dst = ( this._actionQueue[ 0 ].open ? this._actionQueue[ 0 ].popup : null );
 				}
 				else {
-					offset = 0,
-					ac = ( this._currentlyOpenPopup ? { open: false, popup: this._currentlyOpenPopup } : undefined );
+					this._actionQueue = [];
 				}
-				this._actionQueue.splice( offset, this._actionQueue.length - offset, ac );
+
+				if ( dst ) {
+					this._actionQueue.push( { open: false, popup: dst } );
+				}
 			}
 
 			if ( this._actionQueue.length > 0 ) {
