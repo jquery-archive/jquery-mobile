@@ -323,6 +323,7 @@ define( [ "jquery",
 		},
 
 		close: function() {
+			this._isOpen = false;
 			$.mobile.popup.popupManager.pop( this );
 		}
 	});
