@@ -29,9 +29,9 @@
 			<fieldset data-role="controlgroup" data-type="horizontal" data-role="fieldcontain">
 			    <legend>Testing</legend>
 			    <div>
-			    	<?php $g = $_REQUEST['gender']; ?>
-			        <input type="radio" name="gender" value="m" id="gender-1" <?=$g=="m"? "checked": ""; ?> /><label for="gender-1">Male</label>
-			        <input type="radio" name="gender" value="f" id="gender-2" <?=$g=="f"? "checked": ""; ?> /><label for="gender-2">Female</label>
+			    	<?php if ( isset ( $_REQUEST['gender'] ) ) { $g = $_REQUEST['gender']; } ?>
+			        <input type="radio" name="gender" value="m" id="gender-1" <?php echo $g=="m" ? "checked" : "" ?> /><label for="gender-1">Male</label>
+			        <input type="radio" name="gender" value="f" id="gender-2" <?php echo $g=="f" ? "checked" : "" ?> /><label for="gender-2">Female</label>
 			    </div>
 			</fieldset>
 			
