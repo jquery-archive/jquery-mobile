@@ -362,6 +362,7 @@ define( [ "jquery",
 		_haveNavHook: false,
 		_currentlyOpenPopup: null,
 		_myOwnHashChange: false,
+		_myUrl: "",
 
 		// Call _onHashChange if the hash changes /after/ the popup is on the screen
 		// Note that placing the popup on the screen can itself cause a hashchange,
@@ -369,6 +370,15 @@ define( [ "jquery",
 		_doNavHook: function( whenHooked ) {
 			var self = this;
 
+			self._myUrl = $.mobile.activePage.jqmData( "url" );
+			$.mobile.pageContainer.one( "pagebeforechange.popup", function( e, data ) {
+				var parsedDst = $.mobile.path.parseUrl( ( ( typeof data.toPage === "string" ) ? data.toPage : data.toPage.jqmData( "url" ) ) ),
+				    toUrl = parsedDst.pathname + parsedDst.search + parsedDst.hash;
+
+				if ( self._myUrl !== toUrl ) {
+					self._onHashChange( true );
+				}
+			});
 			if ( $.mobile.hashListeningEnabled ) {
 				var activeEntry = $.mobile.urlHistory.getActive(),
 				    hasHash = ( activeEntry.url.indexOf( $.mobile.dialogHashKey ) > -1 );
@@ -403,6 +413,7 @@ define( [ "jquery",
 			else {
 				this._onHashChange();
 			}
+			$.mobile.activePage.unbind( "pagebeforechange.popup" );
 		},
 
 		_inArray: function( action ) {
@@ -442,7 +453,8 @@ define( [ "jquery",
 
 		_continueWithAction: function() {
 			var self = this,
-			    signal, fn, args;
+			    signal, fn, args,
+			    actionComplete = false;
 
 			if ( self._actionQueue[0].open ) {
 				if ( self._currentlyOpenPopup ) {
@@ -461,8 +473,15 @@ define( [ "jquery",
 				args = [];
 			}
 
-			self._actionQueue[0].popup.element.one( signal, function() { self._completeAction(); });
+			self._actionQueue[0].waitingForPopup = true;
+			self._actionQueue[0].popup.element.one( signal, function() {
+				self._completeAction();
+				actionComplete = true;
+			});
 			self._actionQueue[0].popup[fn].apply( self._actionQueue[0].popup, args );
+			if ( !actionComplete && self._actionQueue[0].abort ) {
+				self._actionQueue[0].popup._immediate();
+			}
 		},
 
 		_runSingleAction: function() {
@@ -541,7 +560,7 @@ define( [ "jquery",
 			}
 		},
 
-		_onHashChange: function() {
+		_onHashChange: function( immediate ) {
 			this._haveNavHook = false;
 
 			if ( this._myOwnHashChange ) {
@@ -553,7 +572,15 @@ define( [ "jquery",
 
 				if ( this._inProgress ) {
 					this._actionQueue = [ this._actionQueue[ 0 ] ];
-					dst = ( this._actionQueue[ 0 ].open ? this._actionQueue[ 0 ].popup : null );
+					if ( this._actionQueue[ 0 ].open ) {
+						dst = this._actionQueue[ 0 ].popup;
+						if ( immediate && this._actionQueue[ 0 ].waitingForPopup ) {
+							this._actionQueue[ 0 ].popup._immediate();
+						}
+					}
+					else {
+						dst = null;
+					}
 				}
 				else {
 					this._actionQueue = [];
@@ -565,6 +592,9 @@ define( [ "jquery",
 			}
 
 			if ( this._actionQueue.length > 0 ) {
+				$.each( this._actionQueue, function( idx, val ) {
+					val.abort = immediate;
+				});
 				this._runSingleAction() ;
 			}
 		}
