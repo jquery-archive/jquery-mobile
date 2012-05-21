@@ -129,11 +129,10 @@
 
 	asyncTest( "Popup opens and closes", function() {
 
-		expect( 5 );
+		expect( 4 );
 
 		$( "#test-popup" ).popup( "open" );
 		setTimeout(function() {
-			ok( $( "#test-popup" ).parent().hasClass( "in" ), "Open popup container has class 'in'" );
 			ok( !$( "#test-popup" ).parent().prev().hasClass( "ui-screen-hidden" ), "Open popup screen is not hidden" );
 			ok( $( "#test-popup" ).parent().attr( "class" ).match( /( |^)ui-body-[a-z]( |$)/ ), "Open popup has a valid overlay theme" );
 			$( "#test-popup" ).popup( "close" );
