@@ -5,7 +5,7 @@
 .ui-navbar li.ui-navbar-truncate { position: absolute; left: -9999px; top: -9999px; }
 .ui-navbar li .ui-btn, .ui-navbar .ui-navbar-toggle .ui-btn { display: block; font-size: 12px; text-align: center; margin: 0; border-right-width: 0; max-width: 100%; }
 .ui-navbar li .ui-btn {  margin-right: -1px; }
-.ui-navbar li .ui-btn:last-child { margin-right: 0; }
+.ui-navbar li:last-child .ui-btn { margin-right: 0; }
 .ui-header .ui-navbar li .ui-btn, .ui-header .ui-navbar .ui-navbar-toggle .ui-btn,
 .ui-footer .ui-navbar li .ui-btn, .ui-footer .ui-navbar .ui-navbar-toggle .ui-btn { border-top-width: 0; border-bottom-width: 0; }
 .ui-navbar .ui-btn-inner { padding-left: 2px; padding-right: 2px; }
