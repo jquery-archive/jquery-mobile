@@ -635,7 +635,7 @@ define( [ "jquery",
 		$.mobile.popup.prototype.enhanceWithin( e.target, true );
 
 		$( "a[href^='#']:jqmData(rel='popup')", e.target ).each( function() {
-			$.mobile.popup.bindPopupToButton( $( this ), $( $( this ).attr( "href" ) ) );
+			$.mobile.popup.bindPopupToButton( $( this ), $( $( this ).attr( "href" ), e.target ) );
 		});
 	});
 
