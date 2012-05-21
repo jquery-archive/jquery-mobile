@@ -26,6 +26,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			// NOTE: Windows Phone could not find the label through a selector
 			// filter works though.
 			parentLabel = $( input ).closest( "label" ),
+			customState = $( input ).jqmData("cstate").toString() || "",
 			label = parentLabel.length ? parentLabel : $( input ).closest( "form,fieldset,:jqmData(role='page'),:jqmData(role='dialog')" ).find( "label" ).filter( "[for='" + input[0].id + "']" ),
 			inputtype = input[0].type,
 			mini = inheritAttr( input, "mini" ),
@@ -36,7 +37,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			activeBtn = icon ? "" : " " + $.mobile.activeBtnClass,
 			checkedClass = "ui-" + checkedState + activeBtn,
 			uncheckedClass = "ui-" + uncheckedState,
-			checkedicon = "ui-icon-" + checkedState,
+			checkedicon = "ui-icon-" + (customState.length ? customState : checkedState),
 			uncheckedicon = "ui-icon-" + uncheckedState;
 
 		if ( inputtype !== "checkbox" && inputtype !== "radio" ) {
