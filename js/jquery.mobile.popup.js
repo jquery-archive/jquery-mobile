@@ -406,8 +406,12 @@ define( [ "jquery",
 			}
 		},
 
-		_undoNavHook: function() {
-			if ( $.mobile.hashListeningEnabled ) {
+		_undoNavHook: function( abort ) {
+			if ( abort ) {
+				$( window ).unbind( "hashchange.popupBinder hashchange.popup" );
+			}
+
+			if ( $.mobile.hashListeningEnabled && !abort ) {
 				window.history.back();
 			}
 			else {
@@ -440,7 +444,7 @@ define( [ "jquery",
 			if ( self._actionQueue.length === 0 && !current.open && self._haveNavHook ) {
 					self._haveNavHook = false;
 					self._myOwnHashChange = true;
-					self._undoNavHook();
+					self._undoNavHook( current.abort );
 			}
 			else {
 				self._inProgress = false;
