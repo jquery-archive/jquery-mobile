@@ -1,5 +1,10 @@
 source build/bin/config.sh
 
+if [ ! -n "$(git tag -l $VER_OFFICIAL)" ]; then
+  echo "!!! tag the version of the library before deploying"
+  exit 1;
+fi
+
 # Deploying all the files to the CDN
 mkdir -p tmp
 cp -R $OUTPUT tmp/$VER_OFFICIAL
