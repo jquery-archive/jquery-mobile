@@ -55,6 +55,7 @@ define( [ "jquery",
 				_ui: ui,
 				_fallbackTransition: "",
 				_currentTransition: false,
+				_prereqs: null,
 				_isOpen: false
 			});
 
@@ -192,27 +193,93 @@ define( [ "jquery",
 			return { x: newleft, y: newtop };
 		},
 
+		_immediate: function() {
+			if ( this._prereqs ) {
+				$.each( this._prereqs, function( key, val ) {
+					val.resolve();
+				});
+			}
+		},
+
+		_createPrereqs: function( screenPrereq, containerPrereq, whenDone ) {
+			var self = this, prereqs;
+
+			prereqs = {
+				screen: $.Deferred( function( d ) {
+					d.then( function() {
+						if ( prereqs === self._prereqs ) {
+							screenPrereq();
+						}
+					});
+				}),
+				container: $.Deferred( function( d ) {
+					d.then( function() {
+						if ( prereqs === self._prereqs ) {
+							containerPrereq();
+						}
+					});
+				})
+			};
+
+			$.when( prereqs.screen, prereqs.container ).done( function() {
+				if ( prereqs === self._prereqs ) {
+					self._prereqs = null;
+					whenDone();
+				}
+			});
+
+			self._prereqs = prereqs;
+		},
+
+		_animatePopup: function( additionalCondition, transition, classToRemove, screenClassToAdd, containerClassToAdd, applyTransition, prereqs ) {
+			var self = this;
+
+			if ( self.options.overlayTheme && additionalCondition ) {
+				self._ui.screen
+					.removeClass( classToRemove )
+					.addClass( screenClassToAdd )
+					.animationComplete( function() {
+						prereqs.screen.resolve();
+					});
+			}
+			else {
+				prereqs.screen.resolve();
+			}
+
+			if ( transition && transition !== "none" ) {
+				if ( applyTransition ) { self._applyTransition( transition ); }
+				self._ui.container
+					.removeClass( classToRemove )
+					.addClass( containerClassToAdd )
+					.animationComplete( function() {
+						prereqs.container.resolve();
+					});
+			}
+			else {
+				prereqs.container.resolve();
+			}
+		},
+
 		_realOpen: function( x, y, transition ) {
 			var self = this,
-			    // Count down to triggering "opened" - we have two prerequisits:
-			    // 1. The popup window animation completes (onAnimationComplete())
-			    // 2. The screen opacity animation completes (showScreen())
-			    triggerPrereqs = 2,
-			    maybeTriggerOpened = function() {
-			    	triggerPrereqs--;
-
-			    	if ( 0 === triggerPrereqs ) {
-			    		self._isOpen = true;
-			    		self.element.trigger( "opened" );
-			    	}
-			    },
-			    onAnimationComplete = function() {
-			    	self._ui.screen.height( $( document ).height() );
-			    	maybeTriggerOpened();
-			    },
 			    coords = self._placementCoords(
 			    	( undefined === x ? window.innerWidth / 2 : x ),
 			    	( undefined === y ? window.innerHeight / 2 : y ) );
+
+			// Count down to triggering "opened" - we have two prerequisites:
+			// 1. The popup window animation completes (container())
+			// 2. The screen opacity animation completes (screen())
+			self._createPrereqs(
+				$.noop,
+				function() {
+					self._applyTransition( "none" );
+					self._ui.container.removeClass( "in" );
+					self._ui.screen.height( $( document ).height() );
+				},
+				function() {
+					self._isOpen = true;
+					self.element.trigger( "opened" );
+				});
 
 			if ( transition ) {
 				self._currentTransition = transition;
@@ -230,15 +297,6 @@ define( [ "jquery",
 					.height( $( document ).height() )
 					.removeClass( "ui-screen-hidden" );
 
-			if ( self.options.overlayTheme ) {
-				self._ui.screen
-					.addClass("in")
-					.animationComplete( maybeTriggerOpened );
-			}
-			else {
-				maybeTriggerOpened();
-			}
-
 			self._ui.container
 				.removeClass( "ui-selectmenu-hidden" )
 				.css( {
@@ -246,68 +304,33 @@ define( [ "jquery",
 					top: coords.y
 				});
 
-			if ( transition && transition !== "none" ) {
-				self._ui.container
-					.addClass( "in" )
-					.animationComplete( onAnimationComplete );
-			}
-			else {
-				onAnimationComplete();
-			}
+			self._animatePopup( true, transition, "", "in", "in", false, self._prereqs );
 		},
 
 		_realClose: function() {
 			var self = this,
-			    transition = ( self._currentTransition ? self._currentTransition : self.options.transition ),
-			    // Count down to triggering "closed" - we have two prerequisits:
-			    // 1. The popup window reverse animation completes (onAnimationComplete())
-			    // 2. The screen opacity animation completes (hideScreen())
-			    triggerPrereqs = 2,
-			    maybeTriggerClosed = function() {
-			    	triggerPrereqs--;
+			    transition = ( self._currentTransition ? self._currentTransition : self.options.transition );
 
-			    	if ( 0 === triggerPrereqs ) {
-			    		self._isOpen = false;
-			    		if ( self._currentTransition ) {
-			    			self._applyTransition( self.options.transition );
-			    			self._currentTransition = false;
-			    		}
-			    		self.element.trigger( "closed" );
-			    	}
-			    },
-			    onAnimationComplete = function() {
-			    	self._ui.container
-			    		.removeClass( "reverse out" )
-			    		.addClass( "ui-selectmenu-hidden" )
-			    		.removeAttr( "style" );
-			    	maybeTriggerClosed();
-			    },
-			    hideScreen = function() {
-			    	self._ui.screen
-			    		.removeClass( "out" )
-			    		.addClass( "ui-screen-hidden" );
-			    	maybeTriggerClosed();
-			    };
+			// Count down to triggering "closed" - we have two prerequisites:
+			// 1. The popup window reverse animation completes (container())
+			// 2. The screen opacity animation completes (screen())
+			self._createPrereqs(
+				function() {
+					self._ui.screen
+						.removeClass( "out" )
+						.addClass( "ui-screen-hidden" );
+				},
+				function() {
+					self._ui.container
+						.removeClass( "reverse out" )
+						.addClass( "ui-selectmenu-hidden" )
+						.removeAttr( "style" );
+				},
+				function() {
+					self.element.trigger( "closed" );
+				});
 
-			if ( transition && transition !== "none" ) {
-				this._ui.container
-					.removeClass( "in" )
-					.addClass( "reverse out" )
-					.animationComplete( onAnimationComplete );
-			}
-			else {
-				onAnimationComplete();
-			}
-
-			if ( this.options.overlayTheme && this._ui.screen.hasClass( "in" ) ) {
-				this._ui.screen
-					.removeClass( "in" )
-					.addClass( "out" )
-					.animationComplete( hideScreen );
-			}
-			else {
-				hideScreen();
-			}
+			self._animatePopup( self._ui.screen.hasClass( "in" ), transition, "in", "out", "reverse out", true, self._prereqs );
 		},
 
 		_destroy: function() {
