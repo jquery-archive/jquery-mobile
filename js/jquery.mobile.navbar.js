@@ -32,6 +32,8 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 		if ( !iconpos ) {
 			$navbar.addClass( "ui-navbar-noicons" );
 		}
+		
+		$navbtns.filter( ".ui-btn-active" ).addClass( "ui-state-persist" );
 
 		$navbtns.buttonMarkup({
 			corners:	false,
@@ -49,7 +51,7 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 
 		// Buttons in the navbar with ui-state-persist class should regain their active state before page show
 		$navbar.closest( ".ui-page" ).bind( "pagebeforeshow", function() {
-			$navbtns.filter( ".ui-state-persist" ).addClass( $.mobile.activeBtnClass );
+			$navbtns.removeClass( $.mobile.activeBtnClass ).filter( ".ui-state-persist" ).addClass( $.mobile.activeBtnClass );
 		});
 	}
 });
