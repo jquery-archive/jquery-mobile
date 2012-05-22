@@ -231,7 +231,7 @@ define( [ "jquery",
 			self._prereqs = prereqs;
 		},
 
-		_animatePopup: function( additionalCondition, transition, classToRemove, screenClassToAdd, containerClassToAdd, applyTransition, prereqs ) {
+		_animate: function( additionalCondition, transition, classToRemove, screenClassToAdd, containerClassToAdd, applyTransition, prereqs ) {
 			var self = this;
 
 			if ( self.options.overlayTheme && additionalCondition ) {
@@ -304,7 +304,7 @@ define( [ "jquery",
 					top: coords.y
 				});
 
-			self._animatePopup( true, transition, "", "in", "in", false, self._prereqs );
+			self._animate( true, transition, "", "in", "in", false, self._prereqs );
 		},
 
 		_realClose: function() {
@@ -330,7 +330,7 @@ define( [ "jquery",
 					self.element.trigger( "closed" );
 				});
 
-			self._animatePopup( self._ui.screen.hasClass( "in" ), transition, "in", "out", "reverse out", true, self._prereqs );
+			self._animate( self._ui.screen.hasClass( "in" ), transition, "in", "out", "reverse out", true, self._prereqs );
 		},
 
 		_destroy: function() {
@@ -367,7 +367,7 @@ define( [ "jquery",
 		// Call _onHashChange if the hash changes /after/ the popup is on the screen
 		// Note that placing the popup on the screen can itself cause a hashchange,
 		// because the dialogHashKey may need to be added to the URL.
-		_doNavHook: function( whenHooked ) {
+		_navHook: function( whenHooked ) {
 			var self = this;
 
 			self._myUrl = $.mobile.activePage.jqmData( "url" );
@@ -406,7 +406,7 @@ define( [ "jquery",
 			}
 		},
 
-		_undoNavHook: function( abort ) {
+		_navUnhook: function( abort ) {
 			if ( abort ) {
 				$( window ).unbind( "hashchange.popupBinder hashchange.popup" );
 			}
@@ -444,7 +444,7 @@ define( [ "jquery",
 			if ( self._actionQueue.length === 0 && !current.open && self._haveNavHook ) {
 					self._haveNavHook = false;
 					self._myOwnHashChange = true;
-					self._undoNavHook( current.abort );
+					self._navUnhook( current.abort );
 			}
 			else {
 				self._inProgress = false;
@@ -497,7 +497,7 @@ define( [ "jquery",
 					self._continueWithAction();
 				}
 				else {
-					self._doNavHook( function() {
+					self._navHook( function() {
 						self._haveNavHook = true;
 						self._continueWithAction();
 					});
