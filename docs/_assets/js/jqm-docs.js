@@ -6,7 +6,7 @@ $(function(){
 });
 
 // display the version of jQM
-$(function() {
+$(document).bind( 'pageinit', function() {
 	var version = $.mobile.version || "dev",
 		words = version.split( "-" ),
 		ver = words[0],
