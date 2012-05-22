@@ -38,7 +38,7 @@ $( document ).delegate( ":jqmData(role='listview')", "listviewcreate", function(
 			var $this = $(this),
 				val = this.value.toLowerCase(),
 				listItems = null,
-				lastval = $this.jqmData( "lastval" ) + "",
+				lastval = $this.jqmData( "lastval" ) || "",
 				childItems = false,
 				itemtext = "",
 				item;
