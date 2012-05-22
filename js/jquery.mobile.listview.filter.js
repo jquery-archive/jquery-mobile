@@ -73,7 +73,7 @@ $( document ).delegate( ":jqmData(role='listview')", "listviewcreate", function(
 
 					} else if ( listview.options.filterCallback( itemtext, val ) ) {
 
-						//mark to be hidden
+						// Mark to be hidden
 						item.toggleClass( "ui-filter-hidequeue" , true );
 					} else {
 
@@ -95,7 +95,7 @@ $( document ).delegate( ":jqmData(role='listview')", "listviewcreate", function(
 
 			} else {
 
-				//filtervalue is empty => show all
+				// Filter value is empty => show all
 				listItems.toggleClass( "ui-screen-hidden", false );
 			}
 			listview._refreshCorners();
