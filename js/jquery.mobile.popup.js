@@ -299,7 +299,7 @@ define( [ "jquery",
 
 			self._ui.container
 				.removeClass( "ui-selectmenu-hidden" )
-				.css( {
+				.offset( {
 					left: coords.x,
 					top: coords.y
 				});
