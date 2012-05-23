@@ -64,8 +64,7 @@ QUnit.testDone = function(obj) {
 	var xml = '\t<testcase classname="' +	(moduleName || "jquery.mobile") + '" ' +
 		'name="' + obj.name + '" ' +
 		'time="' + ((new Date()) - startTime)/1000 + '" ' +
-		'assertions=' + obj.total + '" ' +
-		'></testcase>\n';
+		'assertions=' + obj.total + '"></testcase>\n';
 
 	current_test_assertions = [];
 	testCases.push(xml);
@@ -78,7 +77,14 @@ QUnit.moduleStart = function(obj) {
 
 QUnit.moduleDone = function(obj) {
 	sendMessage('moduleDone', obj.name, obj.failed, obj.passed, obj.total);
+};
 
+QUnit.begin = function() {
+	sendMessage('begin');
+	sendMessage('xml', '<?xml version="1.0" encoding="UTF-8"?>\n' );
+};
+
+QUnit.done = function(obj) {
 	var xml = '<testsuite name="'+ obj.name +'" errors="0" failures="'+obj.failed+'" tests="'+obj.total+'" time="'+(new Date() - new Date())/1000+'" >\n';
 	if(testCases.length) {
 		for (var i=0, l=testCases.length; i<l; i++) {
@@ -88,13 +94,5 @@ QUnit.moduleDone = function(obj) {
 
 	xml += '</testsuite>\n';
 	sendMessage( "xml", xml );
-};
-
-QUnit.begin = function() {
-	sendMessage('begin');
-	sendMessage('xml', '<?xml version="1.0" encoding="UTF-8"?>\n' );
-};
-
-QUnit.done = function(obj) {
 	sendMessage('done', obj.failed, obj.passed, obj.total, obj.runtime);
 };

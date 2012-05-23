@@ -41,7 +41,6 @@ var resultsFilename = buildOutpuDir +	'TEST-' + suiteName + ".xml";
 
 if( fs.exists(resultsFilename) ){
 	fs.remove( resultsFilename );
-	sendMessage( ['console', fs.exists( resultsFilename)]);
 }
 
 // Messages are sent to the parent by appending them to the tempfile.
