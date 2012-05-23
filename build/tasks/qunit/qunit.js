@@ -44,7 +44,7 @@ QUnit.log = function(obj) {
 		message += "expected: " + obj.expected + ", but was: " + obj.actual;
 	}
 
-	var xml = '\t<failure type="failed" message="' + xmlEncode(message) + '"/>\n';
+	var xml = '\t<failure type="failed" message="' + xmlEncode(message) + '"></failure>\n';
 
 	failures.push(xml);
 };
@@ -56,11 +56,17 @@ QUnit.testStart = function(obj) {
 
 QUnit.testDone = function(obj) {
 	sendMessage('testDone', obj.name, obj.failed, obj.passed, obj.total);
+	sendMessage('console', failures.join( "foo" ));
 	var xml = '\t<testcase classname="' +	(moduleName || "jquery.mobile") + '" ' +
 		'name="' + xmlEncode(obj.name) + '" ' +
 		'time="' + ((new Date()) - startTime)/1000 + '" ' +
-		'assertions="' + obj.total + '"></testcase>\n';
+		'assertions="' + obj.total + '">\n' +
+		(failures.length ? '\t\t' + failures.join( "\n\t\t" ) : "") +
+		'\t</testcase>\n';
 
+
+	sendMessage('console', xml);
+	failures = [];
 	testCases.push(xml);
 };
 
@@ -83,11 +89,6 @@ QUnit.done = function(obj) {
 	for (var i=0; i<testCases.length; i++) {
 		xml += testCases[i];
 	}
-
-	for (i=0; i<failures.length; i++) {
-		xml += failures[i];
-	}
-
 
 	xml += '</testsuite>\n';
 	sendMessage( "xml", xml );
