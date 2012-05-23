@@ -29,9 +29,7 @@
 
 	document.write( 
 		'<script>' +
-			'console.warn( "jQuery version: " + jQuery.fn.jquery );' +
 			'if ( parseInt( jQuery.fn.jquery.replace( /\\./g, "" ), 10 ) < 170 && window.define && window.define.amd ) {' +
-			    'console.warn( "Exporting \'jquery\' AMD module" );' +
 			    'define( "jquery", [], function () { return jQuery; } );'+
 			'}'+
 		'</script>' 
