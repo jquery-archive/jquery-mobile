@@ -31,22 +31,20 @@ $.testHelper.excludeFileProtocol(function(){
 		$.mobile.media = function(){ return true; };
 
 		$.testHelper.reloadModule( moduleName ).done( function() {
-				ok($.support.orientation);
-				ok($.support.touch);
-				ok($.support.cssTransitions);
-				ok($.support.pushState);
-				ok($.support.mediaquery);
-				start();
+			ok($.support.orientation, "orientation is supported" );
+			ok($.support.touch, "touch is supported" );
+			ok($.support.cssTransitions, "css transitions are supported" );
+			ok($.support.pushState, "push state is supported" );
+			ok($.support.mediaquery, "media queries are supported" );
+			start();
 		});
 	});
 
 	asyncTest( "detects functionality from basic negative properties and attributes (where possible)", function(){
 		delete window["orientation"];
-		delete document["ontouchend"];
 
 		$.testHelper.reloadModule( moduleName ).done( function() {
-			ok(!$.support.orientation);
-			ok(!$.support.touch);
+			ok(!$.support.orientation, "orientation is not supported" );
 			start();
 		});
 	});
