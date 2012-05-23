@@ -115,7 +115,6 @@
 
 			function() {
 				onToComplete( function( el ) {
-					console.log( $("body").attr("class") );
 					ok($("body").hasClass(perspective), "has viewport-flip or viewport-fade based on 3d transform");
 					start();
 				});
