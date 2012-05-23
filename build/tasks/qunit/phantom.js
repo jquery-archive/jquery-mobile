@@ -38,7 +38,7 @@ function sendDebugMessage() {
 
 // Abort if QUnit doesn't do anything for a while.
 setInterval(function() {
-  if (new Date() - last > 15000) {
+  if (new Date() - last > 20000) {
     sendMessage(['done_timeout']);
   }
 }, 1000);

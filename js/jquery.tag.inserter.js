@@ -24,18 +24,15 @@
 				url = "http://code.jquery.com/jquery-"+version+".js";
 				break;
 		}
-	} 
+	}
 
 	document.write( "<script src='" + url + "'></script>" );
 
-	document.write( 
+	document.write(
 		'<script>' +
-			'console.warn( "jQuery version: " + jQuery.fn.jquery );' +
 			'if ( parseInt( jQuery.fn.jquery.replace( /\\./g, "" ), 10 ) < 170 && window.define && window.define.amd ) {' +
-			    'console.warn( "Exporting \'jquery\' AMD module" );' +
 			    'define( "jquery", [], function () { return jQuery; } );'+
 			'}'+
-		'</script>' 
+		'</script>'
 	);
-
 }());
