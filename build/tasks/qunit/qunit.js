@@ -80,11 +80,11 @@ QUnit.begin = function() {
 
 QUnit.done = function(obj) {
 	var xml = '<testsuite name="'+ obj.name +'" errors="0" failures="'+obj.failed+'" tests="'+obj.total+'" time="'+(new Date() - new Date())/1000+'" >\n';
-	for (var i=0, l=testCases.length; i<l; i++) {
+	for (var i=0; i<testCases.length; i++) {
 		xml += testCases[i];
 	}
 
-	for (i=0, l=failures.length; i<l; i++) {
+	for (i=0; i<failures.length; i++) {
 		xml += failures[i];
 	}
 
