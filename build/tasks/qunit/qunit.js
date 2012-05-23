@@ -56,7 +56,6 @@ QUnit.testStart = function(obj) {
 
 QUnit.testDone = function(obj) {
 	sendMessage('testDone', obj.name, obj.failed, obj.passed, obj.total);
-	sendMessage('console', failures.join( "foo" ));
 	var xml = '\t<testcase classname="' +	(moduleName || "jquery.mobile") + '" ' +
 		'name="' + xmlEncode(obj.name) + '" ' +
 		'time="' + ((new Date()) - startTime)/1000 + '" ' +
@@ -64,8 +63,6 @@ QUnit.testDone = function(obj) {
 		(failures.length ? '\t\t' + failures.join( "\n\t\t" ) : "") +
 		'\t</testcase>\n';
 
-
-	sendMessage('console', xml);
 	failures = [];
 	testCases.push(xml);
 };
