@@ -1,11 +1,13 @@
 /*
  * grunt
  * https://github.com/cowboy/grunt
-n *
+ *
  * Copyright (c) 2012 "Cowboy" Ben Alman
  * Licensed under the MIT license.
  * http://benalman.com/about/license/
  */
+
+var testCases = [], failures = [], moduleName, startTime;
 
 /*global QUnit:true, alert:true*/
 
@@ -28,11 +30,13 @@ QUnit.log = function(obj) {
 	var expected = QUnit.jsDump.parse(obj.expected);
 	// Send it.
 	sendMessage('log', obj.result, actual, expected, obj.message, obj.source);
+
 	if (obj.result) {
 		return;
 	}
 
 	var message = obj.message || "";
+
 	if (obj.expected) {
 		if (message.length > 0) {
 			message += ", ";
@@ -40,12 +44,10 @@ QUnit.log = function(obj) {
 		message += "expected: " + obj.expected + ", but was: " + obj.actual;
 	}
 
-	var xml = ']]>\n<failure type="failed" message="' + xmlEncode(message) + '"/>\n<![CDATA[';
+	var xml = '\t<failure type="failed" message="' + xmlEncode(message) + '"/>\n';
 
-	current_test_assertions.push(xml);
+	failures.push(xml);
 };
-
-var testCases = [], current_test_assertions, moduleName, startTime;
 
 QUnit.testStart = function(obj) {
 	sendMessage('testStart', obj.name);
@@ -59,7 +61,6 @@ QUnit.testDone = function(obj) {
 		'time="' + ((new Date()) - startTime)/1000 + '" ' +
 		'assertions="' + obj.total + '"></testcase>\n';
 
-	current_test_assertions = [];
 	testCases.push(xml);
 };
 
@@ -79,11 +80,14 @@ QUnit.begin = function() {
 
 QUnit.done = function(obj) {
 	var xml = '<testsuite name="'+ obj.name +'" errors="0" failures="'+obj.failed+'" tests="'+obj.total+'" time="'+(new Date() - new Date())/1000+'" >\n';
-	if(testCases.length) {
-		for (var i=0, l=testCases.length; i<l; i++) {
-			xml += testCases[i];
-		}
+	for (var i=0, l=testCases.length; i<l; i++) {
+		xml += testCases[i];
 	}
+
+	for (i=0, l=failures.length; i<l; i++) {
+		xml += failures[i];
+	}
+
 
 	xml += '</testsuite>\n';
 	sendMessage( "xml", xml );
