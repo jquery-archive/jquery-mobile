@@ -64,7 +64,7 @@ QUnit.testDone = function(obj) {
 	var xml = '\t<testcase classname="' +	(moduleName || "jquery.mobile") + '" ' +
 		'name="' + obj.name + '" ' +
 		'time="' + ((new Date()) - startTime)/1000 + '" ' +
-		'assertions=' + obj.total + '"></testcase>\n';
+		'assertions="' + obj.total + '"></testcase>\n';
 
 	current_test_assertions = [];
 	testCases.push(xml);
