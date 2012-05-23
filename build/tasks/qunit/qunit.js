@@ -28,13 +28,6 @@ QUnit.log = function(obj) {
 	var expected = QUnit.jsDump.parse(obj.expected);
 	// Send it.
 	sendMessage('log', obj.result, actual, expected, obj.message, obj.source);
-
-
-	function xmlEncode(message) {
-		return message.replace(/\&/g,'&amp;').replace(/</g,'&lt;')
-			.replace(/>/g,'&gt;').replace(/\'/g,'&apos;').replace(/\"/g,'&quot;');
-	}
-
 	if (obj.result) {
 		return;
 	}
@@ -62,7 +55,7 @@ QUnit.testStart = function(obj) {
 QUnit.testDone = function(obj) {
 	sendMessage('testDone', obj.name, obj.failed, obj.passed, obj.total);
 	var xml = '\t<testcase classname="' +	(moduleName || "jquery.mobile") + '" ' +
-		'name="' + obj.name + '" ' +
+		'name="' + xmlEncode(obj.name) + '" ' +
 		'time="' + ((new Date()) - startTime)/1000 + '" ' +
 		'assertions="' + obj.total + '"></testcase>\n';
 
@@ -96,3 +89,8 @@ QUnit.done = function(obj) {
 	sendMessage( "xml", xml );
 	sendMessage('done', obj.failed, obj.passed, obj.total, obj.runtime);
 };
+
+function xmlEncode(message) {
+	return message.replace(/\&/g,'&amp;').replace(/</g,'&lt;')
+		.replace(/>/g,'&gt;').replace(/\'/g,'&apos;').replace(/\"/g,'&quot;');
+}
