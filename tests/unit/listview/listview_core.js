@@ -151,6 +151,10 @@
 	asyncTest( "should go back to top level when the back button is clicked", function() {
 		$.testHelper.pageSequence([
 			function(){
+				$.mobile.changePage("#nested-list-test");
+			},
+
+			function(){
 				$.mobile.changePage("#nested-list-test&ui-page=0-0");
 			},
 
@@ -158,8 +162,8 @@
 				window.history.back();
 			},
 
-			function(){
-				ok($('#nested-list-test').hasClass('ui-page-active'), 'Transitions back to the parent nested page');
+			function( timeout ){
+				ok($.mobile.activePage.is('#nested-list-test'), 'Transitions back to the parent nested page');
 				start();
 			}
 		]);
