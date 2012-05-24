@@ -17,6 +17,16 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		clearSearchButtonText: "clear text"
 	},
 
+    keyup: function () {
+        var input = this.element,
+                scrollHeight = input[0].scrollHeight,
+			    clientHeight = input[0].clientHeight;
+
+        if (clientHeight < scrollHeight) {
+            input.height(scrollHeight + extraLineHeight);
+        }
+    },
+
 	_create: function() {
 
 		var input = this.element,
@@ -103,34 +113,31 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		// Autogrow
 		if ( input.is( "textarea" ) ) {
 			var extraLineHeight = 15,
-				keyupTimeoutBuffer = 100,
-				keyup = function() {
-					var scrollHeight = input[ 0 ].scrollHeight,
-						clientHeight = input[ 0 ].clientHeight;
-
-					if ( clientHeight < scrollHeight ) {
-						input.height(scrollHeight + extraLineHeight);
-					}
-				},
+				keyupTimeoutBuffer = 100,				
 				keyupTimeout;
 
 			input.keyup(function() {
 				clearTimeout( keyupTimeout );
-				keyupTimeout = setTimeout( keyup, keyupTimeoutBuffer );
+				keyupTimeout = setTimeout(self.keyup, keyupTimeoutBuffer);
 			});
 
 			// binding to pagechange here ensures that for pages loaded via
 			// ajax the height is recalculated without user input
-			$( document ).one( "pagechange", keyup );
+            $(document).one("pagechange", self.keyup);
 
 			// Issue 509: the browser is not providing scrollHeight properly until the styles load
 			if ( $.trim( input.val() ) ) {
 				// bind to the window load to make sure the height is calculated based on BOTH
 				// the DOM and CSS
-				$( window ).load( keyup );
+			    $(window).load(self.keyup);
 			}
 		}
 	},
+
+    _destroy: function () {
+        $(document).unbind("pagechange", this.keyup);
+        $(window).unbind("load", this.keyup);
+    },
 
 	disable: function(){
 		( this.element.attr( "disabled", true ).is( "[type='search'],:jqmData(type='search')" ) ?

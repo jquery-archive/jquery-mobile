@@ -247,13 +247,15 @@ $.Widget.prototype = {
 		// we can probably remove the unbind calls in 2.0
 		// all event bindings should go through this._bind()
 		this.element
+            .unbind() // elements created dynamically don't have widget in event name
 			.unbind( "." + this.widgetName )
 			// 1.9 BC for #7810
 			// TODO remove dual storage
 			.removeData( this.widgetName )
 			.removeData( this.widgetFullName );
 		this.widget()
-			.unbind( "." + this.widgetName )
+			.unbind() // elements created dynamically don't have widget in event name
+            .unbind( "." + this.widgetName )
 			.removeAttr( "aria-disabled" )
 			.removeClass(
 				this.widgetFullName + "-disabled " +
