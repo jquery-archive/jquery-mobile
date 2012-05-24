@@ -258,7 +258,7 @@ $.event.special.swipe = {
 		teardown: function(){
 			// If the event is not supported natively, return false so that
 			// jQuery will unbind the event using DOM methods.
-			if ( $.support.orientation && $.mobile.orientationChangeEnabled ) {
+			if ( !$.support.orientation && $.mobile.orientationChangeEnabled ) {
 				return false;
 			}
 
