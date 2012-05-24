@@ -38,7 +38,11 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			labelID = controlID + "-label",
 
-			label = $( "[for='"+ controlID +"']" ).attr( "id", labelID ),
+			$label = $( "[for='"+ controlID +"']" ),
+
+			labelID = $label.attr( "id" ) || controlID + "-label",
+
+			label = $label.attr( "id", labelID ),
 
 			val = function() {
 				return  cType == "input"  ? parseFloat( control.val() ) : control[0].selectedIndex;
