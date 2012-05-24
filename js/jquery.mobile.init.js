@@ -44,7 +44,8 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 		// find and enhance the pages in the dom and transition to the first page.
 		initializePage: function() {
 			// find present pages
-			var $pages = $( ":jqmData(role='page'), :jqmData(role='dialog')" );
+			var $pages = $( ":jqmData(role='page'), :jqmData(role='dialog')" ),
+					hashHasDialogHashKey = ( location.hash.indexOf( $.mobile.dialogHashKey ) > -1 );
 
 			// if no pages are found, create one with body's inner html
 			if ( !$pages.length ) {
@@ -78,8 +79,8 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 			hideRenderingClass();
 
 			// if hashchange listening is disabled or there's no hash deeplink, change to the first page in the DOM
-			if ( !$.mobile.hashListeningEnabled || !$.mobile.path.stripHash( location.hash ) ) {
-				$.mobile.changePage( $.mobile.firstPage, { transition: "none", reverse: true, changeHash: false, fromHashChange: true } );
+			if ( !$.mobile.hashListeningEnabled || !$.mobile.path.stripHash( location.hash ) || hashHasDialogHashKey ) {
+				$.mobile.changePage( $.mobile.firstPage, { transition: "none", reverse: true, changeHash: hashHasDialogHashKey, fromHashChange: !hashHasDialogHashKey } );
 			}
 			// otherwise, trigger a hashchange to load a deeplink
 			else {
