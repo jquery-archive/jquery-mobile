@@ -22,6 +22,9 @@ function sendMessage() {
 	alert(JSON.stringify(args));
 }
 
+sendMessage('console', "" );
+sendMessage('console', "jquery version: " + $.fn.jquery + " pathname: " + location.pathname );
+
 QUnit.log = function(obj) {
 	// What is this I don’t even
 	if (obj.message === '[object Object], undefined:undefined') { return; }

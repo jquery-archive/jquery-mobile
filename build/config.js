@@ -101,22 +101,37 @@ module.exports = function( grunt ) {
 	};
 
 	grunt.registerTask( 'test_config', 'glob all the test files', function() {
-		var done = this.async(), test_paths, server_paths = [];
+		var done = this.async(), test_paths, server_paths = [], env = process.env;
 
+
+		// TODO move the glob to a legit config or pull the one from the qunit config
 		test_paths = glob.glob( 'tests/unit/*/' );
 		test_paths = test_paths.concat( glob.glob('tests/unit/**/*-tests.html') );
+
+		// select the proper domain + paths
 		test_paths.forEach( function( file_path ) {
-			var final_path = process.env.ROOT_DOMAIN + file_path;
+			var full_path = env.ROOT_DOMAIN + file_path;
 
 			// if no test path is defined or if the path matches that specified in the env
 			// add it to the config
 			if( !process.env.TEST_PATH || file_path.indexOf(process.env.TEST_PATH) >= 0 ) {
-				server_paths.push( final_path );
+				server_paths.push( full_path );
 			}
 		});
 
-		grunt.config.set( 'qunit', { all: server_paths });
+		// append the jquery version query param where defined
+		var paths_with_jquery = [];
+		if( env.JQUERY ){
+			server_paths.forEach(function( full_path ) {
+				env.JQUERY.split( "," ).forEach( function( version ) {
+					paths_with_jquery.push(full_path + "?jquery=" + version);
+				});
+			});
 
+			server_paths = paths_with_jquery;
+		}
+
+		grunt.config.set( 'qunit', { all: server_paths });
 		done();
 	});
 
