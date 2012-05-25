@@ -17,6 +17,7 @@ define( [
 	"./jquery.mobile.forms.select",
 	"./jquery.mobile.listview",
 	"./jquery.mobile.page",
+	"./jquery.mobile.popup",
 	// NOTE expects ui content in the defined page, see selector for menuPageContent definition
 	"./jquery.mobile.page.sections" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
