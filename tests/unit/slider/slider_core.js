@@ -46,12 +46,13 @@
 	});
 
 	test( "labels that have id keep that id", function() {
-		var slider = $("[for=label-id-slider]");
-		equal(slider.attr("id"), "label-id");
+		var label = $( "[for=label-id-slider]" );
+		equal(label.attr( "id" ), "label-id", "label id was not changed" );
 	});
 
 	test( "labels without an id get an id", function() {
-		var slider = $("[for=empty-string-val-slider]");
-		ok(slider.attr("id"));
+		var slider = $( "#empty-string-val-slider" ),
+			label = $( "[for=empty-string-val-slider]" );
+		equal(label.attr( "id" ), slider.attr( "id" ) + "-label", "the label id is based off the slider id" );
 	});
 })( jQuery );
