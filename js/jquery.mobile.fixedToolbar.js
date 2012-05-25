@@ -2,7 +2,8 @@
 //>>description: Behavior for "fixed" headers and footers
 //>>label: Toolbars: Fixed
 //>>group: Widgets
-//>>css: ../css/themes/default/jquery.mobile.theme.css,../css/structure/jquery.mobile.fixedToolbar.css
+//>>css.structure: ../css/structure/jquery.mobile.fixedToolbar.css
+//>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.mobile.navigation", "./jquery.mobile.page", "./jquery.mobile.page.sections", "./jquery.mobile.zoom" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");

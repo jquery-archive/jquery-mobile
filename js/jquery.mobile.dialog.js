@@ -2,7 +2,8 @@
 //>>description: Displays a page as a modal dialog with inset appearance and overlay background
 //>>label: Dialogs
 //>>group: Widgets
-//>>css: ../css/themes/default/jquery.mobile.theme.css,../css/structure/jquery.mobile.dialog.css
+//>>css.structure: ../css/structure/jquery.mobile.dialog.css
+//>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 define( [ "jquery", "./jquery.mobile.widget" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");

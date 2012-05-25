@@ -2,7 +2,8 @@
 //>>description: Consistent styling for native select menus. Tapping opens a native select menu.
 //>>label: Selects
 //>>group: Forms
-//>>css: ../css/themes/default/jquery.mobile.theme.css, ../css/structure/jquery.mobile.forms.select.css
+//>>css.structure: ../css/structure/jquery.mobile.forms.select.css
+//>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.widget", "./jquery.mobile.buttonMarkup", "./jquery.mobile.zoom" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");

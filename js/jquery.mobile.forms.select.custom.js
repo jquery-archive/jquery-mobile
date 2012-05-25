@@ -6,7 +6,8 @@
 //>>description: Extension to select menus to support menu styling, placeholder options, and multi-select features.
 //>>label: Selects: Custom menus
 //>>group: Forms
-//>>css: ../css/themes/default/jquery.mobile.theme.css, ../css/structure/jquery.mobile.forms.select.css
+//>>css.structure: ../css/structure/jquery.mobile.forms.select.css
+//>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 define( [
 	"jquery",

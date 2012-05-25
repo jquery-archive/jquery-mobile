@@ -2,7 +2,8 @@
 //>>description: Visually groups sets of buttons, checks, radios, etc. 
 //>>label: Controlgroups
 //>>group: Forms
-//>>css: ../css/themes/default/jquery.mobile.theme.css,../css/structure/jquery.mobile.controlgroup.css
+//>>css.structure: ../css/structure/jquery.mobile.controlgroup.css
+//>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 define( [ "jquery", "./jquery.mobile.buttonMarkup" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
