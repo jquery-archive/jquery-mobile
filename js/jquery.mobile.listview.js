@@ -2,7 +2,8 @@
 //>>description: Applies listview styling of various types (standard, numbered, split button, etc.)
 //>>label: Listview
 //>>group: Widgets
-//>>css: ../css/themes/default/jquery.mobile.theme.css, ../css/structure/jquery.mobile.listview.css
+//>>css.structure: ../css/structure/jquery.mobile.listview.css
+//>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.buttonMarkup", "./jquery.mobile.page", "./jquery.mobile.page.sections" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");

@@ -2,7 +2,8 @@
 //>>description: Applies button styling to links
 //>>label: Buttons: Link-based
 //>>group: Forms
-//>>css: ../css/themes/default/jquery.mobile.theme.css, ../css/structure/jquery.mobile.button.css
+//>>css.structure: ../css/structure/jquery.mobile.button.css
+//>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.vmouse" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");

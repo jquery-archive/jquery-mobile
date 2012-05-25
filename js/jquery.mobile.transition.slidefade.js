@@ -6,7 +6,7 @@
 //>>description: Animation styles and fallback transition definition for non-3D supporting browsers
 //>>label: Slidefade Transition
 //>>group: Transitions
-//>>css: ../css/structure/jquery.mobile.transition.slidefade.css
+//>>css.structure: ../css/structure/jquery.mobile.transition.slidefade.css
 
 define( [ "jquery", "./jquery.mobile.transition" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");

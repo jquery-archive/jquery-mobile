@@ -6,7 +6,7 @@
 //>>description: Animation styles and fallback transition definition for non-3D supporting browsers
 //>>label: Flow Transition
 //>>group: Transitions
-//>>css: ../css/structure/jquery.mobile.transition.flow.css
+//>>css.structure: ../css/structure/jquery.mobile.transition.flow.css
 
 define( [ "jquery", "./jquery.mobile.transition" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
