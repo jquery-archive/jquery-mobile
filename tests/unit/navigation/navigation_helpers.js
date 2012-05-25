@@ -215,4 +215,12 @@
 		same( $.mobile.path.cleanHash( "#anything/atall?akjfdjjf" ), "anything/atall", "removes query param");
 		same( $.mobile.path.cleanHash( "#nothing/atall" ), "nothing/atall", "removes query param");
 	});
+
+	test( "path.isHashValid", function(){
+        same( $.mobile.path.isHashValid( "#id" ), true, "Valid hash");
+        same( $.mobile.path.isHashValid( "#" ), false, "Empty hash");
+        same( $.mobile.path.isHashValid( "#id#" ), false, "Hash with more than one #");
+        same( $.mobile.path.isHashValid( "id" ), false, "Hash without #");
+        same( $.mobile.path.isHashValid( "i#d" ), false, "Hash with # in the wrong spot");
+	});
 })(jQuery);
