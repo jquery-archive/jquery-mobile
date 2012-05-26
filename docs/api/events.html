@@ -73,16 +73,19 @@
 			<p>We provide a set of "virtual" mouse events that attempt to abstract away mouse and touch events. This allows the developer to register listeners for the basic mouse events, such as mousedown, mousemove, mouseup, and click, and the plugin will take care of registering the correct listeners behind the scenes to invoke the listener at the fastest possible time for that device. In touch environments, the plugin retains the order of event firing that is seen in traditional mouse environments, so for example, vmouseup is always dispatched before vmousedown, and vmousedown before vclick, etc. The virtual mouse events also normalize how coordinate information is extracted from the event, so in touch based environments, coordinates are available from the pageX, pageY, screenX, screenY, clientX, and clientY properties, directly on the event object.</p>
 			<dl>
 				<dt><code>vmouseover</code></dt>
-				<dd>Normalized event for handling touch or  <code>mouseover</code> events</dd>
+				<dd>Normalized event for handling touch or <code>mouseover</code> events</dd>
+
+				<dt><code>vmouseout</code></dt>
+				<dd>Normalized event for handling touch or <code>mouseout</code> events</dd>
 
 				<dt><code>vmousedown</code></dt>
-				<dd>Normalized event for handling touchstart or  <code>mousedown</code> events</dd>
+				<dd>Normalized event for handling touchstart or <code>mousedown</code> events</dd>
 
 				<dt><code>vmousemove</code></dt>
-				<dd>Normalized event for handling touchmove or  <code>mousemove</code> events</dd>
+				<dd>Normalized event for handling touchmove or <code>mousemove</code> events</dd>
 
 				<dt><code>vmouseup</code></dt>
-				<dd>Normalized event for handling touchend or  <code>mouseup</code> events</dd>
+				<dd>Normalized event for handling touchend or <code>mouseup</code> events</dd>
 
 				<dt><code>vclick</code></dt>
 				<dd>Normalized event for handling touchend or mouse <code>click</code> events. On touch devices, this event is dispatched *AFTER* vmouseup. </dd>
