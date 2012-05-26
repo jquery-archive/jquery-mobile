@@ -31,9 +31,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			trackTheme = this.options.trackTheme || parentTheme,
 
-			cType = control[ 0 ].nodeName.toLowerCase(),
+			cTypeIsInput = (control[ 0 ].nodeName.toLowerCase() === "input"),
 
-			selectClass = ( cType == "select" ) ? "ui-slider-switch" : "",
+			selectClass = ( !cTypeIsInput ) ? "ui-slider-switch" : "",
 
 			controlID = control.attr( "id" ),
 
@@ -44,12 +44,12 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			label = $label.attr( "id", labelID ),
 
 			val = function() {
-				return  cType == "input"  ? parseFloat( control.val() ) : control[0].selectedIndex;
+				return  cTypeIsInput  ? parseFloat( control.val() ) : control[0].selectedIndex;
 			},
 
-			min =  cType == "input" ? parseFloat( control.attr( "min" ) ) : 0,
+			min =  cTypeIsInput ? parseFloat( control.attr( "min" ) ) : 0,
 
-			max =  cType == "input" ? parseFloat( control.attr( "max" ) ) : control.find( "option" ).length-1,
+			max =  cTypeIsInput ? parseFloat( control.attr( "max" ) ) : control.find( "option" ).length-1,
 
 			step = window.parseFloat( control.attr( "step" ) || 1 ),
 
@@ -63,7 +63,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			domSlider = document.createElement('div'),
 			slider = $( domSlider ),
 
-			valuebg = control.jqmData("highlight") && cType != "select" ? (function() {
+			valuebg = control.jqmData("highlight") && cTypeIsInput ? (function() {
 				var bg = document.createElement('div');
 				bg.className = 'ui-slider-bg ' + $.mobile.activeBtnClass + ' ui-btn-corner-all';
 				return $( bg ).prependTo( slider );
@@ -98,7 +98,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			mouseMoved: false
 		});
 
-		if ( cType == "select" ) {
+		if ( !cTypeIsInput ) {
 			var wrapper = document.createElement('div');
 			wrapper.className = 'ui-slider-inneroffset';
 
@@ -118,7 +118,6 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			for(var i = 0, optionsCount = options.length; i < optionsCount; i++){
 				var side = !i ? "b":"a",
 					sliderTheme = !i ? " ui-btn-down-" + trackTheme :( " " + $.mobile.activeBtnClass ),
-					sliderLabel = document.createElement('div'),
 					sliderImg = document.createElement('span');
 
 				sliderImg.className = ['ui-slider-label ui-slider-label-',side,sliderTheme," ui-btn-corner-all"].join("");
@@ -134,7 +133,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		label.addClass( "ui-slider" );
 
 		// monitor the input for updated values
-		control.addClass( cType === "input" ? "ui-slider-input" : "ui-slider-switch" )
+		control.addClass( cTypeIsInput ? "ui-slider-input" : "ui-slider-switch" )
 			.change( function() {
 				// if the user dragged the handle, the "change" event was triggered from inside refresh(); don't call refresh() again
 				if (!self.mouseMoved) {
@@ -154,7 +153,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				// self.mouseMoved must be updated before refresh() because it will be used in the control "change" event
 				self.mouseMoved = true;
 
-				if ( cType === "select" ) {
+				if ( !cTypeIsInput ) {
 					// make the handle move in sync with the mouse
 					handle.removeClass( "ui-slider-handle-snapping" );
 				}
@@ -172,7 +171,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			self.userModified = false;
 			self.mouseMoved = false;
 
-			if ( cType === "select" ) {
+			if ( !cTypeIsInput ) {
 				self.beforeStart = control[0].selectedIndex;
 			}
 
@@ -187,7 +186,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 					self.dragging = false;
 
-					if ( cType === "select") {
+					if ( !cTypeIsInput) {
 
 						// make the handle move with a smooth transition
 						handle.addClass( "ui-slider-handle-snapping" );
@@ -219,7 +218,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		slider.insertAfter( control );
 
 		// Only add focus class to toggle switch, sliders get it automatically from ui-btn
-		if( cType == 'select' ) {
+		if( !cTypeIsInput ) {
 			this.handle.bind({
 				focus: function() {
 					slider.addClass( $.mobile.focusClass );
@@ -292,7 +291,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 					$( this ).removeClass( "ui-state-active" );
 				}
 			}
-			});
+		});
 
 		this.refresh(undefined, undefined, true);
 	},
@@ -304,24 +303,37 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		}
 
 		var control = this.element, percent,
-			cType = control[0].nodeName.toLowerCase(),
-			min = cType === "input" ? parseFloat( control.attr( "min" ) ) : 0,
-			max = cType === "input" ? parseFloat( control.attr( "max" ) ) : control.find( "option" ).length - 1,
-			step = (cType === "input" && parseFloat( control.attr( "step" ) ) > 0) ? parseFloat(control.attr("step")) : 1;
+			cTypeIsInput = (control[0].nodeName.toLowerCase() === "input");
 
-		if ( typeof val === "object" ) {
-			var data = val,
+        // add some properties as static lookup
+        if (preventInputUpdate || !this.slider.propCache || this.slider.propCache.dirty) {
+            this.slider.propCache = {
+                dirty: preventInputUpdate,
+                width: this.slider.width(),
+                left: this.slider.offset().left,
+                min: cTypeIsInput ? parseFloat( control.attr( "min" ) ) : 0,
+                max: cTypeIsInput ? parseFloat( control.attr( "max" ) ) : control.find( "option" ).length - 1,
+                step: (cTypeIsInput && parseFloat( control.attr( "step" ) ) > 0) ? parseFloat(control.attr("step")) : 1
+            };
+        }
+
+        var min = this.slider.propCache.min,
+            max = this.slider.propCache.max,
+            step = this.slider.propCache.step;
+
+        if ( typeof val === "object" ) {
+			var data = val;
 				// a slight tolerance helped get to the ends of the slider
 				tol = 8;
 			if ( !this.dragging ||
-					data.pageX < this.slider.offset().left - tol ||
-					data.pageX > this.slider.offset().left + this.slider.width() + tol ) {
+					data.pageX < this.slider.propCache.left - tol ||
+					data.pageX > this.slider.propCache.left + this.slider.propCache.width + tol ) {
 				return;
 			}
-			percent = Math.round( ( ( data.pageX - this.slider.offset().left ) / this.slider.width() ) * 100 );
+			percent = Math.round( ( ( data.pageX - this.slider.propCache.left ) / this.slider.propCache.width ) * 100 );
 		} else {
 			if ( val == null ) {
-				val = cType === "input" ? parseFloat( control.val() || 0 ) : control[0].selectedIndex;
+				val = cTypeIsInput ? parseFloat( control.val() || 0 ) : control[0].selectedIndex;
 			}
 			percent = ( parseFloat( val ) - min ) / ( max - min ) * 100;
 		}
@@ -338,38 +350,39 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			percent = 100;
 		}
 
-		var newval = ( percent / 100 ) * ( max - min ) + min;
+		var newval = Math.round( ( percent / 100 ) * ( max - min ) + min );
 
 		//from jQuery UI slider, the following source will round to the nearest step
-		var valModStep = ( newval - min ) % step;
-		var alignValue = newval - valModStep;
+		if (step !== 1) {
+    		var valModStep = ( newval - min ) % step,
+    		    alignValue = newval - valModStep;
 
-		if ( Math.abs( valModStep ) * 2 >= step ) {
-			alignValue += ( valModStep > 0 ) ? step : ( -step );
+    		if ( Math.abs( valModStep ) * 2 >= step ) {
+    			alignValue += ( valModStep > 0 ) ? step : ( -step );
+    		}
+    		// Since JavaScript has problems with large floats, round
+    		// the final value to 5 digits after the decimal point (see jQueryUI: #4124)
+    		newval = parseFloat( alignValue.toFixed(5) );
 		}
-		// Since JavaScript has problems with large floats, round
-		// the final value to 5 digits after the decimal point (see jQueryUI: #4124)
-		newval = parseFloat( alignValue.toFixed(5) );
 
 		if ( newval < min ) {
 			newval = min;
 		}
-
-		if ( newval > max ) {
+		else if ( newval > max ) {
 			newval = max;
 		}
 
 		this.handle.css( "left", percent + "%" );
 		this.handle.attr( {
-				"aria-valuenow": cType === "input" ? newval : control.find( "option" ).eq( newval ).attr( "value" ),
-				"aria-valuetext": cType === "input" ? newval : control.find( "option" ).eq( newval ).getEncodedText(),
-				title: cType === "input" ? newval : control.find( "option" ).eq( newval ).getEncodedText()
-			});
+			"aria-valuenow": cTypeIsInput ? newval : control.find( "option" ).eq( newval ).attr( "value" ),
+			"aria-valuetext": cTypeIsInput ? newval : control.find( "option" ).eq( newval ).getEncodedText(),
+			title: cTypeIsInput ? newval : control.find( "option" ).eq( newval ).getEncodedText()
+		});
 		this.valuebg && this.valuebg.css( "width", percent + "%" );
 
 		// drag the label widths
 		if ( this._labels ) {
-			var handlePercent = this.handle.width() / this.slider.width() * 100,
+			var handlePercent = this.handle.width() / this.slider.propCache.width * 100,
 				aPercent = percent && handlePercent + ( 100 - handlePercent ) * percent / 100,
 				bPercent = percent === 100 ? 0 : Math.min( handlePercent + 100 - aPercent, 100 );
 
@@ -383,13 +396,15 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			var valueChanged = false;
 
 			// update control"s value
-			if ( cType === "input" ) {
+			if ( cTypeIsInput ) {
 				valueChanged = control.val() !== newval;
 				control.val( newval );
 			} else {
 				valueChanged = control[ 0 ].selectedIndex !== newval;
 				control[ 0 ].selectedIndex = newval;
 			}
+
+			// what is the use-case of this?
 			if ( !isfromControl && valueChanged ) {
 				control.trigger( "change" );
 			}
