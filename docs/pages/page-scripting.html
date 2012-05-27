@@ -113,9 +113,10 @@ $.mobile.silentScroll(300);
 
 
 			<h2>Passing parameters between pages</h2>
-			<p>jQuery Mobile does not support query parameter passing to internal/embedded pages. For example, if the framework sees a link to <code>"#somePage?someId=1"</code> it interprets that as "#somePage" and navigates to the internal page div with an <code>id</code> of "somePage" and applies a data-url of "#somePage?someId=1" to that page container. Subsequent calls to other params such as <code>"#somePage?someId=2"<code> will find the same div because jQuery Mobile refers to the data-url on the div which is only set once and will remain at <code>"#somePage?someId=1"</code>.</p>
+			<p>jQuery Mobile does not support query parameter passing to internal/embedded pages. For example, if the framework sees a link to <code>"#somePage?someId=1"</code> it interprets that as <code>"#somePage"</code> and navigates to the internal page div with an <code>id</code> of <code>"somePage"</code> and applies a <code>data-url</code> of <code>"#somePage?someId=1"</code> to that page container. 
+			Subsequent calls to other params such as <code>"#somePage?someId=2"</code> will find the same div because jQuery Mobile refers to the <code>data-url</code> on the <code>div</code> which is only set once and will remain at <code>"#somePage?someId=1"</code>.</p>
 
-			<p>There are two plugins that you can add to your project if query parameters are needed between pages. There is a lightweight <a href="https://github.com/jblas/jquery-mobile-plugins/tree/master/page-params" rel="external">page params plugin</a> and a more fully featured <a href="https://github.com/azicchetti/jquerymobile-router" rel="external">jQuery Mobile router plugin</a> for use with backbone.js or spine.js.</p>
+			<p>There are two plugins that can be added to your project if query parameters are needed between pages. There is a lightweight <a href="https://github.com/jblas/jquery-mobile-plugins/tree/master/page-params" rel="external">page params plugin</a> and a more fully featured <a href="https://github.com/azicchetti/jquerymobile-router" rel="external">jQuery Mobile router plugin</a> for use with backbone.js or spine.js.</p>
 
 
 
