@@ -178,11 +178,19 @@
 		
 <h2>Conventions, not requirements</h2>
 
-<p>Although the page structure outlined above is a recommended approach for a standard web app built with jQuery Mobile, the framework is very flexible with document structure. The page, header, content, and footer data-role elements are optional and are mostly helpful for providing some basic formatting and structure. The page wrapper that used to be required for auto-initialization to work is now optional for single page documents, so there isn't any required markup at all. For a web page with a custom layout, all of these structural elements can be omitted and the Ajax navigation and all widgets will work just like they do in the boilerplate structure. Behind the scenes, the framework will inject the page wrapper if it's not included in the markup because it's needed for managing pages, but the starting markup can now be extremely simple. </p>
+<p>Although the page structure outlined above is a recommended approach for a standard web app built with jQuery Mobile, the framework is very flexible with document structure. 
+The page, header, content, and footer data-role elements are optional and are mostly helpful for providing some basic formatting and structure. 
+The page wrapper that used to be required for auto-initialization to work is now optional for single page documents, so there isn't any required markup at all. 
+For a web page with a custom layout, all of these structural elements can be omitted and the Ajax navigation and all widgets will work just like they do in the boilerplate structure. 
+Behind the scenes, the framework will inject the page wrapper if it's not included in the markup because it's needed for managing pages, but the starting markup can now be extremely simple. </p>
 
-<p>Note that in a multi-page setup, you are required to have page wrappers in your markup in order to group the content into multiple pages.</p>
+<p><strong>Note:</strong> In a multi-page setup, you are required to have page wrappers in your markup in order to group the content into multiple pages.</p>
 
-		
+<p><strong>Also Note:</strong> If your body contains no <code>data-role="page"</code> divs, jQuery Mobile wraps the entire contents of the body within a page div as explained above. 
+jQuery Mobile is using jQuery's <code>wrapAll()</code> method to do this which looks for any script tags inside the content being wrapped, and loads each script source via XHR. 
+If scripts are present in the body, the browser ends up loading them twice. 
+We therefore strongly recommend that jQuery Mobile documents with scripts in their body also contain a <code>div</code> with <code>data-role="page"</code>.
+</p>
 
 
 				</div><!--/content-primary -->		
