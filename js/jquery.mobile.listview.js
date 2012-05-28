@@ -23,7 +23,6 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		dividerTheme: "b",
 		splitIcon: "arrow-r",
 		splitTheme: "b",
-		mini: false,
 		inset: false,
 		initSelector: ":jqmData(role='listview')"
 	},
@@ -33,8 +32,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			listviewClasses = "";
 			
 		listviewClasses += t.options.inset ? " ui-listview-inset ui-corner-all ui-shadow " : "";
-		listviewClasses += t.element.jqmData( "mini" ) || t.options.mini === true ? " ui-mini" : "";
-		
+
 		// create listview markup
 		t.element.addClass(function( i, orig ) {
 			return orig + " ui-listview " + listviewClasses;
