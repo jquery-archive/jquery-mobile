@@ -383,8 +383,9 @@ define( [ "jquery",
 			if ( $.mobile.hashListeningEnabled ) {
 				var activeEntry = $.mobile.urlHistory.getActive(),
 				    hasHash =
-				    	( !( $.mobile.urlHistory.firstVisitedPageHasDialogHash && $.mobile.urlHistory.activeIndex === 0 ) ||
-				    	   ( activeEntry.url.indexOf( $.mobile.dialogHashKey ) > -1 ) );
+				    	( ( activeEntry.url.indexOf( $.mobile.dialogHashKey ) > -1 ) &&
+				    	    !( $.mobile.urlHistory.activeIndex === 0 &&
+				    	       $.mobile.urlHistory.firstVisitedPageHasDialogHash ) );
 
 				function realInstallListener() {
 					$( window ).one( "hashchange.popup", function() {
