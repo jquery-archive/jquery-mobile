@@ -2,7 +2,8 @@
 //>>description: Creates collapsible content blocks.
 //>>label: Collapsible
 //>>group: Widgets
-//>>css: ../css/themes/default/jquery.mobile.theme.css,../css/structure/jquery.mobile.collapsible.css
+//>>css.structure: ../css/structure/jquery.mobile.collapsible.css
+//>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.buttonMarkup" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");

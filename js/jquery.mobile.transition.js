@@ -3,7 +3,8 @@
 //>>description: Animated page change core logic and sequence handlers
 //>>label: Transition Core
 //>>group: Transitions
-//>>css: ../css/themes/default/jquery.mobile.theme.css, ../css/structure/jquery.mobile.transition.css
+//>>css.structure: ../css/structure/jquery.mobile.transition.css
+//>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 define( [ "jquery", "./jquery.mobile.core" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");

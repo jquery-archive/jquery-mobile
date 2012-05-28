@@ -48,17 +48,17 @@
 			<dt><code>taphold</code></dt>
 			<dd><p>Triggers after a held complete touch event (close to one second).</p>
 			<ul>
-				<li><code>tapholdThreshold</code> (default: 750ms) – This value dictates how long the user must hold their tap before the taphold event is fired on the target element.</li>
+				<li><code>$.event.special.tap.tapholdThreshold</code> (default: 750ms) – This value dictates how long the user must hold their tap before the taphold event is fired on the target element.</li>
 			</ul>
 			</dd>
 
 			<dt><code>swipe</code></dt>
 			<dd><p>Triggers when a horizontal drag of 30px or more (and less than 20px vertically) occurs within 1 second duration but these can be configured:</p>
 			  <ul>
-			  	<li><code>scrollSupressionThreshold</code> (default: 10px) – More than this horizontal displacement, and we will suppress scrolling</li>
-			  	<li><code>durationThreshold</code> (default: 1000ms) – More time than this, and it isn’t a swipe</li>
-			  	<li><code>horizontalDistanceThreshold</code> (default: 30px) – Swipe horizontal displacement must be more than this.</li>
-			  	<li><code>verticalDistanceThreshold</code> (default: 75px) – Swipe vertical displacement must be less than this.</li>
+			  	<li><code>$.event.special.swipe.scrollSupressionThreshold</code> (default: 10px) – More than this horizontal displacement, and we will suppress scrolling.</li>
+			  	<li><code>$.event.special.swipe.durationThreshold</code> (default: 1000ms) – More time than this, and it isn’t a swipe.</li>
+			  	<li><code>$.event.special.swipe.horizontalDistanceThreshold</code> (default: 30px) – Swipe horizontal displacement must be more than this.</li>
+			  	<li><code>$.event.special.swipe.verticalDistanceThreshold</code> (default: 75px) – Swipe vertical displacement must be less than this.</li>
 			  	</ul>
 			</dd>
 
@@ -73,16 +73,19 @@
 			<p>We provide a set of "virtual" mouse events that attempt to abstract away mouse and touch events. This allows the developer to register listeners for the basic mouse events, such as mousedown, mousemove, mouseup, and click, and the plugin will take care of registering the correct listeners behind the scenes to invoke the listener at the fastest possible time for that device. In touch environments, the plugin retains the order of event firing that is seen in traditional mouse environments, so for example, vmouseup is always dispatched before vmousedown, and vmousedown before vclick, etc. The virtual mouse events also normalize how coordinate information is extracted from the event, so in touch based environments, coordinates are available from the pageX, pageY, screenX, screenY, clientX, and clientY properties, directly on the event object.</p>
 			<dl>
 				<dt><code>vmouseover</code></dt>
-				<dd>Normalized event for handling touch or  <code>mouseover</code> events</dd>
+				<dd>Normalized event for handling touch or <code>mouseover</code> events</dd>
+
+				<dt><code>vmouseout</code></dt>
+				<dd>Normalized event for handling touch or <code>mouseout</code> events</dd>
 
 				<dt><code>vmousedown</code></dt>
-				<dd>Normalized event for handling touchstart or  <code>mousedown</code> events</dd>
+				<dd>Normalized event for handling touchstart or <code>mousedown</code> events</dd>
 
 				<dt><code>vmousemove</code></dt>
-				<dd>Normalized event for handling touchmove or  <code>mousemove</code> events</dd>
+				<dd>Normalized event for handling touchmove or <code>mousemove</code> events</dd>
 
 				<dt><code>vmouseup</code></dt>
-				<dd>Normalized event for handling touchend or  <code>mouseup</code> events</dd>
+				<dd>Normalized event for handling touchend or <code>mouseup</code> events</dd>
 
 				<dt><code>vclick</code></dt>
 				<dd>Normalized event for handling touchend or mouse <code>click</code> events. On touch devices, this event is dispatched *AFTER* vmouseup. </dd>
@@ -299,7 +302,7 @@ $( document ).bind( &quot;pageloadfailed&quot;, function( event, data ){
             	</li>
             	<li><code>errorThrown</code> (null, string, object)
             	  <ul>
-            	    <li>According to the jQuery Core <a href="http://api.jquery.com/jQuery.ajax/">documentation</a>, this property may be an exception object if one occured, or if an HTTP error occured this will be set to the textual portion of the HTTP status. This is what gets passed as the 3rd argument to the framework's $.ajax() error callback.</li>
+            	    <li>According to the jQuery Core <a href="http://api.jquery.com/jQuery.ajax/">documentation</a>, this property may be an exception object if one occurred, or if an HTTP error occurred this will be set to the textual portion of the HTTP status. This is what gets passed as the 3rd argument to the framework's $.ajax() error callback.</li>
           	    </ul>
             	</li>
            	  </ul>
@@ -421,7 +424,7 @@ $( 'div' ).live( 'pagehide',function(event, ui){
 
 		<p>Internally, jQuery Mobile auto-initializes plugins based on the markup conventions found in a given "page". For example, an <code>input</code> element with a <code>type</code> of <code>range</code> will automatically generate a custom slider control.</p>
 
-		<p>This auto-initialization is controlled by the "page" plugin, which dispatches events before and after it executes, allowing you to manipulate a page either pre-or-post initialization, or even provide your own intialization behavior and prevent the auto-initializations from occuring. Note that these events will only fire once per "page", as opposed to the show/hide events, which fire every time a page is shown and hidden.</p>
+		<p>This auto-initialization is controlled by the "page" plugin, which dispatches events before and after it executes, allowing you to manipulate a page either pre-or-post initialization, or even provide your own initialization behavior and prevent the auto-initializations from occurring. Note that these events will only fire once per "page", as opposed to the show/hide events, which fire every time a page is shown and hidden.</p>
 
 		<dl>
 			<dt><code>pagebeforecreate</code></dt>

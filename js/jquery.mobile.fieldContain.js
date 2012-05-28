@@ -2,7 +2,8 @@
 //>>description: Styling to responsively position forms and labels based on screen width and add visual separation
 //>>label: Fieldcontainers
 //>>group: Forms
-//>>css: ../css/themes/default/jquery.mobile.theme.css,../css/structure/jquery.mobile.forms.fieldcontain.css
+//>>css.structure: ../css/structure/jquery.mobile.forms.fieldcontain.css
+//>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 define( [ "jquery" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");

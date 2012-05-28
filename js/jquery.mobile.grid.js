@@ -2,7 +2,8 @@
 //>>description: Applies classes for creating grid or column styling.
 //>>label: Grid Layouts (Columns)
 //>>group: Widgets
-//>>css: ../css/themes/default/jquery.mobile.theme.css, ../css/structure/jquery.mobile.grid.css
+//>>css.structure:../css/structure/jquery.mobile.grid.css
+//>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 define( [ "jquery" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");

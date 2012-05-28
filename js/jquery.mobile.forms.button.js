@@ -2,7 +2,8 @@
 //>>description: Custom-styled native input/buttons
 //>>label: Buttons: Input or button-based
 //>>group: Forms
-//>>css: ../css/themes/default/jquery.mobile.theme.css,../css/structure/jquery.mobile.button.css
+//>>css.structure: ../css/structure/jquery.mobile.button.css
+//>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.buttonMarkup"  ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");

@@ -27,12 +27,25 @@
 	<h2>Simple navbar</h2>
 	
 	<p>jQuery Mobile has a very basic navbar widget that is useful for providing up to 5 buttons with optional icons in a bar, typically within a header or footer. There is also a <a href="footer-persist-a.html">persistent navbar</a> variation that works more like a tab bar that stays fixed as you navigate across pages.</p>
-	<p>A navbar is coded as an unordered list of links wrapped in a container element that has the <code> data-role="navbar"</code> attribute. To set one of the links to the active (selected) state, add <code>class="ui-btn-active"</code> to the anchor. In this example, we have a two-button navbar with the "One" item set to active:</p>
+	<p>A navbar is coded as an unordered list of links wrapped in a container element that has the <code> data-role="navbar"</code> attribute. This is an example of a two-button navbar:</p>
 	
 <pre><code>
 <strong>&lt;div data-role=&quot;navbar&quot;&gt;</strong>
 	&lt;ul&gt;
-		&lt;li&gt;&lt;a href=&quot;a.html&quot; class=&quot;ui-btn-active&quot;&gt;One&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href=&quot;a.html&quot;&gt;One&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href=&quot;b.html&quot;&gt;Two&lt;/a&gt;&lt;/li&gt;
+	&lt;/ul&gt;
+<strong>&lt;/div&gt;&lt;!-- /navbar --&gt;</strong>
+</code></pre>
+
+	<p>When a link in the navbar is clicked it gets the active (selected) state. The <code>ui-btn-active</code> class is first removed from all anchors in the navbar before it is added to the activated link. If this is a link to another page, the class will be removed again after the transition has completed.</p>
+	
+	<p>To set an item to the active state upon initialization of the navbar, add <code>class="ui-btn-active"</code> to the corresponding anchor in your markup. Additionaly add a class of <code>ui-state-persist</code> to make the framework restore the active state each time the page is shown while it exists in the DOM. The example below shows a navbar with item "One" set to active:</p>
+
+<pre><code>
+<strong>&lt;div data-role=&quot;navbar&quot;&gt;</strong>
+	&lt;ul&gt;
+		&lt;li&gt;&lt;a href=&quot;a.html&quot; class=&quot;ui-btn-active ui-state-persist&quot;&gt;One&lt;/a&gt;&lt;/li&gt;
 		&lt;li&gt;&lt;a href=&quot;b.html&quot;&gt;Two&lt;/a&gt;&lt;/li&gt;
 	&lt;/ul&gt;
 <strong>&lt;/div&gt;&lt;!-- /navbar --&gt;</strong>

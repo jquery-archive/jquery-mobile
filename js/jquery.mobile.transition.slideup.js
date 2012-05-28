@@ -6,7 +6,7 @@
 //>>description: Animation styles and fallback transition definition for non-3D supporting browsers
 //>>label: Slideup Transition
 //>>group: Transitions
-//>>css: ../css/structure/jquery.mobile.transition.slideup.css
+//>>css.structure: ../css/structure/jquery.mobile.transition.slideup.css
 
 define( [ "jquery", "./jquery.mobile.transition" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
