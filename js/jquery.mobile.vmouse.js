@@ -40,7 +40,8 @@ var dataPropertyName = "virtualMouseBindings",
 	eventCaptureSupported = "addEventListener" in document,
 	$document = $( document ),
 	nextTouchID = 1,
-	lastTouchID = 0;
+	lastTouchID = 0,
+	virtualBindingElementCache = [];
 
 $.vmouse = {
 	moveDistanceThreshold: 10,
@@ -126,14 +127,23 @@ function getVirtualBindingFlags( element ) {
 }
 
 function getClosestElementWithVirtualBinding( element, eventType ) {
-	var b;
+    if ( virtualBindingElementCache [ element[ $.expando ] ] ) {
+        return virtualBindingElementCache [ element[ $.expando ] ];
+    }
+
+	var b,
+	    elementId = element[ $.expando ];
 	while ( element ) {
 
-		b = $.data( element, dataPropertyName );
-
+	    b = $.data( element, dataPropertyName );
 		if ( b && ( !eventType || b[ eventType ] ) ) {
+		    if ( elementId ) {
+		        virtualBindingElementCache [ elementId ] = element;
+		    }
+
 			return element;
 		}
+
 		element = element.parentNode;
 	}
 	return null;
@@ -339,6 +349,9 @@ function getSpecialEventObject( eventType ) {
 				$.data( this, dataPropertyName, {});
 			}
 
+			// clear the global cache for getClosestElementWithVirtualBinding
+			virtualBindingElementCache = [];
+
 			// If setup is called, we know it is the first binding for this
 			// eventType, so initialize the count for the eventType to zero.
 			var bindings = $.data( this, dataPropertyName );
@@ -425,6 +438,9 @@ function getSpecialEventObject( eventType ) {
 			// Unregister the dummy event handler.
 
 			$this.unbind( realType, dummyMouseHandler );
+
+	         // clear the global cache for getClosestElementWithVirtualBinding
+            virtualBindingElementCache = [];
 
 			// If this is the last virtual mouse binding on the
 			// element, remove the binding data from the element.
