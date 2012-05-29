@@ -168,7 +168,7 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 			var e = el[ 0 ],
 				ltr = "",
 				re = /ui-(bar|body|overlay)-([a-z])\b/,
-				m;
+				c, m;
 
 			while ( e ) {
 				c = e.className || "";
