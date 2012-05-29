@@ -68,11 +68,22 @@ define( [ "jquery",
 			});
 
 			ui.screen.bind( "vclick", function( e ) { eatEventAndClose( e ); });
+
+			$( window ).bind( "resize", function( e ) {
+				if ( self._isOpen ) {
+					self._resizeScreen();
+				}
+			});
+
 			$( window ).bind( "keyup", function( e ) {
 				if ( self._isOpen && e.keyCode === $.mobile.keyCode.ESCAPE ) {
 					eatEventAndClose( e );
 				}
 			});
+		},
+
+		_resizeScreen: function() {
+			this._ui.screen.height( Math.max( $( window ).height(), this._page.height() ) );
 		},
 
 		_realSetTheme: function( dst, theme ) {
@@ -250,8 +261,8 @@ define( [ "jquery",
 			if ( transition && transition !== "none" ) {
 				if ( applyTransition ) { self._applyTransition( transition ); }
 				self._ui.container
-					.removeClass( classToRemove )
 					.addClass( containerClassToAdd )
+					.removeClass( classToRemove )
 					.animationComplete( function() {
 						prereqs.container.resolve();
 					});
@@ -275,7 +286,7 @@ define( [ "jquery",
 				function() {
 					self._applyTransition( "none" );
 					self._ui.container.removeClass( "in" );
-					self._ui.screen.height( $( document ).height() );
+					self._resizeScreen();
 				},
 				function() {
 					self._isOpen = true;
@@ -294,9 +305,8 @@ define( [ "jquery",
 				self._setTheme( self._page.jqmData( "theme" ) || $.mobile.getInheritedTheme( self._page, "c" ) );
 			}
 
-			self._ui.screen
-					.height( $( document ).height() )
-					.removeClass( "ui-screen-hidden" );
+			self._resizeScreen();
+			self._ui.screen.removeClass( "ui-screen-hidden" );
 
 			self._ui.container
 				.removeClass( "ui-selectmenu-hidden" )
@@ -382,7 +392,10 @@ define( [ "jquery",
 			});
 			if ( $.mobile.hashListeningEnabled ) {
 				var activeEntry = $.mobile.urlHistory.getActive(),
-				    hasHash = ( activeEntry.url.indexOf( $.mobile.dialogHashKey ) > -1 );
+				    hasHash =
+				    	( ( activeEntry.url.indexOf( $.mobile.dialogHashKey ) > -1 ) &&
+				    	    !( $.mobile.urlHistory.activeIndex === 0 &&
+				    	       $.mobile.urlHistory.firstVisitedPageHasDialogHash ) );
 
 				function realInstallListener() {
 					$( window ).one( "hashchange.popup", function() {
@@ -398,6 +411,7 @@ define( [ "jquery",
 					$( window ).one( "hashchange.popupBinder", function() {
 						realInstallListener();
 					});
+					$.mobile.urlHistory.ignoreNextHashChange = true;
 					$.mobile.path.set( activeEntry.url + $.mobile.dialogHashKey );
 					$.mobile.urlHistory.addNew( activeEntry.url + $.mobile.dialogHashKey, activeEntry.transition, activeEntry.title, activeEntry.pageUrl, activeEntry.role );
 				}
@@ -413,6 +427,12 @@ define( [ "jquery",
 			}
 
 			if ( $.mobile.hashListeningEnabled && !abort ) {
+				// Opera 11.62 build 1347 on Linux will not fire a hashchange when going back to an identical URL,
+				// so we need to set one up with a timeout - make sure _onHashChange reacts well to being called
+				// superfluously
+				this._teardownHashChangeTimeout = setTimeout( function() {
+					$( window ).trigger( "hashchange.popup" );
+				}, 300 );
 				window.history.back();
 			}
 			else {
@@ -567,6 +587,11 @@ define( [ "jquery",
 
 		_onHashChange: function( immediate ) {
 			this._haveNavHook = false;
+
+			if ( this._teardownHashChangeTimeout ) {
+				clearTimeout( this._teardownHashChangeTimeout );
+				this._teardownHashChangeTimeout = 0;
+			}
 
 			if ( this._myOwnHashChange ) {
 				this._myOwnHashChange = false;

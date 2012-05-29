@@ -5,6 +5,9 @@
 .ui-li, .ui-li.ui-field-contain { display: block; margin:0; position: relative; overflow: visible; text-align: left; border-width: 0; border-top-width: 1px; }
 .ui-li .ui-btn-text a.ui-link-inherit { text-overflow: ellipsis; overflow: hidden; white-space: nowrap;  }
 .ui-li-divider, .ui-li-static { padding: .5em 15px; font-size: 14px; font-weight: bold;  }
+/* Fixes #4254 to prevent inherit font-size from .ui-li-divider, .ui-li-static */
+.ui-li-divider .ui-btn-text, .ui-li-static .ui-btn-text { font-size: 16px; }
+.ui-li-divider .ui-mini .ui-btn-text, .ui-li-static .ui-mini .ui-btn-text { font-size: inherit; }
 .ui-li-divider { counter-reset: listnumbering;  }
 ol.ui-listview .ui-link-inherit:before, ol.ui-listview .ui-li-static:before, .ui-li-dec { font-size: .8em; display: inline-block; padding-right: .3em; font-weight: normal;counter-increment: listnumbering; content: counter(listnumbering) ". "; }
 ol.ui-listview .ui-li-jsnumbering:before { content: "" !important; } /* to avoid chance of duplication */
