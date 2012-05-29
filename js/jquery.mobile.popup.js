@@ -68,6 +68,13 @@ define( [ "jquery",
 			});
 
 			ui.screen.bind( "vclick", function( e ) { eatEventAndClose( e ); });
+
+			$( window ).bind( "resize", function( e ) {
+				if ( self._isOpen ) {
+					self._ui.screen.height( $( document ).height() );
+				}
+			});
+
 			$( window ).bind( "keyup", function( e ) {
 				if ( self._isOpen && e.keyCode === $.mobile.keyCode.ESCAPE ) {
 					eatEventAndClose( e );
