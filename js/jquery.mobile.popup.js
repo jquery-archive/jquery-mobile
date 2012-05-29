@@ -401,6 +401,7 @@ define( [ "jquery",
 					$( window ).one( "hashchange.popupBinder", function() {
 						realInstallListener();
 					});
+					$.mobile.urlHistory.ignoreNextHashChange = true;
 					$.mobile.path.set( activeEntry.url + $.mobile.dialogHashKey );
 					$.mobile.urlHistory.addNew( activeEntry.url + $.mobile.dialogHashKey, activeEntry.transition, activeEntry.title, activeEntry.pageUrl, activeEntry.role );
 				}
@@ -416,6 +417,12 @@ define( [ "jquery",
 			}
 
 			if ( $.mobile.hashListeningEnabled && !abort ) {
+				// Opera 11.62 build 1347 on Linux will not fire a hashchange when going back to an identical URL,
+				// so we need to set one up with a timeout - make sure _onHashChange reacts well to being called
+				// superfluously
+				this._teardownHashChangeTimeout = setTimeout( function() {
+					$( window ).trigger( "hashchange.popup" );
+				}, 300 );
 				window.history.back();
 			}
 			else {
@@ -570,6 +577,11 @@ define( [ "jquery",
 
 		_onHashChange: function( immediate ) {
 			this._haveNavHook = false;
+
+			if ( this._teardownHashChangeTimeout ) {
+				clearTimeout( this._teardownHashChangeTimeout );
+				this._teardownHashChangeTimeout = 0;
+			}
 
 			if ( this._myOwnHashChange ) {
 				this._myOwnHashChange = false;
