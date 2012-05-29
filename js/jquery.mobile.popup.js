@@ -71,7 +71,7 @@ define( [ "jquery",
 
 			$( window ).bind( "resize", function( e ) {
 				if ( self._isOpen ) {
-					self._ui.screen.height( $( document ).height() );
+					self._resizeScreen();
 				}
 			});
 
@@ -80,6 +80,10 @@ define( [ "jquery",
 					eatEventAndClose( e );
 				}
 			});
+		},
+
+		_resizeScreen: function() {
+			this._ui.screen.height( Math.max( $( window ).height(), this._page.height() ) );
 		},
 
 		_realSetTheme: function( dst, theme ) {
@@ -282,7 +286,7 @@ define( [ "jquery",
 				function() {
 					self._applyTransition( "none" );
 					self._ui.container.removeClass( "in" );
-					self._ui.screen.height( $( document ).height() );
+					self._resizeScreen();
 				},
 				function() {
 					self._isOpen = true;
@@ -301,9 +305,8 @@ define( [ "jquery",
 				self._setTheme( self._page.jqmData( "theme" ) || $.mobile.getInheritedTheme( self._page, "c" ) );
 			}
 
-			self._ui.screen
-					.height( $( document ).height() )
-					.removeClass( "ui-screen-hidden" );
+			self._resizeScreen();
+			self._ui.screen.removeClass( "ui-screen-hidden" );
 
 			self._ui.container
 				.removeClass( "ui-selectmenu-hidden" )
