@@ -171,7 +171,7 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 				m;
 
 			while ( e ) {
-				var c = e.className || "";
+				c = e.className || "";
 				if ( c && ( m = re.exec( c ) ) && ( ltr = m[ 2 ] ) ) {
 					// We found a parent with a theme class
 					// on it so bail from this loop.
