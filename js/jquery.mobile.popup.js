@@ -250,8 +250,8 @@ define( [ "jquery",
 			if ( transition && transition !== "none" ) {
 				if ( applyTransition ) { self._applyTransition( transition ); }
 				self._ui.container
-					.removeClass( classToRemove )
 					.addClass( containerClassToAdd )
+					.removeClass( classToRemove )
 					.animationComplete( function() {
 						prereqs.container.resolve();
 					});
