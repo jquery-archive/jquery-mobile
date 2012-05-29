@@ -378,11 +378,11 @@ define( [
 				} else {
 					self.menuType = "overlay";
 
-					self.listbox.popup( "open", 
-						self.button.offset().left + self.button.outerWidth() / 2,
-						self.button.offset().top + self.button.outerHeight() / 2 );
-
-					focusMenuItem();
+					self.listbox
+						.one( "opened", focusMenuItem )
+						.popup( "open", 
+							self.button.offset().left + self.button.outerWidth() / 2,
+							self.button.offset().top + self.button.outerHeight() / 2 );
 
 					// duplicate with value set in page show for dialog sized selects
 					self.isOpen = true;
