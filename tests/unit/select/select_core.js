@@ -193,7 +193,7 @@
 					triggered = true;
 				});
 
-				$(".ui-selectmenu-screen:not(.ui-screen-hidden)").trigger("click");
+				$(".ui-popup-screen:not(.ui-screen-hidden)").trigger("click");
 			},
 
 			function(){
@@ -269,8 +269,8 @@
 			},
 
 			function() {
-				same( $( ".ui-selectmenu.in ul" ).text(), "default" );
-				$( ".ui-selectmenu-screen" ).click();
+				same( $( ".ui-popup-container:not(.ui-selectmenu-hidden) .ui-selectmenu ul" ).text(), "default" );
+				$( ".ui-popup-screen" ).click();
 			},
 
 			function() {
@@ -284,8 +284,8 @@
 			},
 
 			function() {
-				same( $( ".ui-selectmenu.in ul" ).text(), text );
-				$( ".ui-selectmenu-screen" ).click();
+				same( $( ".ui-popup-container:not(.ui-selectmenu-hidden) .ui-selectmenu ul" ).text(), text );
+				$( ".ui-popup-screen" ).click();
 			},
 
 			start
