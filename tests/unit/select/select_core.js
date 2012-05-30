@@ -399,7 +399,7 @@
 		deepEqual( $select.parent().find( ".ui-btn-text > span" ).attr( "class" ), selectedOptionClasses );
 	});
 
-	test( "multple select text values are aggregated in the button text", function() {
+	test( "multiple select text values are aggregated in the button text", function() {
 		var $select = $( "#select-aggregate-option-text" );
 
 		deepEqual( "Standard: 7 day, Rush: 3 days", $select.parent().find( ".ui-btn-text" ).text() );
