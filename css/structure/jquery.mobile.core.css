@@ -14,7 +14,7 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 .ui-mobile .ui-page-active { display: block; overflow: visible; }
 
 /* on ios4, setting focus on the page element causes flashing during transitions when there is an outline, so we turn off outlines */
-.ui-page { outline: none; }
+.ui-page { outline: none; -webkit-backface-visibility: hidden; }
 
 /*orientations from js are available */
 @media screen and (orientation: portrait){
