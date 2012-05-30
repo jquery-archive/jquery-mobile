@@ -95,26 +95,6 @@
 		]);
 	});
 
-	asyncTest( "custom select menu always renders screen from the left", function(){
-		var select;
-
-		expect( 1 );
-
-		$.testHelper.sequence([
-			resetHash,
-
-			function(){
-				select = $("ul#select-offscreen-menu");
-				$("#select-offscreen-container a").trigger("click");
-			},
-
-			function(){
-				ok(select.offset().left >= 30, "offset from the left is greater than or equal to 30px" );
-				start();
-			}
-		], 1000);
-	});
-
 	asyncTest( "selecting an item from a dialog sized custom select menu leaves no dialog hash key", function(){
 		var dialogHashKey = "ui-state=dialog";
 
