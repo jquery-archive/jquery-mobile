@@ -78,7 +78,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 	_create: function() {
 		this._preExtension();
 
- 		// Allows for extension of the native select for custom selects and other plugins
+		// Allows for extension of the native select for custom selects and other plugins
 		// see select.custom for example extension
 		// TODO explore plugin registration
 		this._trigger( "beforeCreate" );

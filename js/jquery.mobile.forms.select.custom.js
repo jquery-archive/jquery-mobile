@@ -491,7 +491,8 @@ define( [
 	$( document ).bind( "selectmenubeforecreate", function( event ){
 		var selectmenuWidget = $( event.target ).data( "selectmenu" );
 
-		if( !selectmenuWidget.options.nativeMenu ){
+		if( !selectmenuWidget.options.nativeMenu &&
+		    selectmenuWidget.element.parents(":jqmData(role='popup')").length === 0 ){
 			extendSelect( selectmenuWidget );
 		}
 	});
