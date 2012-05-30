@@ -151,6 +151,10 @@
 		}
 	});
 
+	test( "a popup containing a non-native select will cause the select to be rendered as native", function() {
+		ok( $( "#select-choice-inside-popup-menu" ).length === 0, "non-native select inside popup has no generated menu" );
+	});
+
 	asyncTest( "a large select option should not overflow", function(){
 		// https://github.com/jquery/jquery-mobile/issues/1338
 		var menu, select;
