@@ -61,7 +61,7 @@
 			},
 
 			function(){
-				same($("#select-choice-few-menu").parent(".ui-selectmenu-hidden").length, 1);
+				same($("#select-choice-few-menu").parent().parent(".ui-selectmenu-hidden").length, 1);
 				start();
 			}
 		], 1000);
