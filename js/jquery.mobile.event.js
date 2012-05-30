@@ -139,7 +139,8 @@ $.event.special.swipe = {
 				start = {
 					time: ( new Date() ).getTime(),
 					coords: [ data.pageX, data.pageY ],
-					origin: $( event.target )
+					origin: $( event.target ),
+					offset: $('body').scrollTop() // Track scrolling to account for touch-based scrolling
 				},
 				stop;
 
@@ -154,7 +155,8 @@ $.event.special.swipe = {
 
 				stop = {
 					time: ( new Date() ).getTime(),
-					coords: [ data.pageX, data.pageY ]
+					coords: [ data.pageX, data.pageY ],
+					offset: $('body').scrollTop()
 				};
 
 				// prevent scrolling
@@ -170,7 +172,8 @@ $.event.special.swipe = {
 					if ( start && stop ) {
 						if ( stop.time - start.time < $.event.special.swipe.durationThreshold &&
 								Math.abs( start.coords[ 0 ] - stop.coords[ 0 ] ) > $.event.special.swipe.horizontalDistanceThreshold &&
-								Math.abs( start.coords[ 1 ] - stop.coords[ 1 ] ) < $.event.special.swipe.verticalDistanceThreshold ) {
+								( Math.abs( start.coords[ 1 ] - stop.coords[ 1 ] ) + Math.abs( start.offset - stop.offset ))
+									< $.event.special.swipe.verticalDistanceThreshold ) {
 
 							start.origin.trigger( "swipe" )
 								.trigger( start.coords[0] > stop.coords[ 0 ] ? "swipeleft" : "swiperight" );
