@@ -271,9 +271,9 @@ $.event.special.swipe = {
 			var old_handler = handleObj.handler;
 
 
-			handleObj.handler = function( event ) {
-				// Modify event object, adding the .orientation property.
-				event.orientation = get_orientation();
+			handleObj.handler = function( event, orientationdata ) {
+				// Adding the orientationdata.orientation property.
+				orientationdata = {orientation: get_orientation()};
 
 				// Call the originally-bound event handler and return its result.
 				return old_handler.apply( this, arguments );
@@ -285,12 +285,12 @@ $.event.special.swipe = {
 	// the window resize event to simulate the orientationchange event.
 	function handler() {
 		// Get the current orientation.
-		var orientation = get_orientation();
+		var orientationdata = {orientation: get_orientation()};
 
-		if ( orientation !== last_orientation ) {
+		if ( orientationdata.orientation !== last_orientation ) {
 			// The orientation has changed, so trigger the orientationchange event.
-			last_orientation = orientation;
-			win.trigger( "orientationchange" );
+			last_orientation = orientationdata.orientation;
+			win.trigger( "orientationchange", orientationdata );
 		}
 	}
 
