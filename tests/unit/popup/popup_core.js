@@ -129,12 +129,14 @@
 
 	asyncTest( "Popup opens and closes", function() {
 
-		expect( 4 );
+		expect( 5 );
 
-		$( "#test-popup" ).popup( "open" );
+		$( "#test-popup" ).popup( "open", -9999, -9999 );
 		setTimeout(function() {
+			var theOffset = $( "#test-popup p" ).offset();
 			ok( !$( "#test-popup" ).parent().prev().hasClass( "ui-screen-hidden" ), "Open popup screen is not hidden" );
 			ok( $( "#test-popup" ).parent().attr( "class" ).match( /( |^)ui-body-[a-z]( |$)/ ), "Open popup has a valid overlay theme" );
+			ok( theOffset.left >= 10 && theOffset.top >= 30, "Open popup top left coord is at least (10, 30)" );
 			$( "#test-popup" ).popup( "close" );
 			setTimeout(function() {
 				ok( !$( "#test-popup" ).parent().hasClass( "in" ), "Closed popup container does not have class 'in'" );
