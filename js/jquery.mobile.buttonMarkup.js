@@ -190,13 +190,15 @@ var attachEvents = function() {
 		"vmousedown vmousecancel vmouseup vmouseover vmouseout focus blur scrollstart": function( event ) {
 			var theme,
 				$btn = $( closestEnabledButton( event.target ) ),
+				isTouchEvent = /^touch/.test( event.originalEvent.type ),
 				evt = event.type;
 		
 			if ( $btn.length ) {
 				theme = $btn.attr( "data-" + $.mobile.ns + "theme" );
 		
 				if ( evt === "vmousedown" ) {
-					if ( $.support.touch ) {
+					if ( isTouchEvent ) {
+						// Use a short delay to determine if the user is scrolling before highlighting
 						hov = setTimeout(function() {
 							$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-down-" + theme );
 						}, hoverDelay );
@@ -206,7 +208,8 @@ var attachEvents = function() {
 				} else if ( evt === "vmousecancel" || evt === "vmouseup" ) {
 					$btn.removeClass( "ui-btn-down-" + theme ).addClass( "ui-btn-up-" + theme );
 				} else if ( evt === "vmouseover" || evt === "focus" ) {
-					if ( $.support.touch ) {
+					if ( isTouchEvent ) {
+						// Use a short delay to determine if the user is scrolling before highlighting
 						foc = setTimeout(function() {
 							$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-hover-" + theme );
 						}, hoverDelay );
