@@ -6,7 +6,7 @@
 define( [
 	"jquery",
 	"./jquery.mobile.core",
-	"./jquery.mobile.event",
+	"./jquery.mobile.events",
 	"../external/requirejs/depend!./jquery.hashchange[jquery]",
 	"./jquery.mobile.page",
 	"./jquery.mobile.transition" ], function( $ ) {

@@ -2,7 +2,6 @@
 //>>description: Base file for jQuery Mobile
 //>>label: Core
 //>>group: Core
-//>>required: true
 //>>css.structure: ../css/structure/jquery.mobile.core.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
