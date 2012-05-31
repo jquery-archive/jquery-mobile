@@ -39,7 +39,7 @@ define( [
 				"<div data-" + $.mobile.ns + "role='content'></div>"+
 				"</div>" ),
 
-			listbox =  $( "<div>", { class: "ui-selectmenu" } ).insertAfter( widget.select ).popup( { theme: "a" } ),
+			listbox =  $( "<div>", { "class": "ui-selectmenu" } ).insertAfter( widget.select ).popup( { theme: "a" } ),
 
 			list = $( "<ul>", {
 				"class": "ui-selectmenu-list",
