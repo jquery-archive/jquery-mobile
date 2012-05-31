@@ -105,6 +105,14 @@
 				<p>Applications can call <code>preventDefault()</code> on a <code>vclick</code> event to cancel an element's default click behavior. On mouse based devices, calling <code>preventDefault()</code> on a <code>vclick</code> event equates to calling <code>preventDefault()</code> on the real <code>click</code> event during the bubble event phase. On touch based devices, it's a bit more complicated since the actual <code>click</code> event is dispatched about 300ms after the <code>vclick</code> event is dispatched. For touch devices, calling <code>preventDefault()</code> on a <code>vclick</code> event triggers some code in the vmouse plugin that attempts to catch the next <code>click</code> event that gets dispatched by the browser, during the capture event phase, and calls <code>preventDefault()</code> and <code>stopPropagation()</code> on it. As mentioned in the warning above, it is sometimes difficult to match up a touch event with its corresponding mouse event because the targets can differ. For this reason, the vmouse plugin also falls back to attempting to identify a corresponding <code>click</code> event by coordinates. There are still cases where both target and coordinate identification fail, which results in the <code>click</code> event being dispatched and either triggering the default action of the element, or in the case where content has been shifted or replaced, triggering a click on a different element. If this happens on a regular basis for a given element/control, we suggest you use <code>click</code> for triggering your action.</p>
 			</div>
 
+			<dd><p>The virtual mouse events can also be configured:</p>
+			  <ul>
+			  	<li><code>$.vmouse.moveDistanceThreshold</code> (default: 10px) – More than this, then it is a scroll event. The vmousecancel event is called and the TouchMove event is cancelled.</li>
+			  	<li><code>$.vmouse.clickDistanceThreshold</code> (default: 10px) – If a vclick event was already captured and is in the block list, then vclicks less than this distance are ignored.</li>
+			  	<li><code>$.vmouse.resetTimerDuration</code> (default: 1500ms) – More time than this, then it is not a touch event. Scroll, TouchMove and TouchEnd events use this. The block list is cleared.</li>
+			  	</ul>
+			</dd>
+
 		<h2>Orientation change event</h2>
 		<dl>
 			<dt><code>orientationchange</code></dt>
