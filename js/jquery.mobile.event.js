@@ -254,7 +254,7 @@ $.event.special.swipe = {
 			win.bind( "throttledresize", handler );
 		},
 		teardown: function(){
-			// If the event is not supported natively, return false so that
+			// If the event is supported natively, return false so that
 			// jQuery will unbind the event using DOM methods.
 			if ( $.support.orientation && $.mobile.orientationChangeEnabled ) {
 				return false;
