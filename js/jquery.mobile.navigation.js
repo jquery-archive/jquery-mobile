@@ -212,7 +212,7 @@ define( [
 			},
 
 			isHashValid: function( hash ) {
-				return !( /(^#$)|(#.*#.*)|(^[^#].+)/ ).test( hash );
+				return /^#[^#]+$/.test(hash);
 			},
 
 			//check whether a url is referencing the same domain, or an external domain or different protocol
