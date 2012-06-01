@@ -8,6 +8,7 @@ define( [ "jquery", "./jquery.mobile.support.orientation", "./jquery.mobile.even
 
 (function( $, window ) {
 	var win = $( window ),
+		event_name = "orientationchange",
 		special_event,
 		get_orientation,
 		last_orientation,
@@ -112,7 +113,7 @@ define( [ "jquery", "./jquery.mobile.support.orientation", "./jquery.mobile.even
 		if ( orientation !== last_orientation ) {
 			// The orientation has changed, so trigger the orientationchange event.
 			last_orientation = orientation;
-			win.trigger( "orientationchange" );
+			win.trigger( event_name );
 		}
 	}
 
@@ -136,6 +137,12 @@ define( [ "jquery", "./jquery.mobile.support.orientation", "./jquery.mobile.even
 
 		return isPortrait ? "portrait" : "landscape";
 	};
+
+	$.fn[ event_name ] = function( fn ) {
+		return fn ? this.bind( event_name, fn ) : this.trigger( event_name );
+	};
+
+	$.attrFn[ event_name ] = true;
 
 }( jQuery, this ));
 
