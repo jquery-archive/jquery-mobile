@@ -123,6 +123,11 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 			// This method is meant to disable zoom while a fixed-positioned toolbar page is visible
 			$el.closest( ".ui-page" )
 				.bind( "pagebeforeshow", function(){
+					//https://github.com/jquery/jquery-mobile/issues/3984
+					//scrollTop(0) apparently forces Safari viewport to the top of the page
+					//which prevents the position:fixed toolbar from blinking during page transition
+					$('body, html').scrollTop(0);
+					
 					if( o.disablePageZoom ){
 						$.mobile.zoom.disable( true );
 					}
