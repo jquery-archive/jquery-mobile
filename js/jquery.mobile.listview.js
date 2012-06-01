@@ -348,13 +348,14 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				id = ( parentUrl || "" ) + "&" + $.mobile.subPageUrlKey + "=" + listId,
 				theme = list.jqmData( "theme" ) || o.theme,
 				countTheme = list.jqmData( "counttheme" ) || parentList.jqmData( "counttheme" ) || o.countTheme,
+				addBackBtn = list.jqmData( "add-back-btn" ) || $.mobile.page.prototype.options.addBackBtn,
 				newPage, anchor;
 
 			//define hasSubPages for use in later removal
 			hasSubPages = true;
 
 			newPage = list.detach()
-						.wrap( "<div " + dns + "role='page' " +	dns + "url='" + id + "' " + dns + "theme='" + theme + "' " + dns + "count-theme='" + countTheme + "'><div " + dns + "role='content'></div></div>" )
+						.wrap( "<div " + dns + "role='page' " +	dns + "url='" + id + "' " + dns + "theme='" + theme + "' " + dns + "count-theme='" + countTheme + "' " + dns + "add-back-btn='" + addBackBtn + "'><div " + dns + "role='content'></div></div>" )
 						.parent()
 							.before( "<div " + dns + "role='header' " + dns + "theme='" + o.headerTheme + "'><div class='ui-title'>" + title + "</div></div>" )
 							.after( persistentFooterID ? $( "<div " + dns + "role='footer' " + dns + "id='"+ persistentFooterID +"'>") : "" )
