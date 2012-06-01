@@ -711,6 +711,7 @@ define( [
 		if ( page.length ) {
 			if ( !settings.reloadPage ) {
 				enhancePage( page, settings.role );
+				page.jqmData( "url", dataUrl );
 				deferred.resolve( absUrl, options, page );
 				return deferred.promise();
 			}
