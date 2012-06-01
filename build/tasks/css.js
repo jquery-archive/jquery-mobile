@@ -59,8 +59,8 @@ module.exports = function( grunt ) {
 			// dump the versioned header into the structure css file
 			grunt.file.write( structureFile + '.css', config.ver.header );
 
-			// add the compiled css to the normal css file
-			helpers.appendFrom( structureFile + '.css', require.all.out );
+			// add the compiled structure css to the normal css file
+			helpers.appendFrom( structureFile + '.css', require.structure.out );
 
 			// add the min header into the minified file
 			grunt.file.write( structureFile + '.min.css', config.ver.min );
