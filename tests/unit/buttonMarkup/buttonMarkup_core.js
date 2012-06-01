@@ -76,7 +76,9 @@
 
 	asyncTest( "ui-btn-* should be applied based on a setting", function() {
 		// force touch support so the timeout is set
-		$.support.touch = true;
+		$.Event.prototype.originalEvent = {
+			type: "touch"
+		};
 
 		var $btn = $( "#hover-delay" );
 
