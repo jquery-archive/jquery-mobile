@@ -127,7 +127,7 @@
 	});
 
 	var forceTouchSupport = function(){
-		document.ontouchend = true;
+		document.ontouchend = function() {};
 		$.each( components, function( index, value ) { $.testHelper.reloadLib( value ); });
 
 		//mock originalEvent information
