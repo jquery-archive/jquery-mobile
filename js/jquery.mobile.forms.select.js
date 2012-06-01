@@ -26,7 +26,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		// This option defaults to true on iOS devices.
 		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
 		initSelector: "select:not(:jqmData(role='slider'))",
-		mini: false
+		mini: false,
+		autodividers: false
 	},
 
 	_button: function(){
