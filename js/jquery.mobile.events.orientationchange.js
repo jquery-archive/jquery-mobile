@@ -67,7 +67,7 @@ define( [ "jquery", "./jquery.mobile.support.orientation", "./jquery.mobile.even
 		setup: function() {
 			// If the event is supported natively, return false so that jQuery
 			// will bind to the event using DOM methods.
-			if ( $.support.orientation && $.event.special.orientationchange.disabled ) {
+			if ( $.support.orientation && !$.event.special.orientationchange.disabled ) {
 				return false;
 			}
 
@@ -81,7 +81,7 @@ define( [ "jquery", "./jquery.mobile.support.orientation", "./jquery.mobile.even
 		teardown: function(){
 			// If the event is not supported natively, return false so that
 			// jQuery will unbind the event using DOM methods.
-			if ( $.support.orientation && $.event.special.orientationchange.disabled ) {
+			if ( $.support.orientation && !$.event.special.orientationchange.disabled ) {
 				return false;
 			}
 
