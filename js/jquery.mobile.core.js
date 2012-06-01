@@ -149,10 +149,10 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 			return nsNormalizeDict[ prop ] || ( nsNormalizeDict[ prop ] = $.camelCase( $.mobile.ns + prop ) );
 		},
 
-        // Find the closest parent with a theme class on it. Note that
-        // we are not using $.fn.closest() on purpose here because this
-        // method gets called quite a bit and we need it to be as fast
-        // as possible.
+		// Find the closest parent with a theme class on it. Note that
+		// we are not using $.fn.closest() on purpose here because this
+		// method gets called quite a bit and we need it to be as fast
+		// as possible.
 		getInheritedTheme: function( el, defaultTheme ) {
 			var e = el[ 0 ],
 				ltr = "",
