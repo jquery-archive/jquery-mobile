@@ -8,7 +8,7 @@ define( [ "jquery", "./jquery.mobile.vmouse" ], function( $ ) {
 
 (function( $, window, undefined ) {
 	// add new event shortcuts
-	$.each( ( "touchstart touchmove touchend" +
+	$.each( ( "touchstart touchmove touchend " +
 			  "tap taphold " +
 			  "swipe swipeleft swiperight " +
 			  "scrollstart scrollstop" ).split( " " ), function( i, name ) {
