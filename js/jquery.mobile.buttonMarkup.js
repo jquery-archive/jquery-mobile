@@ -190,7 +190,7 @@ var attachEvents = function() {
 		"vmousedown vmousecancel vmouseup vmouseover vmouseout focus blur scrollstart": function( event ) {
 			var theme,
 				$btn = $( closestEnabledButton( event.target ) ),
-				isTouchEvent = /^touch/.test( event.originalEvent.type ),
+				isTouchEvent = event.originalEvent && /^touch/.test( event.originalEvent.type ),
 				evt = event.type;
 		
 			if ( $btn.length ) {
