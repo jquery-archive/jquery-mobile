@@ -10,7 +10,7 @@
 .ui-grid-a .ui-block-a { clear: left; }
 
 /* grid b: 33/33/33 */
-.ui-grid-b .ui-block-a, .ui-grid-b .ui-block-b, .ui-grid-b .ui-block-c { width: 33.333%; }
+.ui-grid-b .ui-block-a, .ui-grid-b .ui-block-b, .ui-grid-b .ui-block-c { width: 33.334%; }
 .ui-grid-b .ui-block-a { clear: left; }
 
 /* grid c: 25/25/25/25 */
