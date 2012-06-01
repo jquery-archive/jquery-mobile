@@ -24,11 +24,7 @@ define( [ "jquery", "./jquery.mobile.navigation", "../external/requirejs/depend!
 		// TODO move to a path helper, this is rather common functionality
 		initialFilePath: (function() {
 			return url.pathname + url.search;
-		})(),
-
-		hashChangeTimeout: 200,
-
-		hashChangeEnableTimer: undefined,
+		})(),	
 
 		initialHref: url.hrefNoHash,
 
@@ -68,6 +64,7 @@ define( [ "jquery", "./jquery.mobile.navigation", "../external/requirejs/depend!
 		onHashChange: function( e ) {
 			// disable this hash change
 			if( self.onHashChangeDisabled ){
+				self.onHashChangeDisabled = false;
 				return;
 			}
 
@@ -105,29 +102,17 @@ define( [ "jquery", "./jquery.mobile.navigation", "../external/requirejs/depend!
 		// on popstate (ie back or forward) we need to replace the hash that was there previously
 		// cleaned up by the additional hash handling
 		onPopState: function( e ) {
-			var poppedState = e.originalEvent.state,
-				fromHash, toHash, hashChanged;
+			var poppedState = e.originalEvent.state;
 
 			// if there's no state its not a popstate we care about, eg chrome's initial popstate
 			if( poppedState ) {
-				// if we get two pop states in under this.hashChangeTimeout
-				// make sure to clear any timer set for the previous change
-				clearTimeout( self.hashChangeEnableTimer );
 
-				// make sure to enable hash handling for the the _handleHashChange call
-				self.nextHashChangePrevented( false );
-
-				// change the page based on the hash in the popped state
 				$.mobile._handleHashChange( poppedState.hash );
 
-				// prevent any hashchange in the next self.hashChangeTimeout
-				self.nextHashChangePrevented( true );
-
-				// re-enable hash change handling after swallowing a possible hash
-				// change event that comes on all popstates courtesy of browsers like Android
-				self.hashChangeEnableTimer = setTimeout( function() {
-					self.nextHashChangePrevented( false );
-				}, self.hashChangeTimeout);
+				// if ignore is false, set to true, otherwise keep false
+				if( $.mobile.urlHistory.ignoreNextHashChange == false ) { 
+					self.nextHashChangePrevented( true );					   
+				}
 			}
 		},
 
