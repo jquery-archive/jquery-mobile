@@ -1073,6 +1073,12 @@ define( [
 			}
 
 			url = ( active.url || "" ) + dialogHashKey;
+
+			// tack on another dialogHashKey if this is the same as the initial hash
+			// this makes sure that a history entry is created for this dialog
+			if ( urlHistory.activeIndex === 0 && url === urlHistory.initialDst ) {
+				url += dialogHashKey;
+			}
 		}
 
 		// Set the location hash.
@@ -1397,6 +1403,10 @@ define( [
 					fromHashChange: true
 				};
 
+			if ( 0 === urlHistory.stack.length ) {
+				urlHistory.initialDst = to;
+			}
+
 			//if listening is disabled (either globally or temporarily), or it's a dialog hash
 			if( !$.mobile.hashListeningEnabled || urlHistory.ignoreNextHashChange ) {
 				urlHistory.ignoreNextHashChange = false;
@@ -1404,7 +1414,7 @@ define( [
 			}
 
 			// special case for dialogs
-			if( urlHistory.stack.length > 1 && to.indexOf( dialogHashKey ) > -1 ) {
+			if( urlHistory.stack.length > 1 && to.indexOf( dialogHashKey ) > -1 && urlHistory.initialDst !== to ) {
 
 				// If current active page is not a dialog skip the dialog and continue
 				// in the same direction
