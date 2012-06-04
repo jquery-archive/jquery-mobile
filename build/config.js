@@ -115,7 +115,7 @@ module.exports = function( grunt ) {
 		});
 	});
 
-	grunt.registerTask( 'test_config', 'glob all the test files', function() {
+	grunt.registerTask( 'test:config', 'glob all the test files', function() {
 		var done = this.async(), test_paths, server_paths = [], env = process.env;
 
 
