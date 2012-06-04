@@ -166,7 +166,7 @@ define( [
 				    // otherwise the Data Url won't match the id of the embedded Page.
 					return u.hash.split( dialogHashKey )[0].replace( /^#/, "" );
 				} else if ( path.isSameDomain( u, documentBase ) ) {
-					return u.hrefNoHash.replace( documentBase.domain, "" );
+					return u.hrefNoHash.replace( documentBase.domain, "" ).split( dialogHashKey )[0];
 				}
 
 				return window.decodeURIComponent(absUrl);
