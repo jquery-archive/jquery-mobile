@@ -53,7 +53,7 @@ If you think you've found a bug, please report it by following these instruction
         * [jsfiddle](http://jsfiddle.net)
 3. Submit the issue.
 
-Recommended: [JS Bin issue template with instructions](http://jsbin.com/exojuw/edit)
+Recommended: [JS Bin issue template with instructions](http://jsbin.com/awoluv/edit)
 
 Issues concerning the jQuery Mobile Theme Roller can be submitted at the [Theme Roller repo: https://github.com/jquery/web-jquery-mobile-theme-roller](https://github.com/jquery/web-jquery-mobile-theme-roller)
 
