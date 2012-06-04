@@ -29,7 +29,7 @@ module.exports = function( grunt ) {
 		}
 	});
 
-	grunt.config.set( 'concat', {
+	helpers.configExtend( 'concat', {
 		structure: {
 			src: [ '<banner:global.ver.header>', structureFile + '.compiled.css' ],
 			dest: structureFile + '.css'

@@ -3,7 +3,7 @@ var requirejs = require( 'requirejs' ),
 	fs = require( 'fs' );
 
 module.exports = function( grunt ) {
-	var config = grunt.config.get( 'global' ),
+	var min = {}, config = grunt.config.get( 'global' ),
 		outputFile = path.join( config.dirs.output, config.names.root ),
 		helpers = config.helpers;
 
@@ -11,7 +11,7 @@ module.exports = function( grunt ) {
 		require: {
 			baseUrl: 'js',
 			name: 'jquery.mobile',
-			exclude:[
+			exclude: [
 				'jquery',
 				'../external/requirejs/order',
 				'../external/requirejs/depend',
@@ -27,37 +27,37 @@ module.exports = function( grunt ) {
 		}
 	});
 
-	grunt.registerTask( 'js_without_deps', 'compile and minify the js', function() {
-		var done = this.async(),
-			require = grunt.config.get( 'js' ).require,
+	helpers.configExtend( 'concat', {
+		js: {
+			src: [ '<banner:global.ver.header>', outputFile + '.compiled.js' ],
+			dest: outputFile + '.js'
+		}
+	});
+
+	// setup minification
+	min[ outputFile + '.min.js' ] = [ "<banner:global.ver.min>", outputFile + '.js' ];
+	grunt.config.set( 'min', min );
+
+	grunt.registerTask( 'js:compile', function() {
+		var require = grunt.config.get( 'js' ).require,
 			global_config = grunt.config.get( 'global' );
 
 		// pull the includes together using require js
 		requirejs.optimize( require );
 
-		// dump the versioned header into the normal js file
-		grunt.file.write( outputFile + '.js',  global_config.ver.header );
-
-		// add the compiled js to the normal js file, replace the version tag
-		// with the contents from version.txt
-		helpers.appendFrom( outputFile + '.js', require.out, function( fileContents ) {
+		// replace the version with the value in version.text
+		helpers.sed( require.out, function( fileContents ) {
 			return fileContents.replace( /__version__/, '"' + global_config.ver.official + '"' );
 		});
+	});
 
-		helpers.minify({
-			output: outputFile + '.min.js',
-			input: outputFile + '.js',
-			header: global_config.ver.min,
-			minCallback: function( unminified ) {
-				return grunt.helper( 'uglify', unminified, {});
-			}
-		});
+	grunt.registerTask( 'js:cleanup', 'compile and minify the js', function() {
+		var require = grunt.config.get( 'js' ).require;
 
 		// remove the requirejs compile output
 		fs.unlink( require.out );
-		done();
 	});
 
 	// NOTE custom dasks don't accept dependencies so we alias
-	grunt.registerTask( 'js', 'custom_init config:async js_without_deps' );
+	grunt.registerTask( 'js', 'custom_init config:async js:compile concat:js min js:cleanup' );
 };
