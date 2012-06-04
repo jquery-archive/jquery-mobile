@@ -6,6 +6,7 @@ var requirejs = require( 'requirejs' ),
 
 module.exports = function( grunt ) {
 	var config = grunt.config.get( 'global' ),
+		cssmin = {},
 		regularFile = path.join( config.dirs.output, config.names.root ),
 		structureFile = path.join( config.dirs.output, config.names.structure ),
 		themeFile = path.join( config.dirs.output, config.names.theme ),
@@ -29,67 +30,50 @@ module.exports = function( grunt ) {
 		}
 	});
 
-	grunt.registerTask( 'css_without_deps', 'compile and minify the css', function() {
-		var done = this.async(),
-			theme = grunt.config.get( 'css' ).theme,
-			require = grunt.config.get( 'css' ).require,
-			global_config = grunt.config.get( 'global' );
+	grunt.config.set( 'concat', {
+		structure: {
+			src: [ '<banner:global.ver.header>', structureFile + '.compiled.css' ],
+			dest: structureFile + '.css'
+		},
+
+		regular: {
+			src: [ '<banner:global.ver.header>', regularFile + '.compiled.css' ],
+			dest: regularFile + '.css'
+		},
+
+		theme: {
+			src: [
+				'<banner:global.ver.header>',
+				'css/themes/default/jquery.mobile.theme.css'
+			],
+			dest: themeFile + '.css'
+		}
+	});
+
+	// setup css min configuration
+	cssmin[ regularFile + '.min.css' ] = [ "<banner:global.ver.min>", regularFile + '.css' ];
+	cssmin[ structureFile + '.min.css' ] = [ "<banner:global.ver.min>", structureFile + '.css' ];
+	cssmin[ themeFile + '.min.css' ] = [ "<banner:global.ver.min>", themeFile + '.css' ];
+	grunt.config.set( 'cssmin', cssmin );
+
+	grunt.registerTask( 'css_compile', 'use require js to sort out deps', function() {
+		var require = grunt.config.get( 'css' ).require;
 
 		// pull the includes together using require js
 		requirejs.optimize( require.all );
 
-		// dump the versioned header into the normal css file
-		grunt.file.write( regularFile + '.css', global_config.ver.header );
-
-		// add the compiled css to the normal css file
-		helpers.appendFrom( regularFile + '.css', require.all.out );
-
-		helpers.minify({
-			output: regularFile + '.min.css',
-			input: regularFile + '.css',
-			header: global_config.ver.min,
-			minCallback: function( unminified ) {
-				return sqwish.minify( unminified, false );
-			}
-		});
-
 		// pull the includes together using require js
 		requirejs.optimize( require.structure );
 
-		// dump the versioned header into the structure css file
-		grunt.file.write( structureFile + '.css', global_config.ver.header );
+		// simple theme file compile
+		grunt.file.write( themeFile + '.css', 'css/themes/default/jquery.mobile.theme.css' );
+	});
 
-		// add the compiled structure css to the normal css file
-		helpers.appendFrom( structureFile + '.css', require.structure.out );
-
-		// add the min header into the minified file
-		grunt.file.write( structureFile + '.min.css', global_config.ver.min );
-
-		// minify the structure css
-		helpers.minify({
-			output: structureFile + '.min.css',
-			input: structureFile + '.css',
-			header: global_config.ver.min,
-			minCallback: function( unminified ) {
-				return sqwish.minify( unminified, false );
-			}
-		});
-
-		// dump the versioned header into the theme css file
-		grunt.file.write( themeFile + '.css',  global_config.ver.header );
-
-		// dump the theme css into the theme css file
-		helpers.appendFrom( themeFile + '.css', 'css/themes/default/jquery.mobile.theme.css' );
-
-		// minify the theme css
-		helpers.minify({
-			output: themeFile + '.min.css',
-			input: themeFile + '.css',
-			header: global_config.ver.min,
-			minCallback: function( unminified ) {
-				return sqwish.minify( unminified, false );
-			}
-		});
+	grunt.registerTask( 'css_cleanup', 'compile and minify the css', function() {
+		var done = this.async(),
+			theme = grunt.config.get( 'css' ).theme,
+			require = grunt.config.get( 'css' ).require,
+			global_config = grunt.config.get( 'global' );
 
 		// remove the requirejs compile output
 		fs.unlink( require.all.out );
@@ -111,5 +95,5 @@ module.exports = function( grunt ) {
 		});
 	});
 
-	grunt.registerTask( 'css', 'async_config custom_init css_without_deps' );
+	grunt.registerTask( 'css', 'custom_init async_config css_compile concat:regular concat:structure concat:theme cssmin css_cleanup' );
 };

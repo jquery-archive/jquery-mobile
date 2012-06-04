@@ -48,6 +48,9 @@ module.exports = function( grunt ) {
 	// set the default task.
 	grunt.registerTask('default', 'lint');
 
+	// csslint and cssmin tasks
+	grunt.loadNpmTasks( "grunt-css" );
+
 	// A convenient task alias.
 	grunt.registerTask('test', 'test_config qunit');
 
