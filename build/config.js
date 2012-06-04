@@ -87,8 +87,12 @@ module.exports = function( grunt ) {
 					global.shas.build_sha = stdout;
 					global.ver.min = grunt.template.process( global.ver.min, global.shas );
 
+					console.log( "first finished" );
+
 					child_process.exec( 'git log -1 --format=format:"%H"', function( err, stdout, stderr ) {
 						global.shas.head_sha = stdout;
+
+						console.log( "second finished" );
 
 						// NOTE not using a template here because the Makefile depends on the v@VERSION
 						global.ver.header = grunt.file.read( global.files.license )
@@ -99,6 +103,15 @@ module.exports = function( grunt ) {
 			}
 		}
 	};
+
+	grunt.registerTask( 'async_config', 'git hashes for output headers', function() {
+		var done = this.async();
+
+		grunt.config.get( 'global' ).helpers.asyncConfig(function(config) {
+			grunt.config.set( 'global', config );
+			done();
+		});
+	});
 
 	grunt.registerTask( 'test_config', 'glob all the test files', function() {
 		var done = this.async(), test_paths, server_paths = [], env = process.env;
