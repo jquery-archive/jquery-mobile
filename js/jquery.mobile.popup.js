@@ -379,7 +379,7 @@ define( [ "jquery",
 		// Note that placing the popup on the screen can itself cause a hashchange,
 		// because the dialogHashKey may need to be added to the URL.
 		_navHook: function( whenHooked ) {
-			var self = this;
+			var self = this, dstHash;
 
 			self._myUrl = $.mobile.activePage.jqmData( "url" );
 			$.mobile.pageContainer.one( "pagebeforechange.popup", function( e, data ) {
@@ -392,6 +392,9 @@ define( [ "jquery",
 			});
 			if ( $.mobile.hashListeningEnabled ) {
 				var activeEntry = $.mobile.urlHistory.getActive(),
+				    dstTransition = ( ( $.mobile.urlHistory.activeIndex === 0 )
+				    	? $.mobile.defaultDialogTransition
+				    	: activeEntry.transition ),
 				    hasHash = ( activeEntry.url.indexOf( $.mobile.dialogHashKey ) > -1 );
 
 				function realInstallListener() {
@@ -408,8 +411,12 @@ define( [ "jquery",
 					$( window ).one( "hashchange.popupBinder", function() {
 						realInstallListener();
 					});
-					$.mobile.path.set( activeEntry.url + $.mobile.dialogHashKey );
-					$.mobile.urlHistory.addNew( activeEntry.url + $.mobile.dialogHashKey, activeEntry.transition, activeEntry.title, activeEntry.pageUrl, activeEntry.role );
+					dstHash = activeEntry.url + $.mobile.dialogHashKey;
+					if ( $.mobile.urlHistory.activeIndex === 0 && dstHash === $.mobile.urlHistory.initialDst ) {
+						dstHash += $.mobile.dialogHashKey;
+					}
+					$.mobile.path.set( dstHash );
+					$.mobile.urlHistory.addNew( dstHash, dstTransition, activeEntry.title, activeEntry.pageUrl, activeEntry.role );
 				}
 			}
 			else {
