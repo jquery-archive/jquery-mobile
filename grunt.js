@@ -52,7 +52,7 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks( "grunt-css" );
 
 	// A convenient task alias.
-	grunt.registerTask('test', 'test_config qunit');
+	grunt.registerTask('test', 'test:config qunit');
 
 	// load the project wide config before loading the tasks
 	require( path.resolve(path.join('build', 'config')) )( grunt );
