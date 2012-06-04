@@ -47,6 +47,25 @@ module.exports = function( grunt ) {
 				fs.closeSync( id );
 			},
 
+			// in place
+			sed: function( file, filter ) {
+				var id, inputString = fs.readFileSync(file).toString();
+
+				inputString = filter ? filter(inputString) : inputString;
+
+				grunt.file.write( file, inputString );
+			},
+
+			configExtend: function( prop, extension ) {
+				var config = grunt.config.get( prop ) || {};
+
+				for( p in extension ){
+					config[p] = extension[p];
+				}
+
+				grunt.config.set( prop, config );
+			},
+
 			minify: function( opts ) {
 				var max = grunt.file.read( opts.input ),
 					min = opts.minCallback(max);
@@ -87,12 +106,8 @@ module.exports = function( grunt ) {
 					global.shas.build_sha = stdout;
 					global.ver.min = grunt.template.process( global.ver.min, global.shas );
 
-					console.log( "first finished" );
-
 					child_process.exec( 'git log -1 --format=format:"%H"', function( err, stdout, stderr ) {
 						global.shas.head_sha = stdout;
-
-						console.log( "second finished" );
 
 						// NOTE not using a template here because the Makefile depends on the v@VERSION
 						global.ver.header = grunt.file.read( global.files.license )
