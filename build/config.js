@@ -106,7 +106,7 @@ module.exports = function( grunt ) {
 
 	grunt.config.set( 'global', global );
 
-	grunt.registerTask( 'async_config', 'git hashes for output headers', function() {
+	grunt.registerTask( 'config:async', 'git hashes for output headers', function() {
 		var done = this.async();
 
 		grunt.config.get( 'global' ).helpers.asyncConfig(function(config) {

@@ -1,8 +1,7 @@
 var requirejs = require( 'requirejs' ),
 	path = require( 'path' ),
 	fs = require( 'fs' ),
-  sqwish = require ( 'sqwish' ),
-  util = require( 'util' );
+	util = require( 'util' );
 
 module.exports = function( grunt ) {
 	var config = grunt.config.get( 'global' ),
@@ -56,7 +55,7 @@ module.exports = function( grunt ) {
 	cssmin[ themeFile + '.min.css' ] = [ "<banner:global.ver.min>", themeFile + '.css' ];
 	grunt.config.set( 'cssmin', cssmin );
 
-	grunt.registerTask( 'css_compile', 'use require js to sort out deps', function() {
+	grunt.registerTask( 'css:compile', 'use require js to sort out deps', function() {
 		var require = grunt.config.get( 'css' ).require;
 
 		// pull the includes together using require js
@@ -69,7 +68,7 @@ module.exports = function( grunt ) {
 		grunt.file.write( themeFile + '.css', 'css/themes/default/jquery.mobile.theme.css' );
 	});
 
-	grunt.registerTask( 'css_cleanup', 'compile and minify the css', function() {
+	grunt.registerTask( 'css:cleanup', 'compile and minify the css', function() {
 		var done = this.async(),
 			theme = grunt.config.get( 'css' ).theme,
 			require = grunt.config.get( 'css' ).require,
@@ -95,5 +94,5 @@ module.exports = function( grunt ) {
 		});
 	});
 
-	grunt.registerTask( 'css', 'custom_init async_config css_compile concat:regular concat:structure concat:theme cssmin css_cleanup' );
+	grunt.registerTask( 'css', 'custom_init config:async css:compile concat:regular concat:structure concat:theme cssmin css:cleanup' );
 };
