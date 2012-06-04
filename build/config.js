@@ -104,6 +104,8 @@ module.exports = function( grunt ) {
 		}
 	};
 
+	grunt.config.set( 'global', global );
+
 	grunt.registerTask( 'async_config', 'git hashes for output headers', function() {
 		var done = this.async();
 
@@ -147,6 +149,4 @@ module.exports = function( grunt ) {
 		grunt.config.set( 'qunit', { all: server_paths });
 		done();
 	});
-
-	grunt.config.set( 'global', global );
 };
