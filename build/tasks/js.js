@@ -4,32 +4,7 @@ var requirejs = require( 'requirejs' ),
 
 module.exports = function( grunt ) {
 	var min = {}, config = grunt.config.get( 'global' ),
-		outputFile = path.join( config.dirs.output, config.names.root ),
 		helpers = config.helpers;
-
-	grunt.config.set( 'js', {
-		require: {
-			baseUrl: 'js',
-			name: 'jquery.mobile',
-			exclude: [
-				'jquery',
-				'../external/requirejs/order',
-				'../external/requirejs/depend',
-				'../external/requirejs/text',
-				'../external/requirejs/text!../version.txt'
-			],
-			out: outputFile + '.compiled.js',
-			pragmasOnSave: { jqmBuildExclude: true },
-			wrap: { startFile: 'build/wrap.start', endFile: 'build/wrap.end' },
-			findNestedDependencies: true,
-			skipModuleInsertion: true,
-			optimize: 'none'
-		}
-	});
-
-	// setup minification
-	min[ outputFile + '.min.js' ] = [ "<banner:global.ver.min>", outputFile + '.js' ];
-	grunt.config.set( 'min', min );
 
 	grunt.registerTask( 'js:compile', function() {
 		var require = grunt.config.get( 'js' ).require,

@@ -4,7 +4,7 @@ var fs = require( 'fs' ),
 	glob = require( 'glob-whatev' );
 
 module.exports = function( grunt ) {
-	var dirs, names;
+	var dirs, names, min = {}, cssmin = {}, rootFile, structureFile, themeFile;
 
 	dirs = {
 		output: 'compiled',
@@ -22,6 +22,10 @@ module.exports = function( grunt ) {
 	function outputPath( name ){
 		return path.join( dirs.output, name );
 	}
+
+	rootFile = outputPath( names.root );
+	structureFile = outputPath( names.structure );
+	themeFile = outputPath( names.theme );
 
 	// Project configuration.
 	grunt.config.init({
@@ -69,8 +73,8 @@ module.exports = function( grunt ) {
 		//      using requirejs. Thus the .compiled extensions. The exception being the theme concat
 		concat: {
 			js: {
-				src: [ '<banner:global.ver.header>', outputPath( names.root ) + '.compiled.js' ],
-				dest: outputPath( names.root ) + '.js'
+				src: [ '<banner:global.ver.header>', rootFile + '.compiled.js' ],
+				dest: rootFile + '.js'
 			},
 
 			structure: {
@@ -79,8 +83,8 @@ module.exports = function( grunt ) {
 			},
 
 			regular: {
-				src: [ '<banner:global.ver.header>', outputPath( names.root ) + '.compiled.css' ],
-				dest: outputPath( names.root ) + '.css'
+				src: [ '<banner:global.ver.header>', rootFile + '.compiled.css' ],
+				dest: rootFile + '.css'
 			},
 
 			theme: {
@@ -89,6 +93,53 @@ module.exports = function( grunt ) {
 					'css/themes/default/jquery.mobile.theme.css'
 				],
 				dest: outputPath( names.theme ) + '.css'
+			}
+		},
+
+		// NOTE the keys are filenames which, being stored as variables requires that we use
+		//      key based assignment. See below.
+		min: undefined,
+		cssmin: undefined,
+
+		// JS config, mostly the requirejs configuration
+		js: {
+			require: {
+				baseUrl: 'js',
+				name: 'jquery.mobile',
+				exclude: [
+					'jquery',
+					'../external/requirejs/order',
+					'../external/requirejs/depend',
+					'../external/requirejs/text',
+					'../external/requirejs/text!../version.txt'
+				],
+				out: rootFile + '.compiled.js',
+				pragmasOnSave: { jqmBuildExclude: true },
+				wrap: { startFile: 'build/wrap.start', endFile: 'build/wrap.end' },
+				findNestedDependencies: true,
+				skipModuleInsertion: true,
+				optimize: 'none'
+			}
+		},
+
+		// CSS config, mostly the requirejs configuration
+		css: {
+			theme: process.env.THEME || 'default',
+
+			themeFile: themeFile,
+
+			require: {
+				all: {
+					cssIn: 'css/themes/default/jquery.mobile.css',
+					optimizeCss: 'standard.keepComments.keepLines',
+					baseUrl: '.',
+					out: rootFile + '.compiled.css'
+				},
+
+				structure: {
+					cssIn: 'css/structure/jquery.mobile.structure.css',
+					out: structureFile + '.compiled.css'
+				}
 			}
 		},
 
@@ -146,6 +197,16 @@ module.exports = function( grunt ) {
 			}
 		}
 	});
+
+	// MIN configuration
+	min[ rootFile + '.min.js' ] = [ "<banner:global.ver.min>", rootFile + '.js' ];
+	grunt.config.set( 'min', min );
+
+	// CSSMIN configuration
+	cssmin[ rootFile + '.min.css' ] = [ "<banner:global.ver.min>", rootFile + '.css' ];
+	cssmin[ structureFile + '.min.css' ] = [ "<banner:global.ver.min>", structureFile + '.css' ];
+	cssmin[ themeFile + '.min.css' ] = [ "<banner:global.ver.min>", themeFile + '.css' ];
+	grunt.config.set( 'cssmin', cssmin );
 
 	grunt.registerTask( 'config:async', 'git hashes for output headers', function() {
 		var done = this.async(), global = grunt.config.get( 'global' );

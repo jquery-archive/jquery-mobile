@@ -5,38 +5,12 @@ var requirejs = require( 'requirejs' ),
 
 module.exports = function( grunt ) {
 	var config = grunt.config.get( 'global' ),
-		cssmin = {},
-		regularFile = path.join( config.dirs.output, config.names.root ),
-		structureFile = path.join( config.dirs.output, config.names.structure ),
-		themeFile = path.join( config.dirs.output, config.names.theme ),
 		helpers = config.helpers;
 
-	grunt.config.set( 'css', {
-		theme: process.env.THEME || 'default',
-
-		require: {
-			all: {
-				cssIn: 'css/themes/default/jquery.mobile.css',
-				optimizeCss: 'standard.keepComments.keepLines',
-				baseUrl: '.',
-				out: regularFile + '.compiled.css'
-			},
-
-			structure: {
-				cssIn: 'css/structure/jquery.mobile.structure.css',
-				out: structureFile + '.compiled.css'
-			}
-		}
-	});
-
-	// setup css min configuration
-	cssmin[ regularFile + '.min.css' ] = [ "<banner:global.ver.min>", regularFile + '.css' ];
-	cssmin[ structureFile + '.min.css' ] = [ "<banner:global.ver.min>", structureFile + '.css' ];
-	cssmin[ themeFile + '.min.css' ] = [ "<banner:global.ver.min>", themeFile + '.css' ];
-	grunt.config.set( 'cssmin', cssmin );
-
 	grunt.registerTask( 'css:compile', 'use require js to sort out deps', function() {
-		var require = grunt.config.get( 'css' ).require;
+		var theme = grunt.config.get( 'css' ).theme,
+			themeFile = grunt.config.get( 'css' ).themeFile,
+			require = grunt.config.get( 'css' ).require;
 
 		// pull the includes together using require js
 		requirejs.optimize( require.all );
@@ -45,9 +19,10 @@ module.exports = function( grunt ) {
 		requirejs.optimize( require.structure );
 
 		// simple theme file compile
-		grunt.file.write( themeFile + '.css', 'css/themes/default/jquery.mobile.theme.css' );
+		grunt.file.write( themeFile + '.css', 'css/themes/' + theme + '/jquery.mobile.theme.css' );
 	});
 
+	// TODO image copy would be better in compile though not perfect
 	grunt.registerTask( 'css:cleanup', 'compile and minify the css', function() {
 		var done = this.async(),
 			theme = grunt.config.get( 'css' ).theme,
@@ -62,7 +37,7 @@ module.exports = function( grunt ) {
 		var imagesPath = path.join( global_config.dirs.output, 'images' ), fileCount = 0;
 
 		grunt.file.mkdir( imagesPath );
-		grunt.file.recurse( path.join('css', 'themes', theme, 'images'), function( full, root, sub, filename ) {
+		grunt.file.recurse( 'css/themes/' + theme + '/images', function( full, root, sub, filename ) {
 
 			fileCount++;
 			var is = fs.createReadStream( full );
@@ -74,5 +49,6 @@ module.exports = function( grunt ) {
 		});
 	});
 
+	// NOTE the progression of events is not obvious from the above compile -> concat x 3 -> min all -> cleanup the compiled stuff
 	grunt.registerTask( 'css', 'custom_init config:async css:compile concat:regular concat:structure concat:theme cssmin css:cleanup' );
 };
