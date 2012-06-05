@@ -4,7 +4,7 @@ var fs = require( 'fs' ),
 	glob = require( 'glob-whatev' );
 
 module.exports = function( grunt ) {
-	var dirs, names, min = {}, cssmin = {}, rootFile, structureFile, themeFile;
+	var dirs, names, min = {}, cssmin = {}, theme, rootFile, structureFile, themeFile;
 
 	dirs = {
 		output: 'compiled',
@@ -26,6 +26,10 @@ module.exports = function( grunt ) {
 	rootFile = outputPath( names.root );
 	structureFile = outputPath( names.structure );
 	themeFile = outputPath( names.theme );
+
+	// TODO again, I'd like to use grunt params but I'm not sure
+	//      how to get that working with a custom task with deps
+	theme =  process.env.THEME || 'default';
 
 	// Project configuration.
 	grunt.config.init({
@@ -78,8 +82,8 @@ module.exports = function( grunt ) {
 			},
 
 			structure: {
-				src: [ '<banner:global.ver.header>', outputPath( names.structure ) + '.compiled.css' ],
-				dest: outputPath( names.structure ) + '.css'
+				src: [ '<banner:global.ver.header>', structureFile + '.compiled.css' ],
+				dest: structureFile + '.css'
 			},
 
 			regular: {
@@ -90,9 +94,9 @@ module.exports = function( grunt ) {
 			theme: {
 				src: [
 					'<banner:global.ver.header>',
-					'css/themes/default/jquery.mobile.theme.css'
+					'css/themes/' + theme + '/jquery.mobile.theme.css'
 				],
-				dest: outputPath( names.theme ) + '.css'
+				dest: themeFile + '.css'
 			}
 		},
 
