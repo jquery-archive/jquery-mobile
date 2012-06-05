@@ -14,5 +14,5 @@ module.exports = function( grunt ) {
 	grunt.registerTask('test', 'config:test qunit');
 
 	// load the project's default tasks
-	grunt.loadTasks( path.join('build', 'tasks') );
+	grunt.loadTasks( 'build/tasks');
 };

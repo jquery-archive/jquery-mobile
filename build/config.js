@@ -156,7 +156,9 @@ module.exports = function( grunt ) {
 			// depends on git commands (eg ver.min, ver.header)
 			ver: {
 				official: grunt.file.read( 'version.txt' ).replace(/\n/, ''),
-				min: "/*! jQuery Mobile v<%= build_sha %> jquerymobile.com | jquery.org/license !*/"
+				min: '/*! jQuery Mobile v<%= build_sha %> jquerymobile.com | jquery.org/license !*/',
+				gitLongSha: 'git log -1 --format=format:"Git Build: SHA1: %H <> Date: %cd"',
+				gitShortSha: 'git log -1 --format=format:"%H"'
 			},
 
 			shas: {},
@@ -211,11 +213,13 @@ module.exports = function( grunt ) {
 	grunt.registerTask( 'config:async', 'git hashes for output headers', function() {
 		var done = this.async(), global = grunt.config.get( 'global' );
 
-		child_process.exec( 'git log -1 --format=format:"Git Build: SHA1: %H <> Date: %cd"', function( err, stdout, stderr ){
+		// Get the long form sha output for inclusion in the non minified js and css
+		child_process.exec( global.ver.gitLongSha, function( err, stdout, stderr ){
 			global.shas.build_sha = stdout;
 			global.ver.min = grunt.template.process( global.ver.min, global.shas );
 
-			child_process.exec( 'git log -1 --format=format:"%H"', function( err, stdout, stderr ) {
+			// Get the short form sha output for inclusion in the minified js and css
+			child_process.exec( global.ver.gitShortSha, function( err, stdout, stderr ) {
 				global.shas.head_sha = stdout;
 
 				// NOTE not using a template here because the Makefile depends on the v@VERSION
@@ -232,7 +236,6 @@ module.exports = function( grunt ) {
 	//      in place of environment variables
 	grunt.registerTask( 'config:test', 'glob all the test files', function() {
 		var done = this.async(), test_paths, server_paths = [], env = process.env;
-
 
 		// TODO move the glob to a legit config or pull the one from the qunit config
 		test_paths = glob.glob( 'tests/unit/*/' );
