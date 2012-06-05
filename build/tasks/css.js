@@ -49,6 +49,7 @@ module.exports = function( grunt ) {
 		});
 	});
 
-	// NOTE the progression of events is not obvious from the above compile -> concat x 3 -> min all -> cleanup the compiled stuff
+	// NOTE the progression of events is not obvious from the above
+	//      compile -> concat x 3 -> min all -> cleanup the compiled stuff
 	grunt.registerTask( 'css', 'custom_init config:async css:compile concat:regular concat:structure concat:theme cssmin css:cleanup' );
 };
