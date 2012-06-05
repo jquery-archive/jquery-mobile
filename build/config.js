@@ -4,105 +4,242 @@ var fs = require( 'fs' ),
 	glob = require( 'glob-whatev' );
 
 module.exports = function( grunt ) {
-	var global = {
-		dirs : {
-			output: 'compiled',
-			temp: 'tmp'
-		},
+	var dirs, names, min = {}, cssmin = {}, theme, rootFile, structureFile, themeFile;
 
-		files: {
-			license: 'LICENSE-INFO.txt'
-		},
-
-		names: {
-		  base: 'jquery.mobile',
-			// this will change for the deploy target to include version information
-			root: 'jquery.mobile',
-			structure: 'jquery.mobile.structure',
-			theme: 'jquery.mobile.theme'
-		},
-
-		// other version information is added via the asyncConfig helper that
-		// depends on git commands (eg ver.min, ver.header)
-		ver: {
-			official: grunt.file.read( 'version.txt' ).replace(/\n/, ''),
-			min: "/*! jQuery Mobile v<%= build_sha %> jquerymobile.com | jquery.org/license !*/"
-		},
-
-		shas: {},
-
-		helpers: {
-			appendFrom: function( output, input, filter ) {
-				var inputString = fs.readFileSync(input).toString();
-
-				this.append( output, inputString, filter );
-			},
-
-			append: function( output, input, filter ) {
-				var id = fs.openSync(output, 'a+');
-
-				input = filter ? filter(input) : input;
-
-				fs.writeSync( id, input );
-				fs.closeSync( id );
-			},
-
-			minify: function( opts ) {
-				var max = grunt.file.read( opts.input ),
-					min = opts.minCallback(max);
-
-				// add the min header into the minified file, and then the min css
-				grunt.file.write( opts.output, opts.header );
-				this.append( opts.output, min );
-
-				grunt.helper( "min_max_info", min, max );
-			},
-
-			// NOTE cargo culting my way to the top :(
-			rmdirRecursive: function(dir) {
-				if( !path.existsSync(dir) ) {
-					return;
-				}
-
-				var list = fs.readdirSync(dir);
-				for(var i = 0; i < list.length; i++) {
-					var filename = path.join(dir, list[i]);
-					var stat = fs.statSync(filename);
-
-					if(filename == "." || filename == "..") {
-						// pass these files
-					} else if(stat.isDirectory()) {
-						// rmdir recursively
-						this.rmdirRecursive(filename);
-					} else {
-						// rm fiilename
-						fs.unlinkSync(filename);
-					}
-				}
-				fs.rmdirSync(dir);
-			},
-
-			asyncConfig: function( callback ) {
-				child_process.exec( 'git log -1 --format=format:"Git Build: SHA1: %H <> Date: %cd"', function( err, stdout, stderr ){
-					global.shas.build_sha = stdout;
-					global.ver.min = grunt.template.process( global.ver.min, global.shas );
-
-					child_process.exec( 'git log -1 --format=format:"%H"', function( err, stdout, stderr ) {
-						global.shas.head_sha = stdout;
-
-						// NOTE not using a template here because the Makefile depends on the v@VERSION
-						global.ver.header = grunt.file.read( global.files.license )
-							.replace(/v@VERSION/, global.shas.build_sha );
-						callback( global );
-					});
-				});
-			}
-		}
+	dirs = {
+		output: 'compiled',
+		temp: 'tmp'
 	};
 
-	grunt.registerTask( 'test_config', 'glob all the test files', function() {
-		var done = this.async(), test_paths, server_paths = [], env = process.env;
+	names= {
+		base: 'jquery.mobile',
+		// this will change for the deploy target to include version information
+		root: 'jquery.mobile',
+		structure: 'jquery.mobile.structure',
+		theme: 'jquery.mobile.theme'
+	};
 
+	function outputPath( name ){
+		return path.join( dirs.output, name );
+	}
+
+	rootFile = outputPath( names.root );
+	structureFile = outputPath( names.structure );
+	themeFile = outputPath( names.theme );
+
+	// TODO again, I'd like to use grunt params but I'm not sure
+	//      how to get that working with a custom task with deps
+	theme =  process.env.THEME || 'default';
+
+	// Project configuration.
+	grunt.config.init({
+		jshint: {
+			options: {
+				curly: true,
+				eqeqeq: true,
+
+				// (function(){})() seems acceptable
+				immed: false,
+				latedef: true,
+				newcap: true,
+				noarg: true,
+				sub: true,
+				undef: true,
+				boss: true,
+				eqnull: true,
+				browser: true
+			},
+			globals: {
+				jQuery: true,
+				"$": true,
+
+				// qunit globals
+				// TODO would be nice to confine these to test files
+				module: true,
+				ok: true,
+				test: true,
+				asyncTest: true,
+				same: true,
+				start: true,
+				stop: true,
+				expect: true,
+
+				// require js global
+				define: true
+			}
+		},
+
+		lint: {
+			files: ['grunt.js', 'js/*.js', 'tests/**/*.js']
+		},
+
+		// NOTE these configuration settings are used _after_ compilation has taken place
+		//      using requirejs. Thus the .compiled extensions. The exception being the theme concat
+		concat: {
+			js: {
+				src: [ '<banner:global.ver.header>', rootFile + '.compiled.js' ],
+				dest: rootFile + '.js'
+			},
+
+			structure: {
+				src: [ '<banner:global.ver.header>', structureFile + '.compiled.css' ],
+				dest: structureFile + '.css'
+			},
+
+			regular: {
+				src: [ '<banner:global.ver.header>', rootFile + '.compiled.css' ],
+				dest: rootFile + '.css'
+			},
+
+			theme: {
+				src: [
+					'<banner:global.ver.header>',
+					'css/themes/' + theme + '/jquery.mobile.theme.css'
+				],
+				dest: themeFile + '.css'
+			}
+		},
+
+		// NOTE the keys are filenames which, being stored as variables requires that we use
+		//      key based assignment. See below.
+		min: undefined,
+		cssmin: undefined,
+
+		// JS config, mostly the requirejs configuration
+		js: {
+			require: {
+				baseUrl: 'js',
+				name: 'jquery.mobile',
+				exclude: [
+					'jquery',
+					'../external/requirejs/order',
+					'../external/requirejs/depend',
+					'../external/requirejs/text',
+					'../external/requirejs/text!../version.txt'
+				],
+				out: rootFile + '.compiled.js',
+				pragmasOnSave: { jqmBuildExclude: true },
+				wrap: { startFile: 'build/wrap.start', endFile: 'build/wrap.end' },
+				findNestedDependencies: true,
+				skipModuleInsertion: true,
+				optimize: 'none'
+			}
+		},
+
+		// CSS config, mostly the requirejs configuration
+		css: {
+			theme: process.env.THEME || 'default',
+
+			themeFile: themeFile,
+
+			require: {
+				all: {
+					cssIn: 'css/themes/default/jquery.mobile.css',
+					optimizeCss: 'standard.keepComments.keepLines',
+					baseUrl: '.',
+					out: rootFile + '.compiled.css'
+				},
+
+				structure: {
+					cssIn: 'css/structure/jquery.mobile.structure.css',
+					out: structureFile + '.compiled.css'
+				}
+			}
+		},
+
+		global: {
+			dirs: dirs,
+
+			names: names,
+
+			files: {
+				license: 'LICENSE-INFO.txt'
+			},
+
+			// other version information is added via the asyncConfig helper that
+			// depends on git commands (eg ver.min, ver.header)
+			ver: {
+				official: grunt.file.read( 'version.txt' ).replace(/\n/, ''),
+				min: '/*! jQuery Mobile v<%= build_sha %> jquerymobile.com | jquery.org/license !*/',
+				gitLongSha: 'git log -1 --format=format:"Git Build: SHA1: %H <> Date: %cd"',
+				gitShortSha: 'git log -1 --format=format:"%H"'
+			},
+
+			shas: {},
+
+			helpers: {
+				// in place file alteration
+				sed: function( file, filter ) {
+					var id, inputString = fs.readFileSync(file).toString();
+
+					inputString = filter ? filter(inputString) : inputString;
+
+					grunt.file.write( file, inputString );
+				},
+
+				// NOTE cargo culting my way to the top :(
+				rmdirRecursive: function(dir) {
+					if( !path.existsSync(dir) ) {
+						return;
+					}
+
+					var list = fs.readdirSync(dir);
+					for(var i = 0; i < list.length; i++) {
+						var filename = path.join(dir, list[i]);
+						var stat = fs.statSync(filename);
+
+						if(filename == "." || filename == "..") {
+							// pass these files
+						} else if(stat.isDirectory()) {
+							// rmdir recursively
+							this.rmdirRecursive(filename);
+						} else {
+							// rm fiilename
+							fs.unlinkSync(filename);
+						}
+					}
+					fs.rmdirSync(dir);
+				}
+			}
+		}
+	});
+
+	// MIN configuration
+	min[ rootFile + '.min.js' ] = [ "<banner:global.ver.min>", rootFile + '.js' ];
+	grunt.config.set( 'min', min );
+
+	// CSSMIN configuration
+	cssmin[ rootFile + '.min.css' ] = [ "<banner:global.ver.min>", rootFile + '.css' ];
+	cssmin[ structureFile + '.min.css' ] = [ "<banner:global.ver.min>", structureFile + '.css' ];
+	cssmin[ themeFile + '.min.css' ] = [ "<banner:global.ver.min>", themeFile + '.css' ];
+	grunt.config.set( 'cssmin', cssmin );
+
+	grunt.registerTask( 'config:async', 'git hashes for output headers', function() {
+		var done = this.async(), global = grunt.config.get( 'global' );
+
+		// Get the long form sha output for inclusion in the non minified js and css
+		child_process.exec( global.ver.gitLongSha, function( err, stdout, stderr ){
+			global.shas.build_sha = stdout;
+			global.ver.min = grunt.template.process( global.ver.min, global.shas );
+
+			// Get the short form sha output for inclusion in the minified js and css
+			child_process.exec( global.ver.gitShortSha, function( err, stdout, stderr ) {
+				global.shas.head_sha = stdout;
+
+				// NOTE not using a template here because the Makefile depends on the v@VERSION
+				global.ver.header = grunt.file.read( global.files.license )
+					.replace(/v@VERSION/, global.shas.build_sha );
+
+				grunt.config.set( 'global', global );
+				done();
+			});
+		});
+	});
+
+	// TODO could use some cleanup. Eg, can we use grunt's parameter passing functionality
+	//      in place of environment variables
+	grunt.registerTask( 'config:test', 'glob all the test files', function() {
+		var done = this.async(), test_paths, server_paths = [], env = process.env;
 
 		// TODO move the glob to a legit config or pull the one from the qunit config
 		test_paths = glob.glob( 'tests/unit/*/' );
@@ -134,6 +271,4 @@ module.exports = function( grunt ) {
 		grunt.config.set( 'qunit', { all: server_paths });
 		done();
 	});
-
-	grunt.config.set( 'global', global );
 };

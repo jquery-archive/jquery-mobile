@@ -12,8 +12,8 @@
   },
   "dependencies": {
     "grunt":  "0.3.x",
+    "grunt-css": "0.2.0",
     "requirejs": "1.0.8",
-    "sqwish": "0.2.0",
     "glob-whatev": "~0.1.4"
   },
   "engine": {
