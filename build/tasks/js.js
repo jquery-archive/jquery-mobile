@@ -27,13 +27,6 @@ module.exports = function( grunt ) {
 		}
 	});
 
-	helpers.configExtend( 'concat', {
-		js: {
-			src: [ '<banner:global.ver.header>', outputFile + '.compiled.js' ],
-			dest: outputFile + '.js'
-		}
-	});
-
 	// setup minification
 	min[ outputFile + '.min.js' ] = [ "<banner:global.ver.min>", outputFile + '.js' ];
 	grunt.config.set( 'min', min );
