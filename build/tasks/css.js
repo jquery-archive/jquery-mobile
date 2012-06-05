@@ -29,26 +29,6 @@ module.exports = function( grunt ) {
 		}
 	});
 
-	helpers.configExtend( 'concat', {
-		structure: {
-			src: [ '<banner:global.ver.header>', structureFile + '.compiled.css' ],
-			dest: structureFile + '.css'
-		},
-
-		regular: {
-			src: [ '<banner:global.ver.header>', regularFile + '.compiled.css' ],
-			dest: regularFile + '.css'
-		},
-
-		theme: {
-			src: [
-				'<banner:global.ver.header>',
-				'css/themes/default/jquery.mobile.theme.css'
-			],
-			dest: themeFile + '.css'
-		}
-	});
-
 	// setup css min configuration
 	cssmin[ regularFile + '.min.css' ] = [ "<banner:global.ver.min>", regularFile + '.css' ];
 	cssmin[ structureFile + '.min.css' ] = [ "<banner:global.ver.min>", structureFile + '.css' ];
