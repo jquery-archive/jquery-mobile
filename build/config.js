@@ -32,21 +32,6 @@ module.exports = function( grunt ) {
 		shas: {},
 
 		helpers: {
-			appendFrom: function( output, input, filter ) {
-				var inputString = fs.readFileSync(input).toString();
-
-				this.append( output, inputString, filter );
-			},
-
-			append: function( output, input, filter ) {
-				var id = fs.openSync(output, 'a+');
-
-				input = filter ? filter(input) : input;
-
-				fs.writeSync( id, input );
-				fs.closeSync( id );
-			},
-
 			// in place
 			sed: function( file, filter ) {
 				var id, inputString = fs.readFileSync(file).toString();
@@ -64,17 +49,6 @@ module.exports = function( grunt ) {
 				}
 
 				grunt.config.set( prop, config );
-			},
-
-			minify: function( opts ) {
-				var max = grunt.file.read( opts.input ),
-					min = opts.minCallback(max);
-
-				// add the min header into the minified file, and then the min css
-				grunt.file.write( opts.output, opts.header );
-				this.append( opts.output, min );
-
-				grunt.helper( "min_max_info", min, max );
 			},
 
 			// NOTE cargo culting my way to the top :(
