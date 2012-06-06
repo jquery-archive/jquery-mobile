@@ -3,7 +3,7 @@
 //>>label: Events
 //>>group: Events
 
-define( [ "jquery", "./jquery.mobile.events.touch", "./jquery.mobile.events.orientationchange" ], function( $ ) {
+define( [ "jquery", "./events/touch", "./events/orientationchange" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });

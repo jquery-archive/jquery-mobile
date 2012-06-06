@@ -4,12 +4,12 @@
 
 (function($){
 	var libName = "jquery.mobile.events.js",
-		components = [ "jquery.mobile.events.touch.js", "jquery.mobile.events.throttledresize.js", "jquery.mobile.events.orientationchange.js" ],
-			absFn = Math.abs,
-			originalEventFn = $.Event.prototype.originalEvent,
-			preventDefaultFn = $.Event.prototype.preventDefault,
-			events = ("touchstart touchmove touchend tap taphold " +
-								"swipe swipeleft swiperight scrollstart scrollstop orientationchange").split( " " );
+	    components = [ "events/touch.js", "events/throttledresize.js", "events/orientationchange.js" ],
+	    absFn = Math.abs,
+	    originalEventFn = $.Event.prototype.originalEvent,
+	    preventDefaultFn = $.Event.prototype.preventDefault,
+	    events = ("touchstart touchmove touchend tap taphold " +
+		          "swipe swipeleft swiperight scrollstart scrollstop orientationchange").split( " " );
 
 	module(libName, {
 		setup: function(){
