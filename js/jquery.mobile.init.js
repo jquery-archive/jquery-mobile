@@ -83,7 +83,7 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 			// Remember, however, that the hash can also be a path!
 			if ( ! ( $.mobile.hashListeningEnabled &&
 			         $.mobile.path.isHashValid( location.hash ) &&
-			         ( $( location.hash + ':jqmData(role="page")' ).length ||
+			         ( $( '#' + $.mobile.path.cleanHash( location.hash ) + ':jqmData(role="page")' ).length ||
 			           $.mobile.path.isPath( location.hash ) ) ) ) {
 				$.mobile.changePage( $.mobile.firstPage, { transition: "none", reverse: true, changeHash: false, fromHashChange: true } );
 			}
