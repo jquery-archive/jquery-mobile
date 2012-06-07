@@ -4,14 +4,14 @@
 //>>group: Transitions
 
 define( [
-	"./transitions/jquery.mobile.transition.flip",
-	"./transitions/jquery.mobile.transition.flow",
-	"./transitions/jquery.mobile.transition.pop",
-	"./transitions/jquery.mobile.transition.slide",
-	"./transitions/jquery.mobile.transition.slidedown",
-	"./transitions/jquery.mobile.transition.slidefade",
-	"./transitions/jquery.mobile.transition.slideup",
-	"./transitions/jquery.mobile.transition.turn"
+	"./transitions/flip",
+	"./transitions/flow",
+	"./transitions/pop",
+	"./transitions/slide",
+	"./transitions/slidedown",
+	"./transitions/slidefade",
+	"./transitions/slideup",
+	"./transitions/turn"
 ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
