@@ -76,3 +76,11 @@
 
 /*hiding native button,inputs */
 .ui-btn-hidden { position: absolute; top: 0; left: 0; width: 100%; height: 100%; -webkit-appearance: none; opacity: .1; cursor: pointer; background: #fff; background: rgba(255,255,255,0); filter: Alpha(Opacity=.0001); font-size: 1px; border: none; text-indent: -9999px; }
+
+.ui-field-contain .ui-btn.ui-submit { margin: 0; }
+label.ui-submit { font-size: 16px; line-height: 1.4; font-weight: normal; margin: 0 0 .3em; display: block; }
+@media all and (min-width: 450px){
+	.ui-field-contain label.ui-submit { vertical-align: top; display: inline-block; width: 20%; margin: 0 2% 0 0; }
+	.ui-field-contain .ui-btn.ui-submit { width: 60%; display: inline-block; }
+	.ui-hide-label .ui-btn.ui-submit { width: auto; }
+}
