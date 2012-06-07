@@ -3,12 +3,12 @@
 */
 
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Animation styles and fallback transition definition for non-3D supporting browsers
+//>>description: Animation styles and fallback transitions definition for non-3D supporting browsers
 //>>label: Turn Transition
 //>>group: Transitions
-//>>css.structure: ../css/structure/jquery.mobile.transition.turn.css
+//>>css.structure: ../../css/structure/jquery.mobile.transitions.turn.css
 
-define( [ "jquery", "./jquery.mobile.transition" ], function( $ ) {
+define( [ "../jquery", "../jquery.mobile.transition" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
