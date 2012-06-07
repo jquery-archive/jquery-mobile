@@ -1,6 +1,8 @@
-.ui-controlgroup, fieldset.ui-controlgroup { padding: 0; margin: 0em 0 .5em; zoom: 1; }
+.ui-controlgroup, fieldset.ui-controlgroup { padding: 0; margin: .5em 0; zoom: 1; }
+.ui-controlgroup.ui-mini, fieldset.ui-controlgroup.ui-mini { margin: .25em 0; }
+.ui-field-contain .ui-controlgroup, .ui-field-contain fieldset.ui-controlgroup { margin: 0; }
+.ui-bar .ui-controlgroup { margin: 0 5px; }
 
-.ui-bar .ui-controlgroup { margin: 0 .3em; }
 .ui-controlgroup-label { font-size: 16px; line-height: 1.4; font-weight: normal; margin: 0 0 .4em; }
 .ui-controlgroup-controls { display: block; width: 100%;}
 .ui-controlgroup li { list-style: none; }
@@ -9,7 +11,6 @@
 .ui-controlgroup-controls label.ui-select { position: absolute; left: -9999px; }
 
 .ui-controlgroup-vertical .ui-controlgroup-last { border-bottom-width: 1px; }
-.ui-controlgroup-horizontal { padding: 0; }
 .ui-controlgroup-horizontal .ui-btn-inner { text-align:center; }
 .ui-controlgroup-horizontal .ui-btn, .ui-controlgroup-horizontal .ui-select { display: inline-block; margin: 0 -6px 0 0; }
 .ui-controlgroup-horizontal .ui-checkbox, .ui-controlgroup-horizontal .ui-radio { float: left; clear: none; margin: 0 -1px 0 0; }
