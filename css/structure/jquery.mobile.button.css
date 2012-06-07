@@ -7,8 +7,8 @@
 .ui-btn-left, .ui-btn-right, .ui-btn-inline { display: inline-block; vertical-align: middle; }
 .ui-btn-block { display: block; }
 
-.ui-header .ui-btn,
-.ui-footer .ui-btn { display: inline-block; margin: 0; }
+.ui-header > .ui-btn,
+.ui-footer > .ui-btn { display: inline-block; margin: 0; }
 .ui-header .ui-btn-block,
 .ui-footer .ui-btn-block { display: block; }
 
