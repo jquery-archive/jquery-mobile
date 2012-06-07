@@ -10,7 +10,11 @@ define( [ "jquery" ], function( $ ) {
 (function( $, undefined ) {
 
 $.fn.fieldcontain = function( options ) {
-	return this.addClass( "ui-field-contain ui-body ui-br" );
+	return this
+		.addClass( "ui-field-contain ui-body ui-br" )
+		.contents().filter( function() {
+			return ( this.nodeType === 3 && !/\S/.test( this.nodeValue ) );
+		}).remove();
 };
 
 //auto self-init widgets
