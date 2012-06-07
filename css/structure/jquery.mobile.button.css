@@ -8,8 +8,8 @@
 .ui-mobile .ui-btn-left, .ui-mobile .ui-btn-right { margin: 0; } /* .ui-mobile to increase specificity level */
 .ui-btn-block { display: block; }
 
-.ui-header .ui-btn,
-.ui-footer .ui-btn { display: inline-block; margin: 0; }
+.ui-header > .ui-btn,
+.ui-footer > .ui-btn { display: inline-block; margin: 0; }
 .ui-header .ui-btn-block,
 .ui-footer .ui-btn-block { display: block; }
 
