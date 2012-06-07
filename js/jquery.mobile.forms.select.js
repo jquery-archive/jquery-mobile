@@ -88,7 +88,9 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		var self = this,
 
 			options = this.options,
-			
+
+			inline = options.inline || this.select.jqmData( "inline" ),
+			mini = options.mini || this.select.jqmData( "mini" ),			
 			iconpos = options.icon ? ( options.iconpos || this.select.jqmData( "iconpos" ) ) : false,
 
 			// IE throws an exception at options.item() function when
@@ -103,11 +105,11 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					theme: options.theme,
 					icon: options.icon,
 					iconpos: iconpos,
-					inline: options.inline,
+					inline: inline,
 					corners: options.corners,
 					shadow: options.shadow,
 					iconshadow: options.iconshadow,
-					mini: options.mini
+					mini: mini
 				});
 
 		this.setButtonText();
