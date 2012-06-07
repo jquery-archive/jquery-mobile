@@ -119,8 +119,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		// On the desktop,it seems to do the opposite
 		// for these reasons, using the nativeMenu option results in a full native select in Opera
 		if ( options.nativeMenu && window.opera && window.opera.version ) {
-			this.select.addClass( "ui-select-nativeonly" );
-		}
+			button.addClass( "ui-select-nativeonly" );
+		}	
 
 		// Add counter for multi selects
 		if ( this.isMultiple ) {
