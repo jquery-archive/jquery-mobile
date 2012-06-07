@@ -88,6 +88,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		var self = this,
 
 			options = this.options,
+			
+			iconpos = options.icon ? ( options.iconpos || this.select.jqmData( "iconpos" ) ) : false,
 
 			// IE throws an exception at options.item() function when
 			// there is no selected item
@@ -100,7 +102,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				.buttonMarkup( {
 					theme: options.theme,
 					icon: options.icon,
-					iconpos: options.iconpos,
+					iconpos: iconpos,
 					inline: options.inline,
 					corners: options.corners,
 					shadow: options.shadow,
