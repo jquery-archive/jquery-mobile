@@ -3,7 +3,7 @@
 //>>label: loading message
 //>>group: Navigation
 
-define( [	"jquery",	"./jquery.mobile.core",	"./jquery.mobile.init" ], function( $ ) {
+define( [ "jquery",	"./jquery.mobile.core" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, window ) {
