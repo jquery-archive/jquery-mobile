@@ -10,8 +10,10 @@ module.exports = function( grunt ) {
 	// csslint and cssmin tasks
 	grunt.loadNpmTasks( "grunt-css" );
 
+	grunt.loadNpmTasks( "grunt-junit" );
+
 	// A convenient task alias.
-	grunt.registerTask('test', 'config:test qunit');
+	grunt.registerTask('test', 'config:test junit');
 
 	// load the project's default tasks
 	grunt.loadTasks( 'build/tasks');
