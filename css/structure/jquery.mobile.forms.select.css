@@ -11,10 +11,14 @@
 .ui-select .ui-btn.ui-select-nativeonly { border-radius: 0; }
 .ui-select .ui-btn.ui-select-nativeonly select { opacity: 1; text-indent: 0; }
 
-.ui-select .ui-btn-icon-right .ui-btn-inner { padding-right: 45px; }
-.ui-select .ui-btn-icon-right .ui-icon { right: 15px;  }
-.ui-select .ui-mini.ui-btn-icon-right .ui-icon { right: 7px;  }
-
+.ui-select .ui-btn-icon-right .ui-btn-inner, .ui-select .ui-li-has-count .ui-btn-inner { padding-right: 45px; }
+.ui-select .ui-mini.ui-btn-icon-right .ui-btn-inner { padding-right: 32px; }
+.ui-select .ui-btn-icon-right.ui-li-has-count .ui-btn-inner { padding-right: 80px; }
+.ui-select .ui-mini.ui-btn-icon-right.ui-li-has-count .ui-btn-inner { padding-right: 67px; }
+.ui-select .ui-btn-icon-right .ui-icon { right: 15px; }
+.ui-select .ui-mini.ui-btn-icon-right .ui-icon { right: 7px; }
+.ui-select .ui-btn-icon-right.ui-li-has-count .ui-li-count { right: 45px; }
+.ui-select .ui-mini.ui-btn-icon-right.ui-li-has-count .ui-li-count { right: 32px; }
 
 /* labels */
 label.ui-select { font-size: 16px; line-height: 1.4;  font-weight: normal; margin: 0 0 .3em; display: block; }
