@@ -89,6 +89,10 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 			options = this.options,
 
+			inline = options.inline || this.select.jqmData( "inline" ),
+			mini = options.mini || this.select.jqmData( "mini" ),			
+			iconpos = options.icon ? ( options.iconpos || this.select.jqmData( "iconpos" ) ) : false,
+
 			// IE throws an exception at options.item() function when
 			// there is no selected item
 			// select first in this case
@@ -101,12 +105,12 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				.buttonMarkup( {
 					theme: options.theme,
 					icon: options.icon,
-					iconpos: options.iconpos,
-					inline: options.inline,
+					iconpos: iconpos,
+					inline: inline,
 					corners: options.corners,
 					shadow: options.shadow,
 					iconshadow: options.iconshadow,
-					mini: options.mini
+					mini: mini
 				});
 
 		// Opera does not properly support opacity on select elements
@@ -114,8 +118,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		// On the desktop,it seems to do the opposite
 		// for these reasons, using the nativeMenu option results in a full native select in Opera
 		if ( options.nativeMenu && window.opera && window.opera.version ) {
-			this.select.addClass( "ui-select-nativeonly" );
-		}
+			button.addClass( "ui-select-nativeonly" );
+		}	
 
 		// Add counter for multi selects
 		if ( this.isMultiple ) {

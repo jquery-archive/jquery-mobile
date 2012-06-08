@@ -54,6 +54,11 @@ $.widget( "mobile.button", $.mobile.widget, {
 			classes = "ui-btn-right";
 		}
 
+		if(  $el.attr( "type" ) == "submit" || $el.attr( "type" ) == "reset" ) {
+			classes += "ui-submit";
+		}
+		$( "label[for='" + $el.attr( "id" ) + "']" ).addClass( "ui-submit" );
+		
 		// Add ARIA role
 		this.button = $( "<div></div>" )
 			.text( $el.text() || $el.val() )
