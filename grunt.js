@@ -165,15 +165,6 @@ module.exports = function( grunt ) {
 			shas: {},
 
 			helpers: {
-				// in place file alteration
-				sed: function( file, filter ) {
-					var id, inputString = fs.readFileSync(file).toString();
-
-					inputString = filter ? filter(inputString) : inputString;
-
-					grunt.file.write( file, inputString );
-				},
-
 				// NOTE cargo culting my way to the top :(
 				rmdirRecursive: function(dir) {
 					if( !path.existsSync(dir) ) {

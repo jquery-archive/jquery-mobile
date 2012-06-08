@@ -14,9 +14,9 @@ module.exports = function( grunt ) {
 		requirejs.optimize( require );
 
 		// replace the version with the value in version.text
-		helpers.sed( require.out, function( fileContents ) {
+		grunt.file.copy( require.out, require.out, { process: function( fileContents ) {
 			return fileContents.replace( /__version__/, '"' + global_config.ver.official + '"' );
-		});
+		}});
 	});
 
 	grunt.registerTask( 'js:cleanup', 'compile and minify the js', function() {
