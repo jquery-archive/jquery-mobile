@@ -145,7 +145,7 @@ define( [ "jquery", "./jquery.mobile.navigation", "../external/requirejs/depend!
 	});
 
 	// We need to init when "mobileinit", "domready", and "navready" have all happened
-	$.when( domreadyDeferred, mobileinitDeferred, $.mobile.navReadyDeferred ).done( function() {
+	$.when( domreadyDeferred, mobileinitDeferred, $.mobile.navreadyDeferred ).done( function() {
 		if( $.mobile.pushStateEnabled && $.support.pushState ){
 			pushStateHandler.init();
 		}

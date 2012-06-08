@@ -1189,8 +1189,8 @@ define( [
 
 	//The following event bindings should be bound after mobileinit has been triggered
 	//the following deferred is resolved in the init file
-	$.mobile.navReadyDeferred = $.Deferred();
-	$.mobile.navReadyDeferred.done( function(){
+	$.mobile.navreadyDeferred = $.Deferred();
+	$.mobile.navreadyDeferred.done( function(){
 		//bind to form submit events, handle with Ajax
 		$( document ).delegate( "form", "submit", function( event ) {
 			var $this = $( this );
@@ -1476,7 +1476,7 @@ define( [
 		$( document ).bind( "pageshow", resetActivePageHeight );
 		$( window ).bind( "throttledresize", resetActivePageHeight );
 
-	});//navReadyDeferred done callback
+	});//navreadyDeferred done callback
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
