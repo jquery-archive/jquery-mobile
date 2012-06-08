@@ -1,10 +1,10 @@
-var fs = require( 'fs' );
+var fs = require( 'fs' ), rmrf = require( 'rimraf' );
 
 module.exports = function( grunt ) {
 	var config = grunt.config.get( 'global' );
 
 	grunt.registerTask( 'clean', 'ensure the output directory is present', function() {
-		config.helpers.rmdirRecursive( config.dirs.output );
-		config.helpers.rmdirRecursive( config.dirs.temp );
+		rmrf.sync( config.dirs.output );
+		rmrf.sync( config.dirs.temp );
 	});
 };

@@ -15,7 +15,8 @@
     "grunt-css": "0.2.0",
     "grunt-junit": "0.1.2",
     "requirejs": "1.0.8",
-    "glob-whatev": "~0.1.4"
+    "glob-whatev": "~0.1.4",
+    "rimraf": "2.0.1"
   },
   "engine": {
     "node": ">=6.0"

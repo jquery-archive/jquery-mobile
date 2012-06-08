@@ -162,33 +162,7 @@ module.exports = function( grunt ) {
 				gitShortSha: 'git log -1 --format=format:"%H"'
 			},
 
-			shas: {},
-
-			helpers: {
-				// NOTE cargo culting my way to the top :(
-				rmdirRecursive: function(dir) {
-					if( !path.existsSync(dir) ) {
-						return;
-					}
-
-					var list = fs.readdirSync(dir);
-					for(var i = 0; i < list.length; i++) {
-						var filename = path.join(dir, list[i]);
-						var stat = fs.statSync(filename);
-
-						if(filename == "." || filename == "..") {
-							// pass these files
-						} else if(stat.isDirectory()) {
-							// rmdir recursively
-							this.rmdirRecursive(filename);
-						} else {
-							// rm fiilename
-							fs.unlinkSync(filename);
-						}
-					}
-					fs.rmdirSync(dir);
-				}
-			}
+			shas: {}
 		}
 	});
 
