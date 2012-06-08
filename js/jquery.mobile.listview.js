@@ -219,7 +219,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 								corners: false,
 								theme: itemTheme,
 								icon: false,
-								iconpos: false
+								iconpos: "notext"
 							})
 							.find( ".ui-btn-inner" )
 								.append(
