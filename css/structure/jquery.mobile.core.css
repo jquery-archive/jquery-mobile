@@ -68,5 +68,5 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 .ui-nojs { position: absolute; left: -9999px; }
 
 /* accessible content hiding */
-.ui-hide-label label,
+.ui-hide-label label.ui-input-text, .ui-hide-label label.ui-select, .ui-hide-label label.ui-slider, .ui-hide-label label.ui-submit, .ui-hide-label .ui-controlgroup-label,
 .ui-hidden-accessible { position: absolute !important; left: -9999px; clip: rect(1px 1px 1px 1px); clip: rect(1px,1px,1px,1px); }
