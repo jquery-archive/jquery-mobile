@@ -61,7 +61,7 @@
 		
 		<p>As you see above, by default grid blocks have no visual styling; they simply present content side-by-side.</p>
 		
-		<p>Grid classes can be applied to any container. In this next example, we add <code>ui-grid-a</code> to a <code>fieldset</code>, and apply the <code>ui-block</code> classes to the two buttons inside to stretch them each to 50% of the screen width:</p>
+		<p>Grid classes can be applied to any container. In this next example, we add <code>ui-grid-a</code> to a <code>fieldset</code>, and apply the <code>ui-block</code> classes to the container of each of the two buttons inside to stretch them each to 50% of the screen width:</p>
 
 <pre><code>
 &lt;fieldset class=&quot;ui-grid-a&quot;&gt;
@@ -75,7 +75,25 @@
 				<div class="ui-block-b"><button type="submit" data-theme="b">Submit</button></div>	   
 	    </fieldset>
 
-	    <p>The framework adds left and right margin to buttons in a grid. To align a single (full width) button with those in the grid you can wrap the button in a div with class <code>ui-grid-a</code> without a <code>ui-block</code> class.</p>	    
+	    <p>Please note that the framework adds left and right margin to buttons in a grid. For a single button you can use a container with class <code>ui-grid-solo</code> and wrap the button in a div with class <code>ui-block-a</code> like the example below. This way the button will get the same margin.</p>
+		 
+<pre><code>
+&lt;div class=&quot;ui-grid-a&quot;&gt;
+	&lt;div class=&quot;ui-block-a&quot;&gt;&lt;button type=&quot;button&quot; data-theme=&quot;c&quot;&gt;Previous&lt;/button&gt;&lt;/div&gt;
+	&lt;div class=&quot;ui-block-b&quot;&gt;&lt;button type=&quot;button&quot; data-theme=&quot;c&quot;&gt;Next&lt;/button&gt;&lt;/div&gt;	   
+&lt;/div&gt;
+&lt;div class=&quot;ui-grid-solo&quot;&gt;
+	&lt;div class=&quot;ui-block-a&quot;&gt;&lt;button type=&quot;v&quot; data-theme=&quot;b&quot;&gt;More&lt;/button&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+		<div class="ui-grid-a">
+				<div class="ui-block-a"><button type="button" data-theme="c">Previous</button></div>
+				<div class="ui-block-b"><button type="button" data-theme="c">Next</button></div>	   
+		</div>
+		<div class="ui-grid-solo">
+				<div class="ui-block-a"><button type="button" data-theme="b">More</button></div>
+		</div>
 	    
 	    <p>Theme classes (not data-theme attributes) from the <a href="../api/themes.html">theming system</a> can be added to an element, including grids. On the blocks below, we're adding two classes: <code>ui-bar</code> to add the default bar padding and <code>ui-bar-e</code> to apply the background gradient and font styling for the "e" toolbar theme swatch. For illustration purposes, an inline <code>style="height:120px"</code> attribute is also added to each grid to set each to a standard height. </p>
 			
