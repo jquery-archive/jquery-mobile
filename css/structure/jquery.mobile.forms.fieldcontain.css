@@ -13,7 +13,7 @@
 	right: 1em;
 }
 
-.ui-field-contain, .ui-mobile fieldset.ui-field-contain { width: 100%; } /* This prevents horizontal scrollbar in IE7 */
+.ui-field-contain:not(.ui-li), .ui-mobile fieldset.ui-field-contain { width: 100%; } /* This prevents horizontal scrollbar in IE7 */
 
 @media all and (min-width: 450px){
 	.ui-field-contain, .ui-mobile fieldset.ui-field-contain { border-width: 0; padding: 0; margin: 1em 0; }
