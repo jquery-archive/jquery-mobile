@@ -1,4 +1,120 @@
-jQuery Mobile Framework
+# jQuery Mobile
+
+This is the main repository for the jQuery Mobile project. From the [official website](http://jquerymobile.com):
+
+> A unified, HTML5-based user interface system for all popular mobile device platforms, built on the rock-solid jQuery and jQuery UI foundation. Its lightweight code is built with progressive enhancement, and has a flexible, easily themeable design.
+
+You can find more information about how the library works, and what it is capable of, by reading the [documentation](http://jquerymobile.com/demos/).
+
+## Issues
+
+When [submitting issues on github](https://github.com/jquery/jquery-mobile/issues/new) please include the following:
+
+1. Issue description
+2. Sample page using our [jsbin template (TODO get link)](http://jsbin.com/awoluv/edit#html)
+3. Steps to reproduce
+4. Expected outcome
+5. Actual outcome
+6. Browers tested
+
+Also, in the interest of creating more readable issues please include code snippets inside a triple backtick box appropriate for the JavaScript/HTML/CSS snippet you wish to discuss. More information is available at the [introduction page](http://github.github.com/github-flavored-markdown/) for github flavored markdown (see, Syntax Highlighting).
+
+## Pull Requests
+
+When submitting a pull request for review there are few important steps you can take to ensure that it gets reviewed quickly and increase the chances that it will be merged (in order of descending importance):
+
+1. Include tests (see [Development](#development))
+2. Follow the [jQuery Core style guide](http://docs.jquery.com/JQuery_Core_Style_Guidelines)
+3. Limit the scope to one Issue/Feature
+4. Small focused commits, ideally less than 10 to 20 lines
+5. Avoid merge commits (see Pro Git's chapter on [Rebasing](http://git-scm.com/book/ch3-6.html))
+
+Taken together, the above reduces the effort that's required of the contributor reviewing your pull request.
+
+## Build/Customization
+
+Currently the library is shipped on the jQuery CDN/download as a single monolithic JavaScript file that depends on jQuery Core (not included) and a similarly bundled CSS file. For users we support the following build targets:
+
+1. `js` - resolve dependencies, build, concat, and minify the JavaScript used for jQuery Mobile
+2. `css` - resolve dependencies, build, concat, and minify all the css, just the structure css, and just the theme css
+3. `docs` - build the js and css, and make the docs ready for static consumption
+4. `zip` - package the documentation in zip format for distribution
+
+### Requirements
+
+The build requires [node.js](http://nodejs.org/) and its packaged npm package manager. For other build targets like `docs` and `zip` it also requires at least a Bash shell with the addition of Make providing a layer of user friendliness if necessary.
+
+For more information on installing node please see its [documentation](http://nodejs.org/#download). For Bash and Make please refer to the appropriate documentation for your opperating system.
+
+### Commands
+
+With node installed you can run the `js` and `css` targets by simply issuing the following from the project root:
+
+    npm install
+    node node_modules/.gin/grunt js # or css
+
+Note that if you have the appropriate version of [grunt](https://github.com/cowboy/grunt), our build tool, installed globally you can substitute `grunt` whereever you see `node node_modules/.gin/grunt`. For the remainder of the build documentation we will prefer the more concise `grunt`.
+
+If you want to use the `docs` and `zip` targets you will need bash and they can be run with the following
+
+   grunt legacy:docs # or `grunt legacy:zip`
+
+Alternatively if you have `make` installed on your system
+
+   make docs # or `make zip`
+
+### JavaScript
+
+As of version 1.1 the library uses dependency management in the JavaScript build by providing [AMD modules](https://github.com/amdjs/amdjs-api/wiki/AMD) which can be added or removed from the core mobile meta module `js/jquery.mobile.js`.
+
+For example, if a user wished to exclude the form widgets to reduce the wire weight of their jQuery Mobile include they would first remove them from the meta module:
+
+```diff
+diff --git a/js/jquery.mobile.js b/js/jquery.mobile.js
+index 6200fe6..3a4625c 100644
+--- a/js/jquery.mobile.js
++++ b/js/jquery.mobile.js
+@@ -19,12 +19,6 @@ define([
+        './jquery.mobile.listview.filter',
+        './jquery.mobile.listview.autodividers',
+        './jquery.mobile.nojs',
+-       './jquery.mobile.forms.checkboxradio',
+-       './jquery.mobile.forms.button',
+-       './jquery.mobile.forms.slider',
+-       './jquery.mobile.forms.textinput',
+-       './jquery.mobile.forms.select.custom',
+-       './jquery.mobile.forms.select',
+        './jquery.mobile.buttonMarkup',
+        './jquery.mobile.controlGroup',
+        './jquery.mobile.links',
+```
+
+And then run the build (for platform variations see [Posix](#posix) or [Windows](#windows))
+
+    grunt js
+
+### CSS
+
+To build using a custom theme simply specify the name with an environment variable.
+
+    THEME=valencia grunt css
+
+This assumes the theme css files are available in the `css/theme/$THEME/` directory relative to the project root.
+
+### Posix
+
+### Windows
+
+The additonal dependency on node.js in the interest of providing users on non posix platforms with the ability to compile at least the CSS and JavaScript.
+
+## Development
+
+### Server
+
+### Testing
+
+
+
 =======================
 [Official Site: http://jquerymobile.com](http://jquerymobile.com)
 
