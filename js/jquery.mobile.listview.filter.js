@@ -44,11 +44,16 @@ $( document ).delegate( ":jqmData(role='listview')", "listviewcreate", function(
 				itemtext = "",
 				item;
 
+		    // Check if a custom filter callback applies
+		    var isCustomFilterCallback = listview.options.filterCallback !=
+                $.mobile.listview.prototype.options.filterCallback;
+                
 			// Change val as lastval for next execution
 			$this.jqmData( "lastval" , val );
-			if ( val.length < lastval.length || val.indexOf(lastval) !== 0 ) {
+			
+			if ( isCustomFilterCallback || ( val.length < lastval.length || val.indexOf(lastval) !== 0 ) ) {
 
-				// Removed chars or pasted something totally different, check all items
+				// Custom filter callback applies, removed chars or pasted something totally different; check all items
 				listItems = list.children();
 			} else {
 
