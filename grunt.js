@@ -187,6 +187,10 @@ module.exports = function( grunt ) {
 	// A convenient task alias.
 	grunt.registerTask('test', 'config:test junit');
 
+	// Ease of use aliases for users who want the zip and docs
+	grunt.registerTask('docs', 'js css legacy_tasks:docs');
+	grunt.registerTask('zip', 'js css legacy_tasks:zip');
+
 	// load the project's default tasks
 	grunt.loadTasks( 'build/tasks');
 };
