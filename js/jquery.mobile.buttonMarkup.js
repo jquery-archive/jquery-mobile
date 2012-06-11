@@ -42,6 +42,10 @@ $.fn.buttonMarkup = function( options ) {
 			e.setAttribute( "data-" + $.mobile.ns + key, value );
 			el.jqmData( key, value );
 		});
+		if ( el.jqmData( "rel" ) === "popup" && e.hasAttribute( "href" ) ) {
+			e.setAttribute( "aria-haspopup", true );
+			e.setAttribute( "aria-owns", e.getAttribute( "href" ) );
+		}
 
 		// Check if this element is already enhanced
 		buttonElements = $.data( ( ( e.tagName === "INPUT" || e.tagName === "BUTTON" ) ? e.parentNode : e ), "buttonElements" );
@@ -102,7 +106,7 @@ $.fn.buttonMarkup = function( options ) {
 				el.attr( "title", el.getEncodedText() );
 			}
 		}
-    
+
 		innerClass += o.corners ? " ui-btn-corner-all" : "";
 
 		if ( o.iconpos && o.iconpos === "notext" && !el.attr( "title" ) ) {

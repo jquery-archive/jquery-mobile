@@ -24,8 +24,8 @@ define( [ "jquery",
 		_create: function() {
 			var ui = {
 			    	screen: $("<div class='ui-screen-hidden ui-popup-screen fade'></div>"),
-			    	placeholder: $("<div id='placeholder' style='display: none;'><!-- placeholder --></div>"),
-			    	container: $("<div id='ui-popup-container' class='ui-popup-container ui-selectmenu-hidden'></div>")
+			    	placeholder: $("<div style='display: none;'><!-- placeholder --></div>"),
+			    	container: $("<div class='ui-popup-container ui-selectmenu-hidden'></div>")
 			    },
 			    eatEventAndClose = function( e ) {
 			    	e.preventDefault();
@@ -622,39 +622,29 @@ define( [ "jquery",
 		}
 	}
 
-	$.mobile.popup.bindPopupToButton = function( btn, popup ) {
-		if ( btn.length === 0 || popup.length === 0 ) return;
+	$.mobile.popup.handleLink = function( $link, whenOpenedCb ) {
+		var closestPage = $link.closest( ":jqmData(role='page')" ),
+		    scope = ( ( closestPage.length === 0 ) ? $( "body" ) : closestPage ),
+		    popup = $( $link.attr( "href" ), scope[0] ),
+		    offset;
 
-		var btnVClickHandler = function( e ) {
-			popup.popup( "open",
-					btn.offset().left + btn.outerWidth() / 2,
-					btn.offset().top + btn.outerHeight() / 2,
-					btn.jqmData( "transition" ) );
+		if ( popup.data( "popup" ) ) {
+			offset = $link.offset();
 
-			// Swallow event, because it might end up getting picked up by the popup window's screen handler, which
-			// will in turn cause the popup window to close - Thanks Sasha!
-			if ( e.stopPropagation ) {
-				e.stopPropagation();
-			}
-			if ( e.preventDefault ) {
-				e.preventDefault();
-			}
-		};
-
-		btn.attr( {
-			"aria-haspopup": true,
-			"aria-owns": btn.attr( "href" )
-		})
-			.removeAttr( "href" )
-			.bind( "vclick", btnVClickHandler );
+			popup
+				.one( "opened", whenOpenedCb )
+				.popup( "open",
+					offset.left + $link.outerWidth() / 2,
+					offset.top + $link.outerHeight() / 2,
+					$link.jqmData( "transition" ) );
+		}
+		else {
+			whenOpenedCb();
+		}
 	};
 
 	$( document ).bind( "pagecreate create", function( e )  {
 		$.mobile.popup.prototype.enhanceWithin( e.target, true );
-
-		$( "a[href^='#']:jqmData(rel='popup')", e.target ).each( function() {
-			$.mobile.popup.bindPopupToButton( $( this ), $( $( this ).attr( "href" ), e.target ) );
-		});
 	});
 
 })( jQuery );
