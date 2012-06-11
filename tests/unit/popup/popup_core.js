@@ -40,8 +40,8 @@
 		detailedEventCascade: function( seq, result ) {
 			// grab one step from the sequence
 			var fn = seq.shift(),
-		    	events = seq.shift(),
-					self = this;
+			    events = seq.shift(),
+			    self = this;
 
 			// we're done
 			if ( fn === undefined ) {
@@ -57,7 +57,7 @@
 				    warnTimer = setTimeout( function() {
 				    	$.each( events, function( key, event ) {
 				    		if ( newResult[ key ] === undefined ) {
-				   				// clean up the unused handler
+				    			// clean up the unused handler
 				    			event.src.unbind( event.event );
 				    			newResult[ key ] = $.extend( {}, event, { timedOut: true } );
 				    		}
@@ -144,6 +144,38 @@
 				setTimeout( function() { start(); }, 300 );
 			}, 1000);
 		}, 1000);
+	});
+
+	asyncTest( "Link that launches popup is deactivated", function() {
+
+		expect( 4 );
+
+		$.testHelper.detailedEventCascade([
+			function() {
+				$( "a#open-test-popup" ).click();
+			},
+
+			{
+				opened: { src: $( "#test-popup" ), event: "opened.linkActiveTestStep1" }
+			},
+
+			function( result ) {
+				ok( !result.opened.timedOut, "Opening a popup did cause 'opened' event" );
+				ok( !$( "a#open-test-popup" ).closest( ".ui-btn" ).hasClass( "ui-btn-active" ), "Opening a popup removes active class from link that launched it" );
+				$( "#test-popup" ).popup( "close" );
+			},
+
+			{
+				closed: { src: $( "#test-popup" ), event: "closed.linkActiveTestStep2" }
+			},
+
+			function( result ) {
+				ok( !result.closed.timedOut, "Opening a popup did cause 'closed' event" );
+				$( "a#open-xyzzy-popup" ).click();
+				ok( !$( "a#open-xyzzy-popup" ).closest( ".ui-btn" ).hasClass( "ui-btn-active" ), "Opening a non-existing popup removes active class from link that attempted to launch it" );
+				setTimeout( function() { start(); }, 300 );
+			},
+		]);
 	});
 
 	asyncTest( "Popup interacts correctly with hashchange", function() {
