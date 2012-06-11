@@ -57,7 +57,7 @@ Note that if you have the appropriate version of [grunt](https://github.com/cowb
 
 If you want to use the `docs` and `zip` targets you will need bash and they can be run with the following
 
-   grunt legacy:docs # or `grunt legacy:zip`
+   grunt docs # or `grunt zip`
 
 Alternatively if you have `make` installed on your system
 
