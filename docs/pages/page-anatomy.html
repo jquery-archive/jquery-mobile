@@ -30,25 +30,25 @@
 
 			<h2>Mobile page structure</h2> 
 
-			<p>A jQuery Mobile site must start with an HTML5 'doctype' to take full advantage of all of the framework's features. (Older devices with browsers that don't understand HTML5 will safely ignore the 'doctype' and various custom attributes.) </p>
-			<p>In the 'head', references to jQuery, jQuery Mobile and the mobile theme CSS are all required to start things off. jQuery Mobile 1.1 works with both 1.6.4 and 1.7.1 versions of jQuery core. We recommend linking to the files hosted on the jQuery CDN for best performance: </p>
+			<p>A jQuery Mobile site must start with an HTML5 "doctype" to take full advantage of all of the framework's features. (Older devices with browsers that don't understand HTML5 will safely ignore the 'doctype' and various custom attributes.) </p>
+			<p>In the "head", references to jQuery, jQuery Mobile and the mobile theme CSS are all required to start things off. jQuery Mobile 1.1 works with both 1.6.4 and 1.7.1 versions of jQuery core. We recommend linking to the files hosted on the jQuery CDN for best performance: </p>
 
 <pre><code>
 <strong>&lt;!DOCTYPE html&gt; </strong>
 &lt;html&gt; 
 	&lt;head&gt; 
-	&lt;title&gt;Page Title&lt;/title&gt; 
+		&lt;title&gt;Page Title&lt;/title&gt; 
 	
-	&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt; 
+		&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt; 
 
-	&lt;link rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css&quot; /&gt;
-	&lt;script src=&quot;http://code.jquery.com/jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
-	&lt;script src=&quot;http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js&quot;&gt;&lt;/script&gt;
-&lt;/head&gt; 
+		&lt;link rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css&quot; /&gt;
+		&lt;script src=&quot;http://code.jquery.com/jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+		&lt;script src=&quot;http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js&quot;&gt;&lt;/script&gt;
+	&lt;/head&gt; 
 
-&lt;body&gt; 
-...content goes here...
-&lt;/body&gt;
+	&lt;body&gt; 
+		...content goes here...
+	&lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
 			
@@ -89,32 +89,32 @@
 &lt;!DOCTYPE html&gt; 
 &lt;html&gt; 
 	&lt;head&gt; 
-	&lt;title&gt;Page Title&lt;/title&gt; 
+		&lt;title&gt;Page Title&lt;/title&gt; 
 	
-	&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt; 
+		&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt; 
 
-	&lt;link rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css&quot; /&gt;
-	&lt;script src=&quot;http://code.jquery.com/jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
-	&lt;script src=&quot;http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js&quot;&gt;&lt;/script&gt;
-&lt;/head&gt; 
-&lt;body&gt; 
+		&lt;link rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css&quot; /&gt;
+		&lt;script src=&quot;http://code.jquery.com/jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;
+		&lt;script src=&quot;http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js&quot;&gt;&lt;/script&gt;
+	&lt;/head&gt; 
+	&lt;body&gt; 
 
-&lt;div data-role=&quot;page&quot;&gt;
+	&lt;div data-role=&quot;page&quot;&gt;
 
-	&lt;div data-role=&quot;header&quot;&gt;
-		&lt;h1&gt;Page Title&lt;/h1&gt;
-	&lt;/div&gt;&lt;!-- /header --&gt;
+		&lt;div data-role=&quot;header&quot;&gt;
+			&lt;h1&gt;Page Title&lt;/h1&gt;
+		&lt;/div&gt;&lt;!-- /header --&gt;
 
-	&lt;div data-role=&quot;content&quot;&gt;	
-		&lt;p&gt;Page content goes here.&lt;/p&gt;		
-	&lt;/div&gt;&lt;!-- /content --&gt;
+		&lt;div data-role=&quot;content&quot;&gt;	
+			&lt;p&gt;Page content goes here.&lt;/p&gt;		
+		&lt;/div&gt;&lt;!-- /content --&gt;
 
-	&lt;div data-role=&quot;footer&quot;&gt;
-		&lt;h4&gt;Page Footer&lt;/h4&gt;
-	&lt;/div&gt;&lt;!-- /footer --&gt;
-&lt;/div&gt;&lt;!-- /page --&gt;
+		&lt;div data-role=&quot;footer&quot;&gt;
+			&lt;h4&gt;Page Footer&lt;/h4&gt;
+		&lt;/div&gt;&lt;!-- /footer --&gt;
+	&lt;/div&gt;&lt;!-- /page --&gt;
 
-&lt;/body&gt;
+	&lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
 
@@ -123,47 +123,47 @@
 
 		<h2>Multi-page template structure</h2> 
 		
-			<p>A single HTML document can contain multiple 'pages' that are loaded together by stacking multiple divs with a <code> data-role</code> of <code>"page"</code>. Each 'page' block needs a unique ID (<code>id="foo"</code>) that will be used to link internally between 'pages' (<code>href="#foo"</code>). When a link is clicked, the framework will look for an internal 'page' with the ID and transition it into view.</p> 
+			<p>A single HTML document can contain multiple "pages" that are loaded together by stacking multiple divs with a <code>data-role</code> of <code>"page"</code>. Each "page" block needs a unique id (<code>id="foo"</code>) that will be used to link internally between "pages" (<code>href="#foo"</code>). When a link is clicked, the framework will look for an internal "page" with the id and transition it into view.</p> 
 						
-			<p>Here is an example of a 2 "page" site built with two jQuery Mobile divs navigated by linking to an ID placed on each page wrapper. Note that the IDs on the page wrappers are only needed to support the internal page linking, and are optional if each page is a separate HTML document. Here is what two pages look inside the <code>body</code> element.</p> 
+			<p>Here is an example of a two "page" site built with two jQuery Mobile divs navigated by linking to an id placed on each page wrapper. Note that the id's on the page wrappers are only needed to support the internal page linking, and are optional if each page is a separate HTML document. Here is what two pages look inside the <code>body</code> element.</p>  
 
 <pre><code>
 &lt;body&gt; 
 
-&lt;!-- Start of first page --&gt;
-&lt;div data-role=&quot;page&quot; id=&quot;foo&quot;&gt;
+	&lt;!-- Start of first page --&gt;
+	&lt;div data-role=&quot;page&quot; id=&quot;foo&quot;&gt;
 
-	&lt;div data-role=&quot;header&quot;&gt;
-		&lt;h1&gt;Foo&lt;/h1&gt;
-	&lt;/div&gt;&lt;!-- /header --&gt;
+		&lt;div data-role=&quot;header&quot;&gt;
+			&lt;h1&gt;Foo&lt;/h1&gt;
+		&lt;/div&gt;&lt;!-- /header --&gt;
 
-	&lt;div data-role=&quot;content&quot;&gt;	
-		&lt;p&gt;I&#x27;m first in the source order so I&#x27;m shown as the page.&lt;/p&gt;		
-		&lt;p&gt;View internal page called &lt;a href=&quot;#bar&quot;&gt;bar&lt;/a&gt;&lt;/p&gt;	
-	&lt;/div&gt;&lt;!-- /content --&gt;
+		&lt;div data-role=&quot;content&quot;&gt;	
+			&lt;p&gt;I&#x27;m first in the source order so I&#x27;m shown as the page.&lt;/p&gt;		
+			&lt;p&gt;View internal page called &lt;a href=&quot;#bar&quot;&gt;bar&lt;/a&gt;&lt;/p&gt;	
+		&lt;/div&gt;&lt;!-- /content --&gt;
 
-	&lt;div data-role=&quot;footer&quot;&gt;
-		&lt;h4&gt;Page Footer&lt;/h4&gt;
-	&lt;/div&gt;&lt;!-- /footer --&gt;
-&lt;/div&gt;&lt;!-- /page --&gt;
+		&lt;div data-role=&quot;footer&quot;&gt;
+			&lt;h4&gt;Page Footer&lt;/h4&gt;
+		&lt;/div&gt;&lt;!-- /footer --&gt;
+	&lt;/div&gt;&lt;!-- /page --&gt;
 
 
-&lt;!-- Start of second page --&gt;
-&lt;div data-role=&quot;page&quot; id=&quot;bar&quot;&gt;
+	&lt;!-- Start of second page --&gt;
+	&lt;div data-role=&quot;page&quot; id=&quot;bar&quot;&gt;
 
-	&lt;div data-role=&quot;header&quot;&gt;
-		&lt;h1&gt;Bar&lt;/h1&gt;
-	&lt;/div&gt;&lt;!-- /header --&gt;
+		&lt;div data-role=&quot;header&quot;&gt;
+			&lt;h1&gt;Bar&lt;/h1&gt;
+		&lt;/div&gt;&lt;!-- /header --&gt;
 
-	&lt;div data-role=&quot;content&quot;&gt;	
-		&lt;p&gt;I&#x27;m the second in the source order so I&#x27;m hidden when the page loads. I&#x27;m just shown if a link that references my ID is beeing clicked.&lt;/p&gt;		
-		&lt;p&gt;&lt;a href=&quot;#foo&quot;&gt;Back to foo&lt;/a&gt;&lt;/p&gt;	
-	&lt;/div&gt;&lt;!-- /content --&gt;
+		&lt;div data-role=&quot;content&quot;&gt;	
+			&lt;p&gt;I&#x27;m the second in the source order so I&#x27;m hidden when the page loads. I&#x27;m just shown if a link that references my id is beeing clicked.&lt;/p&gt;		
+			&lt;p&gt;&lt;a href=&quot;#foo&quot;&gt;Back to foo&lt;/a&gt;&lt;/p&gt;	
+		&lt;/div&gt;&lt;!-- /content --&gt;
 
-	&lt;div data-role=&quot;footer&quot;&gt;
-		&lt;h4&gt;Page Footer&lt;/h4&gt;
-	&lt;/div&gt;&lt;!-- /footer --&gt;
-&lt;/div&gt;&lt;!-- /page --&gt;
+		&lt;div data-role=&quot;footer&quot;&gt;
+			&lt;h4&gt;Page Footer&lt;/h4&gt;
+		&lt;/div&gt;&lt;!-- /footer --&gt;
+	&lt;/div&gt;&lt;!-- /page --&gt;
 &lt;/body&gt;
 </code></pre>	
 
@@ -171,16 +171,26 @@
 
 		<p> </p>
 		
-		<p>PLEASE NOTE: Since we are using the hash to track navigation history for all the Ajax 'pages', it's not currently possible to deep link to an anchor (<code>index.html#foo</code>) on a page in jQuery Mobile, because the framework will look for a 'page' with an <code>ID</code> of <code>#foo</code> instead of the native behavior of scrolling to the content with that <code>ID</code>.</p>
+		<p>PLEASE NOTE: Since we are using the hash to track navigation history for all the Ajax "pages", it's not currently possible to deep link to an anchor (<code>index.html#foo</code>) on a page in jQuery Mobile, because the framework will look for a "page" with an <code>id</code> of <code>#foo</code> instead of the native behavior of scrolling to the content with that <code>id</code>.</p>
+		
+		<p>The <code>id</code> attribute of all your elements must be not only unique on a given page, but also unique across the pages in a site. This is because jQuery Mobile's single-page navigation model allows many different "pages" to be present in the DOM at the same time. This also applies when using a multi-page template, since all "pages" on the template are loaded at once.</p>
 		
 		
 <h2>Conventions, not requirements</h2>
 
-<p>Although the page structure outlined above is a recommended approach for a standard web app built with jQuery Mobile, the framework is very flexible with document structure. The page, header, content, and footer data-role elements are optional and are mostly helpful for providing some basic formatting and structure. The page wrapper that used to be required for auto-initialization to work is now optional for single page documents, so there isn't any required markup at all. For a web page with a custom layout, all of these structural elements can be omitted and the Ajax navigation and all widgets will work just like they do in the boilerplate structure. Behind the scenes, the framework will inject the page wrapper if it's not included in the markup because it’s needed for managing pages, but the starting markup can now be extremely simple. </p>
+<p>Although the page structure outlined above is a recommended approach for a standard web app built with jQuery Mobile, the framework is very flexible with document structure. 
+The page, header, content, and footer data-role elements are optional and are mostly helpful for providing some basic formatting and structure. 
+The page wrapper that used to be required for auto-initialization to work is now optional for single page documents, so there isn't any required markup at all. 
+For a web page with a custom layout, all of these structural elements can be omitted and the Ajax navigation and all widgets will work just like they do in the boilerplate structure. 
+Behind the scenes, the framework will inject the page wrapper if it's not included in the markup because it's needed for managing pages, but the starting markup can now be extremely simple. </p>
 
-<p>Note that in a multi-page setup, you are required to have page wrappers in your markup in order to group the content into multiple pages.</p>
+<p><strong>Note:</strong> In a multi-page setup, you are required to have page wrappers in your markup in order to group the content into multiple pages.</p>
 
-		
+<p><strong>Also Note:</strong> If your body contains no <code>data-role="page"</code> divs, jQuery Mobile wraps the entire contents of the body within a page div as explained above. 
+jQuery Mobile is using jQuery's <code>wrapAll()</code> method to do this which looks for any script tags inside the content being wrapped, and loads each script source via XHR. 
+If scripts are present in the body, the browser ends up loading them twice. 
+We therefore strongly recommend that jQuery Mobile documents with scripts in their body also contain a <code>div</code> with <code>data-role="page"</code>.
+</p>
 
 
 				</div><!--/content-primary -->		
@@ -200,7 +210,9 @@
 								<li><a href="page-titles.html">Page titles</a></li>
 								<li><a href="page-links.html">Linking pages</a></li>
 								<li><a href="page-transitions.html">Page transitions</a></li>
+								<li><a href="loader.html">Page loading widget</a></li>
 								<li><a href="page-dialogs.html">Dialogs</a></li>
+								<li><a href="popup/index.html">Popups</a></li>
 								<li><a href="page-cache.html">Prefetching &amp; caching pages</a></li>
 								<li><a href="page-navmodel.html">Ajax, hashes &amp; history</a></li>
 								<li><a href="page-dynamic.html">Dynamically injecting pages</a></li>

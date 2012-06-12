@@ -10,7 +10,6 @@
 	<script src="../../js/jquery.js"></script>
 	<script src="../../docs/_assets/js/jqm-docs.js"></script>
 	<script src="../../js/"></script>
-
 </head> 
 <body> 
 
@@ -25,7 +24,9 @@
 	<div data-role="content" class="ui-body">
 		<div class="content-primary">	
 
-		<p>All the standard button swatches can be applied to lists. The framework assigns a default list theme swatch of &quot;c&quot; (silver in the default theme) and swatch &quot;b&quot; (blue in default theme) for dividers. Below is a default themed list.</p>
+		<p>All the standard button swatches can be applied to lists. A list inherits its theme swatch from its parent page/content container. So the theme swatch defaults to "c" (silver in the default theme), if nothing else is set to the surrounding page/content containers. List dividers are styled with bar swatch "b" by default (blue in the default theme). The default button swatch for count bubbles is "c" (silver in the default theme).</p>
+		
+		<p>Below is a list which inherits the default "c" content swatch and uses the default swatches for the list divider and the count bubbles.</p>
 		
 <code>
 &lt;ul data-role=&quot;listview&quot; data-inset=&quot;true&quot;&gt;
@@ -41,10 +42,10 @@
 		<p>The list item color scheme can be changed to any button color theme swatch by adding the <code> data-theme</code> attribute to the list, and setting the letter theme swatch. Here is the same list above with the &quot;a&quot; swatch applied. </p>
 		
 <code>
-&lt;ul data-role=&quot;listview&quot; data-inset=&quot;true&quot; data-theme=&quot;d&quot;&gt;
+&lt;ul data-role=&quot;listview&quot; data-inset=&quot;true&quot; data-theme=&quot;a&quot;&gt;
 </code>
 		
-		<ul data-role="listview" data-inset="true" data-theme="d">
+		<ul data-role="listview" data-inset="true" data-theme="a">
 			<li data-role="list-divider">Divider</li>
 			<li><a href="index.html">Inbox <span class="ui-li-count">12</span></a></li>
 			<li><a href="index.html">Outbox <span class="ui-li-count">0</span></a></li>
@@ -63,7 +64,7 @@
 		
 		<h2>Theming dividers</h2>
 		
-		<p>The theme for <strong>list dividers</strong> can be set by adding the <code>data-divider-theme</code> to the list and specifying a swatch letter. Here is an example of the same list above with swatch &quot;d&quot; set on the dividers.</p>
+		<p>The theme for <strong>list dividers</strong> can be set by adding the <code>data-divider-theme</code> to the list and specifying a swatch letter. Here is an example of the same list as above with swatch &quot;e&quot; set on the dividers.</p>
 		
 <code>
 &lt;ul data-role=&quot;listview&quot; data-inset=&quot;true&quot; data-theme=&quot;d&quot; data-divider-theme=&quot;e&quot;&gt;
@@ -78,7 +79,7 @@
 		
 		<h2>Theming count bubbles</h2>
 		
-		<p>The theme for <strong>count bubbles</strong> can be set by adding the <code>data-count-theme</code> to the list and specifying a swatch letter. Here is an example with swatch &quot;e&quot; set on the dividers.</p>
+		<p>The theme for <strong>count bubbles</strong> can be set by adding the <code>data-count-theme</code> to the list and specifying a swatch letter. Here is an example with swatch &quot;b&quot; set on the count bubbles.</p>
 		
 <code>
 &lt;ul data-role=&quot;listview&quot; data-inset=&quot;true&quot; data-theme=&quot;d&quot; data-divider-theme=&quot;e&quot; data-count-theme=&quot;b&quot;&gt;
@@ -93,25 +94,81 @@
 		
 		<h2>Theming icons</h2>
 		
-		<p>The default icon for each list item is <code>arrow-r</code>. To override this, set the <code> data-icon</code> attribute on the desired list item to the <a href="../buttons/buttons-icons.html">name of a standard icon</a>.  To prevent icons from appearing altogether, set the <code> data-icon</code> attribute to &quot;false&quot;.</p>
+		<p>The default icon for each list item containing a link is <code>arrow-r</code>. To override this, set the <code>data-icon</code> attribute on the desired list item to the <a href="../buttons/buttons-icons.html">name of a standard icon</a>. To prevent icons from appearing altogether, set the <code> data-icon</code> attribute to &quot;false&quot;. With a bit of custom styles it's also possible to use third party icons.</p>
+		<p>Markup for the listview:</p>
 <pre>
 <code>
-&lt;li data-icon=&quot;info&quot;&gt;&lt;a href="#"&gt;Notices&lt;/a&gt;&lt;/li&gt;
-&lt;li data-icon=&quot;alert&quot;&gt;&lt;a href="#"&gt;Alerts&lt;/a&gt;&lt;/li&gt;
-&lt;li data-icon=&quot;false&quot;&gt;&lt;a href="#"&gt;No icon&lt;/a&gt;&lt;/li&gt;
+&lt;ul data-role=&quot;listview&quot; data-inset=&quot;true&quot; data-theme=&quot;b&quot;&gt;
+	&lt;li data-role=&quot;list-divider&quot;&gt;Divider&lt;/li&gt;
+	&lt;li data-icon=&quot;home&quot;&gt;&lt;a href=&quot;#&quot;&gt;data-icon=&quot;home&quot;&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon=&quot;delete&quot;&gt;&lt;a href=&quot;#&quot;&gt;data-icon=&quot;delete&quot;&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon=&quot;plus&quot;&gt;&lt;a href=&quot;#&quot;&gt;data-icon=&quot;plus&quot;&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon=&quot;arrow-u&quot;&gt;&lt;a href=&quot;#&quot;&gt;data-icon=&quot;arrow-u&quot;&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon=&quot;arrow-d&quot;&gt;&lt;a href=&quot;#&quot;&gt;data-icon=&quot;arrow-d&quot;&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon=&quot;check&quot;&gt;&lt;a href=&quot;#&quot;&gt;data-icon=&quot;check&quot;&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon=&quot;gear&quot;&gt;&lt;a href=&quot;#&quot;&gt;data-icon=&quot;gear&quot;&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon=&quot;grid&quot;&gt;&lt;a href=&quot;#&quot;&gt;data-icon=&quot;grid&quot;&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon=&quot;star&quot;&gt;&lt;a href=&quot;#&quot;&gt;data-icon=&quot;star&quot;&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon=&quot;custom&quot; id=&quot;coffeeicon&quot;&gt;&lt;a href=&quot;#&quot;&gt;custom-icon&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon=&quot;arrow-r&quot;&gt;&lt;a href=&quot;#&quot;&gt;data-icon=&quot;arrow-r&quot;&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon=&quot;arrow-l&quot;&gt;&lt;a href=&quot;#&quot;&gt;data-icon=&quot;arrow-l&quot;&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon=&quot;minus&quot;&gt;&lt;a href=&quot;#&quot;&gt;data-icon=&quot;minus&quot;&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon=&quot;refresh&quot;&gt;&lt;a href=&quot;#&quot;&gt;data-icon=&quot;refresh&quot;&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon=&quot;forward&quot;&gt;&lt;a href=&quot;#&quot;&gt;data-icon=&quot;forward&quot;&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon=&quot;back&quot;&gt;&lt;a href=&quot;#&quot;&gt;data-icon=&quot;back&quot;&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon=&quot;alert&quot;&gt;&lt;a href=&quot;#&quot;&gt;data-icon=&quot;alert&quot;&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon=&quot;info&quot;&gt;&lt;a href=&quot;#&quot;&gt;data-icon=&quot;info&quot;&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon=&quot;search&quot;&gt;&lt;a href=&quot;#&quot;&gt;data-icon=&quot;search&quot;&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon=&quot;false&quot;&gt;&lt;a href=&quot;#&quot;&gt;data-icon=&quot;false&quot;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </code>
 </pre>
-		<ul data-role="listview" data-inset="true">
+		<p>Styles for the custom icon:</p>
+<pre>
+<code>
+&lt;style&gt;
+	#coffeeicon .ui-icon-custom {
+	background-image: url(&quot;../toolbars/glyphish-icons/34-coffee.png&quot;);
+	background-position: 2px 2px;
+	background-size: 90%; }
+&lt;/style&gt;
+</code>
+</pre>
+		<style>
+			#coffeeicon .ui-icon-custom {
+			background-image: url("../toolbars/glyphish-icons/34-coffee.png");
+			background-position: 2px 1px;
+			background-size: 90%; }
+		</style>
+
+		<ul data-role="listview" data-inset="true" data-theme="b">
 			<li data-role="list-divider">Divider</li>
-			<li data-icon="info"><a href="#">Notices</a></li>
-			<li data-icon="alert"><a href="#">Alerts</a></li>
-			<li data-icon="false"><a href="#">No icon</a></li>
+			<li data-icon="home"><a href="#">data-icon="home"</a></li>
+			<li data-icon="delete"><a href="#">data-icon="delete"</a></li>
+			<li data-icon="plus"><a href="#">data-icon="plus"</a></li>
+			<li data-icon="arrow-u"><a href="#">data-icon="arrow-u"</a></li>
+			<li data-icon="arrow-d"><a href="#">data-icon="arrow-d"</a></li>
+			<li data-icon="check"><a href="#">data-icon="check"</a></li>
+			<li data-icon="gear"><a href="#">data-icon="gear"</a></li>
+			<li data-icon="grid"><a href="#">data-icon="grid"</a></li>
+			<li data-icon="star"><a href="#">data-icon="star"</a></li>
+			<li data-icon="custom" id="coffeeicon"><a href="#">custom-icon</a></li>
+			<li data-icon="arrow-r"><a href="#">data-icon="arrow-r"</a></li>
+			<li data-icon="arrow-l"><a href="#">data-icon="arrow-l"</a></li>
+			<li data-icon="minus"><a href="#">data-icon="minus"</a></li>
+			<li data-icon="refresh"><a href="#">data-icon="refresh"</a></li>
+			<li data-icon="forward"><a href="#">data-icon="forward"</a></li>
+			<li data-icon="back"><a href="#">data-icon="back"</a></li>
+			<li data-icon="alert"><a href="#">data-icon="alert"</a></li>
+			<li data-icon="info"><a href="#">data-icon="info"</a></li>
+			<li data-icon="search"><a href="#">data-icon="search"</a></li>
+			<li data-icon="false"><a href="#">data-icon="false"</a></li>
 		</ul>
-	
+		<p>Custom icon by Joseph Wain / <a href="http://glyphish.com/">glyphish.com</a>. Licensed under the <a href="http://creativecommons.org/licenses/by/3.0/us/">Creative Commons Attribution 3.0 United States License</a>.</p>
 		
 		<h2>Theming split buttons</h2>
 		
-		<p>For split lists which a second button, the framework default to &quot;b&quot; for the theme swatch (blue in the default theme)  Here is a default split list:</p>
+		<p>For split lists with a second link button, the framework default to &quot;b&quot; for the theme swatch (blue in the default theme). Here is a default split list:</p>
 		
 		<ul data-role="listview" data-inset="true">
 			<li><a href="index.html">
@@ -230,6 +287,7 @@
 
 						<li><a href="lists-split.html">Split button list</a></li>	
 						<li><a href="lists-divider.html">List dividers</a></li>
+						<li><a href="lists-autodividers.html">Autodividers</a></li>
 						<li><a href="lists-count.html">Count bubble</a></li>
 						<li><a href="lists-thumbnails.html">Thumbnails</a></li>
 						<li><a href="lists-icons.html">Icons</a></li>

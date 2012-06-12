@@ -36,6 +36,28 @@
 			<p>The collapsible plugin has the following options:</p>
 
 		<dl>
+			<dt><code>collapsedIcon</code> <em>string</em></dt>
+			<dd>
+				<p class="default">default: "plus"</p>
+				<p>Sets the icon for the headers of the collapsible containers when in a collapsed state. To set the value for all instances of this widget, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
+<pre><code>$( document ).bind( "mobileinit", function(){
+    <strong>$.mobile.collapsibleset.prototype.options.collapsedIcon = "arrow-r";</strong>
+});
+</code></pre>
+				<p>This option is also exposed as a data attribute: <code>data-collapsed-icon=&quot;arrow-r&quot;</code>.</p>
+			</dd>
+
+			<dt><code>expandedIcon</code> <em>string</em></dt>
+			<dd>
+				<p class="default">default: "minus"</p>
+				<p>Sets the icon for the headers of the collapsible containers when in an expanded state. To set the value for all instances of this widget, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
+<pre><code>$( document ).bind( "mobileinit", function(){
+    <strong>$.mobile.collapsibleset.prototype.options.expandedIcon = "arrow-r";</strong>
+});
+</code></pre>
+				<p>This option is also exposed as a data attribute: <code>data-expanded-icon=&quot;arrow-r&quot;</code>.</p>
+			</dd>
+
 			<dt><code>iconpos</code> <em>string</em></dt>
 			<dd>
 				<p class="default">default: "left"</p>

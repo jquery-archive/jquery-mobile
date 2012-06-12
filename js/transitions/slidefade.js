@@ -3,16 +3,16 @@
 */
 
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Animation styles and fallback transition definition for non-3D supporting browsers
+//>>description: Animation styles and fallback transitions definition for non-3D supporting browsers
 //>>label: Slidefade Transition
 //>>group: Transitions
-//>>css: ../css/structure/jquery.mobile.transition.slidefade.css
+//>>css.structure: ../../css/structure/jquery.mobile.transitions.slidefade.css
 
-define( [ "jquery", "./jquery.mobile.transition" ], function( $ ) {
+define( [ "../jquery", "../jquery.mobile.transition" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
-// Set the slide transition's fallback to "fade"
+// Set the slide transitions's fallback to "fade"
 $.mobile.transitionFallbacks.slidefade = "fade";
 
 })( jQuery, this );

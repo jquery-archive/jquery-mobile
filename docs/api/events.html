@@ -42,18 +42,23 @@
 		<h2>Touch events</h2>
 		<dl>
 			<dt><code>tap</code></dt>
-			<dd>Triggers after a quick, complete touch event.</dd>
+			<dd><p>Triggers after a quick, complete touch event.</p>
+			</dd>
 
 			<dt><code>taphold</code></dt>
-			<dd>Triggers after a held complete touch event (close to one second).</dd>
+			<dd><p>Triggers after a held complete touch event.</p>
+			<ul>
+				<li><code>$.event.special.tap.tapholdThreshold</code> (default: 750ms) – This value dictates how long the user must hold their tap before the taphold event is fired on the target element.</li>
+			</ul>
+			</dd>
 
 			<dt><code>swipe</code></dt>
-			<dd><p>Triggers when a horizontal drag of 30px or more (and less than 20px vertically) occurs within 1 second duration but these can be configured:</p>
+			<dd><p>Triggers when a horizontal drag of 30px or more (and less than 75px vertically) occurs within 1 second duration but these can be configured:</p>
 			  <ul>
-			  	<li><code>scrollSupressionThreshold</code> (default: 10px) – More than this horizontal displacement, and we will suppress scrolling</li>
-			  	<li><code>durationThreshold</code> (default: 1000ms) – More time than this, and it isn’t a swipe</li>
-			  	<li><code>horizontalDistanceThreshold</code> (default: 30px) – Swipe horizontal displacement must be more than this.</li>
-			  	<li><code>verticalDistanceThreshold</code> (default: 75px) – Swipe vertical displacement must be less than this.</li>
+			  	<li><code>$.event.special.swipe.scrollSupressionThreshold</code> (default: 10px) – More than this horizontal displacement, and we will suppress scrolling.</li>
+			  	<li><code>$.event.special.swipe.durationThreshold</code> (default: 1000ms) – More time than this, and it isn’t a swipe.</li>
+			  	<li><code>$.event.special.swipe.horizontalDistanceThreshold</code> (default: 30px) – Swipe horizontal displacement must be more than this.</li>
+			  	<li><code>$.event.special.swipe.verticalDistanceThreshold</code> (default: 75px) – Swipe vertical displacement must be less than this.</li>
 			  	</ul>
 			</dd>
 
@@ -68,16 +73,19 @@
 			<p>We provide a set of "virtual" mouse events that attempt to abstract away mouse and touch events. This allows the developer to register listeners for the basic mouse events, such as mousedown, mousemove, mouseup, and click, and the plugin will take care of registering the correct listeners behind the scenes to invoke the listener at the fastest possible time for that device. In touch environments, the plugin retains the order of event firing that is seen in traditional mouse environments, so for example, vmouseup is always dispatched before vmousedown, and vmousedown before vclick, etc. The virtual mouse events also normalize how coordinate information is extracted from the event, so in touch based environments, coordinates are available from the pageX, pageY, screenX, screenY, clientX, and clientY properties, directly on the event object.</p>
 			<dl>
 				<dt><code>vmouseover</code></dt>
-				<dd>Normalized event for handling touch or  <code>mouseover</code> events</dd>
+				<dd>Normalized event for handling touch or <code>mouseover</code> events</dd>
+
+				<dt><code>vmouseout</code></dt>
+				<dd>Normalized event for handling touch or <code>mouseout</code> events</dd>
 
 				<dt><code>vmousedown</code></dt>
-				<dd>Normalized event for handling touchstart or  <code>mousedown</code> events</dd>
+				<dd>Normalized event for handling touchstart or <code>mousedown</code> events</dd>
 
 				<dt><code>vmousemove</code></dt>
-				<dd>Normalized event for handling touchmove or  <code>mousemove</code> events</dd>
+				<dd>Normalized event for handling touchmove or <code>mousemove</code> events</dd>
 
 				<dt><code>vmouseup</code></dt>
-				<dd>Normalized event for handling touchend or  <code>mouseup</code> events</dd>
+				<dd>Normalized event for handling touchend or <code>mouseup</code> events</dd>
 
 				<dt><code>vclick</code></dt>
 				<dd>Normalized event for handling touchend or mouse <code>click</code> events. On touch devices, this event is dispatched *AFTER* vmouseup. </dd>
@@ -97,10 +105,18 @@
 				<p>Applications can call <code>preventDefault()</code> on a <code>vclick</code> event to cancel an element's default click behavior. On mouse based devices, calling <code>preventDefault()</code> on a <code>vclick</code> event equates to calling <code>preventDefault()</code> on the real <code>click</code> event during the bubble event phase. On touch based devices, it's a bit more complicated since the actual <code>click</code> event is dispatched about 300ms after the <code>vclick</code> event is dispatched. For touch devices, calling <code>preventDefault()</code> on a <code>vclick</code> event triggers some code in the vmouse plugin that attempts to catch the next <code>click</code> event that gets dispatched by the browser, during the capture event phase, and calls <code>preventDefault()</code> and <code>stopPropagation()</code> on it. As mentioned in the warning above, it is sometimes difficult to match up a touch event with its corresponding mouse event because the targets can differ. For this reason, the vmouse plugin also falls back to attempting to identify a corresponding <code>click</code> event by coordinates. There are still cases where both target and coordinate identification fail, which results in the <code>click</code> event being dispatched and either triggering the default action of the element, or in the case where content has been shifted or replaced, triggering a click on a different element. If this happens on a regular basis for a given element/control, we suggest you use <code>click</code> for triggering your action.</p>
 			</div>
 
+			<dd><p>The virtual mouse events can also be configured:</p>
+			  <ul>
+			  	<li><code>$.vmouse.moveDistanceThreshold</code> (default: 10px) – More than this, then it is a scroll event. The vmousecancel event is called and the TouchMove event is cancelled.</li>
+			  	<li><code>$.vmouse.clickDistanceThreshold</code> (default: 10px) – If a vclick event was already captured and is in the block list, then vclicks less than this distance are ignored.</li>
+			  	<li><code>$.vmouse.resetTimerDuration</code> (default: 1500ms) – More time than this, then it is not a touch event. Scroll, TouchMove and TouchEnd events use this. The block list is cleared.</li>
+			  	</ul>
+			</dd>
+
 		<h2>Orientation change event</h2>
 		<dl>
 			<dt><code>orientationchange</code></dt>
-			<dd>Triggers when a device orientation changes (by turning it vertically or horizontally). When bound to this event, your callback function can leverage a second argument, which contains an <code>orientation</code> property equal to either "portrait" or "landscape". These values are also added as classes to the HTML element, allowing you to leverage them in your CSS selectors. Note that we currently bind to the resize event when <code>orientationchange</code> is not natively supported, or when <code>$.mobile.orientationChangeEnabled</code> is set to false.</dd>
+			<dd>Triggers when a device orientation changes (by turning it vertically or horizontally). When bound to this event, the callback function has one argument, the event object. The event object contains an <code>orientation</code> property equal to either "portrait" or "landscape". Note that we currently bind to the resize event when <code>orientationchange</code> is not natively supported, or when <code>$.mobile.orientationChangeEnabled</code> is set to false.</dd>
 			<div class="ui-body ui-body-e">
 				<h4>orientationchange timing</h4>
 
@@ -294,14 +310,14 @@ $( document ).bind( &quot;pageloadfailed&quot;, function( event, data ){
             	</li>
             	<li><code>errorThrown</code> (null, string, object)
             	  <ul>
-            	    <li>According to the jQuery Core <a href="http://api.jquery.com/jQuery.ajax/">documentation</a>, this property may be an exception object if one occured, or if an HTTP error occured this will be set to the textual portion of the HTTP status. This is what gets passed as the 3rd argument to the framework's $.ajax() error callback.</li>
+            	    <li>According to the jQuery Core <a href="http://api.jquery.com/jQuery.ajax/">documentation</a>, this property may be an exception object if one occurred, or if an HTTP error occurred this will be set to the textual portion of the HTTP status. This is what gets passed as the 3rd argument to the framework's $.ajax() error callback.</li>
           	    </ul>
             	</li>
            	  </ul>
 			</dd>
 		</dl>
 		<h2>Page change events</h2>
-		<p>Navigating between pages in the application is usually accomplished through a call to <code>$.mobile.changePage()</code>. This function is responsible for making sure that the page we are navigating to is loaded and inserted into the DOM, and then kicking off the transition animations between the current active page, and the page the caller wants to to make active. During this process, which is usually asynchronous, changePage() will fire off 2 events. The first is <code>pagebeforechange</code>. The second event depends on the success or failure of the change request. It will either be <code>pagechange</code> or <code>pagechangefailed</code>.</p>
+		<p>Navigating between pages in the application is usually accomplished through a call to <code>$.mobile.changePage()</code>. This function is responsible for making sure that the page we are navigating to is loaded and inserted into the DOM, and then kicking off the transition animations between the current active page, and the page the caller wants to make active. During this process, which is usually asynchronous, changePage() will fire off 2 events. The first is <code>pagebeforechange</code>. The second event depends on the success or failure of the change request. It will either be <code>pagechange</code> or <code>pagechangefailed</code>.</p>
 		<dl>
 			<dt><code>pagebeforechange</code></dt>
 			<dd>This event is triggered prior to any page loading or transition. Callbacks can prevent execution of the changePage() function by calling preventDefault on the event object passed into the callback. The callback also recieves a data object as its 2nd arg. The data object has the following properties:
@@ -416,7 +432,7 @@ $( 'div' ).live( 'pagehide',function(event, ui){
 
 		<p>Internally, jQuery Mobile auto-initializes plugins based on the markup conventions found in a given "page". For example, an <code>input</code> element with a <code>type</code> of <code>range</code> will automatically generate a custom slider control.</p>
 
-		<p>This auto-initialization is controlled by the "page" plugin, which dispatches events before and after it executes, allowing you to manipulate a page either pre-or-post initialization, or even provide your own intialization behavior and prevent the auto-initializations from occuring. Note that these events will only fire once per "page", as opposed to the show/hide events, which fire every time a page is shown and hidden.</p>
+		<p>This auto-initialization is controlled by the "page" plugin, which dispatches events before and after it executes, allowing you to manipulate a page either pre-or-post initialization, or even provide your own initialization behavior and prevent the auto-initializations from occurring. Note that these events will only fire once per "page", as opposed to the show/hide events, which fire every time a page is shown and hidden.</p>
 
 		<dl>
 			<dt><code>pagebeforecreate</code></dt>
@@ -479,7 +495,14 @@ $( '#foo' ).hide().trigger( 'updatelayout' );
         </dl>
 
 		<h2>Animation Events</h2>
-		<p>jQuery Mobile exposes the <code>animationComplete</code> plugin, which you can utilize after adding or removing a class that applies a CSS transition.</p>
+		<p>jQuery Mobile exposes the <code>animationComplete</code> plugin, which you can utilize after adding or removing a class that applies a CSS transition. It can be used with page transition events. For example:</p>
+<pre><code>
+$(document).bind("pagehide", function(event, ui) {
+  $(ui.nextPage).animationComplete(function() {
+    alert('Animation completed');
+  });
+});
+</pre></code>
 
     </div><!--/content-secondary -->
 

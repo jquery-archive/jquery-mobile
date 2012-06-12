@@ -57,6 +57,17 @@
 </code></pre>
 			</dd>
 
+			<dt><code>collapsedIcon</code> <em>string</em></dt>
+			<dd>
+				<p class="default">default: "plus"</p>
+				<p>Sets the icon for the header of the collapsible container when in a collapsed state. To set the value for all instances of this widget, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
+<pre><code>$( document ).bind( "mobileinit", function(){
+    <strong>$.mobile.collapsible.prototype.options.collapsedIcon = "arrow-r";</strong>
+});
+</code></pre>
+				<p>This option is also exposed as a data attribute: <code>data-collapsed-icon=&quot;arrow-r&quot;</code>.</p>
+			</dd>
+
 			<dt><code>contentTheme</code> <em>string</em></dt>
 			<dd>
 				<p class="default">default: null, inherited from parent</p>
@@ -76,6 +87,17 @@
     <strong>$.mobile.collapsible.prototype.options.expandCueText = " expand with a click";</strong>
 });
 </code></pre>
+			</dd>
+
+			<dt><code>expandedIcon</code> <em>string</em></dt>
+			<dd>
+				<p class="default">default: "minus"</p>
+				<p>Sets the icon for the header of the collapsible container when in an expanded state. To set the value for all instances of this widget, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
+<pre><code>$( document ).bind( "mobileinit", function(){
+    <strong>$.mobile.collapsible.prototype.options.expandedIcon = "arrow-r";</strong>
+});
+</code></pre>
+				<p>This option is also exposed as a data attribute: <code>data-expanded-icon=&quot;arrow-r&quot;</code>.</p>
 			</dd>
 
 			<dt><code>heading</code> <em>string</em></dt>

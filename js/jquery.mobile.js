@@ -3,15 +3,10 @@
 
 define([
 	'require',
+	'./jquery.mobile.loader',
 	'./jquery.mobile.navigation',
 	'./jquery.mobile.navigation.pushstate',
-	'./jquery.mobile.transition.pop',
-	'./jquery.mobile.transition.slide',
-	'./jquery.mobile.transition.slidedown',
-	'./jquery.mobile.transition.slideup',
-	'./jquery.mobile.transition.flip',
-	'./jquery.mobile.transition.flow',
-	'./jquery.mobile.transition.turn',
+	'./jquery.mobile.transitions',
 	'./jquery.mobile.degradeInputs',
 	'./jquery.mobile.dialog',
 	'./jquery.mobile.page.sections',
@@ -22,6 +17,7 @@ define([
 	'./jquery.mobile.navbar',
 	'./jquery.mobile.listview',
 	'./jquery.mobile.listview.filter',
+	'./jquery.mobile.listview.autodividers',
 	'./jquery.mobile.nojs',
 	'./jquery.mobile.forms.checkboxradio',
 	'./jquery.mobile.forms.button',
@@ -33,6 +29,7 @@ define([
 	'./jquery.mobile.controlGroup',
 	'./jquery.mobile.links',
 	'./jquery.mobile.fixedToolbar',
+	'./jquery.mobile.popup',
 	'./jquery.mobile.zoom',
 	'./jquery.mobile.zoom.iosorientationfix'
 ], function( require ) {

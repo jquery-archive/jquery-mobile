@@ -55,6 +55,22 @@
 			}
 		},
 
+		pushStateRedirect: function( filename ) {
+			var search, pairs = [];
+
+			search = location.search.replace( "?", "");
+
+			if( search ){
+				pairs = search.split( "&" );
+			}
+
+			pairs.push( "push-state=false" );
+
+			location.href = location.href.toString()
+				 .replace(/\/[^\/]*\?|\/[^\/]*$/, "/" + filename )
+				 .replace( search, "") + "?" + pairs.join( "&" );
+		},
+
 		reloads: {},
 
 		reloadModule: function(libName){

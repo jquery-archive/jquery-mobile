@@ -86,6 +86,14 @@
 		</select>
 	</div>
 
+	<div data-nstest-role="popup" id="popup-containing-select">
+		<select name="select-choice-inside-popup" id="select-choice-inside-popup" data-nstest-native-menu="false">
+			<option value="abracadabra">Abracadabra</option>
+			<option value="simsalabim">Simsalabim</option>
+			<option value="csiribu-csiriba">Csiribu-Csiriba</option>
+		</select>
+	</div>
+
 	<div  data-nstest-role="fieldcontain" id="select-choice-many-container-1">
 		<label for="select-choice-many-1" class="select">Your state:</label>
 		<select name="select-choice-many-1" id="select-choice-many-1" data-nstest-native-menu="false">
@@ -383,10 +391,6 @@
 	</div>
 
 	<select name="select-disabled-enhancetest" id="select-disabled-enhancetest" disabled="disabled" data-nstest-native-menu="false">
-		<option value="standard">Standard: 7 day</option>
-		<option value="rush">Rush: 3 days</option>
-		<option value="express">Express: next day</option>
-		<option value="overnight">Overnight</option>
 		<option value="overnight">disabled enhance test</option>
 	</select>
 
@@ -418,7 +422,6 @@
 		<option value="overnight">Overnight</option>
 	</select>
 </div>
-
 
 <div id="enhancetest">
 	<select name="select-enhancetest" id="select-enhancetest">

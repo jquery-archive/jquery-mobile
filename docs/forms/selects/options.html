@@ -50,14 +50,17 @@
 			<dt><code>icon</code> <em>string</em></dt>
 			<dd>
 				<p class="default">default: "arrow-down"</p>
-				<p>Applies an icon from the <a href="../../buttons/buttons-icons.html">icon set</a> to the custom button. This option is also exposed as a data attribute: <code>data-icon=&quot;star&quot;</code></p>
+				<p>Replaces the default icon "arrow-down" with an icon from the <a href="../../buttons/buttons-icons.html">icon set</a>. This option is also exposed as a data attribute: <code>data-icon=&quot;star&quot;</code>. Setting this attribute to "false" suppresses the icon.</p>
 				<pre><code>$('select').selectmenu(<strong>{ icon: "star" }</strong>);</code></pre>
+				
+				<p>To suppress the icon, a boolean expression must be used:</p>
+				<pre><code>$('select').selectmenu(<strong>{ icon: false }</strong>);</code></pre>
 			</dd>
 			
 			<dt><code>iconpos</code> <em>string</em></dt>
 			<dd>
 				<p class="default">default: "right"</p>
-				<p>Position of the icon in the select button. Possible values: left, right, none, notext. The notext value will display the select as an icon-only button with no text feedback. This option is also exposed as a data attribute: <code>data-iconpos=&quot;left&quot;</code></p>
+				<p>Position of the icon in the select button. Possible values: left, right, top, bottom, notext. The notext value will display the select as an icon-only button with no text feedback. This option is also exposed as a data attribute: <code>data-iconpos=&quot;left&quot;</code></p>
 				<pre><code>$('select').selectmenu(<strong>{ iconpos: "left" }</strong>);</code></pre>
 			</dd>
 			

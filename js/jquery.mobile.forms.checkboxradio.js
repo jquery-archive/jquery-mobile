@@ -6,7 +6,8 @@
 //>>description: Consistent styling for checkboxes/radio buttons.
 //>>label: Checkboxes & Radio Buttons
 //>>group: Forms
-//>>css: ../css/themes/default/jquery.mobile.theme.css,../css/structure/jquery.mobile.forms.checkboxradio.css
+//>>css.structure: ../css/structure/jquery.mobile.forms.checkboxradio.css
+//>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.widget", "./jquery.mobile.buttonMarkup" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
@@ -21,7 +22,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 		var self = this,
 			input = this.element,
 			inheritAttr = function( input, dataAttr ) {
-				return input.jqmData( dataAttr ) || input.closest( "form,fieldset" ).jqmData( dataAttr )
+				return input.jqmData( dataAttr ) || input.closest( "form,fieldset" ).jqmData( dataAttr );
 			},
 			// NOTE: Windows Phone could not find the label through a selector
 			// filter works though.
@@ -152,7 +153,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			return this.element;
 		}
 
-		return this.element.closest( "form,fieldset,:jqmData(role='page')" )
+		return this.element.closest( "form,fieldset,:jqmData(role='page'),:jqmData(role='dialog')" )
 			.find( "input[name='"+ this.element[0].name +"'][type='"+ this.inputtype +"']" );
 	},
 

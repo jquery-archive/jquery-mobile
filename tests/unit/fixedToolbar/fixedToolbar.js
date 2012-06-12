@@ -322,7 +322,7 @@
 	});
 
 
-	var asyncTestFooterAndHeader = function( pageSelector, areHidden ) {
+	var asyncTestFooterAndHeader = function( pageSelector, visible ) {
 		$.testHelper.pageSequence([
 			function() {
 				$.mobile.changePage( pageSelector );
@@ -331,13 +331,13 @@
 			function() {
 				var $footer = $.mobile.activePage.find( ".ui-footer" ),
 					$header = $.mobile.activePage.find( ".ui-header" ),
-					hidden = areHidden ? "hidden" : "visible";
+					hiddenStr = visible ? "hidden" : "visible";
 
 				equal( $footer.length, 1, "there should be one footer" );
 				equal( $header.length, 1, "there should be one header" );
 
-				equal( $footer.hasClass( "ui-fixed-hidden" ), areHidden, "the footer should be " + hiddenStr );
-				equal( $header.hasClass( "ui-fixed-hidden" ), areHidden, "the header should be " + hiddenStr );
+				equal( !$footer.hasClass( "ui-fixed-hidden" ), visible, "the footer should be " + hiddenStr );
+				equal( !$header.hasClass( "ui-fixed-hidden" ), visible, "the header should be " + hiddenStr );
 
 				$.mobile.changePage( "#default" );
 			},

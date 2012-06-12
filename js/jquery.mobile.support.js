@@ -2,9 +2,8 @@
 //>>description: Assorted tests to qualify browsers by detecting features
 //>>label: Support Tests
 //>>group: Core
-//>>required: true
 
-define( [  "jquery", "./jquery.mobile.media", "./jquery.mobile.core" ], function( $ ) {
+define( [  "jquery", "./jquery.mobile.core", "./jquery.mobile.media", "./jquery.mobile.support.orientation" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -49,7 +48,7 @@ function validStyle( prop, value, check_vend ) {
 		check_vends = check_vend ? [ check_vend ] : vendors,
 		ret;
 
-	for( i = 0; i < check_vends.length; i++ ) {
+	for( var i = 0; i < check_vends.length; i++ ) {
 		check_style( check_vends[i] );
 	}
 	return !!ret;
@@ -103,8 +102,6 @@ $.mobile.browser.ie = (function() {
 
 
 $.extend( $.support, {
-	orientation: "orientation" in window && "onorientationchange" in window,
-	touch: "ontouchend" in document,
 	cssTransitions: "WebKitTransitionEvent" in window || validStyle( 'transition', 'height 100ms linear' ),
 	pushState: "pushState" in history && "replaceState" in history,
 	mediaquery: $.mobile.media( "only all" ),

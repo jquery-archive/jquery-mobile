@@ -112,6 +112,88 @@
 	</div>
 </div>
 
+<div data-nstest-role="page" id='collapsible-with-custom-icons'>
+	<div data-nstest-role="header">
+		<h1>Custom icons for collapsibles</h1>
+	</div>
+	<div data-nstest-role="content">
+		<div data-nstest-role="collapsible">
+			<h3>Section A</h3>
+
+			<p>I'm the collapsible content in a set so this feels like an accordion. I'm hidden by default because I
+				have the "collapsed" state; you need to expand the header to see me.</p>
+		</div>
+		<div data-nstest-role="collapsible" data-nstest-collapsed="false">
+			<h3>Section B</h3>
+
+			<p>I'm the collapsible content in a set so this feels like an accordion. I'm hidden by default because I
+				have the "collapsed" state; you need to expand the header to see me.</p>
+		</div>
+
+		<div data-nstest-role="collapsible" data-nstest-collapsed-icon="arrow-r" data-nstest-expanded-icon="arrow-d">
+			<h3>Section C</h3>
+
+			<p>I'm the collapsible content in a set so this feels like an accordion. I'm hidden by default because I
+				have the "collapsed" state; you need to expand the header to see me.</p>
+		</div>
+		<div data-nstest-role="collapsible" data-nstest-collapsed-icon="arrow-r" data-nstest-expanded-icon="arrow-d" data-nstest-collapsed="false">
+			<h3>Section D</h3>
+
+			<p>I'm the collapsible content in a set so this feels like an accordion. I'm hidden by default because I
+				have the "collapsed" state; you need to expand the header to see me.</p>
+		</div>
+
+	</div>
+</div>
+
+<div data-nstest-role="page" id='collapsible-set-with-custom-icons'>
+	<div data-nstest-role="header">
+		<h1>Custom icons for collapsible sets</h1>
+	</div>
+	<div data-nstest-role="content">
+		<div data-nstest-role="collapsible-set">
+			<div data-nstest-role="collapsible">
+				<h3>Section A</h3>
+
+				<p>I'm the collapsible content in a set so this feels like an accordion. I'm hidden by default because I
+					have the "collapsed" state; you need to expand the header to see me.</p>
+			</div>
+			<div data-nstest-role="collapsible" data-nstest-collapsed="false">
+				<h3>Section B</h3>
+
+				<p>I'm the collapsible content in a set so this feels like an accordion. I'm hidden by default because I
+					have the "collapsed" state; you need to expand the header to see me.</p>
+			</div>
+		</div>
+		<div data-nstest-role="collapsible-set" data-nstest-collapsed-icon="arrow-r" data-nstest-expanded-icon="arrow-d">
+			<div data-nstest-role="collapsible">
+				<h3>Section A</h3>
+
+				<p>I'm the collapsible content in a set so this feels like an accordion. I'm hidden by default because I
+					have the "collapsed" state; you need to expand the header to see me.</p>
+			</div>
+			<div data-nstest-role="collapsible" data-nstest-collapsed="false">
+				<h3>Section B</h3>
+
+				<p>I'm the collapsible content in a set so this feels like an accordion. I'm hidden by default because I
+					have the "collapsed" state; you need to expand the header to see me.</p>
+			</div>
+			<div data-nstest-role="collapsible" data-nstest-collapsed-icon="arrow-l" data-nstest-expanded-icon="arrow-u">
+				<h3>Section C</h3>
+
+				<p>I'm the collapsible content in a set so this feels like an accordion. I'm hidden by default because I
+					have the "collapsed" state; you need to expand the header to see me.</p>
+			</div>
+			<div data-nstest-role="collapsible" data-nstest-collapsed-icon="arrow-l" data-nstest-expanded-icon="arrow-u" data-nstest-collapsed="false">
+				<h3>Section D</h3>
+
+				<p>I'm the collapsible content in a set so this feels like an accordion. I'm hidden by default because I
+					have the "collapsed" state; you need to expand the header to see me.</p>
+			</div>
+		</div>
+	</div>
+</div>
+
 <div data-nstest-role="page" id='collapsible-with-theming'>
 	<div data-nstest-role="header">
 		<h1>Themed collapsibles</h1>
@@ -197,6 +279,29 @@
       </div>
 		</div>
 	</div>
+</div>
+
+<div data-nstest-role="page" id="collapsible-set-with-last-collapsible-expanded">
+    <div data-nstest-role="header">
+        <h1>uncollapsed collapsible</h1>
+    </div>
+    <div data-nstest-role="content">
+        <div data-nstest-role="collapsible-set"">
+        <div data-nstest-role="collapsible">
+            <h1>Collapsible collapsed</h1>
+            <ul data-nstest-role="listview" data-inset="true">
+                <li data-nstest-theme="b">Swatch b</li>
+                <li data-nstest-theme="d">Swatch d</li>
+            </ul>
+        </div>
+        <div data-nstest-role="collapsible" data-nstest-collapsed="false" data-nstest-content-theme="e">
+            <h1>Collapsible initial uncollapsed</h1>
+            <ul data-nstest-role="listview" data-nstest-inset="true">
+                <li data-nstest-theme="a">Swatch a</li>
+                <li data-nstest-theme="b">Swatch b</li>
+            </ul>
+        </div>
+    </div>
 </div>
 
 </body>

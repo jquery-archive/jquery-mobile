@@ -38,7 +38,7 @@
 			<p>Creates this button with an icon:</p>
 			<a href="index.html" data-role="button" data-icon="delete">Delete</a>
 			
-			<p>A more compact button with the <code> data-inline="true"</code> attribute added to the button:</p>
+			<p>A more compact button with the <code> data-mini="true"</code> attribute added to the button:</p>
 			<a href="index.html" data-role="button" data-icon="delete" data-mini="true">Delete</a>
 			
 			<h2>Icon set</h2>
@@ -131,7 +131,7 @@
 	background-image: url("app-icon-email.png");
 }</code></pre>
 
-		<p>This will create the standard resolution icon, but many devices now have very high resolution displays, like the retina display on the iPhone 4. To add a HD icon, create an icon that is 36x36 pixels (exactly double the 18 pixel size), and add second rule that uses the <code>-webkit-min-device-pixel-ratio: 2</code> media query to target a rule only to high resolution displays. Specify the background image for the HD icon file and set the background size to 18x18 pixels which will fit the 36 pixel icon into the same 18 pixel space. The media query block can wrap multiple icon rules:</p>
+		<p>This will create the standard resolution icon, but many devices now have very high resolution displays, like the retina display on the iPhone 4. To add a HD icon, create an icon that is 36x36 pixels (exactly double the 18 pixel size), and add second a rule that uses the <code>-webkit-min-device-pixel-ratio: 2</code> media query to target a rule only to high resolution displays. Specify the background image for the HD icon file and set the background size to 18x18 pixels which will fit the 36 pixel icon into the same 18 pixel space. The media query block can wrap multiple icon rules:</p>
 <pre><code>
 @media only screen and (-webkit-min-device-pixel-ratio: 2) {
 	.ui-icon-myapp-email {
@@ -157,6 +157,8 @@
 		<a href="index.html" data-role="button" data-icon="minus" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
 		<a href="index.html" data-role="button" data-icon="check" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
 		<a href="index.html" data-role="button" data-icon="gear" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
+		</div>
+		<div data-role="controlgroup"  data-type="horizontal">
 		<a href="index.html" data-role="button" data-icon="refresh" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
 		<a href="index.html" data-role="button" data-icon="forward" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
 		<a href="index.html" data-role="button" data-icon="back" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
@@ -180,6 +182,8 @@
 		<a href="index.html" data-role="button" data-icon="minus" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
 		<a href="index.html" data-role="button" data-icon="check" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
 		<a href="index.html" data-role="button" data-icon="gear" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
+		</div>
+		<div data-role="controlgroup"  data-type="horizontal">
 		<a href="index.html" data-role="button" data-icon="refresh" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
 		<a href="index.html" data-role="button" data-icon="forward" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
 		<a href="index.html" data-role="button" data-icon="back" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
@@ -203,6 +207,8 @@
 		<a href="index.html" data-role="button" data-icon="minus" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
 		<a href="index.html" data-role="button" data-icon="check" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
 		<a href="index.html" data-role="button" data-icon="gear" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
+		</div>
+		<div data-role="controlgroup"  data-type="horizontal">
 		<a href="index.html" data-role="button" data-icon="refresh" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
 		<a href="index.html" data-role="button" data-icon="forward" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
 		<a href="index.html" data-role="button" data-icon="back" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>

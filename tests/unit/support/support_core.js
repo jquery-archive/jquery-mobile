@@ -19,11 +19,7 @@ $.testHelper.excludeFileProtocol(function(){
 		// TODO expose properties for less brittle tests
 		$.extend(window, {
 			WebKitTransitionEvent: true,
-			orientation: true,
-			onorientationchange: true
 		});
-
-		document.ontouchend = true;
 
 		window.history.pushState = function(){};
 		window.history.replaceState = function(){};
@@ -31,22 +27,30 @@ $.testHelper.excludeFileProtocol(function(){
 		$.mobile.media = function(){ return true; };
 
 		$.testHelper.reloadModule( moduleName ).done( function() {
-				ok($.support.orientation);
-				ok($.support.touch);
-				ok($.support.cssTransitions);
-				ok($.support.pushState);
-				ok($.support.mediaquery);
-				start();
+			ok($.support.cssTransitions, "css transitions are supported" );
+			ok($.support.pushState, "push state is supported" );
+			ok($.support.mediaquery, "media queries are supported" );
+			start();
+		});
+	});
+
+	asyncTest( "detects orientation change", function() {
+		$.extend(window, {
+			orientation: true,
+			onorientationchange: true
+		});
+
+		$.testHelper.reloadModule( "jquery.mobile.support.orientation" ).done( function() {
+			ok($.support.orientation, "orientation is supported" );
+			start();
 		});
 	});
 
 	asyncTest( "detects functionality from basic negative properties and attributes (where possible)", function(){
 		delete window["orientation"];
-		delete document["ontouchend"];
 
-		$.testHelper.reloadModule( moduleName ).done( function() {
-			ok(!$.support.orientation);
-			ok(!$.support.touch);
+		$.testHelper.reloadModule( "jquery.mobile.support.orientation" ).done( function() {
+			ok(!$.support.orientation, "orientation is not supported" );
 			start();
 		});
 	});

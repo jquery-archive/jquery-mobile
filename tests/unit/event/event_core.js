@@ -3,12 +3,13 @@
  */
 
 (function($){
-	var libName = "jquery.mobile.event.js",
-			absFn = Math.abs,
-			originalEventFn = $.Event.prototype.originalEvent,
-			preventDefaultFn = $.Event.prototype.preventDefault,
-			events = ("touchstart touchmove touchend orientationchange tap taphold " +
-								"swipe swipeleft swiperight scrollstart scrollstop").split( " " );
+	var libName = "jquery.mobile.events.js",
+	    components = [ "events/touch.js", "events/throttledresize.js", "events/orientationchange.js" ],
+	    absFn = Math.abs,
+	    originalEventFn = $.Event.prototype.originalEvent,
+	    preventDefaultFn = $.Event.prototype.preventDefault,
+	    events = ("touchstart touchmove touchend tap taphold " +
+		          "swipe swipeleft swiperight scrollstart scrollstop orientationchange").split( " " );
 
 	module(libName, {
 		setup: function(){
@@ -38,10 +39,10 @@
 				same($.fn[name], undefined);
 			});
 
-			$.testHelper.reloadLib(libName);
+			$.each( components, function( index, value ) { $.testHelper.reloadLib( value ); });
 
 			$.each(events, function( i, name ) {
-				ok($.fn[name] !== undefined, name + " is not undefined");
+				ok( $.fn[name] !== undefined, name + " should NOT be undefined");
 			});
 		});
 	});
@@ -76,7 +77,7 @@
 
 	test( "scrollstart enabled defaults to true", function(){
 		$.event.special.scrollstart.enabled = false;
-		$.testHelper.reloadLib(libName);
+		$.each( components, function( index, value ) { $.testHelper.reloadLib( value ); });
 		ok($.event.special.scrollstart.enabled, "scrollstart enabled");
 	});
 
@@ -126,8 +127,8 @@
 	});
 
 	var forceTouchSupport = function(){
-		$.support.touch = true;
-		$.testHelper.reloadLib(libName);
+		document.ontouchend = function() {};
+		$.each( components, function( index, value ) { $.testHelper.reloadLib( value ); });
 
 		//mock originalEvent information
 		$.Event.prototype.originalEvent = {
@@ -135,9 +136,9 @@
 		};
 	};
 
-	asyncTest( "long press fires tap hold after 750 ms", function(){
+	asyncTest( "long press fires tap hold after taphold duration", function(){
 		var taphold = false,
-			target;
+			target = undefined;
 
 		forceTouchSupport();
 
@@ -149,10 +150,16 @@
 		$( "#qunit-fixture" ).trigger("vmousedown");
 
 		setTimeout(function(){
-			ok( taphold );
+			ok( !taphold, "taphold not fired" );
+			same( target, undefined, "taphold target should be #qunit-fixture" );
+		}, $.event.special.tap.tapholdThreshold - 10);
+
+
+		setTimeout(function(){
+			ok( taphold, "taphold fired" );
 			equal( target, $( "#qunit-fixture" ).get( 0 ), "taphold target should be #qunit-fixture" );
 			start();
-		}, 751);
+		}, $.event.special.tap.tapholdThreshold + 10);
 	});
 
 	//NOTE used to simulate movement when checked

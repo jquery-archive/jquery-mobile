@@ -215,4 +215,27 @@
 		same( $.mobile.path.cleanHash( "#anything/atall?akjfdjjf" ), "anything/atall", "removes query param");
 		same( $.mobile.path.cleanHash( "#nothing/atall" ), "nothing/atall", "removes query param");
 	});
+
+	test( "path.isHashValid", function(){
+        same( $.mobile.path.isHashValid( "#id" ), true, "Valid hash");
+        same( $.mobile.path.isHashValid( "#" ), false, "Empty hash");
+        same( $.mobile.path.isHashValid( "#id#" ), false, "Hash with more than one #");
+        same( $.mobile.path.isHashValid( "id" ), false, "Hash without #");
+        same( $.mobile.path.isHashValid( "i#d" ), false, "Hash with # in the wrong spot");
+	});
+
+	test( "path.isPermittedCrossDomainRequest", function() {
+		var fileDocUrl = $.mobile.path.parseUrl( "file://foo" );
+
+		$.mobile.allowCrossDomainPages = false;
+		same( $.mobile.path.isPermittedCrossDomainRequest( "foo",  "bar"), false, "always false from the setting");
+
+
+		$.mobile.allowCrossDomainPages = true;
+		// test the two states of the file protocol logic
+		same( $.mobile.path.isPermittedCrossDomainRequest( fileDocUrl,  "http://bar.com/foo"), true, "external url from file protocol succeeds");
+
+		same( $.mobile.path.isPermittedCrossDomainRequest( fileDocUrl,  "file://foo"), false, "two file protocol urls fail");
+
+	});
 })(jQuery);

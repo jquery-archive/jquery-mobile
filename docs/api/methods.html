@@ -85,7 +85,7 @@
 <strong>//transition to the "about us" page with a slideup transition</strong>
 $.mobile.changePage( "about/us.html", { transition: "slideup"} );
 
-<strong>//transition to the "search results" page, using data from a form with an ID of "search"" 	</strong>
+<strong>//transition to the "search results" page, using data from a form with an id of "search"</strong>
 $.mobile.changePage( "searchresults.php", {
 	type: "post",
 	data: $("form#search").serialize()
@@ -122,6 +122,7 @@ $.mobile.changePage( "../alerts/confirm.html", {
 									<li><code>pageContainer</code> (jQuery collection,	default:	$.mobile.pageContainer) Specifies the element that should contain the page after it is loaded. </li>
 									<li><code>reloadPage</code> (<em>boolean</em>, default: false) Forces a reload of a page, even if it is already in the DOM of the page container. </li>
 									<li><code>role</code> (<em>string</em>,	default:	undefined) The data-role value to be used when displaying the page. By default this is undefined which means rely on the value of the @data-role attribute defined on the element.</li>
+									<li><code>showLoadMsg</code> (<em>boolean</em>,	default: false) Decides whether or not to show the loading message when loading external pages.</li>
 									<li><code>type</code> (<em>string</em>, default: &quot;get&quot;) Specifies the method ("get" or "post") to use when making a page request.
 									</li>
 								</ul>
@@ -138,7 +139,7 @@ $.mobile.changePage( "../alerts/confirm.html", {
 <strong>//load the "about us" page into the DOM</strong>
 $.mobile.loadPage( "about/us.html" );
 
-<strong>//load a "search results" page, using data from a form with an ID of "search"" 	</strong>
+<strong>//load a "search results" page, using data from a form with an id of "search"</strong>
 $.mobile.loadPage( "searchresults.php", {
 	type: "post",
 	data: $("form#search").serialize()
@@ -183,8 +184,35 @@ $.mobile.loadPage( "searchresults.php", {
 				</dl>
 			</dd>
 
+			<dt><code>$.mobile.loading</code> (<em>method</em>)</dt>
+			<dd>Show or hide the page loading message, which is configurable via <code>$.mobile.loader</code> prototype options as described in the <a href="../pages/loader.html">widget docs</a> or can be controlled via a params object.</dd>
+			<dd>
+				<dl>
+					<dt><code>&#183;</code> Object Param Arguments</dt>
+					<dd><code>theme</code> (<em>string</em>, default: "a") The theme swatch for the message.</dd>
+					<dd><code>text</code> (<em>string</em>, default: "loading") The text of the message.</dd>
+					<dd><code>textonly</code> (<em>boolean</em>, default: false) If true, the "spinner" image will be hidden when the message is shown.</dd>
+					<dd><code>textVisible</code> (<em>boolean</em>, default: false) If true, the text value will be used under the spinner.</dd>
+					<dd><code>html</code> (<em>boolean</em>, default: "") If this is set to a non empty string value it will be used to replace the entirety of the loader's inner html</dd>
+				</dl>
+			</dd>
+			<dd>Examples:
+			<pre>
+			<code>
+<strong>//cue the page loader</strong>
+$.mobile.loading( 'show' );
+
+<strong>//use theme swatch "b", a custom message, and no spinner</strong>
+$.mobile.loading( 'show', { theme: "b", text: "foo", textonly: true });
+			</code>
+			</pre>
+
+			</dd>
+
 			<dt><code>$.mobile.showPageLoadingMsg</code> (<em>method</em>)</dt>
-			<dd>Show the page loading message, which is configurable via $.mobile.loadingMessage.</dd>
+			<dd>
+        <p class="ui-bar-e"> Deprecated in 1.2 - use <code>$.mobile.loading( 'show' )</code> instead, see examples above</p>
+        Show the page loading message, which is configurable via $.mobile.loadingMessage.</dd>
 			<dd>
 				<dl>
 					<dt><code>&#183;</code> Arguments</dt>
@@ -209,9 +237,13 @@ $.mobile.showPageLoadingMsg("b", "This is only a test", true);
 
 
 
-			<dt><code>$.mobile.hidePageLoadingMsg</code> (<em>method</em>)</dt>
-			<dd>Hide the page loading message, which is configurable via $.mobile.loadingMessage.</dd>
 
+			<dt><code>$.mobile.hidePageLoadingMsg</code> (<em>method</em>)</dt>
+			<dd>
+        <p class="ui-bar-e"> Deprecated in 1.2 - use <code>$.mobile.loading( 'hide' )</code> instead, see examples above</p>
+        Hide the page loading message, which is configurable via $.mobile.loadingMessage.
+
+      </dd>
 			<dd>Example:
 			<pre>
 			<code>
@@ -223,7 +255,9 @@ $.mobile.hidePageLoadingMsg();
 			</dd>
 
 			<dt><code>$.mobile.fixedToolbars.show</code> (<em>method</em>)</dt>
-			<dd>Utility method for displaying the fixed header and/or footer of the current active page within the viewport. Note that fixed headers/footers are never really hidden. Toggling the show/hide state of a toolbar is really toggling whether or not they are inline within the page content, or displayed within the viewport as if they were fixed.</dd>
+			<dd>
+			<p class="ui-bar-e"> Deprecated in 1.1 <code> </code></p> 
+			Utility method for displaying the fixed header and/or footer of the current active page within the viewport. Note that fixed headers/footers are never really hidden. Toggling the show/hide state of a toolbar is really toggling whether or not they are inline within the page content, or displayed within the viewport as if they were fixed.</dd>
 			<dd>
 				<dl>
 					<dt><code>&#183;</code> Arguments</dt>
@@ -244,7 +278,8 @@ $.mobile.fixedToolbars.show(true);
 			</dd>
 
 			<dt><code>$.mobile.fixedToolbars.hide</code> (<em>method</em>)</dt>
-			<dd>Utility method for hiding the fixed header and/or footer of the current active page.</dd>
+			<dd><p class="ui-bar-e"> Deprecated in 1.1 <code> </code></p> 
+			Utility method for hiding the fixed header and/or footer of the current active page.</dd>
 			<dd>
 				<dl>
 					<dt><code>&#183;</code> Arguments</dt>
@@ -529,6 +564,54 @@ var isAbs = $.mobile.path.isAbsoluteUrl("#foo");
 
 			</dd>
 
+			<dt><code>$.mobile.path.get</code> (<em>method</em>)</dt>
+			<dd>Utility method for determining the directory portion of an URL. If the URL has no trailing slash, the last component of the URL is considered to be a file.</dd>
+			<dd>
+
+				<dl>
+					<dt><code>&#183;</code> Arguments</dt>
+					<dd><code>url</code> (<em>string</em>, required) A relative or absolute URL.</dd>
+
+					<dt><code>&#183;</code> Return Value</dt>
+					<dd>This function returns the directory portion of a given URL.</dd>
+
+				</dl>
+			</dd>
+			<dd>Examples:
+			<pre>
+			<code>
+<strong>// Returns: http://foo.com/a/</strong>
+var dirName = $.mobile.path.get("http://foo.com/a/file.html");
+
+<strong>// Returns: http://foo.com/a/</strong>
+var dirName = $.mobile.path.get("http://foo.com/a/");
+
+<strong>// Returns: http://foo.com/a</strong>
+var dirName = $.mobile.path.get("http://foo.com/a");
+
+<strong>// Returns: //foo.com/a/</strong>
+var dirName = $.mobile.path.get("//foo.com/a/file.html");
+
+<strong>// Returns: /a/</strong>
+var dirName = $.mobile.path.get("/a/file.html");
+
+<strong>// Returns: ""</strong>
+var dirName = $.mobile.path.get("file.html");
+
+<strong>// Returns: /</strong>
+var dirName = $.mobile.path.get("/file.html");
+
+<strong>// Returns: ?a=1&amp;b=2</strong>
+var dirName = $.mobile.path.get("?a=1&amp;b=2");
+
+<strong>// Returns: foo</strong>
+var dirName = $.mobile.path.isAbsoluteUrl("#foo");
+
+
+			</code>
+			</pre>
+
+			</dd>
 
 			<dt><code>$.mobile.base</code> (<em>methods, properties</em>)</dt>
 			<dd>Utilities for working with generated base element. TODO: document as public API is finalized.</dd>

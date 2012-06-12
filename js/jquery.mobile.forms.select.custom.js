@@ -3,10 +3,11 @@
 */
 
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Extension to select menus to support menu styling, placeholder options, and multi-select features. 
+//>>description: Extension to select menus to support menu styling, placeholder options, and multi-select features.
 //>>label: Selects: Custom menus
 //>>group: Forms
-//>>css: ../css/themes/default/jquery.mobile.theme.css, ../css/structure/jquery.mobile.forms.select.css
+//>>css.structure: ../css/structure/jquery.mobile.forms.select.css
+//>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 define( [
 	"jquery",
@@ -16,6 +17,7 @@ define( [
 	"./jquery.mobile.forms.select",
 	"./jquery.mobile.listview",
 	"./jquery.mobile.page",
+	"./jquery.mobile.popup",
 	// NOTE expects ui content in the defined page, see selector for menuPageContent definition
 	"./jquery.mobile.page.sections" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
@@ -26,7 +28,6 @@ define( [
 			selectID  = widget.selectID,
 			label = widget.label,
 			thisPage = widget.select.closest( ".ui-page" ),
-			screen = $( "<div>", {"class": "ui-selectmenu-screen ui-screen-hidden"} ).appendTo( thisPage ),
 			selectOptions = widget._selectOptions(),
 			isMultiple = widget.isMultiple = widget.select[ 0 ].multiple,
 			buttonId = selectID + "-button",
@@ -38,7 +39,7 @@ define( [
 				"<div data-" + $.mobile.ns + "role='content'></div>"+
 				"</div>" ),
 
-			listbox =  $("<div>", { "class": "ui-selectmenu ui-selectmenu-hidden ui-overlay-shadow ui-corner-all ui-body-" + widget.options.overlayTheme + " " + $.mobile.defaultDialogTransition } ).insertAfter(screen),
+			listbox =  $( "<div>", { "class": "ui-selectmenu" } ).insertAfter( widget.select ).popup( { theme: "a" } ),
 
 			list = $( "<ul>", {
 				"class": "ui-selectmenu-list",
@@ -75,7 +76,6 @@ define( [
 			thisPage: thisPage,
 			menuPage: menuPage,
 			label: label,
-			screen: screen,
 			selectOptions: selectOptions,
 			isMultiple: isMultiple,
 			theme: widget.options.theme,
@@ -101,9 +101,9 @@ define( [
 
 				// Button events
 				self.button.bind( "vclick keydown" , function( event ) {
-					if ( event.type == "vclick" ||
-							 event.keyCode && ( event.keyCode === $.mobile.keyCode.ENTER ||
-																	event.keyCode === $.mobile.keyCode.SPACE ) ) {
+					if (event.type === "vclick" ||
+							event.keyCode && (event.keyCode === $.mobile.keyCode.ENTER ||
+																event.keyCode === $.mobile.keyCode.SPACE)) {
 
 						self.open();
 						event.preventDefault();
@@ -160,7 +160,7 @@ define( [
 						// switch logic based on which key was pressed
 						switch ( event.keyCode ) {
 							// up or left arrow keys
-						 case 38:
+						case 38:
 							prev = li.prev().not( ".ui-selectmenu-placeholder" );
 
 							if( prev.is( ".ui-li-divider" ) ) {
@@ -177,10 +177,8 @@ define( [
 							}
 
 							return false;
-							break;
-
 							// down or right arrow keys
-						 case 40:
+						case 40:
 							next = li.next();
 
 							if( next.is( ".ui-li-divider" ) ) {
@@ -197,15 +195,12 @@ define( [
 							}
 
 							return false;
-							break;
-
 							// If enter or space is pressed, trigger click
-						 case 13:
-						 case 32:
+						case 13:
+						case 32:
 							target.trigger( "click" );
 
 							return false;
-							break;
 						}
 					});
 
@@ -230,15 +225,15 @@ define( [
 					$.mobile._bindPageRemove.call( self.thisPage );
 				});
 
-				// Events on "screen" overlay
-				self.screen.bind( "vclick", function( event ) {
+				// Events on the popup
+				self.listbox.bind( "closed", function( event ) {
 					self.close();
 				});
 
 				// Close button on small overlays
 				if( self.isMultiple ){
 					self.headerClose.click( function() {
-						if ( self.menuType == "overlay" ) {
+						if ( self.menuType === "overlay" ) {
 							self.close();
 							return false;
 						}
@@ -308,14 +303,13 @@ define( [
 
 				var self = this;
 
-				if ( self.menuType == "page" ) {
+				if ( self.menuType === "page" ) {
 					// doesn't solve the possible issue with calling change page
 					// where the objects don't define data urls which prevents dialog key
 					// stripping - changePage has incoming refactor
 					window.history.back();
 				} else {
-					self.screen.addClass( "ui-screen-hidden" );
-					self.listbox.addClass( "ui-selectmenu-hidden" ).removeAttr( "style" ).removeClass( "in" );
+					self.listbox.popup( "close" );
 					self.list.appendTo( self.listbox );
 					self._focusButton();
 				}
@@ -334,8 +328,7 @@ define( [
           selfListParent = self.list.parent(),
 					menuHeight = selfListParent.outerHeight(),
 					menuWidth = selfListParent.outerWidth(),
-					activePage = $( ".ui-page-active" ),
-					tScrollElem = activePage,
+					activePage = $( "." + $.mobile.activePageClass ),
 					scrollTop = $window.scrollTop(),
 					btnOffset = self.button.offset().top,
 					screenHeight = $window.height(),
@@ -365,7 +358,7 @@ define( [
 					self.thisPage.unbind( "pagehide.remove" );
 
 					//for WebOS/Opera Mini (set lastscroll using button offset)
-					if ( scrollTop == 0 && btnOffset > screenHeight ) {
+					if ( scrollTop === 0 && btnOffset > screenHeight ) {
 						self.thisPage.one( "pagehide", function() {
 							$( this ).jqmData( "lastScroll", btnOffset );
 						});
@@ -385,48 +378,11 @@ define( [
 				} else {
 					self.menuType = "overlay";
 
-					self.screen.height( $(document).height() )
-						.removeClass( "ui-screen-hidden" );
-
-					// Try and center the overlay over the button
-					var roomtop = btnOffset - scrollTop,
-						roombot = scrollTop + screenHeight - btnOffset,
-						halfheight = menuHeight / 2,
-						maxwidth = parseFloat( self.list.parent().css( "max-width" ) ),
-						newtop, newleft;
-
-					if ( roomtop > menuHeight / 2 && roombot > menuHeight / 2 ) {
-						newtop = btnOffset + ( self.button.outerHeight() / 2 ) - halfheight;
-					} else {
-						// 30px tolerance off the edges
-						newtop = roomtop > roombot ? scrollTop + screenHeight - menuHeight - 30 : scrollTop + 30;
-					}
-
-					// If the menuwidth is smaller than the screen center is
-					if ( menuWidth < maxwidth ) {
-						newleft = ( screenWidth - menuWidth ) / 2;
-					} else {
-
-						//otherwise insure a >= 30px offset from the left
-						newleft = self.button.offset().left + self.button.outerWidth() / 2 - menuWidth / 2;
-
-						// 30px tolerance off the edges
-						if ( newleft < 30 ) {
-							newleft = 30;
-						} else if ( (newleft + menuWidth) > screenWidth ) {
-							newleft = screenWidth - menuWidth - 30;
-						}
-					}
-
-					self.listbox.append( self.list )
-						.removeClass( "ui-selectmenu-hidden" )
-						.css({
-							top: newtop,
-							left: newleft
-						})
-						.addClass( "in" );
-
-					focusMenuItem();
+					self.listbox
+						.one( "opened", focusMenuItem )
+						.popup( "open", 
+							self.button.offset().left + self.button.outerWidth() / 2,
+							self.button.offset().top + self.button.outerHeight() / 2 );
 
 					// duplicate with value set in page show for dialog sized selects
 					self.isOpen = true;
@@ -468,7 +424,7 @@ define( [
 					// Are we inside an optgroup?
 					if (parent !== select && parent.nodeName.toLowerCase() === "optgroup"){
 						var optLabel = parent.getAttribute('label');
-						if ( optLabel != optGroup) {
+						if ( optLabel !== optGroup) {
 							var divider = document.createElement('li');
 							divider.setAttribute(dataRoleAttr,'list-divider');
 							divider.setAttribute('role','option');
@@ -479,7 +435,7 @@ define( [
 						}
 					}
 
-					if (needPlaceholder && (!option.getAttribute( "value" ) || text.length == 0 || $option.jqmData( "placeholder" ))) {
+					if (needPlaceholder && (!option.getAttribute( "value" ) || text.length === 0 || $option.jqmData( "placeholder" ))) {
 						needPlaceholder = false;
 						if ( o.hidePlaceholderMenuItems ) {
 							classes.push( "ui-selectmenu-placeholder" );
@@ -535,7 +491,8 @@ define( [
 	$( document ).bind( "selectmenubeforecreate", function( event ){
 		var selectmenuWidget = $( event.target ).data( "selectmenu" );
 
-		if( !selectmenuWidget.options.nativeMenu ){
+		if( !selectmenuWidget.options.nativeMenu &&
+		    selectmenuWidget.element.parents(":jqmData(role='popup')").length === 0 ){
 			extendSelect( selectmenuWidget );
 		}
 	});

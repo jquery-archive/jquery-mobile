@@ -10,12 +10,19 @@
 	<script src="../jquery.setNameSpace.js"></script>
 	<script src="../../jquery.testHelper.js"></script>
 	<script src="../../../external/qunit.js"></script>
+  <script type="text/javascript">
+    // redirects from push-state-tests.html
+    $( document ).bind( 'mobileinit', function(){
+      $.testHelper.setPushState();
+    });
+  </script>
 	<script>
 		$.testHelper.asyncLoad([
 			[
 				"jquery.mobile.navigation",
 				"jquery.mobile.listview",
 				"jquery.mobile.listview.filter",
+				"jquery.mobile.listview.autodividers"
 			],
 			[ "jquery.mobile.init" ],
 			[
@@ -223,6 +230,43 @@
 	</div>
 </div>
 
+<!-- Autodivider -->
+<div data-nstest-role="page" id="autodividers-test">
+	<div data-nstest-role="header" data-nstest-position="inline">
+		<h1>Autodivider Test</h1>
+	</div>
+	<div data-nstest-role="content">
+		<ul data-nstest-role="listview" data-nstest-autodividers="true">
+			<li data-nstest-role="list-divider">SHOULD REMOVE</li>
+			<li>a is for aquaman</li>
+			<li>b is for batman</li>
+			<li>c is for catwoman</li>
+			<li>d is for darkwing</li>
+		</ul>
+	</div>
+</div>
+
+<div data-nstest-role="page" id="autodividers-selector-test">
+	<div data-nstest-role="header" data-nstest-position="inline">
+		<h1>Autodivider Selector Test</h1>
+	</div>
+	<div data-nstest-role="content">
+		<ul id="autodividers-selector-test-list1" data-nstest-role="listview" data-nstest-autodividers="true">
+			<li><a href="">a is for aquaman</a></li>
+			<li><a href="">b is for batman</a></li>
+			<li><a href="">c is for catwoman</a></li>
+			<li><a href="">d is for darkwing</a></li>
+		</ul>
+
+		<ul id="autodividers-selector-test-list2" data-nstest-role="listview" data-nstest-autodividers="true">
+			<li><div><span class="autodividers-selector-test-selectme">eddie</span> is for aquaman</div></li>
+			<li><div><span class="autodividers-selector-test-selectme">frankie</span> is for batman</div></li>
+			<li><div><span class="autodividers-selector-test-selectme">georgie</span> is for catwoman</div></li>
+			<li><div><span class="autodividers-selector-test-selectme">henry</span> is for darkwing</div></li>
+		</ul>
+	</div>
+</div>
+
 <!-- Search bar filter -->
 <div data-nstest-role="page" id='search-filter-test'>
 	<div data-nstest-role="header" data-nstest-position="inline">
@@ -347,7 +391,6 @@
 	</ul>
 </div>
 
-
 <div data-nstest-role="page" id="split-list-icon">
 	<div data-nstest-role="content">
 		<ul data-nstest-role="listview" data-nstest-split-icon="delete">
@@ -358,6 +401,22 @@
 			<li data-nstest-icon="star"><a href="#">Default</a><a data-nstest-icon="plug" href="#">Default</a></li>
 		</ul>
 	</div>
+</div>
+
+<div data-nstest-role="page" id="list-divider-ignore-link">
+  <div data-nstest-role="content">
+    <ul data-nstest-role="listview">
+      <li data-nstest-role="list-divider">A</li>
+      <li><a href="index.html">Adam Kinkaid</a></li>
+      <li><a href="index.html">Alex Wickerham</a></li>
+      <li><a href="index.html">Avery Johnson</a></li>
+      <li data-nstest-role="list-divider" id="ignored-link">B has a <a href="#">link</a></li>
+      <li><a href="index.html">Bob Cabot</a></li>
+      <li data-nstest-role="list-divider">C</li>
+      <li><a href="index.html">Caleb Booth</a></li>
+      <li><a href="index.html">Christopher Adams</a></li>
+    </ul>
+  </div><!-- /content -->
 </div>
 </body>
 </html>

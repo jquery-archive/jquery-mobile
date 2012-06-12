@@ -55,4 +55,13 @@
 		ok( $inherited.closest("div").hasClass( "ui-btn-up-a" ), "should inherit from page" );
 		ok( $explicit.closest("div").hasClass( "ui-btn-up-b" ), "should not inherit" );
 	});
+
+	test( "Enhanced button elements should allow for phrasing content.", function() {
+		var $htmlstring = $( "#contains-html" ),
+		    $htmlval = $( "#val-contains-html" );
+
+		ok( $htmlstring.parent().find(".ui-btn-text").find("sup").length, "HTML contained within a button element should carry over to the enhanced version" );
+		ok( $htmlval.parent().find(".ui-btn-text").text().length > 1, "If the text is pulled from a button’s value, anything HTML-like should be disregarded." );
+	});
+
 })( jQuery );

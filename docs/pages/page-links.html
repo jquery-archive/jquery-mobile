@@ -43,7 +43,7 @@
 
 <h2>Linking without Ajax</h2>
 		
-		<p>Links that point to other domains or that have <code>rel="external"</code>, <code>data-ajax="false"</code> or <code>target</code> attributes will not be loaded with Ajax. Instead, these links will cause a full page refresh with no animated transition. Both attributes (<code>rel="external"</code> and <code>data-ajax="false"</code>) have the same effect, but a different semantic meaning: <code>rel="external"</code> should be used when linking to another site or domain, while <code>data-ajax="false"</code> is useful for simply opting a page within your domain from being loaded via Ajax. Because of security restrictions, the framework always opts links to external domains out of the Ajax behavior.</p>
+		<p>Links that point to other domains or that have <code>rel="external"</code>, <code>data-ajax="false"</code> or <code>target</code> attributes will not be loaded with Ajax. Instead, these links will cause a full page refresh with no animated transition. Both attributes (<code>rel="external"</code> and <code>data-ajax="false"</code>) have the same effect, but a different semantic meaning: <code>rel="external"</code> should be used when linking to another site or domain, while <code>data-ajax="false"</code> is useful for simply opting a page within your domain from being loaded via Ajax. Because of security restrictions, the framework always opens links to external domains out of the Ajax behavior.</p>
 		<p>In version 1.1, we've added support for using <code>data-ajax="false"</code> on a parent container which allows you to excluded a large number of links from the Ajax navigation system. This avoids the need to add this attribute to every link in a container.</p>
 		<p>Note: When building a jQuery Mobile application where the Ajax navigation system is disabled globally or frequently disabled on individual links, we  recommend disabling the <code>$.mobile.pushStateEnabled</code> global <a href="../api/globalconfig.html">configuration option</a> to avoid inconsistent navigation behavior in some browsers.</p>
 		
@@ -51,9 +51,9 @@
 
 		<h2>Linking within a multi-page document</h2> 
 		
-			<p>A single HTML document can contain one or many 'page' containers simply by stacking multiple divs with a <code> data-role</code> of <code>"page"</code>. This allows you to build a small site or application within a single HTML document; jQuery Mobile will simply display the first 'page' it finds in the source order when the page loads.</p> 
+			<p>A single HTML document can contain one or many "page" containers simply by stacking multiple divs with a <code>data-role</code> of <code>"page"</code>. This allows you to build a small site or application within a single HTML document; jQuery Mobile will simply display the first "page" it finds in the source order when the page loads.</p> 
 			
-			<p>If a link in a multi-page document points to an anchor (<code>#foo</code>), the framework will look for a page wrapper with that ID (<code>id="foo"</code>). If it finds a page in the HTML document, it will transition the new page into view. You can seamlessly navigate between local, internal "pages" and external pages in jQuery Mobile. Both will look the same to the end user except that external pages will display the Ajax spinner while loading. In either situation, jQuery Mobile updates the page's URL hash to enable Back button support, deep-linking and bookmarking. </p>
+			<p>If a link in a multi-page document points to an anchor (<code>#foo</code>), the framework will look for a page wrapper with that id (<code>id="foo"</code>). If it finds a page in the HTML document, it will transition the new page into view. You can seamlessly navigate between local, internal "pages" and external pages in jQuery Mobile. Both will look the same to the end user except that external pages will display the Ajax spinner while loading. In either situation, jQuery Mobile updates the page's URL hash to enable Back button support, deep-linking and bookmarking.</p>
 		
 		<p>It's important to note that if you are linking from a mobile page that was loaded via Ajax to a page that contains multiple internal pages, you need to add a <code>rel="external"</code> or <code>data-ajax="false"</code> to the link. This tells the framework to do a full page reload to clear out the Ajax hash in the URL. This is critical because Ajax pages use the hash (<code>#</code>) to track the Ajax history, while multiple internal pages use the hash to indicate internal pages so there will be conflicts in the hash between these two modes.</p>
 		
@@ -123,7 +123,9 @@
 								<li><a href="page-titles.html">Page titles</a></li>
 								<li data-theme="a"><a href="page-links.html">Linking pages</a></li>
 								<li><a href="page-transitions.html">Page transitions</a></li>
+								<li><a href="loader.html">Page loading widget</a></li>
 								<li><a href="page-dialogs.html">Dialogs</a></li>
+								<li><a href="popup/index.html">Popups</a></li>
 								<li><a href="page-cache.html">Prefetching &amp; caching pages</a></li>
 								<li><a href="page-navmodel.html">Ajax, hashes &amp; history</a></li>
 								<li><a href="page-dynamic.html">Dynamically injecting pages</a></li>

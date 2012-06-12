@@ -34,7 +34,7 @@
 			</ul>
 
 			<h2>Basic linked lists</h2>
-			<p>A list view is coded as a simple unordered list containing linked list items with a <code> data-role="listview"</code> attribute. jQuery Mobile will apply all the necessary styles to transform the list into a mobile-friendly list view with right arrow indicator that fills the full width of the browser window. When you tap on the list item, the framework will trigger a click on the first link inside the list item, issue an AJAX request for the URL in the link, create the new page in the DOM, then kick off a page transition. View the <a href="../api/data-attributes.html">data- attribute reference</a> to see all the possible attributes you can add to listviews.</p> 
+			<p>A list view is coded as a simple unordered list containing linked list items with a <code> data-role="listview"</code> attribute. jQuery Mobile will apply all the necessary styles to transform the list into a mobile-friendly list view with right arrow indicator that fills the full width of the browser window. When you tap on the list item, the framework will trigger a click on the first link inside the list item, issue an AJAX request for the URL in the link, create the new page in the DOM, then kick off a page transition. View the <a href="../api/data-attributes.html">data- attribute reference</a> to see all the possible attributes you can add to listviews.</p>
 			<p>Here is the HTML markup for a basic linked list.</p>
 
 <pre><code>
@@ -49,7 +49,7 @@
 
 			<p><strong>Style note on non-inset lists</strong>: all standard, non-inset lists have a -15px margin to negate the 15px of padding on the content area to make lists fill to the edges of the screen. If you add other widgets above or below a list, the negative margin may make these elements overlap so you'll need to add additional spacing in your custom CSS.</p>
 			<h2>Nested lists</h2>
-			<p>By nesting child <code>ul</code> or <code>ol</code> inside list items, you can create nested lists. When a list item with a child list is clicked, the framework will generate a new ui-page populated with the title of the parent in the header and the list of child elements. These dynamic nested lists are styled with the "b" theme swatch (blue in the default theme) to indicate that you are in a secondary level of navigation. Lists can be nested multiple levels deep and all pages and linking will be automatically handled by the framework.</p>
+			<p>By nesting child <code>ul</code> or <code>ol</code> inside list items, you can create nested lists. When a list item with a child list is clicked, the framework will show a new page populated with the title of the parent in the header and the list of child elements. These dynamic nested lists are styled with the "b" theme swatch (blue in the default theme) to indicate that you are in a secondary level of navigation. Lists can be nested multiple levels deep and all pages and linking will be automatically handled by the framework. Note that the page of each nested listview is created when the parent page loads and for each nested page the page-events will trigger.</p>
 			<p>To <a href="../lists/lists-themes.html">set the swatch color</a> of the child list views, set the <code>data-theme</code> attribute on each list inside.</p>
 			<a href="lists-nested.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Nested list example</a>
 
@@ -65,15 +65,40 @@
 
 			<h2>Split button lists</h2>
 			<p>In cases where there is more than one possible action per list item, a split button can be used to offer two independently clickable items -- the list item and a small arrow icon in the far right. To make a split list item, simply add a second link inside the <code>li</code> and the framework will add a vertical divider line, style the link as an icon-only arrow button, and set the <code>title</code> attribute of the link to the text the link for accessibility. </p>
-			<p>You can set the icon for the right split icon by specifying a <code>data-split-icon</code> attribute with the <a href="../buttons/buttons-themes.html">icon name</a> you want. The theme swatch color of the split button can be set by specifying a swatch letter in the <code>data-split-theme</code> attribute</p>
+			<p>You can set the icon for the right split icon by specifying a <code>data-split-icon</code> attribute with the <a href="../buttons/buttons-icons.html">icon name</a> you want. The theme swatch color of the split button can be set by specifying a swatch letter in the <code>data-split-theme</code> attribute</p>
 
 			<a href="lists-split.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Split list example</a>
 
 
 			<h2>List dividers</h2>
-			<p>List items can be turned into dividers to organize and group the list items. This is done by adding the <code> data-role="list-divider"</code> to any list item. These items are styled with the bar swatch "b" by default (blue in the default theme) but you can specify a theme for dividers by adding the <code>data-dividertheme</code> attribute to the list element (<code>ul</code> or <code>ol</code>) and specifying a theme swatch letter.</p>
+			<p>List items can be turned into dividers to organize and group the list items. This is done by adding the <code> data-role="list-divider"</code> to any list item. These items are styled with the bar swatch "b" by default (blue in the default theme) but you can specify a theme for dividers by adding the <code>data-divider-theme</code> attribute to the list element (<code>ul</code> or <code>ol</code>) and specifying a theme swatch letter.</p>
 
 			<a href="lists-divider.html" data-role="button" data-icon="arrow-r" data-iconpos="right">List divider example</a>
+
+
+			<h2>Autodividers</h2>
+
+			<p>A listview can be configured to automatically generate dividers for its items. This is done by adding a <code>data-autodividers="true"</code> attribute to any listview.</p>
+
+			<p>By default, the text used to create dividers is the uppercased first letter of either the item's link text (for linked lists) or the item's text (for read-only lists). Alternatively, if you are using formatted list items, you can specify divider text by setting the <code>autodividersSelector</code> option on the listview programmatically. For example, to add a custom selector to the element with <code>id="mylistview"</code>:</p>
+
+<pre><code>
+$("#mylistview").listview({
+  autodividers: true,
+
+  // the selector function is passed a &lt;li&gt; element from the listview;
+  // it should return the appropriate divider text for that &lt;li&gt;
+  // element as a string
+  autodividersSelector: function ( li ) {
+    var out = /* generate a string based on the content of li */;
+    return out;
+  }
+});
+</code></pre>
+
+			<p>If new list items are added to the list or removed from it, the dividers are <em>not</em> automatically updated: you should call <code>refresh()</code> on the listview to redraw the autodividers.</p>
+
+			<a href="lists-autodividers.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Autodividers example</a>
 
 
 			<h2>Search filter</h2>
@@ -81,14 +106,14 @@
 
 			<a href="lists-search.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Search filter example</a>
 
-      <p>If you want to change the way in which list items are filtered, ie fuzzy search or matching from the beginning of the string, you can configure the callback used internally by defining <code>$.mobile.listview.prototype.options.filterCallback</code> during <code>mobileinit</code> or after the widget has been created with <code>$("#mylist").listview('option', 'filterCallback', yourFilterFunction)</code>. Any function defined for the callback will be provided two arguments. First, the text of the current list item and second, the value being searched for. A truthy value will result in a hidden list item. The default callback which filters entries without the <code>searchValue</code> as a substring is described below:
+      <p>If you want to change the way in which list items are filtered, ie fuzzy search or matching from the beginning of the string, you can configure the callback used internally by defining <code>$.mobile.listview.prototype.options.filterCallback</code> during <code>mobileinit</code> or after the widget has been created with <code>$("#mylist").listview('option', 'filterCallback', yourFilterFunction)</code>. Any function defined for the callback will be provided three arguments. First, the text of the current list item, second the value being searched for, and third the list item being filtered. A truthy value will result in a hidden list item. The default callback which filters entries without the <code>searchValue</code> as a substring is described below:
       </p>
 
-<pre><code>function( text, searchValue ){
-  return text.toLowerCase().indexOf( searchValue ) === -1;
+<pre><code>function( text, searchValue, item ){
+  return text.toString().toLowerCase().indexOf( searchValue ) === -1;
 };</code></pre>
 
-			<p>To filter list items by values other than the text, add a <code>data-filtertext</code> attribute to the list item.  The value of this attribute will be passed as the first argument to the <code>filterCallback</code> function instead of the text.</p>
+			<p>To filter list items by values other than the text, add a <code>data-filtertext</code> attribute to the list item.  The value of this attribute will be passed as the first argument to the <code>filterCallback</code> function instead of the text. Alternately you can use an attribute of our choosing as defined on the list item itself.</p>
 
 			<a href="lists-search-filtertext.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Hidden data filter example</a>
 
@@ -116,7 +141,7 @@
 			<h2>Calling the listview plugin</h2>
 			<p>You can directly call the listview plugin on any selector, just like any jQuery plugin:</p>
 			<code>$('#mylist').listview();</code>
-			
+
 			<h2>Updating lists</h2>
 			<p>If you add items to a listview, you'll need to call the <code>refresh()</code> method on it to update the styles and create any nested lists that are added. For example:</p>
 			<code>$('#mylist').listview('refresh');</code>
@@ -132,7 +157,7 @@
 
 						<h3>More in this section</h3>
 
-						<ul data-role="listview" data-theme="c" data-dividertheme="d">
+						<ul data-role="listview" data-theme="c" data-divider-theme="d">
 
 							<li data-role="list-divider">List views</li>
 							<li data-theme="a"><a href="docs-lists.html">List basics &amp; API</a></li>
@@ -142,6 +167,7 @@
 
 							<li><a href="lists-split.html">Split button list</a></li>
 							<li><a href="lists-divider.html">List dividers</a></li>
+							<li><a href="lists-autodividers.html">Autodividers</a></li>
 							<li><a href="lists-count.html">Count bubble</a></li>
 							<li><a href="lists-thumbnails.html">Thumbnails</a></li>
 							<li><a href="lists-icons.html">Icons</a></li>
@@ -174,4 +200,3 @@
 
 		</body>
 		</html>
-

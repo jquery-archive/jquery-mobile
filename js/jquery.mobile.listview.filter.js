@@ -11,8 +11,9 @@ define( [ "jquery", "./jquery.mobile.listview", "./jquery.mobile.forms.textinput
 $.mobile.listview.prototype.options.filter = false;
 $.mobile.listview.prototype.options.filterPlaceholder = "Filter items...";
 $.mobile.listview.prototype.options.filterTheme = "c";
-$.mobile.listview.prototype.options.filterCallback = function( text, searchValue ){
-	return text.toLowerCase().indexOf( searchValue ) === -1;
+// TODO rename callback/deprecate and default to the item itself as the first argument
+$.mobile.listview.prototype.options.filterCallback = function( text, searchValue, item ){
+	return text.toString().toLowerCase().indexOf( searchValue ) === -1;
 };
 
 $( document ).delegate( ":jqmData(role='listview')", "listviewcreate", function() {
@@ -71,7 +72,7 @@ $( document ).delegate( ":jqmData(role='listview')", "listviewcreate", function(
 						// New bucket!
 						childItems = false;
 
-					} else if ( listview.options.filterCallback( itemtext, val ) ) {
+					} else if ( listview.options.filterCallback( itemtext, val, item ) ) {
 
 						//mark to be hidden
 						item.toggleClass( "ui-filter-hidequeue" , true );

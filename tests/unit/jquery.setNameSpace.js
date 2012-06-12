@@ -1,4 +1,4 @@
 //set namespace for unit test markp
-$( document ).bind( "mobileinit", function(){
-	$.mobile.ns = "nstest-";		
+jQuery( document ).bind( "mobileinit", function(){
+	jQuery.mobile.ns = "nstest-";
 });

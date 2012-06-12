@@ -61,7 +61,7 @@
 			},
 
 			function(){
-				same($("#select-choice-few-menu").parent(".ui-selectmenu-hidden").length, 1);
+				same($("#select-choice-few-menu").parent().parent(".ui-selectmenu-hidden").length, 1);
 				start();
 			}
 		], 1000);
@@ -93,26 +93,6 @@
 
 			start
 		]);
-	});
-
-	asyncTest( "custom select menu always renders screen from the left", function(){
-		var select;
-
-		expect( 1 );
-
-		$.testHelper.sequence([
-			resetHash,
-
-			function(){
-				select = $("ul#select-offscreen-menu");
-				$("#select-offscreen-container a").trigger("click");
-			},
-
-			function(){
-				ok(select.offset().left >= 30, "offset from the left is greater than or equal to 30px" );
-				start();
-			}
-		], 1000);
 	});
 
 	asyncTest( "selecting an item from a dialog sized custom select menu leaves no dialog hash key", function(){
@@ -171,6 +151,10 @@
 		}
 	});
 
+	test( "a popup containing a non-native select will cause the select to be rendered as native", function() {
+		ok( $( "#select-choice-inside-popup-menu" ).length === 0, "non-native select inside popup has no generated menu" );
+	});
+
 	asyncTest( "a large select option should not overflow", function(){
 		// https://github.com/jquery/jquery-mobile/issues/1338
 		var menu, select;
@@ -213,7 +197,7 @@
 					triggered = true;
 				});
 
-				$(".ui-selectmenu-screen:not(.ui-screen-hidden)").trigger("click");
+				$(".ui-popup-screen:not(.ui-screen-hidden)").trigger("click");
 			},
 
 			function(){
@@ -289,8 +273,8 @@
 			},
 
 			function() {
-				same( $( ".ui-selectmenu.in ul" ).text(), "default" );
-				$( ".ui-selectmenu-screen" ).click();
+				same( $( ".ui-popup-container:not(.ui-selectmenu-hidden) .ui-selectmenu ul" ).text(), "default" );
+				$( ".ui-popup-screen" ).click();
 			},
 
 			function() {
@@ -304,8 +288,8 @@
 			},
 
 			function() {
-				same( $( ".ui-selectmenu.in ul" ).text(), text );
-				$( ".ui-selectmenu-screen" ).click();
+				same( $( ".ui-popup-container:not(.ui-selectmenu-hidden) .ui-selectmenu ul" ).text(), text );
+				$( ".ui-popup-screen" ).click();
 			},
 
 			start
@@ -379,13 +363,13 @@
 	});
 
 	test( "a disabled custom select should still be enhanced as custom", function() {
-		$("#select-disabled-enhancetest").selectmenu("enable").siblings("a").click();
+		$("#select-disabled-enhancetest").selectmenu("enable").selectmenu("open");
 
 		var menu = $(".ui-selectmenu").not( ".ui-selectmenu-hidden" );
 		ok( menu.text().indexOf("disabled enhance test") > -1, "the right select is showing" );
 	});
 
-	test( "selected option 1classes are persisted to the button text", function() {
+	test( "selected option classes are persisted to the button text", function() {
 		var $select = $( "#select-preserve-option-class" ),
 			selectedOptionClasses = $select.find( "option:selected" ).attr( "class" );
 
@@ -399,7 +383,7 @@
 		deepEqual( $select.parent().find( ".ui-btn-text > span" ).attr( "class" ), selectedOptionClasses );
 	});
 
-	test( "multple select text values are aggregated in the button text", function() {
+	test( "multiple select text values are aggregated in the button text", function() {
 		var $select = $( "#select-aggregate-option-text" );
 
 		deepEqual( "Standard: 7 day, Rush: 3 days", $select.parent().find( ".ui-btn-text" ).text() );

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<title>jQuery Mobile: Autodividers</title>
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
+	<script src="../../js/jquery.js"></script>
+	<script src="../../js/"></script>
+</head>
+
+<body>
+
+<div data-role="page" id="baseline">
+	<div data-role="header">
+		<h1>Autodividers</h1>
+	</div>
+
+	<div data-role="content">
+		<p>This should get auto-dividers based on link text.</p>
+		<ul id="link-text-dividers" data-role="listview" data-autodividers="true">
+			<li><a href="#">Amy</a></li>
+			<li><a href="#">Andrew</a></li>
+			<li><a href="#">Astrid</a></li>
+			<li><a href="#">Bertie</a></li>
+			<li><a href="#">Carrie</a></li>
+			<li><a href="#">Derek</a></li>
+			<li><a href="#">Ian</a></li>
+			<li><a href="#">Matthew</a></li>
+		</ul>
+	</div>
+
+	<div data-role="content">
+		<p>This should get auto-dividers based on link text but
+		shouldn't produce duplicate dividers. Should also
+		add more dividers if new list elements are added. Note that
+		removing Bertie should cause the duplicate "A" dividers to merge
+		and trigger a "listviewchange" event.</p>
+
+		<p>
+			<button id="add-gary-button" data-inline="true">Add Gary and refresh</button>
+			<button id="remove-bertie-button" data-inline="true">Remove Bertie and refresh</button>
+		</p>
+
+		<ul id="refreshable-dividers" data-role="listview" data-autodividers="true">
+			<li><a href="#">Amy</a></li>
+			<li><a href="#">Andrew</a></li>
+			<li><a href="#">Angela</a></li>
+			<li><a href="#">Bertie</a></li>
+			<li><a href="#">Astrid</a></li>
+			<li><a href="#">Carrie</a></li>
+			<li><a href="#">Derek</a></li>
+			<li><a href="#">Ian</a></li>
+			<li><a href="#">Matthew</a></li>
+		</ul>
+	</div>
+
+	<div data-role="content">
+		<p>This uses a custom selector to draw text from formatted list
+		items.</p>
+
+		<ul id="custom-selector">
+			<li><span>Anne</span> likes to eat sweets</li>
+			<li><span>Beth</span> likes to eat treats</li>
+			<li><span>Bill</span> likes to eat meats</li>
+			<li><span>Carl</span> likes to eat beets</li>
+		</ul>
+	</div>
+
+	<div data-role="content">
+		<p>This should get auto-dividers based on text. NB this has
+		intentionally blank li elements to check they don't get dividers.</p>
+		<ul id="text-dividers" data-role="listview" data-autodividers="true">
+			<li>Barry</li>
+			<li>Betty</li>
+			<li>Carrie</li>
+			<li>Harry</li>
+			<li></li>
+			<li>Hetty</li>
+			<li>Kitty</li>
+			<li>Larry</li>
+			<li></li>
+			<li>Laurie</li>
+			<li>Mary</li>
+		</ul>
+	</div>
+
+	<div data-role="content">
+		<p>Non-sorted list will produce duplicate auto-dividers.</p>
+		<ul id="non-sorted" data-role="listview" data-autodividers="true">
+			<li>Barry</li>
+			<li>Carrie</li>
+			<li>Betty</li>
+			<li>Harry</li>
+			<li>Carly</li>
+			<li>Hetty</li>
+		</ul>
+	</div>
+
+	<div data-role="content">
+		<p>This had dividers already which were replaced.</p>
+		<ul id="has-dividers" data-role="listview" data-autodividers="true">
+			<li data-role="list-divider">Any old iron</li>
+			<li><a href="#">Amy</a></li>
+			<li><a href="#">Andrew</a></li>
+			<li><a href="#">Astrid</a></li>
+			<li data-role="list-divider">Barnacles</li>
+			<li><a href="#">Bertie</a></li>
+			<li data-role="list-divider">Crop circle</li>
+			<li><a href="#">Carrie</a></li>
+			<li data-role="list-divider">Dog</li>
+			<li><a href="#">Derek</a></li>
+			<li data-role="list-divider">Igloos</li>
+			<li><a href="#">Ian</a></li>
+			<li data-role="list-divider">Massive clouds</li>
+			<li><a href="#">Matthew</a></li>
+		</ul>
+	</div>
+
+</div>
+
+<script>
+$(document).bind('pagecreate', function () {
+	$('#custom-selector').listview({
+	  autodividers: true,
+	  autodividersSelector: function( elt ) {
+			return elt.find('span').text();
+		}
+	});
+
+	$('#add-gary-button').bind('click', function () {
+		var gary = $('<li><a href="#">Gary</a></li>');
+		$('#refreshable-dividers').find('li.ui-li-divider:contains(I)').before(gary);
+		$('#refreshable-dividers').listview('refresh');
+	});
+
+	$('#remove-bertie-button').bind('click', function () {
+		$('#refreshable-dividers').find('li:contains("Bertie")').remove();
+		$('#refreshable-dividers').listview('refresh');
+	});
+});
+</script>
+
+</body>
+</html>

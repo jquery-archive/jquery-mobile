@@ -13,3 +13,9 @@ tmp/
 
 # branch preview
 branches
+
+# node build dependencies
+node_modules
+
+# phantom junit output
+build/test-results/

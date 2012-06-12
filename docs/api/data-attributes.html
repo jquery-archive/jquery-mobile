@@ -70,8 +70,7 @@
 					<td>swatch letter (a-z)</td>
 				</tr>
 			</table>
-			<p>Multiple buttons can be wrapped in a container with a <code>data-role="controlgroup"</code> attribute for a vertically grouped set. Add the <code>data-type="horizontal"</code> attribute for the buttons to sit side-by-side.</p>
-
+			<p>Multiple buttons can be wrapped in a container with a <code>data-role="controlgroup"</code> attribute for a vertically grouped set. Add the <code>data-type="horizontal"</code> attribute for the buttons to sit side-by-side. Add the <code>data-mini="true"</code> to get the mini/compact sized version for all the buttons that appear in the controlgroup. </p>
 
 			<h2><a href="../forms/checkboxes/">Checkbox</a></h2>
 			<p>Pairs of labels and inputs with <code>type="checkbox"</code> are auto-enhanced, no <code>data-role</code> required</p>
@@ -89,6 +88,7 @@
 					<td>swatch letter (a-z) - Added to the form element</td>
 				</tr>
 			</table>
+			<p>Multiple checkboxes can be wrapped in a container with a <code>data-role="controlgroup"</code> attribute for a vertically grouped set. Add the <code>data-type="horizontal"</code> attribute for the checkboxes to sit side-by-side. Add the <code>data-mini="true"</code> to get the mini/compact sized version for all the checkboxes that appear in the controlgroup. </p>
 
 			<h2><a href="../content/content-collapsible.html">Collapsible</a></h2>
 			<p>A heading and content wrapped in a container with the <code>data-role="collapsible"</code></p>
@@ -98,12 +98,20 @@
 					<td><strong>true</strong> | false</td>
 				</tr>
 				<tr>
+					<th>data-collapsed-icon</th>
+					<td>home | delete | <strong>plus</strong> | arrow-u | arrow-d | check | gear | grid | star | custom | arrow-r | arrow-l | minus | refresh | forward | back | alert | info | search</td>
+				</tr>
+				<tr>
 					<th>data-content-theme</th>
 					<td>swatch letter (a-z)</td>
 				</tr>
 				<tr>
+					<th>data-expanded-icon</th>
+					<td>home | delete | plus | arrow-u | arrow-d | check | gear | grid | star | custom | arrow-r | arrow-l | <strong>minus</strong> | refresh | forward | back | alert | info | search</td>
+				</tr>
+				<tr>
 					<th>data-iconpos</th>
-					<td><strong>left</strong> | right | top | bottom |  notext</td>
+					<td><strong>left</strong> | right | top | bottom</td>
 				</tr>
 				<tr>
 					<th>data-mini</th>
@@ -119,8 +127,16 @@
 			<p>A number of collapsibles wrapped in a container with the <code>data-role="collapsible-set"</code></p>
 			<table>
 				<tr>
+					<th>data-collapsed-icon</th>
+					<td>home | delete | <strong>plus</strong> | arrow-u | arrow-d | check | gear | grid | star | custom | arrow-r | arrow-l | minus | refresh | forward | back | alert | info | search</td>
+				</tr>
+				<tr>
 					<th>data-content-theme</th>
 					<td>swatch letter (a-z) - Sets all collapsibles in set</td>
+				</tr>
+				<tr>
+					<th>data-expanded-icon</th>
+					<td>home | delete | plus | arrow-u | arrow-d | check | gear | grid | star | custom | arrow-r | arrow-l | <strong>minus</strong> | refresh | forward | back | alert | info | search</td>
 				</tr>
 				<tr>
 					<th>data-iconpos</th>
@@ -145,8 +161,21 @@
 				</tr>
 			</table>
 
+			<h2><a href="../buttons/buttons-grouped.html">Controlgroup</a></h2>
+			<p>DIV or FIELDSET container with <code>data-role="controlgroup"</code>. Visually integrate multiple button-styled inputs of a single type (<a href="../forms/checkboxes/">checkboxes</a>, <a href="../buttons/buttons-types.html">link-based buttons</a>, <a href="../forms/radiobuttons/">radio buttons</a>, <a href="../forms/selects/">selects</a>) into a group. For grouping form checkboxes and radio buttons, the <code>fieldset</code> container is recommended inside a div container with the <code>data-role="fieldcontain"</code>, to improve label styling.</p>
+			<table>
+				<tr>
+					<th>data-mini</th>
+					<td>true | <strong>false</strong> - Compact sized version for all items in the controlgroup</td>
+				</tr>
+				<tr>
+					<th>data-type</th>
+					<td>horizontal | <strong>vertical</strong> - For horizontal or vertical item alignment</td>
+				</tr>
+			</table>
+
 			<h2><a href="../pages/page-dialogs.html">Dialog</a></h2>
-			<p>Page with <code>data-role="page"</code> linked to with <code>data-rel="dialog"</code> on the anchor.</p>
+			<p>Container with <code>data-role="dialog"</code> or linked to with <code>data-rel="dialog"</code> on the anchor.</p>
 			<table>
 				<tr>
 					<th>data-close-btn-text</th>
@@ -188,6 +217,35 @@
 
 			<h2><a href="../forms/docs-forms.html">Field container</a></h2>
 			<p>Container with <code>data-role="fieldcontain"</code> wrapped around label/form element pair</p>
+
+			<h2><a href="../toolbars/bars-fixed.html">Fixed Toolbar</a></h2>
+			<p>Container with <code>data-role="header"</code> or <code>data-role="footer"</code> plus the attribute <code>data-position="fixed"</code></p>
+			<table>
+				<tr>
+					<th>data-disable-page-zoom</th>
+					<td><strong>true</strong> | false - User-scaling-ability for pages with fixed toolbars</td>
+				</tr>
+				<tr>
+					<th>data-fullscreen</th>
+					<td>true | <strong>false</strong> - Setting toolbars <strong>over</strong> the page-content</td>
+				</tr>
+				<tr>
+					<th>data-tap-toggle</th>
+					<td><strong>true</strong> | false - Ability to toggle toolbar-visibility on user tap/click</td>
+				</tr>
+				<tr>
+					<th>data-transition</th>
+					<td><strong>slide</strong> | fade | none - Show/hide-transition when a tap/click occurs</td>
+				</tr>
+				<tr>
+					<th>data-update-page-padding</th>
+					<td><strong>true</strong> | false - Automatic/User-CSS based toolbar space-management</td>
+				</tr>
+				<tr>
+					<th>data-visible-on-page-show</th>
+					<td><strong>true</strong> | false - toolbar-visibility when parent page is shown</td>
+				</tr>
+			</table>
 
 			<h2><a href="../forms/switch/">Flip toggle switch</a></h2>
 			<p>Select with <code>data-role="slider"</code>, two options only</p>
@@ -235,6 +293,10 @@
 			<p>Container with <code>data-role="header"</code></p>
 			<table>
 				<tr>
+					<th>data-id</th>
+					<td>string (unique id, useful in persistent headers)</td>
+				</tr>
+				<tr>
 					<th>data-position</th>
 					<td>fixed</td>
 				</tr>
@@ -275,13 +337,17 @@
 				</tr>
 				<tr>
 					<th>data-transition</th>
-					<td><strong>slide</strong> | slideup | slidedown | pop | fade | flip</td>
+					<td><strong>fade</strong> | flip | flow | pop | slide | slidedown | slidefade | slideup | turn | none</td>
 				</tr>
 			</table>
 
 			<h2><a href="../lists/docs-lists.html">Listview</a></h2>
 			<p>OL or UL with <code>data-role="listview"</code></p>
 			<table>
+				<tr>
+					<th>data-autodividers</th>
+					<td>true | <strong>false</strong></td>
+				</tr>
 				<tr>
 					<th>data-count-theme</th>
 					<td>swatch letter (a-z)</td>
@@ -303,12 +369,16 @@
 					<td>swatch letter (a-z)</td>
 				</tr>
 				<tr>
+					<th>data-header-theme</th>
+					<td>swatch letter (a-z)</td>
+				</tr>
+				<tr>
 					<th>data-inset</th>
 					<td>true | <strong>false</strong></td>
 				</tr>
 				<tr>
 					<th>data-split-icon</th>
-					<td>home | delete | plus | arrow-u | arrow-d | check | gear | grid | star | custom | arrow-r | arrow-l | minus | refresh | forward | back | alert | info | search</td>
+					<td>home | delete | plus | arrow-u | arrow-d | check | gear | grid | star | custom | <strong>arrow-r</strong> | arrow-l | minus | refresh | forward | back | alert | info | search</td>
 				</tr>
 				<tr>
 					<th>data-split-theme</th>
@@ -329,7 +399,7 @@
 				</tr>
 				<tr>
 					<th>data-icon</th>
-					<td>home | delete | plus | arrow-u | arrow-d | check | gear | grid | star | custom | arrow-r | arrow-l | minus | refresh | forward | back | alert | info | search</td>
+					<td>home | delete | plus | arrow-u | arrow-d | check | gear | grid | star | custom | arrow-r | arrow-l | minus | refresh | forward | back | alert | info | search | false</td>
 				</tr>
 				<tr>
 					<th>data-role</th>
@@ -340,22 +410,19 @@
 					<td>swatch letter (a-z) - can also be set on individual LIs</td>
 				</tr>
 			</table>
+			<p>The <code>data-icon</code> attribute is only applicable for a listview item, if it contains a link.</p>
+
 			<h2><a href="../toolbars/docs-navbar.html">Navbar</a></h2>
 			<p>A number of LIs wrapped in a container with <code>data-role="navbar"</code></p>
 			<table>
 				<tr>
-					<th>data-icon</th>
-					<td>home | delete | plus | arrow-u | arrow-d | check | gear | grid | star | custom | arrow-r | arrow-l | minus | refresh | forward | back | alert | info | search</td>
-				</tr>
-				<tr>
 					<th>data-iconpos</th>
-					<td><strong>left</strong> | right | top | bottom |  notext</td>
-				</tr>
-				<tr>
-					<th>data-theme</th>
-					<td>swatch letter (a-z) - can also be set on individual LIs</td>
+					<td>left | right | <strong>top</strong> | bottom |  notext</td>
 				</tr>
 			</table>
+			<p>To add icons to the navbar items, the <code>data-icon</code> attribute is used, specifying a standard mobile icon for each item.</p>
+			<p>Navbars inherit the theme-swatch from their parent container. Setting the <code>data-theme</code> attribute to a navbar is not supported. The <code>data-theme</code> attribute can be set individually to the links inside a navbar.</p>
+			
 			<h2><a href="../pages/page-anatomy.html">Page</a></h2>
 			<p>Container with <code>data-role="page"</code></p>
 			<table>
@@ -395,6 +462,31 @@
 					<th>data-title</th>
 					<td>string (title used when page is shown)</td>
 				</tr>
+				<tr>
+					<th>data-url</th>
+					<td>url (value for updating the URL, instead of the url used to request the page)</td>
+				</tr>
+			</table>
+
+			<h2><a href="../pages/popup/">Popup</a></h2>
+			<p>Container with <code>data-role="popup"</code> or linked to with <code>data-rel="popup"</code> on the anchor.</p>
+			<table>
+				<tr>
+					<th>data-corners</th>
+					<td><strong>true</strong> | false</td>
+				</tr>
+				<tr>
+					<th>data-overlay-theme</th>
+					<td>swatch letter (a-z) - default null: transparent background</td>
+				</tr>
+				<tr>
+					<th>data-shadow</th>
+					<td><strong>true</strong> | false</td>
+				</tr>
+				<tr>
+					<th>data-theme</th>
+					<td>swatch letter (a-z) - Added to the popup container. Default inherited, none sets the popup to transparent</td>
+				</tr>
 			</table>
 
 			<h2><a href="../forms/radiobuttons/">Radio button</a></h2>
@@ -413,17 +505,18 @@
 					<td>swatch letter (a-z) - Added to the form element</td>
 				</tr>
 			</table>
+						<p>Multiple radion buttons can be wrapped in a container with a <code>data-role="controlgroup"</code> attribute for a vertically grouped set. Add the <code>data-type="horizontal"</code> attribute for the radio buttons to sit side-by-side. Add the <code>data-mini="true"</code> to get the mini/compact sized version for all the radio buttons that appear in the controlgroup. </p>
 
 			<h2><a href="../forms/selects/">Select</a></h2>
 			<p>All <code>select</code> form elements are auto-enhanced, no <code>data-role</code> required</p>
 			<table>
 				<tr>
 					<th>data-icon</th>
-					<td>home | delete | plus | arrow-u | arrow-d | check | gear | grid | star | custom | arrow-r | arrow-l | minus | refresh | forward | back | alert | info | search</td>
+					<td>home | delete | plus | arrow-u | <strong>arrow-d</strong> | check | gear | grid | star | custom | arrow-r | arrow-l | minus | refresh | forward | back | alert | info | search | false </td>
 				</tr>
 				<tr>
 					<th>data-iconpos</th>
-					<td><strong>left</strong> | right | top | bottom |  notext</td>
+					<td>left | <strong>right</strong> | top | bottom |  notext</td>
 				</tr>
 				<tr>
 					<th>data-inline</th>

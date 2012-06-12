@@ -2,7 +2,7 @@
 //>>description: Widget factory extentions for mobile.
 //>>label: Widget Factory 
 //>>group: Core
-//>>css: ../css/themes/default/jquery.mobile.theme.css
+//>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 define( [ "jquery", "../external/requirejs/depend!./jquery.ui.widget[jquery]" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");

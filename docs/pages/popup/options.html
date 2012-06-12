@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Docs - Popup</title>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../../_assets/css/jqm-docs.css"/>
+
+	<script src="../../../js/jquery.js"></script>
+	<script src="../../../docs/_assets/js/jqm-docs.js"></script>
+	<script src="../../../js/"></script>
+
+</head>
+<body>
+
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="f">
+		<h1>Popup</h1>
+		<a href="../../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+		<a href="../../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
+	</div><!-- /header -->
+
+	<div data-role="content" class="ui-body">
+		<div class="content-primary">
+
+		<form action="#" method="get">
+
+			<h2>Popup</h2>
+
+			<ul data-role="controlgroup" data-type="horizontal" class="localnav">
+				<li><a href="index.html" data-role="button" data-transition="fade">Basics</a></li>
+				<li><a href="options.html" data-role="button" data-transition="fade" class="ui-btn-active">Options</a></li>
+				<li><a href="methods.html" data-role="button" data-transition="fade">Methods</a></li>
+				<li><a href="events.html" data-role="button" data-transition="fade">Events</a></li>
+			</ul>
+
+			<p>The popup plugin has the following options:</p>
+
+		<dl>
+			<dt><code>overlayTheme</code> <em>string</em></dt>
+			<dd>
+				<p class="default">default: null</p>
+				<p>Sets the color scheme (swatch) for the popup background, which covers the entire window. If not explicitly set, the background will be transparent.</p>
+				<pre><code>$('.selector').popup(<strong>{ overlayTheme: "a" }</strong>);</code></pre>
+				 <p>This option is also exposed as a data attribute: <code>data-overlay-theme=&quot;a&quot;</code></p>
+			</dd>
+
+			<dt><code>theme</code> <em>string</em></dt>
+			<dd>
+				<p class="default">default: null</p>
+				<p>Sets the color scheme (swatch) for the popup contents. Unless explicitly set to <code>'none'</code>, the
+				theme for the popup will be assigned the first time the popup is shown by inheriting the page theme or, failing that, by the hard-coded value <code>'c'</code>. If you set it to 'none', the popup will not have any theme at all, and will be transparent.</p>
+				<pre><code>$('.selector').popup(<strong>{ theme: "a" }</strong>);</code></pre>
+				 <p>This option is also exposed as a data attribute: <code>data-theme=&quot;a&quot;</code></p>
+			</dd>
+
+			<dt><code>initSelector</code> <em>CSS selector string</em></dt>
+			<dd>
+				<p class="default">default: ":jqmData(role='popup')"</p>
+				<p>This is used to define the selectors (element types, data roles, etc.) that will automatically be initialized as popups. To change which elements are initialized, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
+<pre><code>$( document ).bind( "mobileinit", function(){
+   <strong>$.mobile.popup.prototype.options.initSelector = ".mypopup";</strong>
+});
+</code></pre>
+			</dd>
+
+			<dt><code>shadow</code> <em>boolean</em></dt>
+			<dd>
+				<p class="default">default: true</p>
+				<p>Sets whether to draw a shadow around the popup. This option is also exposed as a data attribute: <code>data-shadow=&quot;true&quot;</code></p>
+				<pre><code>$('.selector').popup(<strong>{ shadow: true }</strong>);</code></pre>
+			</dd>
+
+			<dt><code>corners</code> <em>boolean</em></dt>
+			<dd>
+				<p class="default">default: true</p>
+				<p>Sets whether to draw the popup with rounded corners. This option is also exposed as a data attribute: <code>data-corners=&quot;true&quot;</code></p>
+				<pre><code>$('.selector').popup(<strong>{ corners: true }</strong>);</code></pre>
+			</dd>
+
+		</dl>
+
+	</form>
+	</div><!--/content-primary -->
+
+				<div class="content-secondary">
+
+					<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+
+							<h3>More in this section</h3>
+
+							<ul data-role="listview" data-theme="c" data-dividertheme="d">
+
+								<li data-role="list-divider">Pages &amp; Dialogs</li>
+								<li><a href="../page-anatomy.html">Anatomy of a page</a></li>
+								<li><a href="../page-template.html" data-ajax="false">Single page template</a></li>
+								<li><a href="../multipage-template.html" data-ajax="false">Multi-page template</a></li>
+								<li><a href="../page-titles.html">Page titles</a></li>
+								<li><a href="../page-links.html">Linking pages</a></li>
+								<li><a href="../page-transitions.html" data-ajax="false">Page transitions</a></li>
+								<li><a href="../page-dialogs.html">Dialogs</a></li>
+								<li data-theme="a"><a href="index.html">Popups</a></li>
+								<li><a href="../page-cache.html">Prefetching &amp; caching pages</a></li>
+								<li><a href="../page-navmodel.html">Ajax, hashes &amp; history</a></li>
+								<li><a href="../page-dynamic.html">Dynamically Injecting Pages</a></li>
+								<li><a href="../page-scripting.html">Scripting pages</a></li>
+								<li><a href="../phonegap.html">PhoneGap apps</a></li>
+								<li><a href="../touchoverflow.html">touchOverflow feature</a></li>
+								<li><a href="../pages-themes.html">Theming pages</a></li>
+
+							</ul>
+					</div>
+				</div>
+
+</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p>&copy; 2011-12 The jQuery Foundation</p>
+</div>
+
+</div><!-- /page -->
+
+</body>
+</html>

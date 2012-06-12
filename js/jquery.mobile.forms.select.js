@@ -2,7 +2,8 @@
 //>>description: Consistent styling for native select menus. Tapping opens a native select menu.
 //>>label: Selects
 //>>group: Forms
-//>>css: ../css/themes/default/jquery.mobile.theme.css, ../css/structure/jquery.mobile.forms.select.css
+//>>css.structure: ../css/structure/jquery.mobile.forms.select.css
+//>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.widget", "./jquery.mobile.buttonMarkup", "./jquery.mobile.zoom" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
@@ -46,9 +47,9 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		}, 40);
 	},
 
-  _selectOptions: function() {
-    return this.select.find( "option" );
-  },
+	_selectOptions: function() {
+		return this.select.find( "option" );
+	},
 
 	// setup items that are generally necessary for select menu extension
 	_preExtension: function(){
@@ -77,7 +78,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 	_create: function() {
 		this._preExtension();
 
- 		// Allows for extension of the native select for custom selects and other plugins
+		// Allows for extension of the native select for custom selects and other plugins
 		// see select.custom for example extension
 		// TODO explore plugin registration
 		this._trigger( "beforeCreate" );
@@ -87,6 +88,10 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		var self = this,
 
 			options = this.options,
+
+			inline = options.inline || this.select.jqmData( "inline" ),
+			mini = options.mini || this.select.jqmData( "mini" ),
+			iconpos = options.icon ? ( options.iconpos || this.select.jqmData( "iconpos" ) ) : false,
 
 			// IE throws an exception at options.item() function when
 			// there is no selected item
@@ -99,12 +104,12 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				.buttonMarkup( {
 					theme: options.theme,
 					icon: options.icon,
-					iconpos: options.iconpos,
-					inline: options.inline,
+					iconpos: iconpos,
+					inline: inline,
 					corners: options.corners,
 					shadow: options.shadow,
 					iconshadow: options.iconshadow,
-					mini: options.mini
+					mini: mini
 				});
 
 		this.setButtonText();
@@ -114,7 +119,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		// On the desktop,it seems to do the opposite
 		// for these reasons, using the nativeMenu option results in a full native select in Opera
 		if ( options.nativeMenu && window.opera && window.opera.version ) {
-			this.select.addClass( "ui-select-nativeonly" );
+			button.addClass( "ui-select-nativeonly" );
 		}
 
 		// Add counter for multi selects
@@ -147,12 +152,12 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				// Add active class to button
 				self.button.addClass( $.mobile.activeBtnClass );
 			})
-            .bind( "focus", function() {
-                self.button.addClass( $.mobile.focusClass );
-            })
-            .bind( "blur", function() {
-                self.button.removeClass( $.mobile.focusClass );
-            })
+			.bind( "focus", function() {
+				self.button.addClass( $.mobile.focusClass );
+			})
+			.bind( "blur", function() {
+				self.button.removeClass( $.mobile.focusClass );
+			})
 			.bind( "focus vmouseover", function() {
 				self.button.trigger( "vmouseover" );
 			})
@@ -173,8 +178,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			if( self.options.preventFocusZoom ){
 				$.mobile.zoom.disable( true );
 			}
-		})
-		.bind( "mouseup", function() {
+		}).bind( "mouseup", function() {
 			if( self.options.preventFocusZoom ){
 				$.mobile.zoom.enable( true );
 			}

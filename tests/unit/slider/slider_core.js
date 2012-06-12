@@ -44,4 +44,15 @@
 		same( $unhighlighted.siblings( ".ui-slider" ).find( ".ui-slider-bg" ).length, 0,
 					"unhighlighted slider _not_ should have a div for the track bg" );
 	});
+
+	test( "labels that have id keep that id", function() {
+		var label = $( "[for=label-id-slider]" );
+		equal(label.attr( "id" ), "label-id", "label id was not changed" );
+	});
+
+	test( "labels without an id get an id", function() {
+		var slider = $( "#empty-string-val-slider" ),
+			label = $( "[for=empty-string-val-slider]" );
+		equal(label.attr( "id" ), slider.attr( "id" ) + "-label", "the label id is based off the slider id" );
+	});
 })( jQuery );

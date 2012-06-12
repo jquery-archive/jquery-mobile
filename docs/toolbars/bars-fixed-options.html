@@ -66,7 +66,7 @@
 				<p>Fullscreen fixed toolbars sit on top of the content at all times when they are visible, and unlike regular fixed toolbars, fullscreen toolbars do not fall back to static positioning when toggled, instead they disappear from the screen entirely. Fullscreen toolbars are ideal for more immersive interfaces, like a photo viewer that is meant to fill the entire screen with the photo itself and no distractions. <a href="bars-fullscreen.html">This page</a> demonstrates toolbars that use the fullscreen option. This option is also exposed as a data attribute: <code>data-fullscreen=&quot;true&quot;</code></p>			
 				<pre><code>$("[data-role=header]").fixedtoolbar(<strong>{ fullscreen: true }</strong>);</code></pre>
 				
-				<p class="ui-body ui-body-e"><strong>Note:</strong>While the data-attribute syntax for this option has not changed, it is now only supported on the toolbar element itself, and not the page element. </p>
+				<p class="ui-body ui-body-e"><strong>Note:</strong> While the data-attribute syntax for this option has not changed, it is now only supported on the toolbar element itself, and not the page element. </p>
 				
 			</dd>
 			
@@ -107,7 +107,7 @@ $.mobile.fixedToolbars
 			<dt><code>updatePagePadding</code> <em>boolean</em></dt>
 			<dd>
 				<p class="default">default: true</p>
-				<p>Since toolbars can vary in height depending on the content they contain, this option automatically updates the padding on the page element to ensure that fixed toolbars have adequate space in the document when they are statically positioned, and when scrolled to the top or bottom of the page. When enabled, the padding updates during many operations, such as pageshow, during page transitions, and on resize and orientationchange. As an optimization, we would recommend that you consider disabling this option and adding a rule to your CSS to set the padding of the page div to match the EM height of your toolbars, such as <code>.ui-page-header-fixed { padding-top: 4.5em; }</code>. This option is also exposed as a data attribute: <code>data-update-page-paddinge=&quot;false&quot;</code></p>			
+				<p>Since toolbars can vary in height depending on the content they contain, this option automatically updates the padding on the page element to ensure that fixed toolbars have adequate space in the document when they are statically positioned, and when scrolled to the top or bottom of the page. When enabled, the padding updates during many operations, such as pageshow, during page transitions, and on resize and orientationchange. As an optimization, we would recommend that you consider disabling this option and adding a rule to your CSS to set the padding of the page div to match the EM height of your toolbars, such as <code>.ui-page-header-fixed { padding-top: 4.5em; }</code>. This option is also exposed as a data attribute: <code>data-update-page-padding=&quot;false&quot;</code></p>			
 				<pre><code>$("[data-role=header]").fixedtoolbar(<strong>{ updatePagePadding: false }</strong>);</code></pre>
 			</dd>
 			

@@ -2,7 +2,8 @@
 //>>description: Enhances and consistently styles text inputs.
 //>>label: Text Inputs & Textareas
 //>>group: Forms
-//>>css: ../css/themes/default/jquery.mobile.theme.css, ../css/structure/jquery.mobile.forms.textinput.css
+//>>css.structure: ../css/structure/jquery.mobile.forms.textinput.css
+//>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.widget", "./jquery.mobile.degradeInputs", "./jquery.mobile.buttonMarkup", "./jquery.mobile.zoom"  ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");

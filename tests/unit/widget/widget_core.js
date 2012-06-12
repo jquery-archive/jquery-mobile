@@ -9,8 +9,7 @@
 
 		$.mobile.widget.prototype.options = { "fooBar" : true };
 		$.mobile.widget.prototype.element = $("<div data-"+$.mobile.ns+"foo-bar=" + expected + ">");
-		same($.mobile.widget.prototype._getCreateOptions()["fooBar"],
-				 expected);
+		same($.mobile.widget.prototype._getCreateOptions()["fooBar"], expected);
 	});
 
 	test( "getting no data when the options are empty", function(){
@@ -18,8 +17,7 @@
 
 		$.mobile.widget.prototype.options = {};
 		$.mobile.widget.prototype.element = $("<div data-"+$.mobile.ns+"foo-bar=" + expected + ">");
-		same($.mobile.widget.prototype._getCreateOptions(),
-				 expected);
+		same($.mobile.widget.prototype._getCreateOptions(), expected);
 	});
 
 	test( "getting no data when the element has none", function(){
@@ -27,8 +25,7 @@
 
 		$.mobile.widget.prototype.options = { "fooBar" : true };
 		$.mobile.widget.prototype.element = $("<div>");
-		same($.mobile.widget.prototype._getCreateOptions(),
-				 expected);
+		same($.mobile.widget.prototype._getCreateOptions(), expected);
 	});
 
 	test( "elements embedded in sub page elements are excluded on create when they match the keep native selector", function() {
