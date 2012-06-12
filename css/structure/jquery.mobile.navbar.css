@@ -1,8 +1,20 @@
-.ui-navbar { overflow: hidden; }
-.ui-navbar ul { list-style:none; padding: 0; margin: 0; position: relative; display: block; border: 0;}
-.ui-navbar li .ui-btn { display: block; font-size: 12px; text-align: center; margin: 0; border-right-width: 0; max-width: 100%; }
-.ui-navbar li .ui-btn { margin-right: -1px; }
-.ui-navbar li:last-child .ui-btn { margin-right: 0; }
+.ui-navbar { max-width: 100%; }
+.ui-navbar ul { list-style:none; margin: 0; padding: 0; position: relative; display: block; border: 0; max-width: 100%; overflow:hidden; }
+.ui-navbar li .ui-btn { display: block; text-align: center; margin: 0 -1px 0 0; border-right-width: 0; }
+.ui-navbar li .ui-btn-icon-right .ui-icon { right: 6px; }
+
+/* fixing gaps caused by subpixel problem */
+.ui-header .ui-navbar .ui-grid-b li.ui-block-c .ui-btn,
+.ui-footer .ui-navbar .ui-grid-b li.ui-block-c .ui-btn { margin-right: -5px; }
+.ui-header .ui-navbar .ui-grid-c li.ui-block-d .ui-btn,
+.ui-footer .ui-navbar .ui-grid-c li.ui-block-d .ui-btn { margin-right: -3px; }
+.ui-header .ui-navbar .ui-grid-d li.ui-block-e .ui-btn,
+.ui-footer .ui-navbar .ui-grid-d li.ui-block-e .ui-btn { margin-right: -4px; }
+.ui-header .ui-navbar .ui-grid-b li.ui-block-c .ui-btn-icon-right .ui-icon,
+.ui-footer .ui-navbar .ui-grid-b li.ui-block-c .ui-btn-icon-right .ui-icon { right: 8px; }
+.ui-header .ui-navbar .ui-grid-d li.ui-block-e .ui-btn-icon-right .ui-icon,
+.ui-footer .ui-navbar .ui-grid-d li.ui-block-e .ui-btn-icon-right .ui-icon { right: 7px; }
+
 .ui-header .ui-navbar li .ui-btn,
 .ui-footer .ui-navbar li .ui-btn { border-top-width: 0; border-bottom-width: 0; }
 .ui-navbar .ui-btn-inner { padding-left: 2px; padding-right: 2px; }
