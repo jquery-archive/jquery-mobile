@@ -90,7 +90,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			options = this.options,
 
 			inline = options.inline || this.select.jqmData( "inline" ),
-			mini = options.mini || this.select.jqmData( "mini" ),			
+			mini = options.mini || this.select.jqmData( "mini" ),
 			iconpos = options.icon ? ( options.iconpos || this.select.jqmData( "iconpos" ) ) : false,
 
 			// IE throws an exception at options.item() function when
@@ -120,7 +120,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		// for these reasons, using the nativeMenu option results in a full native select in Opera
 		if ( options.nativeMenu && window.opera && window.opera.version ) {
 			button.addClass( "ui-select-nativeonly" );
-		}	
+		}
 
 		// Add counter for multi selects
 		if ( this.isMultiple ) {
@@ -152,12 +152,12 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 				// Add active class to button
 				self.button.addClass( $.mobile.activeBtnClass );
 			})
-            .bind( "focus", function() {
-                self.button.addClass( $.mobile.focusClass );
-            })
-            .bind( "blur", function() {
-                self.button.removeClass( $.mobile.focusClass );
-            })
+			.bind( "focus", function() {
+				self.button.addClass( $.mobile.focusClass );
+			})
+			.bind( "blur", function() {
+				self.button.removeClass( $.mobile.focusClass );
+			})
 			.bind( "focus vmouseover", function() {
 				self.button.trigger( "vmouseover" );
 			})
@@ -178,8 +178,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			if( self.options.preventFocusZoom ){
 				$.mobile.zoom.disable( true );
 			}
-		})
-		.bind( "mouseup", function() {
+		}).bind( "mouseup", function() {
 			if( self.options.preventFocusZoom ){
 				$.mobile.zoom.enable( true );
 			}
