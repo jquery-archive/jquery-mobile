@@ -1229,9 +1229,13 @@ define( [
 			}
 
 			url = path.makeUrlAbsolute(  url, getClosestBaseUrl($this) );
-
-			//external submits use regular HTTP
-			if( path.isExternal( url ) || target ) {
+			
+			//https://github.com/jquery/jquery-mobile/issues/4033
+			//https://github.com/adrianpike/jquery-mobile/commit/88754ac1643a133686b72520d24e32524a737452
+			// More info about what's going on here is up in useDefaultUrlHandling in the Click routing.	
+			// Basically if we loaded via file:// and we've got "allowCrossDomainPages" true, we should use changePage.
+			isCrossDomainPageLoad = ( $.mobile.allowCrossDomainPages && documentUrl.protocol === "file:");
+			if(( path.isExternal( url ) && !isCrossDomainPageLoad) || target ) {
 				return;
 			}
 
