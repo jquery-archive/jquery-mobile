@@ -15,8 +15,8 @@ When [submitting issues on github](https://github.com/jquery/jquery-mobile/issue
 3. Steps to reproduce
 4. Expected outcome
 5. Actual outcome
-6. Browers tested
-7. Library version
+6. Broswers tested
+7. Library version/Location (eg, CDN or `jquerymobile.com/test/`)
 
 Also, in the interest of creating more readable issues please include code snippets inside a triple backtick box appropriate for the JavaScript/HTML/CSS snippet you wish to discuss. More information is available at the [introduction page](http://github.github.com/github-flavored-markdown/) for github flavored markdown (see, Syntax Highlighting).
 
@@ -24,11 +24,11 @@ Also, in the interest of creating more readable issues please include code snipp
 
 When submitting a pull request for review there are few important steps you can take to ensure that it gets reviewed quickly and increase the chances that it will be merged (in order of descending importance):
 
-1. Include tests (see [Development](#development))
+1. Include tests (see [Testing](#testing))
 2. Follow the [jQuery Core style guide](http://docs.jquery.com/JQuery_Core_Style_Guidelines)
 3. Limit the scope to one Issue/Feature
 4. Small focused commits, ideally less than 10 to 20 lines
-5. Avoid merge commits (see Pro Git's chapter on [Rebasing](http://git-scm.com/book/ch3-6.html), [Development](#development))
+5. Avoid merge commits (see Pro Git's [chapter on rebasing](http://git-scm.com/book/ch3-6.html), [Rebasing](#rebasing))
 
 Taken together, the above reduces the effort that's required of the contributor reviewing your pull request.
 
@@ -39,11 +39,11 @@ Currently the library is shipped on the jQuery CDN/download as a single monolith
 * `js` - resolve dependencies, build, concat, and minify the JavaScript used for jQuery Mobile
 * `css` - resolve dependencies, build, concat, and minify all the css, just the structure css, and just the theme css
 * `docs` - build the js and css, and make the docs ready for static consumption
-* `zip` - package the documentation in zip format for distribution
+* `zip` - package all the javascript and all the css into a zip archive
 
 ### Requirements
 
-The build requires [node.js](http://nodejs.org/) and its packaged npm package manager. For other build targets like `docs` and `zip` it also requires Bash. For more information on installing node please see its [documentation](http://nodejs.org/#download). For Bash and Make please refer to the appropriate documentation for your opperating system.
+The `js` and `css` build targets require [node.js](http://nodejs.org/) and its packaged npm package manager. For other the other build targets, `docs` and `zip`, bash is required. For more information on installing node please see its [documentation](http://nodejs.org/#download). As for bash it's generally installed as the default shell in many posix compliant environments (OSX, Linux, BSD, etc).
 
 ### Commands
 
@@ -126,21 +126,19 @@ Once you have your webserver setup you can point it at the project directory.
 
 Automated testing forms the backbone of the jQuery Mobile project's QA activities. As a contributor or patch submitter you will be excpected to run the test suite in for the area your patches affect. Our continuous integration server will address the remainder of the test suite.
 
-There are two primary ways to run the test suite. First, you can run the tests individually by visiting the different test pages associated with the area in which you are working. For example, to run the tests for `js/jquery.mobile.forms.slider.js` visit `$HOST/tests/unit/slider/`. To find out what which test pages are available you can list them with:
+There are two primary ways to run the test suite. First, you can run the tests individually by visiting the different test pages associated with the area in which you are working. For example, to run the tests for `js/jquery.mobile.forms.slider.js` visit `$WEB_SERVER/tests/unit/slider/`. To find out what which test pages are available you can list them with:
 
     grunt config:test:pages
 
 Second you can run the tests using the [PhantomJS](http://phantomjs.org/) headless webkit browser which must be [installed](http://code.google.com/p/phantomjs/wiki/Installation). Once `phantomjs` is in the your `PATH` the following will execute the whole test suite:
 
-    JUNIT_OUTPUT=build/test-results/ ROOT_DOMAIN=$HOST grunt test
+    JUNIT_OUTPUT=build/test-results/ ROOT_DOMAIN=$WEB_SERV grunt test
 
 You can confine the headless run to a single test page or set of test pages using the `TEST_PATH` environment variable. For example:
 
     TEST_PATH=slider JUNIT_OUTPUT=build/test-results/ ROOT_DOMAIN=$WEB_SERVER grunt test
 
-Will only run the tests where the path contains the string slider. *NOTE* That the phantom tests currently require that the webserver be running to access and run the tests properly because of the PHP dependency that many of them share.
-
-Additionally we run the test suite against many version of jQuery using the `JQUERY` environment variable. For example if you wanted to run the test suite against both of our currently supported versions 1.6.4, and 1.7.1 the command would take the following form:
+Will only run the tests where the path contains the string slider. *NOTE* That the phantom tests currently require that the webserver be running to access and run the tests properly because of the PHP dependency that many of them share. Additionally the test suite is run against many versions of jQuery using the `JQUERY` environment variable. For example if you wanted to run the test suite against both of the currently supported versions 1.6.4, and 1.7.1 the command would take the following form:
 
     JQUERY=1.6.4,1.7.1 JUNIT_OUTPUT=build/test-results/ ROOT_DOMAIN=$WEB_SERVER grunt test
 
