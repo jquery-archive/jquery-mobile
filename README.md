@@ -43,7 +43,7 @@ Currently the library is shipped on the jQuery CDN/download as a single monolith
 
 ### Requirements
 
-The `js` and `css` build targets require [node.js](http://nodejs.org/) and its packaged NPM package manager. For other the other build targets, `docs` and `zip`, bash is also required. For more information on installing node please see its [documentation](http://nodejs.org/#download). As for bash it's generally installed as the default shell in many POSIX compliant environments (OSX, Linux, BSD, etc).
+The `js` and `css` build targets require [node.js](http://nodejs.org/) and its packaged NPM package manager. For the other build targets, `docs` and `zip`, bash is also required. For more information on installing node please see its [documentation](http://nodejs.org/#download). As for bash it's generally installed as the default shell in many POSIX compliant environments (OSX, Linux, BSD, etc).
 
 ### Commands
 
