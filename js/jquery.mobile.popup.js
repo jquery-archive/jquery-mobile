@@ -658,6 +658,7 @@ define( [ "jquery",
 
 			popup
 				.one( "opened", whenOpenedCb )
+				.one( "closed", function() { $link.focus(); } )
 				.popup( "open",
 					offset.left + $link.outerWidth() / 2,
 					offset.top + $link.outerHeight() / 2,
