@@ -130,6 +130,8 @@ There are two primary ways to run the test suite. First, you can run the tests i
 
     grunt config:test:pages
 
+_NOTE_ See the [build requirements](#requirements) for node/grunt install information.
+
 Second you can run the tests using the [PhantomJS](http://phantomjs.org/) headless Webkit browser which must be [installed](http://code.google.com/p/phantomjs/wiki/Installation). Once `phantomjs` is in your `PATH` the following will execute the whole test suite:
 
     JUNIT_OUTPUT=build/test-results/ ROOT_DOMAIN=$WEB_SERVER grunt test
