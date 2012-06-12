@@ -43,7 +43,7 @@ Currently the library is shipped on the jQuery CDN/download as a single monolith
 
 ### Requirements
 
-The `js` and `css` build targets require [node.js](http://nodejs.org/) and its packaged NPM package manager. For other the other build targets, `docs` and `zip`, bash is required. For more information on installing node please see its [documentation](http://nodejs.org/#download). As for bash it's generally installed as the default shell in many POSIX compliant environments (OSX, Linux, BSD, etc).
+The `js` and `css` build targets require [node.js](http://nodejs.org/) and its packaged NPM package manager. For other the other build targets, `docs` and `zip`, bash is also required. For more information on installing node please see its [documentation](http://nodejs.org/#download). As for bash it's generally installed as the default shell in many POSIX compliant environments (OSX, Linux, BSD, etc).
 
 ### Commands
 
@@ -126,7 +126,7 @@ Once you have your web server setup you can point it at the project directory.
 
 Automated testing forms the backbone of the jQuery Mobile project's QA activities. As a contributor or patch submitter you will be expected to run the test suite in for the area your patches affect. Our continuous integration server will address the remainder of the test suite.
 
-There are two primary ways to run the test suite. First, you can run the tests individually by directing your browser to the different test pages associated with the area in which you are working. For example, to run the tests for `js/jquery.mobile.forms.slider.js` visit `$WEB_SERVER/tests/unit/slider/`. To find out what which test pages are available you can list them with:
+There are two primary ways to run the test suite. First, you can run the tests individually by directing your browser to the different test pages associated with the area in which you are working. For example, to run the tests for `js/jquery.mobile.forms.slider.js` visit `$WEB_SERVER/tests/unit/slider/`. To find out which test pages are available you can list them with:
 
     grunt config:test:pages
 
@@ -144,6 +144,11 @@ will only run the tests where the path contains the string `slider`, eg `tests/u
 
 ### Rebasing
 
+Often times when working on a feature or bug fix branch it's useful to pull in the latest from the parent branch. If you're doing this _before_ submitting a pull requests it's best to use git's rebase to apply your commits onto the latest from the parent branch. For example, working on `new-feature` branch where `upstream` is the remote at `git://github.com/jquery/jquery-mobile.git`:
 
+    git checkout new-feature
+    git fetch upstream
+    git rebase upstream/master
+    ## ... here you may have to resolve some conflicts ... ##
 
-
+You can now push to the your own fork and submit the pull request. Keep in mind that it's only a good idea to do this if you _haven't_ already submitted a pull request unless you want to create a new one because your origin remote (your fork)will report a discrepancy. Again, please refer to the [chapter](http://git-scm.com/book/ch3-6.html) in Pro Git on rebasing if you're new to it.
