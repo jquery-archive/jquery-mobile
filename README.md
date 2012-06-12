@@ -15,7 +15,7 @@ When [submitting issues on github](https://github.com/jquery/jquery-mobile/issue
 3. Steps to reproduce
 4. Expected outcome
 5. Actual outcome
-6. Browsers tested
+6. Browsers/platforms tested
 7. Library version/Location (eg, CDN or `jquerymobile.com/test/`)
 
 Also, in the interest of creating more readable issues please include code snippets inside a triple backtick box appropriate for the JavaScript/HTML/CSS snippet you wish to discuss. More information is available at the [introduction page](http://github.github.com/github-flavored-markdown/) for github flavored markdown (see, Syntax Highlighting).
@@ -28,7 +28,7 @@ When submitting a pull request for review there are few important steps you can 
 2. Follow the [jQuery Core style guide](http://docs.jquery.com/JQuery_Core_Style_Guidelines)
 3. Limit the scope to one Issue/Feature
 4. Small focused commits, ideally less than 10 to 20 lines
-5. Avoid merge commits (see Pro Git's [chapter on rebasing](http://git-scm.com/book/ch3-6.html), [Rebasing](#rebasing))
+5. Avoid merge commits (see Pro Git's [chapter on rebasing](http://git-scm.com/book/ch3-6.html), section [Rebasing](#rebasing) below)
 
 Taken together, the above reduces the effort that's required of the contributor reviewing your pull request.
 
@@ -151,4 +151,4 @@ Often times when working on a feature or bug fix branch it's useful to pull in t
     git rebase upstream/master
     ## ... here you may have to resolve some conflicts ... ##
 
-You can now push to the your own fork and submit the pull request. Keep in mind that it's only a good idea to do this if you _haven't_ already submitted a pull request unless you want to create a new one because your origin remote (your fork)will report a discrepancy. Again, please refer to the [chapter](http://git-scm.com/book/ch3-6.html) in Pro Git on rebasing if you're new to it.
+You can now push to the your own fork and submit the pull request. Keep in mind that it's only a good idea to do this if you _haven't_ already submitted a pull request unless you want to create a new one because your origin remote (your fork) will report a discrepancy. Again, please refer to the [chapter](http://git-scm.com/book/ch3-6.html) in Pro Git on rebasing if you're new to it.
