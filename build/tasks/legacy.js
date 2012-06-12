@@ -26,10 +26,6 @@ module.exports = function( grunt ) {
 	grunt.registerMultiTask('legacy_tasks', 'support for old build targets', function() {
 		var done = this.async(), name = this.name, self = this;
 
-		( this.data.deps || [] ).forEach(function(dep) {
-			self.requires( 'legacy_tasks:' + dep );
-		});
-
 		child_process.exec( (this.data.env || '') + ' bash build/bin/' + this.target + '.sh', function (error, stdout, stderr) {
 			if( error !== null ) {
 				grunt.log.error( stderr );

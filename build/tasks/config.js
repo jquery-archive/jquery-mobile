@@ -26,14 +26,43 @@ module.exports = function( grunt ) {
 		});
 	});
 
+	grunt.registerTask( 'config:test:pages', 'glob and log all possible tests', function( a, b ) {
+		var test_paths = [], global_config = grunt.config.get( 'global' ), env = process.env;
+
+		// TODO move the glob to a legit config or pull the one from the qunit config
+		test_paths = glob.glob( 'tests/unit/*/' );
+		test_paths = test_paths.concat( glob.glob('tests/unit/**/*-tests.html') );
+
+		// append the jquery version query param where defined
+		var paths_with_jquery = [];
+		if( env.JQUERY ){
+			test_paths.forEach(function( full_path ) {
+				env.JQUERY.split( "," ).forEach( function( version ) {
+					paths_with_jquery.push(full_path + "?jquery=" + version);
+				});
+			});
+
+			test_paths = paths_with_jquery;
+		}
+
+		// if this test is not a dependency log pages
+		if( this.name.indexOf('config:test:page') > -1 ) {
+			test_paths.forEach(function( path ) {
+				grunt.log.writeln( path );
+			});
+		}
+
+		global_config.test_paths = test_paths;
+		grunt.config.set( 'global', global_config );
+	});
+
 	// TODO could use some cleanup. Eg, can we use grunt's parameter passing functionality
 	//      in place of environment variables
 	grunt.registerTask( 'config:test', 'glob all the test files', function() {
 		var done = this.async(), test_paths, server_paths = [], env = process.env;
 
 		// TODO move the glob to a legit config or pull the one from the qunit config
-		test_paths = glob.glob( 'tests/unit/*/' );
-		test_paths = test_paths.concat( glob.glob('tests/unit/**/*-tests.html') );
+		test_paths = grunt.config.get( 'global' ).test_paths;
 
 		// select the proper domain + paths
 		test_paths.forEach( function( file_path ) {
@@ -45,18 +74,6 @@ module.exports = function( grunt ) {
 				server_paths.push( full_path );
 			}
 		});
-
-		// append the jquery version query param where defined
-		var paths_with_jquery = [];
-		if( env.JQUERY ){
-			server_paths.forEach(function( full_path ) {
-				env.JQUERY.split( "," ).forEach( function( version ) {
-					paths_with_jquery.push(full_path + "?jquery=" + version);
-				});
-			});
-
-			server_paths = paths_with_jquery;
-		}
 
 		grunt.config.set( 'qunit', { all: server_paths });
 		done();
