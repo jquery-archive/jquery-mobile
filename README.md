@@ -11,11 +11,11 @@ You can find more information about how the library works, and what it is capabl
 When [submitting issues on github](https://github.com/jquery/jquery-mobile/issues/new) please include the following:
 
 1. Issue description
-2. Sample page using our [jsbin template (TODO get link)](http://jsbin.com/awoluv/edit#html)
+2. Sample page using our [jsbin template](http://jsbin.com/awoluv/edit#html)
 3. Steps to reproduce
 4. Expected outcome
 5. Actual outcome
-6. Broswers tested
+6. Browsers tested
 7. Library version/Location (eg, CDN or `jquerymobile.com/test/`)
 
 Also, in the interest of creating more readable issues please include code snippets inside a triple backtick box appropriate for the JavaScript/HTML/CSS snippet you wish to discuss. More information is available at the [introduction page](http://github.github.com/github-flavored-markdown/) for github flavored markdown (see, Syntax Highlighting).
@@ -39,11 +39,11 @@ Currently the library is shipped on the jQuery CDN/download as a single monolith
 * `js` - resolve dependencies, build, concat, and minify the JavaScript used for jQuery Mobile
 * `css` - resolve dependencies, build, concat, and minify all the css, just the structure css, and just the theme css
 * `docs` - build the js and css, and make the docs ready for static consumption
-* `zip` - package all the javascript and all the css into a zip archive
+* `zip` - package all the JavaScript and all the css into a zip archive
 
 ### Requirements
 
-The `js` and `css` build targets require [node.js](http://nodejs.org/) and its packaged npm package manager. For other the other build targets, `docs` and `zip`, bash is required. For more information on installing node please see its [documentation](http://nodejs.org/#download). As for bash it's generally installed as the default shell in many posix compliant environments (OSX, Linux, BSD, etc).
+The `js` and `css` build targets require [node.js](http://nodejs.org/) and its packaged NPM package manager. For other the other build targets, `docs` and `zip`, bash is required. For more information on installing node please see its [documentation](http://nodejs.org/#download). As for bash it's generally installed as the default shell in many POSIX compliant environments (OSX, Linux, BSD, etc).
 
 ### Commands
 
@@ -52,7 +52,7 @@ With node installed you can run the `js` and `css` targets by simply issuing the
     npm install
     node node_modules/.gin/grunt js # or css
 
-Note that if you have the appropriate version of [grunt](https://github.com/cowboy/grunt), our build tool, installed globally you can substitute `grunt` whereever you see `node node_modules/.gin/grunt`. For the remainder of the build documentation we will prefer the more concise `grunt`.
+Note that if you have the appropriate version of [grunt](https://github.com/cowboy/grunt), our build tool, installed globally you can substitute `grunt` wherever you see `node node_modules/.gin/grunt`. For the remainder of the build documentation we will prefer the more concise `grunt`.
 
 If you want to use the `docs` and `zip` targets you will need bash and they can be run with the following
 
@@ -108,37 +108,37 @@ The root of the repository is also the root of the documentation and, along with
 
 ### Server
 
-Most of the documentation and testing pages rely on PHP 5+, and as a result Apache and PHP are required for development. You can installthem using one of the following methods:
+Most of the documentation and testing pages rely on PHP 5+, and as a result Apache and PHP are required for development. You can install them using one of the following methods:
 
 * one-click - [MAMP](http://www.mamp.info/en/downloads/index.html) for OSX, [XAMP](http://www.apachefriends.org/en/xampp.html) for OSX/Windows
-* existing webserver - eg, `~/Sites` directory on OSX.
+* existing web server - eg, `~/Sites` directory on OSX.
 * virtual machine - If [Vagrant](http://vagrantup.com) is installed you can add [this remote/branch](https://github.com/johnbender/jquery-mobile/tree/vagrant) and `vagrant up`
 
-In addition to vanilla Apache the folloing modules are requied:
+In addition to vanilla Apache the following modules are required:
 
 * Rewrite (mod\_rewrite.so)
 * Expire (mod\_expires.so)
 * Header (mod\_headers.so)
 
-Once you have your webserver setup you can point it at the project directory.
+Once you have your web server setup you can point it at the project directory.
 
 ### Testing
 
-Automated testing forms the backbone of the jQuery Mobile project's QA activities. As a contributor or patch submitter you will be excpected to run the test suite in for the area your patches affect. Our continuous integration server will address the remainder of the test suite.
+Automated testing forms the backbone of the jQuery Mobile project's QA activities. As a contributor or patch submitter you will be expected to run the test suite in for the area your patches affect. Our continuous integration server will address the remainder of the test suite.
 
-There are two primary ways to run the test suite. First, you can run the tests individually by visiting the different test pages associated with the area in which you are working. For example, to run the tests for `js/jquery.mobile.forms.slider.js` visit `$WEB_SERVER/tests/unit/slider/`. To find out what which test pages are available you can list them with:
+There are two primary ways to run the test suite. First, you can run the tests individually by directing your browser to the different test pages associated with the area in which you are working. For example, to run the tests for `js/jquery.mobile.forms.slider.js` visit `$WEB_SERVER/tests/unit/slider/`. To find out what which test pages are available you can list them with:
 
     grunt config:test:pages
 
-Second you can run the tests using the [PhantomJS](http://phantomjs.org/) headless webkit browser which must be [installed](http://code.google.com/p/phantomjs/wiki/Installation). Once `phantomjs` is in the your `PATH` the following will execute the whole test suite:
+Second you can run the tests using the [PhantomJS](http://phantomjs.org/) headless Webkit browser which must be [installed](http://code.google.com/p/phantomjs/wiki/Installation). Once `phantomjs` is in the your `PATH` the following will execute the whole test suite:
 
-    JUNIT_OUTPUT=build/test-results/ ROOT_DOMAIN=$WEB_SERV grunt test
+    JUNIT_OUTPUT=build/test-results/ ROOT_DOMAIN=$WEB_SERVER grunt test
 
 You can confine the headless run to a single test page or set of test pages using the `TEST_PATH` environment variable. For example:
 
     TEST_PATH=slider JUNIT_OUTPUT=build/test-results/ ROOT_DOMAIN=$WEB_SERVER grunt test
 
-Will only run the tests where the path contains the string slider. *NOTE* That the phantom tests currently require that the webserver be running to access and run the tests properly because of the PHP dependency that many of them share. Additionally the test suite is run against many versions of jQuery using the `JQUERY` environment variable. For example if you wanted to run the test suite against both of the currently supported versions 1.6.4, and 1.7.1 the command would take the following form:
+will only run the tests where the path contains the string `slider`, eg `tests/unit/slider/`. *NOTE* That the phantom tests currently require that the web server be running to access and run the tests properly because of the PHP dependency that many of them share. Additionally the test suite is run against many versions of jQuery using the `JQUERY` environment variable. For example if you wanted to run the test suite against both of the currently supported versions 1.6.4, and 1.7.1 the command would take the following form:
 
     JQUERY=1.6.4,1.7.1 JUNIT_OUTPUT=build/test-results/ ROOT_DOMAIN=$WEB_SERVER grunt test
 
