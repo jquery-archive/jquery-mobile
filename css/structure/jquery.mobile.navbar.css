@@ -18,13 +18,15 @@
 .ui-header .ui-navbar .ui-grid-b li.ui-block-c .ui-btn,
 .ui-footer .ui-navbar .ui-grid-b li.ui-block-c .ui-btn { margin-right: -5px; }
 .ui-header .ui-navbar .ui-grid-c li.ui-block-d .ui-btn,
-.ui-footer .ui-navbar .ui-grid-c li.ui-block-d .ui-btn { margin-right: -3px; }
+.ui-footer .ui-navbar .ui-grid-c li.ui-block-d .ui-btn,
 .ui-header .ui-navbar .ui-grid-d li.ui-block-e .ui-btn,
 .ui-footer .ui-navbar .ui-grid-d li.ui-block-e .ui-btn { margin-right: -4px; }
 .ui-header .ui-navbar .ui-grid-b li.ui-block-c .ui-btn-icon-right .ui-icon,
-.ui-footer .ui-navbar .ui-grid-b li.ui-block-c .ui-btn-icon-right .ui-icon { right: 8px; }
+.ui-footer .ui-navbar .ui-grid-b li.ui-block-c .ui-btn-icon-right .ui-icon,
+.ui-header .ui-navbar .ui-grid-c li.ui-block-d .ui-btn-icon-right .ui-icon,
+.ui-footer .ui-navbar .ui-grid-c li.ui-block-d .ui-btn-icon-right .ui-icon,
 .ui-header .ui-navbar .ui-grid-d li.ui-block-e .ui-btn-icon-right .ui-icon,
-.ui-footer .ui-navbar .ui-grid-d li.ui-block-e .ui-btn-icon-right .ui-icon { right: 7px; }
+.ui-footer .ui-navbar .ui-grid-d li.ui-block-e .ui-btn-icon-right .ui-icon { right: 8px; }
 
 .ui-navbar li .ui-btn .ui-btn-inner { padding-top: .7em; padding-bottom: .8em }
 .ui-navbar li .ui-btn-icon-top .ui-btn-inner { padding-top: 30px; }
