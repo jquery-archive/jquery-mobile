@@ -69,17 +69,40 @@ define( [ "jquery",
 
 			ui.screen.bind( "vclick", function( e ) { eatEventAndClose( e ); });
 
-			$( window ).bind( "resize", function( e ) {
+			// St00pid browser, y u no tell me where focus go?
+			ui.container.bind( "focusout focusin", function( e ) {
+				function maybeClearTimeout() {
+					if ( self._focusTimeout ) {
+						clearTimeout( self._focusTimeout );
+						self._focusTimeout = 0;
+					}
+				}
+
 				if ( self._isOpen ) {
-					self._resizeScreen();
+					if ( e.type === "focusout" ) {
+						maybeClearTimeout();
+						self._focusTimeout = setTimeout( function() {
+							self._ui.container.focus();
+						}, 100 );
+					}
+					else
+					if ( e.type === "focusin" ) {
+						maybeClearTimeout();
+					}
 				}
 			});
 
-			$( window ).bind( "keyup", function( e ) {
-				if ( self._isOpen && e.keyCode === $.mobile.keyCode.ESCAPE ) {
-					eatEventAndClose( e );
-				}
-			});
+			$( window )
+				.bind( "resize", function( e ) {
+					if ( self._isOpen ) {
+						self._resizeScreen();
+					}
+				})
+				.bind( "keyup", function( e ) {
+					if ( self._isOpen && e.keyCode === $.mobile.keyCode.ESCAPE ) {
+						eatEventAndClose( e );
+					}
+				});
 		},
 
 		_resizeScreen: function() {
@@ -290,6 +313,7 @@ define( [ "jquery",
 				},
 				function() {
 					self._isOpen = true;
+					self._ui.container.attr("tabindex", "0" ).focus();
 					self.element.trigger( "opened" );
 				});
 
@@ -338,6 +362,7 @@ define( [ "jquery",
 						.removeAttr( "style" );
 				},
 				function() {
+					self._ui.container.removeAttr( "tabindex" );
 					self.element.trigger( "closed" );
 				});
 
