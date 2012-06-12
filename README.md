@@ -124,7 +124,7 @@ Once you have your webserver setup you can point it at the project directory.
 
 ### Testing
 
-Automated testing forms the backbone of the jQuery Mobile project's QA activities. As a contributor or patch submitter you will be excpected to run the test suite in for the area which you patches affect. Our continuous integration server will address the rest.
+Automated testing forms the backbone of the jQuery Mobile project's QA activities. As a contributor or patch submitter you will be excpected to run the test suite in for the area your patches affect. Our continuous integration server will address the remainder of the test suite.
 
 There are two primary ways to run the test suite. First, you can run the tests individually by visiting the different test pages associated with the area in which you are working. For example, to run the tests for `js/jquery.mobile.forms.slider.js` visit `$HOST/tests/unit/slider/`. To find out what which test pages are available you can list them with:
 
@@ -138,7 +138,7 @@ You can confine the headless run to a single test page or set of test pages usin
 
     TEST_PATH=slider JUNIT_OUTPUT=build/test-results/ ROOT_DOMAIN=$WEB_SERVER grunt test
 
-Will only run the tests whos paths contain the string slider. *NOTE* That the phantom tests currently require that the webserver be running to access and run the tests properly because of the PHP dependency that many of them share.
+Will only run the tests where the path contains the string slider. *NOTE* That the phantom tests currently require that the webserver be running to access and run the tests properly because of the PHP dependency that many of them share.
 
 Additionally we run the test suite against many version of jQuery using the `JQUERY` environment variable. For example if you wanted to run the test suite against both of our currently supported versions 1.6.4, and 1.7.1 the command would take the following form:
 
