@@ -47,9 +47,9 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		}, 40);
 	},
 
-  _selectOptions: function() {
-    return this.select.find( "option" );
-  },
+	_selectOptions: function() {
+		return this.select.find( "option" );
+	},
 
 	// setup items that are generally necessary for select menu extension
 	_preExtension: function(){
