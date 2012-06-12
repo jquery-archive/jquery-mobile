@@ -96,11 +96,11 @@ To create a new theme:
 2. Add customizations to the `jquery.mobile.theme.css` file.
 3. From the project root run the following `grunt` command:
 
-    THEME=my-theme grunt css
+        THEME=my-theme grunt css
 
 4. The output will be available in the `$PROJECT_ROOT/compiled`
 
-Again assumes the theme css files are available in the `css/theme/$THEME/` directory relative to the project root.
+Again this assumes the theme css files are available in the `css/themes/$THEME/` directory relative to the project root, `css/themes/my-theme/` in the example.
 
 ## Development
 
