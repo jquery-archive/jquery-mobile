@@ -30,6 +30,7 @@ $.fn.grid = function( options ) {
 					}
 				} else {
 					grid = "a";
+					$this.addClass( "ui-grid-duo" );
 				}
 			}
 			iterator = gridCols[grid];
