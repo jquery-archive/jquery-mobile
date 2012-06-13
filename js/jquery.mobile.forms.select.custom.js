@@ -380,7 +380,7 @@ define( [
 
 					self.listbox
 						.one( "opened", focusMenuItem )
-						.popup( "open", 
+						.popup( "open",
 							self.button.offset().left + self.button.outerWidth() / 2,
 							self.button.offset().top + self.button.outerHeight() / 2 );
 
@@ -492,7 +492,7 @@ define( [
 		var selectmenuWidget = $( event.target ).data( "selectmenu" );
 
 		if( !selectmenuWidget.options.nativeMenu &&
-		    selectmenuWidget.element.parents(":jqmData(role='popup')").length === 0 ){
+				selectmenuWidget.element.parents(":jqmData(role='popup')").length === 0 ){
 			extendSelect( selectmenuWidget );
 		}
 	});
