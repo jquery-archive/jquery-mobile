@@ -67,7 +67,7 @@ module.exports = function( grunt ) {
 		},
 
 		lint: {
-			files: ['grunt.js', 'js/*.js', 'tests/**/*.js']
+			files: ['grunt.js', 'js/**/*.mobile.*.js' ]
 		},
 
 		// NOTE these configuration settings are used _after_ compilation has taken place
