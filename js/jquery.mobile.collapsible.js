@@ -94,12 +94,11 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 		collapsible
 			.bind( "expand collapse", function( event ) {
 				if ( !event.isDefaultPrevented() ) {
-
-					event.preventDefault();
-
 					var $this = $( this ),
 						isCollapse = ( event.type === "collapse" ),
-					    contentTheme = o.contentTheme;
+						contentTheme = o.contentTheme;
+
+					event.preventDefault();
 
 					collapsibleHeading
 						.toggleClass( "ui-collapsible-heading-collapsed", isCollapse)

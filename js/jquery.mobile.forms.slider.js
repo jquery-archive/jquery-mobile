@@ -33,7 +33,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			cType = control[ 0 ].nodeName.toLowerCase(),
 
-			selectClass = ( cType == "select" ) ? "ui-slider-switch" : "",
+			selectClass = ( cType === "select" ) ? "ui-slider-switch" : "",
 
 			controlID = control.attr( "id" ),
 
@@ -44,16 +44,16 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			label = $label.attr( "id", labelID ),
 
 			val = function() {
-				return  cType == "input"  ? parseFloat( control.val() ) : control[0].selectedIndex;
+				return  cType === "input"  ? parseFloat( control.val() ) : control[0].selectedIndex;
 			},
 
-			min =  cType == "input" ? parseFloat( control.attr( "min" ) ) : 0,
+			min =  cType === "input" ? parseFloat( control.attr( "min" ) ) : 0,
 
-			max =  cType == "input" ? parseFloat( control.attr( "max" ) ) : control.find( "option" ).length-1,
+			max =  cType === "input" ? parseFloat( control.attr( "max" ) ) : control.find( "option" ).length-1,
 
 			step = window.parseFloat( control.attr( "step" ) || 1 ),
 
-			inlineClass = ( this.options.inline || control.jqmData("inline") == true ) ? " ui-slider-inline" : "",
+			inlineClass = ( this.options.inline || control.jqmData("inline") === true ) ? " ui-slider-inline" : "",
 
 			miniClass = ( this.options.mini || control.jqmData("mini") ) ? " ui-slider-mini" : "",
 
@@ -63,7 +63,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			domSlider = document.createElement('div'),
 			slider = $( domSlider ),
 
-			valuebg = control.jqmData("highlight") && cType != "select" ? (function() {
+			valuebg = control.jqmData("highlight") && cType !== "select" ? (function() {
 				var bg = document.createElement('div');
 				bg.className = 'ui-slider-bg ' + $.mobile.activeBtnClass + ' ui-btn-corner-all';
 				return $( bg ).prependTo( slider );
@@ -98,7 +98,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			mouseMoved: false
 		});
 
-		if ( cType == "select" ) {
+		if ( cType === "select" ) {
 			var wrapper = document.createElement('div');
 			wrapper.className = 'ui-slider-inneroffset';
 
@@ -196,7 +196,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 							// this is a drag, change the value only if user dragged enough
 							if ( self.userModified ) {
-								self.refresh( self.beforeStart == 0 ? 1 : 0 );
+								self.refresh( self.beforeStart === 0 ? 1 : 0 );
 							}
 							else {
 								self.refresh( self.beforeStart );
@@ -205,7 +205,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 						}
 						else {
 							// this is just a click, change the value
-							self.refresh( self.beforeStart == 0 ? 1 : 0 );
+							self.refresh( self.beforeStart === 0 ? 1 : 0 );
 						}
 
 					}
@@ -219,7 +219,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		slider.insertAfter( control );
 
 		// Only add focus class to toggle switch, sliders get it automatically from ui-btn
-		if( cType == 'select' ) {
+		if( cType === 'select' ) {
 			this.handle.bind({
 				focus: function() {
 					slider.addClass( $.mobile.focusClass );
@@ -365,7 +365,10 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				"aria-valuetext": cType === "input" ? newval : control.find( "option" ).eq( newval ).getEncodedText(),
 				title: cType === "input" ? newval : control.find( "option" ).eq( newval ).getEncodedText()
 			});
-		this.valuebg && this.valuebg.css( "width", percent + "%" );
+
+		if( this.valuebg ){
+			this.valuebg.css( "width", percent + "%" );
+		}
 
 		// drag the label widths
 		if ( this._labels ) {
