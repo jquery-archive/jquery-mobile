@@ -10,10 +10,14 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.vmouse" ], function
 ( function( $, undefined ) {
 
 $.fn.buttonMarkup = function( options ) {
-	var $workingSet = this;
+	var $workingSet = this,
+		mapToDataAttr = function( key, value ) {
+			e.setAttribute( "data-" + $.mobile.ns + key, value );
+			el.jqmData( key, value );
+		};
 
 	// Enforce options to be of type string
-	options = ( options && ( $.type( options ) == "object" ) )? options : {};
+	options = ( options && ( $.type( options ) === "object" ) )? options : {};
 	for ( var i = 0; i < $workingSet.length; i++ ) {
 		var el = $workingSet.eq( i ),
 			e = el[ 0 ],
@@ -38,10 +42,8 @@ $.fn.buttonMarkup = function( options ) {
 			buttonIcon,
 			buttonElements;
 
-		$.each( o, function( key, value ) {
-			e.setAttribute( "data-" + $.mobile.ns + key, value );
-			el.jqmData( key, value );
-		});
+		$.each( o, mapToDataAttr );
+
 		if ( el.jqmData( "rel" ) === "popup" && e.hasAttribute( "href" ) ) {
 			e.setAttribute( "aria-haspopup", true );
 			e.setAttribute( "aria-owns", e.getAttribute( "href" ) );
@@ -68,11 +70,11 @@ $.fn.buttonMarkup = function( options ) {
 		if ( attachEvents && !buttonElements ) {
 			attachEvents();
 		}
-		
-		// if not, try to find closest theme container	
+
+		// if not, try to find closest theme container
 		if ( !o.theme ) {
-			o.theme = $.mobile.getInheritedTheme( el, "c" );	
-		}		
+			o.theme = $.mobile.getInheritedTheme( el, "c" );
+		}
 
 		buttonClass = "ui-btn ui-btn-up-" + o.theme;
 		buttonClass += o.shadow ? " ui-shadow" : "";
@@ -82,12 +84,12 @@ $.fn.buttonMarkup = function( options ) {
 			// Used to control styling in headers/footers, where buttons default to `mini` style.
 			buttonClass += o.mini === true ? " ui-mini" : " ui-fullsize";
 		}
-		
-		if ( o.inline !== undefined ) {			
+
+		if ( o.inline !== undefined ) {
 			// Used to control styling in headers/footers, where buttons default to `inline` style.
 			buttonClass += o.inline === true ? " ui-btn-inline" : " ui-btn-block";
 		}
-		
+
 		if ( o.icon ) {
 			o.icon = "ui-icon-" + o.icon;
 			o.iconpos = o.iconpos || "left";
@@ -102,7 +104,7 @@ $.fn.buttonMarkup = function( options ) {
 		if ( o.iconpos ) {
 			buttonClass += " ui-btn-icon-" + o.iconpos;
 
-			if ( o.iconpos == "notext" && !el.attr( "title" ) ) {
+			if ( o.iconpos === "notext" && !el.attr( "title" ) ) {
 				el.attr( "title", el.getEncodedText() );
 			}
 		}
@@ -196,10 +198,10 @@ var attachEvents = function() {
 				$btn = $( closestEnabledButton( event.target ) ),
 				isTouchEvent = event.originalEvent && /^touch/.test( event.originalEvent.type ),
 				evt = event.type;
-		
+
 			if ( $btn.length ) {
 				theme = $btn.attr( "data-" + $.mobile.ns + "theme" );
-		
+
 				if ( evt === "vmousedown" ) {
 					if ( isTouchEvent ) {
 						// Use a short delay to determine if the user is scrolling before highlighting
