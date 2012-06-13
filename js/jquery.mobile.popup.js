@@ -520,6 +520,18 @@ define( [ "jquery",
 				args = [];
 			}
 
+			if ( self._yScroll !== undefined && self._actionQueue[0].open ) {
+				if ( self._yScroll !== $( window ).scrollTop() ) {
+					console.log( "_continueWithAction [" + ( self._actionQueue[0].open ? "open" : "close" ) + " " + self._actionQueue[0].popup.element.attr( "id" ) + "]: scrolling to " + self._yScroll );
+					window.scrollTo( 0, self._yScroll );
+				}
+				else {
+					console.log( "_continueWithAction [" + ( self._actionQueue[0].open ? "open" : "close" ) + " " + self._actionQueue[0].popup.element.attr( "id" ) + "]: no need to scroll" );
+				}
+			}
+			self._yScroll = $( window ).scrollTop();
+			console.log( "_continueWithAction [" + ( self._actionQueue[0].open ? "open" : "close" ) + " " + self._actionQueue[0].popup.element.attr( "id" ) + "]: recorded _yScroll: " + self._yScroll );
+
 			self._actionQueue[0].waitingForPopup = true;
 			self._actionQueue[0].popup.element.one( signal, function() {
 				self._completeAction();
@@ -609,6 +621,7 @@ define( [ "jquery",
 
 		_onHashChange: function( immediate ) {
 			this._haveNavHook = false;
+			this._yScroll = undefined;
 
 			if ( this._myOwnHashChange ) {
 				this._myOwnHashChange = false;
