@@ -24,9 +24,15 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			o = this.options,
 			theme = o.theme || $.mobile.getInheritedTheme( this.element, "c" ),
 			themeclass  = " ui-body-" + theme,
-			mini = input.jqmData("mini") == true,
+			mini = input.jqmData("mini") === true,
 			miniclass = mini ? " ui-mini" : "",
 			focusedEl, clearbtn;
+
+		function toggleClear() {
+			setTimeout(function() {
+				clearbtn.toggleClass( "ui-input-clear-hidden", !input.val() );
+			}, 0);
+		}
 
 		$( "label[for='" + input.attr( "id" ) + "']" ).addClass( "ui-input-text" );
 
@@ -68,12 +74,6 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 					shadow: true,
 					mini: mini
 				});
-
-			function toggleClear() {
-				setTimeout(function() {
-					clearbtn.toggleClass( "ui-input-clear-hidden", !input.val() );
-				}, 0);
-			}
 
 			toggleClear();
 
