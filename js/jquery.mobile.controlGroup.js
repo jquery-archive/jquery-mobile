@@ -1,5 +1,5 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Visually groups sets of buttons, checks, radios, etc. 
+//>>description: Visually groups sets of buttons, checks, radios, etc.
 //>>label: Controlgroups
 //>>group: Forms
 //>>css.structure: ../css/structure/jquery.mobile.controlgroup.css
@@ -26,9 +26,9 @@ $.fn.controlgroup = function( options ) {
 						mini: $el.jqmData( "mini" )
 					}, options ),
 			groupheading = $el.children( "legend" ),
-			flCorners = o.direction == "horizontal" ? [ "ui-corner-left", "ui-corner-right" ] : [ "ui-corner-top", "ui-corner-bottom" ],
+			flCorners = o.direction === "horizontal" ? [ "ui-corner-left", "ui-corner-right" ] : [ "ui-corner-top", "ui-corner-bottom" ],
 			type = $el.find( "input" ).first().attr( "type" );
-			
+
 		$el.wrapInner( "<div class='ui-controlgroup-controls'></div>" );
 
 		// Replace legend with more stylable replacement div
