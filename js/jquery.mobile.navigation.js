@@ -1381,7 +1381,7 @@ define( [
 				role = $link.attr( "data-" + $.mobile.ns + "rel" ) || undefined;
 
 			if ( role === "popup" ) {
-				$.mobile.popup.handleLink( $link, removeActiveLinkClass );
+				$.mobile.popup.handleLink( $link );
 			}
 			else {
 				$.mobile.changePage( href, { transition: transition, reverse: reverse, role: role } );

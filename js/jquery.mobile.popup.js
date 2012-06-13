@@ -69,29 +69,6 @@ define( [ "jquery",
 
 			ui.screen.bind( "vclick", function( e ) { eatEventAndClose( e ); });
 
-			// St00pid browser, y u no tell me where focus go?
-			ui.container.bind( "focusout focusin", function( e ) {
-				function maybeClearTimeout() {
-					if ( self._focusTimeout ) {
-						clearTimeout( self._focusTimeout );
-						self._focusTimeout = 0;
-					}
-				}
-
-				if ( self._isOpen ) {
-					if ( e.type === "focusout" ) {
-						maybeClearTimeout();
-						self._focusTimeout = setTimeout( function() {
-							self._ui.container.focus();
-						}, 100 );
-					}
-					else
-					if ( e.type === "focusin" ) {
-						maybeClearTimeout();
-					}
-				}
-			});
-
 			$( window )
 				.bind( "resize", function( e ) {
 					if ( self._isOpen ) {
@@ -660,7 +637,7 @@ define( [ "jquery",
 		}
 	}
 
-	$.mobile.popup.handleLink = function( $link, whenOpenedCb ) {
+	$.mobile.popup.handleLink = function( $link ) {
 		var closestPage = $link.closest( ":jqmData(role='page')" ),
 		    scope = ( ( closestPage.length === 0 ) ? $( "body" ) : closestPage ),
 		    popup = $( $link.attr( "href" ), scope[0] ),
@@ -670,16 +647,17 @@ define( [ "jquery",
 			offset = $link.offset();
 
 			popup
-				.one( "opened", whenOpenedCb )
 				.one( "closed", function() { $link.focus(); } )
 				.popup( "open",
 					offset.left + $link.outerWidth() / 2,
 					offset.top + $link.outerHeight() / 2,
 					$link.jqmData( "transition" ) );
 		}
-		else {
-			whenOpenedCb();
-		}
+
+		//remove after delay
+		setTimeout( function() {
+			$link.removeClass( $.mobile.activeBtnClass );
+		}, 300 );
 	};
 
 	$( document ).bind( "pagecreate create", function( e )  {
