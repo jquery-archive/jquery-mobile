@@ -10,16 +10,16 @@
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 define( [
-	"jquery",
-	"./jquery.mobile.buttonMarkup",
-	"./jquery.mobile.core",
-	"./jquery.mobile.dialog",
+	"../../jquery",
+	"../../jquery.mobile.buttonMarkup",
+	"../../jquery.mobile.core",
+	"../jquery.mobile.dialog",
 	"./jquery.mobile.forms.select",
-	"./jquery.mobile.listview",
-	"./jquery.mobile.page",
-	"./jquery.mobile.popup",
+	"../jquery.mobile.listview",
+	"../jquery.mobile.page",
+	"../jquery.mobile.popup",
 	// NOTE expects ui content in the defined page, see selector for menuPageContent definition
-	"./jquery.mobile.page.sections" ], function( $ ) {
+	"../jquery.mobile.page.sections" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 	var extendSelect = function( widget ){

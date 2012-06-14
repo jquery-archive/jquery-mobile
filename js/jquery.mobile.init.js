@@ -5,7 +5,7 @@
 
 
 define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery.mobile.navigation",
-	"./jquery.mobile.navigation.pushstate", "./jquery.mobile.loader", "depend!./jquery.hashchange[jquery]" ], function( $ ) {
+	"./jquery.mobile.navigation.pushstate", "./widgets/jquery.mobile.loader.js", "depend!./jquery.hashchange[jquery]" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 ( function( $, window, undefined ) {
 	var	$html = $( "html" ),

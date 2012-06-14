@@ -4,10 +4,10 @@
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 //>>css.structure: ../css/structure/jquery.mobile.popup.css,../css/structure/jquery.mobile.transition.css,../css/structure/jquery.mobile.transition.fade.css
 
-define( [ "jquery",
-	"jquery.mobile.widget",
-	"jquery.mobile.navigation",
-	"depend!./jquery.hashchange[jquery]" ], function( $ ) {
+define( [ "../jquery",
+	"../jquery.mobile.widget",
+	"../jquery.mobile.navigation",
+	"depend!../jquery.hashchange[jquery]" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
