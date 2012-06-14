@@ -4,7 +4,7 @@
 //>>group: Core
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../external/requirejs/depend!./jquery.ui.widget[jquery]" ], function( $ ) {
+define( [ "jquery", "depend!./jquery.ui.widget[jquery]" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
