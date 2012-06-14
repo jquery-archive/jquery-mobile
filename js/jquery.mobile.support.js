@@ -24,12 +24,12 @@ function propExists( prop ) {
 			return true;
 		}
 	}
-}
+};
 
 function validStyle( prop, value, check_vend ) {
 	var div = document.createElement('div'),
 		uc = function( txt ) {
-			return txt.charAt( 0 ).toUpperCase() + txt.substr( 1 )
+			return txt.charAt( 0 ).toUpperCase() + txt.substr( 1 );
 		},
 		vend_pref = function( vend ) {
 			return  "-" + vend.charAt( 0 ).toLowerCase() + vend.substr( 1 ) + "-";
@@ -38,9 +38,9 @@ function validStyle( prop, value, check_vend ) {
 			var vend_prop = vend_pref( vend ) + prop + ": " + value + ";",
 				uc_vend = uc( vend ),
 				propStyle = uc_vend + uc( prop );
-		
+
 			div.setAttribute( "style", vend_prop );
-		
+
 			if( !!div.style[ propStyle ] ) {
 				ret = true;
 			}
