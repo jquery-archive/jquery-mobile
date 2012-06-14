@@ -24,7 +24,7 @@ function propExists( prop ) {
 			return true;
 		}
 	}
-};
+}
 
 function validStyle( prop, value, check_vend ) {
 	var div = document.createElement('div'),
