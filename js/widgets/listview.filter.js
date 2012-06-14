@@ -4,7 +4,7 @@
 //>>group: Widgets
 
 
-define( [ "../jquery", "./jquery.mobile.listview", "./forms/jquery.mobile.forms.textinput" ], function( $ ) {
+define( [ "../jquery", "./listview", "./forms/textinput" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

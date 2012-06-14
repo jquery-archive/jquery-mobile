@@ -8,7 +8,7 @@ define( [
 	"./jquery.mobile.core",
 	"./jquery.mobile.events",
 	"depend!./jquery.hashchange[jquery]",
-	"./widgets/jquery.mobile.page",
+	"./widgets/page",
 	"./jquery.mobile.transition" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 ( function( $, undefined ) {
