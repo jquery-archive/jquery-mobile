@@ -109,10 +109,9 @@ module.exports = function( grunt ) {
 				name: 'jquery.mobile',
 				exclude: [
 					'jquery',
-					'../external/requirejs/order',
-					'../external/requirejs/depend',
-					'../external/requirejs/text',
-					'../external/requirejs/text!../version.txt'
+					'depend',
+					'text',
+					'text!../version.txt'
 				],
 				out: rootFile + '.compiled.js',
 				pragmasOnSave: { jqmBuildExclude: true },
