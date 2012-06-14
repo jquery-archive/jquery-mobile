@@ -323,6 +323,8 @@ define( [ "jquery",
 			var self = this,
 				transition = ( self._currentTransition ? self._currentTransition : self.options.transition );
 
+			this._isOpen = false;
+
 			// Count down to triggering "closed" - we have two prerequisites:
 			// 1. The popup window reverse animation completes (container())
 			// 2. The screen opacity animation completes (screen())
@@ -359,7 +361,6 @@ define( [ "jquery",
 		},
 
 		close: function() {
-			this._isOpen = false;
 			$.mobile.popup.popupManager.pop( this );
 		}
 	});
@@ -605,6 +606,7 @@ define( [ "jquery",
 		_onHashChange: function( immediate ) {
 			this._haveNavHook = false;
 			this._yScroll = undefined;
+			$( this ).trigger( "done" );
 
 			if ( this._myOwnHashChange ) {
 				this._myOwnHashChange = false;
@@ -653,11 +655,18 @@ define( [ "jquery",
 			offset = $link.offset();
 
 			popup
-				.one( "closed", function() { $link.focus(); } )
 				.popup( "open",
 					offset.left + $link.outerWidth() / 2,
 					offset.top + $link.outerHeight() / 2,
 					$link.jqmData( "transition" ) );
+
+			// If this link is not inside a popup, re-focus onto it after the popup(s) complete
+			// For some reason, a $.proxy( $link, "focus" ) doesn't work as the handler
+			if ( $link.parents( ".ui-popup-container" ).length === 0 ) {
+				$( $.mobile.popup.popupManager ).one( "done", function() {
+					$link.focus();
+				});
+			}
 		}
 
 		//remove after delay
