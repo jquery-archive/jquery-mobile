@@ -34,12 +34,12 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 				.find( ":jqmData(role='header')" )
 					.prepend( headerCloseButton )
 				.end()
-				.children( ':first-child')
+				.children( ":jqmData(role='header'), :jqmData(role='content'), :jqmData(role='footer')" )
+				.first()
 					.addClass( "ui-corner-top" )
 				.end()
-				.children( ":last-child" )
+				.last()
 					.addClass( "ui-corner-bottom" );
-
 		// this must be an anonymous function so that select menu dialogs can replace
 		// the close method. This is a change from previously just defining data-rel=back
 		// on the button and letting nav handle it
