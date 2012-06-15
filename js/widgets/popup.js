@@ -7,7 +7,7 @@
 define( [ "../jquery",
 	"../jquery.mobile.widget",
 	"../jquery.mobile.navigation",
-	"depend!../jquery.hashchange[jquery]" ], function( $ ) {
+	"depend!../jquery.hashchange[../jquery]" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
