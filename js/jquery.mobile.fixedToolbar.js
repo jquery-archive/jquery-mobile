@@ -184,7 +184,7 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 			if( this.options.fullscreen ){ return; }
 
 			tbPage = tbPage || $el.closest( ".ui-page" );
-			$(tbPage).css( "padding-" + ( header ? "top" : "bottom" ), $el.outerHeight() );
+			$( tbPage ).css( "padding-" + ( header ? "top" : "bottom" ), $el.outerHeight() );
 		},
 		
 		_useTransition: function( notransition ){
