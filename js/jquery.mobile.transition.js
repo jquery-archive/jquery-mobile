@@ -73,8 +73,8 @@ var createHandler = function( sequential ){
 
 			startIn = function(){
 
-				//prevent flickering in phonegap container
-				$to.css("z-index", -10);
+				// Prevent flickering in phonegap container: see comments at #4024 regarding iOS
+        		$to.css("z-index", -10);
 
 				$to.addClass( $.mobile.activePageClass + toPreClass );
 
@@ -86,8 +86,8 @@ var createHandler = function( sequential ){
 				
 				scrollPage();
 
-				//restores visibility of the new page
-				$to.css("z-index", "");
+				// Restores visibility of the new page: added together with $to.css("z-index", -10);
+     			$to.css("z-index", "");
 
 				if( !none ){
 					$to.animationComplete( doneIn );
