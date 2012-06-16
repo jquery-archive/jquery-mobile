@@ -140,7 +140,7 @@ You can confine the headless run to a single test page or set of test pages usin
 
     TEST_PATH=slider JUNIT_OUTPUT=build/test-results/ ROOT_DOMAIN=$WEB_SERVER grunt test
 
-will only run the tests where the path contains the string `slider`, eg `tests/unit/slider/`. *NOTE* That the phantom tests currently require that the web server be running to access and run the tests properly because of the PHP dependency that many of them share. Additionally the test suite is run against many versions of jQuery using the `JQUERY` environment variable. For example if you wanted to run the test suite against both of the currently supported versions 1.6.4, and 1.7.1 the command would take the following form:
+will only run the tests where the path contains the string `slider`, eg `tests/unit/slider/`. *NOTE* That the phantom tests currently require that the web server be running to access and run the tests properly because of the PHP dependency that many of them share. Additionally the test suite is run against many versions of jQuery using the `JQUERY` environment variable. For example if you want to run the test suite against both of the currently supported versions 1.6.4, and 1.7.1 the command would take the following form:
 
     JQUERY=1.6.4,1.7.1 JUNIT_OUTPUT=build/test-results/ ROOT_DOMAIN=$WEB_SERVER grunt test
 
