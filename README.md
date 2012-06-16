@@ -22,7 +22,7 @@ Also, in the interest of creating more readable issues please include code snipp
 
 ## Pull Requests
 
-When submitting a pull request for review there are few important steps you can take to ensure that it gets reviewed quickly and increase the chances that it will be merged (in order of descending importance):
+When submitting a pull request for review there are a few important steps you can take to ensure that it gets reviewed quickly and increase the chances that it will be merged (in order of descending importance):
 
 1. Include tests (see [Testing](#testing))
 2. Follow the [jQuery Core style guide](http://docs.jquery.com/JQuery_Core_Style_Guidelines)
