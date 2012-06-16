@@ -138,8 +138,8 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 				})
 				.bind( "pageshow", function(){
 					var thisPage = this;
+					self.updatePagePadding( thisPage );
 					if( o.updatePagePadding ){
-						self.updatePagePadding( thisPage );
 						$( window ).bind( "throttledresize." + self.widgetName, function(){
 						 	self.updatePagePadding( thisPage );
 						});
