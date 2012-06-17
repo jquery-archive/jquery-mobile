@@ -43,7 +43,7 @@
 
 		<h2>Default theme swatch mapping for components</h2>
 
-		<p>If no theme swatch letter is set at all, the framework uses the "a" swatch for headers and footers and the "c" swatch for the page content to maximize contrast between the both. All items in containers inherit the swatch theme from their parent. One exception to this rule is the listdivider in listviews which always defaults to "b" (blue in the default theme). Note that there is also a swatch named "active" (bright blue in the default theme) which is used to indicate an active selected item. See the <strong>Global "Active" state</strong> further down this page for further information on <strong>active</strong> swatch.</p>
+		<p>If no theme swatch letter is set at all, the framework uses the "a" swatch for headers and footers and the "c" swatch for the page content to maximize contrast between the both. All items in containers inherit the swatch theme from their parent. Two exceptions to this rule are the <a href="../lists/lists-divider.html">list divider</a> in listviews which always defaults to "b" (blue in the default theme) and the <a href="../lists/lists-count.html">count bubble</a> (also in listviews) which always defaults to swatch "c" (silver in the default theme). Note that there is also a swatch named "active" (bright blue in the default theme) which is used to indicate an active selected item. See the <strong>Global "Active" state</strong> further down this page for further information on <strong>active</strong> swatch.</p>
 
 		<h2>Themes &amp; swatches</h2>
 		
@@ -60,14 +60,14 @@
 		<p>The default theme contains the following five bar styles:</p>
 		
 		<div class="swatch-preview">
-			<div class="ui-bar ui-bar-a">Bar A - <a href="#" data-role="none" class="ui-link">Link</a></div>
-			<div class="ui-bar ui-bar-b">Bar B - <a href="#" data-role="none" class="ui-link">Link</a></div>
-			<div class="ui-bar ui-bar-c">Bar C - <a href="#" data-role="none" class="ui-link">Link</a></div>
-			<div class="ui-bar ui-bar-d">Bar D - <a href="#" data-role="none" class="ui-link">Link</a></div>
-			<div class="ui-bar ui-bar-e">Bar E - <a href="#" data-role="none" class="ui-link">Link</a></div>
+			<div class="ui-bar ui-bar-a">Bar "a" - <a href="#" data-role="none" class="ui-link">Link</a></div>
+			<div class="ui-bar ui-bar-b">Bar "b" - <a href="#" data-role="none" class="ui-link">Link</a></div>
+			<div class="ui-bar ui-bar-c">Bar "c" - <a href="#" data-role="none" class="ui-link">Link</a></div>
+			<div class="ui-bar ui-bar-d">Bar "d" - <a href="#" data-role="none" class="ui-link">Link</a></div>
+			<div class="ui-bar ui-bar-e">Bar "e" - <a href="#" data-role="none" class="ui-link">Link</a></div>
 		</div><!-- end swatch-bars -->
 		
-		<p>By default, the framework assigns the "a" swatch to all headers and footers, because these are typically given high visual priority in an application. To set the color of a bar to a different swatch color, simply add the <code> data-theme</code> attribute to your header or footer and specify an alternate swatch letter ('b' or 'd', for example) and the specified theme swatch color will be applied. Learn more about <a href="../toolbars/bars-themes.html">toolbar theming</a>.</p>
+		<p>By default, the framework assigns the "a" swatch to all headers and footers, because these are typically given high visual priority in an application. To set the color of a bar to a different swatch color, simply add the <code> data-theme</code> attribute to your header or footer and specify an alternate swatch letter ("b" or "d", for example) and the specified theme swatch color will be applied. Learn more about <a href="../toolbars/bars-themes.html">toolbar theming</a>.</p>
 		
 		
 		
@@ -75,11 +75,11 @@
 		<p>The default theme also includes color swatch values for use in content blocks, designed to coordinate with the header color swatches in the theme. </p>
 		
 		<div class="swatch-preview">	
-			<div class="ui-body ui-body-a">Block A - <a href="#">Link</a></div>
-			<div class="ui-body ui-body-b">Block B - <a href="#">Link</a></div>
-			<div class="ui-body ui-body-c">Block C - <a href="#">Link</a></div>
-			<div class="ui-body ui-body-d">Block D - <a href="#">Link</a></div>
-			<div class="ui-body ui-body-e">Block E - <a href="#">Link</a></div>
+			<div class="ui-body ui-body-a">Block "a" - <a href="#">Link</a></div>
+			<div class="ui-body ui-body-b">Block "b" - <a href="#">Link</a></div>
+			<div class="ui-body ui-body-c">Block "c" - <a href="#">Link</a></div>
+			<div class="ui-body ui-body-d">Block "d" - <a href="#">Link</a></div>
+			<div class="ui-body ui-body-e">Block "e" - <a href="#">Link</a></div>
 		</div><!-- end swatch-bars -->
 
 
@@ -87,11 +87,11 @@
 					
 			<div data-role="header">
 				<a href="#" data-icon="arrow-l">Back</a>
-				<h1>Default Header</h1>
+				<h1>Default Header "a"</h1>
 			</div>
 			<div class="ui-body ui-body-c">
 				<h3>Default Theme Content Header</h3>
-				<p>This is the default content color swatch and a preview of a <a href="#" class="ui-link">link</a>.</p>
+				<p>This is the default content color swatch "c" and a preview of a <a href="#" class="ui-link">link</a>.</p>
 					<label for="slider1">Input slider:</label>
 				 	<input type="range" name="slider1" id="slider1" value="50" min="0" max="100" />
 				     <fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
@@ -116,50 +116,50 @@
 		<h2>Lists &amp; Buttons</h2>
 		<p>Each swatch also includes default styles for interactive elements like list items and buttons.</p>
 		<ul data-role="listview" data-inset="true" data-theme="a">
-			<li><a href="index.html">List item</a></li>
-			<li><a href="index.html">List item</a></li>
+			<li><a href="index.html">List item "a"</a></li>
+			<li><a href="index.html">List item "a"</a></li>
 		</ul>
 		
 		<ul data-role="listview" data-inset="true" data-theme="b">
-			<li><a href="index.html">List item</a></li>
-			<li><a href="index.html">List item</a></li>
+			<li><a href="index.html">List item "b"</a></li>
+			<li><a href="index.html">List item "b"</a></li>
 		</ul>
 		
 		<ul data-role="listview" data-inset="true" data-theme="c">
-			<li><a href="index.html">List item</a></li>
-			<li><a href="index.html">List item</a></li>
+			<li><a href="index.html">List item "c"</a></li>
+			<li><a href="index.html">List item "c"</a></li>
 		</ul>
 		
 		<ul data-role="listview" data-inset="true" data-theme="d">
-			<li><a href="index.html">List item</a></li>
-			<li><a href="index.html">List item</a></li>
+			<li><a href="index.html">List item "d"</a></li>
+			<li><a href="index.html">List item "d"</a></li>
 		</ul>
 		
 		<ul data-role="listview" data-inset="true" data-theme="e">
-			<li><a href="index.html">List item</a></li>
-			<li><a href="index.html">List item</a></li>
+			<li><a href="index.html">List item "e"</a></li>
+			<li><a href="index.html">List item "e"</a></li>
 		</ul>
 		
 		
 		<p>A button is included for each swatch in the theme. Each button has styles for normal, hover/focus and pressed states.</p>
 		
 		<div class="swatch-preview">
-			<a href="index.html" data-role="button" data-theme="a" data-icon="arrow-l">Button A</a>
-			<a href="index.html" data-role="button" data-theme="b" data-icon="arrow-l">Button B</a>
-			<a href="index.html" data-role="button" data-theme="c" data-icon="arrow-l">Button C</a>
-			<a href="index.html" data-role="button" data-theme="d" data-icon="arrow-l">Button D</a>
-			<a href="index.html" data-role="button" data-theme="e" data-icon="arrow-l">Button E</a>
+			<a href="index.html" data-role="button" data-theme="a" data-icon="arrow-l">Button "a"</a>
+			<a href="index.html" data-role="button" data-theme="b" data-icon="arrow-l">Button "b"</a>
+			<a href="index.html" data-role="button" data-theme="c" data-icon="arrow-l">Button "c"</a>
+			<a href="index.html" data-role="button" data-theme="d" data-icon="arrow-l">Button "d"</a>
+			<a href="index.html" data-role="button" data-theme="e" data-icon="arrow-l">Button "e"</a>
 		</div><!-- end swatch-bars -->
 		
 		
 		<p>By default, any button that's placed in a bar is automatically assigned a swatch letter that matches its parent bar or content box. Thus, the button is visually integrated into the parent theme as shown here:</p>
 		
 		<div class="swatch-preview">
-			<div data-role="header" data-theme="a"><h1>Bar A</h1><a href="index.html" data-icon="arrow-l">Button A</a></div>
-			<div data-role="header" data-theme="b"><h1>Bar B</h1><a href="index.html" data-icon="arrow-l">Button B</a></div>
-			<div data-role="header" data-theme="c"><h1>Bar C</h1><a href="index.html" data-icon="arrow-l">Button C</a></div>
-			<div data-role="header" data-theme="d"><h1>Bar D</h1><a href="index.html" data-icon="arrow-l">Button D</a></div>
-			<div data-role="header" data-theme="e"><h1>Bar E</h1><a href="index.html" data-icon="arrow-l">Button E</a></div>
+			<div data-role="header" data-theme="a"><h1>Bar "a"</h1><a href="index.html" data-icon="arrow-l">Button "a"</a></div>
+			<div data-role="header" data-theme="b"><h1>Bar "b"</h1><a href="index.html" data-icon="arrow-l">Button "b"</a></div>
+			<div data-role="header" data-theme="c"><h1>Bar "c"</h1><a href="index.html" data-icon="arrow-l">Button "c"</a></div>
+			<div data-role="header" data-theme="d"><h1>Bar "d"</h1><a href="index.html" data-icon="arrow-l">Button "d"</a></div>
+			<div data-role="header" data-theme="e"><h1>Bar "e"</h1><a href="index.html" data-icon="arrow-l">Button "e"</a></div>
 		</div><!-- end swatch-bars -->
 		
 		<p>This default behavior makes it easy to ripple a theme change through a page by setting a theme swatch on a parent because you know the buttons will maintain the same relative visual weight across themes. Since form elements use the button styles, they will also adapt to their parent container.</p>
@@ -167,49 +167,54 @@
 		<p>If you want to add visual emphasis to a button, an alternate swatch color can be set by adding a <code> data-theme="a"</code> to the anchor. Once an alternate swatch color is set on a button in the markup, the framework won't override that color if the parent theme is changed, because you made a conscious decision to set it.</p>
 		
 		<div class="swatch-bars">
-			<div data-role="header" data-theme="a" class="ui-bar" >
+			<div data-theme="a" class="ui-bar ui-bar-a">
+				<p>Bar swatch "a"</p>
 				<div><!-- wrapper div to have control over butttons -->
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="a">A</a>
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="b">B</a>
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="c">C</a>
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="d">D</a>
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="e">E</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="a">Button "a"</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="b">Button "b"</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="c">Button "c"</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="d">Button "d"</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="e">Button "e"</a>
 				</div>
 			</div>
-			<div data-role="header" data-theme="b" class="ui-bar" >
+			<div data-theme="b" class="ui-bar ui-bar-b">
+				<p>Bar swatch "b"</p>
 				<div><!-- wrapper div to have control over butttons -->
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="a">A</a>
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="b">B</a>
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="c">C</a>
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="d">D</a>
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="e">E</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="a">Button "a"</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="b">Button "b"</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="c">Button "c"</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="d">Button "d"</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="e">Button "e"</a>
 				</div>
 			</div>
-			<div data-role="header" data-theme="c" class="ui-bar" >
+			<div data-theme="c" class="ui-bar ui-bar-c">
+				<p>Bar swatch "c"</p>
 				<div><!-- wrapper div to have control over butttons -->
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="a">A</a>
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="b">B</a>
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="c">C</a>
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="d">D</a>
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="e">E</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="a">Button "a"</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="b">Button "b"</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="c">Button "c"</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="d">Button "d"</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="e">Button "e"</a>
 				</div>
 			</div>
-			<div data-role="header" data-theme="d" class="ui-bar" >
+			<div data-theme="d" class="ui-bar ui-bar-d">
+				<p>Bar swatch "d"</p>
 				<div><!-- wrapper div to have control over butttons -->
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="a">A</a>
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="b">B</a>
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="c">C</a>
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="d">D</a>
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="e">E</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="a">Button "a"</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="b">Button "b"</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="c">Button "c"</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="d">Button "d"</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="e">Button "e"</a>
 				</div>
 			</div>
-			<div data-role="header" data-theme="e" class="ui-bar" >
+			<div data-theme="e" class="ui-bar ui-bar-e">
+				<p>Bar swatch "e"</p>
 				<div><!-- wrapper div to have control over butttons -->
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="a">A</a>
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="b">B</a>
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="c">C</a>
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="d">D</a>
-					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="e">E</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="a">Button "a"</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="b">Button "b"</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="c">Button "c"</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="d">Button "d"</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="e">Button "e"</a>
 				</div>
 			</div>
 			
