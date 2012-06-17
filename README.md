@@ -11,12 +11,11 @@ You can find more information about how the library works, and what it is capabl
 When [submitting issues on github](https://github.com/jquery/jquery-mobile/issues/new) please include the following:
 
 1. Issue description
-2. Sample page using our [jsbin template](http://jsbin.com/awoluv/edit#html)
+2. Sample page using our [jsbin template](http://jsbin.com/awoluv/edit#html) that loads latest code
 3. Steps to reproduce
 4. Expected outcome
 5. Actual outcome
 6. Browsers/platforms tested
-7. Library version/Location (eg, CDN or `jquerymobile.com/test/`)
 
 Also, in the interest of creating more readable issues please include code snippets inside a triple backtick box appropriate for the JavaScript/HTML/CSS snippet you wish to discuss. More information is available at the [introduction page](http://github.github.com/github-flavored-markdown/) for github flavored markdown (see, Syntax Highlighting).
 
