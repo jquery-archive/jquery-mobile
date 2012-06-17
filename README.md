@@ -11,7 +11,7 @@ You can find more information about how the library works, and what it is capabl
 When [submitting issues on github](https://github.com/jquery/jquery-mobile/issues/new) please include the following:
 
 1. Issue description
-2. Sample page using our [jsbin template](http://jsbin.com/awoluv/edit#html) that loads latest code
+2. Sample page using our [jsbin template](http://jsbin.com/awoluv/edit#html) which uses latest code
 3. Steps to reproduce
 4. Expected outcome
 5. Actual outcome
