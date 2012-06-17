@@ -49,9 +49,9 @@ The `js` and `css` build targets require [node.js](http://nodejs.org/) and its p
 With node installed you can run the `js` and `css` targets by simply issuing the following from the project root:
 
     npm install
-    node node_modules/.gin/grunt js # or css
+    node node_modules/.bin/grunt js # or css
 
-Note that if you have the appropriate version of [grunt](https://github.com/cowboy/grunt), our build tool, installed globally you can substitute `grunt` wherever you see `node node_modules/.gin/grunt`. For the remainder of the build documentation we will prefer the more concise `grunt`.
+Note that if you have the appropriate version of [grunt](https://github.com/cowboy/grunt), our build tool, installed globally you can substitute `grunt` wherever you see `node node_modules/.bin/grunt`. For the remainder of the build documentation we will prefer the more concise `grunt`.
 
 If you want to use the `docs` and `zip` targets you will need bash and they can be run with the following
 
