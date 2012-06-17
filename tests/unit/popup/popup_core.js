@@ -365,7 +365,7 @@
 				closed: { src: $( "#test-popup" ), event: "closed.openCloseQuickStep1" },
 				hashchange1: { src: $( window ), event: "hashchange.openCloseQuickStep1a" },
 				hashchange2: { src: $( window ), event: "hashchange.openCloseQuickStep1b" },
-				timeout: { src: null, length: 600 }
+				timeout: { src: null, length: 700 }
 			},
 
 			function( result ) {

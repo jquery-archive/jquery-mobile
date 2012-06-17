@@ -1114,6 +1114,9 @@ define( [
 			toPage.jqmData( "title", pageTitle );
 		}
 
+        // This sets the scrollTo value for the page we're transitioning to
+        toPage.toPageScrollTo = settings.toPageScrollPosition;
+
 		// Make sure we have a transition defined.
 		settings.transition = settings.transition ||
 			( ( historyDir && !activeIsInitialPage ) ? active.transition : undefined ) ||
@@ -1309,16 +1312,47 @@ define( [
 				window.setTimeout( function() { removeActiveLinkClass( true ); }, 200 );
 			};
 
-			//if there's a data-rel=back attr, go back in history
-			if( $link.is( ":jqmData(rel='back')" ) ) {
-				window.history.back();
-				return false;
-			}
+            // Set up defaults for the new data-rel='back' link handling
+            var prev = null;
+            var toPageScrollTo = 0;
+
+            //if there's a data-rel=back attr, go back in history
+            if( $link.is( ":jqmData(rel='back')" ) ) {
+
+                // Instead of calling window.history.back() we're going to use the urlHistory object to get 
+                // the previous url.  This fixes a bounce down to the scrollTo of the previous page caused 
+                // by the call to window.history.back()
+                prev = $.mobile.urlHistory.getPrev();
+            }
 
 			var baseUrl = getClosestBaseUrl( $link ),
 
 				//get href, if defined, otherwise default to empty hash
 				href = path.makeUrlAbsolute( $link.attr( "href" ) || "#", baseUrl );
+
+			// If prev is not null, then we must be going back
+			if ( prev !== null ) {
+
+			     var lastChar = href.substring(href.length - 1, href.length);
+
+			     if ( lastChar === "#" ) {
+			          href = path.makeUrlAbsolute( href + prev.url );
+			     } else {
+			          href = path.makeUrlAbsolute( prev.url );
+			     }
+			     
+			     // We need this so we can pass it as a changePage setting
+			     toPageScrollTo = prev.lastScroll;
+
+			     // Removing the currently active entry from urlHistory
+			     $.mobile.urlHistory.stack.pop();
+
+			     // Removing previous item from stack too since we already have the url and it will be added back on the stack when we get there
+			     $.mobile.urlHistory.stack.pop();
+
+			     // Decrement urlHistory activeIndex 
+			     $.mobile.urlHistory.activeIndex = $.mobile.urlHistory.activeIndex - 1;  
+			}
 
 			//if ajax is disabled, exit early
 			if( !$.mobile.ajaxEnabled && !path.isEmbeddedPage( href ) ){
@@ -1386,7 +1420,7 @@ define( [
 				$.mobile.popup.handleLink( $link );
 			}
 			else {
-				$.mobile.changePage( href, { transition: transition, reverse: reverse, role: role } );
+				$.mobile.changePage( href, { transition: transition, reverse: reverse, role: role, toPageScrollPosition: toPageScrollTo } );
 			}
 			event.preventDefault();
 		});
