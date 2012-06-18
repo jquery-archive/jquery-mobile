@@ -131,7 +131,9 @@ define( [ "../jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../j
 				})
 				.bind( "pageshow", function(){
 					var thisPage = this;
+
 					self.updatePagePadding( thisPage );
+
 					if( o.updatePagePadding ){
 						$( window ).bind( "throttledresize." + self.widgetName, function(){
 						 	self.updatePagePadding( thisPage );
@@ -177,7 +179,10 @@ define( [ "../jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../j
 			if( this.options.fullscreen ){ return; }
 
 			tbPage = tbPage || $el.closest( ".ui-page" );
-			$( tbPage ).css( "padding-" + ( header ? "top" : "bottom" ), $el.outerHeight() );
+
+			setTimeout( function() {
+				$( tbPage ).css( "padding-" + ( header ? "top" : "bottom" ), $el.outerHeight() );
+			}, 0);
 		},
 
 		_useTransition: function( notransition ){
