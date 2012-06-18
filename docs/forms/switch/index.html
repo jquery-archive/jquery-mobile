@@ -130,7 +130,7 @@
 				
 		<h2>Theming the flip switch</h2>	
 		
-		<p>Like all form elements, this widget will automatically inherit the theme from its parent container. To choose a specific theme color swatch, specify the <code>data-theme</code> attribute on the select and specify a swatch letter.</p>	
+		<p>Like all form elements, this widget will automatically inherit the theme from its parent container. To choose a specific theme color swatch, specify the <code>data-theme</code> attribute on the <code>select</code> and specify a swatch letter.</p>	
 		
 <pre><code>	
 &lt;div data-role=&quot;fieldcontain&quot;&gt;
@@ -158,6 +158,26 @@
 						<option value="yes">Yes</option>
 					</select> 
 				</div>
+		
+		<p>It is also possible to theme the track of the flip switch by adding the <code>data-track-theme</code> attribute and specifying the chosen swatch letter on the <code>select</code>.</p>
+<p>Here's an example of a flip switch with the swatch "a" applied to the track and swatch "c" applied to the handle:</p>		
+
+&lt;div data-role="fieldcontain"&gt;
+        &lt;label for="flip-c"&gt;Flip switch:&lt;/label&gt;
+        &lt;select name="slider" id="flip-c" data-role="slider" data-theme="c" data-track-theme="a"&gt;
+                &lt;option value="no"&gt;No&lt;/option&gt;
+                &lt;option value="yes"&gt;Yes&lt;/option&gt;
+        &lt;/select&gt;
+&lt;/div&gt;
+
+<div data-role="fieldcontain">
+    <label for="flip-c">Flip switch:</label>
+    <select name="slider" id="flip-c" data-role="slider" data-theme="c" data-track-theme="a">
+        <option value="no">No</option>
+        <option value="yes">Yes</option>
+    </select>
+</div>
+		
 		
 		<h2>Calling the switch plugin</h2>
 
