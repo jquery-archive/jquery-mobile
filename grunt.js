@@ -62,7 +62,8 @@ module.exports = function( grunt ) {
 				expect: true,
 
 				// require js global
-				define: true
+				define: true,
+				require: true
 			}
 		},
 
