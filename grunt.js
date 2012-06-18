@@ -67,6 +67,8 @@ module.exports = function( grunt ) {
 			}
 		},
 
+		// TODO add test files here once we can specify different configs for
+		//      different globs
 		lint: {
 			files: [ 'js/**/*.mobile.*.js', 'js/*/*.js' ]
 		},
