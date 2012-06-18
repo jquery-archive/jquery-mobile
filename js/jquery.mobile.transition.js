@@ -22,7 +22,7 @@ var createHandler = function( sequential ){
 		var deferred = new $.Deferred(),
 			reverseClass = reverse ? " reverse" : "",
 			active	= $.mobile.urlHistory.getActive(),
-			toScroll = active.lastScroll || $.mobile.defaultHomeScroll,
+			toScroll = ( $to.toPageScrollTo || active.lastScroll ) || $.mobile.defaultHomeScroll,
 			screenHeight = $.mobile.getScreenHeight(),
 			maxTransitionOverride = $.mobile.maxTransitionWidth !== false && $( window ).width() > $.mobile.maxTransitionWidth,
 			none = !$.support.cssTransitions || maxTransitionOverride || !name || name === "none",
