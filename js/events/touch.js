@@ -9,9 +9,9 @@ define( [ "../jquery", "../jquery.mobile.vmouse" ], function( $ ) {
 (function( $, window, undefined ) {
 	// add new event shortcuts
 	$.each( ( "touchstart touchmove touchend " +
-			  "tap taphold " +
-			  "swipe swipeleft swiperight " +
-			  "scrollstart scrollstop" ).split( " " ), function( i, name ) {
+		"tap taphold " +
+		"swipe swipeleft swiperight " +
+		"scrollstart scrollstop" ).split( " " ), function( i, name ) {
 
 		$.fn[ name ] = function( fn ) {
 			return fn ? this.bind( name, fn ) : this.trigger( name );
@@ -104,7 +104,7 @@ define( [ "../jquery", "../jquery.mobile.vmouse" ], function( $ ) {
 
 					// ONLY trigger a 'tap' event if the start target is
 					// the same as the stop target.
-					if ( origTarget == event.target ) {
+					if ( origTarget === event.target ) {
 						triggerCustomEvent( thisObject, "tap", event );
 					}
 				}

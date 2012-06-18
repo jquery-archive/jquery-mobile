@@ -134,7 +134,7 @@ define( [ "../jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../j
 					self.updatePagePadding( thisPage );
 					if( o.updatePagePadding ){
 						$( window ).bind( "throttledresize." + self.widgetName, function(){
-						 	self.updatePagePadding( thisPage );
+							self.updatePagePadding( thisPage );
 						});
 					}
 				})
