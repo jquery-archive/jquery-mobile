@@ -160,7 +160,7 @@ define( [ "../jquery",
 		// Try and center the overlay over the given coordinates
 		_placementCoords: function( x, y ) {
 			function fitSegmentInsideSegment( winSize, segSize, offset, desired ) {
-				var ret = desiredCoord;
+				var ret = desired;
 
 				if ( winSize < segSize ) {
 					// Center segment if it's bigger than the window
