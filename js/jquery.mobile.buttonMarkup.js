@@ -44,7 +44,7 @@ $.fn.buttonMarkup = function( options ) {
 
 		$.each( o, mapToDataAttr );
 
-		if ( el.jqmData( "rel" ) === "popup" && e.hasAttribute( "href" ) ) {
+		if ( el.jqmData( "rel" ) === "popup" && el.attr( "href" ) ) {
 			e.setAttribute( "aria-haspopup", true );
 			e.setAttribute( "aria-owns", e.getAttribute( "href" ) );
 		}
