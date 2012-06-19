@@ -1072,6 +1072,8 @@ define( [
 		// for the dialog content to be used in the hash. Instead, we want
 		// to append the dialogHashKey to the url of the current page.
 		if ( isDialog && active ) {
+			url = ( active.url || "" );
+
 			// on the initial page load active.url is undefined and in that case should
 			// be an empty string. Moving the undefined -> empty string back into
 			// urlHistory.addNew seemed imprudent given undefined better represents
@@ -1079,19 +1081,10 @@ define( [
 
 			// If we are at a place in history that once belonged to a dialog, reuse
 			// this state without adding to urlHistory and without modifying the hash.
-			// However, if a dialog is already displayed at this point, and we're
-			// about to display another dialog, then we must add another hash and
-			// history entry on top so that one may navigate back to the original dialog
-			if ( active.url.indexOf( dialogHashKey ) > -1 && !$.mobile.activePage.is( ".ui-dialog" ) ) {
+			if ( active.url.indexOf( dialogHashKey ) > -1 && $.mobile.activePage.is( ".ui-dialog" ) ) {
 				settings.changeHash = false;
 				alreadyThere = true;
-			}
-
-			url = ( active.url || "" ) + dialogHashKey;
-
-			// tack on another dialogHashKey if this is the same as the initial hash
-			// this makes sure that a history entry is created for this dialog
-			if ( urlHistory.activeIndex === 0 && url === urlHistory.initialDst ) {
+			} else {
 				url += dialogHashKey;
 			}
 		}
