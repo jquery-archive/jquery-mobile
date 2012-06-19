@@ -186,7 +186,7 @@ define( [ "../jquery",
 				menuSize;
 
 			// Clamp the width of the menu before grabbing its size
-			this._ui.container.css( "max-width", rc.r - rc.l );
+			this._ui.container.css( "max-width", rc.cx );
 			menuSize = {
 				cx: this._ui.container.outerWidth( true ),
 				cy: this._ui.container.outerHeight( true )
