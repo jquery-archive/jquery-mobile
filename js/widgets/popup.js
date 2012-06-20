@@ -119,15 +119,15 @@ define( [ "../jquery",
 
 		_setOverlayTheme: function( value ) {
 			this._realSetTheme( this._ui.screen, value );
-			if ( $.mobile.browser.ie ) {
-				var clr = this._ui.screen.css( "background-color" ),
-					img = this._ui.screen.css( "background-image" ),
-					bkg = this._ui.screen.css( "background" );
 
-				if ( clr === "transparent" || img === "none" ) {
-					if ( bkg === undefined ) {
-						this._ui.screen.css( "background-color", "black" );
-					}
+			if ( $.mobile.browser.ie ) {
+				if ( this._ui.screen.css( "background-color" ) === "transparent" &&
+					this._ui.screen.css( "background-image" ) === "none" &&
+					this._ui.screen.css( "background" ) === undefined ) {
+					this._ui.screen.css( {
+						"background-color": "black",
+						"filter": "Alpha(Opacity=0)"
+					});
 				}
 			}
 		},
