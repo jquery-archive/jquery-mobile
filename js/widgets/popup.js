@@ -108,8 +108,7 @@ define( [ "jquery",
 				if ( matches && matches.length > 1 ) {
 					currentTheme = matches[ 1 ];
 					break;
-				}
-				else {
+				} else {
 					currentTheme = null;
 				}
 			}
@@ -168,8 +167,7 @@ define( [ "jquery",
 				// Record the option change in the options and in the DOM data-* attributes
 				this.options[ key ] = value;
 				this.element.attr( "data-" + ( $.mobile.ns || "" ) + ( key.replace( /([A-Z])/, "-$1" ).toLowerCase() ), value );
-			}
-			else {
+			} else {
 				$.mobile.widget.prototype._setOption.apply( this, arguments );
 			}
 		},
@@ -182,8 +180,7 @@ define( [ "jquery",
 				if ( winSize < segSize ) {
 					// Center segment if it's bigger than the window
 					ret = offset + ( winSize - segSize ) / 2;
-				}
-				else {
+				} else {
 					// Otherwise center it at the desired coordinate while keeping it completely inside the window
 					ret = Math.min( Math.max( offset, desired - segSize / 2 ), offset + winSize - segSize );
 				}
@@ -263,8 +260,7 @@ define( [ "jquery",
 					.animationComplete( function() {
 						prereqs.screen.resolve();
 					});
-			}
-			else {
+			} else {
 				prereqs.screen.resolve();
 			}
 
@@ -276,8 +272,7 @@ define( [ "jquery",
 					.animationComplete( function() {
 						prereqs.container.resolve();
 					});
-			}
-			else {
+			} else {
 				prereqs.container.resolve();
 			}
 		},
@@ -307,8 +302,7 @@ define( [ "jquery",
 			if ( transition ) {
 				self._currentTransition = transition;
 				self._applyTransition( transition );
-			}
-			else {
+			} else {
 				transition = self.options.transition;
 			}
 
@@ -412,8 +406,7 @@ define( [ "jquery",
 
 				if ( typeof data.toPage === "string" ) {
 					parsedDst = data.toPage;
-				}
-				else {
+				} else {
 					parsedDst = data.toPage.jqmData( "url" );
 				}
 				toUrl = parsedDst.pathname + parsedDst.search + parsedDst.hash;
@@ -430,15 +423,13 @@ define( [ "jquery",
 
 				if ( $.mobile.urlHistory.activeIndex === 0 ) {
 					dstTransition = $.mobile.defaultDialogTransition;
-				}
-				else {
+				} else {
 					dstTransition = activeEntry.transition;
 				}
 
 				if ( hasHash ) {
 					realInstallListener();
-				}
-				else {
+				} else {
 					$( window ).one( "hashchange.popupBinder", function() {
 						realInstallListener();
 					});
@@ -450,8 +441,7 @@ define( [ "jquery",
 					$.mobile.path.set( dstHash );
 					$.mobile.urlHistory.addNew( dstHash, dstTransition, activeEntry.title, activeEntry.pageUrl, activeEntry.role );
 				}
-			}
-			else {
+			} else {
 				whenHooked();
 			}
 		},
@@ -495,8 +485,7 @@ define( [ "jquery",
 					self._haveNavHook = false;
 					self._myOwnHashChange = true;
 					self._navUnhook( current.abort );
-			}
-			else {
+			} else {
 				self._inProgress = false;
 			}
 
@@ -520,8 +509,7 @@ define( [ "jquery",
 				signal = "opened";
 				fn = "_realOpen";
 				args = self._actionQueue[0].args;
-			}
-			else {
+			} else {
 				signal = "closed";
 				fn = "_realClose";
 				args = [];
@@ -552,8 +540,7 @@ define( [ "jquery",
 				self._inProgress = true;
 				if ( self._haveNavHook || !self._actionQueue[0].open ) {
 					self._continueWithAction();
-				}
-				else {
+				} else {
 					self._navHook( function() {
 						self._haveNavHook = true;
 						self._continueWithAction();
@@ -575,14 +562,12 @@ define( [ "jquery",
 					if ( cIdx !== -1 ) {
 						if ( 0 === cIdx && self._inProgress ) {
 							self._actionQueue.push( newAction );
-						}
-						else {
+						} else {
 							self._actionQueue.splice( cIdx, 1 );
 						}
 						self._runSingleAction();
 					}
-				}
-				else {
+				} else {
 					self._actionQueue.push( newAction );
 					self._runSingleAction();
 				}
@@ -602,8 +587,7 @@ define( [ "jquery",
 					if ( 0 === oIdx ) {
 						self._actionQueue.splice( 1, 0, newAction );
 						self._runSingleAction();
-					}
-					else {
+					} else {
 						self._actionQueue.splice( oIdx, 1 );
 					}
 				}
@@ -612,8 +596,7 @@ define( [ "jquery",
 					if ( self._actionQueue.length === 0 ) {
 						self._actionQueue.push( newAction );
 						self._runSingleAction();
-					}
-					else {
+					} else {
 						self._actionQueue.splice( ( self._inProgress ? 1 : 0 ), 0, newAction );
 						self._runSingleAction();
 					}
@@ -629,8 +612,7 @@ define( [ "jquery",
 			if ( this._myOwnHashChange ) {
 				this._myOwnHashChange = false;
 				this._inProgress = false;
-			}
-			else {
+			} else {
 				var dst = this._currentlyOpenPopup;
 
 				if ( this._inProgress ) {
@@ -640,12 +622,10 @@ define( [ "jquery",
 						if ( immediate && this._actionQueue[ 0 ].waitingForPopup ) {
 							this._actionQueue[ 0 ].popup._immediate();
 						}
-					}
-					else {
+					} else {
 						dst = null;
 					}
-				}
-				else {
+				} else {
 					this._actionQueue = [];
 				}
 
