@@ -8,6 +8,9 @@
 			$('html').removeClass('ui-mobile');
 
 			$.mobile.loading( 'hide' );
+
+			stop();
+			setTimeout( start, 100 );
 		},
 
 		teardown: function(){
