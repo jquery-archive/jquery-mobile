@@ -50,8 +50,14 @@
 		<a href="index.html" data-role="button">Link button</a>
 		
 		<p><strong>Note:</strong> Links styled like buttons have all the same visual options as true form-based buttons below, but there are a few important differences. Link-based buttons aren't part of the <code>button</code> plugin and only just use the underlying <code>buttonMarkup</code> plugin to generate the button styles so the form button methods (enable, disable, refresh) aren't supported. If you need to disable a link-based button (or any element), it's possible to apply the disabled class ui-disabled yourself with JavaScript to achieve the same effect.</p>
-		
-		<h2>Mini size</h2>
+        <code>
+            &lt;a href=&quot;index.html&quot; data-role=&quot;button&quot; class=&quot;ui-disabled&quot;&gt;Link button&lt;/a&gt;
+        </code>
+
+        <p>Produces this disabled <strong>link-based</strong> button:</p>
+        <a href="index.html" data-role="button" class="ui-disabled">Link button</a>
+
+            <h2>Mini size</h2>
 
 		<p>For a more compact version that is useful in toolbars and tight spaces, add the <code>data-mini="true"</code> attribute to the button to create a <a href="../forms/forms-all-mini.html">mini version</a>. </p>
 
