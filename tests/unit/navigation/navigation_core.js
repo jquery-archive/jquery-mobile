@@ -497,7 +497,7 @@
 		]);
 	});
 
-	asyncTest( "going back from a dialog triggered from a dialog should result in the first dialog ", function(){
+	asyncTest( "going back from a dialog triggered from a dialog should result in the underlying page ", function(){
 		$.testHelper.pageSequence([
 			// setup
 			function(){ $.testHelper.openPage("#nested-dialog-page"); },
@@ -513,7 +513,7 @@
 
 			// make sure we're on first dialog
 			function(){
-				same($(".ui-page-active")[0], $("#nested-dialog-first")[0], "should be the first dialog");
+				same($(".ui-page-active")[0], $("#nested-dialog-page")[0], "should be the underlying page");
 				start();
 			}]);
 	});
