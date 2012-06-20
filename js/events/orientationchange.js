@@ -3,7 +3,7 @@
 //>>label: orientationchange
 //>>group: Events
 
-define( [ "../jquery", "../jquery.mobile.support.orientation", "./throttledresize" ], function( jQuery ) {
+define( [ "jquery", "../jquery.mobile.support.orientation", "./throttledresize" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, window ) {

@@ -10,7 +10,7 @@
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 define( [
-	"../../jquery",
+	"jquery",
 	"../../jquery.mobile.buttonMarkup",
 	"../../jquery.mobile.core",
 	"../dialog",

@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.collapsible.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "../jquery", "../jquery.mobile.widget", "./collapsible" ], function( $ ) {
+define( [ "jquery", "../jquery.mobile.widget", "./collapsible" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

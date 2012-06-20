@@ -3,7 +3,7 @@
 //>>label: Page Sections
 //>>group: Core
 
-define( [ "../jquery", "./page", "../jquery.mobile.core" ], function( $ ) {
+define( [ "jquery", "./page", "../jquery.mobile.core" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
