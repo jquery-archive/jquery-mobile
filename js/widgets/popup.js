@@ -57,7 +57,24 @@ define( [ "jquery",
 				_fallbackTransition: "",
 				_currentTransition: false,
 				_prereqs: null,
-				_isOpen: false
+				_isOpen: false,
+				_globalHandlers: [
+					{
+						src: $( window ),
+						handler: {
+							resize: function( e ) {
+								if ( self._isOpen ) {
+									self._resizeScreen();
+								}
+							},
+							keyup: function( e ) {
+								if ( self._isOpen && e.keyCode === $.mobile.keyCode.ESCAPE ) {
+									eatEventAndClose( e );
+								}
+							}
+						}
+					}
+				]
 			});
 
 			$.each( this.options, function( key, value ) {
@@ -69,17 +86,9 @@ define( [ "jquery",
 
 			ui.screen.bind( "vclick", function( e ) { eatEventAndClose( e ); });
 
-			$( window )
-				.bind( "resize", function( e ) {
-					if ( self._isOpen ) {
-						self._resizeScreen();
-					}
-				})
-				.bind( "keyup", function( e ) {
-					if ( self._isOpen && e.keyCode === $.mobile.keyCode.ESCAPE ) {
-						eatEventAndClose( e );
-					}
-				});
+			$.each( this._globalHandlers, function( idx, value ) {
+				value.src.bind( value.handler );
+			});
 		},
 
 		_resizeScreen: function() {
@@ -355,6 +364,12 @@ define( [ "jquery",
 			this._ui.screen.remove();
 			this._ui.container.remove();
 			this._ui.placeholder.remove();
+
+			$.each( this._globalHandlers, function( idx, oneSrc ) {
+				$.each( oneSrc.handler, function( eventType, handler ) {
+					oneSrc.src.unbind( eventType, handler );
+				});
+			});
 		},
 
 		open: function( x, y, transition ) {
