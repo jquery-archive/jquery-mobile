@@ -13,6 +13,7 @@
 	height: 100%;
 	position: absolute;
 	opacity: 0;
+	filter: Alpha(Opacity=0);
 	border: 0px;
 	z-index: 1099;
 }
