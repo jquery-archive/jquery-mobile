@@ -1071,6 +1071,13 @@ define( [
 		// If we're displaying the page as a dialog, we don't want the url
 		// for the dialog content to be used in the hash. Instead, we want
 		// to append the dialogHashKey to the url of the current page.
+		//
+		// In general dialogs should not be part of the url or page history.
+		// This is per the documentation 
+		// (http://jquerymobile.com/demos/1.1.0/docs/pages/page-dialogs.html),
+		// ...as well as just good UX practice in general. If the user has to 
+		// tap through to close a bunch of dialogs (a la Windows or pre-iOS 5), 
+		// a dialog is probably the wrong widget for the use case.
 		if ( isDialog && active ) {
 			url = ( active.url || "" );
 
