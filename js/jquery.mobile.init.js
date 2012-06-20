@@ -128,7 +128,7 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 		// hide iOS browser chrome on load
 		$window.load( $.mobile.silentScroll );
 
-		$( document ).delegate( ".ui-disabled", "vclick", function () { return false; });
+		$( document ).delegate( ".ui-disabled", "vclick", function() { return false; });
 	});
 }( jQuery, this ));
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
