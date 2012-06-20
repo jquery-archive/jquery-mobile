@@ -62,12 +62,15 @@ module.exports = function( grunt ) {
 				expect: true,
 
 				// require js global
-				define: true
+				define: true,
+				require: true
 			}
 		},
 
+		// TODO add test files here once we can specify different configs for
+		//      different globs
 		lint: {
-			files: ['grunt.js', 'js/*.js', 'tests/**/*.js']
+			files: [ 'js/**/*.mobile.*.js', 'js/*/*.js' ]
 		},
 
 		// NOTE these configuration settings are used _after_ compilation has taken place
@@ -109,10 +112,9 @@ module.exports = function( grunt ) {
 				name: 'jquery.mobile',
 				exclude: [
 					'jquery',
-					'../external/requirejs/order',
-					'../external/requirejs/depend',
-					'../external/requirejs/text',
-					'../external/requirejs/text!../version.txt'
+					'depend',
+					'text',
+					'text!../version.txt'
 				],
 				out: rootFile + '.compiled.js',
 				pragmasOnSave: { jqmBuildExclude: true },

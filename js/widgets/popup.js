@@ -4,10 +4,10 @@
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 //>>css.structure: ../css/structure/jquery.mobile.popup.css,../css/structure/jquery.mobile.transition.css,../css/structure/jquery.mobile.transition.fade.css
 
-define( [ "jquery",
-	"jquery.mobile.widget",
-	"jquery.mobile.navigation",
-	"../external/requirejs/depend!./jquery.hashchange[jquery]" ], function( $ ) {
+define( [ "../jquery",
+	"../jquery.mobile.widget",
+	"../jquery.mobile.navigation",
+	"depend!../jquery.hashchange[../jquery]" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -23,18 +23,18 @@ define( [ "jquery",
 
 		_create: function() {
 			var ui = {
-			    	screen: $("<div class='ui-screen-hidden ui-popup-screen fade'></div>"),
-			    	placeholder: $("<div style='display: none;'><!-- placeholder --></div>"),
-			    	container: $("<div class='ui-popup-container ui-selectmenu-hidden'></div>")
-			    },
-			    eatEventAndClose = function( e ) {
-			    	e.preventDefault();
-			    	e.stopImmediatePropagation();
-			    	self.close();
-			    },
-			    thisPage = this.element.closest( ":jqmData(role='page')" ),
-			    myId = this.element.attr( "id" ),
-			    self = this;
+					screen: $("<div class='ui-screen-hidden ui-popup-screen fade'></div>"),
+					placeholder: $("<div style='display: none;'><!-- placeholder --></div>"),
+					container: $("<div class='ui-popup-container ui-selectmenu-hidden'></div>")
+				},
+				eatEventAndClose = function( e ) {
+					e.preventDefault();
+					e.stopImmediatePropagation();
+					self.close();
+				},
+				thisPage = this.element.closest( ":jqmData(role='page')" ),
+				myId = this.element.attr( "id" ),
+				self = this;
 
 			if ( thisPage.length === 0 ) {
 				thisPage = $( "body" );
@@ -69,29 +69,6 @@ define( [ "jquery",
 
 			ui.screen.bind( "vclick", function( e ) { eatEventAndClose( e ); });
 
-			// St00pid browser, y u no tell me where focus go?
-			ui.container.bind( "focusout focusin", function( e ) {
-				function maybeClearTimeout() {
-					if ( self._focusTimeout ) {
-						clearTimeout( self._focusTimeout );
-						self._focusTimeout = 0;
-					}
-				}
-
-				if ( self._isOpen ) {
-					if ( e.type === "focusout" ) {
-						maybeClearTimeout();
-						self._focusTimeout = setTimeout( function() {
-							self._ui.container.focus();
-						}, 100 );
-					}
-					else
-					if ( e.type === "focusin" ) {
-						maybeClearTimeout();
-					}
-				}
-			});
-
 			$( window )
 				.bind( "resize", function( e ) {
 					if ( self._isOpen ) {
@@ -111,10 +88,10 @@ define( [ "jquery",
 
 		_realSetTheme: function( dst, theme ) {
 			var classes = ( dst.attr( "class" ) || "").split( " " ),
-			    alreadyAdded = true,
-			    currentTheme = null,
-			    matches,
-			    themeStr = String( theme );
+				alreadyAdded = true,
+				currentTheme = null,
+				matches,
+				themeStr = String( theme );
 
 			while ( classes.length > 0 ) {
 				currentTheme = classes.pop();
@@ -142,6 +119,17 @@ define( [ "jquery",
 
 		_setOverlayTheme: function( value ) {
 			this._realSetTheme( this._ui.screen, value );
+			if ( $.mobile.browser.ie ) {
+				var clr = this._ui.screen.css( "background-color" ),
+					img = this._ui.screen.css( "background-image" ),
+					bkg = this._ui.screen.css( "background" );
+
+				if ( clr === "transparent" || img === "none" ) {
+					if ( bkg === undefined ) {
+						this._ui.screen.css( "background-color", "black" );
+					}
+				}
+			}
 		},
 
 		_setShadow: function( value ) {
@@ -180,52 +168,45 @@ define( [ "jquery",
 			}
 		},
 
+		// Try and center the overlay over the given coordinates
 		_placementCoords: function( x, y ) {
-			// Try and center the overlay over the given coordinates
-			var ret,
-			    menuHeight = this._ui.container.outerHeight( true ),
-			    menuWidth = this._ui.container.outerWidth( true ),
-			    scrollTop = $( window ).scrollTop(),
-			    screenHeight = $( window ).height(),
-			    screenWidth = $( window ).width(),
-			    halfheight = menuHeight / 2,
-			    maxwidth = screenWidth - 20,
-			    roomtop = y - scrollTop,
-			    roombot = scrollTop + screenHeight - y,
-			    newtop, newleft;
+			function fitSegmentInsideSegment( winSize, segSize, offset, desired ) {
+				var ret = desired;
 
-			this._ui.container.css( "max-width", maxwidth );
-
-			menuWidth = this._ui.container.outerWidth( true );
-			menuHeight = this._ui.container.outerHeight( true );
-
-			if ( roomtop > menuHeight / 2 && roombot > menuHeight / 2 ) {
-				newtop = y - halfheight;
-			}
-			else {
-				// 30px tolerance off the edges
-				newtop = roomtop > roombot ? scrollTop + screenHeight - menuHeight - 30 : scrollTop + 30;
-			}
-
-			// If the menuwidth is greater or equal to the max-width, center it on screen
-			if ( menuWidth >= maxwidth ) {
-				newleft = ( screenWidth - menuWidth ) / 2;
-			}
-			else {
-				//otherwise insure a >= 30px offset from the left
-				newleft = x - menuWidth / 2;
-
-				// 10px tolerance off the edges
-				if ( newleft < 10 ) {
-					newleft = 10;
+				if ( winSize < segSize ) {
+					// Center segment if it's bigger than the window
+					ret = offset + ( winSize - segSize ) / 2;
 				}
-				else
-				if ( ( newleft + menuWidth ) > screenWidth ) {
-					newleft = screenWidth - menuWidth - 10;
+				else {
+					// Otherwise center it at the desired coordinate while keeping it completely inside the window
+					ret = Math.min( Math.max( offset, desired - segSize / 2 ), offset + winSize - segSize );
 				}
+
+				return ret;
 			}
 
-			return { x: newleft, y: newtop };
+			// Tolerances off the window edges
+			var tol = { l: 10, t: 30, r: 10, b: 30 },
+			// rectangle within which the popup must fit
+				rc = {
+					l: tol.l,
+					t: $( window ).scrollTop() + tol.t,
+					cx: $( window ).width() - tol.l - tol.r,
+					cy: $( window ).height() - tol.t - tol.b
+				},
+				menuSize;
+
+			// Clamp the width of the menu before grabbing its size
+			this._ui.container.css( "max-width", rc.cx );
+			menuSize = {
+				cx: this._ui.container.outerWidth( true ),
+				cy: this._ui.container.outerHeight( true )
+			};
+
+			return {
+				x: fitSegmentInsideSegment( rc.cx, menuSize.cx, rc.l, x ),
+				y: fitSegmentInsideSegment( rc.cy, menuSize.cy, rc.t, y )
+			};
 		},
 
 		_immediate: function() {
@@ -297,9 +278,9 @@ define( [ "jquery",
 
 		_realOpen: function( x, y, transition ) {
 			var self = this,
-			    coords = self._placementCoords(
-			    	( undefined === x ? window.innerWidth / 2 : x ),
-			    	( undefined === y ? window.innerHeight / 2 : y ) );
+				coords = self._placementCoords(
+					( undefined === x ? window.innerWidth / 2 : x ),
+					( undefined === y ? window.innerHeight / 2 : y ) );
 
 			// Count down to triggering "opened" - we have two prerequisites:
 			// 1. The popup window animation completes (container())
@@ -344,7 +325,9 @@ define( [ "jquery",
 
 		_realClose: function() {
 			var self = this,
-			    transition = ( self._currentTransition ? self._currentTransition : self.options.transition );
+				transition = ( self._currentTransition ? self._currentTransition : self.options.transition );
+
+			this._isOpen = false;
 
 			// Count down to triggering "closed" - we have two prerequisites:
 			// 1. The popup window reverse animation completes (container())
@@ -382,7 +365,6 @@ define( [ "jquery",
 		},
 
 		close: function() {
-			this._isOpen = false;
 			$.mobile.popup.popupManager.pop( this );
 		}
 	});
@@ -405,11 +387,24 @@ define( [ "jquery",
 		// because the dialogHashKey may need to be added to the URL.
 		_navHook: function( whenHooked ) {
 			var self = this, dstHash;
+			function realInstallListener() {
+				$( window ).one( "hashchange.popup", function() {
+					self._onHashChange();
+				});
+				whenHooked();
+			}
 
 			self._myUrl = $.mobile.activePage.jqmData( "url" );
 			$.mobile.pageContainer.one( "pagebeforechange.popup", function( e, data ) {
-				var parsedDst = $.mobile.path.parseUrl( ( ( typeof data.toPage === "string" ) ? data.toPage : data.toPage.jqmData( "url" ) ) ),
-				    toUrl = parsedDst.pathname + parsedDst.search + parsedDst.hash;
+				var parsedDst, toUrl;
+
+				if ( typeof data.toPage === "string" ) {
+					parsedDst = data.toPage;
+				}
+				else {
+					parsedDst = data.toPage.jqmData( "url" );
+				}
+				toUrl = parsedDst.pathname + parsedDst.search + parsedDst.hash;
 
 				if ( self._myUrl !== toUrl ) {
 					self._onHashChange( true );
@@ -417,16 +412,14 @@ define( [ "jquery",
 			});
 			if ( $.mobile.hashListeningEnabled ) {
 				var activeEntry = $.mobile.urlHistory.getActive(),
-				    dstTransition = ( ( $.mobile.urlHistory.activeIndex === 0 )
-				    	? $.mobile.defaultDialogTransition
-				    	: activeEntry.transition ),
-				    hasHash = ( activeEntry.url.indexOf( $.mobile.dialogHashKey ) > -1 );
+					dstTransition,
+					hasHash = ( activeEntry.url.indexOf( $.mobile.dialogHashKey ) > -1 );
 
-				function realInstallListener() {
-					$( window ).one( "hashchange.popup", function() {
-						self._onHashChange();
-					});
-					whenHooked();
+				if ( $.mobile.urlHistory.activeIndex === 0 ) {
+					dstTransition = $.mobile.defaultDialogTransition;
+				}
+				else {
+					dstTransition = activeEntry.transition;
 				}
 
 				if ( hasHash ) {
@@ -465,7 +458,7 @@ define( [ "jquery",
 
 		_inArray: function( action ) {
 			var self = this,
-			    idx = -1;
+				idx = -1;
 
 			$.each( self._actionQueue, function( arIdx, value ) {
 				if ( value.open === action.open && value.popup === action.popup ) {
@@ -480,7 +473,7 @@ define( [ "jquery",
 
 		_completeAction: function() {
 			var self = this,
-			    current = self._actionQueue.shift();
+				current = self._actionQueue.shift();
 
 			self._currentlyOpenPopup = ( current.open ? current.popup : null );
 
@@ -500,8 +493,8 @@ define( [ "jquery",
 
 		_continueWithAction: function() {
 			var self = this,
-			    signal, fn, args,
-			    actionComplete = false;
+				signal, fn, args,
+				actionComplete = false;
 
 			if ( self._actionQueue[0].open ) {
 				if ( self._currentlyOpenPopup ) {
@@ -519,6 +512,13 @@ define( [ "jquery",
 				fn = "_realClose";
 				args = [];
 			}
+
+			if ( self._yScroll !== undefined && self._actionQueue[0].open ) {
+				if ( self._yScroll !== $( window ).scrollTop() ) {
+					window.scrollTo( 0, self._yScroll );
+				}
+			}
+			self._yScroll = $( window ).scrollTop();
 
 			self._actionQueue[0].waitingForPopup = true;
 			self._actionQueue[0].popup.element.one( signal, function() {
@@ -550,13 +550,13 @@ define( [ "jquery",
 
 		push: function( popup, args ) {
 			var self = this,
-			    newAction = { open: true, popup: popup, args: args },
-			    idx = self._inArray( newAction );
+				newAction = { open: true, popup: popup, args: args },
+				idx = self._inArray( newAction );
 
 			if ( -1 === idx ) {
 				if ( self._currentlyOpenPopup === popup ) {
 					var closeAction = { open: false, popup: popup },
-					    cIdx = self._inArray( closeAction );
+						cIdx = self._inArray( closeAction );
 
 					if ( cIdx !== -1 ) {
 						if ( 0 === cIdx && self._inProgress ) {
@@ -577,12 +577,12 @@ define( [ "jquery",
 
 		pop: function( popup ) {
 			var self = this,
-			    newAction = { open: false, popup: popup },
-			    idx = self._inArray( newAction );
+				newAction = { open: false, popup: popup },
+				idx = self._inArray( newAction );
 
 			if ( -1 === idx ) {
 				var openAction = { open: true, popup: popup },
-				    oIdx = self._inArray( openAction );
+					oIdx = self._inArray( openAction );
 
 				if ( oIdx !== -1 ) {
 					if ( 0 === oIdx ) {
@@ -609,6 +609,8 @@ define( [ "jquery",
 
 		_onHashChange: function( immediate ) {
 			this._haveNavHook = false;
+			this._yScroll = undefined;
+			$( this ).trigger( "done" );
 
 			if ( this._myOwnHashChange ) {
 				this._myOwnHashChange = false;
@@ -645,28 +647,36 @@ define( [ "jquery",
 				this._runSingleAction() ;
 			}
 		}
-	}
+	};
 
-	$.mobile.popup.handleLink = function( $link, whenOpenedCb ) {
+	$.mobile.popup.handleLink = function( $link ) {
 		var closestPage = $link.closest( ":jqmData(role='page')" ),
-		    scope = ( ( closestPage.length === 0 ) ? $( "body" ) : closestPage ),
-		    popup = $( $link.attr( "href" ), scope[0] ),
-		    offset;
+			scope = ( ( closestPage.length === 0 ) ? $( "body" ) : closestPage ),
+			popup = $( $link.attr( "href" ), scope[0] ),
+			offset;
 
 		if ( popup.data( "popup" ) ) {
 			offset = $link.offset();
 
 			popup
-				.one( "opened", whenOpenedCb )
-				.one( "closed", function() { $link.focus(); } )
 				.popup( "open",
 					offset.left + $link.outerWidth() / 2,
 					offset.top + $link.outerHeight() / 2,
 					$link.jqmData( "transition" ) );
+
+			// If this link is not inside a popup, re-focus onto it after the popup(s) complete
+			// For some reason, a $.proxy( $link, "focus" ) doesn't work as the handler
+			if ( $link.parents( ".ui-popup-container" ).length === 0 ) {
+				$( $.mobile.popup.popupManager ).one( "done", function() {
+					$link.focus();
+				});
+			}
 		}
-		else {
-			whenOpenedCb();
-		}
+
+		//remove after delay
+		setTimeout( function() {
+			$link.removeClass( $.mobile.activeBtnClass );
+		}, 300 );
 	};
 
 	$( document ).bind( "pagecreate create", function( e )  {

@@ -7,8 +7,8 @@ define( [
 	"jquery",
 	"./jquery.mobile.core",
 	"./jquery.mobile.events",
-	"../external/requirejs/depend!./jquery.hashchange[jquery]",
-	"./jquery.mobile.page",
+	"depend!./jquery.hashchange[jquery]",
+	"./widgets/page",
 	"./jquery.mobile.transition" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 ( function( $, undefined ) {
@@ -162,8 +162,8 @@ define( [
 			convertUrlToDataUrl: function( absUrl ) {
 				var u = path.parseUrl( absUrl );
 				if ( path.isEmbeddedPage( u ) ) {
-				    // For embedded pages, remove the dialog hash key as in getFilePath(),
-				    // otherwise the Data Url won't match the id of the embedded Page.
+					// For embedded pages, remove the dialog hash key as in getFilePath(),
+					// otherwise the Data Url won't match the id of the embedded Page.
 					return u.hash.split( dialogHashKey )[0].replace( /^#/, "" );
 				} else if ( path.isSameDomain( u, documentBase ) ) {
 					return u.hrefNoHash.replace( documentBase.domain, "" ).split( dialogHashKey )[0];
@@ -213,7 +213,7 @@ define( [
 			},
 
 			isHashValid: function( hash ) {
-				return /^#[^#]+$/.test(hash);
+				return (/^#[^#]+$/).test(hash);
 			},
 
 			//check whether a url is referencing the same domain, or an external domain or different protocol
@@ -259,6 +259,19 @@ define( [
 					return ( u.hash && ( u.hrefNoHash === documentUrl.hrefNoHash || ( documentBaseDiffers && u.hrefNoHash === documentBase.hrefNoHash ) ) );
 				}
 				return (/^#/).test( u.href );
+			},
+
+
+			// Some embedded browsers, like the web view in Phone Gap, allow cross-domain XHR
+			// requests if the document doing the request was loaded via the file:// protocol.
+			// This is usually to allow the application to "phone home" and fetch app specific
+			// data. We normally let the browser handle external/cross-domain urls, but if the
+			// allowCrossDomainPages option is true, we will allow cross-domain http/https
+			// requests to go through our page loading logic.
+			isPermittedCrossDomainRequest: function( docUrl, reqUrl ) {
+				return $.mobile.allowCrossDomainPages &&
+					docUrl.protocol === "file:" &&
+					reqUrl.search( /^https?:/ ) !== -1;
 			}
 		},
 
@@ -449,7 +462,7 @@ define( [
 	// because the recording of the scroll position is delayed for 100ms after
 	// the browser might have changed the position because of the hashchange
 	$window.bind( $.support.pushState ? "popstate" : "hashchange", function() {
-	 	setLastScrollEnabled = false;
+		setLastScrollEnabled = false;
 	});
 
 	// handle initial hashchange from chrome :(
@@ -462,7 +475,7 @@ define( [
 		// once the page has changed, re-enable the scroll recording
 		$.mobile.pageContainer.bind( "pagechange", function() {
 
-	 		setLastScrollEnabled = true;
+			setLastScrollEnabled = true;
 
 			// remove any binding that previously existed on the get scroll
 			// which may or may not be different than the scroll element determined for
@@ -531,9 +544,11 @@ define( [
 	function resetActivePageHeight(){
 		var aPage = $( "." + $.mobile.activePageClass ),
 			aPagePadT = parseFloat( aPage.css( "padding-top" ) ),
-			aPagePadB = parseFloat( aPage.css( "padding-bottom" ) );
+			aPagePadB = parseFloat( aPage.css( "padding-bottom" ) ),
+			aPageBorderT = parseFloat( aPage.css( "border-top-width" ) ),
+			aPageBorderB = parseFloat( aPage.css( "border-bottom-width" ) );
 
-		aPage.css( "min-height", getScreenHeight() - aPagePadT - aPagePadB );
+		aPage.css( "min-height", getScreenHeight() - aPagePadT - aPagePadB - aPageBorderT - aPageBorderB );
 	}
 
 	//shared page enhancements
@@ -548,7 +563,7 @@ define( [
 		$page.page();
 	}
 
-/* exposed $.mobile methods	 */
+	/* exposed $.mobile methods */
 
 	//animation complete callback
 	$.fn.animationComplete = function( callback ) {
@@ -592,8 +607,8 @@ define( [
 		var page = $(this);
 
 		// when dom caching is not enabled or the page is embedded bind to remove the page on hide
-		if( !page.data("page").options.domCache
-				&& page.is(":jqmData(external-page='true')") ) {
+		if( !page.data("page").options.domCache &&
+				page.is(":jqmData(external-page='true')") ) {
 
 			page.bind( 'pagehide.remove', function() {
 				var $this = $( this ),
@@ -771,10 +786,10 @@ define( [
 
 					// data-url must be provided for the base tag so resource requests can be directed to the
 					// correct url. loading into a temprorary element makes these requests immediately
-					if( pageElemRegex.test( html )
-							&& RegExp.$1
-							&& dataUrlRegex.test( RegExp.$1 )
-							&& RegExp.$1 ) {
+					if( pageElemRegex.test( html ) &&
+							RegExp.$1 &&
+							dataUrlRegex.test( RegExp.$1 ) &&
+							RegExp.$1 ) {
 						url = fileUrl = path.getFilePath( $( "<div>" + RegExp.$1 + "</div>" ).text() );
 					}
 
@@ -955,7 +970,7 @@ define( [
 		// to make sure it is loaded into the DOM. We'll listen
 		// to the promise object it returns so we know when
 		// it is done loading or if an error ocurred.
-		if ( typeof toPage == "string" ) {
+		if ( typeof toPage === "string" ) {
 			$.mobile.loadPage( toPage, settings )
 				.done(function( url, options, newPage, dupCachedPage ) {
 					isPageTransitioning = false;
@@ -1043,7 +1058,7 @@ define( [
 		// Wrap this in a try/catch block since IE9 throw "Unspecified error" if document.activeElement
 		// is undefined when we are in an IFrame.
 		try {
-			if(document.activeElement && document.activeElement.nodeName.toLowerCase() != 'body') {
+			if(document.activeElement && document.activeElement.nodeName.toLowerCase() !== 'body') {
 				$(document.activeElement).blur();
 			} else {
 				$( "input:focus, textarea:focus, select:focus" ).blur();
@@ -1092,7 +1107,7 @@ define( [
 		// if title element wasn't found, try the page div data attr too
 		// If this is a deep-link or a reload ( active === undefined ) then just use pageTitle
 		var newPageTitle = ( !active )? pageTitle : toPage.jqmData( "title" ) || toPage.children(":jqmData(role='header')").find(".ui-title" ).getEncodedText();
-		if( !!newPageTitle && pageTitle == document.title ) {
+		if( !!newPageTitle && pageTitle === document.title ) {
 			pageTitle = newPageTitle;
 		}
 		if ( !toPage.jqmData( "title" ) ) {
@@ -1100,9 +1115,9 @@ define( [
 		}
 
 		// Make sure we have a transition defined.
-		settings.transition = settings.transition
-			|| ( ( historyDir && !activeIsInitialPage ) ? active.transition : undefined )
-			|| ( isDialog ? $.mobile.defaultDialogTransition : $.mobile.defaultPageTransition );
+		settings.transition = settings.transition ||
+			( ( historyDir && !activeIsInitialPage ) ? active.transition : undefined ) ||
+			( isDialog ? $.mobile.defaultDialogTransition : $.mobile.defaultPageTransition );
 
 		//add page to history stack if it's not back or forward
 		if( !historyDir && !alreadyThere ) {
@@ -1167,7 +1182,7 @@ define( [
 			// an embedded SVG document where some symbol instance elements
 			// don't have nodeName defined on them, or strings are of type
 			// SVGAnimatedString.
-			if ( ( typeof ele.nodeName === "string" ) && ele.nodeName.toLowerCase() == "a" ) {
+			if ( ( typeof ele.nodeName === "string" ) && ele.nodeName.toLowerCase() === "a" ) {
 				break;
 			}
 			ele = ele.parentNode;
@@ -1188,7 +1203,6 @@ define( [
 
 		return path.makeUrlAbsolute( url, base);
 	}
-
 
 	//The following event bindings should be bound after mobileinit has been triggered
 	//the following deferred is resolved in the init file
@@ -1230,8 +1244,7 @@ define( [
 
 			url = path.makeUrlAbsolute(  url, getClosestBaseUrl($this) );
 
-			//external submits use regular HTTP
-			if( path.isExternal( url ) || target ) {
+			if(( path.isExternal( url ) && !path.isPermittedCrossDomainRequest(documentUrl, url)) || target ) {
 				return;
 			}
 
@@ -1323,7 +1336,7 @@ define( [
 			//            the current value of the base tag is at the time this code
 			//            is called. For now we are just assuming that any url with a
 			//            hash in it is an application page reference.
-			if ( href.search( "#" ) != -1 ) {
+			if ( href.search( "#" ) !== -1 ) {
 				href = href.replace( /[^#]*#/, "" );
 				if ( !href ) {
 					//link was an empty hash meant purely
@@ -1348,12 +1361,11 @@ define( [
 				// data. We normally let the browser handle external/cross-domain urls, but if the
 				// allowCrossDomainPages option is true, we will allow cross-domain http/https
 				// requests to go through our page loading logic.
-				isCrossDomainPageLoad = ( $.mobile.allowCrossDomainPages && documentUrl.protocol === "file:" && href.search( /^https?:/ ) != -1 ),
 
 				//check for protocol or rel and its not an embedded page
 				//TODO overlap in logic from isExternal, rel=external check should be
 				//     moved into more comprehensive isExternalLink
-				isExternal = useDefaultUrlHandling || ( path.isExternal( href ) && !isCrossDomainPageLoad );
+				isExternal = useDefaultUrlHandling || ( path.isExternal( href ) && !path.isPermittedCrossDomainRequest(documentUrl, href) );
 
 			if( isExternal ) {
 				httpCleanup();
@@ -1371,7 +1383,7 @@ define( [
 				role = $link.attr( "data-" + $.mobile.ns + "rel" ) || undefined;
 
 			if ( role === "popup" ) {
-				$.mobile.popup.handleLink( $link, removeActiveLinkClass );
+				$.mobile.popup.handleLink( $link );
 			}
 			else {
 				$.mobile.changePage( href, { transition: transition, reverse: reverse, role: role } );
@@ -1451,7 +1463,7 @@ define( [
 							// as most of this is lost by the domCache cleaning
 							$.extend( changePageOptions, {
 								role: active.role,
-								transition:	 active.transition,
+								transition: active.transition,
 								reverse: isBack
 							});
 						}

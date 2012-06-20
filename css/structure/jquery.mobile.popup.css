@@ -3,6 +3,7 @@
 	display: inline-block;
 	position: absolute;
 	padding: 0px;
+	outline: none;
 }
 
 .ui-popup-screen {

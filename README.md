@@ -11,18 +11,17 @@ You can find more information about how the library works, and what it is capabl
 When [submitting issues on github](https://github.com/jquery/jquery-mobile/issues/new) please include the following:
 
 1. Issue description
-2. Sample page using our [jsbin template](http://jsbin.com/awoluv/edit#html)
+2. Sample page using our [jsbin template](http://jsbin.com/awoluv/edit#html) which uses latest code
 3. Steps to reproduce
 4. Expected outcome
 5. Actual outcome
 6. Browsers/platforms tested
-7. Library version/Location (eg, CDN or `jquerymobile.com/test/`)
 
 Also, in the interest of creating more readable issues please include code snippets inside a triple backtick box appropriate for the JavaScript/HTML/CSS snippet you wish to discuss. More information is available at the [introduction page](http://github.github.com/github-flavored-markdown/) for github flavored markdown (see, Syntax Highlighting).
 
 ## Pull Requests
 
-When submitting a pull request for review there are few important steps you can take to ensure that it gets reviewed quickly and increase the chances that it will be merged (in order of descending importance):
+When submitting a pull request for review there are a few important steps you can take to ensure that it gets reviewed quickly and increase the chances that it will be merged (in order of descending importance):
 
 1. Include tests (see [Testing](#testing))
 2. Follow the [jQuery Core style guide](http://docs.jquery.com/JQuery_Core_Style_Guidelines)
@@ -50,9 +49,9 @@ The `js` and `css` build targets require [node.js](http://nodejs.org/) and its p
 With node installed you can run the `js` and `css` targets by simply issuing the following from the project root:
 
     npm install
-    node node_modules/.gin/grunt js # or css
+    node node_modules/.bin/grunt js # or css
 
-Note that if you have the appropriate version of [grunt](https://github.com/cowboy/grunt), our build tool, installed globally you can substitute `grunt` wherever you see `node node_modules/.gin/grunt`. For the remainder of the build documentation we will prefer the more concise `grunt`.
+Note that if you have the appropriate version of [grunt](https://github.com/cowboy/grunt), our build tool, installed globally you can substitute `grunt` wherever you see `node node_modules/.bin/grunt`. For the remainder of the build documentation we will prefer the more concise `grunt`.
 
 If you want to use the `docs` and `zip` targets you will need bash and they can be run with the following
 
@@ -146,7 +145,7 @@ will only run the tests where the path contains the string `slider`, eg `tests/u
 
 ### Rebasing
 
-Often times when working on a feature or bug fix branch it's useful to pull in the latest from the parent branch. If you're doing this _before_ submitting a pull requests it's best to use git's rebase to apply your commits onto the latest from the parent branch. For example, working on `new-feature` branch where `upstream` is the remote at `git://github.com/jquery/jquery-mobile.git`:
+Often times when working on a feature or bug fix branch it's useful to pull in the latest from the parent branch. If you're doing this _before_ submitting a pull request it's best to use git's rebase to apply your commits onto the latest from the parent branch. For example, working on `new-feature` branch where `upstream` is the remote at `git://github.com/jquery/jquery-mobile.git`:
 
     git checkout new-feature
     git fetch upstream

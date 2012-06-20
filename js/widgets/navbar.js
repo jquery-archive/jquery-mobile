@@ -6,7 +6,7 @@
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 
-define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.buttonMarkup", "./jquery.mobile.grid" ], function( $ ) {
+define( [ "../jquery", "../jquery.mobile.widget", "../jquery.mobile.buttonMarkup", "../jquery.mobile.grid" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -24,15 +24,11 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 			iconpos = $navbtns.filter( ":jqmData(icon)" ).length ?
 									this.options.iconpos : undefined;
 
-		$navbar.addClass( "ui-navbar" )
+		$navbar.addClass( "ui-navbar ui-mini" )
 			.attr( "role","navigation" )
 			.find( "ul" )
 			.jqmEnhanceable()
 			.grid({ grid: this.options.grid });
-
-		if ( !iconpos ) {
-			$navbar.addClass( "ui-navbar-noicons" );
-		}
 
 		$navbtns.buttonMarkup({
 			corners:	false,

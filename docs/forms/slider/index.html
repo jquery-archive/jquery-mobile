@@ -6,7 +6,6 @@
 	<title>jQuery Mobile Docs - Slider</title>
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
 	<link rel="stylesheet" href="../../_assets/css/jqm-docs.css"/>
-	<script src="../../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
 	<script src="../../../js/jquery.js"></script>
 	<script src="../../../docs/_assets/js/jqm-docs.js"></script>
 	<script src="../../../js/"></script>
@@ -43,13 +42,13 @@
 			<p>The framework will find all <code>input</code> elements with a <code>type="range"</code> and automatically enhance them into a slider with an accompanying input without any need to apply a <code>data-role</code> attribute. To prevent the automatic enhancement of this input into a slider, add <code>data-role="none"</code> attribute to the <code>input</code> and wrap them in a <code>div</code> with the <code> data-role="fieldcontain"</code> attribute to group them. In this example, the acceptable range is 0-100. </p>
 
 <pre><code>
-&lt;label for=&quot;slider-0&quot;&gt;Input slider:&lt;/label&gt;
-&lt;input type=&quot;range&quot; name=&quot;slider&quot; id=&quot;slider-0&quot; value=&quot;60&quot; min=&quot;0&quot; max=&quot;100&quot; /&gt;
+&lt;label for=&quot;slider-1&quot;&gt;Input slider:&lt;/label&gt;
+&lt;input type=&quot;range&quot; name=&quot;slider-1&quot; id=&quot;slider-1&quot; value=&quot;60&quot; min=&quot;0&quot; max=&quot;100&quot; /&gt;
 </code></pre>
 
 				<p>The default slider with these settings is displayed like this:</p>
-				<label for="slider-0">Input slider:</label>
-				<input type="range" name="slider-1" id="slider-0" value="60" min="0" max="100" />
+				<label for="slider-1">Input slider:</label>
+				<input type="range" name="slider-1" id="slider-1" value="60" min="0" max="100" />
 				
 				<h2>Step increment</h2>
 
@@ -57,12 +56,12 @@
 
 <pre><code>
 &lt;label for=&quot;slider-step&quot;&gt;Input slider:&lt;/label&gt;
-&lt;input type=&quot;range&quot; name=&quot;slider&quot; id=&quot;slider-step&quot; value=&quot;150&quot; min=&quot;0&quot; max=&quot;500&quot; <strong>step=&quot;50&quot;</strong> /&gt;
+&lt;input type=&quot;range&quot; name=&quot;slider-step&quot; id=&quot;slider-step&quot; value=&quot;150&quot; min=&quot;0&quot; max=&quot;500&quot; <strong>step=&quot;50&quot;</strong> /&gt;
 </code></pre>
 
 				<p>This will produce an input that snaps to increments of 50. If a value is added to the input that isn't valid with the step increment, the value will be reset on blur to the closest step.</p>
 		        <label for="slider-step">Input slider:</label>
-				<input type="range" name="slider-1" id="slider-step" value="150" min="0" max="500" step="50" />
+				<input type="range" name="slider-step" id="slider-step" value="150" min="0" max="500" step="50" />
 				
 				
 				<h2>Fill highlight</h2>
@@ -71,11 +70,11 @@
 
 <pre><code>
 &lt;label for=&quot;slider-fill&quot;&gt;Input slider:&lt;/label&gt;
-&lt;input type=&quot;range&quot; name=&quot;slider&quot; id=&quot;slider-fill&quot; value=&quot;60&quot; min=&quot;0&quot; max=&quot;100&quot; <strong>data-highlight=&quot;true&quot;</strong> /&gt;
+&lt;input type=&quot;range&quot; name=&quot;slider-fill&quot; id=&quot;slider-fill&quot; value=&quot;60&quot; min=&quot;0&quot; max=&quot;100&quot; <strong>data-highlight=&quot;true&quot;</strong> /&gt;
 </code></pre>
 
-		        <label for="slider-min">Input slider:</label>
-				<input type="range" name="slider-1" id="slider-min" value="60" min="0" max="100" data-highlight="true" />
+		        <label for="slider-fill">Input slider:</label>
+				<input type="range" name="slider-fill" id="slider-fill" value="60" min="0" max="100" data-highlight="true" />
 	
 				
 				<h2>Mini version</h2>
@@ -83,13 +82,13 @@
 				<p>For a more compact version that is useful in toolbars and tight spaces, add the <code>data-mini="true"</code> attribute to the element to create a <a href="../forms-all-mini.html">mini version</a>. </p>
 
 <pre><code>
-&lt;label for=&quot;slider-0&quot;&gt;Input slider:&lt;/label&gt;
-&lt;input type=&quot;range&quot; name=&quot;slider&quot; id=&quot;slider-0&quot; value=&quot;25&quot; min=&quot;0&quot; max=&quot;100&quot; data-highlight=&quot;true&quot; <strong>data-mini=&quot;true&quot;</strong> /&gt;
+&lt;label for=&quot;slider-mini&quot;&gt;Input slider:&lt;/label&gt;
+&lt;input type=&quot;range&quot; name=&quot;slider-mini&quot; id=&quot;slider-mini&quot; value=&quot;25&quot; min=&quot;0&quot; max=&quot;100&quot; data-highlight=&quot;true&quot; <strong>data-mini=&quot;true&quot;</strong> /&gt;
 </code></pre>
 
-				<p>This will produce an input that is not as tall as the standard version and has a smaller text size.</p>
-		        <label for="slider-min">Input slider:</label>
-				<input type="range" name="slider-1" id="slider-min" value="25" min="0" max="100" data-highlight="true" data-mini="true" />
+				<p>This will produce a slider and its corresponding input that are not as tall as the standard version. The input also has a smaller text size.</p>
+		        <label for="slider-mini">Input slider:</label>
+				<input type="range" name="slider-mini" id="slider-mini" value="25" min="0" max="100" data-highlight="true" data-mini="true" />
 
 				<h2>Field containers</h2>
 					
@@ -98,15 +97,15 @@
 
 <pre><code>
 <strong>&lt;div data-role=&quot;fieldcontain&quot;&gt;
-</strong>   &lt;label for=&quot;slider&quot;&gt;Input slider:&lt;/label&gt;
-   &lt;input type=&quot;range&quot; name=&quot;slider&quot; id=&quot;slider&quot; value=&quot;25&quot; min=&quot;0&quot; max=&quot;100&quot;  /&gt;
+</strong>   &lt;label for=&quot;slider-2&quot;&gt;Input slider:&lt;/label&gt;
+   &lt;input type=&quot;range&quot; name=&quot;slider-2&quot; id=&quot;slider-2&quot; value=&quot;25&quot; min=&quot;0&quot; max=&quot;100&quot;  /&gt;
 <strong>&lt;/div&gt;
 </strong></code></pre>
 
 			<p>The slider is now displayed like this:</p>
 			<div data-role="fieldcontain">
-				<label for="slider-1">Input slider:</label>
-				<input type="range" name="slider-1" id="slider-1" value="25" min="0" max="100" />
+				<label for="slider-2">Input slider:</label>
+				<input type="range" name="slider-2" id="slider-2" value="25" min="0" max="100" />
 			</div>
 
 			<p>Sliders also respond to key commands. Right Arrow, Up Arrow and Page Up keys increase the value; Left Arrow, Down Arrow and Page Down keys decrease it. To move the slider to its minimum or maximum value, use the Home or End key, respectively.</p>
@@ -125,15 +124,15 @@ $('input').slider();
 
 		<pre><code>
 &lt;div data-role=&quot;fieldcontain&quot;&gt;
-	&lt;label for=&quot;slider-2&quot;&gt;Input slider:&lt;/label&gt;
-	&lt;input type=&quot;range&quot; name=&quot;slider-2&quot; id=&quot;slider-2&quot; value=&quot;25&quot; min=&quot;0&quot; max=&quot;100&quot; <strong>data-theme=&quot;a&quot; data-track-theme=&quot;b&quot;</strong> /&gt;
+	&lt;label for=&quot;slider-3&quot;&gt;Input slider:&lt;/label&gt;
+	&lt;input type=&quot;range&quot; name=&quot;slider-3&quot; id=&quot;slider-3&quot; value=&quot;25&quot; min=&quot;0&quot; max=&quot;100&quot; <strong>data-theme=&quot;a&quot; data-track-theme=&quot;b&quot;</strong> /&gt;
 &lt;/div&gt;
 		</code></pre>
 
 		<p>This will produce a themed slider:</p>
 		<div data-role="fieldcontain">
-			<label for="slider-2">Input slider:</label>
-			<input type="range" name="slider-2" id="slider-2" value="25" min="0" max="100" data-theme="a" data-track-theme="b" />
+			<label for="slider-3">Input slider:</label>
+			<input type="range" name="slider-3" id="slider-3" value="25" min="0" max="100" data-theme="a" data-track-theme="b" />
 		</div>
 		</form>
 	</div><!--/content-primary -->

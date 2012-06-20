@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.core.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobile.widget" ], function( $, __version__ ) {
+define( [ "jquery", "text!../version.txt" ], function( $, __version__ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
@@ -235,7 +235,7 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 	// ensures all data is set and retrieved using jQuery Mobile's data namespace
 	$.fn.jqmData = function( prop, value ) {
 		var result;
-		if ( typeof prop != "undefined" ) {
+		if ( typeof prop !== "undefined" ) {
 			if ( prop ) {
 				prop = $.mobile.nsNormalize( prop );
 			}
@@ -246,7 +246,7 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 
 	$.jqmData = function( elem, prop, value ) {
 		var result;
-		if ( typeof prop != "undefined" ) {
+		if ( typeof prop !== "undefined" ) {
 			result = $.data( elem, prop ? $.mobile.nsNormalize( prop ) : prop, value );
 		}
 		return result;

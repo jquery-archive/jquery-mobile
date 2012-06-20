@@ -4,7 +4,7 @@
 //>>group: Utilities
 
 
-define( [ "jquery", "./jquery.mobile.page" ], function( $ ) {
+define( [ "jquery", "./widgets/page" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

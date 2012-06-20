@@ -10,16 +10,16 @@
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 define( [
-	"jquery",
-	"./jquery.mobile.buttonMarkup",
-	"./jquery.mobile.core",
-	"./jquery.mobile.dialog",
-	"./jquery.mobile.forms.select",
-	"./jquery.mobile.listview",
-	"./jquery.mobile.page",
-	"./jquery.mobile.popup",
+	"../../jquery",
+	"../../jquery.mobile.buttonMarkup",
+	"../../jquery.mobile.core",
+	"../dialog",
+	"./select",
+	"../listview",
+	"../page",
+	"../popup",
 	// NOTE expects ui content in the defined page, see selector for menuPageContent definition
-	"./jquery.mobile.page.sections" ], function( $ ) {
+	"../page.sections" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 	var extendSelect = function( widget ){
@@ -380,7 +380,7 @@ define( [
 
 					self.listbox
 						.one( "opened", focusMenuItem )
-						.popup( "open", 
+						.popup( "open",
 							self.button.offset().left + self.button.outerWidth() / 2,
 							self.button.offset().top + self.button.outerHeight() / 2 );
 
@@ -492,7 +492,7 @@ define( [
 		var selectmenuWidget = $( event.target ).data( "selectmenu" );
 
 		if( !selectmenuWidget.options.nativeMenu &&
-		    selectmenuWidget.element.parents(":jqmData(role='popup')").length === 0 ){
+				selectmenuWidget.element.parents(":jqmData(role='popup')").length === 0 ){
 			extendSelect( selectmenuWidget );
 		}
 	});

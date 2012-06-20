@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.fixedToolbar.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.mobile.navigation", "./jquery.mobile.page", "./jquery.mobile.page.sections", "./jquery.mobile.zoom" ], function( $ ) {
+define( [ "../jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jquery.mobile.navigation", "./page", "./page.sections", "../jquery.mobile.zoom" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -17,7 +17,7 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 			transition: "slide", //can be none, fade, slide (slide maps to slideup or slidedown)
 			fullscreen: false,
 			tapToggle: true,
-			tapToggleBlacklist: "a, input, select, textarea, .ui-header-fixed, .ui-footer-fixed",
+			tapToggleBlacklist: "a, button, input, select, textarea, .ui-header-fixed, .ui-footer-fixed",
 			hideDuringFocus: "input, textarea, select",
 			updatePagePadding: true,
 			trackPersistentToolbars: true,
@@ -42,25 +42,18 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 
 				if(
 					// iOS 4.3 and older : Platform is iPhone/Pad/Touch and Webkit version is less than 534 (ios5)
-					( ( platform.indexOf( "iPhone" ) > -1 || platform.indexOf( "iPad" ) > -1  || platform.indexOf( "iPod" ) > -1 ) && wkversion && wkversion < 534 )
-					||
+					( ( platform.indexOf( "iPhone" ) > -1 || platform.indexOf( "iPad" ) > -1  || platform.indexOf( "iPod" ) > -1 ) && wkversion && wkversion < 534 ) ||
 					// Opera Mini
-					( w.operamini && ({}).toString.call( w.operamini ) === "[object OperaMini]" )
-					||
-					( operammobilematch && omversion < 7458 )
-					||
+					( w.operamini && ({}).toString.call( w.operamini ) === "[object OperaMini]" ) ||
+					( operammobilematch && omversion < 7458 )	||
 					//Android lte 2.1: Platform is Android and Webkit version is less than 533 (Android 2.2)
-					( ua.indexOf( "Android" ) > -1 && wkversion && wkversion < 533 )
-					||
+					( ua.indexOf( "Android" ) > -1 && wkversion && wkversion < 533 ) ||
 					// Firefox Mobile before 6.0 -
-					( ffversion && ffversion < 6 )
-					||
+					( ffversion && ffversion < 6 ) ||
 					// WebOS less than 3
-					( "palmGetResource" in window && wkversion && wkversion < 534 )
-					||
+					( "palmGetResource" in window && wkversion && wkversion < 534 )	||
 					// MeeGo
-					( ua.indexOf( "MeeGo" ) > -1 && ua.indexOf( "NokiaBrowser/8.5.0" ) > -1 )
-				){
+					( ua.indexOf( "MeeGo" ) > -1 && ua.indexOf( "NokiaBrowser/8.5.0" ) > -1 )	){
 					return true;
 				}
 
@@ -131,15 +124,17 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 					}
 				} )
 				.bind( "webkitAnimationStart animationstart updatelayout", function(){
+					var thisPage = this;
 					if( o.updatePagePadding ){
-						self.updatePagePadding();
+						self.updatePagePadding( thisPage );
 					}
 				})
 				.bind( "pageshow", function(){
-					self.updatePagePadding();
+					var thisPage = this;
+					self.updatePagePadding( thisPage );
 					if( o.updatePagePadding ){
 						$( window ).bind( "throttledresize." + self.widgetName, function(){
-						 	self.updatePagePadding();
+							self.updatePagePadding( thisPage );
 						});
 					}
 				})
@@ -174,16 +169,17 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 		_visible: true,
 
 		// This will set the content element's top or bottom padding equal to the toolbar's height
-		updatePagePadding: function() {
+		updatePagePadding: function( tbPage ) {
 			var $el = this.element,
 				header = $el.is( ".ui-header" );
 
 			// This behavior only applies to "fixed", not "fullscreen"
 			if( this.options.fullscreen ){ return; }
 
-			$el.closest( ".ui-page" ).css( "padding-" + ( header ? "top" : "bottom" ), $el.outerHeight() );
+			tbPage = tbPage || $el.closest( ".ui-page" );
+			$( tbPage ).css( "padding-" + ( header ? "top" : "bottom" ), $el.outerHeight() );
 		},
-		
+
 		_useTransition: function( notransition ){
 			var $win = $( window ),
 				$el = this.element,
@@ -192,7 +188,7 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 				pHeight = $el.closest( ".ui-page" ).height(),
 				viewportHeight = $.mobile.getScreenHeight(),
 				tbtype = $el.is( ":jqmData(role='header')" ) ? "header" : "footer";
-				
+
 			return !notransition &&
 				( this.options.transition && this.options.transition !== "none" &&
 				(
@@ -270,13 +266,13 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 	//auto self-init widgets
 	$( document )
 		.bind( "pagecreate create", function( e ){
-			
+
 			// DEPRECATED in 1.1: support for data-fullscreen=true|false on the page element.
 			// This line ensures it still works, but we recommend moving the attribute to the toolbars themselves.
 			if( $( e.target ).jqmData( "fullscreen" ) ){
 				$( $.mobile.fixedtoolbar.prototype.options.initSelector, e.target ).not( ":jqmData(fullscreen)" ).jqmData( "fullscreen", true );
 			}
-			
+
 			$.mobile.fixedtoolbar.prototype.enhanceWithin( e.target );
 		});
 

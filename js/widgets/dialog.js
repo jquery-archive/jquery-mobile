@@ -5,15 +5,15 @@
 //>>css.structure: ../css/structure/jquery.mobile.dialog.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "./jquery.mobile.widget" ], function( $ ) {
+define( [ "../jquery", "../jquery.mobile.widget" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
 $.widget( "mobile.dialog", $.mobile.widget, {
 	options: {
-		closeBtnText 	: "Close",
-		overlayTheme	: "a",
-		initSelector	: ":jqmData(role='dialog')"
+		closeBtnText: "Close",
+		overlayTheme: "a",
+		initSelector: ":jqmData(role='dialog')"
 	},
 	_create: function() {
 		var self = this,
@@ -25,7 +25,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 				});
 
 		$el.addClass( "ui-dialog ui-overlay-" + this.options.overlayTheme );
-		
+
 		// Class the markup for dialog styling
 		// Set aria role
 		$el
@@ -52,7 +52,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 
 		/* bind events
 			- clicks and submits should use the closing transition that the dialog opened with
-			  unless a data-transition is specified on the link/form
+				unless a data-transition is specified on the link/form
 			- if the click was on the close button, or the link has a data-rel="back" it'll go back in history naturally
 		*/
 		$el.bind( "vclick submit", function( event ) {

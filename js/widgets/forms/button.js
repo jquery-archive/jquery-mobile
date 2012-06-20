@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.button.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.buttonMarkup"  ], function( $ ) {
+define( [ "../../jquery", "../../jquery.mobile.widget", "../../jquery.mobile.buttonMarkup"  ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -57,11 +57,11 @@ $.widget( "mobile.button", $.mobile.widget, {
 			classes = "ui-btn-right";
 		}
 
-		if(  $el.attr( "type" ) == "submit" || $el.attr( "type" ) == "reset" ) {
+		if(  $el.attr( "type" ) === "submit" || $el.attr( "type" ) === "reset" ) {
 			classes += "ui-submit";
 		}
 		$( "label[for='" + $el.attr( "id" ) + "']" ).addClass( "ui-submit" );
-		
+
 		// Add ARIA role
 		this.button = $( "<div></div>" )
 			[ $el.html() ? "html" : "text" ]( $el.html() || $el.val() )

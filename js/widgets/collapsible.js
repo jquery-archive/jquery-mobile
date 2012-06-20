@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.collapsible.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.buttonMarkup" ], function( $ ) {
+define( [ "../jquery", "../jquery.mobile.widget", "../jquery.mobile.buttonMarkup" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -94,12 +94,11 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 		collapsible
 			.bind( "expand collapse", function( event ) {
 				if ( !event.isDefaultPrevented() ) {
-
-					event.preventDefault();
-
 					var $this = $( this ),
 						isCollapse = ( event.type === "collapse" ),
-					    contentTheme = o.contentTheme;
+						contentTheme = o.contentTheme;
+
+					event.preventDefault();
 
 					collapsibleHeading
 						.toggleClass( "ui-collapsible-heading-collapsed", isCollapse)

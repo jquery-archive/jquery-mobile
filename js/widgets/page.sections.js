@@ -3,7 +3,7 @@
 //>>label: Page Sections
 //>>group: Core
 
-define( [ "jquery", "./jquery.mobile.page", "./jquery.mobile.core" ], function( $ ) {
+define( [ "../jquery", "./page", "../jquery.mobile.core" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -15,7 +15,7 @@ $.mobile.page.prototype.options.footerTheme  = "a";
 $.mobile.page.prototype.options.contentTheme = null;
 
 // NOTE bind used to force this binding to run before the buttonMarkup binding
-//      which expects .ui-footer top be applied in its gigantic selector 
+//      which expects .ui-footer top be applied in its gigantic selector
 // TODO remove the buttonMarkup giant selector and move it to the various modules
 //      on which it depends
 $( document ).bind( "pagecreate", function( e ) {
@@ -85,7 +85,7 @@ $( document ).bind( "pagecreate", function( e ) {
 
 		} else if ( role === "content" ) {
 			if ( contentTheme ) {
-			    $this.addClass( "ui-body-" + ( contentTheme ) );
+				$this.addClass( "ui-body-" + ( contentTheme ) );
 			}
 
 			// Add ARIA role

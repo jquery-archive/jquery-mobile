@@ -26,9 +26,9 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 
 /* loading screen */
 .ui-loading .ui-loader { display: block; }
-.ui-loader { display: none; z-index: 9999999; position: fixed; top: 50%; box-shadow: 0 1px 1px -1px #fff; left: 50%; border:0; }
+.ui-loader { display: none; z-index: 9999999; position: fixed; top: 50%; left: 50%; border:0; }
 .ui-loader-default { background: none; opacity: .18; width: 46px; height: 46px; margin-left: -23px; margin-top: -23px; }
-.ui-loader-verbose { width: 200px; opacity: .88; height: auto; margin-left: -110px; margin-top: -43px; padding: 10px; }
+.ui-loader-verbose { width: 200px; opacity: .88; box-shadow: 0 1px 1px -1px #fff; height: auto; margin-left: -110px; margin-top: -43px; padding: 10px; }
 .ui-loader-default h1 { font-size: 0; width: 0; height: 0; overflow: hidden; }
 .ui-loader-verbose h1 { font-size: 16px; margin: 0; text-align: center; }
 .ui-loader .ui-icon { background-color: #000; display: block; margin: 0; width: 44px; height: 44px; padding: 1px; -webkit-border-radius: 36px; -moz-border-radius: 36px; border-radius: 36px; }
@@ -44,7 +44,7 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 .ui-bar { font-size: 16px; margin: 0; }
 .ui-bar h1, .ui-bar h2, .ui-bar h3, .ui-bar h4, .ui-bar h5, .ui-bar h6 { margin: 0; padding: 0; font-size: 16px; display: inline-block; }
 
-.ui-header, .ui-footer { position: relative; border-left-width: 0; border-right-width: 0; }
+.ui-header, .ui-footer { position: relative; border-left-width: 0; border-right-width: 0; zoom: 1; }
 .ui-header .ui-btn-left,
 .ui-header .ui-btn-right,
 .ui-footer .ui-btn-left,

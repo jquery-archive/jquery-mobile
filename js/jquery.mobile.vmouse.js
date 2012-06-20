@@ -40,7 +40,7 @@ var dataPropertyName = "virtualMouseBindings",
 	eventCaptureSupported = "addEventListener" in document,
 	$document = $( document ),
 	nextTouchID = 1,
-	lastTouchID = 0;
+	lastTouchID = 0, threshold;
 
 $.vmouse = {
 	moveDistanceThreshold: 10,
@@ -59,7 +59,7 @@ function getNativeEvent( event ) {
 function createVirtualEvent( event, eventType ) {
 
 	var t = event.type,
-		oe, props, ne, prop, ct, touch, i, j;
+		oe, props, ne, prop, ct, touch, i, j, len;
 
 	event = $.Event(event);
 	event.type = eventType;
@@ -261,11 +261,13 @@ function handleTouchMove( event ) {
 
 	var t = getNativeEvent( event ).touches[ 0 ],
 		didCancel = didScroll,
-		moveThreshold = $.vmouse.moveDistanceThreshold;
+		moveThreshold = $.vmouse.moveDistanceThreshold,
+		flags = getVirtualBindingFlags( event.target );
+
 		didScroll = didScroll ||
 			( Math.abs(t.pageX - startX) > moveThreshold ||
-				Math.abs(t.pageY - startY) > moveThreshold ),
-		flags = getVirtualBindingFlags( event.target );
+				Math.abs(t.pageY - startY) > moveThreshold );
+
 
 	if ( didScroll && !didCancel ) {
 		triggerVirtualEvent( "vmousecancel", event, flags );

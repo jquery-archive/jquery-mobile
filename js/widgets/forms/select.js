@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.select.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.widget", "./jquery.mobile.buttonMarkup", "./jquery.mobile.zoom" ], function( $ ) {
+define( [ "../../jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.buttonMarkup", "../../jquery.mobile.zoom" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -96,7 +96,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			// IE throws an exception at options.item() function when
 			// there is no selected item
 			// select first in this case
-			selectedIndex = this.select[ 0 ].selectedIndex == -1 ? 0 : this.select[ 0 ].selectedIndex,
+			selectedIndex = this.select[ 0 ].selectedIndex === -1 ? 0 : this.select[ 0 ].selectedIndex,
 
 			// TODO values buttonId and menuId are undefined here
 			button = this.button
