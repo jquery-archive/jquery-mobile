@@ -5,7 +5,7 @@
 
 
 define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery.mobile.navigation",
-	"./jquery.mobile.navigation.pushstate", "./widgets/loader", "depend!./jquery.hashchange[jquery]" ], function( $ ) {
+	"./jquery.mobile.navigation.pushstate", "./widgets/loader", "./jquery.mobile.vmouse", "depend!./jquery.hashchange[jquery]" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 ( function( $, window, undefined ) {
 	var	$html = $( "html" ),
@@ -127,6 +127,8 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 		// window load event
 		// hide iOS browser chrome on load
 		$window.load( $.mobile.silentScroll );
+
+		$( document ).delegate( ".ui-disabled", "vclick", function () { return false; });
 	});
 }( jQuery, this ));
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
