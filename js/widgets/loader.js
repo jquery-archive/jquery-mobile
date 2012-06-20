@@ -135,9 +135,11 @@ define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], functi
 				}
 
 				// add the proper css given the options (theme, text, etc)
+				// Force text visibility if the second argument was supplied, or
+				// if the text was explicitly set in the object args
 				this.element.attr("class", loaderClass +
 					" ui-corner-all ui-body-" + theme +
-					" ui-loader-" + ( textVisible || message ? "verbose" : "default" ) +
+					" ui-loader-" + ( textVisible || msgText || theme.text ? "verbose" : "default" ) +
 					( loadSettings.textonly || textonly ? " ui-loader-textonly" : "" ) );
 
 				// TODO verify that jquery.fn.html is ok to use in both cases here

@@ -217,7 +217,7 @@
 			same($(".ui-loader > div.foo").length, 1, "loader has a custom html");
 		});
 
-		test( "page loading should always contain text when passed", function() {
+		test( "page loading should always contain text when passed as the second arg", function() {
 			$.mobile.loadingMessageTextVisible = false;
 
 			// simulate error call in navigation ajax error callback
@@ -225,6 +225,32 @@
 
 			same($(".ui-loader").text(), "foo serious", "loader has message regardless of global setting");
 		});
+
+		test( "page loading should always contain text when passed as an object prop", function() {
+			$.mobile.loadingMessageTextVisible = false;
+
+			// simulate error call in navigation ajax error callback
+			$.mobile.showPageLoadingMsg({ theme: "e", text: "foo serious second", textonly: true });
+
+			same($(".ui-loader").text(), "foo serious second", "loader has message regardless of global setting");
+		});
+
+		test( "page loading should not contain text when default is used and visible prop is false", function() {
+			$.mobile.loadingMessageTextVisible = false;
+
+			// simulate error call in navigation ajax error callback
+			$.mobile.showPageLoadingMsg({ theme: "e", textonly: true });
+
+			ok($(".ui-loader").hasClass("ui-loader-default"), "loader text is hidden");
+
+			$.mobile.hidePageLoadingMsg();
+
+			// simulate error call in navigation ajax error callback
+			$.mobile.showPageLoadingMsg( "e", undefined, true );
+
+			ok($(".ui-loader").hasClass("ui-loader-default"), "loader text is hidden");
+		});
+
 
 		test( "test the loading config object precedence", function() {
 			$.mobile.loadingMessage = "fozzle";
