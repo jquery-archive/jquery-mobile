@@ -146,8 +146,13 @@ define( [
 							self.select.trigger( "change" );
 						}
 
-						//hide custom select for single selects only
-						if ( !self.isMultiple ) {
+						// hide custom select for single selects only - otherwise focus clicked item
+						// We need to grab the clicked item the hard way, because the list may have been rebuilt
+						if ( self.isMultiple ) {
+							self.list.find( "li:not(.ui-li-divider)" ).eq( newIndex )
+								.addClass( "ui-btn-down-" + widget.options.theme ).find( "a" ).first().focus();
+						}
+						else {
 							self.close();
 						}
 
@@ -351,7 +356,11 @@ define( [
 				}, 300);
 
 				function focusMenuItem() {
-					self.list.find( "." + $.mobile.activeBtnClass + " a" ).focus();
+					var selector = self.list.find( "." + $.mobile.activeBtnClass + " a" );
+					if ( selector.length === 0 ) {
+						selector = self.list.find( "li.ui-btn:not(:jqmData(placeholder='true')) a" );
+					}
+					selector.first().focus();
 				}
 
 				if ( menuHeight > screenHeight - 80 || !$.support.scrollTop ) {
@@ -453,9 +462,10 @@ define( [
 					dataIconAttr = dataPrefix + 'icon',
 					dataRoleAttr = dataPrefix + 'role',
 					fragment = document.createDocumentFragment(),
+					isPlaceholderItem = false,
 					optGroup;
 
-				for (var i = 0; i < numOptions;i++){
+				for (var i = 0; i < numOptions;i++, isPlaceholderItem = false){
 					var option = $options[i],
 						$option = $(option),
 						parent = option.parentNode,
@@ -482,6 +492,7 @@ define( [
 
 					if (needPlaceholder && (!option.getAttribute( "value" ) || text.length == 0 || $option.jqmData( "placeholder" ))) {
 						needPlaceholder = false;
+						isPlaceholderItem = true;
 						if ( o.hidePlaceholderMenuItems ) {
 							classes.push( "ui-selectmenu-placeholder" );
 						}
@@ -497,6 +508,9 @@ define( [
 					}
 					item.setAttribute(dataIndexAttr,i);
 					item.setAttribute(dataIconAttr,dataIcon);
+					if ( isPlaceholderItem ) {
+						item.setAttribute( dataPrefix + "placeholder", true );
+					}
 					item.className = classes.join(" ");
 					item.setAttribute('role','option');
 					anchor.setAttribute('tabindex','-1');
