@@ -18,6 +18,11 @@
 	z-index: 1099;
 }
 
+.ui-popup-screen-background-hack {
+	background-color: black;
+	filter: Alpha(Opacity=0);
+}
+
 @-webkit-keyframes popup-fadein {
     from { opacity: 0; }
     to { opacity: 0.5; }

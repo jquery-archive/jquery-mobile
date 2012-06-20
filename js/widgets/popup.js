@@ -121,14 +121,11 @@ define( [ "../jquery",
 			this._realSetTheme( this._ui.screen, value );
 
 			if ( $.mobile.browser.ie ) {
-				if ( this._ui.screen.css( "background-color" ) === "transparent" &&
-					this._ui.screen.css( "background-image" ) === "none" &&
-					this._ui.screen.css( "background" ) === undefined ) {
-					this._ui.screen.css( {
-						"background-color": "black",
-						"filter": "Alpha(Opacity=0)"
-					});
-				}
+				this._ui.screen.toggleClass(
+					"ui-popup-screen-background-hack",
+					( this._ui.screen.css( "background-color" ) === "transparent" &&
+						this._ui.screen.css( "background-image" ) === "none" &&
+						this._ui.screen.css( "background" ) === undefined ) );
 			}
 		},
 
