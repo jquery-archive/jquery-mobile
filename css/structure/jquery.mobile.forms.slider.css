@@ -13,7 +13,7 @@ div.ui-slider-bg { border: none; height: 100%; padding-right: 8px; }
 .ui-controlgroup a.ui-slider-handle, a.ui-slider-handle { position: absolute; z-index: 1; top: 50%; width: 28px; height: 28px; margin-top: -15px; margin-left: -15px; outline: 0; }
 a.ui-slider-handle .ui-btn-inner { padding: 0; height: 100%; }
 div.ui-slider-mini a.ui-slider-handle { height: 14px; width: 14px; margin: -8px 0 0 -7px; }
-div.ui-slider-mini a.ui-slider-handle .ui-btn-inner { height: 30px; width: 30px; padding: 0; margin: -9px 0 0 -9px; }
+div.ui-slider-mini a.ui-slider-handle .ui-btn-inner { height: 30px; width: 30px; padding: 0; margin: -9px 0 0 -9px; border-top: none; }
 
 @media all and (min-width: 450px){
 	.ui-field-contain label.ui-slider { vertical-align: top; display: inline-block; width: 20%; margin: 0 2% 0 0; }
