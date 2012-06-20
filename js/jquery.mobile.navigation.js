@@ -1088,7 +1088,7 @@ define( [
 
 			// If we are at a place in history that once belonged to a dialog, reuse
 			// this state without adding to urlHistory and without modifying the hash.
-			if ( active.url.indexOf( dialogHashKey ) > -1 && $.mobile.activePage.is( ".ui-dialog" ) ) {
+			if ( active.url.indexOf( dialogHashKey ) > -1 ) {
 				settings.changeHash = false;
 				alreadyThere = true;
 			} else {
