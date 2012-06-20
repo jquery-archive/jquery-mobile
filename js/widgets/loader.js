@@ -98,11 +98,12 @@ define( [ "../jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], fun
 		// NOTE that the $.mobile.loading* settings and params past the first are deprecated
 		// TODO sweet jesus we need to break some of this out
 		show: function( theme, msgText, textonly ) {
+			var textVisible, message, $header, loadSettings;
+
 			this.resetHtml();
 
-			var loadSettings;
-
-			// support for object literal params
+			// use the prototype options so that people can set them globally at
+			// mobile init. Consistency, it's what's for dinner
 			if( $.type(theme) === "object" ){
 				loadSettings = $.extend({}, this.options, theme);
 
@@ -110,27 +111,34 @@ define( [ "../jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], fun
 				theme = loadSettings.theme || $.mobile.loadingMessageTheme;
 			} else {
 				loadSettings = this.options;
+
+				// here we prefer the them value passed as a string argument, then
+				// we prefer the global option because we can't use undefined default
+				// prototype options, then the prototype option
 				theme = theme || $.mobile.loadingMessageTheme || loadSettings.theme;
 			}
 
+			// set the message text, prefer the param, then the settings object
+			// then loading message
+			message = msgText || $.mobile.loadingMessage || loadSettings.text;
+
+			// prepare the dom
 			$html.addClass( "ui-loading" );
 
 			if ( $.mobile.loadingMessage !== false || loadSettings.html ) {
-				// text visibility from argument takes priority
-				var textVisible, message, $header;
-
-				// boolean values require a bit more work :P
-				// support object properties and old settings
+				// boolean values require a bit more work :P, supports object properties
+				// and old settings
 				if( $.mobile.loadingMessageTextVisible !== undefined ) {
 					textVisible = $.mobile.loadingMessageTextVisible;
 				} else {
 					textVisible = loadSettings.textVisible;
 				}
 
+				// add the proper css given the options (theme, text, etc)
 				this.element.attr("class", loaderClass +
-													" ui-corner-all ui-body-" + theme +
-													" ui-loader-" + ( textVisible ? "verbose" : "default" ) +
-													( loadSettings.textonly || textonly ? " ui-loader-textonly" : "" ) );
+					" ui-corner-all ui-body-" + theme +
+					" ui-loader-" + ( textVisible || message ? "verbose" : "default" ) +
+					( loadSettings.textonly || textonly ? " ui-loader-textonly" : "" ) );
 
 				// TODO verify that jquery.fn.html is ok to use in both cases here
 				//      this might be overly defensive in preventing unknowing xss
@@ -139,15 +147,16 @@ define( [ "../jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], fun
 				if( loadSettings.html ) {
 					this.element.html( loadSettings.html );
 				} else {
-					// prefer the param, then the settings object then loading message
-					message = msgText || $.mobile.loadingMessage || loadSettings.text;
-					this.element.find( "h1" )
-						.text( message );
+					this.element.find( "h1" ).text( message );
 				}
 
+				// attach the loader to the DOM
 				this.element.appendTo( $.mobile.pageContainer );
 
+				// check that the loader is visible
 				this.checkLoaderPosition();
+
+				// on scroll check the loader position
 				$window.bind( "scroll", $.proxy(this.checkLoaderPosition, this));
 			}
 		},

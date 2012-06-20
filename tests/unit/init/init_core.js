@@ -217,6 +217,15 @@
 			same($(".ui-loader > div.foo").length, 1, "loader has a custom html");
 		});
 
+		test( "page loading should always contain text when passed", function() {
+			$.mobile.loadingMessageTextVisible = false;
+
+			// simulate error call in navigation ajax error callback
+			$.mobile.showPageLoadingMsg( "e", "foo serious", true );
+
+			same($(".ui-loader").text(), "foo serious", "loader has message regardless of global setting");
+		});
+
 		test( "test the loading config object precedence", function() {
 			$.mobile.loadingMessage = "fozzle";
 			$.mobile.loadingMessageTheme = "x";
