@@ -11,6 +11,20 @@ define( [ "jquery",
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
+	function fitSegmentInsideSegment( winSize, segSize, offset, desired ) {
+		var ret = desired;
+
+		if ( winSize < segSize ) {
+			// Center segment if it's bigger than the window
+			ret = offset + ( winSize - segSize ) / 2;
+		} else {
+			// Otherwise center it at the desired coordinate while keeping it completely inside the window
+			ret = Math.min( Math.max( offset, desired - segSize / 2 ), offset + winSize - segSize );
+		}
+
+		return ret;
+	}
+
 	$.widget( "mobile.popup", $.mobile.widget, {
 		options: {
 			theme: null,
@@ -174,20 +188,6 @@ define( [ "jquery",
 
 		// Try and center the overlay over the given coordinates
 		_placementCoords: function( x, y ) {
-			function fitSegmentInsideSegment( winSize, segSize, offset, desired ) {
-				var ret = desired;
-
-				if ( winSize < segSize ) {
-					// Center segment if it's bigger than the window
-					ret = offset + ( winSize - segSize ) / 2;
-				} else {
-					// Otherwise center it at the desired coordinate while keeping it completely inside the window
-					ret = Math.min( Math.max( offset, desired - segSize / 2 ), offset + winSize - segSize );
-				}
-
-				return ret;
-			}
-
 			// Tolerances off the window edges
 			var tol = { l: 10, t: 30, r: 10, b: 30 },
 			// rectangle within which the popup must fit
