@@ -277,7 +277,7 @@ define( [ "jquery",
 			}
 		},
 
-		_realOpen: function( x, y, transition ) {
+		_open: function( x, y, transition ) {
 			var self = this,
 				coords = self._placementCoords(
 					( undefined === x ? window.innerWidth / 2 : x ),
@@ -331,7 +331,7 @@ define( [ "jquery",
 			});
 		},
 
-		_realClose: function() {
+		_close: function() {
 			var self = this,
 				transition = ( self._currentTransition ? self._currentTransition : self.options.transition );
 
@@ -395,7 +395,7 @@ define( [ "jquery",
 		// array of: {
 		//   open: true/false
 		//   popup: popup
-		//   args: args for _realOpen
+		//   args: args for _open
 		// }
 		_actionQueue: [],
 		_inProgress: false,
@@ -523,11 +523,11 @@ define( [ "jquery",
 					return;
 				}
 				signal = "opened";
-				fn = "_realOpen";
+				fn = "_open";
 				args = self._actionQueue[0].args;
 			} else {
 				signal = "closed";
-				fn = "_realClose";
+				fn = "_close";
 				args = [];
 			}
 
