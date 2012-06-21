@@ -425,7 +425,8 @@ define( [ "jquery",
 			if ( $.mobile.hashListeningEnabled ) {
 				var activeEntry = $.mobile.urlHistory.getActive(),
 					dstTransition,
-					hasHash = ( activeEntry.url.indexOf( $.mobile.dialogHashKey ) > -1 );
+					currentIsDialog = $.mobile.activePage.is( ".ui-dialog" ),
+					hasHash = ( activeEntry.url.indexOf( $.mobile.dialogHashKey ) > -1 ) && !currentIsDialog;
 
 				if ( $.mobile.urlHistory.activeIndex === 0 ) {
 					dstTransition = $.mobile.defaultDialogTransition;
@@ -445,6 +446,7 @@ define( [ "jquery",
 					if ( $.mobile.urlHistory.activeIndex === 0 && dstHash === $.mobile.urlHistory.initialDst ) {
 						dstHash += $.mobile.dialogHashKey;
 					}
+					$.mobile.urlHistory.ignoreNextHashChange = currentIsDialog;
 					$.mobile.path.set( dstHash );
 					$.mobile.urlHistory.addNew( dstHash, dstTransition, activeEntry.title, activeEntry.pageUrl, activeEntry.role );
 				}
