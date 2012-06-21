@@ -125,7 +125,7 @@ Once you have your web server setup you can point it at the project directory.
 
 Automated testing forms the backbone of the jQuery Mobile project's QA activities. As a contributor or patch submitter you will be expected to run the test suite for the code your patches affect. Our continuous integration server will address the remainder of the test suite.
 
-There are two primary ways to run the test suite. First, you can run the tests individually by directing your browser to the different test pages associated with the area in which you are working. For example, to run the tests for `js/jquery.mobile.forms.slider.js` visit `$WEB_SERVER/tests/unit/slider/`. To find out which test pages are available you can list them with:
+There are two primary ways to run the test suite. First, you can run the tests by directing your browser to the different test pages associated with the area in which you are working. For example, to run the tests for `js/jquery.mobile.forms.slider.js` visit `$WEB_SERVER/tests/unit/slider/`. To run all the unit tests, visit `$WEB_SERVER/tests/unit/`. To find out which test pages are available you can list them with:
 
     grunt config:test:pages
 
