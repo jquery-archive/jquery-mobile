@@ -32,7 +32,7 @@ define( [ "jquery",
 					e.stopImmediatePropagation();
 					self.close();
 				},
-				thisPage = this.element.closest( ":jqmData(role='page')" ),
+				thisPage = this.element.closest( ".ui-page" ),
 				myId = this.element.attr( "id" ),
 				self = this;
 
