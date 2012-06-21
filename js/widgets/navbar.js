@@ -41,6 +41,10 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 			if( !$(event.target).hasClass("ui-disabled") ) {
 				$navbtns.removeClass( $.mobile.activeBtnClass );
 				$( this ).addClass( $.mobile.activeBtnClass );
+				var activeNavbtn = $( this );
+				$( document ).one( "pagechange", function( event ) {
+					activeNavbtn.removeClass( $.mobile.activeBtnClass );
+				});
 			}
 		});
 
