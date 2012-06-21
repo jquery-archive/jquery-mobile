@@ -1159,7 +1159,7 @@ a.ui-link-inherit {
 /* Focus state - set here for specificity (note: these classes are added by JavaScript)
 -----------------------------------------------------------------------------------------------------------*/
 
-.ui-btn:focus {
+.ui-btn:focus, .ui-link-inherit:focus {
 	outline: 0;
 }
 
@@ -1181,7 +1181,8 @@ a.ui-link-inherit {
 
 /* ...and bring back focus */
 .ui-mobile-nosupport-boxshadow .ui-focus,
-.ui-mobile-nosupport-boxshadow .ui-btn:focus {
+.ui-mobile-nosupport-boxshadow .ui-btn:focus,
+.ui-mobile-nosupport-boxshadow .ui-link-inherit:focus {
 	outline-width: 1px;
 	outline-style: dotted;
 }
