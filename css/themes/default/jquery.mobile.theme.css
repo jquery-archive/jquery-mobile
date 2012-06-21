@@ -1188,5 +1188,5 @@ a.ui-link-inherit {
 .ui-mobile-nosupport-boxshadow .ui-btn:focus,
 .ui-mobile-nosupport-boxshadow .ui-link-inherit:focus {
 	outline-width: 1px;
-	outline-style: dotted;
+	outline-style: auto;
 }
