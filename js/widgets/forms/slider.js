@@ -15,6 +15,8 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		trackTheme: null,
 		disabled: false,
 		initSelector: "input[type='range'], :jqmData(type='range'), :jqmData(role='slider')",
+		// This option defaults to true on iOS devices.
+		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
 		mini: false
 	},
 
@@ -148,6 +150,30 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				self.refresh( val(), true );
 			});
 
+		if ( cType === "input" ) {
+			var o = this.options,
+				inputMiniClass = ( o.mini || control.jqmData( "mini" ) ) ? " ui-mini" : "",		
+				focusedEl = control.addClass(" ui-corner-all ui-shadow-inset ui-body-" + theme + inputMiniClass );
+		
+			control.focus( function() {
+					focusedEl.addClass( $.mobile.focusClass );
+				})
+				.blur( function(){
+					focusedEl.removeClass( $.mobile.focusClass );
+				})
+				// In many situations, iOS will zoom into the select upon tap, this prevents that from happening
+				.bind( "focus", function() {
+					if( o.preventFocusZoom ){
+						$.mobile.zoom.disable( true );
+					}
+				})
+				.bind( "blur", function() {
+					if( o.preventFocusZoom ){
+						$.mobile.zoom.enable( true );
+					}
+				});
+		}
+		
 		// prevent screen drag when slider activated
 		$( document ).bind( "vmousemove", function( event ) {
 			if ( self.dragging ) {
