@@ -250,30 +250,30 @@ define( [ "jquery",
 			self._prereqs = prereqs;
 		},
 
-		_animate: function( additionalCondition, transition, classToRemove, screenClassToAdd, containerClassToAdd, applyTransition, prereqs ) {
+		_animate: function( args ) {
 			var self = this;
 
-			if ( self.options.overlayTheme && additionalCondition ) {
+			if ( self.options.overlayTheme && args.additionalCondition ) {
 				self._ui.screen
-					.removeClass( classToRemove )
-					.addClass( screenClassToAdd )
+					.removeClass( args.classToRemove )
+					.addClass( args.screenClassToAdd )
 					.animationComplete( function() {
-						prereqs.screen.resolve();
+						args.prereqs.screen.resolve();
 					});
 			} else {
-				prereqs.screen.resolve();
+				args.prereqs.screen.resolve();
 			}
 
-			if ( transition && transition !== "none" ) {
-				if ( applyTransition ) { self._applyTransition( transition ); }
+			if ( args.transition && args.transition !== "none" ) {
+				if ( args.applyTransition ) { self._applyTransition( args.transition ); }
 				self._ui.container
-					.addClass( containerClassToAdd )
-					.removeClass( classToRemove )
+					.addClass( args.containerClassToAdd )
+					.removeClass( args.classToRemove )
 					.animationComplete( function() {
-						prereqs.container.resolve();
+						args.prereqs.container.resolve();
 					});
 			} else {
-				prereqs.container.resolve();
+				args.prereqs.container.resolve();
 			}
 		},
 
@@ -320,7 +320,15 @@ define( [ "jquery",
 					top: coords.y
 				});
 
-			self._animate( true, transition, "", "in", "in", false, self._prereqs );
+			self._animate({
+				additionalCondition: true,
+				transition: transition,
+				classToRemove: "",
+				screenClassToAdd: "in",
+				containerClassToAdd: "in",
+				applyTransition: false,
+				prereqs: self._prereqs
+			});
 		},
 
 		_realClose: function() {
@@ -349,7 +357,15 @@ define( [ "jquery",
 					self.element.trigger( "closed" );
 				});
 
-			self._animate( self._ui.screen.hasClass( "in" ), transition, "in", "out", "reverse out", true, self._prereqs );
+			self._animate( {
+				additionalCondition: self._ui.screen.hasClass( "in" ),
+				transition: transition,
+				classToRemove: "in",
+				screenClassToAdd: "out",
+				containerClassToAdd: "reverse out",
+				applyTransition: true,
+				prereqs: self._prereqs
+			});
 		},
 
 		_destroy: function() {
