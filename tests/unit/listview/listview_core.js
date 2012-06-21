@@ -27,7 +27,7 @@
 		}
 	});
 
-	asyncTest( "The page should enhanced correctly", function(){
+	asyncTest( "The page should be enhanced correctly", function(){
 		setTimeout(function() {
 			ok($('#basic-linked-test .ui-li').length, ".ui-li classes added to li elements");
 			start();

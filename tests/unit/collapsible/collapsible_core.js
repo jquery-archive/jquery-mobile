@@ -6,7 +6,7 @@
 (function( $ ){
 	module( "Collapsible section", {});
 
-	asyncTest( "The page should enhanced correctly", function(){
+	asyncTest( "The page should be enhanced correctly", function(){
 		$.testHelper.pageSequence([
 			function(){
 				$.testHelper.openPage( "#basic-collapsible-test" );
@@ -44,7 +44,7 @@
 
 	module( "Collapsible set", {});
 
-	asyncTest( "The page should enhanced correctly", function(){
+	asyncTest( "The page should be enhanced correctly", function(){
 		$.testHelper.pageSequence([
 			function(){
 				$.testHelper.openPage( "#basic-collapsible-set-test" );
