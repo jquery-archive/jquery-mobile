@@ -109,7 +109,7 @@ define( [ "jquery",
 			this._ui.screen.height( Math.max( $( window ).height(), this._page.height() ) );
 		},
 
-		_realSetTheme: function( dst, theme ) {
+		_applyTheme: function( dst, theme ) {
 			var classes = ( dst.attr( "class" ) || "").split( " " ),
 				alreadyAdded = true,
 				currentTheme = null,
@@ -136,11 +136,11 @@ define( [ "jquery",
 		},
 
 		_setTheme: function( value ) {
-			this._realSetTheme( this._ui.container, value );
+			this._applyTheme( this._ui.container, value );
 		},
 
 		_setOverlayTheme: function( value ) {
-			this._realSetTheme( this._ui.screen, value );
+			this._applyTheme( this._ui.screen, value );
 
 			if ( $.mobile.browser.ie ) {
 				this._ui.screen.toggleClass(
