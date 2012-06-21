@@ -325,7 +325,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 	refresh: function( val, isfromControl, preventInputUpdate ) {
 
-		if ( this.options.disabled || this.element.attr( 'disabled' )) {
+		if ( this.options.disabled || this.element.attr( 'disabled' ) ) {
 			this.disable();
 		}
 
@@ -333,7 +333,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			cType = control[0].nodeName.toLowerCase(),
 			min = cType === "input" ? parseFloat( control.attr( "min" ) ) : 0,
 			max = cType === "input" ? parseFloat( control.attr( "max" ) ) : control.find( "option" ).length - 1,
-			step = ( cType === "input" && parseFloat( control.attr( "step" ) ) > 0) ? parseFloat( control.attr( "step" ) ) : 1;
+			step = ( cType === "input" && parseFloat( control.attr( "step" ) ) > 0 ) ? parseFloat( control.attr( "step" ) ) : 1;
 
 		if ( typeof val === "object" ) {
 			var data = val,
@@ -402,8 +402,8 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				aPercent = percent && handlePercent + ( 100 - handlePercent ) * percent / 100,
 				bPercent = percent === 100 ? 0 : Math.min( handlePercent + 100 - aPercent, 100 );
 
-			this._labels.each(function(){
-				var ab = $(this).is( ".ui-slider-label-a" );
+			this._labels.each( function(){
+				var ab = $( this ).is( ".ui-slider-label-a" );
 				$( this ).width( ( ab ? aPercent : bPercent  ) + "%" );
 			});
 		}
