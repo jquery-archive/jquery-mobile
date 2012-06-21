@@ -55,40 +55,40 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			step = window.parseFloat( control.attr( "step" ) || 1 ),
 
-			inlineClass = ( this.options.inline || control.jqmData("inline") === true ) ? " ui-slider-inline" : "",
+			inlineClass = ( this.options.inline || control.jqmData( "inline" ) === true ) ? " ui-slider-inline" : "",
 
-			miniClass = ( this.options.mini || control.jqmData("mini") ) ? " ui-slider-mini" : "",
+			miniClass = ( this.options.mini || control.jqmData( "mini" ) ) ? " ui-slider-mini" : "",
 
 
-			domHandle = document.createElement('a'),
+			domHandle = document.createElement( 'a' ),
 			handle = $( domHandle ),
-			domSlider = document.createElement('div'),
+			domSlider = document.createElement( 'div' ),
 			slider = $( domSlider ),
 
-			valuebg = control.jqmData("highlight") && cType !== "select" ? (function() {
-				var bg = document.createElement('div');
+			valuebg = control.jqmData( "highlight" ) && cType !== "select" ? ( function() {
+				var bg = document.createElement( 'div' );
 				bg.className = 'ui-slider-bg ' + $.mobile.activeBtnClass + ' ui-btn-corner-all';
 				return $( bg ).prependTo( slider );
 			})() : false,
 
 			options;
 
-        domHandle.setAttribute( 'href', "#" );
-		domSlider.setAttribute('role','application');
+		domHandle.setAttribute( 'href', "#" );
+		domSlider.setAttribute( 'role', 'application' );
 		domSlider.className = ['ui-slider ',selectClass," ui-btn-down-",trackTheme,' ui-btn-corner-all', inlineClass, miniClass].join("");
 		domHandle.className = 'ui-slider-handle';
-		domSlider.appendChild(domHandle);
+		domSlider.appendChild( domHandle );
 
 		handle.buttonMarkup({ corners: true, theme: theme, shadow: true })
-				.attr({
-					"role": "slider",
-					"aria-valuemin": min,
-					"aria-valuemax": max,
-					"aria-valuenow": val(),
-					"aria-valuetext": val(),
-					"title": val(),
-					"aria-labelledby": labelID
-				});
+			.attr({
+				"role": "slider",
+				"aria-valuemin": min,
+				"aria-valuemax": max,
+				"aria-valuenow": val(),
+				"aria-valuetext": val(),
+				"title": val(),
+				"aria-labelledby": labelID
+			});
 
 		$.extend( this, {
 			slider: slider,
@@ -101,11 +101,11 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		});
 
 		if ( cType === "select" ) {
-			var wrapper = document.createElement('div');
+			var wrapper = document.createElement( 'div' );
 			wrapper.className = 'ui-slider-inneroffset';
 
-			for(var j = 0,length = domSlider.childNodes.length;j < length;j++){
-				wrapper.appendChild(domSlider.childNodes[j]);
+			for( var j = 0,length = domSlider.childNodes.length;j < length;j++ ){
+				wrapper.appendChild( domSlider.childNodes[j] );
 			}
 
 			domSlider.appendChild(wrapper);
@@ -117,16 +117,16 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			options = control.find( "option" );
 
-			for(var i = 0, optionsCount = options.length; i < optionsCount; i++){
-				var side = !i ? "b":"a",
-					sliderTheme = !i ? " ui-btn-down-" + trackTheme :( " " + $.mobile.activeBtnClass ),
-					sliderLabel = document.createElement('div'),
-					sliderImg = document.createElement('span');
+			for( var i = 0, optionsCount = options.length; i < optionsCount; i++ ){
+				var side = !i ? "b" : "a",
+					sliderTheme = !i ? " ui-btn-down-" + trackTheme : ( " " + $.mobile.activeBtnClass ),
+					sliderLabel = document.createElement( 'div' ),
+					sliderImg = document.createElement( 'span' );
 
 				sliderImg.className = ['ui-slider-label ui-slider-label-',side,sliderTheme," ui-btn-corner-all"].join("");
-				sliderImg.setAttribute('role','img');
-				sliderImg.appendChild(document.createTextNode(options[i].innerHTML));
-				$(sliderImg).prependTo( slider );
+				sliderImg.setAttribute( 'role', 'img' );
+				sliderImg.appendChild( document.createTextNode( options[i].innerHTML ) );
+				$( sliderImg ).prependTo( slider );
 			}
 
 			self._labels = $( ".ui-slider-label", slider );
@@ -139,7 +139,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		control.addClass( cType === "input" ? "ui-slider-input" : "ui-slider-switch" )
 			.change( function() {
 				// if the user dragged the handle, the "change" event was triggered from inside refresh(); don't call refresh() again
-				if (!self.mouseMoved) {
+				if ( !self.mouseMoved ) {
 					self.refresh( val(), true );
 				}
 			})
@@ -320,12 +320,12 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			}
 			});
 
-		this.refresh(undefined, undefined, true);
+		this.refresh( undefined, undefined, true );
 	},
 
 	refresh: function( val, isfromControl, preventInputUpdate ) {
 
-		if ( this.options.disabled || this.element.attr('disabled')) {
+		if ( this.options.disabled || this.element.attr( 'disabled' )) {
 			this.disable();
 		}
 
@@ -333,7 +333,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			cType = control[0].nodeName.toLowerCase(),
 			min = cType === "input" ? parseFloat( control.attr( "min" ) ) : 0,
 			max = cType === "input" ? parseFloat( control.attr( "max" ) ) : control.find( "option" ).length - 1,
-			step = (cType === "input" && parseFloat( control.attr( "step" ) ) > 0) ? parseFloat(control.attr("step")) : 1;
+			step = ( cType === "input" && parseFloat( control.attr( "step" ) ) > 0) ? parseFloat( control.attr( "step" ) ) : 1;
 
 		if ( typeof val === "object" ) {
 			var data = val,
@@ -375,7 +375,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		}
 		// Since JavaScript has problems with large floats, round
 		// the final value to 5 digits after the decimal point (see jQueryUI: #4124)
-		newval = parseFloat( alignValue.toFixed(5) );
+		newval = parseFloat( alignValue.toFixed( 5 ) );
 
 		if ( newval < min ) {
 			newval = min;
