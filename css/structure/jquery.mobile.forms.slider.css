@@ -4,8 +4,6 @@ input.ui-slider-input,
 input.ui-slider-input.ui-mini,
 .ui-field-contain input.ui-slider-input.ui-mini { width: 45px; margin: .25em 0; font-size: 14px; }
 .ui-field-contain input.ui-slider-input { margin: 0; }
-/* To do: Exclude ui-slider-input from textinput widget initSelector. The class ui-input-text is added to the slider input and label. When this is fixed, the rule below can be deleted. */
-input.ui-slider-input, .ui-field-contain input.ui-slider-input { -webkit-box-sizing: content-box; -moz-box-sizing: content-box; -ms-box-sizing: content-box; box-sizing: content-box; }
 select.ui-slider-switch { display: none; }
 div.ui-slider { position: relative; display: inline-block; overflow: visible; height: 15px; padding: 0; margin: 0 2% 0 20px; top: 4px; width: 65%; }
 div.ui-slider-mini { height: 12px; margin-left: 10px; top: 2px; }
