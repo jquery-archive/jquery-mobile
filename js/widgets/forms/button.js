@@ -106,15 +106,15 @@ $.widget( "mobile.button", $.mobile.widget, {
 				});
 		}
 
-        $el.bind({
-            focus: function() {
-                $button.addClass( $.mobile.focusClass );
-            },
+		$el.bind({
+			focus: function() {
+				$button.addClass( $.mobile.focusClass );
+			},
 
-            blur: function() {
-                $button.removeClass( $.mobile.focusClass );
-            }
-        });
+			blur: function() {
+				$button.removeClass( $.mobile.focusClass );
+			}
+		});
 
 		this.refresh();
 	},
