@@ -260,18 +260,21 @@ define( [
 				return options.text() !== list.text();
 			},
 
+			selected: function() {
+				return this._selectOptions().filter( ":selected:not(:jqmData(placeholder='true'))" );
+			},
+
 			refresh: function( forceRebuild , foo ){
 				var self = this,
 				select = this.element,
 				isMultiple = this.isMultiple,
-				options = this._selectOptions(),
-				selected = this.selected(),
-				// return an array of all selected index's
-				indicies = this.selectedIndices();
+				indices;
 
 				if (  forceRebuild || this._isRebuildRequired() ) {
 					self._buildList();
 				}
+
+				indicies = this.selectedIndices();
 
 				self.setButtonText();
 				self.setButtonCount();
@@ -416,6 +419,7 @@ define( [
 					dataIndexAttr = dataPrefix + 'option-index',
 					dataIconAttr = dataPrefix + 'icon',
 					dataRoleAttr = dataPrefix + 'role',
+					dataPlaceholderAttr = dataPrefix + 'placeholder',
 					fragment = document.createDocumentFragment(),
 					isPlaceholderItem = false,
 					optGroup;
@@ -448,6 +452,9 @@ define( [
 					if (needPlaceholder && (!option.getAttribute( "value" ) || text.length === 0 || $option.jqmData( "placeholder" ))) {
 						needPlaceholder = false;
 						isPlaceholderItem = true;
+
+						// If we have identified a placeholder, mark it retroactively in the select as well
+						option.setAttribute( dataPlaceholderAttr, true );
 						if ( o.hidePlaceholderMenuItems ) {
 							classes.push( "ui-selectmenu-placeholder" );
 						}
@@ -464,7 +471,7 @@ define( [
 					item.setAttribute(dataIndexAttr,i);
 					item.setAttribute(dataIconAttr,dataIcon);
 					if ( isPlaceholderItem ) {
-						item.setAttribute( dataPrefix + "placeholder", true );
+						item.setAttribute( dataPlaceholderAttr, true );
 					}
 					item.className = classes.join(" ");
 					item.setAttribute('role','option');
