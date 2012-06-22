@@ -24,6 +24,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		splitIcon: "arrow-r",
 		splitTheme: "b",
 		inset: false,
+		icon: "",
 		initSelector: ":jqmData(role='listview')"
 	},
 
@@ -193,7 +194,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 						shadow: false,
 						corners: false,
 						iconpos: "right",
-						icon: a.length > 1 || icon === false ? false : icon || "arrow-r",
+						icon: a.length > 1 || icon === false || ( o.icon === false && !icon ) ? false : icon || o.icon || "arrow-r",
 						theme: itemTheme
 					});
 
