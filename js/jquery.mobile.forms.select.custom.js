@@ -274,7 +274,7 @@ define( [
 				var self = this,
 				select = this.element,
 				isMultiple = this.isMultiple,
-				indices;
+				indicies;
 
 				if (  forceRebuild || this._isRebuildRequired() ) {
 					self._buildList();
