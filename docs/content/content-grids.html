@@ -30,15 +30,15 @@
 		<p>The jQuery Mobile framework provides a simple way to build CSS-based columns through a  block style class convention called <code>ui-grid</code>. </p>
 		
 		<p>There are four preset configurations layouts  that can be used in any situation that requires columns:</p>
-			<ul>
-				<li><strong>two</strong>-column (using the <code>ui-grid-a</code> class)</li>
-				<li><strong>three</strong>-column (using the <code>ui-grid-b</code> class)</li>
-				<li><strong>four</strong>-column (using the <code>ui-grid-c</code> class)</li>
-				<li><strong>five</strong>-column (using the <code>ui-grid-d</code> class)</li>
-			</ul>
-			
-			<p>Grids are 100% width, completely invisible (no borders or backgrounds) and don't have padding or margins, so they shouldn't interfere with the styles of elements placed inside them. </p>
-			<p>Within the grid container, child elements are assigned <code>ui-block-a/b/c/d/e</code> in a sequential manner which makes each "block" element float side-by-side, forming the grid. The <code>ui-block-a</code> class essentially clears the floats which will start a new line (see multiple row grids, below).</p>
+		<ul>
+			<li><strong>two</strong>-column (using the <code>ui-grid-a</code> class)</li>
+			<li><strong>three</strong>-column (using the <code>ui-grid-b</code> class)</li>
+			<li><strong>four</strong>-column (using the <code>ui-grid-c</code> class)</li>
+			<li><strong>five</strong>-column (using the <code>ui-grid-d</code> class)</li>
+		</ul>
+
+		<p>Grids are 100% width, completely invisible (no borders or backgrounds) and don't have padding or margins, so they shouldn't interfere with the styles of elements placed inside them. </p>
+		<p>Within the grid container, child elements are assigned <code>ui-block-a/b/c/d/e</code> in a sequential manner which makes each "block" element float side-by-side, forming the grid. The <code>ui-block-a</code> class essentially clears the floats which will start a new line (see multiple row grids, below).</p>
 			
 		<h2>Two column grids</h2>
 		<p>To build a two-column (50/50%) layout, start with a container with a <code>class</code> of <code>ui-grid-a</code>, and add two child containers inside it classed with <code>ui-block-a</code> for the first column and <code>ui-block-b</code> for the second:</p>
@@ -71,11 +71,11 @@
 </code></pre>
 	
 		<fieldset class="ui-grid-a">
-				<div class="ui-block-a"><button type="submit" data-theme="c">Cancel</button></div>
-				<div class="ui-block-b"><button type="submit" data-theme="b">Submit</button></div>	   
-	    </fieldset>
+			<div class="ui-block-a"><button type="submit" data-theme="c">Cancel</button></div>
+			<div class="ui-block-b"><button type="submit" data-theme="b">Submit</button></div>	   
+		</fieldset>
 
-	    <p>Please note that the framework adds left and right margin to buttons in a grid. For a single button you can use a container with class <code>ui-grid-solo</code> and wrap the button in a div with class <code>ui-block-a</code> like the example below. This way the button will get the same margin.</p>
+		<p>Please note that the framework adds left and right margin to buttons in a grid. For a single button you can use a container with class <code>ui-grid-solo</code> and wrap the button in a div with class <code>ui-block-a</code> like the example below. This way the button will get the same margin.</p>
 		 
 <pre><code>
 &lt;div class=&quot;ui-grid-a&quot;&gt;
@@ -88,14 +88,15 @@
 </code></pre>
 
 		<div class="ui-grid-a">
-				<div class="ui-block-a"><button type="button" data-theme="c">Previous</button></div>
-				<div class="ui-block-b"><button type="button" data-theme="c">Next</button></div>	   
+			<div class="ui-block-a"><button type="button" data-theme="c">Previous</button></div>
+			<div class="ui-block-b"><button type="button" data-theme="c">Next</button></div>	   
 		</div>
+
 		<div class="ui-grid-solo">
-				<div class="ui-block-a"><button type="button" data-theme="b">More</button></div>
+			<div class="ui-block-a"><button type="button" data-theme="b">More</button></div>
 		</div>
 	    
-	    <p>Theme classes (not data-theme attributes) from the <a href="../api/themes.html">theming system</a> can be added to an element, including grids. On the blocks below, we're adding two classes: <code>ui-bar</code> to add the default bar padding and <code>ui-bar-e</code> to apply the background gradient and font styling for the "e" toolbar theme swatch. For illustration purposes, an inline <code>style="height:120px"</code> attribute is also added to each grid to set each to a standard height. </p>
+		<p>Theme classes (not data-theme attributes) from the <a href="../api/themes.html">theming system</a> can be added to an element, including grids. On the blocks below, we're adding two classes: <code>ui-bar</code> to add the default bar padding and <code>ui-bar-e</code> to apply the background gradient and font styling for the "e" toolbar theme swatch. For illustration purposes, an inline <code>style="height:120px"</code> attribute is also added to each grid to set each to a standard height. </p>
 			
 		<div class="ui-grid-a">
 			<div class="ui-block-a"><div class="ui-bar ui-bar-e" style="height:120px">Block A</div></div>
@@ -124,10 +125,10 @@
 		<p>And an example of a 3 column grid with buttons inside:</p>
 
 		<fieldset class="ui-grid-b">
-				<div class="ui-block-a"><button type="submit" data-theme="c">Hmm</button></div>
-				<div class="ui-block-b"><button type="submit" data-theme="a">No</button></div>	 
-				<div class="ui-block-b"><button type="submit" data-theme="b">Yes</button></div>  
-	    </fieldset>
+			<div class="ui-block-a"><button type="submit" data-theme="c">Hmm</button></div>
+			<div class="ui-block-b"><button type="submit" data-theme="a">No</button></div>	 
+			<div class="ui-block-c"><button type="submit" data-theme="b">Yes</button></div>  
+		</fieldset>
 		
 		<h2>Four-column grids</h2>
 		
@@ -141,7 +142,7 @@
 		</div><!-- /grid-c -->
 		
 		<h2>Five-column grids</h2>
-		<p>A five-column, 20/20/20/20/20% grid is created by specifying <code>class=ui-grid-d</code> on the parent and adding a fourth block. Note: These blocks are also styled with theme classes so the grid layout is clearly visible.</p>
+		<p>A five-column, 20/20/20/20/20% grid is created by specifying <code>class=ui-grid-d</code> on the parent and adding a fifth block. Note: These blocks are also styled with theme classes so the grid layout is clearly visible.</p>
 			
 		<div class="ui-grid-d">
 			<div class="ui-block-a"><div class="ui-bar ui-bar-e" style="height:120px">A</div></div>
@@ -169,14 +170,16 @@
 		
 		
 		<h2>Grids in toolbars</h2>
-		<p>Grids are helpful for creating layouts within a toolbar. Here's a footer with a 3 column grid.</p>
+		<p>Grids are helpful for creating layouts within a toolbar. Here's a footer with a 4 column grid.</p>
 		<!--  NOTE: Inline styles are for demo purposes only, please use external styles -->
 		<div data-role="footer" data-theme="a" class="ui-bar ui-grid-c">
-				<div class="ui-block-a"><h3 style="margin-top:10px;">Settings</h3></div>
-				<div class="ui-block-b"><label for="value" style="margin:8px 10px 0 0; text-align:right;">Price</label> </div>
-				<div class="ui-block-c"><input id="value" value="5,000"></div>	 
-				<div class="ui-block-d"><div style="margin:6px 0 0 10px;"><button type="submit" data-theme="b">Update</button></div></div>  
-	    </div><!-- /footer -->
+			<div class="ui-block-a"><h3 style="margin-top:10px;">Settings</h3></div>
+			<div class="ui-block-b"><label for="value" style="margin:8px 10px 0 0; text-align:right;">Price</label></div>
+			<div class="ui-block-c"><input id="value" value="5,000"></div>	 
+			<div class="ui-block-d">
+				<div style="margin:6px 0 0 10px;"><button type="submit" data-theme="b">Update</button></div>
+			</div>
+		</div><!-- /footer -->
 	
 	
 	</div><!--/content-primary -->		
