@@ -137,7 +137,7 @@ define( [
 						if ( self.isMultiple ) {
 							$( this ).find( ".ui-icon" )
 								.toggleClass( "ui-icon-checkbox-on", option.selected )
-								.toggleClass( "ui-icon-checkbox-off", !option.selected );
+								.toggleClass( "ui-icon-radio-off", !option.selected );
 						}
 
 						// trigger change if value changed
@@ -292,7 +292,7 @@ define( [
 
 							// Multiple selects: add the "on" checkbox state to the icon
 							if ( self.isMultiple ) {
-								item.find( ".ui-icon" ).removeClass( "ui-icon-checkbox-off" ).addClass( "ui-icon-checkbox-on" );
+								item.find( ".ui-icon" ).removeClass( "ui-icon-radio-off" ).addClass( "ui-icon-checkbox-on" );
 							} else {
 								if( item.is( ".ui-selectmenu-placeholder" ) ) {
 									item.next().addClass( $.mobile.activeBtnClass );
@@ -408,7 +408,7 @@ define( [
 					needPlaceholder = true,
 					optgroups = [],
 					lis = [],
-					dataIcon = self.isMultiple ? "checkbox-off" : "false";
+					dataIcon = self.isMultiple ? "radio-off" : "false";
 
 				self.list.empty().filter( ".ui-listview" ).listview( "destroy" );
 
