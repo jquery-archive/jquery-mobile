@@ -239,6 +239,12 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 			}
 
 			return $newSet;
+		},
+
+		getScreenHeight: function(){
+			// Native innerHeight returns more accurate value for this across platforms,
+			// jQuery version is here as a normalized fallback for platforms like Symbian
+			return window.innerHeight || $( window ).height();
 		}
 	}, $.mobile );
 
