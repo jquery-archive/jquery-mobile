@@ -25,7 +25,7 @@ var createHandler = function( sequential ){
 			toScroll = active.lastScroll || $.mobile.defaultHomeScroll,
 			screenHeight = $.mobile.getScreenHeight(),
 			maxTransitionOverride = $.mobile.maxTransitionWidth !== false && $( window ).width() > $.mobile.maxTransitionWidth,
-			none = !$.support.cssTransitions || maxTransitionOverride || !name || name === "none",
+			none = !$.support.cssTransitions || maxTransitionOverride || !name || name === "none" || Math.max( $( window ).scrollTop(), toScroll ) > $.mobile.getMaxScrollForTransition(),
 			toPreClass = " ui-page-pre-in",
 			toggleViewportClass = function(){
 				$.mobile.pageContainer.toggleClass( "ui-mobile-viewport-transitioning viewport-" + name );
@@ -165,6 +165,12 @@ $.mobile._maybeDegradeTransition = function( transition ) {
 
 		return transition;
 };
+
+$.mobile = $.extend( {}, {
+	getMaxScrollForTransition:  function() {
+		return $.mobile.getScreenHeight() * 3;
+	}
+}, $.mobile );
 
 })( jQuery, this );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
