@@ -25,7 +25,7 @@ var createHandler = function( sequential ){
 			toScroll = active.lastScroll || $.mobile.defaultHomeScroll,
 			screenHeight = $.mobile.getScreenHeight(),
 			maxTransitionOverride = $.mobile.maxTransitionWidth !== false && $( window ).width() > $.mobile.maxTransitionWidth,
-			none = !$.support.cssTransitions || maxTransitionOverride || !name || name === "none",
+			none = !$.support.cssTransitions || maxTransitionOverride || !name || name === "none" || Math.max( $( window ).scrollTop(), toScroll ) > $.mobile.getMaxScrollForTransition(),
 			toPreClass = " ui-page-pre-in",
 			toggleViewportClass = function(){
 				$.mobile.pageContainer.toggleClass( "ui-mobile-viewport-transitioning viewport-" + name );
@@ -71,14 +71,11 @@ var createHandler = function( sequential ){
 				
 				startIn();
 			},
-
-			startIn = function(){
-
-				//prevent flickering in phonegap container
-				$to.css("z-index", -10);
-
-				$to.addClass( $.mobile.activePageClass + toPreClass );
-
+			
+			startIn = function(){	
+			
+				$to.addClass( $.mobile.activePageClass );				
+			
 				// Send focus to page as it is now display: block
 				$.mobile.focusPage( $to );
 
@@ -87,16 +84,11 @@ var createHandler = function( sequential ){
 				
 				scrollPage();
 				
-				//restores visibility of the new page
-				$to.css("z-index", "");
-
 				if( !none ){
 					$to.animationComplete( doneIn );
 				}
 				
-				$to
-					.removeClass( toPreClass )
-					.addClass( name + " in" + reverseClass );
+				$to.addClass( name + " in" + reverseClass );
 				
 				if( none ){
 					doneIn();
@@ -156,6 +148,12 @@ $.mobile.transitionHandlers = {
 };
 
 $.mobile.transitionFallbacks = {};
+
+$.mobile = $.extend( {}, {
+	getMaxScrollForTransition:  function() {
+		return $.mobile.getScreenHeight() * 3;
+	}
+}, $.mobile );
 
 })( jQuery, this );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
