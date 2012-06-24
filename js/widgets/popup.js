@@ -521,7 +521,7 @@ define( [ "jquery",
 				}
 			}
 		}
-	}
+	};
 
 	$.mobile.popup.handleLink = function( $link ) {
 		var closestPage = $link.closest( ":jqmData(role='page')" ),
