@@ -10,15 +10,18 @@
 }
 
 .in {
+    -webkit-animation-fill-mode: both;
 	-webkit-animation-timing-function: ease-out;
 	-webkit-animation-duration: 350ms;
+    -moz-animation-fill-mode: both;
 	-moz-animation-timing-function: ease-out;
 	-moz-animation-duration: 350ms;
 }
-
 .out {
+    -webkit-animation-fill-mode: both;
 	-webkit-animation-timing-function: ease-in;
 	-webkit-animation-duration: 225ms;
+    -moz-animation-fill-mode: both;
 	-moz-animation-timing-function: ease-in;
 	-moz-animation-duration: 225ms;
 }
