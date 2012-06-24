@@ -425,6 +425,7 @@ define( [ "jquery",
 				} else {
 					parsedDst = data.toPage.jqmData( "url" );
 				}
+				parsedDst = $.mobile.path.parseUrl( parsedDst );
 				toUrl = parsedDst.pathname + parsedDst.search + parsedDst.hash;
 
 				if ( self._myUrl !== toUrl ) {
