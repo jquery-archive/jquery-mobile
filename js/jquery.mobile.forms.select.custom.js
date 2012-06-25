@@ -363,7 +363,7 @@ define( [
 					if ( selector.length === 0 ) {
 						selector = self.list.find( "li.ui-btn:not(:jqmData(placeholder='true')) a" );
 					}
-					selector.first().focus();
+					selector.first().focus().closest( "li" ).addClass( "ui-btn-down-" + widget.options.theme );
 				}
 
 				if ( menuHeight > screenHeight - 80 || !$.support.scrollTop ) {
