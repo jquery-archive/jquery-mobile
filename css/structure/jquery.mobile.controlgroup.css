@@ -11,10 +11,7 @@
 .ui-controlgroup-vertical .ui-controlgroup-last { border-bottom-width: 1px; }
 .ui-controlgroup-controls label.ui-select { position: absolute; left: -9999px; }
 
-.ui-controlgroup .ui-btn-icon-notext { width: auto; height: auto; top: auto; }
-.ui-controlgroup .ui-btn-icon-notext .ui-btn-inner { height: 20px; padding: .6em 20px .6em 20px }
-.ui-controlgroup-horizontal .ui-btn-icon-notext .ui-btn-inner { width: 18px; }
-.ui-controlgroup.ui-mini .ui-btn-icon-notext .ui-btn-inner { height: 16px; padding: .55em 11px .5em 11px; }
+.ui-controlgroup .ui-btn-icon-notext { width: 24px; height: 24px; }
 .ui-controlgroup .ui-btn-icon-notext .ui-btn-inner .ui-icon { position: absolute; top: 50%; right: 50%; margin: -9px -9px 0 0; }
 
 .ui-controlgroup-horizontal .ui-controlgroup-controls:before,
@@ -22,7 +19,6 @@
 .ui-controlgroup-horizontal .ui-controlgroup-controls:after { clear: both; }
 .ui-controlgroup-horizontal .ui-controlgroup-controls { zoom: 1; }
 .ui-controlgroup-horizontal .ui-btn-inner { text-align: center; }
-.ui-controlgroup-horizontal.ui-mini .ui-btn-inner { height: 16px; line-height: 16px; }
 .ui-controlgroup-horizontal .ui-btn, .ui-controlgroup-horizontal .ui-select,
 .ui-controlgroup-horizontal .ui-checkbox, .ui-controlgroup-horizontal .ui-radio { float: left; clear: none; margin: 0 -1px 0 0; }
 .ui-controlgroup-horizontal .ui-select .ui-btn,
