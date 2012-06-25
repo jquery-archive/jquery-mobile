@@ -23,7 +23,7 @@ position: absolute;
 padding: .25em 3em;
 right: -2.5em;
 text-align: center;
-text-shadow: 0 1px 0 #fff;
+text-shadow: 0 1px 1px #fff;
 top: .75em;
 width: auto;
 z-index: 9;
