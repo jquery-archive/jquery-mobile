@@ -395,7 +395,8 @@ define( [ "jquery",
 	// the process of opening, or already open
 	$.mobile.popup.popupManager = {
 		_currentlyOpenPopup: null,
-		_waitingForPopup: false,
+		_popupIsOpening: false,
+		_popupIsClosing: false,
 		_abort: false,
 
 		// Call _onHashChange if the hash changes /after/ the popup is on the screen
@@ -478,12 +479,12 @@ define( [ "jquery",
 				self._currentlyOpenPopup = popup;
 
 				self._navHook( function() {
-					self._waitingForPopup = true;
+					self._popupIsOpening = true;
 					self._currentlyOpenPopup.element.one( "opened", function() {
-						self._waitingForPopup = false;
+						self._popupIsOpening = false;
 					});
 					self._currentlyOpenPopup._open.apply( self._currentlyOpenPopup, args );
-					if ( !self._waitingForPopup && self._abort ) {
+					if ( !self._popupIsOpening && self._abort ) {
 						self._currentlyOpenPopup._immediate();
 					}
 				});
@@ -493,8 +494,9 @@ define( [ "jquery",
 		pop: function( popup ) {
 			var self = this;
 
-			if ( popup === self._currentlyOpenPopup ) {
-				if ( self._waitingForPopup ) {
+			if ( popup === self._currentlyOpenPopup && !self._popupIsClosing ) {
+				self._popupIsClosing = true;
+				if ( self._popupIsOpening ) {
 					self._currentlyOpenPopup.element.one( "opened", $.proxy( self, "_navUnhook" ) );
 				} else {
 					self._navUnhook();
@@ -508,10 +510,12 @@ define( [ "jquery",
 			self._abort = immediate;
 
 			if ( self._currentlyOpenPopup ) {
-				if ( immediate && self._waitingForPopup ) {
+				if ( immediate && self._popupIsOpening ) {
 					self._currentlyOpenPopup._immediate();
 				}
+				self._popupIsClosing = true;
 				self._currentlyOpenPopup.element.one( "closed", function() {
+					self._popupIsClosing = false;
 					self._currentlyOpenPopup = null;
 					$( self ).trigger( "done" );
 				});
