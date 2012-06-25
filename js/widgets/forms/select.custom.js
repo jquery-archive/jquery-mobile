@@ -332,8 +332,8 @@ define( [
 				}
 
 				var self = this,
-          $window = $( window ),
-          selfListParent = self.list.parent(),
+					$window = $( window ),
+					selfListParent = self.list.parent(),
 					menuHeight = selfListParent.outerHeight(),
 					menuWidth = selfListParent.outerWidth(),
 					activePage = $( "." + $.mobile.activePageClass ),
