@@ -149,7 +149,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			});
 
 		// prevent screen drag when slider activated
-		$( document ).bind( "vmousemove", function( event ) {
+		this.preventDrag = function( event ) {
 			if ( self.dragging ) {
 				// self.mouseMoved must be updated before refresh() because it will be used in the control "change" event
 				self.mouseMoved = true;
@@ -165,7 +165,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				self.userModified = self.beforeStart !== control[0].selectedIndex;
 				return false;
 			}
-		});
+		}
+
+		$( document ).bind( "vmousemove", this.preventDrag);
 
 		slider.bind( "vmousedown", function( event ) {
 			self.dragging = true;
@@ -181,40 +183,41 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		})
 		.bind( "vclick", false );
 
-		slider.add( document )
-			.bind( "vmouseup", function() {
-				if ( self.dragging ) {
+		this.handleDragEnd = function() {
+		    if ( self.dragging ) {
 
-					self.dragging = false;
+			    self.dragging = false;
 
-					if ( cType === "select") {
+			    if ( cType === "select") {
 
-						// make the handle move with a smooth transition
-						handle.addClass( "ui-slider-handle-snapping" );
+				    // make the handle move with a smooth transition
+				    handle.addClass( "ui-slider-handle-snapping" );
 
-						if ( self.mouseMoved ) {
+				    if ( self.mouseMoved ) {
 
-							// this is a drag, change the value only if user dragged enough
-							if ( self.userModified ) {
-								self.refresh( self.beforeStart === 0 ? 1 : 0 );
-							}
-							else {
-								self.refresh( self.beforeStart );
-							}
+					    // this is a drag, change the value only if user dragged enough
+					    if ( self.userModified ) {
+						    self.refresh( self.beforeStart === 0 ? 1 : 0 );
+					    }
+					    else {
+						    self.refresh( self.beforeStart );
+					    }
 
-						}
-						else {
-							// this is just a click, change the value
-							self.refresh( self.beforeStart === 0 ? 1 : 0 );
-						}
+				    }
+				    else {
+					    // this is just a click, change the value
+					    self.refresh( self.beforeStart === 0 ? 1 : 0 );
+				    }
 
-					}
+			    }
 
-					self.mouseMoved = false;
+			    self.mouseMoved = false;
 
-					return false;
-				}
-			});
+			    return false;
+		    }
+	    }
+
+        slider.add( document ).bind( "vmouseup", this.handleDragEnd);
 
 		slider.insertAfter( control );
 
@@ -296,6 +299,11 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 		this.refresh(undefined, undefined, true);
 	},
+
+    _destroy: function() {
+        $( document ).unbind( "vmousemove", this.preventDrag);
+        $( document ).unbind( "vmouseup", this.handleDragEnd);
+    },
 
 	refresh: function( val, isfromControl, preventInputUpdate ) {
 
