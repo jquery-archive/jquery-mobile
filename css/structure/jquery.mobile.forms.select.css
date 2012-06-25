@@ -40,7 +40,7 @@ label.ui-select { font-size: 16px; line-height: 1.4; font-weight: normal; margin
 
 @media all and (min-width: 450px){
 	.ui-field-contain label.ui-select { vertical-align: top; display: inline-block; width: 20%; margin: 0 2% 0 0; }
-	.ui-field-contain .ui-select { width: 78%; display: inline-block; }
+	.ui-field-contain .ui-select { width: 60%; display: inline-block; }
 	.ui-hide-label .ui-select { width: 100%; } 
 }
 

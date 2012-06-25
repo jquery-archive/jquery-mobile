@@ -21,7 +21,7 @@ textarea.ui-mini { height: 45px; }
 	.ui-field-contain label.ui-input-text  { vertical-align: top; display: inline-block; width: 20%; margin: 0 2% 0 0 }
 	.ui-field-contain input.ui-input-text, 
 	.ui-field-contain textarea.ui-input-text, 
-	.ui-field-contain .ui-input-search { width: 78%; display: inline-block; } 
+	.ui-field-contain .ui-input-search { width: 60%; display: inline-block; } 
 	.ui-hide-label input.ui-input-text, 
 	.ui-hide-label textarea.ui-input-text, 
 	.ui-hide-label .ui-input-search { width: 100%; }
