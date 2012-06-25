@@ -93,6 +93,8 @@ p.intro strong {
 }
 .type-home .ui-content {
 	margin-top: 5px;
+	overflow: hidden;
+	position: relative;
 }
 .type-interior .ui-content {
 	padding-bottom: 0;
