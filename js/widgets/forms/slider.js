@@ -214,7 +214,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				self.mouseMoved = false;
 
 			    return false;
-		    }
+			}
 	    }
 
         slider.add( document ).bind( "vmouseup", this.handleDragEnd);
