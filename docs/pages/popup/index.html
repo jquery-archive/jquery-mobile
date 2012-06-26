@@ -42,7 +42,7 @@
 &lt;a href=&quot;#popupBasic&quot; <strong>data-rel=&quot;popup&quot;</strong>&gt;Open Popup&lt;/a&gt;
 
 &lt;div <strong>data-role=&quot;popup&quot;</strong> id=&quot;popupBasic&quot;&gt;
-	This is a completely basic popup, no options set.
+	&lt;p&gt;This is a completely basic popup, no options set.&lt;p&gt;
 &lt;/div&gt;
 </code></pre>
 
@@ -53,7 +53,7 @@
 			<p>This is a completely basic popup, no options set.</p>
 		</div>
 		
-		<p>The framework sets a small margin on text elements, but basically it's really just a container with rounded corners and a shadow which serves as a blank slate for your designs (even these features can be disabled via <a href="options.html">options</a>). This simple styling makes it easy to add in widgets like a listview to make a <a href="#popupMenu" data-rel="popup">menu</a> or photo to make a <a href="#popupMap" data-rel="popup">lightbox</a> that go right up to the edge of the popup.</p>
+		<p>The framework adds small amount of margin to text elements, but basically it's really just a container with rounded corners and a shadow which serves as a blank slate for your designs (even these features can be disabled via <a href="options.html">options</a>). This simple styling makes it easy to add in widgets like a listview to make a <a href="#popupMenu" data-rel="popup">menu</a> or photo to make a <a href="#popupMap" data-rel="popup">lightbox</a> that go right up to the edge of the popup.</p>
 		
 		
 		<h2>Calling the popup plugin</h2>
@@ -92,14 +92,14 @@ $('#myPopupDiv').popup("close")
 		<a href="#popupCloseRight" data-rel="popup" data-role="button" data-inline="true">Popup with close button right</a>
 		<a href="#popupCloseLeft" data-rel="popup" data-role="button" data-inline="true">Popup with close button left</a>
 		
-		<div data-role="popup" id="popupCloseRight" class="ui-content">
+		<div data-role="popup" id="popupCloseRight">
 			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-			<p>I have a close button at the top right corner.</p>
+			<p style="padding-right:10px;">I have a close button at the top right corner.</p>
 		</div>
 		
-		<div data-role="popup" id="popupCloseLeft" class="ui-content">
+		<div data-role="popup" id="popupCloseLeft">
 			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-left">Close</a>
-			<p>I have a close button at the top left corner.</p>
+			<p style="padding-left:10px;">I have a close button at the top left corner.</p>
 		</div>
 		
 		<h2>Adding padding</h2>
