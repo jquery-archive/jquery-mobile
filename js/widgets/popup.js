@@ -192,7 +192,7 @@ define( [ "jquery",
 		// Try and center the overlay over the given coordinates
 		_placementCoords: function( x, y ) {
 			// Tolerances off the window edges
-			var tol = { l: 10, t: 30, r: 10, b: 30 },
+			var tol = { l: 15, t: 30, r: 15, b: 30 },
 			// rectangle within which the popup must fit
 				rc = {
 					l: tol.l,
