@@ -6,18 +6,21 @@ $(function(){
 });
 
 // display the version of jQM
-$(document).bind( 'pageinit', function() {
+$(document).bind( 'pageinit', function( event ) {
 	var version = $.mobile.version || "dev",
 		words = version.split( "-" ),
 		ver = words[0],
 		str = (words[1] || "Final"),
 		html = ver;
+		targetPage = $( event.target );
+		banner = targetPage.find( "p.jqm-version" );
 
 	str = str.charAt( 0 ).toUpperCase() + str.slice( 1 );
 	if ( $.mobile.version && str ) {
 		html += " <b>" + str + "</b>";
 	}
-	$( "p.jqm-version" ).html( html );
+ 	( str !== 'Final' && !banner.length ) ? targetPage.find( ':jqmData(role="content")' ).prepend( '<p class="jqm-version" style="z-index:1001; position:fixed;">' + html + '</p>' ) : null;
+	banner.length ? banner.html( html ) : null;
 })
 
 // Turn off AJAX for local file browsing
