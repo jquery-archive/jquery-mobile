@@ -13,12 +13,16 @@ $(document).bind( 'pageinit', function() {
 		str = (words[1] || "Final"),
 		html = ver;
 
-	str = str.charAt( 0 ).toUpperCase() + str.slice( 1 );
+	if( str.indexOf( "rc" ) == -1 ){
+		str = str.charAt( 0 ).toUpperCase() + str.slice( 1 );
+	}
+
 	if ( $.mobile.version && str ) {
 		html += " <b>" + str + "</b>";
 	}
+
 	$( "p.jqm-version" ).html( html );
-})
+});
 
 // Turn off AJAX for local file browsing
 if ( location.protocol.substr(0,4)  === 'file' ||
