@@ -15,6 +15,8 @@ $(document).bind( 'pageinit', function() {
 
 	if( str.indexOf( "rc" ) == -1 ){
 		str = str.charAt( 0 ).toUpperCase() + str.slice( 1 );
+	} else {
+		str = str.toUpperCase().replace(".", "");
 	}
 
 	if ( $.mobile.version && str ) {
