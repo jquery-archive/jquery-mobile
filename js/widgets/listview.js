@@ -244,7 +244,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 					}
 
 				} else {
-					itemClass += " ui-li-static ui-body-" + itemTheme;
+					itemClass += " ui-li-static ui-btn-up-" + itemTheme;
 				}
 			}
 
