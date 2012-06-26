@@ -55,6 +55,56 @@
 	outline: 0;
 }
 
+.ui-popup > p,
+.ui-popup > h1,
+.ui-popup > h2,
+.ui-popup > h3,
+.ui-popup > h4,
+.ui-popup > h5,
+.ui-popup > h6 {
+	margin: .5em 7px;
+}
+.ui-popup > span {
+	display: block;
+	margin: .5em 7px;
+}
+.ui-popup .ui-title {
+	font-size: 16px;
+	font-weight: bold;
+	margin-top: .5em;
+	margin-bottom: .5em;
+}
+.ui-popup-container .ui-content > p,
+.ui-popup-container .ui-content > h1,
+.ui-popup-container .ui-content > h2,
+.ui-popup-container .ui-content > h3,
+.ui-popup-container .ui-content > h4,
+.ui-popup-container .ui-content > h5,
+.ui-popup-container .ui-content > h6 {
+	margin: .5em 0;
+}
+.ui-popup-container .ui-content > span {
+	margin: 0;
+}
+.ui-popup-container .ui-content > p:first-child,
+.ui-popup-container .ui-content > h1:first-child,
+.ui-popup-container .ui-content > h2:first-child,
+.ui-popup-container .ui-content > h3:first-child,
+.ui-popup-container .ui-content > h4:first-child,
+.ui-popup-container .ui-content > h5:first-child,
+.ui-popup-container .ui-content > h6:first-child {
+	margin-top: 0;
+}
+.ui-popup-container .ui-content > p:last-child,
+.ui-popup-container .ui-content > h1:last-child,
+.ui-popup-container .ui-content > h2:last-child,
+.ui-popup-container .ui-content > h3:last-child,
+.ui-popup-container .ui-content > h4:last-child,
+.ui-popup-container .ui-content > h5:last-child,
+.ui-popup-container .ui-content > h6:last-child {
+	margin-bottom: 0;
+}
+
 .ui-popup-btn-close {
 	position:absolute; 
 	top:-15px; 
