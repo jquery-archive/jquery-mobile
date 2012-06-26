@@ -105,6 +105,14 @@
 	margin-bottom: 0;
 }
 
+.ui-popup > img {
+	width: auto;
+	height: auto;
+	max-width: 100%;
+	max-height: 100%;
+	vertical-align: middle;
+}
+
 .ui-popup .ui-btn-left,
 .ui-popup .ui-btn-right {
 	position: absolute; 
