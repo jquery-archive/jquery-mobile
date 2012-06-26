@@ -135,7 +135,10 @@ var createHandler = function( sequential ){
 
 // generate the handlers from the above
 var sequentialHandler = createHandler(),
-	simultaneousHandler = createHandler( false );
+	simultaneousHandler = createHandler( false ),
+	defaultGetMaxScrollForTransition = function() {
+		return $.mobile.getScreenHeight() * 3;
+	};
 
 // Make our transition handler the public default.
 $.mobile.defaultTransitionHandler = sequentialHandler;
@@ -149,12 +152,8 @@ $.mobile.transitionHandlers = {
 
 $.mobile.transitionFallbacks = {};
 
-$.mobile = $.extend( {}, {
-	getMaxScrollForTransition:  function() {
-		return $.mobile.getScreenHeight() * 3;
-	}
-}, $.mobile );
-
+// Set the getMaxScrollForTransition to default if no implementation was set by user
+$.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defaultGetMaxScrollForTransition;
 })( jQuery, this );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
