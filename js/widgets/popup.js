@@ -63,6 +63,9 @@ define( [ "jquery",
 				ui.placeholder.html( "<!-- placeholder for " + myId + " -->" );
 			}
 			ui.container.append( this.element );
+			
+			// Add class to popup element 
+			this.element.addClass( "ui-popup" );
 
 			// Define instance variables
 			$.extend( this, {
