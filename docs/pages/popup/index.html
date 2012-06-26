@@ -53,7 +53,7 @@
 			<p>This is a completely basic popup, no options set.</p>
 		</div>
 		
-		<p>This example isn't too pretty because a default popup container doesn't have padding. It's really just a container with rounded corners and a shadow which serves as a blank slate for your designs (even these features can be disabled via <a href="options.html">options</a>). This simple styling makes it easy to add in widgets like a listview to make a <a href="#popupMenu" data-rel="popup">menu</a> or photo to make a <a href="#popupPhoto" data-rel="popup">lightbox</a> that go right up to the edge of the popup.</p>
+		<p>The framework sets a small margin on text elements, but basically it's really just a container with rounded corners and a shadow which serves as a blank slate for your designs (even these features can be disabled via <a href="options.html">options</a>). This simple styling makes it easy to add in widgets like a listview to make a <a href="#popupMenu" data-rel="popup">menu</a> or photo to make a <a href="#popupMap" data-rel="popup">lightbox</a> that go right up to the edge of the popup.</p>
 		
 		
 		<h2>Calling the popup plugin</h2>
@@ -89,12 +89,19 @@ $('#myPopupDiv').popup("close")
 &lt;/div&gt;
 		</code></pre>
 				
-		<a href="#popupMap" data-rel="popup" data-role="button" data-inline="true">Popup with close button</a>
-		<div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="a" data-corners="false">
+		<a href="#popupCloseRight" data-rel="popup" data-role="button" data-inline="true">Popup with close button right</a>
+		<a href="#popupCloseLeft" data-rel="popup" data-role="button" data-inline="true">Popup with close button left</a>
+		
+		<div data-role="popup" id="popupCloseRight" class="ui-content">
 			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-			<div id="map_canvas"></div>
+			<p>I have a close button at the top right corner.</p>
 		</div>
-
+		
+		<div data-role="popup" id="popupCloseLeft" class="ui-content">
+			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-left">Close</a>
+			<p>I have a close button at the top left corner.</p>
+		</div>
+		
 		<h2>Adding padding</h2>
 		<p>For popups with formatted text, padding is needed. We recommend adding the <code>ui-content</code> class to the popup container which adds the standard 15px of padding, just like the page content container. Write your own styles to create a more customized design if needed.</p>
 		
@@ -193,7 +200,7 @@ $('#myPopupDiv').popup("close")
 		<a href="#popupMap" data-rel="popup" data-role="button" data-inline="true" data-transition="fade">Map</a>
 		<a href="#popupVideo" data-rel="popup" data-role="button" data-inline="true" data-transition="none">Video</a>
 
-		<div data-role="popup" id="popupInfo" class="ui-content" data-theme="e">
+		<div data-role="popup" id="popupInfo" class="ui-content" data-theme="e" style="max-width:350px;">
           <p>Here is a <strong>tiny popup</strong> being used like a tooltip. The text will wrap to multiple lines as needed.</p>
 		</div>
 
@@ -259,9 +266,14 @@ $('#myPopupDiv').popup("close")
 				</div>
 			</div>
 		</div>
-		
-		<div data-role="popup" id="popupVideo" data-overlay-theme="a" data-theme="c"  data-inset="true" style="width:537px; height: 338px;">
-			<iframe src="http://player.vimeo.com/video/41135183?autoplay=1" width="497" height="298" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen style="padding:20px 20px;"></iframe>
+
+		<div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="a" data-corners="false">
+			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+			<div id="map_canvas"></div>
+		</div>
+				
+		<div data-role="popup" id="popupVideo" data-overlay-theme="a" data-theme="c" class="ui-content">
+			<iframe src="http://player.vimeo.com/video/41135183?autoplay=1" width="497" height="298" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
     </div>
 
 		<h2>Note: Chaining of popups not allowed</h2>

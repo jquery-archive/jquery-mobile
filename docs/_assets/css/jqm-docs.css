@@ -169,6 +169,8 @@ dd h4 { margin:15px 0 0 0; }
 	max-width:100%;
 	text-shadow: none !important;
 }
+/* popup Video example */
+.type-interior .ui-popup-container .ui-content { padding: 15px !important; }
 
 /* F bar theme - just for the docs overview headers */
 .ui-bar-f {
