@@ -105,8 +105,11 @@
 	margin-bottom: 0;
 }
 
-.ui-popup-btn-close {
-	position:absolute; 
-	top:-15px; 
-	right:-15px;	
+.ui-popup .ui-btn-left,
+.ui-popup .ui-btn-right {
+	position: absolute; 
+	top: -13px;
+	margin: 0;
 }
+.ui-popup .ui-btn-left { left: -13px; }
+.ui-popup .ui-btn-right { right: -13px; }
