@@ -268,13 +268,12 @@ $('#myPopupDiv').popup("close")
 		</div>
 
 		<div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="a" data-corners="false">
-			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-			<div id="map_canvas"></div>
+		<div id="map_canvas"></div>
 		</div>
 				
 		<div data-role="popup" id="popupVideo" data-overlay-theme="a" data-theme="c" class="ui-content">
 			<iframe src="http://player.vimeo.com/video/41135183?autoplay=1" width="497" height="298" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-    </div>
+    		</div>
 
 		<h2>Note: Chaining of popups not allowed</h2>
 		<p>The framework does not currently support chaining of popups so it's not possible to embed a link from one popup to another popup. All links with a <code>data-rel="popup"</code> inside a popup will not do anything at all.</p>
