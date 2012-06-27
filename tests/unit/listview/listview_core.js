@@ -973,7 +973,7 @@
 
 			function() {
 				var theme = $.mobile.activePage.jqmData('theme');
-				ok( $.mobile.activePage.find("ul > li").hasClass("ui-body-b"), "theme matches the parent");
+				ok( $.mobile.activePage.find("ul > li").hasClass("ui-btn-up-b"), "theme matches the parent");
 				window.history.back();
 			},
 
