@@ -158,17 +158,6 @@ dd h4 { margin:15px 0 0 0; }
 	margin-top: 0;
 }
 
-/* popup Map example */
-#map_canvas { 
-	border: thin solid;
-	height: 320px;
-	vertical-align: middle;
-	width: 480px; 
-	overflow: hidden;
-	max-height: 90%;
-	max-width:100%;
-	text-shadow: none !important;
-}
 /* popup Video example */
 .type-interior .ui-popup-container .ui-content { padding: 15px !important; }
 
@@ -403,4 +392,15 @@ dd h4 { margin:15px 0 0 0; }
 	.type-interior .content-primary {
 		width: 60%;
 	}
+}
+/* popup Map example */
+#map_canvas { 
+	border: thin solid;
+	height: 320px;
+	vertical-align: middle;
+	width: 480px; 
+	overflow: hidden;
+	max-height: 90%;
+	max-width:100%;
+	text-shadow: none !important;
 }
