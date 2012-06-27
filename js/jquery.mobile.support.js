@@ -121,7 +121,7 @@ $.mobile.browser.ie = (function() {
 
 
 $.extend( $.support, {
-	cssTransitions: "WebKitTransitionEvent" in window || validStyle( 'transition', 'height 100ms linear' ),
+	cssTransitions: ( "WebKitTransitionEvent" in window || validStyle( 'transition', 'height 100ms linear' ) ) && !opera,
 	pushState: "pushState" in history && "replaceState" in history,
 	mediaquery: $.mobile.media( "only all" ),
 	cssPseudoElement: !!propExists( "content" ),
