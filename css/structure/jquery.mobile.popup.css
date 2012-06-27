@@ -114,6 +114,7 @@
 }
 .ui-popup > iframe {
 	max-width: 100%;
+	vertical-align: middle;
 }
 
 @media all and (min-width: 450px){
