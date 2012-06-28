@@ -131,6 +131,19 @@
 		ok( $( "#page-content" ).children().first().html() === "<!-- placeholder for test-popup -->", "When re-created, there is a placeholder in the popup div's original location" );
 	});
 
+	test( "On-the-fly popup is enhanced and de-enhanced correctly", function() {
+		var $container = $( "<div></div>" ).appendTo( $( "#page-content" ) ),
+			$payload = $( "<p id='otf-popup'>This is an on-the-fly-popup</p>" ).appendTo( $container );
+
+		$payload.popup();
+
+		popupEnhancementTests( $payload, "When created on-the-fly" );
+		ok( $container.children().first().html() === "<!-- placeholder for otf-popup -->", "When created on-the-fly, there is a placeholder in the popup div's original location" );
+		$payload.popup( "destroy" );
+		ok( !$payload.attr( "class" ), "After destroying on-the-fly popup, the payload has no 'class' attribute" );
+		ok( $container.children().is( $payload ), "After destroying on-the-fly popup, its payload is returned to its original location" );
+	});
+
 	asyncTest( "Popup opens and closes", function() {
 
 		expect( 5 );
