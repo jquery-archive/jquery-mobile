@@ -372,8 +372,10 @@ define( [ "jquery",
 		},
 
 		_destroy: function() {
-			// Put the element back to where the placeholder was
-			this.element.insertAfter( this._ui.placeholder );
+			// Put the element back to where the placeholder was and remove the "ui-popup" class
+			this.element
+				.insertAfter( this._ui.placeholder )
+				.removeClass( "ui-popup" );
 			this._ui.screen.remove();
 			this._ui.container.remove();
 			this._ui.placeholder.remove();
