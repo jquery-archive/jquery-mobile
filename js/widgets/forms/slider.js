@@ -71,7 +71,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			options;
 
-        domHandle.setAttribute( 'href', "#" );
+        	domHandle.setAttribute( 'href', "#" );
 		domSlider.setAttribute('role','application');
 		domSlider.className = ['ui-slider ',selectClass," ui-btn-down-",trackTheme,' ui-btn-corner-all', inlineClass, miniClass].join("");
 		domHandle.className = 'ui-slider-handle';
@@ -300,10 +300,10 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		this.refresh(undefined, undefined, true);
 	},
 
-    _destroy: function() {
-        $( document ).unbind( "vmousemove", this.preventDrag);
-        $( document ).unbind( "vmouseup", this.handleDragEnd);
-    },
+	_destroy: function() {
+		$( document ).unbind( "vmousemove", this.preventDrag);
+		$( document ).unbind( "vmouseup", this.handleDragEnd);
+	},
 
 	refresh: function( val, isfromControl, preventInputUpdate ) {
 
