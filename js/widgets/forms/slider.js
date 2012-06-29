@@ -185,16 +185,13 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 		this.handleDragEnd = function() {
 			if ( self.dragging ) {
-
 				self.dragging = false;
-
+				
 				if ( cType === "select") {
-
 					// make the handle move with a smooth transition
 					handle.addClass( "ui-slider-handle-snapping" );
-
+					
 					if ( self.mouseMoved ) {
-
 						// this is a drag, change the value only if user dragged enough
 						if ( self.userModified ) {
 						    self.refresh( self.beforeStart === 0 ? 1 : 0 );
@@ -202,7 +199,6 @@ $.widget( "mobile.slider", $.mobile.widget, {
 						else {
 						    self.refresh( self.beforeStart );
 						}
-
 					}
 					else {
 						// this is just a click, change the value
