@@ -184,40 +184,40 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		.bind( "vclick", false );
 
 		this.handleDragEnd = function() {
-		    if ( self.dragging ) {
+			if ( self.dragging ) {
 
 				self.dragging = false;
 
 				if ( cType === "select") {
 
-				    // make the handle move with a smooth transition
-				    handle.addClass( "ui-slider-handle-snapping" );
+					// make the handle move with a smooth transition
+					handle.addClass( "ui-slider-handle-snapping" );
 
 					if ( self.mouseMoved ) {
 
-					    // this is a drag, change the value only if user dragged enough
-					    if ( self.userModified ) {
+						// this is a drag, change the value only if user dragged enough
+						if ( self.userModified ) {
 						    self.refresh( self.beforeStart === 0 ? 1 : 0 );
-					    }
-					    else {
+						}
+						else {
 						    self.refresh( self.beforeStart );
-					    }
+						}
 
-				    }
-				    else {
-					    // this is just a click, change the value
-					    self.refresh( self.beforeStart === 0 ? 1 : 0 );
-				    }
+					}
+					else {
+						// this is just a click, change the value
+						self.refresh( self.beforeStart === 0 ? 1 : 0 );
+					}
 
 				}
 
 				self.mouseMoved = false;
 
-			    return false;
+				return false;
 			}
-	    }
+		}
 
-        slider.add( document ).bind( "vmouseup", this.handleDragEnd);
+        	slider.add( document ).bind( "vmouseup", this.handleDragEnd);
 
 		slider.insertAfter( control );
 
