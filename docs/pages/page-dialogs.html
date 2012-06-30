@@ -65,7 +65,7 @@
 			<p>Since dialogs are typically used to support actions within a page, the framework does not include dialogs in the hash state history tracking. This means that dialogs will not appear in your browsing history chronology when the Back button is clicked. For example, if you are on a page, click a link to open a dialog, close the dialog, then navigate to another page, if you were to click the browser's Back button at that point you will navigate back to the first page, not the dialog.</p>
 
 			<h2>Chaining Dialogs</h2>
-			<p>Please note: If a dialog opens another dialog (chaining), closing the last one with a link of type <code>data-rel="back"</code> will always navigate to the previous dialog until the root-page of type <code>data-role="page"</code> is reached. In this manner a consistent navigation between dialogs is guaranteed.</p>
+			<p>Please note: If a dialog opens another dialog (chaining), closing the last one with a link of type <code>data-rel="back"</code> will always navigate to the previous dialog until the root-page of type <code>data-role="page"</code> is reached. This guarantees a consistent navigation between dialogs.</p>
 
 			<h2>Styling &amp; theming</h2>
 			<p>Dialogs can be styled with different theme swatches, just like any page by adding <code>data-theme</code> attributes to the header, content, or footer containers. Here is an example of a different dialog design:</p>
