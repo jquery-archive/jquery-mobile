@@ -16,7 +16,7 @@ To test these tasks locally, create a testswarm-local.json file like this, repla
 
 Then call:
 
-	grunt config:test:pages testswarm:jquery-mobile/:testswarm-local.json
+	grunt config:test:pages testswarm:jquery-mobile:testswarm-local.json
 
 Adapt the second flag, the 'commit', to match files along with the testUrl property.
  */
@@ -25,7 +25,7 @@ function submit( commit, tests, configFile, done ) {
 	var test,
 		testswarm = require( "testswarm" ),
 		config = grunt.file.readJSON( configFile ).jquerymobile,
-		testBase = config.testUrl + commit,
+		testBase = config.testUrl + commit + "/",
 		testUrls = [];
 	for ( test in tests ) {
 		testUrls.push( testBase + tests[ test ] );
