@@ -29,6 +29,7 @@ When submitting a pull request for review there are a few important steps you ca
 4. Small focused commits, ideally less than 10 to 20 lines
 5. Avoid merge commits (see Pro Git's [chapter on rebasing](http://git-scm.com/book/ch3-6.html), section [Rebasing](#rebasing) below)
 6. Add the appropriate commit message (see below)
+
 Taken together, the above reduces the effort that's required of the contributor reviewing your pull request.
 
 ### Commit messages 
