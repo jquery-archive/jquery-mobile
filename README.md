@@ -28,8 +28,21 @@ When submitting a pull request for review there are a few important steps you ca
 3. Limit the scope to one Issue/Feature
 4. Small focused commits, ideally less than 10 to 20 lines
 5. Avoid merge commits (see Pro Git's [chapter on rebasing](http://git-scm.com/book/ch3-6.html), section [Rebasing](#rebasing) below)
-
+6. Add the appropriate commit message (see below)
 Taken together, the above reduces the effort that's required of the contributor reviewing your pull request.
+
+### Commit messages 
+
+Commit messages should include four components:
+* The WHERE - a single word that categorizes and provides context for the commit and its message, followed by a colon (:). This is typically the name of the plugin being worked on, but sometimes might be something like Build: or Docs:
+* The WHAT - a sufficient summary of the fix or change made (example: modified the foo to no longer bar), followed by a period (.)
+* The WHY #Num - the ticket number with a #sign so Trac creates a hyperlink (example: #1234), followed by a hyphen/dash (-)
+* The WHY Name - the name of the ticket. Notice this is different than summary of the fix. This is a short description of the issue (example: dialog: IE6 crashed when foo is set to bar)
+
+Combined into one, here's a full example:
+    "Dialog: modified the foo to no longer bar. Fixed #1234 - dialog: IE6 crashed when foo is set to bar"
+    \WHERE/:\------------- WHAT -------------/.\  WHY #Num /-\---------------- WHY Name ----------------/
+    
 
 ## Build/Customization
 
