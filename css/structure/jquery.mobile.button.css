@@ -16,8 +16,8 @@
 .ui-footer .ui-btn-inner,
 .ui-mini .ui-btn-inner { font-size: 12.5px; padding: .55em 11px .5em; }
 
-.ui-header .ui-fullsize .ui-btn-inner,
-.ui-footer .ui-fullsize .ui-btn-inner { font-size: 16px; padding: .6em 25px; }
+.ui-fullsize .ui-btn-inner,
+.ui-fullsize .ui-btn-inner { font-size: 16px; padding: .6em 20px; }
 
 .ui-btn-icon-notext { width: 24px; height: 24px; }
 .ui-btn-icon-notext .ui-btn-inner { padding: 0; height: 100%; }
