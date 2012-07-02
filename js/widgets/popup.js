@@ -282,9 +282,10 @@ define( [ "jquery",
 
 		_open: function( x, y, transition ) {
 			var self = this,
+				$win = $( window ),
 				coords = self._placementCoords(
-					( undefined === x ? window.innerWidth / 2 : x ),
-					( undefined === y ? window.innerHeight / 2 : y ) );
+					( undefined === x ? $win.width() / 2 + $win.scrollLeft() : x ),
+					( undefined === y ? $win.height() / 2 + $win.scrollTop() : y ) );
 
 			// Count down to triggering "opened" - we have two prerequisites:
 			// 1. The popup window animation completes (container())
