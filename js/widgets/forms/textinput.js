@@ -131,6 +131,9 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 				$( window ).load( keyup );
 			}
 		}
+		if ( input.attr( "disabled" ) ) {
+			this.disable();
+		}
 	},
 
 	disable: function(){
