@@ -138,12 +138,12 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 
 	disable: function(){
 		( this.element.attr( "disabled", true ).is( "[type='search'],:jqmData(type='search')" ) ?
-			this.element.parent() : this.element ).addClass( "ui-disabled" );
+			this.element.parent() : this.element ).addClass( "ui-disabled" ).attr( "aria-disabled", true );
 	},
 
 	enable: function(){
 		( this.element.attr( "disabled", false).is( "[type='search'],:jqmData(type='search')" ) ?
-			this.element.parent() : this.element ).removeClass( "ui-disabled" );
+			this.element.parent() : this.element ).removeClass( "ui-disabled" ).attr( "aria-disabled", false );
 	}
 });
 
