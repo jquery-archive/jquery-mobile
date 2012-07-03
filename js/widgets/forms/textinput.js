@@ -139,13 +139,13 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 
 	disable: function(){
 		( this.element.attr( "disabled", true ).is( "[type='search'],:jqmData(type='search')" ) ?
-			this.element.parent() : this.element ).addClass( "ui-disabled" ).attr( "aria-disabled", true );
+			this.element.parent() : this.element ).addClass( "ui-disabled" );
 			return this._setOption( "disabled", true );
 	},
 
 	enable: function(){
 		( this.element.attr( "disabled", false).is( "[type='search'],:jqmData(type='search')" ) ?
-			this.element.parent() : this.element ).removeClass( "ui-disabled" ).attr( "aria-disabled", false );
+			this.element.parent() : this.element ).removeClass( "ui-disabled" );
 			return this._setOption( "disabled", false );
 	}
 });
