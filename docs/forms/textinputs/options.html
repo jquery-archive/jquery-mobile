@@ -38,6 +38,13 @@
 			<p>The text input plugin has the following options:</p>
 
 		<dl>
+			<dt><code>disabled</code> <em>boolean</em></dt>
+			<dd>
+				<p class="default">default: false</p>
+				<p>Sets the default state of the text input to disabled when "true".</p>		
+				<pre><code>$('.selector').textinput(<strong>{ disabled: "true" }</strong>);</code></pre>
+			</dd>
+			
 			<dt><code>initSelector</code> <em>CSS selector string</em></dt>
 			<dd>
 				<p class="default">default: "input[type='text'], input[type='search'], :jqmData(type='search'), input[type='number'], :jqmData(type='number'), input[type='password'], input[type='email'], input[type='url'], input[type='tel'], textarea, input:not([type])"</p>
