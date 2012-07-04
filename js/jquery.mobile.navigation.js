@@ -344,6 +344,18 @@ define( [
 				}
 			},
 
+			indexOf: function ( url ) {
+				var index = -1;
+
+				$.each( urlHistory.stack, function( i, historyEntry ) {
+					if ( url === historyEntry.url ) {
+						index = i;
+					}
+				});
+
+				return index;
+			},
+
 			//disable hashchange event listener internally to ignore one change
 			//toggled internally when location.hash is updated to match the url of a successful page load
 			ignoreNextHashChange: false
@@ -946,6 +958,24 @@ define( [
 
 		// If the default behavior is prevented, stop here!
 		if( pbcEvent.isDefaultPrevented() ){
+			// If this request is from a hashchange then restore the state appropriately.
+			if( settings.fromHashChange ){
+				if( typeof toPage == "string" ){
+					url = path.isAbsoluteUrl( toPage ) ? path.stripHash(path.parseUrl( toPage ).hash) : toPage;
+				} else {
+					url = ( settings.dataUrl && path.convertUrlToDataUrl( settings.dataUrl ) ) || toPage.jqmData( "url" );
+				}
+
+				var index = urlHistory.indexOf( url );
+
+				if( index > -1 && index != urlHistory.activeIndex) {
+					// Prevent the next hashchange
+					urlHistory.ignoreNextHashChange = true;
+					// Change the current index in history.
+					window.history.go(urlHistory.activeIndex - index);
+				}
+			}
+
 			return;
 		}
 
