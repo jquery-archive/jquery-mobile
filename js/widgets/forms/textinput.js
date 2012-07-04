@@ -21,7 +21,8 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 
 	_create: function() {
 
-		var input = this.element,
+		var that = this,
+			input = this.element,
 			o = this.options,
 			theme = o.theme || $.mobile.getInheritedTheme( this.element, "c" ),
 			themeclass  = " ui-body-" + theme,
@@ -106,30 +107,31 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		if ( input.is( "textarea" ) ) {
 			var extraLineHeight = 15,
 				keyupTimeoutBuffer = 100,
-				keyup = function() {
-					var scrollHeight = input[ 0 ].scrollHeight,
-						clientHeight = input[ 0 ].clientHeight;
-
-					if ( clientHeight < scrollHeight ) {
-						input.height(scrollHeight + extraLineHeight);
-					}
-				},
 				keyupTimeout;
+
+			this.keyup = function() {
+				var scrollHeight = input[ 0 ].scrollHeight,
+					clientHeight = input[ 0 ].clientHeight;
+
+				if ( clientHeight < scrollHeight ) {
+					input.height(scrollHeight + extraLineHeight);
+				}
+			}
 
 			input.keyup(function() {
 				clearTimeout( keyupTimeout );
-				keyupTimeout = setTimeout( keyup, keyupTimeoutBuffer );
+				keyupTimeout = setTimeout( that.keyup, keyupTimeoutBuffer );
 			});
 
 			// binding to pagechange here ensures that for pages loaded via
 			// ajax the height is recalculated without user input
-			$( document ).one( "pagechange", keyup );
+			$( document ).one( "pagechange", this.keyup );
 
 			// Issue 509: the browser is not providing scrollHeight properly until the styles load
 			if ( $.trim( input.val() ) ) {
 				// bind to the window load to make sure the height is calculated based on BOTH
 				// the DOM and CSS
-				$( window ).load( keyup );
+				$( window ).load( this.keyup );
 			}
 		}
 		if ( input.attr( "disabled" ) ) {
@@ -137,6 +139,10 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		}
 	},
 
+	_destroy: function() {
+		$( window ).unbind( "load", this.keyup );
+	},
+	
 	disable: function(){
 		
 		if ( this.element.attr( "disabled", true ).is( "[type='search'],:jqmData(type='search')" ) ) {

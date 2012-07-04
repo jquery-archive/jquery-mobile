@@ -55,4 +55,20 @@
 			label = $( "[for=empty-string-val-slider]" );
 		equal(label.attr( "id" ), slider.attr( "id" ) + "-label", "the label id is based off the slider id" );
 	});
+
+    test( "slider should detach event", function() {
+		var slider = $( "#remove-events-slider" ),
+			doc = $( document ),
+			vmouseupLength,
+			vmousemoveLength;
+
+		vmouseupLength = doc.data( 'events' ).vmouseup.length;
+		vmousemoveLength = doc.data( 'events' ).vmousemove.length;
+
+		slider.remove();
+
+		equal(doc.data( 'events' ).vmouseup.length, (vmouseupLength - 1), 'vmouseup event was removed');
+		equal(doc.data( 'events' ).vmousemove.length, (vmousemoveLength - 1), 'vmousemove event was removed');
+	});
+
 })( jQuery );

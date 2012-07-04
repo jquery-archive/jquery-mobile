@@ -4,6 +4,18 @@
 (function($){
 	module( "jquery.mobile.forms.textinput.js" );
 
+	test( "input is cleaned up on destroy", function(){
+		var input = $( "#destroycorrectly" ),
+			win = $( window ),
+			loadLen;
+
+		loadLen = win.data("events").load.length;
+
+		input.remove();
+
+		equal(win.data("events").load.length, (loadLen-1), "window load event was not removed");		
+	});
+	
 	test( "inputs without type specified are enhanced", function(){
 		ok( $( "#typeless-input" ).hasClass( "ui-input-text" ) );
 	});
