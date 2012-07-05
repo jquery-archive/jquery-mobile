@@ -139,6 +139,10 @@ define( [
 					return relUrl;
 				}
 
+				if ( absUrl === undefined ) {
+					absUrl = documentBase;
+				}
+
 				var relObj = path.parseUrl( relUrl ),
 					absObj = path.parseUrl( absUrl ),
 					protocol = relObj.protocol || absObj.protocol,
