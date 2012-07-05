@@ -138,23 +138,27 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 	},
 
 	disable: function(){
-		
+
+		var $el;
 		if ( this.element.attr( "disabled", true ).is( "[type='search'],:jqmData(type='search')" ) ) {
-			this.element.parent().addClass( "ui-disabled" );
+			$el = this.element.parent();
 		} else {
-			this.element.addClass( "ui-disabled" );
-		}
+			$el = this.element;
+		} 
+		$el.addClass( "ui-disabled" );
 		return this._setOption( "disabled", true );
 			
 	},
 
 	enable: function(){
-		
+
+		var $el;
 		if ( this.element.attr( "disabled", false ).is( "[type='search'],:jqmData(type='search')" ) ) {
-			this.element.parent().removeClass( "ui-disabled" );
+			$el = this.element.parent();
 		} else {
-			this.element.removeClass( "ui-disabled" );
-		}
+			$el = this.element;
+		} 
+		$el.removeClass( "ui-disabled" );
 		return this._setOption( "disabled", false );
 			
 	}
