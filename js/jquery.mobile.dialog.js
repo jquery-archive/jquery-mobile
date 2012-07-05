@@ -83,13 +83,20 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 
 	// Close method goes back in history
 	close: function() {
+		var dst;
+
 		if ( !this._isClosed ) {
 			this._isClosed = true;
 			if ( $.mobile.hashListeningEnabled ) {
 				window.history.back();
 			}
 			else {
-				$.mobile.changePage( $.mobile.urlHistory.getPrev().url );
+				dst = $.mobile.urlHistory.getPrev().url;
+				if ( !$.mobile.path.isPath( dst ) ) {
+					dst = $.mobile.path.makeUrlAbsolute( "#" + dst );
+				}
+
+				$.mobile.changePage( dst, { changeHash: false, fromHashChange: true } );
 			}
 		}
 	}
