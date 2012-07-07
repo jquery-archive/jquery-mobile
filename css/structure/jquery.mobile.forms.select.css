@@ -10,8 +10,9 @@
 .ui-select .ui-disabled select { display: none; }
 
 @-moz-document url-prefix() {.ui-select .ui-btn select { opacity: 0.0001; }}
-.ui-select .ui-btn.ui-select-nativeonly { border-radius: 0; }
+.ui-select .ui-btn.ui-select-nativeonly { border-radius: 0; border: 0; }
 .ui-select .ui-btn.ui-select-nativeonly select { opacity: 1; text-indent: 0; display: block; }
+.ui-select .ui-disabled.ui-select-nativeonly .ui-btn-inner { opacity: 0; }
 
 .ui-select .ui-btn-icon-right .ui-btn-inner, .ui-select .ui-li-has-count .ui-btn-inner { padding-right: 45px; }
 .ui-select .ui-mini.ui-btn-icon-right .ui-btn-inner { padding-right: 32px; }
