@@ -6,10 +6,12 @@
 .ui-select .ui-btn select { cursor: pointer; -webkit-appearance: none; left: 0; top:0; width: 100%; min-height: 1.5em; min-height: 100%; height: 3em; max-height: 100%; opacity: 0; -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; filter: alpha(opacity=0); z-index: 2; }
 
 .ui-select .ui-disabled { opacity: .3; }
+/* Display none because of issues with IE/WP's filter alpha opacity */
+.ui-select .ui-disabled select { display: none; }
 
 @-moz-document url-prefix() {.ui-select .ui-btn select { opacity: 0.0001; }}
 .ui-select .ui-btn.ui-select-nativeonly { border-radius: 0; }
-.ui-select .ui-btn.ui-select-nativeonly select { opacity: 1; text-indent: 0; }
+.ui-select .ui-btn.ui-select-nativeonly select { opacity: 1; text-indent: 0; display: block; }
 
 .ui-select .ui-btn-icon-right .ui-btn-inner, .ui-select .ui-li-has-count .ui-btn-inner { padding-right: 45px; }
 .ui-select .ui-mini.ui-btn-icon-right .ui-btn-inner { padding-right: 32px; }
