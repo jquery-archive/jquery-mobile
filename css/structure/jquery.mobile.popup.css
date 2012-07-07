@@ -5,8 +5,8 @@
 	height: 100%;
 	border: 0;
 	position: absolute;
-	opacity: 0;
 	filter: Alpha(Opacity=50);
+	opacity: 0;
 	z-index: 1099;
 }
 

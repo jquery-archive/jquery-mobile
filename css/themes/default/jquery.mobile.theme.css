@@ -873,7 +873,6 @@ a.ui-link-inherit {
 /* Interaction cues
 -----------------------------------------------------------------------------------------------------------*/
 .ui-disabled {
-	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(opacity=30)";
 	filter: Alpha(Opacity=30);
 	opacity: .3;
 	zoom: 1;
@@ -1121,8 +1120,8 @@ a.ui-link-inherit {
 
 .ui-overlay {
 	background: #666;
-	opacity: .5;
 	filter: Alpha(Opacity=50);
+	opacity: .5;
 	position: absolute;
 	width: 100%;
 	height: 100%;
