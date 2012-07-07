@@ -76,6 +76,9 @@
 
 /*hiding native button,inputs */
 .ui-btn-hidden { position: absolute; top: 0; left: 0; width: 100%; height: 100%; -webkit-appearance: none; opacity: .1; cursor: pointer; background: #fff; background: rgba(255,255,255,0); filter: Alpha(Opacity=0); font-size: 1px; border: none; text-indent: -9999px; }
+/* Fixes IE/WP filter alpha opacity bugs */
+.ui-disabled .ui-btn-hidden { display: none; }
+.ui-disabled { z-index: 1; }
 
 .ui-field-contain .ui-btn.ui-submit { margin: 0; }
 label.ui-submit { font-size: 16px; line-height: 1.4; font-weight: normal; margin: 0 0 .3em; display: block; }
