@@ -370,7 +370,7 @@ $( document ).bind( &quot;pageloadfailed&quot;, function( event, data ){
 		<p>Page transitions are used to animate the change from the current active page (fromPage) to a new page (toPage). Events are triggered before and after these transitions so that observers can be notified whenever pages are shown or hidden. The events triggered are as follows:</p>
 		<dl>
 			<dt><code>pagebeforeshow</code></dt>
-			<dd>Triggered on the "toPage" we are transitioning to, before the actual transition animation is kicked off. Callbacks for this event will recieve a data object as their 2nd arg. This data object has the following properties on it:
+			<dd>Triggered on the "toPage" we are transitioning to, before the actual transition animation is kicked off. Callbacks for this event will receive a data object as their 2nd arg. This data object has the following properties on it:
 			<ul>
 				<li><code>prevPage</code> (object)
 					<ul>
@@ -381,7 +381,7 @@ $( document ).bind( &quot;pageloadfailed&quot;, function( event, data ){
             </dd>
 
 			<dt><code>pagebeforehide</code></dt>
-			<dd>Triggered on the "fromPage" we are transitioning away from, before the actual transition animation is kicked off. Callbacks for this event will recieve a data object as their 2nd arg. This data object has the following properties on it:
+			<dd>Triggered on the "fromPage" we are transitioning away from, before the actual transition animation is kicked off. Callbacks for this event will receive a data object as their 2nd arg. This data object has the following properties on it:
 			<ul>
 				<li><code>nextPage</code> (object)
 					<ul>
@@ -393,7 +393,7 @@ $( document ).bind( &quot;pageloadfailed&quot;, function( event, data ){
           </dd>
 
 			<dt><code>pageshow</code></dt>
-			<dd>Triggered on the "toPage" after the transition animation has completed. Callbacks for this event will recieve a data object as their 2nd arg. This data object has the following properties on it:
+			<dd>Triggered on the "toPage" after the transition animation has completed. Callbacks for this event will receive a data object as their 2nd arg. This data object has the following properties on it:
 			<ul>
 				<li><code>prevPage</code> (object)
 					<ul>
@@ -404,7 +404,7 @@ $( document ).bind( &quot;pageloadfailed&quot;, function( event, data ){
           </dd>
 
 			<dt><code>pagehide</code></dt>
-			<dd>Triggered on the "fromPage" after the transition animation has completed. Callbacks for this event will recieve a data object as their 2nd arg. This data object has the following properties on it:
+			<dd>Triggered on the "fromPage" after the transition animation has completed. Callbacks for this event will receive a data object as their 2nd arg. This data object has the following properties on it:
 			<ul>
 				<li><code>nextPage</code> (object)
 					<ul>
