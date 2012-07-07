@@ -873,17 +873,15 @@ a.ui-link-inherit {
 /* Interaction cues
 -----------------------------------------------------------------------------------------------------------*/
 .ui-disabled {
-	opacity: 							.3;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(opacity=30)";
+	filter: Alpha(Opacity=30);
+	opacity: .3;
+	zoom: 1;
 }
 .ui-disabled,
 .ui-disabled a {
 	cursor: default !important;
 	pointer-events: none;
-}
-.ui-disabled .ui-btn-text {
-	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(opacity=30)";
-	filter: alpha(opacity=30);
-	zoom: 1;
 }
 
 /* Icons
