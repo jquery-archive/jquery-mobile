@@ -15,9 +15,12 @@ When [submitting issues on github](https://github.com/jquery/jquery-mobile/issue
 3. Steps to reproduce
 4. Expected outcome
 5. Actual outcome
-6. Browsers/platforms tested
+6. jQuery Mobile version
+7. Browsers/platforms tested
 
 Also, in the interest of creating more readable issues please include code snippets inside a triple backtick box appropriate for the JavaScript/HTML/CSS snippet you wish to discuss. More information is available at the [introduction page](http://github.github.com/github-flavored-markdown/) for github flavored markdown (see Syntax Highlighting).
+
+Before opening a new ticket check if the same or a similar issue already has been reported. Tip: Besides the search tool of the issue tracker you can filter issues by label.
 
 ## Pull Requests
 
