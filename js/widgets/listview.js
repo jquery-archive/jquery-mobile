@@ -24,7 +24,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		splitIcon: "arrow-r",
 		splitTheme: "b",
 		inset: false,
-		icon: "",
+		listIcon: "",
 		initSelector: ":jqmData(role='listview')"
 	},
 
@@ -182,19 +182,19 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 			// If we're creating the element, we update it regardless
 			if ( create || !item.hasClass( "ui-li" ) ) {
-				itemTheme = item.jqmData("theme") || o.theme;
+				itemTheme = item.jqmData( "theme" ) || o.theme;
 				a = this._getChildrenByTagName( item[ 0 ], "a", "A" );
 				var isDivider = ( item.jqmData( "role" ) === "list-divider" );
 
 				if ( a.length && !isDivider ) {
-					icon = item.jqmData("icon");
+					icon = item.jqmData( "icon" ) || o.listIcon;
 
 					item.buttonMarkup({
 						wrapperEls: "div",
 						shadow: false,
 						corners: false,
 						iconpos: "right",
-						icon: a.length > 1 || icon === false || ( o.icon === false && !icon ) ? false : icon || o.icon || "arrow-r",
+						icon: a.length > 1 || icon === false ? false : icon || "arrow-r",
 						theme: itemTheme
 					});
 
