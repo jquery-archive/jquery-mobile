@@ -49,7 +49,7 @@ function submit( commit, tests, configFile, done ) {
 grunt.registerTask( "testswarm", function( commit, configFile ) {
 	// TODO currently using only the first five somewhat stable testsuites
 	// need to expand this
-	var tests = grunt.config.get('global').test_paths.slice( 0, 5 );
+	var tests = grunt.config.get('global').test_paths.slice( 0, 10 );
 	var test,
 		latestTests = {};
 	for ( var i = 0; i < tests.length; i++ ) {
