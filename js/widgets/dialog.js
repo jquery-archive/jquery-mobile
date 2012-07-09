@@ -19,7 +19,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		var self = this,
 			$el = this.element,
 			headerCloseButton = $( "<a href='#' data-" + $.mobile.ns + "icon='delete' data-" + $.mobile.ns + "iconpos='notext'>"+ this.options.closeBtnText + "</a>" ),
-			dialogWrap = $("<div/>", {
+			dialogWrap = $( "<div/>", {
 					"role" : "dialog",
 					"class" : "ui-dialog-contain ui-corner-all ui-overlay-shadow"
 				});
@@ -72,8 +72,8 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 			$( this ).find( "." + $.mobile.activeBtnClass ).not( ".ui-slider-bg" ).removeClass( $.mobile.activeBtnClass );
 		})
 		// Override the theme set by the page plugin on pageshow
-		.bind( "pagebeforeshow", function(){
-			if( self.options.overlayTheme ){
+		.bind( "pagebeforeshow", function() {
+			if ( self.options.overlayTheme ) {
 				self.element
 					.page( "removeContainerBackground" )
 					.page( "setContainerBackground", self.options.overlayTheme );
@@ -103,7 +103,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 });
 
 //auto self-init widgets
-$( document ).delegate( $.mobile.dialog.prototype.options.initSelector, "pagecreate", function(){
+$( document ).delegate( $.mobile.dialog.prototype.options.initSelector, "pagecreate", function() {
 	$.mobile.dialog.prototype.enhance( this );
 });
 

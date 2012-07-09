@@ -26,8 +26,8 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			o = this.options,
 			collapsible = $el.addClass( "ui-collapsible" ),
 			collapsibleHeading = $el.children( o.heading ).first(),
-			collapsedIcon = $el.jqmData("collapsed-icon") || o.collapsedIcon,
-			expandedIcon = $el.jqmData("expanded-icon") || o.expandedIcon,
+			collapsedIcon = $el.jqmData( "collapsed-icon" ) || o.collapsedIcon,
+			expandedIcon = $el.jqmData( "expanded-icon" ) || o.expandedIcon,
 			collapsibleContent = collapsible.wrapInner( "<div class='ui-collapsible-content'></div>" ).children( ".ui-collapsible-content" ),
 			collapsibleSet = $el.closest( ":jqmData(role='collapsible-set')" ).addClass( "ui-collapsible-set" );
 
@@ -41,7 +41,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 		if ( collapsibleSet.length ) {
 			// Inherit the theme from collapsible-set
 			if ( !o.theme ) {
-				o.theme = collapsibleSet.jqmData("theme") || $.mobile.getInheritedTheme( collapsibleSet, "c" );
+				o.theme = collapsibleSet.jqmData( "theme" ) || $.mobile.getInheritedTheme( collapsibleSet, "c" );
 			}
 			// Inherit the content-theme from collapsible-set
 			if ( !o.contentTheme ) {
@@ -61,7 +61,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 				o.iconPos = collapsibleSet.jqmData( "iconpos" );
 			}
 
-			if( !o.mini ) {
+			if ( !o.mini ) {
 				o.mini = collapsibleSet.jqmData( "mini" );
 			}
 		}
@@ -143,7 +143,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 });
 
 //auto self-init widgets
-$( document ).bind( "pagecreate create", function( e ){
+$( document ).bind( "pagecreate create", function( e ) {
 	$.mobile.collapsible.prototype.enhanceWithin( e.target );
 });
 

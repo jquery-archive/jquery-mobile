@@ -81,7 +81,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 					.addClass( "ui-corner-tr" )
 				.end()
 				.find( ".ui-li-thumb" )
-					.not(".ui-li-icon")
+					.not( ".ui-li-icon" )
 					.addClass( "ui-corner-tl" );
 
 			// Select the last visible li element
@@ -93,7 +93,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 					.addClass( "ui-corner-br" )
 				.end()
 				.find( ".ui-li-thumb" )
-					.not(".ui-li-icon")
+					.not( ".ui-li-icon" )
 					.addClass( "ui-corner-bl" );
 		}
 		if ( !create ) {
@@ -181,12 +181,12 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 			// If we're creating the element, we update it regardless
 			if ( create || !item.hasClass( "ui-li" ) ) {
-				itemTheme = item.jqmData("theme") || o.theme;
+				itemTheme = item.jqmData( "theme" ) || o.theme;
 				a = this._getChildrenByTagName( item[ 0 ], "a", "A" );
 				var isDivider = ( item.jqmData( "role" ) === "list-divider" );
 
 				if ( a.length && !isDivider ) {
-					icon = item.jqmData("icon");
+					icon = item.jqmData( "icon" );
 
 					item.buttonMarkup({
 						wrapperEls: "div",
@@ -208,7 +208,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 						last = a.last();
 						splittheme = listsplittheme || last.jqmData( "theme" ) || o.splitTheme;
-						linkIcon = last.jqmData("icon");
+						linkIcon = last.jqmData( "icon" );
 
 						last.appendTo(item)
 							.attr( "title", last.getEncodedText() )
@@ -284,12 +284,12 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			.end()
 
 			.find( ".ui-li-aside" ).each(function() {
-					var $this = $(this);
+					var $this = $( this );
 					$this.prependTo( $this.parent() ); //shift aside to front for css float
 				})
 			.end()
 
-			.find( ".ui-li-count" ).each( function() {
+			.find( ".ui-li-count" ).each(function() {
 					$( this ).closest( "li" ).addClass( "ui-li-has-count" );
 				}).addClass( "ui-btn-up-" + ( $list.jqmData( "counttheme" ) || this.options.countTheme) + " ui-btn-corner-all" );
 
@@ -354,16 +354,16 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			hasSubPages = true;
 
 			newPage = list.detach()
-						.wrap( "<div " + dns + "role='page' " +	dns + "url='" + id + "' " + dns + "theme='" + theme + "' " + dns + "count-theme='" + countTheme + "'><div " + dns + "role='content'></div></div>" )
+						.wrap( "<div " + dns + "role='page' " + dns + "url='" + id + "' " + dns + "theme='" + theme + "' " + dns + "count-theme='" + countTheme + "'><div " + dns + "role='content'></div></div>" )
 						.parent()
 							.before( "<div " + dns + "role='header' " + dns + "theme='" + o.headerTheme + "'><div class='ui-title'>" + title + "</div></div>" )
-							.after( persistentFooterID ? $( "<div " + dns + "role='footer' " + dns + "id='"+ persistentFooterID +"'>") : "" )
+							.after( persistentFooterID ? $( "<div " + dns + "role='footer' " + dns + "id='"+ persistentFooterID +"'>" ) : "" )
 							.parent()
 								.appendTo( $.mobile.pageContainer );
 
 			newPage.page();
 
-			anchor = parent.find('a:first');
+			anchor = parent.find( 'a:first' );
 
 			if ( !anchor.length ) {
 				anchor = $( "<a/>" ).html( nodeEls || title ).prependTo( parent.empty() );
@@ -375,20 +375,20 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 		// on pagehide, remove any nested pages along with the parent page, as long as they aren't active
 		// and aren't embedded
-		if( hasSubPages &&
+		if ( hasSubPages &&
 			parentPage.is( ":jqmData(external-page='true')" ) &&
-			parentPage.data("page").options.domCache === false ) {
+			parentPage.data( "page" ).options.domCache === false ) {
 
-			var newRemove = function( e, ui ){
+			var newRemove = function( e, ui ) {
 				var nextPage = ui.nextPage, npURL,
 					prEvent = new $.Event( "pageremove" );
 
-				if( ui.nextPage ){
+				if ( ui.nextPage ) {
 					npURL = nextPage.jqmData( "url" );
-					if( npURL.indexOf( parentUrl + "&" + $.mobile.subPageUrlKey ) !== 0 ){
+					if ( npURL.indexOf( parentUrl + "&" + $.mobile.subPageUrlKey ) !== 0 ) {
 						self.childPages().remove();
 						parentPage.trigger( prEvent );
-						if( !prEvent.isDefaultPrevented() ){
+						if ( !prEvent.isDefaultPrevented() ) {
 							parentPage.removeWithDependents();
 						}
 					}
@@ -403,15 +403,15 @@ $.widget( "mobile.listview", $.mobile.widget, {
 	},
 
 	// TODO sort out a better way to track sub pages of the listview this is brittle
-	childPages: function(){
+	childPages: function() {
 		var parentUrl = this.parentPage.jqmData( "url" );
 
-		return $( ":jqmData(url^='"+  parentUrl + "&" + $.mobile.subPageUrlKey +"')");
+		return $( ":jqmData(url^='"+  parentUrl + "&" + $.mobile.subPageUrlKey + "')" );
 	}
 });
 
 //auto self-init widgets
-$( document ).bind( "pagecreate create", function( e ){
+$( document ).bind( "pagecreate create", function( e ) {
 	$.mobile.listview.prototype.enhanceWithin( e.target );
 });
 

@@ -17,7 +17,7 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 		initSelector: ":jqmData(role='navbar')"
 	},
 
-	_create: function(){
+	_create: function() {
 
 		var $navbar = this.element,
 			$navbtns = $navbar.find( "a" ),
@@ -25,7 +25,7 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 									this.options.iconpos : undefined;
 
 		$navbar.addClass( "ui-navbar ui-mini" )
-			.attr( "role","navigation" )
+			.attr( "role", "navigation" )
 			.find( "ul" )
 			.jqmEnhanceable()
 			.grid({ grid: this.options.grid });
@@ -38,7 +38,7 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 		});
 
 		$navbar.delegate( "a", "vclick", function( event ) {
-			if( !$(event.target).hasClass("ui-disabled") ) {
+			if ( !$(event.target).hasClass( "ui-disabled" ) ) {
 				$navbtns.removeClass( $.mobile.activeBtnClass );
 				$( this ).addClass( $.mobile.activeBtnClass );
 			}
@@ -52,7 +52,7 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 });
 
 //auto self-init widgets
-$( document ).bind( "pagecreate create", function( e ){
+$( document ).bind( "pagecreate create", function( e ) {
 	$.mobile.navbar.prototype.enhanceWithin( e.target );
 });
 

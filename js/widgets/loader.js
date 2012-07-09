@@ -9,7 +9,7 @@ define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], functi
 (function( $, window ) {
 	// DEPRECATED
 	// NOTE global mobile object settings
-	$.extend($.mobile, {
+	$.extend( $.mobile, {
 		// DEPRECATED Should the text be visble in the loading message?
 		loadingMessageTextVisible: undefined,
 
@@ -33,7 +33,7 @@ define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], functi
 		},
 
 		loading: function() {
-			this.loaderWidget.loader.apply(this.loaderWidget, arguments);
+			this.loaderWidget.loader.apply( this.loaderWidget, arguments );
 		}
 	});
 
@@ -63,7 +63,7 @@ define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], functi
 			"</div>",
 
 		// For non-fixed supportin browsers. Position at y center (if scrollTop supported), above the activeBtn (if defined), or just 100px from top
-		fakeFixLoader: function(){
+		fakeFixLoader: function() {
 			var activeBtn = $( "." + $.mobile.activeBtnClass ).first();
 
 			this.element
@@ -75,12 +75,12 @@ define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], functi
 
 		// check position of loader to see if it appears to be "fixed" to center
 		// if not, use abs positioning
-		checkLoaderPosition: function(){
+		checkLoaderPosition: function() {
 			var offset = this.element.offset(),
 				scrollTop = $window.scrollTop(),
 				screenHeight = $.mobile.getScreenHeight();
 
-			if( offset.top < scrollTop || (offset.top - scrollTop) > screenHeight ) {
+			if ( offset.top < scrollTop || ( offset.top - scrollTop ) > screenHeight ) {
 				this.element.addClass( "ui-loader-fakefix" );
 				this.fakeFixLoader();
 				$window
@@ -90,7 +90,7 @@ define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], functi
 		},
 
 		resetHtml: function() {
-			this.element.html( $(this.defaultHtml).html() );
+			this.element.html( $( this.defaultHtml ).html() );
 		},
 
 		// Turn on/off page loading message. Theme doubles as an object argument
@@ -104,8 +104,8 @@ define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], functi
 
 			// use the prototype options so that people can set them globally at
 			// mobile init. Consistency, it's what's for dinner
-			if( $.type(theme) === "object" ){
-				loadSettings = $.extend({}, this.options, theme);
+			if ( $.type(theme) === "object" ) {
+				loadSettings = $.extend( {}, this.options, theme );
 
 				// prefer object property from the param then the old theme setting
 				theme = loadSettings.theme || $.mobile.loadingMessageTheme;
@@ -128,7 +128,7 @@ define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], functi
 			if ( $.mobile.loadingMessage !== false || loadSettings.html ) {
 				// boolean values require a bit more work :P, supports object properties
 				// and old settings
-				if( $.mobile.loadingMessageTextVisible !== undefined ) {
+				if ( $.mobile.loadingMessageTextVisible !== undefined ) {
 					textVisible = $.mobile.loadingMessageTextVisible;
 				} else {
 					textVisible = loadSettings.textVisible;
@@ -146,7 +146,7 @@ define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], functi
 				//      this might be overly defensive in preventing unknowing xss
 				// if the html attribute is defined on the loading settings, use that
 				// otherwise use the fallbacks from above
-				if( loadSettings.html ) {
+				if ( loadSettings.html ) {
 					this.element.html( loadSettings.html );
 				} else {
 					this.element.find( "h1" ).text( message );
@@ -159,19 +159,19 @@ define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], functi
 				this.checkLoaderPosition();
 
 				// on scroll check the loader position
-				$window.bind( "scroll", $.proxy(this.checkLoaderPosition, this));
+				$window.bind( "scroll", $.proxy( this.checkLoaderPosition, this ) );
 			}
 		},
 
 		hide: function() {
 			$html.removeClass( "ui-loading" );
 
-			if( $.mobile.loadingMessage ){
+			if ( $.mobile.loadingMessage ) {
 				this.element.removeClass( "ui-loader-fakefix" );
 			}
 
-			$( window ).unbind( "scroll", $.proxy(this.fakeFixLoader, this) );
-			$( window ).unbind( "scroll", $.proxy(this.checkLoaderPosition, this) );
+			$( window ).unbind( "scroll", $.proxy( this.fakeFixLoader, this) );
+			$( window ).unbind( "scroll", $.proxy( this.checkLoaderPosition, this ) );
 		}
 	});
 

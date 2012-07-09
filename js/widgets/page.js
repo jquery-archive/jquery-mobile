@@ -19,39 +19,39 @@ $.widget( "mobile.page", $.mobile.widget, {
 		var self = this;
 		
 		// if false is returned by the callbacks do not create the page
-		if( self._trigger( "beforecreate" ) === false ){
+		if ( self._trigger( "beforecreate" ) === false ) {
 			return false;
 		}
 
 		self.element
 			.attr( "tabindex", "0" )
 			.addClass( "ui-page ui-body-" + self.options.theme )
-			.bind( "pagebeforehide", function(){
+			.bind( "pagebeforehide", function() {
 				self.removeContainerBackground();
 			} )
-			.bind( "pagebeforeshow", function(){
+			.bind( "pagebeforeshow", function() {
 				self.setContainerBackground();
 			} );
 
 	},
 	
-	removeContainerBackground: function(){
+	removeContainerBackground: function() {
 		$.mobile.pageContainer.removeClass( "ui-overlay-" + $.mobile.getInheritedTheme( this.element.parent() ) );
 	},
 	
 	// set the page container background to the page theme
-	setContainerBackground: function( theme ){
-		if( this.options.theme ){
+	setContainerBackground: function( theme ) {
+		if ( this.options.theme ) {
 			$.mobile.pageContainer.addClass( "ui-overlay-" + ( theme || this.options.theme ) );
 		}
 	},
 
 	keepNativeSelector: function() {
 		var options = this.options,
-			keepNativeDefined = options.keepNative && $.trim(options.keepNative);
+			keepNativeDefined = options.keepNative && $.trim( options.keepNative );
 
-		if( keepNativeDefined && options.keepNative !== options.keepNativeDefault ){
-			return [options.keepNative, options.keepNativeDefault].join(", ");
+		if ( keepNativeDefined && options.keepNative !== options.keepNativeDefault ) {
+			return [options.keepNative, options.keepNativeDefault].join( ", " );
 		}
 
 		return options.keepNativeDefault;

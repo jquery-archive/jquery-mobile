@@ -37,9 +37,9 @@ define( [ "jquery",
 
 		_create: function() {
 			var ui = {
-					screen: $("<div class='ui-screen-hidden ui-popup-screen fade'></div>"),
-					placeholder: $("<div style='display: none;'><!-- placeholder --></div>"),
-					container: $("<div class='ui-popup-container ui-selectmenu-hidden'></div>")
+					screen: $( "<div class='ui-screen-hidden ui-popup-screen fade'></div>" ),
+					placeholder: $( "<div style='display: none;'><!-- placeholder --></div>" ),
+					container: $( "<div class='ui-popup-container ui-selectmenu-hidden'></div>" )
 				},
 				eatEventAndClose = function( e ) {
 					e.preventDefault();
@@ -227,15 +227,15 @@ define( [ "jquery",
 			var self = this, prereqs;
 
 			prereqs = {
-				screen: $.Deferred( function( d ) {
-					d.then( function() {
+				screen: $.Deferred(function( d ) {
+					d.then(function() {
 						if ( prereqs === self._prereqs ) {
 							screenPrereq();
 						}
 					});
 				}),
-				container: $.Deferred( function( d ) {
-					d.then( function() {
+				container: $.Deferred(function( d ) {
+					d.then(function() {
 						if ( prereqs === self._prereqs ) {
 							containerPrereq();
 						}
@@ -243,7 +243,7 @@ define( [ "jquery",
 				})
 			};
 
-			$.when( prereqs.screen, prereqs.container ).done( function() {
+			$.when( prereqs.screen, prereqs.container ).done(function() {
 				if ( prereqs === self._prereqs ) {
 					self._prereqs = null;
 					whenDone();
@@ -260,7 +260,7 @@ define( [ "jquery",
 				self._ui.screen
 					.removeClass( args.classToRemove )
 					.addClass( args.screenClassToAdd )
-					.animationComplete( function() {
+					.animationComplete(function() {
 						args.prereqs.screen.resolve();
 					});
 			} else {
@@ -272,7 +272,7 @@ define( [ "jquery",
 				self._ui.container
 					.addClass( args.containerClassToAdd )
 					.removeClass( args.classToRemove )
-					.animationComplete( function() {
+					.animationComplete(function() {
 						args.prereqs.container.resolve();
 					});
 			} else {
@@ -299,7 +299,7 @@ define( [ "jquery",
 				},
 				function() {
 					self._isOpen = true;
-					self._ui.container.attr("tabindex", "0" ).focus();
+					self._ui.container.attr( "tabindex", "0" ).focus();
 					self.element.trigger( "opened" );
 				});
 
@@ -484,7 +484,7 @@ define( [ "jquery",
 			if ( !self._currentlyOpenPopup ) {
 				self._currentlyOpenPopup = popup;
 
-				self._navHook( function() {
+				self._navHook(function() {
 					self._popupIsOpening = true;
 					self._currentlyOpenPopup.element.one( "opened", function() {
 						self._popupIsOpening = false;

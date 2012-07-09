@@ -50,7 +50,7 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 				.bind( "expand", function( event ) {
 					var closestCollapsible = $( event.target )
 						.closest( ".ui-collapsible" );
-					if( closestCollapsible.parent().is( ":jqmData(role='collapsible-set')" ) ) {
+					if ( closestCollapsible.parent().is( ":jqmData(role='collapsible-set')" ) ) {
 						closestCollapsible
 							.siblings( ".ui-collapsible" )
 							.trigger( "collapse" );
@@ -78,7 +78,7 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 		$.mobile.collapsible.prototype.enhance( collapsiblesInSet.not( ".ui-collapsible" ) );
 
 		// clean up borders
-		collapsiblesInSet.each( function() {
+		collapsiblesInSet.each(function() {
 			$( this ).jqmRemoveData( "collapsible-last" )
 				.find( $.mobile.collapsible.prototype.options.heading )
 				.find( "a" ).first()
@@ -105,7 +105,7 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 });
 
 //auto self-init widgets
-$( document ).bind( "pagecreate create", function( e ){
+$( document ).bind( "pagecreate create", function( e ) {
 	$.mobile.collapsibleset.prototype.enhanceWithin( e.target );
 });
 

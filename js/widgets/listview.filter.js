@@ -12,7 +12,7 @@ $.mobile.listview.prototype.options.filter = false;
 $.mobile.listview.prototype.options.filterPlaceholder = "Filter items...";
 $.mobile.listview.prototype.options.filterTheme = "c";
 // TODO rename callback/deprecate and default to the item itself as the first argument
-$.mobile.listview.prototype.options.filterCallback = function( text, searchValue, item ){
+$.mobile.listview.prototype.options.filterCallback = function( text, searchValue, item ) {
 	return text.toString().toLowerCase().indexOf( searchValue ) === -1;
 };
 
@@ -36,7 +36,7 @@ $( document ).delegate( ":jqmData(role='listview')", "listviewcreate", function(
 		.jqmData( "lastval", "" )
 		.bind( "keyup change", function() {
 
-			var $this = $(this),
+			var $this = $( this ),
 				val = this.value.toLowerCase(),
 				listItems = null,
 				lastval = $this.jqmData( "lastval" ) + "",
@@ -46,7 +46,7 @@ $( document ).delegate( ":jqmData(role='listview')", "listviewcreate", function(
 
 			// Change val as lastval for next execution
 			$this.jqmData( "lastval" , val );
-			if ( val.length < lastval.length || val.indexOf(lastval) !== 0 ) {
+			if ( val.length < lastval.length || val.indexOf( lastval ) !== 0 ) {
 
 				// Removed chars or pasted something totally different, check all items
 				listItems = list.children();

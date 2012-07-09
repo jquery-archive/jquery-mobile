@@ -50,7 +50,7 @@ $( document ).bind( "pagecreate", function( e ) {
 				// Add ARIA role
 				.attr( "role", role === "header" ? "banner" : "contentinfo" );
 
-			if( role === "header") {
+			if ( role === "header") {
 				// Right,left buttons
 				$headeranchors	= $this.children( "a, button" );
 				leftbtn	= $headeranchors.hasClass( "ui-btn-left" );
