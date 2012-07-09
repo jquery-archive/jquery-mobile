@@ -62,7 +62,7 @@ define( [ "jquery", "../jquery.mobile.vmouse" ], function( $ ) {
 				}
 
 				clearTimeout( timer );
-				timer = setTimeout(function() {
+				timer = setTimeout( function() {
 					trigger( event, false );
 				}, 50 );
 			});
@@ -99,7 +99,7 @@ define( [ "jquery", "../jquery.mobile.vmouse" ], function( $ ) {
 					$( document ).unbind( "vmousecancel", clearTapHandlers );
 				}
 
-				function clickHandler(event) {
+				function clickHandler( event ) {
 					clearTapHandlers();
 
 					// ONLY trigger a 'tap' event if the start target is
@@ -113,7 +113,7 @@ define( [ "jquery", "../jquery.mobile.vmouse" ], function( $ ) {
 					.bind( "vclick", clickHandler );
 				$( document ).bind( "vmousecancel", clearTapHandlers );
 
-				timer = setTimeout(function() {
+				timer = setTimeout( function() {
 					triggerCustomEvent( thisObject, "taphold", $.Event( "taphold", { target: origTarget } ) );
 				}, $.event.special.tap.tapholdThreshold );
 			});

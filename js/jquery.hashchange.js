@@ -76,7 +76,7 @@
 //         extra awesomeness that BBQ provides. This plugin will be included as
 //         part of jQuery BBQ, but also be available separately.
 
-(function($,window,undefined){
+(function( $, window, undefined ) {
   // Reused string.
   var str_hashchange = 'hashchange',
     
@@ -242,14 +242,14 @@
   // event for browsers that don't natively support it, including creating a
   // polling loop to watch for hash changes and in IE 6/7 creating a hidden
   // Iframe to enable back and forward.
-  fake_onhashchange = (function(){
+  fake_onhashchange = (function() {
     var self = {},
       timeout_id,
       
       // Remember the initial hash so it doesn't get triggered immediately.
       last_hash = get_fragment(),
       
-      fn_retval = function(val){ return val; },
+      fn_retval = function( val ) { return val; },
       history_set = fn_retval,
       history_get = fn_retval;
     
@@ -286,7 +286,7 @@
     // vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
     // vvvvvvvvvvvvvvvvvvv REMOVE IF NOT SUPPORTING IE6/7/8 vvvvvvvvvvvvvvvvvvv
     // vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-    $.browser.msie && !supports_onhashchange && (function(){
+    $.browser.msie && !supports_onhashchange && (function() {
       // Not only do IE6/7 need the "magical" Iframe treatment, but so does IE8
       // when running in "IE7 compatibility" mode.
       
@@ -295,7 +295,7 @@
       
       // When the event is bound and polling starts in IE 6/7, create a hidden
       // Iframe for history handling.
-      self.start = function(){
+      self.start = function() {
         if ( !iframe ) {
           iframe_src = $.fn[ str_hashchange ].src;
           iframe_src = iframe_src && iframe_src + get_fragment();
@@ -306,7 +306,7 @@
             
             // When Iframe has completely loaded, initialize the history and
             // start polling.
-            .one( 'load', function(){
+            .one( 'load', function() {
               iframe_src || history_set( get_fragment() );
               poll();
             })
@@ -322,7 +322,7 @@
           // prettify the back/next history menu entries. Since IE sometimes
           // errors with "Unspecified error" the very first time this is set
           // (yes, very useful) wrap this with a try/catch block.
-          doc.onpropertychange = function(){
+          doc.onpropertychange = function() {
             try {
               if ( event.propertyName === 'title' ) {
                 iframe.document.title = doc.title;

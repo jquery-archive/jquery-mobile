@@ -9,7 +9,7 @@
 		baseUrl = myScriptTag.src.replace( /(.*)\/.*$/, "$1/" ),
 		url = baseUrl + "jquery.js";
 
-	if( results ) {
+	if ( results ) {
 		version = decodeURIComponent(results[results.length - 1].replace(/\+/g, " "));
 
 		switch( version ) {

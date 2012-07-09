@@ -78,7 +78,7 @@ define( [ "jquery", "../jquery.mobile.support.orientation", "./throttledresize" 
 			// event by testing window dimensions on resize.
 			win.bind( "throttledresize", handler );
 		},
-		teardown: function(){
+		teardown: function() {
 			// If the event is not supported natively, return false so that
 			// jQuery will unbind the event using DOM methods.
 			if ( $.support.orientation && !$.event.special.orientationchange.disabled ) {

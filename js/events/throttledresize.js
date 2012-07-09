@@ -12,7 +12,7 @@ define( [ "jquery" ], function( jQuery ) {
 			setup: function() {
 				$( this ).bind( "resize", handler );
 			},
-			teardown: function(){
+			teardown: function() {
 				$( this ).unbind( "resize", handler );
 			}
 		};
