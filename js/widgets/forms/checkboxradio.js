@@ -27,7 +27,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			// NOTE: Windows Phone could not find the label through a selector
 			// filter works though.
 			parentLabel = $( input ).closest( "label" ),
-			label = parentLabel.length ? parentLabel : $( input ).closest( "form,fieldset,:jqmData(role='page'),:jqmData(role='dialog')" ).find( "label" ).filter( "[for='" + input[0].id + "']" ),
+			label = parentLabel.length ? parentLabel : $( input ).closest( "form, fieldset, :jqmData(role='page'), :jqmData(role='dialog')" ).find( "label" ).filter( "[for='" + input[0].id + "']" ),
 			inputtype = input[0].type,
 			mini = inheritAttr( input, "mini" ),
 			checkedState = inputtype + "-on",
@@ -55,7 +55,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 		});
 
 		// If there's no selected theme check the data attr
-		if( !this.options.theme ) {
+		if ( !this.options.theme ) {
 			this.options.theme = $.mobile.getInheritedTheme( this.element, "c" );
 		}
 
@@ -114,13 +114,13 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 				},
 
 				vclick: function() {
-					var $this = $(this);
+					var $this = $( this );
 
 					// Adds checked attribute to checked input when keyboard is used
 					if ( $this.is( ":checked" ) ) {
 
 						$this.prop( "checked", true);
-						self._getInputSet().not($this).prop( "checked", false );
+						self._getInputSet().not( $this ).prop( "checked", false );
 					} else {
 
 						$this.prop( "checked", false );
@@ -143,25 +143,25 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 
 	_cacheVals: function() {
 		this._getInputSet().each(function() {
-			$(this).jqmData( "cacheVal", this.checked );
+			$( this ).jqmData( "cacheVal", this.checked );
 		});
 	},
 
 	//returns either a set of radios with the same name attribute, or a single checkbox
-	_getInputSet: function(){
-		if(this.inputtype === "checkbox") {
+	_getInputSet: function() {
+		if ( this.inputtype === "checkbox" ) {
 			return this.element;
 		}
 
-		return this.element.closest( "form,fieldset,:jqmData(role='page'),:jqmData(role='dialog')" )
-			.find( "input[name='"+ this.element[0].name +"'][type='"+ this.inputtype +"']" );
+		return this.element.closest( "form, fieldset, :jqmData(role='page'), :jqmData(role='dialog')" )
+			.find( "input[name='" + this.element[0].name + "'][type='" + this.inputtype + "']" );
 	},
 
 	_updateAll: function() {
 		var self = this;
 
 		this._getInputSet().each(function() {
-			var $this = $(this);
+			var $this = $( this );
 
 			if ( this.checked || self.inputtype === "checkbox" ) {
 				$this.trigger( "change" );
@@ -200,7 +200,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 });
 
 //auto self-init widgets
-$( document ).bind( "pagecreate create", function( e ){
+$( document ).bind( "pagecreate create", function( e ) {
 	$.mobile.checkboxradio.prototype.enhanceWithin( e.target, true );
 });
 

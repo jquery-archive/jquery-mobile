@@ -31,8 +31,8 @@ $.widget( "mobile.button", $.mobile.widget, {
 			$buttonPlaceholder;
 
 		// if this is a link, check if it's been enhanced and, if not, use the right function
-		if( $el[ 0 ].tagName === "A" ) {
-			if( !$el.hasClass( "ui-btn" ) ) {
+		if ( $el[ 0 ].tagName === "A" ) {
+			if ( !$el.hasClass( "ui-btn" ) ) {
 				$el.buttonMarkup();
 			}
 
@@ -46,18 +46,18 @@ $.widget( "mobile.button", $.mobile.widget, {
 		}
 
 		// TODO: Post 1.1--once we have time to test thoroughly--any classes manually applied to the original element should be carried over to the enhanced element, with an `-enhanced` suffix. See https://github.com/jquery/jquery-mobile/issues/3577
-		/* if( $el[0].className.length ) {
+		/* if ( $el[0].className.length ) {
 			classes = $el[0].className;
 		} */
-		if( !!~$el[0].className.indexOf( "ui-btn-left" ) ) {
+		if ( !!~$el[0].className.indexOf( "ui-btn-left" ) ) {
 			classes = "ui-btn-left";
 		}
 
-		if(  !!~$el[0].className.indexOf( "ui-btn-right" ) ) {
+		if (  !!~$el[0].className.indexOf( "ui-btn-right" ) ) {
 			classes = "ui-btn-right";
 		}
 
-		if(  $el.attr( "type" ) === "submit" || $el.attr( "type" ) === "reset" ) {
+		if (  $el.attr( "type" ) === "submit" || $el.attr( "type" ) === "reset" ) {
 			classes ? classes += " ui-submit" :  classes = "ui-submit";
 		}
 		$( "label[for='" + $el.attr( "id" ) + "']" ).addClass( "ui-submit" );
@@ -87,7 +87,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 		if ( type !== "button" && type !== "reset" && name ) {
 				$el.bind( "vclick", function() {
 					// Add hidden input if it doesn't already exist.
-					if( $buttonPlaceholder === undefined ) {
+					if ( $buttonPlaceholder === undefined ) {
 						$buttonPlaceholder = $( "<input>", {
 							type: "hidden",
 							name: $el.attr( "name" ),
@@ -95,7 +95,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 						}).insertBefore( $el );
 
 						// Bind to doc to remove after submit handling
-						$( document ).one("submit", function(){
+						$( document ).one( "submit", function() {
 							$buttonPlaceholder.remove();
 
 							// reset the local var so that the hidden input
@@ -146,7 +146,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 });
 
 //auto self-init widgets
-$( document ).bind( "pagecreate create", function( e ){
+$( document ).bind( "pagecreate create", function( e ) {
 	$.mobile.button.prototype.enhanceWithin( e.target, true );
 });
 

@@ -7,7 +7,7 @@
 
 define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "./textinput", "../../jquery.mobile.buttonMarkup" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
-( function( $, undefined ) {
+(function( $, undefined ) {
 
 $.widget( "mobile.slider", $.mobile.widget, {
 	options: {
@@ -53,17 +53,17 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			step = window.parseFloat( control.attr( "step" ) || 1 ),
 
-			inlineClass = ( this.options.inline || control.jqmData("inline") === true ) ? " ui-slider-inline" : "",
+			inlineClass = ( this.options.inline || control.jqmData( "inline" ) === true ) ? " ui-slider-inline" : "",
 
-			miniClass = ( this.options.mini || control.jqmData("mini") ) ? " ui-slider-mini" : "",
+			miniClass = ( this.options.mini || control.jqmData( "mini" ) ) ? " ui-slider-mini" : "",
 
 
-			domHandle = document.createElement('a'),
+			domHandle = document.createElement( 'a' ),
 			handle = $( domHandle ),
-			domSlider = document.createElement('div'),
+			domSlider = document.createElement( 'div' ),
 			slider = $( domSlider ),
 
-			valuebg = control.jqmData("highlight") && cType !== "select" ? (function() {
+			valuebg = control.jqmData( "highlight" ) && cType !== "select" ? (function() {
 				var bg = document.createElement('div');
 				bg.className = 'ui-slider-bg ' + $.mobile.activeBtnClass + ' ui-btn-corner-all';
 				return $( bg ).prependTo( slider );
@@ -73,9 +73,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
         domHandle.setAttribute( 'href', "#" );
 		domSlider.setAttribute('role','application');
-		domSlider.className = ['ui-slider ',selectClass," ui-btn-down-",trackTheme,' ui-btn-corner-all', inlineClass, miniClass].join("");
+		domSlider.className = ['ui-slider ',selectClass," ui-btn-down-",trackTheme,' ui-btn-corner-all', inlineClass, miniClass].join( "" );
 		domHandle.className = 'ui-slider-handle';
-		domSlider.appendChild(domHandle);
+		domSlider.appendChild( domHandle );
 
 		handle.buttonMarkup({ corners: true, theme: theme, shadow: true })
 				.attr({
@@ -102,11 +102,11 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			var wrapper = document.createElement('div');
 			wrapper.className = 'ui-slider-inneroffset';
 
-			for(var j = 0,length = domSlider.childNodes.length;j < length;j++){
-				wrapper.appendChild(domSlider.childNodes[j]);
+			for ( var j = 0,length = domSlider.childNodes.length;j < length;j++ ) {
+				wrapper.appendChild( domSlider.childNodes[j] );
 			}
 
-			domSlider.appendChild(wrapper);
+			domSlider.appendChild( wrapper );
 
 			// slider.wrapInner( "<div class='ui-slider-inneroffset'></div>" );
 
@@ -115,15 +115,15 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			options = control.find( "option" );
 
-			for(var i = 0, optionsCount = options.length; i < optionsCount; i++){
-				var side = !i ? "b":"a",
-					sliderTheme = !i ? " ui-btn-down-" + trackTheme :( " " + $.mobile.activeBtnClass ),
-					sliderLabel = document.createElement('div'),
-					sliderImg = document.createElement('span');
+			for ( var i = 0, optionsCount = options.length; i < optionsCount; i++ ) {
+				var side = !i ? "b" : "a",
+					sliderTheme = !i ? " ui-btn-down-" + trackTheme : ( " " + $.mobile.activeBtnClass ),
+					sliderLabel = document.createElement( 'div' ),
+					sliderImg = document.createElement( 'span' );
 
-				sliderImg.className = ['ui-slider-label ui-slider-label-',side,sliderTheme," ui-btn-corner-all"].join("");
+				sliderImg.className = ['ui-slider-label ui-slider-label-',side,sliderTheme," ui-btn-corner-all"].join( "" );
 				sliderImg.setAttribute('role','img');
-				sliderImg.appendChild(document.createTextNode(options[i].innerHTML));
+				sliderImg.appendChild( document.createTextNode( options[i].innerHTML ) );
 				$(sliderImg).prependTo( slider );
 			}
 
@@ -135,16 +135,16 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 		// monitor the input for updated values
 		control.addClass( cType === "input" ? "ui-slider-input" : "ui-slider-switch" )
-			.change( function() {
+			.change(function() {
 				// if the user dragged the handle, the "change" event was triggered from inside refresh(); don't call refresh() again
-				if (!self.mouseMoved) {
+				if ( !self.mouseMoved ) {
 					self.refresh( val(), true );
 				}
 			})
-			.keyup( function() { // necessary?
+			.keyup(function() { // necessary?
 				self.refresh( val(), true, true );
 			})
-			.blur( function() {
+			.blur(function() {
 				self.refresh( val(), true );
 			});
 
@@ -219,7 +219,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		slider.insertAfter( control );
 
 		// Only add focus class to toggle switch, sliders get it automatically from ui-btn
-		if( cType === 'select' ) {
+		if ( cType === 'select' ) {
 			this.handle.bind({
 				focus: function() {
 					slider.addClass( $.mobile.focusClass );
@@ -294,7 +294,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			}
 			});
 
-		this.refresh(undefined, undefined, true);
+		this.refresh( undefined, undefined, true );
 	},
 
 	refresh: function( val, isfromControl, preventInputUpdate ) {
@@ -307,7 +307,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			cType = control[0].nodeName.toLowerCase(),
 			min = cType === "input" ? parseFloat( control.attr( "min" ) ) : 0,
 			max = cType === "input" ? parseFloat( control.attr( "max" ) ) : control.find( "option" ).length - 1,
-			step = (cType === "input" && parseFloat( control.attr( "step" ) ) > 0) ? parseFloat(control.attr("step")) : 1;
+			step = ( cType === "input" && parseFloat( control.attr( "step" ) ) > 0 ) ? parseFloat( control.attr( "step" ) ) : 1;
 
 		if ( typeof val === "object" ) {
 			var data = val,
@@ -366,7 +366,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				title: cType === "input" ? newval : control.find( "option" ).eq( newval ).getEncodedText()
 			});
 
-		if( this.valuebg ){
+		if ( this.valuebg ) {
 			this.valuebg.css( "width", percent + "%" );
 		}
 
@@ -376,8 +376,8 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				aPercent = percent && handlePercent + ( 100 - handlePercent ) * percent / 100,
 				bPercent = percent === 100 ? 0 : Math.min( handlePercent + 100 - aPercent, 100 );
 
-			this._labels.each(function(){
-				var ab = $(this).is( ".ui-slider-label-a" );
+			this._labels.each(function() {
+				var ab = $( this ).is( ".ui-slider-label-a" );
 				$( this ).width( ( ab ? aPercent : bPercent  ) + "%" );
 			});
 		}
@@ -414,7 +414,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 });
 
 //auto self-init widgets
-$( document ).bind( "pagecreate create", function( e ){
+$( document ).bind( "pagecreate create", function( e ) {
 	$.mobile.slider.prototype.enhanceWithin( e.target, true );
 });
 

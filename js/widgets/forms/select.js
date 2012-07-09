@@ -25,11 +25,11 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		nativeMenu: true,
 		// This option defaults to true on iOS devices.
 		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
-		initSelector: "select:not(:jqmData(role='slider'))",
+		initSelector: "select:not( :jqmData(role='slider') )",
 		mini: false
 	},
 
-	_button: function(){
+	_button: function() {
 		return $( "<div/>" );
 	},
 
@@ -52,17 +52,17 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 	},
 
 	// setup items that are generally necessary for select menu extension
-	_preExtension: function(){
+	_preExtension: function() {
 		var classes = "";
 		// TODO: Post 1.1--once we have time to test thoroughly--any classes manually applied to the original element should be carried over to the enhanced element, with an `-enhanced` suffix. See https://github.com/jquery/jquery-mobile/issues/3577
-		/* if( $el[0].className.length ) {
+		/* if ( $el[0].className.length ) {
 			classes = $el[0].className;
 		} */
-		if( !!~this.element[0].className.indexOf( "ui-btn-left" ) ) {
+		if ( !!~this.element[0].className.indexOf( "ui-btn-left" ) ) {
 			classes =  " ui-btn-left";
 		}
 
-		if(  !!~this.element[0].className.indexOf( "ui-btn-right" ) ) {
+		if (  !!~this.element[0].className.indexOf( "ui-btn-right" ) ) {
 			classes = " ui-btn-right";
 		}
 
@@ -136,7 +136,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		}
 
 		// Events on native select
-		this.select.change( function() {
+		this.select.change(function() {
 			self.refresh();
 		});
 
@@ -175,11 +175,11 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 		// In many situations, iOS will zoom into the select upon tap, this prevents that from happening
 		self.button.bind( "vmousedown", function() {
-			if( self.options.preventFocusZoom ){
+			if ( self.options.preventFocusZoom ) {
 				$.mobile.zoom.disable( true );
 			}
 		}).bind( "mouseup", function() {
-			if( self.options.preventFocusZoom ){
+			if ( self.options.preventFocusZoom ) {
 				$.mobile.zoom.enable( true );
 			}
 		});
@@ -192,7 +192,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 	selectedIndices: function() {
 		var self = this;
 
-		return this.selected().map( function() {
+		return this.selected().map(function() {
 			return self._selectOptions().index( this );
 		}).get();
 	},
@@ -201,7 +201,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		var self = this,
 			selected = this.selected(),
 			text = this.placeholder,
-			span = $( document.createElement("span") );
+			span = $( document.createElement( "span" ) );
 
 		this.button.find( ".ui-btn-text" ).html(function() {
 			if ( selected.length ) {
@@ -214,8 +214,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 			// TODO possibly aggregate multiple select option classes
 			return span.text( text )
-				.addClass( self.select.attr("class") )
-				.addClass( selected.attr("class") );
+				.addClass( self.select.attr( "class" ) )
+				.addClass( selected.attr( "class" ) );
 		});
 	},
 
@@ -250,7 +250,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 });
 
 //auto self-init widgets
-$( document ).bind( "pagecreate create", function( e ){
+$( document ).bind( "pagecreate create", function( e ) {
 	$.mobile.selectmenu.prototype.enhanceWithin( e.target, true );
 });
 })( jQuery );

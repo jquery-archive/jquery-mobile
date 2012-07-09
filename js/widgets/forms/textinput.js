@@ -25,14 +25,14 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			o = this.options,
 			theme = o.theme || $.mobile.getInheritedTheme( this.element, "c" ),
 			themeclass  = " ui-body-" + theme,
-			mini = input.jqmData("mini") === true,
+			mini = input.jqmData( "mini" ) === true,
 			miniclass = mini ? " ui-mini" : "",
 			focusedEl, clearbtn;
 
 		function toggleClear() {
-			setTimeout(function() {
+			setTimeout( function() {
 				clearbtn.toggleClass( "ui-input-clear-hidden", !input.val() );
-			}, 0);
+			}, 0 );
 		}
 
 		$( "label[for='" + input.attr( "id" ) + "']" ).addClass( "ui-input-text" );
@@ -78,7 +78,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 
 			toggleClear();
 
-			input.bind('paste cut keyup focus change blur', toggleClear);
+			input.bind( 'paste cut keyup focus change blur', toggleClear );
 
 		} else {
 			input.addClass( "ui-corner-all ui-shadow-inset" + themeclass + miniclass );
@@ -87,17 +87,17 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		input.focus(function() {
 				focusedEl.addClass( $.mobile.focusClass );
 			})
-			.blur(function(){
+			.blur(function() {
 				focusedEl.removeClass( $.mobile.focusClass );
 			})
 			// In many situations, iOS will zoom into the select upon tap, this prevents that from happening
 			.bind( "focus", function() {
-				if( o.preventFocusZoom ){
+				if ( o.preventFocusZoom ) {
 					$.mobile.zoom.disable( true );
 				}
 			})
 			.bind( "blur", function() {
-				if( o.preventFocusZoom ){
+				if ( o.preventFocusZoom ) {
 					$.mobile.zoom.enable( true );
 				}
 			});
@@ -137,10 +137,10 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		}
 	},
 
-	disable: function(){
+	disable: function() {
 
 		var $el;
-		if ( this.element.attr( "disabled", true ).is( "[type='search'],:jqmData(type='search')" ) ) {
+		if ( this.element.attr( "disabled", true ).is( "[type='search'], :jqmData(type='search')" ) ) {
 			$el = this.element.parent();
 		} else {
 			$el = this.element;
@@ -150,10 +150,10 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			
 	},
 
-	enable: function(){
+	enable: function() {
 
 		var $el;
-		if ( this.element.attr( "disabled", false ).is( "[type='search'],:jqmData(type='search')" ) ) {
+		if ( this.element.attr( "disabled", false ).is( "[type='search'], :jqmData(type='search')" ) ) {
 			$el = this.element.parent();
 		} else {
 			$el = this.element;
@@ -165,7 +165,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 });
 
 //auto self-init widgets
-$( document ).bind( "pagecreate create", function( e ){
+$( document ).bind( "pagecreate create", function( e ) {
 	$.mobile.textinput.prototype.enhanceWithin( e.target, true );
 });
 

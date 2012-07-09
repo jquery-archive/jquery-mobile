@@ -22,7 +22,7 @@ define( [
 	"../page.sections" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
-	var extendSelect = function( widget ){
+	var extendSelect = function( widget ) {
 
 		var select = widget.select,
 			selectID  = widget.selectID,
@@ -60,7 +60,7 @@ define( [
 			menuPageClose,
 			headerClose;
 
-		if( widget.isMultiple ) {
+		if ( widget.isMultiple ) {
 			headerClose = $( "<a>", {
 				"text": widget.options.closeText,
 				"href": "#",
@@ -112,13 +112,13 @@ define( [
 
 				// Events for list items
 				self.list.attr( "role", "listbox" )
-					.bind( "focusin", function( e ){
+					.bind( "focusin", function( e ) {
 						$( e.target )
 							.attr( "tabindex", "0" )
 							.trigger( "vmouseover" );
 
 					})
-					.bind( "focusout", function( e ){
+					.bind( "focusout", function( e ) {
 						$( e.target )
 							.attr( "tabindex", "-1" )
 							.trigger( "vmouseout" );
@@ -168,7 +168,7 @@ define( [
 						case 38:
 							prev = li.prev().not( ".ui-selectmenu-placeholder" );
 
-							if( prev.is( ".ui-li-divider" ) ) {
+							if ( prev.is( ".ui-li-divider" ) ) {
 								prev = prev.prev();
 							}
 
@@ -186,7 +186,7 @@ define( [
 						case 40:
 							next = li.next();
 
-							if( next.is( ".ui-li-divider" ) ) {
+							if ( next.is( ".ui-li-divider" ) ) {
 								next = next.next();
 							}
 
@@ -236,8 +236,8 @@ define( [
 				});
 
 				// Close button on small overlays
-				if( self.isMultiple ){
-					self.headerClose.click( function() {
+				if ( self.isMultiple ) {
+					self.headerClose.click(function() {
 						if ( self.menuType === "overlay" ) {
 							self.close();
 							return false;
@@ -261,10 +261,10 @@ define( [
 			},
 
 			selected: function() {
-				return this._selectOptions().filter( ":selected:not(:jqmData(placeholder='true'))" );
+				return this._selectOptions().filter( ":selected:not( :jqmData(placeholder='true') )" );
 			},
 
-			refresh: function( forceRebuild , foo ){
+			refresh: function( forceRebuild , foo ) {
 				var self = this,
 				select = this.element,
 				isMultiple = this.isMultiple,
@@ -294,7 +294,7 @@ define( [
 							if ( self.isMultiple ) {
 								item.find( ".ui-icon" ).removeClass( "ui-icon-checkbox-off" ).addClass( "ui-icon-checkbox-on" );
 							} else {
-								if( item.is( ".ui-selectmenu-placeholder" ) ) {
+								if ( item.is( ".ui-selectmenu-placeholder" ) ) {
 									item.next().addClass( $.mobile.activeBtnClass );
 								} else {
 									item.addClass( $.mobile.activeBtnClass );
@@ -353,7 +353,7 @@ define( [
 				function focusMenuItem() {
 					var selector = self.list.find( "." + $.mobile.activeBtnClass + " a" );
 					if ( selector.length === 0 ) {
-						selector = self.list.find( "li.ui-btn:not(:jqmData(placeholder='true')) a" );
+						selector = self.list.find( "li.ui-btn:not( :jqmData(placeholder='true') ) a" );
 					}
 					selector.first().focus().closest( "li" ).addClass( "ui-btn-down-" + widget.options.theme );
 				}
@@ -412,7 +412,7 @@ define( [
 
 				self.list.empty().filter( ".ui-listview" ).listview( "destroy" );
 
-				var $options = self.select.find("option"),
+				var $options = self.select.find( "option" ),
 					numOptions = $options.length,
 					select = this.select[ 0 ],
 					dataPrefix = 'data-' + $.mobile.ns,
@@ -424,32 +424,32 @@ define( [
 					isPlaceholderItem = false,
 					optGroup;
 
-				for (var i = 0; i < numOptions;i++, isPlaceholderItem = false){
+				for (var i = 0; i < numOptions;i++, isPlaceholderItem = false) {
 					var option = $options[i],
-						$option = $(option),
+						$option = $( option ),
 						parent = option.parentNode,
 						text = $option.text(),
-						anchor  = document.createElement('a'),
+						anchor  = document.createElement( 'a' ),
 						classes = [];
 
-					anchor.setAttribute('href','#');
-					anchor.appendChild(document.createTextNode(text));
+					anchor.setAttribute( 'href', '#' );
+					anchor.appendChild( document.createTextNode( text ) );
 
 					// Are we inside an optgroup?
-					if (parent !== select && parent.nodeName.toLowerCase() === "optgroup"){
-						var optLabel = parent.getAttribute('label');
-						if ( optLabel !== optGroup) {
-							var divider = document.createElement('li');
-							divider.setAttribute(dataRoleAttr,'list-divider');
-							divider.setAttribute('role','option');
-							divider.setAttribute('tabindex','-1');
-							divider.appendChild(document.createTextNode(optLabel));
-							fragment.appendChild(divider);
+					if ( parent !== select && parent.nodeName.toLowerCase() === "optgroup" ) {
+						var optLabel = parent.getAttribute( 'label' );
+						if ( optLabel !== optGroup ) {
+							var divider = document.createElement( 'li' );
+							divider.setAttribute( dataRoleAttr, 'list-divider' );
+							divider.setAttribute( 'role', 'option' );
+							divider.setAttribute( 'tabindex', '-1' );
+							divider.appendChild( document.createTextNode( optLabel ) );
+							fragment.appendChild( divider );
 							optGroup = optLabel;
 						}
 					}
 
-					if (needPlaceholder && (!option.getAttribute( "value" ) || text.length === 0 || $option.jqmData( "placeholder" ))) {
+					if ( needPlaceholder && ( !option.getAttribute( "value" ) || text.length === 0 || $option.jqmData( "placeholder" ) ) ) {
 						needPlaceholder = false;
 						isPlaceholderItem = true;
 
@@ -468,19 +468,19 @@ define( [
 						classes.push( "ui-disabled" );
 						item.setAttribute('aria-disabled',true);
 					}
-					item.setAttribute(dataIndexAttr,i);
-					item.setAttribute(dataIconAttr,dataIcon);
+					item.setAttribute( dataIndexAttr,i );
+					item.setAttribute( dataIconAttr, dataIcon );
 					if ( isPlaceholderItem ) {
 						item.setAttribute( dataPlaceholderAttr, true );
 					}
-					item.className = classes.join(" ");
-					item.setAttribute('role','option');
-					anchor.setAttribute('tabindex','-1');
-					item.appendChild(anchor);
-					fragment.appendChild(item);
+					item.className = classes.join( " " );
+					item.setAttribute( 'role', 'option' );
+					anchor.setAttribute( 'tabindex', '-1' );
+					item.appendChild( anchor );
+					fragment.appendChild( item );
 				}
 
-				self.list[0].appendChild(fragment);
+				self.list[0].appendChild( fragment );
 
 				// Hide header if it's not a multiselect and there's no placeholder
 				if ( !this.isMultiple && !placeholder.length ) {
@@ -493,7 +493,7 @@ define( [
 				self.list.listview();
 			},
 
-			_button: function(){
+			_button: function() {
 				return $( "<a>", {
 					"href": "#",
 					"role": "button",
@@ -508,12 +508,12 @@ define( [
 		});
 	};
 
-	// issue #3894 - core doesn't triggered events on disabled delegates
-	$( document ).bind( "selectmenubeforecreate", function( event ){
+	// issue #3894 - core doesn't trigger events on disabled delegates
+	$( document ).bind( "selectmenubeforecreate", function( event ) {
 		var selectmenuWidget = $( event.target ).data( "selectmenu" );
 
-		if( !selectmenuWidget.options.nativeMenu &&
-				selectmenuWidget.element.parents(":jqmData(role='popup')").length === 0 ){
+		if ( !selectmenuWidget.options.nativeMenu &&
+				selectmenuWidget.element.parents( ":jqmData(role='popup')" ).length === 0 ) {
 			extendSelect( selectmenuWidget );
 		}
 	});
