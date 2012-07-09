@@ -32,7 +32,7 @@ $.mobile.media = (function() {
 			//must set type for IE!
 			styleBlock.type = "text/css";
 
-			if ( styleBlock.styleSheet  ){
+			if ( styleBlock.styleSheet ) {
 				styleBlock.styleSheet.cssText = cssrule;
 			} else {
 				styleBlock.appendChild( document.createTextNode(cssrule) );

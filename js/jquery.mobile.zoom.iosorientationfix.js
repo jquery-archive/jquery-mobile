@@ -5,17 +5,17 @@
 
 define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.zoom" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
-( function( $, window ) {
+(function( $, window ) {
 
 	// This fix addresses an iOS bug, so return early if the UA claims it's something else.
-	if( !(/iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1 ) ){
+	if ( !(/iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1 ) ) {
 		return;
 	}
 
   var zoom = $.mobile.zoom,
 		evt, x, y, z, aig;
 
-  function checkTilt( e ){
+  function checkTilt( e ) {
 		evt = e.originalEvent;
 		aig = evt.accelerationIncludingGravity;
 
@@ -24,11 +24,11 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.zoom" ], function( 
 		z = Math.abs( aig.z );
 
 		// If portrait orientation and in one of the danger zones
-    if( !window.orientation && ( x > 7 || ( ( z > 6 && y < 8 || z < 8 && y > 6 ) && x > 5 ) ) ){
-			if( zoom.enabled ){
+    if ( !window.orientation && ( x > 7 || ( ( z > 6 && y < 8 || z < 8 && y > 6 ) && x > 5 ) ) ) {
+			if ( zoom.enabled ) {
 				zoom.disable();
 			}
-    }	else if( !zoom.enabled ){
+    }	else if ( !zoom.enabled ) {
 			zoom.enable();
     }
   }

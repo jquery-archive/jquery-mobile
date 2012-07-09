@@ -19,7 +19,7 @@ function propExists( prop ) {
 	var uc_prop = prop.charAt( 0 ).toUpperCase() + prop.substr( 1 ),
 		props = ( prop + " " + vendors.join( uc_prop + " " ) + uc_prop ).split( " " );
 
-	for ( var v in props ){
+	for ( var v in props ) {
 		if ( fbCSS[ props[ v ] ] !== undefined ) {
 			return true;
 		}
@@ -27,7 +27,7 @@ function propExists( prop ) {
 }
 
 function validStyle( prop, value, check_vend ) {
-	var div = document.createElement('div'),
+	var div = document.createElement( 'div' ),
 		uc = function( txt ) {
 			return txt.charAt( 0 ).toUpperCase() + txt.substr( 1 );
 		},
@@ -41,7 +41,7 @@ function validStyle( prop, value, check_vend ) {
 
 			div.setAttribute( "style", vend_prop );
 
-			if( !!div.style[ propStyle ] ) {
+			if ( !!div.style[ propStyle ] ) {
 				ret = true;
 			}
 		},
@@ -86,22 +86,22 @@ function baseTagTest() {
 
 // Thanks Modernizr
 function cssPointerEventsTest() {
-	var element = document.createElement('x'),
+	var element = document.createElement( 'x' ),
 		documentElement = document.documentElement,
 		getComputedStyle = window.getComputedStyle,
 		supports;
 
-	if( !( 'pointerEvents' in element.style ) ){
+	if ( !( 'pointerEvents' in element.style ) ) {
 		return false;
 	}
 
 	element.style.pointerEvents = 'auto';
 	element.style.pointerEvents = 'x';
-    documentElement.appendChild(element);
+	documentElement.appendChild( element );
 	supports = getComputedStyle &&
-    getComputedStyle( element, '' ).pointerEvents === 'auto';
+	getComputedStyle( element, '' ).pointerEvents === 'auto';
 	documentElement.removeChild( element );
-    return !!supports;
+	return !!supports;
 }
 
 
@@ -141,7 +141,7 @@ fakeBody.remove();
 // or that generally work better browsing in regular http for full page refreshes (Opera Mini)
 // Note: This detection below is used as a last resort.
 // We recommend only using these detection methods when all other more reliable/forward-looking approaches are not possible
-var nokiaLTE7_3 = (function(){
+var nokiaLTE7_3 = (function() {
 
 	var ua = window.navigator.userAgent;
 
@@ -154,7 +154,7 @@ var nokiaLTE7_3 = (function(){
 
 // Support conditions that must be met in order to proceed
 // default enhanced qualifications are media query support OR IE 7+
-$.mobile.gradeA = function(){
+$.mobile.gradeA = function() {
 	return $.support.mediaquery || $.mobile.browser.ie && $.mobile.browser.ie >= 7;
 };
 

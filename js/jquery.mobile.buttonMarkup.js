@@ -7,7 +7,7 @@
 
 define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.vmouse" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
-( function( $, undefined ) {
+(function( $, undefined ) {
 
 $.fn.buttonMarkup = function( options ) {
 	var $workingSet = this,
@@ -233,10 +233,10 @@ var attachEvents = function() {
 				}
 			}
 		},
-		"focusin focus": function( event ){
+		"focusin focus": function( event ) {
 			$( closestEnabledButton( event.target ) ).addClass( $.mobile.focusClass );
 		},
-		"focusout blur": function( event ){
+		"focusout blur": function( event ) {
 			$( closestEnabledButton( event.target ) ).removeClass( $.mobile.focusClass );
 		}
 	});
@@ -246,7 +246,7 @@ var attachEvents = function() {
 
 //links in bars, or those with  data-role become buttons
 //auto self-init widgets
-$( document ).bind( "pagecreate create", function( e ){
+$( document ).bind( "pagecreate create", function( e ) {
 
 	$( ":jqmData(role='button'), .ui-bar > a, .ui-header > a, .ui-footer > a, .ui-bar > :jqmData(role='controlgroup') > a", e.target )
 		.not( "button, input, .ui-btn, :jqmData(role='none'), :jqmData(role='nojs')" )

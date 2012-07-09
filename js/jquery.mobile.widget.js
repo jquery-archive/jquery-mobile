@@ -56,7 +56,7 @@ $.widget( "mobile.widget", {
 			// Currently the keepNative value is defined on the page prototype so
 			// the method is as well
 			page = $.mobile.closestPageData( $widgetElements );
-			keepNative = (page && page.keepNativeSelector()) || "";
+			keepNative = ( page && page.keepNativeSelector()) || "";
 
 			$widgetElements = $widgetElements.not( keepNative );
 		}

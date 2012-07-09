@@ -125,12 +125,12 @@ define( [ "jquery", "text!../version.txt" ], function( $, __version__ ) {
 			// prevent scrollstart and scrollstop events
 			$.event.special.scrollstart.enabled = false;
 
-			setTimeout(function() {
+			setTimeout( function() {
 				window.scrollTo( 0, ypos );
 				$( document ).trigger( "silentscroll", { x: 0, y: ypos });
 			}, 20 );
 
-			setTimeout(function() {
+			setTimeout( function() {
 				$.event.special.scrollstart.enabled = true;
 			}, 150 );
 		},
@@ -185,8 +185,8 @@ define( [ "jquery", "text!../version.txt" ], function( $, __version__ ) {
 		// doing a similar parent node traversal to the one found in the inherited theme code above
 		closestPageData: function( $target ) {
 			return $target
-				.closest(':jqmData(role="page"), :jqmData(role="dialog")')
-				.data("page");
+				.closest( ':jqmData(role="page"), :jqmData(role="dialog")' )
+				.data( "page" );
 		},
 
 		enhanceable: function( $set ) {
@@ -198,7 +198,7 @@ define( [ "jquery", "text!../version.txt" ], function( $, __version__ ) {
 		},
 
 		haveParents: function( $set, attr ) {
-			if( !$.mobile.ignoreContentEnabled ){
+			if ( !$.mobile.ignoreContentEnabled ) {
 				return $set;
 			}
 
@@ -230,7 +230,7 @@ define( [ "jquery", "text!../version.txt" ], function( $, __version__ ) {
 			return $newSet;
 		},
 
-		getScreenHeight: function(){
+		getScreenHeight: function() {
 			// Native innerHeight returns more accurate value for this across platforms,
 			// jQuery version is here as a normalized fallback for platforms like Symbian
 			return window.innerHeight || $( window ).height();
@@ -273,25 +273,25 @@ define( [ "jquery", "text!../version.txt" ], function( $, __version__ ) {
 	$.removeWithDependents = function( elem ) {
 		var $elem = $( elem );
 
-		( $elem.jqmData('dependents') || $() ).remove();
+		( $elem.jqmData( 'dependents' ) || $() ).remove();
 		$elem.remove();
 	};
 
 	$.fn.addDependents = function( newDependents ) {
-		$.addDependents( $(this), newDependents );
+		$.addDependents( $( this ), newDependents );
 	};
 
 	$.addDependents = function( elem, newDependents ) {
-		var dependents = $(elem).jqmData( 'dependents' ) || $();
+		var dependents = $( elem ).jqmData( 'dependents' ) || $();
 
-		$(elem).jqmData( 'dependents', $.merge(dependents, newDependents) );
+		$( elem ).jqmData( 'dependents', $.merge( dependents, newDependents ) );
 	};
 
 	// note that this helper doesn't attempt to handle the callback
 	// or setting of an html elements text, its only purpose is
 	// to return the html encoded version of the text in all cases. (thus the name)
 	$.fn.getEncodedText = function() {
-		return $( "<div/>" ).text( $(this).text() ).html();
+		return $( "<div/>" ).text( $( this ).text() ).html();
 	};
 
 	// fluent helper function for the mobile namespaced equivalent

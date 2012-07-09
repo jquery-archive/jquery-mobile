@@ -5,7 +5,7 @@
 
 define( [ "jquery", "./jquery.mobile.core" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
-( function( $ ) {
+(function( $ ) {
 	var	meta = $( "meta[name=viewport]" ),
 		initialContent = meta.attr( "content" ),
 		disabledZoom = initialContent + ",maximum-scale=1, user-scalable=no",
@@ -16,21 +16,21 @@ define( [ "jquery", "./jquery.mobile.core" ], function( $ ) {
 		enabled: !disabledInitially,
 		locked: false,
 		disable: function( lock ) {
-			if( !disabledInitially && !$.mobile.zoom.locked ){
+			if ( !disabledInitially && !$.mobile.zoom.locked ) {
 				meta.attr( "content", disabledZoom );
 				$.mobile.zoom.enabled = false;
 				$.mobile.zoom.locked = lock || false;
 			}
 		},
 		enable: function( unlock ) {
-			if( !disabledInitially && ( !$.mobile.zoom.locked || unlock === true ) ){
+			if ( !disabledInitially && ( !$.mobile.zoom.locked || unlock === true ) ) {
 				meta.attr( "content", enabledZoom );
 				$.mobile.zoom.enabled = true;
 				$.mobile.zoom.locked = false;
 			}
 		},
 		restore: function() {
-			if( !disabledInitially ){
+			if ( !disabledInitially ) {
 				meta.attr( "content", initialContent );
 				$.mobile.zoom.enabled = true;
 			}

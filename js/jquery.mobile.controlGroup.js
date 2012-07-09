@@ -33,13 +33,13 @@ $.fn.controlgroup = function( options ) {
 
 		// Replace legend with more stylable replacement div
 		if ( groupheading.length ) {
-			$( "<div role='heading' class='ui-controlgroup-label'>" + groupheading.html() + "</div>" ).insertBefore( $el.children(0) );
+			$( "<div role='heading' class='ui-controlgroup-label'>" + groupheading.html() + "</div>" ).insertBefore( $el.children( 0 ) );
 			groupheading.remove();
 		}
 
 		$el.addClass( "ui-corner-all ui-controlgroup ui-controlgroup-" + o.direction );
 
-		flipClasses( $el.find( ".ui-btn" + ( o.excludeInvisible ? ":visible" : "" ) ).not('.ui-slider-handle'), flCorners );
+		flipClasses( $el.find( ".ui-btn" + ( o.excludeInvisible ? ":visible" : "" ) ).not( '.ui-slider-handle' ), flCorners );
 		flipClasses( $el.find( ".ui-btn-inner" ), flCorners );
 
 		if ( o.shadow ) {

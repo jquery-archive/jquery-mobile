@@ -10,10 +10,10 @@ define( [ "jquery", "./jquery.mobile.core" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
-var createHandler = function( sequential ){
+var createHandler = function( sequential ) {
 
 	// Default to sequential
-	if( sequential === undefined ){
+	if ( sequential === undefined ) {
 		sequential = true;
 	}
 
@@ -27,10 +27,10 @@ var createHandler = function( sequential ){
 			maxTransitionOverride = $.mobile.maxTransitionWidth !== false && $( window ).width() > $.mobile.maxTransitionWidth,
 			none = !$.support.cssTransitions || maxTransitionOverride || !name || name === "none" || Math.max( $( window ).scrollTop(), toScroll ) > $.mobile.getMaxScrollForTransition(),
 			toPreClass = " ui-page-pre-in",
-			toggleViewportClass = function(){
+			toggleViewportClass = function() {
 				$.mobile.pageContainer.toggleClass( "ui-mobile-viewport-transitioning viewport-" + name );
 			},
-			scrollPage = function(){
+			scrollPage = function() {
 				// By using scrollTo instead of silentScroll, we can keep things better in order
 				// Just to be precautios, disable scrollstart listening like silentScroll would
 				$.event.special.scrollstart.enabled = false;
@@ -38,18 +38,18 @@ var createHandler = function( sequential ){
 				window.scrollTo( 0, toScroll );
 
 				// reenable scrollstart listening like silentScroll would
-				setTimeout(function() {
+				setTimeout( function() {
 					$.event.special.scrollstart.enabled = true;
 				}, 150 );
 			},
-			cleanFrom = function(){
+			cleanFrom = function() {
 				$from
 					.removeClass( $.mobile.activePageClass + " out in reverse " + name )
 					.height( "" );
 			},
-			startOut = function(){
+			startOut = function() {
 				// if it's not sequential, call the doneOut transition to start the TO page animating in simultaneously
-				if( !sequential ){
+				if ( !sequential ) {
 					doneOut();
 				}
 				else {
@@ -59,7 +59,7 @@ var createHandler = function( sequential ){
 				// Set the from page's height and start it transitioning out
 				// Note: setting an explicit height helps eliminate tiling in the transitions
 				$from
-					.height( screenHeight + $(window ).scrollTop() )
+					.height( screenHeight + $( window ).scrollTop() )
 					.addClass( name + " out" + reverseClass );
 			},
 
@@ -72,10 +72,10 @@ var createHandler = function( sequential ){
 				startIn();
 			},
 
-			startIn = function(){
+			startIn = function() {
 
 				// Prevent flickering in phonegap container: see comments at #4024 regarding iOS
-				$to.css("z-index", -10);
+				$to.css( "z-index", -10 );
 
 				$to.addClass( $.mobile.activePageClass + toPreClass );
 
@@ -87,10 +87,10 @@ var createHandler = function( sequential ){
 
 				scrollPage();
 
-				// Restores visibility of the new page: added together with $to.css("z-index", -10);
-				$to.css("z-index", "");
+				// Restores visibility of the new page: added together with $to.css( "z-index", -10 );
+				$to.css( "z-index", "" );
 
-				if( !none ){
+				if ( !none ) {
 					$to.animationComplete( doneIn );
 				}
 
@@ -98,7 +98,7 @@ var createHandler = function( sequential ){
 					.removeClass( toPreClass )
 					.addClass( name + " in" + reverseClass );
 
-				if( none ){
+				if ( none ) {
 					doneIn();
 				}
 
@@ -108,7 +108,7 @@ var createHandler = function( sequential ){
 
 				if ( !sequential ) {
 
-					if( $from ){
+					if ( $from ) {
 						cleanFrom();
 					}
 				}
@@ -121,7 +121,7 @@ var createHandler = function( sequential ){
 
 				// In some browsers (iOS5), 3D transitions block the ability to scroll to the desired location during transition
 				// This ensures we jump to that spot after the fact, if we aren't there already.
-				if( $( window ).scrollTop() !== toScroll ){
+				if ( $( window ).scrollTop() !== toScroll ) {
 					scrollPage();
 				}
 
@@ -162,7 +162,7 @@ $.mobile.transitionFallbacks = {};
 
 // If transition is defined, check if css 3D transforms are supported, and if not, if a fallback is specified
 $.mobile._maybeDegradeTransition = function( transition ) {
-		if( transition && !$.support.cssTransform3d && $.mobile.transitionFallbacks[ transition ] ){
+		if ( transition && !$.support.cssTransform3d && $.mobile.transitionFallbacks[ transition ] ) {
 			transition = $.mobile.transitionFallbacks[ transition ];
 		}
 
