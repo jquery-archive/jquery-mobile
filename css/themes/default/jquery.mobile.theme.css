@@ -16,10 +16,10 @@
 	background-image:      -o-linear-gradient( #3c3c3c /*{a-bar-background-start}*/, #111 /*{a-bar-background-end}*/); /* Opera 11.10+ */
 	background-image:         linear-gradient( #3c3c3c /*{a-bar-background-start}*/, #111 /*{a-bar-background-end}*/);
 }
-.ui-bar-a, 
-.ui-bar-a input, 
-.ui-bar-a select, 
-.ui-bar-a textarea, 
+.ui-bar-a,
+.ui-bar-a input,
+.ui-bar-a select,
+.ui-bar-a textarea,
 .ui-bar-a button {
 	font-family: Helvetica, Arial, sans-serif /*{global-font-family}*/;
 }
@@ -1094,19 +1094,19 @@ a.ui-link-inherit {
 /* radius clip workaround for cleaning up corner trapping */
 .ui-corner-tl,
 .ui-corner-tr,
-.ui-corner-bl, 
+.ui-corner-bl,
 .ui-corner-br,
 .ui-corner-top,
-.ui-corner-bottom, 
+.ui-corner-bottom,
 .ui-corner-right,
 .ui-corner-left,
 .ui-corner-all,
 .ui-btn-corner-tl,
 .ui-btn-corner-tr,
-.ui-btn-corner-bl, 
+.ui-btn-corner-bl,
 .ui-btn-corner-br,
 .ui-btn-corner-top,
-.ui-btn-corner-bottom, 
+.ui-btn-corner-bottom,
 .ui-btn-corner-right,
 .ui-btn-corner-left,
 .ui-btn-corner-all {
