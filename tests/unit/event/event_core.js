@@ -487,17 +487,15 @@
 		$( window ).trigger( "resize" );
 	});
 
-	asyncTest( "throttledresize event prevents resize events from firing more frequently than 250ms", function(){
+	asyncTest( "throttledresize event prevents resize events from firing more frequently than one per 250ms", function(){
 		var called = 0;
 
 		$(window).bind( "throttledresize", function(){
 			called++;
 		});
 
-		// NOTE 250 ms * 3 = 750ms which is plenty of time
-		// for the events to trigger before the next test, but
-		// not so much time that the second resize will be triggered
-		// before the call to same() is made
+		// NOTE 400 ms between two triggers and the check for one callback
+		// is enough time for the first to fire but not enough for a second
 		$.testHelper.sequence([
 			function(){
 				$(window).trigger( "resize" ).trigger( "resize" );
@@ -509,7 +507,7 @@
 			function(){
 				start();
 			}
-		], 250);
+		], 400);
 	});
 
 	asyncTest( "throttledresize event promises that a held call will execute only once after throttled timeout", function(){
