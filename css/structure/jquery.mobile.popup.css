@@ -110,10 +110,6 @@
 	height: auto;
 	vertical-align: middle;
 }
-.ui-popup > iframe {
-	max-width: 100%;
-	vertical-align: middle;
-}
 
 @media all and (min-width: 450px){
 	.ui-popup .ui-field-contain label.ui-submit,
