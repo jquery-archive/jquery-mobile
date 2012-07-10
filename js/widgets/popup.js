@@ -211,7 +211,7 @@ define( [ "jquery",
 
 			return {
 				x: fitSegmentInsideSegment( rc.cx, menuSize.cx, rc.l, x ),
-				y: fitSegmentInsideSegment( rc.cy, menuSize.cy, rc.t, y )
+				y: Math.max( fitSegmentInsideSegment( rc.cy, menuSize.cy, rc.t, y ), 0 )
 			};
 		},
 
