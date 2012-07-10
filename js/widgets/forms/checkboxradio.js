@@ -142,7 +142,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 	},
 
 	_cacheVals: function() {
-		this._getInputSet().each( function() {
+		this._getInputSet().each(function() {
 			$( this ).jqmData( "cacheVal", this.checked );
 		});
 	},
@@ -160,7 +160,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 	_updateAll: function() {
 		var self = this;
 
-		this._getInputSet().each( function() {
+		this._getInputSet().each(function() {
 			var $this = $( this );
 
 			if ( this.checked || self.inputtype === "checkbox" ) {
