@@ -1379,12 +1379,7 @@ define( [
 				//this may need to be more specific as we use data-rel more
 				role = $link.attr( "data-" + $.mobile.ns + "rel" ) || undefined;
 
-			if ( role === "popup" ) {
-				$.mobile.popup.handleLink( $link );
-			}
-			else {
-				$.mobile.changePage( href, { transition: transition, reverse: reverse, role: role } );
-			}
+			$.mobile.changePage( href, { transition: transition, reverse: reverse, role: role, link: $link } );
 			event.preventDefault();
 		});
 
