@@ -54,9 +54,6 @@
 	padding: 0;
 	outline: 0;
 }
-.ui-popup {
-	position: relative;
-}
 
 .ui-popup > p,
 .ui-popup > h1,
