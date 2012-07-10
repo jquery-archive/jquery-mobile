@@ -73,7 +73,7 @@ Note that if you have the appropriate version of [grunt](https://github.com/cowb
 
 If you want to use the `docs` and `zip` targets you will need bash and they can be run with the following
 
-   grunt docs # or `grunt zip`
+   `grunt docs #` or `grunt zip`
 
 ### JavaScript
 
