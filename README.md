@@ -22,6 +22,8 @@ Also, in the interest of creating more readable issues please include code snipp
 
 Before opening a new ticket check if the same or a similar issue already has been reported. Tip: Besides the search tool of the issue tracker you can filter issues by label.
 
+The jQuery Mobile [ThemeRoller](https://github.com/jquery/web-jquery-mobile-theme-roller) and [Download Builder](https://github.com/jquery/jquery-mobile-builder) have their own repo where you can report issues.
+
 ## Pull Requests
 
 When submitting a pull request for review there are a few important steps you can take to ensure that it gets reviewed quickly and increase the chances that it will be merged (in order of descending importance):
