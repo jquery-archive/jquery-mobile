@@ -421,7 +421,7 @@ define( [ "jquery",
 		_navHook: function( whenHooked ) {
 			var self = this, dstHash;
 			function realInstallListener() {
-				$( window ).one( "hashchange.popup", function() {
+				$( window ).one( "navigate.popup", function() {
 					self._onHashChange();
 				});
 				whenHooked();
@@ -458,7 +458,7 @@ define( [ "jquery",
 				if ( hasHash ) {
 					realInstallListener();
 				} else {
-					$( window ).one( "hashchange.popupBinder", function() {
+					$( window ).one( "navigate.popupBinder", function() {
 						realInstallListener();
 					});
 					dstHash = activeEntry.url + $.mobile.dialogHashKey;
@@ -476,7 +476,7 @@ define( [ "jquery",
 
 		_navUnhook: function( abort ) {
 			if ( abort ) {
-				$( window ).unbind( "hashchange.popupBinder hashchange.popup" );
+				$( window ).unbind( "navigate.popupBinder navigate.popup" );
 			}
 
 			if ( $.mobile.hashListeningEnabled && !abort ) {
