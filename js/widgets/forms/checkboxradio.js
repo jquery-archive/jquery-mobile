@@ -68,12 +68,12 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 		});
 
 		// Wrap the input + label in a div
-		var wrapper = document.createElement('div');
+		var wrapper = document.createElement( 'div' );
 		wrapper.className = 'ui-' + inputtype;
 
 		input.add( label ).wrapAll( wrapper );
 
-		label.bind({
+		label.filter( 'a' ).bind({
 			vmouseover: function( event ) {
 				if ( $( this ).parent().is( ".ui-disabled" ) ) {
 					event.stopPropagation();
@@ -119,7 +119,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 					// Adds checked attribute to checked input when keyboard is used
 					if ( $this.is( ":checked" ) ) {
 
-						$this.prop( "checked", true);
+						$this.prop( "checked", true );
 						self._getInputSet().not( $this ).prop( "checked", false );
 					} else {
 
