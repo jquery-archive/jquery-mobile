@@ -109,7 +109,7 @@ define( [ "jquery",
 		},
 
 		_resizeScreen: function() {
-			this._ui.screen.height( Math.max( $( window ).height(), this._page.height() ) );
+			this._ui.screen.height( Math.max( $( window ).height(), $( document ).height() ) );
 		},
 
 		_applyTheme: function( dst, theme ) {
@@ -200,7 +200,7 @@ define( [ "jquery",
 					cx: $( window ).width() - tol.l - tol.r,
 					cy: $( window ).height() - tol.t - tol.b
 				},
-				menuSize;
+				menuSize, ret;
 
 			// Clamp the width of the menu before grabbing its size
 			this._ui.container.css( "max-width", rc.cx );
@@ -209,10 +209,20 @@ define( [ "jquery",
 				cy: this._ui.container.outerHeight( true )
 			};
 
-			return {
+			// Center the menu over the desired coordinates, while not going outside
+			// the window tolerances. This will center wrt. the window if the popup is too large.
+			ret = {
 				x: fitSegmentInsideSegment( rc.cx, menuSize.cx, rc.l, x ),
-				y: Math.max( fitSegmentInsideSegment( rc.cy, menuSize.cy, rc.t, y ), 0 )
+				y: fitSegmentInsideSegment( rc.cy, menuSize.cy, rc.t, y )
 			};
+
+			// Make sure the top of the menu is visible
+			ret.y = Math.max( 0, ret.y );
+			// If the height of the menu is smaller than the height of the document
+			// align the bottom with the bottom of the document
+			ret.y -= Math.min( ret.y, Math.max( 0, ret.y + menuSize.cy - $( document ).height() ) );
+
+			return ret;
 		},
 
 		_immediate: function() {
