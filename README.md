@@ -37,7 +37,7 @@ When submitting a pull request for review there are a few important steps you ca
 
 Taken together, the above reduces the effort that's required of the contributor reviewing your pull request.
 
-### Commit messages 
+### Commit messages
 
 Commit messages should include four components:
 * The WHERE - a single word that categorizes and provides context for the commit and its message, followed by a colon (:). This is typically the name of the plugin being worked on, but sometimes might be something like Build: or Docs:
@@ -49,7 +49,7 @@ Combined into one, here's a full example:
 
         "Dialog: modified the foo to no longer bar. Fixed #1234 - dialog: IE6 crashed when foo is set to bar"
         \WHERE/:\------------- WHAT -------------/.\  WHY #Num /-\---------------- WHY Name ----------------/
-    
+
 
 ## Build/Customization
 
@@ -145,7 +145,7 @@ Once you have your web server setup you can point it at the project directory.
 
 Automated testing forms the backbone of the jQuery Mobile project's QA activities. As a contributor or patch submitter you will be expected to run the test suite for the code your patches affect. Our continuous integration server will address the remainder of the test suite.
 
-There are two primary ways to run the test suite. First, you can run the tests individually by directing your browser to the different test pages associated with the area in which you are working. For example, to run the tests for `js/jquery.mobile.forms.slider.js` visit `$WEB_SERVER/tests/unit/slider/`. To find out which test pages are available you can list them with:
+There are two primary ways to run the test suite. Both of them require a server configured in the previously prescribed manner. The location of which will hereafter be referred to as `$WEB_SERVER`. First, you can run the tests individually by directing your browser to the different test pages associated with the area in which you are working. For example, to run the tests for `js/jquery.mobile.forms.slider.js` visit `$WEB_SERVER/tests/unit/slider/`. To find out which test pages are available you can list them with:
 
     grunt config:test:pages
 
