@@ -1409,6 +1409,9 @@ define( [
 				//transition is false if it's the first page, undefined otherwise (and may be overridden by default)
 				transition = $.mobile.urlHistory.stack.length === 0 ? "none" : undefined,
 
+				// "navigate" event fired to allow others to take advantage of the more robust hashchange handling
+				navEvent = new $.Event( "navigate" ),
+
 				// default options for the changPage calls made after examining the current state
 				// of the page and the hash
 				changePageOptions = {
@@ -1419,6 +1422,13 @@ define( [
 
 			if ( 0 === urlHistory.stack.length ) {
 				urlHistory.initialDst = to;
+			}
+
+			// We should probably fire the "navigate" event from those places that make calls to _handleHashChange,
+			// and have _handleHashChange hook into the "navigate" event instead of triggering it here
+			$.mobile.pageContainer.trigger( navEvent );
+			if ( navEvent.isDefaultPrevented() ) {
+				return;
 			}
 
 			//if listening is disabled (either globally or temporarily), or it's a dialog hash
