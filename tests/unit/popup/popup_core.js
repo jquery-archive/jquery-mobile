@@ -5,7 +5,7 @@
 
 	module( "jquery.mobile.popup.js" );
 
-	$.extend($.testHelper, { 
+	$.extend($.testHelper, {
 
 // detailedEventCascade: call a function and expect a series of events to be triggered (or not to be triggered), and guard
 // with a timeout against getting stood up. Record the result (timed out / was triggered) for each event, and the order
@@ -221,11 +221,11 @@
 
 			{
 				closed: { src: $( "#test-popup" ), event: "closed.hashInteractStep2" },
-				hashchange: { src: $( window ), event: "hashchange.hashInteractStep2" }
+				navigate: { src: $.mobile.pageContainer, event: "navigate.hashInteractStep2" }
 			},
 
 			function( result ) {
-				ok( !result.hashchange.timedOut, "Closing a popup from a non-dialogHashKey location causes a hashchange event" );
+				ok( !result.navigate.timedOut, "Closing a popup from a non-dialogHashKey location causes a 'navigate' event" );
 				ok( decodeURIComponent( location.href ) === baseUrl, "location.href has been restored after the popup" );
 				ok( $.mobile.urlHistory.activeIndex === activeIndex, "$.mobile.urlHistory has been restored correctly" );
 				setTimeout( function() { start(); }, 300 );
@@ -286,11 +286,11 @@
 
 			{
 				closed: { src: $( "#test-popup" ), event: "closed.reuseStep5" },
-				hashchange: { src: $( window ), event: "hashchange.reuseStep5" }
+				navigate: { src: $.mobile.pageContainer, event: "navigate.reuseStep5" }
 			},
 
 			function( result ) {
-				ok( !result.hashchange.timedOut, "Closing a popup from a dialogHashKey location causes a hashchange" );
+				ok( !result.navigate.timedOut, "Closing a popup from a dialogHashKey location causes a 'navigate'" );
 				setTimeout( function() { start(); }, 300 );
 			}
 		]);
