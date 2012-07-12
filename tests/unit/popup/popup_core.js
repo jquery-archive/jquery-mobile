@@ -202,7 +202,7 @@
 
 		$.testHelper.detailedEventCascade([
 			function() {
-				baseUrl = location.href;
+				baseUrl = decodeURIComponent( location.href );
 				activeIndex = $.mobile.urlHistory.activeIndex;
 				$( "#test-popup" ).popup( "open" );
 			},
@@ -214,7 +214,7 @@
 
 			function( result ) {
 				ok( !result.hashchange.timedOut, "Opening a popup from a non-dialogHashKey location causes a hashchange event" );
-				ok( location.href === baseUrl + ( ( baseUrl.indexOf( "#" ) > -1 ) ? "" : "#" ) + $.mobile.dialogHashKey, "location.href has been updated correctly" );
+				ok( decodeURIComponent( location.href ) === baseUrl + ( ( baseUrl.indexOf( "#" ) > -1 ) ? "" : "#" ) + $.mobile.dialogHashKey, "location.href has been updated correctly" );
 				ok( $.mobile.urlHistory.activeIndex === activeIndex + 1, "$.mobile.urlHistory has been advanced correctly" );
 				$( "#test-popup" ).popup( "close" );
 			},
@@ -226,7 +226,7 @@
 
 			function( result ) {
 				ok( !result.hashchange.timedOut, "Closing a popup from a non-dialogHashKey location causes a hashchange event" );
-				ok( location.href === baseUrl, "location.href has been restored after the popup" );
+				ok( decodeURIComponent( location.href ) === baseUrl, "location.href has been restored after the popup" );
 				ok( $.mobile.urlHistory.activeIndex === activeIndex, "$.mobile.urlHistory has been restored correctly" );
 				setTimeout( function() { start(); }, 300 );
 			}
@@ -240,7 +240,7 @@
 
 		$.testHelper.detailedEventCascade([
 			function() {
-				origUrl = location.href;
+				origUrl = decodeURIComponent( location.href );
 				origIndex = $.mobile.urlHistory.activeIndex;
 				$( "#test-popup" ).popup( "open" );
 			},
@@ -267,7 +267,7 @@
 			{ hashchange: { src: $( window ), event: "hashchange.reuseStep3" } },
 
 			function( result ) {
-				baseUrl = location.href;
+				baseUrl = decodeURIComponent( location.href );
 				activeIndex = $.mobile.urlHistory.activeIndex;
 				$( "#test-popup" ).popup( "open" );
 			},
@@ -279,7 +279,7 @@
 
 			function( result ) {
 				ok( result.hashchange.timedOut, "Opening a popup from a dialogHashKey location does not cause a hashchange" );
-				ok( baseUrl === location.href, "Opening a popup from a dialogHashKey location does not cause the location to be modified" );
+				ok( baseUrl === decodeURIComponent( location.href ), "Opening a popup from a dialogHashKey location does not cause the location to be modified" );
 				ok( activeIndex === $.mobile.urlHistory.activeIndex, "Opening a popup from a dialogHashKey location does not cause $.mobile.urlHistory to move" );
 				$( "#test-popup" ).popup( "close" );
 			},
@@ -300,7 +300,7 @@
 	// This should be the case if the previous test has cleaned up correctly.
 	asyncTest( "Opening another page from the popup leaves no trace of the popup in history", function() {
 		var initialActive = $.extend( {}, {}, $.mobile.urlHistory.getActive()),
-		    initialHRef = $.mobile.path.parseUrl( location.href ),
+		    initialHRef = $.mobile.path.parseUrl( decodeURIComponent( location.href ) ),
 		    initialBase = initialHRef.protocol + initialHRef.doubleSlash + initialHRef.authority + initialHRef.directory;
 
 		expect( 6 );
@@ -325,10 +325,10 @@
 			},
 
 			function( result ) {
-				var hRef = $.mobile.path.parseUrl( location.href );
+				var hRef = $.mobile.path.parseUrl( decodeURIComponent( location.href ) );
 				ok( !result.closed.timedOut, "Popup closed" );
 				ok( !result.hashchange.timedOut, "hashchange did occur" );
-				ok( location.href === initialBase + hRef.filename, "New location is exactly the previous location (up to and including path) and the new filename" );
+				ok( decodeURIComponent( location.href ) === initialBase + hRef.filename, "New location is exactly the previous location (up to and including path) and the new filename" );
 				window.history.back();
 			},
 
@@ -357,7 +357,7 @@
 					});
 				}
 
-				ok( location.href === initialHRef.href, "Going back once places the browser on the initial page" );
+				ok( decodeURIComponent( location.href ) === initialHRef.href, "Going back once places the browser on the initial page" );
 				ok( identical, "Going back returns $.mobile.urlHistory to its initial value" );
 				ok( $.mobile.urlHistory.activeIndex === $.mobile.urlHistory.stack.length - 3, "Going back leaves exactly two entries ahead in $.mobile.urlHistory" );
 
