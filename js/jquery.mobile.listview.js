@@ -112,8 +112,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 	// the nodeName from the element every time to ensure we have
 	// a match. Note that this function lives here for now, but may
 	// be moved into $.mobile if other components need a similar method.
-	_findFirstElementByTagName: function( ele, nextProp, lcName, ucName )
-	{
+	_findFirstElementByTagName: function( ele, nextProp, lcName, ucName ) {
 		var dict = {};
 		dict[ lcName ] = dict[ ucName ] = true;
 		while ( ele ) {
@@ -124,8 +123,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		}
 		return null;
 	},
-	_getChildrenByTagName: function( ele, lcName, ucName )
-	{
+	_getChildrenByTagName: function( ele, lcName, ucName ) {
 		var results = [],
 			dict = {};
 		dict[ lcName ] = dict[ ucName ] = true;
@@ -139,8 +137,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		return $( results );
 	},
 
-	_addThumbClasses: function( containers )
-	{
+	_addThumbClasses: function( containers ) {
 		var i, img, len = containers.length;
 		for ( i = 0; i < len; i++ ) {
 			img = $( this._findFirstElementByTagName( containers[ i ].firstChild, "nextSibling", "img", "IMG" ) );
@@ -252,7 +249,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				countParent = item.is( ".ui-li-static:first" ) ? item : item.find( ".ui-link-inherit" );
 
 				countParent.addClass( "ui-li-jsnumbering" )
-					.prepend( "<span class='ui-li-dec'>" + (counter++) + ". </span>" );
+					.prepend( "<span class='ui-li-dec'>" + ( counter++ ) + ". </span>" );
 			}
 
 			// Instead of setting item class directly on the list item and its

@@ -9,7 +9,7 @@
 .ui-li-divider .ui-btn-text, .ui-li-static .ui-btn-text { font-size: 16px; }
 .ui-li-divider .ui-mini .ui-btn-text, .ui-li-static .ui-mini .ui-btn-text { font-size: inherit; }
 .ui-li-divider { counter-reset: listnumbering; }
-ol.ui-listview .ui-link-inherit:before, ol.ui-listview .ui-li-static:before, .ui-li-dec { font-size: .8em; display: inline-block; padding-right: .3em; font-weight: normal;counter-increment: listnumbering; content: counter(listnumbering) ". "; }
+ol.ui-listview .ui-link-inherit:before, ol.ui-listview .ui-li-static:before, .ui-li-dec { font-size: .8em; display: inline-block; padding-right: .3em; font-weight: normal; counter-increment: listnumbering; content: counter(listnumbering) ". "; }
 ol.ui-listview .ui-li-jsnumbering:before { content: "" !important; } /* to avoid chance of duplication */
 .ui-listview-inset .ui-li { border-right-width: 1px; border-left-width: 1px; }
 .ui-li:last-child, .ui-li.ui-field-contain:last-child { border-bottom-width: 1px; }
@@ -48,7 +48,7 @@ ol.ui-listview .ui-li-jsnumbering:before { content: "" !important; } /* to avoid
 .ui-listview-filter .ui-input-search { margin: 5px; width: auto; display: block; }
 
 .ui-listview-filter-inset { margin: -15px -5px -15px -5px; background: transparent; }
-.ui-li.ui-screen-hidden{display:none;}
+.ui-li.ui-screen-hidden{ display:none; }
 /* Odd iPad positioning issue. */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
     .ui-li .ui-btn-text { overflow:  visible; }
