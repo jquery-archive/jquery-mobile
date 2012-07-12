@@ -6,7 +6,7 @@ if [ $# -ne 2 ]; then
 fi
 
 format_contributors='%aN%n%cN';
-git whatchanged $1..$2 --pretty=format:"$format_contributors" \
+LC_ALL='C' git whatchanged $1..$2 --pretty=format:"$format_contributors" \
 | sed '/^:/ d' \
 | sed '/^$/ d' \
 | sort \
