@@ -173,8 +173,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		// Check if a start attribute has been set and take a value of 0 into account
 		if ( typeof start !== "undefined" && start !== false ) {
 			if ( !jsCount ) {
-				var startAt = parseFloat( start ) - 1;
-				$list.css( "counter-reset", "listnumbering " + startAt );
+				var startCount = parseFloat( start ) - 1;
+				$list.css( "counter-reset", "listnumbering " + startCount );
 			} else {
 				counter = parseFloat( start );
 			}
@@ -254,8 +254,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
 					//reset counter when a divider heading is encountered
 					if ( typeof start !== "undefined" && start !== false ) {
 						if ( !jsCount ) {
-							var startAt = parseFloat( start ) - 1;
-							item.css( "counter-reset", "listnumbering " + startAt );
+							var newStartCount = parseFloat( start ) - 1;
+							item.css( "counter-reset", "listnumbering " + newStartCount );
 						} else {
 							counter = parseFloat( start );
 						}
