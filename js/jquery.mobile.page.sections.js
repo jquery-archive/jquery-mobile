@@ -52,7 +52,7 @@ $( document ).bind( "pagecreate", function( e ) {
 
 			if( role === "header") {
 				// Right,left buttons
-				$headeranchors	= $this.children( "a" );
+				$headeranchors	= $this.children( "a, button" );
 				leftbtn	= $headeranchors.hasClass( "ui-btn-left" );
 				rightbtn = $headeranchors.hasClass( "ui-btn-right" );
 

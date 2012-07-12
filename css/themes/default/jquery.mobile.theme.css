@@ -669,7 +669,7 @@
 	font-family: Helvetica, Arial, sans-serif /*{global-font-family}*/;
 }
 .ui-body-e .ui-link-inherit {
-	color: 	#333333 /*{e-body-color}*/;
+	color: 	#222222 /*{e-body-color}*/;
 }
 
 .ui-body-e .ui-link {
@@ -871,17 +871,14 @@ a.ui-link-inherit {
 /* Interaction cues
 -----------------------------------------------------------------------------------------------------------*/
 .ui-disabled {
-	opacity: 							.3;
+	filter: Alpha(Opacity=30);
+	opacity: .3;
+	zoom: 1;
 }
 .ui-disabled,
 .ui-disabled a {
 	cursor: default !important;
 	pointer-events: none;
-}
-.ui-disabled .ui-btn-text {
-	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(opacity=30)";
-	filter: alpha(opacity=30);
-	zoom: 1;
 }
 
 /* Icons
@@ -1120,8 +1117,8 @@ a.ui-link-inherit {
 
 .ui-overlay {
 	background: #666;
-	opacity: .5;
 	filter: Alpha(Opacity=50);
+	opacity: .5;
 	position: absolute;
 	width: 100%;
 	height: 100%;

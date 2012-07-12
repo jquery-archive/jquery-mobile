@@ -23,7 +23,7 @@ div.ui-slider-mini a.ui-slider-handle .ui-btn-inner { height: 30px; width: 30px;
 
 div.ui-slider-switch { height: 32px; margin-left: 0; width: 5.8em; }
 a.ui-slider-handle-snapping { -webkit-transition: left 70ms linear; -moz-transition: left 70ms linear; }
-div.ui-slider-switch .ui-slider-handle {  margin-top: 1px; }
+div.ui-slider-switch .ui-slider-handle { margin-top: 1px; }
 .ui-slider-inneroffset { margin: 0 16px; position: relative; z-index: 1; }
 
 div.ui-slider-switch.ui-slider-mini { width: 5em; height: 29px; }

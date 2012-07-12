@@ -15,7 +15,8 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		// This option defaults to true on iOS devices.
 		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
 		initSelector: "input[type='text'], input[type='search'], :jqmData(type='search'), input[type='number'], :jqmData(type='number'), input[type='password'], input[type='email'], input[type='url'], input[type='tel'], textarea, input[type='time'], input[type='date'], input[type='month'], input[type='week'], input[type='datetime'], input[type='datetime-local'], input[type='color'], input:not([type])",
-		clearSearchButtonText: "clear text"
+		clearSearchButtonText: "clear text",
+		disabled: false
 	},
 
 	_create: function() {
@@ -131,16 +132,35 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 				$( window ).load( keyup );
 			}
 		}
+		if ( input.attr( "disabled" ) ) {
+			this.disable();
+		}
 	},
 
 	disable: function(){
-		( this.element.attr( "disabled", true ).is( "[type='search'],:jqmData(type='search')" ) ?
-			this.element.parent() : this.element ).addClass( "ui-disabled" );
+
+		var $el;
+		if ( this.element.attr( "disabled", true ).is( "[type='search'],:jqmData(type='search')" ) ) {
+			$el = this.element.parent();
+		} else {
+			$el = this.element;
+		} 
+		$el.addClass( "ui-disabled" );
+		return this._setOption( "disabled", true );
+			
 	},
 
 	enable: function(){
-		( this.element.attr( "disabled", false).is( "[type='search'],:jqmData(type='search')" ) ?
-			this.element.parent() : this.element ).removeClass( "ui-disabled" );
+
+		var $el;
+		if ( this.element.attr( "disabled", false ).is( "[type='search'],:jqmData(type='search')" ) ) {
+			$el = this.element.parent();
+		} else {
+			$el = this.element;
+		} 
+		$el.removeClass( "ui-disabled" );
+		return this._setOption( "disabled", false );
+			
 	}
 });
 
