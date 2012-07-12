@@ -330,7 +330,7 @@ define( [
 				$.each( urlHistory.stack, function( i, historyEntry ) {
 
 					//if the url is in the stack, it's a forward or a back
-					if ( opts.currentUrl === historyEntry.url ) {
+					if ( decodeURIComponent( opts.currentUrl ) === decodeURIComponent( historyEntry.url ) ) {
 						//define back and forward by whether url is older or newer than current page
 						back = i < urlHistory.activeIndex;
 						forward = !back;
