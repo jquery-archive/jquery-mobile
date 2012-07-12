@@ -246,7 +246,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			}
 
 			if ( counter && itemClass.indexOf( "ui-li-divider" ) < 0 ) {
-				countParent = item.is( ".ui-li-static:first" ) ? item : item.find( ".ui-link-inherit" );
+				countParent = itemClass.indexOf( "ui-li-static" ) > 0 ? item : item.find( ".ui-link-inherit" );
 
 				countParent.addClass( "ui-li-jsnumbering" )
 					.prepend( "<span class='ui-li-dec'>" + ( counter++ ) + ". </span>" );
