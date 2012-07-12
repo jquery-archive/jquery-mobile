@@ -1,6 +1,6 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: A workaround for browsers without window.matchMedia
-//>>label: matchMedia Polyfill
+//>>label: Match Media Polyfill
 //>>group: Utilities
 
 
