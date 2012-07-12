@@ -155,17 +155,33 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		var o = this.options,
 			$list = this.element,
 			self = this,
+			listIcon = $list.jqmData( "icon" ) || o.icon,
 			dividertheme = $list.jqmData( "dividertheme" ) || o.dividerTheme,
 			listsplittheme = $list.jqmData( "splittheme" ),
 			listspliticon = $list.jqmData( "spliticon" ),
 			li = this._getChildrenByTagName( $list[ 0 ], "li", "LI" ),
-			counter = $.support.cssPseudoElement || !$.nodeName( $list[ 0 ], "ol" ) ? 0 : 1,
+			jsCount = $.support.cssPseudoElement || !$.nodeName( $list[ 0 ], "ol" ) ? false : true,
+			start = $list.attr( "start" ),
 			itemClassDict = {},
 			item, itemClass, itemTheme,
-			a, last, splittheme, countParent, icon, imgParents, img, linkIcon;
+			a, last, splittheme, counter, countParent, icon, imgParents, img, linkIcon;
 
-		if ( counter ) {
+		if ( jsCount ) {
 			$list.find( ".ui-li-dec" ).remove();
+		}
+		
+		// Check if a start attribute has been set and take a value of 0 into account
+		if ( typeof start !== "undefined" && start !== false ) {
+			if ( !jsCount ) {
+				var startAt = parseInt( start ) - 1;
+				$list.css( "counter-reset", "listnumbering " + startAt );
+			} else {
+				counter = parseInt( start );
+			}
+		} else {
+			if ( jsCount ) {
+				counter = 1;
+			}
 		}
 
 		if ( !o.theme ) {
@@ -236,8 +252,17 @@ $.widget( "mobile.listview", $.mobile.widget, {
 					item.attr( "role", "heading" );
 
 					//reset counter when a divider heading is encountered
-					if ( counter ) {
-						counter = 1;
+					if ( typeof start !== "undefined" && start !== false ) {
+						if ( !jsCount ) {
+							var startAt = parseInt( start ) - 1;
+							item.css( "counter-reset", "listnumbering " + startAt );
+						} else {
+							counter = parseInt( start );
+						}
+					} else {
+						if ( jsCount ) {
+							counter = 1;
+						}
 					}
 
 				} else {
@@ -245,7 +270,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				}
 			}
 
-			if ( counter && itemClass.indexOf( "ui-li-divider" ) < 0 ) {
+			if ( jsCount && itemClass.indexOf( "ui-li-divider" ) < 0 ) {
 				countParent = itemClass.indexOf( "ui-li-static" ) > 0 ? item : item.find( ".ui-link-inherit" );
 
 				countParent.addClass( "ui-li-jsnumbering" )
