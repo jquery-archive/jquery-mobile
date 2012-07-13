@@ -558,12 +558,10 @@ define( [ "jquery",
 
 		if ( popup.data( "popup" ) ) {
 			offset = $link.offset();
-
-			popup
-				.popup( "open",
-					offset.left + $link.outerWidth() / 2,
-					offset.top + $link.outerHeight() / 2,
-					$link.jqmData( "transition" ) );
+			popup.popup( "open",
+				offset.left + $link.outerWidth() / 2,
+				offset.top + $link.outerHeight() / 2,
+				$link.jqmData( "transition" ) );
 
 			// If this link is not inside a popup, re-focus onto it after the popup(s) complete
 			// For some reason, a $.proxy( $link, "focus" ) doesn't work as the handler
