@@ -190,7 +190,7 @@ define( [ "jquery",
 		},
 
 		// Try and center the overlay over the given coordinates
-		_placementCoords: function( x, y ) {
+		_placementCoords: function( desired ) {
 			// Tolerances off the window edges
 			var tol = { l: 15, t: 30, r: 15, b: 30 },
 			// rectangle within which the popup must fit
@@ -212,8 +212,8 @@ define( [ "jquery",
 			// Center the menu over the desired coordinates, while not going outside
 			// the window tolerances. This will center wrt. the window if the popup is too large.
 			ret = {
-				x: fitSegmentInsideSegment( rc.cx, menuSize.cx, rc.l, x ),
-				y: fitSegmentInsideSegment( rc.cy, menuSize.cy, rc.t, y )
+				x: fitSegmentInsideSegment( rc.cx, menuSize.cx, rc.l, desired.x ),
+				y: fitSegmentInsideSegment( rc.cy, menuSize.cy, rc.t, desired.y )
 			};
 
 			// Make sure the top of the menu is visible
@@ -298,9 +298,10 @@ define( [ "jquery",
 			// Give applications a chance to modify the contents of the container before it appears
 			this.element.trigger( "popupbeforeopen" );
 
-			coords = self._placementCoords(
-					( undefined === x ? $win.width() / 2 + $win.scrollLeft() : x ),
-					( undefined === y ? $win.height() / 2 + $win.scrollTop() : y ) );
+			coords = self._placementCoords( {
+				x: ( undefined === x ? $win.width() / 2 + $win.scrollLeft() : x ),
+				y: ( undefined === y ? $win.height() / 2 + $win.scrollTop() : y )
+			});
 
 			// Count down to triggering "popupafteropen" - we have two prerequisites:
 			// 1. The popup window animation completes (container())
