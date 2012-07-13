@@ -177,6 +177,30 @@
 		], 500);
 	});
 
+	asyncTest( "focus is transferred to a menu item when the menu is opened",function() {
+		var select, menu, button;
+
+		expect( 1 );
+
+		$.testHelper.sequence([
+			function() {
+				select = $( "#select-choice-focus-test" );
+				menu = $( "#select-choice-focus-test-menu" );
+				button = select.find( "a" );
+				button.trigger( "click" );
+			},
+
+			function() {
+				ok( menu.find( ":focus" ).length > 0, "item in open select menu has focus" );
+				select.selectmenu( "close" );
+			},
+
+			function() {
+				start();
+			}
+		], 5000);
+	});
+
 	asyncTest( "using custom refocuses the button after close", function() {
 		var select, button, triggered = false;
 
