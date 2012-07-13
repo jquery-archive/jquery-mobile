@@ -293,7 +293,12 @@ define( [ "jquery",
 		_open: function( x, y, transition ) {
 			var self = this,
 				$win = $( window ),
-				coords = self._placementCoords(
+				coords;
+
+			// Give applications a chance to modify the contents of the container before it appears
+			this.element.trigger( "popupbeforeopen" );
+
+			coords = self._placementCoords(
 					( undefined === x ? $win.width() / 2 + $win.scrollLeft() : x ),
 					( undefined === y ? $win.height() / 2 + $win.scrollTop() : y ) );
 
