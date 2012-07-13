@@ -178,7 +178,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		
 		if ( ol ) {	
 			// Check if a start attribute has been set while taking a value of 0 into account
-			if ( typeof start !== "undefined" && start !== false ) {
+			if ( start || start === 0 ) {
 				if ( !jsCount ) {
 					startCount = parseFloat( start ) - 1;
 					$list.css( "counter-reset", "listnumbering " + startCount );
@@ -259,7 +259,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 					if ( ol ) {	
 						//reset counter when a divider heading is encountered
-						if ( typeof start !== "undefined" && start !== false ) {
+						if ( start || start === 0 ) {
 							if ( !jsCount ) {
 								newStartCount = parseFloat( start ) - 1;
 								item.css( "counter-reset", "listnumbering " + newStartCount );
