@@ -291,18 +291,62 @@ define( [ "jquery",
 			}
 		},
 
+		// The desired coordinates passed in will be returned untouched if no reference element can be identified via
+		// this.options.positionTo. Nevertheless, this function ensures that its return value always contains valid
+		// x and y coordinates by specifying the center middle of the window if the coordinates are absent.
+		_desiredCoords: function( desired ) {
+			var dst = null, offset, $win = $( window );
+
+			// Establish which element will serve as the reference
+			if ( this.options.positionTo && this.options.positionTo !== "origin" ) {
+				if ( this.options.positionTo === "window" ) {
+					desired = {
+						x: $win.width() / 2 + $win.scrollLeft(),
+						y: $win.height() / 2 + $win.scrollTop(),
+					};
+				} else {
+					try {
+						dst = $( this.options.positionTo );
+					} catch( e ) {
+						dst = null;
+					}
+					if ( dst ) {
+						dst.filter( ":visible" );
+						if ( dst.length === 0 ) {
+							dst = null;
+						}
+					}
+				}
+			}
+
+			if ( dst ) {
+				offset = dst.offset();
+				desired = {
+					x: offset.left + dst.outerWidth() / 2,
+					y: offset.top + dst.outerHeight() / 2
+				};
+			}
+
+			if ( $.type( desired.x ) !== "number" ) {
+				desired.x = $win.width() / 2 + $win.scrollLeft();
+			}
+
+			if ( $.type( desired.y ) !== "number" ) {
+				desired.y = $win.height() / 2 + $win.scrollTop();
+			}
+
+			return desired;
+
+		},
+
 		_open: function( x, y, transition ) {
 			var self = this,
-				$win = $( window ),
 				coords;
 
 			// Give applications a chance to modify the contents of the container before it appears
 			this.element.trigger( "popupbeforeopen" );
 
-			coords = self._placementCoords( {
-				x: ( undefined === x ? $win.width() / 2 + $win.scrollLeft() : x ),
-				y: ( undefined === y ? $win.height() / 2 + $win.scrollTop() : y )
-			});
+			coords = self._placementCoords( self._desiredCoords( { x: x, y: y } ) );
 
 			// Count down to triggering "popupafteropen" - we have two prerequisites:
 			// 1. The popup window animation completes (container())
