@@ -231,7 +231,7 @@ define( [
 				});
 
 				// Events on the popup
-				self.listbox.bind( "closed", function( event ) {
+				self.listbox.bind( "popupafterclose", function( event ) {
 					self.close();
 				});
 
