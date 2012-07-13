@@ -65,7 +65,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		if ( this.options.inset ) {
 			$li = this.element.children( "li" );
 			// at create time the li are not visible yet so we need to rely on .ui-screen-hidden
-			$visibleli = create?$li.not( ".ui-screen-hidden" ):$li.filter( ":visible" );
+			$visibleli = create ? $li.not( ".ui-screen-hidden" ) : $li.filter( ":visible" );
 
 			this._removeCorners( $li );
 
@@ -74,14 +74,14 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				.addClass( "ui-corner-top" );
 
 			$topli.add( $topli.find( ".ui-btn-inner" )
-					.not( ".ui-li-link-alt span:first-child" ) )
-                                .addClass( "ui-corner-top" )
-                                .end()
+				.not( ".ui-li-link-alt span:first-child" ) )
+					.addClass( "ui-corner-top" )
+				.end()
 				.find( ".ui-li-link-alt, .ui-li-link-alt span:first-child" )
 					.addClass( "ui-corner-tr" )
 				.end()
 				.find( ".ui-li-thumb" )
-					.not(".ui-li-icon")
+					.not( ".ui-li-icon" )
 					.addClass( "ui-corner-tl" );
 
 			// Select the last visible li element
@@ -160,28 +160,29 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			listsplittheme = $list.jqmData( "splittheme" ),
 			listspliticon = $list.jqmData( "spliticon" ),
 			li = this._getChildrenByTagName( $list[ 0 ], "li", "LI" ),
-			jsCount = $.support.cssPseudoElement || !$.nodeName( $list[ 0 ], "ol" ) ? false : true,
+			ol = !!$.nodeName( $list[ 0 ], "ol" ),
+			jsCount = !$.support.cssPseudoElement,
 			start = $list.attr( "start" ),
 			itemClassDict = {},
 			item, itemClass, itemTheme,
-			a, last, splittheme, counter, countParent, icon, imgParents, img, linkIcon;
+			a, last, splittheme, counter, startCount, newStartCount, countParent, icon, imgParents, img, linkIcon;
 
-		if ( jsCount ) {
+		if ( ol && jsCount ) {
 			$list.find( ".ui-li-dec" ).remove();
 		}
 		
-		// Check if a start attribute has been set and take a value of 0 into account
-		if ( typeof start !== "undefined" && start !== false ) {
-			if ( !jsCount ) {
-				var startCount = parseFloat( start ) - 1;
-				$list.css( "counter-reset", "listnumbering " + startCount );
-			} else {
-				counter = parseFloat( start );
-			}
-		} else {
-			if ( jsCount ) {
-				counter = 1;
-			}
+		if ( ol ) {	
+			// Check if a start attribute has been set while taking a value of 0 into account
+			if ( typeof start !== "undefined" && start !== false ) {
+				if ( !jsCount ) {
+					startCount = parseFloat( start ) - 1;
+					$list.css( "counter-reset", "listnumbering " + startCount );
+				} else {
+					counter = parseFloat( start );
+				}
+			} else if ( jsCount ) {
+					counter = 1;
+			}	
 		}
 
 		if ( !o.theme ) {
@@ -194,12 +195,12 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 			// If we're creating the element, we update it regardless
 			if ( create || !item.hasClass( "ui-li" ) ) {
-				itemTheme = item.jqmData("theme") || o.theme;
+				itemTheme = item.jqmData( "theme" ) || o.theme;
 				a = this._getChildrenByTagName( item[ 0 ], "a", "A" );
 				var isDivider = ( item.jqmData( "role" ) === "list-divider" );
 
 				if ( a.length && !isDivider ) {
-					icon = item.jqmData("icon");
+					icon = item.jqmData( "icon" );
 
 					item.buttonMarkup({
 						wrapperEls: "div",
@@ -221,9 +222,9 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 						last = a.last();
 						splittheme = listsplittheme || last.jqmData( "theme" ) || o.splitTheme;
-						linkIcon = last.jqmData("icon");
+						linkIcon = last.jqmData( "icon" );
 
-						last.appendTo(item)
+						last.appendTo( item )
 							.attr( "title", last.getEncodedText() )
 							.addClass( "ui-li-link-alt" )
 							.empty()
@@ -251,18 +252,18 @@ $.widget( "mobile.listview", $.mobile.widget, {
 					itemClass += " ui-li-divider ui-bar-" + dividertheme;
 					item.attr( "role", "heading" );
 
-					//reset counter when a divider heading is encountered
-					if ( typeof start !== "undefined" && start !== false ) {
-						if ( !jsCount ) {
-							var newStartCount = parseFloat( start ) - 1;
-							item.css( "counter-reset", "listnumbering " + newStartCount );
-						} else {
-							counter = parseFloat( start );
-						}
-					} else {
-						if ( jsCount ) {
-							counter = 1;
-						}
+					if ( ol ) {	
+						//reset counter when a divider heading is encountered
+						if ( typeof start !== "undefined" && start !== false ) {
+							if ( !jsCount ) {
+								newStartCount = parseFloat( start ) - 1;
+								item.css( "counter-reset", "listnumbering " + newStartCount );
+							} else {
+								counter = parseFloat( start );
+							}
+						} else if ( jsCount ) {
+								counter = 1;
+						}	
 					}
 
 				} else {
@@ -270,7 +271,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				}
 			}
 
-			if ( jsCount && itemClass.indexOf( "ui-li-divider" ) < 0 ) {
+			if ( ol && jsCount && itemClass.indexOf( "ui-li-divider" ) < 0 ) {
 				countParent = itemClass.indexOf( "ui-li-static" ) > 0 ? item : item.find( ".ui-link-inherit" );
 
 				countParent.addClass( "ui-li-jsnumbering" )
