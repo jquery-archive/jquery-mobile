@@ -182,11 +182,11 @@ define( [ "jquery",
 
 			if ( this[ setter ] !== undefined ) {
 				this[ setter ]( value );
+			}
+			if ( key !== "initSelector" ) {
 				// Record the option change in the options and in the DOM data-* attributes
-				this.options[ key ] = value;
-				this.element.attr( "data-" + ( $.mobile.ns || "" ) + ( key.replace( /([A-Z])/, "-$1" ).toLowerCase() ), value );
-			} else {
 				$.mobile.widget.prototype._setOption.apply( this, arguments );
+				this.element.attr( "data-" + ( $.mobile.ns || "" ) + ( key.replace( /([A-Z])/, "-$1" ).toLowerCase() ), value );
 			}
 		},
 
