@@ -391,7 +391,7 @@ define( [
 					self.menuType = "overlay";
 
 					self.listbox
-						.one( "opened", focusMenuItem )
+						.one( "popupafteropen", focusMenuItem )
 						.popup( "open",
 							self.button.offset().left + self.button.outerWidth() / 2,
 							self.button.offset().top + self.button.outerHeight() / 2 );
