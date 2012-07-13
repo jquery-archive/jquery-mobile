@@ -62,11 +62,14 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			$topli,
 			$bottomli;
 
-		if ( this.options.inset ) {
-			$li = this.element.children( "li" );
-			// at create time the li are not visible yet so we need to rely on .ui-screen-hidden
-			$visibleli = create ? $li.not( ".ui-screen-hidden" ) : $li.filter( ":visible" );
+		$li = this.element.children( "li" );
+		// at create time the li are not visible yet so we need to rely on .ui-screen-hidden
+		$visibleli = create ? $li.not( ".ui-screen-hidden" ) : $li.filter( ":visible" );
 
+		// ui-li-last is used for setting border-bottom on the last li		
+		$li.find( ".ui-li-last" ).removeClass( "ui-li-last" );
+					
+		if ( this.options.inset ) {
 			this._removeCorners( $li );
 
 			// Select the first visible li element
@@ -86,7 +89,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 			// Select the last visible li element
 			$bottomli = $visibleli.last()
-				.addClass( "ui-corner-bottom" );
+				.addClass( "ui-corner-bottom ui-li-last" );
 
 			$bottomli.add( $bottomli.find( ".ui-btn-inner" ) )
 				.find( ".ui-li-link-alt" )
@@ -95,6 +98,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				.find( ".ui-li-thumb" )
 					.not(".ui-li-icon")
 					.addClass( "ui-corner-bl" );
+		} else {
+			$visibleli.last().addClass( "ui-li-last" );
 		}
 		if ( !create ) {
 			this.element.trigger( "updatelayout" );
