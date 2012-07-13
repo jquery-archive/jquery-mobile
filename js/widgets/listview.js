@@ -63,8 +63,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			$bottomli;
 
 		$li = this.element.children( "li" );
-		// at create time the li are not visible yet so we need to rely on .ui-screen-hidden
-		$visibleli = create ? $li.not( ".ui-screen-hidden" ) : $li.filter( ":visible" );
+		// At create time and when autodividers calls refresh the li are not visible yet so we need to rely on .ui-screen-hidden
+		$visibleli = create || $li.filter( ":visible" ).length === 0 ? $li.not( ".ui-screen-hidden" ) : $li.filter( ":visible" );
 
 		// ui-li-last is used for setting border-bottom on the last li		
 		$li.find( ".ui-li-last" ).removeClass( "ui-li-last" );
