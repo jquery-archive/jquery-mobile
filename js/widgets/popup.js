@@ -297,7 +297,7 @@ define( [ "jquery",
 					( undefined === x ? $win.width() / 2 + $win.scrollLeft() : x ),
 					( undefined === y ? $win.height() / 2 + $win.scrollTop() : y ) );
 
-			// Count down to triggering "opened" - we have two prerequisites:
+			// Count down to triggering "popupafteropen" - we have two prerequisites:
 			// 1. The popup window animation completes (container())
 			// 2. The screen opacity animation completes (screen())
 			self._createPrereqs(
@@ -310,7 +310,7 @@ define( [ "jquery",
 				function() {
 					self._isOpen = true;
 					self._ui.container.attr( "tabindex", "0" ).focus();
-					self.element.trigger( "opened" );
+					self.element.trigger( "popupafteropen" );
 				});
 
 			if ( transition ) {
@@ -351,7 +351,7 @@ define( [ "jquery",
 
 			this._isOpen = false;
 
-			// Count down to triggering "closed" - we have two prerequisites:
+			// Count down to triggering "popupafterclose" - we have two prerequisites:
 			// 1. The popup window reverse animation completes (container())
 			// 2. The screen opacity animation completes (screen())
 			self._createPrereqs(
@@ -368,7 +368,7 @@ define( [ "jquery",
 				},
 				function() {
 					self._ui.container.removeAttr( "tabindex" );
-					self.element.trigger( "closed" );
+					self.element.trigger( "popupafterclose" );
 				});
 
 			self._animate( {
@@ -496,7 +496,7 @@ define( [ "jquery",
 
 				self._navHook(function() {
 					self._popupIsOpening = true;
-					self._currentlyOpenPopup.element.one( "opened", function() {
+					self._currentlyOpenPopup.element.one( "popupafteropen", function() {
 						self._popupIsOpening = false;
 					});
 					self._currentlyOpenPopup._open.apply( self._currentlyOpenPopup, args );
@@ -513,7 +513,7 @@ define( [ "jquery",
 			if ( popup === self._currentlyOpenPopup && !self._popupIsClosing ) {
 				self._popupIsClosing = true;
 				if ( self._popupIsOpening ) {
-					self._currentlyOpenPopup.element.one( "opened", $.proxy( self, "_navUnhook" ) );
+					self._currentlyOpenPopup.element.one( "popupafteropen", $.proxy( self, "_navUnhook" ) );
 				} else {
 					self._navUnhook();
 				}
@@ -530,7 +530,7 @@ define( [ "jquery",
 					self._currentlyOpenPopup._immediate();
 				}
 				self._popupIsClosing = true;
-				self._currentlyOpenPopup.element.one( "closed", function() {
+				self._currentlyOpenPopup.element.one( "popupafterclose", function() {
 					self._popupIsClosing = false;
 					self._currentlyOpenPopup = null;
 					$( self ).trigger( "done" );
