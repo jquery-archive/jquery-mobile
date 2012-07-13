@@ -23,14 +23,14 @@ $.mobile.listview.prototype.options.autodividersSelector = function( elt ) {
 $( document ).delegate( "ul,ol", "listviewcreate", function() {
 
 	var list = $( this ),
-			listview = list.data( "listview" );
+			listview = list.jqmData( "listview" );
 
 	if ( !listview.options.autodividers ) {
 		return;
 	}
 
 	var replaceDividers = function () {
-		list.find( 'li:jqmData(role=list-divider)' ).remove();
+		list.find( "li:jqmData(role='list-divider')" ).remove();
 
 		var lis = list.find( 'li' ),
 			lastDividerText = null, li, dividerText;
