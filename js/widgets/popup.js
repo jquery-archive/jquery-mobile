@@ -302,7 +302,7 @@ define( [ "jquery",
 				if ( this.options.positionTo === "window" ) {
 					desired = {
 						x: $win.width() / 2 + $win.scrollLeft(),
-						y: $win.height() / 2 + $win.scrollTop(),
+						y: $win.height() / 2 + $win.scrollTop()
 					};
 				} else {
 					try {
