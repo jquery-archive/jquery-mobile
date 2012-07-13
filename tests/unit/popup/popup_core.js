@@ -173,7 +173,7 @@
 			},
 
 			{
-				opened: { src: $( "#test-popup" ), event: "opened.linkActiveTestStep1" }
+				opened: { src: $( "#test-popup" ), event: "popupafteropen.linkActiveTestStep1" }
 			},
 
 			function( result ) {
@@ -183,7 +183,7 @@
 			},
 
 			{
-				closed: { src: $( "#test-popup" ), event: "closed.linkActiveTestStep2" }
+				closed: { src: $( "#test-popup" ), event: "popupafterclose.linkActiveTestStep2" }
 			},
 
 			function( result ) {
@@ -208,7 +208,7 @@
 			},
 
 			{
-				opened: { src: $( "#test-popup" ), event: "opened.hashInteractStep1" },
+				opened: { src: $( "#test-popup" ), event: "popupafteropen.hashInteractStep1" },
 				hashchange: { src: $( window ), event: "hashchange.hashInteractStep1" }
 			},
 
@@ -220,7 +220,7 @@
 			},
 
 			{
-				closed: { src: $( "#test-popup" ), event: "closed.hashInteractStep2" },
+				closed: { src: $( "#test-popup" ), event: "popupafterclose.hashInteractStep2" },
 				navigate: { src: $.mobile.pageContainer, event: "navigate.hashInteractStep2" }
 			},
 
@@ -246,7 +246,7 @@
 			},
 
 			{
-				opened: { src: $( "#test-popup" ), event: "opened.reuseStep1" },
+				opened: { src: $( "#test-popup" ), event: "popupafteropen.reuseStep1" },
 				hashchange: { src: $( window ), event: "hashchange.reuseStep1" }
 			},
 
@@ -255,7 +255,7 @@
 			},
 
 			{
-				closed: { src: $( "#test-popup" ), event: "closed.reuseStep2" },
+				closed: { src: $( "#test-popup" ), event: "popupafterclose.reuseStep2" },
 				hashchange: { src: $( window ), event: "hashchange.reuseStep2" },
 				timeout: { src: null, length: 300 }
 			},
@@ -273,7 +273,7 @@
 			},
 
 			{
-				opened: { src: $( "#test-popup" ), event: "opened.reuseStep4" },
+				opened: { src: $( "#test-popup" ), event: "popupafteropen.reuseStep4" },
 				hashchange: { src: $( window ), event: "hashchange.reuseStep4" }
 			},
 
@@ -285,7 +285,7 @@
 			},
 
 			{
-				closed: { src: $( "#test-popup" ), event: "closed.reuseStep5" },
+				closed: { src: $( "#test-popup" ), event: "popupafterclose.reuseStep5" },
 				navigate: { src: $.mobile.pageContainer, event: "navigate.reuseStep5" }
 			},
 
@@ -311,7 +311,7 @@
 			},
 
 			{
-				opened: { src: $( "#test-popup" ), event: "opened.anotherPageStep1" },
+				opened: { src: $( "#test-popup" ), event: "popupafteropen.anotherPageStep1" },
 				hashchange: { src: $( window ), event: "hashchange.anotherPageStep1" }
 			},
 
@@ -320,7 +320,7 @@
 			},
 
 			{
-				closed: { src: $( "#test-popup" ), event: "closed.anotherPageStep2" },
+				closed: { src: $( "#test-popup" ), event: "popupafterclose.anotherPageStep2" },
 				hashchange: { src: $( window ), event: "hashchange.anotherPageStep2" }
 			},
 
