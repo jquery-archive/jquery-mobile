@@ -65,6 +65,18 @@
 				 <p>This option is also exposed as a data attribute: <code>data-overlay-theme=&quot;a&quot;</code></p>
 			</dd>
 
+			<dt><code>positionTo</code> <em>string</em></dt>
+			<dd>
+				<p class="default">default: "origin"</p>
+				<p>Determines the element over which the popup will be centered. This parameter can have one of three values:</p>
+				<ol>
+					<li><code>"origin"</code>: The coordinates passed to the <code>open</code> method will be used for positioning the popup. In the case where a popup is opened from a link, this means the popup will be centered over the link.</li>
+					<li><code>"window"</code>: The popup will be displayed in the center of the window.</li>
+					<li>A jQuery selector: The selector will be used to select an element over which to center the popup. The resulting selection will be filtered for those elements that are visible. If the selection turns up empty, the default value will be used for placing the popup.</li>
+				</ol>
+				<pre><code>$('.selector').popup(<strong>{ positionTo: "window" }</strong>);</code></pre>
+			</dd>
+
 			<dt><code>shadow</code> <em>boolean</em></dt>
 			<dd>
 				<p class="default">default: true</p>
@@ -86,18 +98,6 @@
 				<p class="default">default: "none"</p>
 				<p>Sets the default transition for the popup. The default value will result in no transition.</p>
 				<p>If the popup is opened from a link, and the link has the <code>data-transition</code> attribute set, the value specified therein will override the value of this option at the time the popup is opened from the link.</p>
-			</dd>
-
-			<dt><code>positionTo</code> <em>string</em></dt>
-			<dd>
-				<p class="default">default: "origin"</p>
-				<p>Determines the element over which the popup will be centered. This parameter can have one of three values:</p>
-				<ol>
-					<li><code>"origin"</code>: The coordinates passed to the <code>open</code> method will be used for positioning the popup. In the case where a popup is opened from a link, this means the popup will be centered over the link.</li>
-					<li><code>"window"</code>: The popup will be displayed in the center of the window.</li>
-					<li>A jQuery selector: The selector will be used to select an element over which to center the popup. The resulting selection will be filtered for those elements that are visible. If the selection turns up empty, the default value will be used for placing the popup.</li>
-				</ol>
-				<pre><code>$('.selector').popup(<strong>{ positionTo: "window" }</strong>);</code></pre>
 			</dd>
 
 		</dl>
