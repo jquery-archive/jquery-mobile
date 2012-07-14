@@ -67,7 +67,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		$visibleli = create ? $li.not( ".ui-screen-hidden" ) : $li.filter( ":visible" );
 
 		// ui-li-last is used for setting border-bottom on the last li		
-		$li.find( ".ui-li-last" ).removeClass( "ui-li-last" );
+		$li.filter( ".ui-li-last" ).removeClass( "ui-li-last" );
 					
 		if ( this.options.inset ) {
 			this._removeCorners( $li );
