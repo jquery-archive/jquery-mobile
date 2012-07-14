@@ -6,11 +6,8 @@
 	max-width: 500px;
 	margin: 10% auto 15px auto;
 	padding: 0;
-}
-.ui-dialog-contain > .ui-header {
-	margin-top: 15%;
-	border: none;
-	overflow: hidden;
+	position: relative;
+	top: -15px;
 }
 .ui-dialog-contain > .ui-header, 
 .ui-dialog-contain > .ui-content, 
@@ -18,18 +15,18 @@
 	display: block;
 	position: relative; 
 	width: auto;
+	margin: 0;
 }
-.ui-dialog-contain > .ui-header, 
-.ui-dialog-contain > .ui-footer  { 
+.ui-dialog-contain > .ui-header {
+	border: none;
+	overflow: hidden;
 	z-index: 10; 
 	padding: 0;
-}
-.ui-dialog-contain > .ui-footer {
-	padding: 0 15px; 
 }
 .ui-dialog-contain > .ui-content { 
 	padding: 15px; 
 }
-.ui-dialog { 
-	margin-top: -15px;
+.ui-dialog-contain > .ui-footer {
+	z-index: 10; 
+	padding: 0 15px; 
 }
