@@ -39,12 +39,12 @@
 			<p>The popup plugin has the following methods:</p>
 
 		<dl>
-			<dt><code>open(x, y)</code> display the popup centered at coordinates (x, y)</dt>
+			<dt><code>open(x, y, transition)</code> display the popup centered at coordinates (x, y) using the specified transition</dt>
 			<dd>
 				<pre><code>
-$('.selector').popup('open', x, y);
+$('.selector').popup('open', x, y, transition);
 				</code></pre>
-				<p>If <code>x</code> or <code>y</code> is missing, the middle of the window will be used.
+				<p>If <code>x</code> or <code>y</code> is missing, the middle of the window will be used. The transition overrides the transition stored in the popup's options, but does not change the value stored there.
 			</dd>
 
 			<dt><code>close</code> close an open popup</dt>
