@@ -53,9 +53,20 @@
 			<p>This is a completely basic popup, no options set.</p>
 		</div>
 		
-		<p>The framework adds a small amount of margin to text elements, but it's really just a container with rounded corners and a shadow which serves as a blank slate for your designs (even these features can be disabled via <a href="options.html">options</a>). This simple styling makes it easy to add in widgets like a listview to make a <a href="#popupMenu" data-rel="popup">menu</a> or a photo to make a <a href="#popupPhotoLandscape" data-rel="popup">lightbox</a> that goes right up to the edge of the popup.</p>
+		<p>The framework adds a small amount of margin to text elements, but it's really just a container with rounded corners and a shadow which serves as a blank slate for your designs (even these features can be disabled via <a href="options.html">options</a>).</p>
 		
+		<p>This simple styling makes it easy to add in widgets to create a variety of different interactions. Here are a few real-world examples that combine the various settings and styles you can achieve out of the box with popups:</p>
 		
+		<a href="#popupInfo" data-rel="popup" data-role="button" data-inline="true">Tooltip</a>
+		<a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true">Menu</a>
+		<a href="#popupLogin" data-rel="popup" data-role="button" data-inline="true">Form</a>
+		<a href="#popupDialog" data-rel="popup" data-role="button" data-inline="true" data-transition="pop">Dialog</a>
+		<a href="#popupPhotoLandscape" data-rel="popup" data-role="button" data-inline="true">Photo landscape</a>
+		<a href="#popupPhotoPortrait" data-rel="popup" data-role="button" data-inline="true" data-transition="fade">Photo portrait</a>
+		<a href="#popupMap" data-rel="popup" data-role="button" data-inline="true">Map</a>
+		<a href="#popupVideo" data-rel="popup" data-role="button" data-inline="true">Video</a>
+	
+	
 		<h2>Calling the popup plugin</h2>
 
 		<p>This plugin will autoinitialize on any page that contains a div with the attribute <code>data-role="popup"</code>. However, if needed you can directly call the <code>popup</code> plugin on any selector, just like any jQuery plugin and programmatically work with the popup <a href="options.html">options</a>, <a href="methods.html">methods</a>, and <a href="events.html">events</a> API:</p>
@@ -79,7 +90,7 @@ $('#myPopupDiv').popup("open")
 $('#myPopupDiv').popup("close")
 </code></pre>
 			
-			<p>To add an explicit close button to a popup, add a link with the role of button into the popup container with a <code>data-rel="back"</code> attribute which will close the popup when tapped. We have created helper classes to position buttons in the upper left (<code>ui-btn-left</code>) or upper right (<code>ui-btn-right</code>) of the popup but you may need to tweak these or add custom positioning styles depending on your design.</p>
+			<p>To add an explicit close button to a popup, add a link with the role of button into the popup container with a <code>data-rel="back"</code> attribute which will close the popup when tapped. We have created helper classes to position buttons in the upper left (<code>ui-btn-left</code>) or upper right (<code>ui-btn-right</code>) of the popup but you may need to tweak these or add custom positioning styles depending on your design. We recommend adding standard content padding to the popup to make room for the buttons (see next section).</p>
 		
 		
 		<pre><code>
@@ -92,14 +103,14 @@ $('#myPopupDiv').popup("close")
 		<a href="#popupCloseRight" data-rel="popup" data-role="button" data-inline="true">Popup with close button right</a>
 		<a href="#popupCloseLeft" data-rel="popup" data-role="button" data-inline="true">Popup with close button left</a>
 		
-		<div data-role="popup" id="popupCloseRight">
+		<div data-role="popup" id="popupCloseRight" class="ui-content" style="max-width:280px">
 			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-			<p style="padding-right:10px;">I have a close button at the top right corner.</p>
+			<p>I have a close button at the top right corner with simple HTML markup.</p>
 		</div>
 		
-		<div data-role="popup" id="popupCloseLeft">
+		<div data-role="popup" id="popupCloseLeft" class="ui-content" style="max-width:280px">
 			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-left">Close</a>
-			<p style="padding-left:10px;">I have a close button at the top left corner.</p>
+			<p>I have a close button at the top left corner with simple HTML markup.</p>
 		</div>
 		
 		<h2>Adding padding</h2>
@@ -122,13 +133,36 @@ $('#myPopupDiv').popup("close")
 		
 		<p>When padding is added, we apply a few style rules to negate the top margin for the first heading or paragraph in the popup and do the same for the last element's bottom margin. This keep the popups from having too much vertical space when the content padding and element margins combine.</p>
 	
-			
-		<h2>Setting transitions</h2>
-		<p>By default, popups open with a pop transition. This default is controlled via the <code>$.mobile.defaultDialogTransition</code> global option. To set the transition used for a popup, add the <code>data-transition</code> attribute to the link that references the popup. </p>
+		
+		<h2>Positioning options</h2>
+		<p>By default, popups open centered vertically and horizontally over the thing you clicked (origin) which is good for popups used as tooltips or menus. The frameworks also applies some basic collision detection rules to ensure that the popup will appear on-screen so the ultimate position be not always be centered over the origin.</p>
+		<p>For situations like a dialog or lightbox where the popup should appear centered within the window instead of over the origin, add the <code>data-position-to</code> attribute to the link that references the popup and specify a value of <code>window</code>. </p>
 				
 <pre><code>
-&lt;a href=&quot;#transitionExample&quot; <strong>data-transition=&quot;none&quot;</strong> data-rel=&quot;popup&quot;&gt;
-   No transition
+&lt;div data-role=&quot;popup&quot; id=&quot;positionWindow&quot; <strong>data-position-to=&quot;window&quot;</strong> &gt;
+	&lt;p&gt;I am positioned to the window.&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+
+		<p>A few examples:</p>
+		
+		<a href="#positionWindow" data-role="button" data-inline="true" data-rel="popup">Position to window</a> 
+		<a href="#positionOrigin" data-role="button" data-inline="true" data-rel="popup">Position to origin</a>
+		
+		<div data-role="popup" id="positionWindow" data-position-to="window" class="ui-content" data-theme="d">
+			<p>I am positioned to the window.</p>
+		</div>
+		
+		<div data-role="popup" id="positionOrigin" data-position-to="origin" class="ui-content" data-theme="d">
+			<p>I am positioned over the origin.</p>
+		</div>
+		
+		<h2>Setting transitions</h2>
+		<p>By default, popups have no transition to make them open as quickly as possible. This default is controlled via the <code>$.mobile.defaultDialogTransition</code> global option. To set the transition used for a popup, add the <code>data-transition</code> attribute to the link that references the popup. </p>
+				
+<pre><code>
+&lt;a href=&quot;#transitionExample&quot; <strong>data-transition=&quot;flip&quot;</strong> data-rel=&quot;popup&quot;&gt;
+   Flip transition
 &lt;/a&gt;
 </code></pre>
 				
@@ -172,11 +206,6 @@ $('#myPopupDiv').popup("close")
   <p>I have <code>data-theme="a"</code> set on me</p>
 </div>
 
-<a href="#themeNone" data-rel="popup" data-role="button" data-inline="true">Theme set to "none"</a>
-<div id="themeNone" data-role="popup" data-theme="none" class="ui-content">
-  <p class="ui-btn-hover-e">I'm semi-transparent</p>
-</div>
-
 <a href="#overlay" data-rel="popup" data-role="button" data-inline="true">Overlay set to A</a>
 <div id="overlay" data-role="popup" data-overlay-theme="a" class="ui-content">
   <p>I have a <code>data-overlay-theme="a"</code> set on me</p>
@@ -189,18 +218,7 @@ $('#myPopupDiv').popup("close")
 
 
 
-		<h2>Popup examples</h2>
-		<p>Here are a few real-world examples that combine the various settings and styles you can achieve out of the box with popups:</p>
-		<a href="#popupInfo" data-rel="popup" data-role="button" data-inline="true">Tooltip</a>
-		<a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true" data-transition="fade">Menu</a>
-		<a href="#popupLogin" data-rel="popup" data-role="button" data-inline="true" data-transition="none">Form</a>
-		<a href="#popupDialog" data-rel="popup" data-role="button" data-inline="true" data-transition="flow">Dialog</a>
-		<a href="#popupAccordion" data-rel="popup" data-role="button" data-inline="true" data-transition="flip">Accordion</a>
-		<a href="#popupPhotoLandscape" data-rel="popup" data-role="button" data-inline="true" data-transition="fade">Photo landscape</a>
-		<a href="#popupPhotoPortrait" data-rel="popup" data-role="button" data-inline="true" data-transition="fade">Photo portrait</a>
-		<a href="#popupMap" data-rel="popup" data-role="button" data-inline="true" data-transition="fade">Map</a>
-		<a href="#popupVideo" data-rel="popup" data-role="button" data-inline="true" data-transition="none">Video</a>
-
+	
 		<div data-role="popup" id="popupInfo" class="ui-content" data-theme="e" style="max-width:350px;">
           <p>Here is a <strong>tiny popup</strong> being used like a tooltip. The text will wrap to multiple lines as needed.</p>
 		</div>
@@ -214,7 +232,7 @@ $('#myPopupDiv').popup("close")
 				</ul>
 		</div>
 
-		<div data-role="popup" id="popupLogin" data-overlay-theme="c" data-theme="a" class="ui-corner-all">
+		<div data-role="popup" id="popupLogin" data-position-to="window" data-theme="a" class="ui-corner-all">
 			<form>
 				<div style="padding:10px 20px;">
 				  <h3>Please sign in</h3>
@@ -229,7 +247,7 @@ $('#myPopupDiv').popup("close")
 			</form>
 		</div>
 		
-		<div data-role="popup" id="popupDialog" data-overlay-theme="a" data-theme="c" style="max-width:400px;" class="ui-corner-all">
+		<div data-role="popup" id="popupDialog" data-position-to="window" data-overlay-theme="a" data-theme="c" style="max-width:400px;" class="ui-corner-all">
 			<div data-role="header" data-theme="a" class="ui-corner-top">
 				<h1>Delete Page?</h1>
 			</div>
@@ -238,27 +256,6 @@ $('#myPopupDiv').popup("close")
 				<p>This action cannot be undone.</p>
 				<a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c">Cancel</a>    
 				<a href="#" data-role="button" data-inline="true" data-rel="back" data-transition="flow" data-theme="b">Delete</a>  
-			</div>
-		</div>
-		
-		<div data-role="popup" id="popupAccordion" data-overlay-theme="d" data-theme="c" style="width:280px;">
-			<div data-role="collapsible-set" data-theme="e" data-content-theme="c" style="margin:0;">
-				<div data-role="collapsible">
-					<h3>Charles Eames</h3>
-					<p>Design is a plan for arranging elements in such a way as best to accomplish a particular purpose.</p>
-				</div>
-				<div data-role="collapsible">
-					<h3>Frank Chimero</h3>
-					<p>People ignore design that ignores people.</p>
-				</div>
-				<div data-role="collapsible">
-					<h3>Jeffrey Zeldman</h3>
-					<p>Content precedes design. Design in the absence of content is not design, it's decoration.</p>
-				</div>
-				<div data-role="collapsible">
-					<h3>Steve Jobs</h3>
-					<p>Design is the fundamental soul of a human-made creation that ends up expressing itself in successive outer layers of the product or service.</p>
-				</div>
 			</div>
 		</div>
 
@@ -270,12 +267,12 @@ $('#myPopupDiv').popup("close")
 			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a><img src="../../_assets/images/photo-portrait.jpg" width="678" height="1024" alt="Photo portrait">
 		</div>
 		
-		<div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="d" class="ui-content">
+		<div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="d" data-corners="false" data-position-to="window">
 			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-			<iframe src="map.html" width="480" height="320" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+			<iframe src="map.html" width="480" height="320" frameborder="0" style="margin: -1px -1px -5px -1px;" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
 		</div>
 				
-		<div data-role="popup" id="popupVideo" data-overlay-theme="a" data-theme="c" class="ui-content">
+		<div data-role="popup" id="popupVideo" data-overlay-theme="a" data-theme="c" data-position-to="window"  class="ui-content">
 			<iframe src="http://player.vimeo.com/video/41135183?autoplay=1" width="497" height="298" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
     		</div>
 
