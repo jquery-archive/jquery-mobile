@@ -622,6 +622,13 @@ define( [ "jquery",
 		}, 300 );
 	};
 
+	$( document ).bind( "pagebeforechange", function( e, data ) {
+		if ( data.options.role === "popup" ) {
+			$.mobile.popup.handleLink( data.options.link );
+			e.preventDefault();
+		}
+	});
+
 	$( document ).bind( "pagecreate create", function( e )  {
 		$.mobile.popup.prototype.enhanceWithin( e.target, true );
 	});
