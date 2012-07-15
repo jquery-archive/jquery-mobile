@@ -184,15 +184,16 @@
 
 		$.testHelper.sequence([
 			function() {
-				select = $( "#select-choice-focus-test" );
-				menu = $( "#select-choice-focus-test-menu" );
+				select = $( "#select-choice-menu-focus-test" );
+				menu = $( "#select-choice-menu-focus-test-menu" );
 				button = select.find( "a" );
 				button.trigger( "click" );
 			},
 
 			function() {
-				same( menu.find( ":focus" ).length, 1, "item in open select menu (" + menu.length + ") has focus" );
-				select.selectmenu( "close" );
+				console.log( document.activeElement );
+				ok( $( document.activeElement ).parents( "#select-choice-menu-focus-test-menu" ).length > 0, "item in open select menu (" + menu.length + ") has focus" );
+				$(".ui-popup-screen:not(.ui-screen-hidden)").trigger( "click" );
 			},
 
 			function() {
