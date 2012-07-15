@@ -40,23 +40,34 @@
 
 	<dl>
 
-		<dt><code>opened</code> triggered when a popup is opened</dt>
+		<dt><code>popupbeforeopen</code> triggered after a popup has completed preparations for opening, but has not yet opened</dt>
 		<dd>
 
 			<pre><code>
 $( ".selector" ).popup({
-   opened: function(event, ui) { ... }
+   popupbeforeopen: function(event, ui) { ... }
+});
+			</code></pre>
+			<p>This event is triggered when the popup has completed preparations for appearing on the screen. At this point the popup has not started the animations and it has not yet calculated the coordinates where it will appear on the screen. Handling this event gives an opportunity to modify the content of the popup before it appears on the screen. For example, the content can be scaled or parts of it can be hidden or removed if it is too wide or too tall.</p>
+		</dd>
+
+		<dt><code>popupafteropen</code> triggered after a popup has completely opened</dt>
+		<dd>
+
+			<pre><code>
+$( ".selector" ).popup({
+   popupafteropen: function(event, ui) { ... }
 });
 			</code></pre>
 			<p>This event is triggered when the popup has completely appeared on the screen, meaning that all associated animations have completed.</p>
 		</dd>
 
-		<dt><code>closed</code> triggered when a popup is closed (by clicking outside of it)</dt>
+		<dt><code>popupafterclose</code> triggered when a popup has completely closed</dt>
 		<dd>
 
 			<pre><code>
 $( ".selector" ).popup({
-   closed: function(event, ui) { ... }
+   popupafterclose: function(event, ui) { ... }
 });
 			</code></pre>
 			<p>This event is triggered when the popup has completely disappeared from the screen, meaning that all associated animations have completed.</p>
