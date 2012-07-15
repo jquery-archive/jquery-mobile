@@ -393,14 +393,3 @@ dd h4 { margin:15px 0 0 0; }
 		width: 60%;
 	}
 }
-/* popup Map example */
-#map_canvas { 
-	border: thin solid;
-	height: 320px;
-	vertical-align: middle;
-	width: 480px; 
-	overflow: hidden;
-	max-height: 90%;
-	max-width:100%;
-	text-shadow: none !important;
-}
