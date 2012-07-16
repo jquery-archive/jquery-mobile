@@ -121,7 +121,11 @@
 			<p>If you add items to a listview, you'll need to call the <code>refresh()</code> method on it to update the styles and create any nested lists that are added. For example:</p>
 			<code>$('#mylist').listview('refresh');</code>
 
-			<p>Note that the <code>refresh()</code> method only affects <strong>new nodes</strong> appended to a list. This is done for performance reasons.  Any list items already enhanced will be ignored by the refresh process. This means that if you change the contents or attributes on an already enhanced list item, these won't be reflected. If you want a list item to be updated, replace it with fresh markup before calling refresh. </p>
+			<p>Note that the <code>refresh()</code> method only affects <strong>new nodes</strong> appended to a list. This is done for performance reasons. Any list items already enhanced will be ignored by the refresh process. This means that if you change the contents or attributes on an already enhanced list item, these won't be reflected. If you want a list item to be updated, replace it with fresh markup before calling refresh.</p>
+			
+			<p>If you initially want to hide a list item you can do this by adding a class of <strong><code>ui-screen-hidden</code></strong> to li element. Using this class ensures the corner styling is applied correctly as well as border-bottom on the last visible item.
+			
+			
 
 
 			</div><!--/content-primary -->
