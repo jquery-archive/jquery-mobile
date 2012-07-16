@@ -160,7 +160,6 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		var o = this.options,
 			$list = this.element,
 			self = this,
-			listIcon = $list.jqmData( "icon" ) || o.icon,
 			dividertheme = $list.jqmData( "dividertheme" ) || o.dividerTheme,
 			listsplittheme = $list.jqmData( "splittheme" ),
 			listspliticon = $list.jqmData( "spliticon" ),
