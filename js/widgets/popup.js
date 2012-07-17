@@ -531,8 +531,8 @@ define( [ "jquery",
 						dstHash += $.mobile.dialogHashKey;
 					}
 					$.mobile.urlHistory.ignoreNextHashChange = currentIsDialog;
-					$.mobile.path.set( dstHash );
 					$.mobile.urlHistory.addNew( dstHash, dstTransition, activeEntry.title, activeEntry.pageUrl, activeEntry.role );
+					$.mobile.path.set( dstHash );
 				}
 			} else {
 				whenHooked();
