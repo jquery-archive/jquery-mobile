@@ -59,12 +59,12 @@
 		
 		<a href="#popupInfo" data-rel="popup" data-role="button" data-inline="true">Tooltip</a>
 		<a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true">Menu</a>
-		<a href="#popupLogin" data-rel="popup" data-role="button" data-inline="true">Form</a>
-		<a href="#popupDialog" data-rel="popup" data-role="button" data-inline="true" data-transition="pop">Dialog</a>
-		<a href="#popupPhotoLandscape" data-rel="popup" data-role="button" data-inline="true">Photo landscape</a>
-		<a href="#popupPhotoPortrait" data-rel="popup" data-role="button" data-inline="true" data-transition="fade">Photo portrait</a>
-		<a href="#popupMap" data-rel="popup" data-role="button" data-inline="true">Map</a>
-		<a href="#popupVideo" data-rel="popup" data-role="button" data-inline="true">Video</a>
+		<a href="#popupLogin" data-rel="popup" data-position-to="window" data-role="button" data-inline="true">Form</a>
+		<a href="#popupDialog" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop">Dialog</a>
+		<a href="#popupPhotoLandscape" data-rel="popup" data-position-to="window" data-role="button" data-inline="true">Photo landscape</a>
+		<a href="#popupPhotoPortrait" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="fade">Photo portrait</a>
+		<a href="#popupMap" data-rel="popup" data-position-to="window" data-role="button" data-inline="true">Map</a>
+		<a href="#popupVideo" data-rel="popup" data-position-to="window" data-role="button" data-inline="true">Video</a>
 	
 	
 		<h2>Calling the popup plugin</h2>
@@ -136,7 +136,7 @@ $('#myPopupDiv').popup("close")
 		
 		<h2>Positioning options</h2>
 		<p>By default, popups open centered vertically and horizontally over the thing you clicked (the origin) which is good for popups used as tooltips or menus. The framework also applies some basic collision detection rules to ensure that the popup will appear on-screen so the ultimate position may not always be centered over the origin.</p>
-		<p>For situations like a dialog or lightbox where the popup should appear centered within the window instead of over the origin, add the <code>data-position-to</code> attribute to the link and specify a value of <code>window</code>. </p>
+		<p>For situations like a dialog or lightbox where the popup should appear centered within the window instead of over the origin, add the <code>data-position-to</code> attribute to the <strong>link</strong> and specify a value of <code>window</code>. </p>
 				
 <pre><code>
 &lt;div data-role=&quot;popup&quot; id=&quot;positionWindow&quot;&gt;
@@ -243,7 +243,7 @@ $('#myPopupDiv').popup("close")
 				</ul>
 		</div>
 
-		<div data-role="popup" id="popupLogin" data-position-to="window" data-theme="a" class="ui-corner-all">
+		<div data-role="popup" id="popupLogin" data-theme="a" class="ui-corner-all">
 			<form>
 				<div style="padding:10px 20px;">
 				  <h3>Please sign in</h3>
@@ -258,7 +258,7 @@ $('#myPopupDiv').popup("close")
 			</form>
 		</div>
 		
-		<div data-role="popup" id="popupDialog" data-position-to="window" data-overlay-theme="a" data-theme="c" style="max-width:400px;" class="ui-corner-all">
+		<div data-role="popup" id="popupDialog" data-overlay-theme="a" data-theme="c" style="max-width:400px;" class="ui-corner-all">
 			<div data-role="header" data-theme="a" class="ui-corner-top">
 				<h1>Delete Page?</h1>
 			</div>
@@ -270,20 +270,20 @@ $('#myPopupDiv').popup("close")
 			</div>
 		</div>
 
-		<div data-role="popup" id="popupPhotoLandscape" data-overlay-theme="a" data-corners="false" data-position-to="window">
+		<div data-role="popup" id="popupPhotoLandscape" data-overlay-theme="a" data-corners="false">
 			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a><img class="popphoto" src="../../_assets/images/photo-landscape.jpg" width="1024" height="678" alt="Photo landscape">
 		</div>
 		
-		<div data-role="popup" id="popupPhotoPortrait" data-overlay-theme="a" data-corners="false" data-position-to="window">
+		<div data-role="popup" id="popupPhotoPortrait" data-overlay-theme="a" data-corners="false">
 			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a><img class="popphoto" src="../../_assets/images/photo-portrait.jpg" width="678" height="1024" alt="Photo portrait">
 		</div>
 		
-		<div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="d" data-corners="false" data-position-to="window">
+		<div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="d" data-corners="false">
 			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
 			<iframe src="map.html" width="480" height="320" frameborder="0" style="margin: -1px -1px -5px -1px;" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
 		</div>
 				
-		<div data-role="popup" id="popupVideo" data-overlay-theme="a" data-theme="c" data-position-to="window"  class="ui-content">
+		<div data-role="popup" id="popupVideo" data-overlay-theme="a" data-theme="c" class="ui-content">
 			<iframe width="497" src="http://player.vimeo.com/video/41135183?portrait=0" height="298" frameborder="0" style="background:black;" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
     		</div>
 
