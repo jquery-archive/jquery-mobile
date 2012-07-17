@@ -32,7 +32,6 @@ define( [ "jquery",
 			shadow: true,
 			corners: true,
 			transition: "none",
-			positionTo: "origin",
 			initSelector: ":jqmData(role='popup')"
 		},
 
