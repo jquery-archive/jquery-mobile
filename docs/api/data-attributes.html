@@ -333,11 +333,27 @@
 					<th>data-rel</th>
 					<td>back (to move one step back in history)<br />
 						dialog (to open link styled as dialog, not tracked in history)<br />
-						external (for linking to another domain)</td>
+						external (for linking to another domain)<br />
+						popup (for opening a popup)</td>
 				</tr>
 				<tr>
 					<th>data-transition</th>
 					<td><strong>fade</strong> | flip | flow | pop | slide | slidedown | slidefade | slideup | turn | none</td>
+				</tr>
+				<tr>
+					<th>data-position-to</th>
+					<td>Used only with popups:<br />
+						<table>
+							<tr>
+								<td><strong>origin</strong></td><td>Center the popup over the link that opens it</td>
+							</tr>
+							<tr>
+								<td style="white-space: nowrap;">jQuery selector</td><td>Center the popup over the selected element. The element must be visible when the link is clicked.</td>
+							</tr>
+							<tr>
+								<td>window</td><td>Center the popup inside the window. This behaviour is also used if a jQuery selector is specified but turns out to be invalid, or if it does not evaluate to a visible element.</td>
+							</tr>
+						</table>
 				</tr>
 			</table>
 
