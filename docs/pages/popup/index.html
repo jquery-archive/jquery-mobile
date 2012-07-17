@@ -135,25 +135,26 @@ $('#myPopupDiv').popup("close")
 	
 		
 		<h2>Positioning options</h2>
-		<p>By default, popups open centered vertically and horizontally over the thing you clicked (origin) which is good for popups used as tooltips or menus. The framework also applies some basic collision detection rules to ensure that the popup will appear on-screen so the ultimate position may not always be centered over the origin.</p>
-		<p>For situations like a dialog or lightbox where the popup should appear centered within the window instead of over the origin, add the <code>data-position-to</code> attribute to the popup container and specify a value of <code>window</code>. </p>
+		<p>By default, popups open centered vertically and horizontally over the thing you clicked (the origin) which is good for popups used as tooltips or menus. The framework also applies some basic collision detection rules to ensure that the popup will appear on-screen so the ultimate position may not always be centered over the origin.</p>
+		<p>For situations like a dialog or lightbox where the popup should appear centered within the window instead of over the origin, add the <code>data-position-to</code> attribute to the link and specify a value of <code>window</code>. </p>
 				
 <pre><code>
-&lt;div data-role=&quot;popup&quot; id=&quot;positionWindow&quot; <strong>data-position-to=&quot;window&quot;</strong> &gt;
+&lt;div data-role=&quot;popup&quot; id=&quot;positionWindow&quot;&gt;
 	&lt;p&gt;I am positioned to the window.&lt;/p&gt;
 &lt;/div&gt;
+&lt;a href=&quot;#positionWindow&quot; data-rel=&quot;popup&quot; <strong>data-position-to=&quot;window&quot;</strong>&gt;
 </code></pre>
 
 		<p>A few examples:</p>
 
-		<a href="#positionWindow" data-role="button" data-inline="true" data-rel="popup">Position to window</a> 
-		<a href="#positionOrigin" data-role="button" data-inline="true" data-rel="popup">Position to origin</a>
+		<a href="#positionWindow" data-role="button" data-inline="true" data-rel="popup" data-position-to="window">Position to window</a> 
+		<a href="#positionOrigin" data-role="button" data-inline="true" data-rel="popup" data-position-to="origin">Position to origin</a>
 
-		<div data-role="popup" id="positionWindow" data-position-to="window" class="ui-content" data-theme="d">
+		<div data-role="popup" id="positionWindow" class="ui-content" data-theme="d">
 			<p>I am positioned to the window.</p>
 		</div>
 
-		<div data-role="popup" id="positionOrigin" data-position-to="origin" class="ui-content" data-theme="d">
+		<div data-role="popup" id="positionOrigin" class="ui-content" data-theme="d">
 			<p>I am positioned over the origin.</p>
 		</div>
 
