@@ -1490,7 +1490,9 @@ define( [
 
 		//hashchange event handler
 		$window.bind( "hashchange", function( e, triggered ) {
-			$.mobile._handleHashChange( location.hash );
+			// Firefox auto-escapes the location.hash as for v13 but
+			// leaves the href untouched
+			$.mobile._handleHashChange( path.parseUrl(location.href).hash );
 		});
 
 		//set page min-heights to be device specific
