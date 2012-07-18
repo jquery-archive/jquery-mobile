@@ -423,40 +423,45 @@ define( [ "jquery",
 			});
 		},
 
+		_closePrereqScreen: function() {
+			this._ui.screen
+				.removeClass( "out" )
+				.addClass( "ui-screen-hidden" );
+		},
+
+		_closePrereqContainer: function() {
+			this._ui.container
+				.removeClass( "reverse out" )
+				.addClass( "ui-selectmenu-hidden" )
+				.removeAttr( "style" );
+		},
+
+		_closePrereqsDone: function() {
+			this._ui.container.removeAttr( "tabindex" );
+			this.element.trigger( "popupafterclose" );
+		},
+
 		_close: function() {
-			var self = this,
-				transition = ( self._currentTransition ? self._currentTransition : self.options.transition );
+			var transition = ( this._currentTransition ? this._currentTransition : this.options.transition );
 
 			this._isOpen = false;
 
 			// Count down to triggering "popupafterclose" - we have two prerequisites:
 			// 1. The popup window reverse animation completes (container())
 			// 2. The screen opacity animation completes (screen())
-			self._createPrereqs(
-				function() {
-					self._ui.screen
-						.removeClass( "out" )
-						.addClass( "ui-screen-hidden" );
-				},
-				function() {
-					self._ui.container
-						.removeClass( "reverse out" )
-						.addClass( "ui-selectmenu-hidden" )
-						.removeAttr( "style" );
-				},
-				function() {
-					self._ui.container.removeAttr( "tabindex" );
-					self.element.trigger( "popupafterclose" );
-				});
+			this._createPrereqs(
+				$.proxy( this, "_closePrereqScreen" ),
+				$.proxy( this, "_closePrereqContainer" ),
+				$.proxy( this, "_closePrereqsDone" ) );
 
-			self._animate( {
-				additionalCondition: self._ui.screen.hasClass( "in" ),
+			this._animate( {
+				additionalCondition: this._ui.screen.hasClass( "in" ),
 				transition: transition,
 				classToRemove: "in",
 				screenClassToAdd: "out",
 				containerClassToAdd: "reverse out",
 				applyTransition: true,
-				prereqs: self._prereqs
+				prereqs: this._prereqs
 			});
 		},
 
