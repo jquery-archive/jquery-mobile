@@ -278,13 +278,11 @@ define( [ "jquery",
 		},
 
 		_animate: function( args ) {
-			var self = this;
-
-			if ( self.options.overlayTheme && args.additionalCondition ) {
-				self._ui.screen
+			if ( this.options.overlayTheme && args.additionalCondition ) {
+				this._ui.screen
 					.removeClass( args.classToRemove )
 					.addClass( args.screenClassToAdd )
-					.animationComplete(function() {
+					.animationComplete( function() {
 						args.prereqs.screen.resolve();
 					});
 			} else {
@@ -292,11 +290,11 @@ define( [ "jquery",
 			}
 
 			if ( args.transition && args.transition !== "none" ) {
-				if ( args.applyTransition ) { self._applyTransition( args.transition ); }
-				self._ui.container
+				if ( args.applyTransition ) { this._applyTransition( args.transition ); }
+				this._ui.container
 					.addClass( args.containerClassToAdd )
 					.removeClass( args.classToRemove )
-					.animationComplete(function() {
+					.animationComplete( function() {
 						args.prereqs.container.resolve();
 					});
 			} else {
