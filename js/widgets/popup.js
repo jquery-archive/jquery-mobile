@@ -282,21 +282,19 @@ define( [ "jquery",
 				this._ui.screen
 					.removeClass( args.classToRemove )
 					.addClass( args.screenClassToAdd )
-					.animationComplete( function() {
-						args.prereqs.screen.resolve();
-					});
+					.animationComplete( $.proxy( args.prereqs.screen, "resolve" ) );
 			} else {
 				args.prereqs.screen.resolve();
 			}
 
 			if ( args.transition && args.transition !== "none" ) {
-				if ( args.applyTransition ) { this._applyTransition( args.transition ); }
+				if ( args.applyTransition ) {
+					this._applyTransition( args.transition );
+				}
 				this._ui.container
 					.addClass( args.containerClassToAdd )
 					.removeClass( args.classToRemove )
-					.animationComplete( function() {
-						args.prereqs.container.resolve();
-					});
+					.animationComplete( $.proxy( args.prereqs.container, "resolve" ) );
 			} else {
 				args.prereqs.container.resolve();
 			}
