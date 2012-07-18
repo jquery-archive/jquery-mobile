@@ -99,6 +99,13 @@ $( document ).on( "pageinit", function() {
 				.prop( "height", height );
 		}
 	});
+	$( "#popupMap" ).on({
+		popupafterclose: function( event ) {
+			$("#mapiframe")
+				.prop( "width", 0 )
+				.prop( "height", 0 );	
+		}
+	});
 	$( "#popupVideo" ).on({
 		popupbeforeopen: function( event ) {
 			var swidth = $( window ).width() - 62,
@@ -114,6 +121,13 @@ $( document ).on( "pageinit", function() {
 			$( "#vidiframe" )
 				.prop( "width", width )
 				.prop( "height", height );
+		}
+	});
+	$( "#popupVideo" ).on({
+		popupafterclose: function( event ) {
+			$("#vidiframe")
+				.prop( "width", 0 )
+				.prop( "height", 0 );	
 		}
 	});
 });
