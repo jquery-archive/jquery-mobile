@@ -41,6 +41,18 @@ define( [ "jquery",
 			this.close();
 		},
 
+		_handleWindowResize: function( e ) {
+			if ( this._isOpen ) {
+				this._resizeScreen();
+			}
+		},
+
+		_handleWindowKeyUp: function( e ) {
+			if ( this._isOpen && e.keyCode === $.mobile.keyCode.ESCAPE ) {
+				this._eatEventAndClose( e );
+			}
+		},
+
 		_create: function() {
 			var ui = {
 					screen: $( "<div class='ui-screen-hidden ui-popup-screen fade'></div>" ),
@@ -80,16 +92,8 @@ define( [ "jquery",
 					{
 						src: $( window ),
 						handler: {
-							resize: function( e ) {
-								if ( self._isOpen ) {
-									self._resizeScreen();
-								}
-							},
-							keyup: function( e ) {
-								if ( self._isOpen && e.keyCode === $.mobile.keyCode.ESCAPE ) {
-									self._eatEventAndClose( e );
-								}
-							}
+							resize: $.proxy( this, "_handleWindowResize" ),
+							keyup: $.proxy( this, "_handleWindowKeyUp" )
 						}
 					}
 				]
@@ -102,7 +106,7 @@ define( [ "jquery",
 				self._setOption( key, value, true );
 			});
 
-			ui.screen.bind( "vclick", function( e ) { self._eatEventAndClose( e ); });
+			ui.screen.bind( "vclick", $.proxy( this, "_eatEventAndClose" ) );
 
 			$.each( this._globalHandlers, function( idx, value ) {
 				value.src.bind( value.handler );
