@@ -591,14 +591,12 @@ define( [ "jquery",
 		},
 
 		pop: function( popup ) {
-			var self = this;
-
-			if ( popup === self._currentlyOpenPopup && !self._popupIsClosing ) {
-				self._popupIsClosing = true;
-				if ( self._popupIsOpening ) {
-					self._currentlyOpenPopup.element.one( "popupafteropen", $.proxy( self, "_navUnhook" ) );
+			if ( popup === this._currentlyOpenPopup && !this._popupIsClosing ) {
+				this._popupIsClosing = true;
+				if ( this._popupIsOpening ) {
+					this._currentlyOpenPopup.element.one( "popupafteropen", $.proxy( this, "_navUnhook" ) );
 				} else {
-					self._navUnhook();
+					this._navUnhook();
 				}
 			}
 		},
