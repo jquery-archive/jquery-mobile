@@ -352,9 +352,20 @@ define( [ "jquery",
 			return desired;
 		},
 
+		_openPrereqContainer: function() {
+			this._applyTransition( "none" );
+			this._ui.container.removeClass( "in" );
+			this._resizeScreen();
+		},
+
+		_openPrereqsComplete: function() {
+			this._isOpen = true;
+			this._ui.container.attr( "tabindex", "0" ).focus();
+			this.element.trigger( "popupafteropen" );
+		},
+
 		_open: function( x, y, $link ) {
-			var self = this,
-				transition = "",
+			var transition = "",
 				desiredPlacement = {
 					x: x,
 					y: y,
@@ -370,53 +381,45 @@ define( [ "jquery",
 			// Give applications a chance to modify the contents of the container before it appears
 			this.element.trigger( "popupbeforeopen" );
 
-			coords = self._placementCoords( self._desiredCoords( desiredPlacement ) );
+			coords = this._placementCoords( this._desiredCoords( desiredPlacement ) );
 
 			// Count down to triggering "popupafteropen" - we have two prerequisites:
 			// 1. The popup window animation completes (container())
 			// 2. The screen opacity animation completes (screen())
-			self._createPrereqs(
+			this._createPrereqs(
 				$.noop,
-				function() {
-					self._applyTransition( "none" );
-					self._ui.container.removeClass( "in" );
-					self._resizeScreen();
-				},
-				function() {
-					self._isOpen = true;
-					self._ui.container.attr( "tabindex", "0" ).focus();
-					self.element.trigger( "popupafteropen" );
-				});
+				$.proxy( this, "_openPrereqContainer" ),
+				$.proxy( this, "_openPrereqsComplete" ) );
 
 			if ( transition ) {
-				self._currentTransition = transition;
-				self._applyTransition( transition );
+				this._currentTransition = transition;
+				this._applyTransition( transition );
 			} else {
-				transition = self.options.transition;
+				transition = this.options.transition;
 			}
 
-			if ( !self.options.theme ) {
-				self._setTheme( self._page.jqmData( "theme" ) || $.mobile.getInheritedTheme( self._page, "c" ) );
+			if ( !this.options.theme ) {
+				this._setTheme( this._page.jqmData( "theme" ) || $.mobile.getInheritedTheme( this._page, "c" ) );
 			}
 
-			self._resizeScreen();
-			self._ui.screen.removeClass( "ui-screen-hidden" );
+			this._resizeScreen();
+			this._ui.screen.removeClass( "ui-screen-hidden" );
 
-			self._ui.container
+			this._ui.container
 				.removeClass( "ui-selectmenu-hidden" )
 				.offset( {
 					left: coords.x,
 					top: coords.y
 				});
 
-			self._animate({
+			this._animate({
 				additionalCondition: true,
 				transition: transition,
 				classToRemove: "",
 				screenClassToAdd: "in",
 				containerClassToAdd: "in",
 				applyTransition: false,
-				prereqs: self._prereqs
+				prereqs: this._prereqs
 			});
 		},
 
