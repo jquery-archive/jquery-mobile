@@ -601,24 +601,24 @@ define( [ "jquery",
 			}
 		},
 
+		_handlePopupAfterClose: function() {
+			this._popupIsClosing = false;
+			this._currentlyOpenPopup = null;
+			$( this ).trigger( "done" );
+		},
+
 		_onHashChange: function( immediate ) {
-			var self = this;
+			this._abort = immediate;
 
-			self._abort = immediate;
-
-			if ( self._currentlyOpenPopup ) {
-				if ( immediate && self._popupIsOpening ) {
-					self._currentlyOpenPopup._immediate();
+			if ( this._currentlyOpenPopup ) {
+				if ( immediate && this._popupIsOpening ) {
+					this._currentlyOpenPopup._immediate();
 				}
-				self._popupIsClosing = true;
-				self._currentlyOpenPopup.element.one( "popupafterclose", function() {
-					self._popupIsClosing = false;
-					self._currentlyOpenPopup = null;
-					$( self ).trigger( "done" );
-				});
-				self._currentlyOpenPopup._close();
-				if ( immediate && self._currentlyOpenPopup ) {
-					self._currentlyOpenPopup._immediate();
+				this._popupIsClosing = true;
+				this._currentlyOpenPopup.element.one( "popupafterclose", $.proxy( this, "_handlePopupAfterClose" ) );
+				this._currentlyOpenPopup._close();
+				if ( immediate && this._currentlyOpenPopup ) {
+					this._currentlyOpenPopup._immediate();
 				}
 			}
 		}
