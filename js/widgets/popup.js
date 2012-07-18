@@ -182,7 +182,7 @@ define( [ "jquery",
 		},
 
 		_setOption: function( key, value ) {
-			var setter = "_set" + key.replace( /^[a-z]/, function( c ) { return c.toUpperCase(); } );
+			var setter = "_set" + key.charAt(0).toUpperCase() + key.slice( 1 );
 
 			if ( this[ setter ] !== undefined ) {
 				this[ setter ]( value );
