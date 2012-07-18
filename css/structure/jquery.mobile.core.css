@@ -2,9 +2,6 @@
 .ui-mobile, .ui-mobile body { height: 99.9%; }
 .ui-mobile fieldset, .ui-page { padding: 0; margin: 0; }
 .ui-mobile a img, .ui-mobile fieldset { border-width: 0; }
-/* Android 2.3 doesn't hide iframes */
-.ui-mobile .ui-screen-hidden iframe { height: 0; width: 0; border: 0; margin: 0; padding: 0; }
-.ui-mobile iframe { max-width: 100% !important; }
 
 /* responsive page widths */
 .ui-mobile-viewport { margin: 0; overflow-x: visible; -webkit-text-size-adjust: none; -ms-text-size-adjust:none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
