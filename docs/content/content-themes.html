@@ -33,7 +33,7 @@
 </code>
 
 		<h2>Theming collapsible blocks</h2>
-		<p>To set the color of the collapsible header, add the <code> data-theme</code> attribute to the collapsible container. The icon and body are not currently themable through data attributes, but can be styled directly with custom css.</p>
+		<p>To set the color of the collapsible header, add the <code>data-theme</code> attribute to the collapsible container. The icons can be set with the <code>data-collapsed-icon</code> attribute for the collapsed state and the <code>data-expanded-icon</code> attribute for the expanded state of a collapsible. The body is themable through the data attribute <code>data-content-theme</code>.</p>
 
 <code>		
 &lt;div data-role=&quot;collapsible&quot; data-collapsed=&quot;true&quot; <strong> data-theme=&quot;a&quot;&gt;</strong>
@@ -105,6 +105,19 @@
 				<p>I have <code> data-theme</code> attribute set manually on my container to set the color to match the content block I'm in. </p>
 			</div><!-- /collapsible -->
 			<div data-role="collapsible" data-theme="e" data-content-theme="e">
+				<h3>I'm a themed collapsible with a themed content</h3>
+				<p>I have <code> data-content-theme</code> attribute set manually on my container to set the color to match the content block I'm in. </p>
+			</div>
+		</div><!-- /themed container -->
+		<p>Swatch <strong>"b"</strong> on content &amp; collapsible, using different icons</p>
+		<div class="ui-body ui-body-b">
+			<h1>H1 Heading</h1>
+			<p>This is a paragraph that contains <strong>strong</strong>, <em>emphasized</em> and <a href="index.html">linked</a> text. Here is more text so you can see how HTML markup works in content. Here is more text so you can see how HTML markup works in content.</p>
+			<div data-role="collapsible" data-collapsed="true" data-theme="b" data-collapsed-icon="arrow-d" data-expanded-icon="arrow-u">
+				<h3>I'm a themed collapsible</h3>
+				<p>I have <code> data-theme</code> attribute set manually on my container to set the color to match the content block I'm in. </p>
+			</div><!-- /collapsible -->
+			<div data-role="collapsible" data-theme="b" data-content-theme="b" data-collapsed-icon="arrow-d" data-expanded-icon="arrow-u">
 				<h3>I'm a themed collapsible with a themed content</h3>
 				<p>I have <code> data-content-theme</code> attribute set manually on my container to set the color to match the content block I'm in. </p>
 			</div>
