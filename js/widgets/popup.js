@@ -241,24 +241,33 @@ define( [ "jquery",
 		_createPrereqs: function( screenPrereq, containerPrereq, whenDone ) {
 			var self = this, prereqs;
 
+			// It is important to maintain both the local variable prereqs and self._prereqs. The local variable remains in
+			// the closure of the functions which call the callbacks passed in. The comparison between the local variable and
+			// self._prereqs is necessary, because once a function has been passed to .animationComplete() it will be called
+			// next time an animation completes, even if that's not the animation whose end the function was supposed to catch
+			// (for example, if an abort happens during the opening animation, the .animationComplete handler is not called for
+			// that animation anymore, but the handler remains attached, so it is called the next time the popup is opened
+			// - making it stale. Comparing the local variable prereqs to the widget-level variable self._prereqs ensures that
+			// callbacks triggered by a stale .animationComplete will be ignored.
+
 			prereqs = {
-				screen: $.Deferred(function( d ) {
-					d.then(function() {
-						if ( prereqs === self._prereqs ) {
-							screenPrereq();
-						}
-					});
-				}),
-				container: $.Deferred(function( d ) {
-					d.then(function() {
-						if ( prereqs === self._prereqs ) {
-							containerPrereq();
-						}
-					});
-				})
+				screen: $.Deferred(),
+				container: $.Deferred()
 			};
 
-			$.when( prereqs.screen, prereqs.container ).done(function() {
+			prereqs.screen.then( function() {
+				if ( prereqs === self._prereqs ) {
+					screenPrereq();
+				}
+			});
+
+			prereqs.container.then( function() {
+				if ( prereqs === self._prereqs ) {
+					containerPrereq();
+				}
+			});
+
+			$.when( prereqs.screen, prereqs.container ).done( function() {
 				if ( prereqs === self._prereqs ) {
 					self._prereqs = null;
 					whenDone();
