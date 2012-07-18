@@ -278,13 +278,13 @@ $('#myPopupDiv').popup("close")
 			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a><img class="popphoto" src="../../_assets/images/photo-portrait.jpg" alt="Photo portrait">
 		</div>
 		
-		<div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="d" data-corners="false">
+		<div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="a" data-corners="false">
 			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-			<iframe src="map.html" width="480" height="320" frameborder="0" style="margin: -1px -1px -5px -1px;" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+			<iframe id="mapiframe" src="map.html" width="480" height="320" frameborder="0" seamless webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
 		</div>
 				
 		<div data-role="popup" id="popupVideo" data-overlay-theme="a" data-theme="c" class="ui-content">
-			<iframe width="497" src="http://player.vimeo.com/video/41135183?portrait=0" height="298" frameborder="0" style="background:black;" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+			<iframe id="vidiframe" src="http://player.vimeo.com/video/41135183?portrait=0" width="497" height="298" frameborder="0" seamless webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
     		</div>
 
 		<h2>Note: Chaining of popups not allowed</h2>
