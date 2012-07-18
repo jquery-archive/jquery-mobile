@@ -35,16 +35,17 @@ define( [ "jquery",
 			initSelector: ":jqmData(role='popup')"
 		},
 
+		_eatEventAndClose: function( e ) {
+			e.preventDefault();
+			e.stopImmediatePropagation();
+			this.close();
+		},
+
 		_create: function() {
 			var ui = {
 					screen: $( "<div class='ui-screen-hidden ui-popup-screen fade'></div>" ),
 					placeholder: $( "<div style='display: none;'><!-- placeholder --></div>" ),
 					container: $( "<div class='ui-popup-container ui-selectmenu-hidden'></div>" )
-				},
-				eatEventAndClose = function( e ) {
-					e.preventDefault();
-					e.stopImmediatePropagation();
-					self.close();
 				},
 				thisPage = this.element.closest( ".ui-page" ),
 				myId = this.element.attr( "id" ),
@@ -86,7 +87,7 @@ define( [ "jquery",
 							},
 							keyup: function( e ) {
 								if ( self._isOpen && e.keyCode === $.mobile.keyCode.ESCAPE ) {
-									eatEventAndClose( e );
+									self._eatEventAndClose( e );
 								}
 							}
 						}
@@ -101,7 +102,7 @@ define( [ "jquery",
 				self._setOption( key, value, true );
 			});
 
-			ui.screen.bind( "vclick", function( e ) { eatEventAndClose( e ); });
+			ui.screen.bind( "vclick", function( e ) { self._eatEventAndClose( e ); });
 
 			$.each( this._globalHandlers, function( idx, value ) {
 				value.src.bind( value.handler );
