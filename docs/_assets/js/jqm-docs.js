@@ -71,12 +71,63 @@ if ( location.protocol.substr(0,4)  === 'file' ||
   });
 }
 
-// popup photo examples
+// popup examples
 $( document ).on( "pageinit", function() {
 	$( "#popupPhotoPortrait, #popupPhotoLandscape" ).on({
 		popupbeforeopen: function( event ) {
 			var inner = $( window ).height() - 62 + "px";
 			$( ".popphoto" ).css( "max-height", inner );
+		}
+	});
+	$("#mapiframe, #vidiframe")
+		.prop( "width", 0 )
+		.prop( "height", 0 );	
+	$( "#popupMap" ).on({
+		popupbeforeopen: function( event ) {
+			var swidth = $( window ).width() - 32,
+				sheight = $( window ).height() - 62,
+				iwidth = 480, iheight = 320;
+			if ( iwidth > swidth ) {
+				width = swidth;
+				height = swidth / iwidth * iheight;
+			} else {
+				width = iwidth;
+				height = iheight;
+			}
+			$( "#mapiframe" )
+				.prop( "width", width )
+				.prop( "height", height );
+		}
+	});
+	$( "#popupMap" ).on({
+		popupafterclose: function( event ) {
+			$("#mapiframe")
+				.prop( "width", 0 )
+				.prop( "height", 0 );	
+		}
+	});
+	$( "#popupVideo" ).on({
+		popupbeforeopen: function( event ) {
+			var swidth = $( window ).width() - 62,
+				sheight = $( window ).height() - 62,
+				iwidth = 497, iheight = 298;
+			if ( iwidth > swidth ) {
+				width = swidth;
+				height = swidth / iwidth * iheight;
+			} else {
+				width = iwidth;
+				height = iheight;
+			}
+			$( "#vidiframe" )
+				.prop( "width", width )
+				.prop( "height", height );
+		}
+	});
+	$( "#popupVideo" ).on({
+		popupafterclose: function( event ) {
+			$("#vidiframe")
+				.prop( "width", 0 )
+				.prop( "height", 0 );	
 		}
 	});
 });

@@ -168,6 +168,16 @@ $('#myPopupDiv').popup("close")
 			<li>If centering the popup over an element would cause the overall height of the document to increase, the popup is shifted upwards at most until its top coordinate becomes 0.</li>
 		</ol>
 
+		<p>To programmatically make use of the popup's positioning functionality (and any features made available by specifying <code>data-*</code> options on links), pass a jQuery object with the corresponding data items as the third parameter to <code>open()</code>:</p>
+<code><pre>
+$( ".selector" ).popup( "open", x, y,
+  $( {} )
+    .jqmData( "position-to", "window" )
+    .jqmData( "transition", "slide" ) );
+</pre></code>
+
+		<p>The above will cause the popup to open and close with a slide transition, and to position itself centered in the window.</p>
+
 		<h2>Setting transitions</h2>
 		<p>By default, popups have no transition to make them open as quickly as possible. To set the transition used for a popup, add the <code>data-transition</code> attribute to the link that references the popup. </p>
 				
@@ -278,13 +288,13 @@ $('#myPopupDiv').popup("close")
 			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a><img class="popphoto" src="../../_assets/images/photo-portrait.jpg" alt="Photo portrait">
 		</div>
 		
-		<div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="d" data-corners="false">
+		<div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="a" data-corners="false">
 			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-			<iframe src="map.html" width="480" height="320" frameborder="0" style="margin: -1px -1px -5px -1px;" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+			<iframe id="mapiframe" src="map.html" width="480" height="320" frameborder="0" seamless webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
 		</div>
 				
 		<div data-role="popup" id="popupVideo" data-overlay-theme="a" data-theme="c" class="ui-content">
-			<iframe width="497" src="http://player.vimeo.com/video/41135183?portrait=0" height="298" frameborder="0" style="background:black;" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+			<iframe id="vidiframe" src="http://player.vimeo.com/video/41135183?portrait=0" width="497" height="298" frameborder="0" seamless webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
     		</div>
 
 		<h2>Note: Chaining of popups not allowed</h2>

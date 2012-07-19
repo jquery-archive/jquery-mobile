@@ -129,7 +129,7 @@ $.fn.buttonMarkup = function( options ) {
 		if ( buttonIcon ) {
 			buttonIcon.className = iconClass;
 			if ( !( buttonElements && buttonElements.icon ) ) {
-				buttonIcon.appendChild( document.createTextNode( "\u00a0" ) );
+				buttonIcon.innerHTML = "&#160;";
 				buttonInner.appendChild( buttonIcon );
 			}
 		}

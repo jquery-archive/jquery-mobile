@@ -35,7 +35,7 @@
 				</style>
 
 			<h2><a href="../buttons/buttons-types.html">Button</a></h2>
-			<p>Links with <code>data-role="button"</code>. Input-based buttons, links in toolbars, and button elements are auto-enhanced, no <code>data-role</code> required.</p>
+			<p>Links with <code>data-role="button"</code>. Input-based buttons, links in toolbars and button elements are auto-enhanced, no <code>data-role</code> required.</p>
 			<table>
 				<tr>
 					<th>data-corners</th>
@@ -477,7 +477,7 @@
 			</table>
 
 			<h2><a href="../pages/popup/">Popup</a></h2>
-			<p>Container with <code>data-role="popup"</code> and linked to with <code>data-rel="popup"</code> on the anchor.</p>
+			<p>Container with <code>data-role="popup"</code></p>
 			<table>
 				<tr>
 					<th>data-corners</th>
@@ -498,6 +498,23 @@
 				<tr>
 					<th>data-transition</th>
 					<td><strong>none</strong> - the transition to be used when showing/hiding the popup</td>
+				</tr>
+			</table>
+			<p>Anchor with a <code>data-rel="popup"</code> opens the popup</p>
+			<table>
+				<tr>
+					<th>data-position-to</th>
+					<td><strong>origin</strong> (centers the popup over the link that opens it)<br />
+						jQuery selector (centers the popup over the specified element)<br />
+						window (centers the popup in the window)</td>
+				</tr>
+				<tr>
+					<th>data-rel</th>
+					<td>popup (for opening a popup)</td>
+				</tr>
+				<tr>
+					<th>data-transition</th>
+					<td><strong>fade</strong> | flip | flow | pop | slide | slidedown | slidefade | slideup | turn | none</td>
 				</tr>
 			</table>
 
