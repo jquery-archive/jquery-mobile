@@ -9,6 +9,9 @@
 	box-sizing: border-box;
 }
 
+.ui-page-pre-in {
+	opacity: 0;
+}
 .in {
 	-webkit-animation-fill-mode: both;
 	-webkit-animation-timing-function: ease-out;
