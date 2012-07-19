@@ -93,23 +93,16 @@ $( document ).on( "pageinit", function() {
 			iw = iframewidth + ip + ib,
 			ih = iframeheight + ip + ib,
 			h, w, width, height;
-			
-		if ( iw > ih ) {
-			if ( iw > sw ) {
-				w = sw;
-				h = sw / iw * ih;
-			} else {
-				w = iw;
-				h = ih;
-			}
+
+		if ( iw < sw && ih < sh ) {
+			w = iw;
+			h = ih;
+		} else if ( ( iw / sw ) > ( ih / sh ) ) {
+			w = sw;
+			h = ( sw / iw ) * ih;
 		} else {
-			if ( ih > sh ) {
-				h = sh;
-				w = sh / ih * iw;
-			} else {
-				h = ih;
-				w = iw;
-			}
+			h = sh;
+			w = ( sh / ih ) * iw;
 		}
 		
 		width = w - ( ip + ib );
