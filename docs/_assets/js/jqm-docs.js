@@ -86,8 +86,8 @@ $( document ).on( "pageinit", function() {
 		.prop( "height", 0 );	
 			
 	function sizes(iframewidth, iframeheight, padding, border) {
-		var sw = $( window ).width() - 30,
-			sh = $( window ).height() - 30,
+		var sw = window.outerWidth > $( window ).width() ? $( window ).width() - 30 : window.outerWidth - 30,
+			sh = window.outerHeight > $( window ).height() ? $( window ).height() - 30 : window.outerHeight - 30,
 			ip = 2 * padding,
 			ib = 2 * border,
 			iw = iframewidth + ip + ib,
