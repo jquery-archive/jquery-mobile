@@ -304,23 +304,17 @@ define( [ "jquery",
 		// The desired coordinates passed in will be returned untouched if no reference element can be identified via
 		// desiredPosition.positionTo. Nevertheless, this function ensures that its return value always contains valid
 		// x and y coordinates by specifying the center middle of the window if the coordinates are absent.
-		_desiredCoords: function( desiredPosition ) {
-			var dst = null, offset, $win = $( window ),
-				desired = {
-					x: desiredPosition.x,
-					y: desiredPosition.y
-				};
+		_desiredCoords: function( x, y, positionTo ) {
+			var dst = null, offset, $win = $( window );
 
 			// Establish which element will serve as the reference
-			if ( desiredPosition.positionTo && desiredPosition.positionTo !== "origin" ) {
-				if ( desiredPosition.positionTo === "window" ) {
-					desired = {
-						x: $win.width() / 2 + $win.scrollLeft(),
-						y: $win.height() / 2 + $win.scrollTop()
-					};
+			if ( positionTo && positionTo !== "origin" ) {
+				if ( positionTo === "window" ) {
+					x = $win.width() / 2 + $win.scrollLeft();
+					y = $win.height() / 2 + $win.scrollTop();
 				} else {
 					try {
-						dst = $( desiredPosition.positionTo );
+						dst = $( positionTo );
 					} catch( e ) {
 						dst = null;
 					}
@@ -336,21 +330,19 @@ define( [ "jquery",
 			// If an element was found, center over it
 			if ( dst ) {
 				offset = dst.offset();
-				desired = {
-					x: offset.left + dst.outerWidth() / 2,
-					y: offset.top + dst.outerHeight() / 2
-				};
+				x = offset.left + dst.outerWidth() / 2;
+				y = offset.top + dst.outerHeight() / 2;
 			}
 
 			// Make sure x and y are valid numbers - center over the window
-			if ( $.type( desired.x ) !== "number" || isNaN( desired.x ) ) {
-				desired.x = $win.width() / 2 + $win.scrollLeft();
+			if ( $.type( x ) !== "number" || isNaN( x ) ) {
+				x = $win.width() / 2 + $win.scrollLeft();
 			}
-			if ( $.type( desired.y ) !== "number" || isNaN( desired.y ) ) {
-				desired.y = $win.height() / 2 + $win.scrollTop();
+			if ( $.type( y ) !== "number" || isNaN( y ) ) {
+				y = $win.height() / 2 + $win.scrollTop();
 			}
 
-			return desired;
+			return { x: x, y: y };
 		},
 
 		_openPrereqContainer: function() {
@@ -365,24 +357,13 @@ define( [ "jquery",
 			this.element.trigger( "popupafteropen" );
 		},
 
-		_open: function( x, y, $link ) {
-			var transition = "",
-				desiredPlacement = {
-					x: x,
-					y: y,
-					positionTo: "origin"
-				},
-				coords;
-
-			if ( $link ) {
-				transition = $link.jqmData( "transition" );
-				desiredPlacement.positionTo = $link.jqmData( "position-to" );
-			}
+		_open: function( x, y, transition, positionTo ) {
+			var coords;
 
 			// Give applications a chance to modify the contents of the container before it appears
 			this.element.trigger( "popupbeforeopen" );
 
-			coords = this._placementCoords( this._desiredCoords( desiredPlacement ) );
+			coords = this._placementCoords( this._desiredCoords( x, y, positionTo ) );
 
 			// Count down to triggering "popupafteropen" - we have two prerequisites:
 			// 1. The popup window animation completes (container())
@@ -481,7 +462,7 @@ define( [ "jquery",
 			});
 		},
 
-		open: function( x, y, $link ) {
+		open: function( x, y, transition, positionTo ) {
 			$.mobile.popup.popupManager.push( this, arguments );
 		},
 
@@ -637,7 +618,8 @@ define( [ "jquery",
 			popup.popup( "open",
 				offset.left + $link.outerWidth() / 2,
 				offset.top + $link.outerHeight() / 2,
-				$link );
+				$link.jqmData( "transition" ),
+				$link.jqmData( "position-to" ) );
 
 			// If this link is not inside a popup, re-focus onto it after the popup(s) complete
 			// For some reason, a $.proxy( $link, "focus" ) doesn't work as the handler
