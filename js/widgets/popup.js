@@ -498,6 +498,22 @@ define( [ "jquery",
 		_popupIsClosing: false,
 		_abort: false,
 
+		_handlePageBeforeChange: function( e, data ) {
+			var parsedDst, toUrl;
+
+			if ( typeof data.toPage === "string" ) {
+				parsedDst = data.toPage;
+			} else {
+				parsedDst = data.toPage.jqmData( "url" );
+			}
+			parsedDst = $.mobile.path.parseUrl( parsedDst );
+			toUrl = parsedDst.pathname + parsedDst.search + parsedDst.hash;
+
+			if ( this._myUrl !== toUrl ) {
+				this._onHashChange( true );
+			}
+		},
+
 		// Call _onHashChange if the hash changes /after/ the popup is on the screen
 		// Note that placing the popup on the screen can itself cause a hashchange,
 		// because the dialogHashKey may need to be added to the URL.
@@ -511,21 +527,7 @@ define( [ "jquery",
 			}
 
 			self._myUrl = $.mobile.activePage.jqmData( "url" );
-			$.mobile.pageContainer.one( "pagebeforechange.popup", function( e, data ) {
-				var parsedDst, toUrl;
-
-				if ( typeof data.toPage === "string" ) {
-					parsedDst = data.toPage;
-				} else {
-					parsedDst = data.toPage.jqmData( "url" );
-				}
-				parsedDst = $.mobile.path.parseUrl( parsedDst );
-				toUrl = parsedDst.pathname + parsedDst.search + parsedDst.hash;
-
-				if ( self._myUrl !== toUrl ) {
-					self._onHashChange( true );
-				}
-			});
+			$.mobile.pageContainer.one( "pagebeforechange.popup", $.proxy( this, "_handlePageBeforeChange" ) );
 			if ( $.mobile.hashListeningEnabled ) {
 				var activeEntry = $.mobile.urlHistory.getActive(),
 					dstTransition,
