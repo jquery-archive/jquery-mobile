@@ -33,6 +33,7 @@ define( [ "jquery",
 			shadow: true,
 			corners: true,
 			transition: "none",
+			positionTo: "origin",
 			initSelector: ":jqmData(role='popup')"
 		},
 
@@ -363,7 +364,7 @@ define( [ "jquery",
 			// Give applications a chance to modify the contents of the container before it appears
 			this.element.trigger( "popupbeforeopen" );
 
-			coords = this._placementCoords( this._desiredCoords( x, y, positionTo ) );
+			coords = this._placementCoords( this._desiredCoords( x, y, positionTo || this.options.positionTo || "origin" ) );
 
 			// Count down to triggering "popupafteropen" - we have two prerequisites:
 			// 1. The popup window animation completes (container())
