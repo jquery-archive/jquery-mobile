@@ -182,7 +182,7 @@ define( [ "jquery",
 		},
 
 		_setOption: function( key, value ) {
-			var setter = "_set" + key.charAt(0).toUpperCase() + key.slice( 1 );
+			var setter = "_set" + key.charAt( 0 ).toUpperCase() + key.slice( 1 );
 
 			if ( this[ setter ] !== undefined ) {
 				this[ setter ]( value );
@@ -341,7 +341,7 @@ define( [ "jquery",
 				};
 			}
 
-			// Make sure x and y are valid numbers
+			// Make sure x and y are valid numbers - center over the window
 			if ( $.type( desired.x ) !== "number" || isNaN( desired.x ) ) {
 				desired.x = $win.width() / 2 + $win.scrollLeft();
 			}
@@ -442,8 +442,6 @@ define( [ "jquery",
 		},
 
 		_close: function() {
-			var transition = ( this._currentTransition ? this._currentTransition : this.options.transition );
-
 			this._isOpen = false;
 
 			// Count down to triggering "popupafterclose" - we have two prerequisites:
@@ -456,7 +454,7 @@ define( [ "jquery",
 
 			this._animate( {
 				additionalCondition: this._ui.screen.hasClass( "in" ),
-				transition: transition,
+				transition: ( this._currentTransition || this.options.transition ),
 				classToRemove: "in",
 				screenClassToAdd: "out",
 				containerClassToAdd: "reverse out",
@@ -474,6 +472,7 @@ define( [ "jquery",
 			this._ui.container.remove();
 			this._ui.placeholder.remove();
 
+			// Unbind handlers that were bound to elements outside this.element (the window, in this case)
 			$.each( this._globalHandlers, function( idx, oneSrc ) {
 				$.each( oneSrc.handler, function( eventType, handler ) {
 					oneSrc.src.unbind( eventType, handler );
