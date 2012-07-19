@@ -73,33 +73,64 @@ if ( location.protocol.substr(0,4)  === 'file' ||
 
 // popup examples
 $( document ).on( "pageinit", function() {
+	
 	$( "#popupPhotoPortrait, #popupPhotoLandscape" ).on({
 		popupbeforeopen: function( event ) {
 			var inner = $( window ).height() - 62 + "px";
 			$( ".popphoto" ).css( "max-height", inner );
 		}
 	});
+
 	$("#mapiframe, #vidiframe")
 		.prop( "width", 0 )
 		.prop( "height", 0 );	
+			
+	function sizes(iframewidth, iframeheight, padding, border) {
+		var sw = $( window ).width() - 30,
+			sh = $( window ).height() - 30,
+			ip = 2 * padding,
+			ib = 2 * border,
+			iw = iframewidth + ip + ib,
+			ih = iframeheight + ip + ib,
+			h, w, width, height;
+			
+		if ( iw > ih ) {
+			if ( iw > sw ) {
+				w = sw;
+				h = sw / iw * ih;
+			} else {
+				w = iw;
+				h = ih;
+			}
+		} else {
+			if ( ih > sh ) {
+				h = sh;
+				w = sh / ih * iw;
+			} else {
+				h = ih;
+				w = iw;
+			}
+		}
+		
+		width = w - ( ip + ib );
+		height = h - ( ip + ib );
+		
+		return {
+			'width': width,
+			'height': height
+		};
+	};
+	
 	$( "#popupMap" ).on({
 		popupbeforeopen: function( event ) {
-			var swidth = $( window ).width() - 32,
-				sheight = $( window ).height() - 62,
-				iwidth = 480, iheight = 320;
-			if ( iwidth > swidth ) {
-				width = swidth;
-				height = swidth / iwidth * iheight;
-			} else {
-				width = iwidth;
-				height = iheight;
-			}
+			var size = sizes(480, 320, 0, 1),
+				w = size.width,
+				h = size.height;
+				
 			$( "#mapiframe" )
-				.prop( "width", width )
-				.prop( "height", height );
-		}
-	});
-	$( "#popupMap" ).on({
+				.prop( "width", w )
+				.prop( "height", h );
+		},
 		popupafterclose: function( event ) {
 			$("#mapiframe")
 				.prop( "width", 0 )
@@ -108,22 +139,14 @@ $( document ).on( "pageinit", function() {
 	});
 	$( "#popupVideo" ).on({
 		popupbeforeopen: function( event ) {
-			var swidth = $( window ).width() - 62,
-				sheight = $( window ).height() - 62,
-				iwidth = 497, iheight = 298;
-			if ( iwidth > swidth ) {
-				width = swidth;
-				height = swidth / iwidth * iheight;
-			} else {
-				width = iwidth;
-				height = iheight;
-			}
+			var size = sizes(497, 298, 15, 1),
+				w = size.width,
+				h = size.height;
+				
 			$( "#vidiframe" )
-				.prop( "width", width )
-				.prop( "height", height );
-		}
-	});
-	$( "#popupVideo" ).on({
+				.prop( "width", w )
+				.prop( "height", h );
+		},
 		popupafterclose: function( event ) {
 			$("#vidiframe")
 				.prop( "width", 0 )
