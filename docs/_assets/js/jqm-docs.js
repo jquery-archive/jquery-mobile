@@ -75,7 +75,7 @@ if ( location.protocol.substr(0,4)  === 'file' ||
 $( document ).on( "pageinit", function() {
 	
 	$( "#popupPhotoPortrait, #popupPhotoLandscape" ).on({
-		popupbeforeopen: function( event ) {
+		popupbeforeposition: function( event ) {
 			var inner = $( window ).height() - 62 + "px";
 			$( ".popphoto" ).css( "max-height", inner );
 		}
@@ -115,7 +115,7 @@ $( document ).on( "pageinit", function() {
 	};
 	
 	$( "#popupMap" ).on({
-		popupbeforeopen: function( event ) {
+		popupbeforeposition: function( event ) {
 			var size = sizes(480, 320, 0, 1),
 				w = size.width,
 				h = size.height;
@@ -131,7 +131,7 @@ $( document ).on( "pageinit", function() {
 		}
 	});
 	$( "#popupVideo" ).on({
-		popupbeforeopen: function( event ) {
+		popupbeforeposition: function( event ) {
 			var size = sizes(497, 298, 15, 1),
 				w = size.width,
 				h = size.height;
