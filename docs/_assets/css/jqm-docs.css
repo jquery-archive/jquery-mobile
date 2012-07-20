@@ -393,3 +393,10 @@ dd h4 { margin:15px 0 0 0; }
 		width: 60%;
 	}
 }
+
+/* tables documenting enum-type settings */
+
+.enum-value {
+	vertical-align: top;
+	white-space: nowrap;
+}

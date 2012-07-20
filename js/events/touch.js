@@ -122,7 +122,7 @@ define( [ "jquery", "../jquery.mobile.vmouse" ], function( $ ) {
 
 	// also handles swipeleft, swiperight
 	$.event.special.swipe = {
-		scrollSupressionThreshold: 10, // More than this horizontal displacement, and we will suppress scrolling.
+		scrollSupressionThreshold: 30, // More than this horizontal displacement, and we will suppress scrolling.
 
 		durationThreshold: 1000, // More time than this, and it isn't a swipe.
 

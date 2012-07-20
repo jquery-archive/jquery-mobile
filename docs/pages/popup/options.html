@@ -65,6 +65,24 @@
 				 <p>This option is also exposed as a data attribute: <code>data-overlay-theme=&quot;a&quot;</code></p>
 			</dd>
 
+			<dt><code>positionTo</code> <em>string</em></dt>
+			<dd>
+				<p class="default">default: "origin"</p>
+				<p>Sets the element relative to which the popup will be centered. It has the following values:
+					<table>
+						<tr><td class="enum-value"><code>"origin"</code></td><td>
+							When the popup opens, center over the coordinates passed to the <code>open()</code> call (see <a href="methods.html">methods</a> page).
+						</td></tr>
+						<tr><td class="enum-value"><code>"window"</code></td><td>
+							When the popup opens, center in the window.
+						</td></tr>
+						<tr><td class="enum-value">jQuery selector</td><td>
+							When the popup opens, create a jQuery object based on the selector, and center over it. The selector is filtered for elements that are visible with <code>":visible"</code>. If the result is empty, the popup will be centered in the window.
+						</td></tr>
+					</table>
+				</p>
+			</dd>
+
 			<dt><code>shadow</code> <em>boolean</em></dt>
 			<dd>
 				<p class="default">default: true</p>
