@@ -39,12 +39,14 @@
 			<p>The popup plugin has the following methods:</p>
 
 		<dl>
-			<dt><code>open(x, y, $link)</code> display the popup centered at coordinates (x, y) using the specified link as the origin</dt>
+			<dt><code>open(x, y, transition, positionTo)</code> display the popup centered at coordinates (x, y) using the specified transition and positioning</dt>
 			<dd>
 				<pre><code>
-$('.selector').popup('open', x, y, $link);
+$('.selector').popup('open', x, y, transition, positionTo);
 				</code></pre>
-				<p>If <code>x</code> or <code>y</code> is missing, the middle of the window will be used. <code>$link</code> is optional, and specifies the link that caused the popup to open. <code>$link</code> can influence the behavior of the popup via its <code>data-position-to</code> and <code>data-transition</code> attributes.</p>
+				<p>If <code>x</code> or <code>y</code> is missing, and no jQuery selector is given as the value of <code>positionTo</code>, the middle of the window will be used.</p>
+				<p><code>transition</code> can be used to override the popup's own <code>transition</code> option. This will result in the popup opening via the transition specified in the call, but the popup's <code>transition</code> option will not be updated.</p>
+				<p>Similarly, <code>data-position-to</code> can be used to override the popup's default positioning without modifying the value of the popup's <code>positionTo</code> option. The values available for <code>positionTo</code> are the same as those for the popup's <code>positionTo</code> option (see <a href="options.html">options</a> page).</p>
 			</dd>
 
 			<dt><code>close</code> close an open popup</dt>
