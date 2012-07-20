@@ -412,7 +412,7 @@ define( [ "jquery",
 			var coords;
 
 			// Give applications a chance to modify the contents of the container before it appears
-			this.element.trigger( "popupbeforeopen" );
+			this.element.trigger( "popupbeforeposition" );
 
 			coords = this._placementCoords( this._desiredCoords( x, y, positionTo || this.options.positionTo || "origin" ) );
 
