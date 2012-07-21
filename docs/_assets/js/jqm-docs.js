@@ -75,7 +75,7 @@ if ( location.protocol.substr(0,4)  === 'file' ||
 $( document ).on( "pageinit", function() {
 	
 	$( "#popupPhotoPortrait, #popupPhotoLandscape" ).on({
-		popupbeforeopen: function( event ) {
+		popupbeforeposition: function( event ) {
 			var inner = $( window ).height() - 62 + "px";
 			$( ".popphoto" ).css( "max-height", inner );
 		}
@@ -86,8 +86,8 @@ $( document ).on( "pageinit", function() {
 		.prop( "height", 0 );	
 			
 	function sizes(iframewidth, iframeheight, padding, border) {
-		var sw = window.outerWidth > $( window ).width() ? $( window ).width() - 30 : window.outerWidth - 30,
-			sh = window.outerHeight > $( window ).height() ? $( window ).height() - 30 : window.outerHeight - 30,
+		var sw = $( window ).width() - 30,
+			sh = $( window ).height() - 30,
 			ip = 2 * padding,
 			ib = 2 * border,
 			iw = iframewidth + ip + ib,
@@ -115,7 +115,7 @@ $( document ).on( "pageinit", function() {
 	};
 	
 	$( "#popupMap" ).on({
-		popupbeforeopen: function( event ) {
+		popupbeforeposition: function( event ) {
 			var size = sizes(480, 320, 0, 1),
 				w = size.width,
 				h = size.height;
@@ -131,7 +131,7 @@ $( document ).on( "pageinit", function() {
 		}
 	});
 	$( "#popupVideo" ).on({
-		popupbeforeopen: function( event ) {
+		popupbeforeposition: function( event ) {
 			var size = sizes(497, 298, 15, 1),
 				w = size.width,
 				h = size.height;

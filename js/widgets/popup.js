@@ -34,6 +34,7 @@ define( [ "jquery",
 			corners: true,
 			transition: "none",
 			positionTo: "origin",
+			tolerance: null,
 			initSelector: ":jqmData(role='popup')"
 		},
 
@@ -90,6 +91,7 @@ define( [ "jquery",
 				_currentTransition: false,
 				_prereqs: null,
 				_isOpen: false,
+				_tolerance: null,
 				_globalHandlers: [
 					{
 						src: $( window ),
@@ -183,6 +185,56 @@ define( [ "jquery",
 			}
 		},
 
+		_setTolerance: function( value ) {
+			var tol = { l: 15, t: 30, r: 15, b: 30 };
+
+			if ( value ) {
+				var ar = String( value ).split( "," );
+
+				$.each( ar, function( idx, val ) { ar[ idx ] = parseInt( val, 10 ); } );
+
+				switch( ar.length ) {
+					// All values are to be the same
+					case 1:
+						if ( !isNaN( ar[ 0 ] ) ) {
+							tol.l = tol.t = tol.r = tol.b = ar[ 0 ];
+						}
+						break;
+
+					// The first value denotes left/right tolerance, and the second value denotes top/bottom tolerance
+					case 2:
+						if ( !isNaN( ar[ 0 ] ) ) {
+							tol.l = tol.r = ar[ 0 ];
+						}
+						if ( !isNaN( ar[ 1 ] ) ) {
+							tol.t = tol.b = ar[ 1 ];
+						}
+						break;
+
+					// The array contains values in the order left, top, right, bottom
+					case 4:
+						if ( !isNaN( ar[ 0 ] ) ) {
+							tol.l = ar[ 0 ];
+						}
+						if ( !isNaN( ar[ 1 ] ) ) {
+							tol.t = ar[ 1 ];
+						}
+						if ( !isNaN( ar[ 2 ] ) ) {
+							tol.r = ar[ 2 ];
+						}
+						if ( !isNaN( ar[ 3 ] ) ) {
+							tol.b = ar[ 3 ];
+						}
+						break;
+
+					default:
+						break;
+				}
+			}
+
+			this._tolerance = tol;
+		},
+
 		_setOption: function( key, value ) {
 			var setter = "_set" + key.charAt( 0 ).toUpperCase() + key.slice( 1 );
 
@@ -198,14 +250,12 @@ define( [ "jquery",
 
 		// Try and center the overlay over the given coordinates
 		_placementCoords: function( desired ) {
-			// Tolerances off the window edges
-			var tol = { l: 15, t: 30, r: 15, b: 30 },
 			// rectangle within which the popup must fit
-				rc = {
-					l: tol.l,
-					t: $( window ).scrollTop() + tol.t,
-					cx: $( window ).width() - tol.l - tol.r,
-					cy: $( window ).height() - tol.t - tol.b
+			var rc = {
+					l: this._tolerance.l,
+					t: $( window ).scrollTop() + this._tolerance.t,
+					cx: $( window ).width() - this._tolerance.l - this._tolerance.r,
+					cy: $( window ).height() - this._tolerance.t - this._tolerance.b
 				},
 				menuSize, ret;
 
@@ -362,7 +412,7 @@ define( [ "jquery",
 			var coords;
 
 			// Give applications a chance to modify the contents of the container before it appears
-			this.element.trigger( "popupbeforeopen" );
+			this.element.trigger( "popupbeforeposition" );
 
 			coords = this._placementCoords( this._desiredCoords( x, y, positionTo || this.options.positionTo || "origin" ) );
 
