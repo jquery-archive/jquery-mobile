@@ -40,7 +40,7 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 						collapsible = $( event.target ).closest( ".ui-collapsible" ),
 						widget = collapsible.data( "collapsible" );
 					if ( collapsible.jqmData( "collapsible-last" ) ) {
-						collapsible.find( widget.options.heading ).first()
+						collapsible.find( ".ui-collapsible-heading" ).first()
 							.find( "a" ).first()
 							.toggleClass( "ui-corner-bottom", isCollapse )
 							.find( ".ui-btn-inner" )
@@ -82,7 +82,7 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 		if ( !!o.inset ) {
 			collapsiblesInSet.each(function() {
 				$( this ).jqmRemoveData( "collapsible-last" )
-					.find( $.mobile.collapsible.prototype.options.heading )
+					.find( ".ui-collapsible-heading" )
 					.find( "a" ).first()
 					.removeClass( "ui-corner-top ui-corner-bottom" )
 					.find( ".ui-btn-inner" )
