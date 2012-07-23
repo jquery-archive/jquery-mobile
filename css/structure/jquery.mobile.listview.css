@@ -13,7 +13,8 @@ ol.ui-listview .ui-link-inherit:before, ol.ui-listview .ui-li-static:before, .ui
 ol.ui-listview .ui-li-jsnumbering:before { content: "" !important; } /* to avoid chance of duplication */
 .ui-listview-inset .ui-li { border-right-width: 1px; border-left-width: 1px; }
 .ui-li-last, .ui-li.ui-field-contain.ui-li-last { border-bottom-width: 1px; }
-.ui-collapsible-content > .ui-listview:not(.ui-listview-inset) .ui-li-last { border-bottom-width: 0; }
+.ui-collapsible-content > .ui-listview:not(.ui-listview-inset) .ui-li:first-child { border-top-width: 0; }
+.ui-collapsible [class*="ui-body"] > .ui-listview:not(.ui-listview-inset) .ui-li-last { border-bottom-width: 0; }
 .ui-collapsible-content > .ui-listview:not(.ui-listview-inset),
 .ui-collapsible-content > .ui-listview:not(.ui-listview-inset) .ui-li-last { border-bottom-left-radius: inherit; border-bottom-right-radius: inherit; }
 .ui-collapsible-content > .ui-listview:not(.ui-listview-inset) .ui-li-last .ui-li-link-alt { border-bottom-right-radius: inherit; }
