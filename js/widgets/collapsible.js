@@ -131,8 +131,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			})
 			.bind( "click", function( event ) {
 
-				var type = collapsibleHeading.is( ".ui-collapsible-heading-collapsed" ) ?
-										"expand" : "collapse";
+				var type = collapsibleHeading.is( ".ui-collapsible-heading-collapsed" ) ? "expand" : "collapse";
 
 				collapsible.trigger( type );
 
