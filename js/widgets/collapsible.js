@@ -17,6 +17,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 		heading: "h1,h2,h3,h4,h5,h6,legend",
 		theme: null,
 		contentTheme: null,
+		inset: true,
 		mini: false,
 		initSelector: ":jqmData(role='collapsible')"
 	},
@@ -60,11 +61,22 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			if ( !o.iconPos ) {
 				o.iconPos = collapsibleSet.jqmData( "iconpos" );
 			}
-
+			// Inherit the preference for inset from collapsible-set or set the default value to ensure equalty within a set
+			if ( collapsibleSet.jqmData( "inset" ) !== undefined ) {
+				o.inset = collapsibleSet.jqmData( "inset" );
+			} else {
+				o.inset = true;
+			}
+			// Gets the preference for mini in the set
 			if ( !o.mini ) {
 				o.mini = collapsibleSet.jqmData( "mini" );
 			}
 		}
+		
+		if ( !!o.inset ) {
+			collapsible.addClass( "ui-collapsible-inset" );
+		}
+		
 		collapsibleContent.addClass( ( o.contentTheme ) ? ( "ui-body-" + o.contentTheme ) : "");
 
 		collapsedIcon = $el.jqmData( "collapsed-icon" ) || o.collapsedIcon || "plus";
@@ -87,8 +99,12 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 					mini: o.mini,
 					theme: o.theme
 				})
-			.add( ".ui-btn-inner", $el )
-				.addClass( "ui-corner-top ui-corner-bottom" );
+
+		if ( !!o.inset ) {				
+			collapsibleHeading
+				.find( "a" ).first().add( ".ui-btn-inner", $el )
+					.addClass( "ui-corner-top ui-corner-bottom" );
+		}
 
 		//events
 		collapsible
@@ -114,7 +130,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 					$this.toggleClass( "ui-collapsible-collapsed", isCollapse );
 					collapsibleContent.toggleClass( "ui-collapsible-content-collapsed", isCollapse ).attr( "aria-hidden", isCollapse );
 
-					if ( contentTheme && ( !collapsibleSet.length || collapsible.jqmData( "collapsible-last" ) ) ) {
+					if ( contentTheme && !!o.inset && ( !collapsibleSet.length || collapsible.jqmData( "collapsible-last" ) ) ) {
 						collapsibleHeading
 							.find( "a" ).first().add( collapsibleHeading.find( ".ui-btn-inner" ) )
 							.toggleClass( "ui-corner-bottom", isCollapse );
