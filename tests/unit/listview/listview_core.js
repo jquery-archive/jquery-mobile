@@ -958,7 +958,7 @@
 		]);
 	});
 	
-	asyncTest( "last item in list has border-bottom", function() {
+	asyncTest( "last list item has border-bottom", function() {
 		$.testHelper.pageSequence([
 			function() {
 				$.mobile.changePage("#list-last-visible-item-border");
@@ -974,4 +974,22 @@
 			start
 		]);
 	});
+	
+	asyncTest( "list inside collapsible content", function() {
+		$.testHelper.pageSequence([
+			function() {
+				$.mobile.changePage("#list-inside-collapsible-content");
+			},
+
+			function() {
+				same($.mobile.activePage.find("#noninsetlastli").css("border-bottom-width"), "0px", "last li non-inset list has no border bottom");
+				same($.mobile.activePage.find("#insetlastli").css("border-bottom-width"), "1px", "last li inset list has border bottom");
+
+				window.history.back();
+			},
+			
+			start
+		]);
+	});
+	
 })(jQuery);
