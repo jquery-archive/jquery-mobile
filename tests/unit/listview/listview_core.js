@@ -889,7 +889,9 @@
 			start
 		]);
 	});
-	
+
+	module( "Borders" );
+		
 	asyncTest( "last list item has border-bottom", function() {
 		$.testHelper.pageSequence([
 			function() {
