@@ -44,12 +44,6 @@ define( [ "jquery",
 			this.close();
 		},
 
-		_handleWindowResize: function( e ) {
-			if ( this._isOpen ) {
-				this._resizeScreen();
-			}
-		},
-
 		_handleWindowKeyUp: function( e ) {
 			if ( this._isOpen && e.keyCode === $.mobile.keyCode.ESCAPE ) {
 				this._eatEventAndClose( e );
@@ -96,7 +90,6 @@ define( [ "jquery",
 					{
 						src: $( window ),
 						handler: {
-							resize: $.proxy( this, "_handleWindowResize" ),
 							keyup: $.proxy( this, "_handleWindowKeyUp" )
 						}
 					}
@@ -115,10 +108,6 @@ define( [ "jquery",
 			$.each( this._globalHandlers, function( idx, value ) {
 				value.src.bind( value.handler );
 			});
-		},
-
-		_resizeScreen: function() {
-			this._ui.screen.height( Math.max( $( window ).height(), $( document ).height() ) );
 		},
 
 		_applyTheme: function( dst, theme ) {
@@ -399,7 +388,6 @@ define( [ "jquery",
 		_openPrereqContainer: function() {
 			this._applyTransition( "none" );
 			this._ui.container.removeClass( "in" );
-			this._resizeScreen();
 		},
 
 		_openPrereqsComplete: function() {
@@ -435,7 +423,6 @@ define( [ "jquery",
 				this._setTheme( this._page.jqmData( "theme" ) || $.mobile.getInheritedTheme( this._page, "c" ) );
 			}
 
-			this._resizeScreen();
 			this._ui.screen.removeClass( "ui-screen-hidden" );
 
 			this._ui.container
