@@ -79,6 +79,17 @@
 </code></pre>
 			</dd>
 
+			<dt><code>inset</code> <em>boolean</em></dt>
+			<dd>
+				<p class="default">default: true</p>
+				<p>By setting this option to false the collapsibles will get a full width appearance without corners. If the value is false for an individual collapsible container, but that container is part of a collapsible set, then the value is inherited from the parent collapsible set. To set the value for all instances of this widget, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
+<pre><code>$( document ).bind( "mobileinit", function(){
+    <strong>$.mobile.collapsible.prototype.options.inset = false;</strong>
+});
+</code></pre>
+				<p>This option is also exposed as a data attribute: <code>data-inset=&quot;false&quot;</code>.</p>
+			</dd>
+			
 			<dt><code>mini</code> <em>boolean</em></dt>
 			<dd>
 				<p class="default">default: false</p>
