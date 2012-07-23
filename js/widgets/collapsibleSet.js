@@ -32,14 +32,14 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 		o.inset = o.inset !== undefined ? o.inset : true;
 
 		// Initialize the collapsible set if it's not already initialized
-		if ( !$el.jqmData( "collapsiblebound" ) && !!o.inset ) {
+		if ( !$el.jqmData( "collapsiblebound" ) ) {
 			$el
 				.jqmData( "collapsiblebound", true )
 				.bind( "expand collapse", function( event ) {
 					var isCollapse = ( event.type === "collapse" ),
 						collapsible = $( event.target ).closest( ".ui-collapsible" ),
 						widget = collapsible.data( "collapsible" );
-					if ( collapsible.jqmData( "collapsible-last" ) ) {
+					if ( collapsible.jqmData( "collapsible-last" ) && !!o.inset ) {
 						collapsible.find( ".ui-collapsible-heading" ).first()
 							.find( "a" ).first()
 							.toggleClass( "ui-corner-bottom", isCollapse )
