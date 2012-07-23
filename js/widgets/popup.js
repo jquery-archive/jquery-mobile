@@ -385,11 +385,6 @@ define( [ "jquery",
 			return { x: x, y: y };
 		},
 
-		_openPrereqContainer: function() {
-			this._applyTransition( "none" );
-			this._ui.container.removeClass( "in" );
-		},
-
 		_openPrereqsComplete: function() {
 			this._isOpen = true;
 			this._ui.container.attr( "tabindex", "0" ).focus();
@@ -409,7 +404,7 @@ define( [ "jquery",
 			// 2. The screen opacity animation completes (screen())
 			this._createPrereqs(
 				$.noop,
-				$.proxy( this, "_openPrereqContainer" ),
+				$.noop,
 				$.proxy( this, "_openPrereqsComplete" ) );
 
 			if ( transition ) {
