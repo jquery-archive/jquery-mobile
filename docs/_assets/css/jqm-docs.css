@@ -321,6 +321,10 @@ dd h4 { margin:15px 0 0 0; }
 	.content-primary ul:first-child {
 		margin-top: 0;
 	}
+	/* collapsible non-inset example */
+	.content-primary .ui-collapsible-content ul:first-child {
+		margin-top: -10px;
+	}
 	.content-secondary h2 {
 		position: absolute;
 		left: -9999px;
