@@ -164,20 +164,6 @@
   		]);
   	});
 
-	asyncTest( "Collapsible set with last collapsible expanded", function(){
-		$.testHelper.pageSequence([
-			function(){
-				$.testHelper.openPage( "#collapsible-set-with-last-collapsible-expanded" );
-			},
-
-			function() {
-				var collapsibles = $.mobile.activePage.find( ".ui-collapsible" );
-				ok( collapsibles.last().find( ".ui-collapsible-content" ).hasClass( "ui-corner-bottom" ), "Content of last collapsible should have class ui-corner-bottom");
-				start();
-			}
-		]);
-	});
-
 	asyncTest( "Collapsible Set", function(){
 		$.testHelper.pageSequence([
 			function(){
@@ -189,25 +175,6 @@
 				ok( !collapsibles.eq(0).find( ".ui-btn" ).is( ".ui-corner-bottom" ), "First collapsible should NOT have class ui-corner-bottom");
 				ok( !collapsibles.eq(1).find( ".ui-btn" ).is( ".ui-corner-bottom,.ui-corner-top" ), "Middle collapsible should NOT have class ui-corner-top or ui-corner-bottom");
 				ok( !collapsibles.eq(2).find( ".ui-btn" ).is( ".ui-corner-top" ), "Last collapsible should NOT have class ui-corner-top");
-				start();
-			}
-		]);
-	});
-	
-	module( "Icons", {});
-
-	asyncTest( "Collapsible with custom icons", function(){
-		$.testHelper.pageSequence([
-			function(){
-				$.testHelper.openPage( "#collapsible-with-custom-icons" );
-			},
-
-			function() {
-				var collapsibles = $.mobile.activePage.find( ".ui-collapsible" );
-				ok( collapsibles.eq(0).find( ".ui-icon" ).hasClass( "ui-icon-plus" ), "Heading of first collapsible should have class ui-icon-plus");
-				ok( collapsibles.eq(1).find( ".ui-icon" ).hasClass( "ui-icon-minus" ), "Heading of second collapsible should have class ui-icon-minus");
-				ok( collapsibles.eq(2).find( ".ui-icon" ).hasClass( "ui-icon-arrow-r" ), "Heading of third collapsible should have class ui-icon-arrow-r");
-				ok( collapsibles.eq(3).find( ".ui-icon" ).hasClass( "ui-icon-arrow-d" ), "Heading of fourth collapsible should have class ui-icon-arrow-d");
 				start();
 			}
 		]);
