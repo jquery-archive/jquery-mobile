@@ -106,7 +106,6 @@ p.intro strong {
 .content-secondary .ui-collapsible-content {
 	padding: 0;
 	background: none;
-	border-bottom: none;
 }
 .content-secondary .ui-listview {
 	margin: 0;
@@ -299,7 +298,8 @@ dd h4 { margin:15px 0 0 0; }
 		padding: 0;
 	}
 	.content-secondary .ui-collapsible-content {
-		border: none;
+		border-left: none;
+		border-right: none;
 	}
 	.type-index .content-secondary .ui-listview {
 		margin: 0;
