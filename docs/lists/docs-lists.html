@@ -24,7 +24,7 @@
 
 		<div data-role="content">
 			<div class="content-primary">
-			<h2>List views</h2>
+			<h2>Listviews</h2>
 
 			<ul data-role="controlgroup" data-type="horizontal" class="localnav">
 				<li><a href="docs-lists.html" data-role="button" data-transition="fade" class="ui-btn-active">Basics</a></li>
@@ -34,11 +34,11 @@
 			</ul>
 
 			<h2>Basic linked lists</h2>
-			<p>A list view is coded as a simple unordered list containing linked list items with a <code> data-role="listview"</code> attribute. jQuery Mobile will apply all the necessary styles to transform the list into a mobile-friendly list view with right arrow indicator that fills the full width of the browser window. When you tap on the list item, the framework will trigger a click on the first link inside the list item, issue an AJAX request for the URL in the link, create the new page in the DOM, then kick off a page transition. View the <a href="../api/data-attributes.html">data- attribute reference</a> to see all the possible attributes you can add to listviews.</p>
+			<p>A listview is coded as a simple unordered list containing linked list items with a <code> data-role="listview"</code> attribute. jQuery Mobile will apply all the necessary styles to transform the list into a mobile-friendly listview with right arrow indicator that fills the full width of the browser window. When you tap on the list item, the framework will trigger a click on the first link inside the list item, issue an Ajax request for the URL in the link, create the new page in the DOM, then kick off a page transition. View the <a href="../api/data-attributes.html">data- attribute reference</a> to see all the possible attributes you can add to listviews.</p>
 			<p>Here is the HTML markup for a basic linked list.</p>
 
 <pre><code>
-&lt;ul data-role=&quot;listview&quot; data-theme=&quot;g&quot;&gt;
+&lt;ul data-role=&quot;listview&quot; data-theme=&quot;b&quot;&gt;
 	&lt;li&gt;&lt;a href=&quot;acura.html&quot;&gt;Acura&lt;/a&gt;&lt;/li&gt;
 	&lt;li&gt;&lt;a href=&quot;audi.html&quot;&gt;Audi&lt;/a&gt;&lt;/li&gt;
 	&lt;li&gt;&lt;a href=&quot;bmw.html&quot;&gt;BMW&lt;/a&gt;&lt;/li&gt;
@@ -51,22 +51,22 @@
 			
 			<h2>Nested lists</h2>
 			<p>By nesting child <code>ul</code> or <code>ol</code> inside list items, you can create nested lists. When a list item with a child list is clicked, the framework will show a new page populated with the title of the parent in the header and the list of child elements. These dynamic nested lists are styled with the "b" theme swatch (blue in the default theme) to indicate that you are in a secondary level of navigation. Lists can be nested multiple levels deep and all pages and linking will be automatically handled by the framework. Note that the page of each nested listview is created when the parent page loads and for each nested page the page-events will trigger.</p>
-			<p>To <a href="../lists/lists-themes.html">set the swatch color</a> of the child list views, set the <code>data-theme</code> attribute on each list inside.</p>
+			<p>To <a href="../lists/lists-themes.html">set the swatch color</a> of the child listviews, set the <code>data-theme</code> attribute on each list inside.</p>
 			<a href="lists-nested.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Nested list example</a>
 
 			<h2>Numbered lists</h2>
-			<p>Lists can also be created from ordered lists (<code>ol</code>) which is useful when presenting items that are in a sequence such as search results or a movie queue. When the enhanced markup is applied to the list view, jQuery Mobile will try to first use CSS to add numbers to the list and, if not supported, will fall back to injecting numbers with JavaScript.</p>
+			<p>Lists can also be created from ordered lists (<code>ol</code>) which is useful when presenting items that are in a sequence such as search results or a movie queue. When the enhanced markup is applied to the listview, jQuery Mobile will try to first use CSS to add numbers to the list and, if not supported, will fall back to injecting numbers with JavaScript.</p>
 
 			<a href="lists-ol.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Numbered list example</a>
 
 			<h2>Read-only lists</h2>
-			<p>List views can also be used to display a non-interactive list of items, usually as an inset list. This list is built from an unordered or ordered list that don't have linked list items. The framework styles the list items as buttons like the other list types (see <a href="../lists/lists-themes.html">theming lists</a>), but without a gradient on the background.</p>
+			<p>Listviews can also be used to display a non-interactive list of items, usually as an inset list. This list is built from an unordered or ordered list that don't have linked list items. The framework styles the list items as buttons like the other list types (see <a href="../lists/lists-themes.html">theming lists</a>), but without a gradient on the background.</p>
 
 			<a href="lists-readonly-inset.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Read-only list example</a>
 
 			<h2>Split button lists</h2>
-			<p>In cases where there is more than one possible action per list item, a split button can be used to offer two independently clickable items -- the list item and a small arrow icon in the far right. To make a split list item, simply add a second link inside the <code>li</code> and the framework will add a vertical divider line, style the link as an icon-only arrow button, and set the <code>title</code> attribute of the link to the text the link for accessibility.</p>
-			<p>You can set the icon for the right split icon by specifying a <code>data-split-icon</code> attribute with the <a href="../buttons/buttons-icons.html">icon name</a> you want. The theme swatch color of the split button defaults to "b" (blue in the default theme) but can be set by specifying a swatch letter in the <code>data-split-theme</code> attribute.</p>
+			<p>In cases where there is more than one possible action per list item, a split button can be used to offer two independently clickable items -- the list item and a small arrow icon in the far right. To make a split list item, simply add a second link inside the <code>li</code> and the framework will add a vertical divider line, style the link as an icon-only arrow button, and set the <code>title</code> attribute of the link to the text of the link for accessibility.</p>
+			<p>You can set the icon for the right split icon by specifying a <code>data-split-icon</code> attribute on the listview with a <a href="../buttons/buttons-icons.html">icon name</a> you want. The default icon is "arrow-r" but can be configured with the <code>splitIcon</code> <a href="../lists/lists-options.html">listview option</a>. By adding a <code>data-icon</code> attribute to the list item, you can set individual icons for each split. The theme swatch color of the split button defaults to "b" (blue in the default theme) but can be set by specifying a swatch letter with the <code>data-split-theme</code> attribute on listview level or for individual splits with the <code>data-theme</code> attribute on link level.</p>
 
 			<a href="lists-split.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Split list example</a>
 
@@ -164,7 +164,7 @@ $("#mylistview").listview({
 
 						<ul data-role="listview" data-theme="c" data-divider-theme="d">
 
-							<li data-role="list-divider">List views</li>
+							<li data-role="list-divider">Listviews</li>
 							<li data-theme="a"><a href="docs-lists.html">List basics &amp; API</a></li>
 							<li><a href="lists-ul.html">Basic linked list</a></li>
 							<li><a href="lists-nested.html">Nested list</a></li>
