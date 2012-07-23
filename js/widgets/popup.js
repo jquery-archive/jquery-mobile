@@ -50,6 +50,13 @@ define( [ "jquery",
 			}
 		},
 
+		_handleWindowOrientationChange: function( e ) {
+			if ( this._isOpen ) {
+				this.element.trigger( "popupbeforeposition" );
+				this._ui.container.offset( this._placementCoords( this._desiredCoords( undefined, undefined, "window" ) ) );
+			}
+		},
+
 		_create: function() {
 			var ui = {
 					screen: $( "<div class='ui-screen-hidden ui-popup-screen fade'></div>" ),
@@ -90,6 +97,7 @@ define( [ "jquery",
 					{
 						src: $( window ),
 						handler: {
+							orientationchange: $.proxy( this, "_handleWindowOrientationChange" ),
 							keyup: $.proxy( this, "_handleWindowKeyUp" )
 						}
 					}
@@ -240,11 +248,13 @@ define( [ "jquery",
 		// Try and center the overlay over the given coordinates
 		_placementCoords: function( desired ) {
 			// rectangle within which the popup must fit
-			var rc = {
+			var
+				$win = $( window ),
+				rc = {
 					l: this._tolerance.l,
-					t: $( window ).scrollTop() + this._tolerance.t,
-					cx: $( window ).width() - this._tolerance.l - this._tolerance.r,
-					cy: $( window ).height() - this._tolerance.t - this._tolerance.b
+					t: $win.scrollTop() + this._tolerance.t,
+					cx: $win.width() - this._tolerance.l - this._tolerance.r,
+					cy: ( window.innerHeight || $win.height() ) - this._tolerance.t - this._tolerance.b
 				},
 				menuSize, ret;
 
@@ -268,7 +278,7 @@ define( [ "jquery",
 			// align the bottom with the bottom of the document
 			ret.y -= Math.min( ret.y, Math.max( 0, ret.y + menuSize.cy - $( document ).height() ) );
 
-			return ret;
+			return { left: ret.x, top: ret.y };
 		},
 
 		_immediate: function() {
@@ -351,7 +361,7 @@ define( [ "jquery",
 			if ( positionTo && positionTo !== "origin" ) {
 				if ( positionTo === "window" ) {
 					x = $win.width() / 2 + $win.scrollLeft();
-					y = $win.height() / 2 + $win.scrollTop();
+					y = ( window.innerHeight || $win.height() ) / 2 + $win.scrollTop();
 				} else {
 					try {
 						dst = $( positionTo );
@@ -379,7 +389,7 @@ define( [ "jquery",
 				x = $win.width() / 2 + $win.scrollLeft();
 			}
 			if ( $.type( y ) !== "number" || isNaN( y ) ) {
-				y = $win.height() / 2 + $win.scrollTop();
+				y = ( window.innerHeight || $win.height() ) / 2 + $win.scrollTop();
 			}
 
 			return { x: x, y: y };
@@ -422,10 +432,7 @@ define( [ "jquery",
 
 			this._ui.container
 				.removeClass( "ui-selectmenu-hidden" )
-				.offset( {
-					left: coords.x,
-					top: coords.y
-				});
+				.offset( coords );
 
 			this._animate({
 				additionalCondition: true,
