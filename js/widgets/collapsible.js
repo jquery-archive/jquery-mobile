@@ -98,7 +98,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 					icon: collapsedIcon,
 					mini: o.mini,
 					theme: o.theme
-				})
+				});
 
 		if ( !!o.inset ) {				
 			collapsibleHeading
