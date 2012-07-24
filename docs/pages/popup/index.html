@@ -59,7 +59,7 @@
 		
 		<a href="#popupInfo" data-rel="popup" data-role="button" data-inline="true">Tooltip</a>
 		<a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true">Menu</a>
-		<a href="#popupNested" data-rel="popup" data-role="button" data-inline="true">Nested Menu</a>
+		<a href="#popupNested" data-rel="popup" data-role="button" data-inline="true">Nested menu</a>
 		<a href="#popupLogin" data-rel="popup" data-position-to="window" data-role="button" data-inline="true">Form</a>
 		<a href="#popupDialog" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop">Dialog</a>
 		<a href="#popupPhotoLandscape" data-rel="popup" data-position-to="window" data-role="button" data-inline="true">Photo landscape</a>
@@ -67,6 +67,22 @@
 		<a href="#popupMap" data-rel="popup" data-position-to="window" data-role="button" data-inline="true">Map</a>
 		<a href="#popupVideo" data-rel="popup" data-position-to="window" data-role="button" data-inline="true">Video</a>
 	
+	
+
+		<div data-role="popup" id="popupInfo" class="ui-content" data-theme="e" style="max-width:350px;">
+          <p>Here is a <strong>tiny popup</strong> being used like a tooltip. The text will wrap to multiple lines as needed.</p>
+		</div>
+
+		<div data-role="popup" id="popupMenu" data-theme="a">
+				<ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="b">
+					<li data-role="divider" data-theme="a">Popup API</li>
+					<li><a href="options.html">Options</a></li>
+					<li><a href="methods.html">Methods</a></li>
+					<li><a href="events.html">Events</a></li>
+				</ul>
+		</div>
+
+
 		<div data-role="popup" id="popupNested" data-theme="none">
 			<div data-role="collapsible-set" data-theme="b" data-content-theme="c" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" style="margin:0; width:250px;">
 				<div data-role="collapsible" data-inset="false">
@@ -107,19 +123,7 @@
 				</div><!-- /collapsible -->
 			</div><!-- /collapsible set -->
 		</div><!-- /popup -->
-
-		<div data-role="popup" id="popupInfo" class="ui-content" data-theme="e" style="max-width:350px;">
-          <p>Here is a <strong>tiny popup</strong> being used like a tooltip. The text will wrap to multiple lines as needed.</p>
-		</div>
-
-		<div data-role="popup" id="popupMenu" data-theme="a">
-				<ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="b">
-					<li data-role="divider" data-theme="a">Popup API</li>
-					<li><a href="options.html">Options</a></li>
-					<li><a href="methods.html">Methods</a></li>
-					<li><a href="events.html">Events</a></li>
-				</ul>
-		</div>
+		
 
 		<div data-role="popup" id="popupLogin" data-theme="a" class="ui-corner-all">
 			<form>
