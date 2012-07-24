@@ -26,6 +26,17 @@ define( [ "jquery",
 		return ret;
 	}
 
+	function windowCoords() {
+		var $win = $( window );
+
+		return {
+			x: $win.scrollLeft(),
+			y: $win.scrollTop(),
+			cx: ( window.innerWidth || $win.width() ),
+			cy: ( window.innerHeight || $win.height() )
+		};
+	}
+
 	$.widget( "mobile.popup", $.mobile.widget, {
 		options: {
 			theme: null,
@@ -252,12 +263,12 @@ define( [ "jquery",
 		_placementCoords: function( desired ) {
 			// rectangle within which the popup must fit
 			var
-				$win = $( window ),
+				winCoords = windowCoords(),
 				rc = {
 					l: this._tolerance.l,
-					t: $win.scrollTop() + this._tolerance.t,
-					cx: $win.width() - this._tolerance.l - this._tolerance.r,
-					cy: ( window.innerHeight || $win.height() ) - this._tolerance.t - this._tolerance.b
+					t: winCoords.y + this._tolerance.t,
+					cx: winCoords.cx - this._tolerance.l - this._tolerance.r,
+					cy: winCoords.cy - this._tolerance.t - this._tolerance.b
 				},
 				menuSize, ret;
 
@@ -358,13 +369,13 @@ define( [ "jquery",
 		// desiredPosition.positionTo. Nevertheless, this function ensures that its return value always contains valid
 		// x and y coordinates by specifying the center middle of the window if the coordinates are absent.
 		_desiredCoords: function( x, y, positionTo ) {
-			var dst = null, offset, $win = $( window );
+			var dst = null, offset, winCoords = windowCoords();
 
 			// Establish which element will serve as the reference
 			if ( positionTo && positionTo !== "origin" ) {
 				if ( positionTo === "window" ) {
-					x = $win.width() / 2 + $win.scrollLeft();
-					y = ( window.innerHeight || $win.height() ) / 2 + $win.scrollTop();
+					x = winCoords.cx / 2 + winCoords.x;
+					y = winCoords.cy / 2 + winCoords.y;
 				} else {
 					try {
 						dst = $( positionTo );
@@ -389,10 +400,10 @@ define( [ "jquery",
 
 			// Make sure x and y are valid numbers - center over the window
 			if ( $.type( x ) !== "number" || isNaN( x ) ) {
-				x = $win.width() / 2 + $win.scrollLeft();
+				x = winCoords.cx / 2 + winCoords.x;
 			}
 			if ( $.type( y ) !== "number" || isNaN( y ) ) {
-				y = ( window.innerHeight || $win.height() ) / 2 + $win.scrollTop();
+				y = winCoords.cy / 2 + winCoords.y;
 			}
 
 			return { x: x, y: y };
