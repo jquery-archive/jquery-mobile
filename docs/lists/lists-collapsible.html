@@ -225,7 +225,7 @@
 			</div>
 			
 			<h2>Non-inset, collapsible set</h2>
-			<p>Setting <code>data-inset="false"</code> on a collapsible or a collapsible makes the collapsible full width (non-inset), like a full width listview.</p>
+			<p>Setting <code>data-inset="false"</code> on a collapsible or a collapsible set makes the collapsible full width (non-inset), like a full width listview.</p>
 			
 			<div data-role="collapsible-set" data-theme="b" data-content-theme="d" data-inset="false">
 				<div data-role="collapsible">
@@ -374,7 +374,9 @@
 							</ul>
 						</div><!-- /collapsible -->
 
-						
+				<p>If you want the top and bottom borders to collapse, you can add the following code to your custom CSS:</p>
+				
+<pre><code>.ui-collapsible-collapsed + .ui-collapsible .ui-collapsible-heading .ui-btn { border-top: none; }</code></pre>
 					
 		</div><!--/content-primary -->		
 
