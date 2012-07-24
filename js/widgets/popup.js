@@ -50,8 +50,11 @@ define( [ "jquery",
 			}
 		},
 
-		_handleWindowOrientationChange: function( e ) {
+		_handleWindowResize: function( e ) {
 			if ( this._isOpen ) {
+				// Need to first set the offset to ( 0, 0 ) to make sure that the width value we retrieve during
+				// _placementCoords, is unaffected by possible truncation due to positive offset
+				this._ui.container.offset( { left: 0, top: 0 } );
 				this.element.trigger( "popupbeforeposition" );
 				this._ui.container.offset( this._placementCoords( this._desiredCoords( undefined, undefined, "window" ) ) );
 			}
@@ -97,7 +100,7 @@ define( [ "jquery",
 					{
 						src: $( window ),
 						handler: {
-							orientationchange: $.proxy( this, "_handleWindowOrientationChange" ),
+							resize: $.proxy( this, "_handleWindowResize" ),
 							keyup: $.proxy( this, "_handleWindowKeyUp" )
 						}
 					}
