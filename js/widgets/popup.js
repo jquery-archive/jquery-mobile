@@ -197,7 +197,7 @@ define( [ "jquery",
 		},
 
 		_setTolerance: function( value ) {
-			var tol = { l: 15, t: 30, r: 15, b: 30 };
+			var tol = { t: 30, r: 15, b: 30, l: 15 };
 
 			if ( value ) {
 				var ar = String( value ).split( "," );
@@ -208,25 +208,22 @@ define( [ "jquery",
 					// All values are to be the same
 					case 1:
 						if ( !isNaN( ar[ 0 ] ) ) {
-							tol.l = tol.t = tol.r = tol.b = ar[ 0 ];
+							tol.t = tol.r = tol.b = tol.l = ar[ 0 ];
 						}
 						break;
 
-					// The first value denotes left/right tolerance, and the second value denotes top/bottom tolerance
+					// The first value denotes top/bottom tolerance, and the second value denotes left/right tolerance
 					case 2:
-						if ( !isNaN( ar[ 0 ] ) ) {
-							tol.l = tol.r = ar[ 0 ];
-						}
 						if ( !isNaN( ar[ 1 ] ) ) {
 							tol.t = tol.b = ar[ 1 ];
 						}
+						if ( !isNaN( ar[ 0 ] ) ) {
+							tol.l = tol.r = ar[ 0 ];
+						}
 						break;
 
-					// The array contains values in the order left, top, right, bottom
+					// The array contains values in the order top, right, bottom, left
 					case 4:
-						if ( !isNaN( ar[ 0 ] ) ) {
-							tol.l = ar[ 0 ];
-						}
 						if ( !isNaN( ar[ 1 ] ) ) {
 							tol.t = ar[ 1 ];
 						}
@@ -235,6 +232,9 @@ define( [ "jquery",
 						}
 						if ( !isNaN( ar[ 3 ] ) ) {
 							tol.b = ar[ 3 ];
+						}
+						if ( !isNaN( ar[ 0 ] ) ) {
+							tol.l = ar[ 0 ];
 						}
 						break;
 
