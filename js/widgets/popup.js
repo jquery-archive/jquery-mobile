@@ -61,13 +61,42 @@ define( [ "jquery",
 			}
 		},
 
+		_resizeTimeout: function() {
+			this.element.trigger( "popupbeforeposition" );
+			this._ui.container
+				.offset( this._placementCoords( this._desiredCoords( undefined, undefined, "window" ) ) )
+				.attr( "tabindex", "0" )
+				.focus();
+			this._resizeData = null;
+		},
+
 		_handleWindowResize: function( e ) {
+			var winCoords;
 			if ( this._isOpen ) {
+
+				if ( this._resizeData ) {
+					winCoords = windowCoords();
+					if ( !(
+						winCoords.x === this._resizeData.winCoords.x &&
+						winCoords.y === this._resizeData.winCoords.y &&
+						winCoords.cx === this._resizeData.winCoords.cx &&
+						winCoords.cy === this._resizeData.winCoords.cy ) ) {
+						clearTimeout( this._resizeData.timeoutId );
+						this._resizeData.timeoutId = setTimeout( $.proxy( this, "_resizeTimeout" ), 250 );
+					}
+				} else {
+					this._resizeData = {
+						winCoords: winCoords,
+						timeoutId: setTimeout( $.proxy( this, "_resizeTimeout" ), 100 )
+					};
+				}
+
 				// Need to first set the offset to ( 0, 0 ) to make sure that the width value we retrieve during
 				// _placementCoords, is unaffected by possible truncation due to positive offset
-				this._ui.container.offset( { left: 0, top: 0 } );
-				this.element.trigger( "popupbeforeposition" );
-				this._ui.container.offset( this._placementCoords( this._desiredCoords( undefined, undefined, "window" ) ) );
+				this._ui.container
+					.removeAttr( "tabindex" )
+					.blur()
+					.offset( { left: 0, top: 0 } );
 			}
 		},
 
@@ -107,6 +136,7 @@ define( [ "jquery",
 				_prereqs: null,
 				_isOpen: false,
 				_tolerance: null,
+				_resizeData: null,
 				_globalHandlers: [
 					{
 						src: $( window ),
@@ -265,8 +295,8 @@ define( [ "jquery",
 			var
 				winCoords = windowCoords(),
 				rc = {
-					l: this._tolerance.l,
-					t: winCoords.y + this._tolerance.t,
+					x: this._tolerance.l,
+					y: winCoords.y + this._tolerance.t,
 					cx: winCoords.cx - this._tolerance.l - this._tolerance.r,
 					cy: winCoords.cy - this._tolerance.t - this._tolerance.b
 				},
@@ -282,8 +312,8 @@ define( [ "jquery",
 			// Center the menu over the desired coordinates, while not going outside
 			// the window tolerances. This will center wrt. the window if the popup is too large.
 			ret = {
-				x: fitSegmentInsideSegment( rc.cx, menuSize.cx, rc.l, desired.x ),
-				y: fitSegmentInsideSegment( rc.cy, menuSize.cy, rc.t, desired.y )
+				x: fitSegmentInsideSegment( rc.cx, menuSize.cx, rc.x, desired.x ),
+				y: fitSegmentInsideSegment( rc.cy, menuSize.cy, rc.y, desired.y )
 			};
 
 			// Make sure the top of the menu is visible
