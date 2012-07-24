@@ -349,7 +349,10 @@
 
 		//NOTE bypass the trigger source check
 		$.Event.prototype.originalEvent = {
-			touches: false
+			touches: [{
+				pageX: 0,
+				pageY: 0
+			}]
 		};
 
 		$( "#qunit-fixture" ).trigger("touchstart");
@@ -395,19 +398,29 @@
 		// ensure the swipe custome event is setup
 		$( "#qunit-fixture" ).bind('swipe', function(){});
 
-		//NOTE bypass the trigger source check
-		$.Event.prototype.originalEvent = {
-			touches: false
-		};
-
 		$.Event.prototype.preventDefault = function(){
 			ok(true, "prevent default called");
 			start();
 		};
 
-		mockAbs(11);
+		//NOTE bypass the trigger source check
+		$.Event.prototype.originalEvent = {
+			touches: [{
+				pageX: 0,
+				pageY: 0
+			}]
+		};
 
 		$( "#qunit-fixture" ).trigger("touchstart");
+
+		//NOTE bypass the trigger source check
+		$.Event.prototype.originalEvent = {
+			touches: [{
+				pageX: 200,
+				pageY: 0
+			}]
+		};
+
 		$( "#qunit-fixture" ).trigger("touchmove");
 	});
 
