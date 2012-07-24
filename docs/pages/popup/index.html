@@ -59,6 +59,7 @@
 		
 		<a href="#popupInfo" data-rel="popup" data-role="button" data-inline="true">Tooltip</a>
 		<a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true">Menu</a>
+		<a href="#popupNested" data-rel="popup" data-role="button" data-inline="true">Nested Menu</a>
 		<a href="#popupLogin" data-rel="popup" data-position-to="window" data-role="button" data-inline="true">Form</a>
 		<a href="#popupDialog" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop">Dialog</a>
 		<a href="#popupPhotoLandscape" data-rel="popup" data-position-to="window" data-role="button" data-inline="true">Photo landscape</a>
@@ -66,6 +67,47 @@
 		<a href="#popupMap" data-rel="popup" data-position-to="window" data-role="button" data-inline="true">Map</a>
 		<a href="#popupVideo" data-rel="popup" data-position-to="window" data-role="button" data-inline="true">Video</a>
 	
+		<div data-role="popup" id="popupNested" data-theme="none">
+			<div data-role="collapsible-set" data-theme="b" data-content-theme="c" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" style="margin:0; width:250px;">
+				<div data-role="collapsible" data-inset="false">
+					<h2>Farm animals</h2>
+					<ul data-role="listview">
+						<li><a href="index.html">Chicken</a></li>
+						<li><a href="index.html">Cow</a></li>
+						<li><a href="index.html">Duck</a></li>
+						<li><a href="index.html">Sheep</a></li>
+					</ul>
+				</div><!-- /collapsible -->
+				<div data-role="collapsible" data-inset="false">
+					<h2>Pets</h2>
+					<ul data-role="listview">
+						<li><a href="index.html">Cat</a></li>
+						<li><a href="index.html">Dog</a></li>
+						<li><a href="index.html">Iguana</a></li>
+						<li><a href="index.html">Mouse</a></li>
+					</ul>
+				</div><!-- /collapsible -->
+				<div data-role="collapsible" data-inset="false">
+					<h2>Ocean Creatures</h2>
+					<ul data-role="listview">
+						<li><a href="index.html">Fish</a></li>
+						<li><a href="index.html">Octopus</a></li>
+						<li><a href="index.html">Shark</a></li>
+						<li><a href="index.html">Starfish</a></li>
+					</ul>
+				</div><!-- /collapsible -->
+				<div data-role="collapsible" data-inset="false">
+					<h2>Wild Animals</h2>
+					<ul data-role="listview">
+						<li><a href="index.html">Lion</a></li>
+						<li><a href="index.html">Monkey</a></li>
+						<li><a href="index.html">Tiger</a></li>
+						<li><a href="index.html">Zebra</a></li>
+					</ul>
+				</div><!-- /collapsible -->
+			</div><!-- /collapsible set -->
+		</div><!-- /popup -->
+
 		<div data-role="popup" id="popupInfo" class="ui-content" data-theme="e" style="max-width:350px;">
           <p>Here is a <strong>tiny popup</strong> being used like a tooltip. The text will wrap to multiple lines as needed.</p>
 		</div>
