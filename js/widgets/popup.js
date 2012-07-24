@@ -61,42 +61,45 @@ define( [ "jquery",
 			}
 		},
 
+		_maybeRefreshTimeout: function() {
+			var winCoords = windowCoords();
+
+			if ( this._resizeData ) {
+				if ( winCoords.x === this._resizeData.winCoords.x &&
+					winCoords.y === this._resizeData.winCoords.y &&
+					winCoords.cx === this._resizeData.winCoords.cx &&
+					winCoords.cy === this._resizeData.winCoords.cy ) {
+					// timeout not refreshed
+					return false;
+				} else {
+					// clear existing timeout - it will be refreshed below
+					clearTimeout( this._resizeData.timeoutId );
+				}
+			}
+
+			this._resizeData = {
+				timeoutId: setTimeout( $.proxy( this, "_resizeTimeout" ), 100 ),
+				winCoords: winCoords
+			};
+
+			return true;
+		},
+
 		_resizeTimeout: function() {
-			this.element.trigger( "popupbeforeposition" );
-			this._ui.container
-				.offset( this._placementCoords( this._desiredCoords( undefined, undefined, "window" ) ) )
-				.attr( "tabindex", "0" )
-				.focus();
-			this._resizeData = null;
+			if ( !this._maybeRefreshTimeout() ) {
+				this.element.trigger( "popupbeforeposition" );
+				this._ui.container.offset( this._placementCoords( this._desiredCoords( undefined, undefined, "window" ) ) );
+				this._resizeData = null;
+			}
 		},
 
 		_handleWindowResize: function( e ) {
 			var winCoords;
 			if ( this._isOpen ) {
-
-				if ( this._resizeData ) {
-					winCoords = windowCoords();
-					if ( !(
-						winCoords.x === this._resizeData.winCoords.x &&
-						winCoords.y === this._resizeData.winCoords.y &&
-						winCoords.cx === this._resizeData.winCoords.cx &&
-						winCoords.cy === this._resizeData.winCoords.cy ) ) {
-						clearTimeout( this._resizeData.timeoutId );
-						this._resizeData.timeoutId = setTimeout( $.proxy( this, "_resizeTimeout" ), 250 );
-					}
-				} else {
-					this._resizeData = {
-						winCoords: winCoords,
-						timeoutId: setTimeout( $.proxy( this, "_resizeTimeout" ), 100 )
-					};
-				}
-
+				this._maybeRefreshTimeout();
 				// Need to first set the offset to ( 0, 0 ) to make sure that the width value we retrieve during
 				// _placementCoords, is unaffected by possible truncation due to positive offset
-				this._ui.container
-					.removeAttr( "tabindex" )
-					.blur()
-					.offset( { left: 0, top: 0 } );
+				this._ui.container.offset( { left: 0, top: 0 } );
 			}
 		},
 
