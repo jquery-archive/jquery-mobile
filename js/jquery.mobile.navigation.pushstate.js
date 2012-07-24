@@ -34,6 +34,7 @@ define( [ "jquery", "./jquery.mobile.navigation", "depend!./jquery.hashchange[jq
 
 		state: function() {
 			return {
+				// firefox auto decodes the url when using location.hash but not href
 				hash: $.mobile.path.parseUrl( location.href ).hash || "#" + self.initialFilePath,
 				title: document.title,
 
@@ -72,6 +73,7 @@ define( [ "jquery", "./jquery.mobile.navigation", "depend!./jquery.hashchange[jq
 			}
 
 			var href, state,
+				// firefox auto decodes the url when using location.hash but not href
 				hash = $.mobile.path.parseUrl( location.href ).hash,
 				isPath = $.mobile.path.isPath( hash ),
 				resolutionUrl = isPath ? location.href : $.mobile.getDocumentUrl();
