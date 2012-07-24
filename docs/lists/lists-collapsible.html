@@ -374,9 +374,9 @@
 							</ul>
 						</div><!-- /collapsible -->
 
-				<p>If you want the top and bottom borders to collapse, you can add the following code to your custom CSS:</p>
+				<p>To avoid "double" borders the framework removes the top border of collapsibles that are immediately preceded by another collapsible. To negate this you can add the following rule to your custom CSS:</p>
 				
-<pre><code>.ui-collapsible-collapsed + .ui-collapsible .ui-collapsible-heading .ui-btn { border-top: none; }</code></pre>
+<pre><code>.ui-collapsible .ui-collapsible-heading .ui-btn { border-top-width: 1px !important; }</code></pre>
 					
 		</div><!--/content-primary -->		
 
