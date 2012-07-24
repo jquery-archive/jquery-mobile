@@ -104,7 +104,6 @@ p.intro strong {
 .content-secondary .ui-collapsible-content {
 	padding: 0;
 	background: none;
-	border-bottom: none;
 }
 .content-secondary .ui-listview {
 	margin: 0;
@@ -302,7 +301,8 @@ dd h4 { margin:15px 0 0 0; }
 		padding: 0;
 	}
 	.content-secondary .ui-collapsible-content {
-		border: none;
+		border-left: none;
+		border-right: none;
 	}
 	.type-index .content-secondary .ui-listview {
 		margin: 0;
@@ -320,6 +320,10 @@ dd h4 { margin:15px 0 0 0; }
 	}
 	.content-primary ul:first-child {
 		margin-top: 0;
+	}
+	/* collapsible non-inset example */
+	.content-primary .ui-collapsible-content ul:first-child {
+		margin-top: -10px;
 	}
 	.content-secondary h2 {
 		position: absolute;

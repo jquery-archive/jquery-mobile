@@ -282,26 +282,58 @@
 </div>
 
 <div data-nstest-role="page" id="collapsible-set-with-last-collapsible-expanded">
-    <div data-nstest-role="header">
-        <h1>uncollapsed collapsible</h1>
-    </div>
-    <div data-nstest-role="content">
-        <div data-nstest-role="collapsible-set">
-        <div data-nstest-role="collapsible">
-            <h1>Collapsible collapsed</h1>
-            <ul data-nstest-role="listview" data-inset="true">
-                <li data-nstest-theme="b">Swatch b</li>
-                <li data-nstest-theme="d">Swatch d</li>
-            </ul>
-        </div>
-        <div data-nstest-role="collapsible" data-nstest-collapsed="false" data-nstest-content-theme="e">
-            <h1>Collapsible initial uncollapsed</h1>
-            <ul data-nstest-role="listview" data-nstest-inset="true">
-                <li data-nstest-theme="a">Swatch a</li>
-                <li data-nstest-theme="b">Swatch b</li>
-            </ul>
-        </div>
-    </div>
+	<div data-nstest-role="header">
+	<h1>uncollapsed collapsible</h1>
+	</div>
+	<div data-nstest-role="content">
+		<div data-nstest-role="collapsible-set">
+			<div data-nstest-role="collapsible">
+				<h1>Collapsible collapsed</h1>
+				<ul data-nstest-role="listview" data-inset="true">
+					<li data-nstest-theme="b">Swatch b</li>
+					<li data-nstest-theme="d">Swatch d</li>
+				</ul>
+			</div>
+			<div data-nstest-role="collapsible" data-nstest-collapsed="false" data-nstest-content-theme="e">
+				<h1>Collapsible initial uncollapsed</h1>
+				<ul data-nstest-role="listview" data-nstest-inset="true">
+					<li data-nstest-theme="a">Swatch a</li>
+					<li data-nstest-theme="b">Swatch b</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div data-nstest-role="page" id="collapsible-set-with-legends">
+	<div data-nstest-role="header">
+		<h1>Collapsible set with legends</h1>
+	</div>
+	<div data-nstest-role="content">
+		<form data-nstest-role="collapsible-set">
+			<fieldset data-nstest-role="collapsible">
+				<legend>Legend</legend>
+				<div data-nstest-role="controlgroup">
+					<input type="checkbox" name="checkbox-1" id="checkbox-1" />
+					<label for="checkbox-1">Checkbox</label>
+				</div>	
+			</fieldset>
+			<fieldset data-nstest-role="collapsible">
+				<legend>Legend</legend>
+				<div data-nstest-role="controlgroup">
+					<input type="checkbox" name="checkbox-2" id="checkbox-2" />
+					<label for="checkbox-2">Checkbox</label>
+				</div>	
+			</fieldset>
+			<fieldset data-nstest-role="collapsible">
+				<legend>Legend</legend>
+				<div data-nstest-role="controlgroup">
+					<input type="checkbox" name="checkbox-3" id="checkbox-3" />
+					<label for="checkbox-3">Checkbox</label>
+				</div>	
+			</fieldset>
+		</form>
+	</div>
 </div>
 
 </body>

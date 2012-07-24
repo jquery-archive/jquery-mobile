@@ -83,7 +83,8 @@ $( document ).on( "pageinit", function() {
 
 	$("#mapiframe, #vidiframe")
 		.prop( "width", 0 )
-		.prop( "height", 0 );	
+		.prop( "height", 0 );
+		$( "#mapiframe" ).contents().find( "#map_canvas" ).css( { "width" : 0, "height" : 0 } );
 			
 	function sizes(iframewidth, iframeheight, padding, border) {
 		var sw = $( window ).width() - 30,
@@ -119,15 +120,17 @@ $( document ).on( "pageinit", function() {
 			var size = sizes(480, 320, 0, 1),
 				w = size.width,
 				h = size.height;
-				
+
 			$( "#mapiframe" )
 				.prop( "width", w )
 				.prop( "height", h );
+			$( "#mapiframe" ).contents().find( "#map_canvas" ).css( { "width": w, "height" : h } );
 		},
 		popupafterclose: function( event ) {
 			$("#mapiframe")
 				.prop( "width", 0 )
-				.prop( "height", 0 );	
+				.prop( "height", 0 );
+			$( "#mapiframe" ).contents().find( "#map_canvas" ).css( { "width": 0, "height" : 0 } );
 		}
 	});
 	$( "#popupVideo" ).on({
