@@ -39,11 +39,26 @@
 			<p>The popup plugin has the following methods:</p>
 
 		<dl>
-			<dt><code>open(x, y, transition, positionTo)</code> display the popup centered at coordinates (x, y) using the specified transition and positioning</dt>
+			<dt><code>open( options )</code> display the popup using the specified options</dt>
 			<dd>
 				<pre><code>
-$('.selector').popup('open', x, y, transition, positionTo);
+$('.selector').popup('open', options);
 				</code></pre>
+				<p><code>options</code> is an object literal which may have any of the following properties:</p>
+				<table>
+					<tr><td class="enum-value"><code>x</code></td><td>
+						The x-coordinate where the popup is to be displayed.
+					</td></tr>
+					<tr><td class="enum-value"><code>y</code></td><td>
+						The y-coordinate where the popup is to be displayed.
+					</td></tr>
+					<tr><td class="enum-value"><code>transition</code></td><td>
+						The transition to use during the opening sequence.
+					</td></tr>
+					<tr><td class="enum-value"><code>positionTo</code></td><td>
+						The positioning to use.
+					</td></tr>
+				</table>
 				<p>If <code>x</code> or <code>y</code> is missing, and no jQuery selector is given as the value of <code>positionTo</code>, the middle of the window will be used.</p>
 				<p><code>transition</code> can be used to override the popup's own <code>transition</code> option. This will result in the popup opening via the transition specified in the call, but the popup's <code>transition</code> option will not be updated.</p>
 				<p>Similarly, <code>data-position-to</code> can be used to override the popup's default positioning without modifying the value of the popup's <code>positionTo</code> option. The values available for <code>positionTo</code> are the same as those for the popup's <code>positionTo</code> option (see <a href="options.html">options</a> page).</p>
