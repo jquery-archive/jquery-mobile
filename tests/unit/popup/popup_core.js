@@ -171,7 +171,7 @@
 
 		expect( 6 );
 
-		$( "#test-popup" ).popup( "open", -9999, -9999 );
+		$( "#test-popup" ).popup( "open", { x: -9999, y: -9999 } );
 		setTimeout(function() {
 			var theOffset = $( "#test-popup p" ).offset();
 			ok( !$( "#test-popup" ).parent().prev().hasClass( "ui-screen-hidden" ), "Open popup screen is not hidden" );
