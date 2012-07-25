@@ -52,9 +52,11 @@
 		<div data-role="popup" id="popupBasic">
 			<p>This is a completely basic popup, no options set.</p>
 		</div>
+
+		<p>The popup consists of two elements: the screen, which is a transparent or translucent element that covers the entire document, and the container, which is the popup itself. If your original element had an <code>id</code> attribute, the screen and the container will each receive an <code>id</code> attribute based on it. The screen's <code>id</code> will be suffixed with "-screen", and the container's <code>id</code> will be suffixed with "-popup" (in the above example, <code>id="popupBasic-screen"</code> and <code>id="popupBasic-popup"</code>, respectively).</p>
 		
 		<p>The framework adds a small amount of margin to text elements, but it's really just a container with rounded corners and a shadow which serves as a blank slate for your designs (even these features can be disabled via <a href="options.html">options</a>).</p>
-		
+
 		<p>This simple styling makes it easy to add in widgets to create a variety of different interactions. Here are a few real-world examples that combine the various settings and styles you can achieve out of the box with popups:</p>
 		
 		<a href="#popupInfo" data-rel="popup" data-role="button" data-inline="true">Tooltip</a>
