@@ -123,6 +123,8 @@ define( [ "jquery",
 			// Leave a placeholder where the element used to be
 			ui.placeholder.insertAfter( this.element );
 			if ( myId ) {
+				ui.screen.attr( "id", myId + "-screen" );
+				ui.container.attr( "id", myId + "-popup" );
 				ui.placeholder.html( "<!-- placeholder for " + myId + " -->" );
 			}
 			ui.container.append( this.element );
