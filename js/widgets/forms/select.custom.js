@@ -392,9 +392,10 @@ define( [
 
 					self.listbox
 						.one( "popupafteropen", focusMenuItem )
-						.popup( "open",
-							self.button.offset().left + self.button.outerWidth() / 2,
-							self.button.offset().top + self.button.outerHeight() / 2 );
+						.popup( "open", {
+							x: self.button.offset().left + self.button.outerWidth() / 2,
+							y: self.button.offset().top + self.button.outerHeight() / 2
+						});
 
 					// duplicate with value set in page show for dialog sized selects
 					self.isOpen = true;
