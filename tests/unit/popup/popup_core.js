@@ -167,6 +167,7 @@
 		popupEnhancementTests( $payload, "When created on-the-fly" );
 		ok( $container.children().first().html() === "<!-- placeholder for otf-popup -->", "When created on-the-fly, there is a placeholder in the popup div's original location" );
 		$payload.popup( "destroy" );
+		console.log( "class: " + $payload.attr( "class" ) );
 		ok( !$payload.attr( "class" ), "After destroying on-the-fly popup, the payload has no 'class' attribute" );
 		ok( $container.children().is( $payload ), "After destroying on-the-fly popup, its payload is returned to its original location" );
 	});
@@ -179,7 +180,7 @@
 		setTimeout(function() {
 			var theOffset = $( "#test-popup p" ).offset();
 			ok( !$( "#test-popup" ).parent().prev().hasClass( "ui-screen-hidden" ), "Open popup screen is not hidden" );
-			ok( $( "#test-popup" ).parent().attr( "class" ).match( /( |^)ui-body-[a-z]( |$)/ ), "Open popup has a valid overlay theme" );
+			ok( $( "#test-popup" ).attr( "class" ).match( /( |^)ui-body-[a-z]( |$)/ ), "Open popup has a valid overlay theme" );
 			ok( theOffset.left >= 15 && theOffset.top >= 30, "Open popup top left coord is at least (10, 30)" );
 			$( "#test-popup" ).popup( "option", "overlayTheme", "a" );
 			ok( $( "#test-popup" ).parent().prev().hasClass( "ui-body-a in" ), "Setting an overlay theme while the popup is open causes the theme to be applied and the screen to be faded in" );
