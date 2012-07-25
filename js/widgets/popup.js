@@ -546,9 +546,10 @@ define( [ "jquery",
 
 		_destroy: function() {
 			// Put the element back to where the placeholder was and remove the "ui-popup" class
+			this._setTheme( "none" );
 			this.element
 				.insertAfter( this._ui.placeholder )
-				.removeClass( "ui-popup" );
+				.removeClass( "ui-popup ui-overlay-shadow ui-corner-all" );
 			this._ui.screen.remove();
 			this._ui.container.remove();
 			this._ui.placeholder.remove();
