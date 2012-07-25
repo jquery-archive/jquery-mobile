@@ -194,7 +194,7 @@ define( [ "jquery",
 		},
 
 		_setTheme: function( value ) {
-			this._applyTheme( this._ui.container, value );
+			this._applyTheme( this.element, value );
 		},
 
 		_setOverlayTheme: function( value ) {
@@ -214,11 +214,11 @@ define( [ "jquery",
 		},
 
 		_setShadow: function( value ) {
-			this._ui.container.toggleClass( "ui-overlay-shadow", value );
+			this.element.toggleClass( "ui-overlay-shadow", value );
 		},
 
 		_setCorners: function( value ) {
-			this._ui.container.toggleClass( "ui-corner-all", value );
+			this.element.toggleClass( "ui-corner-all", value );
 		},
 
 		_applyTransition: function( value ) {
