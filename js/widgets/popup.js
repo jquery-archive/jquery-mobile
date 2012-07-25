@@ -452,13 +452,19 @@ define( [ "jquery",
 			this.element.trigger( "popupafteropen" );
 		},
 
-		_open: function( x, y, transition, positionTo ) {
-			var coords;
+		_open: function( options ) {
+			var coords, transition;
+
+			// Make sure options is defined
+			options = ( options || {} );
+
+			// Copy out the transition, because we may be overwriting it later and we don't want to pass that change back to the caller
+			transition = options.transition;
 
 			// Give applications a chance to modify the contents of the container before it appears
 			this.element.trigger( "popupbeforeposition" );
 
-			coords = this._placementCoords( this._desiredCoords( x, y, positionTo || this.options.positionTo || "origin" ) );
+			coords = this._placementCoords( this._desiredCoords( options.x, options.y, options.positionTo || this.options.positionTo || "origin" ) );
 
 			// Count down to triggering "popupafteropen" - we have two prerequisites:
 			// 1. The popup window animation completes (container())
@@ -553,7 +559,7 @@ define( [ "jquery",
 			});
 		},
 
-		open: function( x, y, transition, positionTo ) {
+		open: function( options ) {
 			$.mobile.popup.popupManager.push( this, arguments );
 		},
 
@@ -706,11 +712,12 @@ define( [ "jquery",
 
 		if ( popup.data( "popup" ) ) {
 			offset = $link.offset();
-			popup.popup( "open",
-				offset.left + $link.outerWidth() / 2,
-				offset.top + $link.outerHeight() / 2,
-				$link.jqmData( "transition" ),
-				$link.jqmData( "position-to" ) );
+			popup.popup( "open", {
+				x: offset.left + $link.outerWidth() / 2,
+				y: offset.top + $link.outerHeight() / 2,
+				transition: $link.jqmData( "transition" ),
+				positionTo: $link.jqmData( "position-to" )
+			});
 
 			// If this link is not inside a popup, re-focus onto it after the popup(s) complete
 			// For some reason, a $.proxy( $link, "focus" ) doesn't work as the handler
