@@ -136,23 +136,6 @@
 		tolTest( tolTestElement, tolTestPopup, null, defaultValues );
 	});
 
-/*
-	test( "Popup tolerances are parsed correctly", function() {
-
-		ok( (
-			$.type( defaultValues.l ) === "number" && !isNaN( defaultValues.l ) &&
-			$.type( defaultValues.t ) === "number" && !isNaN( defaultValues.t ) &&
-			$.type( defaultValues.r ) === "number" && !isNaN( defaultValues.r ) &&
-			$.type( defaultValues.b ) === "number" && !isNaN( defaultValues.b ) ), "Default tolerances are numbers and not NaN" );
-
-		tolTest( tolTestElement, tolTestPopup, "", defaultValues );
-		tolTest( tolTestElement, tolTestPopup, "0", { l: 0, t: 0, r: 0, b: 0 } );
-		tolTest( tolTestElement, tolTestPopup, "12,14", { l: 12, t: 14, r: 12, b: 14 } );
-		tolTest( tolTestElement, tolTestPopup, "5,9,4,11", { l: 5, t: 9, r: 4, b: 11 } );
-		tolTest( tolTestElement, tolTestPopup, null, defaultValues );
-	}
-*/
-
 	test( "Popup is enhanced correctly", function() {
 		popupEnhancementTests( $( "#test-popup" ), "When autoenhanced" );
 		ok( $( "#page-content" ).children().first().html() === "<!-- placeholder for test-popup -->", "When autoenhanced, there is a placeholder in the popup div's original location" );
@@ -186,14 +169,16 @@
 
 	asyncTest( "Popup opens and closes", function() {
 
-		expect( 5 );
+		expect( 6 );
 
 		$( "#test-popup" ).popup( "open", -9999, -9999 );
 		setTimeout(function() {
 			var theOffset = $( "#test-popup p" ).offset();
 			ok( !$( "#test-popup" ).parent().prev().hasClass( "ui-screen-hidden" ), "Open popup screen is not hidden" );
 			ok( $( "#test-popup" ).parent().attr( "class" ).match( /( |^)ui-body-[a-z]( |$)/ ), "Open popup has a valid overlay theme" );
-			ok( theOffset.left >= 10 && theOffset.top >= 30, "Open popup top left coord is at least (10, 30)" );
+			ok( theOffset.left >= 15 && theOffset.top >= 30, "Open popup top left coord is at least (10, 30)" );
+			$( "#test-popup" ).popup( "option", "overlayTheme", "a" );
+			ok( $( "#test-popup" ).parent().prev().hasClass( "ui-body-a in" ), "Setting an overlay theme while the popup is open causes the theme to be applied and the screen to be faded in" );
 			$( "#test-popup" ).popup( "close" );
 			setTimeout(function() {
 				ok( !$( "#test-popup" ).parent().hasClass( "in" ), "Closed popup container does not have class 'in'" );
