@@ -205,6 +205,10 @@ define( [ "jquery",
 						this._ui.screen.css( "background-image" ) === "none" &&
 						this._ui.screen.css( "background" ) === undefined ) );
 			}
+
+			if ( this._isOpen ) {
+				this._ui.screen.addClass( "in" );
+			}
 		},
 
 		_setShadow: function( value ) {
