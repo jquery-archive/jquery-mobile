@@ -25,7 +25,7 @@
 	<div data-role="content" data-theme="c">
 
 		<div class="content-primary">
-			<h2>Data-attribute reference</h2>
+			<h2>Data attribute reference</h2>
 			<p>The jQuery Mobile framework uses HTML5 <code>data-</code> attributes to allow for markup-based initialization and configuration of widgets. These attributes are completely optional; calling plugins manually and passing options directly is also supported. To avoid naming conflicts with other plugins or frameworks that also use <code>data-</code> attributes, set a custom namespace by modifying the <a href="globalconfig.html"><code>ns</code> global option</a>.<p>
 
 				<style>
@@ -81,7 +81,7 @@
 				</tr>
 				<tr>
 					<th>data-role</th>
-					<td>none (prevents auto-enhancement to use native control)</td>
+					<td>none - Prevents auto-enhancement to use native control</td>
 				</tr>
 				<tr>
 					<th>data-theme</th>
@@ -187,7 +187,7 @@
 			<table>
 				<tr>
 					<th>data-close-btn-text</th>
-					<td>string (text for the close button, dialog only)</td>
+					<td>string - Text for the close button, dialog only</td>
 				</tr>
 				<tr>
 					<th>data-dom-cache</th>
@@ -195,7 +195,7 @@
 				</tr>
 				<tr>
 					<th>data-overlay-theme</th>
-					<td>swatch letter (a-z) - overlay theme when the page is opened in a dialog</td>
+					<td>swatch letter (a-z) - Overlay theme when the page is opened in a dialog</td>
 				</tr>
 				<tr>
 					<th>data-theme</th>
@@ -203,7 +203,7 @@
 				</tr>
 				<tr>
 					<th>data-title</th>
-					<td>string (title used when page is shown)</td>
+					<td>string - Title used when page is shown</td>
 				</tr>
 			</table>
 
@@ -235,7 +235,7 @@
 				</tr>
 				<tr>
 					<th>data-fullscreen</th>
-					<td>true | <strong>false</strong> - Setting toolbars <strong>over</strong> the page-content</td>
+					<td>true | <strong>false</strong> - Setting toolbars <u>over</u> the page-content</td>
 				</tr>
 				<tr>
 					<th>data-tap-toggle</th>
@@ -247,7 +247,7 @@
 				</tr>
 				<tr>
 					<th>data-update-page-padding</th>
-					<td><strong>true</strong> | false - Have the page top/bottom padding updated on other events than when page is shown as well (resize, transition, "updatelayout")</td>
+					<td><strong>true</strong> | false - Have the page top and bottom padding updated on resize, transition, "updatelayout" events (the framework always updates the padding on the "pageshow" event).</td>
 				</tr>
 				<tr>
 					<th>data-visible-on-page-show</th>
@@ -256,7 +256,7 @@
 			</table>
 
 			<h2><a href="../forms/switch/">Flip toggle switch</a></h2>
-			<p>Select with <code>data-role="slider"</code>, two options only</p>
+			<p>Select with <code>data-role="slider"</code> and two <code style="font-weight:normal;">option</code> element</p>
 			<table>
 				<tr>
 					<th>data-mini</th>
@@ -264,7 +264,7 @@
 				</tr>
 				<tr>
 					<th>data-role</th>
-					<td>none (prevents auto-enhancement to use native control)</td>
+					<td>none - Prevents auto-enhancement to use native control</td>
 				</tr>
 				<tr>
 					<th>data-theme</th>
@@ -281,7 +281,7 @@
 			<table>
 				<tr>
 					<th>data-id</th>
-					<td>string (unique id, useful in persistent footers)</td>
+					<td>string - Unique ID. Required for persistent footers</td>
 				</tr>
 				<tr>
 					<th>data-position</th>
@@ -289,7 +289,7 @@
 				</tr>
 				<tr>
 					<th>data-fullscreen</th>
-					<td>true (used in conjunction with fixed toolbars)</td>
+					<td>true | <strong>false</strong> - Used in conjunction with fixed toolbars</td>
 				</tr>
 				<tr>
 					<th>data-theme</th>
@@ -302,7 +302,7 @@
 			<table>
 				<tr>
 					<th>data-id</th>
-					<td>string (unique id, useful in persistent headers)</td>
+					<td>string - Unique ID. Required for persistent headers</td>
 				</tr>
 				<tr>
 					<th>data-position</th>
@@ -310,7 +310,7 @@
 				</tr>
 				<tr>
 					<th>data-fullscreen</th>
-					<td>true (used in conjunction with fixed toolbars)</td>
+					<td>true | <strong>false</strong> - Used in conjunction with fixed toolbars</td>
 				</tr>
 				<tr>
 					<th>data-theme</th>
@@ -327,7 +327,7 @@
 				</tr>
 				<tr>
 					<th>data-direction</th>
-					<td>reverse (reverse page transition animation)</td>
+					<td>reverse - Reverse page transition animation</td>
 				</tr>
 				<tr>
 					<th>data-dom-cache</th>
@@ -339,10 +339,10 @@
 				</tr>
 				<tr>
 					<th>data-rel</th>
-					<td>back (to move one step back in history)<br />
-						dialog (to open link styled as dialog, not tracked in history)<br />
-						external (for linking to another domain)<br />
-						popup (for opening a popup)</td>
+					<td>back - To move one step back in history<br />
+						dialog - To open link styled as dialog, not tracked in history<br />
+						external - For linking to another domain<br />
+						popup - For opening a popup</td>
 				</tr>
 				<tr>
 					<th>data-transition</th>
@@ -350,15 +350,15 @@
 				</tr>
 				<tr>
 					<th>data-position-to</th>
-					<td><strong>origin</strong> (centers the popup over the link that opens it)<br />
-						jQuery selector (centers the popup over the specified element)<br />
-						window (centers the popup in the window)<br />
-						<u>Note:</u> option only available when used with popups. See also: Popup <a href="../pages/popup/options.html">options</a></td>
+					<td><strong>origin</strong> - Centers the popup over the link that opens it<br />
+						jQuery selector - Centers the popup over the specified element<br />
+						window - Centers the popup in the window<br />
+						<u>Note:</u> option only available when used with popups. See also: popup <a href="../pages/popup/options.html">options</a>.</td>
 				</tr>
 			</table>
 
 			<h2><a href="../lists/docs-lists.html">Listview</a></h2>
-			<p>OL or UL with <code>data-role="listview"</code></p>
+			<p><code style="font-weight:normal;">OL</code> or <code style="font-weight:normal;">UL</code> with <code>data-role="listview"</code></p>
 			<table>
 				<tr>
 					<th>data-autodividers</th>
@@ -366,11 +366,11 @@
 				</tr>
 				<tr>
 					<th>data-count-theme</th>
-					<td>swatch letter (a-z) (default "c" if unset)</td>
+					<td>swatch letter (a-z) - Default "c"</td>
 				</tr>
 				<tr>
 					<th>data-divider-theme</th>
-					<td>swatch letter (a-z) (default "b" if unset)</td>
+					<td>swatch letter (a-z) - Default "b"</td>
 				</tr>
 				<tr>
 					<th>data-filter</th>
@@ -398,7 +398,7 @@
 				</tr>
 				<tr>
 					<th>data-split-theme</th>
-					<td>swatch letter (a-z) (default "b" if unset)<td>
+					<td>swatch letter (a-z) - Default "b"<td>
 				</tr>
 				<tr>
 					<th>data-theme</th>
@@ -407,11 +407,11 @@
 			</table>
 
 			<h2><a href="../lists/docs-lists.html">Listview item</a></h2>
-			<p>LI within a listview</p>
+			<p><code style="font-weight:normal;">LI</code> within a listview</p>
 			<table>
 				<tr>
 					<th>data-filtertext</th>
-					<td>string (filter by this value instead of inner text)</td>
+					<td>string - Filter by this value instead of inner text</td>
 				</tr>
 				<tr>
 					<th>data-icon</th>
@@ -423,13 +423,13 @@
 				</tr>
 				<tr>
 					<th>data-theme</th>
-					<td>swatch letter (a-z) - can also be set on individual LIs</td>
+					<td>swatch letter (a-z)</td>
 				</tr>
 			</table>
 			<p>The <code>data-icon</code> attribute is only applicable for a listview item, if it contains a link.</p>
 
 			<h2><a href="../toolbars/docs-navbar.html">Navbar</a></h2>
-			<p>A number of LIs wrapped in a container with <code>data-role="navbar"</code></p>
+			<p>A number of <code style="font-weight:normal;">LI</code>s wrapped in a container with <code>data-role="navbar"</code></p>
 			<table>
 				<tr>
 					<th>data-iconpos</th>
@@ -444,7 +444,7 @@
 			<table>
 				<tr>
 					<th>data-add-back-btn</th>
-					<td>true | <strong>false</strong> (auto add back button, header only)</td>
+					<td>true | <strong>false</strong> - Auto add back button, header only</td>
 				</tr>
 				<tr>
 					<th>data-back-btn-text</th>
@@ -456,7 +456,7 @@
 				</tr>
 				<tr>
 					<th>data-close-btn-text</th>
-					<td>string (text for the close button, dialog only)</td>
+					<td>string - Text for the close button, dialog only</td>
 				</tr>
 				<tr>
 					<th>data-dom-cache</th>
@@ -464,23 +464,23 @@
 				</tr>
 				<tr>
 					<th>data-fullscreen</th>
-					<td>true (used in conjunction with fixed toolbars) <p class="ui-bar-e">Deprecated in 1.1 - use on header and footer instead.</p></td>
+					<td>true | <strong>false</strong> - Used in conjunction with fixed toolbars <p class="ui-bar-e">Deprecated in 1.1 - use on header and footer instead.</p></td>
 				</tr>
 				<tr>
 					<th>data-overlay-theme</th>
-					<td>swatch letter (a-z) - overlay theme when the page is opened in a dialog</td>
+					<td>swatch letter (a-z) - Overlay theme when the page is opened in a dialog</td>
 				</tr>
 				<tr>
 					<th>data-theme</th>
-					<td>swatch letter (a-z)</td>
+					<td>swatch letter (a-z) - Default "c"</td>
 				</tr>
 				<tr>
 					<th>data-title</th>
-					<td>string (title used when page is shown)</td>
+					<td>string - Title used when page is shown</td>
 				</tr>
 				<tr>
 					<th>data-url</th>
-					<td>url (value for updating the URL, instead of the url used to request the page)</td>
+					<td>url - Value for updating the URL, instead of the url used to request the page</td>
 				</tr>
 			</table>
 
@@ -493,7 +493,7 @@
 				</tr>
 				<tr>
 					<th>data-overlay-theme</th>
-					<td>swatch letter (a-z) - default null: transparent background</td>
+					<td>swatch letter (a-z) - Default "null" (transparent background)</td>
 				</tr>
 				<tr>
 					<th>data-shadow</th>
@@ -501,11 +501,7 @@
 				</tr>
 				<tr>
 					<th>data-theme</th>
-					<td>swatch letter (a-z) - Added to the popup container. Default inherited, none sets the popup to transparent</td>
-				</tr>
-				<tr>
-					<th>data-transition</th>
-					<td><strong>none</strong> - the transition to be used when showing/hiding the popup</td>
+					<td>swatch letter (a-z) | none - Added to the popup container. Default inherited, "none" sets the popup to transparent</td>
 				</tr>
 				<tr>
 					<th>data-tolerance</th>
@@ -516,17 +512,17 @@
 			<table>
 				<tr>
 					<th>data-position-to</th>
-					<td><strong>origin</strong> (centers the popup over the link that opens it)<br />
-						jQuery selector (centers the popup over the specified element)<br />
-						window (centers the popup in the window)</td>
+					<td><strong>origin</strong> - Centers the popup over the link that opens it<br />
+						jQuery selector - Centers the popup over the specified element<br />
+						window - Centers the popup in the window</td>
 				</tr>
 				<tr>
 					<th>data-rel</th>
-					<td>popup (for opening a popup)</td>
+					<td>popup - For opening a popup</td>
 				</tr>
 				<tr>
 					<th>data-transition</th>
-					<td>fade | flip | flow | pop | slide | slidedown | slidefade | slideup | turn | <strong>none</strong></td>
+					<td>fade | flip | flow | pop | slide | slidedown | slidefade | slideup | turn | <strong>none</strong> - The transition to be used when showing/hiding the popup</td>
 				</tr>
 			</table>
 
@@ -539,7 +535,7 @@
 				</tr>
 				<tr>
 					<th>data-role</th>
-					<td>none (prevents auto-enhancement to use native control)</td>
+					<td>none - Prevents auto-enhancement to use native control</td>
 				</tr>
 				<tr>
 					<th>data-theme</th>
@@ -573,15 +569,15 @@
 				</tr>
 				<tr>
 					<th>data-overlay-theme</th>
-					<td>swatch letter (a-z) - overlay theme for non-native selects</td>
+					<td>swatch letter (a-z) - Overlay theme for non-native selects</td>
 				</tr>
 				<tr>
 					<th>data-placeholder</th>
-					<td>true | false - Add to the Option</td>
+					<td>true | <strong>false</strong> - Can be set on <code style="font-weight:normal;">option</code> element of a non-native select</td>
 				</tr>
 				<tr>
 					<th>data-role</th>
-					<td>none (prevents auto-enhancement to use native control)</td>
+					<td>none - Prevents auto-enhancement to use native control</td>
 				</tr>
 				<tr>
 					<th>data-theme</th>
@@ -603,7 +599,7 @@
 				</tr>
 				<tr>
 					<th>data-role</th>
-					<td>none (prevents auto-enhancement to use native control)</td>
+					<td>none - Prevents auto-enhancement to use native control</td>
 				</tr>
 				<tr>
 					<th>data-theme</th>
@@ -624,7 +620,7 @@
 				</tr>
 				<tr>
 					<th>data-role</th>
-					<td>none (prevents auto-enhancement to use native control)</td>
+					<td>none - Prevents auto-enhancement to use native control</td>
 				</tr>
 				<tr>
 					<th>data-theme</th>

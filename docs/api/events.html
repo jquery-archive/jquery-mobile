@@ -443,7 +443,7 @@ $( '#aboutPage' ).live( 'pagebeforecreate',function(event){
   alert( 'This page was just inserted into the dom!' );
 });
 </code></pre>
-				<p>Note that by binding to <code>pagebeforecreate</code>, you can manipulate markup before jQuery Mobile's default widgets are auto-initialized. For example, say you want to add data-attributes via JavaScript instead of in the HTML source, this is the event you'd use.</p>
+				<p>Note that by binding to <code>pagebeforecreate</code>, you can manipulate markup before jQuery Mobile's default widgets are auto-initialized. For example, say you want to add data attributes via JavaScript instead of in the HTML source, this is the event you'd use.</p>
 
 <pre><code>
 $( '#aboutPage' ).live( 'pagebeforecreate',function(event){
