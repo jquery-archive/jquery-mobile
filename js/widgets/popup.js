@@ -26,6 +26,17 @@ define( [ "jquery",
 		return ret;
 	}
 
+	function windowCoords() {
+		var $win = $( window );
+
+		return {
+			x: $win.scrollLeft(),
+			y: $win.scrollTop(),
+			cx: ( window.innerWidth || $win.width() ),
+			cy: ( window.innerHeight || $win.height() )
+		};
+	}
+
 	$.widget( "mobile.popup", $.mobile.widget, {
 		options: {
 			theme: null,
@@ -50,10 +61,45 @@ define( [ "jquery",
 			}
 		},
 
-		_handleWindowOrientationChange: function( e ) {
-			if ( this._isOpen ) {
+		_maybeRefreshTimeout: function() {
+			var winCoords = windowCoords();
+
+			if ( this._resizeData ) {
+				if ( winCoords.x === this._resizeData.winCoords.x &&
+					winCoords.y === this._resizeData.winCoords.y &&
+					winCoords.cx === this._resizeData.winCoords.cx &&
+					winCoords.cy === this._resizeData.winCoords.cy ) {
+					// timeout not refreshed
+					return false;
+				} else {
+					// clear existing timeout - it will be refreshed below
+					clearTimeout( this._resizeData.timeoutId );
+				}
+			}
+
+			this._resizeData = {
+				timeoutId: setTimeout( $.proxy( this, "_resizeTimeout" ), 100 ),
+				winCoords: winCoords
+			};
+
+			return true;
+		},
+
+		_resizeTimeout: function() {
+			if ( !this._maybeRefreshTimeout() ) {
 				this.element.trigger( "popupbeforeposition" );
 				this._ui.container.offset( this._placementCoords( this._desiredCoords( undefined, undefined, "window" ) ) );
+				this._resizeData = null;
+			}
+		},
+
+		_handleWindowResize: function( e ) {
+			var winCoords;
+			if ( this._isOpen ) {
+				this._maybeRefreshTimeout();
+				// Need to first set the offset to ( 0, 0 ) to make sure that the width value we retrieve during
+				// _placementCoords, is unaffected by possible truncation due to positive offset
+				this._ui.container.offset( { left: 0, top: 0 } );
 			}
 		},
 
@@ -93,11 +139,12 @@ define( [ "jquery",
 				_prereqs: null,
 				_isOpen: false,
 				_tolerance: null,
+				_resizeData: null,
 				_globalHandlers: [
 					{
 						src: $( window ),
 						handler: {
-							orientationchange: $.proxy( this, "_handleWindowOrientationChange" ),
+							resize: $.proxy( this, "_handleWindowResize" ),
 							keyup: $.proxy( this, "_handleWindowKeyUp" )
 						}
 					}
@@ -158,6 +205,10 @@ define( [ "jquery",
 						this._ui.screen.css( "background-image" ) === "none" &&
 						this._ui.screen.css( "background" ) === undefined ) );
 			}
+
+			if ( this._isOpen ) {
+				this._ui.screen.addClass( "in" );
+			}
 		},
 
 		_setShadow: function( value ) {
@@ -183,7 +234,7 @@ define( [ "jquery",
 		},
 
 		_setTolerance: function( value ) {
-			var tol = { l: 15, t: 30, r: 15, b: 30 };
+			var tol = { t: 30, r: 15, b: 30, l: 15 };
 
 			if ( value ) {
 				var ar = String( value ).split( "," );
@@ -194,25 +245,22 @@ define( [ "jquery",
 					// All values are to be the same
 					case 1:
 						if ( !isNaN( ar[ 0 ] ) ) {
-							tol.l = tol.t = tol.r = tol.b = ar[ 0 ];
+							tol.t = tol.r = tol.b = tol.l = ar[ 0 ];
 						}
 						break;
 
-					// The first value denotes left/right tolerance, and the second value denotes top/bottom tolerance
+					// The first value denotes top/bottom tolerance, and the second value denotes left/right tolerance
 					case 2:
-						if ( !isNaN( ar[ 0 ] ) ) {
-							tol.l = tol.r = ar[ 0 ];
-						}
 						if ( !isNaN( ar[ 1 ] ) ) {
 							tol.t = tol.b = ar[ 1 ];
 						}
+						if ( !isNaN( ar[ 0 ] ) ) {
+							tol.l = tol.r = ar[ 0 ];
+						}
 						break;
 
-					// The array contains values in the order left, top, right, bottom
+					// The array contains values in the order top, right, bottom, left
 					case 4:
-						if ( !isNaN( ar[ 0 ] ) ) {
-							tol.l = ar[ 0 ];
-						}
 						if ( !isNaN( ar[ 1 ] ) ) {
 							tol.t = ar[ 1 ];
 						}
@@ -221,6 +269,9 @@ define( [ "jquery",
 						}
 						if ( !isNaN( ar[ 3 ] ) ) {
 							tol.b = ar[ 3 ];
+						}
+						if ( !isNaN( ar[ 0 ] ) ) {
+							tol.l = ar[ 0 ];
 						}
 						break;
 
@@ -249,12 +300,12 @@ define( [ "jquery",
 		_placementCoords: function( desired ) {
 			// rectangle within which the popup must fit
 			var
-				$win = $( window ),
+				winCoords = windowCoords(),
 				rc = {
-					l: this._tolerance.l,
-					t: $win.scrollTop() + this._tolerance.t,
-					cx: $win.width() - this._tolerance.l - this._tolerance.r,
-					cy: ( window.innerHeight || $win.height() ) - this._tolerance.t - this._tolerance.b
+					x: this._tolerance.l,
+					y: winCoords.y + this._tolerance.t,
+					cx: winCoords.cx - this._tolerance.l - this._tolerance.r,
+					cy: winCoords.cy - this._tolerance.t - this._tolerance.b
 				},
 				menuSize, ret;
 
@@ -268,8 +319,8 @@ define( [ "jquery",
 			// Center the menu over the desired coordinates, while not going outside
 			// the window tolerances. This will center wrt. the window if the popup is too large.
 			ret = {
-				x: fitSegmentInsideSegment( rc.cx, menuSize.cx, rc.l, desired.x ),
-				y: fitSegmentInsideSegment( rc.cy, menuSize.cy, rc.t, desired.y )
+				x: fitSegmentInsideSegment( rc.cx, menuSize.cx, rc.x, desired.x ),
+				y: fitSegmentInsideSegment( rc.cy, menuSize.cy, rc.y, desired.y )
 			};
 
 			// Make sure the top of the menu is visible
@@ -355,13 +406,13 @@ define( [ "jquery",
 		// desiredPosition.positionTo. Nevertheless, this function ensures that its return value always contains valid
 		// x and y coordinates by specifying the center middle of the window if the coordinates are absent.
 		_desiredCoords: function( x, y, positionTo ) {
-			var dst = null, offset, $win = $( window );
+			var dst = null, offset, winCoords = windowCoords();
 
 			// Establish which element will serve as the reference
 			if ( positionTo && positionTo !== "origin" ) {
 				if ( positionTo === "window" ) {
-					x = $win.width() / 2 + $win.scrollLeft();
-					y = ( window.innerHeight || $win.height() ) / 2 + $win.scrollTop();
+					x = winCoords.cx / 2 + winCoords.x;
+					y = winCoords.cy / 2 + winCoords.y;
 				} else {
 					try {
 						dst = $( positionTo );
@@ -386,10 +437,10 @@ define( [ "jquery",
 
 			// Make sure x and y are valid numbers - center over the window
 			if ( $.type( x ) !== "number" || isNaN( x ) ) {
-				x = $win.width() / 2 + $win.scrollLeft();
+				x = winCoords.cx / 2 + winCoords.x;
 			}
 			if ( $.type( y ) !== "number" || isNaN( y ) ) {
-				y = ( window.innerHeight || $win.height() ) / 2 + $win.scrollTop();
+				y = winCoords.cy / 2 + winCoords.y;
 			}
 
 			return { x: x, y: y };
