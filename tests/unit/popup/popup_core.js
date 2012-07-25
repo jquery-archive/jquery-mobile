@@ -106,11 +106,15 @@
 	});
 
 	function popupEnhancementTests( $sel, prefix ) {
+		var $container = $sel.parent(), $screen = $sel.parent().prev();
+
 		ok( $sel.data( "popup" ),  prefix + ", popup div is associated with a popup widget" );
 		ok( $sel.hasClass( "ui-popup" ),  prefix + ", popup payload has class 'ui-popup'" );
-		ok( $sel.parent().hasClass( "ui-popup-container" ), prefix + ", popup div parent has class ui-popup-container" );
-		ok( $sel.parent().parent().hasClass( "ui-page" ), prefix + ", popup div grandparent is the page" );
-		ok( $sel.parent().prev().hasClass( "ui-popup-screen" ), prefix + ", popup div is preceded by its screen" );
+		ok( $container.hasClass( "ui-popup-container" ), prefix + ", popup div parent has class ui-popup-container" );
+		ok( $container.parent().hasClass( "ui-page" ), prefix + ", popup container parent is the page" );
+		ok( $screen.hasClass( "ui-popup-screen" ), prefix + ", popup div is preceded by its screen" );
+		ok( $container.attr( "id" ) === $sel.attr( "id" ) + "-popup", prefix + ", popup container has the id of the payload + '-popup'" );
+		ok( $screen.attr( "id" ) === $sel.attr( "id" ) + "-screen", prefix + ", popup screen has the id of the payload + '-screen'" );
 	}
 
 	function tolTest( el, popup, val, expected ) {
