@@ -5,5 +5,5 @@ cp -r $OUTPUT/* /var/www/html/code.jquery.com/mobile/latest/
 
 for file in `ls $OUTPUT/jquery.mobile*`; do
   filename=`echo $file | sed "s/$OUTPUT\///"`
-  curl "http://code.origin.jquery.com/mobile/latest/$filename" > /dev/null
+  curl "http://code.origin.jquery.com/mobile/latest/$filename?reload"
 done
