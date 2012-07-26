@@ -270,17 +270,17 @@ dd h4 { margin:15px 0 0 0; }
 		margin: 2em 0;
 	}
 	.type-home .ui-content,
-	.type-interior .ui-content {
+	.type-interior > .ui-content {
 		padding: 0;
 		background: url(../images/px-ccc.gif) 50% 0 repeat-y;
 	}
-	.ui-popup-container .ui-content {
-		padding: 15px;
-		background-image: none;
-	}
-	.type-interior .ui-content {
+	.type-interior > .ui-content {
 		background-position: 45%;
 		overflow: hidden;
+	}
+	.type-interior .ui-popup-container .ui-content {
+		padding: 15px;
+		background-image: none;
 	}
 	.content-secondary {
 		text-align: left;
