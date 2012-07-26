@@ -68,11 +68,11 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 			}
 		})
 		.bind( "pagehide", function( e, ui ) {
-			self._isClosed = false;
 			$( this ).find( "." + $.mobile.activeBtnClass ).not( ".ui-slider-bg" ).removeClass( $.mobile.activeBtnClass );
 		})
 		// Override the theme set by the page plugin on pageshow
 		.bind( "pagebeforeshow", function() {
+			self._isCloseable = true;
 			if ( self.options.overlayTheme ) {
 				self.element
 					.page( "removeContainerBackground" )
@@ -85,12 +85,11 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 	close: function() {
 		var dst;
 
-		if ( !this._isClosed ) {
-			this._isClosed = true;
+		if ( this._isCloseable ) {
+			this._isCloseable = false;
 			if ( $.mobile.hashListeningEnabled ) {
 				window.history.back();
-			}
-			else {
+			} else {
 				dst = $.mobile.urlHistory.getPrev().url;
 				if ( !$.mobile.path.isPath( dst ) ) {
 					dst = $.mobile.path.makeUrlAbsolute( "#" + dst );
