@@ -402,6 +402,14 @@ dd h4 { margin:15px 0 0 0; }
 	}
 }
 
+/* reset for popup examples */
+.type-interior .ui-popup.ui-content,
+.type-interior .ui-popup .ui-content {
+	background-position: 0 0;
+	background-repeat: no-repeat;
+	overflow: visible;
+}
+
 /* tables documenting enum-type settings */
 
 .enum-value {
