@@ -85,6 +85,11 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 				$.mobile.path.isHashValid( location.hash ) &&
 				( $( location.hash + ':jqmData(role="page")' ).length ||
 					$.mobile.path.isPath( location.hash ) ) ) ) {
+
+				// Store the initial destination
+				if ( $.mobile.path.isHashValid( location.hash ) ) {
+					$.mobile.urlHistory.initialDst = $.mobile.path.parseUrl( location.href ).hash.replace( "#", "" );
+				}
 				$.mobile.changePage( $.mobile.firstPage, { transition: "none", reverse: true, changeHash: false, fromHashChange: true } );
 			}
 			// otherwise, trigger a hashchange to load a deeplink

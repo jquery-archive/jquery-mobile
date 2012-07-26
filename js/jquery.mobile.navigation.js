@@ -1481,6 +1481,14 @@ define( [
 				// since the hashchange could've been the result of a forward/backward navigation
 				// that crosses from an external page/dialog to an internal page/dialog.
 				to = ( typeof to === "string" && !path.isPath( to ) ) ? ( path.makeUrlAbsolute( '#' + to, documentBase ) ) : to;
+
+				// If we're about to go to an initial URL that contains a reference to a non-existent
+				// internal page, go to the first page instead. We know that the initial hash refers to a
+				// non-existent page, because the initial hash did not end up in the initial urlHistory entry
+				if ( to === path.makeUrlAbsolute( '#' + urlHistory.initialDst, documentBase ) &&
+					urlHistory.stack.length && urlHistory.stack[0].url !== urlHistory.initialDst.replace( dialogHashKey, "" ) ) {
+					to = $.mobile.firstPage;
+				}
 				$.mobile.changePage( to, changePageOptions );
 			}	else {
 				//there's no hash, go to the first page in the dom
