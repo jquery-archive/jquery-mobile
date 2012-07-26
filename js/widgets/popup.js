@@ -467,6 +467,7 @@ define( [ "jquery",
 		},
 
 		_openPrereqsComplete: function() {
+			this._ui.container.addClass( "ui-popup-active" );
 			this._isOpen = true;
 			this._ui.container.attr( "tabindex", "0" ).focus();
 			this.element.trigger( "popupafteropen" );
@@ -541,6 +542,7 @@ define( [ "jquery",
 		},
 
 		_close: function() {
+			this._ui.container.removeClass( "ui-popup-active" );
 			this._isOpen = false;
 
 			// Count down to triggering "popupafterclose" - we have two prerequisites:
