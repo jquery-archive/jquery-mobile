@@ -44,7 +44,7 @@ if [ -x $NODE ]; then
   RUN_JS=$NODE
 fi
 
-if [ $IS_DEPLOY_TARGET="true" ]; then
+if [ $IS_DEPLOY_TARGET == "true" ]; then
   function ver {
     sed "s/v@VERSION/${VER_OFFICIAL} ${HEAD_SHA}/"
   }
