@@ -55,6 +55,11 @@
 	outline: 0;
 }
 
+.ui-popup.ui-content,
+.ui-popup .ui-content {
+	overflow: visible;
+}
+
 .ui-popup > p,
 .ui-popup > h1,
 .ui-popup > h2,
