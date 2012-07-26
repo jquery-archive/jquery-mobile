@@ -13,7 +13,7 @@
 //		seq : [
 //			fn(result),
 //			{ key: {
-//					src: event source (is jQuery object), 
+//					src: event source (is jQuery object),
 //					event: event name (is string),
 //					       NB: It's a good idea to namespace your events, because the handler will be removed
 //					       based on the name you give here if a timeout occurs before the event fires.
@@ -167,7 +167,6 @@
 		popupEnhancementTests( $payload, "When created on-the-fly" );
 		ok( $container.children().first().html() === "<!-- placeholder for otf-popup -->", "When created on-the-fly, there is a placeholder in the popup div's original location" );
 		$payload.popup( "destroy" );
-		console.log( "class: " + $payload.attr( "class" ) );
 		ok( !$payload.attr( "class" ), "After destroying on-the-fly popup, the payload has no 'class' attribute" );
 		ok( $container.children().is( $payload ), "After destroying on-the-fly popup, its payload is returned to its original location" );
 	});

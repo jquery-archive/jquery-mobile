@@ -2,9 +2,13 @@
  * mobile dialog unit tests
  */
 (function($) {
+	var home = $.mobile.path.parseUrl(location.pathname).directory,
+		homeWithSearch = home + location.search;
+
 	module( "jquery.mobile.dialog.js", {
 		setup: function() {
 			$.mobile.page.prototype.options.contentTheme = "d";
+			$.testHelper.navReset( homeWithSearch );
 		}
 	});
 
@@ -12,10 +16,6 @@
 		expect( 2 );
 
 		$.testHelper.pageSequence([
-			function() {
-				$.mobile.changePage( $( "#mypage" ) );
-			},
-
 			function() {
 				//bring up the dialog
 				$( "#foo-dialog-link" ).click();
@@ -32,7 +32,7 @@
 			},
 
 			function() {
-				ok( !/&ui-state=dialog/.test(location.hash), "ui-state=dialog !~ location.hash" );
+				ok( !(/&ui-state=dialog/.test(location.hash)), "ui-state=dialog !~ location.hash" );
 				start();
 			}
 		]);
@@ -76,7 +76,7 @@
 
 	asyncTest( "dialog element with no theming", function() {
 		expect(4);
-		
+
 		$.testHelper.pageSequence([
 			function() {
 				$.mobile.changePage( $( "#mypage" ) );
@@ -159,24 +159,34 @@
 			}
 		]);
 	});
-	
-	
+
+
 	asyncTest( "page container is updated to dialog overlayTheme at pagebeforeshow", function(){
-		
+		var pageTheme;
+
 		expect( 1 );
-		
-		var pageTheme = "ui-overlay-" + $.mobile.activePage.dialog( "option", "overlayTheme" );
 
-		$.mobile.pageContainer.removeClass( pageTheme );
-		
-		$.mobile.activePage
-			.bind( "pagebeforeshow", function(){
-				ok( $.mobile.pageContainer.hasClass( pageTheme ), "Page container has the same theme as the dialog overlayTheme on pagebeforeshow" );
-				start();
-			})
-			.trigger( "pagebeforeshow" );
+		$.testHelper.pageSequence([
+			function() {
+				$.mobile.changePage( "#mypage" );
+			},
 
-	} );
-	
-	
+			function() {
+				//bring up the dialog
+				$( "#foo-dialog-link" ).click();
+			},
+
+			function() {
+				pageTheme = "ui-overlay-" + $.mobile.activePage.dialog( "option", "overlayTheme" );
+
+				$.mobile.pageContainer.removeClass( pageTheme );
+
+				$.mobile.activePage
+					.bind( "pagebeforeshow", function(){
+						ok( $.mobile.pageContainer.hasClass( pageTheme ), "Page container has the same theme as the dialog overlayTheme on pagebeforeshow" );
+						start();
+					}).trigger( "pagebeforeshow" );
+			}
+		]);
+	});
 })( jQuery );
