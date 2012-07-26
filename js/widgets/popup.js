@@ -87,19 +87,35 @@ define( [ "jquery",
 
 		_resizeTimeout: function() {
 			if ( !this._maybeRefreshTimeout() ) {
+				// effectively rapid-open the popup while leaving the screen intact
 				this.element.trigger( "popupbeforeposition" );
-				this._ui.container.offset( this._placementCoords( this._desiredCoords( undefined, undefined, "window" ) ) );
+				this._ui.container
+					.removeClass( "ui-selectmenu-hidden" )
+					.offset( this._placementCoords( this._desiredCoords( undefined, undefined, "window" ) ) )
+					.attr( "tabindex", "0" )
+					.focus();
+
 				this._resizeData = null;
+				this._orientationchangeInProgress = false;
 			}
 		},
 
 		_handleWindowResize: function( e ) {
-			var winCoords;
 			if ( this._isOpen ) {
 				this._maybeRefreshTimeout();
-				// Need to first set the offset to ( 0, 0 ) to make sure that the width value we retrieve during
-				// _placementCoords, is unaffected by possible truncation due to positive offset
-				this._ui.container.offset( { left: 0, top: 0 } );
+			}
+		},
+
+		_handleWindowOrientationchange: function( e ) {
+
+			if ( !this._orientationchangeInProgress ) {
+				// effectively rapid-close the popup while leaving the screen intact
+				this._ui.container
+					.addClass( "ui-selectmenu-hidden" )
+					.removeAttr( "style" )
+					.removeAttr( "tabindex" );
+
+				this._orientationchangeInProgress = true;
 			}
 		},
 
@@ -142,10 +158,12 @@ define( [ "jquery",
 				_isOpen: false,
 				_tolerance: null,
 				_resizeData: null,
+				_orientationchangeInProgress: false,
 				_globalHandlers: [
 					{
 						src: $( window ),
 						handler: {
+							orientationchange: $.proxy( this, "_handleWindowOrientationchange" ),
 							resize: $.proxy( this, "_handleWindowResize" ),
 							keyup: $.proxy( this, "_handleWindowKeyUp" )
 						}
