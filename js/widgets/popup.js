@@ -78,7 +78,7 @@ define( [ "jquery",
 			}
 
 			this._resizeData = {
-				timeoutId: setTimeout( $.proxy( this, "_resizeTimeout" ), 100 ),
+				timeoutId: setTimeout( $.proxy( this, "_resizeTimeout" ), 200 ),
 				winCoords: winCoords
 			};
 
