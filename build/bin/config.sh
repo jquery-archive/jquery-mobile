@@ -41,7 +41,7 @@ NODE=/usr/local/bin/node
 RUN_JS='java -XX:ReservedCodeCacheSize=64m -classpath build/js.jar:build/google-compiler-20111003.jar org.mozilla.javascript.tools.shell.Main'
 
 if [ -x $NODE ]; then
-	RUN_JS=${NODE}
+	RUN_JS=$NODE
 fi
 
 if [ $IS_DEPLOY_TARGET = "true" ]; then
