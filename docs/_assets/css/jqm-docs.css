@@ -278,10 +278,6 @@ dd h4 { margin:15px 0 0 0; }
 		background-position: 45%;
 		overflow: hidden;
 	}
-	.type-interior .ui-popup-container .ui-content {
-		padding: 15px;
-		background-image: none;
-	}
 	.content-secondary {
 		text-align: left;
 		float: left;
