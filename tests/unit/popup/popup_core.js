@@ -174,7 +174,7 @@
 
 	asyncTest( "Popup opens and closes", function() {
 
-		expect( 6 );
+		expect( 8 );
 
 		$( "#test-popup" ).popup( "open", { x: -9999, y: -9999 } );
 		setTimeout(function() {
@@ -184,10 +184,12 @@
 			ok( theOffset.left >= 15 && theOffset.top >= 30, "Open popup top left coord is at least (10, 30)" );
 			$( "#test-popup" ).popup( "option", "overlayTheme", "a" );
 			ok( $( "#test-popup" ).parent().prev().hasClass( "ui-body-a in" ), "Setting an overlay theme while the popup is open causes the theme to be applied and the screen to be faded in" );
+			ok( $( "#test-popup" ).parent().hasClass( "ui-popup-active" ), "Open popup has the 'ui-popup-active' class" );
 			$( "#test-popup" ).popup( "close" );
 			setTimeout(function() {
 				ok( !$( "#test-popup" ).parent().hasClass( "in" ), "Closed popup container does not have class 'in'" );
 				ok( $( "#test-popup" ).parent().prev().hasClass( "ui-screen-hidden" ), "Closed popup screen is hidden" );
+				ok( !$( "#test-popup" ).parent().hasClass( "ui-popup-active" ), "Open popup dos not have the 'ui-popup-active' class" );
 				setTimeout( function() { start(); }, 300 );
 			}, 1000);
 		}, 1000);
