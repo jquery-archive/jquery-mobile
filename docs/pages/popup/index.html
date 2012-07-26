@@ -330,12 +330,18 @@ $( ".selector" ).popup( "open", x, y,
 &lt;/div&gt;
 </code></pre>
 
-		<a href="#theme" data-rel="popup" data-role="button" data-inline="true">Theme set to A</a>
+		<a href="#theme" data-rel="popup" data-role="button" data-inline="true">Theme A</a>
 		<div id="theme" data-role="popup" data-theme="a" class="ui-content">
 		  <p>I have <code>data-theme="a"</code> set on me</p>
 		</div>
+		
+		<a href="#transparent" data-rel="popup" data-role="button" data-inline="true">Theme "none", no shadow</a>
+		<div id="transparent" data-role="popup" data-theme="none" data-shadow="false">
+			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+		  <img src="../../_assets/images/firefox-logo.png" class="popphoto" alt="firefox logo on a transparent popup">
+		</div>
 
-		<a href="#overlay" data-rel="popup" data-role="button" data-inline="true">Overlay set to A</a>
+		<a href="#overlay" data-rel="popup" data-role="button" data-inline="true">Overlay theme A</a>
 		<div id="overlay" data-role="popup" data-overlay-theme="a" class="ui-content">
 		  <p>I have a <code>data-overlay-theme="a"</code> set on me</p>
 		</div>
