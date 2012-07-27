@@ -8,7 +8,7 @@
 		onChangeCnt++;
 	};
 
-	module('jquery.mobile.slider.js', {
+	module('jquery.mobile.slider.js events', {
 		setup: function() {
 			// force the value to be an increment of 10 when we aren't testing the rounding
 			$("#stepped").val( 20 );
