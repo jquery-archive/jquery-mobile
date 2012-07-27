@@ -141,9 +141,6 @@ define( [ "jquery", "../jquery.mobile.support.orientation", "./throttledresize" 
 	$.fn[ event_name ] = function( fn ) {
 		return fn ? this.bind( event_name, fn ) : this.trigger( event_name );
 	};
-
-	$.attrFn[ event_name ] = true;
-
 }( jQuery, this ));
 
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
