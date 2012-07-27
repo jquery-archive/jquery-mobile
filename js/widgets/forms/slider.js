@@ -311,7 +311,6 @@ $.widget( "mobile.slider", $.mobile.widget, {
 	_checkedRefresh: function() {
 		if( this.value != this._value() ){
 			this.refresh( this._value() );
-			this.value = this._value();
 		}
 	},
 
@@ -325,6 +324,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		if ( this.options.disabled || this.element.attr('disabled')) {
 			this.disable();
 		}
+
+		// set the stored value for comparison later
+		this.value = this._value();
 
 		var control = this.element, percent,
 			cType = control[0].nodeName.toLowerCase(),
