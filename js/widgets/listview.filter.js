@@ -42,7 +42,10 @@ $( document ).delegate( ":jqmData(role='listview')", "listviewcreate", function(
 				lastval = $this.jqmData( "lastval" ) + "",
 				childItems = false,
 				itemtext = "",
-				item;
+				item,
+				lbfEvent = new $.Event( "listviewbeforefilter" );
+
+			list.trigger( lbfEvent );
 
 			// Change val as lastval for next execution
 			$this.jqmData( "lastval" , val );
