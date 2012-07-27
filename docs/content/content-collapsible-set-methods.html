@@ -41,12 +41,17 @@
 			<p>If you manipulate a collapsible set via JavaScript (e.g. add new collapsible containers), you must call the refresh method on it to update the visual styling.</p>
 
 			<pre><code>
-$('.selector').collapsibleset('refresh');
+$( ".selector" ).collapsibleset( "refresh" );
 				</code></pre>
 			</dd>
 
 		</dl>
-		<p>To expand or collapse items in a set, call the respective <a href="content-collapsible-methods.html">methods</a> on individual collapsibles.</p>
+		<p>To expand or collapse items in a set, call the respective <a href="content-collapsible-methods.html">methods</a> on individual collapsibles. The selector for the collapse method can include multiple items in a set:</p>
+		
+		<dd><pre><code>
+$( "#myCollapsibleSet" ).children().trigger( "collapse" );
+		</code></pre></dd>
+				
 	</div><!--/content-primary -->		
 	
 	<div class="content-secondary">
