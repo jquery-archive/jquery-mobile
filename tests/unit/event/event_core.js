@@ -69,6 +69,16 @@
 		$('#qunit-fixture').touchstart();
 	});
 
+	// jQuery < 1.8
+	if ( $.attrFn ) {
+		test( "defining event functions sets the attrFn to true", function(){
+			$.each( events, function( index, name ) {
+				ok( $.attrFn[ name ], "attribute function is true" );
+			});
+		});
+	}
+
+
 	test( "scrollstart enabled defaults to true", function(){
 		$.event.special.scrollstart.enabled = false;
 		$.each( components, function( index, value ) { $.testHelper.reloadLib( value ); });
