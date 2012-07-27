@@ -10,6 +10,8 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 (function( $, undefined ) {
 
 $.widget( "mobile.slider", $.mobile.widget, {
+	widgetEventPrefix: "slide",
+
 	options: {
 		theme: null,
 		trackTheme: null,
@@ -177,6 +179,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			}
 
 			self.refresh( event );
+			self._trigger( "start" );
 			return false;
 		})
 		.bind( "vclick", false );
@@ -212,6 +215,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 					self.mouseMoved = false;
 
+					self._trigger( "stop" );
 					return false;
 				}
 			});
