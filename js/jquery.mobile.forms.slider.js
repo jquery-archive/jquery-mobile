@@ -71,7 +71,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			options;
 
-        domHandle.setAttribute( 'href', "#" );
+		this._type = cType;
+
+		domHandle.setAttribute( 'href', "#" );
 		domSlider.setAttribute('role','application');
 		domSlider.className = ['ui-slider ',selectClass," ui-btn-down-",trackTheme,' ui-btn-corner-all', inlineClass, miniClass].join("");
 		domHandle.className = 'ui-slider-handle';
@@ -168,6 +170,11 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				return false;
 			}
 		});
+
+		// it appears the clicking the up and down buttons in chrome on
+		// range/number inputs doesn't trigger a change until the field is
+		// blurred. Here we check thif the value has changed and refresh
+		control.bind( "vmouseup", $.proxy( self._checkedRefresh, self));
 
 		slider.bind( "vmousedown", function( event ) {
 			// NOTE: we don't do this in refresh because we still want to
@@ -303,6 +310,18 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			});
 
 		this.refresh(undefined, undefined, true);
+	},
+
+	_checkedRefresh: function() {
+		if( this.value != this._value() ){
+			this.refresh( this._value() );
+			this.value = this._value();
+		}
+	},
+
+	_value: function() {
+		return  this._type === "input" ?
+			parseFloat( this.element.val() ) : this.element[0].selectedIndex;
 	},
 
 	refresh: function( val, isfromControl, preventInputUpdate ) {
