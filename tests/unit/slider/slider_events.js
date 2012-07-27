@@ -373,4 +373,28 @@
 			}
 		], 500);
 	});
+
+	asyncTest( "moving the slider triggers 'slidestart' and 'slidestop' events", function() {
+		var control = $( "#start-stop-events" ),
+			widget = control.data( "slider" ),
+			slider = widget.slider;
+
+		$.testHelper.eventCascade([
+			function() {
+				// trigger the slider grab event
+				slider.trigger( "mousedown" );
+			},
+
+			"slidestart", function( timeout ) {
+				ok( !timeout, "slidermovestart fired" );
+				slider.trigger( "mouseup" );
+			},
+
+			"slidestop", function( timeout ) {
+				ok( !timeout, "slidermovestop fired" );
+				start();
+			}
+		], 500);
+	});
+
 })(jQuery);
