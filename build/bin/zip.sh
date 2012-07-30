@@ -8,5 +8,5 @@ cp -R $OUTPUT tmp/$NAME
 # clear out old zip files
 clear_zip_files tmp/$NAME
 
-cd tmp; zip -rq ../$OUTPUT/$NAME.zip $NAME
-rm -rf tmp
+cd tmp && zip -rq ../$OUTPUT/$NAME.zip $NAME && cd -
+rm -r tmp
