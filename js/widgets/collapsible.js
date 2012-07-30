@@ -71,6 +71,11 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			if ( !o.mini ) {
 				o.mini = collapsibleSet.jqmData( "mini" );
 			}
+		} else {
+			// get inherited theme if not a set and no theme has been set
+			if ( !o.theme ) {
+				o.theme = $.mobile.getInheritedTheme( $el, "c" );
+			}
 		}
 		
 		if ( !!o.inset ) {
