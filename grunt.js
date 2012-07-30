@@ -1,19 +1,25 @@
 var path = require( 'path' ), fs = require( 'fs' );
 
 module.exports = function( grunt ) {
-	var dirs, names, min = {}, cssmin = {}, theme, rootFile, structureFile, themeFile;
+	var dirs, names, min = {}, cssmin = {},
+		theme, rootFile, structureFile, themeFile,
+		verOfficial, suffix;
 
 	dirs = {
 		output: 'compiled',
 		temp: 'tmp'
 	};
 
+	verOfficial = grunt.file.read( 'version.txt' ).replace(/\n/, '');
+
+	suffix = process.env.IS_DEPLOY_TARGET === "true" ? "-" + verOfficial : "";
+
 	names= {
-		base: 'jquery.mobile',
+		base: 'jquery.mobile' + suffix,
 		// this will change for the deploy target to include version information
-		root: 'jquery.mobile',
-		structure: 'jquery.mobile.structure',
-		theme: 'jquery.mobile.theme'
+		root: 'jquery.mobile' + suffix,
+		structure: 'jquery.mobile.structure' + suffix,
+		theme: 'jquery.mobile.theme' + suffix
 	};
 
 	function outputPath( name ){
@@ -46,6 +52,7 @@ module.exports = function( grunt ) {
 				eqnull: true,
 				browser: true
 			},
+
 			globals: {
 				jQuery: true,
 				"$": true,
@@ -158,7 +165,7 @@ module.exports = function( grunt ) {
 			// other version information is added via the asyncConfig helper that
 			// depends on git commands (eg ver.min, ver.header)
 			ver: {
-				official: grunt.file.read( 'version.txt' ).replace(/\n/, ''),
+				official: verOfficial,
 				min: '/*! jQuery Mobile v<%= build_sha %> jquerymobile.com | jquery.org/license !*/',
 				gitLongSha: 'git log -1 --format=format:"Git Build: SHA1: %H <> Date: %cd"',
 				gitShortSha: 'git log -1 --format=format:"%H"'
