@@ -11,8 +11,6 @@
 	<script src="../../../docs/_assets/js/jqm-docs.js"></script>
 	<script src="../../../js/"></script>
 	
-	<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
-
 </head>
 <body>
 
@@ -55,7 +53,7 @@
 
 		<p>The popup consists of two elements: the screen, which is a transparent or translucent element that covers the entire document, and the container, which is the popup itself. If your original element had an <code>id</code> attribute, the screen and the container will each receive an <code>id</code> attribute based on it. The screen's <code>id</code> will be suffixed with "-screen", and the container's <code>id</code> will be suffixed with "-popup" (in the above example, <code>id="popupBasic-screen"</code> and <code>id="popupBasic-popup"</code>, respectively).</p>
 		
-		<p>The framework adds a small amount of margin to text elements, but it's really just a container with rounded corners and a shadow which serves as a blank slate for your designs (even these features can be disabled via <a href="options.html">options</a>).</p>
+		<p>The framework adds a small amount of margin to text elements, but it's really just a container with <strong>rounded corners</strong> and a <strong>shadow</strong> which serves as a blank slate for your designs (even these features can be disabled via <a href="options.html">options</a>).</p>
 
 		<p>This simple styling makes it easy to add in widgets to create a variety of different interactions. Here are a few real-world examples that combine the various settings and styles you can achieve out of the box with popups:</p>
 		
@@ -64,13 +62,8 @@
 		<a href="#popupNested" data-rel="popup" data-role="button" data-inline="true">Nested menu</a>
 		<a href="#popupLogin" data-rel="popup" data-position-to="window" data-role="button" data-inline="true">Form</a>
 		<a href="#popupDialog" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop">Dialog</a>
-		<a href="#popupPhotoLandscape" data-rel="popup" data-position-to="window" data-role="button" data-inline="true">Photo landscape</a>
-		<a href="#popupPhotoPortrait" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="fade">Photo portrait</a>
-		<a href="#popupMap" data-rel="popup" data-position-to="window" data-role="button" data-inline="true">Map</a>
-		<a href="#popupVideo" data-rel="popup" data-position-to="window" data-role="button" data-inline="true">Video</a>
-	
-	
-
+		<a href="#popupPhoto" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="fade">Photo</a>
+		
 		<div data-role="popup" id="popupInfo" class="ui-content" data-theme="e" style="max-width:350px;">
           <p>Here is a <strong>tiny popup</strong> being used like a tooltip. The text will wrap to multiple lines as needed.</p>
 		</div>
@@ -154,24 +147,12 @@
 			</div>
 		</div>
 
-		<div data-role="popup" id="popupPhotoLandscape" data-overlay-theme="a" data-corners="false">
-			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a><img class="popphoto" src="../../_assets/images/photo-landscape.jpg" alt="Photo landscape">
+		<div data-role="popup" id="popupPhoto" data-overlay-theme="a" data-theme="d" data-corners="false">
+			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a><img class="popphoto" src="../../_assets/images/colorful-city.jpg" alt="Colorful city">
 		</div>
+			
+		<p>See <a href="examples.html" data-ajax="false">examples</a> page for more advanced popup examples.</p>
 		
-		<div data-role="popup" id="popupPhotoPortrait" data-overlay-theme="a" data-corners="false">
-			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a><img class="popphoto" src="../../_assets/images/photo-portrait.jpg" alt="Photo portrait">
-		</div>
-		
-		<div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="a" data-corners="false">
-			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-			<iframe id="mapiframe" src="map.html" width="480" height="320" frameborder="0" seamless webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-		</div>
-				
-		<div data-role="popup" id="popupVideo" data-overlay-theme="a" data-theme="c" class="ui-content">
-			<iframe id="vidiframe" src="http://player.vimeo.com/video/41135183?portrait=0" width="497" height="298" frameborder="0" seamless webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-    	</div>
-
-
 		<h2>Calling the popup plugin</h2>
 
 		<p>This plugin will autoinitialize on any page that contains a div with the attribute <code>data-role="popup"</code>. However, if needed you can directly call the <code>popup</code> plugin on any selector, just like any jQuery plugin and programmatically work with the popup <a href="options.html">options</a>, <a href="methods.html">methods</a>, and <a href="events.html">events</a> API:</p>
@@ -355,6 +336,9 @@ $( ".selector" ).popup( "open", x, y,
 		<h2>Note: Chaining of popups not allowed</h2>
 		<p>The framework does not currently support chaining of popups so it's not possible to embed a link from one popup to another popup. All links with a <code>data-rel="popup"</code> inside a popup will not do anything at all.</p>
 		<p>This also means that custom select menus will not work inside popups, because they are themselves implemented using popups. If you place a select menu inside a popup, it will be rendered as a native select menu, even if you specify <code>data-native-menu="false"</code>.</p>
+		
+		<div align="right"><a href="examples.html" data-ajax="false" data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true" align="right">Examples</a>
+		</div>
 
 	</div><!--/content-primary -->
 

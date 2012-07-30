@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Docs - Popup examples</title>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../../_assets/css/jqm-docs.css"/>
+
+	<script src="../../../js/jquery.js"></script>
+	<script src="../../../docs/_assets/js/jqm-docs.js"></script>
+	<script src="../../../js/"></script>
+
+	<script src="popup.js"></script>	
+
+</head>
+<body>
+
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="f">
+		<h1>Popup examples</h1>
+		<a href="../../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+		<a href="../../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
+	</div><!-- /header -->
+
+	<div data-role="content" class="ui-body">
+		<div class="content-primary">
+
+			<h2>Popup examples</h2>
+						
+			
+			<h2>Scaling images</h2>
+			
+			<p>By default the framework CSS sets the <code>max-width</code> and <code>max-height</code> of images that are immediate children of the popup to 100%. Because of the absolute positioning of the popup container and screen, the height is not adjusted to fit the screen on all browsers. You can prevent vertical scrolling with a simple script that scales the image to fit the screen.</p>
+			
+			<p>In the two examples below the divs with <code>data-role="popup"</code> have a class of <code>photopopup</code>. The handler is bound to the <code>popupbeforeposition</code> event, which makes sure the image is not only scaled before it is shown but also when the screen is resized (orientation change). We distract 60px from the height to create a 30px margin at the top and bottom.</p> 
+
+<pre><code>
+// scale images	
+$( ".photopopup" ).on({
+	popupbeforeposition: function( event ) {
+		var inner = $( window ).height() - 60 + "px";
+		$( "img, .photopopup" ).css( "max-height", inner );
+	}
+});			
+</code></pre>
+
+			<a href="#popupPhotoLandscape" data-rel="popup" data-position-to="window" data-role="button" data-inline="true">Photo landscape</a>
+			<a href="#popupPhotoPortrait" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="fade">Photo portrait</a>
+						
+			<div data-role="popup" id="popupPhotoLandscape" class="photopopup" data-overlay-theme="a" data-corners="false">
+				<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a><img src="../../_assets/images/photo-landscape.jpg" alt="Photo landscape">
+			</div>
+		
+			<div data-role="popup" id="popupPhotoPortrait" class="photopopup" data-overlay-theme="a" data-corners="false">
+				<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a><img src="../../_assets/images/photo-portrait.jpg" alt="Photo portrait">
+			</div>
+					
+			<h2>Setting the size of an iframe</h2>
+			
+
+			
+			<a href="#popupMap" data-rel="popup" data-position-to="window" data-role="button" data-inline="true">Map</a>
+			<a href="#popupVideo" data-rel="popup" data-position-to="window" data-role="button" data-inline="true">Video</a>			
+		
+			<div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="a" data-corners="false">
+				<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+				<iframe id="mapiframe" src="map.html" width="480" height="320" frameborder="0" seamless webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+			</div>
+					
+			<div data-role="popup" id="popupVideo" data-overlay-theme="a" data-theme="c" class="ui-content">
+				<iframe id="vidiframe" src="http://player.vimeo.com/video/41135183?portrait=0" width="497" height="298" frameborder="0" seamless webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+			</div>
+		
+		</div><!--/content-primary -->
+
+				<div class="content-secondary">
+
+					<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+
+							<h3>More in this section</h3>
+
+							<ul data-role="listview" data-theme="c" data-dividertheme="d">
+
+								<li data-role="list-divider">Pages &amp; Dialogs</li>
+								<li><a href="../page-anatomy.html">Anatomy of a page</a></li>
+								<li><a href="../page-template.html" data-ajax="false">Single page template</a></li>
+								<li><a href="../multipage-template.html" data-ajax="false">Multi-page template</a></li>
+								<li><a href="../page-titles.html">Page titles</a></li>
+								<li><a href="../page-links.html">Linking pages</a></li>
+								<li><a href="../page-transitions.html" data-ajax="false">Page transitions</a></li>
+								<li><a href="../loader.html">Page loading widget</a></li>
+								<li><a href="../page-dialogs.html">Dialogs</a></li>
+								<li data-theme="a"><a href="index.html">Popups</a></li>
+								<li><a href="../page-cache.html">Prefetching &amp; caching pages</a></li>
+								<li><a href="../page-navmodel.html">Ajax, hashes &amp; history</a></li>
+								<li><a href="../page-dynamic.html">Dynamically Injecting Pages</a></li>
+								<li><a href="../page-scripting.html">Scripting pages</a></li>
+								<li><a href="../phonegap.html">PhoneGap apps</a></li>
+								<li><a href="../touchoverflow.html">touchOverflow feature</a></li>
+								<li><a href="../pages-themes.html">Theming pages</a></li>
+
+							</ul>
+					</div>
+				</div>
+
+</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p>&copy; 2012 jQuery Foundation and other contributors</p>
+</div>
+
+</div><!-- /page -->
+
+</body>
+</html>
