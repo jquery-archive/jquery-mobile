@@ -3,19 +3,19 @@ $( document ).on( "pageinit", function() {
 
 	// scale images	
 	$( ".photopopup" ).on({
-		popupbeforeposition: function( event ) {
+		popupbeforeposition: function() {
 			var inner = $( window ).height() - 60 + "px";
 			$( "img, .photopopup" ).css( "max-height", inner );
 		}
 	});
 
 	// set the size of iframes
-	$("#mapiframe, #vidiframe")
+	$( "iframe" )
 		.prop( "width", 0 )
-		.prop( "height", 0 );
-		$( "#mapiframe" ).contents().find( "#map_canvas" ).css( { "width" : 0, "height" : 0 } );
+		.prop( "height", "auto" );
+		$( "#popupMap iframe" ).contents().find( "#map_canvas" ).css( { "width" : 0, "height" : 0 } );
 			
-	function sizes(iframewidth, iframeheight, padding, border) {
+	function sizes( iframewidth, iframeheight, padding, border ) {
 		var sw = $( window ).width() - 30,
 			sh = $( window ).height() - 30,
 			ip = 2 * padding,
@@ -45,35 +45,35 @@ $( document ).on( "pageinit", function() {
 	};
 	
 	$( "#popupMap" ).on({
-		popupbeforeposition: function( event ) {
+		popupbeforeposition: function() {
 			var size = sizes(480, 320, 0, 1),
 				w = size.width,
 				h = size.height;
 
-			$( "#mapiframe" )
+			$( "#popupMap iframe" )
 				.prop( "width", w )
 				.prop( "height", h );
-			$( "#mapiframe" ).contents().find( "#map_canvas" ).css( { "width": w, "height" : h } );
+			$( "#popupMap iframe" ).contents().find( "#map_canvas" ).css( { "width": w, "height" : h } );
 		},
-		popupafterclose: function( event ) {
-			$("#mapiframe")
+		popupafterclose: function() {
+			$("#popupMap iframe")
 				.prop( "width", 0 )
 				.prop( "height", 0 );
-			$( "#mapiframe" ).contents().find( "#map_canvas" ).css( { "width": 0, "height" : 0 } );
+			$( "#popupMap iframe" ).contents().find( "#map_canvas" ).css( { "width": 0, "height" : 0 } );
 		}
 	});
 	$( "#popupVideo" ).on({
-		popupbeforeposition: function( event ) {
+		popupbeforeposition: function() {
 			var size = sizes(497, 298, 15, 1),
 				w = size.width,
 				h = size.height;
 				
-			$( "#vidiframe" )
+			$( "#popupVideo iframe" )
 				.prop( "width", w )
 				.prop( "height", h );
 		},
-		popupafterclose: function( event ) {
-			$("#vidiframe")
+		popupafterclose: function() {
+			$("#popupVideo iframe")
 				.prop( "width", 0 )
 				.prop( "height", 0 );	
 		}

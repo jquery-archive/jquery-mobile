@@ -27,23 +27,23 @@
 	<div data-role="content" class="ui-body">
 		<div class="content-primary">
 
-			<h2>Popup examples</h2>
-						
-			
 			<h2>Scaling images</h2>
 			
-			<p>By default the framework CSS sets the <code>max-width</code> and <code>max-height</code> of images that are immediate children of the popup to 100%. Because of the absolute positioning of the popup container and screen, the height is not adjusted to fit the screen on all browsers. You can prevent vertical scrolling with a simple script that scales the image to fit the screen.</p>
+			<p>The framework CSS contains rules that make images that are immediate children of the popup scale to fit the screen. Because of the absolute positioning of the popup container and screen, the height is not adjusted to screen height on all browsers. You can prevent vertical scrolling with a simple script that sets the <code>max-height</code> of the image.</p>
 			
 			<p>In the two examples below the divs with <code>data-role="popup"</code> have a class of <code>photopopup</code>. The handler is bound to the <code>popupbeforeposition</code> event, which makes sure the image is not only scaled before it is shown but also when the screen is resized (orientation change). We distract 60px from the height to create a 30px margin at the top and bottom.</p> 
 
 <pre><code>
-// scale images	
-$( ".photopopup" ).on({
-	popupbeforeposition: function( event ) {
-		var inner = $( window ).height() - 60 + "px";
-		$( "img, .photopopup" ).css( "max-height", inner );
-	}
-});			
+$( document ).on( "pageinit", function() {
+	// set max-height for image	
+	$( ".photopopup" ).on({
+		popupbeforeposition: function() {
+			var inner = $( window ).height() - 60 + "px";
+			$( "img, .photopopup" ).css( "max-height", inner );
+		}
+	});
+});
+			
 </code></pre>
 
 			<a href="#popupPhotoLandscape" data-rel="popup" data-position-to="window" data-role="button" data-inline="true">Photo landscape</a>
@@ -59,20 +59,39 @@ $( ".photopopup" ).on({
 					
 			<h2>Setting the size of an iframe</h2>
 			
-
+			<p>When you use an iframe inside a popup it is important to initially set the width and height attributes to 0. This prevents the page to break on platforms like Android 2.3. Note that you have to set the attributes, because setting the style height and width properties with CSS doesn't work here. You can leave the desired width and height in the markup for browsers that have JavaScript disabled and use <code>prop()</code> to set the attributes upon the <code>pageinit</code> event.</p>
 			
-			<a href="#popupMap" data-rel="popup" data-position-to="window" data-role="button" data-inline="true">Map</a>
+<pre><code>
+$( document ).on( "pageinit", function() {
+	// set the width and height of iframe to 0
+	$("iframe")
+		.prop( "width", 0 )
+		.prop( "height", 0 );
+});
+</code></pre>
+
+			<p>In the same way you can set the width and height back, by binding to the <code>popupbeforeposition</code> event. To scale down the iframe to fit the screen you use the following function:</p>
+			
+<pre><code>
+$( document ).on( "pageinit", function() {
+
+
+});
+</code></pre>			
+			
 			<a href="#popupVideo" data-rel="popup" data-position-to="window" data-role="button" data-inline="true">Video</a>			
 		
+			<div data-role="popup" id="popupVideo" data-overlay-theme="a" data-theme="c" class="ui-content">
+				<iframe src="http://player.vimeo.com/video/41135183?portrait=0" width="497" height="298" frameborder="0" seamless webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+			</div>
+
+			<a href="#popupMap" data-rel="popup" data-position-to="window" data-role="button" data-inline="true">Map</a>
+
 			<div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="a" data-corners="false">
 				<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-				<iframe id="mapiframe" src="map.html" width="480" height="320" frameborder="0" seamless webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+				<iframe src="map.html" width="480" height="320" frameborder="0" seamless webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
 			</div>
 					
-			<div data-role="popup" id="popupVideo" data-overlay-theme="a" data-theme="c" class="ui-content">
-				<iframe id="vidiframe" src="http://player.vimeo.com/video/41135183?portrait=0" width="497" height="298" frameborder="0" seamless webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-			</div>
-		
 		</div><!--/content-primary -->
 
 				<div class="content-secondary">
