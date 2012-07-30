@@ -150,7 +150,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 		// prevent screen drag when slider activated
 		$( document ).bind( "vmousemove", function( event ) {
-			if ( self.dragging ) {
+			// NOTE: we don't do this in refresh because we still want to
+			//       support programmatic alteration of disabled inputs
+			if ( self.dragging && !self.options.disabled ) {
 				// self.mouseMoved must be updated before refresh() because it will be used in the control "change" event
 				self.mouseMoved = true;
 
@@ -168,6 +170,12 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		});
 
 		slider.bind( "vmousedown", function( event ) {
+			// NOTE: we don't do this in refresh because we still want to
+			//       support programmatic alteration of disabled inputs
+			if ( self.options.disabled ) {
+				return false;
+			}
+
 			self.dragging = true;
 			self.userModified = false;
 			self.mouseMoved = false;
@@ -299,6 +307,8 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 	refresh: function( val, isfromControl, preventInputUpdate ) {
 
+		// NOTE: we don't return here because we want to support programmatic
+		//       alteration of the input value, which should still update the slider
 		if ( this.options.disabled || this.element.attr('disabled')) {
 			this.disable();
 		}
