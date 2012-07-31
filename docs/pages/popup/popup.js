@@ -35,8 +35,8 @@ $( document ).on( "pageinit", function() {
 	};
 
 	$( ".ui-popup iframe" )
-		.prop( "width", 0 )
-		.prop( "height", "auto" );
+		.attr( "width", 0 )
+		.attr( "height", "auto" );
 	 
 	$( "#popupVideo" ).on({
 		popupbeforeposition: function() {
@@ -46,13 +46,13 @@ $( document ).on( "pageinit", function() {
 				h = size.height;
 
 			$( "#popupVideo iframe" )
-				.prop( "width", w )
-				.prop( "height", h );
+				.attr( "width", w )
+				.attr( "height", h );
 		},
 		popupafterclose: function() {
 			$( "#popupVideo iframe" )
-				.prop( "width", 0 )
-				.prop( "height", 0 );	
+				.attr( "width", 0 )
+				.attr( "height", 0 );	
 		}
 	});
 
@@ -66,16 +66,16 @@ $( document ).on( "pageinit", function() {
 				h = size.height;
 
 			$( "#popupMap iframe" )
-				.prop( "width", w )
-				.prop( "height", h );
+				.attr( "width", w )
+				.attr( "height", h );
 					 
 			$( "#popupMap iframe" ).contents().find( "#map_canvas" )
 				.css( { "width": w, "height" : h } );
 		},
 		popupafterclose: function() {
 			$( "#popupMap iframe" )
-				.prop( "width", 0 )
-				.prop( "height", 0 );
+				.attr( "width", 0 )
+				.attr( "height", 0 );
 					 
 			$( "#popupMap iframe" ).contents().find( "#map_canvas" )
 				.css( { "width": 0, "height" : 0 } );
