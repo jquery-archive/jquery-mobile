@@ -21,11 +21,11 @@ body { background: #dddddd; }
 	font-weight: bold;
 	position: absolute;
 	padding: .25em 3em;
-	right: -2.5em;
+	right: -2.9em;
 	text-align: center;
 	text-shadow: 0 1px 1px #fff;
-	top: .75em;
-	width: 78px;
+	top: 1.5em;
+	width: 96px;
 	z-index: 9;
 	font-size:.8em;
 	-webkit-transform: rotate(45deg);
