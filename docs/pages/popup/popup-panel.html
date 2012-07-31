@@ -28,17 +28,22 @@
 	<div data-role="content" class="ui-body">
 		<div class="content-primary">
 			
-			<h2 class="ui-title">Advanced popup examples</h4>
-		
-			<div data-role="controlgroup" data-type="horizontal" data-mini="true">
-				<a href="popup-images.html" data-role="button" data-transition="fade">Images</a>
-				<a href="popup-iframes.html" data-role="button" data-transition="fade">Iframes</a>
-				<a href="popup-panel.html" data-role="button" data-transition="fade" class="ui-btn-active">Panel</a>
+			<p style="margin-bottom:-20px;"><a href="index.html">Popups &#8594;</a></p>
+			<h2>Overlay panels</h2>
+			
+			<p>Taking customization further, here is an example of a popup that has been customized to look like a vertical panel with three mini buttons:</p>
+			
+			<a href="#popupPanel" data-rel="popup" data-transition="slide" data-position-to="window" data-role="button" data-theme="b" data-inline="true">Open panel</a>
+			
+			<div data-role="popup" id="popupPanel" data-corners="false" data-theme="none" data-shadow="false" data-tolerance="0,0">
+				<div class="inner">
+					<button data-theme="b" data-icon="back" data-mini="true">Back</button>
+					<button data-theme="b" data-icon="grid" data-mini="true">Menu</button>
+					<button data-theme="b" data-icon="search" data-mini="true">Search</button>
+				</div>
 			</div>
 			
-			<h2>Panel</h2>
-			
-			<p>This is the markup for a vertical panel with three mini buttons:</p>
+			<p>Here is the HTML markup for the button and panel:</p>
 <pre><code>
 &lt;a href="#popupPanel" data-rel="popup" data-transition="slide" data-position-to="window" data-role="button"&gt;Panel right&lt;/a&gt;
 			
@@ -83,15 +88,7 @@
 }
 </code></pre>
 
-			<a href="#popupPanel" data-rel="popup" data-transition="slide" data-position-to="window" data-role="button">Panel</a>
-			
-			<div data-role="popup" id="popupPanel" data-corners="false" data-theme="none" data-shadow="false" data-tolerance="0,0">
-				<div class="inner">
-					<button data-theme="b" data-icon="back" data-mini="true">Back</button>
-					<button data-theme="b" data-icon="grid" data-mini="true">Menu</button>
-					<button data-theme="b" data-icon="search" data-mini="true">Search</button>
-				</div>
-			</div>
+
 	
 		
 		</div><!--/content-primary -->
