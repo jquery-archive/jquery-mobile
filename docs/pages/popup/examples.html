@@ -31,17 +31,16 @@
 			
 			<p>The framework CSS contains rules that make images that are immediate children of the popup scale to fit the screen. Because of the absolute positioning of the popup container and screen, the height is not adjusted to screen height on all browsers. You can prevent vertical scrolling with a simple script that sets the <code>max-height</code> of the image.</p>
 			
-			<p>In the two examples below the divs with <code>data-role="popup"</code> have a class of <code>photopopup</code>. The handler is bound to the <code>popupbeforeposition</code> event, which makes sure the image is not only scaled before it is shown but also when the screen is resized (orientation change). We subtract 60px from the height to create a 30px margin at the top and bottom.</p> 
+			<p>In the two examples below the divs with <code>data-role="popup"</code> have a class of <code>photopopup</code>. The handler is bound to the <code>popupbeforeposition</code> event, which makes sure the image is not only scaled before it is shown but also when the window is resized (e.g. orientation change). In this code example the height is reduced by 60 to take a top and bottom tolerance of 30 pixels into account.</p> 
 
 <pre><code>
 $( document ).on( "pageinit", function() {
-	// set max-height for image	
-	$( ".photopopup" ).on({
-		popupbeforeposition: function() {
-			var inner = $( window ).height() - 60 + "px";
-			$( "img, .photopopup" ).css( "max-height", inner );
-		}
-	});
+    $( ".photopopup" ).on({
+        popupbeforeposition: function() {
+            var maxHeight = $( window ).height() - 60 + "px";
+            $( ".photopopup img" ).css( "max-height", maxHeight );
+        }
+    });
 });
 			
 </code></pre>
@@ -49,47 +48,203 @@ $( document ).on( "pageinit", function() {
 			<a href="#popupPhotoLandscape" data-rel="popup" data-position-to="window" data-role="button" data-inline="true">Photo landscape</a>
 			<a href="#popupPhotoPortrait" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="fade">Photo portrait</a>
 						
-			<div data-role="popup" id="popupPhotoLandscape" class="photopopup" data-overlay-theme="a" data-corners="false">
+			<div data-role="popup" id="popupPhotoLandscape" class="photopopup" data-overlay-theme="a" data-corners="false" data-tolerance="30,15" >
 				<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a><img src="../../_assets/images/photo-landscape.jpg" alt="Photo landscape">
 			</div>
 		
-			<div data-role="popup" id="popupPhotoPortrait" class="photopopup" data-overlay-theme="a" data-corners="false">
+			<div data-role="popup" id="popupPhotoPortrait" class="photopopup" data-overlay-theme="a" data-corners="false" data-tolerance="30,15" >
 				<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a><img src="../../_assets/images/photo-portrait.jpg" alt="Photo portrait">
 			</div>
 					
 			<h2>Setting the size of an iframe</h2>
+
+			<p>This is the markup of the first example that contains an iframe with a video. The popup will have a 15 pixels padding because of class <code>ui-content</code> and a one pixel border because the framework will add class <code>ui-body-d</code> to the popup.</p>
 			
-			<p>When you use an iframe inside a popup it is important to initially set the width and height attributes to 0. This prevents the page to break on platforms like Android 2.3. Note that you have to set the attributes, because setting the style height and width properties with CSS doesn't work here. You can leave the desired width and height in the markup for browsers that have JavaScript disabled and use <code>prop()</code> to set the attributes upon the <code>pageinit</code> event.</p>
+<pre><code>
+&lt;div data-role="popup" id="popupVideo" data-overlay-theme="a" data-theme="d" data-tolerance="15,15" class="ui-content"&gt;
+
+    &lt;iframe src="http://player.vimeo.com/video/41135183" width="497" height="298" seamless&gt;&lt;/iframe&gt;
+	 
+&lt;/div&gt;
+</code></pre>
+			
+			<p>When using an iframe inside a popup it is important to initially <strong>set the width and height attributes to 0</strong>. This prevents the page to break on platforms like Android 2.3. Note that you have to set the attributes, because setting the width and height with CSS is not sufficient. You can leave the actual width and height in the markup for browsers that have JavaScript disabled and use <code>prop()</code> to set the zero values upon the <code>pageinit</code> event.</p>
+
+			<p>Bind to the <code>popupbeforeposition</code> event to set the desired size of the iframe when the popup is shown or when the window is resized (e.g. orientation change). For the iframe examples on this page a custom function <code>scale()</code> is used to scale down the iframe to fit smaller screens. Expand the section below to view the code of this function.</p>
+
+			<div data-role="collapsible" data-content-theme="d">
+				<h3><code>scale()</code></h3>
+				<p>The window width and height are decreased by 30 to take the tolerance of 15 pixels at each side into account.</p>
+<pre><code>
+function scale( width, height, padding, border ) {
+    var scrWidth = $( window ).width() - 30,
+        scrHeight = $( window ).height() - 30,
+        ifrPadding = 2 * padding,
+        ifrBorder = 2 * border,
+        ifrWidth = width + ifrPadding + ifrBorder,
+        ifrHeight = height + ifrPadding + ifrBorder,
+        h, w;
+
+    if ( ifrWidth < scrWidth && ifrHeight < scrHeight ) {
+        w = ifrWidth;
+        h = ifrHeight;
+    } else if ( ( ifrWidth / scrWidth ) > ( ifrHeight / scrHeight ) ) {
+        w = scrWidth;
+        h = ( scrWidth / ifrWidth ) * ifrHeight;
+    } else {
+        h = scrHeight;
+        w = ( scrHeight / ifrHeight ) * ifrWidth;
+    }
+
+    return {
+        'width': w - ( ifrPadding + ifrBorder ),
+        'height': h - ( ifrPadding + ifrBorder )
+    };
+};
+</code></pre>
+				<p><strong>Note:</strong> This function is not part of the framework. Copy the code into your script to use it.</p>
+			</div>		
+			
+			<p>When the popup is closed the width and height should be set back to 0. You can do this by binding to the <code>popupafterclose</code> event.</p>
+			
+			<p>Here is the complete script and the link to open the video popup:</p>
 			
 <pre><code>
 $( document ).on( "pageinit", function() {
-	// set the width and height of iframe to 0
-	$("iframe")
-		.prop( "width", 0 )
-		.prop( "height", 0 );
+    $( "#popupVideo iframe" )
+        .prop( "width", 0 )
+        .prop( "height", 0 );
+		  
+    $( "#popupVideo" ).on({
+        popupbeforeposition: function() {
+            var size = scale( 497, 298, 15, 1 ),
+                w = size.width,
+                h = size.height;
+
+            $( "#popupVideo iframe" )
+                .prop( "width", w )
+                .prop( "height", h );
+        },
+        popupafterclose: function() {
+            $( "#popupVideo iframe" )
+                .prop( "width", 0 )
+                .prop( "height", 0 );    
+        }
+    });
 });
 </code></pre>
+			
+			<a href="#popupVideo" data-rel="popup" data-position-to="window" data-role="button">Video</a>			
+		
+			<div data-role="popup" id="popupVideo" data-overlay-theme="a" data-theme="d" data-tolerance="15,15" class="ui-content">
+				<iframe src="http://player.vimeo.com/video/41135183?portrait=0" width="497" height="298" seamless></iframe>
+			</div>
 
-			<p>In the same way you can set the width and height back, by binding to the <code>popupbeforeposition</code> event. To scale down the iframe to fit the screen you use the following function:</p>
+			<p>In the second example an iframe has been used to display <strong>Google Maps API</strong>. Using an iframe prevents issues with the controls of the map. This is the markup of the popup including a right close button:</p>
+			
+<pre><code>
+&lt;div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="a" data-corners="false" data-tolerance="15,15"&gt;
+
+    &lt;a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close&lt;/a&gt;
+	 
+    &lt;iframe src="map.html" width="480" height="320" seamless&gt;&lt;/iframe&gt;
+	 
+&lt;/div&gt;
+</code></pre>
+
+			<p>Expand the section below to view the source of the iframe.</p>
+
+			<div data-role="collapsible" data-content-theme="d">
+				<h3><code>map.html</code></h3>
+<pre><code>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;Map&lt;/title&gt;
+    &lt;script&gt;
+        function initialize() {
+            var myLatlng = new google.maps.LatLng( 51.520838, -0.140261 );
+            var myOptions = {
+                zoom: 15,
+                center: myLatlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+            var map = new google.maps.Map( document.getElementById( "map_canvas" ), myOptions );
+            var marker = new google.maps.Marker({
+                position: myLatlng, 
+                map: map,
+                title:"University of Westminster"
+            });  
+        }
+    &lt;/script&gt;
+    &lt;script src="http://maps.google.com/maps/api/js?sensor=false"&gt;&lt;/script&gt;
+    &lt;style&gt;
+        html {
+            height: 100%;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        #map_canvas { 
+            height: 100%;
+        }    
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body onload="initialize()"&gt;
+
+    &lt;div id="map_canvas"&gt;&lt;/div&gt;
+    
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+			</div>
+				
+			<p>Setting the size of the iframe is done exactly the same as for the video example, with one exception. You should also set the width and height of the div that contains the map to prevent the page to break on platforms like Android 2.3. In this example the ID of this div is <code>#map_canvas</code>.</p>
+			
+			<p>Here is the complete script and the link to open the map popup:</p>
 			
 <pre><code>
 $( document ).on( "pageinit", function() {
+    $( "#popupMap iframe" )
+        .prop( "width", 0 )
+        .prop( "height", 0 );
+		  
+    $( "#popupMap iframe" ).contents().find( "#map_canvas" )
+        .css( { "width" : 0, "height" : 0 } );
+	 	     
+    $( "#popupMap" ).on({
+        popupbeforeposition: function() {
+            var size = scale( 480, 320, 0, 1 ),
+                w = size.width,
+                h = size.height;
 
-
+            $( "#popupMap iframe" )
+                .prop( "width", w )
+                .prop( "height", h );
+					 
+            $( "#popupMap iframe" ).contents().find( "#map_canvas" )
+                .css( { "width": w, "height" : h } );
+        },
+        popupafterclose: function() {
+            $( "#popupMap iframe" )
+                .prop( "width", 0 )
+                .prop( "height", 0 );
+					 
+            $( "#popupMap iframe" ).contents().find( "#map_canvas" )
+                .css( { "width": 0, "height" : 0 } );
+        }
+    });
 });
 </code></pre>			
 			
-			<a href="#popupVideo" data-rel="popup" data-position-to="window" data-role="button" data-inline="true">Video</a>			
-		
-			<div data-role="popup" id="popupVideo" data-overlay-theme="a" data-theme="c" class="ui-content">
-				<iframe src="http://player.vimeo.com/video/41135183?portrait=0" width="497" height="298" frameborder="0" seamless webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-			</div>
+			<a href="#popupMap" data-rel="popup" data-position-to="window" data-role="button">Map</a>
 
-			<a href="#popupMap" data-rel="popup" data-position-to="window" data-role="button" data-inline="true">Map</a>
-
-			<div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="a" data-corners="false">
+			<div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="a" data-corners="false" data-tolerance="15,15">
 				<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-				<iframe src="map.html" width="480" height="320" frameborder="0" seamless webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+				<iframe src="map.html" width="480" height="320" seamless></iframe>
 			</div>
 					
 		</div><!--/content-primary -->

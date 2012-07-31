@@ -405,6 +405,13 @@ dd h4 { margin:15px 0 0 0; }
 	background-repeat: no-repeat;
 	overflow: visible;
 }
+/* iframe style for browsers that don't support HTML5 seamless attribute */
+.ui-popup iframe[seamless] {
+	background-color: transparent;
+	border: none;
+	padding: 0;
+	overflow: hidden;
+}
 
 /* tables documenting enum-type settings */
 
