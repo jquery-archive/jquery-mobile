@@ -27,6 +27,7 @@ body { background: #dddddd; }
 	top: .75em;
 	width: 78px;
 	z-index: 9;
+	font-size:.8em;
 	-webkit-transform: rotate(45deg);
 	-moz-transform: rotate(45deg);
 	-o-transform: rotate(45deg);
