@@ -107,7 +107,7 @@ function scale( width, height, padding, border ) {
 			
 			<p>When the popup is closed the width and height should be set back to 0. You can do this by binding to the <code>popupafterclose</code> event.</p>
 			
-			<p>Here is the complete script and the link to open the video popup:</p>
+			<p>This is the complete script and the link to open the video popup:</p>
 			
 <pre><code>
 $( document ).on( "pageinit", function() {
@@ -140,7 +140,7 @@ $( document ).on( "pageinit", function() {
 				<iframe src="http://player.vimeo.com/video/41135183?portrait=0" width="497" height="298" seamless></iframe>
 			</div>
 
-			<p>In the second example an iframe has been used to display <strong>Google Maps API</strong>. Using an iframe prevents issues with the controls of the map. This is the markup of the popup including a right close button:</p>
+			<p>In the second example an iframe is used to display <strong>Google Maps API</strong>. Using an iframe prevents issues with the controls of the map. This is the markup of the popup including a right close button:</p>
 			
 <pre><code>
 &lt;div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="a" data-corners="false" data-tolerance="15,15"&gt;
@@ -174,7 +174,7 @@ $( document ).on( "pageinit", function() {
             var marker = new google.maps.Marker({
                 position: myLatlng, 
                 map: map,
-                title:"University of Westminster"
+                title: "University of Westminster"
             });  
         }
     &lt;/script&gt;
@@ -204,7 +204,7 @@ $( document ).on( "pageinit", function() {
 				
 			<p>Setting the size of the iframe is done exactly the same as for the video example, with one exception. You should also set the width and height of the div that contains the map to prevent the page to break on platforms like Android 2.3. In this example the ID of this div is <code>#map_canvas</code>.</p>
 			
-			<p>Here is the complete script and the link to open the map popup:</p>
+			<p>This is the complete script and the link to open the map popup:</p>
 			
 <pre><code>
 $( document ).on( "pageinit", function() {
