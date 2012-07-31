@@ -155,8 +155,9 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 	},
 
 	enable: function() {
-
 		var $el;
+
+		// TODO using more than one line of code is acceptable ;)
 		if ( this.element.attr( "disabled", false ).is( "[type='search'], :jqmData(type='search')" ) ) {
 			$el = this.element.parent();
 		} else {
