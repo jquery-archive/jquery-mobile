@@ -62,7 +62,6 @@
 		expect( 1 );
 		var slider = $( "#mouseup-refresh" );
 
-
 		slider.val( parseInt(slider.val(), 10) +  10 );
 		slider.change(function() {
 			ok( true, "slider changed" );

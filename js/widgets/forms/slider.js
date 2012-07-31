@@ -152,11 +152,11 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				self.refresh( val(), true );
 			});
 
-		// prevent screen drag when slider activated
-		$( document ).bind( "vmousemove", function( event ) {
+		this._preventDocumentDrag = function( event ) {
 			// NOTE: we don't do this in refresh because we still want to
 			//       support programmatic alteration of disabled inputs
 			if ( self.dragging && !self.options.disabled ) {
+
 				// self.mouseMoved must be updated before refresh() because it will be used in the control "change" event
 				self.mouseMoved = true;
 
@@ -171,7 +171,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				self.userModified = self.beforeStart !== control[0].selectedIndex;
 				return false;
 			}
-		});
+		}
+
+		$( document ).bind( "vmousemove", this._preventDocumentDrag );
 
 		// it appears the clicking the up and down buttons in chrome on
 		// range/number inputs doesn't trigger a change until the field is
@@ -199,42 +201,36 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		})
 		.bind( "vclick", false );
 
-		slider.add( document )
-			.bind( "vmouseup", function() {
-				if ( self.dragging ) {
+		this._sliderMouseUp = function() {
+			if ( self.dragging ) {
+				self.dragging = false;
 
-					self.dragging = false;
+				if ( cType === "select") {
+					// make the handle move with a smooth transition
+					handle.addClass( "ui-slider-handle-snapping" );
 
-					if ( cType === "select") {
-
-						// make the handle move with a smooth transition
-						handle.addClass( "ui-slider-handle-snapping" );
-
-						if ( self.mouseMoved ) {
-
-							// this is a drag, change the value only if user dragged enough
-							if ( self.userModified ) {
-								self.refresh( self.beforeStart === 0 ? 1 : 0 );
-							}
-							else {
-								self.refresh( self.beforeStart );
-							}
-
+					if ( self.mouseMoved ) {
+						// this is a drag, change the value only if user dragged enough
+						if ( self.userModified ) {
+						    self.refresh( self.beforeStart === 0 ? 1 : 0 );
 						}
 						else {
-							// this is just a click, change the value
-							self.refresh( self.beforeStart === 0 ? 1 : 0 );
+						    self.refresh( self.beforeStart );
 						}
-
 					}
-
-					self.mouseMoved = false;
-
-					self._trigger( "stop" );
-					return false;
+					else {
+						// this is just a click, change the value
+						self.refresh( self.beforeStart === 0 ? 1 : 0 );
+					}
 				}
-			});
 
+				self.mouseMoved = false;
+				self._trigger( "stop" );
+				return false;
+			}
+		};
+
+		slider.add( document ).bind( "vmouseup", this._sliderMouseUp );
 		slider.insertAfter( control );
 
 		// Only add focus class to toggle switch, sliders get it automatically from ui-btn
@@ -325,6 +321,11 @@ $.widget( "mobile.slider", $.mobile.widget, {
 	_value: function() {
 		return  this._type === "input" ?
 			parseFloat( this.element.val() ) : this.element[0].selectedIndex;
+	},
+
+	_destroy: function() {
+		$( document ).unbind( "vmousemove", this._preventDocumentDrag );
+		$( document ).unbind( "vmouseup", this._sliderMouseUp );
 	},
 
 	refresh: function( val, isfromControl, preventInputUpdate ) {

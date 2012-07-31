@@ -21,7 +21,8 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 
 	_create: function() {
 
-		var input = this.element,
+		var self = this,
+			input = this.element,
 			o = this.options,
 			theme = o.theme || $.mobile.getInheritedTheme( this.element, "c" ),
 			themeclass  = " ui-body-" + theme,
@@ -106,30 +107,31 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		if ( input.is( "textarea" ) ) {
 			var extraLineHeight = 15,
 				keyupTimeoutBuffer = 100,
-				keyup = function() {
-					var scrollHeight = input[ 0 ].scrollHeight,
-						clientHeight = input[ 0 ].clientHeight;
-
-					if ( clientHeight < scrollHeight ) {
-						input.height(scrollHeight + extraLineHeight);
-					}
-				},
 				keyupTimeout;
+
+			this._keyup = function() {
+				var scrollHeight = input[ 0 ].scrollHeight,
+					clientHeight = input[ 0 ].clientHeight;
+
+				if ( clientHeight < scrollHeight ) {
+					input.height(scrollHeight + extraLineHeight);
+				}
+			};
 
 			input.keyup(function() {
 				clearTimeout( keyupTimeout );
-				keyupTimeout = setTimeout( keyup, keyupTimeoutBuffer );
+				keyupTimeout = setTimeout( self._keyup, keyupTimeoutBuffer );
 			});
 
 			// binding to pagechange here ensures that for pages loaded via
 			// ajax the height is recalculated without user input
-			$( document ).one( "pagechange", keyup );
+			$( document ).one( "pagechange", this._keyup );
 
 			// Issue 509: the browser is not providing scrollHeight properly until the styles load
 			if ( $.trim( input.val() ) ) {
 				// bind to the window load to make sure the height is calculated based on BOTH
 				// the DOM and CSS
-				$( window ).load( keyup );
+				$( window ).load( this._keyup );
 			}
 		}
 		if ( input.attr( "disabled" ) ) {
@@ -137,30 +139,32 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		}
 	},
 
-	disable: function() {
+	_destroy: function() {
+		$( window ).unbind( "load", this._keyup );
+	},
 
+	disable: function() {
 		var $el;
 		if ( this.element.attr( "disabled", true ).is( "[type='search'], :jqmData(type='search')" ) ) {
 			$el = this.element.parent();
 		} else {
 			$el = this.element;
-		} 
+		}
 		$el.addClass( "ui-disabled" );
 		return this._setOption( "disabled", true );
-			
 	},
 
 	enable: function() {
-
 		var $el;
+
+		// TODO using more than one line of code is acceptable ;)
 		if ( this.element.attr( "disabled", false ).is( "[type='search'], :jqmData(type='search')" ) ) {
 			$el = this.element.parent();
 		} else {
 			$el = this.element;
-		} 
+		}
 		$el.removeClass( "ui-disabled" );
 		return this._setOption( "disabled", false );
-			
 	}
 });
 

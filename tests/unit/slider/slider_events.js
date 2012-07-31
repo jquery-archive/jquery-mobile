@@ -386,15 +386,33 @@
 			},
 
 			"slidestart", function( timeout ) {
-				ok( !timeout, "slidermovestart fired" );
+				ok( !timeout, "slidestart fired" );
 				slider.trigger( "mouseup" );
 			},
 
 			"slidestop", function( timeout ) {
-				ok( !timeout, "slidermovestop fired" );
+				ok( !timeout, "slidestop fired" );
 				start();
 			}
 		], 500);
 	});
 
+	test( "slider should detach event", function() {
+		var slider = $( "#remove-events-slider" ),
+			doc = $( document ),
+			vmouseupLength,
+			vmousemoveLength;
+
+		function getDocumentEventsLength( name ){
+			return (doc.data( 'events' )[name] || []).length;
+		}
+
+		vmouseupLength = getDocumentEventsLength( "vmouseup" );
+		vmousemoveLength = getDocumentEventsLength( "vmousemove" );
+
+		slider.remove();
+		
+		equal(getDocumentEventsLength( "vmouseup" ), (vmouseupLength - 1), 'vmouseup event was removed');
+		equal(getDocumentEventsLength( "vmousemove" ), (vmousemoveLength - 1), 'vmousemove event was removed');
+	});
 })(jQuery);
