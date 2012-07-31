@@ -81,4 +81,17 @@ $( document ).on( "pageinit", function() {
 				.css( { "width": 0, "height" : 0 } );
 		}
 	});
+      
+	$( "#popupPanel" ).on({
+		popupbeforeposition: function() {
+			var height = $( window ).height();
+			$( "#popupPanel" )
+				.css( "height", height )
+		}
+	});
+		 
+	$( "#popupPanel button" ).on( "click", function() {	
+		$( this ).closest( ".ui-popup" ).popup('close');
+	});
+
 });

@@ -1,12 +1,11 @@
 #popupPanel-popup {
-	height: 100%;
-	width: 90%;
+	width: 80%;
 	max-width: 200px !important;
 	right: 0 !important;
 	left: auto !important;
 }
 #popupPanel {
-	border-left: 1px solid #000;
+	border-left: 1px solid #444;
 	margin-left: -1px;
 	background: rgba(0,0,0,.6);
 	position: relative;

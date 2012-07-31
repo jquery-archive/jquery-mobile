@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>jQuery Mobile Docs - Popup panels</title>
+	<title>jQuery Mobile Docs - Popup panel</title>
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
 	<link rel="stylesheet" href="../../_assets/css/jqm-docs.css"/>
 
@@ -20,7 +20,7 @@
 	<div data-role="page" class="type-interior">
 
 		<div data-role="header" data-theme="f">
-		<h1>Popup panels</h1>
+		<h1>Popup panel</h1>
 		<a href="../../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
 		<a href="../../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
 	</div><!-- /header -->
@@ -33,21 +33,66 @@
 			<div data-role="controlgroup" data-type="horizontal" data-mini="true">
 				<a href="popup-images.html" data-role="button" data-transition="fade">Images</a>
 				<a href="popup-iframes.html" data-role="button" data-transition="fade">Iframes</a>
-				<a href="popup-panels.html" data-role="button" data-transition="fade" class="ui-btn-active">Panels</a>
+				<a href="popup-panel.html" data-role="button" data-transition="fade" class="ui-btn-active">Panel</a>
 			</div>
 			
-			<h2>Panels</h2>
+			<h2>Panel</h2>
+			
+			<p>This is the markup for a vertical panel with three buttons:</p>
+<pre><code>
+&lt;a href="#popupPanel" data-rel="popup" data-transition="slide" data-position-to="window" data-role="button"&gt;Panel right&lt;/a&gt;
+			
+&lt;div data-role="popup" id="popupPanel" data-corners="false" data-theme="none" data-shadow="false" data-tolerance="0,0"&gt;
 
-			<a href="#popupPanel" data-rel="popup" data-position-to="window" data-role="button">Panel right</a>	
-						
-			<div data-role="popup" id="popupPanel" data-corners="false" data-theme="a" data-shadow="false" data-tolerance="0,0" data-transition="slide">
+    &lt;div class="inner"&gt;
+	 
+        &lt;button data-theme="b" data-icon="back" data-mini="true"&gt;Back&lt;/button&gt;
+        &lt;button data-theme="b" data-icon="grid" data-mini="true"&gt;Menu&lt;/button&gt;
+        &lt;button data-theme="b" data-icon="search" data-mini="true"&gt;Search&lt;/button&gt;
+		  
+    &lt;/div&gt;
+	 
+&lt;/div&gt;
+</code></pre>
+
+			<p>To create the panel the following CSS:</p>
+<pre><code>
+#popupPanel-popup {
+    width: 90%;
+    max-width: 200px !important;
+    right: 0 !important;
+    left: auto !important;
+}
+#popupPanel {
+    border-left: 1px solid #444;
+    margin-left: -1px;
+    background: rgba(0,0,0,.6);
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+#popupPanel .inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 45px 15px 15px;
+}
+#popupPanel .inner .ui-btn {
+    margin: 0 0 1em 0;
+}
+</code></pre>
+
+			<a href="#popupPanel" data-rel="popup" data-transition="slide" data-position-to="window" data-role="button">Panel</a>
+			
+			<div data-role="popup" id="popupPanel" data-corners="false" data-theme="none" data-shadow="false" data-tolerance="0,0">
 				<div class="inner">
 					<button data-theme="b" data-icon="back" data-mini="true">Back</button>
 					<button data-theme="b" data-icon="grid" data-mini="true">Menu</button>
 					<button data-theme="b" data-icon="search" data-mini="true">Search</button>
 				</div>
 			</div>
-			
+	
 		
 		</div><!--/content-primary -->
 
