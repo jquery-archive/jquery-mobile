@@ -152,28 +152,11 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				self.refresh( val(), true );
 			});
 
-		this._preventDocumentDrag = function( event ) {
-			// NOTE: we don't do this in refresh because we still want to
-			//       support programmatic alteration of disabled inputs
-			if ( self.dragging && !self.options.disabled ) {
-
-				// self.mouseMoved must be updated before refresh() because it will be used in the control "change" event
-				self.mouseMoved = true;
-
-				if ( cType === "select" ) {
-					// make the handle move in sync with the mouse
-					handle.removeClass( "ui-slider-handle-snapping" );
-				}
-
-				self.refresh( event );
-
-				// only after refresh() you can calculate self.userModified
-				self.userModified = self.beforeStart !== control[0].selectedIndex;
-				return false;
-			}
-		}
-
-		$( document ).bind( "vmousemove", this._preventDocumentDrag );
+		// We have to instantiate a new function object for the unbind to work properly
+		// since the method itself is defined in the prototype (causing it to unbind everything)
+		$( document ).bind( "vmousemove", this._unbindDocumentDrag = function( event ) {
+			self._preventDocumentDrag( event );
+		});
 
 		// it appears the clicking the up and down buttons in chrome on
 		// range/number inputs doesn't trigger a change until the field is
@@ -312,6 +295,27 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		this.refresh( undefined, undefined, true );
 	},
 
+	_preventDocumentDrag: function( event ) {
+			// NOTE: we don't do this in refresh because we still want to
+			//       support programmatic alteration of disabled inputs
+			if ( this.dragging && !this.options.disabled ) {
+
+				// this.mouseMoved must be updated before refresh() because it will be used in the control "change" event
+				this.mouseMoved = true;
+
+				if ( this.type === "select" ) {
+					// make the handle move in sync with the mouse
+					this.handle.removeClass( "ui-slider-handle-snapping" );
+				}
+
+				this.refresh( event );
+
+				// only after refresh() you can calculate this.userModified
+				this.userModified = this.beforeStart !== this.element[0].selectedIndex;
+				return false;
+			}
+		},
+
 	_checkedRefresh: function() {
 		if( this.value != this._value() ){
 			this.refresh( this._value() );
@@ -324,7 +328,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 	},
 
 	_destroy: function() {
-		$( document ).unbind( "vmousemove", this._preventDocumentDrag );
+		$( document ).unbind( "vmousemove", this._unbindDocumentDrag );
 		$( document ).unbind( "vmouseup", this._sliderMouseUp );
 	},
 
