@@ -158,7 +158,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		// blurred. Here we check thif the value has changed and refresh
 		control.bind( "vmouseup", $.proxy( this._checkedRefresh, this));
 
-		slider.bind( "vmousedown", $.proxy(this._sliderEvents.mouseDown, this))
+		slider.bind( "vmousedown", $.proxy(this._sliderEvents.vmousedown, this))
 			.bind( "vclick", false );
 
 		// We have to instantiate a new function object for the unbind to work properly
@@ -168,7 +168,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		});
 
 		slider.add( document ).bind( "vmouseup", this._unbindSliderMouseUp = function( event ) {
-			self._sliderEvents.mouseUp.call( self, event );
+			self._sliderEvents.vmouseup.call( self, event );
 		});
 
 		slider.insertAfter( control );
@@ -253,7 +253,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 	},
 
 	_sliderEvents: {
-		mouseDown: function() {
+		vmousedown: function() {
 			// NOTE: we don't do this in refresh because we still want to
 			//       support programmatic alteration of disabled inputs
 			if ( this.options.disabled ) {
@@ -273,7 +273,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			return false;
 		},
 
-		mouseUp: function() {
+		vmouseup: function() {
 			if ( this.dragging ) {
 				this.dragging = false;
 
