@@ -155,28 +155,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		// it appears the clicking the up and down buttons in chrome on
 		// range/number inputs doesn't trigger a change until the field is
 		// blurred. Here we check thif the value has changed and refresh
-		control.bind( "vmouseup", $.proxy( self._checkedRefresh, self));
+		control.bind( "vmouseup", $.proxy( this._checkedRefresh, this));
 
-		slider.bind( "vmousedown", function( event ) {
-			// NOTE: we don't do this in refresh because we still want to
-			//       support programmatic alteration of disabled inputs
-			if ( self.options.disabled ) {
-				return false;
-			}
-
-			self.dragging = true;
-			self.userModified = false;
-			self.mouseMoved = false;
-
-			if ( cType === "select" ) {
-				self.beforeStart = control[0].selectedIndex;
-			}
-
-			self.refresh( event );
-			self._trigger( "start" );
-			return false;
-		})
-		.bind( "vclick", false );
+		slider.bind( "vmousedown", $.proxy(this._sliderMouseDown, this)).bind( "vclick", false );
 
 		// We have to instantiate a new function object for the unbind to work properly
 		// since the method itself is defined in the prototype (causing it to unbind everything)
@@ -269,6 +250,27 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		this.refresh( undefined, undefined, true );
 	},
 
+	_sliderMouseDown: function() {
+		var self = this;
+			// NOTE: we don't do this in refresh because we still want to
+			//       support programmatic alteration of disabled inputs
+			if ( self.options.disabled ) {
+				return false;
+			}
+
+			self.dragging = true;
+			self.userModified = false;
+			self.mouseMoved = false;
+
+			if ( self.type === "select" ) {
+				self.beforeStart = this.element[0].selectedIndex;
+			}
+
+			self.refresh( event );
+ 			self._trigger( "start" );
+			return false;
+	},
+
 	_sliderMouseUp: function() {
 		if ( this.dragging ) {
 			this.dragging = false;
@@ -282,20 +284,20 @@ $.widget( "mobile.slider", $.mobile.widget, {
 					if ( this.userModified ) {
 						this.refresh( this.beforeStart === 0 ? 1 : 0 );
 					}
-						else {
-						    this.refresh( this.beforeStart );
-						}
-					}
 					else {
-						// this is just a click, change the value
-						this.refresh( this.beforeStart === 0 ? 1 : 0 );
+						this.refresh( this.beforeStart );
 					}
 				}
-
-				this.mouseMoved = false;
-				this._trigger( "stop" );
-				return false;
+				else {
+					// this is just a click, change the value
+					this.refresh( this.beforeStart === 0 ? 1 : 0 );
+				}
 			}
+
+			this.mouseMoved = false;
+			this._trigger( "stop" );
+			return false;
+		}
 	},
 
 	_preventDocumentDrag: function( event ) {
