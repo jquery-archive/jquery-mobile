@@ -152,12 +152,14 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				self.refresh( val(), true );
 			});
 
+
 		// it appears the clicking the up and down buttons in chrome on
 		// range/number inputs doesn't trigger a change until the field is
 		// blurred. Here we check thif the value has changed and refresh
 		control.bind( "vmouseup", $.proxy( this._checkedRefresh, this));
 
-		slider.bind( "vmousedown", $.proxy(this._sliderMouseDown, this)).bind( "vclick", false );
+		slider.bind( "vmousedown", $.proxy(this._sliderEvents.mouseDown, this))
+			.bind( "vclick", false );
 
 		// We have to instantiate a new function object for the unbind to work properly
 		// since the method itself is defined in the prototype (causing it to unbind everything)
@@ -166,7 +168,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		});
 
 		slider.add( document ).bind( "vmouseup", this._unbindSliderMouseUp = function( event ) {
-			self._sliderMouseUp( event );
+			self._sliderEvents.mouseUp.call( self, event );
 		});
 
 		slider.insertAfter( control );
@@ -250,52 +252,54 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		this.refresh( undefined, undefined, true );
 	},
 
-	_sliderMouseDown: function() {
-		// NOTE: we don't do this in refresh because we still want to
-		//       support programmatic alteration of disabled inputs
-		if ( this.options.disabled ) {
-			return false;
-		}
-
-		this.dragging = true;
-		this.userModified = false;
-		this.mouseMoved = false;
-
-		if ( this.type === "select" ) {
-			this.beforeStart = this.element[0].selectedIndex;
-		}
-
-		this.refresh( event );
- 		this._trigger( "start" );
-		return false;
-	},
-
-	_sliderMouseUp: function() {
-		if ( this.dragging ) {
-			this.dragging = false;
-
-			if ( this.type === "select") {
-				// make the handle move with a smooth transition
-				this.handle.addClass( "ui-slider-handle-snapping" );
-
-				if ( this.mouseMoved ) {
-					// this is a drag, change the value only if user dragged enough
-					if ( this.userModified ) {
-						this.refresh( this.beforeStart === 0 ? 1 : 0 );
-					}
-					else {
-						this.refresh( this.beforeStart );
-					}
-				}
-				else {
-					// this is just a click, change the value
-					this.refresh( this.beforeStart === 0 ? 1 : 0 );
-				}
+	_sliderEvents: {
+		mouseDown: function() {
+			// NOTE: we don't do this in refresh because we still want to
+			//       support programmatic alteration of disabled inputs
+			if ( this.options.disabled ) {
+				return false;
 			}
 
+			this.dragging = true;
+			this.userModified = false;
 			this.mouseMoved = false;
-			this._trigger( "stop" );
+
+			if ( this.type === "select" ) {
+				this.beforeStart = this.element[0].selectedIndex;
+			}
+
+			this.refresh( event );
+ 			this._trigger( "start" );
 			return false;
+		},
+
+		mouseUp: function() {
+			if ( this.dragging ) {
+				this.dragging = false;
+
+				if ( this.type === "select") {
+					// make the handle move with a smooth transition
+					this.handle.addClass( "ui-slider-handle-snapping" );
+
+					if ( this.mouseMoved ) {
+						// this is a drag, change the value only if user dragged enough
+						if ( this.userModified ) {
+							this.refresh( this.beforeStart === 0 ? 1 : 0 );
+						}
+						else {
+							this.refresh( this.beforeStart );
+						}
+					}
+					else {
+						// this is just a click, change the value
+						this.refresh( this.beforeStart === 0 ? 1 : 0 );
+					}
+				}
+
+				this.mouseMoved = false;
+				this._trigger( "stop" );
+				return false;
+			}
 		}
 	},
 
