@@ -139,26 +139,10 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 		label.addClass( "ui-slider" );
 
+		control.data( "widget", this );
 		// monitor the input for updated values
 		control.addClass( cType === "input" ? "ui-slider-input" : "ui-slider-switch" )
-			.change(function() {
-				// if the user dragged the handle, the "change" event was triggered from inside refresh(); don't call refresh() again
-				if ( !self.mouseMoved ) {
-					self.refresh( val(), true );
-				}
-			})
-			.keyup(function() { // necessary?
-				self.refresh( val(), true, true );
-			})
-			.blur(function() {
-				self.refresh( val(), true );
-			});
-
-
-		// it appears the clicking the up and down buttons in chrome on
-		// range/number inputs doesn't trigger a change until the field is
-		// blurred. Here we check thif the value has changed and refresh
-		control.bind( "vmouseup", $.proxy( this._checkedRefresh, this));
+			.bind( this._controlEvents );
 
 		slider.bind( "vmousedown", $.proxy(this._sliderEvents.vmousedown, this))
 			.bind( "vclick", false );
@@ -192,6 +176,34 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		this.handle.bind( this._handleEvents );
 
 		this.refresh( undefined, undefined, true );
+	},
+
+	_controlEvents: {
+		change: function( event ) {
+			var self = $( event.target ).data( "widget" );
+
+			// if the user dragged the handle, the "change" event was triggered from inside refresh(); don't call refresh() again
+			if ( !self.mouseMoved ) {
+				self.refresh( self._value(), true );
+			}
+		},
+
+		keyup: function( event ) { // necessary?
+			var self = $( event.target ).data( "widget" );
+			self.refresh( self._value(), true, true );
+		},
+
+		blur: function( event ) {
+			var self = $( event.target ).data( "widget" );
+			self.refresh( self._value(), true );
+		},
+
+		// it appears the clicking the up and down buttons in chrome on
+		// range/number inputs doesn't trigger a change until the field is
+		// blurred. Here we check thif the value has changed and refresh
+		vmouseup: function( event ) {
+			$( event.target ).data( "widget" )._checkedRefresh();
+		}
 	},
 
 	_handleEvents: {
