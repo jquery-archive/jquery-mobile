@@ -84,9 +84,10 @@ $( document ).on( "pageinit", function() {
       
 	$( "#popupPanel" ).on({
 		popupbeforeposition: function() {
-			var height = $( window ).height();
+			var h = $( window ).height();
+			
 			$( "#popupPanel" )
-				.css( "height", height )
+				.css( "height", h );
 		}
 	});
 		 
