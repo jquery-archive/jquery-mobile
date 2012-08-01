@@ -202,7 +202,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 	_handleEvents: {
 		// NOTE force focus on handle
 		vmousedown: function( event ) {
-			$( event.target ).focus();
+			this.handle.focus();
 		},
 
 		vclick: false,
@@ -228,7 +228,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 				if ( !this._keySliding ) {
 					this._keySliding = true;
-					$( event.target ).addClass( "ui-state-active" );
+					this.handle.addClass( "ui-state-active" );
 				}
 				break;
 			}
@@ -257,7 +257,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		keyup: function( event ) {
 			if ( this._keySliding ) {
 				this._keySliding = false;
-				$( event.target ).removeClass( "ui-state-active" );
+				this.handle.removeClass( "ui-state-active" );
 			}
 		}
 	},
