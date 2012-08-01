@@ -73,7 +73,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			options;
 
-		this._type = cType;
+		this.type = cType;
 
 		domHandle.setAttribute( 'href', "#" );
 		domSlider.setAttribute('role','application');
@@ -319,7 +319,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 	},
 
 	_value: function() {
-		return  this._type === "input" ?
+		return  this.type === "input" ?
 			parseFloat( this.element.val() ) : this.element[0].selectedIndex;
 	},
 
