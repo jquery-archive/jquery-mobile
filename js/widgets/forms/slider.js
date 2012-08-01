@@ -73,8 +73,6 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			options;
 
-		this.type = cType;
-
 		domHandle.setAttribute( 'href', "#" );
 		domSlider.setAttribute('role','application');
 		domSlider.className = ['ui-slider ',selectClass," ui-btn-down-",trackTheme,' ui-btn-corner-all', inlineClass, miniClass].join( "" );
@@ -95,6 +93,10 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		$.extend( this, {
 			slider: slider,
 			handle: handle,
+			type: cType,
+			step: step,
+			max: max,
+			min: min,
 			valuebg: valuebg,
 			dragging: false,
 			beforeStart: null,
@@ -186,70 +188,76 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			});
 		}
 
-		this.handle.bind({
-			// NOTE force focus on handle
-			vmousedown: function() {
-				$( this ).focus();
-			},
-
-			vclick: false,
-
-			keydown: function( event ) {
-				var index = val();
-
-				if ( self.options.disabled ) {
-					return;
-				}
-
-				// In all cases prevent the default and mark the handle as active
-				switch ( event.keyCode ) {
-					case $.mobile.keyCode.HOME:
-					case $.mobile.keyCode.END:
-					case $.mobile.keyCode.PAGE_UP:
-					case $.mobile.keyCode.PAGE_DOWN:
-					case $.mobile.keyCode.UP:
-					case $.mobile.keyCode.RIGHT:
-					case $.mobile.keyCode.DOWN:
-					case $.mobile.keyCode.LEFT:
-						event.preventDefault();
-
-						if ( !self._keySliding ) {
-							self._keySliding = true;
-							$( this ).addClass( "ui-state-active" );
-						}
-						break;
-				}
-
-				// move the slider according to the keypress
-				switch ( event.keyCode ) {
-					case $.mobile.keyCode.HOME:
-						self.refresh( min );
-						break;
-					case $.mobile.keyCode.END:
-						self.refresh( max );
-						break;
-					case $.mobile.keyCode.PAGE_UP:
-					case $.mobile.keyCode.UP:
-					case $.mobile.keyCode.RIGHT:
-						self.refresh( index + step );
-						break;
-					case $.mobile.keyCode.PAGE_DOWN:
-					case $.mobile.keyCode.DOWN:
-					case $.mobile.keyCode.LEFT:
-						self.refresh( index - step );
-						break;
-				}
-			}, // remove active mark
-
-			keyup: function( event ) {
-				if ( self._keySliding ) {
-					self._keySliding = false;
-					$( this ).removeClass( "ui-state-active" );
-				}
-			}
-			});
+		this.handle.data( "widget", this );
+		this.handle.bind( this._handleEvents );
 
 		this.refresh( undefined, undefined, true );
+	},
+
+	_handleEvents: {
+		// NOTE force focus on handle
+		vmousedown: function() {
+			$( this ).focus();
+		},
+
+		vclick: false,
+
+		keydown: function( event ) {
+			var self = $(event.target).data( "widget" ),
+				index = self._value();
+
+			if ( self.options.disabled ) {
+				return;
+			}
+
+			// In all cases prevent the default and mark the handle as active
+			switch ( event.keyCode ) {
+			 case $.mobile.keyCode.HOME:
+			 case $.mobile.keyCode.END:
+			 case $.mobile.keyCode.PAGE_UP:
+			 case $.mobile.keyCode.PAGE_DOWN:
+			 case $.mobile.keyCode.UP:
+			 case $.mobile.keyCode.RIGHT:
+			 case $.mobile.keyCode.DOWN:
+			 case $.mobile.keyCode.LEFT:
+				event.preventDefault();
+
+				if ( !self._keySliding ) {
+					self._keySliding = true;
+					$( this ).addClass( "ui-state-active" );
+				}
+				break;
+			}
+
+			// move the slider according to the keypress
+			switch ( event.keyCode ) {
+			 case $.mobile.keyCode.HOME:
+				self.refresh( self.min );
+				break;
+			 case $.mobile.keyCode.END:
+				self.refresh( self.max );
+				break;
+			 case $.mobile.keyCode.PAGE_UP:
+			 case $.mobile.keyCode.UP:
+			 case $.mobile.keyCode.RIGHT:
+				self.refresh( index + self.step );
+				break;
+			 case $.mobile.keyCode.PAGE_DOWN:
+			 case $.mobile.keyCode.DOWN:
+			 case $.mobile.keyCode.LEFT:
+				self.refresh( index - self.step );
+				break;
+			}
+		}, // remove active mark
+
+		keyup: function( event ) {
+			var self = self = $(event.target).data( "widget" );
+
+			if ( self._keySliding ) {
+				self._keySliding = false;
+				$( this ).removeClass( "ui-state-active" );
+			}
+		}
 	},
 
 	_sliderEvents: {
