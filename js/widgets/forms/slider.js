@@ -251,24 +251,23 @@ $.widget( "mobile.slider", $.mobile.widget, {
 	},
 
 	_sliderMouseDown: function() {
-		var self = this;
-			// NOTE: we don't do this in refresh because we still want to
-			//       support programmatic alteration of disabled inputs
-			if ( self.options.disabled ) {
-				return false;
-			}
-
-			self.dragging = true;
-			self.userModified = false;
-			self.mouseMoved = false;
-
-			if ( self.type === "select" ) {
-				self.beforeStart = this.element[0].selectedIndex;
-			}
-
-			self.refresh( event );
- 			self._trigger( "start" );
+		// NOTE: we don't do this in refresh because we still want to
+		//       support programmatic alteration of disabled inputs
+		if ( this.options.disabled ) {
 			return false;
+		}
+
+		this.dragging = true;
+		this.userModified = false;
+		this.mouseMoved = false;
+
+		if ( this.type === "select" ) {
+			this.beforeStart = this.element[0].selectedIndex;
+		}
+
+		this.refresh( event );
+ 		this._trigger( "start" );
+		return false;
 	},
 
 	_sliderMouseUp: function() {
