@@ -17,14 +17,11 @@
 	<script>
 		$.testHelper.asyncLoad([
 			[
-				"jquery.mobile.popup",
+				"widgets/popup",
 			],
 			[ "jquery.mobile.init" ],
 			[
 				"popup_core.js"
-			],
-			[
-				"popup_interaction.js"
 			]
 		]);
 	</script>
@@ -49,6 +46,9 @@
       </div>
 			<a id="open-xyzzy-popup" href="#xyzzy" data-nstest-rel="popup" data-nstest-role="button">Pop</a>
 			<a id="open-test-popup" href="#test-popup" data-nstest-rel="popup" data-nstest-role="button">Pop</a>
+			<div data-nstest-role="popup" id="tolerance-test">
+				<p>Tolerance test popup</p>
+			</div>
     </div>
   </div>
 </body>

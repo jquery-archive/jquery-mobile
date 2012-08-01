@@ -66,7 +66,7 @@
 			<dd>
 				<p class="default">default: true</p>
 				<p>Applies the theme shadow to the button's icon if set to true. This option is also exposed as a data attribute: <code>data-iconshadow=&quot;false&quot;</code></p>
-				<pre><code>$('a').buttonMarkup(<strong>{ iconshadow: "false" }</strong>);</code></pre>
+				<pre><code>$('a').buttonMarkup(<strong>{ iconshadow: false }</strong>);</code></pre>
 				<a href="#" data-role="button"  data-icon="star" data-iconshadow="false">No icon shadow</a>
 			</dd>
 			
@@ -74,7 +74,7 @@
 			<dd>
 				<p class="default">default: null (false)</p>
 				<p>If set to true, this will make the button act like an inline button so the width is determined by the button's text. By default, this is null (false) so the button is full width, regardless of the feedback content. Possible values: true, false. This option is also exposed as a data attribute: <code>data-inline=&quot;true&quot;</code></p>
-				<pre><code>$('a').buttonMarkup(<strong>{ inline: "true" }</strong>);</code></pre>
+				<pre><code>$('a').buttonMarkup(<strong>{ inline: true }</strong>);</code></pre>
 				<a href="#" data-role="button" data-inline="true">Inline</a>
 			</dd>
 			
@@ -82,16 +82,16 @@
 			<dd>
 				<p class="default">default: null (false)</p>
 				<p>If set to true, this will display a more compact version of the button that uses less vertical height. Possible values: true, false. This option is also exposed as a data attribute: <code>data-mini=&quot;true&quot;</code></p>
-				<pre><code>$('a').buttonMarkup(<strong>{ mini: "true" }</strong>);</code></pre>
-				<a href="#" data-role="button" data-mini="true">Inline</a>
+				<pre><code>$('a').buttonMarkup(<strong>{ mini: true }</strong>);</code></pre>
+				<a href="#" data-role="button" data-mini="true">Mini</a>
 			</dd>
 			
 			<dt><code>shadow</code> <em>boolean</em></dt>
 			<dd>
 				<p class="default">default: true</p>
 				<p>Applies the drop shadow style to the button if set to true. This option is also exposed as a data attribute: <code>data-shadow=&quot;false&quot;</code></p>
-				<pre><code>$('a').buttonMarkup(<strong>{ shadow: "false" }</strong>);</code></pre>
-				<a href="#" data-role="button" data-shadow="false">No button shadow</a>
+				<pre><code>$('a').buttonMarkup(<strong>{ shadow: false }</strong>);</code></pre>
+				<a href="#" data-role="button" data-shadow=""false">No button shadow</a>
 			</dd>
 			
 			<dt><code>theme</code> <em>string</em></dt>
@@ -110,7 +110,7 @@
 		<dl>
 			<dt><code>initSelector</code> <em>CSS selector string</em></dt>
 			<dd>
-				<p class="default">default: "button, [type='button'], [type='submit'], [type='reset'], [type='image']"</p>
+				<p class="default">default: "button, [type='button'], [type='submit'], [type='reset']"</p>
 				<p>This is used to define the selectors (element types, data roles, etc.) that will automatically be initialized as form buttons. To change which elements are initialized, bind this option to the <a href="../api/globalconfig.html">mobileinit event</a>:</p>
 <pre><code>$( document ).bind( "mobileinit", function(){
    <strong>$.mobile.button.prototype.options.initSelector = ".myButtons";</strong>
@@ -143,7 +143,7 @@
 </div><!-- /content -->
 
 <div data-role="footer" class="footer-docs" data-theme="c">
-		<p>&copy; 2011-12 The jQuery Foundation</p>
+		<p>&copy; 2012 jQuery Foundation and other contributors</p>
 </div>
 	
 </div><!-- /page -->

@@ -1,6 +1,6 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: A workaround for browsers without window.matchMedia
-//>>label: matchMedia Polyfill
+//>>label: Match Media Polyfill
 //>>group: Utilities
 
 
@@ -21,7 +21,7 @@ var $window = $( window ),
 $.mobile.media = (function() {
 	// TODO: use window.matchMedia once at least one UA implements it
 	var cache = {},
-		testDiv = $( "<div id='jquery-mediatest'>" ),
+		testDiv = $( "<div id='jquery-mediatest'></div>" ),
 		fakeBody = $( "<body>" ).append( testDiv );
 
 	return function( query ) {
@@ -32,7 +32,7 @@ $.mobile.media = (function() {
 			//must set type for IE!
 			styleBlock.type = "text/css";
 
-			if ( styleBlock.styleSheet  ){
+			if ( styleBlock.styleSheet ) {
 				styleBlock.styleSheet.cssText = cssrule;
 			} else {
 				styleBlock.appendChild( document.createTextNode(cssrule) );

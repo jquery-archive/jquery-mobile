@@ -6,7 +6,6 @@
 	<title>jQuery Mobile Docs - Search input</title> 
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
 	<link rel="stylesheet" href="../../_assets/css/jqm-docs.css"/>
-	<script src="../../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
 	<script src="../../../js/jquery.js"></script>
 	<script src="../../../docs/_assets/js/jqm-docs.js"></script>
 	<script src="../../../js/"></script>
@@ -36,7 +35,7 @@
 				<li><a href="events.html" data-role="button" data-transition="fade">Events</a></li>
 			</ul>
 
-			<p>Search inputs are a new HTML type that is styled with pill-shaped corners and adds a "x" icon to clear the field once you start typing. Start with an <code>input</code> with a <code>type="search"</code> attribute in your markup. View the <a href="../../api/data-attributes.html">data- attribute reference</a> to see all the possible attributes you can add to search inputs.</p>
+			<p>Search inputs are a new HTML type that is styled with pill-shaped corners and adds an "x" icon to clear the field once you start typing. Start with an <code>input</code> with a <code>type="search"</code> attribute in your markup. View the <a href="../../api/data-attributes.html">data- attribute reference</a> to see all the possible attributes you can add to search inputs.</p>
 			
 			<p>Set the <code>for</code> attribute of the <code>label</code> to match the <code>id</code> of the <code>input</code> so they are semantically associated. It's possible to <a href="../docs-forms.html">accessibly hide the label</a> if it's not desired in the page layout, but we require that it is present in the markup for semantic and accessibility reasons.</p>
 				
@@ -54,13 +53,13 @@
 				<p>For a more compact version that is useful in toolbars and tight spaces, add the <code>data-mini="true"</code> attribute to the element to create a <a href="../forms-all-mini.html">mini version</a>. </p>
 
 <pre><code>	
-&lt;label for=&quot;search-basic&quot;&gt;Search Input:&lt;/label&gt;
-&lt;input type=&quot;search&quot; name=&quot;search&quot; id=&quot;searc-basic&quot; value=&quot;&quot; <strong>data-mini=&quot;true&quot;</strong> /&gt;
+&lt;label for=&quot;search-mini&quot;&gt;Search Input:&lt;/label&gt;
+&lt;input type=&quot;search&quot; name=&quot;search-mini&quot; id=&quot;search-mini&quot; value=&quot;&quot; <strong>data-mini=&quot;true&quot;</strong> /&gt;
 </code></pre>
 
 				<p>This will produce a search input that is not as tall as the standard version and has a smaller text size.</p>
 		         <label for="search-mini">Search Input:</label>
-				 <input type="search" name="search" id="search-mini" value="" />
+				 <input type="search" name="search-mini" id="search-mini" value="" />
 
 				<h2>Field containers</h2>
 				
@@ -68,22 +67,22 @@
 
 <pre><code>	
 <strong>&lt;div data-role=&quot;fieldcontain&quot;&gt;
-</strong>    &lt;label for=&quot;search&quot;&gt;Search Input:&lt;/label&gt;
-    &lt;input type=&quot;search&quot; name=&quot;password&quot; id=&quot;search&quot; value=&quot;&quot; /&gt;
+</strong>    &lt;label for=&quot;search-2&quot;&gt;Search Input:&lt;/label&gt;
+    &lt;input type=&quot;search&quot; name=&quot;search-2&quot; id=&quot;search-2&quot; value=&quot;&quot; /&gt;
 <strong>&lt;/div&gt;
 </strong></code></pre>	
 			 
 			<p>The search input is now displayed like this:</p>
 			<div data-role="fieldcontain">
-	         <label for="search">Search Input:</label>
-	         <input type="search" name="search2" id="search" value="" />
+	         <label for="search-2">Search Input:</label>
+	         <input type="search" name="search-2" id="search-2" value="" />
 			</div>
 
 			<h2>Theming</h2>
 			<p>The <code>data-theme</code> attribute can be added to the search input to set the theme to any swatch letter.</p>
 			<div data-role="fieldcontain">
-	         <label for="searchA">Search Input:</label>
-	         <input type="search" name="search3" id="searchA" value="" data-theme="a" />
+	         <label for="search-3">Search Input:</label>
+	         <input type="search" name="search-3" id="search-3" value="" data-theme="a" />
 			</div>
 
 			<h2>Setting the clear button text</h2>
@@ -132,7 +131,7 @@ $('.mySearchInput').textinput();
 </div><!-- /content -->
 
 <div data-role="footer" class="footer-docs" data-theme="c">
-		<p>&copy; 2011-12 The jQuery Foundation</p>
+		<p>&copy; 2012 jQuery Foundation and other contributors</p>
 </div>
 	
 </div><!-- /page -->

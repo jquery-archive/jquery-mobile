@@ -8,7 +8,7 @@ define( [ "jquery" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$( document ).bind( "pagecreate create", function( e ){
+$( document ).bind( "pagecreate create", function( e ) {
 
 	//links within content areas, tests included with page
 	$( e.target )

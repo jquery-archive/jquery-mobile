@@ -3,9 +3,9 @@
 //>>label: Pushstate Support
 //>>group: Navigation
 
-define( [ "jquery", "./jquery.mobile.navigation", "../external/requirejs/depend!./jquery.hashchange[jquery]" ], function( $ ) {
+define( [ "jquery", "./jquery.mobile.navigation", "depend!./jquery.hashchange[jquery]" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
-( function( $, window ) {
+(function( $, window ) {
 	// For now, let's Monkeypatch this onto the end of $.mobile._registerInternalEvents
 	// Scope self to pushStateHandler so we can reference it sanely within the
 	// methods handed off as event handlers
@@ -34,7 +34,8 @@ define( [ "jquery", "./jquery.mobile.navigation", "../external/requirejs/depend!
 
 		state: function() {
 			return {
-				hash: location.hash || "#" + self.initialFilePath,
+				// firefox auto decodes the url when using location.hash but not href
+				hash: $.mobile.path.parseUrl( location.href ).hash || "#" + self.initialFilePath,
 				title: document.title,
 
 				// persist across refresh
@@ -47,9 +48,9 @@ define( [ "jquery", "./jquery.mobile.navigation", "../external/requirejs/depend!
 				subkey = "&" + $.mobile.subPageUrlKey,
 				dialogIndex = url.indexOf( dialog );
 
-			if( dialogIndex > -1 ) {
+			if ( dialogIndex > -1 ) {
 				url = url.slice( 0, dialogIndex ) + "#" + url.slice( dialogIndex );
-			} else if( url.indexOf( subkey ) > -1 ) {
+			} else if ( url.indexOf( subkey ) > -1 ) {
 				url = url.split( subkey ).join( "#" + subkey );
 			}
 
@@ -67,12 +68,13 @@ define( [ "jquery", "./jquery.mobile.navigation", "../external/requirejs/depend!
 		// handling has taken place and set the state of the DOM
 		onHashChange: function( e ) {
 			// disable this hash change
-			if( self.onHashChangeDisabled ){
+			if ( self.onHashChangeDisabled ) {
 				return;
 			}
 
 			var href, state,
-				hash = location.hash,
+				// firefox auto decodes the url when using location.hash but not href
+				hash = $.mobile.path.parseUrl( location.href ).hash,
 				isPath = $.mobile.path.isPath( hash ),
 				resolutionUrl = isPath ? location.href : $.mobile.getDocumentUrl();
 
@@ -109,7 +111,7 @@ define( [ "jquery", "./jquery.mobile.navigation", "../external/requirejs/depend!
 				fromHash, toHash, hashChanged;
 
 			// if there's no state its not a popstate we care about, eg chrome's initial popstate
-			if( poppedState ) {
+			if ( poppedState ) {
 				// if we get two pop states in under this.hashChangeTimeout
 				// make sure to clear any timer set for the previous change
 				clearTimeout( self.hashChangeEnableTimer );
@@ -127,7 +129,7 @@ define( [ "jquery", "./jquery.mobile.navigation", "../external/requirejs/depend!
 				// change event that comes on all popstates courtesy of browsers like Android
 				self.hashChangeEnableTimer = setTimeout( function() {
 					self.nextHashChangePrevented( false );
-				}, self.hashChangeTimeout);
+				}, self.hashChangeTimeout );
 			}
 		},
 
@@ -145,8 +147,8 @@ define( [ "jquery", "./jquery.mobile.navigation", "../external/requirejs/depend!
 	});
 
 	// We need to init when "mobileinit", "domready", and "navready" have all happened
-	$.when( domreadyDeferred, mobileinitDeferred, $.mobile.navreadyDeferred ).done( function() {
-		if( $.mobile.pushStateEnabled && $.support.pushState ){
+	$.when( domreadyDeferred, mobileinitDeferred, $.mobile.navreadyDeferred ).done(function() {
+		if ( $.mobile.pushStateEnabled && $.support.pushState ) {
 			pushStateHandler.init();
 		}
 	});

@@ -8,7 +8,7 @@
 		onChangeCnt++;
 	};
 
-	module('jquery.mobile.slider.js', {
+	module('jquery.mobile.slider.js events', {
 		setup: function() {
 			// force the value to be an increment of 10 when we aren't testing the rounding
 			$("#stepped").val( 20 );
@@ -372,5 +372,47 @@
 				start();
 			}
 		], 500);
+	});
+
+	asyncTest( "moving the slider triggers 'slidestart' and 'slidestop' events", function() {
+		var control = $( "#start-stop-events" ),
+			widget = control.data( "slider" ),
+			slider = widget.slider;
+
+		$.testHelper.eventCascade([
+			function() {
+				// trigger the slider grab event
+				slider.trigger( "mousedown" );
+			},
+
+			"slidestart", function( timeout ) {
+				ok( !timeout, "slidestart fired" );
+				slider.trigger( "mouseup" );
+			},
+
+			"slidestop", function( timeout ) {
+				ok( !timeout, "slidestop fired" );
+				start();
+			}
+		], 500);
+	});
+
+	test( "slider should detach event", function() {
+		var slider = $( "#remove-events-slider" ),
+			doc = $( document ),
+			vmouseupLength,
+			vmousemoveLength;
+
+		function getDocumentEventsLength( name ){
+			return (doc.data( 'events' )[name] || []).length;
+		}
+
+		vmouseupLength = getDocumentEventsLength( "vmouseup" );
+		vmousemoveLength = getDocumentEventsLength( "vmousemove" );
+
+		slider.remove();
+		
+		equal(getDocumentEventsLength( "vmouseup" ), (vmouseupLength - 1), 'vmouseup event was removed');
+		equal(getDocumentEventsLength( "vmousemove" ), (vmousemoveLength - 1), 'vmousemove event was removed');
 	});
 })(jQuery);

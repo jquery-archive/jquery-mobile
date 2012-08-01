@@ -4,7 +4,7 @@
 //>>group: Utilities
 
 
-define( [ "jquery", "./jquery.mobile.page" ], function( $ ) {
+define( [ "jquery", "./widgets/page" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -26,11 +26,11 @@ $.mobile.page.prototype.options.degradeInputs = {
 
 
 //auto self-init widgets
-$( document ).bind( "pagecreate create", function( e ){
+$( document ).bind( "pagecreate create", function( e ) {
 
-	var page = $.mobile.closestPageData($(e.target)), options;
+	var page = $.mobile.closestPageData( $( e.target ) ), options;
 
-	if( !page ) {
+	if ( !page ) {
 		return;
 	}
 

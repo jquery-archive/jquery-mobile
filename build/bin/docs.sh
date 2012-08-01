@@ -22,8 +22,11 @@ find tmp/demos -name "*$SED_INPLACE_EXT" -exec rm {} \;
 # clear out old zip files
 clear_zip_files $OUTPUT
 
-# ... Move and zip up the the whole folder
-cd tmp/demos && mkdir -p $OUTPUT && zip -qr $OUTPUT/$BASE_NAME.docs.zip ./* && cd -
+# create the docs zip in the output directory using the demo files
+cd tmp/demos && zip -rq ../../$OUTPUT/$NAME.docs.zip * && cd -
+
+# clean out the compiled directory demos and cp the new output
 rm -rf $OUTPUT/demos && mv -f tmp/demos $OUTPUT
+
 # Finish by removing the temporary files
 rm -rf tmp

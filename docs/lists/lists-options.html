@@ -24,7 +24,7 @@
 
 	<div data-role="content">
 	<div class="content-primary">
-		<h2>List views</h2>
+		<h2>Listviews</h2>
 
 		<ul data-role="controlgroup" data-type="horizontal" class="localnav">
 			<li><a href="docs-lists.html" data-role="button" data-transition="fade">Basics</a></li>
@@ -117,7 +117,7 @@
 			<dt><code>initSelector</code> <em>CSS selector string</em></dt>
 			<dd>
 				<p class="default">default: ":jqmData(role='listview')"</p>
-				<p>This is used to define the selectors (element types, data roles, etc.) that will automatically be initialized as list views. To change which elements are initialized, bind this option to the <a href="../api/globalconfig.html">mobileinit event</a>:</p>
+				<p>This is used to define the selectors (element types, data roles, etc.) that will automatically be initialized as listviews. To change which elements are initialized, bind this option to the <a href="../api/globalconfig.html">mobileinit event</a>:</p>
 <pre><code>$( document ).bind( "mobileinit", function(){
     <strong>$.mobile.listview.prototype.options.initSelector = ".mylistview";</strong>
 });
@@ -180,7 +180,7 @@
 
 				<ul data-role="listview" data-theme="c" data-dividertheme="d">
 
-					<li data-role="list-divider">List views</li>
+					<li data-role="list-divider">Listviews</li>
 					<li data-theme="a"><a href="docs-lists.html">List basics &amp; API</a></li>
 					<li><a href="lists-ul.html">Basic linked list</a></li>
 					<li><a href="lists-nested.html">Nested list</a></li>
@@ -188,10 +188,13 @@
 
 					<li><a href="lists-split.html">Split button list</a></li>
 					<li><a href="lists-divider.html">List dividers</a></li>
+					<li><a href="lists-autodividers.html">Autodividers</a></li>
 					<li><a href="lists-count.html">Count bubble</a></li>
 					<li><a href="lists-thumbnails.html">Thumbnails</a></li>
 					<li><a href="lists-icons.html">Icons</a></li>
 					<li><a href="lists-formatting.html">Content formatting</a></li>
+					<li><a href="lists-inset.html">Inset styled lists</a></li>
+					
 					<li><a href="lists-search.html">Search filter bar</a></li>
 					<li><a href="lists-search-inset.html">Inset search filter bar</a></li>
 					<li><a href="lists-search-with-dividers.html">Search filter bar with dividers</a></li>
@@ -202,7 +205,8 @@
 					<li><a href="lists-forms.html">Lists with forms</a></li>
 					<li><a href="lists-forms-inset.html">Inset lists with forms</a></li>
 
-					<li><a href="lists-inset.html">Inset styled lists</a></li>
+					<li><a href="lists-collapsible.html">Collapsible lists</a></li>
+
 					<li><a href="lists-performance.html">List performance test</a></li>
 					<li><a href="lists-themes.html">Theming lists</a></li>
 
@@ -213,7 +217,7 @@
 	</div><!-- /content -->
 
 	<div data-role="footer" class="footer-docs" data-theme="c">
-			<p>&copy; 2011-12 The jQuery Foundation</p>
+			<p>&copy; 2012 jQuery Foundation and other contributors</p>
 	</div>
 
 	</div><!-- /page -->

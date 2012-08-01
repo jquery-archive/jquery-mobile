@@ -33,7 +33,22 @@
 				<li><a href="content-collapsible-events.html" data-role="button" data-transition="fade">Events</a></li>
 			</ul>
 
-			<p>The collapsible plugin has no public methods.</p>
+			<p>The collapsible plugin has the following methods:</p>
+
+		<dl>									
+			<dt><code>collapse</code> collapse a collapsible</dt>
+			<dd>
+				<pre><code>
+$( ".selector" ).trigger( "collapse" );			
+				</code></pre>
+			</dd>
+			<dt><code>expand</code> expand a collapsible</dt>
+			<dd>
+				<pre><code>
+$( ".selector" ).trigger( "expand" );			
+				</code></pre>
+			</dd>
+		</dl>
 	</div><!--/content-primary -->		
 	
 	<div class="content-secondary">
@@ -58,7 +73,7 @@
 </div><!-- /content -->
 
 <div data-role="footer" class="footer-docs" data-theme="c">
-		<p>&copy; 2011-12 The jQuery Foundation</p>
+		<p>&copy; 2012 jQuery Foundation and other contributors</p>
 </div>
 	
 </div><!-- /page -->

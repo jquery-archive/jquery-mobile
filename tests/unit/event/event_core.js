@@ -349,7 +349,10 @@
 
 		//NOTE bypass the trigger source check
 		$.Event.prototype.originalEvent = {
-			touches: false
+			touches: [{
+				pageX: 0,
+				pageY: 0
+			}]
 		};
 
 		$( "#qunit-fixture" ).trigger("touchstart");
@@ -395,19 +398,29 @@
 		// ensure the swipe custome event is setup
 		$( "#qunit-fixture" ).bind('swipe', function(){});
 
-		//NOTE bypass the trigger source check
-		$.Event.prototype.originalEvent = {
-			touches: false
-		};
-
 		$.Event.prototype.preventDefault = function(){
 			ok(true, "prevent default called");
 			start();
 		};
 
-		mockAbs(11);
+		//NOTE bypass the trigger source check
+		$.Event.prototype.originalEvent = {
+			touches: [{
+				pageX: 0,
+				pageY: 0
+			}]
+		};
 
 		$( "#qunit-fixture" ).trigger("touchstart");
+
+		//NOTE bypass the trigger source check
+		$.Event.prototype.originalEvent = {
+			touches: [{
+				pageX: 200,
+				pageY: 0
+			}]
+		};
+
 		$( "#qunit-fixture" ).trigger("touchmove");
 	});
 
@@ -487,17 +500,15 @@
 		$( window ).trigger( "resize" );
 	});
 
-	asyncTest( "throttledresize event prevents resize events from firing more frequently than 250ms", function(){
+	asyncTest( "throttledresize event prevents resize events from firing more frequently than one per 250ms", function(){
 		var called = 0;
 
 		$(window).bind( "throttledresize", function(){
 			called++;
 		});
 
-		// NOTE 250 ms * 3 = 750ms which is plenty of time
-		// for the events to trigger before the next test, but
-		// not so much time that the second resize will be triggered
-		// before the call to same() is made
+		// NOTE 400 ms between two triggers and the check for one callback
+		// is enough time for the first to fire but not enough for a second
 		$.testHelper.sequence([
 			function(){
 				$(window).trigger( "resize" ).trigger( "resize" );
@@ -509,7 +520,7 @@
 			function(){
 				start();
 			}
-		], 250);
+		], 400);
 	});
 
 	asyncTest( "throttledresize event promises that a held call will execute only once after throttled timeout", function(){

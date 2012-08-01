@@ -40,23 +40,34 @@
 
 	<dl>
 
-		<dt><code>opened</code> triggered when a popup is opened</dt>
+		<dt><code>popupbeforeposition</code> triggered after a popup has completed preparations for opening, but has not yet opened</dt>
 		<dd>
 
 			<pre><code>
-$( ".selector" ).popup({
-   opened: function(event, ui) { ... }
+$( ".selector" ).bind({
+   popupbeforeposition: function(event, ui) { ... }
+});
+			</code></pre>
+			<p>This event is triggered when the popup has completed preparations for appearing on the screen. At this point the popup has not started the animations and it has not yet calculated the coordinates where it will appear on the screen. Handling this event gives an opportunity to modify the content of the popup before it appears on the screen. For example, the content can be scaled or parts of it can be hidden or removed if it is too wide or too tall.</p>
+		</dd>
+
+		<dt><code>popupafteropen</code> triggered after a popup has completely opened</dt>
+		<dd>
+
+			<pre><code>
+$( ".selector" ).bind({
+   popupafteropen: function(event, ui) { ... }
 });
 			</code></pre>
 			<p>This event is triggered when the popup has completely appeared on the screen, meaning that all associated animations have completed.</p>
 		</dd>
 
-		<dt><code>closed</code> triggered when a popup is closed (by clicking outside of it)</dt>
+		<dt><code>popupafterclose</code> triggered when a popup has completely closed</dt>
 		<dd>
 
 			<pre><code>
-$( ".selector" ).popup({
-   closed: function(event, ui) { ... }
+$( ".selector" ).bind({
+   popupafterclose: function(event, ui) { ... }
 });
 			</code></pre>
 			<p>This event is triggered when the popup has completely disappeared from the screen, meaning that all associated animations have completed.</p>
@@ -82,6 +93,7 @@ $( ".selector" ).popup({
 								<li><a href="../page-titles.html">Page titles</a></li>
 								<li><a href="../page-links.html">Linking pages</a></li>
 								<li><a href="../page-transitions.html" data-ajax="false">Page transitions</a></li>
+								<li><a href="../loader.html">Page loading widget</a></li>
 								<li><a href="../page-dialogs.html">Dialogs</a></li>
 								<li data-theme="a"><a href="index.html">Popups</a></li>
 								<li><a href="../page-cache.html">Prefetching &amp; caching pages</a></li>
@@ -99,7 +111,7 @@ $( ".selector" ).popup({
 </div><!-- /content -->
 
 <div data-role="footer" class="footer-docs" data-theme="c">
-		<p>&copy; 2011-12 The jQuery Foundation</p>
+		<p>&copy; 2012 jQuery Foundation and other contributors</p>
 </div>
 
 </div><!-- /page -->

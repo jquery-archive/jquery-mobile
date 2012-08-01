@@ -22,11 +22,11 @@ init:
 
 # Build and minify the CSS files
 css: init
-	@@node node_modules/.bin/grunt css
+	@@${ARGS} node node_modules/.bin/grunt css
 
 # Build and minify the JS files
 js: init
-	@@node node_modules/.bin/grunt js
+	@@${ARGS} node node_modules/.bin/grunt js
 
 # -------------------------------------------------
 #

@@ -39,12 +39,29 @@
 			<p>The popup plugin has the following methods:</p>
 
 		<dl>
-			<dt><code>open(x, y)</code> display the popup centered at coordinates (x, y)</dt>
+			<dt><code>open( options )</code> display the popup using the specified options</dt>
 			<dd>
 				<pre><code>
-$('.selector').popup('open', x, y);
+$('.selector').popup('open', options);
 				</code></pre>
-				<p>If <code>x</code> or <code>y</code> is missing, the middle of the window will be used.
+				<p><code>options</code> is an object literal which may have any of the following properties:</p>
+				<table>
+					<tr><td class="enum-value"><code>x</code></td><td>
+						The x-coordinate where the popup is to be displayed.
+					</td></tr>
+					<tr><td class="enum-value"><code>y</code></td><td>
+						The y-coordinate where the popup is to be displayed.
+					</td></tr>
+					<tr><td class="enum-value"><code>transition</code></td><td>
+						The transition to use during the opening sequence.
+					</td></tr>
+					<tr><td class="enum-value"><code>positionTo</code></td><td>
+						The positioning to use.
+					</td></tr>
+				</table>
+				<p>If <code>x</code> or <code>y</code> is missing, and no jQuery selector is given as the value of <code>positionTo</code>, the middle of the window will be used.</p>
+				<p><code>transition</code> can be used to override the popup's own <code>transition</code> option. This will result in the popup opening via the transition specified in the call, but the popup's <code>transition</code> option will not be updated.</p>
+				<p>Similarly, <code>data-position-to</code> can be used to override the popup's default positioning without modifying the value of the popup's <code>positionTo</code> option. The values available for <code>positionTo</code> are the same as those for the popup's <code>positionTo</code> option (see <a href="options.html">options</a> page).</p>
 			</dd>
 
 			<dt><code>close</code> close an open popup</dt>
@@ -73,6 +90,7 @@ $('.selector').popup('close');
 								<li><a href="../page-titles.html">Page titles</a></li>
 								<li><a href="../page-links.html">Linking pages</a></li>
 								<li><a href="../page-transitions.html" data-ajax="false">Page transitions</a></li>
+								<li><a href="../loader.html">Page loading widget</a></li>
 								<li><a href="../page-dialogs.html">Dialogs</a></li>
 								<li data-theme="a"><a href="index.html">Popups</a></li>
 								<li><a href="../page-cache.html">Prefetching &amp; caching pages</a></li>
@@ -90,7 +108,7 @@ $('.selector').popup('close');
 </div><!-- /content -->
 
 <div data-role="footer" class="footer-docs" data-theme="c">
-		<p>&copy; 2011-12 The jQuery Foundation</p>
+		<p>&copy; 2012 jQuery Foundation and other contributors</p>
 </div>
 
 </div><!-- /page -->

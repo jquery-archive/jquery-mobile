@@ -11,26 +11,45 @@ You can find more information about how the library works, and what it is capabl
 When [submitting issues on github](https://github.com/jquery/jquery-mobile/issues/new) please include the following:
 
 1. Issue description
-2. Sample page using our [jsbin template](http://jsbin.com/awoluv/edit#html)
+2. Sample page using our [jsbin template](http://jsbin.com/orucec/edit#html) which uses latest code
 3. Steps to reproduce
 4. Expected outcome
 5. Actual outcome
-6. Browsers/platforms tested
-7. Library version/Location (eg, CDN or `jquerymobile.com/test/`)
+6. jQuery Mobile version
+7. Browsers/platforms tested
 
-Also, in the interest of creating more readable issues please include code snippets inside a triple backtick box appropriate for the JavaScript/HTML/CSS snippet you wish to discuss. More information is available at the [introduction page](http://github.github.com/github-flavored-markdown/) for github flavored markdown (see, Syntax Highlighting).
+Also, in the interest of creating more readable issues please include code snippets inside a triple backtick box appropriate for the JavaScript/HTML/CSS snippet you wish to discuss. More information is available at the [introduction page](http://github.github.com/github-flavored-markdown/) for github flavored markdown (see Syntax Highlighting).
+
+Before opening a new ticket check if the same or a similar issue already has been reported. Tip: Besides the search tool of the issue tracker you can filter issues by label.
+
+The jQuery Mobile [ThemeRoller](https://github.com/jquery/web-jquery-mobile-theme-roller) and [Download Builder](https://github.com/jquery/jquery-mobile-builder) have their own repo where you can report issues.
 
 ## Pull Requests
 
-When submitting a pull request for review there are few important steps you can take to ensure that it gets reviewed quickly and increase the chances that it will be merged (in order of descending importance):
+When submitting a pull request for review there are a few important steps you can take to ensure that it gets reviewed quickly and increase the chances that it will be merged (in order of descending importance):
 
 1. Include tests (see [Testing](#testing))
 2. Follow the [jQuery Core style guide](http://docs.jquery.com/JQuery_Core_Style_Guidelines)
 3. Limit the scope to one Issue/Feature
 4. Small focused commits, ideally less than 10 to 20 lines
 5. Avoid merge commits (see Pro Git's [chapter on rebasing](http://git-scm.com/book/ch3-6.html), section [Rebasing](#rebasing) below)
+6. Add the appropriate commit message (see below)
 
 Taken together, the above reduces the effort that's required of the contributor reviewing your pull request.
+
+### Commit messages
+
+Commit messages should include four components:
+* The WHERE - a single word that categorizes and provides context for the commit and its message, followed by a colon (:). This is typically the name of the plugin being worked on, but sometimes might be something like Build: or Docs:
+* The WHAT - a sufficient summary of the fix or change made (example: modified the foo to no longer bar), followed by a period (.)
+* The WHY #Num - the ticket number with a #sign so Trac creates a hyperlink (example: #1234), followed by a hyphen/dash (-)
+* The WHY Name - the name of the ticket. Notice this is different than summary of the fix. This is a short description of the issue (example: dialog: IE6 crashed when foo is set to bar)
+
+Combined into one, here's a full example:
+
+        "Dialog: modified the foo to no longer bar. Fixed #1234 - dialog: IE6 crashed when foo is set to bar"
+        \WHERE/:\------------- WHAT -------------/.\  WHY #Num /-\---------------- WHY Name ----------------/
+
 
 ## Build/Customization
 
@@ -50,13 +69,13 @@ The `js` and `css` build targets require [node.js](http://nodejs.org/) and its p
 With node installed you can run the `js` and `css` targets by simply issuing the following from the project root:
 
     npm install
-    node node_modules/.gin/grunt js # or css
+    node node_modules/.bin/grunt js # or css
 
-Note that if you have the appropriate version of [grunt](https://github.com/cowboy/grunt), our build tool, installed globally you can substitute `grunt` wherever you see `node node_modules/.gin/grunt`. For the remainder of the build documentation we will prefer the more concise `grunt`.
+Note that if you have the appropriate version of [grunt](https://github.com/cowboy/grunt), our build tool, installed globally you can substitute `grunt` wherever you see `node node_modules/.bin/grunt`. For the remainder of the build documentation we will prefer the more concise `grunt`.
 
 If you want to use the `docs` and `zip` targets you will need bash and they can be run with the following
 
-   grunt docs # or `grunt zip`
+   `grunt docs #` or `grunt zip`
 
 ### JavaScript
 
@@ -126,7 +145,7 @@ Once you have your web server setup you can point it at the project directory.
 
 Automated testing forms the backbone of the jQuery Mobile project's QA activities. As a contributor or patch submitter you will be expected to run the test suite for the code your patches affect. Our continuous integration server will address the remainder of the test suite.
 
-There are two primary ways to run the test suite. First, you can run the tests individually by directing your browser to the different test pages associated with the area in which you are working. For example, to run the tests for `js/jquery.mobile.forms.slider.js` visit `$WEB_SERVER/tests/unit/slider/`. To find out which test pages are available you can list them with:
+There are two primary ways to run the test suite. Both of them require a server configured in the previously prescribed manner. The location of which will hereafter be referred to as `$WEB_SERVER` and should include the protocol. First, you can run the tests individually by directing your browser to the different test pages associated with the area in which you are working. For example, to run the tests for `js/jquery.mobile.forms.slider.js` visit `$WEB_SERVER/tests/unit/slider/`. To find out which test pages are available you can list them with:
 
     grunt config:test:pages
 
@@ -140,13 +159,13 @@ You can confine the headless run to a single test page or set of test pages usin
 
     TEST_PATH=slider JUNIT_OUTPUT=build/test-results/ ROOT_DOMAIN=$WEB_SERVER grunt test
 
-will only run the tests where the path contains the string `slider`, eg `tests/unit/slider/`. *NOTE* That the phantom tests currently require that the web server be running to access and run the tests properly because of the PHP dependency that many of them share. Additionally the test suite is run against many versions of jQuery using the `JQUERY` environment variable. For example if you wanted to run the test suite against both of the currently supported versions 1.6.4, and 1.7.1 the command would take the following form:
+will only run the tests where the path contains the string `slider`, eg `tests/unit/slider/`. *NOTE* that the phantom tests currently require that the web server be running to access and run the tests properly because of the PHP dependency that many of them share. Additionally the test suite is run against many versions of jQuery using the `JQUERY` environment variable. For example if you wanted to run the test suite against both of the currently supported versions 1.6.4, and 1.7.1 the command would take the following form:
 
     JQUERY=1.6.4,1.7.1 JUNIT_OUTPUT=build/test-results/ ROOT_DOMAIN=$WEB_SERVER grunt test
 
 ### Rebasing
 
-Often times when working on a feature or bug fix branch it's useful to pull in the latest from the parent branch. If you're doing this _before_ submitting a pull requests it's best to use git's rebase to apply your commits onto the latest from the parent branch. For example, working on `new-feature` branch where `upstream` is the remote at `git://github.com/jquery/jquery-mobile.git`:
+Often times when working on a feature or bug fix branch it's useful to pull in the latest from the parent branch. If you're doing this _before_ submitting a pull request it's best to use git's rebase to apply your commits onto the latest from the parent branch. For example, working on `new-feature` branch where `upstream` is the remote at `git://github.com/jquery/jquery-mobile.git`:
 
     git checkout new-feature
     git fetch upstream

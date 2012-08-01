@@ -13,8 +13,8 @@
 	<script>
 		$.testHelper.asyncLoad([
 			[
-				"jquery.mobile.forms.select",
-				"jquery.mobile.forms.select.custom",
+				"widgets/forms/select",
+				"widgets/forms/select.custom",
 				"defineKeepNative.js"
 			],
 			[ "jquery.mobile.init" ],
@@ -79,6 +79,15 @@
 
 	<div data-nstest-role="fieldcontain" id="select-choice-focus-test">
 		<select name="select-choice-focus-test" id="select-choice-focus-test"  data-nstest-native-menu="false">
+			<option value="standard">Standard: 7 day</option>
+			<option value="rush">Rush: 3 days</option>
+			<option value="express">Express: next day</option>
+			<option value="overnight">Overnight</option>
+		</select>
+	</div>
+
+	<div data-nstest-role="fieldcontain" id="select-choice-menu-focus-test">
+		<select name="select-choice-menu-focus-test" id="select-choice-menu-focus-test"  data-nstest-native-menu="false">
 			<option value="standard">Standard: 7 day</option>
 			<option value="rush">Rush: 3 days</option>
 			<option value="express">Express: next day</option>

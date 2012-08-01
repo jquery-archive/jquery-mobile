@@ -3,7 +3,7 @@
 //>>label: throttledresize
 //>>group: Events
 
-define( [ "../jquery" ], function( jQuery ) {
+define( [ "jquery" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
 	// throttled resize event
@@ -12,7 +12,7 @@ define( [ "../jquery" ], function( jQuery ) {
 			setup: function() {
 				$( this ).bind( "resize", handler );
 			},
-			teardown: function(){
+			teardown: function() {
 				$( this ).unbind( "resize", handler );
 			}
 		};

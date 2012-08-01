@@ -257,6 +257,30 @@
 			} else {
 				same( parts.hash, "#" + (args.hashOrPush || args.hash), args.report );
 			}
+		},
+
+		navReset: function( url ) {
+			var pageReset = function( hash ) {
+				hash = hash || "";
+
+				stop();
+
+				$(document).one( "pagechange", function() {
+					start();
+				});
+
+				location.hash = "#" + hash;
+			};
+
+			// force the page reset for hash based tests
+			if ( location.hash && !$.support.pushState ) {
+				pageReset();
+			}
+
+			// force the page reset for all pushstate tests
+			if ( $.support.pushState ) {
+				pageReset( url );
+			}
 		}
 	};
 })(jQuery);

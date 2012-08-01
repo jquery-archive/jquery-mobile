@@ -19,7 +19,7 @@ $.fn.fieldcontain = function( options ) {
 };
 
 //auto self-init widgets
-$( document ).bind( "pagecreate create", function( e ){
+$( document ).bind( "pagecreate create", function( e ) {
 	$( ":jqmData(role='fieldcontain')", e.target ).jqmEnhanceable().fieldcontain();
 });
 

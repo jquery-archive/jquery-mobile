@@ -201,7 +201,9 @@
 			},
 
 			function( timeout ){
-				ok( location.search.indexOf("radio1=1") >= 0, "the radio was checked" );
+				var check = location.hash || location.search;
+
+				ok( check.indexOf("radio1=1") >= 0, "the radio was checked" );
 
 				// if the changepage in the previous function failed don't go back
 				if( !timeout ){
@@ -225,8 +227,10 @@
 			},
 
 			function( timeout ){
-				ok( location.search.indexOf("checkbox-form=on") >= 0, "the first checkbox was checked" );
-				ok( location.search.indexOf("checkbox-form-2=on") >= 0, "the second checkbox was checked" );
+				var check = location.hash || location.search;
+
+				ok( check.indexOf("checkbox-form=on") >= 0, "the first checkbox was checked" );
+				ok( check.indexOf("checkbox-form-2=on") >= 0, "the second checkbox was checked" );
 				// if the changepage in the previous function failed don't go back
 				if( !timeout ){
 					window.history.back();

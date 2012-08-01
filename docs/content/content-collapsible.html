@@ -35,7 +35,7 @@
 
 			<p>To create a collapsible block of content, create a container and add the <code> data-role="collapsible"</code> attribute. Using <code>data-content-theme</code> attribute allows you to set a theme for the content of the collapsible. View the <a href="../api/data-attributes.html">data- attribute reference</a> to see all the possible attributes you can add to collapsibles.</p>
 
-			<p>Directly inside this container, add any header element (H1-H6). The framework will style the header to look like a clickable button and add a "+" icon to the left to indicate it's expandable.</p>
+			<p>Directly inside this container, add any header (H1-H6) or legend element. The framework will style the header to look like a clickable button and add a "+" icon to the left to indicate it's expandable.</p>
 		
 			<p>After the header, add any HTML markup you want to be collapsible. The framework will wrap this markup in a container that will be hidden/shown when the heading is clicked.</p>
 			
@@ -68,7 +68,22 @@
 				<h3>I'm a header</h3>
 				<p>I'm the collapsible content. I'm expanded by default because I have the "collapsed" state set to false.</p>
 			</div>
-	
+
+			<h2>Non-inset collapsibles</h2>
+			
+			<p>By default collapsibles have an inset appearance. To make them full width without corner styling add the <code>data-inset="false"</code> attribute to the element.</p>
+
+		<code>		
+		&lt;div data-role=&quot;collapsible&quot; <strong>data-inset=&quot;false&quot;&gt;</strong>
+		</code>
+
+		<p>This code will create a non-inset collapsible:</p>
+
+		<div data-role="collapsible" data-inset="false">
+			<h3>I'm a header</h3>
+			<p>I'm the collapsible content.</p>
+		</div>
+			
 			<h2>Mini collapsibles</h2>
 
 			<p>For a more compact version that is useful in toolbars and tight spaces, add the <code>data-mini="true"</code> attribute to the element to create a <a href="../forms/forms-all-mini.html">mini version</a>. </p>
@@ -81,7 +96,7 @@
 
 		<div data-role="collapsible" data-mini="true">
 			<h3>I'm a mini header</h3>
-			<p>I'm the collapsible content. I'm expanded by default because I have the "collapsed" state set to false.</p>
+			<p>I'm the collapsible content.</p>
 		</div>
 		
 		<h2>Custom icons</h2>
@@ -104,20 +119,20 @@
 	<h2>Theming collapsible content</h2>
 	
 		
-		<p>Collapsible content is minimally styled &mdash; we add only a bit of margin between the bar and content, and the header adopts the default Theme styles of the container it sits within.</p>
+		<p>Collapsible content is minimally styled &mdash; we add only a bit of margin between the bar and content, and the header adopts the default theme styles of the container it sits within.</p>
 		
 		<p>To provide a stronger visual connection between the collapsible header and content, add the <code>data-content-theme</code> attribute to the wrapper and specify a theme swatch letter. This will apply the swatch's border and <em>flat</em> background color (not the gradient) to the content block and changes the corner rounding to square off the bottom of the header and round the bottom of the content block instead to visually group these elements.</p>
 		
 <pre><code>		
 &lt;div data-role=&quot;collapsible&quot; <strong>data-content-theme=&quot;c&quot;</strong>&gt;
-   &lt;h3&gt;Header swatch A&lt;/h3&gt;
-   &lt;p&gt;I&#x27;m the collapsible content with a themed content block set to "C".&lt;/p&gt;
+   &lt;h3&gt;Header&lt;/h3&gt;
+   &lt;p&gt;I&#x27;m the collapsible content with a themed content block set to "c".&lt;/p&gt;
 &lt;/div&gt;
 </code></pre>
 		
 		<div data-role="collapsible" data-content-theme="c">
-			<h3>Header swatch</h3>
-			<p>I'm the collapsible content with a themed content block set to "C".</p>
+			<h3>Header</h3>
+			<p>I'm the collapsible content with a themed content block set to "c".</p>
 		</div>
 		
 		<h2>Theming collapsible headers</h2>
@@ -126,20 +141,20 @@
 <pre><code>		
 &lt;div data-role=&quot;collapsible&quot; <strong>data-theme=&quot;a&quot; data-content-theme=&quot;a&quot;</strong>&gt;
    &lt;h3&gt;Header swatch A&lt;/h3&gt;
-   &lt;p&gt;I&#x27;m the collapsible content with a themed content block set to "A".&lt;/p&gt;
+   &lt;p&gt;I&#x27;m the collapsible content with a themed content block set to "a".&lt;/p&gt;
 &lt;/div&gt;
 </code></pre>
 		
 		<div data-role="collapsible" data-theme="a" data-content-theme="a">
 			<h3>Header swatch A</h3>
-			<p>I'm the collapsible content with a themed content block set to "A".</p>
+			<p>I'm the collapsible content with a themed content block set to "a".</p>
 		</div>
 
 
 		
 		<div data-role="collapsible" data-theme="b" data-content-theme="d">
 			<h3>Header swatch B</h3>
-			<p>I'm the collapsible content with a themed content block set to "D".</p>
+			<p>I'm the collapsible content with a themed content block set to "d".</p>
 		</div>
 
 		
@@ -198,7 +213,7 @@
 		
 		
 		<h2>Collapsible sets (accordions)</h2>
-		<p>It's possible to combine multiple collapsibles into a grouped sets that acts like an <a href="content-collapsible-set.html">accordion widget</a>.</p>
+		<p>It's possible to combine multiple collapsibles into a grouped set that acts like an <a href="content-collapsible-set.html">accordion widget</a>.</p>
 		
 		
 	</div><!--/content-primary -->		
@@ -225,7 +240,7 @@
 </div><!-- /content -->
 
 <div data-role="footer" class="footer-docs" data-theme="c">
-		<p>&copy; 2011-12 The jQuery Foundation</p>
+		<p>&copy; 2012 jQuery Foundation and other contributors</p>
 </div>
 	
 </div><!-- /page -->

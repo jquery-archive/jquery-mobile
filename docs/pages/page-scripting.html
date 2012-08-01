@@ -33,7 +33,7 @@
 
 			<p> This means that any scripts and styles referenced the <code>head</code> of a page won't have any effect <em>when a page is loaded via Ajax</em>, but they <strong>will execute if the page is requested normally via HTTP</strong>. When scripting jQuery Mobile sites, both scenarios need to be considered. The reason that the <code>head</code> of a page is ignored when requested via Ajax is that the potential of re-executing the same JavaScript is very high (it's common to reference the same scripts in every page of a site). Due to the complexity of attempting to work around that issue, we leave the task of executing page-specific scripts to the developer, and assume <code>head</code> scripts are only expected to execute once per browsing session.</p>
 
-			<p>The simplest approach when building a jQuery Mobile site is to reference the same set of stylesheets and scripts in the head of every page. If you need to load in specific scripts or styles for a particular page, we recommend binding logic to the <code>pageInit</code> event (details below) to run  necessary code when a specific page is created (which can be determined by its <code>id</code> attribute, or a number of other ways). Following this approach will ensure that the code executes if the page is loaded directly or is pulled in and shown via Ajax.</p>
+			<p>The simplest approach when building a jQuery Mobile site is to reference the same set of stylesheets and scripts in the head of every page. If you need to load in specific scripts or styles for a particular page, we recommend binding logic to the <code>pageinit</code> event (details below) to run  necessary code when a specific page is created (which can be determined by its <code>id</code> attribute, or a number of other ways). Following this approach will ensure that the code executes if the page is loaded directly or is pulled in and shown via Ajax.</p>
 
 			<p>Another approach for page-specific scripting would be to include scripts at the end of the <code>body</code> element when no <code>data-role=page</code> element is defined, or inside the first <code>data-role=page</code> element. If you include your custom scripting this way, be aware that these scripts will execute when that page is loaded via Ajax or regular HTTP, so if these scripts are the same on every page, you'll likely run into problems. If you're including scripts this way, we'd recommend enclosing your page content in a <code>data-role="page"</code> element, and placing scripts that are referenced on every page outside of that element. Scripts that are unique to that page can be placed in that element, to ensure that they execute when the page is fetched via Ajax.</p>
 
@@ -93,22 +93,22 @@ $.mobile.loadPage( "about/us.html" );
 
 
 			<h2>data-enhance="false" data attribute</h2>
-			<p>As of jQuery Mobile 1.0, all the markup within a page is scanned for elements to be enhanced. This is problematic for 3rd party widgets/libraries that don’t want anybody enhancing their markup or attaching behavior. We heard requests for a data-* attribute that can be placed on an element container to tell the framework not to enhance anything inside it for these situations. In 1.1, we’ve added a new <code>data-enhance="false"</code> attribute that can be added to a container to prevent both auto-initialization and link/form hijacking. 
-			This is also available via <code>$.fn.jqmEnhanceable</code>. It’s important to note that because of the performance impact incurred by finding a parent element with the <code>data-enhance="false"</code> attribute this feature must be turned on explicitly with <code>$.mobile.ignoreContentEnabled=true</code>. </p>
+			<p>As of jQuery Mobile 1.0, all the markup within a page is scanned for elements to be enhanced. This is problematic for 3rd party widgets/libraries that don’t want anybody enhancing their markup or attaching behavior. We heard requests for a data-* attribute that can be placed on an element container to tell the framework not to enhance anything inside it for these situations. In 1.1, we’ve added a new <code>data-enhance="false"</code> attribute that can be added to a container to prevent auto-initialization. 
+			This is also available via <code>$.fn.jqmEnhanceable</code>. It’s important to note that because of the performance impact incurred by finding a parent element with the <code>data-enhance="false"</code> attribute this feature must be turned on explicitly with <code>$.mobile.ignoreContentEnabled=true</code>.</p>
 			
 			<h2>data-ajax="false" now works on containers</h2>
 			<p>On a related topic, we’ve always offered the ability to disable the AJAX navigation system from hijacking a link or form submit via the <code>data-ajax="false"</code> attribute, but people have asked for a way to apply this exclusion more efficiently to a grouping of links. In 1.1, this is now possible by simply adding, and setting <code>$.mobile.ignoreContentEnabled=true</code>, the <code>data-ajax</code> attribute to a parent container and it will exclude all the child links or forms from the AJAX navigation system behavior.</p>
 
 
 			<h2>Scrolling to a position within a page</h2>
-			<p>Since we use the URL hash to preserve Back button behavior, using page anchors to jump down to a position on the page isn't supported by using the traditional anchor link (#foo). Use the <a href="../api/methods.html"><code>silentScroll</code></a> method to scroll to a particular Y position without triggering scroll event listeners. You can pass in a <code>yPos</code> arguments to scroll to that Y location. For example:</p>
+			<p>Since we use the URL hash to preserve Back button behavior, using page anchors to jump down to a position on the page isn't supported by using the traditional anchor link (#foo). Use the <a href="../api/methods.html"><code>silentScroll</code></a> method to scroll to a particular Y position without triggering scroll event listeners. You can pass in a <code>yPos</code> argument to scroll to that Y location. For example:</p>
 <pre><code>
 //scroll to Y 300px
 $.mobile.silentScroll(300);
 </code></pre>
 
 			<h2>Binding to mouse and touch events</h2>
-			<p>One inportant consideration in mobile is handling mouse and touch events. These events differ significantly across mobile platforms, but the common denominator is that click events will work everywhere, but usually after a significant delay of 500-700ms. This delay is necessary for the browser to wait for double tap, scroll and extended hold tap events to potentially occur. To avoid this delay, it's possible to bind to touch events (ex. touchstart) but the issue with this approach is that some mobile platforms (WP7, Blackberry) don't support touch. To compound this issue, some platforms will emit <em>both</em> touch and mouse events so if you bind to both types, duplicate events will be fired for a single interaction.</p>
+			<p>One important consideration in mobile is handling mouse and touch events. These events differ significantly across mobile platforms, but the common denominator is that click events will work everywhere, but usually after a significant delay of 500-700ms. This delay is necessary for the browser to wait for double tap, scroll and extended hold tap events to potentially occur. To avoid this delay, it's possible to bind to touch events (ex. touchstart) but the issue with this approach is that some mobile platforms (WP7, Blackberry) don't support touch. To compound this issue, some platforms will emit <em>both</em> touch and mouse events so if you bind to both types, duplicate events will be fired for a single interaction.</p>
 			<p>Our solution is to create a set of <a href="../api/events.html">virtual events</a> that normalize mouse and touch events. This allows the developer to register listeners for the basic mouse events, such as mousedown, mousemove, mouseup, and click, and the plugin will take care of registering the correct listeners behind the scenes to invoke the listener at the fastest possible time for that device. This still retains the order of event firing in the traditional mouse environment, should multiple handlers be registered on the same element for different events. The virtual mouse system exposes the following virtual events to jQuery bind methods: <code>vmouseover</code>, <code>vmousedown</code>, <code>vmousemove</code>, <code>vmouseup</code>, <code>vclick</code>, and <code>vmousecancel</code></p>
 
 
@@ -154,7 +154,7 @@ $.mobile.silentScroll(300);
 			</div><!-- /content -->
 
 			<div data-role="footer" class="footer-docs" data-theme="c">
-					<p>&copy; 2011-12 The jQuery Foundation</p>
+					<p>&copy; 2012 jQuery Foundation and other contributors</p>
 			</div>
 
 			</div><!-- /page -->

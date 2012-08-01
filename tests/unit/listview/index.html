@@ -20,14 +20,13 @@
 		$.testHelper.asyncLoad([
 			[
 				"jquery.mobile.navigation",
-				"jquery.mobile.listview",
-				"jquery.mobile.listview.filter",
-				"jquery.mobile.listview.autodividers"
+				"widgets/listview",
+				"widgets/listview.filter",
+				"widgets/listview.autodividers",
+				"widgets/collapsible"
 			],
 			[ "jquery.mobile.init" ],
-			[
-				"listview_core.js"
-			]
+			[ "listview_core.js" ]
 		]);
 	</script>
 
@@ -418,5 +417,39 @@
     </ul>
   </div><!-- /content -->
 </div>
+
+<div data-nstest-role="page" id="list-last-visible-item-border">
+	<div data-nstest-role="content">
+		<ul data-nstest-role="listview">
+			<li class="listitem"><a href="index.html">Adam Kinkaid</a></li>
+			<li class="listitem"><a href="index.html">Alex Wickerham</a></li>
+			<li class="listitem ui-screen-hidden"><a href="index.html">Bob Cabot</a></li>
+			<li id="lastitem"><a href="index.html">Caleb Booth</a></li>
+			<li class="listitem ui-screen-hidden"><a href="index.html">Christopher Adams</a></li>
+		</ul>
+	</div><!-- /content -->
+</div>
+
+<div data-nstest-role="page" id="list-inside-collapsible-content">
+	<div data-nstest-role="content">
+		<div data-nstest-role="collapsible" data-nstest-content-theme="c">
+			<h1>Heading</h1>
+			<ul data-nstest-role="listview">
+				<li><a href="index.html">Adam Kinkaid</a></li>
+				<li><a href="index.html">Alex Wickerham</a></li>
+				<li id="noninsetlastli"><a href="index.html">Caleb Booth</a></li>
+			</ul>
+		</div>
+		<div data-nstest-role="collapsible" data-nstest-content-theme="c">
+			<h1>Heading</h1>
+			<ul data-nstest-role="listview" data-nstest-inset="true">
+				<li><a href="index.html">Adam Kinkaid</a></li>
+				<li><a href="index.html">Alex Wickerham</a></li>
+				<li id="insetlastli"><a href="index.html">Caleb Booth</a></li>
+			</ul>
+		</div>	 
+  </div><!-- /content -->
+</div>
+
 </body>
 </html>

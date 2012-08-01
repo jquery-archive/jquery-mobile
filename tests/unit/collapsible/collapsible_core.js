@@ -6,7 +6,7 @@
 (function( $ ){
 	module( "Collapsible section", {});
 
-	asyncTest( "The page should enhanced correctly", function(){
+	asyncTest( "The page should be enhanced correctly", function(){
 		$.testHelper.pageSequence([
 			function(){
 				$.testHelper.openPage( "#basic-collapsible-test" );
@@ -44,7 +44,7 @@
 
 	module( "Collapsible set", {});
 
-	asyncTest( "The page should enhanced correctly", function(){
+	asyncTest( "The page should be enhanced correctly", function(){
 		$.testHelper.pageSequence([
 			function(){
 				$.testHelper.openPage( "#basic-collapsible-set-test" );
@@ -178,6 +178,22 @@
 		]);
 	});
 
+	asyncTest( "Collapsible Set", function(){
+		$.testHelper.pageSequence([
+			function(){
+				$.testHelper.openPage( "#collapsible-set-with-legends" );
+			},
+
+			function() {
+				var collapsibles = $.mobile.activePage.find( ".ui-collapsible-heading" );
+				ok( !collapsibles.eq(0).find( ".ui-btn" ).is( ".ui-corner-bottom" ), "First collapsible should NOT have class ui-corner-bottom");
+				ok( !collapsibles.eq(1).find( ".ui-btn" ).is( ".ui-corner-bottom,.ui-corner-top" ), "Middle collapsible should NOT have class ui-corner-top or ui-corner-bottom");
+				ok( !collapsibles.eq(2).find( ".ui-btn" ).is( ".ui-corner-top" ), "Last collapsible should NOT have class ui-corner-top");
+				start();
+			}
+		]);
+	});
+	
 	module( "Icons", {});
 
 	asyncTest( "Collapsible with custom icons", function(){
@@ -263,6 +279,5 @@
 			}
 		]);
 	});
-
-
+	
 })( jQuery );

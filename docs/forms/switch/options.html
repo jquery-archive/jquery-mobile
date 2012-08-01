@@ -6,7 +6,6 @@
 	<title>jQuery Mobile Docs - Slider options</title>
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
 	<link rel="stylesheet" href="../../_assets/css/jqm-docs.css"/>
-	<script src="../../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
 	<script src="../../../js/jquery.js"></script>
 	<script src="../../../docs/_assets/js/jqm-docs.js"></script>
 	<script src="../../../js/"></script>
@@ -39,11 +38,11 @@
 			<p>The slider plugin has the following options:</p>
 
 		<dl>
-			<dt><code>disabled</code> <em>string</em></dt>
+			<dt><code>disabled</code> <em>boolean</em></dt>
 			<dd>
 				<p class="default">default: false</p>
 				<p>Sets the default state of the slider to disabled when "true".</p>		
-				<pre><code>$('.selector').slider(<strong>{ disabled: "true" }</strong>);</code></pre>
+				<pre><code>$('.selector').slider(<strong>{ disabled: true }</strong>);</code></pre>
 			</dd>
 			
 			<dt><code>initSelector</code> <em>CSS selector string</em></dt>
@@ -59,7 +58,7 @@
 			<dd>
 				<p class="default">default: false</p>
 				<p>Sets the size of the element to a more compact, <a href="../forms-all-mini.html">mini version</a>. This option is also exposed as a data attribute: <code>data-mini=&quot;true&quot;</code></p>		
-				<pre><code>$('.selector').slider(<strong>{ mini: "true" }</strong>);</code></pre>
+				<pre><code>$('.selector').slider(<strong>{ mini: true }</strong>);</code></pre>
 			</dd>
 						
 			<dt><code>theme</code> <em>string</em></dt>
@@ -113,7 +112,7 @@
 </div><!-- /content -->
 
 <div data-role="footer" class="footer-docs" data-theme="c">
-		<p>&copy; 2011-12 The jQuery Foundation</p>
+		<p>&copy; 2012 jQuery Foundation and other contributors</p>
 </div>
 	
 </div><!-- /page -->

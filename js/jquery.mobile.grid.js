@@ -15,9 +15,9 @@ $.fn.grid = function( options ) {
 		var $this = $( this ),
 			o = $.extend({
 				grid: null
-			},options),
+			}, options ),
 			$kids = $this.children(),
-			gridCols = {solo:1, a:2, b:3, c:4, d:5},
+			gridCols = { solo:1, a:2, b:3, c:4, d:5 },
 			grid = o.grid,
 			iterator;
 
@@ -30,6 +30,7 @@ $.fn.grid = function( options ) {
 					}
 				} else {
 					grid = "a";
+					$this.addClass( "ui-grid-duo" );
 				}
 			}
 			iterator = gridCols[grid];

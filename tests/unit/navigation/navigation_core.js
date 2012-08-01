@@ -18,28 +18,8 @@
 			$.mobile.changePage = changePageFn;
 			document.title = originalTitle;
 
-			var pageReset = function( hash ) {
-				hash = hash || "";
-
-				stop();
-
-				$(document).one( "pagechange", function() {
-					start();
-				});
-
-				location.hash = "#" + hash;
-			};
-
-			// force the page reset for hash based tests
-			if ( location.hash && !$.support.pushState ) {
-				pageReset();
-			}
-
-			// force the page reset for all pushstate tests
-			if ( $.support.pushState ) {
-				pageReset( homeWithSearch );
-			}
-
+			// fix the hash before each test
+			$.testHelper.navReset( homeWithSearch );
 
 			$.mobile.urlHistory.stack = [];
 			$.mobile.urlHistory.activeIndex = 0;

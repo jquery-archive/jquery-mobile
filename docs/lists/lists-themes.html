@@ -24,7 +24,7 @@
 	<div data-role="content" class="ui-body">
 		<div class="content-primary">	
 
-		<p>All the standard button swatches can be applied to lists. A list inherits its theme swatch from its parent page/content container. So the theme swatch defaults to "c" (silver in the default theme), if nothing else is set to the surrounding page/content containers. List dividers are styled with bar swatch "b" by default (blue in the default theme). The default button swatch for count bubbles is "c" (silver in the default theme).</p>
+		<p>All the standard button swatches can be applied to lists. A list inherits its theme swatch from its parent page/content container. So the theme swatch defaults to "c" (silver in the default theme), if nothing else is set to the surrounding page/content containers. List dividers and split buttons are styled with bar swatch "b" by default (blue in the default theme). The default button swatch for count bubbles is "c" (silver in the default theme).</p>
 		
 		<p>Below is a list which inherits the default "c" content swatch and uses the default swatches for the list divider and the count bubbles.</p>
 		
@@ -39,7 +39,7 @@
 		</ul>
 		
 		<h2>Theming list items</h2>
-		<p>The list item color scheme can be changed to any button color theme swatch by adding the <code> data-theme</code> attribute to the list, and setting the letter theme swatch. Here is the same list above with the &quot;a&quot; swatch applied. </p>
+		<p>The list item color scheme can be changed to any button color theme swatch by adding the <code> data-theme</code> attribute to the list, and setting the letter theme swatch. Here is the same list as above with the swatch &quot;a&quot; applied. </p>
 		
 <code>
 &lt;ul data-role=&quot;listview&quot; data-inset=&quot;true&quot; data-theme=&quot;a&quot;&gt;
@@ -206,7 +206,7 @@
 			</li>
 		</ul>
 
-		<p>The icon for the split theme can set at the list level by adding the <code>data-split-icon</code> to the list and specifying a <a href="../buttons/buttons-icons.html">standard icon</a>. This attribute can also be added to individual split inside list items by adding a <code> data-icon</code> attribute to specific links (see second list item).</p>
+		<p>The icon for the split can be set at the list level by adding the <code>data-split-icon</code> to the list and specifying a <a href="../buttons/buttons-icons.html">standard icon</a>. The icon can also be set to an individual split by adding a <code>data-icon</code> attribute to specific list items (see second list item).</p>
 		
 <code>
 &lt;ul data-role=&quot;listview&quot; data-inset=&quot;true&quot; data-split-theme=&quot;d&quot; data-split-icon=&quot;delete&quot;&gt;
@@ -220,12 +220,12 @@
 			</a>
 			<a href="index.html">Purchase album</a>
 		</li>
-		<li><a href="index.html">
+		<li data-icon="alert"><a href="index.html">
 			<img src="images/album-hc.jpg" />
 			<h3>Warning</h3>
 			<p>Hot Chip</p>
 			</a>
-			<a href="index.html">Purchase album</a>
+			<a href="index.html" data-theme="e">Purchase album</a>
 		</li>
 	</ul>
 
@@ -233,35 +233,35 @@
 		
 		<h2>Examples of all basic list swatches</h2>
 		
-		<p><strong>A</strong> swatch</p>
+		<p>Swatch <strong>"a"</strong> on listview</p>
 		<ul data-role="listview" data-inset="true" data-theme="a">
 			<li><a href="index.html">Inbox <span class="ui-li-count">12</span></a></li>
 			<li><a href="index.html">Outbox <span class="ui-li-count">0</span></a></li>
 			<li><a href="index.html">Trash <span class="ui-li-count">62</span></a></li>
 		</ul>
 		
-		<p><strong>B</strong> swatch</p>
+		<p>Swatch <strong>"b"</strong> on listview</p>
 		<ul data-role="listview" data-inset="true" data-theme="b">
 			<li><a href="index.html">Inbox <span class="ui-li-count">12</span></a></li>
 			<li><a href="index.html">Outbox <span class="ui-li-count">0</span></a></li>
 			<li><a href="index.html">Trash <span class="ui-li-count">62</span></a></li>
 		</ul>
 		
-		<p><strong>C</strong> swatch</p>
+		<p>Swatch <strong>"c"</strong> on listview</p>
 		<ul data-role="listview" data-inset="true" data-theme="c">
 			<li><a href="index.html">Inbox <span class="ui-li-count">12</span></a></li>
 			<li><a href="index.html">Outbox <span class="ui-li-count">0</span></a></li>
 			<li><a href="index.html">Trash <span class="ui-li-count">62</span></a></li>
 		</ul>
 		
-		<p><strong>D</strong> swatch</p>
+		<p>Swatch <strong>"d"</strong> on listview</p>
 		<ul data-role="listview" data-inset="true" data-theme="d">
 			<li><a href="index.html">Inbox <span class="ui-li-count">12</span></a></li>
 			<li><a href="index.html">Outbox <span class="ui-li-count">0</span></a></li>
 			<li><a href="index.html">Trash <span class="ui-li-count">62</span></a></li>
 		</ul>
 		
-		<p><strong>E</strong> swatch</p>
+		<p>Swatch <strong>"e"</strong> on listview</p>
 		<ul data-role="listview" data-inset="true" data-theme="e">
 			<li><a href="index.html">Inbox <span class="ui-li-count">12</span></a></li>
 			<li><a href="index.html">Outbox <span class="ui-li-count">0</span></a></li>
@@ -279,7 +279,7 @@
 
 					<ul data-role="listview" data-theme="c" data-dividertheme="d">
 
-						<li data-role="list-divider">List views</li>
+						<li data-role="list-divider">Listviews</li>
 						<li><a href="docs-lists.html">List basics &amp; API</a></li>
 						<li><a href="lists-ul.html">Basic linked list</a></li>
 						<li><a href="lists-nested.html">Nested list</a></li>
@@ -292,6 +292,8 @@
 						<li><a href="lists-thumbnails.html">Thumbnails</a></li>
 						<li><a href="lists-icons.html">Icons</a></li>
 						<li><a href="lists-formatting.html">Content formatting</a></li>
+						<li><a href="lists-inset.html">Inset styled lists</a></li>
+						
 						<li><a href="lists-search.html">Search filter bar</a></li>
 						<li><a href="lists-search-inset.html">Inset search filter bar</a></li>
 						<li><a href="lists-search-with-dividers.html">Search filter bar with dividers</a></li>
@@ -302,7 +304,8 @@
 						<li><a href="lists-forms.html">Lists with forms</a></li>
 						<li><a href="lists-forms-inset.html">Inset lists with forms</a></li>
 
-						<li><a href="lists-inset.html">Inset styled lists</a></li>
+						<li><a href="lists-collapsible.html">Collapsible lists</a></li>
+						
 						<li><a href="lists-performance.html">List performance test</a></li>
 						<li data-theme="a"><a href="lists-themes.html">Theming lists</a></li>
 
@@ -313,7 +316,7 @@
 	</div><!-- /content -->
 
 	<div data-role="footer" class="footer-docs" data-theme="c">
-			<p>&copy; 2011-12 The jQuery Foundation</p>
+			<p>&copy; 2012 jQuery Foundation and other contributors</p>
 	</div>
 
 	</div><!-- /page -->

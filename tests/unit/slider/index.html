@@ -13,7 +13,7 @@
 	<script>
 		$.testHelper.asyncLoad([
 			[
-				"jquery.mobile.forms.slider"
+				"widgets/forms/slider"
 			],
 			[
 				"slider_events.js",
@@ -96,9 +96,26 @@
 		<label id="label-id" for="label-id-slider">Input slider:</label>
 		<input type="range" name="slider" id="label-id-slider" value="25" min="0" max="100"/>
 	</div>
+
+	<div data-role="fieldcontain">
+		<label for="start-stop-events">Input slider:</label>
+		<input type="range" name="slider" id="start-stop-events" value="25" min="0" max="100"/>
+	</div>
+
+	<div data-role="fieldcontain">
+		<label for="mouseup-refresh">Input slider:</label>
+		<input type="range" name="slider" id="mouseup-refresh" value="25" min="0" max="100"/>
+	</div>
+
+  <div data-role="fieldcontain">
+    <label for="remove-events-slider">Input slider:</label>
+    <input type="range" name="remove-events-slider" id="remove-events-slider" value="25" min="0" max="100"/>
+  </div>
 </div>
 
 <div id="enhancetest">
 	<input type="range" name="slider-enhancetest" id="range-slider-enhancetest" value="75" min="0" max="100"  data-nstest-theme="b" data-nstest-track-theme="a" />
 </div>
+
+
 </html>

@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.core.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobile.widget" ], function( $, __version__ ) {
+define( [ "jquery", "text!../version.txt" ], function( $, __version__ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
@@ -125,12 +125,12 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 			// prevent scrollstart and scrollstop events
 			$.event.special.scrollstart.enabled = false;
 
-			setTimeout(function() {
+			setTimeout( function() {
 				window.scrollTo( 0, ypos );
 				$( document ).trigger( "silentscroll", { x: 0, y: ypos });
 			}, 20 );
 
-			setTimeout(function() {
+			setTimeout( function() {
 				$.event.special.scrollstart.enabled = true;
 			}, 150 );
 		},
@@ -185,8 +185,8 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 		// doing a similar parent node traversal to the one found in the inherited theme code above
 		closestPageData: function( $target ) {
 			return $target
-				.closest(':jqmData(role="page"), :jqmData(role="dialog")')
-				.data("page");
+				.closest( ':jqmData(role="page"), :jqmData(role="dialog")' )
+				.data( "page" );
 		},
 
 		enhanceable: function( $set ) {
@@ -198,7 +198,7 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 		},
 
 		haveParents: function( $set, attr ) {
-			if( !$.mobile.ignoreContentEnabled ){
+			if ( !$.mobile.ignoreContentEnabled ) {
 				return $set;
 			}
 
@@ -228,6 +228,12 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 			}
 
 			return $newSet;
+		},
+
+		getScreenHeight: function() {
+			// Native innerHeight returns more accurate value for this across platforms,
+			// jQuery version is here as a normalized fallback for platforms like Symbian
+			return window.innerHeight || $( window ).height();
 		}
 	}, $.mobile );
 
@@ -235,18 +241,25 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 	// ensures all data is set and retrieved using jQuery Mobile's data namespace
 	$.fn.jqmData = function( prop, value ) {
 		var result;
-		if ( typeof prop != "undefined" ) {
+		if ( typeof prop !== "undefined" ) {
 			if ( prop ) {
 				prop = $.mobile.nsNormalize( prop );
 			}
-			result = this.data.apply( this, arguments.length < 2 ? [ prop ] : [ prop, value ] );
+
+			// undefined is permitted as an explicit input for the second param
+			// in this case it returns the value and does not set it to undefined
+			if( arguments.length < 2 || value === undefined ){
+				result = this.data( prop );
+			} else {
+				result = this.data( prop, value );
+			}
 		}
 		return result;
 	};
 
 	$.jqmData = function( elem, prop, value ) {
 		var result;
-		if ( typeof prop != "undefined" ) {
+		if ( typeof prop !== "undefined" ) {
 			result = $.data( elem, prop ? $.mobile.nsNormalize( prop ) : prop, value );
 		}
 		return result;
@@ -267,25 +280,25 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 	$.removeWithDependents = function( elem ) {
 		var $elem = $( elem );
 
-		( $elem.jqmData('dependents') || $() ).remove();
+		( $elem.jqmData( 'dependents' ) || $() ).remove();
 		$elem.remove();
 	};
 
 	$.fn.addDependents = function( newDependents ) {
-		$.addDependents( $(this), newDependents );
+		$.addDependents( $( this ), newDependents );
 	};
 
 	$.addDependents = function( elem, newDependents ) {
-		var dependents = $(elem).jqmData( 'dependents' ) || $();
+		var dependents = $( elem ).jqmData( 'dependents' ) || $();
 
-		$(elem).jqmData( 'dependents', $.merge(dependents, newDependents) );
+		$( elem ).jqmData( 'dependents', $.merge( dependents, newDependents ) );
 	};
 
 	// note that this helper doesn't attempt to handle the callback
 	// or setting of an html elements text, its only purpose is
 	// to return the html encoded version of the text in all cases. (thus the name)
 	$.fn.getEncodedText = function() {
-		return $( "<div/>" ).text( $(this).text() ).html();
+		return $( "<div/>" ).text( $( this ).text() ).html();
 	};
 
 	// fluent helper function for the mobile namespaced equivalent

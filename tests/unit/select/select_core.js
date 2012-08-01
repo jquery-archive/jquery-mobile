@@ -177,6 +177,30 @@
 		], 500);
 	});
 
+	asyncTest( "focus is transferred to a menu item when the menu is opened",function() {
+		var select, menu, button;
+
+		expect( 1 );
+
+		$.testHelper.sequence([
+			function() {
+				select = $( "#select-choice-menu-focus-test" );
+				menu = $( "#select-choice-menu-focus-test-menu" );
+				button = select.find( "a" );
+				button.trigger( "click" );
+			},
+
+			function() {
+				ok( $( document.activeElement ).parents( "#select-choice-menu-focus-test-menu" ).length > 0, "item in open select menu (" + menu.length + ") has focus" );
+				$(".ui-popup-screen:not(.ui-screen-hidden)").trigger( "click" );
+			},
+
+			function() {
+				start();
+			}
+		], 5000);
+	});
+
 	asyncTest( "using custom refocuses the button after close", function() {
 		var select, button, triggered = false;
 
@@ -204,7 +228,7 @@
 				ok(triggered, "focus is triggered");
 				start();
 			}
-		], 5000);
+		], 1500);
 	});
 
 	asyncTest( "selected items are highlighted", function(){

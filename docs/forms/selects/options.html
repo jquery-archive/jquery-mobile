@@ -6,7 +6,6 @@
 	<title>jQuery Mobile Docs - Select options</title>
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
 	<link rel="stylesheet" href="../../_assets/css/jqm-docs.css"/>
-	<script src="../../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
 	<script src="../../../js/jquery.js"></script>
 	<script src="../../../docs/_assets/js/jqm-docs.js"></script>
 	<script src="../../../js/"></script>
@@ -45,7 +44,7 @@
 			<dd>
 				<p class="default">default: true</p>
 				<p>Applies the theme button border-radius to the select button if set to true. This option is also exposed as a data attribute: <code>data-corners=&quot;false&quot;</code></p>
-				<pre><code>$('select').selectmenu(<strong>{ corners: "false" }</strong>);</code></pre>
+				<pre><code>$('select').selectmenu(<strong>{ corners: false }</strong>);</code></pre>
 			</dd>			
 			<dt><code>icon</code> <em>string</em></dt>
 			<dd>
@@ -68,7 +67,7 @@
 			<dd>
 				<p class="default">default: true</p>
 				<p>Applies the theme shadow to the select button if set to true. This option is also exposed as a data attribute: <code>data-iconshadow=&quot;false&quot;</code></p>
-				<pre><code>$('select').selectmenu(<strong>{ iconshadow: "false" }</strong>);</code></pre>
+				<pre><code>$('select').selectmenu(<strong>{ iconshadow: false }</strong>);</code></pre>
 			</dd>
 			
 			<dt><code>initSelector</code> <em>CSS selector string</em></dt>
@@ -85,26 +84,26 @@
 			<dd>
 				<p class="default">default: null (false)</p>
 				<p>If set to true, this will make the select button act like an inline button so the width is determined by the button's text. By default, this is null (false) so the select button is full width, regardless of the feedback content. Possible values: true, false. This option is also exposed as a data attribute: <code>data-inline=&quot;true&quot;</code></p>
-				<pre><code>$('select').selectmenu(<strong>{ inline: "true" }</strong>);</code></pre>
+				<pre><code>$('select').selectmenu(<strong>{ inline: true }</strong>);</code></pre>
 			</dd>
 			
 			<dt><code>mini</code> <em>boolean</em></dt>
 			<dd>
 				<p class="default">default: false</p>
 				<p>Sets the size of the element to a more compact, <a href="../forms-all-mini.html">mini version</a>. This option is also exposed as a data attribute: <code>data-mini=&quot;true&quot;</code></p>		
-				<pre><code>$('select').selectmenu(<strong>{ mini: "true" }</strong>);</code></pre>
+				<pre><code>$('select').selectmenu(<strong>{ mini: true }</strong>);</code></pre>
 				
 			<dt><code>nativeMenu</code> <em>boolean</em></dt>
 			<dd>
 				<p class="default">default: true</p>
 				<p>When set to true, clicking the custom-styled select menu will open the native select menu which is best for performance. If set to false, the custom select menu style will be used instead of the native menu. This option is also exposed as a data attribute: <code>data-native-menu=&quot;false&quot;</code></p>
-				<pre><code>$('select').selectmenu(<strong>{ nativeMenu: "false" }</strong>);</code></pre>
+				<pre><code>$('select').selectmenu(<strong>{ nativeMenu: false }</strong>);</code></pre>
 			</dd>
 			
 			<dt><code>overlayTheme</code> <em>string</em></dt>
 			<dd>
-				<p class="default">default: a</p>
-				<p>Sets the color of the overlay layer for the dialog-based custom select menus and the outer border of the smaller custom menus. It accepts a single letter from a-z that maps to the swatches included in your theme. By default, the content block colors for swatch A will be used for the overlays. This option is also exposed as a data attribute: <code>ui-body-d</code></p>
+				<p class="default">default: "a"</p>
+				<p>Sets the color of the overlay layer for the dialog-based custom select menus and the outer border of the smaller custom menus. It accepts a single letter from a-z that maps to the swatches included in your theme. By default, the content block colors for swatch "a" will be used for the overlays. This option is also exposed as a data attribute: <code>ui-body-d</code></p>
 				<pre><code>$('select').selectmenu(<strong>{ overlayTheme: "d" }</strong>);</code></pre>
 			</dd>
 			
@@ -120,7 +119,7 @@
 			<dd>
 				<p class="default">default: true</p>
 				<p>Applies the drop shadow style to the select button if set to true. This option is also exposed as a data attribute: <code>data-shadow=&quot;false&quot;</code></p>
-				<pre><code>$('select').selectmenu(<strong>{ shadow: "false" }</strong>);</code></pre>
+				<pre><code>$('select').selectmenu(<strong>{ shadow: false }</strong>);</code></pre>
 			</dd>
 			
 			<dt><code>theme</code> <em>string</em></dt>
@@ -166,7 +165,7 @@
 </div><!-- /content -->
 
 <div data-role="footer" class="footer-docs" data-theme="c">
-		<p>&copy; 2011-12 The jQuery Foundation</p>
+		<p>&copy; 2012 jQuery Foundation and other contributors</p>
 </div>
 	
 </div><!-- /page -->
