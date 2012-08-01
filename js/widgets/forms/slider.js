@@ -139,10 +139,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 		label.addClass( "ui-slider" );
 
-		control.data( "widget", this );
 		// monitor the input for updated values
 		control.addClass( cType === "input" ? "ui-slider-input" : "ui-slider-switch" )
-			.bind( this._controlEvents );
+			.bind( $.proxyMany(this._controlEvents, this) );
 
 		slider.bind( "vmousedown", $.proxy(this._sliderEvents.vmousedown, this))
 			.bind( "vclick", false );
@@ -172,15 +171,13 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			});
 		}
 
-		this.handle.data( "widget", this );
-		this.handle.bind( this._handleEvents );
-
+		this.handle.bind( $.proxyMany( this._handleEvents, this ));
 		this.refresh( undefined, undefined, true );
 	},
 
 	_controlEvents: {
 		change: function( event ) {
-			var self = $( event.target ).data( "widget" );
+			var self = this;
 
 			// if the user dragged the handle, the "change" event was triggered from inside refresh(); don't call refresh() again
 			if ( !self.mouseMoved ) {
@@ -189,12 +186,12 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		},
 
 		keyup: function( event ) { // necessary?
-			var self = $( event.target ).data( "widget" );
+			var self = this;
 			self.refresh( self._value(), true, true );
 		},
 
 		blur: function( event ) {
-			var self = $( event.target ).data( "widget" );
+			var self = this;
 			self.refresh( self._value(), true );
 		},
 
@@ -202,20 +199,20 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		// range/number inputs doesn't trigger a change until the field is
 		// blurred. Here we check thif the value has changed and refresh
 		vmouseup: function( event ) {
-			$( event.target ).data( "widget" )._checkedRefresh();
+			this._checkedRefresh();
 		}
 	},
 
 	_handleEvents: {
 		// NOTE force focus on handle
-		vmousedown: function() {
-			$( this ).focus();
+		vmousedown: function( event ) {
+			$( event.target ).focus();
 		},
 
 		vclick: false,
 
 		keydown: function( event ) {
-			var self = $(event.target).data( "widget" ),
+			var self = this,
 				index = self._value();
 
 			if ( self.options.disabled ) {
@@ -263,7 +260,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		}, // remove active mark
 
 		keyup: function( event ) {
-			var self = self = $(event.target).data( "widget" );
+			var self = this;
 
 			if ( self._keySliding ) {
 				self._keySliding = false;

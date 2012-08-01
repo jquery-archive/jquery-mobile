@@ -237,6 +237,16 @@ define( [ "jquery", "text!../version.txt" ], function( $, __version__ ) {
 		}
 	}, $.mobile );
 
+	$.proxyMany = function( obj, context ){
+		var newObj = {};
+
+		for( name in obj ) {
+			newObj[name] = $.proxy( obj[name], context );
+		}
+
+		return newObj;
+	};
+
 	// Mobile version of data and removeData and hasData methods
 	// ensures all data is set and retrieved using jQuery Mobile's data namespace
 	$.fn.jqmData = function( prop, value ) {
