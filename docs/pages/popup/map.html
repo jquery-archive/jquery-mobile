@@ -12,15 +12,6 @@
 				mapTypeId: google.maps.MapTypeId.ROADMAP
 			}
 			var map = new google.maps.Map( document.getElementById( "map_canvas" ), myOptions );
-			var marker = new google.maps.Marker({
-				position: myLatlng, 
-				map: map,
-				title: "University of Westminster"
-			});
-			// center the map and the marker when the size of the canvas changes
-			google.maps.event.addListener( map, 'bounds_changed', function() {
-				map.panTo( myLatlng );
-			});
 		}
 	</script>
 	<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
