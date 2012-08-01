@@ -177,22 +177,18 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 	_controlEvents: {
 		change: function( event ) {
-			var self = this;
-
 			// if the user dragged the handle, the "change" event was triggered from inside refresh(); don't call refresh() again
-			if ( !self.mouseMoved ) {
-				self.refresh( self._value(), true );
+			if ( !this.mouseMoved ) {
+				this.refresh( this._value(), true );
 			}
 		},
 
 		keyup: function( event ) { // necessary?
-			var self = this;
-			self.refresh( self._value(), true, true );
+			this.refresh( this._value(), true, true );
 		},
 
 		blur: function( event ) {
-			var self = this;
-			self.refresh( self._value(), true );
+			this.refresh( this._value(), true );
 		},
 
 		// it appears the clicking the up and down buttons in chrome on
@@ -212,10 +208,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		vclick: false,
 
 		keydown: function( event ) {
-			var self = this,
-				index = self._value();
+			var index = this._value();
 
-			if ( self.options.disabled ) {
+			if ( this.options.disabled ) {
 				return;
 			}
 
@@ -231,9 +226,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			 case $.mobile.keyCode.LEFT:
 				event.preventDefault();
 
-				if ( !self._keySliding ) {
-					self._keySliding = true;
-					$( this ).addClass( "ui-state-active" );
+				if ( !this._keySliding ) {
+					this._keySliding = true;
+					$( event.target ).addClass( "ui-state-active" );
 				}
 				break;
 			}
@@ -241,30 +236,28 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			// move the slider according to the keypress
 			switch ( event.keyCode ) {
 			 case $.mobile.keyCode.HOME:
-				self.refresh( self.min );
+				this.refresh( this.min );
 				break;
 			 case $.mobile.keyCode.END:
-				self.refresh( self.max );
+				this.refresh( this.max );
 				break;
 			 case $.mobile.keyCode.PAGE_UP:
 			 case $.mobile.keyCode.UP:
 			 case $.mobile.keyCode.RIGHT:
-				self.refresh( index + self.step );
+				this.refresh( index + this.step );
 				break;
 			 case $.mobile.keyCode.PAGE_DOWN:
 			 case $.mobile.keyCode.DOWN:
 			 case $.mobile.keyCode.LEFT:
-				self.refresh( index - self.step );
+				this.refresh( index - this.step );
 				break;
 			}
 		}, // remove active mark
 
 		keyup: function( event ) {
-			var self = this;
-
-			if ( self._keySliding ) {
-				self._keySliding = false;
-				$( this ).removeClass( "ui-state-active" );
+			if ( this._keySliding ) {
+				this._keySliding = false;
+				$( event.target ).removeClass( "ui-state-active" );
 			}
 		}
 	},
