@@ -2,7 +2,6 @@ Vagrant::Config.run do |config|
   config.vm.box = "base"
   config.vm.network(:hostonly, "33.33.33.10")
   config.vm.forward_port(80, 4567)
-  config.vm.boot_mode = :gui
 
   # Share the WWW folder as the main folder for the web VM using NFS
   config.vm.share_folder("v-root", "/vagrant", ".", :nfs => true)
