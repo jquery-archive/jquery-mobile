@@ -152,12 +152,6 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				self.refresh( val(), true );
 			});
 
-		// We have to instantiate a new function object for the unbind to work properly
-		// since the method itself is defined in the prototype (causing it to unbind everything)
-		$( document ).bind( "vmousemove", this._unbindDocumentDrag = function( event ) {
-			self._preventDocumentDrag( event );
-		});
-
 		// it appears the clicking the up and down buttons in chrome on
 		// range/number inputs doesn't trigger a change until the field is
 		// blurred. Here we check thif the value has changed and refresh
@@ -184,36 +178,16 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		})
 		.bind( "vclick", false );
 
-		this._sliderMouseUp = function() {
-			if ( self.dragging ) {
-				self.dragging = false;
+		// We have to instantiate a new function object for the unbind to work properly
+		// since the method itself is defined in the prototype (causing it to unbind everything)
+		$( document ).bind( "vmousemove", this._unbindDocumentDrag = function( event ) {
+			self._preventDocumentDrag( event );
+		});
 
-				if ( cType === "select") {
-					// make the handle move with a smooth transition
-					handle.addClass( "ui-slider-handle-snapping" );
+		slider.add( document ).bind( "vmouseup", this._unbindSliderMouseUp = function( event ) {
+			self._sliderMouseUp( event );
+		});
 
-					if ( self.mouseMoved ) {
-						// this is a drag, change the value only if user dragged enough
-						if ( self.userModified ) {
-						    self.refresh( self.beforeStart === 0 ? 1 : 0 );
-						}
-						else {
-						    self.refresh( self.beforeStart );
-						}
-					}
-					else {
-						// this is just a click, change the value
-						self.refresh( self.beforeStart === 0 ? 1 : 0 );
-					}
-				}
-
-				self.mouseMoved = false;
-				self._trigger( "stop" );
-				return false;
-			}
-		};
-
-		slider.add( document ).bind( "vmouseup", this._sliderMouseUp );
 		slider.insertAfter( control );
 
 		// Only add focus class to toggle switch, sliders get it automatically from ui-btn
@@ -295,6 +269,35 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		this.refresh( undefined, undefined, true );
 	},
 
+	_sliderMouseUp: function() {
+		if ( this.dragging ) {
+			this.dragging = false;
+
+			if ( this.type === "select") {
+				// make the handle move with a smooth transition
+				this.handle.addClass( "ui-slider-handle-snapping" );
+
+				if ( this.mouseMoved ) {
+					// this is a drag, change the value only if user dragged enough
+					if ( this.userModified ) {
+						this.refresh( this.beforeStart === 0 ? 1 : 0 );
+					}
+						else {
+						    this.refresh( this.beforeStart );
+						}
+					}
+					else {
+						// this is just a click, change the value
+						this.refresh( this.beforeStart === 0 ? 1 : 0 );
+					}
+				}
+
+				this.mouseMoved = false;
+				this._trigger( "stop" );
+				return false;
+			}
+	},
+
 	_preventDocumentDrag: function( event ) {
 			// NOTE: we don't do this in refresh because we still want to
 			//       support programmatic alteration of disabled inputs
@@ -329,7 +332,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 	_destroy: function() {
 		$( document ).unbind( "vmousemove", this._unbindDocumentDrag );
-		$( document ).unbind( "vmouseup", this._sliderMouseUp );
+		$( document ).unbind( "vmouseup", this._unbindSliderMouseUp );
 	},
 
 	refresh: function( val, isfromControl, preventInputUpdate ) {
