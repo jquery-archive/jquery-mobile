@@ -295,12 +295,10 @@ $.widget( "mobile.slider", $.mobile.widget, {
 						// this is a drag, change the value only if user dragged enough
 						if ( this.userModified ) {
 							this.refresh( this.beforeStart === 0 ? 1 : 0 );
-						}
-						else {
+						} else {
 							this.refresh( this.beforeStart );
 						}
-					}
-					else {
+					} else {
 						// this is just a click, change the value
 						this.refresh( this.beforeStart === 0 ? 1 : 0 );
 					}
