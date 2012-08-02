@@ -4,7 +4,6 @@
 .ui-bar .ui-controlgroup { margin: 0 5px; }
 
 .ui-controlgroup-label { font-size: 16px; line-height: 1.4; font-weight: normal; margin: 0 0 .4em; }
-.ui-controlgroup-controls { display: block; width: 100%;}
 .ui-controlgroup li { list-style: none; }
 .ui-controlgroup-vertical .ui-btn,
 .ui-controlgroup-vertical .ui-checkbox, .ui-controlgroup-vertical .ui-radio { margin: 0; border-bottom-width: 0; }
@@ -20,7 +19,7 @@
 .ui-controlgroup-horizontal .ui-controlgroup-controls:before,
 .ui-controlgroup-horizontal .ui-controlgroup-controls:after { content: ""; display: table; }
 .ui-controlgroup-horizontal .ui-controlgroup-controls:after { clear: both; }
-.ui-controlgroup-horizontal .ui-controlgroup-controls { zoom: 1; }
+.ui-controlgroup-horizontal .ui-controlgroup-controls { display: inline-block; zoom: 1; }
 .ui-controlgroup-horizontal .ui-btn-inner { text-align: center; }
 .ui-controlgroup-horizontal.ui-mini .ui-btn-inner { height: 16px; line-height: 16px; }
 .ui-controlgroup-horizontal .ui-btn, .ui-controlgroup-horizontal .ui-select,
