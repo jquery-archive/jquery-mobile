@@ -45,8 +45,6 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			label = $label.attr( "id", labelID ),
 
-			val = $.proxy( this._value, this ),
-
 			min =  cType === "input" ? parseFloat( control.attr( "min" ) ) : 0,
 
 			max =  cType === "input" ? parseFloat( control.attr( "max" ) ) : control.find( "option" ).length-1,
@@ -56,7 +54,6 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			inlineClass = ( this.options.inline || control.jqmData( "inline" ) === true ) ? " ui-slider-inline" : "",
 
 			miniClass = ( this.options.mini || control.jqmData( "mini" ) ) ? " ui-slider-mini" : "",
-
 
 			domHandle = document.createElement( 'a' ),
 			handle = $( domHandle ),
