@@ -158,7 +158,7 @@ define( [ "jquery",
 				_isOpen: false,
 				_tolerance: null,
 				_resizeData: null,
-				_orientationchangeInProgress: false,
+				_orientationchangeInProgress: false
 			});
 
 			$.each( this.options, function( key, value ) {
