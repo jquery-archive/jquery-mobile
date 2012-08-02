@@ -180,36 +180,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		})
 		.bind( "vclick", false );
 
-		this._sliderMouseUp = function() {
-			if ( self.dragging ) {
-				self.dragging = false;
-
-				if ( cType === "select") {
-					// make the handle move with a smooth transition
-					handle.addClass( "ui-slider-handle-snapping" );
-
-					if ( self.mouseMoved ) {
-						// this is a drag, change the value only if user dragged enough
-						if ( self.userModified ) {
-						    self.refresh( self.beforeStart === 0 ? 1 : 0 );
-						}
-						else {
-						    self.refresh( self.beforeStart );
-						}
-					}
-					else {
-						// this is just a click, change the value
-						self.refresh( self.beforeStart === 0 ? 1 : 0 );
-					}
-				}
-
-				self.mouseMoved = false;
-				self._trigger( "stop" );
-				return false;
-			}
-		};
-
-		slider.add( document ).bind( "vmouseup", this._sliderMouseUp );
+		this._on( slider.add( document ), { "vmouseup": "_sliderMouseUp" } );
 		slider.insertAfter( control );
 
 		// Only add focus class to toggle switch, sliders get it automatically from ui-btn
@@ -291,6 +262,35 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		this.refresh( undefined, undefined, true );
 	},
 
+	_sliderMouseUp: function() {
+		if ( this.dragging ) {
+			this.dragging = false;
+
+			if ( this._type === "select") {
+				// make the handle move with a smooth transition
+				this.handle.addClass( "ui-slider-handle-snapping" );
+
+				if ( this.mouseMoved ) {
+					// this is a drag, change the value only if user dragged enough
+					if ( this.userModified ) {
+						  this.refresh( this.beforeStart === 0 ? 1 : 0 );
+					}
+					else {
+						  this.refresh( this.beforeStart );
+					}
+				}
+				else {
+					// this is just a click, change the value
+					this.refresh( this.beforeStart === 0 ? 1 : 0 );
+				}
+			}
+
+			this.mouseMoved = false;
+			this._trigger( "stop" );
+			return false;
+		}
+	},
+
 	_preventDocumentDrag: function( event ) {
 		// NOTE: we don't do this in refresh because we still want to
 		//       support programmatic alteration of disabled inputs
@@ -321,10 +321,6 @@ $.widget( "mobile.slider", $.mobile.widget, {
 	_value: function() {
 		return  this._type === "input" ?
 			parseFloat( this.element.val() ) : this.element[0].selectedIndex;
-	},
-
-	_destroy: function() {
-		$( document ).unbind( "vmouseup", this._sliderMouseUp );
 	},
 
 	refresh: function( val, isfromControl, preventInputUpdate ) {
