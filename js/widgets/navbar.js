@@ -44,10 +44,16 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 			}
 		});
 
-		// Buttons in the navbar with ui-state-persist class should regain their active state before page show
-		$navbar.closest( ".ui-page" ).bind( "pagebeforeshow", function() {
-			$navbtns.filter( ".ui-state-persist" ).addClass( $.mobile.activeBtnClass );
+		$.extend( this, {
+			_navbtns: $navbtns
 		});
+
+		this._on( $navbar.closest( ".ui-page" ), { "pagebeforeshow": "_updateActiveClass" } );
+	},
+
+	_updateActiveClass: function() {
+		// Buttons in the navbar with ui-state-persist class should regain their active state before page show
+		this._navbtns.filter( ".ui-stat-persist" ).addClass( $.mobile.activeBtnClass );
 	}
 });
 
