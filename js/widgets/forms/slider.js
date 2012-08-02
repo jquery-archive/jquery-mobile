@@ -362,8 +362,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		var control = this.element, percent,
 			cType = control[0].nodeName.toLowerCase(),
 			isInput = cType === "input",
+			optionElements = isInput ? [] : control.find( "option" ),
 			min =  isInput ? parseFloat( control.attr( "min" ) ) : 0,
-			max = isInput ? parseFloat( control.attr( "max" ) ) : control.find( "option" ).length - 1,
+			max = isInput ? parseFloat( control.attr( "max" ) ) : optionElements.length - 1,
 			step = ( isInput && parseFloat( control.attr( "step" ) ) > 0 ) ? parseFloat( control.attr( "step" ) ) : 1;
 
 		if ( typeof val === "object" ) {
@@ -422,11 +423,11 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 		this.handle.css( "left", percent + "%" );
 
-		this.handle[0].setAttribute( "aria-valuenow", isInput ? newval : control.find( "option" ).eq( newval ).attr( "value" ) );
+		this.handle[0].setAttribute( "aria-valuenow", isInput ? newval : optionElements.eq( newval ).attr( "value" ) );
 
-		this.handle[0].setAttribute( "aria-valuetext", isInput ? newval : control.find( "option" ).eq( newval ).getEncodedText() );
+		this.handle[0].setAttribute( "aria-valuetext", isInput ? newval : optionElements.eq( newval ).getEncodedText() );
 
-		this.handle[0].setAttribute( "title", isInput ? newval : control.find( "option" ).eq( newval ).getEncodedText() );
+		this.handle[0].setAttribute( "title", isInput ? newval : optionElements.eq( newval ).getEncodedText() );
 
 		if ( this.valuebg ) {
 			this.valuebg.css( "width", percent + "%" );
