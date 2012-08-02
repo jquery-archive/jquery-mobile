@@ -105,33 +105,23 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 
 		// Autogrow
 		if ( input.is( "textarea" ) ) {
-			var extraLineHeight = 15,
-				keyupTimeoutBuffer = 100,
+			var keyupTimeoutBuffer = 100,
 				keyupTimeout;
-
-			this._keyup = function() {
-				var scrollHeight = input[ 0 ].scrollHeight,
-					clientHeight = input[ 0 ].clientHeight;
-
-				if ( clientHeight < scrollHeight ) {
-					input.height(scrollHeight + extraLineHeight);
-				}
-			};
 
 			input.keyup(function() {
 				clearTimeout( keyupTimeout );
-				keyupTimeout = setTimeout( self._keyup, keyupTimeoutBuffer );
+				keyupTimeout = setTimeout( $.proxy( self, "_keyup" ), keyupTimeoutBuffer );
 			});
 
 			// binding to pagechange here ensures that for pages loaded via
 			// ajax the height is recalculated without user input
-			$( document ).one( "pagechange", this._keyup );
+			$( document ).one( "pagechange", $.proxy( this, "_keyup" ) );
 
 			// Issue 509: the browser is not providing scrollHeight properly until the styles load
 			if ( $.trim( input.val() ) ) {
 				// bind to the window load to make sure the height is calculated based on BOTH
 				// the DOM and CSS
-				$( window ).load( this._keyup );
+				this._on( window, { load: "_keyup" } );
 			}
 		}
 		if ( input.attr( "disabled" ) ) {
@@ -139,8 +129,15 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		}
 	},
 
-	_destroy: function() {
-		$( window ).unbind( "load", this._keyup );
+	// Used with a textarea to recalculate its height
+	_keyup: function() {
+		var scrollHeight = this.element[ 0 ].scrollHeight,
+			clientHeight = this.element[ 0 ].clientHeight,
+			extraLineHeight = 15;
+
+		if ( clientHeight < scrollHeight ) {
+			this.element.height( scrollHeight + extraLineHeight );
+		}
 	},
 
 	disable: function() {
