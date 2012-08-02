@@ -420,11 +420,12 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		}
 
 		this.handle.css( "left", percent + "%" );
-		this.handle.attr( {
-				"aria-valuenow": cType === "input" ? newval : control.find( "option" ).eq( newval ).attr( "value" ),
-				"aria-valuetext": cType === "input" ? newval : control.find( "option" ).eq( newval ).getEncodedText(),
-				title: cType === "input" ? newval : control.find( "option" ).eq( newval ).getEncodedText()
-			});
+
+		this.handle[0].setAttribute( "aria-valuenow", cType === "input" ? newval : control.find( "option" ).eq( newval ).attr( "value" ) );
+
+		this.handle[0].setAttribute( "aria-valuetext", cType === "input" ? newval : control.find( "option" ).eq( newval ).getEncodedText() );
+
+		this.handle[0].setAttribute( "title", cType === "input" ? newval : control.find( "option" ).eq( newval ).getEncodedText() );
 
 		if ( this.valuebg ) {
 			this.valuebg.css( "width", percent + "%" );
