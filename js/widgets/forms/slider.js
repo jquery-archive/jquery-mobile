@@ -45,9 +45,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			label = $label.attr( "id", labelID ),
 
-			val = function() {
-				return  cType === "input"  ? parseFloat( control.val() ) : control[0].selectedIndex;
-			},
+			val = $.proxy( this._value, this ),
 
 			min =  cType === "input" ? parseFloat( control.attr( "min" ) ) : 0,
 
@@ -84,9 +82,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 					"role": "slider",
 					"aria-valuemin": min,
 					"aria-valuemax": max,
-					"aria-valuenow": val(),
-					"aria-valuetext": val(),
-					"title": val(),
+					"aria-valuenow": this._value(),
+					"aria-valuetext": this._value(),
+					"title": this._value(),
 					"aria-labelledby": labelID
 				});
 
@@ -172,6 +170,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			});
 		}
 
+		// bind the handle event callbacks and set the context to the widget instance
 		this._on( this.handle, {
 			"vmousedown": "_handleVMouseDown",
 			"keydown": "_handleKeydown",
