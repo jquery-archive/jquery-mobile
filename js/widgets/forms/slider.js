@@ -140,8 +140,14 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		label.addClass( "ui-slider" );
 
 		// monitor the input for updated values
-		control.addClass( cType === "input" ? "ui-slider-input" : "ui-slider-switch" )
-			.bind( $.proxyMany(this._controlEvents, this) );
+		control.addClass( cType === "input" ? "ui-slider-input" : "ui-slider-switch" );
+
+		this._on( control, {
+			"change": "_controlChange",
+			"keyup": "_controlKeyup",
+			"blur": "_controlBlur",
+			"vmouseup": "_controlVMouseUp"
+		});
 
 		slider.bind( "vmousedown", $.proxy(this._sliderEvents.vmousedown, this))
 			.bind( "vclick", false );
@@ -182,93 +188,27 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		this.refresh( undefined, undefined, true );
 	},
 
-	_controlEvents: {
-		change: function( event ) {
-			// if the user dragged the handle, the "change" event was triggered from inside refresh(); don't call refresh() again
-			if ( !this.mouseMoved ) {
-				this.refresh( this._value(), true );
-			}
-		},
-
-		keyup: function( event ) { // necessary?
-			this.refresh( this._value(), true, true );
-		},
-
-		blur: function( event ) {
+	_controlChange: function( event ) {
+		// if the user dragged the handle, the "change" event was triggered from inside refresh(); don't call refresh() again
+		if ( !this.mouseMoved ) {
 			this.refresh( this._value(), true );
-		},
-
-		// it appears the clicking the up and down buttons in chrome on
-		// range/number inputs doesn't trigger a change until the field is
-		// blurred. Here we check thif the value has changed and refresh
-		vmouseup: function( event ) {
-			this._checkedRefresh();
 		}
 	},
 
-	_handleEvents: {
-		// NOTE force focus on handle
-		vmousedown: function( event ) {
-			this.handle.focus();
-		},
-
-		vclick: false,
-
-		keydown: function( event ) {
-			var index = this._value();
-
-			if ( this.options.disabled ) {
-				return;
-			}
-
-			// In all cases prevent the default and mark the handle as active
-			switch ( event.keyCode ) {
-			 case $.mobile.keyCode.HOME:
-			 case $.mobile.keyCode.END:
-			 case $.mobile.keyCode.PAGE_UP:
-			 case $.mobile.keyCode.PAGE_DOWN:
-			 case $.mobile.keyCode.UP:
-			 case $.mobile.keyCode.RIGHT:
-			 case $.mobile.keyCode.DOWN:
-			 case $.mobile.keyCode.LEFT:
-				event.preventDefault();
-
-				if ( !this._keySliding ) {
-					this._keySliding = true;
-					this.handle.addClass( "ui-state-active" );
-				}
-				break;
-			}
-
-			// move the slider according to the keypress
-			switch ( event.keyCode ) {
-			 case $.mobile.keyCode.HOME:
-				this.refresh( this.min );
-				break;
-			 case $.mobile.keyCode.END:
-				this.refresh( this.max );
-				break;
-			 case $.mobile.keyCode.PAGE_UP:
-			 case $.mobile.keyCode.UP:
-			 case $.mobile.keyCode.RIGHT:
-				this.refresh( index + this.step );
-				break;
-			 case $.mobile.keyCode.PAGE_DOWN:
-			 case $.mobile.keyCode.DOWN:
-			 case $.mobile.keyCode.LEFT:
-				this.refresh( index - this.step );
-				break;
-			}
-		}, // remove active mark
-
-		keyup: function( event ) {
-			if ( this._keySliding ) {
-				this._keySliding = false;
-				this.handle.removeClass( "ui-state-active" );
-			}
-		}
+	_controlKeyup: function( event ) { // necessary?
+		this.refresh( this._value(), true, true );
 	},
 
+	_controlBlur: function( event ) {
+		this.refresh( this._value(), true );
+	},
+
+	// it appears the clicking the up and down buttons in chrome on
+	// range/number inputs doesn't trigger a change until the field is
+	// blurred. Here we check thif the value has changed and refresh
+	_controlVMouseUp: function( event ) {
+		this._checkedRefresh();
+	},
 
 	// NOTE force focus on handle
 	_handleVMouseDown: function( event ) {
