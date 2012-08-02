@@ -366,15 +366,19 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			step = ( cType === "input" && parseFloat( control.attr( "step" ) ) > 0 ) ? parseFloat( control.attr( "step" ) ) : 1;
 
 		if ( typeof val === "object" ) {
-			var data = val,
+			var left, width, data = val,
 				// a slight tolerance helped get to the ends of the slider
 				tol = 8;
+
+			left = this.slider.offset().left;
+			width = this.slider.width();
+
 			if ( !this.dragging ||
-					data.pageX < this.slider.offset().left - tol ||
-					data.pageX > this.slider.offset().left + this.slider.width() + tol ) {
+					data.pageX < left - tol ||
+					data.pageX > left + width + tol ) {
 				return;
 			}
-			percent = Math.round( ( ( data.pageX - this.slider.offset().left ) / this.slider.width() ) * 100 );
+			percent = Math.round( ( ( data.pageX - left ) / width ) * 100 );
 		} else {
 			if ( val == null ) {
 				val = cType === "input" ? parseFloat( control.val() || 0 ) : control[0].selectedIndex;
