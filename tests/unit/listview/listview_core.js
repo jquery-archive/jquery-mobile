@@ -417,10 +417,9 @@
 		]);
 	});
 
-	module( "Search Filter");
+	module( "Search Filter" );
 
 	var searchFilterId = "#search-filter-test";
-
 
 	asyncTest( "Filter downs results when the user enters information", function() {
 		var $searchPage = $(searchFilterId);
@@ -591,6 +590,96 @@
 						start();
 					}
 				], 50);
+			}
+		]);
+	});
+
+	module( "Custom search filter", {
+		setup: function() {
+			var self = this;
+			this._refreshCornersCount = 0;
+			this._refreshCornersFn = $.mobile.listview.prototype._refreshCorners;
+
+			this.startTest = function() {
+				return this._refreshCornersCount === 1;
+			};
+
+			// _refreshCorners is the last method called in the filter loop
+			// so we count the number of times _refreshCorners gets invoked to stop the test
+			$.mobile.listview.prototype._refreshCorners = function() {
+				self._refreshCornersCount += 1;
+				self._refreshCornersFn.apply( this, arguments );
+				if ( self.startTest() ) {
+					start();
+				}
+			}
+		},
+		teardown: function() {
+			$.mobile.listview.prototype._refreshCorners = this._refreshCornersFn;
+		}
+	});
+
+	asyncTest( "Custom filterCallback should cause iteration on all list elements", function(){
+		var listPage = $( "#search-customfilter-test" ),
+			filterCallbackCount = 0,
+			expectedCount = 2 * listPage.find("li").length;
+		expect( 1 );
+
+		this.startTest = function() {
+			if ( this._refreshCornersCount === 3 ) {
+				equal( filterCallbackCount, expectedCount, "filterCallback should be call exactly "+ expectedCount +" times" );
+			}
+			return this._refreshCornersCount === 3;
+		}
+
+		$.testHelper.pageSequence( [
+			function(){
+				//reset for relative url refs
+				$.mobile.changePage( home );
+			},
+
+			function() {
+				$.mobile.changePage( "#search-customfilter-test" );
+			},
+
+			function() {
+				// set the listview instance callback
+				listPage.find( "ul" ).listview( "option", "filterCallback", function( text, searchValue, item ) {
+					filterCallbackCount += 1;
+
+					return text.toString().toLowerCase().indexOf( searchValue ) === -1;
+				});
+
+				// trigger a change in the search filter
+				listPage.find( "input" ).val( "at" ).trigger( "change" );
+				listPage.find( "input" ).val( "atw" ).trigger( "change" );
+
+			}
+		]);
+	});
+
+	asyncTest( "filterCallback can be altered after widget creation", function(){
+		var listPage = $( "#search-customfilter-test" );
+		expect( listPage.find("li").length );
+
+		$.testHelper.pageSequence( [
+			function(){
+				//reset for relative url refs
+				$.mobile.changePage( home );
+			},
+
+			function() {
+				$.mobile.changePage( "#search-customfilter-test" );
+			},
+
+			function() {
+				// set the listview instance callback
+				listPage.find( "ul" ).listview( "option", "filterCallback", function() {
+					ok( true, "custom callback invoked" );
+				});
+
+				// trigger a change in the search filter
+				listPage.find( "input" ).val( "foo" ).trigger( "change" );
 			}
 		]);
 	});
@@ -787,35 +876,6 @@
 
 			function(){
 				same( $("#cached-nested-list").length, 1 );
-				start();
-			}
-		]);
-	});
-
-	asyncTest( "filterCallback can be altered after widget creation", function(){
-		var listPage = $( "#search-filter-test" );
-		expect( listPage.find("li").length );
-
-		$.testHelper.pageSequence( [
-			function(){
-				//reset for relative url refs
-				$.mobile.changePage( home );
-			},
-
-			function() {
-				$.mobile.changePage( "#search-filter-test" );
-			},
-
-			function() {
-				// set the listview instance callback
-				listPage.find( "ul" ).listview( "option", "filterCallback", function() {
-					ok(true, "custom callback invoked");
-				});
-
-				// trigger a change in the search filter
-				listPage.find( "input" ).val( "foo" ).trigger( "change" );
-
-				//NOTE beware a poossible issue with timing here
 				start();
 			}
 		]);
