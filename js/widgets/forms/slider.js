@@ -149,18 +149,13 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			"vmouseup": "_controlVMouseUp"
 		});
 
-		slider.bind( "vmousedown", $.proxy(this._sliderEvents.vmousedown, this))
+		slider.bind( "vmousedown", $.proxy(this._sliderVMouseDown, this))
 			.bind( "vclick", false );
 
 		// We have to instantiate a new function object for the unbind to work properly
 		// since the method itself is defined in the prototype (causing it to unbind everything)
-		$( document ).bind( "vmousemove", this._unbindDocumentDrag = function( event ) {
-			self._preventDocumentDrag( event );
-		});
-
-		slider.add( document ).bind( "vmouseup", this._unbindSliderMouseUp = function( event ) {
-			self._sliderEvents.vmouseup.call( self, event );
-		});
+		this._on( document, { "vmousemove": "_preventDocumentDrag" });
+		this._on( slider.add( document ), { "vmouseup": "_sliderVMouseUp" });
 
 		slider.insertAfter( control );
 
@@ -269,52 +264,50 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		}
 	},
 
-	_sliderEvents: {
-		vmousedown: function( event ) {
-			// NOTE: we don't do this in refresh because we still want to
-			//       support programmatic alteration of disabled inputs
-			if ( this.options.disabled ) {
-				return false;
-			}
-
-			this.dragging = true;
-			this.userModified = false;
-			this.mouseMoved = false;
-
-			if ( this.type === "select" ) {
-				this.beforeStart = this.element[0].selectedIndex;
-			}
-
-			this.refresh( event );
- 			this._trigger( "start" );
+	_sliderVMouseDown: function( event ) {
+		// NOTE: we don't do this in refresh because we still want to
+		//       support programmatic alteration of disabled inputs
+		if ( this.options.disabled ) {
 			return false;
-		},
+		}
 
-		vmouseup: function() {
-			if ( this.dragging ) {
-				this.dragging = false;
+		this.dragging = true;
+		this.userModified = false;
+		this.mouseMoved = false;
 
-				if ( this.type === "select") {
-					// make the handle move with a smooth transition
-					this.handle.addClass( "ui-slider-handle-snapping" );
+		if ( this.type === "select" ) {
+			this.beforeStart = this.element[0].selectedIndex;
+		}
 
-					if ( this.mouseMoved ) {
-						// this is a drag, change the value only if user dragged enough
-						if ( this.userModified ) {
-							this.refresh( this.beforeStart === 0 ? 1 : 0 );
-						} else {
-							this.refresh( this.beforeStart );
-						}
-					} else {
-						// this is just a click, change the value
+		this.refresh( event );
+ 		this._trigger( "start" );
+		return false;
+	},
+
+	_sliderVMouseUp: function() {
+		if ( this.dragging ) {
+			this.dragging = false;
+
+			if ( this.type === "select") {
+				// make the handle move with a smooth transition
+				this.handle.addClass( "ui-slider-handle-snapping" );
+
+				if ( this.mouseMoved ) {
+					// this is a drag, change the value only if user dragged enough
+					if ( this.userModified ) {
 						this.refresh( this.beforeStart === 0 ? 1 : 0 );
+					} else {
+						this.refresh( this.beforeStart );
 					}
+				} else {
+					// this is just a click, change the value
+					this.refresh( this.beforeStart === 0 ? 1 : 0 );
 				}
-
-				this.mouseMoved = false;
-				this._trigger( "stop" );
-				return false;
 			}
+
+			this.mouseMoved = false;
+			this._trigger( "stop" );
+			return false;
 		}
 	},
 
@@ -348,11 +341,6 @@ $.widget( "mobile.slider", $.mobile.widget, {
 	_value: function() {
 		return  this.type === "input" ?
 			parseFloat( this.element.val() ) : this.element[0].selectedIndex;
-	},
-
-	_destroy: function() {
-		$( document ).unbind( "vmousemove", this._unbindDocumentDrag );
-		$( document ).unbind( "vmouseup", this._unbindSliderMouseUp );
 	},
 
 	refresh: function( val, isfromControl, preventInputUpdate ) {
