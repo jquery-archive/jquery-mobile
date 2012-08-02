@@ -171,7 +171,14 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			});
 		}
 
-		this.handle.bind( $.proxyMany( this._handleEvents, this ));
+		this._on( this.handle, {
+			"vmousedown": "_handleVMouseDown",
+			"keydown": "_handleKeydown",
+			"keyup": "_handleKeyup"
+		});
+
+		this.handle.bind( "vclick", false );
+
 		this.refresh( undefined, undefined, true );
 	},
 
@@ -259,6 +266,66 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				this._keySliding = false;
 				this.handle.removeClass( "ui-state-active" );
 			}
+		}
+	},
+
+
+	// NOTE force focus on handle
+	_handleVMouseDown: function( event ) {
+		this.handle.focus();
+	},
+
+	_handleKeydown: function( event ) {
+		var index = this._value();
+
+		if ( this.options.disabled ) {
+			return;
+		}
+
+		// In all cases prevent the default and mark the handle as active
+		switch ( event.keyCode ) {
+		 case $.mobile.keyCode.HOME:
+		 case $.mobile.keyCode.END:
+		 case $.mobile.keyCode.PAGE_UP:
+		 case $.mobile.keyCode.PAGE_DOWN:
+		 case $.mobile.keyCode.UP:
+		 case $.mobile.keyCode.RIGHT:
+		 case $.mobile.keyCode.DOWN:
+		 case $.mobile.keyCode.LEFT:
+			event.preventDefault();
+
+			if ( !this._keySliding ) {
+				this._keySliding = true;
+				this.handle.addClass( "ui-state-active" );
+			}
+			break;
+		}
+
+		// move the slider according to the keypress
+		switch ( event.keyCode ) {
+		 case $.mobile.keyCode.HOME:
+			this.refresh( this.min );
+			break;
+		 case $.mobile.keyCode.END:
+			this.refresh( this.max );
+			break;
+		 case $.mobile.keyCode.PAGE_UP:
+		 case $.mobile.keyCode.UP:
+		 case $.mobile.keyCode.RIGHT:
+			this.refresh( index + this.step );
+			break;
+		 case $.mobile.keyCode.PAGE_DOWN:
+		 case $.mobile.keyCode.DOWN:
+		 case $.mobile.keyCode.LEFT:
+			this.refresh( index - this.step );
+			break;
+		}
+	}, // remove active mark
+
+	_handleKeyup: function( event ) {
+		if ( this._keySliding ) {
+			this._keySliding = false;
+			this.handle.removeClass( "ui-state-active" );
 		}
 	},
 
