@@ -361,9 +361,10 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 		var control = this.element, percent,
 			cType = control[0].nodeName.toLowerCase(),
-			min = cType === "input" ? parseFloat( control.attr( "min" ) ) : 0,
-			max = cType === "input" ? parseFloat( control.attr( "max" ) ) : control.find( "option" ).length - 1,
-			step = ( cType === "input" && parseFloat( control.attr( "step" ) ) > 0 ) ? parseFloat( control.attr( "step" ) ) : 1;
+			isInput = cType === "input",
+			min =  isInput ? parseFloat( control.attr( "min" ) ) : 0,
+			max = isInput ? parseFloat( control.attr( "max" ) ) : control.find( "option" ).length - 1,
+			step = ( isInput && parseFloat( control.attr( "step" ) ) > 0 ) ? parseFloat( control.attr( "step" ) ) : 1;
 
 		if ( typeof val === "object" ) {
 			var left, width, data = val,
@@ -381,7 +382,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			percent = Math.round( ( ( data.pageX - left ) / width ) * 100 );
 		} else {
 			if ( val == null ) {
-				val = cType === "input" ? parseFloat( control.val() || 0 ) : control[0].selectedIndex;
+				val = isInput ? parseFloat( control.val() || 0 ) : control[0].selectedIndex;
 			}
 			percent = ( parseFloat( val ) - min ) / ( max - min ) * 100;
 		}
@@ -421,11 +422,11 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 		this.handle.css( "left", percent + "%" );
 
-		this.handle[0].setAttribute( "aria-valuenow", cType === "input" ? newval : control.find( "option" ).eq( newval ).attr( "value" ) );
+		this.handle[0].setAttribute( "aria-valuenow", isInput ? newval : control.find( "option" ).eq( newval ).attr( "value" ) );
 
-		this.handle[0].setAttribute( "aria-valuetext", cType === "input" ? newval : control.find( "option" ).eq( newval ).getEncodedText() );
+		this.handle[0].setAttribute( "aria-valuetext", isInput ? newval : control.find( "option" ).eq( newval ).getEncodedText() );
 
-		this.handle[0].setAttribute( "title", cType === "input" ? newval : control.find( "option" ).eq( newval ).getEncodedText() );
+		this.handle[0].setAttribute( "title", isInput ? newval : control.find( "option" ).eq( newval ).getEncodedText() );
 
 		if ( this.valuebg ) {
 			this.valuebg.css( "width", percent + "%" );
@@ -447,7 +448,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			var valueChanged = false;
 
 			// update control"s value
-			if ( cType === "input" ) {
+			if ( isInput ) {
 				valueChanged = control.val() !== newval;
 				control.val( newval );
 			} else {
