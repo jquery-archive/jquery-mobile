@@ -12,9 +12,11 @@ $.mobile.listview.prototype.options.filter = false;
 $.mobile.listview.prototype.options.filterPlaceholder = "Filter items...";
 $.mobile.listview.prototype.options.filterTheme = "c";
 // TODO rename callback/deprecate and default to the item itself as the first argument
-$.mobile.listview.prototype.options.filterCallback = function( text, searchValue, item ) {
-	return text.toString().toLowerCase().indexOf( searchValue ) === -1;
-};
+var defaultFilterCallback = function( text, searchValue, item ) {
+		return text.toString().toLowerCase().indexOf( searchValue ) === -1;
+	};
+
+$.mobile.listview.prototype.options.filterCallback = defaultFilterCallback;
 
 $( document ).delegate( ":jqmData(role='listview')", "listviewcreate", function() {
 
@@ -42,15 +44,17 @@ $( document ).delegate( ":jqmData(role='listview')", "listviewcreate", function(
 				lastval = $this.jqmData( "lastval" ) + "",
 				childItems = false,
 				itemtext = "",
-				item;
+				item,
+				// Check if a custom filter callback applies
+				isCustomFilterCallback = listview.options.filterCallback !== defaultFilterCallback;
 
 			listview._trigger( "beforefilter", "beforefilter", { input: this } );
 
 			// Change val as lastval for next execution
 			$this.jqmData( "lastval" , val );
-			if ( val.length < lastval.length || val.indexOf( lastval ) !== 0 ) {
+			if ( isCustomFilterCallback || val.length < lastval.length || val.indexOf( lastval ) !== 0 ) {
 
-				// Removed chars or pasted something totally different, check all items
+				// Custom filter callback applies or removed chars or pasted something totally different, check all items
 				listItems = list.children();
 			} else {
 
