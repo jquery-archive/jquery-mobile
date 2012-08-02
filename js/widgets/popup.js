@@ -159,6 +159,16 @@ define( [ "jquery",
 				_tolerance: null,
 				_resizeData: null,
 				_orientationchangeInProgress: false,
+				_globalHandlers: [
+					{
+						src: $( window ),
+						handler: {
+							orientationchange: $.proxy( this, "_handleWindowOrientationchange" ),
+							resize: $.proxy( this, "_handleWindowResize" ),
+							keyup: $.proxy( this, "_handleWindowKeyUp" )
+						}
+					}
+				]
 			});
 
 			$.each( this.options, function( key, value ) {
@@ -169,10 +179,9 @@ define( [ "jquery",
 			});
 
 			ui.screen.bind( "vclick", $.proxy( this, "_eatEventAndClose" ) );
-			this._on( window, {
-				orientationChange: "_handleWindowOrientationChange",
-				resize: "_handleWindowResize",
-				keyup: "_handleWindowKeyUp"
+
+			$.each( this._globalHandlers, function( idx, value ) {
+				value.src.bind( value.handler );
 			});
 		},
 
@@ -570,6 +579,13 @@ define( [ "jquery",
 			this._ui.screen.remove();
 			this._ui.container.remove();
 			this._ui.placeholder.remove();
+
+			// Unbind handlers that were bound to elements outside this.element (the window, in this case)
+			$.each( this._globalHandlers, function( idx, oneSrc ) {
+				$.each( oneSrc.handler, function( eventType, handler ) {
+					oneSrc.src.unbind( eventType, handler );
+				});
+			});
 		},
 
 		open: function( options ) {
