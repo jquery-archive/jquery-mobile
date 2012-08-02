@@ -44,6 +44,8 @@ $( document ).delegate( ":jqmData(role='listview')", "listviewcreate", function(
 				itemtext = "",
 				item;
 
+			listview._trigger( "beforefilter", "beforefilter", { input: this } );
+
 			// Change val as lastval for next execution
 			$this.jqmData( "lastval" , val );
 			if ( val.length < lastval.length || val.indexOf( lastval ) !== 0 ) {
