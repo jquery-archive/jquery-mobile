@@ -88,7 +88,7 @@ define( [ "jquery",
 		_resizeTimeout: function() {
 			if ( !this._maybeRefreshTimeout() ) {
 				// effectively rapid-open the popup while leaving the screen intact
-				this.element.trigger( "popupbeforeposition" );
+				this._trigger( "beforeposition" );
 				this._ui.container
 					.removeClass( "ui-selectmenu-hidden" )
 					.offset( this._placementCoords( this._desiredCoords( undefined, undefined, "window" ) ) )
@@ -476,7 +476,7 @@ define( [ "jquery",
 			this._ui.container.addClass( "ui-popup-active" );
 			this._isOpen = true;
 			this._ui.container.attr( "tabindex", "0" ).focus();
-			this.element.trigger( "popupafteropen" );
+			this._trigger( "afteropen" );
 		},
 
 		_open: function( options ) {
@@ -489,7 +489,7 @@ define( [ "jquery",
 			transition = options.transition;
 
 			// Give applications a chance to modify the contents of the container before it appears
-			this.element.trigger( "popupbeforeposition" );
+			this._trigger( "beforeposition" );
 
 			coords = this._placementCoords( this._desiredCoords( options.x, options.y, options.positionTo || this.options.positionTo || "origin" ) );
 
@@ -544,7 +544,7 @@ define( [ "jquery",
 
 		_closePrereqsDone: function() {
 			this._ui.container.removeAttr( "tabindex" );
-			this.element.trigger( "popupafterclose" );
+			this._trigger( "afterclose" );
 		},
 
 		_close: function() {
