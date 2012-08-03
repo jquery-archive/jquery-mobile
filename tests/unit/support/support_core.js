@@ -91,10 +91,10 @@ $.testHelper.excludeFileProtocol(function(){
 		 	 jqmdetectedver = $.mobile.browser.ie;
 
 		 	if( ie ){
-		 		same(version, jqmdetectedver, "It's IE and the version is correct");
+		 		deepEqual(version, jqmdetectedver, "It's IE and the version is correct");
 		 	}
 		 	else{
-		 		same(ie, jqmdetectedver, "It's not IE");
+		 		deepEqual(ie, jqmdetectedver, "It's not IE");
 		 	}
 			start();
 		});

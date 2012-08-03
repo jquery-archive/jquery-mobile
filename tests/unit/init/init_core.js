@@ -82,7 +82,7 @@
 
 			$.testHelper.reloadLib(libName);
 
-			same( $.mobile.useFastClick, false , "fast click is set to false after init" );
+			deepEqual( $.mobile.useFastClick, false , "fast click is set to false after init" );
 			$.mobile.useFastClick = true;
 		});
 
@@ -95,8 +95,8 @@
 			$.testHelper.reloadLib(libName);
 			var firstPage = findFirstPage();
 
-			same($.mobile.firstPage[0], firstPage[0]);
-			same($.mobile.activePage[0], firstPage[0]);
+			deepEqual($.mobile.firstPage[0], firstPage[0]);
+			deepEqual($.mobile.activePage[0], firstPage[0]);
 		});
 
 		test( "mobile viewport class is defined on the first page's parent", function(){
@@ -112,7 +112,7 @@
 			$.testHelper.reloadLib(libName);
 			var firstPage = findFirstPage();
 
-			same($.mobile.pageContainer[0], firstPage.parent()[0]);
+			deepEqual($.mobile.pageContainer[0], firstPage.parent()[0]);
 		});
 
 		asyncTest( "hashchange triggered on document ready with single argument: true", function(){
@@ -124,7 +124,7 @@
 				// delay the bind until the first hashchange
 				function(){
 					$(window).one("hashchange", function(ev, arg){
-						same(arg, true);
+						deepEqual(arg, true);
 						start();
 					});
 				},
@@ -136,11 +136,11 @@
 		});
 
 		test( "pages without a data-url attribute have it set to their id", function(){
-			same($("#foo").jqmData('url'), "foo");
+			deepEqual($("#foo").jqmData('url'), "foo");
 		});
 
 		test( "pages with a data-url attribute are left with the original value", function(){
-			same($("#bar").jqmData('url'), "bak");
+			deepEqual($("#bar").jqmData('url'), "bak");
 		});
 
 		// NOTE the next two tests work on timeouts that assume a page will be
@@ -159,7 +159,7 @@
 			reloadCoreNSandInit();
 
 			setTimeout(function(){
-				same( $( "#autoinit-on.ui-page" ).length, 1 );
+				deepEqual( $( "#autoinit-on.ui-page" ).length, 1 );
 
 				start();
 			}, 2000);
@@ -179,7 +179,7 @@
 			reloadCoreNSandInit();
 
 			setTimeout(function(){
-				same( $( "#autoinit-off.ui-page" ).length, 0 );
+				deepEqual( $( "#autoinit-off.ui-page" ).length, 0 );
 
 				$(document).bind("mobileinit", function(){
 					$.mobile.autoInitializePage = true;

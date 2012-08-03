@@ -13,7 +13,7 @@
 
 			select.val( key ).selectmenu( 'refresh' );
 			text = select.find( "option[value='" + key + "']" ).text();
-			same( select.parent().find(".ui-btn-text").text(), text );
+			deepEqual( select.parent().find(".ui-btn-text").text(), text );
 		};
 
 		setAndCheck( 'rush' );
@@ -51,11 +51,11 @@
 			button = select.siblings( "a" ).find( ".ui-btn-inner" ),
 			text = "foo";
 
-		same($.trim(button.text()), "default");
+		deepEqual($.trim(button.text()), "default");
 		select.find( "option" ).remove(); //remove the loading message
 		select.append('<option value="1">' + text + '</option>');
 		select.selectmenu( 'refresh' );
-		same($.trim(button.text()), text);
+		deepEqual($.trim(button.text()), text);
 	});
 
 	// issue 2424

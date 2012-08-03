@@ -80,27 +80,27 @@
 		var pageProto = $.mobile.page.prototype;
 		pageProto.options.keepNative = pageProto.options.keepNativeDefault;
 
-		same(pageProto.keepNativeSelector(), pageProto.options.keepNativeDefault);
+		deepEqual(pageProto.keepNativeSelector(), pageProto.options.keepNativeDefault);
 	});
 
 	test( "keepNativeSelector returns the default where keepNative is empty, undefined, whitespace", function() {
 		var pageProto = $.mobile.page.prototype;
 
 		pageProto.options.keepNative = "";
-		same(pageProto.keepNativeSelector(), pageProto.options.keepNativeDefault);
+		deepEqual(pageProto.keepNativeSelector(), pageProto.options.keepNativeDefault);
 
 		pageProto.options.keepNative = undefined;
-		same(pageProto.keepNativeSelector(), pageProto.options.keepNativeDefault);
+		deepEqual(pageProto.keepNativeSelector(), pageProto.options.keepNativeDefault);
 
 		pageProto.options.keepNative = "  ";
-		same(pageProto.keepNativeSelector(), pageProto.options.keepNativeDefault);
+		deepEqual(pageProto.keepNativeSelector(), pageProto.options.keepNativeDefault);
 	});
 
 	test( "keepNativeSelector returns a selector joined with the default", function() {
 		var pageProto = $.mobile.page.prototype;
 
 		pageProto.options.keepNative = "foo, bar";
-		same(pageProto.keepNativeSelector(), "foo, bar, " + pageProto.options.keepNativeDefault);
+		deepEqual(pageProto.keepNativeSelector(), "foo, bar, " + pageProto.options.keepNativeDefault);
 	});
 
 	test( "links inside an ignored container do not enhance", function() {
@@ -109,10 +109,10 @@
 		$.mobile.ignoreContentEnabled = true;
 
 		$ignored.parent().trigger( "create" );
-		same( $ignored.attr( "class" ), undefined, "ignored link doesn't have link class" );
+		deepEqual( $ignored.attr( "class" ), undefined, "ignored link doesn't have link class" );
 
 		$enhanced.parent().trigger( "create" );
-		same( $enhanced.attr( "class" ).indexOf("ui-link"), 0, "enhanced link has link class" );
+		deepEqual( $enhanced.attr( "class" ).indexOf("ui-link"), 0, "enhanced link has link class" );
 
 		$.mobile.ignoreContentEnabled = false;
 	});

@@ -274,14 +274,14 @@
 			function(){
 				$( "#persist-test-d" )
 					.one( "pagebeforeshow", function(){
-						same( nextpageheader.parent()[0], $.mobile.pageContainer[0], "fixed header is now a child of page container" );
+						deepEqual( nextpageheader.parent()[0], $.mobile.pageContainer[0], "fixed header is now a child of page container" );
 					});
 
 				$.mobile.changePage( "#persist-test-d" );
 			},
 
 			function() {
-				same( nextpageheader.parent()[0], $.mobile.activePage[0], "fixed header is now a child of page again" );
+				deepEqual( nextpageheader.parent()[0], $.mobile.activePage[0], "fixed header is now a child of page again" );
 				$.mobile.changePage( "#default" );
 			},
 
@@ -306,14 +306,14 @@
 			function(){
 				$( "#persist-test-f" )
 					.one( "pagebeforeshow", function(){
-						same( nextpagefooter.parent()[0], $.mobile.pageContainer[0], "fixed footer is now a child of page container" );
+						deepEqual( nextpagefooter.parent()[0], $.mobile.pageContainer[0], "fixed footer is now a child of page container" );
 					});
 
 				$.mobile.changePage( "#persist-test-f" );
 			},
 
 			function() {
-				same( nextpagefooter.parent()[0], $.mobile.activePage[0], "fixed footer is now a child of page again" );
+				deepEqual( nextpagefooter.parent()[0], $.mobile.activePage[0], "fixed footer is now a child of page again" );
 				$.mobile.changePage( "#default" );
 			},
 

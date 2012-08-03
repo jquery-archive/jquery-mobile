@@ -61,7 +61,7 @@
 			},
 
 			function(){
-				same($("#select-choice-few-menu").parent().parent(".ui-selectmenu-hidden").length, 1);
+				deepEqual($("#select-choice-few-menu").parent().parent(".ui-selectmenu-hidden").length, 1);
 				start();
 			}
 		], 1000);
@@ -81,7 +81,7 @@
 					fn: $.mobile.defaultTransitionHandler,
 
 					before: function(name){
-						same(name, $.mobile.defaultDialogTransition);
+						deepEqual(name, $.mobile.defaultDialogTransition);
 					}
 				});
 
@@ -111,7 +111,7 @@
 			},
 
 			function(){
-				same(location.hash.indexOf(dialogHashKey), -1);
+				deepEqual(location.hash.indexOf(dialogHashKey), -1);
 				start();
 			}
 		]);
@@ -273,16 +273,16 @@
 		button = select.siblings( "a" ).first();
 
 		select.selectmenu( 'disable' );
-		same( select.attr('disabled'), "disabled", "select is disabled" );
+		deepEqual( select.attr('disabled'), "disabled", "select is disabled" );
 		ok( button.hasClass("ui-disabled"), "disabled class added" );
-		same( button.attr('aria-disabled'), "true", "select is disabled" );
-		same( select.selectmenu( 'option', 'disabled' ), true, "disbaled option set" );
+		deepEqual( button.attr('aria-disabled'), "true", "select is disabled" );
+		deepEqual( select.selectmenu( 'option', 'disabled' ), true, "disbaled option set" );
 
 		select.selectmenu( 'enable' );
-		same( select.attr('disabled'), undefined, "select is disabled" );
+		deepEqual( select.attr('disabled'), undefined, "select is disabled" );
 		ok( !button.hasClass("ui-disabled"), "disabled class added" );
-		same( button.attr('aria-disabled'), "false", "select is disabled" );
-		same( select.selectmenu( 'option', 'disabled' ), false, "disbaled option set" );
+		deepEqual( button.attr('aria-disabled'), "false", "select is disabled" );
+		deepEqual( select.selectmenu( 'option', 'disabled' ), false, "disbaled option set" );
 	});
 
 	asyncTest( "adding options and refreshing a custom select changes the options list", function(){
@@ -297,7 +297,7 @@
 			},
 
 			function() {
-				same( $( ".ui-popup-container:not(.ui-selectmenu-hidden) .ui-selectmenu ul" ).text(), "default" );
+				deepEqual( $( ".ui-popup-container:not(.ui-selectmenu-hidden) .ui-selectmenu ul" ).text(), "default" );
 				$( ".ui-popup-screen" ).click();
 			},
 
@@ -312,7 +312,7 @@
 			},
 
 			function() {
-				same( $( ".ui-popup-container:not(.ui-selectmenu-hidden) .ui-selectmenu ul" ).text(), text );
+				deepEqual( $( ".ui-popup-container:not(.ui-selectmenu-hidden) .ui-selectmenu ul" ).text(), text );
 				$( ".ui-popup-screen" ).click();
 			},
 
@@ -337,7 +337,7 @@
 	// issue #2547
 	test( "custom select list item links have encoded option text values", function() {
 		$( "#encoded-option" ).data( 'selectmenu' )._buildList();
-		same(window.encodedValueIsDefined, undefined);
+		deepEqual(window.encodedValueIsDefined, undefined);
 	});
 
 	// not testing the positive case here since's it's obviously tested elsewhere
@@ -356,7 +356,7 @@
 			},
 
 			function() {
-				same($.mobile.activePage.find( ".ui-title" ).text(), $label.text());
+				deepEqual($.mobile.activePage.find( ".ui-title" ).text(), $label.text());
 				window.history.back();
 			},
 
@@ -378,7 +378,7 @@
 			},
 
 			function() {
-				same($.mobile.activePage.find( ".ui-title" ).text(), $label.text());
+				deepEqual($.mobile.activePage.find( ".ui-title" ).text(), $label.text());
 				window.history.back();
 			},
 

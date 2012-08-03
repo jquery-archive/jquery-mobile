@@ -253,9 +253,9 @@
 				pathnameOnward = location.href.replace( parts.domain, "" );
 
 			if( $.support.pushState ) {
-				same( pathnameOnward, args.hashOrPush || args.push, args.report );
+				deepEqual( pathnameOnward, args.hashOrPush || args.push, args.report );
 			} else {
-				same( parts.hash, "#" + (args.hashOrPush || args.hash), args.report );
+				deepEqual( parts.hash, "#" + (args.hashOrPush || args.hash), args.report );
 			}
 		},
 

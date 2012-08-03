@@ -27,7 +27,7 @@
 		scrollUp();
 
 		setTimeout(function(){
-			same($(window).scrollTop(), 0);
+			deepEqual($(window).scrollTop(), 0);
 			start();
 		}, scrollTimeout);
 	});
@@ -37,7 +37,7 @@
 		scrollUp(pos);
 
 		setTimeout(function(){
-			same($(window).scrollTop(), pos);
+			deepEqual($(window).scrollTop(), pos);
 			start();
 		}, scrollTimeout);
 	});

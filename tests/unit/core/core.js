@@ -94,95 +94,95 @@
 	test( "$.fn.jqmData and $.fn.jqmRemoveData methods are working properly", function(){
 		var data;
 
-		same( $("body").jqmData("foo", true), $("body"), "setting data returns the element" );
+		deepEqual( $("body").jqmData("foo", true), $("body"), "setting data returns the element" );
 
-		same( $("body").jqmData("foo"), true, "getting data returns the right value" );
+		deepEqual( $("body").jqmData("foo"), true, "getting data returns the right value" );
 
-		same( $("body").data($.mobile.nsNormalize("foo")), true, "data was set using namespace" );
+		deepEqual( $("body").data($.mobile.nsNormalize("foo")), true, "data was set using namespace" );
 
-		same( $("body").jqmData("foo", undefined), true, "getting data still returns the value if there's an undefined second arg" );
+		deepEqual( $("body").jqmData("foo", undefined), true, "getting data still returns the value if there's an undefined second arg" );
 
 		data = $.extend( {}, $("body").data() );
 		delete data[ $.expando ]; //discard the expando for that test
-		same( data , { "nstestFoo": true }, "passing .data() no arguments returns a hash with all set properties" );
+		deepEqual( data , { "nstestFoo": true }, "passing .data() no arguments returns a hash with all set properties" );
 
-		same( $("body").jqmData(), undefined, "passing no arguments returns undefined" );
+		deepEqual( $("body").jqmData(), undefined, "passing no arguments returns undefined" );
 
-		same( $("body").jqmData(undefined), undefined, "passing a single undefined argument returns undefined" );
+		deepEqual( $("body").jqmData(undefined), undefined, "passing a single undefined argument returns undefined" );
 
-		same( $("body").jqmData(undefined, undefined), undefined, "passing 2 undefined arguments returns undefined" );
+		deepEqual( $("body").jqmData(undefined, undefined), undefined, "passing 2 undefined arguments returns undefined" );
 
-		same( $("body").jqmRemoveData("foo"), $("body"), "jqmRemoveData returns the element" );
+		deepEqual( $("body").jqmRemoveData("foo"), $("body"), "jqmRemoveData returns the element" );
 
-		same( $("body").jqmData("foo"), undefined, "jqmRemoveData properly removes namespaced data" );
+		deepEqual( $("body").jqmData("foo"), undefined, "jqmRemoveData properly removes namespaced data" );
 
 	});
 
 
 	test( "$.jqmData and $.jqmRemoveData methods are working properly", function(){
-		same( $.jqmData(document.body, "foo", true), true, "setting data returns the value" );
+		deepEqual( $.jqmData(document.body, "foo", true), true, "setting data returns the value" );
 
-		same( $.jqmData(document.body, "foo"), true, "getting data returns the right value" );
+		deepEqual( $.jqmData(document.body, "foo"), true, "getting data returns the right value" );
 
-		same( $.data(document.body, $.mobile.nsNormalize("foo")), true, "data was set using namespace" );
+		deepEqual( $.data(document.body, $.mobile.nsNormalize("foo")), true, "data was set using namespace" );
 
-		same( $.jqmData(document.body, "foo", undefined), true, "getting data still returns the value if there's an undefined second arg" );
+		deepEqual( $.jqmData(document.body, "foo", undefined), true, "getting data still returns the value if there's an undefined second arg" );
 
-		same( $.jqmData(document.body), undefined, "passing no arguments returns undefined" );
+		deepEqual( $.jqmData(document.body), undefined, "passing no arguments returns undefined" );
 
-		same( $.jqmData(document.body, undefined), undefined, "passing a single undefined argument returns undefined" );
+		deepEqual( $.jqmData(document.body, undefined), undefined, "passing a single undefined argument returns undefined" );
 
-		same( $.jqmData(document.body, undefined, undefined), undefined, "passing 2 undefined arguments returns undefined" );
+		deepEqual( $.jqmData(document.body, undefined, undefined), undefined, "passing 2 undefined arguments returns undefined" );
 
-		same( $.jqmRemoveData(document.body, "foo"), undefined, "jqmRemoveData returns the undefined value" );
+		deepEqual( $.jqmRemoveData(document.body, "foo"), undefined, "jqmRemoveData returns the undefined value" );
 
-		same( $("body").jqmData("foo"), undefined, "jqmRemoveData properly removes namespaced data" );
+		deepEqual( $("body").jqmData("foo"), undefined, "jqmRemoveData properly removes namespaced data" );
 
 	});
 
 	test( "addDependents works properly", function() {
-		same( $("#parent").jqmData('dependents'), undefined );
+		deepEqual( $("#parent").jqmData('dependents'), undefined );
 		$( "#parent" ).addDependents( $("#dependent") );
-		same( $("#parent").jqmData('dependents').length, 1 );
+		deepEqual( $("#parent").jqmData('dependents').length, 1 );
 	});
 
 	test( "removeWithDependents removes the parent element and ", function(){
 		$( "#parent" ).addDependents( $("#dependent") );
-		same($( "#parent, #dependent" ).length, 2);
+		deepEqual($( "#parent, #dependent" ).length, 2);
 		$( "#parent" ).removeWithDependents();
-		same($( "#parent, #dependent" ).length, 0);
+		deepEqual($( "#parent, #dependent" ).length, 0);
 	});
 
 	test( "$.fn.getEncodedText should return the encoded value where $.fn.text doesn't", function() {
-		same( $("#encoded").text(), "foo>");
-		same( $("#encoded").getEncodedText(), "foo&gt;");
-		same( $("#unencoded").getEncodedText(), "var foo;");
+		deepEqual( $("#encoded").text(), "foo>");
+		deepEqual( $("#encoded").getEncodedText(), "foo&gt;");
+		deepEqual( $("#unencoded").getEncodedText(), "var foo;");
 	});
 
 	test( "closestPageData returns the parent's page data", function() {
 		var pageChild = $( "#page-child" );
 
 		$( "#parent-page" ).data( "page", { foo: "bar" } );
-		same( $.mobile.closestPageData( pageChild ).foo, "bar" );
+		deepEqual( $.mobile.closestPageData( pageChild ).foo, "bar" );
 	});
 
 	test( "closestPageData returns the parent dialog's page data", function() {
 		var dialogChild = $( "#dialog-child" );
 
 		$( "#parent-dialog" ).data( "page", { foo: "bar" } );
-		same( $.mobile.closestPageData(dialogChild).foo, "bar" );
+		deepEqual( $.mobile.closestPageData(dialogChild).foo, "bar" );
 	});
 
 	test( "test that $.fn.jqmHijackable works", function() {
 		$.mobile.ignoreContentEnabled = true;
 
-		same( $( "#hijacked-link" ).jqmHijackable().length, 1,
+		deepEqual( $( "#hijacked-link" ).jqmHijackable().length, 1,
 					"a link without any association to data-ajax=false should be included");
 
-		same( $( "#unhijacked-link-by-parent" ).jqmHijackable().length, 0,
+		deepEqual( $( "#unhijacked-link-by-parent" ).jqmHijackable().length, 0,
 					"a link with a data-ajax=false parent should be excluded");
 
-		same( $( "#unhijacked-link-by-attr" ).jqmHijackable().length, 0,
+		deepEqual( $( "#unhijacked-link-by-attr" ).jqmHijackable().length, 0,
 					"a link with data-ajax=false should be excluded");
 
 		$.mobile.ignoreContentEnabled = false;

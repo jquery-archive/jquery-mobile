@@ -70,7 +70,7 @@
 	asyncTest( "radio button labels should update the active button class to last clicked and clear checked", function(){
 		var $radioBtns = $( '#radio-active-btn-test input' ),
 			singleActiveAndChecked = function(){
-				same( $( "#radio-active-btn-test .ui-radio-on" ).length, 1, "there should be only one active button" );
+				deepEqual( $( "#radio-active-btn-test .ui-radio-on" ).length, 1, "there should be only one active button" );
 				// Use the .checked property, not the checked attribute which is not dynamic
 				var numChecked = 0;
 				$( "#radio-active-btn-test input" ).each(function(i, e) {
@@ -78,7 +78,7 @@
 						numChecked++;
 					}
 				});
-				same( numChecked, 1, "there should be only one checked" );
+				deepEqual( numChecked, 1, "there should be only one checked" );
 			};
 
 		$.testHelper.sequence([

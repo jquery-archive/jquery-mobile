@@ -92,7 +92,7 @@
 			},
 
 			function() {
-				equals($( "#basic-collapsible-set-test .ui-content >:eq(0) .ui-collapsible-collapsed" ).length, 2, "There should be 2 section collapsed" );
+				equal($( "#basic-collapsible-set-test .ui-content >:eq(0) .ui-collapsible-collapsed" ).length, 2, "There should be 2 section collapsed" );
 				ok(!$( "#basic-collapsible-set-test .ui-content >:eq(0) >:eq(1)" ).hasClass( "ui-collapsible-collapsed" ), "Section B should be expanded" );
 				start();
 			}

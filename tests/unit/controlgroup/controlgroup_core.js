@@ -133,13 +133,13 @@
 		// attempt to enhance the controlgroup
 		$unenhancedFieldSet.parent().trigger("create");
 
-		same( $unenhancedFieldSet.length, 1, "the fieldset test fixtures exist" );
+		deepEqual( $unenhancedFieldSet.length, 1, "the fieldset test fixtures exist" );
 		ok( !$unenhancedFieldSet.is(".ui-controlgroup"), "there is no control group" );
 
 		// attempt to enhance the controlgroup
 		$enhancedFieldSet.parent().trigger("create");
 
-		same( $enhancedFieldSet.length, 1, "the fieldset test fixtures exist" );
+		deepEqual( $enhancedFieldSet.length, 1, "the fieldset test fixtures exist" );
 		ok( $enhancedFieldSet.is(".ui-controlgroup"), "there is a control group" );
 
 		$.mobile.ignoreContentEnabled = false;

@@ -29,7 +29,7 @@
 			handle.trigger('keydown');
 
 			val += opts.increment;
-			same(val, window.parseFloat(slider.val(), 10), "new value is " + opts.increment + " different");
+			deepEqual(val, window.parseFloat(slider.val(), 10), "new value is " + opts.increment + " different");
 		});
 	};
 
@@ -92,22 +92,22 @@
 		var slider = $("#range-slider-up");
 		slider.focus();
 		slider.val(200);
-		same(slider.val(), "200");
+		deepEqual(slider.val(), "200");
 		slider.blur();
-		same(slider.val(), slider.attr('max'));
+		deepEqual(slider.val(), slider.attr('max'));
 	});
 
 	test( "slider should not validate input on keyup", function(){
 		var slider = $("#range-slider-up");
 		slider.focus();
 		slider.val(200);
-		same(slider.val(), "200");
+		deepEqual(slider.val(), "200");
 		slider.keyup();
-		same(slider.val(), "200");
+		deepEqual(slider.val(), "200");
 	});
 
 	test( "input type should degrade to number when slider is created", function(){
-		same($("#range-slider-up").attr( "type" ), "number");
+		deepEqual($("#range-slider-up").attr( "type" ), "number");
 	});
 
 	// generic switch test function
@@ -131,8 +131,8 @@
 			$.Event.prototype.keyCode = $.mobile.keyCode[elem];
 			handle.trigger('keydown');
 
-			same(handle.attr('aria-valuenow'), opts.finish, "handle value is " + opts.finish);
-			same(slider[0].selectedIndex, switchValues[opts.finish], "select input has correct index");
+			deepEqual(handle.attr('aria-valuenow'), opts.finish, "handle value is " + opts.finish);
+			deepEqual(slider[0].selectedIndex, switchValues[opts.finish], "select input has correct index");
 		});
 	};
 
@@ -153,13 +153,13 @@
 	});
 
 	test( "onchange should not be called on create", function(){
-		equals(onChangeCnt, 0, "onChange should not have been called");
+		equal(onChangeCnt, 0, "onChange should not have been called");
 	});
 
 	test( "onchange should be called onchange", function(){
 		onChangeCnt = 0;
 		$( "#onchange" ).slider( "refresh", 50 );
-		equals(onChangeCnt, 1, "onChange should have been called once");
+		equal(onChangeCnt, 1, "onChange should have been called once");
 	});
 
 	test( "slider controls will create when inside a container that receives a 'create' event", function(){
@@ -202,7 +202,7 @@
 		control.unbind( "change", changeFunc );
 
 		ok( control[0].selectedIndex !== currentValue, "value did change");
-		same( changeCount, 1, "change event should be fired once during a click" );
+		deepEqual( changeCount, 1, "change event should be fired once during a click" );
 	});
 
 	var assertLeftCSS = function( obj, opts ) {

@@ -34,7 +34,7 @@
 			},
 
 			function(){
-				same( value, $.trim(selectButton.text()), "the selected value is propogated back to the button text" );
+				deepEqual( value, $.trim(selectButton.text()), "the selected value is propogated back to the button text" );
 				start();
 			}
 		]);
@@ -56,12 +56,12 @@
 			function(){
 				selectButton = $.mobile.activePage.find( "#cached-page-select" ).siblings( 'a' );
 				parentPageId = $.mobile.activePage.attr( 'id' );
-				same( $("#" + parentPageId).length, 1, "establish the parent page exists" );
+				deepEqual( $("#" + parentPageId).length, 1, "establish the parent page exists" );
 				selectButton.click();
 			},
 
 			function(){
-				same( $( "#" + parentPageId).length, 1, "make sure parent page is still there after opening the dialog" );
+				deepEqual( $( "#" + parentPageId).length, 1, "make sure parent page is still there after opening the dialog" );
 				$.mobile.activePage.find( "li a" ).last().click();
 			},
 
@@ -94,7 +94,7 @@
 			},
 
 			function(){
-				same( $("#dialog-select-parent-domcache-test").length, 1, "make sure the select parent page is still cached in the dom after changing page" );
+				deepEqual( $("#dialog-select-parent-domcache-test").length, 1, "make sure the select parent page is still cached in the dom after changing page" );
 				start();
 			}
 		]);
@@ -111,7 +111,7 @@
 
 			function(){
 				// for performance reason we don't initially create the menu dialog now
-				same( $(":jqmData(role='dialog')").length, dialogCount);
+				deepEqual( $(":jqmData(role='dialog')").length, dialogCount);
 
 				// manually trigger dialog opening
 				$( "#domcache-uncached-page-select" ).data( 'selectmenu' ).open();
@@ -119,7 +119,7 @@
 
 			function(){
 				// check if dialog was successfully  created
-				same( $(":jqmData(role='dialog')").length, dialogCount + 1 );
+				deepEqual( $(":jqmData(role='dialog')").length, dialogCount + 1 );
 				$( "#domcache-uncached-page-select" ).data( 'selectmenu' ).close();
 			},
 
@@ -129,7 +129,7 @@
 			},
 
 			function() {
-				same( $(":jqmData(role='dialog')").length, dialogCount );
+				deepEqual( $(":jqmData(role='dialog')").length, dialogCount );
 				start();
 			}
 		]);

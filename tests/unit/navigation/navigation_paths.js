@@ -33,7 +33,7 @@
 
 			// verify that the page has changed and the expected text value is present
 			function(){
-				same($.mobile.activePage.find(".test-value").text(), expectedTextValue);
+				deepEqual($.mobile.activePage.find(".test-value").text(), expectedTextValue);
 				start();
 			}
 		]);

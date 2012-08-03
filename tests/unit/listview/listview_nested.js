@@ -79,7 +79,7 @@
 	});
 
 	test( "nested list title should use first text node, regardless of line breaks", function(){
-		same($(":jqmData(url='nested-list-test&ui-page=0-0') .ui-title").text(), "More animals", 'Text should be "More animals"');
+		deepEqual($(":jqmData(url='nested-list-test&ui-page=0-0') .ui-title").text(), "More animals", 'Text should be "More animals"');
 	});
 
 	asyncTest( "Multiple nested lists on a page with same labels", function() {

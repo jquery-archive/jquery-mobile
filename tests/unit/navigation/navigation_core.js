@@ -68,13 +68,13 @@
 
 			// page is pulled and displayed in the dom
 			function(){
-				same( $( "#external-test" ).length, 1 );
+				deepEqual( $( "#external-test" ).length, 1 );
 				window.history.back();
 			},
 
 			// external-test is *NOT* cached in the dom after transitioning away
 			function(){
-				same( $( "#external-test" ).length, 0 );
+				deepEqual( $( "#external-test" ).length, 0 );
 				start();
 			}
 		]);
@@ -99,13 +99,13 @@
 
 			// page is pulled and displayed in the dom
 			function(){
-				same( $( "#external-test" ).length, 1 );
+				deepEqual( $( "#external-test" ).length, 1 );
 				window.history.back();
 			},
 
 			// external-test *IS* cached in the dom after transitioning away
 			function(){
-				same( $( "#external-test" ).length, 1 );
+				deepEqual( $( "#external-test" ).length, 1 );
 
 				// Switch back to the page again!
 				$.mobile.changePage( "external.html" );
@@ -113,7 +113,7 @@
 
 			// page is still present and displayed in the dom
 			function(){
-				same( $( "#external-test" ).length, 1 );
+				deepEqual( $( "#external-test" ).length, 1 );
 
 				// Now turn off our removal prevention.
 				preventRemoval = false;
@@ -123,7 +123,7 @@
 
 			// external-test is *NOT* cached in the dom after transitioning away
 			function(){
-				same( $( "#external-test" ).length, 0 );
+				deepEqual( $( "#external-test" ).length, 0 );
 				$( document ).unbind( "pageremove", removeCallback );
 				start();
 			}
@@ -140,13 +140,13 @@
 
 			// page is pulled and displayed in the dom
 			function(){
-				same( $( "#external-test-cached" ).length, 1 );
+				deepEqual( $( "#external-test-cached" ).length, 1 );
 				window.history.back();
 			},
 
 			// external test page is cached in the dom after transitioning away
 			function(){
-				same( $( "#external-test-cached" ).length, 1 );
+				deepEqual( $( "#external-test-cached" ).length, 1 );
 				start();
 			}
 		]);
@@ -163,13 +163,13 @@
 
 			// page is pulled and displayed in the dom
 			function(){
-				same( $( "#external-test" ).length, 1 );
+				deepEqual( $( "#external-test" ).length, 1 );
 				window.history.back();
 			},
 
 			// external test page is cached in the dom after transitioning away
 			function(){
-				same( $( "#external-test" ).length, 1 );
+				deepEqual( $( "#external-test" ).length, 1 );
 				$.mobile.page.prototype.options.domCache = false;
 				$( "#external-test" ).remove();
 				start();
@@ -187,7 +187,7 @@
 				// wait for the initial scroll to 0
 				setTimeout( function() {
 					window.scrollTo( 0, 300 );
-					same( $(window).scrollTop(), 300, "scrollTop is 300 after setting it" );
+					deepEqual( $(window).scrollTop(), 300, "scrollTop is 300 after setting it" );
 				}, 300);
 
 				// wait for the scrollstop to fire and for the scroll to be
@@ -203,7 +203,7 @@
 			function(){
 				// Give the silentScroll function some time to kick in.
 				setTimeout(function() {
-					same( $(window).scrollTop(), 300, "scrollTop is 300 after returning to the page" );
+					deepEqual( $(window).scrollTop(), 300, "scrollTop is 300 after returning to the page" );
 					$( "body" ).height( "" );
 					start();
 				}, 300 );
@@ -264,7 +264,7 @@
 		$( "<a>test</a>" ).appendTo( $.mobile.firstPage ).click();
 
 		setTimeout(function(){
-			same(fired, false, "hash shouldn't change after click");
+			deepEqual(fired, false, "hash shouldn't change after click");
 			$(window).unbind("hashchange.temp");
 			start();
 		}, 500);
@@ -273,7 +273,7 @@
 	test( "urlHistory is working properly", function(){
 
 		//urlHistory
-		same( $.type( $.mobile.urlHistory.stack ), "array", "urlHistory.stack is an array" );
+		deepEqual( $.type( $.mobile.urlHistory.stack ), "array", "urlHistory.stack is an array" );
 
 		//preload the stack
 		$.mobile.urlHistory.stack[0] = { url: "foo", transition: "bar" };
@@ -281,30 +281,30 @@
 		$.mobile.urlHistory.stack[2] = { url: "shizoo", transition: "shizaah" };
 
 		//active index
-		same( $.mobile.urlHistory.activeIndex , 0, "urlHistory.activeIndex is 0" );
+		deepEqual( $.mobile.urlHistory.activeIndex , 0, "urlHistory.activeIndex is 0" );
 
 		//getActive
-		same( $.type( $.mobile.urlHistory.getActive() ) , "object", "active item is an object" );
-		same( $.mobile.urlHistory.getActive().url , "foo", "active item has url foo" );
-		same( $.mobile.urlHistory.getActive().transition , "bar", "active item has transition bar" );
+		deepEqual( $.type( $.mobile.urlHistory.getActive() ) , "object", "active item is an object" );
+		deepEqual( $.mobile.urlHistory.getActive().url , "foo", "active item has url foo" );
+		deepEqual( $.mobile.urlHistory.getActive().transition , "bar", "active item has transition bar" );
 
 		//get prev / next
-		same( $.mobile.urlHistory.getPrev(), undefined, "urlHistory.getPrev() is undefined when active index is 0" );
+		deepEqual( $.mobile.urlHistory.getPrev(), undefined, "urlHistory.getPrev() is undefined when active index is 0" );
 		$.mobile.urlHistory.activeIndex = 1;
-		same( $.mobile.urlHistory.getPrev().url, "foo", "urlHistory.getPrev() has url foo when active index is 1" );
+		deepEqual( $.mobile.urlHistory.getPrev().url, "foo", "urlHistory.getPrev() has url foo when active index is 1" );
 		$.mobile.urlHistory.activeIndex = 0;
-		same( $.mobile.urlHistory.getNext().url, "baz", "urlHistory.getNext() has url baz when active index is 0" );
+		deepEqual( $.mobile.urlHistory.getNext().url, "baz", "urlHistory.getNext() has url baz when active index is 0" );
 
 		//add new
 		$.mobile.urlHistory.activeIndex = 2;
 		$.mobile.urlHistory.addNew("test");
-		same( $.mobile.urlHistory.stack.length, 4, "urlHistory.addNew() adds an item after the active index" );
-		same( $.mobile.urlHistory.activeIndex, 3, "urlHistory.addNew() moves the activeIndex to the newly added item" );
+		deepEqual( $.mobile.urlHistory.stack.length, 4, "urlHistory.addNew() adds an item after the active index" );
+		deepEqual( $.mobile.urlHistory.activeIndex, 3, "urlHistory.addNew() moves the activeIndex to the newly added item" );
 
 		//clearForward
 		$.mobile.urlHistory.activeIndex = 0;
 		$.mobile.urlHistory.clearForward();
-		same( $.mobile.urlHistory.stack.length, 1, "urlHistory.clearForward() clears the url stack after the active index" );
+		deepEqual( $.mobile.urlHistory.stack.length, 1, "urlHistory.clearForward() clears the url stack after the active index" );
 	});
 
 	//url listening
@@ -385,7 +385,7 @@
 				// fourth page (third index) in the stack to account for first page being hash manipulation,
 				// the third page is dup-history-second which has two entries in history
 				// the test is to make sure the index isn't 1 in this case, or the first entry for dup-history-second
-				same($.mobile.urlHistory.activeIndex, 3, "should be the fourth page in the stack");
+				deepEqual($.mobile.urlHistory.activeIndex, 3, "should be the fourth page in the stack");
 				start();
 			}]);
 	});
@@ -470,7 +470,7 @@
 			// make sure the dialog is closed
 			function() {
 				setTimeout( function() {
-					same($("#dialog-double-hash-test")[0], $.mobile.activePage[0], "should be back to the test page");
+					deepEqual($("#dialog-double-hash-test")[0], $.mobile.activePage[0], "should be back to the test page");
 					start();
 				}, 300);
 			}
@@ -493,7 +493,7 @@
 
 			// make sure we're on first dialog
 			function(){
-				same($(".ui-page-active")[0], $("#nested-dialog-first")[0], "should be the first dialog");
+				deepEqual($(".ui-page-active")[0], $("#nested-dialog-first")[0], "should be the first dialog");
 				start();
 			}]);
 	});
@@ -512,7 +512,7 @@
 			// make sure the page was loaded properly via ajax
 			function(){
 				// data attribute intentionally left without namespace
-				same($(".ui-page-active").data("other"), "for testing", "should be relative ajax loaded page");
+				deepEqual($(".ui-page-active").data("other"), "for testing", "should be relative ajax loaded page");
 				start();
 			}]);
 	});
@@ -528,7 +528,7 @@
 			},
 
 			function(){
-				same(document.title, "jQuery Mobile Navigation Test Suite");
+				deepEqual(document.title, "jQuery Mobile Navigation Test Suite");
 				start();
 			}
 		]);
@@ -547,12 +547,12 @@
 			},
 
 			function(){
-				same(document.title, "Title Tag");
+				deepEqual(document.title, "Title Tag");
 				$.mobile.activePage.find("#title-check-link").click();
 			},
 
 			function(){
-				same(document.title, title);
+				deepEqual(document.title, title);
 				start();
 			}
 		]);
@@ -569,7 +569,7 @@
 			},
 
 			function(){
-				same(document.title, "Title Tag");
+				deepEqual(document.title, "Title Tag");
 				start();
 			}
 		]);
@@ -586,7 +586,7 @@
 			},
 
 			function(){
-				same(document.title, "Title Attr");
+				deepEqual(document.title, "Title Attr");
 				start();
 			}
 		]);
@@ -603,7 +603,7 @@
 			},
 
 			function(){
-				same(document.title, "Title Heading");
+				deepEqual(document.title, "Title Heading");
 				start();
 			}
 		]);
@@ -620,7 +620,7 @@
 			},
 
 			function(){
-				same($.mobile.activePage[0], $("#self-link")[0], "self-link page is still the active page" );
+				deepEqual($.mobile.activePage[0], $("#self-link")[0], "self-link page is still the active page" );
 				start();
 			}
 		]);
@@ -707,7 +707,7 @@
 			},
 
 			function(){
-				same(location.hash || location.href, firstDialogLoc, "additional dialog hash key not added");
+				deepEqual(location.hash || location.href, firstDialogLoc, "additional dialog hash key not added");
 				start();
 			}
 		]);
@@ -760,7 +760,7 @@
 		$.testHelper.pageSequence([
 			// open our test page
 			function(){
-				same($(".foo-class").length, 1, "should only have one instance of foo-class in the document");
+				deepEqual($(".foo-class").length, 1, "should only have one instance of foo-class in the document");
 				location.hash = "#foo&ui-state=dialog";
 			},
 
@@ -771,7 +771,7 @@
 					report: "hash should match what was loaded"
 				});
 
-				same( $(".foo-class").length, 1, "should only have one instance of foo-class in the document" );
+				deepEqual( $(".foo-class").length, 1, "should only have one instance of foo-class in the document" );
 				start();
 			}
 		]);
@@ -866,7 +866,7 @@
 			},
 
 			function(){
-				same( $.mobile.activePage[0], $( "#default-trans-dialog" )[0] );
+				deepEqual( $.mobile.activePage[0], $( "#default-trans-dialog" )[0] );
 				$.mobile.activePage.find( "a" ).click();
 			},
 
@@ -875,7 +875,7 @@
 			},
 
 			function(){
-				same( $.mobile.activePage[0], $( "#default-trans-dialog" )[0] );
+				deepEqual( $.mobile.activePage[0], $( "#default-trans-dialog" )[0] );
 				start();
 			}
 		]);
@@ -894,7 +894,7 @@
 			// make sure the page is opening first without the mocked button click value
 			// only necessary to prevent issues with test specific fixtures
 			function() {
-				same($.mobile.activePage[0], $("#odd-clicks-page-dest")[0]);
+				deepEqual($.mobile.activePage[0], $("#odd-clicks-page-dest")[0]);
 				$.testHelper.openPage( "#odd-clicks-page" );
 
 				// mock the which value to simulate a middle click
@@ -1011,7 +1011,7 @@
 
 				// Now make sure opening the page didn't result in page duplication.
 				ok( $.mobile.firstPage.hasClass( "first-page" ), "first page has expected class" );
-				same( $( ".first-page" ).length, 1, "first page was not duplicated" );
+				deepEqual( $( ".first-page" ).length, 1, "first page was not duplicated" );
 
 				start();
 			}
@@ -1031,7 +1031,7 @@
 			function(){
 				// Make sure there's only one copy of the first-page in the DOM to begin with.
 				ok( $.mobile.firstPage.hasClass( "first-page" ), "first page has expected class" );
-				same( $( ".first-page" ).length, 1, "first page was not duplicated" );
+				deepEqual( $( ".first-page" ).length, 1, "first page was not duplicated" );
 
 				// Navigate to any page except the first page of the application.
 				$.testHelper.openPage("#foo");
@@ -1040,7 +1040,7 @@
 			function(){
 				var $foo = $( "#foo" );
 				ok( $.mobile.activePage[ 0 ] === $foo[ 0 ], "navigated successfully to #foo" );
-				same( pagechangefailed, false, "no page change failures" );
+				deepEqual( pagechangefailed, false, "no page change failures" );
 
 				// Now navigate to a non-existent page.
 				$foo.find( "#bad-internal-page-link" ).click();
@@ -1048,13 +1048,13 @@
 
 			function(){
 				// Make sure a pagechangefailed event was triggered.
-				same( pagechangefailed, true, "pagechangefailed dispatched" );
+				deepEqual( pagechangefailed, true, "pagechangefailed dispatched" );
 
 				// Make sure we didn't navigate away from #foo.
 				ok( $.mobile.activePage[ 0 ] === $( "#foo" )[ 0 ], "did not navigate away from #foo" );
 
 				// Now make sure opening the page didn't result in page duplication.
-				same( $( ".first-page" ).length, 1, "first page was not duplicated" );
+				deepEqual( $( ".first-page" ).length, 1, "first page was not duplicated" );
 
 				$( document ).unbind( "pagechangefailed", pageChangeFailedCB );
 
@@ -1109,7 +1109,7 @@
 				ok( $.mobile.firstPage[ 0 ].id, "first page has an id" );
 
 				// Make sure there is only one first page in the DOM.
-				same( $( ".first-page" ).length, 1, "only one instance of the first page in the DOM" );
+				deepEqual( $( ".first-page" ).length, 1, "only one instance of the first page in the DOM" );
 
 				// Navigate to any page except the first page of the application.
 				$.testHelper.openPage("#foo");
@@ -1124,7 +1124,7 @@
 
 				// Make sure the first page was actually pruned from the document.
 				ok( $.mobile.firstPage.parent().length === 0, "first page was pruned from the DOM" );
-				same( $( ".first-page" ).length, 0, "no instance of the first page in the DOM" );
+				deepEqual( $( ".first-page" ).length, 0, "no instance of the first page in the DOM" );
 
 				// Remove our hideCallback.
 				$(document).unbind('pagehide', hideCallback);
@@ -1137,7 +1137,7 @@
 				var firstPage = $( ".first-page" );
 
 				// We should only have one first page in the document at any time!
-				same( firstPage.length, 1, "single instance of first page recreated in the DOM" );
+				deepEqual( firstPage.length, 1, "single instance of first page recreated in the DOM" );
 
 				// Make sure the first page in the DOM is actually a different DOM element than the original
 				// one we started with.

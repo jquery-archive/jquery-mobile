@@ -30,14 +30,14 @@
 	test( "prototype options are used for mobile loader", function() {
 		$.mobile.loading( 'show' );
 
-		same( $('.ui-loader').text(), "mobileinit", "prototype options set the text and make it visible" );
+		deepEqual( $('.ui-loader').text(), "mobileinit", "prototype options set the text and make it visible" );
 	});
 
 	test( "showPageLoadingMsg does not show the text when the loading message is false", function(){
 		$.mobile.loadingMessage = false;
 		$.mobile.showPageLoadingMsg();
 
-		same($(".ui-loader h1").text(), "", "no loading message present");
+		deepEqual($(".ui-loader h1").text(), "", "no loading message present");
 	});
 
 	test( "showPageLoadingMsg doesn't hide the text loading message is true", function(){
@@ -52,33 +52,33 @@
 		$.mobile.showPageLoadingMsg();
 		$.mobile.hidePageLoadingMsg();
 
-		same($(".ui-loading").length, 0, "page should not be in the loading state");
+		deepEqual($(".ui-loading").length, 0, "page should not be in the loading state");
 	});
 
 	test( "showPageLoadingMsg adds the dialog to the page when loadingMessage is true", function(){
 		$.mobile.loadingMessage = true;
 		$.mobile.showPageLoadingMsg();
 
-		same($(".ui-loading").length, 1, "page should be in the loading state");
+		deepEqual($(".ui-loading").length, 1, "page should be in the loading state");
 	});
 
 	test( "page loading should contain custom loading message", function(){
 		$.mobile.loadingMessage = "foo";
 		$.mobile.showPageLoadingMsg();
 
-		same($(".ui-loader h1").text(), "foo");
+		deepEqual($(".ui-loader h1").text(), "foo");
 	});
 
 	test( "page loading should contain custom loading message when set at runtime", function(){
 		$.mobile.loadingMessage = "bar";
 		$.mobile.showPageLoadingMsg();
 
-		same($(".ui-loader h1").text(), "bar");
+		deepEqual($(".ui-loader h1").text(), "bar");
 	});
 
 	test( "page loading should contain custom loading message when used in param object", function() {
 		$.mobile.showPageLoadingMsg({ text: "bak" });
-		same($(".ui-loader h1").text(), "bak", "loader has custom message 'bak'");
+		deepEqual($(".ui-loader h1").text(), "bak", "loader has custom message 'bak'");
 	});
 
 	test( "page loading should contain different theme when used in param object", function() {
@@ -91,7 +91,7 @@
 			html: "<div class=\"foo\"></div>"
 		});
 
-		same($(".ui-loader > div.foo").length, 1, "loader has a custom html");
+		deepEqual($(".ui-loader > div.foo").length, 1, "loader has a custom html");
 	});
 
 	test( "page loading should always contain text when passed as the second arg", function() {
@@ -100,7 +100,7 @@
 		// simulate error call in navigation ajax error callback
 		$.mobile.showPageLoadingMsg( "e", "foo serious", true );
 
-		same($(".ui-loader").text(), "foo serious", "loader has message regardless of global setting");
+		deepEqual($(".ui-loader").text(), "foo serious", "loader has message regardless of global setting");
 	});
 
 	test( "page loading should always contain text when passed as an object prop", function() {
@@ -109,7 +109,7 @@
 		// simulate error call in navigation ajax error callback
 		$.mobile.showPageLoadingMsg({ theme: "e", text: "foo serious second", textonly: true });
 
-		same($(".ui-loader").text(), "foo serious second", "loader has message regardless of global setting");
+		deepEqual($(".ui-loader").text(), "foo serious second", "loader has message regardless of global setting");
 	});
 
 	test( "page loading should not contain text when default is used and visible prop is false", function() {
@@ -134,6 +134,6 @@
 
 		$.mobile.showPageLoadingMsg();
 		ok($(".ui-loader").hasClass( "ui-body-x" ), "has theme x");
-		same($(".ui-loader h1").text(), "fozzle", "has text fozzle in loading config object");
+		deepEqual($(".ui-loader h1").text(), "fozzle", "has text fozzle in loading config object");
 	});
 })(jQuery);

@@ -40,14 +40,14 @@
 			.attr( "data-" + $.mobile.ns + "role", "page" )
 			.page()
 			.trigger( "pagecreate" );
-		same( $ignored.attr( "class" ), undefined, "ignored header has no class" );
+		deepEqual( $ignored.attr( "class" ), undefined, "ignored header has no class" );
 
 		$enhanced
 			.parent()
 			.attr( "data-" + $.mobile.ns + "role", "page" )
 			.page()
 			.trigger( "pagecreate" );
-		same( $enhanced.attr( "class" ).indexOf("ui-header"), 0, "enhanced header has classes" );
+		deepEqual( $enhanced.attr( "class" ).indexOf("ui-header"), 0, "enhanced header has classes" );
 
 		$.mobile.ignoreContentEnabled = false;
 	});

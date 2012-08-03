@@ -6,7 +6,7 @@
 	module('jquery.mobile.degradeInputs.js');
 
 	test('keepNative elements should not be degraded', function() {
-		same($('input#not-to-be-degraded').attr("type"), "range");
+		deepEqual($('input#not-to-be-degraded').attr("type"), "range");
 	});
 
 	asyncTest('should degrade input type to a different type, as specified in page options', function(){
@@ -29,11 +29,11 @@
 
 					$('#page-test-container').html('<input type="' + oldType + '" />').trigger("create");
 
-					same($('#page-test-container input').attr("type"), newType, "type attr on page is: " + newType);
+					deepEqual($('#page-test-container input').attr("type"), newType, "type attr on page is: " + newType);
 
 					$('#dialog-test-container').html('<input type="' + oldType + '" />').trigger("create");
 
-					same($('#dialog-test-container input').attr("type"), newType, "type attr on dialog is: " + newType);
+					deepEqual($('#dialog-test-container input').attr("type"), newType, "type attr on dialog is: " + newType);
 				});
 
 				start();

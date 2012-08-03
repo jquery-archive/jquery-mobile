@@ -20,7 +20,7 @@
 
 		$( "#ignore-container-tests" ).trigger( "create" );
 
-		same( $ignored.attr( "class" ), undefined, "ignored div does not have field contain class" );
+		deepEqual( $ignored.attr( "class" ), undefined, "ignored div does not have field contain class" );
 		ok( $enhanced.hasClass( "ui-field-contain" ), "enhanced div has field contain class" );
 
 		$.mobile.ignoreContentEnabled = false;

@@ -119,7 +119,7 @@
 
 	function tolTest( el, popup, val, expected ) {
 		el.popup( "option", "tolerance", val );
-		same( popup._tolerance, expected, "Popup tolerance: '" + val + "' results in expected tolerances" );
+		deepEqual( popup._tolerance, expected, "Popup tolerance: '" + val + "' results in expected tolerances" );
 	}
 
 	test( "Popup tolerances are parsed correctly", function() {
