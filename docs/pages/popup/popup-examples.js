@@ -92,7 +92,7 @@ $( document ).on( "pageinit", function() {
 	});
 		 
 	$( "#popupPanel button" ).on( "click", function() {	
-		$( this ).closest( ".ui-popup" ).popup('close');
+		$( "#popupPanel" ).popup('close');
 	});
 
 });
