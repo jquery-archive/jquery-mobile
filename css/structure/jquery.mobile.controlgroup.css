@@ -16,7 +16,7 @@
 .ui-controlgroup-horizontal .ui-controlgroup-controls:before,
 .ui-controlgroup-horizontal .ui-controlgroup-controls:after { content: ""; display: table; }
 .ui-controlgroup-horizontal .ui-controlgroup-controls:after { clear: both; }
-.ui-controlgroup-horizontal .ui-controlgroup-controls { display: inline-block; zoom: 1; }
+.ui-controlgroup-horizontal .ui-controlgroup-controls { display: inline-block; vertical-align: middle; zoom: 1; }
 .ui-controlgroup-horizontal .ui-btn-inner { text-align: center; }
 .ui-controlgroup-horizontal .ui-btn, .ui-controlgroup-horizontal .ui-select,
 .ui-controlgroup-horizontal .ui-checkbox, .ui-controlgroup-horizontal .ui-radio { float: left; clear: none; margin: 0 -1px 0 0; }
