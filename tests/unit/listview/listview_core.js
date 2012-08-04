@@ -353,7 +353,7 @@
 
 	module( "Autodividers Selector" );
 
-	asyncTest( "Adds divider text from links.", function() {
+	asyncTest( "Adds right divider text.", function() {
 		$.testHelper.pageSequence([
 			function() {
 				$.testHelper.openPage( '#autodividers-selector-test' );
@@ -363,7 +363,7 @@
 				var $new_page = $( '#autodividers-selector-test' );
 				ok($new_page.hasClass( 'ui-page-active' ));
 
-				// check we have the right dividers based on link text
+				// check we have the right dividers
 				var $list = $( '#autodividers-selector-test-list1' );
 				ok( $list.find( '.ui-li-divider' ).length === 4 );
 				ok( $list.find( '.ui-li-divider:eq(0):contains(A)' ).length === 1 );
@@ -371,8 +371,8 @@
 				ok( $list.find( '.ui-li-divider:eq(2):contains(C)' ).length === 1 );
 				ok( $list.find( '.ui-li-divider:eq(3):contains(D)' ).length === 1 );
 
-				// check that adding a new item with link creates the right divider
-				$list.append( '<li><a href="">e is for ethel</a></li>' );
+				// check that adding a new item creates the right divider
+				$list.append( '<li><a href="#">e is for ethel</a></li>' );
 				$list.listview('refresh');
 				ok( $list.find( '.ui-li-divider:eq(4):contains(E)' ).length === 1 );
 
