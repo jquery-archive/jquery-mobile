@@ -81,7 +81,7 @@
 
 			<p>A listview can be configured to automatically generate dividers for its items. This is done by adding a <code>data-autodividers="true"</code> attribute to any listview.</p>
 
-			<p>By default, the text used to create dividers is the uppercased first letter of either the item's link text (for linked lists) or the item's text (for read-only lists). Alternatively, if you are using formatted list items, you can specify divider text by setting the <code>autodividersSelector</code> option on the listview programmatically. For example, to add a custom selector to the element with <code>id="mylistview"</code>:</p>
+			<p>By default, the text used to create dividers is the uppercased first letter of the item's text. Alternatively you can specify divider text by setting the <code>autodividersSelector</code> option on the listview programmatically. For example, to add a custom selector to the element with <code>id="mylistview"</code>:</p>
 
 <pre><code>
 $("#mylistview").listview({
@@ -97,6 +97,8 @@ $("#mylistview").listview({
 });
 </code></pre>
 
+			<p>Note that if you are using formatted list items that contain a floating element (for example <code>ui-li-aside</code>), this element precedes its siblings regardless the order in your HTML markup. This results in the first character of the floating element being used as divider text. Therefor it is recommended to specify the divider text in this case.</p>
+			
 			<p>If new list items are added to the list or removed from it, the dividers are <em>not</em> automatically updated: you should call <code>refresh()</code> on the listview to redraw the autodividers.</p>
 
 			<a href="lists-autodividers.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Autodividers example</a>
