@@ -21,7 +21,7 @@
 .ui-controlgroup-horizontal .ui-controlgroup-controls:before,
 .ui-controlgroup-horizontal .ui-controlgroup-controls:after { content: ""; display: table; }
 .ui-controlgroup-horizontal .ui-controlgroup-controls:after { clear: both; }
-.ui-controlgroup-horizontal .ui-controlgroup-controls { display: inline-block; zoom: 1; }
+.ui-controlgroup-horizontal .ui-controlgroup-controls { display: inline-block; vertical-align: middle; zoom: 1; }
 .ui-controlgroup-horizontal .ui-btn-inner { text-align: center; }
 .ui-controlgroup-horizontal.ui-mini .ui-btn-inner { height: 16px; line-height: 16px; }
 .ui-controlgroup-horizontal .ui-btn, .ui-controlgroup-horizontal .ui-select,
