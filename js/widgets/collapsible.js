@@ -122,13 +122,14 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 					event.preventDefault();
 
 					collapsibleHeading
-						.toggleClass( "ui-collapsible-heading-collapsed", isCollapse)
+						.toggleClass( "ui-collapsible-heading-collapsed", isCollapse )
 						.find( ".ui-collapsible-heading-status" )
 							.text( isCollapse ? o.expandCueText : o.collapseCueText )
 						.end()
 						.find( ".ui-icon" )
 							.toggleClass( "ui-icon-" + expandedIcon, !isCollapse )
-							.toggleClass( "ui-icon-" + collapsedIcon, isCollapse )
+							// logic or cause same icon for expanded/collapsed state would remove the ui-icon-class
+							.toggleClass( "ui-icon-" + collapsedIcon, ( isCollapse || expandedIcon == collapsedIcon ) )
 						.end()
 						.find( "a" ).first().removeClass( $.mobile.activeBtnClass );
 
