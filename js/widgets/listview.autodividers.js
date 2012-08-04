@@ -7,8 +7,8 @@ define( [ "jquery", "./listview" ], function( $ ) {
 
 $.mobile.listview.prototype.options.autodividers = false;
 $.mobile.listview.prototype.options.autodividersSelector = function( elt ) {
-	// look for the first anchor in the item
-	var text = elt.find( 'a' ).text() || elt.text() || null;
+	// look for the text in the given element
+	var text = elt.text() || null;
 
 	if ( !text ) {
 		return null;
