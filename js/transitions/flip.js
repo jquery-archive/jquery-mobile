@@ -6,7 +6,7 @@
 //>>description: Animation styles and fallback transitions definition for non-3D supporting browsers
 //>>label: Flip Transition
 //>>group: Transitions
-//>>css.structure: ../../css/structure/jquery.mobile.transitions.flip.css
+//>>css.structure: ../../css/structure/jquery.mobile.transition.flip.css
 
 define( [ "jquery", "../jquery.mobile.transition" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
