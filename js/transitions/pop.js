@@ -6,7 +6,7 @@
 //>>description: Animation styles and fallback transitions definition for non-3D supporting browsers
 //>>label: Pop Transition
 //>>group: Transitions
-//>>css.structure: ../../css/structure/jquery.mobile.transition.pop.css
+//>>css.structure: ../css/structure/jquery.mobile.transition.pop.css
 
 define( [ "jquery", "../jquery.mobile.transition" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
