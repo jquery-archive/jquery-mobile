@@ -162,7 +162,7 @@
 		<p>This plugin will autoinitialize on any page that contains a div with the attribute <code>data-role="popup"</code>. However, if needed you can directly call the <code>popup</code> plugin on any selector, just like any jQuery plugin and programmatically work with the popup <a href="options.html">options</a>, <a href="methods.html">methods</a>, and <a href="events.html">events</a> API:</p>
 		
 <pre><code>
-$('#myPopupDiv').popup();
+$( "#myPopupDiv" ).popup();
 </code></pre>
 
 		<h2>Opening popups</h2>
@@ -170,14 +170,14 @@ $('#myPopupDiv').popup();
 		<p>Using the markup-based configuration, when a link with the <code>data-rel="popup"</code> is tapped, the corresponding popup container with the id referenced in the <code>href</code> of the link will be shown. To open a popup programmatically, call popup with the <code>open</code> method on the popup container:</p>
 		
 <pre><code>
-$('#myPopupDiv').popup("open")
+$( "#myPopupDiv" ).popup( "open" )
 </code></pre>
 
 		<h2>Closing popups</h2>
 		<p>Popups can be closed either by clicking outside the popup widget or by pressing the <code>Esc</code> key. Popups can also be closed via the <code>close</code> method:
 			
 <pre><code>
-$('#myPopupDiv').popup("close")
+$( "#myPopupDiv" ).popup( "close" )
 </code></pre>
 			
 			<p>To add an explicit close button to a popup, add a link with the role of button into the popup container with a <code>data-rel="back"</code> attribute which will close the popup when tapped. We have created helper classes to position buttons in the upper left (<code>ui-btn-left</code>) or upper right (<code>ui-btn-right</code>) of the popup but you may need to tweak these or add custom positioning styles depending on your design. We recommend adding standard content padding to the popup to make room for the buttons (see next section).</p>
@@ -300,7 +300,7 @@ $( ".selector" ).popup( "open", x, y,
 			<p>I'm a simple popup.</p>
 		</div>
 											
-		<p>When you launch the popup from any of the buttons, the <code>data-transition</code> set on the button will be used. However, if you launch the popup programmatically, such as via <code>$("#transitionExample").popup("open")</code>, the <code>data-transition</code> attribute specified in the definition of the popup will be used if present.</p>
+		<p>When you launch the popup from any of the buttons, the <code>data-transition</code> set on the button will be used. However, if you launch the popup programmatically, such as via <code>$( "#transitionExample" ).popup( "open" )</code>, the <code>data-transition</code> attribute specified in the definition of the popup will be used if present.</p>
 		
 
 		<h2>Theming the popup and overlay</h2>
