@@ -617,7 +617,7 @@ define( [ "jquery",
 			toUrl = parsedDst.pathname + parsedDst.search + parsedDst.hash;
 
 			if ( this._myUrl !== toUrl ) {
-				this._onHashChange( true );
+				this._navUnhook( true );
 			}
 		},
 
@@ -675,7 +675,7 @@ define( [ "jquery",
 				window.history.back();
 			}
 			else {
-				this._onHashChange();
+				this._onHashChange( abort );
 			}
 			$.mobile.activePage.unbind( "pagebeforechange.popup" );
 		},
