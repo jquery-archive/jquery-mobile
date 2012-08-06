@@ -17,7 +17,10 @@ define( [ "jquery", "../jquery.mobile.vmouse" ], function( $ ) {
 			return fn ? this.bind( name, fn ) : this.trigger( name );
 		};
 
-		$.attrFn[ name ] = true;
+		// jQuery < 1.8
+		if ( $.attrFn ) {
+			$.attrFn[ name ] = true;
+		}
 	});
 
 	var supportTouch = "ontouchend" in document,

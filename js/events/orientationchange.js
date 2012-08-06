@@ -142,7 +142,10 @@ define( [ "jquery", "../jquery.mobile.support.orientation", "./throttledresize" 
 		return fn ? this.bind( event_name, fn ) : this.trigger( event_name );
 	};
 
-	$.attrFn[ event_name ] = true;
+	// jQuery < 1.8
+	if ( $.attrFn ) {
+		$.attrFn[ event_name ] = true;
+	}
 
 }( jQuery, this ));
 
