@@ -88,7 +88,7 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 
 				// Store the initial destination
 				if ( $.mobile.path.isHashValid( location.hash ) ) {
-					$.mobile.urlHistory.initialDst = $.mobile.path.parseUrl( location.href ).hash.replace( "#", "" );
+					$.mobile.urlHistory.initialDst = $.mobile.path.parseLocation().hash.replace( "#", "" );
 				}
 				$.mobile.changePage( $.mobile.firstPage, { transition: "none", reverse: true, changeHash: false, fromHashChange: true } );
 			}

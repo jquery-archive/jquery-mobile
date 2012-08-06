@@ -12,7 +12,7 @@ define( [ "jquery", "./jquery.mobile.navigation", "depend!./jquery.hashchange[jq
 	var	pushStateHandler = {},
 		self = pushStateHandler,
 		$win = $( window ),
-		url = $.mobile.path.parseUrl( location.href ),
+		url = $.mobile.path.parseLocation(),
 		mobileinitDeferred = $.Deferred(),
 		domreadyDeferred = $.Deferred();
 
@@ -35,7 +35,7 @@ define( [ "jquery", "./jquery.mobile.navigation", "depend!./jquery.hashchange[jq
 		state: function() {
 			return {
 				// firefox auto decodes the url when using location.hash but not href
-				hash: $.mobile.path.parseUrl( location.href ).hash || "#" + self.initialFilePath,
+				hash: $.mobile.path.parseLocation().hash || "#" + self.initialFilePath,
 				title: document.title,
 
 				// persist across refresh
@@ -74,9 +74,9 @@ define( [ "jquery", "./jquery.mobile.navigation", "depend!./jquery.hashchange[jq
 
 			var href, state,
 				// firefox auto decodes the url when using location.hash but not href
-				hash = $.mobile.path.parseUrl( location.href ).hash,
+				hash = $.mobile.path.parseLocation().hash,
 				isPath = $.mobile.path.isPath( hash ),
-				resolutionUrl = isPath ? location.href : $.mobile.getDocumentUrl();
+				resolutionUrl = isPath ? $.mobile.path.getLocation() : $.mobile.getDocumentUrl();
 
 			hash = isPath ? hash.replace( "#", "" ) : hash;
 
@@ -141,7 +141,7 @@ define( [ "jquery", "./jquery.mobile.navigation", "depend!./jquery.hashchange[jq
 
 			// if there's no hash, we need to replacestate for returning to home
 			if ( location.hash === "" ) {
-				history.replaceState( self.state(), document.title, location.href );
+				history.replaceState( self.state(), document.title, $.mobile.path.getLocation() );
 			}
 		}
 	});

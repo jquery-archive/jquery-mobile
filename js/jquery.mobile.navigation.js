@@ -49,6 +49,17 @@ define( [
 			//
 			urlParseRE: /^(((([^:\/#\?]+:)?(?:(\/\/)((?:(([^:@\/#\?]+)(?:\:([^:@\/#\?]+))?)@)?(([^:\/#\?\]\[]+|\[[^\/\]@#?]+\])(?:\:([0-9]+))?))?)?)?((\/?(?:[^\/\?#]+\/+)*)([^\?#]*)))?(\?[^#]+)?)(#.*)?/,
 
+			// Abstraction to address xss (Issue #4787) in browsers that auto decode location.href
+			// All references to location.href should be replaced with a call to this method so
+			// that it can be dealt with properly here
+			getLocation: function() {
+				return window.location.toString();
+			},
+
+			parseLocation: function() {
+				return this.parseUrl( this.getLocation() );
+			},
+
 			//Parse a URL into a structure that allows easy access to
 			//all of the URL components by name.
 			parseUrl: function( url ) {
@@ -369,7 +380,7 @@ define( [
 		$base = $head.children( "base" ),
 
 		//tuck away the original document URL minus any fragment.
-		documentUrl = path.parseUrl( location.href ),
+		documentUrl = path.parseLocation(),
 
 		//if the document has an embedded base tag, documentBase is set to its
 		//initial value. If a base tag does not exist, then we default to the documentUrl.
@@ -1500,7 +1511,7 @@ define( [
 		$window.bind( "hashchange", function( e, triggered ) {
 			// Firefox auto-escapes the location.hash as for v13 but
 			// leaves the href untouched
-			$.mobile._handleHashChange( path.parseUrl(location.href).hash );
+			$.mobile._handleHashChange( path.parseLocation().hash );
 		});
 
 		//set page min-heights to be device specific
