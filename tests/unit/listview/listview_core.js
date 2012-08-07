@@ -366,15 +366,15 @@
 				// check we have the right dividers
 				var $list = $( '#autodividers-selector-test-list1' );
 				ok( $list.find( '.ui-li-divider' ).length === 4 );
-				ok( $list.find( '.ui-li-divider:eq(0):contains(A)' ).length === 1 );
-				ok( $list.find( '.ui-li-divider:eq(1):contains(B)' ).length === 1 );
-				ok( $list.find( '.ui-li-divider:eq(2):contains(C)' ).length === 1 );
-				ok( $list.find( '.ui-li-divider:eq(3):contains(D)' ).length === 1 );
+				ok( $list.find( '.ui-li-divider' ).eq(0).is( ':contains(A)' ) );
+				ok( $list.find( '.ui-li-divider' ).eq(1).is( ':contains(B)' ) );
+				ok( $list.find( '.ui-li-divider' ).eq(2).is( ':contains(C)' ) );
+				ok( $list.find( '.ui-li-divider' ).eq(3).is( ':contains(D)' ) );
 
 				// check that adding a new item creates the right divider
 				$list.append( '<li><a href="#">e is for ethel</a></li>' );
 				$list.listview('refresh');
-				ok( $list.find( '.ui-li-divider:eq(4):contains(E)' ).length === 1 );
+				ok( $list.find( '.ui-li-divider' ).eq(4).is( ':contains(E)' ) );
 
 				start();
 			}
@@ -398,19 +398,20 @@
           text = text.slice( 0, 1 ).toUpperCase();
           return text;
 				});
+
 				$list.listview( 'refresh' );
 				ok( $list.find( '.ui-li-divider' ).length === 4 );
-				ok( $list.find( '.ui-li-divider:eq(0):contains(E)' ).length === 1 );
-				ok( $list.find( '.ui-li-divider:eq(1):contains(F)' ).length === 1 );
-				ok( $list.find( '.ui-li-divider:eq(2):contains(G)' ).length === 1 );
-				ok( $list.find( '.ui-li-divider:eq(3):contains(H)' ).length === 1 );
+				ok( $list.find( '.ui-li-divider').eq(0).is( ':contains(E)' ) );
+				ok( $list.find( '.ui-li-divider').eq(1).is( ':contains(F)' ) );
+				ok( $list.find( '.ui-li-divider').eq(2).is( ':contains(G)' ) );
+				ok( $list.find( '.ui-li-divider').eq(3).is( ':contains(H)' ) );
 
 				// check that adding a new item creates the right divider
 				$list.append( '<li><div><span class="autodividers-selector-test-selectme">' +
 				'i is for impy</span></div></li>' );
 				$list.listview( 'refresh' );
 
-				ok( $list.find( '.ui-li-divider:eq(4):contains(I)' ).length === 1 );
+				ok( $list.find( '.ui-li-divider').eq(4).is( ':contains(I)' ) );
 
 				start();
 			}
@@ -541,7 +542,7 @@
 				setTimeout(function() {
 					deepEqual($page.find('li:jqmData(role=list-divider):hidden').length, 2);
 					deepEqual($page.find('li:jqmData(role=list-divider):hidden + li:not(:jqmData(role=list-divider)):hidden').length, 2);
-					deepEqual($page.find('li:jqmData(role=list-divider):not(:hidden) + li:not(:jqmData(role=list-divider)):not([:hidden)').length, 2);
+					deepEqual($page.find('li:jqmData(role=list-divider):not(:hidden) + li:not(:jqmData(role=list-divider)):not(:hidden)').length, 2);
 					start();
 				}, 1000);
 			}
@@ -1019,7 +1020,7 @@
 	});
 
 	module( "Borders" );
-		
+
 	asyncTest( "last list item has border-bottom", function() {
 		$.testHelper.pageSequence([
 			function() {
@@ -1032,11 +1033,11 @@
 
 				window.history.back();
 			},
-			
+
 			start
 		]);
 	});
-	
+
 	asyncTest( "list inside collapsible content", function() {
 		$.testHelper.pageSequence([
 			function() {
@@ -1049,9 +1050,9 @@
 
 				window.history.back();
 			},
-			
+
 			start
 		]);
 	});
-	
+
 })(jQuery);
