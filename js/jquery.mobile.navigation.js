@@ -52,8 +52,8 @@ define( [
 			// Abstraction to address xss (Issue #4787) in browsers that auto decode the username:pass
 			// portion of location.href. All references to location.href should be replaced with a call
 			// to this method so that it can be dealt with properly here
-			getLocation: function() {
-				var uri = this.parseUrl( location.href ),
+			getLocation: function( url ) {
+				var uri = this.parseUrl( url || location.href ),
 					encodedUserPass = "";
 
 				if( uri.username ){
