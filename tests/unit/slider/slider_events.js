@@ -397,22 +397,28 @@
 		], 500);
 	});
 
-	test( "slider should detach event", function() {
-		var slider = $( "#remove-events-slider" ),
+	// NOTE this test isn't run because the event data isn't easily accessible
+	// and with the advent of the widget _on method we are actually testing the
+	// widget from UI which has it's own test suite for these sorts of things
+	// ie, don't test your dependencies / framework
+	if( !( $.fn.jquery.match(/^1.8/) )){
+		test( "slider should detach event", function() {
+			var slider = $( "#remove-events-slider" ),
 			doc = $( document ),
 			vmouseupLength,
 			vmousemoveLength;
 
-		function getDocumentEventsLength( name ){
-			return (doc.data( 'events' )[name] || []).length;
-		}
+			function getDocumentEventsLength( name ){
+				return (doc.data( 'events' )[name] || []).length;
+			}
 
-		vmouseupLength = getDocumentEventsLength( "vmouseup" );
-		vmousemoveLength = getDocumentEventsLength( "vmousemove" );
+			vmouseupLength = getDocumentEventsLength( "vmouseup" );
+			vmousemoveLength = getDocumentEventsLength( "vmousemove" );
 
-		slider.remove();
-		
-		equal(getDocumentEventsLength( "vmouseup" ), (vmouseupLength - 1), 'vmouseup event was removed');
-		equal(getDocumentEventsLength( "vmousemove" ), (vmousemoveLength - 1), 'vmousemove event was removed');
-	});
+			slider.remove();
+
+			equal(getDocumentEventsLength( "vmouseup" ), (vmouseupLength - 1), 'vmouseup event was removed');
+			equal(getDocumentEventsLength( "vmousemove" ), (vmousemoveLength - 1), 'vmousemove event was removed');
+		});
+	}
 })(jQuery);

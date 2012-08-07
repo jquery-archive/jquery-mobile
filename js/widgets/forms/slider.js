@@ -173,7 +173,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			}
 		}
 
-		$( document ).bind( "vmousemove", this._preventDocumentDrag );
+		this._on( $( document ), { "vmousemove": this._preventDocumentDrag });
 
 		// it appears the clicking the up and down buttons in chrome on
 		// range/number inputs doesn't trigger a change until the field is
@@ -230,7 +230,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			}
 		};
 
-		slider.add( document ).bind( "vmouseup", this._sliderMouseUp );
+		this._on( slider.add( document ), { "vmouseup": this._sliderMouseUp });
 		slider.insertAfter( control );
 
 		// Only add focus class to toggle switch, sliders get it automatically from ui-btn
@@ -321,11 +321,6 @@ $.widget( "mobile.slider", $.mobile.widget, {
 	_value: function() {
 		return  this._type === "input" ?
 			parseFloat( this.element.val() ) : this.element[0].selectedIndex;
-	},
-
-	_destroy: function() {
-		$( document ).unbind( "vmousemove", this._preventDocumentDrag );
-		$( document ).unbind( "vmouseup", this._sliderMouseUp );
 	},
 
 	refresh: function( val, isfromControl, preventInputUpdate ) {
