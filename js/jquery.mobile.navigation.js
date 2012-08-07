@@ -1476,15 +1476,27 @@ define( [
 						either: function( isBack ) {
 							var active = $.mobile.urlHistory.getActive();
 
-							to = active.pageUrl;
+							// If we've ended up at a stale dialog location, do not attempt to load it, but keep
+							// going in the same direction - much as if the current page had not been a dialog
+							// (the case above)
+							if ( active.stale ) {
+								if ( isBack) {
+									window.history.back();
+								} else {
+									window.history.forward();
+								}
+								return;
+							} else {
+								to = active.pageUrl;
 
-							// make sure to set the role, transition and reversal
-							// as most of this is lost by the domCache cleaning
-							$.extend( changePageOptions, {
-								role: active.role,
-								transition: active.transition,
-								reverse: isBack
-							});
+								// make sure to set the role, transition and reversal
+								// as most of this is lost by the domCache cleaning
+								$.extend( changePageOptions, {
+									role: active.role,
+									transition: active.transition,
+									reverse: isBack
+								});
+							}
 						}
 					});
 				}
