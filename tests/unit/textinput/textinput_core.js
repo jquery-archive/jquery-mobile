@@ -4,17 +4,23 @@
 (function($){
 	module( "jquery.mobile.forms.textinput.js" );
 
-	test( "input is cleaned up on destroy", function(){
-		var input = $( "#destroycorrectly" ),
+	// NOTE this test isn't run because the event data isn't easily accessible
+	// and with the advent of the widget _on method we are actually testing the
+	// widget from UI which has it's own test suite for these sorts of things
+	// ie, don't test your dependencies / framework
+	if( !( $.fn.jquery.match(/^1.8/) )){
+		test( "input is cleaned up on destroy", function(){
+			var input = $( "#destroycorrectly" ),
 			win = $( window ),
 			loadLen;
 
-		loadLen = win.data("events").load.length;
+			loadLen = win.data("events").load.length;
 
-		input.remove();
+			input.remove();
 
-		equal(win.data("events").load.length, (loadLen-1), "window load event was not removed");
-	});
+			equal(win.data("events").load.length, (loadLen-1), "window load event was not removed");
+		});
+	}
 
 	test( "inputs without type specified are enhanced", function(){
 		ok( $( "#typeless-input" ).hasClass( "ui-input-text" ) );

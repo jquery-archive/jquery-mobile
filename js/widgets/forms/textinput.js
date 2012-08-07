@@ -125,22 +125,18 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 
 			// binding to pagechange here ensures that for pages loaded via
 			// ajax the height is recalculated without user input
-			$( document ).one( "pagechange", this._keyup );
+			this._on( $(document), {"pagechange": "_keyup" });
 
 			// Issue 509: the browser is not providing scrollHeight properly until the styles load
 			if ( $.trim( input.val() ) ) {
 				// bind to the window load to make sure the height is calculated based on BOTH
 				// the DOM and CSS
-				$( window ).load( this._keyup );
+				this._on( $(window), {"load": "_keyup"});
 			}
 		}
 		if ( input.attr( "disabled" ) ) {
 			this.disable();
 		}
-	},
-
-	_destroy: function() {
-		$( window ).unbind( "load", this._keyup );
 	},
 
 	disable: function() {
