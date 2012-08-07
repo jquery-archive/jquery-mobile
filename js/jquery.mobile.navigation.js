@@ -65,10 +65,11 @@ define( [
 				}
 
 				if( encodedUserPass ){
-					encodedUserPass = encodedUserPass + "@";
+					return uri.protocol + "//" + encodedUserPass + "@" +
+						uri.host + uri.pathname + uri.search + uri.hash;
 				}
 
-				return uri.protocol + "//" + encodedUserPass + uri.host + uri.pathname + uri.search + uri.hash;
+				return uri.href;
 			},
 
 			parseLocation: function() {
