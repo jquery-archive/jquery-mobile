@@ -49,11 +49,26 @@ define( [
 			//
 			urlParseRE: /^(((([^:\/#\?]+:)?(?:(\/\/)((?:(([^:@\/#\?]+)(?:\:([^:@\/#\?]+))?)@)?(([^:\/#\?\]\[]+|\[[^\/\]@#?]+\])(?:\:([0-9]+))?))?)?)?((\/?(?:[^\/\?#]+\/+)*)([^\?#]*)))?(\?[^#]+)?)(#.*)?/,
 
-			// Abstraction to address xss (Issue #4787) in browsers that auto decode location.href
-			// All references to location.href should be replaced with a call to this method so
-			// that it can be dealt with properly here
+			// Abstraction to address xss (Issue #4787) in browsers that auto decode the username:pass
+			// portion of location.href. All references to location.href should be replaced with a call
+			// to this method so that it can be dealt with properly here
 			getLocation: function() {
-				return window.location.toString();
+				var uri = this.parseUrl( location.href ),
+					encodedUserPass = "";
+
+				if( uri.username ){
+					encodedUserPass = encodeURI( uri.username );
+				}
+
+				if( uri.password  ){
+					encodedUserPass = encodedUserPass + ":" + encodeURI( uri.password );
+				}
+
+				if( encodedUserPass ){
+					encodedUserPass = encodedUserPass + "@";
+				}
+
+				return uri.protocol + "//" + encodedUserPass + uri.host + uri.pathname + uri.search + uri.hash;
 			},
 
 			parseLocation: function() {
