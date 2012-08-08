@@ -238,4 +238,17 @@
 		deepEqual( $.mobile.path.isPermittedCrossDomainRequest( fileDocUrl,  "file://foo"), false, "two file protocol urls fail");
 
 	});
+
+	test( "path.getLocation works properly", function() {
+		equal( $.mobile.path.getLocation("http://example.com/"), "http://example.com/" );
+		equal( $.mobile.path.getLocation("http://foo@example.com"), "http://foo@example.com" );
+		equal( $.mobile.path.getLocation("http://foo:bar@example.com"), "http://foo:bar@example.com" );
+		equal( $.mobile.path.getLocation("http://<foo<:bar@example.com"), "http://%3Cfoo%3C:bar@example.com" );
+		equal( $.mobile.path.getLocation("http://foo:<bar<@example.com"), "http://foo:%3Cbar%3C@example.com" );
+		equal( $.mobile.path.getLocation("http://<foo<:<bar<@example.com"), "http://%3Cfoo%3C:%3Cbar%3C@example.com" );
+
+		var allUriParts = "http://jblas:password@mycompany.com:8080/mail/inbox?msg=1234&type=unread#msg-content";
+
+		equal( $.mobile.path.getLocation( allUriParts ), allUriParts );
+	});
 })(jQuery);
