@@ -1,5 +1,5 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Assorted tests to qualify browsers by detecting features
+//>>description: Feature test for orientation
 //>>label: Orientation support test
 //>>group: Core
 
