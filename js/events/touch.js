@@ -3,7 +3,7 @@
 //>>label: touch
 //>>group: Events
 
-define( [ "jquery", "../jquery.mobile.vmouse" ], function( $ ) {
+define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, window, undefined ) {
@@ -23,7 +23,7 @@ define( [ "jquery", "../jquery.mobile.vmouse" ], function( $ ) {
 		}
 	});
 
-	var supportTouch = "ontouchend" in document,
+	var supportTouch = $.mobile.supportsTouch,
 		scrollEvent = "touchmove scroll",
 		touchStartEvent = supportTouch ? "touchstart" : "mousedown",
 		touchStopEvent = supportTouch ? "touchend" : "mouseup",
