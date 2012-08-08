@@ -41,7 +41,10 @@
 			// grab one step from the sequence
 			var fn = seq.shift(),
 			    events = seq.shift(),
-			    self = this;
+			    self = this,
+			    derefSrc = function( src ) {
+						return ( $.isFunction( src ) ? src() : src );
+					};
 
 			// we're done
 			if ( fn === undefined ) {
@@ -58,7 +61,7 @@
 				    	$.each( events, function( key, event ) {
 				    		if ( newResult[ key ] === undefined ) {
 				    			// clean up the unused handler
-				    			event.src.unbind( event.event );
+				    			derefSrc( event.src ).unbind( event.event );
 				    			newResult[ key ] = $.extend( {}, event, { timedOut: true } );
 				    		}
 				    	});
@@ -87,7 +90,7 @@
 					// If it's an event
 					if ( event.src ) {
 						// Hook up to the event
-						event.src.one( event.event, function() {
+						derefSrc( event.src ).one( event.event, function() {
 							recordResult( key, event, { timedOut: false, idx: nEventsDone } );
 						});
 					}
