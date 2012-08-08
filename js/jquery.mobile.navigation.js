@@ -373,8 +373,6 @@ define( [
 				} else if ( forward ) {
 					( opts.either || opts.isForward )( false );
 				}
-
-				console.log( "directHashChange: " + urlHistory.activeIndex + " has become active" );
 			},
 
 			//disable hashchange event listener internally to ignore one change
@@ -1109,7 +1107,7 @@ define( [
 			// However, if a dialog is already displayed at this point, and we're
 			// about to display another dialog, then we must add another hash and
 			// history entry on top so that one may navigate back to the original dialog
-			if ( active.url.indexOf( dialogHashKey ) > -1 && active.pageUrl === toPage.jqmData( "url" ) ) {
+			if ( active.url.indexOf( dialogHashKey ) > -1 && !$.mobile.activePage.is( ".ui-dialog" ) ) {
 				settings.changeHash = false;
 				alreadyThere = true;
 			}
@@ -1434,7 +1432,6 @@ define( [
 		});
 
 		$.mobile._handleHashChange = function( hash ) {
-
 			//find first page via hash
 			var to = path.stripHash( hash ),
 				//transition is false if it's the first page, undefined otherwise (and may be overridden by default)
@@ -1495,27 +1492,15 @@ define( [
 						either: function( isBack ) {
 							var active = $.mobile.urlHistory.getActive();
 
-							// If we've ended up at a stale dialog location, do not attempt to load it, but keep
-							// going in the same direction - much as if the current page had not been a dialog
-							// (the case above)
-							if ( active.stale ) {
-								if ( isBack) {
-									window.history.back();
-								} else {
-									window.history.forward();
-								}
-								return;
-							} else {
-								to = active.pageUrl;
+							to = active.pageUrl;
 
-								// make sure to set the role, transition and reversal
-								// as most of this is lost by the domCache cleaning
-								$.extend( changePageOptions, {
-									role: active.role,
-									transition: active.transition,
-									reverse: isBack
-								});
-							}
+							// make sure to set the role, transition and reversal
+							// as most of this is lost by the domCache cleaning
+							$.extend( changePageOptions, {
+								role: active.role,
+								transition: active.transition,
+								reverse: isBack
+							});
 						}
 					});
 				}

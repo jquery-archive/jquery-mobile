@@ -87,7 +87,6 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 
 		if ( this._isCloseable ) {
 			this._isCloseable = false;
-			$.mobile.urlHistory.getActive().stale = true;
 			if ( $.mobile.hashListeningEnabled ) {
 				window.history.back();
 			} else {
