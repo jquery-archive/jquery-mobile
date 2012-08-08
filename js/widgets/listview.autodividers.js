@@ -1,6 +1,7 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Generates dividers for listview items
 //>>label: Listview Autodividers
+//>>group: Widgets
 define( [ "jquery", "./listview" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
