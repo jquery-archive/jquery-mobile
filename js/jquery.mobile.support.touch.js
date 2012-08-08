@@ -6,12 +6,14 @@
 define( [ "jquery" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 	(function( $, undefined ) {
-		$.extend( $.support, {
+		var support = {
 			touch: "ontouchend" in document
-		});
-		$.extend( $.mobile, {
-			supportsTouch: $.support.touch
-		});
+		};
+
+		$.mobile = $.mobile || {};
+		$.mobile.support = $.mobile.support || {};
+		$.extend( $.support, support );
+		$.extend( $.mobile.support, support );
 	}( jQuery ));
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
