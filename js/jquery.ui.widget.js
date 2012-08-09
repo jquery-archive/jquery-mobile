@@ -1,7 +1,7 @@
 /*!
- * jQuery UI Widget @VERSION
+ * jQuery UI Widget v1.9.0-beta.1
  *
- * Copyright 2012, AUTHORS.txt (http://jqueryui.com/about)
+ * Copyright 2012, https://github.com/jquery/jquery-ui/blob/master/AUTHORS.txt (http://jqueryui.com/about)
  * Dual licensed under the MIT or GPL Version 2 licenses.
  * http://jquery.org/license
  *
