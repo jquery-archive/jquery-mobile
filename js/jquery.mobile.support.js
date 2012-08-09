@@ -10,7 +10,6 @@ var fakeBody = $( "<body>" ).prependTo( "html" ),
 	fbCSS = fakeBody[ 0 ].style,
 	vendors = [ "Webkit", "Moz", "O" ],
 	webos = "palmGetResource" in window, //only used to rule out scrollTop
-	opera = window.opera,
 	operamini = window.operamini && ({}).toString.call( window.operamini ) === "[object OperaMini]",
 	bb = window.blackberry; //only used to rule out box shadow, as it's filled opaque on BB
 
@@ -122,7 +121,7 @@ $.mobile.browser.ie = (function() {
 
 
 $.extend( $.support, {
-	cssTransitions: "WebKitTransitionEvent" in window || validStyle( 'transition', 'height 100ms linear' ) && !opera,
+	cssTransitions: "WebKitTransitionEvent" in window || validStyle( 'transition', 'height 100ms linear' ),
 	pushState: "pushState" in history && "replaceState" in history,
 	mediaquery: $.mobile.media( "only all" ),
 	cssPseudoElement: !!propExists( "content" ),
