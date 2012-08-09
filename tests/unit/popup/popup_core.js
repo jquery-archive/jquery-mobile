@@ -403,7 +403,7 @@
 	asyncTest( "Sequence page -> popup -> dialog -> popup works", function() {
 		var originallyActivePage = $.mobile.activePage[ 0 ];
 
-		expect( 13 );
+		expect( 15 );
 		$.testHelper.detailedEventCascade([
 			function() {
 				$( "#popup-sequence-test" ).popup( "open" );
@@ -422,11 +422,20 @@
 
 			{
 				closed: { src: $( "#popup-sequence-test" ), event: "popupafterclose.sequenceTestStep2" },
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange.sequenceTestStep2" }
+				pageload: { src: $.mobile.pageContainer, event: "pageload.sequenceTestStep2" }
 			},
 
 			function( result ) {
 				ok( !result.closed.timedOut, "Popup has emitted 'popupafterclose'" );
+				ok( !result.pageload.timedOut, "A 'pageload' event (presumably to load the dialog) has occurred" );
+				ok( $( "#popup-sequence-test-dialog" ).length > 0, "The dialog has been loaded successfully" );
+			},
+
+			{
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange.sequenceTestStep3" }
+			},
+
+			function( result ) {
 				ok( !result.pagechange.timedOut, "A 'pagechange' event has occurred" );
 				ok( $.mobile.activePage[ 0 ] === $( "#popup-sequence-test-dialog" )[ 0 ], "The dialog is the active page" );
 				$( "a[href='#popup-sequence-test-popup-inside-dialog']" ).click();
