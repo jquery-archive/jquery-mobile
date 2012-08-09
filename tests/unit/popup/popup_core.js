@@ -395,7 +395,7 @@
 				ok( identical, "Going back returns $.mobile.urlHistory to its initial value" );
 				ok( $.mobile.urlHistory.activeIndex === $.mobile.urlHistory.stack.length - 3, "Going back leaves exactly two entries ahead in $.mobile.urlHistory" );
 
-				setTimeout( function() { start(); }, 1000 );
+				setTimeout( function() { start(); }, 500 );
 			},
 		]);
 	});
