@@ -49,27 +49,13 @@ define( [
 			//
 			urlParseRE: /^(((([^:\/#\?]+:)?(?:(\/\/)((?:(([^:@\/#\?]+)(?:\:([^:@\/#\?]+))?)@)?(([^:\/#\?\]\[]+|\[[^\/\]@#?]+\])(?:\:([0-9]+))?))?)?)?((\/?(?:[^\/\?#]+\/+)*)([^\?#]*)))?(\?[^#]+)?)(#.*)?/,
 
-			// Abstraction to address xss (Issue #4787) in browsers that auto decode the username:pass
-			// portion of location.href. All references to location.href should be replaced with a call
-			// to this method so that it can be dealt with properly here
+			// Abstraction to address xss (Issue #4787) by removing the authority in
+			// browsers that auto	decode it. All references to location.href should be
+			// replaced with a call to this method so that it can be dealt with properly here
 			getLocation: function( url ) {
-				var uri = this.parseUrl( url || location.href ),
-					encodedUserPass = "";
+				var uri = url ? $.mobile.path.parseUrl( url ) : location;
 
-				if( uri.username ){
-					encodedUserPass = encodeURI( uri.username );
-				}
-
-				if( uri.password  ){
-					encodedUserPass = encodedUserPass + ":" + encodeURI( uri.password );
-				}
-
-				if( encodedUserPass ){
-					return uri.protocol + "//" + encodedUserPass + "@" +
-						uri.host + uri.pathname + uri.search + uri.hash;
-				}
-
-				return uri.href;
+				return uri.protocol + "//" + uri.host + uri.pathname + uri.search + uri.hash;
 			},
 
 			parseLocation: function() {
