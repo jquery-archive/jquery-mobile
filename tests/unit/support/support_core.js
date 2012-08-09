@@ -46,6 +46,18 @@ $.testHelper.excludeFileProtocol(function(){
 		});
 	});
 
+	asyncTest( "detects touch", function() {
+		$.extend(window, {
+			touchend: true
+		});
+
+		$.testHelper.reloadModule( "jquery.mobile.support.touch" ).done( function() {
+			ok( $.mobile.support.touch, "touch is supported" );
+			ok( $.support.touch, "touch is supported" );
+			start();
+		});
+	});
+
 	asyncTest( "detects functionality from basic negative properties and attributes (where possible)", function(){
 		delete window["orientation"];
 

@@ -41,7 +41,10 @@
 			// grab one step from the sequence
 			var fn = seq.shift(),
 			    events = seq.shift(),
-			    self = this;
+			    self = this,
+			    derefSrc = function( src ) {
+						return ( $.isFunction( src ) ? src() : src );
+					};
 
 			// we're done
 			if ( fn === undefined ) {
@@ -58,7 +61,7 @@
 				    	$.each( events, function( key, event ) {
 				    		if ( newResult[ key ] === undefined ) {
 				    			// clean up the unused handler
-				    			event.src.unbind( event.event );
+				    			derefSrc( event.src ).unbind( event.event );
 				    			newResult[ key ] = $.extend( {}, event, { timedOut: true } );
 				    		}
 				    	});
@@ -87,7 +90,7 @@
 					// If it's an event
 					if ( event.src ) {
 						// Hook up to the event
-						event.src.one( event.event, function() {
+						derefSrc( event.src ).one( event.event, function() {
 							recordResult( key, event, { timedOut: false, idx: nEventsDone } );
 						});
 					}
@@ -392,9 +395,86 @@
 				ok( identical, "Going back returns $.mobile.urlHistory to its initial value" );
 				ok( $.mobile.urlHistory.activeIndex === $.mobile.urlHistory.stack.length - 3, "Going back leaves exactly two entries ahead in $.mobile.urlHistory" );
 
-				setTimeout( function() { start(); }, 300 );
+				setTimeout( function() { start(); }, 500 );
+			},
+		]);
+	});
+
+	asyncTest( "Sequence page -> popup -> dialog -> popup works", function() {
+		var originallyActivePage = $.mobile.activePage[ 0 ];
+
+		expect( 15 );
+		$.testHelper.detailedEventCascade([
+			function() {
+				$( "#popup-sequence-test" ).popup( "open" );
 			},
 
+			{
+				opened: { src: $( "#popup-sequence-test" ), event: "popupafteropen.sequenceTestStep1" },
+				hashchange: { src: $( window ), event: "hashchange.sequenceTestStep1" }
+			},
+
+			function( result ) {
+				ok( !result.opened.timedOut, "Popup has emitted 'popupafteropen'" );
+				ok( !result.hashchange.timedOut, "A 'hashchange' event has occurred" );
+				$( "#popup-sequence-test-open-dialog" ).click();
+			},
+
+			{
+				closed: { src: $( "#popup-sequence-test" ), event: "popupafterclose.sequenceTestStep2" },
+				pageload: { src: $.mobile.pageContainer, event: "pageload.sequenceTestStep2" }
+			},
+
+			function( result ) {
+				ok( !result.closed.timedOut, "Popup has emitted 'popupafterclose'" );
+				ok( !result.pageload.timedOut, "A 'pageload' event (presumably to load the dialog) has occurred" );
+				ok( $( "#popup-sequence-test-dialog" ).length > 0, "The dialog has been loaded successfully" );
+			},
+
+			{
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange.sequenceTestStep3" }
+			},
+
+			function( result ) {
+				ok( !result.pagechange.timedOut, "A 'pagechange' event has occurred" );
+				ok( $.mobile.activePage[ 0 ] === $( "#popup-sequence-test-dialog" )[ 0 ], "The dialog is the active page" );
+				$( "a[href='#popup-sequence-test-popup-inside-dialog']" ).click();
+			},
+
+			{
+				opened: { src: function() { return $( "#popup-sequence-test-popup-inside-dialog" ); }, event: "popupafteropen.sequenceTestStep3" },
+				hashchange: { src: $( window ), event: "hashchange.sequenceTestStep3" }
+			},
+
+			function( result ) {
+				ok( !result.opened.timedOut, "Popup inside dialog has emitted 'popupafteropen'" );
+				ok( !result.hashchange.timedOut, "Popup inside dialog has caused a 'hashchange'" );
+				window.history.back();
+			},
+
+			{
+				close: { src: function() { return $( "#popup-sequence-test-popup-inside-dialog" ); }, event: "popupafterclose.sequenceTestStep4" },
+				hashchange: { src: $( window ), event: "hashchange.sequenceTestStep4" }
+			},
+
+			function( result ) {
+				ok( !result.close.timedOut, "Popup inside dialog has emitted 'popupafterclose'" );
+				ok( !result.hashchange.timedOut, "The closing of the inside popup has resulted in a 'hashchange'" );
+				ok( $.mobile.activePage[ 0 ] === $( "#popup-sequence-test-dialog" )[ 0 ], "The dialog is once more the active page" );
+				window.history.back();
+			},
+
+			{
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange.sequenceTestStep5" },
+				hashchange: { src: $( window ), event: "hashchange.sequenceTestStep5" }
+			},
+
+			function( result ) {
+				ok( !result.pagechange.timedOut, "Going back from the dialog has resulted in a 'pagechange'" );
+				ok( !result.hashchange.timedOut, "Going back from the dialog has resulted in a 'hashchange'" );
+				ok( originallyActivePage === $.mobile.activePage[ 0 ], "After going back from the dialog, the originally active page is active once more" );
+				setTimeout( function() { start(); }, 300 );
+			}
 		]);
 	});
 

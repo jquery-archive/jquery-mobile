@@ -18,6 +18,7 @@
 		$.testHelper.asyncLoad([
 			[
 				"widgets/popup",
+				"widgets/dialog"
 			],
 			[ "jquery.mobile.init" ],
 			[
@@ -48,6 +49,9 @@
 			<a id="open-test-popup" href="#test-popup" data-nstest-rel="popup" data-nstest-role="button">Pop</a>
 			<div data-nstest-role="popup" id="tolerance-test">
 				<p>Tolerance test popup</p>
+			</div>
+			<div data-nstest-role="popup" id="popup-sequence-test">
+				<a id="popup-sequence-test-open-dialog" href="popup-sequence-test-dialog.html">Dialog</a>
 			</div>
     </div>
   </div>
