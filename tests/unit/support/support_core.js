@@ -47,9 +47,7 @@ $.testHelper.excludeFileProtocol(function(){
 	});
 
 	asyncTest( "detects touch", function() {
-		$.extend(window, {
-			touchend: true
-		});
+		document.ontouchend = true;
 
 		$.testHelper.reloadModule( "jquery.mobile.support.touch" ).done( function() {
 			ok( $.mobile.support.touch, "touch is supported" );
