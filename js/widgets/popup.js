@@ -91,9 +91,7 @@ define( [ "jquery",
 				this._trigger( "beforeposition" );
 				this._ui.container
 					.removeClass( "ui-selectmenu-hidden" )
-					.offset( this._placementCoords( this._desiredCoords( undefined, undefined, "window" ) ) )
-					.attr( "tabindex", "0" )
-					.focus();
+					.offset( this._placementCoords( this._desiredCoords( undefined, undefined, "window" ) ) );
 
 				this._resizeData = null;
 				this._orientationchangeInProgress = false;
@@ -112,8 +110,7 @@ define( [ "jquery",
 				// effectively rapid-close the popup while leaving the screen intact
 				this._ui.container
 					.addClass( "ui-selectmenu-hidden" )
-					.removeAttr( "style" )
-					.removeAttr( "tabindex" );
+					.removeAttr( "style" );
 
 				this._orientationchangeInProgress = true;
 			}
