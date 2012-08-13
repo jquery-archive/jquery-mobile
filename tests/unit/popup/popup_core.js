@@ -185,7 +185,7 @@
 			ok( $( "#test-popup" ).attr( "class" ).match( /( |^)ui-body-[a-z]( |$)/ ), "Open popup has a valid overlay theme" );
 			ok( theOffset.left >= 15 && theOffset.top >= 30, "Open popup top left coord is at least (10, 30)" );
 			$( "#test-popup" ).popup( "option", "overlayTheme", "a" );
-			ok( $( "#test-popup" ).parent().prev().hasClass( "ui-body-a in" ), "Setting an overlay theme while the popup is open causes the theme to be applied and the screen to be faded in" );
+			ok( $( "#test-popup" ).parent().prev().hasClass( "ui-overlay-a in" ), "Setting an overlay theme while the popup is open causes the theme to be applied and the screen to be faded in" );
 			ok( $( "#test-popup" ).parent().hasClass( "ui-popup-active" ), "Open popup has the 'ui-popup-active' class" );
 			$( "#test-popup" ).popup( "close" );
 			setTimeout(function() {
