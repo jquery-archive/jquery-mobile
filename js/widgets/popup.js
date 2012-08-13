@@ -182,7 +182,7 @@ define( [ "jquery",
 			});
 		},
 
-		_applyTheme: function( dst, theme ) {
+		_applyTheme: function( dst, theme, prefix ) {
 			var classes = ( dst.attr( "class" ) || "").split( " " ),
 				alreadyAdded = true,
 				currentTheme = null,
@@ -191,7 +191,7 @@ define( [ "jquery",
 
 			while ( classes.length > 0 ) {
 				currentTheme = classes.pop();
-				matches = currentTheme.match( /^ui-body-([a-z])$/ );
+				matches = ( new RegExp( "^ui-" + prefix + "-([a-z])$" ) ).exec( currentTheme );
 				if ( matches && matches.length > 1 ) {
 					currentTheme = matches[ 1 ];
 					break;
@@ -201,19 +201,19 @@ define( [ "jquery",
 			}
 
 			if ( theme !== currentTheme ) {
-				dst.removeClass( "ui-body-" + currentTheme );
+				dst.removeClass( "ui-" + prefix + "-" + currentTheme );
 				if ( ! ( theme === null || theme === "none" ) ) {
-					dst.addClass( "ui-body-" + themeStr );
+					dst.addClass( "ui-" + prefix + "-" + themeStr );
 				}
 			}
 		},
 
 		_setTheme: function( value ) {
-			this._applyTheme( this.element, value );
+			this._applyTheme( this.element, value, "body" );
 		},
 
 		_setOverlayTheme: function( value ) {
-			this._applyTheme( this._ui.screen, value );
+			this._applyTheme( this._ui.screen, value, "overlay" );
 
 			if ( $.mobile.browser.ie ) {
 				this._ui.screen.toggleClass(
