@@ -404,22 +404,48 @@ define( [
 		getScreenHeight = $.mobile.getScreenHeight;
 
 		//base element management, defined depending on dynamic base tag support
-		var base = $.support.dynamicBaseTag ? {
-
+		var base = {
 			//define base element, for use in routing asset urls that are referenced in Ajax-requested markup
 			element: ( $base.length ? $base : $( "<base>", { href: documentBase.hrefNoHash } ).prependTo( $head ) ),
 
+			linkSelector: "[src], link[href], a[rel='external'], :jqmData(ajax='false'), a[target]",
+
 			//set the generated BASE element's href attribute to a new page's base path
-			set: function( href ) {
-				base.element.attr( "href", path.makeUrlAbsolute( href, documentBase ) );
+			set: function( href, page ) {
+				// we should do nothing if the user wants to manage their url base manually
+				if ( !$.mobile.dynamicBaseEnabled ){
+					return;
+				}
+
+				// we should use the base tag if we can manipulate it dynamically
+				if ( $.support.dynamicBaseTag ){
+					base.element.attr( "href", path.makeUrlAbsolute( href, documentBase ) );
+				}
+
+				// otherwise rewrite src and href attrs to use a base url
+				if ( !$.support.dynamicBaseTag && page ) {
+					var newPath = path.get( href );
+					page.find( base.linkSelector ).each(function( i, link ) {
+						var thisAttr = $( link ).is( '[href]' ) ? 'href' : $( link ).is( '[src]' ) ? 'src' : 'action',
+						thisUrl = $( link ).attr( thisAttr );
+
+						// XXX_jblas: We need to fix this so that it removes the document
+						//            base URL, and then prepends with the new page URL.
+						//if full path exists and is same, chop it - helps IE out
+						thisUrl = thisUrl.replace( location.protocol + '//' + location.host + location.pathname, '' );
+
+						if ( !/^(\w+:|#|\/)/.test( thisUrl ) ) {
+							$( link ).attr( thisAttr, newPath + thisUrl );
+						}
+					});
+				}
 			},
 
 			//set the generated BASE element's href attribute to a new page's base path
 			reset: function() {
 				base.element.attr( "href", documentBase.hrefNoHash );
 			}
-
-		} : undefined;
+		};
 
 	/* internal utility functions */
 
@@ -752,6 +778,11 @@ define( [
 			}
 		}
 
+		// Reset base to the default document base.
+		if ( $.support.dynamicBaseTag ) {
+			base.reset();
+		}
+
 		// If the page we are interested in is already in the DOM,
 		// and the caller did not indicate that we should force a
 		// reload of the file, we are done. Otherwise, track the
@@ -831,10 +862,6 @@ define( [
 						url = fileUrl = path.getFilePath( $( "<div>" + RegExp.$1 + "</div>" ).text() );
 					}
 
-					if ( base ) {
-						base.set( fileUrl );
-					}
-
 					//workaround to allow scripts to execute when included in page divs
 					all.get( 0 ).innerHTML = html;
 					page = all.find( ":jqmData(role='page'), :jqmData(role='dialog')" ).first();
@@ -851,24 +878,7 @@ define( [
 						page.jqmData( "title", newPageTitle );
 					}
 
-					//rewrite src and href attrs to use a base url
-					if ( !$.support.dynamicBaseTag ) {
-						var newPath = path.get( fileUrl );
-						page.find( "[src], link[href], a[rel='external'], :jqmData(ajax='false'), a[target]" ).each(function() {
-							var thisAttr = $( this ).is( '[href]' ) ? 'href' :
-									$( this ).is( '[src]' ) ? 'src' : 'action',
-								thisUrl = $( this ).attr( thisAttr );
-
-							// XXX_jblas: We need to fix this so that it removes the document
-							//            base URL, and then prepends with the new page URL.
-							//if full path exists and is same, chop it - helps IE out
-							thisUrl = thisUrl.replace( location.protocol + '//' + location.host + location.pathname, '' );
-
-							if ( !/^(\w+:|#|\/)/.test( thisUrl ) ) {
-								$( this ).attr( thisAttr, newPath + thisUrl );
-							}
-						});
-					}
+					base.set( fileUrl, page );
 
 					//append to page and enhance
 					// TODO taging a page with external to make sure that embedded pages aren't removed
@@ -892,7 +902,6 @@ define( [
 					}
 
 					//bind pageHide to removePage after it's hidden, if the page options specify to do so
-
 					// Remove loading message.
 					if ( settings.showLoadMsg ) {
 						hideMsg();
@@ -910,9 +919,7 @@ define( [
 				},
 				error: function( xhr, textStatus, errorThrown ) {
 					//set base back to current path
-					if ( base ) {
-						base.set( path.get() );
-					}
+					base.set( path.get() );
 
 					// Add error info to our triggerData.
 					triggerData.xhr = xhr;
@@ -1184,6 +1191,7 @@ define( [
 			if ( alreadyThere ) {
 				urlHistory.activeIndex = Math.max( 0, urlHistory.activeIndex - 1 );
 			}
+
 			urlHistory.addNew( url, settings.transition, pageTitle, pageUrl, settings.role );
 		}
 
