@@ -60,6 +60,10 @@ Currently the library is shipped on the jQuery CDN/download as a single monolith
 * `docs` - build the js and css, and make the docs ready for static consumption
 * `zip` - package all the JavaScript and all the css into a zip archive
 
+### Download Builder
+
+The easiest way to obtain a custom build is to use the [download builder](http://jquerymobile.com/download-builder/). With it, you can select the parts of the library you need and both the CSS and JavaScript dependencies will be resolved for you as a packaged/minified whole.
+
 ### Requirements
 
 The `js` and `css` build targets require [node.js](http://nodejs.org/) and its packaged NPM package manager. For the other build targets, `docs` and `zip`, bash is also required. For more information on installing node please see its [documentation](http://nodejs.org/#download). As for bash it's generally installed as the default shell in many POSIX compliant environments (OSX, Linux, BSD, etc).
