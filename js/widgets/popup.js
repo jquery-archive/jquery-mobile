@@ -53,11 +53,12 @@ define( [ "jquery",
 			e.preventDefault();
 			e.stopImmediatePropagation();
 			this.close();
+			return false;
 		},
 
 		_handleWindowKeyUp: function( e ) {
 			if ( this._isOpen && e.keyCode === $.mobile.keyCode.ESCAPE ) {
-				this._eatEventAndClose( e );
+				return this._eatEventAndClose( e );
 			}
 		},
 
@@ -113,6 +114,12 @@ define( [ "jquery",
 					.removeAttr( "style" );
 
 				this._orientationchangeInProgress = true;
+			}
+		},
+
+		_closeOnScreenVClick: function( e ) {
+			if ( e.target === this._ui.screen[ 0 ] ) {
+				return this._eatEventAndClose( e );
 			}
 		},
 
@@ -175,7 +182,11 @@ define( [ "jquery",
 				self._setOption( key, value, true );
 			});
 
-			ui.screen.bind( "vclick", $.proxy( this, "_eatEventAndClose" ) );
+			if ( $.mobile.browser.ie ) {
+				ui.screen.bind( "vclick", $.proxy( this, "_eatEventAndClose" ) );
+			} else {
+				this._on( $( document ), { "vclick": "_closeOnScreenVClick" } );
+			}
 
 			$.each( this._globalHandlers, function( idx, value ) {
 				value.src.bind( value.handler );
