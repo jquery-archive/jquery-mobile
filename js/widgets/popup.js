@@ -220,7 +220,8 @@ define( [ "jquery",
 					"ui-popup-screen-background-hack",
 					( this._ui.screen.css( "background-color" ) === "transparent" &&
 						this._ui.screen.css( "background-image" ) === "none" &&
-						this._ui.screen.css( "background" ) === undefined ) );
+						( this._ui.screen.css( "background" ) === undefined ||
+							this._ui.screen.css( "background" ) === "" ) ) );
 			}
 
 			if ( this._isOpen ) {
