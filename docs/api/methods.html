@@ -64,7 +64,7 @@
 									</li>
 								  <li><code>reverse</code> (<em>boolean</em>,	default:	false) Decides what direction the transition will run when showing the page. </li>
 									<li><code>role</code> (<em>string</em>,	default:	undefined) The data-role value to be used when displaying the page. By default this is undefined which means rely on the value of the @data-role attribute defined on the element.</li>
-									<li><code>showLoadMsg</code> (<em>boolean</em>,	default:	true) Decides whether or not to show the loading message when loading external pages.</li>									
+									<li><code>showLoadMsg</code> (<em>boolean</em>,	default:	true) Decides whether or not to show the loading message when loading external pages.</li>
 									<li><code>transition</code> (<em>string</em>,	default:	$.mobile.defaultPageTransition)	The transition to use when showing the page. </li>
 									<li><code>type</code> (<em>string</em>, default: &quot;get&quot;) Specifies the method ("get" or "post") to use when making a page request.
 										<ul>
@@ -157,10 +157,12 @@ $.mobile.loadPage( "searchresults.php", {
 					<dd>See jQuery's <a href="http://api.jquery.com/jQuery.data/">data</a> and <a href="http://api.jquery.com/jQuery.removeData/">removeData</a> methods</dd>
 					<strong>Note: </strong>Calling jqmData() with no argument will return <code>undefined</code>. This behavior is subject to change in future versions.
 					<dt><code>&#183;</code> Also:</dt>
-					<dd>When finding elements by their jQuery Mobile data attribute, please use the custom selector <code>:jqmData()</code>, as it automatically incorporates namespaced data attributes into the lookup when they are in use. For example, instead of calling <code>$("div[data-role='page']")</code>, you should use <code>$("div:jqmData(role='page')")</code>, which internally maps to <code>$("div[data-"+ $.mobile.ns +"role='page']")</code> without forcing you to concatenate a namespace into your selectors manually.</dd>
+					<dd>
+            <p>When finding elements by their jQuery Mobile data attribute, please use the custom selector <code>:jqmData()</code>. It automatically incorporates namespaced data attributes into the lookup when they are in use. For example, instead of calling <code>$("div[data-role='page']")</code>, you should use <code>$("div:jqmData(role='page')")</code>, which internally maps to <code>$("div[data-"+ $.mobile.ns +"role='page']")</code> without forcing you to concatenate a namespace into your selectors manually.<p>
+            <p>One exception to this rule is selecting on namespaced data attributes with URL values, e.g the <code>:jqmData(url)</code> that jQuery Mobile uses to track where a page came from. This is because the selector requires a closing parentheses but the parentheses is also valid URL character.</p>
+          </dd>
 				</dl>
 			</dd>
-
 
 			<dt><code>$.fn.jqmEnhanceable()</code> (<em>method</em>)</dt>
 			<dd>For users that wish to respect <code>data-enhance=false</code> parent elements during manual enhancement or custom plugin authoring jQuery Mobile provides the <code>$.fn.jqmEnhanceable</code> filter method.</dd>
