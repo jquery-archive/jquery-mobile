@@ -1225,4 +1225,25 @@
 			}
 		]);
 	});
+
+	asyncTest( "test that data-urls with parens work properly (avoid jqmData regex)", function() {
+		$.testHelper.pageSequence([
+			function() {
+				$.mobile.changePage( "data-url-tests/parentheses.html?foo=(bar)" );
+			},
+
+			function() {
+				window.history.back();
+			},
+
+			function() {
+				window.history.forward();
+			},
+
+			function() {
+				equal( $.trim($.mobile.activePage.text()), "Parens!", "the page loaded" );
+				start();
+			}
+		]);
+	});
 })(jQuery);
