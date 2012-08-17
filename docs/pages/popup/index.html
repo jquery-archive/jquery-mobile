@@ -263,12 +263,12 @@ $( "#myPopupDiv" ).popup( "close" )
 			<li>If centering the popup over an element would cause the overall height of the document to increase, the popup is shifted upwards at most until its top coordinate becomes 0.</li>
 		</ol>
 
-		<p>To programmatically make use of the popup's positioning functionality (and any features made available by specifying <code>data-*</code> options on links), pass a jQuery object with the corresponding data items as the third parameter to <code>open()</code>:</p>
+		<p>To programmatically make use of the popup's positioning functionality (and any features made available by specifying <code>data-*</code> options on links), set the corresponding keys in the options object passed to <code>open()</code>:</p>
 <code><pre>
-$( ".selector" ).popup( "open", x, y,
-  $( {} )
-    .jqmData( "position-to", "window" )
-    .jqmData( "transition", "slide" ) );
+$( ".selector" ).popup( "open", {
+	positionTo: "window",
+	transition: "slide"
+});
 </pre></code>
 
 		<p>The above will cause the popup to open and close with a slide transition, and to position itself centered in the window.</p>
