@@ -182,11 +182,7 @@ define( [ "jquery",
 				self._setOption( key, value, true );
 			});
 
-			if ( $.mobile.browser.ie ) {
-				ui.screen.bind( "vclick", $.proxy( this, "_eatEventAndClose" ) );
-			} else {
-				this._on( $( document ), { "vclick": "_closeOnScreenVClick" } );
-			}
+			ui.screen.bind( "vclick", $.proxy( this, "_eatEventAndClose" ) );
 
 			$.each( this._globalHandlers, function( idx, value ) {
 				value.src.bind( value.handler );
