@@ -30,3 +30,23 @@
 .ui-collapsible-set { margin: .5em 0; }
 .ui-collapsible-set .ui-collapsible { margin: -1px 0 0; }
 .ui-collapsible-set .ui-collapsible:first-child { margin-top: 0; }
+
+/* horizontal */
+.ui-collapsible-set-horizontal .ui-collapsible h3 .ui-btn { border-bottom-width: 1px; }	
+.ui-collapsible-set-horizontal .ui-collapsible h3 .ui-btn .ui-btn-text { white-space: normal; }
+.ui-collapsible-set .ui-collapsible { margin: 0;}
+.ui-collapsible-inset { margin: 15px; }
+.ui-collapsible-set-horizontal .ui-collapsible-heading { width: 100%; margin: 0; }
+.ui-collapsible-set-horizontal .ui-collapsible-content { position: relative; border: 0 none; margin: 0; padding: 0; }	
+/* 2tabs */
+.ui-collapsible-set-horizontal.ui-grid-a .ui-block-a .ui-collapsible-content { width: 199.3%; }	
+.ui-collapsible-set-horizontal.ui-grid-a .ui-block-b .ui-collapsible-content { left: -99.19%; width: 198.5%;}
+/* 3tabs */
+.ui-collapsible-set-horizontal.ui-grid-b .ui-block-a .ui-collapsible-content { width: 299.9%; }
+.ui-collapsible-set-horizontal.ui-grid-b .ui-block-b .ui-collapsible-content { width: 299.9%; left: -100%; }
+.ui-collapsible-set-horizontal.ui-grid-b .ui-block-c .ui-collapsible-content { width: 299.9%; left: -200%; }
+/* 4tabs */
+.ui-collapsible-set-horizontal.ui-grid-c .ui-block-a .ui-collapsible-content { width: 399.9%; }
+.ui-collapsible-set-horizontal.ui-grid-c .ui-block-b .ui-collapsible-content { width: 399.9%; left: -100%; }
+.ui-collapsible-set-horizontal.ui-grid-c .ui-block-c .ui-collapsible-content { width: 399.9%; left: -200%; }
+.ui-collapsible-set-horizontal.ui-grid-c .ui-block-d .ui-collapsible-content { width: 399.9%; left: -300%; }
