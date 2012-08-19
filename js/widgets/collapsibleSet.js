@@ -11,12 +11,18 @@ define( [ "jquery", "../jquery.mobile.widget", "./collapsible" ], function( $ ) 
 
 $.widget( "mobile.collapsibleset", $.mobile.widget, {
 	options: {
-		initSelector: ":jqmData(role='collapsible-set')"
+		initSelector: ":jqmData(role='collapsible-set')",
+		grid: null
 	},
 	_create: function() {
 		var $el = this.element.addClass( "ui-collapsible-set" ),
-			o = this.options;
+			o = $.extend({  direction: $el.jqmData("type") || "" }, this.options )
+			toggleCorners = o.direction == "horizontal" ? [ "ui-corner-tl ui-corner-bl","ui-corner-tr ui-corner-br" ] : ["ui-corner-top ", "ui-corner-bottom" ];
 
+		// Add horizontal class and grid
+		if ( o.direction == "horizontal" ) {
+			$el.addClass("ui-collapsible-set-horizontal").grid({ grid: this.options.grid });
+		}
 		// Inherit the theme from collapsible-set
 		if ( !o.theme ) {
 			o.theme = $.mobile.getInheritedTheme( $el, "c" );
@@ -38,15 +44,41 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 				.bind( "expand collapse", function( event ) {
 					var isCollapse = ( event.type === "collapse" ),
 						collapsible = $( event.target ).closest( ".ui-collapsible" ),
-						widget = collapsible.data( "collapsible" );
-					if ( collapsible.jqmData( "collapsible-last" ) && !!o.inset ) {
-						collapsible.find( ".ui-collapsible-heading" ).first()
-							.find( "a" ).first()
-							.toggleClass( "ui-corner-bottom", isCollapse )
-							.find( ".ui-btn-inner" )
-							.toggleClass( "ui-corner-bottom", isCollapse );
-						collapsible.find( ".ui-collapsible-content" ).toggleClass( "ui-corner-bottom", !isCollapse );
-					}
+						widget = collapsible.data( "collapsible" ),
+						index = $el.find('.ui-collapsible').index( collapsible ),
+						togClass = "ui-corner-bottom",
+						tog = function() { 
+							for ( var i = 0; i < collapsible.length; i++ ){
+								index = i;
+								togClass = o.direction == "horizontal" ? ( index == 0 ? "ui-corner-bl" : "ui-corner-br") : "ui-corner-bottom";
+
+								collapsible.eq(i).find( widget.options.heading ).first()
+									.find( "a" ).first()
+									.toggleClass( togClass, isCollapse )
+									.find( ".ui-btn-inner" )
+									.toggleClass( togClass, isCollapse );
+								collapsible.find( ".ui-collapsible-content" ).toggleClass( "ui-corner-bottom", !isCollapse );									
+							}
+						};
+					
+						// horizontal: always toggle first/last collapsible 
+						if ( o.direction == "horizontal" ){
+							// stuff two elements into collapsible
+							collapsible = $el.find('.ui-collapsible').first().add( $el.find('.ui-collapsible').eq( $el.find('.ui-collapsible').length-1)  );
+							// expand
+							if ( event.type == "expand" ){
+								isCollapse = false;
+								tog();
+							// catch single collapse (not the collapse events firing together with expand!
+							} else if ( $el.find('.ui-collapsible').length == $el.find('.ui-collapsible-collapsed').length ) {
+								isCollapse = true;
+								tog();
+							}
+						// regular collapsible-set
+						} else if (collapsible.jqmData( "collapsible-last" ) && !!o.inset ) {
+							tog();
+						} 
+						
 				})
 				.bind( "expand", function( event ) {
 					var closestCollapsible = $( event.target )
@@ -90,19 +122,19 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 			});
 
 			collapsiblesInSet.first()
-				.find( "a" )
-					.first()
-					.addClass( "ui-corner-top" )
-					.find( ".ui-btn-inner" )
-						.addClass( "ui-corner-top" );
-	
+			.find( "a" )
+				.first()
+				.addClass( toggleCorners[0] )
+				.find( ".ui-btn-inner" )
+					.addClass(  toggleCorners[0] );
+
 			collapsiblesInSet.last()
-				.jqmData( "collapsible-last", true )
-				.find( "a" )
-					.first()
-					.addClass( "ui-corner-bottom" )
-					.find( ".ui-btn-inner" )
-						.addClass( "ui-corner-bottom" );
+			.jqmData( "collapsible-last", true )
+			.find( "a" )
+				.first()
+				.addClass( toggleCorners[1] )
+				.find( ".ui-btn-inner" )
+					.addClass( toggleCorners[1] );
 		}
 	}
 });
