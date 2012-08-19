@@ -19,6 +19,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 		contentTheme: null,
 		inset: true,
 		mini: false,
+		direction: "",
 		initSelector: ":jqmData(role='collapsible')"
 	},
 	_create: function() {
@@ -41,6 +42,9 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 		// If we are in a collapsible set
 		if ( collapsibleSet.length ) {
 			// Inherit the theme from collapsible-set
+			if ( collapsibleSet.jqmData( "type" ) == "horizontal" ){
+				o.direction = "horizontal";
+			}
 			if ( !o.theme ) {
 				o.theme = collapsibleSet.jqmData( "theme" ) || $.mobile.getInheritedTheme( collapsibleSet, "c" );
 			}
@@ -135,7 +139,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 					$this.toggleClass( "ui-collapsible-collapsed", isCollapse );
 					collapsibleContent.toggleClass( "ui-collapsible-content-collapsed", isCollapse ).attr( "aria-hidden", isCollapse );
 
-					if ( contentTheme && !!o.inset && ( !collapsibleSet.length || collapsible.jqmData( "collapsible-last" ) ) ) {
+					if ( contentTheme && !!o.inset && ( !collapsibleSet.length || collapsible.jqmData( "collapsible-last" ) ) && o.direction != "horizontal" ) {
 						collapsibleHeading
 							.find( "a" ).first().add( collapsibleHeading.find( ".ui-btn-inner" ) )
 							.toggleClass( "ui-corner-bottom", isCollapse );
