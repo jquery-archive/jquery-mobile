@@ -1242,9 +1242,8 @@ define( [
 		allowSamePageTransition: false
 	};
 
-/* Event Bindings - hashchange, submit, and click */
-	function findClosestLink( ele )
-	{
+	/* Event Bindings - hashchange, submit, and click */
+	function findClosestLink( ele )	{
 		while ( ele ) {
 			// Look for the closest element with a nodeName of "a".
 			// Note that we are checking if we have a valid nodeName
@@ -1262,17 +1261,16 @@ define( [
 	}
 
 	// The base URL for any given element depends on the page it resides in.
-	function getClosestBaseUrl( ele )
-	{
+	function getClosestBaseUrl( ele )	{
 		// Find the closest page and extract out its url.
 		var url = $( ele ).closest( ".ui-page" ).jqmData( "url" ),
 			base = documentBase.hrefNoHash;
 
-		if ( !url || !path.isPath( url ) ) {
+		if ( !$.mobile.dynamicBaseEnabled || !url || !path.isPath( url ) ) {
 			url = base;
 		}
 
-		return path.makeUrlAbsolute( url, base);
+		return path.makeUrlAbsolute( url, base );
 	}
 
 	//The following event bindings should be bound after mobileinit has been triggered
