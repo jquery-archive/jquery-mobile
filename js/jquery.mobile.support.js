@@ -117,7 +117,16 @@ $.mobile.browser.ie = (function() {
 		div.innerHTML = "<!--[if gt IE " + ( ++v ) + "]><br><![endif]-->";
 	} while( a[0] );
 
-	return v > 4 ? v : !v;
+	v = v > 4 ? v : !v;
+
+	// Fallback to UA detection because IE10+ does not support conditional comments
+	if ( !v && navigator.appName === 'Microsoft Internet Explorer' ) {
+		var regex  = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+		if (regex.exec( navigator.userAgent ) !== null)
+			v = parseFloat( RegExp.$1 );
+	}
+
+	return v;
 })();
 
 
