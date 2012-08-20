@@ -35,7 +35,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			cType = control[ 0 ].nodeName.toLowerCase(),
 
-			selectClass = ( cType === "select" ) ? "ui-slider-switch" : "",
+			isSelect = this.isToggleSwitch = cType === "select",
+
+			selectClass = ( this.isToggleSwitch ) ? "ui-slider-switch" : "",
 
 			controlID = control.attr( "id" ),
 
@@ -45,9 +47,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			label = $label.attr( "id", labelID ),
 
-			min =  cType === "input" ? parseFloat( control.attr( "min" ) ) : 0,
+			min = !this.isToggleSwitch ? parseFloat( control.attr( "min" ) ) : 0,
 
-			max =  cType === "input" ? parseFloat( control.attr( "max" ) ) : control.find( "option" ).length-1,
+			max =  !this.isToggleSwitch ? parseFloat( control.attr( "max" ) ) : control.find( "option" ).length-1,
 
 			step = window.parseFloat( control.attr( "step" ) || 1 ),
 
@@ -60,7 +62,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			domSlider = document.createElement( 'div' ),
 			slider = $( domSlider ),
 
-			valuebg = control.jqmData( "highlight" ) && cType !== "select" ? (function() {
+			valuebg = control.jqmData( "highlight" ) && !this.isToggleSwitch ? (function() {
 				var bg = document.createElement('div');
 				bg.className = 'ui-slider-bg ' + $.mobile.activeBtnClass + ' ui-btn-corner-all';
 				return $( bg ).prependTo( slider );
@@ -99,7 +101,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			mouseMoved: false
 		});
 
-		if ( cType === "select" ) {
+		if ( this.isToggleSwitch ) {
 			var wrapper = document.createElement('div');
 			wrapper.className = 'ui-slider-inneroffset';
 
@@ -135,7 +137,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		label.addClass( "ui-slider" );
 
 		// monitor the input for updated values
-		control.addClass( cType === "input" ? "ui-slider-input" : "ui-slider-switch" );
+		control.addClass( this.isToggleSwitch ? "ui-slider-switch" : "ui-slider-input" );
 
 		this._on( control, {
 			"change": "_controlChange",
@@ -155,7 +157,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		slider.insertAfter( control );
 
 		// Only add focus class to toggle switch, sliders get it automatically from ui-btn
-		if ( cType === 'select' ) {
+		if ( this.isToggleSwitch ) {
 			this.handle.bind({
 				focus: function() {
 					slider.addClass( $.mobile.focusClass );
@@ -271,7 +273,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		this.userModified = false;
 		this.mouseMoved = false;
 
-		if ( this.type === "select" ) {
+		if ( this.isToggleSwitch ) {
 			this.beforeStart = this.element[0].selectedIndex;
 		}
 
@@ -284,7 +286,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		if ( this.dragging ) {
 			this.dragging = false;
 
-			if ( this.type === "select") {
+			if ( this.isToggleSwitch ) {
 				// make the handle move with a smooth transition
 				this.handle.addClass( "ui-slider-handle-snapping" );
 
@@ -315,7 +317,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				// this.mouseMoved must be updated before refresh() because it will be used in the control "change" event
 				this.mouseMoved = true;
 
-				if ( this.type === "select" ) {
+				if ( this.isToggleSwitch ) {
 					// make the handle move in sync with the mouse
 					this.handle.removeClass( "ui-slider-handle-snapping" );
 				}
@@ -335,8 +337,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 	},
 
 	_value: function() {
-		return  this.type === "input" ?
-			parseFloat( this.element.val() ) : this.element[0].selectedIndex;
+		return  this.isToggleSwitch ? this.element[0].selectedIndex : parseFloat( this.element.val() ) ;
 	},
 
 	refresh: function( val, isfromControl, preventInputUpdate ) {
@@ -351,8 +352,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		this.value = this._value();
 
 		var control = this.element, percent,
-			cType = control[0].nodeName.toLowerCase(),
-			isInput = cType === "input",
+			isInput = !this.isToggleSwitch,
 			optionElements = isInput ? [] : control.find( "option" ),
 			min =  isInput ? parseFloat( control.attr( "min" ) ) : 0,
 			max = isInput ? parseFloat( control.attr( "max" ) ) : optionElements.length - 1,
