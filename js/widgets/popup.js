@@ -222,15 +222,6 @@ define( [ "jquery",
 		_setOverlayTheme: function( value ) {
 			this._applyTheme( this._ui.screen, value, "overlay" );
 
-			if ( $.mobile.browser.ie ) {
-				this._ui.screen.toggleClass(
-					"ui-popup-screen-background-hack",
-					( this._ui.screen.css( "background-color" ) === "transparent" &&
-						this._ui.screen.css( "background-image" ) === "none" &&
-						( this._ui.screen.css( "background" ) === undefined ||
-							this._ui.screen.css( "background" ) === "" ) ) );
-			}
-
 			if ( this._isOpen ) {
 				this._ui.screen.addClass( "in" );
 			}

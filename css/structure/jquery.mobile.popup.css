@@ -1,17 +1,13 @@
 .ui-popup-screen {
+	background-image: url(data:image/gif;base64,R0lGODlhAQABAID/AMDAwAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==); /* Necessary to set some form of background to ensure element is clickable in IE6/7. While legacy IE won’t understand the data-URI’d image, it ensures no additional requests occur in all other browsers with little overhead. */
 	top: 0px;
 	left: 0px;
 	right: 0px;
 	bottom: 1px;
 	position: absolute;
-	filter: Alpha(Opacity=50);
+	filter: Alpha(Opacity=0);
 	opacity: 0;
 	z-index: 1099;
-}
-
-.ui-popup-screen-background-hack {
-	background-color: black;
-	filter: Alpha(Opacity=0);
 }
 
 @-webkit-keyframes popup-fadein {
@@ -36,12 +32,14 @@
 
 .ui-popup-screen.fade.in {
 	opacity: 0.5;
+	filter: Alpha(Opacity=50);
 	-webkit-animation-name: popup-fadein;
 	-moz-animation-name: popup-fadein;
 }
 
 .ui-popup-screen.fade.out {
 	opacity: 0;
+	filter: Alpha(Opacity=0);
 	-webkit-animation-name: popup-fadeout;
 	-moz-animation-name: popup-fadeout;
 }
