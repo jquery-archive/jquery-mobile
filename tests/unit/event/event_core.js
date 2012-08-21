@@ -132,6 +132,7 @@
 
 	var forceTouchSupport = function(){
 		document.ontouchend = function() {};
+		$.testHelper.reloadLib( "jquery.mobile.support.touch.js" );
 		$.each( components, function( index, value ) { $.testHelper.reloadLib( value ); });
 
 		//mock originalEvent information
