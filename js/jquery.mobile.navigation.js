@@ -866,22 +866,26 @@ define( [
 						page = settings.pageContainer.children( "[data-" + $.mobile.ns +"url='" + dataUrl + "']" );
 					}
 
-					//bind pageHide to removePage after it's hidden, if the page options specify to do so
+					// wait for completeLoad to report that the page is really loaded
+					settings.completeLoad( page, function() {
 
-					// Remove loading message.
-					if ( settings.showLoadMsg ) {
-						hideMsg();
-					}
+						//bind pageHide to removePage after it's hidden, if the page options specify to do so
 
-					// Add the page reference and xhr to our triggerData.
-					triggerData.xhr = xhr;
-					triggerData.textStatus = textStatus;
-					triggerData.page = page;
+						// Remove loading message.
+						if ( settings.showLoadMsg ) {
+							hideMsg();
+						}
 
-					// Let listeners know the page loaded successfully.
-					settings.pageContainer.trigger( "pageload", triggerData );
+						// Add the page reference and xhr to our triggerData.
+						triggerData.xhr = xhr;
+						triggerData.textStatus = textStatus;
+						triggerData.page = page;
 
-					deferred.resolve( absUrl, options, page, dupCachedPage );
+						// Let listeners know the page loaded successfully.
+						settings.pageContainer.trigger( "pageload", triggerData );
+
+						deferred.resolve( absUrl, options, page, dupCachedPage );
+					});
 				},
 				error: function( xhr, textStatus, errorThrown ) {
 					//set base back to current path
@@ -935,7 +939,10 @@ define( [
 		role: undefined, // By default we rely on the role defined by the @data-role attribute.
 		showLoadMsg: false,
 		pageContainer: undefined,
-		loadMsgDelay: 50 // This delay allows loads that pull from browser cache to occur without showing the loading message.
+		loadMsgDelay: 50, // This delay allows loads that pull from browser cache to occur without showing the loading message.
+		completeLoad: function( page, callback ) {
+			callback();
+		}
 	};
 
 	// Show a specific page in the page container.
