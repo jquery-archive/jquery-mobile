@@ -179,7 +179,7 @@ define( [
 
 			convertUrlToDataUrl: function( absUrl ) {
 				var u = path.parseUrl( absUrl );
-				if ( path.isEmbeddedPage( u ) ) {
+				if ( path.isEmbeddedPage( u ) && !path.isFirstPageUrl( absUrl ) ) {
 					// For embedded pages, remove the dialog hash key as in getFilePath(),
 					// otherwise the Data Url won't match the id of the embedded Page.
 					return u.hash.split( dialogHashKey )[0].replace( /^#/, "" );
