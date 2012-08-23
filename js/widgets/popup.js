@@ -117,12 +117,6 @@ define( [ "jquery",
 			}
 		},
 
-		_closeOnScreenVClick: function( e ) {
-			if ( e.target === this._ui.screen[ 0 ] ) {
-				return this._eatEventAndClose( e );
-			}
-		},
-
 		_create: function() {
 			var ui = {
 					screen: $( "<div class='ui-screen-hidden ui-popup-screen fade'></div>" ),
@@ -148,8 +142,8 @@ define( [ "jquery",
 				ui.placeholder.html( "<!-- placeholder for " + myId + " -->" );
 			}
 			ui.container.append( this.element );
-			
-			// Add class to popup element 
+
+			// Add class to popup element
 			this.element.addClass( "ui-popup" );
 
 			// Define instance variables
@@ -341,14 +335,14 @@ define( [ "jquery",
 
 			// Make sure the top of the menu is visible
 			ret.y = Math.max( 0, ret.y );
-			
+
 			// If the height of the menu is smaller than the height of the document
 			// align the bottom with the bottom of the document
-			
+
 			// fix for $( document ).height() bug in core 1.7.2.
 			var docEl = document.documentElement, docBody = document.body,
 				docHeight = Math.max( docEl.clientHeight, docBody.scrollHeight, docBody.offsetHeight, docEl.scrollHeight, docEl.offsetHeight );
-			
+
 			ret.y -= Math.min( ret.y, Math.max( 0, ret.y + menuSize.cy - docHeight ) );
 
 			return { left: ret.x, top: ret.y };
@@ -478,6 +472,8 @@ define( [ "jquery",
 		_open: function( options ) {
 			var coords, transition;
 
+			$.mobile.popup.active = this;
+
 			// Make sure options is defined
 			options = ( options || {} );
 
@@ -564,6 +560,9 @@ define( [ "jquery",
 				applyTransition: true,
 				prereqs: this._prereqs
 			});
+
+			// remove the global mutex for popups
+			$.mobile.popup.active = undefined;
 		},
 
 		_destroy: function() {
@@ -584,150 +583,50 @@ define( [ "jquery",
 			});
 		},
 
+
 		open: function( options ) {
-			$.mobile.popup.popupManager.push( this, arguments );
+			// make sure open is idempotent
+			if( $.mobile.popup.active ) {
+				return;
+			}
+
+			var self = this, url = $.mobile.activePage.jqmData( "url" ), newUrl;
+
+			// if the current url has no dialog hash key proceed as normal
+			// otherwise, if the page is a dialog simply tack on the hash key
+			if ( url.indexOf( $.mobile.dialogHashKey ) == -1 ) {
+				newUrl = url + $.mobile.dialogHashKey;
+			} else if ( $.mobile.activePage.is( ".ui-dialog" ) ) {
+				newUrl = $.mobile.path.parseLocation().hash + $.mobile.dialogHashKey;
+			}
+
+			// make sure the popup is displayed
+			this._open();
+
+			// Gotta love methods with 1mm args :(
+			$.mobile.urlHistory.addNew( newUrl, undefined, undefined, undefined, "dialog" );
+
+			// swallow the the initial navigation event, and bind for the next
+			$.mobile.pageContainer.one( "navigate.popup", function( e ) {
+				e.preventDefault();
+
+				// any navigation event after a popup is opened should close the popup
+				$.mobile.pageContainer.one( "navigate.popup", function() {
+					self._close();
+				});
+			});
+
+			// set the new url with (or without) the new dialog hash key
+			$.mobile.path.set( newUrl );
 		},
 
 		close: function() {
-			$.mobile.popup.popupManager.pop( this );
-		}
-	});
-
-	// Popup manager, whose policy is to ignore requests for opening popups when a popup is already in
-	// the process of opening, or already open
-	$.mobile.popup.popupManager = {
-		_currentlyOpenPopup: null,
-		_popupIsOpening: false,
-		_popupIsClosing: false,
-		_abort: false,
-
-		_handlePageBeforeChange: function( e, data ) {
-			var parsedDst, toUrl;
-
-			if ( typeof data.toPage === "string" ) {
-				parsedDst = data.toPage;
-			} else {
-				parsedDst = data.toPage.jqmData( "url" );
-			}
-			parsedDst = $.mobile.path.parseUrl( parsedDst );
-			toUrl = parsedDst.pathname + parsedDst.search + parsedDst.hash;
-
-			if ( this._myUrl !== toUrl ) {
-				this._navUnhook( true );
-			}
-		},
-
-		// Call _onHashChange if the hash changes /after/ the popup is on the screen
-		// Note that placing the popup on the screen can itself cause a hashchange,
-		// because the dialogHashKey may need to be added to the URL.
-		_navHook: function( whenHooked ) {
-			var self = this, dstHash;
-			function realInstallListener() {
-				$( window ).one( "navigate.popup", function() {
-					self._onHashChange();
-				});
-				whenHooked();
-			}
-
-			self._myUrl = $.mobile.activePage.jqmData( "url" );
-			$.mobile.pageContainer.one( "pagebeforechange.popup", $.proxy( this, "_handlePageBeforeChange" ) );
-			if ( $.mobile.hashListeningEnabled ) {
-				var activeEntry = $.mobile.urlHistory.getActive(),
-					dstTransition,
-					currentIsDialog = $.mobile.activePage.is( ".ui-dialog" ),
-					hasHash = ( activeEntry.url.indexOf( $.mobile.dialogHashKey ) > -1 ) && !currentIsDialog;
-
-				if ( $.mobile.urlHistory.activeIndex === 0 ) {
-					dstTransition = $.mobile.defaultDialogTransition;
-				} else {
-					dstTransition = activeEntry.transition;
-				}
-
-				if ( hasHash ) {
-					realInstallListener();
-				} else {
-					$( window ).one( "navigate.popupBinder", function() {
-						realInstallListener();
-					});
-					dstHash = activeEntry.url + $.mobile.dialogHashKey;
-					if ( $.mobile.urlHistory.activeIndex === 0 && dstHash === $.mobile.urlHistory.initialDst ) {
-						dstHash += $.mobile.dialogHashKey;
-					}
-					$.mobile.urlHistory.ignoreNextHashChange = currentIsDialog;
-					$.mobile.urlHistory.addNew( dstHash, dstTransition, activeEntry.title, activeEntry.pageUrl, activeEntry.role );
-					$.mobile.path.set( dstHash );
-				}
-			} else {
-				whenHooked();
-			}
-		},
-
-		_navUnhook: function( abort ) {
-			if ( abort ) {
-				$( window ).unbind( "navigate.popupBinder navigate.popup" );
-			}
-
-			if ( $.mobile.hashListeningEnabled && !abort ) {
+			// make sure close is idempotent
+			if( $.mobile.popup.active ){
 				window.history.back();
 			}
-			else {
-				this._onHashChange( abort );
-			}
-			$.mobile.activePage.unbind( "pagebeforechange.popup" );
-		},
-
-		push: function( popup, args ) {
-			var self = this;
-
-			if ( !self._currentlyOpenPopup ) {
-				self._currentlyOpenPopup = popup;
-
-				self._navHook(function() {
-					self._popupIsOpening = true;
-					self._currentlyOpenPopup.element.one( "popupafteropen", function() {
-						self._popupIsOpening = false;
-					});
-					self._currentlyOpenPopup._open.apply( self._currentlyOpenPopup, args );
-					if ( !self._popupIsOpening && self._abort ) {
-						self._currentlyOpenPopup._immediate();
-					}
-				});
-			}
-		},
-
-		pop: function( popup ) {
-			if ( popup === this._currentlyOpenPopup && !this._popupIsClosing ) {
-				this._popupIsClosing = true;
-				if ( this._popupIsOpening ) {
-					this._currentlyOpenPopup.element.one( "popupafteropen", $.proxy( this, "_navUnhook" ) );
-				} else {
-					this._navUnhook();
-				}
-			}
-		},
-
-		_handlePopupAfterClose: function() {
-			this._popupIsClosing = false;
-			this._currentlyOpenPopup = null;
-			$( this ).trigger( "done" );
-		},
-
-		_onHashChange: function( immediate ) {
-			this._abort = immediate;
-
-			if ( this._currentlyOpenPopup ) {
-				if ( immediate && this._popupIsOpening ) {
-					this._currentlyOpenPopup._immediate();
-				}
-				this._popupIsClosing = true;
-				this._currentlyOpenPopup.element.one( "popupafterclose", $.proxy( this, "_handlePopupAfterClose" ) );
-				this._currentlyOpenPopup._close();
-				if ( immediate && this._currentlyOpenPopup ) {
-					this._currentlyOpenPopup._immediate();
-				}
-			}
 		}
-	};
+	});
 
 	$.mobile.popup.handleLink = function( $link ) {
 		var closestPage = $link.closest( ":jqmData(role='page')" ),
@@ -741,7 +640,8 @@ define( [ "jquery",
 				x: offset.left + $link.outerWidth() / 2,
 				y: offset.top + $link.outerHeight() / 2,
 				transition: $link.jqmData( "transition" ),
-				positionTo: $link.jqmData( "position-to" )
+				positionTo: $link.jqmData( "position-to" ),
+				link: $link
 			});
 
 			// If this link is not inside a popup, re-focus onto it after the popup(s) complete
