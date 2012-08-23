@@ -601,7 +601,7 @@ define( [ "jquery",
 			}
 
 			// make sure the popup is displayed
-			this._open();
+			this._open( options );
 
 			// Gotta love methods with 1mm args :(
 			$.mobile.urlHistory.addNew( newUrl, undefined, undefined, undefined, "dialog" );
