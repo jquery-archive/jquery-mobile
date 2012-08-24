@@ -398,9 +398,9 @@ define( [ "jquery",
 		_animate: function( args ) {
 			if ( this.options.overlayTheme && args.additionalCondition ) {
 				this._ui.screen
+					.animationComplete( $.proxy( args.prereqs.screen, "resolve" ) )
 					.removeClass( args.classToRemove )
-					.addClass( args.screenClassToAdd )
-					.animationComplete( $.proxy( args.prereqs.screen, "resolve" ) );
+					.addClass( args.screenClassToAdd );
 			} else {
 				args.prereqs.screen.resolve();
 			}
@@ -410,9 +410,9 @@ define( [ "jquery",
 					this._applyTransition( args.transition );
 				}
 				this._ui.container
+					.animationComplete( $.proxy( args.prereqs.container, "resolve" ) )
 					.addClass( args.containerClassToAdd )
-					.removeClass( args.classToRemove )
-					.animationComplete( $.proxy( args.prereqs.container, "resolve" ) );
+					.removeClass( args.classToRemove );
 			} else {
 				args.prereqs.container.resolve();
 			}
@@ -463,10 +463,19 @@ define( [ "jquery",
 		},
 
 		_openPrereqsComplete: function() {
-			this._ui.container.addClass( "ui-popup-active" );
-			this._isOpen = true;
-			this._ui.container.attr( "tabindex", "0" ).focus();
-			this._trigger( "afteropen" );
+			var self = this;
+
+			self._ui.container.addClass( "ui-popup-active" );
+			self._isOpen = true;
+
+			// Android appears to trigger the animation complete before the popup
+			// is visible. Allowing the stack to unwind before applying focus prevents
+			// the "blue flash" of element focus in android 4.0
+			setTimeout(function(){
+				self._ui.container.attr( "tabindex", "0" ).focus();
+			});
+
+			self._trigger( "afteropen" );
 		},
 
 		_open: function( options ) {
@@ -480,8 +489,6 @@ define( [ "jquery",
 
 			// Copy out the transition, because we may be overwriting it later and we don't want to pass that change back to the caller
 			transition = options.transition;
-
-			this._link = options.link;
 
 			// Give applications a chance to modify the contents of the container before it appears
 			this._trigger( "beforeposition" );
@@ -542,11 +549,6 @@ define( [ "jquery",
 
 			// remove the global mutex for popups
 			$.mobile.popup.active = undefined;
-
-			// if the popup was opened by a link focus is on close
-			if( this._link ){
-				this._link.focus();
-			}
 
 			// alert users that the popup is closed
 			this._trigger( "afterclose" );

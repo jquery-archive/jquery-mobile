@@ -416,25 +416,21 @@
 		]);
 	});
 
-	asyncTest( "Popup link focused on close", function() {
-		var $link = $( "#open-test-popup" ), $popup = $( "#test-popup" );
+	asyncTest( "Popup focused after open", function() {
+		var $link = $( "#open-test-popup" ), $popup = $( "#test-popup" ), eventCount = 0;
 
 		expect( 2 );
 
-		// make sure the link is blurred
-		$link.blur();
-		ok( !$link.is( ":focus" ), "link is not focused to start" );
+		$popup.popup( "open" );
 
 		// check that after the popup is closed the focus is correct
-		$popup.one( "popupafterclose", function() {
-			ok( $link.is( ":focus" ), "link is focused after the popup closes" );
-			start();
+		$popup.one( "popupafteropen", function() {
+			ok( true, "afteropen has fired" );
+
+			$popup.parent().one( "focus", function() {
+				ok( true, "focus fired after 'afteropen'" );
+				start();
+			});
 		});
-
-		// open the popup
-		$link.click();
-
-		// close the popup
-		$popup.popup( "close" );
 	});
 })( jQuery );
