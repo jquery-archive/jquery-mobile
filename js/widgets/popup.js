@@ -47,6 +47,8 @@ define( [ "jquery",
 			positionTo: "origin",
 			tolerance: null,
 			initSelector: ":jqmData(role='popup')",
+			navigateEvents: "navigate.popup",
+			closeEvents: "navigate.popup pagebeforechange.popup",
 			history: true
 		},
 
@@ -131,6 +133,8 @@ define( [ "jquery",
 			if ( thisPage.length === 0 ) {
 				thisPage = $( "body" );
 			}
+
+
 
 			// Apply the proto
 			thisPage.append( ui.screen );
@@ -549,7 +553,7 @@ define( [ "jquery",
 			this._ui.container.removeAttr( "tabindex" );
 
 			// remove nav bindings if they are still present
-			$.mobile.pageContainer.unbind( "navigate.popup pagebeforechange.popup" );
+			$.mobile.pageContainer.unbind( this.options.closeEvents );
 
 			// remove the global mutex for popups
 			$.mobile.popup.active = undefined;
@@ -599,31 +603,36 @@ define( [ "jquery",
 			});
 		},
 
+		// any navigation event after a popup is opened should close the popup
+		// NOTE the pagebeforechange is bound to catch navigation events that don't
+		//      alter the url (eg, dialogs from popups)
+		_bindContainerNavigate: function() {
+			$.mobile.pageContainer.one( this.options.closeEvents, $.proxy( this._close, this ));
+		},
+
 		// TODO no clear deliniation of what should be here and
 		// what should be in _open. Seems to be "visual" vs "history" for now
 		open: function( options ) {
-			var hashkey = $.mobile.dialogHashKey,
-				activePage = $.mobile.activePage,
-				self = this;
+			var self = this, url, hashkey, activePage;
 
 			// make sure open is idempotent
 			if( $.mobile.popup.active ) {
 				return;
 			}
 
+			this._open( options );
+
 			// if history alteration is disabled close on navigate events
 			// and don't modify the url
 			if( !this.options.history ) {
-				this._open( options );
-
-				$.mobile.pageContainer.one( "navigate.popup pagebeforechange.popup", function() {
-					self._close();
-				});
+				self._bindContainerNavigate();
 
 				return;
 			}
 
-			var url = activePage.jqmData( "url" );
+			hashkey = $.mobile.dialogHashKey;
+			activePage = $.mobile.activePage;
+			url = activePage.jqmData( "url" );
 
 			// if the current url has no dialog hash key proceed as normal
 			// otherwise, if the page is a dialog simply tack on the hash key
@@ -633,19 +642,10 @@ define( [ "jquery",
 				url = $.mobile.path.parseLocation().hash + hashkey;
 			}
 
-			// make sure the popup is displayed
-			this._open( options );
-
 			// swallow the the initial navigation event, and bind for the next
-			$.mobile.pageContainer.one( "navigate.popup", function( e ) {
+			$.mobile.pageContainer.one( self.options.navigateEvents, function( e ) {
 				e.preventDefault();
-
-				// any navigation event after a popup is opened should close the popup
-				// NOTE the pagebeforechange is bound to catch navigation events that don't
-				//      alter the url (eg, dialogs from popups)
-				$.mobile.pageContainer.one( "navigate.popup pagebeforechange.popup", function() {
-					self._close();
-				});
+				self._bindContainerNavigate();
 			});
 
 			// Gotta love methods with 1mm args :(
