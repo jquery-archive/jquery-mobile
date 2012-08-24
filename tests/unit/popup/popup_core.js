@@ -416,4 +416,25 @@
 		]);
 	});
 
+	asyncTest( "Popup link focused on close", function() {
+		var $link = $( "#open-test-popup" ), $popup = $( "#test-popup" );
+
+		expect( 2 );
+
+		// make sure the link is blurred
+		$link.blur();
+		ok( !$link.is( ":focus" ), "link is not focused to start" );
+
+		// check that after the popup is closed the focus is correct
+		$popup.one( "popupafterclose", function() {
+			ok( $link.is( ":focus" ), "link is focused after the popup closes" );
+			start();
+		});
+
+		// open the popup
+		$link.click();
+
+		// close the popup
+		$popup.popup( "close" );
+	});
 })( jQuery );

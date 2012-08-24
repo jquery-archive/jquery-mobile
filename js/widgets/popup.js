@@ -480,6 +480,8 @@ define( [ "jquery",
 			// Copy out the transition, because we may be overwriting it later and we don't want to pass that change back to the caller
 			transition = options.transition;
 
+			this._link = options.link;
+
 			// Give applications a chance to modify the contents of the container before it appears
 			this._trigger( "beforeposition" );
 
@@ -536,6 +538,16 @@ define( [ "jquery",
 
 		_closePrereqsDone: function() {
 			this._ui.container.removeAttr( "tabindex" );
+
+			// remove the global mutex for popups
+			$.mobile.popup.active = undefined;
+
+			// if the popup was opened by a link focus is on close
+			if( this._link ){
+				this._link.focus();
+			}
+
+			// alert users that the popup is closed
 			this._trigger( "afterclose" );
 		},
 
@@ -560,9 +572,6 @@ define( [ "jquery",
 				applyTransition: true,
 				prereqs: this._prereqs
 			});
-
-			// remove the global mutex for popups
-			$.mobile.popup.active = undefined;
 		},
 
 		_destroy: function() {
@@ -633,6 +642,8 @@ define( [ "jquery",
 		}
 	});
 
+
+	// TODO this can be moved inside the widget create along with the page before change binding
 	$.mobile.popup.handleLink = function( $link ) {
 		var closestPage = $link.closest( ":jqmData(role='page')" ),
 			scope = ( ( closestPage.length === 0 ) ? $( "body" ) : closestPage ),
@@ -648,14 +659,6 @@ define( [ "jquery",
 				positionTo: $link.jqmData( "position-to" ),
 				link: $link
 			});
-
-			// If this link is not inside a popup, re-focus onto it after the popup(s) complete
-			// For some reason, a $.proxy( $link, "focus" ) doesn't work as the handler
-			if ( $link.parents( ".ui-popup-container" ).length === 0 ) {
-				$( $.mobile.popup.popupManager ).one( "done", function() {
-					$link.focus();
-				});
-			}
 		}
 
 		//remove after delay
@@ -664,6 +667,7 @@ define( [ "jquery",
 		}, 300 );
 	};
 
+	// TODO move inside _create
 	$( document ).bind( "pagebeforechange", function( e, data ) {
 		if ( data.options.role === "popup" ) {
 			$.mobile.popup.handleLink( data.options.link );
