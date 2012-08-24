@@ -3,7 +3,14 @@
  */
 (function($){
 
-	module( "jquery.mobile.popup.js" );
+	var urlObject = $.mobile.path.parseLocation(),
+		home = urlObject.pathname + urlObject.search;
+
+	module( "jquery.mobile.popup.js", {
+		setup: function() {
+			$.testHelper.navReset( home );
+		}
+	});
 
 	$.extend($.testHelper, {
 
@@ -267,69 +274,6 @@
 		]);
 	});
 
-	asyncTest( "When opening a popup from a dialogHashKey location the location is reused", function() {
-		var origUrl, origIndex, baseUrl, baseIndex;
-
-		expect( 4 );
-
-		$.testHelper.detailedEventCascade([
-			function() {
-				origUrl = decodeURIComponent( location.href );
-				origIndex = $.mobile.urlHistory.activeIndex;
-				$( "#test-popup" ).popup( "open" );
-			},
-
-			{
-				opened: { src: $( "#test-popup" ), event: "popupafteropen.reuseStep1" },
-				hashchange: { src: $( window ), event: "hashchange.reuseStep1" }
-			},
-
-			function( result ) {
-				$( "#test-popup" ).popup( "close" );
-			},
-
-			{
-				closed: { src: $( "#test-popup" ), event: "popupafterclose.reuseStep2" },
-				hashchange: { src: $( window ), event: "hashchange.reuseStep2" },
-				timeout: { src: null, length: 300 }
-			},
-
-			function( result ) {
-				window.history.forward();
-			},
-
-			{ hashchange: { src: $( window ), event: "hashchange.reuseStep3" } },
-
-			function( result ) {
-				baseUrl = decodeURIComponent( location.href );
-				activeIndex = $.mobile.urlHistory.activeIndex;
-				$( "#test-popup" ).popup( "open" );
-			},
-
-			{
-				opened: { src: $( "#test-popup" ), event: "popupafteropen.reuseStep4" },
-				hashchange: { src: $( window ), event: "hashchange.reuseStep4" }
-			},
-
-			function( result ) {
-				ok( result.hashchange.timedOut, "Opening a popup from a dialogHashKey location does not cause a hashchange" );
-				ok( baseUrl === decodeURIComponent( location.href ), "Opening a popup from a dialogHashKey location does not cause the location to be modified" );
-				ok( activeIndex === $.mobile.urlHistory.activeIndex, "Opening a popup from a dialogHashKey location does not cause $.mobile.urlHistory to move" );
-				$( "#test-popup" ).popup( "close" );
-			},
-
-			{
-				closed: { src: $( "#test-popup" ), event: "popupafterclose.reuseStep5" },
-				navigate: { src: $.mobile.pageContainer, event: "navigate.reuseStep5" }
-			},
-
-			function( result ) {
-				ok( !result.navigate.timedOut, "Closing a popup from a dialogHashKey location causes a 'navigate'" );
-				setTimeout( function() { start(); }, 300 );
-			}
-		]);
-	});
-
 	// This test assumes that the popup opens into a state that does not include dialogHashKey.
 	// This should be the case if the previous test has cleaned up correctly.
 	asyncTest( "Opening another page from the popup leaves no trace of the popup in history", function() {
@@ -422,20 +366,14 @@
 
 			{
 				closed: { src: $( "#popup-sequence-test" ), event: "popupafterclose.sequenceTestStep2" },
-				pageload: { src: $.mobile.pageContainer, event: "pageload.sequenceTestStep2" }
+				pageload: { src: $.mobile.pageContainer, event: "pageload.sequenceTestStep2" },
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange.sequenceTestStep3" }
 			},
 
 			function( result ) {
 				ok( !result.closed.timedOut, "Popup has emitted 'popupafterclose'" );
 				ok( !result.pageload.timedOut, "A 'pageload' event (presumably to load the dialog) has occurred" );
 				ok( $( "#popup-sequence-test-dialog" ).length > 0, "The dialog has been loaded successfully" );
-			},
-
-			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange.sequenceTestStep3" }
-			},
-
-			function( result ) {
 				ok( !result.pagechange.timedOut, "A 'pagechange' event has occurred" );
 				ok( $.mobile.activePage[ 0 ] === $( "#popup-sequence-test-dialog" )[ 0 ], "The dialog is the active page" );
 				$( "a[href='#popup-sequence-test-popup-inside-dialog']" ).click();
