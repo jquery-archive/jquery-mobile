@@ -134,7 +134,9 @@ define( [ "jquery",
 				thisPage = $( "body" );
 			}
 
-
+			// define the container for navigation event bindings
+			// TODO this would be nice at the the mobile widget level
+			this.options.container = this.options.container || $.mobile.pageContainer;
 
 			// Apply the proto
 			thisPage.append( ui.screen );
@@ -606,8 +608,11 @@ define( [ "jquery",
 		// any navigation event after a popup is opened should close the popup
 		// NOTE the pagebeforechange is bound to catch navigation events that don't
 		//      alter the url (eg, dialogs from popups)
-		_bindContainerNavigate: function() {
-			$.mobile.pageContainer.one( this.options.closeEvents, $.proxy( this._close, this ));
+		_bindContainerClose: function() {
+			var self = this;
+
+			self.options.container
+				.one( self.options.closeEvents, $.proxy( self._close, self ));
 		},
 
 		// TODO no clear deliniation of what should be here and
@@ -620,18 +625,21 @@ define( [ "jquery",
 				return;
 			}
 
-			this._open( options );
+			// forward the options on to the visual open
+			self._open( options );
 
 			// if history alteration is disabled close on navigate events
 			// and don't modify the url
-			if( !this.options.history ) {
-				self._bindContainerNavigate();
-
+			if( !self.options.history ) {
+				self._bindContainerClose();
 				return;
 			}
 
+			// cache some values for min/readability
 			hashkey = $.mobile.dialogHashKey;
 			activePage = $.mobile.activePage;
+
+			// NOTE I'm not 100% that this is the right place to get the default url
 			url = activePage.jqmData( "url" );
 
 			// if the current url has no dialog hash key proceed as normal
@@ -643,9 +651,9 @@ define( [ "jquery",
 			}
 
 			// swallow the the initial navigation event, and bind for the next
-			$.mobile.pageContainer.one( self.options.navigateEvents, function( e ) {
+			self.options.container.one( self.options.navigateEvents, function( e ) {
 				e.preventDefault();
-				self._bindContainerNavigate();
+				self._bindContainerClose();
 			});
 
 			// Gotta love methods with 1mm args :(
