@@ -46,7 +46,8 @@ define( [ "jquery",
 			transition: "none",
 			positionTo: "origin",
 			tolerance: null,
-			initSelector: ":jqmData(role='popup')"
+			initSelector: ":jqmData(role='popup')",
+			history: true
 		},
 
 		_eatEventAndClose: function( e ) {
@@ -547,6 +548,9 @@ define( [ "jquery",
 		_closePrereqsDone: function() {
 			this._ui.container.removeAttr( "tabindex" );
 
+			// remove nav bindings if they are still present
+			$.mobile.pageContainer.unbind( "navigate.popup pagebeforechange.popup" );
+
 			// remove the global mutex for popups
 			$.mobile.popup.active = undefined;
 
@@ -595,19 +599,31 @@ define( [ "jquery",
 			});
 		},
 
-
 		// TODO no clear deliniation of what should be here and
 		// what should be in _open. Seems to be "visual" vs "history" for now
 		open: function( options ) {
 			var hashkey = $.mobile.dialogHashKey,
-				activePage = $.mobile.activePage;
+				activePage = $.mobile.activePage,
+				self = this;
 
 			// make sure open is idempotent
 			if( $.mobile.popup.active ) {
 				return;
 			}
 
-			var self = this, url = activePage.jqmData( "url" );
+			// if history alteration is disabled close on navigate events
+			// and don't modify the url
+			if( !this.options.history ) {
+				this._open( options );
+
+				$.mobile.pageContainer.one( "navigate.popup pagebeforechange.popup", function() {
+					self._close();
+				});
+
+				return;
+			}
+
+			var url = activePage.jqmData( "url" );
 
 			// if the current url has no dialog hash key proceed as normal
 			// otherwise, if the page is a dialog simply tack on the hash key
@@ -641,8 +657,14 @@ define( [ "jquery",
 
 		close: function() {
 			// make sure close is idempotent
-			if( $.mobile.popup.active ){
+			if( !$.mobile.popup.active ){
+				return;
+			}
+
+			if( this.options.history ) {
 				window.history.back();
+			} else {
+				this._close();
 			}
 		}
 	});

@@ -417,7 +417,7 @@
 	});
 
 	asyncTest( "Popup focused after open", function() {
-		var $link = $( "#open-test-popup" ), $popup = $( "#test-popup" ), eventCount = 0;
+		var $link = $( "#open-test-popup" ), $popup = $( "#test-popup" );
 
 		expect( 2 );
 
@@ -432,5 +432,39 @@
 				start();
 			});
 		});
+	});
+
+	test( "Popup doesn't alter the url when the history option is disabled", function() {
+		var $popup = $( "#test-history-popup" ), hash = $.mobile.path.parseLocation().hash;
+
+		$popup.popup( "open" );
+
+		equal( hash, $.mobile.path.parseLocation().hash, "the hash remains the same" );
+
+		ok( $popup.is( ":visible" ), "popup is indeed visible" );
+
+		$popup.popup( "close" );
+	});
+
+	asyncTest( "Navigating away from the popup page closes the popup without history enabled", function() {
+		var $popup = $( "#test-history-popup" );
+
+		expect( 2 );
+
+		$popup.bind( "popupafterclose", function() {
+			// TODO would be nice to verify that it happens
+			//      right after the first page goes away
+			ok( true, "popup was closed" );
+		});
+
+		$.testHelper.pageSequence([
+			function() {
+				$popup.popup( "open" );
+				ok( $popup.is( ":visible" ), "popup is indeed visible" );
+				$.mobile.changePage( "#no-popups" );
+			},
+
+			start
+		]);
 	});
 })( jQuery );
