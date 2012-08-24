@@ -585,39 +585,44 @@ define( [ "jquery",
 
 
 		open: function( options ) {
+			var hashkey = $.mobile.dialogHashKey,
+				activePage = $.mobile.activePage;
+
 			// make sure open is idempotent
 			if( $.mobile.popup.active ) {
 				return;
 			}
 
-			var self = this, url = $.mobile.activePage.jqmData( "url" ), newUrl;
+			var self = this, url = activePage.jqmData( "url" );
 
 			// if the current url has no dialog hash key proceed as normal
 			// otherwise, if the page is a dialog simply tack on the hash key
-			if ( url.indexOf( $.mobile.dialogHashKey ) == -1 ) {
-				newUrl = url + $.mobile.dialogHashKey;
-			} else if ( $.mobile.activePage.is( ".ui-dialog" ) ) {
-				newUrl = $.mobile.path.parseLocation().hash + $.mobile.dialogHashKey;
+			if ( url.indexOf( hashkey ) == -1 && !activePage.is( ".ui-dialog" ) ){
+				url = url + hashkey;
+			} else {
+				url = $.mobile.path.parseLocation().hash + hashkey;
 			}
 
 			// make sure the popup is displayed
 			this._open( options );
-
-			// Gotta love methods with 1mm args :(
-			$.mobile.urlHistory.addNew( newUrl, undefined, undefined, undefined, "dialog" );
 
 			// swallow the the initial navigation event, and bind for the next
 			$.mobile.pageContainer.one( "navigate.popup", function( e ) {
 				e.preventDefault();
 
 				// any navigation event after a popup is opened should close the popup
-				$.mobile.pageContainer.one( "navigate.popup", function() {
+				// NOTE the pagebeforechange is bound to catch navigation events that don't
+				//      alter the url (eg, dialogs from popups)
+				$.mobile.pageContainer.one( "navigate.popup pagebeforechange.popup", function() {
 					self._close();
 				});
 			});
 
+			// Gotta love methods with 1mm args :(
+			$.mobile.urlHistory.addNew( url, undefined, undefined, undefined, "dialog" );
+
 			// set the new url with (or without) the new dialog hash key
-			$.mobile.path.set( newUrl );
+			$.mobile.path.set( url );
 		},
 
 		close: function() {
