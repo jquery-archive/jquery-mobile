@@ -472,6 +472,7 @@ define( [ "jquery",
 		_open: function( options ) {
 			var coords, transition;
 
+			// set the global popup mutex
 			$.mobile.popup.active = this;
 
 			// Make sure options is defined
@@ -593,6 +594,8 @@ define( [ "jquery",
 		},
 
 
+		// TODO no clear deliniation of what should be here and
+		// what should be in _open. Seems to be "visual" vs "history" for now
 		open: function( options ) {
 			var hashkey = $.mobile.dialogHashKey,
 				activePage = $.mobile.activePage;
