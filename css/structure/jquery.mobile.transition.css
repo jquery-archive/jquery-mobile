@@ -19,6 +19,9 @@
 	-moz-animation-fill-mode: both;
 	-moz-animation-timing-function: ease-out;
 	-moz-animation-duration: 350ms;
+	-o-animation-fill-mode: both;
+	-o-animation-timing-function: ease-out;
+	-o-animation-duration: 350ms;
 }
 .out {
 	-webkit-animation-fill-mode: both;
@@ -27,4 +30,7 @@
 	-moz-animation-fill-mode: both;
 	-moz-animation-timing-function: ease-in;
 	-moz-animation-duration: 225ms;
+	-o-animation-fill-mode: both;
+	-o-animation-timing-function: ease-in;
+	-o-animation-duration: 225ms;
 }

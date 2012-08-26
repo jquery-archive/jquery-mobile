@@ -4,35 +4,47 @@
 .slidefade.out {
 	-webkit-transform: translateX(-100%);
 	-webkit-animation-name: slideouttoleft;
+	-webkit-animation-duration: 225ms;
 	-moz-transform: translateX(-100%);
 	-moz-animation-name: slideouttoleft;
-	-webkit-animation-duration: 225ms;
 	-moz-animation-duration: 225ms;
+	-o-transform: translateX(-100%);
+	-o-animation-name: slideouttoleft;
+	-o-animation-duration: 225ms;
 }
 
 .slidefade.in {
 	-webkit-transform: translateX(0);
 	-webkit-animation-name: fadein;
+	-webkit-animation-duration: 200ms;
 	-moz-transform: translateX(0);
 	-moz-animation-name: fadein;
-	-webkit-animation-duration: 200ms;
 	-moz-animation-duration: 200ms;
+	-o-transform: translateX(0);
+	-o-animation-name: fadein;
+	-o-animation-duration: 200ms;
 }
 
 .slidefade.out.reverse {
 	-webkit-transform: translateX(100%);
 	-webkit-animation-name: slideouttoright;
+	-webkit-animation-duration: 200ms;
 	-moz-transform: translateX(100%);
 	-moz-animation-name: slideouttoright;
-	-webkit-animation-duration: 200ms;
 	-moz-animation-duration: 200ms;
+	-o-transform: translateX(100%);
+	-o-animation-name: slideouttoright;
+	-o-animation-duration: 200ms;
 }
 
 .slidefade.in.reverse {
 	-webkit-transform: translateX(0);
 	-webkit-animation-name: fadein;
-	-moz-transform: translateX(0);
-	-moz-animation-name: fadein;
 	-webkit-animation-duration: 200ms;
+	-moz-transform: translateX(0);
+	-moz-animation-name: fadein
 	-moz-animation-duration: 200ms;
+	-o-transform: translateX(0);
+	-o-animation-name: fadein
+	-o-animation-duration: 200ms;
 }

@@ -1,15 +1,19 @@
 /* flow transition */
 .flow {
 	-webkit-transform-origin: 50% 30%;
-	-moz-transform-origin: 50% 30%;	
 	-webkit-box-shadow: 0 0 20px rgba(0,0,0,.4);
+	-moz-transform-origin: 50% 30%;	
 	-moz-box-shadow: 0 0 20px rgba(0,0,0,.4);
+	-o-transform-origin: 50% 30%;	
+	-o-box-shadow: 0 0 20px rgba(0,0,0,.4);
 }
 .ui-dialog.flow {
 	-webkit-transform-origin: none;
-	-moz-transform-origin: none;	
 	-webkit-box-shadow: none;
+	-moz-transform-origin: none;	
 	-moz-box-shadow: none;
+	-o-transform-origin: none;	
+	-o-box-shadow: none;
 }
 .flow.out {
 	-webkit-transform: translateX(-100%) scale(.7);
@@ -20,6 +24,10 @@
 	-moz-animation-name: flowouttoleft;
 	-moz-animation-timing-function: ease;
 	-moz-animation-duration: 350ms;
+	-o-transform: translateX(-100%) scale(.7);
+	-o-animation-name: flowouttoleft;
+	-o-animation-timing-function: ease;
+	-o-animation-duration: 350ms;
 }
 
 .flow.in {
@@ -31,6 +39,10 @@
 	-moz-animation-name: flowinfromright;
 	-moz-animation-timing-function: ease;
 	-moz-animation-duration: 350ms;
+	-o-transform: translateX(0) scale(1);
+	-o-animation-name: flowinfromright;
+	-o-animation-timing-function: ease;
+	-o-animation-duration: 350ms;
 }
 
 .flow.out.reverse {
@@ -38,11 +50,14 @@
 	-webkit-animation-name: flowouttoright;
 	-moz-transform: translateX(100%);
 	-moz-animation-name: flowouttoright;
+	-o-transform: translateX(100%);
+	-o-animation-name: flowouttoright;
 }
 
 .flow.in.reverse {
 	-webkit-animation-name: flowinfromleft;
 	-moz-animation-name: flowinfromleft;
+	-o-animation-name: flowinfromleft;
 }
 
 @-webkit-keyframes flowouttoleft {
@@ -55,6 +70,11 @@
 	60%, 70% { -moz-transform: translateX(0) scale(.7); }
     100% { -moz-transform:  translateX(-100%) scale(.7); }
 }
+@-o-keyframes flowouttoleft {
+    0% { -o-transform: translateX(0) scale(1); }
+	60%, 70% { -o-transform: translateX(0) scale(.7); }
+    100% { -o-transform:  translateX(-100%) scale(.7); }
+}
 
 @-webkit-keyframes flowouttoright {
     0% { -webkit-transform: translateX(0) scale(1); }
@@ -65,6 +85,11 @@
     0% { -moz-transform: translateX(0) scale(1); }
 	60%, 70% { -moz-transform: translateX(0) scale(.7); }
     100% { -moz-transform:  translateX(100%) scale(.7); }
+}
+@-o-keyframes flowouttoright {
+    0% { -o-transform: translateX(0) scale(1); }
+	60%, 70% { -o-transform: translateX(0) scale(.7); }
+    100% { -o-transform:  translateX(100%) scale(.7); }
 }
 
 @-webkit-keyframes flowinfromleft {
@@ -77,6 +102,12 @@
 	30%, 40% { -moz-transform: translateX(0) scale(.7); }
     100% { -moz-transform: translateX(0) scale(1); }
 }
+@-o-keyframes flowinfromleft {
+    0% { -o-transform: translateX(-100%) scale(.7); }
+	30%, 40% { -o-transform: translateX(0) scale(.7); }
+    100% { -o-transform: translateX(0) scale(1); }
+}
+
 @-webkit-keyframes flowinfromright {
     0% { -webkit-transform: translateX(100%) scale(.7); }
 	30%, 40% { -webkit-transform: translateX(0) scale(.7); }
@@ -86,4 +117,9 @@
     0% { -moz-transform: translateX(100%) scale(.7); }
 	30%, 40% { -moz-transform: translateX(0) scale(.7); }
     100% { -moz-transform: translateX(0) scale(1); }
+}
+@-o-keyframes flowinfromright {
+    0% { -o-transform: translateX(100%) scale(.7); }
+	30%, 40% { -o-transform: translateX(0) scale(.7); }
+    100% { -o-transform: translateX(0) scale(1); }
 }

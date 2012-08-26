@@ -8,6 +8,7 @@
 .viewport-turn {
 	-webkit-perspective: 1000;
 	-moz-perspective: 1000;
+	-o-perspective: 1000;
 	position: absolute;
 }
 .turn {
@@ -16,24 +17,33 @@
 	-webkit-transform-origin: 0;
 	
 	-moz-backface-visibility:hidden;
-	-moz-transform:translateX(0); /* Needed to work around an iOS 3.1 bug that causes listview thumbs to disappear when -webkit-visibility:hidden is used. */
+	-moz-transform:translateX(0);
 	-moz-transform-origin: 0;
+	
+	-o-backface-visibility:hidden;
+	-o-transform:translateX(0);
+	-o-transform-origin: 0;
 }
 
 .turn.out {
 	-webkit-transform: rotateY(-90deg) scale(.9);
 	-webkit-animation-name: flipouttoleft;
+	-webkit-animation-duration: 125ms;
 	-moz-transform: rotateY(-90deg) scale(.9);
 	-moz-animation-name: flipouttoleft;
-	-webkit-animation-duration: 125ms;
 	-moz-animation-duration: 125ms;
+	-o-transform: rotateY(-90deg) scale(.9);
+	-o-animation-name: flipouttoleft;
+	-o-animation-duration: 125ms;
 }
 
 .turn.in {
 	-webkit-animation-name: flipintoright;
-	-moz-animation-name: flipintoright;
 	-webkit-animation-duration: 250ms;
+	-moz-animation-name: flipintoright;
 	-moz-animation-duration: 250ms;
+	-o-animation-name: flipintoright;
+	-o-animation-duration: 250ms;
 	
 }
 
@@ -42,11 +52,14 @@
 	-webkit-animation-name: flipouttoright;
 	-moz-transform: rotateY(90deg) scale(.9);
 	-moz-animation-name: flipouttoright;
+	-o-transform: rotateY(90deg) scale(.9);
+	-o-animation-name: flipouttoright;
 }
 
 .turn.in.reverse {
 	-webkit-animation-name: flipintoleft;
 	-moz-animation-name: flipintoleft;
+	-o-animation-name: flipintoleft;
 }
 
 @-webkit-keyframes flipouttoleft {
@@ -57,6 +70,10 @@
     from { -moz-transform: rotateY(0); }
     to { -moz-transform: rotateY(-90deg) scale(.9); }
 }
+@-o-keyframes flipouttoleft {
+    from { -o-transform: rotateY(0); }
+    to { -o-transform: rotateY(-90deg) scale(.9); }
+}
 @-webkit-keyframes flipouttoright {
     from { -webkit-transform: rotateY(0) ; }
     to { -webkit-transform: rotateY(90deg) scale(.9); }
@@ -64,6 +81,10 @@
 @-moz-keyframes flipouttoright {
     from { -moz-transform: rotateY(0); }
     to { -moz-transform: rotateY(90deg) scale(.9); }
+}
+@-o-keyframes flipouttoright {
+    from { -o-transform: rotateY(0); }
+    to { -o-transform: rotateY(90deg) scale(.9); }
 }
 @-webkit-keyframes flipintoleft {
     from { -webkit-transform: rotateY(-90deg) scale(.9); }
@@ -73,6 +94,10 @@
     from { -moz-transform: rotateY(-90deg) scale(.9); }
     to { -moz-transform: rotateY(0); }
 }
+@-o-keyframes flipintoleft {
+    from { -o-transform: rotateY(-90deg) scale(.9); }
+    to { -o-transform: rotateY(0); }
+}
 @-webkit-keyframes flipintoright {
     from { -webkit-transform: rotateY(90deg) scale(.9); }
     to { -webkit-transform: rotateY(0); }
@@ -80,4 +105,8 @@
 @-moz-keyframes flipintoright {
     from { -moz-transform: rotateY(90deg) scale(.9); }
     to { -moz-transform: rotateY(0); }
+}
+@-o-keyframes flipintoright {
+    from { -o-transform: rotateY(90deg) scale(.9); }
+    to { -o-transform: rotateY(0); }
 }

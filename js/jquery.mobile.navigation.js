@@ -579,7 +579,7 @@ define( [
 	//animation complete callback
 	$.fn.animationComplete = function( callback ) {
 		if ( $.support.cssTransitions ) {
-			return $( this ).one( 'webkitAnimationEnd animationend', callback );
+			return $( this ).one( 'webkitAnimationEnd oanimationend animationend', callback );
 		}
 		else{
 			// defer execution for consistency between webkit/non webkit
