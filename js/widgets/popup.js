@@ -629,7 +629,7 @@ define( [ "jquery",
 			self._open( options );
 
 			// if history alteration is disabled close on navigate events
-			// and don't modify the url
+			// and leave the url as is
 			if( !self.options.history ) {
 				self._bindContainerClose();
 				return;
@@ -678,7 +678,7 @@ define( [ "jquery",
 	});
 
 
-	// TODO this can be moved inside the widget create along with the page before change binding
+	// TODO this can be moved inside the widget
 	$.mobile.popup.handleLink = function( $link ) {
 		var closestPage = $link.closest( ":jqmData(role='page')" ),
 			scope = ( ( closestPage.length === 0 ) ? $( "body" ) : closestPage ),
