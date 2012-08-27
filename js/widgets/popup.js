@@ -49,7 +49,7 @@ define( [ "jquery",
 			initSelector: ":jqmData(role='popup')",
 			navigateEvents: "navigate.popup",
 			closeEvents: "navigate.popup pagebeforechange.popup",
-			history: false
+			history: true
 		},
 
 		_eatEventAndClose: function( e ) {
@@ -560,7 +560,7 @@ define( [ "jquery",
 			self.options.container.unbind( self.options.closeEvents );
 
 			// unbind click handlers added when history is disabled
-			self.options.container.undelegate( "a:jqmData(rel='back')", "click.popup" );
+			self.element.undelegate( "a:jqmData(rel='back')", "click.popup" );
 
 			// remove the global mutex for popups
 			$.mobile.popup.active = undefined;
@@ -641,7 +641,7 @@ define( [ "jquery",
 				// When histoy is disabled we have to grab the data-rel
 				// back link clicks so we can close the popup instead of
 				// relying on history to do it for us
-				self.options.container
+				self.element
 					.delegate( "a:jqmData(rel='back')", "click.popup", function( e ) {
 						self._close();
 
