@@ -451,7 +451,7 @@
 
 		expect( 2 );
 
-		$popup.bind( "popupafterclose", function() {
+		$popup.one( "popupafterclose", function() {
 			// TODO would be nice to verify that it happens
 			//      right after the first page goes away
 			ok( true, "popup was closed" );

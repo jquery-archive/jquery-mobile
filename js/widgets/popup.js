@@ -47,6 +47,8 @@ define( [ "jquery",
 			positionTo: "origin",
 			tolerance: null,
 			initSelector: ":jqmData(role='popup')",
+			closeLinkSelector: "a:jqmData(rel='back')",
+			closeLinkEvents: "click.popup",
 			navigateEvents: "navigate.popup",
 			closeEvents: "navigate.popup pagebeforechange.popup",
 			history: true
@@ -552,15 +554,15 @@ define( [ "jquery",
 		},
 
 		_closePrereqsDone: function() {
-			var self = this;
+			var self = this, opts = self.options;
 
 			self._ui.container.removeAttr( "tabindex" );
 
 			// remove nav bindings if they are still present
-			self.options.container.unbind( self.options.closeEvents );
+			opts.container.unbind( opts.closeEvents );
 
 			// unbind click handlers added when history is disabled
-			self.element.undelegate( "a:jqmData(rel='back')", "click.popup" );
+			self.element.undelegate( opts.closeLinkSelector, opts.closeLinkEvents );
 
 			// remove the global mutex for popups
 			$.mobile.popup.active = undefined;
@@ -623,7 +625,7 @@ define( [ "jquery",
 		// TODO no clear deliniation of what should be here and
 		// what should be in _open. Seems to be "visual" vs "history" for now
 		open: function( options ) {
-			var self = this, url, hashkey, activePage;
+			var self = this, opts = this.options, url, hashkey, activePage;
 
 			// make sure open is idempotent
 			if( $.mobile.popup.active ) {
@@ -635,14 +637,14 @@ define( [ "jquery",
 
 			// if history alteration is disabled close on navigate events
 			// and leave the url as is
-			if( !self.options.history ) {
+			if( !opts.history ) {
 				self._bindContainerClose();
 
 				// When histoy is disabled we have to grab the data-rel
 				// back link clicks so we can close the popup instead of
 				// relying on history to do it for us
 				self.element
-					.delegate( "a:jqmData(rel='back')", "click.popup", function( e ) {
+					.delegate( opts.closeLinkSelector, opts.closeLinkEvents, function( e ) {
 						self._close();
 
 						// NOTE prevent the browser and navigation handlers from
@@ -670,7 +672,7 @@ define( [ "jquery",
 			}
 
 			// swallow the the initial navigation event, and bind for the next
-			self.options.container.one( self.options.navigateEvents, function( e ) {
+			opts.container.one( opts.navigateEvents, function( e ) {
 				e.preventDefault();
 				self._bindContainerClose();
 			});
