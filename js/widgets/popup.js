@@ -7,6 +7,7 @@
 
 define( [ "jquery",
 	"../jquery.mobile.widget",
+	"../jquery.mobile.support",
 	"../jquery.mobile.navigation",
 	"depend!../jquery.hashchange[jquery]" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
@@ -51,7 +52,11 @@ define( [ "jquery",
 			closeLinkEvents: "click.popup",
 			navigateEvents: "navigate.popup",
 			closeEvents: "navigate.popup pagebeforechange.popup",
-			history: true
+
+			// NOTE Windows Phone 7 has a scroll position caching issue that
+			//      requires us to disable popup history management by default
+			//      https://github.com/jquery/jquery-mobile/issues/4784
+			history: !$.mobile.browser.ie
 		},
 
 		_eatEventAndClose: function( e ) {
