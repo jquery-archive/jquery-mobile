@@ -267,27 +267,27 @@ define( [ "jquery",
 
 					// The first value denotes top/bottom tolerance, and the second value denotes left/right tolerance
 					case 2:
-						if ( !isNaN( ar[ 1 ] ) ) {
-							tol.t = tol.b = ar[ 1 ];
-						}
 						if ( !isNaN( ar[ 0 ] ) ) {
-							tol.l = tol.r = ar[ 0 ];
+							tol.t = tol.b = ar[ 0 ];
+						}
+						if ( !isNaN( ar[ 1 ] ) ) {
+							tol.l = tol.r = ar[ 1 ];
 						}
 						break;
 
 					// The array contains values in the order top, right, bottom, left
 					case 4:
+						if ( !isNaN( ar[ 0 ] ) ) {
+							tol.t = ar[ 0 ];
+						}
 						if ( !isNaN( ar[ 1 ] ) ) {
-							tol.t = ar[ 1 ];
+							tol.r = ar[ 1 ];
 						}
 						if ( !isNaN( ar[ 2 ] ) ) {
-							tol.r = ar[ 2 ];
+							tol.b = ar[ 2 ];
 						}
 						if ( !isNaN( ar[ 3 ] ) ) {
-							tol.b = ar[ 3 ];
-						}
-						if ( !isNaN( ar[ 0 ] ) ) {
-							tol.l = ar[ 0 ];
+							tol.l = ar[ 3 ];
 						}
 						break;
 
