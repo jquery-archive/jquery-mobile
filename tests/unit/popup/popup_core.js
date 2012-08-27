@@ -131,15 +131,15 @@
 			defaultValues = tolTestPopup._tolerance;
 
 		ok( (
-			$.type( defaultValues.l ) === "number" && !isNaN( defaultValues.l ) &&
 			$.type( defaultValues.t ) === "number" && !isNaN( defaultValues.t ) &&
 			$.type( defaultValues.r ) === "number" && !isNaN( defaultValues.r ) &&
-			$.type( defaultValues.b ) === "number" && !isNaN( defaultValues.b ) ), "Default tolerances are numbers and not NaN" );
+			$.type( defaultValues.b ) === "number" && !isNaN( defaultValues.b ) &&
+			$.type( defaultValues.l ) === "number" && !isNaN( defaultValues.l ) ), "Default tolerances are numbers and not NaN" );
 
 		tolTest( tolTestElement, tolTestPopup, "", defaultValues );
-		tolTest( tolTestElement, tolTestPopup, "0", { l: 0, t: 0, r: 0, b: 0 } );
-		tolTest( tolTestElement, tolTestPopup, "12,14", { l: 12, t: 14, r: 12, b: 14 } );
-		tolTest( tolTestElement, tolTestPopup, "5,9,4,11", { l: 5, t: 9, r: 4, b: 11 } );
+		tolTest( tolTestElement, tolTestPopup, "0", { t: 0, r: 0, b: 0, l: 0 } );
+		tolTest( tolTestElement, tolTestPopup, "14,12", { t: 14, r: 12, b: 14, l: 12 } );
+		tolTest( tolTestElement, tolTestPopup, "9,4,11,5", { t: 9, r: 4, b: 11, l: 5 } );
 		tolTest( tolTestElement, tolTestPopup, null, defaultValues );
 	});
 
