@@ -467,4 +467,16 @@
 			start
 		]);
 	});
+
+	test( "Close links work on a history disabled popup", function() {
+		var $popup = $( "#test-history-popup" );
+
+		expect( 2 );
+
+		$popup.popup( 'open' );
+		ok( $.mobile.popup.active, "popup is shown on link click" );
+
+		$popup.find( "a" ).click();
+		ok( !$.mobile.popup.active, "popup is hidden on link click" );
+	});
 })( jQuery );

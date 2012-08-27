@@ -49,7 +49,7 @@ define( [ "jquery",
 			initSelector: ":jqmData(role='popup')",
 			navigateEvents: "navigate.popup",
 			closeEvents: "navigate.popup pagebeforechange.popup",
-			history: true
+			history: false
 		},
 
 		_eatEventAndClose: function( e ) {
@@ -552,16 +552,21 @@ define( [ "jquery",
 		},
 
 		_closePrereqsDone: function() {
-			this._ui.container.removeAttr( "tabindex" );
+			var self = this;
+
+			self._ui.container.removeAttr( "tabindex" );
 
 			// remove nav bindings if they are still present
-			$.mobile.pageContainer.unbind( this.options.closeEvents );
+			self.options.container.unbind( self.options.closeEvents );
+
+			// unbind click handlers added when history is disabled
+			self.options.container.undelegate( "a:jqmData(rel='back')", "click.popup" );
 
 			// remove the global mutex for popups
 			$.mobile.popup.active = undefined;
 
 			// alert users that the popup is closed
-			this._trigger( "afterclose" );
+			self._trigger( "afterclose" );
 		},
 
 		_close: function() {
@@ -632,6 +637,20 @@ define( [ "jquery",
 			// and leave the url as is
 			if( !self.options.history ) {
 				self._bindContainerClose();
+
+				// When histoy is disabled we have to grab the data-rel
+				// back link clicks so we can close the popup instead of
+				// relying on history to do it for us
+				self.options.container
+					.delegate( "a:jqmData(rel='back')", "click.popup", function( e ) {
+						self._close();
+
+						// NOTE prevent the browser and navigation handlers from
+						// working with the link's rel=back. This may cause
+						// issues for developers expecting the event to bubble
+						return false;
+					});
+
 				return;
 			}
 
