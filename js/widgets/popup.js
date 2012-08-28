@@ -129,7 +129,7 @@ define( [ "jquery",
 
 		_create: function() {
 			var ui = {
-					screen: $( "<div class='ui-screen-hidden ui-popup-screen fade'></div>" ),
+					screen: $( "<div class='ui-screen-hidden ui-popup-screen'></div>" ),
 					placeholder: $( "<div style='display: none;'><!-- placeholder --></div>" ),
 					container: $( "<div class='ui-popup-container ui-selectmenu-hidden'></div>" )
 				},
