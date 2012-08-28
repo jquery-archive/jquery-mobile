@@ -1,3 +1,8 @@
+.ui-page.ui-popup-open .ui-header-fixed,
+.ui-page.ui-popup-open .ui-footer-fixed {
+	position: absolute;
+}
+
 .ui-popup-screen {
 	background-image: url(data:image/gif;base64,R0lGODlhAQABAID/AMDAwAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==); /* Necessary to set some form of background to ensure element is clickable in IE6/7. While legacy IE won’t understand the data-URI’d image, it ensures no additional requests occur in all other browsers with little overhead. */
 	top: 0px;

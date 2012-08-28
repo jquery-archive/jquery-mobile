@@ -534,6 +534,11 @@ define( [ "jquery",
 				.removeClass( "ui-selectmenu-hidden" )
 				.offset( coords );
 
+//		if ( this.options.overlayTheme !== null ) {
+				// TODO: The fixed toolbars really only need to be hidden if the overlay has a background. Should this be conditional?
+				this.element.closest( ".ui-page" ).addClass( "ui-popup-open" );
+//		}
+
 			this._animate({
 				additionalCondition: true,
 				transition: transition,
@@ -578,6 +583,8 @@ define( [ "jquery",
 
 		_close: function() {
 			this._ui.container.removeClass( "ui-popup-active" );
+			this.element.closest( ".ui-page" ).removeClass( "ui-popup-open" );
+
 			this._isOpen = false;
 
 			// Count down to triggering "popupafterclose" - we have two prerequisites:
