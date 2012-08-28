@@ -64,8 +64,18 @@ define( [ "jquery", "text!../version.txt" ], function( $, __version__ ) {
 		// For error messages, which theme does the box uses?
 		pageLoadErrorMessageTheme: "e",
 
-		//automatically initialize the DOM when it's ready
+		// Automatically initialize the DOM when it's ready
 		autoInitializePage: true,
+
+		// Force reverse direction, for example when:
+		// $.mobile.linkBindingEnabled = false;
+
+		// So, you can:
+		// ($('a[data-rel="back"]')).live('click', function() {
+		//   $.mobile.forceReverse = true;
+		//   window.history.back();
+		// });
+		forceReverse: false,
 
 		pushStateEnabled: true,
 
