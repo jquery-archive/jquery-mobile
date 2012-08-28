@@ -600,17 +600,22 @@ define( [ "jquery",
 		},
 
 		_destroy: function() {
-			// Put the element back to where the placeholder was and remove the "ui-popup" class
-			this._setTheme( "none" );
-			this.element
-				.insertAfter( this._ui.placeholder )
-				.removeClass( "ui-popup ui-overlay-shadow ui-corner-all" );
-			this._ui.screen.remove();
-			this._ui.container.remove();
-			this._ui.placeholder.remove();
+			var self = this;
 
-			// Unbind handlers that were bound to elements outside this.element (the window, in this case)
-			$.each( this._globalHandlers, function( idx, oneSrc ) {
+			// hide and remove bindings
+			self._close();
+
+			// Put the element back to where the placeholder was and remove the "ui-popup" class
+			self._setTheme( "none" );
+			self.element
+				.insertAfter( self._ui.placeholder )
+				.removeClass( "ui-popup ui-overlay-shadow ui-corner-all" );
+			self._ui.screen.remove();
+			self._ui.container.remove();
+			self._ui.placeholder.remove();
+
+			// Unbind handlers that were bound to elements outside self.element (the window, in self case)
+			$.each( self._globalHandlers, function( idx, oneSrc ) {
 				$.each( oneSrc.handler, function( eventType, handler ) {
 					oneSrc.src.unbind( eventType, handler );
 				});

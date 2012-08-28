@@ -479,4 +479,17 @@
 		$popup.find( "a" ).click();
 		ok( !$.mobile.popup.active, "popup is hidden on link click" );
 	});
+
+	asyncTest( "Destroy closes the popup first", function() {
+		var $popup = $( "#test-destroy-popup" );
+
+		expect( 1 );
+
+		$popup.one( "popupafterclose", function() {
+			ok( true, "closed on destroy" );
+			start();
+		});
+
+		$popup.popup( "destroy" );
+	});
 })( jQuery );
