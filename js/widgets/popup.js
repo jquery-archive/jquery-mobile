@@ -412,9 +412,12 @@ define( [ "jquery",
 		_animate: function( args ) {
 			if ( this.options.overlayTheme && args.additionalCondition ) {
 				this._ui.screen
-					.animationComplete( $.proxy( args.prereqs.screen, "resolve" ) )
 					.removeClass( args.classToRemove )
 					.addClass( args.screenClassToAdd );
+
+				setTimeout(function() {
+					args.prereqs.screen.resolve();
+				}, 0);
 			} else {
 				args.prereqs.screen.resolve();
 			}
@@ -424,9 +427,12 @@ define( [ "jquery",
 					this._applyTransition( args.transition );
 				}
 				this._ui.container
-					.animationComplete( $.proxy( args.prereqs.container, "resolve" ) )
 					.addClass( args.containerClassToAdd )
 					.removeClass( args.classToRemove );
+
+				setTimeout(function() {
+					args.prereqs.container.resolve();
+				}, 0);
 			} else {
 				args.prereqs.container.resolve();
 			}
