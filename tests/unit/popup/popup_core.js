@@ -185,7 +185,7 @@
 		var $popup = $( "#test-popup" );
 		expect( 9 );
 
-		$popup.bind( "popupafteropen", function() {
+		$popup.one( "popupafteropen", function() {
 			var theOffset = $( "#test-popup p" ).offset();
 			ok( !$popup.parent().prev().hasClass( "ui-screen-hidden" ), "Open popup screen is not hidden" );
 			ok( $popup.attr( "class" ).match( /( |^)ui-body-[a-z]( |$)/ ), "Open popup has a valid overlay theme" );
@@ -199,12 +199,13 @@
 			$popup.popup( "close" );
 		});
 
-		$popup.bind( "popupafterclose", function() {
+		$popup.one( "popupafterclose", function() {
 			ok( !$popup.parent().hasClass( "in" ), "Closed popup container does not have class 'in'" );
 			ok( $popup.parent().prev().hasClass( "ui-screen-hidden" ), "Closed popup screen is hidden" );
 			ok( !$popup.parent().hasClass( "ui-popup-active" ), "Open popup dos not have the 'ui-popup-active' class" );
 
-			start();
+			// TODO make sure that the afterclose is fired after the nav finishes
+			setTimeout(start, 300);
 		});
 
 		$popup.popup( "open" );
@@ -238,8 +239,18 @@
 				ok( !result.closed.timedOut, "Opening a popup did cause 'closed' event" );
 				$( "a#open-xyzzy-popup" ).click();
 				ok( !$( "a#open-xyzzy-popup" ).closest( ".ui-btn" ).hasClass( "ui-btn-active" ), "Opening a non-existing popup removes active class from link that attempted to launch it" );
-				setTimeout( function() { start(); }, 300 );
+
+				$( "test-popup" ).popup( "close" );
 			},
+
+			{
+				closed: { src: $( "#test-popup" ), event: "popupafterclose.linkActiveTestStep3" }
+			},
+
+			function() {
+				// TODO make sure that the afterclose is fired after the nav finishes
+				setTimeout(start, 300);
+			}
 		]);
 	});
 
@@ -276,7 +287,9 @@
 				ok( !result.navigate.timedOut, "Closing a popup from a non-dialogHashKey location causes a 'navigate' event" );
 				ok( decodeURIComponent( location.href ) === baseUrl, "location.href has been restored after the popup" );
 				ok( $.mobile.urlHistory.activeIndex === activeIndex, "$.mobile.urlHistory has been restored correctly" );
-				setTimeout( function() { start(); }, 300 );
+
+				// TODO make sure that the afterclose is fired after the nav finishes
+				setTimeout(start, 300);
 			}
 		]);
 	});
@@ -434,14 +447,19 @@
 
 			$popup.parent().one( "focus", function() {
 				ok( true, "focus fired after 'afteropen'" );
-				start();
+				$popup.popup( "close" );
 			});
+		});
+
+		$popup.one( "popupafterclose", function() {
+			// TODO make sure that the afterclose is fired after the nav finishes
+			setTimeout(start, 300);
 		});
 
 		$popup.popup( "open" );
 	});
 
-	test( "Popup doesn't alter the url when the history option is disabled", function() {
+	asyncTest( "Popup doesn't alter the url when the history option is disabled", function() {
 		var $popup = $( "#test-history-popup" ), hash = $.mobile.path.parseLocation().hash;
 
 		$popup.popup( "open" );
@@ -449,6 +467,11 @@
 		equal( hash, $.mobile.path.parseLocation().hash, "the hash remains the same" );
 
 		ok( $popup.is( ":visible" ), "popup is indeed visible" );
+
+		$popup.one( "popupafterclose", function() {
+			// TODO make sure that the afterclose is fired after the nav finishes
+			setTimeout(start, 300);
+		});
 
 		$popup.popup( "close" );
 	});
@@ -471,7 +494,10 @@
 				$.mobile.changePage( "#no-popups" );
 			},
 
-			start
+			function() {
+				// TODO make sure that the afterclose is fired after the nav finishes
+				setTimeout(start, 300);
+			}
 		]);
 	});
 
