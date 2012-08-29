@@ -410,29 +410,24 @@ define( [ "jquery",
 		},
 
 		_animate: function( args ) {
-			if ( this.options.overlayTheme && args.additionalCondition ) {
-				this._ui.screen
-					.removeClass( args.classToRemove )
-					.addClass( args.screenClassToAdd );
+			// NOTE before removing the default animation of the screen
+			//      this had an animate callback that would relove the deferred
+			//      now the deferred is resolved immediately
+			// TODO remove the dependency on the screen deferred
+			this._ui.screen
+				.removeClass( args.classToRemove )
+				.addClass( args.screenClassToAdd );
 
-				setTimeout(function() {
-					args.prereqs.screen.resolve();
-				}, 0);
-			} else {
-				args.prereqs.screen.resolve();
-			}
+			args.prereqs.screen.resolve();
 
 			if ( args.transition && args.transition !== "none" ) {
 				if ( args.applyTransition ) {
 					this._applyTransition( args.transition );
 				}
 				this._ui.container
+					.animationComplete( $.proxy( args.prereqs.container, "resolve" ) )
 					.addClass( args.containerClassToAdd )
 					.removeClass( args.classToRemove );
-
-				setTimeout(function() {
-					args.prereqs.container.resolve();
-				}, 0);
 			} else {
 				args.prereqs.container.resolve();
 			}

@@ -182,27 +182,34 @@
 	});
 
 	asyncTest( "Popup opens and closes", function() {
+		var $popup = $( "#test-popup" );
+		expect( 9 );
 
-		expect( 8 );
-
-		$( "#test-popup" ).popup( "open", { x: -9999, y: -9999 } );
-		setTimeout(function() {
+		$popup.bind( "popupafteropen", function() {
 			var theOffset = $( "#test-popup p" ).offset();
-			ok( !$( "#test-popup" ).parent().prev().hasClass( "ui-screen-hidden" ), "Open popup screen is not hidden" );
-			ok( $( "#test-popup" ).attr( "class" ).match( /( |^)ui-body-[a-z]( |$)/ ), "Open popup has a valid overlay theme" );
+			ok( !$popup.parent().prev().hasClass( "ui-screen-hidden" ), "Open popup screen is not hidden" );
+			ok( $popup.attr( "class" ).match( /( |^)ui-body-[a-z]( |$)/ ), "Open popup has a valid overlay theme" );
 			ok( theOffset.left >= 15 && theOffset.top >= 30, "Open popup top left coord is at least (10, 30)" );
-			$( "#test-popup" ).popup( "option", "overlayTheme", "a" );
-			ok( $( "#test-popup" ).parent().prev().hasClass( "ui-overlay-a in" ), "Setting an overlay theme while the popup is open causes the theme to be applied and the screen to be faded in" );
-			ok( $( "#test-popup" ).parent().hasClass( "ui-popup-active" ), "Open popup has the 'ui-popup-active' class" );
-			$( "#test-popup" ).popup( "close" );
-			setTimeout(function() {
-				ok( !$( "#test-popup" ).parent().hasClass( "in" ), "Closed popup container does not have class 'in'" );
-				ok( $( "#test-popup" ).parent().prev().hasClass( "ui-screen-hidden" ), "Closed popup screen is hidden" );
-				ok( !$( "#test-popup" ).parent().hasClass( "ui-popup-active" ), "Open popup dos not have the 'ui-popup-active' class" );
-				setTimeout( function() { start(); }, 300 );
-			}, 1000);
-		}, 1000);
+
+			$popup.popup( "option", "overlayTheme", "a" );
+			ok( $popup.parent().prev().hasClass( "ui-overlay-a" ), "Setting an overlay theme while the popup is open causes the theme to be applied and the screen to be faded in" );
+			ok( $popup.parent().prev().hasClass( "in" ), "Setting an overlay theme while the popup is open causes the theme to be applied and the screen to be faded in" );
+			ok( $popup.parent().hasClass( "ui-popup-active" ), "Open popup has the 'ui-popup-active' class" );
+
+			$popup.popup( "close" );
+		});
+
+		$popup.bind( "popupafterclose", function() {
+			ok( !$popup.parent().hasClass( "in" ), "Closed popup container does not have class 'in'" );
+			ok( $popup.parent().prev().hasClass( "ui-screen-hidden" ), "Closed popup screen is hidden" );
+			ok( !$popup.parent().hasClass( "ui-popup-active" ), "Open popup dos not have the 'ui-popup-active' class" );
+
+			start();
+		});
+
+		$popup.popup( "open" );
 	});
+
 
 	asyncTest( "Link that launches popup is deactivated", function() {
 
@@ -421,8 +428,6 @@
 
 		expect( 2 );
 
-		$popup.popup( "open" );
-
 		// check that after the popup is closed the focus is correct
 		$popup.one( "popupafteropen", function() {
 			ok( true, "afteropen has fired" );
@@ -432,6 +437,8 @@
 				start();
 			});
 		});
+
+		$popup.popup( "open" );
 	});
 
 	test( "Popup doesn't alter the url when the history option is disabled", function() {
