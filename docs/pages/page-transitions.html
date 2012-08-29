@@ -111,6 +111,19 @@
 
 	<h2>Setting a transition on a link or form submit</h2>
 	<p>By default, the framework applies a <strong>fade</strong> transition. To set a custom transition effect, add the <code>data-transition</code> attribute to the link. </p>
+	<p>
+		Note that reverse direction won't be applied if you disable the link binding with <code>$.mobile.linkBindingEnabled = false;</code>.
+		If you want to force a reverse direction, please define: <code>$.mobile.forceReverse = true;</code>. For example:
+
+<code>
+$.mobile.forceReverse = true;
+
+($('a[data-rel="back"]')).live('click', function() {
+  $.mobile.forceReverse = true;
+  window.history.back();
+});
+</code>
+	</p>
 
 <code><code>
 &lt;a href=&quot;index.html&quot; <strong>data-transition=&quot;pop&quot;</strong>&gt;I'll pop&lt;/a&gt;

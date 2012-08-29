@@ -1150,7 +1150,8 @@ define( [
 		$.mobile.activePage = toPage;
 
 		// If we're navigating back in the URL history, set reverse accordingly.
-		settings.reverse = settings.reverse || historyDir < 0;
+		settings.reverse = settings.reverse || $.mobile.forceReverse || historyDir < 0;
+		$.mobile.forceReverse = false;
 
 		transitionPages( toPage, fromPage, settings.transition, settings.reverse )
 			.done(function( name, reverse, $to, $from, alreadyFocused ) {
