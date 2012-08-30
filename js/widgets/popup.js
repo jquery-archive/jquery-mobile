@@ -552,7 +552,7 @@ define( [ "jquery",
 
 			if ( this.options.overlayTheme && androidBlacklist ) {
 				/* TODO:
-				The native browser on Android 4.0.X ("Ice Cream Sandwich") suffers from an issue where the popup overlay appears to be z-indexed 
+				The native browser on Android 4.0.X ("Ice Cream Sandwich") suffers from an issue where the popup overlay appears to be z-indexed
 				above the popup itself when certain other styles exist on the same page -- namely, any element set to `position: fixed` and certain
 				types of input. These issues are reminiscent of previously uncovered bugs in older versions of Android’s native browser:
 				https://github.com/scottjehl/Device-Bugs/issues/3
@@ -746,7 +746,9 @@ define( [ "jquery",
 	$.mobile.popup.handleLink = function( $link ) {
 		var closestPage = $link.closest( ":jqmData(role='page')" ),
 			scope = ( ( closestPage.length === 0 ) ? $( "body" ) : closestPage ),
-			popup = $( $link.attr( "href" ), scope[0] ),
+			// NOTE make sure to get only the hash, ie7 (wp7) return the absolute href
+			//      in this case ruining the element selection
+			popup = $( $.mobile.path.parseUrl($link.attr( "href" )).hash, scope[0] ),
 			offset;
 
 		if ( popup.data( "popup" ) ) {
