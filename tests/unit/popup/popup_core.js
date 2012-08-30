@@ -185,30 +185,43 @@
 		var $popup = $( "#test-popup" );
 		expect( 9 );
 
-		$popup.one( "popupafteropen", function() {
-			var theOffset = $( "#test-popup p" ).offset();
-			ok( !$popup.parent().prev().hasClass( "ui-screen-hidden" ), "Open popup screen is not hidden" );
-			ok( $popup.attr( "class" ).match( /( |^)ui-body-[a-z]( |$)/ ), "Open popup has a valid overlay theme" );
-			ok( theOffset.left >= 15 && theOffset.top >= 30, "Open popup top left coord is at least (10, 30)" );
+		$.testHelper.detailedEventCascade([
+			function() {
+				$popup.popup( "open" );
+			},
 
-			$popup.popup( "option", "overlayTheme", "a" );
-			ok( $popup.parent().prev().hasClass( "ui-overlay-a" ), "Setting an overlay theme while the popup is open causes the theme to be applied and the screen to be faded in" );
-			ok( $popup.parent().prev().hasClass( "in" ), "Setting an overlay theme while the popup is open causes the theme to be applied and the screen to be faded in" );
-			ok( $popup.parent().hasClass( "ui-popup-active" ), "Open popup has the 'ui-popup-active' class" );
+			{
+				opened: { src: $popup, event: "popupafteropen.opensandcloses" },
+				hashchange: { src: $(document), event: "hashchange.opensandcloses" }
+			},
 
-			$popup.popup( "close" );
-		});
+			function( result ) {
+				var theOffset = $( "#test-popup p" ).offset();
+				ok( !$popup.parent().prev().hasClass( "ui-screen-hidden" ), "Open popup screen is not hidden" );
+				ok( $popup.attr( "class" ).match( /( |^)ui-body-[a-z]( |$)/ ), "Open popup has a valid overlay theme" );
+				ok( theOffset.left >= 15 && theOffset.top >= 30, "Open popup top left coord is at least (10, 30)" );
 
-		$popup.one( "popupafterclose", function() {
-			ok( !$popup.parent().hasClass( "in" ), "Closed popup container does not have class 'in'" );
-			ok( $popup.parent().prev().hasClass( "ui-screen-hidden" ), "Closed popup screen is hidden" );
-			ok( !$popup.parent().hasClass( "ui-popup-active" ), "Open popup dos not have the 'ui-popup-active' class" );
+				$popup.popup( "option", "overlayTheme", "a" );
+				ok( $popup.parent().prev().hasClass( "ui-overlay-a" ), "Setting an overlay theme while the popup is open causes the theme to be applied and the screen to be faded in" );
+				ok( $popup.parent().prev().hasClass( "in" ), "Setting an overlay theme while the popup is open causes the theme to be applied and the screen to be faded in" );
+				ok( $popup.parent().hasClass( "ui-popup-active" ), "Open popup has the 'ui-popup-active' class" );
 
-			// TODO make sure that the afterclose is fired after the nav finishes
-			setTimeout(start, 300);
-		});
+				$popup.popup( "close" );
+			},
 
-		$popup.popup( "open" );
+			{
+				closed: { src: $popup, event: "popupafterclose.opensandcloses2" },
+				hashchange: { src: $(document), event: "hashchange.opensandcloses2" }
+			},
+
+			function( result) {
+				ok( !$popup.parent().hasClass( "in" ), "Closed popup container does not have class 'in'" );
+				ok( $popup.parent().prev().hasClass( "ui-screen-hidden" ), "Closed popup screen is hidden" );
+				ok( !$popup.parent().hasClass( "ui-popup-active" ), "Open popup dos not have the 'ui-popup-active' class" );
+
+				start();
+			}
+		]);
 	});
 
 
@@ -222,7 +235,8 @@
 			},
 
 			{
-				opened: { src: $( "#test-popup" ), event: "popupafteropen.linkActiveTestStep1" }
+				opened: { src: $( "#test-popup" ), event: "popupafteropen.linkActiveTestStep1" },
+				hashchange: { src: $(document), event: "navigate.linkActive" }
 			},
 
 			function( result ) {
@@ -232,7 +246,8 @@
 			},
 
 			{
-				closed: { src: $( "#test-popup" ), event: "popupafterclose.linkActiveTestStep2" }
+				closed: { src: $( "#test-popup" ), event: "popupafterclose.linkActiveTestStep2" },
+				hashchange: { src: $(document), event: "navigate.linkActive2" }
 			},
 
 			function( result ) {
@@ -244,13 +259,11 @@
 			},
 
 			{
-				closed: { src: $( "#test-popup" ), event: "popupafterclose.linkActiveTestStep3" }
+				closed: { src: $( "#test-popup" ), event: "popupafterclose.linkActiveTestStep3" },
+				hashchange: { src: $(document), event: "navigate.linkActive3" }
 			},
 
-			function() {
-				// TODO make sure that the afterclose is fired after the nav finishes
-				setTimeout(start, 300);
-			}
+			start
 		]);
 	});
 
