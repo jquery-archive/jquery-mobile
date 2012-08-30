@@ -28,15 +28,4 @@
 
 		$.mobile.ignoreContentEnabled = false;
 	});
-
-	// Issue #4663
-	asyncTest( "clicks/taps triggered on anything above the link get retriggered on the link", function() {
-		expect( 1 );
-		$( document ).delegate( "li", "vclick", function( event ) {
-			ok($( event.target ).is("a"), "target should always be an anchor" );
-			start();
-		});
-
-		$.mobile.activePage.find( "div:jqmData(role=navbar) li" ).first().trigger( "click" );
-	});
 })(jQuery);
