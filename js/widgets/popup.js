@@ -494,8 +494,23 @@ define( [ "jquery",
 		},
 
 		_open: function( options ) {
-			var coords, transition;
+			var coords, transition,
+				androidBlacklist = ( function() {
+					var w = window,
+						ua = navigator.userAgent,
+						// Rendering engine is Webkit, and capture major version
+						wkmatch = ua.match( /AppleWebKit\/([0-9\.]+)/ ),
+						wkversion = !!wkmatch && wkmatch[ 1 ],
+						androidmatch = ua.match( /Android (\d+(?:\.\d+))/ ),
+						andversion = !!androidmatch && androidmatch[ 1 ],
+						chromematch = ua.indexOf( "Chrome" ) > -1;
 
+					// Platform is Android, WebKit version is greater than 534.13 ( Android 3.2.1 ) and not Chrome.
+					if( androidmatch !== null && andversion == 4.0 && wkversion && wkversion > 534.13 && !chromematch ) {
+						return true;
+					}
+					return false;
+				}());
 			// set the global popup mutex
 			$.mobile.popup.active = this;
 
@@ -535,9 +550,21 @@ define( [ "jquery",
 				.removeClass( "ui-selectmenu-hidden" )
 				.offset( coords );
 
-			// TODO: The fixed toolbars really only need to be hidden if the overlay has a background. Should this be conditional?
-			this._page.addClass( "ui-popup-open" );
+			if ( this.options.overlayTheme && androidBlacklist ) {
+				/* TODO:
+				The native browser on Android 4.0.X ("Ice Cream Sandwich") suffers from an issue where the popup overlay appears to be z-indexed 
+				above the popup itself when certain other styles exist on the same page -- namely, any element set to `position: fixed` and certain
+				types of input. These issues are reminiscent of previously uncovered bugs in older versions of Android’s native browser:
+				https://github.com/scottjehl/Device-Bugs/issues/3
 
+				This fix closes the following bugs ( I use "closes" with reluctance, and stress that this issue should be revisited as soon as possible ):
+
+				https://github.com/jquery/jquery-mobile/issues/4816
+				https://github.com/jquery/jquery-mobile/issues/4844
+				https://github.com/jquery/jquery-mobile/issues/4874
+				*/
+				this.element.closest( ".ui-page" ).addClass( "ui-popup-open" );
+			}
 			this._animate({
 				additionalCondition: true,
 				transition: transition,
