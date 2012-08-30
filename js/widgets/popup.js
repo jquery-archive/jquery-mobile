@@ -44,6 +44,7 @@ define( [ "jquery",
 			shadow: true,
 			corners: true,
 			transition: "none",
+			direction: null,
 			positionTo: "origin",
 			tolerance: null,
 			initSelector: ":jqmData(role='popup')"
@@ -158,6 +159,7 @@ define( [ "jquery",
 				_ui: ui,
 				_fallbackTransition: "",
 				_currentTransition: false,
+				_isReversed: false,
 				_prereqs: null,
 				_isOpen: false,
 				_tolerance: null,
@@ -240,6 +242,7 @@ define( [ "jquery",
 			if ( value && value !== "none" ) {
 				this._fallbackTransition = $.mobile._maybeDegradeTransition( value );
 				this._ui.container.addClass( this._fallbackTransition );
+				if (this._isReversed) this._ui.container.toggleClass( "reverse" );
 			}
 		},
 
@@ -499,6 +502,7 @@ define( [ "jquery",
 
 			if ( transition ) {
 				this._currentTransition = transition;
+				if (options.direction === "reverse" ) this._isReversed = true;
 				this._applyTransition( transition );
 			} else {
 				transition = this.options.transition;
@@ -560,7 +564,7 @@ define( [ "jquery",
 				transition: ( this._currentTransition || this.options.transition ),
 				classToRemove: "in",
 				screenClassToAdd: "out",
-				containerClassToAdd: "reverse out",
+				containerClassToAdd: this._isReversed ? "out" : "reverse out",
 				applyTransition: true,
 				prereqs: this._prereqs
 			});
@@ -741,6 +745,7 @@ define( [ "jquery",
 				x: offset.left + $link.outerWidth() / 2,
 				y: offset.top + $link.outerHeight() / 2,
 				transition: $link.jqmData( "transition" ),
+				direction: $link.jqmDate( "direction" ),
 				positionTo: $link.jqmData( "position-to" )
 			});
 
