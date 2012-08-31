@@ -14,6 +14,7 @@
     "grunt":  "0.3.x",
     "grunt-css": "0.2.0",
     "grunt-junit": "0.1.4",
+    "grunt-git-authors": "1.0.0",
     "requirejs": "1.0.8",
     "glob-whatev": "~0.1.4",
     "rimraf": "2.0.1",
