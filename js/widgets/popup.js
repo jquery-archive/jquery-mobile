@@ -506,7 +506,7 @@ define( [ "jquery",
 						chromematch = ua.indexOf( "Chrome" ) > -1;
 
 					// Platform is Android, WebKit version is greater than 534.13 ( Android 3.2.1 ) and not Chrome.
-					if( androidmatch !== null && andversion == 4.0 && wkversion && wkversion > 534.13 && !chromematch ) {
+					if( androidmatch !== null && andversion === "4.0" && wkversion && wkversion > 534.13 && !chromematch ) {
 						return true;
 					}
 					return false;
