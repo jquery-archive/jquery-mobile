@@ -488,9 +488,8 @@ define( [ "jquery",
 			// the "blue flash" of element focus in android 4.0
 			setTimeout(function(){
 				self._ui.container.attr( "tabindex", "0" ).focus();
+				self._trigger( "afteropen" );
 			});
-
-			self._trigger( "afteropen" );
 		},
 
 		_open: function( options ) {
