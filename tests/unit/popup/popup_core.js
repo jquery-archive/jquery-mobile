@@ -454,14 +454,14 @@
 
 		expect( 2 );
 
+		$popup.parent().one( "focus", function() {
+			ok( true, "focus fired after the popup opens" );
+		});
+
 		// check that after the popup is closed the focus is correct
 		$popup.one( "popupafteropen", function() {
 			ok( true, "afteropen has fired" );
-
-			$popup.parent().one( "focus", function() {
-				ok( true, "focus fired after 'afteropen'" );
-				$popup.popup( "close" );
-			});
+			$popup.popup( "close" );
 		});
 
 		$popup.one( "popupafterclose", function() {
