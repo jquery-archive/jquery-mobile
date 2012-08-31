@@ -563,6 +563,8 @@ define( [ "jquery",
 				https://github.com/jquery/jquery-mobile/issues/4844
 				https://github.com/jquery/jquery-mobile/issues/4874
 				*/
+
+				// TODO sort out why this._page isn't working
 				this.element.closest( ".ui-page" ).addClass( "ui-popup-open" );
 			}
 			this._animate({
@@ -708,7 +710,7 @@ define( [ "jquery",
 
 			// if the current url has no dialog hash key proceed as normal
 			// otherwise, if the page is a dialog simply tack on the hash key
-			if ( url.indexOf( hashkey ) == -1 && !activePage.is( ".ui-dialog" ) ){
+			if ( url.indexOf( hashkey ) === -1 && !activePage.is( ".ui-dialog" ) ){
 				url = url + hashkey;
 			} else {
 				url = $.mobile.path.parseLocation().hash + hashkey;
