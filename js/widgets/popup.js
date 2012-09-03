@@ -66,6 +66,16 @@ define( [ "jquery",
 			return false;
 		},
 
+		// Make sure the screen size is increased beyond the page height if the popup's causes the document to increase in height
+		_resizeScreen: function() {
+			var popupHeight = this._ui.container.outerHeight( true );
+
+			this._ui.screen.removeAttr( "style" );
+			if ( popupHeight > this._ui.screen.height() ) {
+				this._ui.screen.height( popupHeight );
+			}
+		},
+
 		_handleWindowKeyUp: function( e ) {
 			if ( this._isOpen && e.keyCode === $.mobile.keyCode.ESCAPE ) {
 				return this._eatEventAndClose( e );
@@ -104,6 +114,7 @@ define( [ "jquery",
 					.removeClass( "ui-selectmenu-hidden" )
 					.offset( this._placementCoords( this._desiredCoords( undefined, undefined, "window" ) ) );
 
+				this._resizeScreen();
 				this._resizeData = null;
 				this._orientationchangeInProgress = false;
 			}
@@ -474,6 +485,7 @@ define( [ "jquery",
 
 			self._ui.container.addClass( "ui-popup-active" );
 			self._isOpen = true;
+			self._resizeScreen();
 
 			// Android appears to trigger the animation complete before the popup
 			// is visible. Allowing the stack to unwind before applying focus prevents
