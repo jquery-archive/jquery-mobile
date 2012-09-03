@@ -18,15 +18,11 @@
 .ui-popup-screen.in {
 	opacity: 0.5;
 	filter: Alpha(Opacity=50);
-	-webkit-animation-name: popup-fadein;
-	-moz-animation-name: popup-fadein;
 }
 
 .ui-popup-screen.out {
 	opacity: 0;
 	filter: Alpha(Opacity=0);
-	-webkit-animation-name: popup-fadeout;
-	-moz-animation-name: popup-fadeout;
 }
 
 .ui-popup-container {
