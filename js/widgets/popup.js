@@ -362,14 +362,6 @@ define( [ "jquery",
 			return { left: ret.x, top: ret.y };
 		},
 
-		_immediate: function() {
-			if ( this._prereqs ) {
-				$.each( this._prereqs, function( key, val ) {
-					val.resolve();
-				});
-			}
-		},
-
 		_createPrereqs: function( screenPrereq, containerPrereq, whenDone ) {
 			var self = this, prereqs;
 
