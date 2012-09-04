@@ -268,7 +268,14 @@
 	});
 
 	asyncTest( "Popup interacts correctly with hashchange", function() {
-		var baseUrl, activeIndex;
+		var baseUrl, activeIndex, $popup = $( "#test-popup" );
+
+		if( !$popup.data( "popup" ).options.history ) {
+			expect( 1 )
+			ok( true, "hash change disabled" );
+			start();
+			return;
+		}
 
 		expect( 6 );
 
@@ -276,7 +283,7 @@
 			function() {
 				baseUrl = decodeURIComponent( location.href );
 				activeIndex = $.mobile.urlHistory.activeIndex;
-				$( "#test-popup" ).popup( "open" );
+				$popup.popup( "open" );
 			},
 
 			{
@@ -311,8 +318,16 @@
 	// This should be the case if the previous test has cleaned up correctly.
 	asyncTest( "Opening another page from the popup leaves no trace of the popup in history", function() {
 		var initialActive = $.extend( {}, {}, $.mobile.urlHistory.getActive()),
-		    initialHRef = $.mobile.path.parseUrl( decodeURIComponent( location.href ) ),
-		    initialBase = initialHRef.protocol + initialHRef.doubleSlash + initialHRef.authority + initialHRef.directory;
+			initialHRef = $.mobile.path.parseUrl( decodeURIComponent( location.href ) ),
+			initialBase = initialHRef.protocol + initialHRef.doubleSlash + initialHRef.authority + initialHRef.directory,
+			$popup = $( "#test-popup" );
+
+		if( !$popup.data( "popup" ).options.history ) {
+			expect( 1 )
+			ok( true, "hash change disabled" );
+			start();
+			return;
+		}
 
 		expect( 6 );
 
@@ -378,7 +393,14 @@
 	});
 
 	asyncTest( "Sequence page -> popup -> dialog -> popup works", function() {
-		var originallyActivePage = $.mobile.activePage[ 0 ];
+		var originallyActivePage = $.mobile.activePage[ 0 ], $popup = $( "#test-popup" );
+
+		if( !$popup.data( "popup" ).options.history ) {
+			expect( 1 )
+			ok( true, "hash change disabled" );
+			start();
+			return;
+		}
 
 		expect( 15 );
 		$.testHelper.detailedEventCascade([
@@ -492,22 +514,31 @@
 	asyncTest( "Navigating away from the popup page closes the popup without history enabled", function() {
 		var $popup = $( "#test-history-popup" );
 
-		expect( 2 );
+		expect( 3 );
 
-		$popup.one( "popupafterclose", function() {
-			// TODO would be nice to verify that it happens
-			//      right after the first page goes away
-			ok( true, "popup was closed" );
-		});
-
-		$.testHelper.pageSequence([
+		$.testHelper.detailedEventCascade([
 			function() {
 				$popup.popup( "open" );
+			},
+
+			{
+				open: { src: $popup, event: "popupafterclose.historyOffTestStep1" },
+			},
+
+			function() {
 				ok( $popup.is( ":visible" ), "popup is indeed visible" );
 				$.mobile.changePage( "#no-popups" );
 			},
 
-			function() {
+			{
+				hashchange: { src: $(window), event: "hashchange.historyOffTestStep2" },
+				close: { src: $popup, event: "popupafterclose.historyOffTestStep2" }
+			},
+
+			function( result ){
+				ok( !result.close.timedOut, "close happened" );
+				ok( !result.close.timedOut, "hashchange happened" );
+
 				// TODO make sure that the afterclose is fired after the nav finishes
 				setTimeout(start, 300);
 			}
