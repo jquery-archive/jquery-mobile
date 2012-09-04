@@ -727,11 +727,6 @@ define( [
 			}
 		}
 
-		// Reset base to the default document base.
-		if ( base ) {
-			base.reset();
-		}
-
 		// If the page we are interested in is already in the DOM,
 		// and the caller did not indicate that we should force a
 		// reload of the file, we are done. Otherwise, track the
@@ -773,6 +768,11 @@ define( [
 					// Hide loading message
 					$.mobile.hidePageLoadingMsg();
 				};
+		}
+
+		// Reset base to the default document base.
+		if ( base ) {
+			base.reset();
 		}
 
 		if ( !( $.mobile.allowCrossDomainPages || path.isSameDomain( documentUrl, absUrl ) ) ) {
