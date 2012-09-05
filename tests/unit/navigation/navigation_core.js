@@ -468,6 +468,7 @@
 			function() { $( "#dialog-base-tag-test a" ).click(); },
 
 			function() {
+				// $.testHelper.pageSequence cannot be used here because no page changes occur
 				$.testHelper.sequence([
 					// Go forward to reach the now-stale dialogHashKey history entry
 					function() { window.history.forward(); },
@@ -475,11 +476,22 @@
 					// Go back
 					function() { window.history.back(); },
 
-					// Make sure the base href is unchanged from the recorded value
+					// Make sure the base href is unchanged from the recorded value, and back up to the start page
 					function() {
 						deepEqual( $( "base" ).attr( "href" ), baseHRef, "href of base tag is unchanged" );
-						start();
-					}
+
+						// Return to start page
+						$.testHelper.pageSequence([
+							// Go back to the setup page
+							function() { window.history.back(); },
+
+							// Go back to the start page
+							function() { window.history.back(); },
+
+							// Conclude the test
+							function() { start(); }
+						]);
+					},
 				], 2000);
 			}
 		]);
