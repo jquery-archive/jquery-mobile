@@ -447,59 +447,34 @@
 
 	asyncTest( "going back from a stale dialog history entry does not cause the base tag to be reset", function() {
 
-		var baseHRef,
-			ts = new Date(), idx = 0,
-			doLog = function( msg ) {
-				var nts = new Date();
-
-				console.log( idx + ": " + ( nts.getTime() - ts.getTime() ) + ": " + msg );
-				idx++;
-				ts = nts;
-			};
+		var baseHRef;
 
 		expect( 1 );
 
 		$.testHelper.pageSequence([
 			// setup
-			function() {
-				console.log( "\n" );
-				doLog( "Navigating to test setup from " + location.href );
-				$.testHelper.openPage( "#dialog-base-tag-test-page" );
-			},
+			function() { $.testHelper.openPage( "#dialog-base-tag-test-page" ); },
 
 			// go to page that launches dialog
-			function() {
-				doLog( "AJAX navigating to page that launches the dialog from " + location.href );
-				$( "#dialog-base-tag-test-page a" ).click();
-			},
+			function() { $( "#dialog-base-tag-test-page a" ).click(); },
 
 			// record the base href and launch the dialog
 			function() {
 				baseHRef = $( "base" ).attr( "href" );
-				doLog( "Recording reference base href(" + baseHRef + ") and opening dialog from " + location.href );
 				$( "a#go-to-dialog" ).click();
 			},
 
 			// close the dialog - this assumes a close button link will be added to the dialog as part of the enhancement process
-			function() {
-				doLog( "Closing dialog from " + location.href );
-				$( "#dialog-base-tag-test a" ).click();
-			},
+			function() { $( "#dialog-base-tag-test a" ).click(); },
 
 			function() {
 				// $.testHelper.pageSequence cannot be used here because no page changes occur
 				$.testHelper.sequence([
 					// Go forward to reach the now-stale dialogHashKey history entry
-					function() {
-						doLog( "Going forward from " + location.href );
-						window.history.forward();
-					},
+					function() { window.history.forward(); },
 
 					// Go back
-					function() {
-						doLog( "Going back from " + location.href );
-						window.history.back();
-					},
+					function() { window.history.back(); },
 
 					// Make sure the base href is unchanged from the recorded value, and back up to the start page
 					function() {
@@ -508,22 +483,13 @@
 						// Return to start page
 						$.testHelper.pageSequence([
 							// Go back to the setup page
-							function() {
-								doLog( "Going back to setup page from " + location.href );
-								window.history.back();
-							},
+							function() { window.history.back(); },
 
 							// Go back to the start page
-							function() {
-								doLog( "Going back to start page from " + location.href );
-								window.history.back();
-							},
+							function() { window.history.back(); },
 
 							// Conclude the test
-							function() {
-								doLog( "Resuming test suite from " + location.href );
-								start();
-							}
+							function() { start(); }
 						]);
 					},
 				], 2000);
