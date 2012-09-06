@@ -11,7 +11,7 @@ jQuery Mobile 1.2 beta (1.2.0-beta.1) works with versions of jQuery core from 1.
 When [submitting issues on github](https://github.com/jquery/jquery-mobile/issues/new) please include the following:
 
 1. Issue description
-2. Sample page using our [jsbin template](http://jsbin.com/orucec/edit#html) which uses latest code
+2. Sample page using our [jsbin template](http://jsbin.com/owipah/edit) which uses latest code
 3. Steps to reproduce
 4. Expected outcome
 5. Actual outcome
