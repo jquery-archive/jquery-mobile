@@ -522,7 +522,7 @@
 			},
 
 			{
-				open: { src: $popup, event: "popupafterclose.historyOffTestStep1" },
+				open: { src: $popup, event: "popupafterclose.historyOffTestStep1" }
 			},
 
 			function() {
@@ -546,7 +546,7 @@
 	});
 
 	// TODO would be nice to avoid checking the internal representation
-	//      of "openness" but :visible didn't seem to be working in thise case
+	//      of "openness" but :visible didn't seem to be working in this case
 	//      (offscreen?)
 	asyncTest( "Close links work on a history disabled popup", function() {
 		var $popup = $( "#test-history-popup" );
@@ -562,7 +562,7 @@
 			ok( !$popup.data( "popup" )._isOpen, "popup is closed on link click" );
 			start();
 		});
-		
+
 		$popup.find( "a" ).click();
 	});
 
