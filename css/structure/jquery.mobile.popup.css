@@ -1,6 +1,7 @@
 .ui-popup-open .ui-header-fixed,
 .ui-popup-open .ui-footer-fixed {
 	position: absolute !important; 	/* See line #553 of popup.js */
+
 }
 .ui-popup-screen {
 	background-image: url(data:image/gif;base64,R0lGODlhAQABAID/AMDAwAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==); /* Necessary to set some form of background to ensure element is clickable in IE6/7. While legacy IE won’t understand the data-URI’d image, it ensures no additional requests occur in all other browsers with little overhead. */
@@ -13,9 +14,7 @@
 	opacity: 0;
 	z-index: 1099;
 }
-.ui-popup-screen.ui-screen-fixed {
-	position: fixed;
-}
+
 .ui-popup-screen.in {
 	opacity: 0.5;
 	filter: Alpha(Opacity=50);

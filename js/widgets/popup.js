@@ -541,10 +541,6 @@ define( [ "jquery",
 				transition = this.options.transition;
 			}
 
-			if ( !$.mobile.fixedBlacklist ) {
-				this._ui.screen.addClass( "ui-screen-fixed" );
-			}
-
 			if ( !this.options.theme ) {
 				this._setTheme( this._page.jqmData( "theme" ) || $.mobile.getInheritedTheme( this._page, "c" ) );
 			}
