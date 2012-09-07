@@ -684,6 +684,7 @@ define( [ "jquery",
 			// if history alteration is disabled close on navigate events
 			// and leave the url as is
 			if( !opts.history ) {
+				self._open( options );
 				self._bindContainerClose();
 
 				// When histoy is disabled we have to grab the data-rel
