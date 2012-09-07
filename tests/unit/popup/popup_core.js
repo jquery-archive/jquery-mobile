@@ -545,18 +545,24 @@
 		]);
 	});
 
-	test( "Close links work on a history disabled popup", function() {
+	// TODO would be nice to avoid checking the internal representation
+	//      of "openness" but :visible didn't seem to be working in thise case
+	//      (offscreen?)
+	asyncTest( "Close links work on a history disabled popup", function() {
 		var $popup = $( "#test-history-popup" );
 
-		expect( 2 );
+		expect( 3 );
+
+		ok( !$popup.data( "popup" )._isOpen, "popup is initially closed" );
 
 		$popup.popup( 'open' );
-		ok( $popup.data( "popup" )._isOpen, "popup is shown on link click" );
+		ok( $popup.data( "popup" )._isOpen, "popup is opened with open method" );
 
-		$( window ).one( "hashchange", function() {
-			ok( !$popup.data( "popup" )._isOpen, "popup is shown on link click" );
+		$popup.one( "popupafterclose", function() {
+			ok( !$popup.data( "popup" )._isOpen, "popup is closed on link click" );
+			start();
 		});
-
+		
 		$popup.find( "a" ).click();
 	});
 
