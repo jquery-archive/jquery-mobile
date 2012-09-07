@@ -551,10 +551,13 @@
 		expect( 2 );
 
 		$popup.popup( 'open' );
-		ok( $.mobile.popup.active, "popup is shown on link click" );
+		ok( $popup.data( "popup" )._isOpen, "popup is shown on link click" );
+
+		$( window ).one( "hashchange", function() {
+			ok( !$popup.data( "popup" )._isOpen, "popup is shown on link click" );
+		});
 
 		$popup.find( "a" ).click();
-		ok( !$.mobile.popup.active, "popup is hidden on link click" );
 	});
 
 	asyncTest( "Destroy closes the popup first", function() {
