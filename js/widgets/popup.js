@@ -514,6 +514,8 @@ define( [ "jquery",
 					}
 					return false;
 				}());
+			// set the global popup mutex
+			$.mobile.popup.active = this;
 
 			// Make sure options is defined
 			options = ( options || {} );
@@ -678,8 +680,8 @@ define( [ "jquery",
 				return;
 			}
 
-			// set the global popup mutex
-			$.mobile.popup.active = this;
+			// forward the options on to the visual open
+			self._open( options );
 
 			// if history alteration is disabled close on navigate events
 			// and leave the url as is
@@ -721,9 +723,6 @@ define( [ "jquery",
 			opts.container.one( opts.navigateEvents, function( e ) {
 				e.preventDefault();
 				self._bindContainerClose();
-
-				// forward the options on to the visual open
-				self._open( options );
 			});
 
 			// Gotta love methods with 1mm args :(
