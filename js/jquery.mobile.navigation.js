@@ -53,7 +53,7 @@ define( [
 			// browsers that auto	decode it. All references to location.href should be
 			// replaced with a call to this method so that it can be dealt with properly here
 			getLocation: function( url ) {
-				var uri = url ? $.mobile.path.parseUrl( url ) : location;
+				var uri = url ? this.parseUrl( url ) : this.parseUrl( location.href );
 
 				return uri.protocol + "//" + uri.host + uri.pathname + uri.search + uri.hash;
 			},
@@ -193,7 +193,7 @@ define( [
 			//get path from current hash, or from a file path
 			get: function( newPath ) {
 				if ( newPath === undefined ) {
-					newPath = location.hash;
+					newPath = path.parseLocation().hash;
 				}
 				return path.stripHash( newPath ).replace( /[^\/]*\.[^\/*]+$/, '' );
 			},
@@ -727,11 +727,6 @@ define( [
 			}
 		}
 
-		// Reset base to the default document base.
-		if ( base ) {
-			base.reset();
-		}
-
 		// If the page we are interested in is already in the DOM,
 		// and the caller did not indicate that we should force a
 		// reload of the file, we are done. Otherwise, track the
@@ -773,6 +768,11 @@ define( [
 					// Hide loading message
 					$.mobile.hidePageLoadingMsg();
 				};
+		}
+
+		// Reset base to the default document base.
+		if ( base ) {
+			base.reset();
 		}
 
 		if ( !( $.mobile.allowCrossDomainPages || path.isSameDomain( documentUrl, absUrl ) ) ) {

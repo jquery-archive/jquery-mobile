@@ -271,7 +271,7 @@
 	background-image:         linear-gradient( #6facd5 /*{b-bhover-background-start}*/, #4272a4 /*{b-bhover-background-end}*/);
 }
 .ui-btn-hover-b:visited,
-.ui-btn-hover-a:hover,
+.ui-btn-hover-b:hover,
 .ui-btn-hover-b a.ui-link-inherit {
 	color: 					#fff /*{b-bhover-color}*/;
 }

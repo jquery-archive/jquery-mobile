@@ -37,30 +37,10 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 			iconpos:	iconpos
 		});
 
-		$navbar.delegate( "li", "vclick", function( event ) {
-
-			// if the vclick was triggered on an anchor or the child
-			// of an anchor (eg, ui-btn), grab the parent link
-			var $link = $(event.target).closest( "a" );
-
-			// if there isn't a parent link find the child link and trigger a click
-			// this addresses Issue #4663 where the events are being triggered
-			// on the parent element in fixed position navbars
-			if( !$link.length ){
-				$link = $( this ).children( "a" ).first();
-				setTimeout(function() {
-					$link.trigger( "click" );
-				});
-
-				return false;
-			}
-
-			// clear existing active button states
-			$navbtns.removeClass( $.mobile.activeBtnClass );
-
-			// if the target button isn't disabled
-			if ( !$link.hasClass( "ui-disabled" ) ) {
-				$link.addClass( $.mobile.activeBtnClass );
+		$navbar.delegate( "a", "vclick", function( event ) {
+			if ( !$(event.target).hasClass( "ui-disabled" ) ) {
+				$navbtns.removeClass( $.mobile.activeBtnClass );
+				$( this ).addClass( $.mobile.activeBtnClass );
 			}
 		});
 

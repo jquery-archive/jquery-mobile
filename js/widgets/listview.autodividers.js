@@ -26,7 +26,7 @@ $( document ).delegate( "ul,ol", "listviewcreate", function() {
 	var list = $( this ),
 			listview = list.data( "listview" );
 
-	if ( !listview.options.autodividers ) {
+	if ( !listview || !listview.options.autodividers ) {
 		return;
 	}
 

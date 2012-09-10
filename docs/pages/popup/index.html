@@ -16,7 +16,7 @@
 
 	<div data-role="page" class="type-interior">
 
-		<div data-role="header" data-theme="f">
+		<div data-role="header" data-theme="f" data-position="fixed">
 		<h1>Popup</h1>
 		<a href="../../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
 		<a href="../../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
@@ -263,15 +263,7 @@ $( "#myPopupDiv" ).popup( "close" )
 			<li>If centering the popup over an element would cause the overall height of the document to increase, the popup is shifted upwards at most until its top coordinate becomes 0.</li>
 		</ol>
 
-		<p>To programmatically make use of the popup's positioning functionality (and any features made available by specifying <code>data-*</code> options on links), set the corresponding keys in the options object passed to <code>open()</code>:</p>
-<code><pre>
-$( ".selector" ).popup( "open", {
-	positionTo: "window",
-	transition: "slide"
-});
-</pre></code>
-
-		<p>The above will cause the popup to open and close with a slide transition, and to position itself centered in the window.</p>
+		<p>See <a href="methods.html">methods</a> for information about setting the popup position programmatically, including the option to specify <strong>x and y coordinates</strong>.
 
 		<h2>Setting transitions</h2>
 		<p>By default, popups have no transition to make them open as quickly as possible. To set the transition used for a popup, add the <code>data-transition</code> attribute to the link that references the popup. The reverse version of the transition will be used when closing the popup.</p>

@@ -445,6 +445,58 @@
 			}]);
 	});
 
+	asyncTest( "going back from a stale dialog history entry does not cause the base tag to be reset", function() {
+
+		var baseHRef;
+
+		expect( 1 );
+
+		$.testHelper.pageSequence([
+			// setup
+			function() { $.testHelper.openPage( "#dialog-base-tag-test-page" ); },
+
+			// go to page that launches dialog
+			function() { $( "#dialog-base-tag-test-page a" ).click(); },
+
+			// record the base href and launch the dialog
+			function() {
+				baseHRef = $( "base" ).attr( "href" );
+				$( "a#go-to-dialog" ).click();
+			},
+
+			// close the dialog - this assumes a close button link will be added to the dialog as part of the enhancement process
+			function() { $( "#dialog-base-tag-test a" ).click(); },
+
+			function() {
+				// $.testHelper.pageSequence cannot be used here because no page changes occur
+				$.testHelper.sequence([
+					// Go forward to reach the now-stale dialogHashKey history entry
+					function() { window.history.forward(); },
+
+					// Go back
+					function() { window.history.back(); },
+
+					// Make sure the base href is unchanged from the recorded value, and back up to the start page
+					function() {
+						deepEqual( $( "base" ).attr( "href" ), baseHRef, "href of base tag is unchanged" );
+
+						// Return to start page
+						$.testHelper.pageSequence([
+							// Go back to the setup page
+							function() { window.history.back(); },
+
+							// Go back to the start page
+							function() { window.history.back(); },
+
+							// Conclude the test
+							function() { start(); }
+						]);
+					},
+				], 2000);
+			}
+		]);
+	});
+
 	asyncTest( "opening a dialog, closing it, moving forward, and opening it again, does not result in a dialog that needs to be closed twice", function() {
 		$.testHelper.pageSequence([
 			// setup

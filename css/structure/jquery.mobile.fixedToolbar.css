@@ -33,7 +33,7 @@
 }
 .ui-page-header-fullscreen .ui-fixed-hidden,
 .ui-page-footer-fullscreen .ui-fixed-hidden {
-	left: -99999em;
+	left: -9999px;
 }
 .ui-header-fixed .ui-btn,
 .ui-footer-fixed .ui-btn { 

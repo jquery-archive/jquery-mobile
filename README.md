@@ -4,14 +4,14 @@ This is the main repository for the jQuery Mobile project. From the [official we
 
 > A unified, HTML5-based user interface system for all popular mobile device platforms, built on the rock-solid jQuery and jQuery UI foundation. Its lightweight code is built with progressive enhancement, and has a flexible, easily themeable design.
 
-You can find more information about how the library works, and what it is capable of, by reading the [documentation](http://jquerymobile.com/demos/).
+jQuery Mobile 1.2 beta (1.2.0-beta.1) works with versions of jQuery core from 1.6.4 to 1.8.1. You can find more information about how the library works, and what it is capable of, by reading the [documentation](http://jquerymobile.com/demos/).
 
 ## Issues
 
 When [submitting issues on github](https://github.com/jquery/jquery-mobile/issues/new) please include the following:
 
 1. Issue description
-2. Sample page using our [jsbin template](http://jsbin.com/orucec/edit#html) which uses latest code
+2. Sample page using our [jsbin template](http://jsbin.com/owipah/edit) which uses latest code
 3. Steps to reproduce
 4. Expected outcome
 5. Actual outcome

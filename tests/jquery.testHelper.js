@@ -261,15 +261,18 @@
 
 		navReset: function( url ) {
 			var pageReset = function( hash ) {
-				hash = hash || "";
+				var timeout;
 
 				stop();
 
+				timeout = setTimeout( start, 2000);
+
 				$(document).one( "pagechange", function() {
+					clearTimeout( timeout );
 					start();
 				});
 
-				location.hash = "#" + hash;
+				location.hash = hash ? "#" + hash : "";
 			};
 
 			// force the page reset for hash based tests

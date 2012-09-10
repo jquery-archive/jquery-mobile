@@ -42,12 +42,6 @@
 		}, scrollTimeout);
 	});
 
-	test( "silent scroll is async", function(){
-		scrollUp();
-		ok($(window).scrollTop() != 0, "scrolltop position should not be zero");
-		start();
-	});
-
 	asyncTest( "scrolling marks scrollstart as disabled for 150 ms", function(){
 		$.event.special.scrollstart.enabled = true;
 		scrollUp();

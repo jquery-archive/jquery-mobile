@@ -118,6 +118,7 @@ $( document ).on( "pageinit", function() {
 });
 </code></pre>
 			
+            <p>Note that the video will still be playing in the iframe when the popup is closed. If available you can use the 3rd party API to stop the video on the <code>popupafterclose</code> event. Another way is to create the iframe when the popup is opened and destroy it when the popup is closed, but this would drop support for browsers that have JavaScript disabled.</p>
 		
 			<h2>Map example</h2>
 			<p>In the second example, an iframe is used to display <strong>Google Maps API</strong>. Using an iframe prevents issues with the controls of the map.</p>

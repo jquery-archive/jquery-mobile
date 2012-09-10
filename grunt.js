@@ -191,6 +191,9 @@ module.exports = function( grunt ) {
 	// csslint and cssmin tasks
 	grunt.loadNpmTasks( "grunt-css" );
 
+	// authors task
+	grunt.loadNpmTasks( "grunt-git-authors" );
+
 	grunt.loadNpmTasks( "grunt-junit" );
 
 	// A convenient task alias.
