@@ -52,7 +52,7 @@
 			<dt><code>initSelector</code> <em>CSS selector string</em></dt>
 			<dd>
 				<p class="default">default: ":jqmData(role='dialog')"</p>
-				<p>This is used to define the selectors (element types, data roles, etc.) that will automatically be initialized as popups. To change which elements are initialized, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
+				<p>This is used to define the selectors (element types, data roles, etc.) that will automatically be initialized as dialogs. To change which elements are initialized, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
 <pre><code>$( document ).bind( "mobileinit", function(){
    <strong>$.mobile.dialog.prototype.options.initSelector = ".mydialog";</strong>
 });
