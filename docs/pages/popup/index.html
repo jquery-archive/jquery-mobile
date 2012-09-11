@@ -332,7 +332,7 @@ $( "#myPopupDiv" ).popup( "close" )
 		<h2>Note: Chaining of popups not allowed</h2>
 		<p>The framework does not currently support chaining of popups so it's not possible to embed a link from one popup to another popup. All links with a <code>data-rel="popup"</code> inside a popup will not do anything at all.</p>
 		<p>This also means that custom select menus will not work inside popups, because they are themselves implemented using popups. If you place a select menu inside a popup, it will be rendered as a native select menu, even if you specify <code>data-native-menu="false"</code>.</p>
-		<p>A workaround to get chained popups working is the use of a timeout for example in the <code>popupafterclose</code> event bound to the invoking popup. In the following example, when the first popup is closed, the second will be opened by a delayed call to the <code>open</open> method:</p>
+		<p>A workaround to get chained popups working is the use of a timeout for example in the <code>popupafterclose</code> event bound to the invoking popup. In the following example, when the first popup is closed, the second will be opened by a delayed call to the <code>open</code> method:</p>
 <pre><code>
 $( document ).on( "pageinit", function() {
     $( '.popupParent' ).on({
