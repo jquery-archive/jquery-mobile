@@ -227,7 +227,7 @@ $( "#myPopupDiv" ).popup( "close" )
 		<h2>Positioning options</h2>
 		<p>By default, popups open centered vertically and horizontally over the thing you clicked (the origin) which is good for popups used as tooltips or menus. The framework also applies some basic collision detection rules to ensure that the popup will appear on-screen so the ultimate position may not always be centered over the origin.</p>
 		<p>For situations like a dialog or lightbox where the popup should appear centered within the window instead of over the origin, add the <code>data-position-to</code> attribute to the <strong>link</strong> and specify a value of <code>window</code>. </p>	
-		<p>It's also possible to specify any valid selector as the value of <code>position-to</code> in addition to <code>origin</code> and <code>window</code>. For example, you adding <code>data-position-to="#myElement"</code> will position the popup over the element with the id <code>myElement</code>.	
+		<p>It's also possible to specify any valid selector as the value of <code>position-to</code> in addition to <code>origin</code> and <code>window</code>. For example, if you add <code>data-position-to="#myElement"</code> the popup will be positioned over the element with the id <code>myElement</code>.	
 <pre id="codeSample"><code>
 &lt;a href=&quot;#positionWindow&quot; data-rel=&quot;popup&quot; <strong>data-position-to=&quot;window&quot;</strong>&gt;
 
@@ -258,7 +258,7 @@ $( "#myPopupDiv" ).popup( "close" )
 		<p>The popup's placement constraints, which may cause the popup not to appear centered as desired, are as follow:</p>
 		<ol>
 			<li>The width of the popup will be limited using CSS <code>max-width</code> to the width of the window minus a tolerance of 15px on either side.</li>
-			<li>A tolerance from the edges of the window (15px from each of the sides and 30px from the top and the bottom) will be observed when the popup fits inside the window. Tall popups are allowed to overflow the top and bottom edges of the window. Those parts of the popup can be viewed by manually scrolling the document. This tolerance is a <a href="options.html">configurable option</a></li>
+			<li>A tolerance from the edges of the window (15px from each of the sides and 30px from the top and the bottom) will be observed when the popup fits inside the window. Tall popups are allowed to overflow the top and bottom edges of the window. Those parts of the popup can be viewed by manually scrolling the document. This tolerance is a <a href="options.html">configurable option</a>.</li>
 			<li>The top coordinate of the popup will never be negative. This ensures that the top of the popup will not be cut off.</li>
 			<li>If centering the popup over an element would cause the overall height of the document to increase, the popup is shifted upwards at most until its top coordinate becomes 0.</li>
 		</ol>

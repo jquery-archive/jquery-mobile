@@ -32,7 +32,7 @@
 			
 			<h2>Default link behavior: Ajax</h2> 
 							
-			<p>To enable animated page transitions, all links that point to an external page (ex. products.html) will be loaded via Ajax. To do this unobtrusively, the framework parses the link's <code>href</code> to formulate an Ajax request (Hijax) and displays the loading spinner. All this happens automatically by jQuery Mobile.</p>
+			<p>To enable animated page transitions, all links that point to an external page (ex. products.html) will be loaded via Ajax. To do this unobtrusively, the framework parses the link's <code>href</code> to formulate an Ajax request (Hijax) and displays the loading spinner. All this is done automatically by jQuery Mobile.</p>
 				
 			<p>If the Ajax request is successful, the new page content is added to the DOM, all mobile widgets are auto-initialized, then the new page is animated into view with a page transition.</p>
 			
@@ -43,7 +43,7 @@
 
 <h2>Linking without Ajax</h2>
 		
-		<p>Links that point to other domains or that have <code>rel="external"</code>, <code>data-ajax="false"</code> or <code>target</code> attributes will not be loaded with Ajax. Instead, these links will cause a full page refresh with no animated transition. Both attributes (<code>rel="external"</code> and <code>data-ajax="false"</code>) have the same effect, but a different semantic meaning: <code>rel="external"</code> should be used when linking to another site or domain, while <code>data-ajax="false"</code> is useful for simply opting a page within your domain from being loaded via Ajax. Because of security restrictions, the framework always opens links to external domains out of the Ajax behavior.</p>
+		<p>Links that point to other domains or that have <code>rel="external"</code>, <code>data-ajax="false"</code> or <code>target</code> attributes will not be loaded with Ajax. Instead, these links will cause a full page refresh with no animated transition. Both attributes (<code>rel="external"</code> and <code>data-ajax="false"</code>) have the same effect, but a different semantic meaning: <code>rel="external"</code> should be used when linking to another site or domain, while <code>data-ajax="false"</code> is useful for simply opting a page within your domain from being loaded via Ajax. Because of security restrictions, the framework always opts links to external domains out of the Ajax behavior.</p>
 		<p>In version 1.1, we've added support for using <code>data-ajax="false"</code> on a parent container which allows you to exclude a large number of links from the Ajax navigation system. This avoids the need to add this attribute to every link in a container. To activate this functionality, <code>$.mobile.ignoreContentEnabled</code> must be set to <code>true</code>. Please check <a href="../api/globalconfig.html">Configuring Defaults</a> before using and setting this option.</p>
 		<p>Note: When building a jQuery Mobile application where the Ajax navigation system is disabled globally or frequently disabled on individual links, we  recommend disabling the <code>$.mobile.pushStateEnabled</code> global <a href="../api/globalconfig.html">configuration option</a> to avoid inconsistent navigation behavior in some browsers.</p>
 		

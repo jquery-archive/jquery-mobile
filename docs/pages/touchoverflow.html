@@ -35,7 +35,7 @@
 			
 			<p>Currently, both the page you're viewing and the one you're navigating to are sitting next to each other in the viewport, which lets us leverage native scrolling for the broadest possible device support. The downside to this approach is that since both pages share the same viewport, when a page transition starts, we must first scroll to the top of the document, then start animating to ensure that the pages are lined up vertically. If you hit the Back button, we need to scroll up, transition, then restore the previous scroll position. Since mobile browsers are pretty slow, these scroll movements can detract from the flow of the experience.</p>
 			
-			<p>The way to really improve this situation is to have both pages in separate containers, each with its own internal scroll bar. The means no more scrolling the document or needing to restore scroll positions for a smoother experience. It also has the benefit of making fixed toolbars very easy to implement by simply placing them outside the containers with internal scrolling.<p>
+			<p>The way to really improve this situation is to have both pages in separate containers, each with its own internal scroll bar. This means no more scrolling the document or needing to restore scroll positions for a smoother experience. It also has the benefit of making fixed toolbars very easy to implement by simply placing them outside the containers with internal scrolling.<p>
 			
 			<h2>How it works</h2>
 			
@@ -49,7 +49,7 @@ $(document).bind(&quot;mobileinit&quot;, function(){
 </strong>});
 &lt;/script&gt;</code></pre>
 			
-			<p>When this feature is activated, the framework looks for browser support for both the <code>overflow:</code> and <code>-webkit-overflow-scrolling:touch</code> CSS properties. In browsers that support both, it switches to a dual page container model with native overflow: scrolling within each, which brings true fixed toolbars smooth transitions. Coupled with iOS&#8217;s already excellent hardware-accelerated transitions, it's now possible to build interfaces that are very close to native performance.</p>
+			<p>When this feature is activated, the framework looks for browser support for both the <code>overflow:</code> and <code>-webkit-overflow-scrolling:touch</code> CSS properties. In browsers that support both, it switches to a dual page container model with native overflow: scrolling within each, which brings true fixed toolbars and smooth transitions. Coupled with iOS&#8217;s already excellent hardware-accelerated transitions, it's now possible to build interfaces that are very close to native performance.</p>
 			
 			<p>To demo this feature, check out <a href="../config/touchOverflow.html">this page</a> in iOS5.</p>
 
@@ -60,7 +60,7 @@ $(document).bind(&quot;mobileinit&quot;, function(){
 			<ul>
 				<li>Sometimes child elements like lists and forms wouldn't render when embedded in a page with <code>overflow:</code> in iOS5. This was a pretty random phenomenon but is not acceptable so we've added a <code>translate-z</code> CSS property which forces iOS to render the contents. The downside with this fix is that when a transform is applied, all elements are set to position:relative which can cause issues in your layout.</li>
 				<li>The <code>-webkit-overflow-scrolling:touch</code> property seems to disable the events to scroll you to the top of the page when the time is tapped in the status bar. We hope Apple fixes this because it's a very useful feature.</li>
-				<li>When <code>overflow:</code> and <code>-webkit-overflow-scrolling:touch</code> properties are set, iOS appears to ignore any overflow:hidden properties on the parent, which is the page in our case. So if you have an image or code block that is wider than the viewport, horizontal scrolling will be seen. </li>
+				<li>When <code>overflow:</code> and <code>-webkit-overflow-scrolling:touch</code> properties are set, iOS appears to ignore any <code>overflow:hidden</code> properties on the parent, which is the page in our case. So if you have an image or code block that is wider than the viewport, horizontal scrolling will be seen. </li>
 				<li>When this feature is active, we are disabling user zoom by manipulating the meta viewport tag because both the toolbars and page content can easily be zoomed to an odd size and it's very difficult to zoom back out. Even though we believe in allowing users to zoom the page, alleviating the usability concerns we have with fixed toolbars and overflow containers is more important.</li>
 				<li>Scroll position can be lost when going back to a page that has been re-loaded. If DOM caching is on, this shouldn't be as much of an issue.</li>
 				<li>This is still an experimental feature, so not all the kinks have been worked out yet. Use with caution and test thoroughly.</li>
