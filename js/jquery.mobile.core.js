@@ -64,6 +64,10 @@ define( [ "jquery", "text!../version.txt" ], function( $, __version__ ) {
 		// For error messages, which theme does the box uses?
 		pageLoadErrorMessageTheme: "e",
 
+		// replace calls to window.history.back with phonegaps navigation helper
+		// where it is provided on the window object
+		phonegapNavigationEnabled: false,
+
 		//automatically initialize the DOM when it's ready
 		autoInitializePage: true,
 
