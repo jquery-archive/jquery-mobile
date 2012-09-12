@@ -20,6 +20,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		shadow: true,
 		iconshadow: true,
 		overlayTheme: "a",
+		dividerTheme: "b",
 		hidePlaceholderMenuItems: true,
 		closeText: "Close",
 		nativeMenu: true,
