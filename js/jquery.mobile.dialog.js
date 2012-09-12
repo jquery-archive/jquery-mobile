@@ -25,7 +25,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 				});
 
 		$el.addClass( "ui-dialog ui-overlay-" + this.options.overlayTheme );
-		
+
 		// Class the markup for dialog styling
 		// Set aria role
 		$el
@@ -88,9 +88,8 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		if ( !this._isClosed ) {
 			this._isClosed = true;
 			if ( $.mobile.hashListeningEnabled ) {
-				window.history.back();
-			}
-			else {
+				$.mobile.back();
+			} else {
 				dst = $.mobile.urlHistory.getPrev().url;
 				if ( !$.mobile.path.isPath( dst ) ) {
 					dst = $.mobile.path.makeUrlAbsolute( "#" + dst );
