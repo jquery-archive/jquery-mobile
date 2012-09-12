@@ -34,7 +34,7 @@
       <p>&nbsp; </p>
 		<div class="ui-body ui-body-e">
 		<h4 style="margin:.5em 0">Important: <code>$(document).bind('pagecreate')</code> vs <code>$(document).bind('pageinit')</code></h4>
-   <p> Prior to Beta 2 the recommendation to users wishing to manipulate jQuery Mobile enhanced page and child widget markup was to bind to the <code>pagecreate</code> event. In Beta 2 an internal change was made to decouple each of the widgets by binding to the <code>pagecreate</code> event in place of direct calls to the widget methods. As a result, users binding to the <code>pagecreate</code> in <code>mobileinit</code> would find their binding executing before the markup had been enhanced by each of the plugins. In keeping with the lifecycle of the jQuery UI Widget Factory, the initialization method is invoked <strong>after</strong> the create method, so the <code>pageinit</code> event provides the correct timing for post enhancement manipulation of the DOM and/or Javascript objects.
+   <p> Prior to Beta 2 the recommendation to users wishing to manipulate jQuery Mobile enhanced pages and child widget markup was to bind to the <code>pagecreate</code> event. In Beta 2 an internal change was made to decouple each of the widgets by binding to the <code>pagecreate</code> event in place of direct calls to the widget methods. As a result, users binding to the <code>pagecreate</code> in <code>mobileinit</code> would find their binding executing before the markup had been enhanced by each of the plugins. In keeping with the lifecycle of the jQuery UI Widget Factory, the initialization method is invoked <strong>after</strong> the create method, so the <code>pageinit</code> event provides the correct timing for post enhancement manipulation of the DOM and/or Javascript objects.
 
 		In short, if you were previously using <code>pagecreate</code> to manipulate the enhanced markup before the page was shown, it's very likely you'll want to migrate to 'pageinit'.
 		</p></div>
@@ -101,7 +101,7 @@
 			</div>
 			<p>&nbsp;</p>
 			<div class="ui-body ui-body-e">
-				<h4 style="margin:.5em 0">Canceling an elements default click behavior</h4>
+				<h4 style="margin:.5em 0">Canceling an element's default click behavior</h4>
 				<p>Applications can call <code>preventDefault()</code> on a <code>vclick</code> event to cancel an element's default click behavior. On mouse based devices, calling <code>preventDefault()</code> on a <code>vclick</code> event equates to calling <code>preventDefault()</code> on the real <code>click</code> event during the bubble event phase. On touch based devices, it's a bit more complicated since the actual <code>click</code> event is dispatched about 300ms after the <code>vclick</code> event is dispatched. For touch devices, calling <code>preventDefault()</code> on a <code>vclick</code> event triggers some code in the vmouse plugin that attempts to catch the next <code>click</code> event that gets dispatched by the browser, during the capture event phase, and calls <code>preventDefault()</code> and <code>stopPropagation()</code> on it. As mentioned in the warning above, it is sometimes difficult to match up a touch event with its corresponding mouse event because the targets can differ. For this reason, the vmouse plugin also falls back to attempting to identify a corresponding <code>click</code> event by coordinates. There are still cases where both target and coordinate identification fail, which results in the <code>click</code> event being dispatched and either triggering the default action of the element, or in the case where content has been shifted or replaced, triggering a click on a different element. If this happens on a regular basis for a given element/control, we suggest you use <code>click</code> for triggering your action.</p>
 			</div>
 
@@ -317,7 +317,7 @@ $( document ).bind( &quot;pageloadfailed&quot;, function( event, data ){
 			</dd>
 		</dl>
 		<h2>Page change events</h2>
-		<p>Navigating between pages in the application is usually accomplished through a call to <code>$.mobile.changePage()</code>. This function is responsible for making sure that the page we are navigating to is loaded and inserted into the DOM, and then kicking off the transition animations between the current active page, and the page the caller wants to make active. During this process, which is usually asynchronous, changePage() will fire off 2 events. The first is <code>pagebeforechange</code>. The second event depends on the success or failure of the change request. It will either be <code>pagechange</code> or <code>pagechangefailed</code>.</p>
+		<p>Navigating between pages in the application is usually accomplished through a call to <code>$.mobile.changePage()</code>. This function is responsible for making sure that the page to which we are navigating is loaded and inserted into the DOM, and then kicking off the transition animations between the current active page, and the page the caller wants to make active. During this process, which is usually asynchronous, changePage() will fire off 2 events. The first is <code>pagebeforechange</code>. The second event depends on the success or failure of the change request. It will either be <code>pagechange</code> or <code>pagechangefailed</code>.</p>
 		<dl>
 			<dt><code>pagebeforechange</code></dt>
 			<dd>This event is triggered prior to any page loading or transition. Callbacks can prevent execution of the changePage() function by calling preventDefault on the event object passed into the callback. The callback also receives a data object as its 2nd arg. The data object has the following properties:
@@ -476,7 +476,7 @@ $( '#aboutPage' ).live( 'pageinit',function(event){
 
 
 		<h2>Page remove events</h2>
-		<p>By default, the framework removes any non active dynamically loaded external pages from the DOM as soon as the user navigates away to a different page. The <code>pageremove</code> event is dispatched just before the framework attempts to remove the a page from the DOM.</p>
+		<p>By default, the framework removes any non active dynamically loaded external pages from the DOM as soon as the user navigates away to a different page. The <code>pageremove</code> event is dispatched just before the framework attempts to remove the page from the DOM.</p>
 		<dl>
 			<dt><code>pageremove</code></dt>
 			<dd>This event is triggered just before the framework attempts to remove an external page from the DOM. Event callbacks can call preventDefault on the event object to prevent the page from being removed.

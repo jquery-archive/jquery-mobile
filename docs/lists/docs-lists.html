@@ -47,7 +47,7 @@
 
 			<a href="lists-ul.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Basic list example</a>
 
-			<p><strong>Style note on non-inset lists</strong>: all standard, non-inset lists have a -15px margin to negate the 15px of padding on the content area to make lists fill to the edges of the screen. If you add other widgets above or below a list, the negative margin may make these elements overlap so you'll need to add additional spacing in your custom CSS.</p>
+			<p><strong>Style note on non-inset lists</strong>: all standard, non-inset lists have a -15px margin to negate the 15px of padding on the content area to make lists extend to the edges of the screen. If you add other widgets above or below a list, the negative margin may make these elements overlap so you'll need to add additional spacing in your custom CSS.</p>
 			
 			<h2>Nested lists</h2>
 			<p>By nesting child <code>ul</code> or <code>ol</code> inside list items, you can create nested lists. When a list item with a child list is clicked, the framework will show a new page populated with the title of the parent in the header and the list of child elements. These dynamic nested lists are styled with the "b" theme swatch (blue in the default theme) to indicate that you are in a secondary level of navigation. Lists can be nested multiple levels deep and all pages and linking will be automatically handled by the framework. Note that the page of each nested listview is created when the parent page loads and for each nested page the page-events will trigger.</p>
@@ -66,7 +66,7 @@
 
 			<h2>Split button lists</h2>
 			<p>In cases where there is more than one possible action per list item, a split button can be used to offer two independently clickable items -- the list item and a small arrow icon in the far right. To make a split list item, simply add a second link inside the <code>li</code> and the framework will add a vertical divider line, style the link as an icon-only arrow button, and set the <code>title</code> attribute of the link to the text of the link for accessibility.</p>
-			<p>You can set the icon for the right split icon by specifying a <code>data-split-icon</code> attribute on the listview with a <a href="../buttons/buttons-icons.html">icon name</a> you want. The default icon is "arrow-r" but can be configured with the <code>splitIcon</code> <a href="../lists/lists-options.html">listview option</a>. By adding a <code>data-icon</code> attribute to the list item, you can set individual icons for each split. The theme swatch color of the split button defaults to "b" (blue in the default theme) but can be set by specifying a swatch letter with the <code>data-split-theme</code> attribute on listview level or for individual splits with the <code>data-theme</code> attribute on link level.</p>
+			<p>You can set the icon for the right split icon by specifying a <code>data-split-icon</code> attribute on the listview with an <a href="../buttons/buttons-icons.html">icon name</a> you want. The default icon is "arrow-r" but can be configured with the <code>splitIcon</code> <a href="../lists/lists-options.html">listview option</a>. By adding a <code>data-icon</code> attribute to the list item, you can set individual icons for each split. The theme swatch color of the split button defaults to "b" (blue in the default theme) but can be set by specifying a swatch letter with the <code>data-split-theme</code> attribute at the listview level or for individual splits with the <code>data-theme</code> attribute at the link level.</p>
 
 			<a href="lists-split.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Split list example</a>
 
@@ -97,7 +97,7 @@ $("#mylistview").listview({
 });
 </code></pre>
 
-			<p>Note that if you are using formatted list items that contain a floating element (for example <code>ui-li-aside</code>), this element precedes its siblings regardless the order in your HTML markup. This results in the first character of the floating element being used as divider text. Therefore it is recommended to specify the divider text in this case.</p>
+			<p>Note that if you are using formatted list items that contain a floating element (for example <code>ui-li-aside</code>), this element precedes its siblings regardless of the order in your HTML markup. This results in the first character of the floating element being used as divider text. Therefore it is recommended to specify the divider text in this case.</p>
 			
 			<p>If new list items are added to the list or removed from it, the dividers are <em>not</em> automatically updated: you should call <code>refresh()</code> on the listview to redraw the autodividers.</p>
 
@@ -109,14 +109,14 @@ $("#mylistview").listview({
 
 			<a href="lists-search.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Search filter example</a>
 
-      <p>If you want to change the way in which list items are filtered, ie fuzzy search or matching from the beginning of the string, you can configure the callback used internally by defining <code>$.mobile.listview.prototype.options.filterCallback</code> during <code>mobileinit</code> or after the widget has been created with <code>$("#mylist").listview('option', 'filterCallback', yourFilterFunction)</code>. Any function defined for the callback will be provided three arguments. First, the text of the current list item, second the value being searched for, and third the list item being filtered. A truthy value will result in a hidden list item. The default callback which filters entries without the <code>searchValue</code> as a substring is described below:
+      <p>If you want to change the way in which list items are filtered, i.e. fuzzy search or matching from the beginning of the string, you can configure the callback used internally by defining <code>$.mobile.listview.prototype.options.filterCallback</code> during <code>mobileinit</code> or after the widget has been created with <code>$("#mylist").listview('option', 'filterCallback', yourFilterFunction)</code>. Any function defined for the callback will be provided three arguments. First, the text of the current list item, second the value being searched for, and third the list item being filtered. A truthy value will result in a hidden list item. The default callback which filters entries without the <code>searchValue</code> as a substring is described below:
       </p>
 
 <pre><code>function( text, searchValue, item ){
   return text.toString().toLowerCase().indexOf( searchValue ) === -1;
 };</code></pre>
 
-			<p>To filter list items by values other than the text, add a <code>data-filtertext</code> attribute to the list item.  The value of this attribute will be passed as the first argument to the <code>filterCallback</code> function instead of the text. Alternately you can use an attribute of our choosing as defined on the list item itself.</p>
+			<p>To filter list items by values other than the text, add a <code>data-filtertext</code> attribute to the list item.  The value of this attribute will be passed as the first argument to the <code>filterCallback</code> function instead of the text. Alternately you can use an attribute of your choosing as defined on the list item itself.</p>
 
 			<a href="lists-search-filtertext.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Hidden data filter example</a>
 
@@ -151,7 +151,7 @@ $("#mylistview").listview({
 
 			<p>Note that the <code>refresh()</code> method only affects <strong>new nodes</strong> appended to a list. This is done for performance reasons. Any list items already enhanced will be ignored by the refresh process. This means that if you change the contents or attributes on an already enhanced list item, these won't be reflected. If you want a list item to be updated, replace it with fresh markup before calling refresh.</p>
 			
-			<p>If you initially want to hide a list item you can do this by adding a class of <strong><code>ui-screen-hidden</code></strong> to li element. Using this class ensures the corner styling is applied correctly as well as border-bottom on the last visible item.
+			<p>If you initially want to hide a list item you can do this by adding a class of <strong><code>ui-screen-hidden</code></strong> to the li element. Using this class ensures the corner styling is applied correctly as well as border-bottom on the last visible item.
 			
 			
 

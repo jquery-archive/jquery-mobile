@@ -41,7 +41,7 @@
 
 			<p>To add a select menu to your page, start with a standard <code>select</code> element populated with a set of <code>option</code> elements. Set the <code>for</code> attribute of the <code>label</code> to match the <code>id</code> of the <code>select</code> so they are semantically associated. It's possible to <a href="../docs-forms.html">accessibly hide the label</a> if it's not desired in the page layout, but we require that it is present in the markup for semantic and accessibility reasons.</p>
 			
-			<p>The framework will find all <code>select</code> elements and automatically enhance them into select menus, no need to apply a <code>data-role</code> attribute. To prevent the automatic enhancement of a select, add  <code>data-role="none"</code> attribute to the <code>select</code>.</p>
+			<p>The framework will find all <code>select</code> elements and automatically enhance them into select menus; there is no need to apply a <code>data-role</code> attribute. To prevent the automatic enhancement of a select, add  <code>data-role="none"</code> attribute to the <code>select</code>.</p>
 			
 <pre><code>
 &lt;label for=&quot;select-choice-0&quot; class=&quot;select&quot;&gt;Shipping method:&lt;/label&gt;
@@ -286,7 +286,7 @@
 </div>
 
 <h2>Horizontally grouped select inputs</h2>
-<p>Select inputs can also be used for grouped sets with more than one related selections. To make a horizontal button set, add the <code>data-type="horizontal"</code> to the fieldset. Note that the buttons which trigger the select will resize depending on the currently selected option’s value. Note that browsers without support for <code>display: inline-block;</code> will group the selects vertically, as above.</p>
+<p>Select inputs can also be used for grouped sets with more than one related selection. To make a horizontal button set, add the <code>data-type="horizontal"</code> to the fieldset. Note that the buttons which trigger the select will resize depending on the currently selected option’s value. Note that browsers without support for <code>display: inline-block;</code> will group the selects vertically, as above.</p>
 
 <code>
 &lt;fieldset data-role="controlgroup" <strong>data-type="horizontal"</strong>&gt;

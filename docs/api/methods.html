@@ -29,7 +29,7 @@
 
 
 		<dl>
-			<dt><code>$.mobile.changePage</code> (<em>method</em>)</dt>
+			<dt><code>$.mobile.changePage()</code> (<em>method</em>)</dt>
 			<dd>Programmatically change from one page to another. This method is used internally for the page loading and transitioning that occurs as a result of clicking a link or submitting a form, when those features are enabled.</dd>
 
 			<dd>
@@ -104,7 +104,7 @@ $.mobile.changePage( "../alerts/confirm.html", {
 			</dd>
 
 
-			<dt><code>$.mobile.loadPage</code> (<em>method</em>)</dt>
+			<dt><code>$.mobile.loadPage()</code> (<em>method</em>)</dt>
 			<dd>Load an external page, enhance its content, and insert it into the DOM. This method is called internally by the changePage() function when its first argument is a URL. This function does not affect the current active page so it can be used to load pages in the background. The function returns a deferred promise object that gets resolved after the page has been enhanced and inserted into the document.</dd>
 
 			<dd>
@@ -186,7 +186,7 @@ $.mobile.loadPage( "searchresults.php", {
 				</dl>
 			</dd>
 
-			<dt><code>$.mobile.loading</code> (<em>method</em>)</dt>
+			<dt><code>$.mobile.loading()</code> (<em>method</em>)</dt>
 			<dd>Show or hide the page loading message, which is configurable via <code>$.mobile.loader</code> prototype options as described in the <a href="../pages/loader.html">widget docs</a> or can be controlled via a params object.</dd>
 			<dd>
 				<dl>
@@ -211,7 +211,7 @@ $.mobile.loading( 'show', { theme: "b", text: "foo", textonly: true });
 
 			</dd>
 
-			<dt><code>$.mobile.showPageLoadingMsg</code> (<em>method</em>)</dt>
+			<dt><code>$.mobile.showPageLoadingMsg()</code> (<em>method</em>)</dt>
 			<dd>
         <p class="ui-bar-e"> Deprecated in 1.2 - use <code>$.mobile.loading( 'show' )</code> instead, see examples above</p>
         Show the page loading message, which is configurable via $.mobile.loadingMessage.</dd>
@@ -240,7 +240,7 @@ $.mobile.showPageLoadingMsg("b", "This is only a test", true);
 
 
 
-			<dt><code>$.mobile.hidePageLoadingMsg</code> (<em>method</em>)</dt>
+			<dt><code>$.mobile.hidePageLoadingMsg()</code> (<em>method</em>)</dt>
 			<dd>
         <p class="ui-bar-e"> Deprecated in 1.2 - use <code>$.mobile.loading( 'hide' )</code> instead, see examples above</p>
         Hide the page loading message, which is configurable via $.mobile.loadingMessage.
@@ -256,7 +256,7 @@ $.mobile.hidePageLoadingMsg();
 
 			</dd>
 
-			<dt><code>$.mobile.fixedToolbars.show</code> (<em>method</em>)</dt>
+			<dt><code>$.mobile.fixedToolbars.show()</code> (<em>method</em>)</dt>
 			<dd>
 			<p class="ui-bar-e"> Deprecated in 1.1 <code> </code></p> 
 			Utility method for displaying the fixed header and/or footer of the current active page within the viewport. Note that fixed headers/footers are never really hidden. Toggling the show/hide state of a toolbar is really toggling whether or not they are inline within the page content, or displayed within the viewport as if they were fixed.</dd>
@@ -279,7 +279,7 @@ $.mobile.fixedToolbars.show(true);
 
 			</dd>
 
-			<dt><code>$.mobile.fixedToolbars.hide</code> (<em>method</em>)</dt>
+			<dt><code>$.mobile.fixedToolbars.hide()</code> (<em>method</em>)</dt>
 			<dd><p class="ui-bar-e"> Deprecated in 1.1 <code> </code></p> 
 			Utility method for hiding the fixed header and/or footer of the current active page.</dd>
 			<dd>
@@ -301,7 +301,7 @@ $.mobile.fixedToolbars.hide(true);
 
 			</dd>
 
-			<dt><code>$.mobile.path.parseUrl</code> (<em>method</em>)</dt>
+			<dt><code>$.mobile.path.parseUrl()</code> (<em>method</em>)</dt>
 			<dd>Utility method for parsing a URL and its relative variants into an object that makes accessing the components of the URL easy. When parsing relative variants, the resulting object will contain empty string values for missing components (like protocol, host, etc). Also, when parsing URLs that have no authority, such as tel: urls, the pathname property of the object will contain the data after the protocol/scheme colon.</dd>
 
 			<dd>
@@ -385,7 +385,7 @@ var obj = $.mobile.path.parseUrl("http://jblas:password@mycompany.com:8080/mail/
 			</dd>
 
 
-			<dt><code>$.mobile.path.makePathAbsolute</code> (<em>method</em>)</dt>
+			<dt><code>$.mobile.path.makePathAbsolute()</code> (<em>method</em>)</dt>
 			<dd>Utility method for converting a relative file or directory path into an absolute path.</dd>
 			<dd>
 				<dl>
@@ -412,7 +412,7 @@ var absPath = $.mobile.path.makePathAbsolute("../../foo/file.html", "/a/b/c/bar.
 			</dd>
 
 
-			<dt><code>$.mobile.path.makeUrlAbsolute</code> (<em>method</em>)</dt>
+			<dt><code>$.mobile.path.makeUrlAbsolute()</code> (<em>method</em>)</dt>
 			<dd>Utility method for converting a relative URL to an absolute URL.</dd>
 			<dd>
 
@@ -450,7 +450,7 @@ var absUrl = $.mobile.path.makeUrlAbsolute("#bar", "http://foo.com/a/b/c/test.ht
 			</dd>
 
 
-			<dt><code>$.mobile.path.isSameDomain</code> (<em>method</em>)</dt>
+			<dt><code>$.mobile.path.isSameDomain()</code> (<em>method</em>)</dt>
 			<dd>Utility method for comparing the domain of 2 URLs.</dd>
 			<dd>
 
@@ -485,7 +485,7 @@ var same = $.mobile.path.isSameDomain("http://foo.com/a/file.html", "http://bar.
 			</dd>
 
 
-			<dt><code>$.mobile.path.isRelativeUrl</code> (<em>method</em>)</dt>
+			<dt><code>$.mobile.path.isRelativeUrl()</code> (<em>method</em>)</dt>
 			<dd>Utility method for determining if a URL is a relative variant.</dd>
 			<dd>
 
@@ -526,7 +526,7 @@ var isRel = $.mobile.path.isRelativeUrl("#foo");
 			</dd>
 
 
-			<dt><code>$.mobile.path.isAbsoluteUrl</code> (<em>method</em>)</dt>
+			<dt><code>$.mobile.path.isAbsoluteUrl()</code> (<em>method</em>)</dt>
 			<dd>Utility method for determining if a URL is absolute.</dd>
 			<dd>
 
@@ -566,7 +566,7 @@ var isAbs = $.mobile.path.isAbsoluteUrl("#foo");
 
 			</dd>
 
-			<dt><code>$.mobile.path.get</code> (<em>method</em>)</dt>
+			<dt><code>$.mobile.path.get()</code> (<em>method</em>)</dt>
 			<dd>Utility method for determining the directory portion of an URL. If the URL has no trailing slash, the last component of the URL is considered to be a file.</dd>
 			<dd>
 
@@ -620,7 +620,7 @@ var dirName = $.mobile.path.isAbsoluteUrl("#foo");
 
 
 
-			<dt><code>$.mobile.silentScroll</code> (<em>method</em>)</dt>
+			<dt><code>$.mobile.silentScroll()</code> (<em>method</em>)</dt>
 			<dd>Scroll to a particular Y position without triggering scroll event listeners.</dd>
 			<dd>
 				<dl>

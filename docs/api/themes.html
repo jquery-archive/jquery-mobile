@@ -43,7 +43,7 @@
 
 		<h2>Default theme swatch mapping for components</h2>
 
-		<p>If no theme swatch letter is set at all, the framework uses the "a" swatch for headers and footers and the "c" swatch for the page content to maximize contrast between the both. All items in containers inherit the swatch theme from their parent. One exception to this rule is the listdivider in listviews which always defaults to "b" (blue in the default theme). Note that there is also a swatch named "active" (bright blue in the default theme) which is used to indicate an active selected item. See the <strong>Global "Active" state</strong> further down this page for further information on <strong>active</strong> swatch.</p>
+		<p>If no theme swatch letter is set at all, the framework uses the "a" swatch for headers and footers and the "c" swatch for the page content to maximize contrast between the both. All items in containers inherit the swatch theme from their parent. One exception to this rule is the listdivider in listviews which always defaults to "b" (blue in the default theme). Note that there is also a swatch named "active" (bright blue in the default theme) which is used to indicate an active selected item. See the <strong>Global "Active" state</strong> further down this page for further information on the <strong>active</strong> swatch.</p>
 
 		<h2>Themes &amp; swatches</h2>
 		
@@ -245,7 +245,7 @@
 			<dt><code>ui-body-(a-z)</code></dt>
 			<dd>Applies the content body theme styles for the selected swatch letter. Commonly used in conjunction with <code>ui-body</code> structural class to add the standard content block padding styles. </dd>
 			<dt><code>ui-btn-up-(a-z)</code></dt>
-			<dd>Applies the button/clickable element theme styles for the selected swatch letter. Commonly used in with the <code>ui-btn-hover-(a-z)</code> and <code>ui-btn-down-(a-z)</code> interaction class states to provide visual feedback and <code>ui-btn-active</code> to indicate the selected or "on" state.</dd>
+			<dd>Applies the button/clickable element theme styles for the selected swatch letter. Commonly used with the <code>ui-btn-hover-(a-z)</code> and <code>ui-btn-down-(a-z)</code> interaction class states to provide visual feedback and <code>ui-btn-active</code> to indicate the selected or "on" state.</dd>
 			<dt><code>ui-corner-all</code></dt>
 			<dd>Applies the theme's global border-radius for rounded corners and is used for container or grouped items in the framework (inset lists, radiobutton sets). There are additional classes for all the possible combinations of rounded corners, for example: <code>ui-corner-tl</code> (top left only), <code>-top</code> (both top corners), <code>-left</code> (both left corners),  etc. A second full set of corner classes is provided for buttons so these can have a different corner radius. These use classes with a similar naming convention, but with "btn-corner" instead of "corner", like this: <code>.ui-<strong>btn-corner</strong>-all</code>.</dd>
 			<dt><code>ui-shadow</code></dt>
@@ -255,7 +255,7 @@
 		</dl>
 
 			<h3>Overriding themes</h3>
-			<p>The themes are meant as a solid starting point, but are meant to be customized. Since everything is controlled by CSS, it's easy to use a web inspector tool to identify the style properties you want to modify. The set of of theme classes (global) and semantic structural classes (widget-specific) added to elements provide a rich set of possible selectors to target style overrides against. We recommend adding an external stylesheet to the <code>head</code>, placed <strong>after</strong> the structure and theme stylesheet references, that contain all your style overrides. This allows you to easily update to newer versions of the library because overrides are kept separate from the library code.</p>
+			<p>The themes are meant as a solid starting point, but are meant to be customized. Since everything is controlled by CSS, it's easy to use a web inspector tool to identify the style properties you want to modify. The set of of theme classes (global) and semantic structural classes (widget-specific) added to elements provide a rich set of possible selectors against which to target style overrides. We recommend adding an external stylesheet to the <code>head</code>, placed <strong>after</strong> the structure and theme stylesheet references, that contain all your style overrides. This allows you to easily update to newer versions of the library because overrides are kept separate from the library code.</p>
 			
 			
 		<p><strong>Learn more</strong> about theming individual components:</p>

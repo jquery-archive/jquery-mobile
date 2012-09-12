@@ -100,7 +100,7 @@
 		</div>
 		
 		<h2>Custom icons</h2>
-		<p>Collapsible headings’ default icons can be overridden by using the <code>data-collapsed-icon</code> and <code>data-expanded-icon</code> attributes. In the below case, <code>data-collapsed-icon="arrow-r"</code> and <code>data-expanded-icon="arrow-d"</code>.</p>
+		<p>The default icons of collapsible headings can be overridden by using the <code>data-collapsed-icon</code> and <code>data-expanded-icon</code> attributes. In the example below, <code>data-collapsed-icon="arrow-r"</code> and <code>data-expanded-icon="arrow-d"</code>.</p>
 
 		<div data-role="collapsible" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
 			<h3>I have custom icons</h3>
@@ -108,7 +108,7 @@
 		</div>
 
 		<h2>Icon positioning</h2>
-		<p>Collapsible headings’ default icon positioning can be overridden by using the <code>data-iconpos</code> attribute. In the below case, <code>data-iconpos="right"</code>.</p>
+		<p>The default icon positioning of collapsible headings can be overridden by using the <code>data-iconpos</code> attribute. In the below case, <code>data-iconpos="right"</code>.</p>
 		
 		<div data-role="collapsible" data-iconpos="right">
 			<h3>I'm a header</h3>
@@ -119,9 +119,9 @@
 	<h2>Theming collapsible content</h2>
 	
 		
-		<p>Collapsible content is minimally styled &mdash; we add only a bit of margin between the bar and content, and the header adopts the default theme styles of the container it sits within.</p>
+		<p>Collapsible content is minimally styled &mdash; we add only a bit of margin between the bar and content, and the header adopts the default theme styles of the container within which it sits.</p>
 		
-		<p>To provide a stronger visual connection between the collapsible header and content, add the <code>data-content-theme</code> attribute to the wrapper and specify a theme swatch letter. This will apply the swatch's border and <em>flat</em> background color (not the gradient) to the content block and changes the corner rounding to square off the bottom of the header and round the bottom of the content block instead to visually group these elements.</p>
+		<p>To provide a stronger visual connection between the collapsible header and content, add the <code>data-content-theme</code> attribute to the wrapper and specify a theme swatch letter. This applies the swatch's border and <em>flat</em> background color (not the gradient) to the content block, removes the rounded corners from the bottom of the header, and gives the bottom of the content block rounded corners to visually group these elements.</p>
 		
 <pre><code>		
 &lt;div data-role=&quot;collapsible&quot; <strong>data-content-theme=&quot;c&quot;</strong>&gt;
@@ -161,7 +161,7 @@
 		
 		<h2>Nested Collapsibles</h2>
 		
-		<p>Collapsibles can be nested inside each other if needed. In this example, we're setting the content theme to provide clearer visual connection between the levels.</p>
+		<p>Collapsibles can be nested inside each other if needed. In this example, we're setting the content theme to provide a clearer visual connection between the levels.</p>
 		<div data-role="collapsible" data-collapsed="false" data-theme="e" data-content-theme="c">
 			<h3>I'm a header</h3>
 			<p>I'm the collapsible content. By default I'm open and displayed on the page, but you can click the header to hide me.</p>

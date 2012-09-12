@@ -33,7 +33,7 @@
 				<li><a href="content-collapsible-set-events.html" data-role="button" data-transition="fade">Events</a></li>
 			</ul>
 
-			<p>The collapsible plugin has the following options:</p>
+			<p>The collapsibleset plugin has the following options:</p>
 
 		<dl>
 			<dt><code>collapsedIcon</code> <em>string</em></dt>
@@ -103,7 +103,7 @@
 			<dt><code>theme</code> <em>string</em></dt>
 			<dd>
 				<p class="default">default: null, inherited from parent</p>
-				<p>Sets the color scheme (swatch) for the collapsible set. It accepts a single letter from a-z that maps to the swatches included in your theme. To set the value for all instances of this widget, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
+				<p>Sets the color scheme (swatch) for the collapsible set. It accepts a single letter from a-z that maps to one of the swatches included in your theme. To set the value for all instances of this widget, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
 <pre><code>$( document ).bind( "mobileinit", function(){
     <strong>$.mobile.collapsibleset.prototype.options.theme = "a";</strong>
 });
