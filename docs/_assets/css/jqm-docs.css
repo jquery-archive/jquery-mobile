@@ -346,6 +346,11 @@ dd h4 { margin:15px 0 0 0; }
 		margin: 0;
 		padding: 0;
 	}
+	.content-secondary .ui-collapsible-content,
+	.content-secondary .ui-collapsible-content > .ui-listview .ui-li-last {
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
+	}
 	.type-interior  .content-secondary .ui-li-divider {
 		padding-top: 1em;
 		padding-bottom: 1em;
