@@ -753,7 +753,7 @@ define( [ "jquery",
 			}
 
 			if( this.options.history ) {
-				window.history.back();
+				$.mobile.back();
 			} else {
 				this._close();
 			}

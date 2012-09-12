@@ -249,4 +249,22 @@
 
 		equal( $.mobile.path.getLocation( allUriParts ), allUriParts.replace( "jblas:password@", "") );
 	});
+
+	test( "calling mobile back uses phonegap's navigator object when present", function() {
+		var previous = $.mobile.phonegapNavigationEnabled;
+
+		expect( 1 );
+
+		$.mobile.phonegapNavigationEnabled = true;
+		window.navigator = {
+			app: {
+				backHistory: function() {
+					ok( true, "history back called" );
+				}
+			}
+		};
+
+		$.mobile.back();
+		$.mobile.phonegapNavigationEnabled = previous;
+	});
 })(jQuery);
