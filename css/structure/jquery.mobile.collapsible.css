@@ -31,22 +31,37 @@
 .ui-collapsible-set .ui-collapsible { margin: -1px 0 0; }
 .ui-collapsible-set .ui-collapsible:first-child { margin-top: 0; }
 
-/* horizontal */
+/* horizontal tabs */
+.ui-collapsible-set-horizontal { margin: .5em -15px; }
+.ui-collapsible-no-inset { margin-left: 0px; margin-right: 0px;}
 .ui-collapsible-set-horizontal .ui-collapsible h3 .ui-btn { border-bottom-width: 1px; }	
 .ui-collapsible-set-horizontal .ui-collapsible h3 .ui-btn .ui-btn-text { white-space: normal; }
-.ui-collapsible-set .ui-collapsible { margin: 0;}
-.ui-collapsible-inset { margin: 15px; }
+.ui-collapsible-set .ui-collapsible { margin-top: 0;}
+.ui-collapsible-set-horizontal.ui-collapsible-inset { margin: 0 15px;  }
+.ui-collapsible-set-horizontal .ui-collapsible-heading .ui-btn-inner { padding-left: 20px;} 
+.ui-collapsible-set-horizontal .ui-collapsible-heading .ui-btn-icon-left .ui-btn-inner { padding-left: 40px;} 
 .ui-collapsible-set-horizontal .ui-collapsible-heading { width: 100%; margin: 0; }
-.ui-collapsible-set-horizontal .ui-collapsible-content { position: relative; border: 0 none; margin: 0; padding: 0; }	
+.ui-collapsible-set-horizontal .ui-collapsible-content { position: relative; margin: 0; padding: 0; }	
 /* 2tabs */
 .ui-collapsible-set-horizontal.ui-grid-a .ui-block-a .ui-collapsible-content { width: 199.3%; }	
 .ui-collapsible-set-horizontal.ui-grid-a .ui-block-b .ui-collapsible-content { left: -99.19%; width: 198.5%;}
 /* 3tabs */
-.ui-collapsible-set-horizontal.ui-grid-b .ui-block-a .ui-collapsible-content { width: 299.9%; }
-.ui-collapsible-set-horizontal.ui-grid-b .ui-block-b .ui-collapsible-content { width: 299.9%; left: -100%; }
-.ui-collapsible-set-horizontal.ui-grid-b .ui-block-c .ui-collapsible-content { width: 299.9%; left: -200%; }
+.ui-collapsible-set-horizontal.ui-grid-b .ui-block-a .ui-collapsible-content { width: 299.5%; }
+.ui-collapsible-set-horizontal.ui-grid-b .ui-block-b .ui-collapsible-content { width: 299.5%; left: -100%; }
+.ui-collapsible-set-horizontal.ui-grid-b .ui-block-c .ui-collapsible-content { width: 299.5%; left: -200%; }
 /* 4tabs */
-.ui-collapsible-set-horizontal.ui-grid-c .ui-block-a .ui-collapsible-content { width: 399.9%; }
-.ui-collapsible-set-horizontal.ui-grid-c .ui-block-b .ui-collapsible-content { width: 399.9%; left: -100%; }
-.ui-collapsible-set-horizontal.ui-grid-c .ui-block-c .ui-collapsible-content { width: 399.9%; left: -200%; }
-.ui-collapsible-set-horizontal.ui-grid-c .ui-block-d .ui-collapsible-content { width: 399.9%; left: -300%; }
+.ui-collapsible-set-horizontal.ui-grid-c .ui-block-a .ui-collapsible-content { width: 399.5%; }
+.ui-collapsible-set-horizontal.ui-grid-c .ui-block-b .ui-collapsible-content { width: 399.5%; left: -100%; }
+.ui-collapsible-set-horizontal.ui-grid-c .ui-block-c .ui-collapsible-content { width: 399.5%; left: -200%; }
+.ui-collapsible-set-horizontal.ui-grid-c .ui-block-d .ui-collapsible-content { width: 399.5%; left: -300%; }
+/* 5tabs */
+.ui-collapsible-set-horizontal.ui-grid-d .ui-block-a .ui-collapsible-content { width: 499.5%; }
+.ui-collapsible-set-horizontal.ui-grid-d .ui-block-b .ui-collapsible-content { width: 499.5%; left: -100%; }
+.ui-collapsible-set-horizontal.ui-grid-d .ui-block-c .ui-collapsible-content { width: 499.5%; left: -200%; }
+.ui-collapsible-set-horizontal.ui-grid-d .ui-block-d .ui-collapsible-content { width: 499.5%; left: -300%; }
+.ui-collapsible-set-horizontal.ui-grid-d .ui-block-e .ui-collapsible-content { width: 499.5%; left: -400%; }
+/* misc */
+.ui-collapsible-set-horizontal .ui-collapsible .ui-btn-active { border-bottom-width: 0; }
+.ui-collapsible-set-horizontal .ui-collapsible-collapsed .ui-btn { border-bottom-width: 1px; }
+.ui-collapsible-set-horizontal .ui-collapsible .ui-collapsible-content { border-top-width: 0;  }
+.ui-collapsible-set-horizontal .ui-collapsible-heading-status { position: absolute !important; left: -9999px; clip: rect(1px 1px 1px 1px); clip: rect(1px,1px,1px,1px);  }
