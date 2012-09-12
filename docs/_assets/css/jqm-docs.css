@@ -48,6 +48,7 @@ h4 code {font-size:1.2em; font-weight:bold; }
 dt { font-weight: bold; margin: 2em 0 .5em; }
 dt code, dd code { font-size:1.3em; line-height:150%; }
 pre { white-space: pre; white-space: pre-wrap; word-wrap: break-word; }
+strong { font-weight: bold; }
 
 #jqm-homeheader img { width: 235px; }
 img { max-width: 100%; }
