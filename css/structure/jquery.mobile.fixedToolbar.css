@@ -8,10 +8,20 @@
 	z-index: 1000;
 }
 .ui-header-fixed {
+	top: -1px;
+	padding-top: 1px;
+}
+.ui-header-fixed.ui-fixed-hidden {
 	top: 0;
+	padding-top: 0;
 }
 .ui-footer-fixed {
+	bottom: -1px;
+	padding-bottom: 1px;
+}
+.ui-footer-fixed.ui-fixed-hidden {
 	bottom: 0;
+	padding-bottom: 0;
 }
 .ui-header-fullscreen,
 .ui-footer-fullscreen {
