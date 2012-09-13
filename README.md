@@ -11,12 +11,12 @@ jQuery Mobile 1.2 beta (1.2.0-rc.1) works with versions of jQuery core from 1.6.
 When [submitting issues on github](https://github.com/jquery/jquery-mobile/issues/new) please include the following:
 
 1. Issue description
-2. Sample page using our [jsbin template](http://jsbin.com/owipah/edit) which uses latest code
+2. Test page using our [jsbin template](http://jsbin.com/owipah/edit) which uses latest code
 3. Steps to reproduce
 4. Expected outcome
 5. Actual outcome
-6. jQuery Mobile version
-7. Browsers/platforms tested
+6. jQuery Mobile version and PhoneGap version if applicable
+7. Devices/platforms/browsers tested
 
 Also, in the interest of creating more readable issues please include code snippets inside a triple backtick box appropriate for the JavaScript/HTML/CSS snippet you wish to discuss. More information is available at the [introduction page](http://github.github.com/github-flavored-markdown/) for github flavored markdown (see Syntax Highlighting).
 
