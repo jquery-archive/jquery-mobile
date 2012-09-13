@@ -410,3 +410,9 @@ dd h4 { margin:15px 0 0 0; }
 	vertical-align: top;
 	white-space: nowrap;
 }
+
+/* Navbar examples */
+.content-primary > .ui-header,
+.content-primary > .ui-footer {
+	overflow: hidden;
+}
