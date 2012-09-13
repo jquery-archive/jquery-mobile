@@ -9,7 +9,7 @@
 	asyncTest( "The page should be enhanced correctly", function(){
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage( "#basic-collapsible-test" );
+				$.mobile.changePage( $( "#basic-collapsible-test" ) );
 			},
 
 			function() {
@@ -28,7 +28,7 @@
 	asyncTest( "Expand/Collapse", function(){
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage( "#basic-collapsible-test" );
+				$.mobile.changePage( $( "#basic-collapsible-test" ) );
 			},
 
 			function() {
@@ -47,7 +47,7 @@
 	asyncTest( "The page should be enhanced correctly", function(){
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage( "#basic-collapsible-set-test" );
+				$.mobile.changePage( $( "#basic-collapsible-set-test" ) );
 			},
 
 			function() {
@@ -69,7 +69,7 @@
 	asyncTest( "Collapsible set with only one collapsible", function() {
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage( "#collapsible-set-with-lonely-collapsible-test" );
+				$.mobile.changePage( $( "#collapsible-set-with-lonely-collapsible-test" ) );
 			},
 
 			function() {
@@ -88,7 +88,7 @@
 	asyncTest( "Section expanded by default", function(){
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage( "#basic-collapsible-set-test" );
+				$.mobile.changePage( $( "#basic-collapsible-set-test" ) );
 			},
 
 			function() {
@@ -102,7 +102,7 @@
 	asyncTest( "Expand/Collapse", function(){
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage( "#basic-collapsible-set-test" );
+				$.mobile.changePage( $( "#basic-collapsible-set-test" ) );
 			},
 
 			function() {
@@ -119,7 +119,7 @@
 	asyncTest( "Collapsible Set with dynamic content", function(){
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage( "#collapsible-set-with-dynamic-content" );
+				$.mobile.changePage( $( "#collapsible-set-with-dynamic-content" ) );
 			},
 
 			function() {
@@ -143,7 +143,7 @@
 	asyncTest( "Collapsible Set with static and dynamic content", function(){
 		$.testHelper.pageSequence([
 			function(){
-  				$.testHelper.openPage( "#collapsible-set-with-static-and-dynamic-content" );
+  				$.mobile.changePage( $( "#collapsible-set-with-static-and-dynamic-content" ) );
   			},
 
   			function() {
@@ -167,7 +167,7 @@
 	asyncTest( "Collapsible set with last collapsible expanded", function(){
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage( "#collapsible-set-with-last-collapsible-expanded" );
+				$.mobile.changePage( $( "#collapsible-set-with-last-collapsible-expanded" ) );
 			},
 
 			function() {
@@ -181,7 +181,7 @@
 	asyncTest( "Collapsible Set", function(){
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage( "#collapsible-set-with-legends" );
+				$.mobile.changePage( $( "#collapsible-set-with-legends" ) );
 			},
 
 			function() {
@@ -199,7 +199,7 @@
 	asyncTest( "Collapsible with custom icons", function(){
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage( "#collapsible-with-custom-icons" );
+				$.mobile.changePage( $( "#collapsible-with-custom-icons" ) );
 			},
 
 			function() {
@@ -222,7 +222,7 @@
 	asyncTest( "Collapsible sets with custom icons", function(){
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage( "#collapsible-set-with-custom-icons" );
+				$.mobile.changePage( $( "#collapsible-set-with-custom-icons" ) );
 			},
 
 			function() {
@@ -243,7 +243,7 @@
 	asyncTest( "Collapsible", 6, function(){
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage( "#collapsible-with-theming" );
+				$.mobile.changePage( $( "#collapsible-with-theming" ) );
 			},
 
 			function() {
@@ -263,7 +263,7 @@
 	asyncTest( "Collapsible Set", function(){
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage( "#collapsible-set-with-theming" );
+				$.mobile.changePage( $( "#collapsible-set-with-theming" ) );
 			},
 
 			function() {
