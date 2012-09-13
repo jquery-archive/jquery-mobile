@@ -77,7 +77,8 @@
 
 			<code>super.setIntegerProperty("loadUrlTimeoutValue", 60000);</code>
 
-
+			<p><strong>Avoid underscores in files and folders</strong> because Phonegap may fail to load the contained files in Android. This is a known <a href="http://code.google.com/p/android/issues/detail?id=5343" data-ajax="false">issue</a>.</p>
+			
 			<h2>Building UIWebView apps with jQuery Mobile</h2>
 
 			<p>It's important to note that when creating a custom, non-phonegap, <code>UIWebView</code> control in an iOS application you must use the <code>loadRequest</code> method in preference to <code>loadData</code> for back button support. The snippet below is an example of loading <code>default.html</code> in your view controller.</p>
