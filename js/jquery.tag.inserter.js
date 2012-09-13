@@ -18,7 +18,7 @@
 
 	document.write(
 		'<script>' +
-			'if ( parseInt( jQuery.fn.jquery.replace( /\\./g, "" ), 10 ) < 170 && window.define && window.define.amd ) {' +
+			'if ( window.jQuery && parseInt( jQuery.fn.jquery.replace( /\\./g, "" ), 10 ) < 170 && window.define && window.define.amd ) {' +
 			    'define( "jquery", [], function () { return jQuery; } );'+
 			'}'+
 		'</script>'
