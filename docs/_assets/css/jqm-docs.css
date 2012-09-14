@@ -4,7 +4,7 @@ Beware: lots of last-minute CSS going on in here
 cobblers, shoes, 
 */
 
-body { background: #eeeeee; }
+body { background: #f9f9f9; padding:13px; }
 body, input, textarea, select, button { font-family: Helvetica, Arial, san-serif; }
 .ui-mobile .type-home .ui-content { margin: 0; background: #e5e5e5 url(../images/jqm-sitebg.png) top center repeat-x; }
 .ui-mobile #jqm-homeheader { padding: 40px 10px 0; text-align: center;  margin: 0 auto; }
@@ -77,6 +77,7 @@ p.intro strong {
 .footer-docs {
 	padding: 5px 0;
 	clear:both;
+	color:#666;
 }
 .footer-docs p {
 	margin-left:15px;
@@ -418,3 +419,9 @@ dd h4 { margin:15px 0 0 0; }
 .content-primary > .ui-footer {
 	overflow: hidden;
 }
+
+/* list styles */
+ul { margin:0; padding-left:0; }
+ul li { list-style:none; padding:.7em 0; margin:0; border-top:1px solid #e3e3e3; }
+ul li:last-child { border-bottom:1px solid #e3e3e3; } 
+
