@@ -76,6 +76,7 @@ p.intro strong {
 }
 .footer-docs {
 	padding: 5px 0;
+	clear:both;
 }
 .footer-docs p {
 	margin-left:15px;
