@@ -13,7 +13,7 @@ body, input, textarea, select, button { font-family: Helvetica, Arial, san-serif
 
 /* .ui-mobile .jqm-themeswitcher { margin: 10px 25px 10px 10px;  } */
 
-.jqm-version {
+.ui-mobile-viewport .jqm-version {
 	background: #f7cf57;
 	border: solid #fff;
 	border-width: 2px 0;
