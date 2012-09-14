@@ -337,7 +337,7 @@ define( [ "jquery",
 			];
 
 			$.mobile.widget.prototype._setOption.apply( this, arguments );
-			if ( exclusions.indexOf( key ) === -1 ) {
+			if ( $.inArray( key, exclusions ) === -1 ) {
 				// Record the option change in the options and in the DOM data-* attributes
 				this.element.attr( "data-" + ( $.mobile.ns || "" ) + ( key.replace( /([A-Z])/, "-$1" ).toLowerCase() ), value );
 			}
