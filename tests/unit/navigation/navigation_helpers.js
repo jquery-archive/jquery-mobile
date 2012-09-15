@@ -6,7 +6,7 @@
 
 	module('jquery.mobile.navigation.js', {
 		setup: function(){
-			if ( location.hash ) {
+			if ( location.hash && location.hash !== "#" ) {
 				stop();
 				$(document).one("pagechange", function() {
 					start();
