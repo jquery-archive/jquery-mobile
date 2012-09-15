@@ -430,6 +430,8 @@ dl dd ul li li li { list-style: square; }
 dl dd ul li,
 dl dd ul li:last-child { border: none; }
 
+ul ul li, ul ul li:last-child { border: none;}
+
 .ui-mobile-viewport .localnav li,
 .ui-mobile-viewport .localnav li:last-child {
 	border: none;	
