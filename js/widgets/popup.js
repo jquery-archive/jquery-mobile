@@ -56,6 +56,8 @@ define( [ "jquery",
 			// NOTE Windows Phone 7 has a scroll position caching issue that
 			//      requires us to disable popup history management by default
 			//      https://github.com/jquery/jquery-mobile/issues/4784
+			//
+			// NOTE this option is modified in _create!
 			history: !$.mobile.browser.ie
 		},
 
@@ -147,6 +149,11 @@ define( [ "jquery",
 				thisPage = this.element.closest( ".ui-page" ),
 				myId = this.element.attr( "id" ),
 				self = this;
+
+			// We need to adjust the history option to be false if there's no AJAX nav.
+			// We can't do it in the option declarations because those are run before
+			// it is determined whether there shall be AJAX nav.
+			this.options.history = this.options.history && $.mobile.ajaxEnabled; 
 
 			if ( thisPage.length === 0 ) {
 				thisPage = $( "body" );
