@@ -423,6 +423,13 @@ ul { margin:0; padding-left:0; }
 ul li { list-style:none; padding:.7em 0; margin:0; border-top:1px solid #e3e3e3; }
 ul li:last-child { border-bottom:1px solid #e3e3e3; } 
 
+dl dd ul { padding-left: 40px; }
+dl dd ul li { list-style: disc; }
+dl dd ul li li { list-style: circle; }
+dl dd ul li li li { list-style: square; }
+dl dd ul li,
+dl dd ul li:last-child { border: none; }
+
 .ui-mobile-viewport .localnav li,
 .ui-mobile-viewport .localnav li:last-child {
 	border: none;	
