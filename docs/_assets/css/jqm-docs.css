@@ -146,7 +146,7 @@ dd h4 { margin:15px 0 0 0; }
 .localnav {
 	margin:0 0 20px 0;
 }
-.localnav li {
+.ui-mobile-viewport .localnav li {
 	float:left;
 }
 .localnav .ui-btn-inner { 
