@@ -21,6 +21,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		countTheme: "c",
 		headerTheme: "b",
 		dividerTheme: "b",
+		indicatorIcon: "arrow-r",
 		splitIcon: "arrow-r",
 		splitTheme: "b",
 		inset: false,
@@ -211,7 +212,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 						shadow: false,
 						corners: false,
 						iconpos: "right",
-						icon: a.length > 1 || icon === false ? false : icon || "arrow-r",
+						icon: a.length > 1 || icon === false ? false : icon || o.indicatorIcon,
 						theme: itemTheme
 					});
 
