@@ -5,6 +5,7 @@ cobblers, shoes,
 */
 
 body { background: #f9f9f9; padding:13px; }
+body.ui-mobile-viewport { padding: 0; }
 body, input, textarea, select, button { font-family: Helvetica, Arial, san-serif; }
 .ui-mobile .type-home .ui-content { margin: 0; background: #e5e5e5 url(../images/jqm-sitebg.png) top center repeat-x; }
 .ui-mobile #jqm-homeheader { padding: 40px 10px 0; text-align: center;  margin: 0 auto; }
