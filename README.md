@@ -8,7 +8,7 @@ jQuery Mobile 1.2 RC1 (1.2.0-rc.1) works with versions of jQuery core from 1.6.4
 
 ## Issues & Pull Requests
 
-Please read the [Contributing Guidelines](jquery-mobile/CONTRIBUTING.md) before submitting issues or pull requests.
+Please read the [Contributing Guidelines](https://github.com/jquery/jquery-mobile/blob/master/CONTRIBUTING.md) before submitting issues or pull requests.
 
 
 ## Build/Customization
