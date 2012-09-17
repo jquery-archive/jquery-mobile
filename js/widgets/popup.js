@@ -574,7 +574,7 @@ define( [ "jquery",
 				/* TODO:
 				The native browser on Android 4.0.X ("Ice Cream Sandwich") suffers from an issue where the popup overlay appears to be z-indexed
 				above the popup itself when certain other styles exist on the same page -- namely, any element set to `position: fixed` and certain
-				types of input. These issues are reminiscent of previously uncovered bugs in older versions of Android’s native browser:
+				types of input. These issues are reminiscent of previously uncovered bugs in older versions of Android's native browser:
 				https://github.com/scottjehl/Device-Bugs/issues/3
 
 				This fix closes the following bugs ( I use "closes" with reluctance, and stress that this issue should be revisited as soon as possible ):
@@ -690,7 +690,7 @@ define( [ "jquery",
 		// TODO no clear deliniation of what should be here and
 		// what should be in _open. Seems to be "visual" vs "history" for now
 		open: function( options ) {
-			var self = this, opts = this.options, url, hashkey, activePage;
+			var self = this, opts = this.options, url, hashkey, activePage, currentIsDialog, hasHash, urlHistory;
 
 			// make sure open is idempotent
 			if( $.mobile.popup.active ) {
@@ -702,7 +702,7 @@ define( [ "jquery",
 
 			// if history alteration is disabled close on navigate events
 			// and leave the url as is
-			if( !opts.history ) {
+			if( !( opts.history && $.mobile.hashListeningEnabled ) ) {
 				self._open( options );
 				self._bindContainerClose();
 
@@ -725,29 +725,41 @@ define( [ "jquery",
 			// cache some values for min/readability
 			hashkey = $.mobile.dialogHashKey;
 			activePage = $.mobile.activePage;
+			currentIsDialog = activePage.is( ".ui-dialog" );
+			url = $.mobile.urlHistory.getActive().url;
+			hasHash = ( url.indexOf( hashkey ) > -1 ) && !currentIsDialog;
+			urlHistory = $.mobile.urlHistory;
 
-			// NOTE I'm not 100% that this is the right place to get the default url
-			url = activePage.jqmData( "url" );
+			if ( hasHash ) {
+				self._open( options );
+				self._bindContainerClose();
+				return;
+			}
 
 			// if the current url has no dialog hash key proceed as normal
 			// otherwise, if the page is a dialog simply tack on the hash key
-			if ( url.indexOf( hashkey ) === -1 && !activePage.is( ".ui-dialog" ) ){
+			if ( url.indexOf( hashkey ) === -1 && !currentIsDialog ){
 				url = url + hashkey;
 			} else {
 				url = $.mobile.path.parseLocation().hash + hashkey;
 			}
 
+			// Tack on an extra hashkey if this is the first page and we've just reconstructed the initial hash
+			if ( urlHistory.activeIndex === 0 && url === urlHistory.initialDst ) {
+				url += hashkey;
+			}
+
 			// swallow the the initial navigation event, and bind for the next
 			opts.container.one( opts.navigateEvents, function( e ) {
 				e.preventDefault();
-				self._bindContainerClose();
-
-				// forward the options on to the visual open
 				self._open( options );
+				self._bindContainerClose();
 			});
 
+			urlHistory.ignoreNextHashChange = currentIsDialog;
+
 			// Gotta love methods with 1mm args :(
-			$.mobile.urlHistory.addNew( url, undefined, undefined, undefined, "dialog" );
+			urlHistory.addNew( url, undefined, undefined, undefined, "dialog" );
 
 			// set the new url with (or without) the new dialog hash key
 			$.mobile.path.set( url );
