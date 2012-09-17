@@ -8,21 +8,7 @@ jQuery Mobile 1.2 RC1 (1.2.0-rc.1) works with versions of jQuery core from 1.6.4
 
 ## Issues & Pull Requests
 
-Please read the [Contributing Guidelines](CONTRIBUTING.md) before submitting issues or pull requests.
-
-
-### Commit messages
-
-Commit messages should include four components:
-* The WHERE - a single word that categorizes and provides context for the commit and its message, followed by a colon (:). This is typically the name of the plugin being worked on, but sometimes might be something like Build: or Docs:
-* The WHAT - a sufficient summary of the fix or change made (example: modified the foo to no longer bar), followed by a period (.)
-* The WHY #Num - the ticket number with a #sign so Trac creates a hyperlink (example: #1234), followed by a hyphen/dash (-)
-* The WHY Name - the name of the ticket. Notice this is different than summary of the fix. This is a short description of the issue (example: dialog: IE6 crashed when foo is set to bar)
-
-Combined into one, here's a full example:
-
-        "Dialog: modified the foo to no longer bar. Fixed #1234 - dialog: IE6 crashed when foo is set to bar"
-        \WHERE/:\------------- WHAT -------------/.\  WHY #Num /-\---------------- WHY Name ----------------/
+Please read the [Contributing Guidelines](jquery-mobile/CONTRIBUTING.md) before submitting issues or pull requests.
 
 
 ## Build/Customization
