@@ -114,6 +114,17 @@
 				<p>This option is also exposed as a data attribute: <code>data-header-theme=&quot;a&quot;</code>.</p>
 			</dd>
 
+			<dt><code>icon</code> <em>string</em></dt>
+			<dd>
+				<p class="default">default: "arrow-r"</p>
+				<p>Applies an icon from the <a href="../buttons/buttons-icons.html">icon set</a> to all <a href="lists-ul.html">linked list buttons</a>. To set the value for all instances of this widget, bind this option to the <a href="../api/globalconfig.html">mobileinit event</a>:</p>
+<pre><code>$( document ).bind( "mobileinit", function(){
+    <strong>$.mobile.listview.prototype.options.icon = "star";</strong>
+});
+</code></pre>
+				<p>This option is also exposed as a data attribute: <code>data-icon=&quot;star&quot;</code>.</p>
+			</dd>
+
 			<dt><code>initSelector</code> <em>CSS selector string</em></dt>
 			<dd>
 				<p class="default">default: ":jqmData(role='listview')"</p>
@@ -133,17 +144,6 @@
 });
 </code></pre>
 				<p>This option is also exposed as a data attribute: <code>data-inset=&quot;true&quot;</code>.</p>
-			</dd>
-
-			<dt><code>icon</code> <em>string</em></dt>
-			<dd>
-				<p class="default">default: "arrow-r"</p>
-				<p>Applies an icon from the <a href="../buttons/buttons-icons.html">icon set</a> to all <a href="lists-ul.html">linked list buttons</a>. To set the value for all instances of this widget, bind this option to the <a href="../api/globalconfig.html">mobileinit event</a>:</p>
-<pre><code>$( document ).bind( "mobileinit", function(){
-    <strong>$.mobile.listview.prototype.options.icon = "star";</strong>
-});
-</code></pre>
-				<p>This option is also exposed as a data attribute: <code>data-icon=&quot;star&quot;</code>.</p>
 			</dd>
 
 			<dt><code>splitIcon</code> <em>string</em></dt>
