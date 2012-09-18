@@ -262,6 +262,8 @@ $( "#myPopupDiv" ).popup( "close" )
 			<li>The top coordinate of the popup will never be negative. This ensures that the top of the popup will not be cut off.</li>
 			<li>If centering the popup over an element would cause the overall height of the document to increase, the popup is shifted upwards at most until its top coordinate becomes 0.</li>
 		</ol>
+        
+        <p>Also note that a popup is currently always placed at the center of the window after an orientation change or window resize event.</p>
 
 		<p>See <a href="methods.html">methods</a> for information about setting the popup position programmatically, including the option to specify <strong>x and y coordinates</strong>.
 
