@@ -50,8 +50,8 @@ dt code, dd code { font-size:1.3em; line-height:150%; }
 pre { white-space: pre; white-space: pre-wrap; word-wrap: break-word; }
 strong { font-weight: bold; }
 
-#jqm-homeheader img { width: 235px; }
-img { max-width: 100%; }
+#jqm-homeheader img { width: 275px; }
+img { max-width: 100%; margin-top:-20px; }
 
 /* fluid images moved from jquery.mobile.core.css*/
 .ui-mobile img {
