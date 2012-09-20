@@ -153,7 +153,7 @@ define( [ "jquery",
 			// We need to adjust the history option to be false if there's no AJAX nav.
 			// We can't do it in the option declarations because those are run before
 			// it is determined whether there shall be AJAX nav.
-			this.options.history = this.options.history && $.mobile.ajaxEnabled; 
+			this.options.history = this.options.history && $.mobile.ajaxEnabled && $.mobile.hashListeningEnabled;
 
 			if ( thisPage.length === 0 ) {
 				thisPage = $( "body" );
@@ -702,7 +702,7 @@ define( [ "jquery",
 
 			// if history alteration is disabled close on navigate events
 			// and leave the url as is
-			if( !( opts.history && $.mobile.hashListeningEnabled ) ) {
+			if( !( opts.history ) ) {
 				self._open( options );
 				self._bindContainerClose();
 
