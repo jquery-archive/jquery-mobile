@@ -76,7 +76,7 @@
 				ok( $.mobile.zoom.enabled === false, "zoom is disabled on vmousedown" );
 			})
 			.one("mouseup.test", function(){
-				setTimeout(function() {
+				setTimeout(function() { // This empty setTimeout is to match the work-around for the issue reported in https://github.com/jquery/jquery-mobile/issues/5041
 					ok( $.mobile.zoom.enabled === true, "zoom is enabled on mouseup" );
 					$.mobile.selectmenu.prototype.options.preventFocusZoom = zoomoptiondefault;
 					$(document).unbind(".test");
