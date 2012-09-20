@@ -76,11 +76,13 @@
 				ok( $.mobile.zoom.enabled === false, "zoom is disabled on vmousedown" );
 			})
 			.one("mouseup.test", function(){
-				ok( $.mobile.zoom.enabled === true, "zoom is enabled on mouseup" );
-				$.mobile.selectmenu.prototype.options.preventFocusZoom = zoomoptiondefault;
-				$(document).unbind(".test");
-				$( "#select-choice-native" ).selectmenu( "option", "preventFocusZoom", zoomoptiondefault )
-				start();
+				setTimeout(function() {
+					ok( $.mobile.zoom.enabled === true, "zoom is enabled on mouseup" );
+					$.mobile.selectmenu.prototype.options.preventFocusZoom = zoomoptiondefault;
+					$(document).unbind(".test");
+					$( "#select-choice-native" ).selectmenu( "option", "preventFocusZoom", zoomoptiondefault );
+					start();
+				}, 0);
 		});
 
 		$( "#select-choice-native" )
