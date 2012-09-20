@@ -33,6 +33,10 @@
 	outline: 0;
 }
 
+.ui-popup {
+	position: relative;
+}
+
 .ui-popup.ui-content,
 .ui-popup .ui-content {
 	overflow: visible;
