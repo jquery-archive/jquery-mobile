@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="../../../js/jquery.js"></script>
+	<script src="../../../js/"></script>
+	<script>
+(function($) {
+	var l = $.mobile.path.parseLocation();
+
+	// Redirect to basic-test.html in the same directory as this file
+	location.href = l.protocol + "//" + l.host + l.directory + "basic-tests.html" + l.search + "#&ui-state=dialog";
+})( jQuery );
+	</script>
+</head>
+</html>

@@ -86,7 +86,8 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 			if ( ! ( $.mobile.hashListeningEnabled &&
 				$.mobile.path.isHashValid( location.hash ) &&
 				( $( hashPage ).is( ':jqmData(role="page")' ) ||
-					$.mobile.path.isPath( hash ) ) ) ) {
+					$.mobile.path.isPath( hash ) ||
+					hash === $.mobile.dialogHashKey ) ) ) {
 
 				// Store the initial destination
 				if ( $.mobile.path.isHashValid( location.hash ) ) {
