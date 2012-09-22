@@ -195,7 +195,9 @@ define( [ "jquery",
 						handler: {
 							orientationchange: $.proxy( this, "_handleWindowOrientationchange" ),
 							resize: $.proxy( this, "_handleWindowResize" ),
-							keyup: $.proxy( this, "_handleWindowKeyUp" )
+							keyup: $.proxy( this, "_handleWindowKeyUp" ),
+							expand: $.proxy( this, "_handleWindowResize" ),
+							collapse: $.proxy( this, "_handleWindowResize" )
 						}
 					}
 				]
