@@ -49,12 +49,15 @@ body, input, textarea, select, button { font-family: Helvetica, Arial, san-serif
 	clear:both;
 	color:#666;
 }
-.footer-docs p, .footer-docs b {
+.footer-docs p {
 	font-weight: normal;
 	font-size: .9em;
 }
 .ui-mobile-viewport .footer-docs p {
 	margin: .5em 15px;	
+}
+.ui-mobile-viewport .footer-docs p.jqm-version {
+	font-weight: bold;
 }
 @media all and (min-width:450px) {
 	.ui-mobile-viewport .footer-docs {
@@ -66,7 +69,8 @@ body, input, textarea, select, button { font-family: Helvetica, Arial, san-serif
 	}
 	.ui-mobile-viewport .footer-docs p.jqm-version {
 		float: right;
-	}	
+		font-weight: normal;
+	}
 }
 
 h2 { margin:1.2em 0 .4em 0; }
