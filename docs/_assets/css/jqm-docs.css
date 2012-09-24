@@ -59,7 +59,7 @@ body, input, textarea, select, button { font-family: Helvetica, Arial, san-serif
 .ui-mobile-viewport .footer-docs p.jqm-version {
 	font-weight: bold;
 }
-@media all and (min-width:450px) {
+@media all and (min-width:650px) {
 	.ui-mobile-viewport .footer-docs {
 		overflow: hidden;		
 	}
