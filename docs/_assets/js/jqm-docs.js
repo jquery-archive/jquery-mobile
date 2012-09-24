@@ -23,7 +23,7 @@ $(document).bind( 'pageinit', function() {
 		html += " <b>" + str + "</b>";
 	}
 
-	$( "p.jqm-version" ).html( html );
+	$( "p.jqm-version" ).html( "1.2.0 <b>Final</b>" );
 });
 
 // Turn off AJAX for local file browsing
