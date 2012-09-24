@@ -174,7 +174,7 @@ $( "#myPopupDiv" ).popup( "open" )
 </code></pre>
 
 		<h2>Closing popups</h2>
-		<p>Popups can be closed either by clicking outside the popup widget or by pressing the <code>Esc</code> key. Popups can also be closed via the <code>close</code> method:
+		<p>Popups can be closed either by clicking outside the popup widget or by pressing the <code>Esc</code> key. Popups can also be closed via the <code>close</code> method:</p>
 			
 <pre><code>
 $( "#myPopupDiv" ).popup( "close" )
@@ -227,7 +227,7 @@ $( "#myPopupDiv" ).popup( "close" )
 		<h2>Positioning options</h2>
 		<p>By default, popups open centered vertically and horizontally over the thing you clicked (the origin) which is good for popups used as tooltips or menus. The framework also applies some basic collision detection rules to ensure that the popup will appear on-screen so the ultimate position may not always be centered over the origin.</p>
 		<p>For situations like a dialog or lightbox where the popup should appear centered within the window instead of over the origin, add the <code>data-position-to</code> attribute to the <strong>link</strong> and specify a value of <code>window</code>. </p>	
-		<p>It's also possible to specify any valid selector as the value of <code>position-to</code> in addition to <code>origin</code> and <code>window</code>. For example, if you add <code>data-position-to="#myElement"</code> the popup will be positioned over the element with the id <code>myElement</code>.	
+		<p>It's also possible to specify any valid selector as the value of <code>position-to</code> in addition to <code>origin</code> and <code>window</code>. For example, if you add <code>data-position-to="#myElement"</code> the popup will be positioned over the element with the id <code>myElement</code>.</p>	
 <pre id="codeSample"><code>
 &lt;a href=&quot;#positionWindow&quot; data-rel=&quot;popup&quot; <strong>data-position-to=&quot;window&quot;</strong>&gt;
 
