@@ -13,32 +13,35 @@ body, input, textarea, select, button { font-family: Helvetica, Arial, san-serif
 .ui-mobile #jqm-homeheader p { margin: .3em 0 0; line-height: 1.3; font-size: .9em; font-weight: bold; color: #666; }
 
 .ui-mobile-viewport .jqm-version {
-	background: #f7cf57;
-	border: solid #fff;
-	border-width: 2px 0;
-	color: #000;
 	display: block;
-	font-weight: bold;
 	position: absolute;
+	width: 96px;
+	border: solid #fff;
+	border-width: 2px 1px;
 	padding: .25em 3em;
-	right: -2.9em;
+	margin: 0 15px 0 0;
+	right: 0;
+	top: -2px;
+	background: #f7cf57;
+	color: #000;
+	font-size: .8em;
+	font-weight: bold;
 	text-align: center;
 	text-shadow: 0 1px 1px #fff;
-	top: 1.5em;
-	width: 96px;
 	z-index: 9;
-	font-size:.8em;
-	-webkit-transform: rotate(45deg);
-	-moz-transform: rotate(45deg);
-	-o-transform: rotate(45deg);
+	-webkit-transform: rotate(45deg) translate(4.8em,-1em);
+	-moz-transform: rotate(45deg) translate(4.8em,-1em);
+	-ms-transform: rotate(45deg) translate(4.8em,-1em);
+	-o-transform: rotate(45deg) translate(4.8em,-1em);
 	transform: rotate(45deg);
 	-webkit-box-shadow: 0 0 6px rgba(0,0,0,.40);
 	-moz-box-shadow: 0 0 6px rgba(0,0,0,.40);
 	-o-box-shadow: 0 0 6px rgba(0,0,0,.40);
 	box-shadow: 0 0 6px rgba(0,0,0,.40);
 }
-.jqm-version b {
+.ui-mobile-viewport .jqm-version b {
 	color: #a21412;
+	font-weight: bold;
 }
 
 h2 { margin:1.2em 0 .4em 0; }
