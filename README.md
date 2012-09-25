@@ -6,9 +6,10 @@ This is the main repository for the jQuery Mobile project. From the [official we
 
 jQuery Mobile 1.2 RC2 (1.2.0-rc.2) works with versions of jQuery core from 1.6.4 to 1.8.1. You can find more information about how the library works, and what it is capable of, by reading the [documentation](http://jquerymobile.com/demos/).
 
-## Issues & Pull Requests
+## Contributing
 
-Please read the [Contributing Guidelines](https://github.com/jquery/jquery-mobile/blob/master/CONTRIBUTING.md) before submitting issues or pull requests.
+You can contribute to the project by reporting issues, suggesting new features or submitting pull requests.
+Please read our [Contributing Guidelines](https://github.com/jquery/jquery-mobile/blob/master/CONTRIBUTING.md) before submitting.
 
 
 ## Build/Customization
