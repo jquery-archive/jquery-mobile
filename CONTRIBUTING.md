@@ -1,8 +1,9 @@
 ## Issues
 
-If you encounter a bug in the framework you can report it on the issue tracker here on Github. Questions about how to use the framework or problems with your custom code can be posted on the [forum](https://forum.jquery.com/jquery-mobile). The jQuery Mobile [ThemeRoller](https://github.com/jquery/web-jquery-mobile-theme-roller) and [Download Builder](https://github.com/jquery/jquery-mobile-builder) have their own repo where you can report issues.
+If you encounter a bug in the framework you can report it on the issue tracker here on Github. Questions about how to use the framework or problems with your custom code can be posted on the [forum](https://forum.jquery.com/jquery-mobile).
+The jQuery Mobile [ThemeRoller](https://github.com/jquery/web-jquery-mobile-theme-roller) and [Download Builder](https://github.com/jquery/jquery-mobile-builder) have their own repo where you can report issues.
 
-Before opening a new issue please check if the same or a similar issue already has been reported (Tip: Besides the search tool of the issue tracker you can filter issues by label).
+Before opening a new issue please check if the same or a similar issue already has been reported. Tip: Besides the search tool of the issue tracker you can filter issues by label.
 
 When submitting an issue include the following:
 
@@ -23,13 +24,13 @@ It is IMPORTANT that you always provide a test page when submitting an issue!
 
 * Why? - This ensures that we are looking at exactly the same thing when testing on our devices and that we know about all markup and code that is in play.
 
-* How? - Use our [JS Bin template](http://jsbin.com/owipah/edit) which uses latest code on branch "master" and copy the updated url when you are done editing.
+* What? - Keep the test page as simple as possible. Only include markup/code that is required to reproduce the issue.
+
+* How? - Use our [JS Bin template](http://jsbin.com/owipah/edit) which uses latest code on branch "master". Copy the updated url when you are done editing.
   * You will notice if the issue has been fixed already
   * It enables us to edit your code if necessary
   * The test page won't disapppear or change while we are looking into the issue
   * We can test again after committing a fix for the issue
-
-* What? - Keep the test page as simple as possible. Only include markup/code that is required to reproduce the issue.
 
 ## Feature Requests
 
@@ -67,5 +68,7 @@ Combined into one, here's a full example:
         "Dialog: modified the foo to no longer bar. Fixed #1234 - dialog: IE6 crashed when foo is set to bar"
         \WHERE/:\------------- WHAT -------------/.\  WHY #Num /-\---------------- WHY Name ----------------/
 
+
+------------------------------------------------------------
 
 *Thank you for contributing to the jQuery Mobile project!*
