@@ -26,7 +26,7 @@ It is IMPORTANT that you always provide a test page when submitting an issue!
 
 * What? - Keep the test page as simple as possible. Only include markup/code that is required to reproduce the issue.
 
-* How? - Use our [JS Bin template](http://jsbin.com/owipah/edit) which uses latest code on branch "master". Copy the updated url when you are done editing.
+* How? - Use our [JS Bin template](http://jsbin.com/uzaret/edit) which uses latest code on branch "master". Copy the updated url when you are done editing.
   * You will notice if the issue has been fixed already
   * It enables us to edit your code if necessary
   * The test page won't disapppear or change while we are looking into the issue
