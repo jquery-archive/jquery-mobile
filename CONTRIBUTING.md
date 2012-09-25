@@ -5,7 +5,7 @@ The jQuery Mobile [ThemeRoller](https://github.com/jquery/web-jquery-mobile-them
 
 Before opening a new issue please check if the same or a similar issue already has been reported. Tip: Besides the search tool of the issue tracker you can filter issues by label.
 
-When submitting an issue include the following:
+When [submitting an issue](https://github.com/jquery/jquery-mobile/issues/new) include the following:
 
 1. Issue description
 2. Test page (see below)
@@ -36,7 +36,7 @@ It is IMPORTANT that you always provide a test page when submitting an issue!
 
 If you have an idea for a new feature or a suggestion how to improve an existing feature, let us know!
 
-1. Open a new issue here on Github to describe your request
+1. Open a [new issue](https://github.com/jquery/jquery-mobile/issues/new) to describe your request
 2. Add a link to the issue on the Feature Requests [wiki page](https://github.com/jquery/jquery-mobile/wiki/Feature-Requests)
 
 Please note that we will flag the issue as feature request and then close it. We check requests on regular base and when we decide to implement a feature we set a milestone and re-open the ticket.
