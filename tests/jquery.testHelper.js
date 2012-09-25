@@ -7,9 +7,9 @@
 		// This function takes sets of files to load asynchronously. Each set will be loaded after
 		// the previous set has completed loading. That is, each require and it's dependencies in a
 		// set will be loaded asynchronously, but each set will be run in serial.
-		asyncLoad: function( seq ) {
+		asyncLoad: function( seq, baseUrl ) {
 			require({
-				baseUrl: "../../../js"
+				baseUrl: ( baseUrl || "../../../js" )
 			});
 
 			function loadSeq( seq, i ){
