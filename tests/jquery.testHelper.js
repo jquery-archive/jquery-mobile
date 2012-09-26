@@ -211,6 +211,106 @@
 			fn( timedOut );
 		},
 
+// detailedEventCascade: call a function and expect a series of events to be triggered (or not to be triggered), and guard
+// with a timeout against getting stood up. Record the result (timed out / was triggered) for each event, and the order
+// in which the event arrived wrt. any other events expected.
+//		seq : [
+//			fn(result),
+//			{ key: {
+//					src: event source (is jQuery object),
+//					event: event name (is string),
+//					       NB: It's a good idea to namespace your events, because the handler will be removed
+//					       based on the name you give here if a timeout occurs before the event fires.
+//					userData1: value,
+//					...
+//					userDatan: value
+//			  },
+//				...
+//			]
+//			...
+//		]
+//		result: {
+//			key: {
+//				idx: order in which the event fired
+//				src: event source (is jQuery object),
+//				event: event name (is string)
+//				timedOut: timed out (is boolean)
+//				userData1: value,
+//				...
+//				userDatan: value
+//			}
+//			...
+//		}
+		detailedEventCascade: function( seq, result ) {
+			// grab one step from the sequence
+			var fn = seq.shift(),
+			    events = seq.shift(),
+			    self = this,
+			    derefSrc = function( src ) {
+						return ( $.isFunction( src ) ? src() : src );
+					};
+
+			// we're done
+			if ( fn === undefined ) {
+				return;
+			}
+
+			// Attach handlers to the various objects which are to be checked for correct event generation
+			if ( events ) {
+				var newResult = {},
+					nEventsDone = 0,
+					nEvents = 0,
+					// set a failsafe timer in case one of the events never happens
+					warnTimer = setTimeout( function() {
+						$.each( events, function( key, event ) {
+							if ( newResult[ key ] === undefined ) {
+								// clean up the unused handler
+								derefSrc( event.src ).unbind( event.event );
+								newResult[ key ] = $.extend( {}, event, { timedOut: true } );
+							}
+						});
+
+						// Move on to the next step
+						self.detailedEventCascade( seq, newResult );
+					}, 2000);
+
+				function recordResult( key, event, result ) {
+					// Record the result
+					newResult[ key ] = $.extend( {}, event, result );
+					// Increment the number of received responses
+					nEventsDone++;
+					if ( nEventsDone === nEvents ) {
+						// clear the timeout and move on to the next step when all events have been received
+						clearTimeout( warnTimer );
+						setTimeout( function() {
+							self.detailedEventCascade( seq, newResult );
+						}, 0);
+					}
+				}
+
+				$.each( events, function( key, event ) {
+					// Count the events so that we may know how many responses to expect
+					nEvents++;
+					// If it's an event
+					if ( event.src ) {
+						// Hook up to the event
+						derefSrc( event.src ).one( event.event, function() {
+							recordResult( key, event, { timedOut: false, idx: nEventsDone } );
+						});
+					}
+					// If it's a timeout
+					else {
+						setTimeout( function() {
+							recordResult( key, event, { timedOut: true, idx: -1 } );
+						}, event.length );
+					}
+				});
+			}
+
+			// Call the function with the result of the events
+			fn( result );
+		},
+
 		deferredSequence: function(fns) {
 			var fn = fns.shift(),
 				deferred = $.Deferred(),
