@@ -43,15 +43,14 @@
 <ol id="qunit-tests">
 </ol>
 
-<div id="basicTestPage" data-nstest-role="page" data-nstest-theme="a">
-	<a id="openBasicDialog" href="#basicDialog" data-nstest-rel="dialog">Dialog</a>
-</div>
+<div data-nstest-role="page" id="sequenceRedirect"></div>
 
-<div id="basicDialog" data-nstest-role="dialog">
-	<div data-nstest-role="header">
-		<h1>Dialog</h1>
-	</div>
-</div>
+<!--
+This test page is used when testing initial URLs of the form
+http://domain/path/to/page1.html#/path/to/page2.html. It really only works if
+you load sequence-tests.html via the hash, i.e.,
+http://domain/path/to/sequence-tests.html#/path/to/sequence-redirect.html
+-->
 
 </body>
 </html>
