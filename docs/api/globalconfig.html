@@ -100,6 +100,9 @@ $(document).bind("mobileinit", function(){
 	<dt><code>defaultPageTransition</code> <em>string</em>, default: 'fade'</dt>
 	<dd>Set the default transition for page changes that use Ajax. Note: default changed from 'slide' to 'fade' in 1.1. Set to 'none' for no transitions.</dd>
 
+	<dt><code>getMaxScrollForTransition</code> <em>integer</em>, default: 3</dt>
+	<dd>Set a scroll position breakpoint for transitions. If the scroll position is greater than the window height multiplied by the value that has been set, transition "none" will be used.</dd>
+    
 	<dt><code>gradeA</code> <em>function that returns a boolean</em>, default: a function returning the value of $.support.mediaquery</dt>
 	<dd>Any support conditions that must be met in order to proceed.</dd>
 
@@ -121,7 +124,7 @@ $(document).bind("mobileinit", function(){
 	<dt><code>loadingMessageTheme</code> <em>string</em>, default: "a"</dt>
 	<dd>The theme that the loading message box uses when text is visible.</dd>
 
-	<dt><code>maxTransitionWidth</code> <em>string, boolean</em>, default: false</dt>
+	<dt><code>maxTransitionWidth</code> <em>integer, boolean</em>, default: false</dt>
 	<dd>Set a max width for transitions. The option accepts any number representing a pixel width and its default value <code>false</code>. If a number value is set, transition "none" will be used if the window is wider than the specified value.</dd>
     
 	<dt><code>minScrollBack</code> <em>integer</em>, default: 250</dt>
