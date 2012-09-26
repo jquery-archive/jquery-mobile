@@ -1,5 +1,7 @@
 (function($) {
 
+	$.testHelper.setPushState();
+
 	asyncTest( "Returning from a dialog results in the page from which it opened", function() {
 		expect( 2 );
 
