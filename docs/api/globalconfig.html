@@ -128,8 +128,11 @@ $(document).bind("mobileinit", function(){
 	<dd>
     The theme that the loading message box uses when text is visible.
     <p class="ui-body ui-body-e"><strong>Deprecated</strong> in 1.2 - use <code>$.mobile.loader.prototype.options.theme</code> instead. See the <a href="../../docs/pages/loader.html">loader docs</a> for more.</p>
-  </dd>
+	</dd>
 
+	<dt><code>maxTransitionWidth</code> <em>string, boolean</em>, default: false</dt>
+	<dd>Set a max width for transitions. The option accepts any number representing a pixel width and its default value <code>false</code>. If a number value is set, transition "none" will be used if the window is wider than the specified value.</dd>
+    
 	<dt><code>minScrollBack</code> <em>integer</em>, default: 250</dt>
 	<dd>Minimum scroll distance that will be remembered when returning to a page.</dd>
 
@@ -162,6 +165,9 @@ $(document).bind("mobileinit", function(){
 	Enable smoother page transitions and true fixed toolbars in devices that support both the <code>overflow:</code> and <code>overflow-scrolling: touch; </code> CSS properties.
 	<p class="ui-body ui-body-e"><strong>Deprecated</strong> in 1.1.0</p>
 	</dd>
+    
+	<dt><code>transitionFallbacks.[transition]</code> <em>string</em>, default: "fade"</dt>
+	<dd>Set the fallback transition for browsers that don't support 3D transforms for a specific transition type.</dd>
 
 </dl>
 	</div><!--/content-secondary -->
