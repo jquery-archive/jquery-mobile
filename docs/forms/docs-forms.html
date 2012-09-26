@@ -81,7 +81,27 @@
 
 	<p>While the label will no longer be visible, it will be available to assisitive technologies such as screen readers.</p>
 
+	<p>Because radio and checkbox buttons use the <code>label</code> to display the button text you can't use <code>ui-hidden-accessible</code> in this case. However, the class <code>ui-hide-label</code> can be used to hide the legend element:</p>
+    
+<pre><code>	
+&lt;div data-role=&quot;fieldcontain&quot; class=&quot;ui-hide-label&quot;&gt;
+    <strong>&lt;fieldset data-role=&quot;controlgroup&quot;&gt;
+	   &lt;legend&gt;Agree to the terms:&lt;/legend&gt;</strong>
+	   &lt;input type=&quot;checkbox&quot; name=&quot;checkbox-2a&quot; id=&quot;checkbox-2a&quot; class=&quot;custom&quot; /&gt;
+	   &lt;label for=&quot;checkbox-2a&quot;&gt;I agree&lt;/label&gt;
+    <strong>&lt;/fieldset&gt;</strong>
+&lt;/div&gt;
+</code></pre>
 
+	<div data-role="fieldcontain" class="ui-hide-label">
+	 	<fieldset data-role="controlgroup">
+			<legend>Agree to the terms:</legend>
+			<input type="checkbox" name="checkbox-2a" id="checkbox-2a" class="custom" />
+			<label for="checkbox-2a">I agree</label>
+	    </fieldset>
+	</div>
+
+    
 	<h2>Disabling form elements</h2>
 	<p>All jQuery Mobile widgets can be disabled in the markup by adding the standard <code>disabled</code> attribute to the element, just like you would with native controls. Each form widget also has standard <code>disable</code> and <code>enable</code> methods that are documented with each form widget. Here are a few examples of disabled widgets: </p>
 
