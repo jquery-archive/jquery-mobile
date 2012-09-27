@@ -20,7 +20,8 @@
 			[
 				"widgets/dialog",
 				"widgets/page",
-				"widgets/page.sections"
+				"widgets/page.sections",
+				"widgets/popup"
 			],
 			[ "jquery.mobile.init" ],
 			[
@@ -37,14 +38,20 @@
 </head>
 <body>
 
-<h1 id="qunit-header">jQuery Mobile Dialog Test Suite</h1>
+<h1 id="qunit-header">jQuery Mobile Sequence Test Suite</h1>
 <h2 id="qunit-banner"></h2>
 <h2 id="qunit-userAgent"></h2>
 <ol id="qunit-tests">
 </ol>
 
 <div id="basicTestPage" data-nstest-role="page" data-nstest-theme="a">
-	<a id="openBasicDialog" href="basic-dialog.html" data-nstest-rel="dialog">Dialog</a>
+	<div data-nstest-role="content">
+		<div data-nstest-role="popup" id="thePopup">
+			<a href="basic-dialog.html" data-nstest-rel="dialog">Dialog</a>
+		</div>
+		<a id="openPopup" href="#thePopup" data-nstest-rel="popup">Pop</a>
+		<a id="openBasicDialog" href="basic-dialog.html" data-nstest-rel="dialog">Dialog</a>
+	</div>
 </div>
 
 </body>

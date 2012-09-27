@@ -33,4 +33,42 @@
 		]);
 	});
 
+	asyncTest( "Returning from a popup results in the page from which it opened", function() {
+		var origActive;
+
+		expect( 5 );
+
+		$.testHelper.detailedEventCascade([
+			function() {
+			},
+			{
+				navigate: { src: $( document ), event: "navigate.returningFromAPopupStep0" }
+			},
+			function() {
+				origActive = $.mobile.activePage;
+				$( "#openPopup" ).click();
+			},
+			{
+				popupafteropen: { src: $( "#thePopup" ), event: "popupafteropen.returnFromPopupStep1" },
+				navigate: { src: $.mobile.pageContainer, event: "navigate.returnFromPopupStep1" }
+			},
+			function( result ) {
+				ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );
+				ok( !result.navigate.timedOut, "A 'navigate' event has occurred as a result of opening the popup" );
+				$( "#thePopup" ).parent().prev().click();
+			},
+			{
+				popupafterclose: { src: $( "#thePopup" ), event: "popupafterclose.returnFromPopupStep2" },
+				navigate: { src: $.mobile.pageContainer, event: "navigate.returnFromPopupStep2" }
+			},
+			function( result ) {
+				ok( !result.popupafterclose.timedOut, "Popup emitted 'popupafterclose'" );
+				ok( !result.navigate.timedOut, "A 'navigate' event has occurred as a result of opening the popup" );
+				ok( $.mobile.activePage[ 0 ] === origActive[ 0 ], "The active page is the same as it was before opening the popup" );
+				start();
+			},
+		]);
+
+	});
+
 })( jQuery );
