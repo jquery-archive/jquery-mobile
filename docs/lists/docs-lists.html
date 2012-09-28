@@ -38,7 +38,7 @@
 			<p>Here is the HTML markup for a basic linked list.</p>
 
 <pre><code>
-&lt;ul data-role=&quot;listview&quot; data-theme=&quot;b&quot;&gt;
+&lt;ul data-role=&quot;listview&quot;&gt;
 	&lt;li&gt;&lt;a href=&quot;acura.html&quot;&gt;Acura&lt;/a&gt;&lt;/li&gt;
 	&lt;li&gt;&lt;a href=&quot;audi.html&quot;&gt;Audi&lt;/a&gt;&lt;/li&gt;
 	&lt;li&gt;&lt;a href=&quot;bmw.html&quot;&gt;BMW&lt;/a&gt;&lt;/li&gt;
@@ -50,7 +50,7 @@
 			<p><strong>Style note on non-inset lists</strong>: all standard, non-inset lists have a -15px margin to negate the 15px of padding on the content area to make lists extend to the edges of the screen. If you add other widgets above or below a list, the negative margin may make these elements overlap so you'll need to add additional spacing in your custom CSS.</p>
 			
 			<h2>Nested lists</h2>
-			<p>By nesting child <code>ul</code> or <code>ol</code> inside list items, you can create nested lists. When a list item with a child list is clicked, the framework will show a new page populated with the title of the parent in the header and the list of child elements. These dynamic nested lists are styled with the "b" theme swatch (blue in the default theme) to indicate that you are in a secondary level of navigation. Lists can be nested multiple levels deep and all pages and linking will be automatically handled by the framework. Note that the page of each nested listview is created when the parent page loads and for each nested page the page-events will trigger.</p>
+			<p>By nesting child <code>ul</code> or <code>ol</code> inside list items, you can create nested lists. When a list item with a child list is clicked, the framework will show a new page populated with the title of the parent in the header and the list of child elements. These dynamic nested lists are styled with the "b" theme swatch (blue in the default theme) to indicate that you are in a secondary level of navigation. Lists can be nested multiple levels deep and all pages and linking will be automatically handled by the framework. Note that the page of each nested listview is created when the parent page loads and for each nested page the page-events will trigger. Please also note that the title of subpages will contain the text of the first element in the parent list item including its elements. So make sure to use a single element for the list item caption and put other elements like count bubbles behind that caption as shown in the demo below.</p>
 			<p>To <a href="../lists/lists-themes.html">set the swatch color</a> of the child listviews, set the <code>data-theme</code> attribute on each list inside.</p>
 			<a href="lists-nested.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Nested list example</a>
 
@@ -65,7 +65,7 @@
 			<a href="lists-readonly-inset.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Read-only list example</a>
 
 			<h2>Split button lists</h2>
-			<p>In cases where there is more than one possible action per list item, a split button can be used to offer two independently clickable items -- the list item and a small arrow icon in the far right. To make a split list item, simply add a second link inside the <code>li</code> and the framework will add a vertical divider line, style the link as an icon-only arrow button, and set the <code>title</code> attribute of the link to the text of the link for accessibility.</p>
+			<p>In cases where there is more than one possible action per list item, a split button can be used to offer two independently clickable items &mdash; the list item and a small arrow icon in the far right. To make a split list item, simply add a second link inside the <code>li</code> and the framework will add a vertical divider line, style the link as an icon-only arrow button, and set the <code>title</code> attribute of the link to the text of the link for accessibility.</p>
 			<p>You can set the icon for the right split icon by specifying a <code>data-split-icon</code> attribute on the listview with an <a href="../buttons/buttons-icons.html">icon name</a> you want. The default icon is "arrow-r" but can be configured with the <code>splitIcon</code> <a href="../lists/lists-options.html">listview option</a>. By adding a <code>data-icon</code> attribute to the list item, you can set individual icons for each split. The theme swatch color of the split button defaults to "b" (blue in the default theme) but can be set by specifying a swatch letter with the <code>data-split-theme</code> attribute at the listview level or for individual splits with the <code>data-theme</code> attribute at the link level.</p>
 
 			<a href="lists-split.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Split list example</a>
@@ -178,12 +178,12 @@ $("#mylistview").listview({
 							<li><a href="lists-count.html">Count bubble</a></li>
 							<li><a href="lists-thumbnails.html">Thumbnails</a></li>
 							<li><a href="lists-icons.html">Icons</a></li>
-							<li><a href="lists-formatting.html">Content formatting</a></li>
+							<li><a href="lists-formatting.html">List formatting</a></li>
 							<li><a href="lists-inset.html">Inset styled lists</a></li>
 						
 							<li><a href="lists-search.html">Search filter bar</a></li>
 							<li><a href="lists-search-inset.html">Inset search filter bar</a></li>
-							<li><a href="lists-search-with-dividers.html">Search filter bar with dividers</a></li>
+							<li><a href="lists-search-with-dividers.html">Search filter with dividers</a></li>
 							<li><a href="lists-search-filtertext.html">Search filter hidden data</a></li>
 
 							<li><a href="lists-readonly.html">Read-only lists</a></li>
@@ -203,6 +203,7 @@ $("#mylistview").listview({
 		</div><!-- /content -->
 
 		<div data-role="footer" class="footer-docs" data-theme="c">
+				<p class="jqm-version"></p>
 				<p>&copy; 2012 jQuery Foundation and other contributors</p>
 		</div>
 

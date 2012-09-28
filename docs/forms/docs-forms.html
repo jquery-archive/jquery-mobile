@@ -54,7 +54,7 @@
 	 <input type="text" name="name" id="mini" value="" data-mini="true" />
 
 	<h2>Hiding labels accessibly</h2>
-	<p>For the sake of accessibility, jQuery Mobile requires that all form elements be paired with a meaningful <code>label</code>. To hide labels in a way that leaves them visible to assistive technologies—for example, when letting an element’s <code>placeholder</code> attribute serve as a label—apply the helper class <code>ui-hidden-accessible</code> to the label itself:</p>
+	<p>For the sake of accessibility, jQuery Mobile requires that all form elements be paired with a meaningful <code>label</code>. To hide labels in a way that leaves them visible to assistive technologies &mdash; for example, when letting an element's <code>placeholder</code> attribute serve as a label &mdash; apply the helper class <code>ui-hidden-accessible</code> to the label itself:</p>
 <code>
 <pre>
 &lt;label for="username" <strong>class="ui-hidden-accessible"</strong>&gt;Username:&lt;/label&gt;
@@ -81,7 +81,27 @@
 
 	<p>While the label will no longer be visible, it will be available to assisitive technologies such as screen readers.</p>
 
+	<p>Because radio and checkbox buttons use the <code>label</code> to display the button text you can't use <code>ui-hidden-accessible</code> in this case. However, the class <code>ui-hide-label</code> can be used to hide the legend element:</p>
+    
+<pre><code>	
+&lt;div data-role=&quot;fieldcontain&quot; class=&quot;ui-hide-label&quot;&gt;
+    <strong>&lt;fieldset data-role=&quot;controlgroup&quot;&gt;
+	   &lt;legend&gt;Agree to the terms:&lt;/legend&gt;</strong>
+	   &lt;input type=&quot;checkbox&quot; name=&quot;checkbox-agree&quot; id=&quot;checkbox-agree&quot; class=&quot;custom&quot; /&gt;
+	   &lt;label for=&quot;checkbox-agree&quot;&gt;I agree&lt;/label&gt;
+    <strong>&lt;/fieldset&gt;</strong>
+&lt;/div&gt;
+</code></pre>
 
+	<div data-role="fieldcontain" class="ui-hide-label">
+	 	<fieldset data-role="controlgroup">
+			<legend>Agree to the terms:</legend>
+			<input type="checkbox" name="checkbox-agree" id="checkbox-agree" class="custom" />
+			<label for="checkbox-agree">I agree</label>
+	    </fieldset>
+	</div>
+
+    
 	<h2>Disabling form elements</h2>
 	<p>All jQuery Mobile widgets can be disabled in the markup by adding the standard <code>disabled</code> attribute to the element, just like you would with native controls. Each form widget also has standard <code>disable</code> and <code>enable</code> methods that are documented with each form widget. Here are a few examples of disabled widgets: </p>
 
@@ -258,6 +278,7 @@ $(document).bind('mobileinit',function(){
 </div><!-- /content -->
 
 <div data-role="footer" class="footer-docs" data-theme="c">
+		<p class="jqm-version"></p>
 		<p>&copy; 2012 jQuery Foundation and other contributors</p>
 </div>
 

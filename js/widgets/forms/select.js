@@ -180,7 +180,9 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			}
 		}).bind( "mouseup", function() {
 			if ( self.options.preventFocusZoom ) {
-				$.mobile.zoom.enable( true );
+				setTimeout(function() {
+					$.mobile.zoom.enable( true );
+				}, 0);
 			}
 		});
 	},

@@ -4,11 +4,12 @@ This is the main repository for the jQuery Mobile project. From the [official we
 
 > A unified, HTML5-based user interface system for all popular mobile device platforms, built on the rock-solid jQuery and jQuery UI foundation. Its lightweight code is built with progressive enhancement, and has a flexible, easily themeable design.
 
-jQuery Mobile 1.2 RC1 (1.2.0-rc.1) works with versions of jQuery core from 1.6.4 to 1.8.1. You can find more information about how the library works, and what it is capable of, by reading the [documentation](http://jquerymobile.com/demos/).
+jQuery Mobile 1.2 (1.2.0) works with versions of jQuery core from 1.7.0 to 1.8.2. You can find more information about how the library works, and what it is capable of, by reading the [documentation](http://jquerymobile.com/demos/).
 
-## Issues & Pull Requests
+## Contributing
 
-Please read the [Contributing Guidelines](https://github.com/jquery/jquery-mobile/blob/master/CONTRIBUTING.md) before submitting issues or pull requests.
+You can contribute to the project by reporting issues, suggesting new features, or submitting pull requests.
+Please read our [Contributing Guidelines](https://github.com/jquery/jquery-mobile/blob/master/CONTRIBUTING.md) before submitting.
 
 
 ## Build/Customization
@@ -123,9 +124,9 @@ You can confine the headless run to a single test page or set of test pages usin
 
     TEST_PATH=slider JUNIT_OUTPUT=build/test-results/ ROOT_DOMAIN=$WEB_SERVER grunt test
 
-will only run the tests where the path contains the string `slider`, eg `tests/unit/slider/`. *NOTE* that the phantom tests currently require that the web server be running to access and run the tests properly because of the PHP dependency that many of them share. Additionally the test suite is run against many versions of jQuery using the `JQUERY` environment variable. For example if you wanted to run the test suite against both of the currently supported versions 1.6.4, and 1.7.1 the command would take the following form:
+will only run the tests where the path contains the string `slider`, eg `tests/unit/slider/`. *NOTE* that the phantom tests currently require that the web server be running to access and run the tests properly because of the PHP dependency that many of them share. Additionally the test suite is run against many versions of jQuery using the `JQUERY` environment variable. For example if you wanted to run the test suite against two of the currently supported versions, 1.7.2 and 1.8.2, the command would take the following form:
 
-    JQUERY=1.6.4,1.7.1 JUNIT_OUTPUT=build/test-results/ ROOT_DOMAIN=$WEB_SERVER grunt test
+    JQUERY=1.7.2,1.8.2 JUNIT_OUTPUT=build/test-results/ ROOT_DOMAIN=$WEB_SERVER grunt test
 
 ### Rebasing
 

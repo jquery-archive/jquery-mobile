@@ -3,7 +3,7 @@
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<title>jQuery Mobile Framework - Static Containers, States</title> 
+	<title>jQuery Mobile Framework - Themes</title> 
 	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" /> 
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 
@@ -44,7 +44,13 @@
 
 		<h2>Default theme swatch mapping for components</h2>
 
-		<p>If no theme swatch letter is set at all, the framework uses the "a" swatch for headers and footers and the "c" swatch for the page content to maximize contrast between the both. All items in containers inherit the swatch theme from their parent. One exception to this rule is the listdivider in listviews which always defaults to "b" (blue in the default theme). Note that there is also a swatch named "active" (bright blue in the default theme) which is used to indicate an active selected item. See the <strong>Global "Active" state</strong> further down this page for further information on the <strong>active</strong> swatch.</p>
+		<p>If no theme swatch letter is set at all, the framework uses the "a" swatch (black in the default theme) for headers and footers and the "c" swatch (light gray in the default theme) for the page content to maximize contrast between the both.</p>
+        
+        <p>All items in containers inherit the swatch from their parent. Exceptions to this rule are the listdivider in listviews, the header of nested list pages, and the button of split button lists. Those default to "b" (blue in the default theme). Count bubbles default to "c" (silver in the default theme).
+        
+        <p>Note that there is also a swatch named "active" (bright blue in the default theme) which is used to indicate an active selected item. See the <strong>Global "Active" state</strong> further down this page for further information on the <strong>active</strong> swatch.</p>
+        
+        <p>The page loading dialog and error message don't inherit a swatch theme. The loading dialog defaults to swatch "a" (black in the default theme) and the error message to swatch "e" (yellow in the default theme). You can configure those defaults globally. See <a href="globalconfig.html">configuring defaults</a>.
 
 		<h2>Themes &amp; swatches</h2>
 		
@@ -68,7 +74,7 @@
 			<div class="ui-bar ui-bar-e">Bar E - <a href="#" data-role="none" class="ui-link">Link</a></div>
 		</div><!-- end swatch-bars -->
 		
-		<p>By default, the framework assigns the "a" swatch to all headers and footers, because these are typically given high visual priority in an application. To set the color of a bar to a different swatch color, simply add the <code> data-theme</code> attribute to your header or footer and specify an alternate swatch letter ('b' or 'd', for example) and the specified theme swatch color will be applied. Learn more about <a href="../toolbars/bars-themes.html">toolbar theming</a>.</p>
+		<p>By default, the framework assigns the "a" swatch to all headers and footers, because these are typically given high visual priority in an application. To set the color of a bar to a different swatch color, simply add the <code> data-theme</code> attribute to your header or footer and specify an alternate swatch letter ("b" or "d", for example) and the specified theme swatch color will be applied. Learn more about <a href="../toolbars/bars-themes.html">toolbar theming</a>.</p>
 		
 		
 		
@@ -292,6 +298,7 @@
 </div><!-- /content -->
 
 <div data-role="footer" class="footer-docs" data-theme="c">
+		<p class="jqm-version"></p>
 		<p>&copy; 2012 jQuery Foundation and other contributors</p>
 </div>
 	

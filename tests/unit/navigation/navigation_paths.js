@@ -9,12 +9,6 @@
 		expect( 2 );
 
 		$.testHelper.pageSequence([
-			function(){
-				// reset before each test, all tests expect original page
-				// for relative urls
-				$.testHelper.openPage( "#" + home);
-			},
-
 			// open our test page
 			function(){
 				$.testHelper.openPage("#pathing-tests");
@@ -64,7 +58,11 @@
 
 
 	//Doc relative tests
-	module("document relative paths");
+	module("document relative paths", {
+		teardown: function() {
+			$.testHelper.navReset( url.pathname + url.search );
+		}
+	});
 
 	asyncTest( "file reference no nesting", function(){
 		testPageLoad("#doc-rel-test-one", "doc rel test one");
