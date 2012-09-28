@@ -68,7 +68,42 @@
 				start();
 			},
 		]);
+	});
 
+	asyncTest( "Going from a dialog to another page works", function() {
+		$.testHelper.detailedEventCascade([
+			// This empty function and the following "navigate" event test is necessary to ensure
+			// that, when the initial URL contains the path to a page to be loaded via AJAX, the loading
+			// process which is done via a synthetic hashchange event completes.
+			function() { },
+			{ navigate: { src: $( document ), event: "navigate.GoingFromADialogToAnotherPageStep0" } },
+
+			function() { $( "#openBasicDialog" ).click(); },
+			{
+				navigate: { src: $( document ), event: "navigate.GoingFromADialogToAnotherPageStep1" },
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange.GoingFromADialogToAnotherPageStep1" }
+			},
+			function() {
+				ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
+				$( "#fromDialogToAnotherPage" ).click();
+			},
+			{
+				navigate: { src: $( document ), event: "navigate.GoingFromADialogToAnotherPageStep2" },
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange.GoingFromADialogToAnotherPageStep2" }
+			},
+			function() {
+				ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
+				$.mobile.back();
+			},
+			{
+				navigate: { src: $( document ), event: "navigate.GoingFromADialogToAnotherPageStep3" },
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange.GoingFromADialogToAnotherPageStep3" }
+			},
+			function() {
+				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Coming back from another page to the start page works" );
+				start();
+			}
+		]);
 	});
 
 })( jQuery );
