@@ -44,8 +44,9 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 		// find and enhance the pages in the dom and transition to the first page.
 		initializePage: function() {
 			// find present pages
-			var $pages = $( ":jqmData(role='page'), :jqmData(role='dialog')" ),
-				hash = $.mobile.path.parseLocation().hash.replace("#", ""),
+			var path = $.mobile.path,
+				$pages = $( ":jqmData(role='page'), :jqmData(role='dialog')" ),
+				hash = path.convertUrlToDataUrl( path.parseLocation().hash ),
 				hashPage = document.getElementById( hash );
 
 			// if no pages are found, create one with body's inner html
