@@ -188,8 +188,11 @@ define( [
 				var u = path.parseUrl( absUrl );
 				if ( path.isEmbeddedPage( u ) ) {
 					// For embedded pages, remove the dialog hash key as in getFilePath(),
-					// otherwise the Data Url won't match the id of the embedded Page.
-					return u.hash.split( dialogHashKey )[0].replace( /^#/, "" );
+					// and remove otherwise the Data Url won't match the id of the embedded Page.
+					return u.hash
+						.split( dialogHashKey )[0]
+						.replace( /^#/, "" )
+						.replace( /\?.*$/, "" );
 				} else if ( path.isSameDomain( u, documentBase ) ) {
 					return u.hrefNoHash.replace( documentBase.domain, "" ).split( dialogHashKey )[0];
 				}
@@ -1008,6 +1011,12 @@ define( [
 		// to the promise object it returns so we know when
 		// it is done loading or if an error ocurred.
 		if ( typeof toPage === "string" ) {
+			// preserve the original target as the dataUrl value will be simplified
+			// eg, removing ui-state, and removing query params from the hash
+			// this is so that users who want to use query params have access to them
+			// in the event bindings for the page life cycle See issue #5085
+			settings.target = toPage;
+
 			$.mobile.loadPage( toPage, settings )
 				.done(function( url, options, newPage, dupCachedPage ) {
 					isPageTransitioning = false;

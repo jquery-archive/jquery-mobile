@@ -1298,4 +1298,18 @@
 			}
 		]);
 	});
+
+	asyncTest( "loading an embeded page with query params works", function() {
+		$.testHelper.pageSequence([
+			function() {
+				$.mobile.changePage( "#bar?baz=bak", { dataUrl: false } );
+			},
+
+			function() {
+				ok( location.hash.indexOf( "bar?baz=bak" ) >= -1, "the hash is targeted at the page to be loaded" );
+				ok( $.mobile.activePage.attr( "id" ), "bar", "the correct page is loaded" );
+				start();
+			}
+		]);
+	});
 })(jQuery);
