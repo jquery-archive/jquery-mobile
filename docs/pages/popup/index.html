@@ -10,6 +10,51 @@
 	<script src="../../../js/jquery.js"></script>
 	<script src="../../../docs/_assets/js/jqm-docs.js"></script>
 	<script src="../../../js/"></script>
+	<script type="text/javascript">
+		function generateDynamicPopup(){
+		// Check to see if the dialog has already been created
+
+			if($('#someDiv').length != 1){
+			
+				/*
+				  the Popup has not been generated yet and so we add it to the DOM
+				  then call the popup() method to add all the correct 
+				  CSS and HTML markup and then "open" popup.
+				*/
+				
+				/*
+				  It is important to add the popup markup to a "page" as 
+				  otherwise the screen-element will not
+				  detect a click/touch to close the popup
+				*/
+				$('div[data-role="page"]').append(
+				'<div id="someDiv" class="ui-content" >'+
+					'<div data-role="header" data-theme="d">'+
+						'<h3>Popup Title</h3>'+
+					'</div>'+
+					'<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>'+
+					'<p>This is some dynamically generated Popup text.</p>'+
+				'</div>'
+				);
+				
+				
+				// Initialize the close button as a jQM button
+				$('#someDiv [data-rel="back"]').button();
+				// Initialize a the new content as a popup
+				$('#someDiv').popup();
+				// Open the popup
+				$('#someDiv').popup('open');
+				  
+			} else {
+				/*
+				  Popup already present in the DOM so we can just open it again
+				  but first we can demonstrate how to change the content.
+				*/
+				$('#someDiv [data-role="header"]').html('<h3>A new title</h3>');
+				$('#someDiv').popup('open');
+			}
+		}
+	</script>
 	
 </head>
 <body>
@@ -151,7 +196,7 @@
 			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a><img class="popphoto" src="../../_assets/images/colorful-city.jpg" alt="Colorful city">
 		</div>
 			
-		<h3>Advanced popup techniques</h3>
+		<h2>Advanced popup techniques</h2>
 		<p>Learn how to customize and extend popups by working with the API, custom scripts, and styles.</p>
 		<a href="popup-images.html" data-ajax="false" data-role="button" data-inline="true" data-icon="arrow-r" data-iconpos="right">Scaling images</a>
 		<a href="popup-iframes.html" data-ajax="false" data-role="button" data-inline="true" data-icon="arrow-r" data-iconpos="right">Map + video iframes</a>
@@ -202,6 +247,58 @@ $( "#myPopupDiv" ).popup( "close" )
 			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-left">Close</a>
 			<p>I have a close button at the top left corner with simple HTML markup.</p>
 		</div>
+		
+		<h2>Dynamic popups</h2>
+		<p>In a similar way to creating dynamic <a href="../dialog/index.html">dialogs</a>, you can also create popups dynamically.  Below we add an <code>onclick</code> handler to the button to call our <code>generateDynamicPopup</code> function.</p>
+		<p>The button:-</p>
+		<code>&lt;a href=&quot;&quot; data-role=&quot;button&quot; data-inline=&quot;true&quot; onclick=&quot;generateDynamicPopup()&quot;&gt;Dynamic Popup&lt;/a&gt;</code>
+		<p> The function it calls:-</p>
+		<pre><p><code>
+function generateDynamicPopup(){
+  // Check to see if the dialog has already been created
+  if($('#someDiv').length != 1){
+
+	/*
+	  the Popup has not been generated yet and so we add it to the DOM
+	  then call the popup() method to add all the correct 
+	  CSS and HTML markup and then "open" popup.
+	*/
+	
+	/*
+	  It is important to add the popup markup to a "page" as 
+	  otherwise the screen-element will not
+	  detect a click/touch to close the popup.
+	*/
+	$('div[data-role="page"]').append(
+	'&lt;div id=&quot;someDiv&quot; class=&quot;ui-content&quot; &gt;'+
+		'&lt;div data-role=&quot;header&quot; data-theme=&quot;d&quot;&gt;'+
+			'&lt;h3&gt;Popup Title&lt;/h3&gt;'+
+		'&lt;/div&gt;'+
+		'&lt;a href=&quot;#&quot; data-rel=&quot;back&quot; data-role=&quot;button&quot; data-theme=&quot;a&quot; data-icon=&quot;delete&quot; data-iconpos=&quot;notext&quot; class=&quot;ui-btn-right&quot;&gt;Close&lt;/a&gt;'+
+		'&lt;p&gt;This is some dynamically generated Popup text.&lt;/p&gt;'+
+	'&lt;/div&gt;'
+	);
+	
+	
+	// Initialize the close button as a jQM button
+	$('#someDiv [data-rel="back"]').button();
+	// Initialize a the new content as a popup
+	$('#someDiv').popup();
+	// Open the popup
+	$('#someDiv').popup('open');
+	  
+  } else {
+	/*
+	  Popup already present in the DOM so we can just open it again
+	  but first we can demonstrate how to change the content.
+	*/
+	$('#someDiv [data-role="header"]').html('&lt;h3&gt;A new title&lt;/h3&gt;');
+	$('#someDiv').popup('open');
+  }
+}
+		</code></p></pre>
+		
+		<a href="" data-role="button" data-inline="true" onclick="generateDynamicPopup()">Dynamic Popup</a>
 		
 		<h2>Adding padding</h2>
 		<p>For popups with formatted text, padding is needed. We recommend adding the <code>ui-content</code> class to the popup container which adds the standard 15px of padding, just like the page content container. Write your own styles to create a more customized design if needed.</p>
