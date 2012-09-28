@@ -106,4 +106,43 @@
 		]);
 	});
 
+	asyncTest( "Going from a popup to another page works", function() {
+		$.testHelper.detailedEventCascade([
+			// This empty function and the following "navigate" event test is necessary to ensure
+			// that, when the initial URL contains the path to a page to be loaded via AJAX, the loading
+			// process which is done via a synthetic hashchange event completes.
+			function() { },
+			{ navigate: { src: $( document ), event: "navigate.GoingFromAPopupToAnotherPageStep0" } },
+
+			function() {
+				$( "#openPopup" ).click();
+			},
+			{
+				popupafteropen: { src: $( "#thePopup" ), event: "popupafteropen.GoingFromAPopupToAnotherPageStep1" },
+				navigate: { src: $.mobile.pageContainer, event: "navigate.GoingFromAPopupToAnotherPageStep1" }
+			},
+			function( result ) {
+				ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );
+				ok( !result.navigate.timedOut, "A 'navigate' event has occurred as a result of opening the popup" );
+				$( "#openPageFromPopup" ).click();
+			},
+			{
+				navigate: { src: $( document ), event: "navigate.GoingFromAPopupToAnotherPageStep2" },
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange.GoingFromAPopupToAnotherPageStep2" }
+			},
+			function() {
+				ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
+				$.mobile.back();
+			},
+			{
+				navigate: { src: $( document ), event: "navigate.GoingFromAPopupToAnotherPageStep3" },
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange.GoingFromAPopupToAnotherPageStep3" }
+			},
+			function() {
+				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Coming back from another page to the start page works" );
+				start();
+			}
+		]);
+	});
+
 })( jQuery );
