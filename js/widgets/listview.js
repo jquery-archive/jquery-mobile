@@ -356,7 +356,12 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			dns = "data-" + $.mobile.ns,
 			self = this,
 			persistentFooterID = parentPage.find( ":jqmData(role='footer')" ).jqmData( "id" ),
-			hasSubPages;
+			hasSubPages,
+			listToRenderLength,
+			currentListLength;
+			
+			listToRenderLength = parentList.find( "li>ul, li>ol" ).toArray().length;
+			currentListLength = $( parentList ).children("li").length;
 
 		if ( typeof listCountPerPage[ parentId ] === "undefined" ) {
 			listCountPerPage[ parentId ] = -1;
@@ -367,7 +372,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		$( parentList.find( "li>ul, li>ol" ).toArray().reverse() ).each(function( i ) {
 			var self = this,
 				list = $( this ),
-				listId = list.attr( "id" ) || parentListId + "-" + i,
+				listId = list.attr( "id" ) || parentListId + "-" + ( listToRenderLength < currentListLength ? currentListLength-listToRenderLength : i ),
 				parent = list.parent(),
 				nodeElsFull = $( list.prevAll().toArray().reverse() ),
 				nodeEls = nodeElsFull.length ? nodeElsFull : $( "<span>" + $.trim(parent.contents()[ 0 ].nodeValue) + "</span>" ),
