@@ -151,4 +151,54 @@
 		]);
 	});
 
+	asyncTest( "Opening one dialog followed by opening another dialog works", function() {
+
+		expect( 4 );
+
+		$.testHelper.detailedEventCascade([
+			// This empty function and the following "navigate" event test is necessary to ensure
+			// that, when the initial URL contains the path to a page to be loaded via AJAX, the loading
+			// process which is done via a synthetic hashchange event completes.
+			function() { },
+			{ navigate: { src: $( document ), event: "navigate.openingOneDialogFollowedByAnotherStep0" } },
+
+			// NOTE: The first part of this test is a copy of the test above
+			function() { $( "#openBasicDialog" ).click(); },
+			{
+				navigate: { src: $( document ), event: "navigate.openingOneDialogFollowedByAnotherStep1" },
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange.openingOneDialogFollowedByAnotherStep1" }
+			},
+			function() {
+				ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
+				$( "a:first", $.mobile.activePage[ 0 ] ).click();
+			},
+			{
+				navigate: { src: $( document ), event: "navigate.openingOneDialogFollowedByAnotherStep2" },
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange.openingOneDialogFollowedByAnotherStep2" }
+			},
+
+			// NOTE: The second part of this test is also a copy of the test above
+			function() {
+				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
+				$( "#openAnotherDialog" ).click();
+			},
+			{
+				navigate: { src: $( document ), event: "navigate.openingOneDialogFollowedByAnotherStep3" },
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange.openingOneDialogFollowedByAnotherStep3" }
+			},
+			function() {
+				ok( $.mobile.activePage.attr( "id" ) === "anotherDialog", "Another dialog has opened" );
+				$( "a:first", $.mobile.activePage[ 0 ] ).click();
+			},
+			{
+				navigate: { src: $( document ), event: "navigate.openingOneDialogFollowedByAnotherStep4" },
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange.openingOneDialogFollowedByAnotherStep4" }
+			},
+			function() {
+				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
+				start();
+			},
+		]);
+	});
+
 })( jQuery );
