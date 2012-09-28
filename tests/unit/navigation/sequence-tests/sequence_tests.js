@@ -6,16 +6,15 @@
 		expect( 2 );
 
 		$.testHelper.detailedEventCascade([
-			function() {
-			},
+			// This empty function and the following "navigate" event test is necessary to ensure
+			// that, when the initial URL contains the path to a page to be loaded via AJAX, the loading
+			// process which is done via a synthetic hashchange event completes.
+			function() { },
+			{ navigate: { src: $( document ), event: "navigate.returningFromADialogStep0" } },
+
+			function() { $( "#openBasicDialog" ).click(); },
 			{
-				navigate: { src: $( document ), event: "navigate.returningFromADialogStep0" }
-			},
-			function() {
-				$( "#openBasicDialog" ).click();
-			},
-			{
-				navigate: { src: $( document ), event: "hashchange.returningFromADialogStep1" },
+				navigate: { src: $( document ), event: "navigate.returningFromADialogStep1" },
 				pagechange: { src: $.mobile.pageContainer, event: "pagechange.returningFromADialogStep1" }
 			},
 			function() {
@@ -23,7 +22,7 @@
 				$( "a", $.mobile.activePage[ 0 ] ).click();
 			},
 			{
-				navigate: { src: $( document ), event: "hashchange.returningFromADialogStep2" },
+				navigate: { src: $( document ), event: "navigate.returningFromADialogStep2" },
 				pagechange: { src: $.mobile.pageContainer, event: "pagechange.returningFromADialogStep2" }
 			},
 			function() {
@@ -39,11 +38,12 @@
 		expect( 5 );
 
 		$.testHelper.detailedEventCascade([
-			function() {
-			},
-			{
-				navigate: { src: $( document ), event: "navigate.returningFromAPopupStep0" }
-			},
+			// This empty function and the following "navigate" event test is necessary to ensure
+			// that, when the initial URL contains the path to a page to be loaded via AJAX, the loading
+			// process which is done via a synthetic hashchange event completes.
+			function() { },
+			{ navigate: { src: $( document ), event: "navigate.returningFromADialogStep0" } },
+
 			function() {
 				origActive = $.mobile.activePage;
 				$( "#openPopup" ).click();
