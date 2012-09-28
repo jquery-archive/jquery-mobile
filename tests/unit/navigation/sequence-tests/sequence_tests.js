@@ -71,6 +71,9 @@
 	});
 
 	asyncTest( "Going from a dialog to another page works", function() {
+
+		expect( 3 );
+
 		$.testHelper.detailedEventCascade([
 			// This empty function and the following "navigate" event test is necessary to ensure
 			// that, when the initial URL contains the path to a page to be loaded via AJAX, the loading
@@ -107,6 +110,9 @@
 	});
 
 	asyncTest( "Going from a popup to another page works", function() {
+
+		expect( 4 );
+
 		$.testHelper.detailedEventCascade([
 			// This empty function and the following "navigate" event test is necessary to ensure
 			// that, when the initial URL contains the path to a page to be loaded via AJAX, the loading
