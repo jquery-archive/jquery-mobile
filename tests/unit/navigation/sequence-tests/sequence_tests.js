@@ -19,7 +19,7 @@
 			},
 			function() {
 				ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
-				$( "a", $.mobile.activePage[ 0 ] ).click();
+				$( "a:first", $.mobile.activePage[ 0 ] ).click();
 			},
 			{
 				navigate: { src: $( document ), event: "navigate.returningFromADialogStep2" },
