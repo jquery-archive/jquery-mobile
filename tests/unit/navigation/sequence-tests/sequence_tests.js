@@ -1,5 +1,13 @@
 (function($) {
 
+	// The following tests are not independent of each other. Thus, if you find
+	// that one of them fails, and it causes the failure of the rest of the tests,
+	// but that, if you change the order of the tests, it passes, then you should
+	// copy the tests over so that both orders are tested here.
+	//
+	// The more we click around the test pages and the more combinations of paths
+	// we try, the better.
+
 	$.testHelper.setPushState();
 
 	asyncTest( "Returning from a dialog results in the page from which it opened", function() {
