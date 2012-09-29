@@ -10,7 +10,7 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 	// add new event shortcuts
 	$.each( ( "touchstart touchmove touchend " +
 		"tap taphold " +
-		"swipe swipeleft swiperight " +
+		"horizontalswipe swipeleft swiperight verticalswipe swipeup swipedown" +
 		"scrollstart scrollstop" ).split( " " ), function( i, name ) {
 
 		$.fn[ name ] = function( fn ) {
@@ -124,8 +124,8 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 	};
 
 	// also handles swipeleft, swiperight
-	$.event.special.swipe = {
-		scrollSupressionThreshold: 30, // More than this horizontal displacement, and we will suppress scrolling.
+	$.event.special.horizontalswipe = {
+		scrollSupressionThreshold: 10, // More than this horizontal displacement, and we will suppress scrolling.
 
 		durationThreshold: 1000, // More time than this, and it isn't a swipe.
 
@@ -139,7 +139,7 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 
 			$this.bind( touchStartEvent, function( event ) {
 				var data = event.originalEvent.touches ?
-						event.originalEvent.touches[ 0 ] : event,
+									event.originalEvent.touches[ 0 ] : event,
 					start = {
 						time: ( new Date() ).getTime(),
 						coords: [ data.pageX, data.pageY ],
@@ -154,7 +154,7 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 					}
 
 					var data = event.originalEvent.touches ?
-						event.originalEvent.touches[ 0 ] : event;
+							event.originalEvent.touches[ 0 ] : event;
 
 					stop = {
 						time: ( new Date() ).getTime(),
@@ -162,7 +162,7 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 					};
 
 					// prevent scrolling
-					if ( Math.abs( start.coords[ 0 ] - stop.coords[ 0 ] ) > $.event.special.swipe.scrollSupressionThreshold ) {
+					if ( Math.abs( start.coords[ 0 ] - stop.coords[ 0 ] ) > $.event.special.horizontalswipe.scrollSupressionThreshold ) {
 						event.preventDefault();
 					}
 				}
@@ -172,9 +172,9 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 						$this.unbind( touchMoveEvent, moveHandler );
 
 						if ( start && stop ) {
-							if ( stop.time - start.time < $.event.special.swipe.durationThreshold &&
-								Math.abs( start.coords[ 0 ] - stop.coords[ 0 ] ) > $.event.special.swipe.horizontalDistanceThreshold &&
-								Math.abs( start.coords[ 1 ] - stop.coords[ 1 ] ) < $.event.special.swipe.verticalDistanceThreshold ) {
+							if ( stop.time - start.time < $.event.special.horizontalswipe.durationThreshold &&
+									Math.abs( start.coords[ 0 ] - stop.coords[ 0 ] ) > $.event.special.horizontalswipe.horizontalDistanceThreshold &&
+									Math.abs( start.coords[ 1 ] - stop.coords[ 1 ] ) < $.event.special.horizontalswipe.verticalDistanceThreshold ) {
 
 								start.origin.trigger( "swipe" )
 									.trigger( start.coords[0] > stop.coords[ 0 ] ? "swipeleft" : "swiperight" );
@@ -185,11 +185,79 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 			});
 		}
 	};
+
+	// also handles swipeup, swipedown
+	$.event.special.verticalswipe = {
+		scrollSupressionThreshold: 30, // More than this vertical displacement, and we will suppress scrolling.
+
+		durationThreshold: 1000, // More time than this, and it isn't a swipe.
+
+		horizontalDistanceThreshold: 45,  // Swipe horizontal displacement must be less than this.
+
+		verticalDistanceThreshold: 85,  // Swipe vertical displacement must be more than this.
+
+		setup: function() {
+			var thisObject = this,
+				$this = $( thisObject );
+
+			$this.bind( touchStartEvent, function( event ) {
+				var data = event.originalEvent.touches ?
+									event.originalEvent.touches[ 0 ] : event,
+					start = {
+						time: ( new Date() ).getTime(),
+						coords: [ data.pageX, data.pageY ],
+						origin: $( event.target )
+					},
+					stop;
+
+				function moveHandler( event ) {
+
+					if ( !start ) {
+						return;
+					}
+
+					var data = event.originalEvent.touches ?
+							event.originalEvent.touches[ 0 ] : event;
+
+					stop = {
+						time: ( new Date() ).getTime(),
+						coords: [ data.pageX, data.pageY ],
+					};
+					
+					//console.log("startY:"+start.coords[1]+"ZY:"+stop.coords[1])
+
+					// prevent scrolling
+					if ( Math.abs( start.coords[ 1 ] - stop.coords[ 1 ] ) > $.event.special.verticalswipe.scrollSupressionThreshold ) {
+						event.preventDefault();
+					}
+				}
+
+				$this.bind( touchMoveEvent, moveHandler )
+					.one( touchStopEvent, function( event ) {
+						$this.unbind( touchMoveEvent, moveHandler );
+
+						if ( start && stop ) {
+							if ( stop.time - start.time < $.event.special.verticalswipe.durationThreshold &&
+									Math.abs( start.coords[ 1 ] - stop.coords[ 1 ] ) > $.event.special.verticalswipe.verticalDistanceThreshold &&
+									Math.abs( start.coords[ 0 ] - stop.coords[ 0 ] ) < $.event.special.verticalswipe.horizontalDistanceThreshold ) {
+
+								start.origin.trigger( "swipe" )
+									.trigger( start.coords[ 1 ] < stop.coords[ 1 ] ? "swipedown" : "swipeup" );
+							}
+						}
+						start = stop = undefined;
+					});
+			});
+		}
+	};
+	
 	$.each({
 		scrollstop: "scrollstart",
 		taphold: "tap",
-		swipeleft: "swipe",
-		swiperight: "swipe"
+		swipeleft: "horizontalswipe",
+		swiperight: "horizontalswipe",
+		swipeup: "verticalswipe",
+		swipedown: "verticalswipe"
 	}, function( event, sourceEvent ) {
 
 		$.event.special[ event ] = {
