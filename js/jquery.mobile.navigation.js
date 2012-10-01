@@ -601,6 +601,12 @@ define( [
 		$page.page();
 	}
 
+	// determine the current base url
+	function findBaseWithDefault() {
+		var closestBase = ( $.mobile.activePage && getClosestBaseUrl( $.mobile.activePage ) );
+		return closestBase || documentBase.hrefNoHash;
+	}
+
 	/* exposed $.mobile methods */
 
 	//animation complete callback
@@ -625,8 +631,6 @@ define( [
 	$.mobile.urlHistory = urlHistory;
 
 	$.mobile.dialogHashKey = dialogHashKey;
-
-
 
 	//enable cross-domain page support
 	$.mobile.allowCrossDomainPages = false;
@@ -679,12 +683,6 @@ define( [
 			// so that it can be removed after the new version of the
 			// page is loaded off the network.
 			dupCachedPage = null,
-
-			// determine the current base url
-			findBaseWithDefault = function() {
-				var closestBase = ( $.mobile.activePage && getClosestBaseUrl( $.mobile.activePage ) );
-				return closestBase || documentBase.hrefNoHash;
-			},
 
 			// The absolute version of the URL passed into the function. This
 			// version of the URL may contain dialog/subpage params in it.
@@ -975,7 +973,7 @@ define( [
 			return;
 		}
 
-		var settings = $.extend( {}, $.mobile.changePage.defaults, options );
+		var settings = $.extend( {}, $.mobile.changePage.defaults, options ), isString;
 
 		// Make sure we have a pageContainer to work with.
 		settings.pageContainer = settings.pageContainer || $.mobile.pageContainer;
@@ -983,9 +981,24 @@ define( [
 		// Make sure we have a fromPage.
 		settings.fromPage = settings.fromPage || $.mobile.activePage;
 
+		isString = (typeof toPage === "string");
+
 		var mpc = settings.pageContainer,
 			pbcEvent = new $.Event( "pagebeforechange" ),
 			triggerData = { toPage: toPage, options: settings };
+
+		// NOTE: preserve the original target as the dataUrl value will be simplified
+		//       eg, removing ui-state, and removing query params from the hash
+		//       this is so that users who want to use query params have access to them
+		//       in the event bindings for the page life cycle See issue #5085
+		if ( isString ) {
+			// if the toPage is a string simply convert it
+			triggerData.url = path.makeUrlAbsolute( toPage, findBaseWithDefault() );
+		} else {
+			// if the toPage is a jQuery object grab the absolute url stored
+			// in the loadPage callback where it exists
+			triggerData.url = toPage.data( 'absoluteUrl' );
+		}
 
 		// Let listeners know we're about to change the current page.
 		mpc.trigger( pbcEvent, triggerData );
@@ -1010,17 +1023,15 @@ define( [
 		// to make sure it is loaded into the DOM. We'll listen
 		// to the promise object it returns so we know when
 		// it is done loading or if an error ocurred.
-		if ( typeof toPage === "string" ) {
-			// preserve the original target as the dataUrl value will be simplified
-			// eg, removing ui-state, and removing query params from the hash
-			// this is so that users who want to use query params have access to them
-			// in the event bindings for the page life cycle See issue #5085
-			settings.target = toPage;
-
+		if ( isString ) {
 			$.mobile.loadPage( toPage, settings )
 				.done(function( url, options, newPage, dupCachedPage ) {
 					isPageTransitioning = false;
 					options.duplicateCachedPage = dupCachedPage;
+
+					// store the original absolute url so that it can be provided
+					// to events in the triggerData
+					newPage.data( 'absoluteUrl', triggerData.url );
 					$.mobile.changePage( newPage, options );
 				})
 				.fail(function( url, options ) {
