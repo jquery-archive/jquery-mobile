@@ -272,7 +272,7 @@
 
 						// Move on to the next step
 						self.detailedEventCascade( seq, newResult );
-					}, 2000);
+					}, 20000);
 
 				function recordResult( key, event, result ) {
 					// Record the result
