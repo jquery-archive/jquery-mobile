@@ -10,16 +10,38 @@
 
 	$.testHelper.setPushState();
 
+	// If the start page is not there, wait for it to appear. Otherwise, leave
+	// some time before starting the actual run to allow the popstate handler to
+	// awaken from its slumber
+	function maybeWaitForStartPage( seq, prefix ) {
+		if ( $( "#basicTestPage" ).length === 0 ) {
+			$.testHelper.detailedEventCascade([
+				// This empty function and the following "navigate" event test is
+				// necessary to ensure that, when the initial URL contains the path to a
+				// page to be loaded via AJAX, the loading process which is done via a
+				// synthetic hashchange event completes.
+				function() { },
+				{ navigate: { src: $( document ), event: "navigate." + prefix + "0" } },
+				function() {
+					$.testHelper.detailedEventCascade( seq );
+				}
+			]);
+		}
+		else {
+			// You can tweak the timeout below to make the tests run faster, but if
+			// you do, make sure it greatly exceeds the timeout used for the pushState
+			// slumber - i.e., the brief time immediately following an adjustment made
+			// by the pushState plugin during which, if the location were to require
+			// an adjustment by the pushState plugin, it will not get such an
+			// adjustment because the pushState plugin ignores such requests.
+			setTimeout( function() { $.testHelper.detailedEventCascade( seq ); }, 1000 );
+		}
+	}
+
 	asyncTest( "Returning from a dialog results in the page from which it opened", function() {
 		expect( 2 );
 
-		$.testHelper.detailedEventCascade([
-			// This empty function and the following "navigate" event test is necessary to ensure
-			// that, when the initial URL contains the path to a page to be loaded via AJAX, the loading
-			// process which is done via a synthetic hashchange event completes.
-			function() { },
-			{ navigate: { src: $( document ), event: "navigate.returningFromADialogStep0" } },
-
+		maybeWaitForStartPage([
 			function() { $( "#openBasicDialog" ).click(); },
 			{
 				navigate: { src: $( document ), event: "navigate.returningFromADialogStep1" },
@@ -37,7 +59,7 @@
 				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
 				start();
 			}
-		]);
+		], "returningFromADialog" );
 	});
 
 	asyncTest( "Returning from a popup results in the page from which it opened", function() {
@@ -45,13 +67,7 @@
 
 		expect( 5 );
 
-		$.testHelper.detailedEventCascade([
-			// This empty function and the following "navigate" event test is necessary to ensure
-			// that, when the initial URL contains the path to a page to be loaded via AJAX, the loading
-			// process which is done via a synthetic hashchange event completes.
-			function() { },
-			{ navigate: { src: $( document ), event: "navigate.returningFromADialogStep0" } },
-
+		maybeWaitForStartPage([
 			function() {
 				origActive = $.mobile.activePage;
 				$( "#openPopup" ).click();
@@ -75,20 +91,14 @@
 				ok( $.mobile.activePage[ 0 ] === origActive[ 0 ], "The active page is the same as it was before opening the popup" );
 				start();
 			},
-		]);
+		], "returnFromPopup" );
 	});
 
 	asyncTest( "Going from a dialog to another page works", function() {
 
 		expect( 3 );
 
-		$.testHelper.detailedEventCascade([
-			// This empty function and the following "navigate" event test is necessary to ensure
-			// that, when the initial URL contains the path to a page to be loaded via AJAX, the loading
-			// process which is done via a synthetic hashchange event completes.
-			function() { },
-			{ navigate: { src: $( document ), event: "navigate.GoingFromADialogToAnotherPageStep0" } },
-
+		maybeWaitForStartPage([
 			function() { $( "#openBasicDialog" ).click(); },
 			{
 				navigate: { src: $( document ), event: "navigate.GoingFromADialogToAnotherPageStep1" },
@@ -114,20 +124,14 @@
 				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Coming back from another page to the start page works" );
 				start();
 			}
-		]);
+		], "GoingFromADialogToAnotherPage" );
 	});
 
 	asyncTest( "Going from a popup to another page works", function() {
 
 		expect( 4 );
 
-		$.testHelper.detailedEventCascade([
-			// This empty function and the following "navigate" event test is necessary to ensure
-			// that, when the initial URL contains the path to a page to be loaded via AJAX, the loading
-			// process which is done via a synthetic hashchange event completes.
-			function() { },
-			{ navigate: { src: $( document ), event: "navigate.GoingFromAPopupToAnotherPageStep0" } },
-
+		maybeWaitForStartPage([
 			function() {
 				$( "#openPopup" ).click();
 			},
@@ -156,20 +160,14 @@
 				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Coming back from another page to the start page works" );
 				start();
 			}
-		]);
+		], "GoingFromAPopupToAnotherPage" );
 	});
 
 	asyncTest( "Opening one dialog followed by opening another dialog works", function() {
 
 		expect( 4 );
 
-		$.testHelper.detailedEventCascade([
-			// This empty function and the following "navigate" event test is necessary to ensure
-			// that, when the initial URL contains the path to a page to be loaded via AJAX, the loading
-			// process which is done via a synthetic hashchange event completes.
-			function() { },
-			{ navigate: { src: $( document ), event: "navigate.openingOneDialogFollowedByAnotherStep0" } },
-
+		maybeWaitForStartPage([
 			// NOTE: The first part of this test is a copy of the test above
 			function() { $( "#openBasicDialog" ).click(); },
 			{
@@ -206,7 +204,7 @@
 				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
 				start();
 			},
-		]);
+		], "openingOneDialogFollowedByAnother" );
 	});
 
 	asyncTest( "Opening one popup followed by opening another popup works", function() {
@@ -214,13 +212,7 @@
 
 		expect( 10 );
 
-		$.testHelper.detailedEventCascade([
-			// This empty function and the following "navigate" event test is necessary to ensure
-			// that, when the initial URL contains the path to a page to be loaded via AJAX, the loading
-			// process which is done via a synthetic hashchange event completes.
-			function() { },
-			{ navigate: { src: $( document ), event: "navigate.openingOnePopupFollwedByAnotherStep0" } },
-
+		maybeWaitForStartPage([
 			// NOTE: This is basically two copies of the "returning from a popup test" one after the other
 			function() {
 				origActive = $.mobile.activePage;
@@ -269,19 +261,13 @@
 				ok( $.mobile.activePage[ 0 ] === origActive[ 0 ], "The active page is the same as it was before opening the popup" );
 				start();
 			}
-		]);
+		], "openingOnePopupFollwedByAnother" );
 	});
 
 	asyncTest( "Opening another page after returning from a dialog works", function() {
 		expect( 4 );
 
-		$.testHelper.detailedEventCascade([
-			// This empty function and the following "navigate" event test is necessary to ensure
-			// that, when the initial URL contains the path to a page to be loaded via AJAX, the loading
-			// process which is done via a synthetic hashchange event completes.
-			function() { },
-			{ navigate: { src: $( document ), event: "navigate.openingAnotherPageAfterDialogStep0" } },
-
+		maybeWaitForStartPage([
 			function() { $( "#openBasicDialog" ).click(); },
 			{
 				navigate: { src: $( document ), event: "navigate.openingAnotherPageAfterDialogStep1" },
@@ -315,19 +301,13 @@
 				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
 				start();
 			},
-		]);
+		], "openingAnotherPageAfterDialog" );
 	});
 
 	asyncTest( "Opening another page after returning from a popup works", function() {
 		expect( 7 );
 
-		$.testHelper.detailedEventCascade([
-			// This empty function and the following "navigate" event test is necessary to ensure
-			// that, when the initial URL contains the path to a page to be loaded via AJAX, the loading
-			// process which is done via a synthetic hashchange event completes.
-			function() { },
-			{ navigate: { src: $( document ), event: "navigate.openingAnotherPageAfterPopupStep0" } },
-
+		maybeWaitForStartPage([
 			function() {
 				origActive = $.mobile.activePage;
 				$( "#openPopup" ).click();
@@ -367,7 +347,7 @@
 				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
 				start();
 			},
-		]);
+		], "openingAnotherPageAfterPopup" );
 	});
 
 })( jQuery );
