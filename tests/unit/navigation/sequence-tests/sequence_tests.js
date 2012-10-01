@@ -57,7 +57,7 @@
 				$( "#openPopup" ).click();
 			},
 			{
-				popupafteropen: { src: $( "#thePopup" ), event: "popupafteropen.returnFromPopupStep1" },
+				popupafteropen: { src: function() { return $( "#thePopup" ); }, event: "popupafteropen.returnFromPopupStep1" },
 				navigate: { src: $.mobile.pageContainer, event: "navigate.returnFromPopupStep1" }
 			},
 			function( result ) {
@@ -66,7 +66,7 @@
 				$( "#thePopup" ).parent().prev().click();
 			},
 			{
-				popupafterclose: { src: $( "#thePopup" ), event: "popupafterclose.returnFromPopupStep2" },
+				popupafterclose: { src: function() { return $( "#thePopup" ); }, event: "popupafterclose.returnFromPopupStep2" },
 				navigate: { src: $.mobile.pageContainer, event: "navigate.returnFromPopupStep2" }
 			},
 			function( result ) {
@@ -132,7 +132,7 @@
 				$( "#openPopup" ).click();
 			},
 			{
-				popupafteropen: { src: $( "#thePopup" ), event: "popupafteropen.GoingFromAPopupToAnotherPageStep1" },
+				popupafteropen: { src: function() { return $( "#thePopup" ); }, event: "popupafteropen.GoingFromAPopupToAnotherPageStep1" },
 				navigate: { src: $.mobile.pageContainer, event: "navigate.GoingFromAPopupToAnotherPageStep1" }
 			},
 			function( result ) {
