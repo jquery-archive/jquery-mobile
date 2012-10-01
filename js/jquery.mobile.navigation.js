@@ -993,11 +993,11 @@ define( [
 		//       in the event bindings for the page life cycle See issue #5085
 		if ( isString ) {
 			// if the toPage is a string simply convert it
-			triggerData.url = path.makeUrlAbsolute( toPage, findBaseWithDefault() );
+			triggerData.absUrl = path.makeUrlAbsolute( toPage, findBaseWithDefault() );
 		} else {
 			// if the toPage is a jQuery object grab the absolute url stored
 			// in the loadPage callback where it exists
-			triggerData.url = toPage.data( 'absoluteUrl' );
+			triggerData.absUrl = toPage.data( 'absUrl' );
 		}
 
 		// Let listeners know we're about to change the current page.
@@ -1031,7 +1031,7 @@ define( [
 
 					// store the original absolute url so that it can be provided
 					// to events in the triggerData
-					newPage.data( 'absoluteUrl', triggerData.url );
+					newPage.data( 'absUrl', triggerData.url );
 					$.mobile.changePage( newPage, options );
 				})
 				.fail(function( url, options ) {
