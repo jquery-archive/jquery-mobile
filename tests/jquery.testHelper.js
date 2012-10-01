@@ -217,7 +217,7 @@
 //		seq : [
 //			fn(result),
 //			{ key: {
-//					src: event source (is jQuery object),
+//					src: event source (is jQuery object or function returning jQuery object),
 //					event: event name (is string),
 //					       NB: It's a good idea to namespace your events, because the handler will be removed
 //					       based on the name you give here if a timeout occurs before the event fires.
