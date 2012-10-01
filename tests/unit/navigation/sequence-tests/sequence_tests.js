@@ -272,4 +272,50 @@
 		]);
 	});
 
+	asyncTest( "Opening another page after returning from a dialog works", function() {
+		expect( 4 );
+
+		$.testHelper.detailedEventCascade([
+			// This empty function and the following "navigate" event test is necessary to ensure
+			// that, when the initial URL contains the path to a page to be loaded via AJAX, the loading
+			// process which is done via a synthetic hashchange event completes.
+			function() { },
+			{ navigate: { src: $( document ), event: "navigate.openingAnotherPageAfterDialogStep0" } },
+
+			function() { $( "#openBasicDialog" ).click(); },
+			{
+				navigate: { src: $( document ), event: "navigate.openingAnotherPageAfterDialogStep1" },
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange.openingAnotherPageAfterDialogStep1" }
+			},
+			function() {
+				ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
+				$( "a:first", $.mobile.activePage[ 0 ] ).click();
+			},
+			{
+				navigate: { src: $( document ), event: "navigate.openingAnotherPageAfterDialogStep2" },
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange.openingAnotherPageAfterDialogStep2" }
+			},
+			function() {
+				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
+				$( "#openAnotherPage" ).click();
+			},
+			{
+				navigate: { src: $( document ), event: "navigate.GoingFromADialogToAnotherPageStep3" },
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange.GoingFromADialogToAnotherPageStep3" }
+			},
+			function() {
+				ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
+				$.mobile.back();
+			},
+			{
+				navigate: { src: $( document ), event: "navigate.openingAnotherPageAfterDialogStep4" },
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange.openingAnotherPageAfterDialogStep4" }
+			},
+			function() {
+				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
+				start();
+			},
+		]);
+	});
+
 })( jQuery );
