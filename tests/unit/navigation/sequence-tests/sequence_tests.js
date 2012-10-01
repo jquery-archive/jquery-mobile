@@ -209,4 +209,67 @@
 		]);
 	});
 
+	asyncTest( "Opening one popup followed by opening another popup works", function() {
+		var origActive;
+
+		expect( 10 );
+
+		$.testHelper.detailedEventCascade([
+			// This empty function and the following "navigate" event test is necessary to ensure
+			// that, when the initial URL contains the path to a page to be loaded via AJAX, the loading
+			// process which is done via a synthetic hashchange event completes.
+			function() { },
+			{ navigate: { src: $( document ), event: "navigate.openingOnePopupFollwedByAnotherStep0" } },
+
+			// NOTE: This is basically two copies of the "returning from a popup test" one after the other
+			function() {
+				origActive = $.mobile.activePage;
+				$( "#openPopup" ).click();
+			},
+			{
+				popupafteropen: { src: function() { return $( "#thePopup" ); }, event: "popupafteropen.openingOnePopupFollwedByAnotherStep1" },
+				navigate: { src: $.mobile.pageContainer, event: "navigate.openingOnePopupFollwedByAnotherStep1" }
+			},
+			function( result ) {
+				ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );
+				ok( !result.navigate.timedOut, "A 'navigate' event has occurred as a result of opening the popup" );
+				$( "#thePopup" ).parent().prev().click();
+			},
+			{
+				popupafterclose: { src: function() { return $( "#thePopup" ); }, event: "popupafterclose.openingOnePopupFollwedByAnotherStep2" },
+				navigate: { src: $.mobile.pageContainer, event: "navigate.openingOnePopupFollwedByAnotherStep2" },
+				// bogus event to delay the opening of the second popup in order to make
+				// sure that the pushState handler comes out of its timeout-induced
+				// slumber. This is unnecessary for dialogs, because they have transitions which
+				// take longer than the timeout
+				xyzzy: { src: $.mobile.pageContainer, event: "xyzzy.openingOnePopupFollowedByAnotherStep2" }
+			},
+			function( result ) {
+				ok( !result.popupafterclose.timedOut, "Popup emitted 'popupafterclose'" );
+				ok( !result.navigate.timedOut, "A 'navigate' event has occurred as a result of closing the popup" );
+				ok( $.mobile.activePage[ 0 ] === origActive[ 0 ], "The active page is the same as it was before opening the popup" );
+				$( "#openAnotherPopup" ).click();
+			},
+			{
+				popupafteropen: { src: function() { return $( "#anotherPopup" ); }, event: "popupafteropen.openingOnePopupFollwedByAnotherStep3" },
+				navigate: { src: $.mobile.pageContainer, event: "navigate.openingOnePopupFollwedByAnotherStep3" }
+			},
+			function( result ) {
+				ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );
+				ok( !result.navigate.timedOut, "A 'navigate' event has occurred as a result of opening the popup" );
+				$( "#anotherPopup" ).parent().prev().click();
+			},
+			{
+				popupafterclose: { src: function() { return $( "#anotherPopup" ); }, event: "popupafterclose.openingOnePopupFollwedByAnotherStep4" },
+				navigate: { src: $.mobile.pageContainer, event: "navigate.openingOnePopupFollwedByAnotherStep4" }
+			},
+			function( result ) {
+				ok( !result.popupafterclose.timedOut, "Popup emitted 'popupafterclose'" );
+				ok( !result.navigate.timedOut, "A 'navigate' event has occurred as a result of opening the popup" );
+				ok( $.mobile.activePage[ 0 ] === origActive[ 0 ], "The active page is the same as it was before opening the popup" );
+				start();
+			}
+		]);
+	});
+
 })( jQuery );
