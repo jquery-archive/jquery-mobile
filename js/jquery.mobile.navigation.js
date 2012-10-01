@@ -1030,8 +1030,8 @@ define( [
 					options.duplicateCachedPage = dupCachedPage;
 
 					// store the original absolute url so that it can be provided
-					// to events in the triggerData
-					newPage.data( 'absUrl', triggerData.url );
+					// to events in the triggerData of the subsequent changePage call
+					newPage.data( 'absUrl', triggerData.absUrl );
 					$.mobile.changePage( newPage, options );
 				})
 				.fail(function( url, options ) {
