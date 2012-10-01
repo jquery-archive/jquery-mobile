@@ -318,4 +318,56 @@
 		]);
 	});
 
+	asyncTest( "Opening another page after returning from a popup works", function() {
+		expect( 7 );
+
+		$.testHelper.detailedEventCascade([
+			// This empty function and the following "navigate" event test is necessary to ensure
+			// that, when the initial URL contains the path to a page to be loaded via AJAX, the loading
+			// process which is done via a synthetic hashchange event completes.
+			function() { },
+			{ navigate: { src: $( document ), event: "navigate.openingAnotherPageAfterPopupStep0" } },
+
+			function() {
+				origActive = $.mobile.activePage;
+				$( "#openPopup" ).click();
+			},
+			{
+				popupafteropen: { src: function() { return $( "#thePopup" ); }, event: "popupafteropen.openingAnotherPageAfterPopupStep1" },
+				navigate: { src: $.mobile.pageContainer, event: "navigate.openingAnotherPageAfterPopupStep1" }
+			},
+			function( result ) {
+				ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );
+				ok( !result.navigate.timedOut, "A 'navigate' event has occurred as a result of opening the popup" );
+				$( "#thePopup" ).parent().prev().click();
+			},
+			{
+				popupafterclose: { src: function() { return $( "#thePopup" ); }, event: "popupafterclose.openingAnotherPageAfterPopupStep2" },
+				navigate: { src: $.mobile.pageContainer, event: "navigate.openingAnotherPageAfterPopupStep2" }
+			},
+			function( result ) {
+				ok( !result.popupafterclose.timedOut, "Popup emitted 'popupafterclose'" );
+				ok( !result.navigate.timedOut, "A 'navigate' event has occurred as a result of opening the popup" );
+				ok( $.mobile.activePage[ 0 ] === origActive[ 0 ], "The active page is the same as it was before opening the popup" );
+				$( "#openAnotherPage" ).click();
+			},
+			{
+				navigate: { src: $( document ), event: "navigate.openingAnotherPageAfterPopupStep3" },
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange.openingAnotherPageAfterPopupStep3" }
+			},
+			function() {
+				ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
+				$.mobile.back();
+			},
+			{
+				navigate: { src: $( document ), event: "navigate.openingAnotherPageAfterPopupStep4" },
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange.openingAnotherPageAfterPopupStep4" }
+			},
+			function() {
+				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
+				start();
+			},
+		]);
+	});
+
 })( jQuery );
