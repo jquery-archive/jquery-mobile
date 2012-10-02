@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+	<div id="basicDialog" data-nstest-role="dialog">
+		<div data-nstest-role="header">
+			<h1>Dialog</h1>
+		</div>
+		<div data-nstest-role="content">
+			<div data-nstest-role="popup" id="popupFromBasicDialog">
+				<a href="another-page.html" id="fromDialogPopupToAnotherPage">Go</a>
+			</div>
+			<a href="#popupFromBasicDialog" id="fromDialogToPopup" data-nstest-rel="popup">Go</a>
+			<a href="another-page.html" id="fromDialogToAnotherPage">Go</a>
+		</div>
+	</div>
+</body>
+</html>
