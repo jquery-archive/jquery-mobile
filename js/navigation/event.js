@@ -17,13 +17,19 @@ define([
 	$.event.special.navigate = self = {
 		bound: false,
 
-		history: {
-			popstate: function( event, data ) {
-				$win.trigger( new $.Event( "navigate" ), $.extend(data, {
-					from: "popstate"
-				}));
-			}
-    },
+		popstate: function( event ) {
+			$win.trigger( new $.Event( "navigate" ), {
+				from: "popstate",
+				state: event.originalEvent.state
+			});
+		},
+
+		hashchange: function( event ) {
+			$win.trigger( new $.Event( "navigate" ), {
+				from: "hashchange",
+				state: {}
+			});
+		},
 
 		setup: function( data, namespaces ) {
 			if( bound ) {
@@ -33,15 +39,9 @@ define([
 			bound = true;
 
 			if( $.support.pushState ) {
-				$win.bind( "popstate", function( event ) {
-					self.history.popstate( event, data );
-				});
+				$win.bind( "popstate", self.popstate );
 			} else {
-				$win.bind( "hashchange", function( event ) {
-					$win.trigger( new $.Event( "navigate" ), $.extend(data, {
-						from: "hashchange"
-					}));
-				});
+				$win.bind( "hashchange", self.hashchange );
 			}
 		}
 	};
