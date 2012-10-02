@@ -1,3 +1,5 @@
+$.testHelper.setPushState();
+
 (function( $) {
 	module( "navigate", {
 		setup: function() {
@@ -32,16 +34,16 @@
 		location.hash = "foo";
 	});
 
-	if( $.support.pushState ) {
-		asyncTest( "popstate navigation events are marked", function() {
-			$( window ).one( "navigate", function( event, data ) {
-				equal( data.from, "popstate", "tagged as popstate" );
-				start();
-			});
-
-			location.hash = "foo";
+	asyncTest( "navigation events are marked", function() {
+		$( window ).one( "navigate", function( event, data ) {
+			equal( data.from, $.support.pushState ? "popstate" : "hashchange", "tagged as popstate" );
+			start();
 		});
 
+		location.hash = "foo";
+	});
+
+	if( $.support.pushState ) {
 		asyncTest( "popstate navigation events contain pushed state", function() {
 			$( window ).one( "navigate", function( event, data ) {
 				$( window ).one( "navigate", function( event, data ) {
