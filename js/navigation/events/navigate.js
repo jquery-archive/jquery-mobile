@@ -2,7 +2,8 @@
 //>>description: placeholder
 //>>label: AJAX Navigation System
 //>>group: Navigation
-define([ "jquery", "./../jquery.mobile.support" ], function( $ ) {
+define([ "jquery",
+				 "./../../jquery.mobile.support" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, undefined ) {
