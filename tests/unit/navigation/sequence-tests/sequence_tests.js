@@ -408,4 +408,49 @@
 		]);
 	});
 
+	asyncTest( "Sequence page1 -> popup1 -> dialog1 -> page2 <- back", function() {
+		var eventNs = ".page1Popup1Dialog1Page2";
+
+		expect( 5 );
+
+		maybeWaitForStartPage([
+			function() {
+				$( "#openPopup" ).click();
+			},
+			{
+				popupafteropen: { src: function() { return $( "#thePopup" ); }, event: "popupafteropen" + eventNs + "1" },
+				navigate: { src: $.mobile.pageContainer, event: "navigate" + eventNs + "1" }
+			},
+			function( result ) {
+				ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );
+				ok( !result.navigate.timedOut, "A 'navigate' event has occurred as a result of opening the popup" );
+				$( "#openDialogFromPopup" ).click();
+			},
+			{
+				navigate: { src: $( document ), event: "navigate" + eventNs + "2" },
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "2" }
+			},
+			function() {
+				ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
+				$( "#fromDialogToAnotherPage" ).click();
+			},
+			{
+				navigate: { src: $( document ), event: "navigate" + eventNs + "3" },
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "3" }
+			},
+			function() {
+				ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
+				$.mobile.back();
+			},
+			{
+				navigate: { src: $( document ), event: "navigate" + eventNs + "4" },
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "4" }
+			},
+			function() {
+				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Coming back from another page to the start page works" );
+				start();
+			}
+		], eventNs );
+	});
+
 })( jQuery );
