@@ -33,9 +33,9 @@ define([ "jquery", "./../jquery.mobile.support" ], function( $ ) {
 			self.bound = true;
 
 			if( $.support.pushState ) {
-				$win.bind( "popstate", self.popstate );
+				$win.bind( "popstate.navigate", self.popstate );
 			} else {
-				$win.bind( "hashchange", self.hashchange );
+				$win.bind( "hashchange.navigate", self.hashchange );
 			}
 		}
 	};
