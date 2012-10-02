@@ -14,9 +14,17 @@
 <body>
 <div data-role="page">
 	<div data-role="header">
+		<a class="ui-btn-right" href="#navMenuForAnotherPage" data-rel="popup">Go To</a>
 		<h1>Another page</h1>
 	</div>
 	<div data-role="content">
+		<div data-role="popup" data-transition="slideup" id="navMenuForAnotherPage">
+			<div data-role="collapsible">
+				<h3>Navigation</h3>
+				<a href="hashchange.html" data-role="button">A page</a>
+				<a href="hashchange1.html" data-role="button">Another page</a>
+			</div>
+		</div>
 		<a data-role="button" href="hashchange.html">A page</a>
 		<a data-role="button" href="hashchange2.html">Yet another page</a>
 		<div id="another-popup" data-role="popup">
