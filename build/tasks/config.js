@@ -48,7 +48,7 @@ module.exports = function( grunt ) {
 		// if this test is not a dependency log pages
 		if( this.name.indexOf('config:test:page') > -1 ) {
 			test_paths.forEach(function( path ) {
-				grunt.log.writeln( path );
+				grunt.log.writeln( (env.ROOT_DOMAIN || "") + path );
 			});
 		}
 
