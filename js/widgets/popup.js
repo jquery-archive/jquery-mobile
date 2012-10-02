@@ -736,13 +736,7 @@ define( [ "jquery",
 				return;
 			}
 
-			// if the current url has no dialog hash key proceed as normal
-			// otherwise, if the page is a dialog simply tack on the hash key
-			if ( url.indexOf( hashkey ) === -1 && !currentIsDialog ){
-				url = url + hashkey;
-			} else {
-				url = $.mobile.path.parseLocation().hash + hashkey;
-			}
+			url = url + hashkey;
 
 			// Tack on an extra hashkey if this is the first page and we've just reconstructed the initial hash
 			if ( urlHistory.activeIndex === 0 && url === urlHistory.initialDst ) {
