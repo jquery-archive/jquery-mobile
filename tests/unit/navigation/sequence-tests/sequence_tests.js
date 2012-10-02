@@ -358,4 +358,51 @@
 		], "openingAnotherPageAfterPopup" );
 	});
 
+	asyncTest( "Sequence page1 -> dialog1 -> popup1 -> page2 <- back", function() {
+		var eventNs = ".page1Dialog1Popup1Page2Back";
+
+		expect( 6 );
+
+		maybeWaitForStartPage([
+			function() { $( "#openBasicDialog" ).click(); },
+			{
+				navigate: { src: $( document ), event: "navigate" + eventNs + "1" },
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "1" },
+				xyzzy: { src: $( document ), event: "xyzzy" + eventNs + "1" }
+			},
+			function() {
+				ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
+				$( "#fromDialogToPopup" ).click();
+			},
+			{
+				popupafteropen: { src: function() { return $( "#popupFromBasicDialog" ); }, event: "popupafteropen" + eventNs + "2" },
+				navigate: { src: $.mobile.pageContainer, event: "navigate" + eventNs + "2" },
+				xyzzy: { src: $( document ), event: "xyzzy" + eventNs + "2" }
+			},
+			function( result ) {
+				ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );
+				ok( !result.navigate.timedOut, "A 'navigate' event has occurred as a result of opening the popup" );
+				$( "#fromDialogPopupToAnotherPage" ).click();
+			},
+			{
+				popupafterclose: { src: function() { return $( "#popupFromBasicDialog" ); }, event: "popupafterclose" + eventNs + "3" },
+				navigate: { src: $( document ), event: "navigate" + eventNs + "3" },
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "3" }
+			},
+			function( result ) {
+				ok( !result.popupafterclose.timedOut, "Popup emitted 'popupafterclose'" );
+				ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
+				$.mobile.back();
+			},
+			{
+				navigate: { src: $( document ), event: "navigate" + eventNs + "4" },
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "4" }
+			},
+			function() {
+				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
+				start();
+			},
+		]);
+	});
+
 })( jQuery );
