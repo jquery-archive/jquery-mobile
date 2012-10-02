@@ -32,11 +32,11 @@ define([
 		},
 
 		setup: function( data, namespaces ) {
-			if( bound ) {
+			if( self.bound ) {
 				return;
 			}
 
-			bound = true;
+			self.bound = true;
 
 			if( $.support.pushState ) {
 				$win.bind( "popstate", self.popstate );
