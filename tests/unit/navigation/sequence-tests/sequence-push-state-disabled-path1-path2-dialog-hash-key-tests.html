@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- forces the base-tests into a push state disabled run and allows for
+       the test suite runner to pick it up as a seperate test set. See test/unit/ls.php,
+       test/unit/runner.js, base-tests.html, and tests/jquery.testHelper.js for more. -->
+	<script src="../../../../js/jquery.js"></script>
+	<script src="../../../jquery.testHelper.js"></script>
+	<script type="text/javascript">
+		$.testHelper.pushStateRedirect( "./sequence-path1-path2-dialog-hash-key-tests.html" );
+	</script>
+</head>
+<body>
+</body>
+</html>
