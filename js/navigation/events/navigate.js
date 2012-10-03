@@ -2,6 +2,9 @@
 //>>description: placeholder
 //>>label: AJAX Navigation System
 //>>group: Navigation
+
+// TODO break out pushstate support test so we don't
+//      depend on the whole thing
 define([ "jquery",
 				 "./../../jquery.mobile.support" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
