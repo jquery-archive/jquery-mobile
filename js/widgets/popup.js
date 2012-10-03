@@ -505,11 +505,9 @@ define( [ "jquery",
 		},
 
 		_openPrereqsComplete: function() {
-			var self = this;
-
-			self._ui.container.addClass( "ui-popup-active" );
-			self._isOpen = true;
-			self._resizeScreen();
+			this._ui.container.addClass( "ui-popup-active" );
+			this._isOpen = true;
+			this._resizeScreen();
 
 			// Android appears to trigger the animation complete before the popup
 			// is visible. Allowing the stack to unwind before applying focus prevents
@@ -614,21 +612,21 @@ define( [ "jquery",
 		},
 
 		_closePrereqsDone: function() {
-			var self = this, opts = self.options;
+			var opts = this.options;
 
-			self._ui.container.removeAttr( "tabindex" );
+			this._ui.container.removeAttr( "tabindex" );
 
 			// remove nav bindings if they are still present
 			opts.container.unbind( opts.closeEvents );
 
 			// unbind click handlers added when history is disabled
-			self.element.undelegate( opts.closeLinkSelector, opts.closeLinkEvents );
+			this.element.undelegate( opts.closeLinkSelector, opts.closeLinkEvents );
 
 			// remove the global mutex for popups
 			$.mobile.popup.active = undefined;
 
 			// alert users that the popup is closed
-			self._trigger( "afterclose" );
+			this._trigger( "afterclose" );
 		},
 
 		_close: function() {
@@ -683,10 +681,8 @@ define( [ "jquery",
 		// NOTE the pagebeforechange is bound to catch navigation events that don't
 		//      alter the url (eg, dialogs from popups)
 		_bindContainerClose: function() {
-			var self = this;
-
-			self.options.container
-				.one( self.options.closeEvents, $.proxy( self._close, self ));
+			this.options.container
+				.one( this.options.closeEvents, $.proxy( this._close, this ));
 		},
 
 		// TODO no clear deliniation of what should be here and
