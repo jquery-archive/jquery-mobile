@@ -188,17 +188,7 @@ define( [ "jquery",
 				_isOpen: false,
 				_tolerance: null,
 				_resizeData: null,
-				_orientationchangeInProgress: false,
-				_globalHandlers: [
-					{
-						src: $( window ),
-						handler: {
-							orientationchange: $.proxy( this, "_handleWindowOrientationchange" ),
-							resize: $.proxy( this, "_handleWindowResize" ),
-							keyup: $.proxy( this, "_handleWindowKeyUp" )
-						}
-					}
-				]
+				_orientationchangeInProgress: false
 			});
 
 			$.each( this.options, function( key, value ) {
@@ -210,8 +200,10 @@ define( [ "jquery",
 
 			ui.screen.bind( "vclick", $.proxy( this, "_eatEventAndClose" ) );
 
-			$.each( this._globalHandlers, function( idx, value ) {
-				value.src.bind( value.handler );
+			this._on( $( window ), {
+				orientationchange: $.proxy( this, "_handleWindowOrientationchange" ),
+				resize: $.proxy( this, "_handleWindowResize" ),
+				keyup: $.proxy( this, "_handleWindowKeyUp" )
 			});
 		},
 
@@ -655,26 +647,17 @@ define( [ "jquery",
 		},
 
 		_destroy: function() {
-			var self = this;
-
 			// hide and remove bindings
-			self._close();
+			this._close();
 
 			// Put the element back to where the placeholder was and remove the "ui-popup" class
-			self._setTheme( "none" );
-			self.element
-				.insertAfter( self._ui.placeholder )
+			this._setTheme( "none" );
+			this.element
+				.insertAfter( this._ui.placeholder )
 				.removeClass( "ui-popup ui-overlay-shadow ui-corner-all" );
-			self._ui.screen.remove();
-			self._ui.container.remove();
-			self._ui.placeholder.remove();
-
-			// Unbind handlers that were bound to elements outside self.element (the window, in self case)
-			$.each( self._globalHandlers, function( idx, oneSrc ) {
-				$.each( oneSrc.handler, function( eventType, handler ) {
-					oneSrc.src.unbind( eventType, handler );
-				});
-			});
+			this._ui.screen.remove();
+			this._ui.container.remove();
+			this._ui.placeholder.remove();
 		},
 
 		// any navigation event after a popup is opened should close the popup
