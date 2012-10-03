@@ -499,6 +499,11 @@ define( [ "jquery",
 			return { x: x, y: y };
 		},
 
+		_completeOpen: function() {
+			this._ui.container.attr( "tabindex", "0" ).focus();
+			this._trigger( "afteropen" );
+		},
+
 		_openPrereqsComplete: function() {
 			var self = this;
 
@@ -509,10 +514,7 @@ define( [ "jquery",
 			// Android appears to trigger the animation complete before the popup
 			// is visible. Allowing the stack to unwind before applying focus prevents
 			// the "blue flash" of element focus in android 4.0
-			setTimeout(function(){
-				self._ui.container.attr( "tabindex", "0" ).focus();
-				self._trigger( "afteropen" );
-			});
+			setTimeout( $.proxy( this, "_completeOpen" ) );
 		},
 
 		_open: function( options ) {
