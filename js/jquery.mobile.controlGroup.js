@@ -11,10 +11,11 @@ define( [ "jquery", "./jquery.mobile.buttonMarkup" ], function( $ ) {
 
 $.fn.controlgroup = function( options ) {
 	function flipClasses( els, flCorners  ) {
-		els.removeClass( "ui-btn-corner-all ui-corner-top ui-corner-bottom ui-corner-left ui-corner-right ui-controlgroup-last ui-shadow" )
-			.eq( 0 ).addClass( flCorners[ 0 ] )
+		els.removeClass( "ui-controlgroup-last" )
+			.buttonMarkup( { corners: false, shadow: false } )
+			.eq( 0 ).buttonMarkup( { corners: flCorners[ 0 ] } )
 			.end()
-			.last().addClass( flCorners[ 1 ] ).addClass( "ui-controlgroup-last" );
+			.last().buttonMarkup( { corners: flCorners[ 1 ] } ).addClass( "ui-controlgroup-last" );
 	}
 
 	return this.each(function() {
@@ -28,7 +29,7 @@ $.fn.controlgroup = function( options ) {
 			grouplegend = $el.children( "legend" ),
 			groupheading = $el.children( ".ui-controlgroup-label" ),
 			groupcontrols = $el.children( ".ui-controlgroup-controls" ),
-			flCorners = o.direction === "horizontal" ? [ "ui-corner-left", "ui-corner-right" ] : [ "ui-corner-top", "ui-corner-bottom" ],
+			flCorners = o.direction === "horizontal" ? [ "left", "right" ] : [ "top", "bottom" ],
 			type = $el.find( "input" ).first().attr( "type" );
 
 		// First unwrap the controls if the controlgroup was already enhanced
@@ -49,7 +50,6 @@ $.fn.controlgroup = function( options ) {
 		$el.addClass( "ui-corner-all ui-controlgroup ui-controlgroup-" + o.direction );
 
 		flipClasses( $el.find( ".ui-btn" + ( o.excludeInvisible ? ":visible" : "" ) ).not( '.ui-slider-handle' ), flCorners );
-		flipClasses( $el.find( ".ui-btn-inner" ), flCorners );
 
 		if ( o.shadow ) {
 			$el.addClass( "ui-shadow" );
