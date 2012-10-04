@@ -463,16 +463,19 @@
 		$popup.find( "a" ).click();
 	});
 
-	asyncTest( "Destroy closes the popup first", function() {
+	asyncTest( "Destroy closes open popup first", function() {
 		var $popup = $( "#test-destroy-popup" );
 
 		expect( 1 );
 
-		$popup.one( "popupafterclose", function() {
-			ok( true, "closed on destroy" );
-			start();
-		});
-
-		$popup.popup( "destroy" );
+		$popup
+			.one( "popupafterclose", function() {
+				ok( true, "closed on destroy" );
+				start();
+			})
+			.one( "popupafteropen", function() {
+				$popup.popup( "destroy" );
+			})
+			.popup( "open" );
 	});
 })( jQuery );
