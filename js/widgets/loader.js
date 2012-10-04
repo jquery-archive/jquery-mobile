@@ -85,7 +85,7 @@ define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], functi
 				this.fakeFixLoader();
 				$window
 					.unbind( "scroll", this.checkLoaderPosition )
-					.bind( "scroll", this.fakeFixLoader );
+					.bind( "scroll", $.proxy( this.fakeFixLoader, this ) );
 			}
 		},
 
@@ -170,8 +170,8 @@ define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], functi
 				this.element.removeClass( "ui-loader-fakefix" );
 			}
 
-			$( window ).unbind( "scroll", $.proxy( this.fakeFixLoader, this) );
-			$( window ).unbind( "scroll", $.proxy( this.checkLoaderPosition, this ) );
+			$( window ).unbind( "scroll", this.fakeFixLoader );
+			$( window ).unbind( "scroll", this.checkLoaderPosition );
 		}
 	});
 
