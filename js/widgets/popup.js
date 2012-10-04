@@ -654,11 +654,8 @@ define( [ "jquery",
 			});
 		},
 
-		_destroy: function() {
+		_unenhance: function() {
 			var self = this;
-
-			// hide and remove bindings
-			self._close();
 
 			// Put the element back to where the placeholder was and remove the "ui-popup" class
 			self._setTheme( "none" );
@@ -675,6 +672,15 @@ define( [ "jquery",
 					oneSrc.src.unbind( eventType, handler );
 				});
 			});
+		},
+
+		_destroy: function() {
+			if ( $.mobile.popup.active === this ) {
+				this.element.one( "popupafterclose", $.proxy( this, "_unenhance" ) );
+				this.close();
+			} else {
+				this._unenhance();
+			}
 		},
 
 		// any navigation event after a popup is opened should close the popup
