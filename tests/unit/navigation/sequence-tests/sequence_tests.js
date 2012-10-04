@@ -450,4 +450,64 @@
 		], eventNs );
 	});
 
+	asyncTest( "Sequence page -> popup1 -> dialog -> popup2 <- back <- back", function() {
+		var eventNs = ".pagePopupDialogPopup";
+
+		expect( 12 );
+
+		maybeWaitForStartPage([
+			function() {
+				$( "#openPopup" ).click();
+			},
+			{
+				popupafteropen: { src: function() { return $( "#thePopup" ); }, event: "popupafteropen" + eventNs + "1" },
+				navigate: { src: $.mobile.pageContainer, event: "navigate" + eventNs + "1" }
+			},
+			function( result ) {
+				ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );
+				ok( !result.navigate.timedOut, "A 'navigate' event has occurred as a result of opening the popup" );
+				$( "#openDialogFromPopup" ).click();
+			},
+			{
+				popupafterclose: { src: function() { return $( "#thePopup" ); }, event: "popupafterclose" + eventNs + "2" },
+				navigate: { src: $( document ), event: "navigate" + eventNs + "2" },
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "2" }
+			},
+			function( result ) {
+				ok( !result.popupafterclose.timedOut, "Popup emitted 'popupafterclose'" );
+				ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
+				$( "#fromDialogToPopup" ).click();
+			},
+			{
+				popupafteropen: { src: function() { return $( "#popupFromBasicDialog" ); }, event: "popupafteropen" + eventNs + "1" },
+				navigate: { src: $.mobile.pageContainer, event: "navigate" + eventNs + "1" }
+			},
+			function( result ) {
+				ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );
+				ok( !result.navigate.timedOut, "A 'navigate' event has occurred as a result of opening the popup" );
+				$( "#popupFromBasicDialog" ).parent().prev().click();
+			},
+			{
+				popupafterclose: { src: function() { return $( "#popupFromBasicDialog" ); }, event: "popupafterclose" + eventNs + "2" },
+				navigate: { src: $( document ), event: "navigate" + eventNs + "2" },
+			},
+			function( result ) {
+				ok( !result.popupafterclose.timedOut, "Popup emitted 'popupafterclose'" );
+				ok( !result.navigate.timedOut, "A 'navigate' event has occurred as a result of closing the popup" );
+				ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog is active page" );
+				$( "a:first", $.mobile.activePage[ 0 ] ).click();
+			},
+			{
+				navigate: { src: $( document ), event: "navigate" + eventNs + "2" },
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "2" }
+			},
+			function( result ) {
+				ok( !result.navigate.timedOut, "A 'navigate' event has occurred as a result of returning from the dialog" );
+				ok( !result.pagechange.timedOut, "A pagechange event has occurred as a result of returning from the dialog" );
+				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Basic test page is active page" );
+				start();
+			}
+		], eventNs );
+	});
+
 })( jQuery );
