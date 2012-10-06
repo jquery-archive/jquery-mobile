@@ -10,6 +10,48 @@
 	<script src="../../../js/jquery.js"></script>
 	<script src="../../../docs/_assets/js/jqm-docs.js"></script>
 	<script src="../../../js/"></script>
+	<script type="text/javascript">
+		function generateDynamicDialog(){
+		// Check to see if the dialog has already been created
+
+			if($('#someDiv').length != 1){
+			
+				/*
+				  the dialog has not been generated yet and so we add it to the DOM
+				  then call the jQuery Mobile dialog() method to add all the correct 
+				  CSS and HTML markup and then "change" to the dialog page.
+				*/
+				
+				$('body').append(
+				'<div id="someDiv" data-role="dialog">'+
+					'<div data-role="header" data-theme="d">'+
+						'<h1>Dialog</h1>'+
+					'</div>'+
+
+					'<div data-role="content">'+
+						'This is some dynamically generated text.'+
+					'</div>'+
+				'</div>'
+				);
+			  
+				$('#someDiv').dialog();
+				$.mobile.changePage('#someDiv', 'pop');
+				  
+			} else {   
+				 
+				/*
+				  we have already created the dialog and hence don't want to add
+				  another one with the same ID into the DOM so we will just
+				  change any details we want and then change to the dialog
+				  with the $.mobile.changePage() method.
+				*/
+			  
+				//	We will change the content to something else.
+				$('#someDiv [data-role="header"] h1').html('Dynamic dialog opened again');
+				$.mobile.changePage('#someDiv', 'pop');
+			}
+		}
+	</script>
 
 </head> 
 <body> 
@@ -44,6 +86,68 @@
 			</p>
 	
 			<a href="../dialog.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">Open dialog</a>
+			
+			<p>Just like any other page in the <a href="../multipage-template.html">multi-page template</a>, dialogs can also be called from within the same page.  </p>
+
+			<p>
+			<code>
+			&lt;a href=&quot;#someDialog&quot; data-rel=&quot;dialog&quot;&gt;Open dialog&lt;/a&gt;
+			</code>
+			</p>
+			<a href="#internalDialog" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">Open same page dialog</a>
+			<h3>Dynamic dialogs</h3>
+			<p>Knowing that we can call dialogs from within our page means we can easily generate dynamic dialogs without having to have/know the markup ahead of time. An example of how this could be achieved is shown below</p>
+			<pre><p><code>
+/*
+  Javascript 
+  You can make a function to be called by an "onclick" for example or in this
+  case bind directly to a click event
+*/
+
+$('#dynamicDialogButton').click(function(){
+
+  // Check to see if the dialog has already been created
+
+  if($('#someDiv').length != 1){
+
+	/*
+	  the dialog has not been generated yet and so we add it to the DOM
+	  then call the jQuery Mobile dialog() method to add all the correct 
+	  CSS and HTML markup and then "change" to the dialog page.
+	*/
+	
+	$('body').append(
+	'&lt;div id="someDiv" data-role="dialog"&gt;'+
+		'&lt;div data-role="header" data-theme="d"&gt;'+
+			'&lt;h1&gt;Dialog&lt;/h1&gt;'+
+		'&lt;/div&gt;'+
+
+		'&lt;div data-role="content"&gt;'+
+			'This is some dynamically generated text.'+
+		'&lt;/div&gt;'+
+	'&lt;/div&gt;'
+	);
+  
+	$('#someDiv').dialog();
+	$.mobile.changePage('#someDiv', 'pop');
+	  
+  } else {   
+	 
+	/*
+	  we have already created the dialog and hence don't want to add
+	  another one with the same ID into the DOM so we will just
+	  change any details we want and then change to the dialog
+	  with the $.mobile.changePage() method.
+	*/
+  
+	//	We will change the content to something else.
+	$('#someDiv [data-role="header"] h1').html('Dynamic dialog opened again');
+	$.mobile.changePage('#someDiv', 'pop');
+  }  
+});
+</code></p></pre>
+			<p>Here all we've done is bind a function to a click of the button/link and checked to see if the dialog already exists, if it does we change the header value and re-show it and if it doesn't we first create the appropriate markup, call the <code>dialog()</code> method on the element and then display it.</p>
+			<a href="" data-role="button" data-inline="true" onclick="generateDynamicDialog()">Open dynamic dialog</a>
 
 
 
@@ -146,6 +250,21 @@
 </div>
 
 </div><!-- /page -->
+
+<div id="internalDialog" data-role="page">
+	
+		<div data-role="header" data-theme="d">
+			<h1>Internal Dialog</h1>
+
+		</div><!-- /header -->
+
+		<div data-role="content" data-theme="c">
+			<h1>Delete page?</h1>
+			<p>This is a regular page, styled as a dialog. To create a dialog, just link to a normal page and include a transition and <code>data-rel="dialog"</code> attribute.</p>
+			<a href="dialog/index.html" data-role="button" data-rel="back" data-theme="b">Sounds good</a>       
+			<a href="dialog/index.html" data-role="button" data-rel="back" data-theme="c">Cancel</a>    
+		</div><!-- /content -->
+	</div><!-- /page -->
 
 </body>
 </html>
