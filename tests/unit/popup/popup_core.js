@@ -399,4 +399,42 @@
 			})
 			.popup( "open" );
 	});
+
+	asyncTest( "Cannot close a non-dismissable popup by clicking on the screen", function() {
+		var $popup = $( "#test-popup-dismissable" ), eventNs = ".cannotCloseNonDismissablePopup";
+
+		$.testHelper.detailedEventCascade([
+			function() {
+				$popup.popup( "open" );
+			},
+			{
+				navigate: { src: $( window ), event: "navigate" + eventNs + "0" },
+				popupafteropen: { src: $popup, event: "popupafteropen" + eventNs + "0" }
+			},
+			function( results ) {
+				ok( !results.navigate.timedOut, "A 'navigate' event has occurred" );
+				ok( !results.popupafteropen.timedOut, "The popup has emitted a 'popupafteropen' event" );
+				// Click on popup screen
+				$popup.parent().prev().click();
+			},
+			{
+				navigate: { src: $( window ), event: "navigate" + eventNs + "1" },
+				popupafterclose: { src: $popup, event: "popupafterclose" + eventNs + "1" }
+			},
+			function( results ) {
+				ok( results.navigate.timedOut, "A 'navigate' event has not occurred" );
+				ok( results.popupafterclose.timedOut, "The popup has not emitted a 'popupafterclose' event" );
+				$.mobile.back();
+			},
+			{
+				navigate: { src: $( window ), event: "navigate" + eventNs + "2" },
+				popupafterclose: { src: $popup, event: "popupafterclose" + eventNs + "2" }
+			},
+			function( results ) {
+				ok( !results.navigate.timedOut, "A 'navigate' event has occurred" );
+				ok( !results.popupafterclose.timedOut, "The popup has emitted a 'popupafterclose' event" );
+				start();
+			}
+		]);
+	});
 })( jQuery );
