@@ -52,6 +52,7 @@ define( [ "jquery",
 			closeLinkEvents: "click.popup",
 			navigateEvents: "navigate.popup",
 			closeEvents: "navigate.popup pagebeforechange.popup",
+			dismissable: true,
 
 			// NOTE Windows Phone 7 has a scroll position caching issue that
 			//      requires us to disable popup history management by default
@@ -64,7 +65,9 @@ define( [ "jquery",
 		_eatEventAndClose: function( e ) {
 			e.preventDefault();
 			e.stopImmediatePropagation();
-			this.close();
+			if ( this.options.dismissable ) {
+				this.close();
+			}
 			return false;
 		},
 
