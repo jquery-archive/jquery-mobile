@@ -21,6 +21,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		countTheme: "c",
 		headerTheme: "b",
 		dividerTheme: "b",
+		icon: "arrow-r",
 		splitIcon: "arrow-r",
 		splitTheme: "b",
 		inset: false,
@@ -163,6 +164,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			dividertheme = $list.jqmData( "dividertheme" ) || o.dividerTheme,
 			listsplittheme = $list.jqmData( "splittheme" ),
 			listspliticon = $list.jqmData( "spliticon" ),
+			listicon = $list.jqmData( "icon" ),
 			li = this._getChildrenByTagName( $list[ 0 ], "li", "LI" ),
 			ol = !!$.nodeName( $list[ 0 ], "ol" ),
 			jsCount = !$.support.cssPseudoElement,
@@ -211,7 +213,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 						shadow: false,
 						corners: false,
 						iconpos: "right",
-						icon: a.length > 1 || icon === false ? false : icon || "arrow-r",
+						icon: a.length > 1 || icon === false ? false : icon || listicon || o.icon,
 						theme: itemTheme
 					});
 
