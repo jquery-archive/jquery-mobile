@@ -143,6 +143,18 @@ define( [ "jquery",
 			}
 		},
 
+		// When the popup is open, attempting to focus on an element that is not a child of the popup will redirect focus to the popup
+		_handleDocumentFocusIn: function( e ) {
+			if ( this._isOpen &&
+				e.target !== this._ui.container[ 0 ] &&
+				0 === $( e.target ).parents().filter( this._ui.container[ 0 ] ).length ) {
+				this._ui.container.focus();
+				e.preventDefault();
+				e.stopImmediatePropagation();
+				return false;
+			}
+		},
+
 		_create: function() {
 			var ui = {
 					screen: $( "<div class='ui-screen-hidden ui-popup-screen'></div>" ),
@@ -207,6 +219,9 @@ define( [ "jquery",
 				orientationchange: $.proxy( this, "_handleWindowOrientationchange" ),
 				resize: $.proxy( this, "_handleWindowResize" ),
 				keyup: $.proxy( this, "_handleWindowKeyUp" )
+			});
+			this._on( $( document ), {
+				focusin: $.proxy( this, "_handleDocumentFocusIn" )
 			});
 		},
 
