@@ -289,6 +289,20 @@ define([
 				return $.mobile.allowCrossDomainPages &&
 					docUrl.protocol === "file:" &&
 					reqUrl.search( /^https?:/ ) !== -1;
+			},
+
+			resetUIKeys: function( url ) {
+				var dialog = $.mobile.dialogHashKey,
+					subkey = "&" + $.mobile.subPageUrlKey,
+					dialogIndex = url.indexOf( dialog );
+
+				if ( dialogIndex > -1 ) {
+					url = url.slice( 0, dialogIndex ) + "#" + url.slice( dialogIndex );
+				} else if ( url.indexOf( subkey ) > -1 ) {
+					url = url.split( subkey ).join( "#" + subkey );
+				}
+
+				return url;
 			}
 		};
 

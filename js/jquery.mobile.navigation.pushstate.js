@@ -42,21 +42,7 @@ define( [ "jquery", "./jquery.mobile.navigation", "depend!./jquery.hashchange[jq
 				initialHref: self.initialHref
 			};
 		},
-
-		resetUIKeys: function( url ) {
-			var dialog = $.mobile.dialogHashKey,
-				subkey = "&" + $.mobile.subPageUrlKey,
-				dialogIndex = url.indexOf( dialog );
-
-			if ( dialogIndex > -1 ) {
-				url = url.slice( 0, dialogIndex ) + "#" + url.slice( dialogIndex );
-			} else if ( url.indexOf( subkey ) > -1 ) {
-				url = url.split( subkey ).join( "#" + subkey );
-			}
-
-			return url;
-		},
-
+		
 		// TODO sort out a single barrier to hashchange functionality
 		nextHashChangePrevented: function( value ) {
 			$.mobile.urlHistory.ignoreNextHashChange = value;
@@ -88,7 +74,7 @@ define( [ "jquery", "./jquery.mobile.navigation", "depend!./jquery.hashchange[jq
 			href = $.mobile.path.makeUrlAbsolute( hash, resolutionUrl );
 
 			if ( isPath ) {
-				href = self.resetUIKeys( href );
+				href = $.mobile.path.resetUIKeys( href );
 			}
 
 			// replace the current url with the new href and store the state
