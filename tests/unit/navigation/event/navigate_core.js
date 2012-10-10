@@ -47,7 +47,7 @@ $.testHelper.setPushState();
 		asyncTest( "popstate navigation events contain pushed state", function() {
 			$( window ).one( "navigate", function( event, data ) {
 				$( window ).one( "navigate", function( event, data ) {
-					equal( data.state.foo, "bar", "tagged as popstate" );
+					equal( data.state.foo, "bar", "state provided properly" );
 					start();
 				});
 
@@ -55,6 +55,21 @@ $.testHelper.setPushState();
 			});
 
 			window.history.replaceState({ foo: "bar" }, document.title, location.href.replace(/#.*/, "" ) + "#foo");
+			location.hash = "#foo2";
+		});
+	} else {
+		// Make sure the binding happends before any of the navigate bindings
+		$( window ).bind( "hashchange", function( event ) {
+			event.hashchangeState = { foo: "bar" };
+		});
+
+		asyncTest( "hashchange navigation provides for data added in a later binding", function() {
+			$( window ).one( "navigate", function( event, data ) {
+				equal( data.from, "hashchange", "event triggered by a hashchange" );
+				equal( data.state.foo, "bar", "state provided properly" );
+				start();
+			});
+
 			location.hash = "#foo2";
 		});
 	}
