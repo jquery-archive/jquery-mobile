@@ -17,13 +17,17 @@ define([ "jquery",
 		// TODO use the originalEvent property on the event object
 		//      instead of from
 		popstate: function( event ) {
-			var state = event.originalEvent.state;
+			var newEvent = new $.Event( "navigate" ),
+				state = event.originalEvent.state;
+
+			// Make sure the original event is tracked for the end
+			// user to inspect incase they want to do something special
+			newEvent.originalEvent = event;
 
 			// NOTE the `|| {}` is there to ensure consistency between
 			//      the popstate navigate event and the hashchange navigate
 			//      event data
-			$win.trigger( new $.Event( "navigate" ), {
-				from: "popstate",
+			$win.trigger( newEvent, {
 				state: state || {}
 			});
 		},
@@ -31,10 +35,15 @@ define([ "jquery",
 		// TODO use the originalEvent property on the event object
 		//      instead of from
 		hashchange: function( event, data ) {
+			var newEvent = new $.Event( "navigate" );
+
+			// Make sure the original event is tracked for the end
+			// user to inspect incase they want to do something special
+			newEvent.originalEvent = event;
+
 			// Trigger the hashchange with state provided by the user
 			// that altered the hash
-			$win.trigger( new $.Event( "navigate" ), {
-				from: "hashchange",
+			$win.trigger( newEvent, {
 				// Users that want to fully normalize the two events
 				// will need to do history management down the stack and
 				// add the state to the event before this binding is fired

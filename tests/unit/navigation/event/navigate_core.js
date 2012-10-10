@@ -36,7 +36,7 @@ $.testHelper.setPushState();
 
 	asyncTest( "navigation events are marked", function() {
 		$( window ).one( "navigate", function( event, data ) {
-			equal( data.from, $.support.pushState ? "popstate" : "hashchange", "tagged as popstate" );
+			equal( event.originalEvent.type, $.support.pushState ? "popstate" : "hashchange", "tagged as popstate" );
 			start();
 		});
 
@@ -65,7 +65,7 @@ $.testHelper.setPushState();
 
 		asyncTest( "hashchange navigation provides for data added in a later binding", function() {
 			$( window ).one( "navigate", function( event, data ) {
-				equal( data.from, "hashchange", "event triggered by a hashchange" );
+				equal( event.originalEvent.type, "hashchange", "event triggered by a hashchange" );
 				equal( data.state.foo, "bar", "state provided properly" );
 				start();
 			});
