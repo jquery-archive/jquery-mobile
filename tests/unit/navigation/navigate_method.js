@@ -54,22 +54,20 @@ $.testHelper.setPushState();
 		});
 	}
 
-	if( !$.support.pushState ) {
-		asyncTest( "navigating backward should include the history state", function() {
-			$( window ).one( "navigate", function() {
-				$.navigate( "#bar" );
-
-				$( window ).one( "navigate", function() {
-					window.history.back();
-
-					$( window ).one( "navigate", function( event, data ) {
-						equal( data.state.foo, "bar", "the data that was appended in the navigation is popped with the backward movement" );
-						start();
-					});
+	asyncTest( "navigating backward should include the history state", function() {
+		$( window ).one( "navigate", function( event, data ) {
+			$( window ).one( "navigate", function( event, data ) {
+				$( window ).one( "navigate", function( event, data ) {
+					equal( data.state.foo, "bar", "the data that was appended in the navigation is popped with the backward movement" );
+					start();
 				});
+
+				window.history.back();
 			});
 
-			$.navigate( "#foo", { foo: "bar" });
+			$.navigate( "#bar" );
 		});
-	}
+
+		$.navigate( "#foo", { foo: "bar" });
+	});
 })( jQuery );

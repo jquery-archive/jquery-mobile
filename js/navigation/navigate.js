@@ -11,7 +11,7 @@ define([
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, undefined ) {
-	var path = $.mobile.path, history;
+	var path = $.mobile.path, history, popstateEvent;
 
 	// TODO consider queueing navigation activity until previous activities have completed
 	//      so that end users don't have to think about it. Punting for now
@@ -45,10 +45,24 @@ define([
 
 		// set the hash to be squashed by replace state or picked up by
 		// the navigation special event
-		window.location.hash = url;
 		history.ignoreNextHashChange = true;
 
+		// IMPORTANT in the case where popstate is supported the event will be triggered
+		//           directly, stopping further execution - ie, interupting the flow of this
+		//           method call to fire bindings at this expression. Below the navigate method
+		//           there is a binding to catch this event and stop its propagation.
+		//
+		//           We then trigger a new popstate event on the window with a null state
+		//           so that the navigate events can conclude their work properly
+		window.location.hash = url;
+
 		if( $.support.pushState ) {
+			popstateEvent = new $.Event( "popstate" );
+			popstateEvent.originalEvent = {
+				type: "popstate",
+				state: null
+			};
+
 			// replace the current url with the new href and store the state
 			// Note that in some cases we might be replacing an url with the
 			// same url. We do this anyways because we need to make sure that
@@ -60,14 +74,27 @@ define([
 			// will always trigger our hashchange callback even when a hashchange event
 			// is not fired.
 			window.history.replaceState( state, document.title, href );
+
+			// Trigger a new faux popstate event to
+			$( window ).trigger( popstateEvent );
 		}
 
 		// record the history entry so that the information can be included
 		// in hashchange event driven navigate events in a similar fashion to
 		// the state that's provided by popstate
-
 		history.add( url, state );
 	};
+
+	// This binding is intended to catch the popstate events that are fired
+	// when execution of the `$.navigate` method stops at window.location.hash = url;
+	// and completely prevent them from propagating. The popstate event will then be
+	// retriggered after execution resumes
+	$( window ).bind( "popstate", function( event ) {
+		if( history.ignoreNextHashChange ) {
+			history.ignoreNextHashChange = false;
+			event.stopImmediatePropagation();
+		}
+	});
 
 	// NOTE must bind before `navigate` special event hashchange binding otherwise the
 	//      navigation data won't be attached to the hashchange event in time for those
