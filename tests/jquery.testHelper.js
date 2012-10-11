@@ -218,9 +218,11 @@
 //			fn(result),
 //			{ key: {
 //					src: event source (is jQuery object or function returning jQuery object),
-//					event: event name (is string),
-//					       NB: It's a good idea to namespace your events, because the handler will be removed
-//					       based on the name you give here if a timeout occurs before the event fires.
+//					length: the number of milliseconds for the timeout - only used if src is not set,
+//					event: event name (is string), only used if src is set,
+//					       (NB: It's a good idea to namespace your events, because the handler will be removed
+//					        based on the name you give here if a timeout occurs before the event fires.)
+//
 //					userData1: value,
 //					...
 //					userDatan: value
@@ -244,11 +246,11 @@
 		detailedEventCascade: function( seq, result ) {
 			// grab one step from the sequence
 			var fn = seq.shift(),
-			    events = seq.shift(),
-			    self = this,
-			    derefSrc = function( src ) {
-						return ( $.isFunction( src ) ? src() : src );
-					};
+				events = seq.shift(),
+				self = this,
+				derefSrc = function( src ) {
+					return ( $.isFunction( src ) ? src() : src );
+				};
 
 			// we're done
 			if ( fn === undefined ) {
