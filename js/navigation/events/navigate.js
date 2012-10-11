@@ -14,8 +14,6 @@ define([ "jquery",
 	$.event.special.navigate = self = {
 		bound: false,
 
-		// TODO use the originalEvent property on the event object
-		//      instead of from
 		popstate: function( event ) {
 			var newEvent = new $.Event( "navigate" ),
 				state = event.originalEvent.state;
@@ -32,8 +30,6 @@ define([ "jquery",
 			});
 		},
 
-		// TODO use the originalEvent property on the event object
-		//      instead of from
 		hashchange: function( event, data ) {
 			var newEvent = new $.Event( "navigate" );
 
