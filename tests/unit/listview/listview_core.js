@@ -685,6 +685,36 @@
 		]);
 	});
 
+	module( "Search Filter with filterReveal==true" );
+
+	asyncTest( "Filter downs results when the user enters information", 3, function() {
+		var $searchPage = $( "#search-filter-reveal-test" );
+		$.testHelper.pageSequence([
+			function() {
+				$.mobile.changePage( $searchPage );
+			},
+
+			function() {
+				deepEqual( $searchPage.find( 'li.ui-screen-hidden' ).length, 22);
+			},
+
+			function() {
+				$searchPage.find( 'input' ).val( 'a' );
+				$searchPage.find( 'input' ).trigger('change');
+
+				deepEqual( $searchPage.find('li.ui-screen-hidden').length, 11);
+			},
+
+			function() {
+				$searchPage.find( 'input' ).val( '' );
+				$searchPage.find( 'input' ).trigger('change');
+
+				deepEqual( $searchPage.find('li.ui-screen-hidden').length, 22);
+				start();
+			}
+		]);
+	});
+
 	module( "Programmatically generated list items", {
 		setup: function(){
 			var item,
