@@ -4,7 +4,7 @@
 //>>group: Navigation
 define([
 	"jquery",
-	"./jquery.mobile.core" ], function( $ ) {
+	"./../jquery.mobile.core" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 
 		var path, documentBase, $base, dialogHashKey = "&ui-state=dialog";
@@ -315,6 +315,16 @@ define([
 			path.documentUrl;
 
 		path.documentBaseDiffers = (path.documentUrl.hrefNoHash !== path.documentBase.hrefNoHash);
+
+		//return the original document url
+		$.mobile.getDocumentUrl = function( asParsedObject ) {
+			return asParsedObject ? $.extend( {}, path.documentUrl ) : path.documentUrl.href;
+		};
+
+		//return the original document base url
+		$.mobile.getDocumentBase = function( asParsedObject ) {
+			return asParsedObject ? $.extend( {}, path.documentBase ) : path.documentBase.href;
+		};
 
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });

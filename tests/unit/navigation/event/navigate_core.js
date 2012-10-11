@@ -1,6 +1,6 @@
 $.testHelper.setPushState();
 
-(function( $) {
+(function( $ ) {
 	module( "navigate", {
 		setup: function() {
 			location.hash = "";
