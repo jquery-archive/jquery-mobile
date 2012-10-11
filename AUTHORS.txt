@@ -81,7 +81,7 @@ Steven Black <steveb@stevenblack.com>
 Eric DeLabar <edelabar@gmail.com>
 Paul Nicholls <paul.nicholls@canterbury.ac.nz>
 Marek Stepien <marcoos@marcoos.org>
-Ghislain Seguin <ghislain.seguin@macjiver.jiveland.com>
+Ghislain Seguin <ghislain@gmail.com>
 Abhishek Joshi <abhishek2185@gmail.com>
 Platon Dickey <platon.dickey@gmail.com>
 Mike Woods <vtwoods@gmail.com>
