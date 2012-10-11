@@ -89,6 +89,9 @@ define([
 	// when execution of the `$.navigate` method stops at window.location.hash = url;
 	// and completely prevent them from propagating. The popstate event will then be
 	// retriggered after execution resumes
+	//
+	// TODO grab the original event here and use it for the synthetic event in the
+	//      second half of the navigate execution that will follow this binding
 	$( window ).bind( "popstate", function( event ) {
 		if( history.ignoreNextHashChange ) {
 			history.ignoreNextHashChange = false;

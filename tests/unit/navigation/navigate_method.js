@@ -15,6 +15,11 @@ $.testHelper.setPushState();
 
 			if( location.hash !== "#reset" ) {
 				$.navigate( "#reset" );
+			} else {
+				// handle the case where it is still set to reset
+				// we've stopped test execution so we need to make
+				// sure it resumes
+				$.navigate( "#seriously-reset" );
 			}
 
 			$.navigate.history.stack = [];
@@ -54,9 +59,11 @@ $.testHelper.setPushState();
 		});
 	}
 
+	// Test the inclusion of state for both pushstate and hashchange
+	// _ --nav--> #foo {state} --nav--> #bar --back--> #foo {state}
 	asyncTest( "navigating backward should include the history state", function() {
-		$( window ).one( "navigate", function( event, data ) {
-			$( window ).one( "navigate", function( event, data ) {
+		$( window ).one( "navigate", function( event ) {
+			$( window ).one( "navigate", function( event ) {
 				$( window ).one( "navigate", function( event, data ) {
 					equal( data.state.foo, "bar", "the data that was appended in the navigation is popped with the backward movement" );
 					start();
