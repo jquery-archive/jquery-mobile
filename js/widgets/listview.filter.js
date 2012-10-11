@@ -11,6 +11,7 @@ define( [ "jquery", "./listview", "./forms/textinput" ], function( $ ) {
 $.mobile.listview.prototype.options.filter = false;
 $.mobile.listview.prototype.options.filterPlaceholder = "Filter items...";
 $.mobile.listview.prototype.options.filterTheme = "c";
+$.mobile.listview.prototype.options.filterReveal = false;
 // TODO rename callback/deprecate and default to the item itself as the first argument
 var defaultFilterCallback = function( text, searchValue, item ) {
 		return text.toString().toLowerCase().indexOf( searchValue ) === -1;
@@ -25,6 +26,10 @@ $( document ).delegate( ":jqmData(role='listview')", "listviewcreate", function(
 
 	if ( !listview.options.filter ) {
 		return;
+	}
+
+	if ( listview.options.filterReveal ) {
+		list.children().addClass( "ui-screen-hidden" );
 	}
 
 	var wrapper = $( "<form>", {
@@ -60,6 +65,10 @@ $( document ).delegate( ":jqmData(role='listview')", "listviewcreate", function(
 
 				// Only chars added, not removed, only use visible subset
 				listItems = list.children( ":not(.ui-screen-hidden)" );
+
+				if ( !listItems.length && listview.options.filterReveal ) {
+					listItems = list.children( ".ui-screen-hidden" );
+				}
 			}
 
 			if ( val ) {
@@ -103,7 +112,7 @@ $( document ).delegate( ":jqmData(role='listview')", "listviewcreate", function(
 			} else {
 
 				//filtervalue is empty => show all
-				listItems.toggleClass( "ui-screen-hidden", false );
+				listItems.toggleClass( "ui-screen-hidden", !!listview.options.filterReveal );
 			}
 			listview._refreshCorners();
 		})
