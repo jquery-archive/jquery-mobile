@@ -262,33 +262,34 @@
 				var newResult = {},
 					nEventsDone = 0,
 					nEvents = 0,
+					recordResult = function( key, event, result ) {
+						// Record the result
+						newResult[ key ] = $.extend( {}, event, result );
+						// Increment the number of received responses
+						nEventsDone++;
+						if ( nEventsDone === nEvents ) {
+							// clear the timeout and move on to the next step when all events have been received
+							if ( warnTimer ) {
+								clearTimeout( warnTimer );
+							}
+							setTimeout( function() {
+								self.detailedEventCascade( seq, newResult );
+							}, 0);
+						}
+					},
 					// set a failsafe timer in case one of the events never happens
 					warnTimer = setTimeout( function() {
+						warnTimer = 0;
 						$.each( events, function( key, event ) {
-							if ( newResult[ key ] === undefined ) {
+							// Timeouts are left out of this, because they will complete for
+							// sure, calling recordResult when they do
+							if ( newResult[ key ] === undefined && event.src ) {
 								// clean up the unused handler
 								derefSrc( event.src ).unbind( event.event );
-								newResult[ key ] = $.extend( {}, event, { timedOut: true } );
+								recordResult( key, event, { timedOut: true } );
 							}
 						});
-
-						// Move on to the next step
-						self.detailedEventCascade( seq, newResult );
 					}, 20000);
-
-				function recordResult( key, event, result ) {
-					// Record the result
-					newResult[ key ] = $.extend( {}, event, result );
-					// Increment the number of received responses
-					nEventsDone++;
-					if ( nEventsDone === nEvents ) {
-						// clear the timeout and move on to the next step when all events have been received
-						clearTimeout( warnTimer );
-						setTimeout( function() {
-							self.detailedEventCascade( seq, newResult );
-						}, 0);
-					}
-				}
 
 				$.each( events, function( key, event ) {
 					// Count the events so that we may know how many responses to expect
