@@ -62,19 +62,30 @@ $.testHelper.setPushState();
 	// Test the inclusion of state for both pushstate and hashchange
 	// _ --nav--> #foo {state} --nav--> #bar --back--> #foo {state}
 	asyncTest( "navigating backward should include the history state", function() {
-		$( window ).one( "navigate", function( event ) {
-			$( window ).one( "navigate", function( event ) {
-				$( window ).one( "navigate", function( event, data ) {
-					equal( data.state.foo, "bar", "the data that was appended in the navigation is popped with the backward movement" );
-					start();
-				});
+		$.testHelper.eventTarget = $( window );
 
+		$.testHelper.eventSequence( "navigate", [
+			function( timedOut, data ) {
+				$.navigate( "#foo", { foo: "bar" });
+			},
+
+			function( timedOut, data ) {
+				$.navigate( "#bar", { baz: "bak" });
+			},
+
+			function( timedOut, data ) {
 				window.history.back();
-			});
+			},
 
-			$.navigate( "#bar" );
-		});
+			function( timedOut, data ) {
+				equal( data.state.foo, "bar", "the data that was appended in the navigation is popped with the backward movement" );
+				window.history.forward();
+			},
 
-		$.navigate( "#foo", { foo: "bar" });
+			function( timedOut, data ) {
+				equal( data.state.baz, "bak", "the data that was appended in the navigation is popped with the foward movement" );
+				start();
+			}
+		]);
 	});
 })( jQuery );

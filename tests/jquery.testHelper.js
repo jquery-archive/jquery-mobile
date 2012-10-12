@@ -184,12 +184,15 @@
 			this.eventCascade( seq );
 		},
 
-		eventCascade: function( sequence, timedOut ) {
+		eventTarget: undefined,
+
+		eventCascade: function( sequence, timedOut, data ) {
 			var fn = sequence.shift(),
 				event = sequence.shift(),
 				self = this;
 
 			if( fn === undefined ) {
+				self.eventCascadeTarget = undefined;
 				return;
 			}
 
@@ -201,18 +204,18 @@
 				}, 2000);
 
 				// bind the recursive call to the event
-				$.mobile.pageContainer.one(event, function() {
+				( self.eventTarget || $.mobile.pageContainer ).one(event, function( event, data ) {
 					clearTimeout( warnTimer );
 
 					// Let the current stack unwind before we fire off the next item in the sequence.
 					// TODO setTimeout(self.pageSequence, 0, sequence);
-					setTimeout(function(){ self.eventCascade(sequence); }, 0);
+					setTimeout(function(){ self.eventCascade(sequence, false, data ); }, 0);
 				});
 			}
 
 			// invoke the function which should, in some fashion,
 			// trigger the next event
-			fn( timedOut );
+			fn( timedOut, data );
 		},
 
 		deferredSequence: function(fns) {
