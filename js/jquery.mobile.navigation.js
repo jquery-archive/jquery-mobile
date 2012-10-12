@@ -404,48 +404,22 @@ define( [
 		getScreenHeight = $.mobile.getScreenHeight;
 
 		//base element management, defined depending on dynamic base tag support
-		var base = {
+		var base = $.support.dynamicBaseTag ? {
+
 			//define base element, for use in routing asset urls that are referenced in Ajax-requested markup
 			element: ( $base.length ? $base : $( "<base>", { href: documentBase.hrefNoHash } ).prependTo( $head ) ),
 
-			linkSelector: "[src], link[href], a[rel='external'], :jqmData(ajax='false'), a[target]",
-
 			//set the generated BASE element's href attribute to a new page's base path
-			set: function( href, page ) {
-				// we should do nothing if the user wants to manage their url base manually
-				if ( !$.mobile.dynamicBaseEnabled ){
-					return;
-				}
-
-				// we should use the base tag if we can manipulate it dynamically
-				if ( $.support.dynamicBaseTag ){
-					base.element.attr( "href", path.makeUrlAbsolute( href, documentBase ) );
-				}
-
-				// otherwise rewrite src and href attrs to use a base url
-				if ( !$.support.dynamicBaseTag && page ) {
-					var newPath = path.get( href );
-					page.find( base.linkSelector ).each(function( i, link ) {
-						var thisAttr = $( link ).is( '[href]' ) ? 'href' : $( link ).is( '[src]' ) ? 'src' : 'action',
-						thisUrl = $( link ).attr( thisAttr );
-
-						// XXX_jblas: We need to fix this so that it removes the document
-						//            base URL, and then prepends with the new page URL.
-						//if full path exists and is same, chop it - helps IE out
-						thisUrl = thisUrl.replace( location.protocol + '//' + location.host + location.pathname, '' );
-
-						if ( !/^(\w+:|#|\/)/.test( thisUrl ) ) {
-							$( link ).attr( thisAttr, newPath + thisUrl );
-						}
-					});
-				}
+			set: function( href ) {
+				base.element.attr( "href", path.makeUrlAbsolute( href, documentBase ) );
 			},
 
 			//set the generated BASE element's href attribute to a new page's base path
 			reset: function() {
 				base.element.attr( "href", documentBase.hrefNoHash );
 			}
-		};
+
+		} : undefined;
 
 	/* internal utility functions */
 
@@ -627,12 +601,6 @@ define( [
 		$page.page();
 	}
 
-	// determine the current base url
-	function findBaseWithDefault() {
-		var closestBase = ( $.mobile.activePage && getClosestBaseUrl( $.mobile.activePage ) );
-		return closestBase || documentBase.hrefNoHash;
-	}
-
 	/* exposed $.mobile methods */
 
 	//animation complete callback
@@ -657,6 +625,8 @@ define( [
 	$.mobile.urlHistory = urlHistory;
 
 	$.mobile.dialogHashKey = dialogHashKey;
+
+
 
 	//enable cross-domain page support
 	$.mobile.allowCrossDomainPages = false;
@@ -709,6 +679,12 @@ define( [
 			// so that it can be removed after the new version of the
 			// page is loaded off the network.
 			dupCachedPage = null,
+
+			// determine the current base url
+			findBaseWithDefault = function() {
+				var closestBase = ( $.mobile.activePage && getClosestBaseUrl( $.mobile.activePage ) );
+				return closestBase || documentBase.hrefNoHash;
+			},
 
 			// The absolute version of the URL passed into the function. This
 			// version of the URL may contain dialog/subpage params in it.
@@ -857,6 +833,10 @@ define( [
 						url = fileUrl = path.getFilePath( $( "<div>" + RegExp.$1 + "</div>" ).text() );
 					}
 
+					if ( base ) {
+						base.set( fileUrl );
+					}
+
 					//workaround to allow scripts to execute when included in page divs
 					all.get( 0 ).innerHTML = html;
 					page = all.find( ":jqmData(role='page'), :jqmData(role='dialog')" ).first();
@@ -873,7 +853,24 @@ define( [
 						page.jqmData( "title", newPageTitle );
 					}
 
-					base.set( fileUrl, page );
+					//rewrite src and href attrs to use a base url
+					if ( !$.support.dynamicBaseTag ) {
+						var newPath = path.get( fileUrl );
+						page.find( "[src], link[href], a[rel='external'], :jqmData(ajax='false'), a[target]" ).each(function() {
+							var thisAttr = $( this ).is( '[href]' ) ? 'href' :
+									$( this ).is( '[src]' ) ? 'src' : 'action',
+								thisUrl = $( this ).attr( thisAttr );
+
+							// XXX_jblas: We need to fix this so that it removes the document
+							//            base URL, and then prepends with the new page URL.
+							//if full path exists and is same, chop it - helps IE out
+							thisUrl = thisUrl.replace( location.protocol + '//' + location.host + location.pathname, '' );
+
+							if ( !/^(\w+:|#|\/)/.test( thisUrl ) ) {
+								$( this ).attr( thisAttr, newPath + thisUrl );
+							}
+						});
+					}
 
 					//append to page and enhance
 					// TODO taging a page with external to make sure that embedded pages aren't removed
@@ -897,6 +894,7 @@ define( [
 					}
 
 					//bind pageHide to removePage after it's hidden, if the page options specify to do so
+
 					// Remove loading message.
 					if ( settings.showLoadMsg ) {
 						hideMsg();
@@ -914,7 +912,9 @@ define( [
 				},
 				error: function( xhr, textStatus, errorThrown ) {
 					//set base back to current path
-					base.set( path.get() );
+					if ( base ) {
+						base.set( path.get() );
+					}
 
 					// Add error info to our triggerData.
 					triggerData.xhr = xhr;
@@ -975,7 +975,7 @@ define( [
 			return;
 		}
 
-		var settings = $.extend( {}, $.mobile.changePage.defaults, options ), isString;
+		var settings = $.extend( {}, $.mobile.changePage.defaults, options );
 
 		// Make sure we have a pageContainer to work with.
 		settings.pageContainer = settings.pageContainer || $.mobile.pageContainer;
@@ -983,24 +983,9 @@ define( [
 		// Make sure we have a fromPage.
 		settings.fromPage = settings.fromPage || $.mobile.activePage;
 
-		isString = (typeof toPage === "string");
-
 		var mpc = settings.pageContainer,
 			pbcEvent = new $.Event( "pagebeforechange" ),
 			triggerData = { toPage: toPage, options: settings };
-
-		// NOTE: preserve the original target as the dataUrl value will be simplified
-		//       eg, removing ui-state, and removing query params from the hash
-		//       this is so that users who want to use query params have access to them
-		//       in the event bindings for the page life cycle See issue #5085
-		if ( isString ) {
-			// if the toPage is a string simply convert it
-			triggerData.absUrl = path.makeUrlAbsolute( toPage, findBaseWithDefault() );
-		} else {
-			// if the toPage is a jQuery object grab the absolute url stored
-			// in the loadPage callback where it exists
-			triggerData.absUrl = toPage.data( 'absUrl' );
-		}
 
 		// Let listeners know we're about to change the current page.
 		mpc.trigger( pbcEvent, triggerData );
@@ -1025,15 +1010,17 @@ define( [
 		// to make sure it is loaded into the DOM. We'll listen
 		// to the promise object it returns so we know when
 		// it is done loading or if an error ocurred.
-		if ( isString ) {
+		if ( typeof toPage === "string" ) {
+			// preserve the original target as the dataUrl value will be simplified
+			// eg, removing ui-state, and removing query params from the hash
+			// this is so that users who want to use query params have access to them
+			// in the event bindings for the page life cycle See issue #5085
+			settings.target = toPage;
+
 			$.mobile.loadPage( toPage, settings )
 				.done(function( url, options, newPage, dupCachedPage ) {
 					isPageTransitioning = false;
 					options.duplicateCachedPage = dupCachedPage;
-
-					// store the original absolute url so that it can be provided
-					// to events in the triggerData of the subsequent changePage call
-					newPage.data( 'absUrl', triggerData.absUrl );
 					$.mobile.changePage( newPage, options );
 				})
 				.fail(function( url, options ) {
@@ -1186,7 +1173,6 @@ define( [
 			if ( alreadyThere ) {
 				urlHistory.activeIndex = Math.max( 0, urlHistory.activeIndex - 1 );
 			}
-
 			urlHistory.addNew( url, settings.transition, pageTitle, pageUrl, settings.role );
 		}
 
@@ -1237,8 +1223,9 @@ define( [
 		allowSamePageTransition: false
 	};
 
-	/* Event Bindings - hashchange, submit, and click */
-	function findClosestLink( ele )	{
+/* Event Bindings - hashchange, submit, and click */
+	function findClosestLink( ele )
+	{
 		while ( ele ) {
 			// Look for the closest element with a nodeName of "a".
 			// Note that we are checking if we have a valid nodeName
@@ -1256,16 +1243,17 @@ define( [
 	}
 
 	// The base URL for any given element depends on the page it resides in.
-	function getClosestBaseUrl( ele )	{
+	function getClosestBaseUrl( ele )
+	{
 		// Find the closest page and extract out its url.
 		var url = $( ele ).closest( ".ui-page" ).jqmData( "url" ),
 			base = documentBase.hrefNoHash;
 
-		if ( !$.mobile.dynamicBaseEnabled || !url || !path.isPath( url ) ) {
+		if ( !url || !path.isPath( url ) ) {
 			url = base;
 		}
 
-		return path.makeUrlAbsolute( url, base );
+		return path.makeUrlAbsolute( url, base);
 	}
 
 	//The following event bindings should be bound after mobileinit has been triggered

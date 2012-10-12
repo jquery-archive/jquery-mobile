@@ -84,10 +84,6 @@ define( [ "jquery", "text!../version.txt" ], function( $, __version__ ) {
 			hoverDelay: 200
 		},
 
-		// disable the alteration of the dynamic base tag or links in the case
-		// that a dynamic base tag isn't supported
-		dynamicBaseEnabled: true,
-
 		// TODO might be useful upstream in jquery itself ?
 		keyCode: {
 			ALT: 18,

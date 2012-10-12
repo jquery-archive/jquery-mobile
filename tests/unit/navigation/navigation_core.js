@@ -1312,33 +1312,4 @@
 			}
 		]);
 	});
-
-
-	var absHomeUrl = $.mobile.path.parseLocation().hrefNoHash,
-	    homeDomain = $.mobile.path.parseLocation().domain;
-
-	asyncTest( "page load events are providided with the absolute url for the content", function() {
-		var requestPath;
-
-		expect( 3 );
-
-		$( document ).one( "pagebeforechange", function( event, data ) {
-			equal( data.absUrl, absHomeUrl + "#bar");
-		});
-
-		$( document ).one( "pagechange", function( event, data ) {
-			equal( data.absUrl, absHomeUrl + "#bar" );
-		});
-
-		$.mobile.changePage( "#bar" );
-
-		requestPath = "/theres/no/way/this/page/exists.html";
-
-		$( document ).one( "pagechangefailed", function( event, data ) {
-			equal( data.absUrl, homeDomain + requestPath );
-			start();
-		});
-
-		$.mobile.changePage( requestPath );
-	});
 })(jQuery);
