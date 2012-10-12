@@ -84,7 +84,7 @@
 			<h2>More text input types</h2>
 			<p>In jQuery Mobile, you can use existing and new HTML5 input types such as <code>password</code>, <code>email</code>, <code>tel</code>, <code>number</code>, and more.  Some type values are rendered differently across browsers. For example, Chrome renders the <code>range</code> input as a slider. jQuery Mobile standardizes the appearance of <code>range</code> and <code>search</code> by dynamically changing their type to <code>text</code>. You can configure which input types are degraded to <code>text</code> with the <code>page</code> plugin's options.</p>
 			
-			<p>One major advantage of using these more specific input types if that on mobile devices, specialized keyboards that speed data entry are offered in place of the standard text keyboard. Try the following inputs on a mobile device to see which display custom keyboards on various platforms.</p>
+			<p>One major advantage of using these more specific input types if that on mobile devices, specialized keyboards or pickers that speed data entry are offered in place of the standard text keyboard. Support for each input type will vary greatly across platforms, but these generally fall back to a basic text input if not understood.</p>
 			
 			<div data-role="fieldcontain">
 	         <label for="password">Password:</label>
@@ -151,6 +151,15 @@
 	         <input type="color" name="color" id="color" value="" />
 			</div>
 			
+
+			
+			<h2>File inputs</h2>
+			<p>File inputs have limited styling options on most platforms due to security concerns. As of version 1.3, we will automatically apply standard theming to file inputs. In testing, we've found that while the button to select a file cannot be styled, the input that surrounds the button seems to get the theme colors, corners and dimensions in most modern browsers.</p>
+			
+			<div data-role="fieldcontain">
+	         <label for="file">File:</label>
+	         <input type="file" name="file" id="file" value="" />
+			</div>
 			
 			
 			<h2>Textareas</h2>
