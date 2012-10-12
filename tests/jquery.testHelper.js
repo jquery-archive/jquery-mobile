@@ -219,7 +219,7 @@
 //			{ key: {
 //					src: event source (is jQuery object or function returning jQuery object),
 //					     (NB: You should use a function returning a jQuery object as the value for this parameter
-//					      if there is a change that at the time of construction of the jQuery object (that is, when
+//					      if there is a chance that at the time of construction of the jQuery object (that is, when
 //					      the call to detailedEventCascade is made) the elements selected by the jQuery object are
 //					      not yet present in the DOM - such as, for instance, when the elements are part of a page
 //					      that gets AJAXed in subsequently, such as during a function that's part of the sequence of
