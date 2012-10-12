@@ -60,7 +60,7 @@ $.testHelper.setPushState();
 	}
 
 	// Test the inclusion of state for both pushstate and hashchange
-	// _ --nav--> #foo {state} --nav--> #bar --back--> #foo {state}
+	// _ --nav--> #foo {state} --nav--> #bar --back--> #foo {state} --foward--> #bar {state}
 	asyncTest( "navigating backward should include the history state", function() {
 		$.testHelper.eventTarget = $( window );
 
