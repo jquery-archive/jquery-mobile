@@ -58,8 +58,8 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 				o.expandedIcon = collapsibleSet.jqmData( "expanded-icon" );
 			}
 			// Gets the preference icon position in the set
-			if ( !o.iconPos ) {
-				o.iconPos = collapsibleSet.jqmData( "iconpos" );
+			if ( !o.iconpos ) {
+				o.iconpos = collapsibleSet.jqmData( "iconpos" );
 			}
 			// Inherit the preference for inset from collapsible-set or set the default value to ensure equalty within a set
 			if ( collapsibleSet.jqmData( "inset" ) !== undefined ) {
@@ -99,7 +99,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 				.buttonMarkup({
 					shadow: false,
 					corners: false,
-					iconpos: $el.jqmData( "iconpos" ) || o.iconPos || "left",
+					iconpos: $el.jqmData( "iconpos" ) || o.iconpos || "left",
 					icon: collapsedIcon,
 					mini: o.mini,
 					theme: o.theme
