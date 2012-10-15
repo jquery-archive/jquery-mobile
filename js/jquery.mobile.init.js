@@ -46,8 +46,8 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 			// find present pages
 			var path = $.mobile.path,
 				$pages = $( ":jqmData(role='page'), :jqmData(role='dialog')" ),
-				hash = path.convertUrlToDataUrl( path.parseLocation().hash ),
-				hashPage = document.getElementById( hash );
+				hash = path.stripHash( path.stripQueryParams(path.parseLocation().hash) ),
+ 				hashPage = document.getElementById( hash );
 
 			// if no pages are found, create one with body's inner html
 			if ( !$pages.length ) {
@@ -94,10 +94,15 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 				if ( $.mobile.path.isHashValid( location.hash ) ) {
 					$.mobile.urlHistory.initialDst = hash.replace( "#", "" );
 				}
-				$.mobile.changePage( $.mobile.firstPage, { transition: "none", reverse: true, changeHash: false, fromHashChange: true } );
-			}
-			// otherwise, trigger a hashchange to load a deeplink
-			else {
+
+				$.mobile.changePage( $.mobile.firstPage, {
+					transition: "none",
+					reverse: true,
+					changeHash: false,
+					fromHashChange: true
+				});
+			} else {
+				// otherwise, trigger a hashchange to load a deeplink
 				$window.trigger( "hashchange", [ true ] );
 			}
 		}

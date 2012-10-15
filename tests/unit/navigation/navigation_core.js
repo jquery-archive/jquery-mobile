@@ -60,8 +60,6 @@
 
 	asyncTest( "external page is removed from the DOM after pagehide", function(){
 		$.testHelper.pageSequence([
-			navigateTestRoot,
-
 			function(){
 				$.mobile.changePage( "external.html" );
 			},
@@ -91,7 +89,6 @@
 		$( document ).bind( "pageremove", removeCallback );
 
 		$.testHelper.pageSequence([
-			navigateTestRoot,
 
 			function(){
 				$.mobile.changePage( "external.html" );
@@ -132,7 +129,6 @@
 
 	asyncTest( "external page is cached in the DOM after pagehide", function(){
 		$.testHelper.pageSequence([
-			navigateTestRoot,
 
 			function(){
 				$.mobile.changePage( "cached-external.html" );
@@ -154,7 +150,6 @@
 
 	asyncTest( "external page is cached in the DOM after pagehide when option is set globally", function(){
 		$.testHelper.pageSequence([
-			navigateTestRoot,
 
 			function(){
 				$.mobile.page.prototype.options.domCache = true;

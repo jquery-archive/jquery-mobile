@@ -378,19 +378,24 @@
 
 				stop();
 
-				timeout = setTimeout( start, 2000);
+				timeout = setTimeout( function() {
+					start();
+					throw "navigation reset timed out";
+				}, 5000);
 
 				$(document).one( "pagechange", function() {
 					clearTimeout( timeout );
 					start();
 				});
 
-				location.hash = hash ? "#" + hash : "";
+
+				hash = location.hash.replace( "#", "" ) !== url ? url : "";
+				location.hash = hash;
 			};
 
 			// force the page reset for hash based tests
 			if ( location.hash && !$.support.pushState ) {
-				pageReset();
+				pageReset( url );
 			}
 
 			// force the page reset for all pushstate tests

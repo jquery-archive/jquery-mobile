@@ -235,6 +235,10 @@ define( [
 				return url.replace( /^#/, "" );
 			},
 
+			stripQueryParams: function( url ) {
+				return url.replace( /\?.*$/, "" );
+			},
+
 			//remove the preceding hash, any query params, and dialog notations
 			cleanHash: function( hash ) {
 				return path.stripHash( hash.replace( /\?.*$/, "" ).replace( dialogHashKey, "" ) );
