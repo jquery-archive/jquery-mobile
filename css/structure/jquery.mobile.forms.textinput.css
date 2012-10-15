@@ -17,6 +17,8 @@ textarea.ui-input-text { height: 50px; -webkit-transition: height 200ms linear; 
 input.ui-mini, .ui-mini input, textarea.ui-mini { font-size: 14px; }
 textarea.ui-mini { height: 45px; }
 
+:-moz-placeholder { color: #aaa; }
+
 @media all and (min-width: 450px){
 	.ui-field-contain label.ui-input-text  { vertical-align: top; display: inline-block; width: 20%; margin: 0 2% 0 0 }
 	.ui-field-contain input.ui-input-text, 
