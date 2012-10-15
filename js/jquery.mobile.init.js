@@ -47,7 +47,7 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 			var path = $.mobile.path,
 				$pages = $( ":jqmData(role='page'), :jqmData(role='dialog')" ),
 				hash = path.stripHash( path.stripQueryParams(path.parseLocation().hash) ),
- 				hashPage = document.getElementById( hash );
+				hashPage = document.getElementById( hash );
 
 			// if no pages are found, create one with body's inner html
 			if ( !$pages.length ) {
