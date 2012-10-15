@@ -25,6 +25,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		splitIcon: "arrow-r",
 		splitTheme: "b",
 		inset: false,
+		layout: "list", //accepts grid also
 		initSelector: ":jqmData(role='listview')"
 	},
 
@@ -34,12 +35,20 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 		listviewClasses += t.options.inset ? " ui-listview-inset ui-corner-all ui-shadow " : "";
 
+		if( t.options.layout === "grid" ){
+			listviewClasses += " ui-listview-grid";
+		}
+
 		// create listview markup
 		t.element.addClass(function( i, orig ) {
 			return orig + " ui-listview " + listviewClasses;
 		});
 
 		t.refresh( true );
+	},
+
+	toggleLayout: function(){
+		this.element.toggleClass( "ui-listview-grid" );
 	},
 
 	_removeCorners: function( li, which ) {
