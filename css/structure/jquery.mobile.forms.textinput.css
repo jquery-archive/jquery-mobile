@@ -18,7 +18,7 @@ input.ui-mini, .ui-mini input, textarea.ui-mini { font-size: 14px; }
 textarea.ui-mini { height: 45px; }
 
 /* Resolves issue #5166: Added to support issue introduced in Firefox 15. We can likely remove this in the future. */
-:-moz-placeholder { color: #aaa !important; }
+input:-moz-placeholder { color: #aaa; }
 
 @media all and (min-width: 450px){
 	.ui-field-contain label.ui-input-text  { vertical-align: top; display: inline-block; width: 20%; margin: 0 2% 0 0 }
