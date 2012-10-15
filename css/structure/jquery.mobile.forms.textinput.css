@@ -17,6 +17,7 @@ textarea.ui-input-text { height: 50px; -webkit-transition: height 200ms linear; 
 input.ui-mini, .ui-mini input, textarea.ui-mini { font-size: 14px; }
 textarea.ui-mini { height: 45px; }
 
+/* Resolves issue #5166: Added to support issue introduced in Firefox 15. We can likely remove this in the future. */
 :-moz-placeholder { color: #aaa; }
 
 @media all and (min-width: 450px){
