@@ -33,7 +33,7 @@ body, input, textarea, select, button { font-family: Helvetica, Arial, san-serif
 	-moz-transform: rotate(45deg) translate(4.8em,-1em);
 	-ms-transform: rotate(45deg) translate(4.8em,-1em);
 	-o-transform: rotate(45deg) translate(4.8em,-1em);
-	transform: rotate(45deg);
+	transform: rotate(45deg) translate(4.8em,-1em);
 	-webkit-box-shadow: 0 0 6px rgba(0,0,0,.40);
 	-moz-box-shadow: 0 0 6px rgba(0,0,0,.40);
 	-o-box-shadow: 0 0 6px rgba(0,0,0,.40);
