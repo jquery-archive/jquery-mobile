@@ -45,7 +45,18 @@
 				<p class="default">default: true</p>
 				<p>Applies the theme button border-radius to the select button if set to true. This option is also exposed as a data attribute: <code>data-corners=&quot;false&quot;</code></p>
 				<pre><code>$('select').selectmenu(<strong>{ corners: false }</strong>);</code></pre>
-			</dd>			
+			</dd>
+			<dt><code>dividerTheme</code> <em>string</em></dt>
+			<dd>
+				<p class="default">default: "b"</p>
+				<p>Sets the color scheme (swatch) for dividers in popup-based custom select menus when using the <code>optgroup</code> support. It accepts a single letter from a-z that maps to the swatches included in your theme. To set the value for all instances of this widget, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
+				<pre><code>$( document ).bind( "mobileinit", function(){
+	<strong>$.mobile.listview.prototype.options.dividerTheme = "a";</strong>
+});
+</code></pre>
+				<p>This option is also exposed as a data attribute: <code>data-divider-theme=&quot;a&quot;</code>.</p>
+			</dd>
+
 			<dt><code>icon</code> <em>string</em></dt>
 			<dd>
 				<p class="default">default: "arrow-down"</p>
