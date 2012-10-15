@@ -256,11 +256,11 @@
 		expect( 1 );
 
 		$.mobile.phonegapNavigationEnabled = true;
-		window.navigator = {
-			app: {
-				backHistory: function() {
-					ok( true, "history back called" );
-				}
+		window.navigator = window.navigator || {};
+
+		window.navigator.app = {
+			backHistory: function() {
+				ok( true, "history back called" );
 			}
 		};
 
