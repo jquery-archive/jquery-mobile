@@ -205,7 +205,10 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 			if ( this._useTransition( notransition ) ) {
 				$el
 					.removeClass( "out " + hideClass )
-					.addClass( "in" );
+					.addClass( "in" )
+					.animationComplete(function () {
+						$el.removeClass('in');
+					});
 			}
 			else {
 				$el.removeClass( hideClass );
