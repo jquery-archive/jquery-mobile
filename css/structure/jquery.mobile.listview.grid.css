@@ -1,7 +1,7 @@
 .ui-listview-grid li.ui-li {
 	float: left;
 	width: 45%;
-	margin: 1em 2% 0;
+	margin: .7em .75% 0;
 	border-width: 1px;
 	padding: .6em 0;
 }
@@ -21,26 +21,30 @@
 .ui-listview-grid .ui-li-static.ui-li-has-thumb {
 	padding: 0 .6em;
 }
-
+.ui-listview-grid .ui-li .ui-icon {
+	display:none;
+}
+.ui-listview-grid .ui-li .ui-li-heading {
+	font-size:13px;
+}
 .ui-listview-grid  .ui-btn-icon-left > .ui-btn-inner > .ui-icon, 
 .ui-listview-grid  .ui-btn-icon-right > .ui-btn-inner > .ui-icon {
-	top: 0;
-	bottom: auto;
-	margin-top: 0;
-	left: .6em;
+	display:none;
 }
 
 
 @media (min-width: 50em){
 	.ui-listview-grid li.ui-li {
-		width: 30%;
-		margin: 1em 1.25% 0;
+		width: 28%;
 	}
 }
-
 @media (min-width: 70em){
 	.ui-listview-grid li.ui-li {
-		width: 22.25%;
-		margin: 1em .75% 0;
+		width: 21%;
+	}
+}
+@media (min-width: 85em){
+	.ui-listview-grid li.ui-li {
+		width: 18%;
 	}
 }

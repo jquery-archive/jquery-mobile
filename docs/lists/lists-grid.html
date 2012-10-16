@@ -14,7 +14,7 @@
 </head> 
 <body> 
 
-	<div data-role="page" class="type-interior">
+	<div data-role="page" class="type-interior" data-theme="c">
 
 		<div data-role="header" data-theme="f">
 		<h1>Grid layout</h1>
@@ -33,7 +33,7 @@
 				<img src="images/album-bb.jpg" />
 				<h3>Broken Bells</h3>
 				<p>Broken Bells</p>
-			</a></li>
+			</a><a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a></li>
 			<li><a href="index.html">
 				<img src="images/album-hc.jpg" />
 				<h3>Warning</h3>
@@ -87,6 +87,13 @@
 				<p>Arcade Fire</p>
 			</a></li>
 		</ul>
+		
+		<div data-role="popup" id="purchase" data-theme="d" data-overlay-theme="b" class="ui-content" style="max-width:340px;">
+			<h3>Purchase Album?</h3>
+			<p>Your download will begin immediately on your mobile device when you purchase.</p>
+			<a href="index.html" data-role="button" data-rel="back" data-theme="b" data-icon="check" data-inline="true" data-mini="true">Buy: $10.99</a>
+			<a href="index.html" data-role="button" data-rel="back" data-inline="true" data-mini="true">Cancel</a>	
+		</div>
 		</div><!--/content-primary -->		
 
 		<div class="content-secondary">
