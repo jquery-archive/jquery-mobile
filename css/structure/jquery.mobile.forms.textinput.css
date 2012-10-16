@@ -21,7 +21,7 @@ textarea.ui-mini { height: 45px; }
 input:-moz-placeholder { color: #aaa; }
 
 /* Resolves issue #5131: Width of textinput depends on its type, for Android 4.1 */
-input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+input[type=number]::-webkit-outer-spin-button { margin: 0; }
 
 @media all and (min-width: 450px){
 	.ui-field-contain label.ui-input-text  { vertical-align: top; display: inline-block; width: 20%; margin: 0 2% 0 0 }
