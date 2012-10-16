@@ -157,7 +157,8 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 								nextFooter.add( nextHeader ).appendTo( $.mobile.pageContainer );
 
 								ui.nextPage.one( "pageshow", function() {
-									nextFooter.add( nextHeader ).appendTo( this );
+									nextHeader.prependTo( this );
+									nextFooter.appendTo( this );
 								});
 							}
 					}
