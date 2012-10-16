@@ -461,6 +461,7 @@ define( [ "jquery",
 					.addClass( args.containerClassToAdd )
 					.removeClass( args.classToRemove );
 			} else {
+				this._ui.container.removeClass( args.classToRemove );
 				args.prereqs.container.resolve();
 			}
 		},
@@ -639,7 +640,7 @@ define( [ "jquery",
 			this._trigger( "afterclose" );
 		},
 
-		_close: function() {
+		_close: function( immediate ) {
 			this._ui.container.removeClass( "ui-popup-active" );
 			this._page.removeClass( "ui-popup-open" );
 
@@ -655,7 +656,7 @@ define( [ "jquery",
 
 			this._animate( {
 				additionalCondition: this._ui.screen.hasClass( "in" ),
-				transition: ( this._currentTransition || this.options.transition ),
+				transition: ( immediate ? "none" : ( this._currentTransition || this.options.transition ) ),
 				classToRemove: "in",
 				screenClassToAdd: "out",
 				containerClassToAdd: "reverse out",
@@ -684,12 +685,40 @@ define( [ "jquery",
 			}
 		},
 
+		_closePopup: function( e, data ) {
+			var parsedDst, toUrl;
+
+			if ( e.type === "pagebeforechange" && data ) {
+				// Determine whether we need to rapid-close the popup, or whether we can
+				// take the time to run the closing transition
+				if ( typeof data.toPage === "string" ) {
+					parsedDst = data.toPage;
+				} else {
+					parsedDst = data.toPage.jqmData( "url" );
+				}
+				parsedDst = $.mobile.path.parseUrl( parsedDst );
+				toUrl = parsedDst.pathname + parsedDst.search + parsedDst.hash;
+
+				if ( this._myUrl !== toUrl ) {
+					// Going to a different page - close immediately
+					this.options.container.unbind( this.options.closeEvents );
+					this._close( true );
+				} else {
+					this._close();
+				}
+
+				return;
+			}
+
+			this._close();
+		},
+
 		// any navigation event after a popup is opened should close the popup
 		// NOTE the pagebeforechange is bound to catch navigation events that don't
 		//      alter the url (eg, dialogs from popups)
 		_bindContainerClose: function() {
 			this.options.container
-				.one( this.options.closeEvents, $.proxy( this._close, this ));
+				.one( this.options.closeEvents, $.proxy( this, "_closePopup" ) );
 		},
 
 		// TODO no clear deliniation of what should be here and
@@ -731,7 +760,7 @@ define( [ "jquery",
 			hashkey = $.mobile.dialogHashKey;
 			activePage = $.mobile.activePage;
 			currentIsDialog = activePage.is( ".ui-dialog" );
-			url = $.mobile.urlHistory.getActive().url;
+			this._myUrl = url = $.mobile.urlHistory.getActive().url;
 			hasHash = ( url.indexOf( hashkey ) > -1 ) && !currentIsDialog;
 			urlHistory = $.mobile.urlHistory;
 
