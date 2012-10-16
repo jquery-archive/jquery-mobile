@@ -231,7 +231,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 						linkIcon = last.jqmData( "icon" );
 
 						last.appendTo( item )
-							.attr( "title", last.getEncodedText() )
+							.attr( "title", $.trim(last.getEncodedText()) )
 							.addClass( "ui-li-link-alt" )
 							.empty()
 							.buttonMarkup({
