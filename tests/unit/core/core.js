@@ -187,19 +187,4 @@
 
 		$.mobile.ignoreContentEnabled = false;
 	});
-
-	test( "proxyMany assigns the correct context", function() {
-		var proxied = $.proxyMany({
-			foo: function() {
-				deepEqual( this.baz, "bak", "the baz property of the context should be bak in foo" );
-			},
-
-			bar: function() {
-				deepEqual( this.baz, "bak", "the baz property of the context should be bak in bar" );
-			}
-		}, { baz: "bak" });
-
-		proxied.foo();
-		proxied.bar();
-	});
 })(jQuery);
