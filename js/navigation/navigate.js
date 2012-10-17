@@ -42,11 +42,6 @@ define([
 		// NOTE we currently _leave_ the appended hash in the hash in the interest
 		//      of seeing what happens and if we can support that before the hash is
 		//      pushed down
-
-		// set the hash to be squashed by replace state or picked up by
-		// the navigation special event
-		history.ignoreNextHashChange = true;
-
 		// IMPORTANT in the case where popstate is supported the event will be triggered
 		//           directly, stopping further execution - ie, interupting the flow of this
 		//           method call to fire bindings at this expression. Below the navigate method
@@ -54,6 +49,7 @@ define([
 		//
 		//           We then trigger a new popstate event on the window with a null state
 		//           so that the navigate events can conclude their work properly
+		history.ignoreNextHashChange = true;
 		window.location.hash = url;
 
 		if( $.support.pushState ) {
@@ -75,7 +71,8 @@ define([
 			// is not fired.
 			window.history.replaceState( state, document.title, href );
 
-			// Trigger a new faux popstate event to
+			// Trigger a new faux popstate event to replace the one that we
+			// caught that was triggered by the hash setting above.
 			$( window ).trigger( popstateEvent );
 		}
 
@@ -93,6 +90,12 @@ define([
 	// TODO grab the original event here and use it for the synthetic event in the
 	//      second half of the navigate execution that will follow this binding
 	$( window ).bind( "popstate", function( event ) {
+		// Partly to support our test suite which manually alters the support
+		// value to test hashchange. Partly to prevent all around weirdness
+		if( !$.support.pushState ){
+			return;
+		}
+
 		if( history.ignoreNextHashChange ) {
 			history.ignoreNextHashChange = false;
 			event.stopImmediatePropagation();
@@ -121,9 +124,10 @@ define([
 
 
 		history.direct({
-			currentUrl: path.parseLocation().hash ,
-			either: function( historyEntry ) {
+			url: path.parseLocation().hash ,
+			either: function( historyEntry, direction ) {
 				event.hashchangeState = historyEntry;
+				event.hashchangeState.direction = direction;
 			}
 		});
 	});
@@ -170,27 +174,43 @@ define([
 			this.stack = this.stack.slice( 0, this.activeIndex + 1 );
 		},
 
-		direct: function( opts ) {
-			var back, forward, newActiveIndex, prev = this.getActive(), a = this.activeIndex;
+		find: function( url, stack ) {
+			var entry, i, length = this.stack.length, newActiveIndex;
 
-			// check if url is in history and if it's ahead or behind current page
-			$.each( this.stack, function( i, historyEntry ) {
-				//if the url is in the stack, it's a forward or a back
-				if ( decodeURIComponent( opts.currentUrl ) === decodeURIComponent( historyEntry.url ) ) {
-					//define back and forward by whether url is older or newer than current page
-					back = i < this.activeIndex;
-					forward = !back;
-					newActiveIndex = i;
+			for ( i = 0; i < length; i++ ) {
+				entry = this.stack[i];
+
+				if ( decodeURIComponent( url ) === decodeURIComponent( entry.url ) ) {
+					return i;
 				}
-			});
+			}
+
+			return undefined;
+		},
+
+		direct: function( opts ) {
+			var back, forward, entry, newActiveIndex, prev = this.getActive(), a = this.activeIndex;
+
+			// First, take the slice of the history stack before the current index and search
+			// for a url match. If one is found, we'll avoid avoid looking through forward history
+			// NOTE the preference for backward history movement is driven by the fact that
+			//      most mobile browsers only have a dedicated back button, and users rarely use
+			//      the forward button in desktop browser anyhow
+			newActiveIndex = this.find( opts.url, this.stack.slice(0, a - 1).reverse() );
+
+			// If nothing was found in backward history check forward
+			if( newActiveIndex === undefined ) {
+				newActiveIndex = this.find( opts.url, this.stack.slice(a + 1) );
+			}
 
 			// save new page index, null check to prevent falsey 0 result
 			this.activeIndex = newActiveIndex !== undefined ? newActiveIndex : this.activeIndex;
 
-			if ( back ) {
-				( opts.either || opts.isBack )( this.getActive() );
-			} else if ( forward ) {
-				( opts.either || opts.isForward )( this.getActive() );
+			// invoke callbacks where appropriate
+			if ( newActiveIndex < a ) {
+				( opts.either || opts.isBack )( this.getActive(), 'back' );
+			} else if ( newActiveIndex > a ) {
+				( opts.either || opts.isForward )( this.getActive(), 'forward' );
 			}
 		},
 

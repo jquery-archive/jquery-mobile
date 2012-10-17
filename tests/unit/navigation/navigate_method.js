@@ -23,6 +23,7 @@ $.testHelper.setPushState();
 			}
 
 			$.navigate.history.stack = [];
+			$.navigate.history.activeIndex = 0;
 		}
 	});
 
@@ -60,7 +61,7 @@ $.testHelper.setPushState();
 	}
 
 	// Test the inclusion of state for both pushstate and hashchange
-	// _ --nav--> #foo {state} --nav--> #bar --back--> #foo {state} --foward--> #bar {state}
+	// --nav--> #foo {state} --nav--> #bar --back--> #foo {state} --foward--> #bar {state}
 	asyncTest( "navigating backward should include the history state", function() {
 		$.testHelper.eventTarget = $( window );
 
@@ -84,6 +85,42 @@ $.testHelper.setPushState();
 
 			function( timedOut, data ) {
 				equal( data.state.baz, "bak", "the data that was appended in the navigation is popped with the foward movement" );
+				start();
+			}
+		]);
+	});
+
+	// --nav--> #foo {state} --nav--> #bar --nav--> #foo {state} --back--> #bar --back--> #foo {state.direction = back}
+	asyncTest( "navigation back to a duplicate history state should prefer back", function() {
+		$.testHelper.eventTarget = $( window );
+
+		$.testHelper.eventSequence( "navigate", [
+			function() {
+				$.navigate( "#foo" );
+			},
+
+			function() {
+				$.navigate( "#bar" );
+			},
+
+			function() {
+				$.navigate( "#foo" );
+			},
+
+			function() {
+				equal( $.navigate.history.activeIndex, 2, "after n navigation events the active index is correct" );
+				window.history.back();
+			},
+
+			function( timedOut, data ) {
+				equal( $.navigate.history.activeIndex, 1, "after n navigation events, and a back, the active index is correct" );
+				equal( data.state.direction, "back", "the direction should be back and not forward" );
+				window.history.back();
+			},
+
+			function( timedOut, data ) {
+				equal( $.navigate.history.activeIndex, 0 );
+				equal( data.state.direction, "back", "the direction should be back and not forward" );
 				start();
 			}
 		]);

@@ -43,6 +43,8 @@ define([ "jquery",
 				// Users that want to fully normalize the two events
 				// will need to do history management down the stack and
 				// add the state to the event before this binding is fired
+				// TODO consider allowing for the explicit addition of callbacks
+				//      to be fired before this value is set to avoid event timing issues
 				state: event.hashchangeState || {}
 			});
 		},
