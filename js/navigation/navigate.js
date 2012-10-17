@@ -189,7 +189,7 @@ define([
 		},
 
 		direct: function( opts ) {
-			var back, forward, entry, newActiveIndex, prev = this.getActive(), a = this.activeIndex;
+			var newActiveIndex, a = this.activeIndex;
 
 			// First, take the slice of the history stack before the current index and search
 			// for a url match. If one is found, we'll avoid avoid looking through forward history
