@@ -3,7 +3,8 @@
   "description": "dependencies for the grunt based build",
   "version": "0.0.1",
   "scripts": {
-    "lint" : "grunt"
+    "lint" : "grunt",
+    "test" : "make; grunt"
   },
   "main": "grunt.js",
   "repository": {
