@@ -28,7 +28,6 @@
 
 
 	test( "Fixed Header Structural Classes are applied correctly", function(){
-
 		//footer
 		ok( !$('#classes-test-a').hasClass('ui-header-fixed'), 'An ordinary header should not have fixed classes');
 		ok( $('#classes-test-b').hasClass('ui-header-fixed'), 'An header with data-position=fixed should have ui-header-fixed class');
@@ -44,13 +43,10 @@
 		ok( $('#classes-test-e').closest( ".ui-page" ).hasClass( "ui-page-footer-fixed" ), "Parent page of a fixed footer has class ui-page-header-fixed" );
 		ok( $('#classes-test-c').closest( ".ui-page" ).hasClass( "ui-page-header-fullscreen" ), "Parent page of a fullscreen header has class ui-page-header-fullscreen" );
 		ok( $('#classes-test-f').closest( ".ui-page" ).hasClass( "ui-page-footer-fullscreen" ), "Parent page of a fullscreen footer has class ui-page-header-fullscreen" );
-
-
 	});
 
 	asyncTest( "Fixed header and footer transition classes are applied correctly", function(){
-
-		expect( 6 );
+		expect( 5 );
 
 		$.testHelper.sequence([
 			function(){
@@ -64,9 +60,7 @@
 			},
 
 			function() {
-
 				ok( $( '#classes-test-g' ).hasClass('slidedown'), 'The slidedown class should be applied by default');
-				ok( $( '#classes-test-k' ).hasClass('in'), 'The "in" class should be applied for fade transitions');
 				ok( !$( '#classes-test-h' ).hasClass('slidedown'), 'The slidedown class should not be applied when the header has a data-transition of "none"');
 
 				ok( !$( '#classes-test-h' ).hasClass('in'), 'The "in" class should not be applied when the header has a data-transition of "none"');
