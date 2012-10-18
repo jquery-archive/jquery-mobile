@@ -383,6 +383,9 @@ define( [
 						focusMenuItem();
 						self.isOpen = true;
 					});
+					self.menuPage.one( "pagebeforehide", function() {
+						self.isOpen = false;
+					});
 
 					self.menuType = "page";
 					self.menuPageContent.append( self.list );
