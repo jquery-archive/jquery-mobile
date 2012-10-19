@@ -16,7 +16,11 @@ define([ "jquery",
 
 		popstate: function( event ) {
 			var newEvent = new $.Event( "navigate" ),
-				state = event.originalEvent.state;
+				state = event.originalEvent.state || {};
+
+			if( event.historyState ){
+				state.direction = event.historyState.direction;
+			}
 
 			// Make sure the original event is tracked for the end
 			// user to inspect incase they want to do something special
@@ -26,7 +30,7 @@ define([ "jquery",
 			//      the popstate navigate event and the hashchange navigate
 			//      event data
 			$win.trigger( newEvent, {
-				state: state || {}
+				state: state
 			});
 		},
 

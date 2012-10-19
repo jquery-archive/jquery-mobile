@@ -7,7 +7,7 @@ define([
 	"./../jquery.mobile.core",
 	"./../jquery.mobile.support",
 	"./events/navigate",
-	"./path"], function( $ ) {
+	"./path" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, undefined ) {
@@ -17,8 +17,7 @@ define([
 	//      so that end users don't have to think about it. Punting for now
 	$.navigate = function( url, data ) {
 		var href, state,
-			// firefox auto decodes the url when using location.hash but not href
-			hash = path.parseUrl(url).hash,
+			hash = path.parseUrl( url ).hash,
 			isPath = path.isPath( hash ),
 			resolutionUrl = isPath ? path.getLocation() : $.mobile.getDocumentUrl();
 
@@ -41,7 +40,8 @@ define([
 
 		// NOTE we currently _leave_ the appended hash in the hash in the interest
 		//      of seeing what happens and if we can support that before the hash is
-		//      pushed down
+		//      pushed down, though we note here that the # char is not permitted by
+		//      rfc3986
 		// IMPORTANT in the case where popstate is supported the event will be triggered
 		//           directly, stopping further execution - ie, interupting the flow of this
 		//           method call to fire bindings at this expression. Below the navigate method
@@ -73,6 +73,7 @@ define([
 
 			// Trigger a new faux popstate event to replace the one that we
 			// caught that was triggered by the hash setting above.
+			history.ignoreNextPopState = true;
 			$( window ).trigger( popstateEvent );
 		}
 
@@ -89,17 +90,37 @@ define([
 	//
 	// TODO grab the original event here and use it for the synthetic event in the
 	//      second half of the navigate execution that will follow this binding
-	$( window ).bind( "popstate", function( event ) {
+	$( window ).bind( "popstate.history", function( event ) {
 		// Partly to support our test suite which manually alters the support
 		// value to test hashchange. Partly to prevent all around weirdness
 		if( !$.support.pushState ){
 			return;
 		}
 
+		// If this is the popstate triggered by the actual alteration of the hash
+		// swallow it completely to prevent handling
 		if( history.ignoreNextHashChange ) {
 			history.ignoreNextHashChange = false;
 			event.stopImmediatePropagation();
+			return;
 		}
+
+		// if this is the popstate triggered after the replaceState call in the navigate
+		// method, then simply ignore it
+		if( history.ignoreNextPopState ) {
+			history.ignoreNextPopState = false;
+			return;
+		}
+
+		// If this is a popstate that comes from the back or forward buttons
+		// make sure to set the state of our history stack properly
+		history.direct({
+			url: event.originalEvent.state.hash,
+			either: function( historyEntry, direction ) {
+				event.historyState = historyEntry;
+				event.historyState.direction = direction;
+			}
+		});
 	});
 
 	// NOTE must bind before `navigate` special event hashchange binding otherwise the
@@ -122,9 +143,10 @@ define([
 			return;
 		}
 
-
+		// If this is a hashchange caused by the back or forward button
+		// make sure to set the state of our history stack properly
 		history.direct({
-			url: path.parseLocation().hash ,
+			url: path.parseLocation().hash,
 			either: function( historyEntry, direction ) {
 				event.hashchangeState = historyEntry;
 				event.hashchangeState.direction = direction;
@@ -219,7 +241,7 @@ define([
 		ignoreNextHashChange: false
 	};
 
-	// Set the initial url history state
+	// NOTE Set the initial url history state, so that we have a history entry to match
 	history.add( path.parseLocation().pathname + path.parseLocation().search, {});
 })( jQuery );
 

@@ -119,6 +119,7 @@ $.testHelper.setPushState();
 			},
 
 			function( timedOut, data ) {
+				equal( $.navigate.history.stack.length, 3, "the history stack hasn't been truncated" );
 				equal( $.navigate.history.activeIndex, 0 );
 				equal( data.state.direction, "back", "the direction should be back and not forward" );
 				start();
