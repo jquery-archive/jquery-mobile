@@ -30,6 +30,7 @@ define([
 	'./jquery.mobile.links',
 	'./widgets/fixedToolbar',
 	'./widgets/popup',
+	'./widgets/table',
 	'./jquery.mobile.zoom',
 	'./jquery.mobile.zoom.iosorientationfix'
 ], function( require ) {
