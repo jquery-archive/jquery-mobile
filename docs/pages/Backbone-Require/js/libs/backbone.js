@@ -98,21 +98,12 @@
       // modification.  The tail is an empty object that will always be used
       // as the next node.
       while (event = events.shift()) {
-<<<<<<< HEAD
-	list = calls[event];
-	node = list ? list.tail : {};
-	node.next = tail = {};
-	node.context = context;
-	node.callback = callback;
-	calls[event] = {tail: tail, next: list ? list.next : node};
-=======
         list = calls[event];
         node = list ? list.tail : {};
         node.next = tail = {};
         node.context = context;
         node.callback = callback;
         calls[event] = {tail: tail, next: list ? list.next : node};
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       }
 
       return this;
@@ -127,33 +118,14 @@
       // No events, or removing *all* events.
       if (!(calls = this._callbacks)) return;
       if (!(events || callback || context)) {
-<<<<<<< HEAD
-	delete this._callbacks;
-	return this;
-=======
         delete this._callbacks;
         return this;
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       }
 
       // Loop through the listed events and contexts, splicing them out of the
       // linked list of callbacks if appropriate.
       events = events ? events.split(eventSplitter) : _.keys(calls);
       while (event = events.shift()) {
-<<<<<<< HEAD
-	node = calls[event];
-	delete calls[event];
-	if (!node || !(callback || context)) continue;
-	// Create a new list, omitting the indicated callbacks.
-	tail = node.tail;
-	while ((node = node.next) !== tail) {
-	  cb = node.callback;
-	  ctx = node.context;
-	  if ((callback && cb !== callback) || (context && ctx !== context)) {
-	    this.on(event, cb, ctx);
-	  }
-	}
-=======
         node = calls[event];
         delete calls[event];
         if (!node || !(callback || context)) continue;
@@ -166,7 +138,6 @@
             this.on(event, cb, ctx);
           }
         }
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       }
 
       return this;
@@ -186,21 +157,6 @@
       // For each event, walk through the linked list of callbacks twice,
       // first to trigger the event, then to trigger any `"all"` callbacks.
       while (event = events.shift()) {
-<<<<<<< HEAD
-	if (node = calls[event]) {
-	  tail = node.tail;
-	  while ((node = node.next) !== tail) {
-	    node.callback.apply(node.context || this, rest);
-	  }
-	}
-	if (node = all) {
-	  tail = node.tail;
-	  args = [event].concat(rest);
-	  while ((node = node.next) !== tail) {
-	    node.callback.apply(node.context || this, args);
-	  }
-	}
-=======
         if (node = calls[event]) {
           tail = node.tail;
           while ((node = node.next) !== tail) {
@@ -214,7 +170,6 @@
             node.callback.apply(node.context || this, args);
           }
         }
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       }
 
       return this;
@@ -307,19 +262,11 @@
 
       // Handle both `"key", value` and `{key: value}` -style arguments.
       if (_.isObject(key) || key == null) {
-<<<<<<< HEAD
-	attrs = key;
-	options = value;
-      } else {
-	attrs = {};
-	attrs[key] = value;
-=======
         attrs = key;
         options = value;
       } else {
         attrs = {};
         attrs[key] = value;
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       }
 
       // Extract attributes and options.
@@ -341,28 +288,6 @@
 
       // For each `set` attribute...
       for (attr in attrs) {
-<<<<<<< HEAD
-	val = attrs[attr];
-
-	// If the new and current value differ, record the change.
-	if (!_.isEqual(now[attr], val) || (options.unset && _.has(now, attr))) {
-	  delete escaped[attr];
-	  (options.silent ? this._silent : changes)[attr] = true;
-	}
-
-	// Update or delete the current value.
-	options.unset ? delete now[attr] : now[attr] = val;
-
-	// If the new and previous value differ, record the change.  If not,
-	// then remove changes for this attribute.
-	if (!_.isEqual(prev[attr], val) || (_.has(now, attr) != _.has(prev, attr))) {
-	  this.changed[attr] = val;
-	  if (!options.silent) this._pending[attr] = true;
-	} else {
-	  delete this.changed[attr];
-	  delete this._pending[attr];
-	}
-=======
         val = attrs[attr];
 
         // If the new and current value differ, record the change.
@@ -383,7 +308,6 @@
           delete this.changed[attr];
           delete this._pending[attr];
         }
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       }
 
       // Fire the `"change"` events.
@@ -413,13 +337,8 @@
       var model = this;
       var success = options.success;
       options.success = function(resp, status, xhr) {
-<<<<<<< HEAD
-	if (!model.set(model.parse(resp, xhr), options)) return false;
-	if (success) success(model, resp);
-=======
         if (!model.set(model.parse(resp, xhr), options)) return false;
         if (success) success(model, resp);
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       };
       options.error = Backbone.wrapError(options.error, model, options);
       return (this.sync || Backbone.sync).call(this, 'read', this, options);
@@ -433,41 +352,24 @@
 
       // Handle both `("key", value)` and `({key: value})` -style calls.
       if (_.isObject(key) || key == null) {
-<<<<<<< HEAD
-	attrs = key;
-	options = value;
-      } else {
-	attrs = {};
-	attrs[key] = value;
-=======
         attrs = key;
         options = value;
       } else {
         attrs = {};
         attrs[key] = value;
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       }
       options = options ? _.clone(options) : {};
 
       // If we're "wait"-ing to set changed attributes, validate early.
       if (options.wait) {
-<<<<<<< HEAD
-	if (!this._validate(attrs, options)) return false;
-	current = _.clone(this.attributes);
-=======
         if (!this._validate(attrs, options)) return false;
         current = _.clone(this.attributes);
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       }
 
       // Regular saves `set` attributes before persisting to the server.
       var silentOptions = _.extend({}, options, {silent: true});
       if (attrs && !this.set(attrs, options.wait ? silentOptions : options)) {
-<<<<<<< HEAD
-	return false;
-=======
         return false;
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       }
 
       // After a successful server-side save, the client is (optionally)
@@ -475,19 +377,6 @@
       var model = this;
       var success = options.success;
       options.success = function(resp, status, xhr) {
-<<<<<<< HEAD
-	var serverAttrs = model.parse(resp, xhr);
-	if (options.wait) {
-	  delete options.wait;
-	  serverAttrs = _.extend(attrs || {}, serverAttrs);
-	}
-	if (!model.set(serverAttrs, options)) return false;
-	if (success) {
-	  success(model, resp);
-	} else {
-	  model.trigger('sync', model, resp, options);
-	}
-=======
         var serverAttrs = model.parse(resp, xhr);
         if (options.wait) {
           delete options.wait;
@@ -499,7 +388,6 @@
         } else {
           model.trigger('sync', model, resp, options);
         }
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       };
 
       // Finish configuring and sending the Ajax request.
@@ -519,23 +407,6 @@
       var success = options.success;
 
       var triggerDestroy = function() {
-<<<<<<< HEAD
-	model.trigger('destroy', model, model.collection, options);
-      };
-
-      if (this.isNew()) {
-	triggerDestroy();
-	return false;
-      }
-
-      options.success = function(resp) {
-	if (options.wait) triggerDestroy();
-	if (success) {
-	  success(model, resp);
-	} else {
-	  model.trigger('sync', model, resp, options);
-	}
-=======
         model.trigger('destroy', model, model.collection, options);
       };
 
@@ -551,7 +422,6 @@
         } else {
           model.trigger('sync', model, resp, options);
         }
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       };
 
       options.error = Backbone.wrapError(options.error, model, options);
@@ -600,26 +470,12 @@
       var changes = _.extend({}, options.changes, this._silent);
       this._silent = {};
       for (var attr in changes) {
-<<<<<<< HEAD
-	this.trigger('change:' + attr, this, this.get(attr), options);
-=======
         this.trigger('change:' + attr, this, this.get(attr), options);
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       }
       if (changing) return this;
 
       // Continue firing `"change"` events while there are pending changes.
       while (!_.isEmpty(this._pending)) {
-<<<<<<< HEAD
-	this._pending = {};
-	this.trigger('change', this, options);
-	// Pending and silent changes still remain.
-	for (var attr in this.changed) {
-	  if (this._pending[attr] || this._silent[attr]) continue;
-	  delete this.changed[attr];
-	}
-	this._previousAttributes = _.clone(this.attributes);
-=======
         this._pending = {};
         this.trigger('change', this, options);
         // Pending and silent changes still remain.
@@ -628,7 +484,6 @@
           delete this.changed[attr];
         }
         this._previousAttributes = _.clone(this.attributes);
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       }
 
       this._changing = false;
@@ -652,13 +507,8 @@
       if (!diff) return this.hasChanged() ? _.clone(this.changed) : false;
       var val, changed = false, old = this._previousAttributes;
       for (var attr in diff) {
-<<<<<<< HEAD
-	if (_.isEqual(old[attr], (val = diff[attr]))) continue;
-	(changed || (changed = {}))[attr] = val;
-=======
         if (_.isEqual(old[attr], (val = diff[attr]))) continue;
         (changed || (changed = {}))[attr] = val;
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       }
       return changed;
     },
@@ -691,15 +541,9 @@
       var error = this.validate(attrs, options);
       if (!error) return true;
       if (options && options.error) {
-<<<<<<< HEAD
-	options.error(this, error, options);
-      } else {
-	this.trigger('error', this, error, options);
-=======
         options.error(this, error, options);
       } else {
         this.trigger('error', this, error, options);
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       }
       return false;
     }
@@ -748,18 +592,6 @@
       // Begin by turning bare objects into model references, and preventing
       // invalid models or duplicate models from being added.
       for (i = 0, length = models.length; i < length; i++) {
-<<<<<<< HEAD
-	if (!(model = models[i] = this._prepareModel(models[i], options))) {
-	  throw new Error("Can't add an invalid model to a collection");
-	}
-	cid = model.cid;
-	id = model.id;
-	if (cids[cid] || this._byCid[cid] || ((id != null) && (ids[id] || this._byId[id]))) {
-	  dups.push(i);
-	  continue;
-	}
-	cids[cid] = ids[id] = model;
-=======
         if (!(model = models[i] = this._prepareModel(models[i], options))) {
           throw new Error("Can't add an invalid model to a collection");
         }
@@ -770,31 +602,20 @@
           continue;
         }
         cids[cid] = ids[id] = model;
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       }
 
       // Remove duplicates.
       i = dups.length;
       while (i--) {
-<<<<<<< HEAD
-	models.splice(dups[i], 1);
-=======
         models.splice(dups[i], 1);
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       }
 
       // Listen to added models' events, and index models for lookup by
       // `id` and by `cid`.
       for (i = 0, length = models.length; i < length; i++) {
-<<<<<<< HEAD
-	(model = models[i]).on('all', this._onModelEvent, this);
-	this._byCid[model.cid] = model;
-	if (model.id != null) this._byId[model.id] = model;
-=======
         (model = models[i]).on('all', this._onModelEvent, this);
         this._byCid[model.cid] = model;
         if (model.id != null) this._byId[model.id] = model;
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       }
 
       // Insert models into the collection, re-sorting if needed, and triggering
@@ -805,15 +626,9 @@
       if (this.comparator) this.sort({silent: true});
       if (options.silent) return this;
       for (i = 0, length = this.models.length; i < length; i++) {
-<<<<<<< HEAD
-	if (!cids[(model = this.models[i]).cid]) continue;
-	options.index = i;
-	model.trigger('add', model, this, options);
-=======
         if (!cids[(model = this.models[i]).cid]) continue;
         options.index = i;
         model.trigger('add', model, this, options);
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       }
       return this;
     },
@@ -825,20 +640,6 @@
       options || (options = {});
       models = _.isArray(models) ? models.slice() : [models];
       for (i = 0, l = models.length; i < l; i++) {
-<<<<<<< HEAD
-	model = this.getByCid(models[i]) || this.get(models[i]);
-	if (!model) continue;
-	delete this._byId[model.id];
-	delete this._byCid[model.cid];
-	index = this.indexOf(model);
-	this.models.splice(index, 1);
-	this.length--;
-	if (!options.silent) {
-	  options.index = index;
-	  model.trigger('remove', model, this, options);
-	}
-	this._removeReference(model);
-=======
         model = this.getByCid(models[i]) || this.get(models[i]);
         if (!model) continue;
         delete this._byId[model.id];
@@ -851,7 +652,6 @@
           model.trigger('remove', model, this, options);
         }
         this._removeReference(model);
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       }
       return this;
     },
@@ -904,17 +704,10 @@
     where: function(attrs) {
       if (_.isEmpty(attrs)) return [];
       return this.filter(function(model) {
-<<<<<<< HEAD
-	for (var key in attrs) {
-	  if (attrs[key] !== model.get(key)) return false;
-	}
-	return true;
-=======
         for (var key in attrs) {
           if (attrs[key] !== model.get(key)) return false;
         }
         return true;
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       });
     },
 
@@ -926,15 +719,9 @@
       if (!this.comparator) throw new Error('Cannot sort a set without a comparator');
       var boundComparator = _.bind(this.comparator, this);
       if (this.comparator.length == 1) {
-<<<<<<< HEAD
-	this.models = this.sortBy(boundComparator);
-      } else {
-	this.models.sort(boundComparator);
-=======
         this.models = this.sortBy(boundComparator);
       } else {
         this.models.sort(boundComparator);
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       }
       if (!options.silent) this.trigger('reset', this, options);
       return this;
@@ -952,11 +739,7 @@
       models  || (models = []);
       options || (options = {});
       for (var i = 0, l = this.models.length; i < l; i++) {
-<<<<<<< HEAD
-	this._removeReference(this.models[i]);
-=======
         this._removeReference(this.models[i]);
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       }
       this._reset();
       this.add(models, _.extend({silent: true}, options));
@@ -973,13 +756,8 @@
       var collection = this;
       var success = options.success;
       options.success = function(resp, status, xhr) {
-<<<<<<< HEAD
-	collection[options.add ? 'add' : 'reset'](collection.parse(resp, xhr), options);
-	if (success) success(collection, resp);
-=======
         collection[options.add ? 'add' : 'reset'](collection.parse(resp, xhr), options);
         if (success) success(collection, resp);
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       };
       options.error = Backbone.wrapError(options.error, collection, options);
       return (this.sync || Backbone.sync).call(this, 'read', this, options);
@@ -996,21 +774,12 @@
       if (!options.wait) coll.add(model, options);
       var success = options.success;
       options.success = function(nextModel, resp, xhr) {
-<<<<<<< HEAD
-	if (options.wait) coll.add(nextModel, options);
-	if (success) {
-	  success(nextModel, resp);
-	} else {
-	  nextModel.trigger('sync', model, resp, options);
-	}
-=======
         if (options.wait) coll.add(nextModel, options);
         if (success) {
           success(nextModel, resp);
         } else {
           nextModel.trigger('sync', model, resp, options);
         }
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       };
       model.save(null, options);
       return model;
@@ -1041,21 +810,12 @@
     _prepareModel: function(model, options) {
       options || (options = {});
       if (!(model instanceof Model)) {
-<<<<<<< HEAD
-	var attrs = model;
-	options.collection = this;
-	model = new this.model(attrs, options);
-	if (!model._validate(model.attributes, options)) model = false;
-      } else if (!model.collection) {
-	model.collection = this;
-=======
         var attrs = model;
         options.collection = this;
         model = new this.model(attrs, options);
         if (!model._validate(model.attributes, options)) model = false;
       } else if (!model.collection) {
         model.collection = this;
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       }
       return model;
     },
@@ -1063,11 +823,7 @@
     // Internal method to remove a model's ties to a collection.
     _removeReference: function(model) {
       if (this == model.collection) {
-<<<<<<< HEAD
-	delete model.collection;
-=======
         delete model.collection;
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       }
       model.off('all', this._onModelEvent, this);
     },
@@ -1079,19 +835,11 @@
     _onModelEvent: function(event, model, collection, options) {
       if ((event == 'add' || event == 'remove') && collection != this) return;
       if (event == 'destroy') {
-<<<<<<< HEAD
-	this.remove(model, options);
-      }
-      if (model && event === 'change:' + model.idAttribute) {
-	delete this._byId[model.previous(model.idAttribute)];
-	this._byId[model.id] = model;
-=======
         this.remove(model, options);
       }
       if (model && event === 'change:' + model.idAttribute) {
         delete this._byId[model.previous(model.idAttribute)];
         this._byId[model.id] = model;
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       }
       this.trigger.apply(this, arguments);
     }
@@ -1148,17 +896,10 @@
       if (!_.isRegExp(route)) route = this._routeToRegExp(route);
       if (!callback) callback = this[name];
       Backbone.history.route(route, _.bind(function(fragment) {
-<<<<<<< HEAD
-	var args = this._extractParameters(route, fragment);
-	callback && callback.apply(this, args);
-	this.trigger.apply(this, ['route:' + name].concat(args));
-	Backbone.history.trigger('route', this, name, args);
-=======
         var args = this._extractParameters(route, fragment);
         callback && callback.apply(this, args);
         this.trigger.apply(this, ['route:' + name].concat(args));
         Backbone.history.trigger('route', this, name, args);
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       }, this));
       return this;
     },
@@ -1175,17 +916,10 @@
       if (!this.routes) return;
       var routes = [];
       for (var route in this.routes) {
-<<<<<<< HEAD
-	routes.unshift([route, this.routes[route]]);
-      }
-      for (var i = 0, l = routes.length; i < l; i++) {
-	this.route(routes[i][0], routes[i][1], this[routes[i][1]]);
-=======
         routes.unshift([route, this.routes[route]]);
       }
       for (var i = 0, l = routes.length; i < l; i++) {
         this.route(routes[i][0], routes[i][1], this[routes[i][1]]);
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       }
     },
 
@@ -1193,13 +927,8 @@
     // against the current location hash.
     _routeToRegExp: function(route) {
       route = route.replace(escapeRegExp, '\\$&')
-<<<<<<< HEAD
-		   .replace(namedParam, '([^\/]+)')
-		   .replace(splatParam, '(.*?)');
-=======
                    .replace(namedParam, '([^\/]+)')
                    .replace(splatParam, '(.*?)');
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       return new RegExp('^' + route + '$');
     },
 
@@ -1249,15 +978,6 @@
     // the hash, or the override.
     getFragment: function(fragment, forcePushState) {
       if (fragment == null) {
-<<<<<<< HEAD
-	if (this._hasPushState || forcePushState) {
-	  fragment = window.location.pathname;
-	  var search = window.location.search;
-	  if (search) fragment += search;
-	} else {
-	  fragment = this.getHash();
-	}
-=======
         if (this._hasPushState || forcePushState) {
           fragment = window.location.pathname;
           var search = window.location.search;
@@ -1265,7 +985,6 @@
         } else {
           fragment = this.getHash();
         }
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       }
       if (!fragment.indexOf(this.options.root)) fragment = fragment.substr(this.options.root.length);
       return fragment.replace(routeStripper, '');
@@ -1288,31 +1007,18 @@
       var oldIE             = (isExplorer.exec(navigator.userAgent.toLowerCase()) && (!docMode || docMode <= 7));
 
       if (oldIE) {
-<<<<<<< HEAD
-	this.iframe = $('<iframe src="javascript:0" tabindex="-1" />').hide().appendTo('body')[0].contentWindow;
-	this.navigate(fragment);
-=======
         this.iframe = $('<iframe src="javascript:0" tabindex="-1" />').hide().appendTo('body')[0].contentWindow;
         this.navigate(fragment);
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       }
 
       // Depending on whether we're using pushState or hashes, and whether
       // 'onhashchange' is supported, determine how we check the URL state.
       if (this._hasPushState) {
-<<<<<<< HEAD
-	$(window).bind('popstate', this.checkUrl);
-      } else if (this._wantsHashChange && ('onhashchange' in window) && !oldIE) {
-	$(window).bind('hashchange', this.checkUrl);
-      } else if (this._wantsHashChange) {
-	this._checkUrlInterval = setInterval(this.checkUrl, this.interval);
-=======
         $(window).bind('popstate', this.checkUrl);
       } else if (this._wantsHashChange && ('onhashchange' in window) && !oldIE) {
         $(window).bind('hashchange', this.checkUrl);
       } else if (this._wantsHashChange) {
         this._checkUrlInterval = setInterval(this.checkUrl, this.interval);
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       }
 
       // Determine if we need to change the base url, for a pushState link
@@ -1324,36 +1030,20 @@
       // If we've started off with a route from a `pushState`-enabled browser,
       // but we're currently in a browser that doesn't support it...
       if (this._wantsHashChange && this._wantsPushState && !this._hasPushState && !atRoot) {
-<<<<<<< HEAD
-	this.fragment = this.getFragment(null, true);
-	window.location.replace(this.options.root + '#' + this.fragment);
-	// Return immediately as browser will do redirect to new url
-	return true;
-=======
         this.fragment = this.getFragment(null, true);
         window.location.replace(this.options.root + '#' + this.fragment);
         // Return immediately as browser will do redirect to new url
         return true;
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
 
       // Or if we've started out with a hash-based route, but we're currently
       // in a browser where it could be `pushState`-based instead...
       } else if (this._wantsPushState && this._hasPushState && atRoot && loc.hash) {
-<<<<<<< HEAD
-	this.fragment = this.getHash().replace(routeStripper, '');
-	window.history.replaceState({}, document.title, loc.protocol + '//' + loc.host + this.options.root + this.fragment);
-      }
-
-      if (!this.options.silent) {
-	return this.loadUrl();
-=======
         this.fragment = this.getHash().replace(routeStripper, '');
         window.history.replaceState({}, document.title, loc.protocol + '//' + loc.host + this.options.root + this.fragment);
       }
 
       if (!this.options.silent) {
         return this.loadUrl();
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       }
     },
 
@@ -1387,17 +1077,10 @@
     loadUrl: function(fragmentOverride) {
       var fragment = this.fragment = this.getFragment(fragmentOverride);
       var matched = _.any(this.handlers, function(handler) {
-<<<<<<< HEAD
-	if (handler.route.test(fragment)) {
-	  handler.callback(fragment);
-	  return true;
-	}
-=======
         if (handler.route.test(fragment)) {
           handler.callback(fragment);
           return true;
         }
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       });
       return matched;
     },
@@ -1417,29 +1100,13 @@
 
       // If pushState is available, we use it to set the fragment as a real URL.
       if (this._hasPushState) {
-<<<<<<< HEAD
-	if (frag.indexOf(this.options.root) != 0) frag = this.options.root + frag;
-	this.fragment = frag;
-	window.history[options.replace ? 'replaceState' : 'pushState']({}, document.title, frag);
-=======
         if (frag.indexOf(this.options.root) != 0) frag = this.options.root + frag;
         this.fragment = frag;
         window.history[options.replace ? 'replaceState' : 'pushState']({}, document.title, frag);
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
 
       // If hash changes haven't been explicitly disabled, update the hash
       // fragment to store history.
       } else if (this._wantsHashChange) {
-<<<<<<< HEAD
-	this.fragment = frag;
-	this._updateHash(window.location, frag, options.replace);
-	if (this.iframe && (frag != this.getFragment(this.getHash(this.iframe)))) {
-	  // Opening and closing the iframe tricks IE7 and earlier to push a history entry on hash-tag change.
-	  // When replace is true, we don't want this.
-	  if(!options.replace) this.iframe.document.open().close();
-	  this._updateHash(this.iframe.location, frag, options.replace);
-	}
-=======
         this.fragment = frag;
         this._updateHash(window.location, frag, options.replace);
         if (this.iframe && (frag != this.getFragment(this.getHash(this.iframe)))) {
@@ -1448,16 +1115,11 @@
           if(!options.replace) this.iframe.document.open().close();
           this._updateHash(this.iframe.location, frag, options.replace);
         }
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
 
       // If you've told us that you explicitly don't want fallback hashchange-
       // based history, then `navigate` becomes a page refresh.
       } else {
-<<<<<<< HEAD
-	window.location.assign(this.options.root + fragment);
-=======
         window.location.assign(this.options.root + fragment);
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       }
       if (options.trigger) this.loadUrl(fragment);
     },
@@ -1466,15 +1128,9 @@
     // a new one to the browser history.
     _updateHash: function(location, fragment, replace) {
       if (replace) {
-<<<<<<< HEAD
-	location.replace(location.toString().replace(/(javascript:|#).*$/, '') + '#' + fragment);
-      } else {
-	location.hash = fragment;
-=======
         location.replace(location.toString().replace(/(javascript:|#).*$/, '') + '#' + fragment);
       } else {
         location.hash = fragment;
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       }
     }
   });
@@ -1569,20 +1225,6 @@
       if (!(events || (events = getValue(this, 'events')))) return;
       this.undelegateEvents();
       for (var key in events) {
-<<<<<<< HEAD
-	var method = events[key];
-	if (!_.isFunction(method)) method = this[events[key]];
-	if (!method) throw new Error('Method "' + events[key] + '" does not exist');
-	var match = key.match(delegateEventSplitter);
-	var eventName = match[1], selector = match[2];
-	method = _.bind(method, this);
-	eventName += '.delegateEvents' + this.cid;
-	if (selector === '') {
-	  this.$el.bind(eventName, method);
-	} else {
-	  this.$el.delegate(selector, eventName, method);
-	}
-=======
         var method = events[key];
         if (!_.isFunction(method)) method = this[events[key]];
         if (!method) throw new Error('Method "' + events[key] + '" does not exist');
@@ -1595,7 +1237,6 @@
         } else {
           this.$el.delegate(selector, eventName, method);
         }
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       }
     },
 
@@ -1612,13 +1253,8 @@
     _configure: function(options) {
       if (this.options) options = _.extend({}, this.options, options);
       for (var i = 0, l = viewOptions.length; i < l; i++) {
-<<<<<<< HEAD
-	var attr = viewOptions[i];
-	if (options[attr]) this[attr] = options[attr];
-=======
         var attr = viewOptions[i];
         if (options[attr]) this[attr] = options[attr];
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       }
       this.options = options;
     },
@@ -1629,21 +1265,12 @@
     // an element from the `id`, `className` and `tagName` properties.
     _ensureElement: function() {
       if (!this.el) {
-<<<<<<< HEAD
-	var attrs = getValue(this, 'attributes') || {};
-	if (this.id) attrs.id = this.id;
-	if (this.className) attrs['class'] = this.className;
-	this.setElement(this.make(this.tagName, attrs), false);
-      } else {
-	this.setElement(this.el, false);
-=======
         var attrs = getValue(this, 'attributes') || {};
         if (this.id) attrs.id = this.id;
         if (this.className) attrs['class'] = this.className;
         this.setElement(this.make(this.tagName, attrs), false);
       } else {
         this.setElement(this.el, false);
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       }
     }
 
@@ -1715,19 +1342,11 @@
     // And an `X-HTTP-Method-Override` header.
     if (Backbone.emulateHTTP) {
       if (type === 'PUT' || type === 'DELETE') {
-<<<<<<< HEAD
-	if (Backbone.emulateJSON) params.data._method = type;
-	params.type = 'POST';
-	params.beforeSend = function(xhr) {
-	  xhr.setRequestHeader('X-HTTP-Method-Override', type);
-	};
-=======
         if (Backbone.emulateJSON) params.data._method = type;
         params.type = 'POST';
         params.beforeSend = function(xhr) {
           xhr.setRequestHeader('X-HTTP-Method-Override', type);
         };
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       }
     }
 
@@ -1745,15 +1364,9 @@
     return function(model, resp) {
       resp = model === originalModel ? resp : model;
       if (onError) {
-<<<<<<< HEAD
-	onError(originalModel, resp, options);
-      } else {
-	originalModel.trigger('error', originalModel, resp, options);
-=======
         onError(originalModel, resp, options);
       } else {
         originalModel.trigger('error', originalModel, resp, options);
->>>>>>> 3089d08357988b86beee94ab8d608964be346258
       }
     };
   };
