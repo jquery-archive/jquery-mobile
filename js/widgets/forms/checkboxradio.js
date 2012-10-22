@@ -9,11 +9,11 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.checkboxradio.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.buttonMarkup" ], function( $ ) {
+define( [ "jquery", "../../jquery.mobile.core", "./formwidget", "../../jquery.mobile.buttonMarkup" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.widget( "mobile.checkboxradio", $.mobile.widget, {
+$.widget( "mobile.checkboxradio", $.mobile.formwidget, {
 	options: {
 		theme: null,
 		initSelector: "input[type='checkbox'],input[type='radio']"
