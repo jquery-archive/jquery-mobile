@@ -112,14 +112,19 @@ define( [ "jquery",
 		},
 
 		_resizeTimeout: function() {
-			if ( !this._maybeRefreshTimeout() ) {
-				// effectively rapid-open the popup while leaving the screen intact
-				this._trigger( "beforeposition" );
-				this._ui.container
-					.removeClass( "ui-selectmenu-hidden" )
-					.offset( this._placementCoords( this._desiredCoords( undefined, undefined, "window" ) ) );
+			if ( this._isOpen ) {
+				if ( !this._maybeRefreshTimeout() ) {
+					// effectively rapid-open the popup while leaving the screen intact
+					this._trigger( "beforeposition" );
+					this._ui.container
+						.removeClass( "ui-selectmenu-hidden" )
+						.offset( this._placementCoords( this._desiredCoords( undefined, undefined, "window" ) ) );
 
-				this._resizeScreen();
+					this._resizeScreen();
+					this._resizeData = null;
+					this._orientationchangeInProgress = false;
+				}
+			} else {
 				this._resizeData = null;
 				this._orientationchangeInProgress = false;
 			}
@@ -132,8 +137,7 @@ define( [ "jquery",
 		},
 
 		_handleWindowOrientationchange: function( e ) {
-
-			if ( !this._orientationchangeInProgress ) {
+			if ( !this._orientationchangeInProgress && this._isOpen ) {
 				// effectively rapid-close the popup while leaving the screen intact
 				this._ui.container
 					.addClass( "ui-selectmenu-hidden" )
