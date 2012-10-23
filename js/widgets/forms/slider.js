@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.slider.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "./textinput", "../../jquery.mobile.buttonMarkup" ], function( $ ) {
+define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "./textinput", "../../jquery.mobile.buttonMarkup", "./form.resetsetup" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -178,6 +178,8 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 		this.handle.bind( "vclick", false );
 
+		$.mobile._formResetSetup( this );
+
 		this.refresh( undefined, undefined, true );
 	},
 
@@ -339,6 +341,10 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 	_value: function() {
 		return  this.isToggleSwitch ? this.element[0].selectedIndex : parseFloat( this.element.val() ) ;
+	},
+
+	_reset: function() {
+		this.refresh( undefined, false, true );
 	},
 
 	refresh: function( val, isfromControl, preventInputUpdate ) {
