@@ -120,6 +120,9 @@ define( [ "jquery", "text!../version.txt" ], function( $, __version__ ) {
 			WINDOWS: 91 // COMMAND
 		},
 
+		// Place to store various widget extensions
+		behaviors: {},
+
 		// Scroll page vertically: scroll to 0 to hide iOS address bar, or pass a Y value
 		silentScroll: function( ypos ) {
 			if ( $.type( ypos ) !== "number" ) {
