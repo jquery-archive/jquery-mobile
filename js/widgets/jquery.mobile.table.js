@@ -26,8 +26,8 @@ $.widget( "mobile.table", $.mobile.widget, {
          $hdrCols = $thead.find( "th:not(." + o.persist + ")" ),
          $bodyRows = $tbody.find( "tr" ),
          $menuButton = $( "<a href='#jqm-table-menu'>" + o.btnText + "</a>" ),
-         $popup = $( "<div id='jqm-table-menu'></div>"),
-         $menu = $("<ul />").appendTo( $popup );
+         $popup = $( "<div id='jqm-table-menu' data-role='popup'></div>"),
+         $menu = $("<ul></ul>").appendTo( $popup );
 
       // create the hide/show toggles
       $hdrCols.each(function(i){
@@ -37,21 +37,33 @@ $.widget( "mobile.table", $.mobile.widget, {
          $check
             .appendTo( $li )
             .children( 0 )
-            .jqmData( "th", $( this ) )
+            .jqmData( "cells", $( this ).add( $bodyRows.children().eq(i) ) )
             .checkboxradio();
 
           $li.appendTo( $menu );
       });
 
-      $popup.insertBefore( $table );
+
+
+      $menuButton
+         .insertBefore( $table )
+         .buttonMarkup();
+
+      $popup
+         .insertBefore( $table )
+         //.popup();
+
+      this._menu = $menu;
+
+      this._bindEvents();
 
    },
 
 
    _bindEvents: function(){
-      // bind event to this.element that listens for a change event, 
-      //and finds an input's TH by the check input's jqmData
-   
+      this._menu.on( "change", "input", function( e ){
+         $( this ).jqmData( "cells" )[ this.checked ? "removeClass" : "addClass" ]( "ui-table-cell-hidden" );
+      } );
    }
     
 });

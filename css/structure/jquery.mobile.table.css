@@ -17,22 +17,11 @@
    right: 0;
    left: auto;
 }
-.table-menu-hidden {
-   left: -999em;
-   right: auto;
-}
-.table-menu-btn {
-   text-decoration: none;
-   color: #333;
-   font-size: 1.2em;
-   background: #eee url(../_img/icon-menu.png) no-repeat 5px center;
-   padding: .3em 10px .3em 20px;
-   border: 1px solid #ccc;
-}
-.table-menu li {
-   padding: .3em 0;
-}
 
+
+.ui-table-cell-hidden {
+   display: none;
+}
 
 
 /* Table styles */
