@@ -26,109 +26,104 @@
       <div class="content-primary">
         <h3>Selectively displaying data</h3>
 
-         <p>The number of columns displayed in the table below depends on the available screen space, by default; a smartphone will display 2 columns, for example, while an expanded desktop browser displays the full set.  This is accomplished by assigning semantic classes to the column headings that indicate which data values take precedence (essential vs optional), in combination with media queries to display them at different screen widths (a.k.a., <a href="http://www.alistapart.com/articles/responsive-web-design/">responsive design</a>).</p>
+          <p>The responsive table works by hiding or showing columns based on two inputs: available screen width or by the user checking and unchecking which columns to display in a column picker popup. We use classes to assign priority (1 = highest, 6 = lowest) to each of the columns so the framework can apply default logic for which to show at a given width. </p>
+    
 
-         <p>We added a bit of JavaScript logic so you can control which data is displayed by checking column names in the "Display" menu on the right.  Once an option is checked, the associated data will persist and display at all screen widths until the option is unchecked.</p>
+    <p>A user may choose to check as many columns as they want by tapping the "Columns..." button to open the column 
+      chooser popup. The popup contains a dynamically generated list of columns based on the table markup that can be checked and unchecked to adjust the visible columns. To keep the interaction simple, the popup will close when a checkbox is tapped.
+      
+     <p>The column preferences take precedence over the default class priority. Because of the flexibility, it's possible for users to introduce horizontal scrolling if the data in each column is long or if many columns are selected to be shown on a smaller screen. </p>
+      
+      
+    
 
-         <p>You can also set a column to always persist by assigning a class in the markup, in which case it has no menu option.  Here, the "Company" column is persistent.</p>
 
 
+         <table data-role="table" id="movie-table">
+            <caption>Top movies of all time according to film buffs. In case you're curious, this is a caption for the table.</caption> 
 
-
-         <table data-role="table">
-            <thead>
-               <tr>
-                  <th class="persist essential">Company</th>
-                  <th class="essential">Last Trade</th>
-                  <th class="optional">Trade Time</th>
-                  <th class="essential">Change</th>
-                  <th class="optional">Prev Close</th>
-                  <th class="optional">Open</th>
-                  <th>Bid</th>
-                  <th>Ask</th>
-                  <th>1y Target Est</th>
-               </tr>
-            </thead>
-            <tbody>
-               <tr>
-                  <th><abbr title="Google Inc.">GOOG</abbr></th>
-                  <td>597.74</td>
-                  <td>12:12PM</td>
-                  <td>14.81 (2.54%)</td>
-                  <td>582.93</td>
-                  <td>597.95</td>
-                  <td>597.73 x 100</td>
-                  <td>597.91 x 300</td>
-                  <td>731.10</td>
-               </tr>      
-               <tr>
-                  <th><abbr title="Apple Inc=">AAPL</abbr></th>
-                  <td>378.94</td>
-                  <td>12:22PM</td>
-                  <td>5.74 (1.54%)</td>
-                  <td>373.20</td>
-                  <td>381.02</td>
-                  <td>378.92 x 300</td>
-                  <td>378.99 x 100</td>
-                  <td>505.94</td>
-               </tr>      
-               <tr>
-                  <th><abbr title="Amazon.com Inc.">AMZN</abbr></th>
-                  <td>191.55</td>
-                  <td>12:23PM</td>
-                  <td>3.16 (1.68%)</td>
-                  <td>188.39</td>
-                  <td>194.99</td>
-                  <td>191.52 x 300</td>
-                  <td>191.58 x 100</td>
-                  <td>240.32</td>  
-               </tr>       
-               <tr>
-                  <th><abbr title="Oracle Corporation">ORCL</abbr></th>
-                  <td>31.15</td>
-                  <td>12:44PM</td>
-                  <td>1.41 (4.72%)</td>
-                  <td>29.74</td>
-                  <td>30.67</td>
-                  <td>31.14 x 6500</td>
-                  <td>31.15 x 3200</td>
-                  <td>36.11</td>
-               </tr>      
-               <tr>
-                  <th><abbr title="Microsoft Corporation">MSFT</abbr></th>
-                  <td>25.50</td>
-                  <td>12:27PM</td>
-                  <td>0.66 (2.67%)</td>
-                  <td>24.84</td>
-                  <td>25.37</td>
-                  <td>25.50 x 71100</td>
-                  <td>25.51 x 17800</td>
-                  <td>31.50</td>  
-               </tr>
-               <tr>
-                  <th><abbr title="Cisco Systems, Inc.">CSCO</abbr></th>
-                  <td>18.65</td>
-                  <td>12:45PM</td>
-                  <td>0.97 (5.49%)</td>
-                  <td>17.68</td>
-                  <td>18.23</td>
-                  <td>18.65 x 10300</td>
-                  <td>18.66 x 24000</td>
-                  <td>21.12</td>
-               </tr>      
-               <tr>
-                  <th><abbr title="Yahoo! Inc.">YHOO</abbr></th>
-                  <td>15.81</td>
-                  <td>12:25PM</td>
-                  <td>0.11 (0.67%)</td>
-                  <td>15.70</td>
-                  <td>15.94</td>
-                  <td>15.79 x 6100</td>
-                  <td>15.80 x 17000</td>
-                  <td>18.16</td>       
-               </tr>
-            </tbody>
-         </table>
+              <thead>
+                <tr>
+                  <th data-priority="1">Rank</th>
+                  <th data-priority="persist">Movie Title</th>
+                  <th data-priority="2">Year</th>
+                  <th data-priority="3"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
+                  <th data-priority="4">Reviews</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-rel="external">Citizen Kane</a></td>
+                  <td>1941</td>
+                  <td>100%</td>
+                  <td>74</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td><a href="http://en.wikipedia.org/wiki/Casablanca_(film)" data-rel="external">Casablanca</a></td>
+                  <td>1942</td>
+                  <td>97%</td>
+                  <td>64</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td><a href="http://en.wikipedia.org/wiki/The_Godfather" data-rel="external">The Godfather</a></td>
+                  <td>1972</td>
+                  <td>97%</td>
+                  <td>87</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td><a href="http://en.wikipedia.org/wiki/Gone_with_the_Wind_(film)" data-rel="external">Gone with the Wind</a></td>
+                  <td>1939</td>
+                  <td>96%</td>
+                  <td>87</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td><a href="http://en.wikipedia.org/wiki/Lawrence_of_Arabia_(film)" data-rel="external">Lawrence of Arabia</a></td>
+                  <td>1962</td>
+                  <td>94%</td>
+                  <td>87</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td><a href="http://en.wikipedia.org/wiki/Dr._Strangelove" data-rel="external">Dr. Strangelove Or How I Learned to Stop Worrying and Love the Bomb</a></td>
+                  <td>1964</td>
+                  <td>92%</td>
+                  <td>74</td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td><a href="http://en.wikipedia.org/wiki/The_Graduate" data-rel="external">The Graduate</a></td>
+                  <td>1967</td>
+                  <td>91%</td>
+                  <td>122</td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td><a href="http://en.wikipedia.org/wiki/The_Wizard_of_Oz_(1939_film)" data-rel="external">The Wizard of Oz</a></td>
+                  <td>1939</td>
+                  <td>90%</td>
+                  <td>72</td>
+                </tr>
+                <tr>
+                  <td>9</td>
+                  <td><a href="http://en.wikipedia.org/wiki/Singin%27_in_the_Rain" data-rel="external">Singin' in the Rain</a></td>
+                  <td>1952</td>
+                  <td>89%</td>
+                  <td>85</td>
+                </tr>
+                <tr>
+                  <td>10</td>
+                  <td><a href="http://en.wikipedia.org/wiki/The_Graduate" data-rel="external">The Graduate</a></td>
+                  <td>1967</td>
+                  <td>84%</td>
+                  <td>56</td>
+                </tr>
+              </tbody>
+            </table>
 
       </div>
       <!--/content-primary -->

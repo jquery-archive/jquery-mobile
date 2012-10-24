@@ -12,8 +12,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.buttonMarkup", 
 $.widget( "mobile.table", $.mobile.widget, {
  
     options: {
-      btnText: "Columns...",
-      persist: "persist", // specify a class assigned to column headers (th) that should always be present; the script not create a checkbox for these columns
+      columnBtnText: "Columns...",
       initSelector: ":jqmData(role='table')"
     },
  
@@ -23,25 +22,31 @@ $.widget( "mobile.table", $.mobile.widget, {
          $table = self.element,
          $thead = $table.find( "thead" ),
          $tbody = $table.find( "tbody" ),
-         $hdrCols = $thead.find( "th" ),
          $bodyRows = $tbody.find( "tr" ),
-         id = $table.attr( "id" ) || "ui-table-menu", //TODO BETTER ID HERE
-         $menuButton = $( "<a href='#" + id + "' class='ui-table-column-btn' data-rel='popup'>" + o.btnText + "</a>" ),
+         id = ( $table.attr( "id" ) || "ui-table" ) + "-popup", //TODO BETTER ID HERE
+         $menuButton = $( "<a href='#" + id + "' class='ui-table-column-btn' data-rel='popup'>" + o.columnBtnText + "</a>" ),
          $popup = $( "<div data-role='popup' data-role='fieldcontain' class='ui-table-column-popup' id='" + id + "'></div>"),
          $menu = $("<fieldset data-role='controlgroup'></fieldset>").appendTo( $popup );
 
       // create the hide/show toggles
-      $hdrCols.each(function(i){
-         if( !$( this ).is( "." + o.persist ) ){
+      $thead.find( "th" ).each(function(i){
+
+         var priority = $( this ).jqmData( "priority" );
+
+         if( priority !== "persist" ){
+
+            var $cells = $( this ).add( $bodyRows.children( ":nth-child(" + (i + 1) + ")" ) );
+
+            $cells.addClass( "ui-table-priority-" + priority );
+
             $("<label><input type='checkbox' checked />" + $( this ).text() + "</label>" )
                .appendTo( $menu )
                .children( 0 )
-               .jqmData( "cells", $( this ).add( $bodyRows.children( ":nth-child(" + (i + 1) + ")" ) ) )
+               .jqmData( "cells", $cells )
                .checkboxradio();
+
          }
       });
-
-
 
       $menuButton
          .insertBefore( $table )
@@ -59,12 +64,26 @@ $.widget( "mobile.table", $.mobile.widget, {
 
    },
 
-
    _bindEvents: function(){
+
+      var self = this;
+
       this._menu.on( "change", "input", function( e ){
-         console.log($( this ).jqmData( "cells" ))
-         $( this ).jqmData( "cells" )[ this.checked ? "removeClass" : "addClass" ]( "ui-table-cell-hidden" );
+         if( this.checked ){
+            $( this ).jqmData( "cells" ).removeClass( "ui-table-cell-hidden" ).addClass( "ui-table-cell-visible" );
+         }
+         else {
+            $( this ).jqmData( "cells" ).removeClass( "ui-table-cell-visible" ).addClass( "ui-table-cell-hidden" );
+         }
       } );
+
+      $( window ).on( "throttledresize", function(){
+         self._menu.find( "input" ).each( function(){
+               this.checked = $( this ).jqmData( "cells" ).eq(0).is( ":visible" );
+               $( this ).checkboxradio( "refresh" );
+         } );
+      });
+
    }
     
 });
