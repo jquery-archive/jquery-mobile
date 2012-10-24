@@ -27,7 +27,7 @@ $( document ).delegate( ":jqmData(role='table')", "tablecreate", function() {
       self = $table.jqmData( "table" ),
       o = self.options;
 
-   if( o.mode === "columntoggle" ){
+   if( o.mode !== "columntoggle" ){
       return;
    }
 
