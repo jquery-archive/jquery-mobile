@@ -55,6 +55,7 @@ $files = array(
 	'widgets/popup.js',
 	'widgets/jquery.mobile.table.js',
 	'widgets/jquery.mobile.table.columntoggle.js',
+	'widgets/jquery.mobile.table.reflow.js',
 	'jquery.mobile.zoom.js',
 	'jquery.mobile.zoom.iosorientationfix.js',
 	'jquery.mobile.init.js'

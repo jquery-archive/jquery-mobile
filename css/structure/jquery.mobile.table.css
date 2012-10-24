@@ -1,73 +1,16 @@
 .ui-table {
    border: 0;
    border-collapse: collapse;
-   background-color: transparent;
-   border-collapse: collapse;
-   border-spacing: 0;
+   padding: 0;
    width: 100%;
-}
-.ui-table-column-btn {
-   float: right;
 }
 .ui-table th,
 .ui-table td {
   line-height: 1.5em;
   text-align: left;
+  border: 1px solid #ccc;
+  padding: .4em;
 }
 .ui-table th {
   font-weight: bold;
-}
-
-/* Remove top/bottom margins around the fieldcontain on check list */ 
-.ui-table-column-popup fieldset {
-      margin:0;
-}
-
-th.ui-table-priority-4,
-td.ui-table-priority-4,
-th.ui-table-priority-3,
-td.ui-table-priority-3,
-th.ui-table-priority-2,
-td.ui-table-priority-2,
-th.ui-table-priority-1,
-td.ui-table-priority-1 {
-  display: none;
-}
-
-
-
-@media screen and (min-width: 20em) {
-   .ui-table th.ui-table-priority-1,
-   .ui-table td.ui-table-priority-1 {
-     display: table-cell;
-   }
-}
-
-@media screen and (min-width: 25em) {
-   .ui-table th.ui-table-priority-2,
-   .ui-table td.ui-table-priority-2 {
-     display: table-cell;
-   }
-}
-
-@media screen and (min-width: 40em) {
-   .ui-table th.ui-table-priority-3,
-   .ui-table td.ui-table-priority-3 {
-     display: table-cell;
-   }
-}
-@media screen and (min-width: 55em) {
-  .ui-table th.ui-table-priority-4,
-  .ui-table td.ui-table-priority-4 {
-     display: table-cell;
-   }
-}
-.ui-table th.ui-table-cell-hidden,
-.ui-table td.ui-table-cell-hidden {
-  display: none;
-}
-
-.ui-table th.ui-table-cell-visible,
-.ui-table td.ui-table-cell-visible {
-   display: table-cell;
 }

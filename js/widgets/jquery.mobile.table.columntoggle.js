@@ -2,6 +2,7 @@
 //>>description: Extends the table widget to a column toggle menu and responsive column visibility
 //>>label: Table: Column Toggle
 //>>group: Widgets
+//>>css.structure: ../css/structure/jquery.mobile.table.columntoggle.css
 
 
 define( [ "jquery", "./jquery.mobile.table", "../jquery.mobile.buttonMarkup", "./popup" ], function( $ ) {
@@ -10,14 +11,17 @@ define( [ "jquery", "./jquery.mobile.table", "../jquery.mobile.buttonMarkup", ".
 
 $.mobile.table.prototype.options.mode = "columntoggle";
 
+$.mobile.table.prototype.options.columnBtnClass = "";
+
 $.mobile.table.prototype.options.columnBtnText = "Columns...";
 
 $.mobile.table.prototype.options.classes = $.extend(
    $.mobile.table.prototype.options.classes,
    {
-      popup: "ui-table-column-popup",
-      btn: "ui-table-column-btn",
-      priorityPrefix: "ui-table-priority-"
+      popup: "ui-table-columntoggle-popup",
+      columnsButton: "ui-table-columntoggle-btn",
+      priorityPrefix: "ui-table-priority-",
+      columnToggleTable: "ui-table-columntoggle"
    }
 );
 
@@ -31,8 +35,10 @@ $( document ).delegate( ":jqmData(role='table')", "tablecreate", function() {
       return;
    }
 
+   self.element.addClass( o.classes.columnToggleTable );
+
    var id = ( $table.attr( "id" ) || self.options.classes.popup ) + "-popup", //TODO BETTER FALLBACK ID HERE
-      $menuButton = $( "<a href='#" + id + "' class='" + o.classes.btn + "' data-rel='popup'>" + o.columnBtnText + "</a>" ),
+      $menuButton = $( "<a href='#" + id + "' class='" + o.classes.columnsButton + "' data-rel='popup'>" + o.columnBtnText + "</a>" ),
       $popup = $( "<div data-role='popup' data-role='fieldcontain' class='" + o.classes.popup + "' id='" + id + "'></div>"),
       $menu = $("<fieldset data-role='controlgroup'></fieldset>").appendTo( $popup );
 

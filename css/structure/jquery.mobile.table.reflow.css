@@ -1,0 +1,41 @@
+/*
+ Styles for the table columntoggle mode
+*/
+
+.ui-table-reflow td,
+.ui-table-reflow th { 
+	text-align: left;
+	display: block;
+}
+.ui-table-reflow tbody th {
+	margin-top: 1em;
+}
+.ui-table-reflow thead td, 
+.ui-table-reflow thead th {
+	display: none;
+}
+.ui-table-reflow th b,
+.ui-table-reflow td b { 
+	padding: .4em; 
+	min-width: 45%; 
+	display: inline-block; 
+	border-right: 1px solid #ccc;
+	margin: -.4em 1em -.4em -.4em;
+}
+
+
+@media ( min-width: 40em ) {
+	.ui-table-reflow td,
+	.ui-table-reflow th,
+	.ui-table-reflow tbody th,
+	.ui-table-reflow tbody td,
+	.ui-table-reflow thead td,
+	.ui-table-reflow thead th {
+		display: table-cell;
+		margin: 0;
+	}
+	.ui-table-reflow td b,
+	.ui-table-reflow th b { 
+		display: none;
+	}
+}

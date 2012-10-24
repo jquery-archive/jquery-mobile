@@ -1,0 +1,58 @@
+/*
+ Styles for the table columntoggle mode
+*/
+
+.ui-table-columntoggle-btn {
+   float: right;
+}
+/* Remove top/bottom margins around the fieldcontain on check list */ 
+.ui-table-columntoggle-popup fieldset {
+      margin:0;
+}
+
+th.ui-table-priority-4,
+td.ui-table-priority-4,
+th.ui-table-priority-3,
+td.ui-table-priority-3,
+th.ui-table-priority-2,
+td.ui-table-priority-2,
+th.ui-table-priority-1,
+td.ui-table-priority-1 {
+  display: none;
+}
+
+@media screen and (min-width: 20em) {
+   th.ui-table-priority-1,
+   td.ui-table-priority-1 {
+     display: table-cell;
+   }
+}
+
+@media screen and (min-width: 25em) {
+   th.ui-table-priority-2,
+   td.ui-table-priority-2 {
+     display: table-cell;
+   }
+}
+
+@media screen and (min-width: 40em) {
+   th.ui-table-priority-3,
+   td.ui-table-priority-3 {
+     display: table-cell;
+   }
+}
+@media screen and (min-width: 55em) {
+  th.ui-table-priority-4,
+  td.ui-table-priority-4 {
+     display: table-cell;
+   }
+}
+th.ui-table-cell-hidden,
+td.ui-table-cell-hidden {
+  display: none;
+}
+
+th.ui-table-cell-visible,
+td.ui-table-cell-visible {
+   display: table-cell;
+}
