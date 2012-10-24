@@ -31,6 +31,7 @@ define([
 	'./widgets/fixedToolbar',
 	'./widgets/popup',
 	'./widgets/jquery.mobile.table',
+	'./widgets/jquery.mobile.table.columntoggle',
 	'./jquery.mobile.zoom',
 	'./jquery.mobile.zoom.iosorientationfix'
 ], function( require ) {
