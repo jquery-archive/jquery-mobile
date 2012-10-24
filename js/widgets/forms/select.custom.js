@@ -376,10 +376,14 @@ define( [
 						});
 					}
 
-					self.menuPage.one( "pageshow", function() {
-						focusMenuItem();
-						self.isOpen = true;
-					});
+					self.menuPage
+						.one( "pageshow", function() {
+							focusMenuItem();
+							self.isOpen = true;
+						})
+						.one( "pagehide", function() {
+							self.isOpen = false;
+						});
 
 					self.menuType = "page";
 					self.menuPageContent.append( self.list );
