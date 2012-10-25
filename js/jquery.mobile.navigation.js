@@ -875,14 +875,6 @@ define( [
 			}
 		}
 
-		// Set the location hash.
-		if ( settings.changeHash !== false && url ) {
-			//disable hash listening temporarily
-			urlHistory.ignoreNextHashChange = true;
-			//update hash and history
-			path.set( url );
-		}
-
 		// if title element wasn't found, try the page div data attr too
 		// If this is a deep-link or a reload ( active === undefined ) then just use pageTitle
 		var newPageTitle = ( !active )? pageTitle : toPage.jqmData( "title" ) || toPage.children( ":jqmData(role='header')" ).find( ".ui-title" ).getEncodedText();
@@ -905,6 +897,14 @@ define( [
 				urlHistory.activeIndex = Math.max( 0, urlHistory.activeIndex - 1 );
 			}
 			urlHistory.addNew( url, settings.transition, pageTitle, pageUrl, settings.role );
+		}
+
+		// Set the location hash.
+		if ( settings.changeHash !== false && url ) {
+			//disable hash listening temporarily
+			urlHistory.ignoreNextHashChange = true;
+			//update hash and history
+			path.set( url );
 		}
 
 		//set page title

@@ -112,6 +112,12 @@ define([
 			return;
 		}
 
+		// account for initial page load popstate, and other popstates triggered
+		// by other parts of the application (ie, during the refactor)
+		if( !event.originalEvent.state ) {
+			return;
+		}
+
 		// If this is a popstate that comes from the back or forward buttons
 		// make sure to set the state of our history stack properly
 		history.direct({
