@@ -5,13 +5,11 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.slider.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "./textinput", "../../jquery.mobile.buttonMarkup" ], function( $ ) {
+define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "./textinput", "../../jquery.mobile.buttonMarkup", "./reset" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 $.widget( "mobile.slider", $.mobile.widget, {
-	widgetEventPrefix: "slide",
-
 	options: {
 		theme: null,
 		trackTheme: null,
@@ -309,6 +307,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			}
 			});
 
+		if ( this._handleFormReset ) {
+			this._handleFormReset();
+		}
 		this.refresh( undefined, undefined, true );
 	},
 
@@ -321,6 +322,11 @@ $.widget( "mobile.slider", $.mobile.widget, {
 	_value: function() {
 		return  this._type === "input" ?
 			parseFloat( this.element.val() ) : this.element[0].selectedIndex;
+	},
+
+
+	_reset: function() {
+		this.refresh( undefined, false, true );
 	},
 
 	refresh: function( val, isfromControl, preventInputUpdate ) {
@@ -443,6 +449,13 @@ $.widget( "mobile.slider", $.mobile.widget, {
 	}
 
 });
+
+$.widget( "mobile.slider", $.mobile.slider, $.mobile.behaviors.formReset );
+
+// FIXME: Move the declaration of widgetEventPrefix back to the top of the
+// initial declaration of the slider widget once we start using a version of
+// the widget factory that includes a fix for http://bugs.jqueryui.com/ticket/8724
+$.widget( "mobile.slider", $.mobile.slider, { widgetEventPrefix: "slide" } );
 
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ) {
