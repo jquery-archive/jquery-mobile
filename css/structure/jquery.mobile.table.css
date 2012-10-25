@@ -8,9 +8,15 @@
 .ui-table td {
   line-height: 1.5em;
   text-align: left;
-  border: 1px solid #ccc;
-  padding: .4em;
+  border-bottom: 1px solid rgba(0, 0, 0, .08);
+  padding: .4em .5em;
+  vertical-align:top;
 }
 .ui-table th {
   font-weight: bold;
+}
+.ui-table caption {
+  text-align:left;
+  margin-bottom:1.4em;
+  opacity:50%;
 }

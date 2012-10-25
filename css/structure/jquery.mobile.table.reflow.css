@@ -14,12 +14,11 @@
 .ui-table-reflow thead th {
 	display: none;
 }
-.ui-table-reflow th b,
-.ui-table-reflow td b { 
+.ui-table-reflow th .ui-table-cell-label,
+.ui-table-reflow td .ui-table-cell-label { 
 	padding: .4em; 
-	min-width: 45%; 
+	min-width: 35%; 
 	display: inline-block; 
-	border-right: 1px solid #ccc;
 	margin: -.4em 1em -.4em -.4em;
 }
 
@@ -34,8 +33,8 @@
 		display: table-cell;
 		margin: 0;
 	}
-	.ui-table-reflow td b,
-	.ui-table-reflow th b { 
+	.ui-table-reflow td .ui-table-cell-label,
+	.ui-table-reflow th .ui-table-cell-label { 
 		display: none;
 	}
 }
