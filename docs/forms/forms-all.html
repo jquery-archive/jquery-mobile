@@ -4,12 +4,13 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>jQuery Mobile Docs - Gallery of Form Controls</title>
-	<link rel="stylesheet"  href="../../themes/default/" />
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+
 	<script src="../../js/jquery.js"></script>
-	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
-	<script src="../_assets/js/jqm-docs.js"></script>
+	<script src="../../docs/_assets/js/jqm-docs.js"></script>
 	<script src="../../js/"></script>
+
 </head>
 <body>
 
@@ -17,7 +18,8 @@
 
 		<div data-role="header" data-theme="f">
 		<h1>Forms</h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
 	</div><!-- /header -->
 
 	<div data-role="content">
@@ -27,9 +29,9 @@
 
 			<h2>Form elements</h2>
 
-			<p>This page contains various progressive-enhancement driven form controls. Native elements are sometimes hidden from view, but their values are maintained so the form can be submitted normally. </p>
-
-			<p>Browsers that don't support the custom controls will still deliver a usable experience, because all are based on native form elements.</p>
+			<p>This page contains various progressive-enhancement driven form controls. Native elements are sometimes hidden from view, but their values are maintained so the form can be submitted normally. Browsers that don't support the custom controls will still deliver a usable experience because all are based on native form elements.</p>
+			
+			<p>There is a complete set of <a href="forms-all-mini.html">mini-sized</a> form elements which are useful for toolbars or tighter spaces. <a href="forms-all-compare.html">Compare mini and normal</a> form elements side-by-side.</p>
 
 			<div data-role="fieldcontain">
 	         <label for="name">Text Input:</label>
@@ -56,7 +58,7 @@
 
 			<div data-role="fieldcontain">
 				<label for="slider">Slider:</label>
-			 	<input type="range" name="slider" id="slider" value="0" min="0" max="100"  />
+			 	<input type="range" name="slider" id="slider" value="50" min="0" max="100" data-highlight="true"  />
 			</div>
 
 			<div data-role="fieldcontain">
@@ -207,7 +209,7 @@
 	
 	<div class="content-secondary">
 		
-		<div data-role="collapsible" data-collapsed="true" data-theme="b">
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
 			
 				<h3>More in this section</h3>
 				
@@ -216,17 +218,18 @@
 					<li data-role="list-divider">Form elements</li>
 					<li><a href="docs-forms.html">Form basics</a></li>
 					<li data-theme="a"><a href="forms-all.html">Form element gallery</a></li>
-					<li><a href="forms-text.html">Text inputs</a></li>
-					<li><a href="forms-search.html">Search inputs</a></li>
-					<li><a href="forms-slider.html">Slider</a></li>
-					<li><a href="forms-switch.html">Flip toggle switch</a></li>
-					<li><a href="forms-radiobuttons.html">Radio buttons</a></li>
-					<li><a href="forms-checkboxes.html">Checkboxes</a></li>
-					<li><a href="forms-selects.html">Select menus</a></li>
+					<li><a href="forms-all-mini.html">Mini form element gallery</a></li>
+					<li><a href="textinputs/">Text inputs</a></li>
+					<li><a href="search/">Search inputs</a></li>
+					<li><a href="slider/">Slider</a></li>
+					<li><a href="switch/">Flip toggle switch</a></li>
+					<li><a href="radiobuttons/">Radio buttons</a></li>
+					<li><a href="checkboxes/">Checkboxes</a></li>
+					<li><a href="selects/">Select menus</a></li>
 					<li><a href="forms-themes.html">Theming forms</a></li>
 					<li><a href="forms-all-native.html">Native form elements</a></li>
 					<li><a href="forms-sample.html">Submitting forms</a></li>
-					<li><a href="plugin-eventsmethods.html">Plugin methods</a></li>
+					
 	
 				</ul>
 		</div>
@@ -235,7 +238,8 @@
 </div><!-- /content -->
 
 <div data-role="footer" class="footer-docs" data-theme="c">
-		<p>&copy; 2011 The jQuery Project</p>
+		<p class="jqm-version"></p>
+		<p>&copy; 2012 jQuery Foundation and other contributors</p>
 </div>
 	
 </div><!-- /page -->

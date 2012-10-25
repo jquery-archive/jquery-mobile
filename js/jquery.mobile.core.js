@@ -1,16 +1,21 @@
-/*!
- * jQuery Mobile v@VERSION
- * http://jquerymobile.com/
- *
- * Copyright 2010, jQuery Project
- * Dual licensed under the MIT or GPL Version 2 licenses.
- * http://jquery.org/license
- */
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Base file for jQuery Mobile
+//>>label: Core
+//>>group: Core
+//>>css.structure: ../css/structure/jquery.mobile.core.css
+//>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
+define( [ "jquery", "text!../version.txt" ], function( $, __version__ ) {
+//>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
+	var nsNormalizeDict = {};
+
 	// jQuery.mobile configurable options
-	$.extend( $.mobile, {
+	$.mobile = $.extend( {}, {
+
+		// Version of the jQuery Mobile Framework
+		version: __version__,
 
 		// Namespace used framework-wide for data-attrs. Default is no namespace
 		ns: "",
@@ -20,15 +25,14 @@
 		// hash segment before &ui-page= is used to make Ajax request
 		subPageUrlKey: "ui-page",
 
-		// Anchor links with a data-rel, or pages with a	 data-role, that match these selectors will be untrackable in history
-		// (no change in URL, not bookmarkable)
-		nonHistorySelectors: "dialog",
-
 		// Class assigned to page currently in view, and during transitions
 		activePageClass: "ui-page-active",
 
 		// Class used for "active" button state, from CSS framework
 		activeBtnClass: "ui-btn-active",
+
+		// Class used for "focus" form element state, from CSS framework
+		focusClass: "ui-focus",
 
 		// Automatically handle clicks and form submissions through Ajax, when same-domain
 		ajaxEnabled: true,
@@ -36,26 +40,48 @@
 		// Automatically load and show pages based on location.hash
 		hashListeningEnabled: true,
 
+		// disable to prevent jquery from bothering with links
+		linkBindingEnabled: true,
+
 		// Set default page transition - 'none' for no transitions
-		defaultPageTransition: "slide",
+		defaultPageTransition: "fade",
+
+		// Set maximum window width for transitions to apply - 'false' for no limit
+		maxTransitionWidth: false,
 
 		// Minimum scroll distance that will be remembered when returning to a page
-		minScrollBack: screen.height / 2,
+		minScrollBack: 250,
+
+		// DEPRECATED: the following property is no longer in use, but defined until 2.0 to prevent conflicts
+		touchOverflowEnabled: false,
 
 		// Set default dialog transition - 'none' for no transitions
 		defaultDialogTransition: "pop",
 
-		// Show loading message during Ajax requests
-		// if false, message will not appear, but loading classes will still be toggled on html el
-		loadingMessage: "loading",
-
 		// Error response message - appears when an Ajax page request fails
 		pageLoadErrorMessage: "Error Loading Page",
 
-		// Support conditions that must be met in order to proceed
-		// default enhanced qualifications are media query support OR IE 7+
-		gradeA: function(){
-			return $.support.mediaquery || $.mobile.browser.ie && $.mobile.browser.ie >= 7;
+		// For error messages, which theme does the box uses?
+		pageLoadErrorMessageTheme: "e",
+
+		// replace calls to window.history.back with phonegaps navigation helper
+		// where it is provided on the window object
+		phonegapNavigationEnabled: false,
+
+		//automatically initialize the DOM when it's ready
+		autoInitializePage: true,
+
+		pushStateEnabled: true,
+
+		// allows users to opt in to ignoring content by marking a parent element as
+		// data-ignored
+		ignoreContentEnabled: false,
+
+		// turn of binding to the native orientationchange due to android orientation behavior
+		orientationChangeEnabled: true,
+
+		buttonMarkup: {
+			hoverDelay: 200
 		},
 
 		// TODO might be useful upstream in jquery itself ?
@@ -103,35 +129,144 @@
 			// prevent scrollstart and scrollstop events
 			$.event.special.scrollstart.enabled = false;
 
-			setTimeout(function() {
+			setTimeout( function() {
 				window.scrollTo( 0, ypos );
 				$( document ).trigger( "silentscroll", { x: 0, y: ypos });
 			}, 20 );
 
-			setTimeout(function() {
+			setTimeout( function() {
 				$.event.special.scrollstart.enabled = true;
 			}, 150 );
 		},
 
+		// Expose our cache for testing purposes.
+		nsNormalizeDict: nsNormalizeDict,
+
 		// Take a data attribute property, prepend the namespace
-		// and then camel case the attribute string
+		// and then camel case the attribute string. Add the result
+		// to our nsNormalizeDict so we don't have to do this again.
 		nsNormalize: function( prop ) {
 			if ( !prop ) {
 				return;
 			}
 
-			return $.camelCase( $.mobile.ns + prop );
+			return nsNormalizeDict[ prop ] || ( nsNormalizeDict[ prop ] = $.camelCase( $.mobile.ns + prop ) );
+		},
+
+		// Find the closest parent with a theme class on it. Note that
+		// we are not using $.fn.closest() on purpose here because this
+		// method gets called quite a bit and we need it to be as fast
+		// as possible.
+		getInheritedTheme: function( el, defaultTheme ) {
+			var e = el[ 0 ],
+				ltr = "",
+				re = /ui-(bar|body|overlay)-([a-z])\b/,
+				c, m;
+
+			while ( e ) {
+				c = e.className || "";
+				if ( c && ( m = re.exec( c ) ) && ( ltr = m[ 2 ] ) ) {
+					// We found a parent with a theme class
+					// on it so bail from this loop.
+					break;
+				}
+
+				e = e.parentNode;
+			}
+
+			// Return the theme letter we found, if none, return the
+			// specified default.
+
+			return ltr || defaultTheme || "a";
+		},
+
+		// TODO the following $ and $.fn extensions can/probably should be moved into jquery.mobile.core.helpers
+		//
+		// Find the closest javascript page element to gather settings data jsperf test
+		// http://jsperf.com/single-complex-selector-vs-many-complex-selectors/edit
+		// possibly naive, but it shows that the parsing overhead for *just* the page selector vs
+		// the page and dialog selector is negligable. This could probably be speed up by
+		// doing a similar parent node traversal to the one found in the inherited theme code above
+		closestPageData: function( $target ) {
+			return $target
+				.closest( ':jqmData(role="page"), :jqmData(role="dialog")' )
+				.data( "page" );
+		},
+
+		enhanceable: function( $set ) {
+			return this.haveParents( $set, "enhance" );
+		},
+
+		hijackable: function( $set ) {
+			return this.haveParents( $set, "ajax" );
+		},
+
+		haveParents: function( $set, attr ) {
+			if ( !$.mobile.ignoreContentEnabled ) {
+				return $set;
+			}
+
+			var count = $set.length,
+				$newSet = $(),
+				e, $element, excluded;
+
+			for ( var i = 0; i < count; i++ ) {
+				$element = $set.eq( i );
+				excluded = false;
+				e = $set[ i ];
+
+				while ( e ) {
+					var c = e.getAttribute ? e.getAttribute( "data-" + $.mobile.ns + attr ) : "";
+
+					if ( c === "false" ) {
+						excluded = true;
+						break;
+					}
+
+					e = e.parentNode;
+				}
+
+				if ( !excluded ) {
+					$newSet = $newSet.add( $element );
+				}
+			}
+
+			return $newSet;
+		},
+
+		getScreenHeight: function() {
+			// Native innerHeight returns more accurate value for this across platforms,
+			// jQuery version is here as a normalized fallback for platforms like Symbian
+			return window.innerHeight || $( window ).height();
 		}
-	});
+	}, $.mobile );
 
 	// Mobile version of data and removeData and hasData methods
 	// ensures all data is set and retrieved using jQuery Mobile's data namespace
 	$.fn.jqmData = function( prop, value ) {
-		return this.data( prop ? $.mobile.nsNormalize( prop ) : prop, value );
+		var result;
+		if ( typeof prop !== "undefined" ) {
+			if ( prop ) {
+				prop = $.mobile.nsNormalize( prop );
+			}
+
+			// undefined is permitted as an explicit input for the second param
+			// in this case it returns the value and does not set it to undefined
+			if( arguments.length < 2 || value === undefined ){
+				result = this.data( prop );
+			} else {
+				result = this.data( prop, value );
+			}
+		}
+		return result;
 	};
 
 	$.jqmData = function( elem, prop, value ) {
-		return $.data( elem, $.mobile.nsNormalize( prop ), value );
+		var result;
+		if ( typeof prop !== "undefined" ) {
+			result = $.data( elem, prop ? $.mobile.nsNormalize( prop ) : prop, value );
+		}
+		return result;
 	};
 
 	$.fn.jqmRemoveData = function( prop ) {
@@ -142,15 +277,49 @@
 		return $.removeData( elem, $.mobile.nsNormalize( prop ) );
 	};
 
-	$.jqmHasData = function( elem, prop ) {
-		return $.hasData( elem, $.mobile.nsNormalize( prop ) );
+	$.fn.removeWithDependents = function() {
+		$.removeWithDependents( this );
+	};
+
+	$.removeWithDependents = function( elem ) {
+		var $elem = $( elem );
+
+		( $elem.jqmData( 'dependents' ) || $() ).remove();
+		$elem.remove();
+	};
+
+	$.fn.addDependents = function( newDependents ) {
+		$.addDependents( $( this ), newDependents );
+	};
+
+	$.addDependents = function( elem, newDependents ) {
+		var dependents = $( elem ).jqmData( 'dependents' ) || $();
+
+		$( elem ).jqmData( 'dependents', $.merge( dependents, newDependents ) );
+	};
+
+	// note that this helper doesn't attempt to handle the callback
+	// or setting of an html elements text, its only purpose is
+	// to return the html encoded version of the text in all cases. (thus the name)
+	$.fn.getEncodedText = function() {
+		return $( "<div/>" ).text( $( this ).text() ).html();
+	};
+
+	// fluent helper function for the mobile namespaced equivalent
+	$.fn.jqmEnhanceable = function() {
+		return $.mobile.enhanceable( this );
+	};
+
+	$.fn.jqmHijackable = function() {
+		return $.mobile.hijackable( this );
 	};
 
 	// Monkey-patching Sizzle to filter the :jqmData selector
-	var oldFind = $.find;
+	var oldFind = $.find,
+		jqmDataRE = /:jqmData\(([^)]*)\)/g;
 
 	$.find = function( selector, context, ret, extra ) {
-		selector = selector.replace(/:jqmData\(([^)]*)\)/g, "[data-" + ( $.mobile.ns || "" ) + "$1]");
+		selector = selector.replace( jqmDataRE, "[data-" + ( $.mobile.ns || "" ) + "$1]" );
 
 		return oldFind.call( this, selector, context, ret, extra );
 	};
@@ -165,3 +334,7 @@
 		return $.find( expr, null, null, [ node ] ).length > 0;
 	};
 })( jQuery, this );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");
+

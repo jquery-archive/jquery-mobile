@@ -1,0 +1,308 @@
+<!DOCTYPE html> 
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>jQuery Mobile Docs - Transitions</title> 
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />  
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+
+	<script src="../../js/jquery.js"></script>
+	<script src="../../docs/_assets/js/jqm-docs.js"></script>
+	<script src="../../js/"></script>
+
+</head> 
+<body> 
+
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="f">
+		<h1>Transitions</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="content-primary">		
+
+				<h2>Creating custom CSS-based transitions</h2>
+
+
+				<p>To create a custom CSS transition, select a class name that corresponds to the name of your transition, for example "slide", and then define your "in" and "out" CSS rules to take advantage of transitions or animation keyframes:</p>
+
+				<pre><code>
+		.slide.in {
+		 	-webkit-transform: translateX(0);
+			-moz-transform: translateX(0);
+			-webkit-animation-name: slideinfromright;
+			-moz-animation-name: slideinfromright;
+		}
+			
+		.slide.out {
+			-webkit-transform: translateX(-100%);
+			-moz-transform: translateX(-100%);
+			-webkit-animation-name: slideouttoleft;
+			-moz-animation-name: slideouttoleft;
+		}
+
+		@-webkit-keyframes slideinfromright {
+			from { -webkit-transform: translateX(100%); }
+			to { -webkit-transform: translateX(0); }
+		}
+		
+		@-webkit-keyframes slideouttoleft {
+			from { -webkit-transform: translateX(0); }
+			to { -webkit-transform: translateX(-100%); }
+		}
+	
+		@-moz-keyframes slideinfromright {
+			from { -moz-transform: translateX(100%); }
+			to { -moz-transform: translateX(0); }
+		}
+		
+		@-moz-keyframes slideouttoleft {
+			from { -moz-transform: translateX(0); }
+			to { -moz-transform: translateX(-100%); }
+		}
+		
+				</code></pre>
+
+				<p>During a CSS-based page transition, jQuery Mobile will place the class name of the transition on both the "from" and "to" pages involved in the transition. It then places an "out" class on the "from" page, and "in" class on the "to" page. The presence of these classes on the "from" and "to" page elements then triggers the animation CSS rules defined above. As of jQuery Mobile version 1.1, animation class additions are queued, rather than simultaneous, producing an out-then-in sequence, which is friendlier for mobile rendering than our previous simultaneous transition sequence.</p>
+
+				<p>If your transition supports a reverse direction, you need to create CSS rules that use the <code>reverse</code> class in addition to the transition class name and the "in" and "out" classes:</p>
+
+				<pre><code>
+		.slide.in.reverse {
+			-webkit-transform: translateX(0);
+			-moz-transform: translateX(0);
+			-webkit-animation-name: slideinfromleft;
+			-moz-animation-name: slideinfromleft;
+		}
+
+		.slide.out.reverse {
+			-webkit-transform: translateX(100%);
+			-moz-transform: translateX(100%);
+			-webkit-animation-name: slideouttoright;
+			-moz-animation-name: slideouttoright;
+		}
+
+		@-webkit-keyframes slideinfromleft {
+			from { -webkit-transform: translateX(-100%); }
+			to { -webkit-transform: translateX(0); }
+		}
+
+		@-webkit-keyframes slideouttoright {
+			from { -webkit-transform: translateX(0); }
+			to { -webkit-transform: translateX(100%); }
+		}
+		
+		@-moz-keyframes slideinfromleft {
+			from { -moz-transform: translateX(-100%); }
+			to { -moz-transform: translateX(0); }
+		}
+
+		@-moz-keyframes slideouttoright {
+			from { -moz-transform: translateX(0); }
+			to { -moz-transform: translateX(100%); }
+		}
+		
+				</code></pre>
+
+				<p>After the CSS rules are in place, you simply specify the name of your transition within the @data-transition attribute of a navigation link:</p>
+
+				<pre><code>&lt;a href="#page2" data-transition="slide"&gt;Page 2&lt;/a&gt;
+				</code></pre>
+
+				<p>When the user clicks on the navigation link, jQuery Mobile will invoke your transition when it navigates to the page mentioned within the link.</p>
+
+				<p>In case you were wondering why none of the CSS rules above specified any easing or duration, it's because the CSS for jQuery Mobile defines the default easing and duration in the following rules:</p>
+
+				<pre><code>
+		.in {
+			-webkit-animation-timing-function: ease-out;
+			-webkit-animation-duration: 350ms;
+			-moz-animation-timing-function: ease-out;
+			-moz-animation-duration: 350ms;
+		}
+
+		.out {
+			-webkit-animation-timing-function: ease-in;
+			-webkit-animation-duration: 225ms;
+			-moz-animation-timing-function: ease-in;
+			-moz-animation-duration: 225;
+		}
+				</code></pre>
+
+				<p>If you need to specify a different easing or duration, simply add the appropriate CSS3 property to your custom page transition rules.</p>
+				
+				
+		<h2>Creating custom JavaScript-based transitions</h2>
+
+		<p>When a user clicks on a link within a page, jQuery Mobile checks if the link specifies a <code>@data-transition</code> attribute. The value of this attribute is the name of the transition to use when displaying the page referred to by the link. If there is no <code>@data-transition</code> attribute, the transition name specified by the configuration option <code>$.mobile.defaultPageTransition</code> is used for pages, and <code>$.mobile.defaultDialogTransition</code> is used for dialogs.</p>
+
+		<p>After the new page is loaded, the <code>$.mobile.transitionHandlers</code> dictionary is used to see if any transition handler function is registered for the given transition name. If a handler is found, that handler is invoked to start and manage the transition. If no handler is found the handler specified by the configuration option <code>$.mobile.defaultTransitionHandler</code> is invoked.</p>
+
+		<p>By default, the <code>$.mobile.transitionHandlers</code> dictionary is only populated with a single handler entry called "default". This handler plays a dual purpose of either executing a "none" transition, which removes the <code>"ui-page-active"</code> class from the page we are transitioning "from", and places it on the page we are transitioning "to", or a Queued CSS3 Animated Transition, such as the one explained above. If the transition is "none", it will be instantaneous; no animation, no fanfare.</p>
+
+		<p>The <code>$.mobile.defaultTransitionHandler</code> points to a handler function that assumes the name is a CSS class name, and implements the "Pure CSS3 Based Transitions" section above.</p>
+
+		<p>The default transition handler is available on the $.mobile namespace:</p>
+
+		<pre><code>
+$.mobile.transitionHandlers[ "default" ];
+		</code></pre>
+
+		<h3>Transition Handlers</h3>
+
+		<p>A transition handler is a function with the following call signature:</p>
+
+		<pre><code>
+function myTransitionHandler(name, reverse, $to, $from)
+{
+    var deferred = new $.Deferred();
+
+    // Perform any actions or set-up necessary to kick-off
+    // your transition here. The only requirement is that
+    // whenever the transition completes, your code calls
+    // deferred.resolve(name, reverse, $to, $from).
+
+    // Return a promise.
+    return deferred.promise();
+}
+		</code></pre>
+
+		<p>Your handler must create a Deferred object and return a promise to the caller. The promise is used to communicate to the caller when your transition is actually complete. It is up to you to call <code>deferred.resolve()</code> at the correct time. If you are new to Deferred objects, you can find documentation <a href="http://api.jquery.com/category/deferred-object/" rel="nofollow">here</a>.</p>
+
+		<h3>Registering and Invoking Your Transition Handler</h3>
+
+		<p>Once you have created a transition handler function, you need to tell jQuery Mobile about it. To do this, simply add your handler to the <code>$.mobile.transitionHandlers</code> dictionary. Remember, the key used should be the name of your transition. This name is also the same name that will be used within the <code>@data-transition</code> attribute of any navigation links.</p>
+
+		<pre><code>
+// Define your transition handler:
+
+function myTransitionHandler(name, reverse, $to, $from)
+{
+    var deferred = new $.Deferred();
+
+    // Perform any actions or set-up necessary to kick-off
+    // your transition here. The only requirement is that
+    // whenever the transition completes, your code calls
+    // deferred.resolve(name, reverse, $to, $from).
+
+    // Return a promise.
+    return deferred.promise();
+}
+
+// Register it with jQuery Mobile:
+
+$.mobile.transitionHandlers["myTransition"] = myTransitionHandler;
+		</code></pre>
+
+		<p>Once you've registered your handler, you can invoke your transition by placing a <code>data-transition</code> attribute on a link:</p>
+
+		<pre><code>&lt;a href="#page2" data-transition="myTransition"&gt;Page 2&lt;/a&gt;
+		</code></pre>
+
+		<p>When the user clicks the link above, your transition handler will be invoked after the page is loaded and it is ready to be shown.</p>
+
+		<h3>Overriding a CSS Transition With Your Own Handler</h3>
+
+		<p>As previously mentioned the default transition handler assumes that any transition name other than "none" is a CSS class to be placed on the "from" and "to" elements to kick off a CSS3 animation. If you would like to override one of these built-in CSS transitions, you simply register your own handler with the same name as the CSS page transition you want to override. So for example, if I wanted to override the built-in "slide" CSS transition with my own JavaScript based transition, I would simply do the following:</p>
+
+		<pre><code>// Define your transition handler:
+
+function myTransitionHandler(name, reverse, $to, $from)
+{
+    var deferred = new $.Deferred();
+
+    // Perform any actions or set-up necessary to kick-off
+    // your transition here. The only requirement is that
+    // whenever the transition completes, your code calls
+    // deferred.resolve(name, reverse, $to, $from).
+
+    // Return a promise.
+    return deferred.promise();
+}
+
+// Register it with jQuery Mobile:
+
+$.mobile.transitionHandlers["slide"] = myTransitionHandler;
+		</code></pre>
+
+		<p>Once you do this, anytime the "slide" transition is invoked, your handler, instead of the default one, will be called to perform the transition.</p>
+
+		<h3>Overriding the Default Transition Handler</h3>
+
+		<p>The <code>$.mobile.css3TransitionHandler</code> function is the default transition handler that gets invoked when a transition name is used and not found in the <code>$.mobile.transitionHandlers</code> dictionary. If you want to install your own custom default handler, you simply set the <code>$.mobile.defaultTransitionHandler</code> to your handler:</p>
+
+		<pre><code>// Define your default transition handler:
+
+function myTransitionHandler(name, reverse, $to, $from)
+{
+    var deferred = new $.Deferred();
+
+    // Perform any actions or set-up necessary to kick-off
+    // your transition here. The only requirement is that
+    // whenever the transition completes, your code calls
+    // deferred.resolve(name, reverse, $to, $from).
+
+    // Return a promise.
+    return deferred.promise();
+}
+
+$.mobile.defaultTransitionHandler = myTransitionHandler;
+		</code></pre>
+
+		<p>Once you do this, your handler will be invoked any time a transition name is used but not found within the <code>$.mobile.transitionHandlers</code> dictionary.</p>
+		
+		<h2>A model for Custom transition handler development</h2>
+		<p>Transition handlers involve a number of critical operations, such as hiding any existing page, showing the new page, scrolling either to the top or a remembered scroll position on that new page, setting focus on the new page, and any animation and timing sequences you'd like to add. During development, we would recommend using <code>jquery.mobile.transitions.js</code> as a coding reference.</p>
+			
+		<h2>Transitions and scroll position</h2>
+		<p>One of the key things jQuery Mobile does is store your scroll position before starting a transition so it can restore you to the same place once you return to the page when hitting the Back button or closing a dialog. Here are the same buttons from the top to test the scrolling logic.</p>
+		
+	
+		</div><!--/content-primary -->		
+
+		<div class="content-secondary">
+
+			<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+
+					<h3>More in this section</h3>
+
+					<ul data-role="listview" data-theme="c" data-dividertheme="d">
+						<li data-role="list-divider">Pages &amp; Dialogs</li>
+						<li><a href="page-anatomy.html">Anatomy of a page</a></li>
+						<li><a href="page-template.html" data-ajax="false">Single page template</a></li>
+						<li><a href="multipage-template.html" data-ajax="false">Multi-page template</a></li>
+						<li><a href="page-titles.html">Page titles</a></li>
+						<li><a href="page-links.html">Linking pages</a></li>
+						<li><a href="page-transitions.html">Page transitions</a></li>
+						<li><a href="loader.html">Page loading widget</a></li>
+						<li><a href="dialog/index.html">Dialogs</a></li>
+                        <li><a href="popup/index.html">Popups</a></li>
+						<li><a href="page-cache.html">Prefetching &amp; caching pages</a></li>
+						<li><a href="page-navmodel.html">Ajax, hashes &amp; history</a></li>
+						<li><a href="page-dynamic.html">Dynamically injecting pages</a></li>
+						<li><a href="page-scripting.html">Scripting pages</a></li>
+						<li><a href="phonegap.html">PhoneGap apps</a></li>
+						<li><a href="touchoverflow.html">touchOverflow feature</a></li>
+						<li><a href="pages-themes.html">Theming pages</a></li>
+					</ul>
+			</div>
+		</div>		
+
+	</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p class="jqm-version"></p>
+		<p>&copy; 2012 jQuery Foundation and other contributors</p>
+</div>
+
+</div><!-- /page -->
+
+
+	
+</body>
+</html>
+

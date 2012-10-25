@@ -2,6 +2,9 @@
  * mobile navigation path unit tests
  */
 (function($){
+	var url = $.mobile.path.parseUrl( location.href ),
+		home = location.href.replace( url.domain, "" );
+
 	var testPageLoad = function(testPageAnchorSelector, expectedTextValue){
 		expect( 2 );
 
@@ -24,11 +27,7 @@
 
 			// verify that the page has changed and the expected text value is present
 			function(){
-				same($.mobile.activePage.find(".test-value").text(), expectedTextValue);
-				$.testHelper.openPage("#pathing-tests-reset");
-			},
-
-			function(){
+				deepEqual($.mobile.activePage.find(".test-value").text(), expectedTextValue);
 				start();
 			}
 		]);
@@ -59,9 +58,13 @@
 
 
 	//Doc relative tests
-	module("document relative paths");
+	module("document relative paths", {
+		teardown: function() {
+			$.testHelper.navReset( url.pathname + url.search );
+		}
+	});
 
- 	asyncTest( "file reference no nesting", function(){
+	asyncTest( "file reference no nesting", function(){
 		testPageLoad("#doc-rel-test-one", "doc rel test one");
 	});
 

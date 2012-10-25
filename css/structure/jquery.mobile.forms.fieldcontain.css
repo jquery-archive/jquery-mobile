@@ -1,0 +1,6 @@
+.ui-field-contain, fieldset.ui-field-contain { padding: .8em 0; margin: 0; border-width: 0 0 1px 0; overflow: visible; }
+.ui-field-contain:last-child { border-bottom-width: 0; }
+.ui-field-contain { max-width: 100%; } /* This prevents horizontal scrollbar in IE7 */
+@media all and (min-width: 450px){
+	.ui-field-contain, .ui-mobile fieldset.ui-field-contain { border-width: 0; padding: 0; margin: 1em 0; }
+}

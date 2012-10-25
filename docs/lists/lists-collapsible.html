@@ -1,0 +1,277 @@
+<!DOCTYPE html> 
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>jQuery Mobile Docs - Collapsible lists</title> 
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />  
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+
+	<script src="../../js/jquery.js"></script>
+	<script src="../../docs/_assets/js/jqm-docs.js"></script>
+	<script src="../../js/"></script>
+
+</head> 
+<body> 
+
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="f">
+		<h1>Collapsible lists</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="content-primary">
+		
+			<p>Listviews can be used together with the <a href="../content/content-collapsible.html">collapsible</a> widget. The framework makes them exactly fit inside the generated content container of the collapsible. If a <code>data-content-theme</code> has been set (which adds a border to the content container), the framework removes the bottom border of the last list item and adjusts its corner styling.</p>
+			
+			<h2>Inset, individual collapsible</h2>
+
+			<p>This is an example of a listview wrapped in a container with <code>data-role="collapsible"</code>.</p>
+			
+			<div data-role="collapsible" data-theme="b" data-content-theme="c">
+				<h2>Choose a car model...</h2>
+				<ul data-role="listview">
+					<li><a href="index.html">Acura</a></li>
+					<li><a href="index.html">Audi</a></li>
+					<li><a href="index.html">BMW</a></li>
+					<li><a href="index.html">Cadillac</a></li>
+					<li><a href="index.html">Chrysler</a></li>
+					<li><a href="index.html">Dodge</a></li>
+					<li><a href="index.html">Ferrari</a></li>
+					<li><a href="index.html">Ford</a></li>
+					<li><a href="index.html">GMC</a></li>
+					<li><a href="index.html">Honda</a></li>
+					<li><a href="index.html">Hyundai</a></li>
+					<li><a href="index.html">Infiniti</a></li>
+					<li><a href="index.html">Jeep</a></li>
+					<li><a href="index.html">Kia</a></li>
+					<li><a href="index.html">Lexus</a></li>
+					<li><a href="index.html">Mini</a></li>
+					<li><a href="index.html">Nissan</a></li>
+					<li><a href="index.html">Porsche</a></li>
+					<li><a href="index.html">Subaru</a></li>
+					<li><a href="index.html">Toyota</a></li>
+					<li><a href="index.html">Volkswagon</a></li>
+					<li><a href="index.html">Volvo</a></li>
+				</ul>
+			</div>
+			
+			<h2>Inset, collapsible set</h2>
+
+			<p>You can also use listviews inside a <a href="../content/content-collapsible-set.html">collapsible set</a> (accordion) to visually group the list and ensure that only a single item can be open at once. The example below shows a collapsible set with various listviews inside.</p>
+
+
+			<div data-role="collapsible-set" data-theme="b" data-content-theme="d">
+				<div data-role="collapsible">
+					<h2>Filtered list</h2>
+					<ul data-role="listview" data-filter="true" data-filter-theme="c" data-divider-theme="d">
+						<li><a href="index.html">Adam Kinkaid</a></li>
+						<li><a href="index.html">Alex Wickerham</a></li>
+						<li><a href="index.html">Avery Johnson</a></li>
+						<li><a href="index.html">Bob Cabot</a></li>
+						<li><a href="index.html">Caleb Booth</a></li>
+					</ul>
+				</div>
+				<div data-role="collapsible">
+					<h2>Formatted text</h2>
+					<ul data-role="listview" data-theme="d" data-divider-theme="d">
+						<li data-role="list-divider">Friday, October 8, 2010 <span class="ui-li-count">2</span></li>
+						<li><a href="index.html">
+							<h3>Stephen Weber</h3>
+							<p><strong>You've been invited to a meeting at Filament Group in Boston, MA</strong></p>
+							<p>Hey Stephen, if you're available at 10am tomorrow, we've got a meeting with the jQuery team.</p>
+							<p class="ui-li-aside"><strong>6:24</strong>PM</p>
+						</a></li>
+						<li><a href="index.html">
+							<h3>jQuery Team</h3>
+							<p><strong>Boston Conference Planning</strong></p>
+							<p>In preparation for the upcoming conference in Boston, we need to start gathering a list of sponsors and speakers.</p>
+							<p class="ui-li-aside"><strong>9:18</strong>AM</p>
+						</a></li>
+					</ul>
+				</div>
+				<div data-role="collapsible">
+					<h2>Thumbnails and split button</h2>
+					<ul data-role="listview" data-split-icon="gear" data-split-theme="d">
+						<li><a href="index.html">
+							<img src="images/album-bb.jpg" />
+							<h3>Broken Bells</h3>
+							<p>Broken Bells</p>
+							</a><a href="lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album
+						</a></li>
+						<li><a href="index.html">
+							<img src="images/album-hc.jpg" />
+							<h3>Warning</h3>
+							<p>Hot Chip</p>
+						</a><a href="lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album
+						</a></li>
+						<li><a href="index.html">
+							<img src="images/album-p.jpg" />
+							<h3>Wolfgang Amadeus Phoenix</h3>
+							<p>Phoenix</p>
+							</a><a href="lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album
+						</a></li>	
+					</ul>
+				</div>
+			</div>
+			
+			<h2>Non-inset, collapsible set</h2>
+			<p>Setting <code>data-inset="false"</code> on a collapsible or a collapsible set makes the collapsible full width (non-inset), like a full width listview.</p>
+			
+			<div data-role="collapsible-set" data-theme="b" data-content-theme="d" data-inset="false">
+				<div data-role="collapsible">
+					<h2>Mailbox</h2>
+					<ul data-role="listview">
+						<li><a href="index.html">Inbox <span class="ui-li-count">12</span></a></li>
+						<li><a href="index.html">Outbox <span class="ui-li-count">0</span></a></li>
+						<li><a href="index.html">Drafts <span class="ui-li-count">4</span></a></li>
+						<li><a href="index.html">Sent <span class="ui-li-count">328</span></a></li>
+						<li><a href="index.html">Trash <span class="ui-li-count">62</span></a></li>
+					</ul>
+				</div>
+				<div data-role="collapsible">
+					<h2>Calendar</h2>
+					<ul data-role="listview" data-theme="d" data-divider-theme="d">
+						<li data-role="list-divider">Friday, October 8, 2010 <span class="ui-li-count">2</span></li>
+						<li><a href="index.html">
+								<h3>Stephen Weber</h3>
+								<p><strong>You've been invited to a meeting at Filament Group in Boston, MA</strong></p>
+								<p>Hey Stephen, if you're available at 10am tomorrow, we've got a meeting with the jQuery team.</p>
+								<p class="ui-li-aside"><strong>6:24</strong>PM</p>
+						</a></li>
+						<li><a href="index.html">
+							<h3>jQuery Team</h3>
+							<p><strong>Boston Conference Planning</strong></p>
+							<p>In preparation for the upcoming conference in Boston, we need to start gathering a list of sponsors and speakers.</p>
+							<p class="ui-li-aside"><strong>9:18</strong>AM</p>
+						</a></li>
+						<li data-role="list-divider">Thursday, October 7, 2010 <span class="ui-li-count">1</span></li>
+						<li><a href="index.html">
+							<h3>Avery Walker</h3>
+							<p><strong>Re: Dinner Tonight</strong></p>
+							<p>Sure, let's plan on meeting at Highland Kitchen at 8:00 tonight. Can't wait! </p>
+							<p class="ui-li-aside"><strong>4:48</strong>PM</p>
+						</a></li>
+						<li data-role="list-divider">Wednesday, October 6, 2010 <span class="ui-li-count">3</span></li>
+						<li><a href="index.html">
+							<h3>Amazon.com</h3>
+							<p><strong>4-for-3 Books for Kids</strong></p>
+							<p>As someone who has purchased children's books from our 4-for-3 Store, you may be interested in these featured books.</p>
+							<p class="ui-li-aside"><strong>12:47</strong>PM</p>
+						</a></li>
+					</ul>
+				</div>
+				<div data-role="collapsible">
+					<h2>Contacts</h2>
+					<ul data-role="listview" data-autodividers="true" data-theme="d" data-divider-theme="d">
+						<li><a href="index.html">Adam Kinkaid</a></li>
+						<li><a href="index.html">Alex Wickerham</a></li>
+						<li><a href="index.html">Avery Johnson</a></li>
+						<li><a href="index.html">Bob Cabot</a></li>
+						<li><a href="index.html">Caleb Booth</a></li>
+						<li><a href="index.html">Christopher Adams</a></li>
+						<li><a href="index.html">Culver James</a></li>	
+					</ul>
+				</div>
+			</div>
+					
+				<h2>Non-inset, individual collapsibles</h2>
+				<p>This is an example of a series of individual collapsibles that are full width (non-inset) with listviews inside. Multiple collapsible rows can be open at once since each is an individual collapsible. Here, each collapsible also has a custom icon.</p>
+
+						<div data-role="collapsible" data-theme="b" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false">
+							<h2>Pets</h2>
+							<ul data-role="listview">
+								<li><a href="index.html">Canary</a></li>
+								<li><a href="index.html">Cat</a></li>
+								<li><a href="index.html">Dog</a></li>
+								<li><a href="index.html">Gerbil</a></li>
+								<li><a href="index.html">Iguana</a></li>
+								<li><a href="index.html">Mouse</a></li>
+							</ul>
+						</div><!-- /collapsible -->
+						<div data-role="collapsible" data-theme="b" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false">
+							<h2>Farm animals</h2>
+							<ul data-role="listview">
+								<li><a href="index.html">Chicken</a></li>
+								<li><a href="index.html">Cow</a></li>
+								<li><a href="index.html">Duck</a></li>
+								<li><a href="index.html">Horse</a></li>
+								<li><a href="index.html">Pig</a></li>
+								<li><a href="index.html">Sheep</a></li>
+							</ul>
+						</div><!-- /collapsible -->
+						<div data-role="collapsible" data-theme="b" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false">
+							<h2>Wild Animals</h2>
+							<ul data-role="listview">
+								<li><a href="index.html">Aardvark</a></li>
+								<li><a href="index.html">Alligator</a></li>
+								<li><a href="index.html">Ant</a></li>
+								<li><a href="index.html">Bear</a></li>
+								<li><a href="index.html">Beaver</a></li>
+								<li><a href="index.html">Cougar</a></li>
+								<li><a href="index.html">Dingo</a></li>
+							</ul>
+						</div><!-- /collapsible -->
+
+				<p>To avoid "double" borders the framework removes the top border of collapsibles that are immediately preceded by another collapsible. To negate this you can add the following rule to your custom CSS:</p>
+				
+<pre><code>.ui-collapsible .ui-collapsible-heading .ui-btn { border-top-width: 1px !important; }</code></pre>
+					
+		</div><!--/content-primary -->		
+
+		<div class="content-secondary">
+
+			<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+
+					<h3>More in this section</h3>
+
+					<ul data-role="listview" data-theme="c" data-dividertheme="d">
+
+						<li data-role="list-divider">Listviews</li>
+						<li><a href="docs-lists.html">List basics &amp; API</a></li>
+						<li><a href="lists-ul.html">Basic linked list</a></li>
+						<li><a href="lists-nested.html">Nested list</a></li>
+						<li><a href="lists-ol.html">Numbered list</a></li>
+
+						<li><a href="lists-split.html">Split button list</a></li>	
+						<li><a href="lists-divider.html">List dividers</a></li>
+						<li><a href="lists-autodividers.html">Autodividers</a></li>
+						<li><a href="lists-count.html">Count bubble</a></li>
+						<li><a href="lists-thumbnails.html">Thumbnails</a></li>
+						<li><a href="lists-icons.html">Icons</a></li>
+						<li><a href="lists-formatting.html">List formatting</a></li>
+						<li><a href="lists-inset.html">Inset styled lists</a></li>
+						
+						<li><a href="lists-search.html">Search filter bar</a></li>
+						<li><a href="lists-search-inset.html">Inset search filter bar</a></li>
+						<li><a href="lists-search-with-dividers.html">Search filter with dividers</a></li>
+						<li><a href="lists-search-filtertext.html">Search filter hidden data</a></li>
+
+						<li><a href="lists-readonly.html">Read-only lists</a></li>
+						<li><a href="lists-readonly-inset.html">Read-only inset lists</a></li>
+						<li><a href="lists-forms.html">Lists with forms</a></li>
+						<li><a href="lists-forms-inset.html">Inset lists with forms</a></li>
+						
+						<li data-theme="a"><a href="lists-collapsible.html">Collapsible lists</a></li>
+						
+						<li><a href="lists-performance.html">List performance test</a></li>
+						<li><a href="lists-themes.html">Theming lists</a></li>
+
+					</ul>
+			</div>
+		</div>		
+
+	</div><!-- /content -->
+
+	<div data-role="footer" class="footer-docs" data-theme="c">
+		<p class="jqm-version"></p>
+		<p>&copy; 2012 jQuery Foundation and other contributors</p>
+	</div>
+
+	</div><!-- /page -->
+
+	</body>
+	</html>

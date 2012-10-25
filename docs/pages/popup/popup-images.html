@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Docs - Popup images</title>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../../_assets/css/jqm-docs.css"/>
+
+	<script src="../../../js/jquery.js"></script>
+	<script src="../../../docs/_assets/js/jqm-docs.js"></script>
+	<script src="../../../js/"></script>
+
+	<script src="popup-examples.js"></script>
+	<link rel="stylesheet" href="popup-examples.css" />
+
+</head>
+<body>
+
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="f">
+		<h1>Popup images</h1>
+		<a href="../../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+		<a href="../../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
+	</div><!-- /header -->
+
+	<div data-role="content" class="ui-body">
+		<div class="content-primary">
+			
+			<a href="index.html" data-role="button" data-transition="fade" data-icon="arrow-l" data-inline="true" data-mini="true">Back to Popups</a>
+			<h2>Scaling images: Lightbox examples</h2>
+			
+			<p>The framework CSS contains rules that make images that are immediate children of the popup scale to fit the screen. Because of the absolute positioning of the popup container and screen, the height is not adjusted to screen height on all browsers. You can prevent vertical scrolling with a simple script that sets the <code>max-height</code> of the image.</p>
+			
+			<p>In the two examples below the divs with <code>data-role="popup"</code> have a class of <code>photopopup</code>. </p>
+			
+			<a href="#popupPhotoLandscape" data-rel="popup" data-position-to="window" data-role="button" data-theme="b" data-inline="true">Photo landscape</a>
+			<a href="#popupPhotoPortrait" data-rel="popup" data-position-to="window" data-role="button" data-theme="b" data-inline="true" data-transition="fade">Photo portrait</a>
+						
+			<div data-role="popup" id="popupPhotoLandscape" class="photopopup" data-overlay-theme="a" data-corners="false" data-tolerance="30,15" >
+				<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a><img src="../../_assets/images/photo-landscape.jpg" alt="Photo landscape">
+			</div>
+		
+			<div data-role="popup" id="popupPhotoPortrait" class="photopopup" data-overlay-theme="a" data-corners="false" data-tolerance="30,15" >
+				<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a><img src="../../_assets/images/photo-portrait.jpg" alt="Photo portrait">
+			</div>
+			
+			<p>The handler is bound to the <code>popupbeforeposition</code> event, which ensures the image is not only scaled before it is shown but also when the window is resized (e.g. orientation change). In this code example the height is reduced by 60 to take a top and bottom tolerance of 30 pixels into account.</p> 
+
+<pre><code>
+$( document ).on( "pageinit", function() {
+    $( ".photopopup" ).on({
+        popupbeforeposition: function() {
+            var maxHeight = $( window ).height() - 60 + "px";
+            $( ".photopopup img" ).css( "max-height", maxHeight );
+        }
+    });
+});
+			
+</code></pre>
+
+			
+			
+		</div><!--/content-primary -->
+
+				<div class="content-secondary">
+
+					<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+
+							<h3>More in this section</h3>
+
+							<ul data-role="listview" data-theme="c" data-dividertheme="d">
+
+								<li data-role="list-divider">Pages &amp; Dialogs</li>
+								<li><a href="../page-anatomy.html">Anatomy of a page</a></li>
+								<li><a href="../page-template.html" data-ajax="false">Single page template</a></li>
+								<li><a href="../multipage-template.html" data-ajax="false">Multi-page template</a></li>
+								<li><a href="../page-titles.html">Page titles</a></li>
+								<li><a href="../page-links.html">Linking pages</a></li>
+								<li><a href="../page-transitions.html" data-ajax="false">Page transitions</a></li>
+								<li><a href="../loader.html">Page loading widget</a></li>
+								<li><a href="../dialog/index.html">Dialogs</a></li>
+								<li data-theme="a"><a href="index.html">Popups</a></li>
+								<li><a href="../page-cache.html">Prefetching &amp; caching pages</a></li>
+								<li><a href="../page-navmodel.html">Ajax, hashes &amp; history</a></li>
+								<li><a href="../page-dynamic.html">Dynamically Injecting Pages</a></li>
+								<li><a href="../page-scripting.html">Scripting pages</a></li>
+								<li><a href="../phonegap.html">PhoneGap apps</a></li>
+								<li><a href="../touchoverflow.html">touchOverflow feature</a></li>
+								<li><a href="../pages-themes.html">Theming pages</a></li>
+
+							</ul>
+					</div>
+				</div>
+
+</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p class="jqm-version"></p>
+		<p>&copy; 2012 jQuery Foundation and other contributors</p>
+</div>
+
+</div><!-- /page -->
+
+</body>
+</html>

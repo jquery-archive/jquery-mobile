@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Docs - Switch</title>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../../_assets/css/jqm-docs.css"/>
+	<script src="../../../js/jquery.js"></script>
+	<script src="../../../docs/_assets/js/jqm-docs.js"></script>
+	<script src="../../../js/"></script>
+
+</head>
+<body>
+
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="f">
+		<h1>Flip Toggle Switch</h1>
+		<a href="../../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+		<a href="../../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="content-primary">
+
+		<form action="#" method="get">
+			<h2>Flip toggle switch</h2>
+			
+			<ul data-role="controlgroup" data-type="horizontal" class="localnav">
+				<li><a href="index.html" data-role="button" data-transition="fade" class="ui-btn-active">Basics</a></li>
+				<li><a href="options.html" data-role="button" data-transition="fade">Options</a></li>
+				<li><a href="methods.html" data-role="button" data-transition="fade">Methods</a></li>
+				<li><a href="events.html" data-role="button" data-transition="fade">Events</a></li>
+			</ul>
+    
+			<p>A binary "flip" switch is a common UI element on mobile devices that is used for binary on/off or true/false data input. You can either drag the flip handle like a slider or tap one side of the switch.</p>
+			
+			<p>To create a flip toggle, start with a <code>select</code> with attribute <code>data-role="slider"</code> and two options. The first option will be styled as the "on" state switch and the second will be styled as the "off" state so write your options accordingly. View the <a href="../../api/data-attributes.html">data- attribute reference</a> to see all the possible attributes you can add to flip switches.</p>
+				
+			<p>Set the <code>for</code> attribute of the <code>label</code> to match the <code>id</code> of the <code>input</code> so they are semantically associated. It's possible to <a href="../docs-forms.html">accessibly hide the label</a> if it's not desired in the page layout, but we require that it is present in the markup for semantic and accessibility reasons.</p>
+				
+<pre><code>	
+&lt;label for=&quot;flip-1&quot;&gt;Flip switch:&lt;/label&gt;
+&lt;select name=&quot;flip-1&quot; id=&quot;flip-1&quot; data-role=&quot;slider&quot;&gt;
+	&lt;option value=&quot;off&quot;&gt;Off&lt;/option&gt;
+	&lt;option value=&quot;on&quot;&gt;On&lt;/option&gt;
+&lt;/select&gt; 
+</code></pre>	
+
+			<p>This will produce a basic flip toggle switch input. The default styles set the width of the switch to 100% of the parent container and stack the label on a separate line.</p>
+
+			<label for="flip-1">Flip switch:</label>
+			<select name="flip-1" id="flip-1" data-role="slider">
+				<option value="off">Off</option>
+				<option value="on">On</option>
+			</select> 
+			
+			
+			<h2>Longer labels</h2>
+			<p>The control is proportionally scaled, so to use longer labels one can just add a line of CSS setting the switch to the desired width. For example, given the following markup:</p>
+<pre><code>
+&lt;div class="containing-element"&gt;
+	&lt;label for="flip-min">Flip switch:&lt;/label&gt;
+	&lt;select name="flip-min" id="flip-min" data-role="slider"&gt;
+		&lt;option value="off">Switch Off&lt;/option&gt;
+		&lt;option value="on">Switch On&lt;/option&gt;
+	&lt;/select&gt;
+&lt;/div&gt;
+</code></pre>
+	
+			<p><code>.containing-element .ui-slider-switch { width: 9em }</code> will produce:</p>
+		
+			<style type="text/css" media="screen">
+			.containing-element .ui-slider-switch { width: 9em; }
+			</style>
+			
+			<div class="containing-element">
+				<label for="flip-min">Flip switch:</label>
+				<select name="flip-min" id="flip-min" data-role="slider">
+					<option value="off">Switch Off</option>
+					<option value="on">Switch On</option>
+				</select> 
+			</div>
+			
+			<p>As some default styles hinge on fieldcontains, note that you may have to ensure that custom styles apply to switches within fieldcontains by using <code>.ui-field-contain div.ui-slider-switch { width: […]; }</code>.</p>
+			
+			<h2>Mini version</h2>
+
+			<p>For a more compact version that is useful in toolbars and tight spaces, add the <code>data-mini="true"</code> attribute to the element to create a <a href="../forms-all-mini.html">mini version</a>. </p>
+
+<pre><code>	
+&lt;label for=&quot;flip-mini&quot;&gt;Flip switch:&lt;/label&gt;
+&lt;select name=&quot;flip-mini&quot; id=&quot;flip-mini&quot; data-role=&quot;slider&quot; <strong>data-mini=&quot;true&quot;</strong>&gt;
+	&lt;option value=&quot;off&quot;&gt;Off&lt;/option&gt;
+	&lt;option value=&quot;on&quot;&gt;On&lt;/option&gt;
+&lt;/select&gt;
+</code></pre>
+			
+			<p>This will produce a flip switch that is not as tall as the standard version and has a smaller text size.</p>
+			<label for="flip-mini">Flip switch:</label>
+			<select name="flip-mini" id="flip-mini" data-role="slider" data-mini="true">
+				<option value="off">Off</option>
+				<option value="on">On</option>
+			</select>
+			
+
+			<h2>Field containers</h2>
+			 <p>Optionally wrap the switch markup in a container with the <code>data-role="fieldcontain"</code> attribute to help visually group it in a longer form.</p>
+
+<pre><code>	
+<strong>&lt;div data-role=&quot;fieldcontain&quot;&gt;
+</strong>&lt;label for=&quot;flip-2&quot;&gt;Flip switch:&lt;/label&gt;
+	&lt;select name=&quot;flip-2&quot; id=&quot;flip-2&quot; data-role=&quot;slider&quot;&gt;
+		&lt;option value=&quot;nope&quot;&gt;Nope&lt;/option&gt;
+		&lt;option value=&quot;yep&quot;&gt;Yep&lt;/option&gt;
+	&lt;/select&gt; 
+<strong>&lt;/div&gt;
+</strong></code></pre>	
+		<p>The flip toggle switch is now displayed like this:</p>
+		<div data-role="fieldcontain">
+			<label for="flip-2">Flip switch:</label>
+			<select name="flip-2" id="flip-2" data-role="slider">
+				<option value="nope">Nope</option>
+				<option value="yep">Yep</option>
+			</select> 
+		</div>
+						
+				
+		<h2>Theming the flip switch</h2>	
+		
+		<p>Like all form elements, this widget will automatically inherit the theme from its parent container. To choose a specific theme color swatch, specify the <code>data-theme</code> attribute on the <code>select</code> and specify a swatch letter.</p>	
+		
+<pre><code>	
+&lt;div data-role=&quot;fieldcontain&quot;&gt;
+	&lt;label for=&quot;flip-3&quot;&gt;Flip switch:&lt;/label&gt;
+	&lt;select name=&quot;flip-3&quot; id=&quot;flip-3&quot; data-role=&quot;slider&quot; data-theme=&quot;a&quot;&gt;
+		&lt;option value=&quot;no&quot;&gt;No&lt;/option&gt;
+		&lt;option value=&quot;yes&quot;&gt;Yes&lt;/option&gt;
+	&lt;/select&gt; 
+&lt;/div&gt;
+</code></pre>	
+				<p>This results in a switch with the swatch "a" colors for the handle. Note that the lefthand "on" state gets the active state color.</p>
+				<div data-role="fieldcontain">
+					<label for="flip-3">Flip switch:</label>
+					<select name="flip-3" id="flip-3" data-role="slider" data-theme="a">
+						<option value="hate">Hate</option>
+						<option value="love">Love</option>
+					</select> 
+				</div>
+				
+				<p>Here is a swatch "e" variation:</p>
+				<div data-role="fieldcontain">
+					<label for="flip-4">Flip switch:</label>
+					<select name="flip-4" id="flip-4" data-role="slider" data-theme="e">
+						<option value="no">No</option>
+						<option value="yes">Yes</option>
+					</select> 
+				</div>
+		
+		<p>It is also possible to theme the track of the flip switch by adding the <code>data-track-theme</code> attribute and specifying the chosen swatch letter on the <code>select</code>.</p>
+<p>Here's an example of a flip switch with the swatch "a" applied to the track and swatch "c" applied to the handle:</p>		
+
+<pre><code>	
+&lt;div data-role="fieldcontain"&gt;
+        &lt;label for="flip-5"&gt;Flip switch:&lt;/label&gt;
+        &lt;select name="flip-5" id="flip-5" data-role="slider" data-theme="c" data-track-theme="a"&gt;
+                &lt;option value="no"&gt;No&lt;/option&gt;
+                &lt;option value="yes"&gt;Yes&lt;/option&gt;
+        &lt;/select&gt;
+&lt;/div&gt;
+</code></pre>
+
+<div data-role="fieldcontain">
+    <label for="flip-5">Flip switch:</label>
+    <select name="flip-5" id="flip-5" data-role="slider" data-theme="c" data-track-theme="a">
+        <option value="no">No</option>
+        <option value="yes">Yes</option>
+    </select>
+</div>
+		
+		
+		<h2>Calling the switch plugin</h2>
+
+<p>This plugin will auto-initialize on any page that contains a <code>select</code> with the <code>data-role="slider"</code> attribute. However, if needed you can directly call the <code>slider</code> plugin on any selector, just like any jQuery plugin:</p>
+<pre><code>
+$('select').slider();			
+</code></pre>
+    
+		</form>
+	</div><!--/content-primary -->		
+	
+	<div class="content-secondary">
+		
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+			
+				<h3>More in this section</h3>
+				
+				<ul data-role="listview" data-theme="c" data-dividertheme="d">
+				
+					<li data-role="list-divider">Form elements</li>
+					<li><a href="../docs-forms.html">Form basics</a></li>
+					<li><a href="../forms-all.html">Form element gallery</a></li>
+					<li><a href="../forms-all-mini.html">Mini form element gallery</a></li>
+					<li><a href="../textinputs/index.html">Text inputs</a></li>
+					<li><a href="../search/">Search input</a></li>
+					<li><a href="../slider/">Slider</a></li>
+					<li data-theme="a"><a href="index.html">Flip toggle switch</a></li>
+					<li><a href="../radiobuttons/">Radio buttons</a></li>
+					<li><a href="../checkboxes/">Checkboxes</a></li>
+					<li><a href="../selects/">Select menus</a></li>
+					<li><a href="../forms-themes.html">Theming forms</a></li>
+					<li><a href="../forms-all-native.html">Native form elements</a></li>
+					<li><a href="../forms-sample.html">Submitting forms</a></li>
+					
+	
+				</ul>
+		</div>
+	</div>		
+
+</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p class="jqm-version"></p>
+		<p>&copy; 2012 jQuery Foundation and other contributors</p>
+</div>
+	
+</div><!-- /page -->
+
+</body>
+</html>
+

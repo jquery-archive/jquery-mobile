@@ -1,37 +1,93 @@
-/*
-* jQuery Mobile Framework : plugin for making button-like links
-* Copyright (c) jQuery Project
-* Dual licensed under the MIT or GPL Version 2 licenses.
-* http://jquery.org/license
-*/
-( function( $, undefined ) {
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Applies button styling to links
+//>>label: Buttons: Link-based
+//>>group: Forms
+//>>css.structure: ../css/structure/jquery.mobile.button.css
+//>>css.theme: ../css/themes/default/jquery.mobile.theme.css
+
+define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.vmouse" ], function( $ ) {
+//>>excludeEnd("jqmBuildExclude");
+(function( $, undefined ) {
 
 $.fn.buttonMarkup = function( options ) {
-	return this.each( function() {
-		var el = $( this ),
-			o = $.extend( {}, $.fn.buttonMarkup.defaults, el.jqmData(), options ),
+	var $workingSet = this,
+		mapToDataAttr = function( key, value ) {
+			e.setAttribute( "data-" + $.mobile.ns + key, value );
+			el.jqmData( key, value );
+		};
+
+	// Enforce options to be of type string
+	options = ( options && ( $.type( options ) === "object" ) )? options : {};
+	for ( var i = 0; i < $workingSet.length; i++ ) {
+		var el = $workingSet.eq( i ),
+			e = el[ 0 ],
+			o = $.extend( {}, $.fn.buttonMarkup.defaults, {
+				icon:       options.icon       !== undefined ? options.icon       : el.jqmData( "icon" ),
+				iconpos:    options.iconpos    !== undefined ? options.iconpos    : el.jqmData( "iconpos" ),
+				theme:      options.theme      !== undefined ? options.theme      : el.jqmData( "theme" ) || $.mobile.getInheritedTheme( el, "c" ),
+				inline:     options.inline     !== undefined ? options.inline     : el.jqmData( "inline" ),
+				shadow:     options.shadow     !== undefined ? options.shadow     : el.jqmData( "shadow" ),
+				corners:    options.corners    !== undefined ? options.corners    : el.jqmData( "corners" ),
+				iconshadow: options.iconshadow !== undefined ? options.iconshadow : el.jqmData( "iconshadow" ),
+				mini:       options.mini       !== undefined ? options.mini       : el.jqmData( "mini" )
+			}, options ),
 
 			// Classes Defined
 			innerClass = "ui-btn-inner",
+			textClass = "ui-btn-text",
 			buttonClass, iconClass,
-			themedParent, wrap;
+			// Button inner markup
+			buttonInner,
+			buttonText,
+			buttonIcon,
+			buttonElements;
 
-		if ( attachEvents ) {
+		$.each( o, mapToDataAttr );
+
+		if ( el.jqmData( "rel" ) === "popup" && el.attr( "href" ) ) {
+			e.setAttribute( "aria-haspopup", true );
+			e.setAttribute( "aria-owns", e.getAttribute( "href" ) );
+		}
+
+		// Check if this element is already enhanced
+		buttonElements = $.data( ( ( e.tagName === "INPUT" || e.tagName === "BUTTON" ) ? e.parentNode : e ), "buttonElements" );
+
+		if ( buttonElements ) {
+			e = buttonElements.outer;
+			el = $( e );
+			buttonInner = buttonElements.inner;
+			buttonText = buttonElements.text;
+			// We will recreate this icon below
+			$( buttonElements.icon ).remove();
+			buttonElements.icon = null;
+		}
+		else {
+			buttonInner = document.createElement( o.wrapperEls );
+			buttonText = document.createElement( o.wrapperEls );
+		}
+		buttonIcon = o.icon ? document.createElement( "span" ) : null;
+
+		if ( attachEvents && !buttonElements ) {
 			attachEvents();
 		}
 
 		// if not, try to find closest theme container
 		if ( !o.theme ) {
-			themedParent = el.closest( "[class*='ui-bar-'],[class*='ui-body-']" );
-			o.theme = themedParent.length ?
-				/ui-(bar|body)-([a-z])/.exec( themedParent.attr( "class" ) )[2] :
-				"c";
+			o.theme = $.mobile.getInheritedTheme( el, "c" );
 		}
 
 		buttonClass = "ui-btn ui-btn-up-" + o.theme;
+		buttonClass += o.shadow ? " ui-shadow" : "";
+		buttonClass += o.corners ? " ui-btn-corner-all" : "";
 
-		if ( o.inline ) {
-			buttonClass += " ui-btn-inline";
+		if ( o.mini !== undefined ) {
+			// Used to control styling in headers/footers, where buttons default to `mini` style.
+			buttonClass += o.mini === true ? " ui-mini" : " ui-fullsize";
+		}
+
+		if ( o.inline !== undefined ) {
+			// Used to control styling in headers/footers, where buttons default to `inline` style.
+			buttonClass += o.inline === true ? " ui-btn-inline" : " ui-btn-block";
 		}
 
 		if ( o.icon ) {
@@ -48,29 +104,63 @@ $.fn.buttonMarkup = function( options ) {
 		if ( o.iconpos ) {
 			buttonClass += " ui-btn-icon-" + o.iconpos;
 
-			if ( o.iconpos == "notext" && !el.attr( "title" ) ) {
-				el.attr( "title", el.text() );
+			if ( o.iconpos === "notext" && !el.attr( "title" ) ) {
+				el.attr( "title", el.getEncodedText() );
 			}
 		}
 
-		if ( o.corners ) {
-			buttonClass += " ui-btn-corner-all";
-			innerClass += " ui-btn-corner-all";
+		innerClass += o.corners ? " ui-btn-corner-all" : "";
+
+		if ( o.iconpos && o.iconpos === "notext" && !el.attr( "title" ) ) {
+			el.attr( "title", el.getEncodedText() );
 		}
 
-		if ( o.shadow ) {
-			buttonClass += " ui-shadow";
+		if ( buttonElements ) {
+			el.removeClass( buttonElements.bcls || "" );
+		}
+		el.removeClass( "ui-link" ).addClass( buttonClass );
+
+		buttonInner.className = innerClass;
+
+		buttonText.className = textClass;
+		if ( !buttonElements ) {
+			buttonInner.appendChild( buttonText );
+		}
+		if ( buttonIcon ) {
+			buttonIcon.className = iconClass;
+			if ( !( buttonElements && buttonElements.icon ) ) {
+				buttonIcon.innerHTML = "&#160;";
+				buttonInner.appendChild( buttonIcon );
+			}
 		}
 
-		el.attr( "data-" + $.mobile.ns + "theme", o.theme )
-			.addClass( buttonClass );
+		while ( e.firstChild && !buttonElements ) {
+			buttonText.appendChild( e.firstChild );
+		}
 
-		wrap = ( "<D class='" + innerClass + "'><D class='ui-btn-text'></D>" +
-			( o.icon ? "<span class='" + iconClass + "'></span>" : "" ) +
-			"</D>" ).replace( /D/g, o.wrapperEls );
+		if ( !buttonElements ) {
+			e.appendChild( buttonInner );
+		}
 
-		el.wrapInner( wrap );
-	});
+		// Assign a structure containing the elements of this button to the elements of this button. This
+		// will allow us to recognize this as an already-enhanced button in future calls to buttonMarkup().
+		buttonElements = {
+			bcls  : buttonClass,
+			outer : e,
+			inner : buttonInner,
+			text  : buttonText,
+			icon  : buttonIcon
+		};
+
+		$.data( e,           'buttonElements', buttonElements );
+		$.data( buttonInner, 'buttonElements', buttonElements );
+		$.data( buttonText,  'buttonElements', buttonElements );
+		if ( buttonIcon ) {
+			$.data( buttonIcon, 'buttonElements', buttonElements );
+		}
+	}
+
+	return this;
 };
 
 $.fn.buttonMarkup.defaults = {
@@ -81,61 +171,91 @@ $.fn.buttonMarkup.defaults = {
 };
 
 function closestEnabledButton( element ) {
-	while ( element ) {
-		var $ele = $( element );
-		if ( $ele.hasClass( "ui-btn" ) && !$ele.hasClass( "ui-disabled" ) ) {
-			break;
-		}
-		element = element.parentNode;
-	}
-	return element;
+    var cname;
+
+    while ( element ) {
+		// Note that we check for typeof className below because the element we
+		// handed could be in an SVG DOM where className on SVG elements is defined to
+		// be of a different type (SVGAnimatedString). We only operate on HTML DOM
+		// elements, so we look for plain "string".
+        cname = ( typeof element.className === 'string' ) && ( element.className + ' ' );
+        if ( cname && cname.indexOf( "ui-btn " ) > -1 && cname.indexOf( "ui-disabled " ) < 0 ) {
+            break;
+        }
+
+        element = element.parentNode;
+    }
+
+    return element;
 }
 
 var attachEvents = function() {
+	var hoverDelay = $.mobile.buttonMarkup.hoverDelay, hov, foc;
+
 	$( document ).bind( {
-		"vmousedown": function( event ) {
-			var btn = closestEnabledButton( event.target ),
-				$btn, theme;
+		"vmousedown vmousecancel vmouseup vmouseover vmouseout focus blur scrollstart": function( event ) {
+			var theme,
+				$btn = $( closestEnabledButton( event.target ) ),
+				isTouchEvent = event.originalEvent && /^touch/.test( event.originalEvent.type ),
+				evt = event.type;
 
-			if ( btn ) {
-				$btn = $( btn );
+			if ( $btn.length ) {
 				theme = $btn.attr( "data-" + $.mobile.ns + "theme" );
-				$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-down-" + theme );
+
+				if ( evt === "vmousedown" ) {
+					if ( isTouchEvent ) {
+						// Use a short delay to determine if the user is scrolling before highlighting
+						hov = setTimeout( function() {
+							$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-down-" + theme );
+						}, hoverDelay );
+					} else {
+						$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-down-" + theme );
+					}
+				} else if ( evt === "vmousecancel" || evt === "vmouseup" ) {
+					$btn.removeClass( "ui-btn-down-" + theme ).addClass( "ui-btn-up-" + theme );
+				} else if ( evt === "vmouseover" || evt === "focus" ) {
+					if ( isTouchEvent ) {
+						// Use a short delay to determine if the user is scrolling before highlighting
+						foc = setTimeout( function() {
+							$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-hover-" + theme );
+						}, hoverDelay );
+					} else {
+						$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-hover-" + theme );
+					}
+				} else if ( evt === "vmouseout" || evt === "blur" || evt === "scrollstart" ) {
+					$btn.removeClass( "ui-btn-hover-" + theme  + " ui-btn-down-" + theme ).addClass( "ui-btn-up-" + theme );
+					if ( hov ) {
+						clearTimeout( hov );
+					}
+					if ( foc ) {
+						clearTimeout( foc );
+					}
+				}
 			}
 		},
-		"vmousecancel vmouseup": function( event ) {
-			var btn = closestEnabledButton( event.target ),
-				$btn, theme;
-
-			if ( btn ) {
-				$btn = $( btn );
-				theme = $btn.attr( "data-" + $.mobile.ns + "theme" );
-				$btn.removeClass( "ui-btn-down-" + theme ).addClass( "ui-btn-up-" + theme );
-			}
+		"focusin focus": function( event ) {
+			$( closestEnabledButton( event.target ) ).addClass( $.mobile.focusClass );
 		},
-		"vmouseover focus": function( event ) {
-			var btn = closestEnabledButton( event.target ),
-				$btn, theme;
-
-			if ( btn ) {
-				$btn = $( btn );
-				theme = $btn.attr( "data-" + $.mobile.ns + "theme" );
-				$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-hover-" + theme );
-			}
-		},
-		"vmouseout blur": function( event ) {
-			var btn = closestEnabledButton( event.target ),
-				$btn, theme;
-
-			if ( btn ) {
-				$btn = $( btn );
-				theme = $btn.attr( "data-" + $.mobile.ns + "theme" );
-				$btn.removeClass( "ui-btn-hover-" + theme ).addClass( "ui-btn-up-" + theme );
-			}
+		"focusout blur": function( event ) {
+			$( closestEnabledButton( event.target ) ).removeClass( $.mobile.focusClass );
 		}
 	});
 
 	attachEvents = null;
 };
 
+//links in bars, or those with  data-role become buttons
+//auto self-init widgets
+$( document ).bind( "pagecreate create", function( e ) {
+
+	$( ":jqmData(role='button'), .ui-bar > a, .ui-header > a, .ui-footer > a, .ui-bar > :jqmData(role='controlgroup') > a", e.target )
+		.jqmEnhanceable()
+		.not( "button, input, .ui-btn, :jqmData(role='none'), :jqmData(role='nojs')" )
+		.buttonMarkup();
+});
+
 })( jQuery );
+
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");

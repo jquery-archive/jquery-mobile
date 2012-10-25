@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Docs - Form element size comparison</title>
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+
+	<script src="../../js/jquery.js"></script>
+	<script src="../../docs/_assets/js/jqm-docs.js"></script>
+	<script src="../../js/"></script>
+
+</head>
+<body>
+
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="f">
+		<h1>Form sizes</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="content-primary">
+
+		<form action="#" method="get">
+
+			<h2>Form size comparison</h2>
+
+			<p>All form controls accept a <code>data-mini="true"</code> attribute that renders a smaller version of the enhanced element. In the case of grouped buttons, the <code>data-mini="true"</code> attribute can be added to the containing controlgroup.</p>
+
+			<style>
+				table { width:100%; border-bottom: 1px solid #ccc; border-spacing: 0; }
+				th { text-align:left; margin-right:50px; display:none; }
+				th h3 { margin:.6em 0; }
+				th, td { vertical-align:top; border-top:1px solid #ccc; padding: 4px 10px; }
+			</style>
+
+		<table margin="0">
+			<tr>
+				<th><h3><a href="search/index.html">Search</a></h3></th>
+				<td>
+					<label for="search-full" class="ui-hidden-accessible">Search Input:</label>
+			        <input type="search" name="name" id="search-full" value="" />
+				</td>
+				<td>
+					<label for="text-mini" class="ui-hidden-accessible">Search Input:</label>
+			        <input type="search" name="name" id="search-mini" value="" data-mini="true" />	
+				</td>
+			</tr>
+			<tr>
+				<th><h3><a href="textinputs/index.html">Text</a></h3></th>
+				<td>
+					<label for="text-full" class="ui-hidden-accessible">Text Input:</label>
+			        <input type="text" name="name" id="text-full" value="" />
+				</td>
+				<td>
+					<label for="text-mini" class="ui-hidden-accessible">Text Input:</label>
+			        <input type="text" name="name" id="text-mini" value="" data-mini="true" />	
+				</td>
+			</tr>
+			<tr>
+				<th><h3><a href="textinputs/index.html">Textarea</a></h3></th>
+				<td>
+					<label for="textarea-full" class="ui-hidden-accessible">Textarea:</label>
+					<textarea name="textarea" id="textarea-full"></textarea>
+				</td>
+				<td>
+					<label for="textarea-mini" class="ui-hidden-accessible">Textarea:</label>
+					<textarea name="textarea" id="textarea-mini" data-mini="true"></textarea>	
+				</td>
+			</tr>
+			<tr>
+				<th><h3><a href="switch/index.html">Switch</a></h3></th>
+				<td>
+					<label for="flip-full" class="ui-hidden-accessible">Flip switch:</label>
+					<select name="slider" id="flip-full" data-role="slider">
+						<option value="off">Off</option>
+						<option value="on">On</option>
+					</select>
+				</td>
+				<td>
+					<label for="flip-mini" class="ui-hidden-accessible">Flip switch:</label>
+					<select name="slider" id="flip-mini" data-role="slider" data-mini="true">
+						<option value="off">Off</option>
+						<option value="on">On</option>
+					</select>	
+				</td>
+			</tr>
+			<tr>
+				<th><h3><a href="slider/index.html">Slider</a></h3></th>
+				<td style="padding-top:14px;">
+					<label for="slider-full" class="ui-hidden-accessible">Input slider:</label>
+					<input type="range" name="slider-1" id="slider-full" value="25" min="0" max="100" data-highlight="true" class="ui-hidden-accessible" />
+				</td>
+				<td style="padding-top:16px;">
+					<label for="slider-mini" class="ui-hidden-accessible">Input slider:</label>
+					<input type="range" name="slider-1" id="slider-mini" value="25" min="0" max="100" data-highlight="true" data-mini="true" class="ui-hidden-accessible" />
+				</td>
+			</tr>
+			<tr>
+				<th><h3><a href="select/index.html">Select</a></h3></th>
+				<td>
+					<label for="select-full" class="ui-hidden-accessible">Shipping method:</label>
+					<select name="select-choice-0" id="select-full">
+						<option value="standard">Standard: 7 day</option>
+						<option value="rush">Rush: 3 days</option>
+						<option value="express">Express: next day</option>
+						<option value="overnight">Overnight</option>
+					</select>
+				</td>
+				<td>
+					<label for="select-mini" class="ui-hidden-accessible">Shipping method:</label>
+					<select name="select-choice-0" id="select-mini" data-mini="true">
+						<option value="standard">Standard: 7 day</option>
+						<option value="rush">Rush: 3 days</option>
+						<option value="express">Express: next day</option>
+						<option value="overnight">Overnight</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th><h3><a href="checkboxes/index.html">Checkbox</a></h3></th>
+				<td>
+					<fieldset data-role="controlgroup">
+						<input type="checkbox" name="checkbox-1a" id="c-full-1" />
+						<label for="c-full-1">Apples</label>
+						<input type="checkbox" name="checkbox-2a" id="c-full-2" />
+						<label for="c-full-2">Oranges</label>
+						<input type="checkbox" name="checkbox-3a" id="c-full-3" />
+						<label for="c-full-3">Bananas</label>
+				    </fieldset>
+				</td>
+				<td>
+					<fieldset data-role="controlgroup" data-mini="true">
+						<input type="checkbox" name="checkbox-1a" id="c-mini-1" />
+						<label for="c-mini-1">Apples</label>
+						<input type="checkbox" name="checkbox-2a" id="c-mini-2" />
+						<label for="c-mini-2">Oranges</label>
+						<input type="checkbox" name="checkbox-3a" id="c-mini-3" />
+						<label for="c-mini-3">Bananas</label>
+				    </fieldset>
+				</td>
+			</tr>
+			<tr>
+				<th><h3><a href="checkboxes/index.html">Checkbox</a></h3></th>
+				<td>
+					<fieldset data-role="controlgroup" data-type="horizontal">
+						<input type="checkbox" name="checkbox-1a" id="c-full-4" />
+						<label for="c-full-4">B</label>
+						<input type="checkbox" name="checkbox-2a" id="c-full-5" />
+						<label for="c-full-5">I</label>
+						<input type="checkbox" name="checkbox-3a" id="c-full-6" />
+						<label for="c-full-6">U</label>
+				    </fieldset>
+				</td>
+				<td>
+					<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+						<input type="checkbox" name="checkbox-1a" id="c-mini-4" />
+						<label for="c-mini-4">B</label>
+						<input type="checkbox" name="checkbox-2a" id="c-mini-5" />
+						<label for="c-mini-5">I</label>
+						<input type="checkbox" name="checkbox-3a" id="c-mini-6" />
+						<label for="c-mini-6">U</label>
+				    </fieldset>
+				</td>
+			</tr>
+			<tr>
+				<th><h3><a href="radiobuttons/index.html">Radio buttons</a></h3></th>
+				<td>
+					<fieldset data-role="controlgroup">
+				         	<input type="radio" name="radio-choice-1" id="radio-full-1" value="choice-1" checked="checked" />
+				         	<label for="radio-full-1">Credit</label>
+				         	<input type="radio" name="radio-choice-1" id="radio-full-2" value="choice-2"  />
+				         	<label for="radio-full-2">Debit</label>
+				         	<input type="radio" name="radio-choice-1" id="radio-full-3" value="choice-3"  />
+				         	<label for="radio-full-3">Cash</label>
+				    </fieldset>
+				</td>
+				<td>
+					<fieldset data-role="controlgroup" data-mini="true">
+				         	<input type="radio" name="radio-choice-1" id="radio-mini-1" value="choice-1" checked="checked" />
+				         	<label for="radio-mini-1">Credit</label>
+				         	<input type="radio" name="radio-choice-1" id="radio-mini-2" value="choice-2"  />
+				         	<label for="radio-mini-2">Debit</label>
+				         	<input type="radio" name="radio-choice-1" id="radio-mini-3" value="choice-3"  />
+				         	<label for="radio-mini-3">Cash</label>
+				    </fieldset>
+				</td>
+			</tr>
+			<tr>
+				<th><h3><a href="radiobuttons/index.html">Radio toggle</a></h3></th>
+				<td>
+					<fieldset data-role="controlgroup" data-type="horizontal">
+				         	<input type="radio" name="radio-choice-1" id="radio-full-4" value="choice-1" checked="checked" />
+				         	<label for="radio-full-4">Design</label>
+				         	<input type="radio" name="radio-choice-1" id="radio-full-5" value="choice-2"  />
+				         	<label for="radio-full-5">Code</label>
+				    </fieldset>
+				</td>
+				<td>
+					<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+				         	<input type="radio" name="radio-choice-1" id="radio-mini-4" value="choice-1" checked="checked" />
+				         	<label for="radio-mini-4">Design</label>
+				         	<input type="radio" name="radio-choice-1" id="radio-mini-5" value="choice-2"  />
+				         	<label for="radio-mini-5">Code</label>
+				    </fieldset>
+				</td>
+			</tr>
+			<tr>
+				<th><h3><a href="radiobuttons/index.html">Radio toggle</a></h3></th>
+				<td>
+					<button type="submit">Button</button>
+				</td>
+				<td>
+					<button type="submit" data-mini="true">Button</button>
+				</td>
+			</tr>
+		</table>
+			
+		</form>
+	</div><!--/content-primary -->		
+	
+	<div class="content-secondary">
+		
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+			
+				<h3>More in this section</h3>
+				
+				<ul data-role="listview" data-theme="c" data-dividertheme="d">
+				
+					<li data-role="list-divider">Form elements</li>
+					<li><a href="docs-forms.html">Form basics</a></li>
+					<li><a href="forms-all.html">Form element gallery</a></li>
+					<li data-theme="a"><a href="forms-all-mini.html">Mini form element gallery</a></li>
+					<li><a href="textinputs/">Text inputs</a></li>
+					<li><a href="search/">Search inputs</a></li>
+					<li><a href="slider/">Slider</a></li>
+					<li><a href="switch/">Flip toggle switch</a></li>
+					<li><a href="radiobuttons/">Radio buttons</a></li>
+					<li><a href="checkboxes/">Checkboxes</a></li>
+					<li><a href="selects/">Select menus</a></li>
+					<li><a href="forms-themes.html">Theming forms</a></li>
+					<li><a href="forms-all-native.html">Native form elements</a></li>
+					<li><a href="forms-sample.html">Submitting forms</a></li>
+					
+	
+				</ul>
+		</div>
+	</div>		
+
+</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p class="jqm-version"></p>
+		<p>&copy; 2012 jQuery Foundation and other contributors</p>
+</div>
+	
+</div><!-- /page -->
+
+</body>
+</html>

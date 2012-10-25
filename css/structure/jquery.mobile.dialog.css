@@ -1,0 +1,32 @@
+.ui-dialog {
+	 background: none !important; /* this is to ensure that dialog theming does not apply (by default at least) on the page div */
+}
+.ui-dialog-contain {
+	width: 92.5%;
+	max-width: 500px;
+	margin: 10% auto 15px auto;
+	padding: 0;
+	position: relative;
+	top: -15px;
+}
+.ui-dialog-contain > .ui-header, 
+.ui-dialog-contain > .ui-content, 
+.ui-dialog-contain > .ui-footer { 
+	display: block;
+	position: relative; 
+	width: auto;
+	margin: 0;
+}
+.ui-dialog-contain > .ui-header {
+	border: none;
+	overflow: hidden;
+	z-index: 10; 
+	padding: 0;
+}
+.ui-dialog-contain > .ui-content { 
+	padding: 15px; 
+}
+.ui-dialog-contain > .ui-footer {
+	z-index: 10; 
+	padding: 0 15px; 
+}

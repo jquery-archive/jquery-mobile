@@ -1,0 +1,79 @@
+/* some unsets - more probably needed */
+.ui-mobile, .ui-mobile body { height: 99.9%; }
+.ui-mobile fieldset, .ui-page { padding: 0; margin: 0; }
+.ui-mobile a img, .ui-mobile fieldset { border-width: 0; }
+
+/* responsive page widths */
+.ui-mobile-viewport { margin: 0; overflow-x: visible; -webkit-text-size-adjust: 100%; -ms-text-size-adjust:none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+/* Issue #2066 */
+body.ui-mobile-viewport,
+div.ui-mobile-viewport { overflow-x: hidden; }
+
+/* "page" containers - full-screen views, one should always be in view post-pageload */
+.ui-mobile [data-role=page], .ui-mobile [data-role=dialog], .ui-page { top: 0; left: 0; width: 100%; min-height: 100%; position: absolute; display: none; border: 0; }
+.ui-mobile .ui-page-active { display: block; overflow: visible; }
+
+/* on ios4, setting focus on the page element causes flashing during transitions when there is an outline, so we turn off outlines */
+.ui-page { outline: none; }
+
+/*orientations from js are available */
+@media screen and (orientation: portrait){
+.ui-mobile, .ui-mobile .ui-page { min-height: 420px; }
+}
+@media screen and (orientation: landscape){
+.ui-mobile, .ui-mobile .ui-page { min-height: 300px; }
+}
+
+/* loading screen */
+.ui-loading .ui-loader { display: block; }
+.ui-loader { display: none; z-index: 9999999; position: fixed; top: 50%; left: 50%; border:0; }
+.ui-loader-default { background: none; filter: Alpha(Opacity=18); opacity: .18; width: 46px; height: 46px; margin-left: -23px; margin-top: -23px; }
+.ui-loader-verbose { width: 200px; filter: Alpha(Opacity=88); opacity: .88; box-shadow: 0 1px 1px -1px #fff; height: auto; margin-left: -110px; margin-top: -43px; padding: 10px; }
+.ui-loader-default h1 { font-size: 0; width: 0; height: 0; overflow: hidden; }
+.ui-loader-verbose h1 { font-size: 16px; margin: 0; text-align: center; }
+.ui-loader .ui-icon { background-color: #000; display: block; margin: 0; width: 44px; height: 44px; padding: 1px; -webkit-border-radius: 36px; -moz-border-radius: 36px; border-radius: 36px; }
+.ui-loader-verbose .ui-icon { margin: 0 auto 10px; filter: Alpha(Opacity=75); opacity: .75; }
+.ui-loader-textonly { padding: 15px; margin-left: -115px; }
+.ui-loader-textonly .ui-icon { display: none; }
+.ui-loader-fakefix { position: absolute; }
+/*fouc*/
+.ui-mobile-rendering > * { visibility: hidden; }
+
+/*headers, content panels*/
+.ui-bar, .ui-body { position: relative; padding: .4em 15px; overflow: hidden; display: block; clear:both; }
+.ui-bar { font-size: 16px; margin: 0; }
+.ui-bar h1, .ui-bar h2, .ui-bar h3, .ui-bar h4, .ui-bar h5, .ui-bar h6 { margin: 0; padding: 0; font-size: 16px; display: inline-block; }
+
+.ui-header, .ui-footer { position: relative; zoom: 1; }
+.ui-mobile .ui-header, .ui-mobile .ui-footer { border-left-width: 0; border-right-width: 0; }
+.ui-header .ui-btn-left,
+.ui-header .ui-btn-right,
+.ui-footer .ui-btn-left,
+.ui-footer .ui-btn-right,
+.ui-header-fixed.ui-fixed-hidden .ui-btn-left,
+.ui-header-fixed.ui-fixed-hidden .ui-btn-right { position: absolute; top: 3px; }
+.ui-header-fixed .ui-btn-left,
+.ui-header-fixed .ui-btn-right { top: 4px;}
+.ui-header .ui-btn-left,
+.ui-footer .ui-btn-left { left: 5px; }
+.ui-header .ui-btn-right,
+.ui-footer .ui-btn-right { right: 5px; }
+.ui-footer .ui-btn-icon-notext,
+.ui-header .ui-btn-icon-notext,
+.ui-header-fixed.ui-fixed-hidden .ui-btn-icon-notext { top: 6px; }
+.ui-header-fixed .ui-btn-icon-notext { top: 7px;}
+.ui-header .ui-title, .ui-footer .ui-title { min-height: 1.1em; text-align: center; font-size: 16px; display: block; margin: .6em 30% .8em; padding: 0; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; outline: 0 !important; }
+.ui-footer .ui-title { margin: .6em 15px .8em; }
+
+/*content area*/
+.ui-content { border-width: 0; overflow: visible; overflow-x: hidden; padding: 15px; }
+
+/* icons sizing */
+.ui-icon { width: 18px; height: 18px; }
+
+/* non-js content hiding */
+.ui-nojs { position: absolute; left: -9999px; }
+
+/* accessible content hiding */
+.ui-hide-label label.ui-input-text, .ui-hide-label label.ui-select, .ui-hide-label label.ui-slider, .ui-hide-label label.ui-submit, .ui-hide-label .ui-controlgroup-label,
+.ui-hidden-accessible { position: absolute !important; left: -9999px; clip: rect(1px 1px 1px 1px); clip: rect(1px,1px,1px,1px); }

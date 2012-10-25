@@ -7,5 +7,15 @@ cache/
 combined/
 combine/
 compiled/
-gitstatus.log
-refreshCDN
+tmp/
+*.swp
+.gitignore
+
+# branch preview
+branches
+
+# node build dependencies
+node_modules
+
+# phantom junit output
+build/test-results/

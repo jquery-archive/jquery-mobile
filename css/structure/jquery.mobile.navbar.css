@@ -1,0 +1,36 @@
+.ui-navbar { max-width: 100%; }
+.ui-navbar.ui-mini { margin: 0; }
+.ui-navbar ul:before, .ui-navbar ul:after { content: " "; display: table; }
+.ui-navbar ul:after { clear: both; }
+.ui-navbar ul { list-style:none; margin: 0; padding: 0; position: relative; display: block; border: 0; max-width: 100%; overflow: visible; zoom: 1; }
+.ui-navbar li .ui-btn { display: block; text-align: center; margin: 0 -1px 0 0; border-right-width: 0; }
+.ui-navbar li .ui-btn-icon-right .ui-icon { right: 6px; }
+
+/* add border if not in header/footer (full width) */
+.ui-navbar li:last-child .ui-btn,
+.ui-navbar .ui-grid-duo .ui-block-b .ui-btn { margin-right: 0; border-right-width: 1px; }
+.ui-header .ui-navbar li:last-child .ui-btn,
+.ui-footer .ui-navbar li:last-child .ui-btn,
+.ui-header .ui-navbar .ui-grid-duo .ui-block-b .ui-btn,
+.ui-footer .ui-navbar .ui-grid-duo .ui-block-b .ui-btn { margin-right: -1px; border-right-width: 0; }
+.ui-navbar .ui-grid-duo li.ui-block-a:last-child .ui-btn { margin-right: -1px; border-right-width: 1px; }
+.ui-header .ui-navbar li .ui-btn,
+.ui-footer .ui-navbar li .ui-btn { border-top-width: 0; border-bottom-width: 0; }
+
+/* fixing gaps caused by subpixel problem */
+.ui-header .ui-navbar .ui-grid-b li.ui-block-c .ui-btn,
+.ui-footer .ui-navbar .ui-grid-b li.ui-block-c .ui-btn { margin-right: -5px; }
+.ui-header .ui-navbar .ui-grid-c li.ui-block-d .ui-btn,
+.ui-footer .ui-navbar .ui-grid-c li.ui-block-d .ui-btn,
+.ui-header .ui-navbar .ui-grid-d li.ui-block-e .ui-btn,
+.ui-footer .ui-navbar .ui-grid-d li.ui-block-e .ui-btn { margin-right: -4px; }
+.ui-header .ui-navbar .ui-grid-b li.ui-block-c .ui-btn-icon-right .ui-icon,
+.ui-footer .ui-navbar .ui-grid-b li.ui-block-c .ui-btn-icon-right .ui-icon,
+.ui-header .ui-navbar .ui-grid-c li.ui-block-d .ui-btn-icon-right .ui-icon,
+.ui-footer .ui-navbar .ui-grid-c li.ui-block-d .ui-btn-icon-right .ui-icon,
+.ui-header .ui-navbar .ui-grid-d li.ui-block-e .ui-btn-icon-right .ui-icon,
+.ui-footer .ui-navbar .ui-grid-d li.ui-block-e .ui-btn-icon-right .ui-icon { right: 8px; }
+
+.ui-navbar li .ui-btn .ui-btn-inner { padding-top: .7em; padding-bottom: .8em }
+.ui-navbar li .ui-btn-icon-top .ui-btn-inner { padding-top: 30px; }
+.ui-navbar li .ui-btn-icon-bottom .ui-btn-inner { padding-bottom: 30px; }

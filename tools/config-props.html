@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<title>Configuration Properties</title>
+<link rel="stylesheet"  href="../css/themes/default/jquery.mobile.css" />
+<style>
+
+.prop { float: left; font-weight: bold; }
+.val { float: right; margin-left: 2em; }
+
+.ui-li { overflow: hidden; }
+
+</style>
+<script src="../js/jquery.js"></script>
+<script src="../js/"></script>
+<script>
+
+function simpleEntityEncode( str )
+{
+	return ( str + "" ).replace( /&/, "&amp;" ).replace( /</, "&lt;" ).replace( />/, "&gt" );
+}
+
+function getObjectPropsAsArray( obj, doSort )
+{
+	var props = [], prop;
+	for ( prop in obj ) {
+		props.push( prop );
+	}
+	return doSort ? props.sort() : props;
+}
+
+function getPropsAsListviewMarkkup( obj )
+{
+	var props = getObjectPropsAsArray( obj || {}, true ),
+		propStr = "<ul data-role='listview' data-inset='true'>\n",
+		prop, val, i;
+
+	for ( i = 0; i < props.length; i++ ) {
+		prop = props[ i ];
+		val = obj[ prop ],
+		vtype = typeof val;
+
+		if ( vtype !== "function" && vtype !== "object" ) {
+			propStr += "\t<li><span class='prop'>" + simpleEntityEncode( prop ) + ":</span><span class='val'>" + simpleEntityEncode( val ) + "</span></li>\n";
+		}
+	}
+
+	return propStr + "</ul>\n";
+}
+
+$( document ).bind( "pageinit", function( e ) {
+	var $content = $( e.target ).find( ".ui-content");
+
+	$( "<h2>$.mobile</h2>" ).appendTo( $content );
+	$( getPropsAsListviewMarkkup( $.mobile ) ).appendTo( $content ).listview(); 
+	$( "<h2>$.support</h2>" ).appendTo( $content );
+	$( getPropsAsListviewMarkkup( $.support ) ).appendTo( $content ).listview(); 
+});
+
+</script>
+</head>
+
+<body>
+<div data-role="page">
+	<div data-role="header"><h1>Configuration Properties</h1></div>
+    <div data-role="content">
+    	<p>Below is a dump of the non-function/object properties of the $.mobile and $.support objects. These properties typically control how the jQuery Mobile framework behaves on the various devices/platforms. You can use this page to quickly assess the default support configuration calculated by both jQuery Core and jQuery Mobile.</p>
+    </div>
+</div>
+</body>
+</html>

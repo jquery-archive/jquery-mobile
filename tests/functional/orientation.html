@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile: Orientation</title>
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../../docs/_assets/css/jqm-docs.css" />
+	<style>
+    
+		#orientationText {
+			font-size: x-large;
+			font-weight: bold;
+			margin: 1em;
+		}
+
+	</style>
+	<script src="../../external/requirejs/require.js"></script>
+	<script src="../../js/jquery.tag.inserter.js"></script>
+	<script>
+		require( {
+			baseUrl: "../../js"
+		} )( [ "jquery", "jquery.mobile" ], function( $ ) {
+			$( document ).one( "pageinit", function() {
+				function updateOrientation()
+				{
+					$( "#orientationText" ).text( $.event.special.orientationchange.orientation() );
+				}
+
+				updateOrientation();
+				$( window ).bind( $.support.orientation ? "orientationchange" : "resize", updateOrientation);
+			});
+		});
+    </script>
+</head>
+
+<body>
+<div data-role="page">
+	<div data-role="header"><h1>Orientation Test</h1></div>
+	<div data-role="content">
+    	<p>The current device orientation is displayed below. It should *ALWAYS* be correct!</p>
+        <div id="orientationText">Orientation Not Supported!</div>
+    </div>
+</div>
+</body>
+</html>

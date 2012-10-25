@@ -1,0 +1,41 @@
+.ui-controlgroup, fieldset.ui-controlgroup { padding: 0; margin: .5em 0; zoom: 1; }
+.ui-controlgroup.ui-mini, fieldset.ui-controlgroup.ui-mini { margin: .25em 0; }
+.ui-field-contain .ui-controlgroup, .ui-field-contain fieldset.ui-controlgroup { margin: 0; }
+.ui-bar .ui-controlgroup { margin: 0 5px; }
+
+.ui-controlgroup-label { font-size: 16px; line-height: 1.4; font-weight: normal; margin: 0 0 .4em; }
+.ui-controlgroup li { list-style: none; }
+.ui-controlgroup-vertical .ui-btn,
+.ui-controlgroup-vertical .ui-checkbox, .ui-controlgroup-vertical .ui-radio { margin: 0; border-bottom-width: 0; }
+.ui-controlgroup-vertical .ui-controlgroup-last { border-bottom-width: 1px; }
+.ui-controlgroup-controls label.ui-select { position: absolute; left: -9999px; }
+
+.ui-controlgroup .ui-btn-icon-notext { width: auto; height: auto; top: auto; }
+.ui-controlgroup .ui-btn-icon-notext .ui-btn-inner { height: 20px; padding: .6em 20px .6em 20px }
+.ui-controlgroup-horizontal .ui-btn-icon-notext .ui-btn-inner { width: 18px; }
+.ui-controlgroup.ui-mini .ui-btn-icon-notext .ui-btn-inner,
+.ui-header .ui-controlgroup .ui-btn-icon-notext .ui-btn-inner,
+.ui-footer .ui-controlgroup .ui-btn-icon-notext .ui-btn-inner { height: 16px; padding: .55em 11px .5em 11px; }
+.ui-controlgroup .ui-btn-icon-notext .ui-btn-inner .ui-icon { position: absolute; top: 50%; right: 50%; margin: -9px -9px 0 0; }
+
+.ui-controlgroup-horizontal .ui-controlgroup-controls:before,
+.ui-controlgroup-horizontal .ui-controlgroup-controls:after { content: ""; display: table; }
+.ui-controlgroup-horizontal .ui-controlgroup-controls:after { clear: both; }
+.ui-controlgroup-horizontal .ui-controlgroup-controls { display: inline-block; vertical-align: middle; zoom: 1; }
+.ui-controlgroup-horizontal .ui-btn-inner { text-align: center; }
+.ui-controlgroup-horizontal.ui-mini .ui-btn-inner { height: 16px; line-height: 16px; }
+.ui-controlgroup-horizontal .ui-btn, .ui-controlgroup-horizontal .ui-select,
+.ui-controlgroup-horizontal .ui-checkbox, .ui-controlgroup-horizontal .ui-radio { float: left; clear: none; margin: 0 -1px 0 0; }
+.ui-controlgroup-horizontal .ui-select .ui-btn,
+.ui-controlgroup-horizontal .ui-checkbox .ui-btn, .ui-controlgroup-horizontal .ui-radio .ui-btn { float: none; margin: 0; }
+.ui-controlgroup-horizontal .ui-controlgroup-last, .ui-controlgroup-horizontal .ui-select:last-child,
+.ui-controlgroup-horizontal .ui-checkbox:last-child, .ui-controlgroup-horizontal .ui-radio:last-child { margin-right: 0; }
+.ui-controlgroup .ui-checkbox label, .ui-controlgroup .ui-radio label { font-size: 16px; }
+
+@media all and (min-width: 450px){
+	.ui-field-contain .ui-controlgroup-label { vertical-align: top; display: inline-block; width: 20%; margin: 0 2% 0 0; }
+	.ui-field-contain .ui-controlgroup-controls { width: 78%; display: inline-block; }
+	.ui-field-contain .ui-controlgroup .ui-select { width: 100%; display: block; } 
+	.ui-field-contain .ui-controlgroup-horizontal .ui-select { width: auto; }
+	.ui-hide-label .ui-controlgroup-controls { width: 100%; }
+}	

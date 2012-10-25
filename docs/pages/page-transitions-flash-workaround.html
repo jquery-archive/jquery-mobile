@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Docs - Transitions</title>
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+
+	<script src="../../js/jquery.js"></script>
+	<script src="../../docs/_assets/js/jqm-docs.js"></script>
+	<script src="../../js/"></script>
+
+    <style type="text/css" media="screen">
+        .ui-page { -webkit-backface-visibility: hidden; }
+    </style>
+
+</head>
+<body>
+
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="f">
+		<h1>Transitions</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="content-primary">
+		<h2>Page transitions with workaround</h2>
+
+		<p>The jQuery Mobile framework includes a set of CSS-based transition effects that can be applied to any page link or form submission with Ajax navigation: </p>
+
+			<style>
+				table { width:100%; border-bottom:1px solid #ccc; border-spacing: 0; }
+				th { text-align:left; }
+				th h3 { margin:.6em 0; }
+				th, td { vertical-align:top; border-top:1px solid #ccc; padding: 1px 3px; }
+				td .ui-btn { margin:.4em 0 .5em 0; }
+				td .ui-btn-inner { padding: .4em 15px; }
+			</style>
+
+		<table margin="0">
+			<tr>
+				<th><h3>fade</h3></th>
+				<td><a href="page-transitions-dialog.html" data-role="button" data-rel="dialog" data-transition="fade" data-inline="true">dialog</a></td>
+				<td><a href="page-transitions-page.html" data-role="button" data-transition="fade" data-inline="true">page</a></td>
+			</tr>
+			<tr>
+				<th><h3>pop</h3></th>
+				<td><a href="page-transitions-dialog.html" data-role="button" data-rel="dialog" data-transition="pop" data-inline="true">dialog</a></td>
+				<td><a href="page-transitions-page.html" data-role="button" data-transition="pop" data-inline="true">page</a></td>
+			</tr>
+			<tr>
+				<th><h3>flip</h3></th>
+				<td><a href="page-transitions-dialog.html" data-role="button" data-rel="dialog" data-transition="flip" data-inline="true">dialog</a></td>
+				<td><a href="page-transitions-page.html" data-role="button" data-transition="flip" data-inline="true">page</a></td>
+			</tr>
+			<tr>
+				<th><h3>turn</h3></th>
+				<td><a href="page-transitions-dialog.html" data-role="button" data-rel="dialog" data-transition="turn" data-inline="true">dialog</a></td>
+				<td><a href="page-transitions-page.html" data-role="button" data-transition="turn" data-inline="true">page</a></td>
+			</tr>
+			<tr>
+				<th><h3>flow</h3></th>
+				<td><a href="page-transitions-dialog.html" data-role="button" data-rel="dialog" data-transition="flow" data-inline="true">dialog</a></td>
+				<td><a href="page-transitions-page.html" data-role="button" data-transition="flow" data-inline="true">page</a></td>
+			</tr>
+			<tr>
+				<th><h3>slidefade</h3></th>
+				<td><a href="page-transitions-dialog.html" data-role="button" data-rel="dialog" data-transition="slidefade" data-inline="true">dialog</a></td>
+				<td><a href="page-transitions-page.html" data-role="button" data-transition="slidefade" data-inline="true">page</a></td>
+			</tr>
+			<tr>
+				<th><h3>slide</h3></th>
+				<td><a href="page-transitions-dialog.html" data-role="button" data-rel="dialog" data-transition="slide" data-inline="true">dialog</a></td>
+				<td><a href="page-transitions-page.html" data-role="button" data-transition="slide" data-inline="true">page</a></td>
+			</tr>
+			<tr>
+				<th><h3>slideup</h3></th>
+				<td><a href="page-transitions-dialog.html" data-role="button" data-rel="dialog" data-transition="slideup" data-inline="true">dialog</a></td>
+				<td><a href="page-transitions-page.html" data-role="button" data-transition="slideup" data-inline="true">page</a></td>
+			</tr>
+			<tr>
+				<th><h3>slidedown</h3></th>
+				<td><a href="page-transitions-dialog.html" data-role="button" data-rel="dialog" data-transition="slidedown" data-inline="true">dialog</a></td>
+				<td><a href="page-transitions-page.html" data-role="button" data-transition="slidedown" data-inline="true">page</a></td>
+			</tr>
+			<tr>
+				<th><h3>none</h3></th>
+				<td><a href="page-transitions-dialog.html" data-role="button" data-rel="dialog" data-transition="none" data-inline="true">dialog</a></td>
+				<td><a href="page-transitions-page.html" data-role="button" data-transition="none" data-inline="true">page</a></td>
+			</tr>
+		</table>
+
+				</div><!--/content-primary -->
+
+				<div class="content-secondary">
+
+					<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+
+							<h3>More in this section</h3>
+
+							<ul data-role="listview" data-theme="c" data-dividertheme="d">
+								<li data-role="list-divider">Pages &amp; Dialogs</li>
+								<li><a href="page-anatomy.html">Anatomy of a page</a></li>
+								<li><a href="page-template.html" data-ajax="false">Single page template</a></li>
+								<li><a href="multipage-template.html" data-ajax="false">Multi-page template</a></li>
+								<li><a href="page-titles.html">Page titles</a></li>
+								<li><a href="page-links.html">Linking pages</a></li>
+								<li data-theme="a"><a href="page-transitions.html">Page transitions</a></li>
+								<li><a href="loader.html">Page loading widget</a></li>
+								<li><a href="dialog/index.html">Dialogs</a></li>
+								<li><a href="popup/index.html">Popups</a></li>
+								<li><a href="page-cache.html">Prefetching &amp; caching pages</a></li>
+								<li><a href="page-navmodel.html">Ajax, hashes &amp; history</a></li>
+								<li><a href="page-dynamic.html">Dynamically injecting pages</a></li>
+								<li><a href="page-scripting.html">Scripting pages</a></li>
+								<li><a href="phonegap.html">PhoneGap apps</a></li>
+								<li><a href="touchoverflow.html">touchOverflow feature</a></li>
+								<li><a href="pages-themes.html">Theming pages</a></li>
+							</ul>
+					</div>
+				</div>
+
+			</div><!-- /content -->
+
+			<div data-role="footer" class="footer-docs" data-theme="c">
+					<p class="jqm-version"></p>
+				<p>&copy; 2012 jQuery Foundation and other contributors</p>
+			</div>
+
+			</div><!-- /page -->
+
+
+			</body>
+			</html>

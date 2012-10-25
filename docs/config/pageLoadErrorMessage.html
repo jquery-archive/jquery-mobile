@@ -1,0 +1,45 @@
+<!DOCTYPE html> 
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>jQuery Mobile Docs - Configuration</title> 
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />  
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	
+	<script src="../../js/jquery.js"></script>
+	<script src="../../docs/_assets/js/jqm-docs.js"></script>
+
+	<script>
+	$(document).bind("mobileinit", function(){
+	  $.mobile.pageLoadErrorMessage = 'Yikes, we broke the internet!';
+	});
+	</script>
+	
+	<script src="../../js/"></script>
+	
+
+</head> 
+<body> 
+
+	<div data-role="page">
+
+		<div data-role="header" data-theme="f">
+		<h1>Config applied</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		
+		<h2>pageLoadErrorMessage is now "Yikes, we broke the internet!"</h2>
+		<p>To test, hit the button below and browse the docs. Note that if a link causes a refresh, this setting will be lost and the default settings will be seen.</p>
+		<a href="../../index.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Browse docs</a>
+		<a href="broken.html" data-role="button" data-rel="dialog">Or try this broken link</a>
+
+
+		</div><!-- /ui-body wrapper -->	
+</div><!-- /page -->
+
+</body>
+</html>

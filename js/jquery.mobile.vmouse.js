@@ -1,9 +1,3 @@
-/*
-* jQuery Mobile Framework : "mouse" plugin
-* Copyright (c) jQuery Project
-* Dual licensed under the MIT or GPL Version 2 licenses.
-* http://jquery.org/license
-*/
 
 // This plugin is an experiment for abstracting away the touch and mouse
 // events so that developers don't have to worry about which method of input
@@ -20,12 +14,21 @@
 // The current version exposes the following virtual events to jQuery bind methods:
 // "vmouseover vmousedown vmousemove vmouseup vclick vmouseout vmousecancel"
 
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Normalizes touch/mouse events.
+//>>label: Virtual Mouse (vmouse) Bindings
+//>>group: Core
+
+define( [ "jquery" ], function( $ ) {
+//>>excludeEnd("jqmBuildExclude");
 (function( $, window, document, undefined ) {
 
 var dataPropertyName = "virtualMouseBindings",
 	touchTargetPropertyName = "virtualTouchID",
 	virtualEventNames = "vmouseover vmousedown vmousemove vmouseup vclick vmouseout vmousecancel".split( " " ),
 	touchEventProps = "clientX clientY pageX pageY screenX screenY".split( " " ),
+	mouseHookProps = $.event.mouseHooks ? $.event.mouseHooks.props : [],
+	mouseEventProps = $.event.props.concat( mouseHookProps ),
 	activeDocHandlers = {},
 	resetTimerID = 0,
 	startX = 0,
@@ -34,10 +37,10 @@ var dataPropertyName = "virtualMouseBindings",
 	clickBlockList = [],
 	blockMouseTriggers = false,
 	blockTouchTriggers = false,
-	eventCaptureSupported = $.support.eventCapture,
+	eventCaptureSupported = "addEventListener" in document,
 	$document = $( document ),
 	nextTouchID = 1,
-	lastTouchID = 0;
+	lastTouchID = 0, threshold;
 
 $.vmouse = {
 	moveDistanceThreshold: 10,
@@ -56,13 +59,19 @@ function getNativeEvent( event ) {
 function createVirtualEvent( event, eventType ) {
 
 	var t = event.type,
-		oe, props, ne, prop, ct, touch, i, j;
+		oe, props, ne, prop, ct, touch, i, j, len;
 
-	event = $.Event(event);
+	event = $.Event( event );
 	event.type = eventType;
 
 	oe = event.originalEvent;
 	props = $.event.props;
+
+	// addresses separation of $.event.props in to $.event.mouseHook.props and Issue 3280
+	// https://github.com/jquery/jquery-mobile/issues/3280
+	if ( t.search( /^(mouse|click)/ ) > -1 ) {
+		props = mouseEventProps;
+	}
 
 	// copy original event properties over to the new event
 	// this would happen if we could call $.event.fix instead of $.Event
@@ -74,14 +83,20 @@ function createVirtualEvent( event, eventType ) {
 		}
 	}
 
+	// make sure that if the mouse and click virtual events are generated
+	// without a .which one is defined
+	if ( t.search(/mouse(down|up)|click/) > -1 && !event.which ) {
+		event.which = 1;
+	}
+
 	if ( t.search(/^touch/) !== -1 ) {
 		ne = getNativeEvent( oe );
 		t = ne.touches;
 		ct = ne.changedTouches;
-		touch = ( t && t.length ) ? t[0] : ( (ct && ct.length) ? ct[ 0 ] : undefined );
+		touch = ( t && t.length ) ? t[0] : ( ( ct && ct.length ) ? ct[ 0 ] : undefined );
 
 		if ( touch ) {
-			for ( j = 0, len = touchEventProps.length; j < len; j++){
+			for ( j = 0, len = touchEventProps.length; j < len; j++) {
 				prop = touchEventProps[ j ];
 				event[ prop ] = touch[ prop ];
 			}
@@ -150,22 +165,21 @@ function disableMouseBindings() {
 
 function startResetTimer() {
 	clearResetTimer();
-	resetTimerID = setTimeout(function(){
+	resetTimerID = setTimeout( function() {
 		resetTimerID = 0;
 		enableMouseBindings();
 	}, $.vmouse.resetTimerDuration );
 }
 
 function clearResetTimer() {
-	if ( resetTimerID ){
+	if ( resetTimerID ) {
 		clearTimeout( resetTimerID );
 		resetTimerID = 0;
 	}
 }
 
 function triggerVirtualEvent( eventType, event, flags ) {
-	var defaultPrevented = false,
-		ve;
+	var ve;
 
 	if ( ( flags && flags[ eventType ] ) ||
 				( !flags && getClosestElementWithVirtualBinding( event.target, eventType ) ) ) {
@@ -173,18 +187,27 @@ function triggerVirtualEvent( eventType, event, flags ) {
 		ve = createVirtualEvent( event, eventType );
 
 		$( event.target).trigger( ve );
-
-		defaultPrevented = ve.isDefaultPrevented();
 	}
 
-	return defaultPrevented;
+	return ve;
 }
 
 function mouseEventCallback( event ) {
-	var touchID = $.data(event.target, touchTargetPropertyName);
+	var touchID = $.data( event.target, touchTargetPropertyName );
 
-	if ( !blockMouseTriggers && ( !lastTouchID || lastTouchID !== touchID ) ){
-		triggerVirtualEvent( "v" + event.type, event );
+	if ( !blockMouseTriggers && ( !lastTouchID || lastTouchID !== touchID ) ) {
+		var ve = triggerVirtualEvent( "v" + event.type, event );
+		if ( ve ) {
+			if ( ve.isDefaultPrevented() ) {
+				event.preventDefault();
+			}
+			if ( ve.isPropagationStopped() ) {
+				event.stopPropagation();
+			}
+			if ( ve.isImmediatePropagationStopped() ) {
+				event.stopImmediatePropagation();
+			}
+		}
 	}
 }
 
@@ -238,11 +261,13 @@ function handleTouchMove( event ) {
 
 	var t = getNativeEvent( event ).touches[ 0 ],
 		didCancel = didScroll,
-		moveThreshold = $.vmouse.moveDistanceThreshold;
-		didScroll = didScroll ||
-			( Math.abs(t.pageX - startX) > moveThreshold ||
-				Math.abs(t.pageY - startY) > moveThreshold ),
+		moveThreshold = $.vmouse.moveDistanceThreshold,
 		flags = getVirtualBindingFlags( event.target );
+
+		didScroll = didScroll ||
+			( Math.abs( t.pageX - startX ) > moveThreshold ||
+				Math.abs( t.pageY - startY ) > moveThreshold );
+
 
 	if ( didScroll && !didCancel ) {
 		triggerVirtualEvent( "vmousecancel", event, flags );
@@ -264,7 +289,8 @@ function handleTouchEnd( event ) {
 	triggerVirtualEvent( "vmouseup", event, flags );
 
 	if ( !didScroll ) {
-		if ( triggerVirtualEvent( "vclick", event, flags ) ) {
+		var ve = triggerVirtualEvent( "vclick", event, flags );
+		if ( ve && ve.isDefaultPrevented() ) {
 			// The target of the mouse events that follow the touchend
 			// event don't necessarily match the target used during the
 			// touch. This means we need to rely on coordinates for blocking
@@ -301,7 +327,7 @@ function hasVirtualBindings( ele ) {
 	return false;
 }
 
-function dummyMouseHandler(){}
+function dummyMouseHandler() {}
 
 function getSpecialEventObject( eventType ) {
 	var realType = eventType.substr( 1 );
@@ -312,7 +338,7 @@ function getSpecialEventObject( eventType ) {
 			// add a bindings object to its data.
 
 			if ( !hasVirtualBindings( this ) ) {
-				$.data( this, dataPropertyName, {});
+				$.data( this, dataPropertyName, {} );
 			}
 
 			// If setup is called, we know it is the first binding for this
@@ -342,7 +368,7 @@ function getSpecialEventObject( eventType ) {
 
 				activeDocHandlers[ "touchstart" ] = ( activeDocHandlers[ "touchstart" ] || 0) + 1;
 
-				if (activeDocHandlers[ "touchstart" ] === 1) {
+				if ( activeDocHandlers[ "touchstart" ] === 1 ) {
 					$document.bind( "touchstart", handleTouchStart )
 						.bind( "touchend", handleTouchEnd )
 
@@ -414,7 +440,7 @@ function getSpecialEventObject( eventType ) {
 
 // Expose our custom events to the jQuery bind/unbind mechanism.
 
-for ( var i = 0; i < virtualEventNames.length; i++ ){
+for ( var i = 0; i < virtualEventNames.length; i++ ) {
 	$.event.special[ virtualEventNames[ i ] ] = getSpecialEventObject( virtualEventNames[ i ] );
 }
 
@@ -422,7 +448,7 @@ for ( var i = 0; i < virtualEventNames.length; i++ ){
 // Note that we require event capture support for this so if the device
 // doesn't support it, we punt for now and rely solely on mouse events.
 if ( eventCaptureSupported ) {
-	document.addEventListener( "click", function( e ){
+	document.addEventListener( "click", function( e ) {
 		var cnt = clickBlockList.length,
 			target = e.target,
 			x, y, ele, i, o, touchID;
@@ -481,3 +507,6 @@ if ( eventCaptureSupported ) {
 	}, true);
 }
 })( jQuery, window, document );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Dialog Test Suite</title>
+	<script src="../../../external/requirejs/require.js"></script>
+	<script src="../../../js/jquery.tag.inserter.js"></script>
+	<script>
+		$(document).bind('mobileinit',function(){
+			$.mobile.changePage.defaults.changeHash = false;
+			$.mobile.hashListeningEnabled = false;
+			$.mobile.pushStateEnabled = false;
+		});
+	</script>
+	<script src="../jquery.setNameSpace.js"></script>
+	<script src="../../jquery.testHelper.js"></script>
+	<script src="../../../external/qunit.js"></script>
+	<script>
+		$.testHelper.asyncLoad([
+			[
+				"widgets/dialog",
+				"widgets/page",
+				"widgets/page.sections"
+			],
+			[ "jquery.mobile.init" ],
+			[
+				"dialog_no_hash.js"
+			]
+		]);
+	</script>
+
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit.css"/>
+
+	<script src="../swarminject.js"></script>
+</head>
+<body>
+
+<h1 id="qunit-header">jQuery Mobile Dialog Test Suite</h1>
+<h2 id="qunit-banner"></h2>
+<h2 id="qunit-userAgent"></h2>
+<ol id="qunit-tests">
+</ol>
+
+<div id="mypage" data-nstest-role="page" data-nstest-theme="a">
+	<div data-nstest-role="content">
+		<a id="dialog-no-hash-link" href="dialog-no-hash.html" data-role="dialog">Dialog</a>
+	</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Page Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+	<script src="../../../js/jquery.tag.inserter.js"></script>
+	<script src="../jquery.setNameSpace.js"></script>
+	<script src="../../../tests/jquery.testHelper.js"></script>
+	<script src="../../../external/qunit.js"></script>
+	<script>
+		$.testHelper.asyncLoad([
+			[
+				"widgets/page",
+				"widgets/page.sections"
+			],
+			[
+				"jquery.mobile.buttonMarkup",
+				"page_core.js"
+			],
+			[ "jquery.mobile.init" ]
+		]);
+	</script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit.css"/>
+
+	<script src="../swarminject.js"></script>
+</head>
+<body>
+
+<h1 id="qunit-header">jQuery Mobile Page Test Suite</h1>
+<h2 id="qunit-banner"></h2>
+<h2 id="qunit-userAgent"></h2>
+<ol id="qunit-tests">
+</ol>
+
+<div id="qunit-fixture">
+	<div data-nstest-role="page">
+		<div data-nstest-role="header">
+			<div>
+				<a href="foo">foo</a>
+			</div>
+			<a href="foo">foo</a>
+		</div><!-- /header -->
+
+		<div  data-nstest-role="footer">
+			<div>
+				<a href="foo">foo</a>
+			</div>
+
+			<a href="foo">foo</a>
+		</div><!-- /header -->
+
+		<div class="ui-bar">
+			<div>
+				<a href="foo">foo</a>
+			</div>
+
+			<a href="foo">foo</a>
+		</div>
+	</div>
+</div>
+
+<div data-nstest-enhance="false">
+	<div data-nstest-role="header" id="ignored-header">
+		<div>
+			<a href="foo">foo</a>
+		</div>
+		<a href="foo">foo</a>
+	</div><!-- /header -->
+</div>
+
+<div>
+	<div data-nstest-role="header" id="enhanced-header">
+		<div>
+			<a href="foo">foo</a>
+		</div>
+		<a href="foo">foo</a>
+	</div><!-- /header -->
+</div>
+</body>
+</html>

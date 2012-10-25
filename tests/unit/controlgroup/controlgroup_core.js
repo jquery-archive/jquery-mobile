@@ -119,4 +119,29 @@
 	});
 
 
+	test( "controlgroups will create when inside a container that receives a 'create' event", function(){
+		ok( !$("#enhancetest").appendTo(".ui-page-active").find(".ui-controlgroup").length, "did not have enhancements applied" );
+		ok( $("#enhancetest").trigger("create").find(".ui-controlgroup").length, "enhancements applied" );
+	});
+
+	test( "controlgroups in ignored containers aren't enhanced", function() {
+		var $unenhancedFieldSet = $( "#unenhanced-fieldset" ),
+			$enhancedFieldSet = $( "#enhanced-fieldset" );
+
+		$.mobile.ignoreContentEnabled = true;
+
+		// attempt to enhance the controlgroup
+		$unenhancedFieldSet.parent().trigger("create");
+
+		deepEqual( $unenhancedFieldSet.length, 1, "the fieldset test fixtures exist" );
+		ok( !$unenhancedFieldSet.is(".ui-controlgroup"), "there is no control group" );
+
+		// attempt to enhance the controlgroup
+		$enhancedFieldSet.parent().trigger("create");
+
+		deepEqual( $enhancedFieldSet.length, 1, "the fieldset test fixtures exist" );
+		ok( $enhancedFieldSet.is(".ui-controlgroup"), "there is a control group" );
+
+		$.mobile.ignoreContentEnabled = false;
+	});
 })(jQuery);

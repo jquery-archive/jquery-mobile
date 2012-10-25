@@ -1,0 +1,63 @@
+.ui-listview { margin: 0; }
+ol.ui-listview, ol.ui-listview .ui-li-divider { counter-reset: listnumbering; }
+.ui-content .ui-listview { margin: -15px; }
+.ui-collapsible-content > .ui-listview { margin: -10px -15px; }
+.ui-content .ui-listview-inset { margin: 1em 0; }
+.ui-collapsible-content .ui-listview-inset { margin: .5em 0; }
+.ui-listview, .ui-li { list-style:none; padding:0; }
+.ui-li, .ui-li.ui-field-contain { display: block; margin:0; position: relative; overflow: visible; text-align: left; border-width: 0; border-top-width: 1px; }
+.ui-li.ui-btn { margin: 0; }
+.ui-li .ui-btn-text a.ui-link-inherit { text-overflow: ellipsis; overflow: hidden; white-space: nowrap; }
+.ui-li-static { background-image: none; }
+.ui-li-divider { padding: .5em 15px; font-size: 14px; font-weight: bold; }
+ol.ui-listview .ui-link-inherit:before, ol.ui-listview .ui-li-static:before, .ui-li-dec { font-size: .8em; display: inline-block; padding-right: .3em; font-weight: normal; counter-increment: listnumbering; content: counter(listnumbering) ". "; }
+ol.ui-listview .ui-li-jsnumbering:before { content: "" !important; } /* to avoid chance of duplication */
+.ui-listview-inset .ui-li { border-right-width: 1px; border-left-width: 1px; }
+.ui-li-last, .ui-li.ui-field-contain.ui-li-last { border-bottom-width: 1px; }
+.ui-collapsible [class*="ui-body"] > .ui-listview:not(.ui-listview-inset) .ui-li-last { border-bottom-width: 0; }
+.ui-collapsible-content > .ui-listview:not(.ui-listview-inset) .ui-li:first-child { border-top-width: 0; }
+.ui-collapsible-content > .ui-listview:not(.ui-listview-inset),
+.ui-collapsible-content > .ui-listview:not(.ui-listview-inset) .ui-li-last { -webkit-border-bottom-left-radius: inherit; -webkit-border-bottom-right-radius: inherit; border-bottom-left-radius: inherit; border-bottom-right-radius: inherit; }
+.ui-collapsible-content > .ui-listview:not(.ui-listview-inset) .ui-li-last .ui-li-link-alt { -webkit-border-bottom-right-radius: inherit; border-bottom-right-radius: inherit; }
+.ui-li>.ui-btn-inner { display: block; position: relative; padding: 0; }
+.ui-li .ui-btn-inner a.ui-link-inherit, .ui-li-static.ui-li { padding: .7em 15px; display: block; }
+.ui-li-has-thumb .ui-btn-inner a.ui-link-inherit, .ui-li-static.ui-li-has-thumb  { min-height: 60px; padding-left: 100px; }
+.ui-li-has-icon .ui-btn-inner a.ui-link-inherit, .ui-li-static.ui-li-has-icon { min-height: 20px; padding-left: 40px; }
+.ui-li-has-count .ui-btn-inner a.ui-link-inherit, .ui-li-static.ui-li-has-count, .ui-li-divider.ui-li-has-count { padding-right: 45px; }
+.ui-li-has-arrow .ui-btn-inner a.ui-link-inherit, .ui-li-static.ui-li-has-arrow { padding-right: 40px; }
+.ui-li-has-arrow.ui-li-has-count .ui-btn-inner a.ui-link-inherit, .ui-li-static.ui-li-has-arrow.ui-li-has-count { padding-right: 75px; }
+.ui-li-heading { font-size: 16px; font-weight: bold; display: block; margin: .6em 0; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; }
+.ui-li-desc { font-size: 12px; font-weight: normal; display: block; margin: -.5em 0 .6em; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; }
+.ui-li-thumb, .ui-listview .ui-li-icon { position: absolute; left: 1px; top: 0; max-height: 80px; max-width: 80px; }
+.ui-listview .ui-li-icon { max-height: 16px; max-width: 16px; left: 10px; top: .9em; }
+.ui-li-thumb, .ui-listview .ui-li-icon, .ui-li-content { float: left; margin-right: 10px; }
+.ui-li-aside { float: right; width: 50%; text-align: right; margin: .3em 0; }
+@media all and (min-width: 480px){
+	 .ui-li-aside { width: 45%; }
+}	 
+.ui-li-divider { cursor: default; }
+.ui-li-has-alt .ui-btn-inner a.ui-link-inherit, .ui-li-static.ui-li-has-alt { padding-right: 53px; }
+.ui-li-has-alt.ui-li-has-count .ui-btn-inner a.ui-link-inherit, .ui-li-static.ui-li-has-alt.ui-li-has-count { padding-right: 88px; }
+.ui-li-has-count .ui-li-count { position: absolute; font-size: 11px; font-weight: bold; padding: .2em .5em; top: 50%; margin-top: -.9em; right: 10px; }
+.ui-li-has-count.ui-li-divider .ui-li-count, .ui-li-has-count .ui-link-inherit .ui-li-count { margin-top: -.95em; }
+.ui-li-has-arrow.ui-li-has-count .ui-li-count { right: 40px; }
+.ui-li-has-alt.ui-li-has-count .ui-li-count { right: 53px; }
+.ui-li-link-alt { position: absolute; width: 40px; height: 100%; border-width: 0; border-left-width: 1px; top: 0; right: 0; margin: 0; padding: 0; z-index: 2; }
+.ui-li-link-alt .ui-btn { overflow: hidden; position: absolute; right: 8px; top: 50%; margin: -13px 0 0 0; border-bottom-width: 1px; z-index: -1;}
+.ui-li-link-alt .ui-btn-inner { padding: 0; height: 100%; position: absolute; width: 100%; top: 0; left: 0;}
+.ui-li-link-alt .ui-btn .ui-icon { right: 50%; margin-right: -9px; }
+.ui-li-link-alt .ui-btn-icon-notext .ui-btn-inner .ui-icon { position: absolute; top: 50%; margin-top: -9px; }
+
+.ui-listview * .ui-btn-inner > .ui-btn > .ui-btn-inner { border-top: 0px; }
+
+.ui-listview-filter { border-width: 0; overflow: hidden; margin: -15px -15px 15px -15px; }
+.ui-collapsible-content .ui-listview-filter { margin: -10px -15px 10px -15px; border-bottom: inherit; }
+.ui-listview-filter-inset { margin: -15px -5px; background: transparent; }
+.ui-collapsible-content .ui-listview-filter-inset { margin: -5px; border-bottom-width: 0; }
+.ui-listview-filter .ui-input-search { margin: 5px; width: auto; display: block; }
+
+.ui-li.ui-screen-hidden{ display:none; }
+/* Odd iPad positioning issue. */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    .ui-li .ui-btn-text { overflow:  visible; }
+}

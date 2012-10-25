@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Textinput Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+	<script src="../../../js/jquery.tag.inserter.js"></script>
+	<script src="../../../external/qunit.js"></script>
+	<script src="../../../tests/jquery.testHelper.js"></script>
+	<script>
+		$.testHelper.asyncLoad([
+			[ "widgets/forms/textinput" ],
+			[ "settings.js" ],
+			[ "jquery.mobile.init" ],
+			[ "textinput_core.js" ]
+		]);
+	</script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit.css"/>
+
+	<script src="../swarminject.js"></script>
+</head>
+<body>
+
+<h1 id="qunit-header">jQuery Mobile Textinput Test Suite</h1>
+<h2 id="qunit-banner"></h2>
+<h2 id="qunit-userAgent"></h2>
+<ol id="qunit-tests">
+</ol>
+
+<div  data-nstest-role="page">
+  <input name="" id="typeless-input" />
+  <textarea class="should-be-native"></textarea>
+
+  <textarea id="reference-autogrow">
+  </textarea>
+
+  <textarea id="init-autogrow">
+    Place holder text
+    Place holder text
+    Place holder text
+    Place holder text
+    Place holder text
+    Place holder text
+    Place holder text
+    Place holder text
+    Place holder text
+  </textarea>
+
+  <textarea id="keyup-autogrow">
+  </textarea>
+  <a href="external.html" id="external">external</a>
+
+  <textarea id="destroycorrectly">Test Value</textarea>
+
+  <input type="search" id="search-input">
+</div>
+</body>
+</html>

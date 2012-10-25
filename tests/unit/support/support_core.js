@@ -4,9 +4,9 @@
 
 $.testHelper.excludeFileProtocol(function(){
 	var	prependToFn = $.fn.prependTo,
-			libName = "jquery.mobile.support.js";
+		moduleName = "jquery.mobile.support";
 
-	module(libName, {
+	module(moduleName, {
 		teardown: function(){
 			//NOTE undo any mocking
 			$.fn.prependTo = prependToFn;
@@ -15,35 +15,54 @@ $.testHelper.excludeFileProtocol(function(){
 
 	// NOTE following two tests have debatable value as they only
 	//      prevent property name changes and improper attribute checks
-	test( "detects functionality from basic affirmative properties and attributes", function(){
+	asyncTest( "detects functionality from basic affirmative properties and attributes", function(){
 		// TODO expose properties for less brittle tests
 		$.extend(window, {
 			WebKitTransitionEvent: true,
-			orientation: true
 		});
 
-		document.ontouchend = true;
+		window.history.pushState = function(){};
+		window.history.replaceState = function(){};
 
-		history.pushState = function(){};
 		$.mobile.media = function(){ return true; };
 
-		$.testHelper.reloadLib(libName);
-
-		ok($.support.orientation);
-		ok($.support.touch);
-		ok($.support.cssTransitions);
-		ok($.support.pushState);
-		ok($.support.mediaquery);
+		$.testHelper.reloadModule( moduleName ).done( function() {
+			ok($.support.cssTransitions, "css transitions are supported" );
+			ok($.support.pushState, "push state is supported" );
+			ok($.support.mediaquery, "media queries are supported" );
+			start();
+		});
 	});
 
-	test( "detects functionality from basic negative properties and attributes (where possible)", function(){
+	asyncTest( "detects orientation change", function() {
+		$.extend(window, {
+			orientation: true,
+			onorientationchange: true
+		});
+
+		$.testHelper.reloadModule( "jquery.mobile.support.orientation" ).done( function() {
+			ok($.support.orientation, "orientation is supported" );
+			start();
+		});
+	});
+
+	asyncTest( "detects touch", function() {
+		document.ontouchend = true;
+
+		$.testHelper.reloadModule( "jquery.mobile.support.touch" ).done( function() {
+			ok( $.mobile.support.touch, "touch is supported" );
+			ok( $.support.touch, "touch is supported" );
+			start();
+		});
+	});
+
+	asyncTest( "detects functionality from basic negative properties and attributes (where possible)", function(){
 		delete window["orientation"];
-		delete document["ontouchend"];
 
-		$.testHelper.reloadLib(libName);
-
-		ok(!$.support.orientation);
-		ok(!$.support.touch);
+		$.testHelper.reloadModule( "jquery.mobile.support.orientation" ).done( function() {
+			ok(!$.support.orientation, "orientation is not supported" );
+			start();
+		});
 	});
 
 	// NOTE mocks prependTo to simulate base href updates or lack thereof
@@ -58,34 +77,39 @@ $.testHelper.excludeFileProtocol(function(){
 		};
 	};
 
-	test( "detects dynamic base tag when new base element added and base href updates", function(){
+	asyncTest( "detects dynamic base tag when new base element added and base href updates", function(){
 		mockBaseCheck(location.protocol + '//' + location.host + location.pathname + "ui-dir/");
-		$.testHelper.reloadLib(libName);
-		ok($.support.dynamicBaseTag);
+		$.testHelper.reloadModule( moduleName ).done( function() {
+			ok($.support.dynamicBaseTag);
+			start();
+		});
 	});
 
-	test( "detects no dynamic base tag when new base element added and base href unchanged", function(){
+	asyncTest( "detects no dynamic base tag when new base element added and base href unchanged", function(){
 		mockBaseCheck('testurl');
-		$.testHelper.reloadLib(libName);
-		ok(!$.support.dynamicBaseTag);
+		$.testHelper.reloadModule( moduleName ).done( function() {
+			ok(!$.support.dynamicBaseTag);
+			start();
+		});
 	});
-	
-	test( "jQM's IE browser check properly detects IE versions", function(){
-		$.testHelper.reloadLib(libName);
-	
+
+	asyncTest( "jQM's IE browser check properly detects IE versions", function(){
+		$.testHelper.reloadModule( moduleName ).done( function() {
 		//here we're just comparing our version to what the conditional compilation finds
 		 var ie 			= !!$.browser.msie, //get a boolean
 		 	 version 		= parseInt( $.browser.version, 10),
 		 	 jqmdetectedver = $.mobile.browser.ie;
-		 	
+
 		 	if( ie ){
-		 		same(version, jqmdetectedver, "It's IE and the version is correct");
+		 		deepEqual(version, jqmdetectedver, "It's IE and the version is correct");
 		 	}
 		 	else{
-		 		same(ie, jqmdetectedver, "It's not IE");
+		 		deepEqual(ie, jqmdetectedver, "It's not IE");
 		 	}
+			start();
+		});
 	});
-	
+
 
 	//TODO propExists testing, refactor propExists into mockable method
 	//TODO scrollTop testing, refactor scrollTop logic into mockable method

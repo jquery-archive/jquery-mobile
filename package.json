@@ -1,0 +1,26 @@
+{
+  "name": "jquery-mobile-build",
+  "description": "dependencies for the grunt based build",
+  "version": "0.0.1",
+  "scripts": {
+    "lint" : "grunt"
+  },
+  "main": "grunt.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jquery/jquery-mobile.git"
+  },
+  "dependencies": {
+    "grunt":  "0.3.x",
+    "grunt-css": "0.2.0",
+    "grunt-junit": "0.1.4",
+    "grunt-git-authors": "1.0.0",
+    "requirejs": "1.0.8",
+    "glob-whatev": "~0.1.4",
+    "rimraf": "2.0.1",
+    "testswarm": "0.2.3"
+  },
+  "engine": {
+    "node": ">=6.0"
+  }
+}

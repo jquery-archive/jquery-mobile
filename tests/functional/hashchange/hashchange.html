@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile: hashchange Tester: A page</title>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../../../docs/_assets/css/jqm-docs.css" />
+	<script src="../../../js/jquery.tag.inserter.js"></script>
+	<script src="../../../js/jquery.js"></script>
+	<script src="../../../docs/_assets/js/jqm-docs.js"></script>
+<!--
+	<script>
+(function( $, undefined ) {
+	$( document ).bind( "mobileinit", function() {
+		$.mobile.pushStateEnabled = false;
+	});
+})( jQuery );
+	</script>
+-->
+	<script src="../../../js/"></script>
+</head>
+<body>
+<div data-role="popup" id="common">
+	<p>This popup is common to all pages</p>
+</div>
+<div data-role="page" id="hashChangePage">
+	<div data-role="header">
+		<a href="#popup" data-rel="popup">Popup</a>
+		<a href="#navMenuForAPage" data-rel="popup">Go To</a>
+		<h1>A page</h1>
+	</div>
+	<div data-role="content">
+		<div data-role="popup" data-transition="slideup" id="navMenuForAPage">
+			<div data-role="collapsible">
+				<h3>Navigation</h3>
+				<a href="hashchange.html" data-role="button">A page</a>
+				<a href="hashchange1.html" data-role="button">Another page</a>
+			</div>
+		</div>
+		<a data-role="button" href="#common">Common</a>
+		<a data-role="button" href="hashchange1.html">Another page</a>
+		<a data-role="button" href="#page2">A page: internal page</a>
+		<div id="popup" data-role="popup">
+			<p>Popup on first page</p>
+			<a href="hashchange1.html">Another page</a><br></br>
+			<a data-role="button" href="dialog.html" data-rel="dialog">A dialog</a>
+		</div>
+		<a data-role="button" href="#popup" data-rel="popup">Popup 1</a>
+		<a data-role="button" href="dialog.html" data-rel="dialog">A dialog</a>
+		<a data-role="button" href="dialog2.html" data-rel="dialog">Yet another dialog</a>
+		<a data-role="button" href="hashchange1.html">Another page</a>
+		<a data-role="button" href="#internalDialog" data-rel="dialog">Internal dialog</a>
+	</div>
+</div>
+<div data-role="page" id="page2">
+	<div data-role="header">
+		<h1>A page: internal Page</h1>
+	</div>
+	<div data-role="content">
+		<div id="the-popup" data-role="popup">
+			<p>The popup</p>
+		</div>
+		<a href="#the-popup" data-role="button" data-inline="true" data-rel="popup">Pop</a>
+	</div>
+</div>
+<div data-role="dialog" id="internalDialog">
+	<div data-role="header">
+		<h1>A page: internal dialog</h1>
+	</div>
+</div>
+</body>
+</html>

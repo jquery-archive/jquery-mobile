@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <div data-nstest-role="page" id='uncached-nested-list'>
+      <div data-nstest-role="header" data-nstest-position="inline">
+        <h1>Basic multiple lists view</h1>
+      </div>
+      <div data-nstest-role="content">
+        <ul data-nstest-role="listview" data-nstest-inset="true" id="topmost">
+          <li>Item 1</li>
+          <li>Item 2</li>
+          <li>Item 3
+            <ul data-nstest-role="listview">
+              <li>Item A-3-0</li>
+              <li>Item A-3-1</li>
+              <li>Item A-3-2</li>
+            </ul>
+          </li>
+        </ul>
+        <ul data-nstest-role="listview" data-nstest-inset="true">
+          <li>Item 1</li>
+          <li>Item 2</li>
+          <li>Item 3
+            <ul data-nstest-role="listview">
+              <li>Item B-3-0
+                <ul data-nstest-role="listview">
+                  <li>Item B-3-0-0</li>
+                  <li>Item B-3-0-1
+                    <ul data-nstest-role="listview">
+                      <li>Item B-3-0-1-0</li>
+                      <li>Item B-3-0-1-1</li>
+                      <li>Item B-3-0-1-2</li>
+                    </ul>
+                  </li>
+                  <li>Item B-3-0-2</li>
+                </ul>
+              </li>
+              <li>Item B-3-1
+                <ul data-nstest-role="listview">
+                  <li>Item B-3-1-0</li>
+                  <li>Item B-3-1-1</li>
+                  <li>Item B-3-1-2</li>
+                </ul>
+              </li>
+              <li>Item B-3-2</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

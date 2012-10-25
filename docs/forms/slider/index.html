@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Docs - Slider</title>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../../_assets/css/jqm-docs.css"/>
+	<script src="../../../js/jquery.js"></script>
+	<script src="../../../docs/_assets/js/jqm-docs.js"></script>
+	<script src="../../../js/"></script>
+
+</head>
+<body>
+
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="f">
+		<h1>Slider</h1>
+		<a href="../../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+		<a href="../../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="content-primary">
+
+		<form action="#" method="get">
+			<h2>Slider</h2>
+
+			<ul data-role="controlgroup" data-type="horizontal" class="localnav">
+				<li><a href="index.html" data-role="button" data-transition="fade" class="ui-btn-active">Basics</a></li>
+				<li><a href="options.html" data-role="button" data-transition="fade">Options</a></li>
+				<li><a href="methods.html" data-role="button" data-transition="fade">Methods</a></li>
+				<li><a href="events.html" data-role="button" data-transition="fade">Events</a></li>
+			</ul>
+
+			<p>To add a slider widget to your page, use a standard <code>input</code> with the <code>type="range"</code> attribute.  The input's <code>value</code> is used to configure the starting position of the handle and the value is populated in the text input. Specify <code>min</code> and <code>max</code> attribute values to set the slider's range. If you want to constrain input to specific increments, add the <code>step</code> attribute. Set the <code>value</code> attribute to define the initial value. The framework will parse these attributes to configure the slider widget. View the <a href="../../api/data-attributes.html">data- attribute reference</a> to see all the possible attributes you can add to sliders.</p>
+
+			<p>As you drag the slider's handle, the framework will update the native input's value (and vice-versa) so they are always in sync; this ensures that the value is submitted with the form.</p>
+			<p>Set the <code>for</code> attribute of the <code>label</code> to match the <code>id</code> of the <code>input</code> so they are semantically associated. It's possible to <a href="../docs-forms.html">accessibly hide the label</a> if it's not desired in the page layout, but we require that it is present in the markup for semantic and accessibility reasons.</p>
+
+			<p>The framework will find all <code>input</code> elements with a <code>type="range"</code> and automatically enhance them into a slider with an accompanying input without any need to apply a <code>data-role</code> attribute. To prevent the automatic enhancement of this input into a slider, add <code>data-role="none"</code> attribute to the <code>input</code> and wrap them in a <code>div</code> with the <code> data-role="fieldcontain"</code> attribute to group them. In this example, the acceptable range is 0-100. </p>
+
+<pre><code>
+&lt;label for=&quot;slider-1&quot;&gt;Input slider:&lt;/label&gt;
+&lt;input type=&quot;range&quot; name=&quot;slider-1&quot; id=&quot;slider-1&quot; value=&quot;60&quot; min=&quot;0&quot; max=&quot;100&quot; /&gt;
+</code></pre>
+
+				<p>The default slider with these settings is displayed like this:</p>
+				<label for="slider-1">Input slider:</label>
+				<input type="range" name="slider-1" id="slider-1" value="60" min="0" max="100" />
+				
+				<h2>Step increment</h2>
+
+				<p>To force the slider to snap to a specific increment, add the <code>step</code> attribute to the input. By default, the step is 1, but in this example, the step is 50 and the maximum value is 500.</p>
+
+<pre><code>
+&lt;label for=&quot;slider-step&quot;&gt;Input slider:&lt;/label&gt;
+&lt;input type=&quot;range&quot; name=&quot;slider-step&quot; id=&quot;slider-step&quot; value=&quot;150&quot; min=&quot;0&quot; max=&quot;500&quot; <strong>step=&quot;50&quot;</strong> /&gt;
+</code></pre>
+
+				<p>This will produce an input that snaps to increments of 50. If a value is added to the input that isn't valid with the step increment, the value will be reset on blur to the closest step.</p>
+		        <label for="slider-step">Input slider:</label>
+				<input type="range" name="slider-step" id="slider-step" value="150" min="0" max="500" step="50" />
+				
+				
+				<h2>Fill highlight</h2>
+
+				<p>To have a highlight fill on the track up to the slider handle position, add the <code>data-highlight="true"</code> attribute to the input. The fill uses the active state swatch. </p>
+
+<pre><code>
+&lt;label for=&quot;slider-fill&quot;&gt;Input slider:&lt;/label&gt;
+&lt;input type=&quot;range&quot; name=&quot;slider-fill&quot; id=&quot;slider-fill&quot; value=&quot;60&quot; min=&quot;0&quot; max=&quot;100&quot; <strong>data-highlight=&quot;true&quot;</strong> /&gt;
+</code></pre>
+
+		        <label for="slider-fill">Input slider:</label>
+				<input type="range" name="slider-fill" id="slider-fill" value="60" min="0" max="100" data-highlight="true" />
+	
+				
+				<h2>Mini version</h2>
+
+				<p>For a more compact version that is useful in toolbars and tight spaces, add the <code>data-mini="true"</code> attribute to the element to create a <a href="../forms-all-mini.html">mini version</a>. </p>
+
+<pre><code>
+&lt;label for=&quot;slider-mini&quot;&gt;Input slider:&lt;/label&gt;
+&lt;input type=&quot;range&quot; name=&quot;slider-mini&quot; id=&quot;slider-mini&quot; value=&quot;25&quot; min=&quot;0&quot; max=&quot;100&quot; data-highlight=&quot;true&quot; <strong>data-mini=&quot;true&quot;</strong> /&gt;
+</code></pre>
+
+				<p>This will produce a slider and its corresponding input that are not as tall as the standard version. The input also has a smaller text size.</p>
+		        <label for="slider-mini">Input slider:</label>
+				<input type="range" name="slider-mini" id="slider-mini" value="25" min="0" max="100" data-highlight="true" data-mini="true" />
+
+				<h2>Field containers</h2>
+					
+				<p>Optionally wrap the slider markup in a container with the <code>data-role="fieldcontain"</code> attribute to help visually group it in a longer form. In this example, the <code>step</code> attribute is omitted to allow any whole number value to be selected.</p>
+
+
+<pre><code>
+<strong>&lt;div data-role=&quot;fieldcontain&quot;&gt;
+</strong>   &lt;label for=&quot;slider-2&quot;&gt;Input slider:&lt;/label&gt;
+   &lt;input type=&quot;range&quot; name=&quot;slider-2&quot; id=&quot;slider-2&quot; value=&quot;25&quot; min=&quot;0&quot; max=&quot;100&quot;  /&gt;
+<strong>&lt;/div&gt;
+</strong></code></pre>
+
+			<p>The slider is now displayed like this:</p>
+			<div data-role="fieldcontain">
+				<label for="slider-2">Input slider:</label>
+				<input type="range" name="slider-2" id="slider-2" value="25" min="0" max="100" />
+			</div>
+
+			<p>Sliders also respond to key commands. Right Arrow, Up Arrow and Page Up keys increase the value; Left Arrow, Down Arrow and Page Down keys decrease it. To move the slider to its minimum or maximum value, use the Home or End key, respectively.</p>
+
+
+		<h2>Calling the slider plugin</h2>
+
+<p>This plugin will auto initialize on any page that contains a text <code>input</code> with the <code>type="range"</code> attribute. However, if needed you can directly call the <code>slider</code> plugin on any selector, just like any jQuery plugin:</p>
+<pre><code>
+$('input').slider();
+</code></pre>
+
+
+		<h2>Theming the slider</h2>
+		<p>To set the theme swatch for the slider, add a <code>data-theme</code> attribute to the <code>input</code> which will apply the theme to both the input, handle and track. The track swatch can be set separately by adding the  <code>data-track-theme</code> attribute to apply the down state version of the selected button swatch.</p>
+
+		<pre><code>
+&lt;div data-role=&quot;fieldcontain&quot;&gt;
+	&lt;label for=&quot;slider-3&quot;&gt;Input slider:&lt;/label&gt;
+	&lt;input type=&quot;range&quot; name=&quot;slider-3&quot; id=&quot;slider-3&quot; value=&quot;25&quot; min=&quot;0&quot; max=&quot;100&quot; <strong>data-theme=&quot;a&quot; data-track-theme=&quot;b&quot;</strong> /&gt;
+&lt;/div&gt;
+		</code></pre>
+
+		<p>This will produce a themed slider:</p>
+		<div data-role="fieldcontain">
+			<label for="slider-3">Input slider:</label>
+			<input type="range" name="slider-3" id="slider-3" value="25" min="0" max="100" data-theme="a" data-track-theme="b" />
+		</div>
+		</form>
+	</div><!--/content-primary -->
+
+	<div class="content-secondary">
+
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+
+				<h3>More in this section</h3>
+
+				<ul data-role="listview" data-theme="c" data-dividertheme="d">
+
+					<li data-role="list-divider">Form elements</li>
+					<li><a href="../docs-forms.html">Form basics</a></li>
+					<li><a href="../forms-all.html">Form element gallery</a></li>
+					<li><a href="../forms-all-mini.html">Mini form element gallery</a></li>
+					<li><a href="../textinputs/index.html">Text inputs</a></li>
+					<li><a href="../search/">Search input</a></li>
+					<li data-theme="a"><a href="index.html">Slider</a></li>
+					<li><a href="../switch/">Flip toggle switch</a></li>
+					<li><a href="../radiobuttons/">Radio buttons</a></li>
+					<li><a href="../checkboxes/">Checkboxes</a></li>
+					<li><a href="../selects/">Select menus</a></li>
+					<li><a href="../forms-themes.html">Theming forms</a></li>
+					<li><a href="../forms-all-native.html">Native form elements</a></li>
+					<li><a href="../forms-sample.html">Submitting forms</a></li>
+
+
+				</ul>
+		</div>
+	</div>
+
+</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p class="jqm-version"></p>
+		<p>&copy; 2012 jQuery Foundation and other contributors</p>
+</div>
+
+</div><!-- /page -->
+
+</body>
+</html>
+

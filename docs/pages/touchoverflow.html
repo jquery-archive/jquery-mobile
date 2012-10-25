@@ -1,0 +1,130 @@
+<!DOCTYPE html> 
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>jQuery Mobile Docs - touchOverflow</title> 
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />  
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+
+	<script src="../../js/jquery.js"></script>
+	<script src="../../docs/_assets/js/jqm-docs.js"></script>
+	<script src="../../js/"></script>
+
+</head> 
+<body> 
+
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="f">
+		<h1>touchOverflow</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="content-primary">		
+			
+			<div class="ui-body ui-body-e">		
+					<h2>touchOverflowEnabled: Deprecated in 1.1.0</h2>
+
+					<p>Prior to jQuery Mobile 1.1, true fixed toolbar support was contingent on native browser support for the CSS property <code>overflow-scrolling: touch</code>, which is currently only supported in iOS5. As of version 1.1, jQuery Mobile no longer uses this CSS property at all. We've removed all internal usage of this property in the framework, but we've left it defined globally on the $.mobile object to reduce the risk that its removal will cause trouble with existing applications. This property is flagged for removal, so please update your code to no longer use it. The support test for this property, however, remains defined under <code>$.support</code> and we have no plans to remove that test at this time. </p>
+			</div>
+			
+			<h2 id="ios5">touchOverflow: Improved page transitions and true fixed toolbars</h2>
+			
+			<p>Currently, both the page you're viewing and the one you're navigating to are sitting next to each other in the viewport, which lets us leverage native scrolling for the broadest possible device support. The downside to this approach is that since both pages share the same viewport, when a page transition starts, we must first scroll to the top of the document, then start animating to ensure that the pages are lined up vertically. If you hit the Back button, we need to scroll up, transition, then restore the previous scroll position. Since mobile browsers are pretty slow, these scroll movements can detract from the flow of the experience.</p>
+			
+			<p>The way to really improve this situation is to have both pages in separate containers, each with its own internal scroll bar. This means no more scrolling the document or needing to restore scroll positions for a smoother experience. It also has the benefit of making fixed toolbars very easy to implement by simply placing them outside the containers with internal scrolling.<p>
+			
+			<h2>How it works</h2>
+			
+			<p>To leverage iOS5&#8242;s support for a touch-targeted version of <code>overflow:auto</code> which allows for internal scrolling regions with the native momentum scrolling, we've added a feature called touchOverflow that leverages these new CSS capabilities to  enable us to bring both true &#8220;fixed&#8221; toolbars and super smooth transitions to iOS5, all by using web standards and very little additional code.</p>				
+				
+			<p>A feature called <code>touchOverflowEnabled</code> is designed to leverage the upcoming wave of browsers that support overflow scrolling in CSS. Note that this feature is off by default to give us more time to test and debug this for best performance but we hope to turn it on by default at a later point. Here's how to enable this <a href="../api/globalconfig.html">global option</a>:</p>
+			
+<pre><code>&lt;script&gt;
+$(document).bind(&quot;mobileinit&quot;, function(){
+<strong>  $.mobile.touchOverflowEnabled = true;
+</strong>});
+&lt;/script&gt;</code></pre>
+			
+			<p>When this feature is activated, the framework looks for browser support for both the <code>overflow:</code> and <code>-webkit-overflow-scrolling:touch</code> CSS properties. In browsers that support both, it switches to a dual page container model with native overflow: scrolling within each, which brings true fixed toolbars and smooth transitions. Coupled with iOS&#8217;s already excellent hardware-accelerated transitions, it's now possible to build interfaces that are very close to native performance.</p>
+			
+			<p>To demo this feature, check out <a href="../config/touchOverflow.html">this page</a> in iOS5.</p>
+
+			<h2>A few downsides</h2>
+			
+			<p>Nothing is perfect, especially a new feature, so there are a few downsides to keep in mind.  When activating this feature:</p>
+				
+			<ul>
+				<li>Sometimes child elements like lists and forms wouldn't render when embedded in a page with <code>overflow:</code> in iOS5. This was a pretty random phenomenon but is not acceptable so we've added a <code>translate-z</code> CSS property which forces iOS to render the contents. The downside with this fix is that when a transform is applied, all elements are set to position:relative which can cause issues in your layout.</li>
+				<li>The <code>-webkit-overflow-scrolling:touch</code> property seems to disable the events to scroll you to the top of the page when the time is tapped in the status bar. We hope Apple fixes this because it's a very useful feature.</li>
+				<li>When <code>overflow:</code> and <code>-webkit-overflow-scrolling:touch</code> properties are set, iOS appears to ignore any <code>overflow:hidden</code> properties on the parent, which is the page in our case. So if you have an image or code block that is wider than the viewport, horizontal scrolling will be seen. </li>
+				<li>When this feature is active, we are disabling user zoom by manipulating the meta viewport tag because both the toolbars and page content can easily be zoomed to an odd size and it's very difficult to zoom back out. Even though we believe in allowing users to zoom the page, alleviating the usability concerns we have with fixed toolbars and overflow containers is more important.</li>
+				<li>Scroll position can be lost when going back to a page that has been re-loaded. If DOM caching is on, this shouldn't be as much of an issue.</li>
+				<li>This is still an experimental feature, so not all the kinks have been worked out yet. Use with caution and test thoroughly.</li>
+			</ul>	
+			
+			
+			
+			<h2>Don&#8217;t other mobile platforms already support overflow?</h2>
+			<p>Yes, but there&#8217;s a catch. Both Android Honeycomb and the Blackberry PlayBook support <code>overflow:</code> properties, but we found in testing that their implementation of overflow wasn't smooth enough, so pages would stutter and hang during scrolling, leading to an unusable experience. We're working with device makers to ensure that they are included when performance improves.</p>
+			<p>More importantly, targeting overflow correctly is a major issue. If we simply placed an <code>overflow: auto</code> CSS rule on the pages, other popular mobile platforms like older versions of Android and iOS would essentially just clip off the content and make it effectively inaccessible (yes, you can do a two-finger scroll gesture in iOS but nobody knows that). The smart thing about Apple&#8217;s implementation for iOS5 is that they added an additional CSS property <code>-webkit-overflow-scrolling:touch</code> that allows us to test for this touch scrolling property and, if supported, add in the <code>overflow</code> rules for just those browsers. This is the only safe way to target overflow without resorting to complex and unmaintainable user agent detection.</p>
+			<p>We will be working with device and browser makers to encourage support for <em>both</em> these CSS-based properties because we strongly believe that this a critical piece needed to build rich mobile web apps. The project will add any vendor-prefixed additions to touch scrolling property if, for example, Opera, Firefox or Microsoft added this support. Once people see how much better page transitions and fixed toolbars are on iOS5, we&#8217;re hoping this will be supported quickly by other browsers. JS-based scroller scripts may still have a place in this new world as a polyfill for browsers that don&#8217;t yet support these new CSS capabilities but we see this as a brief, interim tool in the evolution of the mobile web.</p>
+			
+			
+			
+			<h2>Debugging touchOverflow</h2>
+			<p>Generally touchOverflow is only enabled on devices that support touch-scrolling of overflow areas, not desktop browsers.  This can make it difficult to debug problems with the touchOverflow feature.  To enable touchOverflow on all browsers, use the following code:
+
+<pre><code>&lt;script&gt;
+$(document).bind(&quot;mobileinit&quot;, function() {
+  <strong>$.support.touchOverflow = true;</strong>
+  $.mobile.touchOverflowEnabled = true;
+});
+&lt;/script&gt;</code></pre>
+
+
+		</div><!--/content-primary -->		
+
+		<div class="content-secondary">
+
+					<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+
+							<h3>More in this section</h3>
+
+							<ul data-role="listview" data-theme="c" data-dividertheme="d">
+
+								<li data-role="list-divider">Pages &amp; Dialogs</li>
+								<li><a href="page-anatomy.html">Anatomy of a page</a></li>
+								<li><a href="page-template.html" data-ajax="false">Single page template</a></li>
+								<li><a href="multipage-template.html" data-ajax="false">Multi-page template</a></li>
+								<li><a href="page-titles.html">Page titles</a></li>
+								<li><a href="page-links.html">Linking pages</a></li>
+								<li><a href="page-transitions.html">Page transitions</a></li>
+								<li><a href="loader.html">Page loading widget</a></li>
+								<li><a href="dialog/index.html">Dialogs</a></li>
+								<li><a href="popup/index.html">Popups</a></li>
+								<li><a href="page-cache.html">Prefetching &amp; caching pages</a></li>
+								<li><a href="page-navmodel.html">Ajax, hashes &amp; history</a></li>
+								<li><a href="page-dynamic.html">Dynamically injecting pages</a></li>
+								<li><a href="page-scripting.html">Scripting pages</a></li>
+								<li><a href="phonegap.html">PhoneGap apps</a></li>
+								<li data-theme="a"><a href="touchoverflow.html">touchOverflow feature</a></li>
+								<li><a href="pages-themes.html">Theming pages</a></li>
+							</ul>
+					</div>
+				</div>		
+
+			</div><!-- /content -->
+
+			<div data-role="footer" class="footer-docs" data-theme="c">
+					<p class="jqm-version"></p>
+				<p>&copy; 2012 jQuery Foundation and other contributors</p>
+			</div>
+
+			</div><!-- /page -->
+
+			</body>
+			</html>
