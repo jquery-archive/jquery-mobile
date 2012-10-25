@@ -9,7 +9,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.checkboxradio.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.buttonMarkup" ], function( $ ) {
+define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.buttonMarkup", "./reset" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -138,6 +138,9 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 				}
 			});
 
+		if ( this._handleFormReset ) {
+			this._handleFormReset();
+		}
 		this.refresh();
 	},
 
@@ -170,6 +173,10 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 		.checkboxradio( "refresh" );
 	},
 
+	_reset: function() {
+		this.refresh();
+	},
+
 	refresh: function() {
 		var input = this.element[0],
 			label = this.label,
@@ -198,6 +205,8 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 		this.element.prop( "disabled", false ).parent().removeClass( "ui-disabled" );
 	}
 });
+
+$.widget( "mobile.checkboxradio", $.mobile.checkboxradio, $.mobile.behaviors.formReset );
 
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ) {
