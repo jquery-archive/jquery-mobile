@@ -8,7 +8,7 @@
    <link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 
    <script src="../../js/jquery.js"></script>
-   <script src="jquery.tablesorter.min.js"></script>
+   
 
    <script src="../../docs/_assets/js/jqm-docs.js"></script>
    <script src="../../js/"></script>
@@ -28,13 +28,11 @@
         <h2>Reflow customizations table</h2>
 
 
-
+<script src="jquery.tablesorter.min.js"></script>
 <script>
-    $(function(){
-      $('#btn-sort').click(function(){
-		 $("#movie-table-custom").tablesorter(); 
+      $(document).on( "pageinit", "#movies-custom", function(){
+		    $("#movie-table-custom").tablesorter(); 
       });
-    });
   </script>
 
 <style>
@@ -100,7 +98,6 @@
 
             <h3>Top movies</h3>
 
-<a href="#" id="btn-sort">Sortify the table</a>
 
             <table data-role="table" id="movie-table-custom" data-mode="reflow" class="tablesorter">
             <caption>Top movies of all time according to film buffs. In case you're curious, this is a caption for the table.</caption> 
