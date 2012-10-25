@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.select.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.buttonMarkup", "../../jquery.mobile.zoom" ], function( $ ) {
+define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.buttonMarkup", "../../jquery.mobile.zoom", "./form.resetsetup" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -141,6 +141,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			self.refresh();
 		});
 
+		$.mobile._formResetSetup( this );
 		this.build();
 	},
 
@@ -229,6 +230,10 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		if ( this.isMultiple ) {
 			this.buttonCount[ selected.length > 1 ? "show" : "hide" ]().text( selected.length );
 		}
+	},
+
+	_reset: function() {
+		this.refresh();
 	},
 
 	refresh: function() {
