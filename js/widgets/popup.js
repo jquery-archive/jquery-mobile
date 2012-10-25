@@ -265,6 +265,9 @@ define( [ "jquery",
 			this._ui.container.removeClass( this._fallbackTransition );
 			if ( value && value !== "none" ) {
 				this._fallbackTransition = $.mobile._maybeDegradeTransition( value );
+				if ( this._fallbackTransition === "none" ) {
+					this._fallbackTransition = "";
+				}
 				this._ui.container.addClass( this._fallbackTransition );
 			}
 		},
@@ -433,7 +436,7 @@ define( [ "jquery",
 
 		_animate: function( args ) {
 			// NOTE before removing the default animation of the screen
-			//      this had an animate callback that would relove the deferred
+			//      this had an animate callback that would resolve the deferred
 			//      now the deferred is resolved immediately
 			// TODO remove the dependency on the screen deferred
 			this._ui.screen
@@ -446,14 +449,16 @@ define( [ "jquery",
 				if ( args.applyTransition ) {
 					this._applyTransition( args.transition );
 				}
-				this._ui.container
-					.animationComplete( $.proxy( args.prereqs.container, "resolve" ) )
-					.addClass( args.containerClassToAdd )
-					.removeClass( args.classToRemove );
-			} else {
-				this._ui.container.removeClass( args.classToRemove );
-				args.prereqs.container.resolve();
+				if ( this._fallbackTransition ) {
+					this._ui.container
+						.animationComplete( $.proxy( args.prereqs.container, "resolve" ) )
+						.addClass( args.containerClassToAdd )
+						.removeClass( args.classToRemove );
+					return;
+				}
 			}
+			this._ui.container.removeClass( args.classToRemove );
+			args.prereqs.container.resolve();
 		},
 
 		// The desired coordinates passed in will be returned untouched if no reference element can be identified via
