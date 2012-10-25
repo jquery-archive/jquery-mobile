@@ -114,11 +114,11 @@ define( [ "jquery",
 		_resizeTimeout: function() {
 			if ( this._isOpen ) {
 				if ( !this._expectResizeEvent() ) {
-					if ( this._ui.container.hasClass( "ui-selectmenu-hidden" ) ) {
+					if ( this._ui.container.hasClass( "ui-popup-hidden" ) ) {
 						// effectively rapid-open the popup while leaving the screen intact
 						this._trigger( "beforeposition" );
 						this._ui.container
-							.removeClass( "ui-selectmenu-hidden" )
+							.removeClass( "ui-popup-hidden" )
 							.offset( this._placementCoords( this._desiredCoords( undefined, undefined, "window" ) ) );
 					}
 
@@ -135,10 +135,10 @@ define( [ "jquery",
 		_handleWindowResize: function( e ) {
 			if ( this._isOpen ) {
 				if ( ( this._expectResizeEvent() || this._orientationchangeInProgress ) &&
-					!this._ui.container.hasClass( "ui-selectmenu-hidden" ) ) {
+					!this._ui.container.hasClass( "ui-popup-hidden" ) ) {
 					// effectively rapid-close the popup while leaving the screen intact
 					this._ui.container
-						.addClass( "ui-selectmenu-hidden" )
+						.addClass( "ui-popup-hidden" )
 						.removeAttr( "style" );
 				}
 			}
@@ -167,7 +167,7 @@ define( [ "jquery",
 			var ui = {
 					screen: $( "<div class='ui-screen-hidden ui-popup-screen'></div>" ),
 					placeholder: $( "<div style='display: none;'><!-- placeholder --></div>" ),
-					container: $( "<div class='ui-popup-container ui-selectmenu-hidden'></div>" )
+					container: $( "<div class='ui-popup-container ui-popup-hidden'></div>" )
 				},
 				thisPage = this.element.closest( ".ui-page" ),
 				myId = this.element.attr( "id" ),
@@ -592,7 +592,7 @@ define( [ "jquery",
 			this._ui.screen.removeClass( "ui-screen-hidden" );
 
 			this._ui.container
-				.removeClass( "ui-selectmenu-hidden" )
+				.removeClass( "ui-popup-hidden" )
 				.offset( coords );
 
 			if ( this.options.overlayTheme && androidBlacklist ) {
@@ -632,7 +632,7 @@ define( [ "jquery",
 		_closePrereqContainer: function() {
 			this._ui.container
 				.removeClass( "reverse out" )
-				.addClass( "ui-selectmenu-hidden" )
+				.addClass( "ui-popup-hidden" )
 				.removeAttr( "style" );
 		},
 

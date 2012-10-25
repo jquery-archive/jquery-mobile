@@ -61,7 +61,7 @@
 			},
 
 			function(){
-				deepEqual($("#select-choice-few-menu").parent().parent(".ui-selectmenu-hidden").length, 1);
+				deepEqual($("#select-choice-few-menu").parent().parent(".ui-popup-hidden").length, 1);
 				start();
 			}
 		], 1000);
@@ -297,7 +297,7 @@
 			},
 
 			function() {
-				deepEqual( $( ".ui-popup-container:not(.ui-selectmenu-hidden) .ui-selectmenu ul" ).text(), "default" );
+				deepEqual( $( ".ui-popup-container:not(.ui-popup-hidden) .ui-selectmenu ul" ).text(), "default" );
 				$( ".ui-popup-screen" ).click();
 			},
 
@@ -312,7 +312,7 @@
 			},
 
 			function() {
-				deepEqual( $( ".ui-popup-container:not(.ui-selectmenu-hidden) .ui-selectmenu ul" ).text(), text );
+				deepEqual( $( ".ui-popup-container:not(.ui-popup-hidden) .ui-selectmenu ul" ).text(), text );
 				$( ".ui-popup-screen" ).click();
 			},
 
@@ -389,7 +389,7 @@
 	test( "a disabled custom select should still be enhanced as custom", function() {
 		$("#select-disabled-enhancetest").selectmenu("enable").selectmenu("open");
 
-		var menu = $(".ui-selectmenu").not( ".ui-selectmenu-hidden" );
+		var menu = $(".ui-selectmenu").not( ".ui-popup-hidden" );
 		ok( menu.text().indexOf("disabled enhance test") > -1, "the right select is showing" );
 	});
 
