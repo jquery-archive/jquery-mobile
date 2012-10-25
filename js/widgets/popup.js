@@ -134,13 +134,13 @@ define( [ "jquery",
 
 		_handleWindowResize: function( e ) {
 			if ( this._isOpen ) {
-				if ( !this._ui.container.hasClass( "ui-selectmenu-hidden" ) ) {
+				if ( ( this._maybeRefreshTimeout() || this._orientationchangeInProgress ) &&
+					!this._ui.container.hasClass( "ui-selectmenu-hidden" ) ) {
 					// effectively rapid-close the popup while leaving the screen intact
 					this._ui.container
 						.addClass( "ui-selectmenu-hidden" )
 						.removeAttr( "style" );
 				}
-				this._maybeRefreshTimeout();
 			}
 		},
 
@@ -525,6 +525,7 @@ define( [ "jquery",
 
 		_completeOpen: function() {
 			this._ui.container.attr( "tabindex", "0" ).focus();
+			this._maybeRefreshTimeout();
 			this._trigger( "afteropen" );
 		},
 
