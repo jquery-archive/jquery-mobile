@@ -87,7 +87,7 @@ define( [ "jquery",
 			}
 		},
 
-		_maybeRefreshTimeout: function() {
+		_expectResizeEvent: function() {
 			var winCoords = windowCoords();
 
 			if ( this._resizeData ) {
@@ -113,7 +113,7 @@ define( [ "jquery",
 
 		_resizeTimeout: function() {
 			if ( this._isOpen ) {
-				if ( !this._maybeRefreshTimeout() ) {
+				if ( !this._expectResizeEvent() ) {
 					if ( this._ui.container.hasClass( "ui-selectmenu-hidden" ) ) {
 						// effectively rapid-open the popup while leaving the screen intact
 						this._trigger( "beforeposition" );
@@ -134,7 +134,7 @@ define( [ "jquery",
 
 		_handleWindowResize: function( e ) {
 			if ( this._isOpen ) {
-				if ( ( this._maybeRefreshTimeout() || this._orientationchangeInProgress ) &&
+				if ( ( this._expectResizeEvent() || this._orientationchangeInProgress ) &&
 					!this._ui.container.hasClass( "ui-selectmenu-hidden" ) ) {
 					// effectively rapid-close the popup while leaving the screen intact
 					this._ui.container
@@ -146,7 +146,7 @@ define( [ "jquery",
 
 		_handleWindowOrientationchange: function( e ) {
 			if ( !this._orientationchangeInProgress && this._isOpen ) {
-				this._maybeRefreshTimeout();
+				this._expectResizeEvent();
 				this._orientationchangeInProgress = true;
 			}
 		},
@@ -525,7 +525,7 @@ define( [ "jquery",
 
 		_completeOpen: function() {
 			this._ui.container.attr( "tabindex", "0" ).focus();
-			this._maybeRefreshTimeout();
+			this._expectResizeEvent();
 			this._trigger( "afteropen" );
 		},
 
