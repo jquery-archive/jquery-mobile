@@ -10,15 +10,17 @@
       margin:0;
 }
 
-th.ui-table-priority-4,
-td.ui-table-priority-4,
-th.ui-table-priority-3,
-td.ui-table-priority-3,
-th.ui-table-priority-2,
-td.ui-table-priority-2,
-th.ui-table-priority-1,
-td.ui-table-priority-1 {
-  display: none;
+@media only all {
+  th.ui-table-priority-4,
+  td.ui-table-priority-4,
+  th.ui-table-priority-3,
+  td.ui-table-priority-3,
+  th.ui-table-priority-2,
+  td.ui-table-priority-2,
+  th.ui-table-priority-1,
+  td.ui-table-priority-1 {
+    display: none;
+  }
 }
 
 @media screen and (min-width: 20em) {

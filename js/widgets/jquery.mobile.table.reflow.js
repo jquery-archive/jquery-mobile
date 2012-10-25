@@ -36,7 +36,7 @@ $( document ).delegate( ":jqmData(role='table')", "tablecreate", function() {
    // create the hide/show toggles
    self._headers.each(function(i){
 
-      $( this ).jqmData( "cells" ).prepend( "<b aria-hidden='true' class='" + o.classes.cellLabels + "'>" + $(this).text() + "</b>"  );
+      $( this ).jqmData( "cells" ).prepend( "<b class='" + o.classes.cellLabels + "'>" + $(this).text() + "</b>"  );
    });
 
 });
