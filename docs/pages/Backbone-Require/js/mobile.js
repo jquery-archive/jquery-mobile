@@ -25,15 +25,21 @@ require.config( {
 } );
 
 // Includes File Dependencies
-require([ "jquery","backbone","routers/mobileRouter","jquerymobile" ], function( $, Backbone, Mobile ) {
+require([ "jquery", "backbone", "routers/mobileRouter" ], function( $, Backbone, Mobile ) {
 
-      // Prevents all anchor click handling including the addition of active button state and alternate link bluring.
-      $.mobile.linkBindingEnabled = false;
+	$( document ).on( "mobileinit",
+		// Set up the "mobileinit" handler before requiring jQuery Mobile's module
+		function() {
+			// Prevents all anchor click handling including the addition of active button state and alternate link bluring.
+			$.mobile.linkBindingEnabled = false;
 
-      // Disabling this will prevent jQuery Mobile from handling hash changes
-      $.mobile.hashListeningEnabled = false;
+			// Disabling this will prevent jQuery Mobile from handling hash changes
+			$.mobile.hashListeningEnabled = false;
+		}
+	)
 
-      // Instantiates a new Backbone.js Mobile Router
-      this.router = new Mobile();
-
+	require( [ "jquerymobile" ], function() {
+		// Instantiates a new Backbone.js Mobile Router
+		this.router = new Mobile();
+	});
 } );
