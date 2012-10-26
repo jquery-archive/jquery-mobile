@@ -78,12 +78,17 @@ $( document ).delegate( ":jqmData(role='table')", "tablecreate", function() {
       }
    } );
 
-   $( window ).on( "throttledresize", function(){
+
+   function refreshMenu(){
       $menu.find( "input" ).each( function(){
             this.checked = $( this ).jqmData( "cells" ).eq(0).is( ":visible" );
             $( this ).checkboxradio( "refresh" );
       } );
-   });
+   }
+
+   refreshMenu();
+
+   $( window ).on( "throttledresize", refreshMenu );
 
 });
 
