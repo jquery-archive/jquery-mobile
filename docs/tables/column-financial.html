@@ -43,41 +43,92 @@
 		#financial-table tbody tr td:nth-child(2) {
 			text-align:left;
 		}
+
+
+
+		@media screen and (min-width: 25em) {
+		   #financial-table th.ui-table-priority-2,
+		   #financial-table td.ui-table-priority-2 {
+		     display: none;
+		   }
+		}
+
+		@media screen and (min-width: 40em) {
+			#financial-table th.ui-table-priority-2,
+			#financial-table td.ui-table-priority-2 {
+				display: table-cell;
+			}
+
+			#financial-table th.ui-table-priority-3,
+		 	#financial-table td.ui-table-priority-3 {
+		     display: none;
+		   }
+		}
+		@media screen and (min-width: 55em) {
+			#financial-table th.ui-table-priority-3,
+		 	#financial-table td.ui-table-priority-3 {
+				display: table-cell;
+			}
+			#financial-table th.ui-table-priority-4,
+			#financial-table td.ui-table-priority-4 {
+				display: none;
+			}
+		}
+		@media screen and (min-width: 75em) {
+			#financial-table th.ui-table-priority-4,
+		 	#financial-table td.ui-table-priority-4 {
+				display: table-cell;
+			}
+		}
+		#financial-table th.ui-table-cell-hidden,
+		#financial-table td.ui-table-cell-hidden {
+		  display: none;
+		}
+
+		#financial-table th.ui-table-cell-visible,
+		#financial-table td.ui-table-cell-visible {
+		   display: table-cell;
+		}
+
+
+
+
+
 		</style>
 	
          	<table data-role="table" id="financial-table" data-mode="columntoggle">
 				<thead>
 					<tr class="th-groups">
-						<td colspan="2"></td>
-						<th colspan="3">Q1 2012</th>
-						<th colspan="3">Q2 2012</th>
-						<th colspan="3">Q3 2012</th>
-						<th colspan="3">Q4 2012</th>
-						<th colspan="3" class="totals">YTD Totals</th>
+						<td colspan="2" data-priority="persist"></td>
+						<th colspan="3" data-priority="1">Q1 2012</th>
+						<th colspan="3" data-priority="2">Q2 2012</th>
+						<th colspan="3" data-priority="3">Q3 2012</th>
+						<th colspan="3" data-priority="4">Q4 2012</th>
+						<th colspan="3"  data-priority="4" class="totals">YTD Totals</th>
 					</tr> 
 					<tr>
-						<th data-priority="persist">Store</th>
-						<th data-priority="5">State</th>
+						<th>Store</th>
+						<th>State</th>
 
-						<th data-priority="5" data-grouping="Q1 2012">Income</th>
-						<th data-priority="5">Profit</th>
-						<th data-priority="5">Change</th>
+						<th data-grouping="Q1 2012">Income</th>
+						<th>Profit</th>
+						<th>Change</th>
 
-						<th data-priority="4">Income</th>
-						<th data-priority="4">Profit</th>
-						<th data-priority="4">Change</th>
+						<th>Income</th>
+						<th>Profit</th>
+						<th>Change</th>
 
-						<th data-priority="3">Income</th>
-						<th data-priority="3">Profit</th>
-						<th data-priority="3">Change</th>
+						<th>Income</th>
+						<th>Profit</th>
+						<th>Change</th>
 
-						<th data-priority="2">Income</th>
-						<th data-priority="2">Profit</th>
-						<th data-priority="2">Change</th>
+						<th>Income</th>
+						<th>Profit</th>
+						<th>Change</th>
 
-						<th data-priority="1">Income</th>
-						<th data-priority="1">Profit</th>
-						<th data-priority="1">Change</th>
+						<th>Income</th>
+						<th>Profit</th>
+						<th>Change</th>
 					</tr>
 				</thead>
 

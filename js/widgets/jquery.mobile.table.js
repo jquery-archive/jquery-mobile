@@ -21,21 +21,17 @@ $.widget( "mobile.table", $.mobile.widget, {
  
     _create: function() {
 
-      var self = this;
+      var self = this,
+        coltally = 0,
+        firstTR = this.element.find( "tr:eq(0)" );
 
       this.element.addClass( this.options.classes.table );
 
-      this._headtrs = this.element.find( "thead tr" );
-      this._headers = this._headtrs.children();
+      this._headers = firstTR.children();
 
-      self._headtrs.each(function(){
 
-        var coltally = 0,
-          thisTR = $( this );
 
-        $( this ).children().each(function( i ){
-
-          
+      self._headers.each(function( i ){
 
           var span = parseInt( $( this ).attr( "colspan" ), 10 ),
             sel = ":nth-child(" + (coltally + 1) + ")";
@@ -47,10 +43,9 @@ $.widget( "mobile.table", $.mobile.widget, {
             }
           }
 
-          $( this ).jqmData( "cells", self.element.find( "tr" ).not( thisTR ).not( ":contains(td[colspan],th[colspan])" ).children( sel ) );
+          $( this ).jqmData( "cells", self.element.find( "tr" ).not( firstTR ).children( sel ) );
 
           coltally++;
-        });
       });
 
    }
