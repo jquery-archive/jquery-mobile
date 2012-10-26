@@ -1313,11 +1313,11 @@
 			function(){
 				$.mobile.changePage( " external.html" );
 			},
-
 			function(){
-				ok( $.mobile.activePage.attr( "id" ), "external-test", "the correct page is loaded" );
+				ok( $.mobile.activePage.attr( "id" ) === "external-test", "the correct page is loaded" );
 				start();
 			}
+
 		]);
 	});
 	
