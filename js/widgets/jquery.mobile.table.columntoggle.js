@@ -11,7 +11,9 @@ define( [ "jquery", "./jquery.mobile.table", "../jquery.mobile.buttonMarkup", ".
 
 $.mobile.table.prototype.options.mode = "columntoggle";
 
-$.mobile.table.prototype.options.columnBtnClass = "";
+$.mobile.table.prototype.options.columnBtnTheme = null;
+
+$.mobile.table.prototype.options.columnPopupTheme = null;
 
 $.mobile.table.prototype.options.columnBtnText = "Columns...";
 
@@ -19,7 +21,7 @@ $.mobile.table.prototype.options.classes = $.extend(
    $.mobile.table.prototype.options.classes,
    {
       popup: "ui-table-columntoggle-popup",
-      columnsButton: "ui-table-columntoggle-btn",
+      columnBtn: "ui-table-columntoggle-btn",
       priorityPrefix: "ui-table-priority-",
       columnToggleTable: "ui-table-columntoggle"
    }
@@ -38,7 +40,7 @@ $( document ).delegate( ":jqmData(role='table')", "tablecreate", function() {
    self.element.addClass( o.classes.columnToggleTable );
 
    var id = ( $table.attr( "id" ) || self.options.classes.popup ) + "-popup", //TODO BETTER FALLBACK ID HERE
-      $menuButton = $( "<a href='#" + id + "' class='" + o.classes.columnsButton + "' data-rel='popup'>" + o.columnBtnText + "</a>" ),
+      $menuButton = $( "<a href='#" + id + "' class='" + o.classes.columnBtn + "' data-rel='popup'>" + o.columnBtnText + "</a>" ),
       $popup = $( "<div data-role='popup' data-role='fieldcontain' class='" + o.classes.popup + "' id='" + id + "'></div>"),
       $menu = $("<fieldset data-role='controlgroup'></fieldset>").appendTo( $popup );
 
@@ -62,11 +64,15 @@ $( document ).delegate( ":jqmData(role='table')", "tablecreate", function() {
 
    $menuButton
       .insertBefore( $table )
-      .buttonMarkup();
+      .buttonMarkup({
+         theme: o.columnBtnTheme
+      });
 
    $popup
       .insertBefore( $table )
-      .popup();
+      .popup({
+         theme: o.columnPopupTheme
+      });
 
    // bind change event listeners to inputs - TODO: move to a private method?
    $menu.on( "change", "input", function( e ){
