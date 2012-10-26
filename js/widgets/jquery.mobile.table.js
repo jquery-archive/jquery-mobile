@@ -25,10 +25,25 @@ $.widget( "mobile.table", $.mobile.widget, {
 
       this.element.addClass( this.options.classes.table );
 
-      self._headers = this.element.find( "thead th" );
+      this._headtrs = this.element.find( "thead tr:eq(0)" );
+      this._headers = this._headtrs.find( "th" );
+
+      var coltally = 0;
 
       self._headers.each(function( i ){
-         $( this ).jqmData( "cells", self.element.find( "tbody tr" ).children( ":nth-child(" + (i + 1) + ")" ) );
+        coltally++;
+        var span = parseInt( $( this ).attr( "colspan" ), 10 ),
+          sel = ":nth-child(" + (coltally + 1) + ")";
+
+        if( span ){
+          for( var j = 0; j < span; j++ ){
+            coltally++;
+            sel += ", :nth-child(" + (coltally + 1) + ")";
+          }
+        }
+
+        $( this )
+          .jqmData( "cells", self.element.find( "tbody tr" ).children( sel ) );
       });
    }
     
