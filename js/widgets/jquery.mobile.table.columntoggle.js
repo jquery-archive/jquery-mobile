@@ -58,7 +58,9 @@ $( document ).delegate( ":jqmData(role='table')", "tablecreate", function() {
             .appendTo( $menu )
             .children( 0 )
             .jqmData( "cells", $cells )
-            .checkboxradio();
+            .checkboxradio({
+               theme: o.columnPopupTheme
+            });
       }
    });
 
@@ -70,9 +72,7 @@ $( document ).delegate( ":jqmData(role='table')", "tablecreate", function() {
 
    $popup
       .insertBefore( $table )
-      .popup({
-         theme: o.columnPopupTheme
-      });
+      .popup();
 
    // bind change event listeners to inputs - TODO: move to a private method?
    $menu.on( "change", "input", function( e ){

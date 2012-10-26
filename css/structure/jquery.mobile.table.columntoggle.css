@@ -23,7 +23,21 @@
   td.ui-table-priority-2,
   th.ui-table-priority-1,
   td.ui-table-priority-1 {
-    display: none;
+    width: 0;
+  }
+  th.ui-table-priority-6 *,
+  td.ui-table-priority-6 *,
+  th.ui-table-priority-5 *,
+  td.ui-table-priority-5 *,
+  th.ui-table-priority-4 *,
+  td.ui-table-priority-4 *,
+  th.ui-table-priority-3 *,
+  td.ui-table-priority-3 *,
+  th.ui-table-priority-2 *,
+  td.ui-table-priority-2 *,
+  th.ui-table-priority-1 *,
+  td.ui-table-priority-1 * {
+    width: 0;
   }
 }
 
@@ -55,6 +69,10 @@
 }
 th.ui-table-cell-hidden,
 td.ui-table-cell-hidden {
+  width: 0;
+}
+th.ui-table-cell-hidden *,
+td.ui-table-cell-hidden * {
   display: none;
 }
 
