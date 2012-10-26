@@ -48,7 +48,7 @@ $( document ).delegate( ":jqmData(role='table')", "tablecreate", function() {
       var priority = $( this ).jqmData( "priority" ),
          $cells = $( this ).add( $( this ).jqmData( "cells" ) );
 
-      if( priority !== "persist" ){
+      if( priority ){
 
          $cells.addClass( o.classes.priorityPrefix + priority );
 
@@ -86,9 +86,9 @@ $( document ).delegate( ":jqmData(role='table')", "tablecreate", function() {
       } );
    }
 
-   refreshMenu();
-
    $( window ).on( "throttledresize", refreshMenu );
+
+   refreshMenu();
 
 });
 
