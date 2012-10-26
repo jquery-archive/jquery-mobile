@@ -11,6 +11,10 @@
 }
 
 @media only all {
+  th.ui-table-priority-6,
+  td.ui-table-priority-6,
+  th.ui-table-priority-5,
+  td.ui-table-priority-5,
   th.ui-table-priority-4,
   td.ui-table-priority-4,
   th.ui-table-priority-3,
