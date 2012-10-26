@@ -50,6 +50,10 @@ $( document ).delegate( ":jqmData(role='listview')", "listviewcreate", function(
 				childItems = false,
 				itemtext = "",
 				item,
+				listItemsCollapsible = null,
+				itemCollapsible,
+				itemtextCollapsible = "",
+				itemCollapsible,
 				// Check if a custom filter callback applies
 				isCustomFilterCallback = listview.options.filterCallback !== defaultFilterCallback;
 
@@ -91,6 +95,26 @@ $( document ).delegate( ":jqmData(role='listview')", "listviewcreate", function(
 
 						//mark to be hidden
 						item.toggleClass( "ui-filter-hidequeue" , true );
+					} else if(listItems[i].className.indexOf("ui-collapsible") === 0) {
+					
+						// Collapsible list
+				            $(listItems[i].children[0].children).toggleClass("ui-filter-hidenqueue", true);
+					    	for ( var j = listItems[i].children[1].children.length - 1; j >= 0; j-- ) {
+				             	itemCollapsible = $( listItems[ i ].children[1].children[j] );
+				            	itemtextCollapsible = itemCollapsible.text();
+
+				        	    if ( itemCollapsible.is( "li:jqmData(role=list-divider)" ) ) {
+						            itemCollapsible.toggleClass( "ui-filter-hidequeue" , !childItems );
+									
+						            // New bucket!
+					         	    childItems = false;                     
+				            	} else if ( listview.options.filterCallback( itemtextCollapsible, val, itemCollapsible ) ) {
+							
+                                    //mark to be hidden
+					                itemCollapsible.toggleClass( "ui-filter-hidequeue" , true );
+					            } 
+				         	} 
+					   
 					} else {
 
 						// There's a shown item in the bucket
@@ -108,11 +132,36 @@ $( document ).delegate( ":jqmData(role='listview')", "listviewcreate", function(
 					.filter( ".ui-filter-hidequeue" )
 					.toggleClass( "ui-screen-hidden", true )
 					.toggleClass( "ui-filter-hidequeue", false );
+				
+				  for ( var i = listItems.length - 1; i >= 0; i-- ) {
+				    if(listItems[i].className.indexOf("ui-collapsible") === 0) {
+					listItemsCollapsible = $(listItems[i].children[1].children);
+					
+					// Show Collapsible items, not marked to be hidden
+					listItemsCollapsible
+					        .filter( ":not(.ui-filter-hidequeue)" )
+					        .toggleClass( "ui-screen-hidden", false );
+							
+					// Hide Collapsible items, marked to be hidden		
+					listItemsCollapsible
+					    .filter( ".ui-filter-hidequeue" )
+					    .toggleClass( "ui-screen-hidden", true )
+					    .toggleClass( "ui-filter-hidequeue", false );
+					
+					}
+				}
 
 			} else {
 
 				//filtervalue is empty => show all
 				listItems.toggleClass( "ui-screen-hidden", !!listview.options.filterReveal );
+				
+				for ( var i = listItems.length - 1; i >= 0; i-- ) {
+				    if(listItems[i].className.indexOf("ui-collapsible") === 0) {
+					listItemsCollapsible = $(listItems[i].children[1].children);
+					listItemsCollapsible.toggleClass( "ui-screen-hidden", !!listview.options.filterReveal ); 
+					}
+				}
 			}
 			listview._refreshCorners();
 		})
