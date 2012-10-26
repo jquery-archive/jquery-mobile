@@ -1314,7 +1314,7 @@
 				$.mobile.changePage( " external.html" );
 			},
 			function(){
-				ok( $.mobile.activePage.attr( "id" ) === "external-test", "the correct page is loaded" );
+				equal( $.mobile.activePage.attr( "id" ), "external-test", "the correct page is loaded" );
 				start();
 			}
 
