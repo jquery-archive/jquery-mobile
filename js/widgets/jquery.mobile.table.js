@@ -25,26 +25,34 @@ $.widget( "mobile.table", $.mobile.widget, {
 
       this.element.addClass( this.options.classes.table );
 
-      this._headtrs = this.element.find( "thead tr:eq(0)" );
-      this._headers = this._headtrs.find( "th" );
+      this._headtrs = this.element.find( "thead tr" );
+      this._headers = this._headtrs.children();
 
-      var coltally = 0;
+      self._headtrs.each(function(){
 
-      self._headers.each(function( i ){
-        coltally++;
-        var span = parseInt( $( this ).attr( "colspan" ), 10 ),
-          sel = ":nth-child(" + (coltally + 1) + ")";
+        var coltally = 0,
+          thisTR = $( this );
 
-        if( span ){
-          for( var j = 0; j < span; j++ ){
-            coltally++;
-            sel += ", :nth-child(" + (coltally + 1) + ")";
+        $( this ).children().each(function( i ){
+
+          
+
+          var span = parseInt( $( this ).attr( "colspan" ), 10 ),
+            sel = ":nth-child(" + (coltally + 1) + ")";
+
+          if( span ){
+            for( var j = 0; j < span-1; j++ ){
+              coltally++;
+              sel += ", :nth-child(" + (coltally + 1) + ")";
+            }
           }
-        }
 
-        $( this )
-          .jqmData( "cells", self.element.find( "tbody tr" ).children( sel ) );
+          $( this ).jqmData( "cells", self.element.find( "tr" ).not( thisTR ).not( ":contains(td[colspan],th[colspan])" ).children( sel ) );
+
+          coltally++;
+        });
       });
+
    }
     
 });

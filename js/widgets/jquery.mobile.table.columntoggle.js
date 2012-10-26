@@ -43,7 +43,7 @@ $( document ).delegate( ":jqmData(role='table')", "tablecreate", function() {
       $menu = $("<fieldset data-role='controlgroup'></fieldset>").appendTo( $popup );
 
    // create the hide/show toggles
-   self._headers.each(function(i){
+   self._headers.not( "td" ).each(function(){
 
       var priority = $( this ).jqmData( "priority" ),
          $cells = $( this ).add( $( this ).jqmData( "cells" ) );
