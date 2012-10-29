@@ -44,13 +44,13 @@
 			<li>The default table mode is <code>reflow</code>, add <code>data-mode="columntoggle"</code> change modes</li>
 			<li>The first row of the table must contain the table headers, use <code>th</code> instead of <code>td</code> tags</li>
 			<li>To display longer table header text in the column chooser or reflow labels, wrap the text in the <code>th</code> with a <code>abbr</code> element and set the <code>title</code>. This string will be used in place.</li>
-			<li>Do not use <code>rowspan</code> or <code>colspan</code> in your tables, these aren't supported excect for grouped headers (see below)</li>
+			<li>Do not use <code>rowspan</code> or <code>colspan</code> in your tables, these aren't supported except for grouped headers (see below)</li>
 			<li>Adding <code>thead</code> and <code>tbody</code> elements are optional but provide improved semantics</li>
 			
 		</ul>
 
 		<h3>Markup example</h3>
-		<p>Here is a a pretty basic table that covers the points above.</p>
+		<p>Here is a pretty basic table that covers the points above.</p>
 <pre></code>
 &lt;table <strong>data-role=&quot;table&quot; id=&quot;my-table&quot; data-mode=&quot;columntoggle&quot;</strong>&gt;
   &lt;thead&gt;
@@ -171,7 +171,7 @@
             </table>
 
 			<h3>Setting column priority</h3>
-			<p>The table works hides and shows columns based on two inputs: available screen width or by the user checking and unchecking which columns to display in a column picker popup. Add <code>data-priority</code> attributes to assign priority (1 = highest, 6 = lowest) to each of the <em>optional</em> columns that you want to hide and show. Any table header assigned an priority will be both auto hidden given width based on media queries and available as a column that can be shown or hidden via the column picker menu. </p>
+			<p>The table works hides and shows columns based on two inputs: available screen width or by the user checking and unchecking which columns to display in a column picker popup. Add <code>data-priority</code> attributes to assign priority (1 = highest, 6 = lowest) to each of the <em>optional</em> columns that you want to hide and show. Any table header assigned a priority will be both auto hidden given width based on media queries and available as a column that can be shown or hidden via the column picker menu. </p>
 			<p>To make a column <em>persistent</em> so it's not available for hiding, omit the <code>data-priority</code> attribute.</p>
 
 <pre></code>
