@@ -202,69 +202,6 @@
 
 
 
-			
-
-			<h2>Questions</h2>
-				<ul>
-					<li>Should the TH group be in the markup or just a <code>data-grouping="Q1 2012"</code> on the TH? Thinking markup for non-JS</li>
-					<li>Should priority go on the TH group or just the actual TH's or both? Thinking just the TH</li>
-					<li>How to parse the headings so we can list and group logically (see popup below)</li>
-					<li>Can we make it so the TH group can be used to check/uncheck the headers under it in the popup?</li>
-					<li>Ideas on how to subtly set off headers from child checkboxes?</li>
-				</ul>
-			
-			<h2>Suggested ordering for popup</h2>
-<div class="ui-table-columntoggle-popup ui-popup ui-overlay-shadow ui-corner-all ui-body-c" id="movie-table-popup" aria-disabled="false" data-disabled="false" data-shadow="true" data-corners="true" data-transition="none" data-position-to="origin" data-dismissable="true" style="width:240px">
-	<fieldset data-role="controlgroup" class="ui-corner-all ui-controlgroup ui-controlgroup-vertical"><div class="ui-controlgroup-controls">
-		
-		<div class="ui-checkbox"><label data-corners="true" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-icon="checkbox-off" data-theme="c" class="ui-btn ui-btn-icon-left ui-checkbox-on ui-btn-up-c"><span class="ui-btn-inner"><span class="ui-btn-text">Store</span><span class="ui-icon ui-icon-shadow ui-icon-checkbox-on">&nbsp;</span></span></label><input type="checkbox" checked=""></div>
-		<div class="ui-checkbox"><label data-corners="true" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-icon="checkbox-off" data-theme="c" class="ui-btn ui-btn-up-c ui-btn-icon-left ui-checkbox-on"><span class="ui-btn-inner"><span class="ui-btn-text">State</span><span class="ui-icon ui-icon-shadow ui-icon-checkbox-on">&nbsp;</span></span></label><input type="checkbox" checked=""></div>
-		
-		<div class="ui-checkbox"><label data-corners="true" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-icon="checkbox-off" data-theme="c" class="ui-btn ui-btn-icon-left ui-checkbox-on ui-corner-top ui-btn-down-c"><span class="ui-btn-inner ui-corner-top"><span class="ui-btn-text">Q1 2012</span><span class="ui-icon ui-icon-shadow ui-icon-checkbox-on">&nbsp;</span></span></label><input type="checkbox" checked=""></div>
-			
-			<div class="ui-checkbox"><label data-corners="true" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-icon="checkbox-off" data-theme="c" class="ui-btn ui-btn-up-c ui-btn-icon-left ui-checkbox-on"><span class="ui-btn-inner"><span class="ui-btn-text" style="font-weight:normal">Income</span><span class="ui-icon ui-icon-shadow ui-icon-checkbox-on">&nbsp;</span></span></label><input type="checkbox" checked=""></div>
-			<div class="ui-checkbox"><label data-corners="true" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-icon="checkbox-off" data-theme="c" class="ui-btn ui-btn-up-c ui-btn-icon-left ui-checkbox-on"><span class="ui-btn-inner"><span class="ui-btn-text" style="font-weight:normal">Profit</span><span class="ui-icon ui-icon-shadow ui-icon-checkbox-on">&nbsp;</span></span></label><input type="checkbox" checked=""></div>
-			<div class="ui-checkbox"><label data-corners="true" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-icon="checkbox-off" data-theme="c" class="ui-btn ui-btn-up-c ui-btn-icon-left ui-checkbox-on"><span class="ui-btn-inner"><span class="ui-btn-text"style="font-weight:normal">Change</span><span class="ui-icon ui-icon-shadow ui-icon-checkbox-on">&nbsp;</span></span></label><input type="checkbox" checked=""></div>
-		
-		
-		<div class="ui-checkbox"><label data-corners="true" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-icon="checkbox-off" data-theme="c" class="ui-btn ui-btn-icon-left ui-checkbox-on ui-btn-down-c"><span class="ui-btn-inner"><span class="ui-btn-text">Q2 2012</span><span class="ui-icon ui-icon-shadow ui-icon-checkbox-on">&nbsp;</span></span></label><input type="checkbox" checked=""></div>
-		
-		<div class="ui-checkbox"><label data-corners="true" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-icon="checkbox-off" data-theme="c" class="ui-btn ui-btn-up-c ui-btn-icon-left ui-checkbox-on"><span class="ui-btn-inner"><span class="ui-btn-text" style="font-weight:normal" >Income</span><span class="ui-icon ui-icon-shadow ui-icon-checkbox-on">&nbsp;</span></span></label><input type="checkbox" checked=""></div>
-		<div class="ui-checkbox"><label data-corners="true" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-icon="checkbox-off" data-theme="c" class="ui-btn ui-btn-up-c ui-btn-icon-left ui-checkbox-on"><span class="ui-btn-inner"><span class="ui-btn-text" style="font-weight:normal">Profit</span><span class="ui-icon ui-icon-shadow ui-icon-checkbox-on">&nbsp;</span></span></label><input type="checkbox" checked=""></div>
-		<div class="ui-checkbox"><label data-corners="true" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-icon="checkbox-off" data-theme="c" class="ui-btn ui-btn-up-c ui-btn-icon-left ui-checkbox-on"><span class="ui-btn-inner"><span class="ui-btn-text" style="font-weight:normal">Change</span><span class="ui-icon ui-icon-shadow ui-icon-checkbox-on">&nbsp;</span></span></label><input type="checkbox" checked=""></div>
-		
-		
-		<div class="ui-checkbox"><label data-corners="true" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-icon="checkbox-off" data-theme="c" class="ui-btn ui-btn-icon-left ui-checkbox-on ui-btn-down-c"><span class="ui-btn-inner"><span class="ui-btn-text">Q3 2012</span><span class="ui-icon ui-icon-shadow ui-icon-checkbox-on">&nbsp;</span></span></label><input type="checkbox" checked=""></div>
-		
-		<div class="ui-checkbox"><label data-corners="true" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-icon="checkbox-off" data-theme="c" class="ui-btn ui-btn-up-c ui-btn-icon-left ui-checkbox-on"><span class="ui-btn-inner"><span class="ui-btn-text" style="font-weight:normal">Income</span><span class="ui-icon ui-icon-shadow ui-icon-checkbox-on">&nbsp;</span></span></label><input type="checkbox" checked=""></div>
-		<div class="ui-checkbox"><label data-corners="true" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-icon="checkbox-off" data-theme="c" class="ui-btn ui-btn-up-c ui-btn-icon-left ui-checkbox-on"><span class="ui-btn-inner"><span class="ui-btn-text" style="font-weight:normal">Profit</span><span class="ui-icon ui-icon-shadow ui-icon-checkbox-on">&nbsp;</span></span></label><input type="checkbox" checked=""></div>
-		<div class="ui-checkbox"><label data-corners="true" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-icon="checkbox-off" data-theme="c" class="ui-btn ui-btn-up-c ui-btn-icon-left ui-checkbox-on"><span class="ui-btn-inner"><span class="ui-btn-text" style="font-weight:normal">Change</span><span class="ui-icon ui-icon-shadow ui-icon-checkbox-on">&nbsp;</span></span></label><input type="checkbox" checked=""></div>
-		
-		<div class="ui-checkbox"><label data-corners="true" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-icon="checkbox-off" data-theme="c" class="ui-btn ui-btn-icon-left ui-checkbox-on ui-btn-down-c"><span class="ui-btn-inner"><span class="ui-btn-text">Q4 2012</span><span class="ui-icon ui-icon-shadow ui-icon-checkbox-on">&nbsp;</span></span></label><input type="checkbox" checked=""></div>
-		
-		<div class="ui-checkbox"><label data-corners="true" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-icon="checkbox-off" data-theme="c" class="ui-btn ui-btn-up-c ui-btn-icon-left ui-checkbox-on"><span class="ui-btn-inner"><span class="ui-btn-text" style="font-weight:normal">Income</span><span class="ui-icon ui-icon-shadow ui-icon-checkbox-on">&nbsp;</span></span></label><input type="checkbox" checked=""></div>
-		<div class="ui-checkbox"><label data-corners="true" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-icon="checkbox-off" data-theme="c" class="ui-btn ui-btn-up-c ui-btn-icon-left ui-checkbox-on"><span class="ui-btn-inner"><span class="ui-btn-text" style="font-weight:normal">Profit</span><span class="ui-icon ui-icon-shadow ui-icon-checkbox-on">&nbsp;</span></span></label><input type="checkbox" checked=""></div>
-		<div class="ui-checkbox"><label data-corners="true" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-icon="checkbox-off" data-theme="c" class="ui-btn ui-btn-up-c ui-btn-icon-left ui-checkbox-on"><span class="ui-btn-inner"><span class="ui-btn-text" style="font-weight:normal">Change</span><span class="ui-icon ui-icon-shadow ui-icon-checkbox-on">&nbsp;</span></span></label><input type="checkbox" checked=""></div>
-		
-		
-		
-		<div class="ui-checkbox"><label data-corners="true" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-icon="checkbox-off" data-theme="c" class="ui-btn ui-btn-icon-left ui-checkbox-on ui-btn-down-c"><span class="ui-btn-inner"><span class="ui-btn-text">YTD Totals</span><span class="ui-icon ui-icon-shadow ui-icon-checkbox-on">&nbsp;</span></span></label><input type="checkbox" checked=""></div>
-		
-	
-		
-		
-		
-		
-		
-		
-		<div class="ui-checkbox"><label data-corners="true" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-icon="checkbox-off" data-theme="c" class="ui-btn ui-btn-up-c ui-btn-icon-left ui-checkbox-on"><span class="ui-btn-inner"><span class="ui-btn-text" style="font-weight:normal">Income</span><span class="ui-icon ui-icon-shadow ui-icon-checkbox-on">&nbsp;</span></span></label><input type="checkbox" checked=""></div>
-		<div class="ui-checkbox"><label data-corners="true" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-icon="checkbox-off" data-theme="c" class="ui-btn ui-btn-up-c ui-btn-icon-left ui-checkbox-on"><span class="ui-btn-inner"><span class="ui-btn-text" style="font-weight:normal">Profit</span><span class="ui-icon ui-icon-shadow ui-icon-checkbox-on">&nbsp;</span></span></label><input type="checkbox" checked=""></div>
-		<div class="ui-checkbox"><label data-corners="true" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-icon="checkbox-off" data-theme="c" class="ui-btn ui-btn-up-c ui-btn-icon-left ui-checkbox-on ui-corner-bottom ui-controlgroup-last"><span class="ui-btn-inner ui-corner-bottom ui-controlgroup-last"><span class="ui-btn-text" style="font-weight:normal">Change</span><span class="ui-icon ui-icon-shadow ui-icon-checkbox-on">&nbsp;</span></span></label><input type="checkbox" checked=""></div>
-		</div></fieldset></div>
-
-
-
-
 
 
 
