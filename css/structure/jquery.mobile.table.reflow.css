@@ -29,6 +29,15 @@
 		display: inline-block; 
 		margin: -.4em 1em -.4em -.4em;
 	}
+	.ui-table-reflow th .ui-table-cell-label-top,
+	.ui-table-reflow td .ui-table-cell-label-top {
+		display: block;
+		padding: .4em 0;
+		margin: .4em 0;
+		text-transform: uppercase;
+		font-size: .9em;
+		font-weight: normal;
+	}
 }
 
 

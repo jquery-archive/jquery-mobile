@@ -31,16 +31,21 @@ $( document ).delegate( ":jqmData(role='table')", "tablecreate", function() {
 
    self.element.addClass( o.classes.reflowTable );
 
-   var id = ( $table.attr( "id" ) || self.options.classes.popup ),
-      reverseHeaders =  $( self.allHeaders.get().reverse() );//TODO BETTER FALLBACK ID HERE
+   var id = ( $table.attr( "id" ) || self.options.classes.popup ),//TODO BETTER FALLBACK ID HERE
+      reverseHeaders =  $( self.allHeaders.get().reverse() );
          
    // create the hide/show toggles
-
    reverseHeaders.each(function(i){
       var $cells = $( this ).jqmData( "cells" ),
-         hierarchyClass = $cells.filter( "thead th" ).length ? " ui-table-cell-label-top" : "";
+         hierarchyClass = $cells.not( this ).filter( "thead th" ).length ? " ui-table-cell-label-top" : "",
+         text = $(this).text();
 
-      $cells.filter("tbody td, tbody th" ).prepend( "<b class='" + o.classes.cellLabels + hierarchyClass + "'>" + $(this).text() + "</b>"  );
+      if( text !== ""  ){
+         $cells
+            .filter("tbody td, tbody th" )
+            .prepend( "<b class='" + o.classes.cellLabels + hierarchyClass + "'>" + text + "</b>"  );
+
+      }
    });
 
 });
