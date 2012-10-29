@@ -56,7 +56,11 @@
 =======
 		<p>Here is a a pretty basic table that covers the points above.</p>
 <pre><code>
+<<<<<<< HEAD
 >>>>>>> Added a lot more info on how to work with the column chooser mode
+=======
+
+>>>>>>> Resolving merge conflicts
 &lt;table <strong>data-role=&quot;table&quot; id=&quot;my-table&quot; data-mode=&quot;columntoggle&quot;</strong>&gt;
   &lt;thead&gt;
     &lt;tr&gt;
@@ -189,7 +193,12 @@
 =======
 			<p>The table works hides and shows columns based on two inputs: available screen width by applying media queries or by the user checking and unchecking which columns to display in a column picker popup. Add <code>data-priority</code> attributes to assign priority (1 = highest, 6 = lowest) to each of the <em>optional</em> columns that you want to hide and show. Any table header assigned a available as a column that can be shown or hidden via the column picker menu. </p>
 			<p>To make a column <em>persistent</em> so it's not available for hiding, omit the <code>data-priority</code> attribute. THis will make the column visible at all widths and will prevent the framework from adding this column name to the chooser menu.</p>
+<<<<<<< HEAD
 >>>>>>> Added a lot more info on how to work with the column chooser mode
+=======
+			<p>The table works hides and shows columns based on two inputs: available screen width or by the user checking and unchecking which columns to display in a column picker popup. Add <code>data-priority</code> attributes to assign priority (1 = highest, 6 = lowest) to each of the <em>optional</em> columns that you want to hide and show. Any table header assigned a priority will be both auto hidden given width based on media queries and available as a column that can be shown or hidden via the column picker menu. </p>
+			<p>To make a column <em>persistent</em> so it's not available for hiding, omit the <code>data-priority</code> attribute.</p>
+>>>>>>> Resolving merge conflicts
 
 <pre><code>&lt;th&gt;I&#x27;m am critical and can&#x27;t be removed&lt;/th&gt;
 &lt;th <strong>data-priority=&quot;1&quot;</strong>&gt;I&#x27;m important&lt;/th&gt;
