@@ -13,7 +13,8 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 	options: {
 		closeBtnText: "Close",
 		overlayTheme: "a",
-		initSelector: ":jqmData(role='dialog')"
+		initSelector: ":jqmData(role='dialog')",
+		closeUrl: undefined
 	},
 	_create: function() {
 		var self = this,
@@ -81,21 +82,27 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		});
 	},
 
-	// Close method goes back in history
+	// Close method goes back in history unless closeUrl option is set
 	close: function() {
 		var dst;
 
 		if ( this._isCloseable ) {
 			this._isCloseable = false;
-			if ( $.mobile.hashListeningEnabled ) {
-				$.mobile.back();
-			} else {
-				dst = $.mobile.urlHistory.getPrev().url;
-				if ( !$.mobile.path.isPath( dst ) ) {
-					dst = $.mobile.path.makeUrlAbsolute( "#" + dst );
+			
+			if (this.options.closeUrl !== undefined) {
+				$.mobile.changePage( this.options.closeUrl );
+			} else { 
+			
+				if ( $.mobile.hashListeningEnabled ) {
+					$.mobile.back();
+				} else {
+					dst = $.mobile.urlHistory.getPrev().url;
+					if ( !$.mobile.path.isPath( dst ) ) {
+						dst = $.mobile.path.makeUrlAbsolute( "#" + dst );
+					}
+	
+					$.mobile.changePage( dst, { changeHash: false, fromHashChange: true } );
 				}
-
-				$.mobile.changePage( dst, { changeHash: false, fromHashChange: true } );
 			}
 		}
 	}
