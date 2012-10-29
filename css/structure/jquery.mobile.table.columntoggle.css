@@ -27,11 +27,8 @@
   }
 }
 
-<<<<<<< HEAD
 
-=======
 /* Show priority 1 at 320px (20em x 16px) */ 
->>>>>>> Added comments to each breakpoint to make the em to px calculation clear
 @media screen and (min-width: 20em) {
    th.ui-table-priority-1,
    td.ui-table-priority-1 {
