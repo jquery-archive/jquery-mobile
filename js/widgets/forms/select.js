@@ -75,6 +75,14 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		}
 	},
 
+	_destroy: function() {
+		var wrapper = this.element.parents( ".ui-select" );
+		if ( wrapper.length > 0 ) {
+			this.element.insertAfter( wrapper );
+			wrapper.remove();
+		}
+	},
+
 	_create: function() {
 		this._preExtension();
 

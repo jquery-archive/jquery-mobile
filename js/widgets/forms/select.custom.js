@@ -25,6 +25,7 @@ define( [
 	var extendSelect = function( widget ) {
 
 		var select = widget.select,
+			origDestroy = widget._destroy,
 			selectID  = widget.selectID,
 			label = widget.label,
 			thisPage = widget.select.closest( ".ui-page" ),
@@ -94,6 +95,17 @@ define( [
 				// Create list from select, update state
 				self.refresh();
 
+				if ( self._origTabIndex === undefined ) {
+					self._origTabIndex = self.select.attr( "tabindex" );
+					// Map undefined to false, because self._origTabIndex === undefined
+					// indicates that we have not yet checked whether the select has
+					// originally had a tabindex attribute, whereas false indicates that
+					// we have checked the select for such an attribute, and have found
+					// none present.
+					if ( self._origTabIndex === undefined ) {
+						self._origTabIndex = false;
+					}
+				}
 				self.select.attr( "tabindex", "-1" ).focus(function() {
 					$( this ).blur();
 					self.button.focus();
@@ -458,7 +470,12 @@ define( [
 						needPlaceholder = false;
 						isPlaceholderItem = true;
 
-						// If we have identified a placeholder, mark it retroactively in the select as well
+						// If we have identified a placeholder, record the fact that it was
+						// us who have added the placeholder to the option and mark it
+						// retroactively in the select as well
+						if ( !option.hasAttribute( dataPlaceholderAttr ) ) {
+							this._removePlaceholderAttr = true;
+						}
 						option.setAttribute( dataPlaceholderAttr, true );
 						if ( o.hidePlaceholderMenuItems ) {
 							classes.push( "ui-selectmenu-placeholder" );
@@ -509,6 +526,30 @@ define( [
 					// TODO value is undefined at creation
 					"aria-owns": this.menuId
 				});
+			},
+
+			_destroy: function() {
+				this.close();
+
+				// Restore the tabindex attribute to its original value
+				if ( this._origTabIndex !== undefined ) {
+					if ( this._origTabIndex !== false ) {
+						this.select.attr( "tabindex", this._origTabIndex );
+					} else {
+						this.select.removeAttr( "tabindex" );
+					}
+				}
+
+				// Remove the placeholder attribute if we were the ones to add it
+				if ( this._removePlaceholderAttr ) {
+					this._selectOptions().removeAttr( "data-" + $.mobile.ns + "placeholder" );
+				}
+
+				// Remove the popup
+				this.listbox.remove();
+
+				// Chain up
+				origDestroy.apply( this, arguments );
 			}
 		});
 	};
