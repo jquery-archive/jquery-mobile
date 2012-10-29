@@ -26,27 +26,66 @@
       <div class="content-primary">
         <h2>Responsive table</h2>
 
-        <p>The responsive table widget has two modes: <code>columntoggle</code> and <code>reflow</code>.</p>
+        <p>One of the biggest challenges in responsive designs is tabular data. Large tables with lots of columns don't fit on smaller screens and there isn't a simple way to re-format the content with CSS and media queries for an acceptable presentation.</p>
+		<p>To address this, the framework has created two different options for presenting tables responsively. Each has benefits and tradeoffs, the right choice will depend on the data being presented.</p>
+		
+		<ol>
+			<li><strong>reflow mode</strong> re-formats the table columns at narrow widths so each row of data is presented as a formatted block of label/data pairs. This is ideal for tables with product or contact information with more complex or lengthy data formatting that doesn't need comparison across rows of data.</li>
+			<li><strong>column toggle</strong> mode selectively hides columns at narrower widths as a sensible default but also offers a menu to let users manually control which columns they want to see. This mode is better for financial data tables that have compact values and needs to maintain comparisons across columns and rows of data. It can also be used for building things like product comparison tables.</li>
+		</ol>
+		
+			
+		<h3>Markup guidelines</h3>
+	    <p>Both table modes start with standard HTML table markup but there are some specific guidelines you must follow for the responsive table to work correctly:  </p>
+	
+		<ul>
+			<li>Assign a unique <code>ID</code> to the table</li>
+			<li>Add the <code>data-role="table"</code> to apply the responsive table plugin</li>
+			<li>The default table mode is <code>reflow</code>, add <code>data-mode="columntoggle"</code> change modes</li>
+			<li>The first row of the table must contain the table headers, use <code>th</code> instead of <code>td</code> tags</li>
+			<li>To display longer table header text in the column chooser or reflow labels, wrap the text in the <code>th</code> with a <code>abbr</code> element and set the <code>title</code>. This string will be used in place.</li>
+			<li>Do not use <code>rowspan</code> or <code>colspan</code> in your tables, these aren't supported except for grouped headers (see below)</li>
+			<li>Adding <code>thead</code> and <code>tbody</code> elements are optional but provide improved semantics</li>
+			
+		</ul>
+
+		<h3>Markup example</h3>
+		<p>Here is a pretty basic table that covers the points above.</p>
+<pre></code>
+&lt;table <strong>data-role=&quot;table&quot; id=&quot;my-table&quot; data-mode=&quot;columntoggle&quot;</strong>&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Rank&lt;/th&gt;
+      &lt;th&gt;Movie Title&lt;/th&gt;
+      &lt;th&gt;Year&lt;/th&gt;
+      &lt;th&gt;<strong>&lt;abbr title=&quot;Rotten Tomato Rating&quot;&gt;Rating&lt;/abbr&gt;</strong>&lt;/th&gt;
+      &lt;th&gt;Reviews&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1&lt;/th&gt;
+      &lt;td&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/Citizen_Kane&quot; data-rel=&quot;external&quot;&gt;Citizen Kane&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;1941&lt;/td&gt;
+      &lt;td&gt;100%&lt;/td&gt;
+      &lt;td&gt;74&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+</code></pre>
+
+	<h3>Styling and theming</h3>
+	<p>The responsive table plugin is as minimally styled as possible to give you a clean slate for your designs. The plugin focuses primarily on the difficult scripting elements: generating the labels for the reflow table and creating the button and column chooser popup. Out of the box, the table just has a few basic style rules to add a bit of padding and set the vertical alignment of cells to be top left for visual consistency. The table will adapt to whatever content block it sits in but there isn't an explicit theming attribute for this widget. It's simple enough to add theme classes like <code>ui-content-a</code> to individual cells if desired.</p>
+	
+		
+        <h2>Columntoggle Mode</h2>
 
 
-        <h3>Columntoggle Mode</h3>
-
-
-          <p>The responsive table works by hiding or showing columns based on two inputs: available screen width or by the user checking and unchecking which columns to display in a column picker popup. We use classes to assign priority (1 = highest, 6 = lowest) to each of the columns so the framework can apply default logic for which to show at a given width. </p>
-    
-
-    <p>A user may choose to check as many columns as they want by tapping the "Columns..." button to open the column 
-      chooser popup. The popup contains a dynamically generated list of columns based on the table markup that can be checked and unchecked to adjust the visible columns. To keep the interaction simple, the popup will close when a checkbox is tapped.
+         <p>This table mode auto-hides less important columns at narrower widths and surfaces a button to open a menu that allows the user to choose what columns they want to see. In this mode, the author attempts to define which columns are most important to show across various widths by assigning a priority to each column.</p>
       
-     <p>The column preferences take precedence over the default class priority. Because of the flexibility, it's possible for users to introduce horizontal scrolling if the data in each column is long or if many columns are selected to be shown on a smaller screen. </p>
-      
-      
-    
-
-
-
+      	<p>A user may choose to check as many columns as they want by tapping the "Columns..." button to open the column 
+	      chooser popup. The popup contains a dynamically generated list of columns based on the table markup that can be checked and unchecked to adjust the visible columns. To keep the interaction simple, the popup will close when a checkbox is tapped.</p>
+		
          <table data-role="table" id="movie-table" data-mode="columntoggle">
-            <caption>Top movies of all time according to film buffs. In case you're curious, this is a caption for the table.</caption> 
 
               <thead>
                 <tr>
@@ -131,8 +170,20 @@
               </tbody>
             </table>
 
+			<h3>Setting column priority</h3>
+			<p>The table works hides and shows columns based on two inputs: available screen width or by the user checking and unchecking which columns to display in a column picker popup. Add <code>data-priority</code> attributes to assign priority (1 = highest, 6 = lowest) to each of the <em>optional</em> columns that you want to hide and show. Any table header assigned a priority will be both auto hidden given width based on media queries and available as a column that can be shown or hidden via the column picker menu. </p>
+			<p>To make a column <em>persistent</em> so it's not available for hiding, omit the <code>data-priority</code> attribute.</p>
 
+<pre></code>
+&lt;th&gt;I&#x27;m am critical and can&#x27;t be removed&lt;/th&gt;
+&lt;th <strong>data-priority=&quot;1&quot;</strong>&gt;I&#x27;m important&lt;/th&gt;
+&lt;th <strong>data-priority=&quot;3&quot;</strong>&gt;I&#x27;m somewhat&lt;/th&gt;
+&lt;th <strong>data-priority=&quot;5&quot;</strong>&gt;I&#x27;m less important&lt;/th&gt;
+</code></pre>
 
+	    
+
+	     <p>The column preferences take precedence over the default class priority. Because of the flexibility, it's possible for users to introduce horizontal scrolling if the data in each column is long or if many columns are selected to be shown on a smaller screen. </p>
 
 
             <h3>Reflow mode</h3>
