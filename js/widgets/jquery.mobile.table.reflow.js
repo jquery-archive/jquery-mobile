@@ -42,7 +42,8 @@ $( document ).delegate( ":jqmData(role='table')", "tablecreate", function() {
 
       if( text !== ""  ){
          $cells
-            .filter("tbody td, tbody th" )
+            
+            .filter("tbody tr td:first" )
             .prepend( "<b class='" + o.classes.cellLabels + hierarchyClass + "'>" + text + "</b>"  );
 
       }
