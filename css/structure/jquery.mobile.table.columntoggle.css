@@ -34,7 +34,7 @@
    }
 }
 
-@media screen and (min-width: 25em) {
+@media screen and (min-width: 30em) {
    th.ui-table-priority-2,
    td.ui-table-priority-2 {
      display: table-cell;
@@ -47,7 +47,19 @@
      display: table-cell;
    }
 }
-@media screen and (min-width: 55em) {
+@media screen and (min-width: 50em) {
+  th.ui-table-priority-4,
+  td.ui-table-priority-4 {
+     display: table-cell;
+   }
+}
+@media screen and (min-width: 60em) {
+  th.ui-table-priority-4,
+  td.ui-table-priority-4 {
+     display: table-cell;
+   }
+}
+@media screen and (min-width: 70em) {
   th.ui-table-priority-4,
   td.ui-table-priority-4 {
      display: table-cell;
