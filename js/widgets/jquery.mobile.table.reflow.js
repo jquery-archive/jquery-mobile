@@ -31,10 +31,12 @@ $( document ).delegate( ":jqmData(role='table')", "tablecreate", function() {
 
    self.element.addClass( o.classes.reflowTable );
 
-   var id = ( $table.attr( "id" ) || self.options.classes.popup ); //TODO BETTER FALLBACK ID HERE
+   var id = ( $table.attr( "id" ) || self.options.classes.popup ),
+      reverseHeaders =  $( self.allHeaders.get().reverse() );//TODO BETTER FALLBACK ID HERE
          
    // create the hide/show toggles
-   self.allHeaders.each(function(i){
+
+   reverseHeaders.each(function(i){
       var $cells = $( this ).jqmData( "cells" ),
          hierarchyClass = $cells.filter( "thead th" ).length ? " ui-table-cell-label-top" : "";
 
