@@ -37,7 +37,8 @@ $( document ).delegate( ":jqmData(role='table')", "tablecreate", function() {
    self.allHeaders.each(function(i){
       var $cells = $( this ).jqmData( "cells" ),
          hierarchyClass = $cells.filter( "thead th" ).length ? " ui-table-cell-label-top" : "";
-      $cells.prepend( "<b class='" + o.classes.cellLabels + hierarchyClass + "'>" + $(this).text() + "</b>"  );
+
+      $cells.filter("tbody td, tbody th" ).prepend( "<b class='" + o.classes.cellLabels + hierarchyClass + "'>" + $(this).text() + "</b>"  );
    });
 
 });
