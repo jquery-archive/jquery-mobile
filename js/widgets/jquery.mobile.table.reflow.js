@@ -34,9 +34,10 @@ $( document ).delegate( ":jqmData(role='table')", "tablecreate", function() {
    var id = ( $table.attr( "id" ) || self.options.classes.popup ); //TODO BETTER FALLBACK ID HERE
          
    // create the hide/show toggles
-   self._headers.each(function(i){
-
-      $( this ).jqmData( "cells" ).prepend( "<b class='" + o.classes.cellLabels + "'>" + $(this).text() + "</b>"  );
+   self.allHeaders.each(function(i){
+      var $cells = $( this ).jqmData( "cells" ),
+         hierarchyClass = $cells.filter( "thead th" ).length ? " ui-table-cell-label-top" : "";
+      $cells.prepend( "<b class='" + o.classes.cellLabels + hierarchyClass + "'>" + $(this).text() + "</b>"  );
    });
 
 });

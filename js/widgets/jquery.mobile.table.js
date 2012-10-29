@@ -22,16 +22,19 @@ $.widget( "mobile.table", $.mobile.widget, {
     _create: function() {
 
       var self = this,
-        coltally = 0,
-        firstTR = this.element.find( "tr:eq(0)" );
+        trs = this.element.find( "thead tr" );
 
       this.element.addClass( this.options.classes.table );
 
-      this._headers = firstTR.children();
 
+      self.headers = trs.eq(0).children();
+      self.allHeaders = trs.children();
 
+      trs.each(function(){
 
-      self._headers.each(function( i ){
+        var coltally = 0;
+
+        $( this ).children().each(function( i ){
 
           var span = parseInt( $( this ).attr( "colspan" ), 10 ),
             sel = ":nth-child(" + (coltally + 1) + ")";
@@ -43,9 +46,12 @@ $.widget( "mobile.table", $.mobile.widget, {
             }
           }
 
-          $( this ).jqmData( "cells", self.element.find( "tr" ).not( firstTR ).children( sel ) );
+          $( this ).jqmData( "cells", self.element.find( "tr" ).not( trs.eq(0) ).not( this ).children( sel ) );
 
           coltally++;
+        });
+
+
       });
 
    }
