@@ -50,17 +50,8 @@
 		</ul>
 
 		<h3>Markup example</h3>
-<<<<<<< HEAD
-		<p>Here is a pretty basic table that covers the points above.</p>
-<pre></code>
-=======
 		<p>Here is a a pretty basic table that covers the points above.</p>
 <pre><code>
-<<<<<<< HEAD
->>>>>>> Added a lot more info on how to work with the column chooser mode
-=======
-
->>>>>>> Resolving merge conflicts
 &lt;table <strong>data-role=&quot;table&quot; id=&quot;my-table&quot; data-mode=&quot;columntoggle&quot;</strong>&gt;
   &lt;thead&gt;
     &lt;tr&gt;
@@ -187,18 +178,9 @@
             </table>
 
 			<h3>Setting column priority</h3>
-<<<<<<< HEAD
-			<p>The table works hides and shows columns based on two inputs: available screen width or by the user checking and unchecking which columns to display in a column picker popup. Add <code>data-priority</code> attributes to assign priority (1 = highest, 6 = lowest) to each of the <em>optional</em> columns that you want to hide and show. Any table header assigned a priority will be both auto hidden given width based on media queries and available as a column that can be shown or hidden via the column picker menu. </p>
-			<p>To make a column <em>persistent</em> so it's not available for hiding, omit the <code>data-priority</code> attribute.</p>
-=======
+
 			<p>The table works hides and shows columns based on two inputs: available screen width by applying media queries or by the user checking and unchecking which columns to display in a column picker popup. Add <code>data-priority</code> attributes to assign priority (1 = highest, 6 = lowest) to each of the <em>optional</em> columns that you want to hide and show. Any table header assigned a available as a column that can be shown or hidden via the column picker menu. </p>
 			<p>To make a column <em>persistent</em> so it's not available for hiding, omit the <code>data-priority</code> attribute. THis will make the column visible at all widths and will prevent the framework from adding this column name to the chooser menu.</p>
-<<<<<<< HEAD
->>>>>>> Added a lot more info on how to work with the column chooser mode
-=======
-			<p>The table works hides and shows columns based on two inputs: available screen width or by the user checking and unchecking which columns to display in a column picker popup. Add <code>data-priority</code> attributes to assign priority (1 = highest, 6 = lowest) to each of the <em>optional</em> columns that you want to hide and show. Any table header assigned a priority will be both auto hidden given width based on media queries and available as a column that can be shown or hidden via the column picker menu. </p>
-			<p>To make a column <em>persistent</em> so it's not available for hiding, omit the <code>data-priority</code> attribute.</p>
->>>>>>> Resolving merge conflicts
 
 <pre><code>&lt;th&gt;I&#x27;m am critical and can&#x27;t be removed&lt;/th&gt;
 &lt;th <strong>data-priority=&quot;1&quot;</strong>&gt;I&#x27;m important&lt;/th&gt;
@@ -263,7 +245,7 @@
 			<p>The theme for the column chooser popup can be set by adding the <code>data-column-popup-theme</code> attribute tot he table and specifying any swatch letter in your theme. For custom styles or scripting, all the column chooser popups can be targeted by using the <code>ui-table-columntoggle-popup</code> structural class added to these popups. To customize a single popup, use the generated <code>ID</code> based on the table <code>ID</code> that added to each specific popup (such as <code>#movie-table-popup</code>) to target a specific popup.</p>
 
 			<h3>Working with grouped column headers</h3>
-			<p>It's fairly common to need to logically group multiple columns together under a heading group for financial or scientific data. The framework can support the most simple version of this by allowing for two rows of table headers (<code>TH </code>), with the first row containing simple <code>colspan</code> attributes to group the columns below. In this configuration, the framework will parse the  the first row only for the priority and expose these heading groups as the options in the column chooser popup. This means that the second, heading how with individual columns will not be exposed as columns that can be hidden or shown independently of the groupings.</p>
+			<p>It's fairly common to need to logically group multiple columns together under a heading group for financial or scientific data. The framework can support the most simple version of this by allowing for two rows of table headers (<code>TH</code>), with the first row containing simple <code>colspan</code> attributes to group the columns below. In this configuration, the framework will parse the  the first row only for the priority and expose these heading groups as the options in the column chooser popup. This means that the second, heading how with individual columns will not be exposed as columns that can be hidden or shown independently of the groupings. See an example of <a href="column-financial.html">grouped column table</a>.</p>
 			
 
             <h2>Reflow mode</h2>
