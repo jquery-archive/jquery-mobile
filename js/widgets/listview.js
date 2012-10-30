@@ -255,7 +255,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 					}
 				} else if ( isDivider ) {
 
-					itemClass += " ui-li-divider ui-bar-" + dividertheme;
+					itemClass += " ui-li-divider ui-bar-" + (item.jqmData("theme") || dividertheme);
 					item.attr( "role", "heading" );
 
 					if ( ol ) {	
