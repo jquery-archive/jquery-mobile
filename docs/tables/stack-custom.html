@@ -24,9 +24,9 @@
       <a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
    </div><!-- /header -->
 
-   <div data-role="content">
-        <h2>Reflow customizations table</h2>
-
+   <div data-role="content" data-theme="c">
+        <h2>Top movies</h2>
+		<p>Custom styles for the reflow table at stacked widths</p>
 
 <script src="jquery.tablesorter.min.js"></script>
 <script>
@@ -57,6 +57,7 @@
 	padding-left:.8em;
 }
 
+/*	Custom stacked styles for mobile sizes */
 /*	Use a max-width media query so we don't have to undo these styles */
 @media ( max-width: 40em ) {
 	
@@ -74,6 +75,9 @@
 		padding:.5em .5em;
 		background-color:#fff;
 		color:#77bbff;
+		-moz-box-shadow: 0 1px 6px rgba(0,0,0,.1);
+	  	-webkit-box-shadow: 0 1px 6px rgba(0,0,0,.1);
+	  	box-shadow: 0 1px 6px rgba(0,0,0,.1);
 	}
 	/*	Hide labels for rank and title */
 	.ui-table-reflow tbody th .ui-table-cell-label,
@@ -91,16 +95,37 @@
 	.ui-table-reflow td { 
 		font-weight:bold;
 	}
+	/* Make the label elements a percentage width */ 
+	.ui-table-reflow td .ui-table-cell-label,
+	.ui-table-reflow th .ui-table-cell-label { 
+		min-width: 20%; 
+	}
+}
 
-
+/* Media query to show as a standard table at wider widths */ 
+@media ( min-width: 40em ) {
+	/* Show the table header rows */ 
+	.ui-table-reflow td,
+	.ui-table-reflow th,
+	.ui-table-reflow tbody th,
+	.ui-table-reflow tbody td,
+	.ui-table-reflow thead td,
+	.ui-table-reflow thead th {
+		display: table-cell;
+		margin: 0;
+	}
+	/* Hide the labels in each cell */ 
+	.ui-table-reflow td .ui-table-cell-label,
+	.ui-table-reflow th .ui-table-cell-label { 
+		display: none;
+	}
 }
 </style>
 
-            <h3>Top movies</h3>
+            
 
 
             <table data-role="table" id="movie-table-custom" data-mode="reflow" class="tablesorter">
-            <caption>Top movies of all time according to film buffs. In case you're curious, this is a caption for the table.</caption> 
 
               <thead>
                 <tr>

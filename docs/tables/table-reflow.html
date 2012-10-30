@@ -126,30 +126,31 @@
         </tr>
         <tr>
           <th>10</th>
-          <td><a href="http://en.wikipedia.org/wiki/The_Graduate" data-rel="external">The Graduate</a></td>
-          <td>1967</td>
+          <td class="title"><a href="http://en.wikipedia.org/wiki/Inception" data-rel="external">Inception</a></td>
+          <td>2010</td>
           <td>84%</td>
-          <td>56</td>
+          <td>78</td>
         </tr>
       </tbody>
     </table>
 
-	<h3>Using reflow mode</h3>
+		<h3>Using reflow mode</h3>
 	
-	<p>The reflow responsive table mode is the simplest in terms of markup requirements because it only requires a table with a <code>data-role=&quot;table&quot;</code> on the table element. There is no need to set the <code>data-mode</code> attribute since <code>reflow is the default.</code> For good measure, assign a unique <code>ID</code> to the table.</p>
+		<p>The reflow responsive table mode is the simplest in terms of markup requirements because it only requires a table with a <code>data-role=&quot;table&quot;</code> on the table element. There is no need to set the <code>data-mode</code> attribute since <code>reflow</code> is the default. For good measure, assign a unique <code>ID</code> to the table.</p>
 	
-	<pre><code>&lt;table <strong>data-role=&quot;table&quot; ID=&quot;my-table&quot;</strong>&gt;</code></pre>
+		<pre><code>&lt;table <strong>data-role=&quot;table&quot; ID=&quot;my-table&quot;</strong>&gt;</code></pre>
 	
 	
-	<p>The plugin works by parsing the values (or <code>abbr title</code>) of the first row of header (<code>TH</code>) elements found in the table. For example, this table header content is parsed to grab the contents ("Year"):</p>
+		<p>The plugin works by parsing the values (or <code>abbr title</code>) of the first row of header (<code>TH</code>) elements found in the table. For example, in the table above, the third table header is parsed to grab the contents ("Year"):</p>
 
-	<pre><code>&lt;th&gt;<strong>Year</strong>&lt;/th&gt;</code></pre>
+		<pre><code>&lt;th&gt;<strong>Year</strong>&lt;/th&gt;</code></pre>
 
-	<p>It then appends an element before the contents of every cell in that has the table header text which is styled to look like a label for the cell. For example, for every table cell in the year column:</p>
-	<pre><code><strong>&lt;td&gt;1941&lt;/td&gt;</strong></code></pre>
+		<p>The script then appends an element with the table header text <em>before</em> the contents of every cell. This is styled to look like a left aligned label for the cell when stacked at narrow widths. For example, for every table cell in the year column:</p>
+		
+		<pre><code><strong>&lt;td&gt;1941&lt;/td&gt;</strong></code></pre>
 	
-	<p>An element is prepended before the text with a <code>class</code> of <code>ui-table-cell-label</code>:</p>
-	<pre><code>&lt;td&gt;<strong>&lt;b class=&quot;ui-table-cell-label&quot;&gt;</strong>Year<strong>&lt;/b&gt;</strong>1941&lt;/td&gt;</code></pre>
+		<p>An element is added before the text with a <code>class</code> of <code>ui-table-cell-label</code>:</p>
+		<pre><code>&lt;td&gt;<strong>&lt;b class=&quot;ui-table-cell-label&quot;&gt;</strong>Year<strong>&lt;/b&gt;</strong>1941&lt;/td&gt;</code></pre>
 	
 		<h3>Setting media queries for the stack point</h3>
 		
