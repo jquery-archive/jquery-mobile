@@ -62,7 +62,7 @@ $.testHelper.setPushState();
 
 	// Test the inclusion of state for both pushstate and hashchange
 	// --nav--> #foo {state} --nav--> #bar --back--> #foo {state} --foward--> #bar {state}
-	asyncTest( "navigating backward should include the history state", function() {
+	asyncTest( "navigating backward and forward should include the history state", function() {
 		$.testHelper.eventTarget = $( window );
 
 		$.testHelper.eventSequence( "navigate", [
@@ -80,11 +80,13 @@ $.testHelper.setPushState();
 
 			function( timedOut, data ) {
 				equal( data.state.foo, "bar", "the data that was appended in the navigation is popped with the backward movement" );
+				equal( data.state.direction, "back", "the direction is recorded as backward" );
 				window.history.forward();
 			},
 
 			function( timedOut, data ) {
 				equal( data.state.baz, "bak", "the data that was appended in the navigation is popped with the foward movement" );
+				equal( data.state.direction, "forward", "the direction is recorded as forward" );
 				start();
 			}
 		]);
@@ -120,8 +122,51 @@ $.testHelper.setPushState();
 
 			function( timedOut, data ) {
 				equal( $.navigate.history.stack.length, 3, "the history stack hasn't been truncated" );
-				equal( $.navigate.history.activeIndex, 0 );
+				equal( $.navigate.history.activeIndex, 0, "the active history entry is the first" );
 				equal( data.state.direction, "back", "the direction should be back and not forward" );
+				start();
+			}
+		]);
+	});
+
+	asyncTest( "setting the hash with a url not in history should always create a new history entry", function() {
+		$.testHelper.eventTarget = $( window );
+
+		$.testHelper.eventSequence( "navigate", [
+			function() {
+				$.navigate( "#bar" );
+			},
+
+			function() {
+				location.hash = "#foo";
+			},
+
+			function() {
+				equal($.navigate.history.stack.length, 2, "there are two entries in the history stack" );
+				equal($.navigate.history.getActive().url, "#foo", "the url for the active history entry matches the hash" );
+				start();
+			}
+		]);
+	});
+
+	asyncTest( "setting the hash to the existing hash should not result in a new history entry", function() {
+		$.testHelper.eventTarget = $( window );
+
+		$.testHelper.eventSequence( "navigate", [
+			function() {
+				location.hash = "#foo";
+			},
+
+			function() {
+				equal($.navigate.history.stack.length, 1, "there is one entry in the history stack" );
+				equal($.navigate.history.getActive().url, "#foo", "the url for the active history entry matches the hash" );
+				location.hash = "#foo";
+			},
+
+			function( timedOut ) {
+				equal($.navigate.history.stack.length, 1, "there is one entry in the history stack" );
+				equal($.navigate.history.getActive().url, "#foo", "the url for the active history entry matches the hash" );
+				ok( timedOut, "there was no navigation event from setting the same hash" );
 				start();
 			}
 		]);
