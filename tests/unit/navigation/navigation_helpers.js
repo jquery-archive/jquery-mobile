@@ -250,6 +250,10 @@
 		equal( $.mobile.path.getLocation( allUriParts ), allUriParts.replace( "jblas:password@", "") );
 	});
 
+	test( "path.getLocation works properly on WP7 with PhoneGap", function() {
+	  equal( $.mobile.path.getLocation("x-wmapp1:/app/www/index.html"), "x-wmapp1:/app/www/index.html" );
+	});
+
 	test( "calling mobile back uses phonegap's navigator object when present", function() {
 		var previous = $.mobile.phonegapNavigationEnabled;
 
