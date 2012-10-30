@@ -14,7 +14,7 @@
 </head> 
 <body> 
 
-   <div data-role="page" class="type-interior">
+   <div data-role="page">
 
       <div data-role="header" data-theme="f">
       <h1>Responsive Table</h1>
@@ -23,36 +23,41 @@
    </div><!-- /header -->
 
    <div data-role="content">
-      <div class="content-primary">
         <h2>Responsive table</h2>
 
         <p>One of the biggest challenges in responsive designs is tabular data. Large tables with lots of columns don't fit on smaller screens and there isn't a simple way to re-format the content with CSS and media queries for an acceptable presentation.</p>
 		<p>To address this, the framework has created two different options for presenting tables responsively. Each has benefits and tradeoffs, the right choice will depend on the data being presented.</p>
 		
-		<ol>
-			<li><strong>reflow mode</strong> re-formats the table columns at narrow widths so each row of data is presented as a formatted block of label/data pairs. This is ideal for tables with product or contact information with more complex or lengthy data formatting that doesn't need comparison across rows of data.</li>
-			<li><strong>column toggle</strong> mode selectively hides columns at narrower widths as a sensible default but also offers a menu to let users manually control which columns they want to see. This mode is better for financial data tables that have compact values and needs to maintain comparisons across columns and rows of data. It can also be used for building things like product comparison tables.</li>
-		</ol>
+		<p><strong>Reflow mode</strong> - Re-formats the table columns at narrow widths so each row of data is presented as a formatted block of label/data pairs. This is ideal for tables with product or contact information with more complex or lengthy data formatting that doesn't need comparison across rows of data.</p>
+		
+		<p><strong>Column toggle mode</strong> - Selectively hides columns at narrower widths as a sensible default but also offers a menu to let users manually control which columns they want to see. This mode is better for financial data tables that have compact values and needs to maintain comparisons across columns and rows of data. It can also be used for building things like product comparison tables.</p>
+		
+		<ul data-role="listview" data-inset="true"data-divider-theme="d">
+			<li data-role="list-divider">Responsive table</li>
+			<li><a href="table-reflow.html">Basics: Reflow mode basics</a> </li>
+			<li><a href="table-column-toggle.html">Basics: Column toggle mode basics</a></li>
+			<li><a href="stack-custom.html">Demo: Movie ranking styled reflow </a></li>
+            <li><a href="stack-phones.html">Demo: Product comparison </a></li>
+            <li><a href="column-financial.html">Demo: Financial data w/grouped headers</a></li>
+		</ul>
 		
 			
 		<h2>General markup guidelines</h2>
 	    <p>Both table modes start with standard HTML table markup but there are some specific guidelines you must follow for the responsive table to work correctly:  </p>
 	
-		<ul>
+		<ol>
 			<li>Assign a unique <code>ID</code> to the table</li>
 			<li>Add the <code>data-role="table"</code> to apply the responsive table plugin</li>
 			<li>The default table mode is <code>reflow</code>, add <code>data-mode="columntoggle"</code> change modes</li>
-			<li>The first row of the table must contain the table headers, use <code>th</code> instead of <code>td</code> tags</li>
+			<li>The first row of the table must contain the table headers, be sure to use <code>th</code> instead of <code>td</code> tags</li>
 			<li>To display longer table header text in the column chooser or reflow labels, wrap the text in the <code>th</code> with a <code>abbr</code> element and set the <code>title</code>. This string will be used in place.</li>
 			<li>Do not use <code>rowspan</code> or <code>colspan</code> in your tables, these aren't supported except for grouped headers (see below)</li>
 			<li>Adding <code>thead</code> and <code>tbody</code> elements are optional but provide improved semantics</li>
 			
-		</ul>
+		</ol>
 
-		<h3>Markup example</h3>
-		<p>Here is a a pretty basic table that covers the points above.</p>
-<pre><code>
-&lt;table <strong>data-role=&quot;table&quot; id=&quot;my-table&quot; data-mode=&quot;columntoggle&quot;</strong>&gt;
+		<p>Here is a basic table that covers the points above.</p>
+<pre><code>&lt;table <strong>data-role=&quot;table&quot; id=&quot;my-table&quot; data-mode=&quot;reflow&quot;</strong>&gt;
   &lt;thead&gt;
     &lt;tr&gt;
       &lt;th&gt;Rank&lt;/th&gt;
@@ -65,300 +70,34 @@
   &lt;tbody&gt;
     &lt;tr&gt;
       &lt;th&gt;1&lt;/th&gt;
-      &lt;td&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/Citizen_Kane&quot; data-rel=&quot;external&quot;&gt;Citizen Kane&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;foo.com&quot; data-rel=&quot;external&quot;&gt;Citizen Kane&lt;/a&gt;&lt;/td&gt;
       &lt;td&gt;1941&lt;/td&gt;
       &lt;td&gt;100%&lt;/td&gt;
       &lt;td&gt;74&lt;/td&gt;
     &lt;/tr&gt;
 &lt;/table&gt;
 </code></pre>
-
-	<h3>Styling and theming</h3>
-	<p>The responsive table plugin is as minimally styled as possible to give you a clean slate for your designs. The plugin focuses primarily on the difficult scripting elements: generating the labels for the reflow table and creating the button and column chooser popup. Out of the box, the table just has a few basic style rules to add a bit of padding and set the vertical alignment of cells to be top left for visual consistency. The table will adapt to whatever content block it sits in but there isn't an explicit theming attribute for this widget. It's simple enough to add theme classes like <code>ui-content-a</code> to individual cells if desired.</p>
 	
-		
-        <h2>Columntoggle Mode</h2>
-
-
-         <p>This table mode auto-hides less important columns at narrower widths and surfaces a button to open a menu that allows the user to choose what columns they want to see. In this mode, the author attempts to define which columns are most important to show across various widths by assigning a priority to each column.</p>
-      
-      	<p>A user may choose to check as many columns as they want by tapping the "Columns..." button to open the column 
-	      chooser popup. The popup contains a dynamically generated list of columns based on the table markup that can be checked and unchecked to adjust the visible columns. </p>
 	
-		<p>The plugin automates a few ket things: injecting the column chooser button, and generating the popup with pick list of column names. The list of columns in the menu is populated by auto-scraping the values (or <code>abbr title</code>) of the first row of header (<code>TH</code>) elements found in the table. It also correctly sets the check state for each column checkbox to match the columns currently visible to sync these with what's applied via media queries.</p>
-		
-		<p>The automatic column hiding is accomplished added adding media queries in your custom stylesheet that hide or show certain column priorities at various screen widths. Since each site will have different content and column configurations, we provide a simple media query block that you can copy, paste and customize for each project. This is explained in detail below.</p>
-		
-		 <p>The column preferences take precedence over the default class priority. Because of the flexibility, it's possible for users to introduce horizontal scrolling if the data in each column is long or if many columns are selected to be shown on a smaller screen. </p>
 	
-		
-         <table data-role="table" id="movie-table" data-mode="columntoggle">
-
-              <thead>
-                <tr>
-                  <th data-priority="1">Rank</th>
-                  <th>Movie Title</th>
-                  <th data-priority="2">Year</th>
-                  <th data-priority="3"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
-                  <th data-priority="4">Reviews</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th>1</th>
-                  <td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-rel="external">Citizen Kane</a></td>
-                  <td>1941</td>
-                  <td>100%</td>
-                  <td>74</td>
-                </tr>
-                <tr>
-                  <th>2</th>
-                  <td><a href="http://en.wikipedia.org/wiki/Casablanca_(film)" data-rel="external">Casablanca</a></td>
-                  <td>1942</td>
-                  <td>97%</td>
-                  <td>64</td>
-                </tr>
-                <tr>
-                  <th>3</th>
-                  <td><a href="http://en.wikipedia.org/wiki/The_Godfather" data-rel="external">The Godfather</a></td>
-                  <td>1972</td>
-                  <td>97%</td>
-                  <td>87</td>
-                </tr>
-                <tr>
-                  <th>4</th>
-                  <td><a href="http://en.wikipedia.org/wiki/Gone_with_the_Wind_(film)" data-rel="external">Gone with the Wind</a></td>
-                  <td>1939</td>
-                  <td>96%</td>
-                  <td>87</td>
-                </tr>
-                <tr>
-                  <th>5</th>
-                  <td><a href="http://en.wikipedia.org/wiki/Lawrence_of_Arabia_(film)" data-rel="external">Lawrence of Arabia</a></td>
-                  <td>1962</td>
-                  <td>94%</td>
-                  <td>87</td>
-                </tr>
-                <tr>
-                  <th>6</th>
-                  <td><a href="http://en.wikipedia.org/wiki/Dr._Strangelove" data-rel="external">Dr. Strangelove Or How I Learned to Stop Worrying and Love the Bomb</a></td>
-                  <td>1964</td>
-                  <td>92%</td>
-                  <td>74</td>
-                </tr>
-                <tr>
-                  <th>7</th>
-                  <td><a href="http://en.wikipedia.org/wiki/The_Graduate" data-rel="external">The Graduate</a></td>
-                  <td>1967</td>
-                  <td>91%</td>
-                  <td>122</td>
-                </tr>
-                <tr>
-                  <th>8</th>
-                  <td><a href="http://en.wikipedia.org/wiki/The_Wizard_of_Oz_(1939_film)" data-rel="external">The Wizard of Oz</a></td>
-                  <td>1939</td>
-                  <td>90%</td>
-                  <td>72</td>
-                </tr>
-                <tr>
-                  <th>9</th>
-                  <td><a href="http://en.wikipedia.org/wiki/Singin%27_in_the_Rain" data-rel="external">Singin' in the Rain</a></td>
-                  <td>1952</td>
-                  <td>89%</td>
-                  <td>85</td>
-                </tr>
-                <tr>
-                  <th>10</th>
-                  <td><a href="http://en.wikipedia.org/wiki/The_Graduate" data-rel="external">The Graduate</a></td>
-                  <td>1967</td>
-                  <td>84%</td>
-                  <td>56</td>
-                </tr>
-              </tbody>
-            </table>
-
-			<h3>Setting column priority</h3>
-
-			<p>The table works hides and shows columns based on two inputs: available screen width by applying media queries or by the user checking and unchecking which columns to display in a column picker popup. Add <code>data-priority</code> attributes to assign priority (1 = highest, 6 = lowest) to each of the <em>optional</em> columns that you want to hide and show. Any table header assigned a available as a column that can be shown or hidden via the column picker menu. </p>
-			<p>To make a column <em>persistent</em> so it's not available for hiding, omit the <code>data-priority</code> attribute. THis will make the column visible at all widths and will prevent the framework from adding this column name to the chooser menu.</p>
-
-<pre><code>&lt;th&gt;I&#x27;m am critical and can&#x27;t be removed&lt;/th&gt;
-&lt;th <strong>data-priority=&quot;1&quot;</strong>&gt;I&#x27;m important&lt;/th&gt;
-&lt;th <strong>data-priority=&quot;3&quot;</strong>&gt;I&#x27;m somewhat&lt;/th&gt;
-&lt;th <strong>data-priority=&quot;5&quot;</strong>&gt;I&#x27;m less important&lt;/th&gt;
-</code></pre>
-
-		<p>Behind the scenes, the plugin will apply classes to each cell that map to the priority set in the data attribute on the header. So a table heading with a <code>data-priority="3"</code> will result in every cell in that column being assigned a <code>ui-table-priority-3</code> class once enhanced. These classes are then used to create some simple media queries to hide and show columns based on screen width (see below).</p>
-	
-<pre><code>&lt;td <strong>class=&quot;ui-table-priority-3&quot;</strong>&gt;97%&lt;/td&gt;
-</code></pre>
-
-	
-		<p>Note that you may use whatever priority naming convention you want because the script will generate classes based on the string added to the <code>data-priority</code> attribute. For example, if a priority of <code>critical</code> was added to the heading, a class of <code>ui-table-priority-critial</code> will be applied to each cell in that column. You can then style against those classes. You will need to review the default table classes in the widget if you decide to use custom priority names and copy over key styles.</p> 
-	    
-
-	    
-			<h3>Setting media queries for column auto-hiding</h3>
+			<h2>Styling and theming tables</h2>
 			
-			<p>The framework does not ship with the media query  based styles to autohide columns in the structure CSS file. We do this to make it easier for developers to customize the media query widths for each priority level. We recommend that you simply copy the following style block into your custom style overrides and adjust the min-width values that specify the widths where various priority columns should hide. From there, you can choose which widths to show and hide columns based on your content.</p>
-			<p>These media queries are written using <code>min-width</code> widths so they build on top of each other. We start with all cells with a priority set to hidden in the styles so they are hidden at the narrowest mobile sizes. The most important optional columns (priority 1) are then set to <code>display: table-cell;</code> above <code>20em</code> (320px), then we add priority 2 above <code>25em</code> (400px) and so on up to wide desktop widths.</p>
-
-<pre><code>
-@media screen and (min-width: 20em) {
-   th.ui-table-priority-1,
-   td.ui-table-priority-1 {
-     display: table-cell;
-   }
-}
-@media screen and (min-width: 25em) {
-   th.ui-table-priority-2,
-   td.ui-table-priority-2 {
-     display: table-cell;
-   }
-}
-@media screen and (min-width: 40em) {
-   th.ui-table-priority-3,
-   td.ui-table-priority-3 {
-     display: table-cell;
-   }
-}
-@media screen and (min-width: 55em) {
-  th.ui-table-priority-4,
-  td.ui-table-priority-4 {
-     display: table-cell;
-   }
+			<p>The responsive table plugin is as minimally styled as possible to give you a clean slate for your designs. The plugin focuses primarily on the difficult scripting elements: generating the labels for the reflow table and creating the button and column chooser popup. Out of the box, the table just has a few basic style rules to add a bit of padding and set the vertical alignment of cells to be top left for visual consistency. </p>
+			<p>The table will adapt to whatever content block it sits on, but there isn't an explicit theming attribute for this widget. We did this because it's simple enough to add theme classes like <code>ui-content-a</code> to individual cells if a more heavily themed look is wanted.</p>
+			
+			<h3>Horizontal lines</h3>
+			<p>To add lines between each row, add a custom style like this to your stylesheet:</p>
+			
+<pre><code>.ui-table th,
+.ui-table td {
+  border-bottom: 1px solid rgba(0, 0, 0, .08);
 }
 </code></pre>
-
-			<h3>How the column menu classes work</h3>
-
-			<p>When the column chooser menu opens, the column checkboxes will be checked or unchecked based on the visibility of each column based on the media queries so it accurately reflects what is being seen. These media queries to hide or show columns act as sensible defaults for what columns should be shown based on the developer's understanding of the column importance and data values. The chooser menu allows the user to have control of the table presentation so this takes precedence over the default display.</p>
-			<p>If an unchecked column checkbox is checked by the user, they now take control of the column. Until a the page is refreshed,  the visibility of that column will now always be visible, even if the screen is re-sized. Behind the scenes, a class of <code>visible</code> is added to all the cells in that column to ensure they override any visibility set via media queries.</p>
-			<p>The same idea applies when a column is unchecked: from then on, the column won't be seen at any width because the class of <code>hidden</code> is added to each of the cells in that column.</p>
-
-			<h3>Styling the button and column chooser popup</h3>
-			
-			<p>The column chooser popup is opened via a button that is generated by the framework. The button's text is "Columns..." by default but can be set by adding the <code>data-column-btn-text</code> attribute to the table to the text string you want in the button. The button will inherit the theme from the content area, just like all buttons, but the theme can be set manually by adding the <code>data-column-btn-theme</code> attribute to any swatch letter in your theme.</p>
-			
-			<p>This button is injected directly <em>before</em> the table element and has basic styles to align it to the right but you may want to further customize the appearance of this button. To style all these buttons across your site, key off the <code>ui-table-columntoggle-btn</code> structural class on this link. To target styles against only a specific button, use the unique <code>href</code> value that is generated to target a specific column chooser button. For example, a table with an <code>ID</code> of <code>movie-table</code> will generate a popup with an <code>ID</code> of <code>movie-table-popup</code> so a selector of <code>a[href="#movie-table-popup"]</code> will target only the column popup button for this specific table.</p>
-			
-			<p>The theme for the column chooser popup can be set by adding the <code>data-column-popup-theme</code> attribute tot he table and specifying any swatch letter in your theme. For custom styles or scripting, all the column chooser popups can be targeted by using the <code>ui-table-columntoggle-popup</code> structural class added to these popups. To customize a single popup, use the generated <code>ID</code> based on the table <code>ID</code> that added to each specific popup (such as <code>#movie-table-popup</code>) to target a specific popup.</p>
-
-			<h3>Working with grouped column headers</h3>
-			<p>It's fairly common to need to logically group multiple columns together under a heading group for financial or scientific data. The framework can support the most simple version of this by allowing for two rows of table headers (<code>TH</code>), with the first row containing simple <code>colspan</code> attributes to group the columns below. In this configuration, the framework will parse the  the first row only for the priority and expose these heading groups as the options in the column chooser popup. This means that the second, heading how with individual columns will not be exposed as columns that can be hidden or shown independently of the groupings. See an example of <a href="column-financial.html">grouped column table</a>.</p>
 			
 
-            <h2>Reflow mode</h2>
+			<h3>Row stripes</h3>
 
-            <table data-role="table" id="movie-table-2" data-mode="reflow">
-            <caption>Top movies of all time according to film buffs. In case you're curious, this is a caption for the table.</caption> 
-
-              <thead>
-                <tr>
-                  <th data-priority="1">Rank</th>
-                  <th data-priority="persist">Movie Title</th>
-                  <th data-priority="2">Year</th>
-                  <th data-priority="3"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
-                  <th data-priority="4">Reviews</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th>1</th>
-                  <td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-rel="external">Citizen Kane</a></td>
-                  <td>1941</td>
-                  <td>100%</td>
-                  <td>74</td>
-                </tr>
-                <tr>
-                  <th>2</th>
-                  <td><a href="http://en.wikipedia.org/wiki/Casablanca_(film)" data-rel="external">Casablanca</a></td>
-                  <td>1942</td>
-                  <td>97%</td>
-                  <td>64</td>
-                </tr>
-                <tr>
-                  <th>3</th>
-                  <td><a href="http://en.wikipedia.org/wiki/The_Godfather" data-rel="external">The Godfather</a></td>
-                  <td>1972</td>
-                  <td>97%</td>
-                  <td>87</td>
-                </tr>
-                <tr>
-                  <th>4</th>
-                  <td><a href="http://en.wikipedia.org/wiki/Gone_with_the_Wind_(film)" data-rel="external">Gone with the Wind</a></td>
-                  <td>1939</td>
-                  <td>96%</td>
-                  <td>87</td>
-                </tr>
-                <tr>
-                  <th>5</th>
-                  <td><a href="http://en.wikipedia.org/wiki/Lawrence_of_Arabia_(film)" data-rel="external">Lawrence of Arabia</a></td>
-                  <td>1962</td>
-                  <td>94%</td>
-                  <td>87</td>
-                </tr>
-                <tr>
-                  <th>6</th>
-                  <td><a href="http://en.wikipedia.org/wiki/Dr._Strangelove" data-rel="external">Dr. Strangelove Or How I Learned to Stop Worrying and Love the Bomb</a></td>
-                  <td>1964</td>
-                  <td>92%</td>
-                  <td>74</td>
-                </tr>
-                <tr>
-                  <th>7</th>
-                  <td><a href="http://en.wikipedia.org/wiki/The_Graduate" data-rel="external">The Graduate</a></td>
-                  <td>1967</td>
-                  <td>91%</td>
-                  <td>122</td>
-                </tr>
-                <tr>
-                  <th>8</th>
-                  <td><a href="http://en.wikipedia.org/wiki/The_Wizard_of_Oz_(1939_film)" data-rel="external">The Wizard of Oz</a></td>
-                  <td>1939</td>
-                  <td>90%</td>
-                  <td>72</td>
-                </tr>
-                <tr>
-                  <th>9</th>
-                  <td><a href="http://en.wikipedia.org/wiki/Singin%27_in_the_Rain" data-rel="external">Singin' in the Rain</a></td>
-                  <td>1952</td>
-                  <td>89%</td>
-                  <td>85</td>
-                </tr>
-                <tr>
-                  <th>10</th>
-                  <td><a href="http://en.wikipedia.org/wiki/The_Graduate" data-rel="external">The Graduate</a></td>
-                  <td>1967</td>
-                  <td>84%</td>
-                  <td>56</td>
-                </tr>
-              </tbody>
-            </table>
-
-
-
-
-
-
-      </div>
-      <!--/content-primary -->
-
-            <div class="content-secondary">
-
-               <div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
-
-                     <h3>In this section</h3>
-
-                     <ul data-role="listview" data-theme="c" data-dividertheme="d">
-
-                        <li><a href="index.html">Responsive Table</a></li>
-                        <li><a href="stack-custom.html">stack-custom</a></li>
-                        <li><a href="stack-phones.html">stack-phones</a></li>
-                        <li><a href="column-financial.html">column-financial</a></li>
-                     </ul>
-               </div>
-            </div>
+     
 
          </div><!-- /content -->
 

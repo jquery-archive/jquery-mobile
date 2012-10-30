@@ -5,30 +5,34 @@
 .ui-table-reflow th .ui-table-cell-label { 
 	display: none;
 }
+
+/* Mobile first styles: Begin with the stacked presentation at narrow widths */ 
 @media only all {
-	.ui-table-reflow td .ui-table-cell-label,
-	.ui-table-reflow th .ui-table-cell-label { 
-		display: block;
+	/* Hide the table headers */ 
+	.ui-table-reflow thead td, 
+	.ui-table-reflow thead th {
+		display: none;
 	}
+	/* Show the table cells as a block level element */ 
 	.ui-table-reflow td,
 	.ui-table-reflow th { 
 		text-align: left;
 		display: block;
 	}
+	/* Add a fair amount of top margin to visually separate each row when stacked */  
 	.ui-table-reflow tbody th {
-		margin-top: 1em;
+		margin-top: 3em;
 	}
-	.ui-table-reflow thead td, 
-	.ui-table-reflow thead th {
-		display: none;
-	}
-	.ui-table-reflow th .ui-table-cell-label,
-	.ui-table-reflow td .ui-table-cell-label { 
+	/* Make the label elements a percentage width */ 
+	.ui-table-reflow td .ui-table-cell-label,
+	.ui-table-reflow th .ui-table-cell-label { 
+		display: block;
 		padding: .4em; 
-		min-width: 35%; 
+		min-width: 30%; 
 		display: inline-block; 
 		margin: -.4em 1em -.4em -.4em;
 	}
+	/* For grouped headers, have a different style can have a different style */ 
 	.ui-table-reflow th .ui-table-cell-label-top,
 	.ui-table-reflow td .ui-table-cell-label-top {
 		display: block;
@@ -41,18 +45,4 @@
 }
 
 
-@media ( min-width: 40em ) {
-	.ui-table-reflow td,
-	.ui-table-reflow th,
-	.ui-table-reflow tbody th,
-	.ui-table-reflow tbody td,
-	.ui-table-reflow thead td,
-	.ui-table-reflow thead th {
-		display: table-cell;
-		margin: 0;
-	}
-	.ui-table-reflow td .ui-table-cell-label,
-	.ui-table-reflow th .ui-table-cell-label { 
-		display: none;
-	}
-}
+

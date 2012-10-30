@@ -1,0 +1,321 @@
+<!DOCTYPE html> 
+<html>
+   <head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1"> 
+   <title>jQuery Mobile Docs - Responsive Table</title> 
+   <link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />  
+   <link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+
+   <script src="../../js/jquery.js"></script>
+   <script src="../../docs/_assets/js/jqm-docs.js"></script>
+   <script src="../../js/"></script>
+
+</head> 
+<body> 
+
+   <div data-role="page">
+
+      <div data-role="header" data-theme="f">
+      <h1>Responsive Table</h1>
+      <a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+      <a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
+   </div><!-- /header -->
+
+   <div data-role="content">
+        <h2>Column toggle table mode</h2>
+
+         <p>This table mode auto-hides less important columns at narrower widths and surfaces a button to open a menu that allows the user to choose what columns they want to see. In this mode, the author attempts to define which columns are most important to show across various widths by assigning a priority to each column.</p>
+      
+      	<p>A user may choose to check as many columns as they want by tapping the "Columns..." button to open the column 
+	      chooser popup. The popup contains a dynamically generated list of columns based on the table markup that can be checked and unchecked to adjust the visible columns. </p>
+
+		<style>
+			/* Show priority 1 at 320px (20em x 16px) */ 
+			@media screen and (min-width: 20em) {
+			   th.ui-table-priority-1,
+			   td.ui-table-priority-1 {
+			     display: table-cell;
+			   }
+			}
+			/* Show priority 2 at 480px (30em x 16px) */ 
+			@media screen and (min-width: 30em) {
+			   th.ui-table-priority-2,
+			   td.ui-table-priority-2 {
+			     display: table-cell;
+			   }
+			}
+			/* Show priority 3 at 640px (40em x 16px) */ 
+			@media screen and (min-width: 40em) {
+			   th.ui-table-priority-3,
+			   td.ui-table-priority-3 {
+			     display: table-cell;
+			   }
+			}
+			/* Show priority 4 at 800px (50em x 16px) */ 
+			@media screen and (min-width: 50em) {
+			  th.ui-table-priority-4,
+			  td.ui-table-priority-4 {
+			     display: table-cell;
+			   }
+			}
+			/* Show priority 5 at 960px (60em x 16px) */ 
+			@media screen and (min-width: 60em) {
+			  th.ui-table-priority-5,
+			  td.ui-table-priority-5 {
+			     display: table-cell;
+			   }
+			}
+			/* Show priority 6 at 1200 (75em x 16px) */ 
+			@media screen and (min-width: 75em) {
+			  th.ui-table-priority-6,
+			  td.ui-table-priority-6 {
+			     display: table-cell;
+			   }
+			}
+			/* Manually hidden */ 
+			th.ui-table-cell-hidden,
+			td.ui-table-cell-hidden {
+			  display: none;
+			}
+
+			/* Manually shown */
+			th.ui-table-cell-visible,
+			td.ui-table-cell-visible {
+			   display: table-cell;
+			}
+		</style>
+		
+         <table data-role="table" id="movie-table" data-mode="columntoggle">
+
+              <thead>
+                <tr>
+                  <th data-priority="1">Rank</th>
+                  <th>Movie Title</th>
+                  <th data-priority="2">Year</th>
+                  <th data-priority="3"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
+                  <th data-priority="4">Reviews</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>1</th>
+                  <td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-rel="external">Citizen Kane</a></td>
+                  <td>1941</td>
+                  <td>100%</td>
+                  <td>74</td>
+                </tr>
+                <tr>
+                  <th>2</th>
+                  <td><a href="http://en.wikipedia.org/wiki/Casablanca_(film)" data-rel="external">Casablanca</a></td>
+                  <td>1942</td>
+                  <td>97%</td>
+                  <td>64</td>
+                </tr>
+                <tr>
+                  <th>3</th>
+                  <td><a href="http://en.wikipedia.org/wiki/The_Godfather" data-rel="external">The Godfather</a></td>
+                  <td>1972</td>
+                  <td>97%</td>
+                  <td>87</td>
+                </tr>
+                <tr>
+                  <th>4</th>
+                  <td><a href="http://en.wikipedia.org/wiki/Gone_with_the_Wind_(film)" data-rel="external">Gone with the Wind</a></td>
+                  <td>1939</td>
+                  <td>96%</td>
+                  <td>87</td>
+                </tr>
+                <tr>
+                  <th>5</th>
+                  <td><a href="http://en.wikipedia.org/wiki/Lawrence_of_Arabia_(film)" data-rel="external">Lawrence of Arabia</a></td>
+                  <td>1962</td>
+                  <td>94%</td>
+                  <td>87</td>
+                </tr>
+                <tr>
+                  <th>6</th>
+                  <td><a href="http://en.wikipedia.org/wiki/Dr._Strangelove" data-rel="external">Dr. Strangelove Or How I Learned to Stop Worrying and Love the Bomb</a></td>
+                  <td>1964</td>
+                  <td>92%</td>
+                  <td>74</td>
+                </tr>
+                <tr>
+                  <th>7</th>
+                  <td><a href="http://en.wikipedia.org/wiki/The_Graduate" data-rel="external">The Graduate</a></td>
+                  <td>1967</td>
+                  <td>91%</td>
+                  <td>122</td>
+                </tr>
+                <tr>
+                  <th>8</th>
+                  <td><a href="http://en.wikipedia.org/wiki/The_Wizard_of_Oz_(1939_film)" data-rel="external">The Wizard of Oz</a></td>
+                  <td>1939</td>
+                  <td>90%</td>
+                  <td>72</td>
+                </tr>
+                <tr>
+                  <th>9</th>
+                  <td><a href="http://en.wikipedia.org/wiki/Singin%27_in_the_Rain" data-rel="external">Singin' in the Rain</a></td>
+                  <td>1952</td>
+                  <td>89%</td>
+                  <td>85</td>
+                </tr>
+                <tr>
+                  <th>10</th>
+                  <td><a href="http://en.wikipedia.org/wiki/The_Graduate" data-rel="external">The Graduate</a></td>
+                  <td>1967</td>
+                  <td>84%</td>
+                  <td>56</td>
+                </tr>
+              </tbody>
+            </table>
+
+
+			<h3>Using column toggle mode</h3>
+			<p>The plugin automates a few key things: injecting the column chooser button, and generating the popup with pick list of column names. The list of columns in the menu is populated by parsing the values (or <code>abbr title</code>) of the first row of header (<code>TH</code>) elements found in the table. It also correctly sets the check state for each column checkbox to match the columns currently visible to sync these with what's applied via media queries.</p>
+
+			<p>The automatic column hiding is accomplished added adding media queries in your custom stylesheet that hide or show certain column priorities at various screen widths. Since each site will have different content and column configurations, we provide a simple media query block that you can copy, paste and customize for each project. This is explained in detail below.</p>
+
+			 <p>The column preferences take precedence over the default class priority. Because of the flexibility, it's possible for users to introduce horizontal scrolling if the data in each column is long or if many columns are selected to be shown on a smaller screen. </p>
+
+			<h3>Setting column priority</h3>
+
+			<p>The table works hides and shows columns based on two inputs: available screen width by applying media queries or by the user checking and unchecking which columns to display in a column picker popup. To begin, add the <code>data-mode=&quot;columntoggle&quot;</code> attribute to the table to switch it to the column toggle mode.</p>
+			
+			<pre><code>&lt;table <strong>data-role=&quot;table&quot; id=&quot;my-table&quot; data-mode=&quot;columntoggle&quot;</strong>&gt;			</code></pre>
+			
+			
+			<p>Next, add <code>data-priority</code> attributes to each of the table headers of columns you want to responsively display and assign a priority (1 = highest, 6 = lowest). Any table header given a priority will be available in the column picker menu. </p>
+			<p>To make a column <em>persistent</em> so it's not available for hiding, omit the <code>data-priority</code> attribute. This will make the column visible at all widths and won't be available in the column chooser menu.</p>
+
+<pre><code>&lt;th&gt;I&#x27;m am critical and can&#x27;t be removed&lt;/th&gt;
+&lt;th <strong>data-priority=&quot;1&quot;</strong>&gt;I&#x27;m important&lt;/th&gt;
+&lt;th <strong>data-priority=&quot;3&quot;</strong>&gt;I&#x27;m somewhat&lt;/th&gt;
+&lt;th <strong>data-priority=&quot;5&quot;</strong>&gt;I&#x27;m less important&lt;/th&gt;
+</code></pre>
+
+		<p>Behind the scenes, the plugin will apply classes to each cell that map to the priority set in the data attribute on the header. So a table heading with a <code>data-priority="3"</code> will result in every cell in that column being assigned a <code>ui-table-priority-3</code> class once enhanced. These classes are then used to create some simple media queries to hide and show columns based on screen width (see below).</p>
+	
+<pre><code>&lt;td <strong>class=&quot;ui-table-priority-3&quot;</strong>&gt;97%&lt;/td&gt;
+</code></pre>
+
+	
+		<p>Note that you may use whatever priority naming convention you want because the script will generate classes based on the string added to the <code>data-priority</code> attribute. For example, if a priority of <code>critical</code> was added to the heading, a class of <code>ui-table-priority-critial</code> will be applied to each cell in that column. You can then style against those classes. You will need to review the default table classes in the widget if you decide to use custom priority names and copy over key styles.</p> 
+	    
+
+	    
+			<h3>Setting media queries for column auto-hiding</h3>
+			
+			<p>The framework does not ship with the media query  based styles to autohide columns in the structure CSS file. We do this to make it easier for developers to customize the media query widths for each priority level. We recommend that you simply copy the following style block into your custom style overrides and adjust the min-width values that specify the widths where various priority columns should hide. From there, you can choose which widths to show and hide columns based on your content.</p>
+			
+			<p>The styles for the all priority columns start as hidden by default in the structure stylesheet:</p>
+
+<pre><code>@media only all {
+ th.ui-table-priority-6,
+ td.ui-table-priority-6,
+ th.ui-table-priority-5,
+ td.ui-table-priority-5,
+ th.ui-table-priority-4,
+ td.ui-table-priority-4,
+ th.ui-table-priority-3,
+ td.ui-table-priority-3,
+ th.ui-table-priority-2,
+ td.ui-table-priority-2,
+ th.ui-table-priority-1,
+ td.ui-table-priority-1 {
+   display: none;
+ }
+}
+</code></pre>
+		
+			
+			<p>The media queries that add the responsive behavior to show and hide columns by priority really need to be customized for the needs of your project's content. Simply copy the style block below, paste it into your custom styles and tweak the media query widths to suit your needs.</p>
+			<p>Each media query is written using <code>min-width</code> widths so they build on top of each other. The widths are set in ems so they respond to font size changes. To calculate a pixel withs in em's, divide the target width by 16 (pixels) - it's that easy.</p>
+			<p>Inside each media query, we are overriding the <code>display:none;</code> style properties set on all the priority columns in the basic styles to <code>display: table-cell;</code> so they become visible. The priority 1 columns are shown first, at widths above <code>20em</code> (320px), then priority 2 kicks in above <code>30em</code> (480px) and so on up to wide desktop widths with priority 6 at <code>75em</code> (1,200px). These are just the defaults, so feel free to change these breakpoints in your stylesheet and choose how many priority levels you'd like to use.</p>
+
+
+<pre><code>
+/* Show priority 1 at 320px (20em x 16px) */ 
+@media screen and (min-width: 20em) {
+   th.ui-table-priority-1,
+   td.ui-table-priority-1 {
+     display: table-cell;
+   }
+}
+/* Show priority 2 at 480px (30em x 16px) */ 
+@media screen and (min-width: 30em) {
+   th.ui-table-priority-2,
+   td.ui-table-priority-2 {
+     display: table-cell;
+   }
+}
+/* Show priority 3 at 640px (40em x 16px) */ 
+@media screen and (min-width: 40em) {
+   th.ui-table-priority-3,
+   td.ui-table-priority-3 {
+     display: table-cell;
+   }
+}
+/* Show priority 4 at 800px (50em x 16px) */ 
+@media screen and (min-width: 50em) {
+  th.ui-table-priority-4,
+  td.ui-table-priority-4 {
+     display: table-cell;
+   }
+}
+/* Show priority 5 at 960px (60em x 16px) */ 
+@media screen and (min-width: 60em) {
+  th.ui-table-priority-5,
+  td.ui-table-priority-5 {
+     display: table-cell;
+   }
+}
+/* Show priority 6 at 1200 (75em x 16px) */ 
+@media screen and (min-width: 75em) {
+  th.ui-table-priority-6,
+  td.ui-table-priority-6 {
+     display: table-cell;
+   }
+}
+</code></pre>
+
+			<h3>How the column menu classes work</h3>
+
+			<p>When the column chooser menu opens, the column checkboxes will be checked or unchecked based on the visibility of each column based on the media queries so it accurately reflects what is being seen. These media queries to hide or show columns act as sensible defaults for what columns should be shown based on the developer's understanding of the column importance and data values. The chooser menu allows the user to have control of the table presentation so this takes precedence over the default display.</p>
+			<p>If an unchecked column checkbox is checked by the user, they now take control of the column. Until a the page is refreshed,  the visibility of that column will now always be visible, even if the screen is re-sized. Behind the scenes, a class of <code>visible</code> is added to all the cells in that column to ensure they override any visibility set via media queries.</p>
+			<p>The same idea applies when a column is unchecked: from then on, the column won't be seen at any width because the class of <code>hidden</code> is added to each of the cells in that column.</p>
+
+			<h3>Styling the button and column chooser popup</h3>
+			
+			<p>The column chooser popup is opened via a button that is generated by the framework. The button's text is "Columns..." by default but can be set by adding the <code>data-column-btn-text</code> attribute to the table to the text string you want in the button. The button will inherit the theme from the content area, just like all buttons, but the theme can be set manually by adding the <code>data-column-btn-theme</code> attribute to any swatch letter in your theme.</p>
+			
+			<p>This button is injected directly <em>before</em> the table element and has basic styles to align it to the right but you may want to further customize the appearance of this button. To style all these buttons across your site, key off the <code>ui-table-columntoggle-btn</code> structural class on this link. To target styles against only a specific button, use the unique <code>href</code> value that is generated to target a specific column chooser button. For example, a table with an <code>ID</code> of <code>movie-table</code> will generate a popup with an <code>ID</code> of <code>movie-table-popup</code> so a selector of <code>a[href="#movie-table-popup"]</code> will target only the column popup button for this specific table.</p>
+			
+			<p>The theme for the column chooser popup can be set by adding the <code>data-column-popup-theme</code> attribute tot he table and specifying any swatch letter in your theme. For custom styles or scripting, all the column chooser popups can be targeted by using the <code>ui-table-columntoggle-popup</code> structural class added to these popups. To customize a single popup, use the generated <code>ID</code> based on the table <code>ID</code> that added to each specific popup (such as <code>#movie-table-popup</code>) to target a specific popup.</p>
+
+			<h3>Working with grouped column headers</h3>
+			<p>It's fairly common to need to logically group multiple columns together under a heading group for financial or scientific data. The framework can support the most simple version of this by allowing for two rows of table headers (<code>TH</code>), with the first row containing simple <code>colspan</code> attributes to group the columns below. In this configuration, the framework will parse the  the first row only for the priority and expose these heading groups as the options in the column chooser popup. This means that the second, heading how with individual columns will not be exposed as columns that can be hidden or shown independently of the groupings. See an example of <a href="column-financial.html">grouped column table</a>.</p>
+			
+
+            
+
+
+      
+         </div><!-- /content -->
+
+         <div data-role="footer" class="footer-docs" data-theme="c">
+               <p class="jqm-version"></p>
+            <p>&copy; 2012 jQuery Foundation and other contributors</p>
+         </div>
+
+         </div><!-- /page -->
+
+</body>
+</html>
+
+
+
+
+
+
