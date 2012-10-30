@@ -99,10 +99,10 @@
 				<thead>
 					<tr class="th-groups">
 						<td colspan="2"></td>
-						<th colspan="3" data-priority="5">Q1 2012</th>
-						<th colspan="3" data-priority="4">Q2 2012</th>
-						<th colspan="3" data-priority="3">Q3 2012</th>
-						<th colspan="3" data-priority="2">Q4 2012</th>
+						<th colspan="3" data-priority="6">Q1 2012</th>
+						<th colspan="3" data-priority="5">Q2 2012</th>
+						<th colspan="3" data-priority="4">Q3 2012</th>
+						<th colspan="3" data-priority="3">Q4 2012</th>
 						<th colspan="3" data-priority="1" class="totals">YTD Totals</th>
 					</tr> 
 					<tr>
@@ -210,13 +210,33 @@
 
 
 <h3>Reflow example</h3>
-
 <style>
-#financial-table, #financial-table-reflow {
- 	margin: 2em 0 4em;
- }
 /* Media query to show as a standard table at wider widths */ 
-@media ( min-width: 60em ) {
+@media ( max-width: 72em ) {
+	#financial-table, #financial-table-reflow {
+	 	margin: 2em 0 4em;
+	 }
+	.ui-table-reflow th:first-child,
+	.ui-table-reflow th:first-child + td
+	 { 
+		color:#fff;
+		background-color:#444;
+		font-size:1.5em;
+		display:inline;
+		margin:0;
+	}
+
+	.ui-table-reflow th:first-child .ui-table-cell-label,
+	.ui-table-reflow th:first-child + td .ui-table-cell-label { 
+		display:none;
+	}
+	/* Add a fair amount of top margin to visually separate each row when stacked */  
+	.ui-table-reflow tbody th {
+		margin-bottom: 5em;
+	}
+}
+/* Media query to show as a standard table at wider widths */ 
+@media ( min-width: 72em ) {
 		/* Show the table header rows */ 
 		.ui-table-reflow td,
 		.ui-table-reflow th,
@@ -246,7 +266,7 @@
 						<th colspan="3" data-priority="1" class="totals">YTD Totals</th>
 					</tr> 
 					<tr>
-						<th>Store</th>
+						<th class="hide">Store</th>
 						<th>State</th>
 
 						<th>Income</th>
