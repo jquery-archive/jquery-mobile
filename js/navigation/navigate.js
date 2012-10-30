@@ -151,7 +151,9 @@ define([
 		history.direct({
 			url: (event.originalEvent.state || {}).hash || hash,
 
-			either: function( historyEntry, direction ) {
+			// When the url is either forward or backward in history include the entry
+			// as data on the event object for merging as data in the navigate event
+			present: function( historyEntry, direction ) {
 				event.historyState = historyEntry;
 				event.historyState.direction = direction;
 			}
@@ -184,16 +186,21 @@ define([
 		// make sure to set the state of our history stack properly
 		history.direct({
 			url: hash,
+
 			// When the url is either forward or backward in history include the entry
-			// here
-			either: function( historyEntry, direction ) {
+			// as data on the event object for merging as data in the navigate event
+			present: function( historyEntry, direction ) {
 				event.hashchangeState = historyEntry;
 				event.hashchangeState.direction = direction;
 			},
 
 			// When we don't find a hash in our history clearly we're aiming to go there
-			// record the entry as new history
-			neither: function() {
+			// record the entry as new for future traversal
+			//
+			// NOTE it's not entirely clear that this is the right thing to do given that we
+			//      can't know the users intention. It might be better to explicitly _not_
+			//      support location.hash assignment in preference to $.navigate calls
+			missing: function() {
 				history.add( hash, {
 					hash: hash,
 					title: document.title,
@@ -281,7 +288,7 @@ define([
 			// of the slice must then be added to the result to get the element index
 			// in the original history stack :( :(
 			//
-			// TODO this is hyper confusing and should be cleaned up
+			// TODO this is hyper confusing and should be cleaned up (ugh so bad)
 			if( newActiveIndex === undefined ) {
 				newActiveIndex = this.find( opts.url, this.stack.slice(a + 1), true );
 				newActiveIndex = newActiveIndex === undefined ? newActiveIndex : newActiveIndex + a + 1;
@@ -291,14 +298,18 @@ define([
 			this.activeIndex = newActiveIndex !== undefined ? newActiveIndex : this.activeIndex;
 
 			// invoke callbacks where appropriate
+			//
+			// TODO this is also convoluted and confusing
 			if ( newActiveIndex < a ) {
-				( opts.either || opts.isBack )( this.getActive(), 'back' );
+				( opts.present || opts.back )( this.getActive(), 'back' );
 			} else if ( newActiveIndex > a ) {
-				( opts.either || opts.isForward )( this.getActive(), 'forward' );
+				( opts.present || opts.forward )( this.getActive(), 'forward' );
 			} else if ( newActiveIndex === a ) {
-				opts.same ? opts.same( this.getActiveIndex ) : null;
-			} else if ( opts.neither ){
-				opts.neither( this.getActive() );
+				if( opts.current ) {
+					opts.current( this.getActiveIndex );
+				}
+			} else if ( opts.missing ){
+				opts.missing( this.getActive() );
 			}
 		},
 
