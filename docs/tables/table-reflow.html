@@ -157,37 +157,37 @@
 		<p>With our mobile-first approach, the base styles for reflow display the table in the stacked label/date format. This is done by hiding the table header rows, making each cell <code>display:block</code> and showing the label element injected into each cell. The label elements in each cell are styled like this:</p>
 				
 <pre><code>
-	.ui-table-reflow td .ui-table-cell-label,
-	.ui-table-reflow th .ui-table-cell-label { 
-		display: block;
-		min-width: 30%; 
-		display: inline-block; 
-	}	
+.ui-table-reflow td .ui-table-cell-label,
+.ui-table-reflow th .ui-table-cell-label { 
+	display: block;
+	min-width: 30%; 
+	display: inline-block; 
+}	
 </code></pre>
 
 		<p>At wider widths, a single media query switches to a standard table presentation by showing the table headers and hiding the labels in each cell.This media query should be copied and added to your custom stylesheet so you can modify the width breakpoint for the needs of data in your table. </p>
 			
 <pre><code><strong>@media ( min-width: 40em ) {</strong>
-/* Show the table header rows */ 
-.ui-table-reflow td,
-.ui-table-reflow th,
-.ui-table-reflow tbody th,
-.ui-table-reflow tbody td,
-.ui-table-reflow thead td,
-.ui-table-reflow thead th {
-	display: table-cell;
-	margin: 0;
-}
-/* Hide the labels in each cell */ 
-.ui-table-reflow td .ui-table-cell-label,
-.ui-table-reflow th .ui-table-cell-label { 
-	display: none;
-}
+	/* Show the table header rows */ 
+	.ui-table-reflow td,
+	.ui-table-reflow th,
+	.ui-table-reflow tbody th,
+	.ui-table-reflow tbody td,
+	.ui-table-reflow thead td,
+	.ui-table-reflow thead th {
+		display: table-cell;
+		margin: 0;
+	}
+	/* Hide the labels in each cell */ 
+	.ui-table-reflow td .ui-table-cell-label,
+	.ui-table-reflow th .ui-table-cell-label { 
+		display: none;
+	}
 <strong>}</strong>
 </code></pre>
 
 		<h3>Choosing a breakpoint</h3>
-		<p>In reflow mode, you want to pick at minimum width at which the entire table will fit comfortably within the screen as the breakpoint. On some sites, this may be 30em (480px) and on others, it could be as wide as 100em (1,600px) so there is no way for us to decide on a "standard breakpoint" that will work for everyone -- that's why this media query should be custom to your application.<p>
+		<p>In reflow mode, you want to pick at minimum width at which the <em>entire table</em> will fit comfortably within the screen as the breakpoint. On some sites, this may be 30em (480px) and on others, it could be as wide as 100em (1,600px) so there is no way for us to decide on a "standard breakpoint" that will work for everyone -- that's why this media query should be custom to your application.<p>
 		<p>All media query widths are set in ems so they respond to font size changes. To calculate a pixel withs in em's, divide the target width by 16 (pixels) then edit the 40em value in the example breakpoint.</p>
 		<p>It's  possible that this breakpoint will vary for each table within a page if the content length and number of columns is very different across tables. If that's the case, create a set of table classes that can be used to apply one of a few standard table breakpoints.</p>
 
