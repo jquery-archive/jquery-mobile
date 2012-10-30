@@ -26,7 +26,8 @@ $(document).bind("pagecreate", function() {
 		});
 		if (!options.empty) {
 			delete options.empty;
-			$("#sample-link,#sample-input-button,#sample-button").buttonMarkup(options);
+			$("#sample-link").buttonMarkup(options);
+			$("#sample-input-button,#sample-button" ).button( "option", options );
 		}
 	});
 });
@@ -55,7 +56,7 @@ $(document).bind("pagecreate", function() {
 						<label for="button-icon">icon</label>
 						<input data-setter="true" type="text" id="button-icon"></input>
 					</div>
-                    		</td><td>
+          </td><td>
 					<div data-role="fieldcontain">
 						<label for="button-icon-apply">Apply</label>
 						<input data-apply="true" type="checkbox" id="button-icon-apply"></input>
