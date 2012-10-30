@@ -94,7 +94,9 @@ $( document ).delegate( ":jqmData(role='table')", "tablecreate", function() {
 
    $( window ).on( "throttledresize", refreshMenu );
 
-   refreshMenu();
+   // TODO. Why is a stack unwind needed here?
+   // Maybe because we're waiting on CSS to be applied before that :visible check above can work
+   setTimeout( refreshMenu, 0 );
 
 });
 
