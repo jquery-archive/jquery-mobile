@@ -27,13 +27,13 @@
   }
 }
 
-th.ui-table-cell-hidden,
-td.ui-table-cell-hidden {
+.ui-table-columntoggle th.ui-table-cell-hidden,
+.ui-table-columntoggle td.ui-table-cell-hidden {
   display: none;
 }
 
 
-th.ui-table-cell-visible,
-td.ui-table-cell-visible {
+.ui-table-columntoggle th.ui-table-cell-visible,
+.ui-table-columntoggle td.ui-table-cell-visible {
    display: table-cell;
 }
