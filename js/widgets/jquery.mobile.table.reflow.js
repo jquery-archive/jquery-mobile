@@ -14,8 +14,8 @@ $.mobile.table.prototype.options.mode = "reflow";
 $.mobile.table.prototype.options.classes = $.extend(
    $.mobile.table.prototype.options.classes,
    {
-      cellLabels: "ui-table-cell-label",
-      reflowTable: "ui-table-reflow"
+      reflowTable: "ui-table-reflow",
+      cellLabels: "ui-table-cell-label"
    }
 );
 
