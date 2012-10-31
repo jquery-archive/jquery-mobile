@@ -25,6 +25,7 @@ $( document ).delegate( ":jqmData(role='table')", "tablecreate", function() {
       self = $table.jqmData( "table" ),
       o = self.options;
 
+   // If it's not reflow mode, return here.
    if( o.mode !== "reflow" ){
       return;
    }
