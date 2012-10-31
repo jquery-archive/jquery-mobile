@@ -32,8 +32,7 @@ $( document ).delegate( ":jqmData(role='table')", "tablecreate", function() {
 
    self.element.addClass( o.classes.reflowTable );
 
-   var id = ( $table.attr( "id" ) || self.options.classes.popup ),//TODO BETTER FALLBACK ID HERE
-      reverseHeaders =  $( self.allHeaders.get().reverse() );
+   var reverseHeaders =  $( self.allHeaders.get().reverse() );
          
    // create the hide/show toggles
    reverseHeaders.each(function(i){
