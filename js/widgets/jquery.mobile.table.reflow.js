@@ -32,6 +32,7 @@ $( document ).delegate( ":jqmData(role='table')", "tablecreate", function() {
 
    self.element.addClass( o.classes.reflowTable );
 
+   // get headers in reverse order so that top-level headers are appended last
    var reverseHeaders =  $( self.allHeaders.get().reverse() );
          
    // create the hide/show toggles
@@ -54,8 +55,6 @@ $( document ).delegate( ":jqmData(role='table')", "tablecreate", function() {
          else {
             $cells.prepend( "<b class='" + o.classes.cellLabels + "'>" + text + "</b>"  );
          }
-
-         
 
       }
    });
