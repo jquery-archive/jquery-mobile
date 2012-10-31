@@ -12,7 +12,6 @@ define( [ "jquery", "../jquery.mobile.widget", "./page", "./page.sections" ], fu
 $.widget( "mobile.table", $.mobile.widget, {
  
     options: {
-      columnBtnText: "Columns...",
       classes: {
          table: "ui-table"
       },
