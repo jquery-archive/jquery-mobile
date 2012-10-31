@@ -25,7 +25,7 @@
    <div data-role="content">
         <h2>Column toggle table mode</h2>
 
-         <p>This table mode auto-hides less important columns at narrower widths and surfaces a button to open a menu that allows the user to choose what columns they want to see. In this mode, the author attempts to define which columns are most important to show across various widths by assigning a priority to each column.</p>
+         <p>This table mode automatically hides less important columns at narrower widths and surfaces a button to open a menu that allows the user to choose what columns they want to see. In this mode, the author attempts to define which columns are most important to show across various widths by assigning a priority to each column.</p>
       
       	<p>A user may choose to check as many columns as they want by tapping the "Columns..." button to open the column 
 	      chooser popup. The popup contains a dynamically generated list of columns based on the table markup that can be checked and unchecked to adjust the visible columns. </p>
@@ -185,6 +185,8 @@
 			
 			<pre><code>&lt;table <strong>data-role=&quot;table&quot; id=&quot;my-table&quot; data-mode=&quot;columntoggle&quot;</strong>&gt;			</code></pre>
 			
+      <p>Note that in the column toggle mode, you must add an <code>id</code> attribute to your table, so that it properly associates with the popup menu.</p>
+
 			
 			<p>Next, add <code>data-priority</code> attributes to each of the table headers of columns you want to responsively display and assign a priority (1 = highest, 6 = lowest). Any table header given a priority will be available in the column picker menu. </p>
 			<p>To make a column <em>persistent</em> so it's not available for hiding, omit the <code>data-priority</code> attribute. This will make the column visible at all widths and won't be available in the column chooser menu.</p>
@@ -203,6 +205,24 @@
 	
 		<p>Note that you may use whatever priority naming convention you want because the script will generate classes based on the string added to the <code>data-priority</code> attribute. For example, if a priority of <code>critical</code> was added to the heading, a class of <code>ui-table-priority-critial</code> will be applied to each cell in that column. You can then style against those classes. You will need to review the default table classes in the widget if you decide to use custom priority names and copy over key styles.</p> 
 	    
+
+    <h3>Options</h3>
+    <p>The columntoggle table comes with several options:</p>
+
+    <ul>
+      <li><code>columnBtnTheme</code> default: null</li>
+      <li><code>columnPopupTheme</code> default: null</li>
+      <li><code>columnBtnText</code> default: "Columns..."</li>
+    </ul>
+
+    <p>The columntoggle mode also has an option, <code>classes</code>, which is only configurable via JavaScript because it expects an object literal value. The <code>classes</code> option has two properties that define the structural classnames that the plugin uses:</h3>
+
+      <ul>
+        <li><code>classes.popup</code> default: "ui-table-columntoggle-popup"</li>
+        <li><code>classes.columnBtn</code> default: "ui-table-columntoggle-btn"</li>
+        <li><code>classes.priorityPrefix</code> default: "ui-table-priority-"</li>
+        <li><code>classes.columnToggleTable</code> default: "ui-table-columntoggle"</li>
+      </ul>
 
 	    
 			<h3>Setting media queries for column auto-hiding</h3>
