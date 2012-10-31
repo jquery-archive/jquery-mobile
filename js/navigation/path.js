@@ -121,6 +121,7 @@ define([
 							break;
 					}
 				}
+
 				return "/" + absStack.join( "/" );
 			},
 
@@ -303,6 +304,43 @@ define([
 				}
 
 				return url;
+			},
+
+			mergeSearch: function( first, second ) {
+				var firstSearch, secondSearch,
+					resolvedSearch = {},
+					searchString = [],
+					delimiter = "&";
+
+				firstSearch = first.replace( /^\?/, "" ).split( /&|;/ );
+				secondSearch = second.replace( /^\?/, "" ).split( /&|;/ );
+
+				if( first.indexOf( ";" ) >= 0 || second.indexOf( ";" ) >=0 ) {
+					delimiter = ";";
+				}
+
+				this.paramPairsToObject( firstSearch, resolvedSearch );
+				this.paramPairsToObject( secondSearch, resolvedSearch );
+
+				$.each( resolvedSearch, function(key, value) {
+					searchString.push(key + "=" + value);
+				});
+
+				return searchString.join(delimiter);
+			},
+
+			paramPairsToObject: function( pairs, object ) {
+				$.each( pairs, function(i, pair) {
+					var keyValue = pair.split( "=" ),
+						key = keyValue[0],
+						value = keyValue[1];
+
+					if( !key ){
+						return;
+					}
+
+					object[key] = value;
+				});
 			}
 		};
 

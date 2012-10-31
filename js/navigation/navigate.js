@@ -62,14 +62,25 @@ define([
 
 	$.navigate.squash = function( url, data ) {
 		var state, href,
-			hash = url,
-			isPath = path.isPath( hash ),
-			resolutionUrl = isPath ? path.getLocation() : $.mobile.getDocumentUrl();
+			isPath = path.isPath( url ),
+			hash = isPath ? path.stripHash(url) : url,
+			hashUri = path.parseUrl( hash ),
+			resolutionUrl = isPath ? path.getLocation() : $.mobile.getDocumentUrl(),
+			passedSearch, currentSearch, mergedSearch, preservedHash;
 
 		// make the hash abolute with the current href
 		href = path.makeUrlAbsolute( hash, resolutionUrl );
 
 		if ( isPath ) {
+			passedSearch = hashUri.search;
+			currentSearch = path.parseUrl( resolutionUrl ).search;
+			mergedSearch = path.mergeSearch( passedSearch, currentSearch );
+
+			mergedSearch = mergedSearch ? "?" + mergedSearch : "";
+			preservedHash = (hashUri.hash || path.parseLocation().hash);
+
+			href = path.parseUrl( href );
+			href = href.protocol + "//" + href.host + href.pathname + mergedSearch + preservedHash;
 			href = path.resetUIKeys( href );
 		}
 
@@ -134,7 +145,10 @@ define([
 
 			// squash a hash with replacestate
 			if( path.isPath(hash) ) {
+				console.log( "location  before squash" + location.href );
+				console.log( "squashing hash with:" + hash );
 				state = $.navigate.squash( hash );
+				console.log( "location after squash" + location.href );
 			}
 
 			// record the new hash as an additional history entry
@@ -301,9 +315,9 @@ define([
 			//
 			// TODO this is also convoluted and confusing
 			if ( newActiveIndex < a ) {
-				( opts.present || opts.back )( this.getActive(), 'back' );
+				( opts.present || opts.back || $.noop )( this.getActive(), 'back' );
 			} else if ( newActiveIndex > a ) {
-				( opts.present || opts.forward )( this.getActive(), 'forward' );
+				( opts.present || opts.forward || $.noop )( this.getActive(), 'forward' );
 			} else if ( newActiveIndex === a ) {
 				if( opts.current ) {
 					opts.current( this.getActiveIndex );
