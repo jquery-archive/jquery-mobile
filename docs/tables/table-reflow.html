@@ -27,7 +27,7 @@
         <h2>Reflow table mode</h2>
 
 
-	<p>The reflow table mode works by collapsing the table columns into a stacked presentation that looks like blocks of label/data pairs for each row. It's not possible to reliably style a table to look like this, so the plugin adds a bit of extra markup to make the display work.</p>
+	<p>The reflow table mode works by collapsing the table columns into a stacked presentation that looks like blocks of label/data pairs for each row. Since the HTML source order of a table prohibits styling a table to look like this,  the plugin dynamically adds a bit of  markup to make the display work (without affecting accessibility).</p>
 	
 	<style>
 	/* Media query to show as a standard table at wider widths */ 
@@ -136,9 +136,19 @@
 
 		<h3>Using reflow mode</h3>
 	
-		<p>The reflow responsive table mode is the simplest in terms of markup requirements because it only requires a table with a <code>data-role=&quot;table&quot;</code> on the table element. There is no need to set the <code>data-mode</code> attribute since <code>reflow</code> is the default. For good measure, assign a unique <code>ID</code> to the table.</p>
+		<p>The reflow responsive table mode is the simplest in terms of markup requirements because it only requires a table with a <code>data-role=&quot;table&quot;</code> on the table element. There is no need to set the <code>data-mode</code> attribute since <code>reflow</code> is the default.</p>
 	
 		<pre><code>&lt;table <strong>data-role=&quot;table&quot; ID=&quot;my-table&quot;</strong>&gt;</code></pre>
+
+    <h3>Options</h3>
+    <p>The reflow mode has one option, <code>classes</code>, which is only configurable via JavaScript because it expects an object literal value. The <code>classes</code> option has two properties that define the structural classnames that the plugin uses:</h3>
+
+      <ul>
+        <li><code>classes.reflowTable</code> (default: "ui-table-reflow")</li>
+        <li><code>classes.cellLabels</code> (default: "ui-table-cell-label")</li>
+      </ul>
+
+    <h3>How it works</h3>
 	
 	
 		<p>The plugin works by parsing the values (or <code>abbr title</code>) of the first row of header (<code>TH</code>) elements found in the table. For example, in the table above, the third table header is parsed to grab the contents ("Year"):</p>
