@@ -87,7 +87,7 @@ define( [ "jquery",
 			}
 		},
 
-		_maybeRefreshTimeout: function() {
+		_expectResizeEvent: function() {
 			var winCoords = windowCoords();
 
 			if ( this._resizeData ) {
@@ -112,14 +112,21 @@ define( [ "jquery",
 		},
 
 		_resizeTimeout: function() {
-			if ( !this._maybeRefreshTimeout() ) {
-				// effectively rapid-open the popup while leaving the screen intact
-				this._trigger( "beforeposition" );
-				this._ui.container
-					.removeClass( "ui-selectmenu-hidden" )
-					.offset( this._placementCoords( this._desiredCoords( undefined, undefined, "window" ) ) );
+			if ( this._isOpen ) {
+				if ( !this._expectResizeEvent() ) {
+					if ( this._ui.container.hasClass( "ui-popup-hidden" ) ) {
+						// effectively rapid-open the popup while leaving the screen intact
+						this._trigger( "beforeposition" );
+						this._ui.container
+							.removeClass( "ui-popup-hidden" )
+							.offset( this._placementCoords( this._desiredCoords( undefined, undefined, "window" ) ) );
+					}
 
-				this._resizeScreen();
+					this._resizeScreen();
+					this._resizeData = null;
+					this._orientationchangeInProgress = false;
+				}
+			} else {
 				this._resizeData = null;
 				this._orientationchangeInProgress = false;
 			}
@@ -127,18 +134,19 @@ define( [ "jquery",
 
 		_handleWindowResize: function( e ) {
 			if ( this._isOpen ) {
-				this._maybeRefreshTimeout();
+				if ( ( this._expectResizeEvent() || this._orientationchangeInProgress ) &&
+					!this._ui.container.hasClass( "ui-popup-hidden" ) ) {
+					// effectively rapid-close the popup while leaving the screen intact
+					this._ui.container
+						.addClass( "ui-popup-hidden" )
+						.removeAttr( "style" );
+				}
 			}
 		},
 
 		_handleWindowOrientationchange: function( e ) {
-
-			if ( !this._orientationchangeInProgress ) {
-				// effectively rapid-close the popup while leaving the screen intact
-				this._ui.container
-					.addClass( "ui-selectmenu-hidden" )
-					.removeAttr( "style" );
-
+			if ( !this._orientationchangeInProgress && this._isOpen ) {
+				this._expectResizeEvent();
 				this._orientationchangeInProgress = true;
 			}
 		},
@@ -159,7 +167,7 @@ define( [ "jquery",
 			var ui = {
 					screen: $( "<div class='ui-screen-hidden ui-popup-screen'></div>" ),
 					placeholder: $( "<div style='display: none;'><!-- placeholder --></div>" ),
-					container: $( "<div class='ui-popup-container ui-selectmenu-hidden'></div>" )
+					container: $( "<div class='ui-popup-container ui-popup-hidden'></div>" )
 				},
 				thisPage = this.element.closest( ".ui-page" ),
 				myId = this.element.attr( "id" ),
@@ -275,6 +283,9 @@ define( [ "jquery",
 			this._ui.container.removeClass( this._fallbackTransition );
 			if ( value && value !== "none" ) {
 				this._fallbackTransition = $.mobile._maybeDegradeTransition( value );
+				if ( this._fallbackTransition === "none" ) {
+					this._fallbackTransition = "";
+				}
 				this._ui.container.addClass( this._fallbackTransition );
 			}
 		},
@@ -443,7 +454,7 @@ define( [ "jquery",
 
 		_animate: function( args ) {
 			// NOTE before removing the default animation of the screen
-			//      this had an animate callback that would relove the deferred
+			//      this had an animate callback that would resolve the deferred
 			//      now the deferred is resolved immediately
 			// TODO remove the dependency on the screen deferred
 			this._ui.screen
@@ -456,14 +467,16 @@ define( [ "jquery",
 				if ( args.applyTransition ) {
 					this._applyTransition( args.transition );
 				}
-				this._ui.container
-					.animationComplete( $.proxy( args.prereqs.container, "resolve" ) )
-					.addClass( args.containerClassToAdd )
-					.removeClass( args.classToRemove );
-			} else {
-				this._ui.container.removeClass( args.classToRemove );
-				args.prereqs.container.resolve();
+				if ( this._fallbackTransition ) {
+					this._ui.container
+						.animationComplete( $.proxy( args.prereqs.container, "resolve" ) )
+						.addClass( args.containerClassToAdd )
+						.removeClass( args.classToRemove );
+					return;
+				}
 			}
+			this._ui.container.removeClass( args.classToRemove );
+			args.prereqs.container.resolve();
 		},
 
 		// The desired coordinates passed in will be returned untouched if no reference element can be identified via
@@ -512,6 +525,7 @@ define( [ "jquery",
 
 		_completeOpen: function() {
 			this._ui.container.attr( "tabindex", "0" ).focus();
+			this._expectResizeEvent();
 			this._trigger( "afteropen" );
 		},
 
@@ -578,7 +592,7 @@ define( [ "jquery",
 			this._ui.screen.removeClass( "ui-screen-hidden" );
 
 			this._ui.container
-				.removeClass( "ui-selectmenu-hidden" )
+				.removeClass( "ui-popup-hidden" )
 				.offset( coords );
 
 			if ( this.options.overlayTheme && androidBlacklist ) {
@@ -618,7 +632,7 @@ define( [ "jquery",
 		_closePrereqContainer: function() {
 			this._ui.container
 				.removeClass( "reverse out" )
-				.addClass( "ui-selectmenu-hidden" )
+				.addClass( "ui-popup-hidden" )
 				.removeAttr( "style" );
 		},
 

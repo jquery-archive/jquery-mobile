@@ -170,3 +170,5 @@
 	-webkit-border-radius: inherit;
 	border-radius:         inherit;
 }
+
+.ui-popup-hidden { top: -99999px; left: -9999px; }

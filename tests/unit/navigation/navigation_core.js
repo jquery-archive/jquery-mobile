@@ -1307,4 +1307,18 @@
 			}
 		]);
 	});
+
+	asyncTest( "external page is accessed correctly even if it has a space in the url", function(){
+		$.testHelper.pageSequence([
+			function(){
+				$.mobile.changePage( " external.html" );
+			},
+			function(){
+				equal( $.mobile.activePage.attr( "id" ), "external-test", "the correct page is loaded" );
+				start();
+			}
+
+		]);
+	});
+	
 })(jQuery);
