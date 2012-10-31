@@ -62,6 +62,7 @@ $( document ).delegate( ":jqmData(role='table')", "tablecreate", function() {
                theme: o.columnPopupTheme
             });
       }
+
    });
 
    $menuButton
@@ -85,18 +86,20 @@ $( document ).delegate( ":jqmData(role='table')", "tablecreate", function() {
    } );
 
 
-   function refreshMenu(){
+
+   // refresh method
+   self.refresh = function(){
       $menu.find( "input" ).each( function(){
             this.checked = $( this ).jqmData( "cells" ).eq(0).is( ":visible" );
             $( this ).checkboxradio( "refresh" );
       } );
-   }
+   };
 
-   $( window ).on( "throttledresize", refreshMenu );
+   $( window ).on( "throttledresize", self.refresh );
 
    // TODO. Why is a stack unwind needed here?
    // Maybe because we're waiting on CSS to be applied before that :visible check above can work
-   setTimeout( refreshMenu, 0 );
+   setTimeout( self.refresh, 0 );
 
 });
 
