@@ -26,9 +26,12 @@ $.widget( "mobile.table", $.mobile.widget, {
 
       this.element.addClass( this.options.classes.table );
 
+      // Expose headers and allHeaders properties on the widget
+      // headers references the THs within the first TR in the table
+      self.headers = this.element.find( "tr:eq(0)" ).children();
 
-      self.headers = trs.eq(0).children();
-      self.allHeaders = trs.children();
+      // allHeaders references headers, plus all THs in the thead, which may include several rows, or not
+      self.allHeaders = self.headers.add( trs.children() );
 
       trs.each(function(){
 
@@ -37,20 +40,21 @@ $.widget( "mobile.table", $.mobile.widget, {
         $( this ).children().each(function( i ){
 
           var span = parseInt( $( this ).attr( "colspan" ), 10 ),
-            sel = ":nth-child(" + (coltally + 1) + ")";
+            sel = ":nth-child(" + ( coltally + 1 ) + ")";
 
           if( span ){
-            for( var j = 0; j < span-1; j++ ){
+            for( var j = 0; j < span - 1; j++ ){
               coltally++;
-              sel += ", :nth-child(" + (coltally + 1) + ")";
+              sel += ", :nth-child(" + ( coltally + 1 ) + ")";
             }
           }
 
+          // Store "cells" data on header as a reference to all cells in the same column as this TH
           $( this ).jqmData( "cells", self.element.find( "tr" ).not( trs.eq(0) ).not( this ).children( sel ) );
 
           coltally++;
-        });
 
+        });
 
       });
 
