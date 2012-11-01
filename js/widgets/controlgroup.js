@@ -7,7 +7,7 @@
 
 define( [ "jquery",
 	"../jquery.mobile.buttonMarkup",
-	"forms/button",
+	"./forms/button",
 	"../jquery.mobile.widget" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
