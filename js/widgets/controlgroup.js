@@ -15,9 +15,9 @@ define( [ "jquery",
 	function flipClasses( els, flCorners  ) {
 		els.removeClass( "ui-controlgroup-last" )
 			.buttonMarkup( { corners: false, shadow: false } )
-			.eq( 0 ).buttonMarkup( { corners: flCorners[ 0 ] } )
+			.eq( 0 ).buttonMarkup( { corners: flCorners[ 0 ], cornerstyle: "group" } )
 			.end()
-			.last().buttonMarkup( { corners: flCorners[ 1 ] } ).addClass( "ui-controlgroup-last" );
+			.last().buttonMarkup( { corners: flCorners[ 1 ], cornerstyle: "group" } ).addClass( "ui-controlgroup-last" );
 	}
 
 	$.widget( "mobile.controlgroup", $.mobile.widget, {
@@ -44,7 +44,7 @@ define( [ "jquery",
 			if ( grouplegend.length ) {
 				ui.legend.append( grouplegend ).insertBefore( $el.children( 0 ) );
 			}
-			$el.addClass( "ui-btn-corner-all ui-controlgroup" );
+			$el.addClass( "ui-corner-all ui-controlgroup" );
 
 			$.each( this.options, function( key, value ) {
 				// Cause initial options to be applied by their handler by temporarily setting the option to undefined
