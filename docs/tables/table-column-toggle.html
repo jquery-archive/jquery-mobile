@@ -29,65 +29,9 @@
       
       	<p>A user may choose to check as many columns as they want by tapping the "Columns..." button to open the column 
 	      chooser popup. The popup contains a dynamically generated list of columns based on the table markup that can be checked and unchecked to adjust the visible columns. </p>
-
-		<style>
-			/* Show priority 1 at 320px (20em x 16px) */ 
-			@media screen and (min-width: 20em) {
-			   th.ui-table-priority-1,
-			   td.ui-table-priority-1 {
-			     display: table-cell;
-			   }
-			}
-			/* Show priority 2 at 480px (30em x 16px) */ 
-			@media screen and (min-width: 30em) {
-			   th.ui-table-priority-2,
-			   td.ui-table-priority-2 {
-			     display: table-cell;
-			   }
-			}
-			/* Show priority 3 at 640px (40em x 16px) */ 
-			@media screen and (min-width: 40em) {
-			   th.ui-table-priority-3,
-			   td.ui-table-priority-3 {
-			     display: table-cell;
-			   }
-			}
-			/* Show priority 4 at 800px (50em x 16px) */ 
-			@media screen and (min-width: 50em) {
-			  th.ui-table-priority-4,
-			  td.ui-table-priority-4 {
-			     display: table-cell;
-			   }
-			}
-			/* Show priority 5 at 960px (60em x 16px) */ 
-			@media screen and (min-width: 60em) {
-			  th.ui-table-priority-5,
-			  td.ui-table-priority-5 {
-			     display: table-cell;
-			   }
-			}
-			/* Show priority 6 at 1200 (75em x 16px) */ 
-			@media screen and (min-width: 75em) {
-			  th.ui-table-priority-6,
-			  td.ui-table-priority-6 {
-			     display: table-cell;
-			   }
-			}
-			/* Manually hidden */ 
-			th.ui-table-cell-hidden,
-			td.ui-table-cell-hidden {
-			  display: none;
-			}
-
-			/* Manually shown */
-			th.ui-table-cell-visible,
-			td.ui-table-cell-visible {
-			   display: table-cell;
-			}
-		</style>
+	
 		
-         <table data-role="table" id="movie-table" data-mode="columntoggle">
-
+         <table data-role="table" id="movie-table" data-mode="columntoggle" class="movie-toggle">
               <thead>
                 <tr>
                   <th data-priority="1">Rank</th>
@@ -171,6 +115,51 @@
               </tbody>
             </table>
 
+
+			<!-- We're using a style block to make it easy to view the custom styles -->
+			<!-- In production, these should be added to an custom.css file loaded in the head -->
+			<style>
+				/* Show priority 1 at 320px (20em x 16px) */ 
+				@media screen and (min-width: 20em) {
+				   .movie-toggle th.ui-table-priority-1,
+				   .movie-toggle td.ui-table-priority-1 {
+				     display: table-cell;
+				   }
+				}
+				/* Show priority 2 at 480px (30em x 16px) */ 
+				@media screen and (min-width: 30em) {
+				   .movie-toggle th.ui-table-priority-2,
+				   .movie-toggle td.ui-table-priority-2 {
+				     display: table-cell;
+				   }
+				}
+				/* Show priority 3 at 640px (40em x 16px) */ 
+				@media screen and (min-width: 40em) {
+				   .movie-toggle th.ui-table-priority-3,
+				   .movie-toggle td.ui-table-priority-3 {
+				     display: table-cell;
+				   }
+				}
+				/* Show priority 4 at 800px (50em x 16px) */ 
+				@media screen and (min-width: 50em) {
+				  .movie-toggle th.ui-table-priority-4,
+				  .movie-toggle td.ui-table-priority-4 {
+				     display: table-cell;
+				   }
+				}
+
+				/* Manually hidden */ 
+				.movie-toggle th.ui-table-cell-hidden,
+				.movie-toggle td.ui-table-cell-hidden {
+				  display: none;
+				}
+
+				/* Manually shown */
+				.movie-toggle th.ui-table-cell-visible,
+				.movie-toggle td.ui-table-cell-visible {
+				   display: table-cell;
+				}
+			</style>
 
 			<h3>Using column toggle mode</h3>
 			<p>The plugin automates a few key things: injecting the column chooser button, and generating the popup with pick list of column names. The list of columns in the menu is populated by parsing the values (or <code>abbr title</code>) of the first row of header (<code>TH</code>) elements found in the table. It also correctly sets the check state for each column checkbox to match the columns currently visible to sync these with what's applied via media queries.</p>
