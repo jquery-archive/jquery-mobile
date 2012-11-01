@@ -45,14 +45,24 @@ h1#jqm-logo {
 	color: #666;
 }
 .jqm-footer p {
-	font-weight: normal;
 	font-size: .9em;
-	margin: 1.5em 15px;	
+	margin: 1em 15px;	
 }
-
-/* Content */
-.jqm-content {
-	padding: 15px;
+.jqm-footer p.jqm-version {
+	font-weight: bold;
+}
+@media all and (min-width:650px) {
+	.jqm-footer {
+		overflow: hidden;		
+	}
+	.jqm-footer p {
+		margin: 1.5em 15px;
+		float: left;		
+	}
+	.jqm-footer p.jqm-version {
+		float: right;
+		font-weight: normal;
+	}
 }
 
 /* F bar theme - just for the docs overview headers */
