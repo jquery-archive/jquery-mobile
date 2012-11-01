@@ -1,4 +1,4 @@
-/* JQM Docs CSS */
+/* JQM Demos CSS */
 
 strong { font-weight: bold; }
 img { max-width: 100%; }
@@ -65,7 +65,7 @@ h1#jqm-logo {
 	}
 }
 
-/* F bar theme - just for the docs overview headers */
+/* Swatch F - bar & buttons */
 .ui-bar-f {
 	border: 1px solid #56A00E;
 	background: 			#74b042;
@@ -150,7 +150,7 @@ h1#jqm-logo {
 	text-decoration: none;
 }
 
-/* Demo source code */
+/* View source code */
 [id|="jqm-demo"].ui-popup-container {
 	width: 90%;
 	max-width: 1400px;
