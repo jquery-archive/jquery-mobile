@@ -22,6 +22,19 @@ var cornerClasses = {
 cornerClasses[true] = " ui-btn-corner-all";
 cornerClasses[false] = "";
 
+var groupCornerClasses = {
+	"tl": " ui-corner-tl",
+	"tr": " ui-corner-tr",
+	"bl": " ui-corner-bl",
+	"br": " ui-corner-br",
+	"top": " ui-corner-top",
+	"bottom": " ui-corner-bottom",
+	"left": " ui-corner-left",
+	"right": " ui-corner-right"
+};
+groupCornerClasses[true] = " ui-corner-all";
+groupCornerClasses[false] = "";
+
 $.fn.buttonMarkup = function( options ) {
 	var $workingSet = this,
 		mapToDataAttr = function( key, value ) {
@@ -41,10 +54,13 @@ $.fn.buttonMarkup = function( options ) {
 				inline:     options.inline     !== undefined ? options.inline     : el.jqmData( "inline" ),
 				shadow:     options.shadow     !== undefined ? options.shadow     : el.jqmData( "shadow" ),
 				corners:    options.corners    !== undefined ? options.corners    : el.jqmData( "corners" ),
+				cornerstyle:options.cornerstyle!== undefined ? options.cornerstyle: el.jqmData( "cornerstyle" ),
 				iconshadow: options.iconshadow !== undefined ? options.iconshadow : el.jqmData( "iconshadow" ),
 				mini:       options.mini       !== undefined ? options.mini       : el.jqmData( "mini" )
 			}, options ),
 
+			// Lookup table from which to grab corner classes
+			cornerLookup,
 			// Classes Defined
 			innerClass = "ui-btn-inner",
 			textClass = "ui-btn-text",
@@ -93,7 +109,8 @@ $.fn.buttonMarkup = function( options ) {
 			o.theme = $.mobile.getInheritedTheme( el, "c" );
 		}
 
-		cornerClass = ( cornerClasses[ o.corners ] ? cornerClasses[ o.corners ] : "" );
+		cornerLookup = ( o.cornerstyle === "group" ? groupCornerClasses: cornerClasses );
+		cornerClass = ( cornerLookup[ o.corners ] ? cornerLookup[ o.corners ] : "" );
 
 		buttonClass = "ui-btn ";
 		buttonClass += ( hover ? "ui-btn-hover-" + o.theme : "" );
