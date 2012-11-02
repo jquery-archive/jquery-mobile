@@ -65,15 +65,7 @@ $( document ).delegate( ":jqmData(role='table')", "tablecreate", function() {
 
    });
 
-   $menuButton
-      .insertBefore( $table )
-      .buttonMarkup({
-         theme: o.columnBtnTheme
-      });
-
-   $popup
-      .insertBefore( $table )
-      .popup();
+   
 
    // bind change event listeners to inputs - TODO: move to a private method?
    $menu.on( "change", "input", function( e ){
@@ -85,21 +77,27 @@ $( document ).delegate( ":jqmData(role='table')", "tablecreate", function() {
       }
    } );
 
+   $menuButton
+      .insertBefore( $table )
+      .buttonMarkup({
+         theme: o.columnBtnTheme
+      });
 
+   $popup
+      .insertBefore( $table )
+      .popup();
 
    // refresh method
    self.refresh = function(){
       $menu.find( "input" ).each( function(){
-            this.checked = $( this ).jqmData( "cells" ).eq(0).is( ":visible" );
+            this.checked = $( this ).jqmData( "cells" ).eq(0).css( "display" ) === "table-cell";
             $( this ).checkboxradio( "refresh" );
       } );
    };
 
    $( window ).on( "throttledresize", self.refresh );
 
-   // TODO. Why is a stack unwind needed here?
-   // Maybe because we're waiting on CSS to be applied before that :visible check above can work
-   setTimeout( self.refresh, 0 );
+   self.refresh();
 
 });
 
