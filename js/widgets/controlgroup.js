@@ -12,14 +12,6 @@ define( [ "jquery",
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-	function flipClasses( els, flCorners  ) {
-		els.removeClass( "ui-controlgroup-last" )
-			.buttonMarkup( { corners: false, shadow: false } )
-			.eq( 0 ).buttonMarkup( { corners: flCorners[ 0 ], cornerstyle: "group" } )
-			.end()
-			.last().buttonMarkup( { corners: flCorners[ 1 ], cornerstyle: "group" } ).addClass( "ui-controlgroup-last" );
-	}
-
 	$.widget( "mobile.controlgroup", $.mobile.widget, {
 		options: {
 			shadow: false,
@@ -54,6 +46,14 @@ define( [ "jquery",
 			});
 
 			this.refresh();
+		},
+
+		_flipClasses: function( els, flCorners  ) {
+			els.removeClass( "ui-controlgroup-last" )
+				.buttonMarkup( { corners: false, shadow: false } )
+				.eq( 0 ).buttonMarkup( { corners: flCorners[ 0 ], cornerstyle: "group" } )
+				.end()
+				.last().buttonMarkup( { corners: flCorners[ 1 ], cornerstyle: "group" } ).addClass( "ui-controlgroup-last" );
 		},
 
 		_setOption: function( key, value ) {
@@ -93,7 +93,7 @@ define( [ "jquery",
 				corners = ( this.options.type === "horizontal" ? [ "left", "right" ] : [ "top", "bottom" ] );
 			}
 
-			flipClasses( els, corners );
+			this._flipClasses( els, corners );
 		}
 	});
 
