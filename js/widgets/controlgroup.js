@@ -15,7 +15,7 @@ define( [ "jquery",
 	$.widget( "mobile.controlgroup", $.mobile.widget, {
 		options: {
 			shadow: false,
-			excludeInvisible: false,
+			excludeInvisible: true,
 			type: "vertical",
 			mini: false,
 			initSelector: ":jqmData(role='controlgroup')"
