@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Form test page - jQuery Mobile Demos</title>
+	<title>Form label ui-hidden-accessible - jQuery Mobile Demos</title>
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
 	<link rel="stylesheet" href="../_assets/css/jqm-demos.css"/>
 	<script src="../../../js/jquery.js"></script>
@@ -14,7 +14,7 @@
 <div data-role="page">
 
 	<div data-role="header" data-theme="f">
-		<h1>Form test page</h1>
+		<h1>Form label ui-hidden-accessible</h1>
 		<a href="../" data-icon="home" data-iconpos="notext" data-ajax="false">Home</a>
 	</div><!-- /header -->
     
@@ -22,9 +22,7 @@
     
         <div class="content-primary">
 
-			<h2>Form</h2>
-											
-			<h3 class="subtitle">Without ui-field-contain, label ui-hidden-accessible - fullsize</h3>
+			<h2>Without fieldcontain, label ui-hidden-accessible - fullsize</h2>
 			
 			<p>Note: ui-hidden-accessible does not work on legend.</p>
 			
@@ -33,7 +31,7 @@
 				<div data-demo-html="true">                    
                     <label for="search-4" class="ui-hidden-accessible">Search Input:</label>
                     <input type="search" name="search-4" id="search-4" value="" />
-                </div><!--/demo -->  
+                </div><!--/demo-html -->  
 
 				<div data-demo-html="true">                    
                     <label for="select-multiple-4" class="ui-hidden-accessible">Select:</label>
@@ -43,7 +41,7 @@
                         <option value="medium">Two</option>
                         <option value="large">Three</option>
                     </select>
-                </div><!--/demo -->  
+                </div><!--/demo-html -->  
 
 				<div data-demo-html="true">                    
                     <fieldset data-role="controlgroup" data-mini="true">
@@ -52,7 +50,7 @@
                         <input type="button" data-icon="back" data-iconpos="right" value="Two" />
                         <a href="#" data-role="button" data-icon="grid" data-iconpos="right">Three</a>
                     </fieldset>
-                </div><!--/demo -->  
+                </div><!--/demo-html -->  
 
 				<div data-demo-html="true">                    
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
@@ -61,7 +59,7 @@
                         <input type="button" data-icon="back" data-iconpos="right" value="Two" />
                         <a href="#" data-role="button" data-icon="grid" data-iconpos="right">Three</a>
                     </fieldset>
-                </div><!--/demo -->  
+                </div><!--/demo-html -->  
 
 				<div data-demo-html="true">                    
                     <fieldset data-role="controlgroup" data-mini="true">
@@ -85,7 +83,7 @@
                         <option value="#">Three</option>
                         </select>
                     </fieldset>
-                </div><!--/demo -->  
+                </div><!--/demo-html -->  
 
 				<div data-demo-html="true">                    
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
@@ -109,7 +107,7 @@
                         <option value="#">Three</option>
                         </select>
                     </fieldset>
-                </div><!--/demo -->  
+                </div><!--/demo-html -->  
 
 				<div data-demo-html="true">                    
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
@@ -123,12 +121,12 @@
                         <option value="#">Three</option>
                         </select>
                     </fieldset>
-                </div><!--/demo -->  
+                </div><!--/demo-html -->  
 
 				<div data-demo-html="true">                    
                     <label for="slider-4" class="ui-hidden-accessible">Slider:</label>
                     <input type="range" name="slider-4" id="slider-4" value="50" min="0" max="100" data-highlight="true" data-mini="true" />
-                </div><!--/demo -->  
+                </div><!--/demo-html -->  
 
 				<div data-demo-html="true">                    
                     <label for="flip-4" class="ui-hidden-accessible">Flip toggle:</label>
@@ -136,7 +134,7 @@
                         <option value="off">Off</option>
                         <option value="on">On</option>
                     </select>
-                </div><!--/demo -->  
+                </div><!--/demo-html -->  
 
 				<div data-demo-html="true">                    
                     <fieldset data-role="controlgroup">
@@ -144,7 +142,7 @@
                         <label for="checkbox-4">I agree</label>
                         <input type="checkbox" name="checkbox-4" id="checkbox-4" />
                     </fieldset>
-                </div><!--/demo -->  
+                </div><!--/demo-html -->  
 
 				<div data-demo-html="true">                    
                     <fieldset data-role="controlgroup">
@@ -156,7 +154,7 @@
                         <input type="checkbox" name="checkbox-v-4c" id="checkbox-v-4c" />
                         <label for="checkbox-v-4c">Three</label>
                     </fieldset>
-                </div><!--/demo -->  
+                </div><!--/demo-html -->  
 
 				<div data-demo-html="true">                    
                     <fieldset data-role="controlgroup">
@@ -168,7 +166,7 @@
                         <input type="radio" name="radio-choice-v-4" id="radio-choice-v-4c" value="other" />
                         <label for="radio-choice-v-4c">Three</label>
                     </fieldset>
-                </div><!--/demo -->  
+                </div><!--/demo-html -->  
 
 				<div data-demo-html="true">                    
                     <fieldset data-role="controlgroup" data-type="horizontal">
@@ -180,7 +178,7 @@
                         <input type="checkbox" name="checkbox-h-4c" id="checkbox-h-4c" />
                         <label for="checkbox-h-4c">Three</label>
                     </fieldset>
-                </div><!--/demo -->  
+                </div><!--/demo-html -->  
 
 				<div data-demo-html="true">                    
                     <fieldset data-role="controlgroup" data-type="horizontal">
@@ -192,33 +190,33 @@
                         <input type="radio" name="radio-choice-h-4" id="radio-choice-h-4c" value="other" />
                         <label for="radio-choice-h-4c">Three</label>
                     </fieldset>
-                </div><!--/demo -->  
+                </div><!--/demo-html -->  
 
 				<div data-demo-html="true">                    
                     <label for="textinput-4" class="ui-hidden-accessible">Text Input:</label>
                     <input type="text" name="textinput-4" id="textinput-4" placeholder="Text input" value="" />
-                </div><!--/demo -->  
+                </div><!--/demo-html -->  
 
 				<div data-demo-html="true">                    
                     <label for="textarea-4" class="ui-hidden-accessible">Textarea:</label>
                     <textarea cols="40" rows="8" name="textarea-4" id="textarea-4">Textarea</textarea>
-                </div><!--/demo -->  
+                </div><!--/demo-html -->  
 
 				<div data-demo-html="true">                    
                     <label for="submit-4" class="ui-hidden-accessible">Send:</label>
                     <button type="submit" id="submit-4">Submit</button>
-                </div><!--/demo -->  
+                </div><!--/demo-html -->  
 
             </form>
                     
-            <h3 class="subtitle">Without ui-field-contain, label/legend ui-hidden-accessible - mini</h3>
+            <h2>Without fieldcontain, label/legend ui-hidden-accessible - mini</h2>
             
             <form action="#" method="get">
 
 				<div data-demo-html="true">                    
                     <label for="search-8" class="ui-hidden-accessible">Search Input:</label>
                     <input type="search" name="search-8" id="search-8" value="" data-mini="true" />
-                </div><!--/demo -->  
+                </div><!--/demo-html -->  
 
 				<div data-demo-html="true">                    
                     <label for="select-multiple-8" class="ui-hidden-accessible">Select:</label>
@@ -228,7 +226,7 @@
                         <option value="medium">Two</option>
                         <option value="large">Three</option>
                     </select>
-                </div><!--/demo -->  
+                </div><!--/demo-html -->  
 
 				<div data-demo-html="true">                    
                     <fieldset data-role="controlgroup" data-mini="true">
@@ -237,7 +235,7 @@
                         <input type="button" data-icon="back" data-iconpos="right" value="Two" />
                         <a href="#" data-role="button" data-icon="grid" data-iconpos="right">Three</a>
                     </fieldset>
-                </div><!--/demo -->  
+                </div><!--/demo-html -->  
 
 				<div data-demo-html="true">                    
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
@@ -246,7 +244,7 @@
                         <input type="button" data-icon="back" data-iconpos="right" value="Two" />
                         <a href="#" data-role="button" data-icon="grid" data-iconpos="right">Three</a>
                     </fieldset>
-                </div><!--/demo -->  
+                </div><!--/demo-html -->  
 
 				<div data-demo-html="true">                    
                     <fieldset data-role="controlgroup" data-mini="true">
@@ -270,7 +268,7 @@
                         <option value="#">Three</option>
                         </select>
                     </fieldset>
-                </div><!--/demo -->  
+                </div><!--/demo-html -->  
 
 				<div data-demo-html="true">                    
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
@@ -294,7 +292,7 @@
                         <option value="#">Three</option>
                         </select>
                     </fieldset>
-                </div><!--/demo -->  
+                </div><!--/demo-html -->  
 
 				<div data-demo-html="true">                    
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
@@ -308,12 +306,12 @@
                         <option value="#">Three</option>
                         </select>
                     </fieldset>
-                </div><!--/demo -->  
+                </div><!--/demo-html -->  
 
 				<div data-demo-html="true">                    
                     <label for="slider-8" class="ui-hidden-accessible">Slider:</label>
                     <input type="range" name="slider-8" id="slider-8" value="50" min="0" max="100" data-highlight="true" data-mini="true" />
-                </div><!--/demo -->  
+                </div><!--/demo-html -->  
 
 				<div data-demo-html="true">                    
                     <label for="flip-8" class="ui-hidden-accessible">Flip toggle:</label>
@@ -321,7 +319,7 @@
                         <option value="off">Off</option>
                         <option value="on">On</option>
                     </select>
-                </div><!--/demo -->  
+                </div><!--/demo-html -->  
 
 				<div data-demo-html="true">                    
                     <fieldset data-role="controlgroup" data-mini="true">
@@ -329,7 +327,7 @@
                         <label for="checkbox-8">I agree</label>
                         <input type="checkbox" name="checkbox-8" id="checkbox-8" />
                     </fieldset>
-                </div><!--/demo -->  
+                </div><!--/demo-html -->  
 
 				<div data-demo-html="true">                    
                     <fieldset data-role="controlgroup" data-mini="true">
@@ -341,7 +339,7 @@
                         <input type="checkbox" name="checkbox-v-8c" id="checkbox-v-8c" />
                         <label for="checkbox-v-8c">Three</label>
                     </fieldset>
-                </div><!--/demo -->  
+                </div><!--/demo-html -->  
 
 				<div data-demo-html="true">                    
                     <fieldset data-role="controlgroup" data-mini="true">
@@ -353,7 +351,7 @@
                         <input type="radio" name="radio-choice-v-8" id="radio-choice-v-8c" value="other" />
                         <label for="radio-choice-v-8c">Three</label>
                     </fieldset>
-                </div><!--/demo -->  
+                </div><!--/demo-html -->  
 
 				<div data-demo-html="true">                    
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
@@ -365,7 +363,7 @@
                         <input type="checkbox" name="checkbox-h-8c" id="checkbox-h-8c" />
                         <label for="checkbox-h-8c">Three</label>
                     </fieldset>
-                </div><!--/demo -->  
+                </div><!--/demo-html -->  
 
 				<div data-demo-html="true">                    
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
@@ -377,22 +375,22 @@
                         <input type="radio" name="radio-choice-h-8" id="radio-choice-h-8c" value="other" />
                         <label for="radio-choice-h-8c">Three</label>
                     </fieldset>
-                </div><!--/demo -->  
+                </div><!--/demo-html -->  
 
 				<div data-demo-html="true">                    
                     <label for="textinput-8" class="ui-hidden-accessible">Text Input:</label>
                     <input type="text" name="textinput-8" id="textinput-8" placeholder="Text input" value="" data-mini="true" />
-                </div><!--/demo -->  
+                </div><!--/demo-html -->  
 
 				<div data-demo-html="true">                    
                     <label for="textarea-8" class="ui-hidden-accessible">Textarea:</label>
                     <textarea cols="40" rows="8" name="textarea-8" id="textarea-8" data-mini="true">Textarea</textarea>
-                </div><!--/demo -->  
+                </div><!--/demo-html -->  
 
 				<div data-demo-html="true">                    
                     <label for="submit-8" class="ui-hidden-accessible">Send:</label>
                     <button type="submit" id="submit-8" data-mini="true">Submit</button>
-                </div><!--/demo -->  
+                </div><!--/demo-html -->  
 
 			</form>
                     
