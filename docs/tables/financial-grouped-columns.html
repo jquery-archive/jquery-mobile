@@ -30,7 +30,7 @@
          	<table data-role="table" id="financial-table" data-column-btn-theme="b" data-column-popup-theme="a" data-mode="columntoggle">
 				<thead>
 					<tr class="th-groups">
-						<td colspan="2"></td>
+						<td></td>
 						<th colspan="3" data-priority="6">Q1 2012</th>
 						<th colspan="3" data-priority="5">Q2 2012</th>
 						<th colspan="3" data-priority="4">Q3 2012</th>
@@ -39,7 +39,6 @@
 					</tr> 
 					<tr>
 						<th>Store</th>
-						<th>State</th>
 
 						<th>Income</th>
 						<th>Profit</th>
@@ -66,7 +65,6 @@
 				<tbody>
 					<tr>
 						<th>Boston</th>
-						<td>MA</td>
 
 						<td>2,898</td>
 						<td>739</td>
@@ -90,8 +88,7 @@
 					</tr>
 
 					<tr>
-						<th>Cambridge</th>
-						<td>MA</td>
+						<th>Chicago</th>
 
 						<td>2,898</td>
 						<td>739</td>
@@ -114,8 +111,7 @@
 						<td>+5.9%</td>
 					</tr>
 					<tr>
-						<th>Somerville</th>
-						<td>MA</td>
+						<th>NYC</th>
 
 						<td>2,898</td>
 						<td>739</td>
@@ -212,20 +208,19 @@
 
 
 		<h3 style="margin-top:4em">Reflow example</h3>
-		<p>This table will stack the data into label value pairs at narrow widths. The grouped column headings are displayed as subheadings between data sets. The screen needs to be wide before it shows the tabular format so the media query is set to 72em (1,152px).</p>
+		<p>This table will stack the data into label value pairs at narrow widths. The grouped column headings are displayed as subheadings between data sets. The screen needs to be wide before it shows the tabular format so the media query is set to 72em (1,152px). There are custom styles for the first row to set the background to dark gray with white text and hide the label so it looks more like a section divider.</p>
 		<table data-role="table" id="financial-table-reflow" data-mode="reflow" class="financial-table-reflow">
 				<thead>
 					<tr class="th-groups">
-						<td colspan="2"></td>
-						<th colspan="3" data-priority="5">Q1 2012</th>
-						<th colspan="3" data-priority="4">Q2 2012</th>
-						<th colspan="3" data-priority="3">Q3 2012</th>
-						<th colspan="3" data-priority="2">Q4 2012</th>
-						<th colspan="3" data-priority="1" class="totals">YTD Totals</th>
+						<th></th>
+						<th colspan="3">Q1 2012</th>
+						<th colspan="3">Q2 2012</th>
+						<th colspan="3">Q3 2012</th>
+						<th colspan="3">Q4 2012</th>
+						<th colspan="3" class="totals">YTD Totals</th>
 					</tr> 
 					<tr>
-						<th class="hide">Store</th>
-						<th>State</th>
+						<th>Store</th>
 
 						<th>Income</th>
 						<th>Profit</th>
@@ -252,7 +247,6 @@
 				<tbody>
 					<tr>
 						<th>Boston</th>
-						<td>MA</td>
 
 						<td>2,898</td>
 						<td>739</td>
@@ -276,8 +270,7 @@
 					</tr>
 
 					<tr>
-						<th>Cambridge</th>
-						<td>MA</td>
+						<th>Chicago</th>
 
 						<td>2,898</td>
 						<td>739</td>
@@ -300,8 +293,7 @@
 						<td>+5.9%</td>
 					</tr>
 					<tr>
-						<th>Somerville</th>
-						<td>MA</td>
+						<th>NYC</th>
 
 						<td>2,898</td>
 						<td>739</td>
@@ -334,26 +326,17 @@
 				.financial-table-reflow {
 				 	margin: 2em 0 4em;
 				 }
-				.financial-table-reflow th:first-child,
-				.financial-table-reflow th:first-child + td
+				.financial-table-reflow th:first-child
 				 { 
 					color:#fff;
 					background-color:#555;
 					font-size:1.2em;
-					padding:.3em .6em .3em .9em;
+					padding:.3em .6em .3em .6em;
 					-webkit-text-shadow:none;
 					-moz-text-shadow:none;
 					text-shadow:none;
 				}
-				.financial-table-reflow th:first-child + td
-				 { 
-					color:#fff;
-					text-align:right;
-					margin-top:-2.1em;
-				}
-
-				.financial-table-reflow th:first-child .ui-table-cell-label,
-				.financial-table-reflow th:first-child + td .ui-table-cell-label { 
+				.financial-table-reflow th:first-child .ui-table-cell-label { 
 					display:none;
 				}
 
