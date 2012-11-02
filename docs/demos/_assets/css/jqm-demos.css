@@ -157,6 +157,9 @@ div[data-demo-html] {
 }
 
 /* View source code */
+.jqm-demo-link.ui-btn.ui-mini {
+	margin: 1em 0;
+}
 [id|="jqm-demo"].ui-popup-container {
 	width: 90%;
 	max-width: 1400px;
