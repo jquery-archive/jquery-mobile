@@ -45,7 +45,7 @@ define( [ "jquery",
 				self._setOption( key, value, true );
 			});
 
-			this.refresh();
+			this._refresh( true );
 		},
 
 		_flipClasses: function( els, flCorners  ) {
@@ -83,9 +83,9 @@ define( [ "jquery",
 			this.element.toggleClass( "ui-mini", value );
 		},
 
-		refresh: function() {
+		_refresh: function( create ) {
 			var els = this.element
-				.find( ".ui-btn" + ( this.options.excludeInvisible ? ":visible" : "" ) )
+				.find( ".ui-btn" + ( ( !create && this.options.excludeInvisible ) ? ":visible" : "" ) )
 				.not( '.ui-slider-handle' ),
 				corners = [ true, true ];
 
@@ -94,6 +94,10 @@ define( [ "jquery",
 			}
 
 			this._flipClasses( els, corners );
+		},
+
+		refresh: function() {
+			this._refresh( false );
 		}
 	});
 
