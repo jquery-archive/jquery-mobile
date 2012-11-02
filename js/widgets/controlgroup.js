@@ -63,7 +63,7 @@ define( [ "jquery",
 				this[ setter ]( value );
 			}
 
-			this._super( "_setOption", key, value );
+			this._super( key, value );
 			this.element.attr( "data-" + ( $.mobile.ns || "" ) + ( key.replace( /([A-Z])/, "-$1" ).toLowerCase() ), value );
 		},
 
