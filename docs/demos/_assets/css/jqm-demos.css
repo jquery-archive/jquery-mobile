@@ -22,12 +22,6 @@ h1#jqm-logo {
 	text-transform: uppercase;
 	color: #74b042;
 }
-div[data-demo-html] {
-	border-top:1px solid rgba(0,0,0,.08);
-	margin:0;
-	padding:1.2em 0;
-}
-
 @media all and (min-width:650px) {
 	.jqm-header {
 		overflow: hidden;
@@ -158,7 +152,7 @@ div[data-demo-html] {
 
 /* View source code */
 .jqm-demo-link.ui-btn.ui-mini {
-	margin: 1em 0;
+	margin: 1em 0 0;
 }
 [id|="jqm-demo"].ui-popup-container {
 	width: 90%;
@@ -166,6 +160,11 @@ div[data-demo-html] {
 }
 .jqm-demo .ui-collapsible-content {
 	padding: 0;
+}
+div[data-demo-html] {
+	border-top: 1px solid rgba(0,0,0,.08);
+	margin: 0;
+	padding: 1.2em 0;
 }
 .jqm-demo .ui-collapsible-content > div,
 .jqm-demo .ui-collapsible-content .syntaxhighlighter {
