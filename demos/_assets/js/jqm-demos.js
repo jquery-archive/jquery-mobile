@@ -71,7 +71,7 @@ $.fn.viewSourceCode = function(){
 	
 	return $( this ).each( function(){
 		demoId++
-		var button = $( "<a href='#jqm-demo-" + demoId + "' data-rel='popup' data-role='button' data-icon='gear' data-mini='true' data-inline='true' data-shadow='false' data-theme='f'>View Source</a>" ),
+		var button = $( "<a href='#jqm-demo-" + demoId + "' data-rel='popup' data-role='button' data-icon='gear' data-mini='true' data-inline='true' data-shadow='false' data-theme='c'>View Source</a>" ),
 			popup = $( "<div id='jqm-demo-" + demoId + "' class='jqm-demo' data-role='popup' data-theme='none' data-position-to='window'>" +
 					"<div data-role='collapsible-set' data-inset='true'></div>" +
 				"</div>" ),

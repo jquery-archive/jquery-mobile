@@ -22,6 +22,12 @@ h1#jqm-logo {
 	text-transform: uppercase;
 	color: #74b042;
 }
+div[data-demo-html] {
+	border-top:1px solid rgba(0,0,0,.08);
+	margin:0;
+	padding:1.2em 0;
+}
+
 @media all and (min-width:650px) {
 	.jqm-header {
 		overflow: hidden;
