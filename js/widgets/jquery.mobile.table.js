@@ -40,6 +40,9 @@ $.widget( "mobile.table", $.mobile.widget, {
 
           var span = parseInt( $( this ).attr( "colspan" ), 10 ),
             sel = ":nth-child(" + ( coltally + 1 ) + ")";
+          
+          $( this )
+            .jqmData( "colstart", coltally + 1 );
 
           if( span ){
             for( var j = 0; j < span - 1; j++ ){
@@ -49,7 +52,8 @@ $.widget( "mobile.table", $.mobile.widget, {
           }
 
           // Store "cells" data on header as a reference to all cells in the same column as this TH
-          $( this ).jqmData( "cells", self.element.find( "tr" ).not( trs.eq(0) ).not( this ).children( sel ) );
+          $( this )
+            .jqmData( "cells", self.element.find( "tr" ).not( trs.eq(0) ).not( this ).children( sel ) );
 
           coltally++;
 

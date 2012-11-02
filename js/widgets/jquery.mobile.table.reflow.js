@@ -38,6 +38,7 @@ $( document ).delegate( ":jqmData(role='table')", "tablecreate", function() {
    // create the hide/show toggles
    reverseHeaders.each(function(i){
       var $cells = $( this ).jqmData( "cells" ),
+         colstart = $( this ).jqmData( "colstart" ),
          hierarchyClass = $cells.not( this ).filter( "thead th" ).length && " ui-table-cell-label-top",
          text = $(this).text();
 
@@ -47,8 +48,9 @@ $( document ).delegate( ":jqmData(role='table')", "tablecreate", function() {
             var iteration = parseInt( $( this ).attr( "colspan" ), 10 ),
                filter = "";
 
-            if( iteration ){
-               filter = "td:nth-child("+ iteration +"n)";
+           if( iteration ){
+               filter = "td:nth-child("+ iteration +"n + " + ( colstart ) +")";
+               console.log("td:nth-child("+ iteration +"n + " + ( colstart ) +")")
             }
             $cells.filter( filter ).prepend( "<b class='" + o.classes.cellLabels + hierarchyClass + "'>" + text + "</b>"  );
          }
