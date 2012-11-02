@@ -9,6 +9,32 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.vmouse" ], function
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
+var cornerClasses = {
+	"tl": " ui-btn-corner-tl",
+	"tr": " ui-btn-corner-tr",
+	"bl": " ui-btn-corner-bl",
+	"br": " ui-btn-corner-br",
+	"top": " ui-btn-corner-top",
+	"bottom": " ui-btn-corner-bottom",
+	"left": " ui-btn-corner-left",
+	"right": " ui-btn-corner-right"
+};
+cornerClasses[true] = " ui-btn-corner-all";
+cornerClasses[false] = "";
+
+var groupCornerClasses = {
+	"tl": " ui-corner-tl",
+	"tr": " ui-corner-tr",
+	"bl": " ui-corner-bl",
+	"br": " ui-corner-br",
+	"top": " ui-corner-top",
+	"bottom": " ui-corner-bottom",
+	"left": " ui-corner-left",
+	"right": " ui-corner-right"
+};
+groupCornerClasses[true] = " ui-corner-all";
+groupCornerClasses[false] = "";
+
 $.fn.buttonMarkup = function( options ) {
 	var $workingSet = this,
 		mapToDataAttr = function( key, value ) {
@@ -28,14 +54,17 @@ $.fn.buttonMarkup = function( options ) {
 				inline:     options.inline     !== undefined ? options.inline     : el.jqmData( "inline" ),
 				shadow:     options.shadow     !== undefined ? options.shadow     : el.jqmData( "shadow" ),
 				corners:    options.corners    !== undefined ? options.corners    : el.jqmData( "corners" ),
+				cornerstyle:options.cornerstyle!== undefined ? options.cornerstyle: el.jqmData( "cornerstyle" ),
 				iconshadow: options.iconshadow !== undefined ? options.iconshadow : el.jqmData( "iconshadow" ),
 				mini:       options.mini       !== undefined ? options.mini       : el.jqmData( "mini" )
 			}, options ),
 
+			// Lookup table from which to grab corner classes
+			cornerLookup,
 			// Classes Defined
 			innerClass = "ui-btn-inner",
 			textClass = "ui-btn-text",
-			buttonClass, iconClass,
+			buttonClass, iconClass, cornerClass,
 			hover = false,
 			state = "up",
 			// Button inner markup
@@ -80,11 +109,14 @@ $.fn.buttonMarkup = function( options ) {
 			o.theme = $.mobile.getInheritedTheme( el, "c" );
 		}
 
+		cornerLookup = ( o.cornerstyle === "group" ? groupCornerClasses: cornerClasses );
+		cornerClass = ( cornerLookup[ o.corners ] ? cornerLookup[ o.corners ] : "" );
+
 		buttonClass = "ui-btn ";
 		buttonClass += ( hover ? "ui-btn-hover-" + o.theme : "" );
 		buttonClass += ( state ? " ui-btn-" + state + "-" + o.theme : "" );
 		buttonClass += o.shadow ? " ui-shadow" : "";
-		buttonClass += o.corners ? " ui-btn-corner-all" : "";
+		buttonClass += cornerClass;
 
 		if ( o.mini !== undefined ) {
 			// Used to control styling in headers/footers, where buttons default to `mini` style.
@@ -115,7 +147,7 @@ $.fn.buttonMarkup = function( options ) {
 			}
 		}
 
-		innerClass += o.corners ? " ui-btn-corner-all" : "";
+		innerClass += cornerClass;
 
 		if ( o.iconpos && o.iconpos === "notext" && !el.attr( "title" ) ) {
 			el.attr( "title", el.getEncodedText() );

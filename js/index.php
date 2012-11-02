@@ -50,7 +50,7 @@ $files = array(
 	'widgets/forms/select.custom.js',
 	'widgets/forms/select.js',
 	'jquery.mobile.buttonMarkup.js',
-	'jquery.mobile.controlGroup.js',
+	'widgets/controlgroup.js',
 	'jquery.mobile.links.js',
 	'widgets/fixedToolbar.js',
 	'widgets/popup.js',
