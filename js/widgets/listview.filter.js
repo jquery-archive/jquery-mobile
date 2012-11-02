@@ -18,7 +18,7 @@ var defaultFilterCallback = function( text, searchValue, item ) {
 
 $.mobile.listview.prototype.options.filterCallback = defaultFilterCallback;
 
-$( document ).delegate( ":jqmData(role='listview')", "listviewcreate", function() {
+$( document ).delegate( "ul, ol", "listviewcreate", function() {
 
 	var list = $( this ),
 		listview = list.data( "listview" );
