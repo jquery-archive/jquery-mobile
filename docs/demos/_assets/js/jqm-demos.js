@@ -71,7 +71,7 @@ $.fn.viewSourceCode = function(){
 	
 	return $( this ).each( function(){
 		demoId++
-		var button = $( "<a href='#jqm-demo-" + demoId + "' class='jqm-demo-link' data-rel='popup' data-role='button' data-icon='gear' data-mini='true' data-inline='true' data-shadow='false' data-theme='c'>View Source</a>" ),
+		var button = $( "<div><a href='#jqm-demo-" + demoId + "' class='jqm-demo-link' data-rel='popup' data-role='button' data-icon='gear' data-mini='true' data-inline='true' data-shadow='false' data-theme='c'>View Source</a></div>" ),
 			popup = $( "<div id='jqm-demo-" + demoId + "' class='jqm-demo' data-role='popup' data-theme='none' data-position-to='window'>" +
 					"<div data-role='collapsible-set' data-inset='true'></div>" +
 				"</div>" ),
@@ -111,7 +111,9 @@ $.fn.viewSourceCode = function(){
 			css = $( "<div></div>" ).append( $( "head" ).find( "style" ).contents().clone() ).html();
 			css = css
 				.replace( /&/gmi, '&amp;' )
-				.replace( /"/gmi, '&quot;' );
+				.replace( /"/gmi, '&quot;' )
+				.replace( />/gmi, '&gt;' )
+				.replace( /</gmi, '&lt;' );
 			collapsibleCSS = $( "<div data-role='collapsible' data-collapsed='true' data-theme='e' data-iconpos='right' data-content-theme='a'>" +
 					"<h1>CSS</h1>" +
 					"<pre class='brush: css'></pre>" +
