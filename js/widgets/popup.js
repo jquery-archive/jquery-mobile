@@ -675,6 +675,13 @@ define( [ "jquery",
 			// Put the element back to where the placeholder was and remove the "ui-popup" class
 			self._setTheme( "none" );
 			self.element
+				// Cannot directly insertAfter() - we need to detach() first, because
+				// insertAfter() will do nothing if the payload div was not attached
+				// to the DOM at the time the widget was created, and so the payload
+				// will remain inside the container even after we call insertAfter().
+				// If that happens and we remove the container a few lines below, we
+				// will cause an infinite recursion - #5244
+				.detach()
 				.insertAfter( self._ui.placeholder )
 				.removeClass( "ui-popup ui-overlay-shadow ui-corner-all" );
 			self._ui.screen.remove();
