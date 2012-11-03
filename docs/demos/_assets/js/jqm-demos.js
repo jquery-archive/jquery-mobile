@@ -65,10 +65,7 @@ if ( location.protocol.substr(0,4)  === 'file' ||
 }
 
 // View demo source code
-
-
 $.fn.viewSourceCode = function(){
-	
 	var demoId = 0;
 	
 	return $( this ).each( function(){
@@ -132,9 +129,11 @@ $( document ).on( "pagebeforecreate", "[data-role='page']", function(){
 });
 
 $( document ).on( "pageinit", function(){
+	// reposition when switching between html / js / css
 	$( ".jqm-demo .ui-collapsible-heading-collapsed" ).click( function(){
 		$( this ).parents( ".jqm-demo" ).trigger( "resize" );
 	});
+	// keep line numbers and code lines in sync
 	$( ".jqm-demo" ).on( "popupbeforeposition", function(){
 		$(".gutter", this ).find( ".line" ).each( function(){
 			var line = ".number" + /number(\w+)/.exec( this.className )[1],
