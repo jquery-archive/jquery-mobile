@@ -135,13 +135,16 @@ $( document ).on( "pageinit", function(){
 	});
 	// keep line numbers and code lines in sync
 	$( ".jqm-demo" ).on( "popupbeforeposition", function(){
+		$(".code", this ).find( ".line" ).css( "height", "auto" );
 		$(".gutter", this ).find( ".line" ).each( function(){
-			var line = ".number" + /number(\w+)/.exec( this.className )[1],
+			var linenumber = ".number" + /number(\w+)/.exec( this.className )[1],
 				code = $( this ).parents( "tr" ).find( "td.code" ).first();
-				height = $( code ).find( line ).height();
+				line = $( code ).find( linenumber ),
+				height = $( line ).height();
 			
 			if ( $( this ).height() !== height ) {
 				 $( this ).height( height );
+				 $( line ).height( height );
 			}
 		});
 	});

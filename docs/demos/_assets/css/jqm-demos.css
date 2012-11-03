@@ -198,184 +198,174 @@ div[data-demo-html] {
 .syntaxhighlighter table thead,
 .syntaxhighlighter table caption,
 .syntaxhighlighter textarea {
-	background: none !important;
-	border: 0 !important;
-	bottom: auto !important;
-	float: none !important;
-	left: auto !important;
-	line-height: 1.3em !important;
-	margin: 0 !important;
-	outline: 0 !important;
-	overflow: visible !important;
-	padding: 0 !important;
-	position: static !important;
-	right: auto !important;
-	text-align: left !important;
-	top: auto !important;
-	vertical-align: middle !important;
-	width: auto !important;
-	box-sizing: content-box !important;
-	font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace !important;
-	font-weight: normal !important;
-	font-style: normal !important;
-	font-size: .97em !important;
-	min-height: inherit !important;
-	min-height: auto !important;
-}
-.syntaxhighlighter td.code div,
-.syntaxhighlighter td.code code,
-.syntaxhighlighter table
-.syntaxhighlighter table td.code ,
-.syntaxhighlighter table tr,
-.syntaxhighlighter table tbody,
-.syntaxhighlighter table thead,
-.syntaxhighlighter table caption,
-.syntaxhighlighter textarea {
-	height: auto !important;
+	background: none;
+	border: 0;
+	bottom: auto;
+	float: none;
+	left: auto;
+	height: auto;
+	line-height: 1.3em;
+	margin: 0;
+	outline: 0;
+	overflow: visible;
+	padding: 0;
+	position: static;
+	right: auto;
+	text-align: left;
+	top: auto;
+	vertical-align: baseline;
+	width: auto;
+	box-sizing: content-box;
+	font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
+	font-weight: normal;
+	font-style: normal;
+	font-size: 1em;
+	min-height: inherit;
+	min-height: auto;
 }
 .syntaxhighlighter {
-	width: auto !important;
+	width: auto;
 	margin: 0;
 	padding: 1em 0;
-	position: relative !important;
-	overflow: auto !important;
-	font-size: .97em !important;
-	background-color: #222 !important;
+	position: relative;
+	overflow: auto;
+	font-size: .8125em;
+	background-color: #222;
 }
 .syntaxhighlighter.source {
-	overflow: hidden !important;
+	overflow: hidden;
 }
 .syntaxhighlighter .bold {
-	font-weight: bold !important;
+	font-weight: bold;
 }
 .syntaxhighlighter .italic {
-	font-style: italic !important;
+	font-style: italic;
 }
 .syntaxhighlighter .line {
-	white-space: pre !important;
-	white-space: pre-wrap !important;
+	white-space: pre;
+	white-space: pre-wrap;
 }
 .syntaxhighlighter table {
-	width: 100% !important;
+	width: 100%;
 }
 .syntaxhighlighter table caption {
-	text-align: left !important;
-	padding: .5em 0 0.5em 1em !important;
+	text-align: left;
+	padding: .5em 0 0.5em 1em;
 }
 .syntaxhighlighter table td.code {
-	width: 100% !important;
+	width: 100%;
 }
 .syntaxhighlighter table td.code .container {
-	position: relative !important;
+	position: relative;
 }
 .syntaxhighlighter table td.code .container textarea {
-	box-sizing: border-box !important;
-	position: absolute !important;
-	left: 0 !important;
-	top: 0 !important;
-	width: 100% !important;
-	height: 100% !important;
-	border: none !important;
-	background: white !important;
-	padding-left: 1em !important;
-	overflow: hidden !important;
-	white-space: pre !important;
+	box-sizing: border-box;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	border: none;
+	background: white;
+	padding-left: 1em;
+	overflow: hidden;
+	white-space: pre;
 }
 .syntaxhighlighter table td.gutter .line {
-	text-align: right !important;
-	padding: 0 0.5em 0 1em !important;
+	text-align: right;
+	padding: 0 0.5em 0 1em;
 }
 .syntaxhighlighter table td.code .line {
-	padding: 0 1em !important;
+	padding: 0 1em;
 }
 .syntaxhighlighter.show {
-	display: block !important;
+	display: block;
 }
 .syntaxhighlighter.collapsed table {
-	display: none !important;
+	display: none;
 }
 .syntaxhighlighter .line.alt1 {
-	background-color: transparent !important;
+	background-color: transparent;
 }
 .syntaxhighlighter .line.alt2 {
-	background-color: transparent !important;
+	background-color: transparent;
 }
 .syntaxhighlighter .line.highlighted.alt1, .syntaxhighlighter .line.highlighted.alt2 {
-	background-color: #253e5a !important;
+	background-color: #253e5a;
 }
 .syntaxhighlighter .line.highlighted.number {
-	color: #38566f !important;
+	color: #38566f;
 }
 .syntaxhighlighter table caption {
-	color: #d1edff !important;
+	color: #d1edff;
 }
 .syntaxhighlighter .gutter {
-	color: #afafaf !important;
+	color: #afafaf;
 }
 .syntaxhighlighter .gutter .line {
-	border-right: 3px solid #435a5f !important;
+	border-right: 3px solid #435a5f;
 }
 .syntaxhighlighter .gutter .line.highlighted {
-	background-color: #435a5f !important;
-	color: #0f192a !important;
+	background-color: #435a5f;
+	color: #0f192a;
 }
 .syntaxhighlighter.collapsed {
-	overflow: visible !important;
+	overflow: visible;
 }
 .syntaxhighlighter .plain, .syntaxhighlighter .plain a {
-	color: #eee !important;
+	color: #eee;
 }
 .syntaxhighlighter .comments, .syntaxhighlighter .comments a {
-	color: #5ba1cf !important;
+	color: #5ba1cf;
 }
 .syntaxhighlighter .string {
-	color: #9a6 !important;
+	color: #9a6;
 }
 .syntaxhighlighter .string a {
-	color: #1dc116 !important;
+	color: #1dc116;
 }
 .syntaxhighlighter .keyword {
-	color: #c84 !important;
+	color: #c84;
 }
 .syntaxhighlighter .preprocessor {
-	color: #8aa6c1 !important;
+	color: #8aa6c1;
 }
 .syntaxhighlighter .variable {
-	color: #ffaa3e !important;
+	color: #ffaa3e;
 }
 .syntaxhighlighter .value {
-	color: #f7e741 !important;
+	color: #f7e741;
 }
 .syntaxhighlighter .functions {
-	color: #ffaa3e !important;
+	color: #ffaa3e;
 }
 .syntaxhighlighter .constants {
-	color: #e0e8ff !important;
+	color: #e0e8ff;
 }
 .syntaxhighlighter .script {
-	font-weight: bold !important;
-	color: #b43d3d !important;
-	background-color: none !important;
+	font-weight: bold;
+	color: #b43d3d;
+	background-color: none;
 }
 .syntaxhighlighter .color1 {
-	color: #8df !important;
+	color: #8df;
 }
 .syntaxhighlighter .color1 a {
-	color: #f8bb00 !important;
+	color: #f8bb00;
 }
 .syntaxhighlighter .color2, .syntaxhighlighter .color2 a {
-	color: white !important;
+	color: white;
 }
 .syntaxhighlighter .color3, .syntaxhighlighter .color3 a {
-	color: #ffaa3e !important;
+	color: #ffaa3e;
 }
 .syntaxhighlighter table td.code {
-	cursor: text !important;
+	cursor: text;
 }
 .syntaxhighlighter table td.code .container textarea {
-	background: #eee !important;
-	white-space: pre !important;
-	white-space: pre-wrap !important;
+	background: #eee;
+	white-space: pre;
+	white-space: pre-wrap;
 }
 .syntaxhighlighter ::-moz-selection {
 	background-color: #3399ff;
