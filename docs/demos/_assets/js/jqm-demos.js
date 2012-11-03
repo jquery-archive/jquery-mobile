@@ -98,7 +98,7 @@ $.fn.viewSourceCode = function(){
 			html = $( "<div></div>" ).append( $( this ).contents().clone() ).html();
 			collapsibleHTML = $( "<div data-role='collapsible' data-collapsed='true' data-theme='b' data-iconpos='right' data-content-theme='a'>" +
 					"<h1>HTML</h1>" +
-					"<pre class='brush: xml'></pre>" +
+					"<pre class='brush: xml; toolbar: false;'></pre>" +
 				"</div>" );
 			appendSource( html, collapsibleHTML );
 		}
@@ -106,7 +106,7 @@ $.fn.viewSourceCode = function(){
 			js = $( "<div></div>" ).append( $( "head" ).find( "script" ).contents().clone() ).html();
 			collapsibleJS = $( "<div data-role='collapsible' data-collapsed='true' data-theme='f' data-iconpos='right' data-content-theme='a'>" +
 					"<h1>JS</h1>" +
-					"<pre class='brush: js'></pre>" +
+					"<pre class='brush: js; toolbar: false;'></pre>" +
 				"</div>" );
 			appendSource( js, collapsibleJS );
 		}
@@ -115,7 +115,7 @@ $.fn.viewSourceCode = function(){
 
 			collapsibleCSS = $( "<div data-role='collapsible' data-collapsed='true' data-theme='e' data-iconpos='right' data-content-theme='a'>" +
 					"<h1>CSS</h1>" +
-					"<pre class='brush: css'></pre>" +
+					"<pre class='brush: css; toolbar: false;'></pre>" +
 				"</div>" );
 			appendSource( css, collapsibleCSS );
 		}
@@ -132,8 +132,19 @@ $( document ).on( "pagebeforecreate", "[data-role='page']", function(){
 });
 
 $( document ).on( "pageinit", function(){
-	$( ".jqm-demo .ui-collapsible-heading" ).click( function(){
-		$( ".jqm-demo" ).trigger( "resize" );
+	$( ".jqm-demo .ui-collapsible-heading-collapsed" ).click( function(){
+		$( this ).parents( ".jqm-demo" ).trigger( "resize" );
+	});
+	$( ".jqm-demo" ).on( "popupbeforeposition", function(){
+		$(".gutter", this ).find( ".line" ).each( function(){
+			var line = ".number" + /number(\w+)/.exec( this.className )[1],
+				code = $( this ).parents( "tr" ).find( "td.code" ).first();
+				height = $( code ).find( line ).height();
+			
+			if ( $( this ).height() !== height ) {
+				 $( this ).height( height );
+			}
+		});
 	});
 });
 

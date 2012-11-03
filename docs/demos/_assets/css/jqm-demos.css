@@ -168,8 +168,8 @@ div[data-demo-html] {
 }
 .jqm-demo .ui-collapsible-content > div,
 .jqm-demo .ui-collapsible-content .syntaxhighlighter {
-  border-bottom-right-radius: inherit;
-  border-bottom-left-radius: inherit;
+	border-bottom-right-radius: inherit;
+	border-bottom-left-radius: inherit;
 }
 
 /**
@@ -202,9 +202,8 @@ div[data-demo-html] {
 	border: 0 !important;
 	bottom: auto !important;
 	float: none !important;
-	height: auto !important;
 	left: auto !important;
-	line-height: 1.4em !important;
+	line-height: 1.3em !important;
 	margin: 0 !important;
 	outline: 0 !important;
 	overflow: visible !important;
@@ -229,7 +228,7 @@ div[data-demo-html] {
 	padding: 1em 0;
 	position: relative !important;
 	overflow: auto !important;
-	font-size: 1em !important;
+	font-size: .97em !important;
 }
 .syntaxhighlighter.source {
 	overflow: hidden !important;
@@ -442,12 +441,24 @@ div[data-demo-html] {
 }
 
 /* SyntaxHighlighter overrides (TO DO: merge into defaults above) */
-.syntaxhighlighter .toolbar {
-	display: none;
-}
 .syntaxhighlighter {
 	width: auto !important;
 	background-color: #222 !important;
+}
+.syntaxhighlighter .line {
+	white-space: pre !important;
+	white-space: pre-wrap !important;
+}
+.syntaxhighlighter td.code div,
+.syntaxhighlighter td.code code,
+.syntaxhighlighter table
+.syntaxhighlighter table td.code ,
+.syntaxhighlighter table tr,
+.syntaxhighlighter table tbody,
+.syntaxhighlighter table thead,
+.syntaxhighlighter table caption,
+.syntaxhighlighter textarea {
+	height: auto !important;
 }
 .syntaxhighlighter .line.alt1 {
 	background-color: transparent !important;
