@@ -65,6 +65,8 @@ if ( location.protocol.substr(0,4)  === 'file' ||
 }
 
 // View demo source code
+
+
 $.fn.viewSourceCode = function(){
 	
 	var demoId = 0;
@@ -79,47 +81,43 @@ $.fn.viewSourceCode = function(){
 			page = $( this ).closest( "[data-role='page']" ),
 			html, js, css, collapsibleHTML, collapsibleJS, collapsibleCSS;
 		
-		if ( $( this ).is( "[data-demo-html='true']" ) ) {
-			html = $( "<div></div>" ).append( $( this ).contents().clone() ).html();
-			html = html
-				.replace( /&/gmi, '&amp;' )
+		function appendSource( code, collapsible ){
+			var escaped = code.replace( /&/gmi, '&amp;' )
 				.replace( /"/gmi, '&quot;' )
 				.replace( />/gmi, '&gt;' )
-				.replace( /</gmi, '&lt;' );
+				.replace( /</gmi, '&lt;' ),
+				collapsible, output;
+				
+			collapsible.find( "pre" ).append( escaped ),
+			output = collapsible.appendTo( collapsibleSet );
+
+			return output;	
+		};
+		
+		if ( $( this ).is( "[data-demo-html='true']" ) ) {
+			html = $( "<div></div>" ).append( $( this ).contents().clone() ).html();
 			collapsibleHTML = $( "<div data-role='collapsible' data-collapsed='true' data-theme='b' data-iconpos='right' data-content-theme='a'>" +
 					"<h1>HTML</h1>" +
 					"<pre class='brush: xml'></pre>" +
 				"</div>" );
-			collapsibleHTML.find( "pre" ).append( html );
-			collapsibleHTML.appendTo( collapsibleSet );
+			appendSource( html, collapsibleHTML );
 		}
 		if ( $( this ).is( "[data-demo-js='true']" ) ) {
 			js = $( "<div></div>" ).append( $( "head" ).find( "script" ).contents().clone() ).html();
-			js = js
-				.replace( /&/gmi, '&amp;' )
-				.replace( /"/gmi, '&quot;' )
-				.replace( />/gmi, '&gt;' )
-				.replace( /</gmi, '&lt;' );
 			collapsibleJS = $( "<div data-role='collapsible' data-collapsed='true' data-theme='f' data-iconpos='right' data-content-theme='a'>" +
 					"<h1>JS</h1>" +
 					"<pre class='brush: js'></pre>" +
 				"</div>" );
-			collapsibleJS.find( "pre" ).append( js );
-			collapsibleJS.appendTo( collapsibleSet );
+			appendSource( js, collapsibleJS );
 		}
 		if ( $( this ).is( "[data-demo-css='true']" ) ) {
 			css = $( "<div></div>" ).append( $( "head" ).find( "style" ).contents().clone() ).html();
-			css = css
-				.replace( /&/gmi, '&amp;' )
-				.replace( /"/gmi, '&quot;' )
-				.replace( />/gmi, '&gt;' )
-				.replace( /</gmi, '&lt;' );
+
 			collapsibleCSS = $( "<div data-role='collapsible' data-collapsed='true' data-theme='e' data-iconpos='right' data-content-theme='a'>" +
 					"<h1>CSS</h1>" +
 					"<pre class='brush: css'></pre>" +
 				"</div>" );
-			collapsibleCSS.find( "pre" ).append( css );
-			collapsibleCSS.appendTo( collapsibleSet );
+			appendSource( css, collapsibleCSS );
 		}
 
 		collapsibleSet.find( "[data-role='collapsible']" ).first().attr( "data-collapsed", "false" );
