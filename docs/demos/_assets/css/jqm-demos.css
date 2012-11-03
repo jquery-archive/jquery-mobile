@@ -449,6 +449,18 @@ div[data-demo-html] {
 	white-space: pre !important;
 	white-space: pre-wrap !important;
 }
+.syntaxhighlighter a,
+.syntaxhighlighter div,
+.syntaxhighlighter code,
+.syntaxhighlighter table,
+.syntaxhighlighter table td,
+.syntaxhighlighter table tr,
+.syntaxhighlighter table tbody,
+.syntaxhighlighter table thead,
+.syntaxhighlighter table caption,
+.syntaxhighlighter textarea {
+	vertical-align: middle !important;
+}
 .syntaxhighlighter td.code div,
 .syntaxhighlighter td.code code,
 .syntaxhighlighter table
@@ -483,4 +495,27 @@ div[data-demo-html] {
 }
 .syntaxhighlighter .string {
 	color: #9a6 !important;
+}
+.syntaxhighlighter table td.code {
+	cursor: text !important;
+}
+.syntaxhighlighter table td.code .container textarea {
+	background: #eee !important;
+	white-space: pre !important;
+	white-space: pre-wrap !important;
+}
+.syntaxhighlighter ::-moz-selection {
+	background-color: #3399ff;
+	color: #fff;
+	text-shadow: none;
+}
+.syntaxhighlighter ::-webkit-selection {
+	background-color: #3399ff;
+	color: #fff;
+	text-shadow: none;
+}
+.syntaxhighlighter ::selection {
+	background-color: #3399ff;
+	color: #fff;
+	text-shadow: none;
 }
