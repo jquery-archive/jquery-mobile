@@ -7,7 +7,6 @@
 
 define( [ "jquery",
 	"../jquery.mobile.buttonMarkup",
-	"./forms/button",
 	"../jquery.mobile.widget" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
@@ -101,8 +100,18 @@ define( [ "jquery",
 		}
 	});
 
-	$( document ).bind( "pagecreate create", function( e )  {
-		$.mobile.controlgroup.prototype.enhanceWithin( e.target, true );
+	// TODO: Implement a mechanism to allow widgets to become enhanced in the
+	// correct order when their correct enhancement depends on other widgets in
+	// the page being correctly enhanced already.
+	//
+	// For now, we wait until dom-ready to attach the controlgroup's enhancement
+	// hook, because by that time, all the other widgets' enhancement hooks should
+	// already be in place, ensuring that all widgets that need to be grouped will
+	// already have been enhanced by the time the controlgroup is created.
+	$( function() {
+		$( document ).bind( "pagecreate create", function( e )  {
+			$.mobile.controlgroup.prototype.enhanceWithin( e.target, true );
+		});
 	});
 })(jQuery);
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
