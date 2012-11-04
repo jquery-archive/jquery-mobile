@@ -21,8 +21,21 @@
     <div data-role="content">
     
         <div class="content-primary">
+        
+        	<h2>Button types</h2>
+            
+            <div data-demo-html="true">			
+                <a href="#" data-role="button">Anchor</a>
+                <form>
+                	<button>Button</button>
+                    <input type="button" value="Input">
+                    <input type="submit" value="Submit">
+                    <input type="reset" value="Reset">
+                </form>
+            </div><!--/demo-html -->            
 
-            <h2>Block</h2>
+            <h2>Icon position</h2>
+            
             <div data-demo-html="true">			
                 <a href="#" data-role="button">No icon</a>
                 <a href="#" data-role="button" data-icon="delete" data-iconpos="left">Left</a>
@@ -31,7 +44,8 @@
                 <a href="#" data-role="button" data-icon="delete" data-iconpos="bottom">Bottom</a>
 			</div><!--/demo-html -->
               
-            <h3>Block, mini sized</h3>
+            <h3>Mini sized</h3>
+            
 			<div data-demo-html="true">	
                 <a href="#" data-role="button" data-mini="true">No icon</a>				
                 <a href="#" data-role="button" data-icon="delete" data-iconpos="left" data-mini="true">Left</a>
@@ -40,7 +54,8 @@
                 <a href="#" data-role="button" data-icon="delete" data-iconpos="bottom" data-mini="true">Bottom</a>
 			</div><!--/demo-html -->
             
-			<h2>Inline</h2>
+			<h2>Inline style</h2>
+            
 			<div data-demo-html="true">	
                 <p>
                     <a href="#" data-role="button" data-inline="true">Text only</a>
@@ -48,11 +63,12 @@
                     <a href="#" data-role="button" data-icon="delete" data-iconpos="right" data-inline="true">Right</a>
                     <a href="#" data-role="button" data-icon="delete" data-iconpos="top" data-inline="true">Top</a>
                     <a href="#" data-role="button" data-icon="delete" data-iconpos="bottom" data-inline="true">Bottom</a>
-                    <a href="#" data-role="button" data-icon="delete" data-iconpos="notext" data-inline="true">Hidden</a>
+                    <a href="#" data-role="button" data-icon="delete" data-iconpos="notext" data-inline="true">Icon only</a>
                 </p>
 			</div><!--/demo-html -->
               
-			<h3>Inline, mini sized</h3>
+			<h3>Mini sized</h3>
+            
 			<div data-demo-html="true">	
                 <p>
                     <a href="#" data-role="button" data-mini="true" data-inline="true">Text only</a>
@@ -60,73 +76,9 @@
                     <a href="#" data-role="button" data-icon="delete" data-iconpos="right" data-mini="true" data-inline="true">Right</a>
                     <a href="#" data-role="button" data-icon="delete" data-iconpos="top" data-mini="true" data-inline="true">Top</a>
                     <a href="#" data-role="button" data-icon="delete" data-iconpos="bottom" data-mini="true" data-inline="true">Bottom</a>
-                    <a href="#" data-role="button" data-icon="delete" data-iconpos="notext" data-mini="true" data-inline="true">Hidden</a>
+                    <a href="#" data-role="button" data-icon="delete" data-iconpos="notext" data-mini="true" data-inline="true">Icon only</a>
                 </p>
 			</div><!--/demo-html -->  
-            
-			<h2>Grid blocks</h2>
-            
-            <div data-demo-html="true">                
-                <div class="ui-grid-b">
-                    <div class="ui-block-a"><a href="#" data-role="button">Button</a></div>
-                    <div class="ui-block-b"><button type="button">Button</button></div>
-                    <div class="ui-block-c"><input type="button" value="Button" /></div>
-                </div>
-
-                <div class="ui-grid-a">
-                    <div class="ui-block-a">
-                        <label for="grid-select-1" class="ui-hidden-accessible">Grid select 1</label>
-                        <select id="grid-select-1" name="grid-select-1">
-                            <option>Select</option>
-                            <option value="1">The 1st Option</option>
-                            <option value="2">The 2nt Option</option>
-                            <option value="3">The 3rd Option</option>
-                            <option value="4">The 4th Option</option>
-                        </select>
-                    </div>
-                    <div class="ui-block-b"><a href="#" data-role="button" data-icon="arrow-r" data-iconpos="right">Button</a></div>
-                </div>
-
-                <div class="ui-grid-a">
-                    <div class="ui-block-a">
-                        <label for="grid-select-2" class="ui-hidden-accessible">Grid select 2</label>
-                        <select id="grid-select-2" name="grid-select-2" multiple="multiple" data-native-menu="false" data-mini="true">
-                            <option>Select mini</option>
-                            <option value="1">The 1st Option</option>
-                            <option value="2">The 2nt Option</option>
-                            <option value="3">The 3rd Option</option>
-                            <option value="4">The 4th Option</option>
-                        </select>
-                    </div>
-                    <div class="ui-block-b"><a href="#" data-role="button" data-mini="true" data-icon="arrow-r" data-iconpos="right">Button mini</a></div>
-                </div>
-
-                <div class="ui-grid-a">
-                    <label for="grid-select-3" class="ui-hidden-accessible">Grid select 3</label>
-                    <select id="grid-select-3" name="grid-select-3" multiple="multiple" data-native-menu="false">
-                        <option>Select</option>
-                        <option value="1">The 1st Option</option>
-                        <option value="2">The 2nt Option</option>
-                        <option value="3">The 3rd Option</option>
-                        <option value="4">The 4th Option</option>
-                    </select>
-                </div>
-			</div><!--/demo-html -->  
-            
-			<div data-demo-html="true">	
-                <div class="ui-grid-solo">
-                    <a href="#" data-role="button">Button inside ui-grid-solo, no ui-block</a>
-                    <a href="#" data-role="button" data-mini="true">Button mini inside ui-grid-solo, no ui-block</a>
-                    <div class="ui-block-a">
-                    	<a href="#" data-role="button">Button inside ui-grid-solo, ui-block-a</a>
-                    </div>
-                    <div class="ui-block-a">
-                   		<a href="#" data-role="button" data-mini="true">Button mini inside ui-grid-solo, ui-block-a</a>
-                    </div>
-                </div>
-                
-                <a href="#" data-role="button">Button, no grid</a>       
-        	</div><!--/demo-html -->  
             
         </div><!--/content-primary -->
     
