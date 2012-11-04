@@ -11,7 +11,7 @@
 	<script src="../../js/"></script>
 </head> 
 <body> 
-<div data-role="page">
+<div data-role="page" class="jqm-demos-home">
 
     <div class="jqm-header">
         <h1 id="jqm-logo"><img src="_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></h1>
@@ -20,22 +20,27 @@
     </div><!-- /jqm-header -->
 
     <div data-role="content">
-        
-        <ul data-role="listview" data-inset="true" data-filter="true">
-        	<li data-role="list-divider">Forms</li>
-            <li><a href="forms/index.html" data-ajax="false">Form reference</a></li>
-			<li><a href="forms/form-with-fieldcontain.html" data-ajax="false">Form with fieldcontain</a></li>
-			<li><a href="forms/form-without-fieldcontain.html" data-ajax="false">Form without fieldcontain</a></li>
-			<li><a href="forms/form-hide-label.html" data-ajax="false">Form fieldcontain ui-hide-label</a></li>
-			<li><a href="forms/form-label-hidden.html" data-ajax="false">Form label ui-hidden-accessible</a></li>
-            <li><a href="buttons/index.html" data-ajax="false">Buttons</a></li>
-            <li><a href="controlgroups/index.html" data-ajax="false">Controlgroups</a></li>
-            <li><a href="custom-multiple-select/index.html" data-ajax="false">Custom multiple select</a></li>
-        </ul>
-    
+
+        <div class="content-primary">
+
+            <ul data-role="listview" data-inset="true" data-filter="true">
+                <li data-role="list-divider">Forms</li>
+                <li><a href="forms/index.html" data-ajax="false">Form reference</a></li>
+                <li><a href="forms/form-with-fieldcontain.html" data-ajax="false">Form with fieldcontain</a></li>
+                <li><a href="forms/form-without-fieldcontain.html" data-ajax="false">Form without fieldcontain</a></li>
+                <li><a href="forms/form-hide-label.html" data-ajax="false">Form fieldcontain ui-hide-label</a></li>
+                <li><a href="forms/form-label-hidden.html" data-ajax="false">Form label ui-hidden-accessible</a></li>
+                <li><a href="buttons/index.html" data-ajax="false">Buttons</a></li>
+                <li><a href="controlgroups/index.html" data-ajax="false">Controlgroups</a></li>
+                <li><a href="custom-multiple-select/index.html" data-ajax="false">Custom multiple select</a></li>
+            </ul>
+
+        </div><!--/content-primary -->
+
     </div><!-- /content -->
     
     <div class="jqm-footer">
+	    <p class="jqm-version"></p>
         <p>&copy; 2012 jQuery Foundation and other contributors</p>
     </div><!-- /jqm-footer -->
     

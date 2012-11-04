@@ -5,48 +5,64 @@ img { max-width: 100%; }
 
 /* Header */
 .jqm-header {
-	color: #666;
+	text-align: center;
 }
 h1#jqm-logo {
-	margin: .5em 15px;
+	font-size: 1em;
+	margin: .5em 15px 0;
 }
 #jqm-logo img {
-	width: 275px; height: 78px;
+	width: 180px;
+	height: 51px;
 }
 .jqm-header h2 {
-	margin: 0 15px;
+	margin: 0 15px .3em;
+	font-size: 1.3em;
+	line-height: 1.25em;
+	border-top: 1px solid rgba(0,0,0,.08);
+	border-bottom: 1px solid rgba(0,0,0,.08);
 }
-.jqm-header p {
-	margin: 0 15px;
-	font-size: .9em;
-	text-transform: uppercase;
-	color: #74b042;
+.jqm-header p.jqm-version {
+	display: none;
 }
 @media all and (min-width:650px) {
 	.jqm-header {
+		text-align: left;
 		overflow: hidden;
 	}
 	h1#jqm-logo {
 		float: left;
+		margin: 1em 15px;
+	}
+	#jqm-logo img {
+		width: 275px;
+		height: 78px;
 	}
 	.jqm-header h2 {
 		float: right;
+		font-size: 1.5em;
 		margin: 1em 15px 0;
+		border: none;
 	}
-	.jqm-header p {
+	.jqm-header p.jqm-version {
+		display: block;
 		float: right;
 		clear: right;
+		margin: 0 15px;
+		font-size: .8em;
+		text-transform: uppercase;
+		color: #74b042;
 	}
 }
 
 /* Footer */
 .jqm-footer {
 	border-top: 1px solid #B3B3B3;
-	color: #666;
+	color: #808080;
 }
 .jqm-footer p {
 	font-size: .9em;
-	margin: 1em 15px;	
+	margin: .7em 15px;	
 }
 .jqm-footer p.jqm-version {
 	font-weight: bold;
@@ -63,6 +79,30 @@ h1#jqm-logo {
 		float: right;
 		font-weight: normal;
 	}
+	.jqm-demos-home .jqm-footer p.jqm-version {
+		display: none;
+	}
+}
+
+/* Content */
+.content-primary > h2 {
+	font-size: 1.5em;
+	margin: .8em 0;
+}
+.content-primary > h3 {
+	font-size: 1em;
+	margin: 1.2em 0 .5em;
+}
+div[data-demo-html] {
+	border-top: 1px solid rgba(0,0,0,.08);
+	margin: 0;
+	padding: 1.2em 0;
+}
+div.jqm-demo-link {
+	margin: 0 0 2.4em;
+}
+.jqm-demo-link .ui-btn.ui-mini {
+	margin: 0;
 }
 
 /* Swatch F - bar & buttons */
@@ -150,21 +190,13 @@ h1#jqm-logo {
 	text-decoration: none;
 }
 
-/* View source code */
-.jqm-demo-link.ui-btn.ui-mini {
-	margin: 1em 0 0;
-}
+/* Source code view */
 [id|="jqm-demo"].ui-popup-container {
 	width: 90%;
 	max-width: 1400px;
 }
 .jqm-demo .ui-collapsible-content {
 	padding: 0;
-}
-div[data-demo-html] {
-	border-top: 1px solid rgba(0,0,0,.08);
-	margin: 0;
-	padding: 1.2em 0;
 }
 .jqm-demo .ui-collapsible-content > div,
 .jqm-demo .ui-collapsible-content .syntaxhighlighter {
