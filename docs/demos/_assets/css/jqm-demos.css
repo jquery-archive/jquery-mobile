@@ -87,7 +87,7 @@ h1#jqm-logo {
 /* Content */
 .content-primary > h2 {
 	font-size: 1.5em;
-	margin: .8em 0;
+	margin: .8em 0 .33em;
 }
 .content-primary > h3 {
 	font-size: 1em;
@@ -99,6 +99,8 @@ div[data-demo-html] {
 	padding: 1.2em 0;
 }
 div.jqm-demo-link {
+	border-top: 1px solid rgba(0,0,0,.08);
+	padding: .6em 0 0;
 	margin: 0 0 2.4em;
 }
 .jqm-demo-link .ui-btn.ui-mini {
