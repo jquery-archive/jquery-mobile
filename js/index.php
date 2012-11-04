@@ -59,4 +59,27 @@ $files = array(
 	'jquery.mobile.init.js'
 );
 
+function getCommitId() {
+	$logs = file_get_contents( "../.git/logs/HEAD" );
+	if ( $logs ) {
+		$logs = explode( "\n", $logs );
+		$n_logs = count( $logs );
+		if ( $n_logs > 1 ) {
+			$log = explode( " ", $logs[ $n_logs - 2 ] );
+			if ( count( $log ) > 1 ) {
+				return $log[ 1 ];
+			}
+		}
+	}
+
+	return false;
+}
+
+$comment = getCommitId();
+if ( !$comment ) {
+	unset( $comment );
+} else {
+	$comment = "/* git commitid " . $comment . " */\n";
+}
+
 require_once('../combine.php');
