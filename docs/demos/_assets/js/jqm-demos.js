@@ -79,16 +79,11 @@ $.fn.viewSourceCode = function(){
 			html, js, css, collapsibleHTML, collapsibleJS, collapsibleCSS;
 		
 		function appendSource( code, collapsible ){
-			var escaped = code.replace( /&/gmi, '&amp;' )
-				.replace( /"/gmi, '&quot;' )
-				.replace( />/gmi, '&gt;' )
-				.replace( /</gmi, '&lt;' ),
+			var escaped = code.replace( /</gmi, '&lt;' ),
 				collapsible, output;
 				
 			collapsible.find( "pre" ).append( escaped ),
-			output = collapsible.appendTo( collapsibleSet );
-
-			return output;	
+			collapsible.appendTo( collapsibleSet );
 		};
 		
 		if ( $( this ).is( "[data-demo-html='true']" ) ) {
@@ -130,8 +125,10 @@ $( document ).on( "pagebeforecreate", "[data-role='page']", function(){
 
 $( document ).on( "pageinit", function(){
 	// reposition when switching between html / js / css
-	$( ".jqm-demo .ui-collapsible-heading-collapsed" ).click( function(){
-		$( this ).parents( ".jqm-demo" ).trigger( "resize" );
+	$( ".jqm-demo .ui-collapsible-heading" ).on( "click", function(){
+		if ( !$( this ).is( ".ui-collapsible-heading-collapsed" ) ) {
+			$( this ).parents( ".jqm-demo" ).trigger( "resize" );
+		}
 	});
 	// keep line numbers and code lines in sync
 	$( ".jqm-demo" ).on( "popupbeforeposition", function(){

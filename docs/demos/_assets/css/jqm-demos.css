@@ -195,6 +195,9 @@ div.jqm-demo-link {
 	width: 90%;
 	max-width: 1400px;
 }
+.jqm-demo .ui-collapsible-set {
+	margin: 0;
+}
 .jqm-demo .ui-collapsible-content {
 	padding: 0;
 }
