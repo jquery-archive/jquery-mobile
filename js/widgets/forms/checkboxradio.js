@@ -37,8 +37,8 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			activeBtn = icon ? "" : " " + $.mobile.activeBtnClass,
 			checkedClass = "ui-" + checkedState + activeBtn,
 			uncheckedClass = "ui-" + uncheckedState,
-			checkedicon = checkedState,
-			uncheckedicon = uncheckedState;
+			checkedicon = icon ? checkedState : undefined,
+			uncheckedicon = icon ? uncheckedState : undefined;
 
 		if ( inputtype !== "checkbox" && inputtype !== "radio" ) {
 			return;
