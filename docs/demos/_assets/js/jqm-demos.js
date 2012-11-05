@@ -82,7 +82,7 @@ $.fn.viewSourceCode = function(){
 			var escaped = code.replace( /</gmi, '&lt;' ),
 				collapsible, output;
 				
-			collapsible.find( "pre" ).append( escaped ),
+			collapsible.find( "pre" ).append( escaped );
 			collapsible.appendTo( collapsibleSet );
 		};
 		
