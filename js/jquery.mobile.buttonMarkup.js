@@ -233,7 +233,10 @@ function updateButtonClass( $btn, classToRemove, classToAdd, hover, state ) {
 	var buttonElements = $.data( $btn[ 0 ], "buttonElements" );
 	$btn.removeClass( classToRemove ).addClass( classToAdd );
 	if ( buttonElements ) {
-		buttonElements.bcls = $btn[ 0 ].className;
+		buttonElements.bcls = $( document.createElement( "div" ) )
+			.addClass( buttonElements.bcls + " " + classToAdd )
+			.removeClass( classToRemove )
+			.attr( "class" );
 		if ( hover !== undefined ) {
 			buttonElements.hover = hover;
 		}
