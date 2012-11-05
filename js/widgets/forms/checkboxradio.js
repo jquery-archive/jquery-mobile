@@ -37,8 +37,8 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			activeBtn = icon ? "" : " " + $.mobile.activeBtnClass,
 			checkedClass = "ui-" + checkedState + activeBtn,
 			uncheckedClass = "ui-" + uncheckedState,
-			checkedicon = "ui-icon-" + checkedState,
-			uncheckedicon = "ui-icon-" + uncheckedState;
+			checkedicon = checkedState,
+			uncheckedicon = uncheckedState;
 
 		if ( inputtype !== "checkbox" && inputtype !== "radio" ) {
 			return;
@@ -179,15 +179,12 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 
 	refresh: function() {
 		var input = this.element[0],
-			label = this.label,
-			icon = label.find( ".ui-icon" );
+			label = this.label;
 
 		if ( input.checked ) {
-			label.addClass( this.checkedClass ).removeClass( this.uncheckedClass );
-			icon.addClass( this.checkedicon ).removeClass( this.uncheckedicon );
+			label.addClass( this.checkedClass ).removeClass( this.uncheckedClass ).buttonMarkup( { icon: this.checkedicon } );
 		} else {
-			label.removeClass( this.checkedClass ).addClass( this.uncheckedClass );
-			icon.removeClass( this.checkedicon ).addClass( this.uncheckedicon );
+			label.removeClass( this.checkedClass ).addClass( this.uncheckedClass ).buttonMarkup( { icon: this.uncheckedicon } );;
 		}
 
 		if ( input.disabled ) {
