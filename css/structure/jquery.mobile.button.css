@@ -49,6 +49,13 @@
 .ui-mini.ui-btn-icon-bottom .ui-btn-inner,
 .ui-mini .ui-btn-icon-bottom .ui-btn-inner { padding-bottom: 30px; }
 
+/* Corner styling inheritance */
+.ui-btn-inner,
+.ui-btn-text {
+	-webkit-border-radius: inherit;	
+	border-radius: inherit;
+}
+
 /*btn icon positioning*/
 .ui-btn-icon-notext .ui-icon { display: block; z-index: 0;}
 .ui-btn-icon-left > .ui-btn-inner > .ui-icon, .ui-btn-icon-right > .ui-btn-inner > .ui-icon { position: absolute; top: 50%; margin-top: -9px; }

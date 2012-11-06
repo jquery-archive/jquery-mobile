@@ -18,6 +18,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 		theme: null,
 		contentTheme: null,
 		inset: true,
+		corners: true,
 		mini: false,
 		initSelector: ":jqmData(role='collapsible')"
 	},
@@ -67,6 +68,8 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			} else {
 				o.inset = true;
 			}
+			// Set corners for individual collapsibles to false when in a collapsible-set
+			o.corners = false;
 			// Gets the preference for mini in the set
 			if ( !o.mini ) {
 				o.mini = collapsibleSet.jqmData( "mini" );
@@ -79,7 +82,14 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 		}
 		
 		if ( !!o.inset ) {
-			collapsible.addClass( "ui-collapsible-inset" );
+			var collapsibleClasses = "ui-collapsible-inset";
+			if ( !!o.corners ) {
+				collapsibleClasses += " ui-corner-all";
+			}
+			if ( o.contentTheme ) {
+				collapsibleClasses += " ui-collapsible-themed-content";
+			}
+			collapsible.addClass( collapsibleClasses );
 		}
 		
 		collapsibleContent.addClass( ( o.contentTheme ) ? ( "ui-body-" + o.contentTheme ) : "");
@@ -105,19 +115,12 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 					theme: o.theme
 				});
 
-		if ( !!o.inset ) {				
-			collapsibleHeading
-				.find( "a" ).first().add( ".ui-btn-inner", $el )
-					.addClass( "ui-corner-top ui-corner-bottom" );
-		}
-
 		//events
 		collapsible
 			.bind( "expand collapse", function( event ) {
 				if ( !event.isDefaultPrevented() ) {
 					var $this = $( this ),
-						isCollapse = ( event.type === "collapse" ),
-						contentTheme = o.contentTheme;
+						isCollapse = ( event.type === "collapse" );
 
 					event.preventDefault();
 
@@ -136,12 +139,6 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 					$this.toggleClass( "ui-collapsible-collapsed", isCollapse );
 					collapsibleContent.toggleClass( "ui-collapsible-content-collapsed", isCollapse ).attr( "aria-hidden", isCollapse );
 
-					if ( contentTheme && !!o.inset && ( !collapsibleSet.length || collapsible.jqmData( "collapsible-last" ) ) ) {
-						collapsibleHeading
-							.find( "a" ).first().add( collapsibleHeading.find( ".ui-btn-inner" ) )
-							.toggleClass( "ui-corner-bottom", isCollapse );
-						collapsibleContent.toggleClass( "ui-corner-bottom", !isCollapse );
-					}
 					collapsibleContent.trigger( "updatelayout" );
 				}
 			})
