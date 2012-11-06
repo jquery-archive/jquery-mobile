@@ -69,6 +69,10 @@ define( [ "jquery",
 
 		_setMini: function( value ) {
 			this.element.toggleClass( "ui-mini", value );
+		},
+
+		container: function() {
+			return this.element.children( ".ui-controlgroup-controls" );
 		}
 	});
 
