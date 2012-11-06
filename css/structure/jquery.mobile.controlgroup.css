@@ -37,26 +37,10 @@
 	-webkit-border-radius: inherit;
 	border-radius: inherit;
 }
-
-/* Override things we don't want children to have */
-.ui-controlgroup .ui-radio,
-.ui-controlgroup .ui-checkbox,
-.ui-controlgroup .ui-select,
-.ui-controlgroup .ui-radio .ui-btn,
-.ui-controlgroup .ui-checkbox .ui-btn,
-.ui-controlgroup .ui-select .ui-btn,
-.ui-controlgroup label + .ui-select,
-.ui-controlgroup > li,
-.ui-controlgroup .ui-btn {
-	-webkit-border-radius: 0px;
-	border-radius: 0px;
+.ui-controlgroup .ui-btn-corner-all {
+	-webkit-border-radius: 0;
+	border-radius: 0;
 }
-.ui-controlgroup .ui-shadow:not(.ui-focus) {
-	-moz-box-shadow: none;
-	-webkit-box-shadow: none;
-	box-shadow: none;
-}
-
 .ui-controlgroup-vertical .ui-radio:first-child,
 .ui-controlgroup-vertical .ui-checkbox:first-child,
 .ui-controlgroup-vertical .ui-select:first-child,
@@ -104,6 +88,12 @@
 	border-top-right-radius: inherit;
 	-webkit-border-bottom-right-radius: inherit;
 	border-bottom-right-radius: inherit;
+}
+
+.ui-controlgroup .ui-shadow:not(.ui-focus) {
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
 }
 
 @media all and (min-width: 450px){
