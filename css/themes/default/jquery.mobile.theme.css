@@ -802,10 +802,6 @@ a.ui-link-inherit {
 	-webkit-border-radius: 				.6em /*{global-radii-blocks}*/;
 	border-radius: 						.6em /*{global-radii-blocks}*/;
 }
-.ui-corner-none {
-	-webkit-border-radius: 				   0;
-	border-radius: 						   0;
-}
 
 /* Form field separator
 -----------------------------------------------------------------------------------------------------------*/
