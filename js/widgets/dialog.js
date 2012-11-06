@@ -32,13 +32,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 			.wrapInner( dialogWrap )
 			.children()
 				.find( ":jqmData(role='header')" )
-					.prepend( headerCloseButton )
-				.end()
-				.children( ':first-child')
-					.addClass( "ui-corner-top" )
-				.end()
-				.children( ":last-child" )
-					.addClass( "ui-corner-bottom" );
+					.prepend( headerCloseButton );
 
 		// this must be an anonymous function so that select menu dialogs can replace
 		// the close method. This is a change from previously just defining data-rel=back
