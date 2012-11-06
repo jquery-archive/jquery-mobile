@@ -16,9 +16,6 @@ ol.ui-listview .ui-li-jsnumbering:before { content: "" !important; } /* to avoid
 .ui-li-last, .ui-li.ui-field-contain.ui-li-last { border-bottom-width: 1px; }
 .ui-collapsible [class*="ui-body"] > .ui-listview:not(.ui-listview-inset) .ui-li-last { border-bottom-width: 0; }
 .ui-collapsible-content > .ui-listview:not(.ui-listview-inset) .ui-li:first-child { border-top-width: 0; }
-.ui-collapsible-content > .ui-listview:not(.ui-listview-inset),
-.ui-collapsible-content > .ui-listview:not(.ui-listview-inset) .ui-li-last { -webkit-border-bottom-left-radius: inherit; -webkit-border-bottom-right-radius: inherit; border-bottom-left-radius: inherit; border-bottom-right-radius: inherit; }
-.ui-collapsible-content > .ui-listview:not(.ui-listview-inset) .ui-li-last .ui-li-link-alt { -webkit-border-bottom-right-radius: inherit; border-bottom-right-radius: inherit; }
 /* Corner styling */
 .ui-listview > .ui-li:first-child,
 .ui-listview .ui-btn:first-child > .ui-li > .ui-btn-text > .ui-link-inherit {
@@ -28,7 +25,9 @@ ol.ui-listview .ui-li-jsnumbering:before { content: "" !important; } /* to avoid
 	border-top-left-radius: inherit;
 }
 .ui-listview > .ui-li:last-child,
-.ui-listview .ui-btn:last-child > .ui-li > .ui-btn-text > .ui-link-inherit {
+.ui-listview .ui-btn:last-child > .ui-li > .ui-btn-text > .ui-link-inherit,
+.ui-collapsible-content > .ui-listview:not(.ui-listview-inset),
+.ui-collapsible-content > .ui-listview:not(.ui-listview-inset) .ui-li-last {
 	-webkit-border-bottom-right-radius: inherit;
 	border-bottom-right-radius: inherit;
 	-webkit-border-bottom-left-radius: inherit;
@@ -55,7 +54,6 @@ ol.ui-listview .ui-li-jsnumbering:before { content: "" !important; } /* to avoid
 	-webkit-border-radius: 0;
 	border-radius: 0;		
 }
-
 .ui-li>.ui-btn-inner { display: block; position: relative; padding: 0; }
 .ui-li .ui-btn-inner a.ui-link-inherit, .ui-li-static.ui-li { padding: .7em 15px; display: block; }
 .ui-li-has-thumb .ui-btn-inner a.ui-link-inherit, .ui-li-static.ui-li-has-thumb  { min-height: 60px; padding-left: 100px; }
