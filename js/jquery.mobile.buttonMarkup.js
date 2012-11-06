@@ -9,19 +9,6 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.vmouse" ], function
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-var cornerClasses = {
-	"tl": " ui-btn-corner-tl",
-	"tr": " ui-btn-corner-tr",
-	"bl": " ui-btn-corner-bl",
-	"br": " ui-btn-corner-br",
-	"top": " ui-btn-corner-top",
-	"bottom": " ui-btn-corner-bottom",
-	"left": " ui-btn-corner-left",
-	"right": " ui-btn-corner-right"
-};
-cornerClasses[true] = " ui-btn-corner-all";
-cornerClasses[false] = "";
-
 $.fn.buttonMarkup = function( options ) {
 	var $workingSet = this,
 		mapToDataAttr = function( key, value ) {
@@ -48,7 +35,7 @@ $.fn.buttonMarkup = function( options ) {
 			// Classes Defined
 			innerClass = "ui-btn-inner",
 			textClass = "ui-btn-text",
-			buttonClass, iconClass, cornerClass,
+			buttonClass, iconClass,
 			hover = false,
 			state = "up",
 			// Button inner markup
@@ -93,13 +80,11 @@ $.fn.buttonMarkup = function( options ) {
 			o.theme = $.mobile.getInheritedTheme( el, "c" );
 		}
 
-		cornerClass = ( cornerClasses[ o.corners ] ? cornerClasses[ o.corners ] : "" );
-
 		buttonClass = "ui-btn ";
 		buttonClass += ( hover ? "ui-btn-hover-" + o.theme : "" );
 		buttonClass += ( state ? " ui-btn-" + state + "-" + o.theme : "" );
 		buttonClass += o.shadow ? " ui-shadow" : "";
-		buttonClass += cornerClass;
+		buttonClass += o.corners ? " ui-btn-corner-all" : "";
 
 		if ( o.mini !== undefined ) {
 			// Used to control styling in headers/footers, where buttons default to `mini` style.
@@ -130,7 +115,7 @@ $.fn.buttonMarkup = function( options ) {
 			}
 		}
 
-		innerClass += cornerClass;
+		innerClass += o.corners ? " ui-btn-corner-all" : "";
 
 		if ( o.iconpos && o.iconpos === "notext" && !el.attr( "title" ) ) {
 			el.attr( "title", el.getEncodedText() );
