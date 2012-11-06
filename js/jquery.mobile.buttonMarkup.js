@@ -204,7 +204,7 @@ $.fn.buttonMarkup = function( options ) {
 };
 
 $.fn.buttonMarkup.defaults = {
-	corners: true,
+	corners: false,
 	shadow: true,
 	iconshadow: true,
 	wrapperEls: "span"
