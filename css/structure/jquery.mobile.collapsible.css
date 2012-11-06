@@ -50,7 +50,7 @@
 	-webkit-border-top-left-radius: inherit;	
 	border-top-left-radius: inherit;		
 }
-.ui-collapsible-themed-content:not(.ui-collapsible-collapsed) .ui-collapsible-heading {
+.ui-collapsible-themed-content:not(.ui-collapsible-collapsed) > .ui-collapsible-heading {
 	-webkit-border-bottom-right-radius: 0;	
 	border-bottom-right-radius: 0;
 	-webkit-border-bottom-left-radius: 0;	
