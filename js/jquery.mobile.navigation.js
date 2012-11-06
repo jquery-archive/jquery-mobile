@@ -652,14 +652,28 @@ define( [
 		if ( !page.data( "page" ).options.domCache &&
 				page.is( ":jqmData(external-page='true')" ) ) {
 
-			page.bind( 'pagehide.remove', function() {
+			page.bind( 'pagehide.remove', function(event, ui) {
 				var $this = $( this ),
 					prEvent = new $.Event( "pageremove" );
 
-				$this.trigger( prEvent );
+				if ( ui.nextPage.jqmData( "role" ) == "dialog" ) {
+				
+					ui.nextPage.one('pagehide', function(event2, ui2) {
+						if ( $this.jqmData("url") != ui2.nextPage.jqmData("url") ) {
+							$this.trigger( prEvent );
 
-				if ( !prEvent.isDefaultPrevented() ) {
-					$this.removeWithDependents();
+							if( !prEvent.isDefaultPrevented() ){
+								$this.removeWithDependents();
+							}
+						}
+					});
+					
+				} else {
+					$this.trigger( prEvent );
+
+					if( !prEvent.isDefaultPrevented() ){
+						$this.removeWithDependents();
+					}
 				}
 			});
 		}
