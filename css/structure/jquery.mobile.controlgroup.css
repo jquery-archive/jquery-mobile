@@ -37,6 +37,20 @@
 	-webkit-border-radius: inherit;
 	border-radius: inherit;
 }
+
+.ui-controlgroup .ui-radio,
+.ui-controlgroup .ui-checkbox,
+.ui-controlgroup .ui-select,
+.ui-controlgroup .ui-radio .ui-btn,
+.ui-controlgroup .ui-checkbox .ui-btn,
+.ui-controlgroup .ui-select .ui-btn,
+.ui-controlgroup label + .ui-select,
+.ui-controlgroup > li,
+.ui-controlgroup .ui-btn {
+	-webkit-border-radius: 0px;
+	border-radius: 0px;
+}
+
 .ui-controlgroup-vertical .ui-radio:first-child,
 .ui-controlgroup-vertical .ui-checkbox:first-child,
 .ui-controlgroup-vertical .ui-select:first-child,
