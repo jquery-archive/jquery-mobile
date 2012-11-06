@@ -43,16 +43,6 @@ define( [ "jquery",
 				self.options[ key ] = undefined;
 				self._setOption( key, value, true );
 			});
-
-			this._refresh( true );
-		},
-
-		_flipClasses: function( els, flCorners  ) {
-			els.removeClass( "ui-controlgroup-last" )
-				.buttonMarkup( { corners: false, shadow: false } )
-				.eq( 0 ).buttonMarkup( { corners: flCorners[ 0 ], cornerstyle: "group" } )
-				.end()
-				.last().buttonMarkup( { corners: flCorners[ 1 ], cornerstyle: "group" } ).addClass( "ui-controlgroup-last" );
 		},
 
 		_setOption: function( key, value ) {
@@ -71,7 +61,6 @@ define( [ "jquery",
 				.removeClass( "ui-controlgroup-horizontal ui-controlgroup-vertical" )
 				.addClass( "ui-controlgroup-" + value );
 			this.options.type = value;
-			this.refresh();
 		},
 
 		_setShadow: function( value ) {
@@ -80,23 +69,6 @@ define( [ "jquery",
 
 		_setMini: function( value ) {
 			this.element.toggleClass( "ui-mini", value );
-		},
-
-		_refresh: function( create ) {
-			var els = this.element
-				.find( ".ui-btn" + ( ( !create && this.options.excludeInvisible ) ? ":visible" : "" ) )
-				.not( '.ui-slider-handle' ),
-				corners = [ true, true ];
-
-			if ( els.length > 1 ) {
-				corners = ( this.options.type === "horizontal" ? [ "left", "right" ] : [ "top", "bottom" ] );
-			}
-
-			this._flipClasses( els, corners );
-		},
-
-		refresh: function() {
-			this._refresh( false );
 		}
 	});
 
