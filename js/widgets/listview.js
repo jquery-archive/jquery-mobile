@@ -42,71 +42,6 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		t.refresh( true );
 	},
 
-	_removeCorners: function( li, which ) {
-		var top = "ui-corner-top ui-corner-tr ui-corner-tl",
-			bot = "ui-corner-bottom ui-corner-br ui-corner-bl";
-
-		li = li.add( li.find( ".ui-btn-inner, .ui-li-link-alt, .ui-li-thumb" ) );
-
-		if ( which === "top" ) {
-			li.removeClass( top );
-		} else if ( which === "bottom" ) {
-			li.removeClass( bot );
-		} else {
-			li.removeClass( top + " " + bot );
-		}
-	},
-
-	_refreshCorners: function( create ) {
-		var $li,
-			$visibleli,
-			$topli,
-			$bottomli;
-
-		$li = this.element.children( "li" );
-		// At create time and when autodividers calls refresh the li are not visible yet so we need to rely on .ui-screen-hidden
-		$visibleli = create || $li.filter( ":visible" ).length === 0 ? $li.not( ".ui-screen-hidden" ) : $li.filter( ":visible" );
-
-		// ui-li-last is used for setting border-bottom on the last li		
-		$li.filter( ".ui-li-last" ).removeClass( "ui-li-last" );
-					
-		if ( this.options.inset ) {
-			this._removeCorners( $li );
-
-			// Select the first visible li element
-			$topli = $visibleli.first()
-				.addClass( "ui-corner-top" );
-
-			$topli.add( $topli.find( ".ui-btn-inner" )
-				.not( ".ui-li-link-alt span:first-child" ) )
-					.addClass( "ui-corner-top" )
-				.end()
-				.find( ".ui-li-link-alt, .ui-li-link-alt span:first-child" )
-					.addClass( "ui-corner-tr" )
-				.end()
-				.find( ".ui-li-thumb" )
-					.not( ".ui-li-icon" )
-					.addClass( "ui-corner-tl" );
-
-			// Select the last visible li element
-			$bottomli = $visibleli.last()
-				.addClass( "ui-corner-bottom ui-li-last" );
-
-			$bottomli.add( $bottomli.find( ".ui-btn-inner" ) )
-				.find( ".ui-li-link-alt" )
-					.addClass( "ui-corner-br" )
-				.end()
-				.find( ".ui-li-thumb" )
-					.not( ".ui-li-icon" )
-					.addClass( "ui-corner-bl" );
-		} else {
-			$visibleli.last().addClass( "ui-li-last" );
-		}
-		if ( !create ) {
-			this.element.trigger( "updatelayout" );
-		}
-	},
-
 	// This is a generic utility method for finding the first
 	// node with a given nodeName. It uses basic DOM traversal
 	// to be fast and is meant to be a substitute for simple
@@ -337,9 +272,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		this._addThumbClasses( li );
 		this._addThumbClasses( $list.find( ".ui-link-inherit" ) );
 
-		this._refreshCorners( create );
-
-    // autodividers binds to this to redraw dividers after the listview refresh
+		// autodividers binds to this to redraw dividers after the listview refresh
 		this._trigger( "afterrefresh" );
 	},
 

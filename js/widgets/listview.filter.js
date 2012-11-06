@@ -114,7 +114,6 @@ $( document ).delegate( "ul, ol", "listviewcreate", function() {
 				//filtervalue is empty => show all
 				listItems.toggleClass( "ui-screen-hidden", !!listview.options.filterReveal );
 			}
-			listview._refreshCorners();
 		})
 		.appendTo( wrapper )
 		.textinput();
