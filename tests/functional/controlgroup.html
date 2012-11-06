@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Button Markup Tester</title>
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../../docs/_assets/css/jqm-docs.css" />
+	<script src="../../js/jquery.tag.inserter.js"></script>
+	<script src="../../js"></script>
+	<script>
+( function( $, undefined ) {
+	$( document ).bind( "pageinit", function( e ) {
+		$( "#prepend,#append", e.target ).bind( "click", function( e ) {
+			$( "#controlgroup" ).controlgroup( "container" )[ $( this ).attr( "id" ) ](
+				$( "<a href='#'>Remove " + ( $( "#controlgroup" ).controlgroup( "container" ).children().length + 1 ) + "</a>" )
+					.buttonMarkup()
+					.bind( "click", function( e ) { $( this ).remove(); })
+			);
+		});
+		$( "#isHorizontal" ).bind( "change", function( e ) {
+			$( "#controlgroup" ).controlgroup( "option", "type", ( $( "#isHorizontal" ).is( ":checked" ) ? "horizontal" : "vertical" ) );
+		});
+	});
+})( jQuery );
+	</script>
+</head>
+
+<body>
+	<div data-role="page">
+		<div data-role="header">
+			<h1>Controlroup Dynamic Modification</h1>
+		</div>
+		<div data-role="contents">
+			<div data-role="controlgroup" id="controlgroup">
+			</div>
+			<a href="#" id="prepend" data-role="button" data-corners="true" data-inline="true">Prepend</a>
+			<a href="#" id="append" data-role="button" data-corners="true" data-inline="true">Append</a>
+			<div data-role="fieldcontain" style="display: inline-block;">
+				<input id="isHorizontal" data-inline="true" type="checkbox"></input>
+				<label for="isHorizontal">Horizontal</label>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
