@@ -21,8 +21,6 @@ ol.ui-listview .ui-li-jsnumbering:before { content: "" !important; } /* to avoid
 .ui-collapsible-content > .ui-listview:not(.ui-listview-inset) .ui-li-last .ui-li-link-alt { -webkit-border-bottom-right-radius: inherit; border-bottom-right-radius: inherit; }
 /* Corner styling */
 .ui-listview > .ui-li:first-child,
-.ui-listview .ui-btn:first-child > .ui-li,
-.ui-listview .ui-btn:first-child > .ui-li > .ui-btn-text,
 .ui-listview .ui-btn:first-child > .ui-li > .ui-btn-text > .ui-link-inherit {
 	-webkit-border-top-right-radius: inherit;	
 	border-top-right-radius: inherit;
@@ -30,8 +28,6 @@ ol.ui-listview .ui-li-jsnumbering:before { content: "" !important; } /* to avoid
 	border-top-left-radius: inherit;
 }
 .ui-listview > .ui-li:last-child,
-.ui-listview .ui-btn:last-child > .ui-li,
-.ui-listview .ui-btn:last-child > .ui-li > .ui-btn-text,
 .ui-listview .ui-btn:last-child > .ui-li > .ui-btn-text > .ui-link-inherit {
 	-webkit-border-bottom-right-radius: inherit;
 	border-bottom-right-radius: inherit;
