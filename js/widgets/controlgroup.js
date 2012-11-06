@@ -27,7 +27,6 @@ define( [ "jquery",
 					legend: $( "<div role='heading' class='ui-controlgroup-label'></div>" )
 				},
 				grouplegend = $el.children( "legend" ),
-				groupcontrols = $el.children( ".ui-controlgroup-controls" ),
 				self = this;
 
 			// Apply the proto
