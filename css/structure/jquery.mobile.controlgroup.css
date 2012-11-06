@@ -38,7 +38,6 @@
 	border-radius: inherit;
 }
 
-/* Override things we don't want children to have */
 .ui-controlgroup .ui-radio,
 .ui-controlgroup .ui-checkbox,
 .ui-controlgroup .ui-select,
@@ -50,11 +49,6 @@
 .ui-controlgroup .ui-btn {
 	-webkit-border-radius: 0px;
 	border-radius: 0px;
-}
-.ui-controlgroup .ui-shadow:not(.ui-focus) {
-	-moz-box-shadow: none;
-	-webkit-box-shadow: none;
-	box-shadow: none;
 }
 
 .ui-controlgroup-vertical .ui-radio:first-child,
