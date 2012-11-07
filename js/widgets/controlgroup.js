@@ -14,6 +14,7 @@ define( [ "jquery",
 	$.widget( "mobile.controlgroup", $.mobile.widget, {
 		options: {
 			shadow: false,
+			corners: true,
 			excludeInvisible: true,
 			type: "vertical",
 			mini: false,
@@ -59,7 +60,10 @@ define( [ "jquery",
 			this.element
 				.removeClass( "ui-controlgroup-horizontal ui-controlgroup-vertical" )
 				.addClass( "ui-controlgroup-" + value );
-			this.options.type = value;
+		},
+
+		_setCorners: function( value ) {
+			this.element.toggleClass( "ui-corner-all", value );
 		},
 
 		_setShadow: function( value ) {

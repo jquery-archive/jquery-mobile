@@ -1325,7 +1325,7 @@ define( [
 				return;
 			}
 
-			var link = findClosestLink( event.target );
+			var link = findClosestLink( event.target ), $btn;
 
 			// split from the previous return logic to avoid find closest where possible
 			// TODO teach $.mobile.hijackable to operate on raw dom elements so the link wrapping
@@ -1335,9 +1335,10 @@ define( [
 			}
 
 			if ( link ) {
-				if ( path.parseUrl( link.getAttribute( "href" ) || "#" ).hash !== "#" ) {
+				$btn = $( link ).closest( ".ui-btn" ).not( ".ui-disabled" );
+				if ( path.parseUrl( link.getAttribute( "href" ) || "#" ).hash !== "#" && !$btn.hasClass( $.mobile.activeBtnClass ) ) {
 					removeActiveLinkClass( true );
-					$activeClickedLink = $( link ).closest( ".ui-btn" ).not( ".ui-disabled" );
+					$activeClickedLink = $btn;
 					$activeClickedLink.addClass( $.mobile.activeBtnClass );
 				}
 			}
