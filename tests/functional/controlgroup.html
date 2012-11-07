@@ -10,13 +10,27 @@
 	<script src="../../js"></script>
 	<script>
 ( function( $, undefined ) {
+	var counter = 0;
 	$( document ).bind( "pageinit", function( e ) {
 		$( "#prepend,#append", e.target ).bind( "click", function( e ) {
-			$( "#controlgroup" ).controlgroup( "container" )[ $( this ).attr( "id" ) ](
-				$( "<a href='#'>Remove " + ( $( "#controlgroup" ).controlgroup( "container" ).children().length + 1 ) + "</a>" )
-					.buttonMarkup()
-					.bind( "click", function( e ) { $( this ).remove(); })
-			);
+			counter++;
+			var widgetType = $( "[name='radio-widget']:checked" ).attr( "id" ), $el;
+
+			if ( widgetType === "link" ) {
+				$el = $( "<a href='#'>Remove " + counter + "</a>" ).bind( "click", function( e ) { $( this ).remove(); });
+				$( "#controlgroup" ).controlgroup( "container" )[ $( this ).attr( "id" ) ]( $el );
+				$el.buttonMarkup();
+			} else if ( widgetType === "select" ) {
+				$el = $( "<select><option value='default'>Select " + counter + "</option><option value='remove'>Remove</option></select>" )
+					.bind( "change", function( e ) { $( this ).remove(); });
+				$( "#controlgroup" ).controlgroup( "container" )[ $( this ).attr( "id" ) ]( $el );
+				$el.selectmenu();
+			} else {
+				$el = $( "<input type='checkbox' id='" + counter + "'></input><label for='" + counter + "'>Remove " + counter + "</label>" )
+					.bind( "change", function( e ) { $( this ).remove(); });
+				$( "#controlgroup" ).controlgroup( "container" )[ $( this ).attr( "id" ) ]( $el );
+				$el.checkboxradio();
+			}
 		});
 		$( "#isHorizontal" ).bind( "change", function( e ) {
 			$( "#controlgroup" ).controlgroup( "option", "type", ( $( "#isHorizontal" ).is( ":checked" ) ? "horizontal" : "vertical" ) );
@@ -32,13 +46,32 @@
 			<h1>Controlroup Dynamic Modification</h1>
 		</div>
 		<div data-role="contents">
-			<div data-role="controlgroup" id="controlgroup">
-			</div>
-			<a href="#" id="prepend" data-role="button" data-corners="true" data-inline="true">Prepend</a>
-			<a href="#" id="append" data-role="button" data-corners="true" data-inline="true">Append</a>
-			<div data-role="fieldcontain" style="display: inline-block;">
-				<input id="isHorizontal" data-inline="true" type="checkbox"></input>
-				<label for="isHorizontal">Horizontal</label>
+			<div class="ui-grid-a">
+				<div class="ui-block-a">
+					<div data-role="controlgroup" id="controlgroup">
+					</div>
+				</div>
+				<div class="ui-block-b">
+					<a href="#" id="prepend" data-role="button" data-corners="true" data-inline="true">Prepend</a>
+					<a href="#" id="append" data-role="button" data-corners="true" data-inline="true">Append</a>
+					<form action="#" method="get">
+	  				<fieldset data-role="controlgroup" data-type="horizontal">
+	    				<legend>Widget type</legend>
+	        				<input type="radio" name="radio-widget" id="link" value="link" checked="checked"  />
+	        				<label for="link">Link</label>
+
+	        				<input type="radio" name="radio-widget" id="select" value="select"  />
+	        				<label for="select">Select</label>
+
+	        				<input type="radio" name="radio-widget" id="checkbox" value="checkbox"  />
+	        				<label for="checkbox">Checkbox</label>
+	  				</fieldset>
+					<div data-role="fieldcontain">
+						<input id="isHorizontal" data-inline="true" type="checkbox"></input>
+						<label for="isHorizontal">Horizontal</label>
+					</div>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>
