@@ -7,7 +7,9 @@
 .ui-controlgroup li { list-style: none; }
 .ui-controlgroup-vertical .ui-btn,
 .ui-controlgroup-vertical .ui-checkbox, .ui-controlgroup-vertical .ui-radio { margin: 0; border-bottom-width: 0; }
-.ui-controlgroup-vertical .ui-controlgroup-last { border-bottom-width: 1px; }
+.ui-controlgroup-vertical .ui-controlgroup-controls > div:last-of-type > .ui-btn,
+.ui-controlgroup-vertical li:last-child > .ui-btn,
+.ui-controlgroup-vertical .ui-controlgroup-controls > .ui-btn:last-child { border-bottom-width: 1px; }
 .ui-controlgroup-controls label.ui-select { position: absolute; left: -9999px; }
 
 .ui-controlgroup .ui-btn-icon-notext { width: auto; height: auto; top: auto; }
